@@ -1,0 +1,9 @@
+section
+  h3(id='req.acceptedLanguages') req.acceptedLanguages
+
+  p.
+    Return an array of Accepted languages ordered from highest quality to lowest.
+
+  +js.
+    Accept-Language: en;q=.5, en-us
+    // => ['en-us', 'en']

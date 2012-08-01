@@ -1,0 +1,13 @@
+
+mixin item(url)
+  a(href=url, class=active == url ? 'active' : '') 
+    block
+
+mixin js
+  pre.js
+    code
+      block
+
+mixin logo(name)
+  li
+    img(src='/images/apps/logos/#{name}.png')

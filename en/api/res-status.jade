@@ -1,0 +1,8 @@
+section
+  h3(id='res.status') res.status(code)
+  
+  p.
+    Chainable alias of node's '`res.statusCode=`.
+
+  +js.
+    req.status(204).sendfile('path/to/404.png');

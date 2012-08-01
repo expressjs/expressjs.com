@@ -1,0 +1,10 @@
+section
+  h3(id='app.enable') app.enable(name)
+
+  p.
+    Set setting <code>name</code> to <code>true</code>.
+
+  +js.
+    app.enable('trust proxy');
+    app.get('trust proxy');
+    // => true

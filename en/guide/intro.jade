@@ -1,0 +1,90 @@
+section
+  h3(id='intro') Getting started
+
+  p.
+    With node installed (<a href="http://nodejs.org/#download">download</a>),
+    get your first application started by creating a directory somewhere
+    on your machine:
+
+  +js.
+    $ mkdir hello-world
+
+  p.
+    In this same directory you'll be defining the application "package", which
+    are no different than any other node package. You'll need a package.json
+    file in the directory, with express defined as a dependency:
+
+  +js.
+    {
+      "name": "hello-world",
+      "description": "hello world test app",
+      "version": "0.0.1",
+      "private": true,
+      "dependencies": {
+        "express": "3.0.0"
+      }
+    }
+
+  p.
+    Now that you have a package.json file in this directory you can use
+    <code>npm(1)</code> to install the dependencies, in this case just
+    Express:
+
+  +js.
+    $ npm install
+
+  p.
+    Once npm finishes you'll have a localized Express 3.x dependency in
+    the ./node_modules directory. You may verify this with <code>npm ls</code>
+    as shown in the following snippet displaying a tree of Express and its
+    own dependencies.
+
+  +js.
+    $ npm ls
+    hello-world@0.0.1 /private/tmp
+    └─┬ express@3.0.0beta7 
+      ├── commander@0.6.1 
+      ├─┬ connect@2.3.9 
+      │ ├── bytes@0.1.0 
+      │ ├── cookie@0.0.4 
+      │ ├── crc@0.2.0 
+      │ ├── formidable@1.0.11 
+      │ └── qs@0.4.2 
+      ├── cookie@0.0.3 
+      ├── debug@0.7.0 
+      ├── fresh@0.1.0 
+      ├── methods@0.0.1 
+      ├── mkdirp@0.3.3 
+      ├── range-parser@0.0.4 
+      ├─┬ response-send@0.0.1 
+      │ └── crc@0.2.0 
+      └─┬ send@0.0.3 
+        └── mime@1.2.6
+
+  p.
+    Now to create the application itself! Create a file named app.js or server.js,
+    whichever you prefer, require express and then create a new application with <code>express()</code>:
+
+  +js.
+    var express = require('express');
+    var app = express();
+
+  p.
+    With the new application instance you can start defining routes via <code>app.VERB()</code>,
+    in this case "GET /" responding with the "Hello World" string. The <code>req</code> and
+    <code>res</code> are the exact same objects that node provides to you, thus you may invoke
+    <code>res.pipe()</code>, <code>req.on('data', callback)</code> and anything else you
+    would do without Express involved.
+
+  +js.
+    app.get('/', function(req, res){
+      res.send('Hello World');
+    });
+
+  p.
+    Now to bind and listen for connections invoke the <code>app.listen()</code> method,
+    accepting the same arguments as node's <a href="http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener">net.Server#listen()</a>:
+
+  +js.
+    app.listen(3000);
+    console.log('Listening on port 3000');

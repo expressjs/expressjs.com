@@ -1,0 +1,14 @@
+section
+  h3(id='res.type') res.type(type)
+  
+  p.
+    Sets the Content-Type to the mime lookup of <code>type</code>,
+    or when "/" is present the Content-Type is simply set to this
+    literal value.
+
+  +js.
+    res.type('.html');
+    res.type('html');
+    res.type('json');
+    res.type('application/json');
+    res.type('png');

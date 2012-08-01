@@ -1,0 +1,111 @@
+<!DOCTYPE html><html><head><title>Express - api reference</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script><script src="app.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><span class="express">express<em>3.0.0</em></span><span class="description"> 
+web application framework for <a href="http://nodejs.org">node  </a></span></section><nav class="clearfix"><a href="/" class=""> Home</a><a href="/api.html" class=""> API Reference</a><a href="/guide.html" class="active"> Guide</a><a href="/applications.html" class=""> Applications</a><a href="/community.html" class=""> Community</a><a href="/faq.html" class=""> FAQ</a></nav><div id="x"></div><div id="y"></div></header><ul id="menu"><li><ul><li><a href="#intro">Getting started</a></li><li><a href="#executable">express(1) executable</a></li></ul></li></ul><section><h3 id="intro">Getting started</h3><p>With node installed (<a href="http://nodejs.org/#download">download</a>),
+get your first application started by creating a directory somewhere
+on your machine:
+</p><pre class="js"><code>$ mkdir hello-world
+</code></pre><p>In this same directory you'll be defining the application "package", which
+are no different than any other node package. You'll need a package.json
+file in the directory, with express defined as a dependency:
+</p><pre class="js"><code>{
+  "name": "hello-world",
+  "description": "hello world test app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.0.0"
+  }
+}
+</code></pre><p>Now that you have a package.json file in this directory you can use
+<code>npm(1)</code> to install the dependencies, in this case just
+Express:
+</p><pre class="js"><code>$ npm install
+</code></pre><p>Once npm finishes you'll have a localized Express 3.x dependency in
+the ./node_modules directory. You may verify this with <code>npm ls</code>
+as shown in the following snippet displaying a tree of Express and its
+own dependencies.
+</p><pre class="js"><code>$ npm ls
+hello-world@0.0.1 /private/tmp
+└─┬ express@3.0.0beta7 
+  ├── commander@0.6.1 
+  ├─┬ connect@2.3.9 
+  │ ├── bytes@0.1.0 
+  │ ├── cookie@0.0.4 
+  │ ├── crc@0.2.0 
+  │ ├── formidable@1.0.11 
+  │ └── qs@0.4.2 
+  ├── cookie@0.0.3 
+  ├── debug@0.7.0 
+  ├── fresh@0.1.0 
+  ├── methods@0.0.1 
+  ├── mkdirp@0.3.3 
+  ├── range-parser@0.0.4 
+  ├─┬ response-send@0.0.1 
+  │ └── crc@0.2.0 
+  └─┬ send@0.0.3 
+    └── mime@1.2.6
+    </code></pre><p>Now to create the application itself! Create a file named app.js or server.js,
+whichever you prefer, require express and then create a new application with <code>express()</code>:
+</p><pre class="js"><code>var express = require('express');
+var app = express();
+</code></pre><p>With the new application instance you can start defining routes via <code>app.VERB()</code>,
+in this case "GET /" responding with the "Hello World" string. The <code>req</code> and
+<code>res</code> are the exact same objects that node provides to you, thus you may invoke
+<code>res.pipe()</code>, <code>req.on('data', callback)</code> and anything else you
+would do without Express involved.
+</p><pre class="js"><code>app.get('/', function(req, res){
+  res.send('Hello World');
+});
+</code></pre><p>Now to bind and listen for connections invoke the <code>app.listen()</code> method,
+accepting the same arguments as node's <a href="http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener">net.Server#listen()</a>:
+</p><pre class="js"><code>app.listen(3000);
+console.log('Listening on port 3000');</code></pre></section><section><h3 id="executable">Using express(1) to generate an app</h3><p>Express is bundled with an executable, aptly named <code>express(1)</code>.
+If you install express globally with npm you'll have it available from anywhere
+on your machine:
+</p><pre class="js"><code>$ npm install -g express
+</code></pre><p>This tool provides a simple way to get an application skeleton going,
+but has limited scope, for example it supports only a few template engines,
+whereas Express itself supports virtually any template engine built for node.
+Be sure to check out the <code>--help</code>:
+</p><pre class="js"><code>Usage: express [options]
+
+Options:
+
+  -h, --help          output usage information
+  -V, --version       output the version number
+  -s, --sessions      add session support
+  -e, --ejs           add ejs engine support (defaults to jade)
+  -J, --jshtml        add jshtml engine support (defaults to jade)
+  -h, --hogan         add hogan.js engine support
+  -c, --css <engine>  add stylesheet <engine> support (less|stylus) (defaults to plain css)
+  -f, --force         force on non-empty directory</code></pre><p>If you want to generate an application with EJS, Stylus, and session
+support you would simply execute:
+</p><pre class="js"><code>$ express --sessions --css stylus --ejs myapp
+
+create : myapp
+create : myapp/package.json
+create : myapp/app.js
+create : myapp/public
+create : myapp/public/javascripts
+create : myapp/public/images
+create : myapp/public/stylesheets
+create : myapp/public/stylesheets/style.styl
+create : myapp/routes
+create : myapp/routes/index.js
+create : myapp/views
+create : myapp/views/index.ejs
+
+install dependencies:
+  $ cd myapp && npm install
+  
+run the app:
+  $ node app  
+  </code></pre><p>Like any other node application, you must then install the dependencies:
+</p><pre class="js"><code>$ cd myapp
+$ npm install
+</code></pre><p>Then fire it up!
+</p><pre class="js"><code>$ node app
+</code></pre><p>That's all you need to get a simple application up and running. Keep in mind
+that Express is not bound to any specific directory structure, these are simply
+a baseline for you to work from. For application structure alternatives be
+sure to view the <a href="https://github.com/visionmedia/express/tree/master/examples">examples</a>
+found in the github repo.</p></section></section><a id="top" href="#"><img src="images/arrow.png"></a><footer><div id="footer-content">© 2012 TJ Holowaychuk. All rights reserved.</div></footer></body></html>

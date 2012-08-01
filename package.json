@@ -1,0 +1,8 @@
+{
+  "name": "expressjs.com",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "jade": "0.26.1"
+  }
+}

@@ -1,0 +1,76 @@
+section
+  h3(id='executable') Using express(1) to generate an app
+
+  p.
+    Express is bundled with an executable, aptly named <code>express(1)</code>.
+    If you install express globally with npm you'll have it available from anywhere
+    on your machine:
+
+  +js.
+    $ npm install -g express
+
+  p.
+    This tool provides a simple way to get an application skeleton going,
+    but has limited scope, for example it supports only a few template engines,
+    whereas Express itself supports virtually any template engine built for node.
+    Be sure to check out the <code>--help</code>:
+
+  +js.
+  
+    Usage: express [options]
+
+    Options:
+
+      -h, --help          output usage information
+      -V, --version       output the version number
+      -s, --sessions      add session support
+      -e, --ejs           add ejs engine support (defaults to jade)
+      -J, --jshtml        add jshtml engine support (defaults to jade)
+      -h, --hogan         add hogan.js engine support
+      -c, --css <engine>  add stylesheet <engine> support (less|stylus) (defaults to plain css)
+      -f, --force         force on non-empty directory
+  p.
+    If you want to generate an application with EJS, Stylus, and session
+    support you would simply execute:
+
+  +js.
+    $ express --sessions --css stylus --ejs myapp
+
+    create : myapp
+    create : myapp/package.json
+    create : myapp/app.js
+    create : myapp/public
+    create : myapp/public/javascripts
+    create : myapp/public/images
+    create : myapp/public/stylesheets
+    create : myapp/public/stylesheets/style.styl
+    create : myapp/routes
+    create : myapp/routes/index.js
+    create : myapp/views
+    create : myapp/views/index.ejs
+
+    install dependencies:
+      $ cd myapp && npm install
+
+    run the app:
+      $ node app  
+
+  p.
+    Like any other node application, you must then install the dependencies:
+
+  +js.
+    $ cd myapp
+    $ npm install
+
+  p.
+   Then fire it up!
+
+  +js.
+    $ node app
+
+  p.
+    That's all you need to get a simple application up and running. Keep in mind
+    that Express is not bound to any specific directory structure, these are simply
+    a baseline for you to work from. For application structure alternatives be
+    sure to view the <a href="https://github.com/visionmedia/express/tree/master/examples">examples</a>
+    found in the github repo.

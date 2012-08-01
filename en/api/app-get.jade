@@ -1,0 +1,13 @@
+section
+  h3(id='app.get') app.get(name)
+
+  p.
+    Get setting <code>name</code> value.
+
+  +js.
+    app.get('title');
+    // => undefined
+
+    app.set('title', 'My Site');
+    app.get('title');
+    // => "My Site"
