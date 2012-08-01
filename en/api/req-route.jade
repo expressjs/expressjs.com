@@ -1,0 +1,23 @@
+section
+  h3(id='req.route') req.route
+
+  p.
+    The currently matched <code>Route</code> containing
+    several properties such as the route's original path
+    string, the regexp generated, and so on.
+
+  +js.
+    app.get('/user/:id?', function(req, res){
+      console.log(req.route);
+    });
+
+  p.
+    Example output from the previous snippet:
+
+  +js.
+    { path: '/user/:id?',
+      method: 'get',
+      callbacks: [ [Function] ],
+      keys: [ { name: 'id', optional: true } ],
+      regexp: /^\/user(?:\/([^\/]+?))?\/?$/i,
+      params: [ id: '12' ] }
