@@ -1,18 +1,21 @@
-<!DOCTYPE html><html><head><title>Express - api reference</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script><script src="app.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><span class="express">express<em>3.0.0</em></span><span class="description"> 
+<!DOCTYPE html><html><head><title>Express - guide</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script><script src="app.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><span class="express">express<em>3.0.0</em></span><span class="description"> 
 web application framework for <a href="http://nodejs.org">node  </a></span></section><nav class="clearfix"><a href="/" class=""> Home</a><a href="/api.html" class=""> API Reference</a><a href="/guide.html" class="active"> Guide</a><a href="/applications.html" class=""> Applications</a><a href="/community.html" class=""> Community</a><a href="/faq.html" class=""> FAQ</a></nav></header><ul id="menu"><li><ul><li><a href="#intro">Getting started</a></li><li><a href="#executable">express(1) executable</a></li></ul></li></ul><section><h3 id="intro">Getting started</h3><p>With node installed (<a href="http://nodejs.org/#download">download</a>),
 get your first application started by creating a directory somewhere
 on your machine:
 </p><pre class="js"><code>$ mkdir hello-world
 </code></pre><p>In this same directory you'll be defining the application "package", which
 are no different than any other node package. You'll need a package.json
-file in the directory, with express defined as a dependency:
+file in the directory, with express defined as a dependency. You may use
+<code>npm info express version</code> to fetch the latest version, it's
+preferred that you do this instead of "3.x" below to prevent any future
+surprises.
 </p><pre class="js"><code>{
   "name": "hello-world",
   "description": "hello world test app",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "express": "3.0.0"
+    "express": "3.x"
   }
 }
 </code></pre><p>Now that you have a package.json file in this directory you can use
