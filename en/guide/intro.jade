@@ -12,7 +12,10 @@ section
   p.
     In this same directory you'll be defining the application "package", which
     are no different than any other node package. You'll need a package.json
-    file in the directory, with express defined as a dependency:
+    file in the directory, with express defined as a dependency. You may use
+    <code>npm info express version</code> to fetch the latest version, it's
+    preferred that you do this instead of "3.x" below to prevent any future
+    surprises.
 
   +js.
     {
@@ -21,7 +24,7 @@ section
       "version": "0.0.1",
       "private": true,
       "dependencies": {
-        "express": "3.0.0"
+        "express": "3.x"
       }
     }
 
