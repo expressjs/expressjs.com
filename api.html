@@ -511,7 +511,14 @@ the previous example.
 </code></pre><p>An object may be passed which is then serialized as JSON, which is
 automatically parsed by the <code>bodyParser()</code> middleware.
 </p><pre class="js"><code>res.cookie('cart', { items: [1,2,3] });
-res.cookie('cart', { items: [1,2,3] }, { maxAge: 900000 });</code></pre></section><section><h3 id="res.clearCookie">res.clearCookie(name, [options])</h3><p>Clear cookie <code>name</code>. The <code>path</code>
+res.cookie('cart', { items: [1,2,3] }, { maxAge: 900000 });
+</code></pre><p>Signed cookies are also supported through this method. Simply
+pass the <code>signed</code> option. When given <code>res.cookie()</code>
+will use the secret passed to <code>express.cookieParser(secret)</code>
+to sign the value.
+</p><pre class="js"><code>res.cookie('name', 'tobi', { signed: true });
+</code></pre><p>Later you may access this value through the <a href="#req.signedCookies">req.signedCookie</a>
+object.</p></section><section><h3 id="res.clearCookie">res.clearCookie(name, [options])</h3><p>Clear cookie <code>name</code>. The <code>path</code>
 option defaults to "/".
 </p><pre class="js"><code>res.cookie('name', 'tobi', { path: '/admin' });
 res.clearCookie('name', { path: '/admin' });</code></pre></section><section><h3 id="res.redirect">res.redirect([status], url)</h3><p>Redirect to the given <code>url</code> with optional <code>statua</code> code
