@@ -128,7 +128,37 @@ app.use(function(err, req, res, next){
 });
 </code></pre><p>Responses from within these middleware are completely arbitrary. You may
 wish to respond with an HTML error page, a simple message, a JSON string,
-or anything else you prefer.</p></section></section><script>var _gaq = _gaq || [];
+or anything else you prefer.
+</p><p>For organizational, and higher-level framework purposes you may define
+several of these error-handling middleware, much like you would with
+regular middleware. For example suppose you wanted to define an error-handler
+for requests made via XHR, and those without, you might do:
+</p><pre class="js"><code>app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(app.router);
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
+</code></pre><p>Where the more generic <code>logErrors</code> may write request and
+error information to stderr, loggly, or similar services:
+</p><pre class="js"><code>function logErrors(err, req, res, next) {
+  console.error(err.stack);
+  next(err);
+}
+</code></pre><p>Where <code>clientErrorHandler</code> is defined as the following, note
+that the error is explicitly passed along to the next.
+</p><pre class="js"><code>function clientErrorHandler(err, req, res, next) {
+  if (req.xhr) {
+    res.send(500, { error: 'Something blew up!' });
+  } else {
+    next(err);
+  }
+}
+</code></pre><p>The following <code>errorHandler</code> "catch-all" implementation may be defined as:
+</p><pre class="js"><code>function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+}</code></pre></section></section><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-25235225-1']);
 _gaq.push(['_trackPageview']);
 
