@@ -1,0 +1,30 @@
+section
+  h3(id='error-handling') Error handling
+
+  p.
+    Error-handling middleware are defined just like regular middleware,
+    however must be define with an arity of 4, that is the signature
+    <code>(err, req, res, next)</code>:
+
+  +js.
+    app.use(function(err, req, res, next){
+      console.error(err.stack);
+      res.send(500, 'Something broke!');
+    });
+
+  p.
+    Though not mandatory error-handling middleware are typically defined
+    very last, below any other <code>app.use()</code> calls as shown here:
+
+  +js.
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+    app.use(app.router);
+    app.use(function(err, req, res, next){
+      // logic
+    });
+
+  p.
+    Responses from within these middleware are completely arbitrary. You may
+    wish to respond with an HTML error page, a simple message, a JSON string,
+    or anything else you prefer.
