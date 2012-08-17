@@ -688,7 +688,7 @@ response header field.
 </code></pre><p>yields:</p><pre><code>Link: &lt;http://api.example.com/users?page=2&gt;; rel="next", 
       &lt;http://api.example.com/users?page=5&gt;; rel="last"</code></pre></section><section><h3 id="res.locals">res.locals</h3><p>Response local variables are scoped to the request, thus only
 available to the view(s) rendered during that request / response
-cycle, if any. Otherwise this API is identical to <a href="#app-locals">app.locals</a>.
+cycle, if any. Otherwise this API is identical to <a href="#app.locals">app.locals</a>.
 </p><p>This object is useful for exposes request-level information such as the
 request pathname, authenticated user, user settings etcetera.
 </p><pre class="js"><code>app.use(function(req, res, next){

@@ -112,7 +112,7 @@ that Express is not bound to any specific directory structure, these are simply
 a baseline for you to work from. For application structure alternatives be
 sure to view the <a href="https://github.com/visionmedia/express/tree/master/examples">examples</a>
 found in the github repo.</p></section><section><h3 id="error-handling">Error handling</h3><p>Error-handling middleware are defined just like regular middleware,
-however must be define with an arity of 4, that is the signature
+however must be defined with an arity of 4, that is the signature
 <code>(err, req, res, next)</code>:
 </p><pre class="js"><code>app.use(function(err, req, res, next){
   console.error(err.stack);
