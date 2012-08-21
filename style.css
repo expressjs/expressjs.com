@@ -1,4 +1,4 @@
-/* general */
+#/* general */
 
 * {
   -webkit-box-sizing: border-box;
@@ -55,7 +55,7 @@ h2 {
 
 h3 {
   background: url(images/hr.png) top center no-repeat;
-  margin-top: 50px;
+  margin-top: 40px;
   padding-top: 50px;
   padding-bottom: 5px;
   font-weight: bold;
@@ -296,6 +296,7 @@ html[xmlns] .clearfix {
 
 #boxes section p {
   width: 100%;
+  margin-bottom: 20px;
 }
 
 /* secondary menu */
