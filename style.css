@@ -1,4 +1,4 @@
-#/* general */
+/* general */
 
 * {
   -webkit-box-sizing: border-box;
@@ -28,6 +28,10 @@ p em {
 
 p {
   margin: 5px 0;
+}
+
+strong {
+  color: #353535;
 }
 
 .inner {
