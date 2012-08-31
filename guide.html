@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head><title>Express - guide</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script><script src="app.js"></script><script src="retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><span class="express">express<em>3.0.0</em></span><span class="description"> 
-web application framework for <a href="http://nodejs.org">node  </a></span></section><nav class="clearfix"><a href="/" class=""> Home</a><a href="/api.html" class=""> API Reference</a><a href="/guide.html" class="active"> Guide</a><a href="/applications.html" class=""> Applications</a><a href="/community.html" class=""> Community</a><a href="/faq.html" class=""> FAQ</a></nav></header><ul id="menu"><li><ul><li><a href="#intro">Getting started</a></li><li><a href="#executable">express(1) executable</a></li><li><a href="#error-handling">Error handling</a></li></ul></li></ul><section><h3 id="intro">Getting started</h3><p>With node installed (<a href="http://nodejs.org/#download">download</a>),
+web application framework for <a href="http://nodejs.org">node  </a></span></section><nav class="clearfix"><a href="/" class=""> Home</a><a href="/api.html" class=""> API Reference</a><a href="/guide.html" class="active"> Guide</a><a href="/applications.html" class=""> Applications</a><a href="/community.html" class=""> Community</a><a href="/faq.html" class=""> FAQ</a></nav></header><ul id="menu"><li><ul><li><a href="#intro">Getting started</a></li><li><a href="#executable">express(1) executable</a></li><li><a href="#error-handling">Error handling</a></li><li><a href="#users-online">Users online count</a></li></ul></li></ul><section><h3 id="intro">Getting started</h3><p>With node installed (<a href="http://nodejs.org/#download">download</a>),
 get your first application started by creating a directory somewhere
 on your machine:
 </p><pre class="js"><code>$ mkdir hello-world
@@ -158,7 +158,61 @@ that the error is explicitly passed along to the next.
 </p><pre class="js"><code>function errorHandler(err, req, res, next) {
   res.status(500);
   res.render('error', { error: err });
-}</code></pre></section></section><script>var _gaq = _gaq || [];
+}</code></pre></section><section><h3 id="users-online">Users online count</h3><p>This section details a full (small) application that tracks a users online
+count using <a href="http://redis.io">Redis</a>. First up you'll need to 
+create a package.json file containing two dependencies, one for the redis
+client, another for Express itself. Also make sure you have redis installed
+and running via <code>$ redis-server</code>.
+</p><pre class="js"><code>{
+  "name": "app",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "3.x",
+    "redis": "*"
+  }
+}
+</code></pre><p>Next you'll need to create an app, and a connection to redis:
+</p><pre class="js"><code>var express = require('express');
+var redis = require('redis');
+var db = redis.createClient();
+var app = express();
+</code></pre><p>Next up is the middleware for tracking online users. Here we use the redis 
+<strong>MULTI</strong> command to perform the <strong>SADD</strong> and <strong>EXPIRE</strong>
+commands atomically, all or nothing! <strong>SADD</strong> will add the user-agent string to
+the "online" set, however if you had an authenticated user you would want to add the user's unique id.
+</p><p>Then you need to expire the "online" key after some number of seconds,
+in this case 60, followed by the final <strong>EXEC</strong> call to
+execute the atomic set of commands. Once finished <code>next</code> is
+invoked, and the following middleware may run.
+</p><pre class="js"><code>app.use(function(req, res, next){
+  db.multi()
+    .sadd('online', req.headers['user-agent'])
+    .expire('online', 60)
+    .exec(next);
+});
+</code></pre><p>This middleware is for fetching the current
+online user count. It uses <strong>SCARD</strong> to
+grab the set cardinality, and assigns it to the request
+object so we can access it later in our route(s) or
+other middleware.
+</p><pre class="js"><code>app.use(function(req, res, next){
+  db.scard('online', function(err, count){
+    if (err) return next(err);
+    req.online = count;
+    next();
+  });
+});
+</code></pre><p>Then finally we use it, and bind to a port! That's
+all there is to it, visit the app in a few browsers
+and you'll see the count increase.
+</p><pre class="js"><code>app.get('/', function(req, res){
+  res.send(req.online + ' users online');
+});
+
+app.listen(3000);
+</code></pre><p>Note that if you don't care about which users are online, you may exchange
+the redis set for <strong>INCR</strong> calls to increment a number instead.
+</p><pre class="js"><code>$ npm install -g express</code></pre></section></section><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-25235225-1']);
 _gaq.push(['_trackPageview']);
 

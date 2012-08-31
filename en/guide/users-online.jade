@@ -1,0 +1,83 @@
+section
+  h3(id='users-online') Users online count
+
+  p.
+    This section details a full (small) application that tracks a users online
+    count using <a href="http://redis.io">Redis</a>. First up you'll need to 
+    create a package.json file containing two dependencies, one for the redis
+    client, another for Express itself. Also make sure you have redis installed
+    and running via <code>$ redis-server</code>.
+
+  +js.
+    {
+      "name": "app",
+      "version": "0.0.1",
+      "dependencies": {
+        "express": "3.x",
+        "redis": "*"
+      }
+    }
+
+  p.
+    Next you'll need to create an app, and a connection to redis:
+
+  +js.
+    var express = require('express');
+    var redis = require('redis');
+    var db = redis.createClient();
+    var app = express();
+
+  p.
+    Next up is the middleware for tracking online users. Here we use the redis 
+    <strong>MULTI</strong> command to perform the <strong>SADD</strong> and <strong>EXPIRE</strong>
+    commands atomically, all or nothing! <strong>SADD</strong> will add the user-agent string to
+    the "online" set, however if you had an authenticated user you would want to add the user's unique id.
+
+  p.
+    Then you need to expire the "online" key after some number of seconds,
+    in this case 60, followed by the final <strong>EXEC</strong> call to
+    execute the atomic set of commands. Once finished <code>next</code> is
+    invoked, and the following middleware may run.
+
+  +js.
+    app.use(function(req, res, next){
+      db.multi()
+        .sadd('online', req.headers['user-agent'])
+        .expire('online', 60)
+        .exec(next);
+    });
+
+  p.
+    This middleware is for fetching the current
+    online user count. It uses <strong>SCARD</strong> to
+    grab the set cardinality, and assigns it to the request
+    object so we can access it later in our route(s) or
+    other middleware.
+
+  +js.
+    app.use(function(req, res, next){
+      db.scard('online', function(err, count){
+        if (err) return next(err);
+        req.online = count;
+        next();
+      });
+    });
+
+  p.
+    Then finally we use it, and bind to a port! That's
+    all there is to it, visit the app in a few browsers
+    and you'll see the count increase.
+  
+  +js.
+    app.get('/', function(req, res){
+      res.send(req.online + ' users online');
+    });
+
+    app.listen(3000);
+
+  p.
+    Note that if you don't care about which users are online, you may exchange
+    the redis set for <strong>INCR</strong> calls to increment a number instead.
+
+  +js.
+    $ npm install -g express
