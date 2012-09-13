@@ -36,7 +36,17 @@ that Express 3x introduces, so if you're happy with 2x feel free
 to remain on that branch. For migration information visit the
 <a href="https://github.com/visionmedia/express/wiki/Migrating-from-2.x-to-3.x">migration</a>
 wiki page, or view a <a href="https://github.com/visionmedia/express/wiki/New-features-in-3.x">list of changes</a> made in 3.x.
-</p></setup><setup><h3 id="error-handling">How do you setup an error handler in Express?</h3><p>Error-handling middleware are defined just like regular middleware,
+</p></setup><setup><h3 id="404-handling">How do you handle 404s?</h3><p>In Express 404s are not the result of an error, thus the
+error-handler middleware will not capture 404s, this is
+because a 404 is simply the absence of additional work to do,
+in other words Express has executed all middleware / routes
+and found that none of them responded. All you need to
+do is add a middleware at the very bottom below all the others
+to handle a 404:
+</p><pre class="js"><code>app.use(function(req, res, next){
+  res.send(404, 'Sorry cant find that!');
+});
+</code></pre></setup><setup><h3 id="error-handling">How do you setup an error handler in Express?</h3><p>Error-handling middleware are defined just like regular middleware,
 however must be define with an arity of 4, that is the signature
 <code>(err, req, res, next)</code>:
 </p><pre class="js"><code>app.use(function(err, req, res, next){
