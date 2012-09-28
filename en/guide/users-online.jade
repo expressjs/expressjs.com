@@ -31,7 +31,8 @@ section
     Next up is the middleware for tracking online users. Here we'll
     use sorted sets so that we can query redis for the users
     online within the last N milliseconds. We do this by passing
-    a timestamp as the member's "score".
+    a timestamp as the member's "score". Note that here we're using
+    the User-Agent string in place of what would normally be a user id.
 
   +js.
     app.use(function(req, res, next){
