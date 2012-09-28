@@ -64,7 +64,7 @@ section
   
   +js.
     app.get('/', function(req, res){
-      res.send(req.online + ' users online');
+      res.send(req.online.length + ' users online');
     });
 
     app.listen(3000);
