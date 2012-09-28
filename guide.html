@@ -179,7 +179,8 @@ var app = express();
 </code></pre><p>Next up is the middleware for tracking online users. Here we'll
 use sorted sets so that we can query redis for the users
 online within the last N milliseconds. We do this by passing
-a timestamp as the member's "score".
+a timestamp as the member's "score". Note that here we're using
+the User-Agent string in place of what would normally be a user id.
 </p><pre class="js"><code>app.use(function(req, res, next){
   var ua = req.headers['user-agent'];
   db.zadd('online', Date.now(), ua, next);
@@ -202,7 +203,7 @@ of the current timestamp minus 60,000 milliseconds.
 all there is to it, visit the app in a few browsers
 and you'll see the count increase.
 </p><pre class="js"><code>app.get('/', function(req, res){
-  res.send(req.online + ' users online');
+  res.send(req.online.length + ' users online');
 });
 
 app.listen(3000);</code></pre></section></section><script>var _gaq = _gaq || [];
