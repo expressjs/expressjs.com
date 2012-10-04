@@ -505,13 +505,13 @@ option defaults to "/".
 </p><pre class="js"><code>res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: true });
 res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true });
 </code></pre><p>The <code>maxAge</code> option is a convenience option for setting "expires"
-relative to the current time in milliseconds. The following is equivalent to
+relative to the current time <i>in seconds</i>. The following is equivalent to
 the previous example.
-</p><pre class="js"><code>res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true })
+</p><pre class="js"><code>res.cookie('rememberme', '1', { maxAge: 900, httpOnly: true })
 </code></pre><p>An object may be passed which is then serialized as JSON, which is
 automatically parsed by the <code>bodyParser()</code> middleware.
 </p><pre class="js"><code>res.cookie('cart', { items: [1,2,3] });
-res.cookie('cart', { items: [1,2,3] }, { maxAge: 900000 });
+res.cookie('cart', { items: [1,2,3] }, { maxAge: 900 });
 </code></pre><p>Signed cookies are also supported through this method. Simply
 pass the <code>signed</code> option. When given <code>res.cookie()</code>
 will use the secret passed to <code>express.cookieParser(secret)</code>
