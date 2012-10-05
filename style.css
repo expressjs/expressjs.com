@@ -285,6 +285,10 @@ html[xmlns] .clearfix {
   margin-left: 50px;
   padding-top: 50px;
   padding-bottom: 50px;
+  font-size: 12px;
+}
+
+.inner #boxes {
   font-size: 13px;
 }
 
