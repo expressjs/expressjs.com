@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head><title>Express - guide</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script><script src="app.js"></script><script src="retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><span class="express">express<em>3.0.0</em></span><span class="description"> 
-web application framework for <a href="http://nodejs.org">node  </a></span></section><nav class="clearfix"><a href="/" class=""> Home</a><a href="/api.html" class=""> API Reference</a><a href="/guide.html" class="active"> Guide</a><a href="/applications.html" class=""> Applications</a><a href="/community.html" class=""> Community</a><a href="/faq.html" class=""> FAQ</a></nav></header><ul id="menu"><li><ul><li><a href="#intro">Getting started</a></li><li><a href="#executable">express(1) executable</a></li><li><a href="#error-handling">Error handling</a></li><li><a href="#users-online">Users online count</a></li></ul></li></ul><section><h3 id="intro">Getting started</h3><p>With node installed (<a href="http://nodejs.org/#download">download</a>),
+web application framework for <a href="http://nodejs.org">node  </a></span></section><nav class="clearfix"><a href="/" class=""> Home</a><a href="/api.html" class=""> API Reference</a><a href="/guide.html" class="active"> Guide</a><a href="/applications.html" class=""> Applications</a><a href="/community.html" class=""> Community</a><a href="/faq.html" class=""> FAQ</a></nav></header><ul id="menu"><li><ul><li><a href="#intro">Getting started</a></li><li><a href="#executable">express(1) executable</a></li><li><a href="#error-handling">Error handling</a></li><li><a href="#users-online">Users online count</a></li><li><a href="#proxies">Express behind proxies</a></li></ul></li></ul><section><h3 id="intro">Getting started</h3><p>With node installed (<a href="http://nodejs.org/#download">download</a>),
 get your first application started by creating a directory somewhere
 on your machine:
 </p><pre class="js"><code>$ mkdir hello-world
@@ -206,7 +206,18 @@ and you'll see the count increase.
   res.send(req.online.length + ' users online');
 });
 
-app.listen(3000);</code></pre></section></section><script>var _gaq = _gaq || [];
+app.listen(3000);</code></pre></section><section><h3 id="proxies">Express behind proxies</h3><p>Using Express behind a reverse proxy such as Varnish or Nginx
+is trivial, however it does require configuration. By enabling the "trust proxy" setting via 
+<code>app.enable('trust proxy')</code>,  Express will have knowledge that
+it's sitting behind a proxy and that the <code>X-Forwarded-*</code> header
+fields may be trusted, which otherwise may be easily spoofed.
+</p><p>Enabling this setting has several subtle effects. The first of which is
+that <code>X-Forwarded-Proto</code> may be set by the reverse proxy to
+tell the app that it is https or simply http. This value is reflected
+by <a href="#req.protocol">req.protocol</a>.
+</p><p>The second change this makes is the <a href="#req.ip">req.ip</a> 
+and <a href="#req.ips">req.ips</a> values will be populated with
+<code>X-Forwarded-For</code>'s list of addresses. </p></section></section><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-25235225-1']);
 _gaq.push(['_trackPageview']);
 
