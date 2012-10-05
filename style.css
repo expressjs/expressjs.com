@@ -7,7 +7,7 @@
 }
 
 body {
-  font: 400 14px/1.5 "Open Sans", sans-serif;
+  font: 400 14px/1.6 "Open Sans", sans-serif;
   margin: 0;
   padding: 0;
   color: #777;
@@ -27,7 +27,7 @@ p em {
 }
 
 p {
-  margin: 5px 0;
+  margin: 20px 0;
 }
 
 strong {
@@ -306,6 +306,7 @@ html[xmlns] .clearfix {
 
 #boxes section p {
   width: 100%;
+  margin-top: 5px;
   margin-bottom: 20px;
 }
 
