@@ -214,9 +214,9 @@ fields may be trusted, which otherwise may be easily spoofed.
 </p><p>Enabling this setting has several subtle effects. The first of which is
 that <code>X-Forwarded-Proto</code> may be set by the reverse proxy to
 tell the app that it is https or simply http. This value is reflected
-by <a href="#req.protocol">req.protocol</a>.
-</p><p>The second change this makes is the <a href="#req.ip">req.ip</a> 
-and <a href="#req.ips">req.ips</a> values will be populated with
+by <a href="/api#req.protocol">req.protocol</a>.
+</p><p>The second change this makes is the <a href="/api#req.ip">req.ip</a> 
+and <a href="/api#req.ips">req.ips</a> values will be populated with
 <code>X-Forwarded-For</code>'s list of addresses. </p></section></section><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-25235225-1']);
 _gaq.push(['_trackPageview']);
