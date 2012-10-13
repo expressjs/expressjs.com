@@ -1,0 +1,27 @@
+section
+  h3(id='basicAuth') basicAuth()
+
+  p.
+    Basic Authentication middleware, populating <code>req.user</code>
+    with the username.
+
+  p Simple username and password:
+
+  +js.
+    app.use(express.basicAuth('username', 'password'));
+
+  p Callback verification:
+
+  +js.
+     app.use(express.basicAuth(function(user, pass){
+       return 'tj' == user & 'wahoo' == pass;
+     }));
+
+  p.
+    Async callback verification, accepting <code>fn(err, user)</code>,
+    in this case <code>req.user</code> will be the user object passed.
+
+  +js.
+    app.use(connect.basicAuth(function(user, pass, fn){
+      User.authenticate({ user: user, pass: pass }, fn);
+    }))
