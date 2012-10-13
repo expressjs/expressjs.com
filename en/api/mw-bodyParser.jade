@@ -1,0 +1,16 @@
+section
+  h3(id='bodyParser') bodyParser()
+
+  p.
+    Request body parsing middleware supporting JSON, urlencoded,
+    and multipart requests. This middleware is simply a wrapper
+    the <code>json()</code>, <code>urlencoded()</code>, and
+    <code>multipart()</code> middleware.
+
+  +js.
+    app.use(express.bodyParser());
+
+    // is equivalent to:
+    app.use(express.json());
+    app.use(express.urlencoded());
+    app.use(express.multipart());

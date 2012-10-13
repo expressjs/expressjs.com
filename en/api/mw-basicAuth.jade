@@ -2,7 +2,7 @@ section
   h3(id='basicAuth') basicAuth()
 
   p.
-    Basic Authentication middleware, populating `req.user`
+    Basic Authentication middleware, populating <code>req.user</code>
     with the username.
 
   p Simple username and password:
@@ -18,8 +18,8 @@ section
      }));
 
   p.
-    Async callback verification, accepting `fn(err, user)`,
-    in this case `req.user` will be the `user` object passed.
+    Async callback verification, accepting <code>fn(err, user)</code>,
+    in this case <code>req.user</code> will be the user object passed.
 
   +js.
     app.use(connect.basicAuth(function(user, pass, fn){
