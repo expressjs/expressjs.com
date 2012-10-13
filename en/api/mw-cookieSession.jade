@@ -15,3 +15,8 @@ section
 
   +js.
     app.use(express.cookieSession());
+
+  p To clear a cookie simply assign the session to null before responding:
+
+  +js.
+    req.session = null
