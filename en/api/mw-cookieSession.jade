@@ -5,13 +5,11 @@ section
     Provides cookie-based sessions, and populates <code>req.session</code>.
     This middleware takes the following options:
 
-  <ul>
-    <li><code>key</code> cookie name defaulting to <code>connect.sess</code></li>
-    <li><code>secret</code> prevents cookie tampering</li>
-    <li><code>cookie</code> session cookie settings, defaulting to <code>{ path: '/', httpOnly: true, maxAge: null }</code></li>
-    <li><code>proxy</code> trust the reverse proxy when setting secure cookies (via "x-forwarded-proto")</li>
-  </ul>
-
+  ul
+    li <code>key</code> cookie name defaulting to <code>connect.sess</code>
+    li <code>secret</code> prevents cookie tampering
+    li <code>cookie</code> session cookie settings, defaulting to <code>{ path: '/', httpOnly: true, maxAge: null }</code>
+    li <code>proxy</code> trust the reverse proxy when setting secure cookies (via "x-forwarded-proto")
 
   +js.
     app.use(express.cookieSession());
