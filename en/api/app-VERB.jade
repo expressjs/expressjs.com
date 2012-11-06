@@ -28,7 +28,7 @@ section
     would match "GET /commits/71dbb9c" as well as "GET /commits/71dbb9c..4c084f9".
 
   +js.
-    app.get(/^\/commits\/(\d+)(?:\.\.(\d+))?$/, function(req, res){
+    app.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
       var from = req.params[0];
       var to = req.params[1] || 'HEAD';
       res.send('commit range ' + from + '..' + to);
