@@ -825,7 +825,7 @@ signed cookie support by passing a <code>secret</code> string.
 app.use(express.cookieParser('some secret'));</code></pre></section><section><h3 id="cookieSession">cookieSession()</h3><p>Provides cookie-based sessions, and populates <code>req.session</code>.
 This middleware takes the following options:
 </p><ul><li><code>key</code> cookie name defaulting to <code>connect.sess</code></li><li><code>secret</code> prevents cookie tampering</li><li><code>cookie</code> session cookie settings, defaulting to <code>{ path: '/', httpOnly: true, maxAge: null }</code></li><li><code>proxy</code> trust the reverse proxy when setting secure cookies (via "x-forwarded-proto")</li></ul><pre class="js"><code>app.use(express.cookieSession());
-</code></pre><p>To clear a cookie simply assign the session to null before responding:</p><pre class="js"><code>req.session = null</code></pre></section><section><h3 id="csrf">csrf()</h3><p>CRSF protection middleware.
+</code></pre><p>To clear a cookie simply assign the session to null before responding:</p><pre class="js"><code>req.session = null</code></pre></section><section><h3 id="csrf">csrf()</h3><p>CSRF protection middleware.
 </p><p>By default this middleware generates a token named "_csrf"
 which should be added to requests which mutate
 state, within a hidden form field, query-string etc. This

@@ -45,23 +45,23 @@ section
   +js.
     $ npm ls
     hello-world@0.0.1 /private/tmp
-    └─┬ express@3.0.0beta7 
-      ├── commander@0.6.1 
-      ├─┬ connect@2.3.9 
-      │ ├── bytes@0.1.0 
-      │ ├── cookie@0.0.4 
-      │ ├── crc@0.2.0 
-      │ ├── formidable@1.0.11 
-      │ └── qs@0.4.2 
-      ├── cookie@0.0.3 
-      ├── debug@0.7.0 
-      ├── fresh@0.1.0 
-      ├── methods@0.0.1 
-      ├── mkdirp@0.3.3 
-      ├── range-parser@0.0.4 
-      ├─┬ response-send@0.0.1 
-      │ └── crc@0.2.0 
-      └─┬ send@0.0.3 
+    └─┬ express@3.0.0beta7
+      ├── commander@0.6.1
+      ├─┬ connect@2.3.9
+      │ ├── bytes@0.1.0
+      │ ├── cookie@0.0.4
+      │ ├── crc@0.2.0
+      │ ├── formidable@1.0.11
+      │ └── qs@0.4.2
+      ├── cookie@0.0.3
+      ├── debug@0.7.0
+      ├── fresh@0.1.0
+      ├── methods@0.0.1
+      ├── mkdirp@0.3.3
+      ├── range-parser@0.0.4
+      ├─┬ response-send@0.0.1
+      │ └── crc@0.2.0
+      └─┬ send@0.0.3
         └── mime@1.2.6
 
   p.
@@ -80,10 +80,23 @@ section
     would do without Express involved.
 
   +js.
-    app.get('/', function(req, res){
-      res.send('Hello World');
+    app.get('/hello.txt', function(req, res){
+      var body = 'Hello World';
+      res.setHeader('Content-Type', 'text/plain');
+      res.setHeader('Content-Length', body.length);
+      res.end(body);
     });
 
+  p.
+    Express augments these objects providing you with higher level
+    methods such as <code>res.send()</code>, which among other things
+    adds the Content-Length for you:
+
+  +js.
+    app.get('/hello.txt', function(req, res){
+      res.send('Hello World');
+    });
+ 
   p.
     Now to bind and listen for connections invoke the <code>app.listen()</code> method,
     accepting the same arguments as node's <a href="http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener">net.Server#listen()</a>:
