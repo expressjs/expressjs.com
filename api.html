@@ -643,9 +643,9 @@ res.send([1,2,3])
 </code></pre><p>Finally when a <code>Number</code> is given without
 any of the previously mentioned bodies, then a response
 body string is assigned for you. For example 200 will
-respond will the text "OK", and 204 "Not Found" and so on.
+respond will the text "OK", and 404 "Not Found" and so on.
 </p><pre class="js"><code>res.send(200)
-res.send(204)
+res.send(404)
 res.send(500)</code></pre></section><section><h3 id="res.json">res.json([status|body], [body])</h3><p>Send a JSON response. This method is identical
 to <code>res.send()</code> when an object or
 array is passed, however it may be used for
