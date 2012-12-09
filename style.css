@@ -465,3 +465,14 @@ html[xmlns] .clearfix {
 #logos, footer {
   display: none;
 }
+
+#book {
+  position: relative;
+}
+
+#book img {
+  position: absolute;
+  top: 0;
+  right: -110px;
+  width: 50%;
+}
