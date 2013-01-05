@@ -265,15 +265,15 @@ nav a.active {
   line-height: 0;
   height: 0;
 }
- 
+
 .clearfix {
   display: inline-block;
 }
- 
+
 html[xmlns] .clearfix {
   display: block;
 }
- 
+
 * html .clearfix {
   height: 1%;
 }
@@ -375,6 +375,10 @@ html[xmlns] .clearfix {
   position: absolute;
   bottom: 15px;
   left: 15px;
+}
+
+.application .link a {
+  margin-left: 4px;
 }
 
 /* ipad landscape */

@@ -1,11 +1,20 @@
 
 mixin image(name)
-  img(src='/images/apps/screenshots/#{name}.small.png')
+  img(src='/images/apps/screenshots/#{name}.png')
 
 mixin link(title, url)
   .link
-    | Visit 
+    | Visit
     a(href=url)= title
+
+section.application
+  h2 MySpace
+  p.
+    No introduction required! Everyone knows MySpace,
+    and the upcomming https://new.myspace.com is powered by Express.
+
+  +link('MySpace', 'https://new.myspace.com/')
+  +image('myspace')
 
 section.application
   h2 LearnBoost
@@ -21,8 +30,8 @@ section.application
 section.application
   h2 Storify
   p.
-    Create stories using social media. Turn what people post 
-    on social media into compelling stories.  Collect the best photos, video, 
+    Create stories using social media. Turn what people post
+    on social media into compelling stories.  Collect the best photos, video,
     tweets and more to publish
 
   +link('Storify', 'http://storify.com/')
@@ -31,7 +40,7 @@ section.application
 section.application
   h2 Geekli.st
   p.
-    A place for geeks to share what they've done, who they did it with and 
+    A place for geeks to share what they've done, who they did it with and
     connect with great companies and communities.
 
   +link('Geekli.st', 'http://geekli.st')
@@ -40,7 +49,7 @@ section.application
 section.application
   h2 Klout
   p.
-    Klout is the Standard for Influence. Join Klout to discover your 
+    Klout is the Standard for Influence. Join Klout to discover your
     influence and compare with others you may know.
 
   +link('Klout', 'http://klout.com')
@@ -49,9 +58,9 @@ section.application
 section.application
   h2 Prismatic
   p.
-    Prismatic learns from how you interact on social networks so that we 
+    Prismatic learns from how you interact on social networks so that we
     can show you the most interesting content and conversation from your friends.
-    
+
   +link('Prismatic', 'http://getprismatic.com/')
   +image('prismatic')
 
@@ -74,6 +83,58 @@ section.application
 
   +link('Persona', 'https://login.persona.org/')
   +image('browserid')
+
+section.application
+  h2 Countly
+  p.
+    Extensive real-time mobile analytics as a service.
+
+  +link('Countly', 'https://count.ly/')
+  +image('countly')
+
+section.application
+  h2 Balloons.io
+  p.
+    A beautiful open-source realtime chat application
+    backed by Express.
+
+  +link('Balloons.io', 'http://balloons.io/')
+  +image('balloon')
+
+section.application
+  h2 Segment.io
+  p.
+    No more littering your app with tons of different analytics providers.
+    Instead, instrument your app once cleanly and then send your data to any analytics service you want.
+
+  +link('Segment.io', 'http://segment.io/')
+  +image('segment')
+
+section.application
+  h2 Yummly
+  p.
+    Yummly is the world's largest and most powerful recipe search site.
+    Bringing together recipes from all over the web - making your life easier.
+
+  +link('Yummly', 'http://yummly.com/')
+  +image('yummly')
+
+section.application
+  h2 Koding
+  p.
+    Real-time software development in the browser with integrated
+    editor, collaboration, terminals and more.
+
+  +link('Koding', 'http://koding.com/')
+  +image('koding')
+
+section.application
+  h2 Apiary.io
+  p.
+    REST API documentation reimagined.
+
+  +link('Apiary', 'http://apiary.io/')
+  +image('apiary')
 
 section.application
   h2 and more!
