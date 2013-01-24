@@ -1,0 +1,23 @@
+section
+  h3(id='res.location') res.location
+  p.
+    Set the location header.
+
+  +js.
+    res.location('/foo/bar');
+    res.location('foo/bar');
+    res.location('http://example.com');
+    res.location('../login');
+    res.location('back');
+
+  p.
+    You can use the same kind of <code>urls</code> as in
+    <code>res.redirect()</code>.
+    
+  p.
+    For example, if your application is mounted at <code>/blog</code>,
+    the follwing would set the <code>location</code> header to
+    <code>/blog/admin</code>:
+    
+  +js.
+    res.location('admin')
