@@ -14,6 +14,8 @@ section
     The <code>app.locals</code> object is a JavaScript <code>Function</code>,
     which when invoked with an object will merge properties into itself, providing
     a simple way to expose existing objects as local variables.
+    Because it is a function, attributes specific to functions, such as <code>name</code>,
+    will not work.
 
   +js.
     app.locals({
@@ -28,10 +30,12 @@ section
     app.locals.email
     // => 'me@myapp.com'
 
+    app.locals.name = 'TJ';
+    // This will not work.
+
   p.
     By default Express exposes only a single app-level local variable, <code>settings</code>.
 
   +js.
     app.set('title', 'My App');
     // use settings.title in a view
-    
