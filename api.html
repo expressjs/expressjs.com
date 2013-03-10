@@ -278,7 +278,7 @@ app.locals.email
 </p><pre class="js"><code>app.set('title', 'My App');
 // use settings.title in a view
 </code></pre><p><code>app.locals</code> has reserved words that should not be used.
-Avoid these words in either <code>app.locals</code>, <code>res.locals</code>, or <code>res.render</code>
+Avoid these words in <code>app.locals</code>, <code>res.locals</code>, and <code>res.render</code>
 otherwise your code may not work as intended:
 </p><ul><li><code>name</code><span> - This is due to <code>app.locals</code>'s nature as a function.</span></li><li><code>cache</code></li><li><code>options</code></li><li><code>_locals</code></li></ul></section><section><h3 id="app.render">app.render(view, [options], callback)</h3><p>Render a <code>view</code> with a callback responding with
 the rendered string. This is the app-level variant of <code>res.render()</code>,
