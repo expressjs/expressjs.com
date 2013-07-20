@@ -276,7 +276,11 @@ app.locals.email
 // => 'me@myapp.com'
 </code></pre><p>By default Express exposes only a single app-level local variable, <code>settings</code>.
 </p><pre class="js"><code>app.set('title', 'My App');
-// use settings.title in a view</code></pre></section><section><h3 id="app.render">app.render(view, [options], callback)</h3><p>Render a <code>view</code> with a callback responding with
+// use settings.title in a view
+</code></pre><p><code>app.locals</code> has reserved words that should not be used.
+Avoid these words in <code>app.locals</code>, <code>res.locals</code>, and <code>res.render</code>
+otherwise your code may not work as intended:
+</p><ul><li><code>name</code><span> - This is due to <code>app.locals</code>'s nature as a function.</span></li><li><code>cache</code></li><li><code>options</code></li><li><code>filename</code></li><li><code>_locals</code></li></ul></section><section><h3 id="app.render">app.render(view, [options], callback)</h3><p>Render a <code>view</code> with a callback responding with
 the rendered string. This is the app-level variant of <code>res.render()</code>,
 and otherwise behaves the same way.
 </p><pre class="js"><code>app.render('email', function(err, html){

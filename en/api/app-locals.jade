@@ -34,4 +34,21 @@ section
   +js.
     app.set('title', 'My App');
     // use settings.title in a view
-    
+
+  p.
+    <code>app.locals</code> has reserved words that should not be used.
+    Avoid these words in <code>app.locals</code>, <code>res.locals</code>, and <code>res.render</code>
+    otherwise your code may not work as intended:
+
+  ul
+    li
+      code name
+      span  - This is due to <code>app.locals</code>'s nature as a function.
+    li
+      code cache
+    li
+      code options
+    li
+      code filename
+    li
+      code _locals
