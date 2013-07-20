@@ -20,6 +20,12 @@ h1, h2, h3 {
   -webkit-font-smoothing: antialiased;
 }
 
+h1 small,
+h2 small,
+h3 small {
+  color: #666666;
+}
+
 p em {
   font-weight: bold;
   font-style: normal;
