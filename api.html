@@ -788,7 +788,7 @@ response header field.
       &lt;http://api.example.com/users?page=5&gt;; rel="last"</code></pre></section><section><h3 id="res.locals">res.locals</h3><p>Response local variables are scoped to the request, thus only
 available to the view(s) rendered during that request / response
 cycle, if any. Otherwise this API is identical to <a href="#app.locals">app.locals</a>.
-</p><p>This object is useful for exposes request-level information such as the
+</p><p>This object is useful for exposing request-level information such as the
 request pathname, authenticated user, user settings etcetera.
 </p><pre class="js"><code>app.use(function(req, res, next){
   res.locals.user = req.user;
@@ -823,7 +823,12 @@ the <code>json()</code>, <code>urlencoded()</code>, and
 // is equivalent to:
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(express.multipart());</code></pre></section><section><h3 id="compress">compress()</h3><p>Compress response data with gzip / deflate. This middleware
+app.use(express.multipart());
+</code></pre><p>For security sake, it's better to disable file upload if your application
+doesn't need it. To do this, use only the needed middleware, i.e. don't use
+the <code>bodyParser</code> and <code>multipart()</code> middleware:
+</p><pre class="js"><code>app.use(express.json());
+app.use(express.urlencoded());</code></pre></section><section><h3 id="compress">compress()</h3><p>Compress response data with gzip / deflate. This middleware
 should be placed "high" within the stack to ensure all
 responses may be compressed.
 </p><pre class="js"><code>app.use(express.logger());

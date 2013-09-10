@@ -14,3 +14,12 @@ section
     app.use(express.json());
     app.use(express.urlencoded());
     app.use(express.multipart());
+
+  p.
+    For security sake, it's better to disable file upload if your application
+    doesn't need it. To do this, use only the needed middleware, i.e. don't use
+    the <code>bodyParser</code> and <code>multipart()</code> middleware:
+
+  +js.
+    app.use(express.json());
+    app.use(express.urlencoded());
