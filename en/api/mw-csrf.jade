@@ -8,8 +8,7 @@ section
     By default this middleware generates a token named "_csrf"
     which should be added to requests which mutate
     state, within a hidden form field, query-string etc. This
-    token is validated against the visitor's <code>req.session._csrf</code>
-    property.
+    token is validated against <code>req.csrfToken()</code>.
   
   p.
     The default <code>value</code> function checks <code>req.body</code> generated
