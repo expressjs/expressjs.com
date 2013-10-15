@@ -18,20 +18,27 @@ html
       #right
         include en/api/express
 
-        h2 Application
         a(name='application')
+        h2 Application
         include en/api/app
       
-        h2 Request
         a(name='request')
+        h2 Request
         include en/api/req
 
-        h2 Response
         a(name='response')
+        h2 Response
         include en/api/res
 
-        h2 Middleware
         a(name='middleware')
+        h2 Middleware
+
+        p Express exposes its own middleware, but since Express extends 
+          a(href='http://www.senchalabs.org/connect/') Connect
+          |, all the middleware exposed by Connect are also exposed by Express.
+
+        p This documentation is still under construction, so for missing middleware, please refer to the corresponding one in 
+          a(href='http://www.senchalabs.org/connect/') Connect.
         include en/api/middleware
 
     include includes/footer
