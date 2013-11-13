@@ -22,6 +22,6 @@ section
     in this case <code>req.user</code> will be the user object passed.
 
   +js.
-    app.use(connect.basicAuth(function(user, pass, fn){
+    app.use(express.basicAuth(function(user, pass, fn){
       User.authenticate({ user: user, pass: pass }, fn);
     }))
