@@ -296,6 +296,7 @@ html[xmlns] .clearfix {
   width: 180px;
   margin: 0 25px;
   float: left;
+  min-height: 200px;
 }
 
 #boxes h3 {
