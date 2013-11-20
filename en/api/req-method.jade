@@ -1,0 +1,14 @@
+section
+  h3(id='req.method') req.method
+
+  p.
+    Returns the HTTP method used in the request.
+
+  +js.
+    // GET /user/tj
+    req.method
+    // => "GET"
+  
+    // POST /user
+    req.method
+    // => "POST"
