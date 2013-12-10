@@ -480,3 +480,11 @@ html[xmlns] .clearfix {
   right: -110px;
   width: 50%;
 }
+
+a[name]:before { 
+  display: block; 
+  content: " "; 
+  margin-top: -60px; 
+  height: 60px; 
+  visibility: hidden; 
+}

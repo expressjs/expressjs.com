@@ -7,7 +7,7 @@ app.get('/', function(req, res){
   res.send('hello world');
 });
 
-app.listen(3000);</code></pre></section><h2>Application</h2><a name="application"></a><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.
+app.listen(3000);</code></pre></section><a name="application"></a><h2>Application</h2><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.
 </p><pre class="js"><code>app.set('title', 'My Site');
 app.get('title');
 // => "My Site"</code></pre></section><section><h3 id="app.get">app.get(name)</h3><p>Get setting <code>name</code> value.
@@ -330,7 +330,7 @@ if you wish to use HTTPS or provide both, use the technique above.
 </p><pre class="js"><code>app.listen = function(){
   var server = http.createServer(this);
   return server.listen.apply(server, arguments);
-};</code></pre></section><h2>Request</h2><a name="request"></a><section><h3 id="req.params">req.params</h3><p>This property is an array containing properties mapped to the named route "parameters".
+};</code></pre></section><a name="request"></a><h2>Request</h2><section><h3 id="req.params">req.params</h3><p>This property is an array containing properties mapped to the named route "parameters".
 For example if you have the route <code>/user/:name</code>, then the "name" property
 is available to you as <code>req.params.name</code>. This object defaults to <code>{}</code>.
 </p><pre class="js"><code>// GET /user/tj
@@ -552,7 +552,7 @@ req.originalUrl
 </p><pre class="js"><code>Accept-Language: en;q=.5, en-us
 // => ['en-us', 'en']</code></pre></section><section><h3 id="req.acceptedCharsets">req.acceptedCharsets</h3><p>Return an array of Accepted charsets ordered from highest quality to lowest.
 </p><pre class="js"><code>Accept-Charset: iso-8859-5;q=.2, unicode-1-1;q=0.8
-// => ['unicode-1-1', 'iso-8859-5']</code></pre></section><section><h3 id="req.acceptsCharset">req.acceptsCharset(charset)</h3><p>Check if the given <code>charset</code> are acceptable.</p></section><section><h3 id="req.acceptsLanguage">req.acceptsLanguage(lang)</h3><p>Check if the given <code>lang</code> are acceptable.</p></section><h2>Response</h2><a name="response"></a><section><h3 id="res.status">res.status(code)</h3><p>Chainable alias of node's '`res.statusCode=`.
+// => ['unicode-1-1', 'iso-8859-5']</code></pre></section><section><h3 id="req.acceptsCharset">req.acceptsCharset(charset)</h3><p>Check if the given <code>charset</code> are acceptable.</p></section><section><h3 id="req.acceptsLanguage">req.acceptsLanguage(lang)</h3><p>Check if the given <code>lang</code> are acceptable.</p></section><a name="response"></a><h2>Response</h2><section><h3 id="res.status">res.status(code)</h3><p>Chainable alias of node's '`res.statusCode=`.
 </p><pre class="js"><code>res.status(404).sendfile('path/to/404.png');</code></pre></section><section><h3 id="res.set">res.set(field, [value])</h3><p> 
 Set header <code>field</code> to <code>value</code>,
 or pass an object to set multiple fields at once.</p><pre class="js"><code>res.set('Content-Type', 'text/plain');
@@ -804,7 +804,7 @@ and rendered string are passed, and no automated response is performed.
 
 res.render('user', { name: 'Tobi' }, function(err, html){
   // ...
-});</code></pre></section><h2>Middleware</h2><a name="middleware"></a><section><h3 id="basicAuth">basicAuth()</h3><p>Basic Authentication middleware, populating <code>req.user</code>
+});</code></pre></section><a name="middleware"></a><h2>Middleware</h2><p>Express exposes its own middleware, but since Express extends <a href="http://www.senchalabs.org/connect/">Connect</a>, all the middleware exposed by Connect are also exposed by Express.</p><p>This documentation is still under construction, so for missing middleware, please refer to the corresponding one in <a href="http://www.senchalabs.org/connect/">Connect.</a></p><section><h3 id="basicAuth">basicAuth()</h3><p>Basic Authentication middleware, populating <code>req.user</code>
 with the username.
 </p><p>Simple username and password:</p><pre class="js"><code>app.use(express.basicAuth('username', 'password'));
 </code></pre><p>Callback verification:</p><pre class="js"><code>app.use(express.basicAuth(function(user, pass){
@@ -847,8 +847,7 @@ This middleware takes the following options:
 </p><p>By default this middleware generates a token named "_csrf"
 which should be added to requests which mutate
 state, within a hidden form field, query-string etc. This
-token is validated against the visitor's <code>req.session._csrf</code>
-property.
+token is validated against <code>req.csrfToken()</code>.
 </p><p>The default <code>value</code> function checks <code>req.body</code> generated
 by the <code>bodyParser()</code> middleware, <code>req.query</code> generated
 by <code>query()</code>, and the "X-CSRF-Token" header field.
