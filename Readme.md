@@ -1,4 +1,3 @@
-
 # ExpressJS.com
 
   The site for Express.
@@ -24,3 +23,9 @@ $ make
 ## Contributing
 
   - __dont__ edit the HTML directly, edit the _jade_.
+
+## Showcasing
+
+If you have an app you'd like to showcase on the express site,
+do not just open an issue for it.
+Instead, _open a pull request_ for it.
