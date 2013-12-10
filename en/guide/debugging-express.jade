@@ -1,0 +1,24 @@
+section
+  h3(id='debugging-express') Debugging Express
+
+  p.
+    Express uses the <a href="https://github.com/visionmedia/debug">debug</a> module
+    internally to log information about route matches and application mode.
+    To see this information, simply set the <code>DEBUG</code> environment variable to
+    <code>express:*</code> when launching your app and the debug information will
+    appear on the console.
+
+  +shell.
+    $ DEBUG=express:* node app.js
+
+  p.
+    Running this on the <code>hello world</code> example would print the following
+
+  +shell.
+    express:application booting in development mode +0ms
+    express:router defined get /hello.txt +0ms
+    express:router defined get /hello.txt +1ms
+
+  p.
+    For more documentation on <code>debug</code>, see the <a href="https://github.com/visionmedia/debug">debug guide</a>
+
