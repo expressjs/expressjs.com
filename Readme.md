@@ -22,7 +22,8 @@ $ make
 
 ## Contributing
 
-  - __dont__ edit the HTML directly, edit the _jade_.
+  - __don't__ edit the HTML directly, edit the _jade_.
+  - don't commit any HTML changes, __only jade changes__.
 
 ## Showcasing
 
