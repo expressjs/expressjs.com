@@ -452,16 +452,6 @@ html[xmlns] .clearfix {
   .application img {
     width: 60%;
   }
-
-  #boxes {
-    margin-left: 0;
-  }
-
-  #boxes section {
-    width: 100%;
-    margin-top: 20px;
-    margin-left: 0;
-  }
 }
 
 /* tmp */
