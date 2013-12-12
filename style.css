@@ -296,6 +296,8 @@ html[xmlns] .clearfix {
   width: 180px;
   margin: 0 25px;
   float: left;
+  /* fix grid jank. #105 */
+  min-height: 200px;
 }
 
 #boxes h3 {
@@ -422,6 +424,8 @@ html[xmlns] .clearfix {
     width: 100%;
     margin-top: 20px;
     margin-left: 0;
+    /* undo grid jank */
+    min-height: 0;
   }
 }
 
