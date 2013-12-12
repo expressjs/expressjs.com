@@ -29,6 +29,12 @@ section
     pathname.
 
   p.
+    Note that <code>use</code> declarations should usually be invoked before
+    <strong>all</strong> <code>get</code> and <code>post</code> declarations.
+    Otherwise they may only take effect after <code>get</code> and <code>post</code>
+    declarations.
+
+  p.
     Here's a concrete example, take the typical use-case of serving files in ./public
     using the <code>express.static()</code> middleware:
 
