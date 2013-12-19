@@ -8,8 +8,6 @@ HTML = index.html \
 	community.html \
 	faq.html
 
-build: ; $(MAKE) -j6 docs
-
 docs: $(HTML)
 
 %.html: %.jade
