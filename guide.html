@@ -57,7 +57,7 @@ would do without Express involved.
 </p><pre class="js"><code>app.get('/hello.txt', function(req, res){
   var body = 'Hello World';
   res.setHeader('Content-Type', 'text/plain');
-  res.setHeader('Content-Length', body.length);
+  res.setHeader('Content-Length', Buffer.byteLength(body));
   res.end(body);
 });
 </code></pre><p>Express augments these objects providing you with higher level
