@@ -1,6 +1,4 @@
-/* 
-* general 
-*/
+/* general */
 
 * {
   -webkit-box-sizing: border-box;
@@ -61,10 +59,7 @@ h3 {
   margin: 0 12.5% 0 12.5%;
 }
 
-
-/* 
-* links 
-*/
+/* links */
 
 a {
   color: #259dff;
@@ -84,10 +79,7 @@ nav a {
   color: #7B838A;
 }
 
-
-/* 
-* logo 
-*/
+/* logo */
 
 #content > section {
   margin: 10% 0 10% 0;
@@ -132,10 +124,7 @@ nav a {
   color: #858585;
 }
 
-
-/* 
-* secondary page logo 
-*/
+/* secondary page logo */
 
 .inner header {
   position: fixed;
@@ -173,10 +162,7 @@ nav a {
   display: none;
 }
 
-
-/* 
-* code 
-*/
+/* code */
 
 p code {
   background: #efefef;
@@ -211,10 +197,7 @@ code .string { color: #5890AD }
 code .keyword { color: #8A6343 }
 code .number { color: #2F6FAD }
 
-
-/* 
-* top button 
-*/
+/* top button */
 
 .scroll #top {
   opacity: .2;
@@ -243,10 +226,7 @@ code .number { color: #2F6FAD }
   height: 5px;
 }
 
-
-/* 
-* navigation
-*/
+/* navigation */
 
 header {
   width: 100%;
@@ -274,10 +254,7 @@ nav a.active {
   color: #353535;
 }
 
-
-/* 
-* clearfix 
-*/
+/* clearfix */
 
 .clearfix:after {
   content: ".";
@@ -300,10 +277,7 @@ html[xmlns] .clearfix {
   height: 1%;
 }
 
-
-/* 
-* boxes 
-*/
+/* boxes */
 
 #boxes {
   background: url(images/hr.png) top center no-repeat;
@@ -348,10 +322,7 @@ html[xmlns] .clearfix {
   margin-bottom: 20px;
 }
 
-
-/* 
-* secondary menu 
-*/
+/* secondary menu */
 
 #menu {
   position: fixed;
@@ -390,10 +361,7 @@ html[xmlns] .clearfix {
   color: #259dff;
 }
 
-
-/* 
-* applications page 
-*/
+/* applications page */
 
 .application h2 {
   margin: 0;
@@ -426,10 +394,7 @@ html[xmlns] .clearfix {
   margin-left: 4px;
 }
 
-
-/* 
-* ipad landscape 
-*/
+/* ipad landscape */
 
 @media all and (max-width: 1200px) {    
   #boxes section {
@@ -445,10 +410,7 @@ html[xmlns] .clearfix {
   }
 }
 
-
-/* 
-* ipad portrait 
-*/
+/* ipad portrait */
 
 @media all and (max-width: 768px) {
   .application img {
@@ -475,10 +437,7 @@ html[xmlns] .clearfix {
   }
 }
 
-
-/* 
-* iphone portrait 
-*/
+/* iphone portrait */
 
 @media all and (max-width: 650px) {
   body a > img {
@@ -536,10 +495,7 @@ html[xmlns] .clearfix {
   }
 }
 
-
-/* 
-* tmp 
-*/
+/* tmp */
 
 #logos, footer {
   display: none;
