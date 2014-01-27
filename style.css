@@ -38,18 +38,8 @@ strong {
   margin-top: 100px;
 }
 
-#content {
-  margin-left: 80px;
-  width: 900px;
-  margin-bottom: 80px;
-}
-
 li code {
   color: #353535;
-}
-
-section section p {
-  width: 60%;
 }
 
 h2 {
@@ -59,10 +49,14 @@ h2 {
 
 h3 {
   background: url(images/hr.png) top center no-repeat;
-  margin-top: 40px;
   padding-top: 50px;
   padding-bottom: 5px;
   font-weight: bold;
+}
+
+#main {
+  width: 75%;
+  margin: 0 12.5% 0 12.5%;
 }
 
 /* links */
@@ -87,11 +81,12 @@ nav a {
 
 /* logo */
 
+#content > section {
+  margin: 10% 0 10% 0;
+}
+
 #logo {
-  margin-top: 180px;
-  margin-bottom: 180px;
-  margin-left: 80px;
-  padding-left: 40px;
+  margin: auto;
   width: 440px;
   border-left: 1px dotted #eee;
   -webkit-font-smoothing: antialiased;
@@ -233,11 +228,15 @@ code .number { color: #2F6FAD }
 
 /* navigation */
 
+header {
+  width: 100%;
+  height: 57px;
+}
+
 nav {
-  position: fixed;
-  top: 20px;
-  right: 15px;
-  z-index: 100;
+  margin-top: 15px;
+  margin-right: 15px;
+  float: right;
 }
 
 nav a {
@@ -282,7 +281,8 @@ html[xmlns] .clearfix {
 
 #boxes {
   background: url(images/hr.png) top center no-repeat;
-  margin-left: 50px;
+  width: 75%;
+  margin: 0 12.5% 0 12.5%;
   padding-top: 50px;
   padding-bottom: 50px;
   font-size: 12px;
@@ -293,11 +293,21 @@ html[xmlns] .clearfix {
 }
 
 #boxes section {
-  width: 180px;
+  width: 15%;
   margin: 0 25px;
   float: left;
   /* fix grid jank. #105 */
   min-height: 200px;
+}
+
+#boxes section:last-child {
+  width: 30%;
+}
+
+#boxes section:last-child p {
+  width: 50%;
+  display: inline-block;
+  margin-top: 0;
 }
 
 #boxes h3 {
@@ -371,6 +381,7 @@ html[xmlns] .clearfix {
 
 .application img {
   float: right;
+  width: 60%;
 }
 
 .application .link {
@@ -385,41 +396,7 @@ html[xmlns] .clearfix {
 
 /* ipad landscape */
 
-@media all and (max-width: 1200px) {
-  #content {
-    width: 760px;
-  }
-
-  .applications #content,
-  .community #content {
-    width: 900px;
-  }
-}
-
-/* ipad portrait */
-
-@media all and (max-width: 768px) {
-  #content {
-    width: 500px;
-  }
-
-  .applications #content,
-  .community #content {
-    width: 600px;
-  }
-
-  .application img {
-    width: 60%;
-  }
-
-  .application {
-    height: 450px;
-  }
-
-  #boxes {
-    margin-left: 0;
-  }
-
+@media all and (max-width: 1200px) {    
   #boxes section {
     width: 100%;
     margin-top: 20px;
@@ -427,34 +404,94 @@ html[xmlns] .clearfix {
     /* undo grid jank */
     min-height: 0;
   }
+  
+  #boxes section:last-child {
+    width: 100%;
+  }
+}
+
+/* ipad portrait */
+
+@media all and (max-width: 768px) {
+  .application img {
+    width: 60%;
+  }
+  
+  .inner header {
+    height: 85px;
+  }
+  
+  nav {
+    margin-top: 50px;
+    margin-left: 20px;
+    float: left;
+  }
+  
+  /* reference only the nav on the home page */
+  #content header nav:first-child {
+    float: right;
+  }
+  
+  #menu {
+    display: none;
+  }
 }
 
 /* iphone portrait */
 
 @media all and (max-width: 650px) {
-  #logo {
-    margin-left: 0;
+  body a > img {
+    display: none;
   }
-
-  #content {
-    width: 380px;
+  
+  nav {
+    margin: 15px 0 0 0;
+    width: 30%;
+    display: inline-block;
+    float: right;
   }
-
-  .applications #content,
-  .community #content {
-    width: 500px;
+  
+  nav a {
+    display: inherit;
+  }
+  
+  #content header {
+    height: 150px;
+  }
+  
+  .inner header {
+    position: static;
+  }
+  
+  .inner {
+    margin-top: 0;
+  }
+  
+  .inner.scroll header {
+    border-bottom: 0;
+    box-shadow: 0 0 0;
+  }
+  
+  .inner #logo {
+    padding-top: 60px;
+    display: inline-block;
+    position: static;
+  }
+  
+  #menu {
+    display: none;
   }
 
   section section p {
     width: 100%;
   }
 
-  .application {
-    height: 380px;
-  }
-
   .application img {
-    width: 60%;
+    width: 50%;
+  }
+  
+  .application .link {
+    left: 70%;
   }
 }
 
@@ -469,8 +506,7 @@ html[xmlns] .clearfix {
 }
 
 #book img {
-  position: absolute;
-  top: 0;
-  right: -110px;
-  width: 50%;
+  display: inline-block;
+  width: 30%;
+  float: right;
 }
