@@ -7,7 +7,7 @@ section
   ul
     li
       code env 
-      | Environment mode, defaults to <code>process.env.NODE_ENV</code> or "development"
+      | Environment mode, defaults to <code>process.env.NODE_ENV</code> (NODE_ENV environment variable) or "development"
     li
       code trust proxy 
       | Enables reverse proxy support, disabled by default
@@ -19,7 +19,7 @@ section
       | JSON replacer callback, null by default
     li
       code json spaces 
-      | JSON response spaces for formatting, defaults to <code>2</code> in development, <code>0</code> in production
+      | JSON response spaces for formatting
     li
       code case sensitive routing 
       | Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same

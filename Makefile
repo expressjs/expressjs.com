@@ -12,6 +12,9 @@ HTML = index.html \
 
 docs: $(HTML)
 
+4x/api.html: 4x/api.jade 4x/en/api/*.jade
+	$(JADE) --path $< < $< > $@
+
 %.html: %.jade includes/*.jade
 	$(JADE) --path $< < $< > $@
 
