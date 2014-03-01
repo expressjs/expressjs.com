@@ -1,0 +1,40 @@
+section
+  h3(id='app.configure') app.configure([env], callback)
+
+  p.
+    Conditionally invoke <code>callback</code> when <code>env</code> matches <code>app.get('env')</code>,
+    aka <code>process.env.NODE_ENV</code>. This method remains for legacy reason, and is effectively
+    an <code>if</code> statement as illustrated in the following snippets. These functions are <em>not</em>
+    required in order to use <code>app.set()</code> and other configuration methods.
+
+  +js.
+    // all environments
+    app.configure(function(){
+      app.set('title', 'My Application');
+    })
+
+    // development only
+    app.configure('development', function(){
+      app.set('db uri', 'localhost/dev');
+    })
+    
+    // production only
+    app.configure('production', function(){
+      app.set('db uri', 'n.n.n.n/prod');
+    })
+
+  Is effectively sugar for:
+
+  +js.
+    // all environments
+    app.set('title', 'My Application');
+
+    // development only
+    if ('development' == app.get('env')) {
+      app.set('db uri', 'localhost/dev');
+    }
+    
+    // production only
+    if ('production' == app.get('env')) {
+      app.set('db uri', 'n.n.n.n/prod');
+    }

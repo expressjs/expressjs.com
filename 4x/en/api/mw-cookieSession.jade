@@ -1,0 +1,20 @@
+section
+  h3(id='cookieSession') cookieSession()
+
+  p.
+    Provides cookie-based sessions, and populates <code>req.session</code>.
+    This middleware takes the following options:
+
+  ul
+    li <code>key</code> cookie name defaulting to <code>connect.sess</code>
+    li <code>secret</code> prevents cookie tampering
+    li <code>cookie</code> session cookie settings, defaulting to <code>{ path: '/', httpOnly: true, maxAge: null }</code>
+    li <code>proxy</code> trust the reverse proxy when setting secure cookies (via "x-forwarded-proto")
+
+  +js.
+    app.use(express.cookieSession());
+
+  p To clear a cookie simply assign the session to null before responding:
+
+  +js.
+    req.session = null

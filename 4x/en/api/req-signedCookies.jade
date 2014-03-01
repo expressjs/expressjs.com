@@ -1,0 +1,16 @@
+section
+  h3(id='req.signedCookies') req.signedCookies
+
+  p.
+    When the <code>cookieParser(secret)</code> middleware is used this object
+    defaults to <code>{}</code>, otherwise contains the signed cookies sent by
+    the user-agent, unsigned and ready for use. Signed cookies reside in a different
+    object to show developer intent, otherwise a malicious attack could be
+    placed on `req.cookie` values which are easy to spoof. Note that signing
+    a cookie does not mean it is "hidden" nor encrypted, this simply prevents
+    tampering as the secret used to sign is private.
+
+  +js.
+    // Cookie: user=tobi.CP7AWaXDfAKIRfH49dQzKJx7sKzzSoPq7/AcBBRVwlI3
+    req.signedCookies.user
+    // => "tobi"

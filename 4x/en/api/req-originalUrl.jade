@@ -1,0 +1,14 @@
+section
+  h3(id='req.originalUrl') req.originalUrl
+
+  p.
+    This property is much like <code>req.url</code>, however it retains
+    the original request url, allowing you to rewrite <code>req.url</code>
+    freely for internal routing purposes. For example the "mounting" feature
+    of <a href="#app.use">app.use()</a> will rewrite <code>req.url</code> to
+    strip the mount point.
+
+  +js.
+    // GET /search?q=something
+    req.originalUrl
+    // => "/search?q=something"

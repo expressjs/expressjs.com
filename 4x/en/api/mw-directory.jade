@@ -1,0 +1,21 @@
+
+section
+  h3(id='directory') directory()
+
+  p.
+    Directory serving middleware, serves the given <code>path</code>.
+    This middleware may be paired with <code>static()</code> to serve
+    files, providing a full-featured file browser.
+
+  +js.
+    app.use(express.directory('public'))
+    app.use(express.static('public'))
+
+  p.
+    This middleware accepts the following options:
+
+  ul
+    li<code>hidden</code> display hidden (dot) files. Defaults to false.
+    li<code>icons</code>  display icons. Defaults to false.
+    li<code>filter</code> Apply this filter function to files. Defaults to false.
+  

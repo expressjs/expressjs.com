@@ -1,0 +1,9 @@
+section
+  h3(id='res.clearCookie') res.clearCookie(name, [options])
+  p.
+    Clear cookie <code>name</code>. The <code>path</code>
+    option defaults to "/".
+
+  +js.
+    res.cookie('name', 'tobi', { path: '/admin' });
+    res.clearCookie('name', { path: '/admin' });

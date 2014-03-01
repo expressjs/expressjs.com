@@ -1,0 +1,8 @@
+section
+  h3(id='res.get') res.get(field)
+  p 
+    | Get the case-insensitive response header <code>field</code>. 
+
+  +js.
+    res.get('Content-Type');
+    // => "text/plain"
