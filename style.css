@@ -58,7 +58,7 @@ h2 {
 }
 
 h3 {
-  background: url(images/hr.png) top center no-repeat;
+  background: url(/images/hr.png) top center no-repeat;
   margin-top: 40px;
   padding-top: 50px;
   padding-bottom: 5px;
@@ -281,7 +281,7 @@ html[xmlns] .clearfix {
 /* boxes */
 
 #boxes {
-  background: url(images/hr.png) top center no-repeat;
+  background: url(/images/hr.png) top center no-repeat;
   margin-left: 50px;
   padding-top: 50px;
   padding-bottom: 50px;
@@ -358,7 +358,7 @@ html[xmlns] .clearfix {
 }
 
 .application {
-  background: url(images/hr.png) top center no-repeat;
+  background: url(/images/hr.png) top center no-repeat;
   padding: 80px 0;
   height: 600px;
   position: relative;

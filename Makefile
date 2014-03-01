@@ -6,11 +6,12 @@ HTML = index.html \
 	guide.html \
 	applications.html \
 	community.html \
-	faq.html
+	faq.html \
+	3x/api.html
 
 docs: $(HTML)
 
-%.html: %.jade
+%.html: %.jade includes/*.jade
 	$(JADE) --path $< < $< > $@
 
 clean:
