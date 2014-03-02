@@ -1,5 +1,5 @@
 ul#menu
-  li#app-api 
+  li#app-api
     a(href='#express') Application
     ul#app-menu
       li: a(href='#express') express()
@@ -15,10 +15,11 @@ ul#menu
       li: a(href='#app.param') app.param()
       li: a(href='#app.VERB') application routing
       li: a(href='#app.all') app.all()
+      li: a(href='#app.route') app.route()
       li: a(href='#app.locals') app.locals
       li: a(href='#app.render') app.render()
       li: a(href='#app.listen') app.listen()
-  li#req-api 
+  li#req-api
     a(href='#req.params') Request
     ul#req-menu
       li: a(href='#req.params') req.params
@@ -45,7 +46,7 @@ ul#menu
       li: a(href='#req.secure') req.secure
       li: a(href='#req.subdomains') req.subdomains
       li: a(href='#req.originalUrl') req.originalUrl
-  li#res-api 
+  li#res-api
     a(href='#res.status') Response
     ul#res-menu
       li: a(href='#res.status') res.status()
@@ -67,6 +68,14 @@ ul#menu
       li: a(href='#res.links') res.links()
       li: a(href='#res.locals') res.locals
       li: a(href='#res.render') res.render()
+  li#router-api
+    a(href='#router') Router
+    ul#router-menu
+      li: a(href='#router') Router()
+      li: a(href='#router.use') router.use()
+      li: a(href='#router.param') router.param()
+      li: a(href='#router.route') router.route()
+      li: a(href='#router.VERB') router.VERB()
   li#middleware-api
     a(href='#middleware') Middleware
     ul#middleware-menu

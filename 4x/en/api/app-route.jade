@@ -1,0 +1,21 @@
+section
+  h3(id='app.route') app.route(path)
+
+  p.
+    Returns an instance of a single route which can then be used to handle HTTP verbs with optional middleware. Using <code>app.route()</code> is a recommended approach to avoiding duplicate route naming and thus typo errors.
+
+  +js.
+    var app = express();
+
+    app.route('/events')
+    .all(function(req, res, next) {
+      // runs for all HTTP verbs first
+      // think of it as route specific middleware!
+    })
+    .get(function(req, res, next) {
+      res.json(...);
+    })
+    .post(function(req, res, next) {
+      // maybe add a new event...
+    })
+

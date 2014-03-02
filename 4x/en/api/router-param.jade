@@ -1,0 +1,88 @@
+section
+  h3(id='router.param') router.param([name], callback)
+  
+  p.
+    Map logic to route parameters. For example when <code>:user</code>
+    is present in a route path you may map user loading logic to automatically
+    provide <code>req.user</code> to the route, or perform validations
+    on the parameter input.
+
+  p.
+    The following snippet illustrates how the <code>callback</code>
+    is much like middleware, thus supporting async operations, however
+    providing the additional value of the parameter, here named as <code>id</code>.
+    An attempt to load the user is then performed, assigning <code>req.user</code>,
+    otherwise passing an error to <code>next(err)</code>.
+
+  p.
+    It is important to realize that any route that triggered a named parameter function to run will only be run if <code>next</code> was not called with an error in the named parameter handler.
+
+  +js.
+    router.param('user', function(req, res, next, id){
+      User.find(id, function(err, user){
+        if (err) {
+          return next(err);
+        }
+        else if (!user) {
+          return next(new Error('failed to load user'));
+        }
+
+        req.user = user;
+        next();
+      });
+    });
+
+    // this route uses the ":user" named parameter
+    // which will caused the 'user' param callback to be triggered
+    router.get('/users/:user', function(req, res, next) {
+      // req.user WILL be defined here
+      // if there was an error, normal error handling will be triggered
+      // and this function will NOT execute
+    });
+
+  p.
+    Alternatively you may pass only a <code>callback</code>, in which
+    case you have the opportunity to alter the <code>router.param()</code> API.
+    For example the <a href="http://github.com/visionmedia/express-params">express-params</a>
+    defines the following callback which allows you to restrict parameters to a given
+    regular expression.
+
+  p.
+    This example is a bit more advanced, checking if the second argument is a regular
+    expression, returning the callback which acts much like the "user" param example.
+
+  +js.
+    router.param(function(name, fn){
+      if (fn instanceof RegExp) {
+        return function(req, res, next, val){
+          var captures;
+          if (captures = fn.exec(String(val))) {
+            req.params[name] = captures;
+            next();
+          } else {
+            next('route');
+          }
+        }
+      }
+    });
+
+  p.
+    The method could now be used to effectively validate parameters, or also
+    parse them to provide capture groups:
+
+  +js.
+    router.param('id', /^\d+$/);
+
+    router.get('/user/:id', function(req, res){
+      res.send('user ' + req.params.id);
+    });
+
+    router.param('range', /^(\w+)\.\.(\w+)?$/);
+
+    router.get('/range/:range', function(req, res){
+      var range = req.params.range;
+      res.send('from ' + range[1] + ' to ' + range[2]);
+    });
+
+  p.
+    The <code>router.use()</code> method also supports named parameters so that your mount points for other routers can benefit from preloading using named parameters.

@@ -1,0 +1,42 @@
+section
+  h3(id='router') Router()
+
+  p.
+    A router is an isolated instance of middleware and routes. Routers can be thought of as "mini" applications only capable of performing middleware and routing. Every express application has a builtin app router.
+
+  p.
+    Routers behave like middleware themselves and can be ".use()'d" by the app or in other routers.
+
+  p.
+    Create a new router by using "express.Router()"
+
+  +js.
+    var router = express.Router();
+
+  p.
+    The router can have middleware and http VERB routes added just like an application.
+
+  +js.
+    // invoked for any requested passed to this router
+    router.use(function(req, res, next) {
+      // .. some logic here .. like any other middleware
+      next();
+    });
+
+    // will handle any request that ends in /events
+    // depends on where the router is "use()'d"
+    router.get('/events', function(req, res, next) {
+      // ..
+    });
+
+  p.
+    You can then use a router for a particular root url in this way separating your routes into files or even mini apps.
+
+  +js.
+    // only requests to /calendar/* will be sent to our "router"
+    app.use('/calendar', router);
+
+include ./router-use
+include ./router-param
+include ./router-route
+include ./router-VERB
