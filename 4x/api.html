@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Express - api reference</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="./" class="express">express<em>3.0.0</em></a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/3x/api.html">API Reference</a><a href="/guide.html">Guide</a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a></nav></header><ul id="menu"><li id="app-api"> <a href="#express">Application</a><ul id="app-menu"><li><a href="#express">express()</a></li><li><a href="#app.set">app.set()</a></li><li><a href="#app.get">app.get()</a></li><li><a href="#app.enable">app.enable()</a></li><li><a href="#app.disable">app.disable()</a></li><li><a href="#app.enabled">app.enabled()</a></li><li><a href="#app.disabled">app.disabled()</a></li><li><a href="#app.configure">app.configure()</a></li><li><a href="#app.use">app.use()</a></li><li><a href="#app-settings">application settings</a></li><li><a href="#app.engine">app.engine()</a></li><li><a href="#app.param">app.param()</a></li><li><a href="#app.VERB">application routing</a></li><li><a href="#app.all">app.all()</a></li><li><a href="#app.locals">app.locals</a></li><li><a href="#app.render">app.render()</a></li><li><a href="#app.routes">app.routes</a></li><li><a href="#app.listen">app.listen()</a></li></ul></li><li id="req-api"> <a href="#req.params">Request</a><ul id="req-menu"><li><a href="#req.params">req.params</a></li><li><a href="#req.query">req.query</a></li><li><a href="#req.body">req.body</a></li><li><a href="#req.files">req.files</a></li><li><a href="#req.param">req.param()</a></li><li><a href="#req.route">req.route</a></li><li><a href="#req.cookies">req.cookies</a></li><li><a href="#req.signedCookies">req.signedCookies</a></li><li><a href="#req.get">req.get()</a></li><li><a href="#req.accepts">req.accepts()</a></li><li><a href="#req.accepted">req.accepted</a></li><li><a href="#req.is">req.is()</a></li><li><a href="#req.ip">req.ip</a></li><li><a href="#req.ips">req.ips</a></li><li><a href="#req.path">req.path</a></li><li><a href="#req.host">req.host</a></li><li><a href="#req.fresh">req.fresh</a></li><li><a href="#req.stale">req.stale</a></li><li><a href="#req.xhr">req.xhr</a></li><li><a href="#req.protocol">req.protocol</a></li><li><a href="#req.secure">req.secure</a></li><li><a href="#req.subdomains">req.subdomains</a></li><li><a href="#req.originalUrl">req.originalUrl</a></li><li><a href="#req.acceptedLanguages">req.acceptedLanguages</a></li><li><a href="#req.acceptedCharsets">req.acceptedCharsets</a></li><li><a href="#req.acceptsCharset">req.acceptsCharset()</a></li><li><a href="#req.acceptsLanguage">req.acceptsLanguage()</a></li></ul></li><li id="res-api"> <a href="#res.status">Response</a><ul id="res-menu"><li><a href="#res.status">res.status()</a></li><li><a href="#res.set">res.set()</a></li><li><a href="#res.get">res.get()</a></li><li><a href="#res.cookie">res.cookie()</a></li><li><a href="#res.clearCookie">res.clearCookie()</a></li><li><a href="#res.redirect">res.redirect()</a></li><li><a href="#res.location">res.location()</a></li><li><a href="#res.charset">res.charset</a></li><li><a href="#res.send">res.send()</a></li><li><a href="#res.json">res.json()</a></li><li><a href="#res.jsonp">res.jsonp()</a></li><li><a href="#res.type">res.type()</a></li><li><a href="#res.format">res.format()</a></li><li><a href="#res.attachment">res.attachment()</a></li><li><a href="#res.sendfile">res.sendfile()</a></li><li><a href="#res.download">res.download()</a></li><li><a href="#res.links">res.links()</a></li><li><a href="#res.locals">res.locals</a></li><li><a href="#res.render">res.render()</a></li></ul></li><li id="middleware-api"><a href="#middleware">Middleware</a><ul id="middleware-menu"><li><a href="#basicAuth">basicAuth()</a></li><li><a href="#bodyParser">bodyParser()</a></li><li><a href="#compress">compress()</a></li><li><a href="#cookieParser">cookieParser()</a></li><li><a href="#cookieSession">cookieSession()</a></li><li><a href="#csrf">csrf()</a></li><li><a href="#directory">directory()</a></li></ul></li></ul><div id="right"><section><h3 id="express">express()</h3><p>Create an express application.
+<!DOCTYPE html><html><head><title>Express - api reference</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="./" class="express">express<em>3.0.0</em></a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/3x/api.html">API Reference</a><a href="/guide.html">Guide</a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a></nav></header><ul id="menu"><li id="app-api"><a href="#express">Application</a><ul id="app-menu"><li><a href="#express">express()</a></li><li><a href="#app-settings">application settings</a></li><li><a href="#app.set">app.set()</a></li><li><a href="#app.get">app.get()</a></li><li><a href="#app.enable">app.enable()</a></li><li><a href="#app.disable">app.disable()</a></li><li><a href="#app.enabled">app.enabled()</a></li><li><a href="#app.disabled">app.disabled()</a></li><li><a href="#app.use">app.use()</a></li><li><a href="#app.engine">app.engine()</a></li><li><a href="#app.param">app.param()</a></li><li><a href="#app.VERB">application routing</a></li><li><a href="#app.all">app.all()</a></li><li><a href="#app.route">app.route()</a></li><li><a href="#app.locals">app.locals</a></li><li><a href="#app.render">app.render()</a></li><li><a href="#app.listen">app.listen()</a></li></ul></li><li id="req-api"><a href="#req.params">Request</a><ul id="req-menu"><li><a href="#req.params">req.params</a></li><li><a href="#req.query">req.query</a></li><li><a href="#req.body">req.body</a></li><li><a href="#req.files">req.files</a></li><li><a href="#req.param">req.param()</a></li><li><a href="#req.route">req.route</a></li><li><a href="#req.cookies">req.cookies</a></li><li><a href="#req.signedCookies">req.signedCookies</a></li><li><a href="#req.get">req.get()</a></li><li><a href="#req.accepts">req.accepts()</a></li><li><a href="#req.acceptsCharset">req.acceptsCharset()</a></li><li><a href="#req.acceptsLanguage">req.acceptsLanguage()</a></li><li><a href="#req.is">req.is()</a></li><li><a href="#req.ip">req.ip</a></li><li><a href="#req.ips">req.ips</a></li><li><a href="#req.path">req.path</a></li><li><a href="#req.host">req.host</a></li><li><a href="#req.fresh">req.fresh</a></li><li><a href="#req.stale">req.stale</a></li><li><a href="#req.xhr">req.xhr</a></li><li><a href="#req.protocol">req.protocol</a></li><li><a href="#req.secure">req.secure</a></li><li><a href="#req.subdomains">req.subdomains</a></li><li><a href="#req.originalUrl">req.originalUrl</a></li></ul></li><li id="res-api"><a href="#res.status">Response</a><ul id="res-menu"><li><a href="#res.status">res.status()</a></li><li><a href="#res.set">res.set()</a></li><li><a href="#res.get">res.get()</a></li><li><a href="#res.cookie">res.cookie()</a></li><li><a href="#res.clearCookie">res.clearCookie()</a></li><li><a href="#res.redirect">res.redirect()</a></li><li><a href="#res.location">res.location()</a></li><li><a href="#res.charset">res.charset</a></li><li><a href="#res.send">res.send()</a></li><li><a href="#res.json">res.json()</a></li><li><a href="#res.jsonp">res.jsonp()</a></li><li><a href="#res.type">res.type()</a></li><li><a href="#res.format">res.format()</a></li><li><a href="#res.attachment">res.attachment()</a></li><li><a href="#res.sendfile">res.sendfile()</a></li><li><a href="#res.download">res.download()</a></li><li><a href="#res.links">res.links()</a></li><li><a href="#res.locals">res.locals</a></li><li><a href="#res.render">res.render()</a></li></ul></li><li id="router-api"><a href="#router">Router</a><ul id="router-menu"><li><a href="#router">Router()</a></li><li><a href="#router.use">router.use()</a></li><li><a href="#router.param">router.param()</a></li><li><a href="#router.route">router.route()</a></li><li><a href="#router.VERB">router.VERB()</a></li></ul></li><li id="middleware-api"><a href="#middleware">Middleware</a><ul id="middleware-menu"><li><a href="#basicAuth">basicAuth()</a></li><li><a href="#bodyParser">bodyParser()</a></li><li><a href="#compress">compress()</a></li><li><a href="#cookieParser">cookieParser()</a></li><li><a href="#cookieSession">cookieSession()</a></li><li><a href="#csrf">csrf()</a></li><li><a href="#directory">directory()</a></li></ul></li></ul><div id="right"><section><h3 id="express">express()</h3><p>Create an express application.
 </p><pre class="js"><code>var express = require('express');
 var app = express();
 
@@ -6,7 +6,8 @@ app.get('/', function(req, res){
   res.send('hello world');
 });
 
-app.listen(3000);</code></pre></section><h2>Application</h2><a name="application"></a><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.
+app.listen(3000);</code></pre></section><h2>Application</h2><a name="application"></a><section><h3 id="app-settings">settings</h3><p>The following settings are provided to alter how Express will behave:
+</p><ul><li><code>env </code>Environment mode, defaults to <code>process.env.NODE_ENV</code> (NODE_ENV environment variable) or "development"</li><li><code>trust proxy </code>Enables reverse proxy support, disabled by default</li><li><code>jsonp callback name </code>Changes the default callback name of <code>?callback=</code></li><li><code>json replacer </code>JSON replacer callback, null by default</li><li><code>json spaces </code>JSON response spaces for formatting</li><li><code>case sensitive routing </code>Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same</li><li><code>strict routing </code>Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router </li><li><code>view cache </code>Enables view template compilation caching, enabled in production by default</li><li><code>view engine </code>The default engine extension to use when omitted</li><li><code>views </code>The view directory path, defaulting to "process.cwd() + '/views'"</li></ul></section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.
 </p><pre class="js"><code>app.set('title', 'My Site');
 app.get('title');
 // => "My Site"</code></pre></section><section><h3 id="app.get">app.get(name)</h3><p>Get setting <code>name</code> value.
@@ -33,36 +34,7 @@ app.enabled('trust proxy');
 
 app.enable('trust proxy');
 app.disabled('trust proxy');
-// => false</code></pre></section><section><h3 id="app.configure">app.configure([env], callback)</h3><p>Conditionally invoke <code>callback</code> when <code>env</code> matches <code>app.get('env')</code>,
-aka <code>process.env.NODE_ENV</code>. This method remains for legacy reason, and is effectively
-an <code>if</code> statement as illustrated in the following snippets. These functions are <em>not</em>
-required in order to use <code>app.set()</code> and other configuration methods.
-</p><pre class="js"><code>// all environments
-app.configure(function(){
-  app.set('title', 'My Application');
-})
-
-// development only
-app.configure('development', function(){
-  app.set('db uri', 'localhost/dev');
-})
-
-// production only
-app.configure('production', function(){
-  app.set('db uri', 'n.n.n.n/prod');
-})
-</code></pre><Is>effectively sugar for:</Is><pre class="js"><code>// all environments
-app.set('title', 'My Application');
-
-// development only
-if ('development' == app.get('env')) {
-  app.set('db uri', 'localhost/dev');
-}
-
-// production only
-if ('production' == app.get('env')) {
-  app.set('db uri', 'n.n.n.n/prod');
-}</code></pre></section><section><h3 id="app.use">app.use([path], function)</h3><p>Use the given middleware <code>function</code>, with optional mount <code>path</code>,
+// => false</code></pre></section><section><h3 id="app.use">app.use([path], function)</h3><p>Use the given middleware <code>function</code>, with optional mount <code>path</code>,
 defaulting to "/".
 </p><pre class="js"><code>var express = require('express');
 var app = express();
@@ -120,8 +92,7 @@ app.use(function(req, res){
 giving precedence to "./public" over the others:
 </p><pre class="js"><code>app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/files'));
-app.use(express.static(__dirname + '/uploads'));</code></pre></section><section><h3 id="app-settings">settings</h3><p>The following settings are provided to alter how Express will behave:
-</p><ul><li><code>env </code>Environment mode, defaults to <code>process.env.NODE_ENV</code> or "development"</li><li><code>trust proxy </code>Enables reverse proxy support, disabled by default</li><li><code>jsonp callback name </code>Changes the default callback name of <code>?callback=</code></li><li><code>json replacer </code>JSON replacer callback, null by default</li><li><code>json spaces </code>JSON response spaces for formatting, defaults to <code>2</code> in development, <code>0</code> in production</li><li><code>case sensitive routing </code>Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same</li><li><code>strict routing </code>Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router </li><li><code>view cache </code>Enables view template compilation caching, enabled in production by default</li><li><code>view engine </code>The default engine extension to use when omitted</li><li><code>views </code>The view directory path, defaulting to "process.cwd() + '/views'"</li></ul></section><section><h3 id="app.engine">app.engine(ext, callback)</h3><p>Register the given template engine <code>callback</code> as <code>ext</code>
+app.use(express.static(__dirname + '/uploads'));</code></pre></section><section><h3 id="app.engine">app.engine(ext, callback)</h3><p>Register the given template engine <code>callback</code> as <code>ext</code>
 
 By default will <code>require()</code> the engine based on the
 file extension. For example if you try to render
@@ -254,7 +225,21 @@ app.all('*', loadUser);
 </code></pre><p>Another great example of this is white-listed "global" functionality. Here
 the example is much like before, however only restricting paths prefixed with
 "/api":
-</p><pre class="js"><code>app.all('/api/*', requireAuthentication);</code></pre></section><section><h3 id="app.locals">app.locals</h3><p>Application local variables are provided to all templates
+</p><pre class="js"><code>app.all('/api/*', requireAuthentication);</code></pre></section><section><h3 id="app.route">app.route(path)</h3><p>Returns an instance of a single route which can then be used to handle HTTP verbs with optional middleware. Using <code>app.route()</code> is a recommended approach to avoiding duplicate route naming and thus typo errors.
+</p><pre class="js"><code>var app = express();
+
+app.route('/events')
+.all(function(req, res, next) {
+  // runs for all HTTP verbs first
+  // think of it as route specific middleware!
+})
+.get(function(req, res, next) {
+  res.json(...);
+})
+.post(function(req, res, next) {
+  // maybe add a new event...
+})
+</code></pre></section><section><h3 id="app.locals">app.locals</h3><p>Application local variables are provided to all templates
 rendered within the application. This is useful for providing
 helper functions to templates, as well as app-level data.
 </p><pre class="js"><code>app.locals.title = 'My App';
@@ -291,30 +276,7 @@ and otherwise behaves the same way.
 
 app.render('email', { name: 'Tobi' }, function(err, html){
   // ...
-});</code></pre></section><section><h3 id="app.routes">app.routes</h3><p>The <code>app.routes</code> object houses all of the routes defined mapped
-by the associated HTTP verb. This object may be used for introspection capabilities,
-for example Express uses this internally not only for routing but to provide default
-<string>OPTIONS</string> behaviour unless <code>app.options()</code> is used. Your application
-or framework may also remove routes by simply by removing them from this object.
-</p><pre class="js"><code>console.log(app.routes)
-
-{ get: 
-   [ { path: '/',
-       method: 'get',
-       callbacks: [Object],
-       keys: [],
-       regexp: /^\/\/?$/i },
-   { path: '/user/:id',
-       method: 'get',
-       callbacks: [Object],
-       keys: [{ name: 'id', optional: false }],
-       regexp: /^\/user\/(?:([^\/]+?))\/?$/i } ],
-delete: 
-   [ { path: '/user/:id',
-       method: 'delete',
-       callbacks: [Object],
-       keys: [Object],
-       regexp: /^\/user\/(?:([^\/]+?))\/?$/i } ] }</code></pre></section><section><h3 id="app.listen">app.listen()</h3><p>Bind and listen for connections on the given host and port,
+});</code></pre></section><section><h3 id="app.listen">app.listen()</h3><p>Bind and listen for connections on the given host and port,
 this method is identical to node's <a href="http://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback">http.Server#listen()</a>.
 </p><pre class="js"><code>var express = require('express');
 var app = express();
@@ -431,8 +393,6 @@ string, the regexp generated, and so on.
 });
 </code></pre><p>Example output from the previous snippet:
 </p><pre class="js"><code>{ path: '/user/:id?',
-  method: 'get',
-  callbacks: [ [Function] ],
   keys: [ { name: 'id', optional: true } ],
   regexp: /^\/user(?:\/([^\/]+?))?\/?$/i,
   params: [ id: '12' ] }</code></pre></section><section><h3 id="req.cookies">req.cookies</h3><p>When the <code>cookieParser()</code> middleware is used this object
@@ -488,15 +448,7 @@ req.accepts('png');
 // Accept: text/*;q=.5, application/json
 req.accepts(['html', 'json']);
 req.accepts('html, json');
-// => "json"</code></pre></section><section><h3 id="req.accepted">req.accepted</h3><p>Return an array of Accepted media types ordered from highest quality to lowest.
-</p><pre class="js"><code>[ { value: 'application/json',
-    quality: 1,
-    type: 'application',
-    subtype: 'json' },
-{ value: 'text/html',
-     quality: 0.5,
-     type: 'text',
-     subtype: 'html' } ]</code></pre></section><section><h3 id="req.is">req.is(type)</h3><p>Check if the incoming request contains the "Content-Type" 
+// => "json"</code></pre></section><section><h3 id="req.acceptsCharset">req.acceptsCharset(charset)</h3><p>Check if the given <code>charset</code> are acceptable.</p></section><section><h3 id="req.acceptsLanguage">req.acceptsLanguage(lang)</h3><p>Check if the given <code>lang</code> are acceptable.</p></section><section><h3 id="req.is">req.is(type)</h3><p>Check if the incoming request contains the "Content-Type" 
 header field, and it matches the give mime <code>type</code>.
 </p><pre class="js"><code>// With Content-Type: text/html; charset=utf-8
 req.is('html');
@@ -554,11 +506,7 @@ of <a href="#app.use">app.use()</a> will rewrite <code>req.url</code> to
 strip the mount point.
 </p><pre class="js"><code>// GET /search?q=something
 req.originalUrl
-// => "/search?q=something"</code></pre></section><section><h3 id="req.acceptedLanguages">req.acceptedLanguages</h3><p>Return an array of Accepted languages ordered from highest quality to lowest.
-</p><pre class="js"><code>Accept-Language: en;q=.5, en-us
-// => ['en-us', 'en']</code></pre></section><section><h3 id="req.acceptedCharsets">req.acceptedCharsets</h3><p>Return an array of Accepted charsets ordered from highest quality to lowest.
-</p><pre class="js"><code>Accept-Charset: iso-8859-5;q=.2, unicode-1-1;q=0.8
-// => ['unicode-1-1', 'iso-8859-5']</code></pre></section><section><h3 id="req.acceptsCharset">req.acceptsCharset(charset)</h3><p>Check if the given <code>charset</code> are acceptable.</p></section><section><h3 id="req.acceptsLanguage">req.acceptsLanguage(lang)</h3><p>Check if the given <code>lang</code> are acceptable.</p></section><h2>Response</h2><a name="response"></a><section><h3 id="res.status">res.status(code)</h3><p>Chainable alias of node's <code>res.statusCode=</code>.
+// => "/search?q=something"</code></pre></section><h2>Response</h2><a name="response"></a><section><h3 id="res.status">res.status(code)</h3><p>Chainable alias of node's <code>res.statusCode=</code>.
 </p><pre class="js"><code>res.status(404).sendfile('path/to/404.png');</code></pre></section><section><h3 id="res.set">res.set(field, [value])</h3><p> 
 Set header <code>field</code> to <code>value</code>,
 or pass an object to set multiple fields at once.</p><pre class="js"><code>res.set('Content-Type', 'text/plain');
@@ -809,6 +757,198 @@ and rendered string are passed, and no automated response is performed.
 
 res.render('user', { name: 'Tobi' }, function(err, html){
   // ...
+});</code></pre></section><h2>Router</h2><a name="router"></a><section><h3 id="router">Router()</h3><p>A router is an isolated instance of middleware and routes. Routers can be thought of as "mini" applications only capable of performing middleware and routing. Every express application has a builtin app router.
+</p><p>Routers behave like middleware themselves and can be ".use()'d" by the app or in other routers.
+</p><p>Create a new router by using "express.Router()"
+</p><pre class="js"><code>var router = express.Router();
+</code></pre><p>The router can have middleware and http VERB routes added just like an application.
+</p><pre class="js"><code>// invoked for any requested passed to this router
+router.use(function(req, res, next) {
+  // .. some logic here .. like any other middleware
+  next();
+});
+
+// will handle any request that ends in /events
+// depends on where the router is "use()'d"
+router.get('/events', function(req, res, next) {
+  // ..
+});
+</code></pre><p>You can then use a router for a particular root url in this way separating your routes into files or even mini apps.
+</p><pre class="js"><code>// only requests to /calendar/* will be sent to our "router"
+app.use('/calendar', router);
+</code></pre></section><section><h3 id="router.use">router.use([path], function)</h3><p>Use the given middleware <code>function</code>, with optional mount <code>path</code>,
+defaulting to "/".
+</p><p>Middleware is like a plumbing pipe, requests start at the first middleware you define and work their way "down" the middleware stack processing for each path they match.
+</p><pre class="js"><code>var express = require('express');
+var app = express();
+var router = express.Router();
+
+// simple logger for this router's requests
+// all requests to this router will first hit this middleware
+router.use(function(req, res, next) {
+  console.log('%s %s %s', req.method, req.url, req.path);
+  next();
+});
+
+// this will only be invoked if the path ends in /bar
+router.use('/bar', function(req, res, next) {
+  // ... maybe some additional /bar logging ...
+  next();
+});
+
+// always invoked
+router.use(function(req, res, next) {
+  res.send('Hello World');
+});
+
+app.use('/foo', router);
+
+app.listen(3000);
+</code></pre><p>The "mount" path is stripped and is <strong>not</strong> visible
+to the middleware <code>function</code>. The main effect of this feature is that
+mounted middleware may operate without code changes regardless of its "prefix"
+pathname.
+</p><p>The order of which middleware are "defined" using <code>router.use()</code> is
+very important, they are invoked sequentially, thus this defines middleware
+precedence. For example usually <code>express.logger()</code> is the very
+first middleware you would use, logging every request:
+</p><pre class="js"><code>router.use(logger());
+router.use(express.static(__dirname + '/public'));
+router.use(function(req, res){
+  res.send('Hello');
+});
+</code></pre><p>Now suppose you wanted to ignore logging requests for static files, but to
+continue logging routes and middleware defined after <code>logger()</code>,
+you would simply move <code>static()</code> above:
+</p><pre class="js"><code>router.use(express.static(__dirname + '/public'));
+router.use(logger());
+router.use(function(req, res){
+  res.send('Hello');
+});
+</code></pre><p>Another concrete example would be serving files from multiple directories,
+giving precedence to "./public" over the others:
+</p><pre class="js"><code>app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/files'));
+app.use(express.static(__dirname + '/uploads'));</code></pre></section><section><h3 id="router.param">router.param([name], callback)</h3><p>Map logic to route parameters. For example when <code>:user</code>
+is present in a route path you may map user loading logic to automatically
+provide <code>req.user</code> to the route, or perform validations
+on the parameter input.
+</p><p>The following snippet illustrates how the <code>callback</code>
+is much like middleware, thus supporting async operations, however
+providing the additional value of the parameter, here named as <code>id</code>.
+An attempt to load the user is then performed, assigning <code>req.user</code>,
+otherwise passing an error to <code>next(err)</code>.
+</p><p>It is important to realize that any route that triggered a named parameter function to run will only be run if <code>next</code> was not called with an error in the named parameter handler.
+</p><pre class="js"><code>router.param('user', function(req, res, next, id){
+  User.find(id, function(err, user){
+    if (err) {
+      return next(err);
+    }
+    else if (!user) {
+      return next(new Error('failed to load user'));
+    }
+    
+    req.user = user;
+    next();
+  });
+});
+
+// this route uses the ":user" named parameter
+// which will caused the 'user' param callback to be triggered
+router.get('/users/:user', function(req, res, next) {
+  // req.user WILL be defined here
+  // if there was an error, normal error handling will be triggered
+  // and this function will NOT execute
+});
+</code></pre><p>Alternatively you may pass only a <code>callback</code>, in which
+case you have the opportunity to alter the <code>router.param()</code> API.
+For example the <a href="http://github.com/visionmedia/express-params">express-params</a>
+defines the following callback which allows you to restrict parameters to a given
+regular expression.
+</p><p>This example is a bit more advanced, checking if the second argument is a regular
+expression, returning the callback which acts much like the "user" param example.
+</p><pre class="js"><code>router.param(function(name, fn){
+  if (fn instanceof RegExp) {
+    return function(req, res, next, val){
+      var captures;
+      if (captures = fn.exec(String(val))) {
+        req.params[name] = captures;
+        next();
+      } else {
+        next('route');
+      }
+    }
+  }
+});
+</code></pre><p>The method could now be used to effectively validate parameters, or also
+parse them to provide capture groups:
+</p><pre class="js"><code>router.param('id', /^\d+$/);
+
+router.get('/user/:id', function(req, res){
+  res.send('user ' + req.params.id);
+});
+
+router.param('range', /^(\w+)\.\.(\w+)?$/);
+
+router.get('/range/:range', function(req, res){
+  var range = req.params.range;
+  res.send('from ' + range[1] + ' to ' + range[2]);
+});
+</code></pre><p>The <code>router.use()</code> method also supports named parameters so that your mount points for other routers can benefit from preloading using named parameters.</p></section><section><h3 id="router.route">router.route(path)</h3><p>Returns an instance of a single route which can then be used to handle HTTP verbs with optional middleware. Using <code>router.route()</code> is a recommended approach to avoiding duplicate route naming and thus typo errors.
+</p><p>Building on the <code>router.param()</code> example from before, we see how <code>router.route()</code> allows us to easily specify the various HTTP verb handlers.
+</p><pre class="js"><code>var router = express.Router();
+
+router.param('user_id', function(req, res, next, id) {
+  // sample user, would actually fetch from DB, etc...
+  req.user = {
+    id: id,
+    name: 'TJ'
+  };
+  next();
+});
+
+router.route('/users/:user_id')
+.all(function(req, res, next) {
+  // runs for all HTTP verbs first
+  // think of it as route specific middleware!
+})
+.get(function(req, res, next) {
+  res.json(req.user);
+})
+.put(function(req, res, next) {
+  // just an example of maybe updating the user
+  req.user.name = req.body.name;
+  // save user ... etc
+  res.json(req.user);
+})
+.post(function(req, res, next) {
+  next(new Error('not implemented'));
+})
+.delete(function(req, res, next) {
+  next(new Error('not implemented'));
+})
+</code></pre><p>This apporach re-uses the single '/users/:user_id' path and add handlers for the various HTTP verbs.</p></section><section><h3 id="router.VERB">router.VERB(path, [callback...], callback)</h3><p>The <code>router.VERB()</code> methods provide the routing functionality
+in Express, where <strong>VERB</strong> is one of the HTTP verbs, such
+as <code>router.post()</code>. Multiple callbacks may be given, all are treated
+equally, and behave just like middleware, with the one exception that
+these callbacks may invoke <code>next('route')</code> to bypass the
+remaining route callback(s). This mechanism can be used to perform pre-conditions
+on a route then pass control to subsequent routes when there is no reason to proceed
+with the route matched.
+</p><p>The following snippet illustrates the most simple route definition possible. Express
+translates the path strings to regular expressions, used internally to match incoming requests.
+Query strings are <em>not</em> considered when peforming these matches, for example "GET /"
+would match the following route, as would "GET /?name=tobi".
+</p><pre class="js"><code>router.get('/', function(req, res){
+  res.send('hello world');
+});
+</code></pre><p>Regular expressions may also be used, and can be useful
+if you have very specific restraints, for example the following
+would match "GET /commits/71dbb9c" as well as "GET /commits/71dbb9c..4c084f9".
+</p><pre class="js"><code>router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
+  var from = req.params[0];
+  var to = req.params[1] || 'HEAD';
+  res.send('commit range ' + from + '..' + to);
 });</code></pre></section><h2>Middleware</h2><a name="middleware"></a><section><h3 id="basicAuth">basicAuth()</h3><p>Basic Authentication middleware, populating <code>req.user</code>
 with the username.
 </p><p>Simple username and password:</p><pre class="js"><code>app.use(express.basicAuth('username', 'password'));
