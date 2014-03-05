@@ -99,7 +99,8 @@ nav a {
 
 #logo .express {
   display: block;
-  font: 400 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
   color: #353535;
   width: 100%;
 }
