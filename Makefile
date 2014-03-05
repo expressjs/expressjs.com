@@ -15,7 +15,7 @@ docs: $(HTML)
 4x/api.html: 4x/api.jade 4x/en/api/*.jade includes/*.jade
 	$(JADE) --path $< < $< > $@
 
-%.html: %.jade includes/*.jade
+%.html: %.jade includes/*.jade en/*.jade en/guide/*.jade
 	$(JADE) --path $< < $< > $@
 
 clean:

@@ -79,14 +79,6 @@ section
     <code>res.pipe()</code>, <code>req.on('data', callback)</code> and anything else you
     would do without Express involved.
 
-  +js.
-    app.get('/hello.txt', function(req, res){
-      var body = 'Hello World';
-      res.setHeader('Content-Type', 'text/plain');
-      res.setHeader('Content-Length', Buffer.byteLength(body));
-      res.end(body);
-    });
-
   p.
     Express augments these objects providing you with higher level
     methods such as <code>res.send()</code>, which among other things
@@ -102,5 +94,6 @@ section
     accepting the same arguments as node's <a href="http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener">net.Server#listen()</a>:
 
   +js.
-    app.listen(3000);
-    console.log('Listening on port 3000');
+    var server = app.listen(3000, function() {
+        console.log('Listening on port %d', server.address().port);
+    });

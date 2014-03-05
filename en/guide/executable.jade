@@ -2,12 +2,10 @@ section
   h3(id='executable') Using express(1) to generate an app
 
   p.
-    Express is bundled with an executable, aptly named <code>express(1)</code>.
-    If you install express globally with npm you'll have it available from anywhere
-    on your machine:
+    The Express team maintains a handy quickstart project generator aptly named <code>express(1)</code>. If you install express-generator globally with npm you'll have it available from anywhere on your machine:
 
   +js.
-    $ npm install -g express
+    $ npm install -g express-generator
 
   p.
     This tool provides a simple way to get an application skeleton going,
@@ -16,25 +14,24 @@ section
     Be sure to check out the <code>--help</code>:
 
   +js.
-  
+
     Usage: express [options]
 
     Options:
 
       -h, --help          output usage information
       -V, --version       output the version number
-      -s, --sessions      add session support
       -e, --ejs           add ejs engine support (defaults to jade)
-      -J, --jshtml        add jshtml engine support (defaults to jade)
       -H, --hogan         add hogan.js engine support
       -c, --css <engine>  add stylesheet <engine> support (less|stylus) (defaults to plain css)
       -f, --force         force on non-empty directory
+
   p.
-    If you want to generate an application with EJS, Stylus, and session
+    If you want to generate an application with Jade and Stylus
     support you would simply execute:
 
   +js.
-    $ express --sessions --css stylus --ejs myapp
+    $ express --css stylus myapp
 
     create : myapp
     create : myapp/package.json
@@ -47,13 +44,14 @@ section
     create : myapp/routes
     create : myapp/routes/index.js
     create : myapp/views
-    create : myapp/views/index.ejs
+    create : myapp/views/index.jade
+    create : myapp/views/layout.jade
 
     install dependencies:
       $ cd myapp && npm install
 
     run the app:
-      $ node app  
+      $ DEBUG=myapp node app
 
   p.
     Like any other node application, you must then install the dependencies:
