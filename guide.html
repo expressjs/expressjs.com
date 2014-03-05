@@ -54,13 +54,7 @@ in this case "GET /" responding with the "Hello World" string. The <code>req</co
 <code>res</code> are the exact same objects that node provides to you, thus you may invoke
 <code>res.pipe()</code>, <code>req.on('data', callback)</code> and anything else you
 would do without Express involved.
-</p><pre class="js"><code>app.get('/hello.txt', function(req, res){
-  var body = 'Hello World';
-  res.setHeader('Content-Type', 'text/plain');
-  res.setHeader('Content-Length', Buffer.byteLength(body));
-  res.end(body);
-});
-</code></pre><p>Express augments these objects providing you with higher level
+</p><p>Express augments these objects providing you with higher level
 methods such as <code>res.send()</code>, which among other things
 adds the Content-Length for you:
 </p><pre class="js"><code>app.get('/hello.txt', function(req, res){
@@ -68,11 +62,10 @@ adds the Content-Length for you:
 });
 </code></pre><p>Now to bind and listen for connections invoke the <code>app.listen()</code> method,
 accepting the same arguments as node's <a href="http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener">net.Server#listen()</a>:
-</p><pre class="js"><code>app.listen(3000);
-console.log('Listening on port 3000');</code></pre></section><section><h3 id="executable">Using express(1) to generate an app</h3><p>Express is bundled with an executable, aptly named <code>express(1)</code>.
-If you install express globally with npm you'll have it available from anywhere
-on your machine:
-</p><pre class="js"><code>$ npm install -g express
+</p><pre class="js"><code>var server = app.listen(3000, function() {
+    console.log('Listening on port %d', server.address().port);
+});</code></pre></section><section><h3 id="executable">Using express(1) to generate an app</h3><p>The Express team maintains a handy quickstart project generator aptly named <code>express(1)</code>. If you install express-generator globally with npm you'll have it available from anywhere on your machine:
+</p><pre class="js"><code>$ npm install -g express-generator
 </code></pre><p>This tool provides a simple way to get an application skeleton going,
 but has limited scope, for example it supports only a few template engines,
 whereas Express itself supports virtually any template engine built for node.
@@ -83,14 +76,13 @@ Options:
 
   -h, --help          output usage information
   -V, --version       output the version number
-  -s, --sessions      add session support
   -e, --ejs           add ejs engine support (defaults to jade)
-  -J, --jshtml        add jshtml engine support (defaults to jade)
   -H, --hogan         add hogan.js engine support
   -c, --css <engine>  add stylesheet <engine> support (less|stylus) (defaults to plain css)
-  -f, --force         force on non-empty directory</code></pre><p>If you want to generate an application with EJS, Stylus, and session
+  -f, --force         force on non-empty directory
+  </code></pre><p>If you want to generate an application with Jade and Stylus
 support you would simply execute:
-</p><pre class="js"><code>$ express --sessions --css stylus --ejs myapp
+</p><pre class="js"><code>$ express --css stylus myapp
 
 create : myapp
 create : myapp/package.json
@@ -103,13 +95,14 @@ create : myapp/public/stylesheets/style.styl
 create : myapp/routes
 create : myapp/routes/index.js
 create : myapp/views
-create : myapp/views/index.ejs
+create : myapp/views/index.jade
+create : myapp/views/layout.jade
 
 install dependencies:
   $ cd myapp && npm install
   
 run the app:
-  $ node app  
+  $ DEBUG=myapp node app
   </code></pre><p>Like any other node application, you must then install the dependencies:
 </p><pre class="js"><code>$ cd myapp
 $ npm install
