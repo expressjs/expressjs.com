@@ -74,3 +74,20 @@ section
       res.status(500);
       res.render('error', { error: err });
     }
+	
+  h3(id='error-triggering') Triggering errors
+  
+  p.
+    Any handler may call <code>next(err)</code> to trigger an error. For example, if a backend fails to respond;
+	
+  +js.
+	app.get('/users', function(req, res, next) {
+	  mybackend.getUsers({
+	    success: function(users) { res.send(users.export()); },
+		failure: function(reason) { 
+		  //Send the error message to the handlers
+	      next(new Error("Could not load users - " + reason));
+	    }
+	  });
+	}
+	
