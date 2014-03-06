@@ -29,7 +29,7 @@ section
     })
     .put(function(req, res, next) {
       // just an example of maybe updating the user
-      req.user.name = req.body.name;
+      req.user.name = req.params.name;
       // save user ... etc
       res.json(req.user);
     })
