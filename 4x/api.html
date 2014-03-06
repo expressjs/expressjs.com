@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Express - api reference</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="./" class="express">express<em>3.0.0</em></a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/3x/api.html">API Reference</a><a href="/guide.html">Guide</a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/4x/api.html" class="active">4.x docs</a></nav></header><ul id="menu"><li id="app-api"><a href="#express">Application</a><ul id="app-menu"><li><a href="#express">express()</a></li><li><a href="#app-settings">application settings</a></li><li><a href="#app.set">app.set()</a></li><li><a href="#app.get">app.get()</a></li><li><a href="#app.enable">app.enable()</a></li><li><a href="#app.disable">app.disable()</a></li><li><a href="#app.enabled">app.enabled()</a></li><li><a href="#app.disabled">app.disabled()</a></li><li><a href="#app.use">app.use()</a></li><li><a href="#app.engine">app.engine()</a></li><li><a href="#app.param">app.param()</a></li><li><a href="#app.VERB">application routing</a></li><li><a href="#app.all">app.all()</a></li><li><a href="#app.route">app.route()</a></li><li><a href="#app.locals">app.locals</a></li><li><a href="#app.render">app.render()</a></li><li><a href="#app.listen">app.listen()</a></li></ul></li><li id="req-api"><a href="#req.params">Request</a><ul id="req-menu"><li><a href="#req.params">req.params</a></li><li><a href="#req.query">req.query</a></li><li><a href="#req.body">req.body</a></li><li><a href="#req.files">req.files</a></li><li><a href="#req.param">req.param()</a></li><li><a href="#req.route">req.route</a></li><li><a href="#req.cookies">req.cookies</a></li><li><a href="#req.signedCookies">req.signedCookies</a></li><li><a href="#req.get">req.get()</a></li><li><a href="#req.accepts">req.accepts()</a></li><li><a href="#req.acceptsCharset">req.acceptsCharset()</a></li><li><a href="#req.acceptsLanguage">req.acceptsLanguage()</a></li><li><a href="#req.is">req.is()</a></li><li><a href="#req.ip">req.ip</a></li><li><a href="#req.ips">req.ips</a></li><li><a href="#req.path">req.path</a></li><li><a href="#req.host">req.host</a></li><li><a href="#req.fresh">req.fresh</a></li><li><a href="#req.stale">req.stale</a></li><li><a href="#req.xhr">req.xhr</a></li><li><a href="#req.protocol">req.protocol</a></li><li><a href="#req.secure">req.secure</a></li><li><a href="#req.subdomains">req.subdomains</a></li><li><a href="#req.originalUrl">req.originalUrl</a></li></ul></li><li id="res-api"><a href="#res.status">Response</a><ul id="res-menu"><li><a href="#res.status">res.status()</a></li><li><a href="#res.set">res.set()</a></li><li><a href="#res.get">res.get()</a></li><li><a href="#res.cookie">res.cookie()</a></li><li><a href="#res.clearCookie">res.clearCookie()</a></li><li><a href="#res.redirect">res.redirect()</a></li><li><a href="#res.location">res.location()</a></li><li><a href="#res.charset">res.charset</a></li><li><a href="#res.send">res.send()</a></li><li><a href="#res.json">res.json()</a></li><li><a href="#res.jsonp">res.jsonp()</a></li><li><a href="#res.type">res.type()</a></li><li><a href="#res.format">res.format()</a></li><li><a href="#res.attachment">res.attachment()</a></li><li><a href="#res.sendfile">res.sendfile()</a></li><li><a href="#res.download">res.download()</a></li><li><a href="#res.links">res.links()</a></li><li><a href="#res.locals">res.locals</a></li><li><a href="#res.render">res.render()</a></li></ul></li><li id="router-api"><a href="#router">Router</a><ul id="router-menu"><li><a href="#router">Router()</a></li><li><a href="#router.use">router.use()</a></li><li><a href="#router.param">router.param()</a></li><li><a href="#router.route">router.route()</a></li><li><a href="#router.VERB">router.VERB()</a></li></ul></li><li id="middleware-api"><a href="#middleware">Middleware</a><ul id="middleware-menu"><li><a href="#basicAuth">basicAuth()</a></li><li><a href="#bodyParser">bodyParser()</a></li><li><a href="#compress">compress()</a></li><li><a href="#cookieParser">cookieParser()</a></li><li><a href="#cookieSession">cookieSession()</a></li><li><a href="#csrf">csrf()</a></li><li><a href="#directory">directory()</a></li></ul></li></ul><div id="right"><section><h3 id="express">express()</h3><p>Create an express application.
+<!DOCTYPE html><html><head><title>Express - api reference</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="./" class="express">express</a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/3x/api.html">API Reference</a><a href="/guide.html">Guide</a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/4x/api.html" class="active">4.x docs</a></nav></header><ul id="menu"><li id="app-api"><a href="#express">Application</a><ul id="app-menu"><li><a href="#express">express()</a></li><li><a href="#app-settings">application settings</a></li><li><a href="#app.set">app.set()</a></li><li><a href="#app.get">app.get()</a></li><li><a href="#app.enable">app.enable()</a></li><li><a href="#app.disable">app.disable()</a></li><li><a href="#app.enabled">app.enabled()</a></li><li><a href="#app.disabled">app.disabled()</a></li><li><a href="#app.use">app.use()</a></li><li><a href="#app.engine">app.engine()</a></li><li><a href="#app.param">app.param()</a></li><li><a href="#app.VERB">application routing</a></li><li><a href="#app.all">app.all()</a></li><li><a href="#app.route">app.route()</a></li><li><a href="#app.locals">app.locals</a></li><li><a href="#app.render">app.render()</a></li><li><a href="#app.listen">app.listen()</a></li></ul></li><li id="req-api"><a href="#req.params">Request</a><ul id="req-menu"><li><a href="#req.params">req.params</a></li><li><a href="#req.query">req.query</a></li><li><a href="#req.param">req.param()</a></li><li><a href="#req.route">req.route</a></li><li><a href="#req.cookies">req.cookies</a></li><li><a href="#req.signedCookies">req.signedCookies</a></li><li><a href="#req.get">req.get()</a></li><li><a href="#req.accepts">req.accepts()</a></li><li><a href="#req.acceptsCharset">req.acceptsCharset()</a></li><li><a href="#req.acceptsLanguage">req.acceptsLanguage()</a></li><li><a href="#req.is">req.is()</a></li><li><a href="#req.ip">req.ip</a></li><li><a href="#req.ips">req.ips</a></li><li><a href="#req.path">req.path</a></li><li><a href="#req.host">req.host</a></li><li><a href="#req.fresh">req.fresh</a></li><li><a href="#req.stale">req.stale</a></li><li><a href="#req.xhr">req.xhr</a></li><li><a href="#req.protocol">req.protocol</a></li><li><a href="#req.secure">req.secure</a></li><li><a href="#req.subdomains">req.subdomains</a></li><li><a href="#req.originalUrl">req.originalUrl</a></li></ul></li><li id="res-api"><a href="#res.status">Response</a><ul id="res-menu"><li><a href="#res.status">res.status()</a></li><li><a href="#res.set">res.set()</a></li><li><a href="#res.get">res.get()</a></li><li><a href="#res.cookie">res.cookie()</a></li><li><a href="#res.clearCookie">res.clearCookie()</a></li><li><a href="#res.redirect">res.redirect()</a></li><li><a href="#res.location">res.location()</a></li><li><a href="#res.charset">res.charset</a></li><li><a href="#res.send">res.send()</a></li><li><a href="#res.json">res.json()</a></li><li><a href="#res.jsonp">res.jsonp()</a></li><li><a href="#res.type">res.type()</a></li><li><a href="#res.format">res.format()</a></li><li><a href="#res.attachment">res.attachment()</a></li><li><a href="#res.sendfile">res.sendfile()</a></li><li><a href="#res.download">res.download()</a></li><li><a href="#res.links">res.links()</a></li><li><a href="#res.locals">res.locals</a></li><li><a href="#res.render">res.render()</a></li></ul></li><li id="router-api"><a href="#router">Router</a><ul id="router-menu"><li><a href="#router">Router()</a></li><li><a href="#router.use">router.use()</a></li><li><a href="#router.param">router.param()</a></li><li><a href="#router.route">router.route()</a></li><li><a href="#router.VERB">router.VERB()</a></li></ul></li><li id="middleware-api"><a href="#middleware">Middleware</a><ul id="middleware-menu"><li><a href="#basicAuth">basicAuth()</a></li><li><a href="#bodyParser">bodyParser()</a></li><li><a href="#compress">compress()</a></li><li><a href="#cookieParser">cookieParser()</a></li><li><a href="#cookieSession">cookieSession()</a></li><li><a href="#csrf">csrf()</a></li><li><a href="#directory">directory()</a></li></ul></li></ul><div id="right"><section><h3 id="express">express()</h3><p>Create an express application.
 </p><pre class="js"><code>var express = require('express');
 var app = express();
 
@@ -73,9 +73,11 @@ unless they are mounted as well.
 app.use('/static', express.static(__dirname + '/public'));
 </code></pre><p>The order of which middleware are "defined" using <code>app.use()</code> is
 very important, they are invoked sequentially, thus this defines middleware
-precedence. For example usually <code>express.logger()</code> is the very
-first middleware you would use, logging every request:
-</p><pre class="js"><code>app.use(express.logger());
+precedence. For example, usually any logging middleware is the very
+first middleware you would use:
+</p><pre class="js"><code>var logger = require('morgan');
+
+app.use(logger());
 app.use(express.static(__dirname + '/public'));
 app.use(function(req, res){
   res.send('Hello');
@@ -84,7 +86,7 @@ app.use(function(req, res){
 continue logging routes and middleware defined after <code>logger()</code>,
 you would simply move <code>static()</code> above:
 </p><pre class="js"><code>app.use(express.static(__dirname + '/public'));
-app.use(express.logger());
+app.use(logger());
 app.use(function(req, res){
   res.send('Hello');
 });
@@ -324,54 +326,7 @@ req.query.shoe.color
 // => "blue"
 
 req.query.shoe.type
-// => "converse"</code></pre></section><section><h3 id="req.body">req.body</h3><p>This property is an object containing the parsed request body. This feature
-is provided by the <code>bodyParser()</code> middleware, though other body
-parsing middleware may follow this convention as well. This property
-defaults to <code>{}</code> when <code>bodyParser()</code> is used.
-</p><pre class="js"><code>// POST user[name]=tobi&user[email]=tobi@learnboost.com
-req.body.user.name
-// => "tobi"
-
-req.body.user.email
-// => "tobi@learnboost.com"
-
-// POST { "name": "tobi" }
-req.body.name
-// => "tobi"</code></pre></section><section><h3 id="req.files">req.files</h3><p>This property is an object of the files uploaded. This feature
-is provided by the <code>bodyParser()</code> middleware, though other body
-parsing middleware may follow this convention as well. This property
-defaults to <code>{}</code> when <code>bodyParser()</code> is used.
-</p><p>For example if a <strong>file</strong> field was named "image",
-and a file was uploaded, <code>req.files.image</code> would contain
-the following <code>File</code> object:
-</p><pre class="js"><code>{ size: 74643,
-  path: '/tmp/8ef9c52abe857867fd0a4e9a819d1876',
-  name: 'edge.png',
-  type: 'image/png',
-  hash: false,
-  lastModifiedDate: Thu Aug 09 2012 20:07:51 GMT-0700 (PDT),
-  _writeStream: 
-   { path: '/tmp/8ef9c52abe857867fd0a4e9a819d1876',
-     fd: 13,
-     writable: false,
-     flags: 'w',
-     encoding: 'binary',
-     mode: 438,
-     bytesWritten: 74643,
-     busy: false,
-     _queue: [],
-     _open: [Function],
-     drainable: true },
-  length: [Getter],
-  filename: [Getter],
-  mime: [Getter] }
-  </code></pre><p>The <code>bodyParser()</code> middleware utilizes the
-<a href="https://github.com/felixge/node-formidable">node-formidable</a>
-module internally, and accepts the same options. An example of this
-is the <code>keepExtensions</code> formidable option, defaulting to <strong>false</strong>
-which in this case gives you the filename "/tmp/8ef9c52abe857867fd0a4e9a819d1876" void of
-the ".png" extension. To enable this, and others you may pass them to <code>bodyParser()</code>:
-</p><pre class="js"><code>app.use(express.bodyParser({ keepExtensions: true, uploadDir: '/my/files' }));</code></pre></section><section><h3 id="req.param">req.param(name)</h3><p>Return the value of param <code>name</code> when present.
+// => "converse"</code></pre></section><section><h3 id="req.param">req.param(name)</h3><p>Return the value of param <code>name</code> when present.
 </p><pre class="js"><code>// ?name=tobi
 req.param('name')
 // => "tobi"
@@ -917,7 +872,7 @@ router.route('/users/:user_id')
 })
 .put(function(req, res, next) {
   // just an example of maybe updating the user
-  req.user.name = req.body.name;
+  req.user.name = req.params.name;
   // save user ... etc
   res.json(req.user);
 })
@@ -949,61 +904,7 @@ would match "GET /commits/71dbb9c" as well as "GET /commits/71dbb9c..4c084f9".
   var from = req.params[0];
   var to = req.params[1] || 'HEAD';
   res.send('commit range ' + from + '..' + to);
-});</code></pre></section><h2>Middleware</h2><a name="middleware"></a><section><h3 id="basicAuth">basicAuth()</h3><p>Basic Authentication middleware, populating <code>req.user</code>
-with the username.
-</p><p>Simple username and password:</p><pre class="js"><code>app.use(express.basicAuth('username', 'password'));
-</code></pre><p>Callback verification:</p><pre class="js"><code>app.use(express.basicAuth(function(user, pass){
-  return 'tj' == user && 'wahoo' == pass;
-}));
-</code></pre><p>Async callback verification, accepting <code>fn(err, user)</code>,
-in this case <code>req.user</code> will be the user object passed.
-</p><pre class="js"><code>app.use(express.basicAuth(function(user, pass, fn){
-  User.authenticate({ user: user, pass: pass }, fn);
-}))</code></pre></section><section><h3 id="bodyParser">bodyParser()</h3><p>Request body parsing middleware supporting JSON, urlencoded,
-and multipart requests. This middleware is simply a wrapper
-for the <code>json()</code>, <code>urlencoded()</code>, and
-<code>multipart()</code> middleware.
-</p><pre class="js"><code>app.use(express.bodyParser());
-
-// is equivalent to:
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.multipart());
-</code></pre><p>For security sake, it's better to disable file upload if your application
-doesn't need it. To do this, use only the needed middleware, i.e. don't use
-the <code>bodyParser</code> and <code>multipart()</code> middleware:
-</p><pre class="js"><code>app.use(express.json());
-app.use(express.urlencoded());
-</code></pre><p>If your application needs file upload you should set up
-<a href='https://groups.google.com/d/msg/express-js/iP2VyhkypHo/5AXQiYN3RPcJ'>a strategy for dealing with those files</a>.</p></section><section><h3 id="compress">compress()</h3><p>Compress response data with gzip / deflate. This middleware
-should be placed "high" within the stack to ensure all
-responses may be compressed.
-</p><pre class="js"><code>app.use(express.logger());
-app.use(express.compress());
-app.use(express.methodOverride());
-app.use(express.bodyParser());</code></pre></section><section><h3 id="cookieParser">cookieParser()</h3><p>Parses the Cookie header field and populates <code>req.cookies</code>
-with an object keyed by the cookie names. Optionally you may enabled 
-signed cookie support by passing a <code>secret</code> string.
-</p><pre class="js"><code>app.use(express.cookieParser());
-app.use(express.cookieParser('some secret'));</code></pre></section><section><h3 id="cookieSession">cookieSession()</h3><p>Provides cookie-based sessions, and populates <code>req.session</code>.
-This middleware takes the following options:
-</p><ul><li><code>key</code> cookie name defaulting to <code>connect.sess</code></li><li><code>secret</code> prevents cookie tampering</li><li><code>cookie</code> session cookie settings, defaulting to <code>{ path: '/', httpOnly: true, maxAge: null }</code></li><li><code>proxy</code> trust the reverse proxy when setting secure cookies (via "x-forwarded-proto")</li></ul><pre class="js"><code>app.use(express.cookieSession());
-</code></pre><p>To clear a cookie simply assign the session to null before responding:</p><pre class="js"><code>req.session = null</code></pre></section><section><h3 id="csrf">csrf()</h3><p>CSRF protection middleware.
-</p><p>By default this middleware generates a token named "_csrf"
-which should be added to requests which mutate
-state, within a hidden form field, query-string etc. This
-token is validated against <code>req.csrfToken()</code>.
-</p><p>The default <code>value</code> function checks <code>req.body</code> generated
-by the <code>bodyParser()</code> middleware, <code>req.query</code> generated
-by <code>query()</code>, and the "X-CSRF-Token" header field.
-</p><p>This middleware requires session support, thus should be added
-somewhere below <code>session()</code>.</p></section><section><h3 id="directory">directory()</h3><p>Directory serving middleware, serves the given <code>path</code>.
-This middleware may be paired with <code>static()</code> to serve
-files, providing a full-featured file browser.
-</p><pre class="js"><code>app.use(express.directory('public'))
-app.use(express.static('public'))
-</code></pre><p>This middleware accepts the following options:
-</p><ul><li><code>hidden</code> display hidden (dot) files. Defaults to false.</li><li><code>icons</code>  display icons. Defaults to false.</li><li><code>filter</code> Apply this filter function to files. Defaults to false.</li></ul></section><!--include ./mw-errorHandler--><!--include ./mw-favicon--><!--include ./mw-json--><!--include ./mw-limit--><!--include ./mw-logger--><!--include ./mw-methodOverride--><!--include ./mw-multipart--><!--include ./mw-query--><!--include ./mw-responseTime--><!--include ./mw-static--><!--include ./mw-timeout--><!--include ./mw-urlencoded--><!--include ./mw-vhost--></div></section><script>var _gaq = _gaq || [];
+});</code></pre></section><h2>Middleware</h2><a name="middleware"></a><p>As of 4.x, Express no longer depends on Connect. All of Express' previously included middleware are now in separate repos. Please view <a href="https://github.com/senchalabs/connect#middleware">the list of middleware</a>. The only included middleware is now <code>express.static()</code>.</p></div></section><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-25235225-1']);
 _gaq.push(['_trackPageview']);
 
