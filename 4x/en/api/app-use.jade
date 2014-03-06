@@ -1,6 +1,6 @@
 section
   h3(id='app.use') app.use([path], function)
-  
+
   p.
     Use the given middleware <code>function</code>, with optional mount <code>path</code>,
     defaulting to "/".
@@ -55,11 +55,13 @@ section
   p.
     The order of which middleware are "defined" using <code>app.use()</code> is
     very important, they are invoked sequentially, thus this defines middleware
-    precedence. For example usually <code>express.logger()</code> is the very
-    first middleware you would use, logging every request:
+    precedence. For example, usually any logging middleware is the very
+    first middleware you would use:
 
   +js.
-    app.use(express.logger());
+    var logger = require('morgan');
+
+    app.use(logger());
     app.use(express.static(__dirname + '/public'));
     app.use(function(req, res){
       res.send('Hello');
@@ -72,7 +74,7 @@ section
 
   +js.
     app.use(express.static(__dirname + '/public'));
-    app.use(express.logger());
+    app.use(logger());
     app.use(function(req, res){
       res.send('Hello');
     });
