@@ -16,7 +16,7 @@ section
     // Accept: text/html
     req.accepts('html');
     // => "html"
-  
+
     // Accept: text/*, application/json
     req.accepts('html');
     // => "html"
@@ -26,13 +26,16 @@ section
     // => "json"
     req.accepts('application/json');
     // => "application/json"
-  
+
     // Accept: text/*, application/json
     req.accepts('image/png');
     req.accepts('png');
     // => undefined
-  
+
     // Accept: text/*;q=.5, application/json
     req.accepts(['html', 'json']);
     req.accepts('html, json');
     // => "json"
+
+  p.
+    Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.

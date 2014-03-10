@@ -2,11 +2,11 @@ section
   h3(id='res.sendfile') res.sendfile(path, [options], [fn]])
 
   p Transfer the file at the given <code>path</code>.
-  
+
   p.
     Automatically defaults the Content-Type response header field based
-    on the filename's extension. The callback <code>fn(err)</code> is 
-    invoked when the transfer is complete or when an error occurs. 
+    on the filename's extension. The callback <code>fn(err)</code> is
+    invoked when the transfer is complete or when an error occurs.
 
   p Options:
 
@@ -22,7 +22,7 @@ section
     app.get('/user/:uid/photos/:file', function(req, res){
       var uid = req.params.uid
         , file = req.params.file;
-    
+
       req.user.mayViewFilesFrom(uid, function(yes){
         if (yes) {
           res.sendfile('/uploads/' + uid + '/' + file);
@@ -31,3 +31,6 @@ section
         }
       });
     });
+
+  p.
+    Please refer to <a href="https://github.com/visionmedia/send">send</a> for additional documentation or any issues and concerns.
