@@ -7,7 +7,7 @@ app.get('/', function(req, res){
 });
 
 app.listen(3000);</code></pre></section><h2>Application</h2><a name="application"></a><section><h3 id="app-settings">settings</h3><p>The following settings are provided to alter how Express will behave:
-</p><ul><li><code>env </code>Environment mode, defaults to <code>process.env.NODE_ENV</code> (NODE_ENV environment variable) or "development"</li><li><code>trust proxy </code>Enables reverse proxy support, disabled by default</li><li><code>jsonp callback name </code>Changes the default callback name of <code>?callback=</code></li><li><code>json replacer </code>JSON replacer callback, null by default</li><li><code>json spaces </code>JSON response spaces for formatting</li><li><code>case sensitive routing </code>Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same</li><li><code>strict routing </code>Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router </li><li><code>view cache </code>Enables view template compilation caching, enabled in production by default</li><li><code>view engine </code>The default engine extension to use when omitted</li><li><code>views </code>The view directory path, defaulting to "process.cwd() + '/views'"</li></ul></section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.
+</p><ul><li><code>env </code>Environment mode, defaults to <code>process.env.NODE_ENV</code> (NODE_ENV environment variable) or "development"</li><li><code>trust proxy </code>Enables reverse proxy support, disabled by default</li><li><code>jsonp callback name </code>Changes the default callback name of <code>?callback=</code></li><li><code>json replacer </code>JSON replacer callback, null by default</li><li><code>case sensitive routing </code>Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same</li><li><code>strict routing </code>Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router </li><li><code>view cache </code>Enables view template compilation caching, enabled in production by default</li><li><code>view engine </code>The default engine extension to use when omitted</li><li><code>views </code>The view directory path, defaulting to "process.cwd() + '/views'"</li></ul></section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.
 </p><pre class="js"><code>app.set('title', 'My Site');
 app.get('title');
 // => "My Site"</code></pre></section><section><h3 id="app.get">app.get(name)</h3><p>Get setting <code>name</code> value.
@@ -300,7 +300,7 @@ if you wish to use HTTPS or provide both, use the technique above.
 </p><pre class="js"><code>app.listen = function(){
   var server = http.createServer(this);
   return server.listen.apply(server, arguments);
-};</code></pre></section><h2>Request</h2><a name="request"></a><section><h3 id="req.params">req.params</h3><p>This property is an array containing properties mapped to the named route "parameters".
+};</code></pre></section><h2>Request</h2><a name="request"></a><section><h3 id="req.params">req.params</h3><p>This property is an object containing properties mapped to the named route "parameters".
 For example if you have the route <code>/user/:name</code>, then the "name" property
 is available to you as <code>req.params.name</code>. This object defaults to <code>{}</code>.
 </p><pre class="js"><code>// GET /user/tj

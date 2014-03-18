@@ -19,6 +19,6 @@ docs: $(HTML)
 	$(JADE) --path $< < $< > $@
 
 clean:
-	rm -f *.html
+	rm -f *.html 3x/*.html 4x/*.html
 
 .PHONY: docs clean
