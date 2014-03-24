@@ -44,16 +44,16 @@ section
     })
 
   p.
-    These callbacks may be passed within arrays as well, these arrays are
-    simply flattened when passed:
+    If you have multiple common middleware for a route, you can use the route api with <code>all</code>.
 
   +js.
     var middleware = [loadForum, loadThread];
-    
-    app.get('/forum/:fid/thread/:tid', middleware, function(){
-      // ...
-    })
-    
-    app.post('/forum/:fid/thread/:tid', middleware, function(){
-      // ...
-    })
+
+    app.route('/forum/:fid/thread/:tid')
+    .all(loadForum)
+    .all(loadThread)
+    .get(function() { //... });
+    .post(function() { //... });
+
+  p.
+    Both middleware will be run for GET and POST requests.
