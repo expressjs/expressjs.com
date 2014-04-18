@@ -44,10 +44,12 @@ section
   p.
     The order of which middleware are "defined" using <code>router.use()</code> is
     very important, they are invoked sequentially, thus this defines middleware
-    precedence. For example usually <code>express.logger()</code> is the very
+    precedence. For example usually a logger is the very
     first middleware you would use, logging every request:
 
   +js.
+    var logger = require('morgan');
+
     router.use(logger());
     router.use(express.static(__dirname + '/public'));
     router.use(function(req, res){
