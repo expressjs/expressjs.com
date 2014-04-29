@@ -33,7 +33,7 @@ section
     });
 
     // this route uses the ":user" named parameter
-    // which will caused the 'user' param callback to be triggered
+    // which will cause the 'user' param callback to be triggered
     router.get('/users/:user', function(req, res, next) {
       // req.user WILL be defined here
       // if there was an error, normal error handling will be triggered
