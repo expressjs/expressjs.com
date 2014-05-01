@@ -7,7 +7,7 @@ app.get('/', function(req, res){
 });
 
 app.listen(3000);</code></pre></section><h2>Application</h2><a name="application"></a><section><h3 id="app-settings">settings</h3><p>The following settings are provided to alter how Express will behave:
-</p><ul><li><code>env </code>Environment mode, defaults to <code>process.env.NODE_ENV</code> (NODE_ENV environment variable) or "development"</li><li><code>trust proxy </code>Enables reverse proxy support, disabled by default</li><li><code>jsonp callback name </code>Changes the default callback name of <code>?callback=</code></li><li><code>json replacer </code>JSON replacer callback, null by default</li><li><code>case sensitive routing </code>Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same</li><li><code>strict routing </code>Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router </li><li><code>view cache </code>Enables view template compilation caching, enabled in production by default</li><li><code>view engine </code>The default engine extension to use when omitted</li><li><code>views </code>The view directory path, defaulting to "process.cwd() + '/views'"</li></ul></section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.
+</p><ul><li><code>env </code>Environment mode, defaults to <code>process.env.NODE_ENV</code> (NODE_ENV environment variable) or "development"</li><li><code>trust proxy </code>Enables reverse proxy support, disabled by default</li><li><code>jsonp callback name </code>Changes the default callback name of <code>?callback=</code></li><li><code>json replacer </code>JSON replacer callback, null by default</li><li><code>case sensitive routing </code>Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same</li><li><code>strict routing </code>Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router</li><li><code>view cache </code>Enables view template compilation caching, enabled in production by default</li><li><code>view engine </code>The default engine extension to use when omitted</li><li><code>views </code>The view directory path, defaulting to "process.cwd() + '/views'"</li><li><code>x-powered-by </code>Enables the <code>X-Powered-By: Express</code> HTTP header, enabled by default</li></ul></section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.
 </p><pre class="js"><code>app.set('title', 'My Site');
 app.get('title');
 // => "My Site"</code></pre></section><section><h3 id="app.get">app.get(name)</h3><p>Get setting <code>name</code> value.
@@ -479,7 +479,7 @@ automatically parsed by the <code>bodyParser()</code> middleware.
 res.cookie('cart', { items: [1,2,3] }, { maxAge: 900000 });
 </code></pre><p>Signed cookies are also supported through this method. Simply
 pass the <code>signed</code> option. When given <code>res.cookie()</code>
-will use the secret passed to <code>express.cookieParser(secret)</code>
+will use the secret passed to <code>cookieParser(secret)</code>
 to sign the value.
 </p><pre class="js"><code>res.cookie('name', 'tobi', { signed: true });
 </code></pre><p>Later you may access this value through the <a href="#req.signedCookies">req.signedCookie</a>
@@ -707,7 +707,7 @@ res.render('user', { name: 'Tobi' }, function(err, html){
 </p><p>Create a new router by using "express.Router()"
 </p><pre class="js"><code>var router = express.Router();
 </code></pre><p>The router can have middleware and http VERB routes added just like an application.
-</p><pre class="js"><code>// invoked for any requested passed to this router
+</p><pre class="js"><code>// invoked for any requests passed to this router
 router.use(function(req, res, next) {
   // .. some logic here .. like any other middleware
   next();
@@ -755,9 +755,11 @@ mounted middleware may operate without code changes regardless of its "prefix"
 pathname.
 </p><p>The order of which middleware are "defined" using <code>router.use()</code> is
 very important, they are invoked sequentially, thus this defines middleware
-precedence. For example usually <code>express.logger()</code> is the very
+precedence. For example usually a logger is the very
 first middleware you would use, logging every request:
-</p><pre class="js"><code>router.use(logger());
+</p><pre class="js"><code>var logger = require('morgan');
+
+router.use(logger());
 router.use(express.static(__dirname + '/public'));
 router.use(function(req, res){
   res.send('Hello');
@@ -799,7 +801,7 @@ otherwise passing an error to <code>next(err)</code>.
 });
 
 // this route uses the ":user" named parameter
-// which will caused the 'user' param callback to be triggered
+// which will cause the 'user' param callback to be triggered
 router.get('/users/:user', function(req, res, next) {
   // req.user WILL be defined here
   // if there was an error, normal error handling will be triggered

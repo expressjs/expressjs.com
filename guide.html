@@ -78,7 +78,7 @@ Options:
   -V, --version       output the version number
   -e, --ejs           add ejs engine support (defaults to jade)
   -H, --hogan         add hogan.js engine support
-  -c, --css <engine>  add stylesheet <engine> support (less|stylus) (defaults to plain css)
+  -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass) (defaults to plain css)
   -f, --force         force on non-empty directory
   </code></pre><p>If you want to generate an application with Jade and Stylus
 support you would simply execute:
@@ -121,8 +121,11 @@ however must be defined with an arity of 4, that is the signature
 });
 </code></pre><p>Though not mandatory error-handling middleware are typically defined
 very last, below any other <code>app.use()</code> calls as shown here:
-</p><pre class="js"><code>app.use(express.bodyParser());
-app.use(express.methodOverride());
+</p><pre class="js"><code>var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+
+app.use(bodyParser());
+app.use(methodOverride());
 app.use(app.router);
 app.use(function(err, req, res, next){
   // logic
@@ -134,8 +137,11 @@ or anything else you prefer.
 several of these error-handling middleware, much like you would with
 regular middleware. For example suppose you wanted to define an error-handler
 for requests made via XHR, and those without, you might do:
-</p><pre class="js"><code>app.use(express.bodyParser());
-app.use(express.methodOverride());
+</p><pre class="js"><code>var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+
+app.use(bodyParser());
+app.use(methodOverride());
 app.use(app.router);
 app.use(logErrors);
 app.use(clientErrorHandler);
