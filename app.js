@@ -55,7 +55,7 @@ o(function(){
     var i = headings.length;
     while (i--) {
       h = headings[i];
-      if (top >= h.top) return h;
+      if (top >= h.top - 1) return h;
     }
   }
 
