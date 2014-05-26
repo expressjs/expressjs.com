@@ -41,6 +41,22 @@ section
     });
 
   p.
+    If you want to enforce a specific parameter format (like for example, a numeric value),
+    you can check the format inside the <code>callback</code> and call <code>next('route')</code>
+    to try the next route and don't accept the parameter.
+  
+  +js.
+    router.param('user', function(req, res, next, id){
+      if (!/^\d+$/.test(id)) return next('route');
+      
+      User.find(id, function(err, user) {
+        req.user = user || null;
+        
+        return next();
+      });
+    });
+
+  p.
     Alternatively you may pass only a <code>callback</code>, in which
     case you have the opportunity to alter the <code>router.param()</code> API.
     For example the <a href="http://github.com/visionmedia/express-params">express-params</a>
