@@ -10,12 +10,11 @@ section
     $ mkdir hello-world
 
   p.
-    In this same directory you'll be defining the application "package", which
-    are no different than any other node package. You'll need a package.json
+    In this same directory, you'll be defining the application "package", which
+    is no different than any other node package. You'll need a package.json
     file in the directory, with express defined as a dependency. You may use
-    <code>npm info express version</code> to fetch the latest version, it's
-    preferred that you do this instead of "3.x" below to prevent any future
-    surprises.
+    <code>npm info express version</code> to fetch the latest version. This is
+    preferred over "3.x" (as below) to prevent any future surprises.
 
   +js.
     {
@@ -29,18 +28,17 @@ section
     }
 
   p.
-    Now that you have a package.json file in this directory you can use
-    <code>npm(1)</code> to install the dependencies, in this case just
-    Express:
+    Now that you have a package.json file, you can use <code>npm(1)</code> 
+    to install the dependencies. In this case, that's just Express:
 
   +js.
     $ npm install
 
   p.
-    Once npm finishes you'll have a localized Express 3.x dependency in
-    the ./node_modules directory. You may verify this with <code>npm ls</code>
-    as shown in the following snippet displaying a tree of Express and its
-    own dependencies.
+    Once npm finishes, you'll have a localized Express 3.x dependency in
+    the ./node_modules directory. You can verify this with <code>npm ls</code>
+    (as shown in the following snippet) to display a tree of Express and its
+    dependencies.
 
   +js.
     $ npm ls
@@ -65,24 +63,25 @@ section
         └── mime@1.2.6
 
   p.
-    Now to create the application itself! Create a file named app.js or server.js,
-    whichever you prefer, require express and then create a new application with <code>express()</code>:
+    Now, to create the application itself! Create a file named app.js or server.js 
+    (whichever you prefer). Require express, and then create a new application with
+    <code>express()</code>:
 
   +js.
     var express = require('express');
     var app = express();
 
   p.
-    With the new application instance you can start defining routes via <code>app.VERB()</code>,
-    in this case "GET /" responding with the "Hello World" string. The <code>req</code> and
-    <code>res</code> are the exact same objects that node provides to you, thus you may invoke
-    <code>res.pipe()</code>, <code>req.on('data', callback)</code> and anything else you
+    With the new application instance, you can start defining routes via <code>app.VERB()</code>
+    (in this case, "GET /", responding with the string "Hello World"). The <code>req</code> and
+    <code>res</code> are the exact same objects that node provides you. Therefore, you can invoke
+    <code>res.pipe()</code>, <code>req.on('data', callback)</code>, and anything else you
     would do without Express involved.
 
   p.
-    Express augments these objects providing you with higher level
-    methods such as <code>res.send()</code>, which among other things
-    adds the Content-Length for you:
+    Express augments these objects to provide you with higher level
+    methods (such as <code>res.send()</code>, which, among other things,
+    adds the Content-Length for you):
 
   +js.
     app.get('/hello.txt', function(req, res){
@@ -90,8 +89,8 @@ section
     });
 
   p.
-    Now to bind and listen for connections invoke the <code>app.listen()</code> method,
-    accepting the same arguments as node's <a href="http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener">net.Server#listen()</a>:
+    Now, to bind and listen for connections, invoke the <code>app.listen()</code> method.
+    It accepts the same arguments as node's <a href="http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener">net.Server#listen()</a>:
 
   +js.
     var server = app.listen(3000, function() {
