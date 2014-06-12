@@ -3,7 +3,7 @@ section
   
   p.
     Send a JSON response with JSONP support. This method is identical
-    to <code>res.json()</code> however opts-in to JSONP callback
+    to <code>res.json()</code>, except that it opts-in to JSONP callback
     support.
 
   +js.
@@ -17,8 +17,8 @@ section
     // => { "error": "message" }
 
   p.
-    By default the JSONP callback name is simply <code>callback</code>,
-    however you may alter this with the <a href="#app-settings">jsonp callback name</a>
+    By default, the JSONP callback name is simply <code>callback</code>.
+    However, you may alter this with the <a href="#app-settings">jsonp callback name</a>
     setting. The following are some examples of JSONP responses using the same
     code:
 

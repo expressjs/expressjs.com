@@ -2,13 +2,13 @@ section
   h3(id='res.locals') res.locals
 
   p.
-    Response local variables are scoped to the request, thus only
+    Response local variables are scoped to the request, and therefore only
     available to the view(s) rendered during that request / response
-    cycle, if any. Otherwise this API is identical to <a href="#app.locals">app.locals</a>.
+    cycle (if any). Otherwise, this API is identical to <a href="#app.locals">app.locals</a>.
 
   p.
     This object is useful for exposing request-level information such as the
-    request pathname, authenticated user, user settings etcetera.
+    request pathname, authenticated user, user settings etc.
 
   +js.
     app.use(function(req, res, next){

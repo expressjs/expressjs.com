@@ -2,15 +2,15 @@ section
   h3(id='router.param') router.param([name], callback)
   
   p.
-    Map logic to route parameters. For example when <code>:user</code>
+    Map logic to route parameters. For example, when <code>:user</code>
     is present in a route path you may map user loading logic to automatically
     provide <code>req.user</code> to the route, or perform validations
     on the parameter input.
 
   p.
     The following snippet illustrates how the <code>callback</code>
-    is much like middleware, thus supporting async operations, however
-    providing the additional value of the parameter, here named as <code>id</code>.
+    is much like middleware, thus supporting async operations. However,
+    it provides the additional value of the parameter (here named as <code>id</code>).
     An attempt to load the user is then performed, assigning <code>req.user</code>,
     otherwise passing an error to <code>next(err)</code>.
 
@@ -48,8 +48,8 @@ section
     regular expression.
 
   p.
-    This example is a bit more advanced, checking if the second argument is a regular
-    expression, returning the callback which acts much like the "user" param example.
+    This example is a bit more advanced. It checks whether the second argument is a regular
+    expression, returning the callback (which acts much like the "user" param example).
 
   +js.
     router.param(function(name, fn){
@@ -67,8 +67,8 @@ section
     });
 
   p.
-    The method could now be used to effectively validate parameters, or also
-    parse them to provide capture groups:
+    The method could now be used to effectively validate parameters 
+    (and optionally parse them to provide capture groups):
 
   +js.
     router.param('id', /^\d+$/);

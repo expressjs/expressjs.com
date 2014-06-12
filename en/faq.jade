@@ -3,8 +3,8 @@ section
   h3(id='models') How do I define models?
 
   p.
-    Express has no notion of a database at all, this is
-    left up to third-party node modules - allowing you to
+    Express has no notion of a database at all. This is
+    left up to third-party node modules, allowing you to
     interface with nearly any database.
 
 section
@@ -20,7 +20,7 @@ section
 
   p.
     Anything that can conform with the <code>(path, locals, callback)</code> signature.
-    To normalize template engine interfaces and caching it's recommended to
+    To normalize template engine interfaces and caching, it's recommended to
     check the <a href="https://github.com/visionmedia/consolidate.js">consolidate.js</a>
     project for support. Unlisted template engines may still support the Express
     signature.
@@ -29,9 +29,9 @@ section
   h3(id='structure') How should I structure my application?
 
   p.
-    There is no true answer to this question, it is highly dependant
+    There is no true answer to this question. It is highly dependant
     on the scale of your application and the team involved. To be as
-    flexible as possible Express makes no assumptions in terms of structure.
+    flexible as possible, Express makes no assumptions in terms of structure.
 
   p.
     Routes and other application-specific logic may live in as many files
@@ -44,7 +44,7 @@ section
     li: a(href='https://github.com/strongloop/express/tree/master/examples/mvc') MVC style controllers
 
   p.
-    Available as well are third-party extensions to Express to simplify some of these patterns:
+    Also, there are third-party extensions for Express, which simplify some of these patterns:
 
   ul
     li: a(href='https://github.com/expressjs/express-resource') Resourceful routing
@@ -55,9 +55,9 @@ section
 
   p.
     You may typically use any middleware several times 
-    within your application. With the following middleware setup and a request
-    to "GET /javascripts/jquery.js" would first check "./public/javascripts/jquery.js",
-    if it does not exist then the subsequent middleware will check "./files/javascripts/jquery.js".
+    within your application. With the following middleware setup, and a request
+    for "GET /javascripts/jquery.js", the first check would be "./public/javascripts/jquery.js";
+    if it does not exist, then the subsequent middleware will check "./files/javascripts/jquery.js".
 
   +js.
     app.use(express.static('public'));
@@ -68,11 +68,11 @@ setup
   
   p.
     Connect's generic "mounting" feature allows you to define
-    the pathname "prefix" to which the middleware will be invoked,
-    effectively behaving as if that prefix string was never
-    part of the path. Suppose if you wanted "GET /files/javascripts/jquery.js",
-    you could mount the middleware at "/files", exposing "/javascripts/jquery.js"
-    as the <code>req.url</code> allowing the middleware to serve the file:
+    the pathname "prefix" to which the middleware will be invoked.
+    This effectively behaves as if that prefix string was never
+    part of the path. Suppose you wanted "GET /files/javascripts/jquery.js".
+    You could mount the middleware at "/files", exposing "/javascripts/jquery.js"
+    as the <code>req.url</code>, allowing the middleware to serve the file:
 
   +js.
     app.use('/public', express.static('public'));
@@ -81,7 +81,7 @@ setup
   h3(id='migration') How do I migrate my Express 2.x application?
 
   p.
-    Express 2x will likely be supported through to node 1.0 so there's
+    Express 2x will likely be supported through to node 1.0, so there's
     no immediate reason to update beyond the refactoring and API changes
     that Express 3x introduces, so if you're happy with 2x feel free
     to remain on that branch. For migration information visit the
@@ -92,12 +92,12 @@ setup
   h3(id='404-handling') How do you handle 404s?
 
   p.
-    In Express 404s are not the result of an error, thus the
-    error-handler middleware will not capture 404s, this is
-    because a 404 is simply the absence of additional work to do,
-    in other words Express has executed all middleware / routes
+    In Express, 404s are not the result of an error. Therefore,
+    the error-handler middleware will not capture 404s. This is
+    because a 404 is simply the absence of additional work to do;
+    in other words, Express has executed all middleware / routes,
     and found that none of them responded. All you need to
-    do is add a middleware at the very bottom below all the others
+    do is add a middleware at the very bottom (below all others)
     to handle a 404:
 
   +js.
@@ -109,9 +109,9 @@ setup
   h3(id='error-handling') How do you setup an error handler in Express?
 
   p.
-    Error-handling middleware are defined just like regular middleware,
-    however must be define with an arity of 4, that is the signature
-    <code>(err, req, res, next)</code>:
+    Error-handling middleware is defined just like regular middleware,
+    except that it must be defined with an arity of 4 (that is the signature
+    <code>(err, req, res, next)</code>):
 
   +js.
     app.use(function(err, req, res, next){
@@ -135,7 +135,7 @@ setup
   h3(id='size') How big is the Express codebase?
 
   p.
-    Express is a very small framework, the 3.0.0 release is only
+    Express is a very small framework. The 3.0.0 release is only
     932 SLOC, and the mandatory portion of Connect which Express
     is built on is only 267 SLOC. The optional middleware bundled
     with Connect add an additional 1143 SLOC, and are lazy loaded

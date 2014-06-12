@@ -2,9 +2,9 @@ section
   h3(id='error-handling') Error handling
 
   p.
-    Error-handling middleware are defined just like regular middleware,
-    however must be defined with an arity of 4, that is the signature
-    <code>(err, req, res, next)</code>:
+    Error-handling middleware is defined just like regular middleware,
+    except that must be defined with an arity of 4 (that is the signature
+    <code>(err, req, res, next)</code>):
 
   +js.
     app.use(function(err, req, res, next){
@@ -13,8 +13,8 @@ section
     });
 
   p.
-    Though not mandatory error-handling middleware are typically defined
-    very last, below any other <code>app.use()</code> calls as shown here:
+    Though not mandatory, error-handling middleware are typically defined
+    very last, below any other <code>app.use()</code> calls, like so:
 
   +js.
     var bodyParser = require('body-parser');
@@ -28,13 +28,13 @@ section
     });
 
   p.
-    Responses from within these middleware are completely arbitrary. You may
+    Responses from within the middleware are completely arbitrary. You may
     wish to respond with an HTML error page, a simple message, a JSON string,
     or anything else you prefer.
 
   p.
-    For organizational, and higher-level framework purposes you may define
-    several of these error-handling middleware, much like you would with
+    For organizational (and higher-level framework) purposes, you may define
+    several error-handling middleware, much like you would with
     regular middleware. For example suppose you wanted to define an error-handler
     for requests made via XHR, and those without, you might do:
 
@@ -60,8 +60,8 @@ section
     }
 
   p.
-    Where <code>clientErrorHandler</code> is defined as the following, note
-    that the error is explicitly passed along to the next.
+    Where <code>clientErrorHandler</code> is defined as the following (note
+    that the error is explicitly passed along to the next):
 
   +js.
     function clientErrorHandler(err, req, res, next) {
