@@ -3,14 +3,14 @@ section
 
   p.
     Check if the given <code>types</code> are acceptable, returning
-    the best match when true, otherwise <code>undefined</code> - in which
-    case you should respond with 406 "Not Acceptable".
+    the best match when true, or else <code>undefined</code> (in which
+    case you should respond with 406 "Not Acceptable").
 
   p.
     The <code>type</code> value may be a single mime type string
-    such as "application/json", the extension name
-    such as "json", a comma-delimited list or an array. When a list
-    or array is given the <em>best</em> match, if any is returned.
+    (such as "application/json"), the extension name
+    such as "json", a comma-delimited list, or an array. When a list
+    or array is given, the <em>best</em> match (if any) is returned.
 
   +js.
     // Accept: text/html

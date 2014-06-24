@@ -2,8 +2,8 @@ section
   h3(id='app.use') app.use([path], function)
 
   p.
-    Use the given middleware <code>function</code>, with optional mount <code>path</code>,
-    defaulting to "/".
+    Use the given middleware <code>function</code> (with optional mount <code>path</code>,
+    defaulting to "/").
 
   +js.
     var express = require('express');
@@ -24,12 +24,12 @@ section
 
   p.
     The "mount" path is stripped and is <strong>not</strong> visible
-    to the middleware <code>function</code>. The main effect of this feature is that
-    mounted middleware may operate without code changes regardless of its "prefix"
+    to the middleware <code>function</code>. This feature is mainly to ensure that
+    mounted middleware may operate without code changes, regardless of the "prefix"
     pathname.
 
   p.
-    Here's a concrete example, take the typical use-case of serving files in ./public
+    Here's a concrete example. Take the typical use-case of serving files in ./public
     using the <code>express.static()</code> middleware:
 
   +js.
@@ -39,12 +39,12 @@ section
     app.use(express.static(__dirname + '/public'));
 
   p.
-    Say for example you wanted to prefix all static files with "/static", you could
+    Say you wanted to prefix all static files with "/static". You could
     use the "mounting" feature to support this. Mounted middleware functions are <strong>not</strong>
     invoked unless the <code>req.url</code> contains this prefix, at which point
-    it is stripped when the function is invoked. This affects this function only,
+    it is stripped when the function is invoked. This affects this function only;
     subsequent middleware will see <code>req.url</code> with "/static" included
-    unless they are mounted as well.
+    (unless they are mounted as well).
 
   +js.
     // GET /static/javascripts/jquery.js
@@ -53,8 +53,8 @@ section
     app.use('/static', express.static(__dirname + '/public'));
 
   p.
-    The order of which middleware are "defined" using <code>app.use()</code> is
-    very important, they are invoked sequentially, thus this defines middleware
+    The order in which middleware are "defined" using <code>app.use()</code> is
+    very important. They are invoked sequentially, and therefore define middleware
     precedence. For example, usually any logging middleware is the very
     first middleware you would use:
 
@@ -68,9 +68,9 @@ section
     });
 
   p.
-    Now suppose you wanted to ignore logging requests for static files, but to
-    continue logging routes and middleware defined after <code>logger()</code>,
-    you would simply move <code>static()</code> above:
+    Now suppose you wanted to ignore logging requests for static files, but
+    continue logging routes and middleware defined after <code>logger()</code>.
+    You could simply move <code>static()</code> above it:
 
   +js.
     app.use(express.static(__dirname + '/public'));
