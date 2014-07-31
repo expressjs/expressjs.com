@@ -1,5 +1,5 @@
 section
-  h3(id='res.sendfile') res.sendfile(path, [options], [fn])
+  h3(id='res.sendfile') res.sendFile(path, [options], [fn])
 
   p Transfer the file at the given <code>path</code>.
 
@@ -25,7 +25,7 @@ section
 
       req.user.mayViewFilesFrom(uid, function(yes){
         if (yes) {
-          res.sendfile('/uploads/' + uid + '/' + file);
+          res.sendFile('/uploads/' + uid + '/' + file);
         } else {
           res.send(403, 'Sorry! you cant see that.');
         }
