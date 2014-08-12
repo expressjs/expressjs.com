@@ -1,17 +1,21 @@
-<!DOCTYPE html><html><head><title>Express - Moving to version 4</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">express</a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html">API Reference</a><a href="/guide.html">Guide</a><a href="/migrating-4.html" class="active">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><section><h3 id="">Moving to Express 4</h3><p>Express 4 is a breaking change from Express 3.  That means an existing
+<!DOCTYPE html><html><head><title>Express - Moving to version 4</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">express</a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html">API Reference</a><a href="/guide.html">Guide</a><a href="/migrating-4.html" class="active">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/3x/api.html">3.x docs</a></nav><ul id="menu"><li><ul class="active"><li><a href="#overview">Overview</a></li><li><a href="#changes">Changes in Express 4</a></li><li><a href="#example-migration">Example app migration</a></li><li><a href="#app-gen">Upgrading Express app generator</a></li></ul></li></ul></header><section><h3 id="overview">Overview: Moving to Express 4</h3><p>Express 4 is a breaking change from Express 3.  That means an existing
 Express 3 app will not work if you update the Express version in its
 dependencies.
-</p><p>There are two aspects to moving to Express 3:
-
-ul
-  li Migrating existing Express 3 apps to Express 4.
-  li Upgrading the Express generator to version 4.
-  </p><h3 id="">Changes in Express 4</h3><p>The main changes in Express 4 are:
-</p><ul><li>The dependency on Connect and built-in middleware were removed; you must add all middleware yourself.</li><li>Changes to the routing system.</li><li>You can now load middleware on a path with a variable parameter.</li><li>Various other changes.</li></ul><p>See also:
-</p><ul><li><a href="https://github.com/strongloop/express/wiki/New-features-in-4.x">New features in 4.x.</a></li><li><a href="https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x">Migrating from 3.x to 4.x.</a></li></ul><h4 id="">The Express core</h4><p>Express 4 does not depend on Connect anymore, and removes all the built-in
+</p><p>This article covers:
+</p><ul class="doclist">
+<li><a href='#changes'>Changes in Express 4</a>.</li>
+<li><a href='#example-migration'> An example of migrating an Express 3 app to Express 4</a>.</li>
+<li><a href='#app-gen'> Upgrading to the Express 4 app generator</a>.</li>
+</ul><h3 id="changes">Changes in Express 4</h3><p>The main changes in Express 4 are:
+</p><ul class="doclist">
+<li><a href='#core-changes'> Changes to Express core and middleware system</a>:  The dependency on Connect and built-in middleware were removed, so you must add middleware yourself.</li>
+<li><a href='#routing'> Changes to the routing system</a>.</li>      
+<li><a href='#other-changes'> Various other changes</a>.</li>
+</ul><p>See also:
+</p><ul><li><a href="https://github.com/strongloop/express/wiki/New-features-in-4.x">New features in 4.x.</a></li><li><a href="https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x">Migrating from 3.x to 4.x.</a></li></ul><h4 id="core-changes">Changes to Express core and middleware system</h4><p>Express 4 does not depend on Connect anymore, and removes all the built-in
 middleware from its core, except <code>express.static</code>. This means Express is
 now an independent routing and middleware web framework.
-</p><h4 id="">The middleware system</h4><p>The built-in middleware have been removed from the Express core so that
+</p><p>The built-in middleware have been removed from the Express core so that
 Express versioning and releases are not affected by updates in the
 dependent middleware. 
 </p><p>With the built-in middleware gone, you must explicitly add all the
@@ -19,92 +23,42 @@ middleware required to run your app.  Simply follow these steps:
 </p><ol><li>Install the module: <code>npm install -save <module-name></code></li><li>In your app, require the module: <code>require('module-name');</code></li><li>Use the module according to its documentation: <code>app.use( ... );</code></li></ol><p>The following table lists Express 3 middleware and their counterparts in
 Express 4.
 </p><table class="doctable" style="width: 400px;" border="1">
-<tr>
-<th>Express 3</th>
-<th>Express 4</th>
-</tr>
-<tr>
-<td>express.bodyParser</td>
-<td>body-parser + multer</td>
-</tr>
-<tr>
-<td>express.compress</td>
-<td>compression</td>
-</tr>
-<tr>
-<td>express.cookieSession</td>
-<td>cookie-session</td>
-</tr>
-<tr>
-<td>express.cookieParser</td>
-<td>cookie-parser</td>
-</tr>
-<tr>
-<td>express.logger</td>
-<td>morgan</td>
-</tr>
-<tr>
-<td>express.session</td>
-<td>express-session</td>
-</tr>
-<tr>
-<td>express.favicon</td>
-<td>serve-favicon</td>
-</tr>
-<tr>
-<td>express.responseTime</td>
-<td>response-time</td>
-</tr>
-<tr>
-<td>express.errorHandler</td>
-<td>errorhandler</td>
-</tr>
-<tr>
-<td>express.methodOverride</td>
-<td>method-override</td>
-</tr>
-<tr>
-<td>express.timeout</td>
-<td>connect-timeout</td>
-</tr>
-<tr>
-<td>express.vhost</td>
-<td>vhost</td>
-</tr>
-<tr>
-<td>express.csrf</td>
-<td>csurf</td>
-</tr>
-<tr>
-<td>express.directory</td>
-<td>serve-index</td>
-</tr>
-<tr>
-<td>express.static</td>
-<td>serve-static</td>
-</tr>
-<tr>
-<td>express.timeout</td>
-<td>connect-timeout</td>
-</tr>
+<tr><th>Express 3</th><th>Express 4</th></tr>
+<tr><td>express.bodyParser</td><td><a href="https://github.com/expressjs/body-parser">body-parser</a> + <a href="https://github.com/expressjs/multer">multer</a></td></tr>
+<tr><td>express.compress</td><td><a href="https://github.com/expressjs/compression">compression</a></td></tr>
+<tr><td>express.cookieSession</td><td><a href="https://github.com/expressjs/cookie-session">cookie-session</a></td></tr>
+<tr><td>express.cookieParser</td><td><a href="https://github.com/expressjs/cookie-parser">cookie-parser</a></td></tr>
+<tr><td>express.logger</td><td><a href="https://github.com/expressjs/morgan">morgan</a></td></tr>
+<tr><td>express.session</td><td><a href="https://github.com/expressjs/session">express-session</a></td></tr>
+<tr><td>express.favicon</td><td><a href="https://github.com/expressjs/serve-favicon">serve-favicon</a></td></tr>
+<tr><td>express.responseTime</td><td><a href="https://github.com/expressjs/response-time">response-time</a></td></tr>
+<tr><td>express.errorHandler</td><td><a href="https://github.com/expressjs/errorhandler">errorhandler</a></td></tr>
+<tr><td>express.methodOverride</td><td><a href="https://github.com/expressjs/method-override">method-override</a></td></tr>
+<tr><td>express.timeout</td><td><a href="https://github.com/expressjs/timeout">connect-timeout</a></td></tr>
+<tr><td>express.vhost</td><td><a href="https://github.com/expressjs/vhost">vhost</a></td></tr>
+<tr><td>express.csrf</td><td><a href="https://github.com/expressjs/csurf">csurf</a></td></tr>
+<tr><td>express.directory</td><td><a href="https://github.com/expressjs/serve-index">serve-index</a></td></tr>
+<tr><td>express.static</td><td><a href="https://github.com/expressjs/serve-static">serve-static</a></td></tr>
+<tr><td>express.timeout</td><td><a href="https://github.com/expressjs/timeout">connect-timeout</a></td></tr>
 </table><p>For the complete list,
 see <a href="https://github.com/senchalabs/connect#middleware">https://github.com/senchalabs/connect#middleware</a>.
 </p><p>In most cases, you can simply replace the old version 3 middleware with
 its Express 4 counterpart. For details, see the module documentation in
 GitHub.
-</p><h5 id="">app.use accepts parameters</h5><p>In version 4 you can now load middleware on a path with a variable
+</p><h5 id="app-use">app.use accepts parameters</h5><p>In version 4 you can now load middleware on a path with a variable
 parameter and read the parameter value from the route handler.
 For example:
 </p><pre class="js"><code>app.use('/book/:id', function(req, res, next) {
   console.log('ID:', req.params.id);
   next();
 })
-</code></pre><h4 id="">The routing system</h4><p>Apps now implicitly load routing middleware, so you no longer have to
+</code></pre><h4 id="routing">The routing system</h4><p>Apps now implicitly load routing middleware, so you no longer have to
 worry about the order in which middleware is loaded with respect to
 the <code>router</code> middleware.
 </p><p>The way you define routes is unchanged, but the routing system has two
 new features to help organize your routes:
-</p><ul><li>A new method, <code>app.route()</code>, to create chainable route handlers<for>a route path. </for></li><li>A new class, <code>express.Router</code>, to create modular mountable route<handlers></handlers></li></ul><h5 id="">app.route() method</h5><p>The new <code>app.route()</code> method enables you to create chainable route handlers
+</p><ul class="doclist"><li>A new method, <code>app.route()</code>, to create chainable route handlers for a route path. </li><li>A new class, <code>express.Router</code>, to create modular mountable route handlers.
+</li></ul><h5 id="app-route">app.route() method</h5><p>The new <code>app.route()</code> method enables you to create chainable route handlers
 for a route path. Since the path is specified in a single location, it
 helps to create modular routes and reduce redundancy and typos. For more
 information on routes, see <a href="http://expressjs.com/4x/api.html#router"> Router() documentation</a>.
@@ -119,7 +73,7 @@ information on routes, see <a href="http://expressjs.com/4x/api.html#router"> Ro
   .put(function(req, res) {
     res.send('Update the book);
   })
-  </code></pre><h5 id="">express.Router class</h5><p>The other feature to help organize routes is a new class, <code>express.Router</code>,
+  </code></pre><h5 id="express-router">express.Router class</h5><p>The other feature to help organize routes is a new class, <code>express.Router</code>,
 that you can use to create modular mountable route handlers. A <code>Router</code>
 instance is a complete middleware and routing system; for this reason it
 is often referred to as a "mini-app".  
@@ -151,15 +105,16 @@ module.exports = router;
 app.use('/birds', birds);
 </code></pre><p>The app will now be able to handle requests to <code>/birds</code> and <code>/birds/about</code>,
 along with calling the <code>timeLog</code> middleware specific to the route.
-</p><h4 id="">Other changes</h4><p>The following table lists other small but important changes in Express 4.
-</p><table class="doctable" border="1">
+</p><h4 id="other-changes">Other changes</h4><p>The following table lists other small but important changes in Express 4.
+</p><table class="doctable" border="1" width="600">
 <tr>
 <th>Object</th>
 <th>Description</th>
 </tr>
 <tr>
 <td>Node</td>
-<td>Express 4 requires Node 0.10.x or later and has dropped support for<Node>0.8.x.</td></Node></tr>
+<td>Express 4 requires Node 0.10.x or later and has dropped support for Node 0.8.x.</td>
+</tr>
 <tr>
 <td><code>http.createServer()</code></td>
 <td>The http module is no longer needed. The app is started using
@@ -176,7 +131,8 @@ along with calling the <code>timeLog</code> middleware specific to the route.
 </tr>
 <tr>
 <td><code>req.accepted()</code></td>
-<td>Use <code>req.accepts()</code>, <code>req.acceptsEncodings()</code>, <code>req.acceptsCharsets()</code>,<and><code>req.acceptsLanguages()</code>.</td></and></tr>
+<td>Use <code>req.accepts()</code>, <code>req.acceptsEncodings()</code>, <code>req.acceptsCharsets()</code>, and <code>req.acceptsLanguages()</code>.</td>
+</tr>
 <tr>
 <td><code>res.location()</code></td>
 <td>No longer resolves relative URLs.</td>
@@ -207,8 +163,9 @@ along with calling the <code>timeLog</code> middleware specific to the route.
 </tr>
 <tr>
 <td><code>res.setHeader('Set-Cookie', val)</code></td>
-<td>Functionality is now limited to setting the basic cookie value.<Use><code>res.cookie()</code> for added functionality.</td></Use></tr>
-</table><h3 id="">Example app migration</h3><p>Here is an example of migrating an Express 3 application to Express 4.
+<td>Functionality is now limited to setting the basic cookie value. Use <code>res.cookie()</code> for added functionality.</td>
+</tr>
+</table><h3 id="example-migration">Example app migration</h3><p>Here is an example of migrating an Express 3 application to Express 4.
 The files of interest are <code>app.js</code> and <code>package.json</code>.
 </p><h4 id="">Version 3 app</h4><h5 id="">app.js </h5><p>Consider an Express v.3 application with the following <code>app.js</code> file:
 </p><pre class="js"><code>var express = require('express');
@@ -242,7 +199,8 @@ app.get('/users', user.list);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-</code></pre><h5 id="">pacakge.json </h5></section><The>accompanying version 3 <code>package.json</code> file might look something like this:<pre class="js"><code>{
+</code></pre><h5 id="">pacakge.json </h5><p>The accompanying version 3 <code>package.json</code> file might look something like this:
+</p><pre class="js"><code>{
   "name": "application-name",
   "version": "0.0.1",
   "private": true,
@@ -331,10 +289,10 @@ Express 4 app. To confirm, start the app with the following command:
 </p><pre class="js"><code>$ node .
 </code></pre><p>Load <a href="http://localhost:3000">http://localhost:3000</a>. 
 and see the home page being rendered by Express 4.
-</p><h3 id="">The Express 4 app generator</h3><p>The command-line tool to generate an Express app is still <code>express</code>,
-but instead of installing the <code>express</code> npm package as a global module you
-install it using the independent npm package, <code>express-generator</code>.
-</p><h4 id="">Installing the new express-generator</h4><p>If you already have the Express 3 app generator installed on your system,
+</p><h3 id="app-gen">Upgrading to the Express 4 app generator</h3><p>The command-line tool to generate an Express app is still <code>express</code>,
+but to upgrade to the new version, you must uninstall the Express 3 app generator 
+and then install the new <code>express-generator</code>.
+</p><h4 id="">Installing </h4><p>If you already have the Express 3 app generator installed on your system,
 you must uninstall it  as follows:
 </p><pre class="js"><code>$ npm uninstall -g express
 </code></pre><p>Depending on how your file and directory privileges are configured,
@@ -347,7 +305,7 @@ you may need to run this command with <code>sudo</code>.
 generator. 
 </p><h4 id="">Changes to the app generator </h4><p>Command options and use largely remain the same, with the following
 exceptions:
-</p><ul><li>The <code>--sessions</code> option has been removed.</li><li>The <code>--jshtml</code> option has been removed.</li><li>The <code>--hogan</code> option has been added to
+</p><ul class="doclist"><li>The <code>--sessions</code> option has been removed.</li><li>The <code>--jshtml</code> option has been removed.</li><li>The <code>--hogan</code> option has been added to
 support <a href="http://twitter.github.io/hogan.js/">Hogan.js</a>.
 </li></ul><h4 id="">Example</h4><p>Execute the following command to create an Express 4 app:
 </p><pre class="js"><code>$ express app4
@@ -365,8 +323,7 @@ to be <code>node app.js</code> in Express 3.
 </p><p>Since the <code>app.js</code> file generated by the Express 4 generator is now a Node
 module, it can no longer be started independently as an app (unless you
 modify the code). It has to be to be loaded in a Node file and started
-via the Node file. The Node file happens to be the <code>./bin/www</code> in this
-case.
+via the Node file. The Node file is <code>./bin/www</code> in this case.
 </p><p>Neither the <code>bin</code> directory nor the extensionless <code>www</code> file is mandatory
 for creating an Express app or starting the app. They are just suggestions
 by the generator, so feel free to modify them to suit your needs.
@@ -385,9 +342,7 @@ following code.
 <code>"start": "node app.js"</code>.
 </p><p>With that, you just moved the functionality of <code>./bin/www</code> back to <code>app.js</code>.
 Not that it is recommended, but the exercise helps to understand
-how <code>./bin/www</code> works and why <code>app.js</code> won't start on its own anymore.
-
-</p></The></section><script>var _gaq = _gaq || [];
+how <code>./bin/www</code> works and why <code>app.js</code> won't start on its own anymore.</p></section></section><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-25235225-1']);
 _gaq.push(['_trackPageview']);
 
