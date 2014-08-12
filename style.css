@@ -63,6 +63,16 @@ h3 {
   padding-top: 50px;
   padding-bottom: 5px;
   font-weight: bold;
+  1.2 em;
+}
+
+h4 {
+  font-size: 1.1em;
+}
+
+h5 {
+  font-size: 1.0em;
+  color: #666;
 }
 
 /* links */
@@ -76,8 +86,12 @@ a:hover {
   text-decoration: underline;
 }
 
-:target {
+h3:target {
   padding-top: 100px;
+}
+
+h4:target {
+  padding-top: 50px;
 }
 
 nav a {
@@ -493,4 +507,8 @@ html[xmlns] .clearfix {
 .doctable tr th {
     background-color: #D8D8D8;
     font-size: 110%;
+}
+
+ul.doclist {
+  width: 500px;
 }
