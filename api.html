@@ -454,7 +454,7 @@ strip the mount point.
 </p><pre class="js"><code>// GET /search?q=something
 req.originalUrl
 // => "/search?q=something"</code></pre></section><h2>Response</h2><a name="response"></a><section><h3 id="res.status">res.status(code)</h3><p>Chainable alias of node's <code>res.statusCode=</code>.
-</p><pre class="js"><code>res.status(404).sendFile('path/to/404.png');</code></pre></section><section><h3 id="res.set">res.set(field, [value])</h3><p> 
+</p><pre class="js"><code>res.status(404).sendFile('/absolute/path/to/404.png');</code></pre></section><section><h3 id="res.set">res.set(field, [value])</h3><p> 
 Set header <code>field</code> to <code>value</code>,
 or pass an object to set multiple fields at once.</p><pre class="js"><code>res.set('Content-Type', 'text/plain');
 
@@ -640,7 +640,9 @@ and the Content-Disposition's "filename=" parameter will be set.
 
 res.attachment('path/to/logo.png');
 // Content-Disposition: attachment; filename="logo.png"
-// Content-Type: image/png</code></pre></section><section><h3 id="res.sendFile">res.sendFile(path, [options], [fn])</h3><p>Transfer the file at the given <code>path</code>.</p><p>Automatically defaults the Content-Type response header field based
+// Content-Type: image/png</code></pre></section><section><h3 id="res.sendFile">res.sendFile(path, [options], [fn])</h3><p>Transfer the file at the given <code>path</code>.</p><p><code>path</code> must be absolute unless the <code>root</code>
+option is specified.
+</p><p>Automatically defaults the Content-Type response header field based
 on the filename's extension. The callback <code>fn(err)</code> is
 invoked when the transfer is complete or when an error occurs.
 </p><p>Options:</p><ul><li><code>maxAge</code> in milliseconds defaulting to 0</li><li><code>root</code> root directory for relative filenames</li></ul><p>This method provides fine-grained support for file serving
