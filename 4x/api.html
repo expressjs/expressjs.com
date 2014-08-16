@@ -7,7 +7,7 @@ app.get('/', function(req, res){
 });
 
 app.listen(3000);</code></pre></section><h2>Application</h2><a name="application"></a><section><h3 id="app-settings">settings</h3><p>The following settings are provided to alter how Express will behave:
-</p><ul><li><code>env </code>Environment mode, defaults to <code>process.env.NODE_ENV</code> (NODE_ENV environment variable) or "development"</li><li><code>trust proxy </code>Enables reverse proxy support, disabled by default</li><li><code>jsonp callback name </code>Changes the default callback name of <code>?callback=</code></li><li><code>json replacer </code>JSON replacer callback, null by default</li><li><code>case sensitive routing </code>Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same</li><li><code>strict routing </code>Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router</li><li><code>view cache </code>Enables view template compilation caching, enabled in production by default</li><li><code>view engine </code>The default engine extension to use when omitted</li><li><code>views </code>The view directory path, defaulting to "process.cwd() + '/views'"</li><li><code>x-powered-by </code>Enables the <code>X-Powered-By: Express</code> HTTP header, enabled by default</li></ul></section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.
+</p><ul><li><code>env </code>Environment mode, defaults to <code>process.env.NODE_ENV</code> (NODE_ENV environment variable) or "development"</li><li><code>trust proxy </code>Enables reverse proxy support, disabled by default</li><li><code>subdomain offset</code>The number of dot-separated parts of the host to remove to access subdomain, two by default</li><li><code>jsonp callback name </code>Changes the default callback name of <code>?callback=</code></li><li><code>json replacer </code>JSON replacer callback, null by default</li><li><code>case sensitive routing </code>Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same</li><li><code>strict routing </code>Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router</li><li><code>view cache </code>Enables view template compilation caching, enabled in production by default</li><li><code>view engine </code>The default engine extension to use when omitted</li><li><code>views </code>The view directory path, defaulting to "process.cwd() + '/views'"</li><li><code>x-powered-by </code>Enables the <code>X-Powered-By: Express</code> HTTP header, enabled by default</li></ul></section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.
 </p><pre class="js"><code>app.set('title', 'My Site');
 app.get('title');
 // => "My Site"</code></pre></section><section><h3 id="app.get">app.get(name)</h3><p>Get setting <code>name</code> value.
@@ -141,7 +141,7 @@ otherwise passing an error to <code>next(err)</code>.
 });
 </code></pre><p>Alternatively you may pass only a <code>callback</code>, in which
 case you have the opportunity to alter the <code>app.param()</code> API.
-For example the <a href="http://github.com/visionmedia/express-params">express-params</a>
+For example the <a href="http://github.com/expressjs/express-params">express-params</a>
 defines the following callback which allows you to restrict parameters to a given
 regular expression. 
 </p><p>This example is a bit more advanced, checking if the second argument is a regular
@@ -640,7 +640,7 @@ and the Content-Disposition's "filename=" parameter will be set.
 
 res.attachment('path/to/logo.png');
 // Content-Disposition: attachment; filename="logo.png"
-// Content-Type: image/png</code></pre></section><section><h3 id="res.sendfile">res.sendfile(path, [options], [fn]])</h3><p>Transfer the file at the given <code>path</code>.</p><p>Automatically defaults the Content-Type response header field based
+// Content-Type: image/png</code></pre></section><section><h3 id="res.sendfile">res.sendfile(path, [options], [fn])</h3><p>Transfer the file at the given <code>path</code>.</p><p>Automatically defaults the Content-Type response header field based
 on the filename's extension. The callback <code>fn(err)</code> is
 invoked when the transfer is complete or when an error occurs.
 </p><p>Options:</p><ul><li><code>maxAge</code> in milliseconds defaulting to 0</li><li><code>root</code> root directory for relative filenames</li></ul><p>This method provides fine-grained support for file serving
@@ -810,7 +810,7 @@ router.get('/users/:user', function(req, res, next) {
 });
 </code></pre><p>Alternatively you may pass only a <code>callback</code>, in which
 case you have the opportunity to alter the <code>router.param()</code> API.
-For example the <a href="http://github.com/visionmedia/express-params">express-params</a>
+For example the <a href="http://github.com/expressjs/express-params">express-params</a>
 defines the following callback which allows you to restrict parameters to a given
 regular expression.
 </p><p>This example is a bit more advanced, checking if the second argument is a regular
@@ -897,13 +897,11 @@ would match "GET /commits/71dbb9c" as well as "GET /commits/71dbb9c..4c084f9".
   var from = req.params[0];
   var to = req.params[1] || 'HEAD';
   res.send('commit range ' + from + '..' + to);
-});</code></pre></section><h2>Middleware</h2><a name="middleware"></a><p>As of 4.x, Express no longer depends on Connect. All of Express' previously included middleware are now in separate repos. Please view <a href="https://github.com/senchalabs/connect#middleware">the list of middleware</a>. The only included middleware is now <code>express.static()</code>.</p></div></section><script>var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-25235225-1']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script><a id="top" href="#"><img src="/images/arrow.png"></a><footer><div id="footer-content">© 2012 TJ Holowaychuk. All rights reserved.</div></footer></body></html>
+});</code></pre></section><h2>Middleware</h2><a name="middleware"></a><p>As of 4.x, Express no longer depends on Connect. All of Express' previously included middleware are now in separate repos. Please view <a href="https://github.com/senchalabs/connect#middleware">the list of middleware</a>. The only included middleware is now <code>express.static()</code>.</p></div></section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i) {w[l]=w[l]||[];
+  w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;
+  j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})
+(window,document,'script','dataLayer','GTM-5XL76H');
+</script><a id="top" href="#"><img src="/images/arrow.png"></a><footer><div id="footer-content">© 2012-2014 TJ Holowaychuk, StrongLoop, and all Contributors. All rights reserved.</div></footer></body></html>
