@@ -2,19 +2,20 @@ section
   h3(id='proxies') Express behind proxies
 
   p.
-    Using Express behind a reverse proxy such as Varnish or Nginx
-    is trivial, however it does require configuration. By enabling the "trust proxy" setting via 
-    <code>app.enable('trust proxy')</code>,  Express will have knowledge that
-    it's sitting behind a proxy and that the <code>X-Forwarded-*</code> header
-    fields may be trusted, which otherwise may be easily spoofed.
+    Using Express behind a reverse proxy (such as Varnish or Nginx)
+    is trivial; however, it does require configuration. By enabling the 
+    "trust proxy" setting via <code>app.enable('trust proxy')</code>, Express 
+    will have knowledge that it's sitting behind a proxy and that the 
+    <code>X-Forwarded-*</code> header fields may be trusted. (Otherwise, 
+    they are easily spoofed.)
 
   p.
-    Enabling this setting has several subtle effects. The first of which is
+    Enabling this setting has several subtle effects. The first is
     that <code>X-Forwarded-Proto</code> may be set by the reverse proxy to
-    tell the app that it is https or simply http. This value is reflected
+    tell the app whether it is https or simply http. This value is reflected
     by <a href="/api#req.protocol">req.protocol</a>.
 
   p.
-    The second change this makes is the <a href="/api#req.ip">req.ip</a> 
+    The second change is that the <a href="/api#req.ip">req.ip</a> 
     and <a href="/api#req.ips">req.ips</a> values will be populated with
     <code>X-Forwarded-For</code>'s list of addresses. 

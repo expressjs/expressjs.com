@@ -1,5 +1,5 @@
 section
-  h3(id='res.sendfile') res.sendfile(path, [options], [fn])
+  h3(id='res.sendFile') res.sendFile(path, [options], [fn])
 
   p Transfer the file at the given <code>path</code>.
 
@@ -8,10 +8,14 @@ section
     on the filename's extension. The callback <code>fn(err)</code> is
     invoked when the transfer is complete or when an error occurs.
 
+  p.
+    By default the <code>path</code> must be an absolute filename. Set the <code>root</code>
+    option to use relative paths.
+
   p Options:
 
   ul
-    li <code>maxAge</code> in milliseconds defaulting to 0
+    li <code>maxAge</code> in milliseconds (default: 0)
     li <code>root</code> root directory for relative filenames
 
   p.
@@ -25,7 +29,7 @@ section
 
       req.user.mayViewFilesFrom(uid, function(yes){
         if (yes) {
-          res.sendfile('/uploads/' + uid + '/' + file);
+          res.sendFile('/uploads/' + uid + '/' + file);
         } else {
           res.send(403, 'Sorry! you cant see that.');
         }

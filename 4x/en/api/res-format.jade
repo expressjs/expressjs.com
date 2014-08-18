@@ -4,20 +4,20 @@ section
   p.
     Performs content-negotiation on the request Accept header
     field when present. This method uses <code>req.accepted</code>, an array of
-    acceptable types ordered by their quality values, otherwise the
-    first callback is invoked. When no match is performed the server
+    acceptable types ordered by their quality values. Otherwise, the
+    first callback is invoked. When no match is performed, the server
     responds with 406 "Not Acceptable", or invokes the <code>default</code>
     callback.
 
   p.
-    The Content-Type is set for you when a callback is selected,
-    however you may alter this within the callback using <code>res.set()</code>
+    The Content-Type is set for you when a callback is selected.
+    However, you may alter this within the callback using <code>res.set()</code>
     or <code>res.type()</code> etcetera.
 
   p.
     The following example would respond with <code>{ "message": "hey" }</code>
-    when the Accept header field is set to "application/json" or "*/json",
-    however if "*/*" is given then "hey" will be the response.
+    when the Accept header field is set to "application/json" or "*/json"
+    (however if "*/*" is given, then "hey" will be the response).
 
   +js.
     res.format({
@@ -35,8 +35,8 @@ section
     });
 
   p.
-    In addition to canonicalized MIME types you may also
-    use extnames mapped to these types, providing a slightly
+    In addition to canonicalized MIME types, you may also
+    use extnames mapped to these types for a slightly
     less verbose implementation:
 
   +js.

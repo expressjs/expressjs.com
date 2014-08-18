@@ -3,19 +3,19 @@ section
 
   p.
     The <code>app.VERB()</code> methods provide the routing functionality
-    in Express, where <strong>VERB</strong> is one of the HTTP verbs, such
-    as <code>app.post()</code>. Multiple callbacks may be given, all are treated
-    equally, and behave just like middleware, with the one exception that
+    in Express, where <strong>VERB</strong> is one of the HTTP verbs (such
+    as <code>app.post()</code>). Multiple callbacks may be given; all are treated
+    equally, and behave just like middleware. The only exception is that
     these callbacks may invoke <code>next('route')</code> to bypass the
     remaining route callback(s). This mechanism can be used to perform pre-conditions
-    on a route then pass control to subsequent routes when there is no reason to proceed
-    with the route matched.
+    on a route, then pass control to subsequent routes if there's no reason to proceed
+    with the current route.
 
   p.
     The following snippet illustrates the most simple route definition possible. Express
     translates the path strings to regular expressions, used internally to match incoming requests.
-    Query strings are <em>not</em> considered when peforming these matches, for example "GET /"
-    would match the following route, as would "GET /?name=tobi".
+    Query strings are <em>not</em> considered when peforming these matches. For example, "GET /"
+    would match the following route, as would "GET /?name=tobi":
 
   +js.
     app.get('/', function(req, res){
@@ -44,7 +44,7 @@ section
     })
 
   p.
-    If you have multiple common middleware for a route, you can use the route api with <code>all</code>.
+    If you have multiple common middleware for a route, you can use the route API with <code>all</code>.
 
   +js.
     var middleware = [loadForum, loadThread];
