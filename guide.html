@@ -1,27 +1,29 @@
-<!DOCTYPE html><html><head><title>Express - guide</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">express</a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html">API Reference</a><a href="/guide.html" class="active">Guide</a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><ul id="menu"><li><ul class="active"><li><a href="#intro">Getting started</a></li><li><a href="#executable">express(1) executable</a></li><li><a href="#error-handling">Error handling</a></li><li><a href="#users-online">Users online count</a></li><li><a href="#proxies">Express behind proxies</a></li><li><a href="#debugging-express">Debugging Express</a></li></ul></li></ul><section><h3 id="intro">Getting started</h3><p>With node installed (<a href="http://nodejs.org/download">download</a>),
-get your first application started by creating a directory somewhere
-on your machine:
+<!DOCTYPE html><html><head><title>Express - guide</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">express</a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html">API Reference</a><a href="/guide.html" class="active">Guide</a><a href="/migrating-4.html">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><ul id="menu"><li><ul class="active"><li><a href="#intro">Getting started</a></li><li><a href="#executable">express(1) executable</a></li><li><a href="#error-handling">Error handling</a></li><li><a href="#users-online">Users online count</a></li><li><a href="#proxies">Express behind proxies</a></li><li><a href="#debugging-express">Debugging Express</a></li></ul></li></ul><section><h3 id="intro">Getting started</h3><p>First, if you have not already done so,
+<a href="http://nodejs.org/download">download and install Node</a>.
+Then, to start your first application, create a directory on your machine:
 </p><pre class="js"><code>$ mkdir hello-world
-</code></pre><p>In this same directory, you'll be defining the application "package", which
-is no different than any other node package. You'll need a package.json
-file in the directory, with express defined as a dependency. You may use
-<code>npm info express version</code> to fetch the latest version. This is
-preferred over "3.x" (as below) to prevent any future surprises.
+</code></pre><p>In this same directory you'll be defining the application "package", which
+is the same as any other Node package. You'll need a
+<code>package.json</code> file in the directory, with <code>express</code>
+as a dependency. 
 </p><pre class="js"><code>{
   "name": "hello-world",
   "description": "hello world test app",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "express": "3.x"
+    "express": "4.x"
   }
 }
-</code></pre><p>Now that you have a package.json file, you can use <code>npm(1)</code> 
-to install the dependencies. In this case, that's just Express:
+</code></pre><p>In general, as a best practice, use <code>npm info express version</code> to
+determine the latest version of Express, and then use the version number
+returned instead of "4.x" to prevent future surprises.
+</p><p>Now that you have a <code>package.json</code> file in this directory use
+<code>npm</code> to install the dependencies, in this case just Express:
 </p><pre class="js"><code>$ npm install
-</code></pre><p>Once npm finishes, you'll have a localized Express 3.x dependency in
-the ./node_modules directory. You can verify this with <code>npm ls</code>
-(as shown in the following snippet) to display a tree of Express and its
+</code></pre><p>Once npm finishes you'll have a localized Express dependency in
+the <code>./node_modules</code> directory.  Verify this with <code>npm ls</code>
+as shown in the following snippet displaying a tree of Express and its
 dependencies.
 </p><pre class="js"><code>$ npm ls
 hello-world@0.0.1 /private/tmp
@@ -43,9 +45,8 @@ hello-world@0.0.1 /private/tmp
   │ └── crc@0.2.0
   └─┬ send@0.0.3
     └── mime@1.2.6
-    </code></pre><p>Now, to create the application itself! Create a file named app.js or server.js 
-(whichever you prefer). Require express, and then create a new application with
-<code>express()</code>:
+    </code></pre><p>Now to create the application itself! Create a file named <code>app.js</code> or <code>server.js</code>,
+whichever you prefer, require Express and then create a new application with <code>express()</code>:
 </p><pre class="js"><code>var express = require('express');
 var app = express();
 </code></pre><p>With the new application instance you can start defining routes via <code>app.VERB()</code>,
