@@ -63,7 +63,6 @@ h3 {
   padding-top: 50px;
   padding-bottom: 5px;
   font-weight: bold;
-  1.2 em;
 }
 
 h4 {
@@ -491,22 +490,22 @@ html[xmlns] .clearfix {
 }
 
 .doctable {
-    margin: 1em 1em 1em 0;
-    border: 1px solid #666;
-    border-collapse: collapse;
-    background-color: #F9F9F9;
-    empty-cells:show;
+  margin: 1em 1em 1em 0;
+  border: 1px solid #666;
+  border-collapse: collapse;
+  background-color: #F9F9F9;
+  empty-cells:show;
 }
  
 .doctable td, .doctable th {
-    padding: 7px;
-    line-height: 120%;
-    vertical-align: top;
+  padding: 7px;
+  line-height: 120%;
+  vertical-align: top;
 }
  
 .doctable tr th {
-    background-color: #D8D8D8;
-    font-size: 110%;
+  background-color: #D8D8D8;
+  font-size: 110%;
 }
 
 ul.doclist {

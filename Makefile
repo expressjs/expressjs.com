@@ -9,7 +9,7 @@ HTML = index.html \
 	faq.html \
 	3x/api.html \
 	4x/api.html \
-        migrating-4.html
+	migrating-4.html
 
 docs: $(HTML)
 
