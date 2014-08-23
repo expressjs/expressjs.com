@@ -20,7 +20,7 @@ Express versioning and releases are not affected by updates in the
 dependent middleware. 
 </p><p>With the built-in middleware gone, you must explicitly add all the
 middleware required to run your app.  Simply follow these steps:
-</p><ol><li>Install the module: <code>npm install -save <module-name></code></li><li>In your app, require the module: <code>require('module-name');</code></li><li>Use the module according to its documentation: <code>app.use( ... );</code></li></ol><p>The following table lists Express 3 middleware and their counterparts in
+</p><ol><li>Install the module: <code>npm install --save &lt;module-name&gt;</code></li><li>In your app, require the module: <code>require('module-name');</code></li><li>Use the module according to its documentation: <code>app.use( ... );</code></li></ol><p>The following table lists Express 3 middleware and their counterparts in
 Express 4.
 </p><table class="doctable" style="width: 400px;" border="1">
 <tr><th>Express 3</th><th>Express 4</th></tr>
@@ -342,13 +342,13 @@ following code.
 <code>"start": "node app.js"</code>.
 </p><p>With that, you just moved the functionality of <code>./bin/www</code> back to <code>app.js</code>.
 Not that it is recommended, but the exercise helps to understand
-how <code>./bin/www</code> works and why <code>app.js</code> won't start on its own anymore.</p></section></section><script>var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-25235225-1']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script><a id="top" href="#"><img src="/images/arrow.png"></a><footer><div id="footer-content">© 2012 TJ Holowaychuk. All rights reserved.</div></footer></body></html>
+how <code>./bin/www</code> works and why <code>app.js</code> won't start on its own anymore.</p></section></section>
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H"
+height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+</noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5XL76H');</script>
+<a id="top" href="#"><img src="/images/arrow.png"></a><footer>
+<div id="footer-content">© 2012 TJ Holowaychuk. All rights reserved.</div></footer></body></html>
