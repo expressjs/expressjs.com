@@ -2,15 +2,16 @@ section
   h3(id='app.mountpath') app.mountpath
 
   p.
-    Render a <code>view</code> with a callback responding with
-    the rendered string. This is the app-level variant of <code>res.render()</code>,
-    and otherwise behaves the same way.
+    This property refers to the path on which a sub app was mounted.
+    It is analogous to the <a href="#req.baseUrl">baseUrl</a> property of the <code>req</code> object.
 
   +js.
-    app.render('email', function(err, html){
-      // ...
-    });
 
-    app.render('email', { name: 'Tobi' }, function(err, html){
-      // ...
-    });
+    var admin = express();
+
+    admin.get('/', function (req, res) {
+      console.log(admin.mountpath); // prints "/admin"
+      res.send('Admin Homepage');
+    })
+
+    app.use('/admin', admin);
