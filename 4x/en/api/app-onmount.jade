@@ -2,7 +2,7 @@ section
   h3(id='app.onmount') app.on('mount', callback(parent))
 
   p.
-    The <code>mount</code> event is fired, when a sub app is mounted on a parent app successfully. The parent app is passed to the callback function.
+    The <code>mount</code> event is fired on a sub app, when it is mounted on a parent app. The parent app is passed to the callback function.
 
   +js.
 
@@ -10,7 +10,7 @@ section
 
     admin.on('mount', function (parent) {
       console.log('Admin Mounted');
-      console.log(parent); // refers to app
+      console.log(parent); // refers to the parent app
     });
 
     admin.get('/', function (req, res) {
