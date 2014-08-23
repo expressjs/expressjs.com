@@ -2,16 +2,41 @@ section
   h3(id='app.mountpath') app.mountpath
 
   p.
-    This property refers to the path on which a sub app was mounted.
-    It is analogous to the <a href="#req.baseUrl">baseUrl</a> property of the <code>req</code> object.
+    This property refers to the path pattern(s) on which a sub app was mounted.
 
   +js.
 
     var admin = express();
 
     admin.get('/', function (req, res) {
-      console.log(admin.mountpath); // prints "/admin"
+      console.log(admin.mountpath); // /admin
       res.send('Admin Homepage');
     })
 
-    app.use('/admin', admin);
+    app.use('/admin', admin); // mount the sub app
+
+  p.
+    It is similar to the <a href="#req.baseUrl">baseUrl</a> property of the <code>req</code> object, except <code>req.baseUrl</code> returns the matched URL path, instead of the matched pattern(s).
+
+  p.
+    If a sub app is mounted on multiple path patterns, <code>app.mountpath</code> returns the list of patterns it is mounted on, as shown in the following example. 
+
+  +js.
+
+    var admin = express();
+
+    admin.get('/', function (req, res) {
+      console.log(admin.mountpath); // [ '/adm*n', '/manager' ]
+      res.send('Admin Homepage');
+    })
+
+    var secret = express();
+    secret.get('/', function (req, res) {
+      console.log(secret.mountpath); // /secr*t
+      res.send('Admin Secret');
+    });
+
+    admin.use('/secr*t', secret); // load the 'secret' router on '/secr*t', on the 'admin' sub app
+    app.use(['/adm*n', '/manager'], admin); // load the 'admin' router on '/adm*n' and '/manager', on the main app
+
+
