@@ -1,0 +1,16 @@
+section
+  h3(id='req.baseUrlUrl') req.baseUrl
+
+  p.
+    This property refers to the path on which a router instance was mounted.
+    It is analogous to the <a href="#app.mountpath">mountpath</a> property of the <code>app</code> object.
+
+  +js.
+    var greet = express.Router();
+
+    greet.get('/jp', function (req, res) {
+      console.log(req.baseUrl); // prints "/greet"
+      res.send('Konichiwa!');
+    });
+
+    app.use('/greet', greet);
