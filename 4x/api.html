@@ -294,7 +294,7 @@ admin.get('/', function (req, res) {
 })
 
 app.use('/admin', admin); // mount the sub app
-</code></pre><p>It is similar to the <a href="#req.baseUrl">baseUrl</a> property of the <code>req</code> object, except <code>req.baseUrl</code> returns the matched URL path, instead of the matched pattern(s).
+</code></pre><p>It is similar to the <a href="#req.baseUrl"><code>baseUrl</code></a> property of the <code>req</code> object, except <code>req.baseUrl</code> returns the matched URL path, instead of the matched pattern(s).
 </p><p>If a sub app is mounted on multiple path patterns, <code>app.mountpath</code> returns the list of patterns it is mounted on, as shown in the following example. 
 </p><pre class="js"><code>var admin = express();
 
@@ -500,7 +500,7 @@ greet.get('/jp', function (req, res) {
 app.use('/greet', greet); // load the router on '/greet'
 </code></pre><p>Even if a path pattern or a set of path patterns were used to load the router, the matched string is returned as the <code>baseUrl</code>, instead of the pattern(s). In the following example, the <code>greet</code> router is loaded on two path patterns.
 </p><pre class="js"><code>app.use(['/gre+t', '/hel{2}o'], greet); // load the router on '/gre+t' and '/hel{2}o'
-</code></pre><p>When the request is made to <code>/greet/jp</code>, <code>req.baseUrl</code> will be equal to "/greet"; and when the request is made to <code>/hello/jp</code>, it will be equal to "/hello".</p><p><code>req.baseUrl</code> is similar to the <a href="#app.mountpath">mountpath</a> property of the <code>app</code> object, except <code>app.mountpath</code> returns the matched path pattern(s).</p></section><h2>Response</h2><a name="response"></a><section><h3 id="res.status">res.status(code)</h3><p>Chainable alias of node's <code>res.statusCode=</code>.
+</code></pre><p>When the request is made to <code>/greet/jp</code>, <code>req.baseUrl</code> will be equal to "/greet"; and when the request is made to <code>/hello/jp</code>, it will be equal to "/hello".</p><p><code>req.baseUrl</code> is similar to the <a href="#app.mountpath"><code>mountpath</code></a> property of the <code>app</code> object, except <code>app.mountpath</code> returns the matched path pattern(s).</p></section><h2>Response</h2><a name="response"></a><section><h3 id="res.status">res.status(code)</h3><p>Chainable alias of node's <code>res.statusCode=</code>.
 </p><pre class="js"><code>res.status(404).sendFile('/absolute/path/to/404.png');</code></pre></section><section><h3 id="res.set">res.set(field, [value])</h3><p> 
 Set header <code>field</code> to <code>value</code>,
 or pass an object to set multiple fields at once.</p><pre class="js"><code>res.set('Content-Type', 'text/plain');
