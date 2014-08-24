@@ -10,7 +10,7 @@ Setup:
 $ npm install -g serve
 $ npm install
 $ make
-$ serve . &
+$ serve .
 $ open http://localhost:3000
 ```
 
@@ -22,8 +22,8 @@ $ make
 
 ## Contributing
 
-  - __don't__ edit the HTML directly, edit the _jade_.
-  - don't commit any HTML changes, __only jade changes__.
+  - __Don't__ edit the HTML directly, edit the _jade_.
+  - Don't commit any HTML changes, __only jade changes__.
 
 ## Showcasing
 
