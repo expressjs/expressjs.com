@@ -197,7 +197,7 @@ section
     router.get('/about', function(req, res) {
       res.send('About birds');
     })
-    
+
     module.exports = router;
 
   p.
@@ -304,9 +304,9 @@ section
     var user = require('./routes/user');
     var http = require('http');
     var path = require('path');
-    
+
     var app = express();
-    
+
     // all environments
     app.set('port', process.env.PORT || 3000);
     app.set('views', path.join(__dirname, 'views'));
@@ -318,12 +318,12 @@ section
     app.use(express.bodyParser());
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
-    
+
     // development only
     if ('development' == app.get('env')) {
       app.use(express.errorHandler());
     }
-    
+
     app.get('/', routes.index);
     app.get('/users', user.list);
     
