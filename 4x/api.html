@@ -766,8 +766,8 @@ res.render('user', { name: 'Tobi' }, function(err, html){
 </p><p>Routers behave like middleware themselves and can be ".use()'d" by the app or in other routers.
 </p><p>Create a new router by using "express.Router()"
 </p><pre class="js"><code>var router = express.Router([options]);
-</code></pre><p>Options is an optional object to alter the route matching behavior of the router.
-</p><ul><li><code>caseSensitive </code>Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same</li><li><code>strict </code>Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router</li></ul><p>The router can have middleware and http VERB routes added just like an application.
+</code></pre><p>Options is an optional object to alter the behavior of the router.
+</p><ul><li><code>caseSensitive </code>Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same</li><li><code>strict </code>Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router</li><li> <code>mergeParams </code>Ensure the <code>req.params</code> values from the parent router are preserved. If the parent and the child have conflicting param names, the child's value take precedence. Defaults to <code>false</code>.</li></ul><p>The router can have middleware and http VERB routes added just like an application.
 </p><pre class="js"><code>// invoked for any requests passed to this router
 router.use(function(req, res, next) {
   // .. some logic here .. like any other middleware

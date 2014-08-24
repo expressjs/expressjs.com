@@ -14,7 +14,7 @@ section
     var router = express.Router([options]);
 
   p.
-    Options is an optional object to alter the route matching behavior of the router.
+    Options is an optional object to alter the behavior of the router.
 
   ul
     li
@@ -23,6 +23,9 @@ section
     li
       code strict 
       | Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router
+    li 
+      code mergeParams 
+      | Ensure the <code>req.params</code> values from the parent router are preserved. If the parent and the child have conflicting param names, the child's value take precedence. Defaults to <code>false</code>.
 
   p.
     The router can have middleware and http VERB routes added just like an application.
