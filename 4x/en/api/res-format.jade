@@ -2,15 +2,17 @@ section
   h3(id='res.format') res.format(object)
   
   p.
-    Performs content-negotiation on the request Accept header
-    field when present. This method uses <code>req.accepted</code>, an array of
-    acceptable types ordered by their quality values. Otherwise, the
-    first callback is invoked. When no match is performed, the server
+    Performs content-negotiation on the Accept HTTP header on the request object, 
+    when present. It uses <a href="#req.accepts"><code>req.accepts()</code></a> 
+    to select a handler for the request, 
+    based on the acceptable types ordered by their quality values. 
+    If the header is not specified, the
+    first callback is invoked. When no match is found, the server
     responds with 406 "Not Acceptable", or invokes the <code>default</code>
     callback.
 
   p.
-    The Content-Type is set for you when a callback is selected.
+    The Content-Type response header is set for you when a callback is selected.
     However, you may alter this within the callback using <code>res.set()</code>
     or <code>res.type()</code> etcetera.
 
@@ -31,12 +33,17 @@ section
     
       'application/json': function(){
         res.send({ message: 'hey' });
+      },
+
+      'default': function() {
+        // log the request and respond with 406
+        res.send(406, 'Not Acceptable');
       }
     });
 
   p.
     In addition to canonicalized MIME types, you may also
-    use extnames mapped to these types for a slightly
+    use extension names mapped to these types for a slightly
     less verbose implementation:
 
   +js.

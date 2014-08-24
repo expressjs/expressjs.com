@@ -638,13 +638,15 @@ literal value.
 res.type('html');
 res.type('json');
 res.type('application/json');
-res.type('png');</code></pre></section><section><h3 id="res.format">res.format(object)</h3><p>Performs content-negotiation on the request Accept header
-field when present. This method uses <code>req.accepted</code>, an array of
-acceptable types ordered by their quality values. Otherwise, the
-first callback is invoked. When no match is performed, the server
+res.type('png');</code></pre></section><section><h3 id="res.format">res.format(object)</h3><p>Performs content-negotiation on the Accept HTTP header on the request object, 
+when present. It uses <a href="#req.accepts"><code>req.accepts()</code></a> 
+to select a handler for the request, 
+based on the acceptable types ordered by their quality values. 
+If the header is not specified, the
+first callback is invoked. When no match is found, the server
 responds with 406 "Not Acceptable", or invokes the <code>default</code>
 callback.
-</p><p>The Content-Type is set for you when a callback is selected.
+</p><p>The Content-Type response header is set for you when a callback is selected.
 However, you may alter this within the callback using <code>res.set()</code>
 or <code>res.type()</code> etcetera.
 </p><p>The following example would respond with <code>{ "message": "hey" }</code>
@@ -661,10 +663,15 @@ when the Accept header field is set to "application/json" or "*/json"
   
   'application/json': function(){
     res.send({ message: 'hey' });
+  },
+  
+  'default': function() {
+    // log the request and respond with 406
+    res.send(406, 'Not Acceptable');
   }
 });
 </code></pre><p>In addition to canonicalized MIME types, you may also
-use extnames mapped to these types for a slightly
+use extension names mapped to these types for a slightly
 less verbose implementation:
 </p><pre class="js"><code>res.format({
   text: function(){
@@ -678,7 +685,8 @@ less verbose implementation:
   json: function(){
     res.send({ message: 'hey' });
   }
-});</code></pre></section><section><h3 id="res.attachment">res.attachment([filename])</h3><p>Sets the Content-Disposition header field to "attachment". If
+});
+</code></pre></section><section><h3 id="res.attachment">res.attachment([filename])</h3><p>Sets the Content-Disposition header field to "attachment". If
 a <code>filename</code> is given, then the Content-Type will be
 automatically set based on the extname via <code>res.type()</code>,
 and the Content-Disposition's "filename=" parameter will be set.
