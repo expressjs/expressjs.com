@@ -1,5 +1,5 @@
 section
-  h3(id='res.json') res.json([status|body], [body])
+  h3(id='res.json') res.json([body])
   
   p.
     Send a JSON response. This method is identical
@@ -11,4 +11,4 @@ section
   +js.
     res.json(null)
     res.json({ user: 'tobi' })
-    res.json(500, { error: 'message' })
+    res.status(500).json({ error: 'message' })

@@ -604,14 +604,14 @@ body string is assigned for you. For example 200 will
 respond will the text "OK", 404 with "Not Found", and so on.
 </p><pre class="js"><code>res.send(200)
 res.send(404)
-res.send(500)</code></pre></section><section><h3 id="res.json">res.json([status|body], [body])</h3><p>Send a JSON response. This method is identical
+res.send(500)</code></pre></section><section><h3 id="res.json">res.json([body])</h3><p>Send a JSON response. This method is identical
 to <code>res.send()</code> when an object or
 array is passed. However, it may be used for
 explicit JSON conversion of non-objects, such as null, undefined, etc.
 (although these are technically not valid JSON).
 </p><pre class="js"><code>res.json(null)
 res.json({ user: 'tobi' })
-res.json(500, { error: 'message' })</code></pre></section><section><h3 id="res.jsonp">res.jsonp([status|body], [body])</h3><p>Send a JSON response with JSONP support. This method is identical
+res.status(500).json({ error: 'message' })</code></pre></section><section><h3 id="res.jsonp">res.jsonp([status|body], [body])</h3><p>Send a JSON response with JSONP support. This method is identical
 to <code>res.json()</code>, except that it opts-in to JSONP callback
 support.
 </p><pre class="js"><code>res.jsonp(null)
