@@ -2,7 +2,9 @@ section
   h3(id='res.status') res.status(code)
   
   p.
-    Chainable alias of node's <code>res.statusCode=</code>.
+    Chainable alias of node's <code>res.statusCode</code>. Use this method to set the HTTP status for the response.
 
   +js.
+    res.status(403).end();
+    res.status(400).send('Bad Request');
     res.status(404).sendFile('/absolute/path/to/404.png');
