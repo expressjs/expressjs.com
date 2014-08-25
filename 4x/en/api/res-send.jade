@@ -1,16 +1,16 @@
 section
-  h3(id='res.send') res.send([body|status], [body])
+  h3(id='res.send') res.send([body])
   
   p.
-    Send a response.
+    Send a response. The response status defaults to <code>200</code>, use the chainable <code>res.status()</code> method to set a custom status.
 
   +js.
     res.send(new Buffer('whoop'));
     res.send({ some: 'json' });
     res.send('<p>some html</p>');
-    res.send(404, 'Sorry, we cannot find that!');
-    res.send(500, { error: 'something blew up' });
-    res.send(200);
+    res.status(404).send('Sorry, we cannot find that!');
+    res.status(500).send({ error: 'something blew up' });
+    res.status(200).end();
 
   p.
     This method performs a myriad of
