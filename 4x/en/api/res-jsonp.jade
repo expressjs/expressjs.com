@@ -1,5 +1,5 @@
 section
-  h3(id='res.jsonp') res.jsonp([status|body], [body])
+  h3(id='res.jsonp') res.jsonp([body])
   
   p.
     Send a JSON response with JSONP support. This method is identical
@@ -13,7 +13,7 @@ section
     res.jsonp({ user: 'tobi' })
     // => { "user": "tobi" }
 
-    res.jsonp(500, { error: 'message' })
+    res.status(500).jsonp({ error: 'message' })
     // => { "error": "message" }
 
   p.
@@ -30,6 +30,6 @@ section
     app.set('jsonp callback name', 'cb');
 
     // ?cb=foo
-    res.jsonp(500, { error: 'message' })
+    res.status(500).jsonp({ error: 'message' })
     // => foo({ "error": "message" })
     

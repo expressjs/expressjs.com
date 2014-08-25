@@ -611,7 +611,7 @@ explicit JSON conversion of non-objects, such as null, undefined, etc.
 (although these are technically not valid JSON).
 </p><pre class="js"><code>res.json(null)
 res.json({ user: 'tobi' })
-res.status(500).json({ error: 'message' })</code></pre></section><section><h3 id="res.jsonp">res.jsonp([status|body], [body])</h3><p>Send a JSON response with JSONP support. This method is identical
+res.status(500).json({ error: 'message' })</code></pre></section><section><h3 id="res.jsonp">res.jsonp([body])</h3><p>Send a JSON response with JSONP support. This method is identical
 to <code>res.json()</code>, except that it opts-in to JSONP callback
 support.
 </p><pre class="js"><code>res.jsonp(null)
@@ -620,7 +620,7 @@ support.
 res.jsonp({ user: 'tobi' })
 // => { "user": "tobi" }
 
-res.jsonp(500, { error: 'message' })
+res.status(500).jsonp({ error: 'message' })
 // => { "error": "message" }
 </code></pre><p>By default, the JSONP callback name is simply <code>callback</code>.
 However, you may alter this with the <a href="#app-settings">jsonp callback name</a>
@@ -633,8 +633,9 @@ res.jsonp({ user: 'tobi' })
 app.set('jsonp callback name', 'cb');
 
 // ?cb=foo
-res.jsonp(500, { error: 'message' })
-// => foo({ "error": "message" })</code></pre></section><section><h3 id="res.type">res.type(type)</h3><p>Sets the Content-Type to the mime lookup of <code>type</code>,
+res.status(500).jsonp({ error: 'message' })
+// => foo({ "error": "message" })
+</code></pre></section><section><h3 id="res.type">res.type(type)</h3><p>Sets the Content-Type to the mime lookup of <code>type</code>,
 or when "/" is present the Content-Type is simply set to this
 literal value.
 </p><pre class="js"><code>res.type('.html');
