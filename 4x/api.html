@@ -582,7 +582,6 @@ res.send({ some: 'json' });
 res.send('<p>some html</p>');
 res.status(404).send('Sorry, we cannot find that!');
 res.status(500).send({ error: 'something blew up' });
-res.status(200).end();
 </code></pre><p>This method performs a myriad of
 useful tasks for simple non-streaming responses such
 as automatically assigning the Content-Length unless
@@ -598,15 +597,8 @@ Content-Type is set defaulted to "text/html":
 </p><pre class="js"><code>res.send('<p>some html</p>');
 </code></pre><p>When an <code>Array</code> or <code>Object</code> is
 given Express will respond with the JSON representation:
-</p><pre class="js"><code>res.send({ user: 'tobi' })
-res.send([1,2,3])
-</code></pre><p>Finally when a <code>Number</code> is given without
-any of the previously mentioned bodies, then a response
-body string is assigned for you. For example 200 will
-respond will the text "OK", 404 with "Not Found", and so on.
-</p><pre class="js"><code>res.send(200)
-res.send(404)
-res.send(500)</code></pre></section><section><h3 id="res.json">res.json([body])</h3><p>Send a JSON response. This method is identical
+</p><pre class="js"><code>res.send({ user: 'tobi' });
+res.send([1,2,3]);</code></pre></section><section><h3 id="res.json">res.json([body])</h3><p>Send a JSON response. This method is identical
 to <code>res.send()</code> when an object or
 array is passed. However, it may be used for
 explicit JSON conversion of non-objects, such as null, undefined, etc.
