@@ -364,17 +364,22 @@ req.param('name')
 // => "tobi"
 </code></pre><p>Lookup is performed in the following order:</p><ul><li><code>req.params</code></li><li><code>req.body</code></li><li><code>req.query</code></li></ul><p>Direct access to <code>req.body</code>, <code>req.params</code>,
 and <code>req.query</code> should be favoured for clarity - unless
-you truly accept input from each object.</p></section><section><h3 id="req.route">req.route</h3><p>The currently matched <code>Route</code> containing
-several properties (such as the route's original path
-string, the regexp generated, and so on).
-</p><pre class="js"><code>app.get('/user/:id?', function(req, res){
+you truly accept input from each object.</p></section><section><h3 id="req.route">req.route</h3><p>The currently matched <code>Route</code>.
+</p><pre class="js"><code>app.get('/user/:id?', function userIdHandler(req, res){
   console.log(req.route);
-});
+  res.send('GET');
+})
 </code></pre><p>Example output from the previous snippet:
 </p><pre class="js"><code>{ path: '/user/:id?',
-  keys: [ { name: 'id', optional: true } ],
-  regexp: /^\/user(?:\/([^\/]+?))?\/?$/i,
-  params: [ id: '12' ] }</code></pre></section><section><h3 id="req.cookies">req.cookies</h3><p>When the <code>cookieParser()</code> middleware is used, this object
+  stack:
+   [ { handle: [Function: userIdHandler],
+       name: 'userIdHandler',
+       params: undefined,
+       path: undefined,
+       keys: [],
+       regexp: /^\/?$/i,
+       method: 'get' } ],
+  methods: { get: true } }</code></pre></section><section><h3 id="req.cookies">req.cookies</h3><p>When the <code>cookieParser()</code> middleware is used, this object
 defaults to <code>{}</code>. Otherwise, it contains the cookies sent by
 the user-agent.
 </p><pre class="js"><code>// Cookie: name=tj
