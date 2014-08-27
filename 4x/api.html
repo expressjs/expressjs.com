@@ -691,7 +691,7 @@ and the Content-Disposition's "filename=" parameter will be set.
 
 res.attachment('path/to/logo.png');
 // Content-Disposition: attachment; filename="logo.png"
-// Content-Type: image/png</code></pre></section><section><h3 id="res.sendFile">res.sendFile(path, [options], [fn])</h3><p>Transfer the file at the given <code>path</code>.</p><p>Automatically defaults the Content-Type response header field based
+// Content-Type: image/png</code></pre></section><section><h3 id="res.sendFile">res.sendFile(path, [options], [fn])</h3><div class="notice"><b>Note</b>: <code>res.sendFile</code> requires Express version to be at least 4.8.0</div><p>Transfer the file at the given <code>path</code>.</p><p>Automatically defaults the Content-Type response header field based
 on the filename's extension. The callback <code>fn(err)</code> is
 invoked when the transfer is complete or when an error occurs.
 </p><p>By default the <code>path</code> must be an absolute filename. Set the <code>root</code>
