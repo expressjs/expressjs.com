@@ -668,7 +668,8 @@ when the Accept header field is set to "application/json" or "*/json"
   
   'default': function() {
     // log the request and respond with 406
-    res.send(406, 'Not Acceptable');
+    res.status(406);
+    res.send('Not Acceptable');
   }
 });
 </code></pre><p>In addition to canonicalized MIME types, you may also
@@ -711,7 +712,8 @@ as illustrated in the following example:
     if (yes) {
       res.sendFile('/uploads/' + uid + '/' + file);
     } else {
-      res.send(403, 'Sorry! you cant see that.');
+      res.status(403);
+      res.send('Sorry! you cant see that.');
     }
   });
 });

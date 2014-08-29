@@ -37,7 +37,8 @@ section
 
       'default': function() {
         // log the request and respond with 406
-        res.send(406, 'Not Acceptable');
+        res.status(406);
+        res.send('Not Acceptable');
       }
     });
 

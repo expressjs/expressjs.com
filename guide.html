@@ -117,7 +117,8 @@ except that must be defined with an arity of 4 (that is the signature
 <code>(err, req, res, next)</code>):
 </p><pre class="js"><code>app.use(function(err, req, res, next){
   console.error(err.stack);
-  res.send(500, 'Something broke!');
+  re.status(500);
+  res.send('Something broke!');
 });
 </code></pre><p>Though not mandatory, error-handling middleware are typically defined
 very last, below any other <code>app.use()</code> calls, like so:
@@ -156,7 +157,8 @@ error information to stderr, loggly, or similar services:
 that the error is explicitly passed along to the next):
 </p><pre class="js"><code>function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
-    res.send(500, { error: 'Something blew up!' });
+    res.status(500);
+    res.send({ error: 'Something blew up!' });
   } else {
     next(err);
   }
