@@ -22,8 +22,11 @@ $ make
 
 ## Contributing
 
-  - __Don't__ edit the HTML directly, edit the _jade_.
-  - Don't commit any HTML changes, __only jade changes__.
+The Jade files are the authoring / source files that generate HTML files that are the publishing format.  The website is served from the HTML pages in the `gh-pages` branch.
+
+  - __Don't__ edit the HTML directly, edit the Jade files, then generate the HTML using `make` to view your changes locally.
+  - In general, PRs should contain both Jade files and resultant generated HTML files.  However, very small PRs or commits can be just the Jade source, with the understanding the the HTML will be regenerated later to incorporate numerous Jade changes.
+  - To publish a change, you must commit the HTML files.  
 
 ## Showcasing
 
