@@ -33,7 +33,7 @@ section
         if (yes) {
           res.sendFile('/uploads/' + uid + '/' + file);
         } else {
-          res.send(403, 'Sorry! you cant see that.');
+          res.status(403).send('Sorry! you cant see that.');
         }
       });
     });
