@@ -1,4 +1,5 @@
 ul#menu
+  
   li#app-api
     a(href='#express') Application
     ul#app-menu
@@ -21,6 +22,7 @@ ul#menu
       li: a(href='#app.listen') app.listen()
       li: a(href='#app.mountpath') app.mountpath
       li: a(href='#app.onmount') app.onmount
+
   li#req-api
     a(href='#req.params') Request
     ul#req-menu
@@ -48,6 +50,7 @@ ul#menu
       li: a(href='#req.subdomains') req.subdomains
       li: a(href='#req.originalUrl') req.originalUrl
       li: a(href='#req.baseUrl') req.baseUrl
+
   li#res-api
     a(href='#res.status') Response
     ul#res-menu
@@ -81,13 +84,12 @@ ul#menu
       li: a(href='#router.param') router.param()
       li: a(href='#router.route') router.route()
       li: a(href='#router.VERB') router.VERB()
+
   li#middleware-api
-    a(href='#middleware') Middleware
+    a(href='#middleware.api') Middleware
     ul#middleware-menu
-      li: a(href='#basicAuth') basicAuth()
-      li: a(href='#bodyParser') bodyParser()
-      li: a(href='#compress') compress()
-      li: a(href='#cookieParser') cookieParser()
-      li: a(href='#cookieSession') cookieSession()
-      li: a(href='#csrf') csrf()
-      li: a(href='#directory') directory()
+      li: a(href='#middleware.api') API
+      li: a(href='#middleware.application') Application level
+      li: a(href='#middleware.router') Router level
+      li: a(href='#middleware.thirdparty') Third-party
+      li: a(href='#middleware.builtin') Built-in
