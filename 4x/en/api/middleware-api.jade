@@ -13,7 +13,7 @@ section
   p.
     With an optional mount path, middleware can be loaded at the application level or at the router level. Also, a series of middleware functions can be loaded together, creating a sub-stack of middleware system at a mount point.
 
-  h4(id='middleware.application') Application level middleware
+  h3(id='middleware.application') Application level middleware
 
   p.
     Application level middleware are bound to an instance of <code>express</code>, using <code>app.use()</code> and <code>app.VERB()</code>.
@@ -89,7 +89,7 @@ section
       res.render('special');
     });
 
-  h4(id='middleware.router') Router level middleware
+  h3(id='middleware.router') Router level middleware
 
   p Router level middleware work just like application level middleware except they are bound to an instance of <code>express.Router()</code>.
 
