@@ -122,9 +122,9 @@ app.engine('html', engines.hogan);</code></pre></section><section><h3 id="app.pa
 is present in a route path, you may map user loading logic to automatically
 provide <code>req.user</code> to the route, or perform validations
 on the parameter input.
-</p><p>The following snippet illustrates how the <code>callback</code>
+</p><p>Note: Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>app</code> will be trigerred only by route parameters defined on <code>app</code> routes.</p><p>The following snippet illustrates how the <code>callback</code>
 is much like middleware, thus supporting async operations. However,
-it provides the additional value of the parameter (here named as <code>id</code>).
+it provides the additional value of the parameter (here named as <code>id</code>), derived from the corresponding parameter in the <code>req.params</code> object.
 An attempt to load the user is then performed, assigning <code>req.user</code>;
 otherwise an error is passed to <code>next(err)</code>.
 </p><pre class="js"><code>app.param('user', function(req, res, next, id){
@@ -847,9 +847,9 @@ app.use(express.static(__dirname + '/uploads'));</code></pre></section><section>
 is present in a route path you may map user loading logic to automatically
 provide <code>req.user</code> to the route, or perform validations
 on the parameter input.
-</p><p>The following snippet illustrates how the <code>callback</code>
+</p><p>Note: Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>router</code> will be trigerred only by route parameters defined on <code>router</code> routes.</p><p>The following snippet illustrates how the <code>callback</code>
 is much like middleware, thus supporting async operations. However,
-it provides the additional value of the parameter (here named as <code>id</code>).
+it provides the additional value of the parameter (here named as <code>id</code>), derived from the corresponding parameter in the <code>req.params</code> object.
 An attempt to load the user is then performed, assigning <code>req.user</code>,
 otherwise passing an error to <code>next(err)</code>.
 </p><p>It is important to realize that any route that triggered a named parameter function to run will only be run if <code>next</code> was not called with an error in the named parameter handler.
