@@ -9,7 +9,7 @@ section
   +js.
     app.use(function(err, req, res, next){
       console.error(err.stack);
-      res.send(500, 'Something broke!');
+      res.status(500).send('Something broke!');
     });
 
   p.
@@ -66,7 +66,7 @@ section
   +js.
     function clientErrorHandler(err, req, res, next) {
       if (req.xhr) {
-        res.send(500, { error: 'Something blew up!' });
+        res.status(500).send({ error: 'Something blew up!' });
       } else {
         next(err);
       }
