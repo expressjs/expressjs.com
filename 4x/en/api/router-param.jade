@@ -6,8 +6,14 @@ section
     is present in a route path you may map user loading logic to automatically
     provide <code>req.user</code> to the route, or perform validations
     on the parameter input.
+  
+  p <i>Note</i>
 
-  p Note: Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>router</code> will be trigerred only by route parameters defined on <code>router</code> routes.
+    ul 
+
+      li Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>router</code> will be trigerred only by route parameters defined on <code>router</code> routes.
+
+      li A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.
 
   p.
     The following snippet illustrates how the <code>callback</code>
