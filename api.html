@@ -122,7 +122,21 @@ app.engine('html', engines.hogan);</code></pre></section><section><h3 id="app.pa
 is present in a route path, you may map user loading logic to automatically
 provide <code>req.user</code> to the route, or perform validations
 on the parameter input.
-</p><p><i>Note</i><ul><li>Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>app</code> will be trigerred only by route parameters defined on <code>app</code> routes.</li><li>A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.</li></ul></p><p>The following snippet illustrates how the <code>callback</code>
+</p><p><i>Note</i><ul><li>Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>app</code> will be trigerred only by route parameters defined on <code>app</code> routes.</li><li>A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.<pre class="js"><code>app.param('id', function (req, res, next, id) {
+  console.log('CALLED ONLY ONCE');
+  next();
+})
+
+app.get('/user/:id', function (req, res, next) {
+  console.log('although this matches');
+  next();
+});
+
+app.get('/user/:id', function (req, res) {
+  console.log('and this matches too');
+  res.end();
+});
+</code></pre></li></ul></p><p>The following snippet illustrates how the <code>callback</code>
 is much like middleware, thus supporting async operations. However,
 it provides the additional value of the parameter (here named as <code>id</code>), derived from the corresponding parameter in the <code>req.params</code> object.
 An attempt to load the user is then performed, assigning <code>req.user</code>;
@@ -847,7 +861,20 @@ app.use(express.static(__dirname + '/uploads'));</code></pre></section><section>
 is present in a route path you may map user loading logic to automatically
 provide <code>req.user</code> to the route, or perform validations
 on the parameter input.
-</p><p><i>Note</i><ul> <li>Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>router</code> will be trigerred only by route parameters defined on <code>router</code> routes.</li><li>A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.</li></ul></p><p>The following snippet illustrates how the <code>callback</code>
+</p><p><i>Note</i><ul> <li>Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>router</code> will be trigerred only by route parameters defined on <code>router</code> routes.</li><li>A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.<pre class="js"><code>app.param('id', function (req, res, next, id) {
+  console.log('CALLED ONLY ONCE');
+  next();
+})
+
+app.get('/user/:id', function (req, res, next) {
+  console.log('although this matches');
+  next();
+});
+
+app.get('/user/:id', function (req, res) {
+  console.log('and this matches too');
+  res.end();
+});</code></pre></li></ul></p><p>The following snippet illustrates how the <code>callback</code>
 is much like middleware, thus supporting async operations. However,
 it provides the additional value of the parameter (here named as <code>id</code>), derived from the corresponding parameter in the <code>req.params</code> object.
 An attempt to load the user is then performed, assigning <code>req.user</code>,
