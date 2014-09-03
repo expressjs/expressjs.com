@@ -3,25 +3,52 @@ section
 
   .notice <b>Note</b>: <code>res.sendFile</code> requires Express version to be at least 4.8.0
 
-  p Transfer the file at the given <code>path</code>.
+  p Transfer the file at the given <code>path</code>. The Content-Type response header field is automatically set based on the filename's extension.
 
   p.
-    Automatically defaults the Content-Type response header field based
-    on the filename's extension. The callback <code>fn(err)</code> is
-    invoked when the transfer is complete or when an error occurs.
-
-  p.
-    By default the <code>path</code> must be an absolute filename. Set the <code>root</code>
-    option to use relative paths.
+    Unless the <code>root</code> option is set in the options object, <code>path</code> must be an absolute path of the file.
 
   p Options:
 
-  ul
-    li <code>maxAge</code> in milliseconds (default: 0)
-    li <code>root</code> root directory for relative filenames
+    ul
+      li <code>maxAge</code> in milliseconds, default to 0.
+      li <code>root</code> root directory for relative filenames.
+      li <code>headers</code> object of HTTP headers to serve with the file.
+      li <code>dotfiles</code> option for serving dotfiles. Possible values are "allow", "deny", "ignore"; defaults to "ignore".
 
   p.
-    This method provides fine-grained support for file serving
+    The callback <code>fn(err)</code> is invoked when the transfer is complete or when an error occurs. If the callback function is specified and an error occurs, the response process must be handled explicitly within the callback function by either ending the request response cycle, or passing the control to the next route.
+
+  p Here is an example of using <code>res.sendFile</code> with all its arguments.
+
+  +js.
+
+    app.get('/file/:name', function (req, res, next) {
+
+      var options = {
+        root: __dirname + '/public/',
+        dotfiles: 'deny',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+      };
+
+      var fileName = req.params.name;
+      res.sendFile(fileName, options, function (err) {
+        if (err) {
+          console.log(err);
+          res.status(err.status).end();
+        }
+        else {
+          console.log('Sent:', fileName);
+        }
+      });
+
+    })
+
+  p.
+    <code>res.sendFile</code> provides fine-grained support for file serving
     as illustrated in the following example:
 
   +js.
