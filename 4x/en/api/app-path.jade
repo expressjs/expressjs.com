@@ -1,0 +1,21 @@
+section
+  h3(id='app.path') app.path()
+
+  p.
+    Returns the canonical path of the app.
+
+  +js.
+
+    var app = express()
+      , blog = express()
+      , blogAdmin = express();
+
+    app.use('/blog', blog);
+    blog.use('/admin', blogAdmin);
+
+    console.log(app.path()); // ''
+    console.log(blog.path()); // '/blog'
+    console.log(blogAdmin.path()); // '/blog/admin'
+
+  p.
+    The behavior of this method can become very complicated in complex cases of mounted apps, hence it is recommended to use <a href="#req.baseUrl"><code>req.baseUrl</code></a> to get the canonical path of the app.
