@@ -3,4 +3,45 @@ section
 
   p As of 4.x, Express no longer depends on Connect. Except for <code>express.static</code>, all of Express' previously included middleware are now in separate repos. Please view <a href="https://github.com/senchalabs/connect#middleware">the list of middleware</a>.
 
-  p <code>express.static</code> is based on <a href="https://github.com/expressjs/serve-static"><code>serve-static</code></a>, refer its <a href="https://github.com/expressjs/serve-static">documentation</a> for specifics about its usage and options.
+  h4 <code>express.static(root, [options])</code>
+
+  p <code>express.static</code> is based on <a href="https://github.com/expressjs/serve-static"><code>serve-static</code></a>, and is responsible for serving the static assets of an Express application.
+
+  p The <code>root</code> argument refers to the root directory from which the static assets are to be served.
+
+  p The optional <code>options</code> object can have the following properties.
+
+    ul
+        li <code>dotfiles</code> option for serving dotfiles. Possible values are "allow", "deny", "ignore"; defaults to "ignore".
+        li <code>etag</code> enable or disable etag generation, defaults to <code>true</code>.
+        li <code>extensions</code> sets file extension fallbacks, defaults to <code>false</code>.
+        li <code>index</code> sends directory index file, defaults to "index.html". Set <code>false</code> to disable directory indexing.
+        li <code>maxAge</code> sets the max-age property of the Cache-Control header in milliseconds or a string in <a href="https://www.npmjs.org/package/ms">ms format</a>, defaults to 0.
+        li <code>redirect</code> redirects to trailing "/" when the pathname is a dir, defaults to <code>true</code>.
+        li <code>setHeaders</code> function for setting HTTP headers to serve with the file.
+
+  p Here is an example of using the <code>express.static</code> middleware with an elaborate options object.
+
+  +js.
+    var options = {
+      dotfiles: 'ignore',
+      etag: false,
+      extensions: ['htm', 'html'],
+      index: false,
+      maxAge: '1d',
+      redirect: false,
+      setHeaders: function (res, path) {
+        res.set('x-timestamp', Date.now())
+      }
+    };
+
+    app.use(express.static('public', options));
+
+  p You can have more than one static directory per app.
+
+  +js.
+    app.use(express.static('public');
+    app.use(express.static('uploads');
+    app.use(express.static('files');
+
+  p For more details about <code>serve-static</code> and its options, visit the <a href="https://github.com/expressjs/serve-static"><code>serve-static</code> documentation</a>.
