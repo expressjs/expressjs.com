@@ -37,7 +37,7 @@ section
       | The view directory path, defaulting to "process.cwd() + '/views'"
     li
       code query parser 
-      | The query parser to use - "simple" or "extended", defaults to "extended". The simple query parser is based on <a href="https://github.com/Gozala/querystring">querystring</a>, the extended query parser is based on <a href="https://github.com/hapijs/qs">qp</a>.
+      | The query parser to use - "simple" or "extended", defaults to "extended". The simple query parser is based on node's native query parser, <a href="http://nodejs.org/api/querystring.html">querystring</a>. The extended query parser is based on <a href="https://www.npmjs.org/package/qs">qp</a>.
     li
       code x-powered-by 
       | Enables the <code>X-Powered-By: Express</code> HTTP header, enabled by default
