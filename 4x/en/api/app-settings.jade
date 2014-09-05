@@ -12,7 +12,7 @@ section
       code trust proxy 
       | Enables reverse proxy support, disabled by default
     li
-      code subdomain offset
+      code subdomain offset 
       | The number of dot-separated parts of the host to remove to access subdomain, two by default
     li
       code jsonp callback name 
@@ -35,6 +35,9 @@ section
     li
       code views 
       | The view directory path, defaulting to "process.cwd() + '/views'"
+    li
+      code query parser 
+      | The query parser to use - "simple" or "extended", defaults to "extended". The simple query parser is based on <a href="https://github.com/Gozala/querystring">querystring</a>, the extended query parser is based on <a href="https://github.com/hapijs/qs">qp</a>.
     li
       code x-powered-by 
       | Enables the <code>X-Powered-By: Express</code> HTTP header, enabled by default
