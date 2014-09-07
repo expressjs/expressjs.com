@@ -6,9 +6,6 @@ section
 
   ul
     li
-      code env 
-      | Environment mode, defaults to <code>process.env.NODE_ENV</code> (NODE_ENV environment variable) or "development"
-    li
       code trust proxy 
       | Indicate that the app is sitting behind a front-facing proxy, and the <code>X-Forwarded-*</code> headers may be trusted for determining the connection and the IP address of the client. It must, however, be noted that, the <code>X-Forwarded-*</code> headers are easily spoofed and the detected IP addresses are unreliable.
 
@@ -30,9 +27,7 @@ section
             td
               strong IP addresses
             td
-              p An IP address, subnet, or an array of IP addresses, and subnets to trust.
-
-              p The following is the list of pre-configured subnet names.
+              p An IP address, subnet, or an array of IP addresses, and subnets to trust. The following is the list of pre-configured subnet names.
                 ul
                   li loopback -  <code>127.0.0.1/8</code>, <code>::1/128</code>
                   li linklocal - <code>169.254.0.0/16</code>, <code>fe80::/10</code>
@@ -52,7 +47,7 @@ section
           tr
             td
               strong Function
-            td Custom trust implementation. Use this only as a last resort.
+            td Custom trust implementation. Use this only if you know what you are doing.
 
               +js.
                 app.set('trust proxy', function (ip) {
@@ -61,7 +56,9 @@ section
                 })
 
       p The <code>trust proxy</code> setting is implemented using the <a href="https://www.npmjs.org/package/proxy-addr">proxy-addr</a> package, look up its documentation for further details.
-
+    li
+      code env 
+      | Environment mode, defaults to <code>process.env.NODE_ENV</code> (NODE_ENV environment variable) or "development"
     li
       code subdomain offset 
       | The number of dot-separated parts of the host to remove to access subdomain, two by default
@@ -93,3 +90,37 @@ section
       code x-powered-by 
       | Enables the <code>X-Powered-By: Express</code> HTTP header, enabled by default
     
+    li
+      code etag 
+      | Set the ETag response header.
+      table.doctable
+        thead
+          tr
+            th Type
+            th Value
+        tbody
+          tr
+            td
+              strong Boolean
+            td
+              p.
+                <code>true</code> enables strong ETag. This is the default setting.<br>
+                <code>false</code> disables ETag altogether.
+          tr
+            td
+              strong String
+            td
+              p
+                If "strong", enables strong ETag.<br>
+                If "weak", enables weak ETag.
+          tr
+            td
+              strong Function
+            td Custom ETag function implementation. Use this only if you know what you are doing.
+
+              +js.
+                app.set('etag', function (body, encoding) {
+                  return generateHash(body, encoding); // consider the function is defined
+                })
+      p
+        a(href="http://en.wikipedia.org/wiki/HTTP_ETag") More about the HTTP ETag header.
