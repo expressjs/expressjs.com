@@ -9,7 +9,23 @@ To normalize template engine interfaces and caching, it's recommended to
 check the <a href="https://github.com/visionmedia/consolidate.js">consolidate.js</a>
 project for support. Unlisted template engines may still support the Express
 signature.
-</p></section><section><h3 id="structure">How should I structure my application?</h3><p>There is no true answer to this question. It is highly dependant
+</p></section><section><h3 id="custom-template-engines">How do I create custom template engines in Express?</h3><p>Use the <code>app.engine(ext, callback)</code> method to create your own template engine. <code>ext</code> refers to the file extension, <code>callback</code> is the template engine function which accepts the location of the file, the options object, and the callback function, as its parameters.</p><p>The following is an example of implementing a very simple template engine for rendering ".ntl" files.</p><pre class="js"><code>var fs = require('fs'); // this engine requires the `fs` module
+app.engine('ntl', function (filePath, options, callback) { // define the template engine
+  fs.readFile(filePath, function (err, content) {
+    if (err) throw new Error(err);
+    // this is an exteremly simple template engine
+    var rendered = content.toString().replace('#title#', '<title>'+ options.title +'</title>').replace('#message#', '<h1>'+ options.message +'</h1>');
+    return callback(null, rendered);
+  })
+});
+app.set('views', './views'); // specify the views directory
+app.set('view engine', 'ntl'); // register the template engine
+</code></pre><p>Your app will now be able to render ".ntl" files. Create a file named "index.ntl" in the views directory with the following content.</p><pre class="js"><code>#title#
+#message#
+</code></pre><p>Then, create the following route in your app.</p><pre class="js"><code>app.get('/', function (req, res) {
+  res.render('index', { title: 'Hey', message: 'Hello there!'});
+})
+</code></pre><p>On making a request to the home page, "index.ntl" will be rendered as HTML.</p></section><section><h3 id="structure">How should I structure my application?</h3><p>There is no true answer to this question. It is highly dependant
 on the scale of your application and the team involved. To be as
 flexible as possible, Express makes no assumptions in terms of structure.
 </p><p>Routes and other application-specific logic may live in as many files
