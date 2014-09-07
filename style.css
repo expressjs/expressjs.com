@@ -188,8 +188,8 @@ p code {
   border: 1px solid #eaeaea;
   font-family: monaco, monospace;
   font-size: .75em;
-  padding: 2px 8px;
-  -webkit-border-radius: 3px;
+  padding: 1px 3px;
+  border-radius: 3px;
 }
 
 pre {
@@ -496,7 +496,7 @@ html[xmlns] .clearfix {
 
 .doctable {
   margin: 1em 1em 1em 0;
-  border: 1px solid #666;
+  border: 1px solid #d8d8d8;
   border-collapse: collapse;
   background-color: #F9F9F9;
   empty-cells:show;
@@ -511,6 +511,14 @@ html[xmlns] .clearfix {
 .doctable tr th {
   background-color: #D8D8D8;
   font-size: 110%;
+}
+
+.doctable td p:first-child {
+  margin-top: 0;
+}
+
+li p {
+  width: 100% !important;
 }
 
 ul.doclist {
