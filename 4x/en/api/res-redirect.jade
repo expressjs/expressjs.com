@@ -1,5 +1,8 @@
 section
   h3(id='res.redirect') res.redirect([status], url)
+
+  .notice <strong>Note</strong>: Express passes the specified URL string as-is to the browser in the <code>Location</code> header, without any validation or manipulation, except in case of <code>back</code>. Browsers take the responsibility of deriving the intended URL from the current URL or the referring URL, and the URL specified in the <code>Location</code> header; and redirect the user accordingly.
+
   p.
     Redirect to the given <code>url</code> with optional <code>status</code> code
     defaulting to 302 "Found".
@@ -10,30 +13,24 @@ section
     res.redirect(301, 'http://example.com');
     res.redirect('../login');
 
-  p.
-    Express supports a few forms of redirection. The first is
-    a fully qualified URI for redirecting to a different site:
+  p Redirects can be a fully qualified URI for redirecting to a different site:
 
   +js.
     res.redirect('http://google.com');
 
-  p.
-    The second is the pathname-relative redirect. For example,
-    if you were on <code>http://example.com/admin/post/new</code>, the 
-    following redirect to <code>/admin</code> would land you at <code>http://example.com/admin</code>:
+  p Redirects can be relative to the root of the host name. For example, if you were on <code>http://example.com/admin/post/new</code>, the following redirect to <code>/admin</code> would land you at <code>http://example.com/admin</code>:
 
   +js.
     res.redirect('/admin');
 
-  p.
-    This next redirect is relative to the <code>mount</code> point of the application. For example,
-    if you have a blog application mounted at <code>/blog</code>, ideally it has no knowledge of
-    where it was mounted. So, where a redirect of <code>/admin/post/new</code> would simply give you
-    <code>http://example.com/admin/post/new</code>, the following mount-relative redirect would give
-    you <code>http://example.com/blog/admin/post/new</code>:
+  p Redirects can be relative to the current URL. A redirection of <code>post/new</code>, from <code>http://example.com/blog/admin/</code> (notice the trailing slash), would  give you <code>http://example.com/blog/admin/post/new</code>.
 
   +js.
-    res.redirect('admin/post/new');
+    res.redirect('post/new');
+
+  p Redirecting to <code>post/new</code> from <code>http://example.com/blog/admin</code> (no trailing slash), will take you to <code>http://example.com/blog/post/new</code>.
+
+  p If you found the above behavior confusing, think of path segments as directories (have trailing slashes) and files, it will start to make sense.
 
   p.
     Pathname relative redirects are also possible. If you were
@@ -44,10 +41,8 @@ section
     res.redirect('..');
 
   p.
-    The final special-case is a <code>back</code> redirect, redirecting back to
+    A <code>back</code> redirection will redirect the request back to
     the Referer (or Referrer), defaulting to <code>/</code> when missing.
 
   +js.
-    res.redirect('back');
-  
-    
+    res.redirect('back');    
