@@ -16,6 +16,7 @@ section
         li <code>etag</code> enable or disable etag generation, defaults to <code>true</code>.
         li <code>extensions</code> sets file extension fallbacks, defaults to <code>false</code>.
         li <code>index</code> sends directory index file, defaults to "index.html". Set <code>false</code> to disable directory indexing.
+        li <code>lastModified</code> enabled by default, sets the <code>Last-Modified</code> header to the last modified date of the file on the OS. Set <code>false</code> to disable it.
         li <code>maxAge</code> sets the max-age property of the Cache-Control header in milliseconds or a string in <a href="https://www.npmjs.org/package/ms">ms format</a>, defaults to 0.
         li <code>redirect</code> redirects to trailing "/" when the pathname is a dir, defaults to <code>true</code>.
         li <code>setHeaders</code> function for setting HTTP headers to serve with the file.
