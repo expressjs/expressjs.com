@@ -506,6 +506,7 @@ html[xmlns] .clearfix {
   padding: 7px;
   line-height: 120%;
   vertical-align: top;
+  border-color: #d8d8d8;
 }
  
 .doctable tr th {
