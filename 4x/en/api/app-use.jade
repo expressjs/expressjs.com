@@ -154,7 +154,7 @@ section
         td
           strong Array
         td
-          p Clubbing middleware in arrays is a good way to logically group them.
+          p Clubbing middleware in arrays is a good way to logically group them. The mount path has to be specified, if an array of middleware is passed as the first or the only set of middleware.
           +js.
 
             var r1 = express.Router();
@@ -167,7 +167,7 @@ section
               next();
             })
 
-            app.use([r1, r2]);
+            app.use('/', [r1, r2]);
 
       tr
         td

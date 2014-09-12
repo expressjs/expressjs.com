@@ -116,7 +116,7 @@ r2.get('/', function (req, res, next) {
 })
 
 app.use(r1, r2);
-</code></pre></td></tr><tr><td><strong>Array</strong></td><td><p>Clubbing middleware in arrays is a good way to logically group them.</p><pre class="js"><code>var r1 = express.Router();
+</code></pre></td></tr><tr><td><strong>Array</strong></td><td><p>Clubbing middleware in arrays is a good way to logically group them. The mount path has to be specified, if an array of middleware is passed as the first or the only set of middleware.</p><pre class="js"><code>var r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
 })
@@ -126,7 +126,7 @@ r2.get('/', function (req, res, next) {
   next();
 })
 
-app.use([r1, r2]);
+app.use('/', [r1, r2]);
 </code></pre></td></tr><tr><td><strong>Combination</strong></td><td><p>All the above ways of mounting middleware can be combined.</p><pre class="js"><code>function mw1(req, res, next) { next(); }
 function mw2(req, res, next) { next(); }
 
