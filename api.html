@@ -45,65 +45,108 @@ app.enabled('trust proxy');
 
 app.enable('trust proxy');
 app.disabled('trust proxy');
-// => false</code></pre></section><section><h3 id="app.use">app.use([path], function)</h3><p>Use the given middleware <code>function</code> (with optional mount <code>path</code>,
-defaulting to "/").
-</p><pre class="js"><code>var express = require('express');
-var app = express();
-
-// simple logger
-app.use(function(req, res, next){
-  console.log('%s %s', req.method, req.url);
+// => false</code></pre></section><section><h3 id="app.use">app.use([path], [function...], function)</h3><p>Mount the <a href="#middleware.api">middleware</a> <code>function</code>(s) at the <code>path</code>. If <code>path</code> is not specified, it defaults to "/".</p><p>Mounting a middleware at a <code>path</code> will cause the middleware function to be executed whenever the base of the requested path matches the <code>path</code>.</p><p>Since <code>path</code> defaults to "/", middleware mounted without a path will be executed for every request to the app.</p><pre class="js"><code>// this middleware will be executed for every request to the app
+app.use(function (req, res, next) {
+  console.log('Time: %d', Date.now());
   next();
-});
-
-// respond
-app.use(function(req, res, next){
+})
+</code></pre><p>Middleware functions are executed sequentially, therefore the order of middleware inclusion is important.</p><pre class="js"><code>// this middleware will not allow the request to go beyond it
+app.use(function(req, res, next) {
   res.send('Hello World');
-});
+})
 
-app.listen(3000);
-</code></pre><p>The "mount" path is stripped and is <strong>not</strong> visible
-to the middleware <code>function</code>. This feature is mainly to ensure that
-mounted middleware may operate without code changes, regardless of the "prefix"
-pathname.
-</p><p>Here's a concrete example. Take the typical use-case of serving files in ./public
-using the <code>express.static()</code> middleware:
-</p><pre class="js"><code>// GET /javascripts/jquery.js
-// GET /style.css
-// GET /favicon.ico
+// requests will never reach this route
+app.get('/', function (req, res) {
+  res.send('Welcome');
+})
+</code></pre><div class="notice">The middleware examples below are intentionally left overly simple to keep the examples lean and clutter-free.</div><p><code>path</code> can be a string representing a path, a path pattern, a regular expression to match paths, or an array of combinations of the aforementioned path objects.<table border="1" class="doctable"><thead><tr><th>Type</th><th>Example</th></tr></thead><tbody><tr><td><strong>Path</strong></td><td><pre class="js"><code>// will match paths starting with /abcd
+app.use('/abcd', function (req, res, next) {
+  next();
+})</code></pre></td></tr><tr><td><strong>Path Pattern</strong></td><td><pre class="js"><code>// will match paths starting with /abcd and /abd
+app.use('/abc?d', function (req, res, next) {
+  next();
+})
+
+// will match paths starting with /abcd and /abd
+app.use('/abc?d', function (req, res, next) {
+  next();
+})
+
+// will match paths starting with /abcd, /abbcd, /abbbbbcd and so on
+app.use('/ab+cd', function (req, res, next) {
+  next();
+})
+
+// will match paths starting with /abcd, /abxcd, /abFOOcd, /abbArcd and so on  
+app.use('/ab*cd', function (req, res, next) {
+  next();
+})
+
+// will match paths starting with /ad and /abcd
+app.use('/a(bc)?d', function (req, res, next) {
+  next();
+})</code></pre></td></tr><tr><td><strong>Regular Expression</strong></td><td><pre class="js"><code>// will match paths starting with /abc and /xyz
+app.use(/\/abc|\/xyz/, function (req, res, next) {
+  next();
+})</code></pre></td></tr><tr><td><strong>Array</strong></td><td><pre class="js"><code>// will match paths starting with /abcd, /xyza, /lmn, and /pqr
+app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
+  next();
+})
+</code></pre></td></tr></tbody></table></p><p><code>function</code> can be a middleware function, a series of middleware functions, an array of middleware functions, or a combination of all of them. Since routers and apps implement the middleware interface, they can be used like any other middleware function.</p><table border="1" class="doctable"><thead><tr><th>Usage</th><th>Example</th></tr></thead><tbody><tr><td><strong>Single Middleware</strong></td><td><p>A middleware function can be defined and mounted locally.</p><pre class="js"><code>app.use(function (req, res, next) {
+  next();
+})
+</code></pre><p>A router is a valid middleware.</p><pre class="js"><code>var router = express.Router();
+router.get('/', function (req, res, next) {
+  next();
+})
+app.use(router);
+</code></pre><p>An Express app is a valid middleware.</p><pre class="js"><code>var subApp = express();
+subApp.get('/', function (req, res, next) {
+  next();
+})
+app.use(subApp);
+</code></pre></td></tr><tr><td><strong>Series of Middleware</strong></td><td><p>More than one middleware can be specified at a mount path.</p><pre class="js"><code>var r1 = express.Router();
+r1.get('/', function (req, res, next) {
+  next();
+})
+
+var r2 = express.Router();
+r2.get('/', function (req, res, next) {
+  next();
+})
+
+app.use(r1, r2);
+</code></pre></td></tr><tr><td><strong>Array</strong></td><td><p>Clubbing middleware in arrays is a good way to logically group them.</p><pre class="js"><code>var r1 = express.Router();
+r1.get('/', function (req, res, next) {
+  next();
+})
+
+var r2 = express.Router();
+r2.get('/', function (req, res, next) {
+  next();
+})
+
+app.use([r1, r2]);
+</code></pre></td></tr><tr><td><strong>Combination</strong></td><td><p>All the above ways of mounting middleware can be combined.</p><pre class="js"><code>function mw1(req, res, next) { next(); }
+function mw2(req, res, next) { next(); }
+
+var r1 = express.Router();
+r1.get('/', function (req, res, next) { next(); });
+
+var r2 = express.Router();
+r2.get('/', function (req, res, next) { next(); });
+
+var subApp = express();
+subApp.get('/', function (req, res, next) { next(); });
+
+app.use(mw1, [mw2, r1, r2], subApp);
+</code></pre></td></tr></tbody></table><p>Following are some examples of using the <a href="#express.static">express.static</a> middleware in an Express app.</p><p>Serve static content for the app from the "public" directory in the application directory.</p><pre class="js"><code>// GET /style.css etc
 app.use(express.static(__dirname + '/public'));
-</code></pre><p>Say you wanted to prefix all static files with "/static". You could
-use the "mounting" feature to support this. Mounted middleware functions are <strong>not</strong>
-invoked unless the <code>req.url</code> contains this prefix, at which point
-it is stripped when the function is invoked. This affects this function only;
-subsequent middleware will see <code>req.url</code> with "/static" included
-(unless they are mounted as well).
-</p><pre class="js"><code>// GET /static/javascripts/jquery.js
-// GET /static/style.css
-// GET /static/favicon.ico
+</code></pre><p>Mount the middleware at "/static" to server static content only when their request path is prefixed with "/static".</p><pre class="js"><code>// GET /static/style.css etc.
 app.use('/static', express.static(__dirname + '/public'));
-</code></pre><p>The order in which middleware are "defined" using <code>app.use()</code> is
-very important. They are invoked sequentially, and therefore define middleware
-precedence. For example, usually any logging middleware is the very
-first middleware you would use:
-</p><pre class="js"><code>var logger = require('morgan');
-
+</code></pre><p>Disable logging for static content requests by loading the logger middleware after the static middleware.</p><pre class="js"><code>app.use(express.static(__dirname + '/public'));
 app.use(logger());
-app.use(express.static(__dirname + '/public'));
-app.use(function(req, res){
-  res.send('Hello');
-});
-</code></pre><p>Now suppose you wanted to ignore logging requests for static files, but
-continue logging routes and middleware defined after <code>logger()</code>.
-You could simply move <code>static()</code> above it:
-</p><pre class="js"><code>app.use(express.static(__dirname + '/public'));
-app.use(logger());
-app.use(function(req, res){
-  res.send('Hello');
-});
-</code></pre><p>Another concrete example would be serving files from multiple directories,
-giving precedence to "./public" over the others:
-</p><pre class="js"><code>app.use(express.static(__dirname + '/public'));
+</code></pre><p>Serve static files from multiple directories, but give precedence to "./public" over the others.</p><pre class="js"><code>app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/files'));
 app.use(express.static(__dirname + '/uploads'));</code></pre></section><section><h3 id="app.engine">app.engine(ext, callback)</h3><p>Register the given template engine <code>callback</code> as <code>ext</code>
 
@@ -1130,7 +1173,7 @@ var cookieParser = require('cookie-parser');
 
 // load the cookie parsing middleware
 app.use(cookieParser);
-</code></pre><p><a href="https://github.com/senchalabs/connect#middleware">Here</a> is a list of third-party middleware commonly used with Express.</p></section><section><h3 id="middleware.builtin">Built-in middleware</h3><p>As of 4.x, Express no longer depends on Connect. Except for <code>express.static</code>, all of Express' previously included middleware are now in separate repos. Please view <a href="https://github.com/senchalabs/connect#middleware">the list of middleware</a>.</p><h4><code>express.static(root, [options])</code></h4><p><code>express.static</code> is based on <a href="https://github.com/expressjs/serve-static"><code>serve-static</code></a>, and is responsible for serving the static assets of an Express application.</p><p>The <code>root</code> argument refers to the root directory from which the static assets are to be served.</p><p>The optional <code>options</code> object can have the following properties.<ul><li><code>dotfiles</code> option for serving dotfiles. Possible values are "allow", "deny", "ignore"; defaults to "ignore".</li><li><code>etag</code> enable or disable etag generation, defaults to <code>true</code>.</li><li><code>extensions</code> sets file extension fallbacks, defaults to <code>false</code>.</li><li><code>index</code> sends directory index file, defaults to "index.html". Set <code>false</code> to disable directory indexing.</li><li><code>lastModified</code> enabled by default, sets the <code>Last-Modified</code> header to the last modified date of the file on the OS. Set <code>false</code> to disable it.</li><li><code>maxAge</code> sets the max-age property of the Cache-Control header in milliseconds or a string in <a href="https://www.npmjs.org/package/ms">ms format</a>, defaults to 0.</li><li><code>redirect</code> redirects to trailing "/" when the pathname is a dir, defaults to <code>true</code>.</li><li><code>setHeaders</code> function for setting HTTP headers to serve with the file.</li></ul></p><p>Here is an example of using the <code>express.static</code> middleware with an elaborate options object.</p><pre class="js"><code>var options = {
+</code></pre><p><a href="https://github.com/senchalabs/connect#middleware">Here</a> is a list of third-party middleware commonly used with Express.</p></section><section><h3 id="middleware.builtin">Built-in middleware</h3><p>As of 4.x, Express no longer depends on Connect. Except for <code>express.static</code>, all of Express' previously included middleware are now in separate repos. Please view <a href="https://github.com/senchalabs/connect#middleware">the list of middleware</a>.</p><h4 id="express.static"><code>express.static(root, [options])</code></h4><p><code>express.static</code> is based on <a href="https://github.com/expressjs/serve-static"><code>serve-static</code></a>, and is responsible for serving the static assets of an Express application.</p><p>The <code>root</code> argument refers to the root directory from which the static assets are to be served.</p><p>The optional <code>options</code> object can have the following properties.<ul><li><code>dotfiles</code> option for serving dotfiles. Possible values are "allow", "deny", "ignore"; defaults to "ignore".</li><li><code>etag</code> enable or disable etag generation, defaults to <code>true</code>.</li><li><code>extensions</code> sets file extension fallbacks, defaults to <code>false</code>.</li><li><code>index</code> sends directory index file, defaults to "index.html". Set <code>false</code> to disable directory indexing.</li><li><code>lastModified</code> enabled by default, sets the <code>Last-Modified</code> header to the last modified date of the file on the OS. Set <code>false</code> to disable it.</li><li><code>maxAge</code> sets the max-age property of the Cache-Control header in milliseconds or a string in <a href="https://www.npmjs.org/package/ms">ms format</a>, defaults to 0.</li><li><code>redirect</code> redirects to trailing "/" when the pathname is a dir, defaults to <code>true</code>.</li><li><code>setHeaders</code> function for setting HTTP headers to serve with the file.</li></ul></p><p>Here is an example of using the <code>express.static</code> middleware with an elaborate options object.</p><pre class="js"><code>var options = {
   dotfiles: 'ignore',
   etag: false,
   extensions: ['htm', 'html'],

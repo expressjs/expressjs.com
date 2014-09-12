@@ -218,7 +218,15 @@ code .number { color: #2F6FAD }
 
 .notice {
   font-size: 12px; 
-  color: #322411;
+  color: #999;
+}
+
+.info {
+  background: #f7f7f7;
+  padding: 3px;
+  border: 1px solid #f2f2f2;
+  border-radius: 3px;
+  font-size: 12px;  
 }
 
 /* top button */
@@ -500,6 +508,7 @@ html[xmlns] .clearfix {
   border-collapse: collapse;
   background-color: #F9F9F9;
   empty-cells:show;
+  width: 100%;
 }
  
 .doctable td, .doctable th {
@@ -518,10 +527,11 @@ html[xmlns] .clearfix {
   margin-top: 0;
 }
 
-li p {
+.doctable td p, li p {
   width: 100% !important;
 }
 
 ul.doclist {
   width: 500px;
 }
+
