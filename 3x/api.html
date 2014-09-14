@@ -304,12 +304,12 @@ or framework may also remove routes by simply by removing them from this object.
        callbacks: [Object],
        keys: [],
        regexp: /^\/\/?$/i },
-   { path: '/user/:id',
+     { path: '/user/:id',
        method: 'get',
        callbacks: [Object],
        keys: [{ name: 'id', optional: false }],
        regexp: /^\/user\/(?:([^\/]+?))\/?$/i } ],
-delete: 
+  delete: 
    [ { path: '/user/:id',
        method: 'delete',
        callbacks: [Object],
@@ -403,7 +403,7 @@ the following <code>File</code> object:
   length: [Getter],
   filename: [Getter],
   mime: [Getter] }
-  </code></pre><p>The <code>bodyParser()</code> middleware utilizes the
+</code></pre><p>The <code>bodyParser()</code> middleware utilizes the
 <a href="https://github.com/felixge/node-formidable">node-formidable</a>
 module internally, and accepts the same options. An example of this
 is the <code>keepExtensions</code> formidable option, defaulting to <strong>false</strong>
@@ -493,7 +493,7 @@ req.accepts('html, json');
     quality: 1,
     type: 'application',
     subtype: 'json' },
-{ value: 'text/html',
+   { value: 'text/html',
      quality: 0.5,
      type: 'text',
      subtype: 'html' } ]</code></pre></section><section><h3 id="req.is">req.is(type)</h3><p>Check if the incoming request contains the "Content-Type" 
@@ -616,9 +616,7 @@ would land you at <code>http//example.com/admin/post</code>:
 </p><pre class="js"><code>res.redirect('..');
 </code></pre><p>The final special-case is a <code>back</code> redirect, redirecting back to
 the Referer (or Referrer), defaulting to <code>/</code> when missing.
-</p><pre class="js"><code>res.redirect('back');
-
-</code></pre></section><section><h3 id="res.location">res.location</h3><p>Set the location header.
+</p><pre class="js"><code>res.redirect('back');</code></pre></section><section><h3 id="res.location">res.location</h3><p>Set the location header.
 </p><pre class="js"><code>res.location('/foo/bar');
 res.location('foo/bar');
 res.location('http://example.com');
@@ -716,11 +714,11 @@ however if "*/*" is given then "hey" will be the response.
   'text/plain': function(){
     res.send('hey');
   },
-  
+
   'text/html': function(){
     res.send('<p>hey</p>');
   },
-  
+
   'application/json': function(){
     res.send({ message: 'hey' });
   }
@@ -732,11 +730,11 @@ less verbose implementation:
   text: function(){
     res.send('hey');
   },
-  
+
   html: function(){
     res.send('<p>hey</p>');
   },
-  
+
   json: function(){
     res.send({ message: 'hey' });
   }
@@ -757,7 +755,7 @@ as illustrated in the following example:
 </p><pre class="js"><code>app.get('/user/:uid/photos/:file', function(req, res){
   var uid = req.params.uid
     , file = req.params.file;
-    
+
   req.user.mayViewFilesFrom(uid, function(yes){
     if (yes) {
       res.sendfile('/uploads/' + uid + '/' + file);

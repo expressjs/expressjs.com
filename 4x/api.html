@@ -6,22 +6,109 @@ app.get('/', function(req, res){
   res.send('hello world');
 });
 
-app.listen(3000);</code></pre></section><section><h3 id="app-settings">settings</h3><p>The following settings will alter how Express behaves:
-</p><ul><li><code>trust proxy </code>Indicate that the app is sitting behind a front-facing proxy, and the <code>X-Forwarded-*</code> headers may be trusted for determining the connection and the IP address of the client. It must, however, be noted that, the <code>X-Forwarded-*</code> headers are easily spoofed and the detected IP addresses are unreliable.<p><code>trust proxy</code> is disabled by default. When enabled, Express attempts to determine the IP address of the client which is connected through the front-facing proxy, or a series of proxies. The <code>req.ips</code> property, then, contains an array of IP addresses the client is connected through. It can be enabled using either of the following values.</p><table border="1" class="doctable"><thead><tr><th>Type</th><th>Value</th></tr></thead><tbody><tr><td><strong>Boolean</strong></td><td><p>If <code>true</code>, the client's IP address is understood as the left-most entry in the <code>X-Forwarded-*</code> header.</p><p>If <code>false</code>, the app is understood as directly facing the Internet and the client's IP address is derived from <code>req.connection.remoteAddress</code>. This is the default setting.</p></td></tr><tr><td><strong>IP addresses</strong></td><td><p>An IP address, subnet, or an array of IP addresses, and subnets to trust. The following is the list of pre-configured subnet names.<ul><li>loopback -  <code>127.0.0.1/8</code>, <code>::1/128</code></li><li>linklocal - <code>169.254.0.0/16</code>, <code>fe80::/10</code></li><li>uniquelocal - <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>, <code>fc00::/7</code></li></ul></p><p>The IP addresses can be set in the following ways.</p><pre class="js"><code>app.set('trust proxy', 'loopback') // specify a single subnet
-app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
-app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
-</code></pre><p>When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client's IP address.</p></td></tr><tr><td><strong>Number</strong></td><td>Trust the <code>n</code>th hop from the front-facing proxy server as the client.</td></tr><tr><td><strong>Function</strong></td><td>Custom trust implementation. Use this only if you know what you are doing.<pre class="js"><code>app.set('trust proxy', function (ip) {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
+app.listen(3000);</code></pre></section><section><h3 id="app-settings">settings</h3><p>The following settings will alter how Express behaves:</p>
+<ul>
+<li><p><code>trust proxy</code> Indicate that the app is sitting behind a front-facing proxy, and the <code>X-Forwarded-*</code> headers may be trusted for determining the connection and the IP address of the client. It must, however, be noted that, the <code>X-Forwarded-*</code> headers are easily spoofed and the detected IP addresses are unreliable.</p>
+<p><code>trust proxy</code> is disabled by default. When enabled, Express attempts to determine the IP address of the client which is connected through the front-facing proxy, or a series of proxies. The <code>req.ips</code> property, then, contains an array of IP addresses the client is connected through. It can be enabled using either of the following values.</p>
+<table class="doctable" border="1">
+  <thead><tr><th>Type</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong> Boolean </strong></td>
+      <td>
+        If <code>true</code>, the client&#39;s IP address is understood as the left-most entry in the <code>X-Forwarded-*</code> header.<br>
+        If <code>false</code>, the app is understood as directly facing the Internet and the client&#39;s IP address is derived from <code>req.connection.remoteAddress</code>. This is the default setting.
+      </td>
+    </tr>
+    <tr>
+      <td><strong> IP addresses </strong></td>
+      <td>
+        An IP address, subnet, or an array of IP addresses, and subnets to trust. The following is the list of pre-configured subnet names.
+          <ul>
+            <li>loopback - <code>127.0.0.1/8</code>, <code>::1/128</code></li>
+            <li>linklocal - <code>169.254.0.0/16</code>, <code>fe80::/10</code></li>
+            <li>uniquelocal - <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>, <code>fc00::/7</code></li>
+          </ul>
+        The IP addresses can be set in the following ways.<br>
+        <pre class="js"><code>app.set(&#39;trust proxy&#39;, &#39;loopback&#39;) // specify a single subnet
+app.set(&#39;trust proxy&#39;, &#39;loopback, 123.123.123.123&#39;) // specify a subnet and an address
+app.set(&#39;trust proxy&#39;, &#39;loopback, linklocal, uniquelocal&#39;) // specify multiple subnets as CSV
+app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;uniquelocal&#39;]) // specify multiple subnets as an array</code></pre>
+
+        When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client&#39;s IP address.
+      </td>
+    </tr>
+    <tr>
+      <td><strong> Number </strong></td>
+      <td>Trust the <code>n</code>th hop from the front-facing proxy server as the client.</td>
+    </tr>
+    <tr>
+      <td><strong> Function </strong></td>
+      <td> Custom trust implementation. Use this only if you know what you are doing.
+
+          <pre class="js"><code>app.set(&#39;trust proxy&#39;, function (ip) {
+  if (ip === &#39;127.0.0.1&#39; || ip === &#39;123.123.123.123&#39;) return true; // trusted IPs
   else return false;
-})
-</code></pre></td></tr></tbody></table><p>The <code>trust proxy</code> setting is implemented using the <a href="https://www.npmjs.org/package/proxy-addr">proxy-addr</a> package, look up its documentation for further details.</p></li><li><code>env </code>Environment mode, defaults to <code>process.env.NODE_ENV</code> (NODE_ENV environment variable) or "development"</li><li><code>subdomain offset </code>The number of dot-separated parts of the host to remove to access subdomain, two by default</li><li><code>jsonp callback name </code>Changes the default callback name of <code>?callback=</code></li><li><code>json replacer </code>JSON replacer callback, null by default</li><li><code>case sensitive routing </code>Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same</li><li><code>strict routing </code>Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router</li><li><code>view cache </code>Enables view template compilation caching, enabled in production by default</li><li><code>view engine </code>The default engine extension to use when omitted</li><li><code>views </code>The view directory path, defaulting to "process.cwd() + '/views'"</li><li><code>query parser </code>The query parser to use - "simple" or "extended", defaults to "extended". The simple query parser is based on node's native query parser, <a href="http://nodejs.org/api/querystring.html">querystring</a>. The extended query parser is based on <a href="https://www.npmjs.org/package/qs">qp</a>.</li><li><code>x-powered-by </code>Enables the <code>X-Powered-By: Express</code> HTTP header, enabled by default</li><li><code>etag </code>Set the ETag response header.<table border="1" class="doctable"><thead><tr><th>Type</th><th>Value</th></tr></thead><tbody><tr><td><strong>Boolean</strong></td><td><p><code>true</code> enables strong ETag. This is the default setting.<br>
-<code>false</code> disables ETag altogether.</p></td></tr><tr><td><strong>String</strong></td><td><p><If>"strong", enables strong ETag.<br></If><If>"weak", enables weak ETag.</If></p></td></tr><tr><td><strong>Function</strong></td><td>Custom ETag function implementation. Use this only if you know what you are doing.<pre class="js"><code>app.set('etag', function (body, encoding) {
+})</code></pre>
+    </tr>
+</tbody>
+</table>
+
+<p>The <code>trust proxy</code> setting is implemented using the <a href="https://www.npmjs.org/package/proxy-addr">proxy-addr</a> package, look up its documentation for further details.</p>
+</li>
+<li><code>env</code> Environment mode, defaults to <code>process.env.NODE_ENV</code> (<code>NODE_ENV</code> environment variable) or &quot;development&quot;</li>
+<li><code>subdomain offset</code> The number of dot-separated parts of the host to remove to access subdomain, two by default</li>
+<li><code>jsonp callback name</code> Changes the default callback name of <code>?callback=</code></li>
+<li><code>json replacer</code> JSON replacer callback, <code>null</code> by default</li>
+<li><code>case sensitive routing</code> Enable case sensitivity, disabled by default, treating &quot;/Foo&quot; and &quot;/foo&quot; as the same</li>
+<li><code>strict routing</code> Enable strict routing, by default &quot;/foo&quot; and &quot;/foo/&quot; are treated the same by the router</li>
+<li><code>view cache</code> Enables view template compilation caching, enabled in production by default</li>
+<li><code>view engine</code> The default engine extension to use when omitted</li>
+<li><code>views</code> The view directory path, defaulting to <code>&quot;process.cwd() + &#39;/views&#39;&quot;</code></li>
+<li><code>query parser</code> The query parser to use - &quot;simple&quot; or &quot;extended&quot;, defaults to &quot;extended&quot;. The simple query parser is based on node&#39;s native query parser, <a href="http://nodejs.org/api/querystring.html">querystring</a>. The extended query parser is based on <a href="https://www.npmjs.org/package/qs">qp</a>.</li>
+<li><code>x-powered-by</code> Enables the &quot;X-Powered-By: Express&quot; HTTP header, enabled by default</li>
+<li><p><code>etag</code> Set the ETag response header.  </p>
+<table class="doctable" border="1">
+  <thead><tr><th>Type</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong> Boolean </strong></td>
+      <td>
+          <code>true</code> enables strong ETag. This is the default setting.<br>
+          <code>false</code> disables ETag altogether.
+      </td>
+    </tr>
+    <tr>
+      <td><strong> String </strong></td>
+      <td>
+          If &quot;strong&quot;, enables strong ETag.
+          If &quot;weak&quot;, enables weak ETag.
+      </td>
+    </tr>
+    <tr>
+      <td><strong> Function </strong></td>
+      <td> Custom ETag function implementation. Use this only if you know what you are doing.
+
+        <pre class="js"><code>app.set(&#39;etag&#39;, function (body, encoding) {
   return generateHash(body, encoding); // consider the function is defined
-})</code></pre></td></tr></tbody></table><p><a href="http://en.wikipedia.org/wiki/HTTP_ETag">More about the HTTP ETag header.</a></p></li></ul></section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.
-</p><pre class="js"><code>app.set('title', 'My Site');
+})</code></pre>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="http://en.wikipedia.org/wiki/HTTP_ETag">More about the HTTP ETag header</a>.</p>
+</li>
+</ul>
+</section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.</p>
+<pre class="js"><code>
+app.set('title', 'My Site');
 app.get('title');
-// => "My Site"</code></pre></section><section><h3 id="app.get">app.get(name)</h3><p>Get setting <code>name</code> value.
+// => "My Site"
+</code>
+</pre>
+</section><section><h3 id="app.get">app.get(name)</h3><p>Get setting <code>name</code> value.
 </p><pre class="js"><code>app.get('title');
 // => undefined
 
@@ -306,8 +393,7 @@ app.route('/events')
 })
 .post(function(req, res, next) {
   // maybe add a new event...
-})
-</code></pre></section><section><h3 id="app.locals">app.locals</h3><p>Application local variables are provided to all templates
+})</code></pre></section><section><h3 id="app.locals">app.locals</h3><p>Application local variables are provided to all templates
 rendered within the application. This is useful for providing
 helper functions to templates, as well as app-level data.
 </p><pre class="js"><code>app.locals.title = 'My App';
@@ -357,7 +443,7 @@ https.createServer(options, app).listen(443);
 </p><pre class="js"><code>var app = express()
   , blog = express()
   , blogAdmin = express();
-  
+
 app.use('/blog', blog);
 blog.use('/admin', blogAdmin);
 
@@ -389,9 +475,7 @@ secret.get('/', function (req, res) {
 });
 
 admin.use('/secr*t', secret); // load the 'secret' router on '/secr*t', on the 'admin' sub app
-app.use(['/adm*n', '/manager'], admin); // load the 'admin' router on '/adm*n' and '/manager', on the parent app
-
-</code></pre></section><section><h3 id="app.onmount">app.on('mount', callback(parent))</h3><p>The <code>mount</code> event is fired on a sub app, when it is mounted on a parent app. The parent app is passed to the callback function.
+app.use(['/adm*n', '/manager'], admin); // load the 'admin' router on '/adm*n' and '/manager', on the parent app</code></pre></section><section><h3 id="app.onmount">app.on('mount', callback(parent))</h3><p>The <code>mount</code> event is fired on a sub app, when it is mounted on a parent app. The parent app is passed to the callback function.
 </p><pre class="js"><code>var admin = express();
 
 admin.on('mount', function (parent) {
@@ -698,8 +782,7 @@ app.set('jsonp callback name', 'cb');
 
 // ?cb=foo
 res.status(500).jsonp({ error: 'message' })
-// => foo({ "error": "message" })
-</code></pre></section><section><h3 id="res.type">res.type(type)</h3><p>Sets the Content-Type to the mime lookup of <code>type</code>,
+// => foo({ "error": "message" })</code></pre></section><section><h3 id="res.type">res.type(type)</h3><p>Sets the Content-Type to the mime lookup of <code>type</code>,
 or when "/" is present the Content-Type is simply set to this
 literal value.
 </p><pre class="js"><code>res.type('.html');
@@ -724,15 +807,15 @@ when the Accept header field is set to "application/json" or "*/json"
   'text/plain': function(){
     res.send('hey');
   },
-  
+
   'text/html': function(){
     res.send('<p>hey</p>');
   },
-  
+
   'application/json': function(){
     res.send({ message: 'hey' });
   },
-  
+
   'default': function() {
     // log the request and respond with 406
     res.status(406).send('Not Acceptable');
@@ -745,16 +828,15 @@ less verbose implementation:
   text: function(){
     res.send('hey');
   },
-  
+
   html: function(){
     res.send('<p>hey</p>');
   },
-  
+
   json: function(){
     res.send({ message: 'hey' });
   }
-});
-</code></pre></section><section><h3 id="res.attachment">res.attachment([filename])</h3><p>Sets the Content-Disposition header field to "attachment". If
+});</code></pre></section><section><h3 id="res.attachment">res.attachment([filename])</h3><p>Sets the Content-Disposition header field to "attachment". If
 a <code>filename</code> is given, then the Content-Type will be
 automatically set based on the extname via <code>res.type()</code>,
 and the Content-Disposition's "filename=" parameter will be set.
@@ -775,7 +857,7 @@ res.attachment('path/to/logo.png');
         'x-sent': true
     }
   };
-  
+
   var fileName = req.params.name;
   res.sendFile(fileName, options, function (err) {
     if (err) {
@@ -786,14 +868,14 @@ res.attachment('path/to/logo.png');
       console.log('Sent:', fileName);
     }
   });
-  
+
 })
 </code></pre><p><code>res.sendFile</code> provides fine-grained support for file serving
 as illustrated in the following example:
 </p><pre class="js"><code>app.get('/user/:uid/photos/:file', function(req, res){
   var uid = req.params.uid
     , file = req.params.file;
-    
+
   req.user.mayViewFilesFrom(uid, function(yes){
     if (yes) {
       res.sendFile('/uploads/' + uid + '/' + file);
@@ -965,7 +1047,7 @@ otherwise passing an error to <code>next(err)</code>.
     else if (!user) {
       return next(new Error('failed to load user'));
     }
-    
+
     req.user = user;
     next();
   });
@@ -1165,8 +1247,7 @@ router.get('/user/:id', function (req, res, next) {
 });
 
 // mount the router on the app
-app.use('/', router);
-</code></pre></section><section><h3 id="middleware.thirdparty">Third-party middleware</h3><p>Express is a routing and middleware web framework with minimal functionality of its own. Functionality to Express apps are added via third-party middleware.</p><p>Install the node module for the required functionality and loaded it in your app at the application level or at the router level.</p><p>In the following example, <code>cookie-parser</code>, a cookie parsing middleware is installed and loaded in the app.</p><pre class="js"><code>$ npm install cookie-parser
+app.use('/', router);</code></pre></section><section><h3 id="middleware.thirdparty">Third-party middleware</h3><p>Express is a routing and middleware web framework with minimal functionality of its own. Functionality to Express apps are added via third-party middleware.</p><p>Install the node module for the required functionality and loaded it in your app at the application level or at the router level.</p><p>In the following example, <code>cookie-parser</code>, a cookie parsing middleware is installed and loaded in the app.</p><pre class="js"><code>$ npm install cookie-parser
 </code></pre><pre class="js"><code>var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');

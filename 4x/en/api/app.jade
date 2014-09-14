@@ -1,5 +1,11 @@
-include ./app-settings
-include ./app-set
+section
+  h3(id='app-settings') settings
+  include:md ./app-settings.md
+  
+section
+  h3(id='app.set') app.set(name, value)
+  include:md ./app-set.md
+
 include ./app-get
 include ./app-enable
 include ./app-disable

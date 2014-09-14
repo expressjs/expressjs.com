@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Express - guide</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">express</a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html">API Reference</a><a href="/guide.html" class="active">Guide</a><a href="/migrating-4.html">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><ul id="menu"><li><ul class="active"><li><a href="#intro">Getting started</a></li><li><a href="#template-engines">Template Engines</a></li><li><a href="#executable">express(1) executable</a></li><li><a href="#error-handling">Error handling</a></li><li><a href="#users-online">Users online count</a></li><li><a href="#proxies">Express behind proxies</a></li><li><a href="#debugging-express">Debugging Express</a></li></ul></li></ul><section><h3 id="intro">Getting started</h3><p>First, if you have not already done so,
+<!DOCTYPE html><html><head><title>Express - guide</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">express</a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><active>= '/guide.html'</active><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html">API Reference</a><a href="/guide.html">Guide</a><a href="/migrating-4.html">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><ul id="menu"><li><ul class="active"><li><a href="#intro">Getting started</a></li><li><a href="#template-engines">Template Engines</a></li><li><a href="#executable">express(1) executable</a></li><li><a href="#error-handling">Error handling</a></li><li><a href="#users-online">Users online count</a></li><li><a href="#proxies">Express behind proxies</a></li><li><a href="#debugging-express">Debugging Express</a></li></ul></li></ul><section><h3 id="intro">Getting started</h3><p>First, if you have not already done so,
 <a href="http://nodejs.org/download">download and install Node</a>.
 Then, to start your first application, create a directory on your machine:
 </p><pre class="js"><code>$ mkdir hello-world
@@ -45,7 +45,7 @@ hello-world@0.0.1 /private/tmp
   │ └── crc@0.2.0
   └─┬ send@0.0.3
     └── mime@1.2.6
-    </code></pre><p>Now to create the application itself! Create a file named <code>app.js</code> or <code>server.js</code>,
+</code></pre><p>Now to create the application itself! Create a file named <code>app.js</code> or <code>server.js</code>,
 whichever you prefer, require Express and then create a new application with <code>express()</code>:
 </p><pre class="js"><code>var express = require('express');
 var app = express();
@@ -69,7 +69,7 @@ It accepts the same arguments as node's <a href="http://nodejs.org/api/net.html#
     title!= title
   body
     h1!= message
-    </code></pre><p>Then create a route to render the "index.jade" file.</p><pre class="js"><code>app.get('/', function (req, res) {
+</code></pre><p>Then create a route to render the "index.jade" file.</p><pre class="js"><code>app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 })
 </code></pre><p>On making a request to the home page, "index.jade" will be rendered as HTML.</p><p>To better understand how template engines work in Express, read <a href="faq.html#custom-template-engines">"How do I create custom template engines in Express?"</a>.</p></section><section><h3 id="executable">Using express(1) to generate an app</h3><p>The Express team maintains a handy quickstart project generator, aptly named <code>express(1)</code>. If you install express-generator globally with npm, you'll have it available from anywhere on your machine:
@@ -88,7 +88,7 @@ Options:
   -H, --hogan         add hogan.js engine support
   -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass) (defaults to plain css)
   -f, --force         force on non-empty directory
-  </code></pre><p>To generate an application with Jade and Stylus
+</code></pre><p>To generate an application with Jade and Stylus
 support:
 </p><pre class="js"><code>$ express --css stylus myapp
 
@@ -108,10 +108,10 @@ create : myapp/views/layout.jade
 
 install dependencies:
   $ cd myapp && npm install
-  
+
 run the app:
   $ DEBUG=myapp node app
-  </code></pre><p>Like any other node application, you must then install the dependencies:
+</code></pre><p>Like any other node application, you must then install the dependencies:
 </p><pre class="js"><code>$ cd myapp
 $ npm install
 </code></pre><p>Then fire it up!
@@ -246,8 +246,7 @@ express:router defined get /hello.txt +1ms
 </code></pre><p>Additionally, the app generated by the express executable (generator) also uses the <code>debug</code> module and by default is scoped to the <code>my-application</code> debug namespace.
 </p><p>You can enable those debug statements with the following command
 </p><pre class="sh"><code>$ DEBUG=my-application node ./bin/www
-</code></pre><p>For more documentation on <code>debug</code>, see the <a href="https://github.com/visionmedia/debug">debug guide</a>
-</p></section></section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+</code></pre><p>For more documentation on <code>debug</code>, see the <a href="https://github.com/visionmedia/debug">debug guide</a></p></section></section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
