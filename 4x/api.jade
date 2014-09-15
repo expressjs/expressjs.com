@@ -17,25 +17,20 @@ html
 
       #right
 
-        h2 Application
-        a(name='application')
+        h2(id='application') Application
         include ./en/api/express
         include ./en/api/app
 
-        h2 Request
-        a(name='request')
+        h2(id='request') Request
         include ./en/api/req
 
-        h2 Response
-        a(name='response')
+        h2(id='response') Response
         include ./en/api/res
 
-        h2 Router
-        a(name='router')
+        h2(id='router') Router
         include ./en/api/router
 
-        h2 Middleware
-        a(name='middleware')
+        h2(id='middleware') Middleware
         include ./en/api/middleware
 
     include ../includes/footer

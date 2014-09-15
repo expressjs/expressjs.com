@@ -8,6 +8,7 @@
 
 body {
   font: 400 14px/1.6 "Open Sans", sans-serif;
+  background: url(/images/bg.jpg);
   margin: 0;
   padding: 0;
   color: #666;
@@ -30,12 +31,12 @@ p {
   margin: 20px 0;
 }
 
-strong {
+strong, th {
   color: #353535;
 }
 
 .inner {
-  margin-top: 100px;
+  padding-top: 98px;
 }
 
 #content {
@@ -44,25 +45,33 @@ strong {
   margin-bottom: 80px;
 }
 
+section {
+  margin-left: 2em;
+  margin-bottom: 3em;
+}
+
 li code {
   color: #353535;
 }
 
 section section p {
-  width: 60%;
+  /*width: 60%;*/
 }
 
 h2 {
-  margin-top: 80px;
+  /*padding-top: 20px;*/
   font-weight: bold;
+  font-size: 2.3em;
+  margin-bottom: 15px;
 }
 
 h3 {
-  background: url(/images/hr.png) top center no-repeat;
-  margin-top: 40px;
-  padding-top: 50px;
+  /*background: url(/images/hr.png) top center no-repeat;*/
+  /*margin-top: 5px;*/
+  padding-top: 10px;
   padding-bottom: 5px;
   font-weight: bold;
+  font-size: 1.5em;
 }
 
 h4 {
@@ -85,12 +94,16 @@ a:hover {
   text-decoration: underline;
 }
 
+h2:target {
+  padding-top: 100px;
+}
+
 h3:target {
   padding-top: 100px;
 }
 
 h4:target {
-  padding-top: 50px;
+  /*padding-top: 50px;*/
 }
 
 nav a {
@@ -106,7 +119,6 @@ nav a {
   margin-left: 80px;
   padding-left: 40px;
   width: 440px;
-  border-left: 1px dotted #eee;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -153,6 +165,7 @@ nav a {
   width: 100%;
   height: 55px;
   z-index: 100;
+  border-bottom: 1px solid #ddd;
 }
 
 .inner.scroll header {
@@ -199,13 +212,10 @@ pre {
   color: #353535;
   font-size: 14px;
   line-height: 1.4;
-  margin: 0;
-  padding: 0 20px;
   background: white;
   border: 1px solid #e7e7e7;
-  border-bottom: 1px solid #ddd;
-  -webkit-box-shadow: 0 1px 3px 0 #eee;
-  -webkit-border-radius: 3px;
+  padding: 16px;
+  border-radius: 3px;
 }
 
 pre code {
@@ -265,7 +275,7 @@ code .number { color: #2F6FAD }
 
 nav {
   position: fixed;
-  top: 20px;
+  top: 15px;
   right: 15px;
   z-index: 100;
 }
@@ -311,7 +321,7 @@ html[xmlns] .clearfix {
 /* boxes */
 
 #boxes {
-  background: url(/images/hr.png) top center no-repeat;
+  /*background: url(/images/hr.png) top center no-repeat;*/
   margin-left: 50px;
   padding-top: 50px;
   padding-bottom: 50px;
@@ -388,7 +398,7 @@ html[xmlns] .clearfix {
 }
 
 .application {
-  background: url(/images/hr.png) top center no-repeat;
+  /*background: url(/images/hr.png) top center no-repeat;*/
   padding: 80px 0;
   height: 600px;
   position: relative;
@@ -509,7 +519,7 @@ html[xmlns] .clearfix {
   margin: 1em 1em 1em 0;
   border: 1px solid #d8d8d8;
   border-collapse: collapse;
-  background-color: #F9F9F9;
+  background-color: #f4f3f3;
   empty-cells:show;
   width: 100%;
 }

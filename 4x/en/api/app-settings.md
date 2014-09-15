@@ -1,4 +1,4 @@
-The following settings will alter how Express behaves:
+Express application settings can be set using [`app.set()`](#app.set), and retrieved using [`app.get()`](#app.get). The following settings will alter how the app behaves:
 
 * `trust proxy` Indicate that the app is sitting behind a front-facing proxy, and the `X-Forwarded-*` headers may be trusted for determining the connection and the IP address of the client. It must, however, be noted that, the `X-Forwarded-*` headers are easily spoofed and the detected IP addresses are unreliable.
 
