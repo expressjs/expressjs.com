@@ -31,7 +31,7 @@ o(function(){
   })
 
   // highlight code
-  o('pre.js code').each(function(){
+  o('code.lang-js').each(function(){
     o(this).html(highlight(o(this).text()));
   })
 })

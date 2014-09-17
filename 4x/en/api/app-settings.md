@@ -26,7 +26,7 @@ Express application settings can be set using [`app.set()`](#app.set), and retri
             </ul>
           The IP addresses can be set in the following ways.  
 
-          <pre class="js"><code>app.set('trust proxy', 'loopback') // specify a single subnet
+          <pre><code class="lang-js">app.set('trust proxy', 'loopback') // specify a single subnet
   app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
   app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
   app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code></pre>
@@ -42,7 +42,7 @@ Express application settings can be set using [`app.set()`](#app.set), and retri
         <td>** Function **</td>
         <td> Custom trust implementation. Use this only if you know what you are doing.
 
-            <pre class="js"><code>app.set('trust proxy', function (ip) {
+            <pre><code class="lang-js">app.set('trust proxy', function (ip) {
     if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
     else return false;
   })</code></pre>
@@ -85,7 +85,7 @@ Express application settings can be set using [`app.set()`](#app.set), and retri
         <td>** Function **</td>
         <td> Custom ETag function implementation. Use this only if you know what you are doing.
 
-          <pre class="js"><code>app.set('etag', function (body, encoding) {
+          <pre><code class="lang-js">app.set('etag', function (body, encoding) {
     return generateHash(body, encoding); // consider the function is defined
   })</code></pre>
 

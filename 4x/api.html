@@ -1,12 +1,14 @@
-<!DOCTYPE html><html><head><title>Express - api reference</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">express</a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html" class="active">API Reference</a><a href="/guide.html">Guide</a><a href="/migrating-4.html">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><ul id="menu"><li id="app-api"><a href="#application">Application</a><ul id="app-menu"><li><a href="#express">express()</a></li><li><a href="#app-settings">application settings</a></li><li><a href="#app.set">app.set()</a></li><li><a href="#app.get">app.get()</a></li><li><a href="#app.enable">app.enable()</a></li><li><a href="#app.disable">app.disable()</a></li><li><a href="#app.enabled">app.enabled()</a></li><li><a href="#app.disabled">app.disabled()</a></li><li><a href="#app.use">app.use()</a></li><li><a href="#app.engine">app.engine()</a></li><li><a href="#app.param">app.param()</a></li><li><a href="#app.VERB">application routing</a></li><li><a href="#app.all">app.all()</a></li><li><a href="#app.route">app.route()</a></li><li><a href="#app.locals">app.locals</a></li><li><a href="#app.render">app.render()</a></li><li><a href="#app.listen">app.listen()</a></li><li><a href="#app.path">app.path()</a></li><li><a href="#app.mountpath">app.mountpath</a></li><li><a href="#app.onmount">app.onmount</a></li></ul></li><li id="req-api"><a href="#request">Request</a><ul id="req-menu"><li><a href="#req.params">req.params</a></li><li><a href="#req.query">req.query</a></li><li><a href="#req.param">req.param()</a></li><li><a href="#req.route">req.route</a></li><li><a href="#req.cookies">req.cookies</a></li><li><a href="#req.signedCookies">req.signedCookies</a></li><li><a href="#req.get">req.get()</a></li><li><a href="#req.accepts">req.accepts()</a></li><li><a href="#req.acceptsCharsets">req.acceptsCharsets()</a></li><li><a href="#req.acceptsLanguages">req.acceptsLanguages()</a></li><li><a href="#req.acceptsEncodings">req.acceptsEncodings()</a></li><li><a href="#req.is">req.is()</a></li><li><a href="#req.ip">req.ip</a></li><li><a href="#req.ips">req.ips</a></li><li><a href="#req.path">req.path</a></li><li><a href="#req.hostname">req.hostname</a></li><li><a href="#req.fresh">req.fresh</a></li><li><a href="#req.stale">req.stale</a></li><li><a href="#req.xhr">req.xhr</a></li><li><a href="#req.protocol">req.protocol</a></li><li><a href="#req.secure">req.secure</a></li><li><a href="#req.subdomains">req.subdomains</a></li><li><a href="#req.originalUrl">req.originalUrl</a></li><li><a href="#req.baseUrl">req.baseUrl</a></li></ul></li><li id="res-api"><a href="#response">Response</a><ul id="res-menu"><li><a href="#res.status">res.status()</a></li><li><a href="#res.set">res.set()</a></li><li><a href="#res.get">res.get()</a></li><li><a href="#res.cookie">res.cookie()</a></li><li><a href="#res.clearCookie">res.clearCookie()</a></li><li><a href="#res.redirect">res.redirect()</a></li><li><a href="#res.location">res.location()</a></li><li><a href="#res.send">res.send()</a></li><li><a href="#res.json">res.json()</a></li><li><a href="#res.jsonp">res.jsonp()</a></li><li><a href="#res.type">res.type()</a></li><li><a href="#res.format">res.format()</a></li><li><a href="#res.attachment">res.attachment()</a></li><li><a href="#res.sendFile">res.sendFile()</a></li><li><a href="#res.sendStatus">res.sendStatus()</a></li><li><a href="#res.download">res.download()</a></li><li><a href="#res.links">res.links()</a></li><li><a href="#res.locals">res.locals</a></li><li><a href="#res.render">res.render()</a></li><li><a href="#res.vary">res.vary()</a></li><li><a href="#res.end">res.end()</a></li><li><a href="#res.headersSent">res.headersSent</a></li></ul></li><li id="router-api"><a href="#router">Router</a><ul id="router-menu"><li><a href="#router">Router()</a></li><li><a href="#router.use">router.use()</a></li><li><a href="#router.param">router.param()</a></li><li><a href="#router.route">router.route()</a></li><li><a href="#router.VERB">router.VERB()</a></li></ul></li><li id="middleware-api"><a href="#middleware">Middleware</a><ul id="middleware-menu"><li><a href="#middleware.api">API</a></li><li><a href="#middleware.application">Application level</a></li><li><a href="#middleware.router">Router level</a></li><li><a href="#middleware.thirdparty">Third-party</a></li><li><a href="#middleware.builtin">Built-in</a></li></ul></li></ul><div id="right"><h2 id="application">Application</h2><section><h3 id="express">express()</h3><p>Create an express application.
-</p><pre class="js"><code>var express = require('express');
+<!DOCTYPE html><html><head><title>Express - api reference</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">express</a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html" class="active">API Reference</a><a href="/guide.html">Guide</a><a href="/migrating-4.html">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><ul id="menu"><li id="app-api"><a href="#application">Application</a><ul id="app-menu"><li><a href="#express">express()</a></li><li><a href="#app-settings">application settings</a></li><li><a href="#app.set">app.set()</a></li><li><a href="#app.get">app.get()</a></li><li><a href="#app.enable">app.enable()</a></li><li><a href="#app.disable">app.disable()</a></li><li><a href="#app.enabled">app.enabled()</a></li><li><a href="#app.disabled">app.disabled()</a></li><li><a href="#app.use">app.use()</a></li><li><a href="#app.engine">app.engine()</a></li><li><a href="#app.param">app.param()</a></li><li><a href="#app.VERB">application routing</a></li><li><a href="#app.all">app.all()</a></li><li><a href="#app.route">app.route()</a></li><li><a href="#app.locals">app.locals</a></li><li><a href="#app.render">app.render()</a></li><li><a href="#app.listen">app.listen()</a></li><li><a href="#app.path">app.path()</a></li><li><a href="#app.mountpath">app.mountpath</a></li><li><a href="#app.onmount">app.onmount</a></li></ul></li><li id="req-api"><a href="#request">Request</a><ul id="req-menu"><li><a href="#req.params">req.params</a></li><li><a href="#req.query">req.query</a></li><li><a href="#req.param">req.param()</a></li><li><a href="#req.route">req.route</a></li><li><a href="#req.cookies">req.cookies</a></li><li><a href="#req.signedCookies">req.signedCookies</a></li><li><a href="#req.get">req.get()</a></li><li><a href="#req.accepts">req.accepts()</a></li><li><a href="#req.acceptsCharsets">req.acceptsCharsets()</a></li><li><a href="#req.acceptsLanguages">req.acceptsLanguages()</a></li><li><a href="#req.acceptsEncodings">req.acceptsEncodings()</a></li><li><a href="#req.is">req.is()</a></li><li><a href="#req.ip">req.ip</a></li><li><a href="#req.ips">req.ips</a></li><li><a href="#req.path">req.path</a></li><li><a href="#req.hostname">req.hostname</a></li><li><a href="#req.fresh">req.fresh</a></li><li><a href="#req.stale">req.stale</a></li><li><a href="#req.xhr">req.xhr</a></li><li><a href="#req.protocol">req.protocol</a></li><li><a href="#req.secure">req.secure</a></li><li><a href="#req.subdomains">req.subdomains</a></li><li><a href="#req.originalUrl">req.originalUrl</a></li><li><a href="#req.baseUrl">req.baseUrl</a></li></ul></li><li id="res-api"><a href="#response">Response</a><ul id="res-menu"><li><a href="#res.status">res.status()</a></li><li><a href="#res.set">res.set()</a></li><li><a href="#res.get">res.get()</a></li><li><a href="#res.cookie">res.cookie()</a></li><li><a href="#res.clearCookie">res.clearCookie()</a></li><li><a href="#res.redirect">res.redirect()</a></li><li><a href="#res.location">res.location()</a></li><li><a href="#res.send">res.send()</a></li><li><a href="#res.json">res.json()</a></li><li><a href="#res.jsonp">res.jsonp()</a></li><li><a href="#res.type">res.type()</a></li><li><a href="#res.format">res.format()</a></li><li><a href="#res.attachment">res.attachment()</a></li><li><a href="#res.sendFile">res.sendFile()</a></li><li><a href="#res.sendStatus">res.sendStatus()</a></li><li><a href="#res.download">res.download()</a></li><li><a href="#res.links">res.links()</a></li><li><a href="#res.locals">res.locals</a></li><li><a href="#res.render">res.render()</a></li><li><a href="#res.vary">res.vary()</a></li><li><a href="#res.end">res.end()</a></li><li><a href="#res.headersSent">res.headersSent</a></li></ul></li><li id="router-api"><a href="#router">Router</a><ul id="router-menu"><li><a href="#router">Router()</a></li><li><a href="#router.use">router.use()</a></li><li><a href="#router.param">router.param()</a></li><li><a href="#router.route">router.route()</a></li><li><a href="#router.VERB">router.VERB()</a></li></ul></li><li id="middleware-api"><a href="#middleware">Middleware</a><ul id="middleware-menu"><li><a href="#middleware.api">API</a></li><li><a href="#middleware.application">Application level</a></li><li><a href="#middleware.router">Router level</a></li><li><a href="#middleware.thirdparty">Third-party</a></li><li><a href="#middleware.builtin">Built-in</a></li></ul></li></ul><div id="right"><h2 id="application">Application</h2><section><h3 id="express">express()</h3><p>Create an express application.</p>
+<pre><code class="lang-js">var express = require(&#39;express&#39;);
 var app = express();
 
-app.get('/', function(req, res){
-  res.send('hello world');
+app.get(&#39;/&#39;, function(req, res){
+  res.send(&#39;hello world&#39;);
 });
 
-app.listen(3000);</code></pre></section><section><h3 id="app-settings">settings</h3><p>Express application settings can be set using <a href="#app.set"><code>app.set()</code></a>, and retrieved using <a href="#app.get"><code>app.get()</code></a>. The following settings will alter how the app behaves:</p>
+app.listen(3000);
+</code></pre>
+</section><section><h3 id="app-settings">settings</h3><p>Express application settings can be set using <a href="#app.set"><code>app.set()</code></a>, and retrieved using <a href="#app.get"><code>app.get()</code></a>. The following settings will alter how the app behaves:</p>
 <ul>
 <li><p><code>trust proxy</code> Indicate that the app is sitting behind a front-facing proxy, and the <code>X-Forwarded-*</code> headers may be trusted for determining the connection and the IP address of the client. It must, however, be noted that, the <code>X-Forwarded-*</code> headers are easily spoofed and the detected IP addresses are unreliable.</p>
 <p><code>trust proxy</code> is disabled by default. When enabled, Express attempts to determine the IP address of the client which is connected through the front-facing proxy, or a series of proxies. The <code>req.ips</code> property, then, contains an array of IP addresses the client is connected through. It can be enabled using either of the following values.</p>
@@ -30,7 +32,7 @@ app.listen(3000);</code></pre></section><section><h3 id="app-settings">settings<
             <li>uniquelocal - <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>, <code>fc00::/7</code></li>
           </ul>
         The IP addresses can be set in the following ways.<br>
-        <pre class="js"><code>app.set(&#39;trust proxy&#39;, &#39;loopback&#39;) // specify a single subnet
+        <pre><code class="lang-js">app.set(&#39;trust proxy&#39;, &#39;loopback&#39;) // specify a single subnet
 app.set(&#39;trust proxy&#39;, &#39;loopback, 123.123.123.123&#39;) // specify a subnet and an address
 app.set(&#39;trust proxy&#39;, &#39;loopback, linklocal, uniquelocal&#39;) // specify multiple subnets as CSV
 app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;uniquelocal&#39;]) // specify multiple subnets as an array</code></pre>
@@ -46,7 +48,7 @@ app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;un
       <td><strong> Function </strong></td>
       <td> Custom trust implementation. Use this only if you know what you are doing.
 
-          <pre class="js"><code>app.set(&#39;trust proxy&#39;, function (ip) {
+          <pre><code class="lang-js">app.set(&#39;trust proxy&#39;, function (ip) {
   if (ip === &#39;127.0.0.1&#39; || ip === &#39;123.123.123.123&#39;) return true; // trusted IPs
   else return false;
 })</code></pre>
@@ -89,7 +91,7 @@ app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;un
       <td><strong> Function </strong></td>
       <td> Custom ETag function implementation. Use this only if you know what you are doing.
 
-        <pre class="js"><code>app.set(&#39;etag&#39;, function (body, encoding) {
+        <pre><code class="lang-js">app.set(&#39;etag&#39;, function (body, encoding) {
   return generateHash(body, encoding); // consider the function is defined
 })</code></pre>
 
@@ -102,137 +104,255 @@ app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;un
 </li>
 </ul>
 </section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.</p>
-<pre class="js"><code>app.set('title', 'My Site');
-app.get('title'); // "My Site"
+<pre><code class="lang-js">app.set(&#39;title&#39;, &#39;My Site&#39;);
+app.get(&#39;title&#39;); // &quot;My Site&quot;
 </code></pre>
-</section><section><h3 id="app.get">app.get(name)</h3><p>Get setting <code>name</code> value.
-</p><pre class="js"><code>app.get('title');
-// => undefined
+</section><section><h3 id="app.get">app.get(name)</h3><p>Get setting <code>name</code> value.</p>
+<pre><code class="lang-js">app.get(&#39;title&#39;);
+// =&gt; undefined
 
-app.set('title', 'My Site');
-app.get('title');
-// => "My Site"</code></pre></section><section><h3 id="app.enable">app.enable(name)</h3><p>Set setting <code>name</code> to <code>true</code>.
-</p><pre class="js"><code>app.enable('trust proxy');
-app.get('trust proxy');
-// => true</code></pre></section><section><h3 id="app.disable">app.disable(name)</h3><p>Set setting <code>name</code> to <code>false</code>.
-</p><pre class="js"><code>app.disable('trust proxy');
-app.get('trust proxy');
-// => false</code></pre></section><section><h3 id="app.enabled">app.enabled(name)</h3><p>Check if setting <code>name</code> is enabled.
-</p><pre class="js"><code>app.enabled('trust proxy');
-// => false
+app.set(&#39;title&#39;, &#39;My Site&#39;);
+app.get(&#39;title&#39;);
+// =&gt; &quot;My Site&quot;
+</code></pre>
+</section><section><h3 id="app.enable">app.enable(name)</h3><p>Set setting <code>name</code> to <code>true</code>.</p>
+<pre><code class="lang-js">app.enable(&#39;trust proxy&#39;);
+app.get(&#39;trust proxy&#39;);
+// =&gt; true
+</code></pre>
+</section><section><h3 id="app.enabled">app.enabled(name)</h3><p>Check if setting <code>name</code> is enabled.</p>
+<pre><code class="lang-js">app.enabled(&#39;trust proxy&#39;);
+// =&gt; false
 
-app.enable('trust proxy');
-app.enabled('trust proxy');
-// => true</code></pre></section><section><h3 id="app.disabled">app.disabled(name)</h3><p>Check if setting <code>name</code> is disabled.
-</p><pre class="js"><code>app.disabled('trust proxy');
-// => true
+app.enable(&#39;trust proxy&#39;);
+app.enabled(&#39;trust proxy&#39;);
+// =&gt; true
+</code></pre>
+</section><section><h3 id="app.disable">app.disable(name)</h3><p>Check if setting <code>name</code> is enabled.</p>
+<pre><code class="lang-js">app.enabled(&#39;trust proxy&#39;);
+// =&gt; false
 
-app.enable('trust proxy');
-app.disabled('trust proxy');
-// => false</code></pre></section><section><h3 id="app.use">app.use([path], [function...], function)</h3><p>Mount the <a href="#middleware.api">middleware</a> <code>function</code>(s) at the <code>path</code>. If <code>path</code> is not specified, it defaults to "/".</p><p>Mounting a middleware at a <code>path</code> will cause the middleware function to be executed whenever the base of the requested path matches the <code>path</code>.</p><p>Since <code>path</code> defaults to "/", middleware mounted without a path will be executed for every request to the app.</p><pre class="js"><code>// this middleware will be executed for every request to the app
+app.enable(&#39;trust proxy&#39;);
+app.enabled(&#39;trust proxy&#39;);
+// =&gt; true
+</code></pre>
+</section><section><h3 id="app.disabled">app.disabled(name)</h3><p>Check if setting <code>name</code> is disabled.</p>
+<pre><code class="lang-js">app.disabled(&#39;trust proxy&#39;);
+// =&gt; true
+
+app.enable(&#39;trust proxy&#39;);
+app.disabled(&#39;trust proxy&#39;);
+// =&gt; false
+</code></pre>
+</section><section><h3 id="app.use">app.use([path], [function...], function)</h3><p>Mount the <a href="#middleware.api">middleware</a> <code>function</code>(s) at the <code>path</code>. If <code>path</code> is not specified, it defaults to &quot;/&quot;.</p>
+<p>Mounting a middleware at a <code>path</code> will cause the middleware function to be executed whenever the base of the requested path matches the <code>path</code>.</p>
+<p>Since <code>path</code> defaults to &quot;/&quot;, middleware mounted without a path will be executed for every request to the app.</p>
+<pre><code class="lang-js">// this middleware will be executed for every request to the app
 app.use(function (req, res, next) {
-  console.log('Time: %d', Date.now());
+  console.log(&#39;Time: %d&#39;, Date.now());
   next();
 })
-</code></pre><p>Middleware functions are executed sequentially, therefore the order of middleware inclusion is important.</p><pre class="js"><code>// this middleware will not allow the request to go beyond it
-app.use(function(req, res, next) {
-  res.send('Hello World');
-})
+</code></pre>
+<p>Middleware functions are executed sequentially, therefore the order of middleware inclusion is important.</p>
+<pre><code class="lang-js">  // this middleware will not allow the request to go beyond it
+  app.use(function(req, res, next) {
+    res.send(&#39;Hello World&#39;);
+  })
 
-// requests will never reach this route
-app.get('/', function (req, res) {
-  res.send('Welcome');
-})
-</code></pre><div class="notice">The middleware examples below are intentionally left overly simple to keep the examples lean and clutter-free.</div><p><code>path</code> can be a string representing a path, a path pattern, a regular expression to match paths, or an array of combinations of the aforementioned path objects.<table border="1" class="doctable"><thead><tr><th>Type</th><th>Example</th></tr></thead><tbody><tr><td><strong>Path</strong></td><td><pre class="js"><code>// will match paths starting with /abcd
-app.use('/abcd', function (req, res, next) {
+  // requests will never reach this route
+  app.get(&#39;/&#39;, function (req, res) {
+    res.send(&#39;Welcome&#39;);
+  })
+</code></pre>
+<div class="notice"> The middleware examples below are intentionally left overly simple to kee the examples lean and clutter-free.</div>
+
+<p><code>path</code> can be a string representing a path, a path pattern, a regular expression to match paths, or an array of combinations of the aforementioned path objects.</p>
+<table class="doctable" border="1">
+  <thead>
+      <tr>
+        <th> Type </th>
+        <th> Example </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong> Path </strong></td>
+        <td>
+          <pre><code class="lang-js">// will match paths starting with /abcd
+app.use(&#39;/abcd&#39;, function (req, res, next) {
   next();
-})</code></pre></td></tr><tr><td><strong>Path Pattern</strong></td><td><pre class="js"><code>// will match paths starting with /abcd and /abd
-app.use('/abc?d', function (req, res, next) {
+})</code></pre>
+      </tr>
+
+      <tr>
+        <td><strong> Path Pattern </strong></td>
+        <td>
+          <pre><code class="lang-js">// will match paths starting with /abcd and /abd
+app.use(&#39;/abc?d&#39;, function (req, res, next) {
   next();
 })
 
 // will match paths starting with /abcd and /abd
-app.use('/abc?d', function (req, res, next) {
+app.use(&#39;/abc?d&#39;, function (req, res, next) {
   next();
 })
 
 // will match paths starting with /abcd, /abbcd, /abbbbbcd and so on
-app.use('/ab+cd', function (req, res, next) {
+app.use(&#39;/ab+cd&#39;, function (req, res, next) {
   next();
 })
 
-// will match paths starting with /abcd, /abxcd, /abFOOcd, /abbArcd and so on  
-app.use('/ab*cd', function (req, res, next) {
+// will match paths starting with /abcd, /abxcd, /abFOOcd, /abbArcd and so on
+app.use(&#39;/ab<em>cd&#39;, function (req, res, next) {
   next();
 })
 
 // will match paths starting with /ad and /abcd
-app.use('/a(bc)?d', function (req, res, next) {
+app.use(&#39;/a(bc)?d&#39;, function (req, res, next) {
   next();
-})</code></pre></td></tr><tr><td><strong>Regular Expression</strong></td><td><pre class="js"><code>// will match paths starting with /abc and /xyz
+})</code></pre>
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong> Regular Expression </strong></td>
+        <td>
+          <pre><code class="lang-js">// will match paths starting with /abc and /xyz
 app.use(/\/abc|\/xyz/, function (req, res, next) {
   next();
-})</code></pre></td></tr><tr><td><strong>Array</strong></td><td><pre class="js"><code>// will match paths starting with /abcd, /xyza, /lmn, and /pqr
-app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
+})</code></pre>
+        </td>
+      </tr>
+
+      <tr>
+        <td><em>* Array </em></em></td>
+        <td>
+          <pre><code class="lang-js">// will match paths starting with /abcd, /xyza, /lmn, and /pqr
+app.use([&#39;/abcd&#39;, &#39;/xyza&#39;, /\/lmn|\/pqr/], function (req, res, next) {
+  next();
+})</code></pre>
+        </td>
+      </tr>
+
+    </tbody>
+</table>
+
+<p><code>function</code> can be a middleware function, a series of middleware functions, an array of middleware functions, or a combination of all of them. Since routers and apps implement the middleware interface, they can be used like any other middleware function.</p>
+<table class="doctable" border="1">
+  <thead>
+    <tr>
+      <th>Usage</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td><strong> Single Middleware </strong></td>
+      <td>
+A middleware function can be defined and mounted locally.
+<pre><code class="lang-js">app.use(function (req, res, next) {
   next();
 })
-</code></pre></td></tr></tbody></table></p><p><code>function</code> can be a middleware function, a series of middleware functions, an array of middleware functions, or a combination of all of them. Since routers and apps implement the middleware interface, they can be used like any other middleware function.</p><table border="1" class="doctable"><thead><tr><th>Usage</th><th>Example</th></tr></thead><tbody><tr><td><strong>Single Middleware</strong></td><td><p>A middleware function can be defined and mounted locally.</p><pre class="js"><code>app.use(function (req, res, next) {
-  next();
-})
-</code></pre><p>A router is a valid middleware.</p><pre class="js"><code>var router = express.Router();
-router.get('/', function (req, res, next) {
+</code></pre>
+A router is a valid middleware.
+
+<pre><code class="lang-js">var router = express.Router();
+router.get(&#39;/&#39;, function (req, res, next) {
   next();
 })
 app.use(router);
-</code></pre><p>An Express app is a valid middleware.</p><pre class="js"><code>var subApp = express();
-subApp.get('/', function (req, res, next) {
+</code></pre>
+
+An Express app is a valid middleware.
+<pre><code class="lang-js">var subApp = express();
+subApp.get(&#39;/&#39;, function (req, res, next) {
   next();
 })
 app.use(subApp);
-</code></pre></td></tr><tr><td><strong>Series of Middleware</strong></td><td><p>More than one middleware can be specified at a mount path.</p><pre class="js"><code>var r1 = express.Router();
-r1.get('/', function (req, res, next) {
+</code></pre>
+    </tr>
+
+    <tr>
+      <td><strong>Series of Middleware</strong></td>
+      <td>
+        More than one middleware can be specified at a mount path.
+<pre><code class="lang-js">var r1 = express.Router();
+r1.get(&#39;/&#39;, function (req, res, next) {
   next();
 })
 
 var r2 = express.Router();
-r2.get('/', function (req, res, next) {
+r2.get(&#39;/&#39;, function (req, res, next) {
   next();
 })
 
 app.use(r1, r2);
-</code></pre></td></tr><tr><td><strong>Array</strong></td><td><p>Clubbing middleware in arrays is a good way to logically group them. The mount path has to be specified, if an array of middleware is passed as the first or the only set of middleware.</p><pre class="js"><code>var r1 = express.Router();
-r1.get('/', function (req, res, next) {
+</code></pre>
+    </tr>
+
+    <tr>
+      <td><strong> Array </strong></td>
+      <td>
+        Clubbing middleware in arrays is a good way to logically group them. The mount path has to be specified, if an array of middleware is passed as the first or the only set of middleware.
+<pre><code class="lang-js">var r1 = express.Router();
+r1.get(&#39;/&#39;, function (req, res, next) {
   next();
 })
 
 var r2 = express.Router();
-r2.get('/', function (req, res, next) {
+r2.get(&#39;/&#39;, function (req, res, next) {
   next();
 })
 
-app.use('/', [r1, r2]);
-</code></pre></td></tr><tr><td><strong>Combination</strong></td><td><p>All the above ways of mounting middleware can be combined.</p><pre class="js"><code>function mw1(req, res, next) { next(); }
+app.use(&#39;/&#39;, [r1, r2]);
+</code></pre>
+      </td>
+    </tr>
+
+    <tr>
+      <td><strong> Combination </strong></td>
+      <td>
+        All the above ways of mounting middleware can be combined.
+<pre><code class="lang-js">function mw1(req, res, next) { next(); }
 function mw2(req, res, next) { next(); }
 
 var r1 = express.Router();
-r1.get('/', function (req, res, next) { next(); });
+r1.get(&#39;/&#39;, function (req, res, next) { next(); });
 
 var r2 = express.Router();
-r2.get('/', function (req, res, next) { next(); });
+r2.get(&#39;/&#39;, function (req, res, next) { next(); });
 
 var subApp = express();
-subApp.get('/', function (req, res, next) { next(); });
+subApp.get(&#39;/&#39;, function (req, res, next) { next(); });
 
 app.use(mw1, [mw2, r1, r2], subApp);
-</code></pre></td></tr></tbody></table><p>Following are some examples of using the <a href="#express.static">express.static</a> middleware in an Express app.</p><p>Serve static content for the app from the "public" directory in the application directory.</p><pre class="js"><code>// GET /style.css etc
-app.use(express.static(__dirname + '/public'));
-</code></pre><p>Mount the middleware at "/static" to server static content only when their request path is prefixed with "/static".</p><pre class="js"><code>// GET /static/style.css etc.
-app.use('/static', express.static(__dirname + '/public'));
-</code></pre><p>Disable logging for static content requests by loading the logger middleware after the static middleware.</p><pre class="js"><code>app.use(express.static(__dirname + '/public'));
-app.use(logger());
-</code></pre><p>Serve static files from multiple directories, but give precedence to "./public" over the others.</p><pre class="js"><code>app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/files'));
-app.use(express.static(__dirname + '/uploads'));</code></pre></section><section><h3 id="app.engine">app.engine(ext, callback)</h3><p>Register the given template engine <code>callback</code> as <code>ext</code>
+</code></pre>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<p>Following are some examples of using the <a href="#express.static">express.static</a> middleware in an Express app.</p>
+<p>Serve static content for the apfrom the &quot;public&quot; directory in the application directory.</p>
+<pre><code class="lang-js">    // GET /style.css etc
+    app.use(express.static(__dirname + &#39;/public&#39;));
+</code></pre>
+<p>Mount the middleware at &quot;/static&quot; to server static content only when their request path is prefixed with &quot;/static&quot;.</p>
+<pre><code class="lang-js">  // GET /static/style.css etc.
+  app.use(&#39;/static&#39;, express.static(__dirname + &#39;/public&#39;));
+</code></pre>
+<p>Disable logging for static content requests by loading the logger middleware after the static middleware.</p>
+<pre><code class="lang-js">    app.use(express.static(__dirname + &#39;/public&#39;));
+    app.use(logger());
+</code></pre>
+<p>Serve static files from multiple directories, but give precedence to &quot;./public&quot; over the others.</p>
+<pre><code class="lang-js">  app.use(express.static(__dirname + &#39;/public&#39;));
+  app.use(express.static(__dirname + &#39;/files&#39;));
+  app.use(express.static(__dirname + &#39;/uploads&#39;));
+</code></pre>
+</section><section><h3 id="app.engine">app.engine(ext, callback)</h3><p>Register the given template engine <code>callback</code> as <code>ext</code>
 
 By default will <code>require()</code> the engine based on the
 file extension. For example if you try to render

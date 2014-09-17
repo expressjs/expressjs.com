@@ -6,12 +6,30 @@ section
   h3(id='app.set') app.set(name, value)
   include:md ./app-set.md
 
-include ./app-get
-include ./app-enable
-include ./app-disable
-include ./app-enabled
-include ./app-disabled
-include ./app-use
+section
+  h3(id='app.get') app.get(name)
+  include:md ./app-get.md
+
+section
+  h3(id='app.enable') app.enable(name)
+  include:md ./app-enable.md
+
+section
+  h3(id='app.enabled') app.enabled(name)
+  include:md ./app-enabled.md
+
+section
+  h3(id='app.disable') app.disable(name)
+  include:md ./app-enabled.md
+
+section
+  h3(id='app.disabled') app.disabled(name)
+  include:md ./app-disabled.md
+
+section
+  h3(id='app.use') app.use([path], [function...], function)
+  include:md ./app-use.md
+
 include ./app-engine
 include ./app-param
 include ./app-VERB

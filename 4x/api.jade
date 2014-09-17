@@ -18,7 +18,9 @@ html
       #right
 
         h2(id='application') Application
-        include ./en/api/express
+        section
+          h3(id='express') express()
+          include:md ./en/api/express.md
         include ./en/api/app
 
         h2(id='request') Request
