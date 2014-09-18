@@ -1,6 +1,6 @@
 Get setting <code>name</code> value.
 
-```js
+```
 app.get('title');
 // => undefined
 

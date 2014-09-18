@@ -30,14 +30,46 @@ section
   h3(id='app.use') app.use([path], [function...], function)
   include:md ./app-use.md
 
-include ./app-engine
-include ./app-param
-include ./app-VERB
-include ./app-all
-include ./app-route
-include ./app-locals
-include ./app-render
-include ./app-listen
-include ./app-path
-include ./app-mountpath
-include ./app-onmount
+section
+  h3(id='app.engine') app.engine(ext, callback)
+  include:md ./app-engine.md
+
+section
+  h3(id='app.param') app.param([name], callback)
+  include:md ./app-param.md
+
+section
+  h3(id='app.VERB') app.VERB(path, [callback...], callback)
+  include:md ./app-VERB.md
+
+section
+  h3(id='app.all') app.all(path, [callback...], callback)
+  include:md ./app-all.md
+
+section
+  h3(id='app.route') app.route(path)
+  include:md ./app-route.md
+
+section
+  h3(id='app.locals') app.locals
+  include:md ./app-locals.md
+
+section
+  h3(id='app.render') app.render(view, [options], callback)
+  include:md ./app-render.md
+
+section
+  h3(id='app.listen') app.listen()
+  include:md ./app-listen.md
+
+section
+  h3(id='app.path') app.path()
+  include:md ./app-path.md
+
+section
+  h3(id='app.mountpath') app.mountpath
+  include:md ./app-mountpath.md
+
+section
+  h3(id='app.onmount') app.on('mount', callback(parent))
+  include:md ./app-onmount.md

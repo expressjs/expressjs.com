@@ -104,47 +104,41 @@ app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;un
 </li>
 </ul>
 </section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.</p>
-<pre><code class="lang-js">app.set(&#39;title&#39;, &#39;My Site&#39;);
+<pre><code>app.set(&#39;title&#39;, &#39;My Site&#39;);
 app.get(&#39;title&#39;); // &quot;My Site&quot;
-</code></pre>
-</section><section><h3 id="app.get">app.get(name)</h3><p>Get setting <code>name</code> value.</p>
-<pre><code class="lang-js">app.get(&#39;title&#39;);
+</code></pre></section><section><h3 id="app.get">app.get(name)</h3><p>Get setting <code>name</code> value.</p>
+<pre><code>app.get(&#39;title&#39;);
 // =&gt; undefined
 
 app.set(&#39;title&#39;, &#39;My Site&#39;);
 app.get(&#39;title&#39;);
 // =&gt; &quot;My Site&quot;
-</code></pre>
-</section><section><h3 id="app.enable">app.enable(name)</h3><p>Set setting <code>name</code> to <code>true</code>.</p>
-<pre><code class="lang-js">app.enable(&#39;trust proxy&#39;);
+</code></pre></section><section><h3 id="app.enable">app.enable(name)</h3><p>Set setting <code>name</code> to <code>true</code>.</p>
+<pre><code>app.enable(&#39;trust proxy&#39;);
 app.get(&#39;trust proxy&#39;);
 // =&gt; true
-</code></pre>
-</section><section><h3 id="app.enabled">app.enabled(name)</h3><p>Check if setting <code>name</code> is enabled.</p>
-<pre><code class="lang-js">app.enabled(&#39;trust proxy&#39;);
+</code></pre></section><section><h3 id="app.enabled">app.enabled(name)</h3><p>Check if setting <code>name</code> is enabled.</p>
+<pre><code>app.enabled(&#39;trust proxy&#39;);
 // =&gt; false
 
 app.enable(&#39;trust proxy&#39;);
 app.enabled(&#39;trust proxy&#39;);
 // =&gt; true
-</code></pre>
-</section><section><h3 id="app.disable">app.disable(name)</h3><p>Check if setting <code>name</code> is enabled.</p>
-<pre><code class="lang-js">app.enabled(&#39;trust proxy&#39;);
+</code></pre></section><section><h3 id="app.disable">app.disable(name)</h3><p>Check if setting <code>name</code> is enabled.</p>
+<pre><code>app.enabled(&#39;trust proxy&#39;);
 // =&gt; false
 
 app.enable(&#39;trust proxy&#39;);
 app.enabled(&#39;trust proxy&#39;);
 // =&gt; true
-</code></pre>
-</section><section><h3 id="app.disabled">app.disabled(name)</h3><p>Check if setting <code>name</code> is disabled.</p>
-<pre><code class="lang-js">app.disabled(&#39;trust proxy&#39;);
+</code></pre></section><section><h3 id="app.disabled">app.disabled(name)</h3><p>Check if setting <code>name</code> is disabled.</p>
+<pre><code>app.disabled(&#39;trust proxy&#39;);
 // =&gt; true
 
 app.enable(&#39;trust proxy&#39;);
 app.disabled(&#39;trust proxy&#39;);
 // =&gt; false
-</code></pre>
-</section><section><h3 id="app.use">app.use([path], [function...], function)</h3><p>Mount the <a href="#middleware.api">middleware</a> <code>function</code>(s) at the <code>path</code>. If <code>path</code> is not specified, it defaults to &quot;/&quot;.</p>
+</code></pre></section><section><h3 id="app.use">app.use([path], [function...], function)</h3><p>Mount the <a href="#middleware.api">middleware</a> <code>function</code>(s) at the <code>path</code>. If <code>path</code> is not specified, it defaults to &quot;/&quot;.</p>
 <p>Mounting a middleware at a <code>path</code> will cause the middleware function to be executed whenever the base of the requested path matches the <code>path</code>.</p>
 <p>Since <code>path</code> defaults to &quot;/&quot;, middleware mounted without a path will be executed for every request to the app.</p>
 <pre><code class="lang-js">// this middleware will be executed for every request to the app
@@ -352,54 +346,60 @@ app.use(mw1, [mw2, r1, r2], subApp);
   app.use(express.static(__dirname + &#39;/files&#39;));
   app.use(express.static(__dirname + &#39;/uploads&#39;));
 </code></pre>
-</section><section><h3 id="app.engine">app.engine(ext, callback)</h3><p>Register the given template engine <code>callback</code> as <code>ext</code>
-
-By default will <code>require()</code> the engine based on the
+</section><section><h3 id="app.engine">app.engine(ext, callback)</h3><p>Register the given template engine <code>callback</code> as <code>ext</code></p>
+<p>By default will <code>require()</code> the engine based on the
 file extension. For example if you try to render
-a "foo.jade" file Express will invoke the following internally,
+a &quot;foo.jade&quot; file Express will invoke the following internally,
 and cache the <code>require()</code> on subsequent calls to increase
-performance.
-</p><pre class="js"><code>app.engine('jade', require('jade').__express);
+performance.</p>
+<pre><code>app.engine(&#39;jade&#39;, require(&#39;jade&#39;).__express);
 </code></pre><p>For engines that do not provide <code>.__express</code> out of the box -
-or if you wish to "map" a different extension to the template engine
+or if you wish to &quot;map&quot; a different extension to the template engine
 you may use this method. For example mapping the EJS template engine to
-".html" files:
-</p><pre class="js"><code>app.engine('html', require('ejs').renderFile);
+&quot;.html&quot; files:</p>
+<pre><code>app.engine(&#39;html&#39;, require(&#39;ejs&#39;).renderFile);
 </code></pre><p>In this case EJS provides a <code>.renderFile()</code> method with
 the same signature that Express expects: <code>(path, options, callback)</code>,
 though note that it aliases this method as <code>ejs.__express</code> internally
-so if you're using ".ejs" extensions you dont need to do anything.
-</p><p>Some template engines do not follow this convention, the
+so if you&#39;re using &quot;.ejs&quot; extensions you dont need to do anything.</p>
+<p>Some template engines do not follow this convention, the
 <a href="https://github.com/visionmedia/consolidate.js">consolidate.js</a>
-library was created to map all of node's popular template
+library was created to map all of node&#39;s popular template
 engines to follow this convention, thus allowing them to
-work seemlessly within Express.
-</p><pre class="js"><code>var engines = require('consolidate');
-app.engine('haml', engines.haml);
-app.engine('html', engines.hogan);</code></pre></section><section><h3 id="app.param">app.param([name], callback)</h3><p>Map logic to route parameters. For example, when <code>:user</code>
+work seemlessly within Express.</p>
+<pre><code>var engines = require(&#39;consolidate&#39;);
+app.engine(&#39;haml&#39;, engines.haml);
+app.engine(&#39;html&#39;, engines.hogan);
+</code></pre></section><section><h3 id="app.param">app.param([name], callback)</h3><p>Map logic to route parameters. For example, when <code>:user</code>
 is present in a route path, you may map user loading logic to automatically
 provide <code>req.user</code> to the route, or perform validations
-on the parameter input.
-</p><p><i>Note</i><ul><li>Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>app</code> will be trigerred only by route parameters defined on <code>app</code> routes.</li><li>A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.<pre class="js"><code>app.param('id', function (req, res, next, id) {
-  console.log('CALLED ONLY ONCE');
+on the parameter input.</p>
+<p><em>Note</em></p>
+<ul>
+<li>Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>app</code> will be trigerred only by route parameters defined on <code>app</code> routes.</li>
+<li><p>A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.</p>
+<pre><code>app.param(&#39;id&#39;, function (req, res, next, id) {
+  console.log(&#39;CALLED ONLY ONCE&#39;);
   next();
 })
 
-app.get('/user/:id', function (req, res, next) {
-  console.log('although this matches');
+app.get(&#39;/user/:id&#39;, function (req, res, next) {
+  console.log(&#39;although this matches&#39;);
   next();
 });
 
-app.get('/user/:id', function (req, res) {
-  console.log('and this matches too');
+app.get(&#39;/user/:id&#39;, function (req, res) {
+  console.log(&#39;and this matches too&#39;);
   res.end();
 });
-</code></pre></li></ul></p><p>The following snippet illustrates how the <code>callback</code>
+</code></pre></li>
+</ul>
+<p>The following snippet illustrates how the <code>callback</code>
 is much like middleware, thus supporting async operations. However,
 it provides the additional value of the parameter (here named as <code>id</code>), derived from the corresponding parameter in the <code>req.params</code> object.
 An attempt to load the user is then performed, assigning <code>req.user</code>;
-otherwise an error is passed to <code>next(err)</code>.
-</p><pre class="js"><code>app.param('user', function(req, res, next, id){
+otherwise an error is passed to <code>next(err)</code>.</p>
+<pre><code>app.param(&#39;user&#39;, function(req, res, next, id){
   User.find(id, function(err, user){
     if (err) {
       next(err);
@@ -407,7 +407,7 @@ otherwise an error is passed to <code>next(err)</code>.
       req.user = user;
       next();
     } else {
-      next(new Error('failed to load user'));
+      next(new Error(&#39;failed to load user&#39;));
     }
   });
 });
@@ -415,10 +415,10 @@ otherwise an error is passed to <code>next(err)</code>.
 case you have the opportunity to alter the <code>app.param()</code> API.
 For example the <a href="http://github.com/expressjs/express-params">express-params</a>
 defines the following callback which allows you to restrict parameters to a given
-regular expression. 
-</p><p>This example is a bit more advanced. It is checking if the second argument is a regular
-expression, returning the callback, which acts much like the "user" param example.
-</p><pre class="js"><code>app.param(function(name, fn){
+regular expression. </p>
+<p>This example is a bit more advanced. It is checking if the second argument is a regular
+expression, returning the callback, which acts much like the &quot;user&quot; param example.</p>
+<pre><code>app.param(function(name, fn){
   if (fn instanceof RegExp) {
     return function(req, res, next, val){
       var captures;
@@ -426,81 +426,84 @@ expression, returning the callback, which acts much like the "user" param exampl
         req.params[name] = captures;
         next();
       } else {
-        next('route');
+        next(&#39;route&#39;);
       }
     }
   }
 });
 </code></pre><p>The method could now be used to effectively validate parameters (and
-optionally parse them to provide capture groups):
-</p><pre class="js"><code>app.param('id', /^\d+$/);
+optionally parse them to provide capture groups):</p>
+<pre><code>app.param(&#39;id&#39;, /^\d+$/);
 
-app.get('/user/:id', function(req, res){
-  res.send('user ' + req.params.id);
+app.get(&#39;/user/:id&#39;, function(req, res){
+  res.send(&#39;user &#39; + req.params.id);
 });
 
-app.param('range', /^(\w+)\.\.(\w+)?$/);
+app.param(&#39;range&#39;, /^(\w+)\.\.(\w+)?$/);
 
-app.get('/range/:range', function(req, res){
+app.get(&#39;/range/:range&#39;, function(req, res){
   var range = req.params.range;
-  res.send('from ' + range[1] + ' to ' + range[2]);
-});</code></pre></section><section><h3 id="app.VERB">app.VERB(path, [callback...], callback)</h3><p>The <code>app.VERB()</code> methods provide the routing functionality
+  res.send(&#39;from &#39; + range[1] + &#39; to &#39; + range[2]);
+});
+</code></pre></section><section><h3 id="app.VERB">app.VERB(path, [callback...], callback)</h3><p>The <code>app.VERB()</code> methods provide the routing functionality
 in Express, where <strong>VERB</strong> is one of the HTTP verbs (such
 as <code>app.post()</code>). Multiple callbacks may be given; all are treated
 equally, and behave just like middleware. The only exception is that
-these callbacks may invoke <code>next('route')</code> to bypass the
+these callbacks may invoke <code>next(&#39;route&#39;)</code> to bypass the
 remaining route callback(s). This mechanism can be used to perform pre-conditions
-on a route, then pass control to subsequent routes if there's no reason to proceed
-with the current route.
-</p><p>The following snippet illustrates the most simple route definition possible. Express
+on a route, then pass control to subsequent routes if there&#39;s no reason to proceed
+with the current route.</p>
+<p>The following snippet illustrates the most simple route definition possible. Express
 translates the path strings to regular expressions, used internally to match incoming requests.
-Query strings are <em>not</em> considered when peforming these matches. For example, "GET /"
-would match the following route, as would "GET /?name=tobi":
-</p><pre class="js"><code>app.get('/', function(req, res){
-  res.send('hello world');
+Query strings are <em>not</em> considered when peforming these matches. For example, &quot;GET /&quot;
+would match the following route, as would &quot;GET /?name=tobi&quot;:</p>
+<pre><code>app.get(&#39;/&#39;, function(req, res){
+  res.send(&#39;hello world&#39;);
 });
 </code></pre><p>Regular expressions may also be used, and can be useful
 if you have very specific restraints, for example the following
-would match "GET /commits/71dbb9c" as well as "GET /commits/71dbb9c..4c084f9".
-</p><pre class="js"><code>app.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
+would match &quot;GET /commits/71dbb9c&quot; as well as &quot;GET /commits/71dbb9c..4c084f9&quot;.</p>
+<pre><code>app.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
   var from = req.params[0];
-  var to = req.params[1] || 'HEAD';
-  res.send('commit range ' + from + '..' + to);
+  var to = req.params[1] || &#39;HEAD&#39;;
+  res.send(&#39;commit range &#39; + from + &#39;..&#39; + to);
 });
 </code></pre><p>Several callbacks may also be passed, useful for re-using middleware
-that load resources, perform validations, etc.
-</p><pre class="js"><code>app.get('/user/:id', user.load, function(){
+that load resources, perform validations, etc.</p>
+<pre><code>app.get(&#39;/user/:id&#39;, user.load, function(){
   // ... 
 })
-</code></pre><p>If you have multiple common middleware for a route, you can use the route API with <code>all</code>.
-</p><pre class="js"><code>var middleware = [loadForum, loadThread];
+</code></pre><p>If you have multiple common middleware for a route, you can use the route API with <code>all</code>.</p>
+<pre><code>var middleware = [loadForum, loadThread];
 
-app.route('/forum/:fid/thread/:tid')
+app.route(&#39;/forum/:fid/thread/:tid&#39;)
 .all(loadForum)
 .all(loadThread)
 .get(function() { //... });
 .post(function() { //... });
-</code></pre><p>Both middleware will be run for GET and POST requests.</p></section><section><h3 id="app.all">app.all(path, [callback...], callback)</h3><p>This method functions just like the <code>app.VERB()</code> methods,
-however it matches all HTTP verbs. 
-</p><p>This method is extremely useful for
-mapping "global" logic for specific path prefixes or arbitrary matches.
+</code></pre><p>Both middleware will be run for GET and POST requests.</p>
+</section><section><h3 id="app.all">app.all(path, [callback...], callback)</h3><p>This method functions just like the <code>app.VERB()</code> methods,
+however it matches all HTTP verbs. </p>
+<p>This method is extremely useful for
+mapping &quot;global&quot; logic for specific path prefixes or arbitrary matches.
 For example if you placed the following route at the top of all other
 route definitions, it would require that all routes from that point on
 would require authentication, and automatically load a user. Keep in mind
 that these callbacks do not have to act as end points, <code>loadUser</code>
 can perform a task, then <code>next()</code> to continue matching subsequent
-routes.
-</p><pre class="js"><code>app.all('*', requireAuthentication, loadUser);
-</code></pre><p>Or the equivalent:
-</p><pre class="js"><code>app.all('*', requireAuthentication)
-app.all('*', loadUser);
-</code></pre><p>Another great example of this is white-listed "global" functionality. Here
+routes.</p>
+<pre><code>app.all(&#39;*&#39;, requireAuthentication, loadUser);
+</code></pre><p>Or the equivalent:</p>
+<pre><code>app.all(&#39;*&#39;, requireAuthentication)
+app.all(&#39;*&#39;, loadUser);
+</code></pre><p>Another great example of this is white-listed &quot;global&quot; functionality. Here
 the example is much like before, however only restricting paths prefixed with
-"/api":
-</p><pre class="js"><code>app.all('/api/*', requireAuthentication);</code></pre></section><section><h3 id="app.route">app.route(path)</h3><p>Returns an instance of a single route, which can then be used to handle HTTP verbs with optional middleware. Using <code>app.route()</code> is a recommended approach for avoiding duplicate route names (and thus typo errors).
-</p><pre class="js"><code>var app = express();
+&quot;/api&quot;:</p>
+<pre><code>app.all(&#39;/api/*&#39;, requireAuthentication);
+</code></pre></section><section><h3 id="app.route">app.route(path)</h3><p>Returns an instance of a single route, which can then be used to handle HTTP verbs with optional middleware. Using <code>app.route()</code> is a recommended approach for avoiding duplicate route names (and thus typo errors).</p>
+<pre><code>var app = express();
 
-app.route('/events')
+app.route(&#39;/events&#39;)
 .all(function(req, res, next) {
   // runs for all HTTP verbs first
   // think of it as route specific middleware!
@@ -510,101 +513,108 @@ app.route('/events')
 })
 .post(function(req, res, next) {
   // maybe add a new event...
-})</code></pre></section><section><h3 id="app.locals">app.locals</h3><p>Application local variables are provided to all templates
+})
+</code></pre></section><section><h3 id="app.locals">app.locals</h3><p>Application local variables are provided to all templates
 rendered within the application. This is useful for providing
-helper functions to templates, as well as app-level data.
-</p><pre class="js"><code>app.locals.title = 'My App';
-app.locals.strftime = require('strftime');
-app.locals.email = 'me@myapp.com';
+helper functions to templates, as well as app-level data.</p>
+<pre><code>app.locals.title = &#39;My App&#39;;
+app.locals.strftime = require(&#39;strftime&#39;);
+app.locals.email = &#39;me@myapp.com&#39;;
 </code></pre><p>The <code>app.locals</code> object is a JavaScript <code>Object</code>. The
-properties added to it will be exposed as local variables within the application.
-</p><pre class="js"><code>app.locals.title
-// => 'My App'
+properties added to it will be exposed as local variables within the application.</p>
+<pre><code>app.locals.title
+// =&gt; &#39;My App&#39;
 
 app.locals.email
-// => 'me@myapp.com'
-</code></pre><p>By default, Express exposes only a single app-level local variable: <code>settings</code>.
-</p><pre class="js"><code>app.set('title', 'My App');
-// use settings.title in a view</code></pre></section><section><h3 id="app.render">app.render(view, [options], callback)</h3><p>Render a <code>view</code> with a callback responding with
+// =&gt; &#39;me@myapp.com&#39;
+</code></pre><p>By default, Express exposes only a single app-level local variable: <code>settings</code>.</p>
+<pre><code>app.set(&#39;title&#39;, &#39;My App&#39;);
+// use settings.title in a view
+</code></pre></section><section><h3 id="app.render">app.render(view, [options], callback)</h3><p>Render a <code>view</code> with a callback responding with
 the rendered string. This is the app-level variant of <code>res.render()</code>,
-and otherwise behaves the same way.
-</p><pre class="js"><code>app.render('email', function(err, html){
+and otherwise behaves the same way.</p>
+<pre><code>app.render(&#39;email&#39;, function(err, html){
   // ...
 });
 
-app.render('email', { name: 'Tobi' }, function(err, html){
+app.render(&#39;email&#39;, { name: &#39;Tobi&#39; }, function(err, html){
   // ...
-});</code></pre></section><section><h3 id="app.listen">app.listen()</h3><p>Bind and listen for connections on the given host and port.
-This method is identical to node's <a href="http://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback">http.Server#listen()</a>.
-</p><pre class="js"><code>var express = require('express');
+});
+</code></pre></section><section><h3 id="app.listen">app.listen()</h3><p>Bind and listen for connections on the given host and port.
+This method is identical to node&#39;s <a href="http://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback">http.Server#listen()</a></a>.</p>
+<pre><code>var express = require(&#39;express&#39;);
 var app = express();
 app.listen(3000);
 </code></pre><p>The <code>app</code> returned by <code>express()</code> is in fact a JavaScript
-<code>Function</code>, designed to be passed to node's HTTP servers as a callback
+<code>Function</code>, designed to be passed to node&#39;s HTTP servers as a callback
 to handle requests. This allows you to provide both HTTP and HTTPS versions of
 your app with the same codebase easily, as the app does not inherit from these
-(it is simply a callback):
-</p><pre class="js"><code>var express = require('express');
-var https = require('https');
-var http = require('http');
+(it is simply a callback):</p>
+<pre><code>var express = require(&#39;express&#39;);
+var https = require(&#39;https&#39;);
+var http = require(&#39;http&#39;);
 var app = express();
 
 http.createServer(app).listen(80);
 https.createServer(options, app).listen(443);
 </code></pre><p>The <code>app.listen()</code> method is a convenience method for the following
-(if you wish to use HTTPS or provide both, use the technique above):
-</p><pre class="js"><code>app.listen = function(){
+(if you wish to use HTTPS or provide both, use the technique above):</p>
+<pre><code>app.listen = function(){
   var server = http.createServer(this);
   return server.listen.apply(server, arguments);
-};</code></pre></section><section><h3 id="app.path">app.path()</h3><p>Returns the canonical path of the app.
-</p><pre class="js"><code>var app = express()
+};
+</code></pre></section><section><h3 id="app.path">app.path()</h3><p>Returns the canonical path of the app.</p>
+<pre><code>var app = express()
   , blog = express()
   , blogAdmin = express();
 
-app.use('/blog', blog);
-blog.use('/admin', blogAdmin);
+app.use(&#39;/blog&#39;, blog);
+blog.use(&#39;/admin&#39;, blogAdmin);
 
-console.log(app.path()); // ''
-console.log(blog.path()); // '/blog'
-console.log(blogAdmin.path()); // '/blog/admin'
-</code></pre><p>The behavior of this method can become very complicated in complex cases of mounted apps, hence it is recommended to use <a href="#req.baseUrl"><code>req.baseUrl</code></a> to get the canonical path of the app.</p></section><section><h3 id="app.mountpath">app.mountpath</h3><p>This property refers to the path pattern(s) on which a sub app was mounted.
-</p><pre class="js"><code>var admin = express();
+console.log(app.path()); // &#39;&#39;
+console.log(blog.path()); // &#39;/blog&#39;
+console.log(blogAdmin.path()); // &#39;/blog/admin&#39;
+</code></pre><p>The behavior of this method can become very complicated in complex cases of mounted apps, hence it is recommended to use <a href="#req.baseUrl">req.baseUrl</a> to get the canonical path of the app.</p>
+</section><section><h3 id="app.mountpath">app.mountpath</h3><p>This property refers to the path pattern(s) on which a sub app was mounted.</p>
+<pre><code>var admin = express();
 
-admin.get('/', function (req, res) {
+admin.get(&#39;/&#39;, function (req, res) {
   console.log(admin.mountpath); // /admin
-  res.send('Admin Homepage');
+  res.send(&#39;Admin Homepage&#39;);
 })
 
-app.use('/admin', admin); // mount the sub app
-</code></pre><p>It is similar to the <a href="#req.baseUrl"><code>baseUrl</code></a> property of the <code>req</code> object, except <code>req.baseUrl</code> returns the matched URL path, instead of the matched pattern(s).
-</p><p>If a sub app is mounted on multiple path patterns, <code>app.mountpath</code> returns the list of patterns it is mounted on, as shown in the following example. 
-</p><pre class="js"><code>var admin = express();
+app.use(&#39;/admin&#39;, admin); // mount the sub app
+</code></pre><p>It is similar to the <a href="#req.baseUrl">baseUrl</a> property of the <code>req</code> object, except <code>req.baseUrl</code> returns the matched URL path, instead of the matched pattern(s).</p>
+<p>If a sub app is mounted on multiple path patterns, <code>app.mountpath</code> returns the list of patterns it is mounted on, as shown in the following example. </p>
+<pre><code>var admin = express();
 
-admin.get('/', function (req, res) {
-  console.log(admin.mountpath); // [ '/adm*n', '/manager' ]
-  res.send('Admin Homepage');
+admin.get(&#39;/&#39;, function (req, res) {
+  console.log(admin.mountpath); // [ &#39;/adm*n&#39;, &#39;/manager&#39; ]
+  res.send(&#39;Admin Homepage&#39;);
 })
 
 var secret = express();
-secret.get('/', function (req, res) {
+secret.get(&#39;/&#39;, function (req, res) {
   console.log(secret.mountpath); // /secr*t
-  res.send('Admin Secret');
+  res.send(&#39;Admin Secret&#39;);
 });
 
-admin.use('/secr*t', secret); // load the 'secret' router on '/secr*t', on the 'admin' sub app
-app.use(['/adm*n', '/manager'], admin); // load the 'admin' router on '/adm*n' and '/manager', on the parent app</code></pre></section><section><h3 id="app.onmount">app.on('mount', callback(parent))</h3><p>The <code>mount</code> event is fired on a sub app, when it is mounted on a parent app. The parent app is passed to the callback function.
-</p><pre class="js"><code>var admin = express();
+admin.use(&#39;/secr*t&#39;, secret); // load the &#39;secret&#39; router on &#39;/secr*t&#39;, on the &#39;admin&#39; sub app
+app.use([&#39;/adm*n&#39;, &#39;/manager&#39;], admin); // load the &#39;admin&#39; router on &#39;/adm*n&#39; and &#39;/manager&#39;, on the parent app
+</code></pre></section><section><h3 id="app.onmount">app.on('mount', callback(parent))</h3><p>The <code>mount</code> event is fired on a sub app, when it is mounted on a parent app. The parent app is passed to the callback function.</p>
+<pre><code>var admin = express();
 
-admin.on('mount', function (parent) {
-  console.log('Admin Mounted');
+admin.on(&#39;mount&#39;, function (parent) {
+  console.log(&#39;Admin Mounted&#39;);
   console.log(parent); // refers to the parent app
 });
 
-admin.get('/', function (req, res) {
-  res.send('Admin Homepage');
+admin.get(&#39;/&#39;, function (req, res) {
+  res.send(&#39;Admin Homepage&#39;);
 });
 
-app.use('/admin', admin);</code></pre></section><h2 id="request">Request</h2><section><h3 id="req.params">req.params</h3><p>This property is an object containing properties mapped to the named route "parameters".
+app.use(&#39;/admin&#39;, admin);
+</code></pre></section><h2 id="request">Request</h2><section><h3 id="req.params">req.params</h3><p>This property is an object containing properties mapped to the named route "parameters".
 For example, if you have the route <code>/user/:name</code>, then the "name" property
 is available to you as <code>req.params.name</code>. This object defaults to <code>{}</code>.
 </p><pre class="js"><code>// GET /user/tj
