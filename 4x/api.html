@@ -722,75 +722,74 @@ req.accepts(&#39;html, json&#39;);
 <p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p>
 </section><section><h3 id="req.acceptsEncodings">req.acceptsEncodings(encoding, ...)</h3><p>Check if the given <code>encoding</code> are acceptable.</p>
 <p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p>
-</section><section><h3 id="req.is">req.is(type)</h3><p>Check if the incoming request contains the "Content-Type"
-header field, and if it matches the give mime <code>type</code>.
-</p><pre class="js"><code>// With Content-Type: text/html; charset=utf-8
-req.is('html');
-req.is('text/html');
-req.is('text/*');
-// => true
+</section><section><h3 id="req.is">req.is(type)</h3><p>Check if the incoming request contains the &quot;Content-Type&quot; header field, and if it matches the give mime <code>type</code>.</p>
+<pre><code>// With Content-Type: text/html; charset=utf-8
+req.is(&#39;html&#39;);
+req.is(&#39;text/html&#39;);
+req.is(&#39;text/*&#39;);
+// =&gt; true
 
 // When Content-Type is application/json
-req.is('json');
-req.is('application/json');
-req.is('application/*');
-// => true
+req.is(&#39;json&#39;);
+req.is(&#39;application/json&#39;);
+req.is(&#39;application/*&#39;);
+// =&gt; true
 
-req.is('html');
-// => false
-</code></pre><p>Please refer to <a href="https://github.com/expressjs/type-is">type-is</a> for additional documentation or any issues and concerns.</p></section><section><h3 id="req.ip">req.ip</h3><p>Return the remote address (or, if "trust proxy" is enabled, the upstream address).
-</p><pre class="js"><code>req.ip
-// => "127.0.0.1"</code></pre></section><section><h3 id="req.ips">req.ips</h3><p>When "trust proxy" is `true`, parse
-the "X-Forwarded-For" ip address list
-and return an array. Otherwise, an empty
-array is returned.
-
-For example, if the value were "client, proxy1, proxy2",
-you would receive the array <code>["client", "proxy1", "proxy2"]</code>,
-where "proxy2" is the furthest down-stream.</p></section><section><h3 id="req.path">req.path</h3><p>Returns the request URL pathname.
-</p><pre class="js"><code>// example.com/users?sort=desc
+req.is(&#39;html&#39;);
+// =&gt; false
+</code></pre><p>Please refer to <a href="https://github.com/expressjs/type-is">type-is</a> for additional documentation or any issues and concerns.</p>
+</section><section><h3 id="req.ip">req.ip</h3><p>Return the remote address (or, if &quot;trust proxy&quot; is enabled, the upstream address).</p>
+<pre><code>req.ip
+// =&gt; &quot;127.0.0.1&quot;
+</code></pre></section><section><h3 id="req.ips">req.ips</h3><p>When &quot;trust proxy&quot; is <code>true</code>, parse the &quot;X-Forwarded-For&quot; ip address list and return an array. Otherwise, an empty array is returned.</p>
+<p>For example, if the value were &quot;client, proxy1, proxy2&quot;, you would receive the array <code>[&quot;client&quot;, &quot;proxy1&quot;, &quot;proxy2&quot;]</code>, where &quot;proxy2&quot; is the furthest down-stream.</p>
+</section><section><h3 id="req.path">req.path</h3><p>Returns the request URL pathname.</p>
+<pre><code>// example.com/users?sort=desc
 req.path
-// => "/users"</code></pre></section><section><h3 id="req.hostname">req.hostname</h3><p>Returns the hostname from the "Host" header field.
-</p><pre class="js"><code>// Host: "example.com:3000"
+// =&gt; &quot;/users&quot;
+</code></pre></section><section><h3 id="req.hostname">req.hostname</h3><p>Returns the hostname from the &quot;Host&quot; header field.</p>
+<pre><code>// Host: &quot;example.com:3000&quot;
 req.hostname
-// => "example.com"</code></pre></section><section><h3 id="req.fresh">req.fresh</h3><p>Check if the request is "fresh" (i.e. whether the Last-Modified and/or the ETag still match).
-</p><pre class="js"><code>req.fresh
-// => true
-</code></pre><p>Please refer to <a href="https://github.com/visionmedia/node-fresh">fresh</a> for additional documentation or any issues and concerns.</p></section><section><h3 id="req.stale">req.stale</h3><p>Check if the request is "stale" (i.e. the Last-Modified and/or ETag headers do not match).
-</p><pre class="js"><code>req.stale
-// => true</code></pre></section><section><h3 id="req.xhr">req.xhr</h3><p>Check if the request was issued with the "X-Requested-With"
-header field set to "XMLHttpRequest" (jQuery etc).
-</p><pre class="js"><code>req.xhr
-// => true</code></pre></section><section><h3 id="req.protocol">req.protocol</h3><p>Return the protocol string "http" or "https"
-when requested with TLS. If the "trust proxy" 
-setting is enabled, the "X-Forwarded-Proto" header
-field will be trusted. If you're running behind
-a reverse proxy that supplies https for you, this
-may be enabled.
-</p><pre class="js"><code>req.protocol
-// => "http"</code></pre></section><section><h3 id="req.secure">req.secure</h3><p>Check if a TLS connection is established. This is a short-hand for:
-</p><pre class="js"><code>'https' == req.protocol;</code></pre></section><section><h3 id="req.subdomains">req.subdomains</h3><p>Return subdomains as an array.
-</p><pre class="js"><code>// Host: "tobi.ferrets.example.com"
+// =&gt; &quot;example.com&quot;
+</code></pre></section><section><h3 id="req.fresh">req.fresh</h3><p>Check if the request is &quot;fresh&quot; (i.e. whether the Last-Modified and/or the ETag still match).</p>
+<pre><code>req.fresh
+// =&gt; true
+</code></pre><p>Please refer to <a href="https://github.com/visionmedia/node-fresh">fresh</a> for additional documentation or any issues and concerns.</p>
+</section><section><h3 id="req.stale">req.stale</h3><p>Check if the request is &quot;stale&quot; (i.e. the Last-Modified and/or ETag headers do not match).</p>
+<pre><code>req.stale
+// =&gt; true
+</code></pre></section><section><h3 id="req.xhr">req.xhr</h3><p>Check if the request was issued with the &quot;X-Requested-With&quot; header field set to &quot;XMLHttpRequest&quot; (jQuery etc).</p>
+<pre><code>req.xhr
+// =&gt; true
+</code></pre></section><section><h3 id="req.protocol">req.protocol</h3><p>Return the protocol string &quot;http&quot; or &quot;https&quot; when requested with TLS. If the &quot;trust proxy&quot; setting is enabled, the &quot;X-Forwarded-Proto&quot; header field will be trusted. If you&#39;re running behind a reverse proxy that supplies https for you, this may be enabled.</p>
+<pre><code>req.protocol
+// =&gt; &quot;http&quot;
+</code></pre></section><section><h3 id="req.secure">req.secure</h3><p>Check if a TLS connection is established. This is a short-hand for:</p>
+<p>``
+&#39;https&#39; == req.protocol;
+```</p>
+</section><section><h3 id="req.subdomains">req.subdomains</h3><p>Return subdomains as an array.</p>
+<pre><code>// Host: &quot;tobi.ferrets.example.com&quot;
 req.subdomains
-// => ["ferrets", "tobi"]</code></pre></section><section><h3 id="req.originalUrl">req.originalUrl</h3><p>This property is much like <code>req.url</code>; however, it retains
-the original request url, allowing you to rewrite <code>req.url</code>
-freely for internal routing purposes. For example, the "mounting" feature
-of <a href="#app.use">app.use()</a> will rewrite <code>req.url</code> to
-strip the mount point.
-</p><pre class="js"><code>// GET /search?q=something
+// =&gt; [&quot;ferrets&quot;, &quot;tobi&quot;]
+</code></pre></section><section><h3 id="req.originalUrl">req.originalUrl</h3><p>This property is much like <code>req.url</code>; however, it retains the original request url, allowing you to rewrite <code>req.url</code> freely for internal routing purposes. For example, the &quot;mounting&quot; feature of <a href="#app.use(">app.use()</a>) will rewrite <code>req.url</code> to strip the mount point.</p>
+<pre><code>// GET /search?q=something
 req.originalUrl
-// => "/search?q=something"</code></pre></section><section><h3 id="req.baseUrl">req.baseUrl</h3><p>This property refers to the URL path, on which a router instance was mounted.
-</p><pre class="js"><code>var greet = express.Router();
+// =&gt; &quot;/search?q=something&quot;
+</code></pre></section><section><h3 id="req.baseUrl">req.baseUrl</h3><p>This property refers to the URL path, on which a router instance was mounted.</p>
+<pre><code>var greet = express.Router();
 
-greet.get('/jp', function (req, res) {
+greet.get(&#39;/jp&#39;, function (req, res) {
   console.log(req.baseUrl); // /greet
-  res.send('Konichiwa!');
+  res.send(&#39;Konichiwa!&#39;);
 });
 
-app.use('/greet', greet); // load the router on '/greet'
-</code></pre><p>Even if a path pattern or a set of path patterns were used to load the router, the matched string is returned as the <code>baseUrl</code>, instead of the pattern(s). In the following example, the <code>greet</code> router is loaded on two path patterns.
-</p><pre class="js"><code>app.use(['/gre+t', '/hel{2}o'], greet); // load the router on '/gre+t' and '/hel{2}o'
-</code></pre><p>When the request is made to <code>/greet/jp</code>, <code>req.baseUrl</code> will be equal to "/greet"; and when the request is made to <code>/hello/jp</code>, it will be equal to "/hello".</p><p><code>req.baseUrl</code> is similar to the <a href="#app.mountpath"><code>mountpath</code></a> property of the <code>app</code> object, except <code>app.mountpath</code> returns the matched path pattern(s).</p></section><h2 id="response">Response</h2><section><h3 id="res.status">res.status(code)</h3><p>Chainable alias of node's <code>res.statusCode</code>. Use this method to set the HTTP status for the response.
+app.use(&#39;/greet&#39;, greet); // load the router on &#39;/greet&#39;
+</code></pre><p>Even if a path pattern or a set of path patterns were used to load the router, the matched string is returned as the <code>baseUrl</code>, instead of the pattern(s). In the following example, the <code>greet</code> router is loaded on two path patterns.</p>
+<pre><code>app.use([&#39;/gre+t&#39;, &#39;/hel{2}o&#39;], greet); // load the router on &#39;/gre+t&#39; and &#39;/hel{2}o&#39;
+</code></pre><p>When the request is made to <code>/greet/jp</code>, <code>req.baseUrl</code> will be equal to &quot;/greet&quot;; and when the request is made to <code>/hello/jp</code>, it will be equal to &quot;/hello&quot;.</p>
+<p><code>req.baseUrl</code> is similar to the <a href="#app.mountpath">mountpath</a> property of the <code>app</code> object, except <code>app.mountpath</code> returns the matched path pattern(s).</p>
+</section><h2 id="response">Response</h2><section><h3 id="res.status">res.status(code)</h3><p>Chainable alias of node's <code>res.statusCode</code>. Use this method to set the HTTP status for the response.
 </p><pre class="js"><code>res.status(403).end();
 res.status(400).send('Bad Request');
 res.status(404).sendFile('/absolute/path/to/404.png');</code></pre></section><section><h3 id="res.set">res.set(field, [value])</h3><p> 
