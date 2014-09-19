@@ -1,6 +1,6 @@
 Create an express application.
 
-```js
+```
 var express = require('express');
 var app = express();
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head><title>Express - api reference</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">express</a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html" class="active">API Reference</a><a href="/guide.html">Guide</a><a href="/migrating-4.html">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><ul id="menu"><li id="app-api"><a href="#application">Application</a><ul id="app-menu"><li><a href="#express">express()</a></li><li><a href="#app-settings">application settings</a></li><li><a href="#app.set">app.set()</a></li><li><a href="#app.get">app.get()</a></li><li><a href="#app.enable">app.enable()</a></li><li><a href="#app.disable">app.disable()</a></li><li><a href="#app.enabled">app.enabled()</a></li><li><a href="#app.disabled">app.disabled()</a></li><li><a href="#app.use">app.use()</a></li><li><a href="#app.engine">app.engine()</a></li><li><a href="#app.param">app.param()</a></li><li><a href="#app.VERB">application routing</a></li><li><a href="#app.all">app.all()</a></li><li><a href="#app.route">app.route()</a></li><li><a href="#app.locals">app.locals</a></li><li><a href="#app.render">app.render()</a></li><li><a href="#app.listen">app.listen()</a></li><li><a href="#app.path">app.path()</a></li><li><a href="#app.mountpath">app.mountpath</a></li><li><a href="#app.onmount">app.onmount</a></li></ul></li><li id="req-api"><a href="#request">Request</a><ul id="req-menu"><li><a href="#req.params">req.params</a></li><li><a href="#req.query">req.query</a></li><li><a href="#req.param">req.param()</a></li><li><a href="#req.route">req.route</a></li><li><a href="#req.cookies">req.cookies</a></li><li><a href="#req.signedCookies">req.signedCookies</a></li><li><a href="#req.get">req.get()</a></li><li><a href="#req.accepts">req.accepts()</a></li><li><a href="#req.acceptsCharsets">req.acceptsCharsets()</a></li><li><a href="#req.acceptsLanguages">req.acceptsLanguages()</a></li><li><a href="#req.acceptsEncodings">req.acceptsEncodings()</a></li><li><a href="#req.is">req.is()</a></li><li><a href="#req.ip">req.ip</a></li><li><a href="#req.ips">req.ips</a></li><li><a href="#req.path">req.path</a></li><li><a href="#req.hostname">req.hostname</a></li><li><a href="#req.fresh">req.fresh</a></li><li><a href="#req.stale">req.stale</a></li><li><a href="#req.xhr">req.xhr</a></li><li><a href="#req.protocol">req.protocol</a></li><li><a href="#req.secure">req.secure</a></li><li><a href="#req.subdomains">req.subdomains</a></li><li><a href="#req.originalUrl">req.originalUrl</a></li><li><a href="#req.baseUrl">req.baseUrl</a></li></ul></li><li id="res-api"><a href="#response">Response</a><ul id="res-menu"><li><a href="#res.status">res.status()</a></li><li><a href="#res.set">res.set()</a></li><li><a href="#res.get">res.get()</a></li><li><a href="#res.cookie">res.cookie()</a></li><li><a href="#res.clearCookie">res.clearCookie()</a></li><li><a href="#res.redirect">res.redirect()</a></li><li><a href="#res.location">res.location()</a></li><li><a href="#res.send">res.send()</a></li><li><a href="#res.json">res.json()</a></li><li><a href="#res.jsonp">res.jsonp()</a></li><li><a href="#res.type">res.type()</a></li><li><a href="#res.format">res.format()</a></li><li><a href="#res.attachment">res.attachment()</a></li><li><a href="#res.sendFile">res.sendFile()</a></li><li><a href="#res.sendStatus">res.sendStatus()</a></li><li><a href="#res.download">res.download()</a></li><li><a href="#res.links">res.links()</a></li><li><a href="#res.locals">res.locals</a></li><li><a href="#res.render">res.render()</a></li><li><a href="#res.vary">res.vary()</a></li><li><a href="#res.end">res.end()</a></li><li><a href="#res.headersSent">res.headersSent</a></li></ul></li><li id="router-api"><a href="#router">Router</a><ul id="router-menu"><li><a href="#router">Router()</a></li><li><a href="#router.use">router.use()</a></li><li><a href="#router.param">router.param()</a></li><li><a href="#router.route">router.route()</a></li><li><a href="#router.VERB">router.VERB()</a></li></ul></li><li id="middleware-api"><a href="#middleware">Middleware</a><ul id="middleware-menu"><li><a href="#middleware.api">API</a></li><li><a href="#middleware.application">Application level</a></li><li><a href="#middleware.router">Router level</a></li><li><a href="#middleware.thirdparty">Third-party</a></li><li><a href="#middleware.builtin">Built-in</a></li></ul></li></ul><div id="right"><h2 id="application">Application</h2><section><h3 id="express">express()</h3><p>Create an express application.</p>
-<pre><code class="lang-js">var express = require(&#39;express&#39;);
+<pre><code>var express = require(&#39;express&#39;);
 var app = express();
 
 app.get(&#39;/&#39;, function(req, res){
@@ -7,8 +7,7 @@ app.get(&#39;/&#39;, function(req, res){
 });
 
 app.listen(3000);
-</code></pre>
-</section><section><h3 id="app-settings">settings</h3><p>Express application settings can be set using <a href="#app.set"><code>app.set()</code></a>, and retrieved using <a href="#app.get"><code>app.get()</code></a>. The following settings will alter how the app behaves:</p>
+</code></pre></section><section><h3 id="app-settings">settings</h3><p>Express application settings can be set using <a href="#app.set"><code>app.set()</code></a>, and retrieved using <a href="#app.get"><code>app.get()</code></a>. The following settings will alter how the app behaves:</p>
 <ul>
 <li><p><code>trust proxy</code> Indicate that the app is sitting behind a front-facing proxy, and the <code>X-Forwarded-*</code> headers may be trusted for determining the connection and the IP address of the client. It must, however, be noted that, the <code>X-Forwarded-*</code> headers are easily spoofed and the detected IP addresses are unreliable.</p>
 <p><code>trust proxy</code> is disabled by default. When enabled, Express attempts to determine the IP address of the client which is connected through the front-facing proxy, or a series of proxies. The <code>req.ips</code> property, then, contains an array of IP addresses the client is connected through. It can be enabled using either of the following values.</p>
@@ -1276,128 +1275,159 @@ would match "GET /commits/71dbb9c" as well as "GET /commits/71dbb9c..4c084f9".
   var from = req.params[0];
   var to = req.params[1] || 'HEAD';
   res.send('commit range ' + from + '..' + to);
-});</code></pre></section><h2 id="middleware">Middleware</h2><section><h3 id="middleware.api">API</h3><p>An Express application is essentially a stack of middleware which are executed serially.
-</p><p>A middleware is a function with access to the request object (<code>req</code>), the response object (<code>res</code>), and the next middleware in line in the request-response cycle of an Express application. It is commonly denoted by a variable named <code>next</code>. Each middleware has the capacity to execute any code, make changes to the request and the reponse object, end the request-response cycle, and call the next middleware in the stack. Since middleware are execute serially, their order of inclusion is important.
-</p><p>If the current middleware is not ending the request-response cycle, it is important to call <code>next()</code> to pass on the control to the next middleware, else the request will be left hanging.
-</p><p>With an optional mount path, middleware can be loaded at the application level or at the router level. Also, a series of middleware functions can be loaded together, creating a sub-stack of middleware system at a mount point.
-</p><h3 id="middleware.application">Application level middleware</h3><p>Application level middleware are bound to an instance of <code>express</code>, using <code>app.use()</code> and <code>app.VERB()</code>.
-</p><pre class="js"><code>var app = express();
+});</code></pre></section><h2 id="middleware">Middleware</h2><section><h3 id="middleware.api">API</h3><p>An Express application is essentially a stack of middleware which are executed serially.</p>
+<p>A middleware is a function with access to the request object (<code>req</code>), the response object (<code>res</code>), and the next middleware in line in the request-response cycle of an Express application. It is commonly denoted by a variable named <code>next</code>. Each middleware has the capacity to execute any code, make changes to the request and the reponse object, end the request-response cycle, and call the next middleware in the stack. Since middleware are execute serially, their order of inclusion is important.</p>
+<p>If the current middleware is not ending the request-response cycle, it is important to call <code>next()</code> to pass on the control to the next middleware, else the request will be left hanging.</p>
+<p>With an optional mount path, middleware can be loaded at the application level or at the router level. Also, a series of middleware functions can be loaded together, creating a sub-stack of middleware system at a mount point.</p>
+<h3 id='middleware.application'>Application level middleware</h3>
+
+<p>Application level middleware are bound to an instance of <code>express</code>, using <code>app.use()</code> and <code>app.VERB()</code>.</p>
+<pre><code>var app = express();
 
 // a middleware with no mount path; gets executed for every request to the app
 app.use(function (req, res, next) {
-  console.log('Time:', Date.now());
+  console.log(&#39;Time:&#39;, Date.now());
   next();
 });
 
 // a middleware mounted on /user/:id; will be executed for any type of HTTP request to /user/:id
-app.use('/user/:id', function (req, res, next) {
-  console.log('Request Type:', req.method);
+app.use(&#39;/user/:id&#39;, function (req, res, next) {
+  console.log(&#39;Request Type:&#39;, req.method);
   next();
 });
 
 // a route and its handler function (middleware system) which handles GET requests to /user/:id
-app.get('/user/:id', function (req, res, next) {
-  res.send('USER');
+app.get(&#39;/user/:id&#39;, function (req, res, next) {
+  res.send(&#39;USER&#39;);
 });
-</code></pre><p>Here is an example of loading a series of middleware at a mount point with a mount path.
-</p><pre class="js"><code>// a middleware sub-stack which prints request info for any type of HTTP request to /user/:id
-app.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
+</code></pre><p>Here is an example of loading a series of middleware at a mount point with a mount path.</p>
+<pre><code>// a middleware sub-stack which prints request info for any type of HTTP request to /user/:id
+app.use(&#39;/user/:id&#39;, function(req, res, next) {
+  console.log(&#39;Request URL:&#39;, req.originalUrl);
   next();
 }, function (req, res, next) {
-  console.log('Request Type:', req.method);
+  console.log(&#39;Request Type:&#39;, req.method);
   next();
 });
-</code></pre><p>Route handlers, being a middleware system, makes it possible to define multiple routes for a path. In the example below, two routes are defined for GET requests to <code>/user/:id</code>. The second router will not cause any problems, however it will never get called, because the first route ends the request-response cycle.
-</p><pre class="js"><code>// a middleware sub-stack which handles GET requests to /user/:id
-app.get('/user/:id', function (req, res, next) {
-  console.log('ID:', req.params.id);
+</code></pre><p>Route handlers, being a middleware system, makes it possible to define multiple routes for a path. In the example below, two routes are defined for GET requests to <code>/user/:id</code>. The second router will not cause any problems, however it will never get called, because the first route ends the request-response cycle.</p>
+<pre><code>// a middleware sub-stack which handles GET requests to /user/:id
+app.get(&#39;/user/:id&#39;, function (req, res, next) {
+  console.log(&#39;ID:&#39;, req.params.id);
   next();
 }, function (req, res, next) {
-  res.send('User Info');
+  res.send(&#39;User Info&#39;);
 });
 
 // handler for /user/:id which prints the user id
-app.get('/user/:id', function (req, res, next) {
+app.get(&#39;/user/:id&#39;, function (req, res, next) {
   res.end(req.params.id);
 });
-</code></pre><p>If you need to skip the rest of the middleware from a router middleware stack, call <code>next('route')</code> to pass on the control to the next route. Note: <code>next('route')</code> will work only in middleware loaded using <code>app.VERB()</code> or <code>router.VERB()</code>.
-</p><pre class="js"><code>// a middleware sub-stack which handles GET requests to /user/:id
-app.get('/user/:id', function (req, res, next) {
+</code></pre><p>If you need to skip the rest of the middleware from a router middleware stack, call <code>next(&#39;route&#39;)</code> to pass on the control to the next route. Note: <code>next(&#39;route&#39;)</code> will work only in middleware loaded using <code>app.VERB()</code> or <code>router.VERB()</code>.</p>
+<pre><code>// a middleware sub-stack which handles GET requests to /user/:id
+app.get(&#39;/user/:id&#39;, function (req, res, next) {
   // if user id is 0, skip to the next route
-  if (req.params.id == 0) next('route');
+  if (req.params.id == 0) next(&#39;route&#39;);
   // else pass the control to the next middleware in this stack
   else next(); // 
 }, function (req, res, next) {
   // render a regular page
-  res.render('regular');
+  res.render(&#39;regular&#39;);
 });
 
 // handler for /user/:id which renders a special page
-app.get('/user/:id', function (req, res, next) {
-  res.render('special');
+app.get(&#39;/user/:id&#39;, function (req, res, next) {
+  res.render(&#39;special&#39;);
 });
-</code></pre><h3 id="middleware.router">Router level middleware</h3><p>Router level middleware work just like application level middleware except they are bound to an instance of <code>express.Router()</code>.</p><pre class="js"><code>var router = express.Router();
-</code></pre><p>Router level middleware are loaded using <code>router.use()</code> and <code>router.VERB()</code>.</p><p>The middleware system created at the application level in the example above, can be replicated at the router level using the following code.</p><pre class="js"><code>var app = express();
+</code></pre><h3 id='middleware.router'>Router level middleware</h3>
+
+<p>Router level middleware work just like application level middleware except they are bound to an instance of <code>express.Router()</code>.</p>
+<pre><code>var router = express.Router();
+</code></pre><p>Router level middleware are loaded using <code>router.use()</code> and <code>router.VERB()</code>.</p>
+<p>The middleware system created at the application level in the example above, can be replicated at the router level using the following code.</p>
+<pre><code>var app = express();
 var router = express.Router();
 
 // a middleware with no mount path, gets executed for every request to the router
 router.use(function (req, res, next) {
-  console.log('Time:', Date.now());
+  console.log(&#39;Time:&#39;, Date.now());
   next();
 });
 
 // a middleware sub-stack shows request info for any type of HTTP request to /user/:id
-router.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
+router.use(&#39;/user/:id&#39;, function(req, res, next) {
+  console.log(&#39;Request URL:&#39;, req.originalUrl);
   next();
 }, function (req, res, next) {
-  console.log('Request Type:', req.method);
+  console.log(&#39;Request Type:&#39;, req.method);
   next();
 });
 
 // a middleware sub-stack which handles GET requests to /user/:id
-router.get('/user/:id', function (req, res, next) {
+router.get(&#39;/user/:id&#39;, function (req, res, next) {
   // if user id is 0, skip to the next router
-  if (req.params.id == 0) next('route');
+  if (req.params.id == 0) next(&#39;route&#39;);
   // else pass the control to the next middleware in this stack
   else next(); // 
 }, function (req, res, next) {
   // render a regular page
-  res.render('regular');
+  res.render(&#39;regular&#39;);
 });
 
 // handler for /user/:id which renders a special page
-router.get('/user/:id', function (req, res, next) {
+router.get(&#39;/user/:id&#39;, function (req, res, next) {
   console.log(req.params.id);
-  res.render('special');
+  res.render(&#39;special&#39;);
 });
 
 // mount the router on the app
-app.use('/', router);</code></pre></section><section><h3 id="middleware.thirdparty">Third-party middleware</h3><p>Express is a routing and middleware web framework with minimal functionality of its own. Functionality to Express apps are added via third-party middleware.</p><p>Install the node module for the required functionality and loaded it in your app at the application level or at the router level.</p><p>In the following example, <code>cookie-parser</code>, a cookie parsing middleware is installed and loaded in the app.</p><pre class="js"><code>$ npm install cookie-parser
-</code></pre><pre class="js"><code>var express = require('express');
+app.use(&#39;/&#39;, router);
+</code></pre></section><section><h3 id="middleware.thirdparty">Third-party middleware</h3><p>Express is a routing and middleware web framework with minimal functionality of its own. Functionality to Express apps are added via third-party middleware.</p>
+<p>Install the node module for the required functionality and loaded it in your app at the application level or at the router level.</p>
+<p>In the following example, <code>cookie-parser</code>, a cookie parsing middleware is installed and loaded in the app.</p>
+<pre><code>  $ npm install cookie-parser
+</code></pre><pre><code>var express = require(&#39;express&#39;);
 var app = express();
-var cookieParser = require('cookie-parser');
+var cookieParser = require(&#39;cookie-parser&#39;);
 
 // load the cookie parsing middleware
 app.use(cookieParser);
-</code></pre><p><a href="https://github.com/senchalabs/connect#middleware">Here</a> is a list of third-party middleware commonly used with Express.</p></section><section><h3 id="middleware.builtin">Built-in middleware</h3><p>As of 4.x, Express no longer depends on Connect. Except for <code>express.static</code>, all of Express' previously included middleware are now in separate repos. Please view <a href="https://github.com/senchalabs/connect#middleware">the list of middleware</a>.</p><h4 id="express.static"><code>express.static(root, [options])</code></h4><p><code>express.static</code> is based on <a href="https://github.com/expressjs/serve-static"><code>serve-static</code></a>, and is responsible for serving the static assets of an Express application.</p><p>The <code>root</code> argument refers to the root directory from which the static assets are to be served.</p><p>The optional <code>options</code> object can have the following properties.<ul><li><code>dotfiles</code> option for serving dotfiles. Possible values are "allow", "deny", "ignore"; defaults to "ignore".</li><li><code>etag</code> enable or disable etag generation, defaults to <code>true</code>.</li><li><code>extensions</code> sets file extension fallbacks, defaults to <code>false</code>.</li><li><code>index</code> sends directory index file, defaults to "index.html". Set <code>false</code> to disable directory indexing.</li><li><code>lastModified</code> enabled by default, sets the <code>Last-Modified</code> header to the last modified date of the file on the OS. Set <code>false</code> to disable it.</li><li><code>maxAge</code> sets the max-age property of the Cache-Control header in milliseconds or a string in <a href="https://www.npmjs.org/package/ms">ms format</a>, defaults to 0.</li><li><code>redirect</code> redirects to trailing "/" when the pathname is a dir, defaults to <code>true</code>.</li><li><code>setHeaders</code> function for setting HTTP headers to serve with the file.</li></ul></p><p>Here is an example of using the <code>express.static</code> middleware with an elaborate options object.</p><pre class="js"><code>var options = {
-  dotfiles: 'ignore',
+</code></pre><p><a href="https://github.com/senchalabs/connect#middleware">Here</a> is a list of third-party middleware commonly used with Express.</p>
+</section><section><h3 id="middleware.builtin">Built-in middleware</h3><p>As of 4.x, Express no longer depends on Connect. Except for <code>express.static</code>, all of Express&#39; previously included middleware are now in separate repos. Please view <a href="https://github.com/senchalabs/connect#middleware">the list of middleware</a>.</p>
+<h4 id='express.static'>express.static(root, [options])</h4>
+
+<p><code>express.static</code> is based on <a href="https://github.com/expressjs/serve-static">serve-static</a>, and is responsible for serving the static assets of an Express application.</p>
+<p>The <code>root</code> argument refers to the root directory from which the static assets are to be served.</p>
+<p>The optional <code>options</code> object can have the following properties.</p>
+<ul>
+<li><code>dotfiles</code> option for serving dotfiles. Possible values are &quot;allow&quot;, &quot;deny&quot;, &quot;ignore&quot;; defaults to &quot;ignore&quot;.</li>
+<li><code>etag</code> enable or disable etag generation, defaults to <code>true</code>.</li>
+<li><code>extensions</code> sets file extension fallbacks, defaults to <code>false</code>.</li>
+<li><code>index</code> sends directory index file, defaults to &quot;index.html&quot;. Set <code>false</code> to disable directory indexing.</li>
+<li><code>lastModified</code> enabled by default, sets the <code>Last-Modified</code> header to the last modified date of the file on the OS. Set <code>false</code> to disable it.</li>
+<li><code>maxAge</code> sets the max-age property of the Cache-Control header in milliseconds or a string in <a href="https://www.npmjs.org/package/ms">ms format</a>, defaults to 0.</li>
+<li><code>redirect</code> redirects to trailing &quot;/&quot; when the pathname is a dir, defaults to <code>true</code>.</li>
+<li><code>setHeaders</code> function for setting HTTP headers to serve with the file.</li>
+</ul>
+<p>Here is an example of using the <code>express.static</code> middleware with an elaborate options object.</p>
+<pre><code>var options = {
+  dotfiles: &#39;ignore&#39;,
   etag: false,
-  extensions: ['htm', 'html'],
+  extensions: [&#39;htm&#39;, &#39;html&#39;],
   index: false,
-  maxAge: '1d',
+  maxAge: &#39;1d&#39;,
   redirect: false,
   setHeaders: function (res, path) {
-    res.set('x-timestamp', Date.now())
+    res.set(&#39;x-timestamp&#39;, Date.now())
   }
 };
 
-app.use(express.static('public', options));
-</code></pre><p>You can have more than one static directory per app.</p><pre class="js"><code>app.use(express.static('public'));
-app.use(express.static('uploads'));
-app.use(express.static('files'));
-</code></pre><p>For more details about <code>serve-static</code> and its options, visit the <a href="https://github.com/expressjs/serve-static"><code>serve-static</code> documentation</a>.</p></section></div></section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+app.use(express.static(&#39;public&#39;, options));
+</code></pre><p>You can have more than one static directory per app.</p>
+<pre><code>app.use(express.static(&#39;public&#39;));
+app.use(express.static(&#39;uploads&#39;));
+app.use(express.static(&#39;files&#39;));
+</code></pre><p>For more details about <code>serve-static</code> and its options, visit the <a href="https://github.com/expressjs/serve-static">serve-static</a> documentation</a>.</p>
+</section></div></section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
