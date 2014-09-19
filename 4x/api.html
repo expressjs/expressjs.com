@@ -789,192 +789,173 @@ app.use(&#39;/greet&#39;, greet); // load the router on &#39;/greet&#39;
 <pre><code>app.use([&#39;/gre+t&#39;, &#39;/hel{2}o&#39;], greet); // load the router on &#39;/gre+t&#39; and &#39;/hel{2}o&#39;
 </code></pre><p>When the request is made to <code>/greet/jp</code>, <code>req.baseUrl</code> will be equal to &quot;/greet&quot;; and when the request is made to <code>/hello/jp</code>, it will be equal to &quot;/hello&quot;.</p>
 <p><code>req.baseUrl</code> is similar to the <a href="#app.mountpath">mountpath</a> property of the <code>app</code> object, except <code>app.mountpath</code> returns the matched path pattern(s).</p>
-</section><h2 id="response">Response</h2><section><h3 id="res.status">res.status(code)</h3><p>Chainable alias of node's <code>res.statusCode</code>. Use this method to set the HTTP status for the response.
-</p><pre class="js"><code>res.status(403).end();
-res.status(400).send('Bad Request');
-res.status(404).sendFile('/absolute/path/to/404.png');</code></pre></section><section><h3 id="res.set">res.set(field, [value])</h3><p> 
-Set header <code>field</code> to <code>value</code>,
-or pass an object to set multiple fields at once.</p><pre class="js"><code>res.set('Content-Type', 'text/plain');
+</section><h2 id="response">Response</h2><section><h3 id="res.status">res.status(code)</h3><p>Chainable alias of node&#39;s <code>res.statusCode</code>. Use this method to set the HTTP status for the response.</p>
+<pre><code>res.status(403).end();
+res.status(400).send(&#39;Bad Request&#39;);
+res.status(404).sendFile(&#39;/absolute/path/to/404.png&#39;);
+</code></pre></section><section><h3 id="res.set">res.set(field, [value])</h3><p>Set header <code>field</code> to <code>value</code>, or pass an object to set multiple fields at once.</p>
+<pre><code>res.set(&#39;Content-Type&#39;, &#39;text/plain&#39;);
 
 res.set({
-  'Content-Type': 'text/plain',
-  'Content-Length': '123',
-  'ETag': '12345'
+  &#39;Content-Type&#39;: &#39;text/plain&#39;,
+  &#39;Content-Length&#39;: &#39;123&#39;,
+  &#39;ETag&#39;: &#39;12345&#39;
 })
-</code></pre><p>Aliased as <code>res.header(field, [value])</code>.</p></section><section><h3 id="res.get">res.get(field)</h3><p> 
-Get the case-insensitive response header <code>field</code>. </p><pre class="js"><code>res.get('Content-Type');
-// => "text/plain"</code></pre></section><section><h3 id="res.cookie">res.cookie(name, value, [options])</h3><p>Set cookie <code>name</code> to <code>value</code>, which may be a string or object converted to JSON. The <code>path</code>
-option defaults to "/".
-</p><pre class="js"><code>res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: true });
-res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true });
-</code></pre><p>The <code>maxAge</code> option is a convenience option for setting "expires"
-relative to the current time in milliseconds. The following is equivalent to
-the previous example.
-</p><pre class="js"><code>res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true })
-</code></pre><p>An object may be passed which is then serialized as JSON, which is
-automatically parsed by the <code>bodyParser()</code> middleware.
-</p><pre class="js"><code>res.cookie('cart', { items: [1,2,3] });
-res.cookie('cart', { items: [1,2,3] }, { maxAge: 900000 });
-</code></pre><p>Signed cookies are also supported through this method. Simply
-pass the <code>signed</code> option. When given <code>res.cookie()</code>
-will use the secret passed to <code>cookieParser(secret)</code>
-to sign the value.
-</p><pre class="js"><code>res.cookie('name', 'tobi', { signed: true });
-</code></pre><p>Later you may access this value through the <a href="#req.signedCookies">req.signedCookie</a>
-object.</p></section><section><h3 id="res.clearCookie">res.clearCookie(name, [options])</h3><p>Clear cookie <code>name</code>. The <code>path</code>
-option defaults to "/".
-</p><pre class="js"><code>res.cookie('name', 'tobi', { path: '/admin' });
-res.clearCookie('name', { path: '/admin' });</code></pre></section><section><h3 id="res.redirect">res.redirect([status], url)</h3><div class="notice"><strong>Note</strong>: Express passes the specified URL string as-is to the browser in the <code>Location</code> header, without any validation or manipulation, except in case of <code>back</code>. Browsers take the responsibility of deriving the intended URL from the current URL or the referring URL, and the URL specified in the <code>Location</code> header; and redirect the user accordingly.</div><p>Redirect to the given <code>url</code> with optional <code>status</code> code
-defaulting to 302 "Found".
-</p><pre class="js"><code>res.redirect('/foo/bar');
-res.redirect('http://example.com');
-res.redirect(301, 'http://example.com');
-res.redirect('../login');
-</code></pre><p>Redirects can be a fully qualified URI for redirecting to a different site:</p><pre class="js"><code>res.redirect('http://google.com');
-</code></pre><p>Redirects can be relative to the root of the host name. For example, if you were on <code>http://example.com/admin/post/new</code>, the following redirect to <code>/admin</code> would land you at <code>http://example.com/admin</code>:</p><pre class="js"><code>res.redirect('/admin');
-</code></pre><p>Redirects can be relative to the current URL. A redirection of <code>post/new</code>, from <code>http://example.com/blog/admin/</code> (notice the trailing slash), would  give you <code>http://example.com/blog/admin/post/new</code>.</p><pre class="js"><code>res.redirect('post/new');
-</code></pre><p>Redirecting to <code>post/new</code> from <code>http://example.com/blog/admin</code> (no trailing slash), will take you to <code>http://example.com/blog/post/new</code>.</p><p>If you found the above behavior confusing, think of path segments as directories (have trailing slashes) and files, it will start to make sense.</p><p>Pathname relative redirects are also possible. If you were
-on <code>http://example.com/admin/post/new</code>, the following redirect
-would land you at <code>http//example.com/admin/post</code>:
-</p><pre class="js"><code>res.redirect('..');
-</code></pre><p>A <code>back</code> redirection will redirect the request back to
-the Referer (or Referrer), defaulting to <code>/</code> when missing.
-</p><pre class="js"><code>res.redirect('back');    </code></pre></section><section><h3 id="res.location">res.location</h3><p>Set the location header.
-</p><pre class="js"><code>res.location('/foo/bar');
-res.location('foo/bar');
-res.location('http://example.com');
-res.location('../login');
-res.location('back');
-</code></pre><p>You can use the same kind of <code>urls</code> as in
-<code>res.redirect()</code>.
-</p><p>For example, if your application is mounted at <code>/blog</code>,
-the following would set the <code>location</code> header to
-<code>/blog/admin</code>:
-</p><pre class="js"><code>res.location('admin')</code></pre></section><section><h3 id="res.send">res.send([body])</h3><p>Send a response.
-</p><pre class="js"><code>res.send(new Buffer('whoop'));
-res.send({ some: 'json' });
-res.send('<p>some html</p>');
-res.status(404).send('Sorry, we cannot find that!');
-res.status(500).send({ error: 'something blew up' });
-</code></pre><p>This method performs a myriad of
-useful tasks for simple non-streaming responses such
-as automatically assigning the Content-Length unless
-previously defined and providing automatic <em>HEAD</em> and
-HTTP cache freshness support.
-</p><p>When a <code>Buffer</code> is given
-the Content-Type is set to "application/octet-stream"
-unless previously defined as shown below:
-</p><pre class="js"><code>res.set('Content-Type', 'text/html');
-res.send(new Buffer('<p>some html</p>'));
-</code></pre><p>When a <code>String</code> is given the
-Content-Type is set defaulted to "text/html":
-</p><pre class="js"><code>res.send('<p>some html</p>');
-</code></pre><p>When an <code>Array</code> or <code>Object</code> is
-given Express will respond with the JSON representation:
-</p><pre class="js"><code>res.send({ user: 'tobi' });
-res.send([1,2,3]);</code></pre></section><section><h3 id="res.json">res.json([body])</h3><p>Send a JSON response. This method is identical
-to <code>res.send()</code> when an object or
-array is passed. However, it may be used for
-explicit JSON conversion of non-objects, such as null, undefined, etc.
-(although these are technically not valid JSON).
-</p><pre class="js"><code>res.json(null)
-res.json({ user: 'tobi' })
-res.status(500).json({ error: 'message' })</code></pre></section><section><h3 id="res.jsonp">res.jsonp([body])</h3><p>Send a JSON response with JSONP support. This method is identical
-to <code>res.json()</code>, except that it opts-in to JSONP callback
-support.
-</p><pre class="js"><code>res.jsonp(null)
-// => null
+</code></pre><p>Aliased as <code>res.header(field, [value])</code>.</p>
+</section><section><h3 id="res.get">res.get(field)</h3><p>Get the case-insensitive response header <code>field</code>. </p>
+<pre><code>res.get(&#39;Content-Type&#39;);
+// =&gt; &quot;text/plain&quot;
+</code></pre></section><section><h3 id="res.cookie">res.cookie(name, value, [options])</h3><p>Set cookie <code>name</code> to <code>value</code>, which may be a string or object converted to JSON. The <code>path</code> option defaults to &quot;/&quot;.</p>
+<pre><code>res.cookie(&#39;name&#39;, &#39;tobi&#39;, { domain: &#39;.example.com&#39;, path: &#39;/admin&#39;, secure: true });
+res.cookie(&#39;rememberme&#39;, &#39;1&#39;, { expires: new Date(Date.now() + 900000), httpOnly: true });
+</code></pre><p>The <code>maxAge</code> option is a convenience option for setting &quot;expires&quot; relative to the current time in milliseconds. The following is equivalent to the previous example.</p>
+<pre><code>res.cookie(&#39;rememberme&#39;, &#39;1&#39;, { maxAge: 900000, httpOnly: true })
+</code></pre><p>An object may be passed which is then serialized as JSON, which is automatically parsed by the <code>bodyParser()</code> middleware.</p>
+<pre><code>res.cookie(&#39;cart&#39;, { items: [1,2,3] });
+res.cookie(&#39;cart&#39;, { items: [1,2,3] }, { maxAge: 900000 });
+</code></pre><p> Signed cookies are also supported through this method. Simply pass the <code>signed</code> option. When given <code>res.cookie()</code> will use the secret passed to <code>cookieParser(secret)</code> to sign the value.</p>
+<pre><code>res.cookie(&#39;name&#39;, &#39;tobi&#39;, { signed: true });
+</code></pre><p>Later you may access this value through the <a href="#req.signedCookies">req.signedCookie</a> object.</p>
+</section><section><h3 id="res.clearCookie">res.clearCookie(name, [options])</h3><p>Clear cookie <code>name</code>. The <code>path</code> option defaults to &quot;/&quot;.</p>
+<pre><code>res.cookie(&#39;name&#39;, &#39;tobi&#39;, { path: &#39;/admin&#39; });
+res.clearCookie(&#39;name&#39;, { path: &#39;/admin&#39; });
+</code></pre></section><section><h3 id="res.redirect">res.redirect([status], url)</h3><div class="notice"> <strong>Note</strong>: Express passes the specified URL string as-is to the browser in the <code>Location</code> header, without any validation or manipulation, except in case of <code>back</code>. Browsers take the responsibility of deriving the intended URL from the current URL or the referring URL, and the URL specified in the <code>Location</code> header; and redirect the user accordingly.
+</div>
 
-res.jsonp({ user: 'tobi' })
-// => { "user": "tobi" }
+<p>Redirect to the given <code>url</code> with optional <code>status</code> code defaulting to 302 &quot;Found&quot;.</p>
+<pre><code>res.redirect(&#39;/foo/bar&#39;);
+res.redirect(&#39;http://example.com&#39;);
+res.redirect(301, &#39;http://example.com&#39;);
+res.redirect(&#39;../login&#39;);
+</code></pre><p>Redirects can be a fully qualified URI for redirecting to a different site:</p>
+<pre><code>res.redirect(&#39;http://google.com&#39;);
+</code></pre><p>Redirects can be relative to the root of the host name. For example, if you were on <code>http://example.com/admin/post/new</code>, the following redirect to <code>/admin</code> would land you at <code>http://example.com/admin</code>:</p>
+<pre><code>res.redirect(&#39;/admin&#39;);
+</code></pre><p>Redirects can be relative to the current URL. A redirection of <code>post/new</code>, from <code>http://example.com/blog/admin/</code> (notice the trailing slash), would  give you <code>http://example.com/blog/admin/post/new</code>.</p>
+<pre><code>res.redirect(&#39;post/new&#39;);
+</code></pre><p>Redirecting to <code>post/new</code> from <code>http://example.com/blog/admin</code> (no trailing slash), will take you to <code>http://example.com/blog/post/new</code>.</p>
+<p>If you found the above behavior confusing, think of path segments as directories (have trailing slashes) and files, it will start to make sense.</p>
+<p>Pathname relative redirects are also possible. If you were on <code>http://example.com/admin/post/new</code>, the following redirect would land you at <code>http//example.com/admin/post</code>:</p>
+<pre><code>res.redirect(&#39;..&#39;);
+</code></pre><p>A <code>back</code> redirection will redirect the request back to the Referer (or Referrer), defaulting to <code>/</code> when missing.</p>
+<pre><code>res.redirect(&#39;back&#39;);
+</code></pre></section><section><h3 id="res.location">res.location</h3><p>Set the location header.</p>
+<pre><code>res.location(&#39;/foo/bar&#39;);
+res.location(&#39;foo/bar&#39;);
+res.location(&#39;http://example.com&#39;);
+res.location(&#39;../login&#39;);
+res.location(&#39;back&#39;);
+</code></pre><p>You can use the same kind of <code>urls</code> as in <code>res.redirect()</code>.</p>
+<p>For example, if your application is mounted at <code>/blog</code>, the following would set the <code>location</code> header to <code>/blog/admin</code>:</p>
+<pre><code>res.location(&#39;admin&#39;)
+</code></pre></section><section><h3 id="res.send">res.send([body])</h3><p>Send a response.</p>
+<pre><code>res.send(new Buffer(&#39;whoop&#39;));
+res.send({ some: &#39;json&#39; });
+res.send(&#39;&lt;p&gt;some html&lt;/p&gt;&#39;);
+res.status(404).send(&#39;Sorry, we cannot find that!&#39;);
+res.status(500).send({ error: &#39;something blew up&#39; });
+</code></pre><p>This method performs a myriad of useful tasks for simple non-streaming responses such as automatically assigning the Content-Length unless previously defined and providing automatic <em>HEAD</em> and HTTP cache freshness support.</p>
+<p>When a <code>Buffer</code> is given the Content-Type is set to &quot;application/octet-stream&quot; unless previously defined as shown below:</p>
+<pre><code>res.set(&#39;Content-Type&#39;, &#39;text/html&#39;);
+res.send(new Buffer(&#39;&lt;p&gt;some html&lt;/p&gt;&#39;));
+</code></pre><p>When a <code>String</code> is given the Content-Type is set defaulted to &quot;text/html&quot;:</p>
+<pre><code>res.send(&#39;&lt;p&gt;some html&lt;/p&gt;&#39;);
+</code></pre><p>When an <code>Array</code> or <code>Object</code> is given Express will respond with the JSON representation:</p>
+<pre><code>res.send({ user: &#39;tobi&#39; });
+res.send([1,2,3]);
+</code></pre></section><section><h3 id="res.json">res.json([body])</h3><p>Send a JSON response. This method is identical to <code>res.send()</code> when an object or array is passed. However, it may be used for explicit JSON conversion of non-objects, such as null, undefined, etc. (although these are technically not valid JSON).</p>
+<pre><code>res.json(null)
+res.json({ user: &#39;tobi&#39; })
+res.status(500).json({ error: &#39;message&#39; })
+</code></pre></section><section><h3 id="res.jsonp">res.jsonp([body])</h3><p>Send a JSON response with JSONP support. This method is identical to <code>res.json()</code>, except that it opts-in to JSONP callback support.</p>
+<pre><code>res.jsonp(null)
+// =&gt; null
 
-res.status(500).jsonp({ error: 'message' })
-// => { "error": "message" }
-</code></pre><p>By default, the JSONP callback name is simply <code>callback</code>.
-However, you may alter this with the <a href="#app-settings">jsonp callback name</a>
-setting. The following are some examples of JSONP responses using the same
-code:
-</p><pre class="js"><code>// ?callback=foo
-res.jsonp({ user: 'tobi' })
-// => foo({ "user": "tobi" })
+res.jsonp({ user: &#39;tobi&#39; })
+// =&gt; { &quot;user&quot;: &quot;tobi&quot; }
 
-app.set('jsonp callback name', 'cb');
+res.status(500).jsonp({ error: &#39;message&#39; })
+// =&gt; { &quot;error&quot;: &quot;message&quot; }
+</code></pre><p>By default, the JSONP callback name is simply <code>callback</code>. However, you may alter this with the <a href="#app-settings">jsonp callback name</a> setting. The following are some examples of JSONP responses using the same code:</p>
+<pre><code>// ?callback=foo
+res.jsonp({ user: &#39;tobi&#39; })
+// =&gt; foo({ &quot;user&quot;: &quot;tobi&quot; })
+
+app.set(&#39;jsonp callback name&#39;, &#39;cb&#39;);
 
 // ?cb=foo
-res.status(500).jsonp({ error: 'message' })
-// => foo({ "error": "message" })</code></pre></section><section><h3 id="res.type">res.type(type)</h3><p>Sets the Content-Type to the mime lookup of <code>type</code>,
-or when "/" is present the Content-Type is simply set to this
-literal value.
-</p><pre class="js"><code>res.type('.html');
-res.type('html');
-res.type('json');
-res.type('application/json');
-res.type('png');</code></pre></section><section><h3 id="res.format">res.format(object)</h3><p>Performs content-negotiation on the Accept HTTP header on the request object, 
-when present. It uses <a href="#req.accepts"><code>req.accepts()</code></a> 
-to select a handler for the request, 
-based on the acceptable types ordered by their quality values. 
-If the header is not specified, the
-first callback is invoked. When no match is found, the server
-responds with 406 "Not Acceptable", or invokes the <code>default</code>
-callback.
-</p><p>The Content-Type response header is set for you when a callback is selected.
-However, you may alter this within the callback using <code>res.set()</code>
-or <code>res.type()</code> etcetera.
-</p><p>The following example would respond with <code>{ "message": "hey" }</code>
-when the Accept header field is set to "application/json" or "*/json"
-(however if "*/*" is given, then "hey" will be the response).
-</p><pre class="js"><code>res.format({
-  'text/plain': function(){
-    res.send('hey');
+res.status(500).jsonp({ error: &#39;message&#39; })
+// =&gt; foo({ &quot;error&quot;: &quot;message&quot; })
+</code></pre></section><section><h3 id="res.type">res.type(type)</h3><p>Sets the Content-Type to the mime lookup of <code>type</code>, or when &quot;/&quot; is present the Content-Type is simply set to this literal value.</p>
+<pre><code>res.type(&#39;.html&#39;);
+res.type(&#39;html&#39;);
+res.type(&#39;json&#39;);
+res.type(&#39;application/json&#39;);
+res.type(&#39;png&#39;);
+</code></pre></section><section><h3 id="res.format">res.format(object)</h3><p>Performs content-negotiation on the Accept HTTP header on the request object, when present. It uses <a href="#req.accepts">req.accepts()</a> to select a handler for the request, based on the acceptable types ordered by their quality values. If the header is not specified, the first callback is invoked. When no match is found, the server responds with 406 &quot;Not Acceptable&quot;, or invokes the <code>default</code> callback.</p>
+<p>The Content-Type response header is set for you when a callback is selected. However, you may alter this within the callback using <code>res.set()</code> or <code>res.type()</code> etcetera.</p>
+<p>The following example would respond with <code>{ &quot;message&quot;: &quot;hey&quot; }</code> when the Accept header field is set to &quot;application/json&quot; or &quot;<em>/json&quot; (however if &quot;</em>/*&quot; is given, then &quot;hey&quot; will be the response).</p>
+<pre><code>res.format({
+  &#39;text/plain&#39;: function(){
+    res.send(&#39;hey&#39;);
   },
 
-  'text/html': function(){
-    res.send('<p>hey</p>');
+  &#39;text/html&#39;: function(){
+    res.send(&#39;&lt;p&gt;hey&lt;/p&gt;&#39;);
   },
 
-  'application/json': function(){
-    res.send({ message: 'hey' });
+  &#39;application/json&#39;: function(){
+    res.send({ message: &#39;hey&#39; });
   },
 
-  'default': function() {
+  &#39;default&#39;: function() {
     // log the request and respond with 406
-    res.status(406).send('Not Acceptable');
+    res.status(406).send(&#39;Not Acceptable&#39;);
   }
 });
-</code></pre><p>In addition to canonicalized MIME types, you may also
-use extension names mapped to these types for a slightly
-less verbose implementation:
-</p><pre class="js"><code>res.format({
+</code></pre><p>In addition to canonicalized MIME types, you may also use extension names mapped to these types for a slightly less verbose implementation:</p>
+<pre><code>res.format({
   text: function(){
-    res.send('hey');
+    res.send(&#39;hey&#39;);
   },
 
   html: function(){
-    res.send('<p>hey</p>');
+    res.send(&#39;&lt;p&gt;hey&lt;/p&gt;&#39;);
   },
 
   json: function(){
-    res.send({ message: 'hey' });
+    res.send({ message: &#39;hey&#39; });
   }
-});</code></pre></section><section><h3 id="res.attachment">res.attachment([filename])</h3><p>Sets the Content-Disposition header field to "attachment". If
-a <code>filename</code> is given, then the Content-Type will be
-automatically set based on the extname via <code>res.type()</code>,
-and the Content-Disposition's "filename=" parameter will be set.
-</p><pre class="js"><code>res.attachment();
+});
+</code></pre></section><section><h3 id="res.attachment">res.attachment([filename])</h3><p>Sets the Content-Disposition header field to &quot;attachment&quot;. If a <code>filename</code> is given, then the Content-Type will be automatically set based on the extname via <code>res.type()</code>, and the Content-Disposition&#39;s &quot;filename=&quot; parameter will be set.</p>
+<pre><code>res.attachment();
 // Content-Disposition: attachment
 
-res.attachment('path/to/logo.png');
-// Content-Disposition: attachment; filename="logo.png"
-// Content-Type: image/png</code></pre></section><section><h3 id="res.sendFile">res.sendFile(path, [options], [fn])</h3><div class="notice"><b>Note</b>: <code>res.sendFile</code> requires Express version to be at least 4.8.0</div><p>Transfer the file at the given <code>path</code>. The Content-Type response header field is automatically set based on the filename's extension.</p><p>Unless the <code>root</code> option is set in the options object, <code>path</code> must be an absolute path of the file.
-</p><p>Options:<ul><li><code>maxAge</code> sets the max-age property of the Cache-Control header in milliseconds or a string in <a href="https://www.npmjs.org/package/ms">ms format</a>, defaults to 0.</li><li><code>root</code> root directory for relative filenames.</li><li><code>lastModified</code> enabled by default, sets the <code>Last-Modified</code> header to the last modified date of the file on the OS. Set <code>false</code> to disable it.</li><li><code>headers</code> object of HTTP headers to serve with the file.</li><li><code>dotfiles</code> option for serving dotfiles. Possible values are "allow", "deny", "ignore"; defaults to "ignore".</li></ul></p><p>The callback <code>fn(err)</code> is invoked when the transfer is complete or when an error occurs. If the callback function is specified and an error occurs, the response process must be handled explicitly within the callback function by either ending the request response cycle, or passing the control to the next route.
-</p><p>Here is an example of using <code>res.sendFile</code> with all its arguments.</p><pre class="js"><code>app.get('/file/:name', function (req, res, next) {
+res.attachment(&#39;path/to/logo.png&#39;);
+// Content-Disposition: attachment; filename=&quot;logo.png&quot;
+// Content-Type: image/png
+</code></pre></section><section><h3 id="res.sendFile">res.sendFile(path, [options], [fn])</h3><div class="notice"><strong>Note</strong>: <code>res.sendFile</code> requires Express version to be at least 4.8.0</div>
+
+<p>Transfer the file at the given <code>path</code>. The Content-Type response header field is automatically set based on the filename&#39;s extension.</p>
+<p>Unless the <code>root</code> option is set in the options object, <code>path</code> must be an absolute path of the file.</p>
+<p>Options:</p>
+<ul>
+<li><code>maxAge</code> sets the max-age property of the Cache-Control header in milliseconds or a string in <a href="https://www.npmjs.org/package/ms">ms format</a>, defaults to 0.</li>
+<li><code>root</code> root directory for relative filenames.</li>
+<li><code>lastModified</code> enabled by default, sets the <code>Last-Modified</code> header to the last modified date of the file on the OS. Set <code>false</code> to disable it.</li>
+<li><code>headers</code> object of HTTP headers to serve with the file.</li>
+<li><code>dotfiles</code> option for serving dotfiles. Possible values are &quot;allow&quot;, &quot;deny&quot;, &quot;ignore&quot;; defaults to &quot;ignore&quot;.</li>
+</ul>
+<p>The callback <code>fn(err)</code> is invoked when the transfer is complete or when an error occurs. If the callback function is specified and an error occurs, the response process must be handled explicitly within the callback function by either ending the request response cycle, or passing the control to the next route.</p>
+<p>Here is an example of using <code>res.sendFile</code> with all its arguments.</p>
+<pre><code>app.get(&#39;/file/:name&#39;, function (req, res, next) {
 
   var options = {
-    root: __dirname + '/public/',
-    dotfiles: 'deny',
+    root: __dirname + &#39;/public/&#39;,
+    dotfiles: &#39;deny&#39;,
     headers: {
-        'x-timestamp': Date.now(),
-        'x-sent': true
+        &#39;x-timestamp&#39;: Date.now(),
+        &#39;x-sent&#39;: true
     }
   };
 
@@ -985,83 +966,82 @@ res.attachment('path/to/logo.png');
       res.status(err.status).end();
     }
     else {
-      console.log('Sent:', fileName);
+      console.log(&#39;Sent:&#39;, fileName);
     }
   });
 
 })
-</code></pre><p><code>res.sendFile</code> provides fine-grained support for file serving
-as illustrated in the following example:
-</p><pre class="js"><code>app.get('/user/:uid/photos/:file', function(req, res){
+</code></pre><p><code>res.sendFile</code> provides fine-grained support for file serving as illustrated in the following example:</p>
+<pre><code>app.get(&#39;/user/:uid/photos/:file&#39;, function(req, res){
   var uid = req.params.uid
     , file = req.params.file;
 
   req.user.mayViewFilesFrom(uid, function(yes){
     if (yes) {
-      res.sendFile('/uploads/' + uid + '/' + file);
+      res.sendFile(&#39;/uploads/&#39; + uid + &#39;/&#39; + file);
     } else {
-      res.status(403).send('Sorry! you cant see that.');
+      res.status(403).send(&#39;Sorry! you cant see that.&#39;);
     }
   });
 });
-</code></pre><p>Please refer to <a href="https://github.com/visionmedia/send">send</a> for additional documentation or any issues and concerns.</p></section><section><h3 id="res.sendStatus">res.sendStatus(statusCode)</h3><p>Set the response HTTP status code to <code>statusCode</code> and send its string representation as the response body.</p><pre class="js"><code>res.sendStatus(200); // equivalent to res.status(200).send('OK')
-res.sendStatus(403); // equivalent to res.status(403).send('Forbidden')
-res.sendStatus(404); // equivalent to res.status(404).send('Not Found')
-res.sendStatus(500); // equivalent to res.status(500).send('Internal Server Error')
-</code></pre><p>If an unspported status code is specified, the HTTP status is still set to <code>statusCode</code> and the string version of the code is sent as the response body.</p><pre class="js"><code>res.sendStatus(2000); // equivalent to res.status(2000).send('2000')</code></pre><p><a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">More about HTTP Status Codes</a></p></section><section><h3 id="res.download">res.download(path, [filename], [fn])</h3><p>Transfer the file at <code>path</code> as an "attachment".
-Typically, browsers will prompt the user for download. The
-Content-Disposition "filename=" parameter (i.e. the one
-that will appear in the brower dialog) is set to <code>path</code>
-by default. However, you may provide an override <code>filename</code>.
-</p><p>When an error has ocurred or transfer is complete the optional 
-callback <code>fn</code> is invoked. This method uses <a href="#res.sendFile">res.sendFile()</a>
-to transfer the file.
-</p><pre class="js"><code>res.download('/report-12345.pdf');
+</code></pre><p>Please refer to <a href="https://github.com/visionmedia/send">send</a> for additional documentation or any issues and concerns.</p>
+</section><section><h3 id="res.sendStatus">res.sendStatus(statusCode)</h3><p>Set the response HTTP status code to <code>statusCode</code> and send its string representation as the response body.</p>
+<pre><code>res.sendStatus(200); // equivalent to res.status(200).send(&#39;OK&#39;)
+res.sendStatus(403); // equivalent to res.status(403).send(&#39;Forbidden&#39;)
+res.sendStatus(404); // equivalent to res.status(404).send(&#39;Not Found&#39;)
+res.sendStatus(500); // equivalent to res.status(500).send(&#39;Internal Server Error&#39;)
+</code></pre><p>If an unspported status code is specified, the HTTP status is still set to <code>statusCode</code> and the string version of the code is sent as the response body.</p>
+<pre><code>res.sendStatus(2000); // equivalent to res.status(2000).send(&#39;2000&#39;)
+</code></pre><p><a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">More about HTTP Status Codes</a></p>
+</section><section><h3 id="res.download">res.download(path, [filename], [fn])</h3><p>Transfer the file at <code>path</code> as an &quot;attachment&quot;. Typically, browsers will prompt the user for download. The Content-Disposition &quot;filename=&quot; parameter (i.e. the one that will appear in the brower dialog) is set to <code>path</code> by default. However, you may provide an override <code>filename</code>.</p>
+<p>When an error has ocurred or transfer is complete the optional callback <code>fn</code> is invoked. This method uses <a href="#res.sendFile">res.sendFile()</a> to transfer the file.</p>
+<pre><code>res.download(&#39;/report-12345.pdf&#39;);
 
-res.download('/report-12345.pdf', 'report.pdf');
+res.download(&#39;/report-12345.pdf&#39;, &#39;report.pdf&#39;);
 
-res.download('/report-12345.pdf', 'report.pdf', function(err){
+res.download(&#39;/report-12345.pdf&#39;, &#39;report.pdf&#39;, function(err){
   if (err) {
     // handle error, keep in mind the response may be partially-sent
     // so check res.headersSent
   } else {
     // decrement a download credit etc
   }
-});</code></pre></section><section><h3 id="res.links">res.links(links)</h3><p>Join the given <code>links</code> to populate the "Link"
-response header field.
-</p><pre class="js"><code>res.links({
-  next: 'http://api.example.com/users?page=2',
-  last: 'http://api.example.com/users?page=5'
 });
-</code></pre><p>yields:</p><pre><code>Link: &lt;http://api.example.com/users?page=2&gt;; rel="next", 
-      &lt;http://api.example.com/users?page=5&gt;; rel="last"</code></pre></section><section><h3 id="res.locals">res.locals</h3><p>Response local variables are scoped to the request, and therefore only
-available to the view(s) rendered during that request / response
-cycle (if any). Otherwise, this API is identical to <a href="#app.locals">app.locals</a>.
-</p><p>This object is useful for exposing request-level information such as the
-request pathname, authenticated user, user settings etc.
-</p><pre class="js"><code>app.use(function(req, res, next){
+</code></pre></section><section><h3 id="res.links">res.links(links)</h3><p>Join the given <code>links</code> to populate the &quot;Link&quot; response header field.</p>
+<pre><code>res.links({
+  next: &#39;http://api.example.com/users?page=2&#39;,
+  last: &#39;http://api.example.com/users?page=5&#39;
+});
+</code></pre><p>yields:</p>
+<pre><code>Link: &amp;lt;http://api.example.com/users?page=2&amp;gt;; rel=&quot;next&quot;, 
+      &amp;lt;http://api.example.com/users?page=5&amp;gt;; rel=&quot;last&quot;
+</code></pre></section><section><h3 id="res.locals">res.locals</h3><p>Response local variables are scoped to the request, and therefore only available to the view(s) rendered during that request / response cycle (if any). Otherwise, this API is identical to <a href="#app.locals">app.locals</a>.</p>
+<p>This object is useful for exposing request-level information such as the request pathname, authenticated user, user settings etc.</p>
+<pre><code>app.use(function(req, res, next){
   res.locals.user = req.user;
   res.locals.authenticated = ! req.user.anonymous;
   next();
-});</code></pre></section><section><h3 id="res.render">res.render(view, [locals], callback)</h3><p>Render a <code>view</code> with a callback responding with
-the rendered string. When an error occurs <code>next(err)</code>
-is invoked internally. When a callback is provided both the possible error
-and rendered string are passed, and no automated response is performed.
-</p><pre class="js"><code>res.render('index', function(err, html){
+});
+</code></pre></section><section><h3 id="res.render">res.render(view, [locals], callback)</h3><p>Render a <code>view</code> with a callback responding with the rendered string. When an error occurs <code>next(err)</code> is invoked internally. When a callback is provided both the possible error and rendered string are passed, and no automated response is performed.</p>
+<pre><code>res.render(&#39;index&#39;, function(err, html){
   // ...
 });
 
-res.render('user', { name: 'Tobi' }, function(err, html){
+res.render(&#39;user&#39;, { name: &#39;Tobi&#39; }, function(err, html){
   // ...
-});</code></pre></section><section><h3 id="res.vary">res.vary(field)</h3><p>Adds the field to the <code>Vary</code> response header, if it is not there already.
-</p><pre class="js"><code>res.vary('User-Agent').render('docs');</code></pre></section><section><h3 id="res.end">res.end([data], [encoding])</h3><p>Inherited from node's <code>http.ServerResponse</code>, ends the response process. The only recommended use is for quickly ending the response without any data. If you need to respond with data, use Express' response methods such as <code>res.send()</code>, <code>res.json()</code> etc.
-</p><pre class="js"><code>res.end();
-res.status(404).end();</code></pre></section><section><h3 id="res.headersSent">res.headersSent</h3><p>Property indicating if HTTP headers has been sent for the response.
-</p><pre class="js"><code>app.get('/', function (req, res) {
+});
+</code></pre></section><section><h3 id="res.vary">res.vary(field)</h3><p>Adds the field to the <code>Vary</code> response header, if it is not there already.</p>
+<pre><code>res.vary(&#39;User-Agent&#39;).render(&#39;docs&#39;);
+</code></pre></section><section><h3 id="res.end">res.end([data], [encoding])</h3><p>Inherited from node&#39;s <code>http.ServerResponse</code>, ends the response process. The only recommended use is for quickly ending the response without any data. If you need to respond with data, use Express&#39; response methods such as <code>res.send()</code>, <code>res.json()</code> etc.</p>
+<pre><code>res.end();
+res.status(404).end();
+</code></pre></section><section><h3 id="res.headersSent">res.headersSent</h3><p>Property indicating if HTTP headers has been sent for the response.</p>
+<pre><code>app.get(&#39;/&#39;, function (req, res) {
   console.log(res.headersSent); // false
-  res.send('OK');
+  res.send(&#39;OK&#39;);
   console.log(res.headersSent); // true
-})</code></pre></section><h2 id="router">Router</h2><section><h3 id="router">Router()</h3><p>A router is an isolated instance of middleware and routes. Routers can be thought of as "mini" applications only capable of performing middleware and routing. Every express application has a builtin app router.
+})
+</code></pre></section><h2 id="router">Router</h2><section><h3 id="router">Router()</h3><p>A router is an isolated instance of middleware and routes. Routers can be thought of as "mini" applications only capable of performing middleware and routing. Every express application has a builtin app router.
 </p><p>Routers behave like middleware themselves and can be ".use()'d" by the app or in other routers.
 </p><p>Create a new router by using "express.Router()"
 </p><pre class="js"><code>var router = express.Router([options]);
