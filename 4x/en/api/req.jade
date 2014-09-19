@@ -1,14 +1,47 @@
-include ./req-params
-include ./req-query
-include ./req-param
-include ./req-route
-include ./req-cookies
-include ./req-signedCookies
-include ./req-header
-include ./req-accepts
-include ./req-acceptsCharsets
-include ./req-acceptsLanguages
-include ./req-acceptsEncodings
+section
+  h3(id='req.params') req.params
+  include:md ./req-params.md
+
+section
+  h3(id='req.query') req.query
+  include:md ./req-query.md
+
+section
+  h3(id='req.param') req.param(name)
+  include:md ./req-param.md
+
+section
+  h3(id='req.route') req.route
+  include:md ./req-route.md
+
+section
+  h3(id='req.cookies') req.cookies
+  include:md ./req-cookies.md
+
+section
+  h3(id='req.signedCookies') req.signedCookies
+  include:md ./req-signedCookies.md
+
+section
+  h3(id='req.get') req.get(field)
+  include:md ./req-header.md
+
+section
+  h3(id='req.accepts') req.accepts(types)
+  include:md ./req-accepts.md
+
+section
+  h3(id='req.acceptsCharsets') req.acceptsCharsets(charset, ...)
+  include:md ./req-acceptsCharsets.md
+
+section
+  h3(id='req.acceptsLanguages') req.acceptsLanguages(lang, ...)
+  include:md ./req-acceptsLanguages.md
+
+section
+  h3(id='req.acceptsEncodings') req.acceptsEncodings(encoding, ...)
+  include:md ./req-acceptsEncodings.md
+
 include ./req-is
 include ./req-ip
 include ./req-ips

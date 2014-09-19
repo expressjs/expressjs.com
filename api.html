@@ -613,121 +613,116 @@ admin.get(&#39;/&#39;, function (req, res) {
 });
 
 app.use(&#39;/admin&#39;, admin);
-</code></pre></section><h2 id="request">Request</h2><section><h3 id="req.params">req.params</h3><p>This property is an object containing properties mapped to the named route "parameters".
-For example, if you have the route <code>/user/:name</code>, then the "name" property
-is available to you as <code>req.params.name</code>. This object defaults to <code>{}</code>.
-</p><pre class="js"><code>// GET /user/tj
+</code></pre></section><h2 id="request">Request</h2><section><h3 id="req.params">req.params</h3><p>This property is an object containing properties mapped to the named route &quot;parameters&quot;. For example, if you have the route <code>/user/:name</code>, then the &quot;name&quot; property is available to you as <code>req.params.name</code>. This object defaults to <code>{}</code>.</p>
+<pre><code>// GET /user/tj
 req.params.name
-// => "tj"
-</code></pre><p>When a regular expression is used for the route definition, capture groups
-are provided in the array using <code>req.params[N]</code>, where <code>N</code>
-is the nth capture group. This rule is applied to unnamed wild-card matches
-with string routes such as `/file/*`:
-</p><pre class="js"><code>// GET /file/javascripts/jquery.js
+// =&gt; &quot;tj&quot;
+</code></pre><p>When a regular expression is used for the route definition, capture groups are provided in the array using <code>req.params[N]</code>, where <code>N</code> is the nth capture group. This rule is applied to unnamed wild-card matches with string routes such as <code>/file/*</code>:</p>
+<pre><code>// GET /file/javascripts/jquery.js
 req.params[0]
-// => "javascripts/jquery.js"</code></pre></section><section><h3 id="req.query">req.query</h3><p>This property is an object containing the parsed query-string,
-defaulting to <code>{}</code>.
-</p><pre class="js"><code>// GET /search?q=tobi+ferret
+// =&gt; &quot;javascripts/jquery.js&quot;
+</code></pre></section><section><h3 id="req.query">req.query</h3><p>This property is an object containing the parsed query-string, defaulting to <code>{}</code>.</p>
+<pre><code>// GET /search?q=tobi+ferret
 req.query.q
-// => "tobi ferret"
+// =&gt; &quot;tobi ferret&quot;
 
-// GET /shoes?order=desc&shoe[color]=blue&shoe[type]=converse
+// GET /shoes?order=desc&amp;shoe[color]=blue&amp;shoe[type]=converse
 req.query.order
-// => "desc"
+// =&gt; &quot;desc&quot;
 
 req.query.shoe.color
-// => "blue"
+// =&gt; &quot;blue&quot;
 
 req.query.shoe.type
-// => "converse"</code></pre></section><section><h3 id="req.param">req.param(name)</h3><p>Return the value of param <code>name</code> when present.
-</p><pre class="js"><code>// ?name=tobi
-req.param('name')
-// => "tobi"
+// =&gt; &quot;converse&quot;
+</code></pre></section><section><h3 id="req.param">req.param(name)</h3><p>Return the value of param <code>name</code> when present.</p>
+<pre><code>// ?name=tobi
+req.param(&#39;name&#39;)
+// =&gt; &quot;tobi&quot;
 
 // POST name=tobi
-req.param('name')
-// => "tobi"
+req.param(&#39;name&#39;)
+// =&gt; &quot;tobi&quot;
 
 // /user/tobi for /user/:name 
-req.param('name')
-// => "tobi"
-</code></pre><p>Lookup is performed in the following order:</p><ul><li><code>req.params</code></li><li><code>req.body</code></li><li><code>req.query</code></li></ul><p>Direct access to <code>req.body</code>, <code>req.params</code>,
-and <code>req.query</code> should be favoured for clarity - unless
-you truly accept input from each object.</p></section><section><h3 id="req.route">req.route</h3><p>The currently matched <code>Route</code>.
-</p><pre class="js"><code>app.get('/user/:id?', function userIdHandler(req, res){
+req.param(&#39;name&#39;)
+// =&gt; &quot;tobi&quot;
+</code></pre><p>Lookup is performed in the following order:</p>
+<ul>
+<li><code>req.params</code></li>
+<li><code>req.body</code></li>
+<li><code>req.query</code></li>
+</ul>
+<p>Direct access to <code>req.body</code>, <code>req.params</code>, and <code>req.query</code> should be favoured for clarity - unless you truly accept input from each object.</p>
+</section><section><h3 id="req.route">req.route</h3><p>The currently matched <code>Route</code>.</p>
+<pre><code>app.get(&#39;/user/:id?&#39;, function userIdHandler(req, res) {
   console.log(req.route);
-  res.send('GET');
+  res.send(&#39;GET&#39;);
 })
-</code></pre><p>Example output from the previous snippet:
-</p><pre class="js"><code>{ path: '/user/:id?',
+</code></pre><p>Example output from the previous snippet:</p>
+<pre><code>{ path: &#39;/user/:id?&#39;,
   stack:
    [ { handle: [Function: userIdHandler],
-       name: 'userIdHandler',
+       name: &#39;userIdHandler&#39;,
        params: undefined,
        path: undefined,
        keys: [],
        regexp: /^\/?$/i,
-       method: 'get' } ],
-  methods: { get: true } }</code></pre></section><section><h3 id="req.cookies">req.cookies</h3><p>When the <code>cookieParser()</code> middleware is used, this object
-defaults to <code>{}</code>. Otherwise, it contains the cookies sent by
-the user-agent.
-</p><pre class="js"><code>// Cookie: name=tj
+       method: &#39;get&#39; } ],
+  methods: { get: true } }
+</code></pre></section><section><h3 id="req.cookies">req.cookies</h3><p>When the <code>cookieParser()</code> middleware is used, this object defaults to <code>{}</code>. Otherwise, it contains the cookies sent by the user-agent.</p>
+<pre><code>// Cookie: name=tj
 req.cookies.name
-// => "tj"
-</code></pre><p>Please refer to <a href="https://github.com/expressjs/cookie-parser">cookie-parser</a> for additional documentation or any issues and concerns.</p></section><section><h3 id="req.signedCookies">req.signedCookies</h3><p>When the <code>cookieParser(secret)</code> middleware is used, this object
-defaults to <code>{}</code>. Otherwise, it contains the signed cookies sent by
-the user-agent, unsigned and ready for use. Signed cookies reside in a different
-object to show developer intent; otherwise, a malicious attack could be
-placed on `req.cookie` values (which are easy to spoof). Note that signing
-a cookie does not make it "hidden" or encrypted; this simply prevents
-tampering (because the secret used to sign is private).
-</p><pre class="js"><code>// Cookie: user=tobi.CP7AWaXDfAKIRfH49dQzKJx7sKzzSoPq7/AcBBRVwlI3
+// =&gt; &quot;tj&quot;
+</code></pre><p>Please refer to <a href="https://github.com/expressjs/cookie-parser">cookie-parser</a> for additional documentation or any issues and concerns.</p>
+</section><section><h3 id="req.signedCookies">req.signedCookies</h3><p>When the <code>cookieParser(secret)</code> middleware is used, this object defaults to <code>{}</code>. Otherwise, it contains the signed cookies sent by the user-agent, unsigned and ready for use. Signed cookies reside in a different object to show developer intent; otherwise, a malicious attack could be placed on <code>req.cookie</code> values (which are easy to spoof). Note that signing a cookie does not make it &quot;hidden&quot; or encrypted; this simply prevents tampering (because the secret used to sign is private).</p>
+<pre><code>// Cookie: user=tobi.CP7AWaXDfAKIRfH49dQzKJx7sKzzSoPq7/AcBBRVwlI3
 req.signedCookies.user
-// => "tobi"
-</code></pre><p>Please refer to <a href="https://github.com/expressjs/cookie-parser">cookie-parser</a> for additional documentation or any issues and concerns.</p></section><section><h3 id="req.get">req.get(field)</h3><p> 
-Get the case-insensitive request header <code>field</code>. 
-The <em>Referrer</em> and <em>Referer</em> fields are interchangeable.</p><pre class="js"><code>req.get('Content-Type');
-// => "text/plain"
+// =&gt; &quot;tobi&quot;
+</code></pre><p>Please refer to <a href="https://github.com/expressjs/cookie-parser">cookie-parser</a> for additional documentation or any issues and concerns.</p>
+</section><section><h3 id="req.get">req.get(field)</h3><p>Get the case-insensitive request header <code>field</code>. The <em>Referrer</em> and <em>Referer</em> fields are interchangeable.</p>
+<pre><code>req.get(&#39;Content-Type&#39;);
+// =&gt; &quot;text/plain&quot;
 
-req.get('content-type');
-// => "text/plain"
+req.get(&#39;content-type&#39;);
+// =&gt; &quot;text/plain&quot;
 
-req.get('Something');
-// => undefined
-</code></pre><p>Aliased as <code>req.header(field)</code>.</p></section><section><h3 id="req.accepts">req.accepts(types)</h3><p>Check if the given <code>types</code> are acceptable, returning
-the best match when true, or else <code>undefined</code> (in which
-case you should respond with 406 "Not Acceptable").
-</p><p>The <code>type</code> value may be a single mime type string
-(such as "application/json"), the extension name
-such as "json", a comma-delimited list, or an array. When a list
-or array is given, the <em>best</em> match (if any) is returned.
-</p><pre class="js"><code>// Accept: text/html
-req.accepts('html');
-// => "html"
+req.get(&#39;Something&#39;);
+// =&gt; undefined
+</code></pre><p>Aliased as <code>req.header(field)</code>.</p>
+</section><section><h3 id="req.accepts">req.accepts(types)</h3><p>Check if the given <code>types</code> are acceptable, returning the best match when true, or else <code>undefined</code> (in which case you should respond with 406 &quot;Not Acceptable&quot;).</p>
+<p>The <code>type</code> value may be a single mime type string (such as &quot;application/json&quot;), the extension name such as &quot;json&quot;, a comma-delimited list, or an array. When a list or array is given, the <em>best</em> match (if any) is returned.</p>
+<pre><code>// Accept: text/html
+req.accepts(&#39;html&#39;);
+// =&gt; &quot;html&quot;
 
 // Accept: text/*, application/json
-req.accepts('html');
-// => "html"
-req.accepts('text/html');
-// => "text/html"
-req.accepts('json, text');
-// => "json"
-req.accepts('application/json');
-// => "application/json"
+req.accepts(&#39;html&#39;);
+// =&gt; &quot;html&quot;
+req.accepts(&#39;text/html&#39;);
+// =&gt; &quot;text/html&quot;
+req.accepts(&#39;json, text&#39;);
+// =&gt; &quot;json&quot;
+req.accepts(&#39;application/json&#39;);
+// =&gt; &quot;application/json&quot;
 
 // Accept: text/*, application/json
-req.accepts('image/png');
-req.accepts('png');
-// => undefined
+req.accepts(&#39;image/png&#39;);
+req.accepts(&#39;png&#39;);
+// =&gt; undefined
 
 // Accept: text/*;q=.5, application/json
-req.accepts(['html', 'json']);
-req.accepts('html, json');
-// => "json"
-</code></pre><p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p></section><section><h3 id="req.acceptsCharsets">req.acceptsCharsets(charset, ...)</h3><p>Check if the given <code>charset</code> are acceptable.
-</p><p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p></section><section><h3 id="req.acceptsLanguages">req.acceptsLanguages(lang, ...)</h3><p>Check if the given <code>lang</code> are acceptable.
-</p><p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p></section><section><h3 id="req.acceptsEncodings">req.acceptsEncodings(encoding, ...)</h3><p>Check if the given <code>encoding</code> are acceptable.
-</p><p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p></section><section><h3 id="req.is">req.is(type)</h3><p>Check if the incoming request contains the "Content-Type"
+req.accepts([&#39;html&#39;, &#39;json&#39;]);
+req.accepts(&#39;html, json&#39;);
+// =&gt; &quot;json&quot;
+</code></pre><p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p>
+</section><section><h3 id="req.acceptsCharsets">req.acceptsCharsets(charset, ...)</h3><p>Check if the given <code>charset</code> are acceptable.</p>
+<p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p>
+</section><section><h3 id="req.acceptsLanguages">req.acceptsLanguages(lang, ...)</h3><p>Check if the given <code>lang</code> are acceptable.</p>
+<p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p>
+</section><section><h3 id="req.acceptsEncodings">req.acceptsEncodings(encoding, ...)</h3><p>Check if the given <code>encoding</code> are acceptable.</p>
+<p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p>
+</section><section><h3 id="req.is">req.is(type)</h3><p>Check if the incoming request contains the "Content-Type"
 header field, and if it matches the give mime <code>type</code>.
 </p><pre class="js"><code>// With Content-Type: text/html; charset=utf-8
 req.is('html');
