@@ -11,10 +11,7 @@ html
         include includes/logo
         - active = '/'
         include includes/menu
-     section#logos
-       .content
-         include includes/app-logos
-     section#intro
-       .content
-         include includes/intro
+     section#intro.content
+         include:md includes/intro.md
+         
     include includes/footer
