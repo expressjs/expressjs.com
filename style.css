@@ -323,7 +323,6 @@ html[xmlns] .clearfix {
 #boxes {
   /*background: url(/images/hr.png) top center no-repeat;*/
   margin-left: 50px;
-  padding-top: 50px;
   padding-bottom: 50px;
   font-size: 12px;
 }
@@ -332,12 +331,17 @@ html[xmlns] .clearfix {
   font-size: 13px;
 }
 
-#boxes section {
+#boxes h3 {
+  line-height: 1.25em;
+}
+
+#boxes li {
   width: 180px;
   margin: 0 25px;
   float: left;
   /* fix grid jank. #105 */
   min-height: 200px;
+  list-style: none;
 }
 
 #boxes h3 {
