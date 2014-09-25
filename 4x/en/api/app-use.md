@@ -66,7 +66,7 @@ app.use('/ab+cd', function (req, res, next) {
 })
 
 // will match paths starting with /abcd, /abxcd, /abFOOcd, /abbArcd and so on
-app.use('/ab*cd', function (req, res, next) {
+app.use('/ab\*cd', function (req, res, next) {
   next();
 })
 
