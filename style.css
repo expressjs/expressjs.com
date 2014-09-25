@@ -114,7 +114,7 @@ nav a {
 /* logo */
 
 #logo {
-  margin-top: 180px;
+  margin-top: 160px;
   margin-bottom: 80px;
   margin-left: 80px;
   padding-left: 40px;
@@ -153,6 +153,11 @@ nav a {
 #logo a:hover {
   text-decoration: none;
   color: #858585;
+}
+
+#intro {
+  padding: 20px 0 0;
+  margin-bottom: 0;
 }
 
 /* secondary page logo */
@@ -323,7 +328,6 @@ html[xmlns] .clearfix {
 #boxes {
   /*background: url(/images/hr.png) top center no-repeat;*/
   margin-left: 50px;
-  padding-bottom: 50px;
   font-size: 12px;
 }
 
@@ -335,7 +339,7 @@ html[xmlns] .clearfix {
   line-height: 1.25em;
 }
 
-#boxes li {
+#boxes div {
   width: 180px;
   margin: 0 25px;
   float: left;
