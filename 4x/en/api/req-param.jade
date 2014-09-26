@@ -1,5 +1,5 @@
 section
-  h3(id='req.param') req.param(name)
+  h3(id='req.param') req.param(name, [defaultValue])
 
   p.
     Return the value of param <code>name</code> when present.
@@ -23,7 +23,9 @@ section
     li <code>req.params</code>
     li <code>req.body</code>
     li <code>req.query</code>
-  
+
+  p Optionally, you can specify <code>defaultValue</code> to set a default value if the parameter is not found in any of the request objects.
+
   p.
     Direct access to <code>req.body</code>, <code>req.params</code>,
     and <code>req.query</code> should be favoured for clarity - unless
