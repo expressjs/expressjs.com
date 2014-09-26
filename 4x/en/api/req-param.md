@@ -20,4 +20,6 @@ Lookup is performed in the following order:
 * `req.body`
 * `req.query`
 
+Optionally, you can specify `defaultValue` to set a default value if the parameter is not found in any of the request objects.
+
 Direct access to `req.body`, `req.params`, and `req.query` should be favoured for clarity - unless you truly accept input from each object.
