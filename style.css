@@ -45,9 +45,13 @@ strong, th {
   margin-bottom: 80px;
 }
 
-section {
+section, span.block-section {
   margin-left: 2em;
   margin-bottom: 3em;
+}
+
+span.block-section {
+  display: block;
 }
 
 li code {
@@ -221,6 +225,7 @@ pre {
   border: 1px solid #e7e7e7;
   padding: 16px;
   border-radius: 3px;
+  overflow: auto;
 }
 
 pre code {

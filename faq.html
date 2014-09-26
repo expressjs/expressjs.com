@@ -1,83 +1,153 @@
-<!DOCTYPE html><html><head><title>Express - FAQ</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">Express</a><span class="description">web application framework for<a href="http://nodejs.org">&nbsp;Node.js</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html">API Reference</a><a href="/guide.html">Guide</a><a href="/migrating-4.html">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html" class="active">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><div id="faq"><section><h3 id="models">How do I define models?</h3><p>Express has no notion of a database at all. This is
+<!DOCTYPE html><html><head><title>Express - FAQ</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">Express</a><span class="description">web application framework for<a href="http://nodejs.org">&nbsp;Node.js</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html">API Reference</a><a href="/guide.html">Guide</a><a href="/migrating-4.html">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html" class="active">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><div id="faq"><p><span class="block-section"></p>
+<h3 id='models'>
+How do I define models?
+</h3>
+
+<p>Express has no notion of a database at all. This is
 left up to third-party node modules, allowing you to
 interface with nearly any database.
-</p></section><section><h3 id="auth">How can I authenticate users?</h3><p>This is another opinionated area that Express does not
+</span></p>
+<p><span class="block-section"></p>
+<h3 id="auth">
+How can I authenticate users?
+</h3>
+
+<p>This is another opinionated area that Express does not
 venture into, you may use any authentication scheme you wish.
 For a simple username / password scheme view this <a href="https://github.com/strongloop/express/tree/master/examples/auth">example</a>.
-</p></section><section><h3 id="templates">Which template engines does Express support?</h3><p>Anything that can conform with the <code>(path, locals, callback)</code> signature.
-To normalize template engine interfaces and caching, it's recommended to
+</span></p>
+<p><span class="block-section"></p>
+<h3 id="templates">
+Which template engines does Express support?
+</h3>
+
+<p>Anything that can conform with the <code>(path, locals, callback)</code> signature.
+To normalize template engine interfaces and caching, it&#39;s recommended to
 check the <a href="https://github.com/visionmedia/consolidate.js">consolidate.js</a>
 project for support. Unlisted template engines may still support the Express
 signature.
-</p></section><section><h3 id="custom-template-engines">How do I create custom template engines in Express?</h3><p>Use the <code>app.engine(ext, callback)</code> method to create your own template engine. <code>ext</code> refers to the file extension, <code>callback</code> is the template engine function which accepts the location of the file, the options object, and the callback function, as its parameters.</p><p>The following is an example of implementing a very simple template engine for rendering ".ntl" files.</p><pre class="js"><code>var fs = require('fs'); // this engine requires the `fs` module
-app.engine('ntl', function (filePath, options, callback) { // define the template engine
+</span></p>
+<p><span class="block-section"></p>
+<h3 id="custom-template-engines">How do I create custom template engines in Express?</h3>
+
+<p>Use the <code>app.engine(ext, callback)</code> method to create your own template engine. <code>ext</code> refers to the file extension, <code>callback</code> is the template engine function which accepts the location of the file, the options object, and the callback function, as its parameters.</p>
+<p>The following is an example of implementing a very simple template engine for rendering &quot;.ntl&quot; files.</p>
+<pre><code>var fs = require(&#39;fs&#39;); // this engine requires the `fs` module
+app.engine(&#39;ntl&#39;, function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
     if (err) throw new Error(err);
     // this is an exteremly simple template engine
-    var rendered = content.toString().replace('#title#', '<title>'+ options.title +'</title>').replace('#message#', '<h1>'+ options.message +'</h1>');
+    var rendered = content.toString().replace(&#39;#title#&#39;, &#39;&lt;title&gt;&#39;+ options.title +&#39;&lt;/title&gt;&#39;)
+    .replace(&#39;#message#&#39;, &#39;&lt;h1&gt;&#39;+ options.message +&#39;&lt;/h1&gt;&#39;);
     return callback(null, rendered);
   })
 });
-app.set('views', './views'); // specify the views directory
-app.set('view engine', 'ntl'); // register the template engine
-</code></pre><p>Your app will now be able to render ".ntl" files. Create a file named "index.ntl" in the views directory with the following content.</p><pre class="js"><code>#title#
+app.set(&#39;views&#39;, &#39;./views&#39;); // specify the views directory
+app.set(&#39;view engine&#39;, &#39;ntl&#39;); // register the template engine
+</code></pre><p>Your app will now be able to render &quot;.ntl&quot; files. Create a file named &quot;index.ntl&quot; in the views directory with the following content.</p>
+<pre><code>#title#
 #message#
-</code></pre><p>Then, create the following route in your app.</p><pre class="js"><code>app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
+</code></pre><p>Then, create the following route in your app.</p>
+<pre><code>app.get(&#39;/&#39;, function (req, res) {
+  res.render(&#39;index&#39;, { title: &#39;Hey&#39;, message: &#39;Hello there!&#39;});
 })
-</code></pre><p>On making a request to the home page, "index.ntl" will be rendered as HTML.</p></section><section><h3 id="structure">How should I structure my application?</h3><p>There is no true answer to this question. It is highly dependant
+</code></pre><p>On making a request to the home page, &quot;index.ntl&quot; will be rendered as HTML.
+</span></p>
+<p><span class="block-section"></p>
+<h3 id="structure">How should I structure my application?</h3>
+
+<p>There is no true answer to this question. It is highly dependant
 on the scale of your application and the team involved. To be as
-flexible as possible, Express makes no assumptions in terms of structure.
-</p><p>Routes and other application-specific logic may live in as many files
+flexible as possible, Express makes no assumptions in terms of structure.</p>
+<p>Routes and other application-specific logic may live in as many files
 as you wish, in any directory structure you prefer. View the following
-examples for inspiration:
-</p><ul><li><a href="https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19">Route listings</a></li><li><a href="https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47">Route map</a></li><li><a href="https://github.com/strongloop/express/tree/master/examples/mvc">MVC style controllers</a></li></ul><p>Also, there are third-party extensions for Express, which simplify some of these patterns:
-</p><ul><li><a href="https://github.com/expressjs/express-resource">Resourceful routing</a></li><li><a href="https://github.com/expressjs/express-namespace">Namespaced routing</a></li></ul></section><section><h3 id="multiple-statics">How can I serve statics from several directories?</h3><p>You may typically use any middleware several times 
+examples for inspiration:</p>
+<ul>
+<li><a href="https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19">Route listings</a></li>
+<li><a href="https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47">Route map</a></li>
+<li><a href="https://github.com/strongloop/express/tree/master/examples/mvc">MVC style controllers</a></li>
+</ul>
+<p>Also, there are third-party extensions for Express, which simplify some of these patterns:</p>
+<ul>
+<li><a href="https://github.com/expressjs/express-resource">Resourceful routing</a></li>
+<li><a href="https://github.com/expressjs/express-namespace">Namespaced routing</a>
+</span></li>
+</ul>
+<p><span class="block-section"></p>
+<h3 id="multiple-statics">How can I serve statics from several directories?</h3>
+
+<p>You may typically use any middleware several times 
 within your application. With the following middleware setup, and a request
-for "GET /javascripts/jquery.js", the first check would be "./public/javascripts/jquery.js";
-if it does not exist, then the subsequent middleware will check "./files/javascripts/jquery.js".
-</p><pre class="js"><code>app.use(express.static('public'));
-app.use(express.static('files'));
-</code></pre></section><setup><h3 id="static-prefix">How can I prefix a pathname for serving statics?</h3><p>Connect's generic "mounting" feature allows you to define
-the pathname "prefix" to which the middleware will be invoked.
+for &quot;GET /javascripts/jquery.js&quot;, the first check would be &quot;./public/javascripts/jquery.js&quot;;
+if it does not exist, then the subsequent middleware will check &quot;./files/javascripts/jquery.js&quot;.</p>
+<pre><code>app.use(express.static(&#39;public&#39;));
+app.use(express.static(&#39;files&#39;));
+</code></pre><p></span></p>
+<p><span class="block-section"></p>
+<h3 id="static-prefix">How can I prefix a pathname for serving statics?</h3>
+
+<p>Connect&#39;s generic &quot;mounting&quot; feature allows you to define
+the pathname &quot;prefix&quot; to which the middleware will be invoked.
 This effectively behaves as if that prefix string was never
-part of the path. Suppose you wanted "GET /files/javascripts/jquery.js".
-You could mount the middleware at "/files", exposing "/javascripts/jquery.js"
-as the <code>req.url</code>, allowing the middleware to serve the file:
-</p><pre class="js"><code>app.use('/public', express.static('public'));
-</code></pre></setup><setup><h3 id="migration">How do I migrate my Express 2.x application?</h3><p>Express 2x will likely be supported through to node 1.0, so there's
+part of the path. Suppose you wanted &quot;GET /files/javascripts/jquery.js&quot;.
+You could mount the middleware at &quot;/files&quot;, exposing &quot;/javascripts/jquery.js&quot;
+as the <code>req.url</code>, allowing the middleware to serve the file:</p>
+<pre><code>app.use(&#39;/public&#39;, express.static(&#39;public&#39;));
+</code></pre><p></span></p>
+<p><span class="block-section"></p>
+<h3 id="migration">How do I migrate my Express 2.x application?</h3>
+
+<p>Express 2x will likely be supported through to node 1.0, so there&#39;s
 no immediate reason to update beyond the refactoring and API changes
-that Express 3x introduces, so if you're happy with 2x feel free
+that Express 3x introduces, so if you&#39;re happy with 2x feel free
 to remain on that branch. For migration information visit the
 <a href="https://github.com/strongloop/express/wiki/Migrating-from-2.x-to-3.x">migration</a>
 wiki page, or view a <a href="https://github.com/strongloop/express/wiki/New-features-in-3.x">list of changes</a> made in 3.x.
-</p></setup><setup><h3 id="404-handling">How do you handle 404s?</h3><p>In Express, 404s are not the result of an error. Therefore,
+</span></p>
+<p><span class="block-section"></p>
+<h3 id="404-handling">How do you handle 404s?</h3>
+
+<p>In Express, 404s are not the result of an error. Therefore,
 the error-handler middleware will not capture 404s. This is
 because a 404 is simply the absence of additional work to do;
 in other words, Express has executed all middleware / routes,
 and found that none of them responded. All you need to
 do is add a middleware at the very bottom (below all others)
-to handle a 404:
-</p><pre class="js"><code>app.use(function(req, res, next){
-  res.send(404, 'Sorry cant find that!');
+to handle a 404:</p>
+<pre><code>app.use(function(req, res, next){
+  res.send(404, &#39;Sorry cant find that!&#39;);
 });
-</code></pre></setup><setup><h3 id="error-handling">How do you setup an error handler in Express?</h3><p>Error-handling middleware is defined just like regular middleware,
+</code></pre><p></span></p>
+<p><span class="block-section"></p>
+<h3 id="error-handling">How do you setup an error handler in Express?</h3>
+
+<p>Error-handling middleware is defined just like regular middleware,
 except that it must be defined with an arity of 4 (that is the signature
-<code>(err, req, res, next)</code>):
-</p><pre class="js"><code>app.use(function(err, req, res, next){
+<code>(err, req, res, next)</code>):</p>
+<pre><code>app.use(function(err, req, res, next){
   console.error(err.stack);
-  res.send(500, 'Something broke!');
+  res.send(500, &#39;Something broke!&#39;);
 });
 </code></pre><p>View <a href="/guide.html#error-handling">error-handling</a> for more information.
-</p></setup><setup><h3 id="render-html">How do I render plain HTML?</h3><p>You don't! There's no need to "render" HTML with <code>res.render()</code>,
+</span></p>
+<p><span class="block-section"></p>
+<h3 id="render-html">How do I render plain HTML?</h3>
+
+<p>You don&#39;t! There&#39;s no need to &quot;render&quot; HTML with <code>res.render()</code>,
 if you have a specific file you should use <code>res.sendFile()</code>, or
 if you are serving many assets from a directory use the <code>express.static()</code>
 middleware.
-</p></setup><setup><h3 id="size">How big is the Express codebase?</h3><p>Express is a very small framework. The 3.0.0 release is only
+</span></p>
+<p><span class="block-section"></p>
+<h3 id="size">How big is the Express codebase?</h3>
+
+<p>Express is a very small framework. The 3.0.0 release is only
 932 SLOC, and the mandatory portion of Connect which Express
 is built on is only 267 SLOC. The optional middleware bundled
 with Connect add an additional 1143 SLOC, and are lazy loaded
-upon use.</p></setup></div></section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+upon use.
+</span></p>
+</div></section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
