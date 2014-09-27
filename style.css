@@ -406,6 +406,11 @@ html[xmlns] .clearfix {
 
 /* applications page */
 
+#applications .section {
+  display: block;
+  margin-bottom: 50px;
+}
+
 .application h2 {
   margin: 0;
 }
