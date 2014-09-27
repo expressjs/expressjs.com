@@ -6,6 +6,7 @@ How do I define models?
 Express has no notion of a database at all. This is
 left up to third-party node modules, allowing you to
 interface with nearly any database.
+
 </span>
 
 <span class="block-section">
@@ -16,6 +17,7 @@ How can I authenticate users?
 This is another opinionated area that Express does not
 venture into, you may use any authentication scheme you wish.
 For a simple username / password scheme view this [example](https://github.com/strongloop/express/tree/master/examples/auth).
+
 </span>
 
 <span class="block-section">
@@ -28,6 +30,7 @@ To normalize template engine interfaces and caching, it's recommended to
 check the [consolidate.js](https://github.com/visionmedia/consolidate.js)
 project for support. Unlisted template engines may still support the Express
 signature.
+
 </span>
 
 <span class="block-section">
@@ -66,6 +69,7 @@ app.get('/', function (req, res) {
 })
 ```
 On making a request to the home page, "index.ntl" will be rendered as HTML.
+
 </span>
 
 <span class="block-section">
@@ -87,6 +91,7 @@ Also, there are third-party extensions for Express, which simplify some of these
 
 * [Resourceful routing](https://github.com/expressjs/express-resource)
 * [Namespaced routing](https://github.com/expressjs/express-namespace)
+
 </span>
 
 <span class="block-section">
@@ -101,6 +106,7 @@ if it does not exist, then the subsequent middleware will check "./files/javascr
 app.use(express.static('public'));
 app.use(express.static('files'));
 ```
+
 </span>
 
 <span class="block-section">
@@ -116,6 +122,7 @@ as the `req.url`, allowing the middleware to serve the file:
 ```
 app.use('/public', express.static('public'));
 ```
+
 </span>
 
 <span class="block-section">
@@ -127,6 +134,7 @@ that Express 3x introduces, so if you're happy with 2x feel free
 to remain on that branch. For migration information visit the
 [migration](https://github.com/strongloop/express/wiki/Migrating-from-2.x-to-3.x)
 wiki page, or view a [list of changes](https://github.com/strongloop/express/wiki/New-features-in-3.x) made in 3.x.
+
 </span>
 
 <span class="block-section">
@@ -145,6 +153,7 @@ app.use(function(req, res, next){
   res.send(404, 'Sorry cant find that!');
 });
 ```
+
 </span>
 
 <span class="block-section">
@@ -160,7 +169,9 @@ app.use(function(err, req, res, next){
   res.send(500, 'Something broke!');
 });
 ```
+
 View [error-handling](/guide.html#error-handling) for more information.
+
 </span>
 
 <span class="block-section">
@@ -170,6 +181,7 @@ You don't! There's no need to "render" HTML with `res.render()`,
 if you have a specific file you should use `res.sendFile()`, or
 if you are serving many assets from a directory use the `express.static()`
 middleware.
+
 </span>
 
 <span class="block-section">
@@ -180,4 +192,5 @@ Express is a very small framework. The 3.0.0 release is only
 is built on is only 267 SLOC. The optional middleware bundled
 with Connect add an additional 1143 SLOC, and are lazy loaded
 upon use.
+
 </span>
