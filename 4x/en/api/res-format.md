@@ -2,9 +2,9 @@ Performs content-negotiation on the Accept HTTP header on the request object, wh
 
 The Content-Type response header is set for you when a callback is selected. However, you may alter this within the callback using `res.set()` or `res.type()` etcetera.
 
-The following example would respond with `{ "message": "hey" }` when the Accept header field is set to "application/json" or "*/json" (however if "*/*" is given, then "hey" will be the response).
+The following example would respond with `{ "message": "hey" }` when the Accept header field is set to "application/json" or "\*/json" (however if "\*/\*" is given, then "hey" will be the response).
 
-```
+```js
 res.format({
   'text/plain': function(){
     res.send('hey');
@@ -26,7 +26,7 @@ res.format({
 ```
 In addition to canonicalized MIME types, you may also use extension names mapped to these types for a slightly less verbose implementation:
 
-```
+```js
 res.format({
   text: function(){
     res.send('hey');

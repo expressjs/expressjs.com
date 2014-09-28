@@ -1,7 +1,7 @@
 <div id="applications">
 
   <span class="section">
-  <h2>MySpace</h2>
+  <h2 id="myspace">MySpace</h2>
   <p>
   No introduction required! Everyone knows MySpace,
   and the upcoming https://new.myspace.com is powered by Express.

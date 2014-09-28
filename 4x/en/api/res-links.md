@@ -1,6 +1,6 @@
-Join the given <code>links</code> to populate the "Link" response header field.
+Join the given `links` to populate the "Link" response header field.
 
-```
+```js
 res.links({
   next: 'http://api.example.com/users?page=2',
   last: 'http://api.example.com/users?page=5'

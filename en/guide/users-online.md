@@ -6,7 +6,7 @@ create a package.json file containing two dependencies: one for the redis
 client, and another for Express itself. (Also, be sure you have redis installed
 and running via `$ redis-server`.)
 
-```
+```js
 {
   "name": "app",
   "version": "0.0.1",
@@ -19,7 +19,7 @@ and running via `$ redis-server`.)
 
 Next you'll need to create an app, and a connection to redis:
 
-```
+```js
 var express = require('express');
 var redis = require('redis');
 var db = redis.createClient();
@@ -32,7 +32,7 @@ online within the last N milliseconds. We do this by passing
 a timestamp as the member's "score". Note that we're using the 
 User-Agent string here, in place of what would normally be a user id.
 
-```
+```js
 app.use(function(req, res, next){
   var ua = req.headers['user-agent'];
   db.zadd('online', Date.now(), ua, next);
@@ -45,7 +45,7 @@ to fetch with a positive infinite max value, so that we're
 always getting the most recent users. It's capped with a minimum score
 of the current timestamp minus 60,000 milliseconds.
 
-```
+```js
 app.use(function(req, res, next){
   var min = 60 * 1000;
   var ago = Date.now() - min;
@@ -61,7 +61,7 @@ Finally we then use it, and bind to a port! That's
 all there is to it. Visit the app in a few browsers
 and you'll see the count increase.
 
-```
+```js
 app.get('/', function(req, res){
   res.send(req.online.length + ' users online');
 });

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Express - FAQ</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">Express</a><span class="description">web application framework for<a href="http://nodejs.org">&nbsp;Node.js</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html">API Reference</a><a href="/guide.html">Guide</a><a href="/migrating-4.html">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html" class="active">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><div id="faq"><p><span class="block-section"></p>
+<!DOCTYPE html><html><head><title>Express - FAQ</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">Express</a><span class="description">web application framework for<a href="http://nodejs.org">&nbsp;Node.js</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html#application">API Reference</a><a href="/guide.html">Guide</a><a href="/migrating-4.html#overview">Moving to 4.x  </a><a href="/applications.html#myspace">Applications</a><a href="/community.html">Community</a><a href="/faq.html" class="active">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><div id="faq"><p><span class="block-section"></p>
 <h3 id='models'>
 How do I define models?
 </h3>
@@ -32,7 +32,7 @@ signature.</p>
 
 <p>Use the <code>app.engine(ext, callback)</code> method to create your own template engine. <code>ext</code> refers to the file extension, <code>callback</code> is the template engine function which accepts the location of the file, the options object, and the callback function, as its parameters.</p>
 <p>The following is an example of implementing a very simple template engine for rendering &quot;.ntl&quot; files.</p>
-<pre><code>var fs = require(&#39;fs&#39;); // this engine requires the `fs` module
+<pre><code class="lang-js">var fs = require(&#39;fs&#39;); // this engine requires the fs module
 app.engine(&#39;ntl&#39;, function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
     if (err) throw new Error(err);
@@ -44,14 +44,16 @@ app.engine(&#39;ntl&#39;, function (filePath, options, callback) { // define the
 });
 app.set(&#39;views&#39;, &#39;./views&#39;); // specify the views directory
 app.set(&#39;view engine&#39;, &#39;ntl&#39;); // register the template engine
-</code></pre><p>Your app will now be able to render &quot;.ntl&quot; files. Create a file named &quot;index.ntl&quot; in the views directory with the following content.</p>
+</code></pre>
+<p>Your app will now be able to render &quot;.ntl&quot; files. Create a file named &quot;index.ntl&quot; in the views directory with the following content.</p>
 <pre><code>#title#
 #message#
 </code></pre><p>Then, create the following route in your app.</p>
-<pre><code>app.get(&#39;/&#39;, function (req, res) {
+<pre><code class="lang-js">app.get(&#39;/&#39;, function (req, res) {
   res.render(&#39;index&#39;, { title: &#39;Hey&#39;, message: &#39;Hello there!&#39;});
 })
-</code></pre><p>On making a request to the home page, &quot;index.ntl&quot; will be rendered as HTML.</p>
+</code></pre>
+<p>On making a request to the home page, &quot;index.ntl&quot; will be rendered as HTML.</p>
 <p></span></p>
 <p><span class="block-section"></p>
 <h3 id="structure">How should I structure my application?</h3>
@@ -80,9 +82,10 @@ examples for inspiration:</p>
 within your application. With the following middleware setup, and a request
 for &quot;GET /javascripts/jquery.js&quot;, the first check would be &quot;./public/javascripts/jquery.js&quot;;
 if it does not exist, then the subsequent middleware will check &quot;./files/javascripts/jquery.js&quot;.</p>
-<pre><code>app.use(express.static(&#39;public&#39;));
+<pre><code class="lang-js">app.use(express.static(&#39;public&#39;));
 app.use(express.static(&#39;files&#39;));
-</code></pre><p></span></p>
+</code></pre>
+<p></span></p>
 <p><span class="block-section"></p>
 <h3 id="static-prefix">How can I prefix a pathname for serving statics?</h3>
 
@@ -92,8 +95,9 @@ This effectively behaves as if that prefix string was never
 part of the path. Suppose you wanted &quot;GET /files/javascripts/jquery.js&quot;.
 You could mount the middleware at &quot;/files&quot;, exposing &quot;/javascripts/jquery.js&quot;
 as the <code>req.url</code>, allowing the middleware to serve the file:</p>
-<pre><code>app.use(&#39;/public&#39;, express.static(&#39;public&#39;));
-</code></pre><p></span></p>
+<pre><code class="lang-js">app.use(&#39;/public&#39;, express.static(&#39;public&#39;));
+</code></pre>
+<p></span></p>
 <p><span class="block-section"></p>
 <h3 id="migration">How do I migrate my Express 2.x application?</h3>
 
@@ -114,21 +118,23 @@ in other words, Express has executed all middleware / routes,
 and found that none of them responded. All you need to
 do is add a middleware at the very bottom (below all others)
 to handle a 404:</p>
-<pre><code>app.use(function(req, res, next){
+<pre><code class="lang-js">app.use(function(req, res, next){
   res.send(404, &#39;Sorry cant find that!&#39;);
 });
-</code></pre><p></span></p>
+</code></pre>
+<p></span></p>
 <p><span class="block-section"></p>
 <h3 id="error-handling">How do you setup an error handler in Express?</h3>
 
 <p>Error-handling middleware is defined just like regular middleware,
 except that it must be defined with an arity of 4 (that is the signature
 <code>(err, req, res, next)</code>):</p>
-<pre><code>app.use(function(err, req, res, next){
+<pre><code class="lang-js">app.use(function(err, req, res, next){
   console.error(err.stack);
   res.send(500, &#39;Something broke!&#39;);
 });
-</code></pre><p>View <a href="/guide.html#error-handling">error-handling</a> for more information.</p>
+</code></pre>
+<p>View <a href="/guide.html#error-handling">error-handling</a> for more information.</p>
 <p></span></p>
 <p><span class="block-section"></p>
 <h3 id="render-html">How do I render plain HTML?</h3>

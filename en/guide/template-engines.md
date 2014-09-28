@@ -33,7 +33,7 @@ html
 
 Then create a route to render the "index.jade" file.
 
-```
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 })

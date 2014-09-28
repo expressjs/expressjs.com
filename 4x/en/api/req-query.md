@@ -1,6 +1,6 @@
 This property is an object containing the parsed query-string, defaulting to `{}`.
 
-```
+```js
 // GET /search?q=tobi+ferret
 req.query.q
 // => "tobi ferret"

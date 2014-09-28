@@ -1,6 +1,6 @@
 Returns the canonical path of the app.
 
-```
+```js
 var app = express()
   , blog = express()
   , blogAdmin = express();

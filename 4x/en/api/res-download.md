@@ -2,7 +2,7 @@ Transfer the file at `path` as an "attachment". Typically, browsers will prompt 
 
 When an error has ocurred or transfer is complete the optional callback `fn` is invoked. This method uses [res.sendFile()](#res.sendFile) to transfer the file.
 
-```
+```js
 res.download('/report-12345.pdf');
 
 res.download('/report-12345.pdf', 'report.pdf');

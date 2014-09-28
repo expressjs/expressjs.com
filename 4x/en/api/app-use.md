@@ -15,20 +15,20 @@ app.use(function (req, res, next) {
 Middleware functions are executed sequentially, therefore the order of middleware inclusion is important.
 
 ```js
-  // this middleware will not allow the request to go beyond it
-  app.use(function(req, res, next) {
-    res.send('Hello World');
-  })
+// this middleware will not allow the request to go beyond it
+app.use(function(req, res, next) {
+  res.send('Hello World');
+})
 
-  // requests will never reach this route
-  app.get('/', function (req, res) {
-    res.send('Welcome');
-  })
+// requests will never reach this route
+app.get('/', function (req, res) {
+  res.send('Welcome');
+})
 ```
 
-<div class="notice"> The middleware examples below are intentionally left overly simple to kee the examples lean and clutter-free.</div>
-
 `path` can be a string representing a path, a path pattern, a regular expression to match paths, or an array of combinations of the aforementioned path objects.
+
+<div class="notice">**Note**: The middleware examples below are intentionally left overly simple to keep the examples lean and clutter-free.</div>
 
 <table class="doctable" border="1">
   <thead>
@@ -198,33 +198,33 @@ app.use(mw1, [mw2, r1, r2], subApp);
   </tbody>
 </table>
 
-Following are some examples of using the <a href="#express.static">express.static</a> middleware in an Express app.
+Following are some examples of using the [express.static](#express.static) middleware in an Express app.
 
 Serve static content for the apfrom the "public" directory in the application directory.
 
 ```js
-    // GET /style.css etc
-    app.use(express.static(__dirname + '/public'));
+// GET /style.css etc
+app.use(express.static(__dirname + '/public'));
 ```
 
 Mount the middleware at "/static" to server static content only when their request path is prefixed with "/static".
 
 ```js
-  // GET /static/style.css etc.
-  app.use('/static', express.static(__dirname + '/public'));
+// GET /static/style.css etc.
+app.use('/static', express.static(__dirname + '/public'));
 ```
 
 Disable logging for static content requests by loading the logger middleware after the static middleware.
 
 ```js
-    app.use(express.static(__dirname + '/public'));
-    app.use(logger());
+app.use(express.static(__dirname + '/public'));
+app.use(logger());
 ```
 
 Serve static files from multiple directories, but give precedence to "./public" over the others.
 
 ```js
-  app.use(express.static(__dirname + '/public'));
-  app.use(express.static(__dirname + '/files'));
-  app.use(express.static(__dirname + '/uploads'));
+app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/files'));
+app.use(express.static(__dirname + '/uploads'));
 ```

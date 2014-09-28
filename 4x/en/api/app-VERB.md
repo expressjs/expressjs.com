@@ -12,7 +12,7 @@ translates the path strings to regular expressions, used internally to match inc
 Query strings are *not* considered when peforming these matches. For example, "GET /"
 would match the following route, as would "GET /?name=tobi":
 
-```
+```js
 app.get('/', function(req, res){
   res.send('hello world');
 });
@@ -22,7 +22,7 @@ Regular expressions may also be used, and can be useful
 if you have very specific restraints, for example the following
 would match "GET /commits/71dbb9c" as well as "GET /commits/71dbb9c..4c084f9".
 
-```
+```js
 app.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
   var from = req.params[0];
   var to = req.params[1] || 'HEAD';
@@ -33,7 +33,7 @@ app.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
 Several callbacks may also be passed, useful for re-using middleware
 that load resources, perform validations, etc.
 
-```
+```js
 app.get('/user/:id', user.load, function(){
   // ... 
 })
@@ -41,7 +41,7 @@ app.get('/user/:id', user.load, function(){
 
 If you have multiple common middleware for a route, you can use the route API with `all`.
 
-```
+```js
 var middleware = [loadForum, loadThread];
 
 app.route('/forum/:fid/thread/:tid')

@@ -6,7 +6,7 @@ Unless the `root` option is set in the options object, `path` must be an absolut
 
 Options:
 
-* `maxAge` sets the max-age property of the Cache-Control header in milliseconds or a string in <a href="https://www.npmjs.org/package/ms">ms format</a>, defaults to 0.
+* `maxAge` sets the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms), defaults to 0.
 * `root` root directory for relative filenames.
 * `lastModified` enabled by default, sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.
 * `headers` object of HTTP headers to serve with the file.
@@ -16,7 +16,7 @@ The callback `fn(err)` is invoked when the transfer is complete or when an error
 
 Here is an example of using `res.sendFile` with all its arguments.
 
-```
+```js
 app.get('/file/:name', function (req, res, next) {
 
   var options = {
@@ -44,7 +44,7 @@ app.get('/file/:name', function (req, res, next) {
 
 `res.sendFile` provides fine-grained support for file serving as illustrated in the following example:
 
-```
+```js
 app.get('/user/:uid/photos/:file', function(req, res){
   var uid = req.params.uid
     , file = req.params.file;

@@ -4,7 +4,7 @@ Error-handling middleware is defined just like regular middleware,
 except that must be defined with an arity of 4 (that is the signature
 `(err, req, res, next)`):
 
-```
+```js
 app.use(function(err, req, res, next){
   console.error(err.stack);
   res.status(500).send('Something broke!');
@@ -14,7 +14,7 @@ app.use(function(err, req, res, next){
 Though not mandatory, error-handling middleware are typically defined
 very last, below any other `app.use()` calls, like so:
 
-```
+```js
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
@@ -35,7 +35,7 @@ several error-handling middleware, much like you would with
 regular middleware. For example suppose you wanted to define an error-handler
 for requests made via XHR, and those without, you might do:
 
-```
+```js
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
@@ -50,7 +50,7 @@ app.use(errorHandler);
 Where the more generic `logErrors` may write request and
 error information to stderr, loggly, or similar services:
 
-```
+```js
 function logErrors(err, req, res, next) {
   console.error(err.stack);
   next(err);
@@ -60,7 +60,7 @@ function logErrors(err, req, res, next) {
 Where `clientErrorHandler` is defined as the following (note
 that the error is explicitly passed along to the next):
 
-```
+```js
 function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
     res.status(500).send({ error: 'Something blew up!' });
@@ -72,7 +72,7 @@ function clientErrorHandler(err, req, res, next) {
 
 The following `errorHandler` "catch-all" implementation may be defined as:
 
-```
+```js
 function errorHandler(err, req, res, next) {
   res.status(500);
   res.render('error', { error: err });

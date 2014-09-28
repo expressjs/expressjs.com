@@ -2,7 +2,7 @@ Returns an instance of a single route which can then be used to handle HTTP verb
 
 Building on the `router.param()` example from before, we see how `router.route()` allows us to easily specify the various HTTP verb handlers.
 
-```
+```js
 var router = express.Router();
 
 router.param('user_id', function(req, res, next, id) {
@@ -35,4 +35,5 @@ router.route('/users/:user_id')
   next(new Error('not implemented'));
 })
 ```
+
 This apporach re-uses the single '/users/:user_id' path and add handlers for the various HTTP verbs.

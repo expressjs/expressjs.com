@@ -8,21 +8,21 @@ _Note_
 * Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on `app` will be trigerred only by route parameters defined on `app` routes.
 * A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.
 
-  ```
-  app.param('id', function (req, res, next, id) {
-    console.log('CALLED ONLY ONCE');
-    next();
-  })
+```js
+app.param('id', function (req, res, next, id) {
+  console.log('CALLED ONLY ONCE');
+  next();
+})
 
-  app.get('/user/:id', function (req, res, next) {
-    console.log('although this matches');
-    next();
-  });
+app.get('/user/:id', function (req, res, next) {
+  console.log('although this matches');
+  next();
+});
 
-  app.get('/user/:id', function (req, res) {
-    console.log('and this matches too');
-    res.end();
-  });
+app.get('/user/:id', function (req, res) {
+  console.log('and this matches too');
+  res.end();
+});
 ```
 
 The following snippet illustrates how the `callback`
@@ -31,7 +31,7 @@ it provides the additional value of the parameter (here named as `id`), derived 
 An attempt to load the user is then performed, assigning `req.user`;
 otherwise an error is passed to `next(err)`.
 
-```
+```js
 app.param('user', function(req, res, next, id){
   User.find(id, function(err, user){
     if (err) {
@@ -55,7 +55,7 @@ regular expression.
 This example is a bit more advanced. It is checking if the second argument is a regular
 expression, returning the callback, which acts much like the "user" param example.
 
-```
+```js
 app.param(function(name, fn){
   if (fn instanceof RegExp) {
     return function(req, res, next, val){
@@ -74,7 +74,7 @@ app.param(function(name, fn){
 The method could now be used to effectively validate parameters (and
 optionally parse them to provide capture groups):
 
-```
+```js
 app.param('id', /^\d+$/);
 
 app.get('/user/:id', function(req, res){

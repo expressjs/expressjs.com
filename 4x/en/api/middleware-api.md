@@ -10,7 +10,7 @@ With an optional mount path, middleware can be loaded at the application level o
 
 Application level middleware are bound to an instance of `express`, using `app.use()` and `app.VERB()`.
 
-```
+```js
 var app = express();
 
 // a middleware with no mount path; gets executed for every request to the app
@@ -33,7 +33,7 @@ app.get('/user/:id', function (req, res, next) {
 
 Here is an example of loading a series of middleware at a mount point with a mount path.
 
-```
+```js
 // a middleware sub-stack which prints request info for any type of HTTP request to /user/:id
 app.use('/user/:id', function(req, res, next) {
   console.log('Request URL:', req.originalUrl);
@@ -46,7 +46,7 @@ app.use('/user/:id', function(req, res, next) {
 
 Route handlers, being a middleware system, makes it possible to define multiple routes for a path. In the example below, two routes are defined for GET requests to `/user/:id`. The second router will not cause any problems, however it will never get called, because the first route ends the request-response cycle.
 
-```
+```js
 // a middleware sub-stack which handles GET requests to /user/:id
 app.get('/user/:id', function (req, res, next) {
   console.log('ID:', req.params.id);
@@ -63,7 +63,7 @@ app.get('/user/:id', function (req, res, next) {
 
 If you need to skip the rest of the middleware from a router middleware stack, call `next('route')` to pass on the control to the next route. Note: `next('route')` will work only in middleware loaded using `app.VERB()` or `router.VERB()`.
 
-```
+```js
 // a middleware sub-stack which handles GET requests to /user/:id
 app.get('/user/:id', function (req, res, next) {
   // if user id is 0, skip to the next route
@@ -85,14 +85,14 @@ app.get('/user/:id', function (req, res, next) {
 
 Router level middleware work just like application level middleware except they are bound to an instance of `express.Router()`.
 
-```
+```js
 var router = express.Router();
 ```
 Router level middleware are loaded using `router.use()` and `router.VERB()`.
 
 The middleware system created at the application level in the example above, can be replicated at the router level using the following code.
 
-```
+```js
 var app = express();
 var router = express.Router();
 

@@ -1,6 +1,6 @@
 <h3 id="overview">Overview: Moving to Express 4</h3>
 
-Express 4 is a breaking change from Express 3.  That means an existing Express 3 app will not work if you update the Express version in its dependencies.
+Express 4 is a breaking change from Express 3. That means an existing Express 3 app will not work if you update the Express version in its dependencies.
   
 This article covers:
 
@@ -23,10 +23,8 @@ The main changes in Express 4 are:
 
 See also:
 
-<ul>
-  <li><a href="https://github.com/strongloop/express/wiki/New-features-in-4.x">New features in 4.x.</a></li>
-  <li><a href="https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x">Migrating from 3.x to 4.x.</a></li>
-</ul>
+* [New features in 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
+* [Migrating from 3.x to 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
 
 <h4 id="core-changes">
 Changes to Express core and middleware system
@@ -83,7 +81,7 @@ The following table lists Express 3 middleware and their counterparts in Express
 <td><a href="https://github.com/expressjs/timeout">connect-timeout</a></td></tr>
 </table>
 
-For the complete list, see <a href="https://github.com/senchalabs/connect#middleware">https://github.com/senchalabs/connect#middleware</a>.
+For the complete list, see [https://github.com/senchalabs/connect#middleware](https://github.com/senchalabs/connect#middleware).
 
 In most cases, you can simply replace the old version 3 middleware with
 its Express 4 counterpart. For details, see the module documentation in
@@ -95,7 +93,7 @@ In version 4 you can now load middleware on a path with a variable
 parameter and read the parameter value from the route handler.
 For example:
 
-```
+```js
 app.use('/book/:id', function(req, res, next) {
   console.log('ID:', req.params.id);
   next();
@@ -128,12 +126,11 @@ new features to help organize your routes:
 The new `app.route()` method enables you to create chainable route handlers
 for a route path. Since the path is specified in a single location, it
 helps to create modular routes and reduce redundancy and typos. For more
-information on routes, see
-<a href="http://expressjs.com/4x/api.html#router"> Router() documentation</a>.
+information on routes, see [Router() documentation](/4x/api.html#router).
 
 Here is an example of chained route handlers defined using `app.route()`.
   
-```
+```js
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -159,7 +156,7 @@ it, defines some routes, and mounts it on a path on the main app.
 Create a router file named `birds.js` in the app directory,
 with the following content:
 
-```
+```js
 var express = require('express');
 var router = express.Router();
 
@@ -182,7 +179,7 @@ module.exports = router;
 
 Then, load the router module in the app:
 
-```
+```js
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
@@ -277,7 +274,7 @@ Version 3 app
 
 Consider an Express v.3 application with the following `app.js` file:
 
-```
+```js
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -316,7 +313,7 @@ http.createServer(app).listen(app.get('port'), function(){
 The accompanying version 3 `package.json` file might look
   something like this:
 
-```
+```js
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -369,7 +366,7 @@ Make the following changes to app.js:
 
 Running the above `npm` command will update `package.json` as follows:
 
-```
+```js
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -396,7 +393,7 @@ Running the above `npm` command will update `package.json` as follows:
 Then, remove invalid code, load the required middleware, and make other
 changes as necessary. Then `app.js` will look like this:
 
-```
+```js
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -449,7 +446,7 @@ Express 4 app. To confirm, start the app with the following command:
 $ node .
 ```
 
-Load <a href="http://localhost:3000">http://localhost:3000</a>. 
+Load [http://localhost:3000](http://localhost:3000). 
   and see the home page being rendered by Express 4.
 
 <h3 id="app-gen">Upgrading to the Express 4 app generator</h3>
@@ -491,7 +488,7 @@ Command options and use largely remain the same, with the following exceptions:
   <li>The `--jshtml` option has been removed.</li>
   <li>
     The `--hogan` option has been added to
-    support <a href="http://twitter.github.io/hogan.js/">Hogan.js</a>.
+    support [Hogan.js](http://twitter.github.io/hogan.js/).
   </li>
 </ul>
 <h4 id="">Example</h4>
@@ -537,7 +534,7 @@ To get rid of the `www` directory and keep things the "Express 3 way",
 delete the line that says `module.exports = app;` at the end of
 `app.js`, and paste the following code in its place.
 
-```
+```js
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
@@ -547,7 +544,7 @@ var server = app.listen(app.get('port'), function() {
 
 Make sure to load the `debug` module at the top of `app.js` with the following code.
 
-```
+```js
 var debug = require('debug')('app4');
 ```
 

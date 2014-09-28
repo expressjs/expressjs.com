@@ -1,6 +1,6 @@
 Return the value of param `name` when present.
 
-```
+```js
 // ?name=tobi
 req.param('name')
 // => "tobi"

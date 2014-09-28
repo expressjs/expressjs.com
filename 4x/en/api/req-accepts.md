@@ -2,7 +2,7 @@ Check if the given `types` are acceptable, returning the best match when true, o
 
 The `type` value may be a single mime type string (such as "application/json"), the extension name such as "json", a comma-delimited list, or an array. When a list or array is given, the *best* match (if any) is returned.
 
-```
+```js
 // Accept: text/html
 req.accepts('html');
 // => "html"

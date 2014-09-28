@@ -1,6 +1,6 @@
 This property refers to the path pattern(s) on which a sub app was mounted.
 
-```
+```js
 var admin = express();
 
 admin.get('/', function (req, res) {
@@ -15,7 +15,7 @@ It is similar to the [baseUrl](#req.baseUrl) property of the `req` object, excep
 
 If a sub app is mounted on multiple path patterns, `app.mountpath` returns the list of patterns it is mounted on, as shown in the following example. 
 
-```
+```js
 var admin = express();
 
 admin.get('/', function (req, res) {

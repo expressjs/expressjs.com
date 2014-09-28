@@ -1,6 +1,6 @@
-Check if setting <code>name</code> is enabled.
+Check if setting `name` is enabled.
 
-```
+```js
 app.enabled('trust proxy');
 // => false
 

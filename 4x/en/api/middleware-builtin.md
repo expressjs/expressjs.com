@@ -19,7 +19,7 @@ The optional `options` object can have the following properties.
 
 Here is an example of using the `express.static` middleware with an elaborate options object.
 
-```
+```js
 var options = {
   dotfiles: 'ignore',
   etag: false,
@@ -37,10 +37,10 @@ app.use(express.static('public', options));
 
 You can have more than one static directory per app.
 
-```
+```js
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 app.use(express.static('files'));
 ```
 
-For more details about `serve-static` and its options, visit the [serve-static](https://github.com/expressjs/serve-static) documentation</a>.
+For more details about `serve-static` and its options, visit the [serve-static](https://github.com/expressjs/serve-static) documentation.

@@ -1,6 +1,6 @@
 Check if the request is "fresh" (i.e. whether the Last-Modified and/or the ETag still match).
 
-```
+```js
 req.fresh
 // => true
 ```

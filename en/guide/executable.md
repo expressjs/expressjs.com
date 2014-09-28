@@ -43,17 +43,13 @@ create : myapp/routes/index.js
 create : myapp/views
 create : myapp/views/index.jade
 create : myapp/views/layout.jade
-```
 
 install dependencies:
 
-```
 $ cd myapp && npm install
-```
 
 run the app:
 
-```
 $ DEBUG=myapp node app
 ```
 

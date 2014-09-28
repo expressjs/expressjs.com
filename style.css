@@ -11,7 +11,7 @@ body {
   background: url(/images/bg.jpg);
   margin: 0;
   padding: 0;
-  color: #666;
+  color: #555;
 }
 
 h1, h2, h3 {
@@ -39,14 +39,17 @@ strong, th {
   padding-top: 98px;
 }
 
+#home-content {
+  margin: 10% 0 10% 80px;
+  width: 900px;
+}
+
 #content {
   margin-left: 80px;
   width: 900px;
-  margin-bottom: 80px;
 }
 
 section, span.block-section {
-  margin-left: 2em;
   margin-bottom: 3em;
 }
 
@@ -55,7 +58,7 @@ span.block-section {
 }
 
 li code {
-  color: #353535;
+  color: #333;
 }
 
 section section p {
@@ -160,7 +163,7 @@ nav a {
 }
 
 #intro {
-  padding: 20px 0 0;
+  padding: 20px 0 0 50px;
   margin-bottom: 0;
 }
 
@@ -206,19 +209,11 @@ nav a {
 /* code */
 
 p code, td code {
-  font-family: monaco, monospace;
-  font-size: .75em;
-  padding: 1px 3px;
-}
-
-p code {
-  background: #fefefe;
-  border: 1px solid #eaeaea;
-  border-radius: 3px;
+  color: #333;
 }
 
 pre {
-  color: #353535;
+  color: #666;
   font-size: 14px;
   line-height: 1.4;
   background: white;
@@ -226,11 +221,6 @@ pre {
   padding: 16px;
   border-radius: 3px;
   overflow: auto;
-}
-
-pre code {
-  font-family: monaco, monospace;
-  font-size: .8em;
 }
 
 code .comment { color: #888 }
@@ -241,7 +231,7 @@ code .number { color: #2F6FAD }
 
 .notice {
   font-size: 12px; 
-  color: #999;
+  color: #555;
 }
 
 .info {
@@ -331,9 +321,8 @@ html[xmlns] .clearfix {
 /* boxes */
 
 #boxes {
-  /*background: url(/images/hr.png) top center no-repeat;*/
-  margin-left: 50px;
   font-size: 12px;
+  margin-top: 30px;
 }
 
 .inner #boxes {
@@ -345,12 +334,12 @@ html[xmlns] .clearfix {
 }
 
 #boxes div {
-  width: 180px;
+  width: 210px;
   margin: 0 25px;
   float: left;
   /* fix grid jank. #105 */
-  min-height: 200px;
   list-style: none;
+  padding-bottom: 20px;
 }
 
 #boxes h3 {
@@ -397,7 +386,7 @@ html[xmlns] .clearfix {
 }
 
 #menu ul a {
-  color: #7B838A;
+  color: #555;
 }
 
 #menu ul a.active {

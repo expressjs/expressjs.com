@@ -47,37 +47,36 @@ Express application settings can be set using [`app.set()`](#app.set), and retri
     else return false;
   })</code></pre>
       </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
   The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.org/package/proxy-addr) package, look up its documentation for further details.
-* `env` Environment mode, defaults to `process.env.NODE_ENV` (`NODE_ENV` environment variable) or "development"
-* `subdomain offset` The number of dot-separated parts of the host to remove to access subdomain, two by default
-* `jsonp callback name` Changes the default callback name of `?callback=`
-* `json replacer` JSON replacer callback, `null` by default
-* `case sensitive routing` Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same
-* `strict routing` Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router
-* `view cache` Enables view template compilation caching, enabled in production by default
-* `view engine` The default engine extension to use when omitted
-* `views` The view directory path, defaulting to `"process.cwd() + '/views'"`
+* `env` Environment mode, defaults to `process.env.NODE_ENV` (`NODE_ENV` environment variable) or "development".
+* `subdomain offset` The number of dot-separated parts of the host to remove to access subdomain, two by default.
+* `jsonp callback name` Changes the default callback name of `?callback=`.
+* `json replacer` JSON replacer callback, `null` by default.
+* `case sensitive routing` Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same.
+* `strict routing` Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router.
+* `view cache` Enables view template compilation caching, enabled in production by default.
+* `view engine` The default engine extension to use when omitted.
+* `views` The view directory path, defaulting to `"process.cwd() + '/views'"`.
 * `query parser` The query parser to use - "simple" or "extended", defaults to "extended". The simple query parser is based on node's native query parser, [querystring](http://nodejs.org/api/querystring.html). The extended query parser is based on [qp](https://www.npmjs.org/package/qs).
-* `x-powered-by` Enables the "X-Powered-By: Express" HTTP header, enabled by default
-* `etag` Set the ETag response header.  
-
+* `x-powered-by` Enables the "X-Powered-By: Express" HTTP header, enabled by default.
+* `etag` Set the ETag response header.
   <table class="doctable" border="1">
     <thead><tr><th>Type</th><th>Value</th></tr></thead>
     <tbody>
       <tr>
         <td>** Boolean **</td>
         <td>
-            <code>true</code> enables strong ETag. This is the default setting.<br>
-            <code>false</code> disables ETag altogether.
+            `true` enables strong ETag. This is the default setting.<br>
+            `false` disables ETag altogether.
         </td>
       </tr>
       <tr>
         <td>** String **</td>
         <td>
-            If "strong", enables strong ETag.
+            If "strong", enables strong ETag.<br>
             If "weak", enables weak ETag.
         </td>
       </tr>

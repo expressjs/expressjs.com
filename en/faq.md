@@ -40,8 +40,8 @@ Use the `app.engine(ext, callback)` method to create your own template engine. `
 
 The following is an example of implementing a very simple template engine for rendering ".ntl" files.
 
-```
-var fs = require('fs'); // this engine requires the `fs` module
+```js
+var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
     if (err) throw new Error(err);
@@ -63,7 +63,7 @@ Your app will now be able to render ".ntl" files. Create a file named "index.ntl
 ```
 Then, create the following route in your app.
 
-```
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 })
@@ -102,7 +102,7 @@ within your application. With the following middleware setup, and a request
 for "GET /javascripts/jquery.js", the first check would be "./public/javascripts/jquery.js";
 if it does not exist, then the subsequent middleware will check "./files/javascripts/jquery.js".
 
-```
+```js
 app.use(express.static('public'));
 app.use(express.static('files'));
 ```
@@ -119,7 +119,7 @@ part of the path. Suppose you wanted "GET /files/javascripts/jquery.js".
 You could mount the middleware at "/files", exposing "/javascripts/jquery.js"
 as the `req.url`, allowing the middleware to serve the file:
 
-```
+```js
 app.use('/public', express.static('public'));
 ```
 
@@ -148,7 +148,7 @@ and found that none of them responded. All you need to
 do is add a middleware at the very bottom (below all others)
 to handle a 404:
 
-```
+```js
 app.use(function(req, res, next){
   res.send(404, 'Sorry cant find that!');
 });
@@ -163,7 +163,7 @@ Error-handling middleware is defined just like regular middleware,
 except that it must be defined with an arity of 4 (that is the signature
 `(err, req, res, next)`):
 
-```
+```js
 app.use(function(err, req, res, next){
   console.error(err.stack);
   res.send(500, 'Something broke!');

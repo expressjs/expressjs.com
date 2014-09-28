@@ -1,6 +1,6 @@
 When the `cookieParser()` middleware is used, this object defaults to `{}`. Otherwise, it contains the cookies sent by the user-agent.
 
-```
+```js
 // Cookie: name=tj
 req.cookies.name
 // => "tj"
