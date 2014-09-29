@@ -1,7 +1,13 @@
 
 o = $;
 
-// misc junk
+o(document).ready(function () {
+  // highlight code
+  o('pre code.lang-js').each(function(){
+    o(this).html(highlight(o(this).text()));
+  })
+
+})
 
 o(function(){
 
@@ -29,11 +35,6 @@ o(function(){
       o('body').removeClass('scroll');
       added = false;
     }
-  })
-
-  // highlight code
-  o('pre code.lang-js').each(function(){
-    o(this).html(highlight(o(this).text()));
   })
 })
 
@@ -77,10 +78,7 @@ o(function(){
   })
 })
 
-/**
- * Highlight the given `js`.
- */
-
+// js highlighter
 function highlight(js) {
   return js
     .replace(/</g, '&lt;')
