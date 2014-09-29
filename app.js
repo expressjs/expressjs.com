@@ -4,6 +4,7 @@ o = $;
 // misc junk
 
 o(function(){
+
   var width = window.innerWidth;
   var height = window.innerHeight;
   var doc = o(document);
@@ -13,8 +14,8 @@ o(function(){
 
   // top link
   o('#top').click(function(e){
-    o('body').animate({ scrollTop: 0 }, 'fast');
-    e.preventDefault();
+    o('html, body').animate({scrollTop : 0}, 200);
+    return false;
   });
 
   // scrolling links
@@ -31,7 +32,7 @@ o(function(){
   })
 
   // highlight code
-  o('pre.js code').each(function(){
+  o('pre code.lang-js').each(function(){
     o(this).html(highlight(o(this).text()));
   })
 })

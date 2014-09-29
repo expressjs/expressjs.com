@@ -8,9 +8,10 @@
 
 body {
   font: 400 14px/1.6 "Open Sans", sans-serif;
+  background: url(/images/bg.jpg);
   margin: 0;
   padding: 0;
-  color: #666;
+  color: #555;
 }
 
 h1, h2, h3 {
@@ -30,39 +31,54 @@ p {
   margin: 20px 0;
 }
 
-strong {
+strong, th {
   color: #353535;
 }
 
 .inner {
-  margin-top: 100px;
+  padding-top: 98px;
+}
+
+#home-content {
+  margin: 10% 0 9% 80px;
+  width: 900px;
 }
 
 #content {
   margin-left: 80px;
   width: 900px;
-  margin-bottom: 80px;
+}
+
+section, span.block-section {
+  margin-bottom: 3em;
+}
+
+span.block-section {
+  display: block;
 }
 
 li code {
-  color: #353535;
+  color: #333;
 }
 
 section section p {
-  width: 60%;
+  /*width: 60%;*/
 }
 
 h2 {
-  margin-top: 80px;
+  /*padding-top: 20px;*/
   font-weight: bold;
+  font-size: 2.3em;
+  margin-bottom: 20px;
 }
 
 h3 {
-  background: url(/images/hr.png) top center no-repeat;
-  margin-top: 40px;
-  padding-top: 50px;
+  /*background: url(/images/hr.png) top center no-repeat;*/
+  /*margin-top: 5px;*/
+  padding-top: 10px;
   padding-bottom: 5px;
   font-weight: bold;
+  font-size: 1.5em;
 }
 
 h4 {
@@ -85,12 +101,16 @@ a:hover {
   text-decoration: underline;
 }
 
+h2:target {
+  padding-top: 100px;
+}
+
 h3:target {
   padding-top: 100px;
 }
 
 h4:target {
-  padding-top: 50px;
+  /*padding-top: 50px;*/
 }
 
 nav a {
@@ -101,12 +121,11 @@ nav a {
 /* logo */
 
 #logo {
-  margin-top: 180px;
-  margin-bottom: 180px;
+  margin-top: 160px;
+  margin-bottom: 80px;
   margin-left: 80px;
   padding-left: 40px;
   width: 440px;
-  border-left: 1px dotted #eee;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -143,6 +162,11 @@ nav a {
   color: #858585;
 }
 
+#intro {
+  padding: 20px 0 0 50px;
+  margin-bottom: 0;
+}
+
 /* secondary page logo */
 
 .inner header {
@@ -153,6 +177,7 @@ nav a {
   width: 100%;
   height: 55px;
   z-index: 100;
+  border-bottom: 1px solid #ddd;
 }
 
 .inner.scroll header {
@@ -183,31 +208,19 @@ nav a {
 
 /* code */
 
-p code {
-  background: #efefef;
-  border: 1px solid #eaeaea;
-  font-family: monaco, monospace;
-  font-size: .75em;
-  padding: 1px 3px;
-  border-radius: 3px;
+p code, td code {
+  color: #333;
 }
 
 pre {
-  color: #353535;
+  color: #666;
   font-size: 14px;
   line-height: 1.4;
-  margin: 20px 0;
-  padding: 20px;
   background: white;
   border: 1px solid #e7e7e7;
-  border-bottom: 1px solid #ddd;
-  -webkit-box-shadow: 0 1px 3px 0 #eee;
-  -webkit-border-radius: 3px;
-}
-
-pre code {
-  font-family: monaco, monospace;
-  font-size: .8em;
+  padding: 16px;
+  border-radius: 3px;
+  overflow: auto;
 }
 
 code .comment { color: #888 }
@@ -218,7 +231,7 @@ code .number { color: #2F6FAD }
 
 .notice {
   font-size: 12px; 
-  color: #999;
+  color: #555;
 }
 
 .info {
@@ -262,7 +275,7 @@ code .number { color: #2F6FAD }
 
 nav {
   position: fixed;
-  top: 20px;
+  top: 15px;
   right: 15px;
   z-index: 100;
 }
@@ -308,23 +321,25 @@ html[xmlns] .clearfix {
 /* boxes */
 
 #boxes {
-  background: url(/images/hr.png) top center no-repeat;
-  margin-left: 50px;
-  padding-top: 50px;
-  padding-bottom: 50px;
   font-size: 12px;
+  margin-top: 30px;
 }
 
 .inner #boxes {
   font-size: 13px;
 }
 
-#boxes section {
-  width: 180px;
+#boxes h3 {
+  line-height: 1.25em;
+}
+
+#boxes div {
+  width: 210px;
   margin: 0 25px;
   float: left;
   /* fix grid jank. #105 */
-  min-height: 200px;
+  list-style: none;
+  padding-bottom: 20px;
 }
 
 #boxes h3 {
@@ -371,7 +386,7 @@ html[xmlns] .clearfix {
 }
 
 #menu ul a {
-  color: #7B838A;
+  color: #555;
 }
 
 #menu ul a.active {
@@ -380,12 +395,17 @@ html[xmlns] .clearfix {
 
 /* applications page */
 
+#applications .section {
+  display: block;
+  margin-bottom: 50px;
+}
+
 .application h2 {
   margin: 0;
 }
 
 .application {
-  background: url(/images/hr.png) top center no-repeat;
+  /*background: url(/images/hr.png) top center no-repeat;*/
   padding: 80px 0;
   height: 600px;
   position: relative;
@@ -506,7 +526,7 @@ html[xmlns] .clearfix {
   margin: 1em 1em 1em 0;
   border: 1px solid #d8d8d8;
   border-collapse: collapse;
-  background-color: #F9F9F9;
+  background-color: #f4f3f3;
   empty-cells:show;
   width: 100%;
 }
@@ -529,6 +549,10 @@ html[xmlns] .clearfix {
 
 .doctable td p, li p {
   width: 100% !important;
+}
+
+.doctable ul {
+  margin: 20px 0
 }
 
 ul.doclist {

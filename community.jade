@@ -1,4 +1,4 @@
-!!! 5
+doctype html
 html
   head
     title Express - community
@@ -8,7 +8,8 @@ html
     section#content
       header
         include includes/logo
-        active = '/community.html'
+        - active = '/community.html'
         include includes/menu
-      include en/community
+      #boxes.clearfix
+        include:md en/community.md
     include includes/footer

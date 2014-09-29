@@ -1,4 +1,4 @@
-!!! 5
+doctype html
 html
   head
     title Express - Moving to version 4
@@ -8,7 +8,7 @@ html
     section#content
       header
         include includes/logo
-        active = '/migrating-4.html'
+        - active = '/migrating-4.html#overview'
         include includes/menu
         
         include includes/mixins
@@ -19,10 +19,7 @@ html
             li: a(href='#changes') Changes in Express 4
             li: a(href='#example-migration') Example app migration
             li: a(href='#app-gen') Upgrading Express app generator
-          
-      include en/migrating-4
+      
+      section
+        include:md en/migrating-4.md
     include includes/footer
-
-
-
-

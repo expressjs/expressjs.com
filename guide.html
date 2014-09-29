@@ -1,31 +1,34 @@
-<!DOCTYPE html><html><head><title>Express - guide</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">express</a><span class="description">web application framework for<a href="http://nodejs.org"> node</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html">API Reference</a><a href="/guide.html" class="active">Guide</a><a href="/migrating-4.html">Moving to 4.x  </a><a href="/applications.html">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><ul id="menu"><li><ul class="active"><li><a href="#intro">Getting started</a></li><li><a href="#template-engines">Template Engines</a></li><li><a href="#executable">express(1) executable</a></li><li><a href="#error-handling">Error handling</a></li><li><a href="#users-online">Users online count</a></li><li><a href="#proxies">Express behind proxies</a></li><li><a href="#debugging-express">Debugging Express</a></li></ul></li></ul><section><h3 id="intro">Getting started</h3><p>First, if you have not already done so,
+<!DOCTYPE html><html><head><title>Express - guide</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">Express</a><span class="description">web application framework for<a href="http://nodejs.org">&nbsp;Node.js</a></span></section><nav class="clearfix"><a href="/">Home</a><a href="/4x/api.html#application">API Reference</a><a href="/guide.html" class="active">Guide</a><a href="/migrating-4.html#overview">Moving to 4.x  </a><a href="/applications.html#myspace">Applications</a><a href="/community.html">Community</a><a href="/faq.html">FAQ</a><a href="/3x/api.html">3.x docs</a></nav></header><ul id="menu"><li><ul class="active"><li><a href="#intro">Getting started</a></li><li><a href="#template-engines">Template Engines</a></li><li><a href="#executable">express(1) executable</a></li><li><a href="#error-handling">Error handling</a></li><li><a href="#users-online">Users online count</a></li><li><a href="#proxies">Express behind proxies</a></li><li><a href="#debugging-express">Debugging Express</a></li></ul></li></ul><section><h3 id='getting-started'>Getting started</h3>
+
+<p>First, if you have not already done so,
 <a href="http://nodejs.org/download">download and install Node</a>.
-Then, to start your first application, create a directory on your machine:
-</p><pre class="js"><code>$ mkdir hello-world
-</code></pre><p>In this same directory you'll be defining the application "package", which
-is the same as any other Node package. You'll need a
+Then, to start your first application, create a directory on your machine:</p>
+<pre><code>$ mkdir hello-world
+</code></pre><p>In this same directory you&#39;ll be defining the application &quot;package&quot;, which
+is the same as any other Node package. You&#39;ll need a
 <code>package.json</code> file in the directory, with <code>express</code>
-as a dependency. 
-</p><pre class="js"><code>{
-  "name": "hello-world",
-  "description": "hello world test app",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "express": "4.x"
+as a dependency. </p>
+<pre><code class="lang-js">{
+  &quot;name&quot;: &quot;hello-world&quot;,
+  &quot;description&quot;: &quot;hello world test app&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;private&quot;: true,
+  &quot;dependencies&quot;: {
+    &quot;express&quot;: &quot;4.x&quot;
   }
 }
-</code></pre><p>In general, as a best practice, use <code>npm info express version</code> to
+</code></pre>
+<p>In general, as a best practice, use <code>npm info express version</code> to
 determine the latest version of Express, and then use the version number
-returned instead of "4.x" to prevent future surprises.
-</p><p>Now that you have a <code>package.json</code> file in this directory use
-<code>npm</code> to install the dependencies, in this case just Express:
-</p><pre class="js"><code>$ npm install
-</code></pre><p>Once npm finishes you'll have a localized Express dependency in
+returned instead of &quot;4.x&quot; to prevent future surprises.</p>
+<p>Now that you have a <code>package.json</code> file in this directory use
+<code>npm</code> to install the dependencies, in this case just Express:</p>
+<pre><code>$ npm install
+</code></pre><p>Once npm finishes you&#39;ll have a localized Express dependency in
 the <code>./node_modules</code> directory.  Verify this with <code>npm ls</code>
 as shown in the following snippet displaying a tree of Express and its
-dependencies.
-</p><pre class="js"><code>$ npm ls
+dependencies.</p>
+<pre><code>$ npm ls
 hello-world@0.0.1 /private/tmp
 └─┬ express@3.0.0beta7
   ├── commander@0.6.1
@@ -45,40 +48,64 @@ hello-world@0.0.1 /private/tmp
   │ └── crc@0.2.0
   └─┬ send@0.0.3
     └── mime@1.2.6
-    </code></pre><p>Now to create the application itself! Create a file named <code>app.js</code> or <code>server.js</code>,
-whichever you prefer, require Express and then create a new application with <code>express()</code>:
-</p><pre class="js"><code>var express = require('express');
+</code></pre><p>Now to create the application itself! Create a file named <code>app.js</code> or <code>server.js</code>,
+whichever you prefer, require Express and then create a new application with <code>express()</code>:</p>
+<pre><code class="lang-js">var express = require(&#39;express&#39;);
 var app = express();
-</code></pre><p>With the new application instance you can start defining routes via <code>app.VERB()</code>,
-in this case "GET /" responding with the "Hello World" string. The <code>req</code> and
+</code></pre>
+<p>With the new application instance you can start defining routes via <code>app.VERB()</code>,
+in this case &quot;GET /&quot; responding with the &quot;Hello World&quot; string. The <code>req</code> and
 <code>res</code> are the exact same objects that node provides to you, thus you may invoke
-<code>req.pipe()</code>, <code>req.on('data', callback)</code> and anything else you
-would do without Express involved.
-</p><p>Express augments these objects to provide you with higher level
+<code>req.pipe()</code>, <code>req.on(&#39;data&#39;, callback)</code> and anything else you
+would do without Express involved.</p>
+<p>Express augments these objects to provide you with higher level
 methods (such as <code>res.send()</code>, which, among other things,
-adds the Content-Length for you):
-</p><pre class="js"><code>app.get('/hello.txt', function(req, res){
-  res.send('Hello World');
+adds the Content-Length for you):</p>
+<pre><code class="lang-js">app.get(&#39;/hello.txt&#39;, function(req, res){
+  res.send(&#39;Hello World&#39;);
 });
-</code></pre><p>Now, to bind and listen for connections, invoke the <code>app.listen()</code> method.
-It accepts the same arguments as node's <a href="http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener">net.Server#listen()</a>:
-</p><pre class="js"><code>var server = app.listen(3000, function() {
-    console.log('Listening on port %d', server.address().port);
-});</code></pre></section><section><h3 id="template-engines">Using template engines with Express</h3><p>Before Express can render template files, the following application settings have to be set.<ul><li><code>views</code>, the directory where the template files are located. Eg: <code>app.set('views', './views')</code></li><li><code>view engine</code>, the template engine to use. Eg: <code>app.set('view engine', 'jade')</code></li></ul></p><p>Then install the corresponding template engine npm package.</p><pre class="js"><code>$ npm install jade --save</code></pre><p>Express-compliant template engines such as Jade, export a function named <code>__express(filePath, options, callback)</code>, which is called by <code>res.render()</code> to render the template code.</p><p>Some template engines do not follow this convention, the <a href="https://www.npmjs.org/package/consolidate">Consolidate.js</a> library was created to map all of node's popular template engines to follow this convention, thus allowing them to work seamlessly within Express.</p><p>Once the view engine is set, you don't have to explicitly specify the engine or load the template engine module in your app, Express loads it internally as shown below, for the example above.</p><pre class="js"><code>app.engine('jade', require('jade').__express);</code></pre><p>Create a Jade template files named "index.jade" in the views directory, with the following content.</p><pre class="js"><code>html
+</code></pre>
+<p>Now, to bind and listen for connections, invoke the <code>app.listen()</code> method.
+It accepts the same arguments as node&#39;s <a href="http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener">net.Server#listen()</a>:</p>
+<pre><code class="lang-js">var server = app.listen(3000, function() {
+    console.log(&#39;Listening on port %d&#39;, server.address().port);
+});
+</code></pre>
+</section><section><h3 id='template-engines'>Using template engines with Express</h3>
+
+<p>Before Express can render template files, the following application settings have to be set.</p>
+<ul>
+<li><code>views</code>, the directory where the template files are located. Eg: <code>app.set(&#39;views&#39;, &#39;./views&#39;)</code></li>
+<li><code>view engine</code>, the template engine to use. Eg: <code>app.set(&#39;view engine&#39;, &#39;jade&#39;)</code></li>
+</ul>
+<p>Then install the corresponding template engine npm package.</p>
+<pre><code>$ npm install jade --save
+</code></pre><p>Express-compliant template engines such as Jade, export a function named <code>__express(filePath, options, callback)</code>, which is called by <code>res.render()</code> to render the template code.</p>
+<p>Some template engines do not follow this convention, the <a href="https://www.npmjs.org/package/consolidate">Consolidate.js</a> library was created to map all of node&#39;s popular template engines to follow this convention, thus allowing them to work seamlessly within Express.</p>
+<p>Once the view engine is set, you don&#39;t have to explicitly specify the engine or load the template engine module in your app, Express loads it internally as shown below, for the example above.</p>
+<pre><code>app.engine(&#39;jade&#39;, require(&#39;jade&#39;).__express);
+</code></pre><p>Create a Jade template files named &quot;index.jade&quot; in the views directory, with the following content.</p>
+<pre><code>html
   head
     title!= title
   body
     h1!= message
-    </code></pre><p>Then create a route to render the "index.jade" file.</p><pre class="js"><code>app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
+</code></pre><p>Then create a route to render the &quot;index.jade&quot; file.</p>
+<pre><code class="lang-js">app.get(&#39;/&#39;, function (req, res) {
+  res.render(&#39;index&#39;, { title: &#39;Hey&#39;, message: &#39;Hello there!&#39;});
 })
-</code></pre><p>On making a request to the home page, "index.jade" will be rendered as HTML.</p><p>To better understand how template engines work in Express, read <a href="faq.html#custom-template-engines">"How do I create custom template engines in Express?"</a>.</p></section><section><h3 id="executable">Using express(1) to generate an app</h3><p>The Express team maintains a handy quickstart project generator, aptly named <code>express(1)</code>. If you install express-generator globally with npm, you'll have it available from anywhere on your machine:
-</p><pre class="js"><code>$ npm install -g express-generator
+</code></pre>
+<p>On making a request to the home page, &quot;index.jade&quot; will be rendered as HTML.</p>
+<p>To better understand how template engines work in Express, read <a href="faq.html#custom-template-engines">&quot;How do I create custom template engines in Express?&quot;</a>.</p>
+</section><section><h3 id='executable'>Using express(1) to generate an app</h3>
+
+<p>The Express team maintains a handy quickstart project generator, aptly named <code>express(1)</code>. If you install express-generator globally with npm, you&#39;ll have it available from anywhere on your machine:</p>
+<pre><code>$ npm install -g express-generator
 </code></pre><p>This tool provides a simple way to get an application skeleton going,
 but has limited scope, for example it supports only a few template engines,
 whereas Express itself supports virtually any template engine built for node.
-Be sure to check out the <code>--help</code>:
-</p><pre class="js"><code>Usage: express [options]
+Be sure to check out the <code>--help</code>:</p>
+<pre><code>Usage: express [options]
 
 Options:
 
@@ -86,11 +113,11 @@ Options:
   -V, --version       output the version number
   -e, --ejs           add ejs engine support (defaults to jade)
   -H, --hogan         add hogan.js engine support
-  -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass) (defaults to plain css)
+  -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass) (defaults to plain css)
   -f, --force         force on non-empty directory
-  </code></pre><p>To generate an application with Jade and Stylus
-support:
-</p><pre class="js"><code>$ express --css stylus myapp
+</code></pre><p>To generate an application with Jade and Stylus
+support:</p>
+<pre><code>$ express --css stylus myapp
 
 create : myapp
 create : myapp/package.json
@@ -107,30 +134,36 @@ create : myapp/views/index.jade
 create : myapp/views/layout.jade
 
 install dependencies:
-  $ cd myapp && npm install
-  
+
+$ cd myapp &amp;&amp; npm install
+
 run the app:
-  $ DEBUG=myapp node app
-  </code></pre><p>Like any other node application, you must then install the dependencies:
-</p><pre class="js"><code>$ cd myapp
+
+$ DEBUG=myapp node app
+</code></pre><p>Like any other node application, you must then install the dependencies:</p>
+<pre><code>$ cd myapp
 $ npm install
-</code></pre><p>Then fire it up!
-</p><pre class="js"><code>$ npm start
-</code></pre><p>That's all you need to get a simple application up and running. Keep in mind
+</code></pre><p>Then fire it up!</p>
+<pre><code>$ npm start
+</code></pre><p>That&#39;s all you need to get a simple application up and running. Keep in mind
 that Express is not bound to any specific directory structure, these are simply
 a baseline for you to work from. For application structure alternatives be
 sure to view the <a href="https://github.com/strongloop/express/tree/master/examples">examples</a>
-found in the github repo.</p></section><section><h3 id="error-handling">Error handling</h3><p>Error-handling middleware is defined just like regular middleware,
+found in the github repo.</p>
+</section><section><h3 id='error-handling'>Error handling</h3>
+
+<p>Error-handling middleware is defined just like regular middleware,
 except that must be defined with an arity of 4 (that is the signature
-<code>(err, req, res, next)</code>):
-</p><pre class="js"><code>app.use(function(err, req, res, next){
+<code>(err, req, res, next)</code>):</p>
+<pre><code class="lang-js">app.use(function(err, req, res, next){
   console.error(err.stack);
-  res.status(500).send('Something broke!');
+  res.status(500).send(&#39;Something broke!&#39;);
 });
-</code></pre><p>Though not mandatory, error-handling middleware are typically defined
-very last, below any other <code>app.use()</code> calls, like so:
-</p><pre class="js"><code>var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+</code></pre>
+<p>Though not mandatory, error-handling middleware are typically defined
+very last, below any other <code>app.use()</code> calls, like so:</p>
+<pre><code class="lang-js">var bodyParser = require(&#39;body-parser&#39;);
+var methodOverride = require(&#39;method-override&#39;);
 
 app.use(bodyParser());
 app.use(methodOverride());
@@ -138,15 +171,16 @@ app.use(app.router);
 app.use(function(err, req, res, next){
   // logic
 });
-</code></pre><p>Responses from within the middleware are completely arbitrary. You may
+</code></pre>
+<p>Responses from within the middleware are completely arbitrary. You may
 wish to respond with an HTML error page, a simple message, a JSON string,
-or anything else you prefer.
-</p><p>For organizational (and higher-level framework) purposes, you may define
+or anything else you prefer.</p>
+<p>For organizational (and higher-level framework) purposes, you may define
 several error-handling middleware, much like you would with
 regular middleware. For example suppose you wanted to define an error-handler
-for requests made via XHR, and those without, you might do:
-</p><pre class="js"><code>var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+for requests made via XHR, and those without, you might do:</p>
+<pre><code class="lang-js">var bodyParser = require(&#39;body-parser&#39;);
+var methodOverride = require(&#39;method-override&#39;);
 
 app.use(bodyParser());
 app.use(methodOverride());
@@ -154,102 +188,120 @@ app.use(app.router);
 app.use(logErrors);
 app.use(clientErrorHandler);
 app.use(errorHandler);
-</code></pre><p>Where the more generic <code>logErrors</code> may write request and
-error information to stderr, loggly, or similar services:
-</p><pre class="js"><code>function logErrors(err, req, res, next) {
+</code></pre>
+<p>Where the more generic <code>logErrors</code> may write request and
+error information to stderr, loggly, or similar services:</p>
+<pre><code class="lang-js">function logErrors(err, req, res, next) {
   console.error(err.stack);
   next(err);
 }
-</code></pre><p>Where <code>clientErrorHandler</code> is defined as the following (note
-that the error is explicitly passed along to the next):
-</p><pre class="js"><code>function clientErrorHandler(err, req, res, next) {
+</code></pre>
+<p>Where <code>clientErrorHandler</code> is defined as the following (note
+that the error is explicitly passed along to the next):</p>
+<pre><code class="lang-js">function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
-    res.status(500).send({ error: 'Something blew up!' });
+    res.status(500).send({ error: &#39;Something blew up!&#39; });
   } else {
     next(err);
   }
 }
-</code></pre><p>The following <code>errorHandler</code> "catch-all" implementation may be defined as:
-</p><pre class="js"><code>function errorHandler(err, req, res, next) {
+</code></pre>
+<p>The following <code>errorHandler</code> &quot;catch-all&quot; implementation may be defined as:</p>
+<pre><code class="lang-js">function errorHandler(err, req, res, next) {
   res.status(500);
-  res.render('error', { error: err });
-}</code></pre></section><section><h3 id="users-online">Users online count</h3><p>This section details a full (small) application that tracks a users online
-count using <a href="http://redis.io">Redis</a>. First up, you'll need to 
+  res.render(&#39;error&#39;, { error: err });
+}
+</code></pre>
+</section><section><h3 id='users-online'>Users online count</h3>
+
+<p>This section details a full (small) application that tracks a users online
+count using <a href="http://redis.io">Redis</a>. First up, you&#39;ll need to 
 create a package.json file containing two dependencies: one for the redis
 client, and another for Express itself. (Also, be sure you have redis installed
-and running via <code>$ redis-server</code>.)
-</p><pre class="js"><code>{
-  "name": "app",
-  "version": "0.0.1",
-  "dependencies": {
-    "express": "3.x",
-    "redis": "*"
+and running via <code>$ redis-server</code>.)</p>
+<pre><code class="lang-js">{
+  &quot;name&quot;: &quot;app&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;dependencies&quot;: {
+    &quot;express&quot;: &quot;3.x&quot;,
+    &quot;redis&quot;: &quot;*&quot;
   }
 }
-</code></pre><p>Next you'll need to create an app, and a connection to redis:
-</p><pre class="js"><code>var express = require('express');
-var redis = require('redis');
+</code></pre>
+<p>Next you&#39;ll need to create an app, and a connection to redis:</p>
+<pre><code class="lang-js">var express = require(&#39;express&#39;);
+var redis = require(&#39;redis&#39;);
 var db = redis.createClient();
 var app = express();
-</code></pre><p>Next up is the middleware for tracking online users. Here we'll
+</code></pre>
+<p>Next up is the middleware for tracking online users. Here we&#39;ll
 use sorted sets, so that we can query redis for the users
 online within the last N milliseconds. We do this by passing
-a timestamp as the member's "score". Note that we're using the 
-User-Agent string here, in place of what would normally be a user id.
-</p><pre class="js"><code>app.use(function(req, res, next){
-  var ua = req.headers['user-agent'];
-  db.zadd('online', Date.now(), ua, next);
+a timestamp as the member&#39;s &quot;score&quot;. Note that we&#39;re using the 
+User-Agent string here, in place of what would normally be a user id.</p>
+<pre><code class="lang-js">app.use(function(req, res, next){
+  var ua = req.headers[&#39;user-agent&#39;];
+  db.zadd(&#39;online&#39;, Date.now(), ua, next);
 });
-</code></pre><p>This next middleware is for fetching the users online
+</code></pre>
+<p>This next middleware is for fetching the users online
 in the last minute using <strong>zrevrangebyscore</strong>
-to fetch with a positive infinite max value, so that we're
-always getting the most recent users. It's capped with a minimum score
-of the current timestamp minus 60,000 milliseconds.
-</p><pre class="js"><code>app.use(function(req, res, next){
+to fetch with a positive infinite max value, so that we&#39;re
+always getting the most recent users. It&#39;s capped with a minimum score
+of the current timestamp minus 60,000 milliseconds.</p>
+<pre><code class="lang-js">app.use(function(req, res, next){
   var min = 60 * 1000;
   var ago = Date.now() - min;
-  db.zrevrangebyscore('online', '+inf', ago, function(err, users){
+  db.zrevrangebyscore(&#39;online&#39;, &#39;+inf&#39;, ago, function(err, users){
     if (err) return next(err);
     req.online = users;
     next();
   });
 });
-</code></pre><p>Finally we then use it, and bind to a port! That's
+</code></pre>
+<p>Finally we then use it, and bind to a port! That&#39;s
 all there is to it. Visit the app in a few browsers
-and you'll see the count increase.
-</p><pre class="js"><code>app.get('/', function(req, res){
-  res.send(req.online.length + ' users online');
+and you&#39;ll see the count increase.</p>
+<pre><code class="lang-js">app.get(&#39;/&#39;, function(req, res){
+  res.send(req.online.length + &#39; users online&#39;);
 });
 
-app.listen(3000);</code></pre></section><section><h3 id="proxies">Express behind proxies</h3><p>Using Express behind a reverse proxy (such as Varnish or Nginx)
+app.listen(3000);
+</code></pre>
+</section><section><h3 id='proxies'>Express behind proxies</h3>
+
+<p>Using Express behind a reverse proxy (such as Varnish or Nginx)
 is trivial; however, it does require configuration. By enabling the 
-"trust proxy" setting via <code>app.enable('trust proxy')</code>, Express 
-will have knowledge that it's sitting behind a proxy and that the 
+&quot;trust proxy&quot; setting via <code>app.enable(&#39;trust proxy&#39;)</code>, Express 
+will have knowledge that it&#39;s sitting behind a proxy and that the 
 <code>X-Forwarded-*</code> header fields may be trusted. (Otherwise, 
-they are easily spoofed.)
-</p><p>Enabling this setting has several subtle effects. The first is
+they are easily spoofed.)</p>
+<p>Enabling this setting has several subtle effects. The first is
 that <code>X-Forwarded-Proto</code> may be set by the reverse proxy to
 tell the app whether it is https or simply http. This value is reflected
-by <a href="/api#req.protocol">req.protocol</a>.
-</p><p>The second change is that the <a href="/api#req.ip">req.ip</a> 
+by <a href="/api#req.protocol">req.protocol</a>.</p>
+<p>The second change is that the <a href="/api#req.ip">req.ip</a> 
 and <a href="/api#req.ips">req.ips</a> values will be populated with
-<code>X-Forwarded-For</code>'s list of addresses. </p></section><section><h3 id="debugging-express">Debugging Express</h3><p>Express uses the <a href="https://github.com/visionmedia/debug">debug</a> module
+<code>X-Forwarded-For</code>&#39;s list of addresses. </p>
+</section><section><h3 id='debugging-express'>Debugging Express</h3>
+
+<p>Express uses the <a href="https://github.com/visionmedia/debug">debug</a> module
 internally to log information about route matches and application mode.
 To see this information, simply set the <code>DEBUG</code> environment variable to
 <code>express:*</code> when launching your app and the debug information will
-appear on the console.
-</p><pre class="sh"><code>$ DEBUG=express:* node ./bin/www
-</code></pre><p>Running this on the <code>hello world</code> example would print the following
-</p><pre class="sh"><code>express:application booting in development mode +0ms
+appear on the console.</p>
+<pre><code>$ DEBUG=express:* node ./bin/www
+</code></pre><p>Running this on the <code>hello world</code> example would print the following</p>
+<pre><code>express:application booting in development mode +0ms
 express:router defined get /hello.txt +0ms
 express:router defined get /hello.txt +1ms
-</code></pre><p>Additionally, the app generated by the express executable (generator) also uses the <code>debug</code> module and by default is scoped to the <code>my-application</code> debug namespace.
-</p><p>You can enable those debug statements with the following command
-</p><pre class="sh"><code>$ DEBUG=my-application node ./bin/www
-</code></pre><p>For more documentation on <code>debug</code>, see the <a href="https://github.com/visionmedia/debug">debug guide</a>
-</p></section></section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+</code></pre><p>Additionally, the app generated by the express executable (generator) also uses the <code>debug</code> module and by default is scoped to the <code>my-application</code> debug namespace.</p>
+<p>You can enable those debug statements with the following command</p>
+<pre><code>$ DEBUG=my-application node ./bin/www
+</code></pre><p>For more documentation on <code>debug</code>, see the <a href="https://github.com/visionmedia/debug">debug guide</a></p>
+</section></section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-5XL76H');
-</script><a id="top" href="#"><img src="/images/arrow.png"></a><footer><div id="footer-content">© 2012 TJ Holowaychuk. All rights reserved.</div></footer></body></html>
+</script><a id="top" href="#"><img src="/images/arrow.png"></a><footer><div id="footer-content">&copy; 2012 TJ Holowaychuk. All rights reserved.</div></footer></body></html>

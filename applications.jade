@@ -1,4 +1,4 @@
-!!! 5
+doctype html
 html
   head
     title Express - applications
@@ -8,7 +8,8 @@ html
     section#content
       header
         include includes/logo
-        active = '/applications.html'
+        - active = '/applications.html#myspace'
         include includes/menu
-      include en/applications
+      
+      include:md en/applications.md
     include includes/footer

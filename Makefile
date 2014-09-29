@@ -9,14 +9,15 @@ HTML = index.html \
 	faq.html \
 	3x/api.html \
 	4x/api.html \
-	migrating-4.html
+	migrating-4.html \
+  resources/books.html 
 
 docs: $(HTML)
 
 4x/api.html: 4x/api.jade 4x/en/api/*.jade includes/*.jade
 	$(JADE) --path $< < $< > $@
 
-%.html: %.jade includes/*.jade en/*.jade en/guide/*.jade
+%.html: %.jade includes/*.jade en/guide/*.jade resources/*.jade
 	$(JADE) --path $< < $< > $@
 
 clean:

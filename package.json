@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "dependencies": {
-    "jade": "0.35.0"
+    "jade": "1.6.0",
+    "marked": "^0.3.2"
   }
 }

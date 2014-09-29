@@ -1,15 +1,15 @@
-!!! 5
+doctype html
 html
   head
-    title Express - faq
+    title Express - FAQ
     include includes/head
   body.inner
     .bar
     section#content
       header
         include includes/logo
-        active = '/faq.html'
+        - active = '/faq.html'
         include includes/menu
       #faq
-        include en/faq
+        include:md en/faq.md
     include includes/footer
