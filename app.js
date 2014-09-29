@@ -1,12 +1,11 @@
 
 o = $;
 
-o(document).ready(function () {
+o(window).load(function () {
   // highlight code
   o('pre code.lang-js').each(function(){
     o(this).html(highlight(o(this).text()));
   })
-
 })
 
 o(function(){
