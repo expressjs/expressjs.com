@@ -1,13 +1,6 @@
 
 o = $;
 
-o(window).load(function () {
-  // highlight code
-  o('pre code.lang-js').each(function(){
-    o(this).html(highlight(o(this).text()));
-  })
-})
-
 o(function(){
 
   var width = window.innerWidth;
@@ -35,6 +28,13 @@ o(function(){
       added = false;
     }
   })
+
+  setTimeout(function () {
+    o('pre code.lang-js').each(function(){
+      o(this).html(highlight(o(this).text()));
+    })
+  }, 50)
+
 })
 
 // active menu junk
