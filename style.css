@@ -559,3 +559,43 @@ ul.doclist {
   width: 500px;
 }
 
+
+/* dropdown menu */
+.menu ul {
+  display: none;
+}
+
+.menu ul.dropit-submenu {
+  background-color: #fff;
+  border: 1px solid #b2b2b2;
+  padding: 6px 0;
+  margin: -2px 0 0 1px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+}
+
+.menu ul.dropit-submenu a {
+  display: block;
+  color: #777;
+  padding: 0 18px;
+}
+
+.menu ul.dropit-submenu a:hover {
+  background: #259dff;
+  color: #fff;
+  text-decoration: none;
+}
+
+#navmenu > li {
+  list-style: none;
+  padding: 0;
+  float: left;
+}
+
+#navmenu a:hover {
+  text-decoration: none;
+}

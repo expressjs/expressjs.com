@@ -33,11 +33,9 @@ $(function(){
     })
   }, 1000)
 
-})
 
-// active menu
+  // menu bar
 
-$(function(){
   var prev;
   var n = 0;
 
@@ -73,7 +71,16 @@ $(function(){
 
     prev = a;
   })
+
+  // dropdown menu
+  $('#application-menu').dropit({ action: 'mouseenter' })
+  $('#getting-started-menu').dropit({ action: 'mouseenter' })
+  $('#guide-menu').dropit({ action: 'mouseenter' })
+  $('#advanced-topics-menu').dropit({ action: 'mouseenter' })
+  $('#resources-menu').dropit({ action: 'mouseenter' })
+
 })
+
 
 // js highlighter
 function highlight(js) {
