@@ -1,18 +1,16 @@
 
-o = $;
-
-o(function(){
+$(function(){
 
   var width = window.innerWidth;
   var height = window.innerHeight;
-  var doc = o(document);
+  var doc = $(document);
 
   // .onload
-  o('html').addClass('onload');
+  $('html').addClass('onload');
 
   // top link
-  o('#top').click(function(e){
-    o('html, body').animate({scrollTop : 0}, 200);
+  $('#top').click(function(e){
+    $('html, body').animate({scrollTop : 0}, 200);
     return false;
   });
 
@@ -22,37 +20,37 @@ o(function(){
     if (doc.scrollTop() > 5) {
       if (added) return;
       added = true;
-      o('body').addClass('scroll');
+      $('body').addClass('scroll');
     } else {
-      o('body').removeClass('scroll');
+      $('body').removeClass('scroll');
       added = false;
     }
   })
 
   setTimeout(function () {
-    o('pre code.lang-js').each(function(){
-      o(this).html(highlight(o(this).text()));
+    $('pre code.lang-js').each(function(){
+      $(this).html(highlight($(this).text()));
     })
-  }, 50)
+  }, 1000)
 
 })
 
-// active menu junk
+// active menu
 
-o(function(){
+$(function(){
   var prev;
   var n = 0;
 
-  var headings = o('h3').map(function(i, el){
+  var headings = $('h3').map(function(i, el){
     return {
-      top: o(el).offset().top,
+      top: $(el).offset().top,
       id: el.id
     }
   });
 
   function closest() {
     var h;
-    var top = o(window).scrollTop();
+    var top = $(window).scrollTop();
     var i = headings.length;
     while (i--) {
       h = headings[i];
@@ -60,7 +58,7 @@ o(function(){
     }
   }
 
-  o(document).scroll(function(){
+  $(document).scroll(function(){
     var h = closest();
     if (!h) return;
 
@@ -69,7 +67,7 @@ o(function(){
       prev.parent().parent().removeClass('active');
     }
 
-    var a = o('a[href="#' + h.id + '"]');
+    var a = $('a[href="#' + h.id + '"]');
     a.addClass('active');
     a.parent().parent().addClass('active');
 
