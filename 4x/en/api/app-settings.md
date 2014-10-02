@@ -55,6 +55,7 @@ Express application settings can be set using [`app.set()`](#app.set), and retri
 * `subdomain offset` The number of dot-separated parts of the host to remove to access subdomain, two by default.
 * `jsonp callback name` Changes the default callback name of `?callback=`.
 * `json replacer` JSON replacer callback, `null` by default.
+* `json spaces` When set, sends prettified JSON string indented with the specified amount of spaces. Disabled by default.
 * `case sensitive routing` Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same.
 * `strict routing` Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router.
 * `view cache` Enables view template compilation caching, enabled in production by default.
