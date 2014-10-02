@@ -227,6 +227,16 @@
   </span>
 
   <span class="section">
+  <h2>LogHuman</h2>
+  <p>
+  LogHuman is an application insights platform which enables developers to record information such as billing events, feature usage, or system hiccups, as well as flexible metadata to give these events context.
+  </p>
+  [![](./images/apps/screenshots/loghuman.png)](https://loghuman.com)
+
+  <div class="link">Visit [LogHuman](https://loghuman.com)</div>
+  </span>
+
+  <span class="section">
   <h2>and more!</h2>
   <p>
   Shodan search reports that there are well over **26,000** Express applications
