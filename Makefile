@@ -9,21 +9,26 @@ HTML = index.html \
 	faq.html \
 	3x/api.html \
 	4x/api.html \
-	migrating-4.html \
-  resources/books.html \
-  resources/community.html \
-  resources/applications.html \
-  resources/glossary.html 
+  en/resources/books.html \
+  en/resources/community.html \
+  en/resources/applications.html \
+  en/resources/glossary.html \
+  en/starter/faq.html \
+  en/starter/generator.html \
+  en/starter/hello-world.html \
+  en/starter/installing.html \
+  en/starter/routing.html \
+  en/guide/migrating-4.html 
 
 docs: $(HTML)
 
 4x/api.html: 4x/api.jade 4x/en/api/*.jade includes/*.jade
 	$(JADE) --path $< < $< > $@
 
-%.html: %.jade includes/*.jade en/guide/*.jade resources/*.jade
+%.html: %.jade includes/*.jade en/guide/*.jade en/resources/*.jade en/advanced/*.jade
 	$(JADE) --path $< < $< > $@
 
 clean:
-	rm -f *.html 3x/*.html 4x/*.html resources/*.html
+	rm -f *.html 3x/*.html 4x/*.html en/guide/*.html en/resources/*.html en/advanced/*.html
 
 .PHONY: docs clean
