@@ -276,7 +276,7 @@ code .number { color: #2F6FAD }
 nav {
   position: fixed;
   top: 15px;
-  right: 15px;
+  left: 410px;
   z-index: 100;
 }
 
@@ -569,7 +569,7 @@ ul.doclist {
   background-color: #fff;
   border: 1px solid #b2b2b2;
   padding: 6px 0;
-  margin: -2px 0 0 1px;
+  margin: 0 0 0 1px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -581,13 +581,18 @@ ul.doclist {
 .menu ul.dropit-submenu a {
   display: block;
   color: #777;
-  padding: 0 18px;
+  padding: 0 8px;
 }
 
 .menu ul.dropit-submenu a:hover {
   background: #259dff;
   color: #fff;
   text-decoration: none;
+}
+
+#navmenu {
+  padding: 0;
+  margin: 0;
 }
 
 #navmenu > li {
