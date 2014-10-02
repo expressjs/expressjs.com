@@ -152,7 +152,7 @@ nav a {
 #description {
   margin-top: 160px;
   margin-bottom: 80px;
-  margin-left: 80px;
+  margin-left: 20px;
   padding-left: 40px;
   -webkit-font-smoothing: antialiased;
 }
@@ -179,7 +179,7 @@ nav a {
   background: #fff;
   border: 1px solid #eee;
   border-radius: 3px;
-  margin-left: 200px;
+  margin-left: 142px;
   margin-bottom: 3%;
   width: 635px;
 }
@@ -607,5 +607,5 @@ ul.doclist {
 /* github ribbon */
 
 .right .github-fork-ribbon {
-  background-color: #aaa;
+  
 }
