@@ -10,7 +10,10 @@ HTML = index.html \
 	3x/api.html \
 	4x/api.html \
 	migrating-4.html \
-  resources/books.html 
+  resources/books.html \
+  resources/community.html \
+  resources/applications.html \
+  resources/glossary.html 
 
 docs: $(HTML)
 
@@ -21,6 +24,6 @@ docs: $(HTML)
 	$(JADE) --path $< < $< > $@
 
 clean:
-	rm -f *.html 3x/*.html 4x/*.html
+	rm -f *.html 3x/*.html 4x/*.html resources/*.html
 
 .PHONY: docs clean

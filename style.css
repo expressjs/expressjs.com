@@ -141,7 +141,7 @@ nav a {
   position: relative;
   top: -5px;
   font: 100 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #cecece;
+  color: #bebebe;
   line-height: .75;
 }
 
@@ -154,7 +154,7 @@ nav a {
 }
 
 #logo a {
-  color: #cecece;
+  color: #bebebe;
 }
 
 #logo a:hover {
