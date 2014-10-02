@@ -1,29 +1,28 @@
 <!DOCTYPE html><html><head><title>Express Resources - Glossary</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/dropit.css"><link rel="stylesheet" href="/prism.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script src="/app.js"></script><script src="/retina.js"></script><script src="/dropit.js"></script><script src="/prism.js"></script></head><body class="inner"><div class="bar"></div><section id="content"><header><section id="logo"><a href="/" class="express">Express</a><span class="description">web application framework for<a href="http://nodejs.org">&nbsp;Node.js</a></span></section><nav class="clearfix"><ul id="navmenu"><li><a href="/">Home</a></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html">API Reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li></ul></li></ul></li><li><ul id="getting-started-menu" class="menu"><li><a href="/en/starter/installing.html">Getting started </a><ul><li><a href="/en/starter/installing.html">Installing</a></li><li><a href="/en/starter/generator.html">Express generator</a></li><li><a href="/en/starter/hello-world.html">Hello World </a></li><li><a href="/en/starter/routing.html">Basic routing tutorial</a></li><li><a href="/en/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/en/guide/routing.html">Express Developer's Guide </a><ul><li><a href="/en/guide/routing.html">Routing</a></li><li><a href="/en/guide/error-handling.html">Error handling</a></li><li><a href="/en/guide/debugging.html">Debugging Express</a></li><li><a href="/en/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/en/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/en/guide/using-components.html">Using components </a></li><li><a href="/en/guide/database-integration.html">Database Integration</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/en/advanced/express-components.html">Advanced Topics </a><ul><li><a href="/en/advanced/express-components.html">Express components</a></li><li><a href="/en/advanced/template-engines.html">Template engines</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/en/resources/glossary.html">Resources</a><ul><li><a href="/en/resources/glossary.html">Glossary</a></li><li><a href="/en/resources/applications.html">Applications</a></li><li><a href="/en/resources/community.html">Community</a></li><li><a href="/en/resources/books.html">Books</a></li></ul></li></ul></li></ul></nav></header><h1 id="glossary">Glossary</h1>
 <p>This serves as a guide for both authors and readers of spelling, capitalization, and usage.</p>
-<p>NOTE: This document is in Mediawiki format (wikitext), to take advantage of easy definition list formatting.</p>
 <p><strong>This is currently a working draft.</strong></p>
-<p>; application
-: In general, one or more programs designed to carry out operations for a specific purpose.  In the context of Express, a program that uses the Express API running on the Node.js platform.  May also refer to an  [<a href="http://expressjs.com/api#express">http://expressjs.com/api#express</a> app object].</p>
-<p>; API
-: Application programming interface.  Spell out on first use.</p>
-<p>; Express
-: A fast, un-opinionated, minimalist web framework for Node.js applications.  In general, prefer simply &quot;Express&quot; to &quot;Express.js,&quot; though the latter is acceptable.</p>
-<p>; libuv
-: Multi-platform support library with focus on asynchronous I/O, primarily developed for use by Node.js.</p>
-<p>; middleware
-: A function invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.</p>
-<p>;Node.js
-:Software platform used to build scalable network applications. Node.js uses JavaScript as its scripting language, and achieves high throughput via non-blocking I/O and a single-threaded event loop.  See [<a href="http://nodejs.org/">http://nodejs.org/</a> nodejs.org]. &#39;&#39;&#39;Usage note&#39;&#39;&#39;: Initially, &quot;Node.js,&quot; thereafter &quot;Node.&quot;</p>
-<p>; open-source, open source
-: When used as an adjective, hyphenate; for example: &quot;This is open-source software.&quot; See [<a href="http://en.wikipedia.org/wiki/Open-source_software">http://en.wikipedia.org/wiki/Open-source_software</a> Open-source software on Wikipedia].  Note: Although it is common not to hyphenate this term, we are using the standard English rules for hyphenating a compound adjective</p>
-<p>; request
-: An HTTP request.  A client submits an HTTP request message to a server, which returns an response.  Must use one of several [<a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods</a> request methods] such as GET, POST, and so on.</p>
-<p>; response
-: An HTTP response. A server returns an HTTP response message to the client. The response contains completion status information about the request and may also contain requested content in its message body.</p>
-<p>; route
-: Part of a URL that identifies a resource.  For example, in <code>http://foo.com/products</code>, &quot;/products/id&quot; is the route.</p>
-<p>; router
-: See <a href="http://expressjs.com/api#router">http://expressjs.com/api#router</a></p>
+<p><em>application</em></p>
+<p>In general, one or more programs designed to carry out operations for a specific purpose.  In the context of Express, a program that uses the Express API running on the Node.js platform.  May also refer to an <a href="http://expressjs.com/api#express">app object</a>.</p>
+<p><em>API</em></p>
+<p>Application programming interface.  Spell out on first use.</p>
+<p><em>Express</em></p>
+<p>A fast, un-opinionated, minimalist web framework for Node.js applications.  In general, prefer simply &quot;Express&quot; to &quot;Express.js,&quot; though the latter is acceptable.</p>
+<p><em>libuv</em></p>
+<p>Multi-platform support library with focus on asynchronous I/O, primarily developed for use by Node.js.</p>
+<p><em>middleware</em></p>
+<p>A function invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.</p>
+<p><em>Node.js</em></p>
+<p>Software platform used to build scalable network applications. Node.js uses JavaScript as its scripting language, and achieves high throughput via non-blocking I/O and a single-threaded event loop.  See <a href="http://nodejs.org/">nodejs.org</a>. <strong>Usage note</strong>: Initially, &quot;Node.js,&quot; thereafter &quot;Node&quot;.</p>
+<p><em>open-source, open source</em></p>
+<p>When used as an adjective, hyphenate; for example: &quot;This is open-source software.&quot; See <a href="http://en.wikipedia.org/wiki/Open-source_software">Open-source software on Wikipedia</a>. Note: Although it is common not to hyphenate this term, we are using the standard English rules for hyphenating a compound adjective</p>
+<p><em>request</em></p>
+<p>An HTTP request.  A client submits an HTTP request message to a server, which returns an response.  Must use one of several <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">request methods</a> such as GET, POST, and so on.</p>
+<p><em>response</em></p>
+<p>An HTTP response. A server returns an HTTP response message to the client. The response contains completion status information about the request and may also contain requested content in its message body.</p>
+<p><em>route</em></p>
+<p>Part of a URL that identifies a resource.  For example, in <code>http://foo.com/products</code>, &quot;/products/id&quot; is the route.</p>
+<p><em>router</em></p>
+<p>See <a href="http://expressjs.com/api#router">http://expressjs.com/api#router</a></p>
 </section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
