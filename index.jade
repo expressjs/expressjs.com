@@ -3,16 +3,23 @@ html
   head
     title Express - Node.js web application framework
     include includes/head
+    link(rel='stylesheet', href='/gh-fork-ribbon.css')
+
   body
-    a(href='https://github.com/strongloop/express')
-      img(style='position: absolute; top: 0; left: 0; border: 0;', src='//s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png', alt='Fork me on GitHub')
+
+    .github-fork-ribbon-wrapper.right
+        .github-fork-ribbon
+            a(href='https://github.com/strongloop/express?_ga=1.39756451.1408343404.1407943788') Fork me on GitHub
     .bar
     section#home-content
       header
         include includes/logo
-        - active = '/'
         include includes/menu
-     section#intro.content
+      include includes/description
+
+    #install-command $ npm install express
+
+    section#intro.content
         #boxes.clearfix
           include:md includes/intro.md
          

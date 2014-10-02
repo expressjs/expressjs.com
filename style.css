@@ -39,7 +39,7 @@ strong, th {
 }
 
 #home-content {
-  margin: 10% 0 9% 80px;
+  margin: 10% 0 0 80px;
   width: 900px;
 }
 
@@ -120,15 +120,28 @@ nav a {
 /* logo */
 
 #logo {
-  margin-top: 160px;
-  margin-bottom: 80px;
-  margin-left: 80px;
-  padding-left: 40px;
-  width: 440px;
-  -webkit-font-smoothing: antialiased;
+  position: fixed;
+  top: 0;
+  margin: 0;
+  padding: 10px 25px;
+  width: auto;
+  border-left: none;
 }
 
 #logo .express {
+  display: block;
+  font: 25px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  color: #777;
+  width: 100%;
+}
+
+#logo a:hover, #description a:hover {
+  text-decoration: none;
+  color: #858585;
+}
+
+#description .express {
   display: block;
   font: 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 100;
@@ -136,7 +149,15 @@ nav a {
   width: 100%;
 }
 
-#logo .description {
+#description {
+  margin-top: 160px;
+  margin-bottom: 80px;
+  margin-left: 80px;
+  padding-left: 40px;
+  -webkit-font-smoothing: antialiased;
+}
+
+#description .description {
   position: relative;
   top: -5px;
   font: 100 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -144,7 +165,7 @@ nav a {
   line-height: .75;
 }
 
-#logo em {
+#description em {
   font-style: normal;
   font-weight: 100;
   font-size: 9px;
@@ -152,13 +173,15 @@ nav a {
   margin-left: 5px;
 }
 
-#logo a {
-  color: #bebebe;
-}
-
-#logo a:hover {
-  text-decoration: none;
-  color: #858585;
+#install-command {
+  font-family: Consolas, Monaco, "Andale Mono", monospace;
+  padding: 5px 10px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  margin-left: 200px;
+  margin-bottom: 3%;
+  width: 630px;
 }
 
 #intro {
@@ -166,9 +189,7 @@ nav a {
   margin-bottom: 0;
 }
 
-/* secondary page logo */
-
-.inner header {
+header {
   position: fixed;
   top: 0;
   left: 0;
@@ -179,30 +200,9 @@ nav a {
   border-bottom: 1px solid #ddd;
 }
 
-.inner.scroll header {
+.scroll header {
   border-bottom: 1px solid #ddd;
   box-shadow: 0 0 4px #eee;
-}
-
-.inner #logo {
-  position: fixed;
-  top: 0;
-  margin: 0;
-  padding: 10px 25px;
-  width: auto;
-  border-left: none;
-}
-
-.inner #logo .express {
-  font-size: 25px;
-}
-
-.inner #logo em {
-  display: none;
-}
-
-.inner .description {
-  display: none;
 }
 
 /* code */
@@ -602,4 +602,10 @@ ul.doclist {
 
 #navmenu a:hover {
   text-decoration: none;
+}
+
+/* github ribbon */
+
+.right .github-fork-ribbon {
+  background-color: #aaa;
 }
