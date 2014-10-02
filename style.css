@@ -132,7 +132,7 @@ nav a {
   display: block;
   font: 25px "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 100;
-  color: #777;
+  color: #555;
   width: 100%;
 }
 
@@ -146,6 +146,7 @@ nav a {
   font: 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 100;
   color: #353535;
+  width: 50%;
 }
 
 #description {
@@ -180,7 +181,7 @@ nav a {
   border-radius: 3px;
   margin-left: 200px;
   margin-bottom: 3%;
-  width: 630px;
+  width: 635px;
 }
 
 #intro {
@@ -192,7 +193,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(255,255,255,.9);
+  background: #f4f4f3;
   width: 100%;
   height: 55px;
   z-index: 100;
@@ -564,7 +565,7 @@ ul.doclist {
 }
 
 .menu ul.dropit-submenu {
-  background-color: #fff;
+  background-color: #fcfcfa;
   border: 1px solid #b2b2b2;
   padding: 6px 0;
   margin: 0 0 0 1px;
