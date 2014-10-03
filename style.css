@@ -610,7 +610,7 @@ ul.doclist {
 .doc-box {
   font-size: 12px;
   line-height: 14px;
-  padding: 7px;
+  padding: 10px;
   border-radius: 3px;
 }
 
@@ -627,7 +627,7 @@ ul.doclist {
   border: 1px solid #ded8c1;
 }
 
-.doc-tip {
+.doc-info {
   background: #f7faec;
   border: 1px solid #dfe2d3;
 }

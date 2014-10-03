@@ -18,6 +18,6 @@ If the installation is intended to be temporarily and express need not be added 
 $ npm install express
 ```
 
-<div class="doc-box doc-tip">
+<div class="doc-box doc-info">
 Node modules installed with the `--save` option gets added to the `dependencies` list in the `package.json` file. Modules in the dependecies are automatically installed when the `npm install` command executed in a node application directory.
 </div>

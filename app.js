@@ -28,7 +28,7 @@ $(function(){
   })
 
 
-  $('code.lang-js').each(function(){
+  $('code.lang-js, pre.js code').each(function(){
     $(this).addClass('language-javascript').removeClass('lang-js')
   })
 
