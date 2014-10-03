@@ -15,7 +15,7 @@ body {
 }
 
 h1 {
-  font-size: 25px;
+  font-size: 30px;
 }
 
 h1, h2, h3 {
@@ -64,31 +64,25 @@ li code {
   color: #333;
 }
 
-section section p {
-  /*width: 60%;*/
-}
 
-h2 {
-  /*padding-top: 20px;*/
+#api-doc h2 {
   font-weight: bold;
   font-size: 2.3em;
   margin-bottom: 20px;
 }
 
-h3 {
-  /*background: url(/images/hr.png) top center no-repeat;*/
-  /*margin-top: 5px;*/
+#api-doc h3 {
   padding-top: 10px;
   padding-bottom: 5px;
   font-weight: bold;
   font-size: 1.5em;
 }
 
-h4 {
+#api-doc h4 {
   font-size: 1.1em;
 }
 
-h5 {
+#api-doc h5 {
   font-size: 1.0em;
   color: #666;
 }
@@ -104,15 +98,15 @@ a:hover {
   text-decoration: underline;
 }
 
-h2:target {
+#api-doc h2:target {
   padding-top: 100px;
 }
 
-h3:target {
+#api-doc h3:target {
   padding-top: 100px;
 }
 
-h4:target {
+#api-doc h4:target {
   /*padding-top: 50px;*/
 }
 
@@ -166,7 +160,7 @@ nav a {
   position: relative;
   top: -5px;
   font: 100 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #bebebe;
+  color: #aeaeae;
   line-height: .75;
 }
 
