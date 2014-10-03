@@ -14,15 +14,18 @@ HTML = index.html \
   en/starter/hello-world.html \
   en/starter/installing.html \
   en/starter/basic-routing.html \
-  en/advanced/express-components.html \
-  en/advanced/template-engines.html \
   en/guide/routing.html \
   en/guide/error-handling.html \
   en/guide/debugging.html \
   en/guide/behind-proxies.html \
   en/guide/migrating-4.html \
   en/guide/using-components.html \
-  en/guide/database-integration.html
+  en/guide/using-template-engines.html \
+  en/guide/database-integration.html \
+  en/advanced/security.html \
+  en/advanced/performance.html \
+  en/advanced/express-components.html \
+  en/advanced/developing-template-engines.html
 
 docs: $(HTML)
 

@@ -1,4 +1,4 @@
-<h3 id='template-engines'>Using template engines with Express</h3>
+# Using template engines with Express
 
 Before Express can render template files, the following application settings have to be set.
 
