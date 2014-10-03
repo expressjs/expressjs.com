@@ -146,11 +146,12 @@ nav a {
   font: 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 100;
   color: #353535;
-  width: 50%;
+  width: 25%;
+  margin-bottom: .25em;
 }
 
 #description {
-  margin-top: 160px;
+  margin-top: 140px;
   margin-bottom: 80px;
   margin-left: 20px;
   padding-left: 40px;
