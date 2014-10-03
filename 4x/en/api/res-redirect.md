@@ -1,4 +1,10 @@
-<div class="notice"> **Note**: Express passes the specified URL string as-is to the browser in the `Location` header, without any validation or manipulation, except in case of `back`. Browsers take the responsibility of deriving the intended URL from the current URL or the referring URL, and the URL specified in the `Location` header; and redirect the user accordingly.
+<div class='doc-box doc-warn'>
+<p>
+Express passes the specified URL string as-is to the browser in the `Location` header, without any validation or manipulation, except in case of `back`.
+</p>
+<p>
+Browsers take the responsibility of deriving the intended URL from the current URL or the referring URL, and the URL specified in the `Location` header; and redirect the user accordingly.
+</p>
 </div>
 
 Redirect to the given `url` with optional `status` code defaulting to 302 "Found".

@@ -17,7 +17,7 @@ HTML = index.html \
   en/starter/generator.html \
   en/starter/hello-world.html \
   en/starter/installing.html \
-  en/starter/routing.html \
+  en/starter/basic-routing.html \
   en/guide/migrating-4.html 
 
 docs: $(HTML)
@@ -25,10 +25,10 @@ docs: $(HTML)
 4x/api.html: 4x/api.jade 4x/en/api/*.jade includes/*.jade
 	$(JADE) --path $< < $< > $@
 
-%.html: %.jade includes/*.jade en/guide/*.jade en/resources/*.jade en/advanced/*.jade
+%.html: %.jade includes/*.jade en/guide/*.jade en/resources/*.jade en/advanced/*.jade en/starter/*.jade
 	$(JADE) --path $< < $< > $@
 
 clean:
-	rm -f *.html 3x/*.html 4x/*.html en/guide/*.html en/resources/*.html en/advanced/*.html
+	rm -f *.html 3x/*.html 4x/*.html en/guide/*.html en/resources/*.html en/advanced/*.html en/starter/*.html
 
 .PHONY: docs clean

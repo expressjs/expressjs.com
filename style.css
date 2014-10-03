@@ -605,8 +605,34 @@ ul.doclist {
   text-decoration: none;
 }
 
-/* github ribbon */
+/* doc boxes */
 
-.right .github-fork-ribbon {
-  
+.doc-box {
+  font-size: 12px;
+  line-height: 14px;
+  padding: 7px;
+  border-radius: 3px;
+}
+
+.doc-box p {
+  margin: 0 0 6px 0;
+}
+
+.doc-box p:last-child {
+  margin: 0;
+}
+
+.doc-notice {
+  background: #faf6e8;
+  border: 1px solid #ded8c1;
+}
+
+.doc-tip {
+  background: #f7faec;
+  border: 1px solid #dfe2d3;
+}
+
+.doc-warn {
+  background: #f9f1f1;
+  border: 1px solid #e2d3d3;
 }
