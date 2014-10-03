@@ -1,4 +1,6 @@
-<h3 id="overview">Overview: Moving to Express 4</h3>
+<h1>Moving to Express 4</h1>
+
+<h3 id="overview">Overview</h3>
 
 Express 4 is a breaking change from Express 3. That means an existing Express 3 app will not work if you update the Express version in its dependencies.
   
