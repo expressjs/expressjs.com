@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title Developing template engines for Express
+    include ../../includes/head
+  body.inner
+    .bar
+    section#content
+      header
+        include ../../includes/logo
+        - active = 'advanced'
+        include ../../includes/menu
+      include ../../includes/mixins
+      include:md template-engines.md 
+
+    include ../../includes/footer

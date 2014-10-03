@@ -2,7 +2,7 @@
 
 This serves as a guide for both authors and readers of spelling, capitalization, and usage.
 
-**This is currently a working draft.**
+<div class="doc-box doc-warn">This is currently a working draft</div>
 
 *application*
 

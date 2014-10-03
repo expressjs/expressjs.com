@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title Express database integration
+    include ../../includes/head
+  body.inner
+    .bar
+    section#content
+      header
+        include ../../includes/logo
+        - active = 'guide'
+        include ../../includes/menu
+      include ../../includes/mixins
+      include:md database-integration.md 
+
+    include ../../includes/footer

@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title Express behind proxies
+    include ../../includes/head
+  body.inner
+    .bar
+    section#content
+      header
+        include ../../includes/logo
+        - active = 'guide'
+        include ../../includes/menu
+      include ../../includes/mixins
+      include:md behind-proxies.md 
+
+    include ../../includes/footer
