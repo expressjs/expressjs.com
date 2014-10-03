@@ -5,12 +5,12 @@ nav.clearfix
 
   ul#navmenu
     li
-      +item('/') Home
+      a(href='/', class=active == 'home' ? 'active' : '') Home
 
     li
       ul#application-menu.menu
         li
-          a(href='/4x/api.html') API Reference
+          a(href='/4x/api.html', class=active == 'api' ? 'active' : '') API Reference
           ul
             li
               a(href='/4x/api.html') 4.x
@@ -20,7 +20,7 @@ nav.clearfix
     li
       ul#getting-started-menu.menu
         li
-          a(href='/en/starter/installing.html') Getting started 
+          a(href='/en/starter/installing.html', class=active == 'starter' ? 'active' : '') Getting started
           ul
             li
               a(href='/en/starter/installing.html') Installing
@@ -36,7 +36,7 @@ nav.clearfix
     li
       ul#guide-menu.menu
         li
-          a(href='/en/guide/routing.html') Express Developer's Guide 
+          a(href='/en/guide/routing.html', class=active == 'guide' ? 'active' : '') Express Developer's Guide
           ul
             li
               a(href='/en/guide/routing.html') Routing
@@ -56,7 +56,7 @@ nav.clearfix
     li
       ul#advanced-topics-menu.menu
         li
-          a(href='/en/advanced/express-components.html') Advanced Topics 
+          a(href='/en/advanced/express-components.html', class=active == 'advanced' ? 'active' : '') Advanced Topics
           ul
             li
               a(href='/en/advanced/express-components.html') Express components
@@ -66,7 +66,7 @@ nav.clearfix
     li
       ul#resources-menu.menu
         li
-          a(href='/en/resources/glossary.html') Resources
+          a(href='/en/resources/glossary.html', class=active == 'resources' ? 'active' : '') Resources
           ul
             li
               a(href='/en/resources/glossary.html') Glossary
