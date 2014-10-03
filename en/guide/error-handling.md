@@ -1,4 +1,4 @@
-<h3 id='error-handling'>Error handling</h3>
+# Error handling
 
 Error-handling middleware is defined just like regular middleware,
 except that must be defined with an arity of 4 (that is the signature
