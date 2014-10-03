@@ -121,7 +121,7 @@ nav a {
 
 #logo {
   position: fixed;
-  top: 0;
+  top: 2px;
   margin: 0;
   padding: 10px 25px;
   width: auto;
