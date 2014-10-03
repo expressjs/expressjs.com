@@ -1,2 +1,0 @@
-  - __don't__ edit the HTML directly, edit the _jade_.
-  - don't commit any HTML changes, __only jade changes__.
