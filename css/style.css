@@ -55,8 +55,7 @@ strong, th {
   border: 1px solid #eee;
   border-radius: 3px;
   margin: 0 0 5% 12%;
-  max-width: 41.63%;
-  min-width: 350px;
+  max-width: 375px;
 }
 
 #content {
@@ -122,10 +121,6 @@ a:hover {
   padding-top: 100px;
 }
 
-#api-doc h4:target {
-  /*padding-top: 50px;*/
-}
-
 /* logo */
 
 #logo {
@@ -152,10 +147,9 @@ a:hover {
 
 #description .express {
   display: block;
-  font: 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 4.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 100;
   color: #353535;
-  width: 25%;
   margin-bottom: .25em;
 }
 
@@ -168,7 +162,7 @@ a:hover {
 #description .description {
   position: relative;
   top: -5px;
-  font: 100 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 100 4.2em "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #aeaeae;
   line-height: .75;
 }
@@ -589,6 +583,10 @@ ul.doclist {
     margin-left: 5%;
   }
 
+  #description {
+    font-size: .8em;
+  }
+
 }
 
 @media all and (max-width: 689px) {
@@ -604,6 +602,10 @@ ul.doclist {
   header {
     height: 85px;
   }
+
+  #boxes div {
+    width: 90%;
+  }
 }
 
 
@@ -611,6 +613,21 @@ ul.doclist {
 
   header {
     height: 113px;
+  }
+
+  #install-command {
+    width: 300px;
+  }
+}
+
+@media all and (max-width: 320px) {
+
+  header {
+    height: 133px;
+  }
+
+  #install-command {
+    width: 280px;
   }
 }
 

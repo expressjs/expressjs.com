@@ -74,10 +74,20 @@ $(function(){
   })
 
   // dropdown menu
-  $('#application-menu').dropit({ action: 'mouseenter' })
-  $('#getting-started-menu').dropit({ action: 'mouseenter' })
-  $('#guide-menu').dropit({ action: 'mouseenter' })
-  $('#advanced-topics-menu').dropit({ action: 'mouseenter' })
-  $('#resources-menu').dropit({ action: 'mouseenter' })
+
+  if ('ontouchstart' in document.documentElement) {
+    $('#application-menu').dropit({ action: 'click' })
+    $('#getting-started-menu').dropit({ action: 'click' })
+    $('#guide-menu').dropit({ action: 'click' })
+    $('#advanced-topics-menu').dropit({ action: 'click' })
+    $('#resources-menu').dropit({ action: 'click' })
+  }
+  else {
+    $('#application-menu').dropit({ action: 'mouseenter' })
+    $('#getting-started-menu').dropit({ action: 'mouseenter' })
+    $('#guide-menu').dropit({ action: 'mouseenter' })
+    $('#advanced-topics-menu').dropit({ action: 'mouseenter' })
+    $('#resources-menu').dropit({ action: 'mouseenter' })
+  }
 
 })
