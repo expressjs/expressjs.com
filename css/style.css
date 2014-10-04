@@ -212,7 +212,11 @@ pre {
   border: 1px solid #eee;
   padding: 16px;
   border-radius: 3px;
-  overflow: auto;
+  overflow: scroll;
+}
+
+code {
+  overflow: scroll;
 }
 
 code .comment { color: #888 }
@@ -481,7 +485,6 @@ html[xmlns] .clearfix {
   border-collapse: collapse;
   background-color: #f4f3f3;
   empty-cells:show;
-  width: 100%;
 }
  
 .doctable td, .doctable th {
@@ -587,6 +590,10 @@ ul.doclist {
 
   #description {
     font-size: .8em;
+  }
+
+  #menu {
+    display: none;
   }
 
 }
