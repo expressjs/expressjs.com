@@ -58,8 +58,8 @@ strong, th {
   max-width: 375px;
 }
 
-#content {
-  margin-left: 3%;
+.content {
+  margin: 0 3%;
   max-width: 900px;
 }
 
@@ -518,6 +518,7 @@ ul.doclist {
   line-height: 14px;
   padding: 10px;
   border-radius: 3px;
+  margin: 0 3% 0 3%;
 }
 
 .doc-box p {
@@ -606,6 +607,15 @@ ul.doclist {
   #boxes div {
     width: 90%;
   }
+
+  .content {
+    margin-top: 7%;
+  }
+
+  #application-content img {
+    width: 98%;
+    height: 98%;
+  }
 }
 
 
@@ -618,16 +628,25 @@ ul.doclist {
   #install-command {
     width: 300px;
   }
+
+  .content {
+    margin-top: 12%;
+  }
+
 }
 
 @media all and (max-width: 320px) {
 
   header {
-    height: 133px;
+    height: 137px;
   }
 
   #install-command {
     width: 280px;
+  }
+
+  .content {
+    margin-top: 15%;
   }
 }
 
