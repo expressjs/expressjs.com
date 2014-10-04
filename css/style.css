@@ -43,13 +43,24 @@ strong, th {
 }
 
 #home-content {
-  margin: 10% 0 0 80px;
-  width: 900px;
+  margin: 12% 0 0 9%;
+  max-width: 900px;
+  padding-right: 9%;
+}
+
+#install-command {
+  font-family: Consolas, Monaco, "Andale Mono", monospace;
+  padding: 5px 10px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  margin: 0 0 5% 9%;
+  width: 41.63%;
 }
 
 #content {
-  margin-left: 80px;
-  width: 900px;
+  margin-left: 3%;
+  max-width: 900px;
 }
 
 section, span.block-section {
@@ -114,11 +125,6 @@ a:hover {
   /*padding-top: 50px;*/
 }
 
-nav a {
-  font-size: 12px;
-  color: #666;
-}
-
 /* logo */
 
 #logo {
@@ -155,8 +161,6 @@ nav a {
 #description {
   margin-top: 140px;
   margin-bottom: 50px;
-  margin-left: 20px;
-  padding-left: 40px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -176,20 +180,10 @@ nav a {
   margin-left: 5px;
 }
 
-#install-command {
-  font-family: Consolas, Monaco, "Andale Mono", monospace;
-  padding: 5px 10px;
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 3px;
-  margin-left: 142px;
-  margin-bottom: 5%;
-  width: 651px;
-}
-
 #intro {
-  padding: 20px 0 0 50px;
+  padding: 20px 0 0 0;
   margin-bottom: 0;
+  margin-left: 5%;
 }
 
 header {
@@ -273,30 +267,6 @@ code .number { color: #2F6FAD }
   height: 5px;
 }
 
-/* navigation */
-
-nav {
-  position: fixed;
-  top: 15px;
-  left: 410px;
-  z-index: 100;
-}
-
-nav a {
-  margin: 0 5px;
-  padding-right: 15px;
-  border-right: 1px dotted #eee;
-}
-
-nav a:last-child {
-  border-right: none;
-}
-
-nav a.active {
-  font-weight: bold;
-  color: #353535;
-}
-
 /* clearfix */
 
 .clearfix:after {
@@ -337,9 +307,8 @@ html[xmlns] .clearfix {
 
 #boxes div {
   width: 210px;
-  margin: 0 25px;
+  margin-right: 50px;
   float: left;
-  /* fix grid jank. #105 */
   list-style: none;
   padding-bottom: 20px;
 }
@@ -354,6 +323,82 @@ html[xmlns] .clearfix {
   width: 100%;
   margin-top: 5px;
   margin-bottom: 20px;
+}
+
+/* navigation */
+
+#navbar {
+  padding-left: 10%;
+  max-width: 1177px;
+  position: relative;
+}
+
+#navbar a {
+  font-size: 12px;
+  color: #666;
+  margin: 0 5px;
+  padding-right: 15px;
+  border-right: 1px dotted #eee;
+}
+
+#navbar a:last-child {
+  border-right: none;
+}
+
+#navbar a.active {
+  font-weight: bold;
+  color: #353535;
+}
+
+
+/* dropdown menu */
+
+#navmenu {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  right: 125px;
+  top: 15px;
+  padding-left: 5%;
+}
+
+#navmenu > li {
+  list-style: none;
+  padding: 0;
+  float: left;
+}
+
+#navmenu a:hover {
+  text-decoration: none;
+}
+
+.menu ul {
+  display: none;
+}
+
+.menu ul.dropit-submenu {
+  background-color: #fcfcfa;
+  border: 1px solid #b2b2b2;
+  padding: 6px 0;
+  margin: 0 0 0 1px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+}
+
+.menu ul.dropit-submenu a {
+  display: block;
+  color: #777;
+  padding: 0 8px 2px 8px;
+}
+
+.menu ul.dropit-submenu a:hover {
+  background: #259dff;
+  color: #fff !important;
+  text-decoration: none;
 }
 
 /* secondary menu */
@@ -407,7 +452,6 @@ html[xmlns] .clearfix {
 }
 
 .application {
-  /*background: url(/images/hr.png) top center no-repeat;*/
   padding: 80px 0;
   height: 600px;
   position: relative;
@@ -432,96 +476,10 @@ html[xmlns] .clearfix {
   margin-left: 4px;
 }
 
-/* ipad landscape */
-
-@media all and (max-width: 1200px) {
-  #content {
-    width: 760px;
-  }
-
-  .applications #content,
-  .community #content {
-    width: 900px;
-  }
-}
-
-/* ipad portrait */
-
-@media all and (max-width: 768px) {
-  #content {
-    width: 500px;
-  }
-
-  .applications #content,
-  .community #content {
-    width: 600px;
-  }
-
-  .application img {
-    width: 60%;
-  }
-
-  .application {
-    height: 450px;
-  }
-
-  #boxes {
-    margin-left: 0;
-  }
-
-  #boxes section {
-    width: 100%;
-    margin-top: 20px;
-    margin-left: 0;
-    /* undo grid jank */
-    min-height: 0;
-  }
-}
-
-/* iphone portrait */
-
-@media all and (max-width: 650px) {
-  #logo {
-    margin-left: 0;
-  }
-
-  #content {
-    width: 380px;
-  }
-
-  .applications #content,
-  .community #content {
-    width: 500px;
-  }
-
-  section section p {
-    width: 100%;
-  }
-
-  .application {
-    height: 380px;
-  }
-
-  .application img {
-    width: 60%;
-  }
-}
-
-/* tmp */
+/* general */
 
 #logos, footer {
   display: none;
-}
-
-#book {
-  position: relative;
-}
-
-#book img {
-  position: absolute;
-  top: 0;
-  right: -110px;
-  width: 50%;
 }
 
 .doctable {
@@ -561,52 +519,6 @@ ul.doclist {
   width: 500px;
 }
 
-
-/* dropdown menu */
-.menu ul {
-  display: none;
-}
-
-.menu ul.dropit-submenu {
-  background-color: #fcfcfa;
-  border: 1px solid #b2b2b2;
-  padding: 6px 0;
-  margin: 0 0 0 1px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-  -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-}
-
-.menu ul.dropit-submenu a {
-  display: block;
-  color: #777;
-  padding: 0 8px;
-}
-
-.menu ul.dropit-submenu a:hover {
-  background: #259dff;
-  color: #fff;
-  text-decoration: none;
-}
-
-#navmenu {
-  padding: 0;
-  margin: 0;
-}
-
-#navmenu > li {
-  list-style: none;
-  padding: 0;
-  float: left;
-}
-
-#navmenu a:hover {
-  text-decoration: none;
-}
-
 /* doc boxes */
 
 .doc-box {
@@ -637,4 +549,56 @@ ul.doclist {
 .doc-warn {
   background: #f9f1f1;
   border: 1px solid #e2d3d3;
+}
+
+/* responsive */
+
+@media all and (max-width: 775px) {
+
+  #logo {
+    display: none;
+  }
+
+  #home-content {
+    margin: 6% 0 0 5%;
+    padding-right: 3%;
+  }
+
+  #navmenu {
+    left: 0;
+  }
+
+  #install-command {
+    margin-left: 5%;
+  }
+
+}
+
+@media all and (max-width: 689px) {
+
+  .github-fork-ribbon-wrapper {
+    display: none;
+  }
+
+  header {
+    height: 85px;
+  }
+}
+
+/* ipad landscape */
+
+@media all and (max-width: 1200px) {
+
+}
+
+/* ipad portrait */
+
+@media all and (max-width: 768px) {
+
+}
+
+/* iphone portrait */
+
+@media all and (max-width: 650px) {
+
 }

@@ -14,7 +14,10 @@
   margin: 0;
 }
 
-.dropit .dropit-trigger { position: relative; }
+.dropit .dropit-trigger {
+  position: relative;
+  margin-bottom: 6px;
+}
 
 .dropit .dropit-submenu {
   position: absolute !important;
