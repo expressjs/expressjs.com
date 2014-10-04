@@ -16,6 +16,7 @@ body {
 
 h1 {
   font-size: 30px;
+  line-height: 36px;
 }
 
 h1, h2, h3 {
@@ -59,7 +60,7 @@ strong, th {
 }
 
 .content {
-  margin: 0 3%;
+  margin: 0 3% 7%;
   max-width: 900px;
 }
 
