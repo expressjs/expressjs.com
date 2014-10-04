@@ -30,8 +30,3 @@ Our vibrant community has created a large variety of extensions,
 [middleware](https://github.com/senchalabs/connect/wiki)
 and higher level frameworks. Check them out in the
 [wiki](https://github.com/strongloop/express/wiki).
-
-
-<h2>Express 2.x Docs</h2>
-
-Looking for the 2.x documentation? You can find them [here](/2x).
