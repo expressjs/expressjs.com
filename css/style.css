@@ -43,7 +43,7 @@ strong, th {
 }
 
 #home-content {
-  margin: 12% 0 0 9%;
+  margin: 12% 0 0 12%;
   max-width: 900px;
   padding-right: 9%;
 }
@@ -54,8 +54,9 @@ strong, th {
   background: #fff;
   border: 1px solid #eee;
   border-radius: 3px;
-  margin: 0 0 5% 9%;
-  width: 41.63%;
+  margin: 0 0 5% 12%;
+  max-width: 41.63%;
+  min-width: 350px;
 }
 
 #content {
@@ -582,6 +583,14 @@ ul.doclist {
 
   header {
     height: 85px;
+  }
+}
+
+
+@media all and (max-width: 420px) {
+
+  header {
+    height: 113px;
   }
 }
 
