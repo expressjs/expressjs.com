@@ -64,6 +64,10 @@ li code {
   color: #333;
 }
 
+#intro h3 {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
 
 #api-doc h2 {
   font-weight: bold;
