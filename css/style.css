@@ -306,12 +306,17 @@ html[xmlns] .clearfix {
 }
 
 #boxes div {
-  width: 210px;
+  width: 215px;
   margin-right: 50px;
   float: left;
   list-style: none;
   padding-bottom: 20px;
 }
+
+#boxes div:last-child {
+  margin-right: 0;
+}
+
 
 #boxes h3 {
   background: none;
