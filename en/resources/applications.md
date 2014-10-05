@@ -1,5 +1,3 @@
-# Applications
-
 ##MySpace
 
 No introduction required! Everyone knows MySpace,

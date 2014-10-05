@@ -4,13 +4,14 @@ html
     title Express Resources - Applications
     include ../../includes/head
   body.inner
-    .bar
     section#application-content.content
       header
         include ../../includes/logo
         - active = 'resources'
         include ../../includes/menu
       include ../../includes/mixins
+      h1 Applications
+      .vspace
       include:md applications.md
 
     include ../../includes/footer

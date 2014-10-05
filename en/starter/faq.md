@@ -1,31 +1,16 @@
-# FAQ
-
-<span class="block-section">
-<h3 id='models'>
-How do I define models?
-</h3>
+## How do I define models?
 
 Express has no notion of a database at all. This is
 left up to third-party node modules, allowing you to
 interface with nearly any database.
 
-</span>
-
-<span class="block-section">
-<h3 id="auth">
-How can I authenticate users?
-</h3>
+## How can I authenticate users?
 
 This is another opinionated area that Express does not
 venture into, you may use any authentication scheme you wish.
 For a simple username / password scheme view this [example](https://github.com/strongloop/express/tree/master/examples/auth).
 
-</span>
-
-<span class="block-section">
-<h3 id="templates">
-Which template engines does Express support?
-</h3>
+## Which template engines does Express support?
 
 Anything that can conform with the `(path, locals, callback)` signature.
 To normalize template engine interfaces and caching, it's recommended to
@@ -33,10 +18,7 @@ check the [consolidate.js](https://github.com/visionmedia/consolidate.js)
 project for support. Unlisted template engines may still support the Express
 signature.
 
-</span>
-
-<span class="block-section">
-<h3 id="custom-template-engines">How do I create custom template engines in Express?</h3>
+## How do I create custom template engines in Express?
 
 Use the `app.engine(ext, callback)` method to create your own template engine. `ext` refers to the file extension, `callback` is the template engine function which accepts the location of the file, the options object, and the callback function, as its parameters.
 
@@ -72,10 +54,7 @@ app.get('/', function (req, res) {
 ```
 On making a request to the home page, "index.ntl" will be rendered as HTML.
 
-</span>
-
-<span class="block-section">
-<h3 id="structure">How should I structure my application?</h3>
+## How should I structure my application?
 
 There is no true answer to this question. It is highly dependant
 on the scale of your application and the team involved. To be as
@@ -94,10 +73,7 @@ Also, there are third-party extensions for Express, which simplify some of these
 * [Resourceful routing](https://github.com/expressjs/express-resource)
 * [Namespaced routing](https://github.com/expressjs/express-namespace)
 
-</span>
-
-<span class="block-section">
-<h3 id="multiple-statics">How can I serve statics from several directories?</h3>
+## How can I serve statics from several directories?
 
 You may typically use any middleware several times 
 within your application. With the following middleware setup, and a request
@@ -109,10 +85,7 @@ app.use(express.static('public'));
 app.use(express.static('files'));
 ```
 
-</span>
-
-<span class="block-section">
-<h3 id="static-prefix">How can I prefix a pathname for serving statics?</h3>
+## How can I prefix a pathname for serving statics?
 
 Connect's generic "mounting" feature allows you to define
 the pathname "prefix" to which the middleware will be invoked.
@@ -125,10 +98,7 @@ as the `req.url`, allowing the middleware to serve the file:
 app.use('/public', express.static('public'));
 ```
 
-</span>
-
-<span class="block-section">
-<h3 id="migration">How do I migrate my Express 2.x application?</h3>
+## How do I migrate my Express 2.x application?
 
 Express 2x will likely be supported through to node 1.0, so there's
 no immediate reason to update beyond the refactoring and API changes
@@ -137,10 +107,7 @@ to remain on that branch. For migration information visit the
 [migration](https://github.com/strongloop/express/wiki/Migrating-from-2.x-to-3.x)
 wiki page, or view a [list of changes](https://github.com/strongloop/express/wiki/New-features-in-3.x) made in 3.x.
 
-</span>
-
-<span class="block-section">
-<h3 id="404-handling">How do you handle 404s?</h3>
+## How do you handle 404s?
 
 In Express, 404s are not the result of an error. Therefore,
 the error-handler middleware will not capture 404s. This is
@@ -156,10 +123,7 @@ app.use(function(req, res, next){
 });
 ```
 
-</span>
-
-<span class="block-section">
-<h3 id="error-handling">How do you setup an error handler in Express?</h3>
+## How do you setup an error handler in Express?
 
 Error-handling middleware is defined just like regular middleware,
 except that it must be defined with an arity of 4 (that is the signature
@@ -174,25 +138,17 @@ app.use(function(err, req, res, next){
 
 View [error-handling](/guide.html#error-handling) for more information.
 
-</span>
-
-<span class="block-section">
-<h3 id="render-html">How do I render plain HTML?</h3>
+## How do I render plain HTML?
 
 You don't! There's no need to "render" HTML with `res.render()`,
 if you have a specific file you should use `res.sendFile()`, or
 if you are serving many assets from a directory use the `express.static()`
 middleware.
 
-</span>
-
-<span class="block-section">
-<h3 id="size">How big is the Express codebase?</h3>
+## How big is the Express codebase?
 
 Express is a very small framework. The 3.0.0 release is only
 932 SLOC, and the mandatory portion of Connect which Express
 is built on is only 267 SLOC. The optional middleware bundled
 with Connect add an additional 1143 SLOC, and are lazy loaded
 upon use.
-
-</span>

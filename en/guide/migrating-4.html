@@ -1,6 +1,4 @@
-<!DOCTYPE html><html><head><title>Express - Moving to version 4</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script src="/js/app.js"></script><script src="/js/retina.js"></script><script src="/js/dropit.js"></script><script src="/js/prism.js"></script></head><body class="inner"><div class="bar"></div><section class="content"> <header><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/">Home</a></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="getting-started-menu" class="menu"><li><a href="/en/starter/installing.html">Getting started</a><ul><li><a href="/en/starter/installing.html">Installing</a></li><li><a href="/en/starter/generator.html">Express generator</a></li><li><a href="/en/starter/hello-world.html">Hello World!</a></li><li><a href="/en/starter/basic-routing.html">Basic routing tutorial</a></li><li><a href="/en/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/en/guide/routing.html" class="active">Guide</a><ul><li><a href="/en/guide/routing.html">Routing</a></li><li><a href="/en/guide/error-handling.html">Error handling</a></li><li><a href="/en/guide/debugging.html">Debugging Express</a></li><li><a href="/en/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/en/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/en/guide/using-components.html">Using components</a></li><li><a href="/en/guide/using-template-engines.html">Using template engines</a></li><li><a href="/en/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/en/advanced/express-components.html">Advanced topics</a><ul><li><a href="/en/advanced/express-components.html">Express components</a></li><li><a href="/en/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/en/advanced/security.html">Security</a></li><li><a href="/en/advanced/performance.html">Performance</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/en/resources/glossary.html">Resources</a><ul><li><a href="/en/resources/glossary.html">Glossary</a></li><li><a href="/en/resources/applications.html">Applications</a></li><li><a href="/en/resources/community.html">Community</a></li><li><a href="/en/resources/books.html">Books</a></li></ul></li></ul></li></ul></div><ul id="menu"><li><ul class="active"><li><a href="#overview">Overview</a></li><li><a href="#changes">Changes in Express 4</a></li><li><a href="#example-migration">Example app migration</a></li><li><a href="#app-gen">Upgrading Express app generator</a></li></ul></li></ul></header><section><h1>Moving to Express 4</h1>
-
-<h3 id="overview">Overview</h3>
+<!DOCTYPE html><html><head><title>Express - Moving to version 4</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script src="/js/app.js"></script><script src="/js/retina.js"></script><script src="/js/dropit.js"></script><script src="/js/prism.js"></script></head><body class="inner"><div class="bar"></div><section class="content"><header><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/">Home</a></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="getting-started-menu" class="menu"><li><a href="/en/starter/installing.html">Getting started</a><ul><li><a href="/en/starter/installing.html">Installing</a></li><li><a href="/en/starter/generator.html">Express generator</a></li><li><a href="/en/starter/hello-world.html">Hello World!</a></li><li><a href="/en/starter/basic-routing.html">Basic routing tutorial</a></li><li><a href="/en/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/en/guide/routing.html" class="active">Guide</a><ul><li><a href="/en/guide/routing.html">Routing</a></li><li><a href="/en/guide/error-handling.html">Error handling</a></li><li><a href="/en/guide/debugging.html">Debugging Express</a></li><li><a href="/en/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/en/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/en/guide/using-components.html">Using components</a></li><li><a href="/en/guide/using-template-engines.html">Using template engines</a></li><li><a href="/en/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/en/advanced/express-components.html">Advanced topics</a><ul><li><a href="/en/advanced/express-components.html">Express components</a></li><li><a href="/en/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/en/advanced/security.html">Security</a></li><li><a href="/en/advanced/performance.html">Performance</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/en/resources/glossary.html">Resources</a><ul><li><a href="/en/resources/glossary.html">Glossary</a></li><li><a href="/en/resources/applications.html">Applications</a></li><li><a href="/en/resources/community.html">Community</a></li><li><a href="/en/resources/books.html">Books</a></li></ul></li></ul></li></ul></div><ul id="menu"><li><ul class="active"><li><a href="#overview">Overview</a></li><li><a href="#changes">Changes in Express 4</a></li><li><a href="#example-migration">Migration example</a></li><li><a href="#app-gen">Express generator</a></li></ul></li></ul></header><section><h1>Moving to Express 4</h1><div class="bar"></div><h2 id="overview">Overview</h2>
 
 <p>Express 4 is a breaking change from Express 3. That means an existing Express 3 app will not work if you update the Express version in its dependencies.</p>
 <p>This article covers:</p>
@@ -10,7 +8,7 @@
   <li><a href="#app-gen">Upgrading to the Express 4 app generator.</a></li>
 </ul>
 
-<h3 id="changes">Changes in Express 4</h3>
+<h2 id="changes">Changes in Express 4</h2>
 
 <p>The main changes in Express 4 are:</p>
 <ul class="doclist">
@@ -25,9 +23,9 @@
 <li><a href="https://github.com/strongloop/express/wiki/New-features-in-4.x">New features in 4.x.</a></li>
 <li><a href="https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x">Migrating from 3.x to 4.x.</a></li>
 </ul>
-<h4 id="core-changes">
+<h3 id="core-changes">
 Changes to Express core and middleware system
-</h4>
+</h3>
 
 <p>Express 4 no longer depends on Connect, and removes all the built-in
 middleware from its core, except <code>express.static</code>. This means
@@ -82,7 +80,7 @@ middleware required to run your app.  Simply follow these steps:</p>
 <p>In most cases, you can simply replace the old version 3 middleware with
 its Express 4 counterpart. For details, see the module documentation in
 GitHub.</p>
-<h5 id="app-use">app.use accepts parameters</h5>
+<h4 id="app-use">app.use accepts parameters</h4>
 
 <p>In version 4 you can now load middleware on a path with a variable
 parameter and read the parameter value from the route handler.
@@ -92,9 +90,9 @@ For example:</p>
   next();
 })
 </code></pre>
-<h4 id="routing">
+<h3 id="routing">
 The routing system
-</h4>
+</h3>
 
 <p>Apps now implicitly load routing middleware, so you no longer have to
 worry about the order in which middleware is loaded with respect to
@@ -112,7 +110,7 @@ new features to help organize your routes:</p>
   </li>
 </ul>
 
-<h5 id="app-route">app.route() method</h5>
+<h4 id="app-route">app.route() method</h4>
 
 <p>The new <code>app.route()</code> method enables you to create chainable route handlers
 for a route path. Since the path is specified in a single location, it
@@ -130,7 +128,7 @@ information on routes, see <a href="/4x/api.html#router">Router() documentation<
     res.send(&#39;Update the book&#39;);
   })
 </code></pre>
-<h5 id="express-router">express.Router class</h5>
+<h4 id="express-router">express.Router class</h4>
 
 <p>The other feature to help organize routes is a new class,
 <code>express.Router</code>, that you can use to create modular mountable
@@ -167,9 +165,9 @@ app.use(&#39;/birds&#39;, birds);
 <p>The app will now be able to handle requests to <code>/birds</code> and
 <code>/birds/about</code>, along with calling the <code>timeLog</code>
 middleware specific to the route.</p>
-<h4 id="other-changes">
+<h3 id="other-changes">
 Other changes
-</h4>
+</h3>
 
 <p>The following table lists other small but important changes in Express 4.</p>
 <table class="doctable" border="1" width="600">
@@ -238,15 +236,15 @@ Node 0.8.x.</td>
 </tr>
 </table>
 
-<h3 id="example-migration">Example app migration</h3>
+<h2 id="example-migration">Example app migration</h2>
 
 <p>Here is an example of migrating an Express 3 application to Express 4.
 The files of interest are <code>app.js</code> and <code>package.json</code>.</p>
-<h4 id="">
+<h3 id="">
 Version 3 app
-</h4>
+</h3>
 
-<h5 id="">app.js</h5>
+<h4 id="">app.js</h4>
 
 <p>Consider an Express v.3 application with the following <code>app.js</code> file:</p>
 <pre><code class="lang-js">var express = require(&#39;express&#39;);
@@ -281,7 +279,7 @@ http.createServer(app).listen(app.get(&#39;port&#39;), function(){
   console.log(&#39;Express server listening on port &#39; + app.get(&#39;port&#39;));
 });
 </code></pre>
-<h5 id="">pacakge.json </h5>
+<h4 id="">pacakge.json</h4>
 
 <p>The accompanying version 3 <code>package.json</code> file might look
   something like this:</p>
@@ -298,9 +296,9 @@ http.createServer(app).listen(app.get(&#39;port&#39;), function(){
   }
 }
 </code></pre>
-<h4 id="">
+<h3 id="">
 Process
-</h4>
+</h3>
 
 <p>Begin the migration process by installing the required middleware for the
 Express 4 app and updating Express and Jade to their respective latest
@@ -327,9 +325,9 @@ body-parser multer errorhandler express@latest jade@latest --save
  <code>http.createServer</code>.</p>
 </li>
 </ol>
-<h4 id="">Version 4 app</h4>
+<h3 id="">Version 4 app</h3>
 
-<h5 id="">pacakge.json</h5>
+<h4 id="">pacakge.json</h4>
 
 <p>Running the above <code>npm</code> command will update <code>package.json</code> as follows:</p>
 <pre><code class="lang-js">{
@@ -352,7 +350,7 @@ body-parser multer errorhandler express@latest jade@latest --save
   }
 }
 </code></pre>
-<h5 id="">app.js</h5>
+<h4 id="">app.js</h4>
 
 <p>Then, remove invalid code, load the required middleware, and make other
 changes as necessary. Then <code>app.js</code> will look like this:</p>
@@ -398,20 +396,20 @@ app.listen(app.get(&#39;port&#39;), function(){
   console.log(&#39;Express server listening on port &#39; + app.get(&#39;port&#39;));
 });
 </code></pre>
-<h4 id="">Run the app</h4>
+<h3 id="">Run the app</h3>
 
 <p>With that, the migration process is complete, and the app is now an
 Express 4 app. To confirm, start the app with the following command:</p>
 <pre><code>$ node .
 </code></pre><p>Load <a href="http://localhost:3000">http://localhost:3000</a>. 
   and see the home page being rendered by Express 4.</p>
-<h3 id="app-gen">Upgrading to the Express 4 app generator</h3>
+<h2 id="app-gen">Upgrading to the Express 4 app generator</h2>
 
 <p>The command-line tool to generate an Express app is still
   <code>express</code>, but to upgrade to the new version, you must uninstall
   the Express 3 app generator and then install the new
   <code>express-generator</code>.</p>
-<h4 id="">Installing </h4>
+<h3 id="">Installing </h3>
 
 <p>If you already have the Express 3 app generator installed on your system,
 you must uninstall it  as follows:</p>
@@ -424,7 +422,7 @@ you may need to run this command with <code>sudo</code>.</p>
 you may need to run this command with <code>sudo</code>.</p>
 <p>Now the <code>express</code> command on your system is updated to the
 Express 4 generator. </p>
-<h4 id="">Changes to the app generator </h4>
+<h3 id="">Changes to the app generator </h3>
 
 <p>Command options and use largely remain the same, with the following exceptions:</p>
 <p><ul class="doclist">
@@ -435,7 +433,7 @@ Express 4 generator. </p>
     support <a href="http://twitter.github.io/hogan.js/">Hogan.js</a>.
   </li>
 </ul></p>
-<h4 id="">Example</h4>
+<h3 id="">Example</h3>
 
 <p>Execute the following command to create an Express 4 app:</p>
 <pre><code>$ express app4

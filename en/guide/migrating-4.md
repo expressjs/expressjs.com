@@ -1,6 +1,4 @@
-<h1>Moving to Express 4</h1>
-
-<h3 id="overview">Overview</h3>
+<h2 id="overview">Overview</h2>
 
 Express 4 is a breaking change from Express 3. That means an existing Express 3 app will not work if you update the Express version in its dependencies.
   
@@ -12,7 +10,7 @@ This article covers:
   <li><a href="#app-gen">Upgrading to the Express 4 app generator.</a></li>
 </ul>
 
-<h3 id="changes">Changes in Express 4</h3>
+<h2 id="changes">Changes in Express 4</h2>
 
 The main changes in Express 4 are:
 
@@ -28,9 +26,9 @@ See also:
 * [New features in 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
 * [Migrating from 3.x to 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
 
-<h4 id="core-changes">
+<h3 id="core-changes">
 Changes to Express core and middleware system
-</h4>
+</h3>
 
 Express 4 no longer depends on Connect, and removes all the built-in
 middleware from its core, except `express.static`. This means
@@ -89,7 +87,7 @@ In most cases, you can simply replace the old version 3 middleware with
 its Express 4 counterpart. For details, see the module documentation in
 GitHub.
 
-<h5 id="app-use">app.use accepts parameters</h5>
+<h4 id="app-use">app.use accepts parameters</h4>
 
 In version 4 you can now load middleware on a path with a variable
 parameter and read the parameter value from the route handler.
@@ -101,9 +99,9 @@ app.use('/book/:id', function(req, res, next) {
   next();
 })
 ```
-<h4 id="routing">
+<h3 id="routing">
 The routing system
-</h4>
+</h3>
 
 Apps now implicitly load routing middleware, so you no longer have to
 worry about the order in which middleware is loaded with respect to
@@ -123,7 +121,7 @@ new features to help organize your routes:
   </li>
 </ul>
 
-<h5 id="app-route">app.route() method</h5>
+<h4 id="app-route">app.route() method</h4>
 
 The new `app.route()` method enables you to create chainable route handlers
 for a route path. Since the path is specified in a single location, it
@@ -145,7 +143,7 @@ app.route('/book')
   })
 ```
 
-<h5 id="express-router">express.Router class</h5>
+<h4 id="express-router">express.Router class</h4>
 
 The other feature to help organize routes is a new class,
 `express.Router`, that you can use to create modular mountable
@@ -191,9 +189,9 @@ The app will now be able to handle requests to `/birds` and
 `/birds/about`, along with calling the `timeLog`
 middleware specific to the route.
 
-<h4 id="other-changes">
+<h3 id="other-changes">
 Other changes
-</h4>
+</h3>
 
 The following table lists other small but important changes in Express 4.
 
@@ -263,16 +261,16 @@ Node 0.8.x.</td>
 </tr>
 </table>
 
-<h3 id="example-migration">Example app migration</h3>
+<h2 id="example-migration">Example app migration</h2>
 
 Here is an example of migrating an Express 3 application to Express 4.
 The files of interest are `app.js` and `package.json`.
 
-<h4 id="">
+<h3 id="">
 Version 3 app
-</h4>
+</h3>
 
-<h5 id="">app.js</h5>
+<h4 id="">app.js</h4>
 
 Consider an Express v.3 application with the following `app.js` file:
 
@@ -310,7 +308,7 @@ http.createServer(app).listen(app.get('port'), function(){
 });
 ```
 
-<h5 id="">pacakge.json </h5>
+<h4 id="">pacakge.json</h4>
 
 The accompanying version 3 `package.json` file might look
   something like this:
@@ -330,9 +328,9 @@ The accompanying version 3 `package.json` file might look
 }
 ```
 
-<h4 id="">
+<h3 id="">
 Process
-</h4>
+</h3>
 
 Begin the migration process by installing the required middleware for the
 Express 4 app and updating Express and Jade to their respective latest
@@ -362,9 +360,9 @@ Make the following changes to app.js:
 4. Start the app with `app.listen()` instead of
     `http.createServer`.
 
-<h4 id="">Version 4 app</h4>
+<h3 id="">Version 4 app</h3>
 
-<h5 id="">pacakge.json</h5>
+<h4 id="">pacakge.json</h4>
 
 Running the above `npm` command will update `package.json` as follows:
 
@@ -390,7 +388,7 @@ Running the above `npm` command will update `package.json` as follows:
 }
 ```
 
-<h5 id="">app.js</h5>
+<h4 id="">app.js</h4>
 
 Then, remove invalid code, load the required middleware, and make other
 changes as necessary. Then `app.js` will look like this:
@@ -439,7 +437,7 @@ app.listen(app.get('port'), function(){
 });
 ```
 
-<h4 id="">Run the app</h4>
+<h3 id="">Run the app</h3>
 
 With that, the migration process is complete, and the app is now an
 Express 4 app. To confirm, start the app with the following command:
@@ -451,14 +449,14 @@ $ node .
 Load [http://localhost:3000](http://localhost:3000). 
   and see the home page being rendered by Express 4.
 
-<h3 id="app-gen">Upgrading to the Express 4 app generator</h3>
+<h2 id="app-gen">Upgrading to the Express 4 app generator</h2>
 
 The command-line tool to generate an Express app is still
   `express`, but to upgrade to the new version, you must uninstall
   the Express 3 app generator and then install the new
   `express-generator`.
 
-<h4 id="">Installing </h4>
+<h3 id="">Installing </h3>
 
 If you already have the Express 3 app generator installed on your system,
 you must uninstall it  as follows:
@@ -481,7 +479,7 @@ you may need to run this command with `sudo`.
 Now the `express` command on your system is updated to the
 Express 4 generator. 
 
-<h4 id="">Changes to the app generator </h4>
+<h3 id="">Changes to the app generator </h3>
 
 Command options and use largely remain the same, with the following exceptions:
 
@@ -493,7 +491,7 @@ Command options and use largely remain the same, with the following exceptions:
     support [Hogan.js](http://twitter.github.io/hogan.js/).
   </li>
 </ul>
-<h4 id="">Example</h4>
+<h3 id="">Example</h3>
 
 Execute the following command to create an Express 4 app:
 

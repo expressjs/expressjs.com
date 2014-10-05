@@ -4,13 +4,14 @@ html
     title Express Resources - Glossary
     include ../../includes/head
   body.inner
-    .bar
     section.content
       header
         include ../../includes/logo
         - active = 'resources'
         include ../../includes/menu
       include ../../includes/mixins
+      h1 Glossary
+      .vspace
       include:md glossary.md
 
     include ../../includes/footer

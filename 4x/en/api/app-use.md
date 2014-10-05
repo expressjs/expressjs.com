@@ -28,7 +28,7 @@ app.get('/', function (req, res) {
 
 `path` can be a string representing a path, a path pattern, a regular expression to match paths, or an array of combinations of the aforementioned path objects.
 
-<div class="notice">**Note**: The middleware examples below are intentionally left overly simple to keep the examples lean and clutter-free.</div>
+<div class="doc-box doc-notice">The middleware examples below are intentionally left overly simple to keep the examples lean and clutter-free.</div>
 
 <table class="doctable" border="1">
   <thead>
