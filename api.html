@@ -47,7 +47,6 @@ app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;un
     <tr>
       <td><strong> Function </strong></td>
       <td> Custom trust implementation. Use this only if you know what you are doing.
-
           <pre><code class="lang-js">app.set(&#39;trust proxy&#39;, function (ip) {
   if (ip === &#39;127.0.0.1&#39; || ip === &#39;123.123.123.123&#39;) return true; // trusted IPs
   else return false;
@@ -68,7 +67,7 @@ app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;un
 <li><code>view cache</code> Enables view template compilation caching, enabled in production by default.</li>
 <li><code>view engine</code> The default engine extension to use when omitted.</li>
 <li><code>views</code> The view directory path, defaulting to <code>&quot;process.cwd() + &#39;/views&#39;&quot;</code>.</li>
-<li><code>query parser</code> The query parser to use - &quot;simple&quot; or &quot;extended&quot;, defaults to &quot;extended&quot;. The simple query parser is based on node&#39;s native query parser, <a href="http://nodejs.org/api/querystring.html">querystring</a>. The extended query parser is based on <a href="https://www.npmjs.org/package/qs">qp</a>.</li>
+<li><code>query parser</code> The query parser to use - &quot;simple&quot; or &quot;extended&quot;, defaults to &quot;extended&quot;. The simple query parser is based on node&#39;s native query parser, <a href="http://nodejs.org/api/querystring.html">querystring</a>. The extended query parser is based on <a href="https://www.npmjs.org/package/qs">qs</a>.</li>
 <li><code>x-powered-by</code> Enables the &quot;X-Powered-By: Express&quot; HTTP header, enabled by default.</li>
 <li><p><code>etag</code> Set the ETag response header.</p>
 <table class="doctable" border="1">

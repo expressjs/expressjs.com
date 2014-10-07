@@ -41,7 +41,6 @@ Express application settings can be set using [`app.set()`](#app.set), and retri
       <tr>
         <td>** Function **</td>
         <td> Custom trust implementation. Use this only if you know what you are doing.
-
             <pre><code class="lang-js">app.set('trust proxy', function (ip) {
     if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
     else return false;
@@ -61,7 +60,7 @@ Express application settings can be set using [`app.set()`](#app.set), and retri
 * `view cache` Enables view template compilation caching, enabled in production by default.
 * `view engine` The default engine extension to use when omitted.
 * `views` The view directory path, defaulting to `"process.cwd() + '/views'"`.
-* `query parser` The query parser to use - "simple" or "extended", defaults to "extended". The simple query parser is based on node's native query parser, [querystring](http://nodejs.org/api/querystring.html). The extended query parser is based on [qp](https://www.npmjs.org/package/qs).
+* `query parser` The query parser to use - "simple" or "extended", defaults to "extended". The simple query parser is based on node's native query parser, [querystring](http://nodejs.org/api/querystring.html). The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
 * `x-powered-by` Enables the "X-Powered-By: Express" HTTP header, enabled by default.
 * `etag` Set the ETag response header.
   <table class="doctable" border="1">
