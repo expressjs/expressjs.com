@@ -20,7 +20,6 @@ var methodOverride = require('method-override');
 
 app.use(bodyParser());
 app.use(methodOverride());
-app.use(app.router);
 app.use(function(err, req, res, next){
   // logic
 });
@@ -41,7 +40,6 @@ var methodOverride = require('method-override');
 
 app.use(bodyParser());
 app.use(methodOverride());
-app.use(app.router);
 app.use(logErrors);
 app.use(clientErrorHandler);
 app.use(errorHandler);

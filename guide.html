@@ -167,7 +167,6 @@ var methodOverride = require(&#39;method-override&#39;);
 
 app.use(bodyParser());
 app.use(methodOverride());
-app.use(app.router);
 app.use(function(err, req, res, next){
   // logic
 });
@@ -184,7 +183,6 @@ var methodOverride = require(&#39;method-override&#39;);
 
 app.use(bodyParser());
 app.use(methodOverride());
-app.use(app.router);
 app.use(logErrors);
 app.use(clientErrorHandler);
 app.use(errorHandler);
