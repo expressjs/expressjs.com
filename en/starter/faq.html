@@ -12,48 +12,6 @@ To normalize template engine interfaces and caching, it&#39;s recommended to
 check the <a href="https://github.com/visionmedia/consolidate.js">consolidate.js</a>
 project for support. Unlisted template engines may still support the Express
 signature.</p>
-<h2 id="how-do-i-create-custom-template-engines-in-express-">How do I create custom template engines in Express?</h2>
-<p>Use the <code>app.engine(ext, callback)</code> method to create your own template engine. <code>ext</code> refers to the file extension, <code>callback</code> is the template engine function which accepts the location of the file, the options object, and the callback function, as its parameters.</p>
-<p>The following is an example of implementing a very simple template engine for rendering &quot;.ntl&quot; files.</p>
-<pre><code class="lang-js">var fs = require(&#39;fs&#39;); // this engine requires the fs module
-app.engine(&#39;ntl&#39;, function (filePath, options, callback) { // define the template engine
-  fs.readFile(filePath, function (err, content) {
-    if (err) throw new Error(err);
-    // this is an exteremly simple template engine
-    var rendered = content.toString().replace(&#39;#title#&#39;, &#39;&lt;title&gt;&#39;+ options.title +&#39;&lt;/title&gt;&#39;)
-    .replace(&#39;#message#&#39;, &#39;&lt;h1&gt;&#39;+ options.message +&#39;&lt;/h1&gt;&#39;);
-    return callback(null, rendered);
-  })
-});
-app.set(&#39;views&#39;, &#39;./views&#39;); // specify the views directory
-app.set(&#39;view engine&#39;, &#39;ntl&#39;); // register the template engine
-</code></pre>
-<p>Your app will now be able to render &quot;.ntl&quot; files. Create a file named &quot;index.ntl&quot; in the views directory with the following content.</p>
-<pre><code>#title#
-#message#
-</code></pre><p>Then, create the following route in your app.</p>
-<pre><code class="lang-js">app.get(&#39;/&#39;, function (req, res) {
-  res.render(&#39;index&#39;, { title: &#39;Hey&#39;, message: &#39;Hello there!&#39;});
-})
-</code></pre>
-<p>On making a request to the home page, &quot;index.ntl&quot; will be rendered as HTML.</p>
-<h2 id="how-should-i-structure-my-application-">How should I structure my application?</h2>
-<p>There is no true answer to this question. It is highly dependant
-on the scale of your application and the team involved. To be as
-flexible as possible, Express makes no assumptions in terms of structure.</p>
-<p>Routes and other application-specific logic may live in as many files
-as you wish, in any directory structure you prefer. View the following
-examples for inspiration:</p>
-<ul>
-<li><a href="https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19">Route listings</a></li>
-<li><a href="https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47">Route map</a></li>
-<li><a href="https://github.com/strongloop/express/tree/master/examples/mvc">MVC style controllers</a></li>
-</ul>
-<p>Also, there are third-party extensions for Express, which simplify some of these patterns:</p>
-<ul>
-<li><a href="https://github.com/expressjs/express-resource">Resourceful routing</a></li>
-<li><a href="https://github.com/expressjs/express-namespace">Namespaced routing</a></li>
-</ul>
 <h2 id="how-can-i-serve-statics-from-several-directories-">How can I serve statics from several directories?</h2>
 <p>You may typically use any middleware several times 
 within your application. With the following middleware setup, and a request
