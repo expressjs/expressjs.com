@@ -129,13 +129,10 @@ app.enable(&#39;trust proxy&#39;);
 app.enabled(&#39;trust proxy&#39;);
 // =&gt; true
 </code></pre>
-</section><section><h3 id="app.disable">app.disable(name)</h3><p>Check if setting <code>name</code> is enabled.</p>
-<pre><code class="lang-js">app.enabled(&#39;trust proxy&#39;);
+</section><section><h3 id="app.disable">app.disable(name)</h3><p>Set setting <code>name</code> to <code>false</code>. </p>
+<pre><code class="lang-js">app.disable(&#39;trust proxy&#39;);
+app.get(&#39;trust proxy&#39;);
 // =&gt; false
-
-app.enable(&#39;trust proxy&#39;);
-app.enabled(&#39;trust proxy&#39;);
-// =&gt; true
 </code></pre>
 </section><section><h3 id="app.disabled">app.disabled(name)</h3><p>Check if setting <code>name</code> is disabled.</p>
 <pre><code class="lang-js">app.disabled(&#39;trust proxy&#39;);
