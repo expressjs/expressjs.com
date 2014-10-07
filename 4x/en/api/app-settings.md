@@ -41,7 +41,6 @@ Express application settings can be set using [`app.set()`](#app.set), and retri
       <tr>
         <td>** Function **</td>
         <td> Custom trust implementation. Use this only if you know what you are doing.
-
             <pre><code class="lang-js">app.set('trust proxy', function (ip) {
     if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
     else return false;
