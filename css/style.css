@@ -650,6 +650,7 @@ pre, code {
 
   #description .description {
     font-size: 3em;
+    line-height: .9em;
   }
 
   #install-command {
