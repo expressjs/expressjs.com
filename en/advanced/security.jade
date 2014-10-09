@@ -5,12 +5,13 @@ html
     include ../../includes/head
   body.inner
     .bar
-    section.content 
+    section.content
       header
+        include ../../includes/mobile-menu
         include ../../includes/logo
         - active = 'advanced'
         include ../../includes/menu
       include ../../includes/mixins
-      include:md security.md 
+      include:md security.md
 
     include ../../includes/footer

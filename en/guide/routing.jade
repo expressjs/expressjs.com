@@ -5,12 +5,13 @@ html
     include ../../includes/head
   body.inner
     .bar
-    section.content 
+    section.content
       header
+        include ../../includes/mobile-menu
         include ../../includes/logo
         - active = 'guide'
         include ../../includes/menu
       include ../../includes/mixins
-      include:md routing.md 
+      include:md routing.md
 
     include ../../includes/footer

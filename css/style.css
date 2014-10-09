@@ -533,11 +533,7 @@ pre, code {
   border: 1px solid #b2b2b2;
   padding: 6px 0;
   margin: 0 0 0 1px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-  -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
   box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
 }
 
@@ -597,7 +593,6 @@ pre, code {
 
 @media all and (max-width: 770px) {
 
-
   #home-content {
     margin: 28% 0 0 5%;
     padding-right: 5%;
@@ -631,8 +626,8 @@ pre, code {
     display: none;
   }
 
-  #navbar {
- /*   display: none;*/
+  #navmenu {
+    display: none;
   }
 
   #mobile-menu {
@@ -656,27 +651,102 @@ pre, code {
     height: 98%;
   }
 
+  #home-menu {
+    display: block;
+    position: absolute;
+    top: 7px;
+  }
+
   #navbar {
     padding: 0;
+  }
+
+  #navbar a {
+    font-size: 15px;
+    margin: 0;
+    padding-left: 5%;
   }
 
   #navmenu {
     left: 0;
     padding: 0;
-    top: 56px;
+    top: 55px;
     background: #fff;
     width: 100%;
   }
 
-  #navmenu li {
-    font-size: 25px;
+  #navmenu > li {
     float: none;
     border-bottom: 1px solid #ccc;
     margin: 0;
+    min-height: 40px;
+    position: relative;
+    background: #eee;
+    cursor: pointer;
   }
 
-  .dropit-submenu {
+  #navmenu > li:first-child {
+    display: none;
+  }
+
+  #navmenu > li:hover {
+    background: #e9e9e9;
+  }
+
+  #navmenu > li > ul {
+    position: static;
+  }
+
+  .dropit .dropit-submenu {
+    position: static !important;
+  }
+
+  .dropit .dropit-trigger {
+    padding-top: 7px;
+  }
+
+  .menu ul.dropit-submenu {
+    margin-top: 7px;
+    background: #ddd;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .dropit-trigger > a {
     display: block;
+    margin-bottom: 8px !important;
+  }
+
+  .menu ul.dropit-submenu a {
+    padding: 5px 5px 5px 5%;
+  }
+
+  .dropit-submenu li {
+    border-bottom: 1px solid #cdcdcd;
+  }
+
+  .dropit-submenu a {
+    padding-left: 8% !important;
+  }
+
+  .menu ul {
+    display: block;
+  }
+
+  .active-mobile-menu {
+    border-bottom: none !important;
+  }
+
+  .active-mobile-menu .dropit-trigger {
+    margin-bottom: 0 !important;
+  }
+
+  .menu ul.dropit-submenu a:hover {
+    background: #cccccc;
+    color: #666 !important;
   }
 
 }

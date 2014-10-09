@@ -20,7 +20,7 @@
 }
 
 .dropit .dropit-submenu {
-  position: absolute !important;
+  position: absolute;
   top: 100%;
   left: 0; /* dropdown left or right */
   z-index: 1000;

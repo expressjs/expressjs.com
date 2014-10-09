@@ -5,12 +5,13 @@ html
     include ../../includes/head
   body.inner
     .bar
-    section.content 
+    section.content
       header
+        include ../../includes/mobile-menu
         include ../../includes/logo
         - active = 'starter'
         include ../../includes/menu
       include ../../includes/mixins
-      include:md hello-world.md 
+      include:md hello-world.md
 
     include ../../includes/footer
