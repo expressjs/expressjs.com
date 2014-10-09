@@ -73,8 +73,10 @@ $(function(){
     prev = a;
   })
 
+  // show mobile menu
   $('#nav-button').click(function () {
     $('#navmenu').toggle()
+    $('#overlay').toggle()
   })
 
   // dropdown menu
