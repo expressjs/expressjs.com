@@ -424,13 +424,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', routes.index);
+app.get('/users', user.list);
+
 // development only
+// the error handler is placed after routes
+// if it were above it would not receive errors
+// from app.get() etc
 if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
-
-app.get('/', routes.index);
-app.get('/users', user.list);
 
 app.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
