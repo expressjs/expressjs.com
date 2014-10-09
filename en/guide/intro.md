@@ -61,8 +61,8 @@ hello-world@0.0.1 /private/tmp
     └── mime@1.2.6
 ```
 
-Now to create the application itself! Create a file named `app.js` or `server.js`,
-whichever you prefer, require Express and then create a new application with `express()`:
+Now to create the application itself! Create a file named `server.js`,
+and add the following lines of code to require Express and then create a new application with `express()`:
 
 ```js
 var express = require('express');
@@ -70,26 +70,34 @@ var app = express();
 ```
 
 With the new application instance you can start defining routes via `app.VERB()`,
-in this case "GET /" responding with the "Hello World" string. The `req` and
-`res` are the exact same objects that node provides to you, thus you may invoke
-`req.pipe()`, `req.on('data', callback)` and anything else you
-would do without Express involved.
-
-Express augments these objects to provide you with higher level
-methods (such as `res.send()`, which, among other things,
-adds the Content-Length for you):
+in this case "GET /" responding with the "Hello World" string. 
 
 ```js
-app.get('/hello.txt', function(req, res){
-  res.send('Hello World');
+app.get('/', function(req, res){
+  res.send('Hello World!');
 });
 ```
 
+The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
+`req.pipe()`, `req.on('data', callback)` and anything else you would do without Express involved.
+
+Express augments these objects to provide you with higher-level
+methods such as `res.send()`, which, among other things, adds the Content-Length for you:
+
 Now, to bind and listen for connections, invoke the `app.listen()` method.
-It accepts the same arguments as node's [net.Server#listen()](http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener):
+It accepts the same arguments as Node's [net.Server#listen()](http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener):
 
 ```js
 var server = app.listen(3000, function() {
     console.log('Listening on port %d', server.address().port);
 });
 ```
+At this point, you can run the application:
+```
+$ node server
+```
+In your console, you'll see:
+```
+Listening on port 3000
+```
+Load http://localhost:3000/ in your browser and you'll see a web page that says "Hello World!"

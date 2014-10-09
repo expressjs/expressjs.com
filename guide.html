@@ -48,29 +48,32 @@ hello-world@0.0.1 /private/tmp
   │ └── crc@0.2.0
   └─┬ send@0.0.3
     └── mime@1.2.6
-</code></pre><p>Now to create the application itself! Create a file named <code>app.js</code> or <code>server.js</code>,
-whichever you prefer, require Express and then create a new application with <code>express()</code>:</p>
+</code></pre><p>Now to create the application itself! Create a file named <code>server.js</code>,
+and add the following lines of code to require Express and then create a new application with <code>express()</code>:</p>
 <pre><code class="lang-js">var express = require(&#39;express&#39;);
 var app = express();
 </code></pre>
 <p>With the new application instance you can start defining routes via <code>app.VERB()</code>,
-in this case &quot;GET /&quot; responding with the &quot;Hello World&quot; string. The <code>req</code> and
-<code>res</code> are the exact same objects that node provides to you, thus you may invoke
-<code>req.pipe()</code>, <code>req.on(&#39;data&#39;, callback)</code> and anything else you
-would do without Express involved.</p>
-<p>Express augments these objects to provide you with higher level
-methods (such as <code>res.send()</code>, which, among other things,
-adds the Content-Length for you):</p>
-<pre><code class="lang-js">app.get(&#39;/hello.txt&#39;, function(req, res){
-  res.send(&#39;Hello World&#39;);
+in this case &quot;GET /&quot; responding with the &quot;Hello World&quot; string. </p>
+<pre><code class="lang-js">app.get(&#39;/&#39;, function(req, res){
+  res.send(&#39;Hello World!&#39;);
 });
 </code></pre>
+<p>The <code>req</code> (request) and <code>res</code> (response) are the exact same objects that Node provides, so you can invoke
+<code>req.pipe()</code>, <code>req.on(&#39;data&#39;, callback)</code> and anything else you would do without Express involved.</p>
+<p>Express augments these objects to provide you with higher-level
+methods such as <code>res.send()</code>, which, among other things, adds the Content-Length for you:</p>
 <p>Now, to bind and listen for connections, invoke the <code>app.listen()</code> method.
-It accepts the same arguments as node&#39;s <a href="http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener">net.Server#listen()</a>:</p>
+It accepts the same arguments as Node&#39;s <a href="http://nodejs.org/api/net.html#net_server_listen_port_host_backlog_listeninglistener">net.Server#listen()</a>:</p>
 <pre><code class="lang-js">var server = app.listen(3000, function() {
     console.log(&#39;Listening on port %d&#39;, server.address().port);
 });
 </code></pre>
+<p>At this point, you can run the application:</p>
+<pre><code>$ node server
+</code></pre><p>In your console, you&#39;ll see:</p>
+<pre><code>Listening on port 3000
+</code></pre><p>Load <a href="http://localhost:3000/">http://localhost:3000/</a> in your browser and you&#39;ll see a web page that says &quot;Hello World!&quot;</p>
 </section><section><h3 id='template-engines'>Using template engines with Express</h3>
 
 <p>Before Express can render template files, the following application settings have to be set.</p>
