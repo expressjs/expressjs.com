@@ -317,9 +317,11 @@ body-parser multer errorhandler express@latest jade@latest --save
  <code>express</code> object.  You must install their alternatives
  manually and load them in the app.</p>
 </li>
-<li><p>You no longer need to load <code>app.router</code> and in fact it
- is not a valid Express 4 app object, so remove
+<li><p>You no longer need to load <code>app.router</code>.
+ It is not a valid Express 4 app object, so remove
  <code>app.use(app.router);</code></p>
+</li>
+<li><p>Make sure the middleware are loaded in the right order - load <code>errorHandler</code> after loading the app routes.</p>
 </li>
 <li><p>Start the app with <code>app.listen()</code> instead of
  <code>http.createServer</code>.</p>
@@ -384,13 +386,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 app.use(express.static(path.join(__dirname, &#39;public&#39;)));
 
-// development only
+app.get(&#39;/&#39;, routes.index);
+app.get(&#39;/users&#39;, user.list);
+
+// error handling middleware should be loaded after the loading the routes
 if (&#39;development&#39; == app.get(&#39;env&#39;)) {
   app.use(errorHandler());
 }
-
-app.get(&#39;/&#39;, routes.index);
-app.get(&#39;/users&#39;, user.list);
 
 app.listen(app.get(&#39;port&#39;), function(){
   console.log(&#39;Express server listening on port &#39; + app.get(&#39;port&#39;));
