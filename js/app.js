@@ -74,7 +74,7 @@ $(function(){
   })
 
   // show mobile menu
-  $('#nav-button').click(function () {
+  $('#nav-button, #overlay').click(function () {
     $('#navmenu').toggle()
     $('#overlay').toggle()
   })
