@@ -657,7 +657,7 @@ pre, code {
   }
 
   #logo {
-    margin-left: 27%;
+    margin-left: 26%;
   }
 
   #logo .express {
@@ -751,6 +751,9 @@ pre, code {
     border: none;
     border-radius: 0;
     box-shadow: none;
+    max-height: 190px;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .dropit-trigger > a {
@@ -767,7 +770,7 @@ pre, code {
   }
 
   .dropit-submenu a {
-    padding-left: 8% !important;
+    padding-left: 10% !important;
   }
 
   .menu ul {
@@ -803,6 +806,10 @@ pre, code {
 }
 
 @media all and (max-width: 320px) {
+
+  #logo {
+    margin-left: 25%;
+  }
 
   #install-command {
     width: 250px;
