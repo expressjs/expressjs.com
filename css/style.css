@@ -593,6 +593,10 @@ pre, code {
 
 @media all and (max-width: 770px) {
 
+  .content {
+    padding-right: 0;
+  }
+
   #home-content {
     margin: 28% 0 0 5%;
     padding-right: 5%;
