@@ -44,7 +44,7 @@ strong, th {
 }
 
 .inner {
-  padding-top: 19%;
+  padding-top: 80px;
 }
 
 #overlay {
@@ -601,9 +601,19 @@ pre, code {
 }
 
 
+
+
+
+
+
+
 /* responsive */
 
 @media all and (max-width: 770px) {
+
+  .inner {
+    padding-top: 19%;
+  }
 
   h1 {
     font-size: 22px;
