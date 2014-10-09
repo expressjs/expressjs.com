@@ -353,11 +353,13 @@ Make the following changes to app.js:
     `express` object.  You must install their alternatives
     manually and load them in the app.
 
-3. You no longer need to load `app.router` and in fact it
-    is not a valid Express 4 app object, so remove
+3. You no longer need to load `app.router`.
+    It is not a valid Express 4 app object, so remove
     `app.use(app.router);`
 
-4. Start the app with `app.listen()` instead of
+4. Make sure the middleware are loaded in the right order - load `errorHandler` after loading the app routes.
+
+5. Start the app with `app.listen()` instead of
     `http.createServer`.
 
 <h4 id="">Version 4 app</h4>
@@ -427,10 +429,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-// development only
-// the error handler is placed after routes
-// if it were above it would not receive errors
-// from app.get() etc
+// error handling middleware should be loaded after the loading the routes
 if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
