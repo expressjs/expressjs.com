@@ -14,10 +14,10 @@ With an optional mount path, middleware can be loaded at the application level o
 Also, a series of middleware functions can be loaded together, creating a sub-stack of middleware system at a mount point.
 
 An Express application can use the following kinds of middleware:
- - Application-level middleware
- - Router-level middleware
- - Built-in middleware
- - Third-party middleware
+ - [Application-level middleware](#middleware.application)
+ - [Router-level middleware](#middleware.router)
+ - [Built-in middleware](#middleware.built-in)
+ - [Third-party middleware](#middleware.third-party)
 
 <h3 id='middleware.application'>Application level middleware</h3>
 
@@ -145,3 +145,75 @@ router.get('/user/:id', function (req, res, next) {
 app.use('/', router);
 ```
 
+<h3 id='middleware.third-party'>Third-party middleware</h3>
+
+Express is a routing and middleware web framework with minimal functionality of its own. Functionality to Express apps are added via third-party middleware.
+
+Install the node module for the required functionality and loaded it in your app at the application level or at the router level.
+
+In the following example, `cookie-parser`, a cookie parsing middleware is installed and loaded in the app.
+
+```
+$ npm install cookie-parser
+```
+
+```js
+var express = require('express');
+var app = express();
+var cookieParser = require('cookie-parser');
+
+// load the cookie parsing middleware
+app.use(cookieParser);
+```
+
+See [Third-party middleware](../resources/middleware.html) for a partial list of third-party middleware commonly used with Express.
+
+<h3 id='middleware.built-in'>Built-in middleware</h3>
+
+As of 4.x, Express no longer depends on Connect. Except for `express.static`, all of Express' previously included middleware are now in separate repos.
+Please view [the list of middleware](https://github.com/senchalabs/connect#middleware).
+
+<h4 id='express.static'>express.static(root, [options])</h4>
+
+`express.static` is based on [serve-static](https://github.com/expressjs/serve-static), and is responsible for serving the static assets of an Express application.
+
+The `root` argument refers to the root directory from which the static assets are to be served.
+
+The optional `options` object can have the following properties.
+
+* `dotfiles` option for serving dotfiles. Possible values are "allow", "deny", "ignore"; defaults to "ignore".
+* `etag` enable or disable etag generation, defaults to `true`.
+* `extensions` sets file extension fallbacks, defaults to `false`.
+* `index` sends directory index file, defaults to "index.html". Set `false` to disable directory indexing.
+* `lastModified` enabled by default, sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.
+* `maxAge` sets the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms), defaults to 0.
+* `redirect` redirects to trailing "/" when the pathname is a dir, defaults to `true`.
+* `setHeaders` function for setting HTTP headers to serve with the file.
+
+Here is an example of using the `express.static` middleware with an elaborate options object.
+
+```js
+var options = {
+  dotfiles: 'ignore',
+  etag: false,
+  extensions: ['htm', 'html'],
+  index: false,
+  maxAge: '1d',
+  redirect: false,
+  setHeaders: function (res, path) {
+    res.set('x-timestamp', Date.now())
+  }
+};
+
+app.use(express.static('public', options));
+```
+
+You can have more than one static directory per app.
+
+```js
+app.use(express.static('public'));
+app.use(express.static('uploads'));
+app.use(express.static('files'));
+```
+
+For more details about `serve-static` and its options, visit the [serve-static](https://github.com/expressjs/serve-static) documentation.

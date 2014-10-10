@@ -12,10 +12,10 @@
 Also, a series of middleware functions can be loaded together, creating a sub-stack of middleware system at a mount point.</p>
 <p>An Express application can use the following kinds of middleware:</p>
 <ul>
-<li>Application-level middleware</li>
-<li>Router-level middleware</li>
-<li>Built-in middleware</li>
-<li>Third-party middleware</li>
+<li><a href="#middleware.application">Application-level middleware</a></li>
+<li><a href="#middleware.router">Router-level middleware</a></li>
+<li><a href="#middleware.built-in">Built-in middleware</a></li>
+<li><a href="#middleware.third-party">Third-party middleware</a></li>
 </ul>
 <h3 id='middleware.application'>Application level middleware</h3>
 
@@ -125,6 +125,60 @@ router.get(&#39;/user/:id&#39;, function (req, res, next) {
 // mount the router on the app
 app.use(&#39;/&#39;, router);
 </code></pre>
+<h3 id='middleware.third-party'>Third-party middleware</h3>
+
+<p>Express is a routing and middleware web framework with minimal functionality of its own. Functionality to Express apps are added via third-party middleware.</p>
+<p>Install the node module for the required functionality and loaded it in your app at the application level or at the router level.</p>
+<p>In the following example, <code>cookie-parser</code>, a cookie parsing middleware is installed and loaded in the app.</p>
+<pre><code>$ npm install cookie-parser
+</code></pre><pre><code class="lang-js">var express = require(&#39;express&#39;);
+var app = express();
+var cookieParser = require(&#39;cookie-parser&#39;);
+
+// load the cookie parsing middleware
+app.use(cookieParser);
+</code></pre>
+<p>See <a href="../resources/middleware.html">Third-party middleware</a> for a partial list of third-party middleware commonly used with Express.</p>
+<h3 id='middleware.built-in'>Built-in middleware</h3>
+
+<p>As of 4.x, Express no longer depends on Connect. Except for <code>express.static</code>, all of Express&#39; previously included middleware are now in separate repos.
+Please view <a href="https://github.com/senchalabs/connect#middleware">the list of middleware</a>.</p>
+<h4 id='express.static'>express.static(root, [options])</h4>
+
+<p><code>express.static</code> is based on <a href="https://github.com/expressjs/serve-static">serve-static</a>, and is responsible for serving the static assets of an Express application.</p>
+<p>The <code>root</code> argument refers to the root directory from which the static assets are to be served.</p>
+<p>The optional <code>options</code> object can have the following properties.</p>
+<ul>
+<li><code>dotfiles</code> option for serving dotfiles. Possible values are &quot;allow&quot;, &quot;deny&quot;, &quot;ignore&quot;; defaults to &quot;ignore&quot;.</li>
+<li><code>etag</code> enable or disable etag generation, defaults to <code>true</code>.</li>
+<li><code>extensions</code> sets file extension fallbacks, defaults to <code>false</code>.</li>
+<li><code>index</code> sends directory index file, defaults to &quot;index.html&quot;. Set <code>false</code> to disable directory indexing.</li>
+<li><code>lastModified</code> enabled by default, sets the <code>Last-Modified</code> header to the last modified date of the file on the OS. Set <code>false</code> to disable it.</li>
+<li><code>maxAge</code> sets the max-age property of the Cache-Control header in milliseconds or a string in <a href="https://www.npmjs.org/package/ms">ms format</a>, defaults to 0.</li>
+<li><code>redirect</code> redirects to trailing &quot;/&quot; when the pathname is a dir, defaults to <code>true</code>.</li>
+<li><code>setHeaders</code> function for setting HTTP headers to serve with the file.</li>
+</ul>
+<p>Here is an example of using the <code>express.static</code> middleware with an elaborate options object.</p>
+<pre><code class="lang-js">var options = {
+  dotfiles: &#39;ignore&#39;,
+  etag: false,
+  extensions: [&#39;htm&#39;, &#39;html&#39;],
+  index: false,
+  maxAge: &#39;1d&#39;,
+  redirect: false,
+  setHeaders: function (res, path) {
+    res.set(&#39;x-timestamp&#39;, Date.now())
+  }
+};
+
+app.use(express.static(&#39;public&#39;, options));
+</code></pre>
+<p>You can have more than one static directory per app.</p>
+<pre><code class="lang-js">app.use(express.static(&#39;public&#39;));
+app.use(express.static(&#39;uploads&#39;));
+app.use(express.static(&#39;files&#39;));
+</code></pre>
+<p>For more details about <code>serve-static</code> and its options, visit the <a href="https://github.com/expressjs/serve-static">serve-static</a> documentation.</p>
 </section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
