@@ -9,6 +9,7 @@ HTML = index.html \
   en/resources/community.html \
   en/resources/applications.html \
   en/resources/glossary.html \
+  en/resources/middleware.html \
   en/starter/faq.html \
   en/starter/generator.html \
   en/starter/hello-world.html \
@@ -19,7 +20,7 @@ HTML = index.html \
   en/guide/debugging.html \
   en/guide/behind-proxies.html \
   en/guide/migrating-4.html \
-  en/guide/using-components.html \
+  en/guide/using-middleware.html \
   en/guide/using-template-engines.html \
   en/guide/database-integration.html \
   en/advanced/security.html \

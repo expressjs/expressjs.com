@@ -8,18 +8,6 @@ include mixins
       a(href='/', class=active == 'home' ? 'active' : '') Home
 
     li
-      ul#application-menu.menu
-        li
-          a(href='/4x/api.html', class=active == 'api' ? 'active' : '') API reference
-          ul
-            li
-              a(href='/4x/api.html') 4.x
-            li
-              a(href='/3x/api.html') 3.x
-            li
-              a(href='/2x/') 2.x (deprecated)
-
-    li
       ul#getting-started-menu.menu
         li
           a(href='/en/starter/installing.html', class=active == 'starter' ? 'active' : '') Getting started
@@ -51,19 +39,29 @@ include mixins
             li
               a(href='/en/guide/migrating-4.html') Moving to Express 4
             li
-              a(href='/en/guide/using-components.html') Using components
+              a(href='/en/guide/using-middleware.html') Using middleware
             li
               a(href='/en/guide/using-template-engines.html') Using template engines
             li
               a(href='/en/guide/database-integration.html') Database integration
 
     li
+      ul#application-menu.menu
+        li
+          a(href='/4x/api.html', class=active == 'api' ? 'active' : '') API reference
+          ul
+            li
+              a(href='/4x/api.html') 4.x
+            li
+              a(href='/3x/api.html') 3.x
+            li
+              a(href='/2x/') 2.x (deprecated)
+
+    li
       ul#advanced-topics-menu.menu
         li
           a(href='/en/advanced/express-components.html', class=active == 'advanced' ? 'active' : '') Advanced topics
           ul
-            li
-              a(href='/en/advanced/express-components.html') Express components
             li
               a(href='/en/advanced/developing-template-engines.html') Template engines
             li
@@ -79,8 +77,10 @@ include mixins
             li
               a(href='/en/resources/glossary.html') Glossary
             li
+              a(href='/en/resources/middleware.html') Middleware
+            li
               a(href='/en/resources/applications.html') Applications
             li
               a(href='/en/resources/community.html') Community
             li
-              a(href='/en/resources/books.html') Books
+              a(href='/en/resources/books.html') Books and blogs
