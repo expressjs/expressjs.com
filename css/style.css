@@ -56,6 +56,7 @@ strong, th {
   width: 100%;
   height: 100%;
   display: none;
+  z-index: 1;
 }
 
 #home-content {
@@ -98,7 +99,7 @@ li code {
 
 #api-doc h2 {
   font-weight: bold;
-  font-size: 2.3em;
+  font-size: 21px;
   margin-bottom: 20px;
 }
 
@@ -106,15 +107,17 @@ li code {
   padding-top: 10px;
   padding-bottom: 5px;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 18px;
 }
 
 #api-doc h4 {
-  font-size: 1.1em;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 #api-doc h5 {
-  font-size: 1.0em;
+  font-size: 14em;
+  font-weight: bold;
   color: #666;
 }
 
@@ -230,6 +233,7 @@ pre {
 
 code {
   overflow: scroll;
+  word-break: break-all;
 }
 
 code .comment { color: #888 }
@@ -415,9 +419,6 @@ html[xmlns] .clearfix {
   margin: 20px 0
 }
 
-ul.doclist {
-  width: 500px;
-}
 
 /* doc boxes */
 
@@ -524,6 +525,7 @@ pre, code {
   right: 125px;
   top: 15px;
   padding-left: 5%;
+  z-index: 1000;
 }
 
 #navmenu > li {
@@ -615,19 +617,24 @@ pre, code {
     padding-top: 19%;
   }
 
+  ul {
+    padding-left: 5%;
+  }
+
   h1 {
     font-size: 22px;
-    line-height: 25px;
+    line-height: 26px;
   }
 
   h2 {
     font-size: 18px;
-    line-height: 22px;
+    line-height: 25px;
   }
 
   h3 {
     font-size: 16px;
-    line-height: 18px;
+    line-height: 23px;
+    word-break: break-all;
   }
 
   h4 {

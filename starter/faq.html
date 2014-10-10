@@ -1,0 +1,94 @@
+<!DOCTYPE html><html><head><title>FAQ</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script src="/js/app.js"></script><script src="/js/retina.js"></script><script src="/js/dropit.js"></script><script src="/js/prism.js"></script></head><body class="inner"><section class="content"><header><div id="mobile-menu"><a href="https://github.com/strongloop/express?_ga=1.39756451.1408343404.1407943788" title="Fork me on GitHub" id="fork-button"><div class="fa fa-code-fork fa-2x"></div></a><div id="nav-button" class="fa fa-bars fa-2x button"></div></div><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/" id="home-menu">Home</a></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="getting-started-menu" class="menu"><li><a href="/starter/installing.html" class="active">Getting started</a><ul><li><a href="/starter/installing.html">Installing</a></li><li><a href="/starter/generator.html">Express generator</a></li><li><a href="/starter/hello-world.html">Hello world</a></li><li><a href="/starter/basic-routing.html">Basic routing tutorial</a></li><li><a href="/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/guide/routing.html">Guide</a><ul><li><a href="/guide/routing.html">Routing</a></li><li><a href="/guide/error-handling.html">Error handling</a></li><li><a href="/guide/debugging.html">Debugging Express</a></li><li><a href="/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/guide/using-components.html">Using components</a></li><li><a href="/guide/using-template-engines.html">Using template engines</a></li><li><a href="/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/advanced/express-components.html">Advanced topics</a><ul><li><a href="/advanced/express-components.html">Express components</a></li><li><a href="/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/advanced/security.html">Security</a></li><li><a href="/advanced/performance.html">Performance</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/resources/glossary.html">Resources</a><ul><li><a href="/resources/glossary.html">Glossary</a></li><li><a href="/resources/applications.html">Applications</a></li><li><a href="/resources/community.html">Community</a></li><li><a href="/resources/books.html">Books</a></li></ul></li></ul></li></ul></div></header><div id="overlay"></div><h1>FAQ</h1><div class="vspace"></div><h2 id="how-should-i-structure-my-application-">How should I structure my application?</h2>
+<p>There is no true answer to this question. It is highly dependant
+on the scale of your application and the team involved. To be as
+flexible as possible, Express makes no assumptions in terms of structure.</p>
+<p>Routes and other application-specific logic may live in as many files
+as you wish, in any directory structure you prefer. View the following
+examples for inspiration:</p>
+<ul>
+<li><a href="https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19">Route listings</a></li>
+<li><a href="https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47">Route map</a></li>
+<li><a href="https://github.com/strongloop/express/tree/master/examples/mvc">MVC style controllers</a></li>
+</ul>
+<p>Also, there are third-party extensions for Express, which simplify some of these patterns:</p>
+<ul>
+<li><a href="https://github.com/expressjs/express-resource">Resourceful routing</a></li>
+<li><a href="https://github.com/expressjs/express-namespace">Namespaced routing</a></li>
+</ul>
+<h2 id="how-do-i-define-models-">How do I define models?</h2>
+<p>Express has no notion of a database at all. This is
+left up to third-party node modules, allowing you to
+interface with nearly any database.</p>
+<h2 id="how-can-i-authenticate-users-">How can I authenticate users?</h2>
+<p>This is another opinionated area that Express does not
+venture into, you may use any authentication scheme you wish.
+For a simple username / password scheme view this <a href="https://github.com/strongloop/express/tree/master/examples/auth">example</a>.</p>
+<h2 id="which-template-engines-does-express-support-">Which template engines does Express support?</h2>
+<p>Anything that can conform with the <code>(path, locals, callback)</code> signature.
+To normalize template engine interfaces and caching, it&#39;s recommended to
+check the <a href="https://github.com/visionmedia/consolidate.js">consolidate.js</a>
+project for support. Unlisted template engines may still support the Express
+signature.</p>
+<h2 id="how-can-i-serve-statics-from-several-directories-">How can I serve statics from several directories?</h2>
+<p>You may typically use any middleware several times 
+within your application. With the following middleware setup, and a request
+for &quot;GET /javascripts/jquery.js&quot;, the first check would be &quot;./public/javascripts/jquery.js&quot;;
+if it does not exist, then the subsequent middleware will check &quot;./files/javascripts/jquery.js&quot;.</p>
+<pre><code class="lang-js">app.use(express.static(&#39;public&#39;));
+app.use(express.static(&#39;files&#39;));
+</code></pre>
+<h2 id="how-can-i-prefix-a-pathname-for-serving-statics-">How can I prefix a pathname for serving statics?</h2>
+<p>Connect&#39;s generic &quot;mounting&quot; feature allows you to define
+the pathname &quot;prefix&quot; to which the middleware will be invoked.
+This effectively behaves as if that prefix string was never
+part of the path. Suppose you wanted &quot;GET /files/javascripts/jquery.js&quot;.
+You could mount the middleware at &quot;/files&quot;, exposing &quot;/javascripts/jquery.js&quot;
+as the <code>req.url</code>, allowing the middleware to serve the file:</p>
+<pre><code class="lang-js">app.use(&#39;/public&#39;, express.static(&#39;public&#39;));
+</code></pre>
+<h2 id="how-do-you-handle-404s-">How do you handle 404s?</h2>
+<p>In Express, 404s are not the result of an error. Therefore,
+the error-handler middleware will not capture 404s. This is
+because a 404 is simply the absence of additional work to do;
+in other words, Express has executed all middleware / routes,
+and found that none of them responded. All you need to
+do is add a middleware at the very bottom (below all others)
+to handle a 404:</p>
+<pre><code class="lang-js">app.use(function(req, res, next){
+  res.send(404, &#39;Sorry cant find that!&#39;);
+});
+</code></pre>
+<h2 id="how-do-you-setup-an-error-handler-in-express-">How do you setup an error handler in Express?</h2>
+<p>Error-handling middleware is defined just like regular middleware,
+except that it must be defined with an arity of 4 (that is the signature
+<code>(err, req, res, next)</code>):</p>
+<pre><code class="lang-js">app.use(function(err, req, res, next){
+  console.error(err.stack);
+  res.send(500, &#39;Something broke!&#39;);
+});
+</code></pre>
+<p>View <a href="/guide.html#error-handling">error-handling</a> for more information.</p>
+<h2 id="how-do-i-render-plain-html-">How do I render plain HTML?</h2>
+<p>You don&#39;t! There&#39;s no need to &quot;render&quot; HTML with <code>res.render()</code>,
+if you have a specific file you should use <code>res.sendFile()</code>, or
+if you are serving many assets from a directory use the <code>express.static()</code>
+middleware.</p>
+<h2 id="how-do-i-migrate-my-express-2-x-application-">How do I migrate my Express 2.x application?</h2>
+<p>Express 2x will likely be supported through to node 1.0, so there&#39;s
+no immediate reason to update beyond the refactoring and API changes
+that Express 3x introduces, so if you&#39;re happy with 2x feel free
+to remain on that branch. For migration information visit the
+<a href="https://github.com/strongloop/express/wiki/Migrating-from-2.x-to-3.x">migration</a>
+wiki page, or view a <a href="https://github.com/strongloop/express/wiki/New-features-in-3.x">list of changes</a> made in 3.x.</p>
+<h2 id="how-big-is-the-express-codebase-">How big is the Express codebase?</h2>
+<p>Express is a very small framework. The 3.0.0 release is only
+932 SLOC, and the mandatory portion of Connect which Express
+is built on is only 267 SLOC. The optional middleware bundled
+with Connect add an additional 1143 SLOC, and are lazy loaded
+upon use.</p>
+</section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5XL76H');
+</script><a id="top" href="#"><img src="/images/arrow.png"></a><footer><div id="footer-content">&copy; 2012 TJ Holowaychuk. All rights reserved.</div></footer></body></html>

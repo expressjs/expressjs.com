@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title FAQ
+    include ../includes/head
+  body.inner
+    section.content
+      header
+        include ../includes/mobile-menu
+        include ../includes/logo
+        - active = 'starter'
+        include ../includes/menu
+      include ../includes/mixins
+      #overlay
+
+      h1 FAQ
+      .vspace
+      include:md faq.md
+
+    include ../includes/footer
