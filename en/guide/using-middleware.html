@@ -1,0 +1,133 @@
+<!DOCTYPE html><html><head><title>Using middleware</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script src="/js/app.js"></script><script src="/js/retina.js"></script><script src="/js/dropit.js"></script><script src="/js/prism.js"></script></head><body class="inner"><div class="bar"></div><section class="content"> <header><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/">Home</a></li><li><ul id="getting-started-menu" class="menu"><li><a href="/en/starter/installing.html">Getting started</a><ul><li><a href="/en/starter/installing.html">Installing</a></li><li><a href="/en/starter/generator.html">Express generator</a></li><li><a href="/en/starter/hello-world.html">Hello World!</a></li><li><a href="/en/starter/basic-routing.html">Basic routing tutorial</a></li><li><a href="/en/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/en/guide/routing.html" class="active">Guide</a><ul><li><a href="/en/guide/routing.html">Routing</a></li><li><a href="/en/guide/error-handling.html">Error handling</a></li><li><a href="/en/guide/debugging.html">Debugging Express</a></li><li><a href="/en/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/en/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/en/guide/using-middleware.html">Using middleware</a></li><li><a href="/en/guide/using-template-engines.html">Using template engines</a></li><li><a href="/en/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/en/advanced/express-components.html">Advanced topics</a><ul><li><a href="/en/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/en/advanced/security.html">Security</a></li><li><a href="/en/advanced/performance.html">Performance</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/en/resources/glossary.html">Resources</a><ul><li><a href="/en/resources/glossary.html">Glossary</a></li><li><a href="/en/resources/middleware.html">Middleware</a></li><li><a href="/en/resources/applications.html">Applications</a></li><li><a href="/en/resources/community.html">Community</a></li><li><a href="/en/resources/books.html">Books and blogs</a></li></ul></li></ul></li></ul></div></header><h1 id="using-middleware">Using middleware</h1>
+<p>An Express application is essentially a series of middleware, executed in the order they occur.  </p>
+<p>Middleware is a function with access to the request object (<code>req</code>), the response object (<code>res</code>), and the next middleware in line in the request-response cycle of an Express application, commonly denoted by a variable named <code>next</code>.  Middleware can:</p>
+<ul>
+<li>Execute any code.</li>
+<li>Make changes to the request and the reponse objects.</li>
+<li>End the request-response cycle.</li>
+<li>Call the next middleware in the stack. </li>
+</ul>
+<p>If the current middleware does not end the request-response cycle, it must call <code>next()</code> to pass control to the next middleware, otherwise the request will be left hanging.</p>
+<p>With an optional mount path, middleware can be loaded at the application level or at the router level.
+Also, a series of middleware functions can be loaded together, creating a sub-stack of middleware system at a mount point.</p>
+<p>An Express application can use the following kinds of middleware:</p>
+<ul>
+<li>Application-level middleware</li>
+<li>Router-level middleware</li>
+<li>Built-in middleware</li>
+<li>Third-party middleware</li>
+</ul>
+<h3 id='middleware.application'>Application level middleware</h3>
+
+<p>Application level middleware are bound to an instance of <code>express</code>, using <code>app.use()</code> and <code>app.VERB()</code>.</p>
+<pre><code class="lang-js">var app = express();
+
+// a middleware with no mount path; gets executed for every request to the app
+app.use(function (req, res, next) {
+  console.log(&#39;Time:&#39;, Date.now());
+  next();
+});
+
+// a middleware mounted on /user/:id; will be executed for any type of HTTP request to /user/:id
+app.use(&#39;/user/:id&#39;, function (req, res, next) {
+  console.log(&#39;Request Type:&#39;, req.method);
+  next();
+});
+
+// a route and its handler function (middleware system) which handles GET requests to /user/:id
+app.get(&#39;/user/:id&#39;, function (req, res, next) {
+  res.send(&#39;USER&#39;);
+});
+</code></pre>
+<p>Here is an example of loading a series of middleware at a mount point with a mount path.</p>
+<pre><code class="lang-js">// a middleware sub-stack which prints request info for any type of HTTP request to /user/:id
+app.use(&#39;/user/:id&#39;, function(req, res, next) {
+  console.log(&#39;Request URL:&#39;, req.originalUrl);
+  next();
+}, function (req, res, next) {
+  console.log(&#39;Request Type:&#39;, req.method);
+  next();
+});
+</code></pre>
+<p>Route handlers, being a middleware system, makes it possible to define multiple routes for a path. In the example below, two routes are defined for GET requests to <code>/user/:id</code>. The second router will not cause any problems, however it will never get called, because the first route ends the request-response cycle.</p>
+<pre><code class="lang-js">// a middleware sub-stack which handles GET requests to /user/:id
+app.get(&#39;/user/:id&#39;, function (req, res, next) {
+  console.log(&#39;ID:&#39;, req.params.id);
+  next();
+}, function (req, res, next) {
+  res.send(&#39;User Info&#39;);
+});
+
+// handler for /user/:id which prints the user id
+app.get(&#39;/user/:id&#39;, function (req, res, next) {
+  res.end(req.params.id);
+});
+</code></pre>
+<p>If you need to skip the rest of the middleware from a router middleware stack, call <code>next(&#39;route&#39;)</code> to pass on the control to the next route. Note: <code>next(&#39;route&#39;)</code> will work only in middleware loaded using <code>app.VERB()</code> or <code>router.VERB()</code>.</p>
+<pre><code class="lang-js">// a middleware sub-stack which handles GET requests to /user/:id
+app.get(&#39;/user/:id&#39;, function (req, res, next) {
+  // if user id is 0, skip to the next route
+  if (req.params.id == 0) next(&#39;route&#39;);
+  // else pass the control to the next middleware in this stack
+  else next(); // 
+}, function (req, res, next) {
+  // render a regular page
+  res.render(&#39;regular&#39;);
+});
+
+// handler for /user/:id which renders a special page
+app.get(&#39;/user/:id&#39;, function (req, res, next) {
+  res.render(&#39;special&#39;);
+});
+</code></pre>
+<h3 id='middleware.router'>Router level middleware</h3>
+
+<p>Router level middleware work just like application level middleware except they are bound to an instance of <code>express.Router()</code>.</p>
+<pre><code class="lang-js">var router = express.Router();
+</code></pre>
+<p>Router level middleware are loaded using <code>router.use()</code> and <code>router.VERB()</code>.</p>
+<p>The middleware system created at the application level in the example above, can be replicated at the router level using the following code.</p>
+<pre><code class="lang-js">var app = express();
+var router = express.Router();
+
+// a middleware with no mount path, gets executed for every request to the router
+router.use(function (req, res, next) {
+  console.log(&#39;Time:&#39;, Date.now());
+  next();
+});
+
+// a middleware sub-stack shows request info for any type of HTTP request to /user/:id
+router.use(&#39;/user/:id&#39;, function(req, res, next) {
+  console.log(&#39;Request URL:&#39;, req.originalUrl);
+  next();
+}, function (req, res, next) {
+  console.log(&#39;Request Type:&#39;, req.method);
+  next();
+});
+
+// a middleware sub-stack which handles GET requests to /user/:id
+router.get(&#39;/user/:id&#39;, function (req, res, next) {
+  // if user id is 0, skip to the next router
+  if (req.params.id == 0) next(&#39;route&#39;);
+  // else pass the control to the next middleware in this stack
+  else next(); // 
+}, function (req, res, next) {
+  // render a regular page
+  res.render(&#39;regular&#39;);
+});
+
+// handler for /user/:id which renders a special page
+router.get(&#39;/user/:id&#39;, function (req, res, next) {
+  console.log(req.params.id);
+  res.render(&#39;special&#39;);
+});
+
+// mount the router on the app
+app.use(&#39;/&#39;, router);
+</code></pre>
+</section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5XL76H');
+</script><a id="top" href="#"><img src="/images/arrow.png"></a><footer><div id="footer-content">&copy; 2012 TJ Holowaychuk. All rights reserved.</div></footer></body></html>
