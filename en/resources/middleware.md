@@ -47,5 +47,6 @@ are replaced by an alternative module, or should be superseded by a better modul
     - [st](https://github.com/isaacs/st)
     - [connect-static](https://github.com/andrewrk/connect-static)
 
-For more middleware, see [http-framework](https://github.com/Raynos/http-framework/wiki/Modules).
- 
+For more middleware, see also:
+ - [http-framework](https://github.com/Raynos/http-framework/wiki/Modules).
+ - [expressjs](https://github.com/expressjs)
