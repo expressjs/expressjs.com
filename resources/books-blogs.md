@@ -19,7 +19,7 @@ add a link to your book, then submit a pull request (GitHub login required).  Fo
 ## Blogs
 
 - [StrongLoop Blog: Express category](http://strongloop.com/strongblog/category/express/)
-- [HackSparrow Blog: Express category](http://www.hacksparrow.com/category/express-js)
+- [Hage Yaapa's Blog: Express category](http://www.hacksparrow.com/category/express-js)
 
 ###Add your blog here!
 

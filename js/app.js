@@ -5,9 +5,6 @@ $(function(){
   var height = window.innerHeight;
   var doc = $(document);
 
-  // .onload
-  $('html').addClass('onload');
-
   // top link
   $('#top').click(function(e){
     $('html, body').animate({scrollTop : 0}, 200);

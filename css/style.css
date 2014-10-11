@@ -30,7 +30,7 @@ h1, h2, h3 {
   -webkit-font-smoothing: antialiased;
 }
 
-.inner h1 {
+.content h1 {
   margin-bottom: 20px;
 }
 
@@ -47,10 +47,6 @@ strong, th {
   color: #353535;
 }
 
-.inner {
-  padding-top: 80px;
-}
-
 #overlay {
   position: fixed;
   left: 0;
@@ -64,7 +60,7 @@ strong, th {
 }
 
 #home-content {
-  margin: 9% 0 3% 5%;
+  margin: 130px 0 3% 5%;
   max-width: 900px;
   padding-right: 9%;
 }
@@ -79,7 +75,7 @@ strong, th {
 }
 
 .content {
-  margin: 0 3% 7%;
+  margin: 90px 3% 7%;
   max-width: 1090px;
   padding-right: 140px;
 }
@@ -156,7 +152,6 @@ a {
   font: 25px "Helvetica Neue", "Open Sans", sans-serif;
   font-weight: 100;
   color: #444;
-  width: 100%;
 }
 
 #description .express {
@@ -168,7 +163,7 @@ a {
 }
 
 #description {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -189,7 +184,7 @@ a {
 }
 
 #intro {
-  margin-bottom: 0;
+  margin-bottom: 3%;
   margin-left: 5%;
 }
 
@@ -307,10 +302,6 @@ html[xmlns] .clearfix {
 #boxes {
   font-size: 12px;
   margin-top: 30px;
-}
-
-.inner #boxes {
-  font-size: 13px;
 }
 
 #boxes h3 {
@@ -478,7 +469,7 @@ pre, code {
 #loopback {
   display: block;
   position: absolute;
-  right: 10px;
+  right: 2%;
   top: 11px;
 }
 
@@ -527,7 +518,7 @@ footer {
 
 #navbar {
   padding-left: 10%;
-  max-width: 1177px;
+  max-width: 1193px;
   position: relative;
 }
 
@@ -641,14 +632,6 @@ footer {
 
 @media all and (max-width: 770px) {
 
-  #loopback {
-    display: none;
-  }
-
-  .inner {
-    padding-top: 19%;
-  }
-
   ul {
     padding-left: 5%;
   }
@@ -681,11 +664,10 @@ footer {
 
   .content {
     padding-right: 0;
-    margin-top: 0;
   }
 
   #home-content {
-    margin: 28% 0 0 5%;
+    margin: 100px 0 0 5%;
     padding-right: 5%;
   }
 
@@ -694,7 +676,7 @@ footer {
   }
 
   #description .express {
-    font-size: 3em;
+    display: none;
   }
 
   #description .description {
@@ -704,10 +686,17 @@ footer {
 
   #install-command {
     width: 100%;
+    margin-right: 5%;
   }
 
   #logo {
-    margin-left: 26%;
+    position: static;
+    width: 100%;
+  }
+
+  #logo a {
+    display: table !important;
+    margin: 0 auto;
   }
 
   #logo .express {
@@ -718,16 +707,8 @@ footer {
     display: none;
   }
 
-  #navmenu {
-    display: none;
-  }
-
   #mobile-menu {
     display: block;
-  }
-
-  #navmenu {
-    top: 70px;
   }
 
   #boxes div {
@@ -758,9 +739,10 @@ footer {
   #navmenu {
     left: 0;
     padding: 0;
-    top: 55px;
+    top: 2px;
     background: #fff;
     width: 100%;
+    display: none;
   }
 
   #navmenu > li {
@@ -845,12 +827,12 @@ footer {
 
 @media all and (max-width: 420px) {
 
-  #description .express {
+  #loopback {
     display: none;
   }
 
-  #install-command {
-    width: 300px;
+  #description .express {
+    display: none;
   }
 
   footer {
@@ -881,12 +863,7 @@ footer {
 
 @media all and (max-width: 320px) {
 
-  #logo {
-    margin-left: 25%;
-  }
-
   #install-command {
-    width: 250px;
     font-size: 12px;
   }
 

@@ -25,6 +25,6 @@
 <div id="#resource">
   <h3>Resources</h3>
 
-  See [Resources - Books](/en/resources/books.html)  for a list of books and other helpful Express resources.
+  See [Resources - Books](/resources/books-blogs.html)  for a list of books and other helpful Express resources.
   
 </div>
