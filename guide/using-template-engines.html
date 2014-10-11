@@ -1,0 +1,31 @@
+<!DOCTYPE html><html><head><title>Using template engines</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script src="/js/app.js"></script><script src="/js/retina.js"></script><script src="/js/dropit.js"></script><script src="/js/prism.js"></script></head><body class="inner"><div class="bar"></div><section class="content"><header><div id="mobile-menu"><a href="https://github.com/strongloop/express?_ga=1.39756451.1408343404.1407943788" title="Fork me on GitHub" id="fork-button"><div class="fa fa-code-fork fa-2x"></div></a><div id="nav-button" class="fa fa-bars fa-2x button"></div></div><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/" id="home-menu">Home</a></li><li><ul id="getting-started-menu" class="menu"><li><a href="/starter/installing.html">Getting started</a><ul><li><a href="/starter/installing.html">Installing</a></li><li><a href="/starter/generator.html">Express generator</a></li><li><a href="/starter/hello-world.html">Hello world</a></li><li><a href="/starter/basic-routing.html">Basic routing tutorial</a></li><li><a href="/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/guide/routing.html" class="active">Guide</a><ul><li><a href="/guide/routing.html">Routing</a></li><li><a href="/guide/error-handling.html">Error handling</a></li><li><a href="/guide/debugging.html">Debugging Express</a></li><li><a href="/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/guide/using-middleware.html">Using middleware</a></li><li><a href="/guide/using-template-engines.html">Using template engines</a></li><li><a href="/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/advanced/express-components.html">Advanced topics</a><ul><li><a href="/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/advanced/security.html">Security</a></li><li><a href="/advanced/performance.html">Performance</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/resources/glossary.html">Resources</a><ul><li><a href="/resources/glossary.html">Glossary</a></li><li><a href="/resources/middleware.html">Middleware</a></li><li><a href="/resources/applications.html">Applications</a></li><li><a href="/resources/community.html">Community</a></li><li><a href="/resources/books-blogs.html">Books and blogs</a></li></ul></li></ul></li></ul></div></header><div id="overlay"></div><h1 id="using-template-engines-with-express">Using template engines with Express</h1>
+<p>Before Express can render template files, the following application settings have to be set.</p>
+<ul>
+<li><code>views</code>, the directory where the template files are located. Eg: <code>app.set(&#39;views&#39;, &#39;./views&#39;)</code></li>
+<li><code>view engine</code>, the template engine to use. Eg: <code>app.set(&#39;view engine&#39;, &#39;jade&#39;)</code></li>
+</ul>
+<p>Then install the corresponding template engine npm package.</p>
+<pre><code>$ npm install jade --save
+</code></pre><p>Express-compliant template engines such as Jade, export a function named <code>__express(filePath, options, callback)</code>, which is called by <code>res.render()</code> to render the template code.</p>
+<p>Some template engines do not follow this convention, the <a href="https://www.npmjs.org/package/consolidate">Consolidate.js</a> library was created to map all of node&#39;s popular template engines to follow this convention, thus allowing them to work seamlessly within Express.</p>
+<p>Once the view engine is set, you don&#39;t have to explicitly specify the engine or load the template engine module in your app, Express loads it internally as shown below, for the example above.</p>
+<pre><code>app.engine(&#39;jade&#39;, require(&#39;jade&#39;).__express);
+</code></pre><p>Create a Jade template files named &quot;index.jade&quot; in the views directory, with the following content.</p>
+<pre><code>html
+  head
+    title!= title
+  body
+    h1!= message
+</code></pre><p>Then create a route to render the &quot;index.jade&quot; file.</p>
+<pre><code class="lang-js">app.get(&#39;/&#39;, function (req, res) {
+  res.render(&#39;index&#39;, { title: &#39;Hey&#39;, message: &#39;Hello there!&#39;});
+})
+</code></pre>
+<p>On making a request to the home page, &quot;index.jade&quot; will be rendered as HTML.</p>
+<p>To better understand how template engines work in Express, read <a href="/advanced/developing-template-engines.html">&quot;Developing template engines for Express&quot;</a>.</p>
+</section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5XL76H');
+</script><a id="top" href="#"><img src="/images/arrow.png"></a><footer><div id="footer-content">&copy; 2012 TJ Holowaychuk. All rights reserved.</div></footer></body></html>

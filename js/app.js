@@ -73,6 +73,12 @@ $(function(){
     prev = a;
   })
 
+  // show mobile menu
+  $('#nav-button, #overlay').click(function () {
+    $('#navmenu').toggle()
+    $('#overlay').toggle()
+  })
+
   // dropdown menu
 
   if ('ontouchstart' in document.documentElement) {
@@ -91,5 +97,45 @@ $(function(){
     $('#resources-menu').dropit({ action: 'mouseenter' })
     $('#lb-menu').dropit({ action: 'mouseenter' })
   }
+
+  // mobile
+
+  // main menu
+  $('#navmenu > li').click(function () {
+
+    // applicable only it has a menu
+    if ($(this).find('ul').length) {
+      if ($(this).hasClass('active-mobile-menu')) {
+        $(this).removeClass('active-mobile-menu')
+        $(this).find('.dropit .dropit-submenu').hide()
+      }
+      else {
+        $('.dropit .dropit-submenu').hide()
+        $(this).find('.dropit .dropit-submenu').show()
+        $('#navmenu li.active-mobile-menu').removeClass('active-mobile-menu')
+        $(this).addClass('active-mobile-menu')
+      }
+    }
+    else {
+      var path = $(this).find('a').attr('href')
+      document.location = path
+    }
+
+  })
+
+  // when in mobile mode, menu names should open the submenu
+  $('.dropit-trigger a').click(function (e) {
+
+    if (window.matchMedia('(max-width: 770px)').matches) {
+      e.preventDefault()
+    }
+
+  })
+
+  // sub menu navigation
+  $('.dropit-submenu li').click(function () {
+    var path = $(this).find('a').attr('href')
+    document.location = path
+  })
 
 })

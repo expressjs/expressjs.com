@@ -9,7 +9,9 @@
 
 ;(function($) {
 
-    $.fn.dropit = function(method) {
+    $.fn.dropit = function(method, minWidth) {
+
+        minWidth = minWidth || '770px';
 
         var methods = {
 
@@ -27,6 +29,9 @@
 
                     // Open on click
                     $el.on(settings.action, settings.triggerParentEl +':has('+ settings.submenuEl +') > '+ settings.triggerEl +'', function(){
+
+                        if (!window.matchMedia('(min-width: '+ minWidth +')').matches) return;
+
                         // Close click menu's if clicked again
                         if(settings.action == 'click' && $(this).parents(settings.triggerParentEl).hasClass('dropit-open')){
                             settings.beforeHide.call(this);
@@ -50,6 +55,9 @@
 
                     // Close if outside click
                     $(document).on('click', function(){
+
+                        if (!window.matchMedia('(min-width: '+ minWidth +')').matches) return;
+
                         settings.beforeHide.call(this);
                         $('.dropit-open').removeClass('dropit-open').find('.dropit-submenu').hide();
                         settings.afterHide.call(this);
@@ -57,6 +65,9 @@
 
                     // If hover
                     if(settings.action == 'mouseenter'){
+
+                        if (!window.matchMedia('(min-width: '+ minWidth +')').matches) return;
+
                         $el.on('mouseleave', function(){
                             settings.beforeHide.call(this);
                             $(this).removeClass('dropit-open').find(settings.submenuEl).hide();

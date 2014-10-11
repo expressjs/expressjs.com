@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Express Hello World Example
+    include ../includes/head
+  body.inner
+    section.content
+      header
+        include ../includes/mobile-menu
+        include ../includes/logo
+        - active = 'starter'
+        include ../includes/menu
+      include ../includes/mixins
+      #overlay
+
+      include:md hello-world.md
+
+    include ../includes/footer

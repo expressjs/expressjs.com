@@ -4,6 +4,7 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 body {
@@ -43,11 +44,23 @@ strong, th {
 }
 
 .inner {
-  padding-top: 98px;
+  padding-top: 80px;
+}
+
+#overlay {
+  position: fixed;
+  left: 0;
+  top: 250px;
+  background: #fff;
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 1;
 }
 
 #home-content {
-  margin: 12% 0 0 12%;
+  margin: 12% 0 6% 12%;
   max-width: 900px;
   padding-right: 9%;
 }
@@ -58,7 +71,6 @@ strong, th {
   background: #fff;
   border: 1px solid #eee;
   border-radius: 3px;
-  margin: 0 0 5% 12%;
   max-width: 375px;
 }
 
@@ -87,7 +99,7 @@ li code {
 
 #api-doc h2 {
   font-weight: bold;
-  font-size: 2.3em;
+  font-size: 21px;
   margin-bottom: 20px;
 }
 
@@ -95,15 +107,17 @@ li code {
   padding-top: 10px;
   padding-bottom: 5px;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 18px;
 }
 
 #api-doc h4 {
-  font-size: 1.1em;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 #api-doc h5 {
-  font-size: 1.0em;
+  font-size: 14em;
+  font-weight: bold;
   color: #666;
 }
 
@@ -139,7 +153,7 @@ a:hover {
 
 #logo .express {
   display: block;
-  font: 25px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 25px "Helvetica Neue", "Open Sans", sans-serif;
   font-weight: 100;
   color: #444;
   width: 100%;
@@ -152,14 +166,13 @@ a:hover {
 
 #description .express {
   display: block;
-  font: 4.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 4.5em "Helvetica Neue", "Open Sans", sans-serif;
   font-weight: 100;
   color: #353535;
   margin-bottom: .25em;
 }
 
 #description {
-  margin-top: 140px;
   margin-bottom: 50px;
   -webkit-font-smoothing: antialiased;
 }
@@ -167,7 +180,7 @@ a:hover {
 #description .description {
   position: relative;
   top: -5px;
-  font: 100 4.2em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 100 4.2em "Helvetica Neue", "Open Sans", sans-serif;
   color: #aeaeae;
   line-height: .75;
 }
@@ -181,7 +194,6 @@ a:hover {
 }
 
 #intro {
-  padding: 20px 0 0 0;
   margin-bottom: 0;
   margin-left: 5%;
 }
@@ -221,6 +233,7 @@ pre {
 
 code {
   overflow: scroll;
+  word-break: break-all;
 }
 
 code .comment { color: #888 }
@@ -334,121 +347,6 @@ html[xmlns] .clearfix {
   margin-bottom: 20px;
 }
 
-/* navigation */
-
-#navbar {
-  padding-left: 10%;
-  max-width: 1177px;
-  position: relative;
-}
-
-#navbar a {
-  font-size: 12px;
-  color: #666;
-  margin: 0 5px;
-  padding-right: 15px;
-  border-right: 1px dotted #eee;
-}
-
-#navbar a:last-child {
-  border-right: none;
-}
-
-#navbar a.active {
-  font-weight: bold;
-  color: #353535;
-}
-
-
-/* dropdown menu */
-
-#navmenu {
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  right: 125px;
-  top: 15px;
-  padding-left: 5%;
-}
-
-#navmenu > li {
-  list-style: none;
-  padding: 0;
-  float: left;
-}
-
-#navmenu a:hover {
-  text-decoration: none;
-}
-
-.menu ul {
-  display: none;
-}
-
-.menu ul.dropit-submenu {
-  background-color: #fcfcfa;
-  border: 1px solid #b2b2b2;
-  padding: 6px 0;
-  margin: 0 0 0 1px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-  -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-}
-
-.menu ul.dropit-submenu a {
-  display: block;
-  color: #777;
-  padding: 0 8px 2px 8px;
-}
-
-.menu ul.dropit-submenu a:hover {
-  background: #259dff;
-  color: #fff !important;
-  text-decoration: none;
-}
-
-/* secondary menu */
-
-#menu {
-  position: fixed;
-  margin: 0;
-  padding: 0;
-  top: 105px;
-  right: 30px;
-  height: 500px;
-  text-align: right;
-  font-size: 13px;
-}
-
-#menu li {
-  list-style: none;
-}
-
-#menu ul {
-  height: 0;
-  overflow-y: hidden;
-}
-
-#menu ul.active {
-  height: auto;
-}
-
-#menu > li > a {
-  color: #353535;
-  font-weight: bold;
-}
-
-#menu ul a {
-  color: #555;
-}
-
-#menu ul a.active {
-  color: #259dff;
-}
-
 /* applications page */
 
 #applications .section {
@@ -521,9 +419,6 @@ html[xmlns] .clearfix {
   margin: 20px 0
 }
 
-ul.doclist {
-  width: 500px;
-}
 
 /* doc boxes */
 
@@ -564,17 +459,32 @@ ul.doclist {
   display: none;
 }
 
-#fork-icon {
-  color: #d1d1d1;
-  position: absolute;
-  top: 25px;
-  right: 5%;
-  z-index: 1001;
-  display: none;
+.button {
+  display: block;
+  padding: 3px 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #555;
 }
 
-#fork-icon div:hover {
-  color: #c30000;
+#mobile-menu {
+  display: none;
+  position: relative;
+  top: 9px;
+  left: 0;
+}
+
+#nav-button {
+  position: absolute;
+  right: 5%;
+}
+
+#fork-button {
+  position: absolute;
+  left: 5%;
+  top: 4px;
+  color: #555;
 }
 
 pre, code {
@@ -585,29 +495,152 @@ pre, code {
   height: 20px;
 }
 
+/* navigation */
+
+#navbar {
+  padding-left: 10%;
+  max-width: 1177px;
+  position: relative;
+}
+
+#navbar a {
+  font-size: 12px;
+  color: #666;
+  margin: 0 5px;
+  padding-right: 15px;
+}
+
+#navbar a.active {
+  font-weight: bold;
+  color: #353535;
+}
+
+
+/* dropdown menu */
+
+#navmenu {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  right: 125px;
+  top: 15px;
+  padding-left: 5%;
+  z-index: 1000;
+}
+
+#navmenu > li {
+  list-style: none;
+  padding: 0;
+  float: left;
+}
+
+#navmenu a:hover {
+  text-decoration: none;
+}
+
+.menu ul {
+  display: none;
+}
+
+.menu ul.dropit-submenu {
+  background-color: #fcfcfa;
+  border: 1px solid #b2b2b2;
+  padding: 6px 0;
+  margin: 0 0 0 1px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+}
+
+.menu ul.dropit-submenu a {
+  display: block;
+  color: #777;
+  padding: 0 8px 2px 8px;
+}
+
+.menu ul.dropit-submenu a:hover {
+  background: #259dff;
+  color: #fff !important;
+  text-decoration: none;
+}
+
+/* secondary menu */
+
+#menu {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  top: 105px;
+  right: 30px;
+  height: 500px;
+  text-align: right;
+  font-size: 13px;
+}
+
+#menu li {
+  list-style: none;
+}
+
+#menu ul {
+  height: 0;
+  overflow-y: hidden;
+}
+
+#menu ul.active {
+  height: auto;
+}
+
+#menu > li > a {
+  color: #353535;
+  font-weight: bold;
+}
+
+#menu ul a {
+  color: #555;
+}
+
+#menu ul a.active {
+  color: #259dff;
+}
+
+
+
+
+
+
+
+
 /* responsive */
 
-@media all and (max-width: 775px) {
+@media all and (max-width: 770px) {
 
-  #logo {
-    display: none;
+  .inner {
+    padding-top: 19%;
   }
 
-  #home-content {
-    margin: 6% 0 0 5%;
-    padding-right: 3%;
+  ul {
+    padding-left: 5%;
   }
 
-  #navmenu {
-    left: 0;
+  h1 {
+    font-size: 22px;
+    line-height: 26px;
   }
 
-  #install-command {
-    margin-left: 5%;
+  h2 {
+    font-size: 18px;
+    line-height: 25px;
   }
 
-  #description {
-    font-size: .8em;
+  h3 {
+    font-size: 16px;
+    line-height: 23px;
+    word-break: break-all;
+  }
+
+  h4 {
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: normal;
   }
 
   #menu {
@@ -615,85 +648,191 @@ pre, code {
   }
 
   .content {
-    padding-right: 2px;
+    padding-right: 0;
+    margin-top: 0;
   }
 
-}
+  #home-content {
+    margin: 28% 0 0 5%;
+    padding-right: 5%;
+  }
 
-@media all and (max-width: 689px) {
+  #description {
+    margin-bottom: 35px;
+  }
+
+  #description .express {
+    font-size: 3em;
+  }
+
+  #description .description {
+    font-size: 3em;
+    line-height: .9em;
+  }
+
+  #install-command {
+    width: 100%;
+  }
+
+  #logo {
+    margin-left: 26%;
+  }
+
+  #logo .express {
+    font-weight: bold;
+  }
 
   .github-fork-ribbon-wrapper {
     display: none;
   }
 
-  #fork-icon {
-    display: inline;
+  #navmenu {
+    display: none;
   }
 
-  header {
-    height: 85px;
+  #mobile-menu {
+    display: block;
+  }
+
+  #navmenu {
+    top: 70px;
   }
 
   #boxes div {
     width: 90%;
   }
 
-  .content {
-    margin-top: 7%;
-  }
-
   .content img {
     width: 98%;
     height: 98%;
   }
+
+  #home-menu {
+    display: block;
+    position: absolute;
+    top: 7px;
+  }
+
+  #navbar {
+    padding: 0;
+  }
+
+  #navbar a {
+    font-size: 19px;
+    margin: 0;
+    padding-left: 5%;
+  }
+
+  #navmenu {
+    left: 0;
+    padding: 0;
+    top: 55px;
+    background: #fff;
+    width: 100%;
+  }
+
+  #navmenu > li {
+    float: none;
+    border-bottom: 1px solid #ccc;
+    margin: 0;
+    min-height: 47px;
+    position: relative;
+    background: #eee;
+    cursor: pointer;
+  }
+
+  #navmenu > li:first-child {
+    display: none;
+  }
+
+  #navmenu > li:hover {
+    background: #e9e9e9;
+  }
+
+  #navmenu > li > ul {
+    position: static;
+  }
+
+  .dropit .dropit-submenu {
+    position: static !important;
+  }
+
+  .dropit .dropit-trigger {
+    padding-top: 7px;
+  }
+
+  .menu ul.dropit-submenu {
+    margin-top: 7px;
+    background: #ddd;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    max-height: 190px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .dropit-trigger > a {
+    display: block;
+    margin-bottom: 8px !important;
+  }
+
+  .menu ul.dropit-submenu a {
+    padding: 5px 5px 5px 5%;
+  }
+
+  .dropit-submenu li {
+    border-bottom: 1px solid #cdcdcd;
+  }
+
+  .dropit-submenu a {
+    padding-left: 10% !important;
+  }
+
+  .menu ul {
+    display: block;
+  }
+
+  .active-mobile-menu {
+    border-bottom: none !important;
+  }
+
+  .active-mobile-menu .dropit-trigger {
+    margin-bottom: 0 !important;
+  }
+
+  .menu ul.dropit-submenu a:hover {
+    background: #cccccc;
+    color: #666 !important;
+  }
+
 }
 
 
 @media all and (max-width: 420px) {
 
-  header {
-    height: 113px;
+  #description .express {
+    display: none;
   }
 
   #install-command {
     width: 300px;
   }
 
-  .content {
-    margin-top: 12%;
-  }
-
 }
 
 @media all and (max-width: 320px) {
 
-  header {
-    height: 137px;
+  #logo {
+    margin-left: 25%;
   }
 
   #install-command {
-    width: 280px;
+    width: 250px;
+    font-size: 12px;
   }
 
-  .content {
-    margin-top: 15%;
-  }
 }
 
-/* ipad landscape */
-
-@media all and (max-width: 1200px) {
-
-}
-
-/* ipad portrait */
-
-@media all and (max-width: 768px) {
-
-}
-
-/* iphone portrait */
-
-@media all and (max-width: 650px) {
-
-}
