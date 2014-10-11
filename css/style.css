@@ -455,10 +455,6 @@ html[xmlns] .clearfix {
 
 /* general */
 
-#logos, footer {
-  display: none;
-}
-
 .button {
   display: block;
   padding: 3px 5px;
@@ -494,6 +490,14 @@ pre, code {
 .vspace {
   height: 20px;
 }
+
+#loopback {
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: 11px;
+}
+
 
 /* navigation */
 
@@ -612,6 +616,10 @@ pre, code {
 /* responsive */
 
 @media all and (max-width: 770px) {
+
+  #loopback {
+    display: none;
+  }
 
   .inner {
     padding-top: 19%;
