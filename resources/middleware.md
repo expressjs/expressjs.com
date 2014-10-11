@@ -8,7 +8,7 @@ Here are some Express middleware modules:
     - [co-body](https://github.com/visionmedia/co-body)
     - [raw-body](https://github.com/stream-utils/raw-body)
   - [compression](https://github.com/expressjs/compression) - previously `compress`
-  - [connect-image-optimus] (https://github.com/msemenistyi/connect-image-optimus):  Connect/Express middleware for optimal image serving. Switches to webp/jpegxr if possible.
+  - [connect-image-optimus](https://github.com/msemenistyi/connect-image-optimus):  Connect/Express middleware for optimal image serving. Switches to webp/jpegxr if possible.
   - [connect-timeout](https://github.com/expressjs/timeout): previously `timeout`
   - [cookie-parser](https://github.com/expressjs/cookie-parser): previously `cookieParser`
   - [cookie-session](https://github.com/expressjs/cookie-session): previously `cookieSession`
@@ -39,8 +39,10 @@ are replaced by an alternative module, or should be superseded by a better modul
   - `limit`
     - [raw-body](https://github.com/stream-utils/raw-body)
   - `multipart`
-    - [connect-multiparty](https://github.com/superjoe30/connect-multiparty)
     - [connect-busboy](https://github.com/mscdex/connect-busboy)
+    - [multer](https://github.com/expressjs/multer)
+    - [connect-multiparty](https://github.com/superjoe30/connect-multiparty)
+    
   - `query`
     - [qs](https://github.com/visionmedia/node-querystring)
   - `staticCache`
