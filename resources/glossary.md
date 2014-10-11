@@ -1,5 +1,4 @@
 <div class="doc-box doc-warn">This is currently a working draft</div>
-<div class="vspace"></div>
 
 ### application
 

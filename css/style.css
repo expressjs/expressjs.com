@@ -30,6 +30,10 @@ h1, h2, h3 {
   -webkit-font-smoothing: antialiased;
 }
 
+.inner h1 {
+  margin-bottom: 20px;
+}
+
 p em {
   font-weight: bold;
   color: #353535;
@@ -469,10 +473,6 @@ html[xmlns] .clearfix {
 
 pre, code {
   white-space: pre-wrap !important;
-}
-
-.vspace {
-  height: 20px;
 }
 
 #loopback {
