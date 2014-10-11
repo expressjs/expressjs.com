@@ -29,8 +29,11 @@ $(function(){
     $(this).addClass('language-javascript').removeClass('lang-js')
   })
 
-  Prism.highlightAll()
+  $('code.lang-sh').each(function(){
+    $(this).addClass('language-bash').removeClass('lang-sh')
+  })
 
+  Prism.highlightAll()
 
   // menu bar
 

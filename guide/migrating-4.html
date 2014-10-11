@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Express - Moving to Express 4</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script src="/js/app.js"></script><script src="/js/retina.js"></script><script src="/js/dropit.js"></script><script src="/js/prism.js"></script></head><body><section class="content"><header><div id="mobile-menu"><div id="nav-button" class="fa fa-bars fa-2x button"></div></div><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/" id="home-menu">Home</a></li><li><ul id="getting-started-menu" class="menu"><li><a href="/starter/installing.html">Getting started</a><ul><li><a href="/starter/installing.html">Installing</a></li><li><a href="/starter/generator.html">Express generator</a></li><li><a href="/starter/hello-world.html">Hello world</a></li><li><a href="/starter/basic-routing.html">Basic routing tutorial</a></li><li><a href="/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/guide/routing.html" class="active">Guide</a><ul><li><a href="/guide/routing.html">Routing</a></li><li><a href="/guide/error-handling.html">Error handling</a></li><li><a href="/guide/debugging.html">Debugging Express</a></li><li><a href="/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/guide/using-middleware.html">Using middleware</a></li><li><a href="/guide/using-template-engines.html">Using template engines</a></li><li><a href="/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/advanced/express-components.html">Advanced topics</a><ul><li><a href="/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/advanced/security.html">Security</a></li><li><a href="/advanced/performance.html">Performance</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/resources/glossary.html">Resources</a><ul><li><a href="/resources/glossary.html">Glossary</a></li><li><a href="/resources/middleware.html">Middleware</a></li><li><a href="/resources/applications.html">Applications</a></li><li><a href="/resources/community.html">Community</a></li><li><a href="/resources/books-blogs.html">Books and blogs</a></li></ul></li></ul></li></ul></div><a href="http://loopback.io/" title="LoopBack
+<!DOCTYPE html><html><head><title>Express - Moving to Express 4</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script src="/js/app.js"></script><script src="/js/retina.js"></script><script src="/js/dropit.js"></script><script src="/js/prism.js"></script></head><body><section class="content"><header><div id="mobile-menu"><div id="nav-button" class="fa fa-bars fa-2x button"></div></div><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/" id="home-menu">Home</a></li><li><ul id="getting-started-menu" class="menu"><li><a href="/starter/installing.html">Getting started</a><ul><li><a href="/starter/installing.html">Installing</a></li><li><a href="/starter/generator.html">Express generator</a></li><li><a href="/starter/hello-world.html">Hello world</a></li><li><a href="/starter/basic-routing.html">Basic routing tutorial</a></li><li><a href="/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/guide/routing.html" class="active">Guide</a><ul><li><a href="/guide/error-handling.html">Error handling</a></li><li><a href="/guide/debugging.html">Debugging Express</a></li><li><a href="/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/guide/using-middleware.html">Using middleware</a></li><li><a href="/guide/using-template-engines.html">Using template engines</a></li></ul></li></ul></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/advanced/express-components.html">Advanced topics</a><ul><li><a href="/advanced/developing-template-engines.html">Template engines</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/resources/glossary.html">Resources</a><ul><li><a href="/resources/glossary.html">Glossary</a></li><li><a href="/resources/applications.html">Applications</a></li><li><a href="/resources/community.html">Community</a></li><li><a href="/resources/books-blogs.html">Books and blogs</a></li></ul></li></ul></li></ul></div><a href="http://loopback.io/" title="LoopBack
 Node.js API Framework powered by Express" id="loopback"><img src="/images/loopback-link.png"></a><div id="overlay"></div><ul id="menu"><li><ul class="active"><li><a href="#overview">Overview</a></li><li><a href="#changes">Changes in Express 4</a></li><li><a href="#example-migration">Migration example</a></li><li><a href="#app-gen">Express generator</a></li></ul></li></ul></header><section><h1>Moving to Express 4</h1><h2 id="overview">Overview</h2>
 
 <p>Express 4 is a breaking change from Express 3. That means an existing Express 3 app will not work if you update the Express version in its dependencies.</p>
@@ -280,7 +280,7 @@ http.createServer(app).listen(app.get(&#39;port&#39;), function(){
   console.log(&#39;Express server listening on port &#39; + app.get(&#39;port&#39;));
 });
 </code></pre>
-<h4 id="">pacakge.json</h4>
+<h4 id="">package.json</h4>
 
 <p>The accompanying version 3 <code>package.json</code> file might look
   something like this:</p>
@@ -304,9 +304,10 @@ Process
 <p>Begin the migration process by installing the required middleware for the
 Express 4 app and updating Express and Jade to their respective latest
 version with the following command:</p>
-<pre><code>$ npm install serve-favicon morgan method-override express-session
+<pre><code class="lang-sh">$ npm install serve-favicon morgan method-override express-session
 body-parser multer errorhandler express@latest jade@latest --save
-</code></pre><p>Make the following changes to app.js:</p>
+</code></pre>
+<p>Make the following changes to app.js:</p>
 <ol>
 <li><p>The <code>http</code> module is longer required, so remove
  <code>var http = require(&#39;http&#39;);</code></p>
@@ -403,8 +404,9 @@ app.listen(app.get(&#39;port&#39;), function(){
 
 <p>With that, the migration process is complete, and the app is now an
 Express 4 app. To confirm, start the app with the following command:</p>
-<pre><code>$ node .
-</code></pre><p>Load <a href="http://localhost:3000">http://localhost:3000</a>. 
+<pre><code class="lang-sh">$ node .
+</code></pre>
+<p>Load <a href="http://localhost:3000">http://localhost:3000</a>. 
   and see the home page being rendered by Express 4.</p>
 <h2 id="app-gen">Upgrading to the Express 4 app generator</h2>
 
@@ -416,12 +418,14 @@ Express 4 app. To confirm, start the app with the following command:</p>
 
 <p>If you already have the Express 3 app generator installed on your system,
 you must uninstall it  as follows:</p>
-<pre><code>$ npm uninstall -g express
-</code></pre><p>Depending on how your file and directory privileges are configured,
+<pre><code class="lang-sh">$ npm uninstall -g express
+</code></pre>
+<p>Depending on how your file and directory privileges are configured,
 you may need to run this command with <code>sudo</code>.</p>
 <p>Now install the new generator:</p>
-<pre><code>$ npm install -g express-generator
-</code></pre><p>Depending on how your file and directory privileges are configured,
+<pre><code class="lang-sh">$ npm install -g express-generator
+</code></pre>
+<p>Depending on how your file and directory privileges are configured,
 you may need to run this command with <code>sudo</code>.</p>
 <p>Now the <code>express</code> command on your system is updated to the
 Express 4 generator. </p>
@@ -439,8 +443,9 @@ Express 4 generator. </p>
 <h3 id="">Example</h3>
 
 <p>Execute the following command to create an Express 4 app:</p>
-<pre><code>$ express app4
-</code></pre><p>If you look at the contents of the <code>app.js</code> file in the
+<pre><code class="lang-sh">$ express app4
+</code></pre>
+<p>If you look at the contents of the <code>app.js</code> file in the
 <code>app4</code> directory, you will notice that all the middleware
 (except <code>express.static</code>) required for the app are loaded as
 independent modules and the <code>router</code> middleware
@@ -448,8 +453,9 @@ is no longer explicitly loaded in the app.</p>
 <p>You will also notice that the <code>app.js</code> file is now a Node module,
 compared to the standalone app generated by the old generator.</p>
 <p>After installing the dependencies, start the app using the following command:</p>
-<pre><code>$ npm start
-</code></pre><p>If you peek at the npm start script in <code>package.json</code> file,
+<pre><code class="lang-sh">$ npm start
+</code></pre>
+<p>If you peek at the npm start script in <code>package.json</code> file,
 you will notice that the actual command that starts the app is
 <code>node ./bin/www</code>, which used to be <code>node app.js</code>
 in Express 3.</p>

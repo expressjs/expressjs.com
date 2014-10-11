@@ -394,7 +394,7 @@ html[xmlns] .clearfix {
   line-height: 14px;
   padding: 10px;
   border-radius: 3px;
-  margin: 0 3% 0 3%;
+  margin: 20px 3% 20px 3%;
 }
 
 .doc-box p {
@@ -468,6 +468,7 @@ footer {
   float: left;
   margin-right: 20px;
   background-repeat: no-repeat;
+  background-position: 0 1px;
   padding-bottom: 4px;
 }
 
@@ -480,7 +481,7 @@ footer {
 #fork {
   background-image: url(/images/fork-icon.png);
   background-size: 11px 16px;
-  padding-left: 14px;
+  padding-left: 15px;
 }
 
 @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-devicepixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx) {

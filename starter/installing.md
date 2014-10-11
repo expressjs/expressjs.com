@@ -2,19 +2,19 @@
 
 Create a `package.json` file in the directory of interest, if it does not exist already, with the `npm init` command.
 
-```
+```sh
 $ npm init
 ```
 
 Express can then be installed in the directory and saved in the dependecies list with the following command.
 
-```
+```sh
 $ npm install express --save
 ```
 
 If the installation is intended to be temporarily and express need not be added to the dependecies list, install express without the `--save` option.
 
-```
+```sh
 $ npm install express
 ```
 

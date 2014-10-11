@@ -2,13 +2,13 @@
 
 The express application generator tool `express` can be used to quickly create a application skeleton. Install it using the following command.
 
-```
+```sh
 $ npm install express-generator -g
 ```
 
 The command options can be displayed with the `-h` option.
 
-```
+```sh
 $ express -h
 
   Usage: express [options] [dir]
@@ -26,7 +26,7 @@ $ express -h
 
 The following is an example of using the generator to create an express app named _myapp_, in the current working directory.
 
-```
+```sh
 $ express myapp
 
    create : myapp

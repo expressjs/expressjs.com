@@ -24,7 +24,7 @@ The app starts a server and listens on port 3000 for connection. It will respond
 
 Save the code in a file named `app.js` and run it with the following command.
 
-```
+```sh
 $ node app.js
 ```
 
