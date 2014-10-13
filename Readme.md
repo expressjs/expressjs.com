@@ -24,7 +24,7 @@ $ make
 
 Markdown files are the authoring / source files that generate HTML files that are the publishing format.  The website is served from the HTML pages in the `gh-pages` branch.  Jade files are used to create a page with appropriate header, footer, and one or more markdown files.  Generally, you shouldn't need to edit Jade files unless you are adding a new page or reorganizing pages.
 
-  - __Don't__ edit the HTML directly.  Instead, edit the Markdown file(s), then generate the HTML using `make` to view your changes locally.
+  - __Don't__ edit the HTML directly.  Instead, edit the Markdown file(s), then generate the HTML using `make` to view your changes locally.  NOTE: You must delete the existing HTML file so that `make` will regenerate it.  You can also do `make clean` to delete all the HTML files, then run `make` to rebuild the entire site.
   - In general, PRs should contain both Markdown file(s) and resultant generated HTML file(s).  However, very small PRs or commits can be just the Markdown source, with the understanding the the HTML will be regenerated later to incorporate numerous changes.
   - To publish a change, you must commit the HTML files.  
 
