@@ -221,7 +221,7 @@ pre {
   overflow: scroll;
 }
 
-code {
+pre code {
   overflow: scroll;
   word-break: break-all;
 }
