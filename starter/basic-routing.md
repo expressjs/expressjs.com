@@ -1,16 +1,16 @@
 # Basic routing tutorial
 
-This tutorial is a basic introduction to the concept of routing in express.
+This tutorial is a basic introduction to routing with Express.  _Routing_ refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or _path_) and a specific HTTP request method (GET, POST, and so on).
+
+Each route has a handler function, executed when the route is matched. 
+
+Route definition takes the following structure `app.VERB(PATH, HANDLER)`, where `app` is an instance of `express`, `VERB` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` is a path on the server, and `HANDLER` is the function executed when the route is matched.
 
 <div class="doc-box doc-notice">
-The code in the tutorial is written with the assumption that an instance of express named `app` is created and the server is running. If you are nor familiar with creating an app and starting it, refer to the [Hello world example](/en/starter/hello-world.html).
+This tutorial assumes that an instance of `express` named `app` is created and the server is running. If you are nor familiar with creating an app and starting it, refer to the [Hello world example](/starter/hello-world.html).
 </div>
 
-Routing is the definition of endpoints for clients to interact with an express app. It is accomplished with the use of an HTTP request method and a path. Each route has a handler function, which is executed when the route is matched.
-
-Route definition takes the following structure `app.VERB(PATH, HANDLER)`, where `app` is an instance of express, `VERB` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` is a path on the server, and `HANDLER` is the function which is executed when the route is matched.
-
-The following is an example routes in an app, the comments are descriptive of what they do.
+The following code illustrates some example routes in an app.
 
 ```js
 // respond with "Hello World!" on the homepage
@@ -34,5 +34,6 @@ app.delete('/', function (req, res) {
 })
 
 ```
-
-For all the details about routing, refer the [routing guide](/en/guide/routing.html).
+<!--
+For all the details about routing, see [routing guide](/en/guide/routing.html).
+-->

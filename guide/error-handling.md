@@ -1,7 +1,7 @@
 # Error handling
 
-Error-handling middleware is defined just like regular middleware,
-except that must be defined with an arity of 4 (that is the signature
+Define error-handling middleware like other middleware,
+except with four arguments instead of three, specifically with the signature
 `(err, req, res, next)`):
 
 ```js
@@ -11,8 +11,8 @@ app.use(function(err, req, res, next){
 });
 ```
 
-Though not mandatory, error-handling middleware are typically defined
-very last, below any other `app.use()` calls, like so:
+Though not strictly required, by convention you define error-handling middleware last, after other `app.use()` calls;
+For example:
 
 ```js
 var bodyParser = require('body-parser');

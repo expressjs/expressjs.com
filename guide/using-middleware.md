@@ -1,6 +1,6 @@
 # Using middleware
 
-An Express application is essentially a series of middleware, executed in the order they occur.  
+An Express application is essentially a series of middleware calls.  
 
 Middleware is a function with access to the request object (`req`), the response object (`res`), and the next middleware in line in the request-response cycle of an Express application, commonly denoted by a variable named `next`.  Middleware can:
  - Execute any code.
