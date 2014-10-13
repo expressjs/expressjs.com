@@ -23,10 +23,16 @@ $(function(){
   })
 
   // edit page link
-  var branchPath = 'https://github.com/strongloop/expressjs.com/blob/gh-pages';
-  var pagePath = document.location.pathname.replace(/\.html$/, '.md');
-  var editPath = branchPath + pagePath;
-  var editLink = '<a href="' + editPath + '">Edit this page on GitHub</a>';
+
+  var branchPath = 'https://github.com/strongloop/expressjs.com';
+  var pathName = document.location.pathname;
+  var pagePath = pathName.replace(/\.html$/, '.md');
+  var editPath = branchPath + '/blob/gh-pages' + pagePath;
+  var editLink;
+
+  if (pathName == '/') editLink = '<a href="' + branchPath + '">Fork the website on GitHub</a>';
+  else editLink = '<a href="' + editPath + '">Edit this page on GitHub</a>';
+
   $('#fork').html(editLink);
 
   // code highlight
