@@ -20,7 +20,6 @@ Here are some Express middleware modules:
   - [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn): easily use a CDN for your static assets, with multiple host support (ex. cdn1.host.com, cdn2.host.com).
   - [express-slash](https://github.com/ericf/express-slash): Express middleware for people who are strict about trailing slashes.
   - [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize): redirect HTTP requests containing uppercase to a canonical lowercase form.
-  - [flashify](https://github.com/tehlulz/flashify): for rails type notifications
   - [method-override](https://github.com/expressjs/method-override): previously `express.methodOverride`
   - [morgan](https://github.com/expressjs/morgan): previously `logger`
   - [response-time](https://github.com/expressjs/response-time): previously `express.responseTime`

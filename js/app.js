@@ -1,8 +1,6 @@
 
 $(function(){
 
-  var width = window.innerWidth;
-  var height = window.innerHeight;
   var doc = $(document);
 
   // top link
@@ -24,6 +22,14 @@ $(function(){
     }
   })
 
+  // edit page link
+  var branchPath = 'https://github.com/strongloop/expressjs.com/blob/gh-pages';
+  var pagePath = document.location.pathname.replace(/\.html$/, '.md');
+  var editPath = branchPath + pagePath;
+  var editLink = '<a href="' + editPath + '">Edit this page on GitHub</a>';
+  $('#fork').html(editLink);
+
+  // code highlight
 
   $('code.lang-js, pre.js code').each(function(){
     $(this).addClass('language-javascript').removeClass('lang-js')

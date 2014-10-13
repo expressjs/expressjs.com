@@ -23,6 +23,5 @@ a feature request open a ticket in the [issue queue](https://github.com/stronglo
 ##Third Party
 
 Our vibrant community has created a large variety of extensions,
-[middleware](https://github.com/senchalabs/connect/wiki)
-and higher level frameworks. Check them out in the
+[middleware](/resources/middleware.html) and higher level frameworks. Check them out in the
 [wiki](https://github.com/strongloop/express/wiki).
