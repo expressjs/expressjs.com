@@ -1,6 +1,6 @@
 # Installing
 
-First, create a directory to hold your application, if you haven't alredy done so, and make that your working directory.
+First, create a directory to hold your application, if you haven't already done so, and make that your working directory.
 ```sh
 $ mkdir myapp
 $ cd myapp
