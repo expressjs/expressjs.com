@@ -19,6 +19,10 @@ var server = app.listen(3000, function () {
 
 })
 ```
+<div class="doc-box doc-notice">
+The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
+`req.pipe()`, `req.on('data', callback)` and anything else you would do without Express involved.
+</div>
 
 The app starts a server and listens on port 3000 for connection. It will respond with "Hello World!" for requests to the homepage. For every other path, it will respond with a **404 Not Found**.
 

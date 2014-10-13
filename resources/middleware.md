@@ -7,7 +7,6 @@ Here are some Express middleware modules:
     - [body](https://github.com/raynos/body)
     - [co-body](https://github.com/visionmedia/co-body)
     - [raw-body](https://github.com/stream-utils/raw-body)
-    - [multer](https://github.com/expressjs/multer)
   - [compression](https://github.com/expressjs/compression) - previously `express.compress`
   - [connect-image-optimus](https://github.com/msemenistyi/connect-image-optimus): Connect/Express middleware for optimal image serving. Switches to webp/jpegxr if possible.
   - [connect-timeout](https://github.com/expressjs/timeout): previously `express.timeout`
@@ -50,5 +49,5 @@ are replaced by an alternative module, or should be superseded by a better modul
     - [connect-static](https://github.com/andrewrk/connect-static)
 
 For more middleware, see also:
- - [http-framework](https://github.com/Raynos/http-framework/wiki/Modules).
+ - [http-framework](https://github.com/Raynos/http-framework/wiki/Modules)
  - [expressjs](https://github.com/expressjs)
