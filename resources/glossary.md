@@ -10,7 +10,7 @@ Application programming interface.  Spell out on first use.
 
 ### Express
 
-A fast, un-opinionated, minimalist web framework for Node.js applications.  In general, prefer simply "Express" to "Express.js," though the latter is acceptable.
+A fast, un-opinionated, minimalist web framework for Node.js applications.  In general, prefer simply "Express" to "Express.js," though the latter is acceptable. 
 
 ### libuv
 
@@ -18,7 +18,11 @@ Multi-platform support library with focus on asynchronous I/O, primarily develop
 
 ### middleware
 
-A function invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.
+A function invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.  A few fine points of terminology around middleware:
+
+  * `var foo = require('middleware')` is called _requiring_ or _using_ a Node.js module. Then the statement `var mw = foo()`  typically returns the middleware.
+  * `app.use(mw)` is called _adding the middleware to the global processing stack_.
+  * `app.get('/foo', mw, function (req, res) { ... })` is called _adding the middleware to the "GET /foo" processing stack_.
 
 ### Node.js
 

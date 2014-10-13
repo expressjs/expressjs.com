@@ -55,16 +55,6 @@ can show you the most interesting content and conversation from your friends.
 
 Visit [Prismatic](http://getprismatic.com/)
 
-##Clipboard
-
-Clipboard is a powerful tool allowing to save live clips
-of your interests on the web, not just static images,
-but fully-functional fragments of anything online.
-
-[![](/images/apps/screenshots/clipboard.png)](http://clipboard.com/)
-
-Visit [Clipboard](http://clipboard.com/)
-
 ##StudyNotes
 
 At StudyNotes, we are building beautiful and simple
@@ -179,11 +169,7 @@ LogHuman is an application insights platform which enables developers to record 
 
 Visit [LogHuman](https://loghuman.com)
 
-##and more!
+##Add your app or site
 
-Shodan search reports that there are well over **26,000** Express applications
-in the wild, we can't possibly list them all here, but if you feel
-your application helps showcase the framework open an issue on
-the [github repo](https://github.com/strongloop/expressjs.com/issues).
-
-![](/images/apps/screenshots/more.png)
+[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/menu/en/resources/applications.md),
+add a link to your app, then submit a pull request (GitHub login required).  Follow the format of the above listings.
