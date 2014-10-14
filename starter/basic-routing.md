@@ -24,12 +24,12 @@ app.post('/', function (req, res) {
 })
 
 // accept PUT request at /user
-app.put('/', function (req, res) {
+app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user')
 })
 
 // accept DELETE request at /user
-app.delete('/', function (req, res) {
+app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user')
 })
 
