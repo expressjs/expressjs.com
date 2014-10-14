@@ -23,5 +23,5 @@
 </div>
 
 <div id="sponsorship">
-  [![](/images/expressjs-strongloop-training.png)](http://strongloop.com/developers/events/)
+  [![](/images/expressjs-strongloop-training.svg)](http://strongloop.com/developers/events/)
 </div>
