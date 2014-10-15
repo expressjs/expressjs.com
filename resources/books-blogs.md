@@ -4,6 +4,8 @@
 
 Here are a few of the many books on Express:
 
+ - **[Mastering Web Application Development with Express](https://www.packtpub.com/web-development/mastering-web-application-development-express-raw)**,
+Pack Publishing, September 2014.
  - **[Web Development with Node and Express](http://shop.oreilly.com/product/0636920032977.do)**,
 O'Reilly Media, July 2014.
  - **[Node.js in Action](http://www.manning.com/cantelon/)**,
