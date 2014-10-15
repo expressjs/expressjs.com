@@ -73,8 +73,6 @@ middleware required to run your app.  Simply follow these steps:</p>
 <td><a href="https://github.com/expressjs/serve-index">serve-index</a></td></tr>
 <tr><td>express.static</td>
 <td><a href="https://github.com/expressjs/serve-static">serve-static</a></td></tr>
-<tr><td>express.timeout</td>
-<td><a href="https://github.com/expressjs/timeout">connect-timeout</a></td></tr>
 </table>
 
 <p>Here is the <a href="https://github.com/senchalabs/connect#middleware">complete list</a> of Express 4 middleware.</p>
@@ -103,7 +101,7 @@ new features to help organize your routes:</p>
 <ul class="doclist">
   <li>
     A new method, <code>app.route()</code>, to create chainable route
-    handlers for a route path. 
+    handlers for a route path.
   </li>
   <li>
     A new class, <code>express.Router</code>, to create modular mountable
@@ -134,7 +132,7 @@ information on routes, see <a href="/4x/api.html#router">Router() documentation<
 <p>The other feature to help organize routes is a new class,
 <code>express.Router</code>, that you can use to create modular mountable
 route handlers. A <code>Router</code> instance is a complete middleware and
-routing system; for this reason it is often referred to as a &quot;mini-app&quot;.  </p>
+routing system; for this reason it is often referred to as a &quot;mini-app&quot;.</p>
 <p>The following example creates a router as a module, loads a middleware in
 it, defines some routes, and mounts it on a path on the main app.</p>
 <p>Create a router file named <code>birds.js</code> in the app directory,
@@ -406,7 +404,7 @@ app.listen(app.get(&#39;port&#39;), function(){
 Express 4 app. To confirm, start the app with the following command:</p>
 <pre><code class="lang-sh">$ node .
 </code></pre>
-<p>Load <a href="http://localhost:3000">http://localhost:3000</a>. 
+<p>Load <a href="http://localhost:3000">http://localhost:3000</a>.
   and see the home page being rendered by Express 4.</p>
 <h2 id="app-gen">Upgrading to the Express 4 app generator</h2>
 
@@ -428,7 +426,7 @@ you may need to run this command with <code>sudo</code>.</p>
 <p>Depending on how your file and directory privileges are configured,
 you may need to run this command with <code>sudo</code>.</p>
 <p>Now the <code>express</code> command on your system is updated to the
-Express 4 generator. </p>
+Express 4 generator.</p>
 <h3 id="">Changes to the app generator </h3>
 
 <p>Command options and use largely remain the same, with the following exceptions:</p>
