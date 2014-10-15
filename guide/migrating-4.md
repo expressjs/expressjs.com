@@ -1,7 +1,7 @@
 <h2 id="overview">Overview</h2>
 
 Express 4 is a breaking change from Express 3. That means an existing Express 3 app will not work if you update the Express version in its dependencies.
-  
+
 This article covers:
 
 <ul class="doclist">
@@ -77,8 +77,6 @@ The following table lists Express 3 middleware and their counterparts in Express
 <td><a href="https://github.com/expressjs/serve-index">serve-index</a></td></tr>
 <tr><td>express.static</td>
 <td><a href="https://github.com/expressjs/serve-static">serve-static</a></td></tr>
-<tr><td>express.timeout</td>
-<td><a href="https://github.com/expressjs/timeout">connect-timeout</a></td></tr>
 </table>
 
 Here is the [complete list](https://github.com/senchalabs/connect#middleware) of Express 4 middleware.
@@ -113,7 +111,7 @@ new features to help organize your routes:
 <ul class="doclist">
   <li>
     A new method, `app.route()`, to create chainable route
-    handlers for a route path. 
+    handlers for a route path.
   </li>
   <li>
     A new class, `express.Router`, to create modular mountable
@@ -129,7 +127,7 @@ helps to create modular routes and reduce redundancy and typos. For more
 information on routes, see [Router() documentation](/4x/api.html#router).
 
 Here is an example of chained route handlers defined using `app.route()`.
-  
+
 ```js
 app.route('/book')
   .get(function(req, res) {
@@ -148,7 +146,7 @@ app.route('/book')
 The other feature to help organize routes is a new class,
 `express.Router`, that you can use to create modular mountable
 route handlers. A `Router` instance is a complete middleware and
-routing system; for this reason it is often referred to as a "mini-app".  
+routing system; for this reason it is often referred to as a "mini-app".
 
 The following example creates a router as a module, loads a middleware in
 it, defines some routes, and mounts it on a path on the main app.
@@ -448,7 +446,7 @@ Express 4 app. To confirm, start the app with the following command:
 $ node .
 ```
 
-Load [http://localhost:3000](http://localhost:3000). 
+Load [http://localhost:3000](http://localhost:3000)
   and see the home page being rendered by Express 4.
 
 <h2 id="app-gen">Upgrading to the Express 4 app generator</h2>
@@ -479,7 +477,7 @@ Depending on how your file and directory privileges are configured,
 you may need to run this command with `sudo`.
 
 Now the `express` command on your system is updated to the
-Express 4 generator. 
+Express 4 generator.
 
 <h3 id="">Changes to the app generator </h3>
 
