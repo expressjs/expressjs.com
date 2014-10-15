@@ -446,7 +446,7 @@ Express 4 app. To confirm, start the app with the following command:
 $ node .
 ```
 
-Load [http://localhost:3000](http://localhost:3000).
+Load [http://localhost:3000](http://localhost:3000)
   and see the home page being rendered by Express 4.
 
 <h2 id="app-gen">Upgrading to the Express 4 app generator</h2>
