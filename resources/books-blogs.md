@@ -10,6 +10,8 @@ O'Reilly Media, July 2014.
 Manning Publications, October 2013.
  - **[Express Web Application Development](https://www.packtpub.com/web-development/express-web-application-development)**,
 Pack Publishing, June 2013.
+ - **[Mastering Web Application Development with Express](https://www.packtpub.com/web-development/mastering-web-application-development-express-raw)**,
+Pack Publishing, September 2014.
 
 ###Add your book here!
 
