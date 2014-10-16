@@ -188,18 +188,12 @@ a {
   margin-left: 5%;
 }
 
-#performance {
-  margin-right: 0 !important;
+#sponsorship, #sponsorship a {
+  color: #7DBD33;
 }
 
-#sponsorship {
-  padding-top: 17px;
-}
-
-#sponsorship a {
-  display: block;
-  width: 170px;
-  margin: 0 auto;
+#sponsorship h3 {
+  color: #08592B;
 }
 
 header {
@@ -461,11 +455,16 @@ pre, code {
   white-space: pre-wrap !important;
 }
 
-#loopback {
+#strongloop-header {
+  font-size: 0.6em;
   display: block;
   position: absolute;
   right: 2%;
   top: 11px;
+  width: 120px;
+  border-radius: 3px;
+  color: #08592B;
+  padding: 3px;
 }
 
 footer {
@@ -823,7 +822,7 @@ footer {
 
 @media all and (max-width: 420px) {
 
-  #loopback {
+  #strongloop-header {
     display: none;
   }
 

@@ -23,5 +23,10 @@
 </div>
 
 <div id="sponsorship">
-  [![](/images/expressjs-strongloop-training.svg)](http://strongloop.com/developers/events/)
+
+  [<h3>LoopBack</h3>
+  
+  Develop model-driven apps with Express-based framework.
+  <br/>
+  Find out more at loopback.io.](http://loopback.io/)
 </div>
