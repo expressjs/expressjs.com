@@ -2,7 +2,7 @@
 
 Use the application generator tool, `express`, to quickly create a application skeleton.
 
-Install it with the following command:
+Install it with the following command.
 
 ```sh
 $ npm install express-generator -g
@@ -56,8 +56,12 @@ $ express myapp
 
    run the app:
      $ DEBUG=myapp ./bin/www
-   run the app (Windows):
-     $ set DEBUG=myapp & node .\bin\www
+```
+
+On Windows, use the following command to run the app.
+
+```sh
+> set DEBUG=myapp & node .\bin\www
 ```
 
 The generated app directory structure looks like the following.
