@@ -26,8 +26,6 @@ $ express -h
     -f, --force         force on non-empty directory
 ```
 
-The following is an example of using the generator to create an Express app named _myapp_, in the current working directory.
-
 For example, the following creates an Express app named _myapp_ in the current working directory.
 
 ```sh
