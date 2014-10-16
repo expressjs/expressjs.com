@@ -56,6 +56,8 @@ $ express myapp
 
    run the app:
      $ DEBUG=myapp ./bin/www
+   run the app (Windows):
+     $ set DEBUG=myapp & node .\bin\www
 ```
 
 The generated app directory structure looks like the following.
