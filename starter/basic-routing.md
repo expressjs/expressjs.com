@@ -1,6 +1,6 @@
 # Basic routing tutorial
 
-This tutorial is a basic introduction to routing with Express.  _Routing_ refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or _path_) and a specific HTTP request method (GET, POST, and so on).
+This tutorial is a basic introduction to routing with Express.  _Routing_ refers to determining how an application responds to a client's request to a particular endpoint.  An enpoint being an URI (or _path_) along with a specific HTTP request method (GET, POST, and so on).
 
 Each route has a handler function, executed when the route is matched. 
 
