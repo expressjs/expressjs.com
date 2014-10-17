@@ -26,7 +26,7 @@
 
   [<h3>LoopBack</h3>
   
-  Develop model-driven apps with Express-based framework.
+  Develop model-driven apps with an Express-based framework.
   <br/>
   Find out more at loopback.io.](http://loopback.io/)
 </div>
