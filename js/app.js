@@ -117,6 +117,7 @@ $(function(){
 
     // applicable only it has a menu
     if ($(this).find('ul').length) {
+
       if ($(this).hasClass('active-mobile-menu')) {
         $(this).removeClass('active-mobile-menu')
         $(this).find('.dropit .dropit-submenu').hide()
@@ -138,7 +139,7 @@ $(function(){
   // when in mobile mode, menu names should open the submenu
   $('.dropit-trigger a').click(function (e) {
 
-    if (window.matchMedia('(max-width: 770px)').matches) {
+    if (window.matchMedia('(max-width: 899px)').matches) {
       e.preventDefault()
     }
 
