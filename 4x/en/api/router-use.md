@@ -16,7 +16,7 @@ router.use(function(req, res, next) {
   next();
 });
 
-// this will only be invoked if the path ends in /bar
+// this will only be invoked if the path starts with /bar from the mount point
 router.use('/bar', function(req, res, next) {
   // ... maybe some additional /bar logging ...
   next();
