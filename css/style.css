@@ -95,8 +95,8 @@ li code {
 
 #api-doc h2 {
   font-weight: bold;
-  font-size: 21px;
-  margin-bottom: 20px;
+  font-size: 24px;
+  margin: 40px 0 20px;
 }
 
 #api-doc h3 {
@@ -124,12 +124,13 @@ a {
   text-decoration: none;
 }
 
-#api-doc h2:target {
-  padding-top: 100px;
+.h2:target {
+  display: block;
+  padding-top: 40px;
 }
 
 #api-doc h3:target {
-  padding-top: 100px;
+  padding-top: 80px;
 }
 
 /* logo */
