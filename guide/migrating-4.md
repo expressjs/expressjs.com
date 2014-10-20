@@ -362,7 +362,7 @@ Make the following changes to app.js:
 
 <h3 id="">Version 4 app</h3>
 
-<h4 id="">pacakge.json</h4>
+<h4 id="">package.json</h4>
 
 Running the above `npm` command will update `package.json` as follows:
 
