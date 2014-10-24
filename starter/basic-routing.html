@@ -9,22 +9,22 @@ This tutorial assumes that an instance of <code>express</code> named <code>app</
 <p>The following code illustrates some example routes in an app.</p>
 <pre><code class="lang-js">// respond with &quot;Hello World!&quot; on the homepage
 app.get(&#39;/&#39;, function (req, res) {
-  res.send(&#39;Hello World!&#39;)
+  res.send(&#39;Hello World!&#39;);
 })
 
 // accept POST request on the homepage
 app.post(&#39;/&#39;, function (req, res) {
-  res.send(&#39;Got a POST request&#39;)
+  res.send(&#39;Got a POST request&#39;);
 })
 
 // accept PUT request at /user
 app.put(&#39;/user&#39;, function (req, res) {
-  res.send(&#39;Got a PUT request at /user&#39;)
+  res.send(&#39;Got a PUT request at /user&#39;);
 })
 
 // accept DELETE request at /user
 app.delete(&#39;/user&#39;, function (req, res) {
-  res.send(&#39;Got a DELETE request at /user&#39;)
+  res.send(&#39;Got a DELETE request at /user&#39;);
 })
 </code></pre>
 <!--
