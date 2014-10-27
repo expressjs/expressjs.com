@@ -1505,7 +1505,7 @@ app.use(cookieParser);
   index: false,
   maxAge: &#39;1d&#39;,
   redirect: false,
-  setHeaders: function (res, path) {
+  setHeaders: function (res, path, stat) {
     res.set(&#39;x-timestamp&#39;, Date.now())
   }
 };
