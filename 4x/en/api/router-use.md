@@ -1,4 +1,4 @@
-The interface is similar to [app.use()]('#app.use'). A simple example and usecase is described below, read the [app.use()]('#app.use') documentation for the details.
+The interface is similar to [app.use()](#app.use). A simple example and usecase is described below, read the [app.use()](#app.use) documentation for the details.
 
 Use the given middleware `function`, with optional mount `path`, defaulting to "/".
 
