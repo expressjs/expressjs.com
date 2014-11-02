@@ -1,6 +1,6 @@
 # Security updates
 
-<div class="doc-box doc-warn">
+<div class="doc-box doc-notice">
 Node.js vulnerabilities directy affect Express. Therefore [keep a watch on Node vulnerabilities](http://blog.nodejs.org/vulnerability/) and make sure you are using the latest stable version of Node.
 </div>
 
