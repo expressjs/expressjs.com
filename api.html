@@ -815,7 +815,7 @@ req.hostname
 req.subdomains
 // =&gt; [&quot;ferrets&quot;, &quot;tobi&quot;]
 </code></pre>
-</section><section><h3 id="req.originalUrl">req.originalUrl</h3><p>This property is much like <code>req.url</code>; however, it retains the original request url, allowing you to rewrite <code>req.url</code> freely for internal routing purposes. For example, the &quot;mounting&quot; feature of <a href="#app.use(">app.use()</a>) will rewrite <code>req.url</code> to strip the mount point.</p>
+</section><section><h3 id="req.originalUrl">req.originalUrl</h3><p>This property is much like <code>req.url</code>; however, it retains the original request url, allowing you to rewrite <code>req.url</code> freely for internal routing purposes. For example, the &quot;mounting&quot; feature of <a href="#app.use">app.use()</a> will rewrite <code>req.url</code> to strip the mount point.</p>
 <pre><code class="lang-js">// GET /search?q=something
 req.originalUrl
 // =&gt; &quot;/search?q=something&quot;
@@ -1160,7 +1160,7 @@ router.get(&#39;/events&#39;, function(req, res, next) {
 <pre><code class="lang-js">// only requests to /calendar/* will be sent to our &quot;router&quot;
 app.use(&#39;/calendar&#39;, router);
 </code></pre>
-</section><section><h3 id="router.use">router.use([path], [function...], function)</h3><p>The interface is similar to <a href="&#39;#app.use&#39;">app.use()</a>. A simple example and usecase is described below, read the <a href="&#39;#app.use&#39;">app.use()</a> documentation for the details.</p>
+</section><section><h3 id="router.use">router.use([path], [function...], function)</h3><p>The interface is similar to <a href="#app.use">app.use()</a>. A simple example and usecase is described below, read the <a href="#app.use">app.use()</a> documentation for the details.</p>
 <p>Use the given middleware <code>function</code>, with optional mount <code>path</code>, defaulting to &quot;/&quot;.</p>
 <p>Middleware is like a plumbing pipe, requests start at the first middleware you define and work their way &quot;down&quot; the middleware stack processing for each path they match.</p>
 <pre><code class="lang-js">var express = require(&#39;express&#39;);
