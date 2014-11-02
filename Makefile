@@ -23,7 +23,7 @@ HTML = index.html \
   guide/using-middleware.html \
   guide/using-template-engines.html \
   guide/database-integration.html \
-  advanced/security.html \
+  advanced/security-updates.html \
   advanced/performance.html \
   advanced/developing-template-engines.html
 
