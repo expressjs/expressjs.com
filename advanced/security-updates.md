@@ -11,7 +11,7 @@ Node.js vulnerabilities directy affect Express. Therefore [keep a watch on Node 
       - Fix a path traversal issue when using `root`
       - Fix malicious path detection for empty string path
   * 4.8.4
-    * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests can cause `fd`s to leak and eventually leak to `EMFILE `errors and server unresponsiveness.
+    * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests can cause `fd`s to leak and eventually leak to `EMFILE` errors and server unresponsiveness.
   * 4.8.0
     * deps: qs@1.0.2
       - denial of service fix
