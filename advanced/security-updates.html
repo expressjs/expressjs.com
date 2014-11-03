@@ -14,10 +14,7 @@ Node.js vulnerabilities directy affect Express. Therefore <a href="http://blog.n
 </ul>
 </li>
 <li>4.8.4<ul>
-<li>deps: send@0.8.2<ul>
-<li>Work around <code>fd</code> leak in Node.js 0.10 for <code>fs.ReadStream</code></li>
-</ul>
-</li>
+<li>Node.js 0.10 can leak <code>fd</code>s in certain situations that affect <code>express.static</code> and <code>res.sendfile</code>. Malicious requests can cause <code>fd</code>s to leak and eventually leak to <code>EMFILE</code>errors and server unresponsiveness.</li>
 </ul>
 </li>
 <li>4.8.0<ul>
