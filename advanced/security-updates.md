@@ -16,12 +16,6 @@ Node.js vulnerabilities directy affect Express. Therefore [keep a watch on Node 
   * 4.8.0
     * deps: qs@1.0.2
       - denial of service fix
-  * 4.7.0 
-    * deps: send@0.7.0
-      - Add `dotfiles` option
-  * 4.6.0
-    * add explicit "Rosetta Flash JSONP abuse" protection
-      - previous versions are not vulnerable; this is just explicit protection
 
 ## 3.x
 
@@ -36,14 +30,5 @@ Node.js vulnerabilities directy affect Express. Therefore [keep a watch on Node 
     * deps: connect@2.25.0
       - deps: qs@1.0.2
         - denial of service fix
-  * 3.15.0
-    * deps: send@0.7.0
-      - Add `dotfiles` option
-  * 3.14.0
-    * add explicit "Rosetta Flash JSONP abuse" protection
-      - previous versions are not vulnerable; this is just explicit protection
-  * 3.11.0
-    * deps: connect@2.20.2
-      - fixed `express.bodyParser` temporary files "issue"
   * 3.3.0
     * fix method-override middleware abuse
