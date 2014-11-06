@@ -26,14 +26,15 @@ $(function(){
   var latest = '';
   var branchPath = 'https://github.com/strongloop/expressjs.com';
   var pathName = document.location.pathname;
-
+  console.log(pathName)
   var fileName = pathName.split('/').splice(-1);
   var currentVersion = '4x';
   var pagePath;
   var editPath;
-
+  console.log(fileName)
   // the api doc cannot be edited individually, we'll have to link to the dir instead
   if (fileName == 'api.html') {
+    console.log('API');
     editPath = branchPath + '/tree/gh-pages/'+ currentVersion +'/en/api';
   }
   // link to individual doc files
@@ -46,7 +47,7 @@ $(function(){
 
   if (pathName == '/') editLink = '<a href="' + branchPath + '">Fork the website on GitHub</a>';
   else editLink = '<a href="' + editPath + '">Edit this page on GitHub</a>';
-
+console.log(editLink)
   $('#fork').html(editLink);
 
   // code highlight
