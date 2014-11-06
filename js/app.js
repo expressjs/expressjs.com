@@ -31,7 +31,7 @@ $(function(){
   var currentVersion = '4x';
   var pagePath;
   var editPath;
-
+console.log(fileName)
   // the api doc cannot be edited individually, we'll have to link to the dir instead
   if (fileName == 'api.html') {
     editPath = branchPath + '/tree/gh-pages/'+ currentVersion +'/en/api';
@@ -41,7 +41,7 @@ $(function(){
     pagePath = pathName.replace(/\.html$/, '.md');
     editPath = branchPath + '/blob/gh-pages' + pagePath;
   }
-
+console.log(editPath)
   var editLink;
 
   if (pathName == '/') editLink = '<a href="' + branchPath + '">Fork the website on GitHub</a>';
