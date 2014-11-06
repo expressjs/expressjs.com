@@ -34,6 +34,7 @@ $(function(){
 console.log(fileName)
   // the api doc cannot be edited individually, we'll have to link to the dir instead
   if (fileName == 'api.html') {
+    var API = true;
     editPath = branchPath + '/tree/gh-pages/'+ currentVersion +'/en/api';
   }
   // link to individual doc files
