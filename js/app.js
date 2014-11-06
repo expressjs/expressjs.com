@@ -27,8 +27,8 @@ $(function(){
   var branchPath = 'https://github.com/strongloop/expressjs.com';
   var pathName = document.location.pathname;
 
-  var fileName = pathName.split('/').splice(-1)[0];
-  var currentVersion = '4x';
+  var currentVersion = pathName.split('/').splice(-2)[0] || '4x'; // defaults to current version
+  var fileName = pathName.split('/').splice(-2)[1];
   var pagePath;
   var editPath;
 
