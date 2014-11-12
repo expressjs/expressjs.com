@@ -5,4 +5,4 @@ req.fresh
 // => true
 ```
 
-Please refer to [fresh](https://github.com/visionmedia/node-fresh) for additional documentation or any issues and concerns.
+Please refer to [fresh](https://github.com/jshttp/fresh) for additional documentation or any issues and concerns.
