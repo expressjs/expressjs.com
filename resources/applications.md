@@ -84,15 +84,6 @@ Extensive real-time mobile analytics as a service.
 
 Visit [Countly](https://count.ly/)
 
-##Balloons.io
-
-A beautiful open-source realtime chat application
-backed by Express.
-
-[![](/images/apps/screenshots/balloon.png)](http://balloons.io/)
-
-Visit [Balloons.io](http://balloons.io/)
-
 ## Segment.io
 
 No more littering your app with tons of different analytics providers.
