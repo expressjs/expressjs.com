@@ -202,7 +202,7 @@ Serve static content for the apfrom the "public" directory in the application di
 app.use(express.static(__dirname + '/public'));
 ```
 
-Mount the middleware at "/static" to server static content only when their request path is prefixed with "/static".
+Mount the middleware at "/static" to serve static content only when their request path is prefixed with "/static".
 
 ```js
 // GET /static/style.css etc.
