@@ -331,7 +331,7 @@ app.use(mw1, [mw2, r1, r2], subApp);
 <pre><code class="lang-js">// GET /style.css etc
 app.use(express.static(__dirname + &#39;/public&#39;));
 </code></pre>
-<p>Mount the middleware at &quot;/static&quot; to server static content only when their request path is prefixed with &quot;/static&quot;.</p>
+<p>Mount the middleware at &quot;/static&quot; to serve static content only when their request path is prefixed with &quot;/static&quot;.</p>
 <pre><code class="lang-js">// GET /static/style.css etc.
 app.use(&#39;/static&#39;, express.static(__dirname + &#39;/public&#39;));
 </code></pre>
@@ -800,7 +800,7 @@ req.hostname
 <pre><code class="lang-js">req.fresh
 // =&gt; true
 </code></pre>
-<p>Please refer to <a href="https://github.com/visionmedia/node-fresh">fresh</a> for additional documentation or any issues and concerns.</p>
+<p>Please refer to <a href="https://github.com/jshttp/fresh">fresh</a> for additional documentation or any issues and concerns.</p>
 </section><section><h3 id="req.stale">req.stale</h3><p>Check if the request is &quot;stale&quot; (i.e. the Last-Modified and/or ETag headers do not match).</p>
 <pre><code class="lang-js">req.stale
 // =&gt; true
@@ -855,8 +855,7 @@ res.set({
   &#39;ETag&#39;: &#39;12345&#39;
 })
 </code></pre>
-<p>js
-Aliased as <code>res.header(field, [value])</code>.</p>
+<p>Aliased as <code>res.header(field, [value])</code>.</p>
 </section><section><h3 id="res.get">res.get(field)</h3><p>Get the case-insensitive response header <code>field</code>. </p>
 <pre><code class="lang-js">res.get(&#39;Content-Type&#39;);
 // =&gt; &quot;text/plain&quot;
