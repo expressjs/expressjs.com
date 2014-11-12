@@ -331,7 +331,7 @@ app.use(mw1, [mw2, r1, r2], subApp);
 <pre><code class="lang-js">// GET /style.css etc
 app.use(express.static(__dirname + &#39;/public&#39;));
 </code></pre>
-<p>Mount the middleware at &quot;/static&quot; to server static content only when their request path is prefixed with &quot;/static&quot;.</p>
+<p>Mount the middleware at &quot;/static&quot; to serve static content only when their request path is prefixed with &quot;/static&quot;.</p>
 <pre><code class="lang-js">// GET /static/style.css etc.
 app.use(&#39;/static&#39;, express.static(__dirname + &#39;/public&#39;));
 </code></pre>
