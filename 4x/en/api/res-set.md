@@ -9,5 +9,5 @@ res.set({
   'ETag': '12345'
 })
 ```
-js
+
 Aliased as `res.header(field, [value])`.
