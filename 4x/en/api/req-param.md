@@ -22,4 +22,8 @@ Lookup is performed in the following order:
 
 Optionally, you can specify `defaultValue` to set a default value if the parameter is not found in any of the request objects.
 
+<div class="doc-box doc-warn">
 Direct access to `req.body`, `req.params`, and `req.query` should be favoured for clarity - unless you truly accept input from each object.
+
+Body-parsing middleware must be loaded for `req.param()` to work preditably. Refer [req.body](#req.body) for details.
+</div>
