@@ -3,57 +3,40 @@
 Node.js vulnerabilities directy affect Express. Therefore <a href="http://blog.nodejs.org/vulnerability/">keep a watch on Node vulnerabilities</a> and make sure you are using the latest stable version of Node.
 </div>
 
+<p>The list below enumerates the Express vulnerabilities that were fixed in the specified version update.</p>
 <h2 id="4-x">4.x</h2>
 <ul>
 <li>4.8.8<ul>
-<li>deps: send@0.8.5<ul>
-<li>Fix a path traversal issue when using <code>root</code></li>
-<li>Fix malicious path detection for empty string path</li>
-</ul>
-</li>
+<li>Fixed directory traversal vulnerabilities in <code>express.static</code>.</li>
 </ul>
 </li>
 <li>4.8.4<ul>
-<li>Node.js 0.10 can leak <code>fd</code>s in certain situations that affect <code>express.static</code> and <code>res.sendfile</code>. Malicious requests can cause <code>fd</code>s to leak and eventually leak to <code>EMFILE</code> errors and server unresponsiveness.</li>
+<li>Node.js 0.10 can leak <code>fd</code>s in certain situations that affect <code>express.static</code> and <code>res.sendfile</code>. Malicious requests could cause <code>fd</code>s to leak and eventually leak to <code>EMFILE</code> errors and server unresponsiveness.</li>
 </ul>
 </li>
 <li>4.8.0<ul>
-<li>deps: qs@1.0.2<ul>
-<li>denial of service fix</li>
-</ul>
-</li>
+<li>Sparse arrays with extremely high indexes in query string could cause the process to run out of memory and crash the server.</li>
+<li>Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.</li>
 </ul>
 </li>
 </ul>
 <h2 id="3-x">3.x</h2>
 <ul>
 <li>3.16.10<ul>
-<li>deps: send@0.8.5<ul>
-<li>Fix a path traversal issue when using <code>root</code></li>
-<li>Fix malicious path detection for empty string path</li>
-</ul>
-</li>
+<li>Fixed directory traversal vulnerabilities in <code>express.static</code>.</li>
 </ul>
 </li>
 <li>3.16.6<ul>
-<li>deps: send@0.8.2<ul>
-<li>Work around <code>fd</code> leak in Node.js 0.10 for <code>fs.ReadStream</code></li>
-</ul>
-</li>
+<li>Node.js 0.10 can leak <code>fd</code>s in certain situations that affect <code>express.static</code> and <code>res.sendfile</code>. Malicious requests could cause <code>fd</code>s to leak and eventually leak to <code>EMFILE</code> errors and server unresponsiveness.</li>
 </ul>
 </li>
 <li>3.16.0<ul>
-<li>deps: connect@2.25.0<ul>
-<li>deps: qs@1.0.2<ul>
-<li>denial of service fix</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>Sparse arrays with extremely high indexes in query string could cause the process to run out of memory and crash the server.</li>
+<li>Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.</li>
 </ul>
 </li>
 <li>3.3.0<ul>
-<li>fix method-override middleware abuse</li>
+<li>The 404 response of an unsupported method override attempt was susceptible to cross-site scripting attacks.</li>
 </ul>
 </li>
 </ul>

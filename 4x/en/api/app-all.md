@@ -1,4 +1,4 @@
-This method functions just like the `app.VERB()` methods,
+This method functions just like the `app.METHOD()` methods,
 however it matches all HTTP verbs. 
 
 This method is extremely useful for

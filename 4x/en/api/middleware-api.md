@@ -8,7 +8,7 @@ With an optional mount path, middleware can be loaded at the application level o
 
 <h3 id='middleware.application'>Application level middleware</h3>
 
-Application level middleware are bound to an instance of `express`, using `app.use()` and `app.VERB()`.
+Application level middleware are bound to an instance of `express`, using `app.use()` and `app.METHOD()`.
 
 ```js
 var app = express();
@@ -61,7 +61,7 @@ app.get('/user/:id', function (req, res, next) {
 });
 ```
 
-If you need to skip the rest of the middleware from a router middleware stack, call `next('route')` to pass on the control to the next route. Note: `next('route')` will work only in middleware loaded using `app.VERB()` or `router.VERB()`.
+If you need to skip the rest of the middleware from a router middleware stack, call `next('route')` to pass on the control to the next route. Note: `next('route')` will work only in middleware loaded using `app.METHOD()` or `router.METHOD()`.
 
 ```js
 // a middleware sub-stack which handles GET requests to /user/:id
@@ -88,7 +88,7 @@ Router level middleware work just like application level middleware except they 
 ```js
 var router = express.Router();
 ```
-Router level middleware are loaded using `router.use()` and `router.VERB()`.
+Router level middleware are loaded using `router.use()` and `router.METHOD()`.
 
 The middleware system created at the application level in the example above, can be replicated at the router level using the following code.
 

@@ -1,4 +1,4 @@
-This method functions just like the `router.VERB()` methods, except that it matches all HTTP verbs. 
+This method functions just like the `router.METHOD()` methods, except that it matches all HTTP verbs. 
 
 This method is extremely useful for
 mapping "global" logic for specific path prefixes or arbitrary matches.
