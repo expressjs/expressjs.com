@@ -26,6 +26,7 @@ add a link to your book, then submit a pull request (GitHub login required).  Fo
 
 - [StrongLoop Blog: Express category](http://strongloop.com/strongblog/category/express/)
 - [Hage Yaapa's Blog: Express category](http://www.hacksparrow.com/category/express-js)
+- [Codeforgeek Blog: Express category](http://codeforgeek.com/code/nodejs/express/)
 
 ###Add your blog here!
 
