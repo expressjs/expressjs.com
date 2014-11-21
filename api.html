@@ -377,7 +377,7 @@ provide <code>req.user</code> to the route, or perform validations
 on the parameter input.</p>
 <p><em>Note</em></p>
 <ul>
-<li>Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>app</code> will be trigerred only by route parameters defined on <code>app</code> routes.</li>
+<li>Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>app</code> will be triggered only by route parameters defined on <code>app</code> routes.</li>
 <li>A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.</li>
 </ul>
 <pre><code class="lang-js">app.param(&#39;id&#39;, function (req, res, next, id) {
