@@ -1,5 +1,7 @@
 # Books and blogs
 
+<div class="doc-box doc-warn">Disclaimer: Unendorsed community content.</div>
+
 ## Books
 
 Here are a few of the many books on Express:
@@ -30,5 +32,4 @@ add a link to your book, then submit a pull request (GitHub login required).  Fo
 
 ###Add your blog here!
 
-[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) and
-add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.
