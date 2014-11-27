@@ -106,7 +106,7 @@ Router level middleware are loaded using `router.use()` and `router.VERB()`.
 The middleware system created at the application level in the example above, can be replicated at the router level using the following code.
 
 ```js
-var app = express();
+var express = express();
 var router = express.Router();
 
 // a middleware with no mount path, gets executed for every request to the router
