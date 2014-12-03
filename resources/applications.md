@@ -160,6 +160,14 @@ LogHuman is an application insights platform which enables developers to record 
 
 Visit [LogHuman](https://loghuman.com)
 
+##VogueVerve
+
+VogueVerve is a minimalist fashion social platform. Follow, like and buy.
+
+[![](/images/apps/screenshots/vogueverve.png)](http://vogueverve.com)
+
+Visit [VogueVerve](http://vogueverve.com)
+
 ##Add your app or site
 
 [Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/menu/en/resources/applications.md),
