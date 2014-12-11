@@ -7,17 +7,17 @@ Map logic to route parameters. For example, when `:user` is present in a route p
   * A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.
 
     ```js
-    app.param('id', function (req, res, next, id) {
+    router.param('id', function (req, res, next, id) {
       console.log('CALLED ONLY ONCE');
       next();
     })
 
-    app.get('/user/:id', function (req, res, next) {
+    router.get('/user/:id', function (req, res, next) {
       console.log('although this matches');
       next();
     });
 
-    app.get('/user/:id', function (req, res) {
+    router.get('/user/:id', function (req, res) {
       console.log('and this matches too');
       res.end();
     });
