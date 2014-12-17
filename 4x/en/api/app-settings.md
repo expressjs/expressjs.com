@@ -69,7 +69,7 @@ Express application settings can be set using [`app.set()`](#app.set), and retri
       <tr>
         <td>** Boolean **</td>
         <td>
-            `true` enables strong ETag. This is the default setting.<br>
+            `true` enables weak ETag. This is the default setting.<br>
             `false` disables ETag altogether.
         </td>
       </tr>
