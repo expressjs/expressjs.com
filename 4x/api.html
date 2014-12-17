@@ -1244,17 +1244,17 @@ app.use(express.static(__dirname + &#39;/uploads&#39;));
 <li><p>Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>router</code> will be trigerred only by route parameters defined on <code>router</code> routes.</p>
 </li>
 <li><p>A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.</p>
-<pre><code class="lang-js">app.param(&#39;id&#39;, function (req, res, next, id) {
+<pre><code class="lang-js">router.param(&#39;id&#39;, function (req, res, next, id) {
   console.log(&#39;CALLED ONLY ONCE&#39;);
   next();
 })
 
-app.get(&#39;/user/:id&#39;, function (req, res, next) {
+router.get(&#39;/user/:id&#39;, function (req, res, next) {
   console.log(&#39;although this matches&#39;);
   next();
 });
 
-app.get(&#39;/user/:id&#39;, function (req, res) {
+router.get(&#39;/user/:id&#39;, function (req, res) {
   console.log(&#39;and this matches too&#39;);
   res.end();
 });
