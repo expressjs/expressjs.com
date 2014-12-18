@@ -18,6 +18,7 @@ router.route('/users/:user_id')
 .all(function(req, res, next) {
   // runs for all HTTP verbs first
   // think of it as route specific middleware!
+  next();
 })
 .get(function(req, res, next) {
   res.json(req.user);
