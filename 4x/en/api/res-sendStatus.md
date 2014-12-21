@@ -7,7 +7,7 @@ res.sendStatus(404); // equivalent to res.status(404).send('Not Found')
 res.sendStatus(500); // equivalent to res.status(500).send('Internal Server Error')
 ```
 
-If an unspported status code is specified, the HTTP status is still set to `statusCode` and the string version of the code is sent as the response body.
+If an unsupported status code is specified, the HTTP status is still set to `statusCode` and the string version of the code is sent as the response body.
 
 ```js
 res.sendStatus(2000); // equivalent to res.status(2000).send('2000')
