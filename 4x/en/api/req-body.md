@@ -1,7 +1,7 @@
 Contains the key-value pairs of data submitted in the request body. It is `undefined` by default, and is 
 populated with the use of a body-parsing middleware such as [body-parser](https://www.npmjs.org/package/body-parser) and [multer](https://www.npmjs.org/package/multer).
 
-The example below shows the use of body-parsing middleware to ppopulate `req.body`.
+The example below shows the use of body-parsing middleware to populate `req.body`.
 
 ```js
 var app = require('express')();
