@@ -12,7 +12,7 @@ Options is an optional object to alter the behavior of the router.
 
 * `caseSensitive` Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same
 * `strict`  Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router
-* `mergeParams` Ensure the `req.params` values from the parent router are preserved. If the parent and the child have conflicting param names, the child's value take precedence. Defaults to `false`.
+* `mergeParams` *Since Express.js v4.5.0.* Ensure the `req.params` values from the parent router are preserved. If the parent and the child have conflicting param names, the child's value take precedence. Defaults to `false`.
 
 The router can have middleware and http VERB routes added just like an application.
 
