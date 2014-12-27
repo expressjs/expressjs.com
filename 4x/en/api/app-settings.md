@@ -59,7 +59,7 @@ Express application settings can be set using [`app.set()`](#app.set), and retri
 * `strict routing` Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router.
 * `view cache` Enables view template compilation caching, enabled in production by default.
 * `view engine` The default engine extension to use when omitted.
-* `views` The view directory path, defaulting to `"process.cwd() + '/views'"`.
+* `views` A directory or an array of directories for the application's views. Defaults to `"process.cwd() + '/views'"`. If an array is specified, the views are looked up in sequence in the array of directories.
 * `query parser` The query parser to use - "simple" or "extended", defaults to "extended". The simple query parser is based on node's native query parser, [querystring](http://nodejs.org/api/querystring.html). The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
 * `x-powered-by` Enables the "X-Powered-By: Express" HTTP header, enabled by default.
 * `etag` Set the ETag response header.

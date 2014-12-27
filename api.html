@@ -66,7 +66,7 @@ app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;un
 <li><code>strict routing</code> Enable strict routing, by default &quot;/foo&quot; and &quot;/foo/&quot; are treated the same by the router.</li>
 <li><code>view cache</code> Enables view template compilation caching, enabled in production by default.</li>
 <li><code>view engine</code> The default engine extension to use when omitted.</li>
-<li><code>views</code> The view directory path, defaulting to <code>&quot;process.cwd() + &#39;/views&#39;&quot;</code>.</li>
+<li><code>views</code> A directory or an array of directories for the application&#39;s views. Defaults to <code>&quot;process.cwd() + &#39;/views&#39;&quot;</code>. If an array is specified, the views are looked up in sequence in the array of directories.</li>
 <li><code>query parser</code> The query parser to use - &quot;simple&quot; or &quot;extended&quot;, defaults to &quot;extended&quot;. The simple query parser is based on node&#39;s native query parser, <a href="http://nodejs.org/api/querystring.html">querystring</a>. The extended query parser is based on <a href="https://www.npmjs.org/package/qs">qs</a>.</li>
 <li><code>x-powered-by</code> Enables the &quot;X-Powered-By: Express&quot; HTTP header, enabled by default.</li>
 <li><p><code>etag</code> Set the ETag response header.</p>
