@@ -5,7 +5,7 @@
 app.engine(&#39;ntl&#39;, function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
     if (err) throw new Error(err);
-    // this is an exteremly simple template engine
+    // this is an extremely simple template engine
     var rendered = content.toString().replace(&#39;#title#&#39;, &#39;&lt;title&gt;&#39;+ options.title +&#39;&lt;/title&gt;&#39;)
     .replace(&#39;#message#&#39;, &#39;&lt;h1&gt;&#39;+ options.message +&#39;&lt;/h1&gt;&#39;);
     return callback(null, rendered);
