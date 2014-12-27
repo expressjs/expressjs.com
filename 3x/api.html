@@ -83,7 +83,7 @@ app.listen(3000);
 to the middleware <code>function</code>. The main effect of this feature is that
 mounted middleware may operate without code changes regardless of its "prefix"
 pathname.
-</p><div class="doc-box doc-notice"><p>A route will match any path which follows its path with either a "<code>/</code>" or a "<code>.</code>". For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, <b>/apple.html</b>, <b>/apple.html.txt</b>, and so on.</p></div><p>Here's a concrete example, take the typical use-case of serving files in ./public
+</p><div class="doc-box doc-notice"><p>A route will match any path, which follows its path immediately with either a "<code>/</code>" or a "<code>.</code>". For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, <b>/apple.html</b>, <b>/apple.html.txt</b>, and so on.</p></div><p>Here's a concrete example, take the typical use-case of serving files in ./public
 using the <code>express.static()</code> middleware:
 </p><pre class="js"><code>// GET /javascripts/jquery.js
 // GET /style.css

@@ -1,7 +1,7 @@
 Mount the [middleware](#middleware.api) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
 
 <div class="doc-box doc-notice">
-A route will match any path which follows its path with a "<code>/</code>". For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, and so on.  
+A route will match any path, which follows its path immediately with a "<code>/</code>". For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, and so on.  
 </div>
 
 Mounting a middleware at a `path` will cause the middleware function to be executed whenever the base of the requested path matches the `path`.

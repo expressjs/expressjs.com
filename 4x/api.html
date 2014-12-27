@@ -143,7 +143,7 @@ app.disabled(&#39;trust proxy&#39;);
 </code></pre>
 </section><section><h3 id="app.use">app.use([path], [function...], function)</h3><p>Mount the <a href="#middleware.api">middleware</a> <code>function</code>(s) at the <code>path</code>. If <code>path</code> is not specified, it defaults to &quot;/&quot;.</p>
 <div class="doc-box doc-notice">
-A route will match any path which follows its path with a &quot;<code>/</code>&quot;. For example: <code>app.use(&#39;/apple&#39;, ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, and so on.<br></div>
+A route will match any path, which follows its path immediately with a &quot;<code>/</code>&quot;. For example: <code>app.use(&#39;/apple&#39;, ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, and so on.<br></div>
 
 <p>Mounting a middleware at a <code>path</code> will cause the middleware function to be executed whenever the base of the requested path matches the <code>path</code>.</p>
 <p>Since <code>path</code> defaults to &quot;/&quot;, middleware mounted without a path will be executed for every request to the app.</p>

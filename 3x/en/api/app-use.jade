@@ -30,7 +30,7 @@ section
 
   .doc-box.doc-notice
     p.
-      A route will match any path which follows its path with either a "<code>/</code>" or a "<code>.</code>". For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, <b>/apple.html</b>, <b>/apple.html.txt</b>, and so on.
+      A route will match any path, which follows its path immediately with either a "<code>/</code>" or a "<code>.</code>". For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, <b>/apple.html</b>, <b>/apple.html.txt</b>, and so on.
   p.
     Here's a concrete example, take the typical use-case of serving files in ./public
     using the <code>express.static()</code> middleware:
