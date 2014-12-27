@@ -1,6 +1,6 @@
 section
   h3(id='app.use') app.use([path], function)
-  
+
   p.
     Use the given middleware <code>function</code>, with optional mount <code>path</code>,
     defaulting to "/".
@@ -28,6 +28,9 @@ section
     mounted middleware may operate without code changes regardless of its "prefix"
     pathname.
 
+  .doc-box.doc-notice
+    p.
+      A route will match any path which follows its path with either a "<code>/</code>" or a "<code>.</code>". For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, <b>/apple.html</b>, <b>/apple.html.txt</b>, and so on.
   p.
     Here's a concrete example, take the typical use-case of serving files in ./public
     using the <code>express.static()</code> middleware:
