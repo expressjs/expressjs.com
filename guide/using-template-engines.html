@@ -20,7 +20,7 @@ Some template engines do not follow this convention, the <a href="https://www.np
     title!= title
   body
     h1!= message
-</code></pre><p>Then create a route to render the &quot;index.jade&quot; file.</p>
+</code></pre><p>Then create a route to render the &quot;index.jade&quot; file. If the <code>view engine</code> property is not set, you will have to specify the extension of the view file, else you can omit it.</p>
 <pre><code class="lang-js">app.get(&#39;/&#39;, function (req, res) {
   res.render(&#39;index&#39;, { title: &#39;Hey&#39;, message: &#39;Hello there!&#39;});
 })

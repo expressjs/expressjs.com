@@ -33,7 +33,7 @@ html
     h1!= message
 ```
 
-Then create a route to render the "index.jade" file.
+Then create a route to render the "index.jade" file. If the `view engine` property is not set, you will have to specify the extension of the view file, else you can omit it.
 
 ```js
 app.get('/', function (req, res) {
