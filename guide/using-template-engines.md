@@ -11,14 +11,16 @@ Then install the corresponding template engine npm package.
 $ npm install jade --save
 ```
 
+<div class="doc-box doc-notice">
 Express-compliant template engines such as Jade, export a function named `__express(filePath, options, callback)`, which is called by `res.render()` to render the template code.
 
 Some template engines do not follow this convention, the [Consolidate.js](https://www.npmjs.org/package/consolidate) library was created to map all of node's popular template engines to follow this convention, thus allowing them to work seamlessly within Express.
+</div>
 
 Once the view engine is set, you don't have to explicitly specify the engine or load the template engine module in your app, Express loads it internally as shown below, for the example above.
 
 ```
-app.engine('jade', require('jade').__express);
+app.set('view engine', 'jade');
 ```
 
 Create a Jade template files named "index.jade" in the views directory, with the following content.
