@@ -129,7 +129,7 @@ $(function(){
   // main menu
   $('#navmenu > li').click(function () {
 
-    // applicable only it has a menu
+    // applicable only if it has a menu
     if ($(this).find('ul').length) {
 
       if ($(this).hasClass('active-mobile-menu')) {
