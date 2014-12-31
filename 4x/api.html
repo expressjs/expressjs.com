@@ -1240,17 +1240,42 @@ res.status(404).end();
   console.log(res.headersSent); // true
 })
 </code></pre>
-</section><h2>Router</h2><a id="router" class="h2"></a><section><h3 id="router">Router()</h3><p>A router is an isolated instance of middleware and routes. Routers can be thought of as &quot;mini&quot; applications, capable only of performing middleware and routing functions. Every express application has a built-in app router.</p>
+</section><h2>Router</h2><a id="router" class="h2"></a><section><h3 id="router">Router([options])</h3><p>A router is an isolated instance of middleware and routes. Routers can be thought of as &quot;mini&quot; applications, capable only of performing middleware and routing functions. Every express application has a built-in app router.</p>
 <p>Routers behave like middleware themselves and can be &quot;.use()&#39;d&quot; by the app or in other routers.</p>
 <p>Create a new router with <code>express.Router()</code>:</p>
 <pre><code class="lang-js">var router = express.Router([options]);
 </code></pre>
-<p>Options is an optional object to alter the behavior of the router.</p>
-<ul>
-<li><code>caseSensitive</code> Enable case sensitivity, disabled by default, treating &quot;/Foo&quot; and &quot;/foo&quot; as the same</li>
-<li><code>strict</code>  Enable strict routing, by default &quot;/foo&quot; and &quot;/foo/&quot; are treated the same by the router</li>
-<li><code>mergeParams</code> Ensure the <code>req.params</code> values from the parent router are preserved. If the parent and the child have conflicting param names, the child&#39;s value take precedence. Defaults to <code>false</code>.</li>
-</ul>
+<p><code>options</code> is an optional object to alter the behavior of the router.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Default</th>
+<th>Availability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>caseSensitive</code></td>
+<td>Enable case sensitivity</td>
+<td>Disabled by default, treating &quot;/Foo&quot; and &quot;/foo&quot; as the same.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>strict</code></td>
+<td>Enable strict routing</td>
+<td>Disabled by default, &quot;/foo&quot; and &quot;/foo/&quot; are treated the same by the router.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>mergeParams</code></td>
+<td>Ensure the <code>req.params</code> values from the parent router are preserved. If the parent and the child have conflicting param names, the child&#39;s value take precedence.</td>
+<td><code>false</code></td>
+<td>4.5.0+</td>
+</tr>
+</tbody>
+</table>
 <p>The router can have middleware and http VERB routes added just like an application.</p>
 <pre><code class="lang-js">// invoked for any requests passed to this router
 router.use(function(req, res, next) {

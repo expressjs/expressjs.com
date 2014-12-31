@@ -8,11 +8,13 @@ Create a new router with `express.Router()`:
 var router = express.Router([options]);
 ```
 
-Options is an optional object to alter the behavior of the router.
+`options` is an optional object to alter the behavior of the router.
 
-* `caseSensitive` Enable case sensitivity, disabled by default, treating "/Foo" and "/foo" as the same
-* `strict`  Enable strict routing, by default "/foo" and "/foo/" are treated the same by the router
-* `mergeParams` Ensure the `req.params` values from the parent router are preserved. If the parent and the child have conflicting param names, the child's value take precedence. Defaults to `false`.
+| Property        | Description                                     | Default     | Availability  |
+|-----------------|-------------------------------------------------|-------------|---------------|
+| `caseSensitive` | Enable case sensitivity | Disabled by default, treating "/Foo" and "/foo" as the same.|  |
+| `strict`        | Enable strict routing | Disabled by default, "/foo" and "/foo/" are treated the same by the router.|  |
+| `mergeParams`   | Ensure the `req.params` values from the parent router are preserved. If the parent and the child have conflicting param names, the child's value take precedence.| `false` | 4.5.0+ |
 
 The router can have middleware and http VERB routes added just like an application.
 

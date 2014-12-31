@@ -356,24 +356,24 @@ html[xmlns] .clearfix {
 
 /* doc specific */
 
-.doctable {
+.doctable, section table {
   margin: 1em 1em 1em 0;
-  border: 1px solid #d8d8d8;
+  border: 1px solid #c6c6c6;
   border-collapse: collapse;
   background-color: #f4f3f3;
   empty-cells:show;
   width: 100%;
 }
 
-.doctable td, .doctable th {
+.doctable td, .doctable th, section table td, section table th {
   padding: 7px;
   line-height: 120%;
   vertical-align: top;
-  border-color: #d8d8d8;
+  border: 1px solid #c6c6c6;
 }
 
-.doctable tr th {
-  background-color: #D8D8D8;
+.doctable tr th, section table tr th {
+  background-color: #c6c6c6;
   font-size: 110%;
 }
 
