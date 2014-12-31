@@ -1,16 +1,16 @@
-<div class="notice">**Note**: `res.sendFile` requires Express version to be at least 4.8.0</div>
+<div class="doc-box doc-info">`res.sendFile` is supported from Express v4.8.0 onwards</div>
 
-Transfer the file at the given `path`. The Content-Type response header field is automatically set based on the filename's extension.
+Transfer the file at the given `path`. The Content-Type response header field is automatically set based on the filename's extension. Unless the `root` option is set in the options object, `path` must be an absolute path of the file.
 
-Unless the `root` option is set in the options object, `path` must be an absolute path of the file.
+The details of the `options` object is listed in the following table.
 
-Options:
-
-* `maxAge` sets the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms), defaults to 0.
-* `root` root directory for relative filenames.
-* `lastModified` enabled by default, sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.
-* `headers` object of HTTP headers to serve with the file.
-* `dotfiles` option for serving dotfiles. Possible values are "allow", "deny", "ignore"; defaults to "ignore".
+| Property        | Description                                     | Default     |
+|-----------------|-------------------------------------------------|-------------|
+|`maxAge`         | Sets the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)| 0 |
+| `root`          | Root directory for relative filenames.|  |
+| `lastModified`  | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.| Enabled |
+| `headers`       | Object of HTTP headers to serve with the file.|  |
+| `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" |
 
 The callback `fn(err)` is invoked when the transfer is complete or when an error occurs. If the callback function is specified and an error occurs, the response process must be handled explicitly within the callback function by either ending the request response cycle, or passing the control to the next route.
 
