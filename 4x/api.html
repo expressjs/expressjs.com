@@ -945,7 +945,7 @@ res.cookie(&#39;cart&#39;, { items: [1,2,3] }, { maxAge: 900000 });
 <pre><code class="lang-js">res.cookie(&#39;name&#39;, &#39;tobi&#39;, { signed: true });
 </code></pre>
 <p>Later you may access this value through the <a href="#req.signedCookies">req.signedCookie</a> object.</p>
-</section><section><h3 id="res.clearCookie">res.clearCookie(name, [options])</h3><p>Clear cookie <code>name</code>. For details about the <code>options</code> object, refer [res.cookie()](#res.cookie.</p>
+</section><section><h3 id="res.clearCookie">res.clearCookie(name, [options])</h3><p>Clear cookie <code>name</code>. For details about the <code>options</code> object, refer <a href="#res.cookie">res.cookie()</a>.</p>
 <pre><code class="lang-js">res.cookie(&#39;name&#39;, &#39;tobi&#39;, { path: &#39;/admin&#39; });
 res.clearCookie(&#39;name&#39;, { path: &#39;/admin&#39; });
 </code></pre>
@@ -1258,13 +1258,13 @@ res.status(404).end();
 <tbody>
 <tr>
 <td><code>caseSensitive</code></td>
-<td>Enable case sensitivity</td>
+<td>Enable case sensitivity.</td>
 <td>Disabled by default, treating &quot;/Foo&quot; and &quot;/foo&quot; as the same.</td>
 <td></td>
 </tr>
 <tr>
 <td><code>strict</code></td>
-<td>Enable strict routing</td>
+<td>Enable strict routing.</td>
 <td>Disabled by default, &quot;/foo&quot; and &quot;/foo/&quot; are treated the same by the router.</td>
 <td></td>
 </tr>
