@@ -554,9 +554,11 @@ app.locals.email
 <pre><code class="lang-js">app.set(&#39;title&#39;, &#39;My App&#39;);
 // use settings.title in a view
 </code></pre>
-</section><section><h3 id="app.render">app.render(view, [options], callback)</h3><p>Render a <code>view</code> with a callback responding with
-the rendered string. This is the app-level variant of <code>res.render()</code>,
-and otherwise behaves the same way.</p>
+</section><section><h3 id="app.render">app.render(view, [locals], callback)</h3><p>Return the rendered HTML of a view via the <code>callback</code> function. It accepts an optional object of local variables for the view. It is like <a href="#res.render">res.render()</a>, except it cannot send the rendered view to the client on its own.</p>
+<div class="doc-box doc-info">
+Think of <code>app.render()</code> as a utility function for generating rendered view strings. Internally <code>res.render()</code> uses <code>app.render()</code> to render views.
+</div>
+
 <pre><code class="lang-js">app.render(&#39;email&#39;, function(err, html){
   // ...
 });
@@ -885,7 +887,7 @@ res.set({
 <pre><code class="lang-js">res.get(&#39;Content-Type&#39;);
 // =&gt; &quot;text/plain&quot;
 </code></pre>
-</section><section><h3 id="res.cookie">res.cookie(name, value, [options])</h3><p>Set cookie <code>name</code> to <code>value</code>, which may be a string or object converted to JSON. The options object can have the following properties.</p>
+</section><section><h3 id="res.cookie">res.cookie(name, value, [options])</h3><p>Set cookie <code>name</code> to <code>value</code>, which may be a string or object converted to JSON. The <code>options</code> object can have the following properties.</p>
 <table>
 <thead>
 <tr>
@@ -943,7 +945,7 @@ res.cookie(&#39;cart&#39;, { items: [1,2,3] }, { maxAge: 900000 });
 <pre><code class="lang-js">res.cookie(&#39;name&#39;, &#39;tobi&#39;, { signed: true });
 </code></pre>
 <p>Later you may access this value through the <a href="#req.signedCookies">req.signedCookie</a> object.</p>
-</section><section><h3 id="res.clearCookie">res.clearCookie(name, [options])</h3><p>Clear cookie <code>name</code>. The <code>path</code> option defaults to &quot;/&quot;.</p>
+</section><section><h3 id="res.clearCookie">res.clearCookie(name, [options])</h3><p>Clear cookie <code>name</code>. For details about the <code>options</code> object, refer [res.cookie()](#res.cookie.</p>
 <pre><code class="lang-js">res.cookie(&#39;name&#39;, &#39;tobi&#39;, { path: &#39;/admin&#39; });
 res.clearCookie(&#39;name&#39;, { path: &#39;/admin&#39; });
 </code></pre>
@@ -1182,12 +1184,17 @@ res.download(&#39;/report-12345.pdf&#39;, &#39;report.pdf&#39;, function(err){
   next();
 });
 </code></pre>
-</section><section><h3 id="res.render">res.render(view, [locals], callback)</h3><p>Render a <code>view</code> with a callback responding with the rendered string. When an error occurs <code>next(err)</code> is invoked internally. When a callback is provided both the possible error and rendered string are passed, and no automated response is performed.</p>
-<pre><code class="lang-js">res.render(&#39;index&#39;, function(err, html){
-  // ...
+</section><section><h3 id="res.render">res.render(view, [locals], callback)</h3><p>Render a <code>view</code> and send the rendered HTML string to the client. It accepts an optional object of local variables for the view. When a <code>callback</code> is provided both the possible error and rendered string are returned, and no automated response is performed. When an error occurs <code>next(err)</code> is invoked internally.</p>
+<pre><code class="lang-js">// send the rendered view to the client
+res.render(&#39;index&#39;);
+
+// if a callback is specified, the rendered HTML string has to be sent explicitly
+res.render(&#39;index&#39;, function(err, html) {
+  res.send(html);
 });
 
-res.render(&#39;user&#39;, { name: &#39;Tobi&#39; }, function(err, html){
+// pass a local variable to the view
+res.render(&#39;user&#39;, { name: &#39;Tobi&#39; }, function(err, html) {
   // ...
 });
 </code></pre>

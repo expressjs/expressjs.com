@@ -1,4 +1,4 @@
-Set cookie `name` to `value`, which may be a string or object converted to JSON. The options object can have the following properties.
+Set cookie `name` to `value`, which may be a string or object converted to JSON. The `options` object can have the following properties.
 
 | Property    | Description                                                             |
 |-------------|-------------------------------------------------------------------------|

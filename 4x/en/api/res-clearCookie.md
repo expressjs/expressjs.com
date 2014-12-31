@@ -1,4 +1,4 @@
-Clear cookie `name`. The `path` option defaults to "/".
+Clear cookie `name`. For details about the `options` object, refer [res.cookie()](#res.cookie.
 
 ```js
 res.cookie('name', 'tobi', { path: '/admin' });
