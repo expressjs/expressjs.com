@@ -12,8 +12,8 @@ var router = express.Router([options]);
 
 | Property        | Description                                     | Default     | Availability  |
 |-----------------|-------------------------------------------------|-------------|---------------|
-| `caseSensitive` | Enable case sensitivity | Disabled by default, treating "/Foo" and "/foo" as the same.|  |
-| `strict`        | Enable strict routing | Disabled by default, "/foo" and "/foo/" are treated the same by the router.|  |
+| `caseSensitive` | Enable case sensitivity. | Disabled by default, treating "/Foo" and "/foo" as the same.|  |
+| `strict`        | Enable strict routing. | Disabled by default, "/foo" and "/foo/" are treated the same by the router.|  |
 | `mergeParams`   | Ensure the `req.params` values from the parent router are preserved. If the parent and the child have conflicting param names, the child's value take precedence.| `false` | 4.5.0+ |
 
 The router can have middleware and http VERB routes added just like an application.
