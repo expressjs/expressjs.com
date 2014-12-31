@@ -4,13 +4,13 @@ Transfer the file at the given `path`. The Content-Type response header field is
 
 The details of the `options` object is listed in the following table.
 
-| Property        | Description                                     | Default     |
-|-----------------|-------------------------------------------------|-------------|
-|`maxAge`         | Sets the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)| 0 |
-| `root`          | Root directory for relative filenames.|  |
-| `lastModified`  | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.| Enabled |
-| `headers`       | Object of HTTP headers to serve with the file.|  |
-| `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" |
+| Property        | Description                                     | Default     | Availability |
+|-----------------|-------------------------------------------------|-------------|--------------|
+|`maxAge`         | Sets the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)| 0 |  |
+| `root`          | Root directory for relative filenames.|  |  |
+| `lastModified`  | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.| Enabled | 4.9.0+ |
+| `headers`       | Object of HTTP headers to serve with the file.|  |  |
+| `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" |  |
 
 The callback `fn(err)` is invoked when the transfer is complete or when an error occurs. If the callback function is specified and an error occurs, the response process must be handled explicitly within the callback function by either ending the request response cycle, or passing the control to the next route.
 
