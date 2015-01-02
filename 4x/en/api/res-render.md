@@ -1,7 +1,7 @@
 Render a `view` and send the rendered HTML string to the client. It accepts an optional object of local variables for the view. When a `callback` is provided both the possible error and rendered string are returned, and no automated response is performed. When an error occurs `next(err)` is invoked internally.
 
 <div class="doc-box doc-notice">
-The local variable `cache` is reserved for enabling view cache. Set it to `true`, if you want to cache view in development mode. View caching is enabled in production by default.
+The local variable `cache` is reserved for enabling view cache. Set it to `true`, if you want to cache view during development; view caching is enabled in production by default.
 </div>
 
 ```js

@@ -5,7 +5,7 @@ Think of `app.render()` as a utility function for generating rendered view strin
 </div>
 
 <div class="doc-box doc-notice">
-The local variable `cache` is reserved for enabling view cache. Set it to `true`, if you want to cache view in development mode. View caching is enabled in production by default.
+The local variable `cache` is reserved for enabling view cache. Set it to `true`, if you want to cache view during development; view caching is enabled in production by default.
 </div>
 
 ```js
