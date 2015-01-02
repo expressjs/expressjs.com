@@ -4,6 +4,10 @@ Return the rendered HTML of a view via the `callback` function. It accepts an op
 Think of `app.render()` as a utility function for generating rendered view strings. Internally `res.render()` uses `app.render()` to render views.
 </div>
 
+<div class="doc-box doc-notice">
+The local variable `cache` is reserved for enabling view cache. Set it to `true`, if you want to cache view in development mode. View caching is enabled in production by default.
+</div>
+
 ```js
 app.render('email', function(err, html){
   // ...

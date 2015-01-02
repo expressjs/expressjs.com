@@ -559,6 +559,10 @@ app.locals.email
 Think of <code>app.render()</code> as a utility function for generating rendered view strings. Internally <code>res.render()</code> uses <code>app.render()</code> to render views.
 </div>
 
+<div class="doc-box doc-notice">
+The local variable <code>cache</code> is reserved for enabling view cache. Set it to <code>true</code>, if you want to cache view in development mode. View caching is enabled in production by default.
+</div>
+
 <pre><code class="lang-js">app.render(&#39;email&#39;, function(err, html){
   // ...
 });
@@ -1218,6 +1222,10 @@ res.download(&#39;/report-12345.pdf&#39;, &#39;report.pdf&#39;, function(err){
 });
 </code></pre>
 </section><section><h3 id="res.render">res.render(view, [locals], callback)</h3><p>Render a <code>view</code> and send the rendered HTML string to the client. It accepts an optional object of local variables for the view. When a <code>callback</code> is provided both the possible error and rendered string are returned, and no automated response is performed. When an error occurs <code>next(err)</code> is invoked internally.</p>
+<div class="doc-box doc-notice">
+The local variable <code>cache</code> is reserved for enabling view cache. Set it to <code>true</code>, if you want to cache view in development mode. View caching is enabled in production by default.
+</div>
+
 <pre><code class="lang-js">// send the rendered view to the client
 res.render(&#39;index&#39;);
 
