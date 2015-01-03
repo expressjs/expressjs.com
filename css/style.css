@@ -516,6 +516,7 @@ footer {
   color: #666;
   margin: 0 5px;
   padding-right: 15px;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 #navbar a.active {
