@@ -6,7 +6,7 @@ Set cookie `name` to `value`, which may be a string or object converted to JSON.
 | `path`      | Path for the cookie. Defaults to "/".
 | `secure`    | Marks the cookie to be used with HTTPS only.
 | `expires`   | Expiry date of the cookie in GMT. If not specified or set to 0, creates a session cookie.
-| `maxAge`    | Convenient option for setting the expiry time relative to the current time in seconds.
+| `maxAge`    | Convenient option for setting the expiry time relative to the current time in milliseconds.
 | `httpOnly`  | Flags the cookie to be accessible only by the web server.
 | `signed`    | Indicates if the cookie should be signed.
 
