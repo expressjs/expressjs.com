@@ -30,71 +30,74 @@ ul#menu
     a(href='#request') Request
     ul#req-menu
       li: em Properties
-      li: a(href='#req.params') req.params
-      li: a(href='#req.query') req.query
+      li: a(href='#req.baseUrl') req.baseUrl
       li: a(href='#req.body') req.body
-      li: a(href='#req.route') req.route
       li: a(href='#req.cookies') req.cookies
-      li: a(href='#req.signedCookies') req.signedCookies
+      li: a(href='#req.fresh') req.fresh
+      li: a(href='#req.hostname') req.hostname
       li: a(href='#req.ip') req.ip
       li: a(href='#req.ips') req.ips
-      li: a(href='#req.path') req.path
-      li: a(href='#req.hostname') req.hostname
-      li: a(href='#req.fresh') req.fresh
-      li: a(href='#req.stale') req.stale
-      li: a(href='#req.xhr') req.xhr
-      li: a(href='#req.protocol') req.protocol
-      li: a(href='#req.secure') req.secure
-      li: a(href='#req.subdomains') req.subdomains
       li: a(href='#req.originalUrl') req.originalUrl
-      li: a(href='#req.baseUrl') req.baseUrl
+      li: a(href='#req.params') req.params
+      li: a(href='#req.path') req.path
+      li: a(href='#req.protocol') req.protocol
+      li: a(href='#req.query') req.query
+      li: a(href='#req.route') req.route
+      li: a(href='#req.secure') req.secure
+      li: a(href='#req.signedCookies') req.signedCookies
+      li: a(href='#req.stale') req.stale
+      li: a(href='#req.subdomains') req.subdomains
+      li: a(href='#req.xhr') req.xhr
       li: em Methods
-      li: a(href='#req.param') req.param()
-      li: a(href='#req.get') req.get()
       li: a(href='#req.accepts') req.accepts()
       li: a(href='#req.acceptsCharsets') req.acceptsCharsets()
-      li: a(href='#req.acceptsLanguages') req.acceptsLanguages()
       li: a(href='#req.acceptsEncodings') req.acceptsEncodings()
+      li: a(href='#req.acceptsLanguages') req.acceptsLanguages()
+      li: a(href='#req.get') req.get()
       li: a(href='#req.is') req.is()
+      li: a(href='#req.param') req.param()
 
   li#res-api
     a(href='#response') Response
     ul#res-menu
       li: em Properties
-      li: a(href='#res.locals') res.locals
       li: a(href='#res.headersSent') res.headersSent
+      li: a(href='#res.locals') res.locals
       li: em Methods
-      li: a(href='#res.status') res.status()
-      li: a(href='#res.set') res.set()
-      li: a(href='#res.get') res.get()
+      li: a(href='#res.attachment') res.attachment()
       li: a(href='#res.cookie') res.cookie()
       li: a(href='#res.clearCookie') res.clearCookie()
-      li: a(href='#res.redirect') res.redirect()
-      li: a(href='#res.location') res.location()
-      li: a(href='#res.send') res.send()
+      li: a(href='#res.download') res.download()
+      li: a(href='#res.end') res.end()
+      li: a(href='#res.format') res.format()
+      li: a(href='#res.get') res.get()
       li: a(href='#res.json') res.json()
       li: a(href='#res.jsonp') res.jsonp()
-      li: a(href='#res.type') res.type()
-      li: a(href='#res.format') res.format()
-      li: a(href='#res.attachment') res.attachment()
+      li: a(href='#res.links') res.links()
+      li: a(href='#res.location') res.location()
+      li: a(href='#res.redirect') res.redirect()
+      li: a(href='#res.render') res.render()
+      li: a(href='#res.send') res.send()
       li: a(href='#res.sendFile') res.sendFile()
       li: a(href='#res.sendStatus') res.sendStatus()
-      li: a(href='#res.download') res.download()
-      li: a(href='#res.links') res.links()
-      li: a(href='#res.render') res.render()
+      li: a(href='#res.set') res.set()
+      li: a(href='#res.status') res.status()
+      li: a(href='#res.type') res.type()
       li: a(href='#res.vary') res.vary()
-      li: a(href='#res.end') res.end()
+
 
   li#router-api
     a(href='#router') Router
     ul#router-menu
       li: a(href='#router') Router()
       li: em Methods
-      li: a(href='#router.use') router.use()
+      li: a(href='#router.all') router.all()
+      li: a(href='#router.METHOD') router.METHOD()
       li: a(href='#router.param') router.param()
       li: a(href='#router.route') router.route()
-      li: a(href='#router.METHOD') router.METHOD()
-      li: a(href='#router.all') router.all()
+      li: a(href='#router.use') router.use()
+
+
 
   li#middleware-api
     a(href='#middleware') Middleware

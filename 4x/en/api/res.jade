@@ -1,14 +1,14 @@
 section
-  h3(id='res.status') res.status(code)
-  include:md ./res-status.md
+  h3(id='res.headersSent') res.headersSent
+  include:md ./res-headersSent.md
 
 section
-  h3(id='res.set') res.set(field, [value])
-  include:md ./res-set.md
+  h3(id='res.locals') res.locals
+  include:md ./res-locals.md
 
 section
-  h3(id='res.get') res.get(field)
-  include:md ./res-get.md
+  h3(id='res.attachment') res.attachment([filename])
+  include:md ./res-attachment.md
 
 section
   h3(id='res.cookie') res.cookie(name, value, [options])
@@ -19,16 +19,20 @@ section
   include:md ./res-clearCookie.md
 
 section
-  h3(id='res.redirect') res.redirect([status], url)
-  include:md ./res-redirect.md
+  h3(id='res.download') res.download(path, [filename], [fn])
+  include:md ./res-download.md
 
 section
-  h3(id='res.location') res.location
-  include:md ./res-location.md
+  h3(id='res.end') res.end([data], [encoding])
+  include:md ./res-end.md
 
 section
-  h3(id='res.send') res.send([body])
-  include:md ./res-send.md
+  h3(id='res.format') res.format(object)
+  include:md ./res-format.md
+
+section
+  h3(id='res.get') res.get(field)
+  include:md ./res-get.md
 
 section
   h3(id='res.json') res.json([body])
@@ -39,16 +43,24 @@ section
   include:md ./res-jsonp.md
 
 section
-  h3(id='res.type') res.type(type)
-  include:md ./res-type.md
+  h3(id='res.links') res.links(links)
+  include:md ./res-links.md
 
 section
-  h3(id='res.format') res.format(object)
-  include:md ./res-format.md
+  h3(id='res.location') res.location
+  include:md ./res-location.md
 
 section
-  h3(id='res.attachment') res.attachment([filename])
-  include:md ./res-attachment.md
+  h3(id='res.redirect') res.redirect([status], url)
+  include:md ./res-redirect.md
+
+section
+  h3(id='res.render') res.render(view, [locals], callback)
+  include:md ./res-render.md
+
+section
+  h3(id='res.send') res.send([body])
+  include:md ./res-send.md
 
 section
   h3(id='res.sendFile') res.sendFile(path, [options], [fn])
@@ -59,30 +71,20 @@ section
   include:md ./res-sendStatus.md
 
 section
-  h3(id='res.download') res.download(path, [filename], [fn])
-  include:md ./res-download.md
+  h3(id='res.set') res.set(field, [value])
+  include:md ./res-set.md
 
 section
-  h3(id='res.links') res.links(links)
-  include:md ./res-links.md
+  h3(id='res.status') res.status(code)
+  include:md ./res-status.md
 
 section
-  h3(id='res.locals') res.locals
-  include:md ./res-locals.md
-
-section
-  h3(id='res.render') res.render(view, [locals], callback)
-  include:md ./res-render.md
+  h3(id='res.type') res.type(type)
+  include:md ./res-type.md
 
 section
   h3(id='res.vary') res.vary(field)
   include:md ./res-vary.md
 
-section
-  h3(id='res.end') res.end([data], [encoding])
-  include:md ./res-end.md
 
-section
-  h3(id='res.headersSent') res.headersSent
-  include:md ./res-headersSent.md
 
