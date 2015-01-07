@@ -578,11 +578,16 @@ footer {
   position: fixed;
   margin: 0;
   padding: 0;
-  top: 105px;
+  top: 90px;
   right: 30px;
   height: 500px;
   text-align: right;
   font-size: 13px;
+}
+
+#menu em {
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 #menu li {
@@ -601,10 +606,12 @@ footer {
 #menu > li > a {
   color: #353535;
   font-weight: bold;
+  font-size: 15px;
 }
 
 #menu ul a {
   color: #555;
+  padding-right: 7px;
 }
 
 #menu ul a.active {
