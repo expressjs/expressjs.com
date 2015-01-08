@@ -93,13 +93,26 @@ li code {
   margin-bottom: 10px;
 }
 
-#api-doc h2 {
+#api-doc section {
+  padding-left: 20px;
+}
+
+#api-doc > h3 {
+  padding-top: 10px;
+  padding-bottom: 5px;
   font-weight: bold;
   font-size: 24px;
+  color: #888;
+  font-style: italic;
+}
+
+#api-doc h2 {
+  font-weight: bold;
+  font-size: 29px;
   margin: 40px 0 20px;
 }
 
-#api-doc h3 {
+#api-doc section h3 {
   padding-top: 10px;
   padding-bottom: 5px;
   font-weight: bold;
@@ -587,7 +600,7 @@ footer {
 
 #menu em {
   font-weight: bold;
-  text-decoration: underline;
+  color: #888;
 }
 
 #menu li {
