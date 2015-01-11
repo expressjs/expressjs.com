@@ -1,10 +1,10 @@
 # Basic routing tutorial
 
-This tutorial is a basic introduction to routing with Express.  _Routing_ refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or _path_) and a specific HTTP request method (GET, POST, and so on).
+This tutorial is a basic introduction to routing with Express. _Routing_ refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or _path_) and a specific HTTP request method (GET, POST, and so on).
 
-Each route has a handler function, executed when the route is matched. 
+Each route can have one or more handler functions, which is / are executed when the route is matched. 
 
-Route definition takes the following structure `app.VERB(PATH, HANDLER)`, where `app` is an instance of `express`, `VERB` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` is a path on the server, and `HANDLER` is the function executed when the route is matched.
+Route definition takes the following structure `app.METHOD(PATH, HANDLER)`, where `app` is an instance of `express`, `METHOD` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` is a path on the server, and `HANDLER` is the function executed when the route is matched.
 
 <div class="doc-box doc-notice">
 This tutorial assumes that an instance of `express` named `app` is created and the server is running. If you are not familiar with creating an app and starting it, refer to the [Hello world example](/starter/hello-world.html).
@@ -32,8 +32,6 @@ app.put('/user', function (req, res) {
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 })
-
 ```
-<!--
-For all the details about routing, see [routing guide](/en/guide/routing.html).
--->
+
+For more details about routing, refer the [routing guide](/en/guide/routing.html).
