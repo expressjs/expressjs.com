@@ -41,12 +41,16 @@ client.on(&#39;error&#39;, function (err) {
 client.set(&#39;string key&#39;, &#39;string val&#39;, redis.print);
 client.hset(&#39;hash key&#39;, &#39;hashtest 1&#39;, &#39;some value&#39;, redis.print);
 client.hset([&#39;hash key&#39;, &#39;hashtest 2&#39;, &#39;some other value&#39;], redis.print);
+
 client.hkeys(&#39;hash key&#39;, function (err, replies) {
+
   console.log(replies.length + &#39; replies:&#39;);
   replies.forEach(function (reply, i) {
     console.log(&#39;    &#39; + i + &#39;: &#39; + reply);
   });
+
   client.quit();
+
 });
 </code></pre>
 <h2 id="sqlite">SQLite</h2>
@@ -57,17 +61,17 @@ var db = new sqlite3.Database(&#39;:memory:&#39;);
 db.serialize(function() {
 
   db.run(&#39;CREATE TABLE lorem (info TEXT)&#39;);
-
   var stmt = db.prepare(&#39;INSERT INTO lorem VALUES (?)&#39;);
+
   for (var i = 0; i &lt; 10; i++) {
     stmt.run(&#39;Ipsum &#39; + i);
   }
+
   stmt.finalize();
 
   db.each(&#39;SELECT rowid AS id, info FROM lorem&#39;, function(err, row) {
     console.log(row.id + &#39;: &#39; + row.info);
   });
-
 });
 
 db.close();
@@ -80,7 +84,6 @@ var db = levelup(&#39;./mydb&#39;);
 db.put(&#39;name&#39;, &#39;LevelUP&#39;, function (err) {
 
   if (err) return console.log(&#39;Ooops!&#39;, err);
-
   db.get(&#39;name&#39;, function (err, value) {
     if (err) return console.log(&#39;Ooops!&#39;, err);
     console.log(&#39;name=&#39; + value)
@@ -92,11 +95,14 @@ db.put(&#39;name&#39;, &#39;LevelUP&#39;, function (err) {
 <p><strong>Node module</strong>: <a href="https://github.com/hacksparrow/apoc">apoc</a><br><strong>Installation</strong>: <code>$ npm install apoc</code><br><strong>Example</strong></p>
 <pre><code class="lang-js">var apoc = require(&#39;apoc&#39;);
 
-apoc.query(&#39;match (n) return n&#39;).exec().then(function (response) {
-  console.log(response);
-}, function (fail) {
-  console.log(fail);
-});
+apoc.query(&#39;match (n) return n&#39;).exec().then(
+  function (response) {
+    console.log(response);
+  },
+  function (fail) {
+    console.log(fail);
+  }
+);
 </code></pre>
 <h2 id="postgresql">PostgreSQL</h2>
 <p><strong>Node module</strong>: <a href="https://github.com/brianc/node-postgres">pg</a><br><strong>Installation</strong>: <code>$ npm install pg</code><br><strong>Example</strong></p>
@@ -105,18 +111,17 @@ var conString = &quot;postgres://username:password@localhost/database&quot;;
 
 pg.connect(conString, function(err, client, done) {
 
-  if(err) {
+  if (err) {
     return console.error(&#39;error fetching client from pool&#39;, err);
   }
   client.query(&#39;SELECT $1::int AS number&#39;, [&#39;1&#39;], function(err, result) {
-
     done();
-
-    if(err) {
+    if (err) {
       return console.error(&#39;error running query&#39;, err);
     }
     console.log(result.rows[0].number);
   });
+
 });
 </code></pre>
 <!-- ## Riak

@@ -61,12 +61,16 @@ client.on('error', function (err) {
 client.set('string key', 'string val', redis.print);
 client.hset('hash key', 'hashtest 1', 'some value', redis.print);
 client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print);
+
 client.hkeys('hash key', function (err, replies) {
+
   console.log(replies.length + ' replies:');
   replies.forEach(function (reply, i) {
     console.log('    ' + i + ': ' + reply);
   });
+
   client.quit();
+
 });
 ```
 
@@ -83,17 +87,17 @@ var db = new sqlite3.Database(':memory:');
 db.serialize(function() {
 
   db.run('CREATE TABLE lorem (info TEXT)');
-
   var stmt = db.prepare('INSERT INTO lorem VALUES (?)');
+
   for (var i = 0; i < 10; i++) {
     stmt.run('Ipsum ' + i);
   }
+
   stmt.finalize();
 
   db.each('SELECT rowid AS id, info FROM lorem', function(err, row) {
     console.log(row.id + ': ' + row.info);
   });
-
 });
 
 db.close();
@@ -112,7 +116,6 @@ var db = levelup('./mydb');
 db.put('name', 'LevelUP', function (err) {
 
   if (err) return console.log('Ooops!', err);
-
   db.get('name', function (err, value) {
     if (err) return console.log('Ooops!', err);
     console.log('name=' + value)
@@ -130,11 +133,14 @@ db.put('name', 'LevelUP', function (err) {
 ```js
 var apoc = require('apoc');
 
-apoc.query('match (n) return n').exec().then(function (response) {
-  console.log(response);
-}, function (fail) {
-  console.log(fail);
-});
+apoc.query('match (n) return n').exec().then(
+  function (response) {
+    console.log(response);
+  },
+  function (fail) {
+    console.log(fail);
+  }
+);
 ```
 
 ## PostgreSQL
@@ -149,18 +155,17 @@ var conString = "postgres://username:password@localhost/database";
 
 pg.connect(conString, function(err, client, done) {
 
-  if(err) {
+  if (err) {
     return console.error('error fetching client from pool', err);
   }
   client.query('SELECT $1::int AS number', ['1'], function(err, result) {
-
     done();
-
-    if(err) {
+    if (err) {
       return console.error('error running query', err);
     }
     console.log(result.rows[0].number);
   });
+
 });
 ```
 
