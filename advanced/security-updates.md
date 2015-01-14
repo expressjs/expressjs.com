@@ -9,7 +9,7 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
 ## 4.x
 
   * 4.8.8
-    * Fixed directory traversal vulnerabilities in `express.static`.
+    * Fixed directory traversal vulnerabilities in `express.static` ([advisory](http://nodesecurity.io/advisories/send-directory-traversal) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394))
   * 4.8.4
     * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually leak to `EMFILE` errors and server unresponsiveness.
   * 4.8.0
