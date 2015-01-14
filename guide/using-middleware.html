@@ -9,7 +9,7 @@
 </ul>
 <p>If the current middleware does not end the request-response cycle, it must call <code>next()</code> to pass control to the next middleware, otherwise the request will be left hanging.</p>
 <p>With an optional mount path, middleware can be loaded at the application level or at the router level.
-Also, a series of middleware functions can be loaded together, creating a sub-stack of middleware system at a mount point.</p>
+Also, a series of middleware functions can be loaded together, creating a sub-stack of the middleware system at a mount point.</p>
 <p>An Express application can use the following kinds of middleware:</p>
 <ul>
 <li><a href="#middleware.application">Application-level middleware</a></li>
@@ -134,7 +134,7 @@ app.use(&#39;/&#39;, router);
 <p>The <code>root</code> argument refers to the root directory from which the static assets are to be served.</p>
 <p>The optional <code>options</code> object can have the following properties.</p>
 <ul>
-<li><code>dotfiles</code> option for serving dotfiles. Possible values are &quot;allow&quot;, &quot;deny&quot;, &quot;ignore&quot;; defaults to &quot;ignore&quot;.</li>
+<li><code>dotfiles</code> option for serving dotfiles. Possible values are &quot;allow&quot;, &quot;deny&quot;, and &quot;ignore&quot;; defaults to &quot;ignore&quot;.</li>
 <li><code>etag</code> enable or disable etag generation, defaults to <code>true</code>.</li>
 <li><code>extensions</code> sets file extension fallbacks, defaults to <code>false</code>.</li>
 <li><code>index</code> sends directory index file, defaults to &quot;index.html&quot;. Set <code>false</code> to disable directory indexing.</li>
