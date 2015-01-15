@@ -21,6 +21,10 @@ section
   include:md ./app-all.md
 
 section
+  h3(id='app.delete.method') app.delete(path, [callback...], callback)
+  include:md ./app-delete-method.md
+
+section
   h3(id='app.disable') app.disable(name)
   include:md ./app-disable.md
 
@@ -45,6 +49,10 @@ section
   include:md ./app-get.md
 
 section
+  h3(id='app.get.method') app.get(path, [callback...], callback)
+  include:md ./app-get-method.md
+
+section
   h3(id='app.listen') app.listen()
   include:md ./app-listen.md
 
@@ -55,6 +63,14 @@ section
 section
   h3(id='app.path') app.path()
   include:md ./app-path.md
+
+section
+  h3(id='app.post.method') app.post(path, [callback...], callback)
+  include:md ./app-post-method.md
+
+section
+  h3(id='app.put.method') app.put(path, [callback...], callback)
+  include:md ./app-put-method.md
 
 section
   h3(id='app.render') app.render(view, [locals], callback)

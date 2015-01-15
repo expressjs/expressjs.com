@@ -10,6 +10,19 @@ To route methods which translate to invalid JavaScript variable names, use the b
 <code>app[&#39;m-search&#39;](&#39;/&#39;, function () { ... })</code>
 </div>
 
+<div class="doc-box">
+<strong> Writing notes </strong>
+
+1. Path - types, examples
+2. Request methods - list them all, examples
+3. Handlers - single, multiple
+4. Response methods - res.send*, res.end, ...
+</div>
+
+
+
+
+
 <h2 id="defining-route-paths">Defining route paths</h2>
 <p>The following snippet illustrates the most simple route definition possible. Express
 translates the path strings to regular expressions, used internally to match incoming requests.</p>
@@ -50,6 +63,40 @@ app.route(&#39;/forum/:fid/thread/:tid&#39;)
 <h2 id="defining-route-handlers">Defining route handlers</h2>
 <p>Multiple callbacks may be given; all are treated equally, and behave just like middleware. The only exception is that these callbacks may invoke <code>next(&#39;route&#39;)</code> to bypass the remaining route callback(s). This mechanism can be used to perform pre-conditions on a route, then pass control to subsequent routes if there&#39;s no reason to proceed
 with the current route.</p>
+<hr>
+<p>The following snippet illustrates the most simple route definition possible. Express
+translates the path strings to regular expressions, used internally to match incoming requests.
+Query strings are <em>not</em> considered when peforming these matches. For example, &quot;GET /&quot;
+would match the following route, as would &quot;GET /?name=tobi&quot;:</p>
+<pre><code class="lang-js">app.get(&#39;/&#39;, function(req, res){
+  res.send(&#39;hello world&#39;);
+});
+</code></pre>
+<p>Regular expressions may also be used, and can be useful
+if you have very specific restraints, for example the following
+would match &quot;GET /commits/71dbb9c&quot; as well as &quot;GET /commits/71dbb9c..4c084f9&quot;.</p>
+<pre><code class="lang-js">app.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
+  var from = req.params[0];
+  var to = req.params[1] || &#39;HEAD&#39;;
+  res.send(&#39;commit range &#39; + from + &#39;..&#39; + to);
+});
+</code></pre>
+<p>Several callbacks may also be passed, useful for re-using middleware
+that load resources, perform validations, etc.</p>
+<pre><code class="lang-js">app.get(&#39;/user/:id&#39;, user.load, function(){
+  // ... 
+})
+</code></pre>
+<p>If you have multiple common middleware for a route, you can use the route API with <code>all</code>.</p>
+<pre><code class="lang-js">var middleware = [loadForum, loadThread];
+
+app.route(&#39;/forum/:fid/thread/:tid&#39;)
+.all(loadForum)
+.all(loadThread)
+.get(function() { //... });
+.post(function() { //... });
+</code></pre>
+<p>Both middleware will be run for GET and POST requests.</p>
 </section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
