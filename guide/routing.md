@@ -13,6 +13,15 @@ To route methods which translate to invalid JavaScript variable names, use the b
 `app['m-search']('/', function () { ... })`
 </div>
 
+<div class="doc-box">
+** Writing notes **
+
+1. Path - types, examples
+2. Request methods - list them all, examples
+3. Handlers - single, multiple
+4. Response methods - res.send*, res.end, ...
+</div>
+
 ## Defining route paths
 
 The following snippet illustrates the most simple route definition possible. Express
