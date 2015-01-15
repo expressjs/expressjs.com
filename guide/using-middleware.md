@@ -11,7 +11,7 @@ Middleware is a function with access to the request object (`req`), the response
 If the current middleware does not end the request-response cycle, it must call `next()` to pass control to the next middleware, otherwise the request will be left hanging.
 
 With an optional mount path, middleware can be loaded at the application level or at the router level.
-Also, a series of middleware functions can be loaded together, creating a sub-stack of middleware system at a mount point.
+Also, a series of middleware functions can be loaded together, creating a sub-stack of the middleware system at a mount point.
 
 An Express application can use the following kinds of middleware:
  - [Application-level middleware](#middleware.application)
@@ -157,7 +157,7 @@ The `root` argument refers to the root directory from which the static assets ar
 
 The optional `options` object can have the following properties.
 
-* `dotfiles` option for serving dotfiles. Possible values are "allow", "deny", "ignore"; defaults to "ignore".
+* `dotfiles` option for serving dotfiles. Possible values are "allow", "deny", and "ignore"; defaults to "ignore".
 * `etag` enable or disable etag generation, defaults to `true`.
 * `extensions` sets file extension fallbacks, defaults to `false`.
 * `index` sends directory index file, defaults to "index.html". Set `false` to disable directory indexing.
