@@ -125,7 +125,7 @@ li code {
 }
 
 #api-doc h5 {
-  font-size: 14em;
+  font-size: 14px;
   font-weight: bold;
   color: #666;
 }
@@ -437,6 +437,10 @@ html[xmlns] .clearfix {
 }
 
 /* general */
+
+#app-settings-property {
+  width: 200px;
+}
 
 .button {
   display: block;

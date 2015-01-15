@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Express - api reference</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script data-cfasync="false" src="/js/app.js?v=06112014"></script><script data-cfasync="false" src="/js/retina.js"></script><script data-cfasync="false" src="/js/dropit.js"></script><script data-cfasync="false" src="/js/prism.js"></script></head><body><section class="content"><header><div id="mobile-menu"><div id="nav-button" class="fa fa-bars fa-2x button"></div></div><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/" id="home-menu">Home</a></li><li><ul id="getting-started-menu" class="menu"><li><a href="/starter/installing.html">Getting started</a><ul><li><a href="/starter/installing.html">Installing</a></li><li><a href="/starter/generator.html">Express generator</a></li><li><a href="/starter/hello-world.html">Hello world</a></li><li><a href="/starter/basic-routing.html">Basic routing</a></li><li><a href="/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/guide/error-handling.html">Guide</a><ul><li><a href="/guide/routing.html">Routing</a></li><li><a href="/guide/using-middleware.html">Using middleware</a></li><li><a href="/guide/using-template-engines.html">Using template engines</a></li><li><a href="/guide/error-handling.html">Error handling</a></li><li><a href="/guide/debugging.html">Debugging</a></li><li><a href="/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html" class="active">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/advanced/developing-template-engines.html">Advanced topics</a><ul><li><a href="/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/advanced/security-updates.html">Security updates</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/resources/glossary.html">Resources</a><ul><li><a href="/resources/glossary.html">Glossary</a></li><li><a href="/resources/middleware.html">Middleware</a></li><li><a href="/resources/community.html">Community</a></li><li><a href="/resources/books-blogs.html">Books and blogs</a></li><li><a href="/resources/applications.html">Applications</a></li></ul></li></ul></li></ul></div><a href="http://strongloop.com/node-js/training/" title="Node and Express Training from StrongLoop" id="strongloop-header">Express and Node.js Training from StrongLoop</a></header><ul id="menu"><li id="app-api"><a href="#application">Application</a><ul id="app-menu"><li><a href="#express">express()</a></li><li><em>Properties</em></li><li><a href="#app.locals">app.locals</a></li><li><a href="#app.mountpath">app.mountpath</a></li><li><em>Events</em></li><li><a href="#app.onmount">mount</a></li><li><em>Methods</em></li><li><a href="#app.all">app.all()</a></li><li><a href="#app.delete.method">app.delete()</a></li><li><a href="#app.disable">app.disable()</a></li><li><a href="#app.disabled">app.disabled()</a></li><li><a href="#app.enable">app.enable()</a></li><li><a href="#app.enabled">app.enabled()</a></li><li><a href="#app.engine">app.engine()</a></li><li><a href="#app.get">app.get()</a></li><li><a href="#app.get.method">app.get()</a></li><li><a href="#app.listen">app.listen()</a></li><li><a href="#app.param">app.param()</a></li><li><a href="#app.path">app.path()</a></li><li><a href="#app.post.method">app.post()</a></li><li><a href="#app.put.method">app.put()</a></li><li><a href="#app.render">app.render()</a></li><li><a href="#app.route">app.route()</a></li><li><a href="#app.METHOD">Routing</a></li><li><a href="#app-settings">Settings</a></li><li><a href="#app.set">app.set()</a></li><li><a href="#app.use">app.use()</a></li></ul></li><li id="req-api"><a href="#request">Request</a><ul id="req-menu"><li><em>Properties</em></li><li><a href="#req.baseUrl">req.baseUrl</a></li><li><a href="#req.body">req.body</a></li><li><a href="#req.cookies">req.cookies</a></li><li><a href="#req.fresh">req.fresh</a></li><li><a href="#req.hostname">req.hostname</a></li><li><a href="#req.ip">req.ip</a></li><li><a href="#req.ips">req.ips</a></li><li><a href="#req.originalUrl">req.originalUrl</a></li><li><a href="#req.params">req.params</a></li><li><a href="#req.path">req.path</a></li><li><a href="#req.protocol">req.protocol</a></li><li><a href="#req.query">req.query</a></li><li><a href="#req.route">req.route</a></li><li><a href="#req.secure">req.secure</a></li><li><a href="#req.signedCookies">req.signedCookies</a></li><li><a href="#req.stale">req.stale</a></li><li><a href="#req.subdomains">req.subdomains</a></li><li><a href="#req.xhr">req.xhr</a></li><li><em>Methods</em></li><li><a href="#req.accepts">req.accepts()</a></li><li><a href="#req.acceptsCharsets">req.acceptsCharsets()</a></li><li><a href="#req.acceptsEncodings">req.acceptsEncodings()</a></li><li><a href="#req.acceptsLanguages">req.acceptsLanguages()</a></li><li><a href="#req.get">req.get()</a></li><li><a href="#req.is">req.is()</a></li><li><a href="#req.param">req.param()</a></li></ul></li><li id="res-api"><a href="#response">Response</a><ul id="res-menu"><li><em>Properties</em></li><li><a href="#res.headersSent">res.headersSent</a></li><li><a href="#res.locals">res.locals</a></li><li><em>Methods</em></li><li><a href="#res.attachment">res.attachment()</a></li><li><a href="#res.cookie">res.cookie()</a></li><li><a href="#res.clearCookie">res.clearCookie()</a></li><li><a href="#res.download">res.download()</a></li><li><a href="#res.end">res.end()</a></li><li><a href="#res.format">res.format()</a></li><li><a href="#res.get">res.get()</a></li><li><a href="#res.json">res.json()</a></li><li><a href="#res.jsonp">res.jsonp()</a></li><li><a href="#res.links">res.links()</a></li><li><a href="#res.location">res.location()</a></li><li><a href="#res.redirect">res.redirect()</a></li><li><a href="#res.render">res.render()</a></li><li><a href="#res.send">res.send()</a></li><li><a href="#res.sendFile">res.sendFile()</a></li><li><a href="#res.sendStatus">res.sendStatus()</a></li><li><a href="#res.set">res.set()</a></li><li><a href="#res.status">res.status()</a></li><li><a href="#res.type">res.type()</a></li><li><a href="#res.vary">res.vary()</a></li></ul></li><li id="router-api"><a href="#router">Router</a><ul id="router-menu"><li><a href="#router">Router()</a></li><li><em>Methods</em></li><li><a href="#router.all">router.all()</a></li><li><a href="#router.METHOD">router.METHOD()</a></li><li><a href="#router.param">router.param()</a></li><li><a href="#router.route">router.route()</a></li><li><a href="#router.use">router.use()</a></li></ul></li></ul><div id="overlay"></div><div id="api-doc"><h1>4.x API</h1><h2>Application</h2><a id="application" class="h2"></a><section><h3 id="express">express()</h3><p>Create an express application.</p>
+<!DOCTYPE html><html><head><title>Express - api reference</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script data-cfasync="false" src="/js/app.js?v=06112014"></script><script data-cfasync="false" src="/js/retina.js"></script><script data-cfasync="false" src="/js/dropit.js"></script><script data-cfasync="false" src="/js/prism.js"></script></head><body><section class="content"><header><div id="mobile-menu"><div id="nav-button" class="fa fa-bars fa-2x button"></div></div><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/" id="home-menu">Home</a></li><li><ul id="getting-started-menu" class="menu"><li><a href="/starter/installing.html">Getting started</a><ul><li><a href="/starter/installing.html">Installing</a></li><li><a href="/starter/generator.html">Express generator</a></li><li><a href="/starter/hello-world.html">Hello world</a></li><li><a href="/starter/basic-routing.html">Basic routing</a></li><li><a href="/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/guide/error-handling.html">Guide</a><ul><li><a href="/guide/routing.html">Routing</a></li><li><a href="/guide/using-middleware.html">Using middleware</a></li><li><a href="/guide/using-template-engines.html">Using template engines</a></li><li><a href="/guide/error-handling.html">Error handling</a></li><li><a href="/guide/debugging.html">Debugging</a></li><li><a href="/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html" class="active">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/advanced/developing-template-engines.html">Advanced topics</a><ul><li><a href="/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/advanced/security-updates.html">Security updates</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/resources/glossary.html">Resources</a><ul><li><a href="/resources/glossary.html">Glossary</a></li><li><a href="/resources/middleware.html">Middleware</a></li><li><a href="/resources/community.html">Community</a></li><li><a href="/resources/books-blogs.html">Books and blogs</a></li><li><a href="/resources/applications.html">Applications</a></li></ul></li></ul></li></ul></div><a href="http://strongloop.com/node-js/training/" title="Node and Express Training from StrongLoop" id="strongloop-header">Express and Node.js Training from StrongLoop</a></header><ul id="menu"><li id="app-api"><a href="#application">Application</a><ul id="app-menu"><li><a href="#express">express()</a></li><li><em>Properties</em></li><li><a href="#app.locals">app.locals</a></li><li><a href="#app.mountpath">app.mountpath</a></li><li><em>Events</em></li><li><a href="#app.onmount">mount</a></li><li><em>Methods</em></li><li><a href="#app.all">app.all()</a></li><li><a href="#app.delete.method">app.delete()</a></li><li><a href="#app.disable">app.disable()</a></li><li><a href="#app.disabled">app.disabled()</a></li><li><a href="#app.enable">app.enable()</a></li><li><a href="#app.enabled">app.enabled()</a></li><li><a href="#app.engine">app.engine()</a></li><li><a href="#app.get">app.get()</a></li><li><a href="#app.get.method">app.get()</a></li><li><a href="#app.listen">app.listen()</a></li><li><a href="#app.param">app.param()</a></li><li><a href="#app.path">app.path()</a></li><li><a href="#app.post.method">app.post()</a></li><li><a href="#app.put.method">app.put()</a></li><li><a href="#app.render">app.render()</a></li><li><a href="#app.route">app.route()</a></li><li><a href="#app.METHOD">Routing</a></li><li><a href="#app.set">app.set()</a></li><li><a href="#app.use">app.use()</a></li></ul></li><li id="req-api"><a href="#request">Request</a><ul id="req-menu"><li><em>Properties</em></li><li><a href="#req.baseUrl">req.baseUrl</a></li><li><a href="#req.body">req.body</a></li><li><a href="#req.cookies">req.cookies</a></li><li><a href="#req.fresh">req.fresh</a></li><li><a href="#req.hostname">req.hostname</a></li><li><a href="#req.ip">req.ip</a></li><li><a href="#req.ips">req.ips</a></li><li><a href="#req.originalUrl">req.originalUrl</a></li><li><a href="#req.params">req.params</a></li><li><a href="#req.path">req.path</a></li><li><a href="#req.protocol">req.protocol</a></li><li><a href="#req.query">req.query</a></li><li><a href="#req.route">req.route</a></li><li><a href="#req.secure">req.secure</a></li><li><a href="#req.signedCookies">req.signedCookies</a></li><li><a href="#req.stale">req.stale</a></li><li><a href="#req.subdomains">req.subdomains</a></li><li><a href="#req.xhr">req.xhr</a></li><li><em>Methods</em></li><li><a href="#req.accepts">req.accepts()</a></li><li><a href="#req.acceptsCharsets">req.acceptsCharsets()</a></li><li><a href="#req.acceptsEncodings">req.acceptsEncodings()</a></li><li><a href="#req.acceptsLanguages">req.acceptsLanguages()</a></li><li><a href="#req.get">req.get()</a></li><li><a href="#req.is">req.is()</a></li><li><a href="#req.param">req.param()</a></li></ul></li><li id="res-api"><a href="#response">Response</a><ul id="res-menu"><li><em>Properties</em></li><li><a href="#res.headersSent">res.headersSent</a></li><li><a href="#res.locals">res.locals</a></li><li><em>Methods</em></li><li><a href="#res.attachment">res.attachment()</a></li><li><a href="#res.cookie">res.cookie()</a></li><li><a href="#res.clearCookie">res.clearCookie()</a></li><li><a href="#res.download">res.download()</a></li><li><a href="#res.end">res.end()</a></li><li><a href="#res.format">res.format()</a></li><li><a href="#res.get">res.get()</a></li><li><a href="#res.json">res.json()</a></li><li><a href="#res.jsonp">res.jsonp()</a></li><li><a href="#res.links">res.links()</a></li><li><a href="#res.location">res.location()</a></li><li><a href="#res.redirect">res.redirect()</a></li><li><a href="#res.render">res.render()</a></li><li><a href="#res.send">res.send()</a></li><li><a href="#res.sendFile">res.sendFile()</a></li><li><a href="#res.sendStatus">res.sendStatus()</a></li><li><a href="#res.set">res.set()</a></li><li><a href="#res.status">res.status()</a></li><li><a href="#res.type">res.type()</a></li><li><a href="#res.vary">res.vary()</a></li></ul></li><li id="router-api"><a href="#router">Router</a><ul id="router-menu"><li><a href="#router">Router()</a></li><li><em>Methods</em></li><li><a href="#router.all">router.all()</a></li><li><a href="#router.METHOD">router.METHOD()</a></li><li><a href="#router.param">router.param()</a></li><li><a href="#router.route">router.route()</a></li><li><a href="#router.use">router.use()</a></li></ul></li></ul><div id="overlay"></div><div id="api-doc"><h1>4.x API</h1><h2>Application</h2><a id="application" class="h2"></a><section><h3 id="express">express()</h3><p>Create an express application.</p>
 <pre><code class="lang-js">var express = require(&#39;express&#39;);
 var app = express();
 
@@ -314,18 +314,112 @@ these callbacks may invoke <code>next(&#39;route&#39;)</code> to bypass the
 remaining route callback(s). This mechanism can be used to perform pre-conditions
 on a route, then pass control to subsequent routes if there&#39;s no reason to proceed
 with the current route.</p>
-</section><section><h3 id="app-settings">settings</h3><p>Express application settings can be set using <a href="#app.set"><code>app.set()</code></a>, and retrieved using <a href="#app.get"><code>app.get()</code></a>. The following settings will alter how the app behaves:</p>
-<ul>
-<li><p><code>trust proxy</code> Indicate that the app is sitting behind a front-facing proxy, and the <code>X-Forwarded-*</code> headers may be trusted for determining the connection and the IP address of the client. It must, however, be noted that, the <code>X-Forwarded-*</code> headers are easily spoofed and the detected IP addresses are unreliable.</p>
-<p><code>trust proxy</code> is disabled by default. When enabled, Express attempts to determine the IP address of the client which is connected through the front-facing proxy, or a series of proxies. The <code>req.ips</code> property, then, contains an array of IP addresses the client is connected through. It can be enabled using either of the following values.</p>
+</section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.</p>
+<pre><code class="lang-js">app.set(&#39;title&#39;, &#39;My Site&#39;);
+app.get(&#39;title&#39;); // &quot;My Site&quot;
+</code></pre>
+<p>The value can be retrieved using <a href="#app.get"><code>app.get()</code></a></p>
+<h4 id="app.settings">Application Settings</h4><p>If <code>name</code> is one of the application settings, it will affect the behavior of the application. The possible application settings are listed in the following table.</p>
+<table class="doctable" border="1">
+  <thead><tr><th id="app-settings-property">Property</th><th>Value</th><th>Default</th></tr></thead>
+  <tbody>
+  <tr>
+    <td><code>trust proxy</code></td>
+    <td>
+      <p>
+      Indicate that the app is sitting behind a front-facing proxy, and the <code>X-Forwarded-*</code> headers may be trusted for determining the connection and the IP address of the client. It must, however, be noted that, the <code>X-Forwarded-*</code> headers are easily spoofed and the detected IP addresses are unreliable.<br>      </p>
+      <p>
+      <code>trust proxy</code> is disabled by default. When enabled, Express attempts to determine the IP address of the client which is connected through the front-facing proxy, or a series of proxies. The <code>req.ips</code> property, then, contains an array of IP addresses the client is connected through. It can be enabled using either of the values specified in the <a href="#trust.proxy.options.table"><code>trust proxy</code> options-table</a>.<br>      </p>
+      <p>
+      The <code>trust proxy</code> setting is implemented using the <a href="https://www.npmjs.org/package/proxy-addr">proxy-addr</a> package, look up its documentation for further details.
+      </p>
+    </td>
+    <td>Disabled.</td>
+  </tr>
+  <tr>
+    <td><code>env</code></td>
+    <td>Environment mode.</td>
+    <td><code>process.env.NODE_ENV</code> (<code>NODE_ENV</code> environment variable) or &quot;development&quot;.</td>
+  </tr>
+  <tr>
+    <td><code>subdomain offset</code></td>
+    <td>The number of dot-separated parts of the host to remove to access subdomain.</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><code>jsonp callback name</code></td>
+    <td>Specifies the default JSONP callback name.</td>
+    <td><code>?callback=</code></td>
+  </tr>
+  <tr>
+    <td><code>json replacer</code></td>
+    <td>JSON replacer callback.</td>
+    <td><code>null</code></td>
+  </tr>
+  <tr>
+    <td><code>json spaces</code></td>
+    <td>When set, sends prettified JSON string indented with the specified amount of spaces.</td>
+    <td>Disabled.</td>
+  </tr>
+  <tr>
+    <td><code>case sensitive routing</code></td>
+    <td>Enable case sensitivity.</td>
+    <td>Disabled. Treats &quot;/Foo&quot; and &quot;/foo&quot; as the same.</td>
+  </tr>
+  <tr>
+    <td><code>strict routing</code></td>
+    <td>Enable strict routing.</td>
+    <td>Disabled. Treats &quot;/foo&quot; and &quot;/foo/&quot; as the same by the router.</td>
+  </tr>
+  <tr>
+    <td><code>view cache</code></td>
+    <td>Enables view template compilation caching.</td>
+    <td>Enabled in production.</td>
+  </tr>
+  <tr>
+    <td><code>view engine</code></td>
+    <td>The default engine extension to use when omitted.</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>views</code></td>
+    <td>A directory or an array of directories for the application&#39;s views. If an array is specified, the views are looked up in sequence in the array of directories.</td>
+    <td><code>&quot;process.cwd() + &#39;/views&#39;&quot;</code></td>
+  </tr>
+  <tr>
+    <td><code>query parser</code></td>
+    <td>The query parser to use - &quot;simple&quot; or &quot;extended&quot;. The simple query parser is based on node&#39;s native query parser, <a href="http://nodejs.org/api/querystring.html">querystring</a>. The extended query parser is based on <a href="https://www.npmjs.org/package/qs">qs</a>.</td>
+    <td>&quot;extended&quot;</td>
+  </tr>
+  <tr>
+    <td><code>x-powered-by</code></td>
+    <td>Enables the &quot;X-Powered-By: Express&quot; HTTP header.</td>
+    <td>Enabled.</td>
+  </tr>
+  <tr>
+    <td><code>etag</code></td>
+    <td>
+      <p>Set the ETag response header. For the possible value, refer the <a href="#etag.options.table"><code>etag</code> options table</a>.</p>
+      <p><a href="http://en.wikipedia.org/wiki/HTTP_ETag">More about the HTTP ETag header</a>.</p>
+    </td>
+    <td></td>
+  </tr>
+  </tbody>
+</table>
+
+<h5 id="trust.proxy.options.table"><code>trust proxy</code> options table</h5>
+
 <table class="doctable" border="1">
   <thead><tr><th>Type</th><th>Value</th></tr></thead>
   <tbody>
     <tr>
       <td><strong> Boolean </strong></td>
       <td>
-        If <code>true</code>, the client&#39;s IP address is understood as the left-most entry in the <code>X-Forwarded-*</code> header.<br>
+        <p>
+        If <code>true</code>, the client&#39;s IP address is understood as the left-most entry in the <code>X-Forwarded-*</code> header.<br>        </p>
+        <p>
         If <code>false</code>, the app is understood as directly facing the Internet and the client&#39;s IP address is derived from <code>req.connection.remoteAddress</code>. This is the default setting.
+        </p>
       </td>
     </tr>
     <tr>
@@ -361,21 +455,8 @@ app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;un
   </tbody>
 </table>
 
-<p>The <code>trust proxy</code> setting is implemented using the <a href="https://www.npmjs.org/package/proxy-addr">proxy-addr</a> package, look up its documentation for further details.</p>
-</li>
-<li><code>env</code> Environment mode, defaults to <code>process.env.NODE_ENV</code> (<code>NODE_ENV</code> environment variable) or &quot;development&quot;.</li>
-<li><code>subdomain offset</code> The number of dot-separated parts of the host to remove to access subdomain, two by default.</li>
-<li><code>jsonp callback name</code> Changes the default callback name of <code>?callback=</code>.</li>
-<li><code>json replacer</code> JSON replacer callback, <code>null</code> by default.</li>
-<li><code>json spaces</code> When set, sends prettified JSON string indented with the specified amount of spaces. Disabled by default.</li>
-<li><code>case sensitive routing</code> Enable case sensitivity, disabled by default, treating &quot;/Foo&quot; and &quot;/foo&quot; as the same.</li>
-<li><code>strict routing</code> Enable strict routing, by default &quot;/foo&quot; and &quot;/foo/&quot; are treated the same by the router.</li>
-<li><code>view cache</code> Enables view template compilation caching, enabled in production by default.</li>
-<li><code>view engine</code> The default engine extension to use when omitted.</li>
-<li><code>views</code> A directory or an array of directories for the application&#39;s views. Defaults to <code>&quot;process.cwd() + &#39;/views&#39;&quot;</code>. If an array is specified, the views are looked up in sequence in the array of directories.</li>
-<li><code>query parser</code> The query parser to use - &quot;simple&quot; or &quot;extended&quot;, defaults to &quot;extended&quot;. The simple query parser is based on node&#39;s native query parser, <a href="http://nodejs.org/api/querystring.html">querystring</a>. The extended query parser is based on <a href="https://www.npmjs.org/package/qs">qs</a>.</li>
-<li><code>x-powered-by</code> Enables the &quot;X-Powered-By: Express&quot; HTTP header, enabled by default.</li>
-<li><p><code>etag</code> Set the ETag response header.</p>
+<h5 id="etag.options.table"><code>etag</code> options table</h5>
+
 <table class="doctable" border="1">
   <thead><tr><th>Type</th><th>Value</th></tr></thead>
   <tbody>
@@ -405,14 +486,6 @@ app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;un
     </tr>
   </tbody>
 </table>
-
-<p><a href="http://en.wikipedia.org/wiki/HTTP_ETag">More about the HTTP ETag header</a>.</p>
-</li>
-</ul>
-</section><section><h3 id="app.set">app.set(name, value)</h3><p>Assigns setting <code>name</code> to <code>value</code>.</p>
-<pre><code class="lang-js">app.set(&#39;title&#39;, &#39;My Site&#39;);
-app.get(&#39;title&#39;); // &quot;My Site&quot;
-</code></pre>
 </section><section><h3 id="app.use">app.use([path], [function...], function)</h3><p>Mount the <a href="#middleware.api">middleware</a> <code>function</code>(s) at the <code>path</code>. If <code>path</code> is not specified, it defaults to &quot;/&quot;.</p>
 <div class="doc-box doc-notice">
 A route will match any path, which follows its path immediately with a &quot;<code>/</code>&quot;. For example: <code>app.use(&#39;/apple&#39;, ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, and so on.<br></div>
