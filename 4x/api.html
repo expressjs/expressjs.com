@@ -695,7 +695,9 @@ app.post(&#39;/&#39;, function (req, res) {
 
 })
 </code></pre>
-</section><section><h3 id="req.param">req.param(name, [defaultValue])</h3><p>Return the value of param <code>name</code> when present.</p>
+</section><section><h3 id="req.param">req.param(name, [defaultValue])</h3><div class="doc-box doc-warn">Deprecated. Use either <code>req.params</code>, <code>req.body</code> or <code>req.query</code>, as applicable.</div>
+
+<p>Return the value of param <code>name</code> when present.</p>
 <pre><code class="lang-js">// ?name=tobi
 req.param(&#39;name&#39;)
 // =&gt; &quot;tobi&quot;
