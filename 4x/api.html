@@ -416,6 +416,8 @@ otherwise an error is passed to <code>next(err)</code>.</p>
   });
 });
 </code></pre>
+<div class="doc-box doc-warn"><code>app.param(callback)</code> is deprecated as of v4.11.0.</div>
+
 <p>Alternatively, you can pass only a <code>callback</code>, in which
 case you have the opportunity to alter the <code>app.param()</code> API.
 For example the <a href="http://github.com/expressjs/express-params">express-params</a>
@@ -441,15 +443,15 @@ expression, returning the callback, which acts much like the &quot;user&quot; pa
 optionally parse them to provide capture groups):</p>
 <pre><code class="lang-js">app.param(&#39;id&#39;, /^\d+$/);
 
-app.get(&#39;/user/:id&#39;, function(req, res){
+app.get(&#39;/user/:id([0-9]+)&#39;, function(req, res){
   res.send(&#39;user &#39; + req.params.id);
 });
 
 app.param(&#39;range&#39;, /^(\w+)\.\.(\w+)?$/);
 
-app.get(&#39;/range/:range&#39;, function(req, res){
-  var range = req.params.range;
-  res.send(&#39;from &#39; + range[1] + &#39; to &#39; + range[2]);
+app.get(&#39;/range/:range(\\w+\\.\\.\\w+)&#39;, function(req, res){
+  var range = req.params.range.split(&#39;..&#39;);
+  res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
 });
 </code></pre>
 </section><section><h3 id="app.METHOD">app.METHOD(path, [callback...], callback)</h3><p>The <code>app.METHOD()</code> methods provide the routing functionality in Express, where <strong>METHOD</strong> is derived from 

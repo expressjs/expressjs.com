@@ -46,6 +46,8 @@ app.param('user', function(req, res, next, id){
 });
 ```
 
+<div class="doc-box doc-warn">`app.param(callback)` is deprecated as of v4.11.0.</div>
+
 Alternatively, you can pass only a `callback`, in which
 case you have the opportunity to alter the `app.param()` API.
 For example the [express-params](http://github.com/expressjs/express-params)
@@ -77,14 +79,14 @@ optionally parse them to provide capture groups):
 ```js
 app.param('id', /^\d+$/);
 
-app.get('/user/:id', function(req, res){
+app.get('/user/:id([0-9]+)', function(req, res){
   res.send('user ' + req.params.id);
 });
 
 app.param('range', /^(\w+)\.\.(\w+)?$/);
 
-app.get('/range/:range', function(req, res){
-  var range = req.params.range;
-  res.send('from ' + range[1] + ' to ' + range[2]);
+app.get('/range/:range(\\w+\\.\\.\\w+)', function(req, res){
+  var range = req.params.range.split('..');
+  res.send('from ' + range[0] + ' to ' + range[1]);
 });
 ```
