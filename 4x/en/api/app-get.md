@@ -1,4 +1,4 @@
-Get setting `name` value.
+Get the value of `name` app setting, where `name` is one of strings in the [app settings table](#app.settings). For example:
 
 ```js
 app.get('title');

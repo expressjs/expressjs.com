@@ -1,4 +1,4 @@
-Check if setting `name` is enabled.
+Check if setting `name` is enabled, where `name` is one of the properties from the [app settings table](#app.settings).
 
 ```js
 app.enabled('trust proxy');

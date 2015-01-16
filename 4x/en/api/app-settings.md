@@ -1,10 +1,68 @@
 If `name` is one of the application settings, it will affect the behavior of the application. The possible application settings are listed in the following table.
 
 <table class="doctable" border="1">
-  <thead><tr><th id="app-settings-property">Property</th><th>Value</th><th>Default</th></tr></thead>
+  <thead><tr><th id="app-settings-property">Property</th><th>Type</th><th>Value</th><th>Default</th></tr></thead>
   <tbody>
   <tr>
+    <td>`case sensitive routing`</td>
+    <td>Boolean</td>
+    <td>Enable case sensitivity.</td>
+    <td>Disabled. Treats "/Foo" and "/foo" as the same.</td>
+  </tr>
+  <tr>
+    <td>`env`</td>
+    <td>String</td>
+    <td>Environment mode.</td>
+    <td>`process.env.NODE_ENV` (`NODE_ENV` environment variable) or "development".</td>
+  </tr>
+  <tr>
+    <td>`etag`</td>
+    <td>Varied</td>
+    <td>
+      <p>Set the ETag response header. For the possible value, refer the [`etag` options table](#etag.options.table).</p>
+      <p>[More about the HTTP ETag header](http://en.wikipedia.org/wiki/HTTP_ETag).</p>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>`jsonp callback name`</td>
+    <td>String</td>
+    <td>Specifies the default JSONP callback name.</td>
+    <td>`?callback=`</td>
+  </tr>
+  <tr>
+    <td>`json replacer`</td>
+    <td>String</td>
+    <td>JSON replacer callback.</td>
+    <td>`null`</td>
+  </tr>
+  <tr>
+    <td>`json spaces`</td>
+    <td>Number</td>
+    <td>When set, sends prettified JSON string indented with the specified amount of spaces.</td>
+    <td>Disabled.</td>
+  </tr>
+  <tr>
+    <td>`query parser`</td>
+    <td>String</td>
+    <td>The query parser to use - "simple" or "extended". The simple query parser is based on node's native query parser, [querystring](http://nodejs.org/api/querystring.html). The extended query parser is based on [qs](https://www.npmjs.org/package/qs).</td>
+    <td>"extended"</td>
+  </tr>
+  <tr>
+    <td>`strict routing`</td>
+    <td>Boolean</td>
+    <td>Enable strict routing.</td>
+    <td>Disabled. Treats "/foo" and "/foo/" as the same by the router.</td>
+  </tr>
+  <tr>
+    <td>`subdomain offset`</td>
+    <td>Number</td>
+    <td>The number of dot-separated parts of the host to remove to access subdomain.</td>
+    <td>2</td>
+  </tr>
+  <tr>
     <td>`trust proxy`</td>
+    <td>Varied</td>
     <td>
       <p>
       Indicate that the app is sitting behind a front-facing proxy, and the `X-Forwarded-*` headers may be trusted for determining the connection and the IP address of the client. It must, however, be noted that, the `X-Forwarded-*` headers are easily spoofed and the detected IP addresses are unreliable.  
@@ -19,72 +77,28 @@ If `name` is one of the application settings, it will affect the behavior of the
     <td>Disabled.</td>
   </tr>
   <tr>
-    <td>`env`</td>
-    <td>Environment mode.</td>
-    <td>`process.env.NODE_ENV` (`NODE_ENV` environment variable) or "development".</td>
-  </tr>
-  <tr>
-    <td>`subdomain offset`</td>
-    <td>The number of dot-separated parts of the host to remove to access subdomain.</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td>`jsonp callback name`</td>
-    <td>Specifies the default JSONP callback name.</td>
-    <td>`?callback=`</td>
-  </tr>
-  <tr>
-    <td>`json replacer`</td>
-    <td>JSON replacer callback.</td>
-    <td>`null`</td>
-  </tr>
-  <tr>
-    <td>`json spaces`</td>
-    <td>When set, sends prettified JSON string indented with the specified amount of spaces.</td>
-    <td>Disabled.</td>
-  </tr>
-  <tr>
-    <td>`case sensitive routing`</td>
-    <td>Enable case sensitivity.</td>
-    <td>Disabled. Treats "/Foo" and "/foo" as the same.</td>
-  </tr>
-  <tr>
-    <td>`strict routing`</td>
-    <td>Enable strict routing.</td>
-    <td>Disabled. Treats "/foo" and "/foo/" as the same by the router.</td>
+    <td>`views`</td>
+    <td>String</td>
+    <td>A directory or an array of directories for the application's views. If an array is specified, the views are looked up in sequence in the array of directories.</td>
+    <td>`"process.cwd() + '/views'"`</td>
   </tr>
   <tr>
     <td>`view cache`</td>
+    <td>Boolean</td>
     <td>Enables view template compilation caching.</td>
     <td>Enabled in production.</td>
   </tr>
   <tr>
     <td>`view engine`</td>
+    <td>String</td>
     <td>The default engine extension to use when omitted.</td>
     <td></td>
   </tr>
   <tr>
-    <td>`views`</td>
-    <td>A directory or an array of directories for the application's views. If an array is specified, the views are looked up in sequence in the array of directories.</td>
-    <td>`"process.cwd() + '/views'"`</td>
-  </tr>
-  <tr>
-    <td>`query parser`</td>
-    <td>The query parser to use - "simple" or "extended". The simple query parser is based on node's native query parser, [querystring](http://nodejs.org/api/querystring.html). The extended query parser is based on [qs](https://www.npmjs.org/package/qs).</td>
-    <td>"extended"</td>
-  </tr>
-  <tr>
     <td>`x-powered-by`</td>
+    <td>Boolean</td>
     <td>Enables the "X-Powered-By: Express" HTTP header.</td>
     <td>Enabled.</td>
-  </tr>
-  <tr>
-    <td>`etag`</td>
-    <td>
-      <p>Set the ETag response header. For the possible value, refer the [`etag` options table](#etag.options.table).</p>
-      <p>[More about the HTTP ETag header](http://en.wikipedia.org/wiki/HTTP_ETag).</p>
-    </td>
-    <td></td>
   </tr>
   </tbody>
 </table>
