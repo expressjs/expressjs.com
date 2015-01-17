@@ -1,4 +1,4 @@
-This property refers to the path pattern(s) on which a sub app was mounted.
+The `admin.mountpath` property is the path pattern(s) on which a sub-app was mounted.
 
 ```js
 var admin = express();
@@ -13,7 +13,7 @@ app.use('/admin', admin); // mount the sub app
 
 It is similar to the [baseUrl](#req.baseUrl) property of the `req` object, except `req.baseUrl` returns the matched URL path, instead of the matched pattern(s).
 
-If a sub app is mounted on multiple path patterns, `app.mountpath` returns the list of patterns it is mounted on, as shown in the following example. 
+If a sub-app is mounted on multiple path patterns, `app.mountpath` returns the list of patterns it is mounted on, as shown in the following example. 
 
 ```js
 var admin = express();

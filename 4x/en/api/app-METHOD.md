@@ -4,10 +4,10 @@ You can provide multiple callback functions that behave just like middleware. Th
 
 <div class="doc-box doc-info">
   <p>
-    The following methods are supported by Express: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
+    Express supports the following routing methods corresponding to HTTP methods: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
   </p>
   <p>
-    Considering their popularity, only `app.()get`, `app.post()`, `app.put()`, and `app.delete()` have been included in the API documentation to help developers get a quick sense of how things work. Other methods like `app.()lock`, `app.subscribe()`, and so on, work as expected too.
+    The API documentation explicitly includes only the most popular HTTP methods `app.get()`, `app.post()`, `app.put()`, and `app.delete()` to provide a quick sense of how things work. Other methods like `app.lock()`, `app.subscribe()`, and so on, work in exactly the same way.
   </p>
   <p>
     To route methods which translate to invalid JavaScript variable names, use the bracket notation:

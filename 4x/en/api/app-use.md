@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
 
 `path` can be a string representing a path, a path pattern, a regular expression to match paths, or an array of combinations of the aforementioned path objects.
 
-<div class="doc-box doc-notice">The middleware examples below are intentionally left overly simple to keep the examples lean and clutter-free.</div>
+<div class="doc-box doc-notice">The middleware in the below are simple examples.</div>
 
 <table class="doctable" border="1">
   <thead>
@@ -99,7 +99,7 @@ app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
     </tbody>
 </table>
 
-`function` can be a middleware function, a series of middleware functions, an array of middleware functions, or a combination of all of them. Since routers and apps implement the middleware interface, they can be used like any other middleware function.
+`function` can be a middleware function, a series of middleware functions, an array of middleware functions, or a combination of all of them. Since routers and apps implement the middleware interface, you can use them as you would any other middleware function.
 
 <table class="doctable" border="1">
   <thead>
@@ -112,13 +112,12 @@ app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
 
     <tr>
       <td>** Single Middleware **</td>
-      <td>
-A middleware function can be defined and mounted locally.
+      <td>You can define and mount a middleware function locally.
 <pre><code class="lang-js">app.use(function (req, res, next) {
   next();
 })
 </code></pre>
-A router is a valid middleware.
+A router is valid middleware.
 
 <pre><code class="lang-js">var router = express.Router();
 router.get('/', function (req, res, next) {
@@ -127,7 +126,7 @@ router.get('/', function (req, res, next) {
 app.use(router);
 </code></pre>
 
-An Express app is a valid middleware.
+An Express app is valid middleware.
 <pre><code class="lang-js">var subApp = express();
 subApp.get('/', function (req, res, next) {
   next();
@@ -139,7 +138,7 @@ app.use(subApp);
     <tr>
       <td>**Series of Middleware**</td>
       <td>
-        More than one middleware can be specified at a mount path.
+        You can specify more than one middleware function at the same mount path.
 <pre><code class="lang-js">var r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
@@ -157,7 +156,8 @@ app.use(r1, r2);
     <tr>
       <td>** Array **</td>
       <td>
-        Clubbing middleware in arrays is a good way to logically group them. The mount path has to be specified, if an array of middleware is passed as the first or the only set of middleware.
+      Use an array to group middleware logically.
+      If you pass an array of middleware as the first or only middleware parameters, then you _must_ specify the mount path.
 <pre><code class="lang-js">var r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
@@ -176,7 +176,7 @@ app.use('/', [r1, r2]);
     <tr>
       <td>** Combination **</td>
       <td>
-        All the above ways of mounting middleware can be combined.
+        You can combine all the above ways of mounting middleware.
 <pre><code class="lang-js">function mw1(req, res, next) { next(); }
 function mw2(req, res, next) { next(); }
 
@@ -197,30 +197,30 @@ app.use(mw1, [mw2, r1, r2], subApp);
   </tbody>
 </table>
 
-Following are some examples of using the [express.static](#express.static) middleware in an Express app.
+Following are some examples of using the [express.static](/guide/using-middleware.html#middleware.built-in) middleware in an Express app.
 
-Serve static content for the app from the "public" directory in the application directory.
+Serve static content for the app from the "public" directory in the application directory:
 
 ```js
 // GET /style.css etc
 app.use(express.static(__dirname + '/public'));
 ```
 
-Mount the middleware at "/static" to serve static content only when their request path is prefixed with "/static".
+Mount the middleware at "/static" to serve static content only when their request path is prefixed with "/static":
 
 ```js
 // GET /static/style.css etc.
 app.use('/static', express.static(__dirname + '/public'));
 ```
 
-Disable logging for static content requests by loading the logger middleware after the static middleware.
+Disable logging for static content requests by loading the logger middleware after the static middleware:
 
 ```js
 app.use(express.static(__dirname + '/public'));
 app.use(logger());
 ```
 
-Serve static files from multiple directories, but give precedence to "./public" over the others.
+Serve static files from multiple directories, but give precedence to "./public" over the others:
 
 ```js
 app.use(express.static(__dirname + '/public'));

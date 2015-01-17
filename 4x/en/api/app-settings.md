@@ -1,4 +1,4 @@
-If `name` is one of the application settings, it will affect the behavior of the application. The possible application settings are listed in the following table.
+If `name` is one of the application settings, it affects the behavior of the application. The following table lists application settings.
 
 <table class="doctable" border="1">
   <thead><tr><th id="app-settings-property">Property</th><th>Type</th><th>Value</th><th>Default</th></tr></thead>
@@ -19,7 +19,7 @@ If `name` is one of the application settings, it will affect the behavior of the
     <td>`etag`</td>
     <td>Varied</td>
     <td>
-      <p>Set the ETag response header. For the possible value, refer the [`etag` options table](#etag.options.table).</p>
+      <p>Set the ETag response header. For possible values, see the [`etag` options table](#etag.options.table).</p>
       <p>[More about the HTTP ETag header](http://en.wikipedia.org/wiki/HTTP_ETag).</p>
     </td>
     <td></td>
@@ -45,7 +45,7 @@ If `name` is one of the application settings, it will affect the behavior of the
   <tr>
     <td>`query parser`</td>
     <td>String</td>
-    <td>The query parser to use - "simple" or "extended". The simple query parser is based on node's native query parser, [querystring](http://nodejs.org/api/querystring.html). The extended query parser is based on [qs](https://www.npmjs.org/package/qs).</td>
+    <td>The query parser to use, either "simple" or "extended". The simple query parser is based on Node's native query parser, [querystring](http://nodejs.org/api/querystring.html). The extended query parser is based on [qs](https://www.npmjs.org/package/qs).</td>
     <td>"extended"</td>
   </tr>
   <tr>
@@ -65,28 +65,28 @@ If `name` is one of the application settings, it will affect the behavior of the
     <td>Varied</td>
     <td>
       <p>
-      Indicate that the app is sitting behind a front-facing proxy, and the `X-Forwarded-*` headers may be trusted for determining the connection and the IP address of the client. It must, however, be noted that, the `X-Forwarded-*` headers are easily spoofed and the detected IP addresses are unreliable.  
+      Indicates the app is behind a front-facing proxy, and to use the `X-Forwarded-*` headers to determine the connection and the IP address of the client. NOTE: `X-Forwarded-*` headers are easily spoofed and the detected IP addresses are unreliable.  
       </p>
       <p>
-      `trust proxy` is disabled by default. When enabled, Express attempts to determine the IP address of the client which is connected through the front-facing proxy, or a series of proxies. The `req.ips` property, then, contains an array of IP addresses the client is connected through. It can be enabled using either of the values specified in the [`trust proxy` options-table](#trust.proxy.options.table).  
+      `trust proxy` is disabled by default. When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The `req.ips` property, then, contains an array of IP addresses the client is connected through. To enable it, use the values described in the [`trust proxy` options table](#trust.proxy.options.table).  
       </p>
       <p>
-      The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.org/package/proxy-addr) package, look up its documentation for further details.
+      The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.org/package/proxy-addr) package.  For more information, see its documentation.
       </p>
     </td>
     <td>Disabled.</td>
   </tr>
   <tr>
     <td>`views`</td>
-    <td>String</td>
-    <td>A directory or an array of directories for the application's views. If an array is specified, the views are looked up in sequence in the array of directories.</td>
+    <td>String or Array</td>
+    <td>A directory or an array of directories for the application's views. If an array, the views are looked up in the order they occur in the array.</td>
     <td>`"process.cwd() + '/views'"`</td>
   </tr>
   <tr>
     <td>`view cache`</td>
     <td>Boolean</td>
     <td>Enables view template compilation caching.</td>
-    <td>Enabled in production.</td>
+    <td>`true` in production.</td>
   </tr>
   <tr>
     <td>`view engine`</td>
@@ -98,12 +98,12 @@ If `name` is one of the application settings, it will affect the behavior of the
     <td>`x-powered-by`</td>
     <td>Boolean</td>
     <td>Enables the "X-Powered-By: Express" HTTP header.</td>
-    <td>Enabled.</td>
+    <td>`true`</td>
   </tr>
   </tbody>
 </table>
 
-<h5 id="trust.proxy.options.table">`trust proxy` options table</h5>
+<h5 id="trust.proxy.options.table">Options for `trust proxy` setting</h5>
 
 <table class="doctable" border="1">
   <thead><tr><th>Type</th><th>Value</th></tr></thead>
@@ -128,7 +128,7 @@ If `name` is one of the application settings, it will affect the behavior of the
             <li>linklocal - `169.254.0.0/16`, `fe80::/10`</li>
             <li>uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`</li>
           </ul>
-        The IP addresses can be set in the following ways.  
+        Set IP addresses in any of the following ways:  
 
         <pre><code class="lang-js">app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
@@ -153,7 +153,7 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify mult
   </tbody>
 </table>
 
-<h5 id="etag.options.table">`etag` options table</h5>
+<h5 id="etag.options.table">Options for `etag` setting</h5>
 
 <table class="doctable" border="1">
   <thead><tr><th>Type</th><th>Value</th></tr></thead>
