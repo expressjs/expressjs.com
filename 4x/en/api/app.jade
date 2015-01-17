@@ -53,7 +53,7 @@ section
   include:md ./app-get-method.md
 
 section
-  h3(id='app.listen') app.listen()
+  h3(id='app.listen') app.listen(port, [hostname], [backlog], [callback])
   include:md ./app-listen.md
 
 section
@@ -91,5 +91,5 @@ section
   include:md ./app-settings.md
 
 section
-  h3(id='app.use') app.use([path], function [, function...])
+  h3(id='app.use') app.use([path,] function [, function...])
   include:md ./app-use.md

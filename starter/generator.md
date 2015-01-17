@@ -48,19 +48,25 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-
-   install dependencies:
-     $ cd myapp && npm install
-
-   run the app:
-     $ DEBUG=myapp ./bin/www
+```
+Then install dependencies:
+```
+$ cd myapp 
+$ npm install
 ```
 
-On Windows, use the following command to run the app.
+Run the app (on MacOS or Linux):
+```
+$ DEBUG=myapp ./bin/www
+```
+
+On Windows, use this command:
 
 ```sh
 > set DEBUG=myapp & node .\bin\www
 ```
+
+Then load `http://localhost:3000/` in your browser to access the app.
 
 The generated app directory structure looks like the following.
 
