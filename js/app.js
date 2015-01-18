@@ -62,6 +62,10 @@ $(function(){
   Prism.highlightAll()
 
   // menu bar
+
+  var prev;
+  var n = 0;
+
   var headings = $('h3').map(function(i, el){
     return {
       top: $(el).offset().top - 100,
@@ -88,21 +92,39 @@ $(function(){
     var h = closest();
     if (!h) return;
 
-    currentApiPrefix = h.id.split('-')[0];
-    parentMenuSelector = '#'+ currentApiPrefix + '-menu';
 
-    $(parentMenuSelector).addClass('active');
+    if (window.location.pathname == '/3x/api.html') {
 
-    if (lastApiPrefix && (lastApiPrefix != currentApiPrefix)) {
-      $('#'+ lastApiPrefix + '-menu').removeClass('active');
+      if (prev) {
+      prev.removeClass('active');
+      prev.parent().parent().removeClass('active');
+      }
+      var a = $('a[href="#' + h.id + '"]');
+      a.addClass('active');
+      a.parent().parent().addClass('active');
+      prev = a;
+
     }
 
-    $('#menu li a').removeClass('active');
+    else {
 
-    var a = $('a[href="#' + h.id + '"]');
-    a.addClass('active');
+      currentApiPrefix = h.id.split('-')[0];
+      parentMenuSelector = '#'+ currentApiPrefix + '-menu';
 
-    lastApiPrefix = currentApiPrefix.split('.')[0];
+      $(parentMenuSelector).addClass('active');
+
+      if (lastApiPrefix && (lastApiPrefix != currentApiPrefix)) {
+        $('#'+ lastApiPrefix + '-menu').removeClass('active');
+      }
+
+      $('#menu li a').removeClass('active');
+
+      var a = $('a[href="#' + h.id + '"]');
+      a.addClass('active');
+
+      lastApiPrefix = currentApiPrefix.split('.')[0];
+
+    }
 
   })
 
