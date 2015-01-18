@@ -4,7 +4,7 @@ Express supports the following routing methods corresponding to HTTP methods: `g
 
 <div class="doc-box doc-info">
   To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
-  `app['m-search']('/', function () { ... })`.
+  `app['m-search']('/', function ...`.
 </div>
 
 You can provide multiple callback functions that behave just like middleware. The only exception is that these callbacks may invoke `next('route')` to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there is no reason to proceed with the current route.

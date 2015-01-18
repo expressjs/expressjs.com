@@ -9,6 +9,7 @@ app.get(&#39;/&#39;, function(req, res) {
 </code></pre>
 <h2 id="route-methods">Route methods</h2>
 <p>A route method is derived from one of the HTTP methods, and is attached to an instance of <code>express</code>.</p>
+<p>The following is an example of routes defined for the GET and the POST methods to the root of the app.</p>
 <pre><code class="lang-js">var express = require(&#39;express&#39;)
 var app = express()
 
@@ -25,7 +26,7 @@ app.post(&#39;/&#39;, function (req, res) {
 <p>Express supports the following routing methods corresponding to HTTP methods: <code>get</code>, <code>post</code>, <code>put</code>, <code>head</code>, <code>delete</code>, <code>options</code>, <code>trace</code>, <code>copy</code>, <code>lock</code>, <code>mkcol</code>, <code>move</code>, <code>purge</code>, <code>propfind</code>, <code>proppatch</code>, <code>unlock</code>, <code>report</code>, <code>mkactivity</code>, <code>checkout</code>, <code>merge</code>, <code>m-search</code>, <code>notify</code>, <code>subscribe</code>, <code>unsubscribe</code>, <code>patch</code>, <code>search</code>, and <code>connect</code>.</p>
 <div class="doc-box doc-info">
 To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
-<code>app[&#39;m-search&#39;](&#39;/&#39;, function () { ... })</code>
+<code>app[&#39;m-search&#39;](&#39;/&#39;, function ...</code>
 </div>
 
 <h2 id="route-paths">Route paths</h2>

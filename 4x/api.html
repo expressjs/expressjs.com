@@ -195,7 +195,7 @@ https.createServer(options, app).listen(443);
 <p>Express supports the following routing methods corresponding to HTTP methods: <code>get</code>, <code>post</code>, <code>put</code>, <code>head</code>, <code>delete</code>, <code>options</code>, <code>trace</code>, <code>copy</code>, <code>lock</code>, <code>mkcol</code>, <code>move</code>, <code>purge</code>, <code>propfind</code>, <code>proppatch</code>, <code>unlock</code>, <code>report</code>, <code>mkactivity</code>, <code>checkout</code>, <code>merge</code>, <code>m-search</code>, <code>notify</code>, <code>subscribe</code>, <code>unsubscribe</code>, <code>patch</code>, <code>search</code>, and <code>connect</code>.</p>
 <div class="doc-box doc-info">
   To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
-  <code>app[&#39;m-search&#39;](&#39;/&#39;, function () { ... })</code>.
+  <code>app[&#39;m-search&#39;](&#39;/&#39;, function ...</code>.
 </div>
 
 <p>You can provide multiple callback functions that behave just like middleware. The only exception is that these callbacks may invoke <code>next(&#39;route&#39;)</code> to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there is no reason to proceed with the current route.</p>

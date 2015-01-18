@@ -17,6 +17,8 @@ app.get('/', function(req, res) {
 
 A route method is derived from one of the HTTP methods, and is attached to an instance of `express`.
 
+The following is an example of routes defined for the GET and the POST methods to the root of the app.
+
 ```js
 var express = require('express')
 var app = express()
@@ -37,7 +39,7 @@ Express supports the following routing methods corresponding to HTTP methods: `g
 
 <div class="doc-box doc-info">
 To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
-`app['m-search']('/', function () { ... })`
+`app['m-search']('/', function ...`
 </div>
 
 ## Route paths
