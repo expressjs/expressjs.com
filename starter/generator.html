@@ -38,16 +38,16 @@
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-
-   install dependencies:
-     $ cd myapp &amp;&amp; npm install
-
-   run the app:
-     $ DEBUG=myapp ./bin/www
 </code></pre>
-<p>On Windows, use the following command to run the app.</p>
+<p>Then install dependencies:</p>
+<pre><code>$ cd myapp 
+$ npm install
+</code></pre><p>Run the app (on MacOS or Linux):</p>
+<pre><code>$ DEBUG=myapp ./bin/www
+</code></pre><p>On Windows, use this command:</p>
 <pre><code class="lang-sh">&gt; set DEBUG=myapp &amp; node .\bin\www
 </code></pre>
+<p>Then load <code>http://localhost:3000/</code> in your browser to access the app.</p>
 <p>The generated app directory structure looks like the following.</p>
 <pre><code class="lang-sh">.
 ├── app.js

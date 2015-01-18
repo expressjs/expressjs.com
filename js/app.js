@@ -62,13 +62,9 @@ $(function(){
   Prism.highlightAll()
 
   // menu bar
-
-  var prev;
-  var n = 0;
-
   var headings = $('h3').map(function(i, el){
     return {
-      top: $(el).offset().top,
+      top: $(el).offset().top - 100,
       id: el.id
     }
   });
@@ -83,20 +79,31 @@ $(function(){
     }
   }
 
-  $(document).scroll(function(){
+  var currentApiPrefix;
+  var parentMenuSelector;
+  var lastApiPrefix;
+
+  $(document).scroll(function() {
+
     var h = closest();
     if (!h) return;
 
-    if (prev) {
-      prev.removeClass('active');
-      prev.parent().parent().removeClass('active');
+    currentApiPrefix = h.id.split('-')[0];
+    parentMenuSelector = '#'+ currentApiPrefix + '-menu';
+
+    $(parentMenuSelector).addClass('active');
+
+    if (lastApiPrefix && (lastApiPrefix != currentApiPrefix)) {
+      $('#'+ lastApiPrefix + '-menu').removeClass('active');
     }
+
+    $('#menu li a').removeClass('active');
 
     var a = $('a[href="#' + h.id + '"]');
     a.addClass('active');
-    a.parent().parent().addClass('active');
 
-    prev = a;
+    lastApiPrefix = currentApiPrefix.split('.')[0];
+
   })
 
   // show mobile menu
