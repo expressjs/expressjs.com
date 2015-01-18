@@ -1,75 +1,147 @@
 <!DOCTYPE html><html><head><title>Express routing</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script data-cfasync="false" src="/js/app.js?v=06112014"></script><script data-cfasync="false" src="/js/retina.js"></script><script data-cfasync="false" src="/js/dropit.js"></script><script data-cfasync="false" src="/js/prism.js"></script></head><body><section class="content"><header><div id="mobile-menu"><div id="nav-button" class="fa fa-bars fa-2x button"></div></div><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/" id="home-menu">Home</a></li><li><ul id="getting-started-menu" class="menu"><li><a href="/starter/installing.html">Getting started</a><ul><li><a href="/starter/installing.html">Installing</a></li><li><a href="/starter/generator.html">Express generator</a></li><li><a href="/starter/hello-world.html">Hello world</a></li><li><a href="/starter/basic-routing.html">Basic routing</a></li><li><a href="/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/guide/error-handling.html" class="active">Guide</a><ul><li><a href="/guide/routing.html">Routing</a></li><li><a href="/guide/using-middleware.html">Using middleware</a></li><li><a href="/guide/using-template-engines.html">Using template engines</a></li><li><a href="/guide/error-handling.html">Error handling</a></li><li><a href="/guide/debugging.html">Debugging</a></li><li><a href="/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/advanced/developing-template-engines.html">Advanced topics</a><ul><li><a href="/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/advanced/security-updates.html">Security updates</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/resources/glossary.html">Resources</a><ul><li><a href="/resources/glossary.html">Glossary</a></li><li><a href="/resources/middleware.html">Middleware</a></li><li><a href="/resources/community.html">Community</a></li><li><a href="/resources/books-blogs.html">Books and blogs</a></li><li><a href="/resources/applications.html">Applications</a></li></ul></li></ul></li></ul></div><a href="http://strongloop.com/node-js/training/" title="Node and Express Training from StrongLoop" id="strongloop-header">Express and Node.js Training from StrongLoop</a></header><div id="overlay"></div><h1 id="routing">Routing</h1>
 <p>Routing refers to the definition of end points (URIs) to an application and how it responds to client requests.</p>
 <p>A route is a combination of a URI, a HTTP request method (GET, POST, and so on), and one or more handlers for the endpoint. It takes the following structure <code>app.METHOD(path, [callback...], callback)</code>, where <code>app</code> is an instance of <code>express</code>, <code>METHOD</code> is an <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP request method</a>, <code>path</code> is a path on the server, and <code>callback</code> is the function executed when the route is matched.</p>
-<p>You can provide multiple callback functions that behave just like middleware. The only exception is that these callbacks may invoke <code>next(&#39;route&#39;)</code> to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there&#39;s no reason to proceed with the current route.</p>
-<div class="doc-box doc-info">
-Express supports the following methods: <code>get</code>, <code>post</code>, <code>put</code>, <code>head</code>, <code>delete</code>, <code>options</code>, <code>trace</code>, <code>copy</code>, <code>lock</code>, <code>mkcol</code>, <code>move</code>, <code>purge</code>, <code>propfind</code>, <code>proppatch</code>, <code>unlock</code>, <code>report</code>, <code>mkactivity</code>, <code>checkout</code>, <code>merge</code>, <code>m-search</code>, <code>notify</code>, <code>subscribe</code>, <code>unsubscribe</code>, <code>patch</code>, <code>search</code>, and <code>connect</code>.
-</div>
+<p>The following is an example of a very basic route.</p>
+<pre><code class="lang-js">// respond with &quot;hello world&quot; when a GET request is made to the homepage
+app.get(&#39;/&#39;, function(req, res) {
+  res.send(&#39;hello world&#39;)
+})
+</code></pre>
+<h2 id="route-methods">Route methods</h2>
+<p>A route method is derived from one of the HTTP methods, and is attached to an instance of <code>express</code>.</p>
+<pre><code class="lang-js">var express = require(&#39;express&#39;)
+var app = express()
 
+// GET method route
+app.get(&#39;/&#39;, function (req, res) {
+  res.send(&#39;GET request to the homepage&#39;)
+})
+
+// POST method route
+app.post(&#39;/&#39;, function (req, res) {
+  res.send(&#39;POST request to the homepage&#39;)
+})
+</code></pre>
+<p>Express supports the following routing methods corresponding to HTTP methods: <code>get</code>, <code>post</code>, <code>put</code>, <code>head</code>, <code>delete</code>, <code>options</code>, <code>trace</code>, <code>copy</code>, <code>lock</code>, <code>mkcol</code>, <code>move</code>, <code>purge</code>, <code>propfind</code>, <code>proppatch</code>, <code>unlock</code>, <code>report</code>, <code>mkactivity</code>, <code>checkout</code>, <code>merge</code>, <code>m-search</code>, <code>notify</code>, <code>subscribe</code>, <code>unsubscribe</code>, <code>patch</code>, <code>search</code>, and <code>connect</code>.</p>
 <div class="doc-box doc-info">
-To route methods which translate to invalid JavaScript variable names, use the bracket notation:
+To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
 <code>app[&#39;m-search&#39;](&#39;/&#39;, function () { ... })</code>
 </div>
 
-<div class="doc-box">
-<strong> Writing notes </strong>
-
-1. Path - types, examples
-2. Request methods - list them all, examples
-3. Handlers - single, multiple
-4. Response methods - res.send*, res.end, ...
-</div>
-
-
-<h2 id="defining-route-paths">Defining route paths</h2>
-<p>The following snippet illustrates the most simple route definition possible. Express
-translates the path strings to regular expressions, used internally to match incoming requests.</p>
+<h2 id="route-paths">Route paths</h2>
 <div class="doc-box doc-warn">
 Query strings are <em>not</em> considered when peforming these matches. For example, &quot;GET /&quot;
 would match the following route, as would &quot;GET /?name=tobi&quot;:
 </div>
 
-<pre><code class="lang-js">app.get(&#39;/&#39;, function(req, res){
-  res.send(&#39;hello world&#39;);
-});
-</code></pre>
-<p>Regular expressions may also be used, and can be useful
-if you have very specific restraints, for example the following
-would match &quot;GET /commits/71dbb9c&quot; as well as &quot;GET /commits/71dbb9c..4c084f9&quot;.</p>
-<pre><code class="lang-js">app.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
-  var from = req.params[0];
-  var to = req.params[1] || &#39;HEAD&#39;;
-  res.send(&#39;commit range &#39; + from + &#39;..&#39; + to);
-});
-</code></pre>
-<p>Several callbacks may also be passed, useful for re-using middleware
-that load resources, perform validations, etc.</p>
-<pre><code class="lang-js">app.get(&#39;/user/:id&#39;, user.load, function(){
-  // ... 
+<p>...</p>
+<h2 id="route-handlers">Route handlers</h2>
+<p>You can provide multiple callback functions that behave just like <a href="/guide/using-middleware.html">middleware</a> to handle a request. The only exception is that these callbacks may invoke <code>next(&#39;route&#39;)</code> to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there&#39;s no reason to proceed with the current route.</p>
+<p>Route handlers can come in the form of a function, an array of functions, or various combinations of both, as shown the following examples.</p>
+<p>A route can be handled using a single callback function:</p>
+<pre><code class="lang-js">app.get(&#39;/example/a&#39;, function (req, res) {
+  res.send(&#39;Hello from A!&#39;)
 })
 </code></pre>
-<p>If you have multiple common middleware for a route, you can use the route API with <code>all</code>.</p>
-<pre><code class="lang-js">var middleware = [loadForum, loadThread];
+<p>A route can be handled using a more than one callback function (make sure to specify the <code>next</code> object):</p>
+<pre><code class="lang-js">app.get(&#39;/example/b&#39;, function (req, res, next) {
+  console.log(&#39;response will be sent by the next function ...&#39;)
+  next()
+}, function (req, res) {
+  res.send(&#39;Hello from B!&#39;)
+})
+</code></pre>
+<p>A route can be handled using an array of callback functions:</p>
+<pre><code class="lang-js">
+var cb0 = function (req, res, next) {
+  console.log(&#39;CB0&#39;)
+  next()
+}
 
-app.route(&#39;/forum/:fid/thread/:tid&#39;)
-.all(loadForum)
-.all(loadThread)
-.get(function() { //... });
-.post(function() { //... });
+var cb1 = function (req, res, next) {
+  console.log(&#39;CB1&#39;)
+  next()
+}
+
+var cb2 = function (req, res) {
+  res.send(&#39;Hello from C!&#39;)
+}
+
+app.get(&#39;/example/c&#39;, [cb0, cb1, cb2])
 </code></pre>
-<p>Both middleware will be run for GET and POST requests.</p>
-<h2 id="defining-route-handlers">Defining route handlers</h2>
-<p>Multiple callbacks may be given; all are treated equally, and behave just like middleware. The only exception is that these callbacks may invoke <code>next(&#39;route&#39;)</code> to bypass the remaining route callback(s). This mechanism can be used to perform pre-conditions on a route, then pass control to subsequent routes if there&#39;s no reason to proceed
-with the current route.</p>
+<p>A route can be handled using a combination of array of functions and independent functions:</p>
+<pre><code class="lang-js">var cb0 = function (req, res, next) {
+  console.log(&#39;CB0&#39;)
+  next()
+}
+
+var cb1 = function (req, res, next) {
+  console.log(&#39;CB1&#39;)
+  next()
+}
+
+app.get(&#39;/example/d&#39;, [cb0, cb1], function (req, res, next) {
+  console.log(&#39;response will be sent by the next function ...&#39;)
+  next()
+}, function (req, res) {
+  res.send(&#39;Hello from D!&#39;)
+})
+</code></pre>
+<h2 id="response-methods">Response methods</h2>
+<p>...</p>
+<h2 id="-app-route-"><code>app.route()</code></h2>
+<p><code>app.route()</code> method enables you to create chainable route handlers
+for a route path. Since the path is specified in a single location, it
+helps to create modular routes and reduce redundancy and typos. For more
+information on routes, see <a href="/4x/api.html#router">Router() documentation</a>.</p>
+<p>Here is an example of chained route handlers defined using <code>app.route()</code>.</p>
+<pre><code class="lang-js">app.route(&#39;/book&#39;)
+  .get(function(req, res) {
+    res.send(&#39;Get a random book&#39;);
+  })
+  .post(function(req, res) {
+    res.send(&#39;Add a book&#39;);
+  })
+  .put(function(req, res) {
+    res.send(&#39;Update the book&#39;);
+  })
+</code></pre>
+<h2 id="-express-router-"><code>express.Router</code></h2>
+<p>You can use the <code>express.Router</code> class to create modular mountable
+route handlers. A <code>Router</code> instance is a complete middleware and
+routing system; for this reason it is often referred to as a &quot;mini-app&quot;.</p>
+<p>The following example creates a router as a module, loads a middleware in
+it, defines some routes, and mounts it on a path on the main app.</p>
+<p>Create a router file named <code>birds.js</code> in the app directory,
+with the following content:</p>
+<pre><code class="lang-js">var express = require(&#39;express&#39;);
+var router = express.Router();
+
+// middleware specific to this router
+router.use(function timeLog(req, res, next) {
+  console.log(&#39;Time: &#39;, Date.now());
+  next();
+})
+// define the home page route
+router.get(&#39;/&#39;, function(req, res) {
+  res.send(&#39;Birds home page&#39;);
+})
+// define the about route
+router.get(&#39;/about&#39;, function(req, res) {
+  res.send(&#39;About birds&#39;);
+})
+
+module.exports = router;
+</code></pre>
+<p>Then, load the router module in the app:</p>
+<pre><code class="lang-js">var birds = require(&#39;./birds&#39;);
+...
+app.use(&#39;/birds&#39;, birds);
+</code></pre>
+<p>The app will now be able to handle requests to <code>/birds</code> and
+<code>/birds/about</code>, along with calling the <code>timeLog</code>
+middleware specific to the route.</p>
 <hr>
-<p>The following snippet illustrates the most simple route definition possible. Express
-translates the path strings to regular expressions, used internally to match incoming requests.
-Query strings are <em>not</em> considered when peforming these matches. For example, &quot;GET /&quot;
-would match the following route, as would &quot;GET /?name=tobi&quot;:</p>
-<pre><code class="lang-js">app.get(&#39;/&#39;, function(req, res){
-  res.send(&#39;hello world&#39;);
-});
-</code></pre>
 <p>Regular expressions may also be used, and can be useful
 if you have very specific restraints, for example the following
 would match &quot;GET /commits/71dbb9c&quot; as well as &quot;GET /commits/71dbb9c..4c084f9&quot;.</p>
