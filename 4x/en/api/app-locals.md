@@ -10,7 +10,7 @@ app.locals.email
 ```
 
 Once set, the value of `app.locals` properties persist throughout the life of the application,
-in contrast with [res.locals](http://localhost:3000/4x/api.html#res.locals) properties that
+in contrast with [res.locals](#res-locals) properties that
 are valid only for the lifetime of the request.
 
 You can accesss local variables in templates rendered within the application.
