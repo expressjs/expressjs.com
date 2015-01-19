@@ -124,7 +124,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 
 ## `app.route()`
 
-`app.route()` method enables you to create chainable route handlers
+The app method, `app.route()`, enables you to create chainable route handlers
 for a route path. Since the path is specified in a single location, it
 helps to create modular routes and reduce redundancy and typos. For more
 information on routes, see [Router() documentation](/4x/api.html#router).

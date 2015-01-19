@@ -26,12 +26,15 @@ Note, however, that you cannot access local variables in middleware.</p>
 app.locals.strftime = require(&#39;strftime&#39;);
 app.locals.email = &#39;me@myapp.com&#39;;
 </code></pre>
-<p>By default, Express exposes only a single app-level local variable: <code>settings</code>.</p>
-<pre><code class="lang-js">app.set(&#39;title&#39;, &#39;My App&#39;);
-// use settings.title in a view
-</code></pre>
-</section><section><h3 id="app-mountpath">app.mountpath</h3><p>The <code>admin.mountpath</code> property is the path pattern(s) on which a sub-app was mounted.</p>
-<pre><code class="lang-js">var admin = express();
+</section><section><h3 id="app-mountpath">app.mountpath</h3><p>The <code>app.mountpath</code> property is the path pattern(s) on which a sub app was mounted.</p>
+<div class="doc-box doc-info">
+  A sub app is an instance <code>express</code> which may be used for handling the request to a route.
+</div>
+
+<pre><code class="lang-js">var express = required(&#39;express&#39;);
+
+var app = express(); // the main app
+var admin = express(); // the sub app
 
 admin.get(&#39;/&#39;, function (req, res) {
   console.log(admin.mountpath); // /admin

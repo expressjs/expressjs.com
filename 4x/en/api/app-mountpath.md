@@ -1,7 +1,14 @@
-The `admin.mountpath` property is the path pattern(s) on which a sub-app was mounted.
+The `app.mountpath` property is the path pattern(s) on which a sub app was mounted.
+
+<div class="doc-box doc-info">
+  A sub app is an instance `express` which may be used for handling the request to a route.
+</div>
 
 ```js
-var admin = express();
+var express = required('express');
+
+var app = express(); // the main app
+var admin = express(); // the sub app
 
 admin.get('/', function (req, res) {
   console.log(admin.mountpath); // /admin

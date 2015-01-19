@@ -22,12 +22,3 @@ app.locals.title = 'My App';
 app.locals.strftime = require('strftime');
 app.locals.email = 'me@myapp.com';
 ```
-
-By default, Express exposes only a single app-level local variable: `settings`.
-
-```js
-app.set('title', 'My App');
-// use settings.title in a view
-```
-
-
