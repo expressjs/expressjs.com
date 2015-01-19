@@ -155,7 +155,7 @@ so they work seemlessly with Express.</p>
 app.engine(&#39;haml&#39;, engines.haml);
 app.engine(&#39;html&#39;, engines.hogan);
 </code></pre>
-</section><section><h3 id="app-get">app.get(name)</h3><p>Get the value of <code>name</code> app setting, where <code>name</code> is one of strings in the <a href="#app.settings">app settings table</a>. For example:</p>
+</section><section><h3 id="app-get">app.get(name)</h3><p>Get the value of <code>name</code> app setting, where <code>name</code> is one of strings in the <a href="#app-settings-table">app settings table</a>. For example:</p>
 <pre><code class="lang-js">app.get(&#39;title&#39;);
 // =&gt; undefined
 
@@ -340,13 +340,13 @@ app.route(&#39;/events&#39;)
   // maybe add a new event...
 })
 </code></pre>
-</section><section><h3 id="app-set">app.set(name, value)</h3><p>Assign setting <code>name</code> to <code>value</code>, where <code>name</code> is one of the properties from the <a href="#app.settings">app settings table</a>.</p>
+</section><section><h3 id="app-set">app.set(name, value)</h3><p>Assign setting <code>name</code> to <code>value</code>, where <code>name</code> is one of the properties from the <a href="#app-settings-table">app settings table</a>.</p>
 <p>Calling <code>app.set(&#39;foo&#39;, true)</code> for a Boolean property is the same as calling <code>app.enable(&#39;foo&#39;)</code>. Similarly, calling <code>app.set(&#39;foo&#39;, false)</code> for a Boolean property is the same as calling <code>app.disable(&#39;foo&#39;)</code>.</p>
 <pre><code class="lang-js">app.set(&#39;title&#39;, &#39;My Site&#39;);
 app.get(&#39;title&#39;); // &quot;My Site&quot;
 </code></pre>
 <p>The value can be retrieved using <a href="#app.get"><code>app.get()</code></a></p>
-<h4 id="app-settings">Application Settings</h4><p>If <code>name</code> is one of the application settings, it affects the behavior of the application. The following table lists application settings.</p>
+<h4 id="app-settings-table">Application Settings</h4><p>If <code>name</code> is one of the application settings, it affects the behavior of the application. The following table lists application settings.</p>
 <table class="doctable" border="1">
   <thead><tr><th id="app-settings-property">Property</th><th>Type</th><th>Value</th><th>Default</th></tr></thead>
   <tbody>

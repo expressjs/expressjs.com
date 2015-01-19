@@ -373,7 +373,7 @@ html[xmlns] .clearfix {
   margin: 1em 1em 1em 0;
   border: 1px solid #c6c6c6;
   border-collapse: collapse;
-  background-color: #f4f3f3;
+  background-color: #f8f8f8;
   empty-cells:show;
   width: 100%;
 }
@@ -386,7 +386,7 @@ html[xmlns] .clearfix {
 }
 
 .doctable tr th, section table tr th {
-  background-color: #c6c6c6;
+  background-color: #dadada;
   font-size: 110%;
 }
 
