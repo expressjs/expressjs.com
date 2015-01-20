@@ -108,7 +108,7 @@ $(function(){
 
     else {
 
-      currentApiPrefix = h.id.split('-')[0];
+      currentApiPrefix = h.id.split('.')[0];
       parentMenuSelector = '#'+ currentApiPrefix + '-menu';
 
       $(parentMenuSelector).addClass('active');
