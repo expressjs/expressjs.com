@@ -7,22 +7,22 @@ A route is a combination of a URI, a HTTP request method (GET, POST, and so on),
 The following is an example of a very basic route.
 
 ```js
+var express = require('express')
+var app = express()
+
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function(req, res) {
   res.send('hello world')
 })
 ```
 
-## Route methods
+<h2 id="route-methods">Route methods</h2>
 
 A route method is derived from one of the HTTP methods, and is attached to an instance of `express`.
 
 The following is an example of routes defined for the GET and the POST methods to the root of the app.
 
 ```js
-var express = require('express')
-var app = express()
-
 // GET method route
 app.get('/', function (req, res) {
   res.send('GET request to the homepage')
@@ -42,17 +42,85 @@ To route methods which translate to invalid JavaScript variable names, use the b
 `app['m-search']('/', function ...`
 </div>
 
-## Route paths
+There is a special routing method, `app.all()`, which is not derived from any HTTP method. It is used for loading middleware at a path for all request methods.
 
-<div class="doc-box doc-warn">
-Query strings are *not* considered when peforming these matches. For example, "GET /"
-would match the following route, as would "GET /?name=tobi":
+In the following example, the handler will be executed for requests to "/secret" whether using GET, POST, PUT, DELETE, or any other HTTP request method.
+
+```js
+app.all('/secret', function (req, res, next) {
+  console.log('Accessing the secret section ...')
+  next() // pass control to the next handler
+})
+```
+
+<h2 id="route-paths">Route paths</h2>
+
+Route paths, in combination with a request method, define the endpoints at which requests can be made to. They be strings, string patterns, or regular expressions.
+
+<div class="doc-box doc-warn">Query strings are *not* a part of the route path.</div>
+
+Examples of route paths based on strings:
+
+```js
+// with match request to the root
+app.get('/', function (req, res) {
+  res.send('root')
+})
+
+// will match requests to /about
+app.get('/about', function (req, res) {
+  res.send('about')
+})
+
+// will match request to /random.text
+app.get('/random.text', function (req, res) {
+  res.send('random.text')
+})
+```
+
+Examples of route paths based on string patterns:
+
+```js
+// will match acd and abcd
+app.get('/ab?cd', function(req, res) {
+  res.send('ab?cd')
+})
+
+// will match abcd, abbcd, abbbcd, and so on
+app.get('/ab+cd', function(req, res) {
+  res.send('ab+cd')
+})
+
+// will match abcd, abxcd, abRABDOMcd, ab123cd, and so on
+app.get('/ab*cd', function(req, res) {
+  res.send('ab*cd')
+})
+
+// will match /abe and /abcde
+app.get('/ab(cd)?e', function(req, res) {
+ res.send('ab(cd)?e')
+})
+```
+
+<div class="doc-box doc-info">
+The characters ?, +, *, and () are subsets of their Regular Expression counterparts. The hyphen (-) and the dot (.) are interpreted literally by string-based paths.
 </div>
 
-...
+Examples of route paths based on regular expressions:
 
+```js
+// will match anything with an a in the route name:
+app.get(/a/, function(req, res) {
+  res.send('/a/')
+})
 
-## Route handlers
+// will match butterfly, dagonfly; but not butterflyman, dragonfly man, and so on
+app.get(/.*fly$/, function(req, res) {
+  res.send('/.*fly$/')
+})
+```
+
+<h2 id="route-handlers">Route handlers</h2>
 
 You can provide multiple callback functions that behave just like [middleware](/guide/using-middleware.html) to handle a request. The only exception is that these callbacks may invoke `next('route')` to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
 
@@ -118,7 +186,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 })
 ```
 
-## Response methods
+<h2 id="response-methods">Response methods</h2>
 
 The methods on the response object (`res`) in the following table can send a response to the client and terminate the request response cycle. If none of them is called from a route handler, the client request will be left hanging.
 
@@ -134,10 +202,10 @@ The methods on the response object (`res`) in the following table can send a res
 | [res.sendFile](/4x/api.html#res-sendFile)     | Send a file as an octet stream.
 | [res.sendStatus()](/4x/api.html#res-sendStatus) | Set the response status code and send its string representation as the response body.
 
-## `app.route()`
+<h2 id="app-route">`app.route()`</h2>
 
-The app method, `app.route()`, enables you to create chainable route handlers
-for a route path. Since the path is specified in a single location, it
+Chainable route handlers for a route path can be created using `app.route()`.
+Since the path is specified at a single location, it
 helps to create modular routes and reduce redundancy and typos. For more
 information on routes, see [Router() documentation](/4x/api.html#router).
 
@@ -156,9 +224,9 @@ app.route('/book')
   })
 ```
 
-## `express.Router`
+<h2 id="express-router">`express.Router`</h2>
 
-You can use the `express.Router` class to create modular mountable
+The `express.Router` class can be used to create modular mountable
 route handlers. A `Router` instance is a complete middleware and
 routing system; for this reason it is often referred to as a "mini-app".
 
@@ -200,43 +268,3 @@ app.use('/birds', birds);
 The app will now be able to handle requests to `/birds` and
 `/birds/about`, along with calling the `timeLog`
 middleware specific to the route.
-
-
----
-
-
-Regular expressions may also be used, and can be useful
-if you have very specific restraints, for example the following
-would match "GET /commits/71dbb9c" as well as "GET /commits/71dbb9c..4c084f9".
-
-```js
-app.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
-  var from = req.params[0];
-  var to = req.params[1] || 'HEAD';
-  res.send('commit range ' + from + '..' + to);
-});
-```
-
-Several callbacks may also be passed, useful for re-using middleware
-that load resources, perform validations, etc.
-
-```js
-app.get('/user/:id', user.load, function(){
-  // ... 
-})
-```
-
-If you have multiple common middleware for a route, you can use the route API with `all`.
-
-```js
-var middleware = [loadForum, loadThread];
-
-app.route('/forum/:fid/thread/:tid')
-.all(loadForum)
-.all(loadThread)
-.get(function() { //... });
-.post(function() { //... });
-```
-
-Both middleware will be run for GET and POST requests.
-

@@ -17,7 +17,7 @@ app.locals.email
 // =&gt; &#39;me@myapp.com&#39;
 </code></pre>
 <p>Once set, the value of <code>app.locals</code> properties persist throughout the life of the application,
-in contrast with <a href="http://localhost:3000/4x/api.html#res.locals">res.locals</a> properties that
+in contrast with <a href="#res-locals">res.locals</a> properties that
 are valid only for the lifetime of the request.</p>
 <p>You can accesss local variables in templates rendered within the application.
 This is useful for providing helper functions to templates, as well as app-level data.
@@ -43,7 +43,7 @@ admin.get(&#39;/&#39;, function (req, res) {
 
 app.use(&#39;/admin&#39;, admin); // mount the sub app
 </code></pre>
-<p>It is similar to the <a href="#req.baseUrl">baseUrl</a> property of the <code>req</code> object, except <code>req.baseUrl</code> returns the matched URL path, instead of the matched pattern(s).</p>
+<p>It is similar to the <a href="#req-baseUrl">baseUrl</a> property of the <code>req</code> object, except <code>req.baseUrl</code> returns the matched URL path, instead of the matched pattern(s).</p>
 <p>If a sub-app is mounted on multiple path patterns, <code>app.mountpath</code> returns the list of patterns it is mounted on, as shown in the following example. </p>
 <pre><code class="lang-js">var admin = express();
 
@@ -101,7 +101,7 @@ The example is much like before, however it only restricts paths that start with
   res.send(&#39;DELETE request to homepage&#39;);
 });
 </code></pre>
-</section><section><h3 id="app-disable">app.disable(name)</h3><p>Set Boolean setting <code>name</code> to <code>false</code>, where <code>name</code> is one of the properties from the <a href="#app.settings">app settings table</a>.
+</section><section><h3 id="app-disable">app.disable(name)</h3><p>Set Boolean setting <code>name</code> to <code>false</code>, where <code>name</code> is one of the properties from the <a href="#app-settings">app settings table</a>.
 Calling <code>app.set(&#39;foo&#39;, false)</code> for a Boolean property is the same as calling <code>app.disable(&#39;foo&#39;)</code>.</p>
 <p>For example:</p>
 <pre><code class="lang-js">app.disable(&#39;trust proxy&#39;);
@@ -205,6 +205,14 @@ https.createServer(options, app).listen(443);
 <div class="doc-box doc-info">
   The API documentation explicitly includes only the most popular HTTP methods <code>app.get()</code>, <code>app.post()</code>, <code>app.put()</code>, and <code>app.delete()</code> to provide a quick sense of how things work. Other methods like <code>app.lock()</code>, <code>app.subscribe()</code>, and so on, work in exactly the same way.
 </div>
+
+<p>There is a special routing method, <code>app.all()</code>, which is not derived from any HTTP method. It is used for loading middleware at a path for all request methods.</p>
+<p>In the following example, the handler will be executed for requests to &quot;/secret&quot; whether using GET, POST, PUT, DELETE, or any other HTTP request method.</p>
+<pre><code class="lang-js">app.all(&#39;/secret&#39;, function (req, res, next) {
+  console.log(&#39;Accessing the secret section ...&#39;)
+  next() // pass control to the next handler
+})
+</code></pre>
 </section><section><h3 id="app-param">app.param([name], callback)</h3><p>Map logic to route parameters. For example, when <code>:user</code>
 is present in a route path, you may map user loading logic to automatically
 provide <code>req.user</code> to the route, or perform validations
@@ -340,12 +348,15 @@ app.route(&#39;/events&#39;)
   // maybe add a new event...
 })
 </code></pre>
-</section><section><h3 id="app-set">app.set(name, value)</h3><p>Assign setting <code>name</code> to <code>value</code>, where <code>name</code> is one of the properties from the <a href="#app-settings-table">app settings table</a>.</p>
-<p>Calling <code>app.set(&#39;foo&#39;, true)</code> for a Boolean property is the same as calling <code>app.enable(&#39;foo&#39;)</code>. Similarly, calling <code>app.set(&#39;foo&#39;, false)</code> for a Boolean property is the same as calling <code>app.disable(&#39;foo&#39;)</code>.</p>
+</section><section><h3 id="app-set">app.set(name, value)</h3><p>Assign setting <code>name</code> to <code>value</code>, where <code>name</code> is one of the properties from
+the <a href="#app-settings-table">app settings table</a>. </p>
+<p>Calling <code>app.set(&#39;foo&#39;, true)</code> for a Boolean property is the same as calling
+<code>app.enable(&#39;foo&#39;)</code>. Similarly, calling <code>app.set(&#39;foo&#39;, false)</code> for a Boolean
+property is the same as calling <code>app.disable(&#39;foo&#39;)</code>.</p>
+<p>Retrieve the value of a setting with <a href="#app.get"><code>app.get()</code></a>.</p>
 <pre><code class="lang-js">app.set(&#39;title&#39;, &#39;My Site&#39;);
 app.get(&#39;title&#39;); // &quot;My Site&quot;
 </code></pre>
-<p>The value can be retrieved using <a href="#app.get"><code>app.get()</code></a></p>
 <h4 id="app-settings-table">Application Settings</h4><p>If <code>name</code> is one of the application settings, it affects the behavior of the application. The following table lists application settings.</p>
 <table class="doctable" border="1">
   <thead><tr><th id="app-settings-property">Property</th><th>Type</th><th>Value</th><th>Default</th></tr></thead>
@@ -960,7 +971,8 @@ Body-parsing middleware must be loaded for <code>req.param()</code> to work pred
   console.log(res.headersSent); // true
 })
 </code></pre>
-</section><section><h3 id="res-locals">res.locals</h3><p>Response local variables are scoped to the request, and therefore only available to the view(s) rendered during that request / response cycle (if any). Otherwise, this API is identical to <a href="#app.locals">app.locals</a>.</p>
+</section><section><h3 id="res-locals">res.locals</h3><p>Response local variables are scoped to the request, and therefore only available to
+the view(s) rendered during that request / response cycle (if any). Otherwise, this API is identical to <a href="#app-locals">app.locals</a>.</p>
 <p>This object is useful for exposing request-level information such as the request pathname, authenticated user, user settings etc.</p>
 <pre><code class="lang-js">app.use(function(req, res, next){
   res.locals.user = req.user;

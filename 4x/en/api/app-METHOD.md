@@ -12,3 +12,14 @@ You can provide multiple callback functions that behave just like middleware. Th
 <div class="doc-box doc-info">
   The API documentation explicitly includes only the most popular HTTP methods `app.get()`, `app.post()`, `app.put()`, and `app.delete()` to provide a quick sense of how things work. Other methods like `app.lock()`, `app.subscribe()`, and so on, work in exactly the same way.
 </div>
+
+There is a special routing method, `app.all()`, which is not derived from any HTTP method. It is used for loading middleware at a path for all request methods.
+
+In the following example, the handler will be executed for requests to "/secret" whether using GET, POST, PUT, DELETE, or any other HTTP request method.
+
+```js
+app.all('/secret', function (req, res, next) {
+  console.log('Accessing the secret section ...')
+  next() // pass control to the next handler
+})
+```
