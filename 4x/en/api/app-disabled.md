@@ -1,5 +1,5 @@
 Check if the Boolean setting `name` is disabled (`false`), where `name` is one of the properties from
-the [app settings table](#app.settings).
+the [app settings table](#app.settings.table).
 
 ```js
 app.disabled('trust proxy');

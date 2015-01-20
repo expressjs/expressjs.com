@@ -11,7 +11,7 @@ res.status(500).jsonp({ error: 'message' })
 // => { "error": "message" }
 ```
 
-By default, the JSONP callback name is simply `callback`. However, you may alter this with the <a href="#app-settings">jsonp callback name</a> setting. The following are some examples of JSONP responses using the same code:
+By default, the JSONP callback name is simply `callback`. However, you may alter this with the <a href="#app.settings.table">jsonp callback name</a> setting. The following are some examples of JSONP responses using the same code:
 
 ```js
 // ?callback=foo

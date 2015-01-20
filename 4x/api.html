@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Express - api reference</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script data-cfasync="false" src="/js/app.js?v=06112014"></script><script data-cfasync="false" src="/js/retina.js"></script><script data-cfasync="false" src="/js/dropit.js"></script><script data-cfasync="false" src="/js/prism.js"></script></head><body><section class="content"><header><div id="mobile-menu"><div id="nav-button" class="fa fa-bars fa-2x button"></div></div><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/" id="home-menu">Home</a></li><li><ul id="getting-started-menu" class="menu"><li><a href="/starter/installing.html">Getting started</a><ul><li><a href="/starter/installing.html">Installing</a></li><li><a href="/starter/generator.html">Express generator</a></li><li><a href="/starter/hello-world.html">Hello world</a></li><li><a href="/starter/basic-routing.html">Basic routing</a></li><li><a href="/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/guide/error-handling.html">Guide</a><ul><li><a href="/guide/routing.html">Routing</a></li><li><a href="/guide/using-middleware.html">Using middleware</a></li><li><a href="/guide/using-template-engines.html">Using template engines</a></li><li><a href="/guide/error-handling.html">Error handling</a></li><li><a href="/guide/debugging.html">Debugging</a></li><li><a href="/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html" class="active">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/advanced/developing-template-engines.html">Advanced topics</a><ul><li><a href="/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/advanced/security-updates.html">Security updates</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/resources/glossary.html">Resources</a><ul><li><a href="/resources/glossary.html">Glossary</a></li><li><a href="/resources/middleware.html">Middleware</a></li><li><a href="/resources/community.html">Community</a></li><li><a href="/resources/books-blogs.html">Books and blogs</a></li><li><a href="/resources/applications.html">Applications</a></li></ul></li></ul></li></ul></div><a href="http://strongloop.com/node-js/training/" title="Node and Express Training from StrongLoop" id="strongloop-header">Express and Node.js Training from StrongLoop</a></header><ul id="menu"><li id="app-api"><a href="#application">Application</a><ul id="app-menu"><li><a href="#app.express">express()</a></li><li><em>Properties</em></li><li><a href="#app.locals">app.locals</a></li><li><a href="#app.mountpath">app.mountpath</a></li><li><em>Events</em></li><li><a href="#app.onmount">mount</a></li><li><em>Methods</em></li><li><a href="#app.all">app.all()</a></li><li><a href="#app.delete-method">app.delete()</a></li><li><a href="#app.disable">app.disable()</a></li><li><a href="#app.disabled">app.disabled()</a></li><li><a href="#app.enable">app.enable()</a></li><li><a href="#app.enabled">app.enabled()</a></li><li><a href="#app.engine">app.engine()</a></li><li><a href="#app.get">app.get()</a></li><li><a href="#app.get-method">app.get()</a></li><li><a href="#app.listen">app.listen()</a></li><li><a href="#app.METHOD">app.METHOD()</a></li><li><a href="#app.param">app.param()</a></li><li><a href="#app.path">app.path()</a></li><li><a href="#app.post-method">app.post()</a></li><li><a href="#app.put-method">app.put()</a></li><li><a href="#app.render">app.render()</a></li><li><a href="#app.route">app.route()</a></li><li><a href="#app.set">app.set()</a></li><li><a href="#app.use">app.use()</a></li></ul></li><li id="req-api"><a href="#request">Request</a><ul id="req-menu"><li><em>Properties</em></li><li><a href="#req.baseUrl">req.baseUrl</a></li><li><a href="#req.body">req.body</a></li><li><a href="#req.cookies">req.cookies</a></li><li><a href="#req.fresh">req.fresh</a></li><li><a href="#req.hostname">req.hostname</a></li><li><a href="#req.ip">req.ip</a></li><li><a href="#req.ips">req.ips</a></li><li><a href="#req.originalUrl">req.originalUrl</a></li><li><a href="#req.params">req.params</a></li><li><a href="#req.path">req.path</a></li><li><a href="#req.protocol">req.protocol</a></li><li><a href="#req.query">req.query</a></li><li><a href="#req.route">req.route</a></li><li><a href="#req.secure">req.secure</a></li><li><a href="#req.signedCookies">req.signedCookies</a></li><li><a href="#req.stale">req.stale</a></li><li><a href="#req.subdomains">req.subdomains</a></li><li><a href="#req.xhr">req.xhr</a></li><li><em>Methods</em></li><li><a href="#req.accepts">req.accepts()</a></li><li><a href="#req.acceptsCharsets">req.acceptsCharsets()</a></li><li><a href="#req.acceptsEncodings">req.acceptsEncodings()</a></li><li><a href="#req.acceptsLanguages">req.acceptsLanguages()</a></li><li><a href="#req.get">req.get()</a></li><li><a href="#req.is">req.is()</a></li><li><a href="#req.param">req.param()</a></li></ul></li><li id="res-api"><a href="#response">Response</a><ul id="res-menu"><li><em>Properties</em></li><li><a href="#res.headersSent">res.headersSent</a></li><li><a href="#res.locals">res.locals</a></li><li><em>Methods</em></li><li><a href="#res.append">res.append()</a></li><li><a href="#res.attachment">res.attachment()</a></li><li><a href="#res.cookie">res.cookie()</a></li><li><a href="#res.clearCookie">res.clearCookie()</a></li><li><a href="#res.download">res.download()</a></li><li><a href="#res.end">res.end()</a></li><li><a href="#res.format">res.format()</a></li><li><a href="#res.get">res.get()</a></li><li><a href="#res.json">res.json()</a></li><li><a href="#res.jsonp">res.jsonp()</a></li><li><a href="#res.links">res.links()</a></li><li><a href="#res.location">res.location()</a></li><li><a href="#res.redirect">res.redirect()</a></li><li><a href="#res.render">res.render()</a></li><li><a href="#res.send">res.send()</a></li><li><a href="#res.sendFile">res.sendFile()</a></li><li><a href="#res.sendStatus">res.sendStatus()</a></li><li><a href="#res.set">res.set()</a></li><li><a href="#res.status">res.status()</a></li><li><a href="#res.type">res.type()</a></li><li><a href="#res.vary">res.vary()</a></li></ul></li><li id="router-api"><a href="#router">Router</a><ul id="router-menu"><li><a href="#router">Router()</a></li><li><em>Methods</em></li><li><a href="#router.all">router.all()</a></li><li><a href="#router.METHOD">router.METHOD()</a></li><li><a href="#router.param">router.param()</a></li><li><a href="#router.route">router.route()</a></li><li><a href="#router.use">router.use()</a></li></ul></li></ul><div id="overlay"></div><div id="api-doc"><h1>4.x API</h1><h2>Application</h2><a id="application" class="h2"></a><section><h3 id="app.express">express()</h3><p>Create an express application.</p>
+<!DOCTYPE html><html><head><title>Express - api reference</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script data-cfasync="false" src="/js/app.js?v=06112014"></script><script data-cfasync="false" src="/js/retina.js"></script><script data-cfasync="false" src="/js/dropit.js"></script><script data-cfasync="false" src="/js/prism.js"></script></head><body><section class="content"><header><div id="mobile-menu"><div id="nav-button" class="fa fa-bars fa-2x button"></div></div><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/" id="home-menu">Home</a></li><li><ul id="getting-started-menu" class="menu"><li><a href="/starter/installing.html">Getting started</a><ul><li><a href="/starter/installing.html">Installing</a></li><li><a href="/starter/generator.html">Express generator</a></li><li><a href="/starter/hello-world.html">Hello world</a></li><li><a href="/starter/basic-routing.html">Basic routing</a></li><li><a href="/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/guide/error-handling.html">Guide</a><ul><li><a href="/guide/routing.html">Routing</a></li><li><a href="/guide/using-middleware.html">Using middleware</a></li><li><a href="/guide/using-template-engines.html">Using template engines</a></li><li><a href="/guide/error-handling.html">Error handling</a></li><li><a href="/guide/debugging.html">Debugging</a></li><li><a href="/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html" class="active">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/advanced/developing-template-engines.html">Advanced topics</a><ul><li><a href="/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/advanced/security-updates.html">Security updates</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/resources/glossary.html">Resources</a><ul><li><a href="/resources/glossary.html">Glossary</a></li><li><a href="/resources/middleware.html">Middleware</a></li><li><a href="/resources/community.html">Community</a></li><li><a href="/resources/books-blogs.html">Books and blogs</a></li><li><a href="/resources/applications.html">Applications</a></li></ul></li></ul></li></ul></div><a href="http://strongloop.com/node-js/training/" title="Node and Express Training from StrongLoop" id="strongloop-header">Express and Node.js Training from StrongLoop</a></header><ul id="menu"><li id="app-api"><a href="#application">Application</a><ul id="app-menu"><li><a href="#app.express">express()</a></li><li><em>Properties</em></li><li><a href="#app.locals">app.locals</a></li><li><a href="#app.mountpath">app.mountpath</a></li><li><em>Events</em></li><li><a href="#app.onmount">mount</a></li><li><em>Methods</em></li><li><a href="#app.all">app.all()</a></li><li><a href="#app.delete.method">app.delete()</a></li><li><a href="#app.disable">app.disable()</a></li><li><a href="#app.disabled">app.disabled()</a></li><li><a href="#app.enable">app.enable()</a></li><li><a href="#app.enabled">app.enabled()</a></li><li><a href="#app.engine">app.engine()</a></li><li><a href="#app.get">app.get()</a></li><li><a href="#app.get.method">app.get()</a></li><li><a href="#app.listen">app.listen()</a></li><li><a href="#app.METHOD">app.METHOD()</a></li><li><a href="#app.param">app.param()</a></li><li><a href="#app.path">app.path()</a></li><li><a href="#app.post.method">app.post()</a></li><li><a href="#app.put.method">app.put()</a></li><li><a href="#app.render">app.render()</a></li><li><a href="#app.route">app.route()</a></li><li><a href="#app.set">app.set()</a></li><li><a href="#app.use">app.use()</a></li></ul></li><li id="req-api"><a href="#request">Request</a><ul id="req-menu"><li><em>Properties</em></li><li><a href="#req.baseUrl">req.baseUrl</a></li><li><a href="#req.body">req.body</a></li><li><a href="#req.cookies">req.cookies</a></li><li><a href="#req.fresh">req.fresh</a></li><li><a href="#req.hostname">req.hostname</a></li><li><a href="#req.ip">req.ip</a></li><li><a href="#req.ips">req.ips</a></li><li><a href="#req.originalUrl">req.originalUrl</a></li><li><a href="#req.params">req.params</a></li><li><a href="#req.path">req.path</a></li><li><a href="#req.protocol">req.protocol</a></li><li><a href="#req.query">req.query</a></li><li><a href="#req.route">req.route</a></li><li><a href="#req.secure">req.secure</a></li><li><a href="#req.signedCookies">req.signedCookies</a></li><li><a href="#req.stale">req.stale</a></li><li><a href="#req.subdomains">req.subdomains</a></li><li><a href="#req.xhr">req.xhr</a></li><li><em>Methods</em></li><li><a href="#req.accepts">req.accepts()</a></li><li><a href="#req.acceptsCharsets">req.acceptsCharsets()</a></li><li><a href="#req.acceptsEncodings">req.acceptsEncodings()</a></li><li><a href="#req.acceptsLanguages">req.acceptsLanguages()</a></li><li><a href="#req.get">req.get()</a></li><li><a href="#req.is">req.is()</a></li><li><a href="#req.param">req.param()</a></li></ul></li><li id="res-api"><a href="#response">Response</a><ul id="res-menu"><li><em>Properties</em></li><li><a href="#res.headersSent">res.headersSent</a></li><li><a href="#res.locals">res.locals</a></li><li><em>Methods</em></li><li><a href="#res.append">res.append()</a></li><li><a href="#res.attachment">res.attachment()</a></li><li><a href="#res.cookie">res.cookie()</a></li><li><a href="#res.clearCookie">res.clearCookie()</a></li><li><a href="#res.download">res.download()</a></li><li><a href="#res.end">res.end()</a></li><li><a href="#res.format">res.format()</a></li><li><a href="#res.get">res.get()</a></li><li><a href="#res.json">res.json()</a></li><li><a href="#res.jsonp">res.jsonp()</a></li><li><a href="#res.links">res.links()</a></li><li><a href="#res.location">res.location()</a></li><li><a href="#res.redirect">res.redirect()</a></li><li><a href="#res.render">res.render()</a></li><li><a href="#res.send">res.send()</a></li><li><a href="#res.sendFile">res.sendFile()</a></li><li><a href="#res.sendStatus">res.sendStatus()</a></li><li><a href="#res.set">res.set()</a></li><li><a href="#res.status">res.status()</a></li><li><a href="#res.type">res.type()</a></li><li><a href="#res.vary">res.vary()</a></li></ul></li><li id="router-api"><a href="#router">Router</a><ul id="router-menu"><li><a href="#router">Router()</a></li><li><em>Methods</em></li><li><a href="#router.all">router.all()</a></li><li><a href="#router.METHOD">router.METHOD()</a></li><li><a href="#router.param">router.param()</a></li><li><a href="#router.route">router.route()</a></li><li><a href="#router.use">router.use()</a></li></ul></li></ul><div id="overlay"></div><div id="api-doc"><h1>4.x API</h1><h2>Application</h2><a id="application" class="h2"></a><section><h3 id="app.express">express()</h3><p>Create an express application.</p>
 <pre><code class="lang-js">var express = require(&#39;express&#39;);
 var app = express();
 
@@ -17,7 +17,7 @@ app.locals.email
 // =&gt; &#39;me@myapp.com&#39;
 </code></pre>
 <p>Once set, the value of <code>app.locals</code> properties persist throughout the life of the application,
-in contrast with <a href="#res-locals">res.locals</a> properties that
+in contrast with <a href="#res.locals">res.locals</a> properties that
 are valid only for the lifetime of the request.</p>
 <p>You can accesss local variables in templates rendered within the application.
 This is useful for providing helper functions to templates, as well as app-level data.
@@ -43,7 +43,7 @@ admin.get(&#39;/&#39;, function (req, res) {
 
 app.use(&#39;/admin&#39;, admin); // mount the sub app
 </code></pre>
-<p>It is similar to the <a href="#req-baseUrl">baseUrl</a> property of the <code>req</code> object, except <code>req.baseUrl</code> returns the matched URL path, instead of the matched pattern(s).</p>
+<p>It is similar to the <a href="#req.baseUrl">baseUrl</a> property of the <code>req</code> object, except <code>req.baseUrl</code> returns the matched URL path, instead of the matched pattern(s).</p>
 <p>If a sub-app is mounted on multiple path patterns, <code>app.mountpath</code> returns the list of patterns it is mounted on, as shown in the following example. </p>
 <pre><code class="lang-js">var admin = express();
 
@@ -95,13 +95,13 @@ The example is much like before, however it only restricts paths that start with
 &quot;/api&quot;:</p>
 <pre><code class="lang-js">app.all(&#39;/api/*&#39;, requireAuthentication);
 </code></pre>
-</section><section><h3 id="app.delete-method">app.delete(path, callback [, callback ...])</h3><p>Route HTTP DELETE requests to the specified path with the specified callback functions. For more information, see the <a href="/guide/routing.html">routing guide</a>.</p>
+</section><section><h3 id="app.delete.method">app.delete(path, callback [, callback ...])</h3><p>Route HTTP DELETE requests to the specified path with the specified callback functions. For more information, see the <a href="/guide/routing.html">routing guide</a>.</p>
 <p>You can provide multiple callback functions that behave just like middleware. The only exception is that these callbacks may invoke <code>next(&#39;route&#39;)</code> to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there&#39;s no reason to proceed with the current route.</p>
 <pre><code class="lang-js">app.delete(&#39;/&#39;, function (req, res) {
   res.send(&#39;DELETE request to homepage&#39;);
 });
 </code></pre>
-</section><section><h3 id="app.disable">app.disable(name)</h3><p>Set Boolean setting <code>name</code> to <code>false</code>, where <code>name</code> is one of the properties from the <a href="#app-settings">app settings table</a>.
+</section><section><h3 id="app.disable">app.disable(name)</h3><p>Set Boolean setting <code>name</code> to <code>false</code>, where <code>name</code> is one of the properties from the <a href="#app.settings.table">app settings table</a>.
 Calling <code>app.set(&#39;foo&#39;, false)</code> for a Boolean property is the same as calling <code>app.disable(&#39;foo&#39;)</code>.</p>
 <p>For example:</p>
 <pre><code class="lang-js">app.disable(&#39;trust proxy&#39;);
@@ -109,7 +109,7 @@ app.get(&#39;trust proxy&#39;);
 // =&gt; false
 </code></pre>
 </section><section><h3 id="app.disabled">app.disabled(name)</h3><p>Check if the Boolean setting <code>name</code> is disabled (<code>false</code>), where <code>name</code> is one of the properties from
-the <a href="#app.settings">app settings table</a>.</p>
+the <a href="#app.settings.table">app settings table</a>.</p>
 <pre><code class="lang-js">app.disabled(&#39;trust proxy&#39;);
 // =&gt; true
 
@@ -117,13 +117,13 @@ app.enable(&#39;trust proxy&#39;);
 app.disabled(&#39;trust proxy&#39;);
 // =&gt; false
 </code></pre>
-</section><section><h3 id="app.enable">app.enable(name)</h3><p>Set Boolean setting <code>name</code> to <code>true</code>, where <code>name</code> is one of the properties from the <a href="#app.settings">app settings table</a>.
+</section><section><h3 id="app.enable">app.enable(name)</h3><p>Set Boolean setting <code>name</code> to <code>true</code>, where <code>name</code> is one of the properties from the <a href="#app.settings.table">app settings table</a>.
 Calling <code>app.set(&#39;foo&#39;, true)</code> for a Boolean property is the same as calling <code>app.enable(&#39;foo&#39;)</code>.</p>
 <pre><code class="lang-js">app.enable(&#39;trust proxy&#39;);
 app.get(&#39;trust proxy&#39;);
 // =&gt; true
 </code></pre>
-</section><section><h3 id="app.enabled">app.enabled(name)</h3><p>Check if setting <code>name</code> is enabled, where <code>name</code> is one of the properties from the <a href="#app.settings">app settings table</a>.</p>
+</section><section><h3 id="app.enabled">app.enabled(name)</h3><p>Check if setting <code>name</code> is enabled, where <code>name</code> is one of the properties from the <a href="#app.settings.table">app settings table</a>.</p>
 <pre><code class="lang-js">app.enabled(&#39;trust proxy&#39;);
 // =&gt; false
 
@@ -155,7 +155,7 @@ so they work seemlessly with Express.</p>
 app.engine(&#39;haml&#39;, engines.haml);
 app.engine(&#39;html&#39;, engines.hogan);
 </code></pre>
-</section><section><h3 id="app.get">app.get(name)</h3><p>Get the value of <code>name</code> app setting, where <code>name</code> is one of strings in the <a href="#app-settings-table">app settings table</a>. For example:</p>
+</section><section><h3 id="app.get">app.get(name)</h3><p>Get the value of <code>name</code> app setting, where <code>name</code> is one of strings in the <a href="#app.settings.table">app settings table</a>. For example:</p>
 <pre><code class="lang-js">app.get(&#39;title&#39;);
 // =&gt; undefined
 
@@ -163,7 +163,7 @@ app.set(&#39;title&#39;, &#39;My Site&#39;);
 app.get(&#39;title&#39;);
 // =&gt; &quot;My Site&quot;
 </code></pre>
-</section><section><h3 id="app.get-method">app.get(path, callback [, callback ...])</h3><p>Route HTTP GET requests to the specified path with the specified callback functions. For more information, see the <a href="/guide/routing.html">routing guide</a>.</p>
+</section><section><h3 id="app.get.method">app.get(path, callback [, callback ...])</h3><p>Route HTTP GET requests to the specified path with the specified callback functions. For more information, see the <a href="/guide/routing.html">routing guide</a>.</p>
 <p>You can provide multiple callback functions that behave just like middleware. The only exception is that these callbacks may invoke <code>next(&#39;route&#39;)</code> to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there&#39;s no reason to proceed with the current route.</p>
 <pre><code class="lang-js">app.get(&#39;/&#39;, function (req, res) {
   res.send(&#39;GET request to homepage&#39;);
@@ -306,13 +306,13 @@ console.log(blog.path()); // &#39;/blog&#39;
 console.log(blogAdmin.path()); // &#39;/blog/admin&#39;
 </code></pre>
 <p>The behavior of this method can become very complicated in complex cases of mounted apps, hence it is recommended to use <a href="#req.baseUrl">req.baseUrl</a> to get the canonical path of the app.</p>
-</section><section><h3 id="app.post-method">app.post(path, callback [, callback ...])</h3><p>Route HTTP POST requests to the specified path with the specified callback functions. For more information, see the <a href="/guide/routing.html">routing guide</a>.</p>
+</section><section><h3 id="app.post.method">app.post(path, callback [, callback ...])</h3><p>Route HTTP POST requests to the specified path with the specified callback functions. For more information, see the <a href="/guide/routing.html">routing guide</a>.</p>
 <p>You can provide multiple callback functions that behave just like middleware. The only exception is that these callbacks may invoke <code>next(&#39;route&#39;)</code> to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there&#39;s no reason to proceed with the current route.</p>
 <pre><code class="lang-js">app.post(&#39;/&#39;, function (req, res) {
   res.send(&#39;POST request to homepage&#39;);
 });
 </code></pre>
-</section><section><h3 id="app.put-method">app.put(path, callback [, callback ...])</h3><p>Route HTTP PUT requests to the specified path with the specified callback functions. For more information, see the <a href="/guide/routing.html">routing guide</a>.</p>
+</section><section><h3 id="app.put.method">app.put(path, callback [, callback ...])</h3><p>Route HTTP PUT requests to the specified path with the specified callback functions. For more information, see the <a href="/guide/routing.html">routing guide</a>.</p>
 <p>You can provide multiple callback functions that behave just like middleware. The only exception is that these callbacks may invoke <code>next(&#39;route&#39;)</code> to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there&#39;s no reason to proceed with the current route.</p>
 <pre><code class="lang-js">app.put(&#39;/&#39;, function (req, res) {
   res.send(&#39;PUT request to homepage&#39;);
@@ -351,7 +351,7 @@ app.route(&#39;/events&#39;)
 })
 </code></pre>
 </section><section><h3 id="app.set">app.set(name, value)</h3><p>Assign setting <code>name</code> to <code>value</code>, where <code>name</code> is one of the properties from
-the <a href="#app-settings-table">app settings table</a>. </p>
+the <a href="#app.settings.table">app settings table</a>. </p>
 <p>Calling <code>app.set(&#39;foo&#39;, true)</code> for a Boolean property is the same as calling
 <code>app.enable(&#39;foo&#39;)</code>. Similarly, calling <code>app.set(&#39;foo&#39;, false)</code> for a Boolean
 property is the same as calling <code>app.disable(&#39;foo&#39;)</code>.</p>
@@ -359,7 +359,7 @@ property is the same as calling <code>app.disable(&#39;foo&#39;)</code>.</p>
 <pre><code class="lang-js">app.set(&#39;title&#39;, &#39;My Site&#39;);
 app.get(&#39;title&#39;); // &quot;My Site&quot;
 </code></pre>
-<h4 id="app.settings-table">Application Settings</h4><p>If <code>name</code> is one of the application settings, it affects the behavior of the application. The following table lists application settings.</p>
+<h4 id="app.settings.table">Application Settings</h4><p>If <code>name</code> is one of the application settings, it affects the behavior of the application. The following table lists application settings.</p>
 <table class="doctable" border="1">
   <thead><tr><th id="app-settings-property">Property</th><th>Type</th><th>Value</th><th>Default</th></tr></thead>
   <tbody>
@@ -540,7 +540,7 @@ app.set(&#39;trust proxy&#39;, [&#39;loopback&#39;, &#39;linklocal&#39;, &#39;un
     </tr>
   </tbody>
 </table>
-</section><section><h3 id="app.use">app.use([path,] function [, function...])</h3><p>Mount the <a href="#middleware.api">middleware</a> <code>function</code>(s) at the <code>path</code>. If <code>path</code> is not specified, it defaults to &quot;/&quot;.</p>
+</section><section><h3 id="app.use">app.use([path,] function [, function...])</h3><p>Mount the <a href="/guide/using-middleware.html">middleware</a> <code>function</code>(s) at the <code>path</code>. If <code>path</code> is not specified, it defaults to &quot;/&quot;.</p>
 <div class="doc-box doc-notice">
 A route will match any path, which follows its path immediately with a &quot;<code>/</code>&quot;. For example: <code>app.use(&#39;/apple&#39;, ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, and so on.<br></div>
 
@@ -913,7 +913,7 @@ req.accepts(&#39;html, json&#39;);
 <p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p>
 </section><section><h3 id="req.acceptsLanguages">req.acceptsLanguages(lang, ...)</h3><p>Check if the given <code>lang</code> are acceptable.</p>
 <p>Please refer to <a href="https://github.com/expressjs/accepts">accepts</a> for additional documentation or any issues and concerns.</p>
-</section><section><h3 id="req.get">req.get(field)</h3><p>Get the case-insensitive request header <code>field</code>. The <em>Referrer</em> and <em>Referer</em> fields are interchangeable.</p>
+</section><section><h3 id="req.get">req.get(field)</h3><p>Get the case-insensitive request header <code>field</code>. The <code>Referrer</code> and <code>Referer</code> fields are interchangeable.</p>
 <pre><code class="lang-js">req.get(&#39;Content-Type&#39;);
 // =&gt; &quot;text/plain&quot;
 
@@ -976,7 +976,7 @@ Body-parsing middleware must be loaded for <code>req.param()</code> to work pred
 })
 </code></pre>
 </section><section><h3 id="res.locals">res.locals</h3><p>Response local variables are scoped to the request, and therefore only available to
-the view(s) rendered during that request / response cycle (if any). Otherwise, this API is identical to <a href="#app-locals">app.locals</a>.</p>
+the view(s) rendered during that request / response cycle (if any). Otherwise, this API is identical to <a href="#app.locals">app.locals</a>.</p>
 <p>This object is useful for exposing request-level information such as the request pathname, authenticated user, user settings etc.</p>
 <pre><code class="lang-js">app.use(function(req, res, next){
   res.locals.user = req.user;
@@ -1137,7 +1137,7 @@ res.jsonp({ user: &#39;tobi&#39; })
 res.status(500).jsonp({ error: &#39;message&#39; })
 // =&gt; { &quot;error&quot;: &quot;message&quot; }
 </code></pre>
-<p>By default, the JSONP callback name is simply <code>callback</code>. However, you may alter this with the <a href="#app-settings">jsonp callback name</a> setting. The following are some examples of JSONP responses using the same code:</p>
+<p>By default, the JSONP callback name is simply <code>callback</code>. However, you may alter this with the <a href="#app.settings.table">jsonp callback name</a> setting. The following are some examples of JSONP responses using the same code:</p>
 <pre><code class="lang-js">// ?callback=foo
 res.jsonp({ user: &#39;tobi&#39; })
 // =&gt; foo({ &quot;user&quot;: &quot;tobi&quot; })

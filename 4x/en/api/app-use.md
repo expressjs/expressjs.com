@@ -1,4 +1,4 @@
-Mount the [middleware](#middleware.api) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
+Mount the [middleware](/guide/using-middleware.html) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
 
 <div class="doc-box doc-notice">
 A route will match any path, which follows its path immediately with a "<code>/</code>". For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, and so on.  
