@@ -4,7 +4,7 @@ Here is an example of a very basic Express app.
 
 ```js
 var express = require('express')
-var app = express()
+var app = express.createServer()
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
