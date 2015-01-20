@@ -1,4 +1,4 @@
-<div class="doc-box doc-info">`res.sendFile` is supported from Express v4.8.0 onwards</div>
+<div class="doc-box doc-info">`res.sendFile()` is supported from Express v4.8.0 onwards</div>
 
 Transfer the file at the given `path`. The Content-Type response header field is automatically set based on the filename's extension. Unless the `root` option is set in the options object, `path` must be an absolute path of the file.
 
