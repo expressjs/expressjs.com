@@ -1,7 +1,34 @@
 <!DOCTYPE html><html><head><title>Express database integration</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dropit.css"><link rel="stylesheet" href="/css/prism.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script data-cfasync="false" src="/js/app.js?v=06112014"></script><script data-cfasync="false" src="/js/retina.js"></script><script data-cfasync="false" src="/js/dropit.js"></script><script data-cfasync="false" src="/js/prism.js"></script></head><body><section class="content"><header><div id="mobile-menu"><div id="nav-button" class="fa fa-bars fa-2x button"></div></div><section id="logo"><a href="/" class="express">Express</a></section><div id="navbar"><ul id="navmenu"><li><a href="/" id="home-menu">Home</a></li><li><ul id="getting-started-menu" class="menu"><li><a href="/starter/installing.html">Getting started</a><ul><li><a href="/starter/installing.html">Installing</a></li><li><a href="/starter/generator.html">Express generator</a></li><li><a href="/starter/hello-world.html">Hello world</a></li><li><a href="/starter/basic-routing.html">Basic routing</a></li><li><a href="/starter/faq.html">FAQ</a></li></ul></li></ul></li><li><ul id="guide-menu" class="menu"><li><a href="/guide/error-handling.html" class="active">Guide</a><ul><li><a href="/guide/routing.html">Routing</a></li><li><a href="/guide/using-middleware.html">Using middleware</a></li><li><a href="/guide/using-template-engines.html">Using template engines</a></li><li><a href="/guide/error-handling.html">Error handling</a></li><li><a href="/guide/debugging.html">Debugging</a></li><li><a href="/guide/behind-proxies.html">Express behind proxies</a></li><li><a href="/guide/migrating-4.html">Moving to Express 4</a></li><li><a href="/guide/database-integration.html">Database integration</a></li></ul></li></ul></li><li><ul id="application-menu" class="menu"><li><a href="/4x/api.html">API reference</a><ul><li><a href="/4x/api.html">4.x</a></li><li><a href="/3x/api.html">3.x</a></li><li><a href="/2x/">2.x (deprecated)</a></li></ul></li></ul></li><li><ul id="advanced-topics-menu" class="menu"><li><a href="/advanced/developing-template-engines.html">Advanced topics</a><ul><li><a href="/advanced/developing-template-engines.html">Template engines</a></li><li><a href="/advanced/security-updates.html">Security updates</a></li></ul></li></ul></li><li><ul id="resources-menu" class="menu"><li><a href="/resources/glossary.html">Resources</a><ul><li><a href="/resources/glossary.html">Glossary</a></li><li><a href="/resources/middleware.html">Middleware</a></li><li><a href="/resources/community.html">Community</a></li><li><a href="/resources/books-blogs.html">Books and blogs</a></li><li><a href="/resources/applications.html">Applications</a></li></ul></li></ul></li></ul></div><a href="http://strongloop.com/node-js/training/" title="Node and Express Training from StrongLoop" id="strongloop-header">Express and Node.js Training from StrongLoop</a></header><div id="overlay"></div><h1 id="database-integration">Database integration</h1>
-<p>Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document demonstrates the process of integrating some of the popular database system to an Express app, using one of their popular Node modules.</p>
-<div class="doc-box doc-notice">The database drivers used in the examples are one of the many, that might be available for a particular database, look up <a href="https://www.npmjs.com/">https://www.npmjs.com/</a> for other options.</div>
+<p>Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node modules for database systems in your Express app:</p>
+<ul>
+<li><a href="#leveldb">LevelDB</a></li>
+<li><a href="#mysql">MySQL</a></li>
+<li><a href="#mongo">MongoDB</a></li>
+<li><a href="#neo4j">Neo4j</a></li>
+<li><a href="#postgres">PostgreSQL</a></li>
+<li><a href="#redis">Redis</a></li>
+<li><a href="#sqlite">SQLite</a></li>
+</ul>
+<div class="doc-box doc-notice">These database drivers are among many that are available.  For other options,
+search on the <a href="https://www.npmjs.com/">npm</a> site.</div>
 
+<p><a name="leveldb"></a></p>
+<h2 id="leveldb">LevelDB</h2>
+<p><strong>Node module</strong>: <a href="https://github.com/rvagg/node-levelup">levelup</a><br><strong>Installation</strong>: <code>$ npm install level</code><br><strong>Example</strong></p>
+<pre><code class="lang-js">var levelup = require(&#39;levelup&#39;);
+var db = levelup(&#39;./mydb&#39;);
+
+db.put(&#39;name&#39;, &#39;LevelUP&#39;, function (err) {
+
+  if (err) return console.log(&#39;Ooops!&#39;, err);
+  db.get(&#39;name&#39;, function (err, value) {
+    if (err) return console.log(&#39;Ooops!&#39;, err);
+    console.log(&#39;name=&#39; + value)
+  });
+
+});
+</code></pre>
+<p><a name="mysql"></a></p>
 <h2 id="mysql">MySQL</h2>
 <p><strong>Node module</strong>: <a href="https://github.com/felixge/node-mysql/">mysql</a><br><strong>Installation</strong>: <code>$ npm install mysql</code><br><strong>Example</strong></p>
 <pre><code class="lang-js">var mysql      = require(&#39;mysql&#39;);
@@ -20,6 +47,7 @@ connection.query(&#39;SELECT 1 + 1 AS solution&#39;, function(err, rows, fields)
 
 connection.end();
 </code></pre>
+<p><a name="mongo"></a></p>
 <h2 id="mongodb">MongoDB</h2>
 <p><strong>Node module</strong>: <a href="https://github.com/kissjs/node-mongoskin">mongoskin</a><br><strong>Installation</strong>: <code>$ npm install mongoskin</code><br><strong>Example</strong></p>
 <pre><code class="lang-js">var db = require(&#39;mongoskin&#39;).db(&#39;localhost:27017/animals&#39;);
@@ -30,6 +58,42 @@ db.collection(&#39;mamals&#39;).find().toArray(function(err, result) {
 });
 </code></pre>
 <p>If you want a object model driver for MongoDB, checkout <a href="https://github.com/LearnBoost/mongoose">Mongoose</a>.</p>
+<p><a name="neo4j"></a></p>
+<h2 id="neo4j">Neo4j</h2>
+<p><strong>Node module</strong>: <a href="https://github.com/hacksparrow/apoc">apoc</a><br><strong>Installation</strong>: <code>$ npm install apoc</code><br><strong>Example</strong></p>
+<pre><code class="lang-js">var apoc = require(&#39;apoc&#39;);
+
+apoc.query(&#39;match (n) return n&#39;).exec().then(
+  function (response) {
+    console.log(response);
+  },
+  function (fail) {
+    console.log(fail);
+  }
+);
+</code></pre>
+<p><a name="postgres"></a></p>
+<h2 id="postgresql">PostgreSQL</h2>
+<p><strong>Node module</strong>: <a href="https://github.com/brianc/node-postgres">pg</a><br><strong>Installation</strong>: <code>$ npm install pg</code><br><strong>Example</strong></p>
+<pre><code class="lang-js">var pg = require(&#39;pg&#39;);
+var conString = &quot;postgres://username:password@localhost/database&quot;;
+
+pg.connect(conString, function(err, client, done) {
+
+  if (err) {
+    return console.error(&#39;error fetching client from pool&#39;, err);
+  }
+  client.query(&#39;SELECT $1::int AS number&#39;, [&#39;1&#39;], function(err, result) {
+    done();
+    if (err) {
+      return console.error(&#39;error running query&#39;, err);
+    }
+    console.log(result.rows[0].number);
+  });
+
+});
+</code></pre>
+<p><a name="redis"></a></p>
 <h2 id="redis">Redis</h2>
 <p><strong>Node module</strong>: <a href="https://github.com/mranney/node_redis">redis</a><br><strong>Installation</strong>: <code>$ npm install redis</code><br><strong>Example</strong></p>
 <pre><code class="lang-js">var client = require(&#39;redis&#39;).createClient();
@@ -53,6 +117,7 @@ client.hkeys(&#39;hash key&#39;, function (err, replies) {
 
 });
 </code></pre>
+<p><a name="sqlite"></a></p>
 <h2 id="sqlite">SQLite</h2>
 <p><strong>Node module</strong>: <a href="https://github.com/mapbox/node-sqlite3">sqlite3</a><br><strong>Installation</strong>: <code>$ npm install sqlite3</code><br><strong>Example</strong></p>
 <pre><code class="lang-js">var sqlite3 = require(&#39;sqlite3&#39;).verbose();
@@ -75,54 +140,6 @@ db.serialize(function() {
 });
 
 db.close();
-</code></pre>
-<h2 id="leveldb">LevelDB</h2>
-<p><strong>Node module</strong>: <a href="https://github.com/rvagg/node-levelup">levelup</a><br><strong>Installation</strong>: <code>$ npm install level</code><br><strong>Example</strong></p>
-<pre><code class="lang-js">var levelup = require(&#39;levelup&#39;);
-var db = levelup(&#39;./mydb&#39;);
-
-db.put(&#39;name&#39;, &#39;LevelUP&#39;, function (err) {
-
-  if (err) return console.log(&#39;Ooops!&#39;, err);
-  db.get(&#39;name&#39;, function (err, value) {
-    if (err) return console.log(&#39;Ooops!&#39;, err);
-    console.log(&#39;name=&#39; + value)
-  });
-
-});
-</code></pre>
-<h2 id="neo4j">Neo4j</h2>
-<p><strong>Node module</strong>: <a href="https://github.com/hacksparrow/apoc">apoc</a><br><strong>Installation</strong>: <code>$ npm install apoc</code><br><strong>Example</strong></p>
-<pre><code class="lang-js">var apoc = require(&#39;apoc&#39;);
-
-apoc.query(&#39;match (n) return n&#39;).exec().then(
-  function (response) {
-    console.log(response);
-  },
-  function (fail) {
-    console.log(fail);
-  }
-);
-</code></pre>
-<h2 id="postgresql">PostgreSQL</h2>
-<p><strong>Node module</strong>: <a href="https://github.com/brianc/node-postgres">pg</a><br><strong>Installation</strong>: <code>$ npm install pg</code><br><strong>Example</strong></p>
-<pre><code class="lang-js">var pg = require(&#39;pg&#39;);
-var conString = &quot;postgres://username:password@localhost/database&quot;;
-
-pg.connect(conString, function(err, client, done) {
-
-  if (err) {
-    return console.error(&#39;error fetching client from pool&#39;, err);
-  }
-  client.query(&#39;SELECT $1::int AS number&#39;, [&#39;1&#39;], function(err, result) {
-    done();
-    if (err) {
-      return console.error(&#39;error running query&#39;, err);
-    }
-    console.log(result.rows[0].number);
-  });
-
-});
 </code></pre>
 <!-- ## Riak
 

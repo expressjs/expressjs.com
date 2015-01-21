@@ -1,9 +1,41 @@
 # Database integration
 
-Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document demonstrates the process of integrating some of the popular database system to an Express app, using one of their popular Node modules.
+Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node modules for database systems in your Express app:
 
-<div class="doc-box doc-notice">The database drivers used in the examples are one of the many, that might be available for a particular database, look up [https://www.npmjs.com/](https://www.npmjs.com/) for other options.</div>
+* [LevelDB](#leveldb)
+* [MySQL](#mysql)
+* [MongoDB](#mongo)
+* [Neo4j](#neo4j)
+* [PostgreSQL](#postgres)
+* [Redis](#redis)
+* [SQLite](#sqlite)
 
+<div class="doc-box doc-notice">These database drivers are among many that are available.  For other options,
+search on the [npm](https://www.npmjs.com/) site.</div>
+
+<a name="leveldb"></a>
+## LevelDB
+
+**Node module**: [levelup](https://github.com/rvagg/node-levelup)  
+**Installation**: `$ npm install level`  
+**Example**
+
+```js
+var levelup = require('levelup');
+var db = levelup('./mydb');
+
+db.put('name', 'LevelUP', function (err) {
+
+  if (err) return console.log('Ooops!', err);
+  db.get('name', function (err, value) {
+    if (err) return console.log('Ooops!', err);
+    console.log('name=' + value)
+  });
+
+});
+```
+
+<a name="mysql"></a>
 ## MySQL
 
 **Node module**: [mysql](https://github.com/felixge/node-mysql/)  
@@ -28,6 +60,7 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 connection.end();
 ```
 
+<a name="mongo"></a>
 ## MongoDB
 
 **Node module**: [mongoskin](https://github.com/kissjs/node-mongoskin)  
@@ -45,6 +78,54 @@ db.collection('mamals').find().toArray(function(err, result) {
 
 If you want a object model driver for MongoDB, checkout [Mongoose](https://github.com/LearnBoost/mongoose).
 
+<a name="neo4j"></a>
+## Neo4j
+
+**Node module**: [apoc](https://github.com/hacksparrow/apoc)  
+**Installation**: `$ npm install apoc`  
+**Example**
+
+```js
+var apoc = require('apoc');
+
+apoc.query('match (n) return n').exec().then(
+  function (response) {
+    console.log(response);
+  },
+  function (fail) {
+    console.log(fail);
+  }
+);
+```
+
+<a name="postgres"></a>
+## PostgreSQL
+
+**Node module**: [pg](https://github.com/brianc/node-postgres)  
+**Installation**: `$ npm install pg`  
+**Example**
+
+```js
+var pg = require('pg');
+var conString = "postgres://username:password@localhost/database";
+
+pg.connect(conString, function(err, client, done) {
+
+  if (err) {
+    return console.error('error fetching client from pool', err);
+  }
+  client.query('SELECT $1::int AS number', ['1'], function(err, result) {
+    done();
+    if (err) {
+      return console.error('error running query', err);
+    }
+    console.log(result.rows[0].number);
+  });
+
+});
+```
+
+<a name="redis"></a>
 ## Redis
 
 **Node module**: [redis](https://github.com/mranney/node_redis)  
@@ -74,6 +155,7 @@ client.hkeys('hash key', function (err, replies) {
 });
 ```
 
+<a name="sqlite"></a>
 ## SQLite
 
 **Node module**: [sqlite3](https://github.com/mapbox/node-sqlite3)  
@@ -101,72 +183,6 @@ db.serialize(function() {
 });
 
 db.close();
-```
-
-## LevelDB
-
-**Node module**: [levelup](https://github.com/rvagg/node-levelup)  
-**Installation**: `$ npm install level`  
-**Example**
-
-```js
-var levelup = require('levelup');
-var db = levelup('./mydb');
-
-db.put('name', 'LevelUP', function (err) {
-
-  if (err) return console.log('Ooops!', err);
-  db.get('name', function (err, value) {
-    if (err) return console.log('Ooops!', err);
-    console.log('name=' + value)
-  });
-
-});
-```
-
-## Neo4j
-
-**Node module**: [apoc](https://github.com/hacksparrow/apoc)  
-**Installation**: `$ npm install apoc`  
-**Example**
-
-```js
-var apoc = require('apoc');
-
-apoc.query('match (n) return n').exec().then(
-  function (response) {
-    console.log(response);
-  },
-  function (fail) {
-    console.log(fail);
-  }
-);
-```
-
-## PostgreSQL
-
-**Node module**: [pg](https://github.com/brianc/node-postgres)  
-**Installation**: `$ npm install pg`  
-**Example**
-
-```js
-var pg = require('pg');
-var conString = "postgres://username:password@localhost/database";
-
-pg.connect(conString, function(err, client, done) {
-
-  if (err) {
-    return console.error('error fetching client from pool', err);
-  }
-  client.query('SELECT $1::int AS number', ['1'], function(err, result) {
-    done();
-    if (err) {
-      return console.error('error running query', err);
-    }
-    console.log(result.rows[0].number);
-  });
-
-});
 ```
 
 <!-- ## Riak
