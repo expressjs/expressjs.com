@@ -2,6 +2,7 @@
 
 Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node modules for database systems in your Express app:
 
+* [DB2 for i](#DB2fori)
 * [LevelDB](#leveldb)
 * [MySQL](#mysql)
 * [MongoDB](#mongo)
@@ -183,6 +184,26 @@ db.serialize(function() {
 });
 
 db.close();
+```
+
+## DB2fori
+**NOTE:** [DB2 for i](http://www-03.ibm.com/systems/power/software/i/db2/) is much different than DB2 on LUW (Linux/Unix/Windows) as it is integreated into the operating system.  That and the fact that Node.js support on IBM i is very new (Dec 2014) there isn't a normal-to-Node.js way to install the Node.js module.
+
+**Node module**: Install licensed program 5733OPS
+
+**Installation**: [instructions](https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/IBM%20i%20Technology%20Updates/page/Node.js)  
+
+**Example**
+
+```js
+var db = require('/QOpenSys/QIBM/ProdData/Node/os400/db2i/lib/db2')
+
+db.init()
+db.conn("*LOCAL")
+db.exec("SELECT LSTNAM, STATE FROM QIWS.QCUSTCDT", function(results) {
+  console.log(results);
+});
+db.close(); 
 ```
 
 <!-- ## Riak
