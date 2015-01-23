@@ -65,6 +65,38 @@ strong, th {
   padding-right: 9%;
 }
 
+#announcements {
+  margin: 3px 5%;
+  max-width: 1005px;
+  padding: 0 16px;
+  background: #fdfae6;
+  border: 1px solid #ebdbb7;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+#announcements ul {
+  padding-left: 0;
+}
+
+#announcements li {
+  list-style: none;
+  margin-bottom: 16px;
+}
+
+#announcements p {
+  margin: 6px 0;
+}
+
+#announcements p:first-child {
+  font-weight: bold;
+  padding-left: 20px;
+  background-image: url(/images/announcement-icon.png);
+  background-position: 0 3px;
+  background-repeat: no-repeat;
+  background-size: 14px 14px;
+}
+
 #install-command {
   font-family: Consolas, Monaco, "Andale Mono", monospace;
   padding: 5px 10px;
@@ -517,6 +549,10 @@ footer {
 
   #fork {
     background-image: url(/images/fork-icon@2x.png);
+  }
+
+  #announcements p:first-child {
+    background-image: url(/images/announcement-icon@2x.png);
   }
 
 }
