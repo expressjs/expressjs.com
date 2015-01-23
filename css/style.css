@@ -142,7 +142,7 @@ a {
   padding-top: 40px;
 }
 
-#api-doc h3:target {
+#api-doc h3:target, #api-doc h4:target {
   padding-top: 80px;
 }
 
