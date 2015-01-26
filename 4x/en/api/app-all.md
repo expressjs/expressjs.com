@@ -1,4 +1,4 @@
-This method is like the standard [`app.METHOD()`](http://localhost:3000/4x/api.html#app.METHOD) methods,
+This method is like the standard [app.METHOD()](#app.METHOD) methods,
 except it matches _all_ HTTP verbs. 
 
 It's useful for mapping "global" logic for specific path prefixes or arbitrary matches.
