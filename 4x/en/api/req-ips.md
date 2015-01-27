@@ -1,3 +1,7 @@
-When "trust proxy" is `true`, parse the "X-Forwarded-For" ip address list and return an array. Otherwise, an empty array is returned.
+When the `trust proxy` setting is `true`, this property contains an array of
+IP addresses specified in the "X-Forwarded-For" request header.  Otherwise, it contains an empty array.
 
-For example, if the value were "client, proxy1, proxy2", you would receive the array `["client", "proxy1", "proxy2"]`, where "proxy2" is the furthest down-stream.
+For example, if "X-Forwarded-For" is "client, proxy1, proxy2", `req.ips` would be 
+`["client", "proxy1", "proxy2"]`, where "proxy2" is the furthest downstream.
+
+For more information on the `trust proxy` setting, see [app.set](#app.set).

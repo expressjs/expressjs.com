@@ -1,4 +1,9 @@
-This object requires the `cookieParser(secret)` middleware for use. It contains signed cookies sent by the user-agent, unsigned and ready for use. Signed cookies reside in a different object to show developer intent; otherwise, a malicious attack could be placed on `req.cookie` values (which are easy to spoof). Note that signing a cookie does not make it "hidden" or encrypted; this simply prevents tampering (because the secret used to sign is private). If no signed cookies are sent, it defaults to `{}`.
+When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this property
+contains signed cookies sent by the request, unsigned and ready for use. Signed cookies reside
+in a different object to show developer intent; otherwise, a malicious attack could be placed on
+`req.cookie` values (which are easy to spoof). Note that signing a cookie does not make it "hidden"
+or encrypted; but simply prevents tampering (because the secret used to sign is private).
+If no signed cookies are sent, the property defaults to `{}`.
 
 ```js
 // Cookie: user=tobi.CP7AWaXDfAKIRfH49dQzKJx7sKzzSoPq7/AcBBRVwlI3
@@ -6,4 +11,4 @@ req.signedCookies.user
 // => "tobi"
 ```
 
-Please refer to [cookie-parser](https://github.com/expressjs/cookie-parser) for additional documentation or any issues and concerns.
+For more information, issues, or concerns, see [cookie-parser](https://github.com/expressjs/cookie-parser).

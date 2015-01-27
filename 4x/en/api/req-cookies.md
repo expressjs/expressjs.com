@@ -1,4 +1,5 @@
-This object requires the `cookieParser()` middleware for use. It contains cookies sent by the user-agent. If no cookies are sent, it defaults to `{}`.
+When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this property is an object that
+contains cookies sent by the request.  If the request contains no cookies, it defaults to `{}`.
 
 ```js
 // Cookie: name=tj
@@ -6,4 +7,4 @@ req.cookies.name
 // => "tj"
 ```
 
-Please refer to [cookie-parser](https://github.com/expressjs/cookie-parser) for additional documentation or any issues and concerns.
+For more information, issues, or concerns, see [cookie-parser](https://github.com/expressjs/cookie-parser).

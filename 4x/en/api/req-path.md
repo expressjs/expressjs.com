@@ -1,4 +1,4 @@
-Returns the request URL pathname.
+This property contains the path part of the request URL.
 
 ```js
 // example.com/users?sort=desc

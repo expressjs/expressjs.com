@@ -1,4 +1,5 @@
-This property refers to the URL path, on which a router instance was mounted.
+This property is the URL path on which a router instance was mounted.
+For example:
 
 ```js
 var greet = express.Router();
@@ -11,12 +12,16 @@ greet.get('/jp', function (req, res) {
 app.use('/greet', greet); // load the router on '/greet'
 ```
 
-Even if a path pattern or a set of path patterns were used to load the router, the matched string is returned as the `baseUrl`, instead of the pattern(s). In the following example, the `greet` router is loaded on two path patterns.
+Even if you use a path pattern or a set of path patterns to load the router,
+the `baseUrl` property returns the matched string, not the pattern(s). In the
+following example, the `greet` router is loaded on two path patterns.
 
 ```js
 app.use(['/gre+t', '/hel{2}o'], greet); // load the router on '/gre+t' and '/hel{2}o'
 ```
 
-When the request is made to `/greet/jp`, `req.baseUrl` will be equal to "/greet"; and when the request is made to `/hello/jp`, it will be equal to "/hello".
+When a request is made to `/greet/jp`, `req.baseUrl` is "/greet".  When a request is
+made to `/hello/jp`, `req.baseUrl` is "/hello".
 
-`req.baseUrl` is similar to the [mountpath](#app.mountpath) property of the `app` object, except `app.mountpath` returns the matched path pattern(s).
+`req.baseUrl` is similar to the [mountpath](#app.mountpath) property of the `app` object,
+except `app.mountpath` returns the matched path pattern(s).

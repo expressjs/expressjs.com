@@ -1,3 +1,5 @@
-Check if the given `lang` are acceptable.
+Returns the first accepted language of the specified languages,
+based on the request's `Accept-Language` HTTP header field.
+If none of the specified languages is accepted, returns `false`.
 
-Please refer to [accepts](https://github.com/expressjs/accepts) for additional documentation or any issues and concerns.
+For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).

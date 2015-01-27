@@ -1,4 +1,6 @@
-Check if the incoming request contains the "Content-Type" header field, and if it matches the give mime `type`.
+Returns `true` if the incoming request's "Content-Type" HTTP header field
+matches the MIME type specified by the `type` parameter.
+Returns `false` otherwise.
 
 ```js
 // With Content-Type: text/html; charset=utf-8
@@ -17,4 +19,4 @@ req.is('html');
 // => false
 ```
 
-Please refer to [type-is](https://github.com/expressjs/type-is) for additional documentation or any issues and concerns.
+For more information, or if you have issues or concerns, see [type-is](https://github.com/expressjs/type-is).

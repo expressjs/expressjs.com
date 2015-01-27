@@ -1,3 +1,5 @@
-Check if the given `encoding` are acceptable.
+Returns the first accepted encoding of the specified encodings,
+based on the request's `Accept-Encoding` HTTP header field.
+If none of the specified encodings is accepted, returns `false`.
 
-Please refer to [accepts](https://github.com/expressjs/accepts) for additional documentation or any issues and concerns.
+For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).

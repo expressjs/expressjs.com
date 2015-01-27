@@ -1,6 +1,10 @@
-Check if the given `types` are acceptable, returning the best match when true, or else `undefined` (in which case you should respond with 406 "Not Acceptable").
+Check if the specified content types are acceptable, based on the request's `Accept` HTTP header field.
+The method returns the best match, or if none of the specified content types is acceptable, returns 
+`undefined` (in which case, the application should respond with `406 "Not Acceptable"`).
 
-The `type` value may be a single mime type string (such as "application/json"), the extension name such as "json", a comma-delimited list, or an array. When a list or array is given, the *best* match (if any) is returned.
+The `type` value may be a single MIME type string (such as "application/json"),
+an extension name such as "json", a comma-delimited list, or an array. For a
+list or array, the method returns the *best* match (if any).
 
 ```js
 // Accept: text/html
@@ -28,4 +32,4 @@ req.accepts('html, json');
 // => "json"
 ```
 
-Please refer to [accepts](https://github.com/expressjs/accepts) for additional documentation or any issues and concerns.
+For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).

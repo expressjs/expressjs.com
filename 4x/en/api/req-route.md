@@ -1,4 +1,4 @@
-The currently matched `Route`.
+This property is a string that is the currently-matched `Route`.  For example:
 
 ```js
 app.get('/user/:id?', function userIdHandler(req, res) {

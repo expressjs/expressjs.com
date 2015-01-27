@@ -1,4 +1,5 @@
-Get the case-insensitive request header `field`. The `Referrer` and `Referer` fields are interchangeable.
+Returns the specified HTTP request header field (case-insensitive match).
+The `Referrer` and `Referer` fields are interchangeable.
 
 ```js
 req.get('Content-Type');
