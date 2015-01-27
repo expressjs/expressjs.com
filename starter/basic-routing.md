@@ -34,4 +34,4 @@ app.delete('/user', function (req, res) {
 })
 ```
 
-For more details about routing, refer the [routing guide](/en/guide/routing.html).
+For more details about routing, refer the [routing guide](/guide/routing.html).
