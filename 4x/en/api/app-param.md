@@ -1,12 +1,27 @@
-Map logic to route parameters. For example, when `:user`
-is present in a route path, you may map user loading logic to automatically
-provide `req.user` to the route, or perform validations
-on the parameter input.
+Add callback triggers to route paramters, where `name` is the name of the parameter and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.
 
-_Note_
+For example, when `:user` is present in a route path, you may map user loading logic to automatically provide `req.user` to the route, or perform validations on the parameter input.
 
-* Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on `app` will be triggered only by route parameters defined on `app` routes.
-* A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.
+```js
+app.param('user', function(req, res, next, id) {
+
+  // try to get the user details from the User model and attach it to the request object
+  User.find(id, function(err, user) {
+    if (err) {
+      next(err);
+    } else if (user) {
+      req.user = user;
+      next();
+    } else {
+      next(new Error('failed to load user'));
+    }
+  });
+});
+```
+
+Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on `app` will be triggered only by route parameters defined on `app` routes.
+
+A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following example.
 
 ```js
 app.param('id', function (req, res, next, id) {
@@ -25,40 +40,12 @@ app.get('/user/:id', function (req, res) {
 });
 ```
 
-The following snippet illustrates how the `callback`
-is much like middleware, thus supporting async operations. However,
-it provides the additional value of the parameter (here named as `id`), derived from the corresponding parameter in the `req.params` object.
-An attempt to load the user is then performed, assigning `req.user`;
-otherwise an error is passed to `next(err)`.
-
-```js
-app.param('user', function(req, res, next, id){
-  User.find(id, function(err, user){
-    if (err) {
-      next(err);
-    } else if (user) {
-      req.user = user;
-      next();
-    } else {
-      next(new Error('failed to load user'));
-    }
-  });
-});
-```
-
 <div class="doc-box doc-warn">`app.param(callback)` is deprecated as of v4.11.0.</div>
 
-Alternatively, you can pass only a `callback`, in which
-case you have the opportunity to alter the `app.param()` API.
-For example the [express-params](http://github.com/expressjs/express-params)
-defines the following callback which allows you to restrict parameters to a given
-regular expression. 
-
-This example is a bit more advanced. It is checking if the second argument is a regular
-expression, returning the callback, which acts much like the "user" param example.
+By passing only a callback function, you can alter the `app.param()` API. For example the [express-params](http://github.com/expressjs/express-params) defines the following callback which allows you to restrict parameters to a given regular expression. 
 
 ```js
-app.param(function(name, fn){
+app.param(function(name, fn) {
   if (fn instanceof RegExp) {
     return function(req, res, next, val){
       var captures;
@@ -73,20 +60,21 @@ app.param(function(name, fn){
 });
 ```
 
-The method could now be used to effectively validate parameters (and
-optionally parse them to provide capture groups):
+The method could now be used to effectively validate parameters (and optionally parse them to provide capture groups):
 
 ```js
+// validation rule for id: should be one or more digits
 app.param('id', /^\d+$/);
 
-app.get('/user/:id([0-9]+)', function(req, res){
+app.get('/user/:id', function(req, res) {
   res.send('user ' + req.params.id);
 });
 
+// validation rule for range: should start with one more alphanumeric characters, followed by two dots, and end with one more alphanumeric characters
 app.param('range', /^(\w+)\.\.(\w+)?$/);
 
-app.get('/range/:range(\\w+\\.\\.\\w+)', function(req, res){
-  var range = req.params.range.split('..');
-  res.send('from ' + range[0] + ' to ' + range[1]);
+app.get('/range/:range', function(req, res) {
+  var range = req.params.range;
+  res.send('from ' + range[1] + ' to ' + range[2]);
 });
 ```
