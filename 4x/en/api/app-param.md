@@ -1,4 +1,4 @@
-Add callback triggers to route paramters, where `name` is the name of the parameter and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.
+Add callback triggers to route paramters, where `name` is the name of the parameter or an array of them, and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.
 
 For example, when `:user` is present in a route path, you may map user loading logic to automatically provide `req.user` to the route, or perform validations on the parameter input.
 
@@ -40,14 +40,31 @@ app.get('/user/:id', function (req, res) {
 });
 ```
 
-<div class="doc-box doc-warn">`app.param(callback)` is deprecated as of v4.11.0.</div>
+By passing only a callback function, you can alter the `app.param()` API. For example the [express-params](http://github.com/expressjs/express-params) defines the following callback which allows you to restrict parameters to a given regular expression.
 
-By passing only a callback function, you can alter the `app.param()` API. For example the [express-params](http://github.com/expressjs/express-params) defines the following callback which allows you to restrict parameters to a given regular expression. 
+<div class="doc-box doc-warn">
+  <p>`app.param(callback)` is deprecated as of v4.11.0.</p>
+  <p>
+    The code in the next section can be migrated using the following, without the use of `app.param(callback)`:
+    <p>
+```
+app.get('/user/:id([0-9]+)', function(req, res){
+  res.send('user ' + req.params.id);
+});
+
+app.get('/range/:range(\\w+\.\.\\w+)', function(req, res){
+  var range = req.params.range.split('..');
+  res.send('from ' + range[0] + ' to ' + range[1]);
+});
+```
+    </p>
+  </p>
+</div>
 
 ```js
 app.param(function(name, fn) {
   if (fn instanceof RegExp) {
-    return function(req, res, next, val){
+    return function(req, res, next, val) {
       var captures;
       if (captures = fn.exec(String(val))) {
         req.params[name] = captures;
