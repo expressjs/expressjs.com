@@ -1,8 +1,9 @@
-<div class="doc-box doc-info">`res.append()` is supported from Express v4.11.0 onwards</div>
+<div class="doc-box doc-info">`res.append()` is supported by Express v4.11.0+</div>
 
-Append additional value `value` to an existing header named `field`; or create the header with the value `value`, if the header is not already set. `value` can be a string or an array of values to be appended.
+Appends the specified `value` to the HTTP response header `field`.  If the header is not already set,
+it creates the header with the specified value.  The `value` parameter can be a string or an array.
 
-Note that, calling `res.set()` after `res.append()` will reset the previously set header value.
+Note: calling `res.set()` after `res.append()` will reset the previously-set header value.
 
 ```js
 res.append('Link', ['<http://localhost/>', '<http://localhost:3000/>']);

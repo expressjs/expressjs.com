@@ -1,4 +1,4 @@
-This property is the remote IP address.
+The remote IP address of the request.
 
 If the `trust proxy` is setting enabled, it is the upstream address;
 see [Express behind proxies](/guide/behind-proxies.html) for more information.

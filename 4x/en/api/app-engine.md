@@ -1,9 +1,8 @@
-Register the given template engine `callback` as `ext`.
+Registers the given template engine `callback` as `ext`.
 
-By default, Express will `require()` the engine based on the
-file extension. For example, if you try to render
-a "foo.jade" file, Express invokes the following internally,
-and caches the `require()` on subsequent calls to increase
+By default, Express will `require()` the engine based on the file extension.
+For example, if you try to render a "foo.jade" file, Express invokes the
+following internally, and caches the `require()` on subsequent calls to increase
 performance.
 
 ```js
@@ -19,7 +18,7 @@ For example, to map the EJS template engine to ".html" files:
 app.engine('html', require('ejs').renderFile);
 ```
 
-In this case EJS provides a `.renderFile()` method with
+In this case, EJS provides a `.renderFile()` method with
 the same signature that Express expects: `(path, options, callback)`,
 though note that it aliases this method as `ejs.__express` internally
 so if you're using ".ejs" extensions you don't need to do anything.

@@ -1,4 +1,4 @@
-Check if the specified content types are acceptable, based on the request's `Accept` HTTP header field.
+Checks if the specified content types are acceptable, based on the request's `Accept` HTTP header field.
 The method returns the best match, or if none of the specified content types is acceptable, returns 
 `undefined` (in which case, the application should respond with `406 "Not Acceptable"`).
 

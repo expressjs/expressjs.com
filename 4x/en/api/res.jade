@@ -1,3 +1,4 @@
+include:md ./res.md
 h3(id='res.properties') Properties
 
 section
@@ -11,7 +12,7 @@ section
 h3(id='res.methods') Methods
 
 section
-  h3(id='res.append') res.append(field, [value])
+  h3(id='res.append') res.append(field [, value])
   include:md ./res-append.md
 
 section
@@ -19,19 +20,19 @@ section
   include:md ./res-attachment.md
 
 section
-  h3(id='res.cookie') res.cookie(name, value, [options])
+  h3(id='res.cookie') res.cookie(name, value [, options])
   include:md ./res-cookie.md
 
 section
-  h3(id='res.clearCookie') res.clearCookie(name, [options])
+  h3(id='res.clearCookie') res.clearCookie(name [, options])
   include:md ./res-clearCookie.md
 
 section
-  h3(id='res.download') res.download(path, [filename], [fn])
+  h3(id='res.download') res.download(path [, filename] [, fn])
   include:md ./res-download.md
 
 section
-  h3(id='res.end') res.end([data], [encoding])
+  h3(id='res.end') res.end([data] [, encoding])
   include:md ./res-end.md
 
 section
@@ -63,7 +64,7 @@ section
   include:md ./res-redirect.md
 
 section
-  h3(id='res.render') res.render(view, [locals], callback)
+  h3(id='res.render') res.render(view, [locals,] callback)
   include:md ./res-render.md
 
 section
@@ -71,7 +72,7 @@ section
   include:md ./res-send.md
 
 section
-  h3(id='res.sendFile') res.sendFile(path, [options], [fn])
+  h3(id='res.sendFile') res.sendFile(path, [options,] [fn])
   include:md ./res-sendFile.md
 
 section
@@ -79,7 +80,7 @@ section
   include:md ./res-sendStatus.md
 
 section
-  h3(id='res.set') res.set(field, [value])
+  h3(id='res.set') res.set(field [, value])
   include:md ./res-set.md
 
 section

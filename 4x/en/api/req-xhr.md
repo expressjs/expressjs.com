@@ -1,5 +1,5 @@
-This property is `true` if the request was issued with the "X-Requested-With" header field set to
-"XMLHttpRequest" (indicating that the request was issued by a client library such as jQuery).
+A Boolean value that is `true` if the request's "X-Requested-With" header field is
+"XMLHttpRequest", indicating that the request was issued by a client library such as jQuery.
 
 ```js
 req.xhr

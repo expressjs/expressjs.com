@@ -1,4 +1,4 @@
-This property is the URL path on which a router instance was mounted.
+The URL path on which a router instance was mounted.
 For example:
 
 ```js

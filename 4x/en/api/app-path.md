@@ -1,4 +1,4 @@
-Returns the canonical path of the app.
+Returns the canonical path of the app, a string.
 
 ```js
 var app = express()
@@ -13,4 +13,5 @@ console.log(blog.path()); // '/blog'
 console.log(blogAdmin.path()); // '/blog/admin'
 ```
 
-The behavior of this method can become very complicated in complex cases of mounted apps, hence it is recommended to use [req.baseUrl](#req.baseUrl) to get the canonical path of the app.
+The behavior of this method can become very complicated in complex cases of mounted apps:
+it is usually better to use [req.baseUrl](#req.baseUrl) to get the canonical path of the app.

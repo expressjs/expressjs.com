@@ -1,7 +1,9 @@
-Response local variables are scoped to the request, and therefore only available to
-the view(s) rendered during that request / response cycle (if any). Otherwise, this API is identical to [app.locals](#app.locals).
+An object that contains response local variables scoped to the request, and therefore available only to
+the view(s) rendered during that request / response cycle (if any). Otherwise,
+this property is identical to [app.locals](#app.locals).
 
-This object is useful for exposing request-level information such as the request pathname, authenticated user, user settings etc.
+This property is useful for exposing request-level information such as the request path name,
+authenticated user, user settings, and so on.
 
 ```js
 app.use(function(req, res, next){

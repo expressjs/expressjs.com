@@ -1,4 +1,4 @@
-This property is an object containing a property for each query string parameter in the route.
+An object containing a property for each query string parameter in the route.
 If there is no query string, it is the empty object, `{}`.
 
 ```js

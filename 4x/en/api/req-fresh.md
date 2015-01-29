@@ -1,4 +1,4 @@
-This property indicates that the request is "fresh."  It is the opposite of `req.stale`.
+Indicates whether the request is "fresh."  It is the opposite of `req.stale`.
 
 It is true if the `cache-control` request header doesn't have a `no-cache` directive and any
 of the following is true:

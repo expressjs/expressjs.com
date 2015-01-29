@@ -1,4 +1,6 @@
-Send a JSON response. This method is identical to `res.send()` when an object or array is passed. However, it may be used for explicit JSON conversion of non-objects, such as null, undefined, etc. (although these are technically not valid JSON).
+Sends a JSON response. This method is identical to `res.send()` with an object or array as the parameter.
+However, you can use it to convert other values to JSON, such as `null`, and `undefined`.
+(although these are technically not valid JSON).
 
 ```js
 res.json(null)

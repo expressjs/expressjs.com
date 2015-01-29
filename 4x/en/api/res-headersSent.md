@@ -1,4 +1,4 @@
-Property indicating if HTTP headers has been sent for the response.
+Boolean property that indicates if the app sent HTTP headers for the response.
 
 ```js
 app.get('/', function (req, res) {

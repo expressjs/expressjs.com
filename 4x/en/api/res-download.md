@@ -1,6 +1,9 @@
-Transfer the file at `path` as an "attachment". Typically, browsers will prompt the user for download. The Content-Disposition "filename=" parameter (i.e. the one that will appear in the brower dialog) is set to `path` by default. However, you may provide an override `filename`.
+Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.
+By default, the `Content-Disposition` header "filename=" parameter is `path` (this typically appears in the brower dialog).
+Override this default with the `filename` parameter.
 
-When an error has ocurred or transfer is complete the optional callback `fn` is invoked. This method uses [res.sendFile()](#res.sendFile) to transfer the file.
+When an error ocurrs or transfer is complete, the method calls the optional callback function `fn`.
+This method uses [res.sendFile()](#res.sendFile) to transfer the file.
 
 ```js
 res.download('/report-12345.pdf');
@@ -9,10 +12,10 @@ res.download('/report-12345.pdf', 'report.pdf');
 
 res.download('/report-12345.pdf', 'report.pdf', function(err){
   if (err) {
-    // handle error, keep in mind the response may be partially-sent
+    // Handle error, but keep in mind the response may be partially-sent
     // so check res.headersSent
   } else {
-    // decrement a download credit etc
+    // decrement a download credit, etc.
   }
 });
 ```

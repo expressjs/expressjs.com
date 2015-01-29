@@ -1,4 +1,4 @@
-Bind and listen for connections on the given host and port.
+Binds and listens for connections on the specified host and port.
 This method is identical to Node's [http.Server.listen()](http://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback)</a>.
 
 ```js
@@ -9,8 +9,8 @@ app.listen(3000);
 
 The `app` returned by `express()` is in fact a JavaScript
 `Function`, designed to be passed to Node's HTTP servers as a callback
-to handle requests. This enables you to provide both HTTP and HTTPS versions of
-your app with the same code base easily, as the app does not inherit from these
+to handle requests. This makes it easy to provide both HTTP and HTTPS versions of
+your app with the same code base, as the app does not inherit from these
 (it is simply a callback):
 
 ```js

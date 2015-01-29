@@ -1,4 +1,4 @@
-Join the given `links` to populate the "Link" response header field.
+Joins the given `links` to populate the "Link" response header field.
 
 ```js
 res.links({

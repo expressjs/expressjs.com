@@ -1,4 +1,5 @@
-Get the case-insensitive response header `field`. 
+Returns the HTTP response header specified by `field`.
+The match is case-insensitive.
 
 ```js
 res.get('Content-Type');

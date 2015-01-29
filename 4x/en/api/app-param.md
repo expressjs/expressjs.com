@@ -1,11 +1,11 @@
-Map logic to route parameters. For example, when `:user`
-is present in a route path, you may map user loading logic to automatically
-provide `req.user` to the route, or perform validations
-on the parameter input.
+Maps logic to route parameters. For example, when `:user` is present in a route
+path, you may map user loading logic to automatically provide `req.user` to the
+route, or perform validations on the parameter input.
 
 _Note_
 
-* Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on `app` will be triggered only by route parameters defined on `app` routes.
+* Param callback functions are local to the router on which they are defined.  Mounted apps or routers do not inherit them.
+Hence, param callbacks defined on `app` will be triggered only by route parameters defined on `app` routes.
 * A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.
 
 ```js
@@ -25,11 +25,11 @@ app.get('/user/:id', function (req, res) {
 });
 ```
 
-The following snippet illustrates how the `callback`
-is much like middleware, thus supporting async operations. However,
-it provides the additional value of the parameter (here named as `id`), derived from the corresponding parameter in the `req.params` object.
-An attempt to load the user is then performed, assigning `req.user`;
-otherwise an error is passed to `next(err)`.
+The following snippet illustrates how the `callback` is much like middleware,
+thus supporting asynchronous operations. However, it provides the additional
+value of the parameter (here named as `id`), derived from the corresponding
+parameter in the `req.params` object.  An attempt to load the user is then
+performed, assigning `req.user`;  otherwise an error is passed to `next(err)`.
 
 ```js
 app.param('user', function(req, res, next, id){
@@ -54,8 +54,8 @@ For example the [express-params](http://github.com/expressjs/express-params)
 defines the following callback which allows you to restrict parameters to a given
 regular expression. 
 
-This example is a bit more advanced. It is checking if the second argument is a regular
-expression, returning the callback, which acts much like the "user" param example.
+This example is a bit more advanced. It checks if the second argument is a regular
+expression, and if so returns the callback function, that acts much like the "user" param example.
 
 ```js
 app.param(function(name, fn){
@@ -73,7 +73,7 @@ app.param(function(name, fn){
 });
 ```
 
-The method could now be used to effectively validate parameters (and
+Now, you could use the method to effectively validate parameters (and
 optionally parse them to provide capture groups):
 
 ```js

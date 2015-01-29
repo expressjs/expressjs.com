@@ -1,7 +1,9 @@
-Mount the [middleware](/guide/using-middleware.html) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
+Mounts the [middleware](/guide/using-middleware.html) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
 
 <div class="doc-box doc-notice">
-A route will match any path, which follows its path immediately with a "<code>/</code>". For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>, <b>/apple/images/news</b>, and so on.  
+A route will match any path, which follows its path immediately with a "<code>/</code>".
+For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>,
+<b>/apple/images/news</b>, and so on.  
 </div>
 
 Mounting a middleware at a `path` will cause the middleware function to be executed whenever the base of the requested path matches the `path`.
@@ -30,7 +32,8 @@ app.get('/', function (req, res) {
 })
 ```
 
-`path` can be a string representing a path, a path pattern, a regular expression to match paths, or an array of combinations of the aforementioned path objects.
+`path` can be a string representing a path, a path pattern, a regular expression to match paths,
+or an array of combinations thereof.
 
 <div class="doc-box doc-notice">The middleware in the below are simple examples.</div>
 
@@ -99,7 +102,10 @@ app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
     </tbody>
 </table>
 
-`function` can be a middleware function, a series of middleware functions, an array of middleware functions, or a combination of all of them. Since routers and apps implement the middleware interface, you can use them as you would any other middleware function.
+`function` can be a middleware function, a series of middleware functions,
+an array of middleware functions, or a combination of all of them.
+Since [router](#router) and [app](#application) implement the middleware interface, you can use them
+as you would any other middleware function.
 
 <table class="doctable" border="1">
   <thead>
@@ -197,7 +203,8 @@ app.use(mw1, [mw2, r1, r2], subApp);
   </tbody>
 </table>
 
-Following are some examples of using the [express.static](/guide/using-middleware.html#middleware.built-in) middleware in an Express app.
+Following are some examples of using the [express.static](/guide/using-middleware.html#middleware.built-in)
+middleware in an Express app.
 
 Serve static content for the app from the "public" directory in the application directory:
 

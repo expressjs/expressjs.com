@@ -1,4 +1,4 @@
-This property contains key-value pairs of data submitted in the request body.
+Contains key-value pairs of data submitted in the request body.
 By default, it is `undefined`, and is populated when you use body-parsing middleware such
 as [body-parser](https://www.npmjs.org/package/body-parser) and [multer](https://www.npmjs.org/package/multer).
 

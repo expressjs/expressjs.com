@@ -1,4 +1,5 @@
-Returns an instance of a single route, which can then be used to handle HTTP verbs with optional middleware. Using `app.route()` is a recommended approach for avoiding duplicate route names (and thus typo errors).
+Returns an instance of a single route, which you can then use to handle HTTP verbs with optional middleware.
+Use `app.route()` to avoid duplicate route names (and thus typo errors).
 
 ```js
 var app = express();

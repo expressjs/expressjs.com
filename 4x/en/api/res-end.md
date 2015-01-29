@@ -1,4 +1,8 @@
-Inherited from node's `http.ServerResponse`, ends the response process. The only recommended use is for quickly ending the response without any data. If you need to respond with data, use Express' response methods such as `res.send()`, `res.json()` etc.
+Ends the response process. 
+Inherited from Node's [http.ServerResponse](http://nodejs.org/api/http.html#http_response_end_data_encoding).
+
+Use to quickly end the response without any data.
+If you need to respond with data, instead use methods such as [res.send()](#res.send) and [res.json()](#res.json).
 
 ```js
 res.end();
