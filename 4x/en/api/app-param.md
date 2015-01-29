@@ -40,10 +40,11 @@ app.get('/user/:id', function (req, res) {
 });
 ```
 
+<div class="doc-box doc-warn">`app.param(callback)` is deprecated as of v4.11.0.</div>
+
 By passing only a callback function, you can alter the `app.param()` API. For example the [express-params](http://github.com/expressjs/express-params) defines the following callback which allows you to restrict parameters to a given regular expression.
 
-<div class="doc-box doc-warn">
-  <p>`app.param(callback)` is deprecated as of v4.11.0.</p>
+<div class="doc-box doc-info">
   <p>
     The code in the next section can be migrated using the following, without the use of `app.param(callback)`:
     <p>
