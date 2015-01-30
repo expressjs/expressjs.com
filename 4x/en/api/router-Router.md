@@ -1,22 +1,19 @@
-A router is an isolated instance of middleware and routes. Routers can be thought of as "mini" applications, capable only of performing middleware and routing functions. Every express application has a built-in app router.
-
-Routers behave like middleware themselves and can be ".use()'d" by the app or in other routers.
-
-Create a new router with `express.Router()`:
+Create a new router as follows:
 
 ```js
 var router = express.Router([options]);
 ```
 
-`options` is an optional object to alter the behavior of the router.
+The optional `options` parameter specifies the behavior of the router.
 
 | Property        | Description                                     | Default     | Availability  |
 |-----------------|-------------------------------------------------|-------------|---------------|
 | `caseSensitive` | Enable case sensitivity. | Disabled by default, treating "/Foo" and "/foo" as the same.|  |
-| `strict`        | Enable strict routing. | Disabled by default, "/foo" and "/foo/" are treated the same by the router.|  |
-| `mergeParams`   | Ensure the `req.params` values from the parent router are preserved. If the parent and the child have conflicting param names, the child's value take precedence.| `false` | 4.5.0+ |
+| `mergeParams`   | Preserve the `req.params` values from the parent router. If the parent and the child have conflicting param names, the child's value take precedence.| `false` | 4.5.0+ |
+| `strict`        | Enable strict routing. | Disabled by default, "/foo" and "/foo/" are treated the same by the router.| &nbsp; |
 
-The router can have middleware and http VERB routes added just like an application.
+You can add middleware and HTTP method routes (such as `get`, `put`, `post`, and
+so on) to `router` just like an application.
 
 ```js
 // invoked for any requests passed to this router
@@ -32,7 +29,7 @@ router.get('/events', function(req, res, next) {
 });
 ```
 
-You can then use a router for a particular root url in this way separating your routes into files or even mini apps.
+You can then use a router for a particular root URL in this way separating your routes into files or even mini-apps.
 
 ```js
 // only requests to /calendar/* will be sent to our "router"

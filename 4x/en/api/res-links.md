@@ -1,4 +1,5 @@
-Joins the given `links` to populate the "Link" response header field.
+Joins the `links` provided as properties of the parameter to populate the response's
+`Link` HTTP header field.
 
 ```js
 res.links({
@@ -8,7 +9,7 @@ res.links({
 ```
 yields:
 
-```
+```text
 Link: &lt;http://api.example.com/users?page=2&gt;; rel="next", 
       &lt;http://api.example.com/users?page=5&gt;; rel="last"
 ```

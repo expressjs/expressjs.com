@@ -56,15 +56,15 @@ section
   include:md ./res-links.md
 
 section
-  h3(id='res.location') res.location
+  h3(id='res.location') res.location(path)
   include:md ./res-location.md
 
 section
-  h3(id='res.redirect') res.redirect([status], url)
+  h3(id='res.redirect') res.redirect([status,] path)
   include:md ./res-redirect.md
 
 section
-  h3(id='res.render') res.render(view, [locals,] callback)
+  h3(id='res.render') res.render(view [, locals] [, callback])
   include:md ./res-render.md
 
 section
@@ -72,7 +72,7 @@ section
   include:md ./res-send.md
 
 section
-  h3(id='res.sendFile') res.sendFile(path, [options,] [fn])
+  h3(id='res.sendFile') res.sendFile(path [, options] [, fn])
   include:md ./res-sendFile.md
 
 section

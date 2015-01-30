@@ -1,6 +1,9 @@
-Returns an instance of a single route which can then be used to handle HTTP verbs with optional middleware. Using `router.route()` is a recommended approach to avoiding duplicate route naming and thus typo errors.
+Returns an instance of a single route which you can then use to handle HTTP verbs
+with optional middleware. Use `router.route()` to avoid duplicate route naming and
+thus typo errors.
 
-Building on the `router.param()` example from before, we see how `router.route()` allows us to easily specify the various HTTP verb handlers.
+Building on the `router.param()` example above, the following code shows how to use
+`router.route()` to specify various HTTP method handlers.
 
 ```js
 var router = express.Router();
@@ -37,4 +40,5 @@ router.route('/users/:user_id')
 })
 ```
 
-This apporach re-uses the single '/users/:user_id' path and add handlers for the various HTTP verbs.
+This apporach re-uses the single '/users/:user_id' path and add handlers for
+various HTTP methods.

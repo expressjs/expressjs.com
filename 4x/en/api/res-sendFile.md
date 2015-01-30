@@ -1,18 +1,23 @@
 <div class="doc-box doc-info">`res.sendFile()` is supported from Express v4.8.0 onwards</div>
 
-Transfer the file at the given `path`. The Content-Type response header field is automatically set based on the filename's extension. Unless the `root` option is set in the options object, `path` must be an absolute path of the file.
+Transfers the file at the given `path`. Sets the `Content-Type` response HTTP header field
+based on the filename's extension. Unless the `root` option is set in
+the options object, `path` must be an absolute path of the file.
 
 The details of the `options` object is listed in the following table.
 
 | Property        | Description                                     | Default     | Availability |
 |-----------------|-------------------------------------------------|-------------|--------------|
-|`maxAge`         | Sets the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)| 0 |  |
+|`maxAge`         | Sets the max-age property of the `Cache-Control` header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)| 0 |  |
 | `root`          | Root directory for relative filenames.|  |  |
 | `lastModified`  | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.| Enabled | 4.9.0+ |
-| `headers`       | Object of HTTP headers to serve with the file.|  |  |
-| `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" |  |
+| `headers`       | Object containing HTTP headers to serve with the file.|  |  |
+| `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" | &nbsp; |
 
-The callback `fn(err)` is invoked when the transfer is complete or when an error occurs. If the callback function is specified and an error occurs, the response process must be handled explicitly within the callback function by either ending the request response cycle, or passing the control to the next route.
+The method invokes the callback function `fn(err)` when the transfer is complete
+or when an error occurs. If the callback function is specified and an error occurs,
+the callback function must explicitly handle the response process either by
+ending the request-response cycle, or by passing control to the next route.
 
 Here is an example of using `res.sendFile` with all its arguments.
 
@@ -58,4 +63,4 @@ app.get('/user/:uid/photos/:file', function(req, res){
   });
 });
 ```
-Please refer to [send](https://github.com/visionmedia/send) for additional documentation or any issues and concerns.
+For more information, or if you have issues or concerns, see [send](https://github.com/pillarjs/send).

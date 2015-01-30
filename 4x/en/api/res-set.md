@@ -1,4 +1,5 @@
-Set header `field` to `value`, or pass an object to set multiple fields at once.
+Sets the response's HTTP header `field` to `value`.
+To set multiple fields at once, pass an object as the parameter.
 
 ```js
 res.set('Content-Type', 'text/plain');
@@ -10,4 +11,4 @@ res.set({
 })
 ```
 
-Aliased as `res.header(field, [value])`.
+Aliased as `res.header(field [, value])`.

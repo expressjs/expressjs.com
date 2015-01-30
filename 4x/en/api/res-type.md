@@ -1,9 +1,11 @@
-Sets the Content-Type to the mime lookup of `type`, or when "/" is present the Content-Type is simply set to this literal value.
+Sets the `Content-Type` HTTP header to the MIME type as determined by
+[mime.lookup()](https://github.com/broofa/node-mime#mimelookuppath) for the specified `type`.
+If `type` contains the "/" character, then it sets the `Content-Type` to `type`.
 
 ```js
-res.type('.html');
-res.type('html');
-res.type('json');
-res.type('application/json');
-res.type('png');
+res.type('.html');              // => 'text/html'
+res.type('html');               // => 'text/html'
+res.type('json');               // => 'application/json'
+res.type('application/json');   // => 'application/json'
+res.type('png');                // => image/png:
 ```

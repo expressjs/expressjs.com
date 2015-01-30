@@ -1,8 +1,10 @@
-The interface is similar to [app.use()](#app.use). A simple example and usecase is described below, read the [app.use()](#app.use) documentation for the details.
+Uses the given middleware `function`, with optional mount path `path`, that defaults to "/".
 
-Use the given middleware `function`, with optional mount `path`, defaulting to "/".
+This method is similar to [app.use()](#app.use).  A simple example and usecase is described below.
+See [app.use()](#app.use) for more information.
 
-Middleware is like a plumbing pipe, requests start at the first middleware you define and work their way "down" the middleware stack processing for each path they match.
+Middleware is like a plumbing pipe, requests start at the first middleware you define
+and work their way "down" the middleware stack processing for each path they match.
 
 ```js
 var express = require('express');
@@ -32,9 +34,13 @@ app.use('/foo', router);
 app.listen(3000);
 ```
 
-The "mount" path is stripped and is _not_ visible to the middleware `function`. The main effect of this feature is that mounted middleware may operate without code changes regardless of its "prefix" pathname.
+The "mount" path is stripped and is _not_ visible to the middleware `function`.
+The main effect of this feature is that mounted middleware may operate without
+code changes regardless of its "prefix" pathname.
 
-The order of which middleware are "defined" using `router.use()` is very important, they are invoked sequentially, thus this defines middleware precedence. For example usually a logger is the very first middleware you would use, logging every request:
+The order in which you define middleware with `router.use()` is very important.
+They are invoked sequentially, thus the order defines middleware precedence. For example,
+usually a logger is the very first middleware you would use, so every request is logged.
 
 ```js
 var logger = require('morgan');
@@ -46,7 +52,8 @@ router.use(function(req, res){
 });
 ```
 
-Now suppose you wanted to ignore logging requests for static files, but to continue logging routes and middleware defined after `logger()`, you would simply move `static()` above:
+Now suppose you wanted to ignore logging requests for static files, but to continue
+logging routes and middleware defined after `logger()`.  You would simply move `static()` above:
 
 ```js
 router.use(express.static(__dirname + '/public'));
@@ -56,7 +63,8 @@ router.use(function(req, res){
 });
 ```
 
-Another concrete example would be serving files from multiple directories, giving precedence to "./public" over the others:
+Another concrete example is serving files from multiple directories,
+giving precedence to "./public" over the others:
 
 ```js
 app.use(express.static(__dirname + '/public'));
