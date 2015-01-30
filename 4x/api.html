@@ -1195,6 +1195,21 @@ res.attachment(&#39;path/to/logo.png&#39;);
 <td>Domain name for the cookie. Defaults to the domain name of the app.</td>
 </tr>
 <tr>
+<td><code>expires</code></td>
+<td>Date</td>
+<td>Expiry date of the cookie in GMT. If not specified or set to 0, creates a session cookie.</td>
+</tr>
+<tr>
+<td><code>httpOnly</code></td>
+<td>Boolean</td>
+<td>Flags the cookie to be accessible only by the web server.</td>
+</tr>
+<tr>
+<td><code>maxAge</code></td>
+<td>String</td>
+<td>Convenient option for setting the expiry time relative to the current time in milliseconds.</td>
+</tr>
+<tr>
 <td><code>path</code></td>
 <td>String</td>
 <td>Path for the cookie. Defaults to &quot;/&quot;.</td>
@@ -1203,21 +1218,6 @@ res.attachment(&#39;path/to/logo.png&#39;);
 <td><code>secure</code></td>
 <td>Boolean</td>
 <td>Marks the cookie to be used with HTTPS only.</td>
-</tr>
-<tr>
-<td><code>expires</code></td>
-<td>Date</td>
-<td>Expiry date of the cookie in GMT. If not specified or set to 0, creates a session cookie.</td>
-</tr>
-<tr>
-<td><code>maxAge</code></td>
-<td>String</td>
-<td>Convenient option for setting the expiry time relative to the current time in milliseconds.</td>
-</tr>
-<tr>
-<td><code>httpOnly</code></td>
-<td>Boolean</td>
-<td>Flags the cookie to be accessible only by the web server.</td>
 </tr>
 <tr>
 <td><code>signed</code></td>
@@ -1365,8 +1365,8 @@ res.status(500).jsonp({ error: &#39;message&#39; })
 });
 </code></pre>
 <p>yields:</p>
-<pre><code class="lang-text">Link: &amp;lt;http://api.example.com/users?page=2&amp;gt;; rel=&quot;next&quot;, 
-      &amp;lt;http://api.example.com/users?page=5&amp;gt;; rel=&quot;last&quot;
+<pre><code class="lang-text">Link: &lt;http://api.example.com/users?page=2&gt;; rel=&quot;next&quot;, 
+      &lt;http://api.example.com/users?page=5&gt;; rel=&quot;last&quot;
 </code></pre>
 </section><section><h3 id="res.location">res.location(path)</h3><p>Sets the response <code>Location</code> HTTP header field based on the specified <code>path</code>
 parameter; for example:</p>

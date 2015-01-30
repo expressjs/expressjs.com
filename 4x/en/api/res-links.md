@@ -10,6 +10,6 @@ res.links({
 yields:
 
 ```text
-Link: &lt;http://api.example.com/users?page=2&gt;; rel="next", 
-      &lt;http://api.example.com/users?page=5&gt;; rel="last"
+Link: <http://api.example.com/users?page=2>; rel="next", 
+      <http://api.example.com/users?page=5>; rel="last"
 ```
