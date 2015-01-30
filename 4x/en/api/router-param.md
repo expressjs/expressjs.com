@@ -1,79 +1,71 @@
-Maps logic to route parameters. For example, when `:user` is present in a route
-path you can map user-loading logic to automatically provide `req.user` to the
-route or perform validations on the parameter input.
-  
-*Note*
+Add callback triggers to route paramters, where `name` is the name of the parameter or an array of them, and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.
 
-  * Param callback functions are local to the router on which they are defined.
-  They are not inherited by mounted apps or routers. Hence, param callbacks
-  defined on `router` will be trigerred only by route parameters defined on
-  `router` routes.
-
-  * A param callback is called only once in a request-response cycle,
-  even if multiple routes match the parameter.
-
-    ```js
-    router.param('id', function (req, res, next, id) {
-      console.log('CALLED ONLY ONCE');
-      next();
-    })
-
-    router.get('/user/:id', function (req, res, next) {
-      console.log('although this matches');
-      next();
-    });
-
-    router.get('/user/:id', function (req, res) {
-      console.log('and this matches too');
-      res.end();
-    });
-    ```
-    
-The following snippet illustrates how the `callback` is much like middleware,
-thus supporting asynchronous operations. However, it provides the additional value
-of the parameter (here named `id`), derived from the corresponding parameter
-in the `req.params` object. The callback function then attempts to load the user,
-and assign it to `req.user`, otherwise passing an error to `next(err)`.
-
-It is important to realize that any route that triggered a named parameter
-function will only be run if the named parameter handler did not call `next`
-with an error.
+For example, when `:user` is present in a route path, you may map user loading logic to automatically provide `req.user` to the route, or perform validations on the parameter input.
 
 ```js
-router.param('user', function(req, res, next, id){
-  User.find(id, function(err, user){
+router.param('user', function(req, res, next, id) {
+
+  // try to get the user details from the User model and attach it to the request object
+  User.find(id, function(err, user) {
     if (err) {
-      return next(err);
+      next(err);
+    } else if (user) {
+      req.user = user;
+      next();
+    } else {
+      next(new Error('failed to load user'));
     }
-    else if (!user) {
-      return next(new Error('failed to load user'));
-    }
-
-    req.user = user;
-    next();
   });
-});
-
-// this route uses the ":user" named parameter
-// which will cause the 'user' param callback to be triggered
-router.get('/users/:user', function(req, res, next) {
-  // req.user WILL be defined here
-  // if there was an error, normal error handling will be triggered
-  // and this function will NOT execute
 });
 ```
 
-Alternatively you may pass only a `callback`, in which case you have the opportunity
-to alter the `router.param()` API. For example 
-[express-params](http://github.com/expressjs/express-params) defines the following
-callback which allows you to restrict parameters to a given regular expression.
-It checks whether the second argument is a regular
-expression, returning the callback (which acts much like the "user" param example).
+Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on `app` will be triggered only by route parameters defined on `app` routes.
+
+A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following example.
 
 ```js
-router.param(function(name, fn){
+router.param('id', function (req, res, next, id) {
+  console.log('CALLED ONLY ONCE');
+  next();
+})
+
+router.get('/user/:id', function (req, res, next) {
+  console.log('although this matches');
+  next();
+});
+
+router.get('/user/:id', function (req, res) {
+  console.log('and this matches too');
+  res.end();
+});
+```
+
+<div class="doc-box doc-warn">`router.param(callback)` is deprecated as of v4.11.0.</div>
+
+By passing only a callback function, you can alter the `router.param()` API. For example the [express-params](http://github.com/expressjs/express-params) defines the following callback which allows you to restrict parameters to a given regular expression.
+
+<div class="doc-box doc-info">
+  <p>
+    The code in the next section can be migrated using the following, without the use of `router.param(callback)`:
+    <p>
+```
+router.get('/user/:id([0-9]+)', function(req, res){
+  res.send('user ' + req.params.id);
+});
+
+router.get('/range/:range(\\w+\.\.\\w+)', function(req, res){
+  var range = req.params.range.split('..');
+  res.send('from ' + range[0] + ' to ' + range[1]);
+});
+```
+    </p>
+  </p>
+</div>
+
+```js
+router.param(function(name, fn) {
   if (fn instanceof RegExp) {
-    return function(req, res, next, val){
+    return function(req, res, next, val) {
       var captures;
       if (captures = fn.exec(String(val))) {
         req.params[name] = captures;
@@ -86,19 +78,20 @@ router.param(function(name, fn){
 });
 ```
 
-You could then use this method to effectively validate parameters (and optionally
-parse them to provide capture groups):
+The method could now be used to effectively validate parameters (and optionally parse them to provide capture groups):
 
 ```js
+// validation rule for id: should be one or more digits
 router.param('id', /^\d+$/);
 
-router.get('/user/:id', function(req, res){
+router.get('/user/:id', function(req, res) {
   res.send('user ' + req.params.id);
 });
 
+// validation rule for range: should start with one more alphanumeric characters, followed by two dots, and end with one more alphanumeric characters
 router.param('range', /^(\w+)\.\.(\w+)?$/);
 
-router.get('/range/:range', function(req, res){
+router.get('/range/:range', function(req, res) {
   var range = req.params.range;
   res.send('from ' + range[1] + ' to ' + range[2]);
 });

@@ -1,6 +1,6 @@
 Uses the given middleware `function`, with optional mount path `path`, that defaults to "/".
 
-This method is similar to [app.use()](#app.use).  A simple example and usecase is described below.
+This method is similar to [app.use()](#app.use). A simple example and usecase is described below.
 See [app.use()](#app.use) for more information.
 
 Middleware is like a plumbing pipe, requests start at the first middleware you define
@@ -71,3 +71,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/files'));
 app.use(express.static(__dirname + '/uploads'));
 ```
+
+The `router.use()` method also supports named parameters so that your mount points
+for other routers can benefit from preloading using named parameters.
