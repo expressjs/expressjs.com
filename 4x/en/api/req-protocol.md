@@ -1,8 +1,5 @@
-The string "http" for a standard HTTP request or "https" for a request with TLS.
-If the "trust proxy" setting is enabled, the application will trust the "X-Forwarded-Proto" header field.
-HTTPS can be enabled if the application is running behind a reverse proxy that provides HTTPS.
-<!-- Confirm that this interpretation is correct -->
-  
+The request protocol string, "http" or "https" when requested with TLS. When the "trust proxy" [setting](/4x/api.html#trust.proxy.options.table) trusts the socket address, the value of the "X-Forwarded-Proto" header ("http" or "https") field will be trusted and used if present.
+
 ```js
 req.protocol
 // => "http"

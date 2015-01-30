@@ -956,10 +956,7 @@ req.params[0]
 req.path
 // =&gt; &quot;/users&quot;
 </code></pre>
-</section><section><h3 id="req.protocol">req.protocol</h3><p>The string &quot;http&quot; for a standard HTTP request or &quot;https&quot; for a request with TLS.
-If the &quot;trust proxy&quot; setting is enabled, the application will trust the &quot;X-Forwarded-Proto&quot; header field.
-HTTPS can be enabled if the application is running behind a reverse proxy that provides HTTPS.
-<!-- Confirm that this interpretation is correct --></p>
+</section><section><h3 id="req.protocol">req.protocol</h3><p>The request protocol string, &quot;http&quot; or &quot;https&quot; when requested with TLS. When the &quot;trust proxy&quot; <a href="/4x/api.html#trust.proxy.options.table">setting</a> trusts the socket address, the value of the &quot;X-Forwarded-Proto&quot; header (&quot;http&quot; or &quot;https&quot;) field will be trusted and used if present.</p>
 <pre><code class="lang-js">req.protocol
 // =&gt; &quot;http&quot;
 </code></pre>
@@ -1714,18 +1711,25 @@ as &quot;GET /commits/71dbb9c..4c084f9&quot;.</p>
   res.send(&#39;commit range &#39; + from + &#39;..&#39; + to);
 });
 </code></pre>
-</section><section><h3 id="router.param">router.param([name,] callback)</h3><p>Maps logic to route parameters. For example, when <code>:user</code> is present in a route
-path you can map user-loading logic to automatically provide <code>req.user</code> to the
-route or perform validations on the parameter input.</p>
-<p><em>Note</em></p>
-<ul>
-<li><p>Param callback functions are local to the router on which they are defined.
-They are not inherited by mounted apps or routers. Hence, param callbacks
-defined on <code>router</code> will be trigerred only by route parameters defined on
-<code>router</code> routes.</p>
-</li>
-<li><p>A param callback is called only once in a request-response cycle,
-even if multiple routes match the parameter.</p>
+</section><section><h3 id="router.param">router.param([name,] callback)</h3><p>Add callback triggers to route paramters, where <code>name</code> is the name of the parameter or an array of them, and <code>function</code> is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.</p>
+<p>For example, when <code>:user</code> is present in a route path, you may map user loading logic to automatically provide <code>req.user</code> to the route, or perform validations on the parameter input.</p>
+<pre><code class="lang-js">router.param(&#39;user&#39;, function(req, res, next, id) {
+
+  // try to get the user details from the User model and attach it to the request object
+  User.find(id, function(err, user) {
+    if (err) {
+      next(err);
+    } else if (user) {
+      req.user = user;
+      next();
+    } else {
+      next(new Error(&#39;failed to load user&#39;));
+    }
+  });
+});
+</code></pre>
+<p>Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>router</code> will be triggered only by route parameters defined on <code>router</code> routes.</p>
+<p>A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following example.</p>
 <pre><code class="lang-js">router.param(&#39;id&#39;, function (req, res, next, id) {
   console.log(&#39;CALLED ONLY ONCE&#39;);
   next();
@@ -1741,47 +1745,28 @@ router.get(&#39;/user/:id&#39;, function (req, res) {
   res.end();
 });
 </code></pre>
-</li>
-</ul>
-<p>The following snippet illustrates how the <code>callback</code> is much like middleware,
-thus supporting asynchronous operations. However, it provides the additional value
-of the parameter (here named <code>id</code>), derived from the corresponding parameter
-in the <code>req.params</code> object. The callback function then attempts to load the user,
-and assign it to <code>req.user</code>, otherwise passing an error to <code>next(err)</code>.</p>
-<p>It is important to realize that any route that triggered a named parameter
-function will only be run if the named parameter handler did not call <code>next</code>
-with an error.</p>
-<pre><code class="lang-js">router.param(&#39;user&#39;, function(req, res, next, id){
-  User.find(id, function(err, user){
-    if (err) {
-      return next(err);
-    }
-    else if (!user) {
-      return next(new Error(&#39;failed to load user&#39;));
-    }
+<div class="doc-box doc-warn"><code>router.param(callback)</code> is deprecated as of v4.11.0.</div>
 
-    req.user = user;
-    next();
-  });
+<p>By passing only a callback function, you can alter the <code>router.param()</code> API. For example the <a href="http://github.com/expressjs/express-params">express-params</a> defines the following callback which allows you to restrict parameters to a given regular expression.</p>
+<div class="doc-box doc-info">
+  <p>
+    The code in the next section can be migrated using the following, without the use of <code>router.param(callback)</code>:
+    <p>
+<code>router.get(&#39;/user/:id([0-9]+)&#39;, function(req, res){
+  res.send(&#39;user &#39; + req.params.id);
 });
 
-// this route uses the &quot;:user&quot; named parameter
-// which will cause the &#39;user&#39; param callback to be triggered
-router.get(&#39;/users/:user&#39;, function(req, res, next) {
-  // req.user WILL be defined here
-  // if there was an error, normal error handling will be triggered
-  // and this function will NOT execute
-});
-</code></pre>
-<p>Alternatively you may pass only a <code>callback</code>, in which case you have the opportunity
-to alter the <code>router.param()</code> API. For example 
-<a href="http://github.com/expressjs/express-params">express-params</a> defines the following
-callback which allows you to restrict parameters to a given regular expression.
-It checks whether the second argument is a regular
-expression, returning the callback (which acts much like the &quot;user&quot; param example).</p>
-<pre><code class="lang-js">router.param(function(name, fn){
+router.get(&#39;/range/:range(\\w+\.\.\\w+)&#39;, function(req, res){
+  var range = req.params.range.split(&#39;..&#39;);
+  res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
+});</code>
+    </p>
+  </p>
+</div>
+
+<pre><code class="lang-js">router.param(function(name, fn) {
   if (fn instanceof RegExp) {
-    return function(req, res, next, val){
+    return function(req, res, next, val) {
       var captures;
       if (captures = fn.exec(String(val))) {
         req.params[name] = captures;
@@ -1793,17 +1778,18 @@ expression, returning the callback (which acts much like the &quot;user&quot; pa
   }
 });
 </code></pre>
-<p>You could then use this method to effectively validate parameters (and optionally
-parse them to provide capture groups):</p>
-<pre><code class="lang-js">router.param(&#39;id&#39;, /^\d+$/);
+<p>The method could now be used to effectively validate parameters (and optionally parse them to provide capture groups):</p>
+<pre><code class="lang-js">// validation rule for id: should be one or more digits
+router.param(&#39;id&#39;, /^\d+$/);
 
-router.get(&#39;/user/:id&#39;, function(req, res){
+router.get(&#39;/user/:id&#39;, function(req, res) {
   res.send(&#39;user &#39; + req.params.id);
 });
 
+// validation rule for range: should start with one more alphanumeric characters, followed by two dots, and end with one more alphanumeric characters
 router.param(&#39;range&#39;, /^(\w+)\.\.(\w+)?$/);
 
-router.get(&#39;/range/:range&#39;, function(req, res){
+router.get(&#39;/range/:range&#39;, function(req, res) {
   var range = req.params.range;
   res.send(&#39;from &#39; + range[1] + &#39; to &#39; + range[2]);
 });
@@ -1851,7 +1837,7 @@ router.route(&#39;/users/:user_id&#39;)
 <p>This apporach re-uses the single &#39;/users/:user_id&#39; path and add handlers for
 various HTTP methods.</p>
 </section><section><h3 id="router.use">router.use([path], [function, ...] function)</h3><p>Uses the given middleware <code>function</code>, with optional mount path <code>path</code>, that defaults to &quot;/&quot;.</p>
-<p>This method is similar to <a href="#app.use">app.use()</a>.  A simple example and usecase is described below.
+<p>This method is similar to <a href="#app.use">app.use()</a>. A simple example and usecase is described below.
 See <a href="#app.use">app.use()</a> for more information.</p>
 <p>Middleware is like a plumbing pipe, requests start at the first middleware you define
 and work their way &quot;down&quot; the middleware stack processing for each path they match.</p>
@@ -1909,6 +1895,8 @@ giving precedence to &quot;./public&quot; over the others:</p>
 app.use(express.static(__dirname + &#39;/files&#39;));
 app.use(express.static(__dirname + &#39;/uploads&#39;));
 </code></pre>
+<p>The <code>router.use()</code> method also supports named parameters so that your mount points
+for other routers can benefit from preloading using named parameters.</p>
 </section></div></section><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
