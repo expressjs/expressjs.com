@@ -332,12 +332,12 @@ app.get(&#39;/user/:id&#39;, function (req, res) {
     The code in the next section can be migrated using the following, without the use of <code>app.param(callback)</code>:
     <p>
 <code>app.get(&#39;/user/:id([0-9]+)&#39;, function(req, res){
-  res.send(&#39;user &#39; + req.params.id);
+    res.send(&#39;user &#39; + req.params.id);
 });
 
 app.get(&#39;/range/:range(\\w+\.\.\\w+)&#39;, function(req, res){
-  var range = req.params.range.split(&#39;..&#39;);
-  res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
+    var range = req.params.range.split(&#39;..&#39;);
+    res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
 });</code>
     </p>
   </p>
@@ -1756,12 +1756,12 @@ router.get(&#39;/user/:id&#39;, function (req, res) {
     The code in the next section can be migrated using the following, without the use of <code>router.param(callback)</code>:
     <p>
 <code>router.get(&#39;/user/:id([0-9]+)&#39;, function(req, res){
-  res.send(&#39;user &#39; + req.params.id);
+    res.send(&#39;user &#39; + req.params.id);
 });
 
 router.get(&#39;/range/:range(\\w+\.\.\\w+)&#39;, function(req, res){
-  var range = req.params.range.split(&#39;..&#39;);
-  res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
+    var range = req.params.range.split(&#39;..&#39;);
+    res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
 });</code>
     </p>
   </p>

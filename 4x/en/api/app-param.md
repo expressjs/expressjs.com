@@ -50,12 +50,12 @@ By passing only a callback function, you can alter the `app.param()` API. For ex
     <p>
 ```
 app.get('/user/:id([0-9]+)', function(req, res){
-  res.send('user ' + req.params.id);
+    res.send('user ' + req.params.id);
 });
 
 app.get('/range/:range(\\w+\.\.\\w+)', function(req, res){
-  var range = req.params.range.split('..');
-  res.send('from ' + range[0] + ' to ' + range[1]);
+    var range = req.params.range.split('..');
+    res.send('from ' + range[0] + ' to ' + range[1]);
 });
 ```
     </p>
