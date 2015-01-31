@@ -3,7 +3,7 @@ The <code>express()</code> function is a top-level function exported by the Expr
 <pre><code class="lang-js">var express = require(&#39;express&#39;);
 var app = express();
 </code></pre>
-</section><h2>Application</h2><a id="application" class="h2"></a><p>The <code>app</code> object conventially denotes the Express application.
+</section><h2 id="application">Application</h2><p>The <code>app</code> object conventially denotes the Express application.
 Create it by calling the top-level <code>express()</code> function exported by the Express module:</p>
 <pre><code class="lang-js">var express = require(&#39;express&#39;);
 var app = express();
@@ -290,15 +290,25 @@ GET, POST, PUT, DELETE, or any other HTTP request method.</p>
   next() // pass control to the next handler
 })
 </code></pre>
-</section><section><h3 id="app.param">app.param([name], callback)</h3><p>Maps logic to route parameters. For example, when <code>:user</code> is present in a route
-path, you may map user loading logic to automatically provide <code>req.user</code> to the
-route, or perform validations on the parameter input.</p>
-<p><em>Note</em></p>
-<ul>
-<li>Param callback functions are local to the router on which they are defined.  Mounted apps or routers do not inherit them.
-Hence, param callbacks defined on <code>app</code> will be triggered only by route parameters defined on <code>app</code> routes.</li>
-<li>A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes.</li>
-</ul>
+</section><section><h3 id="app.param">app.param([name], callback)</h3><p>Add callback triggers to route paramters, where <code>name</code> is the name of the parameter or an array of them, and <code>function</code> is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.</p>
+<p>For example, when <code>:user</code> is present in a route path, you may map user loading logic to automatically provide <code>req.user</code> to the route, or perform validations on the parameter input.</p>
+<pre><code class="lang-js">app.param(&#39;user&#39;, function(req, res, next, id) {
+
+  // try to get the user details from the User model and attach it to the request object
+  User.find(id, function(err, user) {
+    if (err) {
+      next(err);
+    } else if (user) {
+      req.user = user;
+      next();
+    } else {
+      next(new Error(&#39;failed to load user&#39;));
+    }
+  });
+});
+</code></pre>
+<p>Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on <code>app</code> will be triggered only by route parameters defined on <code>app</code> routes.</p>
+<p>A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following example.</p>
 <pre><code class="lang-js">app.param(&#39;id&#39;, function (req, res, next, id) {
   console.log(&#39;CALLED ONLY ONCE&#39;);
   next();
@@ -314,36 +324,28 @@ app.get(&#39;/user/:id&#39;, function (req, res) {
   res.end();
 });
 </code></pre>
-<p>The following snippet illustrates how the <code>callback</code> is much like middleware,
-thus supporting asynchronous operations. However, it provides the additional
-value of the parameter (here named as <code>id</code>), derived from the corresponding
-parameter in the <code>req.params</code> object.  An attempt to load the user is then
-performed, assigning <code>req.user</code>;  otherwise an error is passed to <code>next(err)</code>.</p>
-<pre><code class="lang-js">app.param(&#39;user&#39;, function(req, res, next, id){
-  User.find(id, function(err, user){
-    if (err) {
-      next(err);
-    } else if (user) {
-      req.user = user;
-      next();
-    } else {
-      next(new Error(&#39;failed to load user&#39;));
-    }
-  });
-});
-</code></pre>
 <div class="doc-box doc-warn"><code>app.param(callback)</code> is deprecated as of v4.11.0.</div>
 
-<p>Alternatively, you can pass only a <code>callback</code>, in which
-case you have the opportunity to alter the <code>app.param()</code> API.
-For example the <a href="http://github.com/expressjs/express-params">express-params</a>
-defines the following callback which allows you to restrict parameters to a given
-regular expression. </p>
-<p>This example is a bit more advanced. It checks if the second argument is a regular
-expression, and if so returns the callback function, that acts much like the &quot;user&quot; param example.</p>
-<pre><code class="lang-js">app.param(function(name, fn){
+<p>By passing only a callback function, you can alter the <code>app.param()</code> API. For example the <a href="http://github.com/expressjs/express-params">express-params</a> defines the following callback which allows you to restrict parameters to a given regular expression.</p>
+<div class="doc-box doc-info">
+  <p>
+    The code in the next section can be migrated using the following, without the use of <code>app.param(callback)</code>:
+    <p>
+<code>app.get(&#39;/user/:id([0-9]+)&#39;, function(req, res){
+  res.send(&#39;user &#39; + req.params.id);
+});
+
+app.get(&#39;/range/:range(\\w+\.\.\\w+)&#39;, function(req, res){
+  var range = req.params.range.split(&#39;..&#39;);
+  res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
+});</code>
+    </p>
+  </p>
+</div>
+
+<pre><code class="lang-js">app.param(function(name, fn) {
   if (fn instanceof RegExp) {
-    return function(req, res, next, val){
+    return function(req, res, next, val) {
       var captures;
       if (captures = fn.exec(String(val))) {
         req.params[name] = captures;
@@ -355,19 +357,20 @@ expression, and if so returns the callback function, that acts much like the &qu
   }
 });
 </code></pre>
-<p>Now, you could use the method to effectively validate parameters (and
-optionally parse them to provide capture groups):</p>
-<pre><code class="lang-js">app.param(&#39;id&#39;, /^\d+$/);
+<p>The method could now be used to effectively validate parameters (and optionally parse them to provide capture groups):</p>
+<pre><code class="lang-js">// validation rule for id: should be one or more digits
+app.param(&#39;id&#39;, /^\d+$/);
 
-app.get(&#39;/user/:id([0-9]+)&#39;, function(req, res){
+app.get(&#39;/user/:id&#39;, function(req, res) {
   res.send(&#39;user &#39; + req.params.id);
 });
 
+// validation rule for range: should start with one more alphanumeric characters, followed by two dots, and end with one more alphanumeric characters
 app.param(&#39;range&#39;, /^(\w+)\.\.(\w+)?$/);
 
-app.get(&#39;/range/:range(\\w+\\.\\.\\w+)&#39;, function(req, res){
-  var range = req.params.range.split(&#39;..&#39;);
-  res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
+app.get(&#39;/range/:range&#39;, function(req, res) {
+  var range = req.params.range;
+  res.send(&#39;from &#39; + range[1] + &#39; to &#39; + range[2]);
 });
 </code></pre>
 </section><section><h3 id="app.path">app.path()</h3><p>Returns the canonical path of the app, a string.</p>
@@ -846,7 +849,7 @@ app.use(logger());
 app.use(express.static(__dirname + &#39;/files&#39;));
 app.use(express.static(__dirname + &#39;/uploads&#39;));
 </code></pre>
-</section><h2>Request</h2><a id="request" class="h2"></a><p>The <code>req</code> object represents the HTTP request and has properties for the 
+</section><h2 id="request">Request</h2><p>The <code>req</code> object represents the HTTP request and has properties for the 
 request query string, parameters, body, HTTP headers, and so on.  In this documentation and by convention, 
 the object is always referred to as <code>req</code> (and the HTTP response is <code>res</code>) but its actual name is determined
 by the parameters to the callback function in which you&#39;re working.</p>
@@ -1124,7 +1127,7 @@ Direct access to <code>req.body</code>, <code>req.params</code>, and <code>req.q
 
 Body-parsing middleware must be loaded for <code>req.param()</code> to work predictably. Refer <a href="#req.body">req.body</a> for details.
 </div>
-</section><h2>Response</h2><a id="response" class="h2"></a><p>The <code>res</code> object represents the HTTP response that an Express app sends when it gets an HTTP request.</p>
+</section><h2 id="response">Response</h2><p>The <code>res</code> object represents the HTTP response that an Express app sends when it gets an HTTP request.</p>
 <p>In this documentation and by convention, 
 the object is always referred to as <code>res</code> (and the HTTP request is <code>req</code>) but its actual name is determined
 by the parameters to the callback function in which you&#39;re working.</p>
@@ -1606,7 +1609,7 @@ res.type(&#39;png&#39;);                // =&gt; image/png:
 </section><section><h3 id="res.vary">res.vary(field)</h3><p>Adds the field to the <code>Vary</code> response header, if it is not there already.</p>
 <pre><code class="lang-js">res.vary(&#39;User-Agent&#39;).render(&#39;docs&#39;);
 </code></pre>
-</section><h2>Router</h2><a id="router" class="h2"></a><section><p>A <code>router</code> object is an isolated instance of middleware and routes. You can think of it
+</section><h2 id="router">Router</h2><section><p>A <code>router</code> object is an isolated instance of middleware and routes. You can think of it
 as a &quot;mini-application,&quot; capable only of performing middleware and routing
 functions. Every Express application has a built-in app router.</p>
 <p>A router behaves like middleware itself, so you can use it as an argument to
