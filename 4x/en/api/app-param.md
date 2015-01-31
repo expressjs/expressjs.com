@@ -45,21 +45,17 @@ app.get('/user/:id', function (req, res) {
 By passing only a callback function, you can alter the `app.param()` API. For example the [express-params](http://github.com/expressjs/express-params) defines the following callback which allows you to restrict parameters to a given regular expression.
 
 <div class="doc-box doc-info">
-  <p>
-    The code in the next section can be migrated using the following, without the use of `app.param(callback)`:
-    <p>
-```
-app.get('/user/:id([0-9]+)', function(req, res){
-    res.send('user ' + req.params.id);
+The code in the next section can be migrated using the following, without the use of `app.param(callback)`:
+<pre class="language-javascript">
+router.get('/user/:id([0-9]+)', function(req, res){
+  res.send('user ' + req.params.id);
 });
 
-app.get('/range/:range(\\w+\.\.\\w+)', function(req, res){
-    var range = req.params.range.split('..');
-    res.send('from ' + range[0] + ' to ' + range[1]);
+router.get('/range/:range(\\w+\.\.\\w+)', function(req, res){
+  var range = req.params.range.split('..');
+  res.send('from ' + range[0] + ' to ' + range[1]);
 });
-```
-    </p>
-  </p>
+</pre>
 </div>
 
 ```js

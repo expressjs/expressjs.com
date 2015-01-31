@@ -445,6 +445,11 @@ html[xmlns] .clearfix {
   margin: 20px 3% 20px 3%;
 }
 
+.doc-box pre {
+  font-size: 12px;
+  background-color: #fdfef8 !important;
+}
+
 .doc-box p {
   margin: 0 0 8px 0;
 }

@@ -328,19 +328,17 @@ app.get(&#39;/user/:id&#39;, function (req, res) {
 
 <p>By passing only a callback function, you can alter the <code>app.param()</code> API. For example the <a href="http://github.com/expressjs/express-params">express-params</a> defines the following callback which allows you to restrict parameters to a given regular expression.</p>
 <div class="doc-box doc-info">
-  <p>
     The code in the next section can be migrated using the following, without the use of <code>app.param(callback)</code>:
-    <p>
-<code>app.get(&#39;/user/:id([0-9]+)&#39;, function(req, res){
-    res.send(&#39;user &#39; + req.params.id);
+<pre class="language-javascript">
+router.get(&#39;/user/:id([0-9]+)&#39;, function(req, res){
+  res.send(&#39;user &#39; + req.params.id);
 });
 
-app.get(&#39;/range/:range(\\w+\.\.\\w+)&#39;, function(req, res){
-    var range = req.params.range.split(&#39;..&#39;);
-    res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
-});</code>
-    </p>
-  </p>
+router.get(&#39;/range/:range(\w+..\w+)&#39;, function(req, res){
+  var range = req.params.range.split(&#39;..&#39;);
+  res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
+});
+</pre>
 </div>
 
 <pre><code class="lang-js">app.param(function(name, fn) {
@@ -1752,19 +1750,17 @@ router.get(&#39;/user/:id&#39;, function (req, res) {
 
 <p>By passing only a callback function, you can alter the <code>router.param()</code> API. For example the <a href="http://github.com/expressjs/express-params">express-params</a> defines the following callback which allows you to restrict parameters to a given regular expression.</p>
 <div class="doc-box doc-info">
-  <p>
     The code in the next section can be migrated using the following, without the use of <code>router.param(callback)</code>:
-    <p>
-<code>router.get(&#39;/user/:id([0-9]+)&#39;, function(req, res){
-    res.send(&#39;user &#39; + req.params.id);
+<pre class="language-javascript">
+router.get(&#39;/user/:id([0-9]+)&#39;, function(req, res){
+  res.send(&#39;user &#39; + req.params.id);
 });
 
-router.get(&#39;/range/:range(\\w+\.\.\\w+)&#39;, function(req, res){
-    var range = req.params.range.split(&#39;..&#39;);
-    res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
-});</code>
-    </p>
-  </p>
+router.get(&#39;/range/:range(\w+..\w+)&#39;, function(req, res){
+  var range = req.params.range.split(&#39;..&#39;);
+  res.send(&#39;from &#39; + range[0] + &#39; to &#39; + range[1]);
+});
+</pre>
 </div>
 
 <pre><code class="lang-js">router.param(function(name, fn) {
