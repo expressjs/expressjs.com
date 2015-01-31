@@ -3,7 +3,7 @@ The <code>express()</code> function is a top-level function exported by the Expr
 <pre><code class="lang-js">var express = require(&#39;express&#39;);
 var app = express();
 </code></pre>
-</section><h2 id="application">Application</h2><p>The <code>app</code> object conventially denotes the Express application.
+</section><a id="application" class="h2"></a><h2>Application</h2><p>The <code>app</code> object conventially denotes the Express application.
 Create it by calling the top-level <code>express()</code> function exported by the Express module:</p>
 <pre><code class="lang-js">var express = require(&#39;express&#39;);
 var app = express();
@@ -849,7 +849,7 @@ app.use(logger());
 app.use(express.static(__dirname + &#39;/files&#39;));
 app.use(express.static(__dirname + &#39;/uploads&#39;));
 </code></pre>
-</section><h2 id="request">Request</h2><p>The <code>req</code> object represents the HTTP request and has properties for the 
+</section><a id="request" class="h2"></a><h2>Request</h2><p>The <code>req</code> object represents the HTTP request and has properties for the 
 request query string, parameters, body, HTTP headers, and so on.  In this documentation and by convention, 
 the object is always referred to as <code>req</code> (and the HTTP response is <code>res</code>) but its actual name is determined
 by the parameters to the callback function in which you&#39;re working.</p>
@@ -1127,7 +1127,7 @@ Direct access to <code>req.body</code>, <code>req.params</code>, and <code>req.q
 
 Body-parsing middleware must be loaded for <code>req.param()</code> to work predictably. Refer <a href="#req.body">req.body</a> for details.
 </div>
-</section><h2 id="response">Response</h2><p>The <code>res</code> object represents the HTTP response that an Express app sends when it gets an HTTP request.</p>
+</section><a id="response" class="h2"></a><h2>Response</h2><p>The <code>res</code> object represents the HTTP response that an Express app sends when it gets an HTTP request.</p>
 <p>In this documentation and by convention, 
 the object is always referred to as <code>res</code> (and the HTTP request is <code>req</code>) but its actual name is determined
 by the parameters to the callback function in which you&#39;re working.</p>
@@ -1609,7 +1609,7 @@ res.type(&#39;png&#39;);                // =&gt; image/png:
 </section><section><h3 id="res.vary">res.vary(field)</h3><p>Adds the field to the <code>Vary</code> response header, if it is not there already.</p>
 <pre><code class="lang-js">res.vary(&#39;User-Agent&#39;).render(&#39;docs&#39;);
 </code></pre>
-</section><h2 id="router">Router</h2><section><p>A <code>router</code> object is an isolated instance of middleware and routes. You can think of it
+</section><a id="router" class="h2"></a><h2>Router</h2><section><p>A <code>router</code> object is an isolated instance of middleware and routes. You can think of it
 as a &quot;mini-application,&quot; capable only of performing middleware and routing
 functions. Every Express application has a built-in app router.</p>
 <p>A router behaves like middleware itself, so you can use it as an argument to
