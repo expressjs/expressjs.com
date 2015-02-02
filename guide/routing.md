@@ -55,7 +55,7 @@ app.all('/secret', function (req, res, next) {
 
 <h2 id="route-paths">Route paths</h2>
 
-Route paths, in combination with a request method, define the endpoints at which requests can be made to. They be strings, string patterns, or regular expressions.
+Route paths, in combination with a request method, define the endpoints at which requests can be made to. They are strings, string patterns, or regular expressions.
 
 <div class="doc-box doc-warn">Query strings are *not* a part of the route path.</div>
 
