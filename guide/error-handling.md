@@ -11,7 +11,7 @@ app.use(function(err, req, res, next){
 });
 ```
 
-Though not strictly required, by convention you define error-handling middleware last, after other `app.use()` calls;
+You define error-handling middleware last, after other `app.use()` and routes calls;
 For example:
 
 ```js
