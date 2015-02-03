@@ -7,7 +7,7 @@ except with four arguments instead of three, specifically with the signature
   res.status(500).send(&#39;Something broke!&#39;);
 });
 </code></pre>
-<p>Though not strictly required, by convention you define error-handling middleware last, after other <code>app.use()</code> calls;
+<p>You define error-handling middleware last, after other <code>app.use()</code> and routes calls;
 For example:</p>
 <pre><code class="lang-js">var bodyParser = require(&#39;body-parser&#39;);
 var methodOverride = require(&#39;method-override&#39;);
