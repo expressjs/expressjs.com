@@ -3,6 +3,7 @@
 Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node modules for database systems in your Express app:
 
 * [Cassandra](#cassandra)
+* [CouchDB](#couchdb)
 * [LevelDB](#leveldb)
 * [MySQL](#mysql)
 * [MongoDB](#mongo)
@@ -29,6 +30,31 @@ client.execute('select key from system.local', function(err, result) {
   if (err) throw err;
   console.log(result.rows[0]);
 });
+```
+
+<a name="couchdb"></a>
+## CouchDB
+
+**Node module**: [nano](https://github.com/dscape/nano)  
+**Installation**: `$ npm install nano`  
+**Example**
+
+```js
+var nano = require('nano')('http://localhost:5984');
+nano.db.create('books');
+var books = nano.db.use('books');
+
+//Insert a book document in the books database
+books.insert({name: 'The Art of war'}, null, function(err, body) {
+  if (!err){
+    console.log(body);
+  }
+});
+
+//Get a list of all books
+books.list(function(err, body){
+  console.log(body.rows);
+}
 ```
 
 <a name="leveldb"></a>
@@ -202,7 +228,3 @@ db.serialize(function() {
 
 db.close();
 ```
-
-<!-- ## Riak
-
-## CouchDB -->
