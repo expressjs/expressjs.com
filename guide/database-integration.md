@@ -2,6 +2,7 @@
 
 Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node modules for database systems in your Express app:
 
+* [Cassandra](#cassandra)
 * [LevelDB](#leveldb)
 * [MySQL](#mysql)
 * [MongoDB](#mongo)
@@ -12,6 +13,23 @@ Adding database connectivity capability to Express apps is just a matter of load
 
 <div class="doc-box doc-notice">These database drivers are among many that are available.  For other options,
 search on the [npm](https://www.npmjs.com/) site.</div>
+
+<a name="cassandra"></a>
+## Cassandra
+
+**Node module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)  
+**Installation**: `$ npm install cassandra-driver`  
+**Example**
+
+```js
+var cassandra = require('cassandra-driver');
+var client = new cassandra.Client({ contactPoints: ['localhost']});
+
+client.execute('select key from system.local', function(err, result) {
+  if (err) throw err;
+  console.log(result.rows[0]);
+});
+```
 
 <a name="leveldb"></a>
 ## LevelDB
@@ -186,7 +204,5 @@ db.close();
 ```
 
 <!-- ## Riak
-
-## Cassandra
 
 ## CouchDB -->
