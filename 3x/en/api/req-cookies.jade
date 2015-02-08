@@ -1,0 +1,12 @@
+section
+  h3(id='req.cookies') req.cookies
+
+  p.
+    This object requires the <code>cookieParser()</code> middleware for use.
+    It contains cookies sent by the user-agent. If no cookies are sent, it 
+    defaults to <code>{}</code>.
+
+  +js.
+    // Cookie: name=tj
+    req.cookies.name
+    // => "tj"

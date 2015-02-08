@@ -1,0 +1,38 @@
+{
+  "name": "express",
+  "description": "Sinatra inspired web development framework",
+  "version": "3.0.0alpha1-pre",
+  "author": "TJ Holowaychuk <tj@vision-media.ca>",
+  "contributors": [ 
+    { "name": "TJ Holowaychuk", "email": "tj@vision-media.ca" }, 
+    { "name": "Aaron Heckmann", "email": "aaron.heckmann+github@gmail.com" },
+    { "name": "Ciaran Jessup", "email": "ciaranj@gmail.com" },
+    { "name": "Guillermo Rauch", "email": "rauchg@gmail.com" }
+  ],
+  "dependencies": {
+    "connect": "2.0.0",
+    "commander": "0.5.2",
+    "mime": "1.2.5",
+    "mkdirp": "0.3.0",
+    "debug": "*"
+  },
+  "devDependencies": {
+    "ejs": "*",
+    "mocha": "*",
+    "jade": "*",
+    "stylus": "*",
+    "should": "*",
+    "connect-redis": "*",
+    "github-flavored-markdown": "*"
+  },
+  "keywords": ["express", "framework", "sinatra", "web", "rest", "restful", "router"],
+  "repository": "git://github.com/visionmedia/express",
+  "main": "index",
+  "bin": { "express": "./bin/express" },
+  "scripts": {
+    "prepublish" : "npm prune",
+    "test": "make test"
+  },
+  "engines": { "node":">= 0.5.0 < 0.7.0" }
+}
+

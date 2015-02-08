@@ -1,0 +1,30 @@
+section
+  h3(id='req.param') req.param(name)
+
+  p.
+    Return the value of param <code>name</code> when present.
+
+  +js.
+    // ?name=tobi
+    req.param('name')
+    // => "tobi"
+
+    // POST name=tobi
+    req.param('name')
+    // => "tobi"
+    
+    // /user/tobi for /user/:name 
+    req.param('name')
+    // => "tobi"
+  
+  p Lookup is performed in the following order:
+  
+  ul
+    li <code>req.params</code>
+    li <code>req.body</code>
+    li <code>req.query</code>
+  
+  p.
+    Direct access to <code>req.body</code>, <code>req.params</code>,
+    and <code>req.query</code> should be favoured for clarity - unless
+    you truly accept input from each object.

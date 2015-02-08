@@ -1,0 +1,10 @@
+section
+  h3(id='req.stale') req.stale
+
+  p.
+    Check if the request is stale - aka Last-Modified and/or the ETag do not match,
+    indicating that the resource is "stale".
+
+  +js.
+    req.stale
+    // => true

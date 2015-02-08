@@ -1,0 +1,10 @@
+section
+  h3(id='app.set') app.set(name, value)
+
+  p.
+    Assigns setting <code>name</code> to <code>value</code>.
+
+  +js.
+    app.set('title', 'My Site');
+    app.get('title');
+    // => "My Site"

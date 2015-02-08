@@ -1,0 +1,53 @@
+section
+  h3(id='res.redirect') res.redirect([status], url)
+  p.
+    Redirect to the given <code>url</code> with optional <code>status</code> code
+    defaulting to 302 "Found".
+
+  +js.
+    res.redirect('/foo/bar');
+    res.redirect('http://example.com');
+    res.redirect(301, 'http://example.com');
+    res.redirect('../login');
+
+  p.
+    Express supports a few forms of redirection, first being
+    a fully qualified URI for redirecting to a different site:
+
+  +js.
+    res.redirect('http://google.com');
+
+  p.
+    The second form is the pathname-relative redirect, for example
+    if you were on <code>http://example.com/admin/post/new</code>, the 
+    following redirect to <code>/admin</code> would land you at <code>http://example.com/admin</code>:
+
+  +js.
+    res.redirect('/admin');
+
+  p.
+    This next redirect is relative to the <code>mount</code> point of the application. For example
+    if you have a blog application mounted at <code>/blog</code>, ideally it has no knowledge of
+    where it was mounted, so where a redirect of <code>/admin/post/new</code> would simply give you
+    <code>http://example.com/admin/post/new</code>, the following mount-relative redirect would give
+    you <code>http://example.com/blog/admin/post/new</code>:
+
+  +js.
+    res.redirect('admin/post/new');
+
+  p.
+    Pathname relative redirects are also possible. If you were
+    on <code>http://example.com/admin/post/new</code>, the following redirect
+    would land you at <code>http//example.com/admin/post</code>:
+
+  +js.
+    res.redirect('..');
+
+  p.
+    The final special-case is a <code>back</code> redirect, redirecting back to
+    the Referer (or Referrer), defaulting to <code>/</code> when missing.
+
+  +js.
+    res.redirect('back');
+  
+    
