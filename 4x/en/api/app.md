@@ -12,7 +12,7 @@ app.get('/', function(req, res){
 app.listen(3000);
 ```
 
-The `app` object has a methods for
+The `app` object has methods for
 * Routing HTTP requests; see for example, [app.METHOD](#app.METHOD) and [app.param](#app.param).
 * Configuring middlewware; see [app.route](#app.route).
 * Rendering HTML views; see [app.render](#app.render).
