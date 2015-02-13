@@ -16,7 +16,7 @@ This tutorial assumes that an instance of `express` named `app` is created and t
 
 The following code illustrates some example routes in an app.
 
-```js
+```
 // respond with "Hello World!" on the homepage
 app.get('/', function (req, res) {
   res.send('Hello World!');

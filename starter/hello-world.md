@@ -6,7 +6,7 @@ layout: page
 
 Here is an example of a very basic Express app.
 
-```js
+{% highlight js %}
 var express = require('express')
 var app = express()
 
@@ -22,7 +22,8 @@ var server = app.listen(3000, function () {
   console.log('Example app listening at http://%s:%s', host, port)
 
 })
-```
+{% endhighlight %}
+
 <div class="doc-box doc-notice">
 The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
 `req.pipe()`, `req.on('data', callback)` and anything else you would do without Express involved.
@@ -32,7 +33,7 @@ The app starts a server and listens on port 3000 for connection. It will respond
 
 Save the code in a file named `app.js` and run it with the following command.
 
-```sh
+```
 $ node app.js
 ```
 
