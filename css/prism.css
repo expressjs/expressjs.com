@@ -55,7 +55,16 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-	background: #fff;
+	background: #F7F7F7;
+}
+
+pre.language-sh {
+	background-color: #272727;
+}
+
+code.language-sh {
+	color: #4fbf40;
+	text-shadow: none;
 }
 
 /* Inline code */

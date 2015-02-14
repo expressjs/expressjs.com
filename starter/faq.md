@@ -50,10 +50,10 @@ within your application. With the following middleware setup, and a request
 for `GET /javascripts/jquery.js`, the first check would be `./public/javascripts/jquery.js`;
 if it does not exist, then the subsequent middleware will check `./files/javascripts/jquery.js`.
 
-```js
+~~~js
 app.use(express.static('public'));
 app.use(express.static('files'));
-```
+~~~
 
 ## How can I prefix a pathname for serving static files?
 
@@ -64,9 +64,9 @@ part of the path. Suppose you wanted `GET /files/javascripts/jquery.js`.
 You could mount the middleware at `/files`, exposing `/javascripts/jquery.js`
 as the `req.url`, allowing the middleware to serve the file:
 
-```js
+~~~js
 app.use('/public', express.static('public'));
-```
+~~~
 
 ## How do you handle 404s?
 
@@ -78,11 +78,11 @@ and found that none of them responded. All you need to
 do is add a middleware at the very bottom (below all others)
 to handle a 404:
 
-```js
+~~~js
 app.use(function(req, res, next){
   res.send(404, 'Sorry cant find that!');
 });
-```
+~~~
 
 ## How do you setup an error handler?
 
@@ -90,12 +90,12 @@ You define error-handling middleware the same way as other middleware,
 except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
 
 
-```js
+~~~js
 app.use(function(err, req, res, next){
   console.error(err.stack);
   res.send(500, 'Something broke!');
 });
-```
+~~~
 
 For more information, see [Error handling](/guide/error-handling.html).
 

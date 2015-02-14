@@ -51,12 +51,12 @@ $(function(){
 
   // code highlight
 
-  $('code.lang-js, pre.js code').each(function(){
-    $(this).addClass('language-javascript').removeClass('lang-js')
+  $('code.language-js').each(function(){
+    $(this).addClass('language-javascript').removeClass('language-js')
   })
 
-  $('code.lang-sh').each(function(){
-    $(this).addClass('language-bash').removeClass('lang-sh')
+  $('code.language-sh').each(function(){
+    $(this).parent().addClass('language-sh')
   })
 
   Prism.highlightAll()

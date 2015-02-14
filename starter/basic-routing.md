@@ -16,7 +16,7 @@ This tutorial assumes that an instance of `express` named `app` is created and t
 
 The following code illustrates some example routes in an app.
 
-```
+~~~js
 // respond with "Hello World!" on the homepage
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -36,6 +36,6 @@ app.put('/user', function (req, res) {
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 })
-```
+~~~
 
 For more details about routing, refer the [routing guide](/guide/routing.html).
