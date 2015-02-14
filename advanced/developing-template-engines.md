@@ -8,7 +8,7 @@ Use the `app.engine(ext, callback)` method to create your own template engine. `
 
 The following is an example of implementing a very simple template engine for rendering ".ntl" files.
 
-```js
+~~~js
 var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
@@ -21,19 +21,19 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
-```
+~~~
 
 Your app will now be able to render ".ntl" files. Create a file named "index.ntl" in the views directory with the following content.
 
-```
+~~~js
 #title#
 #message#
-```
+~~~
 Then, create the following route in your app.
 
-```js
+~~~js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 })
-```
+~~~
 On making a request to the home page, "index.ntl" will be rendered as HTML.

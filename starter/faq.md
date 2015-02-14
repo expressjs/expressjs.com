@@ -2,6 +2,8 @@
 layout: page
 ---
 
+# FAQ
+
 ## How should I structure my application?
 
 There is no definitive answer to this question. It depends 
