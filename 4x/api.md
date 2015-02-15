@@ -1,8 +1,7 @@
 ---
 layout: 4x-api
-apiVersion: 4.x
 ---
-<div id="api-doc">
+<div id="api-doc" markdown="1">
 
   <h1>4.x API</h1>
 

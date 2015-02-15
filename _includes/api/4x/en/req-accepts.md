@@ -8,7 +8,7 @@ The `type` value may be a single MIME type string (such as "application/json"),
 an extension name such as "json", a comma-delimited list, or an array. For a
 list or array, the method returns the *best* match (if any).
 
-```js
+~~~js
 // Accept: text/html
 req.accepts('html');
 // => "html"
@@ -32,6 +32,6 @@ req.accepts('png');
 req.accepts(['html', 'json']);
 req.accepts('html, json');
 // => "json"
-```
+~~~
 
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).

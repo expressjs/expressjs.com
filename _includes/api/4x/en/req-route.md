@@ -2,16 +2,16 @@
 
 The currently-matched route, a string.  For example:
 
-```js
+~~~js
 app.get('/user/:id?', function userIdHandler(req, res) {
   console.log(req.route);
   res.send('GET');
 })
-```
+~~~
 
 Example output from the previous snippet:
 
-```js
+~~~js
 { path: '/user/:id?',
   stack:
    [ { handle: [Function: userIdHandler],
@@ -22,4 +22,4 @@ Example output from the previous snippet:
        regexp: /^\/?$/i,
        method: 'get' } ],
   methods: { get: true } }
-```
+~~~

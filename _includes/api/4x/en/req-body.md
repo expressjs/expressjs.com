@@ -6,7 +6,7 @@ as [body-parser](https://www.npmjs.org/package/body-parser) and [multer](https:/
 
 This example shows how to use body-parsing middleware to populate `req.body`.
 
-```js
+~~~js
 var app = require('express')();
 var bodyParser = require('body-parser');
 var multer = require('multer'); 
@@ -19,4 +19,4 @@ app.post('/', function (req, res) {
   console.log(req.body);
   res.json(req.body);
 })
-```
+~~~

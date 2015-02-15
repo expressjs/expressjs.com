@@ -1,6 +1,8 @@
 <h3 id='res.sendFile'>res.sendFile(path [, options] [, fn])</h3>
 
-<div class="doc-box doc-info">`res.sendFile()` is supported from Express v4.8.0 onwards</div>
+<div class="doc-box doc-info" markdown="1">
+`res.sendFile()` is supported from Express v4.8.0 onwards
+</div>
 
 Transfers the file at the given `path`. Sets the `Content-Type` response HTTP header field
 based on the filename's extension. Unless the `root` option is set in
@@ -23,7 +25,7 @@ ending the request-response cycle, or by passing control to the next route.
 
 Here is an example of using `res.sendFile` with all its arguments.
 
-```js
+~~~js
 app.get('/file/:name', function (req, res, next) {
 
   var options = {
@@ -47,11 +49,11 @@ app.get('/file/:name', function (req, res, next) {
   });
 
 })
-```
+~~~
 
 `res.sendFile` provides fine-grained support for file serving as illustrated in the following example:
 
-```js
+~~~js
 app.get('/user/:uid/photos/:file', function(req, res){
   var uid = req.params.uid
     , file = req.params.file;
@@ -64,5 +66,5 @@ app.get('/user/:uid/photos/:file', function(req, res){
     }
   });
 });
-```
+~~~
 For more information, or if you have issues or concerns, see [send](https://github.com/pillarjs/send).

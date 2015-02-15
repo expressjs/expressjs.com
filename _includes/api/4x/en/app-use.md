@@ -2,7 +2,7 @@
 
 Mounts the [middleware](/guide/using-middleware.html) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
 
-<div class="doc-box doc-notice">
+<div class="doc-box doc-notice" markdown="1">
   A route will match any path, which follows its path immediately with a "<code>/</code>".
   For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>,
   <b>/apple/images/news</b>, and so on.  
@@ -12,17 +12,17 @@ Mounting a middleware at a `path` will cause the middleware function to be execu
 
 Since `path` defaults to "/", middleware mounted without a path will be executed for every request to the app.
 
-```js
+~~~js
 // this middleware will be executed for every request to the app
 app.use(function (req, res, next) {
   console.log('Time: %d', Date.now());
   next();
 })
-```
+~~~
 
 Middleware functions are executed sequentially, therefore the order of middleware inclusion is important.
 
-```js
+~~~js
 // this middleware will not allow the request to go beyond it
 app.use(function(req, res, next) {
   res.send('Hello World');
@@ -32,12 +32,14 @@ app.use(function(req, res, next) {
 app.get('/', function (req, res) {
   res.send('Welcome');
 })
-```
+~~~
 
 `path` can be a string representing a path, a path pattern, a regular expression to match paths,
 or an array of combinations thereof.
 
-<div class="doc-box doc-notice">The middleware in the below are simple examples.</div>
+<div class="doc-box doc-notice" markdown="1">
+The middleware in the below are simple examples.
+</div>
 
 <table class="doctable" border="1">
 
@@ -50,9 +52,9 @@ or an array of combinations thereof.
   <tbody>
 
     <tr>
-      <td>** Path **</td>
+      <td>Path</td>
       <td>
-        <pre><code class="lang-js">// will match paths starting with /abcd
+        <pre><code class="language-js">// will match paths starting with /abcd
 app.use('/abcd', function (req, res, next) {
   next();
 })</code></pre>
@@ -60,9 +62,9 @@ app.use('/abcd', function (req, res, next) {
     </tr>
 
     <tr>
-      <td>** Path Pattern **</td>
+      <td>Path Pattern</td>
       <td>
-        <pre><code class="lang-js">// will match paths starting with /abcd and /abd
+        <pre><code class="language-js">// will match paths starting with /abcd and /abd
 app.use('/abc?d', function (req, res, next) {
   next();
 })
@@ -85,9 +87,9 @@ app.use('/a(bc)?d', function (req, res, next) {
     </tr>
 
     <tr>
-      <td>** Regular Expression **</td>
+      <td>Regular Expression</td>
       <td>
-        <pre><code class="lang-js">// will match paths starting with /abc and /xyz
+        <pre><code class="language-js">// will match paths starting with /abc and /xyz
 app.use(/\/abc|\/xyz/, function (req, res, next) {
   next();
 })</code></pre>
@@ -95,9 +97,9 @@ app.use(/\/abc|\/xyz/, function (req, res, next) {
     </tr>
 
     <tr>
-      <td>** Array **</td>
+      <td>Array</td>
       <td>
-        <pre><code class="lang-js">// will match paths starting with /abcd, /xyza, /lmn, and /pqr
+        <pre><code class="language-js">// will match paths starting with /abcd, /xyza, /lmn, and /pqr
 app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
   next();
 })</code></pre>
@@ -124,15 +126,15 @@ as you would any other middleware function.
   <tbody>
 
     <tr>
-      <td>** Single Middleware **</td>
+      <td>Single Middleware</td>
       <td>You can define and mount a middleware function locally.
-<pre><code class="lang-js">app.use(function (req, res, next) {
+<pre><code class="language-js">app.use(function (req, res, next) {
   next();
 })
 </code></pre>
 A router is valid middleware.
 
-<pre><code class="lang-js">var router = express.Router();
+<pre><code class="language-js">var router = express.Router();
 router.get('/', function (req, res, next) {
   next();
 })
@@ -140,7 +142,7 @@ app.use(router);
 </code></pre>
 
 An Express app is valid middleware.
-<pre><code class="lang-js">var subApp = express();
+<pre><code class="language-js">var subApp = express();
 subApp.get('/', function (req, res, next) {
   next();
 })
@@ -150,10 +152,10 @@ app.use(subApp);
     </tr>
 
     <tr>
-      <td>**Series of Middleware**</td>
+      <td>Series of Middleware</td>
       <td>
         You can specify more than one middleware function at the same mount path.
-<pre><code class="lang-js">var r1 = express.Router();
+<pre><code class="language-js">var r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
 })
@@ -169,11 +171,11 @@ app.use(r1, r2);
     </tr>
 
     <tr>
-      <td>** Array **</td>
+      <td>Array</td>
       <td>
       Use an array to group middleware logically.
       If you pass an array of middleware as the first or only middleware parameters, then you _must_ specify the mount path.
-<pre><code class="lang-js">var r1 = express.Router();
+<pre><code class="language-js">var r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
 })
@@ -189,10 +191,10 @@ app.use('/', [r1, r2]);
     </tr>
 
     <tr>
-      <td>** Combination **</td>
+      <td>Combination</td>
       <td>
         You can combine all the above ways of mounting middleware.
-<pre><code class="lang-js">function mw1(req, res, next) { next(); }
+<pre><code class="language-js">function mw1(req, res, next) { next(); }
 function mw2(req, res, next) { next(); }
 
 var r1 = express.Router();
@@ -218,29 +220,29 @@ middleware in an Express app.
 
 Serve static content for the app from the "public" directory in the application directory:
 
-```js
+~~~js
 // GET /style.css etc
 app.use(express.static(__dirname + '/public'));
-```
+~~~
 
 Mount the middleware at "/static" to serve static content only when their request path is prefixed with "/static":
 
-```js
+~~~js
 // GET /static/style.css etc.
 app.use('/static', express.static(__dirname + '/public'));
-```
+~~~
 
 Disable logging for static content requests by loading the logger middleware after the static middleware:
 
-```js
+~~~js
 app.use(express.static(__dirname + '/public'));
 app.use(logger());
-```
+~~~
 
 Serve static files from multiple directories, but give precedence to "./public" over the others:
 
-```js
+~~~js
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/files'));
 app.use(express.static(__dirname + '/uploads'));
-```
+~~~

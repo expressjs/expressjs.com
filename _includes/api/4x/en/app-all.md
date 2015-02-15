@@ -1,7 +1,7 @@
 <h3 id='app.all'>app.all(path, callback [, callback ...])</h3>
 
 This method is like the standard [app.METHOD()](#app.METHOD) methods,
-except it matches _all_ HTTP verbs. 
+except it matches all HTTP verbs. 
 
 It's useful for mapping "global" logic for specific path prefixes or arbitrary matches.
 For example, if you put the following at the top of all other
@@ -11,21 +11,21 @@ that these callbacks do not have to act as end-points: `loadUser`
 can perform a task, then call `next()` to continue matching subsequent
 routes.
 
-```js
+~~~js
 app.all('*', requireAuthentication, loadUser);
-```
+~~~
 
 Or the equivalent:
 
-```js
+~~~js
 app.all('*', requireAuthentication)
 app.all('*', loadUser);
-```
+~~~
 
 Another example is white-listed "global" functionality. 
 The example is much like before, however it only restricts paths that start with
 "/api":
 
-```js
+~~~js
 app.all('/api/*', requireAuthentication);
-```
+~~~

@@ -43,8 +43,8 @@ With the built-in middleware gone, you must explicitly add all the
 middleware required to run your app.  Simply follow these steps:
 
 1. Install the module: `npm install --save <module-name>`
-2. In your app, require the module: `require('module-name');`
-3. Use the module according to its documentation: `app.use( ... );`
+2. In your app, require the module: `require('module-name')`
+3. Use the module according to its documentation: `app.use( ... )`
 
 The following table lists Express 3 middleware and their counterparts in Express 4.
 
@@ -112,16 +112,9 @@ the `router` middleware.
 The way you define routes is unchanged, but the routing system has two
 new features to help organize your routes:
 
-<ul class="doclist">
-  <li>
-    A new method, `app.route()`, to create chainable route
-    handlers for a route path.
-  </li>
-  <li>
-    A new class, `express.Router`, to create modular mountable
-    route handlers.
-  </li>
-</ul>
+{: .doclist }
+* A new method, `app.route()`, to create chainable route handlers for a route path.
+* A new class, `express.Router`, to create modular mountable route handlers.
 
 <h4 id="app-route">app.route() method</h4>
 
@@ -208,58 +201,105 @@ The following table lists other small but important changes in Express 4.
 Node 0.8.x.</td>
 </tr>
 <tr>
-<td>`http.createServer()`</td>
-<td>The http module is no longer needed. The app is started using
-`app.listen()`.</td>
+<td markdown="1">
+`http.createServer()`
+</td>
+<td markdown="1">
+The http module is no longer needed. The app is started using
+`app.listen()`.
+</td>
 </tr>
 <tr>
-<td>`app.configure()`</td>
-<td>`app.configure()` has been removed.  Use
+<td markdown="1">
+`app.configure()`
+</td>
+<td markdown="1">
+`app.configure()` has been removed.  Use
 `process.env.NODE_ENV` or
-`app.get('env')` to detect the environment and configure the app accordingly.</td>
+`app.get('env')` to detect the environment and configure the app accordingly.
+</td>
 </tr>
 <tr>
-<td>`json spaces`</td>
-<td>The
-`json spaces` application property is disabled by default in Express 4.</td>
+<td markdown="1">
+`json spaces`
+</td>
+<td markdown="1">
+The `json spaces` application property is disabled by default in Express 4.
+</td>
 </tr>
 <tr>
-<td>`req.accepted()`</td>
-<td>Use `req.accepts()`, `req.acceptsEncodings()`,
-`req.acceptsCharsets()`, and `req.acceptsLanguages()`.</td>
+<td markdown="1">
+`req.accepted()`
+</td>
+<td markdown="1">
+Use `req.accepts()`, `req.acceptsEncodings()`,
+`req.acceptsCharsets()`, and `req.acceptsLanguages()`.
+</td>
 </tr>
 <tr>
-<td>`res.location()`</td>
-<td>No longer resolves relative URLs.</td>
+<td markdown="1">
+`res.location()`
+</td>
+<td markdown="1">
+No longer resolves relative URLs.
+</td>
 </tr>
 <tr>
-<td>`req.params`</td>
-<td>Was an array, is now an object.</td>
+<td markdown="1">
+`req.params`
+</td>
+<td markdown="1">
+Was an array, is now an object.
+</td>
 </tr>
 <tr>
-<td>`res.locals`</td>
-<td>Was a function, is now an object.</td>
+<td markdown="1">
+`res.locals`
+</td>
+<td markdown="1">
+Was a function, is now an object.
+</td>
 </tr>
 <tr>
-<td>`res.headerSent`</td>
-<td>Changed to `res.headersSent`.</td>
+<td markdown="1">
+`res.headerSent`
+</td>
+<td markdown="1">
+Changed to `res.headersSent`.
+</td>
 </tr>
 <tr>
-<td>`app.route`</td>
-<td>Now available as `app.mountpath`.</td>
+<td markdown="1">
+`app.route`
+</td>
+<td markdown="1">
+Now available as `app.mountpath`.
+</td>
 </tr>
 <tr>
-<td>`res.on('header')`</td>
-<td>Removed.</td>
+<td markdown="1">
+`res.on('header')`
+</td>
+<td markdown="1">
+Removed.
+</td>
 </tr>
 <tr>
-<td>`res.charset`</td>
-<td>Removed.</td>
+<td markdown="1">
+`res.charset`
+</td>
+<td markdown="1">
+Removed.
+</td>
 </tr>
 <tr>
-<td>`res.setHeader('Set-Cookie', val)`</td>
-<td>Functionality is now limited to setting the basic cookie value. Use
-`res.cookie()` for added functionality.</td>
+<td markdown="1">
+`res.setHeader('Set-Cookie', val)`
+</td>
+<td markdown="1">
+Functionality is now limited to setting the basic cookie value. Use
+`res.cookie()` for added functionality.
+</td>
 </tr>
 </table>
 
@@ -486,14 +526,11 @@ Express 4 generator.
 
 Command options and use largely remain the same, with the following exceptions:
 
-<ul class="doclist">
-  <li>The `--sessions` option has been removed.</li>
-  <li>The `--jshtml` option has been removed.</li>
-  <li>
-    The `--hogan` option has been added to
-    support [Hogan.js](http://twitter.github.io/hogan.js/).
-  </li>
-</ul>
+{: .doclist }
+* The `--sessions` option has been removed.
+* The `--jshtml` option has been removed.
+* The `--hogan` option has been added to support [Hogan.js](http://twitter.github.io/hogan.js/).
+
 <h3 id="">Example</h3>
 
 Execute the following command to create an Express 4 app:

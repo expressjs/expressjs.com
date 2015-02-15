@@ -15,7 +15,7 @@ Then install the corresponding template engine npm package.
 $ npm install jade --save
 ~~~
 
-<div class="doc-box doc-notice">
+<div class="doc-box doc-notice" markdown="1">
 Express-compliant template engines such as Jade, export a function named `__express(filePath, options, callback)`, which is called by `res.render()` to render the template code.
 
 Some template engines do not follow this convention, the [Consolidate.js](https://www.npmjs.org/package/consolidate) library was created to map all of node's popular template engines to follow this convention, thus allowing them to work seamlessly within Express.

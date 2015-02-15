@@ -404,7 +404,6 @@ html[xmlns] .clearfix {
   margin: 1em 1em 1em 0;
   border: 1px solid #c6c6c6;
   border-collapse: collapse;
-  background-color: #f8f8f8;
   empty-cells:show;
   width: 100%;
 }
@@ -442,6 +441,13 @@ html[xmlns] .clearfix {
   padding: 10px;
   border-radius: 3px;
   margin: 20px 3% 20px 3%;
+}
+
+.doc-box pre {
+  font-size: 12px;
+  line-height: 14px;
+  padding: 0;
+  margin: 0;
 }
 
 .doc-box p {

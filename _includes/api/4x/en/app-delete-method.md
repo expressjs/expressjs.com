@@ -8,8 +8,8 @@ these callbacks can invoke `next('route')` to bypass the remaining route
 callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control
 to subsequent routes if there's no reason to proceed with the current route.
 
-```js
+~~~js
 app.delete('/', function (req, res) {
   res.send('DELETE request to homepage');
 });
-```
+~~~

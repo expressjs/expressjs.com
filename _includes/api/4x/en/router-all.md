@@ -11,21 +11,21 @@ that these callbacks do not have to act as end points; `loadUser`
 can perform a task, then call `next()` to continue matching subsequent
 routes.
 
-```js
+~~~js
 router.all('*', requireAuthentication, loadUser);
-```
+~~~
 
 Or the equivalent:
 
-```js
+~~~js
 router.all('*', requireAuthentication)
 router.all('*', loadUser);
-```
+~~~
 
 Another example of this is white-listed "global" functionality. Here
 the example is much like before, but it only restricts paths prefixed with
 "/api":
 
-```js
+~~~js
 router.all('/api/*', requireAuthentication);
-```
+~~~

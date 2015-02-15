@@ -10,7 +10,7 @@ Each route can have one or more handler functions, which is / are executed when 
 
 Route definition takes the following structure `app.METHOD(PATH, HANDLER)`, where `app` is an instance of `express`, `METHOD` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` is a path on the server, and `HANDLER` is the function executed when the route is matched.
 
-<div class="doc-box doc-notice">
+<div class="doc-box doc-notice" markdown="1">
 This tutorial assumes that an instance of `express` named `app` is created and the server is running. If you are not familiar with creating an app and starting it, refer to the [Hello world example](/starter/hello-world.html).
 </div>
 

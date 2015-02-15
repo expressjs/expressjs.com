@@ -8,7 +8,7 @@ See [app.use()](#app.use) for more information.
 Middleware is like a plumbing pipe, requests start at the first middleware you define
 and work their way "down" the middleware stack processing for each path they match.
 
-```js
+~~~js
 var express = require('express');
 var app = express();
 var router = express.Router();
@@ -34,7 +34,7 @@ router.use(function(req, res, next) {
 app.use('/foo', router);
 
 app.listen(3000);
-```
+~~~
 
 The "mount" path is stripped and is _not_ visible to the middleware `function`.
 The main effect of this feature is that mounted middleware may operate without
@@ -44,7 +44,7 @@ The order in which you define middleware with `router.use()` is very important.
 They are invoked sequentially, thus the order defines middleware precedence. For example,
 usually a logger is the very first middleware you would use, so every request is logged.
 
-```js
+~~~js
 var logger = require('morgan');
 
 router.use(logger());
@@ -52,27 +52,27 @@ router.use(express.static(__dirname + '/public'));
 router.use(function(req, res){
   res.send('Hello');
 });
-```
+~~~
 
 Now suppose you wanted to ignore logging requests for static files, but to continue
 logging routes and middleware defined after `logger()`.  You would simply move `static()` above:
 
-```js
+~~~js
 router.use(express.static(__dirname + '/public'));
 router.use(logger());
 router.use(function(req, res){
   res.send('Hello');
 });
-```
+~~~
 
 Another concrete example is serving files from multiple directories,
 giving precedence to "./public" over the others:
 
-```js
+~~~js
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/files'));
 app.use(express.static(__dirname + '/uploads'));
-```
+~~~
 
 The `router.use()` method also supports named parameters so that your mount points
 for other routers can benefit from preloading using named parameters.

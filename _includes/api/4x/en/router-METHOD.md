@@ -17,19 +17,20 @@ to match incoming requests. Query strings are _not_ considered when performing
 these matches, for example "GET /" would match the following route, as would
 "GET /?name=tobi".
 
-```js
+~~~js
 router.get('/', function(req, res){
   res.send('hello world');
 });
-```
+~~~
+
 You can also use regular expressions&mdash;useful if you have very specific
 constraints, for example the following would match "GET /commits/71dbb9c" as well
 as "GET /commits/71dbb9c..4c084f9".
 
-```js
+~~~js
 router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
   var from = req.params[0];
   var to = req.params[1] || 'HEAD';
   res.send('commit range ' + from + '..' + to);
 });
-```
+~~~

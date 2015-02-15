@@ -41,7 +41,7 @@ app.post('/', function (req, res) {
 
 Express supports the following routing methods corresponding to HTTP methods: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
 
-<div class="doc-box doc-info">
+<div class="doc-box doc-info" markdown="1">
 To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
 `app['m-search']('/', function ...`
 </div>
@@ -61,7 +61,7 @@ app.all('/secret', function (req, res, next) {
 
 Route paths, in combination with a request method, define the endpoints at which requests can be made to. They can be strings, string patterns, or regular expressions.
 
-<div class="doc-box doc-warn">Query strings are *not* a part of the route path.</div>
+<div class="doc-box doc-warn" markdown="1">Query strings are not a part of the route path.</div>
 
 Examples of route paths based on strings:
 
@@ -106,7 +106,7 @@ app.get('/ab(cd)?e', function(req, res) {
 })
 ~~~
 
-<div class="doc-box doc-info">
+<div class="doc-box doc-info" markdown="1">
 The characters ?, +, *, and () are subsets of their Regular Expression counterparts. The hyphen (-) and the dot (.) are interpreted literally by string-based paths.
 </div>
 

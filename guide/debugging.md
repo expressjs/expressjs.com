@@ -8,7 +8,7 @@ Express uses the [debug](https://github.com/visionmedia/debug) module
 internally to log information about route matches, middleware in use, application mode,
 and the flow of the request-response cycle.
 
-<div class="doc-box doc-info">
+<div class="doc-box doc-info" markdown="1">
 `debug` is like an augmented version of `console.log`. But unlike `console.log`, you don't have to
 comment out `debug` logs in production code. It is turned off by default and can be conditionally turned on with the use an environment variable named `DEBUG`.
 </div>

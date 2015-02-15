@@ -29,7 +29,7 @@ To install Express temporarily, and not add it to the dependencies list, omit th
 $ npm install express
 ~~~
 
-<div class="doc-box doc-info">
+<div class="doc-box doc-info" markdown="1">
 Node modules installed with the `--save` option are added to the `dependencies` list in the `package.json` file.
 Then using `npm install` in the app directory will automatically install modules in the dependencies list.
 </div>

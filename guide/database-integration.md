@@ -16,8 +16,10 @@ Adding database connectivity capability to Express apps is just a matter of load
 * [Redis](#redis)
 * [SQLite](#sqlite)
 
-<div class="doc-box doc-notice">These database drivers are among many that are available.  For other options,
-search on the [npm](https://www.npmjs.com/) site.</div>
+<div class="doc-box doc-notice" markdown="1">
+These database drivers are among many that are available.  For other options,
+search on the [npm](https://www.npmjs.com/) site.
+</div>
 
 <a name="cassandra"></a>
 

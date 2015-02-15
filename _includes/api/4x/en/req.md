@@ -7,124 +7,124 @@ by the parameters to the callback function in which you're working.
 
 For example:
 
-```js
+~~~js
 app.get('/user/:id', function(req, res){
-    res.send('user ' + req.params.id);
+  res.send('user ' + req.params.id);
 });
-```
+~~~
 
 But you could just as well have:
 
-```js
+~~~js
 app.get('/user/:id', function(request, response){
-    response.send('user ' + request.params.id);
+  response.send('user ' + request.params.id);
 });
-```
+~~~
 
 <h3 id='req.properties'>Properties</h3>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-app.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-baseUrl.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-body.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-cookies.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-fresh.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-hostname.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-ip.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-ips.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-originalUrl.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-params.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-path.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-protocol.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-query.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-route.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-secure.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-signedCookies.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-stale.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-subdomains.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-xhr.md %}
 </section>
 
 <h3 id='req.methods'>Methods</h3>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-accepts.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-acceptsCharsets.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-acceptsEncodings.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-acceptsLanguages.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-get.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-is.md %}
 </section>
 
-<section>
+<section markdown="1">
   {% include api/4x/en/req-param.md %}
 </section>
