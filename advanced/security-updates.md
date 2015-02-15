@@ -12,6 +12,10 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
 
 ## 4.x
 
+  * 4.11.1
+    * Fixed root path disclosure vulnerability in express.static, res.sendfile, and res.sendFile
+  * 4.10.7
+    * Fixed open redirect vulnerability in express.static (advisory (https://nodesecurity.io/advisories/serve-static-open-redirect), CVE-2015-1164 (http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164))
   * 4.8.8
     * Fixed directory traversal vulnerabilities in `express.static` ([advisory](http://nodesecurity.io/advisories/send-directory-traversal) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394))
   * 4.8.4
@@ -22,6 +26,10 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
 
 ## 3.x
 
+  * 3.19.1
+    * Fixed root path disclosure vulnerability in express.static, res.sendfile, and res.sendFile
+  * 3.19.0
+    * Fixed open redirect vulnerability in express.static (advisory (https://nodesecurity.io/advisories/serve-static-open-redirect), CVE-2015-1164 (http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164))
   * 3.16.10
     * Fixed directory traversal vulnerabilities in `express.static`.
   * 3.16.6
