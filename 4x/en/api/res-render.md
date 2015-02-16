@@ -3,7 +3,7 @@ Optional parameters:
 - `locals`, an object whose properties define local variables for the view.
 - `callback`, a callback function. If provided, the method returns both the
 possible error and rendered string, but does not perform an automated response.
-When an error occurs, the methohd invokes `next(err)` internally.
+When an error occurs, the method invokes `next(err)` internally.
 
 <div class="doc-box doc-notice">
 The local variable `cache` enables view caching. Set it to `true`,
