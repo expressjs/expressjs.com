@@ -1,34 +1,29 @@
-# ExpressJS.com
+# expressjs.com
 
-  The site for Express.
+This is the repository of the website [www.expressjs.com](http://www.expressjs.com). It is hosted directly from the repository as a [GitHub Pages](https://pages.github.com/) website.
 
-## Building
+## Local Setup
 
-Setup:
+GitHub Pages websites being served through [Jekyll](http://jekyllrb.com/), you will need to replicate the setup on your local machine to preview the website locally.
 
-```
-$ npm install -g serve
-$ npm install
-$ make
-$ serve .
-$ open http://localhost:3000
-```
+[Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) and [Jekyll](http://jekyllrb.com/docs/installation/) on your system, if you don't have them already.
 
-then rebuild changes with:
+Once installed, `cd` to the respository directory and run Jekyll using the following command:
 
 ```
-$ make
+$ jekyll s
 ```
+
+Then, load [http://localhost:4000/](http://localhost:4000/) on your browser.
+
+Jekyll uses a variant of Markdown known as [Kramdown](http://kramdown.gettalong.org/quickref.html), read up the docs if you need to go beyond basic Markdown in the doc files.
+
+To understand the template system used by Jekyll, read up the [Liquid template engine docs](http://liquidmarkup.org/).
 
 ## Contributing
 
-Markdown files are the authoring / source files that generate HTML files that are the publishing format.  The website is served from the HTML pages in the `gh-pages` branch.  Jade files are used to create a page with appropriate header, footer, and one or more markdown files.  Generally, you shouldn't need to edit Jade files unless you are adding a new page or reorganizing pages.
-
-  - __Don't__ edit the HTML directly.  Instead, edit the Markdown file(s), then generate the HTML using `make` to view your changes locally.  NOTE: You must delete the existing HTML file so that `make` will regenerate it.  You can also do `make clean` to delete all the HTML files, then run `make` to rebuild the entire site.
-  - In general, PRs should contain both Markdown file(s) and resultant generated HTML file(s).  However, very small PRs or commits can be just the Markdown source, with the understanding the the HTML will be regenerated later to incorporate numerous changes.
-  - To publish a change, you must commit the HTML files.  
+Feel free to make changes to the template files or the document files. The supporting docs are located in their respective directories, and the API docs are located under the `_includes` directory.
 
 ## Showcasing
 
-If you have an app you'd like to showcase on the site, do not just open an issue for it.
-Instead, _open a pull request_ for it.
+If you have an app you'd like to showcase on the site, open a pull request for it.
