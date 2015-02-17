@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Express application generator
+menu: starter
 ---
 
 # Express application generator

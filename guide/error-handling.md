@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Express error handling
+menu: guide
 ---
 
 # Error handling

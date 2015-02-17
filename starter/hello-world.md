@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Express "Hello World" example
+menu: starter
 ---
 
 # Hello world example

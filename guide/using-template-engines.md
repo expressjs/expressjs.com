@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Using template engines with Express
+menu: guide
 ---
 
 # Using template engines with Express

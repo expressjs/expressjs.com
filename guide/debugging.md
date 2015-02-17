@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Debugging Express
+menu: guide
 ---
 
 # Debugging Express

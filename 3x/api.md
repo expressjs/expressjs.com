@@ -1,6 +1,7 @@
 ---
 layout: 3x-api
 title: Express 3.x - API Reference
+menu: api
 ---
 <div id="api-doc" markdown="1">
 

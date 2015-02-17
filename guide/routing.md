@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Express routing
+menu: guide
 ---
 
 # Routing

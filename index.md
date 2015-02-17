@@ -1,6 +1,7 @@
 ---
 layout: home
 title: Express - Node.js web application framework
+menu: home
 ---
 
 <section id="home-content">

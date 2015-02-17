@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Express community
+menu: resources
 ---
 
 # Community

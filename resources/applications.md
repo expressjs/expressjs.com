@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Express applications
+menu: resources
 ---
 
 # Applications

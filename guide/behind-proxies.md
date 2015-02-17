@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Express behind proxies
+menu: guide
 ---
 
 # Express behind proxies

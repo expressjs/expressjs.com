@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Express glossary
+menu: resources
 ---
 
 # Glossary

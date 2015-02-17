@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Developing template engines for Express
+menu: advanced
 ---
 
 # Developing template engines for Express

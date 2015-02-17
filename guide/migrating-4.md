@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Migrating to Express 4
+menu: guide
 ---
 
 # Moving to Express 4

@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Express middleware
+menu: resources
 ---
 
 # Third-party middleware

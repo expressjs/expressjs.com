@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Using Express middleware
+menu: guide
 ---
 
 # Using middleware

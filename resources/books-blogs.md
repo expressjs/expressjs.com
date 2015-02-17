@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Express books and blogs
+menu: resources
 ---
 
 # Books and blogs
