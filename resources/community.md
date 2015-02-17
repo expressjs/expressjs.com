@@ -1,6 +1,9 @@
 ---
 layout: page
+title: Express community
 ---
+
+# Community
 
 ##Mailing List
 

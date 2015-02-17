@@ -1,5 +1,6 @@
 ---
 layout: page
+title: Express books and blogs
 ---
 
 # Books and blogs

@@ -1,5 +1,6 @@
 ---
 layout: 4x-api
+title: Express 4.x - API Reference
 ---
 <div id="api-doc" markdown="1">
 

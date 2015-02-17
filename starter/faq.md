@@ -1,5 +1,6 @@
 ---
 layout: page
+title: Express FAQ 
 ---
 
 # FAQ
@@ -107,11 +108,3 @@ You don't! There's no need to "render" HTML with `res.render()`.
 If you have a specific file, use `res.sendFile()`.
 If you are serving many assets from a directory use the `express.static()`
 middleware.
-
-## How big is the Express codebase?
-
-Express is a very small framework. The 3.0.0 release is only
-932 SLOC, and the mandatory portion of Connect which Express
-is built on is only 267 SLOC. The optional middleware bundled
-with Connect add an additional 1143 SLOC, and are lazy loaded
-upon use.

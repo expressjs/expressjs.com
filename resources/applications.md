@@ -1,6 +1,9 @@
 ---
 layout: page
+title: Express applications
 ---
+
+# Applications
 
 ##MySpace
 

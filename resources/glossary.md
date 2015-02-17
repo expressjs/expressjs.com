@@ -1,6 +1,9 @@
 ---
 layout: page
+title: Express glossary
 ---
+
+# Glossary
 
 <div class="doc-box doc-warn">This is currently a working draft</div>
 

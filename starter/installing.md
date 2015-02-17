@@ -1,6 +1,6 @@
 ---
-title: Installing Express
 layout: page
+title: Installing Express
 ---
 
 # Installing

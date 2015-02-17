@@ -1,6 +1,9 @@
 ---
 layout: page
+title: Migrating to Express 4
 ---
+
+# Moving to Express 4
 
 <h2 id="overview">Overview</h2>
 

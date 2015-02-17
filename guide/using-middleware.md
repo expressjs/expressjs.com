@@ -1,5 +1,6 @@
 ---
 layout: page
+title: Using Express middleware
 ---
 
 # Using middleware

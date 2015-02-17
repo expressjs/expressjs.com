@@ -1,5 +1,6 @@
 ---
 layout: page
+title: Debugging Express
 ---
 
 # Debugging Express
