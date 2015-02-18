@@ -63,7 +63,9 @@ app.all('/secret', function (req, res, next) {
 
 Route paths, in combination with a request method, define the endpoints at which requests can be made to. They can be strings, string patterns, or regular expressions.
 
-<div class="doc-box doc-warn" markdown="1">Query strings are not a part of the route path.</div>
+<div class="doc-box doc-warn" markdown="1">
+Query strings are not a part of the route path.
+</div>
 
 Examples of route paths based on strings:
 

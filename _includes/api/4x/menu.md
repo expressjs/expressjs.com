@@ -1,5 +1,5 @@
 <ul id="menu">
-    <li><a href="#express">Express</a></li>
+    <li><a href="#express">express()</a></li>
     <li id="app-api"><a href="#application">Application</a>
         <ul id="app-menu">
             <li><em>Properties</em>
