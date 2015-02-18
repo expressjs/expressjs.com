@@ -14,7 +14,7 @@ app.listen(3000);
 
 The `app` object has methods for
 * Routing HTTP requests; see for example, [app.METHOD](#app.METHOD) and [app.param](#app.param).
-* Configuring middlewware; see [app.route](#app.route).
+* Configuring middleware; see [app.route](#app.route).
 * Rendering HTML views; see [app.render](#app.render).
 * Registering a template engine; see [app.engine](#app.engine).
 
