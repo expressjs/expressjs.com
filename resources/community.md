@@ -1,3 +1,11 @@
+---
+layout: page
+title: Express community
+menu: resources
+---
+
+# Community
+
 ##Mailing List
 
 Join over 2000 Express users or browse over 5000

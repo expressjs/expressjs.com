@@ -1,3 +1,11 @@
+---
+layout: page
+title: Express applications
+menu: resources
+---
+
+# Applications
+
 ##MySpace
 
 No introduction required! Everyone knows MySpace,

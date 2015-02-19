@@ -1,3 +1,9 @@
+---
+layout: page
+title: Express behind proxies
+menu: guide
+---
+
 # Express behind proxies
 
 Using Express behind a reverse proxy (such as Varnish or Nginx)

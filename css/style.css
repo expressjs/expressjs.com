@@ -40,7 +40,8 @@ p em {
 }
 
 p {
-  margin: 20px 0;
+  margin: 10px 0;
+  line-height: 1.35em;
 }
 
 strong, th {
@@ -263,8 +264,6 @@ pre {
   color: #666;
   font-size: 14px;
   line-height: 1.4;
-  background: white;
-  border: 1px solid #eee;
   padding: 16px;
   border-radius: 3px;
   overflow: scroll;
@@ -405,7 +404,6 @@ html[xmlns] .clearfix {
   margin: 1em 1em 1em 0;
   border: 1px solid #c6c6c6;
   border-collapse: collapse;
-  background-color: #f8f8f8;
   empty-cells:show;
   width: 100%;
 }
@@ -447,7 +445,9 @@ html[xmlns] .clearfix {
 
 .doc-box pre {
   font-size: 12px;
-  background-color: #fdfef8 !important;
+  line-height: 14px;
+  padding: 0;
+  margin: 0;
 }
 
 .doc-box p {

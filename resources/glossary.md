@@ -1,3 +1,11 @@
+---
+layout: page
+title: Express glossary
+menu: resources
+---
+
+# Glossary
+
 <div class="doc-box doc-warn">This is currently a working draft</div>
 
 ### application
@@ -46,4 +54,4 @@ Part of a URL that identifies a resource.  For example, in `http://foo.com/produ
 
 ### router
 
-See http://expressjs.com/api#router
+See [http://expressjs.com/api#router](http://expressjs.com/api#router)

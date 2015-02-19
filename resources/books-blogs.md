@@ -1,3 +1,9 @@
+---
+layout: page
+title: Express books and blogs
+menu: resources
+---
+
 # Books and blogs
 
 <div class="doc-box doc-warn">Disclaimer: Unendorsed community content.</div>
@@ -21,8 +27,7 @@ Pack Publishing, June 2013.
 
 ###Add your book here!
 
-[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md),
-add a link to your book, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) and add a link to your book, then submit a pull request (GitHub login required).  Follow the format of the above listings.
 
 ## Blogs
 
