@@ -10,6 +10,8 @@ the options object, `path` must be an absolute path of the file.
 
 The details of the `options` object is listed in the following table.
 
+<div class="table-scroller" markdown="1">
+
 | Property        | Description                                     | Default     | Availability |
 |-----------------|-------------------------------------------------|-------------|--------------|
 |`maxAge`         | Sets the max-age property of the `Cache-Control` header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)| 0 |  |
@@ -17,6 +19,8 @@ The details of the `options` object is listed in the following table.
 | `lastModified`  | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.| Enabled | 4.9.0+ |
 | `headers`       | Object containing HTTP headers to serve with the file.|  |  |
 | `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" | &nbsp; |
+
+</div>
 
 The method invokes the callback function `fn(err)` when the transfer is complete
 or when an error occurs. If the callback function is specified and an error occurs,

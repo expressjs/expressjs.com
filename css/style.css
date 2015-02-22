@@ -404,7 +404,7 @@ html[xmlns] .clearfix {
   margin: 1em 1em 1em 0;
   border: 1px solid #c6c6c6;
   border-collapse: collapse;
-  empty-cells:show;
+  empty-cells: show;
   width: 100%;
 }
 
@@ -431,7 +431,6 @@ html[xmlns] .clearfix {
 .doctable ul {
   margin: 20px 0
 }
-
 
 /* doc boxes */
 
@@ -687,6 +686,11 @@ footer {
 
 @media all and (max-width: 899px) {
 
+  .table-scroller {
+    width: 100%;
+    overflow: scroll;
+  }
+
   #api-doc section {
     padding-left: 10px;
   }
@@ -897,6 +901,10 @@ footer {
 
 
 @media all and (max-width: 420px) {
+
+  #app-settings-property {
+    width: auto;
+  }
 
   #strongloop-header {
     display: none;
