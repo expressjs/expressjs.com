@@ -692,7 +692,7 @@ footer {
   }
 
   #api-doc section {
-    padding-left: 10px;
+    padding-left: 0;
   }
 
   code {
