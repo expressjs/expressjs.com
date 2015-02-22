@@ -176,6 +176,14 @@ VogueVerve is a minimalist fashion social platform. Follow, like and buy.
 
 Visit [VogueVerve](http://vogueverve.com)
 
+##Glip
+
+Real-time team collaboration with integrated task management, video conferencing, shared calendars and more.
+
+[![](/images/apps/screenshots/glip.png)](https://glip.com)
+
+Visit [Glip](https://glip.com)
+
 ##Add your app or site
 
 [Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/menu/en/resources/applications.md),
