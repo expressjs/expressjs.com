@@ -8,7 +8,7 @@ For more information, see the [routing guide](/guide/routing.html).
 
 Express supports the following routing methods corresponding to the HTTP methods of the same names:
 
-<table style="border: 0px; background: none; width: 600px;">
+<table style="border: 0px; background: none">
 <tr>
 <td style="background: none; border: 0px;" markdown="1">
 * `checkout`

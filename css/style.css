@@ -497,7 +497,7 @@ html[xmlns] .clearfix {
 
 #nav-button {
   position: absolute;
-  left: 5%;
+  left: 16px;
 }
 
 pre, code {
@@ -686,6 +686,10 @@ footer {
 /* responsive */
 
 @media all and (max-width: 899px) {
+
+  #api-doc section {
+    padding-left: 10px;
+  }
 
   pre code {
     word-break: break-all;
