@@ -695,11 +695,7 @@ footer {
     padding-left: 10px;
   }
 
-  pre code {
-    word-break: break-all;
-  }
-
-  td code {
+  code {
     word-break: break-all;
   }
 

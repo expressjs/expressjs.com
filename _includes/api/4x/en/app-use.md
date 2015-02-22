@@ -41,6 +41,7 @@ or an array of combinations thereof.
 The middleware in the below are simple examples.
 </div>
 
+<div class="table-scroller">
 <table class="doctable" border="1">
 
   <thead>
@@ -109,6 +110,7 @@ app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
   </tbody>
 
 </table>
+</div>
 
 `function` can be a middleware function, a series of middleware functions,
 an array of middleware functions, or a combination of all of them.
