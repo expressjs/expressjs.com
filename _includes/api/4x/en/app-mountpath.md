@@ -7,7 +7,7 @@ The `app.mountpath` property is the path pattern(s) on which a sub app was mount
 </div>
 
 ~~~js
-var express = required('express');
+var express = require('express');
 
 var app = express(); // the main app
 var admin = express(); // the sub app
