@@ -6,20 +6,20 @@
   </section>
   <div id="navbar">
       <ul id="navmenu">
-          <li><a href="/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Home</a></li>
+          <li><a href="{% if page.lang == 'en' %}/{% else %}/{{ page.lang }}/{% endif %}" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Home</a></li>
           <li>
               <ul id="getting-started-menu" class="menu">
-                  <li><a href="/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Getting started</a>
+                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Getting started</a>
                       <ul>
-                          <li><a href="/starter/installing.html">Installing</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html">Installing</a>
                           </li>
-                          <li><a href="/starter/generator.html">Express generator</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/generator.html">Express generator</a>
                           </li>
-                          <li><a href="/starter/hello-world.html">Hello world</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/hello-world.html">Hello world</a>
                           </li>
-                          <li><a href="/starter/basic-routing.html">Basic routing</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/basic-routing.html">Basic routing</a>
                           </li>
-                          <li><a href="/starter/faq.html">FAQ</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/faq.html">FAQ</a>
                           </li>
                       </ul>
                   </li>
@@ -27,23 +27,23 @@
           </li>
           <li>
               <ul id="guide-menu" class="menu">
-                  <li><a href="/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Guide</a>
+                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Guide</a>
                       <ul>
-                          <li><a href="/guide/routing.html">Routing</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/routing.html">Routing</a>
                           </li>
-                          <li><a href="/guide/using-middleware.html">Using middleware</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/using-middleware.html">Using middleware</a>
                           </li>
-                          <li><a href="/guide/using-template-engines.html">Using template engines</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/using-template-engines.html">Using template engines</a>
                           </li>
-                          <li><a href="/guide/error-handling.html">Error handling</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/error-handling.html">Error handling</a>
                           </li>
-                          <li><a href="/guide/debugging.html">Debugging</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/debugging.html">Debugging</a>
                           </li>
-                          <li><a href="/guide/behind-proxies.html">Express behind proxies</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/behind-proxies.html">Express behind proxies</a>
                           </li>
-                          <li><a href="/guide/migrating-4.html">Moving to Express 4</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/migrating-4.html">Moving to Express 4</a>
                           </li>
-                          <li><a href="/guide/database-integration.html">Database integration</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/database-integration.html">Database integration</a>
                           </li>
                       </ul>
                   </li>
@@ -51,13 +51,13 @@
           </li>
           <li>
               <ul id="application-menu" class="menu">
-                  <li><a href="/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API reference</a>
+                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API reference</a>
                       <ul>
-                          <li><a href="/4x/api.html">4.x</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/4x/api.html">4.x</a>
                           </li>
-                          <li><a href="/3x/api.html">3.x</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/3x/api.html">3.x</a>
                           </li>
-                          <li><a href="/2x/">2.x (deprecated)</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/2x/">2.x (deprecated)</a>
                           </li>
                       </ul>
                   </li>
@@ -65,11 +65,11 @@
           </li>
           <li>
               <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Advanced topics</a>
+                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Advanced topics</a>
                       <ul>
-                          <li><a href="/advanced/developing-template-engines.html">Template engines</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/developing-template-engines.html">Template engines</a>
                           </li>
-                          <li><a href="/advanced/security-updates.html">Security updates</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/security-updates.html">Security updates</a>
                           </li>
                       </ul>
                   </li>
@@ -77,17 +77,17 @@
           </li>
           <li>
               <ul id="resources-menu" class="menu">
-                  <li><a href="/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Resources</a>
+                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Resources</a>
                       <ul>
-                          <li><a href="/resources/glossary.html">Glossary</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/glossary.html">Glossary</a>
                           </li>
-                          <li><a href="/resources/middleware.html">Middleware</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/middleware.html">Middleware</a>
                           </li>
-                          <li><a href="/resources/community.html">Community</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/community.html">Community</a>
                           </li>
-                          <li><a href="/resources/books-blogs.html">Books and blogs</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/books-blogs.html">Books and blogs</a>
                           </li>
-                          <li><a href="/resources/applications.html">Applications</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/applications.html">Applications</a>
                           </li>
                       </ul>
                   </li>

@@ -6,12 +6,12 @@
   </section>
   <div id="navbar">
       <ul id="navmenu">
-          <li><a href="{% if page.lang == 'en' %}/{% else %}/{{ page.lang }}/{% endif %}" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>ホーム</a></li>
+          <li><a href="{% if page.lang == 'en' %}/{% else %}/{{ page.lang }}/{% endif %}" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Home</a></li>
           <li>
               <ul id="getting-started-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>入門</a>
+                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>начиная</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html">インストール</a>
+                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html">Установка</a>
                           </li>
                           <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/generator.html">Express generator</a>
                           </li>
@@ -27,7 +27,7 @@
           </li>
           <li>
               <ul id="guide-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>ガイド</a>
+                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Guide</a>
                       <ul>
                           <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/routing.html">Routing</a>
                           </li>
@@ -51,7 +51,7 @@
           </li>
           <li>
               <ul id="application-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>APIリファレンス</a>
+                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API reference</a>
                       <ul>
                           <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/4x/api.html">4.x</a>
                           </li>
@@ -63,7 +63,7 @@
           </li>
           <li>
               <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>高度なトピック</a>
+                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Advanced topics</a>
                       <ul>
                           <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/developing-template-engines.html">Template engines</a>
                           </li>
@@ -75,7 +75,7 @@
           </li>
           <li>
               <ul id="resources-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>リソース</a>
+                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Resources</a>
                       <ul>
                           <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/glossary.html">Glossary</a>
                           </li>
@@ -92,5 +92,5 @@
               </ul>
           </li>
       </ul>
-  </div><a href="http://strongloop.com/node-js/training/" title="Node and Express Training from StrongLoop" id="strongloop-header">ExpressおよびStrongLoopからNode.jsのトレーニング</a>
+  </div><a href="http://strongloop.com/node-js/training/" title="Node and Express Training from StrongLoop" id="strongloop-header">Express and Node.js Training from StrongLoop</a>
 </header>
