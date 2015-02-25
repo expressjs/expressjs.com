@@ -1,6 +1,6 @@
 # expressjs.com
 
-This is the repository of the website [www.expressjs.com](http://www.expressjs.com). It is hosted directly from the repository as a [GitHub Pages](https://pages.github.com/) website.
+This is the repository of the website [expressjs.com](http://expressjs.com). It is hosted directly from the repository as a [GitHub Pages](https://pages.github.com/) website.
 
 ## Local Setup
 
