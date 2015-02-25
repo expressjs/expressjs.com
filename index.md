@@ -2,10 +2,11 @@
 layout: home
 title: Express - Node.js web application framework
 menu: home
+lang: en
 ---
 
 <section id="home-content">
-    {% include header.html %}
+    {% include header-{{ page.lang }}.html %}
     <div id="overlay"></div>
     <section id="description"><a href="/" class="express">Express</a><span class="description">Fast, unopinionated, minimalist web framework for <a href='http://nodejs.org'>Node.js</a></span>
     </section>

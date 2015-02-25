@@ -2,6 +2,7 @@
 layout: page
 title: Express "Hello World" example
 menu: starter
+lang: en
 ---
 
 # Hello world example

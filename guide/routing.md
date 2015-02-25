@@ -2,6 +2,7 @@
 layout: page
 title: Express routing
 menu: guide
+lang: en
 ---
 
 # Routing

@@ -2,6 +2,7 @@
 layout: page
 title: Using template engines with Express
 menu: guide
+lang: en
 ---
 
 # Using template engines with Express

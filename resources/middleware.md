@@ -2,6 +2,7 @@
 layout: page
 title: Express middleware
 menu: resources
+lang: en
 ---
 
 # Third-party middleware

@@ -2,6 +2,7 @@
 layout: page
 title: Express basic routing tutorial
 menu: starter
+lang: en
 ---
 
 # Basic routing tutorial

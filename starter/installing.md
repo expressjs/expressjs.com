@@ -2,6 +2,7 @@
 layout: page
 title: Installing Express
 menu: starter
+lang: en
 ---
 
 # Installing

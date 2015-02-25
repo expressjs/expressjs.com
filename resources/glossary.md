@@ -2,6 +2,7 @@
 layout: page
 title: Express glossary
 menu: resources
+lang: en
 ---
 
 # Glossary

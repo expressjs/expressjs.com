@@ -2,6 +2,7 @@
 layout: page
 title: Express database integration
 menu: guide
+lang: en
 ---
 
 # Database integration

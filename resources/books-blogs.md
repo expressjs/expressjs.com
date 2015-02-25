@@ -2,6 +2,7 @@
 layout: page
 title: Express books and blogs
 menu: resources
+lang: en
 ---
 
 # Books and blogs

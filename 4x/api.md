@@ -2,24 +2,25 @@
 layout: 4x-api
 title: Express 4.x - API Reference
 menu: api
+lang: en
 ---
 <div id="api-doc" markdown="1">
 
   <h1>4.x API</h1>
 
   <a id='express' class='h2'></a>
-  {% include api/4x/en/express.md %}
+  {% include api/{{ page.lang }}/4x/express.md %}
 
   <a id='application' class='h2'></a>
-  {% include api/4x/en/app.md %}
+  {% include api/{{ page.lang }}/4x/app.md %}
 
   <a id='request' class='h2'></a>
-  {% include api/4x/en/req.md %}
+  {% include api/{{ page.lang }}/4x/req.md %}
 
   <a id='response' class='h2'></a>
-  {% include api/4x/en/res.md %}
+  {% include api/{{ page.lang }}/4x/res.md %}
 
   <a id='router' class='h2'></a>
-  {% include api/4x/en/router.md %}
+  {% include api/{{ page.lang }}/4x/router.md %}
 
 </div>

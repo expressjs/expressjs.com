@@ -2,6 +2,7 @@
 layout: page
 title: Developing template engines for Express
 menu: advanced
+lang: en
 ---
 
 # Developing template engines for Express

@@ -2,6 +2,7 @@
 layout: page
 title: Migrating to Express 4
 menu: guide
+lang: en
 ---
 
 # Moving to Express 4

@@ -6,12 +6,16 @@
   <body>
 
     <section class="content">
-      {% include header.html %}
+
+      {% include header-{{ page.lang }}.html %}
+
       <div id="overlay"></div>
+
       {{ content }}
+      
     </section>
 
-    {% include footer.html %}
+    {% include footer-{{ page.lang }}.html %}
 
   </body>
 
