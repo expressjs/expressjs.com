@@ -86,7 +86,7 @@ books.list(function(err, body){
 **Installation**
 
 ~~~sh
-$ npm install level
+$ npm install level levelup leveldown
 ~~~
 
 **Example**
