@@ -12,7 +12,7 @@ except with four arguments instead of three, specifically with the signature
 `(err, req, res, next)`):
 
 ~~~js
-app.use(function(err, req, res, next){
+app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
@@ -27,7 +27,7 @@ var methodOverride = require('method-override');
 
 app.use(bodyParser());
 app.use(methodOverride());
-app.use(function(err, req, res, next){
+app.use(function(err, req, res, next) {
   // logic
 });
 ~~~

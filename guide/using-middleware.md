@@ -25,6 +25,7 @@ An Express application can use the following kinds of middleware:
 
  - [Application-level middleware](#middleware.application)
  - [Router-level middleware](#middleware.router)
+ - [Error-handling middleware](#middleware.error-handling)
  - [Built-in middleware](#middleware.built-in)
  - [Third-party middleware](#middleware.third-party)
 
@@ -153,6 +154,19 @@ router.get('/user/:id', function (req, res, next) {
 // mount the router on the app
 app.use('/', router);
 ~~~
+
+<h3 id='middleware.error-handling'>Error-handling middleware</h3>
+
+Error-handling middleware are defined like other middleware, except with four arguments instead of three, specifically with the signature `(err, req, res, next)`):
+
+~~~js
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+~~~
+
+For details about error-handling middleware, refer [Error handling](/guide/error-handling.html).
 
 <h3 id='middleware.built-in'>Built-in middleware</h3>
 
