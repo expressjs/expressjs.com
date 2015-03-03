@@ -158,7 +158,7 @@ app.use('/', router);
 <h3 id='middleware.error-handling'>Error-handling middleware</h3>
 
 <div class="doc-box doc-notice" markdown="1">
-Error-handling middleware has an [arity](http://en.wikipedia.org/wiki/Arity) of 4, which must always be maintained to be identified as an error-handling middleware. Even if you don't need to use the `next` object, make sure specify it to maintain the signature, else it will be interpreted as a regular middleware, and fail to handle errors.
+An error-handling middleware has an [arity](http://en.wikipedia.org/wiki/Arity) of 4, which must always be maintained to be identified as an error-handling middleware. Even if you don't need to use the `next` object, make sure specify it to maintain the signature, else it will be interpreted as a regular middleware, and fail to handle errors.
 </div>
 
 Error-handling middleware are defined like other middleware, except with four arguments instead of three, specifically with the signature `(err, req, res, next)`):
