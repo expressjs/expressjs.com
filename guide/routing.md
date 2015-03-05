@@ -4,7 +4,7 @@ title: Express routing
 menu: guide
 lang: en
 ---
-
+d
 # Routing
 
 Routing refers to the definition of end points (URIs) to an application and how it responds to client requests.
@@ -123,7 +123,7 @@ app.get(/a/, function(req, res) {
   res.send('/a/')
 })
 
-// will match butterfly, dagonfly; but not butterflyman, dragonfly man, and so on
+// will match butterfly, dragonfly; but not butterflyman, dragonfly man, and so on
 app.get(/.*fly$/, function(req, res) {
   res.send('/.*fly$/')
 })
