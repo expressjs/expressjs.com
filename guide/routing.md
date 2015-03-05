@@ -4,7 +4,7 @@ title: Express routing
 menu: guide
 lang: en
 ---
-d
+
 # Routing
 
 Routing refers to the definition of end points (URIs) to an application and how it responds to client requests.
