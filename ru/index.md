@@ -6,7 +6,7 @@ lang: ru
 ---
 
 <section id="home-content">
-    {% include header-{{ page.lang }}.html %}
+    {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
     <section id="description"><a href="/" class="express">Express</a><span class="description">Быстро, unopinionated, минималистский веб-фреймворк для <a href='http://nodejs.org'>Node.js</a></span>
     </section>
@@ -35,3 +35,8 @@ lang: ru
     </div>
 </section>
 
+<!--
+<section id="announcements">
+  {% include announcement/announcement-{{ page.lang }}.md %}
+</section>
+-->

@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <section id="home-content">
-    {% include header-{{ page.lang }}.html %}
+    {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
     <section id="description"><a href="/" class="express">Express</a><span class="description">基于 <a href='http://nodejs.org'>Node.js</a> 平台的快速、灵活、简洁的 web 开发框架。</span>
     </section>
@@ -35,3 +35,8 @@ lang: zh
     </div>
 </section>
 
+<!--
+<section id="announcements">
+  {% include announcement/announcement-{{ page.lang }}.md %}
+</section>
+-->

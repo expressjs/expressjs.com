@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ page.lang }}">
 
   {% include head.html %}
 
@@ -7,15 +7,21 @@
 
     <section class="content">
 
-      {% include header-{{ page.lang }}.html %}
+      {% include header/header-{{ page.lang }}.html %}
 
       <div id="overlay"></div>
 
+      {% if page.lang != 'en' %}
+        <div id="i18n-notice-box" class="doc-box doc-warn">
+          {% include i18n-notice.html %}
+        </div>
+      {% endif %}
+    
       {{ content }}
       
     </section>
 
-    {% include footer-{{ page.lang }}.html %}
+    {% include footer/footer-{{ page.lang }}.html %}
 
   </body>
 

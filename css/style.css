@@ -89,6 +89,10 @@ strong, th {
   margin: 6px 0;
 }
 
+#announcements time {
+  font-weight: normal;
+}
+
 #announcements p:first-child {
   font-weight: bold;
   padding-left: 20px;
@@ -225,8 +229,12 @@ a {
   margin-left: 5px;
 }
 
-#intro {
+#intro, #doc-langs {
   margin-left: 5%;
+}
+
+#doc-langs {
+  font-size: 11px;
 }
 
 #sponsorship, #sponsorship a {
@@ -469,6 +477,19 @@ html[xmlns] .clearfix {
 .doc-warn {
   background: #f9f1f1;
   border: 1px solid #e2d3d3;
+}
+
+#i18n-notice-box {
+  margin-top: 100px;
+  position: relative;
+}
+
+#close-i18n-notice-box {
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  color: #550000;
+  cursor: pointer;
 }
 
 /* general */

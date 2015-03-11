@@ -42,6 +42,7 @@ Follow these steps:
 4. Update the `lang` variable in the copied markdown files.
 5. Update the `title` variable in the copied markdown files.
 6. Create the header and footer HTML files for the language in the `_includes/` directory, and make necessary edits to the contents.
-7. Create a copy of the `_includes/api/en` and rename it acording to the language code.
-8. Make sure to append `/\{\{ page.lang }}` to all the links within the site.
+7. Create the announcement file for the language in the `_includes/` directory.
+8. Create a copy of the `_includes/api/en` and rename it acording to the language code.
+9. Make sure to append `/\{\{ page.lang }}` to all the links within the site.
 

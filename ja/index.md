@@ -6,7 +6,7 @@ lang: ja
 ---
 
 <section id="home-content">
-    {% include header-{{ page.lang }}.html %}
+    {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
     <section id="description">
     <a href="/" class="express">Express</a>
@@ -40,3 +40,8 @@ lang: ja
     </div>
 </section>
 
+<!--
+<section id="announcements">
+  {% include announcement/announcement-{{ page.lang }}.md %}
+</section>
+-->
