@@ -6,7 +6,7 @@ Feel free to make changes to the template files or the document files. The suppo
 
 ## Help translate the docs to other languages
 
-We need volunteers to help translate the Express docs to other languages.
+We are looking for volunteers to help translate the Express docs to other languages.
 
 Interested? Please follow these steps:
 
