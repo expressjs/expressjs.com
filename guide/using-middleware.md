@@ -29,7 +29,7 @@ An Express application can use the following kinds of middleware:
  - [Built-in middleware](#middleware.built-in)
  - [Third-party middleware](#middleware.third-party)
 
-<h3 id='middleware.application'>Application level middleware</h3>
+<h2 id='middleware.application'>Application level middleware</h2>
 
 Application level middleware are bound to an instance of `express`, using `app.use()` and `app.VERB()`.
 
@@ -104,7 +104,7 @@ app.get('/user/:id', function (req, res, next) {
 });
 ~~~
 
-<h3 id='middleware.router'>Router level middleware</h3>
+<h2 id='middleware.router'>Router level middleware</h2>
 
 Router level middleware work just like application level middleware except they are bound to an instance of `express.Router()`.
 
@@ -155,7 +155,7 @@ router.get('/user/:id', function (req, res, next) {
 app.use('/', router);
 ~~~
 
-<h3 id='middleware.error-handling'>Error-handling middleware</h3>
+<h2 id='middleware.error-handling'>Error-handling middleware</h2>
 
 <div class="doc-box doc-notice" markdown="1">
 An error-handling middleware has an [arity](http://en.wikipedia.org/wiki/Arity) of 4, which must always be maintained to be identified as an error-handling middleware. Even if you don't need to use the `next` object, make sure specify it to maintain the signature, else it will be interpreted as a regular middleware, and fail to handle errors.
@@ -172,7 +172,7 @@ app.use(function(err, req, res, next) {
 
 For details about error-handling middleware, refer [Error handling](/guide/error-handling.html).
 
-<h3 id='middleware.built-in'>Built-in middleware</h3>
+<h2 id='middleware.built-in'>Built-in middleware</h2>
 
 As of 4.x, Express no longer depends on Connect. Except for `express.static`, all of Express' previously included middleware are now in separate repos. Please view [the list of middleware](https://github.com/senchalabs/connect#middleware).
 
@@ -221,7 +221,7 @@ app.use(express.static('files'));
 
 For more details about `serve-static` and its options, visit the [serve-static](https://github.com/expressjs/serve-static) documentation.
 
-<h3 id='middleware.third-party'>Third-party middleware</h3>
+<h2 id='middleware.third-party'>Third-party middleware</h2>
 
 Express is a routing and middleware web framework with minimal functionality of its own. Functionality to Express apps are added via third-party middleware.
 
