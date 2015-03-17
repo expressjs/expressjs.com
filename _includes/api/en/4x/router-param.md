@@ -50,7 +50,8 @@ By passing only a callback function, you can alter the `router.param()` API. For
 
 <div class="doc-box doc-info" markdown="1">
 The code in the next section can be migrated using the following, without the use of `router.param(callback)`:
-<pre class="language-javascript">
+
+<pre>
 router.get('/user/:id([0-9]+)', function(req, res){
   res.send('user ' + req.params.id);
 });
@@ -60,6 +61,7 @@ router.get('/range/:range(\\w+\.\.\\w+)', function(req, res){
   res.send('from ' + range[0] + ' to ' + range[1]);
 });
 </pre>
+
 </div>
 
 ~~~js
