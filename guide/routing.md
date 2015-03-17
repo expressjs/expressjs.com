@@ -64,6 +64,10 @@ app.all('/secret', function (req, res, next) {
 
 Route paths, in combination with a request method, define the endpoints at which requests can be made to. They can be strings, string patterns, or regular expressions.
 
+<div class="doc-box doc-info" markdown="1">
+  Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths; look up its docs for all the possibilities in defining route paths. [Express Route Tester](forbeslindesay.github.io/express-route-tester/) is a handy tool for testing Express routes.
+</div>
+
 <div class="doc-box doc-warn" markdown="1">
 Query strings are not a part of the route path.
 </div>
