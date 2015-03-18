@@ -1,6 +1,6 @@
 <ul id="menu">
     <li><a href="#express">express()</a></li>
-    <li id="app-api"><a href="#application">Application</a>
+    <li id="app-api"><a href="#app">Application</a>
         <ul id="app-menu">
             <li><em>Properties</em>
             </li>
@@ -54,7 +54,7 @@
             </li>
         </ul>
     </li>
-    <li id="req-api"><a href="#request">Request</a>
+    <li id="req-api"><a href="#req">Request</a>
         <ul id="req-menu">
             <li><em>Properties</em>
             </li>
@@ -114,7 +114,7 @@
             </li>
         </ul>
     </li>
-    <li id="res-api"><a href="#response">Response</a>
+    <li id="res-api"><a href="#res">Response</a>
         <ul id="res-menu">
             <li><em>Properties</em>
             </li>

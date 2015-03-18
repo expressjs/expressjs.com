@@ -66,7 +66,7 @@ $(function(){
   var prev;
   var n = 0;
 
-  var headings = $('h3').map(function(i, el){
+  var headings = $('.h2, h3').map(function(i, el){
     return {
       top: $(el).offset().top - 100,
       id: el.id
