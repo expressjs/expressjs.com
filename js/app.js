@@ -5,7 +5,7 @@ $(function(){
 
   // top link
   $('#top').click(function(e){
-    $('html, body').animate({scrollTop : 0}, 200);
+    $('html, body').animate({scrollTop : 0}, 500);
     return false;
   });
 
