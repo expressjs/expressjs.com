@@ -660,6 +660,7 @@ footer {
   height: 500px;
   text-align: right;
   font-size: 13px;
+  overflow-y: auto;
 }
 
 #menu em {
@@ -674,6 +675,7 @@ footer {
 #menu ul {
   height: 0;
   overflow-y: hidden;
+  overflow: hidden;
 }
 
 #menu ul.active {
