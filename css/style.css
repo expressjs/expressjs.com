@@ -654,7 +654,7 @@ footer {
 #menu {
   position: fixed;
   margin: 0;
-  padding: 0;
+  padding: 0 10px 0 0;
   top: 90px;
   right: 30px;
   height: 500px;
@@ -674,7 +674,6 @@ footer {
 
 #menu ul {
   height: 0;
-  overflow-y: hidden;
   overflow: hidden;
 }
 
@@ -965,4 +964,3 @@ footer {
   }
 
 }
-
