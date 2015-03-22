@@ -5,7 +5,7 @@ $(function(){
 
   // top link
   $('#top').click(function(e){
-    $('html, body').animate({scrollTop : 0}, 200);
+    $('html, body').animate({scrollTop : 0}, 500);
     return false;
   });
 
@@ -66,7 +66,7 @@ $(function(){
   var prev;
   var n = 0;
 
-  var headings = $('h3').map(function(i, el){
+  var headings = $('.h2, h3').map(function(i, el){
     return {
       top: $(el).offset().top - 100,
       id: el.id
@@ -86,6 +86,12 @@ $(function(){
   var currentApiPrefix;
   var parentMenuSelector;
   var lastApiPrefix;
+
+  $(window).bind('load resize', function() {
+
+    $('#menu').css('height', ($(this).height() - 150) + 'px');
+
+  });
 
   $(document).scroll(function() {
 
