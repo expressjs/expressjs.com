@@ -188,4 +188,5 @@
             </li>
         </ul>
     </li>
+    <li id="express-static-middleware"><a href="#express.static">express.static</a>
 </ul>
