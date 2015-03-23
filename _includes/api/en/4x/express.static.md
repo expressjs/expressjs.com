@@ -15,4 +15,4 @@ The optional `options` object can have the following properties.
 | `redirect`    | Redirect to trailing "/" when the pathname is a directory. | Boolean | `true` |
 | `setHeaders`  | Function for setting HTTP headers to serve with the file. | Function |  |
 
-For details on using the middleware, refer [Serving static files in Express](http://localhost:4000/starter/static-files.html).
+For details on using the middleware, refer [Serving static files in Express](http://expressjs.com/starter/static-files.html).
