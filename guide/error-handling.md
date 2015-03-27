@@ -18,8 +18,7 @@ app.use(function(err, req, res, next) {
 });
 ~~~
 
-You define error-handling middleware last, after other `app.use()` and routes calls.
-For example:
+You define error-handling middleware last, after other `app.use()` and routes calls; for example:
 
 ~~~js
 var bodyParser = require('body-parser');
