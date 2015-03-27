@@ -60,7 +60,7 @@ to handle a 404:
 
 ~~~js
 app.use(function(req, res, next) {
-  res.send(404, 'Sorry cant find that!');
+  res.status(404).send('Sorry cant find that!');
 });
 ~~~
 
@@ -72,7 +72,7 @@ except with four arguments instead of three; specifically with the signature `(e
 ~~~js
 app.use(function(err, req, res, next) {
   console.error(err.stack);
-  res.send(500, 'Something broke!');
+  res.status(500).send('Something broke!');
 });
 ~~~
 
