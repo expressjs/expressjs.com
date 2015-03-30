@@ -1,5 +1,12 @@
 <ul id="menu">
-    <li><a href="#express">express()</a></li>
+
+    <li id="express-api"><a href="#express">express()</a>
+    <ul id="express-menu">
+        <li><em>Properties</em></li>
+        <li id="express-static-middleware"><a href="#express.static">express.static</a></li>
+    </ul>
+    </li>
+
     <li id="app-api"><a href="#app">Application</a>
         <ul id="app-menu">
             <li><em>Properties</em>
@@ -188,5 +195,4 @@
             </li>
         </ul>
     </li>
-    <li id="express-static-middleware"><a href="#express.static">express.static</a>
 </ul>

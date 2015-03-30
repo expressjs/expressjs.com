@@ -22,7 +22,4 @@ lang: en
   <a id='router' class='h2'></a>
   {% include api/{{ page.lang }}/4x/router.md %}
 
-  <h2 id='express.static' class='h2'>express.static(root, [options])</h2>
-  {% include api/{{ page.lang }}/4x/express.static.md %}
-
 </div>

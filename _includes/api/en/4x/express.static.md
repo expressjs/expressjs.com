@@ -1,3 +1,5 @@
+<h3 id='express.static' class='h2'>express.static(root, [options])</h3>
+
 `express.static` is the only built-in middleware in Express. It is based on [serve-static](https://github.com/expressjs/serve-static), and is responsible for serving the static assets of an Express application.
 
 The `root` argument refers to the root directory from which the static assets are to be served.
