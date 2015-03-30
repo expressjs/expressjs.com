@@ -104,7 +104,7 @@ For example:
 app.use('/book/:id', function(req, res, next) {
   console.log('ID:', req.params.id);
   next();
-})
+});
 ~~~
 <h3 id="routing">
 The routing system
@@ -134,13 +134,13 @@ Here is an example of chained route handlers defined using `app.route()`.
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
-  })
+  });
   .post(function(req, res) {
     res.send('Add a book');
-  })
+  });
   .put(function(req, res) {
     res.send('Update the book');
-  })
+  });
 ~~~
 
 <h4 id="express-router">express.Router class</h4>
@@ -164,15 +164,15 @@ var router = express.Router();
 router.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
   next();
-})
+});
 // define the home page route
 router.get('/', function(req, res) {
   res.send('Birds home page');
-})
+});
 // define the about route
 router.get('/about', function(req, res) {
   res.send('About birds');
-})
+});
 
 module.exports = router;
 ~~~
