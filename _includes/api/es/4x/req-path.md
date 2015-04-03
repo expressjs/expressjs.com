@@ -7,3 +7,7 @@ Contains the path part of the request URL.
 req.path
 // => "/users"
 ~~~
+
+<div class="doc-box doc-info">
+The mount point is not included in `req.path`, when called from a middleware.
+</div>
