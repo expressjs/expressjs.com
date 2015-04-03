@@ -39,7 +39,7 @@ See also:
 Changes to Express core and middleware system
 </h3>
 
-Express 4 no longer depends on Connect, and removes all the built-in
+Express 4 no longer depends on Connect, and removes all built-in
 middleware from its core, except `express.static`. This means
 Express is now an independent routing and middleware web framework, and
 Express versioning and releases are not affected by middleware updates.
@@ -55,36 +55,36 @@ The following table lists Express 3 middleware and their counterparts in Express
 
 <table class="doctable" border="1">
 <tr><th>Express 3</th><th>Express 4</th></tr>
-<tr><td>express.bodyParser</td>
+<tr><td><code>express.bodyParser</code></td>
 <td><a href="https://github.com/expressjs/body-parser">body-parser</a> +
 <a href="https://github.com/expressjs/multer">multer</a></td></tr>
-<tr><td>express.compress</td>
+<tr><td><code>express.compress</code></td>
 <td><a href="https://github.com/expressjs/compression">compression</a></td></tr>
-<tr><td>express.cookieSession</td>
+<tr><td><code>express.cookieSession</code></td>
 <td><a href="https://github.com/expressjs/cookie-session">cookie-session</a></td></tr>
-<tr><td>express.cookieParser</td>
+<tr><td><code>express.cookieParser</code></td>
 <td><a href="https://github.com/expressjs/cookie-parser">cookie-parser</a></td></tr>
-<tr><td>express.logger</td>
+<tr><td><code>express.logger</code></td>
 <td><a href="https://github.com/expressjs/morgan">morgan</a></td></tr>
-<tr><td>express.session</td>
+<tr><td><code>express.session</code></td>
 <td><a href="https://github.com/expressjs/session">express-session</a></td></tr>
-<tr><td>express.favicon</td>
+<tr><td><code>express.favicon</code></td>
 <td><a href="https://github.com/expressjs/serve-favicon">serve-favicon</a></td></tr>
-<tr><td>express.responseTime</td>
+<tr><td><code>express.responseTime</code></td>
 <td><a href="https://github.com/expressjs/response-time">response-time</a></td></tr>
-<tr><td>express.errorHandler</td>
+<tr><td><code>express.errorHandler</code></td>
 <td><a href="https://github.com/expressjs/errorhandler">errorhandler</a></td></tr>
-<tr><td>express.methodOverride</td>
+<tr><td><code>express.methodOverride</code></td>
 <td><a href="https://github.com/expressjs/method-override">method-override</a></td></tr>
-<tr><td>express.timeout</td>
+<tr><td><code>express.timeout</code></td>
 <td><a href="https://github.com/expressjs/timeout">connect-timeout</a></td></tr>
-<tr><td>express.vhost</td>
+<tr><td><code>express.vhost</code></td>
 <td><a href="https://github.com/expressjs/vhost">vhost</a></td></tr>
-<tr><td>express.csrf</td>
+<tr><td><code>express.csrf</code></td>
 <td><a href="https://github.com/expressjs/csurf">csurf</a></td></tr>
-<tr><td>express.directory</td>
+<tr><td><code>express.directory</code></td>
 <td><a href="https://github.com/expressjs/serve-index">serve-index</a></td></tr>
-<tr><td>express.static</td>
+<tr><td><code>express.static</code></td>
 <td><a href="https://github.com/expressjs/serve-static">serve-static</a></td></tr>
 </table>
 
@@ -94,7 +94,7 @@ In most cases, you can simply replace the old version 3 middleware with
 its Express 4 counterpart. For details, see the module documentation in
 GitHub.
 
-<h4 id="app-use">app.use accepts parameters</h4>
+<h4 id="app-use"><code>app.use</code> accepts parameters</h4>
 
 In version 4 you can now load middleware on a path with a variable
 parameter and read the parameter value from the route handler.
@@ -121,12 +121,12 @@ new features to help organize your routes:
 * A new method, `app.route()`, to create chainable route handlers for a route path.
 * A new class, `express.Router`, to create modular mountable route handlers.
 
-<h4 id="app-route">app.route() method</h4>
+<h4 id="app-route"><code>app.route()</code> method</h4>
 
 The new `app.route()` method enables you to create chainable route handlers
 for a route path. Since the path is specified in a single location, it
 helps to create modular routes and reduce redundancy and typos. For more
-information on routes, see [Router() documentation](/4x/api.html#router).
+information on routes, see [`Router()` documentation](/4x/api.html#router).
 
 Here is an example of chained route handlers defined using `app.route()`.
 
@@ -143,7 +143,7 @@ app.route('/book')
   });
 ~~~
 
-<h4 id="express-router">express.Router class</h4>
+<h4 id="express-router"><code>express.Router</code> class</h4>
 
 The other feature to help organize routes is a new class,
 `express.Router`, that you can use to create modular mountable
@@ -207,10 +207,10 @@ Node 0.8.x.</td>
 </tr>
 <tr>
 <td markdown="1">
-`http.createServer()`
+`http.createServer()
 </td>
 <td markdown="1">
-The http module is no longer needed. The app is started using
+The `http` module is no longer needed. The app is started using
 `app.listen()`.
 </td>
 </tr>
@@ -254,7 +254,7 @@ No longer resolves relative URLs.
 `req.params`
 </td>
 <td markdown="1">
-Was an array, is now an object.
+Was an array; now an object.
 </td>
 </tr>
 <tr>
@@ -262,7 +262,7 @@ Was an array, is now an object.
 `res.locals`
 </td>
 <td markdown="1">
-Was a function, is now an object.
+Was a function; now an object.
 </td>
 </tr>
 <tr>
@@ -317,7 +317,7 @@ The files of interest are `app.js` and `package.json`.
 Version 3 app
 </h3>
 
-<h4 id="">app.js</h4>
+<h4 id=""><code>app.js</code></h4>
 
 Consider an Express v.3 application with the following `app.js` file:
 
@@ -355,7 +355,7 @@ http.createServer(app).listen(app.get('port'), function(){
 });
 ~~~
 
-<h4 id="">package.json</h4>
+<h4 id=""><code>package.json</code></h4>
 
 The accompanying version 3 `package.json` file might look
   something like this:
@@ -410,7 +410,7 @@ Make the following changes to `app.js`:
 
 <h3 id="">Version 4 app</h3>
 
-<h4 id="">package.json</h4>
+<h4 id=""><code>package.json</code></h4>
 
 Running the above `npm` command will update `package.json` as follows:
 
@@ -436,7 +436,7 @@ Running the above `npm` command will update `package.json` as follows:
 }
 ~~~
 
-<h4 id="">app.js</h4>
+<h4 id=""><code>app.js</code></h4>
 
 Then, remove invalid code, load the required middleware, and make other
 changes as necessary. Then `app.js` will look like this:
@@ -532,9 +532,9 @@ Express 4 generator.
 Command options and use largely remain the same, with the following exceptions:
 
 {: .doclist }
-* The `--sessions` option has been removed.
-* The `--jshtml` option has been removed.
-* The `--hogan` option has been added to support [Hogan.js](http://twitter.github.io/hogan.js/).
+* Removed the `--sessions` option.
+* Removed the `--jshtml` option.
+* Added the `--hogan` option to support [Hogan.js](http://twitter.github.io/hogan.js/).
 
 <h3 id="">Example</h3>
 
@@ -544,10 +544,9 @@ Execute the following command to create an Express 4 app:
 $ express app4
 ~~~
 
-If you look at the contents of the `app.js` file in the
-`app4` directory, you will notice that all the middleware
-(except `express.static`) required for the app are loaded as
-independent modules and the `router` middleware
+If you look at the contents of `app4/app.js`, you will notice 
+that all the middleware (except `express.static`) required for 
+the app are loaded as independent modules and the `router` middleware
 is no longer explicitly loaded in the app.
 
 You will also notice that the `app.js` file is now a Node module,
@@ -597,5 +596,5 @@ Next, change `"start": "node ./bin/www"` in the `package.json` file to `"start":
 
 With that, you just moved the functionality of `./bin/www` back to
 `app.js`.  Not that it is recommended, but the exercise helps
-to understand how `./bin/www` works and why `app.js`
+to understand how `./bin/www` works, and why `app.js`
 won't start on its own anymore.
