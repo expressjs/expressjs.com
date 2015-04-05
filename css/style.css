@@ -464,6 +464,10 @@ html[xmlns] .clearfix {
   margin: 0;
 }
 
+.doc-box pre[class*="language-"] {
+  background: none repeat scroll 0 0 #fff;
+}
+
 .doc-notice {
   background: #faf6e8;
   border: 1px solid #ded8c1;

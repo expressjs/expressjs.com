@@ -2,10 +2,24 @@
 
 Mounts the [middleware](/guide/using-middleware.html) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
 
-<div class="doc-box doc-notice" markdown="1">
+<div class="doc-box doc-info" markdown="1">
   A route will match any path, which follows its path immediately with a "<code>/</code>".
-  For example: <code>app.use('/apple', ...)</code> will match <b>/apple</b>, <b>/apple/images</b>,
-  <b>/apple/images/news</b>, and so on.  
+  For example: <code>app.use('/apple', ...)</code> will match "/apple", "/apple/images",
+  "/apple/images/news", and so on.  
+</div>
+
+<div class="doc-box doc-info" markdown="1">
+`req.originalUrl` in a middleware is a combination of `req.baseUrl` and `req.path`, as shown in the following example.
+
+~~~js
+app.use('/admin', function(req, res, next) {
+  // GET 'http://www.example.com/admin/new'
+  console.log(req.originalUrl); // '/admin/new'
+  console.log(req.baseUrl); // '/admin'
+  console.log(req.path); // '/new'
+  next();
+});
+~~~
 </div>
 
 Mounting a middleware at a `path` will cause the middleware function to be executed whenever the base of the requested path matches the `path`.
