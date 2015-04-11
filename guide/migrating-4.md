@@ -389,7 +389,7 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
 
 Make the following changes to `app.js`:
 
-1. The `http` module is longer required, so remove
+1. The `http` module is no longer required, so remove
     `var http = require('http');`
 
 2. The built-in Express middleware `express.favicon`,
