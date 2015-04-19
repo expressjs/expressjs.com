@@ -67,13 +67,13 @@ $ npm install
 Run the app (on MacOS or Linux):
 
 ~~~sh
-$ DEBUG=myapp ./bin/www
+$ DEBUG=myapp npm start
 ~~~
 
 On Windows, use this command:
 
 ~~~sh
-> set DEBUG=myapp & node .\bin\www
+> set DEBUG=myapp & npm start
 ~~~
 
 Then load `http://localhost:3000/` in your browser to access the app.
