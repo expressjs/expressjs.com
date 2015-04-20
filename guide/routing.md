@@ -75,7 +75,7 @@ Query strings are not a part of the route path.
 Examples of route paths based on strings:
 
 ~~~js
-// with match request to the root
+// will match request to the root
 app.get('/', function (req, res) {
   res.send('root');
 });
