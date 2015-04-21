@@ -51,8 +51,7 @@ By passing only a callback function, you can alter the `app.param()` API. For ex
 <div class="doc-box doc-info" markdown="1">
 The code in the next section can be migrated using the following, without the use of `app.param(callback)`:
 
-<pre>
-router.get('/user/:id([0-9]+)', function(req, res){
+<pre><code class="language-js">router.get('/user/:id([0-9]+)', function(req, res){
   res.send('user ' + req.params.id);
 });
 
@@ -60,7 +59,7 @@ router.get('/range/:range(\\w+\.\.\\w+)', function(req, res){
   var range = req.params.range.split('..');
   res.send('from ' + range[0] + ' to ' + range[1]);
 });
-</pre>
+</code></pre>
 
 </div>
 
