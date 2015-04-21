@@ -207,10 +207,10 @@ Node 0.8.x.</td>
 </tr>
 <tr>
 <td markdown="1">
-`http.createServer()
+`http.createServer()`
 </td>
 <td markdown="1">
-The `http` module is no longer needed. The app is started using
+The `http` module is no longer needed, unless you need to directly work with it (socket.io/SPDY/HTTPS). The app can be started using
 `app.listen()`.
 </td>
 </tr>
@@ -389,24 +389,18 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
 
 Make the following changes to `app.js`:
 
-1. The `http` module is no longer required, so remove
-    `var http = require('http');`
-
-2. The built-in Express middleware `express.favicon`,
+1. The built-in Express middleware `express.favicon`,
     `express.logger`, `express.methodOverride`,
     `express.session`, `express.bodyParser` and
     `express.errorHandler` are no longer available on the
     `express` object.  You must install their alternatives
     manually and load them in the app.
 
-3. You no longer need to load `app.router`.
+2. You no longer need to load `app.router`.
     It is not a valid Express 4 app object, so remove
     `app.use(app.router);`
 
-4. Make sure the middleware are loaded in the right order - load `errorHandler` after loading the app routes.
-
-5. Start the app with `app.listen()` instead of
-    `http.createServer`.
+3. Make sure the middleware are loaded in the right order - load `errorHandler` after loading the app routes.
 
 <h3 id="">Version 4 app</h3>
 
@@ -442,6 +436,7 @@ Then, remove invalid code, load the required middleware, and make other
 changes as necessary. Then `app.js` will look like this:
 
 ~~~js
+var http = require('http');
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -480,10 +475,18 @@ if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
 
-app.listen(app.get('port'), function(){
+var server = http.createServer(app);
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 ~~~
+
+<div class="doc-box doc-info" markdown="1">
+Unless you need to work directly with the `http` module (socket.io/SPDY/HTTPS), loading it is not required, and the app can be simple started this way:
+<pre><code class="language-js">app.listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});</code></pre>
+</div>
 
 <h3 id="">Run the app</h3>
 
