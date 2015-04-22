@@ -26,10 +26,12 @@ Here are some Express middleware modules:
   - [express-session](https://github.com/expressjs/session): previously `express.session`
   - [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn): easily use a CDN for your static assets, with multiple host support (ex. cdn1.host.com, cdn2.host.com).
   - [express-slash](https://github.com/ericf/express-slash): Express middleware for people who are strict about trailing slashes.
+  - [express-stormpath](https://github.com/stormpath/stormpath-express): Express middleware for user storage, authentication, authorization, SSO, and data security.
   - [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize): redirect HTTP requests containing uppercase to a canonical lowercase form.
   - [join-io](https://github.com/coderaiser/join-io "join-io"): join files on a fly to reduce requests count
   - [method-override](https://github.com/expressjs/method-override): previously `express.methodOverride`
   - [morgan](https://github.com/expressjs/morgan): previously `logger`
+  - [passport](https://github.com/jaredhanson/passport): Express middleware for authentication.
   - [response-time](https://github.com/expressjs/response-time): previously `express.responseTime`
   - [serve-favicon](https://github.com/expressjs/serve-favicon): previously `express.favicon`
   - [serve-index](https://github.com/expressjs/serve-index): previousy `express.directory`
