@@ -18,13 +18,13 @@ Manning Publications, early 2015.
  - **[Express.js in Action](http://www.manning.com/hahn/)**,
 Manning Publications, early 2015.
  - **[Mastering Web Application Development with Express](https://www.packtpub.com/web-development/mastering-web-application-development-express-raw)**,
-Pack Publishing, September 2014.
+Packt Publishing, September 2014.
  - **[Web Development with Node and Express](http://shop.oreilly.com/product/0636920032977.do)**,
 O'Reilly Media, July 2014.
  - **[Node.js in Action](http://www.manning.com/cantelon/)**,
 Manning Publications, October 2013.
  - **[Express Web Application Development](https://www.packtpub.com/web-development/express-web-application-development)**,
-Pack Publishing, June 2013.
+Packt Publishing, June 2013.
 
 ###Add your book here!
 
