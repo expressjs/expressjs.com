@@ -46,7 +46,7 @@ app.use('/static', express.static('public'));
 
 Now, you will be able to load the files under the `public` directory, from the path prefix "/static".
 
-~~~
+~~~js
 http://localhost:3000/static/images/kitten.jpg
 http://localhost:3000/static/css/style.css
 http://localhost:3000/static/js/app.js
