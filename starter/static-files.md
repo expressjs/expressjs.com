@@ -17,7 +17,7 @@ app.use(express.static('public'));
 
 Now, you will be able to load the files under the `public` directory:
 
-~~~
+~~~js
 http://localhost:3000/images/kitten.jpg
 http://localhost:3000/css/style.css
 http://localhost:3000/js/app.js
