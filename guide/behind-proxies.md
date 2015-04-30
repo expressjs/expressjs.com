@@ -7,7 +7,7 @@ lang: en
 
 # Express behind proxies
 
-When running an Express app behind a proxy, the application variable `trust proxy` must be set (using [app.set()](/4x/api.html#app.set)) to one of the possible values listed in the following table.
+When running an Express app behind a proxy, set (using [app.set()](/4x/api.html#app.set)) the application variable `trust proxy` to one of the values listed in the following table.
 
 <div class="doc-box doc-info" markdown="1">
 While the app will not fail to run if the application variable `trust proxy` is not set, it will incorrectly register the proxy's IP address as the client IP address unless `trust proxy` is configured.
