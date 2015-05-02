@@ -274,6 +274,7 @@ pre {
   padding: 16px;
   border-radius: 3px;
   overflow: scroll;
+  border: 1px solid #ddd;
 }
 
 pre code {
