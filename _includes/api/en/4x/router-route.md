@@ -42,5 +42,5 @@ router.route('/users/:user_id')
 })
 ~~~
 
-This apporach re-uses the single '/users/:user_id' path and add handlers for
+This approach re-uses the single '/users/:user_id' path and add handlers for
 various HTTP methods.
