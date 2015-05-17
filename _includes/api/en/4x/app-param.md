@@ -97,3 +97,19 @@ app.get('/range/:range', function(req, res) {
   res.send('from ' + range[1] + ' to ' + range[2]);
 });
 ~~~
+
+<div class="doc-box doc-info" markdown="1">
+The '`.`' character can't be used to caputure a character in your capturing regexp (for example you can't use `'/user-.+/'` to capture `'users-gami'`. Use `[\\s\\S]` or `[\\w\\W]` instead (as in `'/user-[\\s\\S]+/'`).
+Exemples: 
+
+<pre><code class="language-js">//captures '1-a_6' but not '543-azser-sder'
+router.get('/[0-9]+-[[\\w]]*', function); 
+
+//captures '1-a_6' and '543-az(ser"-sder' but not '5-a s'
+router.get('/[0-9]+-[[\\S]]*', function); 
+
+//captures all (equivalent to '.*')
+router.get('[[\\s\\S]]*', function); 
+</code></pre>
+
+</div>
