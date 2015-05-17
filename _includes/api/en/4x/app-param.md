@@ -99,7 +99,7 @@ app.get('/range/:range', function(req, res) {
 ~~~
 
 <div class="doc-box doc-info" markdown="1">
-The '`.`' character can't be used to caputure a character in your capturing regexp (for example you can't use `'/user-.+/'` to capture `'users-gami'`. Use `[\\s\\S]` or `[\\w\\W]` instead (as in `'/user-[\\s\\S]+/'`).
+The '`.`' character can't be used to capture a character in your capturing regexp (for example you can't use `'/user-.+/'` to capture `'users-gami'`. Use `[\\s\\S]` or `[\\w\\W]` instead (as in `'/user-[\\s\\S]+/'`).
 
 Examples: 
 
