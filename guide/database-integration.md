@@ -291,3 +291,42 @@ db.serialize(function() {
 
 db.close();
 ~~~
+
+<a name="elasticsearch"></a>
+
+## ElasticSearch
+
+**Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)  
+**Installation**
+
+~~~sh
+$ npm install elasticsearch
+~~~
+
+**Example**
+
+~~~js
+
+var elasticsearch = require('elasticsearch');
+var client = elasticsearch.Client({
+  host: 'localhost:9200'  
+});
+
+client.search({
+  index: 'books',
+  type: 'book',
+  body: {
+    query: {
+      multi_match: {
+        query: 'express js',
+        fields: ['title', 'description']
+      }
+    }
+  }
+}).then(function(response) {
+  var hits = reponse.hits.hits;
+}, function(error) {
+  console.trace(error.message);
+});
+
+~~~
