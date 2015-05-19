@@ -306,7 +306,6 @@ $ npm install elasticsearch
 **Example**
 
 ~~~js
-
 var elasticsearch = require('elasticsearch');
 var client = elasticsearch.Client({
   host: 'localhost:9200'  
@@ -328,5 +327,4 @@ client.search({
 }, function(error) {
   console.trace(error.message);
 });
-
 ~~~
