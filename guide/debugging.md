@@ -113,7 +113,7 @@ You can enable the debug statements with the following command
 $ DEBUG=sample-app node ./bin/www
 ~~~
 
-You can specify more than one debug namespace by assignning a comma separated list of names, as shown below.
+You can specify more than one debug namespace by assigning a comma separated list of names, as shown below.
 
 ~~~sh
 $ DEBUG=http,mail,express:* node index.js
