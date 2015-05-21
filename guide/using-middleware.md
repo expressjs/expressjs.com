@@ -188,7 +188,7 @@ The optional `options` object can have the following properties.
 |---------------|-----------------------------------------------------------------------|-------------|-----------------|
 | `dotfiles`    | Option for serving dotfiles. Possible values are "allow", "deny", and "ignore" | String | "ignore" |
 | `etag`        | Enable or disable etag generation  | Boolean | `true` |
-| `extensions`  | Sets file extension fallbacks. | Boolean | `false` |
+| `extensions`  | Sets file extension fallbacks. | Array | `[]` |
 | `index`       | Sends directory index file. Set `false` to disable directory indexing. | Mixed | "index.html" |
  `lastModified` | Set the `Last-Modified` header to the last modified date of the file on the OS. Possible values are `true` or `false`. | Boolean | `true` |
 | `maxAge`      | Set the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms) | Number | 0 |
