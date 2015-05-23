@@ -18,6 +18,7 @@ Adding database connectivity capability to Express apps is just a matter of load
 * [PostgreSQL](#postgres)
 * [Redis](#redis)
 * [SQLite](#sqlite)
+* [ElasticSearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
 These database drivers are among many that are available.  For other options,
