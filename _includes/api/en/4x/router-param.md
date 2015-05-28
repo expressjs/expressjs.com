@@ -54,7 +54,7 @@ The middleware returned by the function decides the behavior of what happens whe
 
 In this example, the `router.param(name, callback)` signature is modified to `router.param(name, accessId)`. Instead of accepting a name and a callback, `router.param()` will now accept a name and a number.
 
-```
+~~~js
 var express = require('express');
 var app = express();
 var router = express.Router();
@@ -84,11 +84,11 @@ app.use(router);
 app.listen(3000, function () {
   console.log('Ready');
 })
-```
+~~~
 
 In this example, the `router.param(name, callback)` signature remains the same, but instead of a middleware callback, a custom data type checking function has been defined to validate the data type of the user id.
 
-```
+~~~js
 router.param(function(param, validator) {
   return function (req, res, next, val) {
     if (validator(val)) {
@@ -103,4 +103,4 @@ router.param(function(param, validator) {
 router.param('id', function (candidate) {
   return !isNaN(parseFloat(candidate)) && isFinite(candidate);
 });
-```
+~~~
