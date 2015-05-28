@@ -46,57 +46,61 @@ app.get('/user/:id', function (req, res) {
 `app.param(callback)` is deprecated as of v4.11.0.
 </div>
 
-By passing only a callback function, you can alter the `app.param()` API. For example the [express-params](http://github.com/expressjs/express-params) defines the following callback which allows you to restrict parameters to a given regular expression.
+The behavior of the `app.param(name, callback)` method can be altered entirely by passing only a function to `app.param()`. This function is a custom implementation of how `app.param(name, callback)` should behave - it accepts two parameters and must return a middleware.
 
-<div class="doc-box doc-info" markdown="1">
-The code in the next section can be migrated using the following, without the use of `app.param(callback)`:
+The first parameter of this function is the name of the URL parameter that should be captured, the second parameter can be any JavaScript object which might be used for returning the middleware implementation.
 
-<pre><code class="language-js">router.get('/user/:id([0-9]+)', function(req, res){
-  res.send('user ' + req.params.id);
-});
+The middleware returned by the function decides the behavior of what happens when a URL parameter is captured.
 
-router.get('/range/:range(\\w+\.\.\\w+)', function(req, res){
-  var range = req.params.range.split('..');
-  res.send('from ' + range[0] + ' to ' + range[1]);
-});
-</code></pre>
+In this example, the `app.param(name, callback)` signature is modified to `app.param(name, accessId)`. Instead of accepting a name and a callback, `app.param()` will now accept a name and a number.
 
-</div>
+```
+var express = require('express');
+var app = express();
 
-~~~js
-app.param(function(name, fn) {
-  if (fn instanceof RegExp) {
-    return function(req, res, next, val) {
-      var captures;
-      if (captures = fn.exec(String(val))) {
-        req.params[name] = captures;
-        next();
-      } else {
-        next('route');
-      }
+// customizing the behavior of app.param()
+app.param(function(param, option) {
+  return function (req, res, next, val) {
+    if (val == option) {
+      next();
+    }
+    else {
+      res.sendStatus(403);
     }
   }
 });
-~~~
 
-The method could now be used to effectively validate parameters (and optionally parse them to provide capture groups):
+// using the customized app.param()
+app.param('id', 1337);
 
-~~~js
-// validation rule for id: should be one or more digits
-app.param('id', /^\d+$/);
+// route to trigger the capture
+app.get('/user/:id', function (req, res) {
+  res.send('OK');
+})
 
-app.get('/user/:id', function(req, res) {
-  res.send('user ' + req.params.id);
+app.listen(3000, function () {
+  console.log('Ready');
+})
+```
+
+In this example, the `app.param(name, callback)` signature remains the same, but instead of a middleware callback, a custom data type checking function has been defined to validate the data type of the user id.
+
+```
+app.param(function(param, validator) {
+  return function (req, res, next, val) {
+    if (validator(val)) {
+      next();
+    }
+    else {
+      res.sendStatus(403);
+    }
+  }
+})
+
+app.param('id', function (candidate) {
+  return !isNaN(parseFloat(candidate)) && isFinite(candidate);
 });
-
-// validation rule for range: should start with one more alphanumeric characters, followed by two dots, and end with one more alphanumeric characters
-app.param('range', /^(\w+)\.\.(\w+)?$/);
-
-app.get('/range/:range', function(req, res) {
-  var range = req.params.range;
-  res.send('from ' + range[1] + ' to ' + range[2]);
-});
-~~~
+```
 
 <div class="doc-box doc-info" markdown="1">
 The '`.`' character can't be used to capture a character in your capturing regexp. For example you can't use `'/user-.+/'` to capture `'users-gami'`, use `[\\s\\S]` or `[\\w\\W]` instead (as in `'/user-[\\s\\S]+/'`.
