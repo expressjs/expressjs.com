@@ -43,7 +43,7 @@ app.get('/user/:id', function (req, res) {
 ~~~
 
 <div class="doc-box doc-warn" markdown="1">
-`app.param(callback)` is deprecated as of v4.11.0.
+The following section describes `router.param(callback)`, which is deprecated as of v4.11.0.
 </div>
 
 The behavior of the `app.param(name, callback)` method can be altered entirely by passing only a function to `app.param()`. This function is a custom implementation of how `app.param(name, callback)` should behave - it accepts two parameters and must return a middleware.
