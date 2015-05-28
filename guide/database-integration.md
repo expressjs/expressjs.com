@@ -324,7 +324,7 @@ client.search({
     }
   }
 }).then(function(response) {
-  var hits = reponse.hits.hits;
+  var hits = response.hits.hits;
 }, function(error) {
   console.trace(error.message);
 });
