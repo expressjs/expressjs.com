@@ -34,7 +34,7 @@ $(function(){
 
   // the api doc cannot be edited individually, we'll have to link to the dir instead
   if (fileName == 'api.html') {
-    editPath = branchPath + '/tree/gh-pages/_includes/api/'+ currentVersion +'/en';
+    editPath = branchPath + '/tree/gh-pages/_includes/api/en/'+ currentVersion;
   }
   // link to individual doc files
   else {
