@@ -24,7 +24,6 @@ examples for inspiration:
 Also, there are third-party extensions for Express, which simplify some of these patterns:
 
 * [Resourceful routing](https://github.com/expressjs/express-resource)
-* [Namespaced routing](https://github.com/expressjs/express-namespace)
 
 ## How do I define models?
 
