@@ -51,7 +51,7 @@ An HTTP response. A server returns an HTTP response message to the client. The r
 
 ### route
 
-Part of a URL that identifies a resource.  For example, in `http://foo.com/products`, "/products/id" is the route.
+Part of a URL that identifies a resource.  For example, in `http://foo.com/products/id`, "/products/id" is the route.
 
 ### router
 
