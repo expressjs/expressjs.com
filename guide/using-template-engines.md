@@ -30,7 +30,7 @@ Once the view engine is set, you don't have to explicitly specify the engine or 
 app.set('view engine', 'jade');
 ~~~
 
-Create a Jade template files named "index.jade" in the views directory, with the following content.
+Create a Jade template file named "index.jade" in the views directory, with the following content.
 
 ~~~js
 html
