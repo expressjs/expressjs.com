@@ -18,7 +18,7 @@ req.accepts('html');
 // => "html"
 req.accepts('text/html');
 // => "text/html"
-req.accepts('json, text');
+req.accepts(['json', 'text']);
 // => "json"
 req.accepts('application/json');
 // => "application/json"
@@ -30,7 +30,6 @@ req.accepts('png');
 
 // Accept: text/*;q=.5, application/json
 req.accepts(['html', 'json']);
-req.accepts('html, json');
 // => "json"
 ~~~
 
