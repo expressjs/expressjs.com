@@ -194,12 +194,6 @@ $(function(){
 
   })
 
-  // sub menu navigation
-  $('.dropit-submenu li').click(function () {
-    var path = $(this).find('a').attr('href')
-    document.location = path
-  })
-
   // i18n notice
   if (readCookie('i18nClose')) {
     $('#i18n-notice-box').hide()
