@@ -1,8 +1,8 @@
 ---
 layout: 4x-api
-title: Express 4.x - API Reference
+title: Express 4.x - API 레퍼런스
 menu: api
-lang: en
+lang: ko
 ---
 <div id="api-doc" markdown="1">
 
