@@ -2,7 +2,7 @@
 layout: page
 title: Express FAQ
 menu: starter
-lang: en
+lang: ko
 ---
 
 # FAQ

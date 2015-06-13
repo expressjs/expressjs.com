@@ -2,7 +2,7 @@
 layout: page
 title: Debugging Express
 menu: guide
-lang: en
+lang: ko
 ---
 
 # Debugging Express

@@ -2,7 +2,7 @@
 layout: page
 title: Express application generator
 menu: starter
-lang: en
+lang: ko
 ---
 
 # Express application generator

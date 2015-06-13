@@ -2,7 +2,7 @@
 layout: page
 title: Express security updates
 menu: advanced
-lang: en
+lang: ko
 ---
 
 # Security updates

@@ -2,7 +2,7 @@
 layout: page
 title: Express community
 menu: resources
-lang: en
+lang: ko
 ---
 
 # Community

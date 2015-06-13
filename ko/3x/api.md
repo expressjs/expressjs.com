@@ -2,7 +2,7 @@
 layout: 3x-api
 title: Express 3.x - API Reference
 menu: api
-lang: en
+lang: ko
 ---
 <div id="api-doc" markdown="1">
 
