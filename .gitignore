@@ -3,3 +3,4 @@ node_modules
 *.sublime*
 _site
 .sass-cache
+*.log
