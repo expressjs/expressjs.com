@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Express - Node.js рамки веб-приложений
+title: Express - Node.js фреймворк для веб-приложений
 menu: home
 lang: ru
 ---
@@ -8,7 +8,7 @@ lang: ru
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
-    <section id="description"><a href="/" class="express">Express</a><span class="description">Быстро, unopinionated, минималистский веб-фреймворк для <a href='http://nodejs.org'>Node.js</a></span>
+    <section id="description"><a href="/" class="express">Express</a><span class="description">Быстрый, гибкий, минималистичный веб-фреймворк для <a href='http://nodejs.org'>Node.js</a></span>
     </section>
     <div id="install-command">$ npm install express --save</div>
 </section>
@@ -17,19 +17,19 @@ lang: ru
     <div id="boxes" class="clearfix">
 
         <div id="web-applications">
-            <h3>Web Applications</h3> Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+            <h3>Веб приложения</h3> Express минималистичный и гибкий фреймворк для Node.js веб-приложений который обеспечивает широкий набор возможностей для веб и мобильных приложений.
         </div>
 
         <div id="apis">
-            <h3>APIs</h3> With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy.
+            <h3>APIs</h3> С множеством утилитных HTTP методов и промежуточных обработчиков в вашем распоряжении, создание надежного API будет быстрым и легким.
         </div>
 
         <div id="performance">
-            <h3>Performance</h3> Express provides a thin layer of fundamental web application features, without obscuring Node features that you know and love.
+            <h3>Производительность</h3> Express обеспечивает тонкий слой основных особенностей веб-приложений, не ограничивая Node возможности, которые вы знаете и любите.
         </div>
 
         <div id="sponsorship">
-            <a href="http://loopback.io/"><h3>LoopBack</h3> Develop model-driven apps with an Express-based framework.<br/>Find out more at loopback.io.</a>
+            <a href="http://loopback.io/"><h3>LoopBack</h3> Разработка model-driven приложений на основе Express фреймворка.<br/>Узнайте больше на loopback.io.</a>
         </div>
         
     </div>
