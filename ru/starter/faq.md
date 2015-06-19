@@ -7,81 +7,83 @@ lang: ru
 
 # FAQ
 
-## How should I structure my application?
+## Какую структуру я должен использовать для моего приложения?
 
-There is no definitive answer to this question. It depends 
-on the scale of your application and the team involved. To be as
-flexible as possible, Express makes no assumptions in terms of structure.
+Нет единого ответа на данный вопрос. Все зависит от 
+размера вашего приложения и учавствующей в разработке команды. Для того что бы быть
+как возможно гибким, Express не делает никаких предположений по структуре.
 
-Routes and other application-specific logic may live in as many files
-as you wish, in any directory structure you prefer. View the following
-examples for inspiration:
+Маршрутизация и другая логика приложения могут размещаться во многих файлах как вы 
+считаете нужным, и иметь любую структуре каталогов которую вы предпочтете. 
+Посмотрите следующие примеры для вдохновления:
 
-* [Route listings](https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19)
-* [Route map](https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47)
-* [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Объявление маршрутов](https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19)
+* [Карта маршрутов](https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47)
+* [Контроллеры в MVC стиле](https://github.com/strongloop/express/tree/master/examples/mvc)
 
-Also, there are third-party extensions for Express, which simplify some of these patterns:
+Также, существуют сторонние расширения для Express, которые упрощают некоторые из этих шаблонов:
 
-* [Resourceful routing](https://github.com/expressjs/express-resource)
-* [Namespaced routing](https://github.com/expressjs/express-namespace)
+* [Resourceful маршрутизация](https://github.com/expressjs/express-resource)
+* [Namespaced маршрутизация](https://github.com/expressjs/express-namespace)
 
-## How do I define models?
+## Как я могу определить модели?
 
-Express has no notion of a database at all. This is
-left up to third-party Node modules, allowing you to
-interface with nearly any database.
+Express не имееет определения для работы с базой данных. Это отданно 
+на откуп сторонних Node модулей, что позволяет вам 
+взаимеодействовать с практически любой базе данных.
 
-See [LoopBack](http://loopback.io) for an Express-based framework centered around models.
+Смотрите [LoopBack](http://loopback.io) фреймворк на базе Express сосредоточеный на работе с моделями.
 
-## How can I authenticate users?
+## Как я могу аутентифицировать пользователей?
 
-This is another opinionated area that Express does not
-venture into.  You may use any authentication scheme you wish.
-For a simple username / password scheme, see [this example](https://github.com/strongloop/express/tree/master/examples/auth).
+Это еще один своеобразная область, которую Express не включает в себя. 
+Вы можете использовать любую схему аутентификации, которую вы хотите.
+Для простой username / password схемы, смотрите [этот пример](https://github.com/strongloop/express/tree/master/examples/auth).
 
 
-## Which template engines does Express support?
+## Какой шаблонизатор поддерживает Express?
 
-Express supports any template engine that conforms with the `(path, locals, callback)` signature.
-To normalize template engine interfaces and caching, see the
+Express поддерживает любой шаблонизатор который согласуется с `(path, locals, callback)` сигнатурой.
+Для нормализации интерфейсов шаблонизатора и кеширования, смотрите
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
-project for support. Unlisted template engines may still support the Express signature.
+проект для помощи. Не заявленные шаблонизаторы могут также поддерживать Express сигнатуру.
 
-## How can I serve static files from several directories?
+## Как я могу предоставлять статические файлы из нескольких директорий?
 
-You may typically use any middleware several times 
-within your application. With the following middleware setup, and a request
-for `GET /javascripts/jquery.js`, the first check would be `./public/javascripts/jquery.js`;
-if it does not exist, then the subsequent middleware will check `./files/javascripts/jquery.js`.
+Вы можете просто использовать любой промежуточный обработчик несколько раз 
+в вашем приложении. С ниже приведеными настройками промежуточных обработчиков, запрос
+на получение `GET /javascripts/jquery.js`, первоочередно проверит `./public/javascripts/jquery.js`;
+если файл в данной директории не существует, тогда проверка будет сделана в последующем промежуточном 
+обработчике `./files/javascripts/jquery.js`.
 
 ~~~js
 app.use(express.static('public'));
 app.use(express.static('files'));
 ~~~
 
-## How can I prefix a pathname for serving static files?
+## Как я могу указать префикс пути для раздачи статических файлов?
 
-Connect's generic "mounting" feature allows you to define
-the pathname "prefix" to which the middleware will be invoked.
-This effectively behaves as if that prefix string were never
-part of the path. Suppose you wanted `GET /files/javascripts/jquery.js`.
-You could mount the middleware at `/files`, exposing `/javascripts/jquery.js`
-as the `req.url`, allowing the middleware to serve the file:
+С помощу базовой возможности Сonnect "mounting" вы можете 
+определить "префикс" для того middleware который будет выполнен.
+Это эффективно работает как будто префикс никогда не был частью пути. 
+Представим, что вам нужно `GET /files/javascripts/jquery.js`.
+Вы можете установить `/files` префикс, определить `/javascripts/jquery.js`
+как `req.url`, тем самым указав middleware файл для выдачи:
 
 ~~~js
 app.use('/public', express.static('public'));
 ~~~
 
-## How do you handle 404s?
+## Как вы обрабатываете 404 ошибку?
 
-In Express, 404s are not the result of an error. Therefore,
-the error-handler middleware will not capture 404s. This is
-because a 404 is simply the absence of additional work to do;
-in other words, Express has executed all middleware / routes,
-and found that none of them responded. All you need to
-do is add a middleware at the very bottom (below all others)
-to handle a 404:
+В Express, 404 ошибка не являеться результатом ошибки. Поэтому,
+обработчик ошибок middleware не поймает 404. Потому что 404 
+является всего лишь фактом отсутствия дополнительной работы;
+Говоря иначе, Express выполнит все 
+промежуточные обработчики(middleware) / роутинги(routes),
+и обнаружит что ни один из них не возвращяет результат работы. 
+Все что вам нужно сделать это добавить обработчик(middleware) в конце (после всех других)
+для обработки 404:
 
 ~~~js
 app.use(function(req, res, next){
@@ -89,10 +91,10 @@ app.use(function(req, res, next){
 });
 ~~~
 
-## How do you setup an error handler?
+## Как вы определяете обработчик ошибок?
 
-You define error-handling middleware the same way as other middleware,
-except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
+Вы можете определить middleware обработчик ошибок тем же самым образом как и другие обработчики(middleware),
+с отличием указания четерёх аргументов вместо трёх; с определеной сигнатурой `(err, req, res, next)`:
 
 
 ~~~js
@@ -102,11 +104,11 @@ app.use(function(err, req, res, next){
 });
 ~~~
 
-For more information, see [Error handling](/guide/error-handling.html).
+Для более подробной информации, смотрите [Обработка ошибок](/guide/error-handling.html).
 
-## How do I render plain HTML?
+## Как я могу рендерить для выдачи plain HTML?
 
-You don't! There's no need to "render" HTML with `res.render()`.
-If you have a specific file, use `res.sendFile()`.
-If you are serving many assets from a directory use the `express.static()`
-middleware.
+Вам не нужно этого делать! Нету надобности "ендерить" HTML с помощу `res.render()`.
+Если у вас есть такой файл, используйте `res.sendFile()`.
+Если вы предоставляете много таких файлов с директории используйте `express.static()`
+оработчик(middleware).
