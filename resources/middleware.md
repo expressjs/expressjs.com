@@ -41,7 +41,7 @@ Here are some Express middleware modules:
   - [view-helpers](https://github.com/madhums/node-view-helpers): An express middleware that provides common helper methods to the views.
 
 Some middleware previously included with Connect are no longer supported by the Connect/Express team,
-are replaced by an alternative module, or should be superseded by a better module. Use one of these alternatives instead:
+and are replaced by an alternative module, or should be superseded by a better module. Use one of these alternatives instead:
 
   - express.cookieParser
     - [cookies](https://github.com/jed/cookies) and [keygrip](https://github.com/jed/keygrip)
