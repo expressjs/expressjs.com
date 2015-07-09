@@ -1,9 +1,5 @@
 <h3 id='res.sendFile'>res.sendFile(path [, options] [, fn])</h3>
 
-<div class="doc-box doc-info" markdown="1">
-`res.sendFile()` is supported from Express v4.8.0 onwards
-</div>
-
 Transfers the file at the given `path`. Sets the `Content-Type` response HTTP header field
 based on the filename's extension. Unless the `root` option is set in
 the options object, `path` must be an absolute path of the file.
@@ -27,7 +23,7 @@ or when an error occurs. If the callback function is specified and an error occu
 the callback function must explicitly handle the response process either by
 ending the request-response cycle, or by passing control to the next route.
 
-Here is an example of using `res.sendFile` with all its arguments.
+Here is an example of using `res.sendFile()` with all its arguments.
 
 ~~~js
 app.get('/file/:name', function (req, res, next) {
@@ -36,8 +32,8 @@ app.get('/file/:name', function (req, res, next) {
     root: __dirname + '/public/',
     dotfiles: 'deny',
     headers: {
-        'x-timestamp': Date.now(),
-        'x-sent': true
+      'x-timestamp': Date.now(),
+      'x-sent': true
     }
   };
 
@@ -55,7 +51,7 @@ app.get('/file/:name', function (req, res, next) {
 })
 ~~~
 
-`res.sendFile` provides fine-grained support for file serving as illustrated in the following example:
+`res.sendFile()` provides fine-grained support for file serving as illustrated in the following example:
 
 ~~~js
 app.get('/user/:uid/photos/:file', function(req, res){
