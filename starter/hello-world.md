@@ -7,16 +7,17 @@ lang: en
 
 # Hello world example
 
-Make sure you've followed the instructions in [Installing](/starter/installing.html).
+Make sure you've followed the instructions in [Installing](/starter/installing.html). 
 
 Now, you're going to create a very basic Express app.
 
-
 <div class="doc-box doc-info" markdown="1">
 NOTE: This is essentially the simplest Express app you can create.  It's a single file&mdash;_not_ what you'd get
-if you use the [Express generator](/starter/generator.html), which creates the scaffolding for a full app with sub-directories for various
-purposes. 
+if you use the [Express generator](/starter/generator.html), which creates the scaffolding for a full app with numerous JavaScript files,
+Jade templates, and sub-directories for various purposes.
 </div>
+
+In the `myapp` directory, create a file named `app.js` and add the following code to it:
 
 ~~~js
 var express = require('express');
@@ -27,12 +28,10 @@ app.get('/', function (req, res) {
 });
 
 var server = app.listen(3000, function () {
-
   var host = server.address().address;
   var port = server.address().port;
 
   console.log('Example app listening at http://%s:%s', host, port);
-
 });
 ~~~
 
@@ -44,7 +43,7 @@ The `req` (request) and `res` (response) are the exact same objects that Node pr
 `req.pipe()`, `req.on('data', callback)`, and anything else you would do without Express involved.
 </div>
 
-Save the code in a file named `app.js` and run it with the following command.
+Run the app with the following command.
 
 ~~~ sh
 $ node app.js
