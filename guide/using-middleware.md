@@ -7,7 +7,7 @@ lang: en
 
 # Using middleware
 
-An Express application is essentially a series of middleware calls.  
+An Express application is essentially a series of middleware calls. Express is a routing and middleware web framework with minimal functionality of its own. Functionality to Express apps are added via [third-party middleware](#third-party-middleware).
 
 Middleware is a function with access to the request object (`req`), the response object (`res`), and the next middleware in line in the request-response cycle of an Express application, commonly denoted by a variable named `next`. Middleware can:
 
@@ -224,8 +224,6 @@ app.use(express.static('files'));
 For more details about `serve-static` and its options, visit the [serve-static](https://github.com/expressjs/serve-static) documentation.
 
 <h2 id='middleware.third-party'>Third-party middleware</h2>
-
-Express is a routing and middleware web framework with minimal functionality of its own. Functionality to Express apps are added via third-party middleware.
 
 Install the node module for the required functionality and loaded it in your app at the application level or at the router level.
 
