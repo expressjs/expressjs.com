@@ -9,7 +9,7 @@ lang: en
 
 Define error-handling middleware like other middleware,
 except with four arguments instead of three, specifically with the signature
-`(err, req, res, next)`):
+`(err, req, res, next)`. For example:
 
 ~~~js
 app.use(function(err, req, res, next) {
