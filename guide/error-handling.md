@@ -106,5 +106,5 @@ app.get('/a_route_behind_paywall',
 In this example, the `getPaidContent` handler will be skipped but any remaining handlers in `app` for `/a_route_behind_paywall` would continue to be executed.
 
 <div class="doc-box doc-info" markdown="1">
-`next()` and `next(err)` are analogous to `Promise.resolve()` and `Promise.reject()`.  They allow you to signal to Express that this current handler is complete and in what state.  `next(err)` will skip all remaining handlers in the chain except for those that are set up to handle errors as described in the next section.
+Calls to `next()` and `next(err)` indicate that the current handler is complete and in what state.  `next(err)` will skip all remaining handlers in the chain except for those that are set up to handle errors as described above.
 </div>
