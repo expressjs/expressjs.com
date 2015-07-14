@@ -542,7 +542,7 @@ pre, code {
 
 footer {
   font-size: 11px;
-  margin: 30px 0 30px 0;
+  margin: 30px 10px 30px 10px;
 }
 
 #footer-content {
@@ -703,12 +703,12 @@ footer {
 
 
 /* hash link scroll buffer */
-h2 a:before { 
-  display: block; 
-  content: ' '; 
-  margin-top: -40px; 
-  height: 40px; 
-  visibility: hidden; 
+h2 a:before {
+  display: block;
+  content: ' ';
+  margin-top: -40px;
+  height: 40px;
+  visibility: hidden;
 }
 
 h2 a {
