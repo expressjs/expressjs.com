@@ -130,7 +130,7 @@ So when you add a custom error handler you will want to delegate to
 the default error handling mechanisms in express, when the headers
 have already been sent to the client.
 
-```
+~~~
 function errorHandler(err, req, res, next) {
   if (res.headersSent) {
     return next(err);
@@ -138,4 +138,4 @@ function errorHandler(err, req, res, next) {
   res.status(500);
   res.render('error', { error: err });
 }
-```
+~~~
