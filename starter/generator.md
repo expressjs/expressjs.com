@@ -7,7 +7,7 @@ lang: en
 
 # Express application generator
 
-Use the application generator tool, `express`, to quickly create a application skeleton.
+Use the application generator tool, `express`, to quickly create an application skeleton.
 
 Install it with the following command.
 
@@ -30,6 +30,7 @@ $ express -h
         --hbs           add handlebars engine support
     -H, --hogan         add hogan.js engine support
     -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+        --git           add .gitignore
     -f, --force         force on non-empty directory
 ~~~
 
