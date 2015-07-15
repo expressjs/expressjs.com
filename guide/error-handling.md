@@ -108,3 +108,34 @@ In this example, the `getPaidContent` handler will be skipped but any remaining 
 <div class="doc-box doc-info" markdown="1">
 Calls to `next()` and `next(err)` indicate that the current handler is complete and in what state.  `next(err)` will skip all remaining handlers in the chain except for those that are set up to handle errors as described above.
 </div>
+
+## The Default Error Handler
+
+Express comes with an in-built error handler, which takes care of any errors that might be encountered in the app. This default error-handling middleware is added at the end of the middleware stack.
+
+If you pass an error to `next()` and you do not handle it in
+an error handler, it will be handled by the built-in error handler - the error will be written to the client with the
+stack trace. The stack trace is not incluced in the production environment.
+
+<div class="doc-box doc-info" markdown="1">
+Set the environment variable `NODE_END` to "production", to run the app in production mode.
+</div>
+
+If you call `next()` with an error after you have started writing the
+response, for instance if you encounter an error while streaming the
+response to the client, Express' default error handler will close the
+connection and make the request be considered failed.
+
+So when you add a custom error handler you will want to delegate to
+the default error handling mechanisms in express, when the headers
+have already been sent to the client.
+
+```
+function errorHandler(err, req, res, next) {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
