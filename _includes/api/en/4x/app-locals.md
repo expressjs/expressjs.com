@@ -15,7 +15,7 @@ Once set, the value of `app.locals` properties persist throughout the life of th
 in contrast with [res.locals](#res.locals) properties that
 are valid only for the lifetime of the request.
 
-You can accesss local variables in templates rendered within the application.
+You can access local variables in templates rendered within the application.
 This is useful for providing helper functions to templates, as well as app-level data.
 Note, however, that you cannot access local variables in middleware.
 
