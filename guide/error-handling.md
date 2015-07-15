@@ -118,7 +118,7 @@ an error handler, it will be handled by the built-in error handler - the error w
 stack trace. The stack trace is not incluced in the production environment.
 
 <div class="doc-box doc-info" markdown="1">
-Set the environment variable `NODE_END` to "production", to run the app in production mode.
+Set the environment variable `NODE_ENV` to "production", to run the app in production mode.
 </div>
 
 If you call `next()` with an error after you have started writing the
