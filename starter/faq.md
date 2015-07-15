@@ -17,8 +17,8 @@ Routes and other application-specific logic may live in as many files
 as you wish, in any directory structure you prefer. View the following
 examples for inspiration:
 
-* [Route listings](https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19)
-* [Route map](https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47)
+* [Route listings](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Route map](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
 * [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
 
 Also, there are third-party extensions for Express, which simplify some of these patterns:
