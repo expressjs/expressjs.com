@@ -66,9 +66,15 @@ If `name` is one of the application settings, it affects the behavior of the app
   <td markdown="1">
   `query parser`
   </td>
-      <td>String</td>
+      <td>Varied</td>
   <td markdown="1">
-  The query parser to use, either "simple" or "extended". The simple query parser is based on Node's native query parser, [querystring](http://nodejs.org/api/querystring.html). The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
+  Disable query parsing by setting the value to `false`, or set the query parser to use either "simple" or "extended" or a custom query string parsing function.
+
+  The simple query parser is based on Node's native query parser, [querystring](http://nodejs.org/api/querystring.html).
+
+  The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
+
+  A custom query string parsing function will receive the complete query string, and must return an object of query string and their values.
   </td>
       <td>"extended"</td>
     </tr>
