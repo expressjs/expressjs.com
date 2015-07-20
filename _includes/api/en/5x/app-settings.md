@@ -74,7 +74,7 @@ If `name` is one of the application settings, it affects the behavior of the app
 
   The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
 
-  A custom query string parsing function will receive the complete query string, and must return an object of query string and their values.
+  A custom query string parsing function will receive the complete query string, and must return an object of query keys and their values.
   </td>
       <td>"extended"</td>
     </tr>
