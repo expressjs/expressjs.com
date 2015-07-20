@@ -48,6 +48,10 @@ In Express 4, `req.files` is no longer available on the `req` object by default.
 </section>
 
 <section markdown="1">
+  {% include api/{{ page.lang }}/5x/req-host.md %}
+</section>
+
+<section markdown="1">
   {% include api/{{ page.lang }}/5x/req-hostname.md %}
 </section>
 
