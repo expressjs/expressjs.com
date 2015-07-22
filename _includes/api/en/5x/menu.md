@@ -73,6 +73,8 @@
             </li>
             <li><a href="#req.cookies">req.cookies</a>
             </li>
+            <li><a href="#req.files">req.files</a>
+            </li>
             <li><a href="#req.fresh">req.fresh</a>
             </li>
             <li><a href="#req.host">req.host</a>
@@ -102,6 +104,8 @@
             <li><a href="#req.stale">req.stale</a>
             </li>
             <li><a href="#req.subdomains">req.subdomains</a>
+            </li>
+            <li><a href="#req.url">req.url</a>
             </li>
             <li><a href="#req.xhr">req.xhr</a>
             </li>
