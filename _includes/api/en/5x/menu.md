@@ -119,8 +119,6 @@
             </li>
             <li><a href="#req.is">req.is()</a>
             </li>
-            <li><a href="#req.param">req.param()</a>
-            </li>
         </ul>
     </li>
     <li id="res-api"><a href="#res">Response</a>
