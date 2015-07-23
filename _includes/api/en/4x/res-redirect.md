@@ -1,13 +1,5 @@
 <h3 id='res.redirect'>res.redirect([status,] path)</h3>
 
-<div class='doc-box doc-warn' markdown="1">
-Express passes the specified URL string as-is to the browser in the `Location` header,
-without any validation or manipulation, except in case of `back`.
-
-Browsers take the responsibility of deriving the intended URL from the current URL
-or the referring URL, and the URL specified in the `Location` header; and redirect the user accordingly.
-</div>
-
 Redirects to the URL dervied from the specified `path`, with specified
 [HTTP status code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) `status`.
 If you don't specify `status`, the status code defaults to "302 "Found".

@@ -21,3 +21,11 @@ For example, if your application is mounted at `/blog`, the following would set 
 ~~~js
 res.location('admin')
 ~~~
+
+<div class='doc-box doc-warn' markdown="1">
+Express passes the specified URL string as-is to the browser in the `Location` header,
+without any validation or manipulation, except in case of `back`.
+
+Browsers take the responsibility of deriving the intended URL from the current URL
+or the referring URL, and the URL specified in the `Location` header; and redirect the user accordingly.
+</div>
