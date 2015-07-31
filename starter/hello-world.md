@@ -46,7 +46,7 @@ The `req` (request) and `res` (response) are the exact same objects that Node pr
 Run the app with the following command.
 
 ~~~ sh
-$ node app.js
+$ npm start
 ~~~
 
 Then, load [http://localhost:3000/](http://localhost:3000/) in a browser to see the output.
