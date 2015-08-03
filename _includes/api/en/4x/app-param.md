@@ -1,6 +1,8 @@
 <h3 id='app.param'>app.param([name], callback)</h3>
 
-Add callback triggers to route parameters, where `name` is the name of the parameter or an array of them, and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.
+Add callback triggers to route parameters, where `name` is the name of the parameter or an array of them, and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order. 
+
+If `name` is an array, the `callback` trigger is registered for each parameter declared in it, in the order in which they are declared. Furthermore, for each declared parameter except the last one, a call to `next` inside the callback will call the callback for the next declared parameter. For the last parameter, a call to `next` will call the next middleware in place for the route currently being processed, just like it would if `name` were just a string.
 
 For example, when `:user` is present in a route path, you may map user loading logic to automatically provide `req.user` to the route, or perform validations on the parameter input.
 
@@ -23,7 +25,7 @@ app.param('user', function(req, res, next, id) {
 
 Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on `app` will be triggered only by route parameters defined on `app` routes.
 
-A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following example.
+All param callbacks will be called before any handler of any route in which the param occurs, and they will each be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following examples.
 
 ~~~js
 app.param('id', function (req, res, next, id) {
@@ -40,6 +42,38 @@ app.get('/user/:id', function (req, res) {
   console.log('and this matches too');
   res.end();
 });
+~~~
+
+On `GET /user/42`, the following is printed:
+~~~
+CALLED ONLY ONCE
+although this matches
+and this matches too
+~~~
+
+~~~js
+app.param(['id', 'page'], function (req, res, next, value) {
+  console.log('CALLED ONLY ONCE with', value);
+  next();
+})
+
+app.get('/user/:id/:page', function (req, res, next) {
+  console.log('although this matches');
+  next();
+});
+
+app.get('/user/:id/:page', function (req, res) {
+  console.log('and this matches too');
+  res.end();
+});
+~~~
+
+On `GET /user/42/3`, the following is printed:
+~~~
+CALLED ONLY ONCE with 42
+CALLED ONLY ONCE with 3
+although this matches
+and this matches too
 ~~~
 
 <div class="doc-box doc-warn" markdown="1">
