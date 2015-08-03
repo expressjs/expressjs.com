@@ -45,6 +45,7 @@ app.get('/user/:id', function (req, res) {
 ~~~
 
 On `GET /user/42`, the following is printed:
+
 ~~~
 CALLED ONLY ONCE
 although this matches
@@ -69,6 +70,7 @@ app.get('/user/:id/:page', function (req, res) {
 ~~~
 
 On `GET /user/42/3`, the following is printed:
+
 ~~~
 CALLED ONLY ONCE with 42
 CALLED ONLY ONCE with 3
