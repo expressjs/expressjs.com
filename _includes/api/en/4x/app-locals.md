@@ -17,7 +17,7 @@ are valid only for the lifetime of the request.
 
 You can access local variables in templates rendered within the application.
 This is useful for providing helper functions to templates, as well as app-level data.
-Note, however, that you cannot access local variables in middleware.
+Locals are available in middleware via `req.app.locals` (see [req.app](#req.app))
 
 ~~~js
 app.locals.title = 'My App';
