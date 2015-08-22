@@ -22,7 +22,7 @@ For more information on how `package.json` works, see [Specifics of npm's packag
 $ npm init
 ~~~
 
-This command will prompt your for a number of things such as the name and version of of your application.
+This command will prompt your for a number of things such as the name and version of your application.
 For now, you can simply hit RETURN to accept the defaults for most of them, except for:
 
 ~~~sh
