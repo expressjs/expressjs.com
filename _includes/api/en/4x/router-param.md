@@ -1,8 +1,10 @@
-<h3 id='router.param'>router.param([name,] callback)</h3>
+<h3 id='router.param'>router.param(name, callback)</h3>
 
-Add callback triggers to route parameters, where `name` is the name of the parameter or an array of them, and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.
+Add callback triggers to route parameters, where `name` is the name of the parameter, and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.
 
-If `name` is an array, the `callback` trigger is registered for each parameter declared in it, in the order in which they are declared. Furthermore, for each declared parameter except the last one, a call to `next` inside the callback will call the callback for the next declared parameter. For the last parameter, a call to `next` will call the next middleware in place for the route currently being processed, just like it would if `name` were just a string.
+<div class="doc-box doc-info" markdown="1">
+Unlike `app.param()`, `router.param()` does not accept an array of route parameters.
+</div>
 
 For example, when `:user` is present in a route path, you may map user loading logic to automatically provide `req.user` to the route, or perform validations on the parameter input.
 
