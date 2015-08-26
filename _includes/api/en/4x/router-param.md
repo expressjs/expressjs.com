@@ -1,6 +1,6 @@
 <h3 id='router.param'>router.param(name, callback)</h3>
 
-Add callback triggers to route parameters, where `name` is the name of the parameter, and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.
+Add callback triggers to route parameters, where `name` is the name of the parameter and `callback` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.  Although `name` is technically optional, using this method without it is deprecated starting with Express v4.11.0 (see below).
 
 <div class="doc-box doc-info" markdown="1">
 Unlike `app.param()`, `router.param()` does not accept an array of route parameters.
@@ -55,11 +55,6 @@ and this matches too
 ~~~
 
 ~~~js
-router.param(['id', 'page'], function (req, res, next, value) {
-  console.log('CALLED ONLY ONCE with', value);
-  next();
-})
-
 app.get('/user/:id/:page', function (req, res, next) {
   console.log('although this matches');
   next();
@@ -74,8 +69,6 @@ app.get('/user/:id/:page', function (req, res) {
 On `GET /user/42/3`, the following is printed:
 
 ~~~
-CALLED ONLY ONCE with 42
-CALLED ONLY ONCE with 3
 although this matches
 and this matches too
 ~~~
