@@ -72,7 +72,7 @@ books.insert({name: 'The Art of war'}, null, function(err, body) {
   }
 });
 
-//Obtêm a liste de todos os livros
+//Obtêm a lista de todos os livros
 books.list(function(err, body){
   console.log(body.rows);
 }
