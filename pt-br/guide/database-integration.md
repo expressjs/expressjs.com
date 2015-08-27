@@ -1,13 +1,12 @@
 ---
 layout: page
-title: Express database integration
+title: Integração com banco de dados
 menu: guide
 lang: pt_BR
 ---
 
 # Integração com bancos de dados Database integration
-Adicionando capacidade de conectividade de banco de dados para aplicações Express é apenas uma questão de carregar um driver Node.js apropriado para o banco de dados em seu aplicativo. Este documento explica resumidamente como adicionar e usar alguns dos módulos mais populares do Node para sistemas de banco de dados em seu aplicativo Express:
-Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node modules for database systems in your Express app:
+Adicionar capacidade de conectividade com banco de dados para aplicações Express é apenas uma questão de carregar um driver Node.js apropriado para o banco de dados em seu aplicativo. Este documento explica resumidamente como adicionar e usar alguns dos módulos mais populares do Node para sistemas de banco de dados em seu aplicativo Express:
 
 * [Cassandra](#cassandra)
 * [CouchDB](#couchdb)
@@ -21,10 +20,8 @@ Adding database connectivity capability to Express apps is just a matter of load
 * [ElasticSearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
-.  Para outras opções,
- faça uma busca no site do [npm](https://www.npmjs.com/).   
-These database drivers are among many that are available.  For other options,
-search on the [npm](https://www.npmjs.com/) site.
+Estes adaptadores para banco de dados, estão entre os muitos que estão disponíveis.  Para outras opções,
+ faça uma busca no site do [npm](https://www.npmjs.com/).
 </div>
 
 <a name="cassandra"></a>
@@ -61,21 +58,21 @@ client.execute('select key from system.local', function(err, result) {
 $ npm install nano
 ~~~
 
-**Example**
+**Exemplo**
 
 ~~~js
 var nano = require('nano')('http://localhost:5984');
 nano.db.create('books');
 var books = nano.db.use('books');
 
-//Insert a book document in the books database
+//Insere um documento book no banco de dados books
 books.insert({name: 'The Art of war'}, null, function(err, body) {
   if (!err){
     console.log(body);
   }
 });
 
-//Get a list of all books
+//Obtêm a liste de todos os livros
 books.list(function(err, body){
   console.log(body.rows);
 }
@@ -85,14 +82,14 @@ books.list(function(err, body){
 
 ## LevelDB
 
-**Module**: [levelup](https://github.com/rvagg/node-levelup)  
-**Installation**
+**Módulo**: [levelup](https://github.com/rvagg/node-levelup)  
+**Instalação**
 
 ~~~sh
 $ npm install level levelup leveldown
 ~~~
 
-**Example**
+**Examplo**
 
 ~~~js
 var levelup = require('levelup');
@@ -113,14 +110,14 @@ db.put('name', 'LevelUP', function (err) {
 
 ## MySQL
 
-**Module**: [mysql](https://github.com/felixge/node-mysql/)  
-**Installation**
+**Módulo**: [mysql](https://github.com/felixge/node-mysql/)  
+**Instalação**
 
 ~~~sh
 $ npm install mysql
 ~~~
 
-**Example**
+**Examplo**
 
 ~~~js
 var mysql      = require('mysql');
@@ -144,14 +141,14 @@ connection.end();
 
 ## MongoDB
 
-**Module**: [mongoskin](https://github.com/kissjs/node-mongoskin)  
-**Installation**
+**Módulo**: [mongoskin](https://github.com/kissjs/node-mongoskin)  
+**Instalação**
 
 ~~~sh
 $ npm install mongoskin
 ~~~
 
-**Example**
+**Examplo**
 
 ~~~js
 var db = require('mongoskin').db('localhost:27017/animals');
@@ -161,21 +158,20 @@ db.collection('mamals').find().toArray(function(err, result) {
   console.log(result);
 });
 ~~~
-
-If you want a object model driver for MongoDB, checkout [Mongoose](https://github.com/LearnBoost/mongoose).
+Se você deseja um adaptador de modelo orientado a objetos, verifique [[Mongoose](https://github.com/LearnBoost/mongoose).
 
 <a name="neo4j"></a>
 
 ## Neo4j
 
-**Module**: [apoc](https://github.com/hacksparrow/apoc)  
-**Installation**
+**Módulo**: [apoc](https://github.com/hacksparrow/apoc)  
+**Instalação**
 
 ~~~sh
 $ npm install apoc
 ~~~
 
-**Example**
+**Exemplo**
 
 ~~~js
 var apoc = require('apoc');
@@ -194,14 +190,14 @@ apoc.query('match (n) return n').exec().then(
 
 ## PostgreSQL
 
-**Module**: [pg](https://github.com/brianc/node-postgres)  
-**Installation**
+**Módulo**: [pg](https://github.com/brianc/node-postgres)  
+**Instalação**
 
 ~~~sh
 $ npm install pg
 ~~~
 
-**Example**
+**Exemplo**
 
 ~~~js
 var pg = require('pg');
@@ -227,14 +223,14 @@ pg.connect(conString, function(err, client, done) {
 
 ## Redis
 
-**Module**: [redis](https://github.com/mranney/node_redis)  
-**Installation**
+**Módulo**: [redis](https://github.com/mranney/node_redis)  
+**Instalação**
 
 ~~~sh
 $ npm install redis
 ~~~
 
-**Example**
+**Exemplo**
 
 ~~~js
 var client = require('redis').createClient();
@@ -263,14 +259,14 @@ client.hkeys('hash key', function (err, replies) {
 
 ## SQLite
 
-**Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)  
-**Installation**
+**Módulo**: [sqlite3](https://github.com/mapbox/node-sqlite3)  
+**Instalação**
 
 ~~~sh
 $ npm install sqlite3
 ~~~
 
-**Example**
+**Exemplo**
 
 ~~~js
 var sqlite3 = require('sqlite3').verbose();
@@ -299,14 +295,14 @@ db.close();
 
 ## ElasticSearch
 
-**Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)  
-**Installation**
+**Módulo**: [elasticsearch](https://github.com/elastic/elasticsearch-js)  
+**Instalação**
 
 ~~~sh
 $ npm install elasticsearch
 ~~~
 
-**Example**
+**Exemplo**
 
 ~~~js
 var elasticsearch = require('elasticsearch');
