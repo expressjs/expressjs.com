@@ -2,11 +2,11 @@
 layout: page
 title: Express database integration
 menu: guide
-lang: en
+lang: pt_BR
 ---
 
-# Database integration
-
+# Integração com bancos de dados Database integration
+Adicionando capacidade de conectividade de banco de dados para aplicações Express é apenas uma questão de carregar um driver Node.js apropriado para o banco de dados em seu aplicativo. Este documento explica resumidamente como adicionar e usar alguns dos módulos mais populares do Node para sistemas de banco de dados em seu aplicativo Express:
 Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node modules for database systems in your Express app:
 
 * [Cassandra](#cassandra)
@@ -21,6 +21,8 @@ Adding database connectivity capability to Express apps is just a matter of load
 * [ElasticSearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
+.  Para outras opções,
+ faça uma busca no site do [npm](https://www.npmjs.com/).   
 These database drivers are among many that are available.  For other options,
 search on the [npm](https://www.npmjs.com/) site.
 </div>
@@ -29,14 +31,14 @@ search on the [npm](https://www.npmjs.com/) site.
 
 ## Cassandra
 
-**Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)  
-**Installation**
+**Módulo**: [cassandra-driver](https://github.com/datastax/nodejs-driver)  
+**Instalação**
 
 ~~~sh
 $ npm install cassandra-driver
 ~~~
 
-**Example**
+**Exemplo**
 
 ~~~js
 var cassandra = require('cassandra-driver');
@@ -52,8 +54,8 @@ client.execute('select key from system.local', function(err, result) {
 
 ## CouchDB
 
-**Module**: [nano](https://github.com/dscape/nano)  
-**Installation**
+**Módulo**: [nano](https://github.com/dscape/nano)  
+**Instalação**
 
 ~~~sh
 $ npm install nano
