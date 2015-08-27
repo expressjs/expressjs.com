@@ -5,7 +5,7 @@ menu: guide
 lang: pt_BR
 ---
 
-# Integração com bancos de dados Database integration
+# Integração com bancos de dados Database
 Adicionar capacidade de conectividade com banco de dados para aplicações Express é apenas uma questão de carregar um driver Node.js apropriado para o banco de dados em seu aplicativo. Este documento explica resumidamente como adicionar e usar alguns dos módulos mais populares do Node para sistemas de banco de dados em seu aplicativo Express:
 
 * [Cassandra](#cassandra)
