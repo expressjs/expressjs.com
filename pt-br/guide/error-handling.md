@@ -103,7 +103,7 @@ Chamadas para `next()` ou `next(err)` indicam que o manipulador (handler) atual 
 
 ## O Handler de erros padrão (Default Error Handler)
 
-Expresso vem com um handler de erro embutido, que cuida de todos os erros que podem ser encontradas no aplicativo. Este middleware padrão de tratamento de erro é adicionado ao final da pilha de middlewares.
+O Express vem com um handler de erro embutido, que cuida de todos os erros que podem ser encontradas no aplicativo. Este middleware padrão de tratamento de erro é adicionado ao final da pilha de middlewares.
 
 Se passarmos um erro para `next()` e não tivermos nenhum handler de erro para lidar com isso, este erro será tratado pelo middlware padrão de tratamento de erros (default error handler) embutido no Express - o erro será escrito para o cliente stack trace (rastreamento de pilha). O stack trace não está incluído no ambiente de produção.
 
