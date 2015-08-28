@@ -2,7 +2,7 @@
 layout: page
 title: Tratamento de erros no Express
 menu: guide
-lang: pt_BR
+lang: pt-br
 ---
 
 # Tratamento de erros
