@@ -2,7 +2,7 @@
 layout: page
 title: Usando middleware
 menu: guide
-lang: pt_BR
+lang: pt-br
 ---
 
 # Usando middleware
