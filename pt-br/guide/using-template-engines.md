@@ -2,7 +2,7 @@
 layout: page
 title: Usando template engines com o Express
 menu: guide
-lang: pt_BR
+lang: pt-br
 ---
 
 # Usando template engines com o Express
