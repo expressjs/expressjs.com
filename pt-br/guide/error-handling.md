@@ -17,7 +17,6 @@ app.use(function(err, req, res, next) {
 ~~~
 
 Definimos middleware de tratamento de erros por último; depois de outros `app.use()` e chamadas de rotas. Por exemplo:
-You define error-handling middleware last, after other `app.use()` and routes calls; for example:
 
 ~~~js
 var bodyParser = require('body-parser');
@@ -66,7 +65,7 @@ function clientErrorHandler(err, req, res, next) {
 }
 ~~~
 
-O próximo `errorHandler` "pega tudo" e pode ser implementado da sequinte forma:
+O próximo `errorHandler` é um "pega tudo" e pode ser implementado da sequinte forma:
 
 ~~~js
 function errorHandler(err, req, res, next) {
@@ -113,10 +112,6 @@ Para rodar o app em modo de produção, defina o valor da variável de ambiente 
 
 Se chamarmos `next()` com um erro depois de já ter iniciado a escrita da resposta, por exemplo se encontramos um erro enquanto estamos enviando a resposta para o cliente, o handler de erro padrão do Express fechará a conexão, fazendo com que seja considerado que houve falha na requisição.
 
-
-So when you add a custom error handler you will want to delegate to
-the default error handling mechanisms in express, when the headers
-have already been sent to the client.
 
 Então quando adicionamos um handler de erro personalizado, é bom delegarmos o tratamento de erros para o handler de erro padrão do Express quando os cabecalhos `headers` já foram enviados para o cliente.
 
