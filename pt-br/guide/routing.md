@@ -1,110 +1,119 @@
 ---
 layout: page
-title: Express routing
+title: Roteamento no Express
 menu: guide
-lang: en
+lang: pt_BR
 ---
 
-# Routing
+# Roteamento
 
-Routing refers to the definition of end points (URIs) to an application and how it responds to client requests.
-
-A route is a combination of a URI, a HTTP request method (GET, POST, and so on), and one or more handlers for the endpoint. It takes the following structure `app.METHOD(path, [callback...], callback)`, where `app` is an instance of `express`, `METHOD` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `path` is a path on the server, and `callback` is the function executed when the route is matched.
-
-The following is an example of a very basic route.
-
+Roteamento é uma forma de determinar como uma aplicação responde a uma requisição do cliente para chegar a um ponto determinado, dependendo de qual foi a URI (path) e o método HTTP (GET, POST, etc...)  utilizado nessa requisição.
+Exemplo básico de roteamento no Express:
 ~~~js
+
 var express = require('express');
 var app = express();
 
-// respond with "hello world" when a GET request is made to the homepage
+// responde com "hello world" quando uma requisição com método GET é feita à home page
 app.get('/', function(req, res) {
   res.send('hello world');
 });
+
 ~~~
 
-<h2 id="route-methods">Route methods</h2>
+<h2 id="route-methods">Métodos da rota</h2>
 
-A route method is derived from one of the HTTP methods, and is attached to an instance of `express`.
+A rota é uma combinação de uma URI, um [método de requisição HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), e manipuladores (handlers).
+Cada rota pode ter um ou mais manipuladores (handler functions) que são executados quando a rota coincide.
 
-The following is an example of routes defined for the GET and the POST methods to the root of the app.
+Os métodos da rota são derivados dos métodos HTTP e vinculados a uma instância do Express.
 
+A definição de rota segue a estrutura app.METHOD(PATH, HANDLER), onde app é uma instância express, METHOD é um dos métodos de requisição do HTTP, PATH é um caminho (rota) no servidor, e HANDLER é a função executada para a rota correspondente.
+
+O código a seguir mostra alguns exemplos de rotas em um app.
 ~~~js
-// GET method route
+// responde com with "Hello World!" na homepage
 app.get('/', function (req, res) {
-  res.send('GET request to the homepage');
+  res.send('Hello World!');
 });
 
-// POST method route
+// recebe uma requisição POST da homepage
 app.post('/', function (req, res) {
-  res.send('POST request to the homepage');
+  res.send('Got a POST request');
 });
 
+// recebe uma requisição PUT em /user
+app.put('/user', function (req, res) {
+  res.send('Got a PUT request at /user');
+});
+
+// recebe uma requisição DELETE em /user
+app.delete('/user', function (req, res) {
+  res.send('Got a DELETE request at /user');
+});
 ~~~
 
-Express supports the following routing methods corresponding to HTTP methods: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
+
+
+O Express soporta os seguintes métodos de roteamento correspondentes aos métodos de requisição HTTP: get, post, put, head, delete, options, trace, copy, lock, mkcol, move, purge, propfind, proppatch, unlock, report, mkactivity, checkout, merge, m-search, notify, subscribe, unsubscribe, patch search e connect.
 
 <div class="doc-box doc-info" markdown="1">
-To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
-`app['m-search']('/', function ...`
+Para nomes de métodos de roteamento que formam variáveis JavaScript com nomes inválidos, use a notação de colchetes. Por exemplo, app['m-search']('/', function ...
 </div>
 
-There is a special routing method, `app.all()`, which is not derived from any HTTP method. It is used for loading middleware at a path for all request methods.
+Existe um metódo de roteamento especial, app.all(), que não é derivado de nenhum método HTTP. Ele é utilizado para o carregamento de middlewares para requisições em uma determinada rota (path) para qualquer método.
 
-In the following example, the handler will be executed for requests to "/secret" whether using GET, POST, PUT, DELETE, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+No exemplo a seguir, o handler será executado numa requisição para “/secret” a partir de qualquer método utilizado: GET, POST, PUT, DELETE, ou qualquer outro método de requisição suportado pelo módulo HTTP do Express.
 
 ~~~js
 app.all('/secret', function (req, res, next) {
   console.log('Accessing the secret section ...');
-  next(); // pass control to the next handler
+  next(); // passa o controle para o próximo handler
 });
 ~~~
 
-<h2 id="route-paths">Route paths</h2>
+<h2 id="route-paths">Caminho (path) da rota</h2>
 
-Route paths, in combination with a request method, define the endpoints at which requests can be made to. They can be strings, string patterns, or regular expressions.
+Em combinação com um método de requisição, a rota define onde será o ponto final da requisição. A rota pode ser uma string, um padrão de string ou uma expressão regular.
 
 <div class="doc-box doc-info" markdown="1">
-  Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths; see its documentation for all the possibilities in defining route paths. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) is a handy tool for testing basic Express routes, although it does not support pattern matching.
+  O Express utiliza [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) para casar caminhos de rota;consulte a documentação para conhecer todas as possibilidades de definição de rotas. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) é uma ferramenta para testes básicos de rotas no Express, porém não suporta casamento de padrões.
 </div>
 
 <div class="doc-box doc-warn" markdown="1">
-Query strings are not a part of the route path.
+Observação: query strings não são parte do caminho de uma rota.
 </div>
 
-Examples of route paths based on strings:
-
+Exemplos de rotas baseadas em string:
 ~~~js
-// will match request to the root
+// casa requisições para root
 app.get('/', function (req, res) {
   res.send('root');
 });
 
-// will match requests to /about
+// casa requisições para /about
 app.get('/about', function (req, res) {
   res.send('about');
 });
 
-// will match request to /random.text
+// casa requisições para /random.text
 app.get('/random.text', function (req, res) {
   res.send('random.text');
 });
 ~~~
-
-Examples of route paths based on string patterns:
-
+Exemplo de rotas baseadas em padrões de string:
 ~~~js
-// will match acd and abcd
+// casa requisições acd e abcd
 app.get('/ab?cd', function(req, res) {
   res.send('ab?cd');
 });
 
-// will match abcd, abbcd, abbbcd, and so on
+// casa requisições abcd, abbcd, abbbcd, e etc...
 app.get('/ab+cd', function(req, res) {
   res.send('ab+cd');
 });
 
-// will match abcd, abxcd, abRABDOMcd, ab123cd, and so on
+// casa requisições abcd, abxcd, abRABDOMcd, ab123cd, e etc...
 app.get('/ab*cd', function(req, res) {
   res.send('ab*cd');
 });
@@ -116,38 +125,38 @@ app.get('/ab(cd)?e', function(req, res) {
 ~~~
 
 <div class="doc-box doc-info" markdown="1">
-The characters ?, +, *, and () are subsets of their Regular Expression counterparts. The hyphen (-) and the dot (.) are interpreted literally by string-based paths.
+Os caracteres ?, +, *, e () são subconjuntos de suas expresões regulares. O hífem (-) e o ponto (.) são interpretados literalmente em rotas baseadas em strings.
 </div>
 
-Examples of route paths based on regular expressions:
+Exemplos de rotas baseadas em expressões regulares:
 
 ~~~js
-// will match anything with an a in the route name:
+// casa qualquer requisição com uma letra a no nome da rota:
 app.get(/a/, function(req, res) {
   res.send('/a/');
 });
 
-// will match butterfly, dragonfly; but not butterflyman, dragonfly man, and so on
+// casa com butterfly, dragonfly; mas não casa com butterflyman, dragonfly man, e etc...
 app.get(/.*fly$/, function(req, res) {
   res.send('/.*fly$/');
 });
 ~~~
 
-<h2 id="route-handlers">Route handlers</h2>
+<h2 id="route-handlers">Manipuladores (handlers)</h2>
 
-You can provide multiple callback functions that behave just like [middleware](/guide/using-middleware.html) to handle a request. The only exception is that these callbacks may invoke `next('route')` to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+Vocé pode fornecer várias funções de retorno de chamada (callback) que se comportam exatamente como middlewares para lidar com uma requisição.
+A diferença é que esses callbacks podem invocar ume próxima rota, next(‘route’), ignorando o restante do callback.
+Você pode usar isso para definir condições em uma rota e então passar o controle para uma rota seguinte se não for mais necessário continuar executando a rota atual.
+Handlers podem vir em forma de função, array de funções ou várias combinações de ambos, como mostram os exemplos a seguir.
 
-Route handlers can come in the form of a function, an array of functions, or various combinations of both, as shown the following examples.
-
-A route can be handled using a single callback function:
-
+Uma rota pode ser manipulada usando uma simples função callback:
 ~~~js
 app.get('/example/a', function (req, res) {
   res.send('Hello from A!');
 });
 ~~~
 
-A route can be handled using a more than one callback function (make sure to specify the `next` object):
+Uma rota pode ser manipulada usando uma ou mais funções callback (o objeto next precisa ser especificado):
 
 ~~~js
 app.get('/example/b', function (req, res, next) {
@@ -158,7 +167,8 @@ app.get('/example/b', function (req, res, next) {
 });
 ~~~
 
-A route can be handled using an array of callback functions:
+Uma rota pode ser manipulada utilizando-se um array de funções callback:
+
 
 ~~~js
 var cb0 = function (req, res, next) {
@@ -178,7 +188,7 @@ var cb2 = function (req, res) {
 app.get('/example/c', [cb0, cb1, cb2]);
 ~~~
 
-A route can be handled using a combination of array of functions and independent functions:
+Uma rota pode ser manipulada utilizando-se uma combinação de array  de funções e funções independentes:
 
 ~~~js
 var cb0 = function (req, res, next) {
@@ -199,30 +209,28 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 });
 ~~~
 
-<h2 id="response-methods">Response methods</h2>
+<h2 id="response-methods">Métodos de resposta (response methods)</h2>
 
-The methods on the response object (`res`) in the following table can send a response to the client and terminate the request response cycle. If none of them is called from a route handler, the client request will be left hanging.
+Os métodos em um objeto de resposta (res) na tabela seguinte podem enviar respostar ao cliente e encerrar o ciclo de requisição e resposta. Se nenhum deles é chamado por um manipulador (handler), então a requisição do cliente será deixada em espera.
 
-| Method               | Description                           
+| Método               | Descrição                          
 |----------------------|--------------------------------------
-| [res.download()](/4x/api.html#res.download)   | Prompt a file to be downloaded.
-| [res.end()](/4x/api.html#res.end)        | End the response process.
-| [res.json()](/4x/api.html#res.json)       | Send a JSON response.
-| [res.jsonp()](/4x/api.html#res.jsonp)      | Send a JSON response with JSONP support.
-| [res.redirect()](/4x/api.html#res.redirect)   | Redirect a request.
-| [res.render()](/4x/api.html#res.render)     | Render a view template.
-| [res.send()](/4x/api.html#res.send)       | Send a response of various types.
-| [res.sendFile](/4x/api.html#res.sendFile)     | Send a file as an octet stream.
-| [res.sendStatus()](/4x/api.html#res.sendStatus) | Set the response status code and send its string representation as the response body.
+| [res.download()](/4x/api.html#res.download)   | Solicita o download de um arquivo.
+| [res.end()](/4x/api.html#res.end)        | Finaliza a resposta.
+| [res.json()](/4x/api.html#res.json)       | Envia um JSON como resposta.
+| [res.jsonp()](/4x/api.html#res.jsonp)      | Envia uma JSON com suporte JSONP como resposta.
+| [res.redirect()](/4x/api.html#res.redirect)   | Redireciona uma requisição.
+| [res.render()](/4x/api.html#res.render)     | Renderiza um template view.
+| [res.send()](/4x/api.html#res.send)       | Envia uma resposta de vários tipos.
+| [res.sendFile](/4x/api.html#res.sendFile)     | Envia um arquivo como octet stream.
+| [res.sendStatus()](/4x/api.html#res.sendStatus) | Define o código de status da resposta e envia uma string representando este status como corpo da resposta (response body).
 
 <h2 id="app-route">app.route()</h2>
 
-Chainable route handlers for a route path can be created using `app.route()`.
-Since the path is specified at a single location, it
-helps to create modular routes and reduce redundancy and typos. For more
-information on routes, see [Router() documentation](/4x/api.html#router).
+Encadeamento de manipuladores (handlers) para uma rota podem ser criados utilizando-se app.route().
+Como nesse caso a rota (path) é especificada em um único local, isso ajuda a criar rotas modulares, reduzindo a redundância e erros de digitação. Para mais informações consulte a documentação [Router()](/4x/api.html#router).
 
-Here is an example of chained route handlers defined using `app.route()`.
+Aqui está um exemplo de handlers encadeados definidos com a utilização de app.route():
 
 ~~~js
 app.route('/book')
@@ -239,38 +247,34 @@ app.route('/book')
 
 <h2 id="express-router">express.Router</h2>
 
-The `express.Router` class can be used to create modular mountable
-route handlers. A `Router` instance is a complete middleware and
-routing system; for this reason it is often referred to as a "mini-app".
+A classe express.Router pode ser usada para criar manipuladores de rota modulares. 
+Uma instância Router é um sistema completo de middleware e roteamento; Por isso, é muitas vezes chamado de um "mini-app". 
 
-The following example creates a router as a module, loads a middleware in
-it, defines some routes, and mounts it on a path on the main app.
+O exemplo a seguir cria um router como um módulo, carrega um middleware nele, define algumas rotas, e o monta em uma única rota no app principal.
+Crie um arquivo chamado routerbirds.js no diretório app, com o seguinte conteúdo:
 
-Create a router file named `birds.js` in the app directory,
-with the following content:
 
 ~~~js
 var express = require('express');
 var router = express.Router();
 
-// middleware specific to this router
+// middleware específico para este router
 router.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
   next();
 });
-// define the home page route
+// define a rota para a home page
 router.get('/', function(req, res) {
   res.send('Birds home page');
 });
-// define the about route
+// define a rota para about
 router.get('/about', function(req, res) {
   res.send('About birds');
 });
-
 module.exports = router;
 ~~~
 
-Then, load the router module in the app:
+Então carregue o módulo router num app:
 
 ~~~js
 var birds = require('./birds');
@@ -278,6 +282,4 @@ var birds = require('./birds');
 app.use('/birds', birds);
 ~~~
 
-The app will now be able to handle requests to `/birds` and
-`/birds/about`, along with calling the `timeLog`
-middleware specific to the route.
+O app agora será capaz de lidar com as requisições para '/birds' e '/birds/about' e chamando o middleware timeLog específico para a rota.

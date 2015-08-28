@@ -1,36 +1,36 @@
 ---
 layout: page
-title: Using template engines with Express
+title: Usando template engines com o Express
 menu: guide
-lang: en
+lang: pt-br
 ---
 
-# Using template engines with Express
+# Usando template engines com o Express
 
-Before Express can render template files, the following application settings have to be set.
+Antes que o Express possa renderizar arquivos de template, as seguintes configurações precisão ser feitas na aplicação.
 
-* `views`, the directory where the template files are located. Eg: `app.set('views', './views')`
-* `view engine`, the template engine to use. Eg: `app.set('view engine', 'jade')`
+* `views`, o diretório onde os arquivos de templates estão localizados. Exemplo: `app.set('views', './views')`
+* `view engine`, a template engine que será utilizada. Exemplo: `app.set('view engine', 'jade')`
 
-Then install the corresponding template engine npm package.
+Então instalamos os pacotes npm da templete engine correspondente.
 
 ~~~sh
 $ npm install jade --save
 ~~~
 
 <div class="doc-box doc-notice" markdown="1">
-Express-compliant template engines such as Jade, export a function named `__express(filePath, options, callback)`, which is called by `res.render()` to render the template code.
+Templates engines compatíveis com o Express, como a Jade, exportam uma função assinada como __express(filePath, options, callback) que é chamada por `res.render()` para renderizar o código do template.
 
-Some template engines do not follow this convention, the [Consolidate.js](https://www.npmjs.org/package/consolidate) library was created to map all of node's popular template engines to follow this convention, thus allowing them to work seamlessly within Express.
+Algumas templates engines não seguem esta convenção. A biblioteca [Consolidate.js](https://www.npmjs.org/package/consolidate) foi criada para mapear todas as template engines populares do nodeJS para esta convenção, permitindo que todas funcionem perfeitamente com o Express.
 </div>
 
-Once the view engine is set, you don't have to explicitly specify the engine or load the template engine module in your app, Express loads it internally as shown below, for the example above.
+Uma vez que a view engine estiver definida, você não precisa especificá-la explicitamente nem carregar o módulo da engine no seu app. O Express fará isso internamente como mostrado a seguir.
 
 ~~~js
 app.set('view engine', 'jade');
 ~~~
 
-Create a Jade template file named "index.jade" in the views directory, with the following content.
+	Crie um arquivo de template jade chamado "index.jade" no diretório views, com o seguinte conteúdo
 
 ~~~js
 html
@@ -40,7 +40,8 @@ html
     h1!= message
 ~~~
 
-Then create a route to render the "index.jade" file. If the `view engine` property is not set, you will have to specify the extension of the view file, else you can omit it.
+Crie então uma rota para renderizar o arquivo "index.jade". Se a propriedade `view engine` estiver definida, você pode omitir a extensão do arquivo view, caso contrário a extensão precisará ser especificada.
+
 
 ~~~js
 app.get('/', function (req, res) {
@@ -48,6 +49,6 @@ app.get('/', function (req, res) {
 });
 ~~~
 
-On making a request to the home page, "index.jade" will be rendered as HTML.
+Ao ser feita uma requisição GET para a home page  o arquivo "index.jade" será renderizado como HTML.
 
-To better understand how template engines work in Express, read ["Developing template engines for Express"](/advanced/developing-template-engines.html).
+Para entender melhor como templates engines trabalham no Express, leia ["Desenvolvendo templates engines para o Express"](/advanced/developing-template-engines.html).
