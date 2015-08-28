@@ -2,7 +2,7 @@
 layout: page
 title: Roteamento no Express
 menu: guide
-lang: pr_BR
+lang: pt-br
 ---
 
 # Roteamento
