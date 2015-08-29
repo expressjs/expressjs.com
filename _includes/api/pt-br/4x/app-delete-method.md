@@ -1,12 +1,12 @@
 <h3 id='app.delete.method'>app.delete(path, callback [, callback ...])</h3>
 
-Routes HTTP DELETE requests to the specified path with the specified callback functions.
-For more information, see the [routing guide](/guide/routing.html).
+Routes HTTP DELETE requisitam à path específica com as funções callback específicas.
+Para mais informações, veja o [routing guide](/guide/routing.html).
 
-You can provide multiple callback functions that behave just like middleware, except
-these callbacks can invoke `next('route')` to bypass the remaining route
-callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control
-to subsequent routes if there's no reason to proceed with the current route.
+Você pode fornecer multiplas funções callback que se comportam como middleware, com exceção de
+que esses callbacks podem chamar `next('route')` para ignorar a(s) restante(s) route
+callback(s). Você pode usar este mecanismo para impor condições prévias em uma route, então passar
+o controle para routes subsequentes se não houver razão para continuar na route atual.
 
 ~~~js
 app.delete('/', function (req, res) {
