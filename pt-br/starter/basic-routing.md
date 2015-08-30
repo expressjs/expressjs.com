@@ -1,44 +1,45 @@
 ---
 layout: page
-title: Express basic routing tutorial
+title: Tutorial básico de roteamento do Express
 menu: starter
-lang: en
+lang: pt-br
 ---
 
-# Basic routing tutorial
+# Tutorial básico de roteamento
 
-This tutorial is a basic introduction to routing with Express. Routing refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, and so on).
+Este tutorial é uma introdução básica ao roteamento com Express. Roteamento determina como uma aplicação responde a uma requisição de um cliente a um <i>endpoint</i> específico, que é uma <i>URI</i> (ou caminho) e um método HTTP específico (GET, POST, etc...)
 
-Each route can have one or more handler functions, which is / are executed when the route is matched. 
+Cada rota pode ter uma ou mais funções <i>handler</i>, que é(serão) executada(s) quando a rota coincidir.
 
-Route definition takes the following structure `app.METHOD(PATH, HANDLER)`, where `app` is an instance of `express`, `METHOD` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` is a path on the server, and `HANDLER` is the function executed when the route is matched.
+A definição de uma rota segue a seguinte estrutura `app.METHOD(PATH, HANDLER)`, onde `app` é uma instância do `express`, `METHOD` é um [método de requisição HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` é o caminho no servidor, e `HANDLER` é a função que será executada quando a rota coincidir.
+
 
 <div class="doc-box doc-notice" markdown="1">
-This tutorial assumes that an instance of `express` named `app` is created and the server is running. If you are not familiar with creating an app and starting it, refer to the [Hello world example](/starter/hello-world.html).
+Este tutorial assume que uma instância do `express` nomeada `app` é criada e o servidor está sendo executado. Se você não está familiarizado com a criação de uma aplicação e como executá-la, consulte o [exemplo de Hello world](/starter/hello-world.html).
 </div>
 
-The following code illustrates some example routes in an app.
+O seguinte código demonstra alguns exemplos de rotas em uma aplicação.
 
 ~~~js
-// respond with "Hello World!" on the homepage
+// responde com "Hello World!" na página principal
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-// accept POST request on the homepage
+// aceita uma requisição POST na página principal
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
 
-// accept PUT request at /user
+// aceita uma requisição PUT no caminho /user
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
 
-// accept DELETE request at /user
+// aceita uma requisição DELETE no caminho /user
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
 ~~~
 
-For more details about routing, refer to the [routing guide](/guide/routing.html).
+Para maiores detalhes sobre roteamento, consulte o [guia de roteamento](/guide/routing.html). 

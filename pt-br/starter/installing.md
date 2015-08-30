@@ -1,49 +1,48 @@
 ---
 layout: page
-title: Installing Express
+title: Instalando Express
 menu: starter
-lang: en
+lang: pt-be
 ---
 
-# Installing
+# Instalando
 
-Assuming you've already installed [Node.js](https://nodejs.org/), create a directory to hold your application,
-and make that your working directory.
+Assumindo que você já possui o [Node.js](https://nodejs.org/) instalado, crie um diretório que irá conter sua aplicação, e acesse o diretório.
 
 ~~~sh
 $ mkdir myapp
 $ cd myapp
 ~~~
 
-Use the `npm init` command to create a `package.json` file for your application.
-For more information on how `package.json` works, see [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
+Execute o comando `npm init` para criar o arquivo `package.json` para sua aplicação.
+Para mais informações de como o `package.json` funciona, consulte as [Especificações para manipulação do package.json do npm](https://docs.npmjs.com/files/package.json).
 
 ~~~sh
 $ npm init
 ~~~
 
-This command will prompt your for a number of things such as the name and version of your application.
-For now, you can simply hit RETURN to accept the defaults for most of them, except for:
+Este comando pedirá algumas coisas como nome e versão da aplicação.
+Por enquanto, você pode apenas apertar ENTER para aceitar os valores <i>default</i> para a maioria, exceto para:
 
 ~~~sh
 entry point: (index.js)
 ~~~
 
-Enter `app.js` or whatever you want the name of the main file to be. If you want it to be `index.js`, hit RETURN to accept the suggested default file name.
+Digite `app.js` ou o que você desejar que seja o nome do seu arquivo principal. Se você deseja que seja `index.js`, aperte ENTER para aceitar a sugestão <i>default</i> de nome de arquivo.
 
-Now install Express in the app directory and save it in the dependencies list:
+Agora instale Express no diretório da aplicação e salve na lista de dependências:
 
 ~~~sh
 $ npm install express --save
 ~~~
 
-To install Express temporarily, and not add it to the dependencies list, omit the `--save` option:
+Para instalar o Express temporariamente, e não adicioná-lo na lista de dependências, omita a opção `--save`:
 
 ~~~sh
 $ npm install express
 ~~~
 
 <div class="doc-box doc-info" markdown="1">
-Node modules installed with the `--save` option are added to the `dependencies` list in the `package.json` file.
-Then using `npm install` in the app directory will automatically install modules in the dependencies list.
+Módulos do Node isntalador com a opção `--save` serão adicionados a lista de `dependências` no arquivo `package.json`.
+Então utilizando `npm install` no diretório da aplicação irá instalar automaticamente os módulos do lista de dependência.
 </div>

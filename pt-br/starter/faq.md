@@ -2,60 +2,60 @@
 layout: page
 title: Express FAQ
 menu: starter
-lang: en
+lang: pt-br
 ---
 
 # FAQ
 
-## How should I structure my application?
+## Como eu devo estruturar minha aplicação?
 
-There is no definitive answer to this question. It depends 
-on the scale of your application and the team involved. To be as
-flexible as possible, Express makes no assumptions in terms of structure.
+Não existe uma resposta definitiva para esta questão. Ela depende 
+ta escala da sua aplicação e do time envolvido. Para ser o mais 
+flexível possível, o Express não possui premissas em termos de estrutura.
 
-Routes and other application-specific logic may live in as many files
-as you wish, in any directory structure you prefer. View the following
-examples for inspiration:
+Rotas e outras lógicas específicas da aplicação podem ficar em quantos 
+arquivos que você desejar, em qualquer estrutura de diretório que você 
+preferir. Veja os seguintes exemplos para inspiração:
 
 * [Route listings](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
 * [Route map](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
 * [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
 
-Also, there are third-party extensions for Express, which simplify some of these patterns:
+Também, existem extensões de terceiros para o Express, que simplificam alguns destes padrões:
 
 * [Resourceful routing](https://github.com/expressjs/express-resource)
 
-## How do I define models?
+## Como eu defino modelos?
 
-Express has no notion of a database at all. This is
-left up to third-party Node modules, allowing you to
-interface with nearly any database.
+Express não tem noção nenhuma da banco de dados como um todo.
+Isto é deixado para módulos do Node de terceiros, permitindo 
+que você faça interface com quase qualquer banco de dados.
 
-See [LoopBack](http://loopback.io) for an Express-based framework centered around models.
+Veja [LoopBack](http://loopback.io) para um framework baseado em Express centrado em modelos.
 
-## How can I authenticate users?
+## Como eu posso autenticar usuários?
 
-This is another opinionated area that Express does not
-venture into.  You may use any authentication scheme you wish.
-For a simple username / password scheme, see [this example](https://github.com/strongloop/express/tree/master/examples/auth).
+Está é uma outra área que o Expres não se aventura. 
+Você pode utilizar qualquer schema de autenticação que desejar.
+Para um schema simples de <i>username</i> / <i>password</i>, veja [este exemplo](https://github.com/strongloop/express/tree/master/examples/auth).
 
 
-## Which template engines does Express support?
+## Qual <i>engine</i> de template que o Express suporta?
 
-Express supports any template engine that conforms with the `(path, locals, callback)` signature.
-To normalize template engine interfaces and caching, see the
-[consolidate.js](https://github.com/visionmedia/consolidate.js)
-project for support. Unlisted template engines may still support the Express signature.
+Express suporta qualquer <i>engine</i> de template que siga a assinatura `(path, locals, callback)`.
+Para normalizar a interface e cache de template <i>engine</i>, veja o projeto
+[consolidate.js](https://github.com/visionmedia/consolidate.js) para apoio.
+<i>Engine</i> de templates não listadas, podem ter a assinatura do Express.
 
-## How do you handle 404s?
+## Como o lidar com 404s?
 
-In Express, 404s are not the result of an error. Therefore,
-the error-handler middleware will not capture 404s. This is
-because a 404 is simply the absence of additional work to do;
-in other words, Express has executed all middleware / routes,
-and found that none of them responded. All you need to
-do is add a middleware at the very bottom (below all others)
-to handle a 404:
+No Express, 404s não são resultados de erro. Portanto, 
+o <i>middleware</i> de tratamento de erro não irá capturar 404s.
+Isto é porque 404 é simplesmente a ausência de um trabalho adicional;
+em outras palavras, Express executou todos os <i>middlewares</i> / 
+rotas, e não nenhum deles respondeu. Tudo o que você precisa fazer 
+é adicionar por último um <i>middleware</i> (depois te todos os 
+outros) para tratar o 404:
 
 ~~~js
 app.use(function(req, res, next) {
@@ -63,10 +63,11 @@ app.use(function(req, res, next) {
 });
 ~~~
 
-## How do you setup an error handler?
+## Como configurar tratamento de erros?
 
-You define error-handling middleware the same way as other middleware,
-except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
+Você pode definir um <i>middleware</i> para tratamento de erros do mesmo 
+jeito que os outros <i>middlewares</i>, exceto que com quatro argumentos 
+ao invés de três; especificamente com a assinatura `(err, req, res, next)`:
 
 ~~~js
 app.use(function(err, req, res, next) {
@@ -75,11 +76,11 @@ app.use(function(err, req, res, next) {
 });
 ~~~
 
-For more information, see [Error handling](/guide/error-handling.html).
+Para mais informações, veja [Tratamento de Erro](/guide/error-handling.html).
 
-## How do I render plain HTML?
+## Como eu renderizo HTML puro?
 
-You don't! There's no need to "render" HTML with `res.render()`.
-If you have a specific file, use `res.sendFile()`.
-If you are serving many assets from a directory use the `express.static()`
-middleware.
+Você não faz! Não tem porque "renderizar" HTML com `res.render()`.
+Se você tem um arquivo específico, use `res.sendFile()`.
+Se vocês está servindo diversos arquivos de um diretório use o 
+<i>middleware</i> `express.static()`.
