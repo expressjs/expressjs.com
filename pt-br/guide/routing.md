@@ -2,7 +2,7 @@
 layout: page
 title: Roteamento no Express
 menu: guide
-lang: pt_BR
+lang: pt-br
 ---
 
 # Roteamento
@@ -213,7 +213,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 
 Os métodos em um objeto de resposta (res) na tabela seguinte podem enviar respostar ao cliente e encerrar o ciclo de requisição e resposta. Se nenhum deles é chamado por um manipulador (handler), então a requisição do cliente será deixada em espera.
 
-| Método               | Descrição                          
+| Método               | Descrição
 |----------------------|--------------------------------------
 | [res.download()](/4x/api.html#res.download)   | Solicita o download de um arquivo.
 | [res.end()](/4x/api.html#res.end)        | Finaliza a resposta.
@@ -247,8 +247,8 @@ app.route('/book')
 
 <h2 id="express-router">express.Router</h2>
 
-A classe express.Router pode ser usada para criar manipuladores de rota modulares. 
-Uma instância Router é um sistema completo de middleware e roteamento; Por isso, é muitas vezes chamado de um "mini-app". 
+A classe express.Router pode ser usada para criar manipuladores de rota modulares.
+Uma instância Router é um sistema completo de middleware e roteamento; Por isso, é muitas vezes chamado de um "mini-app".
 
 O exemplo a seguir cria um router como um módulo, carrega um middleware nele, define algumas rotas, e o monta em uma única rota no app principal.
 Crie um arquivo chamado routerbirds.js no diretório app, com o seguinte conteúdo:

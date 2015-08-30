@@ -2,7 +2,7 @@
 layout: page
 title: Instalando Express
 menu: starter
-lang: pt-be
+lang: pt-br
 ---
 
 # Instalando
