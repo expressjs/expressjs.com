@@ -1,7 +1,7 @@
-<h2>Application</h2>
+<h2>Aplicativo Express</h2>
 
-The `app` object conventionally denotes the Express application.
-Create it by calling the top-level `express()` function exported by the Express module:
+O objeto`app` convensionalmente é o aplicativo Express.
+Para criar este objeto chamamos a função de alto nível `express()`, que é exportada pelo módulo Express:
 
 ~~~js
 var express = require('express');
@@ -14,17 +14,17 @@ app.get('/', function(req, res){
 app.listen(3000);
 ~~~
 
-The `app` object has methods for
+O objeto `app` possui métodos para:
+* Roteamento de requisições HTTP; veja por exemplo, [app.METHOD](#app.METHOD) e [app.param](#app.param).
+* Configuração de middlewares; veja [app.route](#app.route).
+* Renderização de views HTML; veja [app.render](#app.render).
+* Definição de template engine; veja [app.engine](#app.engine).
 
-* Routing HTTP requests; see for example, [app.METHOD](#app.METHOD) and [app.param](#app.param).
-* Configuring middleware; see [app.route](#app.route).
-* Rendering HTML views; see [app.render](#app.render).
-* Registering a template engine; see [app.engine](#app.engine).
 
-It also has settings (properties) that affect how the application behaves;
-for more information, see [Application settings](#app.settings.table).
+O `app` também tem configurações (propriedades) que afetam o comportamento do aplicativo;
+para mais informações, consulte [Application settings](#app.settings.table).
 
-<h3 id='app.properties'>Properties</h3>
+<h3 id='app.properties'>Propriedades (Properties)</h3>
 
 <section markdown="1">
   {% include api/{{ page.lang }}/4x/app-locals.md %}
@@ -34,13 +34,13 @@ for more information, see [Application settings](#app.settings.table).
   {% include api/{{ page.lang }}/4x/app-mountpath.md %}
 </section>
 
-<h3 id='app.events'>Events</h3>
+<h3 id='app.events'>Eventos (Events)</h3>
 
 <section markdown="1">
   {% include api/{{ page.lang }}/4x/app-onmount.md %}
 </section>
 
-<h3 id='app.methods'>Methods</h3>
+<h3 id='app.methods'>Métodos (Methods)</h3>
 
 <section markdown="1">
   {% include api/{{ page.lang }}/4x/app-all.md %}
@@ -117,4 +117,3 @@ for more information, see [Application settings](#app.settings.table).
 <section markdown="1">
   {% include api/{{ page.lang }}/4x/app-use.md %}
 </section>
-
