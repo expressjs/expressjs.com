@@ -2,7 +2,7 @@
 layout: page
 title: Integração com banco de dados
 menu: guide
-lang: pt_BR
+lang: pt-br
 ---
 
 # Integração com bancos de dados Database
