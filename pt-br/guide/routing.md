@@ -8,9 +8,10 @@ lang: pt-br
 # Roteamento
 
 Roteamento é uma forma de determinar como uma aplicação responde a uma requisição do cliente para chegar a um ponto determinado, dependendo de qual foi a URI (path) e o método HTTP (GET, POST, etc...)  utilizado nessa requisição.
-Exemplo básico de roteamento no Express:
-~~~js
 
+Exemplo básico de roteamento no Express:
+
+~~~js
 var express = require('express');
 var app = express();
 
@@ -18,7 +19,6 @@ var app = express();
 app.get('/', function(req, res) {
   res.send('hello world');
 });
-
 ~~~
 
 <h2 id="route-methods">Métodos da rota</h2>
@@ -31,6 +31,7 @@ Os métodos da rota são derivados dos métodos HTTP e vinculados a uma instânc
 A definição de rota segue a estrutura app.METHOD(PATH, HANDLER), onde app é uma instância express, METHOD é um dos métodos de requisição do HTTP, PATH é um caminho (rota) no servidor, e HANDLER é a função executada para a rota correspondente.
 
 O código a seguir mostra alguns exemplos de rotas em um app.
+
 ~~~js
 // responde com with "Hello World!" na homepage
 app.get('/', function (req, res) {
@@ -52,8 +53,6 @@ app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
 ~~~
-
-
 
 O Express soporta os seguintes métodos de roteamento correspondentes aos métodos de requisição HTTP: get, post, put, head, delete, options, trace, copy, lock, mkcol, move, purge, propfind, proppatch, unlock, report, mkactivity, checkout, merge, m-search, notify, subscribe, unsubscribe, patch search e connect.
 
@@ -85,6 +84,7 @@ Observação: query strings não são parte do caminho de uma rota.
 </div>
 
 Exemplos de rotas baseadas em string:
+
 ~~~js
 // casa requisições para root
 app.get('/', function (req, res) {
@@ -101,7 +101,9 @@ app.get('/random.text', function (req, res) {
   res.send('random.text');
 });
 ~~~
+
 Exemplo de rotas baseadas em padrões de string:
+
 ~~~js
 // casa requisições acd e abcd
 app.get('/ab?cd', function(req, res) {
@@ -150,6 +152,7 @@ Você pode usar isso para definir condições em uma rota e então passar o cont
 Handlers podem vir em forma de função, array de funções ou várias combinações de ambos, como mostram os exemplos a seguir.
 
 Uma rota pode ser manipulada usando uma simples função callback:
+
 ~~~js
 app.get('/example/a', function (req, res) {
   res.send('Hello from A!');
@@ -168,7 +171,6 @@ app.get('/example/b', function (req, res, next) {
 ~~~
 
 Uma rota pode ser manipulada utilizando-se um array de funções callback:
-
 
 ~~~js
 var cb0 = function (req, res, next) {
@@ -252,7 +254,6 @@ Uma instância Router é um sistema completo de middleware e roteamento; Por iss
 
 O exemplo a seguir cria um router como um módulo, carrega um middleware nele, define algumas rotas, e o monta em uma única rota no app principal.
 Crie um arquivo chamado routerbirds.js no diretório app, com o seguinte conteúdo:
-
 
 ~~~js
 var express = require('express');
