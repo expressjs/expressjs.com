@@ -1,39 +1,39 @@
 ---
 layout: home
-title: Express - Node.js web application framework
+title: Express - Framework web para Node.js
 menu: home
-lang: en
+lang: pt-br
 ---
 
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
-    <section id="description"><a href="/" class="express">Express</a><span class="description">Fast, unopinionated, minimalist web framework for <a href='http://nodejs.org'>Node.js</a></span>
+    <section id="description"><a href="/" class="express">Express</a><span class="description">Framework web rápido, minimalista e de mente aberta para <a href='http://nodejs.org'>Node.js</a></span>
     </section>
     <div id="install-command">$ npm install express --save</div>
 </section>
 
 <section id="doc-langs" markdown="1">
-  Express docs available in other languages: [Spanish](/es), [Japanese](/ja), [Russian](/ru), [Chinese](/zh), [Korean](/ko).
+  Documentação do Express disponível em outros idiomas: [Spanish](/es), [Japanese](/ja), [Russian](/ru), [Chinese](/zh), [Korean](/ko), [Portuguese](/pt-br).
 </section>
 
 <section id="intro">
 
   <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h3>Web Applications</h3> Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+          <h3>Aplicações Web</h3> Express é um framework de aplicações web minimalista e flexível para Node.js que fornece um conjunto robusto de recursos para web e aplicações móveis.
       </div>
 
       <div id="apis">
-          <h3>APIs</h3> With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy.
+          <h3>APIs</h3> Com uma infinidade de métodos e middlewares HTTP à sua disposição, criar uma API robusta é rápido e fácil.
       </div>
 
       <div id="performance">
-          <h3>Performance</h3> Express provides a thin layer of fundamental web application features, without obscuring Node features that you know and love.
+          <h3>Desempenho</h3> Express fornece uma camada fina de características fundamentais para aplicativos web, sem obscurecer características do Node que você conhece e ama.
       </div>
 
       <div id="sponsorship">
-          <a href="http://loopback.io/"><h3>LoopBack</h3> Develop model-driven apps with an Express-based framework.<br/>Find out more at loopback.io.</a>
+          <a href="http://loopback.io/"><h3>LoopBack</h3> Desenvolve aplicações conduzidas por modelos com uma estrutura baseada em Express.<br/>Saiba mais em loopback.io.</a>
       </div>
   </div>
 
