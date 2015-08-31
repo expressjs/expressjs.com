@@ -8,8 +8,7 @@ lang: pt-br
 # Atualizações seguras do Express
 
 <div class="doc-box doc-notice" markdown="1">
-Vulnerabilidades do Node.js afetam diretamente o Express
-Node.js vulnerabilities directly affect Express. Portanto [dê uma olhada nas vulnerabilidades do Node.js] vulnerabilities](http://blog.nodejs.org/vulnerability/) e certifique-se de estar utilizando a última versão estável do Node.
+Vulnerabilidades do Node.js afetam diretamente o Express. Portanto [dê uma olhada nas vulnerabilidades do Node.js] vulnerabilities](http://blog.nodejs.org/vulnerability/) e certifique-se de estar utilizando a última versão estável do Node.
 </div>
 
 A lista abaixo mostra as vulnerabilidades do Express que estão corrigidas em uma específica versão de atualização.
