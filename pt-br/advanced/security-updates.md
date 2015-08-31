@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Atualizações com segurança do Express
+title: Atualizações seguras do Express
 menu: advanced
 lang: pt-br
 ---
 
-# Atualizações com segurança
+# Atualizações seguras do Express
 
 <div class="doc-box doc-notice" markdown="1">
 Vulnerabilidades do Node.js afetam diretamente o Express
