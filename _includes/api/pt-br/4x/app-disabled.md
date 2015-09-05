@@ -1,7 +1,7 @@
 <h3 id='app.disabled'>app.disabled(name)</h3>
 
-Returns `true` if the Boolean setting `name` is disabled (`false`), where `name` is one of the properties from
-the [app settings table](#app.settings.table).
+Retorna `true` se o Booleano `name` está desativado (`false`), onde `name` é uma das
+propriedades da [tabela de configurações da aplicação](#app.settings.table).
 
 ~~~js
 app.disabled('trust proxy');
