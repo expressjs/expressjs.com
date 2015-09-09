@@ -152,7 +152,7 @@ $ npm install mongoskin
 **Example**
 
 ~~~js
-var db = require('mongoskin').db('localhost:27017/animals');
+var db = require('mongoskin').db('mongodb://localhost:27017/animals');
 
 db.collection('mamals').find().toArray(function(err, result) {
   if (err) throw err;
