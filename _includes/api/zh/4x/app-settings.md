@@ -32,7 +32,9 @@ If `name` is one of the application settings, it affects the behavior of the app
 
   [More about the HTTP ETag header](http://en.wikipedia.org/wiki/HTTP_ETag).
   </td>
-      <td></td>
+  <td markdown="1">
+  `weak`
+  </td>
     </tr>
     <tr>
   <td markdown="1">
