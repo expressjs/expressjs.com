@@ -1,6 +1,6 @@
 <h3 id='app.path'>app.path()</h3>
 
-Returns the canonical path of the app, a string.
+Retorna o caminho canônico da aplicação, uma string.
 
 ~~~js
 var app = express()
@@ -15,5 +15,5 @@ console.log(blog.path()); // '/blog'
 console.log(blogAdmin.path()); // '/blog/admin'
 ~~~
 
-The behavior of this method can become very complicated in complex cases of mounted apps:
-it is usually better to use [req.baseUrl](#req.baseUrl) to get the canonical path of the app.
+O comportamento desse método pode se tornar muito complicado em casos complexos de aplicações montadas:
+geralmente é melhor usar [req.baseUrl](#req.baseUrl) para obter o caminho canônico da aplicação.

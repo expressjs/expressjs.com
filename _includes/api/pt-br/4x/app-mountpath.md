@@ -1,28 +1,28 @@
 <h3 id='app.mountpath'>app.mountpath</h3>
 
-The `app.mountpath` property is the path pattern(s) on which a sub app was mounted.
+A propriedade `app.mountpath` é o caminho padrão no qual uma sub aplicação foi montada.
 
 <div class="doc-box doc-info" markdown="1">
-  A sub app is an instance of `express` which may be used for handling the request to a route.
+  Uma sub aplicação é uma instância de `express` que pode ser utilizada para manipular a solicitação para uma rota.
 </div>
 
 ~~~js
 var express = require('express');
 
-var app = express(); // the main app
-var admin = express(); // the sub app
+var app = express(); // a aplicação principal
+var admin = express(); // a sub aplicação
 
 admin.get('/', function (req, res) {
   console.log(admin.mountpath); // /admin
   res.send('Admin Homepage');
 })
 
-app.use('/admin', admin); // mount the sub app
+app.use('/admin', admin); // montar a sub aplicação
 ~~~
 
-It is similar to the [baseUrl](#req.baseUrl) property of the `req` object, except `req.baseUrl` returns the matched URL path, instead of the matched pattern(s).
+É semelhante à propriedade [baseUrl](#req.baseUrl) do objeto `req`, exceto que `req.baseUrl` retorna o caminho de URL correspondente, em vez do padrão correspondente.
 
-If a sub-app is mounted on multiple path patterns, `app.mountpath` returns the list of patterns it is mounted on, as shown in the following example. 
+Se uma sub aplicação é montada em vários caminhos padrões, `app.mountpath` devolve a lista de padrões que está montado, como mostrado no exemplo a seguir.
 
 ~~~js
 var admin = express();
@@ -38,6 +38,6 @@ secret.get('/', function (req, res) {
   res.send('Admin Secret');
 });
 
-admin.use('/secr*t', secret); // load the 'secret' router on '/secr*t', on the 'admin' sub app
-app.use(['/adm*n', '/manager'], admin); // load the 'admin' router on '/adm*n' and '/manager', on the parent app
+admin.use('/secr*t', secret); // carrega o roteador 'secret' em '/secr*t', sobre a sub aplicação 'admin'
+app.use(['/adm*n', '/manager'], admin); // carrega o roteador 'admin' em '/adm*n' e '/manager', sobre a aplicação pai
 ~~~
