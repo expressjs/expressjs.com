@@ -198,9 +198,11 @@ If `name` is one of the application settings, it affects the behavior of the app
 
   <h5 id="etag.options.table">Options for `etag` setting</h5>
 
+  <p markdown="1">
   The ETag functionality is implemented using the
   [etag](https://www.npmjs.org/package/etag) package.
   For more information, see its documentation.
+  </p>
 
   <table class="doctable" border="1">
     <thead><tr><th>Type</th><th>Value</th></tr></thead>
