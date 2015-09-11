@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Express - WebアプリケーションフレームワークをNode.jsの
+title: Express - Node.jsのWebアプリケーションフレームワーク
 menu: home
 lang: ja
 ---
@@ -11,7 +11,7 @@ lang: ja
     <section id="description">
     <a href="/" class="express">Express</a>
     <span class="description">
-      <a href='http://nodejs.org'>Node.js</a>のための、高速開放的な、ミニマリストのWebフレームワーク
+      <a href='http://nodejs.org'>Node.js</a>のための、高速で軽量なWebフレームワーク
     </span>
     </section>
     <div id="install-command">$ npm install express --save</div>
@@ -26,15 +26,15 @@ lang: ja
       </div>
 
       <div id="apis">
-          <h3>APIs</h3> 堅牢なAPIを作成するあなたの処分でのHTTPユーティリティメソッドやミドルウェアの無数の、で迅速かつ簡単です。
+          <h3>APIs</h3> 多数のHTTPユーティリティメソッドやミドルウェアを兼ね揃え、自由に、迅速かつ簡単に堅牢なAPIを作成することができます。
       </div>
 
       <div id="performance">
-          <h3>Performance</h3> Expressは、ノードあなたが知っている機能や愛を隠すことなく、基本的なWebアプリケーションの機能の薄い層を提供しています。
+          <h3>Performance</h3> Expressは、あなたが好きなNode.jsの機能を覆い隠すことなく、基本で薄いレイヤーのWebアプリケーショの機能を提供しています。
       </div>
 
       <div id="sponsorship">
-          <a href="http://loopback.io/"><h3>LoopBack</h3> Expressベースのフレームワークを使用してモデル駆動型のアプリケーションを開発する。loopback.ioで詳細をご覧ください。</a>
+          <a href="http://loopback.io/"><h3>LoopBack</h3> Expressベースのフレームワークを使用してモデル駆動型のアプリケーションを開発するにはloopback.ioで詳細をご覧ください。</a>
       </div>
         
     </div>
