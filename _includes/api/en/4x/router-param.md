@@ -1,6 +1,6 @@
 <h3 id='router.param'>router.param(name, callback)</h3>
 
-Add callback triggers to route parameters, where `name` is the name of the parameter and `callback` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.  Although `name` is technically optional, using this method without it is deprecated starting with Express v4.11.0 (see below).
+Add callback triggers to route parameters, where `name` is the name of the parameter and `callback` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, the value of the parameter and the name of the parameter, in that order.  Although `name` is technically optional, using this method without it is deprecated starting with Express v4.11.0 (see below).
 
 <div class="doc-box doc-info" markdown="1">
 Unlike `app.param()`, `router.param()` does not accept an array of route parameters.
