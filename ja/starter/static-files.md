@@ -2,7 +2,7 @@
 layout: page
 title: Expressで静的ファイルを提供する
 menu: starter
-lang: jp
+lang: ja
 ---
 
 # Expressで静的ファイルを提供する
