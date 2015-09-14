@@ -53,3 +53,9 @@ http://localhost:3000/static/js/app.js
 http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
 ~~~
+
+However, the path you provide to `express.static` is relative to the directory where you launch your node process. If you run the express app from another directory, it's safer to use the absolute path of the directory you want to serve:
+
+~~~js
+app.use('/static', express.static(__dirname + '/public'));
+~~~
