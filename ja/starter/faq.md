@@ -7,106 +7,72 @@ lang: ja
 
 # FAQ
 
-## How should I structure my application?
+## アプリケーションの構造はどのようにすべきですか？
 
-There is no definitive answer to this question. It depends 
-on the scale of your application and the team involved. To be as
-flexible as possible, Express makes no assumptions in terms of structure.
+この質問に対する明確な答えはありません。アプリケーションのスケールや関係するチームに依存します。
+できるだけ柔軟にするために、Expressはアプリケーションの構造についての前提は何もありません。
 
-Routes and other application-specific logic may live in as many files
-as you wish, in any directory structure you prefer. View the following
-examples for inspiration:
+ルーティングや他のロジックは、あなたの望むディレクトリ構造の中で、あなたの望む沢山のファイルの中で動作します。
+インスピレーションを得るために、以下の例を見るといいでしょう。
 
-* [Route listings](https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19)
-* [Route map](https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47)
+* [Route listings](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Route map](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
 * [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
 
-Also, there are third-party extensions for Express, which simplify some of these patterns:
+また、これらのパターンを簡略化するサードパーティーによる拡張機能があります。
 
 * [Resourceful routing](https://github.com/expressjs/express-resource)
-* [Namespaced routing](https://github.com/expressjs/express-namespace)
 
-## How do I define models?
+## どのようにしてモデルを定義しますか？
 
-Express has no notion of a database at all. This is
-left up to third-party Node modules, allowing you to
-interface with nearly any database.
+Expressはデータベースのための道具は全くありません。
+サードパーティーのNodeモジュールに任せることで、ほどんどのデータベースへの接続を実現できます。
 
-See [LoopBack](http://loopback.io) for an Express-based framework centered around models.
+モデルを中心としたExpressベースのフレームワークである[LoopBack](http://loopback.io)を参照してください。
 
-## How can I authenticate users?
+## どうしたらユーザー認証ができますか？
 
-This is another opinionated area that Express does not
-venture into.  You may use any authentication scheme you wish.
-For a simple username / password scheme, see [this example](https://github.com/strongloop/express/tree/master/examples/auth).
+これはExpressが進んで対処しない頑固なエリアの一つです。
+あなたが使いたいと思う認証スキームを使ってください。
+ユーザー名とパスワードを用いたシンプルなスキームの例は [express/examples/auth](https://github.com/strongloop/express/tree/master/examples/auth) をご覧ください。
 
+## Expressはどのテンプレートエンジンをサポートしていますか？
 
-## Which template engines does Express support?
+Expressは`(path, locals, callback)`のシグネチャを守っているすべてのテンプレートエンジンをサポートしています。
+テンプレートエンジンのインターフェースを標準化し、キャッシュするためには、[consolidate.js](https://github.com/visionmedia/consolidate.js)をご覧ください。
+リストにないテンプレートエンジンでも、Expressのシグネチャをサポートすることができます。
 
-Express supports any template engine that conforms with the `(path, locals, callback)` signature.
-To normalize template engine interfaces and caching, see the
-[consolidate.js](https://github.com/visionmedia/consolidate.js)
-project for support. Unlisted template engines may still support the Express signature.
+## どのようにして404を操作できますか？
 
-## How can I serve static files from several directories?
-
-You may typically use any middleware several times 
-within your application. With the following middleware setup, and a request
-for `GET /javascripts/jquery.js`, the first check would be `./public/javascripts/jquery.js`;
-if it does not exist, then the subsequent middleware will check `./files/javascripts/jquery.js`.
+Expressでは、404はエラーによる結果ではありません。
+したがって、エラーハンドルミドルウェアは404を検知しません。
+404というのは単に追加の作業がない、ということがその理由です。
+言い換えれば、Expressがすべてのミドルウェアを実行し、そのどれもが応答しないことが分かったということです。
+404を操作するためにやらなければならないことは、404を操作するためのミドルウェアを追加するだけです。
 
 ~~~js
-app.use(express.static('public'));
-app.use(express.static('files'));
-~~~
-
-## How can I prefix a pathname for serving static files?
-
-Connect's generic "mounting" feature allows you to define
-the pathname "prefix" to which the middleware will be invoked.
-This effectively behaves as if that prefix string were never
-part of the path. Suppose you wanted `GET /files/javascripts/jquery.js`.
-You could mount the middleware at `/files`, exposing `/javascripts/jquery.js`
-as the `req.url`, allowing the middleware to serve the file:
-
-~~~js
-app.use('/public', express.static('public'));
-~~~
-
-## How do you handle 404s?
-
-In Express, 404s are not the result of an error. Therefore,
-the error-handler middleware will not capture 404s. This is
-because a 404 is simply the absence of additional work to do;
-in other words, Express has executed all middleware / routes,
-and found that none of them responded. All you need to
-do is add a middleware at the very bottom (below all others)
-to handle a 404:
-
-~~~js
-app.use(function(req, res, next){
-  res.send(404, 'Sorry cant find that!');
+app.use(function(req, res, next) {
+  res.status(404).send('Sorry cant find that!');
 });
 ~~~
 
-## How do you setup an error handler?
+## エラーハンドラをどう設定するか？
 
-You define error-handling middleware the same way as other middleware,
-except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
-
+エラーハンドルミドルウェアを他のミドルウェアと同じように定義します。
+具体的にはシグネチャ`(err, req, res, next)`を用います。
+4引数の代わりに3引数でも定義できます。
 
 ~~~js
-app.use(function(err, req, res, next){
+app.use(function(err, req, res, next) {
   console.error(err.stack);
-  res.send(500, 'Something broke!');
+  res.status(500).send('Something broke!');
 });
 ~~~
 
-For more information, see [Error handling](/guide/error-handling.html).
+詳細な情報は[Error handling](/{{ page.lang }}/guide/error-handling.html)を参照してください。
 
-## How do I render plain HTML?
+## どうしたらHTMLをそのまま表示できますか？
 
-You don't! There's no need to "render" HTML with `res.render()`.
-If you have a specific file, use `res.sendFile()`.
-If you are serving many assets from a directory use the `express.static()`
-middleware.
+そのようなことはしないでください！　HTMLを`res.render()`を使って表示する必要はありません。
+表示したい特定のファイルがあるなら、`res.sendFile()`を使ってください。
+もし、ディレクトリから提供したいアセットがたくさんあるなら、`express.static()`ミドルウェアを使ってください。

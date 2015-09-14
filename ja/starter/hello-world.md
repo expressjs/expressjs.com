@@ -5,39 +5,46 @@ menu: starter
 lang: ja
 ---
 
-# Hello world example
+# Hello world
 
-Here is an example of a very basic Express app.
+まず、[インストール](http://expressjs.com/ja/starter/installing.html)の指示通りにできているか確認してください。
 
-~~~js
-var express = require('express')
-var app = express()
+それでは、非常に基本的なExpressのアプリを作っていきましょう。
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
-
-var server = app.listen(3000, function () {
-
-  var host = server.address().address
-  var port = server.address().port
-
-  console.log('Example app listening at http://%s:%s', host, port)
-
-})
-~~~
-
-<div class="doc-box doc-notice" markdown="1">
-The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
-`req.pipe()`, `req.on('data', callback)` and anything else you would do without Express involved.
+<div class="doc-box doc-info" markdown="1">
+NOTE: これは、基本的に、あなたが作成できる最も簡単なExpressアプリです。
+あなたが欲しいのがシングルファイルアプリケーションでないなら、[Express generator](/starter/generator.html)を使ってください。
+Express generatorは多数のJavaScriptファイルや、Jadeテンプレート、サブディレクトリなどの様々な目的を用いるフルアプリケーションのための足場を生成します。
 </div>
 
-The app starts a server and listens on port 3000 for connection. It will respond with "Hello World!" for requests to the homepage. For every other path, it will respond with a **404 Not Found**.
+`myapp`ディレクトリで`app.js`という名前のファイルを作成し、下記のコードを追加します。
 
-Save the code in a file named `app.js` and run it with the following command.
+~~~js
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('Hello World!');
+});
+
+var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
+});
+~~~
+
+アプリはサーバーを立ち上げて3000番ポートで接続を待機します。このアプリは、ルートURL(`/`)または _route_ へのリクエストに対して"Hello World!"と応答します。その他のすべてのパスには **404 Not Found** を返します。
+
+<div class="doc-box doc-notice" markdown="1">
+`req` (request)や`res` (response)は厳格にNodeが与えるオブジェクトと同じです。よって、`req.pipe()`や`req.on('data', callback)`を呼び出すことができ、その他もExpressに関係なく呼び出すことができます。
+</div>
+
+下記のコマンドでアプリを実行してください。
 
 ~~~ sh
 $ node app.js
 ~~~
 
-Then, load [http://localhost:3000/](http://localhost:3000/) in a browser to see the output.
+ブラウザで[http://localhost:3000/](http://localhost:3000/)を読み込むと、応答が確認できます。
