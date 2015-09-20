@@ -5,19 +5,19 @@ menu: starter
 lang: zh
 ---
 
-# Basic routing tutorial
+# 路由基础教程
 
-This tutorial is a basic introduction to routing with Express. Routing refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, and so on).
+本教程是对Express路由功能的简单介绍。路由决定一个应用程序在某特定的端响应客户端的请求。这个端包括一个URI（或路径）和一个具体的HTTP请求方法（GET，POST，等等）。
 
-Each route can have one or more handler functions, which is / are executed when the route is matched. 
+每一个路由有一个或多个处理函数，当路由被匹配时将会执行。
 
-Route definition takes the following structure `app.METHOD(PATH, HANDLER)`, where `app` is an instance of `express`, `METHOD` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` is a path on the server, and `HANDLER` is the function executed when the route is matched.
+定义的路由会使用如下结构`app.METHOD(PATH, HANDLER)`, `app`是`express`的实例，`METHOD`是[HTTP请求方法](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)，`PATH`是请求服务器时的路径，`HANDLER`是指当路由被匹配时所执行的函数。
 
 <div class="doc-box doc-notice" markdown="1">
-This tutorial assumes that an instance of `express` named `app` is created and the server is running. If you are not familiar with creating an app and starting it, refer to the [Hello world example](/starter/hello-world.html).
+本教程假设`app`创建完成并已启动服务。如果你不熟悉如何创建`app`并启动它，请转到 [Hello world example](/starter/hello-world.html).
 </div>
 
-The following code illustrates some example routes in an app.
+以下代码是app中的一些路由示例。
 
 ~~~js
 // respond with "Hello World!" on the homepage
@@ -41,4 +41,4 @@ app.delete('/user', function (req, res) {
 })
 ~~~
 
-For more details about routing, refer the [routing guide](/guide/routing.html).
+更多详情 [路由使用指南](/guide/routing.html).
