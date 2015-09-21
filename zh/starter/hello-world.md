@@ -28,16 +28,16 @@ var server = app.listen(3000, function () {
 ~~~
 
 <div class="doc-box doc-notice" markdown="1">
-The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
-`req.pipe()`, `req.on('data', callback)` and anything else you would do without Express involved.
+`req`（request）和`res`（response）是Node提供的完全相同的对象，所以在不用Express参与的情况下，你还可以调用`req.pipe（）`，`req.on（'data', callback）`或其他任何你想调用的方法。
 </div>
 
-The app starts a server and listens on port 3000 for connection. It will respond with "Hello World!" for requests to the homepage. For every other path, it will respond with a **404 Not Found**.
+此应用会启动一个服务并且监听3000端口。当访问主页时会返回“Hello World!”。对于访问其他路径，将会响应**404 Not Found**。
 
-Save the code in a file named `app.js` and run it with the following command.
+保存这段代码到一个名为`app.js`的文件，执行如下命令
 
 ~~~ sh
 $ node app.js
 ~~~
 
-Then, load [http://localhost:3000/](http://localhost:3000/) in a browser to see the output.
+然后，在浏览器中访问[http://localhost:3000/](http://localhost:3000/)查看结果。
+
