@@ -9,14 +9,14 @@ This example shows how to use body-parsing middleware to populate `req.body`.
 ~~~js
 var app = require('express')();
 var bodyParser = require('body-parser');
-var multer = require('multer'); 
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' }); // for parsing multipart/form-data
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(multer()); // for parsing multipart/form-data
 
-app.post('/', function (req, res) {
+app.post('/profile', upload.array(), function (req, res, next) {
   console.log(req.body);
   res.json(req.body);
-})
+});
 ~~~
