@@ -28,6 +28,7 @@ Here are some Express middleware modules:
   - [express-slash](https://github.com/ericf/express-slash): Express middleware for people who are strict about trailing slashes.
   - [express-stormpath](https://github.com/stormpath/stormpath-express): Express middleware for user storage, authentication, authorization, SSO, and data security.
   - [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize): redirect HTTP requests containing uppercase to a canonical lowercase form.
+  - [helmet](https://github.com/helmetjs/helmet): help secure your apps by setting various HTTP headers
   - [join-io](https://github.com/coderaiser/join-io "join-io"): join files on a fly to reduce requests count
   - [method-override](https://github.com/expressjs/method-override): previously `express.methodOverride`
   - [morgan](https://github.com/expressjs/morgan): previously `logger`
