@@ -10,7 +10,7 @@ The following example shows how to use body-parsing middleware to populate `req.
 var app = require('express')();
 var bodyParser = require('body-parser');
 var multer = require('multer'); // v1.0.5
-var upload = multer({ dest: 'uploads/' }); // for parsing multipart/form-data
+var upload = multer(); // for parsing multipart/form-data
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
