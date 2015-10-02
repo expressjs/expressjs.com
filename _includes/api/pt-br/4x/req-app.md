@@ -1,11 +1,10 @@
 <h3 id='req.app'>req.app</h3>
+Esta propriedade faz uma referência à instância da aplicação Express que está utilizando o middleware.
 
-This property holds a reference to the instance of the express application that is using the middleware.
+Se você seguir o padrão em que você cria um módulo que apenas exporta um middleware para requisitá-lo dentro do arquivo principal, então esse middleware pode acessar a instância do Express utilizando `req.app`.
 
-If you follow the pattern in which you create a module that just exports a middleware 
-in order for requiring it in your main file, then the middleware can access the express instance via `req.app`
 
-For example:
+Por exemplo:
 
 ~~~js
 //index.js

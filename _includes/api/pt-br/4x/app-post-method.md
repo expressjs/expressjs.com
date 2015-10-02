@@ -1,13 +1,9 @@
 <h3 id='app.post.method'>app.post(path, callback [, callback ...])</h3>
 
-Routes HTTP POST requests to the specified path with the specified callback functions.
-For more information, see the [routing guide](/guide/routing.html).
+Roteia requisições HTTP POST para um `path` especificando funções callback.
+Para mais informações, veja o guia [roteamento](/guide/routing.html).
 
-You can provide multiple callback functions that behave just like middleware,
-except that these callbacks can invoke `next('route')` to bypass the
-remaining route callback(s). You can use this mechanism to impose pre-conditions on
-a route, then pass control to subsequent routes if there's no reason to proceed with
-the current route.
+Você pode fornecer múltiplas funções callbacks que se comportam como middlewares, porém esses callbacks podem invocar `next('route')` para ignorar os callbacks restantes da rota. Você pode usar esse mecanismo para impor pré condições em uma rota, e então passar o controle para as rotas na sequência se não é mais necessário continuar na rota atual. 
 
 ~~~js
 app.post('/', function (req, res) {

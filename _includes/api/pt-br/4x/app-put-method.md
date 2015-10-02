@@ -1,13 +1,9 @@
 <h3 id='app.put.method'>app.put(path, callback [, callback ...])</h3>
 
-Routes HTTP PUT requests to the specified path with the specified callback functions.
-For more information, see the [routing guide](/guide/routing.html).
+Roteia requisições HTTP PUT para um path especificado com funções callback específicadas.
+Para mais informações, veja o [guia roteamento](/guide/routing.html).
 
-You can provide multiple callback functions that behave just like middleware,
-except that these callbacks can invoke `next('route')` to bypass the
-remaining route callback(s). You can use this mechanism to impose pre-conditions on
-a route, then pass control to subsequent routes if there's no reason to proceed with
-the current route.
+Você pode fornecer múltiplos callbacks que se comportaram como middlewares, exceto que esses callbacks poderão chamar `next('route')` para ignorar os callbacks restantes da rota. Você pode utilizar esse mecanismo para impor pré condições em uma rota e passar o controle para as rotas subsequentes quando não houver mais razão para continuar processando a rota atual.
 
 ~~~js
 app.put('/', function (req, res) {
