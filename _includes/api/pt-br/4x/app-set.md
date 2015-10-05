@@ -1,19 +1,17 @@
 <h3 id='app.set'>app.set(name, value)</h3>
 
-Assigns setting `name` to `value`, where `name` is one of the properties from
-the [app settings table](#app.settings.table). 
+Atribui o valor de configuração `name` para `value`, onde `name` é uma das propriedades listada
+na [tabela de configurações do aplicativo](#app.settings.table). 
 
-Calling `app.set('foo', true)` for a Boolean property is the same as calling
-`app.enable('foo')`. Similarly, calling `app.set('foo', false)` for a Boolean
-property is the same as calling `app.disable('foo')`.
+Chamar `app.set('foo', true)` para um valor booleano é a mesma coisa que chamar `app.enable('foo')`. De forma similiar, chamar `app.set('foo', false)` para alterar uma propriedade booleana é a mesma coisa que `app.disable('foo')`.
 
-Retrieve the value of a setting with [`app.get()`](#app.get).
+Obtendo o valor de uma configuração com [`app.get()`](#app.get).
 
 ~~~js
-app.set('title', 'My Site');
-app.get('title'); // "My Site"
+app.set('title', 'Meu site');
+app.get('title'); // "Meu site"
 ~~~
 
-<h4 id='app.settings.table'>Application Settings</h4>
+<h4 id='app.settings.table'>Configurações do Aplicativo</h4>
 
 {% include api/{{ page.lang }}/4x/app-settings.md %}
