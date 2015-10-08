@@ -192,7 +192,7 @@ Gugamarket is listed as one of the top Node/Express REST API's at http://nodefra
 
 [![](/images/apps/screenshots/gugamarket.png)](https://www.gugamarket.com)
 
-Visit [Glip](https://www.gugamarket.com)
+Visit [Gugamarket](https://www.gugamarket.com)
 
 ##Add your app or site
 
