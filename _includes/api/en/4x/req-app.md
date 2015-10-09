@@ -9,12 +9,12 @@ For example:
 
 ~~~js
 //index.js
-app.get("/viewdirectory", require("./mymiddleware.js"))
+app.get('/viewdirectory', require('./mymiddleware.js'))
 ~~~
 
 ~~~js
 //mymiddleware.js
 module.exports = function (req, res) {
-  res.send("The views directory is " + req.app.get("views"));
+  res.send('The views directory is ' + req.app.get('views'));
 });
 ~~~
