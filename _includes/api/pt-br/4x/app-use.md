@@ -1,19 +1,19 @@
 <h3 id='app.use'>app.use([path,] function [, function...])</h3>
 
-Mounts the [middleware](/guide/using-middleware.html) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
+Monta as funções do [middleware](/guide/using-middleware.html) no caminho `path`. Quando `path` não for especificado, o valor padrão é de "/".
 
 <div class="doc-box doc-info" markdown="1">
-  A route will match any path, which follows its path immediately with a "<code>/</code>".
-  For example: <code>app.use('/apple', ...)</code> will match "/apple", "/apple/images",
-  "/apple/images/news", and so on.  
+  A rota irá corresponder com qualquer caminho que seguir imediatamente com "<code>/</code>".
+  Por exemplo: <code>app.use('/apple', ...)</code> irá corresponder com "/apple", "/apple/images",
+  "/apple/images/news", e assim por diante. 
 </div>
 
 <div class="doc-box doc-info" markdown="1">
-`req.originalUrl` in a middleware is a combination of `req.baseUrl` and `req.path`, as shown in the following example.
+`req.originalUrl` em um *middleware* é a combinação de `req.baseUrl` e `req.path`, como mostrado no exemplo a seguir:
 
 ~~~js
 app.use('/admin', function(req, res, next) {
-  // GET 'http://www.example.com/admin/new'
+  // GET 'http://www.exemplo.com/admin/new'
   console.log(req.originalUrl); // '/admin/new'
   console.log(req.baseUrl); // '/admin'
   console.log(req.path); // '/new'
@@ -22,37 +22,42 @@ app.use('/admin', function(req, res, next) {
 ~~~
 </div>
 
-Mounting a middleware at a `path` will cause the middleware function to be executed whenever the base of the requested path matches the `path`.
+A montagem de um *middleware* em um caminho 'path', fará com que a função 
+*middleware* seja executada sempre que o caminho base da requisição corresponder 
+com o caminho 'path'.
 
-Since `path` defaults to "/", middleware mounted without a path will be executed for every request to the app.
+Como o padrão de `path` é "/", os *middlewares* montados sem um caminho 
+específico serão executados em cada requisição do aplicativo.
 
 ~~~js
-// this middleware will be executed for every request to the app
+// esta middleware será executada em cada requisição do aplicativo
 app.use(function (req, res, next) {
-  console.log('Time: %d', Date.now());
+  console.log('Hora: %d', Date.now());
   next();
 })
 ~~~
 
-Middleware functions are executed sequentially, therefore the order of middleware inclusion is important.
+As funções *middlewares* são executadas sequencialmente portanto, a ordem 
+de inclusão de cada uma é importante. 
 
 ~~~js
-// this middleware will not allow the request to go beyond it
+// esta middleware não irá permitir que a requisição vá além daqui.
 app.use(function(req, res, next) {
-  res.send('Hello World');
+  res.send('Olá mundo!');
 })
 
-// requests will never reach this route
+// requisições nunca atingirão esta rota
 app.get('/', function (req, res) {
-  res.send('Welcome');
+  res.send('Bem vindo');
 })
 ~~~
+`path` pode ser uma *string* representando a rota, uma *string pattern*, 
+uma expressão regular que irá combinar com as rotas, ou até mesmo uma 
+*array* de combinações.
 
-`path` can be a string representing a path, a path pattern, a regular expression to match paths,
-or an array of combinations thereof.
 
 <div class="doc-box doc-notice" markdown="1">
-The middleware in the below are simple examples.
+Os *middlewares* abaixo são simples exemplos:
 </div>
 
 <div class="table-scroller">
@@ -60,8 +65,8 @@ The middleware in the below are simple examples.
 
   <thead>
     <tr>
-      <th> Type </th>
-      <th> Example </th>
+      <th> Tipo </th>
+      <th> Exemplo </th>
     </tr>
   </thead>
   <tbody>
@@ -69,7 +74,7 @@ The middleware in the below are simple examples.
     <tr>
       <td>Path</td>
       <td>
-        <pre><code class="language-js">// will match paths starting with /abcd
+        <pre><code class="language-js">// irá combinar com rotas iniciadas em /abcd
 app.use('/abcd', function (req, res, next) {
   next();
 })</code></pre>
@@ -79,22 +84,22 @@ app.use('/abcd', function (req, res, next) {
     <tr>
       <td>Path Pattern</td>
       <td>
-        <pre><code class="language-js">// will match paths starting with /abcd and /abd
+        <pre><code class="language-js">// irá combinar com rotas iniciadas em /abcd e /abd
 app.use('/abc?d', function (req, res, next) {
   next();
 })
 
-// will match paths starting with /abcd, /abbcd, /abbbbbcd and so on
+// irá combinar com rotas iniciadas em /abcd, /abbcd, /abbbbbcd e assim por diante
 app.use('/ab+cd', function (req, res, next) {
   next();
 })
 
-// will match paths starting with /abcd, /abxcd, /abFOOcd, /abbArcd and so on
+// irá combinar com rotar iniciadas em /abcd, /abxcd, /abFOOcd, /abbArcd e assim por diante
 app.use('/ab\*cd', function (req, res, next) {
   next();
 })
 
-// will match paths starting with /ad and /abcd
+// irá combinar com as rotas iniciadas em /ad e /abcd
 app.use('/a(bc)?d', function (req, res, next) {
   next();
 })</code></pre>
@@ -104,7 +109,7 @@ app.use('/a(bc)?d', function (req, res, next) {
     <tr>
       <td>Regular Expression</td>
       <td>
-        <pre><code class="language-js">// will match paths starting with /abc and /xyz
+        <pre><code class="language-js">// irá combinar com rotas iniciadas em /abc e /xyz
 app.use(/\/abc|\/xyz/, function (req, res, next) {
   next();
 })</code></pre>
@@ -114,7 +119,7 @@ app.use(/\/abc|\/xyz/, function (req, res, next) {
     <tr>
       <td>Array</td>
       <td>
-        <pre><code class="language-js">// will match paths starting with /abcd, /xyza, /lmn, and /pqr
+        <pre><code class="language-js">// irá combinar com rotas iniciadas em /abcd, /xyza, /lmn, e /pqr
 app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
   next();
 })</code></pre>
@@ -126,29 +131,30 @@ app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
 </table>
 </div>
 
-`function` can be a middleware function, a series of middleware functions,
-an array of middleware functions, or a combination of all of them.
-Since [router](#router) and [app](#application) implement the middleware interface, you can use them
-as you would any other middleware function.
+`function` pode ser uma função *middleware*, uma série de funções *middlewares*,
+uma *array* de funções *middlewares*, ou uma combinação de todas elas.
+Desde que [router](#router) e [app](#application) implementem a interface 
+*middleware*, você pode utiliza-las como faria em qualquer outra função 
+*middleware*.
 
 <table class="doctable" border="1">
 
   <thead>
     <tr>
-      <th>Usage</th>
-      <th>Example</th>
+      <th>Uso</th>
+      <th>Exemplo</th>
     </tr>
   </thead>
   <tbody>
 
     <tr>
-      <td>Single Middleware</td>
-      <td>You can define and mount a middleware function locally.
+      <td>Middleware Única</td>
+      <td>Você pode definir e montar uma middleware localmente.
 <pre><code class="language-js">app.use(function (req, res, next) {
   next();
 })
 </code></pre>
-A router is valid middleware.
+Uma *router* é uma *middleware* válida.
 
 <pre><code class="language-js">var router = express.Router();
 router.get('/', function (req, res, next) {
@@ -157,7 +163,7 @@ router.get('/', function (req, res, next) {
 app.use(router);
 </code></pre>
 
-An Express app is valid middleware.
+Um aplicativo Express é uma *middleware* válida.
 <pre><code class="language-js">var subApp = express();
 subApp.get('/', function (req, res, next) {
   next();
@@ -168,9 +174,9 @@ app.use(subApp);
     </tr>
 
     <tr>
-      <td>Series of Middleware</td>
+      <td>Série de Middleware</td>
       <td>
-        You can specify more than one middleware function at the same mount path.
+      Você pode especificar mais de uma função middleware em uma mesma rota.
 <pre><code class="language-js">var r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
@@ -189,8 +195,9 @@ app.use(r1, r2);
     <tr>
       <td>Array</td>
       <td>
-      Use an array to group middleware logically.
-      If you pass an array of middleware as the first or only middleware parameters, then you _must_ specify the mount path.
+      Use uma array para agrupar logicamente *middlewares*.
+      Se você passar uma array de middleware como primeiro ou único 
+      parâmetro middleware, você deverá especificar a rota montada.
 <pre><code class="language-js">var r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
@@ -207,9 +214,9 @@ app.use('/', [r1, r2]);
     </tr>
 
     <tr>
-      <td>Combination</td>
+      <td>Combinação</td>
       <td>
-        You can combine all the above ways of mounting middleware.
+      Você pode combinar todas as formas acima ao montar a middleware.
 <pre><code class="language-js">function mw1(req, res, next) { next(); }
 function mw2(req, res, next) { next(); }
 
@@ -231,31 +238,31 @@ app.use(mw1, [mw2, r1, r2], subApp);
 
 </table>
 
-Following are some examples of using the [express.static](/guide/using-middleware.html#middleware.built-in)
-middleware in an Express app.
+Segue alguns exemplos de utilização do *middleware* [express.static](/guide/using-middleware.html#middleware.built-in)
+do aplicativo *Express*.
 
-Serve static content for the app from the "public" directory in the application directory:
+Serve conteúdo estático para o aplicativo a partir do diretório "public" da aplicação:
 
 ~~~js
 // GET /style.css etc
 app.use(express.static(__dirname + '/public'));
 ~~~
 
-Mount the middleware at "/static" to serve static content only when their request path is prefixed with "/static":
+Monta o *middleware* em "/static" para servir conteúdo estático apenas para requisições com rotas iniciadas em "/static":
 
 ~~~js
 // GET /static/style.css etc.
 app.use('/static', express.static(__dirname + '/public'));
 ~~~
 
-Disable logging for static content requests by loading the logger middleware after the static middleware:
+Desabilite o *logging* para requisições de conteúdos estáticos carregando o *logger* depois de seu *middleware*.
 
 ~~~js
 app.use(express.static(__dirname + '/public'));
 app.use(logger());
 ~~~
 
-Serve static files from multiple directories, but give precedence to "./public" over the others:
+Serve arquivos estáticos a partir de diversos diretórios, mas atribui a procedência de "./public" acima dos outros:
 
 ~~~js
 app.use(express.static(__dirname + '/public'));
