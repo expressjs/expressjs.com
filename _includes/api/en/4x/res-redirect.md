@@ -1,6 +1,6 @@
 <h3 id='res.redirect'>res.redirect([status,] path)</h3>
 
-Redirects to the URL dervied from the specified `path`, with specified
+Redirects to the URL derived from the specified `path`, with specified
 [HTTP status code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) `status`.
 If you don't specify `status`, the status code defaults to "302 "Found".
 
