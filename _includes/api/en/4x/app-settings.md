@@ -68,9 +68,15 @@ If `name` is one of the application settings, it affects the behavior of the app
   <td markdown="1">
   `query parser`
   </td>
-      <td>String</td>
+      <td>Varied</td>
   <td markdown="1">
-  The query parser to use, either "simple" or "extended". The simple query parser is based on Node's native query parser, [querystring](http://nodejs.org/api/querystring.html). The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
+Disable query parsing by setting the value to `false`, or set the query parser to use either "simple" or "extended" or a custom query string parsing function.
+
+The simple query parser is based on Node's native query parser, [querystring](http://nodejs.org/api/querystring.html).
+
+The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
+
+A custom query string parsing function will receive the complete query string, and must return an object of query keys and their values.
   </td>
       <td>"extended"</td>
     </tr>
@@ -96,9 +102,9 @@ If `name` is one of the application settings, it affects the behavior of the app
   </td>
       <td>Varied</td>
   <td markdown="1">
-  Indicates the app is behind a front-facing proxy, and to use the `X-Forwarded-*` headers to determine the connection and the IP address of the client. NOTE: `X-Forwarded-*` headers are easily spoofed and the detected IP addresses are unreliable.  
+  Indicates the app is behind a front-facing proxy, and to use the `X-Forwarded-*` headers to determine the connection and the IP address of the client. NOTE: `X-Forwarded-*` headers are easily spoofed and the detected IP addresses are unreliable.
 
-  `trust proxy` is disabled by default. When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The `req.ips` property, then, contains an array of IP addresses the client is connected through. To enable it, use the values described in the [`trust proxy` options table](#trust.proxy.options.table).  
+  `trust proxy` is disabled by default. When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The `req.ips` property, then, contains an array of IP addresses the client is connected through. To enable it, use the values described in the [`trust proxy` options table](#trust.proxy.options.table).
 
   The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.org/package/proxy-addr) package.  For more information, see its documentation.
   </td>
@@ -158,7 +164,7 @@ If `name` is one of the application settings, it affects the behavior of the app
       <tr>
         <td>Boolean</td>
   <td markdown="1">
-  If `true`, the client's IP address is understood as the left-most entry in the `X-Forwarded-*` header.  
+  If `true`, the client's IP address is understood as the left-most entry in the `X-Forwarded-*` header.
 
   If `false`, the app is understood as directly facing the Internet and the client's IP address is derived from `req.connection.remoteAddress`. This is the default setting.
   </td>
@@ -172,7 +178,7 @@ If `name` is one of the application settings, it affects the behavior of the app
   * linklocal - `169.254.0.0/16`, `fe80::/10`
   * uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
 
-  Set IP addresses in any of the following ways:  
+  Set IP addresses in any of the following ways:
 
   <pre><code class="language-js">app.set('trust proxy', 'loopback') // specify a single subnet
   app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
