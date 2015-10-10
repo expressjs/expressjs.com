@@ -7,9 +7,9 @@ lang: en
 <div id="api-doc" markdown="1">
 
   <div class="doc-box doc-warn" markdown="1">
-  **Express 3.x support is ending soon**
+  **Express 3.x IS NO LONGER MAINTAINED**
 
-  This series will continue to receive only security updates and bug fixes until July 2015. It is highly recommended to upgrade to Express 4.x.
+  Known and unknown security and performance issues in 3.x have not been addressed since the last update (1 August, 2015). It is highly recommended to use the latest version of Express.
   </div>
 
   <h1>3.x API</h1>

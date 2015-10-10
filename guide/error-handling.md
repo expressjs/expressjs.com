@@ -115,7 +115,7 @@ Express comes with an in-built error handler, which takes care of any errors tha
 
 If you pass an error to `next()` and you do not handle it in
 an error handler, it will be handled by the built-in error handler - the error will be written to the client with the
-stack trace. The stack trace is not incluced in the production environment.
+stack trace. The stack trace is not included in the production environment.
 
 <div class="doc-box doc-info" markdown="1">
 Set the environment variable `NODE_ENV` to "production", to run the app in production mode.
