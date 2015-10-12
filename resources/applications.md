@@ -188,11 +188,11 @@ Visit [Glip](https://glip.com)
 ##Gugamarket
 
 Gugamarket is a fullstack REST API framework licensed under GPLv3. It supports giaya.com social login. 
-Gugamarket is listed as one of the top Node/Express REST API's at http://nodeframework.com/. 
+Gugamarket is listed as one of the top Node/Express REST API's at http://nodeframework.com/.
 
-[![](/images/apps/screenshots/gugamarket.png)](https://www.gugamarket.com)
+[![](/images/apps/screenshots/gugamarket.png)](http://www.gugamarket.com)
 
-Visit [Gugamarket](https://www.gugamarket.com)
+Visit [Gugamarket](http://www.gugamarket.com)
 
 ##Add your app or site
 
