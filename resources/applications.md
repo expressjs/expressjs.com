@@ -185,6 +185,15 @@ Real-time team collaboration with integrated task management, video conferencing
 
 Visit [Glip](https://glip.com)
 
+##Gugamarket
+
+Gugamarket is a fullstack REST API framework licensed under GPLv3. It supports giaya.com social login. 
+Gugamarket is listed as one of the top Node/Express REST API's at http://nodeframework.com/.
+
+[![](/images/apps/screenshots/gugamarket.png)](http://www.gugamarket.com)
+
+Visit [Gugamarket](http://www.gugamarket.com)
+
 ##Add your app or site
 
 [Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/menu/en/resources/applications.md),
