@@ -1,36 +1,36 @@
-If `name` is one of the application settings, it affects the behavior of the application. The following table lists application settings.
+Se `name` for uma das configurações da aplicação (app), o comportamento do app é alterado. A tabela a seguir apresenta a lista dessas configurações.
 
 <div class="table-scroller">
   <table class="doctable" border="1">
-    <thead><tr><th id="app-settings-property">Property</th><th>Type</th><th>Value</th><th>Default</th></tr></thead>
+    <thead><tr><th id="app-settings-property">Propriedade</th><th>Tipo</th><th>Valor</th><th>Padrão</th></tr></thead>
     <tbody>
     <tr>
   <td markdown="1">
   `case sensitive routing`
   </td>
       <td>Boolean</td>
-      <td>Enable case sensitivity.</td>
-      <td>Disabled. Treats "/Foo" and "/foo" as the same.</td>
+      <td>Habilita diferenciação entre maiúsculas e minúsculas.</td>
+      <td>Disabled. Trata  "/Foo" e "/foo" como a mesma coisa.</td>
     </tr>
     <tr>
   <td markdown="1">
   `env`
   </td>
       <td>String</td>
-      <td>Environment mode.</td>
+      <td>Modo ambiente de desenvolvimento.</td>
   <td markdown="1">
-  `process.env.NODE_ENV` (`NODE_ENV` environment variable) or "development".
+  `process.env.NODE_ENV` (variável de ambiente de desenvolvimento `NODE_ENV`) ou "development".
   </td>
     </tr>
     <tr>
   <td markdown="1">
   `etag`
   </td>
-      <td>Varied</td>
+      <td>Variado</td>
   <td markdown="1">
-  Set the ETag response header. For possible values, see the [`etag` options table](#etag.options.table).
-
-  [More about the HTTP ETag header](http://en.wikipedia.org/wiki/HTTP_ETag).
+  Define o parâmetro ETag no cabeçalho de resposta (response header). Para os valores possíveis veja a [tabela opções `etag`](#etag.options.table).
+  
+  [Mais sobre cabeçalho HTTP ETag](http://en.wikipedia.org/wiki/HTTP_ETag).
   </td>
       <td></td>
     </tr>
@@ -39,7 +39,7 @@ If `name` is one of the application settings, it affects the behavior of the app
   `jsonp callback name`
   </td>
       <td>String</td>
-      <td>Specifies the default JSONP callback name.</td>
+      <td>Especifica o nome padrão da função callback JSONP.</td>
   <td markdown="1">
   `?callback=`
   </td>
@@ -49,7 +49,7 @@ If `name` is one of the application settings, it affects the behavior of the app
   `json replacer`
   </td>
       <td>String</td>
-      <td>JSON replacer callback.</td>
+      <td>Substituto do callback JSON.</td>
   <td markdown="1">
   `null`
   </td>
@@ -58,8 +58,8 @@ If `name` is one of the application settings, it affects the behavior of the app
   <td markdown="1">
   `json spaces`
   </td>
-      <td>Number</td>
-      <td>When set, sends prettified JSON string indented with the specified amount of spaces.</td>
+      <td>Número</td>
+      <td>Quando definida, envia strings JSON formatadas com a quantidade de espaços de identação especificada.</td>
       <td>Disabled.</td>
     </tr>
     <tr>
@@ -68,7 +68,7 @@ If `name` is one of the application settings, it affects the behavior of the app
   </td>
       <td>String</td>
   <td markdown="1">
-  The query parser to use, either "simple" or "extended". The simple query parser is based on Node's native query parser, [querystring](http://nodejs.org/api/querystring.html). The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
+  Define `query parser` a ser utilizado, entre "simple" ou "extended". Query parser "simple" é baseado no Node nativo, [querystring](http://nodejs.org/api/querystring.html). Query parser "extended" tem como base [qs](https://www.npmjs.org/package/qs).
   </td>
       <td>"extended"</td>
     </tr>
@@ -77,28 +77,28 @@ If `name` is one of the application settings, it affects the behavior of the app
   `strict routing`
   </td>
       <td>Boolean</td>
-      <td>Enable strict routing.</td>
-      <td>Disabled. Treats "/foo" and "/foo/" as the same by the router.</td>
+      <td>Habilita o roteamento restrito.</td>
+      <td>Disabled. Trata "/foo" e "/foo/" como sendo a mesma rota.</td>
     </tr>
     <tr>
   <td markdown="1">
   `subdomain offset`
   </td>
-      <td>Number</td>
-      <td>The number of dot-separated parts of the host to remove to access subdomain.</td>
+      <td>Número</td>
+      <td>O número de partes separadas por ponto do host a remover para acessar subdomínios.</td>
       <td>2</td>
     </tr>
     <tr>
   <td markdown="1">
   `trust proxy`
   </td>
-      <td>Varied</td>
+      <td>Variado</td>
   <td markdown="1">
-  Indicates the app is behind a front-facing proxy, and to use the `X-Forwarded-*` headers to determine the connection and the IP address of the client. NOTE: `X-Forwarded-*` headers are easily spoofed and the detected IP addresses are unreliable.  
+  Indica que o app está por trás de um proxy `front-facing`, e usa os cabeçalhos `X-Forwarded-*` para determinar a conexão e o IP do cliente. Nota: Cabeçalhos `X-Forwarded-*` são facilmente falsificados e os IPs detectados não são confiáveis.  
 
-  `trust proxy` is disabled by default. When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The `req.ips` property, then, contains an array of IP addresses the client is connected through. To enable it, use the values described in the [`trust proxy` options table](#trust.proxy.options.table).  
+  `trust proxy` está desabilidado por padrão. Quanto habilitado, o Express tenta determinar o IP do cliente conectado através do proxy `front-facing`, ou série de proxies. A propriedade `req.ips` contém então um array de IPs pelos quais o cliente está conectado. Para habilitar isto, utilize os valores descritos na [tabela opções `trust proxy`](#trust.proxy.options.table).  
 
-  The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.org/package/proxy-addr) package.  For more information, see its documentation.
+  A configuração `trust proxy` é implementada utilizando o pacote [proxy-addr](https://www.npmjs.org/package/proxy-addr). Para mais informações, veja esta documentação.
   </td>
       <td>Disabled.</td>
     </tr>
@@ -106,8 +106,8 @@ If `name` is one of the application settings, it affects the behavior of the app
   <td markdown="1">
   `views`
   </td>
-      <td>String or Array</td>
-      <td>A directory or an array of directories for the application's views. If an array, the views are looked up in the order they occur in the array.</td>
+      <td>String ou Array</td>
+      <td>Um diretório ou array de diretórios para as views da aplicação. Se é um array, as views são procuradas conforme a ordem em que ocorrem no array.</td>
   <td markdown="1">
   `process.cwd() + '/views'`
   </td>
@@ -116,10 +116,10 @@ If `name` is one of the application settings, it affects the behavior of the app
   <td markdown="1">
   `view cache`
   </td>
-      <td>Boolean</td>
-      <td>Enables view template compilation caching.</td>
+      <td>Boleano</td>
+      <td>Habilita o cacheamento de compilação de template de view.</td>
   <td markdown="1">
-  `true` in production.
+  `true` em produção.
   </td>
     </tr>
     <tr>
@@ -127,15 +127,15 @@ If `name` is one of the application settings, it affects the behavior of the app
   `view engine`
   </td>
       <td>String</td>
-      <td>The default engine extension to use when omitted.</td>
+      <td>A extensão padrão da engine a ser utilizada, quando omitida.</td>
       <td></td>
     </tr>
     <tr>
   <td markdown="1">
   `x-powered-by`
   </td>
-      <td>Boolean</td>
-      <td>Enables the "X-Powered-By: Express" HTTP header.</td>
+      <td>Boleano</td>
+      <td>Habilita o cabeçalho HTTP "X-Powered-By: Express".</td>
   <td markdown="1">
   `true`
   </td>
@@ -143,46 +143,45 @@ If `name` is one of the application settings, it affects the behavior of the app
     </tbody>
   </table>
 
-  <h5 id="trust.proxy.options.table">Options for `trust proxy` setting</h5>
+  <h5 id="trust.proxy.options.table">Opções para configurações `trust proxy`</h5>
 
   <table class="doctable" border="1">
-    <thead><tr><th>Type</th><th>Value</th></tr></thead>
+    <thead><tr><th>Tipo</th><th>Valor</th></tr></thead>
     <tbody>
       <tr>
-        <td>Boolean</td>
+        <td>Boleano</td>
   <td markdown="1">
-  If `true`, the client's IP address is understood as the left-most entry in the `X-Forwarded-*` header.  
+  Se `true`, o IP do cliente é entendido como a entrada mais à esquerda no cabeçalho `X-Forwarded-*`.
 
-  If `false`, the app is understood as directly facing the Internet and the client's IP address is derived from `req.connection.remoteAddress`. This is the default setting.
+  Se `false`, a app é considerada como direta da Internet e o IP do cliente é derivado de `req.connection.remoteAddress`. Esta é a configuração padrão.
   </td>
       </tr>
       <tr>
         <td>IP addresses</td>
   <td markdown="1">
-  An IP address, subnet, or an array of IP addresses, and subnets to trust. The following is the list of pre-configured subnet names.
+  Um endereço IP, sub-rede, ou um array de IPs e sub-redes de confiança. A lista seguinte apresenta a lista de nomes pré configurados.
 
   * loopback - `127.0.0.1/8`, `::1/128`
   * linklocal - `169.254.0.0/16`, `fe80::/10`
   * uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
 
-  Set IP addresses in any of the following ways:  
+  IPs são definidos das seguintes formas:
 
   <pre><code class="language-js">app.set('trust proxy', 'loopback') // specify a single subnet
   app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
   app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
   app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code></pre>
-
-  When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client's IP address.
+  Quando especificado, os endereços IP ou sub-redes são excluídas do processo de determinação de endereço, e o endereço IP não confiável mais próximo para o servidor é determinado como o endereço IP do cliente.
   </td>
       </tr>
       <tr>
-        <td>Number</td>
+        <td>Número</td>
   <td markdown="1">
   Trust the `n`th hop from the front-facing proxy server as the client.
   </td>
       </tr>
       <tr>
-        <td>Function</td>
+        <td>Função</td>
   <td markdown="1">
   Custom trust implementation. Use this only if you know what you are doing.
   <pre><code class="language-js">app.set('trust proxy', function (ip) {
@@ -194,28 +193,28 @@ If `name` is one of the application settings, it affects the behavior of the app
     </tbody>
   </table>
 
-  <h5 id="etag.options.table">Options for `etag` setting</h5>
+  <h5 id="etag.options.table">Opções para configuação de `etag`</h5>
 
   <table class="doctable" border="1">
-    <thead><tr><th>Type</th><th>Value</th></tr></thead>
+    <thead><tr><th>Tipo</th><th>Valor</th></tr></thead>
     <tbody>
       <tr>
-        <td>Boolean</td>
+        <td>Boleano</td>
   <td markdown="1">
-  `true` enables weak ETag. This is the default setting.<br>
-  `false` disables ETag altogether.
+  `true` habilita ETag frágil. Esta é a configuração padrão.<br>
+  `false` desabilita ETag completamente.
   </td>
       </tr>
       <tr>
         <td>String</td>
         <td>
-            If "strong", enables strong ETag.<br>
-            If "weak", enables weak ETag.
+            Se "strong", habilita ETag forte.<br>
+            Se "weak", habilita ETag frágil.
         </td>
       </tr>
       <tr>
-        <td>Function</td>
-  <td markdown="1">Custom ETag function implementation. Use this only if you know what you are doing.
+        <td>Função</td>
+  <td markdown="1">Implementação de função ETag personalizada. Utilize somente se você sabe o que está fazendo.
 
   <pre><code class="language-js">app.set('etag', function (body, encoding) {
   return generateHash(body, encoding); // consider the function is defined

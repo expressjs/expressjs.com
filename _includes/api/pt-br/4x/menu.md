@@ -2,24 +2,24 @@
 
     <li id="express-api"><a href="#express">express()</a>
     <ul id="express-menu">
-        <li><em>Methods</em></li>
+        <li><em>Métodos</em></li>
         <li id="express-static-middleware"><a href="#express.static">express.static()</a></li>
     </ul>
     </li>
 
-    <li id="app-api"><a href="#app">Application</a>
+    <li id="app-api"><a href="#app">Aplicação</a>
         <ul id="app-menu">
-            <li><em>Properties</em>
+            <li><em>Propriedades</em>
             </li>
             <li><a href="#app.locals">app.locals</a>
             </li>
             <li><a href="#app.mountpath">app.mountpath</a>
             </li>
-            <li><em>Events</em>
+            <li><em>Eventos</em>
             </li>
             <li><a href="#app.onmount">mount</a>
             </li>
-            <li><em>Methods</em>
+            <li><em>Métodos</em>
             </li>
             <li><a href="#app.all">app.all()</a>
             </li>
@@ -61,9 +61,9 @@
             </li>
         </ul>
     </li>
-    <li id="req-api"><a href="#req">Request</a>
+    <li id="req-api"><a href="#req">Requisição (request)</a>
         <ul id="req-menu">
-            <li><em>Properties</em>
+            <li><em>Propriedades</em>
             </li>
             <li><a href="#req.app">req.app</a>
             </li>
@@ -103,7 +103,7 @@
             </li>
             <li><a href="#req.xhr">req.xhr</a>
             </li>
-            <li><em>Methods</em>
+            <li><em>Métodos</em>
             </li>
             <li><a href="#req.accepts">req.accepts()</a>
             </li>
@@ -121,9 +121,9 @@
             </li>
         </ul>
     </li>
-    <li id="res-api"><a href="#res">Response</a>
+    <li id="res-api"><a href="#res">Resposta (response)</a>
         <ul id="res-menu">
-            <li><em>Properties</em>
+            <li><em>Propriedades</em>
             </li>
             <li><a href="#res.app">res.app      </a>
             </li>
@@ -131,7 +131,7 @@
             </li>
             <li><a href="#res.locals">res.locals</a>
             </li>
-            <li><em>Methods</em>
+            <li><em>Métodos</em>
             </li>
             <li><a href="#res.append">res.append()</a>
             </li>
@@ -177,11 +177,11 @@
             </li>
         </ul>
     </li>
-    <li id="router-api"><a href="#router">Router</a>
+    <li id="router-api"><a href="#router">Roteador</a>
         <ul id="router-menu">
             <li><a href="#router">Router()</a>
             </li>
-            <li><em>Methods</em>
+            <li><em>Métodos</em>
             </li>
             <li><a href="#router.all">router.all()</a>
             </li>
