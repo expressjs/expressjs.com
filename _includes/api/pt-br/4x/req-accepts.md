@@ -1,4 +1,4 @@
-<h3 id='req.accepts'>req.accepts(types)</h3>
+<h3 id='req.accepts'>req.accepts(tipos)</h3>
 
 Verifica se o conteúdo especificado é aceitával, com base no campo `Accept` do cabeçalho da requisição HTTP.
 
