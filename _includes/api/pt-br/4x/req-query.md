@@ -1,7 +1,7 @@
 <h3 id='req.query'>req.query</h3>
 
-An object containing a property for each query string parameter in the route.
-If there is no query string, it is the empty object, `{}`.
+Um objeto contendo uma propriedade para cada parâmetro string de consulta na rota.
+Se não houver string de consulta, será um objeto vazio, `{}`.
 
 ~~~js
 // GET /search?q=tobi+ferret
