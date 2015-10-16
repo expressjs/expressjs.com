@@ -4,7 +4,7 @@
 `res.append()` é suportado a partir do Express v4.11.0+
 </div>
 
-Acrescenta um campo (`field`) com o valor (`value`) especificado no cabeçalho de resposta HTTP. If o cabeçalho ainda não foi criado, cria o cabeçalho com campo e valor especificado. O parâmetro `value` pode ser uma string ou um array.
+Acrescenta um campo (`field`) com o valor (`value`) especificado no cabeçalho de resposta HTTP. Se o cabeçalho ainda não foi criado, cria o cabeçalho com campo e valor especificado. O parâmetro `value` pode ser uma string ou um array.
 
 
 Nota: chamando `res.set()` depois de `res.append()` você irá resetar os cabeçalhos previamente definidos.
