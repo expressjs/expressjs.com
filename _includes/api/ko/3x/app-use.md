@@ -27,7 +27,7 @@ mounted middleware may operate without code changes regardless of its "prefix"
 pathname.
 
 <div class="doc-box doc-notice" markdown="1">
-A route will match any path, which follows its path immediately with either a "`/`" or a "`.`". For example: `app.use('/apple', ...)` will match _/apple_, _/apple/images_, _/apple/images/news_, _/apple.html_, _/apple.html.txt_, and so on.
+A route will match any path that follows its path immediately with either a "`/`" or a "`.`". For example: `app.use('/apple', ...)` will match _/apple_, _/apple/images_, _/apple/images/news_, _/apple.html_, _/apple.html.txt_, and so on.
 </div>
 
 Here's a concrete example, take the typical use-case of serving files in ./public
