@@ -1,9 +1,10 @@
 <h3 id='res.send'>res.send([body])</h3>
 
+Envia a resposta HTTP.
 Sends the HTTP response.
 
-The `body` parameter can be a `Buffer` object, a `String`, an object, or an `Array`.
-For example:
+O parâmetro `body` pode ser um objeto `Buffer`, uma `String`, um objeto, ou um `Array`.
+Por exemplo:
 
 ~~~js
 res.send(new Buffer('whoop'));
@@ -13,25 +14,24 @@ res.status(404).send('Sorry, we cannot find that!');
 res.status(500).send({ error: 'something blew up' });
 ~~~
 
-This method performs many useful tasks for simple non-streaming responses:
-For example, it automatically assigns the `Content-Length` HTTP response header field
-(unless previously defined) and provides automatic HEAD and HTTP cache freshness support.
+Este método realiza muitas tarefas usuais para uma resposta `non-streaming` simples:
+Por exemplo, o campo `Content-Length` do cabeçalho HTTO é definido automaticamente (se não foi definido previamente), e fornece suporte automático para HEAD e HTTP cache fresh.
 
-When the parameter is a `Buffer` object, the method sets the `Content-Type`
-response header field  to "application/octet-stream", unless previously defined as shown below:
+Quando o parâmetro é um objeto 'Buffer', o método define o campo `Content-Type` do cabeçalho para "application/octet-stream", caso não tenha sido definido previamente:
 
 ~~~js
 res.set('Content-Type', 'text/html');
 res.send(new Buffer('<p>some html</p>'));
 ~~~
 
-When the parameter is a `String`, the method sets the `Content-Type` to "text/html":
+Quando o parâmetro é uma `String`, o método define `Content-Type` para "text/html":
 
 ~~~js
 res.send('<p>some html</p>');
 ~~~
 
-When the parameter is an `Array` or `Object`, Express responds with the JSON representation:
+Quando o parâretro é um `Array` ou um `Object`, o Express responde com uma representação JSON:
+
 
 ~~~js
 res.send({ user: 'tobi' });
