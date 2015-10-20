@@ -1,7 +1,6 @@
 <h3 id='res.links'>res.links(links)</h3>
 
-Joins the `links` provided as properties of the parameter to populate the response's
-`Link` HTTP header field.
+Define os `links` para popular o campo `Link`do cabeçalho de resposta HTTP.
 
 ~~~js
 res.links({
@@ -10,7 +9,7 @@ res.links({
 });
 ~~~
 
-yields:
+Resultado:
 
 ~~~js
 Link: <http://api.example.com/users?page=2>; rel="next", 

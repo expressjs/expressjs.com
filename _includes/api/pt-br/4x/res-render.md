@@ -1,26 +1,27 @@
 <h3 id='res.render'>res.render(view [, locals] [, callback])</h3>
 
-Renders a `view` and sends the rendered HTML string to the client.
-Optional parameters:
+Renderiza a `view` e envia a string HTML renderizada para o cliente.
+Parâmetros opcionais:
 
-- `locals`, an object whose properties define local variables for the view.
-- `callback`, a callback function. If provided, the method returns both the possible error and rendered string, but does not perform an automated response. When an error occurs, the method invokes `next(err)` internally.
+
+- `locals`, um objeto cujas propriedades definem variáveis locais para a view.
+- `callback`, uma função callback. Se fornecida, o método retorna tanto um possível erro como a string renderizada, mas não realiza uma resposta automática. Quando um erro ocorre, o método invoca internamente `next(err)`.
 
 <div class="doc-box doc-notice" markdown="1">
-The local variable `cache` enables view caching. Set it to `true`,
-to cache the view during development; view caching is enabled in production by default.
+A variável local `cache` habilita cacheamento de view. Defina esse parâmetro para `true`,
+para cachear a view durante o desenvolvimento; cacheamento de view está habilitado por padrão em modo de produção.
 </div>
 
 ~~~js
-// send the rendered view to the client
+// Envia a view renderizada para o cliente
 res.render('index');
 
-// if a callback is specified, the rendered HTML string has to be sent explicitly
+// se um callback é especificado, a string HTML renderizada precisa ser enviada explicitamente
 res.render('index', function(err, html) {
   res.send(html);
 });
 
-// pass a local variable to the view
+// passa uma variável local para a view
 res.render('user', { name: 'Tobi' }, function(err, html) {
   // ...
 });
