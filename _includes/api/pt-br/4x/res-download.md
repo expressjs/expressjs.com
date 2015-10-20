@@ -1,12 +1,11 @@
 <h3 id='res.download'>res.download(path [, filename] [, fn])</h3>
 
-Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.
-By default, the `Content-Disposition` header "filename=" parameter is `path` (this typically appears in the brower dialog).
-Override this default with the `filename` parameter.
+Transfere o arquivo em `path` como um anexo. Tipicamente os browsers irão mostrar mostrar o prompt de download para o usuário.
+Por padrão, o parâmetro "filename=" do cabeçalho `Content-Disposition é `path` (que tipicamente aparece na janela de diálogo para iniciar o download.
 
-When an error ocurrs or transfer is complete, the method calls the optional callback function `fn`.
-This method uses [res.sendFile()](#res.sendFile) to transfer the file.
+O parâmetro `filename` substitue o nome padrão do arquivo fornecido em `path'.
 
+Quando o download é completado ou quando ocorre algum erro, o método chama a função callback opcional `fn`. Este método utiliza [res.sendFile()](#res.sendFile) para transferir o arquivo.
 ~~~js
 res.download('/report-12345.pdf');
 
@@ -14,8 +13,8 @@ res.download('/report-12345.pdf', 'report.pdf');
 
 res.download('/report-12345.pdf', 'report.pdf', function(err){
   if (err) {
-    // Handle error, but keep in mind the response may be partially-sent
-    // so check res.headersSent
+    // Trata erro, mas lembre-se de que a resposta pode ter sido parcialmente enviada,
+    // então verifique res.headersSent.
   } else {
     // decrement a download credit, etc.
   }
