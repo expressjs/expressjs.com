@@ -1,7 +1,8 @@
 <h3 id='res.set'>res.set(field [, value])</h3>
 
-Sets the response's HTTP header `field` to `value`.
-To set multiple fields at once, pass an object as the parameter.
+Define o cabeçalho de resposta HTTP `field` com `value`.
+Para definir múltiplos campos de uma vez, passe um objeto como parâmetro.
+
 
 ~~~js
 res.set('Content-Type', 'text/plain');
@@ -13,4 +14,4 @@ res.set({
 })
 ~~~
 
-Aliased as `res.header(field [, value])`.
+Alias como `res.header(field [, value])`.
