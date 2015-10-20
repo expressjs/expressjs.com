@@ -1,6 +1,7 @@
 <h3 id='res.location'>res.location(path)</h3>
 
-Sets the response `Location` HTTP header to the specified `path` parameter.
+Define o cabeçalho HTTP `Location` para o parâmetro `path` especificado.
+
 
 ~~~js
 res.location('/foo/bar');
@@ -8,12 +9,11 @@ res.location('http://example.com');
 res.location('back');
 ~~~
 
-A `path` value of "back" has a special meaning, it refers to the URL specified in the `Referer` header of the request. If the `Referer` header was not specified, it refers to "/".
+O valor de `path` para "back" é um caso especial que se refere à URL especificada no cabeçalho `Referer` da requisição. Se `Referer` não foi especificado, "back" fará referência a "/".
+
 
 <div class='doc-box doc-warn' markdown="1">
-Express passes the specified URL string as-is to the browser in the `Location` header,
-without any validation or manipulation, except in case of `back`.
+O Express repassa para o browser a string URL especificada como está no cabeçalho `Location` sem fazer qualquer alteração ou validação, exceto no caso de `back`.
 
-Browsers take the responsibility of deriving the intended URL from the current URL
-or the referring URL, and the URL specified in the `Location` header; and redirect the user accordingly.
+Os browsers ficam com a responsabilidade de decifrar a intensão da URL passada a partir da URL atual ou URL de referência, e a URL especificada no cabeçalho `Location`; e então redirecionar apropriadamente.
 </div>
