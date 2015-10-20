@@ -1,30 +1,23 @@
 <h3 id='router.all'>router.all(path, [callback, ...] callback)</h3>
 
-This method functions just like the `router.METHOD()` methods, except that it matches all HTTP verbs. 
+Este método funciona como os métodos `router.METHOD()` exceto que casam com todos os verbos HTTP.
 
-This method is extremely useful for
-mapping "global" logic for specific path prefixes or arbitrary matches.
-For example, if you placed the following route at the top of all other
-route definitions, it would require that all routes from that point on
-would require authentication, and automatically load a user. Keep in mind
-that these callbacks do not have to act as end points; `loadUser`
-can perform a task, then call `next()` to continue matching subsequent
-routes.
+É extremamente útil para mapear lógicas "globais" para casar paths prefixadas ou arbitrárias.
+
+Por exemplo, se você inserir a seguinte rota no topo de todas as outras definições de rota, isto forçar que qualquer rota exiga autenticação de usuário e automaticamente carregue seus dados. Tendo em mente que esses callbacks não precisam atuar como `end points`; `loadUser` pode realizar uma tarefa, então chamar `next()` para continuar casando as rotas seguintes.
 
 ~~~js
 router.all('*', requireAuthentication, loadUser);
 ~~~
 
-Or the equivalent:
+Ou o equivalente:
 
 ~~~js
 router.all('*', requireAuthentication)
 router.all('*', loadUser);
 ~~~
 
-Another example of this is white-listed "global" functionality. Here
-the example is much like before, but it only restricts paths prefixed with
-"/api":
+Outro exemplo de uso disto é para criar uma funcionalidade global de "lista branca". O próximo exemplo é parecido com o anterior, mas ele está restrito a paths prefixadas com "/api":
 
 ~~~js
 router.all('/api/*', requireAuthentication);
