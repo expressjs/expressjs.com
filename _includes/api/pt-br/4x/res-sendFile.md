@@ -1,33 +1,29 @@
 <h3 id='res.sendFile'>res.sendFile(path [, options] [, fn])</h3>
 
 <div class="doc-box doc-info" markdown="1">
-`res.sendFile()` is supported from Express v4.8.0 onwards
+`res.sendFile()` Suportado a partir do Express v4.8.0
 </div>
 
-Transfers the file at the given `path`. Sets the `Content-Type` response HTTP header field
-based on the filename's extension. Unless the `root` option is set in
-the options object, `path` must be an absolute path of the file.
+Transfere o arquivo dado em `path`. Define o campo `Content-Type` do cabeçalho de requisição HTTP com base no nome de extensão do arquivo. A menos que a opção `root` esteja definida no objeto `options`, `path` precisa ser um caminho absoluto para o arquivo.
 
-The details of the `options` object is listed in the following table.
+Os detalhes do objeto `options` estão listados na seguinte tabela:
 
 <div class="table-scroller" markdown="1">
 
-| Property        | Description                                     | Default     | Availability |
+| Propriedade        | Descrição                                     | Padrão     | Disponibilidade |
 |-----------------|-------------------------------------------------|-------------|--------------|
-|`maxAge`         | Sets the max-age property of the `Cache-Control` header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)| 0 |  |
-| `root`          | Root directory for relative filenames.|  |  |
-| `lastModified`  | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.| Enabled | 4.9.0+ |
-| `headers`       | Object containing HTTP headers to serve with the file.|  |  |
-| `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" | &nbsp; |
+|`maxAge`         | Define a propriedade max-age do cabeçalho `Cache-Control` em milissegundos ou uma string em [formato ms](https://www.npmjs.org/package/ms)| 0 |  |
+| `root`          | Diratório raiz para nomes de arquivos relativos.|  |  |
+| `lastModified`  | Define o cabeçalho `Last-Modified` para a última data de modificação do arquivo no sistema operacional. Defina como `false` para desabilitar.| Enabled | 4.9.0+ |
+| `headers`       | Objeto contento os cabeçalhos HTTP para fornecer com o arquivo.|  |  |
+| `dotfiles`      | Opção para servir arquivos `dotfiles`. Os valores possíveis são "allow", "deny", "ignore".| "ignore" | &nbsp; |
 
 </div>
 
-The method invokes the callback function `fn(err)` when the transfer is complete
-or when an error occurs. If the callback function is specified and an error occurs,
-the callback function must explicitly handle the response process either by
-ending the request-response cycle, or by passing control to the next route.
+O método invoca a função callback `fn(err)` quando a transferência é completada ou quando ocorre um erro. Se a função callback é especificada e ocorre um erro, a função callback precisa explicitamente manipular o processo de resposta terminando o ciclo de requisição-resposta ou passando o controle para a rota seguinte.
 
-Here is an example of using `res.sendFile` with all its arguments.
+Aqui está um exemplo de utilização de `res.sendFile` com todos estes argumentos.
+
 
 ~~~js
 app.get('/file/:name', function (req, res, next) {
@@ -55,7 +51,7 @@ app.get('/file/:name', function (req, res, next) {
 })
 ~~~
 
-`res.sendFile` provides fine-grained support for file serving as illustrated in the following example:
+`res.sendFile` fornece suporte para baixa granulidade para os arquivos que serve, como ilustrado no exemplo a seguir:
 
 ~~~js
 app.get('/user/:uid/photos/:file', function(req, res){
@@ -71,4 +67,4 @@ app.get('/user/:uid/photos/:file', function(req, res){
   });
 });
 ~~~
-For more information, or if you have issues or concerns, see [send](https://github.com/pillarjs/send).
+Para mais informações ou se você tiver problemas ou dúvidas, veja [send](https://github.com/pillarjs/send).
