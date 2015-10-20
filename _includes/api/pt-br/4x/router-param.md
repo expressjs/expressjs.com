@@ -1,17 +1,20 @@
 <h3 id='router.param'>router.param(name, callback)</h3>
 
-Add callback triggers to route parameters, where `name` is the name of the parameter and `callback` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.  Although `name` is technically optional, using this method without it is deprecated starting with Express v4.11.0 (see below).
+Adiciona gatilhos de callback para os parametros da rota, onde `name` é o nome do parametro e `callback` é a função de callback. Os parametros
+da função de callback são o objeto da requisição, o objeto de resposta, o próximo middleware, e o valor do parâmetro, nessa ordem. Embora `name`
+seja tecnicamente opcional, utilizar esse método sem ele ele é deprecated desde Express v4.11.0 (veja abaixo).
 
 <div class="doc-box doc-info" markdown="1">
-Unlike `app.param()`, `router.param()` does not accept an array of route parameters.
+Diferente de `app.param()`, `router.param()`não aceita um array de parametros de rota.
 </div>
 
-For example, when `:user` is present in a route path, you may map user loading logic to automatically provide `req.user` to the route, or perform validations on the parameter input.
+Por exemplo, quando `:user` está presente em um caminoh de rota, você pode mapear a lógica de mapeamento para fornecer automaticamente `req.user`
+para a rota, ou realizar validações no parametro de entrada.
 
 ~~~js
 router.param('user', function(req, res, next, id) {
 
-  // try to get the user details from the User model and attach it to the request object
+  // tenta pegar os detalhes do usuário do modelo User e o anexa no objeto da requisição
   User.find(id, function(err, user) {
     if (err) {
       next(err);
