@@ -1,21 +1,13 @@
 <h3 id='router.METHOD'>router.METHOD(path, [callback, ...] callback)</h3>
 
-The `router.METHOD()` methods provide the routing functionality in Express,
-where METHOD is one of the HTTP methods, such as GET, PUT, POST, and so on,
-in lowercase.  Thus, the actual methods are `router.get()`, `router.post()`,
-`router.put()`, and so on. 
+Os métodos `router.METHOD()` fornecem a funcionalidade de roteamento no Express, onde METHOD é ums dos métodos HTTP, como GET, PUT, POST e assim por diante (todos em minúsculas). Assim, os métodos atualmente disponíveis são `router.get()`, `router.post()`, `router.put()` e etc. 
 
-You can provide multiple callbacks, and all are treated equally, and behave just
-like middleware, except that these callbacks may invoke `next('route')`
-to bypass the remaining route callback(s).  You can use this mechanism to perform
-pre-conditions on a route then pass control to subsequent routes when there is no
-reason to proceed with the route matched.
+Você pode fornecer múltiplos callbacks, e todos serão tratatos igualmente, e se comportarão como middlewares, exceto que esses callbacks podem invocar `next('route')` para pular os callbacks restantes na rota. Você pode utilizar essa funcionalidade para criar pré condições em uma rota e então passar o controle para rotas seguintes quando não houver mais razão para continuar na rota atual.
 
-The following snippet illustrates the most simple route definition possible.
-Express translates the path strings to regular expressions, used internally
-to match incoming requests. Query strings are _not_ considered when performing
-these matches, for example "GET /" would match the following route, as would
-"GET /?name=tobi".
+O trecho seguinte ilustra a definição de rota mais simples possível.
+O Express traduz a string path para uma expressão regular, usada internamente para casas entradas de requisições.
+Query strings _não_ são consideradas quando executando esses casamentos de entradas de requisições, por exemplo, "GET /" casará com a seguinte rota, tal como "GET /?name=tobi".
+
 
 ~~~js
 router.get('/', function(req, res){
@@ -23,9 +15,8 @@ router.get('/', function(req, res){
 });
 ~~~
 
-You can also use regular expressions&mdash;useful if you have very specific
-constraints, for example the following would match "GET /commits/71dbb9c" as well
-as "GET /commits/71dbb9c..4c084f9".
+Você pode também utilizar expressões regulares &mdash; úteis quando você tem uma regra bem específica. O exemplo seguinte casa com "GET /commits/71dbb9c" e também com "GET /commits/71dbb9c..4c084f9".
+
 
 ~~~js
 router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
