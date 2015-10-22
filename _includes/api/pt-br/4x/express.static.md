@@ -1,20 +1,20 @@
 <h3 id='express.static' class='h2'>express.static(root, [options])</h3>
 
-`express.static` is the only built-in middleware in Express. It is based on [serve-static](https://github.com/expressjs/serve-static), and is responsible for serving the static assets of an Express application.
+`express.static` é o único 'middleware' embutido no Express. Ele é baseado no [serve-static](https://github.com/expressjs/serve-static), e é responsável em servir conteúdo estático de uma aplicação Express.
 
-The `root` argument refers to the root directory from which the static assets are to be served.
+O argumento `root` se refere ao diretório raiz no qual o conteúdo estático será distribuído.
 
-The optional `options` object can have the following properties.
+O objeto opcional `options` pode conter as seguintes propriedades:
 
-| Property      | Description                                                           |   Type      | Default         |
+| Propriedade      | Descrição                                                           |   Tipo      | Padrão         |
 |---------------|-----------------------------------------------------------------------|-------------|-----------------|
-| `dotfiles`    | Option for serving dotfiles. Possible values are "allow", "deny", and "ignore" | String | "ignore" |
-| `etag`        | Enable or disable etag generation  | Boolean | `true` |
-| `extensions`  | Sets file extension fallbacks. | Boolean | `false` |
-| `index`       | Sends directory index file. Set `false` to disable directory indexing. | Mixed | "index.html" |
- `lastModified` | Set the `Last-Modified` header to the last modified date of the file on the OS. Possible values are `true` or `false`. | Boolean | `true` |
-| `maxAge`      | Set the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms) | Number | 0 |
-| `redirect`    | Redirect to trailing "/" when the pathname is a directory. | Boolean | `true` |
-| `setHeaders`  | Function for setting HTTP headers to serve with the file. | Function |  |
+| `dotfiles`    | Opção para servir 'dotfiles'. Os valores possíveis são: "allow", "deny", e "ignore" | String | "ignore" |
+| `etag`        | Ativa e desativa a geração de 'etags'.  | Boolean | `true` |
+| `extensions`  | Conjunto de extensões de arquivos. | Boolean | `false` |
+| `index`       | Envia arquivo de indexação de diretórios. Atribua `false` para desabilitar a indexação de diretórios. | Mixed | "index.html" |
+| `lastModified` | Defina o cabeçalho `Last-Modified` para a data da ultima alteração do arquivo no sistema operacional. Os valores possiveis são: `true` ou `false`. | Boolean | `true` |
+| `maxAge`      | Defina a propriedade max-age para o controle de chache em milisegundos ou uma string no formato [ms format](https://www.npmjs.org/package/ms) | Number | 0 |
+| `redirect`    | Redireciona a rota "/" quando o caminho for um diretório. | Boolean | `true` |
+| `setHeaders`  | Função para definir cabeçalhos HTTP a ser servido com o conteúdo estático. | Function |  |
 
-For details on using the middleware, refer [Serving static files in Express](/starter/static-files.html).
+Para mais detalhes de utilização do middleware, consulte: [Servindo arquivos estáticos pelo Express](/starter/static-files.html).
