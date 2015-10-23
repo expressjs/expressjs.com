@@ -7,15 +7,11 @@ lang: en
 
 # Hello world example
 
-Make sure you've followed the instructions in [Installing](/starter/installing.html). 
-
-Now, you're going to create a very basic Express app.
-
 <div class="doc-box doc-info" markdown="1">
-NOTE: This is essentially the simplest Express app you can create.  It's a single file&mdash;_not_ what you'd get
-if you use the [Express generator](/starter/generator.html), which creates the scaffolding for a full app with numerous JavaScript files,
-Jade templates, and sub-directories for various purposes.
+This is essentially going to be the simplest Express app you can create. It is a single file app &mdash; _not_ what you'd get if you use the [Express generator](/starter/generator.html), which creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and sub-directories for various purposes.
 </div>
+
+First create a directory named `myapp`, and run `npm init` in it. Then install `express` as a dependency, as per the [installation guide](/starter/installing.html). 
 
 In the `myapp` directory, create a file named `app.js` and add the following code to it:
 

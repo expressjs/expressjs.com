@@ -3,7 +3,7 @@
 Mounts the [middleware](/guide/using-middleware.html) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
 
 <div class="doc-box doc-info" markdown="1">
-  A route will match any path, which follows its path immediately with a "<code>/</code>".
+  A route will match any path that follows its path immediately with a "<code>/</code>".
   For example: <code>app.use('/apple', ...)</code> will match "/apple", "/apple/images",
   "/apple/images/news", and so on.  
 </div>
