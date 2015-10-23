@@ -9,7 +9,7 @@ lang: en
 
 <h2 id="overview">Overview</h2>
 
-Express 5.0 is still in the alpha release stage, but we want to give you a brief look at the  changes that will be in the release and how you can migrate your Express 4 app to Express 5.
+Express 5.0 is still in the alpha release stage, but here is preview of the changes that will be in the release and how to migrate your Express 4 app to Express 5.
 
 Express 5 is not very different from Express 4: The changes to the API are not as significant as from 3.0 to 4.0.  Although the basic API remains the same, there are still breaking changes; in other words an existing Express 4 program may not work if you update it to use Express 5.
 
@@ -19,19 +19,20 @@ To install the latest alpha and preview Express 5, enter this command in your ap
 $ npm install express@5.0.0-alpha.2 --save
 ~~~
 
-After you do this, run your automated tests to see what fails, and fix them according to the updates listed below. You do have tests, don't you?  This is a good example of why having tests is a good idea! After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
+After you do this, run your automated tests to see what fails, and fix them according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
 
 <h2 id="changes">Changes in Express 5</h2>
 
-Following is the list of changes that will affect you as a user of Express. Currently, Express 5 is still in alpha release, so there are likely to be further changes. We'll make every effort to update this list as the [planned features](https://github.com/strongloop/express/pull/2237) land on the releases.
+Following is the list of changes (as of the alpha 2 release ) that will affect you as a user of Express.
+See the [pull request](https://github.com/strongloop/express/pull/2237) for a list of all the planned features.
 
 **Removed methods and properties**
 
 <ul class="doclist">
   <li><a href="#app.del">app.del()</a></li>
   <li><a href="#app.param">app.param(fn)</a></li>
-  <li><a href="#pluralized">Pluralized method names</a></li>
-  <li><a href="#leading">Leading : in name for app.param(name, fn)</a></li>
+  <li><a href="#plural">Pluralized method names</a></li>
+  <li><a href="#leading">Leading colon in name argument to app.param(name, fn)</a></li>
   <li><a href="#req.param">req.param(name)</a></li>
   <li><a href="#res.json">res.json(obj, status)</a></li>
   <li><a href="#res.jsonp">res.jsonp(obj, status)</a></li>
@@ -82,7 +83,7 @@ The following method names have been pluralized. In Express 4, using the old met
 
 A leading colon character (:) in name for `app.param(name, fn)` is remnant of Express 3, and for the sake of backwards compatibility, Express 4 supported it with a deprecation notice. Express 5 will silently ignore it; use the name parameter without prefixing it with a colon.
 
-This should not affect your code, if you have been following the Express 4 documentation of app.param, as it makes no mention of the leading colon.
+This should not affect your code if you follow the Express 4 documentation of [app.param](/4x/api.html#app.param), as it makes no mention of the leading colon.
 
 <h4 id="req.param">req.param(name)</h4>
 
@@ -102,8 +103,7 @@ Express 5 no longer supports the signature `res.send(obj, status)`. Instead, set
 
 <h4 id="res.send.status">res.send(status)</h4>
 
-Express 5 no longer supports the signature res.send(status), where status is a number. Instead, use res.sendStatus(status), which sets the HTTP response header code and sends the text version of the code: "Not Found", "Internal Server Error", and so on.
-
+Express 5 no longer supports the signature <code>res.send(<em>status</em>)</code>, where _`status`_ is a number. Instead, use `res.sendStatus(statusCode)`, which sets the HTTP response header status code and sends the text version of the code: "Not Found", "Internal Server Error", and so on.
 If you need to send a number using `res.send()`, quote the number to convert it to a string, so that Express does not interpret it as an attempt at using the unsupported old signature.
 
 <h4 id="res.sendfile">res.sendfile()</h4>
@@ -122,14 +122,10 @@ In Express 4, `req.host` incorrectly stripped off the port number if it was pres
 
 <h4 id="req.query">req.query</h4>
 
-In Express 4.7 and Express 5 onwards, the query parser option can accept false to disable query string parsing, and instead use your own function for query string parsing logic.
+In Express 4.7 and Express 5 onwards, the query parser option can accept false to disable query string parsing, when you want to  use your own function for query string parsing logic.
 
 <h3>Improvements</h3>
 
 <h4 id="res.render">res.render()</h4>
 
 This method now enforces asynchronous behavior for all view engines, avoiding bugs caused by view engines which had a synchronous implementation and violated the recommended interface.
-
-<h2>Conclusion</h2>
-
-We've given you a quick preview of the changes that will be in the Express 5 release, and a general path to upgrade your apps. Since version 5 is still in alpha stage, there are sure to be some further changes before the final release, so keep checking the StrongLoop blog for the latest news. We'll keep you updated on the progress of the 5.0 release, as well as future Express releases.
