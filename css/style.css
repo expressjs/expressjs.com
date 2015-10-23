@@ -229,6 +229,12 @@ a {
   margin-left: 5px;
 }
 
+#conference {
+  display: inline;
+  float: right;
+  margin-left: 10px;
+}
+
 #intro, #doc-langs {
   margin-left: 5%;
 }
@@ -720,6 +726,11 @@ h2 a {
 
 @media all and (max-width: 899px) {
 
+  #conference a img {
+    width: 150px;
+    margin-right: 10px;
+  }
+
   .table-scroller {
     width: 100%;
     overflow: scroll;
@@ -931,6 +942,10 @@ h2 a {
 
 
 @media all and (max-width: 420px) {
+
+  #conference {
+    display:none;
+  }
 
   #app-settings-property {
     width: auto;

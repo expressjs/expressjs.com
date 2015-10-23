@@ -8,8 +8,19 @@ lang: en
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
-    <section id="description"><a href="/" class="express">Express</a><span class="description">Fast, unopinionated, minimalist web framework for <a href='http://nodejs.org'>Node.js</a></span>
+
+    <section id="description">
+        <a href="/" class="express">Express</a>
+
+        <div id="conference">
+            <a href="http://events.linuxfoundation.org/events/node-interactive">
+                <img src="/images/node_int15.png" />
+            </a>
+        </div>
+
+        <span class="description">Fast, unopinionated, minimalist web framework for <a href='http://nodejs.org'>Node.js</a></span>
     </section>
+
     <div id="install-command">$ npm install express --save</div>
 </section>
 
@@ -39,6 +50,8 @@ lang: en
 
 </section>
 
-<!-- <section id="announcements">
+<!--
+<section id="announcements">
   {% include announcement/announcement-{{ page.lang }}.md %}
-</section> -->
+</section>
+-->
