@@ -1,18 +1,17 @@
 <h3 id='req.fresh'>req.fresh</h3>
 
-Indicates whether the request is "fresh."  It is the opposite of `req.stale`.
+Indica se a requisição é "fresh.". É o oposto de `req.stale`.
 
-It is true if the `cache-control` request header doesn't have a `no-cache` directive and any
-of the following is true:
+É true se o cabeçalho `cache-control` da requisição não possui a diretiva `no-cache`
+e algum dos seguintes é verdadeiro:
 
-* The `if-modified-since` request header is specified  and `last-modified` request header is equal to or eariler than the `modified` response header.
-* The `if-none-match` request header is `*`.
-* The `if-none-match` request header, after being parsed into its directives, does not
-match the `etag` response header.
+* O cabeçalho `if-modified-since` da requisição foi especificado e o cabeçalho `last-modified` da requisição é igual ou anterior ao cabeçalho `modified` da resposta.
+* O cabeçalho `if-none-match` da requisição é `*`.
+* O cabeçalho `if-none-match` da requisição após ser feito o parse em suas diretivas, não coincide com o cabeçalho `etag` da resposta.
 
 ~~~js
 req.fresh
 // => true
 ~~~
 
-For more information, issues, or concerns, see [fresh](https://github.com/jshttp/fresh).
+Para mais informações ou em caso de problemas veja [fresh](https://github.com/jshttp/fresh).

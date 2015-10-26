@@ -1,6 +1,6 @@
 <h3 id='req.route'>req.route</h3>
 
-The currently-matched route, a string.  For example:
+A string correspondente a rota atual: Por exemplo:
 
 ~~~js
 app.get('/user/:id?', function userIdHandler(req, res) {
@@ -9,7 +9,7 @@ app.get('/user/:id?', function userIdHandler(req, res) {
 })
 ~~~
 
-Example output from the previous snippet:
+Saída de exemplo do fragmento anterior:
 
 ~~~js
 { path: '/user/:id?',

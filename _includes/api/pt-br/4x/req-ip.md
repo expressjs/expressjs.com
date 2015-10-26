@@ -1,9 +1,10 @@
 <h3 id='req.ip'>req.ip</h3>
 
+O IP remoto da requisição.
 The remote IP address of the request.
 
-If the `trust proxy` is setting enabled, it is the upstream address;
-see [Express behind proxies](/guide/behind-proxies.html) for more information.
+Se a configuração `trust proxy` estiver habilitada, é o endereço upstream;
+veja [Express behind proxies](/guide/behind-proxies.html) para mais informações.
 
 ~~~js
 req.ip
