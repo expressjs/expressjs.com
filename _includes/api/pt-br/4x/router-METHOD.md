@@ -1,6 +1,6 @@
 <h3 id='router.METHOD'>router.METHOD(path, [callback, ...] callback)</h3>
 
-Os métodos `router.METHOD()` fornecem a funcionalidade de roteamento no Express, onde METHOD é ums dos métodos HTTP, como GET, PUT, POST e assim por diante (todos em minúsculas). Assim, os métodos atualmente disponíveis são `router.get()`, `router.post()`, `router.put()` e etc. 
+Os métodos `router.METHOD()` fornecem a funcionalidade de roteamento no Express, onde METHOD é um dos métodos HTTP, como GET, PUT, POST e assim por diante (todos em minúsculas). Assim, os métodos atualmente disponíveis são `router.get()`, `router.post()`, `router.put()` e etc. 
 
 Você pode fornecer múltiplos callbacks, e todos serão tratatos igualmente, e se comportarão como middlewares, exceto que esses callbacks podem invocar `next('route')` para pular os callbacks restantes na rota. Você pode utilizar essa funcionalidade para criar pré condições em uma rota e então passar o controle para rotas seguintes quando não houver mais razão para continuar na rota atual.
 
