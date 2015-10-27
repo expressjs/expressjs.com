@@ -35,12 +35,12 @@ router.param('id', function (req, res, next, id) {
   next();
 })
 
-app.get('/user/:id', function (req, res, next) {
+router.get('/user/:id', function (req, res, next) {
   console.log('although this matches');
   next();
 });
 
-app.get('/user/:id', function (req, res) {
+router.get('/user/:id', function (req, res) {
   console.log('and this matches too');
   res.end();
 });
@@ -50,25 +50,6 @@ On `GET /user/42`, the following is printed:
 
 ~~~
 CALLED ONLY ONCE
-although this matches
-and this matches too
-~~~
-
-~~~js
-app.get('/user/:id/:page', function (req, res, next) {
-  console.log('although this matches');
-  next();
-});
-
-app.get('/user/:id/:page', function (req, res) {
-  console.log('and this matches too');
-  res.end();
-});
-~~~
-
-On `GET /user/42/3`, the following is printed:
-
-~~~
 although this matches
 and this matches too
 ~~~
