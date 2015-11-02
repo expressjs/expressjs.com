@@ -38,7 +38,10 @@ See [LoopBack](http://loopback.io) for an Express-based framework centered aroun
 This is another opinionated area that Express does not
 venture into.  You may use any authentication scheme you wish.
 For a simple username / password scheme, see [this example](https://github.com/strongloop/express/tree/master/examples/auth).
-
+For a more advanced library with full support for all forms of authentication
+*and* authorization, check out [express-stormpath](http://docs.stormpath.com/nodejs/express/latest/).
+express-stormpath provides pre-built login and registration pages, a user
+management dashboard, groups, roles, API keys, OAuth2 support, and lots more.
 
 ## Which template engines does Express support?
 
