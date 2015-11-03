@@ -20,6 +20,27 @@ Middleware can:
 
 If the current middleware does not end the request-response cycle, it must call `next()` to pass control to the next middleware, otherwise the request will be left hanging.
 
+Elements of Middleware 
+
+~~~
+var express = require('express');
+var app = express();
+
+    http verb to which the middleware function shall be applied
+    |    path to which the middleware function shall be applied
+    |    |   middleware function
+    |    |   |         request argument passed to middleware function, commonly called "req"
+    |    |   |         |     response argument passed to middleware function, commonly called "res"
+    |    |   |         |     |   callback to the next middleware, commonly called "next"
+    |    |   |         |     |   |
+    ▼    ▼   ▼         ▼     ▼   ▼
+app.get('/', function (req, res, next) {
+  next();
+});
+
+app.listen(3000);
+~~~
+
 To learn how to write and use Express middleware, we will write two middleware for the following minimalistic app:
 
 ~~~js
