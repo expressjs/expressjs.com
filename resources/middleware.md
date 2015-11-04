@@ -40,6 +40,7 @@ Here are some Express middleware modules:
   - [static-expiry](https://github.com/paulwalker/connect-static-expiry): fingerprinted URLs/Caching Headers for static assets including external domain(s) support.
   - [vhost](https://github.com/expressjs/vhost): previously `express.vhost`
   - [view-helpers](https://github.com/madhums/node-view-helpers): An express middleware that provides common helper methods to the views.
+  - [sriracha-admin](https://github.com/hdngr/siracha): An express middleware that dynamically generates an admin site for Mongoose.
 
 Some middleware previously included with Connect are no longer supported by the Connect/Express team,
 and are replaced by an alternative module, or should be superseded by a better module. Use one of these alternatives instead:
