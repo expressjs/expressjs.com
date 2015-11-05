@@ -1,7 +1,7 @@
 <h3 id='req.acceptsEncodings'>req.acceptsEncodings(encoding [, ...])</h3>
 
-Returns the first accepted encoding of the specified encodings,
-based on the request's `Accept-Encoding` HTTP header field.
-If none of the specified encodings is accepted, returns `false`.
+Retorna o primeiro encoding aceito dentre os encodings especificados,
+baseado no campo do cabeçalho HTTP `Accept-Encoding` da requisição.
+Caso nenhum dos encondings especificados seja aceito, retorna `false`
 
-For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
+Para mais informações ou em caso de problemas veja [accepts](https://github.com/expressjs/accepts).

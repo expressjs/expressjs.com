@@ -1,7 +1,7 @@
 <h3 id='res.jsonp'>res.jsonp([body])</h3>
 
-Sends a JSON response with JSONP support. This method is identical to `res.json()`,
-except that it opts-in to JSONP callback support.
+Envia uma resposta JSON com suporte a JSONP. Este método é idêntico a `res.json()`, mas dá suporte a callback JSONP.
+
 
 ~~~js
 res.jsonp(null)
@@ -14,10 +14,10 @@ res.status(500).jsonp({ error: 'message' })
 // => { "error": "message" }
 ~~~
 
-By default, the JSONP callback name is simply `callback`. Override this with the
-<a href="#app.settings.table">jsonp callback name</a> setting.
+Por padrão, o callback JSONP é simplesmente chamado `callback`. Você pode alterar isto configurando <a href="#app.settings.table">o nome do callback de JSONP.</a> 
 
-The following are some examples of JSONP responses using the same code:
+A seguir alguns exemplos de respostas JSONP utilizando o mesmo código:
+
 
 ~~~js
 // ?callback=foo

@@ -1,51 +1,51 @@
 <h3 id='res.cookie'>res.cookie(name, value [, options])</h3>
 
-Sets cookie `name` to `value`.  The `value` parameter may be a string or object converted to JSON.
+Seta o cookie `name` com `value`.  O parâmetro `value` é uma string ou um objeto convertido para JSON.
 
-The `options` parameter is an object that can have the following properties.
+O parâmetro `options` é um objeto e que pode ter as seguintes propriedades.
 
-| Property    | Type |  Description                                                             |
+| Propriedade    | Tipo |  Descrição                                                             |
 |-------------|-------------------------------------------------------------------------|
-| `domain`    | String | Domain name for the cookie. Defaults to the domain name of the app.
-| `expires`   | Date | Expiry date of the cookie in GMT. If not specified or set to 0, creates a session cookie.
-| `httpOnly`  | Boolean | Flags the cookie to be accessible only by the web server.
-| `maxAge`    | String | Convenient option for setting the expiry time relative to the current time in milliseconds.
-| `path`      | String | Path for the cookie. Defaults to "/".
-| `secure`    | Boolean | Marks the cookie to be used with HTTPS only.
-| `signed`    | Boolean | Indicates if the cookie should be signed.
+| `domain`    | String | Nome de domínio para o cookie. O valor padrão é o nome do domínio do app.
+| `expires`   | Data | Data de expiração do cookie em GMT. Se o valor não for especificado ou for 0, cria um cookie de sessão.
+| `httpOnly`  | Boleano | Flag que torna o cookie acessível somente por servidor web.
+| `maxAge`    | String | Opção conveniente para configurar o tempo de expiração relativo ao momento atual em milissegundos.
+| `path`      | String | Caminho para o cookie. O padrão é "/".
+| `secure`    | Boleano | Marca o cookie para ser utilizado somente com HTTPS.
+| `signed`    | boleano | Indica se o cookie deve ser assinado.
 
 <div class="doc-box doc-notice" markdown="1">
-All `res.cookie()` does is set the HTTP `Set-Cookie` header with the options provided.
-Any option not specified defaults to the value stated in [RFC 6265](http://tools.ietf.org/html/rfc6265).
+Toda chamada para `res.cookie()` seta o cabeçalho HTTP `Set-Cookie` com as opções especificadas.
+Qualquer opção não especificada terá por padrão os valores padronizados em [RFC 6265](http://tools.ietf.org/html/rfc6265).
 </div>
 
-For example:
+Exemplos:
 
 ~~~js
 res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: true });
 res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true });
 ~~~
 
-The `maxAge` option is a convenience option for setting "expires" relative to the current time in milliseconds.
-The following is equivalent to the second example above.
+O opção `maxAge` serve para configurar "expires" relativamente ao tempo atual, em milissegundos.
+A linha a seguir é equivalente ao segundo exemplo acima.
+
 
 ~~~js
 res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true })
 ~~~
 
-You can pass an object as the `value` parameter; it is then serialized as JSON and parsed by `bodyParser()` middleware.
+Você pode passar um objeto como parâmetro `value`, que será serializado como JSON e repassado pelo middleware `bodyParser()`.
 
 ~~~js
 res.cookie('cart', { items: [1,2,3] });
 res.cookie('cart', { items: [1,2,3] }, { maxAge: 900000 });
 ~~~
 
-When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this method also
-supports signed cookies. Simply include the `signed` option set to `true`.
-Then `res.cookie()` will use the secret passed to `cookieParser(secret)` to sign the value.
+Quando utilizamos o middleware [cookie-parser](https://www.npmjs.com/package/cookie-parser), este método também suporta cookies assinados. Basta incluir a opção `signed` definida como `true`.
+Então `res.cookie()` utilizará `cookieParser(secret)` para assinar o valor.
 
 ~~~js
 res.cookie('name', 'tobi', { signed: true });
 ~~~
 
-Later you may access this value through the [req.signedCookie](#req.signedCookies) object.
+Posteriormente você pode acessar o valor utilizando o objeto [req.signedCookie](#req.signedCookies).

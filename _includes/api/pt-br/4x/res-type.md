@@ -1,8 +1,7 @@
 <h3 id='res.type'>res.type(type)</h3>
 
-Sets the `Content-Type` HTTP header to the MIME type as determined by
-[mime.lookup()](https://github.com/broofa/node-mime#mimelookuppath) for the specified `type`.
-If `type` contains the "/" character, then it sets the `Content-Type` to `type`.
+Define o cabeçalho HTTP `Content-Type` para MIME type como determinado por [mime.lookup()](https://github.com/broofa/node-mime#mimelookuppath) para o parâmetro `type` especificado.
+Se `type` contém o caractere "/", `Content-Type` é definido para `type`.
 
 ~~~js
 res.type('.html');              // => 'text/html'

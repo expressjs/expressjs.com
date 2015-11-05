@@ -1,6 +1,6 @@
 <h3 id='req.path'>req.path</h3>
 
-Contains the path part of the request URL.
+Contém a parte "path" da URL de requisição.
 
 ~~~js
 // example.com/users?sort=desc
@@ -9,5 +9,5 @@ req.path
 ~~~
 
 <div class="doc-box doc-info" markdown="1">
-When called from a middleware, the mount point is not included in `req.path`. Look up [app.use()](/4x/api.html#app.use) for more details.
+Quando chamado de um middleware, o ponto de montagem não é incluído no `req.path`. Veja [app.use()](/4x/api.html#app.use) para mais detalhes.
 </div>

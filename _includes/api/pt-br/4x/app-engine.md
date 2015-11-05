@@ -1,33 +1,34 @@
 <h3 id='app.engine'>app.engine(ext, callback)</h3>
 
-Registers the given template engine `callback` as `ext`.
+Registra o motor de template `callback` como `ext`.
 
-By default, Express will `require()` the engine based on the file extension.
-For example, if you try to render a "foo.jade" file, Express invokes the
-following internally, and caches the `require()` on subsequent calls to increase
-performance.
+Por padrão, Express vai `require()` o motor baseado na extensão do arquivo.
+Por exemplo, se você tentar renderizar o arquivo "foo.jade", Express invoca o
+seguinte internamente e guarda o `require()` nas chamadas subseqüentes para
+aumentar o desempenho.
 
 ~~~js
 app.engine('jade', require('jade').__express);
 ~~~
 
-Use this method for engines that do not provide `.__express` out of the box,
-or if you wish to "map" a different extension to the template engine.
+Use este método para motores que não fornecem `.__express` ou se você
+deseja mapear uma extensão diferente para o motor de template.
 
-For example, to map the EJS template engine to ".html" files:
+Por examplo, para mapear o motor de template EJS para arquivos ".html":
 
 ~~~js
 app.engine('html', require('ejs').renderFile);
 ~~~
 
-In this case, EJS provides a `.renderFile()` method with
-the same signature that Express expects: `(path, options, callback)`,
-though note that it aliases this method as `ejs.__express` internally
-so if you're using ".ejs" extensions you don't need to do anything.
+Neste caso, EJS fornece um método `.renderFile()` com
+a mesma assinatura que o Express espera: `(path, options, callback)`,
+embora note que ele chama o método `ejs.__express` internamente por isso,
+se você está usando extensões ".ejs" você não precisa fazer nada.
 
-Some template engines do not follow this convention.  The
-[consolidate.js](https://github.com/tj/consolidate.js) library maps Node template engines to follow this convention,
-so they work seemlessly with Express.
+Alguns motores de template não seguem esta convenção. A
+biblioteca [consolidate.js](https://github.com/tj/consolidate.js) mapeia
+motores de template Node para seguir esta convenção, para que eles funcionem
+sem problemas com Express.
 
 ~~~js
 var engines = require('consolidate');

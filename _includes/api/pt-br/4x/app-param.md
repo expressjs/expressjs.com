@@ -1,15 +1,15 @@
 <h3 id='app.param'>app.param([name], callback)</h3>
 
-Add callback triggers to route parameters, where `name` is the name of the parameter or an array of them, and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order. 
+Adiciona `callback triggers` (acionadores de callback) para parâmetros da rota, onde `name` é o nome de um parâmetro ou um array de nomes de parâmetros, e `callback` é a função callback. Os parâmetros da função callback são os objeto `request`, o próximo `middleware` e o valor do parâmetro, nesta ordem.
 
-If `name` is an array, the `callback` trigger is registered for each parameter declared in it, in the order in which they are declared. Furthermore, for each declared parameter except the last one, a call to `next` inside the callback will call the callback for the next declared parameter. For the last parameter, a call to `next` will call the next middleware in place for the route currently being processed, just like it would if `name` were just a string.
+Se `name` é um array, o `callback trigger` é registrado para cada parâmetro declarado no array, na ordem em que eles foram declarados. Além disso para cada parâmetro declarado, com exceção do último, uma chamada para `next` dentro do callback, chamará o callback para o próximo parâmetro declarado. Para o último parâmetro, uma chamada para `next` chamara o próximo middleware da rota que está sendo processada, como aconteceria caso `name` não fosse um array e sim uma string.
 
-For example, when `:user` is present in a route path, you may map user loading logic to automatically provide `req.user` to the route, or perform validations on the parameter input.
+Por exemplo, quando `:user` está presente em um path da rota, você pode controlar o automaticamente a lógica de carregamento do usuário fornecendo uma `req.user` para a rota ou fazer validações nos parâmetos de entrada.
 
 ~~~js
 app.param('user', function(req, res, next, id) {
 
-  // try to get the user details from the User model and attach it to the request object
+  // Tenta pegar os detalhes do usuário e adicioná-los ao objeto `request`
   User.find(id, function(err, user) {
     if (err) {
       next(err);
@@ -23,9 +23,10 @@ app.param('user', function(req, res, next, id) {
 });
 ~~~
 
-Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on `app` will be triggered only by route parameters defined on `app` routes.
+Os parâmetros de funções callbacks são locais para o `router` em que são definidos. Eles não herdam de apps montadas ou `routers`. Consequentemente, parâmetros de callbacks definidos em `app` serão acionados somente por parâmetros definidos nos `routes` de `app`.
 
-All param callbacks will be called before any handler of any route in which the param occurs, and they will each be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following examples.
+Todos os parâmetros de callbacks serão chamados antes de qualquer `handler` de qualquer rota em que o parâmetro ocorre, e serão chamados somente uma vez no ciclo de requisição e resposta, mesmo que o parâmetro esteja combinado em múltiplas rotas, como mostra o exemplo seguinte:
+
 
 ~~~js
 app.param('id', function (req, res, next, id) {
@@ -44,7 +45,7 @@ app.get('/user/:id', function (req, res) {
 });
 ~~~
 
-On `GET /user/42`, the following is printed:
+Em `GET /user/42`, será impresso o seguinte:
 
 ~~~
 CALLED ONLY ONCE
@@ -69,7 +70,7 @@ app.get('/user/:id/:page', function (req, res) {
 });
 ~~~
 
-On `GET /user/42/3`, the following is printed:
+Em `GET /user/42/3`, será impresso o seguinte:
 
 ~~~
 CALLED ONLY ONCE with 42
@@ -79,22 +80,25 @@ and this matches too
 ~~~
 
 <div class="doc-box doc-warn" markdown="1">
-The following section describes `app.param(callback)`, which is deprecated as of v4.11.0.
+
+A próxima seção descreve `app.param(callback)`, que está obsoleto a partir da versão 4.11.0.
+
 </div>
 
-The behavior of the `app.param(name, callback)` method can be altered entirely by passing only a function to `app.param()`. This function is a custom implementation of how `app.param(name, callback)` should behave - it accepts two parameters and must return a middleware.
+O comportamento do método `app.param(name, callback)` pode ser totalmente alterado passando-se somente uma função para `app.param()`. Esta função é uma implementação personalizada de como `app.param(name, callback)`  deve se comportar - aceita dois parâmetros e deve retornar um middleware.
 
-The first parameter of this function is the name of the URL parameter that should be captured, the second parameter can be any JavaScript object which might be used for returning the middleware implementation.
+O primeiro parâmetro desta função é o nome do parâmetro da URL que deve ser capturado, o segundo parâmetro pode ser qualquer objeto JavaScript que pode ser utilizado para retornar uma implementação de middleware.
 
-The middleware returned by the function decides the behavior of what happens when a URL parameter is captured.
 
-In this example, the `app.param(name, callback)` signature is modified to `app.param(name, accessId)`. Instead of accepting a name and a callback, `app.param()` will now accept a name and a number.
+O middleware retornado decide o que acontece quando o parâmetro de URL é capturado.
+
+Nesse exemplo, a assinatura de `app.param(name,callback)` é modificada para `app.param(name, accessId)`.  Em vez de aceitar um nome e um callback, agora `app.param()` aceitará um nome e um número.
 
 ~~~js
 var express = require('express');
 var app = express();
 
-// customizing the behavior of app.param()
+// personalizando o comportamento de app.param()
 app.param(function(param, option) {
   return function (req, res, next, val) {
     if (val == option) {
@@ -106,10 +110,10 @@ app.param(function(param, option) {
   }
 });
 
-// using the customized app.param()
+// usando a app.param() pesonalizada.
 app.param('id', 1337);
 
-// route to trigger the capture
+// rota para acionar a captura
 app.get('/user/:id', function (req, res) {
   res.send('OK');
 })
@@ -119,7 +123,8 @@ app.listen(3000, function () {
 })
 ~~~
 
-In this example, the `app.param(name, callback)` signature remains the same, but instead of a middleware callback, a custom data type checking function has been defined to validate the data type of the user id.
+Nesse exemplo, a assinatura `app.param(name, callback)` continua a mesma, mas em vez de um callback middleware, foi definida uma função personalizada de verificação de tipo de dado para validar os dados de user id.
+
 
 ~~~js
 app.param(function(param, validator) {
@@ -139,17 +144,17 @@ app.param('id', function (candidate) {
 ~~~
 
 <div class="doc-box doc-info" markdown="1">
-The '`.`' character can't be used to capture a character in your capturing regexp. For example you can't use `'/user-.+/'` to capture `'users-gami'`, use `[\\s\\S]` or `[\\w\\W]` instead (as in `'/user-[\\s\\S]+/'`.
+O caracter '`.`' não pode ser usado para capturar um caracter em suas expressões regulares. Por exemplo você não pode usar `'/user-.+/'` para capturar `'users-gami'`, em vez disto utilize  `[\\s\\S]` ou `[\\w\\W]` (como em `'/user-[\\s\\S]+/'`).
 
-Examples: 
+Exemplos:
 
-<pre><code class="language-js">//captures '1-a_6' but not '543-azser-sder'
+<pre><code class="language-js">//captura '1-a_6' mas não '543-azser-sder'
 router.get('/[0-9]+-[[\\w]]*', function); 
 
-//captures '1-a_6' and '543-az(ser"-sder' but not '5-a s'
+//captura '1-a_6' e '543-az(ser"-sder' mas não '5-a s'
 router.get('/[0-9]+-[[\\S]]*', function); 
 
-//captures all (equivalent to '.*')
+//captura tudo (equivalent a '.*')
 router.get('[[\\s\\S]]*', function); 
 </code></pre>
 
