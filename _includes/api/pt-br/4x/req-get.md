@@ -1,7 +1,6 @@
 <h3 id='req.get'>req.get(field)</h3>
-
-Returns the specified HTTP request header field (case-insensitive match).
-The `Referrer` and `Referer` fields are interchangeable.
+Retorna o campo solicitado do cabeçalho da requisição HTTP (não sensível a maiúsculas e minúsculas).
+Os campos `Referrer` e `Referer` são intercambiáveis.
 
 ~~~js
 req.get('Content-Type');
@@ -14,4 +13,4 @@ req.get('Something');
 // => undefined
 ~~~
 
-Aliased as `req.header(field)`.
+Alias com `req.header(field)`.

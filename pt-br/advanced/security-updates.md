@@ -1,17 +1,17 @@
 ---
 layout: page
-title: Express security updates
+title: Atualizações seguras do Express
 menu: advanced
-lang: en
+lang: pt-br
 ---
 
-# Security updates
+# Atualizações seguras do Express
 
 <div class="doc-box doc-notice" markdown="1">
-Node.js vulnerabilities directly affect Express. Therefore [keep a watch on Node vulnerabilities](http://blog.nodejs.org/vulnerability/) and make sure you are using the latest stable version of Node.
+Vulnerabilidades do Node.js afetam diretamente o Express. Portanto [dê uma olhada nas vulnerabilidades do Node.js] vulnerabilities](http://blog.nodejs.org/vulnerability/) e certifique-se de estar utilizando a última versão estável do Node.
 </div>
 
-The list below enumerates the Express vulnerabilities that were fixed in the specified version update.
+A lista abaixo mostra as vulnerabilidades do Express que estão corrigidas em uma específica versão de atualização.
 
 ## 4.x
 

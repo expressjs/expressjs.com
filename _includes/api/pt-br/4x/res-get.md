@@ -1,7 +1,6 @@
 <h3 id='res.get'>res.get(field)</h3>
 
-Returns the HTTP response header specified by `field`.
-The match is case-insensitive.
+Retorna o cabeçalho de resposta HTTP especificado por `field`. O casamento não é sensível a maiúsculas e minúsculas.
 
 ~~~js
 res.get('Content-Type');

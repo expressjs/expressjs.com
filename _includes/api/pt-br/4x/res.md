@@ -1,12 +1,11 @@
 <h2>Response</h2>
 
-The `res` object represents the HTTP response that an Express app sends when it gets an HTTP request.
+O objeto `res` representa a resposta HTTP que uma app Express envia quando recebe uma requisição HTTP.
 
-In this documentation and by convention, 
-the object is always referred to as `res` (and the HTTP request is `req`) but its actual name is determined
-by the parameters to the callback function in which you're working.
 
-For example:
+Neste documento e por convenção, o objeto de resposta HTTP é sempre referido como `res` (e o objeto de requisição HTTP como `req` ) mas o nome real é determinado pelo parâmetro da função callback em que você está trabalhando.
+
+Por exemplo:
 
 ~~~js
 app.get('/user/:id', function(req, res){
@@ -14,7 +13,7 @@ app.get('/user/:id', function(req, res){
 });
 ~~~
 
-But you could just as well have:
+Mas você poderia ter:
 
 ~~~js
 app.get('/user/:id', function(request, response){
@@ -22,7 +21,7 @@ app.get('/user/:id', function(request, response){
 });
 ~~~
 
-<h3 id='res.properties'>Properties</h3>
+<h3 id='res.properties'>Propriedades</h3>
 
 <section markdown="1">
   {% include api/{{ page.lang }}/4x/res-app.md %}

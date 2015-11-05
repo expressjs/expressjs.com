@@ -1,6 +1,6 @@
 <h3 id='req.params'>req.params</h3>
 
-An object containing properties mapped to the named route "parameters". For example, if you have the route `/user/:name`, then the "name" property is available as `req.params.name`. This object defaults to `{}`.
+Um objeto contendo as propriedades mapeadas para a rota nomeada "parameters". Por exemplo, caso você passua a rota `/user/:name`, então a propriedade "name" estará disponível como `req.params.name`. O padrão desse objeto é `{}`.
 
 ~~~js
 // GET /user/tj
@@ -8,7 +8,9 @@ req.params.name
 // => "tj"
 ~~~
 
-When you use a regular expression for the route definition, capture groups are provided in the array using `req.params[n]`, where `n` is the n<sup>th</sup> capture group. This rule is applied to unnamed wild card matches with string routes such as `/file/*`:
+Quando você utiliza expressões regulares para a definição da rota, grupos de captura são fornecidos no array usando `req.params[n]`, onde `n`
+é o <i>enésimo</i> grupo de captura. Essa regra é aplicada a correspondencias não nomeadas de caracteres-curinga nas definições das
+rotas tais como `/file/*`:
 
 ~~~js
 // GET /file/javascripts/jquery.js

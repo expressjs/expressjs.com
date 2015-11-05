@@ -1,8 +1,7 @@
 <h3 id='req.baseUrl'>req.baseUrl</h3>
 
-The URL path on which a router instance was mounted.
-For example:
-
+A URL do caminho em que a instância do roteador foi montado.
+Por exemplo:
 ~~~js
 var greet = express.Router();
 
@@ -11,19 +10,20 @@ greet.get('/jp', function (req, res) {
   res.send('Konichiwa!');
 });
 
-app.use('/greet', greet); // load the router on '/greet'
+app.use('/greet', greet); // Carrega o roteador em '/greet'
 ~~~
 
-Even if you use a path pattern or a set of path patterns to load the router,
-the `baseUrl` property returns the matched string, not the pattern(s). In the
-following example, the `greet` router is loaded on two path patterns.
+Mesmo se você usar um padrão de caminho ou conjunto de padrões para para
+carregar o roteador, a propriedade `baseUrl` retorna a string coincidente, não
+os padrões. No seguinte exemplo, o roteador `greet` é carregador em dois
+padrões de caminho.
 
 ~~~js
-app.use(['/gre+t', '/hel{2}o'], greet); // load the router on '/gre+t' and '/hel{2}o'
+app.use(['/gre+t', '/hel{2}o'], greet); // Carrega o roteador em '/gre+t' e '/hel{2}o'
 ~~~
 
-When a request is made to `/greet/jp`, `req.baseUrl` is "/greet".  When a request is
-made to `/hello/jp`, `req.baseUrl` is "/hello".
+Quando uma requisição é feita para `/greet/jp`, `req.baseUrl` é "/greet".
+Quando uma requisição é feita a `/hello/jp`, `req.baseUrl` é "/hello".
 
-`req.baseUrl` is similar to the [mountpath](#app.mountpath) property of the `app` object,
-except `app.mountpath` returns the matched path pattern(s).
+`req.baseUrl` é similar a propriedade [mountpath](#app.mountpath) do objeto
+`app`, exceto `app.mountpath` retorna padrões de caminho coincidente(s).

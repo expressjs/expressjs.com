@@ -1,8 +1,6 @@
 <h3 id='res.redirect'>res.redirect([status,] path)</h3>
 
-Redirects to the URL dervied from the specified `path`, with specified
-[HTTP status code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) `status`.
-If you don't specify `status`, the status code defaults to "302 "Found".
+Redireciona para a URL especificada em `path` com o [HTTP status code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) especificado em `status`. Se `status` é omitido o código padrão "302 Found" é aplicado.
 
 ~~~js
 res.redirect('/foo/bar');
@@ -10,43 +8,38 @@ res.redirect('http://example.com');
 res.redirect(301, 'http://example.com');
 res.redirect('../login');
 ~~~
-Redirects can be a fully-qualified URL for redirecting to a different site:
+
+Os redirecionamentos pode feitos para um site diferente, por uma URL completa:
+
 
 ~~~js
 res.redirect('http://google.com');
 ~~~
-Redirects can be relative to the root of the host name. For example, if the
-application is on `http://example.com/admin/post/new`, the following
-would redirect to the URL `http://example.com/admin`:
+
+Ou podem ser relativos ao host name root. Por exemplo, se a aplicação está rodando em `http://example.com/admin/post/new`, o código a seguir irá redirecionar para a URL `http://example.com/admin`:
 
 ~~~js
 res.redirect('/admin');
 ~~~
 
-Redirects can be relative to the current URL. For example, 
-from `http://example.com/blog/admin/` (notice the trailing slash), the following
-would redirect to the URL `http://example.com/blog/admin/post/new`.
+Ou podem ser relativos à URL atual. Por exemplo, a partir de `http://example.com/blog/admin/` (observe a barra final "/") o código a seguir redirecionará para a URL `http://example.com/blog/admin/post/new`.
 
 ~~~js
 res.redirect('post/new');
 ~~~
 
-Redirecting to `post/new` from `http://example.com/blog/admin` (no trailing slash),
-will redirect to `http://example.com/blog/post/new`.
+Redirecionando para `post/new` a partir de `http://example.com/blog/admin` (sem barra final), iremos redirecionar para `http://example.com/blog/post/new`.
 
-If you found the above behavior confusing, think of path segments as directories
-(with trailing slashes) and files, it will start to make sense.
+Se você acha o comportamento acima confuso, pensar em seguimentos de path como diretórios (com barras finais) e arquivos, começará a fazer sentido.
 
-Path-relative redirects are also possible. If you were on
-`http://example.com/admin/post/new`, the following would redirect to
-`http//example.com/admin/post`:
+Redirecionamento para path relativas também são possíveis. Se você está em `http://example.com/admin/post/new`, o código seguinte irá redirecionar para `http//example.com/admin/post`:
+
 
 ~~~js
 res.redirect('..');
 ~~~
 
-A `back` redirection redirects the request back to the [referer](http://en.wikipedia.org/wiki/HTTP_referer),
-defaulting to `/` when the referer is missing.
+Um redirecionamento para `back` redireciona a requisição para [referer](http://en.wikipedia.org/wiki/HTTP_referer), padronizando para `/` quando referer é omitido.
 
 ~~~js
 res.redirect('back');    

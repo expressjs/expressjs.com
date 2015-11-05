@@ -1,11 +1,11 @@
 <h2>Request</h2>
 
-The `req` object represents the HTTP request and has properties for the 
-request query string, parameters, body, HTTP headers, and so on.  In this documentation and by convention, 
-the object is always referred to as `req` (and the HTTP response is `res`) but its actual name is determined
-by the parameters to the callback function in which you're working.
+Objeto `req` representa a requisição HTTP e possui propriedades para o query string
+da requisição, parametros, corpo, cabeçalhos HTTP, e assim por diante. Nessa documentação e por
+convenção, o objeto é sempre referido como `req` (e a resposta HTTP é `res`) mas seu nome atual é determinado
+pelos parametros para a função de callback que você está trabalhando.
 
-For example:
+Por exemplo:
 
 ~~~js
 app.get('/user/:id', function(req, res){
@@ -13,7 +13,7 @@ app.get('/user/:id', function(req, res){
 });
 ~~~
 
-But you could just as well have:
+Mas você poderia muito bem ter:
 
 ~~~js
 app.get('/user/:id', function(request, response){
@@ -24,7 +24,8 @@ app.get('/user/:id', function(request, response){
 <h3 id='req.properties'>Properties</h3>
 
 <div class="doc-box doc-notice" markdown="1">
-In Express 4, `req.files` is no longer available on the `req` object by default. To access uploaded files on the `req.files` object, use a multipart-handling middleware like [busboy](https://www.npmjs.com/package/busboy), [multer](https://www.npmjs.com/package/multer), [formidable](https://www.npmjs.com/package/formidable), [multiparty](https://www.npmjs.com/package/multiparty), [connect-multiparty](https://www.npmjs.com/package/connect-multiparty), or [pez](https://www.npmjs.com/package/pez).
+No Express 4, `req.files` não está mais disponível no objeto `req` por padrão. Para acessar os arquivos carregados no objeto `req.files`,
+utilize um middleware de multipart-handling como [busboy](https://www.npmjs.com/package/busboy), [multer](https://www.npmjs.com/package/multer), [formidable](https://www.npmjs.com/package/formidable), [multiparty](https://www.npmjs.com/package/multiparty), [connect-multiparty](https://www.npmjs.com/package/connect-multiparty), ou [pez](https://www.npmjs.com/package/pez).
 </div>
 
 <section markdown="1">
