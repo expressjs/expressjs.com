@@ -61,20 +61,20 @@ $ express myapp
 Then install dependencies:
 
 ~~~sh
-$ cd myapp 
+$ cd myapp
 $ npm install
 ~~~
 
 Run the app (on MacOS or Linux):
 
 ~~~sh
-$ DEBUG=myapp npm start
+$ DEBUG=myapp:* npm start
 ~~~
 
 On Windows, use this command:
 
 ~~~sh
-> set DEBUG=myapp & npm start
+> set DEBUG=myapp:* & npm start
 ~~~
 
 Then load `http://localhost:3000/` in your browser to access the app.
