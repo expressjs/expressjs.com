@@ -1,58 +1,59 @@
 ---
 layout: page
-title: Express behind proxies
+title: Express atrás de proxies
 menu: guide
-lang: en
+lang: pt-br
 ---
 
-# Express behind proxies
+# Express atrás de proxies
 
-When running an Express app behind a proxy, set (using [app.set()](/4x/api.html#app.set)) the application variable `trust proxy` to one of the values listed in the following table.
+Quando uma aplicação Express estiver rodando atrá de um proxy, defina a variável `trust proxy` (usando [app.set()](/4x/api.html#app.set)) para um dos valores listados na tabela seguinte.
 
 <div class="doc-box doc-info" markdown="1">
-While the app will not fail to run if the application variable `trust proxy` is not set, it will incorrectly register the proxy's IP address as the client IP address unless `trust proxy` is configured.
+A aplicação não deixa de rodar se `trust proxy` não estiver definida, porém irá registrar incorretamente o IP do proxy como sendo o IP do cliente. Para evitar isso, a variável `trust proxy` deve ser configurada
 </div>
 
 <table class="doctable" border="1" markdown="1">
-  <thead><tr><th>Type</th><th>Value</th></tr></thead>
+  <thead><tr><th>Tipo</th><th>Valor</th></tr></thead>
   <tbody>
     <tr>
-      <td>Boolean</td>
+      <td>Boleano</td>
 <td markdown="1">
-If `true`, the client's IP address is understood as the left-most entry in the `X-Forwarded-*` header.  
+Se `true`, o endereço IP do cliente é entendido como sendo a entrada mais à esquerda no cabeçalho `X-Forwarded-*`.  
 
-If `false`, the app is understood as directly facing the Internet and the client's IP address is derived from `req.connection.remoteAddress`. This is the default setting.
+Se `false`, a app é entendida como acessando diretamente a Internet, e o endereço IP do cliente é derivado de `req.connection.remoteAddress`. Este é a configuração padrão.
 </td>
     </tr>
     <tr>
-      <td>IP addresses</td>
+      <td>Endereço IP</td>
 <td markdown="1">
-An IP address, subnet, or an array of IP addresses, and subnets to trust. The following is the list of pre-configured subnet names.
+Um endereço IP, sub-rede, ou um array de endereços IPs e sub-redes para trust. A seguir temos a lista de nomes de sub-rede pré configurados.
 
 * loopback - `127.0.0.1/8`, `::1/128`
 * linklocal - `169.254.0.0/16`, `fe80::/10`
 * uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
 
-Set IP addresses in any of the following ways:  
+Configure endereços IP por qualquer um dos seguintes caminhos:  
 
-<pre><code class="language-js">app.set('trust proxy', 'loopback') // specify a single subnet
-app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
-app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code></pre>
+<pre><code class="language-js">app.set('trust proxy', 'loopback') // especifica uma única sub-rede
+app.set('trust proxy', 'loopback, 123.123.123.123') // especifica uma sub-rede e um endereço
+app.set('trust proxy', 'loopback, linklocal, uniquelocal') // especifica múltiplas sub-redes como CSV
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // especifica múltiplas sub-redes como um array</code></pre>
 
-When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client's IP address.
+
+Quando especificados, os endereços IP ou sub-redes são excluídos do processo de determinação de endereço, e o IP não confiável mais próximo para o servidor da aplicação é determinado como o endereço IP do cliente.
 </td>
     </tr>
     <tr>
-      <td>Number</td>
+      <td>Número</td>
 <td markdown="1">
 Trust the `n`th hop from the front-facing proxy server as the client.
 </td>
     </tr>
     <tr>
-      <td>Function</td>
+      <td>Função</td>
 <td markdown="1">
-Custom trust implementation. Use this only if you know what you are doing.
+Implementação trust personalizada. Use somente se você sabe realmente o que está fazendo.
 <pre><code class="language-js">app.set('trust proxy', function (ip) {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
   else return false;
@@ -62,13 +63,13 @@ Custom trust implementation. Use this only if you know what you are doing.
   </tbody>
 </table>
 
-Setting a non-`false` `trust proxy` value results in two important changes:
+Configurar um `trust proxy` com valor não `false` resulta em duas mudanças importantes:
 
 <ul>
-  <li markdown="1">`X-Forwarded-Proto` may be set by the reverse proxy to tell the app whether it is https or simply http. This value is reflected by [req.protocol](/api.html#req.protocol).
+  <li markdown="1">`X-Forwarded-Proto` pode ser definido pelo proxy reverso para informar ao aplicativo se é https ou simplesmente http. Esse valor é refletido por [req.protocol](/api.html#req.protocol).
   </li>
-  <li markdown="1">The [req.ip](/api.html#req.ip) and [req.ips](/api.html#req.ips) values will be populated with `X-Forwarded-For`'s list of addresses.
+  <li markdown="1">Os valores [req.ip](/api.html#req.ip) e [req.ips](/api.html#req.ips) serão preenchidos com lista de endereços de `X-Forwarded-For`.
   </li>
 </ul>
 
-The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.com/package/proxy-addr) package. For more information, see its documentation.
+A configuração de `trust proxy` é implementada usando o pacote [proxy-addr](https://www.npmjs.com/package/proxy-addr). Para mais informações, veja esta documentação.
