@@ -41,7 +41,7 @@ Plataforma de software para construir aplicações de rede escalonáveis. Node.J
 
 ### open-source, open source
 
-Quando utilizado como adjetivo com hífen; por exemplo "Este é um software open-source." Veja [Open-source software on Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Nota: Embora seja comum a não hifenização, estamos utilizando o padrão de escrita da língua inglesa para adjetivos compostos.
+Quando utilizado como adjetivo com hífen; por exemplo "Este é um software open-source." Veja [Open-source software em Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Nota: Embora seja comum a não hifenização, estamos utilizando o padrão de escrita da língua inglesa para adjetivos compostos.
 
 ### request
 
