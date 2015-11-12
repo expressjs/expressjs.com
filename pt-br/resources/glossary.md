@@ -1,58 +1,60 @@
 ---
 layout: page
-title: Express glossary
+title: Glossário
 menu: resources
-lang: en
+lang: pt-br
 ---
 
-# Glossary
+# Glossário
 
-<div class="doc-box doc-warn">This is currently a working draft</div>
+<div class="doc-box doc-warn">Atualmente este é um rascunho</div>
 
-### application
+### application (aplicação)
 
-In general, one or more programs designed to carry out operations for a specific purpose.  In the context of Express, a program that uses the Express API running on the Node.js platform.  May also refer to an [app object](/api.html#express).
+Em geral, um ou mais programas destinados a realizar operações para uma finalidade específica. No contexto do Express, um programa que utiliza a API Express em execução na plataforma Node.js. Também pode se referir a um [objeto app ](/api.html#express).
 
 ### API
 
-Application programming interface.  Spell out on first use.
+Application programming interfac ou Interface de Programação de Aplicativos. Soletrar como A-P-I.
 
 ### Express
 
-A fast, un-opinionated, minimalist web framework for Node.js applications.  In general, prefer simply "Express" to "Express.js," though the latter is acceptable. 
+Um rápido e minimalista framework de mente aberta para aplicações Node.Js.  Em geral chamado simplesmente de "Express", a nomeclatura "Express.js" também é aceita. 
 
 ### libuv
 
-Multi-platform support library with focus on asynchronous I/O, primarily developed for use by Node.js.
+Biblioteca com suporte multi plataforma com foco em I/O assíncrono, primariamente desenvolvida para ser usada pelo Node.Js.
+
 
 ### middleware
 
-A function invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.  A few fine points of terminology around middleware:
+Uma função invocada pela camada de roteamento do Express antes do manipulador (handler) final da requisição, situa-se entre a requisição e a rota final pretendida.
+A function invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.  Alguns pormenores em torno da terminologia relacionada a middleware:
 
-  * `var foo = require('middleware')` is called _requiring_ or _using_ a Node.js module. Then the statement `var mw = foo()`  typically returns the middleware.
-  * `app.use(mw)` is called _adding the middleware to the global processing stack_.
-  * `app.get('/foo', mw, function (req, res) { ... })` is called _adding the middleware to the "GET /foo" processing stack_.
+  * `var foo = require('middleware')` é chamado _requisitando_ or _utilizando_ um módulo Node.Js. Então a declaração `var mw = foo()`  tipicamente retorna um middleware.
+  * `app.use(mw)` é chamada _adicionando um middleware à pilha de processamento global_.
+  * `app.get('/foo', mw, function (req, res) { ... })` é chamada _adicionando o middware para a pilha de processamento_ de "GET /foo".
 
 ### Node.js
 
-Software platform used to build scalable network applications. Node.js uses JavaScript as its scripting language, and achieves high throughput via non-blocking I/O and a single-threaded event loop.  See [nodejs.org](http://nodejs.org/). **Usage note**: Initially, "Node.js," thereafter "Node".
+Plataforma de software para construir aplicações de rede escalonáveis. Node.Js utiliza o JavaScript como linguagem de script e alcança uma elevada taxa de transferência via I/O não bloqueante e um ciclo de eventos single-threaded. Veja [nodejs.org](http://nodejs.org/). **Nota**: Inicialmente, "Node.js," depois disso "Node".
 
 ### open-source, open source
 
-When used as an adjective, hyphenate; for example: "This is open-source software." See [Open-source software on Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Note: Although it is common not to hyphenate this term, we are using the standard English rules for hyphenating a compound adjective
+Quando utilizado como adjetivo com hífen; por exemplo "Este é um software open-source." Veja [Open-source software on Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Nota: Embora seja comum a não hifenização, estamos utilizando o padrão de escrita da língua inglesa para adjetivos compostos.
 
 ### request
 
-An HTTP request.  A client submits an HTTP request message to a server, which returns an response.  Must use one of several [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) such as GET, POST, and so on.
+Uma requisição HTTP. Um cliente envia uma mensagem de requisição HTTP para um servidor, que retornará uma resposta (response). Para isso uma dos métodos de requisição HTTP podem ser utilizados [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), como  GET, POST, e outros.
 
 ### response
 
-An HTTP response. A server returns an HTTP response message to the client. The response contains completion status information about the request and may also contain requested content in its message body.
+Uma resposta HTTP. Um servidor retorna uma mensagem de resposta HTTP para o cliente. Essa resposta contém informações completas sobre o estado da requisição e pode também conter o conteúdo requisitado no corpo da mensagem.
 
-### route
+### route (rota)
 
-Part of a URL that identifies a resource.  For example, in `http://foo.com/products/id`, "/products/id" is the route.
+Parte de uma URL que identifica um recurso.  Por exemplo, em `http://foo.com/products/id`, "/products/id" é a rota.
 
 ### router
 
-See [http://expressjs.com/api#router](http://expressjs.com/api#router)
+Veja [http://expressjs.com/api#router](http://expressjs.com/api#router)
