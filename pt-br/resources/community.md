@@ -1,41 +1,33 @@
 ---
 layout: page
-title: Express community
-menu: resources
-lang: en
+title: Comunidade Express
+menu: Recursos
+lang: pt-br
 ---
 
-# Community
+# Comunidade
 
-##Mailing List
+##Lista de email
 
-Join over 2000 Express users or browse over 5000
-discussions in the [Google Group](https://groups.google.com/group/express-js).
+Junte-se a mais de 2000 usuários Express ou navegue em mais de 5000 tópicos de discussão no [Google Group](https://groups.google.com/group/express-js).
 
 ##Gitter
 
-The [strongloop/express chatroom](https://gitter.im/strongloop/express) is great place 
-for developers interested in the everyday discussions related to Express.
+O [chatroom strongloop/express](https://gitter.im/strongloop/express) é um ótimo lugar para desenvolvedores interessados nas discussões mais recentes sobre Express.
 
-##IRC Channel
+##Canal IRC
 
-Hundreds of developers idle in #express on freenode every day.
-If you have questions about the framework, jump in for quick
-feedback.
+Centenas de desenvolvedores disponíveis para ajudar diariamente com questões sobre o Express.
 
-##Examples
+##Exemplos
 
-View dozens of Express application [examples](https://github.com/strongloop/express/tree/master/examples)
-in the repo covering everything from API design and auth
-to template engine integration.
+Veja dezenas de  [exemplos](https://github.com/strongloop/express/tree/master/examples) de aplicações Express no repositório oficial, desde design da API e autenticações, até integração com motores de templates.
 
-##Issues
+##Issues (problemas)
 
-If you've come across what you think is a bug, or just want to make
-a feature request open a ticket in the [issue queue](https://github.com/strongloop/express/issues).
+Se você encontrar algo que pareça um bug, ou simplesmente quiser pedir um recurso, abra um ticket na [issue queue (fila de questões)](https://github.com/strongloop/express/issues).
 
-##Third Party
 
-Our vibrant community has created a large variety of extensions,
-[middleware](/resources/middleware.html) and higher level frameworks. Check them out in the
-[wiki](https://github.com/strongloop/express/wiki).
+##Parte de terceiros
+
+Nossa comunidade vibrante criou uma grande variedade de extensões, [middleware](/resources/middleware.html) e frameworks de alto nível. Veja em [wiki](https://github.com/strongloop/express/wiki).
