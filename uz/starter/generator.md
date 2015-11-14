@@ -1,21 +1,21 @@
 ---
 layout: page
-title: Генератор Express приложения
+title: Express dasturlar generatori
 menu: starter
-lang: ru
+lang: uz
 ---
 
-# Генератор Express приложения
+# Express dasturlar generatori
 
-Используйте инструмент генерации приложений, `express`, для быстрого создания скелета приложения.
+Dastur generatsiya qilish uchun `express` buyrug'idan foydalanishgiz mumkin, u dasturning asosiy qismini yaratib beradi.
 
-Устанавливайте его с помощу команды.
+Uni o'rnatish uchun quyidagi buyruqlardan foydalaning.
 
 ~~~sh
 $ npm install express-generator -g
 ~~~
 
-Для просмотра опций команды используйте `-h` опцию:
+Qo'shimcha amallarda foydalanish uchun `-h` qo'shimchasini yozing:
 
 ~~~sh
 $ express -h
@@ -33,7 +33,7 @@ $ express -h
     -f, --force         force on non-empty directory
 ~~~
 
-Пример, следующая команда создаст Express приложение с именем _myapp_ в текущей директории.
+Masalan, quyidagi buyruq _myapp_ nomi dasturni yaratadi.
 
 ~~~sh
 $ express myapp
@@ -57,28 +57,28 @@ $ express myapp
    create : myapp/bin/www
 ~~~
 
-Далее вам нужно установить зависимости:
+Keyin dasturning kerakli modullarni o'rnatish kerak bo'ladi:
 
 ~~~sh
-$ cd myapp 
+$ cd myapp
 $ npm install
 ~~~
 
-Запуск приложения (на MacOS или Linux):
+Dasturni ishga tushurish (MacOS va Linux):
 
 ~~~sh
 $ DEBUG=myapp ./bin/www
 ~~~
 
-На Windows, используйте слудующу команду:
+Windowsda esa, quyidagicha:
 
 ~~~sh
 > set DEBUG=myapp & node .\bin\www
 ~~~
 
-Далее откройте `http://localhost:3000/` в вашем браузере что бы посмотреть работу приложения.
+Undan keyin brauzerda `http://localhost:3000/` manziligaa kirib dastur ishalayotganini tekshiring.
 
-Сгенерированя структура приложения выглядит следующим образом.
+Generatsiya qilingan dasturning strukturasi quyidagicha bo'ladi.
 
 ~~~sh
 .
@@ -103,5 +103,5 @@ $ DEBUG=myapp ./bin/www
 ~~~
 
 <div class="doc-box doc-info" markdown="1">
-Структура приложения сгенерированая с помощью генератора, всего лишь один из множества способов организации структуры Express приложений. Вы можете не использовать даную структуру или изменить её лучшего использования под ваши нужды.
+Generator yordamida generatsiya qilingan struktra, Express dasturda yaratish mumkin bo'lgan strukturalardan bir usuli hisoblanadi. Siz bu strukturadan foydalanmasligingiz mumkin, o'zingizga kerakli ko'rinishda yaratishingiz mumkin.
 </div>
