@@ -25,7 +25,7 @@ lang: en
 </section>
 
 <section id="doc-langs" markdown="1">
-  Express docs available in other languages: [Spanish](/es), [Japanese](/ja), [Russian](/ru), [Chinese](/zh), [Korean](/ko), [Portuguese](/pt-br).
+  Express docs available in other languages: [Spanish](/es), [Japanese](/ja), [Russian](/ru), [Chinese](/zh), [Korean](/ko), [Portuguese](/pt-br), [Uzbek](/uz).
 </section>
 
 <section id="intro">
