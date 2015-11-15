@@ -1,13 +1,13 @@
 ---
 layout: page
-title: Express "Hello World" пример
+title: Express "Hello World"
 menu: starter
-lang: ru
+lang: uz
 ---
 
-# Hello world пример
+# Hello world 
 
-Здесь приведен пример очень простого Express приложения.
+Bu yerda Express dasturga eng sodda misol keltirilgan.
 
 ~~~js
 var express = require('express')
@@ -28,16 +28,16 @@ var server = app.listen(3000, function () {
 ~~~
 
 <div class="doc-box doc-notice" markdown="1">
-`req` (request) и `res` (response) являються теми же объектами которые предоставляет Node, поэтому вы можте выполнить
-`req.pipe()`, `req.on('data', callback)` и все другое, что не требует участия Express.
+`req` (request) va `res` (response) Node taqdim etayotgan obyektlar hisoblanadi, shuning uchun
+`req.pipe()`, `req.on('data', callback)` Express talab qilmaydigan boshqa obyektlar.
 </div>
 
-Приложение запустит сервер и будет слушать соединение на порте 3000. В ответ на запрос главной страницы будет отправлено "Hello World!". Для всех других путей, ответом будет **404 Not Found**.
+Dastur serverni ishga tushuradi va 3000 portdagi aloqani eshitib turadi. Javob sifatida bosh sahifaga "Hello World!" so'zi jo'natiladi. Qolgan barcha sahifalarga esa **404 Not Found** javobi jo'natiladi.
 
-Сохраните код в файл под названием `app.js` и запустите с помощу следующей команды.
+Kodni yozib, `app.js` faylida saqlab qoying. Uni ishga tushurish uchun quyidagi buyruqni ishga tushiring:
 
 ~~~ sh
 $ node app.js
 ~~~
 
-Загрузите [http://localhost:3000/](http://localhost:3000/) в браузере что бы увидеть результат.
+Natijani ko'rish uchun, brauzerdan [http://localhost:3000/](http://localhost:3000/) manziliga kiring.

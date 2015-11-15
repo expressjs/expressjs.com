@@ -1,19 +1,16 @@
 ---
 layout: page
-title: Express базовое обучение маршрутизации
+title: Express asosiy marshrutizatsiya
 menu: starter
-lang: ru
+lang: uz
 ---
 
-# Базовое обучение маршрутизации
+# Asosiy marshrutizatsiya
+Ushbu material Expressda asosiy marshrutizatsiyalar bilan ishlash haqidadir. Marshrutizatsiya dasturda HTTP so'rovlarga (GET, POST va b.sh) murojat qilinganda, ma'lum bir manzilga(endpoint) qanday javob berishini aniqlaydi.
 
-Этот материал базовое представление по работе маршрутизации в Express. Маршрутизация определяет как приложение отвечет на клиенский запрос 
-к конкретному адрессу(endpoint), который являеться URI (или путь) и определеному методу HTTP запроса (GET, POST, и т.д.).
+Har bir marshrut(route) bir yoki ko'plar qayta ishlovchi funksiyalarga ega.
 
-Каждый маршрут(route) имеет одину или более функций обработки, которые выполняються когда маршрут сопоставится. 
-
-Определение маршрута имеет следующую структуру `app.METHOD(PATH, HANDLER)`, где `app` это экземпляр `express`, `METHOD` это [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` это адрес на сайте, и `HANDLER` это функция выполняемая когда маршрут будет сопоставлен.
-
+Marshrutni aniqlash quyidagi ko'rinishga ega `app.METHOD(PATH, HANDLER)`, bu yerda `app` `express`ning ekzamplyari, `METHOD` esa [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` esa saytdagi manzili va `HANDLER` esa marshrut chaqirilganda bajariladinga funksiya.
 <div class="doc-box doc-notice" markdown="1">
 Этот руководство подразумевает что экземпляр `express` названый `app` создан и сервер запущен. Если вы не знакомы с созданием и запуском приложения, ознакомтесь с [Hello world пример](/starter/hello-world.html).
 </div>
