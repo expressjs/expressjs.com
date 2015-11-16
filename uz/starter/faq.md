@@ -2,88 +2,70 @@
 layout: page
 title: Express FAQ
 menu: starter
-lang: ru
+lang: uz
 ---
 
 # FAQ
 
-## Какую структуру я должен использовать для моего приложения?
+## Dasturim uchun qanday struktura tanlashim kerak?
 
-Нет единого ответа на данный вопрос. Все зависит от 
-размера вашего приложения и учавствующей в разработке команды. Для того что бы быть
-как возможно гибким, Express не делает никаких предположений по структуре.
+Bu savolga bitta javob yo'q. Bu dasturingiz hajmi va dasturchilar jamosiga bog'liq bo'ladi. Tobora moslashuvchan bo'lish uchun, Express struktura yaratishga hech qanday cheklovlar qo'ymaydi.
 
-Маршрутизация и другая логика приложения могут размещаться во многих файлах как вы 
-считаете нужным, и иметь любую структуре каталогов которую вы предпочтете. 
-Посмотрите следующие примеры для вдохновления:
+Dasturning marshrutizatsiya va boshqa logika qismi ko'plab fayllarda joylashgan bo'lishi mumkin, struktura esa siz hohlagan holda yaratish imkoniyati mavjud. Ilhomlanish uchun quyidagi strukturalarni ko'rishingiz mumkin:
 
-* [Объявление маршрутов](https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19)
-* [Карта маршрутов](https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47)
-* [Контроллеры в MVC стиле](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Marshrutlarni e'lon qilish](https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19)
+* [Marshrutlarni haritasi](https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47)
+* [MVC ko'rinishida kontrollerlar](https://github.com/strongloop/express/tree/master/examples/mvc)
 
-Также, существуют сторонние расширения для Express, которые упрощают некоторые из этих шаблонов:
+Bundan tashqari, Express uchun qo'shimcha yordam beruvchi shablonlar mavjud:
 
-* [Resourceful маршрутизация](https://github.com/expressjs/express-resource)
-* [Namespaced маршрутизация](https://github.com/expressjs/express-namespace)
+* [Resourceful marshrutizatsiya](https://github.com/expressjs/express-resource)
+* [Namespaced marshrutizatsiya](https://github.com/expressjs/express-namespace)
 
-## Как я могу определить модели?
+## Modellarni qanday aniqlashim mumkin?
 
-Express не имееет определения для работы с базой данных. Это отданно 
-на откуп сторонних Node модулей, что позволяет вам 
-взаимеодействовать с практически любой базе данных.
+Express qaysi ma'lumotlar ombori bilan ishlashni keltirilmagan. Siz hohlagan Node modullarni ishlatishingiz mumkin bo'ladi, bu esa sizga hohlagan ma'lumotlar omborini ishlatish imkonini beradi.
 
-Смотрите [LoopBack](http://loopback.io) фреймворк на базе Express сосредоточеный на работе с моделями.
+[LoopBack](http://loopback.io) ko'ring, Express asosida modellar bilan ishlash uchun yaratilgan freymvork.
 
-## Как я могу аутентифицировать пользователей?
+## Qanday qilish foydalanuvchini autenfikatsiya qilishim mumkin?
 
-Это еще один своеобразная область, которую Express не включает в себя. 
-Вы можете использовать любую схему аутентификации, которую вы хотите.
-Для простой username / password схемы, смотрите [этот пример](https://github.com/strongloop/express/tree/master/examples/auth).
+Bu ham Express o'ziga olmaydigan qismi hisoblanadi. Siz hohlagan autenfikatsiya tizimini ishlatishingiz mumkin bo'ladi.
+Oddiy username / password sxemasini ishlatish uchun [ushbu misolni](https://github.com/strongloop/express/tree/master/examples/auth) ko'ring.
 
 
-## Какой шаблонизатор поддерживает Express?
+## Express qaysi shablonizator ishlatadi?
 
-Express поддерживает любой шаблонизатор который согласуется с `(path, locals, callback)` сигнатурой.
-Для нормализации интерфейсов шаблонизатора и кеширования, смотрите
-[consolidate.js](https://github.com/visionmedia/consolidate.js)
-проект для помощи. Не заявленные шаблонизаторы могут также поддерживать Express сигнатуру.
+Express `(path, locals, callback)` signaturasini maqullaydigan barcha shablonizatorni ishlatishi mumkin.
+Iterfey shablonizator va keshirovaniyani normalashtirish uchun, [consolidate.js](https://github.com/visionmedia/consolidate.js) ni ko'ring.
 
-## Как я могу предоставлять статические файлы из нескольких директорий?
+## Qanday qilib bir necha direktoriyalarni statik fayllarga aylantirishim mumkin?
 
-Вы можете просто использовать любой промежуточный обработчик несколько раз 
-в вашем приложении. С ниже приведеными настройками промежуточных обработчиков, запрос
-на получение `GET /javascripts/jquery.js`, первоочередно проверит `./public/javascripts/jquery.js`;
-если файл в данной директории не существует, тогда проверка будет сделана в последующем промежуточном 
-обработчике `./files/javascripts/jquery.js`.
+Siz oraliq qayta ishlovchilarni bir necha marta ishatishingiz mumkin. Quyidagilar keltirilgan oraliq qayta ishlovchida, `GET /javascripts/jquery.js` ni olishga so'rov jo'natilganda, avvalo `./public/javascripts/jquery.js`ni tekshiradi;
+Agarda ushbu fayl direktoriyada topilmasa, undan keyingi oraliq qayta ishlovchida ko'rsatilgan direktoriyani `./files/javascripts/jquery.js` tekshiradi.
 
 ~~~js
 app.use(express.static('public'));
 app.use(express.static('files'));
 ~~~
 
-## Как я могу указать префикс пути для раздачи статических файлов?
+## Statik fayllarni tarqatish qanday qilib manzil prefiksini ko'rsatsam bo'ladi?
 
-С помощу базовой возможности Сonnect "mounting" вы можете 
-определить "префикс" для того middleware который будет выполнен.
-Это эффективно работает как будто префикс никогда не был частью пути. 
-Представим, что вам нужно `GET /files/javascripts/jquery.js`.
-Вы можете установить `/files` префикс, определить `/javascripts/jquery.js`
-как `req.url`, тем самым указав middleware файл для выдачи:
+Asosiy Connect "mounting" yordamida "prefiks" aniqlab qaysi middleware ishga tushishini ko'rsatish mumkin bo'ladi.
+Bu usul effektiv ishlaydi huddi prefiks hech qachon manzil qismi bo'lmagandek.
+Masalan, bizga `GET /files/javascripts/jquery.js` kerak bo'lsa.
+Siz `/files` prefiksini o'rnatib, `/javascripts/jquery.js`ni `req.url` aniqlashingiz mumkin, shu bilan tarqatish uchun middleware ko'rsatishingiz mumkin:
 
 ~~~js
 app.use('/public', express.static('public'));
 ~~~
 
-## Как вы обрабатываете 404 ошибку?
+## Siz qanday qilib 404 xatoni qayta ishlaysiz?
 
-В Express, 404 ошибка не являеться результатом ошибки. Поэтому,
-обработчик ошибок middleware не поймает 404. Потому что 404 
-является всего лишь фактом отсутствия дополнительной работы;
-Говоря иначе, Express выполнит все 
-промежуточные обработчики(middleware) / роутинги(routes),
-и обнаружит что ни один из них не возвращяет результат работы. 
-Все что вам нужно сделать это добавить обработчик(middleware) в конце (после всех других)
-для обработки 404:
+Expressda, 404 xatosi, natija xatosi hisoblanmaydi. Shuning uchun ham xatolarni qayta ishlovchi middleware 404ni qayta ishlay olmaydi. Chunki 404 qo'shimcha ish yo'qligidan dalolat beradi;
+Boshqa qilib aytganda, Express hamma oraliq qayta ishlovchi(middleware)  / routerlarni(routes)larni ishga tushuradi,
+va ularda hech biri ish haqida natija beramangani aniqlanadi.
+Buning uchun siz eng oxirida(hammasidan keyin) 404ni qayta ishlash oraliq qayta ishlovchi ko'rsatishingiz kerak bo'ladi:
 
 ~~~js
 app.use(function(req, res, next){
@@ -91,11 +73,10 @@ app.use(function(req, res, next){
 });
 ~~~
 
-## Как вы определяете обработчик ошибок?
+## Xato qayta ishlovchisini qanday aniqlaysiz?
 
-Вы можете определить middleware обработчик ошибок тем же самым образом как и другие обработчики(middleware),
-с отличием указания четерёх аргументов вместо трёх; с определеной сигнатурой `(err, req, res, next)`:
-
+Siz xatolarni qayta ishlovchi middlewareni ko'rsatishingiz mumkin, shu bilan qolgan qayta ishlovchisi(middleware)ga
+uchta argumentlar o'rniga to'rtta argument jo'natishingiz kerak; u quyidagicha `(err, req, res, next)`:
 
 ~~~js
 app.use(function(err, req, res, next){
@@ -104,11 +85,10 @@ app.use(function(err, req, res, next){
 });
 ~~~
 
-Для более подробной информации, смотрите [Обработка ошибок](/guide/error-handling.html).
+Batafsil ma'lumot uchun [Xatolarni qayta ishlash](/guide/error-handling.html) o'qing.
 
-## Как я могу рендерить для выдачи plain HTML?
+## Qanday qilib plain HTMLni render qilishim mumkin?
 
-Вам не нужно этого делать! Нету надобности "ендерить" HTML с помощу `res.render()`.
-Если у вас есть такой файл, используйте `res.sendFile()`.
-Если вы предоставляете много таких файлов с директории используйте `express.static()`
-оработчик(middleware).
+Siz buni qilishingiz kerak emas! HTMLni `res.render()` orqali "render" qilish kerak emas.
+Agar sizda shunday fayl bo'lsa, `res.sendFile()` ishlating.
+Agar siz ko'pgina bunday fayllarni ishlatsangiz `express.static()` qayta ishlovchisi(middleware)ni ishlatishingiz mumkin.
