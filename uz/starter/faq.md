@@ -33,7 +33,6 @@ Express qaysi ma'lumotlar ombori bilan ishlashni keltirilmagan. Siz hohlagan Nod
 Bu ham Express o'ziga olmaydigan qismi hisoblanadi. Siz hohlagan autenfikatsiya tizimini ishlatishingiz mumkin bo'ladi.
 Oddiy username / password sxemasini ishlatish uchun [ushbu misolni](https://github.com/strongloop/express/tree/master/examples/auth) ko'ring.
 
-
 ## Express qaysi shablonizator ishlatadi?
 
 Express `(path, locals, callback)` signaturasini maqullaydigan barcha shablonizatorni ishlatishi mumkin.
