@@ -44,8 +44,8 @@ $(function(){
 
   var editLink;
 
-  if (pathName == '/') editLink = '<a href="' + branchPath + '">Fork the website on GitHub</a>';
-  else editLink = '<a href="' + editPath + '">Edit this page on GitHub</a>';
+  if (pathName == '/') editLink = '<a href="' + branchPath + '">Fork the website on GitHub</a>.';
+  else editLink = '<a href="' + editPath + '">Edit this page on GitHub</a>.';
 
   $('#fork').html(editLink);
 
