@@ -55,7 +55,7 @@ If you are using Node.js 4.0+ or io.js 2.1.0+, you can use the `--trace-sync-io`
 
 ### Use middleware to serve static files
 
-In development, you can use `[res.sendFile()](http://expressjs.com/4x/api.html#res.sendFile)` to serve static files. But don't do this in production, because this function has to read from the file system for every file request, so it will encounter significant latency and affect the overall performance of the app. Note that `res.sendFile()` is _not_ implemented with the [sendfile](http://linux.die.net/man/2/sendfile) system call, which would make it far more efficient.
+In development, you can use [`res.sendFile()`](http://expressjs.com/4x/api.html#res.sendFile) to serve static files. But don't do this in production, because this function has to read from the file system for every file request, so it will encounter significant latency and affect the overall performance of the app. Note that `res.sendFile()` is _not_ implemented with the [sendfile](http://linux.die.net/man/2/sendfile) system call, which would make it far more efficient.
 
 Instead, use [serve-static](https://www.npmjs.com/package/serve-static) middleware (or something equivalent), that is optimized for serving files for Express apps.
 
@@ -157,7 +157,7 @@ Now all errors asynchronous and synchronous get propagated to the error middlewa
 
 However, there are two caveats:
 
-1.  All your asynchronous code must return promises (except emitters). If a particular library does not return promises, convert the base object using a helper function like `[Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html)`.
+1.  All your asynchronous code must return promises (except emitters). If a particular library does not return promises, convert the base object using a helper function like [`Bluebird.promisifyAll()`](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
 2.  Event emitters (like streams) can still cause uncaught exceptions. So make sure you are handling the error event properly; for example:
 
 ~~~js
