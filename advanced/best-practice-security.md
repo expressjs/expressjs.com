@@ -5,23 +5,21 @@ menu: advanced
 lang: en
 ---
 
-# Security Best Practices for Express in Production
-
-This is a two-part blog series about some best practices for running Express applications in production. This first part focuses on security, and the second on performance and reliability.  It assumes you are already familiar with the basics of Node.js and web development practices.  It covers topics and concepts that are especially relevant to the production environment.
+# Production Best Practices: Security
 
 ## Overview
 
-The term _"production"_ refers to the stage in the software lifecycle when an application or API is generally available to its end-users or consumers. In contrast, in _"development"_, you're still actively writing and testing code, and the application is not open to external access. The corresponding system environments are known as _production_ and _development_ environments, respectively.
+The term _"production"_ refers to the stage in the software lifecycle when an application or API is generally available to its end-users or consumers. In contrast, in the _"development"_ stage, you're still actively writing and testing code, and the application is not open to external access. The corresponding system environments are known as _production_ and _development_ environments, respectively.
 
-Development and production environments are often set up very differently and have vastly different requirements. Something that's fine in development may not be acceptable in production. For example, in a development environment verbose logging of errors may be needed for debugging, while the same behavior can become a security concern in a production environment. And in development, you don't need to worry about scalability, reliability, and performance, while those concerns become critical in production.
+Development and production environments are usually set up differently and have vastly different requirements. What's fine in development may not be acceptable in production. For example, in a development environment you may want verbose logging of errors for debugging, while the same behavior can become a security concern in a production environment. And in development, you don't need to worry about scalability, reliability, and performance, while those concerns become critical in production.
 
-This blog presents some security best practices for Express applications deployed to production.
+This article discusses some security best practices for Express applications deployed to production.
 
 ## Don't use deprecated or vulnerable versions of Express
 
-Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them!  If you haven't moved to version 4, we have provided a [handy migration guide](http://expressjs.com/guide/migrating-4.html).
+Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them!  If you haven't moved to version 4, follow the [migration guide](/guide/migrating-4.html).
 
-Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](http://expressjs.com/advanced/security-updates.html). If you are, update to one of the stable releases, preferably the latest.
+Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/advanced/security-updates.html). If you are, update to one of the stable releases, preferably the latest.
 
 ## Use TLS
 
@@ -138,7 +136,7 @@ app.use(session({
 
 Using npm to manage your application's dependencies is powerful and convenient.  But the packages that you use may contain critical security vulnerabilities that could also affect your application.  The security of your app is only as strong as the "weakest link" in your dependencies.
 
-Fortunately, there are two helpful tools you can use to ensure security of the third-party packages you use: [nsp](https://www.npmjs.com/package/nsp) and [requireSafe](https://requiresafe.com/).  These two tools do largely the same thing, so using both might be overkill, but "better safe than sorry" are words to live by when it comes to security.
+Use either or both of the following two tools to help ensure security of third-party packages you use: [nsp](https://www.npmjs.com/package/nsp) and [requireSafe](https://requiresafe.com/).  These two tools do largely the same thing.
 
 [nsp](https://www.npmjs.com/package/nsp) is a command-line tool that checks the [Node Security Project](https://nodesecurity.io/) vulnerability database to determine if your application uses packages with known vulnerabilities. Install it as follows:
 
@@ -146,7 +144,7 @@ Fortunately, there are two helpful tools you can use to ensure security of the t
 $ npm i nsp -g
 ~~~
 
-Use this command to submit the npm-shrinkwrap.json file for validation to [nodesecurity.io](https://nodesecurity.io/):
+Use this command to submit the `npm-shrinkwrap.json` file for validation to [nodesecurity.io](https://nodesecurity.io/):
 
 ~~~sh
 $ nsp audit-shrinkwrap
@@ -158,7 +156,7 @@ Use this command to submit the `package.json` file for validation to [nodesecuri
 $ nsp audit-package
 ~~~
 
-You can also use [requireSafe](https://requiresafe.com/) to audit your Node modules:
+Here's how to use [requireSafe](https://requiresafe.com/) to audit your Node modules:
 
 ~~~sh
 $ npm install -g requiresafe

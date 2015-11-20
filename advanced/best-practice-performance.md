@@ -5,17 +5,13 @@ menu: advanced
 lang: en
 ---
 
-# Performance Best Practices Using Express in Production
-
-This is a two-part blog series about some best practices for running Express applications in production. The first part was about security, and this second part focuses on performance and reliability. It assumes you are already familiar with the basics of Node.js and web development practices and covers topics and concepts especially relevant to the production environment.
-
-If you haven't already, be sure to also read [Part 1 on security](https://strongloop.com/strongblog/best-practices-for-express-in-production-part-one-security/)!
+# Production best practices: performance and reliability
 
 ## Overview
 
-As explained in part one, in _production_ your application is generally available for use by end-users, as opposed to _development_ when you're still actively writing and testing code. Development and production environments are often set up very differently and have vastly different requirements. For example, in development, you don't need to worry about scalability, reliability, and performance, while in production those concerns become critical.
+This article discusses performance and reliability best practices for Express applications deployed to production.
 
-This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, we've divided the information into two parts:
+This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts:
 
 * [Things to do in your code](#code) (the dev part).
 * [Things to do in your environment / setup](#env) (the ops part).
@@ -55,7 +51,7 @@ If you are using Node.js 4.0+ or io.js 2.1.0+, you can use the `--trace-sync-io`
 
 ### Use middleware to serve static files
 
-In development, you can use [`res.sendFile()`](http://expressjs.com/4x/api.html#res.sendFile) to serve static files. But don't do this in production, because this function has to read from the file system for every file request, so it will encounter significant latency and affect the overall performance of the app. Note that `res.sendFile()` is _not_ implemented with the [sendfile](http://linux.die.net/man/2/sendfile) system call, which would make it far more efficient.
+In development, you can use [`res.sendFile()`](/4x/api.html#res.sendFile) to serve static files. But don't do this in production, because this function has to read from the file system for every file request, so it will encounter significant latency and affect the overall performance of the app. Note that `res.sendFile()` is _not_ implemented with the [sendfile](http://linux.die.net/man/2/sendfile) system call, which would make it far more efficient.
 
 Instead, use [serve-static](https://www.npmjs.com/package/serve-static) middleware (or something equivalent), that is optimized for serving files for Express apps.
 
@@ -107,11 +103,10 @@ Try-catch is a JavaScript language construct that you can use to catch exception
 
 Use a tool such as [JSHint](http://jshint.com/) or [JSLint](http://www.jslint.com/) to help you find implicit exceptions like [reference errors on undefined variables](http://www.jshint.com/docs/options/#undef).
 
-Here is an example of using try-catch for catching a potential process-crashing operation:
+Here is an example of using try-catch to handle a potential process-crashing exception.
+This middleware function accepts a query field parameter named "params" that is a JSON object.
 
 ~~~js
-// Accepts a JSON in the query field named "params"
-// for specifying the parameters
 app.get('/search', function (req, res) {
   // Simulating async operation
   setImmediate(function () {
@@ -157,7 +152,7 @@ Now all errors asynchronous and synchronous get propagated to the error middlewa
 
 However, there are two caveats:
 
-1.  All your asynchronous code must return promises (except emitters). If a particular library does not return promises, convert the base object using a helper function like [`Bluebird.promisifyAll()`](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
+1.  All your asynchronous code must return promises (except emitters). If a particular library does not return promises, convert the base object using a helper function like [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
 2.  Event emitters (like streams) can still cause uncaught exceptions. So make sure you are handling the error event properly; for example:
 
 ~~~js
@@ -200,9 +195,9 @@ Setting NODE_ENV to "production" makes Express:
 
 If you need to write environment-specific code, you can check the value of NODE_ENV with `process.env.NODE_ENV`. Be aware that checking the value of any environment variable incurs a performance penalty, and so should be done sparingly.
 
-You're probably used to setting environment variables in your interactive shell, for example with `export` or your `.bash_profile` file. But in general you shouldn't do that on a production server; instead, use your OS's init system (systemd or Upstart). The next section provides more details about using your init system in general, but setting NODE_ENV is so important for performance (and easy to do), that we're highlighting it here.
+In development, you typically set environment variables in your interactive shell, for example with `export` or your `.bash_profile` file. But in general you shouldn't do that on a production server; instead, use your OS's init system (systemd or Upstart). The next section provides more details about using your init system in general, but setting NODE_ENV is so important for performance (and easy to do), that it's highlighted here.
 
-With Upstart, use the env keyword in your job file. For example:
+With Upstart, use the `env` keyword in your job file. For example:
 
 ~~~
 # /etc/init/env.conf
@@ -211,7 +206,7 @@ With Upstart, use the env keyword in your job file. For example:
 
 For more information, see the [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables).
 
-With systemd, use the Environment directive in your unit file. For example:
+With systemd, use the `Environment` directive in your unit file. For example:
 
 ~~~
 # /etc/systemd/system/myservice.service
@@ -224,12 +219,12 @@ If you are using StrongLoop Process Manager, you can also [set the environment v
 
 ### Ensure your app automatically restarts
 
-In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server itself crashes. Although of course you hope that neither of those events occurs, realistically you must account for both eventualities by:
+In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server itself crashes. Although you hope that neither of those events occurs, realistically you must account for both eventualities by:
 
 * Using a process manager to restart the app (and Node) when it crashes.
 * Using the init system provided by your OS to restart the process manager when the OS crashes. It's also possible to use the init system without a process manager.
 
-Node applications crash if they encounter an uncaught exception. The foremost thing you need to do is to ensure your app is well-tested and handles all exceptions (see our advice to [handle exceptions properly](#exceptions) below). But as a fail-safe, put a mechanism in place to ensure that if and when your app crashes, it will automatically restart.
+Node applications crash if they encounter an uncaught exception. The foremost thing you need to do is to ensure your app is well-tested and handles all exceptions (see [handle exceptions properly](#exceptions) for details). But as a fail-safe, put a mechanism in place to ensure that if and when your app crashes, it will automatically restart.
 
 #### Use a process manager
 
@@ -247,11 +242,11 @@ The most popular process managers for Node are:
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-For a feature-by-feature comparison of the three process managers, see [http://strong-pm.io/compare/](http://strong-pm.io/compare/). For a more detailed introduction to all three, see [Process managers for Express apps](http://expressjs.com/advanced/pm.html).
+For a feature-by-feature comparison of the three process managers, see [http://strong-pm.io/compare/](http://strong-pm.io/compare/). For a more detailed introduction to all three, see [Process managers for Express apps](/advanced/pm.html).
 
 Using any of these process managers will suffice to keep your application up, even if it does crash from time to time.
 
-But we're not going to lie to you: We like StrongLoop Process Manager and recommend using it. You didn't really expect us to recommend another process manager, did you? StrongLoop PM has lots of features specifically targeting production deployment. You can use it and the related StrongLoop tools to:
+However, StrongLoop PM has lots of features specifically targeting production deployment. You can use it and the related StrongLoop tools to:
 
 * Build and package your app locally, then deploy it securely to your production system.
 * Automatically restart your app if it crashes for any reason.
@@ -264,7 +259,7 @@ As explained below, when you install StrongLoop PM as an operating system servic
 
 #### Use an init system
 
-The next layer of reliability is to ensure that your app restarts when the server restarts. Although we like to think that our systems are highly stable, they can still go down for a variety of reasons. To ensure that your app restarts if the server crashes, use the init system built into your OS. The two main init systems in use today are [systemd](https://wiki.debian.org/systemd) and [Upstart](http://upstart.ubuntu.com/).
+The next layer of reliability is to ensure that your app restarts when the server restarts. Systems can still go down for a variety of reasons. To ensure that your app restarts if the server crashes, use the init system built into your OS. The two main init systems in use today are [systemd](https://wiki.debian.org/systemd) and [Upstart](http://upstart.ubuntu.com/).
 
 There are two ways to use init systems with your Express app:
 
@@ -310,7 +305,7 @@ For more information on systemd, see the [systemd reference (man page)](http://w
 
 ##### StrongLoop PM as a systemd service
 
-If you're using StrongLoop Process Manager, you can easily install StrongLoop PM as a systemd service. Then, when the server restarts, it will automatically restart StrongLoop PM, which will then restart all the apps it is managing.
+You can easily install StrongLoop Process Manager as a systemd service. After you do, when the server restarts, it will automatically restart StrongLoop PM, which will then restart all the apps it is managing.
 
 To install StrongLoop PM as a systemd service:
 
@@ -378,7 +373,7 @@ For more information on Upstart, see [Upstart Intro, Cookbook and Best Practises
 
 ##### StrongLoop PM as an Upstart service
 
-If you are using StrongLoop Process Manager, you can easily install Process Manager as an Upstart service. Then, when the server restarts, it will automatically restart StrongLoop PM, which will then restart all the apps it is managing.
+You can easily install StrongLoop Process Manager as an Upstart service. After you do, when the server restarts, it will automatically restart StrongLoop PM, which will then restart all the apps it is managing.
 
 To install StrongLoop PM as an Upstart 1.4 service:
 
@@ -436,8 +431,6 @@ A load balancer is usually a reverse proxy that orchestrates traffic to and from
 
 With load balancing, you may have to ensure that requests associated with a particular session ID connect to the process that originated them. This is known as _session affinity_, or _sticky sessions_, and may be addressed by the suggestion above to use a data store such as Redis for session data (depending on your application). For a discussion, see [Using multiple nodes](http://socket.io/docs/using-multiple-nodes/).
 
-Load balancing is a vast topic of its own, and a detailed discussion is beyond this scope of this article.
-
 #### Using StrongLoop PM with an Nginx load balancer
 
 [StrongLoop Process Manager](http://strong-pm.io/) integrates with an Nginx Controller, making it easy to configure multi-host production environment configurations. For more information, see [Scaling to multiple servers](https://docs.strongloop.com/display/SLC/Scaling+to+multiple+servers) (StrongLoop documentation).
@@ -448,4 +441,3 @@ Load balancing is a vast topic of its own, and a detailed discussion is beyond t
 A reverse proxy sits in front of a web app and performs supporting operations on the requests, apart from directing requests to the app. It can handle error pages, compression, caching, serving files, and load balancing among other things.
 
 Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.com/) or [HAProxy](http://www.haproxy.org/) in production.
-
