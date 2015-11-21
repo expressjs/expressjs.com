@@ -1,8 +1,10 @@
 ---
+### TRANSLATE ONLY "title" CONTENT IN THIS SECTION
 layout: page
 title: Migrating to Express 5
 menu: guide
 lang: en
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Moving to Express 5
@@ -15,9 +17,9 @@ Express 5 is not very different from Express 4: The changes to the API are not a
 
 To install the latest alpha and to preview Express 5, enter the following command in your application root directory:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install express@5.0.0-alpha.2 --save
-~~~
+</code></pre>
 
 You can then run your automated tests to see what fails, and fix problems according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
 

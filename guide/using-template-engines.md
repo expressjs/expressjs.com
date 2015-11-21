@@ -1,8 +1,10 @@
 ---
+### TRANSLATE ONLY "title" CONTENT IN THIS SECTION
 layout: page
 title: Using template engines with Express
 menu: guide
 lang: en
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Using template engines with Express
@@ -14,9 +16,9 @@ Before Express can render template files, the following application settings mus
 
 Then install the corresponding template engine npm package:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install jade --save
-~~~
+</code></pre>
 
 <div class="doc-box doc-notice" markdown="1">
 Express-compliant template engines such as Jade export a function named `__express(filePath, options, callback)`, which is called by the `res.render()` function to render the template code.
@@ -26,27 +28,27 @@ Some template engines do not follow this convention. The [Consolidate.js](https:
 
 After the view engine is set, you don't have to specify the engine or load the template engine module in your app; Express loads the module internally, as shown below (for the above example).
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.set('view engine', 'jade');
-~~~
+</code></pre>
 
 Create a Jade template file named `index.jade` in the `views` directory, with the following content:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 html
   head
     title!= title
   body
     h1!= message
-~~~
+</code></pre>
 
 Then create a route to render the `index.jade` file. If the `view engine` property is not set, you must specify the extension of the `view` file. Otherwise, you can omit it.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-~~~
+</code></pre>
 
 When you make a request to the home page, the `index.jade` file will be rendered as HTML.
 

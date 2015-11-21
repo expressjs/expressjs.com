@@ -1,8 +1,10 @@
 ---
+### TRANSLATE ONLY "title" CONTENT IN THIS SECTION
 layout: page
 title: Express routing
 menu: guide
 lang: en
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Routing
@@ -13,7 +15,7 @@ A route is a combination of a URI, an HTTP request method (such as GET and POST)
 
 The following code is an example of a very basic route.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -21,7 +23,7 @@ var app = express();
 app.get('/', function(req, res) {
   res.send('hello world');
 });
-~~~
+</code></pre>
 
 <h2 id="route-methods">Route methods</h2>
 
@@ -29,7 +31,7 @@ A route method is derived from one of the HTTP methods, and is attached to an in
 
 The following code is an example of routes that are defined for the GET and the POST methods to the root of the app.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // GET method route
 app.get('/', function (req, res) {
   res.send('GET request to the homepage');
@@ -40,7 +42,7 @@ app.post('/', function (req, res) {
   res.send('POST request to the homepage');
 });
 
-~~~
+</code></pre>
 
 Express supports the following routing methods that correspond to HTTP methods: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
 
@@ -53,12 +55,12 @@ There is a special routing method, `app.all()`, which is not derived from any HT
 
 In the following example, the handler will be executed for requests to "/secret" whether you are using GET, POST, PUT, DELETE, or any other HTTP request method that is supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.all('/secret', function (req, res, next) {
   console.log('Accessing the secret section ...');
   next(); // pass control to the next handler
 });
-~~~
+</code></pre>
 
 <h2 id="route-paths">Route paths</h2>
 
@@ -72,48 +74,65 @@ Route paths, in combination with a request method, define the endpoints at which
 Query strings are not part of the route path.
 </div>
 
-Examples of route paths that are based on strings:
+Here are some examples of route paths based on strings.
 
-~~~js
-// will match a request to the root
+This route path will match requests to the root route, `/`.
+
+<pre><code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.send('root');
 });
+</code></pre>
 
-// will match requests to /about
+This route path will match requests to `/about`.
+
+<pre><code class="language-javascript" translate="no">
 app.get('/about', function (req, res) {
   res.send('about');
 });
+</code></pre>
 
-// will match request to /random.text
+This route path will match requests to `/random.text`.
+
+<pre><code class="language-javascript" translate="no">
 app.get('/random.text', function (req, res) {
   res.send('random.text');
 });
-~~~
+</code></pre>
 
-Examples of route paths based on string patterns:
+Here are some examples of route paths based on string patterns.
 
-~~~js
-// will match acd and abcd
+This route path will match `acd` and `abcd`.
+
+<pre><code class="language-javascript" translate="no">
 app.get('/ab?cd', function(req, res) {
   res.send('ab?cd');
 });
+</code></pre>
 
-// will match abcd, abbcd, abbbcd, and so on
+This route path will match `abcd`, `abbcd`, `abbbcd`, and so on.
+
+<pre><code class="language-javascript" translate="no">
 app.get('/ab+cd', function(req, res) {
   res.send('ab+cd');
 });
+</code></pre>
 
-// will match abcd, abxcd, abRABDOMcd, ab123cd, and so on
+This route path will match `abcd`, `abxcd`, `abRABDOMcd`, `ab123cd`, and so on.
+
+<pre><code class="language-javascript" translate="no">
 app.get('/ab*cd', function(req, res) {
   res.send('ab*cd');
 });
+</code></pre>
 
-// will match /abe and /abcde
+This route path will match `/abe` and `/abcde`.
+
+<pre><code class="language-javascript" translate="no">
 app.get('/ab(cd)?e', function(req, res) {
  res.send('ab(cd)?e');
 });
-~~~
+</code></pre>
 
 <div class="doc-box doc-info" markdown="1">
 The characters ?, +, *, and () are subsets of their regular expression counterparts. The hyphen (-) and the dot (.) are interpreted literally by string-based paths.
@@ -121,17 +140,21 @@ The characters ?, +, *, and () are subsets of their regular expression counterpa
 
 Examples of route paths based on regular expressions:
 
-~~~js
-// will match anything with an "a" in the route name:
+This route path will match anything with an "a" in the route name.
+
+<pre><code class="language-javascript" translate="no">
 app.get(/a/, function(req, res) {
   res.send('/a/');
 });
+</code></pre>
 
-// will match butterfly and dragonfly; but not butterflyman, dragonfly man, and so on
+This route path will match `butterfly` and `dragonfly`, but not `butterflyman`, `dragonfly man`, and so on.
+
+<pre><code class="language-javascript" translate="no">
 app.get(/.*fly$/, function(req, res) {
   res.send('/.*fly$/');
 });
-~~~
+</code></pre>
 
 <h2 id="route-handlers">Route handlers</h2>
 
@@ -139,28 +162,28 @@ You can provide multiple callback functions that behave like [middleware](/guide
 
 Route handlers can be in the form of a function, an array of functions, or combinations of both, as shown in the following examples.
 
-A route can be handled using a single callback function:
+A single callback function can handle a route.  For example:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.get('/example/a', function (req, res) {
   res.send('Hello from A!');
 });
-~~~
+</code></pre>
 
-A route can be handled using more than one callback function (make sure you specify the `next` object):
+More than one callback function can handle a route (make sure you specify the `next` object). For example:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.get('/example/b', function (req, res, next) {
   console.log('the response will be sent by the next function ...');
   next();
 }, function (req, res) {
   res.send('Hello from B!');
 });
-~~~
+</code></pre>
 
-A route can be handled using an array of callback functions:
+An array of callback functions can handle a route.  For example:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var cb0 = function (req, res, next) {
   console.log('CB0');
   next();
@@ -176,11 +199,11 @@ var cb2 = function (req, res) {
 }
 
 app.get('/example/c', [cb0, cb1, cb2]);
-~~~
+</code></pre>
 
-A route can be handled using a combination of independent functions and arrays of functions:
+A combination of independent functions and arrays of functions can handle a route.  For example:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var cb0 = function (req, res, next) {
   console.log('CB0');
   next();
@@ -197,7 +220,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 }, function (req, res) {
   res.send('Hello from D!');
 });
-~~~
+</code></pre>
 
 <h2 id="response-methods">Response methods</h2>
 
@@ -222,7 +245,7 @@ Because the path is specified at a single location, creating modular routes is h
 
 Here is an example of chained route handlers that are defined by using `app.route()`.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -233,7 +256,7 @@ app.route('/book')
   .put(function(req, res) {
     res.send('Update the book');
   });
-~~~
+</code></pre>
 
 <h2 id="express-router">express.Router</h2>
 
@@ -243,7 +266,7 @@ The following example creates a router as a module, loads a middleware function 
 
 Create a router file named `birds.js` in the app directory, with the following content:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var router = express.Router();
 
@@ -262,15 +285,15 @@ router.get('/about', function(req, res) {
 });
 
 module.exports = router;
-~~~
+</code></pre>
 
 Then, load the router module in the app:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-~~~
+</code></pre>
 
 The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.
 

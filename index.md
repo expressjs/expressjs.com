@@ -1,8 +1,10 @@
 ---
+### TRANSLATE ONLY "title" CONTENT IN THIS SECTION
 layout: home
 title: Express - Node.js web application framework
 menu: home
 lang: en
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 <section id="home-content">

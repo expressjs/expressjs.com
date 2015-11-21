@@ -1,8 +1,10 @@
 ---
+### TRANSLATE ONLY "title" CONTENT IN THIS SECTION
 layout: page
 title: Express books and blogs
 menu: resources
 lang: en
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Books and blogs

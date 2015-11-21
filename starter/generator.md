@@ -1,8 +1,10 @@
 ---
+### TRANSLATE ONLY "title" CONTENT IN THIS SECTION
 layout: page
 title: Express application generator
 menu: starter
 lang: en
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Express application generator
@@ -11,13 +13,13 @@ Use the application generator tool, `express`, to quickly create an application 
 
 Install `express` with the following command:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install express-generator -g
-~~~
+</code></pre>
 
 Display the command options with the `-h` option:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ express -h
 
   Usage: express [options] [dir]
@@ -32,11 +34,11 @@ $ express -h
     -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-~~~
+</code></pre>
 
 For example, the following creates an Express app named _myapp_ in the current working directory:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ express myapp
 
    create : myapp
@@ -56,32 +58,32 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-~~~
+</code></pre>
 
 Then install dependencies:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ cd myapp
 $ npm install
-~~~
+</code></pre>
 
 On MacOS or Linux, run the app with this command: 
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ DEBUG=myapp:* npm start
-~~~
+</code></pre>
 
 On Windows, use this command:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 > set DEBUG=myapp:* & npm start
-~~~
+</code></pre>
 
 Then load `http://localhost:3000/` in your browser to access the app.
 
 The generated app has the following directory structure:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 .
 ├── app.js
 ├── bin
@@ -101,7 +103,7 @@ The generated app has the following directory structure:
     └── layout.jade
 
 7 directories, 9 files
-~~~
+</code></pre>
 
 <div class="doc-box doc-info" markdown="1">
 The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.

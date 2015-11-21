@@ -1,8 +1,10 @@
 ---
+### TRANSLATE ONLY "title" CONTENT IN THIS SECTION
 layout: page
 title: Security Best Practices for Express in Production
 menu: advanced
 lang: en
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Production Best Practices: Security
@@ -47,18 +49,18 @@ Helmet is actually just a collection of nine smaller middleware functions that s
 
 Install Helmet like any other module:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install --save helmet
-~~~
+</code></pre>
 
 Then to use it in your code:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 ...
 var helmet = require('helmet');
 app.use(helmet());
 ...
-~~~
+</code></pre>
 
 ### At a minimum, disable X-Powered-By header
 
@@ -66,9 +68,9 @@ If you don't want to use Helmet, then at least disable the `X-Powered-By` header
 
 So, best practice is to to turn off the header with the `app.disable()` method:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.disable('x-powered-by');
-~~~
+</code></pre>
 
 If you use `helmet.js`, it takes care of this for you.
 
@@ -91,7 +93,7 @@ Using the default session cookie name can open your app to attacks.  The securit
 
 To avoid this, use generic cookie names; for example using [express-session](https://www.npmjs.com/package/express-session) middleware:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var session = require('express-session');
 app.set('trust proxy', 1) // trust first proxy
 app.use( session({
@@ -99,7 +101,7 @@ app.use( session({
    name : 'sessionId',
   })
 );
-~~~
+</code></pre>
 
 ### Set cookie security options
 
@@ -113,7 +115,7 @@ Set the following cookie options to enhance security:
 
 Here is an example using [cookie-session](https://www.npmjs.com/package/cookie-session) middleware:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var session = require('cookie-session');
 var express = require('express');
 var app = express();
@@ -130,7 +132,7 @@ app.use(session({
           }
   })
 );
-~~~
+</code></pre>
 
 ## Ensure your dependencies are secure
 
@@ -140,29 +142,29 @@ Use either or both of the following two tools to help ensure security of third-p
 
 [nsp](https://www.npmjs.com/package/nsp) is a command-line tool that checks the [Node Security Project](https://nodesecurity.io/) vulnerability database to determine if your application uses packages with known vulnerabilities. Install it as follows:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm i nsp -g
-~~~
+</code></pre>
 
 Use this command to submit the `npm-shrinkwrap.json` file for validation to [nodesecurity.io](https://nodesecurity.io/):
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ nsp audit-shrinkwrap
-~~~
+</code></pre>
 
 Use this command to submit the `package.json` file for validation to [nodesecurity.io](https://nodesecurity.io/):
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ nsp audit-package
-~~~
+</code></pre>
 
 Here's how to use [requireSafe](https://requiresafe.com/) to audit your Node modules:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install -g requiresafe
 $ cd your-app
 $ requiresafe check
-~~~
+</code></pre>
 
 ## Additional considerations
 

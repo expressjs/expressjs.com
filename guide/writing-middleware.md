@@ -1,8 +1,10 @@
 ---
+### TRANSLATE ONLY "title" CONTENT IN THIS SECTION
 layout: page
 title: Writing middleware for use in Express apps
 menu: guide
 lang: en
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Writing middleware for use in Express apps
@@ -26,7 +28,7 @@ The following figure shows the elements of a middleware function call:
 
 To learn how to write and use Express middleware functions, we will write two middleware functions for the following, simple "Hello world" app:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -35,18 +37,18 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-~~~
+</code></pre>
 
 <h2>Development</h2>
 
 Here is a simple example of a middleware function called "myLogger". This function just prints "LOGGED" when a request to the app passes through it. The middleware function is assigned to a variable named `myLogger`.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var myLogger = function (req, res, next) {
   console.log('LOGGED');
   next();
 };
-~~~
+</code></pre>
 
 <div class="doc-box doc-notice" markdown="1">
 Notice the call above to `next()`.  Calling this function invokes the next middleware function in the app.
@@ -56,7 +58,7 @@ The `next()` function is not a part of the Node.js or Express API, but is the th
 To load the middleware function, call `app.use()`, specifying the middleware function.
 For example, the following code loads the `myLogger` middleware function before the route to the root path (/).
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -72,7 +74,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-~~~
+</code></pre>
 
 Every time the app receives a request, it prints the message "LOGGED" to the terminal.
 
@@ -84,16 +86,16 @@ The middleware function `myLogger` simply prints a message, then passes on the r
 
 The next example adds a property called `requestTime` to the request object. We'll name this middleware function "requestTime".
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var requestTime = function (req, res, next) {
   req.requestTime = Date.now();
   next();
 };
-~~~
+</code></pre>
 
 The app now uses the `requestTime` middleware function. Also, the callback function of the root path route uses the property that the middleware function adds to `req` (the request object).
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -111,7 +113,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-~~~
+</code></pre>
 
 When you make a request to the root of the app, the app now displays the timestamp of your request in the browser.
 

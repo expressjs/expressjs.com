@@ -1,8 +1,10 @@
 ---
+### TRANSLATE ONLY "title" CONTENT IN THIS SECTION
 layout: page
 title: Express "Hello World" example
 menu: starter
 lang: en
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Hello world example
@@ -15,7 +17,7 @@ First create a directory named `myapp`, change to it and run `npm init`. Then in
 
 In the `myapp` directory, create a file named `app.js` and add the following code:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -29,7 +31,7 @@ var server = app.listen(3000, function () {
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
-~~~
+</code></pre>
 
 The app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
 to the root URL (`/`) or _route_. For every other path, it will respond with a **404 Not Found**.
@@ -41,9 +43,9 @@ The `req` (request) and `res` (response) are the exact same objects that Node pr
 
 Run the app with the following command:
 
-~~~ sh
+</code></pre> sh
 $ node app.js
-~~~
+</code></pre>
 
 Then, load [http://localhost:3000/](http://localhost:3000/) in a browser to see the output.
 

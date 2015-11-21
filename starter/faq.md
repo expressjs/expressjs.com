@@ -1,8 +1,10 @@
 ---
+### TRANSLATE ONLY "title" CONTENT IN THIS SECTION
 layout: page
 title: Express FAQ
 menu: starter
 lang: en
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # FAQ
@@ -57,23 +59,23 @@ and found that none of them responded. All you need to
 do is add a middleware function at the very bottom of the stack (below all other functions)
 to handle a 404 response:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use(function(req, res, next) {
   res.status(404).send('Sorry cant find that!');
 });
-~~~
+</code></pre>
 
 ## How do you setup an error handler?
 
 You define error-handling middleware in the same way as other middleware,
 except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-~~~
+</code></pre>
 
 For more information, see [Error handling](/guide/error-handling.html).
 

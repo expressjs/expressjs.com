@@ -1,8 +1,10 @@
 ---
+### TRANSLATE ONLY "title" CONTENT IN THIS SECTION
 layout: page
 title: Express basic routing tutorial
 menu: starter
 lang: en
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Basic routing tutorial
@@ -19,7 +21,7 @@ This tutorial assumes that an instance of `express` named `app` is created and t
 
 The following code illustrates some example routes in an app:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // respond with "Hello World!" on the homepage
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -39,6 +41,6 @@ app.put('/user', function (req, res) {
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-~~~
+</code></pre>
 
 For more details about routing, see the [routing guide](/guide/routing.html).
