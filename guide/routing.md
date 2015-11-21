@@ -7,11 +7,11 @@ lang: en
 
 # Routing
 
-Routing refers to the definition of end points (URIs) to an application and how it responds to client requests.
+Routing refers to the definition of application end points (URIs) and how they respond to client requests.
 
-A route is a combination of a URI, a HTTP request method (GET, POST, and so on), and one or more handlers for the endpoint. It takes the following structure `app.METHOD(path, [callback...], callback)`, where `app` is an instance of `express`, `METHOD` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `path` is a path on the server, and `callback` is the function executed when the route is matched.
+A route is a combination of a URI, an HTTP request method (such as GET and POST), and one or more handlers for the endpoint. Routes use the following structure: `app.METHOD(path, [callback...], callback)`, where `app` is an instance of `express`, `METHOD` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `path` is a path on the server, and `callback` is the function that is executed when the route is matched.
 
-The following is an example of a very basic route.
+The following code is an example of a very basic route.
 
 ~~~js
 var express = require('express');
@@ -25,9 +25,9 @@ app.get('/', function(req, res) {
 
 <h2 id="route-methods">Route methods</h2>
 
-A route method is derived from one of the HTTP methods, and is attached to an instance of `express`.
+A route method is derived from one of the HTTP methods, and is attached to an instance of the `express` class.
 
-The following is an example of routes defined for the GET and the POST methods to the root of the app.
+The following code is an example of routes that are defined for the GET and the POST methods to the root of the app.
 
 ~~~js
 // GET method route
@@ -42,16 +42,16 @@ app.post('/', function (req, res) {
 
 ~~~
 
-Express supports the following routing methods corresponding to HTTP methods: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
+Express supports the following routing methods that correspond to HTTP methods: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
 
 <div class="doc-box doc-info" markdown="1">
-To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
+To route methods that translate to invalid JavaScript variable names, use the bracket notation. For example, 
 `app['m-search']('/', function ...`
 </div>
 
-There is a special routing method, `app.all()`, which is not derived from any HTTP method. It is used for loading middleware at a path for all request methods.
+There is a special routing method, `app.all()`, which is not derived from any HTTP method. This method is used for loading middleware functions at a path for all request methods.
 
-In the following example, the handler will be executed for requests to "/secret" whether using GET, POST, PUT, DELETE, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+In the following example, the handler will be executed for requests to "/secret" whether you are using GET, POST, PUT, DELETE, or any other HTTP request method that is supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
 ~~~js
 app.all('/secret', function (req, res, next) {
@@ -62,20 +62,20 @@ app.all('/secret', function (req, res, next) {
 
 <h2 id="route-paths">Route paths</h2>
 
-Route paths, in combination with a request method, define the endpoints at which requests can be made to. They can be strings, string patterns, or regular expressions.
+Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings, string patterns, or regular expressions.
 
 <div class="doc-box doc-info" markdown="1">
-  Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths; see its documentation for all the possibilities in defining route paths. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) is a handy tool for testing basic Express routes, although it does not support pattern matching.
+  Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths; see the path-to-regexp documentation for all the possibilities in defining route paths. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) is a handy tool for testing basic Express routes, although it does not support pattern matching.
 </div>
 
 <div class="doc-box doc-warn" markdown="1">
-Query strings are not a part of the route path.
+Query strings are not part of the route path.
 </div>
 
-Examples of route paths based on strings:
+Examples of route paths that are based on strings:
 
 ~~~js
-// will match request to the root
+// will match a request to the root
 app.get('/', function (req, res) {
   res.send('root');
 });
@@ -116,18 +116,18 @@ app.get('/ab(cd)?e', function(req, res) {
 ~~~
 
 <div class="doc-box doc-info" markdown="1">
-The characters ?, +, *, and () are subsets of their Regular Expression counterparts. The hyphen (-) and the dot (.) are interpreted literally by string-based paths.
+The characters ?, +, *, and () are subsets of their regular expression counterparts. The hyphen (-) and the dot (.) are interpreted literally by string-based paths.
 </div>
 
 Examples of route paths based on regular expressions:
 
 ~~~js
-// will match anything with an a in the route name:
+// will match anything with an "a" in the route name:
 app.get(/a/, function(req, res) {
   res.send('/a/');
 });
 
-// will match butterfly, dragonfly; but not butterflyman, dragonfly man, and so on
+// will match butterfly and dragonfly; but not butterflyman, dragonfly man, and so on
 app.get(/.*fly$/, function(req, res) {
   res.send('/.*fly$/');
 });
@@ -135,9 +135,9 @@ app.get(/.*fly$/, function(req, res) {
 
 <h2 id="route-handlers">Route handlers</h2>
 
-You can provide multiple callback functions that behave just like [middleware](/guide/using-middleware.html) to handle a request. The only exception is that these callbacks may invoke `next('route')` to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+You can provide multiple callback functions that behave like [middleware](/guide/using-middleware.html) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
 
-Route handlers can come in the form of a function, an array of functions, or various combinations of both, as shown the following examples.
+Route handlers can be in the form of a function, an array of functions, or combinations of both, as shown in the following examples.
 
 A route can be handled using a single callback function:
 
@@ -147,11 +147,11 @@ app.get('/example/a', function (req, res) {
 });
 ~~~
 
-A route can be handled using a more than one callback function (make sure to specify the `next` object):
+A route can be handled using more than one callback function (make sure you specify the `next` object):
 
 ~~~js
 app.get('/example/b', function (req, res, next) {
-  console.log('response will be sent by the next function ...');
+  console.log('the response will be sent by the next function ...');
   next();
 }, function (req, res) {
   res.send('Hello from B!');
@@ -178,7 +178,7 @@ var cb2 = function (req, res) {
 app.get('/example/c', [cb0, cb1, cb2]);
 ~~~
 
-A route can be handled using a combination of array of functions and independent functions:
+A route can be handled using a combination of independent functions and arrays of functions:
 
 ~~~js
 var cb0 = function (req, res, next) {
@@ -192,7 +192,7 @@ var cb1 = function (req, res, next) {
 }
 
 app.get('/example/d', [cb0, cb1], function (req, res, next) {
-  console.log('response will be sent by the next function ...');
+  console.log('the response will be sent by the next function ...');
   next();
 }, function (req, res) {
   res.send('Hello from D!');
@@ -201,7 +201,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 
 <h2 id="response-methods">Response methods</h2>
 
-The methods on the response object (`res`) in the following table can send a response to the client and terminate the request response cycle. If none of them is called from a route handler, the client request will be left hanging.
+The methods on the response object (`res`) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.
 
 | Method               | Description                           
 |----------------------|--------------------------------------
@@ -217,12 +217,10 @@ The methods on the response object (`res`) in the following table can send a res
 
 <h2 id="app-route">app.route()</h2>
 
-Chainable route handlers for a route path can be created using `app.route()`.
-Since the path is specified at a single location, it
-helps to create modular routes and reduce redundancy and typos. For more
-information on routes, see [Router() documentation](/4x/api.html#router).
+You can create chainable route handlers for a route path by using `app.route()`.
+Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/4x/api.html#router).
 
-Here is an example of chained route handlers defined using `app.route()`.
+Here is an example of chained route handlers that are defined by using `app.route()`.
 
 ~~~js
 app.route('/book')
@@ -239,21 +237,17 @@ app.route('/book')
 
 <h2 id="express-router">express.Router</h2>
 
-The `express.Router` class can be used to create modular mountable
-route handlers. A `Router` instance is a complete middleware and
-routing system; for this reason it is often referred to as a "mini-app".
+The `express.Router` class can be used to create modular, mountable route handlers. A `Router` instance is a complete middleware and routing system; for this reason, it is often referred to as a "mini-app".
 
-The following example creates a router as a module, loads a middleware in
-it, defines some routes, and mounts it on a path on the main app.
+The following example creates a router as a module, loads a middleware function in it, defines some routes, and mounts the router module on a path in the main app.
 
-Create a router file named `birds.js` in the app directory,
-with the following content:
+Create a router file named `birds.js` in the app directory, with the following content:
 
 ~~~js
 var express = require('express');
 var router = express.Router();
 
-// middleware specific to this router
+// middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
   next();
@@ -278,6 +272,5 @@ var birds = require('./birds');
 app.use('/birds', birds);
 ~~~
 
-The app will now be able to handle requests to `/birds` and
-`/birds/about`, along with calling the `timeLog`
-middleware specific to the route.
+The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.
+

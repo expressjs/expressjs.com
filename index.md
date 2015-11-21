@@ -40,7 +40,7 @@ lang: en
       </div>
 
       <div id="performance">
-          <h3>Performance</h3> Express provides a thin layer of fundamental web application features, without obscuring Node features that you know and love.
+          <h3>Performance</h3> Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love.
       </div>
 
       <div id="sponsorship">

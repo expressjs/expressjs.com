@@ -9,11 +9,11 @@ lang: en
 
 ## How should I structure my application?
 
-There is no definitive answer to this question. It depends 
-on the scale of your application and the team involved. To be as
+There is no definitive answer to this question. The answer depends 
+on the scale of your application and the team that is involved. To be as
 flexible as possible, Express makes no assumptions in terms of structure.
 
-Routes and other application-specific logic may live in as many files
+Routes and other application-specific logic can live in as many files
 as you wish, in any directory structure you prefer. View the following
 examples for inspiration:
 
@@ -27,15 +27,15 @@ Also, there are third-party extensions for Express, which simplify some of these
 
 ## How do I define models?
 
-Express has no notion of a database at all. This is
+Express has no notion of a database. This concept is
 left up to third-party Node modules, allowing you to
 interface with nearly any database.
 
-See [LoopBack](http://loopback.io) for an Express-based framework centered around models.
+See [LoopBack](http://loopback.io) for an Express-based framework that is centered around models.
 
 ## How can I authenticate users?
 
-This is another opinionated area that Express does not
+Authentication is another opinionated area that Express does not
 venture into.  You may use any authentication scheme you wish.
 For a simple username / password scheme, see [this example](https://github.com/strongloop/express/tree/master/examples/auth).
 
@@ -45,17 +45,17 @@ For a simple username / password scheme, see [this example](https://github.com/s
 Express supports any template engine that conforms with the `(path, locals, callback)` signature.
 To normalize template engine interfaces and caching, see the
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
-project for support. Unlisted template engines may still support the Express signature.
+project for support. Unlisted template engines might still support the Express signature.
 
-## How do you handle 404s?
+## How do you handle 404 responses?
 
-In Express, 404s are not the result of an error. Therefore,
-the error-handler middleware will not capture 404s. This is
-because a 404 is simply the absence of additional work to do;
-in other words, Express has executed all middleware / routes,
+In Express, 404 responses are not the result of an error, so
+the error-handler middleware will not capture them. This behavior is
+because a 404 response simply indicates the absence of additional work to do;
+in other words, Express has executed all middleware functions and routes,
 and found that none of them responded. All you need to
-do is add a middleware at the very bottom (below all others)
-to handle a 404:
+do is add a middleware function at the very bottom of the stack (below all other functions)
+to handle a 404 response:
 
 ~~~js
 app.use(function(req, res, next) {
@@ -65,7 +65,7 @@ app.use(function(req, res, next) {
 
 ## How do you setup an error handler?
 
-You define error-handling middleware the same way as other middleware,
+You define error-handling middleware in the same way as other middleware,
 except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
 
 ~~~js
@@ -79,7 +79,7 @@ For more information, see [Error handling](/guide/error-handling.html).
 
 ## How do I render plain HTML?
 
-You don't! There's no need to "render" HTML with `res.render()`.
-If you have a specific file, use `res.sendFile()`.
-If you are serving many assets from a directory use the `express.static()`
-middleware.
+You don't! There's no need to "render" HTML with the `res.render()` function.
+If you have a specific file, use the `res.sendFile()` function.
+If you are serving many assets from a directory, use the `express.static()`
+middleware function.

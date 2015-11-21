@@ -7,9 +7,9 @@ lang: en
 
 # Developing template engines for Express
 
-Use the `app.engine(ext, callback)` method to create your own template engine. `ext` refers to the file extension, `callback` is the template engine function which accepts the location of the file, the options object, and the callback function, as its parameters.
+Use the `app.engine(ext, callback)` method to create your own template engine. `ext` refers to the file extension, and `callback` is the template engine function, which accepts the following items as parameters: the location of the file, the options object, and the callback function.
 
-The following is an example of implementing a very simple template engine for rendering ".ntl" files.
+The following code is an example of implementing a very simple template engine for rendering `.ntl` files.
 
 ~~~js
 var fs = require('fs'); // this engine requires the fs module
@@ -26,7 +26,7 @@ app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
 ~~~
 
-Your app will now be able to render ".ntl" files. Create a file named "index.ntl" in the views directory with the following content.
+Your app will now be able to render `.ntl` files. Create a file named `index.ntl` in the `views` directory with the following content.
 
 ~~~js
 #title#
@@ -39,4 +39,4 @@ app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 })
 ~~~
-On making a request to the home page, "index.ntl" will be rendered as HTML.
+When you make a request to the home page, `index.ntl` will be rendered as HTML.

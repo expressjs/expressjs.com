@@ -7,7 +7,7 @@ lang: en
 
 # Database integration
 
-Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node modules for database systems in your Express app:
+Adding the capability to connect databases to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node.js modules for database systems in your Express app:
 
 * [Cassandra](#cassandra)
 * [CouchDB](#couchdb)
@@ -29,7 +29,7 @@ search on the [npm](https://www.npmjs.com/) site.
 
 ## Cassandra
 
-**Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)  
+**Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Installation**
 
 ~~~sh
@@ -52,7 +52,7 @@ client.execute('select key from system.local', function(err, result) {
 
 ## CouchDB
 
-**Module**: [nano](https://github.com/dscape/nano)  
+**Module**: [nano](https://github.com/dscape/nano)
 **Installation**
 
 ~~~sh
@@ -83,7 +83,7 @@ books.list(function(err, body){
 
 ## LevelDB
 
-**Module**: [levelup](https://github.com/rvagg/node-levelup)  
+**Module**: [levelup](https://github.com/rvagg/node-levelup)
 **Installation**
 
 ~~~sh
@@ -111,7 +111,7 @@ db.put('name', 'LevelUP', function (err) {
 
 ## MySQL
 
-**Module**: [mysql](https://github.com/felixge/node-mysql/)  
+**Module**: [mysql](https://github.com/felixge/node-mysql/)
 **Installation**
 
 ~~~sh
@@ -142,7 +142,7 @@ connection.end();
 
 ## MongoDB
 
-**Module**: [mongodb](https://github.com/mongodb/node-mongodb-native)  
+**Module**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Installation**
 
 ~~~sh
@@ -167,13 +167,13 @@ MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
 });
 ~~~
 
-If you want a object model driver for MongoDB, checkout [Mongoose](https://github.com/LearnBoost/mongoose).
+If you want an object model driver for MongoDB, look at [Mongoose](https://github.com/LearnBoost/mongoose).
 
 <a name="neo4j"></a>
 
 ## Neo4j
 
-**Module**: [apoc](https://github.com/hacksparrow/apoc)  
+**Module**: [apoc](https://github.com/hacksparrow/apoc)
 **Installation**
 
 ~~~sh
@@ -199,7 +199,7 @@ apoc.query('match (n) return n').exec().then(
 
 ## PostgreSQL
 
-**Module**: [pg](https://github.com/brianc/node-postgres)  
+**Module**: [pg](https://github.com/brianc/node-postgres)
 **Installation**
 
 ~~~sh
@@ -232,7 +232,7 @@ pg.connect(conString, function(err, client, done) {
 
 ## Redis
 
-**Module**: [redis](https://github.com/mranney/node_redis)  
+**Module**: [redis](https://github.com/mranney/node_redis)
 **Installation**
 
 ~~~sh
@@ -268,7 +268,7 @@ client.hkeys('hash key', function (err, replies) {
 
 ## SQLite
 
-**Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)  
+**Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Installation**
 
 ~~~sh
@@ -304,7 +304,7 @@ db.close();
 
 ## ElasticSearch
 
-**Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)  
+**Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Installation**
 
 ~~~sh
@@ -316,7 +316,7 @@ $ npm install elasticsearch
 ~~~js
 var elasticsearch = require('elasticsearch');
 var client = elasticsearch.Client({
-  host: 'localhost:9200'  
+  host: 'localhost:9200'
 });
 
 client.search({

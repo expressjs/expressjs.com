@@ -7,15 +7,15 @@ lang: en
 
 # Serving static files in Express
 
-Serving files, such as images, CSS, JavaScript and other static files is accomplished with the help of a built-in middleware in Express - `express.static`.
+To serve static files such as images, CSS files, and JavaScript files, use the `express.static` built-in middleware function in Express.
 
-Pass the name of the directory, which is to be marked as the location of static assets, to the `express.static` middleware to start serving the files directly. For example, if you keep your images, CSS, and JavaScript files in a directory named `public`, you can do this:
+Pass the name of the directory that contains the static assets to the `express.static` middleware function to start serving the files directly. For example, if you keep your images, CSS files, and JavaScript files in a directory named `public`, you can use the following code:
 
 ~~~js
 app.use(express.static('public'));
 ~~~
 
-Now, you will be able to load the files under the `public` directory:
+Now, you can load the files that are in the `public` directory:
 
 ~~~js
 http://localhost:3000/images/kitten.jpg
@@ -26,25 +26,25 @@ http://localhost:3000/hello.html
 ~~~
 
 <div class="doc-box doc-info">
-The files are looked up relative to the static directory, therefore, the name of the static directory is not a part of the URL.
+The files are looked up relative to the static directory, so the name of the static directory is not part of the URL.
 </div>
 
-If you want to use multiple directories as static assets directories, you can call the `express.static` middleware multiple times:
+If you want to use multiple directories as static assets directories, you can call the `express.static` middleware function multiple times:
 
 ~~~js
 app.use(express.static('public'));
 app.use(express.static('files'));
 ~~~
 
-The files will be looked up in the order the static directories were set using the `express.static` middleware.
+The files are looked up in the order in which you set the static directories by using the `express.static` middleware function.
 
-If you want to create a "virtual" (since the path does not actually exist in the file system) path prefix for the files served by `express.static`, you can [specify a mount path](/4x/api.html#app.use) for the static directory, as shown below:
+If you want to create a virtual path prefix (where the path does not actually exist in the file system) for the files that are served by the `express.static` function, you can [specify a mount path](/4x/api.html#app.use) for the static directory, as shown below:
 
 ~~~js
 app.use('/static', express.static('public'));
 ~~~
 
-Now, you will be able to load the files under the `public` directory, from the path prefix "/static".
+Now, you can load the files that are in the `public` directory from the `/static` path prefix.
 
 ~~~js
 http://localhost:3000/static/images/kitten.jpg
@@ -54,7 +54,7 @@ http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
 ~~~
 
-However, the path you provide to `express.static` is relative to the directory where you launch your node process. If you run the express app from another directory, it's safer to use the absolute path of the directory you want to serve:
+However, the path that you provide to the `express.static` function is relative to the directory from where you launch your `node` process. If you run the express app from another directory, it's safer to use the absolute path of the directory that you want to serve:
 
 ~~~js
 app.use('/static', express.static(__dirname + '/public'));

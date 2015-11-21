@@ -9,22 +9,22 @@ lang: en
 
 <h2>Overview</h2>
 
-Middleware is a function with access to the request object (`req`), the response object (`res`), and the next middleware in the application's request-response cycle, commonly denoted by a variable named `next`.
+_Middleware_ functions are functions that have access to the [request object](/4x/api.html#req)  (`req`), the [response object](/4x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
 
-Middleware can:
+Middleware functions can perform the following tasks:
 
 * Execute any code.
 * Make changes to the request and the response objects.
 * End the request-response cycle.
 * Call the next middleware in the stack.
 
-If the current middleware does not end the request-response cycle, it must call `next()` to pass control to the next middleware, otherwise the request will be left hanging.
+If the current middleware function does not end the request-response cycle, it must call `next()` to pass control to the next middleware function. Otherwise, the request will be left hanging.
 
-The following figure illustrates the elements of a middleware function call:
+The following figure shows the elements of a middleware function call:
 
 <img class="outlined-img" src="/images/express-mw.png" />
 
-To learn how to write and use Express middleware, we will write two middleware for the following simple "Hello world" app:
+To learn how to write and use Express middleware functions, we will write two middleware functions for the following, simple "Hello world" app:
 
 ~~~js
 var express = require('express');
@@ -39,7 +39,7 @@ app.listen(3000);
 
 <h2>Development</h2>
 
-Here is a simple example of middleware called "myLogger". All it does is print "LOGGED", when a request to the app passes through it. The middleware is assigned to a variable named `myLogger`.
+Here is a simple example of a middleware function called "myLogger". This function just prints "LOGGED" when a request to the app passes through it. The middleware function is assigned to a variable named `myLogger`.
 
 ~~~js
 var myLogger = function (req, res, next) {
@@ -49,14 +49,12 @@ var myLogger = function (req, res, next) {
 ~~~
 
 <div class="doc-box doc-notice" markdown="1">
-Notice the call above to `next()`.  Calling this function invokes the next middleware in the app.
-The `next()` function is not a part of the Node or Express API, but rather is the third argument
-passed to the middleware function.  It could be called anything, but by convention it is always called "next".
-To avoid confusion, always follow this convention.
+Notice the call above to `next()`.  Calling this function invokes the next middleware function in the app.
+The `next()` function is not a part of the Node.js or Express API, but is the third argument that is passed to the middleware function.  The `next()` function could be named anything, but by convention it is always named "next". To avoid confusion, always use this convention.
 </div>
 
-To load the middleware, call `app.use()` with the middleware function.
-For example, the following code loads this middleware before the route to the root path (/).
+To load the middleware function, call `app.use()`, specifying the middleware function.
+For example, the following code loads the `myLogger` middleware function before the route to the root path (/).
 
 ~~~js
 var express = require('express');
@@ -76,15 +74,15 @@ app.get('/', function (req, res) {
 app.listen(3000);
 ~~~
 
-Now every time the app receives a request, it will print "LOGGED" to the terminal.
+Every time the app receives a request, it prints the message "LOGGED" to the terminal.
 
-The order of middleware loading is important: middleware loaded first is executed first.
+The order of middleware loading is important: middleware functions that are loaded first are also executed first.
 
-If myLogger was loaded after the route to the root path, the request would have never reached it, and the app wouldn't print "LOGGED", because the route handler of the root path would have terminated the request-response cycle.
+If `myLogger` is loaded after the route to the root path, the request never reaches it and the app doesn't print "LOGGED", because the route handler of the root path terminates the request-response cycle.
 
-The middleware myLogger simply printed a message and passed on the request to the next middleware in the stack by calling `next()`.
+The middleware function `myLogger` simply prints a message, then passes on the request to the next middleware function in the stack by calling the `next()` function.
 
-The next example adds a property called `requestTime` to the request object. So, we'll call this middleware "requestTime".
+The next example adds a property called `requestTime` to the request object. We'll name this middleware function "requestTime".
 
 ~~~js
 var requestTime = function (req, res, next) {
@@ -93,7 +91,7 @@ var requestTime = function (req, res, next) {
 };
 ~~~
 
-The app now uses the requestTime middleware, and the callback function of the root path route uses the property that the middleware adds to `req` (the request object).
+The app now uses the `requestTime` middleware function. Also, the callback function of the root path route uses the property that the middleware function adds to `req` (the request object).
 
 ~~~js
 var express = require('express');
@@ -115,8 +113,8 @@ app.get('/', function (req, res) {
 app.listen(3000);
 ~~~
 
-On making a request to the root of the app now, the app displays the timestamp of request in the browser.
+When you make a request to the root of the app, the app now displays the timestamp of your request in the browser.
 
-With access to the request object, the response object, the next middleware in stack, and the whole Node.js API, the possibilities with middleware are endless.
+Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
 
-For more information about Express middleware, refer to the article "[Using Express middleware](/guide/using-middleware.html)".
+For more information about Express middleware, see: "[Using Express middleware](/guide/using-middleware.html)".
