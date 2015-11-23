@@ -1,11 +1,11 @@
 <h3 id='app.use'>app.use([path,] function [, function...])</h3>
 
-Mounts the [middleware](/{{ page.lang }}/guide/using-middleware.html) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
+Mounts the [middleware](/guide/using-middleware.html) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
 
 <div class="doc-box doc-info" markdown="1">
   A route will match any path that follows its path immediately with a "<code>/</code>".
   For example: <code>app.use('/apple', ...)</code> will match "/apple", "/apple/images",
-  "/apple/images/news", and so on.
+  "/apple/images/news", and so on.  
 </div>
 
 <div class="doc-box doc-info" markdown="1">
@@ -231,7 +231,7 @@ app.use(mw1, [mw2, r1, r2], subApp);
 
 </table>
 
-Following are some examples of using the [express.static](/{{ page.lang }}/guide/using-middleware.html#middleware.built-in)
+Following are some examples of using the [express.static](/guide/using-middleware.html#middleware.built-in)
 middleware in an Express app.
 
 Serve static content for the app from the "public" directory in the application directory:
