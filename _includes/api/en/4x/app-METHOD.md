@@ -4,7 +4,7 @@ Routes an HTTP request, where METHOD is the HTTP method of the request, such as 
 PUT, POST, and so on, in lowercase. Thus, the actual methods are `app.get()`,
 `app.post()`, `app.put()`, and so on.  See below for the complete list.
 
-For more information, see the [routing guide](/guide/routing.html).
+For more information, see the [routing guide](/{{ page.lang }}/guide/routing.html).
 
 Express supports the following routing methods corresponding to the HTTP methods of the same names:
 
@@ -46,7 +46,7 @@ Express supports the following routing methods corresponding to the HTTP methods
 </table>
 
 <div class="doc-box doc-info" markdown="1">
-  To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
+  To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example,
   `app['m-search']('/', function ...`.
 </div>
 
