@@ -17,4 +17,4 @@ The optional `options` object can have the following properties.
 | `redirect`    | Redirect to trailing "/" when the pathname is a directory. | Boolean | `true` |
 | `setHeaders`  | Function for setting HTTP headers to serve with the file. | Function |  |
 
-For details on using the middleware, refer [Serving static files in Express](/{{ page.lang }}/starter/static-files.html).
+For details on using the middleware, refer [Serving static files in Express](/starter/static-files.html).

@@ -1,0 +1,48 @@
+---
+layout: page
+title: Express "Hello World" example
+menu: starter
+lang: en
+---
+
+# Hello world example
+
+<div class="doc-box doc-info" markdown="1">
+This is essentially going to be the simplest Express app you can create. It is a single file app &mdash; _not_ what you'd get if you use the [Express generator](/starter/generator.html), which creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and sub-directories for various purposes.
+</div>
+
+First create a directory named `myapp`, and run `npm init` in it. Then install `express` as a dependency, as per the [installation guide](/starter/installing.html). 
+
+In the `myapp` directory, create a file named `app.js` and add the following code to it:
+
+~~~js
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('Hello World!');
+});
+
+var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
+});
+~~~
+
+The app starts a server and listens on port 3000 for connection. It will respond with "Hello World!" for requests
+to the root URL (`/`) or _route_. For every other path, it will respond with a **404 Not Found**.
+
+<div class="doc-box doc-notice" markdown="1">
+The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
+`req.pipe()`, `req.on('data', callback)`, and anything else you would do without Express involved.
+</div>
+
+Run the app with the following command.
+
+~~~ sh
+$ node app.js
+~~~
+
+Then, load [http://localhost:3000/](http://localhost:3000/) in a browser to see the output.
