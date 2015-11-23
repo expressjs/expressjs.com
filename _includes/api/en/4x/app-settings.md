@@ -154,7 +154,7 @@ A custom query string parsing function will receive the complete query string, a
   <h5 id="trust.proxy.options.table">Options for `trust proxy` setting</h5>
 
   <p markdown="1">
-  Read [Express behind proxies](/guide/behind-proxies.html) for more
+  Read [Express behind proxies](/{{ page.lang }}/guide/behind-proxies.html) for more
   information.
   </p>
 
