@@ -997,3 +997,19 @@ h2 a {
   }
 
 }
+
+/* For image callouts in writing-middleware.md */
+
+.callout {position: relative;}
+
+#callout1 {top: 60px; }
+
+#callout2 {top: 70px;}
+
+#callout3 {top: 80px;}
+
+#callout4 {top: 155px;}
+
+#callout5 {top: 165px;}
+
+#callout6 {top: 190px;}

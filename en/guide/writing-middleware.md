@@ -4,7 +4,6 @@ layout: page
 title: Writing middleware for use in Express apps
 menu: guide
 lang: en
-redirect_from: "/guide/writing-middleware.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -12,7 +11,7 @@ redirect_from: "/guide/writing-middleware.html"
 
 <h2>Overview</h2>
 
-_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/4x/api.html#req)  (`req`), the [response object](/{{ page.lang }}/4x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
+_Middleware_ functions are functions that have access to the [request object](/4x/api.html#req)  (`req`), the [response object](/4x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
 
 Middleware functions can perform the following tasks:
 
@@ -25,7 +24,24 @@ If the current middleware function does not end the request-response cycle, it m
 
 The following figure shows the elements of a middleware function call:
 
-<img class="outlined-img" src="/images/express-mw.png" />
+<table border="0" style="padding: 0; border: 0;">
+<tr><td style="margin: 0; padding: 0px; border: 0; width: 410px;">
+<img src="/images/express-mw.png" style="margin: 0px; padding: 0px; width: 410px; height: 308px;" />
+</td>
+<td style="margin: 0; padding: 0 0 0 5px; border: 0; width: 510px;">
+<div class="callout" id="callout1">HTTP method for which the middleware function applies.</div>
+
+<div class="callout" id="callout2">Path (route) for which the middleware function applies.</div>
+
+<div class="callout" id="callout3">The middleware function.</div>
+
+<div class="callout" id="callout4">Callback argument to the middleware function, called "next" by convention.</div>
+
+<div class="callout" id="callout5">HTTP <a href="/4x/api.html#res">response</a> argument to the middleware function, called "res" by convention.</div>
+
+<div class="callout" id="callout6">HTTP <a href="/4x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
+</td></tr>
+</table>
 
 To learn how to write and use Express middleware functions, we will write two middleware functions for the following, simple "Hello world" app:
 
@@ -120,4 +136,4 @@ When you make a request to the root of the app, the app now displays the timesta
 
 Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
 
-For more information about Express middleware, see: "[Using Express middleware](/{{ page.lang }}/guide/using-middleware.html)".
+For more information about Express middleware, see: "[Using Express middleware](/guide/using-middleware.html)".
