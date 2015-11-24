@@ -44,7 +44,7 @@ The `req` (request) and `res` (response) are the exact same objects that Node pr
 
 Run the app with the following command:
 
-</code></pre> sh
+<pre><code class="language-sh" translate="no">
 $ node app.js
 </code></pre>
 

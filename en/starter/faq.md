@@ -50,7 +50,7 @@ To normalize template engine interfaces and caching, see the
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 project for support. Unlisted template engines might still support the Express signature.
 
-## How do you handle 404 responses?
+## How do I handle 404 responses?
 
 In Express, 404 responses are not the result of an error, so
 the error-handler middleware will not capture them. This behavior is
@@ -66,7 +66,7 @@ app.use(function(req, res, next) {
 });
 </code></pre>
 
-## How do you setup an error handler?
+## How do I setup an error handler?
 
 You define error-handling middleware in the same way as other middleware,
 except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:

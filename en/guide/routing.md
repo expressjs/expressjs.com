@@ -10,9 +10,8 @@ redirect_from: "/guide/routing.html"
 
 # Routing
 
-Routing refers to the definition of application end points (URIs) and how they respond to client requests.
-
-A route is a combination of a URI, an HTTP request method (such as GET and POST), and one or more handlers for the endpoint. Routes use the following structure: `app.METHOD(path, [callback...], callback)`, where `app` is an instance of `express`, `METHOD` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `path` is a path on the server, and `callback` is the function that is executed when the route is matched.
+_Routing_ refers to the definition of application end points (URIs) and how they respond to client requests.
+For an introduction to routing, see [Basic routing](/{{ page.lang }}/starter/basic-routing.html).
 
 The following code is an example of a very basic route.
 
@@ -261,7 +260,7 @@ app.route('/book')
 
 <h2 id="express-router">express.Router</h2>
 
-The `express.Router` class can be used to create modular, mountable route handlers. A `Router` instance is a complete middleware and routing system; for this reason, it is often referred to as a "mini-app".
+Use the `express.Router` class to create modular, mountable route handlers. A `Router` instance is a complete middleware and routing system; for this reason, it is often referred to as a "mini-app".
 
 The following example creates a router as a module, loads a middleware function in it, defines some routes, and mounts the router module on a path in the main app.
 
@@ -297,4 +296,3 @@ app.use('/birds', birds);
 </code></pre>
 
 The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.
-

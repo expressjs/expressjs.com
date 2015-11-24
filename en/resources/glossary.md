@@ -58,4 +58,4 @@ Part of a URL that identifies a resource.  For example, in `http://foo.com/produ
 
 ### router
 
-See [http://expressjs.com/api#router](http://expressjs.com/api#router)
+See [router](en/4x/api.html#router) in the API reference.

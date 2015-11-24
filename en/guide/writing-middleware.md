@@ -24,11 +24,11 @@ If the current middleware function does not end the request-response cycle, it m
 
 The following figure shows the elements of a middleware function call:
 
-<table border="0" style="padding: 0; border: 0;">
+<table style="padding: 0; border: 0; width: 960px; margin-bottom: 10px;">
 <tr><td style="margin: 0; padding: 0px; border: 0; width: 410px;">
 <img src="/images/express-mw.png" style="margin: 0px; padding: 0px; width: 410px; height: 308px;" />
 </td>
-<td style="margin: 0; padding: 0 0 0 5px; border: 0; width: 510px;">
+<td style="margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;">
 <div class="callout" id="callout1">HTTP method for which the middleware function applies.</div>
 
 <div class="callout" id="callout2">Path (route) for which the middleware function applies.</div>
@@ -37,13 +37,13 @@ The following figure shows the elements of a middleware function call:
 
 <div class="callout" id="callout4">Callback argument to the middleware function, called "next" by convention.</div>
 
-<div class="callout" id="callout5">HTTP <a href="/4x/api.html#res">response</a> argument to the middleware function, called "res" by convention.</div>
+<div class="callout" id="callout5">HTTP <a href="/en/4x/api.html#res">response</a> argument to the middleware function, called "res" by convention.</div>
 
-<div class="callout" id="callout6">HTTP <a href="/4x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
+<div class="callout" id="callout6">HTTP <a href="/en/4x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
 </td></tr>
 </table>
 
-To learn how to write and use Express middleware functions, we will write two middleware functions for the following, simple "Hello world" app:
+Here is an example of a simple "Hello World" Express application, for which you will define two middleware functions:
 
 <pre><code class="language-javascript" translate="no">
 var express = require('express');
@@ -136,4 +136,4 @@ When you make a request to the root of the app, the app now displays the timesta
 
 Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
 
-For more information about Express middleware, see: "[Using Express middleware](/guide/using-middleware.html)".
+For more information about Express middleware, see: [Using Express middleware](/guide/using-middleware.html).
