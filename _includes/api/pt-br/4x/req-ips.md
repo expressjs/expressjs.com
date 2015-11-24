@@ -1,8 +1,10 @@
 <h3 id='req.ips'>req.ips</h3>
 
-When the [`trust proxy` setting](/4x/api.html#trust.proxy.options.table) trusts
-the socket address, this property contains an array of IP addresses specified in
-the `X-Forwarded-For` request header. Otherwise, it contains an empty array.
+Quando a configuração [`trust proxy`](/4x/api.html#trust.proxy.options.table) é `true`, essa propriedade contém um array
+de endereços IP especificados no cabeçalho "X-Forwarded-For" da requisição.
+Caso contrário ela contém um array vazio.
 
-For example, if `X-Forwarded-For` is `client, proxy1, proxy2`, `req.ips` would be 
-`["client", "proxy1", "proxy2"]`, where `proxy2` is the furthest downstream.
+Por exemplo, se "X-Forwarded-For" for "client, proxy1, proxy2", `req.ips` seria
+`["client", "proxy1", "proxy2"]`, onde "proxy2" é o downstream mais distante.
+
+Para mais informações sobre a configuração `trust proxy`, veja [app.set](#app.set).

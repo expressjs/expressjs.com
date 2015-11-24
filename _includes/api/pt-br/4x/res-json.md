@@ -1,8 +1,7 @@
 <h3 id='res.json'>res.json([body])</h3>
 
-Sends a JSON response. This method is identical to `res.send()` with an object or array as the parameter.
-However, you can use it to convert other values to JSON, such as `null`, and `undefined`.
-(although these are technically not valid JSON).
+Envia uma resposta em formato JSON. Este método é idêntico a `res.send()` com um objeto ou array como parâmetro.
+No entanto, você pode utilizá-lo para converter outros valores como `null` e `undefined` para JSON (uma vez que tecnicamente estes valores não são JSONs válidos).
 
 ~~~js
 res.json(null)

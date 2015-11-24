@@ -1,7 +1,7 @@
 <h3 id='app.get'>app.get(name)</h3>
 
-Returns the value of `name` app setting, where `name` is one of strings in the
-[app settings table](#app.settings.table). For example:
+Retorna o valor da configuração `name`, onde `name` é uma das propriedades da
+[tabela de configurações da aplicação](#app.settings.table).
 
 ~~~js
 app.get('title');

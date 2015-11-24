@@ -1,17 +1,17 @@
 <h3 id='router.route'>router.route(path)</h3>
 
-Returns an instance of a single route which you can then use to handle HTTP verbs
-with optional middleware. Use `router.route()` to avoid duplicate route naming and
-thus typo errors.
+Retorna uma instância de uma única rota a qual você pode então usar para manusear
+verbos HTTP com um middleware opcional. Use `router.route()` para evitar nomes de
+rota duplicados e assim erros de grafia.
 
-Building on the `router.param()` example above, the following code shows how to use
-`router.route()` to specify various HTTP method handlers.
+Constuído com base no exemplo `router.param()` acima, o seguinte código demonstra a
+utilização de `router.route()` para especificar vários métodos manipuladores HTTP.
 
 ~~~js
 var router = express.Router();
 
 router.param('user_id', function(req, res, next, id) {
-  // sample user, would actually fetch from DB, etc...
+  // usuário exemplo, seria na verdade buscado do DB, etc...
   req.user = {
     id: id,
     name: 'TJ'
@@ -21,17 +21,17 @@ router.param('user_id', function(req, res, next, id) {
 
 router.route('/users/:user_id')
 .all(function(req, res, next) {
-  // runs for all HTTP verbs first
-  // think of it as route specific middleware!
+  // roda para todos os verbos HTTP primeiro
+  // pense nisso como uma rota middleware específica!
   next();
 })
 .get(function(req, res, next) {
   res.json(req.user);
 })
 .put(function(req, res, next) {
-  // just an example of maybe updating the user
+  // apenas um exemplo de talvez atualizar o usuário
   req.user.name = req.params.name;
-  // save user ... etc
+  // salvando o usuário ... etc
   res.json(req.user);
 })
 .post(function(req, res, next) {
@@ -42,5 +42,5 @@ router.route('/users/:user_id')
 })
 ~~~
 
-This approach re-uses the single '/users/:user_id' path and add handlers for
-various HTTP methods.
+Essa abordagem reutiliza o único caminho '/users/:user_id' e adiciona manipuladores
+para vários métodos HTTP.

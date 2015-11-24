@@ -20,7 +20,11 @@ Middleware can:
 
 If the current middleware does not end the request-response cycle, it must call `next()` to pass control to the next middleware, otherwise the request will be left hanging.
 
-To learn how to write and use Express middleware, we will write two middleware for the following minimalistic app:
+The following figure illustrates the elements of a middleware function call:
+
+<img class="outlined-img" src="/images/express-mw.png" />
+
+To learn how to write and use Express middleware, we will write two middleware for the following simple "Hello world" app:
 
 ~~~js
 var express = require('express');
@@ -44,7 +48,15 @@ var myLogger = function (req, res, next) {
 };
 ~~~
 
-To load middleware, use the `app.use()` method. For example, the following code loads this middleware before the route to the root path (/).
+<div class="doc-box doc-notice" markdown="1">
+Notice the call above to `next()`.  Calling this function invokes the next middleware in the app.
+The `next()` function is not a part of the Node or Express API, but rather is the third argument
+passed to the middleware function.  It could be called anything, but by convention it is always called "next".
+To avoid confusion, always follow this convention.
+</div>
+
+To load the middleware, call `app.use()` with the middleware function.
+For example, the following code loads this middleware before the route to the root path (/).
 
 ~~~js
 var express = require('express');
@@ -66,7 +78,7 @@ app.listen(3000);
 
 Now every time the app receives a request, it will print "LOGGED" to the terminal.
 
-The order of middleware loading is important: middleware loaded first are executed first.
+The order of middleware loading is important: middleware loaded first is executed first.
 
 If myLogger was loaded after the route to the root path, the request would have never reached it, and the app wouldn't print "LOGGED", because the route handler of the root path would have terminated the request-response cycle.
 

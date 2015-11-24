@@ -1,20 +1,20 @@
 <h3 id='app.route'>app.route(path)</h3>
 
-Returns an instance of a single route, which you can then use to handle HTTP verbs with optional middleware.
-Use `app.route()` to avoid duplicate route names (and thus typo errors).
+Retorna uma instância de uma única rota, que você pode usar para lidar com verbos HTTP com middleware opcional.
+Use `app.route()` para evitar nomes duplicados de rota (e assim, erros de digitação).
 
 ~~~js
 var app = express();
 
 app.route('/events')
 .all(function(req, res, next) {
-  // runs for all HTTP verbs first
-  // think of it as route specific middleware!
+  // roda para todos os verbos de HTTP primeiro
+  // pense nisso como um middleware específico da rota!
 })
 .get(function(req, res, next) {
   res.json(...);
 })
 .post(function(req, res, next) {
-  // maybe add a new event...
+  // talvez adicionar um novo evento...
 })
 ~~~

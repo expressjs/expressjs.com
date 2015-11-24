@@ -182,6 +182,11 @@ a {
   padding-top: 80px;
 }
 
+.outlined-img {
+  border: 1px solid #eaeaea;
+  width: 90%;
+}
+
 /* logo */
 
 #logo {

@@ -1,7 +1,8 @@
 <h3 id='req.cookies'>req.cookies</h3>
 
-When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this property is an object that
-contains cookies sent by the request.  If the request contains no cookies, it defaults to `{}`.
+Quando utilizando o middleware [cookie-parser](https://www.npmjs.com/package/cookie-parser),
+essa propriedade é um objeto que contém os cookies enviados pela requisição. Se
+a requisição não contiver cookies, o padrão é `{}`.
 
 ~~~js
 // Cookie: name=tj
@@ -9,4 +10,4 @@ req.cookies.name
 // => "tj"
 ~~~
 
-For more information, issues, or concerns, see [cookie-parser](https://github.com/expressjs/cookie-parser).
+Para mais informações ou em caso de problemas veja [cookie-parser](https://github.com/expressjs/cookie-parser).

@@ -1,7 +1,7 @@
 <h3 id='req.xhr'>req.xhr</h3>
 
-A Boolean value that is `true` if the request's "X-Requested-With" header field is
-"XMLHttpRequest", indicating that the request was issued by a client library such as jQuery.
+Um valor Booleano que é `true` se o campo "X-Requested-With" do cabeçalho da resquisição é
+"XMLHttpRequest", indicando que a requisição foi emitida por uma biblioteca cliente como jQuery.
 
 ~~~js
 req.xhr

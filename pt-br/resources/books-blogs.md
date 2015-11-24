@@ -1,16 +1,17 @@
 ---
 layout: page
-title: Express books and blogs
+title: Livros e Blogs sobre Express
 menu: resources
-lang: en
+lang: pt-br
 ---
 
-# Books and blogs
+# Livros e Blogs
 
-<div class="doc-box doc-warn">Disclaimer: Unendorsed community content.</div>
+<div class="doc-box doc-warn">Atenção: Este conteúdo não é de responsabilidade da comunidade.</div>
 
-## Books
+## Livros
 
+Aqui estão alguns dos vários livros sobre Express:
 Here are a few of the many books on Express:
 
  - **[Getting MEAN with Mongo, Express, Angular, and Node](http://www.manning.com/sholmes/)**,
@@ -26,10 +27,9 @@ Manning Publications, October 2013.
  - **[Express Web Application Development](https://www.packtpub.com/web-development/express-web-application-development)**,
 Packt Publishing, June 2013.
 
-###Add your book here!
+###Adicione seu livro aqui!
 
-[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) and add a link to your book, then submit a pull request (GitHub login required).  Follow the format of the above listings.
-
+[Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) e adicione um link para o seu livro, então envie um pull request (necessário login no GitHub).  Siga o formato da listagem acima.
 ## Blogs
 
 - [StrongLoop Blog: Express category](http://strongloop.com/strongblog/category/express/)
@@ -37,6 +37,6 @@ Packt Publishing, June 2013.
 - [Codeforgeek Blog: Express category](http://codeforgeek.com/code/nodejs/express/)
 - [Node-tricks Blog: Express category](http://node-tricks.com/category/express/)
 
-###Add your blog here!
+###Adicione seu blog aqui!
 
-[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+[Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) e adicione um link para o seu blog, então envie um pull request (necessário login no GitHub). Siga o formato da listagem acima.

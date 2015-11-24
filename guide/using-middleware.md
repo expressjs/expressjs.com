@@ -34,7 +34,7 @@ Also, you can load a series of middleware functions together, creating a sub-sta
 <h2 id='middleware.application'>Application-level middleware</h2>
 
 Bind application-level middleware to an instance of the [app object](/4x/api.html#app) with `app.use()` and `app.METHOD()`,
-where `METHOD` is is the HTTP method of the request that it handles, such as GET, PUT, POST, and so on, in lowercase.
+where `METHOD` is the HTTP method of the request that it handles, such as GET, PUT, POST, and so on, in lowercase.
 For example:
 
 ~~~js

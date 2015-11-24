@@ -1,7 +1,7 @@
 <h3 id='req.stale'>req.stale</h3>
 
-Indicates whether the request is "stale," and is the opposite of `req.fresh`.
-For more information, see [req.fresh](#req.fresh).
+Indica se a requisição é "stale", e é o oposto de `req.fresh`.
+Para mais informações, veja [req.fresh](#req.fresh).
 
 ~~~js
 req.stale

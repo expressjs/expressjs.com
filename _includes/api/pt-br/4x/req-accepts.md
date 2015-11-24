@@ -1,12 +1,11 @@
-<h3 id='req.accepts'>req.accepts(types)</h3>
+<h3 id='req.accepts'>req.accepts(tipos)</h3>
 
-Checks if the specified content types are acceptable, based on the request's `Accept` HTTP header field.
-The method returns the best match, or if none of the specified content types is acceptable, returns 
-`undefined` (in which case, the application should respond with `406 "Not Acceptable"`).
+Verifica se o conteúdo especificado é aceitával, com base no campo `Accept` do cabeçalho da requisição HTTP.
 
-The `type` value may be a single MIME type string (such as "application/json"),
-an extension name such as "json", a comma-delimited list, or an array. For a
-list or array, the method returns the *best* match (if any).
+Este método retorna a melhor combinação ou, se nenhum dos tipos de conteúdo especificado é aceitável, retorna `undefined`
+(neste caso, a aplicação deve responder com um `406 "Not Acceptable"`).
+
+O tipo de valor pode ser uma simples string MIME type (como "application/json"), um nome de extensão como "json", uma lista delimitada por vírgula, ou um array. Para uma lista ou array, este método retorna a *melhor* combinação (se houver).
 
 ~~~js
 // Accept: text/html
@@ -33,4 +32,4 @@ req.accepts(['html', 'json']);
 // => "json"
 ~~~
 
-For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
+Para mais informações, veja [accepts](https://github.com/expressjs/accepts).

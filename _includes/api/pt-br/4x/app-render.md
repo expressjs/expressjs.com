@@ -1,17 +1,16 @@
 <h3 id='app.render'>app.render(view, [locals], callback)</h3>
 
-Returns the rendered HTML of a view via the `callback` function. It accepts an optional parameter
-that is an object containing local variables for the view. It is like [res.render()](#res.render),
-except it cannot send the rendered view to the client on its own.
+Retorna o HTML renderizado de uma view pela função `callback`. Este método aceita um parâmetro opcional que é um objeto contendo variáveis locais para a view. Funciona como o [res.render()](#res.render), com a exceção de que não pode enviar a view renderizada para o cliente por conta própria.
 
 <div class="doc-box doc-info" markdown="1">
-Think of `app.render()` as a utility function for generating rendered view strings.
-Internally `res.render()` uses `app.render()` to render views.
+Pense em `app.render()` como uma função utilitária para gerar strings contendo a view renderizada.
+
+Internamente `res.render()` utiliza `app.render()` para renderizar views.
 </div>
 
 <div class="doc-box doc-notice" markdown="1">
-The local variable `cache` is reserved for enabling view cache. Set it to `true`, if you want to
-cache view during development; view caching is enabled in production by default.
+A variável local `cache` é reservada, pois é utilizada para cache de views. Defina essa variável como `true`, se você quer utilizar cache de views durante o desenvolvimento; cacheamento de views está por padrão habilitado em modo de produção.
+
 </div>
 
 ~~~js

@@ -142,21 +142,28 @@ connection.end();
 
 ## MongoDB
 
-**Module**: [mongoskin](https://github.com/kissjs/node-mongoskin)  
+**Module**: [mongodb](https://github.com/mongodb/node-mongodb-native)  
 **Installation**
 
 ~~~sh
-$ npm install mongoskin
+$ npm install mongodb
 ~~~
 
 **Example**
 
 ~~~js
-var db = require('mongoskin').db('mongodb://localhost:27017/animals');
+var MongoClient = require('mongodb').MongoClient;
 
-db.collection('mamals').find().toArray(function(err, result) {
-  if (err) throw err;
-  console.log(result);
+MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
+  if (err) {
+    throw err;
+  }
+  db.collection('mammals').find().toArray(function(err, result) {
+    if (err) {
+      throw err;
+    }
+    console.log(result);
+  });
 });
 ~~~
 

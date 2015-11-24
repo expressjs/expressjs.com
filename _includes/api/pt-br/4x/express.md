@@ -1,6 +1,6 @@
 <h2>express()</h2>
 
-Creates an Express application. The `express()` function is a top-level function exported by the _express_ module.
+Cria uma aplicação Express. A função `express()` é uma função de alto nível exportada pelo módulo _express_.
 
 ~~~js
 var express = require('express');
