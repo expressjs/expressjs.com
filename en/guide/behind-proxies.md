@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express behind proxies
 menu: guide
@@ -40,7 +40,7 @@ An IP address, subnet, or an array of IP addresses and subnets to trust. The fol
 
 You can set IP addresses in any of the following ways:
 
-<pre><code class="language-js">app.set('trust proxy', 'loopback') // specify a single subnet
+<pre><code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
 app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code></pre>
@@ -58,7 +58,7 @@ Trust the `n`th hop from the front-facing proxy server as the client.
       <td>Function</td>
 <td markdown="1">
 Custom trust implementation. Use this only if you know what you are doing.
-<pre><code class="language-js">app.set('trust proxy', function (ip) {
+<pre><code class="language-js" translate="no">app.set('trust proxy', function (ip) {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
   else return false;
 })</code></pre>

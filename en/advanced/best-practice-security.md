@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Security Best Practices for Express in Production
 menu: advanced
@@ -67,7 +67,7 @@ app.use(helmet());
 
 ### At a minimum, disable X-Powered-By header
 
-If you don't want to use Helmet, then at least disable the `X-Powered-By` header.  Attackers can use this header (that is enabled by default) to detect apps running Express and then launch specifically-targeted attacks.
+If you don't want to use Helmet, then at least disable the `X-Powered-By` header.  Attackers can use this header (which is enabled by default) to detect apps running Express and then launch specifically-targeted attacks.
 
 So, best practice is to to turn off the header with the `app.disable()` method:
 
@@ -90,11 +90,11 @@ The main difference between these two modules is how they save cookie session da
 
 In contrast, [cookie-session](https://www.npmjs.com/package/cookie-session) middleware implements cookie-backed storage: it serializes the entire session to the cookie, rather than just a session key.  Only use it when session data is relatively small and easily encoded as primitive values (rather than objects).  Although browsers are supposed to support at least 4096 bytes per cookie, to ensure you don't exceed the limit, don't exceed a size of 4093 bytes per domain.  Also, be aware that the cookie data will be visible to the client, so if there is any reason to keep it secure or obscure, then express-session may be a better choice.
 
-### Don't use default session cookie name
+### Don't use the default session cookie name
 
 Using the default session cookie name can open your app to attacks.  The security issue posed is similar to `X-Powered-By`: a potential attacker can use it to fingerprint the server and target attacks accordingly.
 
-To avoid this, use generic cookie names; for example using [express-session](https://www.npmjs.com/package/express-session) middleware:
+To avoid this problem, use generic cookie names; for example using [express-session](https://www.npmjs.com/package/express-session) middleware:
 
 <pre><code class="language-javascript" translate="no">
 var session = require('express-session');
@@ -141,7 +141,7 @@ app.use(session({
 
 Using npm to manage your application's dependencies is powerful and convenient.  But the packages that you use may contain critical security vulnerabilities that could also affect your application.  The security of your app is only as strong as the "weakest link" in your dependencies.
 
-Use either or both of the following two tools to help ensure security of third-party packages you use: [nsp](https://www.npmjs.com/package/nsp) and [requireSafe](https://requiresafe.com/).  These two tools do largely the same thing.
+Use either or both of the following two tools to help ensure the security of third-party packages that you use: [nsp](https://www.npmjs.com/package/nsp) and [requireSafe](https://requiresafe.com/).  These two tools do largely the same thing.
 
 [nsp](https://www.npmjs.com/package/nsp) is a command-line tool that checks the [Node Security Project](https://nodesecurity.io/) vulnerability database to determine if your application uses packages with known vulnerabilities. Install it as follows:
 

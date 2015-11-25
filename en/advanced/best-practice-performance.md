@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Performance Best Practices Using Express in Production
 menu: advanced
@@ -30,7 +30,7 @@ Here are some things you can do in your code to improve your application's perfo
 * Use gzip compression
 * Don't use synchronous functions
 * Use middleware to serve static files
-* Do logging right
+* Do logging correctly
 * Handle exceptions properly
 
 ### Use gzip compression
@@ -62,7 +62,7 @@ Instead, use [serve-static](https://www.npmjs.com/package/serve-static) middlewa
 
 An even better option is to use a reverse proxy to serve static files; see [Use a reverse proxy](#proxy) for more information.
 
-### Do logging well
+### Do logging correctly
 
 In general, there are two reasons for logging from your app: For debugging and for logging app activity (essentially, everything else). Using `console.log()` or `console.err()` to print log messages to the terminal is common practice in development. But [these functions are synchronous](https://nodejs.org/api/console.html#console_console_1) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
 
@@ -94,7 +94,7 @@ For more on the fundamentals of error handling, see:
 
 #### What not to do
 
-One thing you should _not_ do is to listen for the `uncaughtException` event, emitted when an exception bubbles all the way back to the event loop. Adding an event listener for `uncaughtException` will change the default behavior of the process encountering an exception; the process will continue to run despite the exception. This might sound like a good way of preventing your app from crashing, but continuing to run the app after an uncaught exception is a dangerous practice and is not recommended, because the state of the process becomes unreliable and unpredictable.
+One thing you should _not_ do is to listen for the `uncaughtException` event, emitted when an exception bubbles all the way back to the event loop. Adding an event listener for `uncaughtException` will change the default behavior of the process that is encountering an exception; the process will continue to run despite the exception. This might sound like a good way of preventing your app from crashing, but continuing to run the app after an uncaught exception is a dangerous practice and is not recommended, because the state of the process becomes unreliable and unpredictable.
 
 Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process.html#process_event_uncaughtexception) and there is a [proposal](https://github.com/nodejs/node-v0.x-archive/issues/2582) to remove it from the core. So listening for `uncaughtException` is just a bad idea. This is why we recommend things like multiple processes and supervisors: crashing and restarting is often the most reliable way to recover from an error.
 
@@ -126,13 +126,13 @@ app.get('/search', function (req, res) {
 });
 </code></pre>
 
-However, try-catch works only for synchronous code. Since the Node platform is primarily asynchronous (particularly in a production environment), try-catch won't catch a lot of exceptions.
+However, try-catch works only for synchronous code. Because the Node platform is primarily asynchronous (particularly in a production environment), try-catch won't catch a lot of exceptions.
 
 <a name="promises"></a>
 
 #### Use promises
 
-Promises will handle any exceptions (both explicit and implicit) in asynchronous code blocks using `then()`. Just add `.catch(next)` to the end of promise chains. For example:
+Promises will handle any exceptions (both explicit and implicit) in asynchronous code blocks that use `then()`. Just add `.catch(next)` to the end of promise chains. For example:
 
 <pre><code class="language-javascript" translate="no">
 app.get('/', function (req, res, next) {
@@ -157,7 +157,7 @@ Now all errors asynchronous and synchronous get propagated to the error middlewa
 
 However, there are two caveats:
 
-1.  All your asynchronous code must return promises (except emitters). If a particular library does not return promises, convert the base object using a helper function like [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
+1.  All your asynchronous code must return promises (except emitters). If a particular library does not return promises, convert the base object by using a helper function like [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
 2.  Event emitters (like streams) can still cause uncaught exceptions. So make sure you are handling the error event properly; for example:
 
 <pre><code class="language-javascript" translate="no">
@@ -168,7 +168,7 @@ app.get('/', wrap(async (req, res, next) => {
 }))
 </code></pre>
 
-For more information about error-handling using promises, see:
+For more information about error-handling by using promises, see:
 
 * [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
 * [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
@@ -200,11 +200,11 @@ Setting NODE_ENV to "production" makes Express:
 
 If you need to write environment-specific code, you can check the value of NODE_ENV with `process.env.NODE_ENV`. Be aware that checking the value of any environment variable incurs a performance penalty, and so should be done sparingly.
 
-In development, you typically set environment variables in your interactive shell, for example with `export` or your `.bash_profile` file. But in general you shouldn't do that on a production server; instead, use your OS's init system (systemd or Upstart). The next section provides more details about using your init system in general, but setting NODE_ENV is so important for performance (and easy to do), that it's highlighted here.
+In development, you typically set environment variables in your interactive shell, for example by using `export` or your `.bash_profile` file. But in general you shouldn't do that on a production server; instead, use your OS's init system (systemd or Upstart). The next section provides more details about using your init system in general, but setting NODE_ENV is so important for performance (and easy to do), that it's highlighted here.
 
 With Upstart, use the `env` keyword in your job file. For example:
 
-</code></pre>
+<pre><code class="language-sh" translate="no">
 # /etc/init/env.conf
  env NODE_ENV=production
 </code></pre>
@@ -213,7 +213,7 @@ For more information, see the [Upstart Intro, Cookbook and Best Practices](http:
 
 With systemd, use the `Environment` directive in your unit file. For example:
 
-</code></pre>
+<pre><code class="language-sh" translate="no">
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
 </code></pre>
@@ -241,7 +241,7 @@ In addition to restarting your app when it crashes, a process manager can enable
 * Modify settings dynamically to improve performance.
 * Control clustering (StrongLoop PM and pm2).
 
-The most popular process managers for Node are:
+The most popular process managers for Node are as follows:
 
 * [StrongLoop Process Manager](http://strong-pm.io/)
 * [PM2](https://github.com/Unitech/pm2)
@@ -251,7 +251,7 @@ For a feature-by-feature comparison of the three process managers, see [http://s
 
 Using any of these process managers will suffice to keep your application up, even if it does crash from time to time.
 
-However, StrongLoop PM has lots of features specifically targeting production deployment. You can use it and the related StrongLoop tools to:
+However, StrongLoop PM has lots of features that specifically target production deployment. You can use it and the related StrongLoop tools to:
 
 * Build and package your app locally, then deploy it securely to your production system.
 * Automatically restart your app if it crashes for any reason.
@@ -275,9 +275,9 @@ There are two ways to use init systems with your Express app:
 
 Systemd is a Linux system and service manager. Most major Linux distributions have adopted systemd as their default init system.
 
-A systemd service configuration file is called a _unit file_, with a filename ending in .service. Here's an example unit file to manage a Node app directly (replace the bolded text with values for your system and app):
+A systemd service configuration file is called a _unit file_, with a filename ending in .service. Here's an example unit file to manage a Node app directly (replace the bold text with values for your system and app):
 
-</code></pre>
+<pre><code class="language-sh" translate="no">
 [Unit]
 Description=Awesome Express App
 
@@ -332,9 +332,9 @@ Upstart is a system tool available on many Linux distributions for starting task
 
 An Upstart service is defined in a job configuration file (also called a "job") with filename ending in `.conf`. The following example shows how to create a job called "myapp" for an app named "myapp" with the main file located at `/projects/myapp/index.js`.
 
-Create a file named `myapp.conf` at `/etc/init/` with the following content (replace the bolded text with values for your system and app):
+Create a file named `myapp.conf` at `/etc/init/` with the following content (replace the bold text with values for your system and app):
 
-</code></pre>
+<pre><code class="language-sh" translate="no">
 # When to start the process
 start on runlevel [2345]
 
@@ -398,7 +398,7 @@ NOTE: On systems that don't support Upstart 1.4, the commands are slightly diffe
 
 In a multi-core system, you can increase the performance of a Node app by many times by launching a cluster of processes. A cluster runs multiple instances of the app, ideally one instance on each CPU core, thereby distributing the load and tasks among the instances.
 
-![Balancing between application instances using the cluster API](/{{ page.lang }}/images/clustering.png)
+![Balancing between application instances using the cluster API](/images/clustering.png)
 
 IMPORTANT: Since the app instances run as separate processes, they do not share the same memory space. That is, objects are local to each instance of the app. Therefore, you cannot maintain state in the application code. However, you can use an in-memory datastore like [Redis](http://redis.io/) to store session-related data and state. This caveat applies to essentially all forms of horizontal scaling, whether clustering with multiple processes or multiple physical servers.
 
@@ -432,9 +432,9 @@ Use a caching server like [Varnish](https://www.varnish-cache.org/) or [Nginx](h
 
 No matter how optimized an app is, a single instance can handle only a limited amount of load and traffic. One way to scale an app is to run multiple instances of it and distribute the traffic via a load balancer. Setting up a load balancer can improve your app's performance and speed, and enable it to scale more than is possible with a single instance.
 
-A load balancer is usually a reverse proxy that orchestrates traffic to and from multiple application instances and servers. You can easily set up a load balancer for your app using [Nginx](http://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+A load balancer is usually a reverse proxy that orchestrates traffic to and from multiple application instances and servers. You can easily set up a load balancer for your app by using [Nginx](http://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
-With load balancing, you may have to ensure that requests associated with a particular session ID connect to the process that originated them. This is known as _session affinity_, or _sticky sessions_, and may be addressed by the suggestion above to use a data store such as Redis for session data (depending on your application). For a discussion, see [Using multiple nodes](http://socket.io/docs/using-multiple-nodes/).
+With load balancing, you might have to ensure that requests that are associated with a particular session ID connect to the process that originated them. This is known as _session affinity_, or _sticky sessions_, and may be addressed by the suggestion above to use a data store such as Redis for session data (depending on your application). For a discussion, see [Using multiple nodes](http://socket.io/docs/using-multiple-nodes/).
 
 #### Using StrongLoop PM with an Nginx load balancer
 
