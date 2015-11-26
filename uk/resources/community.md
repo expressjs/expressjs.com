@@ -2,7 +2,7 @@
 layout: page
 title: Express community
 menu: resources
-lang: ru
+lang: uk
 ---
 
 # Community
