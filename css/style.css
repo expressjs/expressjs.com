@@ -480,6 +480,10 @@ html[xmlns] .clearfix {
   background: none repeat scroll 0 0 #fff;
 }
 
+.page pre[class*="language-"] {
+  padding-top: 0 !important;
+}
+
 .doc-notice {
   background: #faf6e8;
   border: 1px solid #ded8c1;
