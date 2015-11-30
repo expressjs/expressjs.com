@@ -29,6 +29,12 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
 
 ## 3.x
 
+  <div class="doc-box doc-warn" markdown="1">
+  **Express 3.x IS NO LONGER MAINTAINED**
+
+  Known and unknown security issues in 3.x have not been addressed since the last update (1 August, 2015). Using the 3.x line should not be considered secure.
+  </div>
+
   * 3.19.1
     * Fixed root path disclosure vulnerability in express.static, res.sendfile, and res.sendFile
   * 3.19.0
