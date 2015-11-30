@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express basic routing
 menu: starter
@@ -17,9 +17,7 @@ _Routing_ refers to determining how an application responds to a client request 
 Each route can have one or more handler functions, which are executed when the route is matched.
 
 Route definition takes the following structure:
-<pre><code class="language-text" translate="no">
-app.METHOD(PATH, HANDLER)
-</code></pre>
+<pre><code class="language-text" translate="no">app.METHOD(PATH, HANDLER)</code></pre>
 
 Where:
 

@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express applications
 menu: resources
@@ -17,7 +17,7 @@ redirect_from: "/resources/applications.html"
 No introduction required! Everyone knows MySpace,
 and the upcoming https://new.myspace.com is powered by Express.
 
-[![](/{{ page.lang }}/images/apps/screenshots/myspace.png)](https://new.myspace.com/)
+[![](/images/apps/screenshots/myspace.png)](https://new.myspace.com/)
 
 Visit [MySpace](https://new.myspace.com/)
 
@@ -28,7 +28,7 @@ education suite including gradebook,
 lesson plans, attendance, reporting, and calendars
 among other tools.
 
-[![](/{{ page.lang }}/images/apps/screenshots/learnboost.png)](https://www.learnboost.com/)
+[![](/images/apps/screenshots/learnboost.png)](https://www.learnboost.com/)
 
 Visit [LearnBoost](https://www.learnboost.com/)
 
@@ -38,7 +38,7 @@ Create stories using social media. Turn what people post
 on social media into compelling stories.  Collect the best photos, video,
 tweets and more to publish.
 
-[![](/{{ page.lang }}/images/apps/screenshots/storify.png)](http://storify.com/)
+[![](/images/apps/screenshots/storify.png)](http://storify.com/)
 
 Visit [Storify](http://storify.com/)
 
@@ -47,7 +47,7 @@ Visit [Storify](http://storify.com/)
 A place for geeks to share what they've done, who they did it with and
 connect with great companies and communities.
 
-[![](/{{ page.lang }}/images/apps/screenshots/geeklist.png)](http://geekli.st)
+[![](/images/apps/screenshots/geeklist.png)](http://geekli.st)
 
 Visit [Geekli.st](http://geekli.st)
 
@@ -56,7 +56,7 @@ Visit [Geekli.st](http://geekli.st)
 Klout is the Standard for Influence. Join Klout to discover your
 influence and compare with others you may know.
 
-[![](/{{ page.lang }}/images/apps/screenshots/klout.png)](http://klout.com)
+[![](/images/apps/screenshots/klout.png)](http://klout.com)
 
 Visit [Klout](http://klout.com)
 
@@ -65,7 +65,7 @@ Visit [Klout](http://klout.com)
 Prismatic learns from how you interact on social networks so that we
 can show you the most interesting content and conversation from your friends.
 
-[![](/{{ page.lang }}/images/apps/screenshots/prismatic.png)](http://getprismatic.com/)
+[![](/images/apps/screenshots/prismatic.png)](http://getprismatic.com/)
 
 Visit [Prismatic](http://getprismatic.com/)
 
@@ -76,7 +76,7 @@ learning tools to empower students to accelerate their
 learning – i.e. to learn more effectively, in a shorter
 time, and with better long-term recall.
 
-[![](/{{ page.lang }}/images/apps/screenshots/studynotes.png)](http://www.apstudynotes.org/)
+[![](/images/apps/screenshots/studynotes.png)](http://www.apstudynotes.org/)
 
 Visit [StudyNotes](http://www.apstudynotes.org/)
 
@@ -86,7 +86,7 @@ Persona, or "BrowserID" is Mozilla's answer
 to a better identification system for your browser,
 this promising tool is definitely worth checking out.
 
-[![](/{{ page.lang }}/images/apps/screenshots/browserid.png)](https://login.persona.org/)
+[![](/images/apps/screenshots/browserid.png)](https://login.persona.org/)
 
 Visit [Persona](https://login.persona.org/)
 
@@ -94,7 +94,7 @@ Visit [Persona](https://login.persona.org/)
 
 Extensive real-time mobile analytics as a service.
 
-[![](/{{ page.lang }}/images/apps/screenshots/countly.png)](https://count.ly/)
+[![](/images/apps/screenshots/countly.png)](https://count.ly/)
 
 Visit [Countly](https://count.ly/)
 
@@ -103,7 +103,7 @@ Visit [Countly](https://count.ly/)
 No more littering your app with tons of different analytics providers.
 Instead, instrument your app once cleanly and then send your data to any analytics service you want.
 
-[![](/{{ page.lang }}/images/apps/screenshots/segment.png)](http://segment.io/)
+[![](/images/apps/screenshots/segment.png)](http://segment.io/)
 
 Visit [Segment.io](http://segment.io/)
 
@@ -112,7 +112,7 @@ Visit [Segment.io](http://segment.io/)
 Yummly is the world's largest and most powerful recipe search site.
 Bringing together recipes from all over the web - making your life easier.
 
-[![](/{{ page.lang }}/images/apps/screenshots/yummly.png)](http://yummly.com/)
+[![](/images/apps/screenshots/yummly.png)](http://yummly.com/)
 
 Visit [Yummly](http://yummly.com/)
 
@@ -121,7 +121,7 @@ Visit [Yummly](http://yummly.com/)
 Real-time software development in the browser with integrated
 editor, collaboration, terminals and more.
 
-[![](/{{ page.lang }}/images/apps/screenshots/koding.png)](http://koding.com/)
+[![](/images/apps/screenshots/koding.png)](http://koding.com/)
 
 Visit [Koding](http://koding.com/)
 
@@ -129,7 +129,7 @@ Visit [Koding](http://koding.com/)
 
 REST API documentation reimagined.
 
-[![](/{{ page.lang }}/images/apps/screenshots/apiary.png)](http://apiary.io/)
+[![](/images/apps/screenshots/apiary.png)](http://apiary.io/)
 
 Visit [Apiary](http://apiary.io/)
 
@@ -138,7 +138,7 @@ Visit [Apiary](http://apiary.io/)
 Cozy is the personal cloud that allows you to put your web apps and your
 data on your hardware: calendars, contacts, feeds, notes. With Cozy, you can build and use your own Express app and use the data stored by the other applications.
 
-[![](/{{ page.lang }}/images/apps/screenshots/cozy.png)](http://cozy.io/)
+[![](/images/apps/screenshots/cozy.png)](http://cozy.io/)
 
 Visit [Cozy](http://cozy.io/)
 
@@ -146,7 +146,7 @@ Visit [Cozy](http://cozy.io/)
 
 Real-time Collaborative environment for LaTex.
 
-[![](/{{ page.lang }}/images/apps/screenshots/flylatex.png)](http://github.com/alabid/flylatex)
+[![](/images/apps/screenshots/flylatex.png)](http://github.com/alabid/flylatex)
 
 Visit [FlyLatex](http://github.com/alabid/flylatex)
 
@@ -154,7 +154,7 @@ Visit [FlyLatex](http://github.com/alabid/flylatex)
 
 Advanced exercise prescription software for physical therapists and other health professionals.
 
-[![](/{{ page.lang }}/images/apps/screenshots/simpleset.png)](http://www.simpleset.net)
+[![](/images/apps/screenshots/simpleset.png)](http://www.simpleset.net)
 
 Visit [SimpleSet](http://www.simpleset.net)
 
@@ -162,7 +162,7 @@ Visit [SimpleSet](http://www.simpleset.net)
 
 Just a blogging platform.
 
-[![](/{{ page.lang }}/images/apps/screenshots/ghost.png)](https://ghost.org)
+[![](/images/apps/screenshots/ghost.png)](https://ghost.org)
 
 Visit [Ghost](https://ghost.org)
 
@@ -170,7 +170,7 @@ Visit [Ghost](https://ghost.org)
 
 LogHuman is an application insights platform which enables developers to record information such as billing events, feature usage, or system hiccups, as well as flexible metadata to give these events context.
 
-[![](/{{ page.lang }}/images/apps/screenshots/loghuman.png)](https://loghuman.com)
+[![](/images/apps/screenshots/loghuman.png)](https://loghuman.com)
 
 Visit [LogHuman](https://loghuman.com)
 
@@ -178,7 +178,7 @@ Visit [LogHuman](https://loghuman.com)
 
 VogueVerve is a minimalist fashion social platform. Follow, like and buy.
 
-[![](/{{ page.lang }}/images/apps/screenshots/vogueverve.png)](http://vogueverve.com)
+[![](/images/apps/screenshots/vogueverve.png)](http://vogueverve.com)
 
 Visit [VogueVerve](http://vogueverve.com)
 
@@ -186,7 +186,7 @@ Visit [VogueVerve](http://vogueverve.com)
 
 Real-time team collaboration with integrated task management, video conferencing, shared calendars and more.
 
-[![](/{{ page.lang }}/images/apps/screenshots/glip.png)](https://glip.com)
+[![](/images/apps/screenshots/glip.png)](https://glip.com)
 
 Visit [Glip](https://glip.com)
 
@@ -195,7 +195,7 @@ Visit [Glip](https://glip.com)
 Gugamarket is a fullstack REST API framework licensed under GPLv3. It supports giaya.com social login.
 Gugamarket is listed as one of the top Node/Express REST API's at http://nodeframework.com/.
 
-[![](/{{ page.lang }}/images/apps/screenshots/gugamarket.png)](http://www.gugamarket.com)
+[![](/images/apps/screenshots/gugamarket.png)](http://www.gugamarket.com)
 
 Visit [Gugamarket](http://www.gugamarket.com)
 
