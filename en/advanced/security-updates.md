@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express security updates
 menu: advanced
@@ -33,6 +33,12 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
     * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
 
 ## 3.x
+
+  <div class="doc-box doc-warn" markdown="1">
+  **Express 3.x IS NO LONGER MAINTAINED**
+
+  Known and unknown security issues in 3.x have not been addressed since the last update (1 August, 2015). Using the 3.x line should not be considered secure.
+  </div>
 
   * 3.19.1
     * Fixed root path disclosure vulnerability in `express.static`, `res.sendfile`, and `res.sendFile`
