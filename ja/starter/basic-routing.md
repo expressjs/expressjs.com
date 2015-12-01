@@ -22,7 +22,7 @@ lang: ja
 
 下記のコードはルートのいくつかの例を示しています。
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // respond with "Hello World!" on the homepage
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -42,6 +42,6 @@ app.put('/user', function (req, res) {
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-~~~
+</code></pre>
 
 ルーティングについての詳細は[routing guide](/{{ page.lang }}/guide/routing.html)を参照してください。

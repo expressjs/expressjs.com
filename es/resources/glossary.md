@@ -2,7 +2,7 @@
 layout: page
 title: Express glossary
 menu: resources
-lang: en
+lang: es
 ---
 
 # Glossary
@@ -19,7 +19,7 @@ Application programming interface.  Spell out on first use.
 
 ### Express
 
-A fast, un-opinionated, minimalist web framework for Node.js applications.  In general, prefer simply "Express" to "Express.js," though the latter is acceptable. 
+A fast, un-opinionated, minimalist web framework for Node.js applications.  In general, prefer simply "Express" to "Express.js," though the latter is acceptable.
 
 ### libuv
 

@@ -6,22 +6,22 @@
   </section>
   <div id="navbar">
       <ul id="navmenu">
-          <li><a href="{% if page.lang == 'en' %}/{% else %}/{{ page.lang }}/{% endif %}" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>ホーム</a></li>
+          <li><a href="/{{ page.lang }}" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>ホーム</a></li>
           <li>
               <ul id="getting-started-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>入門</a>
+                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>入門</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html">インストール</a>
+                          <li><a href="/{{ page.lang }}/starter/installing.html">インストール</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/generator.html">Express generator</a>
+                          <li><a href="/{{ page.lang }}/starter/generator.html">Express generator</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/hello-world.html">Hello world</a>
+                          <li><a href="/{{ page.lang }}/starter/hello-world.html">Hello world</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/basic-routing.html">Basic routing</a>
+                          <li><a href="/{{ page.lang }}/starter/basic-routing.html">Basic routing</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/static-files.html">Static files</a>
+                          <li><a href="/{{ page.lang }}/starter/static-files.html">Static files</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/faq.html">FAQ</a>
+                          <li><a href="/{{ page.lang }}/starter/faq.html">FAQ</a>
                           </li>
                       </ul>
                   </li>
@@ -29,23 +29,23 @@
           </li>
           <li>
               <ul id="guide-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>ガイド</a>
+                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>ガイド</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/routing.html">Routing</a>
+                          <li><a href="/{{ page.lang }}/guide/routing.html">Routing</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/using-middleware.html">Using middleware</a>
+                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Using middleware</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/using-template-engines.html">Using template engines</a>
+                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Using template engines</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/error-handling.html">Error handling</a>
+                          <li><a href="/{{ page.lang }}/guide/error-handling.html">Error handling</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/debugging.html">Debugging</a>
+                          <li><a href="/{{ page.lang }}/guide/debugging.html">Debugging</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/behind-proxies.html">Express behind proxies</a>
+                          <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express behind proxies</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/migrating-4.html">Moving to Express 4</a>
+                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">Moving to Express 4</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/database-integration.html">Database integration</a>
+                          <li><a href="/{{ page.lang }}/guide/database-integration.html">Database integration</a>
                           </li>
                       </ul>
                   </li>
@@ -53,11 +53,11 @@
           </li>
           <li>
               <ul id="application-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>APIリファレンス</a>
+                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>APIリファレンス</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/4x/api.html">4.x</a>
+                          <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/3x/api.html">3.x</a>
+                          <li><a href="/{{ page.lang }}/3x/api.html">3.x</a>
                           </li>
                       </ul>
                   </li>
@@ -65,13 +65,13 @@
           </li>
           <li>
               <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>高度なトピック</a>
+                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>高度なトピック</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/developing-template-engines.html">Template engines</a>
+                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Template engines</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/pm.html">Using process managers</a>
+                          <li><a href="/{{ page.lang }}/advanced/pm.html">Using process managers</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/security-updates.html">Security updates</a>
+                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">Security updates</a>
                           </li>
                       </ul>
                   </li>
@@ -79,17 +79,17 @@
           </li>
           <li>
               <ul id="resources-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>リソース</a>
+                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>リソース</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/glossary.html">Glossary</a>
+                          <li><a href="/{{ page.lang }}/resources/glossary.html">Glossary</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/middleware.html">Middleware</a>
+                          <li><a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/community.html">Community</a>
+                          <li><a href="/{{ page.lang }}/resources/community.html">Community</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/books-blogs.html">Books and blogs</a>
+                          <li><a href="/{{ page.lang }}/resources/books-blogs.html">Books and blogs</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/applications.html">Applications</a>
+                          <li><a href="/{{ page.lang }}/resources/applications.html">Applications</a>
                           </li>
                       </ul>
                   </li>

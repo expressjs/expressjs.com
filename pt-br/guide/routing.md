@@ -11,7 +11,7 @@ Roteamento é uma forma de determinar como uma aplicação responde a uma requis
 
 Exemplo básico de roteamento no Express:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -19,7 +19,7 @@ var app = express();
 app.get('/', function(req, res) {
   res.send('hello world');
 });
-~~~
+</code></pre>
 
 <h2 id="route-methods">Métodos da rota</h2>
 
@@ -32,7 +32,7 @@ A definição de rota segue a estrutura app.METHOD(PATH, HANDLER), onde app é u
 
 O código a seguir mostra alguns exemplos de rotas em um app.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // responde com with "Hello World!" na homepage
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -52,7 +52,7 @@ app.put('/user', function (req, res) {
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-~~~
+</code></pre>
 
 O Express soporta os seguintes métodos de roteamento correspondentes aos métodos de requisição HTTP: get, post, put, head, delete, options, trace, copy, lock, mkcol, move, purge, propfind, proppatch, unlock, report, mkactivity, checkout, merge, m-search, notify, subscribe, unsubscribe, patch search e connect.
 
@@ -64,12 +64,12 @@ Existe um metódo de roteamento especial, app.all(), que não é derivado de nen
 
 No exemplo a seguir, o handler será executado numa requisição para “/secret” a partir de qualquer método utilizado: GET, POST, PUT, DELETE, ou qualquer outro método de requisição suportado pelo módulo HTTP do Express.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.all('/secret', function (req, res, next) {
   console.log('Accessing the secret section ...');
   next(); // passa o controle para o próximo handler
 });
-~~~
+</code></pre>
 
 <h2 id="route-paths">Caminho (path) da rota</h2>
 
@@ -85,7 +85,7 @@ Observação: query strings não são parte do caminho de uma rota.
 
 Exemplos de rotas baseadas em string:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // casa requisições para root
 app.get('/', function (req, res) {
   res.send('root');
@@ -100,11 +100,11 @@ app.get('/about', function (req, res) {
 app.get('/random.text', function (req, res) {
   res.send('random.text');
 });
-~~~
+</code></pre>
 
 Exemplo de rotas baseadas em padrões de string:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // casa requisições acd e abcd
 app.get('/ab?cd', function(req, res) {
   res.send('ab?cd');
@@ -124,7 +124,7 @@ app.get('/ab*cd', function(req, res) {
 app.get('/ab(cd)?e', function(req, res) {
  res.send('ab(cd)?e');
 });
-~~~
+</code></pre>
 
 <div class="doc-box doc-info" markdown="1">
 Os caracteres ?, +, *, e () são subconjuntos de suas expresões regulares. O hífem (-) e o ponto (.) são interpretados literalmente em rotas baseadas em strings.
@@ -132,7 +132,7 @@ Os caracteres ?, +, *, e () são subconjuntos de suas expresões regulares. O h�
 
 Exemplos de rotas baseadas em expressões regulares:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // casa qualquer requisição com uma letra a no nome da rota:
 app.get(/a/, function(req, res) {
   res.send('/a/');
@@ -142,7 +142,7 @@ app.get(/a/, function(req, res) {
 app.get(/.*fly$/, function(req, res) {
   res.send('/.*fly$/');
 });
-~~~
+</code></pre>
 
 <h2 id="route-handlers">Manipuladores (handlers)</h2>
 
@@ -153,26 +153,26 @@ Handlers podem vir em forma de função, array de funções ou várias combinaç
 
 Uma rota pode ser manipulada usando uma simples função callback:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.get('/example/a', function (req, res) {
   res.send('Hello from A!');
 });
-~~~
+</code></pre>
 
 Uma rota pode ser manipulada usando uma ou mais funções callback (o objeto next precisa ser especificado):
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.get('/example/b', function (req, res, next) {
   console.log('response will be sent by the next function ...');
   next();
 }, function (req, res) {
   res.send('Hello from B!');
 });
-~~~
+</code></pre>
 
 Uma rota pode ser manipulada utilizando-se um array de funções callback:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var cb0 = function (req, res, next) {
   console.log('CB0');
   next();
@@ -188,11 +188,11 @@ var cb2 = function (req, res) {
 }
 
 app.get('/example/c', [cb0, cb1, cb2]);
-~~~
+</code></pre>
 
 Uma rota pode ser manipulada utilizando-se uma combinação de array  de funções e funções independentes:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var cb0 = function (req, res, next) {
   console.log('CB0');
   next();
@@ -209,7 +209,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 }, function (req, res) {
   res.send('Hello from D!');
 });
-~~~
+</code></pre>
 
 <h2 id="response-methods">Métodos de resposta (response methods)</h2>
 
@@ -234,7 +234,7 @@ Como nesse caso a rota (path) é especificada em um único local, isso ajuda a c
 
 Aqui está um exemplo de handlers encadeados definidos com a utilização de app.route():
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -245,7 +245,7 @@ app.route('/book')
   .put(function(req, res) {
     res.send('Update the book');
   });
-~~~
+</code></pre>
 
 <h2 id="express-router">express.Router</h2>
 
@@ -255,7 +255,7 @@ Uma instância Router é um sistema completo de middleware e roteamento; Por iss
 O exemplo a seguir cria um router como um módulo, carrega um middleware nele, define algumas rotas, e o monta em uma única rota no app principal.
 Crie um arquivo chamado routerbirds.js no diretório app, com o seguinte conteúdo:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var router = express.Router();
 
@@ -273,14 +273,14 @@ router.get('/about', function(req, res) {
   res.send('About birds');
 });
 module.exports = router;
-~~~
+</code></pre>
 
 Então carregue o módulo router num app:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-~~~
+</code></pre>
 
 O app agora será capaz de lidar com as requisições para '/birds' e '/birds/about' e chamando o middleware timeLog específico para a rota.

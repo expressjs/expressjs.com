@@ -19,7 +19,7 @@ Express generatorは多数のJavaScriptファイルや、Jadeテンプレート�
 
 `myapp`ディレクトリで`app.js`という名前のファイルを作成し、下記のコードを追加します。
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -33,7 +33,7 @@ var server = app.listen(3000, function () {
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
-~~~
+</code></pre>
 
 アプリはサーバーを立ち上げて3000番ポートで接続を待機します。このアプリは、ルートURL(`/`)または _route_ へのリクエストに対して"Hello World!"と応答します。その他のすべてのパスには **404 Not Found** を返します。
 
@@ -43,8 +43,8 @@ var server = app.listen(3000, function () {
 
 下記のコマンドでアプリを実行してください。
 
-~~~ sh
+<pre><code class="language-sh" translate="no">
 $ node app.js
-~~~
+</code></pre>
 
 ブラウザで[http://localhost:3000/](http://localhost:3000/)を読み込むと、応答が確認できます。

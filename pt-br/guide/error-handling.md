@@ -9,16 +9,16 @@ lang: pt-br
 
 Definimos middlewares de tratamento de erros (middlweares do tipo error-handling) da mesma forma como fazemos com outros middlewares, a diferença é que para este tipo precisamos fornecer quatro argumentos em vez de três; a assinatura deve ficar `(err, req, res, next)`. Por exemplo:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-~~~
+</code></pre>
 
 Definimos middleware de tratamento de erros por último; depois de outros `app.use()` e chamadas de rotas. Por exemplo:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
@@ -27,13 +27,13 @@ app.use(methodOverride());
 app.use(function(err, req, res, next) {
   // logic
 });
-~~~
+</code></pre>
 
 As respostas dos middlewares são completamente arbitrárias. Isso significa que podemos responder com uma página de erro em HTML, uma mensagem de texto, uma string JSON, ou qualquer outra coisa que quisermos.
 
 Para fins de organização (e um framework de nível mais elevado) podemos definir vários middlewares de tratamento de erro, como faríamos com outros tipos de middlewares. Por exemplo, se quisermos tratar error para requisições feita por XHR, ou não, poderíamos fazer o seguinte:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
@@ -42,20 +42,20 @@ app.use(methodOverride());
 app.use(logErrors);
 app.use(clientErrorHandler);
 app.use(errorHandler);
-~~~
+</code></pre>
 
 Onde o middleware mais genérico, `logErrors`, pode escrever requisições e informações de erro para `stderr`, `loggly`, ou serviços semelhantes:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 function logErrors(err, req, res, next) {
   console.error(err.stack);
   next(err);
 }
-~~~
+</code></pre>
 
 Onde definimos `clientErrorHandler` como a sequir (note que o erro é explicitamente repassado para o `next`):
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
     res.status(500).send({ error: 'Something blew up!' });
@@ -63,27 +63,27 @@ function clientErrorHandler(err, req, res, next) {
     next(err);
   }
 }
-~~~
+</code></pre>
 
 O próximo `errorHandler` é um "pega tudo" e pode ser implementado da sequinte forma:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 function errorHandler(err, req, res, next) {
   res.status(500);
   res.render('error', { error: err });
 }
-~~~
+</code></pre>
 
 Se passarmos qualquer coisa para a função `next()` (exceto a string `'route'`) o Express irá considerar que a requisição tem erro e pulará qualquer função middleware restante que não seja do tipo `error-handling`. Se quisermos lidar com essa requisição de alguma outra forma, precisaremos criar uma rota de tratamento de erro como a que veremos na próxima seção.
 
 Se tivermos uma rota tratada com múltiplas funções callback, precisaremos usar o parâmetro 'route' se quisermos pular para o próximo 'handler'. Por exemplo:
 
-~~~js
-app.get('/a_route_behind_paywall', 
+<pre><code class="language-javascript" translate="no">
+app.get('/a_route_behind_paywall',
   function checkIfPaidSubscriber(req, res, next) {
-    if(!req.user.hasPaid) { 
-    
-      // continua o tratamento desta requisição 
+    if(!req.user.hasPaid) {
+
+      // continua o tratamento desta requisição
       next('route');
     }
   }, function getPaidContent(req, res, next) {
@@ -92,7 +92,7 @@ app.get('/a_route_behind_paywall',
       res.json(doc);
     });
   });
-~~~ 
+</code></pre>
 
 Neste exemplo o handler `getPaidContent` será saltado, mas qualquer outro handler em `app` para a requisição `/a_route_behind_paywall` continuará a ser executado.
 
@@ -115,7 +115,7 @@ Se chamarmos `next()` com um erro depois de já ter iniciado a escrita da respos
 
 Então quando adicionamos um handler de erro personalizado, é bom delegarmos o tratamento de erros para o handler de erro padrão do Express quando os cabecalhos `headers` já foram enviados para o cliente.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 function errorHandler(err, req, res, next) {
   if (res.headersSent) {
     return next(err);
@@ -123,4 +123,4 @@ function errorHandler(err, req, res, next) {
   res.status(500);
   res.render('error', { error: err });
 }
-~~~
+</code></pre>

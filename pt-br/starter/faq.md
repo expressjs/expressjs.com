@@ -57,11 +57,11 @@ rotas, e não nenhum deles respondeu. Tudo o que você precisa fazer
 é adicionar por último um <i>middleware</i> (depois te todos os
 outros) para tratar o 404:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use(function(req, res, next) {
   res.status(404).send('Sorry cant find that!');
 });
-~~~
+</code></pre>
 
 ## Como configurar tratamento de erros?
 
@@ -69,12 +69,12 @@ Você pode definir um <i>middleware</i> para tratamento de erros do mesmo
 jeito que os outros <i>middlewares</i>, exceto que com quatro argumentos
 ao invés de três; especificamente com a assinatura `(err, req, res, next)`:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-~~~
+</code></pre>
 
 Para mais informações, veja [Tratamento de Erro](/guide/error-handling.html).
 

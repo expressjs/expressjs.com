@@ -2,7 +2,7 @@
 layout: page
 title: Express community
 menu: resources
-lang: en
+lang: es
 ---
 
 # Community
@@ -14,7 +14,7 @@ discussions in the [Google Group](https://groups.google.com/group/express-js).
 
 ##Gitter
 
-The [strongloop/express chatroom](https://gitter.im/strongloop/express) is great place 
+The [strongloop/express chatroom](https://gitter.im/strongloop/express) is great place
 for developers interested in the everyday discussions related to Express.
 
 ##IRC Channel

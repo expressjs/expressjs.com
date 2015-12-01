@@ -35,7 +35,7 @@ Você pode carregar middlewares application-level e router-level com uma montage
 Vinculamos um middleware application-level a uma instância do objeto app utilizando app.use() e app.METHOD(), onde METHOD é o método de requisição HTTP que será manipulado, tal como GET, PUT, POST e qualquer outro (escrito em minúsculas).
 Por exemplo:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var app = express();
 
 // um middleware sem path; é executado por qualquer requisição feita a app
@@ -53,12 +53,12 @@ app.use('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.send('USER');
 });
-~~~
+</code></pre>
 
 Aqui está um exemplo de carregamento de uma série de middlewares em um ponto de montagem com um caminho montado.
 
-~~~js
-// uma sub-pilha que imprime informações de qualquer tipo de requisição HTTP para /user/:id 
+<pre><code class="language-javascript" translate="no">
+// uma sub-pilha que imprime informações de qualquer tipo de requisição HTTP para /user/:id
 app.use('/user/:id', function(req, res, next) {
   console.log('Request URL:', req.originalUrl);
   next();
@@ -66,12 +66,12 @@ app.use('/user/:id', function(req, res, next) {
   console.log('Request Type:', req.method);
   next();
 });
-~~~
+</code></pre>
 
 Manipuladores de rota (route handlers) permitem que você defina múltiplas rotas para um caminho (path).
 O exemplo abaixo define duas rotas para /user/:id com a requisição tipo GET. A segunda rota não causará qualquer problema, pois ela nunca será chamada, porque a primeira finaliza o ciclo de requsição-resposta.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // uma sub pilha middleware que manipula requisições GET para /user/:id
 app.get('/user/:id', function (req, res, next) {
   console.log('ID:', req.params.id);
@@ -84,13 +84,13 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.end(req.params.id);
 });
-~~~
+</code></pre>
 
-Para pular o resto do middleware e passar o controle para o próximo middleware da rota, utilizamos `next('route')`. 
+Para pular o resto do middleware e passar o controle para o próximo middleware da rota, utilizamos `next('route')`.
 **Nota**: `next('route')` só funcionará em middlewares carregados com `app.METHOD()` ou `router.METHOD()`.
 
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // uma sub-pilha de middleware que manipula requisições GET para /user/:id
 app.get('/user/:id', function (req, res, next) {
   // if user id is 0, skip to the next route
@@ -106,21 +106,21 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.render('special');
 });
-~~~
+</code></pre>
 
 <h2 id='middleware.router'>Router-level middleware</h2>
 
 Um middleware router-level funciona de forma semelhante a um middleware application-level, porém está limitado a uma instância de `express.Router()`.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var router = express.Router();
-~~~
+</code></pre>
 
 Carregamos middlewares router-level utilizando `router.use()` e `router.METHOD()`.
 
 O próximo exemplo de código refaz o sistema de middleware para application-level mostrado anteriormente, usando agora um middleware router-level:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var app = express();
 var router = express.Router();
 
@@ -158,7 +158,7 @@ router.get('/user/:id', function (req, res, next) {
 
 // montagem da rota no app
 app.use('/', router);
-~~~
+</code></pre>
 
 <h2 id='middleware.error-handling'>Error-handling middleware</h2>
 
@@ -168,12 +168,12 @@ Middlewares error-handling sempre têm quatro argumentos. Você precisa fornecer
 
 Definimos um middleware error-handling como qualquer outro middleware, exceto pela presença de quatro argumentos em vez de apenas três, especificamente com a assinatura `(err, req, res, next)`:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-~~~
+</code></pre>
 
 Para mais detalhes sobre middlewares error-handling, veja [Error handling](/guide/error-handling.html).
 
@@ -202,7 +202,7 @@ O argumento options é opcional, e pode ter as seguintes propriedades.
 
 Aqui está um exemplo de utilização do middleware `express.static` com um complexo objeto options.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var options = {
   dotfiles: 'ignore',
   etag: false,
@@ -216,15 +216,15 @@ var options = {
 }
 
 app.use(express.static('public', options));
-~~~
+</code></pre>
 
 Você pode ter mais de um diretório estático por app.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 app.use(express.static('files'));
-~~~
+</code></pre>
 
 Para mais informações sobre o middleware serve-static e suas opções, consulte a [documentação do serve-static](https://github.com/expressjs/serve-static).
 
@@ -236,17 +236,17 @@ Instala-se o módulo Node para a funcionalidade requerida e carrega-se dentro do
 
 O exemplo a seguir ilustra a instalação e carregamento do middleware `cookie-parser`.
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install cookie-parser
-~~~
+</code></pre>
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');
 
 // load the cookie parsing middleware
 app.use(cookieParser());
-~~~
+</code></pre>
 
 Consulte [middlewares third-party](../resources/middleware.html) para uma lista parcial dos que são mais utilizados com Express.

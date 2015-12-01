@@ -2,14 +2,14 @@
 layout: page
 title: Express "Hello World" example
 menu: starter
-lang: en
+lang: es
 ---
 
 # Hello world example
 
 Here is an example of a very basic Express app.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express')
 var app = express()
 
@@ -25,7 +25,7 @@ var server = app.listen(3000, function () {
   console.log('Example app listening at http://%s:%s', host, port)
 
 })
-~~~
+</code></pre>
 
 <div class="doc-box doc-notice" markdown="1">
 The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
@@ -36,8 +36,8 @@ The app starts a server and listens on port 3000 for connection. It will respond
 
 Save the code in a file named `app.js` and run it with the following command.
 
-~~~ sh
+<pre><code class="language-sh" translate="no">
 $ node app.js
-~~~
+</code></pre>
 
 Then, load [http://localhost:3000/](http://localhost:3000/) in a browser to see the output.

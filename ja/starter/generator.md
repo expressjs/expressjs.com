@@ -11,13 +11,13 @@ lang: ja
 
 下記のコマンドを使ってツールをインストールします。
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install express-generator -g
-~~~
+</code></pre>
 
 `-h`オプションでコマンドのオプションを表示します。
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ express -h
 
   Usage: express [options] [dir]
@@ -29,14 +29,14 @@ $ express -h
     -e, --ejs           add ejs engine support (defaults to jade)
         --hbs           add handlebars engine support
     -H, --hogan         add hogan.js engine support
-    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+    -c, --css &lt;engine>  add stylesheet &lt;engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-~~~
+</code></pre>
 
 例えば、下記は _myapp_ という名前のExpressアプリを現在のワーキングディレクトリに生成します。
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ express myapp
 
    create : myapp
@@ -56,32 +56,32 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-~~~
+</code></pre>
 
 そうしたら、依存関係をインストールします。
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ cd myapp
 $ npm install
-~~~
+</code></pre>
 
 アプリを実行します。(MaxOS または Linux)
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ DEBUG=myapp npm start
-~~~
+</code></pre>
 
 Windowsでは以下のコマンドを使います。
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 > set DEBUG=myapp & npm start
-~~~
+</code></pre>
 
 ブラウザで`http://localhost:3000/`をロードして、アプリにアクセスします。
 
 生成されたアプリのディレクトリ構造は以下のようになっています。
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 .
 ├── app.js
 ├── bin
@@ -101,7 +101,7 @@ Windowsでは以下のコマンドを使います。
     └── layout.jade
 
 7 directories, 9 files
-~~~
+</code></pre>
 
 <div class="doc-box doc-info" markdown="1">
 ジェネレータで生成されたアプリの構造は、複数あるExpressアプリを構造化する手法の一つにすぎません。

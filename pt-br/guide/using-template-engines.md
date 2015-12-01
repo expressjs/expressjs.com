@@ -14,9 +14,9 @@ Antes que o Express possa renderizar arquivos de template, as seguintes configur
 
 Então instalamos os pacotes npm da templete engine correspondente.
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install jade --save
-~~~
+</code></pre>
 
 <div class="doc-box doc-notice" markdown="1">
 Templates engines compatíveis com o Express, como a Jade, exportam uma função assinada como __express(filePath, options, callback) que é chamada por `res.render()` para renderizar o código do template.
@@ -26,28 +26,28 @@ Algumas templates engines não seguem esta convenção. A biblioteca [Consolidat
 
 Uma vez que a view engine estiver definida, você não precisa especificá-la explicitamente nem carregar o módulo da engine no seu app. O Express fará isso internamente como mostrado a seguir.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.set('view engine', 'jade');
-~~~
+</code></pre>
 
 	Crie um arquivo de template jade chamado "index.jade" no diretório views, com o seguinte conteúdo
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 html
   head
     title!= title
   body
     h1!= message
-~~~
+</code></pre>
 
 Crie então uma rota para renderizar o arquivo "index.jade". Se a propriedade `view engine` estiver definida, você pode omitir a extensão do arquivo view, caso contrário a extensão precisará ser especificada.
 
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-~~~
+</code></pre>
 
 Ao ser feita uma requisição GET para a home page  o arquivo "index.jade" será renderizado como HTML.
 

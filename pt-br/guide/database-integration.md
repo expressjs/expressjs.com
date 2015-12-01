@@ -28,16 +28,16 @@ Estes adaptadores para banco de dados, estão entre os muitos que estão dispon�
 
 ## Cassandra
 
-**Módulo**: [cassandra-driver](https://github.com/datastax/nodejs-driver)  
+**Módulo**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Instalação**
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install cassandra-driver
-~~~
+</code></pre>
 
 **Exemplo**
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var cassandra = require('cassandra-driver');
 var client = new cassandra.Client({ contactPoints: ['localhost']});
 
@@ -45,22 +45,22 @@ client.execute('select key from system.local', function(err, result) {
   if (err) throw err;
   console.log(result.rows[0]);
 });
-~~~
+</code></pre>
 
 <a name="couchdb"></a>
 
 ## CouchDB
 
-**Módulo**: [nano](https://github.com/dscape/nano)  
+**Módulo**: [nano](https://github.com/dscape/nano)
 **Instalação**
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install nano
-~~~
+</code></pre>
 
 **Exemplo**
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var nano = require('nano')('http://localhost:5984');
 nano.db.create('books');
 var books = nano.db.use('books');
@@ -76,22 +76,22 @@ books.insert({name: 'The Art of war'}, null, function(err, body) {
 books.list(function(err, body){
   console.log(body.rows);
 }
-~~~
+</code></pre>
 
 <a name="leveldb"></a>
 
 ## LevelDB
 
-**Módulo**: [levelup](https://github.com/rvagg/node-levelup)  
+**Módulo**: [levelup](https://github.com/rvagg/node-levelup)
 **Instalação**
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install level levelup leveldown
-~~~
+</code></pre>
 
 **Examplo**
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var levelup = require('levelup');
 var db = levelup('./mydb');
 
@@ -104,22 +104,22 @@ db.put('name', 'LevelUP', function (err) {
   });
 
 });
-~~~
+</code></pre>
 
 <a name="mysql"></a>
 
 ## MySQL
 
-**Módulo**: [mysql](https://github.com/felixge/node-mysql/)  
+**Módulo**: [mysql](https://github.com/felixge/node-mysql/)
 **Instalação**
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install mysql
-~~~
+</code></pre>
 
 **Examplo**
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -135,45 +135,45 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 });
 
 connection.end();
-~~~
+</code></pre>
 
 <a name="mongo"></a>
 
 ## MongoDB
 
-**Módulo**: [mongoskin](https://github.com/kissjs/node-mongoskin)  
+**Módulo**: [mongoskin](https://github.com/kissjs/node-mongoskin)
 **Instalação**
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install mongoskin
-~~~
+</code></pre>
 
 **Examplo**
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var db = require('mongoskin').db('localhost:27017/animals');
 
 db.collection('mamals').find().toArray(function(err, result) {
   if (err) throw err;
   console.log(result);
 });
-~~~
+</code></pre>
 Se você deseja um adaptador de modelo orientado a objetos, verifique [[Mongoose](https://github.com/LearnBoost/mongoose).
 
 <a name="neo4j"></a>
 
 ## Neo4j
 
-**Módulo**: [apoc](https://github.com/hacksparrow/apoc)  
+**Módulo**: [apoc](https://github.com/hacksparrow/apoc)
 **Instalação**
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install apoc
-~~~
+</code></pre>
 
 **Exemplo**
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var apoc = require('apoc');
 
 apoc.query('match (n) return n').exec().then(
@@ -184,22 +184,22 @@ apoc.query('match (n) return n').exec().then(
     console.log(fail);
   }
 );
-~~~
+</code></pre>
 
 <a name="postgres"></a>
 
 ## PostgreSQL
 
-**Módulo**: [pg](https://github.com/brianc/node-postgres)  
+**Módulo**: [pg](https://github.com/brianc/node-postgres)
 **Instalação**
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install pg
-~~~
+</code></pre>
 
 **Exemplo**
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var pg = require('pg');
 var conString = "postgres://username:password@localhost/database";
 
@@ -217,22 +217,22 @@ pg.connect(conString, function(err, client, done) {
   });
 
 });
-~~~
+</code></pre>
 
 <a name="redis"></a>
 
 ## Redis
 
-**Módulo**: [redis](https://github.com/mranney/node_redis)  
+**Módulo**: [redis](https://github.com/mranney/node_redis)
 **Instalação**
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install redis
-~~~
+</code></pre>
 
 **Exemplo**
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var client = require('redis').createClient();
 
 client.on('error', function (err) {
@@ -253,22 +253,22 @@ client.hkeys('hash key', function (err, replies) {
   client.quit();
 
 });
-~~~
+</code></pre>
 
 <a name="sqlite"></a>
 
 ## SQLite
 
-**Módulo**: [sqlite3](https://github.com/mapbox/node-sqlite3)  
+**Módulo**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Instalação**
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install sqlite3
-~~~
+</code></pre>
 
 **Exemplo**
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(':memory:');
 
@@ -289,25 +289,25 @@ db.serialize(function() {
 });
 
 db.close();
-~~~
+</code></pre>
 
 <a name="elasticsearch"></a>
 
 ## ElasticSearch
 
-**Módulo**: [elasticsearch](https://github.com/elastic/elasticsearch-js)  
+**Módulo**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Instalação**
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install elasticsearch
-~~~
+</code></pre>
 
 **Exemplo**
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var elasticsearch = require('elasticsearch');
 var client = elasticsearch.Client({
-  host: 'localhost:9200'  
+  host: 'localhost:9200'
 });
 
 client.search({
@@ -326,4 +326,4 @@ client.search({
 }, function(error) {
   console.trace(error.message);
 });
-~~~
+</code></pre>

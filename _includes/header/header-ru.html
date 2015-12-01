@@ -6,20 +6,20 @@
   </section>
   <div id="navbar">
       <ul id="navmenu">
-          <li><a href="{% if page.lang == 'en' %}/{% else %}/{{ page.lang }}/{% endif %}" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Главная</a></li>
+          <li><a href="/{{ page.lang }}" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Главная</a></li>
           <li>
               <ul id="getting-started-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>С чего начать</a>
+                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>С чего начать</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html">Установка</a>
+                          <li><a href="/{{ page.lang }}/starter/installing.html">Установка</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/generator.html">Express генератор</a>
+                          <li><a href="/{{ page.lang }}/starter/generator.html">Express генератор</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/hello-world.html">Hello world</a>
+                          <li><a href="/{{ page.lang }}/starter/hello-world.html">Hello world</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/basic-routing.html">Основы маршрутизации</a>
+                          <li><a href="/{{ page.lang }}/starter/basic-routing.html">Основы маршрутизации</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/faq.html">FAQ</a>
+                          <li><a href="/{{ page.lang }}/starter/faq.html">FAQ</a>
                           </li>
                       </ul>
                   </li>
@@ -27,23 +27,23 @@
           </li>
           <li>
               <ul id="guide-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Руководство</a>
+                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Руководство</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/routing.html">Маршрутизация</a>
+                          <li><a href="/{{ page.lang }}/guide/routing.html">Маршрутизация</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/using-middleware.html">Использование middleware</a>
+                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Использование middleware</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/using-template-engines.html">Использование шаблонизаторов</a>
+                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Использование шаблонизаторов</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/error-handling.html">Обработка ошибок</a>
+                          <li><a href="/{{ page.lang }}/guide/error-handling.html">Обработка ошибок</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/debugging.html">Отладка</a>
+                          <li><a href="/{{ page.lang }}/guide/debugging.html">Отладка</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/behind-proxies.html">Express за прокси</a>
+                          <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express за прокси</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/migrating-4.html">Миграция до версии Express 4</a>
+                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">Миграция до версии Express 4</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/database-integration.html">Интеграция с базами данных</a>
+                          <li><a href="/{{ page.lang }}/guide/database-integration.html">Интеграция с базами данных</a>
                           </li>
                       </ul>
                   </li>
@@ -51,11 +51,11 @@
           </li>
           <li>
               <ul id="application-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Справочник API</a>
+                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Справочник API</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/4x/api.html">4.x</a>
+                          <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/3x/api.html">3.x</a>
+                          <li><a href="/{{ page.lang }}/3x/api.html">3.x</a>
                           </li>
                       </ul>
                   </li>
@@ -63,13 +63,13 @@
           </li>
           <li>
               <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Более сложные темы</a>
+                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Более сложные темы</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/developing-template-engines.html">Шаблонизаторы</a>
+                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Шаблонизаторы</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/pm.html">Использование менеджеров процесса</a>
+                          <li><a href="/{{ page.lang }}/advanced/pm.html">Использование менеджеров процесса</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/security-updates.html">Обновления безопасности</a>
+                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">Обновления безопасности</a>
                           </li>
                       </ul>
                   </li>
@@ -77,17 +77,17 @@
           </li>
           <li>
               <ul id="resources-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Ресурсы</a>
+                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Ресурсы</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/glossary.html">Глоссарий</a>
+                          <li><a href="/{{ page.lang }}/resources/glossary.html">Глоссарий</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/middleware.html">Middleware</a>
+                          <li><a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/community.html">Сообщество</a>
+                          <li><a href="/{{ page.lang }}/resources/community.html">Сообщество</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/books-blogs.html">Книги и блоги</a>
+                          <li><a href="/{{ page.lang }}/resources/books-blogs.html">Книги и блоги</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/applications.html">Приложения</a>
+                          <li><a href="/{{ page.lang }}/resources/applications.html">Приложения</a>
                           </li>
                       </ul>
                   </li>

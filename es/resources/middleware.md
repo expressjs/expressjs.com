@@ -2,14 +2,14 @@
 layout: page
 title: Express middleware
 menu: resources
-lang: en
+lang: es
 ---
 
 # Third-party middleware
 
 Here are some Express middleware modules:
 
-  - [body-parser](https://github.com/expressjs/body-parser): previously `express.bodyParser`, `json`, and `urlencoded`. 
+  - [body-parser](https://github.com/expressjs/body-parser): previously `express.bodyParser`, `json`, and `urlencoded`.
   See also:
     - [body](https://github.com/raynos/body)
     - [co-body](https://github.com/visionmedia/co-body)

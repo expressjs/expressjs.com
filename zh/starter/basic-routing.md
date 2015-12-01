@@ -19,7 +19,7 @@ lang: zh
 
 以下代码是app中的一些路由示例。
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // respond with "Hello World!" on the homepage
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -39,6 +39,6 @@ app.put('/user', function (req, res) {
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 })
-~~~
+</code></pre>
 
 更多详情 [路由使用指南](/guide/routing.html).

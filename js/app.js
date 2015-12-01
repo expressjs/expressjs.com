@@ -3,6 +3,9 @@ $(function(){
 
   var doc = $(document);
 
+  // hilight the menu item of the current page
+  $('#navmenu ul ul').find('a[href="'+ document.location.pathname + '"]').addClass('current')
+
   // top link
   $('#top').click(function(e){
     $('html, body').animate({scrollTop : 0}, 500);

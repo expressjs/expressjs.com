@@ -5,7 +5,7 @@
 
   <body>
 
-    <section class="content">
+    <section class="page content">
 
       {% include header/header-{{ page.lang }}.html %}
 
@@ -16,9 +16,9 @@
           {% include i18n-notice.html %}
         </div>
       {% endif %}
-    
+
       {{ content }}
-      
+
     </section>
 
     {% include footer/footer-{{ page.lang }}.html %}

@@ -36,7 +36,7 @@ lang: ja
       <div id="sponsorship">
           <a href="http://loopback.io/"><h3>LoopBack</h3> Expressベースのフレームワークを使用してモデル駆動型のアプリケーションを開発するにはloopback.ioで詳細をご覧ください。</a>
       </div>
-        
+
     </div>
 </section>
 
