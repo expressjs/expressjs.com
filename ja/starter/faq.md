@@ -50,11 +50,11 @@ Expressでは、404はエラーによる結果ではありません。
 言い換えれば、Expressがすべてのミドルウェアを実行し、そのどれもが応答しないことが分かったということです。
 404を操作するためにやらなければならないことは、404を操作するためのミドルウェアを追加するだけです。
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use(function(req, res, next) {
   res.status(404).send('Sorry cant find that!');
 });
-~~~
+</code></pre>
 
 ## エラーハンドラをどう設定するか？
 
@@ -62,12 +62,12 @@ app.use(function(req, res, next) {
 具体的にはシグネチャ`(err, req, res, next)`を用います。
 4引数の代わりに3引数でも定義できます。
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-~~~
+</code></pre>
 
 詳細な情報は[Error handling](/{{ page.lang }}/guide/error-handling.html)を参照してください。
 

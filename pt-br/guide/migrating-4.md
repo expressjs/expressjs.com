@@ -94,12 +94,12 @@ Na maioria dos casos, você pode simplesmente trocar a antiga versão 3 pelo mid
 Na versão 4 agora você pode carregar middlewares em uma ´path´ com uma variável de parâmetro e ler o valor deste parâmetro a partir do `handler` (manipulador) da rota.
 Por exemplo:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use('/book/:id', function(req, res, next) {
   console.log('ID:', req.params.id);
   next();
 });
-~~~
+</code></pre>
 <h3 id="routing">
 O sistema de roteamento
 </h3>
@@ -120,7 +120,7 @@ Como o `path` é especificado em um único local, isto facilita a criação de r
 
 Nesse exemplo um encadeamento de handlers é definido para uma rota usando `app.route()`.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -131,7 +131,7 @@ app.route('/book')
   .put(function(req, res) {
     res.send('Update the book');
   });
-~~~
+</code></pre>
 
 <h4 id="express-router">Classe <code>express.Router</code></h4>
 
@@ -142,7 +142,7 @@ O exemplo seguinte cria um ´router´ como um módulo, carrega nele um middlewar
 
 Crie no diretório da app um arquivo router chamado `birds.js`, com o seguinte conteúdo:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var router = express.Router();
 
@@ -161,15 +161,15 @@ router.get('/about', function(req, res) {
 });
 
 module.exports = router;
-~~~
+</code></pre>
 
 Então, carregue o módulo router na app:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-~~~
+</code></pre>
 
 Agora a app será capaz de manipular requisições para `/birds` e `birds/about`, além de chamar o middleware `timeLog` específico para a rota.
 
@@ -305,7 +305,7 @@ Version 3 app
 
 Considere uma aplicação Express 3 com o seguinte arquivo `app.js`:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -337,13 +337,13 @@ app.get('/users', user.list);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-~~~
+</code></pre>
 
 <h4 id=""><code>package.json</code></h4>
 
 No arquivo `package.json` da versão 3 pode aparecer algo como:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -356,7 +356,7 @@ No arquivo `package.json` da versão 3 pode aparecer algo como:
     "jade": "*"
   }
 }
-~~~
+</code></pre>
 
 <h3 id="">
 Processo
@@ -364,9 +364,9 @@ Processo
 Inicie o processo de migração instalando os middlewares necessários para a aplicação em Express 4, e atualize o Express e o Jade para suas versões mais novas com o seguinte comando:
 
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
-~~~
+</code></pre>
 
 Faça as seguintes alterações em `app.js`:
 
@@ -375,7 +375,7 @@ Faça as seguintes alterações em `app.js`:
     `express.session`, `express.bodyParser` and
     `express.errorHandler` não estão mais embutidos no Express. Você precisa instalá-los manualmente e depois carregá-los na aplicação.
 2. Você não precisa mais carregar `app.router`. Isto não é válido em um objeto app do Express 4, então remova `app.use(app.router)`.
-	
+
 3. Certifique-se de que os middlewares sejam carregados na ordem correta - carregue `errorHandler` depois do carregamento das rotas.
 
 
@@ -386,7 +386,7 @@ Faça as seguintes alterações em `app.js`:
 Executando o comando `npm` mostrado anteriormente o arquivo `package.json` será atualizado como a seguir:
 
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -406,13 +406,13 @@ Executando o comando `npm` mostrado anteriormente o arquivo `package.json` será
     "serve-favicon": "^2.0.1"
   }
 }
-~~~
+</code></pre>
 
 <h4 id=""><code>app.js</code></h4>
 
 Remova os códigos inválidos, carregue os middlewares requeridos, e faça outras alterações que forem necessárias. Então o arquivo `app.js` ficará como isto:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
@@ -456,7 +456,7 @@ var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-~~~
+</code></pre>
 
 
 <div class="doc-box doc-info" markdown="1">
@@ -471,9 +471,9 @@ A menos que você queira trabalhar diretamente com o módulo `http` (socket.io/S
 
 Com isso, o processo de migração está completo, e agora a app é uma aplicação Express 4. Para confirmar, inicialize a app com o seguinte comando:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ node .
-~~~
+</code></pre>
 
 Acesse [http://localhost:3000](http://localhost:3000) e veja a home page renderizada pelo Express 4.
 
@@ -486,16 +486,16 @@ A ferramenta de linha de comando para gerar aplicações em Express ainda é `ex
 
 Se o gerador de apps Express 3 está instalado no seu sistema, você precisa desinstalá-lo como mostrado a seguir:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm uninstall -g express
-~~~
+</code></pre>
 Dependendo das configurações de privilégios dos seus arquivos e diretórios, você precisará rodar esse comando com `sudo`.
 
 Agora instale o novo `generator`:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install -g express-generator
-~~~
+</code></pre>
 
 Novamente, dependendo das configurações de privilégios dos seus arquivos e diretórios, você precisará rodar o comando acima com `sudo`.
 
@@ -515,9 +515,9 @@ A maioria dos comandos e opções são os mesmos, com as seguinte exeções:
 
 Execute os seguintes comandos para criar uma aplicação em Express 4:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ express app4
-~~~
+</code></pre>
 Olhando o conteúdo de `app4.js`, você notará que todos os middlewares requeridos para a app (exceto `express.static`), são carregados como módulos independentes e o middleware `router` não é mais carregado explicitamente na app.
 
 Você também notará que o arquivo `app.js` é agora um módulo do Node, comparando com a app independente criada pelo antigo generator.
@@ -525,16 +525,16 @@ Você também notará que o arquivo `app.js` é agora um módulo do Node, compar
 Após instalar as dependências, inicialize a app usando o seguinte comando:
 
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm start
-~~~
+</code></pre>
 
 
 Olhando no início do script no arquivo `package.json`, você notará que o comando que inicia o app é `node ./bin/www`, enquanto que no Express 3 era `node app.js`.
 
 
 
-Uma vez que o arquivo `app.js` criado pelo generator é agora um módulo Node, ele não pode mais ser inicializado como uma app independente (a não ser que você modifique o código). 
+Uma vez que o arquivo `app.js` criado pelo generator é agora um módulo Node, ele não pode mais ser inicializado como uma app independente (a não ser que você modifique o código).
 O arquivo `app.js` precisa ser carregado e inicializado em um arquivo Node. Neste caso o arquivo Node é `./bin/www`.
 
 Os diretórios `bin`e `www` não são obrigatórios para criação ou incialização de uma app no Express 4. Isto é apenas uma sugestão do generator, mas você pode modificar livremente conforme sua necessidade.
@@ -542,19 +542,19 @@ Os diretórios `bin`e `www` não são obrigatórios para criação ou incializa�
 
 Para se livrar do diretório `www` e manter as coisas como era no Express 3, exclua a linha que contém `module.exports = app;` no fim do arquivo `app.js`, e coloque no lugar o seguinte código:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
-~~~
+</code></pre>
 
 Certifique-se de carregar o módulo `debug` no topo de `app.js`, com o seguinte código:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var debug = require('debug')('app4');
-~~~
+</code></pre>
 
 Em seguida, altere `"start": "node ./bin/www"` no arquivo `package.json` para `"start": "node app.js"`.
 

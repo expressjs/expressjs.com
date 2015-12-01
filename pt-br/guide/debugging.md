@@ -15,19 +15,19 @@ Express utiliza o módulo [debug](https://github.com/visionmedia/debug) internam
 
 Para visualizar todos os logs internos utilizados no Express, apenas configure a variável de ambiente DEBUG para `express:*` quando for executar sua aplicação.
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ DEBUG=express:* node index.js
-~~~
+</code></pre>
 
 No windows, utilize o seguinte comando:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 > set DEBUG=express:* & node index.js
-~~~
+</code></pre>
 
 Executando o comando acima na aplicação padrão gerada pelo [express generator](/starter/generator.html) mostrará a seguinte saída:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -63,17 +63,17 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +1ms
   express:router use /users router +0ms
   express:router:layer new /users +0ms
-  express:router use / <anonymous> +0ms
+  express:router use / &lt;anonymous> +0ms
   express:router:layer new / +0ms
-  express:router use / <anonymous> +0ms
+  express:router use / &lt;anonymous> +0ms
   express:router:layer new / +0ms
-  express:router use / <anonymous> +0ms
+  express:router use / &lt;anonymous> +0ms
   express:router:layer new / +0ms
-~~~
+</code></pre>
 
 Agora, quando uma requisição for realizada em sua aplicação, você verá os logs gerados pelo Express:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -89,7 +89,7 @@ Agora, quando uma requisição for realizada em sua aplicação, você verá os 
   express:view lookup "index.jade" +338ms
   express:view stat "/projects/example/views/index.jade" +0ms
   express:view render "/projects/example/views/index.jade" +1ms
-~~~
+</code></pre>
 
 Para visualizer apenas os logs da implementação de rotas, configure a varíavel `DEBUG` para `express:router`. Da mesma forma, para logs somente da implementação da aplicação, utilize `express:application`, e assim por diante.
 
@@ -99,20 +99,20 @@ A aplicação gerada pelo comando `express` também utiliza o módulo `debug` e 
 
 Ao criar uma aplicação como a seguinte:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ express sample-app
-~~~
+</code></pre>
 
 Você poderá habilitar a depuração com o comando a seguir:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ DEBUG=sample-app node ./bin/www
-~~~
+</code></pre>
 
 Você pode especificar mais de um namespace de depuração, atribuindo uma lista cujos elementos são separados por vírgula, como abaixo:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ DEBUG=http,mail,express:* node index.js
-~~~
+</code></pre>
 
 Para mais informações sobre o módulo `debug`, veja o [debug guide](https://github.com/visionmedia/debug).

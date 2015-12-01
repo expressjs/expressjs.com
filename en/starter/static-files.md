@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Serving static files in Express
 menu: starter
@@ -22,7 +22,7 @@ app.use(express.static('public'));
 
 Now, you can load the files that are in the `public` directory:
 
-<pre><code class="language-javascript" translate="no">
+<pre class="plain-text"><code class="plain-text" translate="no">
 http://localhost:3000/images/kitten.jpg
 http://localhost:3000/css/style.css
 http://localhost:3000/js/app.js
@@ -51,7 +51,7 @@ app.use('/static', express.static('public'));
 
 Now, you can load the files that are in the `public` directory from the `/static` path prefix.
 
-<pre><code class="language-javascript" translate="no">
+<pre class="plain-text"><code class="plain-text" translate="no">
 http://localhost:3000/static/images/kitten.jpg
 http://localhost:3000/static/css/style.css
 http://localhost:3000/static/js/app.js

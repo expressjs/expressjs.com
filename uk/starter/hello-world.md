@@ -9,7 +9,7 @@ lang: uk
 
 Тут наведено приклад дуже простого Express додатку.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express')
 var app = express()
 
@@ -25,7 +25,7 @@ var server = app.listen(3000, function () {
   console.log('Example app listening at http://%s:%s', host, port)
 
 })
-~~~
+</code></pre>
 
 <div class="doc-box doc-notice" markdown="1">
 `req` (request) і` res` (response) є тими ж об'єктами які надає Node, тому ви можете виконати
@@ -36,8 +36,8 @@ var server = app.listen(3000, function () {
 
 Збережіть код в файл під назвою `app.js` і запустіть за допомогою наступних команд.
 
-~~~ sh
+<pre><code class="language-sh" translate="no">
 $ node app.js
-~~~
+</code></pre>
 
 Завантажте [http://localhost:3000/](http://localhost:3000/) в браузері щоб побачити результат.

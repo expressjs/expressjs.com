@@ -20,7 +20,7 @@ Este tutorial assume que uma instância do `express` nomeada `app` é criada e o
 
 O seguinte código demonstra alguns exemplos de rotas em uma aplicação.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // responde com "Hello World!" na página principal
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -40,6 +40,6 @@ app.put('/user', function (req, res) {
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-~~~
+</code></pre>
 
-Para maiores detalhes sobre roteamento, consulte o [guia de roteamento](/guide/routing.html). 
+Para maiores detalhes sobre roteamento, consulte o [guia de roteamento](/guide/routing.html).

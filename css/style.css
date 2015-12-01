@@ -484,6 +484,12 @@ html[xmlns] .clearfix {
   padding-top: 0 !important;
 }
 
+.page pre.plain-text, .page code.plain-text {
+  padding-top: 0 !important;
+  color: #000;
+}
+
+
 .doc-notice {
   background: #faf6e8;
   border: 1px solid #ded8c1;

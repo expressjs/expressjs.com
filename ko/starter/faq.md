@@ -9,7 +9,7 @@ lang: ko
 
 ## How should I structure my application?
 
-There is no definitive answer to this question. It depends 
+There is no definitive answer to this question. It depends
 on the scale of your application and the team involved. To be as
 flexible as possible, Express makes no assumptions in terms of structure.
 
@@ -57,23 +57,23 @@ and found that none of them responded. All you need to
 do is add a middleware at the very bottom (below all others)
 to handle a 404:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use(function(req, res, next) {
   res.status(404).send('Sorry cant find that!');
 });
-~~~
+</code></pre>
 
 ## How do you setup an error handler?
 
 You define error-handling middleware the same way as other middleware,
 except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-~~~
+</code></pre>
 
 For more information, see [Error handling](/guide/error-handling.html).
 

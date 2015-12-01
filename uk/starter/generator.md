@@ -11,13 +11,13 @@ lang: uk
 
 Встановлюйте його за допомогою команди.
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ npm install express-generator -g
-~~~
+</code></pre>
 
 Для перегляду опцій команди використовуйте `-h` опцію:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ express -h
 
   Usage: express [options] [dir]
@@ -29,13 +29,13 @@ $ express -h
     -e, --ejs           add ejs engine support (defaults to jade)
         --hbs           add handlebars engine support
     -H, --hogan         add hogan.js engine support
-    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass) (defaults to plain css)
+    -c, --css &lt;engine>  add stylesheet &lt;engine> support (less|stylus|compass) (defaults to plain css)
     -f, --force         force on non-empty directory
-~~~
+</code></pre>
 
 Приклад, наступна команда створює Express додаток з ім'ям _myapp_ в поточній директорії.
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ express myapp
 
    create : myapp
@@ -55,32 +55,32 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-~~~
+</code></pre>
 
 Далі вам потрібно встановити залежності:
 
-~~~sh
-$ cd myapp 
+<pre><code class="language-sh" translate="no">
+$ cd myapp
 $ npm install
-~~~
+</code></pre>
 
 Запуск програми (на MacOS або Linux):
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 $ DEBUG=myapp ./bin/www
-~~~
+</code></pre>
 
 На Windows, використовуйте наступну команду:
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 > set DEBUG=myapp & node .\bin\www
-~~~
+</code></pre>
 
 Далі відкрийте `http://localhost:3000/` у вашому браузері щоб подивитися роботу програми.
 
 Згенерована структура додатку виглядає наступним чином.
 
-~~~sh
+<pre><code class="language-sh" translate="no">
 .
 ├── app.js
 ├── bin
@@ -100,7 +100,7 @@ $ DEBUG=myapp ./bin/www
     └── layout.jade
 
 7 directories, 9 files
-~~~
+</code></pre>
 
 <div class="doc-box doc-info" markdown="1">
 Структура додатку згенерувала за допомогою генератора, всього лише один з безлічі способів організації структури Express додатків. Ви можете не використовувати Дану структуру або змінити її кращого використання під ваші потреби.

@@ -19,7 +19,7 @@ lang: uk
 
 Наступний код демонструє деякі приклади маршрутів у додатку.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 // Відповідь "Hello World!" на гловній сторінці
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -39,6 +39,6 @@ app.put('/user', function (req, res) {
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 })
-~~~
+</code></pre>
 
 Щоб більше дізнатися про маршрутизацію, ознайомтеся з керівництвом [Маршрутизація](/guide/routing.html).
