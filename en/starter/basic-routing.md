@@ -17,7 +17,9 @@ _Routing_ refers to determining how an application responds to a client request 
 Each route can have one or more handler functions, which are executed when the route is matched.
 
 Route definition takes the following structure:
-<pre><code class="language-text" translate="no">app.METHOD(PATH, HANDLER)</code></pre>
+<pre><code class="language-javascript" translate="no">
+app.METHOD(PATH, HANDLER)
+</code></pre>
 
 Where:
 
