@@ -187,6 +187,10 @@ a {
   width: 90%;
 }
 
+.current {
+  background: #e0f5ff;
+}
+
 /* logo */
 
 #logo {
