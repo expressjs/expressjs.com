@@ -4,7 +4,7 @@ $(function(){
   var doc = $(document);
 
   // hilight the menu item of the current page
-  $('#navmenu').find('a[href="'+ document.location.pathname + '"]').addClass('current')
+  $('#navmenu ul ul').find('a[href="'+ document.location.pathname + '"]').addClass('current')
 
   // top link
   $('#top').click(function(e){
