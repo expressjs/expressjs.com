@@ -2,7 +2,7 @@
 layout: page
 title: Serving static files in Express
 menu: starter
-lang: en
+lang: es
 ---
 
 # Serving static files in Express

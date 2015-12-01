@@ -2,7 +2,7 @@
 layout: page
 title: Express database integration
 menu: guide
-lang: en
+lang: es
 ---
 
 # Database integration
@@ -28,7 +28,7 @@ search on the [npm](https://www.npmjs.com/) site.
 
 ## Cassandra
 
-**Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)  
+**Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Installation**
 
 ~~~sh
@@ -51,7 +51,7 @@ client.execute('select key from system.local', function(err, result) {
 
 ## CouchDB
 
-**Module**: [nano](https://github.com/dscape/nano)  
+**Module**: [nano](https://github.com/dscape/nano)
 **Installation**
 
 ~~~sh
@@ -82,7 +82,7 @@ books.list(function(err, body){
 
 ## LevelDB
 
-**Module**: [levelup](https://github.com/rvagg/node-levelup)  
+**Module**: [levelup](https://github.com/rvagg/node-levelup)
 **Installation**
 
 ~~~sh
@@ -110,7 +110,7 @@ db.put('name', 'LevelUP', function (err) {
 
 ## MySQL
 
-**Module**: [mysql](https://github.com/felixge/node-mysql/)  
+**Module**: [mysql](https://github.com/felixge/node-mysql/)
 **Installation**
 
 ~~~sh
@@ -141,7 +141,7 @@ connection.end();
 
 ## MongoDB
 
-**Module**: [mongoskin](https://github.com/kissjs/node-mongoskin)  
+**Module**: [mongoskin](https://github.com/kissjs/node-mongoskin)
 **Installation**
 
 ~~~sh
@@ -165,7 +165,7 @@ If you want a object model driver for MongoDB, checkout [Mongoose](https://githu
 
 ## Neo4j
 
-**Module**: [apoc](https://github.com/hacksparrow/apoc)  
+**Module**: [apoc](https://github.com/hacksparrow/apoc)
 **Installation**
 
 ~~~sh
@@ -191,7 +191,7 @@ apoc.query('match (n) return n').exec().then(
 
 ## PostgreSQL
 
-**Module**: [pg](https://github.com/brianc/node-postgres)  
+**Module**: [pg](https://github.com/brianc/node-postgres)
 **Installation**
 
 ~~~sh
@@ -224,7 +224,7 @@ pg.connect(conString, function(err, client, done) {
 
 ## Redis
 
-**Module**: [redis](https://github.com/mranney/node_redis)  
+**Module**: [redis](https://github.com/mranney/node_redis)
 **Installation**
 
 ~~~sh
@@ -260,7 +260,7 @@ client.hkeys('hash key', function (err, replies) {
 
 ## SQLite
 
-**Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)  
+**Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Installation**
 
 ~~~sh

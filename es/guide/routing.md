@@ -2,7 +2,7 @@
 layout: page
 title: Express routing
 menu: guide
-lang: en
+lang: es
 ---
 
 # Routing
@@ -45,7 +45,7 @@ app.post('/', function (req, res) {
 Express supports the following routing methods corresponding to HTTP methods: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
 
 <div class="doc-box doc-info" markdown="1">
-To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
+To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example,
 `app['m-search']('/', function ...`
 </div>
 
@@ -199,7 +199,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 
 The methods on the response object (`res`) in the following table can send a response to the client and terminate the request response cycle. If none of them is called from a route handler, the client request will be left hanging.
 
-| Method               | Description                           
+| Method               | Description
 |----------------------|--------------------------------------
 | [res.download()](/4x/api.html#res.download)   | Prompt a file to be downloaded.
 | [res.end()](/4x/api.html#res.end)        | End the response process.

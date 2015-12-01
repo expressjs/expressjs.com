@@ -2,14 +2,14 @@
 layout: page
 title: Express FAQ
 menu: starter
-lang: en
+lang: es
 ---
 
 # FAQ
 
 ## How should I structure my application?
 
-There is no definitive answer to this question. It depends 
+There is no definitive answer to this question. It depends
 on the scale of your application and the team involved. To be as
 flexible as possible, Express makes no assumptions in terms of structure.
 

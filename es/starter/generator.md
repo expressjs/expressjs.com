@@ -2,7 +2,7 @@
 layout: page
 title: Express application generator
 menu: starter
-lang: en
+lang: es
 ---
 
 # Express application generator
@@ -60,7 +60,7 @@ $ express myapp
 Then install dependencies:
 
 ~~~sh
-$ cd myapp 
+$ cd myapp
 $ npm install
 ~~~
 

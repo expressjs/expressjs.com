@@ -2,19 +2,19 @@
 layout: page
 title: Using Express middleware
 menu: guide
-lang: en
+lang: es
 ---
 
 # Using middleware
 
-An Express application is essentially a series of middleware calls.  
+An Express application is essentially a series of middleware calls.
 
 Middleware is a function with access to the request object (`req`), the response object (`res`), and the next middleware in line in the request-response cycle of an Express application, commonly denoted by a variable named `next`. Middleware can:
 
  - Execute any code.
  - Make changes to the request and the response objects.
  - End the request-response cycle.
- - Call the next middleware in the stack. 
+ - Call the next middleware in the stack.
 
 If the current middleware does not end the request-response cycle, it must call `next()` to pass control to the next middleware, otherwise the request will be left hanging.
 
@@ -92,7 +92,7 @@ app.get('/user/:id', function (req, res, next) {
   // if user id is 0, skip to the next route
   if (req.params.id == 0) next('route');
   // else pass the control to the next middleware in this stack
-  else next(); // 
+  else next(); //
 }, function (req, res, next) {
   // render a regular page
   res.render('regular');
@@ -139,7 +139,7 @@ router.get('/user/:id', function (req, res, next) {
   // if user id is 0, skip to the next router
   if (req.params.id == 0) next('route');
   // else pass the control to the next middleware in this stack
-  else next(); // 
+  else next(); //
 }, function (req, res, next) {
   // render a regular page
   res.render('regular');

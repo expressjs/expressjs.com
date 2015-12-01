@@ -2,14 +2,14 @@
 layout: page
 title: Express basic routing tutorial
 menu: starter
-lang: en
+lang: es
 ---
 
 # Basic routing tutorial
 
 This tutorial is a basic introduction to routing with Express. Routing refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, and so on).
 
-Each route can have one or more handler functions, which is / are executed when the route is matched. 
+Each route can have one or more handler functions, which is / are executed when the route is matched.
 
 Route definition takes the following structure `app.METHOD(PATH, HANDLER)`, where `app` is an instance of `express`, `METHOD` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` is a path on the server, and `HANDLER` is the function executed when the route is matched.
 
