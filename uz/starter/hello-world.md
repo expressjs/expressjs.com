@@ -5,11 +5,11 @@ menu: starter
 lang: uz
 ---
 
-# Hello world 
+# Hello world
 
 Bu yerda Express dasturga eng sodda misol keltirilgan.
 
-~~~js
+<pre><code class="language-javascript" translate="no">
 var express = require('express')
 var app = express()
 
@@ -25,7 +25,7 @@ var server = app.listen(3000, function () {
   console.log('Example app listening at http://%s:%s', host, port)
 
 })
-~~~
+</code></pre>
 
 <div class="doc-box doc-notice" markdown="1">
 `req` (request) va `res` (response) Node taqdim etayotgan obyektlar hisoblanadi, shuning uchun
@@ -36,8 +36,8 @@ Dastur serverni ishga tushuradi va 3000 portdagi aloqani eshitib turadi. Javob s
 
 Kodni yozib, `app.js` faylida saqlab qoying. Uni ishga tushurish uchun quyidagi buyruqni ishga tushiring:
 
-~~~ sh
+<pre><code class="language-sh" translate="no">
 $ node app.js
-~~~
+</code></pre>
 
 Natijani ko'rish uchun, brauzerdan [http://localhost:3000/](http://localhost:3000/) manziliga kiring.
