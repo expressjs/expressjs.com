@@ -1,7 +1,7 @@
 ---
 layout: page
-title: 
-lang: ru
+title:
+lang: uz
 ---
 
 # Performance

@@ -2,7 +2,7 @@
 layout: page
 title: Using Express middleware
 menu: guide
-lang: ru
+lang: uz
 ---
 
 # Using middleware
