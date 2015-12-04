@@ -1,1 +1,1 @@
-Этот документ может быть устаревшей по отношению к документации на английском языке . Для получения последних обновлений , пожалуйста, обратитесь к <a href="/">документации на английском языке</a>.
+Ushbu dokumentatsiya eskirga bo'lishi mumkin. Eng oxirgi yangilanishlarni olish uchun, iltimos, qo'llanmani <a href="/">ingliz tilida</a> o'qing. Expressni o'zbek tiliga tarjima qilishga yordam bermoqchi bo'lsangiz, GitHubdagi <a href="https://github.com/strongloop/expressjs.com">ushbu repozitoriyaga</a> o'ting.
