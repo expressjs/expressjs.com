@@ -12,7 +12,6 @@ lang: pt-br
 ## Livros
 
 Aqui estão alguns dos vários livros sobre Express:
-Here are a few of the many books on Express:
 
  - **[Getting MEAN with Mongo, Express, Angular, and Node](http://www.manning.com/sholmes/)**,
 Manning Publications, early 2015.
@@ -30,6 +29,7 @@ Packt Publishing, June 2013.
 ###Adicione seu livro aqui!
 
 [Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) e adicione um link para o seu livro, então envie um pull request (necessário login no GitHub).  Siga o formato da listagem acima.
+
 ## Blogs
 
 - [StrongLoop Blog: Express category](http://strongloop.com/strongblog/category/express/)
