@@ -43,4 +43,4 @@ Execute a aplicação com o seguinte comando.
 $ node app.js
 </code></pre>
 
-Então, carregue [http://localhost:3000/](http://localhost:3000/) em um <i>browser</i> e irá ver a saída.
+Então, carregue [http://localhost:3000/](http://localhost:3000/) em um <i>browser</i> e para ver a saída.
