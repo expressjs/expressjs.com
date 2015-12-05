@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Escrevendo um middleware para usar em apps com Express
+title: Escrevendo um middleware
 menu: guide
 lang: pt-br
 ---
 
-# Escrevendo um <i>middleware</i> para usar em apps com Express
+# Escrevendo um <i>middleware</i>
 
 <h2>Visão Geral</h2>
 
