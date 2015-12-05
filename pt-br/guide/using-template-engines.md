@@ -30,7 +30,7 @@ Uma vez que a view engine estiver definida, você não precisa especificá-la ex
 app.set('view engine', 'jade');
 </code></pre>
 
-	Crie um arquivo de template jade chamado "index.jade" no diretório views, com o seguinte conteúdo
+Crie um arquivo de template jade chamado "index.jade" no diretório views, com o seguinte conteúdo
 
 <pre><code class="language-javascript" translate="no">
 html
@@ -41,7 +41,6 @@ html
 </code></pre>
 
 Crie então uma rota para renderizar o arquivo "index.jade". Se a propriedade `view engine` estiver definida, você pode omitir a extensão do arquivo view, caso contrário a extensão precisará ser especificada.
-
 
 <pre><code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
