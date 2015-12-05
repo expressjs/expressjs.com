@@ -89,11 +89,7 @@ Visite [Segment.io](http://segment.io/)
 
 ##Yummly
 
-Yummly is the world's largest and most powerful recipe search site.
-Bringing together recipes from all over the web - making your life easier.
-
-Yummly é o maior e mais poderoso site de busca de receitas do mundo.
-Reunindo receitas de toda a web e tornando sua vida mais fácil.
+Yummly é o maior e mais poderoso site de busca de receitas do mundo. Reunindo receitas de toda a web e tornando sua vida mais fácil.
 
 [![](/images/apps/screenshots/yummly.png)](http://yummly.com/)
 
@@ -102,6 +98,7 @@ Visite [Yummly](http://yummly.com/)
 ##Koding
 
 Desenvolvimento de software em tempo real no browser com editor integrado, colaboradores, terminais e muito mais.
+
 [![](/images/apps/screenshots/koding.png)](http://koding.com/)
 
 Visite [Koding](http://koding.com/)
@@ -172,5 +169,4 @@ Visite [Glip](https://glip.com)
 
 ##Adicione seu aplicativo em nosso site.
 
-[Edite o arquvio Markdown](https://github.com/strongloop/expressjs.com/blob/menu/en/resources/applications.md),
-adicione um link para o seu aplicativo, então envie um pull request (necessário login no GitHub). Siga o modelo das listas acima.
+[Edite o arquvio Markdown](https://github.com/strongloop/expressjs.com/blob/menu/en/resources/applications.md), adicione um link para o seu aplicativo, então envie um pull request (necessário login no GitHub). Siga o modelo das listas acima.
