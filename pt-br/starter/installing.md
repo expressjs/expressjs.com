@@ -43,6 +43,6 @@ $ npm install express
 </code></pre>
 
 <div class="doc-box doc-info" markdown="1">
-Módulos do Node isntalador com a opção `--save` serão adicionados a lista de `dependências` no arquivo `package.json`.
+Módulos do Node instalados com a opção `--save` serão adicionados a lista de `dependências` no arquivo `package.json`.
 Então utilizando `npm install` no diretório da aplicação irá instalar automaticamente os módulos do lista de dependência.
 </div>
