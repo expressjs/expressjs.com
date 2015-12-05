@@ -39,6 +39,7 @@ Exemplos de módulos middleware para Express:
   - [static-expiry](https://github.com/paulwalker/connect-static-expiry): Urls com impressão digital/cabeçalhos de cache para arquivos estáticos incluído suporte à domínios externos.
   - [vhost](https://github.com/expressjs/vhost): antigo `express.vhost`
   - [view-helpers](https://github.com/madhums/node-view-helpers): Um middleware Express que fornece métodos comuns para os templates.
+  - [sriracha-admin](https://github.com/hdngr/siracha?_ga=1.21381939.980875034.1449337929): Middleware Express módulo que gera dinamicamente um site admin para Mongoose.
 
 Alguns dos middlewares que faziam parte do Connect não são mais suportados pela equipe Connect/Express
 e foram substituídos por um módulo alternativo. Use uma dessas opções:
