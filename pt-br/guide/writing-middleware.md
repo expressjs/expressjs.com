@@ -134,4 +134,4 @@ Quando você faz um pedido para a raiz do aplicativo, o aplicativo agora exibe a
 
 Porque você tem acesso para o objeto do pedido, o objeto de resposta, a seguinte função de middleware na pilha e toda a API do Node.js, com funções de middleware suas possibilidades são infinitas.
 
-Para obter mais informações sobre middleware com Express, consulte: [Usando middleware com Express](/{{ page.lang }}/guide/using-middleware.html).
+Para obter mais informações sobre middleware com Express, consulte: [Usando middleware](/{{ page.lang }}/guide/using-middleware.html).
