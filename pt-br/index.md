@@ -7,7 +7,7 @@ lang: pt-br
 
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
-    <div id="overlay"></div
+    <div id="overlay"></div>
     
     <section id="description">
         <a href="/" class="express">Express</a>
