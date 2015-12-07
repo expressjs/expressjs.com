@@ -25,7 +25,7 @@ Exemplos de módulos middleware para Express:
   - [express-partial-response](https://github.com/nemtsov/express-partial-response): Middleware Express para filtrar partes das respostas em JSON usando o parâmetro de url `fields`; Usando o *Google API's Partial Response*.
   - [express-session](https://github.com/expressjs/session): antigo `express.session`
   - [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn): Use facilmente um CDN para os seus arquivos estáticos com suporte a multiplos servidores (ex. cdn1.host.com, cdn2.host.com).
-  - [express-slash](https://github.com/ericf/express-slash): Middleware Expresse para pessoas que são rigorosos quanto a barras no fim da URL.
+  - [express-slash](https://github.com/ericf/express-slash): Middleware Expresse para pessoas que são rigorosas quanto a barras no fim da URL.
   - [express-stormpath](https://github.com/stormpath/stormpath-express): Middleware Express para armazenar dados de usuários, autenticação, autorização, SSO, e segurança dos dados.
   - [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize): Redireciona requisições HTTP contendo letras maiúsculas para uma versão da url com letras minúsculas.
   - [join-io](https://github.com/coderaiser/join-io "join-io"): agrupa arquivos para reduzir a quantidade de requisições
@@ -36,12 +36,13 @@ Exemplos de módulos middleware para Express:
   - [serve-favicon](https://github.com/expressjs/serve-favicon): antigo `express.favicon`
   - [serve-index](https://github.com/expressjs/serve-index): antigo `express.directory`
   - [serve-static](https://github.com/expressjs/serve-static): para servir conteúdo estático
-  - [static-expiry](https://github.com/paulwalker/connect-static-expiry): Urls com impreção ditital/Cabeçalhos de cache para arquivos estáticos incluído suporte à domínios externos.
+  - [static-expiry](https://github.com/paulwalker/connect-static-expiry): Urls com impressão digital/cabeçalhos de cache para arquivos estáticos incluído suporte à domínios externos.
   - [vhost](https://github.com/expressjs/vhost): antigo `express.vhost`
   - [view-helpers](https://github.com/madhums/node-view-helpers): Um middleware Express que fornece métodos comuns para os templates.
+  - [sriracha-admin](https://github.com/hdngr/siracha?_ga=1.21381939.980875034.1449337929): Middleware Express módulo que gera dinamicamente um site admin para Mongoose.
 
 Alguns dos middlewares que faziam parte do Connect não são mais suportados pela equipe Connect/Express
-e foram substituídos por um módulo auternativo. Use uma dessas opções:
+e foram substituídos por um módulo alternativo. Use uma dessas opções:
 
   - express.cookieParser
     - [cookies](https://github.com/jed/cookies) e [keygrip](https://github.com/jed/keygrip)
@@ -58,5 +59,5 @@ e foram substituídos por um módulo auternativo. Use uma dessas opções:
     - [connect-static](https://github.com/andrewrk/connect-static)
 
 Para mais middlewares, veja também:
- - [http-framework](https://github.com/Raynos/http-framework/wiki/Modules)
- - [expressjs](https://github.com/expressjs)
+  - [http-framework](https://github.com/Raynos/http-framework/wiki/Modules)
+  - [expressjs](https://github.com/expressjs)

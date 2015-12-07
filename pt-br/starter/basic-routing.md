@@ -7,36 +7,55 @@ lang: pt-br
 
 # Tutorial básico de roteamento
 
-Este tutorial é uma introdução básica ao roteamento com Express. Roteamento determina como uma aplicação responde a uma requisição de um cliente a um <i>endpoint</i> específico, que é uma <i>URI</i> (ou caminho) e um método HTTP específico (GET, POST, etc...)
+_Roteamento_ determina como uma aplicação responde a uma requisição de um cliente a um <i>endpoint</i> específico, que é uma <i>URI</i> (ou caminho) e um método <i>HTTP</i> específico (<i>GET</i>, <i>POST</i>, etc...)
 
 Cada rota pode ter uma ou mais funções <i>handler</i>, que é(serão) executada(s) quando a rota coincidir.
 
-A definição de uma rota segue a seguinte estrutura `app.METHOD(PATH, HANDLER)`, onde `app` é uma instância do `express`, `METHOD` é um [método de requisição HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` é o caminho no servidor, e `HANDLER` é a função que será executada quando a rota coincidir.
+A definição de uma rota segue a seguinte estrutura:
+<pre><code class="language-javascript" translate="no">
+app.METHOD(PATH, HANDLER)
+</code></pre>
 
+Onde:
+
+- `app` é uma instância do `express`.
+- `METHOD` é um [método de requisição <i>HTTP</i>](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol).
+- `PATH` é o caminho no servidor.
+- `HANDLER` é a função que será executada quando a rota coincidir.
 
 <div class="doc-box doc-notice" markdown="1">
-Este tutorial assume que uma instância do `express` nomeada `app` é criada e o servidor está sendo executado. Se você não está familiarizado com a criação de uma aplicação e como executá-la, consulte o [exemplo de Hello world](/starter/hello-world.html).
+Este tutorial assume que uma instância do `express` nomeada `app` é criada e o servidor está sendo executado. Se você não está familiarizado com a criação de uma aplicação e como executá-la, consulte o [exemplo de Hello world](/{{ page.lang }}/starter/hello-world.html).
 </div>
 
 O seguinte código demonstra alguns exemplos de rotas em uma aplicação.
 
+Responde com "Hello World!" na página principal:
+
 <pre><code class="language-javascript" translate="no">
-// responde com "Hello World!" na página principal
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
+</code></pre>
 
-// aceita uma requisição POST na página principal
+Aceita uma requisição POST na página principal:
+
+<pre><code class="language-javascript" translate="no">
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
+</code></pre>
 
-// aceita uma requisição PUT no caminho /user
+Aceita uma requisição PUT no caminho `/user`:
+
+<pre><code class="language-javascript" translate="no">
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
+</code></pre>
 
-// aceita uma requisição DELETE no caminho /user
+Aceita uma requisição DELETE no caminho `/user`:
+
+<pre><code class="language-javascript" translate="no">
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });

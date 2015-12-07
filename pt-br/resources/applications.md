@@ -9,9 +9,7 @@ lang: pt-br
 
 ##MySpace
 
-Não precisa ser apresentado! Todo mundo conhece MySpace,
-No introduction required! Everyone knows MySpace,
-e o próximo https://new.myspace.com é Express.
+Não precisa ser apresentado! Todo mundo conhece MySpace, e o próximo https://new.myspace.com foi desenvolvido com Express.
 
 [![](/images/apps/screenshots/myspace.png)](https://new.myspace.com/)
 
@@ -29,7 +27,6 @@ Visite [LearnBoost](https://www.learnboost.com/)
 
 Cria histórias usando mídias sociais. Transforma o que as pessoas postam nas mídias sociais, em histórias interessantes. Coleciona as melhores fotos, vídeos, tweets e mais para publicar.
 
-
 [![](/images/apps/screenshots/storify.png)](http://storify.com/)
 
 Visite [Storify](http://storify.com/)
@@ -37,17 +34,14 @@ Visite [Storify](http://storify.com/)
 ##Geekli.st
 
 Um lugar para geeks compartilharem o que criaram e o que fizeram com isso, fazer contato com grandes empresas e comunidades.
-A place for geeks to share what they've done, who they did it with and
-connect with great companies and communities.
 
 [![](/images/apps/screenshots/geeklist.png)](http://geekli.st)
 
-Visie [Geekli.st](http://geekli.st)
+Visite [Geekli.st](http://geekli.st)
 
 ##Klout
 
 Klout é o Padrão de Influência. Junte-se ao Klout para descobrir seu grau de influência e comparar com outros que você conhece.
-
 
 [![](/images/apps/screenshots/klout.png)](http://klout.com)
 
@@ -65,18 +59,17 @@ Visite [Prismatic](http://getprismatic.com/)
 
 Em StudyNotes, estamos construindo uma ferramenta maravilhosa e simples para capacitar os alunos a acelerar sua aprendizagem, aprender com mais eficiência, em menor tempo e relembrar o que aprende por muito tempo.
 
-
 [![](/images/apps/screenshots/studynotes.png)](http://www.apstudynotes.org/)
 
 Visite [StudyNotes](http://www.apstudynotes.org/)
 
 ##Persona
-Persona, ou "BrowserID" é a resposta da Mozilla para um melhor sistema de identificação para o seu ´browser´ (navegador de Internet). É uma ferramenta muito promissora que definitivamente vale a pena conferir.
 
+Persona, ou "BrowserID" é a resposta da Mozilla para um melhor sistema de identificação para o seu ´browser´ (navegador de Internet). É uma ferramenta muito promissora que definitivamente vale a pena conferir.
 
 [![](/images/apps/screenshots/browserid.png)](https://login.persona.org/)
 
-Visits [Persona](https://login.persona.org/)
+Visite [Persona](https://login.persona.org/)
 
 ##Countly
 
@@ -96,22 +89,19 @@ Visite [Segment.io](http://segment.io/)
 
 ##Yummly
 
-Yummly is the world's largest and most powerful recipe search site.
-Bringing together recipes from all over the web - making your life easier.
-
-Yummly é o maior e mais poderoso site de busca de receitas do mundo.
-Reunindo receitas de toda a web e tornando sua vida mais fácil.
+Yummly é o maior e mais poderoso site de busca de receitas do mundo. Reunindo receitas de toda a web e tornando sua vida mais fácil.
 
 [![](/images/apps/screenshots/yummly.png)](http://yummly.com/)
 
-Visit [Yummly](http://yummly.com/)
+Visite [Yummly](http://yummly.com/)
 
 ##Koding
 
 Desenvolvimento de software em tempo real no browser com editor integrado, colaboradores, terminais e muito mais.
+
 [![](/images/apps/screenshots/koding.png)](http://koding.com/)
 
-Visits [Koding](http://koding.com/)
+Visite [Koding](http://koding.com/)
 
 ##Apiary.io
 
@@ -127,7 +117,7 @@ Cozy é o cloud pessoal que permite que você coloque seus aplicativos web e dad
 
 [![](/images/apps/screenshots/cozy.png)](http://cozy.io/)
 
-Visitw [Cozy](http://cozy.io/)
+Visite [Cozy](http://cozy.io/)
 
 ##FlyLatex
 
@@ -155,11 +145,11 @@ Visite [Ghost](https://ghost.org)
 
 ##LogHuman
 
-LogHuman is an application insights platform which enables developers to record information such as billing events, feature usage, or system hiccups, as well as flexible metadata to give these events context.
+LogHuman é uma plataforma de idéias de aplicativos que permite aos desenvolvedores registrar informações como eventos de faturamento, uso de recurso, ou hiccups do sistema, bem como metadados flexíveis para dar contexto destes eventos.
 
 [![](/images/apps/screenshots/loghuman.png)](https://loghuman.com)
 
-Visit [LogHuman](https://loghuman.com)
+Visite [LogHuman](https://loghuman.com)
 
 ##VogueVerve
 
@@ -179,5 +169,4 @@ Visite [Glip](https://glip.com)
 
 ##Adicione seu aplicativo em nosso site.
 
-[Edite o arquvio Markdown](https://github.com/strongloop/expressjs.com/blob/menu/en/resources/applications.md),
-adicione um link para o seu aplicativo, então envie um pull request (necessário login no GitHub). Siga o modelo das listas acima.
+[Edite o arquvio Markdown](https://github.com/strongloop/expressjs.com/blob/menu/en/resources/applications.md), adicione um link para o seu aplicativo, então envie um pull request (necessário login no GitHub). Siga o modelo das listas acima.

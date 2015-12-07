@@ -7,14 +7,25 @@ lang: pt-br
 
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
-    <div id="overlay"></div>
-    <section id="description"><a href="/" class="express">Express</a><span class="description">Framework web rápido, minimalista e de mente aberta para <a href='http://nodejs.org'>Node.js</a></span>
+    <div id="overlay"></div
+    
+    <section id="description">
+        <a href="/" class="express">Express</a>
+
+        <div id="conference">
+            <a href="http://events.linuxfoundation.org/events/node-interactive">
+                <img src="/images/node_int15.png" />
+            </a>
+        </div>
+
+        <span class="description">Framework web rápido, minimalista e de mente aberta para <a href='http://nodejs.org'>Node.js</a></span>
     </section>
+    
     <div id="install-command">$ npm install express --save</div>
 </section>
 
 <section id="doc-langs" markdown="1">
-  Documentação do Express disponível em outros idiomas: [Spanish](/es), [Japanese](/ja), [Russian](/ru), [Chinese](/zh), [Korean](/ko), [Portuguese](/pt-br).
+  Documentação do Express disponível em outros idiomas: [Spanish](/es), [Japanese](/ja), [Russian](/ru), [Chinese](/zh), [Korean](/ko), [Portuguese](/pt-br), [Uzbek](/uz).
 </section>
 
 <section id="intro">

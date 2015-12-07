@@ -57,4 +57,4 @@ Parte de uma URL que identifica um recurso.  Por exemplo, em `http://foo.com/pro
 
 ### router
 
-Veja [http://expressjs.com/api#router](http://expressjs.com/api#router)
+Veja [router](http://expressjs.com/api#router) na referência da API.

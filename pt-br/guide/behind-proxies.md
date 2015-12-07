@@ -66,10 +66,12 @@ Implementação trust personalizada. Use somente se você sabe realmente o que e
 Configurar um `trust proxy` com valor não `false` resulta em duas mudanças importantes:
 
 <ul>
-  <li markdown="1">`X-Forwarded-Proto` pode ser definido pelo proxy reverso para informar ao aplicativo se é https ou simplesmente http. Esse valor é refletido por [req.protocol](/api.html#req.protocol).
+  <li markdown="1">O valor de [req.hostname](/{{ page.lang }}/api.html#req.hostname) é derivado do valor definido no cabeçalho `X-Forwarded-Host`, que pode ser definido pelo cliente ou pelo proxy.
   </li>
-  <li markdown="1">Os valores [req.ip](/api.html#req.ip) e [req.ips](/api.html#req.ips) serão preenchidos com lista de endereços de `X-Forwarded-For`.
+  <li markdown="1">`X-Forwarded-Proto` pode ser definido pelo proxy reverso para informar ao aplicativo se é https ou simplesmente http. Esse valor é refletido por [req.protocol](/{{ page.lang }}/api.html#req.protocol).
+  </li>
+  <li markdown="1">Os valores [req.ip](/{{ page.lang }}/api.html#req.ip) e [req.ips](/{{ page.lang }}/api.html#req.ips) serão preenchidos com lista de endereços de `X-Forwarded-For`.
   </li>
 </ul>
 
-A configuração de `trust proxy` é implementada usando o pacote [proxy-addr](https://www.npmjs.com/package/proxy-addr). Para mais informações, veja esta documentação.
+A configuração de `trust proxy` é implementada usando o pacote [proxy-addr](https://www.npmjs.com/package/proxy-addr). Para mais informações, consulte sua documentação.
