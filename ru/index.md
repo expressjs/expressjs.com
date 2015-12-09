@@ -8,7 +8,7 @@ lang: ru
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
-    <section id="description"><a href="/" class="express">Express</a><span class="description">Быстрый, гибкий, минималистичный веб-фреймворк для <a href='http://nodejs.org'>Node.js</a></span>
+    <section id="description"><a href="/" class="express">Express</a><span class="description">Быстрый, гибкий, минималистичный веб-фреймворк для <a href='https://nodejs.org/en/'>Node.js</a></span>
     </section>
     <div id="install-command">$ npm install express --save</div>
 </section>
@@ -31,7 +31,7 @@ lang: ru
         <div id="sponsorship">
             <a href="http://loopback.io/"><h3>LoopBack</h3> Разработка model-driven приложений на основе фреймворка Express.<br/>Узнайте больше на loopback.io.</a>
         </div>
-        
+
     </div>
 </section>
 

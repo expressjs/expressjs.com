@@ -8,7 +8,7 @@ lang: ko
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
-    <section id="description"><a href="/" class="express">Express</a><span class="description"><a href='http://nodejs.org'>Node.js</a>를 위한<br>빠르고 개방적인<br>조그만 웹 프레임워크</span>
+    <section id="description"><a href="/" class="express">Express</a><span class="description"><a href='https://nodejs.org/en/'>Node.js</a>를 위한<br>빠르고 개방적인<br>조그만 웹 프레임워크</span>
     </section>
     <div id="install-command">$ npm install express --save</div>
 </section>

@@ -12,7 +12,7 @@ lang: uz
     <section id="description">
         <a href="/" class="express">Express</a>
 
-        <span class="description"> <a href='http://nodejs.org'>Node.js</a> uchun tezkor, moslashuvchan, minimalistik web-freymvork.</span>
+        <span class="description"> <a href='https://nodejs.org/en/'>Node.js</a> uchun tezkor, moslashuvchan, minimalistik web-freymvork.</span>
     </section>
 
     <div id="install-command">$ npm install express --save</div>

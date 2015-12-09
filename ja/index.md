@@ -11,7 +11,7 @@ lang: ja
     <section id="description">
     <a href="/" class="express">Express</a>
     <span class="description">
-      <a href='http://nodejs.org'>Node.js</a>のための、高速で軽量なWebフレームワーク
+      <a href='https://nodejs.org/en/'>Node.js</a>のための、高速で軽量なWebフレームワーク
     </span>
     </section>
     <div id="install-command">$ npm install express --save</div>

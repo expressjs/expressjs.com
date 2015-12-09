@@ -18,7 +18,7 @@ lang: pt-br
             </a>
         </div>
 
-        <span class="description">Framework web rápido, minimalista e de mente aberta para <a href='http://nodejs.org'>Node.js</a></span>
+        <span class="description">Framework web rápido, minimalista e de mente aberta para <a href='https://nodejs.org/en/'>Node.js</a></span>
     </section>
 
     <div id="install-command">$ npm install express --save</div>

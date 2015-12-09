@@ -8,7 +8,7 @@ lang: zh
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
-    <section id="description"><a href="/" class="express">Express</a><span class="description">基于 <a href='http://nodejs.org'>Node.js</a> 平台的快速、灵活、简洁的 web 开发框架。</span>
+    <section id="description"><a href="/" class="express">Express</a><span class="description">基于 <a href='https://nodejs.org/en/'>Node.js</a> 平台的快速、灵活、简洁的 web 开发框架。</span>
     </section>
     <div id="install-command">$ npm install express --save</div>
 </section>
@@ -31,7 +31,7 @@ lang: zh
         <div id="sponsorship">
             <a href="http://loopback.io/"><h3>LoopBack</h3> 基于 Express 框架开发模型驱动的应用。<br/>请到 loopback.io 了解更多信息。</a>
         </div>
-        
+
     </div>
 </section>
 

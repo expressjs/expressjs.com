@@ -8,7 +8,7 @@ lang: es
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
-    <section id="description"><a href="/" class="express">Express</a><span class="description">Framework Web Rápido, De Mente Abierta, minimalista para <a href='http://nodejs.org'>Node.js</a></span>
+    <section id="description"><a href="/" class="express">Express</a><span class="description">Framework Web Rápido, De Mente Abierta, minimalista para <a href='https://nodejs.org/en/'>Node.js</a></span>
     </section>
     <div id="install-command">$ npm install express --save</div>
 </section>

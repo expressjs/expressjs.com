@@ -11,7 +11,7 @@ lang: uk
     <section id="description">
         <a href="/" class="express" title="Express">Express</a>
         <span class="description">
-            Швидкий, гнучкий, мінімалістичний веб-фреймворк для <a href='http://nodejs.org' title="Express веб-фреймворк для Node.js">Node.js</a>
+            Швидкий, гнучкий, мінімалістичний веб-фреймворк для <a href='https://nodejs.org/en/' title="Express веб-фреймворк для Node.js">Node.js</a>
         </span>
     </section>
     <div id="install-command">$ npm install express --save</div>

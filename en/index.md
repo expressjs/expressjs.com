@@ -23,7 +23,7 @@ redirect_from: "/"
             </a>
         </div>
 
-        <span class="description">Fast, unopinionated, minimalist web framework for <a href='http://nodejs.org'>Node.js</a></span>
+        <span class="description">Fast, unopinionated, minimalist web framework for <a href='https://nodejs.org/en/'>Node.js</a></span>
     </section>
 
     <div id="install-command">$ npm install express --save</div>
