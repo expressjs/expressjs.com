@@ -1,28 +1,29 @@
 <h2>Application</h2>
 
-The `app` object conventionally denotes the Express application.
-Create it by calling the top-level `express()` function exported by the Express module:
 
-~~~js
+
+
+`app`对象一般用来表示Express程序。通过调用Express模块导出的顶层的`express()`方法来创建它:
+```js
 var express = require('express');
 var app = express();
 
-app.get('/', function(req, res){
-  res.send('hello world');
+app.get('/', function(req, res) {
+    res.send('hello world!');
 });
 
 app.listen(3000);
-~~~
+```
+`app`对象具有以下的方法：
 
-The `app` object has methods for
+ -  路由HTTP请求；具体可以看[app.METHOD](#app.METHOD)和[app.param](#app.param)这两个例子。
+ -  配置中间件；具体请看[app.route](#app.route)。
+ -  渲染HTML视图；具体请看[app.render](#app.render)。
+ -  注册模板引擎；具体请看[app.engine](#app.engine)。
 
-* Routing HTTP requests; see for example, [app.METHOD](#app.METHOD) and [app.param](#app.param).
-* Configuring middleware; see [app.route](#app.route).
-* Rendering HTML views; see [app.render](#app.render).
-* Registering a template engine; see [app.engine](#app.engine).
+它还有一些属性设置，这些属性可以改变程序的行为。获得更多的信息，可以查阅[Application settings](#app.settings.table])。
 
-It also has settings (properties) that affect how the application behaves;
-for more information, see [Application settings](#app.settings.table).
+
 
 <h3 id='app.properties'>Properties</h3>
 
