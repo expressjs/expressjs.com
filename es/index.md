@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Express - Framework Web para Node.js 
+title: Express - Framework Web para Node.js
 menu: home
 lang: es
 ---
@@ -13,7 +13,7 @@ lang: es
     <div id="install-command">$ npm install express --save</div>
 </section>
 <section id="doc-langs" markdown="1">
-  Documentación de Express disponible en otros idiomas: [Inglés](/), [Japonés](/ja), [Ruso](/ru), [Chino](/zh).
+  Documentación de Express disponible en otros idiomas: [Inglés](/en/), [Japonés](/ja/), [Ruso](/ru/), [Chino](/zh/).
 </section>
 
 <section id="intro">

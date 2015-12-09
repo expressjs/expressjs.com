@@ -8,7 +8,7 @@ lang: pt-br
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
-    
+
     <section id="description">
         <a href="/" class="express">Express</a>
 
@@ -20,12 +20,12 @@ lang: pt-br
 
         <span class="description">Framework web rápido, minimalista e de mente aberta para <a href='http://nodejs.org'>Node.js</a></span>
     </section>
-    
+
     <div id="install-command">$ npm install express --save</div>
 </section>
 
 <section id="doc-langs" markdown="1">
-  Documentação do Express disponível em outros idiomas: [Spanish](/es), [Japanese](/ja), [Russian](/ru), [Chinese](/zh), [Korean](/ko), [Portuguese](/pt-br), [Uzbek](/uz).
+  Documentação do Express disponível em outros idiomas: [Spanish](/es/), [Japanese](/ja/), [Russian](/ru/), [Chinese](/zh/), [Korean](/ko/), [Portuguese](/pt-br/), [Uzbek](/uz/).
 </section>
 
 <section id="intro">

@@ -14,7 +14,7 @@ lang: ko
 </section>
 
 <section id="doc-langs" markdown="1">
-  Express 문서는 다른 언어로도 사용 가능합니다: [Spanish](/es), [Japanese](/ja), [Russian](/ru), [Chinese](/zh).
+  Express 문서는 다른 언어로도 사용 가능합니다: [Spanish](/es/), [Japanese](/ja/), [Russian](/ru/), [Chinese](/zh/).
 </section>
 
 <section id="intro">

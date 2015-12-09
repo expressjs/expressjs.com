@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: home
 title: Express - Node.js web application framework
 menu: home
@@ -30,7 +30,7 @@ redirect_from: "/"
 </section>
 
 <section id="doc-langs" markdown="1">
-  Express docs available in other languages: [Spanish](/es), [Japanese](/ja), [Russian](/ru), [Chinese](/zh), [Korean](/ko), [Portuguese](/pt-br), [Uzbek](/uz).
+  Express docs available in other languages: [Spanish](/es/), [Japanese](/ja/), [Russian](/ru/), [Chinese](/zh/), [Korean](/ko/), [Portuguese](/pt-br/), [Uzbek](/uz/).
 </section>
 
 <section id="intro">
