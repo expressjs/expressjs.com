@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express "Hello World" example
 menu: starter
@@ -50,5 +50,4 @@ Run the app with the following command:
 $ node app.js
 </code></pre>
 
-Then, load [http://localhost:3000/](http://localhost:3000/) in a browser to see the output.
-
+Then, load `http://localhost:3000/` in a browser to see the output.
