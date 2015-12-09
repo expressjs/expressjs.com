@@ -169,4 +169,4 @@ Visite [Glip](https://glip.com)
 
 ##Adicione seu aplicativo em nosso site.
 
-[Edite o arquvio Markdown](https://github.com/strongloop/expressjs.com/blob/menu/en/resources/applications.md), adicione um link para o seu aplicativo, então envie um pull request (necessário login no GitHub). Siga o modelo das listas acima.
+[Edite o arquvio Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/applications.md), adicione um link para o seu aplicativo, então envie um pull request (necessário login no GitHub). Siga o modelo das listas acima.
