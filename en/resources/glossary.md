@@ -60,4 +60,5 @@ Part of a URL that identifies a resource.  For example, in `http://foo.com/produ
 
 ### router
 
-See [router](en/4x/api.html#router) in the API reference.
+See [router](/{{ page.lang }}/api.html#router) in the API reference.
+
