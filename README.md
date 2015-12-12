@@ -32,7 +32,21 @@ If you have an app you'd like to showcase on the site, open a pull request for i
 
 Jekyll comes built-in with GitHub Pages. Since we are already using GitHub Pages to host the website, it makes sense to leverage the capabilities it provides. It's all about using the right tool, for the right job, under the right circumstances.
 
-## How do I help translate the docs to a certain language?
+## How do I help translate the docs to another language?
+
+**IMPORTANT:** We [recently announced](https://strongloop.com/strongblog/express-goes-global/) that we are getting professional translation of the Express documentation into the following languages:
+- German
+- French
+- Italian
+- Spanish
+- Brazilian Portuguese
+- Japanese
+- Simplified Chinese
+- Traditional Chinese
+- Russian
+- Korean
+
+Therefore we can no longer accept community translations for these languages.  However, we welcome contributions of translations into other languages, following the procedure below.
 
 Follow these steps:
 
