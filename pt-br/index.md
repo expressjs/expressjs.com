@@ -12,12 +12,6 @@ lang: pt-br
     <section id="description">
         <a href="/" class="express">Express</a>
 
-        <div id="conference">
-            <a href="http://events.linuxfoundation.org/events/node-interactive">
-                <img src="/images/node_int15.png" />
-            </a>
-        </div>
-
         <span class="description">Framework web rápido, minimalista e de mente aberta para <a href='http://nodejs.org'>Node.js</a></span>
     </section>
     
