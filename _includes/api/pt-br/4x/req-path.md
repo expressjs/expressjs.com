@@ -9,5 +9,5 @@ req.path
 ~~~
 
 <div class="doc-box doc-info" markdown="1">
-Quando chamado de um middleware, o ponto de montagem não é incluído no `req.path`. Veja [app.use()](/4x/api.html#app.use) para mais detalhes.
+Quando chamado de um middleware, o ponto de montagem não é incluído no `req.path`. Veja [app.use()](/{{ page.lang }}/4x/api.html#app.use) para mais detalhes.
 </div>

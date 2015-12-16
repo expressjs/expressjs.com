@@ -9,7 +9,7 @@ lang: pt-br
 
 Express é um framework de roteamento e mddleware com um mínimo de funcionalidades próprias. Um aplicativo Express é essencialmente uma série de chamadas a middlewares.
 
-_Middleware_ é uma função com acesso ao [objeto de requisição](/4x/api.html#req) (req), ao [objeto de resposta](/4x/api.html#res) (res), e ao próximo middleware no ciclo requisição-resposta do aplicativo. Normalmente middlewares são denominados por uma variável chamada next.
+_Middleware_ é uma função com acesso ao [objeto de requisição](/{{ page.lang }}/4x/api.html#req) (req), ao [objeto de resposta](/{{ page.lang }}/4x/api.html#res) (res), e ao próximo middleware no ciclo requisição-resposta do aplicativo. Normalmente middlewares são denominados por uma variável chamada next.
 
 Um middleware pode:
 
@@ -175,7 +175,7 @@ app.use(function(err, req, res, next) {
 });
 </code></pre>
 
-Para mais detalhes sobre middlewares error-handling, veja [Error handling](/guide/error-handling.html).
+Para mais detalhes sobre middlewares error-handling, veja [Error handling](/{{ page.lang }}/guide/error-handling.html).
 
 <h2 id='middleware.built-in'>Built-in middleware</h2>
 

@@ -2,7 +2,7 @@
 
 Contains the hostname from the `Host` HTTP header.
 
-When the [`trust proxy` setting](/4x/api.html#trust.proxy.options.table) trusts
+When the [`trust proxy` setting](/{{ page.lang }}/4x/api.html#trust.proxy.options.table) trusts
 the socket address, the value of the `X-Forwarded-Host` header field will be
 trusted and used if present.
 

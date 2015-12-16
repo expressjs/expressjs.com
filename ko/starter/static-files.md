@@ -38,7 +38,7 @@ app.use(express.static('files'));
 
 The files will be looked up in the order the static directories were set using the `express.static` middleware.
 
-If you want to create a "virtual" (since the path does not actually exist in the file system) path prefix for the files served by `express.static`, you can [specify a mount path](/4x/api.html#app.use) for the static directory, as shown below:
+If you want to create a "virtual" (since the path does not actually exist in the file system) path prefix for the files served by `express.static`, you can [specify a mount path](/{{ page.lang }}/4x/api.html#app.use) for the static directory, as shown below:
 
 <pre><code class="language-javascript" translate="no">
 app.use('/static', express.static('public'));

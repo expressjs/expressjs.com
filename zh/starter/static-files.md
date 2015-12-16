@@ -39,7 +39,7 @@ app.use(express.static('files'));
 
 这些文件将会按照在静态目录中使用`express.static`中间件设置的顺序依次被查找到。
 
-如果你想创建一个“虚拟”（这个路径在文件系统中并不存在）路径前缀，可以[指定安装路径](/4x/api.html#app.use)，如下所示：
+如果你想创建一个“虚拟”（这个路径在文件系统中并不存在）路径前缀，可以[指定安装路径](/{{ page.lang }}/4x/api.html#app.use)，如下所示：
 
 <pre><code class="language-javascript" translate="no">
 app.use('/static', express.static('public'));

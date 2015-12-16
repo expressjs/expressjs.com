@@ -30,4 +30,4 @@ Se você encontrar algo que pareça um bug, ou simplesmente quiser pedir um recu
 
 ##Parte de terceiros
 
-Nossa comunidade vibrante criou uma grande variedade de extensões, [middleware](/resources/middleware.html) e frameworks de alto nível. Veja em [wiki](https://github.com/strongloop/express/wiki).
+Nossa comunidade vibrante criou uma grande variedade de extensões, [middleware](/{{ page.lang }}/resources/middleware.html) e frameworks de alto nível. Veja em [wiki](https://github.com/strongloop/express/wiki).

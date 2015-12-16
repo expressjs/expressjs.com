@@ -61,4 +61,4 @@ app.delete('/user', function (req, res) {
 });
 </code></pre>
 
-Para maiores detalhes sobre roteamento, consulte o [guia de roteamento](/guide/routing.html).
+Para maiores detalhes sobre roteamento, consulte o [guia de roteamento](/{{ page.lang }}/guide/routing.html).

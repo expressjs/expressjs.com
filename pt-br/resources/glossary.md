@@ -11,7 +11,7 @@ lang: pt-br
 
 ### application (aplicação)
 
-Em geral, um ou mais programas destinados a realizar operações para uma finalidade específica. No contexto do Express, um programa que utiliza a API Express em execução na plataforma Node.js. Também pode se referir a um [objeto app ](/api.html#express).
+Em geral, um ou mais programas destinados a realizar operações para uma finalidade específica. No contexto do Express, um programa que utiliza a API Express em execução na plataforma Node.js. Também pode se referir a um [objeto app ](/{{ page.lang }}/api.html#express).
 
 ### API
 

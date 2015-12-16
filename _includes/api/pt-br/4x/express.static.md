@@ -17,4 +17,4 @@ O objeto opcional `options` pode conter as seguintes propriedades:
 | `redirect`    | Redireciona a rota "/" quando o caminho for um diretório. | Boolean | `true` |
 | `setHeaders`  | Função para definir cabeçalhos HTTP a ser servido com o conteúdo estático. | Function |  |
 
-Para mais detalhes de utilização do middleware, consulte: [Servindo arquivos estáticos pelo Express](/starter/static-files.html).
+Para mais detalhes de utilização do middleware, consulte: [Servindo arquivos estáticos pelo Express](/{{ page.lang }}/starter/static-files.html).

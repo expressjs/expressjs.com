@@ -14,7 +14,7 @@ lang: zh
 定义的路由会使用如下结构`app.METHOD(PATH, HANDLER)`, `app`是`express`的实例，`METHOD`是[HTTP请求方法](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)，`PATH`是请求服务器时的路径，`HANDLER`是指当路由被匹配时所执行的函数。
 
 <div class="doc-box doc-notice" markdown="1">
-本教程假设`app`创建完成并已启动服务。如果你不熟悉如何创建`app`并启动它，请转到 [Hello world example](/starter/hello-world.html).
+本教程假设`app`创建完成并已启动服务。如果你不熟悉如何创建`app`并启动它，请转到 [Hello world example](/{{ page.lang }}/starter/hello-world.html).
 </div>
 
 以下代码是app中的一些路由示例。
@@ -41,4 +41,4 @@ app.delete('/user', function (req, res) {
 })
 </code></pre>
 
-更多详情 [路由使用指南](/guide/routing.html).
+更多详情 [路由使用指南](/{{ page.lang }}/guide/routing.html).

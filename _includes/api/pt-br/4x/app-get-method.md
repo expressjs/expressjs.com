@@ -1,7 +1,7 @@
 <h3 id='app.get.method'>app.get(path, callback [, callback ...])</h3>
 
 Rotas de requisições HTTP GET para o caminho especificado com as funções de *callback* especificados.
-Para obter mais informações, consulte o [guia de roteamento](/guide/routing.html).
+Para obter mais informações, consulte o [guia de roteamento](/{{ page.lang }}/guide/routing.html).
 
 Você pode oferecer múltiplas funções de *callback* que se comportam exatamente como *middleware*,
 exceto esses *callbacks* podem chamar `next('route')` para ignorar o(s) *callback(s)* restante(s).

@@ -1,6 +1,6 @@
 <h3 id='req.ips'>req.ips</h3>
 
-Quando a configuração [`trust proxy`](/4x/api.html#trust.proxy.options.table) é `true`, essa propriedade contém um array
+Quando a configuração [`trust proxy`](/{{ page.lang }}/4x/api.html#trust.proxy.options.table) é `true`, essa propriedade contém um array
 de endereços IP especificados no cabeçalho "X-Forwarded-For" da requisição.
 Caso contrário ela contém um array vazio.
 

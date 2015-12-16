@@ -50,4 +50,4 @@ app.get('/', function (req, res) {
 
 On making a request to the home page, "index.jade" will be rendered as HTML.
 
-To better understand how template engines work in Express, read ["Developing template engines for Express"](/advanced/developing-template-engines.html).
+To better understand how template engines work in Express, read ["Developing template engines for Express"](/{{ page.lang }}/advanced/developing-template-engines.html).

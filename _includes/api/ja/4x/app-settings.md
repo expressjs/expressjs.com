@@ -148,7 +148,7 @@ If `name` is one of the application settings, it affects the behavior of the app
   <h5 id="trust.proxy.options.table">Options for `trust proxy` setting</h5>
 
   <p markdown="1">
-  Read [Express behind proxies](/guide/behind-proxies.html) for more
+  Read [Express behind proxies](/{{ page.lang }}/guide/behind-proxies.html) for more
   information.
   </p>
 

@@ -25,7 +25,7 @@ No windows, utilize o seguinte comando:
 > set DEBUG=express:* & node index.js
 </code></pre>
 
-Executando o comando acima na aplicação padrão gerada pelo [express generator](/starter/generator.html) mostrará a seguinte saída:
+Executando o comando acima na aplicação padrão gerada pelo [express generator](/{{ page.lang }}/starter/generator.html) mostrará a seguinte saída:
 
 <pre><code class="language-sh" translate="no">
 $ DEBUG=express:* node ./bin/www

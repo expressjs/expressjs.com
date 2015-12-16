@@ -17,8 +17,8 @@ they are easily spoofed.)
 Enabling this setting has several subtle effects. The first is
 that `X-Forwarded-Proto` may be set by the reverse proxy to
 tell the app whether it is https or simply http. This value is reflected
-by [req.protocol](/api.html#req.protocol).
+by [req.protocol](/{{ page.lang }}/api.html#req.protocol).
 
-The second change is that the [req.ip](/api.html#req.ip)
-and [req.ips](/api.html#req.ips) values will be populated with
+The second change is that the [req.ip](/{{ page.lang }}/api.html#req.ip)
+and [req.ips](/{{ page.lang }}/api.html#req.ips) values will be populated with
 `X-Forwarded-For`'s list of addresses.

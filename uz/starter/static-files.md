@@ -38,7 +38,7 @@ app.use(express.static('files'));
 
 Fayllar ketma-ketlik bo'yicha statik direktoriyadan joy olishda va `express.static` orqali o'rnatiladi.
 
-Agar siz "virtual" (huddi manzil lekin fayl sistemada mavjud emas) fayllardan oldin prefix qo'shimchalik yaratmoqchi bo'lsangiz, `express.static` ikkita argument jo'nating, qo'shimcha ma'lumotni esa [bu yerdan](/4x/api.html#app.use) olishingiz mumkin bo'ladi. Ishlatishga misol esa:
+Agar siz "virtual" (huddi manzil lekin fayl sistemada mavjud emas) fayllardan oldin prefix qo'shimchalik yaratmoqchi bo'lsangiz, `express.static` ikkita argument jo'nating, qo'shimcha ma'lumotni esa [bu yerdan](/{{ page.lang }}/4x/api.html#app.use) olishingiz mumkin bo'ladi. Ishlatishga misol esa:
 
 <pre><code class="language-javascript" translate="no">
 app.use('/static', express.static('public'));
