@@ -20,6 +20,9 @@ Development and production environments are usually set up differently and have 
 
 This article discusses some security best practices for Express applications deployed to production.
 
+**NOTE**: If you believe you have discovered a security vulnerability in Express, please see
+[Security Policies and Procedures](https://github.com/strongloop/express/blob/master/Security.md).
+
 ## Don't use deprecated or vulnerable versions of Express
 
 Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them!  If you haven't moved to version 4, follow the [migration guide](/{{ page.lang }}/guide/migrating-4.html).

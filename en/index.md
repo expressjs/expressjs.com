@@ -17,12 +17,6 @@ redirect_from: "/"
     <section id="description">
         <a href="/" class="express">Express</a>
 
-        <div id="conference">
-            <a href="http://events.linuxfoundation.org/events/node-interactive">
-                <img src="/images/node_int15.png" />
-            </a>
-        </div>
-
         <span class="description">Fast, unopinionated, minimalist web framework for <a href='https://nodejs.org/en/'>Node.js</a></span>
     </section>
 
