@@ -50,4 +50,4 @@ app.get('/', function (req, res) {
 
 Ao ser feita uma requisição GET para a home page  o arquivo "index.jade" será renderizado como HTML.
 
-Para entender melhor como templates engines trabalham no Express, leia ["Desenvolvendo templates engines para o Express"](/advanced/developing-template-engines.html).
+Para entender melhor como templates engines trabalham no Express, leia ["Desenvolvendo templates engines para o Express"](/{{ page.lang }}/advanced/developing-template-engines.html).
