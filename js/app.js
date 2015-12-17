@@ -47,10 +47,17 @@ $(function(){
 
   var editLink;
 
-  if (pathName == '/') editLink = '<a href="' + branchPath + '">Fork the website on GitHub</a>.';
-  else editLink = '<a href="' + editPath + '">Edit this page on GitHub</a>.';
+  console.log("pagePath is " + pagePath);
 
-  $('#fork').html(editLink);
+// Edit/Fork link in footer
+  if (pagePath.startsWith('/en')) {
+    if (pathName == '/') 
+      editLink = '<a href="' + branchPath + '">Fork the website on GitHub</a>.';
+    else 
+      editLink = '<a href="' + editPath + '">Edit this page on GitHub</a>.';
+
+    $('#fork').html(editLink);
+  }
 
   // code highlight
 
