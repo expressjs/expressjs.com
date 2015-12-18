@@ -1,8 +1,13 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
 title: Express books and blogs
 menu: resources
 lang: ru
+redirect_from: "/resources/books-blogs.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Books and blogs
@@ -18,13 +23,18 @@ Manning Publications, early 2015.
  - **[Express.js in Action](http://www.manning.com/hahn/)**,
 Manning Publications, early 2015.
  - **[Mastering Web Application Development with Express](https://www.packtpub.com/web-development/mastering-web-application-development-express-raw)**,
-Pack Publishing, September 2014.
+Packt Publishing, September 2014.
  - **[Web Development with Node and Express](http://shop.oreilly.com/product/0636920032977.do)**,
 O'Reilly Media, July 2014.
  - **[Node.js in Action](http://www.manning.com/cantelon/)**,
 Manning Publications, October 2013.
  - **[Express Web Application Development](https://www.packtpub.com/web-development/express-web-application-development)**,
-Pack Publishing, June 2013.
+Packt Publishing, June 2013.
+- **[express - Middleware für node.js](http://www.amazon.de/express-Middleware-node-js-J%C3%B6rg-Krause/dp/1517281342/ref=sr_1_1?ie=UTF8&qid=1442001556&sr=8-1&keywords=1517281342)**,
+texxtoor, September 2015. In deutscher Sprache / in German language
+- **[JADE - die Template Engine für node.js](http://www.amazon.de/JADE-Die-Template-Engine-node-js/dp/1517282098/ref=sr_1_1?ie=UTF8&qid=1442001592&sr=8-1&keywords=1517282098)**,
+texxtoor, September 2015. In deutscher Sprache / in German language
+- **[Node Web Development, 2nd edition](https://www.packtpub.com/web-development/node-web-development-second-edition)**, Packt Publishing, August 2013
 
 ###Add your book here!
 
@@ -39,4 +49,4 @@ Pack Publishing, June 2013.
 
 ###Add your blog here!
 
-[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.

@@ -1,56 +1,78 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Expressで静的ファイルを提供する
+title: Express での静的ファイルの提供
 menu: starter
 lang: ja
+redirect_from: "/starter/static-files.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Expressで静的ファイルを提供する
+# Express での静的ファイルの提供
 
-画像やCSS、JavaScriptといった静的ファイルを提供するには、Expressのビルトインミドルウェア`express.static`を用います。
+イメージ、CSS ファイル、JavaScript ファイルなどの静的ファイルを提供するには、Express に標準装備されている `express.static` ミドルウェア関数を使用します。
 
-静的アセットのディレクトリパスを`express.static`ミドルウェアに渡すと、ファイル提供を直接するようになります。
-たとえば、あなたの画像やCSS、JavaScriptのファイルが`public`という名前のディレクトリに入っているなら、以下のように記述します。
+静的資産を格納しているディレクトリーの名前を `express.static` ミドルウェア関数に渡して、ファイルの直接提供を開始します。例えば、`public` というディレクトリー内のイメージ、CSS ファイル、JavaScript ファイルを提供するには、次のコードを使用します。
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.use(express.static('public'));
-</code></pre>
+</code>
+</pre>
 
-そうすると、`public`ディレクトリ以下のファイルをロードできるようになります。
+これで、`public` ディレクトリーに入っているファイルをロードできます。
 
-<pre class="plain-text"><code class="plain-text" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 http://localhost:3000/images/kitten.jpg
 http://localhost:3000/css/style.css
 http://localhost:3000/js/app.js
 http://localhost:3000/images/bg.png
 http://localhost:3000/hello.html
-</code></pre>
+</code>
+</pre>
 
 <div class="doc-box doc-info">
-ファイルは、静的ディレクトリから相対的に検索されます。そのため、ディレクトリの名前はURLの一部には含まれません。
+Express は、静的ディレクトリーから相対的なファイルを検索するため、静的ディレクトリーの名前は URL の一部ではありません。
 </div>
 
-もし、複数のディレクトリを静的アセットとして使いたいなら、`express.static`ミドルウェアを複数回呼ぶことができます。
+複数の静的資産ディレクトリーを使用するには、`express.static` ミドルウェア関数を複数回呼び出します。
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.use(express.static('public'));
 app.use(express.static('files'));
-</code></pre>
+</code>
+</pre>
 
-ファイルは`express.static`ミドルウェアにセットされた順序で静的ディレクトリから検索されます。
+Express は、`express.static` ミドルウェア関数に静的ディレクトリーが設定された順序でファイルを検索します。
 
-もし、`express.static`を使って仮想的なパスを作りたいなら、以下のように静的ディレクトリの[マウントパスを指定](/{{ page.lang }}/4x/api.html#app.use)することができます。
+`express.static` 関数によって提供されるファイルの仮想パスのプレフィックス (パスは実際にはファイル・システムに存在しません) を作成するには、次に示すように、静的ディレクトリーの[マウント・パスを指定](/{{ page.lang }}/4x/api.html#app.use)します。
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.use('/static', express.static('public'));
-</code></pre>
+</code>
+</pre>
 
-そうすると、"/static"パスから`public`ディレクトリ以下のファイルをロードできるようになります。
+これで、`public` ディレクトリー内のファイルを `/static` パス・プレフィックスからロードできます。
 
-<pre class="plain-text"><code class="plain-text" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 http://localhost:3000/static/images/kitten.jpg
 http://localhost:3000/static/css/style.css
 http://localhost:3000/static/js/app.js
 http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
-</code></pre>
+</code>
+</pre>
+
+ただし、`express.static` 関数に指定するパスは、`node` プロセスを起動するディレクトリーに対して相対的です。別のディレクトリーから Express アプリケーションを実行する場合は、提供するディレクトリーの絶対パスを使用する方が安全です。
+
+<pre>
+<code class="language-javascript" translate="no">
+app.use('/static', express.static(__dirname + '/public'));
+</code>
+</pre>

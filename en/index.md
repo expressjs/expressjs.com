@@ -24,7 +24,9 @@ redirect_from: "/"
 </section>
 
 <section id="doc-langs" markdown="1">
-  Express docs available in other languages: [Spanish](/es/), [Japanese](/ja/), [Russian](/ru/), [Chinese](/zh/), [Korean](/ko/), [Portuguese](/pt-br/), [Uzbek](/uz/).
+Express docs available in other languages: [French](/fr/), [German](/de/), [Spanish](/es/), [Italian](/it/), [Japanese](/ja/), [Russian](/ru/), [Chinese](/zh-cn/), [Tradtional Chinese](/zh-tw/), [Korean](/ko/), [Portuguese](/pt-br/).
+
+Community translation available for: [Ukrainian](/uk) and [Uzbek](/uz/).
 </section>
 
 <section id="intro">

@@ -1,44 +1,49 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Express security updates
+title: Express 보안 업데이트
 menu: advanced
 lang: ko
+redirect_from: "/advanced/security-updates.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Security updates
+# 보안 업데이트
 
 <div class="doc-box doc-notice" markdown="1">
-Node.js vulnerabilities directly affect Express. Therefore [keep a watch on Node vulnerabilities](http://blog.nodejs.org/vulnerability/) and make sure you are using the latest stable version of Node.
+Node.js 취약성은 Express에 직접 영향을 미칩니다. 따라서 [Node.js 취약성을 항상 주시해야 하며](http://blog.nodejs.org/vulnerability/), 반드시 안정적인 최신 버전의 Node.js를 사용해야 합니다.
 </div>
 
-The list below enumerates the Express vulnerabilities that were fixed in the specified version update.
+아래의 목록에는 지정된 버전 업데이트에서 수정된 Express 취약성이 열거되어 있습니다.
 
 ## 4.x
 
   * 4.11.1
-    * Fixed root path disclosure vulnerability in express.static, res.sendfile, and res.sendFile
+    * `express.static`, `res.sendfile` 및 `res.sendFile`의 루트 경로 노출 취약성을 수정했습니다.
   * 4.10.7
-    * Fixed open redirect vulnerability in express.static (advisory (https://nodesecurity.io/advisories/serve-static-open-redirect), CVE-2015-1164 (http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164))
+    * `express.static`의 개방된 경로 재지정 취약성을 수정했습니다([보안 권고문](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 4.8.8
-    * Fixed directory traversal vulnerabilities in `express.static` ([advisory](http://nodesecurity.io/advisories/send-directory-traversal) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394))
+    * `express.static`의 디렉토리 조회 취약성을 수정했습니다([보안 권고문](http://nodesecurity.io/advisories/send-directory-traversal), [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
   * 4.8.4
-    * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually leak to `EMFILE` errors and server unresponsiveness.
+    * Node.js 0.10 이용 시, 특정한 상황에서 `fd` 누수가 발생할 수 있으며, 이는 `express.static` 및 `res.sendfile`에 영향을 미칩니다. 악성 요청은 `fd` 누수를 발생시킬 수 있으며, 결국 `EMFILE` 오류와 서버 무응답을 초래할 수 있습니다.
   * 4.8.0
-    * Sparse arrays with extremely high indexes in query string could cause the process to run out of memory and crash the server.
-    * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
+    * 조회 문자열에서 극단적으로 높은 인덱스를 갖는 스파스 배열은 프로세스가 메모리 부족을 발생시키고 서버에서 충돌이 발생하도록 하는 원인이 될 수 있습니다.
+    * 극단적인 수준으로 중첩된 조회 문자열 오브젝트는 프로세스가 서버를 차단하고 일시적으로 서버를 무응답 상태로 만드는 원인이 될 수 있습니다.
 
 ## 3.x
 
   * 3.19.1
-    * Fixed root path disclosure vulnerability in express.static, res.sendfile, and res.sendFile
+    * `express.static`, `res.sendfile` 및 `res.sendFile`의 루트 경로 노출 취약성을 수정했습니다.
   * 3.19.0
-    * Fixed open redirect vulnerability in express.static (advisory (https://nodesecurity.io/advisories/serve-static-open-redirect), CVE-2015-1164 (http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164))
+    * `express.static`의 개방된 경로 재지정 취약성을 수정했습니다([보안 권고문](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 3.16.10
-    * Fixed directory traversal vulnerabilities in `express.static`.
+    * `express.static`의 디렉토리 조회 취약성을 수정했습니다.
   * 3.16.6
-    * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually leak to `EMFILE` errors and server unresponsiveness.
+    * Node.js 0.10 이용 시, 특정한 상황에서 `fd` 누수가 발생할 수 있으며, 이는 `express.static` 및 `res.sendfile`에 영향을 미칩니다. 악성 요청은 `fd` 누수를 발생시킬 수 있으며, 결국 `EMFILE` 오류와 서버 무응답을 초래할 수 있습니다.
   * 3.16.0
-    * Sparse arrays with extremely high indexes in query string could cause the process to run out of memory and crash the server.
-    * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
+    * 조회 문자열에서 극단적으로 높은 인덱스를 갖는 스파스 배열은 프로세스가 메모리 부족을 발생시키고 서버에서 충돌이 발생하도록 하는 원인이 될 수 있습니다.
+    * 극단적인 수준으로 중첩된 조회 문자열 오브젝트는 프로세스가 서버를 차단하고 일시적으로 서버를 무응답 상태로 만드는 원인이 될 수 있습니다.
   * 3.3.0
-    * The 404 response of an unsupported method override attempt was susceptible to cross-site scripting attacks.
+    * 지원되지 않는 메소드 대체 시도의 404 응답은 XSS(Cross-site scripting) 공격을 받기 쉬웠습니다.

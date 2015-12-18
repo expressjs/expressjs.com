@@ -1,15 +1,16 @@
 ---
 layout: 3x-api
-title: Express 3.x - API Reference
+title: Express 3.x - API 참조
 menu: api
 lang: ko
+redirect_from: "/3x/api.html"
 ---
 <div id="api-doc" markdown="1">
 
   <div class="doc-box doc-warn" markdown="1">
-  **Express 3.x 지원은 곧 끝납니다**
+  **Express 3.x은 더 이상 유지보수되지 않습니다.**
 
-   이 시리즈는 2015년 7월까지만 보안 업데이트와 버그 픽스를 받습니다. Express 4.x로 업그레이드하는 것을 강력이 권장합니다.
+  3.x의 알려진 또는 알려지지 않은 보안 및 성능 문제는 마지막 업데이트(2015년 8월 1일) 이후로 처리되지 않고 있습니다. 최신 버전의 Express를 사용할 것을 강력히 권장합니다.
   </div>
 
   <h1>3.x API</h1>

@@ -1,53 +1,66 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Using template engines with Express
+title: Utilización de motores de plantilla con Express
 menu: guide
 lang: es
+redirect_from: "/guide/using-template-engines.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Using template engines with Express
+# Utilización de motores de plantilla con Express
 
-Before Express can render template files, the following application settings have to be set.
+Para que Express pueda representar archivos de plantilla, deben establecerse los siguientes valores de aplicación:
 
-* `views`, the directory where the template files are located. Eg: `app.set('views', './views')`
-* `view engine`, the template engine to use. Eg: `app.set('view engine', 'jade')`
+* `views`, el directorio donde se encuentran los archivos de plantilla. Ejemplo: `app.set('views', './views')`
+* `view engine`, el motor de plantilla que se utiliza. Ejemplo: `app.set('view engine', 'jade')`
 
-Then install the corresponding template engine npm package.
+A continuación, instale el paquete npm de motor de plantilla correspondiente:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install jade --save
-</code></pre>
+</code>
+</pre>
 
 <div class="doc-box doc-notice" markdown="1">
-Express-compliant template engines such as Jade, export a function named `__express(filePath, options, callback)`, which is called by `res.render()` to render the template code.
+Los motores de plantilla compatibles con Express como, por ejemplo, Jade exportan una función denominada `__express(filePath, options, callback)`, que es invocada por la función `res.render()` para representar el código de plantilla.
 
-Some template engines do not follow this convention, the [Consolidate.js](https://www.npmjs.org/package/consolidate) library was created to map all of node's popular template engines to follow this convention, thus allowing them to work seamlessly within Express.
+Algunos motores de plantilla no siguen esta convención. La biblioteca [Consolidate.js](https://www.npmjs.org/package/consolidate) sigue esta convención correlacionando todos los motores de plantilla de Node.js más conocidos, por lo que funciona de forma ininterrumpida en Express.
 </div>
 
-Once the view engine is set, you don't have to explicitly specify the engine or load the template engine module in your app, Express loads it internally as shown below, for the example above.
+Una vez establecida la propiedad view engine, no tiene que especificar el motor ni cargar el módulo de motor de plantilla en la aplicación; Express carga el módulo internamente, como se muestra a continuación (para el ejemplo anterior).
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.set('view engine', 'jade');
-</code></pre>
+</code>
+</pre>
 
-Create a Jade template files named "index.jade" in the views directory, with the following content.
+Cree un archivo de plantilla Jade denominado `index.jade` en el directorio `views`, con el siguiente contenido:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 html
   head
     title!= title
   body
     h1!= message
-</code></pre>
+</code>
+</pre>
 
-Then create a route to render the "index.jade" file. If the `view engine` property is not set, you will have to specify the extension of the view file, else you can omit it.
+A continuación, cree una ruta para representar el archivo `index.jade`. Si la propiedad `view engine` no se establece, debe especificar la extensión del archivo `view`. De lo contrario, puede omitirla.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
-})
-</code></pre>
+});
+</code>
+</pre>
 
-On making a request to the home page, "index.jade" will be rendered as HTML.
+Cuando realice una solicitud a la página de inicio, el archivo `index.jade` se representará como HTML.
 
-To better understand how template engines work in Express, read ["Developing template engines for Express"](/{{ page.lang }}/advanced/developing-template-engines.html).
+Para obtener más información sobre cómo funcionan los motores de plantilla en Express, consulte: ["Desarrollo de motores de plantilla para Express"](/{{ page.lang }}/advanced/developing-template-engines.html).

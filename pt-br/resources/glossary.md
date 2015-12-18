@@ -1,60 +1,94 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Glossário
+title: Glossário do Express
 menu: resources
 lang: pt-br
+redirect_from: "/resources/glossary.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Glossário
 
-<div class="doc-box doc-warn">Atualmente este é um rascunho</div>
+<div class="doc-box doc-warn">Este é atualmente um rascunho de trabalho</div>
 
-### application (aplicação)
+### aplicativo
 
-Em geral, um ou mais programas destinados a realizar operações para uma finalidade específica. No contexto do Express, um programa que utiliza a API Express em execução na plataforma Node.js. Também pode se referir a um [objeto app ](/api.html#express).
+Em geral, um ou mais programas que são designados a executar
+operações com um propósito específico.  No contexto do Express, um
+programa que usa a API do Express executando na plataforma.  Pode
+também se referir a um [objeto app](/{{ page.lang }}/api.html#express).
 
 ### API
 
-Application programming interfac ou Interface de Programação de Aplicativos. Soletrar como A-P-I.
+Interface de programação de aplicativos.  Especifique o significado da abreviação no seu primeiro uso.
 
 ### Express
 
-Um rápido e minimalista framework de mente aberta para aplicações Node.Js.  Em geral chamado simplesmente de "Express", a nomeclatura "Express.js" também é aceita. 
+Uma estrutura web rápida, flexível e minimalista para aplicativos Node.js.  Em
+geral, "Express" é preferido a "Express.js," apesar de que o último ser aceitável.
 
 ### libuv
 
-Biblioteca com suporte multi plataforma com foco em I/O assíncrono, primariamente desenvolvida para ser usada pelo Node.Js.
-
+Uma biblioteca de suporte multiplataforma que foca em E/S
+assíncrona, primeiramente desenvolvida para uso pelo Node.js.
 
 ### middleware
 
-Uma função invocada pela camada de roteamento do Express antes do manipulador (handler) final da requisição, situa-se entre a requisição e a rota final pretendida.
-A function invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.  Alguns pormenores em torno da terminologia relacionada a middleware:
+Uma função que é chamada pela camada de roteamento do Express
+antes do manipulador final da solicitação, e assim ficando no meio,
+entre uma solicitação bruta a rota final desejada.  Alguns poucos
+pontos de refinamento da terminologia envolvendo middleware:
 
-  * `var foo = require('middleware')` é chamado _requisitando_ or _utilizando_ um módulo Node.Js. Então a declaração `var mw = foo()`  tipicamente retorna um middleware.
-  * `app.use(mw)` é chamada _adicionando um middleware à pilha de processamento global_.
-  * `app.get('/foo', mw, function (req, res) { ... })` é chamada _adicionando o middware para a pilha de processamento_ de "GET /foo".
+  * `var foo = require('middleware')` é
+chamado *requerendo* ou *usando* um módulo
+do Node.js. Então a instrução `var mw = foo()`
+tipicamente retorna o middleware.
+  * `app.use(mw)` é chamado *incluindo
+o middleware na pilha global de processamento*.
+  * `app.get('/foo', mw, function (req, res) { ... })`
+é chamado *incluindo o  middleware para a pilha de
+processamento do "GET /foo" *.
 
 ### Node.js
 
-Plataforma de software para construir aplicações de rede escalonáveis. Node.Js utiliza o JavaScript como linguagem de script e alcança uma elevada taxa de transferência via I/O não bloqueante e um ciclo de eventos single-threaded. Veja [nodejs.org](http://nodejs.org/). **Nota**: Inicialmente, "Node.js," depois disso "Node".
+Uma plataforma de software que é usada para construir aplicativos de rede escaláveis. O Node.js usa o JavaScript como
+linguagem de script, e alcança rendimentos altos através de E/S não
+bloqueante e um loop de eventos de thread única.  Consulte [nodejs.org](http://nodejs.org/). **Nota
+de uso**: Inicialmente, "Node.js," posteriormente "Node".
 
 ### open-source, open source
 
-Quando utilizado como adjetivo com hífen; por exemplo "Este é um software open-source." Veja [Open-source software em Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Nota: Embora seja comum a não hifenização, estamos utilizando o padrão de escrita da língua inglesa para adjetivos compostos.
+Quando usado como adjetivo, colocar o hífen; por exemplo "Este
+é um software open-source". Consulte
+[Software
+Open-source na Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Nota: Apesar de ser comum não
+colocar o hífen neste termo, estamos usando as regras padrões do
+Inglês para colocar o hífen em adjetivos compostos.
 
-### request
+### resposta
 
-Uma requisição HTTP. Um cliente envia uma mensagem de requisição HTTP para um servidor, que retornará uma resposta (response). Para isso uma dos métodos de requisição HTTP podem ser utilizados [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), como  GET, POST, e outros.
+Uma resposta HTTP. Um servidor retorna uma mensagem de resposta
+HTTP para o cliente. A resposta contém informações do status de
+conclusão sobre a solicitação e pode também conter conteúdo da
+solicitação no corpo da mensagem.
 
-### response
+### rota
 
-Uma resposta HTTP. Um servidor retorna uma mensagem de resposta HTTP para o cliente. Essa resposta contém informações completas sobre o estado da requisição e pode também conter o conteúdo requisitado no corpo da mensagem.
+Parte de uma URL que identifica um recurso.  Por exemplo, em
+`http://foo.com/products/id`, "/products/id" é a
+rota.
 
-### route (rota)
+### roteador
 
-Parte de uma URL que identifica um recurso.  Por exemplo, em `http://foo.com/products/id`, "/products/id" é a rota.
+Consulte [roteador](/{{ page.lang }}/en/4x/api.html#router) na referência da API.
 
-### router
+### solicitação
 
-Veja [router](http://expressjs.com/api#router) na referência da API.
+Uma solicitação HTTP.  Um cliente envia uma mensagem HTTP para
+um servidor, que retorna uma resposta.  A solicitação deve usar um dos
+vários
+[métodos
+de solicitação](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) como GET, POST, e assim por diante.

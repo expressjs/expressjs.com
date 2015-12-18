@@ -1,49 +1,66 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Escrevendo um middleware
+title: Escrevendo middlewares para uso em aplicativos do Express
 menu: guide
 lang: pt-br
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Escrevendo um <i>middleware</i>
+# Escrevendo middlewares pra uso em aplicativos do Express
 
 <h2>Visão Geral</h2>
 
-Funções do _middleware_ são funções que têm acesso para [requisitar objeto](/4x/api.html#req) (`req`), [responder objeto](/4x/api.html#res) (`res`) e a próxima função de <i>middleware</i> no ciclo de solicitação-resposta do aplicativo. A próxima função de <i>middleware</i> é comumente denotada por uma variável chamada `next`.
+Funções de *Middleware* são funções que tem acesso
+ao [objeto de solicitação](/{{ page.lang }}/4x/api.html#req)
+(`req`), o [objeto de resposta](/{{ page.lang }}/4x/api.html#res)
+(`res`), e a próxima função de middleware no ciclo
+solicitação-resposta do aplicativo. A próxima função middleware é
+comumente denotada por uma variável chamada `next`.
 
-Funções de <i>middleware</i> podem executar as seguintes tarefas:
+Funções de middleware podem executar as seguintes tarefas:
 
 * Executar qualquer código.
-* Fazer mudanças no objeto de requisição e de resposta.
-* Fechar o ciclo requisição-resposta.
-* Chamar o próximo <i>middleware</i> na pilha.
+* Fazer mudanças nos objetos de solicitação e resposta.
+* Encerrar o ciclo de solicitação-resposta.
+* Chamar o próximo middleware na pilha.
 
-Se a função atual do middleware não termina o ciclo de requisição-resposta, ele deve chamar `next()` para passar o controle para a seguinte função de middleware. Caso contrário, a solicitação será deixada suspensa.
+Se a atual função de middleware não terminar o ciclo de
+solicitação-resposta, ela precisa chamar `next()`
+para passar o controle para a próxima função de middleware. Caso
+contrário, a solicitação ficará suspensa.
 
-A figura a seguir mostra os elementos de uma chamada de função de <i>middleware</i>:
+O exemplo a seguir mostra os elementos de uma chamada de função de middleware:
 
-<table style="padding: 0; border: 0; width: 960px; margin-bottom: 10px;">
-<tr><td style="margin: 0; padding: 0px; border: 0; width: 410px;">
-<img src="/images/express-mw.png" style="margin: 0px; padding: 0px; width: 410px; height: 308px;" />
-</td>
-<td style="margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;">
-<div class="callout" id="callout1">Método HTTP para o qual se aplica a função de <i>middleware</i>.</div>
+<pre>
+<code class="language-javascript" translate="no">
+var express = require('express');
+var app = express();
+app.get('/', function(req, res, next) {
+	next();
+})
+</code>
+</pre>
 
-<div class="callout" id="callout2">Caminho (rota) para o qual se aplica a função de <i>middleware</i>.</div>
+* <code>app.get</code>: O método HTTP para o qual a função de middleware é aplicada.
 
-<div class="callout" id="callout3">A função de <i>middleware</i>.</div>
+* <code>'/'</code>: Caminho (rota) para o qual a função de middleware é aplicada.
 
-<div class="callout" id="callout4">Argumento de retorno de chamada para a função de middleware, chamado "next" por convenção.</div>
+* <code>function</code>: A função de middleware.
 
-<div class="callout" id="callout5">HTTP <a href="/en/4x/api.html#res">solicita</a> o argumento para a função de middleware, chamado "res" por convenção.</div>
+* <code>req</code>: Argumento de <a href="../4x/api.html#req">solicitação</a> HTTP para a função de middleware, chamado de "req" por convenção.
 
-<div class="callout" id="callout6">HTTP <a href="/en/4x/api.html#req">requisita</a> o argumento para a função de middleware, chamado "req" por convenção.</div>
-</td></tr>
-</table>
+* <code>res</code>: Argumento de <a href="../4x/api.html#res">resposta</a> HTTP para a função de middleware, chamado de "res" por convenção.
 
-Aqui está um exemplo de um aplicativo "Hello World" simples, usando Express, para o qual você irá definir duas funções de middleware:
+* <code>next</code>: Argumento de retorno de chamada para a função de middleware, chamado de "next" por convenção.
 
-<pre><code class="language-javascript" translate="no">
+Aqui está um exemplo de um simples aplicativo "Hello World" do
+Express, para o qual serão definidas duas funções de middleware:
+
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -52,28 +69,39 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code></pre>
+</code>
+</pre>
 
 <h2>Desenvolvimento</h2>
 
-Aqui está um exemplo simples de uma função de middleware chamada "myLogger". Esta função só imprime "LOGGED" quando uma solicitação para o aplicativo passa através dele. A função de middleware é atribuída a uma variável chamada `myLogger`.
+Aqui está um exemplo simples de uma função de middleware chamada "myLogger". Esta
+função apenas imprime "LOGGED" quando uma solicitação para o aplicativo passa por ela. A
+função de middleware é designada para uma variável chamada `myLogger`.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var myLogger = function (req, res, next) {
   console.log('LOGGED');
   next();
 };
-</code></pre>
+</code>
+</pre>
 
 <div class="doc-box doc-notice" markdown="1">
-Observe a chamada acima para `next()`. Chamando essa função invoca a próxima função de middleware no app.
-A função `next()` não é uma parte do Node.js ou da API Express, mas é o terceiro argumento que é passado para a função de middleware. A função `next()` pode ser chamada qualquer coisa, mas por convenção sempre chama-se "next". Para evitar confusão, recorra à presente convenção.
+Observe a chamada acima para `next()`.  A chamada
+desta função chama a próxima função de middleware no aplicativo.
+A função `next()` não faz parte do Node.js
+ou da API Express, mas é o terceiro argumento que é passado para a
+função de middleware. A função `next()` poderia ter
+qualquer nome, mas por convenção ela é sempre chamada de "next". Para
+evitar confusão, sempre use esta convenção.
 </div>
 
-Para carregar a função de middleware, chamada `app.use()`, especificando a função de middleware.
-Por exemplo, o código a seguir carrega a função de middleware `myLogger` antes da rota para o caminho de raiz (/).
+Para carregar a função de middleware, chame `app.use()`, especificando a função de middleware.
+Por exemplo, o código a seguir carrega a função de middleware do `myLogger` antes da rota para o caminho raiz (/).
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -89,28 +117,42 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code></pre>
+</code>
+</pre>
 
-Cada vez que o aplicativo recebe uma solicitação, ele imprime a mensagem "LOGGED", para o terminal.
+Sempre que o aplicativo recebe uma chamada, ele imprime a mensagem "LOGGED" no terminal.
 
 A ordem de carregamento do middleware é importante: funções de middleware que são carregadas primeiro também são executadas primeiro.
 
-Se `myLogger` fosse carregado após a rota para o caminho de raiz, nunca atingiria a solicitação e o app não imprimiria "LOGGED", porque o manipulador de rotas do caminho raiz termina o ciclo de requisição-resposta.
 
-A função de middleware `myLogger` simplesmente imprime uma mensagem, em seguida, passa a solicitação para a próxima função de middleware na pilha chamando a função 'next()'.
+Se `myLogger` é carregada após a rota para o
+caminho raiz, a chamada nunca chegará a ela e o aplicativo não
+imprimirá "LOGGED", pois o manipulador de rota do caminho raiz
+encerra o ciclo de solicitação-resposta.
 
-O exemplo seguinte adiciona uma propriedade chamada `requestTime` para o objeto do pedido. Nós vamos nomear esta função de middleware "requestTime".
+A função de middleware `myLogger` simplesmente imprime uma mensagem, e em seguida passa a solicitação para a próxima
+função de middleware na pilha chamando a função `next()`.
 
-<pre><code class="language-javascript" translate="no">
+O próximo exemplo inclui uma propriedade chamada
+`requestTime` ao objeto da solicitação. Iremos
+chamar esta função de middleware de "requestTime".
+
+<pre>
+<code class="language-javascript" translate="no">
 var requestTime = function (req, res, next) {
   req.requestTime = Date.now();
   next();
 };
-</code></pre>
+</code>
+</pre>
 
-O app agora usa a função de middleware `requestTime`. Além disso, a função de retorno de chamada da rota do caminho raiz usa a propriedade que adiciona a função de middleware `req` (o objeto requisitado).
+O aplicativo agora usa a função de middleware `requestTime`. Além
+disso, a função de retorno de chamada do caminho raiz usa a
+propriedade que a função de middleware inclui no
+`req` (o objeto da solicitação).
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -128,10 +170,17 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code></pre>
+</code>
+</pre>
 
-Quando você faz um pedido para a raiz do aplicativo, o aplicativo agora exibe a hora do seu pedido no navegador.
+Ao fazer uma solicitação para a raiz do aplicativo, o
+aplicativo agora exibe o registro de data e hora da sua solicitação
+no navegador.
 
-Porque você tem acesso para o objeto do pedido, o objeto de resposta, a seguinte função de middleware na pilha e toda a API do Node.js, com funções de middleware suas possibilidades são infinitas.
+Como você tem acesso ao objeto da solicitação, ao objeto de
+resposta, à próxima função de middleware na pilha, e à API completa do
+Node.js, as possibilidades com as funções de middleware são ilimitadas.
 
-Para obter mais informações sobre middleware com Express, consulte: [Usando middleware](/{{ page.lang }}/guide/using-middleware.html).
+Para obter mais informações sobre middlewares no Express,
+consulte: [Usando
+middlewares no Express](/{{ page.lang }}/guide/using-middleware.html).

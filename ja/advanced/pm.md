@@ -1,69 +1,78 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Process managers for Express apps
+title: Express アプリケーション用のプロセス・マネージャー
 menu: advanced
 lang: ja
+redirect_from: "/advanced/pm.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Process managers for Express apps
+# Express アプリケーション用のプロセス・マネージャー
 
-When running Express apps for production, it is helpful to use a _process manager_ to:
+Express アプリケーションを実動で実行する際、以下のタスクを実行するために*プロセス・マネージャー* を使用すると便利です。
 
-- Restart the app automatically if it crashes.
-- Gain insights into runtime performance and resource consumption.
-- Modify settings dynamically to improve performance.
-- Control clustering.
+- アプリケーションが異常終了した場合に自動的に再始動する。
+- ランタイム・パフォーマンスとリソース使用量に関するインサイトを得る。
+- パフォーマンスを向上させるために設定を動的に変更する。
+- クラスタリングを制御する。
 
-A process manager is somewhat like an application server: it's a "container" for applications that facilitates deployment,
-provides high availability, and enables you to manage the application at runtime.
+プロセス・マネージャーは、アプリケーション・サーバーに似ていて、デプロイメントを容易に行えるようにして、高可用性を実現し、アプリケーションを実行時に管理できるようにする、アプリケーションの「コンテナー」です。
 
-The most popular process managers for Express and other Node applications are:
+Express およびその他の Node.js アプリケーション用の最も一般的なプロセス・マネージャーは次のとおりです。
 
 - [StrongLoop Process Manager](#sl)
 - [PM2](#pm2)
 - [Forever](#forever)
 
 
-Using any of these three tools can be very helpful, however StrongLoop Process Manager is the only solution that provides a comprehensive runtime and deployment solution that address entire Node application life cycle with tooling for every step before and after production in an unified interface.
+上記の 3 つのツールのいずれを使用しても非常に役立ちますが、StrongLoop Process Manager は、Node.js アプリケーションのライフサイクル全体に対応した包括的な実行時とデプロイメントのソリューションを提供する唯一のツールであり、実動前と実動後のすべてのステップに関するツールを統合インターフェースで提供します。
 
-Here's a brief look at each of these tools.
-For a detailed comparison, see [http://strong-pm.io/compare/](http://strong-pm.io/compare/).
+以下に、これらの各ツールについて簡単に説明します。
+詳細な比較については、[http://strong-pm.io/compare/](http://strong-pm.io/compare/) を参照してください。
 
 ## <a id="sl">StrongLoop Process Manager</a>
 
-StrongLoop Process Manager (StrongLoop PM) is a production process manager for Node.js applications with built-in load balancing, monitoring, multi-host deployment, and a graphical console.
-It enables you to:
+StrongLoop Process Manager (StrongLoop PM) は、Node.js アプリケーション用の実動プロセス・マネージャーです。StrongLoop PM には、ロード・バランシング、モニター、マルチホスト・デプロイメント、およびグラフィカル・コンソールが組み込まれています。
+StrongLoop PM は、以下のタスクに使用できます。
 
-- Build, package, and deploy your Node application to a local or remote system.
-- View CPU profiles and heap snapshots to optimize performance and diagnose memory leaks.
-- Keep processes and clusters alive forever.
-- View performance metrics on your application.
-- Easily manage multi-host deployments with Nginx integration.
-- Unify multiple StrongLoop PMs to a distributed microservices runtime managed from Arc.
+- Node.js アプリケーションを作成してパッケージし、ローカル・システムまたはリモート・システムにデプロイする。
+- CPU プロファイルとヒープ・スナップショットを表示して、パフォーマンスを最適化し、メモリー・リークを診断する。
+- プロセスとクラスターの稼働を永続的に維持する。
+- アプリケーションのパフォーマンス・メトリックを表示する。
+- Nginx が統合されたマルチホスト・デプロイメントを容易に管理する。
+- 複数の StrongLoop PM を、Arc から管理される分散マイクロサービス・ランタイムに統合する。
 
-You can work with StrongLoop PM using a powerful CLI tool, `slc`, or a graphical tool, Arc.  It's open source, with professional support provided by StrongLoop.
+StrongLoop PM で作業するには、`slc` という強力なコマンド・ライン・インターフェース、または Arc というグラフィカル・ツールを使用します。Arc は、オープン・ソースであり、StrongLoop によって専門的なサポートが提供されます。
 
-For more information, see [http://strong-pm.io/](http://strong-pm.io/).
+詳細については、[http://strong-pm.io/](http://strong-pm.io/) を参照してください。
 
-Full documentation:
+詳細な説明:
 
-- [Operating Node apps (StrongLoop documentation)](http://docs.strongloop.com/display/SLC)
+- [Operating Node apps (StrongLoop 資料)](http://docs.strongloop.com/display/SLC)
 - [Using StrongLoop Process Manager](http://docs.strongloop.com/display/SLC/Using+Process+Manager).
 
-### Installation
-<pre><code class="language-sh" translate="no">
+### インストール
+<pre>
+<code class="language-sh" translate="no">
 $ [sudo] npm install -g strongloop
-</code></pre>
+</code>
+</pre>
 
-### Basic use
-<pre><code class="language-sh" translate="no">
+### 基本的な使用法
+<pre>
+<code class="language-sh" translate="no">
 $ cd my-app
 $ slc start
-</code></pre>
+</code>
+</pre>
 
-View status of Process Manager and all deployed apps:
+プロセス・マネージャーとすべてのデプロイ済みアプリケーションを表示するには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl
 Service ID: 1
 Service Name: my-app
@@ -79,57 +88,71 @@ Processes:
     1.1.57694  57694   2     0.0.0.0:3001
     1.1.57695  57695   3     0.0.0.0:3001
     1.1.57696  57696   4     0.0.0.0:3001
-</code></pre>
+</code>
+</pre>
 
-List all apps (services) under management:
+すべての管理対象アプリケーション (サービス) をリストするには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl ls
 Id          Name         Scale
  1          my-app       1
-</code></pre>
+</code>
+</pre>
 
-Stop an app:
+アプリケーションを停止するには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl stop my-app
-</code></pre>
+</code>
+</pre>
 
-Restart an app:
+アプリケーションを再始動するには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl restart my-app
-</code></pre>
+</code>
+</pre>
 
-You can also "soft restart," which gives worker processes a grace period to close existing connections, then restarts the current application:
+「ソフト再始動」も実行できます。こうすると、ワーカー・プロセスに既存の接続をクローズするための猶予期間を与えた後で、現行のアプリケーションが再始動されます。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl soft-restart my-app
-</code></pre>
+</code>
+</pre>
 
-To remove an app from management:
+アプリケーションを管理対象から削除するには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl remove my-app
-</code></pre>
+</code>
+</pre>
 
 ## <a id="pm2">PM2</a>
 
-PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and will facilitate common system admin tasks.  It also enables you to manage application logging, monitoring, and clustering.
+PM2 は、ロード・バランサーが組み込まれた、Node.js アプリケーション用の実動プロセス・マネージャーです。PM2 では、アプリケーションの稼働を永続的に維持して、ダウン時間を発生させずに再ロードすることができ、共通のシステム管理タスクを簡単に実行できます。PM2 では、アプリケーションのロギング、モニター、クラスタリングを管理することもできます。
 
-For more information, see [https://github.com/Unitech/pm2](https://github.com/Unitech/pm2).
+詳細については、[https://github.com/Unitech/pm2](https://github.com/Unitech/pm2) を参照してください。
 
-### Installation
+### インストール
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ [sudo] npm install pm2 -g
-</code></pre>
+</code>
+</pre>
 
-### Basic use
+### 基本的な使用法
 
-Starting an app with `pm2` requires the path of the app to be specified. However, stopping, restarting, and deleting requires just the name or the id of the app.
+`pm2` コマンドを使用してアプリケーションを開始する場合、アプリケーションのパスを指定する必要があります。ただし、アプリケーションの停止、再始動、または削除を行う場合は、アプリケーションの名前または ID を指定するだけですみます。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 start app.js
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
@@ -137,102 +160,129 @@ $ pm2 start app.js
 ├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────────────┼──────────┤
 │ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
- Use `pm2 show <id|name>` to get more details about an app
-</code></pre>
+ Use the `pm2 show <id|name>` command to get more details about an app.
+</code>
+</pre>
 
-Starting an app with `pm2` will immediately send it to the background. You can control the background app from the command line using various `pm2` commands.
+`pm2` コマンドを使用してアプリケーションを開始する場合、アプリケーションは即時にバックグラウンドに送信されます。さまざまな `pm2` コマンドを使用して、コマンド・ラインからバックグラウンド・アプリケーションを制御できます。
 
-Once an app is started with `pm2` it is registered in `pm2`'s list of processes with an ID, which makes it possible to manage apps with the same name from different directories on the system, using their IDs.
+`pm2` コマンドを使用してアプリケーションが開始された後、アプリケーションは、ID を使用して PM2 のプロセス・リストに登録されます。そのため、システム上の別のディレクトリーから、ID を使用して、同じ名前を持つアプリケーションを管理できます。
 
-Note that if more than one app with the same name is running, `pm2` commands affect all of them. So use IDs instead of names to manage individual apps.
+同じ名前を持つ複数のアプリケーションが実行されている場合、`pm2` コマンドがすべてのアプリケーションに影響を与えることに注意してください。そのため、個々のアプリケーションを管理するには、名前ではなく ID を使用してください。
 
-List all running processes:
+実行中のプロセスをすべてリストするには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 list
-</code></pre>
+</code>
+</pre>
 
-Stop an app:
+アプリケーションを停止するには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 stop 0
-</code></pre>
+</code>
+</pre>
 
-Restart an app:
+アプリケーションを再始動するには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 restart 0
-</code></pre>
+</code>
+</pre>
 
-To view detailed information about an app:
+アプリケーションに関する詳細情報を表示するには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 show 0
-</code></pre>
+</code>
+</pre>
 
-To remove an app from `pm2`'s registry:
+アプリケーションを PM2 のレジストリーから削除するには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 delete 0
-</code></pre>
+</code>
+</pre>
 
 
 ## <a id="forever">Forever</a>
 
-Forever is a simple CLI tool for ensuring that a given script runs continuously (forever). Its simple interface makes it ideal for running smaller deployments of Node apps and scripts.
+Forever は、特定のスクリプトが確実に継続的 (永続的) に実行されるようにするための単純なコマンド・ライン・インターフェース・ツールです。Forever のインターフェースは単純であるため、Node.js アプリケーションおよびスクリプトの小規模なデプロイメントを実行するのに理想的です。
 
-For more information, see [https://github.com/foreverjs/forever](https://github.com/foreverjs/forever).
+詳細については、[https://github.com/foreverjs/forever](https://github.com/foreverjs/forever) を参照してください。
 
-### Installation
+### インストール
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ [sudo] npm install forever -g
-</code></pre>
+</code>
+</pre>
 
-### Basic use
+### 基本的な使用法
 
-To start a script, use the `forever start` command and specify the path of the script:
+スクリプトを開始するには、次のように `forever start` コマンドを使用して、スクリプトのパスを指定します。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ forever start script.js
-</code></pre>
+</code>
+</pre>
 
-This will run the script in daemon mode (in the background).
+このコマンドは、スクリプトをデーモン・モード (バックグラウンド) で実行します。
 
-To run the script attached to the terminal, omit `start`:
+端末に接続されるようにスクリプトを実行するには、次のように `start` を省略します。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ forever script.js
-</code></pre>
+</code>
+</pre>
 
-It is a good idea to log output from forever and the script using the logging options `-l`, `-o`, `-e`, as shown this example:
+次の例に示すように、ロギング・オプション `-l`、`-o`、および `-e` を使用して Forever ツールおよびスクリプトの出力をログに記録することをお勧めします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ forever start -l forever.log -o out.log -e err.log script.js
-</code></pre>
+</code>
+</pre>
 
-To view the list of scripts started by forever:
+Forever によって開始されたスクリプトのリストを表示するには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ forever list
-</code></pre>
+</code>
+</pre>
 
-To stop a script started by forever use the `forever stop` command and specify the process index (as listed by the `forever list` command).
+Forever によって開始されたスクリプトを停止するには、`forever stop` コマンドを使用して、プロセス索引 (`forever list` コマンドによってリストされます) を指定します。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ forever stop 1
-</code></pre>
+</code>
+</pre>
 
-Alternatively, specify the path of the file:
+あるいは、次のようにファイルのパスを指定します。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ forever stop script.js
-</code></pre>
+</code>
+</pre>
 
-To stop all the scripts started by `forever`:
+Forever によって開始されたすべてのスクリプトを停止するには、次のようにします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ forever stopall
-</code></pre>
+</code>
+</pre>
 
-Forever has many more options, and it also provides a programmatic API.
+Forever には、さらに多くのオプションがあり、プログラマチック API もあります。

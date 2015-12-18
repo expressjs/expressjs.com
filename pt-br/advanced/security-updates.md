@@ -1,44 +1,67 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Atualizações seguras do Express
+title: Atualizações de segurança do Express
 menu: advanced
 lang: pt-br
+redirect_from: "/advanced/security-updates.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Atualizações seguras do Express
+# Atualizações de segurança
 
 <div class="doc-box doc-notice" markdown="1">
-Vulnerabilidades do Node.js afetam diretamente o Express. Portanto [dê uma olhada nas vulnerabilidades do Node.js] vulnerabilities](http://blog.nodejs.org/vulnerability/) e certifique-se de estar utilizando a última versão estável do Node.
+As vulnerabilidades do Node.js afetam diretamente o Express. Portanto
+[fique atento às
+vulnerabilidades do Node.js](http://blog.nodejs.org/vulnerability/) e certifique-se de que você está
+usando a versão estável mais recente do Node.js.
 </div>
 
-A lista abaixo mostra as vulnerabilidades do Express que estão corrigidas em uma específica versão de atualização.
+A lista abaixo enumera as vulnerabilidades do Express que foram
+corrigidas na versão da atualização especificadas.
 
 ## 4.x
 
   * 4.11.1
-    * Fixed root path disclosure vulnerability in express.static, res.sendfile, and res.sendFile
+    * Corrigida a vulnerabilidade de divulgação do caminho
+raiz no `express.static`, `res.sendfile`, e `res.sendFile`
   * 4.10.7
-    * Fixed open redirect vulnerability in express.static (advisory (https://nodesecurity.io/advisories/serve-static-open-redirect), CVE-2015-1164 (http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164))
+    * Corrigida a vulnerabilidade de redirecionamento aberto
+no `express.static` ([recomendação](https://nodesecurity.io/advisories/serve-static-open-redirect),
+[CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 4.8.8
-    * Fixed directory traversal vulnerabilities in `express.static` ([advisory](http://nodesecurity.io/advisories/send-directory-traversal) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394))
+    * Corrigida a vulnerabilidade de travessia de diretório no `express.static` ([recomendação](http://nodesecurity.io/advisories/send-directory-traversal), [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
   * 4.8.4
-    * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually leak to `EMFILE` errors and server unresponsiveness.
+    * O Node.js 0.10 pode vazar os `fd`s em certas situações que afetam o `express.static` e o
+`res.sendfile`. Solicitações maliciosas podem causar os `fd`s a vazar e eventualmente levar a erros
+de `EMFILE` e servidores sem capacidade de resposta.
   * 4.8.0
-    * Sparse arrays with extremely high indexes in query string could cause the process to run out of memory and crash the server.
-    * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
+    * Matrizes esparsas que possuem índices extremamente altos na sequência de consulta podem fazer com que o processo sofra um
+esgotamento de memória e derrubar o servidor.
+    * Objetos de sequência de consulta extremamente aninhados podem fazer com que o processo fique bloqueado e o servidor
+temporariamente não responsivo.
+
 
 ## 3.x
 
   * 3.19.1
-    * Fixed root path disclosure vulnerability in express.static, res.sendfile, and res.sendFile
+    * Corrigida a vulnerabilidade de divulgação do caminho raiz no `express.static`,
+`res.sendfile`, e `res.sendFile`
   * 3.19.0
-    * Fixed open redirect vulnerability in express.static (advisory (https://nodesecurity.io/advisories/serve-static-open-redirect), CVE-2015-1164 (http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164))
+    * Corrigida a vulnerabilidade de redirecionamento aberto no `express.static` ([recomendação](https://nodesecurity.io/advisories/serve-static-open-redirect),
+[CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 3.16.10
-    * Fixed directory traversal vulnerabilities in `express.static`.
+    * Corrigida a vulnerabilidade de travessia de diretório no `express.static`.
   * 3.16.6
-    * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually leak to `EMFILE` errors and server unresponsiveness.
+    * O Node.js 0.10 pode vazar os `fd`s em certas situações que afetam o `express.static` e o
+`res.sendfile`. Solicitações maliciosas podem causar os `fd`s a vazar e eventualmente levar a erros de
+`EMFILE` e servidores sem capacidade de resposta.
   * 3.16.0
-    * Sparse arrays with extremely high indexes in query string could cause the process to run out of memory and crash the server.
-    * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
+    * Matrizes esparsas que possuem índices extremamente altos na sequência de consulta podem fazer com que o processo sofra um
+esgotamento de memória e derrubar o servidor.
+    * Objetos de sequência de consulta extremamente aninhados podem fazer com que o processo fique bloqueado e o servidor
+temporariamente não responsivo.
   * 3.3.0
-    * The 404 response of an unsupported method override attempt was susceptible to cross-site scripting attacks.
+    * A resposta 404 de uma tentativa de substituição de um método não suportado era suscetível a ataques de cross-site scripting.

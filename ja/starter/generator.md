@@ -1,26 +1,34 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Express application generator
+title: Express のアプリケーション生成プログラム
 menu: starter
 lang: ja
+redirect_from: "/starter/generator.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Express application generator
+# Express のアプリケーション生成プログラム
 
-アプリケーション生成ツール`express`を使うことで、すぐにアプリケーションの骨組みを作ることができます。
+アプリケーション生成プログラム・ツールの `express` を使用すると、アプリケーション・スケルトンを素早く作成できます。
 
-下記のコマンドを使ってツールをインストールします。
+次のコマンドを使用して、`express` をインストールします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express-generator -g
-</code></pre>
+</code>
+</pre>
 
-`-h`オプションでコマンドのオプションを表示します。
+`-h` オプションを指定してコマンド・オプションを表示します。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ express -h
 
-  Usage: express [options] [dir]
+  Usage: express [options][dir]
 
   Options:
 
@@ -29,14 +37,16 @@ $ express -h
     -e, --ejs           add ejs engine support (defaults to jade)
         --hbs           add handlebars engine support
     -H, --hogan         add hogan.js engine support
-    -c, --css &lt;engine>  add stylesheet &lt;engine> support (less|stylus|compass|sass) (defaults to plain css)
+    -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code></pre>
+</code>
+</pre>
 
-例えば、下記は _myapp_ という名前のExpressアプリを現在のワーキングディレクトリに生成します。
+例えば、以下のコマンドでは、現行作業ディレクトリーに _myapp_ という Express アプリケーションを作成します。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ express myapp
 
    create : myapp
@@ -56,54 +66,62 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-</code></pre>
+</code>
+</pre>
 
-そうしたら、依存関係をインストールします。
+次に、依存関係をインストールします。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ cd myapp
 $ npm install
-</code></pre>
+</code>
+</pre>
 
-アプリを実行します。(MaxOS または Linux)
+MacOS または Linux では、次のコマンドによってアプリケーションを実行します。
 
-<pre><code class="language-sh" translate="no">
-$ DEBUG=myapp npm start
-</code></pre>
+<pre>
+<code class="language-sh" translate="no">
+$ DEBUG=myapp:* npm start
+</code>
+</pre>
 
-Windowsでは以下のコマンドを使います。
+Windows では、次のコマンドを使用します。
 
-<pre><code class="language-sh" translate="no">
-> set DEBUG=myapp & npm start
-</code></pre>
+<pre>
+<code class="language-sh" translate="no">
+> set DEBUG=myapp:* & npm start
+</code>
+</pre>
 
-ブラウザで`http://localhost:3000/`をロードして、アプリにアクセスします。
+次に、ブラウザーに `http://localhost:3000/` をロードして、アプリケーションにアクセスします。
 
-生成されたアプリのディレクトリ構造は以下のようになっています。
+生成されたアプリケーションには、以下のディレクトリー構造があります。
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 .
 ├── app.js
 ├── bin
-│   └── www
+│   └── www
 ├── package.json
 ├── public
-│   ├── images
-│   ├── javascripts
-│   └── stylesheets
-│       └── style.css
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+│       └── style.css
 ├── routes
-│   ├── index.js
-│   └── users.js
+│   ├── index.js
+│   └── users.js
 └── views
     ├── error.jade
     ├── index.jade
     └── layout.jade
 
 7 directories, 9 files
-</code></pre>
+</code>
+</pre>
 
 <div class="doc-box doc-info" markdown="1">
-ジェネレータで生成されたアプリの構造は、複数あるExpressアプリを構造化する手法の一つにすぎません。
-この構造を使わない、もしくはあなたのニーズに最も合うように変更するといったことを自由に行ってください。
+ここで生成プログラムによって作成されたアプリケーション構造は、Express アプリケーションを作成するための数多くの方法の 1 つにすぎません。この構造を自由に使用したり、ニーズに合わせて変更したりしてください。
 </div>

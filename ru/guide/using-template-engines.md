@@ -1,53 +1,66 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Using template engines with Express
+title: Использование шаблонизаторов в Express
 menu: guide
 lang: ru
+redirect_from: "/guide/using-template-engines.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Using template engines with Express
+# Использование шаблонизаторов в Express
 
-Before Express can render template files, the following application settings have to be set.
+Для того чтобы отображать в Express файлы шаблонов, необходимо задать следующие параметры приложения:
 
-* `views`, the directory where the template files are located. Eg: `app.set('views', './views')`
-* `view engine`, the template engine to use. Eg: `app.set('view engine', 'jade')`
+* `views`, каталог, в котором находятся файлы шаблонов. Например: `app.set('views', './views')`
+* `view engine`, используемый шаблонизатор. Например: `app.set('view engine', 'jade')`
 
-Then install the corresponding template engine npm package.
+Затем установите соответствующий пакет npm шаблонизатора:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install jade --save
-</code></pre>
+</code>
+</pre>
 
 <div class="doc-box doc-notice" markdown="1">
-Express-compliant template engines such as Jade, export a function named `__express(filePath, options, callback)`, which is called by `res.render()` to render the template code.
+Шаблонизаторы, совместимые с Express, например, Jade, экспортируют функцию `__express(filePath, options, callback)`, вызываемую с помощью функции `res.render()` для вывода кода шаблона.
 
-Some template engines do not follow this convention, the [Consolidate.js](https://www.npmjs.org/package/consolidate) library was created to map all of node's popular template engines to follow this convention, thus allowing them to work seamlessly within Express.
+Это правило действует не для всех шаблонизаторов. Библиотека [Consolidate.js](https://www.npmjs.org/package/consolidate) соблюдает его путем преобразования всех популярных шаблонизаторов Node.js, благодаря чему работает в Express без проблем.
 </div>
 
-Once the view engine is set, you don't have to explicitly specify the engine or load the template engine module in your app, Express loads it internally as shown below, for the example above.
+После указания механизма визуализации (view engine) не нужно указывать его или загружать модуль шаблонизатора в приложение; Express загружает модуль внутренними средствами, как показано далее (для примера, приведенного выше).
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.set('view engine', 'jade');
-</code></pre>
+</code>
+</pre>
 
-Create a Jade template files named "index.jade" in the views directory, with the following content.
+Создайте файл шаблона Jade с именем `index.jade` в каталоге `views` со следующим содержанием:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 html
   head
     title!= title
   body
     h1!= message
-</code></pre>
+</code>
+</pre>
 
-Then create a route to render the "index.jade" file. If the `view engine` property is not set, you will have to specify the extension of the view file, else you can omit it.
+Затем создайте маршрут для вывода файла `index.jade`. Если свойство `view engine` не задано, необходимо указать расширение файла `view`. В противном случае, можно не указывать расширение.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
-})
-</code></pre>
+});
+</code>
+</pre>
 
-On making a request to the home page, "index.jade" will be rendered as HTML.
+При выполнении запроса к домашней странице файл `index.jade` будет отображаться как HTML.
 
-To better understand how template engines work in Express, read ["Developing template engines for Express"](/{{ page.lang }}/advanced/developing-template-engines.html).
+Для получения дополнительной информации о работе шаблонизаторов в Express обратитесь к разделу ["Разработка шаблонизаторов для Express"](/{{ page.lang }}/advanced/developing-template-engines.html).

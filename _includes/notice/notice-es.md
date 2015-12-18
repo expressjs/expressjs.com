@@ -1,1 +1,1 @@
-Este documento podría estar obsoleto en relación con la documentación en Inglés. Para obtener las últimas actualizaciones, por favor consulte la <a href="/en/">documentación en Inglés</a>.
+Este documento puede estar desfasado respecto a la documentación en inglés. Para ver las últimas actualizaciones, consulte la <a href="/en/">documentación en inglés</a>.

@@ -1,12 +1,20 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Integração com banco de dados
+title: Integração de banco de dados do Express
 menu: guide
 lang: pt-br
+redirect_from: "/guide/database-integration.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Integração com bancos de dados Database
-Adicionar capacidade de conectividade com banco de dados para aplicações Express é apenas uma questão de carregar um driver Node.js apropriado para o banco de dados em seu aplicativo. Este documento explica resumidamente como adicionar e usar alguns dos módulos mais populares do Node para sistemas de banco de dados em seu aplicativo Express:
+# Integração de Banco de dados
+
+A inclusão da capacidade de se conectar à banco de dados em aplicativos do Express é apenas uma questão de se carregar um driver
+Node.js apropriado para o banco de dados no seu aplicativo. Este documento explica brevemente como incluir e utilizar alguns dos mais
+populares módulos do Node.js para sistemas de bancos de dados no seu aplicativo do Express:
 
 * [Cassandra](#cassandra)
 * [CouchDB](#couchdb)
@@ -20,8 +28,8 @@ Adicionar capacidade de conectividade com banco de dados para aplicações Expre
 * [ElasticSearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
-Estes adaptadores para banco de dados, estão entre os muitos que estão disponíveis.  Para outras opções,
- faça uma busca no site do [npm](https://www.npmjs.com/).
+Estes drivers de banco de dados estão entre os muitos que estão
+disponíveis. Para obter outras opções, procure no site [npm](https://www.npmjs.com/).
 </div>
 
 <a name="cassandra"></a>
@@ -31,13 +39,16 @@ Estes adaptadores para banco de dados, estão entre os muitos que estão dispon�
 **Módulo**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Instalação**
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install cassandra-driver
-</code></pre>
+</code>
+</pre>
 
 **Exemplo**
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var cassandra = require('cassandra-driver');
 var client = new cassandra.Client({ contactPoints: ['localhost']});
 
@@ -45,7 +56,8 @@ client.execute('select key from system.local', function(err, result) {
   if (err) throw err;
   console.log(result.rows[0]);
 });
-</code></pre>
+</code>
+</pre>
 
 <a name="couchdb"></a>
 
@@ -54,29 +66,33 @@ client.execute('select key from system.local', function(err, result) {
 **Módulo**: [nano](https://github.com/dscape/nano)
 **Instalação**
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install nano
-</code></pre>
+</code>
+</pre>
 
 **Exemplo**
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var nano = require('nano')('http://localhost:5984');
 nano.db.create('books');
 var books = nano.db.use('books');
 
-//Insere um documento book no banco de dados books
+//Insert a book document in the books database
 books.insert({name: 'The Art of war'}, null, function(err, body) {
   if (!err){
     console.log(body);
   }
 });
 
-//Obtêm a lista de todos os livros
+//Get a list of all books
 books.list(function(err, body){
   console.log(body.rows);
 }
-</code></pre>
+</code>
+</pre>
 
 <a name="leveldb"></a>
 
@@ -85,13 +101,16 @@ books.list(function(err, body){
 **Módulo**: [levelup](https://github.com/rvagg/node-levelup)
 **Instalação**
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install level levelup leveldown
-</code></pre>
+</code>
+</pre>
 
-**Examplo**
+**Exemplo**
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var levelup = require('levelup');
 var db = levelup('./mydb');
 
@@ -104,7 +123,8 @@ db.put('name', 'LevelUP', function (err) {
   });
 
 });
-</code></pre>
+</code>
+</pre>
 
 <a name="mysql"></a>
 
@@ -113,13 +133,16 @@ db.put('name', 'LevelUP', function (err) {
 **Módulo**: [mysql](https://github.com/felixge/node-mysql/)
 **Instalação**
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install mysql
-</code></pre>
+</code>
+</pre>
 
-**Examplo**
+**Exemplo**
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -135,30 +158,44 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 });
 
 connection.end();
-</code></pre>
+</code>
+</pre>
 
 <a name="mongo"></a>
 
 ## MongoDB
 
-**Módulo**: [mongoskin](https://github.com/kissjs/node-mongoskin)
+**Módulo**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Instalação**
 
-<pre><code class="language-sh" translate="no">
-$ npm install mongoskin
-</code></pre>
+<pre>
+<code class="language-sh" translate="no">
+$ npm install mongodb
+</code>
+</pre>
 
-**Examplo**
+**Exemplo**
 
-<pre><code class="language-javascript" translate="no">
-var db = require('mongoskin').db('localhost:27017/animals');
+<pre>
+<code class="language-javascript" translate="no">
+var MongoClient = require('mongodb').MongoClient;
 
-db.collection('mamals').find().toArray(function(err, result) {
-  if (err) throw err;
-  console.log(result);
+MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
+  if (err) {
+    throw err;
+  }
+  db.collection('mammals').find().toArray(function(err, result) {
+    if (err) {
+      throw err;
+    }
+    console.log(result);
+  });
 });
-</code></pre>
-Se você deseja um adaptador de modelo orientado a objetos, verifique [[Mongoose](https://github.com/LearnBoost/mongoose).
+</code>
+</pre>
+
+Se desejar um driver de modelo de objeto para o MongoDB,
+consulte em [Mongoose](https://github.com/LearnBoost/mongoose).
 
 <a name="neo4j"></a>
 
@@ -167,13 +204,16 @@ Se você deseja um adaptador de modelo orientado a objetos, verifique [[Mongoose
 **Módulo**: [apoc](https://github.com/hacksparrow/apoc)
 **Instalação**
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install apoc
-</code></pre>
+</code>
+</pre>
 
 **Exemplo**
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var apoc = require('apoc');
 
 apoc.query('match (n) return n').exec().then(
@@ -184,7 +224,8 @@ apoc.query('match (n) return n').exec().then(
     console.log(fail);
   }
 );
-</code></pre>
+</code>
+</pre>
 
 <a name="postgres"></a>
 
@@ -193,13 +234,16 @@ apoc.query('match (n) return n').exec().then(
 **Módulo**: [pg](https://github.com/brianc/node-postgres)
 **Instalação**
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install pg
-</code></pre>
+</code>
+</pre>
 
 **Exemplo**
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var pg = require('pg');
 var conString = "postgres://username:password@localhost/database";
 
@@ -217,7 +261,8 @@ pg.connect(conString, function(err, client, done) {
   });
 
 });
-</code></pre>
+</code>
+</pre>
 
 <a name="redis"></a>
 
@@ -226,13 +271,16 @@ pg.connect(conString, function(err, client, done) {
 **Módulo**: [redis](https://github.com/mranney/node_redis)
 **Instalação**
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install redis
-</code></pre>
+</code>
+</pre>
 
 **Exemplo**
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var client = require('redis').createClient();
 
 client.on('error', function (err) {
@@ -253,7 +301,8 @@ client.hkeys('hash key', function (err, replies) {
   client.quit();
 
 });
-</code></pre>
+</code>
+</pre>
 
 <a name="sqlite"></a>
 
@@ -262,13 +311,16 @@ client.hkeys('hash key', function (err, replies) {
 **Módulo**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Instalação**
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install sqlite3
-</code></pre>
+</code>
+</pre>
 
 **Exemplo**
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(':memory:');
 
@@ -289,7 +341,8 @@ db.serialize(function() {
 });
 
 db.close();
-</code></pre>
+</code>
+</pre>
 
 <a name="elasticsearch"></a>
 
@@ -298,13 +351,16 @@ db.close();
 **Módulo**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Instalação**
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install elasticsearch
-</code></pre>
+</code>
+</pre>
 
 **Exemplo**
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var elasticsearch = require('elasticsearch');
 var client = elasticsearch.Client({
   host: 'localhost:9200'
@@ -326,4 +382,5 @@ client.search({
 }, function(error) {
   console.trace(error.message);
 });
-</code></pre>
+</code>
+</pre>

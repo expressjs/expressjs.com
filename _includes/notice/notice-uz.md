@@ -1,1 +1,1 @@
-Ushbu dokumentatsiya eskirga bo'lishi mumkin. Eng oxirgi yangilanishlarni olish uchun, iltimos, qo'llanmani <a href="/en/">ingliz tilida</a> o'qing. Expressni o'zbek tiliga tarjima qilishga yordam bermoqchi bo'lsangiz, GitHubdagi <a href="https://github.com/strongloop/expressjs.com">ushbu repozitoriyaga</a> o'ting.
+This document might be outdated relative to the documentation in English. For the latest updates, please refer to the <a href="/en/">documentation in English</a>.

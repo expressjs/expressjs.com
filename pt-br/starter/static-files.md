@@ -1,61 +1,98 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Servindo arquivos estáticos no Express
+title: Entregando arquivos estáticos no Express
 menu: starter
 lang: pt-br
+redirect_from: "/starter/static-files.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Servindo arquivos estáticos no Express
+# Entregando arquivos estáticos no Express
 
-Para servir arquivos estáticos, como imagens, CSS, e JavaScript, é realizado com a ajuda de um <i>middleware</i> embutido no Express - `express.static`.
+Para entregar arquivos estáticos como imagens, arquivos CSS, e
+arquivos JavaScript, use a função de middleware `express.static`
+integrada no Express.
 
-Passe o nome do diretório, que será marcado como a localização dos arquivos estáticos, para que o <i>middleware</i> `express.static` comece a servir os arquivos diretamente. Por exemplo, se você deixa suas imagens, CSS e JavaScript em um diretório com o nome `public`, você pode fazer o seguinte:
+Passe o nome do diretório que contém os ativos estáticos para a
+função de middleware `express.static` para iniciar a
+entregar os arquivos diretamente. Por exemplo, use o código a seguir
+para entregar imagens, arquivos CSS, e arquivos JavaScript em um
+diretório chamado `public`:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.use(express.static('public'));
-</code></pre>
+</code>
+</pre>
 
-Agora, você é capaz de carregar os arquivos que estão sob o diretório `public`:
+Agora, é possível carregar os arquivos que estão no diretório `public`:
 
-<pre class="plain-text"><code class="plain-text" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 http://localhost:3000/images/kitten.jpg
 http://localhost:3000/css/style.css
 http://localhost:3000/js/app.js
 http://localhost:3000/images/bg.png
 http://localhost:3000/hello.html
-</code></pre>
+</code>
+</pre>
 
 <div class="doc-box doc-info">
-Os arquivos são procurados em relação ao diretório estático, portanto, o nome do diretório estático não faz parte da URL.
+O Express consulta os arquivos em relação ao diretório estático, para
+que o nome do diretório estático não faça parte da URL.
 </div>
 
-Se você deseja múltiplos diretórios como diretórios de arquivos estáticos, você pode chamar o <i>middleware</i> `express.static` múltiplas vezes:
+Para usar vários diretórios de ativos estáticos, chame a função
+de middleware `express.static` várias vezes:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.use(express.static('public'));
 app.use(express.static('files'));
-</code></pre>
+</code>
+</pre>
 
-Os arquivos serão procurados na ordem em que os diretórios estáticos foram configurados usando o <i>middleware</i> `express.static`.
+O Express consulta os arquivos na ordem em que você configurar
+os diretórios estáticos com a função de middleware
+`express.static`.
 
-Se você deseja criar um prefixo "virtual" (desde que o caminho não exista no <i>file system</i>) de caminho para os arquivos servidos pelo `express.static`, você pode [especificar um caminho de montagem](/4x/api.html#app.use) para o diretório estático, conforme apresentado abaixo:
+Para criar um prefixo de caminho virtual (onde o caminho não
+existe realmente no sistema de arquivos) para arquivos que são
+entregues pela função `express.static`,
+[especifique um caminho de montagem](/{{ page.lang }}/4x/api.html#app.use) para o
+diretório estático, como mostrado abaixo:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.use('/static', express.static('public'));
-</code></pre>
+</code>
+</pre>
 
-Agora, se você é capaz de carregar os arquivos que estão sob o diretório `public`, pelo prefixo de caminho "/static".
+Agora, é possível carregar os arquivos que estão no diretório
+`public` a partir do prefixo do caminho `/static`.
 
-<pre class="plain-text"><code class="plain-text" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 http://localhost:3000/static/images/kitten.jpg
 http://localhost:3000/static/css/style.css
 http://localhost:3000/static/js/app.js
 http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
-</code></pre>
+</code>
+</pre>
 
-No entanto, o caminho que você fornecer para a função `express.static` é relativo ao diretório de onde você iniciar seu processo do Node. Se você executar o aplicativo de outro diretório, é mais seguro usar o caminho absoluto do diretório que você deseja servir:
+Entretanto, o caminho fornecido para a função
+`express.static` é relativa ao diretório a partir do
+qual você inicia o seu `node` de processo. Se você
+executar o aplicativo express a partir de outro diretório, é mais
+seguro utilizar o caminho absoluto do diretório para o qual deseja
+entregar.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.use('/static', express.static(__dirname + '/public'));
-</code></pre>
+</code>
+</pre>

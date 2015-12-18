@@ -6,20 +6,40 @@
   </section>
   <div id="navbar">
       <ul id="navmenu">
-          <li><a href="/{{ page.lang }}" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Главная</a></li>
+          <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Начальная страница</a></li>
           <li>
               <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>С чего начать</a>
+                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Начало работы</a>
                       <ul>
-                          <li><a href="/{{ page.lang }}/starter/installing.html">Установка</a>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/installing.html">
+                              Установка
+                            </a>
                           </li>
-                          <li><a href="/{{ page.lang }}/starter/generator.html">Express генератор</a>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/hello-world.html">
+                              Hello world
+                            </a>
                           </li>
-                          <li><a href="/{{ page.lang }}/starter/hello-world.html">Hello world</a>
+                          <li>
+                          <a href="/{{ page.lang }}/starter/generator.html">
+                            Генератор приложений Express
+                          </a>
                           </li>
-                          <li><a href="/{{ page.lang }}/starter/basic-routing.html">Основы маршрутизации</a>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/basic-routing.html">
+                              Основы маршрутизации
+                            </a>
                           </li>
-                          <li><a href="/{{ page.lang }}/starter/faq.html">FAQ</a>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/static-files.html">
+                              Статические файлы
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/faq.html">
+                              FAQ
+                            </a>
                           </li>
                       </ul>
                   </li>
@@ -31,7 +51,9 @@
                       <ul>
                           <li><a href="/{{ page.lang }}/guide/routing.html">Маршрутизация</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Использование middleware</a>
+                          <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Написание кода промежуточных обработчиков</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Использование промежуточных обработчиков</a>
                           </li>
                           <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Использование шаблонизаторов</a>
                           </li>
@@ -41,7 +63,9 @@
                           </li>
                           <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express за прокси</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">Миграция до версии Express 4</a>
+                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">Переход к Express 4</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/migrating-5.html">Переход к Express 5</a>
                           </li>
                           <li><a href="/{{ page.lang }}/guide/database-integration.html">Интеграция с базами данных</a>
                           </li>
@@ -51,11 +75,13 @@
           </li>
           <li>
               <ul id="application-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Справочник API</a>
+                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Справочник по API</a>
                       <ul>
                           <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/3x/api.html">3.x</a>
+                          <li><a href="/{{ page.lang }}/3x/api.html">3.x (устарел)</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/2x/">2.x (устарел)</a>
                           </li>
                       </ul>
                   </li>
@@ -63,14 +89,19 @@
           </li>
           <li>
               <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Более сложные темы</a>
+                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Расширенные возможности</a>
                       <ul>
                           <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Шаблонизаторы</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/advanced/pm.html">Использование менеджеров процесса</a>
+                          <li><a href="/{{ page.lang }}/advanced/pm.html">Работа с диспетчерами процессов</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">Обновления безопасности</a>
+                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">Обновления системы безопасности</a>
                           </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">Лучшие практические методы в области защиты</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Лучшие практические методы улучшения производительности</a>
+                          </li>
+
                       </ul>
                   </li>
               </ul>
@@ -81,7 +112,7 @@
                       <ul>
                           <li><a href="/{{ page.lang }}/resources/glossary.html">Глоссарий</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
+                          <li><a href="/{{ page.lang }}/resources/middleware.html">Промежуточный обработчик</a>
                           </li>
                           <li><a href="/{{ page.lang }}/resources/community.html">Сообщество</a>
                           </li>
@@ -94,5 +125,5 @@
               </ul>
           </li>
       </ul>
-  </div><a href="https://strongloop.com/node-js/training/" title="Express и Node.js обучение от StrongLoop" id="strongloop-header">Express и Node.js обучение от StrongLoop</a>
+  </div><a href="http://strongloop.com/node-js/training/" title="Обучение по Node и Express от StrongLoop" id="strongloop-header">Обучение по Express и Node.js от StrongLoop</a>
 </header>
