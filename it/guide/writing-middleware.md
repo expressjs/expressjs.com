@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Compilazione del middleware per l'utilizzo nelle applicazioni Express
 menu: guide
@@ -26,6 +26,26 @@ Se la funzione middleware corrente non termina il ciclo richiesta-risposta, deve
 
 I seguenti esempi mostrano gli elementi di una chiamata alla funzione middleware:
 
+<table style="padding: 0; border: 0; width: 960px; margin-bottom: 10px;">
+<tr><td style="margin: 0; padding: 0px; border: 0; width: 410px;">
+<img src="/images/express-mw.png" style="margin: 0px; padding: 0px; width: 410px; height: 308px;" />
+</td>
+<td style="margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;">
+<div class="callout" id="callout1">Metodo HTTP per cui si applica la funzione middleware.</div>
+
+<div class="callout" id="callout2">Percorso (route) per cui si applica la funzione middleware.</div>
+
+<div class="callout" id="callout3">La funzione middleware.</div>
+
+<div class="callout" id="callout4">Argomento di callback nella funzione middleware, denominata per convenzione "next".</div>
+
+<div class="callout" id="callout5">Argomento <a href="../4x/api.html#res">risposta</a> HTTP nella funzione middleware, denominato "res" per convenzione.</div>
+
+<div class="callout" id="callout6">Argomento <a href="../4x/api.html#req">richiesta</a> HTTP nella funzione middleware, denominato "req" per convenzione.</div>
+</td></tr>
+</table>
+
+<!--
 <pre>
 <code class="language-javascript" translate="no">
 var express = require('express');
@@ -47,6 +67,7 @@ app.get('/', function(req, res, next) {
 * <code>res</code>: Argomento <a href="../4x/api.html#res">risposta</a> HTTP nella funzione middleware, denominato "res" per convenzione.
 
 * <code>next</code>: Argomento di callback nella funzione middleware, denominata per convenzione "next".
+-->
 
 Ecco un esempio di una semplice applicazione Express "Hello World", per cui si definiranno due funzioni middleware:
 

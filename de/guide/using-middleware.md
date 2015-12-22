@@ -187,7 +187,8 @@ app.use('/', router);
 <h2 id='middleware.error-handling'>Middleware für die Fehlerbehandlung</h2>
 
 <div class="doc-box doc-notice" markdown="1">
-Middleware für die Fehlerbehandlung benötigt immer *vier* Argumente. Sie müssen vier Argumente angeben, um die Erkennung als Middlewarefunktion für die Fehlerbehandlung zu ermöglichen. Selbst wenn das Objekt `next` nicht verwenden müssen, müssen Sie dies angeben, um die Signatur beizubehalten. Andernfalls wird das Objekt `next` als reguläre Middleware interpretiert, sodass keine Fehlerbehandlung möglich ist.  </div>
+Middleware für die Fehlerbehandlung benötigt immer *vier* Argumente. Sie müssen vier Argumente angeben, um die Erkennung als Middlewarefunktion für die Fehlerbehandlung zu ermöglichen. Selbst wenn das Objekt `next` nicht verwenden müssen, müssen Sie dies angeben, um die Signatur beizubehalten. Andernfalls wird das Objekt `next` als reguläre Middleware interpretiert, sodass keine Fehlerbehandlung möglich ist.  
+</div>
 
 Middlewarefunktionen für die Fehlerbehandlung werden in derselben Weise definiert wie andere Middlewarefunktionen, außer dass Fehlerbehandlungsfunktionen speziell bei Signaturen vier anstatt drei Argumente aufweisen `(err, req, res, next)`: 
 

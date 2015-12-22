@@ -73,8 +73,10 @@ Die Festlegung eines anderen `trust proxy`-Werts als `false` resultiert in drei 
 <ul>
   <li markdown="1">Der Wert für [req.hostname](/{{ page.lang }}/api.html#req.hostname) wird vom Wert abgeleitet, der im Header `X-Forwarded-Host` festgelegt wurde. Dieser Wert kann vom Client oder Proxy festgelegt werden.
 </li>
-  <li markdown="1">`X-Forwarded-Proto` kann vom Reverse Proxy festgelegt werden, um der Anwendung mitzuteilen, ob es sich um `https` oder `http` oder sogar um einen ungültigen Namen handelt. Dieser Wert wird durch [req.protocol](/{{ page.lang }}/api.html#req.protocol) abgebildet. </li>
-  <li markdown="1">Als Werte für [req.ip](/{{ page.lang }}/api.html#req.ip) und [req.ips](/{{ page.lang }}/api.html#req.ips) wird die Liste der Adressen aus `X-Forwarded-For` herangezogen. </li>
+  <li markdown="1">`X-Forwarded-Proto` kann vom Reverse Proxy festgelegt werden, um der Anwendung mitzuteilen, ob es sich um `https` oder `http` oder sogar um einen ungültigen Namen handelt. Dieser Wert wird durch [req.protocol](/{{ page.lang }}/api.html#req.protocol) abgebildet. 
+  </li>
+  <li markdown="1">Als Werte für [req.ip](/{{ page.lang }}/api.html#req.ip) und [req.ips](/{{ page.lang }}/api.html#req.ips) wird die Liste der Adressen aus `X-Forwarded-For` herangezogen. 
+  </li>
 </ul>
 
 Die Einstellung für `trust proxy` wird mithilfe des [proxy-addr](https://www.npmjs.com/package/proxy-addr)-Pakets implementiert. Weitere Informationen finden Sie in der zugehörigen Dokumentation. 

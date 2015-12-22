@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Ecriture de middleware utilisable dans les applications Express
 menu: guide
@@ -26,6 +26,26 @@ Si la fonction middleware en cours ne termine pas le cycle de demande-réponse, 
 
 L'exemple suivant montre les éléments d'un appel de fonction middleware:
 
+<table style="padding: 0; border: 0; width: 960px; margin-bottom: 10px;">
+<tr><td style="margin: 0; padding: 0px; border: 0; width: 410px;">
+<img src="/images/express-mw.png" style="margin: 0px; padding: 0px; width: 410px; height: 308px;" />
+</td>
+<td style="margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;">
+<div class="callout" id="callout1">Méthode HTTP à laquelle la fonction middleware s'applique.</div>
+
+<div class="callout" id="callout2">Chemin (route) auquel la fonction middleware s'applique.</div>
+
+<div class="callout" id="callout3">Fonction de middleware.</div>
+
+<div class="callout" id="callout4">Argument de rappel à la fonction middleware, appelée "next" par convention.</div>
+
+<div class="callout" id="callout5">Argument de <a href="../4x/api.html#res">réponse</a> HTTP à la fonction middleware, appelé "res" par convention.</div>
+
+<div class="callout" id="callout6">Argument de <a href="../4x/api.html#req">demande</a> HTTP à la fonction middleware, appelé "req" par convention.</div>
+</td></tr>
+</table>
+
+<!--
 <pre>
 <code class="language-javascript" translate="no">
 var express = require('express');
@@ -47,6 +67,7 @@ app.get('/', function(req, res, next) {
 * <code>res</code>: Argument de <a href="../4x/api.html#res">réponse</a> HTTP à la fonction middleware, appelé "res" par convention.
 
 * <code>next</code>: Argument de rappel à la fonction middleware, appelée "next" par convention.
+-->
 
 Voici un exemple d'une application Express "Hello World" simple, pour laquelle vous allez définir deux fonctions middleware :
 

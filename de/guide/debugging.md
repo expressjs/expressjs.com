@@ -16,7 +16,8 @@ Express verwendet das Modul [debug](https://www.npmjs.com/package/debug) intern,
 
 <div class="doc-box doc-info" markdown="1">
 `debug` ist praktisch eine erweiterte Version von `console.log`. Im Gegensatz zu `console.log` müssen jedoch
-keine `debug`-Protokolle im Produktionscode auskommentiert werden. Die Protokollierung wird standardmäßig inaktiviert und kann über die Umgebungsvariable `DEBUG` bedingt aktiviert werden. </div>
+keine `debug`-Protokolle im Produktionscode auskommentiert werden. Die Protokollierung wird standardmäßig inaktiviert und kann über die Umgebungsvariable `DEBUG` bedingt aktiviert werden. 
+</div>
 
 Wenn Sie alle in Express verwendeten internen Protokolle anzeigen wollen, legen Sie beim Starten Ihrer Anwendung die Umgebungsvariable `DEBUG` auf `express:*` fest.
 

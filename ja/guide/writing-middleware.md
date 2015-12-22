@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express アプリケーションで使用するためのミドルウェアの作成
 menu: guide
@@ -26,27 +26,24 @@ lang: ja
 
 次の例は、ミドルウェア関数呼び出しの要素を示しています。
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-app.get('/', function(req, res, next) {
-	next();
-})
-</code>
-</pre>
+<table id="mw-fig">
+<tr><td id="mw-fig-imgcell">
+<img src="/images/express-mw.png" id="mw-fig-img" />
+</td>
+<td class="mw-fig-callouts">
+<div class="callout" id="callout1">ミドルウェア関数が適用される HTTP メソッド。</div>
 
-* <code>app.get</code>: ミドルウェア関数が適用される HTTP メソッド。
+<div class="callout" id="callout2"> ミドルウェア関数が適用されるパス (ルート)。</div>
 
-* <code>'/'</code>: ミドルウェア関数が適用されるパス (ルート)。
+<div class="callout" id="callout3">ミドルウェア関数。</div>
 
-* <code>function</code>: ミドルウェア関数。
+<div class="callout" id="callout4">ミドルウェア関数へのコールバック引数 (慣習的に「next」と呼ばれます)。</div>
 
-* <code>req</code>: ミドルウェア関数への HTTP <a href="../4x/api.html#req">要求</a>引数 (慣習的に「req」と呼ばれます)。
+<div class="callout" id="callout5">ミドルウェア関数への HTTP <a href="../4x/api.html#res">応答</a>引数 (慣習的に「res」と呼ばれます)。</div>
 
-* <code>res</code>: ミドルウェア関数への HTTP <a href="../4x/api.html#res">応答</a>引数 (慣習的に「res」と呼ばれます)。
-
-* <code>next</code>: ミドルウェア関数へのコールバック引数 (慣習的に「next」と呼ばれます)。
+<div class="callout" id="callout6">ミドルウェア関数への HTTP <a href="../4x/api.html#req">要求</a>引数 (慣習的に「req」と呼ばれます)。</div>
+</td></tr>
+</table>
 
 次に、単純な「Hello World」という Express アプリケーションの例を示します。ここでは、2 つのミドルウェア関数を定義します。
 

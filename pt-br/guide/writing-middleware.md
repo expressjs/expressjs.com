@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Escrevendo middlewares para uso em aplicativos do Express
 menu: guide
@@ -34,27 +34,24 @@ contrário, a solicitação ficará suspensa.
 
 O exemplo a seguir mostra os elementos de uma chamada de função de middleware:
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-app.get('/', function(req, res, next) {
-	next();
-})
-</code>
-</pre>
+<table id="mw-fig"> 
+<tr><td id="mw-fig-imgcell">
+<img src="/images/express-mw.png" id="mw-fig-img" />
+</td>
+<td class="mw-fig-callouts">
+<div class="callout" id="callout1">O método HTTP para o qual a função de middleware é aplicada.</div>
 
-* <code>app.get</code>: O método HTTP para o qual a função de middleware é aplicada.
+<div class="callout" id="callout2">Caminho (rota) para o qual a função de middleware é aplicada.</div>
 
-* <code>'/'</code>: Caminho (rota) para o qual a função de middleware é aplicada.
+<div class="callout" id="callout3">A função de middleware.</div>
 
-* <code>function</code>: A função de middleware.
+<div class="callout" id="callout4">Argumento de retorno de chamada para a função de middleware, chamado de "next" por convenção.</div>
 
-* <code>req</code>: Argumento de <a href="../4x/api.html#req">solicitação</a> HTTP para a função de middleware, chamado de "req" por convenção.
+<div class="callout" id="callout5">Argumento de <a href="../4x/api.html#res">resposta</a> HTTP para a função de middleware, chamado de "res" por convenção.</div>
 
-* <code>res</code>: Argumento de <a href="../4x/api.html#res">resposta</a> HTTP para a função de middleware, chamado de "res" por convenção.
-
-* <code>next</code>: Argumento de retorno de chamada para a função de middleware, chamado de "next" por convenção.
+<div class="callout" id="callout6">Argumento de <a href="../4x/api.html#req">solicitação</a> HTTP para a função de middleware, chamado de "req" por convenção.</div>
+</td></tr>
+</table>
 
 Aqui está um exemplo de um simples aplicativo "Hello World" do
 Express, para o qual serão definidas duas funções de middleware:

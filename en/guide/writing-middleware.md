@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Writing middleware for use in Express apps
 menu: guide
@@ -26,11 +26,11 @@ If the current middleware function does not end the request-response cycle, it m
 
 The following figure shows the elements of a middleware function call:
 
-<table style="padding: 0; border: 0; width: 960px; margin-bottom: 10px;">
-<tr><td style="margin: 0; padding: 0px; border: 0; width: 410px;">
-<img src="/images/express-mw.png" style="margin: 0px; padding: 0px; width: 410px; height: 308px;" />
+<table id="mw-fig">
+<tr><td id="mw-fig-imgcell">
+<img src="/images/express-mw.png" id="mw-fig-img" />
 </td>
-<td style="margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;">
+<td class="mw-fig-callouts">
 <div class="callout" id="callout1">HTTP method for which the middleware function applies.</div>
 
 <div class="callout" id="callout2">Path (route) for which the middleware function applies.</div>
@@ -44,6 +44,8 @@ The following figure shows the elements of a middleware function call:
 <div class="callout" id="callout6">HTTP <a href="/en/4x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
 </td></tr>
 </table>
+
+xx
 
 Here is an example of a simple "Hello World" Express application, for which you will define two middleware functions:
 

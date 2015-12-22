@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express 앱에서 사용하기 위한 미들웨어 작성
 menu: guide
@@ -26,27 +26,24 @@ lang: ko
 
 다음 예시에 미들웨어 함수 호출의 요소가 표시되어 있습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-app.get('/', function(req, res, next) {
-	next();
-})
-</code>
-</pre>
+<table id="mw-fig">
+<tr><td id="mw-fig-imgcell">
+<img src="/images/express-mw.png" id="mw-fig-img" />
+</td>
+<td class="mw-fig-callouts">
+<div class="callout" id="callout1">미들웨어 함수가 적용되는 HTTP 메소드.</div>
 
-* <code>app.get</code>: 미들웨어 함수가 적용되는 HTTP 메소드.
+<div class="callout" id="callout2">미들웨어 함수가 적용되는 경로(라우트).</div>
 
-* <code>'/'</code>: 미들웨어 함수가 적용되는 경로(라우트).
+<div class="callout" id="callout3">미들웨어 함수.</div>
 
-* <code>function</code>: 미들웨어 함수.
+<div class="callout" id="callout4">미들웨어 함수에 대한 콜백 인수(일반적으로 "next"라 불림).</div>
 
-* <code>req</code>: 미들웨어 함수에 대한 HTTP <a href="../4x/api.html#req">요청</a> 인수(일반적으로 "req"라 불림).
+<div class="callout" id="callout5">미들웨어 함수에 대한 HTTP <a href="../4x/api.html#res">응답</a> 인수(일반적으로 "res"라 불림).</div>
 
-* <code>res</code>: 미들웨어 함수에 대한 HTTP <a href="../4x/api.html#res">응답</a> 인수(일반적으로 "res"라 불림).
-
-* <code>next</code>: 미들웨어 함수에 대한 콜백 인수(일반적으로 "next"라 불림).
+<div class="callout" id="callout6">미들웨어 함수에 대한 HTTP <a href="../4x/api.html#req">요청</a> 인수(일반적으로 "req"라 불림).</div>
+</td></tr>
+</table>
 
 아래에는 간단한 "Hello World" Express 애플리케이션에 대한 예가 표시되어 있으며, 이 애플리케이션을 위해 두 개의 미들웨어 함수를 정의하게 됩니다.
 

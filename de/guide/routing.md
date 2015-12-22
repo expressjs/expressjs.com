@@ -155,7 +155,8 @@ app.get('/ab(cd)?e', function(req, res) {
 </pre>
 
 <div class="doc-box doc-info" markdown="1">
-Die Zeichen ?, +, * und () sind Subsets ihrer Entsprechungen in regulären Ausdrücken. Der Bindestrich (-) und der Punkt (.) werden von zeichenfolgebasierten Pfaden förmlich interpretiert. </div>
+Die Zeichen ?, +, * und () sind Subsets ihrer Entsprechungen in regulären Ausdrücken. Der Bindestrich (-) und der Punkt (.) werden von zeichenfolgebasierten Pfaden förmlich interpretiert. 
+</div>
 
 Beispiele für Weiterleitungspfade auf Basis regulärer Ausdrücke:
 

@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Escritura de middleware para su uso en aplicaciones Express
 menu: guide
@@ -26,27 +26,24 @@ Si la función de middleware actual no finaliza el ciclo de solicitud/respuestas
 
 El siguiente ejemplo muestra los elementos de una llamada a función de middleware:
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-app.get('/', function(req, res, next) {
-	next();
-})
-</code>
-</pre>
+<table id="mw-fig">
+<tr><td id="mw-fig-imgcell">
+<img src="/images/express-mw.png" id="mw-fig-img" />
+</td>
+<td class="mw-fig-callouts">
+<div class="callout" id="callout1">Método HTTP para el que se aplica la función de middleware.</div>
 
-* <code>app.get</code>: Método HTTP para el que se aplica la función de middleware.
+<div class="callout" id="callout2">Vía de acceso (ruta) para la que se aplica la función de middleware.</div>
 
-* <code>'/'</code>: Vía de acceso (ruta) para la que se aplica la función de middleware.
+<div class="callout" id="callout3">La función de middleware.</div>
 
-* <code>function</code>: La función de middleware.
+<div class="callout" id="callout4">Argumento de devolución de llamada a la función de middleware, denominado "next" por convención.</div>
 
-* <code>req</code>: Argumento de <a href="../4x/api.html#req">solicitud</a> HTTP a la función de middleware, denominado "req" por convención.
+<div class="callout" id="callout5">Argumento de <a href="../4x/api.html#res">respuesta</a> HTTP a la función de middleware, denominado "res" por convención.</div>
 
-* <code>res</code>: Argumento de <a href="../4x/api.html#res">respuesta</a> HTTP a la función de middleware, denominado "res" por convención.
-
-* <code>next</code>: Argumento de devolución de llamada a la función de middleware, denominado "next" por convención.
+<div class="callout" id="callout6">Argumento de <a href="../4x/api.html#req">solicitud</a> HTTP a la función de middleware, denominado "req" por convención.</div>
+</td></tr>
+</table> 
 
 A continuación, se muestra un ejemplo de una aplicación Express simple, "Hello World", para la que definirá dos funciones de middleware:
 

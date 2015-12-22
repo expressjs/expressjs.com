@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Написание кода промежуточных обработчиков для использования в приложениях Express
 menu: guide
@@ -26,27 +26,24 @@ lang: ru
 
 Ниже представлены элементы вызова функции промежуточного обработчика:
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-app.get('/', function(req, res, next) {
-	next();
-})
-</code>
-</pre>
+<table id="mw-fig">
+<tr><td id="mw-fig-imgcell">
+<img src="/images/express-mw.png" id="mw-fig-img" />
+</td>
+<td class="mw-fig-callouts">
+<div class="callout" id="callout1">Метод HTTP, к которому применяется данный промежуточный обработчик.</div>
 
-* <code>app.get</code>: Метод HTTP, к которому применяется данный промежуточный обработчик.
+<div class="callout" id="callout2">Путь (маршрут), к которому применяется данный промежуточный обработчик.</div>
 
-* <code>'/'</code>: Путь (маршрут), к которому применяется данный промежуточный обработчик.
+<div class="callout" id="callout3">Функция промежуточного обработчика.</div>
 
-* <code>function</code>: Функция промежуточного обработчика.
+<div class="callout" id="callout4">Аргумент обратного вызова для функции промежуточного обработчика, именуемый "next" согласно стандарту.</div>
 
-* <code>req</code>: Аргумент <a href="../4x/api.html#req">запроса</a> HTTP, именуемый "req" согласно стандарту.
+<div class="callout" id="callout5">Аргумент <a href="../4x/api.html#res">ответа</a> HTTP, именуемый "res" согласно стандарту.</div>
 
-* <code>res</code>: Аргумент <a href="../4x/api.html#res">ответа</a> HTTP, именуемый "res" согласно стандарту.
-
-* <code>next</code>: Аргумент обратного вызова для функции промежуточного обработчика, именуемый "next" согласно стандарту.
+<div class="callout" id="callout6">Аргумент <a href="../4x/api.html#req">запроса</a> HTTP, именуемый "req" согласно стандарту.</div>
+</td></tr>
+</table>
 
 Далее приводится пример простого приложения Ниже Express "Hello World", для которого будут определены две функции промежуточных обработчиков:
 

@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: 编写中间件以用于 Express 应用程序
 menu: guide
@@ -26,27 +26,24 @@ lang: zh-cn
 
 以下示例显示中间件函数调用的元素：
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-app.get('/', function(req, res, next) {
-	next();
-})
-</code>
-</pre>
+<table id="mw-fig"> 
+<tr><td id="mw-fig-imgcell">
+<img src="/images/express-mw.png" id="mw-fig-img" />
+</td>
+<td class="mw-fig-callouts">
+<div class="callout" id="callout1">中间件函数适用的 HTTP 方法。</div>
 
-* <code>app.get</code>: 中间件函数适用的 HTTP 方法。
+<div class="callout" id="callout2">中间件函数适用的路径（路由）。</div>
 
-* <code>'/'</code>: 中间件函数适用的路径（路由）。
+<div class="callout" id="callout3">中间件函数。</div>
 
-* <code>function</code>: 中间件函数。
+<div class="callout" id="callout4">中间件函数的回调自变量，按约定称为“next”。</div>
 
-* <code>req</code>: 中间件函数的 HTTP <a href="../4x/api.html#req">请求</a>自变量，按约定称为“req”。
+<div class="callout" id="callout5">中间件函数的 HTTP <a href="../4x/api.html#res">响应</a>自变量，按约定称为“res”。</div>
 
-* <code>res</code>: 中间件函数的 HTTP <a href="../4x/api.html#res">响应</a>自变量，按约定称为“res”。
-
-* <code>next</code>: 中间件函数的回调自变量，按约定称为“next”。
+<div class="callout" id="callout6">中间件函数的 HTTP <a href="../4x/api.html#req">请求</a>自变量，按约定称为“req”。</div>
+</td></tr>
+</table>
 
 以下是“Hello World”Express 应用程序的简单示例，将为其定义两个中间件函数：
 

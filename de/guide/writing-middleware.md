@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Middleware für die Verwendung in Express-Anwendungen schreiben
 menu: guide
@@ -13,7 +13,7 @@ lang: de
 
 <h2>Überblick</h2>
 
-*Middlewarefunktionen* sind Funktionen, die Zugriff auf das [Anforderungsobjekt](/{{ page.lang }}/4x/api.html#req) (`req`), das [Antwortobjekt](/{{ page.lang }}/4x/api.html#res) (`res`) und die nächste Middlewarefunktion im Anforderung/Antwort-Zyklus der Anwendung haben. Die nächste Middlewarefunktion wird im Allgemeinen durch die Variable `next` bezeichnet. 
+*Middlewarefunktionen* sind Funktionen, die Zugriff auf das [Anforderungsobjekt](/{{ page.lang }}/4x/api.html#req) (`req`), das [Antwortobjekt](/{{ page.lang }}/4x/api.html#res) (`res`) und die nächste Middlewarefunktion im Anforderung/Antwort-Zyklus der Anwendung haben. Die nächste Middlewarefunktion wird im Allgemeinen durch die Variable `next` bezeichnet.
 
 Über Middlewarefunktionen lassen sich die folgenden Tasks ausführen:
 
@@ -22,36 +22,32 @@ lang: de
 * Beenden des Anforderung/Antwort-Zyklus
 * Aufrufen der nächsten Middleware im Stack
 
-Wenn über die aktuelle Middlewarefunktion der Anforderung/Antwort-Zyklus nicht beendet werden kann, muss `next()` aufgerufen werden, um die Steuerung an die nächste Middlewarefunktion zu übergeben. Andernfalls geht die Anforderung in den Status "Blockiert" über. 
+Wenn über die aktuelle Middlewarefunktion der Anforderung/Antwort-Zyklus nicht beendet werden kann, muss `next()` aufgerufen werden, um die Steuerung an die nächste Middlewarefunktion zu übergeben. Andernfalls geht die Anforderung in den Status "Blockiert" über.
 
 Das folgende Beispiel zeigt die Elemente eines Middlewarefunktionsaufrufs:
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-app.get('/', function(req, res, next) {
-	next();
-})
-</code>
-</pre>
+<table style="padding: 0; border: 0; width: 960px; margin-bottom: 10px;">
+<tr><td style="margin: 0; padding: 0px; border: 0; width: 410px;">
+<img src="/images/express-mw.png" style="margin: 0px; padding: 0px; width: 410px; height: 308px;" />
+</td>
+<td style="margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;">
+<div class="callout" id="callout1">HTTP-Methode, für die die Middlewarefunktion angewendet wird.</div>
 
-* <code>app.get</code>: HTTP-Methode, für die die Middlewarefunktion angewendet wird.
+<div class="callout" id="callout2">Pfad (Weiterleitung), für den die Middlewarefunktion angewendet wird.</div>
 
-* <code>'/'</code>: Pfad (Weiterleitung), für den die Middlewarefunktion angewendet wird.
+<div class="callout" id="callout3">Die Middlewarefunktion.</div>
 
-* <code>function</code>: Die Middlewarefunktion.
+<div class="callout" id="callout4">Callback-Argument zur Middlewarefunktion, die nach der geltenden Konvention als "next" bezeichnet wird.</div>
 
-* <code>req</code>: HTTP-<a href="../4x/api.html#req">Anforderungs</a>argument zur Middlewarefunktion, die nach der geltenden Konvention als "req" bezeichnet wird.
+<div class="callout" id="callout5">HTTP-<a href="../4x/api.html#res">Antwort</a>argument zur Middlewarefunktion, die nach der geltenden Konvention als "res" bezeichnet wird.</div>
 
-* <code>res</code>: HTTP-<a href="../4x/api.html#res">Antwort</a>argument zur Middlewarefunktion, die nach der geltenden Konvention als "res" bezeichnet wird.
-
-* <code>next</code>: Callback-Argument zur Middlewarefunktion, die nach der geltenden Konvention als "next" bezeichnet wird.
+<div class="callout" id="callout6">HTTP-<a href="../4x/api.html#req">Anforderungs</a>argument zur Middlewarefunktion, die nach der geltenden Konvention als "req" bezeichnet wird.</div>
+</td></tr>
+</table>
 
 Dies ist ein Beispiel einer einfachen Express-Anwendung namens "Hello World", für die Sie zwei Middlewarefunktionen definieren:
 
-<pre>
-<code class="language-javascript" translate="no">
+<pre><code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -60,8 +56,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+</code></pre>
 
 <h2>Entwicklung</h2>
 
@@ -77,7 +72,9 @@ var myLogger = function (req, res, next) {
 </pre>
 
 <div class="doc-box doc-notice" markdown="1">
-Beachten Sie den Aufruf oben zu `next()`. Durch den Aufruf dieser Funktion wird die nächste Middlewarefunktion in der Anwendung aufgerufen. Die Funktion `next()` ist nicht Teil der Node.js- oder Express-API, sondern das dritte Argument, das an die Middlewarefunktion übergeben wird. Die Funktion `next()` kann jeden beliebigen Namen haben, per Konvention erhält sie jedoch immer den Namen "next". Um Unklarheiten zu vermeiden, sollten Sie immer diese Konvention verwenden. </div>
+Beachten Sie den Aufruf oben zu `next()`. Durch den Aufruf dieser Funktion wird die nächste Middlewarefunktion in der Anwendung aufgerufen. Die Funktion `next()` ist nicht Teil der Node.js- oder Express-API, sondern das dritte Argument, das an die Middlewarefunktion übergeben wird. Die Funktion `next()` kann jeden beliebigen Namen haben, per Konvention erhält sie jedoch immer den Namen "next". Um Unklarheiten zu vermeiden, sollten Sie immer diese Konvention verwenden.
+</div>
+
 
 Zum Laden der Middlewarefunktion rufen Sie `app.use()` auf und geben die Middlewarefunktion an. Beispiel: Durch den folgenden Code wird die Middlewarefunktion `myLogger` vor der Weiterleitung zum Stammverzeichnispfad (/) geladen.
 
@@ -103,11 +100,11 @@ app.listen(3000);
 
 Sobald die Anwendung eine Anforderung erhält, gibt sie die Nachricht "LOGGED" an das Terminal aus.
 
-Die Reihenfolge beim Laden der Middleware ist wichtig: Middlewarefunktionen, die zuerst geladen werden, werden auch zuerst ausgeführt. 
+Die Reihenfolge beim Laden der Middleware ist wichtig: Middlewarefunktionen, die zuerst geladen werden, werden auch zuerst ausgeführt.
 
-Wenn `myLogger` nach der Weiterleitung zum Stammverzeichnispfad geladen wird, erreicht die Weiterleitung die Middlewarefunktion nicht. Die Anwendung gibt "LOGGED" nicht aus, weil der Routenhandler für den Stammverzeichnispfad den Anforderung/Antwort-Zyklus beendet. 
+Wenn `myLogger` nach der Weiterleitung zum Stammverzeichnispfad geladen wird, erreicht die Weiterleitung die Middlewarefunktion nicht. Die Anwendung gibt "LOGGED" nicht aus, weil der Routenhandler für den Stammverzeichnispfad den Anforderung/Antwort-Zyklus beendet.
 
-Die Middlewarefunktion `myLogger` gibt einfach eine Nachricht aus und übergibt dann die Anforderung zur nächsten Middlewarefunktion im Stack durch Aufruf der Funktion `next()`. 
+Die Middlewarefunktion `myLogger` gibt einfach eine Nachricht aus und übergibt dann die Anforderung zur nächsten Middlewarefunktion im Stack durch Aufruf der Funktion `next()`.
 
 Im nächsten Beispiel wird die Eigenschaft `requestTime` zum Anforderungsobjekt hinzugefügt. Diese Middlewarefunktion erhält den Namen "requestTime".
 
@@ -120,7 +117,7 @@ var requestTime = function (req, res, next) {
 </code>
 </pre>
 
-Die Anwendung verwendet nun die Middlewarefunktion `requestTime`. Außerdem verwendet die Callback-Funktion der Weiterleitung zum Stammverzeichnispfad die Eigenschaft, die die Middlewarefunktion zu `req` (dem Anforderungsobjekt) hinzufügt. 
+Die Anwendung verwendet nun die Middlewarefunktion `requestTime`. Außerdem verwendet die Callback-Funktion der Weiterleitung zum Stammverzeichnispfad die Eigenschaft, die die Middlewarefunktion zu `req` (dem Anforderungsobjekt) hinzufügt.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -146,6 +143,6 @@ app.listen(3000);
 
 Wenn Sie eine Anforderung zum Stammverzeichnis der Anwendung einleiten, zeigt die Anwendung nun die Zeitmarke Ihrer Anforderung im Browser an.
 
-Da Sie Zugriff auf das Anforderungsobjekt, das Antwortobjekt, die nächste Middlewarefunktion im Stack und die gesamte Node.js-API haben, sind die Möglichkeiten, die Sie mit Middlewarefunktionen haben, nahezu unendlich. 
+Da Sie Zugriff auf das Anforderungsobjekt, das Antwortobjekt, die nächste Middlewarefunktion im Stack und die gesamte Node.js-API haben, sind die Möglichkeiten, die Sie mit Middlewarefunktionen haben, nahezu unendlich.
 
 Weitere Informationen zur Verwendung von Middleware in Express siehe [ Express-Middleware verwenden](/{{ page.lang }}/guide/using-middleware.html).

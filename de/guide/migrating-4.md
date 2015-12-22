@@ -190,22 +190,26 @@ In der folgenden Tabelle sind andere kleinere, aber trotzdem wichtige Änderunge
 <th>Beschreibung</th>
 </tr>
 <tr>
-<td>Node.js</td>
-<td>Express 4 erfordert Node.js 0.10.x oder höher und unterstützt nicht mehr Node.js 0.8.x.</td>
+<td>Node.js
+</td>
+<td>Express 4 erfordert Node.js 0.10.x oder höher und unterstützt nicht mehr Node.js 0.8.x.
+</td>
 </tr>
 <tr>
 <td markdown="1">
 `http.createServer()`
 </td>
 <td markdown="1">
-Das Modul `http` wird nicht mehr benötigt, es sei denn, Sie müssen direkt mit dem Modul arbeiten (socket.io/SPDY/HTTPS). Die Anwendung kann mithilfe der Funktion `app.listen()` gestartet werden. </td>
+Das Modul `http` wird nicht mehr benötigt, es sei denn, Sie müssen direkt mit dem Modul arbeiten (socket.io/SPDY/HTTPS). Die Anwendung kann mithilfe der Funktion `app.listen()` gestartet werden. 
+</td>
 </tr>
 <tr>
 <td markdown="1">
 `app.configure()`
 </td>
 <td markdown="1">
-Die Funktion `app.configure()` wurde entfernt. Verwenden Sie die Funktion `process.env.NODE_ENV` oder `app.get('env')`, um die Umgebung zu erkennen und die Anwendung entsprechend zu konfigurieren. </td>
+Die Funktion `app.configure()` wurde entfernt. Verwenden Sie die Funktion `process.env.NODE_ENV` oder `app.get('env')`, um die Umgebung zu erkennen und die Anwendung entsprechend zu konfigurieren. 
+</td>
 </tr>
 <tr>
 <td markdown="1">
@@ -244,7 +248,8 @@ War bisher ein Array, ist nun ein Objekt.
 `res.locals`
 </td>
 <td markdown="1">
-War bisher eine Funktion, ist nun ein Objekt. </td>
+War bisher eine Funktion, ist nun ein Objekt. 
+</td>
 </tr>
 <tr>
 <td markdown="1">
@@ -259,7 +264,8 @@ Geändert in `res.headersSent`.
 `app.route`
 </td>
 <td markdown="1">
-Nun verfügbar als `app.mountpath`. </td>
+Nun verfügbar als `app.mountpath`. 
+</td>
 </tr>
 <tr>
 <td markdown="1">
@@ -282,7 +288,8 @@ Entfernt.
 `res.setHeader('Set-Cookie', val)`
 </td>
 <td markdown="1">
-Die Funktionalität ist nun auf die Einstellung des Basis-Cookiewerts begrenzt. Verwenden Sie `res.cookie()`, um weitere Funktionalität zu erhalten. </td>
+Die Funktionalität ist nun auf die Einstellung des Basis-Cookiewerts begrenzt. Verwenden Sie `res.cookie()`, um weitere Funktionalität zu erhalten. 
+</td>
 </tr>
 </table>
 
@@ -461,10 +468,12 @@ server.listen(app.get('port'), function(){
 </pre>
 
 <div class="doc-box doc-info" markdown="1">
-Wenn Sie nicht direkt mit dem Modul `http` arbeiten müssen (socket.io/SPDY/HTTPS), ist das Laden des Moduls nicht erforderlich. Die Anwendung kann dann einfach wie folgt gestartet werden: <pre>
+Wenn Sie nicht direkt mit dem Modul `http` arbeiten müssen (socket.io/SPDY/HTTPS), ist das Laden des Moduls nicht erforderlich. Die Anwendung kann dann einfach wie folgt gestartet werden: 
+<pre>
 <code class="language-js" translate="no">app.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
-});</code>
+});
+</code>
 </pre>
 </div>
 

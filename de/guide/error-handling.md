@@ -117,7 +117,8 @@ app.get('/a_route_behind_paywall',
 In diesem Beispiel wird der Handler `getPaidContent` übersprungen. Alle verbleibenden Handler in `app` für `/a_route_behind_paywall` werden jedoch weiter ausgeführt.
 
 <div class="doc-box doc-info" markdown="1">
-Aufrufe zu `next()` und `next(err)` geben an, dass der aktuelle Handler abgeschlossen ist und welchen Status er aufweist. Durch `next(err)` werden alle verbleibenden Handler in der Kette übersprungen. Ausgenommen hiervor sind die Handler, die konfiguriert sind, um Fehler wie oben beschrieben zu behandeln. </div>
+Aufrufe zu `next()` und `next(err)` geben an, dass der aktuelle Handler abgeschlossen ist und welchen Status er aufweist. Durch `next(err)` werden alle verbleibenden Handler in der Kette übersprungen. Ausgenommen hiervor sind die Handler, die konfiguriert sind, um Fehler wie oben beschrieben zu behandeln. 
+</div>
 
 ## Die Standardfehlerbehandlungsroutine (Default Error Handler)
 
@@ -126,7 +127,8 @@ Express ist bereits mit einer integrierten Fehlerbehandlungsroutine ausgestattet
 Wenn Sie einen Fehler an `next()` übergeben und diesen nicht mit einem Error-Handler bearbeiten, wird dieser über den integrierten Error-Handler bearbeitet. Der Fehler wird mit dem Stack-Trace zum Client geschrieben. Der Stack-Trace ist in der Produktionsumgebung nicht verfügbar. 
 
 <div class="doc-box doc-info" markdown="1">
-Legen Sie die Umgebungsvariable `NODE_ENV` auf `production` fest, um die Anwendung im Produktionsmodus auszuführen. </div>
+Legen Sie die Umgebungsvariable `NODE_ENV` auf `production` fest, um die Anwendung im Produktionsmodus auszuführen. 
+</div>
 
 Wenn `next()` mit einem Fehler aufgerufen wird, nachdem Sie mit dem Schreiben der Antwort begonnen haben (z. B., wenn Sie beim Streamen der Antwort zum Client einen Fehler feststellen), schließt die Standardfehlerbehandlungsroutine in Express die Verbindung, und die Anforderung schlägt fehl. 
 

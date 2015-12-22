@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: 撰寫中介軟體以用於 Express 應用程式中
 menu: guide
@@ -26,27 +26,24 @@ lang: zh-tw
 
 下列範例顯示中介軟體函數呼叫中的元素：
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-app.get('/', function(req, res, next) {
-	next();
-})
-</code>
-</pre>
+<table id="mw-fig">
+<tr><td id="mw-fig-imgcell">
+<img src="/images/express-mw.png" id="mw-fig-img" />
+</td>
+<td class="mw-fig-callouts">
+<div class="callout" id="callout1">要套用中介軟體函數的 HTTP 方法。</div>
 
-* <code>app.get</code>: 要套用中介軟體函數的 HTTP 方法。
+<div class="callout" id="callout2">要套用中介軟體函數的路徑（路由）。</div>
 
-* <code>'/'</code>: 要套用中介軟體函數的路徑（路由）。
+<div class="callout" id="callout3">中介軟體函數。</div>
 
-* <code>function</code>: 中介軟體函數。
+<div class="callout" id="callout4">中介軟體函數的回呼引數，依慣例，稱為 "next"。</div>
 
-* <code>req</code>: 中介軟體函數的 HTTP <a href="../4x/api.html#req">request</a> 引數，依慣例，稱為 "req"。
+<div class="callout" id="callout5">中介軟體函數的 HTTP <a href="../4x/api.html#res">response</a> 引數，依慣例，稱為 "res"。</div>
 
-* <code>res</code>: 中介軟體函數的 HTTP <a href="../4x/api.html#res">response</a> 引數，依慣例，稱為 "res"。
-
-* <code>next</code>: 中介軟體函數的回呼引數，依慣例，稱為 "next"。
+<div class="callout" id="callout6">中介軟體函數的 HTTP <a href="../4x/api.html#req">request</a> 引數，依慣例，稱為 "req"。</div>
+</td></tr>
+</table>
 
 下列範例顯示簡單的 "Hello World" Express 應用程式，您將為這個應用程式定義兩個中介軟體函數：
 

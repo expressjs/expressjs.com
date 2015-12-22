@@ -1009,21 +1009,13 @@ h2 a {
   #install-command {
     font-size: 12px;
   }
-
 }
 
-/* For image callouts in writing-middleware.md */
+/* For image callouts in writing-middleware.md  */
 
 .callout {position: relative;}
 
-#callout1 {top: 60px; }
-
-#callout2 {top: 70px;}
-
-#callout3 {top: 80px;}
-
-#callout4 {top: 155px;}
-
-#callout5 {top: 165px;}
-
-#callout6 {top: 190px;}
+#mw-fig { padding: 0; border: 0; width: 960px; margin-bottom: 20px;}
+#mw-fig-imgcell {margin: 0; padding: 0px; border: 0; width: 410px;}
+#mw-fig-img {margin: 0px; padding: 0px; width: 410px; height: 308px;}
+.mw-fig-callouts {margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;}
