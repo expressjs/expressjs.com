@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Routage Express
 menu: guide
@@ -46,7 +46,6 @@ app.get('/', function (req, res) {
 app.post('/', function (req, res) {
   res.send('POST request to the homepage');
 });
-
 </code>
 </pre>
 
@@ -325,7 +324,7 @@ module.exports = router;
 </code>
 </pre>
 
-Puis, chargez le module de routage dans l'application : 
+Puis, chargez le module de routage dans l'application :
 
 <pre>
 <code class="language-javascript" translate="no">

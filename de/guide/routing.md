@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Weiterleitung in Express
 menu: guide
@@ -12,9 +12,9 @@ redirect_from: "/guide/routing.html"
 
 # Weiterleitung (Routing)
 
-Der Begriff *Weiterleitung* (Routing) bezieht sich auf die Definition von Anwendungsendpunkten (URIs) und deren Antworten auf Clientanforderungen. Eine Einführung in dieses Routing siehe [Basisrouting](/{{ page.lang }}/starter/basic-routing.html). 
+Der Begriff *Weiterleitung* (Routing) bezieht sich auf die Definition von Anwendungsendpunkten (URIs) und deren Antworten auf Clientanforderungen. Eine Einführung in dieses Routing siehe [Basisrouting](/{{ page.lang }}/starter/basic-routing.html).
 
-Der folgende Code ist ein Beispiel für ein sehr einfaches Basisrouting. 
+Der folgende Code ist ein Beispiel für ein sehr einfaches Basisrouting.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -30,9 +30,9 @@ app.get('/', function(req, res) {
 
 <h2 id="route-methods">Weiterleitungsmethoden</h2>
 
-Eine Weiterleitungsmethode wird von einer HTTP-Methode abgeleitet und an eine Instanz der Klasse `express` angehängt. 
+Eine Weiterleitungsmethode wird von einer HTTP-Methode abgeleitet und an eine Instanz der Klasse `express` angehängt.
 
-Der folgende Code ist ein Beispiel für Weiterleitungen, die für die Methoden GET und POST zum Stamm (Root) der Anwendung definiert werden. 
+Der folgende Code ist ein Beispiel für Weiterleitungen, die für die Methoden GET und POST zum Stamm (Root) der Anwendung definiert werden.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -45,7 +45,6 @@ app.get('/', function (req, res) {
 app.post('/', function (req, res) {
   res.send('POST request to the homepage');
 });
-
 </code>
 </pre>
 
@@ -55,7 +54,7 @@ Express unterstützt die folgenden Weiterleitungsmethoden, die den HTTP-Methoden
 Verwenden Sie zum Weiterleiten von Methoden, die zu den JavaScript-Variablennamen führen, die Notation "Eckige Klammer". Beispiel: `app['m-search']('/', function ...`
 </div>
 
-Es gibt eine spezielle Weiterleitungsmethode, `app.all()`, die nicht von einer HTTP-Methode abgeleitet wird. Diese Methode wird zum Laden von Middlewarefunktionen bei einem Pfad für alle Anforderungsmethoden verwendet. 
+Es gibt eine spezielle Weiterleitungsmethode, `app.all()`, die nicht von einer HTTP-Methode abgeleitet wird. Diese Methode wird zum Laden von Middlewarefunktionen bei einem Pfad für alle Anforderungsmethoden verwendet.
 
 Im folgenden Beispiel wird der Handler für Anforderungen zur Weiterleitung "/secret" ausgeführt, um herauszufinden, ob Sie GET-, POST-, PUT-, DELETE- oder andere HTTP-Anforderungsmethoden verwenden, die im [HTTP-Modul](https://nodejs.org/api/http.html#http_http_methods) unterstützt werden.
 
@@ -70,7 +69,7 @@ app.all('/secret', function (req, res, next) {
 
 <h2 id="route-paths">Weiterleitungspfade</h2>
 
-Über Weiterleitungspfade werden in Kombination mit einer Anforderungsmethode die Endpunkte definiert, bei denen Anforderungen erfolgen können. Weiterleitungspfade können Zeichenfolgen, Zeichenfolgemuster oder reguläre Ausdrücke sein. 
+Über Weiterleitungspfade werden in Kombination mit einer Anforderungsmethode die Endpunkte definiert, bei denen Anforderungen erfolgen können. Weiterleitungspfade können Zeichenfolgen, Zeichenfolgemuster oder reguläre Ausdrücke sein.
 
 <div class="doc-box doc-info" markdown="1">
 Express verwendet für den Abgleich der Weiterleitungspfade [path-to-regexp](https://www.npmjs.com/package/path-to-regexp). In der Dokumentation zu "path-to-regexp" finden Sie alle Möglichkeiten zum Definieren von Weiterleitungspfaden. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) ist ein handliches Tool zum Testen von Express-Basisweiterleitungen, auch wenn dieses Tool keine Musterabgleiche unterstützt.
@@ -112,7 +111,7 @@ app.get('/random.text', function (req, res) {
 </code>
 </pre>
 
-Dies sind einige Beispiele für Weiterleitungspfade auf Basis von Zeichenfolgemustern. 
+Dies sind einige Beispiele für Weiterleitungspfade auf Basis von Zeichenfolgemustern.
 
 Dieser Weiterleitungspfad gleicht `acd` und `abcd` ab.
 
@@ -124,7 +123,7 @@ app.get('/ab?cd', function(req, res) {
 </code>
 </pre>
 
-Dieser Weiterleitungspfad gleicht `abcd`, `abbcd`, `abbbcd` usw. ab. 
+Dieser Weiterleitungspfad gleicht `abcd`, `abbcd`, `abbbcd` usw. ab.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -155,12 +154,12 @@ app.get('/ab(cd)?e', function(req, res) {
 </pre>
 
 <div class="doc-box doc-info" markdown="1">
-Die Zeichen ?, +, * und () sind Subsets ihrer Entsprechungen in regulären Ausdrücken. Der Bindestrich (-) und der Punkt (.) werden von zeichenfolgebasierten Pfaden förmlich interpretiert. 
+Die Zeichen ?, +, * und () sind Subsets ihrer Entsprechungen in regulären Ausdrücken. Der Bindestrich (-) und der Punkt (.) werden von zeichenfolgebasierten Pfaden förmlich interpretiert.
 </div>
 
 Beispiele für Weiterleitungspfade auf Basis regulärer Ausdrücke:
 
-Dieser Weiterleitungspfad gleicht alle Weiterleitungsnamen ab, die den Buchstaben "a" enthalten. 
+Dieser Weiterleitungspfad gleicht alle Weiterleitungsnamen ab, die den Buchstaben "a" enthalten.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -170,7 +169,7 @@ app.get(/a/, function(req, res) {
 </code>
 </pre>
 
-Dieser Weiterleitungspfad gleicht `butterfly` und `dragonfly`, jedoch nicht `butterflyman`, `dragonfly man` usw. ab. 
+Dieser Weiterleitungspfad gleicht `butterfly` und `dragonfly`, jedoch nicht `butterflyman`, `dragonfly man` usw. ab.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -182,9 +181,9 @@ app.get(/.*fly$/, function(req, res) {
 
 <h2 id="route-handlers">Routenhandler (Weiterleitungsroutinen)</h2>
 
-Sie können mehrere Callback-Funktionen angeben, die sich wie [Middleware](/{{ page.lang }}/guide/using-middleware.html) verhalten, um eine Anforderung zu verarbeiten. Die einzige Ausnahme hierbei ist, dass diese Callbacks möglicherweise `next('route')` aufrufen, um die verbleibenden Weiterleitungs-Callbacks zu umgehen. Mit diesem Verfahren können Sie Vorabbedingungen für eine Weiterleitung festlegen und dann die Steuerung an nachfolgende Weiterleitungen übergeben, wenn kein Grund vorliegt, mit der aktuellen Weiterleitung fortzufahren. 
+Sie können mehrere Callback-Funktionen angeben, die sich wie [Middleware](/{{ page.lang }}/guide/using-middleware.html) verhalten, um eine Anforderung zu verarbeiten. Die einzige Ausnahme hierbei ist, dass diese Callbacks möglicherweise `next('route')` aufrufen, um die verbleibenden Weiterleitungs-Callbacks zu umgehen. Mit diesem Verfahren können Sie Vorabbedingungen für eine Weiterleitung festlegen und dann die Steuerung an nachfolgende Weiterleitungen übergeben, wenn kein Grund vorliegt, mit der aktuellen Weiterleitung fortzufahren.
 
-Routenhandler können eine Funktion und/oder ein Funktionsarray sein, wie in den folgenden Beispielen zu sehen ist. 
+Routenhandler können eine Funktion und/oder ein Funktionsarray sein, wie in den folgenden Beispielen zu sehen ist.
 
 Eine einzelne Callback-Funktion kann eine Weiterleitung verarbeiten. Beispiel:
 
@@ -295,9 +294,9 @@ app.route('/book')
 
 Mit der Klasse `express.Router` lassen sich modular einbindbare Routenhandler erstellen. Eine `Router`-Instanz ist ein vollständiges Middleware- und Routingsystem. Aus diesem Grund wird diese Instanz oft auch als "Mini-App" bezeichnet.
 
-Im folgenden Beispiel wird ein Router als Modul erstellt, eine Middlewarefunktion in das Modul geladen, es werden Weiterleitungen definiert und das Modul letztendlich in einen Pfad in der Hauptanwendung eingebunden. 
+Im folgenden Beispiel wird ein Router als Modul erstellt, eine Middlewarefunktion in das Modul geladen, es werden Weiterleitungen definiert und das Modul letztendlich in einen Pfad in der Hauptanwendung eingebunden.
 
-Erstellen Sie eine Routerdatei namens `birds.js` mit dem folgenden Inhalt im Anwendungsverzeichnis: 
+Erstellen Sie eine Routerdatei namens `birds.js` mit dem folgenden Inhalt im Anwendungsverzeichnis:
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -332,4 +331,4 @@ app.use('/birds', birds);
 </code>
 </pre>
 
-Die Anwendung kann nun Anforderungen an die Pfade `/birds` und `/birds/about` bearbeiten und ruft die Middlewarefunktion `timeLog` auf, die speziell für diese Weiterleitung bestimmt ist. 
+Die Anwendung kann nun Anforderungen an die Pfade `/birds` und `/birds/about` bearbeiten und ruft die Middlewarefunktion `timeLog` auf, die speziell für diese Weiterleitung bestimmt ist.
