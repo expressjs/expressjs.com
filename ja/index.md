@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: home
 title: Express - Node.js Web アプリケーション・フレームワーク
 menu: home
@@ -22,15 +22,15 @@ lang: ja
     <div id="install-command">$ npm install express --save</div>
 </section>
 
-<!--<section id="doc-langs" markdown="1">
+<section id="doc-langs" markdown="1">
   Express の資料は、他の言語 ([スペイン語](/es)、[日本語](/ja)、[ロシア語](/ru)、[中国語](/zh)、[韓国語](/ko)、[ポルトガル語](/pt-br)) でも提供されています。
-</section>-->
+</section>
 
 <section id="intro">
 
   <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h3>Web<br>アプリケーション</h3> Express は、Web アプリケーションとモバイル・アプリケーション向けの一連の堅固な機能を提供する最小限の柔軟な Node.js Web アプリケーション・フレームワークです。</div>
+          <h3>Web アプリケーション</h3> Express は、Web アプリケーションとモバイル・アプリケーション向けの一連の堅固な機能を提供する最小限の柔軟な Node.js Web アプリケーション・フレームワークです。</div>
 
       <div id="apis">
           <h3>API</h3> 無数の HTTP ユーティリティー・メソッドとミドルウェアを自由に使用できるため、堅固な API を迅速かつ容易に作成できます。</div>

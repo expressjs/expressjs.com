@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: home
 title: Express - Node.js Web 應用程式架構
 menu: home
@@ -22,10 +22,10 @@ lang: zh-tw
     <div id="install-command">$ npm install express --save</div>
 </section>
 
-<!--<section id="doc-langs" markdown="1">
+<section id="doc-langs" markdown="1">
   Express 文件提供其他語言版本：[西班牙文](/es)、[日文](/ja)、[俄文](/ru)、
 [中文](/zh)、[韓文](/ko)、[葡萄牙文](/pt-br)。
-</section>-->
+</section>
 
 <section id="intro">
 

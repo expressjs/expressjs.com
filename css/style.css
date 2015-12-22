@@ -554,12 +554,12 @@ pre, code {
 }
 
 #strongloop-header {
-  font-size: 0.6em;
+  font-size: 0.7em;
   display: block;
   position: absolute;
   right: 2%;
   top: 11px;
-  width: 120px;
+  width: 150px;
   border-radius: 3px;
   color: #08592B;
   padding: 3px;

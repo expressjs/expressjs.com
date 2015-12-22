@@ -1,4 +1,4 @@
----
+﻿---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
 ### DO NOT CHANGE ANY OTHER TEXT. 
@@ -72,12 +72,10 @@ IP アドレスまたはサブネットは、指定されると、アドレス�
 `false` 以外の `trust proxy` 値を設定すると、次の 3 つの重要な変更が起こります。
 
 <ul>
-  <li markdown="1">[req.hostname](/{{ page.lang }}/api.html#req.hostname) の値は、クライアントまたはプロキシーが設定できる `X-Forwarded-Host` ヘッダーに設定された値から導き出されます。
-  </li>
+  <li markdown="1">[req.hostname](/{{ page.lang }}/api.html#req.hostname) の値は、クライアントまたはプロキシーが設定できる `X-Forwarded-Host` ヘッダーに設定された値から導き出されます。</li>
   <li markdown="1">`X-Forwarded-Proto` は、`https` と `http` のどちらであるか、または無効な名前であるかをアプリケーションに通知するためにリバース・プロキシーによって設定できます。この値は、[req.protocol](/{{ page.lang }}/api.html#req.protocol) に反映されます。
 </li>
-  <li markdown="1">[req.ip](/{{ page.lang }}/api.html#req.ip) および [req.ips](/{{ page.lang }}/api.html#req.ips) の値は、`X-Forwarded-For` のアドレス・リストから取り込まれます。
-  </li>
+  <li markdown="1">[req.ip](/{{ page.lang }}/api.html#req.ip) および [req.ips](/{{ page.lang }}/api.html#req.ips) の値は、`X-Forwarded-For` のアドレス・リストから取り込まれます。</li>
 </ul>
 
 `trust proxy` 設定は、[proxy-addr](https://www.npmjs.com/package/proxy-addr) パッケージを使用して実装されます。詳細については、資料を参照してください。
