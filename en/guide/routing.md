@@ -237,7 +237,7 @@ The methods on the response object (`res`) in the following table can send a res
 | [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | Redirect a request.
 | [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | Render a view template.
 | [res.send()](/{{ page.lang }}/4x/api.html#res.send)       | Send a response of various types.
-| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)     | Send a file as an octet stream.
+| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | Send a file as an octet stream.
 | [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Set the response status code and send its string representation as the response body.
 
 <h2 id="app-route">app.route()</h2>
