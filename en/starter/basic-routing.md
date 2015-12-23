@@ -58,7 +58,7 @@ app.put('/user', function (req, res) {
 });
 </code></pre>
 
-Respond to a DELETE request the the `/user` route:
+Respond to a DELETE request the `/user` route:
 
 <pre><code class="language-javascript" translate="no">
 app.delete('/user', function (req, res) {
