@@ -84,7 +84,7 @@ app.use(function(err, req, res, next){
 });
 </code></pre>
 
-Batafsil ma'lumot uchun [Xatolarni qayta ishlash](/guide/error-handling.html) o'qing.
+Batafsil ma'lumot uchun [Xatolarni qayta ishlash](/{{ page.lang }}/guide/error-handling.html) o'qing.
 
 ## Qanday qilib plain HTMLni render qilishim mumkin?
 

@@ -38,7 +38,7 @@ app.use(express.static('files'));
 
 Os arquivos serão procurados na ordem em que os diretórios estáticos foram configurados usando o <i>middleware</i> `express.static`.
 
-Se você deseja criar um prefixo "virtual" (desde que o caminho não exista no <i>file system</i>) de caminho para os arquivos servidos pelo `express.static`, você pode [especificar um caminho de montagem](/4x/api.html#app.use) para o diretório estático, conforme apresentado abaixo:
+Se você deseja criar um prefixo "virtual" (desde que o caminho não exista no <i>file system</i>) de caminho para os arquivos servidos pelo `express.static`, você pode [especificar um caminho de montagem](/{{ page.lang }}/4x/api.html#app.use) para o diretório estático, conforme apresentado abaixo:
 
 <pre><code class="language-javascript" translate="no">
 app.use('/static', express.static('public'));

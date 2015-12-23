@@ -13,7 +13,7 @@ lang: ja
 
 <div class="doc-box doc-info" markdown="1">
 NOTE: これは、基本的に、あなたが作成できる最も簡単なExpressアプリです。
-あなたが欲しいのがシングルファイルアプリケーションでないなら、[Express generator](/starter/generator.html)を使ってください。
+あなたが欲しいのがシングルファイルアプリケーションでないなら、[Express generator](/{{ page.lang }}/starter/generator.html)を使ってください。
 Express generatorは多数のJavaScriptファイルや、Jadeテンプレート、サブディレクトリなどの様々な目的を用いるフルアプリケーションのための足場を生成します。
 </div>
 

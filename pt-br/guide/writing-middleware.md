@@ -9,7 +9,7 @@ lang: pt-br
 
 <h2>Visão Geral</h2>
 
-Funções do _middleware_ são funções que têm acesso para [requisitar objeto](/4x/api.html#req) (`req`), [responder objeto](/4x/api.html#res) (`res`) e a próxima função de <i>middleware</i> no ciclo de solicitação-resposta do aplicativo. A próxima função de <i>middleware</i> é comumente denotada por uma variável chamada `next`.
+Funções do _middleware_ são funções que têm acesso para [requisitar objeto](/{{ page.lang }}/4x/api.html#req) (`req`), [responder objeto](/{{ page.lang }}/4x/api.html#res) (`res`) e a próxima função de <i>middleware</i> no ciclo de solicitação-resposta do aplicativo. A próxima função de <i>middleware</i> é comumente denotada por uma variável chamada `next`.
 
 Funções de <i>middleware</i> podem executar as seguintes tarefas:
 

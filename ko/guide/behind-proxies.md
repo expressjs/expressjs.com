@@ -7,7 +7,7 @@ lang: ko
 
 # Express behind proxies
 
-When running an Express app behind a proxy, set (using [app.set()](/4x/api.html#app.set)) the application variable `trust proxy` to one of the values listed in the following table.
+When running an Express app behind a proxy, set (using [app.set()](/{{ page.lang }}/4x/api.html#app.set)) the application variable `trust proxy` to one of the values listed in the following table.
 
 <div class="doc-box doc-info" markdown="1">
 While the app will not fail to run if the application variable `trust proxy` is not set, it will incorrectly register the proxy's IP address as the client IP address unless `trust proxy` is configured.
@@ -65,9 +65,9 @@ Custom trust implementation. Use this only if you know what you are doing.
 Setting a non-`false` `trust proxy` value results in two important changes:
 
 <ul>
-  <li markdown="1">`X-Forwarded-Proto` may be set by the reverse proxy to tell the app whether it is https or simply http. This value is reflected by [req.protocol](/api.html#req.protocol).
+  <li markdown="1">`X-Forwarded-Proto` may be set by the reverse proxy to tell the app whether it is https or simply http. This value is reflected by [req.protocol](/{{ page.lang }}/api.html#req.protocol).
   </li>
-  <li markdown="1">The [req.ip](/api.html#req.ip) and [req.ips](/api.html#req.ips) values will be populated with `X-Forwarded-For`'s list of addresses.
+  <li markdown="1">The [req.ip](/{{ page.lang }}/api.html#req.ip) and [req.ips](/{{ page.lang }}/api.html#req.ips) values will be populated with `X-Forwarded-For`'s list of addresses.
   </li>
 </ul>
 

@@ -126,7 +126,7 @@ new features to help organize your routes:
 The new `app.route()` method enables you to create chainable route handlers
 for a route path. Since the path is specified in a single location, it
 helps to create modular routes and reduce redundancy and typos. For more
-information on routes, see [Router() documentation](/4x/api.html#router).
+information on routes, see [Router() documentation](/{{ page.lang }}/4x/api.html#router).
 
 Here is an example of chained route handlers defined using `app.route()`.
 

@@ -1,7 +1,7 @@
 <h3 id='app.delete.method'>app.delete(path, callback [, callback ...])</h3>
 
 Routes HTTP DELETE requisitam à path específica com as funções callback específicas.
-Para mais informações, veja o [routing guide](/guide/routing.html).
+Para mais informações, veja o [routing guide](/{{ page.lang }}/guide/routing.html).
 
 Você pode fornecer multiplas funções callback que se comportam como middleware, com exceção de
 que esses callbacks podem chamar `next('route')` para ignorar a(s) restante(s) route

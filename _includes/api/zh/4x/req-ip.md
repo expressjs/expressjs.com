@@ -2,7 +2,7 @@
 
 The remote IP address of the request.
 
-When the [`trust proxy` setting](/4x/api.html#trust.proxy.options.table) trusts
+When the [`trust proxy` setting](/{{ page.lang }}/4x/api.html#trust.proxy.options.table) trusts
 the socket address, it is the upstream address.
 
 ~~~js

@@ -98,7 +98,7 @@ app.use(function(err, req, res, next){
 });
 </code></pre>
 
-Для більш детальної інформації, дивіться [Обробка помилок](/guide/error-handling.html).
+Для більш детальної інформації, дивіться [Обробка помилок](/{{ page.lang }}/guide/error-handling.html).
 
 ## Як я можу рендерить для видачі plain HTML?
 

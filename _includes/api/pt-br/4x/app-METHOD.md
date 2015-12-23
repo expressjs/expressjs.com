@@ -5,7 +5,7 @@ Faz o roteamento de uma requisição HTTP, onde METHOD é um método de requisi�
 
 Veja a baixo a lista completa.
 
-Para mais informações, veja [routing guide](/guide/routing.html).
+Para mais informações, veja [routing guide](/{{ page.lang }}/guide/routing.html).
 
 O Express suporta os seguintes métodos de roteamento, correspondentes aos métodos HTTP de mesmo nome:
 

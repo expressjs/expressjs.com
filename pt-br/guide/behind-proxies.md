@@ -7,7 +7,7 @@ lang: pt-br
 
 # Express atrás de proxies
 
-Quando uma aplicação Express estiver rodando atrá de um proxy, defina a variável `trust proxy` (usando [app.set()](/4x/api.html#app.set)) para um dos valores listados na tabela seguinte.
+Quando uma aplicação Express estiver rodando atrá de um proxy, defina a variável `trust proxy` (usando [app.set()](/{{ page.lang }}/4x/api.html#app.set)) para um dos valores listados na tabela seguinte.
 
 <div class="doc-box doc-info" markdown="1">
 A aplicação não deixa de rodar se `trust proxy` não estiver definida, porém irá registrar incorretamente o IP do proxy como sendo o IP do cliente. Para evitar isso, a variável `trust proxy` deve ser configurada

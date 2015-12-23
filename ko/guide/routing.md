@@ -135,7 +135,7 @@ app.get(/.*fly$/, function(req, res) {
 
 <h2 id="route-handlers">Route handlers</h2>
 
-You can provide multiple callback functions that behave just like [middleware](/guide/using-middleware.html) to handle a request. The only exception is that these callbacks may invoke `next('route')` to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+You can provide multiple callback functions that behave just like [middleware](/{{ page.lang }}/guide/using-middleware.html) to handle a request. The only exception is that these callbacks may invoke `next('route')` to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
 
 Route handlers can come in the form of a function, an array of functions, or various combinations of both, as shown the following examples.
 
@@ -205,22 +205,22 @@ The methods on the response object (`res`) in the following table can send a res
 
 | Method               | Description
 |----------------------|--------------------------------------
-| [res.download()](/4x/api.html#res.download)   | Prompt a file to be downloaded.
-| [res.end()](/4x/api.html#res.end)        | End the response process.
-| [res.json()](/4x/api.html#res.json)       | Send a JSON response.
-| [res.jsonp()](/4x/api.html#res.jsonp)      | Send a JSON response with JSONP support.
-| [res.redirect()](/4x/api.html#res.redirect)   | Redirect a request.
-| [res.render()](/4x/api.html#res.render)     | Render a view template.
-| [res.send()](/4x/api.html#res.send)       | Send a response of various types.
-| [res.sendFile](/4x/api.html#res.sendFile)     | Send a file as an octet stream.
-| [res.sendStatus()](/4x/api.html#res.sendStatus) | Set the response status code and send its string representation as the response body.
+| [res.download()](/{{ page.lang }}/4x/api.html#res.download)   | Prompt a file to be downloaded.
+| [res.end()](/{{ page.lang }}/4x/api.html#res.end)        | End the response process.
+| [res.json()](/{{ page.lang }}/4x/api.html#res.json)       | Send a JSON response.
+| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)      | Send a JSON response with JSONP support.
+| [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | Redirect a request.
+| [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | Render a view template.
+| [res.send()](/{{ page.lang }}/4x/api.html#res.send)       | Send a response of various types.
+| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)     | Send a file as an octet stream.
+| [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Set the response status code and send its string representation as the response body.
 
 <h2 id="app-route">app.route()</h2>
 
 Chainable route handlers for a route path can be created using `app.route()`.
 Since the path is specified at a single location, it
 helps to create modular routes and reduce redundancy and typos. For more
-information on routes, see [Router() documentation](/4x/api.html#router).
+information on routes, see [Router() documentation](/{{ page.lang }}/4x/api.html#router).
 
 Here is an example of chained route handlers defined using `app.route()`.
 

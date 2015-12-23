@@ -76,7 +76,7 @@ app.use(function(err, req, res, next) {
 });
 </code></pre>
 
-For more information, see [Error handling](/guide/error-handling.html).
+For more information, see [Error handling](/{{ page.lang }}/guide/error-handling.html).
 
 ## How do I render plain HTML?
 

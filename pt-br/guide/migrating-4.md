@@ -115,7 +115,7 @@ O modo como você define rotas não mudou, mas o sistema de roteamento tem agora
 <h4 id="app-route">Método <code>app.route()</code></h4>
 
 O novo método `app.route()` permite criar encadeamentos de manipuladores de rota (route handlers) para um `path` de uma rota.
-Como o `path` é especificado em um único local, isto facilita a criação de rotas modulares e reduz a redundância. Para mais informações sobre rotas, veja na [documentação `Router()`](/4x/api.html#router).
+Como o `path` é especificado em um único local, isto facilita a criação de rotas modulares e reduz a redundância. Para mais informações sobre rotas, veja na [documentação `Router()`](/{{ page.lang }}/4x/api.html#router).
 
 
 Nesse exemplo um encadeamento de handlers é definido para uma rota usando `app.route()`.

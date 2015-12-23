@@ -170,7 +170,7 @@ app.use(function(err, req, res, next) {
 });
 </code></pre>
 
-For details about error-handling middleware, refer [Error handling](/guide/error-handling.html).
+For details about error-handling middleware, refer [Error handling](/{{ page.lang }}/guide/error-handling.html).
 
 <h2 id='middleware.built-in'>Built-in middleware</h2>
 

@@ -217,20 +217,20 @@ Os métodos em um objeto de resposta (res) na tabela seguinte podem enviar respo
 
 | Método               | Descrição
 |----------------------|--------------------------------------
-| [res.download()](/4x/api.html#res.download)   | Solicita o download de um arquivo.
-| [res.end()](/4x/api.html#res.end)        | Finaliza a resposta.
-| [res.json()](/4x/api.html#res.json)       | Envia um JSON como resposta.
-| [res.jsonp()](/4x/api.html#res.jsonp)      | Envia uma JSON com suporte JSONP como resposta.
-| [res.redirect()](/4x/api.html#res.redirect)   | Redireciona uma requisição.
-| [res.render()](/4x/api.html#res.render)     | Renderiza um template view.
-| [res.send()](/4x/api.html#res.send)       | Envia uma resposta de vários tipos.
-| [res.sendFile](/4x/api.html#res.sendFile)     | Envia um arquivo como octet stream.
-| [res.sendStatus()](/4x/api.html#res.sendStatus) | Define o código de status da resposta e envia uma string representando este status como corpo da resposta (response body).
+| [res.download()](/{{ page.lang }}/4x/api.html#res.download)   | Solicita o download de um arquivo.
+| [res.end()](/{{ page.lang }}/4x/api.html#res.end)        | Finaliza a resposta.
+| [res.json()](/{{ page.lang }}/4x/api.html#res.json)       | Envia um JSON como resposta.
+| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)      | Envia uma JSON com suporte JSONP como resposta.
+| [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | Redireciona uma requisição.
+| [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | Renderiza um template view.
+| [res.send()](/{{ page.lang }}/4x/api.html#res.send)       | Envia uma resposta de vários tipos.
+| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)     | Envia um arquivo como octet stream.
+| [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Define o código de status da resposta e envia uma string representando este status como corpo da resposta (response body).
 
 <h2 id="app-route">app.route()</h2>
 
 Encadeamento de manipuladores (handlers) para uma rota podem ser criados utilizando-se app.route().
-Como nesse caso a rota (path) é especificada em um único local, isso ajuda a criar rotas modulares, reduzindo a redundância e erros de digitação. Para mais informações consulte a documentação [Router()](/4x/api.html#router).
+Como nesse caso a rota (path) é especificada em um único local, isso ajuda a criar rotas modulares, reduzindo a redundância e erros de digitação. Para mais informações consulte a documentação [Router()](/{{ page.lang }}/4x/api.html#router).
 
 Aqui está um exemplo de handlers encadeados definidos com a utilização de app.route():
 

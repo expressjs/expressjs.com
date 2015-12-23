@@ -13,7 +13,7 @@ lang: en
 
 <h2>Overview</h2>
 
-_Middleware_ functions are functions that have access to the [request object](/4x/api.html#req)  (`req`), the [response object](/4x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/4x/api.html#req)  (`req`), the [response object](/{{ page.lang }}/4x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
 
 Middleware functions can perform the following tasks:
 
@@ -138,4 +138,4 @@ When you make a request to the root of the app, the app now displays the timesta
 
 Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
 
-For more information about Express middleware, see: [Using Express middleware](/guide/using-middleware.html).
+For more information about Express middleware, see: [Using Express middleware](/{{ page.lang }}/guide/using-middleware.html).

@@ -14,7 +14,7 @@ lang: uk
 Визначення маршруту має наступну структуру `app.METHOD(PATH, HANDLER)`, де `app` це екземпляр `express`, `METHOD` це [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `PATH` це адреса на сайті, і `HANDLER` це функція яка виконується коли маршрут буде зіставлений.
 
 <div class="doc-box doc-notice" markdown="1">
-Це керівництво передбачає що екземпляр `express` названий `app` створений і сервер запущено. Якщо ви не знайомі зі створенням і запуском додатку, ознайомтеся з [Hello world приклад](/starter/hello-world.html).
+Це керівництво передбачає що екземпляр `express` названий `app` створений і сервер запущено. Якщо ви не знайомі зі створенням і запуском додатку, ознайомтеся з [Hello world приклад](/{{ page.lang }}/starter/hello-world.html).
 </div>
 
 Наступний код демонструє деякі приклади маршрутів у додатку.
@@ -41,4 +41,4 @@ app.delete('/user', function (req, res) {
 })
 </code></pre>
 
-Щоб більше дізнатися про маршрутизацію, ознайомтеся з керівництвом [Маршрутизація](/guide/routing.html).
+Щоб більше дізнатися про маршрутизацію, ознайомтеся з керівництвом [Маршрутизація](/{{ page.lang }}/guide/routing.html).

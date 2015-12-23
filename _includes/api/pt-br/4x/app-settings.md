@@ -148,7 +148,7 @@ Se `name` for uma das configurações da aplicação (app), o comportamento do a
   <h5 id="trust.proxy.options.table">Opções para configurações `trust proxy`</h5>
 
   <p markdown="1">
-  Read [Express behind proxies](/guide/behind-proxies.html) for more
+  Read [Express behind proxies](/{{ page.lang }}/guide/behind-proxies.html) for more
   information.
   </p>
 

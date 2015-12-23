@@ -1,6 +1,6 @@
 <h3 id='app.use'>app.use([path,] function [, function...])</h3>
 
-Monta as funções do [middleware](/guide/using-middleware.html) no caminho `path`. Quando `path` não for especificado, o valor padrão é de "/".
+Monta as funções do [middleware](/{{ page.lang }}/guide/using-middleware.html) no caminho `path`. Quando `path` não for especificado, o valor padrão é de "/".
 
 <div class="doc-box doc-info" markdown="1">
   A rota irá corresponder com qualquer caminho que seguir imediatamente com "<code>/</code>".
@@ -238,7 +238,7 @@ app.use(mw1, [mw2, r1, r2], subApp);
 
 </table>
 
-Segue alguns exemplos de utilização do *middleware* [express.static](/guide/using-middleware.html#middleware.built-in)
+Segue alguns exemplos de utilização do *middleware* [express.static](/{{ page.lang }}/guide/using-middleware.html#middleware.built-in)
 do aplicativo *Express*.
 
 Serve conteúdo estático para o aplicativo a partir do diretório "public" da aplicação:
