@@ -1,1 +1,1 @@
-This document might be outdated relative to the documentation in English. For the latest updates, please refer the <a href="/en/">documentation in English</a>.
+이 문서는 영문판 문서에 비해 더 오래된 버전일 수도 있습니다. 최신 업데이트를 확인하려면 <a href="/en/">영문판 문서</a>를 참조하십시오.

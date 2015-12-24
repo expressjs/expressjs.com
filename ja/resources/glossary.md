@@ -1,58 +1,63 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Express glossary
+title: Express の用語集
 menu: resources
 lang: ja
+redirect_from: "/resources/glossary.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Glossary
+# 用語集
 
-<div class="doc-box doc-warn">This is currently a working draft</div>
+<div class="doc-box doc-warn">現在作業中のドラフトです。</div>
 
-### application
+### アプリケーション
 
-In general, one or more programs designed to carry out operations for a specific purpose.  In the context of Express, a program that uses the Express API running on the Node.js platform.  May also refer to an [app object](/api.html#express).
+一般に、特定の目的で操作を実行するよう設計された 1 つ以上のプログラム。Express のコンテキストでは、Node.js プラットフォームで稼働する Express API を使用するプログラム。[アプリケーション・オブジェクト](/{{ page.lang }}/api.html#express)と呼ばれることもある。
 
 ### API
 
-Application programming interface.  Spell out on first use.
+アプリケーション・プログラミング・インターフェース。最初に使用するときは、略語のスペルを略さない。
 
 ### Express
 
-A fast, un-opinionated, minimalist web framework for Node.js applications.  In general, prefer simply "Express" to "Express.js," though the latter is acceptable. 
+特定の意見に固執しない、Node.js アプリケーション向けの高速で最小限の Web フレームワーク。一般に、「Express」の望ましい呼び方は「Express.js」であるが、後者でも問題はない。
 
 ### libuv
 
-Multi-platform support library with focus on asynchronous I/O, primarily developed for use by Node.js.
+主に Node.js で使用するために開発された、非同期入出力に重点を置いたマルチプラットフォーム・サポート・ライブラリー。
 
-### middleware
+### ミドルウェア
 
-A function invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.  A few fine points of terminology around middleware:
+最後の要求ハンドラーの前に Express ルーティング層によって呼び出される関数。そのため、未加工要求と最後の目的のルートの間に配置される。ミドルウェアの用語に関しては、微妙な点がいくつかある。
 
-  * `var foo = require('middleware')` is called _requiring_ or _using_ a Node.js module. Then the statement `var mw = foo()`  typically returns the middleware.
-  * `app.use(mw)` is called _adding the middleware to the global processing stack_.
-  * `app.get('/foo', mw, function (req, res) { ... })` is called _adding the middleware to the "GET /foo" processing stack_.
+  * `var foo = require('middleware')` は、Node.js モジュールを*要求* または*使用* することで呼び出される。その後、通常はステートメント `var mw = foo()` がミドルウェアを返す。
+  * `app.use(mw)` は、*グローバル処理スタックにミドルウェアを追加* することで呼び出される。
+  * `app.get('/foo', mw, function (req, res) { ... })` は、*「GET /foo」処理スタックにミドルウェアを追加* することで呼び出される。
 
 ### Node.js
 
-Software platform used to build scalable network applications. Node.js uses JavaScript as its scripting language, and achieves high throughput via non-blocking I/O and a single-threaded event loop.  See [nodejs.org](http://nodejs.org/). **Usage note**: Initially, "Node.js," thereafter "Node".
+スケーラブルなネットワーク・アプリケーションを作成するために使用されるソフトウェア・プラットフォーム。Node.js は、スクリプト言語として JavaScript を使用し、ノンブロッキング入出力と単一スレッドのイベント・ループを通して高スループットを実現する。[nodejs.org](http://nodejs.org/) を参照。**使用上の注意**: 初回は「Node.js」を使用し、その後は「Node」を使用する。
 
-### open-source, open source
+### オープン・ソース
 
-When used as an adjective, hyphenate; for example: "This is open-source software." See [Open-source software on Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Note: Although it is common not to hyphenate this term, we are using the standard English rules for hyphenating a compound adjective
+形容詞として使用する場合は、ハイフンを付ける (例: 「This is open-source software.」)。[Wikipedia の「Open-source software」](http://en.wikipedia.org/wiki/Open-source_software)を参照。注: 一般的にはこの用語にハイフンを付けないが、ここでは複合形容詞にハイフンを付けるという標準英語の規則に従う。
 
-### request
+### 要求
 
-An HTTP request.  A client submits an HTTP request message to a server, which returns an response.  Must use one of several [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) such as GET, POST, and so on.
+HTTP 要求。クライアントは HTTP 要求メッセージをサーバーに送信して、サーバーは応答を返す。要求では、いずれかの[要求メソッド](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) (GET、POST など) を使用する必要がある。
 
-### response
+### 応答
 
-An HTTP response. A server returns an HTTP response message to the client. The response contains completion status information about the request and may also contain requested content in its message body.
+HTTP 応答。サーバーは、HTTP 応答メッセージをクライアントに返す。応答には要求の完了状況情報が含まれ、要求された内容がメッセージの本文に入っている場合もある。
 
-### route
+### ルート
 
-Part of a URL that identifies a resource.  For example, in `http://foo.com/products`, "/products/id" is the route.
+リソースを識別する URL の一部。例えば、`http://foo.com/products/id` の中では「/products/id」がルートである。
 
-### router
+### ルーター
 
-See [http://expressjs.com/api#router](http://expressjs.com/api#router)
+API リファレンスで[ルーター](/{{ page.lang }}/4x/api.html#router)を参照。

@@ -1,33 +1,52 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Depurando no Express
+title: Depurando o Express
 menu: guide
 lang: pt-br
+redirect_from: "/guide/debugging.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Depurando no Express
+# Depurando o Express
 
-Express utiliza o módulo [debug](https://github.com/visionmedia/debug) internamente para registrar informações(logs) sobre combinação de rotas, middlewares em uso, modo de aplicação, e o fluxo do ciclo de requisição e resposta(request-response cycle).
+O Express usa o módulo de [depuração](https://www.npmjs.com/package/debug)
+internamente para registrar informações de log sobre a correspondência de rotas, as funções middleware que estão em uso, o modo de
+aplicativo, e o fluxo do ciclo solicitação-resposta.
 
 <div class="doc-box doc-info" markdown="1">
-‘debug’, é como uma versão incrementada do ‘console.log’. Mas ao contrário deste, você não tem que comentar logs de depuração no código em produção. Esta opção já vem desabilitada por padrão e pode ser condicionalmente habilitada com o uso de uma varíavel de ambiente chamada ‘DEBUG’.
+O `debug` é como uma versão aumentada do `console.log` mas, diferente do
+`console.log`, não é preciso comentar os logs de
+`debug` no código na produção. O registro de logs
+está desligado por padrão e podem ser ligados condicionadamente
+usando a variável de ambiente `DEBUG`.
 </div>
 
-Para visualizar todos os logs internos utilizados no Express, apenas configure a variável de ambiente DEBUG para `express:*` quando for executar sua aplicação.
+Para ver todos os logs interno usados no Express, configure a
+variável de ambiente `DEBUG` para
+`express:*` ao ativar seu aplicativo.
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ DEBUG=express:* node index.js
-</code></pre>
+</code>
+</pre>
 
-No windows, utilize o seguinte comando:
+No Windows, use o comando correspondente.
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 > set DEBUG=express:* & node index.js
-</code></pre>
+</code>
+</pre>
 
-Executando o comando acima na aplicação padrão gerada pelo [express generator](/starter/generator.html) mostrará a seguinte saída:
+Executar este comando no aplicativo padrão gerado pelo
+[express generator](/{{ page.lang }}/starter/generator.html) imprime a seguinte saída:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -63,17 +82,20 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +1ms
   express:router use /users router +0ms
   express:router:layer new /users +0ms
-  express:router use / &lt;anonymous> +0ms
+  express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous> +0ms
+  express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous> +0ms
+  express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-</code></pre>
+</code>
+</pre>
 
-Agora, quando uma requisição for realizada em sua aplicação, você verá os logs gerados pelo Express:
+Quando uma solicitação é feita em seguida para o aplicativo,
+você verá os logs especificados no código do Express:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -89,30 +111,40 @@ Agora, quando uma requisição for realizada em sua aplicação, você verá os 
   express:view lookup "index.jade" +338ms
   express:view stat "/projects/example/views/index.jade" +0ms
   express:view render "/projects/example/views/index.jade" +1ms
-</code></pre>
+</code>
+</pre>
 
-Para visualizer apenas os logs da implementação de rotas, configure a varíavel `DEBUG` para `express:router`. Da mesma forma, para logs somente da implementação da aplicação, utilize `express:application`, e assim por diante.
+Para ver os logs apenas da implementação do roteador configure
+o valor de `DEBUG` para
+`express:router`. Do mesmo modo, para ver os logs
+apenas da implementação do aplicativo configure o valor de
+`DEBUG` para `express:application`,
+e assim por diante.
 
-## `express`-generated app
+## Aplicativos gerados pelo `express`
 
-A aplicação gerada pelo comando `express` também utiliza o módulo `debug` e seu namespace possui como escopo o nome da aplicação.
+Um aplicativo gerado pelo comando `express`
+também usa o módulo de `debug` e o seu namespace de
+depuração está com o escopo definido para o nome do aplicativo.
 
-Ao criar uma aplicação como a seguinte:
+Por exemplo, se você gerou o aplicativo com o `$ express
+sample-app`, é possível ativar as instruções de depuração
+com o seguinte comando:
 
-<pre><code class="language-sh" translate="no">
-$ express sample-app
-</code></pre>
-
-Você poderá habilitar a depuração com o comando a seguir:
-
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ DEBUG=sample-app node ./bin/www
-</code></pre>
+</code>
+</pre>
 
-Você pode especificar mais de um namespace de depuração, atribuindo uma lista cujos elementos são separados por vírgula, como abaixo:
+É possível especificar mais do que um namespace de depuração
+designando uma lista de nomes separados por vírgulas:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ DEBUG=http,mail,express:* node index.js
-</code></pre>
+</code>
+</pre>
 
-Para mais informações sobre o módulo `debug`, veja o [debug guide](https://github.com/visionmedia/debug).
+Para obter mais informações sobre `debug`,
+consulte o [debug](https://www.npmjs.com/package/debug).

@@ -1,58 +1,63 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Express glossary
+title: Express 용어집
 menu: resources
 lang: ko
+redirect_from: "/resources/glossary.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Glossary
+# 용어집
 
-<div class="doc-box doc-warn">This is currently a working draft</div>
+<div class="doc-box doc-warn">이 문서는 현재 작업 중인 초안 문서입니다.</div>
 
-### application
+### 라우터(router)
 
-In general, one or more programs designed to carry out operations for a specific purpose.  In the context of Express, a program that uses the Express API running on the Node.js platform.  May also refer to an [app object](/api.html#express).
+API 참조의 [라우터](/{{ page.lang }}/4x/api.html#router)를 참조하십시오.
+
+### 라우트(route)
+
+자원을 식별하는 URL의 일부입니다.  예를 들면, `http://foo.com/products/id`에서 "/products/id"가 라우트입니다.
+
+### 미들웨어(middleware)
+
+최종 요청 핸들러 이전의 Express 라우팅 계층에 의해 호출되는 함수이며, 따라서 원시 요청과 의도된 최종 라우트 사이의 미들웨어에 위치합니다.  미들웨어와 관련된 용어의 몇 가지 요점은 다음과 같습니다.
+
+  * `var foo = require('middleware')`는 Node.js 모듈을 *요구* 또는 *사용*하는 것으로 일컬어집니다. 이후 `var mw = foo()` 명령문은 일반적으로 미들웨어를 리턴합니다.
+  * `app.use(mw)`는 *미들웨어를 전역 처리 스택에 추가*하는 것으로 일컬어집니다.
+  * `app.get('/foo', mw, function (req, res) { ... })`는 *미들웨어를 "GET /foo" 처리 스택에 추가*하는 것으로 일컬어집니다.
+
+### 애플리케이션(application)
+
+일반적으로, 특정한 목적의 연산을 수행하도록 설계된 하나 이상의 프로그램입니다.  Express의 컨텍스트에서는, Node.js 플랫폼에서 실행되며 Express API를 사용하는 프로그램을 말합니다.  또한 [앱 오브젝트](/{{ page.lang }}/api.html#express)를 지칭할 수도 있습니다.
+
+### 오픈 소스(open-source, open source)
+
+영문에서 형용사로 사용될 때는 하이픈이 사용됩니다. 예: "이 소프트웨어는 오픈 소스 소프트웨어입니다(This is open-source software)." [Wikipedia의 Open-source software](http://en.wikipedia.org/wiki/Open-source_software)를 참조하십시오. 참고: 영문에서 이 용어에 하이픈이 사용되지 않는 경우가 흔하지만, 여기서는 합성 형용사에 하이픈을 추가하는 표준 영문 규칙을 사용합니다.
+
+### 요청(request)
+
+HTTP 요청입니다.  클라이언트는 HTTP 요청 메시지를 서버에 제출하며, 서버는 응답을 리턴합니다.  요청은 여러 [요청 메소드](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) 중 하나를 사용해야 합니다(예: GET, POST 등).
+
+### 응답(response)
+
+HTTP 응답입니다. 서버는 HTTP 응답 메시지를 클라이언트에 리턴합니다. 응답에는 요청에 대한 완료 상태 정보가 포함되어 있으며 응답 메시지 본문에는 요청된 컨텐츠가 포함되어 있을 수도 있습니다.
 
 ### API
 
-Application programming interface.  Spell out on first use.
+애플리케이션 프로그래밍 인터페이스(Application Programming Interface)입니다.  이 용어를 최초로 사용할 때는 약어를 풀어서 기재하십시오.
 
 ### Express
 
-A fast, un-opinionated, minimalist web framework for Node.js applications.  In general, prefer simply "Express" to "Express.js," though the latter is acceptable. 
+Node.js 애플리케이션을 위한 빠르고 개방적인 간결한 웹 프레임워크입니다.  일반적으로 "Express.js"보다 "Express"가 선호되지만, "Express.js"도 허용됩니다.
 
 ### libuv
 
-Multi-platform support library with focus on asynchronous I/O, primarily developed for use by Node.js.
-
-### middleware
-
-A function invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.  A few fine points of terminology around middleware:
-
-  * `var foo = require('middleware')` is called _requiring_ or _using_ a Node.js module. Then the statement `var mw = foo()`  typically returns the middleware.
-  * `app.use(mw)` is called _adding the middleware to the global processing stack_.
-  * `app.get('/foo', mw, function (req, res) { ... })` is called _adding the middleware to the "GET /foo" processing stack_.
+비동기식 I/O에 초점을 둔 멀티플랫폼 지원 라이브러리이며, 주로 Node.js에 의해 사용되도록 개발됩니다.
 
 ### Node.js
 
-Software platform used to build scalable network applications. Node.js uses JavaScript as its scripting language, and achieves high throughput via non-blocking I/O and a single-threaded event loop.  See [nodejs.org](http://nodejs.org/). **Usage note**: Initially, "Node.js," thereafter "Node".
-
-### open-source, open source
-
-When used as an adjective, hyphenate; for example: "This is open-source software." See [Open-source software on Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Note: Although it is common not to hyphenate this term, we are using the standard English rules for hyphenating a compound adjective
-
-### request
-
-An HTTP request.  A client submits an HTTP request message to a server, which returns an response.  Must use one of several [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) such as GET, POST, and so on.
-
-### response
-
-An HTTP response. A server returns an HTTP response message to the client. The response contains completion status information about the request and may also contain requested content in its message body.
-
-### route
-
-Part of a URL that identifies a resource.  For example, in `http://foo.com/products/id`, "/products/id" is the route.
-
-### router
-
-See [http://expressjs.com/api#router](http://expressjs.com/api#router)
+확장 가능한 네트워크 애플리케이션을 개발하는 데 사용되는 소프트웨어 플랫폼입니다. Node.js는 JavaScript를 스크립팅 언어로 사용하며, 방해하지 않는 I/O 및 단일 스레드 이벤트 루프를 통해 높은 처리량을 달성합니다.  [nodejs.org](http://nodejs.org/)를 참조하십시오. **활용 참고**: 최초에는 "Node.js"였으며 이후 "Node"가 되었습니다.

@@ -1,8 +1,13 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express applications
 menu: resources
 lang: ko
+redirect_from: "/resources/applications.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Applications
@@ -184,6 +189,15 @@ Real-time team collaboration with integrated task management, video conferencing
 [![](/images/apps/screenshots/glip.png)](https://glip.com)
 
 Visit [Glip](https://glip.com)
+
+##Gugamarket
+
+Gugamarket is a fullstack REST API framework licensed under GPLv3. It supports giaya.com social login.
+Gugamarket is listed as one of the top Node/Express REST API's at http://nodeframework.com/.
+
+[![](/images/apps/screenshots/gugamarket.png)](http://www.gugamarket.com)
+
+Visit [Gugamarket](http://www.gugamarket.com)
 
 ##Add your app or site
 

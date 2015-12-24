@@ -1,23 +1,24 @@
 ---
 layout: 4x-api
-title: Express 4.x - API Reference
+title: Express 4.x - Referencia de API
 menu: api
 lang: es
+redirect_from: "/4x/api.html"
 ---
 <div id="api-doc" markdown="1">
 
-  <h1>4.x API</h1>
+  <h1>API de 4.x</h1>
 
   <a id='express' class='h2'></a>
   {% include api/{{ page.lang }}/4x/express.md %}
 
-  <a id='application' class='h2'></a>
+  <a id='app' class='h2'></a>
   {% include api/{{ page.lang }}/4x/app.md %}
 
-  <a id='request' class='h2'></a>
+  <a id='req' class='h2'></a>
   {% include api/{{ page.lang }}/4x/req.md %}
 
-  <a id='response' class='h2'></a>
+  <a id='res' class='h2'></a>
   {% include api/{{ page.lang }}/4x/res.md %}
 
   <a id='router' class='h2'></a>

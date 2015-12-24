@@ -1,41 +1,39 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Express community
+title: Express のコミュニティー
 menu: resources
 lang: ja
+redirect_from: "/resources/community.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Community
+# コミュニティー
 
-##Mailing List
+##メーリング・リスト
 
-Join over 2000 Express users or browse over 5000
-discussions in the [Google Group](https://groups.google.com/group/express-js).
+[Google グループ](https://groups.google.com/group/express-js)で、2000 名を超える Express ユーザーの中に参加したり、5000 件を超えるディスカッションを参照したりすることができます。
 
 ##Gitter
 
-The [strongloop/express chatroom](https://gitter.im/strongloop/express) is great place 
-for developers interested in the everyday discussions related to Express.
+[strongloop/express chatroom](https://gitter.im/strongloop/express) は、Express に関連する日常的なディスカッションに参加したい開発者に適しています。
 
-##IRC Channel
+##IRC チャネル
 
-Hundreds of developers idle in #express on freenode every day.
-If you have questions about the framework, jump in for quick
-feedback.
+毎日、数百名の開発者が #express on freenode で時間を過ごしています。
+フレームワークに関する質問がある場合は、すぐに参加してください。フィードバックを素早く得られます。
 
-##Examples
+##例
 
-View dozens of Express application [examples](https://github.com/strongloop/express/tree/master/examples)
-in the repo covering everything from API design and auth
-to template engine integration.
+API の設計や認証からテンプレート・エンジンの統合まで、あらゆるものを扱っている数十の Express アプリケーションの[例](https://github.com/strongloop/express/tree/master/examples)をリポジトリーでご覧ください。
 
-##Issues
+##問題
 
-If you've come across what you think is a bug, or just want to make
-a feature request open a ticket in the [issue queue](https://github.com/strongloop/express/issues).
+バグに思われるものが見つかったり、単に機能を要求したりする場合は、[問題のキュー](https://github.com/strongloop/express/issues)でチケットをオープンしてください。
 
-##Third Party
+##サード・パーティー
 
-Our vibrant community has created a large variety of extensions,
-[middleware](/resources/middleware.html) and higher level frameworks. Check them out in the
-[wiki](https://github.com/strongloop/express/wiki).
+この活気あるコミュニティーでは、さまざまな拡張機能、[ミドルウェア・モジュール](/{{ page.lang }}/resources/middleware.html)、高水準のフレームワークが作成されています。[Wiki](https://github.com/strongloop/express/wiki) で確認してください。
+

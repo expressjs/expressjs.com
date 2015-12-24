@@ -1,47 +1,79 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Express basic routing tutorial
+title: Express の基本的なルーティング
 menu: starter
 lang: ja
+redirect_from: "/starter/basic-routing.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# 基本的なルーティングチュートリアル
+# 基本的なルーティング
 
-このチュートリアルはExpressでルーティングをするための導入です。
-ルーティングはURI(またはpath)や特定のHTTPリクエストメソッド(GET, POSTなど)といったクライアントからの特定のリクエストに対して、アプリケーションがどのように応答するか決定します。
+*ルーティング* とは、アプリケーションが特定のエンドポイントに対するクライアント要求に応答する方法として、URI (またはパス) と特定の HTTP 要求メソッド (GET、POST など) を決定することです。
 
-ルートは一つ以上のハンドラ関数を持っていて、ルートにマッチした時には / のハンドラ関数が実行されます。
+各ルートには、1 つ以上のハンドラー関数があり、それらはルートが一致したときに実行されます。
 
-ルートの定義は`app.METHOD(PATH, HANDLER)`と書きます。
-ここでの`app`は`express`のインスタンス、`METHOD`は[HTTPリクエストメソッド](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)、`PATH`はサーバー上のパス、`HANDLER`はルーティングがマッチした時に実行される関数を示しています。
+ルート定義では、次の構造を使用します。
+<pre>
+<code class="language-text" translate="no">
+app.METHOD(PATH, HANDLER)
+</code>
+</pre>
+
+各部分の意味は次のとおりです。
+
+- `app` は、`express` のインスタンスです。
+- `METHOD` は、[HTTP 要求メソッド](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) です。
+- `PATH` は、サーバー上のパスです。
+- `HANDLER` は、ルートが一致したときに実行される関数です。
 
 <div class="doc-box doc-notice" markdown="1">
-このチュートリアルでは`express`のインスタンスが`app`という名前で作成され、サーバーが動作していることが前提となっています。
-あなたがアプリの作成と開始についてよくわからない場合は[Hello world example](/{{ page.lang }}/starter/hello-world.html)を参照してください。
+このチュートリアルでは、`app` という名前の `express` のインスタンスが作成されていて、サーバーが稼働中であることを想定しています。アプリケーションの作成と開始に慣れていない場合は、[Hello World の例](/{{ page.lang }}/starter/hello-world.html) を参照してください。
 </div>
 
-下記のコードはルートのいくつかの例を示しています。
+以下の例は、単純なルートの定義を示しています。
 
-<pre><code class="language-javascript" translate="no">
-// respond with "Hello World!" on the homepage
+ホーム・ページで `Hello World!` と応答します。
+
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
+</code>
+</pre>
 
-// accept POST request on the homepage
+アプリケーションのホーム・ページであるルートのルート (`/`) で POST 要求に応答します。
+
+<pre>
+<code class="language-javascript" translate="no">
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
+</code>
+</pre>
 
-// accept PUT request at /user
+`/user` ルートに対する PUT 要求に応答します。
+
+<pre>
+<code class="language-javascript" translate="no">
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
+</code>
+</pre>
 
-// accept DELETE request at /user
+`/user` ルートに対する DELETE 要求に応答します。
+
+<pre>
+<code class="language-javascript" translate="no">
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-</code></pre>
+</code>
+</pre>
 
-ルーティングについての詳細は[routing guide](/{{ page.lang }}/guide/routing.html)を参照してください。
+ルーティングについて詳しくは、[ルーティング・ガイド](/{{ page.lang }}/guide/routing.html)を参照してください。

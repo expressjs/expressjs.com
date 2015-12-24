@@ -1,18 +1,19 @@
 ---
 layout: 3x-api
-title: Express 3.x - API Reference
+title: Express 3.x - Referencia de API
 menu: api
 lang: es
+redirect_from: "/3x/api.html"
 ---
 <div id="api-doc" markdown="1">
 
   <div class="doc-box doc-warn" markdown="1">
-  **Express 3.x support is ending soon**
+  **Express 3.x YA NO SE MANTIENE**
 
-  This series will continue to receive only security updates and bug fixes until July 2015. It is highly recommended to upgrade to Express 4.x.
+  Los problemas de rendimiento y seguridad conocidos y desconocidos en 3.x no se han solucionado desde la última actualización (1 de agosto de 2015). Se recomienda especialmente utilizar la última versión de Express.
   </div>
 
-  <h1>3.x API</h1>
+  <h1>API de 3.x</h1>
 
   <a id='express' class='h2'></a>
   {% include api/{{ page.lang }}/3x/express.md %}

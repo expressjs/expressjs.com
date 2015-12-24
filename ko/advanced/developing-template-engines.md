@@ -1,17 +1,23 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Developing template engines for Express
+title: Express용 템플리트 엔진 개발
 menu: advanced
 lang: ko
+redirect_from: "/advanced/developing-template-engines.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Developing template engines for Express
+# Express용 템플리트 엔진 개발
 
-Use the `app.engine(ext, callback)` method to create your own template engine. `ext` refers to the file extension, `callback` is the template engine function which accepts the location of the file, the options object, and the callback function, as its parameters.
+`app.engine(ext, callback)` 메소드를 사용하면 자신만의 템플리트 엔진을 작성할 수 있습니다. `ext`는 파일 확장자를 나타내며, `callback`은 파일의 위치, 옵션 오브젝트 및 콜백 함수 등의 항목을 매개변수로 수락하는 템플리트 엔진 함수입니다.
 
-The following is an example of implementing a very simple template engine for rendering ".ntl" files.
+다음의 코드는 `.ntl` 파일을 렌더링하기 위한 매우 간단한 템플리트 엔진을 구현하는 예입니다.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
@@ -24,19 +30,24 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
-</code></pre>
+</code>
+</pre>
 
-Your app will now be able to render ".ntl" files. Create a file named "index.ntl" in the views directory with the following content.
+앱은 이제 `.ntl` 파일을 렌더링할 수 있습니다. 다음의 내용이 입력된 `index.ntl`이라는 이름의 파일을 `views` 디렉토리에 작성하십시오.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 #title#
 #message#
-</code></pre>
-Then, create the following route in your app.
+</code>
+</pre>
+이후 앱에 다음과 같은 라우트를 작성하십시오.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 })
-</code></pre>
-On making a request to the home page, "index.ntl" will be rendered as HTML.
+</code>
+</pre>
+홈 페이지에 대한 요청을 실행할 때 `index.ntl`은 HTML로 렌더링됩니다.

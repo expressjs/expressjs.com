@@ -1,38 +1,63 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
 title: Instalación de Express
 menu: starter
 lang: es
+redirect_from: "/starter/installing.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Instalación
 
-Lo primero, crea un directorio para su aplicación, si no lo ha hecho, y entrar en su directorio de trabajo.
+Suponiendo que ya ha instalado [Node.js](https://nodejs.org/), cree un directorio para que contenga la aplicación y conviértalo en el directorio de trabajo.
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ mkdir myapp
 $ cd myapp
-</code></pre>
+</code>
+</pre>
 
-Crea un archivo `package.json` en el directorio de interés, si no existe ya, con el comando `npm init`.
+Utilice el mandato `npm init` para crear un archivo `package.json` para la aplicación.
+Para obtener más información sobre cómo funciona `package.json`, consulte [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm init
-</code></pre>
+</code>
+</pre>
 
-Instala Express en el directorio y guardarlo en la lista de dependencias:
+Este mandato solicita varios elementos como, por ejemplo, el nombre y la versión de la aplicación.
+Por ahora, sólo tiene que pulsar INTRO para aceptar los valores predeterminados para la mayoría de ellos, con la siguiente excepción:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
+entry point: (index.js)
+</code>
+</pre>
+
+Especifique `app.js` o el nombre que desee para el archivo principal. Si desea que sea `index.js`, pulse INTRO para aceptar el nombre de archivo predeterminado recomendado.
+
+A continuación, instale Express en el directorio `app` y guárdelo en la lista de dependencias. Por ejemplo:
+
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express --save
-</code></pre>
+</code>
+</pre>
 
-Para instalar Express temporalmente, y no agregarlo a la listade dependencias, omitir la opción `--save`:
+Para instalar Express temporalmente y no añadirlo a la lista de dependencias, omita la opción `--save`:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express
-</code></pre>
+</code>
+</pre>
 
 <div class="doc-box doc-info" markdown="1">
-Módulos de Node instalados con la opción `--save` se añaden a la lista de `dependencias` en el archivo `package.json`.
-Luego, utilizando el comando `npm install` en el directorio de la aplicación se instalará automáticamente los módulos en la lista de dependencias.
+Los módulos de Node que se instalan con la opción `--save` se añaden a la lista `dependencies` en el archivo `package.json`.
+Posteriormente, si ejecuta `npm install` en el directorio `app`, los módulos se instalarán automáticamente en la lista de dependencias.
 </div>

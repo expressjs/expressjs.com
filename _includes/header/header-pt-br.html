@@ -6,14 +6,14 @@
   </section>
   <div id="navbar">
       <ul id="navmenu">
-          <li><a href="/{{ page.lang }}" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Início</a></li>
+          <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Página Inicial</a></li>
           <li>
               <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Primeiros passos</a>
+                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Introdução</a>
                       <ul>
                           <li>
                             <a href="/{{ page.lang }}/starter/installing.html">
-                              Instalando
+                              Instalação
                             </a>
                           </li>
                           <li>
@@ -23,22 +23,22 @@
                           </li>
                           <li>
                           <a href="/{{ page.lang }}/starter/generator.html">
-                            Gerador Express
+                            Gerador do Express
                           </a>
                           </li>
                           <li>
                             <a href="/{{ page.lang }}/starter/basic-routing.html">
-                              Roteamento básico
+                              Roteamento Básico
                             </a>
                           </li>
                           <li>
                             <a href="/{{ page.lang }}/starter/static-files.html">
-                              Arquivos estáticos
+                              Arquivos Estáticos
                             </a>
                           </li>
                           <li>
                             <a href="/{{ page.lang }}/starter/faq.html">
-                              FAQ
+                              Perguntas mais frequentes
                             </a>
                           </li>
                       </ul>
@@ -51,19 +51,23 @@
                       <ul>
                           <li><a href="/{{ page.lang }}/guide/routing.html">Roteamento</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Usando middleware</a>
+                          <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Escrevendo o middleware</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Utilizando motores de template</a>
+                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Usando o middleware</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/error-handling.html">Tratamento de erros</a>
+                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Usando o mecanismo de modelo</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/debugging.html">Debugging</a>
+                          <li><a href="/{{ page.lang }}/guide/error-handling.html">Manipulação de erros</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/debugging.html">Depuração</a>
                           </li>
                           <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express atrás de proxies</a>
                           </li>
                           <li><a href="/{{ page.lang }}/guide/migrating-4.html">Migrando para o Express 4</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/database-integration.html">Integração com BD</a>
+                          <li><a href="/{{ page.lang }}/guide/migrating-5.html">Migrando para o Express 5</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/database-integration.html">Integração de Banco de dados</a>
                           </li>
                       </ul>
                   </li>
@@ -75,9 +79,9 @@
                       <ul>
                           <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/3x/api.html">3.x</a>
+                          <li><a href="/{{ page.lang }}/3x/api.html">3.x (descontinuada)</a>
                           </li>
-                          <li><a href="/2x/">2.x (depreciado)</a>
+                          <li><a href="/{{ page.lang }}/2x/">2.x (descontinuada)</a>
                           </li>
                       </ul>
                   </li>
@@ -85,14 +89,19 @@
           </li>
           <li>
               <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Tópicos avançados</a>
+                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Tópicos Avançados</a>
                       <ul>
-                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Motores de template</a>
+                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Mecanismos de modelo</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/advanced/pm.html">Usando gerentes de processo</a>
+                          <li><a href="/{{ page.lang }}/advanced/pm.html">Usando gerenciadores de processos</a>
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/security-updates.html">Atualizações de segurança</a>
                           </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">Melhores práticas de segurança</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Melhores práticas de desempenho</a>
+                          </li>
+
                       </ul>
                   </li>
               </ul>
@@ -109,12 +118,12 @@
                           </li>
                           <li><a href="/{{ page.lang }}/resources/books-blogs.html">Livros e blogs</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/resources/applications.html">Aplicações</a>
+                          <li><a href="/{{ page.lang }}/resources/applications.html">Aplicativos</a>
                           </li>
                       </ul>
                   </li>
               </ul>
           </li>
       </ul>
-  </div><a href="https://strongloop.com/node-js/training/" title="Node and Express Training from StrongLoop" id="strongloop-header">Treinamento Express e Node.js na StrongLoop</a>
+  </div><a href="http://strongloop.com/node-js/training/" title="Treinamento de Node e Express do StrongLoop" id="strongloop-header">Treinamento de Express e Node.js do StrongLoop</a>
 </header>
