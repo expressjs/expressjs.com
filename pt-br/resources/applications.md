@@ -1,205 +1,177 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Express applications
-menu: resources
+title: Aplicações
+menu: Recursos
 lang: pt-br
 redirect_from: "/resources/applications.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Applications
+# Aplicações
 
 ##MySpace
 
-No introduction required! Everyone knows MySpace,
-and the upcoming https://new.myspace.com is powered by Express.
+Não precisa ser apresentado! Todo mundo conhece MySpace, e o próximo https://new.myspace.com foi desenvolvido com Express.
 
-[![](/{{ page.lang }}/images/apps/screenshots/myspace.png)](https://new.myspace.com/)
+[![](/images/apps/screenshots/myspace.png)](https://new.myspace.com/)
 
-Visit [MySpace](https://new.myspace.com/)
+Visite [MySpace](https://new.myspace.com/)
 
 ##LearnBoost
 
-LearnBoost provides a free, easy to use online
-education suite including gradebook,
-lesson plans, attendance, reporting, and calendars
-among other tools.
+LearnBoost é uma suite educacional online, grátis e fácil de utilizar, que inclui lançamento de notas, diário de classe, presença (assiduidade), relatórios e calendários, entre outras ferramentas.
 
-[![](/{{ page.lang }}/images/apps/screenshots/learnboost.png)](https://www.learnboost.com/)
+[![](/images/apps/screenshots/learnboost.png)](https://www.learnboost.com/)
 
-Visit [LearnBoost](https://www.learnboost.com/)
+Visite [LearnBoost](https://www.learnboost.com/)
 
 ##Storify
 
-Create stories using social media. Turn what people post
-on social media into compelling stories.  Collect the best photos, video,
-tweets and more to publish.
+Cria histórias usando mídias sociais. Transforma o que as pessoas postam nas mídias sociais, em histórias interessantes. Coleciona as melhores fotos, vídeos, tweets e mais para publicar.
 
-[![](/{{ page.lang }}/images/apps/screenshots/storify.png)](http://storify.com/)
+[![](/images/apps/screenshots/storify.png)](http://storify.com/)
 
-Visit [Storify](http://storify.com/)
+Visite [Storify](http://storify.com/)
 
 ##Geekli.st
 
-A place for geeks to share what they've done, who they did it with and
-connect with great companies and communities.
+Um lugar para geeks compartilharem o que criaram e o que fizeram com isso, fazer contato com grandes empresas e comunidades.
 
-[![](/{{ page.lang }}/images/apps/screenshots/geeklist.png)](http://geekli.st)
+[![](/images/apps/screenshots/geeklist.png)](http://geekli.st)
 
-Visit [Geekli.st](http://geekli.st)
+Visite [Geekli.st](http://geekli.st)
 
 ##Klout
 
-Klout is the Standard for Influence. Join Klout to discover your
-influence and compare with others you may know.
+Klout é o Padrão de Influência. Junte-se ao Klout para descobrir seu grau de influência e comparar com outros que você conhece.
 
-[![](/{{ page.lang }}/images/apps/screenshots/klout.png)](http://klout.com)
+[![](/images/apps/screenshots/klout.png)](http://klout.com)
 
-Visit [Klout](http://klout.com)
+Visite [Klout](http://klout.com)
 
 ##Prismatic
 
-Prismatic learns from how you interact on social networks so that we
-can show you the most interesting content and conversation from your friends.
+Prismatic aprende como você interage nas redes sociais para poder lhe mostrar conteúdos que lhe interessam e assuntos interessantes dos seus amigos.
 
-[![](/{{ page.lang }}/images/apps/screenshots/prismatic.png)](http://getprismatic.com/)
+[![](/images/apps/screenshots/prismatic.png)](http://getprismatic.com/)
 
-Visit [Prismatic](http://getprismatic.com/)
+Visite [Prismatic](http://getprismatic.com/)
 
 ##StudyNotes
 
-At StudyNotes, we are building beautiful and simple
-learning tools to empower students to accelerate their
-learning – i.e. to learn more effectively, in a shorter
-time, and with better long-term recall.
+Em StudyNotes, estamos construindo uma ferramenta maravilhosa e simples para capacitar os alunos a acelerar sua aprendizagem, aprender com mais eficiência, em menor tempo e relembrar o que aprende por muito tempo.
 
-[![](/{{ page.lang }}/images/apps/screenshots/studynotes.png)](http://www.apstudynotes.org/)
+[![](/images/apps/screenshots/studynotes.png)](http://www.apstudynotes.org/)
 
-Visit [StudyNotes](http://www.apstudynotes.org/)
+Visite [StudyNotes](http://www.apstudynotes.org/)
 
 ##Persona
 
-Persona, or "BrowserID" is Mozilla's answer
-to a better identification system for your browser,
-this promising tool is definitely worth checking out.
+Persona, ou "BrowserID" é a resposta da Mozilla para um melhor sistema de identificação para o seu ´browser´ (navegador de Internet). É uma ferramenta muito promissora que definitivamente vale a pena conferir.
 
-[![](/{{ page.lang }}/images/apps/screenshots/browserid.png)](https://login.persona.org/)
+[![](/images/apps/screenshots/browserid.png)](https://login.persona.org/)
 
-Visit [Persona](https://login.persona.org/)
+Visite [Persona](https://login.persona.org/)
 
 ##Countly
 
-Extensive real-time mobile analytics as a service.
+Serviço de análise mobile extensiva em tempo real.
 
-[![](/{{ page.lang }}/images/apps/screenshots/countly.png)](https://count.ly/)
+[![](/images/apps/screenshots/countly.png)](https://count.ly/)
 
-Visit [Countly](https://count.ly/)
+Visite [Countly](https://count.ly/)
 
 ## Segment.io
 
-No more littering your app with tons of different analytics providers.
-Instead, instrument your app once cleanly and then send your data to any analytics service you want.
+Segment.io é um centro de dados de clientes. Você nos envia seus dados de qualquer dispositivo ou plataforma. Nós traduzimos e encaminhamoso para seus aplicativos em uma linguagem que eles entendem.
 
-[![](/{{ page.lang }}/images/apps/screenshots/segment.png)](http://segment.io/)
+[![](/images/apps/screenshots/segment.png)](http://segment.io/)
 
-Visit [Segment.io](http://segment.io/)
+Visite [Segment.io](http://segment.io/)
 
 ##Yummly
 
-Yummly is the world's largest and most powerful recipe search site.
-Bringing together recipes from all over the web - making your life easier.
+Yummly é o maior e mais poderoso site de busca de receitas do mundo. Reunindo receitas de toda a web e tornando sua vida mais fácil.
 
-[![](/{{ page.lang }}/images/apps/screenshots/yummly.png)](http://yummly.com/)
+[![](/images/apps/screenshots/yummly.png)](http://yummly.com/)
 
-Visit [Yummly](http://yummly.com/)
+Visite [Yummly](http://yummly.com/)
 
 ##Koding
 
-Real-time software development in the browser with integrated
-editor, collaboration, terminals and more.
+Desenvolvimento de software em tempo real no browser com editor integrado, colaboradores, terminais e muito mais.
 
-[![](/{{ page.lang }}/images/apps/screenshots/koding.png)](http://koding.com/)
+[![](/images/apps/screenshots/koding.png)](http://koding.com/)
 
-Visit [Koding](http://koding.com/)
+Visite [Koding](http://koding.com/)
 
 ##Apiary.io
 
-REST API documentation reimagined.
+Documentação REST API reinventada.
 
-[![](/{{ page.lang }}/images/apps/screenshots/apiary.png)](http://apiary.io/)
+[![](/images/apps/screenshots/apiary.png)](http://apiary.io/)
 
-Visit [Apiary](http://apiary.io/)
+Visite [Apiary](http://apiary.io/)
 
 ##Cozy
 
-Cozy is the personal cloud that allows you to put your web apps and your
-data on your hardware: calendars, contacts, feeds, notes. With Cozy, you can build and use your own Express app and use the data stored by the other applications.
+Cozy é o cloud pessoal que permite que você coloque seus aplicativos web e dados sobre o seu hardware: calendários, contatos, feeds, notas. Com Cozy você pode construir e usar suas apps Express e utilizar os dados armazenados por outras aplicações.
 
-[![](/{{ page.lang }}/images/apps/screenshots/cozy.png)](http://cozy.io/)
+[![](/images/apps/screenshots/cozy.png)](http://cozy.io/)
 
-Visit [Cozy](http://cozy.io/)
+Visite [Cozy](http://cozy.io/)
 
 ##FlyLatex
 
-Real-time Collaborative environment for LaTex.
+Ambiente colaborativo em tempo real para LaTex.
 
-[![](/{{ page.lang }}/images/apps/screenshots/flylatex.png)](http://github.com/alabid/flylatex)
+[![](/images/apps/screenshots/flylatex.png)](http://github.com/alabid/flylatex)
 
-Visit [FlyLatex](http://github.com/alabid/flylatex)
+Visite [FlyLatex](http://github.com/alabid/flylatex)
 
 ##SimpleSet
 
-Advanced exercise prescription software for physical therapists and other health professionals.
+Software avançado de prescrição de exercícios para fisioterapeutas e outros profissionais da saúde.
 
-[![](/{{ page.lang }}/images/apps/screenshots/simpleset.png)](http://www.simpleset.net)
+[![](/images/apps/screenshots/simpleset.png)](http://www.simpleset.net)
 
-Visit [SimpleSet](http://www.simpleset.net)
+Visite [SimpleSet](http://www.simpleset.net)
 
 ##Ghost
 
-Just a blogging platform.
+Apenas uma plataforma de blog.
 
-[![](/{{ page.lang }}/images/apps/screenshots/ghost.png)](https://ghost.org)
+[![](/images/apps/screenshots/ghost.png)](https://ghost.org)
 
-Visit [Ghost](https://ghost.org)
+Visite [Ghost](https://ghost.org)
 
 ##LogHuman
 
-LogHuman is an application insights platform which enables developers to record information such as billing events, feature usage, or system hiccups, as well as flexible metadata to give these events context.
+LogHuman é uma plataforma de idéias de aplicativos que permite aos desenvolvedores registrar informações como eventos de faturamento, uso de recurso, ou hiccups do sistema, bem como metadados flexíveis para dar contexto destes eventos.
 
-[![](/{{ page.lang }}/images/apps/screenshots/loghuman.png)](https://loghuman.com)
+[![](/images/apps/screenshots/loghuman.png)](https://loghuman.com)
 
-Visit [LogHuman](https://loghuman.com)
+Visite [LogHuman](https://loghuman.com)
 
 ##VogueVerve
 
-VogueVerve is a minimalist fashion social platform. Follow, like and buy.
+VogueVerve é uma plataforma social de moda. Siga, curta e compre.
 
-[![](/{{ page.lang }}/images/apps/screenshots/vogueverve.png)](http://vogueverve.com)
+[![](/images/apps/screenshots/vogueverve.png)](http://vogueverve.com)
 
-Visit [VogueVerve](http://vogueverve.com)
+Visite [VogueVerve](http://vogueverve.com)
 
 ##Glip
 
-Real-time team collaboration with integrated task management, video conferencing, shared calendars and more.
+Equipe de colaboradores em tempo real com gerenciador de tarefas, vídeo conferência, compartilhamento de agenda e mais.
 
-[![](/{{ page.lang }}/images/apps/screenshots/glip.png)](https://glip.com)
+[![](/images/apps/screenshots/glip.png)](https://glip.com)
 
-Visit [Glip](https://glip.com)
+Visite [Glip](https://glip.com)
 
-##Gugamarket
+##Adicione seu aplicativo em nosso site.
 
-Gugamarket is a fullstack REST API framework licensed under GPLv3. It supports giaya.com social login.
-Gugamarket is listed as one of the top Node/Express REST API's at http://nodeframework.com/.
-
-[![](/{{ page.lang }}/images/apps/screenshots/gugamarket.png)](http://www.gugamarket.com)
-
-Visit [Gugamarket](http://www.gugamarket.com)
-
-##Add your app or site
-
-[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/menu/en/resources/applications.md),
-add a link to your app, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+[Edite o arquvio Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/applications.md), adicione um link para o seu aplicativo, então envie um pull request (necessário login no GitHub). Siga o modelo das listas acima.
