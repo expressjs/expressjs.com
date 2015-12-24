@@ -1,7 +1,7 @@
-﻿---
+---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: プロキシーの背後の Express
 menu: guide
@@ -79,3 +79,4 @@ IP アドレスまたはサブネットは、指定されると、アドレス�
 </ul>
 
 `trust proxy` 設定は、[proxy-addr](https://www.npmjs.com/package/proxy-addr) パッケージを使用して実装されます。詳細については、資料を参照してください。
+

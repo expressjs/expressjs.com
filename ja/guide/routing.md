@@ -7,7 +7,7 @@ title: Express でのルーティング
 menu: guide
 lang: ja
 redirect_from: "/guide/routing.html"
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION 
 ---
 
 # ルーティング
