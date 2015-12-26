@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Routing di base Express
 menu: starter
@@ -18,7 +18,7 @@ Ciascuna route può disporre di una o più funzioni dell'handler, le quali vengo
 
 La definizione della route ha la seguente struttura:
 <pre>
-<code class="language-text" translate="no">
+<code class="language-javascript" translate="no">
 app.METHOD(PATH, HANDLER)
 </code>
 </pre>

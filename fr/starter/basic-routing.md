@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Routage de base Express
 menu: starter
@@ -19,7 +19,7 @@ Chaque route peut avoir une ou plusieurs fonctions de gestionnaire, qui sont ex�
 
 La définition de la route utilise la structure suivante :
 <pre>
-<code class="language-text" translate="no">
+<code class="language-javascript" translate="no">
 app.METHOD(PATH, HANDLER)
 </code>
 </pre>
@@ -32,7 +32,7 @@ Où :
 - `HANDLER` est la fonction exécutée lorsque la route est mise en correspondance.
 
 <div class="doc-box doc-notice" markdown="1">
-Ce tutoriel suppose qu'une instance d'`express` appelée `app` soit créée et que le serveur soit en cours d'exécution. 
+Ce tutoriel suppose qu'une instance d'`express` appelée `app` soit créée et que le serveur soit en cours d'exécution.
 Si vous ne savez pas créer et démarrer une application, reportez-vous à l'[exemple Hello world](/{{ page.lang }}/starter/hello-world.html).
 </div>
 

@@ -3,7 +3,11 @@
 
   {% include head.html %}
 
-  <body>
+  {% if page.lang == 'en' %}
+  <body class="en-doc">
+  {% else %}
+  <body class="non-en-doc">
+  {% endif %}
 
     <section class="page content">
 

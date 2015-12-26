@@ -3,13 +3,14 @@
 
   {% include head.html %}
 
-  <body>
-
-    {% if page.lang != 'en' %}
-      <div id="i18n-notice-box" class="doc-box doc-warn">
-        {% include i18n-notice.html %}
-      </div>
-    {% endif %}
+  {% if page.lang == 'en' %}
+  <body class="en-doc">
+  {% else %}
+  <body class="non-en-doc">
+    <div id="i18n-notice-box" class="doc-box doc-warn">
+      {% include i18n-notice.html %}
+    </div>
+  {% endif %}
 
     {{ content }}
 

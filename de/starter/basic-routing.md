@@ -1,7 +1,7 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Basisrouting in Express
 menu: starter
@@ -12,13 +12,13 @@ redirect_from: "/starter/basic-routing.html"
 
 # Basisrouting
 
-Per *Routing* wird bestimmt, wie eine Antwort auf eine Clientanforderung an einem bestimmten Endpunkt antwortet. Dies ist eine URI (oder ein Pfad) und eine bestimmte HTTP-Anforderungsmethode (GET, POST usw.). 
+Per *Routing* wird bestimmt, wie eine Antwort auf eine Clientanforderung an einem bestimmten Endpunkt antwortet. Dies ist eine URI (oder ein Pfad) und eine bestimmte HTTP-Anforderungsmethode (GET, POST usw.).
 
-Jede Weiterleitung (Route) kann eine oder mehrere Handlerfunktionen haben, die ausgeführt werden, wenn die Weiterleitung abgeglichen wird. 
+Jede Weiterleitung (Route) kann eine oder mehrere Handlerfunktionen haben, die ausgeführt werden, wenn die Weiterleitung abgeglichen wird.
 
 Weiterleitungsdefinitionen haben die folgende Struktur:
 <pre>
-<code class="language-text" translate="no">
+<code class="language-javascript" translate="no">
 app.METHOD(PATH, HANDLER)
 </code>
 </pre>
@@ -27,14 +27,14 @@ Bedeutung:
 
 - `app` ist eine Instanz von `express`.
 - `METHOD` ist eine [HTTP-Anforderungsmethode](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol).
-- `PATH` ist ein Pfad auf dem Server. 
-- `HANDLER` ist die Funktion, die ausgeführt wird, wenn die Weiterleitung abgeglichen wird. 
+- `PATH` ist ein Pfad auf dem Server.
+- `HANDLER` ist die Funktion, die ausgeführt wird, wenn die Weiterleitung abgeglichen wird.
 
 <div class="doc-box doc-notice" markdown="1">
 In diesem Lernprogramm wird vorausgesetzt, dass eine Instanz von `express` namens `app` erstellt und der Server ausgeführt wird. Wenn Sie mit dem Erstellen und Starten von Anwendungen nicht vertraut sind, spielen Sie das [Beispiel "Hello World"](/{{ page.lang }}/starter/hello-world.html) durch.
 </div>
 
-Die folgenden Beispiele veranschaulichen das Definieren einfacher Weiterleitungen. 
+Die folgenden Beispiele veranschaulichen das Definieren einfacher Weiterleitungen.
 
 Antworten Sie mit `Hello World!` auf der Homepage:
 
