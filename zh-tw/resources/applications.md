@@ -6,7 +6,6 @@ layout: page
 title: Express applications
 menu: resources
 lang: zh-tw
-redirect_from: "/resources/applications.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

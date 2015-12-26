@@ -6,7 +6,6 @@ layout: page
 title: Основы маршрутизации в Express
 menu: starter
 lang: ru
-redirect_from: "/starter/basic-routing.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

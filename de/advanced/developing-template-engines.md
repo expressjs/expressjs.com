@@ -1,20 +1,19 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Template-Engines für Express entwickeln
 menu: advanced
 lang: de
-redirect_from: "/advanced/developing-template-engines.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Template-Engines für Express entwickeln
 
-Verwenden Sie die Methode `app.engine(ext, callback)`, um Ihre eigene Template-Engine zu erstellen. `ext` bezieht sich auf die Dateierweiterung, `callback` ist die Template-Engine-Funktion, die die folgenden Elemente als Parameter akzeptiert: die Position der Datei, das Optionsobjekt und die Callback-Funktion. 
+Verwenden Sie die Methode `app.engine(ext, callback)`, um Ihre eigene Template-Engine zu erstellen. `ext` bezieht sich auf die Dateierweiterung, `callback` ist die Template-Engine-Funktion, die die folgenden Elemente als Parameter akzeptiert: die Position der Datei, das Optionsobjekt und die Callback-Funktion.
 
-Der folgende Code ist ein Beispiel für die Implementierung einer sehr einfachen Template-Engine für die Ausgabe von `.ntl`-Dateien. 
+Der folgende Code ist ein Beispiel für die Implementierung einer sehr einfachen Template-Engine für die Ausgabe von `.ntl`-Dateien.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -33,7 +32,7 @@ app.set('view engine', 'ntl'); // register the template engine
 </code>
 </pre>
 
-Ihre Anwendung ist jetzt in der Lage, `.ntl`-Dateien auszugeben. Erstellen Sie im Verzeichnis `views` eine Datei namens `index.ntl` mit dem folgenden Inhalt. 
+Ihre Anwendung ist jetzt in der Lage, `.ntl`-Dateien auszugeben. Erstellen Sie im Verzeichnis `views` eine Datei namens `index.ntl` mit dem folgenden Inhalt.
 
 <pre>
 <code class="language-javascript" translate="no">

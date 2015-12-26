@@ -6,7 +6,6 @@ layout: page
 title: 對 Express 除錯
 menu: guide
 lang: zh-tw
-redirect_from: "/guide/using-template-engines.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

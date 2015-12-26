@@ -1,18 +1,17 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express installieren
 menu: starter
 lang: de
-redirect_from: "/starter/installing.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Installation
 
-Angenommen, Sie haben [Node.js](https://nodejs.org/) bereits installiert. Erstellen Sie ein Verzeichnis für Ihre Anwendung und definieren Sie dieses Verzeichnis als Ihr Arbeitsverzeichnis. 
+Angenommen, Sie haben [Node.js](https://nodejs.org/) bereits installiert. Erstellen Sie ein Verzeichnis für Ihre Anwendung und definieren Sie dieses Verzeichnis als Ihr Arbeitsverzeichnis.
 
 <pre>
 <code class="language-sh" translate="no">
@@ -37,7 +36,7 @@ entry point: (index.js)
 </code>
 </pre>
 
-Geben Sie `app.js` oder einen Namen Ihrer Vorstellung als Namen für die Hauptdatei ein. Wenn dieser Name `index.js` lauten soll, drücken Sie die Eingabetaste, um den vorgeschlagenen Standarddateinamen zu akzeptieren. 
+Geben Sie `app.js` oder einen Namen Ihrer Vorstellung als Namen für die Hauptdatei ein. Wenn dieser Name `index.js` lauten soll, drücken Sie die Eingabetaste, um den vorgeschlagenen Standarddateinamen zu akzeptieren.
 
 Installieren Sie jetzt Express im Verzeichnis `app` und speichern Sie es in der Abhängigkeitsliste. Beispiel:
 
@@ -56,5 +55,5 @@ $ npm install express
 </pre>
 
 <div class="doc-box doc-info" markdown="1">
-Node-Module, die mit der Option `--save` installiert werden, werden zur `Abhängigkeitsliste` in der Datei `package.json` hinzugefügt. Danach werden bei der Ausführung von `npm install` im Verzeichnis `app` automatisch alle Module in der Abhängigkeitsliste installiert. 
+Node-Module, die mit der Option `--save` installiert werden, werden zur `Abhängigkeitsliste` in der Datei `package.json` hinzugefügt. Danach werden bei der Ausführung von `npm install` im Verzeichnis `app` automatisch alle Module in der Abhängigkeitsliste installiert.
 </div>

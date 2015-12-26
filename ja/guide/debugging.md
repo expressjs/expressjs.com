@@ -6,7 +6,6 @@ layout: page
 title: Express のデバッグ
 menu: guide
 lang: ja
-redirect_from: "/guide/debugging.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

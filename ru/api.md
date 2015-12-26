@@ -2,7 +2,6 @@
 layout: 4x-api
 title: Express 4.x - Справочник API
 lang: ru
-redirect_from: "/api.html"
 ---
 <div id="api-doc" markdown="1">
 

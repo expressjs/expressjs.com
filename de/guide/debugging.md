@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Debugging bei Express
 menu: guide
 lang: de
-redirect_from: "/guide/debugging.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -16,7 +15,7 @@ Express verwendet das Modul [debug](https://www.npmjs.com/package/debug) intern,
 
 <div class="doc-box doc-info" markdown="1">
 `debug` ist praktisch eine erweiterte Version von `console.log`. Im Gegensatz zu `console.log` müssen jedoch
-keine `debug`-Protokolle im Produktionscode auskommentiert werden. Die Protokollierung wird standardmäßig inaktiviert und kann über die Umgebungsvariable `DEBUG` bedingt aktiviert werden. 
+keine `debug`-Protokolle im Produktionscode auskommentiert werden. Die Protokollierung wird standardmäßig inaktiviert und kann über die Umgebungsvariable `DEBUG` bedingt aktiviert werden.
 </div>
 
 Wenn Sie alle in Express verwendeten internen Protokolle anzeigen wollen, legen Sie beim Starten Ihrer Anwendung die Umgebungsvariable `DEBUG` auf `express:*` fest.
@@ -35,7 +34,7 @@ Verwenden Sie unter Windows den entsprechenden Befehl.
 </code>
 </pre>
 
-Die Ausführung dieses Befehls für die durch [express generator](/{{ page.lang }}/starter/generator.html) generierte Standardanwendung resultiert in folgender Ausgabe: 
+Die Ausführung dieses Befehls für die durch [express generator](/{{ page.lang }}/starter/generator.html) generierte Standardanwendung resultiert in folgender Ausgabe:
 
 <pre>
 <code class="language-sh" translate="no">
@@ -105,13 +104,13 @@ Bei einer Anforderung an die Anwendung sind die Protokolle im Express-Code angeg
 </code>
 </pre>
 
-Wenn Sie nur die Protokolle von der Routerimplementierung sehen wollen, legen Sie den Wert für `DEBUG` auf `express:router` fest. Gleichermaßen gilt: Wenn Sie nur die Protokolle von der Anwendungsimplementierung sehen wollen, legen Sie den Wert für `DEBUG` auf `express:application` fest, usw. 
+Wenn Sie nur die Protokolle von der Routerimplementierung sehen wollen, legen Sie den Wert für `DEBUG` auf `express:router` fest. Gleichermaßen gilt: Wenn Sie nur die Protokolle von der Anwendungsimplementierung sehen wollen, legen Sie den Wert für `DEBUG` auf `express:application` fest, usw.
 
 ## Von `express` generierte Anwendungen
 
-Eine über den Befehl `express` generierte Anwendung verwendet ebenfalls das Modul `debug`. Der Debug-Namespace wird auf den Namen der Anwendung erweitert. 
+Eine über den Befehl `express` generierte Anwendung verwendet ebenfalls das Modul `debug`. Der Debug-Namespace wird auf den Namen der Anwendung erweitert.
 
-Beispiel: Wenn Sie die Anwendung mit `$ express sample-app` generiert haben, können Sie die Debuganweisungen mit dem folgenden Befehl aktivieren: 
+Beispiel: Wenn Sie die Anwendung mit `$ express sample-app` generiert haben, können Sie die Debuganweisungen mit dem folgenden Befehl aktivieren:
 
 <pre>
 <code class="language-sh" translate="no">

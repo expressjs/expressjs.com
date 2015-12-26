@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: 生产环境中 Express 的安全最佳实践
 menu: advanced
 lang: zh-cn
-redirect_from: "/advanced/best-practice-security.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

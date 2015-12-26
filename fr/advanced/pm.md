@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Gestionnaires de processus pour les applications Express
 menu: advanced
 lang: fr
-redirect_from: "/advanced/pm.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -14,9 +13,9 @@ redirect_from: "/advanced/pm.html"
 
 Quand vous exécutez l'application Express pour la
 production, utilisez un *gestionnaire de
-processus* car celui-ci peut vous permettre : 
+processus* car celui-ci peut vous permettre :
 
-- De redémarrer l'application manuellement si elle subit une panne. 
+- De redémarrer l'application manuellement si elle subit une panne.
 - De vous informer sur les performances d'exécution et la consommation des ressources.
 - De modifier les paramètres de manière dynamique afin d'améliorer les performances.
 - De contrôler la mise en cluster.
@@ -38,7 +37,7 @@ Pour une comparaison détaillée, voir [http://strong-pm.io/compare/](http://str
 ## <a id="sl">StrongLoop Process Manager</a>
 
 Le gestionnaire de processus StrongLoop (StrongLoop PM) est un gestionnaire de processus de production pour les applications Node.js. StrongLoop PM possède un équilibrage de charge, une surveillance et un déploiement multi-hôte, ainsi qu'une console graphique intégrés.
-Vous pouvez utiliser StrongLoop PM pour les tâches suivantes :  
+Vous pouvez utiliser StrongLoop PM pour les tâches suivantes :
 
 - Construire, combiner et déployer votre application Node.js à un système local ou distant.
 - Afficher les profils d'UC et les instantanés de segment de mémoire pour optimiser les performances et diagnostiquer les fuites de mémoire.
@@ -239,7 +238,7 @@ $ pm2 delete 0
 ## <a id="forever">Forever</a>
 
 Forever est un simple outil d'interface de ligne de commande qui permet de s'assurer qu'un script donné est exécuté de façon continue (forever). L'interface simple de Forever en fait un
-outil idéal pour exécuter des déploiements plus petits des applications et des scripts de Node.jps.  
+outil idéal pour exécuter des déploiements plus petits des applications et des scripts de Node.jps.
 
 Pour plus d'informations, voir [https://github.com/foreverjs/forever](https://github.com/foreverjs/forever).
 

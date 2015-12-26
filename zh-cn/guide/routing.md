@@ -6,7 +6,6 @@ layout: page
 title: Express 路由
 menu: guide
 lang: zh-cn
-redirect_from: "/guide/routing.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

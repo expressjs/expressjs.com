@@ -3,7 +3,6 @@ layout: 3x-api
 title: Express 3.x - Referencia de API
 menu: api
 lang: es
-redirect_from: "/3x/api.html"
 ---
 <div id="api-doc" markdown="1">
 

@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Exemple "Hello world" Express
 menu: starter
 lang : fr
-redirect_from: "/starter/hello-world.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -17,7 +16,7 @@ Il s'agit de l'application Express la plus simple que vous puissiez créer. Cett
 [générateur Express](/{{ page.lang }}/starter/generator.html), qui crée l'échafaudage d'une application entière, avec des fichiers JavaScript, des modèles Jade et des sous-répertoires pour divers motifs.
 </div>
 
-Premièrement, créez un répertoire appelé `myapp`, rendez-vous dedans et exécutez la commande `npm init`. 
+Premièrement, créez un répertoire appelé `myapp`, rendez-vous dedans et exécutez la commande `npm init`.
 Ensuite, installez `express` en tant que dépendance en suivant les instructions du [guide d'installation](/{{ page.lang }}/starter/installing.html).
 
 Dans le répertoire `myapp`, créez un fichier appelé `app.js` et ajoutez le code suivant :

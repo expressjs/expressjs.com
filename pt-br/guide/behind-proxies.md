@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express atrás de proxies
 menu: guide
 lang: pt-br
-redirect_from: "/guide/behind-proxies.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

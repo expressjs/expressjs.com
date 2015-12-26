@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Migration vers Express 4
 menu: guide
 lang: fr
-redirect_from: "/guide/migrating-4.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -179,7 +178,7 @@ module.exports = router;
 </code>
 </pre>
 
-Puis, chargez le module de routage dans l'application : 
+Puis, chargez le module de routage dans l'application :
 
 <pre>
 <code class="language-javascript" translate="no">

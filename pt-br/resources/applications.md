@@ -6,7 +6,6 @@ layout: page
 title: Aplicações
 menu: Recursos
 lang: pt-br
-redirect_from: "/resources/applications.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

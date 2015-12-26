@@ -6,7 +6,6 @@ layout: page
 title: Roteamento no Express
 menu: guide
 lang: pt-br
-redirect_from: "/guide/routing.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

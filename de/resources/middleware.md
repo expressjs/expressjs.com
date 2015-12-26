@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express-Middleware
 menu: resources
 lang: de
-redirect_from: "/resources/middleware.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -26,7 +25,7 @@ Nachfolgend sind einige Express-Middlewaremodule aufgeführt:
   - [cookie-session](https://github.com/expressjs/cookie-session): Bisher: `express.cookieSession`
   - [csurf](https://github.com/expressjs/csurf): Bisher: `express.csrf`
   - [errorhandler](https://github.com/expressjs/errorhandler): Bisher: `express.errorHandler`
-  - [express-debug](https://github.com/devoidfury/express-debug): Entwicklungstool, mit dem eine Registerkarte mit Informationen zu Vorlagenvariablen (lokalen Variablen), zur aktuellen Sitzung, zu hilfreichen Anforderungsdaten usw. Ihrer Anwendung hinzugefügt werden können. 
+  - [express-debug](https://github.com/devoidfury/express-debug): Entwicklungstool, mit dem eine Registerkarte mit Informationen zu Vorlagenvariablen (lokalen Variablen), zur aktuellen Sitzung, zu hilfreichen Anforderungsdaten usw. Ihrer Anwendung hinzugefügt werden können.
   - [express-partial-response](https://github.com/nemtsov/express-partial-response): Express-Middlewaremodul für die Filterung von Teilen von JSON-Antworten auf Basis der Abfragezeichenfolge `fields` durch Verwendung der Google-API Partial Response.
   - [express-session](https://github.com/expressjs/session): Bisher: `express.session`
   - [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn): Express-Middlewaremodul für die Verwendung eines CDN (Content Delivery Network) für statische Assets mit Unterstützung mehrerer Hosts (Beispiel: cdn1.host.com, cdn2.host.com).
@@ -44,8 +43,8 @@ Nachfolgend sind einige Express-Middlewaremodule aufgeführt:
   - [serve-static](https://github.com/expressjs/serve-static): Modul für statischen Inhalt.
   - [static-expiry](https://github.com/paulwalker/connect-static-expiry): URLs mit elektronischem Fingerabdruck oder Caching-Headern für statische Assets einschließlich Unterstützung für eine oder mehrere externe Domänen.
   - [vhost](https://github.com/expressjs/vhost): Bisher: `express.vhost`
-  - [view-helpers](https://github.com/madhums/node-view-helpers): Express-Middlewaremodul, das allgemeine Helper-Methoden für Ansichten bereitstellt. 
-  - [sriracha-admin](https://github.com/hdngr/siracha): Express-Middlewaremodul, das eine Administratorsite für Mongoose dynamisch generiert. 
+  - [view-helpers](https://github.com/madhums/node-view-helpers): Express-Middlewaremodul, das allgemeine Helper-Methoden für Ansichten bereitstellt.
+  - [sriracha-admin](https://github.com/hdngr/siracha): Express-Middlewaremodul, das eine Administratorsite für Mongoose dynamisch generiert.
 
 Einige Middlewaremodule, die bisher zu Connect gehörten, werden vom Connect/Express-Team nicht mehr unterstützt. Diese Module werden durch ein alternatives oder besseres Modul ersetzt. Verwenden Sie eine der folgenden Alternativen:
 

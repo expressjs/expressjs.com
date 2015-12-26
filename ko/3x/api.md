@@ -3,7 +3,6 @@ layout: 3x-api
 title: Express 3.x - API 참조
 menu: api
 lang: ko
-redirect_from: "/3x/api.html"
 ---
 <div id="api-doc" markdown="1">
 

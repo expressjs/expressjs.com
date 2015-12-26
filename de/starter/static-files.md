@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Statische Dateien in Express bereitstellen
 menu: starter
 lang: de
-redirect_from: "/starter/static-files.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -46,7 +45,7 @@ app.use(express.static('files'));
 </code>
 </pre>
 
-Express sucht in der Reihenfolge nach den Dateien, in der sie die Verzeichnisse mit den statischen Assets über die Middlewarefunktion `express.static` festgelegt haben. 
+Express sucht in der Reihenfolge nach den Dateien, in der sie die Verzeichnisse mit den statischen Assets über die Middlewarefunktion `express.static` festgelegt haben.
 
 Wenn Sie ein Präfix für einen virtuellen Pfad (in dem der Pfad nicht wirklich im Dateisystem existiert) für Dateien festlegen wollen, die über die Funktion `express.static` bereitgestellt werden, [müssen Sie einen Mountpfad](/{{ page.lang }}/4x/api.html#app.use) für das Verzeichnis mit den statischen Assets wie unten gezeigt angeben:
 
@@ -56,7 +55,7 @@ app.use('/static', express.static('public'));
 </code>
 </pre>
 
-Jetzt können Sie die Dateien, die sich im Verzeichnis `public` befinden, aus dem Pfadpräfix `/static` laden. 
+Jetzt können Sie die Dateien, die sich im Verzeichnis `public` befinden, aus dem Pfadpräfix `/static` laden.
 
 <pre>
 <code class="language-javascript" translate="no">

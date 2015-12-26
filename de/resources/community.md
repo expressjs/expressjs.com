@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express-Community
 menu: resources
 lang: de
-redirect_from: "/resources/community.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -23,7 +22,7 @@ Der [strongloop/express-Chatroom](https://gitter.im/strongloop/express) eignet s
 
 ##IRC-Channel
 
-Hunderte von Entwicklern, die jeden Tag in #express auf freenode auf Ihre Fragen warten. Wenn Sie Fragen zum Framework haben, schauen Sie doch einfach vorbei und holen Sie sich dazu geeignetes Feedback. 
+Hunderte von Entwicklern, die jeden Tag in #express auf freenode auf Ihre Fragen warten. Wenn Sie Fragen zum Framework haben, schauen Sie doch einfach vorbei und holen Sie sich dazu geeignetes Feedback.
 
 ##Beispiele
 

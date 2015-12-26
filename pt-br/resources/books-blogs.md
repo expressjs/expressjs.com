@@ -6,7 +6,6 @@ layout: page
 title: Livros e Blogs sobre Express
 menu: Recursos
 lang: pt-br
-redirect_from: "/resources/books-blogs.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

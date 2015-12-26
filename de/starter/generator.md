@@ -1,18 +1,17 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express-Anwendungsgenerator
 menu: starter
 lang: de
-redirect_from: "/starter/generator.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Express-Anwendungsgenerator
 
-Mit dem Application Generator Tool `express` können Sie innerhalb kürzester Zeit ein Anwendungsgerüst erstellen. 
+Mit dem Application Generator Tool `express` können Sie innerhalb kürzester Zeit ein Anwendungsgerüst erstellen.
 
 Installieren Sie `express` mit dem folgenden Befehl:
 
@@ -123,5 +122,5 @@ Die erstellte Anwendung hat die folgende Verzeichnisstruktur:
 </pre>
 
 <div class="doc-box doc-info" markdown="1">
-Die vom Generator erstellte Anwendungsstruktur ist nur eine der vielen Möglichkeiten, Express-Anwendungen zu strukturieren. Sie können diese Struktur verwenden oder sie an Ihre Anforderungen anpassen. 
+Die vom Generator erstellte Anwendungsstruktur ist nur eine der vielen Möglichkeiten, Express-Anwendungen zu strukturieren. Sie können diese Struktur verwenden oder sie an Ihre Anforderungen anpassen.
 </div>

@@ -6,7 +6,6 @@ layout: page
 title: Маршрутизация в Express
 menu: guide
 lang: ru
-redirect_from: "/guide/routing.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

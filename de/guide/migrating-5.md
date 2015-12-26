@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Migration auf Express 5
 menu: guide
 lang: de
-redirect_from: "/guide/migrating-5.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -26,7 +25,7 @@ $ npm install express@5.0.0-alpha.2 --save
 </code>
 </pre>
 
-Sie können Ihre automatisierten Tests ausführen, um zu sehen, was fehlschlägt, und Probleme gemäß den folgenden Updates beheben. Nachdem Sie alle Testfehler behoben haben, führen Sie Ihre Anwendung aus, um zu sehen, welche Fehler noch auftreten. Sie werden sofort feststellen, ob die Anwendung Methoden oder Eigenschaften verwendet, die nicht unterstützt werden. 
+Sie können Ihre automatisierten Tests ausführen, um zu sehen, was fehlschlägt, und Probleme gemäß den folgenden Updates beheben. Nachdem Sie alle Testfehler behoben haben, führen Sie Ihre Anwendung aus, um zu sehen, welche Fehler noch auftreten. Sie werden sofort feststellen, ob die Anwendung Methoden oder Eigenschaften verwendet, die nicht unterstützt werden.
 
 <h2 id="changes">Änderungen in Express 5</h2>
 
@@ -67,17 +66,17 @@ Wenn Sie eine dieser Methoden oder Eigenschaften in Ihrer Anwendung verwenden, s
 
 <h4 id="app.del">app.del()</h4>
 
-Express 5 unterstützt die Funktion `app.del()` nicht mehr. Wenn Sie diese Funktion verwenden, wird ein Fehler ausgelöst. Für die Registrierung von HTTP DELETE-Weiterleitungen verwenden Sie stattdessen die Funktion `app.delete()`. 
+Express 5 unterstützt die Funktion `app.del()` nicht mehr. Wenn Sie diese Funktion verwenden, wird ein Fehler ausgelöst. Für die Registrierung von HTTP DELETE-Weiterleitungen verwenden Sie stattdessen die Funktion `app.delete()`.
 
-Anfänglich wurde `del` statt `delete` verwendet, weil `delete` in JavaScript ein reserviertes Schlüsselwort ist. Ab ECMAScript 6 jedoch können `delete` und andere reservierte Schlüsselwörter legal als Eigenschaftsnamen verwendet werden. Lesen hier auch die Diskussion, die zur Einstellung der Unterstützung der Funktion `app.del` geführt hat. 
+Anfänglich wurde `del` statt `delete` verwendet, weil `delete` in JavaScript ein reserviertes Schlüsselwort ist. Ab ECMAScript 6 jedoch können `delete` und andere reservierte Schlüsselwörter legal als Eigenschaftsnamen verwendet werden. Lesen hier auch die Diskussion, die zur Einstellung der Unterstützung der Funktion `app.del` geführt hat.
 
 <h4 id="app.param">app.param(fn)</h4>
 
-Die Signatur `app.param(fn)` wurde für die Änderung der Verhaltensweise der Funktion `app.param(name, fn)` verwendet. Seit v4.11.0 wurde sie nicht mehr verwendet.  In Express 5 wird sie überhaupt nicht mehr unterstützt. 
+Die Signatur `app.param(fn)` wurde für die Änderung der Verhaltensweise der Funktion `app.param(name, fn)` verwendet. Seit v4.11.0 wurde sie nicht mehr verwendet.  In Express 5 wird sie überhaupt nicht mehr unterstützt.
 
 <h4 id="plural">Pluralisierte Methodennamen</h4>
 
-Die folgenden Methodennamen wurden pluralisiert. In Express 4 wurde bei Verwendung der alten Methoden eine Warnung zur Einstellung der Unterstützung ausgegeben. Express 5 unterstützt diese Methoden nicht mehr. 
+Die folgenden Methodennamen wurden pluralisiert. In Express 4 wurde bei Verwendung der alten Methoden eine Warnung zur Einstellung der Unterstützung ausgegeben. Express 5 unterstützt diese Methoden nicht mehr.
 
 `req.acceptsCharset()` wird durch `req.acceptsCharsets()` ersetzt.
 
@@ -87,9 +86,9 @@ Die folgenden Methodennamen wurden pluralisiert. In Express 4 wurde bei Verwendu
 
 <h4 id="leading">Führender Doppelpunkt (:) im Namen für app.param(name, fn)</h4>
 
-Ein führendes Doppelpunktzeichen (:) im Namen für die Funktion `app.param(name, fn)` ist ein Überbleibsel aus Express 3. Aus Gründen der Abwärtskompatibilität wurde dieser Name in Express 4 mit einem Hinweis zu veralteten Versionen weiter unterstützt. In Express 5 wird dieser Name stillschwiegend ignoriert und der Namensparameter ohne einen vorangestellten Doppelpunkt verwendet. 
+Ein führendes Doppelpunktzeichen (:) im Namen für die Funktion `app.param(name, fn)` ist ein Überbleibsel aus Express 3. Aus Gründen der Abwärtskompatibilität wurde dieser Name in Express 4 mit einem Hinweis zu veralteten Versionen weiter unterstützt. In Express 5 wird dieser Name stillschwiegend ignoriert und der Namensparameter ohne einen vorangestellten Doppelpunkt verwendet.
 
-Dies dürfte keine Auswirkungen auf Ihren Code haben, wenn Sie die Express 4-Dokumentation zu [app.param](/{{ page.lang }}/4x/api.html#app.param) befolgen, da dort der führende Doppelpunkt nicht erwähnt wird. 
+Dies dürfte keine Auswirkungen auf Ihren Code haben, wenn Sie die Express 4-Dokumentation zu [app.param](/{{ page.lang }}/4x/api.html#app.param) befolgen, da dort der führende Doppelpunkt nicht erwähnt wird.
 
 <h4 id="req.param">req.param(name)</h4>
 
@@ -109,28 +108,28 @@ Express 5 unterstützt die Signatur `res.send(obj, status)` nicht mehr. Stattdes
 
 <h4 id="res.send.status">res.send(status)</h4>
 
-Express 5 unterstützt die Signatur <code>res.send(<em>status</em>)</code>, nicht mehr, wobei *`status`* für eine Zahl steht. Verwenden Sie stattdessen die Funktion `res.sendStatus(statusCode)`, mit der der Statuscode für den HTTP-Antwort-Header festgelegt und die Textversion des Codes gesendet wird: "Not Found" (Nicht gefunden), "Internal Server Error" (Interner Serverfehler) usw. Wenn Sie eine Zahl senden und hierfür die Funktion `res.send()` verwenden müssen, müssen Sie die Zahl in Anführungszeichen setzen, um diese in eine Zeichenfolge zu konvertieren. Dadurch interpretiert Express diese Zahl nicht als Versuch, die nicht mehr unterstützte alte Signatur zu verwenden. 
+Express 5 unterstützt die Signatur <code>res.send(<em>status</em>)</code>, nicht mehr, wobei *`status`* für eine Zahl steht. Verwenden Sie stattdessen die Funktion `res.sendStatus(statusCode)`, mit der der Statuscode für den HTTP-Antwort-Header festgelegt und die Textversion des Codes gesendet wird: "Not Found" (Nicht gefunden), "Internal Server Error" (Interner Serverfehler) usw. Wenn Sie eine Zahl senden und hierfür die Funktion `res.send()` verwenden müssen, müssen Sie die Zahl in Anführungszeichen setzen, um diese in eine Zeichenfolge zu konvertieren. Dadurch interpretiert Express diese Zahl nicht als Versuch, die nicht mehr unterstützte alte Signatur zu verwenden.
 
 <h4 id="res.sendfile">res.sendfile()</h4>
 
-Die Funktion `res.sendfile()` wurde durch eine Version in Camel-Schreibweise von `res.sendFile()` in Express 5 ersetzt. 
+Die Funktion `res.sendfile()` wurde durch eine Version in Camel-Schreibweise von `res.sendFile()` in Express 5 ersetzt.
 
 <h3>Geändert</h3>
 
 <h4 id="app.router">app.router</h4>
 
-Das Objekt `app.router`, das in Express 4 entfernt wurde, ist in Express 5 wieder verfügbar. In der neuen Version fungiert dieses Objekt nur als Referenz zum Express-Basisrouter – im Gegensatz zu Express 3, wo die Anwendung dieses Objekt explizit laden musste. 
+Das Objekt `app.router`, das in Express 4 entfernt wurde, ist in Express 5 wieder verfügbar. In der neuen Version fungiert dieses Objekt nur als Referenz zum Express-Basisrouter – im Gegensatz zu Express 3, wo die Anwendung dieses Objekt explizit laden musste.
 
 <h4 id="req.host">req.host</h4>
 
-In Express 4 übergab die Funktion `req.host` nicht ordnungsgemäß eine eventuell vorhandene Portnummer. In Express 5 wird die Portnummer beibehalten. 
+In Express 4 übergab die Funktion `req.host` nicht ordnungsgemäß eine eventuell vorhandene Portnummer. In Express 5 wird die Portnummer beibehalten.
 
 <h4 id="req.query">req.query</h4>
 
-In Express 4.7 und ab Express 5 kann die Abfrageparser-Option `false` akzeptieren, um das Parsing von Abfragezeichenfolgen zu inaktivieren, wenn Sie Ihre eigene Funktion für die Parsinglogik bei Abfragezeichenfolgen verwenden wollen. 
+In Express 4.7 und ab Express 5 kann die Abfrageparser-Option `false` akzeptieren, um das Parsing von Abfragezeichenfolgen zu inaktivieren, wenn Sie Ihre eigene Funktion für die Parsinglogik bei Abfragezeichenfolgen verwenden wollen.
 
 <h3>Verbesserungen</h3>
 
 <h4 id="res.render">res.render()</h4>
 
-Diese Methode erzwingt nun asynchrones Verhalten für alle View-Engines, sodass durch View-Engines mit synchroner Implementierung verursachte Fehler vermieden werden, durch die die empfohlene Schnittstelle nicht verwendet werden konnte. 
+Diese Methode erzwingt nun asynchrones Verhalten für alle View-Engines, sodass durch View-Engines mit synchroner Implementierung verursachte Fehler vermieden werden, durch die die empfohlene Schnittstelle nicht verwendet werden konnte.

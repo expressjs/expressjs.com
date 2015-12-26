@@ -6,7 +6,6 @@ layout: page
 title: Express 基本路由
 menu: starter
 lang: zh-tw
-redirect_from: "/starter/basic-routing.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

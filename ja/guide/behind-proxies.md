@@ -6,7 +6,6 @@ layout: page
 title: プロキシーの背後の Express
 menu: guide
 lang: ja
-redirect_from: "/guide/behind-proxies.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

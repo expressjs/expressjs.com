@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Лучшие практические методы улучшения производительности при использовании Express в рабочей среде
 menu: advanced
 lang: ru
-redirect_from: "/advanced/best-practice-performance.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

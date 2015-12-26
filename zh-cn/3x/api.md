@@ -3,7 +3,6 @@ layout: 3x-api
 title: Express 3.x - API 参考
 menu: api
 lang: zh-cn
-redirect_from: "/3x/api.html"
 ---
 <div id="api-doc" markdown="1">
 

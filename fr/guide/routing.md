@@ -6,7 +6,6 @@ layout: page
 title: Routage Express
 menu: guide
 lang: fr
-redirect_from: "/guide/routing.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

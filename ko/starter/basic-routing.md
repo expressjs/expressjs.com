@@ -6,7 +6,6 @@ layout: page
 title: Express 기본 라우팅
 menu: starter
 lang: ko
-redirect_from: "/starter/basic-routing.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

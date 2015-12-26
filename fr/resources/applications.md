@@ -6,7 +6,6 @@ layout: page
 title: Express applications
 menu: resources
 lang: fr
-redirect_from: "/resources/applications.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

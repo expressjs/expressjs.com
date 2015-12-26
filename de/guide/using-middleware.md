@@ -1,20 +1,19 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express-Middleware verwenden
 menu: guide
 lang: de
-redirect_from: "/guide/using-middleware.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Middleware verwenden
 
-Express ist ein Weiterleitungs- und Middleware-Web-Framework, das selbst nur minimale Funktionalität aufweist: Eine Express-Anwendung besteht im Wesentlichen aus einer Reihe von Middlewarefunktionsaufrufen. 
+Express ist ein Weiterleitungs- und Middleware-Web-Framework, das selbst nur minimale Funktionalität aufweist: Eine Express-Anwendung besteht im Wesentlichen aus einer Reihe von Middlewarefunktionsaufrufen.
 
-*Middlewarefunktionen* sind Funktionen, die Zugriff auf das [Anforderungsobjekt](/{{ page.lang }}/4x/api.html#req) (`req`), das [Antwortobjekt](/{{ page.lang }}/4x/api.html#res) (`res`) und die nächste Middlewarefunktion im Anforderung/Antwort-Zyklus der Anwendung haben. Die nächste Middlewarefunktion wird im Allgemeinen durch die Variable `next` bezeichnet. 
+*Middlewarefunktionen* sind Funktionen, die Zugriff auf das [Anforderungsobjekt](/{{ page.lang }}/4x/api.html#req) (`req`), das [Antwortobjekt](/{{ page.lang }}/4x/api.html#res) (`res`) und die nächste Middlewarefunktion im Anforderung/Antwort-Zyklus der Anwendung haben. Die nächste Middlewarefunktion wird im Allgemeinen durch die Variable `next` bezeichnet.
 
 Über Middlewarefunktionen lassen sich die folgenden Tasks ausführen:
 
@@ -23,7 +22,7 @@ Express ist ein Weiterleitungs- und Middleware-Web-Framework, das selbst nur min
 * Beenden des Anforderung/Antwort-Zyklus
 * Aufrufen der nächsten Middlewarefunktion im Stack
 
-Wenn über die aktuelle Middlewarefunktion der Anforderung/Antwort-Zyklus nicht beendet werden kann, muss `next()` aufgerufen werden, um die Steuerung an die nächste Middlewarefunktion zu übergeben. Andernfalls geht die Anforderung in den Status "Blockiert" über. 
+Wenn über die aktuelle Middlewarefunktion der Anforderung/Antwort-Zyklus nicht beendet werden kann, muss `next()` aufgerufen werden, um die Steuerung an die nächste Middlewarefunktion zu übergeben. Andernfalls geht die Anforderung in den Status "Blockiert" über.
 
 Eine Express-Anwendung kann die folgenden Middlewaretypen verwenden:
 
@@ -33,13 +32,13 @@ Eine Express-Anwendung kann die folgenden Middlewaretypen verwenden:
  - [Integrierte Middleware](#middleware.built-in)
  - [Middleware anderer Anbieter](#middleware.third-party)
 
-Sie können Middleware auf Anwendungsebene und Routerebene mit einem optionalen Mountpfad laden. Sie können auch eine Reihe von Middlewarefunktionen zusammen laden. Dadurch wird ein Sub-Stack des Middlewaresystems am Mountpunkt erstellt. 
+Sie können Middleware auf Anwendungsebene und Routerebene mit einem optionalen Mountpfad laden. Sie können auch eine Reihe von Middlewarefunktionen zusammen laden. Dadurch wird ein Sub-Stack des Middlewaresystems am Mountpunkt erstellt.
 
 <h2 id='middleware.application'>Middleware auf Anwendungsebene</h2>
 
 Binden Sie Middleware auf Anwendungsebene zu einer Instanz des [Anwendungsobjekts](/{{ page.lang }}/4x/api.html#app), indem Sie die Funktionen `app.use()` und `app.METHOD()` verwenden. `METHOD` ist dabei die HTTP-Methode der Anforderung, die die Middlewarefunktion in Kleinschreibung verarbeitet (wie GET, PU oder POST).
 
-Dieses Beispiel zeigt eine Middlewarefunktion ohne Mountpfad. Die Funktion wird immer dann ausgeführt, wenn die Anwendung eine Anforderung erhält. 
+Dieses Beispiel zeigt eine Middlewarefunktion ohne Mountpfad. Die Funktion wird immer dann ausgeführt, wenn die Anwendung eine Anforderung erhält.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -52,7 +51,7 @@ app.use(function (req, res, next) {
 </code>
 </pre>
 
-Dieses Beispiel zeigt eine Middlewarefunktion mit dem Mountpfad `/user/:id`. Die Funktion wird für jede Art von HTTP-Anforderung auf dem Pfad `/user/:id` ausgeführt. 
+Dieses Beispiel zeigt eine Middlewarefunktion mit dem Mountpfad `/user/:id`. Die Funktion wird für jede Art von HTTP-Anforderung auf dem Pfad `/user/:id` ausgeführt.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -87,9 +86,9 @@ app.use('/user/:id', function(req, res, next) {
 </code>
 </pre>
 
-Mit einem Routenhandler können Sie mehrere Weiterleitungen für einen Pfad definieren. Im folgenden Beispiel werden zwei Weiterleitungen für GET-Anforderungen zum Pfad `/user/:id` definiert. Die zweite Weiterleitung verursacht zwar keine Probleme, wird jedoch nie aufgerufen, da durch die erste Weiterleitung der Anforderung/Antwort-Zyklus beendet wird. 
+Mit einem Routenhandler können Sie mehrere Weiterleitungen für einen Pfad definieren. Im folgenden Beispiel werden zwei Weiterleitungen für GET-Anforderungen zum Pfad `/user/:id` definiert. Die zweite Weiterleitung verursacht zwar keine Probleme, wird jedoch nie aufgerufen, da durch die erste Weiterleitung der Anforderung/Antwort-Zyklus beendet wird.
 
-Dieses Beispiel zeigt einen Middleware-Sub-Stack, über den GET-Anforderungen zum Pfad `/user/:id` verarbeitet werden. 
+Dieses Beispiel zeigt einen Middleware-Sub-Stack, über den GET-Anforderungen zum Pfad `/user/:id` verarbeitet werden.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -107,9 +106,9 @@ app.get('/user/:id', function (req, res, next) {
 </code>
 </pre>
 
-Wenn Sie den Rest der Middlewarefunktionen eines Weiterleitungs-Middleware-Stack überspringen wollen, rufen Sie `next('route')` auf, um die Steuerung an die nächste Weiterleitung zu übergeben. **HINWEIS**: `next('route')` funktioniert nur in Middlewarefunktionen, die über die Funktionen `app.METHOD()` oder `router.METHOD()` geladen wurden. 
+Wenn Sie den Rest der Middlewarefunktionen eines Weiterleitungs-Middleware-Stack überspringen wollen, rufen Sie `next('route')` auf, um die Steuerung an die nächste Weiterleitung zu übergeben. **HINWEIS**: `next('route')` funktioniert nur in Middlewarefunktionen, die über die Funktionen `app.METHOD()` oder `router.METHOD()` geladen wurden.
 
-Dieses Beispiel zeigt einen Middleware-Sub-Stack, über den GET-Anforderungen zum Pfad `/user/:id` verarbeitet werden. 
+Dieses Beispiel zeigt einen Middleware-Sub-Stack, über den GET-Anforderungen zum Pfad `/user/:id` verarbeitet werden.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -140,7 +139,7 @@ var router = express.Router();
 </code>
 </pre>
 Laden Sie Middleware auf Routerebene über die Funktionen `router.use()` und `router.METHOD()`.
-Der folgende Beispielcode repliziert das Middlewaresystem, das oben für die Middleware auf Anwendungsebene gezeigt wird, durch Verwendung von Middleware auf Routerebene. 
+Der folgende Beispielcode repliziert das Middlewaresystem, das oben für die Middleware auf Anwendungsebene gezeigt wird, durch Verwendung von Middleware auf Routerebene.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -187,10 +186,10 @@ app.use('/', router);
 <h2 id='middleware.error-handling'>Middleware für die Fehlerbehandlung</h2>
 
 <div class="doc-box doc-notice" markdown="1">
-Middleware für die Fehlerbehandlung benötigt immer *vier* Argumente. Sie müssen vier Argumente angeben, um die Erkennung als Middlewarefunktion für die Fehlerbehandlung zu ermöglichen. Selbst wenn das Objekt `next` nicht verwenden müssen, müssen Sie dies angeben, um die Signatur beizubehalten. Andernfalls wird das Objekt `next` als reguläre Middleware interpretiert, sodass keine Fehlerbehandlung möglich ist.  
+Middleware für die Fehlerbehandlung benötigt immer *vier* Argumente. Sie müssen vier Argumente angeben, um die Erkennung als Middlewarefunktion für die Fehlerbehandlung zu ermöglichen. Selbst wenn das Objekt `next` nicht verwenden müssen, müssen Sie dies angeben, um die Signatur beizubehalten. Andernfalls wird das Objekt `next` als reguläre Middleware interpretiert, sodass keine Fehlerbehandlung möglich ist.
 </div>
 
-Middlewarefunktionen für die Fehlerbehandlung werden in derselben Weise definiert wie andere Middlewarefunktionen, außer dass Fehlerbehandlungsfunktionen speziell bei Signaturen vier anstatt drei Argumente aufweisen `(err, req, res, next)`: 
+Middlewarefunktionen für die Fehlerbehandlung werden in derselben Weise definiert wie andere Middlewarefunktionen, außer dass Fehlerbehandlungsfunktionen speziell bei Signaturen vier anstatt drei Argumente aufweisen `(err, req, res, next)`:
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -213,7 +212,7 @@ Die einzige integrierte Middlewarefunktion in Express ist `express.static`. Dies
 
 Das Argument `root` gibt das Stammverzeichnis an, von dem aus statische Assets bedient werden.
 
-Das optionale Objekt `options` kann folgende Eigenschaften aufweisen: 
+Das optionale Objekt `options` kann folgende Eigenschaften aufweisen:
 
 | Eigenschaft      | Beschreibung                                                           |   Typ      | Standard         |
 |---------------|-----------------------------------------------------------------------|-------------|-----------------|

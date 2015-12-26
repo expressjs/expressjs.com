@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express-Glossar
 menu: resources
 lang: de
-redirect_from: "/resources/glossary.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -16,11 +15,11 @@ redirect_from: "/resources/glossary.html"
 
 ### Anforderung
 
-Eine HTTP-Anforderung. Ein Client übergibt eine HTTP-Anforderungsnachricht an einen Server, der wiederum eine Antwort zurückgibt. Bei der Anforderung muss eine der [Anforderungsmethoden](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) wie GET, POST usw. verwendet werden. 
+Eine HTTP-Anforderung. Ein Client übergibt eine HTTP-Anforderungsnachricht an einen Server, der wiederum eine Antwort zurückgibt. Bei der Anforderung muss eine der [Anforderungsmethoden](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) wie GET, POST usw. verwendet werden.
 
 ### Antwort
 
-Eine HTTP-Antwort. Ein Server gibt eine HTTP-Antwortnachricht an den Client zurück. Die Antwort enthält Informationen zum Beendigungsstatus in Bezug auf die Anforderung und kann im Nachrichtenhauptteil auch angeforderten Inhalt enthalten. 
+Eine HTTP-Antwort. Ein Server gibt eine HTTP-Antwortnachricht an den Client zurück. Die Antwort enthält Informationen zum Beendigungsstatus in Bezug auf die Anforderung und kann im Nachrichtenhauptteil auch angeforderten Inhalt enthalten.
 
 ### Anwendung
 
@@ -28,11 +27,11 @@ Im Allgemeinen besteht eine Anwendung aus einem oder mehreren Programmen, über 
 
 ### API
 
-Anwendungsprogrammierschnittstelle (Application Programming Interface). Abkürzung bei der ersten Verwendung ausschreiben. 
+Anwendungsprogrammierschnittstelle (Application Programming Interface). Abkürzung bei der ersten Verwendung ausschreiben.
 
 ### Express
 
-Schnelles, offenes, unkompliziertes Web-Framework für Node.js-Anwendungen. Im Allgemeinen wird der Name "Express" eher verwendet als "Express.js", auch wenn "Express.js" ebenfalls verwendet werden kann. 
+Schnelles, offenes, unkompliziertes Web-Framework für Node.js-Anwendungen. Im Allgemeinen wird der Name "Express" eher verwendet als "Express.js", auch wenn "Express.js" ebenfalls verwendet werden kann.
 
 ### libuv
 
@@ -48,11 +47,11 @@ Eine Funktion, die über die Weiterleitungsebene in Express vor dem letzten Anfo
 
 ### Node.js
 
-Eine Softwareplattform, die für die Erstellung skalierbarer Netzanwendungen verwendet wird. Node.js verwendet JavaScript als Scripting-Sprache und erzielt den hohen Durchsatz durch nicht blockierende Ein-/Ausgabe und eine Ereignisschleife mit einem Thread. Siehe auch [nodejs.org](http://nodejs.org/). **Hinweis**: Der ursprüngliche Name lautet "Node.js". Mittlerweile ist die Bezeichnung "Node" geläufig. 
+Eine Softwareplattform, die für die Erstellung skalierbarer Netzanwendungen verwendet wird. Node.js verwendet JavaScript als Scripting-Sprache und erzielt den hohen Durchsatz durch nicht blockierende Ein-/Ausgabe und eine Ereignisschleife mit einem Thread. Siehe auch [nodejs.org](http://nodejs.org/). **Hinweis**: Der ursprüngliche Name lautet "Node.js". Mittlerweile ist die Bezeichnung "Node" geläufig.
 
 ### Open-Source
 
-Bei Verwendung als Adjektiv muss dieser Begriff mit Bindestrichen gekoppelt werden: Beispiel: "Dies ist eine Open-Source-Software." Siehe auch [Open-Source-Software in Wikipedia](http://en.wikipedia.org/wiki/Open-source_software).   
+Bei Verwendung als Adjektiv muss dieser Begriff mit Bindestrichen gekoppelt werden: Beispiel: "Dies ist eine Open-Source-Software." Siehe auch [Open-Source-Software in Wikipedia](http://en.wikipedia.org/wiki/Open-source_software).
 
 ### Router
 

@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Migration vers Express 5
 menu: guide
 lang: fr
-redirect_from: "/guide/migrating-5.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -83,14 +82,14 @@ nom pour app.param(name, fn)</a></li>
 
 Si vous utilisez une de ces méthodes ou propriétés dans votre
 application, elle tombera en panne. Vous devrez donc modifier votre
-application après la mise à jour vers la version 5. 
+application après la mise à jour vers la version 5.
 
 <h4 id="app.del">app.del()</h4>
 
 Express 5 ne prend plus en charge la fonction
 `app.del()`. Si vous utilisez cette fonction, une
 erreur est émise. Pour enregistrer des routes HTTP DELETE, utilisez la fonction
-`app.delete()` à la place. 
+`app.delete()` à la place.
 
 Initialement, `del` était utilisé au lieu de
 `delete` car `delete` est un mot
@@ -98,7 +97,7 @@ clé réservé dans JavaScript. Cependant, à partir d'ECMAScript 6,
 `delete` et les autres mots clés réservés peuvent
 être utilisés en toute légalité comme noms de propriété. Vous pouvez lire la
 discussion qui a donné lieu à l'obsolescence de la fonction
-`app.del` ici. 
+`app.del` ici.
 
 <h4 id="app.param">app.param(fn)</h4>
 
@@ -129,17 +128,17 @@ Le signe deux-points (:) de tête dans le nom de la fonction
 compatibilité avec les versions antérieures, Express 4 la prenait en
 charge avec un avis sur l'obsolescence. Express 5 l'ignore
 automatiquement et utilise le paramètre de nom sans le préfixer d'un
-signe deux-points. 
+signe deux-points.
 
 Cela n'affectera normalement pas votre code si vous lisez la documentation Express 4
-d'[app.param](/{{ page.lang }}/4x/api.html#app.param) car cela ne mentionne pas le signe deux-points de tête. 
+d'[app.param](/{{ page.lang }}/4x/api.html#app.param) car cela ne mentionne pas le signe deux-points de tête.
 
 <h4 id="req.param">req.param(name)</h4>
 
 Cette méthode potentiellement déroutante et dangereuse
 d'extraction des données de formulaire a été supprimée. Vous devrez
 désormais rechercher spécifiquement le nom du paramètre soumis dans
-l'objet `req.params`, `req.body` ou `req.query`. 
+l'objet `req.params`, `req.body` ou `req.query`.
 
 <h4 id="res.json">res.json(obj, status)</h4>
 
@@ -173,7 +172,7 @@ qui définit le code de statut de l'en-tête de réponse HTTP et envoie
 la version texte du code: "Not Found", "Internal Server Error", etc.
 Si vous devez envoyer un nombre à l'aide de la fonction `res.send()`,
 mettez ce nombre entre guillemets pour qu'Express ne l'interprète pas
-comme une tentative d'utilisation de l'ancienne signature non prise en charge. 
+comme une tentative d'utilisation de l'ancienne signature non prise en charge.
 
 <h4 id="res.sendfile">res.sendfile()</h4>
 
@@ -186,12 +185,12 @@ version CamelCase `res.sendFile()` dans Express 5.
 <h4 id="app.router">app.router</h4>
 
 L'objet `app.router`, qui a été supprimé dans Express 4, est revenu dans Express 5. Dans la version, cet objet
-n'est qu'une référence dans le routeur Express de base, contrairement à Express 3, où une application devait le charger explicitement. 
+n'est qu'une référence dans le routeur Express de base, contrairement à Express 3, où une application devait le charger explicitement.
 
 <h4 id="req.host">req.host</h4>
 
 Dans Express 4, la `req.host` retirait de
-manière incorrecte le numéro de port s'il était présent. Dans Express 5, ce numéro de port est conservé. 
+manière incorrecte le numéro de port s'il était présent. Dans Express 5, ce numéro de port est conservé.
 
 <h4 id="req.query">req.query</h4>
 
@@ -208,4 +207,4 @@ syntaxique de chaîne de requête.
 Cette méthode impose désormais un comportement asynchrone pour
 tous les moteurs de vue. Cela évite les bogues générés par les
 moteurs de vue qui avaient une implémentation synchrone et qui
-ne prenaient pas en compte l'interface recommandée. 
+ne prenaient pas en compte l'interface recommandée.

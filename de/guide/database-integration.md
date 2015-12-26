@@ -1,18 +1,17 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Datenbankintegration in Express
 menu: guide
 lang: de
-redirect_from: "/guide/database-integration.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Datenbankintegration
 
-Die Herstellung einer Verbindung zwischen Datenbanken und Express-Anwendungen erfolgt einfach durch Laden eines geeigneten Node.js-Treibers für die Datenbank in Ihre Anwendung. In diesem Dokument wird in Kurzform beschrieben, wie einige der gängigsten Node.js-Module für Datenbanksysteme Ihrer Express-Anwendung hinzugefügt und verwendet werden: 
+Die Herstellung einer Verbindung zwischen Datenbanken und Express-Anwendungen erfolgt einfach durch Laden eines geeigneten Node.js-Treibers für die Datenbank in Ihre Anwendung. In diesem Dokument wird in Kurzform beschrieben, wie einige der gängigsten Node.js-Module für Datenbanksysteme Ihrer Express-Anwendung hinzugefügt und verwendet werden:
 
 * [Cassandra](#cassandra)
 * [CouchDB](#couchdb)

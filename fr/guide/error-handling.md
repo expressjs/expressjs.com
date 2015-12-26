@@ -1,12 +1,11 @@
 ---
 ### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Traitement d'erreurs Express
 menu: guide
 lang: fr
-redirect_from: "/guide/error-handling.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
@@ -42,7 +41,7 @@ app.use(function(err, req, res, next) {
 
 Les réponses issues d'une fonction middleware peuvent être au format de votre choix, par exemple une page d'erreur HTML, un simple message ou une chaîne JSON.
 
-A des fins organisationnelles (et d'infrastructure de niveau supérieur), vous pouvez définir plusieurs fonctions middleware de traitement d'erreurs, tout comme vous le feriez avec d'autres fonctions middleware ordinaires. 
+A des fins organisationnelles (et d'infrastructure de niveau supérieur), vous pouvez définir plusieurs fonctions middleware de traitement d'erreurs, tout comme vous le feriez avec d'autres fonctions middleware ordinaires.
 Par exemple, si vous vouliez définir un gestionnaire d'erreurs pour les demandes réalisées avec `XHR` et pour celles réalisées sans, vous pourriez utiliser les commandes suivantes :
 
 <pre>
@@ -121,7 +120,7 @@ app.get('/a_route_behind_paywall',
 Dans cet exemple, le gestionnaire `getPaidContent` sera ignoré, mais tous les gestionnaires restants dans `app` pour `/a_route_behind_paywall` continueront d'être exécutés.
 
 <div class="doc-box doc-info" markdown="1">
-Les appels `next()` et `next(err)` indiquent que le gestionnaire en cours a fini et quel est son état.  
+Les appels `next()` et `next(err)` indiquent que le gestionnaire en cours a fini et quel est son état.
 `next(err)` ignorera tous les gestionnaires restants dans la chaîne, sauf ceux définis pour gérer les erreurs tel que décrit ci-dessus.
 </div>
 

@@ -6,7 +6,6 @@ layout: page
 title: Weiterleitung in Express
 menu: guide
 lang: de
-redirect_from: "/guide/routing.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

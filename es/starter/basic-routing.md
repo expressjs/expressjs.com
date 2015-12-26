@@ -6,7 +6,6 @@ layout: page
 title: Direccionamiento básico de Express
 menu: starter
 lang: es
-redirect_from: "/starter/basic-routing.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 

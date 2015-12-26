@@ -6,7 +6,6 @@ layout: page
 title: Express 라우팅
 menu: guide
 lang: ko
-redirect_from: "/guide/routing.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
