@@ -6,7 +6,7 @@ layout: home
 title: Express - Node.js web application framework
 menu: home
 lang: en
-redirect_from: "/"
+redirect_from: "/en/index.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
