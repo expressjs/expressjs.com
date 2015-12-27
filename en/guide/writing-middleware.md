@@ -45,8 +45,6 @@ The following figure shows the elements of a middleware function call:
 </td></tr>
 </table>
 
-xx
-
 Here is an example of a simple "Hello World" Express application, for which you will define two middleware functions:
 
 <pre><code class="language-javascript" translate="no">
