@@ -20,7 +20,8 @@ Najskôr si vytvorte priečinok s názvom `myapp`, presuňte sa tam a spustite `
 
 V priečinku `myapp` vytvorte súbor s názvom `app.js` a vložte do neho nasledovný kód:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -34,7 +35,8 @@ var server = app.listen(3000, function () {
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
-</code></pre>
+</code>
+</pre>
 
 Aplikácia naštartuje server a začne počúvať na porte 3000 na pripojenia. Aplikácia odpovie "Hello World!" na request na hlavnú URL (`/`) alebo _route_. Pre každú inú URL odpovie prostredníctvom **404 Not Found**.
 
@@ -44,9 +46,11 @@ Request (požiadavka) `req` a response (odpoveď) `res` sú presne rovnaké obje
 
 Aplikáciu spustíte pomocou nasledujúceho príkazu:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ node app.js
-</code></pre>
+</code>
+</pre>
 
 Potom v prehliadači zadajte [http://localhost:3000/](http://localhost:3000/) a sledujte výstup.
 

@@ -58,11 +58,13 @@ Toto správanie je z dôvodu, že odpoveď 404 jednoducho indikuje absenciu prá
 inými slovami, Express vykonal všetky middlware funkcie a nenašiel žiaden routing,
 ktorý by na danú požiadavku vedel odpovedať. Všetko čo musíte spraviť k odchyteniu 404-ky je, že pridáte nasledovnú middleware funkciu pod všetky ostatné definície:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.use(function(req, res, next) {
   res.status(404).send('Sorry cant find that!');
 });
-</code></pre>
+</code>
+</pre>
 
 ## Ako si zadefinujem error handler?
 
@@ -70,12 +72,14 @@ Error-handling middleware je rovnakým middlewarom ako všetky ostatné,
 s jediným rozdielom a to, že je vyvolaný so štyrmi argumentami, namiesto troch.
 Jeho signatúra je nasledovná `(err, req, res, next)`:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-</code></pre>
+</code>
+</pre>
 
 Viac informácií sa dozviete v kapitole [Error handling](/{{ page.lang }}/guide/error-handling.html).
 

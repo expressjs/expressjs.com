@@ -17,9 +17,11 @@ _Routing_ rozhoduje o tom, ako aplikácia odpovedá na požiadavky klientov na j
 Každý definovaný route môže mať jednu alebo viacero handler funkcií, ktoré sa vykonajú v prípade, ak je route spárovaný s požiadavkou klienta.
 
 Route definícia má nasledovnú štruktúru:
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.METHOD(PATH, HANDLER)
-</code></pre>
+</code>
+</pre>
 
 Kde:
 
@@ -36,34 +38,42 @@ Nasledujúce priklady ilustrujú definovanie jednoducých route-ov.
 
 Odpoveď s textom `Hello World!` na hlavnej stránke:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
-</code></pre>
+</code>
+</pre>
 
 Odpoveď na POST request na hlavný route (`/`), hlavnú stránku aplikácie:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
-</code></pre>
+</code>
+</pre>
 
 Odpoveď na PUT request na route `/user`:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
-</code></pre>
+</code>
+</pre>
 
 Odpoveď na DELETE request na route `/user`:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-</code></pre>
+</code>
+</pre>
 
 Viac informácií ohľadom routing-u nájdete v [routing príručke](/{{ page.lang }}/guide/routing.html).

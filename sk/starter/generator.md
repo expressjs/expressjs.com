@@ -16,13 +16,16 @@ Pre rýchle vygenerovanie skeletonu aplikácie môžete použit nástroj `expres
 
 `express` nainštalujte pomocou nasledujúceho príkazu:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express-generator -g
-</code></pre>
+</code>
+</pre>
 
 Pre zobrazenie ďalších možností príkazu zadajte prepínač `-h`:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ express -h
 
   Usage: express [options] [dir]
@@ -37,11 +40,13 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code></pre>
+</code>
+</pre>
 
 Napr., nasledujúci príkaz vytvorí Express aplikáciu s názvom _myapp_ v aktuálnom priečinku:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ express myapp
 
    create : myapp
@@ -61,32 +66,40 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-</code></pre>
+</code>
+</pre>
 
 Potom nainštalujte dependencie:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ cd myapp
 $ npm install
-</code></pre>
+</code>
+</pre>
 
 Na MacOS príp. Linux, spustíte aplikáciu príkazom:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ DEBUG=myapp:* npm start
-</code></pre>
+</code>
+</pre>
 
 Na Windows, príkazom:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 > set DEBUG=myapp:* & npm start
-</code></pre>
+</code>
+</pre>
 
 Potom v prehliadači zadajte `http://localhost:3000/`.
 
 Vygenerovaná aplikácia má naslednovnú štruktúru priečinkov:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 .
 ├── app.js
 ├── bin
@@ -106,7 +119,8 @@ Vygenerovaná aplikácia má naslednovnú štruktúru priečinkov:
     └── layout.jade
 
 7 directories, 9 files
-</code></pre>
+</code>
+</pre>
 
 <div class="doc-box doc-info" markdown="1">
 Takáto štruktúra aplikácie je len jednou z mnohých spôsobov usporiadania Express aplikácie. Môžete ju použit, alebo ju zmeniť tak, ako vám bude najlepšie vyhovovať.
