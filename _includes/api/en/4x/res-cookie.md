@@ -13,6 +13,7 @@ The `options` parameter is an object that can have the following properties.
 | `path`      | String | Path for the cookie. Defaults to "/".
 | `secure`    | Boolean | Marks the cookie to be used with HTTPS only.
 | `signed`    | Boolean | Indicates if the cookie should be signed.
+| `encode`    | Function | A synchronous function used for cookie value encoding.
 
 <div class="doc-box doc-notice" markdown="1">
 All `res.cookie()` does is set the HTTP `Set-Cookie` header with the options provided.
@@ -49,3 +50,19 @@ res.cookie('name', 'tobi', { signed: true });
 ~~~
 
 Later you may access this value through the [req.signedCookie](#req.signedCookies) object.
+
+The `encode` option allows you to choose the function used for cookie value encoding.
+The default setting is `encodeURIComponent` (URI encoding). Does not support asynchronous functions.
+
+~~~js
+//Default encoding
+res.cookie('some_cross_domain_cookie', 'http://mydomain.example.com',{domain:'example.com'});  
+// Result: 'some_cross_domain_cookie=http%3A%2F%2Fmydomain.example.com; Domain=example.com; Path=/'
+
+//Custom encoding
+res.cookie('some_cross_domain_cookie', 'http://mydomain.example.com',{domain:'example.com', encode: String});  
+// Result: 'some_cross_domain_cookie=http://mydomain.example.com; Domain=example.com; Path=/;'
+~~~
+
+Example use case: You need to set a domain wide cookie for another site in your organization to use. 
+This other site (not under your administrative control) does not use URI encoded cookie values.
