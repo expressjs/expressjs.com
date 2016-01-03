@@ -6,10 +6,10 @@
     </section>
     <div id="navbar">
         <ul id="navmenu">
-            <li><a href="/{{ page.lang }}/" id="home-menu" {% if page.menu=='home' %} class="active" {% endif %}>Domov</a></li>
+            <li><a href="/{{ page.lang }}/" id="home-menu" {% if page.menu == 'home' %} class="active" {% endif %}>Domov</a></li>
             <li>
                 <ul id="getting-started-menu" class="menu">
-                    <li><a href="/{{ page.lang }}/starter/installing.html" {% if page.menu=='starter' %} class="active" {% endif %}>Začíname</a>
+                    <li><a href="/{{ page.lang }}/starter/installing.html" {% if page.menu == 'starter' %} class="active" {% endif %}>Začíname</a>
                         <ul>
                             <li>
                                 <a href="/{{ page.lang }}/starter/installing.html">
@@ -47,7 +47,7 @@
             </li>
             <li>
                 <ul id="guide-menu" class="menu">
-                    <li><a href="/{{ page.lang }}/guide/routing.html" {% if page.menu=='guide' %} class="active" {% endif %}>Príručka</a>
+                    <li><a href="/{{ page.lang }}/guide/routing.html" {% if page.menu == 'guide' %} class="active" {% endif %}>Príručka</a>
                         <ul>
                             <li><a href="/{{ page.lang }}/guide/routing.html">Routing</a>
                             </li>
@@ -75,7 +75,7 @@
             </li>
             <li>
                 <ul id="application-menu" class="menu">
-                    <li><a href="/{{ page.lang }}/4x/api.html" {% if page.menu=='api' %} class="active" {% endif %}>API referenčná príručka</a>
+                    <li><a href="/{{ page.lang }}/4x/api.html" {% if page.menu == 'api' %} class="active" {% endif %}>API referenčná príručka</a>
                         <ul>
                             <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
                             </li>
@@ -89,7 +89,7 @@
             </li>
             <li>
                 <ul id="advanced-topics-menu" class="menu">
-                    <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html" {% if page.menu=='advanced' %} class="active" {% endif %}>Pokročilé témy</a>
+                    <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html" {% if page.menu == 'advanced' %} class="active" {% endif %}>Pokročilé témy</a>
                         <ul>
                             <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Templatovacie enginy</a>
                             </li>
@@ -108,7 +108,7 @@
             </li>
             <li>
                 <ul id="resources-menu" class="menu">
-                    <li><a href="/{{ page.lang }}/resources/glossary.html" {% if page.menu=='resources' %} class="active" {% endif %}>Zdroje</a>
+                    <li><a href="/{{ page.lang }}/resources/glossary.html" {% if page.menu == 'resources' %} class="active" {% endif %}>Zdroje</a>
                         <ul>
                             <li><a href="/{{ page.lang }}/resources/glossary.html">Glosár</a>
                             </li>
