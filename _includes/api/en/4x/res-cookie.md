@@ -7,6 +7,7 @@ The `options` parameter is an object that can have the following properties.
 | Property    | Type |  Description                                                             |
 |-------------|-------------------------------------------------------------------------|
 | `domain`    | String | Domain name for the cookie. Defaults to the domain name of the app.
+| `encode`    | Function | A synchronous function used for cookie value encoding. Defaults to `encodeURIComponent`.
 | `expires`   | Date | Expiry date of the cookie in GMT. If not specified or set to 0, creates a session cookie.
 | `httpOnly`  | Boolean | Flags the cookie to be accessible only by the web server.
 | `maxAge`    | String | Convenient option for setting the expiry time relative to the current time in milliseconds.
@@ -24,6 +25,22 @@ For example:
 ~~~js
 res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: true });
 res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true });
+~~~
+
+The `encode` option allows you to choose the function used for cookie value encoding.
+Does not support asynchronous functions.
+
+Example use case: You need to set a domain wide cookie for another site in your organization to use. 
+This other site (not under your administrative control) does not use URI encoded cookie values.
+
+~~~js
+//Default encoding
+res.cookie('some_cross_domain_cookie', 'http://mysubdomain.example.com',{domain:'example.com'});  
+// Result: 'some_cross_domain_cookie=http%3A%2F%2Fmysubdomain.example.com; Domain=example.com; Path=/'
+
+//Custom encoding
+res.cookie('some_cross_domain_cookie', 'http://mysubdomain.example.com',{domain:'example.com', encode: String});  
+// Result: 'some_cross_domain_cookie=http://mysubdomain.example.com; Domain=example.com; Path=/;'
 ~~~
 
 The `maxAge` option is a convenience option for setting "expires" relative to the current time in milliseconds.
