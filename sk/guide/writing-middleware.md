@@ -3,51 +3,52 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
 ### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Writing middleware for use in Express apps
+title: Tvorba middleware pre použitie v Express applikáciách
 menu: guide
-lang: en
+lang: sk
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Writing middleware for use in Express apps
+# Tvorba middleware pre použitie v Express applikáciách
 
-<h2>Overview</h2>
+<h2>Prehľad</h2>
 
-_Middleware_ functions are functions that have access to the [request object](/4x/api.html#req)  (`req`), the [response object](/4x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
+_Middleware_ funkcie sú funkcie, ktoré majú prístup k [request objektu](/4x/api.html#req)  (`req`), [response objektu](/4x/api.html#res) (`res`) a nasledujúcej middleware funkcii v request-response cykle aplikácie. Nasledujúca middleware funkcia v poradí je bežne označovaná premennou `next`.
 
-Middleware functions can perform the following tasks:
+Middleware funkcie dokážu vykonávať nasledujúce úlohy:
 
-* Execute any code.
-* Make changes to the request and the response objects.
-* End the request-response cycle.
-* Call the next middleware in the stack.
+* Vykonať akýkoľvek kód.
+* Vykonať zmeny na request a response objektoch.
+* Ukončiť request-response cyklus.
+* Zavolať nasledujúcu middleware funkciu v poradí.
 
-If the current middleware function does not end the request-response cycle, it must call `next()` to pass control to the next middleware function. Otherwise, the request will be left hanging.
+Ak aktuálna middleware funkcia neukončuje request-response cyklus, musí posunúť obsluhu nasledujúcej middleware funkcii vyvolaním `next()`. V opačnom prípade zostane request 'visieť'.
 
-The following figure shows the elements of a middleware function call:
+Nasledujúci diagram ukazuje jednotlivé časti volania middleware funkcie:
 
 <table id="mw-fig">
 <tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" id="mw-fig-img" />
 </td>
 <td class="mw-fig-callouts">
-<div class="callout" id="callout1">HTTP method for which the middleware function applies.</div>
+<div class="callout" id="callout1">HTTP metóda pre ktorú je middleware funkcia aplikovateľná.</div>
 
-<div class="callout" id="callout2">Path (route) for which the middleware function applies.</div>
+<div class="callout" id="callout2">Cesta (route) pre ktorú je middleware funkcia aplikovateľná.</div>
 
-<div class="callout" id="callout3">The middleware function.</div>
+<div class="callout" id="callout3">Middleware funkcia.</div>
 
-<div class="callout" id="callout4">Callback argument to the middleware function, called "next" by convention.</div>
+<div class="callout" id="callout4">Callback argument k middleware funkcii, nazvaný "next" podľa konvencie.</div>
 
-<div class="callout" id="callout5">HTTP <a href="/en/4x/api.html#res">response</a> argument to the middleware function, called "res" by convention.</div>
+<div class="callout" id="callout5">HTTP <a href="/en/4x/api.html#res">response</a> argument k middleware funkcii, nazvaný "res" podľa konvencie.</div>
 
-<div class="callout" id="callout6">HTTP <a href="/en/4x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
+<div class="callout" id="callout6">HTTP <a href="/en/4x/api.html#req">request</a> argument k middleware funkcii, nazvaný "req" podľa konvencie.</div>
 </td></tr>
 </table>
 
-Here is an example of a simple "Hello World" Express application, for which you will define two middleware functions:
+Tu je príklad jednoduchej "Hello World" Express aplikácie, pre ktorú zadefinujeme dve middleware funkcie:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -56,28 +57,33 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code></pre>
+</code>
+</pre>
 
 <h2>Development</h2>
 
-Here is a simple example of a middleware function called "myLogger". This function just prints "LOGGED" when a request to the app passes through it. The middleware function is assigned to a variable named `myLogger`.
+Tu je príklad jednoduchej middleware funkcie nazvanej "myLogger". Táto funkcia len vypíše "LOGGED", vždy keď aplikácia odchytí request. Middleware funkcia je priradená premennej nazvanej `myLogger`.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var myLogger = function (req, res, next) {
   console.log('LOGGED');
   next();
 };
-</code></pre>
+</code>
+</pre>
 
 <div class="doc-box doc-notice" markdown="1">
-Notice the call above to `next()`.  Calling this function invokes the next middleware function in the app.
-The `next()` function is not a part of the Node.js or Express API, but is the third argument that is passed to the middleware function.  The `next()` function could be named anything, but by convention it is always named "next". To avoid confusion, always use this convention.
+Všimnite si volanie `next()` metódy hore. Zavolanie tejto funkcie vyvolá ďalší middleware v aplikácii.
+Funkcia `next()` nieje súčasťou Node.js či Express API, ale je tretím argumentom s ktorým je middleware funkcia vyvolaná.
+Funkcia `next()` môže byť nazvaná hocijako, ale podľa konvencie sa zvykne nazývať vždy "next". Aby ste predišli zmätkom používajte túto konvenciu.
 </div>
 
-To load the middleware function, call `app.use()`, specifying the middleware function.
-For example, the following code loads the `myLogger` middleware function before the route to the root path (/).
+Pre načítanie middleware funkcie zavolajte `app.use()`, prostredníctvom ktorej ho špecifikujete.
+Nasledujúci kód načíta `myLogger` middleware funkciu ešte pred route definíciou hlavnej cesty aplikácie (/).
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -93,28 +99,32 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code></pre>
+</code>
+</pre>
 
-Every time the app receives a request, it prints the message "LOGGED" to the terminal.
+Vždy keď aplikácia obdrží request požiadavku, vypíše do konzoly správu "LOGGED".
 
-The order of middleware loading is important: middleware functions that are loaded first are also executed first.
+Poradie načítania middleware-ov je dôležité: middleware funkcie ktoré sú načítane prvé, sú aj ako prvé vykonané.
 
-If `myLogger` is loaded after the route to the root path, the request never reaches it and the app doesn't print "LOGGED", because the route handler of the root path terminates the request-response cycle.
+Ak by `myLogger` bol načítaný až za definíciou route pre hlavnú stránku aplikácie, nikdy by ho request nedosiahol a aplikácia by nevypísala "LOGGED", pretože route handler ukončí request-response cyklus.
 
-The middleware function `myLogger` simply prints a message, then passes on the request to the next middleware function in the stack by calling the `next()` function.
+Táto `myLogger` middleware funkcia len vypisuje správu a posunie spracovanie ďalšej middleware funkcii v poradí zavolaním funkcie `next()`.
 
-The next example adds a property called `requestTime` to the request object. We'll name this middleware function "requestTime".
+Ďalší príklad pridáva do request objektu atribút s názvom `requestTime`. Túto middleware funkciu nazveme "requestTime".
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var requestTime = function (req, res, next) {
   req.requestTime = Date.now();
   next();
 };
-</code></pre>
+</code>
+</pre>
 
-The app now uses the `requestTime` middleware function. Also, the callback function of the root path route uses the property that the middleware function adds to `req` (the request object).
+Aplikácia teraz používa `requestTime` middleware funkciu. Taktiež callback funkcia pre obsluhu route hlavnej stránky aplikácie používa atribút, ktorý táto middleware funkcia pridala na `req` (request objekt).
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -132,10 +142,11 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code></pre>
+</code>
+</pre>
 
-When you make a request to the root of the app, the app now displays the timestamp of your request in the browser.
+Po vykonaní requestu na hlavnú stránku aplikácie sa zobrazí v prehliadači timestamp vášho requestu.
 
-Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
+Keďže máte prístup k request a response objektu, ďalšej middleware funkcii v poradí a celému Node.js API, možnosti middleware funkcií sú nekonečné.
 
-For more information about Express middleware, see: [Using Express middleware](/guide/using-middleware.html).
+Pre viac informácií ohľadom Express middleware si pozrite: [Použitie Express middleware](/{{ page.lang }}/guide/using-middleware.html).
