@@ -3,29 +3,31 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
 ### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Express error handling
+title: Error handling v Express-e
 menu: guide
-lang: en
+lang: sk
 redirect_from: "/guide/error-handling.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Error handling
 
-Define error-handling middleware functions in the same way as other middleware functions,
-except error-handling functions have four arguments instead of three:
-`(err, req, res, next)`. For example:
+Middleware funkcie pre error-handling sa definujú rovnako, ako ostatné middleware funkcie s jediným rozdielom a to, že majú štyri argumenty namiesto troch:
+`(err, req, res, next)`. Napr.:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-</code></pre>
+</code>
+</pre>
 
-You define error-handling middleware last, after other `app.use()` and routes calls; for example:
+Error-handling middleware zadefinujte ako posledný, za ostatnými `app.use()` a route definíciami, napr.:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
@@ -34,16 +36,16 @@ app.use(methodOverride());
 app.use(function(err, req, res, next) {
   // logic
 });
-</code></pre>
+</code>
+</pre>
 
-Responses from within a middleware function can be in any format that you prefer, such as an HTML error page, a simple message, or a JSON string.
+Návratové hodnoty predávané medzi jednotlivými middleware funkciami môžu byť v ľubovoľnom formáte, ako napr. stránka s HTML errorom, jednoduchá message, či JSON string.
 
-For organizational (and higher-level framework) purposes, you can define
-several error-handling middleware functions, much like you would with
-regular middleware functions. For example, if you wanted to define an error-handler
-for requests made by using `XHR`, and those without, you might use the following commands:
+Z dôvodu lepšej organizácie kódu je možné zadefinovať niekoľko error-handling middleware funkcií, podobne ako je tomu so štandardnými middleware funkciami.
+Napr., ak chcete zadefinovať error-handling pre `XHR` volania a pre tie ostatné, môžete použiť nasledujúci príklad:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
@@ -52,21 +54,24 @@ app.use(methodOverride());
 app.use(logErrors);
 app.use(clientErrorHandler);
 app.use(errorHandler);
-</code></pre>
+</code>
+</pre>
 
-In this example, the generic `logErrors` might write request and
-error information to `stderr`, for example:
+V nasledujúcom príklade `logErrors` sú všetky errory vypísané na `stderr`, napr.:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 function logErrors(err, req, res, next) {
   console.error(err.stack);
   next(err);
 }
-</code></pre>
+</code>
+</pre>
 
-Also in this example, `clientErrorHandler` is defined as follows; in this case, the error is explicitly passed along to the next one:
+V nasledujúcom príklade je `clientErrorHandler` zadefinovaný tak, aby XHR errory boli explicitne odchytené; tie ostatné sa nespracovávajú a ich spracovanie je ponechané nasledujúcej middleware funkcii v poradí:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
     res.status(500).send({ error: 'Something failed!' });
@@ -74,22 +79,26 @@ function clientErrorHandler(err, req, res, next) {
     next(err);
   }
 }
-</code></pre>
+</code>
+</pre>
 
-The "catch-all" `errorHandler` function might be implemented as follows:
+Finálna "catch-all" `errorHandler` funkcia môže byť implementovaná takto:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 function errorHandler(err, req, res, next) {
   res.status(500);
   res.render('error', { error: err });
 }
-</code></pre>
+</code>
+</pre>
 
-If you pass anything to the `next()` function (except the string `'route'`), Express regards the current request as being in error and will skip any remaining non-error handling routing and middleware functions. If you want to handle that error in some way, you'll have to create an error-handling route as described in the next section.
+Ak do funkcie `next()` predáte čokoľvek (okrem stringu `'route'`), Express bude považovať toto volanie ako error a automaticky preskočí všetky zostávajúce non-error middleware funkcie. Ak potrebujete tento error spracovať špeciálne, budete musieť vytvoriť error-handling route, ako je popísane v ďalšej sekcii.
 
-If you have a route handler with multiple callback functions you can use the `route` parameter to skip to the next route handler.  For example:
+Ak váš route handler obsahuje viacero callback funkcií, môžete k preskočeniu na ďalší route handler v poradí použiť parameter `route`.  Napr.:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/a_route_behind_paywall',
   function checkIfPaidSubscriber(req, res, next) {
     if(!req.user.hasPaid) {
@@ -103,36 +112,31 @@ app.get('/a_route_behind_paywall',
       res.json(doc);
     });
   });
-</code></pre>
+</code>
+</pre>
 
-In this example, the `getPaidContent` handler will be skipped but any remaining handlers in `app` for `/a_route_behind_paywall` would continue to be executed.
-
-<div class="doc-box doc-info" markdown="1">
-Calls to `next()` and `next(err)` indicate that the current handler is complete and in what state.  `next(err)` will skip all remaining handlers in the chain except for those that are set up to handle errors as described above.
-</div>
-
-## The Default Error Handler
-
-Express comes with an in-built error handler, which takes care of any errors that might be encountered in the app. This default error-handling middleware function is added at the end of the middleware function stack.
-
-If you pass an error to `next()` and you do not handle it in
-an error handler, it will be handled by the built-in error handler; the error will be written to the client with the
-stack trace. The stack trace is not included in the production environment.
+V tomto príklade bude `getPaidContent` handler preskočený, ale ďalšie zostávajúce `app` handlery pre `/a_route_behind_paywall` budú vykonané.
 
 <div class="doc-box doc-info" markdown="1">
-Set the environment variable `NODE_ENV` to `production`, to run the app in production mode.
+Volania `next()` a `next(err)` hovoria, že aktuálny handler dokončil svoju úlohu príp. v akom stave. Volanie `next(err)` zabezpeči preskočenie všetkých zostávajúcich handlerov v poradí okrem tých, ktoré slúžia na spracovanie errorov, ako je popísané vyššie.
 </div>
 
-If you call `next()` with an error after you have started writing the
-response (for example, if you encounter an error while streaming the
-response to the client) the Express default error handler closes the
-connection and fails the request.
+## Defaultný Error Handler
 
-So when you add a custom error handler, you will want to delegate to
-the default error handling mechanisms in Express, when the headers
-have already been sent to the client:
+Express obsahuje vstavaný error handler, ktorý sa stará o všetky errory, aké sa môžu v aplikácii vyskytnúť. Táto defaultná error-handling middleware funkcia je pridaná na koniec stacku middleware funkcií.
 
-<pre><code class="language-javascript" translate="no">
+Ak funkcii `next()` predáte error a nespracujete ho vlatným error handlerom, error bude spracovaný vstavaným error handlerom, pričom error a jeho stack trace bude vrátený klientovi. Stack trace nieje vrátený v prípade produkčného módu.
+
+<div class="doc-box doc-info" markdown="1">
+Ak chcete aplikáciu spustiť v produkčnom móde, nastavte environment premennú `NODE_ENV` na `production`.
+</div>
+
+V prípade, ak zavoláte `next()` spolu s errorom potom, ako ste už začali vypisovať response (napr. ak nastane error počas streamovania dát klientovi), vstavaný error handler ukončí spojenie s klientom a request spadne.
+
+V prípade, ak máte zadefinovaný vlastný erorr handler a budete chcieť delegovať defaultný error handling mechanizmus na Express, v prípade ak už nejaké dáta boli odoslané klientovi, môžete vykonať nasledovné:
+
+<pre>
+<code class="language-javascript" translate="no">
 function errorHandler(err, req, res, next) {
   if (res.headersSent) {
     return next(err);
@@ -140,4 +144,5 @@ function errorHandler(err, req, res, next) {
   res.status(500);
   res.render('error', { error: err });
 }
-</code></pre>
+</code>
+</pre>
