@@ -3,56 +3,64 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
 ### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Using template engines with Express
+title: Použitie templatovacích enginov v Express
 menu: guide
-lang: en
+lang: sk
 redirect_from: "/guide/using-template-engines.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Using template engines with Express
+# Použitie templatovacích enginov v Express
 
-Before Express can render template files, the following application settings must be set:
+Aby Express dokázal spracovať a vyrendrovať template súbory, musí aplikácia obsahovať nasledujúce nastavenia:
 
-* `views`, the directory where the template files are located. Eg: `app.set('views', './views')`
-* `view engine`, the template engine to use. Eg: `app.set('view engine', 'jade')`
+* `views`, cesta k priečinku kde sa nachádzajú template súbory. Napr: `app.set('views', './views')`
+* `view engine`, templatovací engine ktorý chcete použiť. Napr: `app.set('view engine', 'jade')`
 
-Then install the corresponding template engine npm package:
+Potom nainštalujte vybraný templatovací engine ako npm dependenciu:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install jade --save
-</code></pre>
+</code>
+</pre>
 
 <div class="doc-box doc-notice" markdown="1">
-Express-compliant template engines such as Jade export a function named `__express(filePath, options, callback)`, which is called by the `res.render()` function to render the template code.
+Templatovacie enginy kompatibilné s Express-om ako napr. Jade exportujú funkciu `__express(filePath, options, callback)`, ktorá je volaná pomocou `res.render()` funkcie k vyrendrovaniu template kódu.
 
-Some template engines do not follow this convention. The [Consolidate.js](https://www.npmjs.org/package/consolidate) library follows this convention by mapping all of the popular Node.js template engines, and therefore works seamlessly within Express.
+Niektoré templatovacie enginy používajú inú konvenciu. [Consolidate.js](https://www.npmjs.org/package/consolidate) knižnica mapuje konvencie všetkých populárnych Node.js templatovacích enginov tak, aby bezproblémov fungovali s Express-om.
 </div>
 
-After the view engine is set, you don't have to specify the engine or load the template engine module in your app; Express loads the module internally, as shown below (for the above example).
+Nastavenie parametra view engine zabezpečí, že nieje potrebné špecifikovať engine, ani načítať modul templatovacieho enginu vo vašej aplikácii; Express načíta tento modul interne, ako je (pre príklad hore) zobrazené nižšie.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.set('view engine', 'jade');
-</code></pre>
+</code>
+</pre>
 
-Create a Jade template file named `index.jade` in the `views` directory, with the following content:
+Vo `views` priečinku vytvorte Jade template súbor s názvom `index.jade` s takýmto obsahom:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 html
   head
     title!= title
   body
     h1!= message
-</code></pre>
+</code>
+</pre>
 
-Then create a route to render the `index.jade` file. If the `view engine` property is not set, you must specify the extension of the `view` file. Otherwise, you can omit it.
+Potom zadefinujte route pre rendrovanie `index.jade` súboru. Ak `view engine` parameter nebol nastavený, musíte špecifikovať príponu vášho `view` súboru. V opačnom prípade ju špecifikovať netreba.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code></pre>
+</code>
+</pre>
 
-When you make a request to the home page, the `index.jade` file will be rendered as HTML.
+Po vykonaní requestu na home page, sa súbor `index.jade` vyrendruje ako HTML.
 
-To learn more about how template engines work in Express, see: ["Developing template engines for Express"](/{{ page.lang }}/advanced/developing-template-engines.html).
+Pre viac informácií ohľadom fungovania templatovacích enginov v Express-e si prečítajte: ["Vývoj templatovacích enginov pre Express"](/{{ page.lang }}/advanced/developing-template-engines.html).
