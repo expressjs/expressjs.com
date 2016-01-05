@@ -3,79 +3,83 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
 ### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Express behind proxies
+title: Express za proxy
 menu: guide
-lang: en
+lang: sk
 redirect_from: "/guide/behind-proxies.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Express behind proxies
+# Express za proxy
 
-When running an Express app behind a proxy, set (by using [app.set()](/{{ page.lang }}/4x/api.html#app.set)) the application variable `trust proxy` to one of the values listed in the following table.
+Ak chcete, aby vaša Express aplikácia bežala za proxy, nastavte (pomocou [app.set()](/{{ page.lang }}/4x/api.html#app.set)) aplikačnú premennú `trust proxy` na jednu z hodnôt z nasledujúcej tabuľky.
 
 <div class="doc-box doc-info" markdown="1">
-Although the app will not fail to run if the application variable `trust proxy` is not set, it will incorrectly register the proxy's IP address as the client IP address unless `trust proxy` is configured.
+Aplikácia bude bežať i v prípade, ak aplikačná premenná `trust proxy` nieje nastavená. Aplikácia však nesprávne zaregistruje IP adresu proxy, ako klientskú IP adresu dokým `trust proxy` nebude nastavené.
 </div>
 
 <table class="doctable" border="1" markdown="1">
-  <thead><tr><th>Type</th><th>Value</th></tr></thead>
+  <thead><tr><th>Typ</th><th>Hodnota</th></tr></thead>
   <tbody>
     <tr>
       <td>Boolean</td>
 <td markdown="1">
-If `true`, the client's IP address is understood as the left-most entry in the `X-Forwarded-*` header.
+Ak je `true`, IP addresa klienta bude chápaná ako left-most entry v `X-Forwarded-*` hlavičke.
 
-If `false`, the app is understood as directly facing the Internet and the client's IP address is derived from `req.connection.remoteAddress`. This is the default setting.
+Ak je `false`, aplikácia sa chápe, ako priamo vystavená na Internet a klientská IP adresa je odvodená z `req.connection.remoteAddress`. Toto je defaultné nastavenie.
 </td>
     </tr>
     <tr>
       <td>IP addresses</td>
 <td markdown="1">
-An IP address, subnet, or an array of IP addresses and subnets to trust. The following list shows the pre-configured subnet names:
+IP adresa, subnet, alebo pole IP adries a subnet-ov (podsietí), ktorým má aplikácia dôverovať. Nasledujúci zoznam zobrazuje predkonfigurované názvy subnet-ov:
 
 * loopback - `127.0.0.1/8`, `::1/128`
 * linklocal - `169.254.0.0/16`, `fe80::/10`
 * uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
 
-You can set IP addresses in any of the following ways:
+IP adresy môžete nastaviť ktorýmkoľvek z nasledujúcich spôsobov:
 
-<pre><code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
+<pre>
+<code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code></pre>
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
+</pre>
 
-When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client's IP address.
+Pri zadaní IP adresy alebo subnet-ov, sú tieto vylúčené z procesu vyhodnocovania a nedôveryhodná IP adresa najbližsie k aplikačnému serveru je vyhodnotená ako IP adresa klienta.
 </td>
     </tr>
     <tr>
       <td>Number</td>
 <td markdown="1">
-Trust the `n`th hop from the front-facing proxy server as the client.
+Doveruj n-tému hop-u od front-facing proxy servera ako klient.
 </td>
     </tr>
     <tr>
       <td>Function</td>
 <td markdown="1">
-Custom trust implementation. Use this only if you know what you are doing.
-<pre><code class="language-js" translate="no">app.set('trust proxy', function (ip) {
+Vlastná implementácia dôveryhodnosti. Použite to iba v prípade, ak viete čo robíte.
+<pre>
+<code class="language-js" translate="no">app.set('trust proxy', function (ip) {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
   else return false;
-})</code></pre>
+})</code>
+</pre>
 </td>
     </tr>
   </tbody>
 </table>
 
-Setting a non-`false` `trust proxy` value results in three important changes:
+Nastavením inej ako `false` hodnoty `trust proxy` implikuje tieto tri dôležité zmeny:
 
 <ul>
-  <li markdown="1">The value of [req.hostname](/{{ page.lang }}/api.html#req.hostname) is derived from the value set in the `X-Forwarded-Host` header, which can be set by the client or by the proxy.
+  <li markdown="1">Hodnota [req.hostname](/{{ page.lang }}/api.html#req.hostname) je odvodená od hodnoty nastavenej v `X-Forwarded-Host` hlavičke, ktorá môže byť nastavená klientom alebo proxy.
   </li>
-  <li markdown="1">`X-Forwarded-Proto` can be set by the reverse proxy to tell the app whether it is `https` or  `http` or even an invalid name. This value is reflected by [req.protocol](/{{ page.lang }}/api.html#req.protocol).
+  <li markdown="1">Hlavička `X-Forwarded-Proto` môže byť nastavená z reverse proxy aby oznámila aplikácii, či je `https` alebo  `http` prípadne nevalidná hodnota. Táto hodnota reflektuje [req.protocol](/{{ page.lang }}/api.html#req.protocol).
   </li>
-  <li markdown="1">The [req.ip](/{{ page.lang }}/api.html#req.ip) and [req.ips](/{{ page.lang }}/api.html#req.ips) values are populated with the list of addresses from `X-Forwarded-For`.
+  <li markdown="1">Hodnoty [req.ip](/{{ page.lang }}/api.html#req.ip) a [req.ips](/{{ page.lang }}/api.html#req.ips) sú naplnené zoznamom adries z `X-Forwarded-For`.
   </li>
 </ul>
 
-The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.com/package/proxy-addr) package. For more information, see its documentation.
+Nastavenie `trust proxy` je implementované pomocou [proxy-addr](https://www.npmjs.com/package/proxy-addr) modulu. Pre viac informácií si pozrite jeho dokumentáciu.
