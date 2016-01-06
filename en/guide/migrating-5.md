@@ -68,7 +68,7 @@ If you use any of these methods or properties in your app, it will crash. So, yo
 
 Express 5 no longer supports the `app.del()` function. If you use this function an error is thrown. For registering HTTP DELETE routes, use the `app.delete()` function instead.
 
-Initially `del` was used instead of `delete`, because `delete` is a reserved keyword in JavaScript. However, as of ECMAScript 6, `delete` and other reserved keywords can legally be used as property names. You can read the discussion that led to the deprecation of the `app.del` function here.
+Initially `del` was used instead of `delete`, because `delete` is a reserved keyword in JavaScript. However, as of ECMAScript 6, `delete` and other reserved keywords can legally be used as property names. 
 
 <h4 id="app.param">app.param(fn)</h4>
 
