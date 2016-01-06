@@ -3,56 +3,56 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
 ### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Express security updates
+title: Express security aktualizácie
 menu: advanced
-lang: en
+lang: sk
 redirect_from: "/advanced/security-updates.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Security updates
+# Security aktualizácie
 
 <div class="doc-box doc-notice" markdown="1">
-Node.js vulnerabilities directly affect Express. Therefore [keep a watch on Node.js vulnerabilities](http://blog.nodejs.org/vulnerability/) and make sure you are using the latest stable version of Node.js.
+Vulnereabilita (zraniteĺnosť) Node.js priamo ovplyvňuje Express. Preto [sledujte vulnereabilitu Node.js](http://blog.nodejs.org/vulnerability/) a uistite sa, že používate poslednú stable verziu Node.js.
 </div>
 
-The list below enumerates the Express vulnerabilities that were fixed in the specified version update.
+Zoznam nižšie obsahuje objavené a opravené vulnereability Express-u v špecifických verziách updatov.
 
-**NOTE**: If you believe you have discovered a security vulnerability in Express, please see
+**POZN.**: Ak si myslíte, že ste objavili security vulnerabilitu Express-u, prosím pozrite si
 [Security Policies and Procedures](https://github.com/strongloop/express/blob/master/Security.md).
 
 ## 4.x
 
   * 4.11.1
-    * Fixed root path disclosure vulnerability in `express.static`, `res.sendfile`, and `res.sendFile`
+    * Opravená vulnereabilita sprístupnenia root path-u v `express.static`, `res.sendfile` a `res.sendFile`
   * 4.10.7
-    * Fixed open redirect vulnerability in `express.static` ([advisory](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * Opravená open redirect vulnereabilita v `express.static` ([advisory](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 4.8.8
-    * Fixed directory traversal vulnerabilities in `express.static` ([advisory](http://nodesecurity.io/advisories/send-directory-traversal) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
+    * Opravená directory traversal vulnerabilita v `express.static` ([advisory](http://nodesecurity.io/advisories/send-directory-traversal) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
   * 4.8.4
-    * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually lead to `EMFILE` errors and server unresponsiveness.
+    * Node.js 0.10 obsahuje leak `file descriptorov` čo v určitých situáciách ovplyvňuje `express.static` a `res.sendfile`. Malicious (škodlivé) requesty môžu spôsobiť leakovanie `file descriptorov` a môžu eventuálne viesť k `EMFILE` errorom a neresponzívnosti servera.
   * 4.8.0
-    * Sparse arrays that have extremely high indexes in the query string could cause the process to run out of memory and crash the server.
-    * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
+    * Sparse polia s extrémne vysokými indexami v query stringoch môžu spôsobiť, že pre realizáciu procesu nieje dostatok pamäte a následne crash servera.
+    * Extrémne vnorené query string objekty môžu spôsobiť zablokovanie procesu a dočasnú neresponzívnosť servera.
 
 ## 3.x
 
   <div class="doc-box doc-warn" markdown="1">
-  **Express 3.x IS NO LONGER MAINTAINED**
+  **Express 3.x UŽ NIE JE VIAC UDRŽIAVANÝ**
 
-  Known and unknown security issues in 3.x have not been addressed since the last update (1 August, 2015). Using the 3.x line should not be considered secure.
+  Známe aj neznáme security problémy v 3.x už neboli viac riešené od poslednej aktualizácie (1 August, 2015). Používanie verzie 3.x by nemalo byť považované za bezpečné.
   </div>
 
   * 3.19.1
-    * Fixed root path disclosure vulnerability in `express.static`, `res.sendfile`, and `res.sendFile`
+    * Opravená vulnereabilita sprístupnenia root path-u v `express.static`, `res.sendfile`, and `res.sendFile`
   * 3.19.0
-    * Fixed open redirect vulnerability in `express.static` ([advisory](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * Opravená open redirect vulnereabilita v `express.static` ([advisory](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 3.16.10
-    * Fixed directory traversal vulnerabilities in `express.static`.
+    * Opravená directory traversal vulnerabilita v `express.static`.
   * 3.16.6
-    * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually lead to `EMFILE` errors and server unresponsiveness.
+    * Node.js 0.10 obsahuje leak `file descriptorov` čo v určitých situáciách ovplyvňuje `express.static` a `res.sendfile`. Malicious (škodlivé) requesty môžu spôsobiť leakovanie `file descriptorov` a môžu eventuálne viesť k `EMFILE` errorom a neresponzívnosti servera.
   * 3.16.0
-    * Sparse arrays that have extremely high indexes in query string could cause the process to run out of memory and crash the server.
-    * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
+    * Sparse polia s extrémne vysokými indexami v query stringoch môžu spôsobiť, že pre realizáciu procesu nieje dostatok pamäte a následne crash servera.
+    * Extrémne vnorené query string objekty môžu spôsobiť zablokovanie procesu a dočasnú neresponzívnosť servera.
   * 3.3.0
-    * The 404 response of an unsupported method override attempt was susceptible to cross-site scripting attacks.
+    * Odpoveď 404-ka na pokus o nepodporovaný method override bola náchylná na cross-site scripting útok.

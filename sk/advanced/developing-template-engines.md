@@ -3,18 +3,18 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
 ### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Developing template engines for Express
+title: Vývoj templatovacích enginov pre Express
 menu: advanced
-lang: en
+lang: sk
 redirect_from: "/advanced/developing-template-engines.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Developing template engines for Express
+# Vývoj templatovacích enginov pre Express
 
-Use the `app.engine(ext, callback)` method to create your own template engine. `ext` refers to the file extension, and `callback` is the template engine function, which accepts the following items as parameters: the location of the file, the options object, and the callback function.
+Pre vytvorenie vlastného templatovacieho enginu použite metódu `app.engine(ext, callback)`. Parameter `ext` špecifikuje príponu súborov a `callback` je samotná funkcia templatovacieho enginu, ktorá príjma nasledujúce prvky ako parametre: cesta k súboru, options objekt a callback funkciu.
 
-The following code is an example of implementing a very simple template engine for rendering `.ntl` files.
+Nasledujúci kód je príkladom implementácie veľmi jednoduchého templatovacieho enginu pre rendrovanie `.ntl` súborov.
 
 <pre><code class="language-javascript" translate="no">
 var fs = require('fs'); // this engine requires the fs module
@@ -31,17 +31,17 @@ app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
 </code></pre>
 
-Your app will now be able to render `.ntl` files. Create a file named `index.ntl` in the `views` directory with the following content.
+Odteraz bude vaša aplikácia schopná rendrovať `.ntl` súbory. Vytvorte súbor s názvom `index.ntl` a `views` priečinok s nasledujúcim obsahom.
 
 <pre><code class="language-javascript" translate="no">
 #title#
 #message#
 </code></pre>
-Then, create the following route in your app.
+Potom vo vašej aplikácii vytvorte takýto route:
 
 <pre><code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 })
 </code></pre>
-When you make a request to the home page, `index.ntl` will be rendered as HTML.
+Keď vykonáte request na home page, `index.ntl` bude vyrendrované ako HTML.
