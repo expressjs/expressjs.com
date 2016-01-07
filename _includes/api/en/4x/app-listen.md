@@ -25,7 +25,7 @@ http.createServer(app).listen(80);
 https.createServer(options, app).listen(443);
 ~~~
 
-The `app.listen()` method is a convenience method for the following (for HTTP only):
+The `app.listen()` method returns an [http.Server](https://nodejs.org/api/http.html#http_class_http_server) object and (for HTTP) is a convenience method for the following:
 
 ~~~js
 app.listen = function() {
