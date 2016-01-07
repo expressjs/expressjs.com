@@ -24,7 +24,7 @@ redirect_from: "/en/index.html"
 </section>
 
 <section id="doc-langs" markdown="1">
-Express docs available in other languages: [French](/fr/), [German](/de/), [Spanish](/es/), [Italian](/it/), [Japanese](/ja/), [Russian](/ru/), [Chinese](/zh-cn/), [Tradtional Chinese](/zh-tw/), [Korean](/ko/), [Portuguese](/pt-br/).
+Express docs available in other languages: [French](/fr/), [German](/de/), [Spanish](/es/), [Italian](/it/), [Japanese](/ja/), [Russian](/ru/), [Chinese](/zh-cn/), [Traditional Chinese](/zh-tw/), [Korean](/ko/), [Portuguese](/pt-br/).
 
 Community translation available for: [Ukrainian](/uk) and [Uzbek](/uz/).
 </section>
