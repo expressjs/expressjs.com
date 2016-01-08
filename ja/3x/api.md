@@ -1,15 +1,15 @@
 ---
 layout: 3x-api
-title: Express 3.x - API Reference
+title: Express 3.x - API リファレンス
 menu: api
 lang: ja
 ---
 <div id="api-doc" markdown="1">
 
   <div class="doc-box doc-warn" markdown="1">
-  **Express 3.x support is ending soon**
+  **Express 3.x は保守されなくなりました**
 
-  This series will continue to receive only security updates and bug fixes until July 2015. It is highly recommended to upgrade to Express 4.x.
+  最終更新日 (2015 年 8 月 1 日) 以降、3.x における既知および不明のセキュリティーとパフォーマンスの問題には対応していません。最新バージョンの Express を使用することを強くお勧めします。
   </div>
 
   <h1>3.x API</h1>

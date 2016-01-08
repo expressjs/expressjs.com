@@ -1,14 +1,13 @@
 <h2>Router</h2>
 
 <section markdown="1">
-A `router` object is an isolated instance of middleware and routes. You can think of it
-as a "mini-application," capable only of performing middleware and routing
-functions. Every Express application has a built-in app router.
+Um objeto `router` é uma instância isolada de middleware e rotas. Você pode considerar isso como uma "mini aplicação", capaz somente de processar middlewares e funções de roteamento. Toda aplicação Express tem um app router embutido.
 
-A router behaves like middleware itself, so you can use it as an argument to
-[app.use()](#app.use) or as the argument to another router's  [use()](#router.use) method.
+Um router se comporta como o próprio middleware, assim você pode utilizá-lo como um argumento para [app.use()](#app.use) ou como argumento de outro método  [use()](#router.use) da rota.
 
-The top-level `express` object has a `Router()` function that creates a new `router` object.
+O objeto de alto nível `express` tem uma função `Router()` que cria um novo objeto `router`.
+
+
 
 {% include api/{{ page.lang }}/4x/router-Router.md %}
 </section>

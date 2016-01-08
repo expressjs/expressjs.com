@@ -1,58 +1,62 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Express glossary
+title: Глоссарий по Express
 menu: resources
 lang: ru
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Glossary
+# Глоссарий
 
-<div class="doc-box doc-warn">This is currently a working draft</div>
+<div class="doc-box doc-warn">На данный момент это рабочая черновая версия</div>
 
-### application
+### application (приложение)
 
-In general, one or more programs designed to carry out operations for a specific purpose.  In the context of Express, a program that uses the Express API running on the Node.js platform.  May also refer to an [app object](/api.html#express).
+В общем смысле, одна или несколько программ, предназначенных для выполнения операций с определенной целью.  В контексте Express - программа, использующая API Express, запущенный на платформе Node.js.  Также называется [объектом приложения](/{{ page.lang }}/api.html#express).
 
 ### API
 
-Application programming interface.  Spell out on first use.
+Интерфейс программирования приложений.  Рекомендуется расшифровывать данную аббревиатуру при первом упоминании.
 
 ### Express
 
-A fast, un-opinionated, minimalist web framework for Node.js applications.  In general, prefer simply "Express" to "Express.js," though the latter is acceptable. 
+Быстрый, гибкий, минималистичный веб-фреймворк для приложений Node.js.  В целом, название "Express" является более предпочтительным, чем"Express.js", хотя последнее тоже допускается.
 
 ### libuv
 
-Multi-platform support library with focus on asynchronous I/O, primarily developed for use by Node.js.
+Библиотека мультиплатформной поддержки, ориентированная на асинхронный ввод/вывод, в основном разработанный для использования Node.js.
 
-### middleware
+### middleware (промежуточные обработчики)
 
-A function invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.  A few fine points of terminology around middleware:
+Функция, вызываемая уровнем маршрутизации Express перед обработчиком финального запроса, то есть, находящаяся между необработанным запросом и окончательным заданным маршрутом.  Вот некоторые выдержки из терминологии, связанной с промежуточными обработчиками:
 
-  * `var foo = require('middleware')` is called _requiring_ or _using_ a Node.js module. Then the statement `var mw = foo()`  typically returns the middleware.
-  * `app.use(mw)` is called _adding the middleware to the global processing stack_.
-  * `app.get('/foo', mw, function (req, res) { ... })` is called _adding the middleware to the "GET /foo" processing stack_.
+  * `var foo = require('middleware')` называется *затребованием* или *использованием* модуля Node.js. Затем оператор `var mw = foo()`, как правило, возвращает промежуточный обработчик.
+  * `app.use(mw)` называется *добавлением промежуточного обработчика в глобальный стек обработки*.
+  * `app.get('/foo', mw, function (req, res) { ... })` называется *добавлением промежуточного обработчика в стек обработки "GET /foo"*.
 
 ### Node.js
 
-Software platform used to build scalable network applications. Node.js uses JavaScript as its scripting language, and achieves high throughput via non-blocking I/O and a single-threaded event loop.  See [nodejs.org](http://nodejs.org/). **Usage note**: Initially, "Node.js," thereafter "Node".
+Платформа программного обеспечения, используемая для разработки масштабируемых сетевых приложений. Node.js использует JavaScript в качестве языка создания сценариев и обеспечивает высокую пропускную способность благодаря неблокирующему вводу/выводу и однопотоковому циклу событий.  См. [nodejs.org](http://nodejs.org/). **Особенность употребления термина**: При первом упоминании - "Node.js", в дальнейшем - "Node".
 
-### open-source, open source
+### open-source, open source (открытый исходный код, с открытым исходным кодом)
 
-When used as an adjective, hyphenate; for example: "This is open-source software." See [Open-source software on Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Note: Although it is common not to hyphenate this term, we are using the standard English rules for hyphenating a compound adjective
+В английском языке прилагательное open-source пишется через дефис; например: "This is open-source software" ("Это программное обеспечение с открытым исходным кодом"). См. статью [Открытое программное обеспечение](http://en.wikipedia.org/wiki/Open-source_software) в Википедии. Примечание: Хотя широко распространено употребление данного термина без дефиса, мы следуем стандартным правилам английского языка, согласно которым составные прилагательные пишутся через дефис.
 
-### request
+### request (запрос)
 
-An HTTP request.  A client submits an HTTP request message to a server, which returns an response.  Must use one of several [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) such as GET, POST, and so on.
+Запрос HTTP.  Клиент передает на сервер сообщение-запрос по протоколу HTTP, а сервер возвращает ответ.  В запросе должен использоваться один из нескольких [методов запроса](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), например, GET, POST и т.д.
 
-### response
+### response (ответ)
 
-An HTTP response. A server returns an HTTP response message to the client. The response contains completion status information about the request and may also contain requested content in its message body.
+Ответ HTTP. Сервер возвращает клиенту сообщение-ответ по протоколу HTTP. Ответ содержит информацию о состоянии выполнения запроса, а также в теле сообщения может быть включено запрашиваемое содержимое.
 
-### route
+### route (маршрут)
 
-Part of a URL that identifies a resource.  For example, in `http://foo.com/products`, "/products/id" is the route.
+Часть URL, идентифицирующая ресурс.  Например, в `http://foo.com/products/id`, "/products/id" является маршрутом.
 
-### router
+### router (маршрутизатор)
 
-See [http://expressjs.com/api#router](http://expressjs.com/api#router)
+См. раздел [маршрутизатор](/{{ page.lang }}/4x/api.html#router) в справочнике API.

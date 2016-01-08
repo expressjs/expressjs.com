@@ -1,7 +1,7 @@
 <h3 id='app.enabled'>app.enabled(name)</h3>
 
-Returns `true` if the setting `name` is enabled (`true`), where `name` is one of the
-properties from the [app settings table](#app.settings.table).
+Retorna `true` se a configuração `name` está ativada (`true`), onde `name` é uma das
+propriedades da [tabela de configurações da aplicação](#app.settings.table).
 
 ~~~js
 app.enabled('trust proxy');

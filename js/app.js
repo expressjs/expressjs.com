@@ -2,6 +2,10 @@
 $(function(){
 
   var doc = $(document);
+  var lang = document.location.pathname.split('/')[1]
+
+  // hilight the menu item of the current page
+  $('#navmenu ul ul').find('a[href="'+ document.location.pathname + '"]').addClass('current')
 
   // top link
   $('#top').click(function(e){
@@ -44,10 +48,11 @@ $(function(){
 
   var editLink;
 
-  if (pathName == '/') editLink = '<a href="' + branchPath + '">Fork the website on GitHub</a>';
-  else editLink = '<a href="' + editPath + '">Edit this page on GitHub</a>';
-
-  $('#fork').html(editLink);
+  if (lang === 'en') {
+    if (pathName == '/') editLink = '<a href="' + branchPath + '">Fork the website on GitHub</a>.';
+    else editLink = '<a href="' + editPath + '">Edit this page on GitHub</a>.';
+    $('#fork').html(editLink);
+  }
 
   // code highlight
 

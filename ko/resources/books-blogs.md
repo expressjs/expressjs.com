@@ -1,8 +1,12 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express books and blogs
 menu: resources
 lang: ko
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Books and blogs
@@ -25,6 +29,11 @@ O'Reilly Media, July 2014.
 Manning Publications, October 2013.
  - **[Express Web Application Development](https://www.packtpub.com/web-development/express-web-application-development)**,
 Packt Publishing, June 2013.
+- **[express - Middleware für node.js](http://www.amazon.de/express-Middleware-node-js-J%C3%B6rg-Krause/dp/1517281342/ref=sr_1_1?ie=UTF8&qid=1442001556&sr=8-1&keywords=1517281342)**,
+texxtoor, September 2015. In deutscher Sprache / in German language
+- **[JADE - die Template Engine für node.js](http://www.amazon.de/JADE-Die-Template-Engine-node-js/dp/1517282098/ref=sr_1_1?ie=UTF8&qid=1442001592&sr=8-1&keywords=1517282098)**,
+texxtoor, September 2015. In deutscher Sprache / in German language
+- **[Node Web Development, 2nd edition](https://www.packtpub.com/web-development/node-web-development-second-edition)**, Packt Publishing, August 2013
 
 ###Add your book here!
 

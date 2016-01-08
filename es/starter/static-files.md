@@ -1,55 +1,77 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Serving static files in Express
+title: Servicio de archivos estáticos en Express
 menu: starter
-lang: en
+lang: es
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Serving static files in Express
+# Servicio de archivos estáticos en Express
 
-Serving files, such as images, CSS, JavaScript and other static files is accomplished with the help of a built-in middleware in Express - `express.static`.
+Para el servicio de archivos estáticos como, por ejemplo, imágenes, archivos CSS y archivos JavaScript, utilice la función de middleware incorporado `express.static` de Express.
 
-Pass the name of the directory, which is to be marked as the location of static assets, to the `express.static` middleware to start serving the files directly. For example, if you keep your images, CSS, and JavaScript files in a directory named `public`, you can do this:
+Pase el nombre del directorio que contiene los activos estáticos a la función de middleware `express.static` para empezar directamente el servicio de los archivos. Por ejemplo, utilice el siguiente código para el servicio de imágenes, archivos CSS y archivos JavaScript en un directorio denominado `public`:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.use(express.static('public'));
-~~~
+</code>
+</pre>
 
-Now, you will be able to load the files under the `public` directory:
+Ahora, puede cargar los archivos que hay en el directorio `public`:
 
-~~~
+<pre>
+<code class="language-javascript" translate="no">
 http://localhost:3000/images/kitten.jpg
 http://localhost:3000/css/style.css
 http://localhost:3000/js/app.js
 http://localhost:3000/images/bg.png
 http://localhost:3000/hello.html
-~~~
+</code>
+</pre>
 
 <div class="doc-box doc-info">
-The files are looked up relative to the static directory, therefore, the name of the static directory is not a part of the URL.
+Express busca los archivos relativos al directorio estático, por lo que el nombre del directorio estático no forma parte del URL.
 </div>
 
-If you want to use multiple directories as static assets directories, you can call the `express.static` middleware multiple times:
+Para utilizar varios directorios de activos estáticos, invoque la función de middleware `express.static` varias veces:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.use(express.static('public'));
 app.use(express.static('files'));
-~~~
+</code>
+</pre>
 
-The files will be looked up in the order the static directories were set using the `express.static` middleware.
+Express busca los archivos en el orden en el que se definen los directorios estáticos con la función de middleware `express.static`.
 
-If you want to create a "virtual" (since the path does not actually exists in the file system) path prefix for the files served by `express.static`, you can [specify a mount path](/4x/api.html#app.use) for the static directory, as shown below:
+Para crear un prefijo de vía de acceso virtual (donde la vía de acceso no existe realmente en el sistema de archivos) para los archivos a los que da servicio la función `express.static`, [especifique una vía de acceso de montaje](/{{ page.lang }}/4x/api.html#app.use) para el directorio estático, como se muestra a continuación:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.use('/static', express.static('public'));
-~~~
+</code>
+</pre>
 
-Now, you will be able to load the files under the `public` directory, from the path prefix "/static".
+Ahora, puede cargar los archivos que hay en el directorio `public` desde el prefijo de vía de acceso `/static`.
 
-~~~
+<pre>
+<code class="language-javascript" translate="no">
 http://localhost:3000/static/images/kitten.jpg
 http://localhost:3000/static/css/style.css
 http://localhost:3000/static/js/app.js
 http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
-~~~
+</code>
+</pre>
+
+No obstante, la vía de acceso que proporciona a la función `express.static` es relativa al directorio desde donde inicia el proceso `node`. Si ejecuta la aplicación Express desde cualquier otro directorio, es más seguro utilizar la vía de acceso absoluta del directorio al que desea dar servicio:
+
+<pre>
+<code class="language-javascript" translate="no">
+app.use('/static', express.static(__dirname + '/public'));
+</code>
+</pre>

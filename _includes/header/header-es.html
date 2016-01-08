@@ -6,39 +6,39 @@
   </section>
   <div id="navbar">
       <ul id="navmenu">
-          <li><a href="{% if page.lang == 'en' %}/{% else %}/{{ page.lang }}/{% endif %}" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Home</a></li>
+          <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Inicio</a></li>
           <li>
               <ul id="getting-started-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Empezar</a>
+                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Cómo empezar</a>
                       <ul>
                           <li>
-                            <a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/installing.html">
+                            <a href="/{{ page.lang }}/starter/installing.html">
                               Instalación
                             </a>
                           </li>
                           <li>
-                          <a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/generator.html">
-                            Generador Express 
+                            <a href="/{{ page.lang }}/starter/hello-world.html">
+                              Hello world
+                            </a>
+                          </li>
+                          <li>
+                          <a href="/{{ page.lang }}/starter/generator.html">
+                            Generador de Express
                           </a>
                           </li>
                           <li>
-                            <a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/hello-world.html">
-                              Hola Mundo
+                            <a href="/{{ page.lang }}/starter/basic-routing.html">
+                              Direccionamiento básico
                             </a>
                           </li>
                           <li>
-                            <a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/basic-routing.html">
-                              Enrutamiento Básico
+                            <a href="/{{ page.lang }}/starter/static-files.html">
+                              Archivos estáticos
                             </a>
                           </li>
                           <li>
-                            <a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/static-files.html">
-                              Archivos Estáticos
-                            </a>
-                          </li>
-                          <li>
-                            <a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/starter/faq.html">
-                              FAQ
+                            <a href="/{{ page.lang }}/starter/faq.html">
+                              Preguntas más frecuentes
                             </a>
                           </li>
                       </ul>
@@ -47,23 +47,27 @@
           </li>
           <li>
               <ul id="guide-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Guía</a>
+                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Guía</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/routing.html">Enrutamiento</a>
+                          <li><a href="/{{ page.lang }}/guide/routing.html">Direccionamiento</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/using-middleware.html">Usar Middleware</a>
+                          <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Escritura de middleware</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/using-template-engines.html">Usar Motores de plantillas</a>
+                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Utilización del middleware</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/error-handling.html">Manejo de Errores</a>
+                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Utilización de motores de plantilla</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/debugging.html">Depuración</a>
+                          <li><a href="/{{ page.lang }}/guide/error-handling.html">Manejo de errores</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/behind-proxies.html">Express detrás de proxies</a>
+                          <li><a href="/{{ page.lang }}/guide/debugging.html">Depuración</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/migrating-4.html">Mover a Express 4</a>
+                          <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express detrás de proxies</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/guide/database-integration.html">Integrar bases de datos</a>
+                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">Migración a Express 4</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/migrating-5.html">Migración a Express 5</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/database-integration.html">Integración de la base de datos</a>
                           </li>
                       </ul>
                   </li>
@@ -71,11 +75,13 @@
           </li>
           <li>
               <ul id="application-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Referencia de API</a>
+                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Referencia de API</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/4x/api.html">4.x</a>
+                          <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/3x/api.html">3.x</a>
+                          <li><a href="/{{ page.lang }}/3x/api.html">3.x (en desuso)</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/2x/">2.x (en desuso)</a>
                           </li>
                       </ul>
                   </li>
@@ -83,36 +89,41 @@
           </li>
           <li>
               <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Temas Avanzados</a>
+                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Temas avanzados</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/developing-template-engines.html">Motores de plantilla</a>
+                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Motores de plantilla</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/pm.html">Using process managers</a>
+                          <li><a href="/{{ page.lang }}/advanced/pm.html">Utilización de gestores de procesos</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/advanced/security-updates.html">Actualizaciones de Seguridad</a>
+                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">Actualizaciones de seguridad</a>
                           </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">Mejores prácticas de seguridad</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Mejores prácticas de rendimiento</a>
+                          </li>
+
                       </ul>
                   </li>
               </ul>
           </li>
           <li>
               <ul id="resources-menu" class="menu">
-                  <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Recursos</a>
+                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Recursos</a>
                       <ul>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/glossary.html">Glosario</a>
+                          <li><a href="/{{ page.lang }}/resources/glossary.html">Glosario</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/middleware.html">Middleware</a>
+                          <li><a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/community.html">Comunidad</a>
+                          <li><a href="/{{ page.lang }}/resources/community.html">Comunidad</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/books-blogs.html">Libros y blogs</a>
+                          <li><a href="/{{ page.lang }}/resources/books-blogs.html">Manuales y blogs</a>
                           </li>
-                          <li><a href="{% if page.lang != 'en' %}/{{ page.lang }}{% endif %}/resources/applications.html">Aplicaciones</a>
+                          <li><a href="/{{ page.lang }}/resources/applications.html">Aplicaciones</a>
                           </li>
                       </ul>
                   </li>
               </ul>
           </li>
       </ul>
-  </div><a href="http://strongloop.com/node-js/training/" title="Node and Express Training from StrongLoop" id="strongloop-header">Express and Node.js Training from StrongLoop</a>
+  </div><a href="http://strongloop.com/node-js/training/" title="Formación en Node y Express de StrongLoop" id="strongloop-header">Formación en Express y Node.js de StrongLoop</a>
 </header>

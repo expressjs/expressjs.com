@@ -1,0 +1,129 @@
+<header>
+  <div id="mobile-menu">
+      <div id="nav-button" class="fa fa-bars fa-2x button"></div>
+  </div>
+  <section id="logo"><a href="/" class="express">Express</a>
+  </section>
+  <div id="navbar">
+      <ul id="navmenu">
+          <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>首頁</a></li>
+          <li>
+              <ul id="getting-started-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>入門</a>
+                      <ul>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/installing.html">
+                              安裝
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/hello-world.html">
+                              Hello World
+                            </a>
+                          </li>
+                          <li>
+                          <a href="/{{ page.lang }}/starter/generator.html">
+                            Express 產生器
+                          </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/basic-routing.html">
+                              基本路由
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/static-files.html">
+                              靜態檔案
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/faq.html">
+                              常見問題 (FAQ)
+                            </a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="guide-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>手冊</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/guide/routing.html">路由</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/writing-middleware.html">撰寫中介軟體</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">使用中介軟體</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">使用範本引擎</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/error-handling.html">錯誤處理</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/debugging.html">除錯</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/behind-proxies.html">位於 Proxy 背後的 Express</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">移至 Express 4</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/migrating-5.html">移至 Express 5</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/database-integration.html">資料庫整合</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="application-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API 參照</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/3x/api.html">3.x（已淘汰）</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/2x/">2.x（已淘汰）</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="advanced-topics-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>進階主題</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">範本引擎</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/pm.html">使用程序管理程式</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">安全更新</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">安全最佳作法</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">效能最佳作法</a>
+                          </li>
+
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="resources-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>資源</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/resources/glossary.html">名詞解釋</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/middleware.html">中介軟體</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/community.html">社群</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/books-blogs.html">書籍與部落格</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/applications.html">應用程式</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+  </div><a href="http://strongloop.com/node-js/training/" title="StrongLoop 提供的 Node 和 Express 訓練課程" id="strongloop-header">StrongLoop 提供的 Express 和 Node.js 訓練課程</a>
+</header>

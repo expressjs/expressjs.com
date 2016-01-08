@@ -1,39 +1,62 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Express 설치하기
+title: Express 설치
 menu: starter
 lang: ko
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # 설치
 
-먼저, 당신의 애플리케이션을 보관할 폴더를 만들지 않았다면 작업 공간이 될 폴더를 만드세요.
-First, create a directory to hold your application, if you haven't already done so, and make that your working directory.
+[Node.js](https://nodejs.org/)가 이미 설치되었다고 가정한 상태에서, 애플리케이션을 보관할 디렉토리를 작성하고 그 디렉토리를 작업 디렉토리로 설정하십시오.
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ mkdir myapp
 $ cd myapp
-~~~
+</code>
+</pre>
 
-`package.json` 파일이 존재하지 않는다면 원하는 폴더에서 `npm init` 명령어를 이 파일을 만드세요.
+`npm init` 명령을 이용하여 애플리케이션에 대한 `package.json` 파일을 작성하십시오.
+`package.json`의 작동 원리에 대한 자세한 정보는 [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json)을 참조하십시오.
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm init
-~~~
+</code>
+</pre>
 
-Express를 앱 디렉토리에 설치하여 의존성 목록에 저장하세요:
+이 명령을 실행하면 애플리케이션의 이름 및 버전과 같은 몇 가지 정보에 대해 프롬프트합니다.
+지금은 다음의 항목을 제외한 대부분의 항목에서 ENTER 키를 눌러 기본값을 수락할 수 있습니다.
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
+entry point: (index.js)
+</code>
+</pre>
+
+기본 파일의 이름을 `app.js`로 입력하거나 자유롭게 입력하십시오. 기본 파일의 이름을 `index.js`로 입력하기 원하는 경우에는 ENTER 키를 눌러 제안된 기본 파일 이름을 수락하십시오.
+
+이제 `app` 디렉토리에 Express를 설치한 후 종속 항목 목록에 저장하십시오. 예를 들면 다음과 같습니다.
+
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express --save
-~~~
+</code>
+</pre>
 
-Express를 임시로 설치하고 싶다면, `-save` 옵션을 빼면 됩니다:
+Express를 임시로 설치하고 종속 항목 목록에 추가하지 않으려면, 다음과 같이 `--save` 옵션을 생략하십시오.
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express
-~~~
+</code>
+</pre>
 
 <div class="doc-box doc-info" markdown="1">
-Node 모듈들은 `--save` 옵션을 통해 `package.json` 파일 내부 `dependencies` 목록에 추가됩니다.
-그리고 앱 디렉토리에서 `npm install` 명령어를 이용하여 의존성 목록에 있는 모듈들을 자동으로 설치할 수 있습니다. 
+`--save` 옵션을 통해 설치된 Node 모듈은 `package.json` 파일 내의 `dependencies` 목록에 추가됩니다.
+이후 `app` 디렉토리에서 `npm install`을 실행하면 종속 항목 목록 내의 모듈이 자동으로 설치됩니다.
 </div>

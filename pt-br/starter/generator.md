@@ -1,26 +1,34 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Gerador de aplicação Express
+title: Gerador de aplicativos do Express
 menu: starter
 lang: pt-br
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Gerador de aplicação Express
+# Gerador de aplicativos do Express
 
-Utiliza a ferramenta de geração de aplicação, `express`, para rapidamente criar um esqueleto de aplicação.
+Use a ferramenta geradora de aplicativos, `express`,
+para rapidamente criar uma estrutura básica de aplicativo.
 
-Instale com a seguinte linha de comando.
+Instale o `express` com o comando a seguir:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express-generator -g
-~~~
+</code>
+</pre>
 
-Mostre as opções de comando com a opção `-h`:
+Exiba as opções de comando com a opção `-h`:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ express -h
 
-  Usage: express [options] [dir]
+  Usage: express [options][dir]
 
   Options:
 
@@ -29,14 +37,17 @@ $ express -h
     -e, --ejs           add ejs engine support (defaults to jade)
         --hbs           add handlebars engine support
     -H, --hogan         add hogan.js engine support
-    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+    -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-~~~
+</code>
+</pre>
 
-Por exemplo, o seguinte comando cria uma aplicação Express nomeada _myapp_ no diretório corrente.
+Por exemplo, o seguinte cria um aplicativo do Express chamado _myapp_
+no diretório atualmente em funcionamento:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ express myapp
 
    create : myapp
@@ -56,53 +67,64 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-~~~
+</code>
+</pre>
 
-Então instale as dependências:
+Em seguida instale as dependências:
 
-~~~sh
-$ cd myapp 
+<pre>
+<code class="language-sh" translate="no">
+$ cd myapp
 $ npm install
-~~~
+</code>
+</pre>
 
-Rode a aplicação (no MaxOS ou Linux):
+No MacOS ou Linux, execute o aplicativo com este comando:
 
-~~~sh
-$ DEBUG=myapp npm start
-~~~
+<pre>
+<code class="language-sh" translate="no">
+$ DEBUG=myapp:* npm start
+</code>
+</pre>
 
-No Windows, utilize este comando:
+No Windows, use este comando:
 
-~~~sh
-> set DEBUG=myapp & npm start
-~~~
+<pre>
+<code class="language-sh" translate="no">
+> set DEBUG=myapp:* & npm start
+</code>
+</pre>
 
-Então abra `http://localhost:3000` no seu <i>browser</i> para acessar a aplicação.
+Em seguida carregue `http://localhost:3000/` no seu navegador para acessar o aplicativo.
 
-A estrutura da aplicação gerada será semelhante a esta.
 
-~~~sh
+O aplicativo gerado possui a seguinte estrutura de diretórios:
+
+<pre>
+<code class="language-sh" translate="no">
 .
 ├── app.js
 ├── bin
-│   └── www
+│   └── www
 ├── package.json
 ├── public
-│   ├── images
-│   ├── javascripts
-│   └── stylesheets
-│       └── style.css
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+│       └── style.css
 ├── routes
-│   ├── index.js
-│   └── users.js
+│   ├── index.js
+│   └── users.js
 └── views
     ├── error.jade
     ├── index.jade
     └── layout.jade
 
 7 directories, 9 files
-~~~
+</code>
+</pre>
 
 <div class="doc-box doc-info" markdown="1">
-A estrutura de aplicação gerada pelo gerador é apenas uma dos múltiplos jeitos de estruturar uma aplicação Express. Sinta-se livre para não usá-la ou modificá-la para melhor atender suas necessidades.
+A estrutura de aplicativo criada pelo gerador é apenas uma das várias maneiras de estruturar aplicativos do Express.
+É possível utilizar esta estrutura ou modificá-la para melhor se adequar às suas necessidades.
 </div>

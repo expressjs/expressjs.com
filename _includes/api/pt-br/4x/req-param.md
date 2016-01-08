@@ -1,10 +1,10 @@
 <h3 id='req.param'>req.param(name [, defaultValue])</h3>
 
 <div class="doc-box doc-warn" markdown="1">
-Deprecated. Use either `req.params`, `req.body` or `req.query`, as applicable.
+Deprecated. Utilize `req.params`, `req.body` ou `req.query`, conforme aplicação.
 </div>
 
-Return the value of param `name` when present.
+Retorna o valor do parâmetro `name` quando presente.
 
 ~~~js
 // ?name=tobi
@@ -15,21 +15,24 @@ req.param('name')
 req.param('name')
 // => "tobi"
 
-// /user/tobi for /user/:name 
+// /user/tobi for /user/:name
 req.param('name')
 // => "tobi"
 ~~~
 
-Lookup is performed in the following order:
+A busca é realizada na seguinte ordem:
 
 * `req.params`
 * `req.body`
 * `req.query`
 
-Optionally, you can specify `defaultValue` to set a default value if the parameter is not found in any of the request objects.
+De forma opcional, você pode especificar `defaultValue` ara definir um valor padrão
+caso o parâmetro não seja encontrado em nenhum dos objetos da requisição.
 
 <div class="doc-box doc-warn" markdown="1">
-Direct access to `req.body`, `req.params`, and `req.query` should be favoured for clarity - unless you truly accept input from each object.
+O acesso direto a `req.body`, `req.params`, e `req.query` deve ser favorecido
+para maior clareza - a não ser que você verdadeiramente aceite entradas para cada objeto.
 
-Body-parsing middleware must be loaded for `req.param()` to work predictably. Refer [req.body](#req.body) for details.
+O middleware de Body-parsing deve ser carregado para que `req.param()` trabalhe de maneira preditiva.
+Veja [req.body](#req.body) para maiores detalhes.
 </div>

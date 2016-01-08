@@ -1,6 +1,6 @@
 ## Contributing to expressjs.com
 
-This respository is only for issues related to the website [http://expressjs.com](http://expressjs.com). For issues related to Express, the framework, go to [https://github.com/strongloop/express](https://github.com/strongloop/express).
+This repository is only for issues related to the website [http://expressjs.com](http://expressjs.com). For issues related to Express, the framework, go to [https://github.com/strongloop/express](https://github.com/strongloop/express).
 
 Feel free to make changes to the template files or the document files. The supporting docs are located in their respective directories, and the API docs are located under the `_includes` directory.
 
@@ -18,7 +18,7 @@ Interested? Please follow these steps:
 5. Update the `title` variable in the copied markdown files.
 6. Create the header, footer, notice, and announcement file for the language in the `_includes/` directory, in the respective directories, and make necessary edits to the contents.
 7. Create the announcement file for the language in the `_includes/` directory.
-8. Create a copy of the `_includes/api/en` and rename it acording to the language code.
+8. Create a copy of the `_includes/api/en` and rename it according to the language code.
 9. Make sure to append `/{{ page.lang }}` to all the links within the site.
 
 ## Local Setup
@@ -27,7 +27,7 @@ GitHub Pages websites being served through [Jekyll](http://jekyllrb.com/), you w
 
 [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) and [Jekyll](http://jekyllrb.com/docs/installation/) on your system, if you don't have them already.
 
-Once installed, `cd` to the respository directory and run Jekyll using the following command:
+Once installed, `cd` to the repository directory and run Jekyll using the following command:
 
 ```
 $ jekyll s

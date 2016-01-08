@@ -1,43 +1,55 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: home
-title: Express - Framework Web para Node.js 
+title: Express - Infraestructura de aplicaciones web Node.js
 menu: home
 lang: es
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
-    <section id="description"><a href="/" class="express">Express</a><span class="description">Framework Web Rápido, De Mente Abierta, minimalista para <a href='http://nodejs.org'>Node.js</a></span>
+
+    <section id="description">
+        <a href="/" class="express">Express</a>
+
+        <span class="description">Infraestructura web rápida, minimalista y flexible para <a href='http://nodejs.org'>Node.js</a></span>
     </section>
+
     <div id="install-command">$ npm install express --save</div>
 </section>
-<section id="doc-langs" markdown="1">
-  Documentación de Express disponible en otros idiomas: [Inglés](/), [Japonés](/ja), [Ruso](/ru), [Chino](/zh).
-</section>
+
+<!--<section id="doc-langs" markdown="1">
+  Documentos de Express disponibles en otros idiomas: [español](/es), [japonés](/ja), [ruso](/ru), [chino](/zh), [coreano](/ko), [portugués](/pt-br).
+</section>-->
 
 <section id="intro">
 
   <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h3>Aplicaciones Web</h3> Express es un framework web mínimo y flexible para Node.js que proporciona un conjunto robusto de características para aplicaciones web y móviles.
+          <h3>Aplicaciones web</h3> Express es una infraestructura de aplicaciones web Node.js mínima y flexible que proporciona un conjunto sólido de características para las aplicaciones web y móviles.
       </div>
 
       <div id="apis">
-          <h3>APIs</h3> Con una gran variedad de métodos de utilidad HTTP y middleware a su disposición, la creación de una potente API es rápido y fácil.
+          <h3>API</h3> Con miles de métodos de programa de utilidad HTTP y middleware a su disposición, la creación de una API sólida es rápida y sencilla.
       </div>
 
       <div id="performance">
-          <h3>Rendimiento</h3> Express proporciona una capa delgada de características fundamentales de aplicaciones web, sin ocultar las características del Node que usted sabe y ama.
+          <h3>Rendimiento</h3> Express proporciona una delgada capa de características de aplicación web básicas, que no ocultan las características de Node.js que tanto ama y conoce.
       </div>
 
       <div id="sponsorship">
-          <a href="http://loopback.io/"><h3>LoopBack</h3> Desarrolla aplicaciones dirigidas por modelos con un framework basado en Express.<br/>Más información en loopback.io.</a>
+          <a href="http://loopback.io/"><h3>LoopBack</h3> Desarrolle aplicaciones basadas en modelos con una infraestructura basada en Express.<br/>Encontrará más información en loopback.io.</a>
       </div>
   </div>
 
 </section>
 
-<!-- <section id="announcements">
+<!--
+<section id="announcements">
   {% include announcement/announcement-{{ page.lang }}.md %}
-</section> -->
+</section>
+-->

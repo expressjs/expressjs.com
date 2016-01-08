@@ -1,49 +1,62 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Expressのインストール
+title: Express のインストール
 menu: starter
 lang: ja
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # インストール
 
-すでに[Node.js](https://nodejs.org/)がインストールされているとして、アプリケーションのためのディレクトリを作成し、ワーキングディレクトリとします。
+既に [Node.js](https://nodejs.org/) をインストールしてあることを想定して、ここではアプリケーションを保持するディレクトリーを作成して、それを作業ディレクトリーにします。
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ mkdir myapp
 $ cd myapp
-~~~
+</code>
+</pre>
 
-`npm init`を用いて`package.json`を生成します。
-`package.json`についてのさらなる情報は[Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json)をご覧ください。
+`npm init` コマンドを使用して、アプリケーション用の `package.json` ファイルを作成します。
+`package.json` の機能について詳しくは、[Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json) を参照してください。
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm init
-~~~
+</code>
+</pre>
 
-このコマンドはアプリケーションの名前やバージョンといった、いくつかの入力を要求します。
-今のところは、下記の項目以外は単にエンターキーを押してデフォルト値を使うことができます。
+次のコマンドは、アプリケーションの名前やバージョンなど多くの情報の指定を求めるプロンプトを表示します。
+ここでは、単に RETURN キーを押し、以下を例外として大半の情報に関してデフォルトを受け入れます。
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 entry point: (index.js)
-~~~
+</code>
+</pre>
 
-`app.js`または、あなたがメインファイルにつけたい名前を入力します。
-もし、それを`index.js`にしたいなら、エンターキーを押してデフォルトのファイル名を利用します。
+`app.js`、またはメインファイルに指定したい名前を入力します。`index.js` にする場合は、RETURN キーを押して、示されたデフォルトのファイル名を受け入れます。
 
-アプリのディレクトリにExpressをインストールして、依存関係リストの保存をします。
+次に、Express を `app` ディレクトリーにインストールして、依存関係リストに保存します。次に例を示します。
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express --save
-~~~
+</code>
+</pre>
 
-一時的にExpressをインストールし、依存関係リストをを追加しない場合は`--save`オプションを省略します。
+Express を一時的にインストールして、依存関係リストに追加しない場合は、`--save` オプションを省略します。
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express
-~~~
+</code>
+</pre>
 
 <div class="doc-box doc-info" markdown="1">
-Nodeモジュールは`--save`オプションで追加される`package.json`ファイル内の`dependencies`リストとともにインストールされます。
-アプリのディレクトリで`npm install`を使うと、依存関係リストにあるモジュールが自動的にインストールされます。
+`--save` オプションを指定してインストールされた Node モジュールは、`package.json` ファイル内の `dependencies` リストに追加されます。
+その後、`npm install` を `app` ディレクトリーで実行すると、dependencies リスト内のモジュールが自動的にインストールされます。
 </div>

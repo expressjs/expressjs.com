@@ -3,9 +3,13 @@
 
   {% include head.html %}
 
-  <body>
+  {% if page.lang == 'en' %}
+  <body class="en-doc">
+  {% else %}
+  <body class="non-en-doc">
+  {% endif %}
 
-    <section class="content">
+    <section class="page content">
 
       {% include header/header-{{ page.lang }}.html %}
 
@@ -16,9 +20,9 @@
           {% include i18n-notice.html %}
         </div>
       {% endif %}
-    
+
       {{ content }}
-      
+
     </section>
 
     {% include footer/footer-{{ page.lang }}.html %}

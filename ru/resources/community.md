@@ -1,41 +1,39 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Express community
+title: Сообщество Express
 menu: resources
 lang: ru
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Community
+# Сообщество
 
-##Mailing List
+##Список рассылки
 
-Join over 2000 Express users or browse over 5000
-discussions in the [Google Group](https://groups.google.com/group/express-js).
+Присоединяйтесь к 2000 пользователей Express или ознакомьтесь с более чем 5000
+обсуждений в [Группе Google](https://groups.google.com/group/express-js).
 
 ##Gitter
 
-The [strongloop/express chatroom](https://gitter.im/strongloop/express) is great place 
-for developers interested in the everyday discussions related to Express.
+[Раздел чата по strongloop/express](https://gitter.im/strongloop/express) идеален для разработчиков, активно интересующихся ежедневными обсуждениями тем, касающихся Express.
 
-##IRC Channel
+##Канал IRC
 
-Hundreds of developers idle in #express on freenode every day.
-If you have questions about the framework, jump in for quick
-feedback.
+Сотни разработчиков ежедневно общаются на канале #express в сети freenode.
+Если у вас возникнут вопросы по данному фреймворку, присоединяйтесь - и вы быстро получите ответы на них.
 
-##Examples
+##Примеры
 
-View dozens of Express application [examples](https://github.com/strongloop/express/tree/master/examples)
-in the repo covering everything from API design and auth
-to template engine integration.
+Просмотр десятков [примеров](https://github.com/strongloop/express/tree/master/examples) приложений Express в хранилище, охватывающем разнообразные направления - от проектирования API и аутентификации до интеграции шаблонизаторов.
 
-##Issues
+##Размещение заявок
 
-If you've come across what you think is a bug, or just want to make
-a feature request open a ticket in the [issue queue](https://github.com/strongloop/express/issues).
+Если вы обнаружили возможную ошибку или хотите запросить необходимую функцию, создайте зарегистрированный электронный запрос в [очереди заявок](https://github.com/strongloop/express/issues).
 
-##Third Party
+##Сторонние участники
 
-Our vibrant community has created a large variety of extensions,
-[middleware](/resources/middleware.html) and higher level frameworks. Check them out in the
-[wiki](https://github.com/strongloop/express/wiki).
+Энергичными участниками нашего сообщества создано множество разнообразных расширений, [модулей промежуточной обработки](/{{ page.lang }}/resources/middleware.html) и фреймворков высшего уровня. Ознакомиться с ними можно в [вики](https://github.com/strongloop/express/wiki).
+

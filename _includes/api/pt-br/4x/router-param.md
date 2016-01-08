@@ -1,17 +1,20 @@
 <h3 id='router.param'>router.param(name, callback)</h3>
 
-Add callback triggers to route parameters, where `name` is the name of the parameter and `callback` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, and the value of the parameter, in that order.  Although `name` is technically optional, using this method without it is deprecated starting with Express v4.11.0 (see below).
+Adiciona gatilhos de callback para os parametros da rota, onde `name` é o nome do parametro e `callback` é a função de callback. Os parametros
+da função de callback são o objeto da requisição, o objeto de resposta, o próximo middleware, e o valor do parâmetro, nessa ordem. Embora `name`
+seja tecnicamente opcional, utilizar esse método sem ele ele é deprecated desde Express v4.11.0 (veja abaixo).
 
 <div class="doc-box doc-info" markdown="1">
-Unlike `app.param()`, `router.param()` does not accept an array of route parameters.
+Diferente de `app.param()`, `router.param()`não aceita um array de parametros de rota.
 </div>
 
-For example, when `:user` is present in a route path, you may map user loading logic to automatically provide `req.user` to the route, or perform validations on the parameter input.
+Por exemplo, quando `:user` está presente em um path da rota, você pode mapear a lógica de mapeamento para fornecer automaticamente `req.user`
+para a rota, ou realizar validações no parametro de entrada.
 
 ~~~js
 router.param('user', function(req, res, next, id) {
 
-  // try to get the user details from the User model and attach it to the request object
+  // tenta buscar os detalhes do usuário do modelo User e o anexa no objeto da requisição
   User.find(id, function(err, user) {
     if (err) {
       next(err);
@@ -25,9 +28,11 @@ router.param('user', function(req, res, next, id) {
 });
 ~~~
 
-Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on `router` will be triggered only by route parameters defined on `router` routes.
+Funções de callback de parâmentros são locais ao roteador ao qual foram definidas. Elas não são herdadas por apps montados ou roteadores.
+Consequentemente, parâmentros de callback definidos no `router` serão desencadeados somente por paramtros de rota definidos nas rotas do `router`.
 
-A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following examples.
+Um paramentro de callback será chamado somente uma vez em um ciclo de requisição-resposta, mesmo se o parametro coincide com multiplas rotas,
+como mostrado nos seguintes exemplos.
 
 ~~~js
 router.param('id', function (req, res, next, id) {
@@ -46,7 +51,7 @@ app.get('/user/:id', function (req, res) {
 });
 ~~~
 
-On `GET /user/42`, the following is printed:
+Em `GET /user/42`, o seguinte é impresso:
 
 ~~~
 CALLED ONLY ONCE
@@ -66,7 +71,7 @@ app.get('/user/:id/:page', function (req, res) {
 });
 ~~~
 
-On `GET /user/42/3`, the following is printed:
+Em `GET /user/42/3`, o seguinte é impresso:
 
 ~~~
 although this matches
@@ -74,23 +79,27 @@ and this matches too
 ~~~
 
 <div class="doc-box doc-warn" markdown="1">
-The following section describes `router.param(callback)`, which is deprecated as of v4.11.0.
+A seção seguinte descreve `router.param(callback)`, que está deprecated desde v4.11.0.
 </div>
 
-The behavior of the `router.param(name, callback)` method can be altered entirely by passing only a function to `router.param()`. This function is a custom implementation of how `router.param(name, callback)` should behave - it accepts two parameters and must return a middleware.
+O comportamento do método `router.param(name, callback)` pode ser alterado completamente aravés da passagem de apenas uma função
+para o `router.param()`. Essa função é uma implementação personalizada de como `router.param(name, callback)` deve se comportar - ela aceita
+dois parâmetros e deve retornar um middleware.
 
-The first parameter of this function is the name of the URL parameter that should be captured, the second parameter can be any JavaScript object which might be used for returning the middleware implementation.
+O primeiro parametro dessa função é o nome d parâmetro da URL que deve ser capturado, o segundo parâmetro pode ser qualquer objeto JavaScript suscetível
+a utilização para o retorno da implementação do middleware.
 
-The middleware returned by the function decides the behavior of what happens when a URL parameter is captured.
+O middleware retornado pela função decide o comportamento do que acontece quando o parâmetro da URL é capturado.
 
-In this example, the `router.param(name, callback)` signature is modified to `router.param(name, accessId)`. Instead of accepting a name and a callback, `router.param()` will now accept a name and a number.
+Nesse exemplo, a assinatura `router.param(name, callback)` é modificada para `router.param(name, accessId)`. Ao invés de aceitar o nome e o callback,
+`router.param()` passará a aceitar nome e número.
 
 ~~~js
 var express = require('express');
 var app = express();
 var router = express.Router();
 
-// customizing the behavior of router.param()
+// personalizando o comportamento de router.param()
 router.param(function(param, option) {
   return function (req, res, next, val) {
     if (val == option) {
@@ -102,10 +111,10 @@ router.param(function(param, option) {
   }
 });
 
-// using the customized router.param()
+// utilizando o router.param() personalizado
 router.param('id', 1337);
 
-// route to trigger the capture
+// roteando para desencadear a captura
 router.get('/user/:id', function (req, res) {
   res.send('OK');
 })
@@ -117,7 +126,7 @@ app.listen(3000, function () {
 })
 ~~~
 
-In this example, the `router.param(name, callback)` signature remains the same, but instead of a middleware callback, a custom data type checking function has been defined to validate the data type of the user id.
+Nesse exemplo, a assinatura `router.param(name, callback)` se mantém a mesma, mas ao invés de um middleware callback, uma função de verificação personalizada de dados foi definida para validar o tipo de dado do id do usuário.
 
 ~~~js
 router.param(function(param, validator) {

@@ -1,43 +1,43 @@
 <h3 id='router'>Router([options])</h3>
 
-Create a new router as follows:
+Cria um novo Router conforme o seguinte:
 
 ~~~js
 var router = express.Router([options]);
 ~~~
 
-The optional `options` parameter specifies the behavior of the router.
+O parâmetro opcional `options` especifica o comportamento do roteador.
 
 <div class="table-scroller" markdown="1">
 
 | Property        | Description                                     | Default     | Availability  |
 |-----------------|-------------------------------------------------|-------------|---------------|
-| `caseSensitive` | Enable case sensitivity. | Disabled by default, treating "/Foo" and "/foo" as the same.|  |
-| `mergeParams`   | Preserve the `req.params` values from the parent router. If the parent and the child have conflicting param names, the child's value take precedence.| `false` | 4.5.0+ |
-| `strict`        | Enable strict routing. | Disabled by default, "/foo" and "/foo/" are treated the same by the router.| &nbsp; |
+| `caseSensitive` | Habilita a diferenciação de maiúsculas e minúsculas. | Desabilitado por padrão, tratando "/Foo" e "/foo" como o mesmo.|  |
+| `mergeParams`   | Preserva os valores `req.params` do roteador pai. Se o pai e o filho possuem nomes conflitantes, o valor do filho tem precedência.| `false` | 4.5.0+ |
+| `strict`        | Habilita a rota estrita. | Desabilitado por padrão, "/foo" e "/foo/" são tratados como o mesmo peo roteador.| &nbsp; |
 
 </div>
 
-You can add middleware and HTTP method routes (such as `get`, `put`, `post`, and
-so on) to `router` just like an application.
+Você pode adicionar middlewares e métodos de rotas HTTP (tais como `get`, `put`, `post`, e assim por diante)
+ao `router` assim como uma aplicação.
 
 ~~~js
-// invoked for any requests passed to this router
+// invocado para quaisquer requisições passadas a esse router
 router.use(function(req, res, next) {
-  // .. some logic here .. like any other middleware
+  // .. alguma lógica aqui .. como qualquer outro middleware
   next();
 });
 
-// will handle any request that ends in /events
-// depends on where the router is "use()'d"
+// irá tratar qualquer requisição que termine em /events
+// depende onde o roteador é "use()'d"
 router.get('/events', function(req, res, next) {
   // ..
 });
 ~~~
 
-You can then use a router for a particular root URL in this way separating your routes into files or even mini-apps.
+Você pode usa um roteador para uma URL raiz em particular dessa maneira separando suas rotas em arquivos ou até mini-apps.
 
 ~~~js
-// only requests to /calendar/* will be sent to our "router"
+// somente requisições para /calendar/* serão enviadas para o nosso "router"
 app.use('/calendar', router);
 ~~~

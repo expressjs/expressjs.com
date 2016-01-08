@@ -1,48 +1,75 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Instalando Express
+title: Instalando o Express
 menu: starter
 lang: pt-br
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Instalando
+# Instalação
 
-Assumindo que você já possui o [Node.js](https://nodejs.org/) instalado, crie um diretório que irá conter sua aplicação, e acesse o diretório.
+Assumindo que já tenha instalado o [Node.js](https://nodejs.org/), crie um diretório
+para conter o seu aplicativo, e torne-o seu diretório ativo.
 
-~~~sh
+
+<pre>
+<code class="language-sh" translate="no">
 $ mkdir myapp
 $ cd myapp
-~~~
+</code>
+</pre>
 
-Execute o comando `npm init` para criar o arquivo `package.json` para sua aplicação.
-Para mais informações de como o `package.json` funciona, consulte as [Especificações para manipulação do package.json do npm](https://docs.npmjs.com/files/package.json).
+Use o comando `npm init` para criar um arquivo `package.json` para o seu aplicativo.
+Para obter mais informações sobre como o `package.json` funciona,
+consulte [Detalhes do tratamento de package.json do npm](https://docs.npmjs.com/files/package.json).
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm init
-~~~
+</code>
+</pre>
 
-Este comando pedirá algumas coisas como nome e versão da aplicação.
-Por enquanto, você pode apenas apertar ENTER para aceitar os valores <i>default</i> para a maioria, exceto para:
+Este comando solicita por várias coisas, como o nome e versão do seu aplicativo.
+Por enquanto, é possível simplesmente pressionar RETURN para aceitar
+os padrões para a maioria deles, com as seguintes exceções:
 
-~~~sh
+
+<pre>
+<code class="language-sh" translate="no">
 entry point: (index.js)
-~~~
+</code>
+</pre>
 
-Digite `app.js` ou o que você desejar que seja o nome do seu arquivo principal. Se você deseja que seja `index.js`, aperte ENTER para aceitar a sugestão <i>default</i> de nome de arquivo.
+Insira `app.js`, ou qualquer nome que deseje
+para o arquivo principal. Se desejar que seja `index.js`, pressione RETURN para aceitar o nome de
+arquivo padrão sugerido.
 
-Agora instale Express no diretório da aplicação e salve na lista de dependências:
+Agora instale o Express no diretório `app`
+e salve-o na lista de dependências. Por exemplo:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express --save
-~~~
+</code>
+</pre>
 
-Para instalar o Express temporariamente, e não adicioná-lo na lista de dependências, omita a opção `--save`:
+Para instalar o Express temporariamente não o inclua na lista
+de dependências, omita a opção `--save`:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express
-~~~
+</code>
+</pre>
 
 <div class="doc-box doc-info" markdown="1">
-Módulos do Node isntalador com a opção `--save` serão adicionados a lista de `dependências` no arquivo `package.json`.
-Então utilizando `npm install` no diretório da aplicação irá instalar automaticamente os módulos do lista de dependência.
+Módulos do Node instalados com a opção `--save`
+são incluídas na lista `dependencies` no arquivo
+`package.json`.
+Posteriormente, executando `npm install` no diretório
+`app` irá automaticamente instalar os módulos na
+lista de dependências.
 </div>

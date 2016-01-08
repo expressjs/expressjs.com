@@ -1,25 +1,26 @@
----
+﻿---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Express "Hello World" example
+title: Express の「Hello World」の例
 menu: starter
 lang: ja
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Hello world
-
-まず、[インストール](http://expressjs.com/ja/starter/installing.html)の指示通りにできているか確認してください。
-
-それでは、非常に基本的なExpressのアプリを作っていきましょう。
+# Hello World の例
 
 <div class="doc-box doc-info" markdown="1">
-NOTE: これは、基本的に、あなたが作成できる最も簡単なExpressアプリです。
-あなたが欲しいのがシングルファイルアプリケーションでないなら、[Express generator](/starter/generator.html)を使ってください。
-Express generatorは多数のJavaScriptファイルや、Jadeテンプレート、サブディレクトリなどの様々な目的を用いるフルアプリケーションのための足場を生成します。
+ここで紹介するのは基本的に、作成できる最も単純な Express アプリケーションです。このアプリケーションは単一ファイル・アプリケーションであり、[Express ジェネレーター](/{{ page.lang }}/starter/generator.html) を使用して得られるものでは *ありません* 。このジェネレーターは、さまざまな目的で多数の JavaScript ファイル、Jade テンプレート、サブディレクトリーを使用する完全なアプリケーション用のスキャフォールディングを作成します。
 </div>
 
-`myapp`ディレクトリで`app.js`という名前のファイルを作成し、下記のコードを追加します。
+最初に、`myapp` という名前のディレクトリーを作成して、そのディレクトリーに移動し、`npm init` を実行します。次に、[インストール・ガイド](/{{ page.lang }}/starter/installing.html)に従い、依存関係として `express` をインストールします。
 
-~~~js
+`myapp` ディレクトリーで、`app.js` というファイルを作成して、以下のコードを追加します。
+
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var app = express();
 
@@ -27,24 +28,25 @@ app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-var server = app.listen(3000, function () {
-  var host = server.address().address;
-  var port = server.address().port;
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+})
+</code>
+</pre>
 
-  console.log('Example app listening at http://%s:%s', host, port);
-});
-~~~
-
-アプリはサーバーを立ち上げて3000番ポートで接続を待機します。このアプリは、ルートURL(`/`)または _route_ へのリクエストに対して"Hello World!"と応答します。その他のすべてのパスには **404 Not Found** を返します。
+アプリケーションは、サーバーを始動して、ポート 3000 で接続を listen します。アプリケーションは、ルート URL (`/`) または*ルート* に対する要求に「Hello World!」と応答します。その他すべてのパスについては、「**404 Not Found**」と応答します。
 
 <div class="doc-box doc-notice" markdown="1">
-`req` (request)や`res` (response)は厳格にNodeが与えるオブジェクトと同じです。よって、`req.pipe()`や`req.on('data', callback)`を呼び出すことができ、その他もExpressに関係なく呼び出すことができます。
+`req` (要求) と `res` (応答) は、Node が提供するのとまったく同じオブジェクトであるため、Express が関与しない場合と同じように、`req.pipe()`、`req.on('data', callback)` などを呼び出すことができます。
 </div>
 
-下記のコマンドでアプリを実行してください。
+次のコマンドを使用してアプリケーションを実行します。
 
-~~~ sh
+<pre>
+<code class="language-sh" translate="no">
 $ node app.js
-~~~
+</code>
+</pre>
 
-ブラウザで[http://localhost:3000/](http://localhost:3000/)を読み込むと、応答が確認できます。
+次に、ブラウザーに [http://localhost:3000/](http://localhost:3000/) をロードして、出力を確認します。
+

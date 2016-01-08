@@ -1,53 +1,64 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Using template engines with Express
+title: Express でのテンプレート・エンジンの使用
 menu: guide
 lang: ja
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Using template engines with Express
+# Express でのテンプレート・エンジンの使用
 
-Before Express can render template files, the following application settings have to be set.
+Express でテンプレート・ファイルをレンダリングするには、その前に以下のアプリケーション設定を設定する必要があります。
 
-* `views`, the directory where the template files are located. Eg: `app.set('views', './views')`
-* `view engine`, the template engine to use. Eg: `app.set('view engine', 'jade')`
+* `views`。テンプレート・ファイルが配置されるディレクトリー。例: `app.set('views', './views')`
+* `view engine`。使用するテンプレート・エンジン。例: `app.set('view engine', 'jade')`
 
-Then install the corresponding template engine npm package.
+次に、対応するテンプレート・エンジンの npm パッケージをインストールします。
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install jade --save
-~~~
+</code>
+</pre>
 
 <div class="doc-box doc-notice" markdown="1">
-Express-compliant template engines such as Jade, export a function named `__express(filePath, options, callback)`, which is called by `res.render()` to render the template code.
-
-Some template engines do not follow this convention, the [Consolidate.js](https://www.npmjs.org/package/consolidate) library was created to map all of node's popular template engines to follow this convention, thus allowing them to work seamlessly within Express.
+Jade などの Express 対応テンプレート・エンジンは、`__express(filePath, options, callback)` という関数をエクスポートします。この関数は、テンプレート・コードをレンダリングするために `res.render()` 関数によって呼び出されます。
+一部のテンプレート・エンジンは、この規則に従いません。[Consolidate.js](https://www.npmjs.org/package/consolidate) ライブラリーは、すべての一般的な Node.js テンプレート・エンジンをマップすることで、この規則に従います。そのため、Express 内でシームレスに動作します。
 </div>
 
-Once the view engine is set, you don't have to explicitly specify the engine or load the template engine module in your app, Express loads it internally as shown below, for the example above.
+ビュー・エンジンが設定された後は、アプリケーションでエンジンを指定したり、テンプレート・エンジンをロードしたりする必要はありません。(上記の例に対応した) 下記のように、Express がモジュールを内部的にロードします。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.set('view engine', 'jade');
-~~~
+</code>
+</pre>
 
-Create a Jade template files named "index.jade" in the views directory, with the following content.
+以下の内容で `index.jade` という Jade テンプレート・ファイルを `views` ディレクトリーに作成します。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 html
   head
     title!= title
   body
     h1!= message
-~~~
+</code>
+</pre>
 
-Then create a route to render the "index.jade" file. If the `view engine` property is not set, you will have to specify the extension of the view file, else you can omit it.
+次に、`index.jade` ファイルをレンダリングするためのルートを作成します。`view engine` プロパティーが設定されていない場合は、`view` ファイルの拡張子を指定する必要があります。そうでない場合は、省略できます。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
-})
-~~~
+});
+</code>
+</pre>
 
-On making a request to the home page, "index.jade" will be rendered as HTML.
+ホーム・ページに要求すると、`index.jade` ファイルは HTML としてレンダリングされます。
 
-To better understand how template engines work in Express, read ["Developing template engines for Express"](/advanced/developing-template-engines.html).
+Express でのテンプレート・エンジンの動作について詳しくは、[Express 用のテンプレート・エンジンの開発](/{{ page.lang }}/advanced/developing-template-engines.html)を参照してください。

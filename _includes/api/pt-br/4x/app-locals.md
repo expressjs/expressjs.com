@@ -1,7 +1,6 @@
 <h3 id='app.locals'>app.locals</h3>
 
-The `app.locals` object is a JavaScript object, and its 
-properties are local variables within the application.
+`app.locals` é um objeto JavaScript, e suas propriedades são variáveis locais dentro da aplicação.
 
 ~~~js
 app.locals.title
@@ -11,13 +10,11 @@ app.locals.email
 // => 'me@myapp.com'
 ~~~
 
-Once set, the value of `app.locals` properties persist throughout the life of the application,
-in contrast with [res.locals](#res.locals) properties that
-are valid only for the lifetime of the request.
+Quando é definido um valor para uma propriedade de `app.locals`, este valor persiste por toda a vida da aplicação; ao contrário de propriedades definidas com [res.locals](#res.locals) que são válidas somente durante a tempo de vida da requisição.
 
-You can access local variables in templates rendered within the application.
-This is useful for providing helper functions to templates, as well as app-level data.
-Locals are available in middleware via `req.app.locals` (see [req.app](#req.app))
+Você pode acessar variáveis locais em renderização de templates dentro da aplicação.
+Isto é muito útil para criar funções de ajuda `helper` para templates, bem como dados a nível de app. Variáveis locais estão disponíveis em middlewares via `req.app.locals` (Veja [req.app](#req.app)).
+
 
 ~~~js
 app.locals.title = 'My App';

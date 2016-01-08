@@ -1,38 +1,62 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Установка Express
 menu: starter
 lang: ru
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Установка
 
-Во-первых, если вы ещё не создали, создайте директорию для вашего проекта и сделайте её вашей рабочей директорией.
+Предположим, вы уже установили [Node.js](https://nodejs.org/). Создайте каталог для своего приложения и сделайте его своим рабочим каталогом.
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ mkdir myapp
 $ cd myapp
-~~~
+</code>
+</pre>
 
-Если в вашей директории ещё нет файла `package.json`, создайте его с помощу `npm init` команды.
+С помощью команды `npm init` создайте файл `package.json` для своего приложения.
+Дополнительную информацию о работе `package.json` можно найти в разделе [Специфика работы с npm package.json](https://docs.npmjs.com/files/package.json).
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm init
-~~~
+</code>
+</pre>
 
-Установите Express в директорию приложения и сохраните в список зависимостей:
+Эта команда выдает целый ряд приглашений, например, приглашение указать имя и версию вашего приложения.
+На данный момент, достаточно просто нажать клавишу ВВОД, чтобы принять предлагаемые значения по умолчанию для большинства пунктов, кроме следующего:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
+entry point: (index.js)
+</code>
+</pre>
+
+Введите `app.js` или любое другое имя главного файла по своему желанию. Если вас устраивает `index.js`, нажмите клавишу ВВОД, чтобы принять предложенное имя файла по умолчанию.
+
+Теперь установите Express в каталоге `app` и сохраните его в списке зависимостей. Например:
+
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express --save
-~~~
+</code>
+</pre>
 
-Для того что бы временно установить Express, и не добавлять его в список зависимостей, не указывайте `--save` опцию:
+Для временной установки Express, без добавления его в список зависимостей, не указывайте опцию `--save`:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express
-~~~
+</code>
+</pre>
 
 <div class="doc-box doc-info" markdown="1">
-Node модули установленные с `--save` опцией будут добавлены в `dependencies` список `package.json` файла.
-И при использовании `npm install` в директории приложения модули будут автоматически установленны из списка зависимостей.
+Модули Node, установленные с опцией `--save`, добавляются в список `dependencies` в файле `package.json`.
+В дальнейшем, при запуске `npm install` в каталоге `app` установка модулей из списка зависимостей будет выполняться автоматически.
 </div>

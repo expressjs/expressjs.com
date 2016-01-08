@@ -1,13 +1,17 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Express database integration
+title: Integración de la base de datos de Express
 menu: guide
-lang: en
+lang: es
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Database integration
+# Integración de la base de datos
 
-Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node modules for database systems in your Express app:
+La adición de la funcionalidad de conectar bases de datos a las aplicaciones Express se consigue simplemente cargando el controlador de Node.js adecuado para la base de datos en la aplicación. En este documento se describe brevemente cómo añadir y utilizar algunos de los módulos de Node.js más conocidos para los sistemas de base de datos en la aplicación Express:
 
 * [Cassandra](#cassandra)
 * [CouchDB](#couchdb)
@@ -18,26 +22,29 @@ Adding database connectivity capability to Express apps is just a matter of load
 * [PostgreSQL](#postgres)
 * [Redis](#redis)
 * [SQLite](#sqlite)
+* [ElasticSearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
-These database drivers are among many that are available.  For other options,
-search on the [npm](https://www.npmjs.com/) site.
+Estos son algunos de los muchos controladores de base de datos que hay disponibles.  Para ver otras opciones, realice búsquedas en el sitio [npm](https://www.npmjs.com/).
 </div>
 
 <a name="cassandra"></a>
 
 ## Cassandra
 
-**Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)  
-**Installation**
+**Módulo**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
+**Instalación**
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install cassandra-driver
-~~~
+</code>
+</pre>
 
-**Example**
+**Ejemplo**
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var cassandra = require('cassandra-driver');
 var client = new cassandra.Client({ contactPoints: ['localhost']});
 
@@ -45,22 +52,26 @@ client.execute('select key from system.local', function(err, result) {
   if (err) throw err;
   console.log(result.rows[0]);
 });
-~~~
+</code>
+</pre>
 
 <a name="couchdb"></a>
 
 ## CouchDB
 
-**Module**: [nano](https://github.com/dscape/nano)  
-**Installation**
+**Módulo**: [nano](https://github.com/dscape/nano)
+**Instalación**
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install nano
-~~~
+</code>
+</pre>
 
-**Example**
+**Ejemplo**
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var nano = require('nano')('http://localhost:5984');
 nano.db.create('books');
 var books = nano.db.use('books');
@@ -76,22 +87,26 @@ books.insert({name: 'The Art of war'}, null, function(err, body) {
 books.list(function(err, body){
   console.log(body.rows);
 }
-~~~
+</code>
+</pre>
 
 <a name="leveldb"></a>
 
 ## LevelDB
 
-**Module**: [levelup](https://github.com/rvagg/node-levelup)  
-**Installation**
+**Módulo**: [levelup](https://github.com/rvagg/node-levelup)
+**Instalación**
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install level levelup leveldown
-~~~
+</code>
+</pre>
 
-**Example**
+**Ejemplo**
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var levelup = require('levelup');
 var db = levelup('./mydb');
 
@@ -104,22 +119,26 @@ db.put('name', 'LevelUP', function (err) {
   });
 
 });
-~~~
+</code>
+</pre>
 
 <a name="mysql"></a>
 
 ## MySQL
 
-**Module**: [mysql](https://github.com/felixge/node-mysql/)  
-**Installation**
+**Módulo**: [mysql](https://github.com/felixge/node-mysql/)
+**Instalación**
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install mysql
-~~~
+</code>
+</pre>
 
-**Example**
+**Ejemplo**
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -135,46 +154,61 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 });
 
 connection.end();
-~~~
+</code>
+</pre>
 
 <a name="mongo"></a>
 
 ## MongoDB
 
-**Module**: [mongoskin](https://github.com/kissjs/node-mongoskin)  
-**Installation**
+**Módulo**: [mongodb](https://github.com/mongodb/node-mongodb-native)
+**Instalación**
 
-~~~sh
-$ npm install mongoskin
-~~~
+<pre>
+<code class="language-sh" translate="no">
+$ npm install mongodb
+</code>
+</pre>
 
-**Example**
+**Ejemplo**
 
-~~~js
-var db = require('mongoskin').db('localhost:27017/animals');
+<pre>
+<code class="language-javascript" translate="no">
+var MongoClient = require('mongodb').MongoClient;
 
-db.collection('mamals').find().toArray(function(err, result) {
-  if (err) throw err;
-  console.log(result);
+MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
+  if (err) {
+    throw err;
+  }
+  db.collection('mammals').find().toArray(function(err, result) {
+    if (err) {
+      throw err;
+    }
+    console.log(result);
+  });
 });
-~~~
+</code>
+</pre>
 
-If you want a object model driver for MongoDB, checkout [Mongoose](https://github.com/LearnBoost/mongoose).
+Si desea un controlador de modelo de objeto para MongoDB, consulte [Mongoose](https://github.com/LearnBoost/mongoose).
 
 <a name="neo4j"></a>
 
 ## Neo4j
 
-**Module**: [apoc](https://github.com/hacksparrow/apoc)  
-**Installation**
+**Módulo**: [apoc](https://github.com/hacksparrow/apoc)
+**Instalación**
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install apoc
-~~~
+</code>
+</pre>
 
-**Example**
+**Ejemplo**
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var apoc = require('apoc');
 
 apoc.query('match (n) return n').exec().then(
@@ -185,22 +219,26 @@ apoc.query('match (n) return n').exec().then(
     console.log(fail);
   }
 );
-~~~
+</code>
+</pre>
 
 <a name="postgres"></a>
 
 ## PostgreSQL
 
-**Module**: [pg](https://github.com/brianc/node-postgres)  
-**Installation**
+**Módulo**: [pg](https://github.com/brianc/node-postgres)
+**Instalación**
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install pg
-~~~
+</code>
+</pre>
 
-**Example**
+**Ejemplo**
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var pg = require('pg');
 var conString = "postgres://username:password@localhost/database";
 
@@ -218,22 +256,26 @@ pg.connect(conString, function(err, client, done) {
   });
 
 });
-~~~
+</code>
+</pre>
 
 <a name="redis"></a>
 
 ## Redis
 
-**Module**: [redis](https://github.com/mranney/node_redis)  
-**Installation**
+**Módulo**: [redis](https://github.com/mranney/node_redis)
+**Instalación**
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install redis
-~~~
+</code>
+</pre>
 
-**Example**
+**Ejemplo**
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var client = require('redis').createClient();
 
 client.on('error', function (err) {
@@ -254,22 +296,26 @@ client.hkeys('hash key', function (err, replies) {
   client.quit();
 
 });
-~~~
+</code>
+</pre>
 
 <a name="sqlite"></a>
 
 ## SQLite
 
-**Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)  
-**Installation**
+**Módulo**: [sqlite3](https://github.com/mapbox/node-sqlite3)
+**Instalación**
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install sqlite3
-~~~
+</code>
+</pre>
 
-**Example**
+**Ejemplo**
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(':memory:');
 
@@ -290,4 +336,46 @@ db.serialize(function() {
 });
 
 db.close();
-~~~
+</code>
+</pre>
+
+<a name="elasticsearch"></a>
+
+## ElasticSearch
+
+**Módulo**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
+**Instalación**
+
+<pre>
+<code class="language-sh" translate="no">
+$ npm install elasticsearch
+</code>
+</pre>
+
+**Ejemplo**
+
+<pre>
+<code class="language-javascript" translate="no">
+var elasticsearch = require('elasticsearch');
+var client = elasticsearch.Client({
+  host: 'localhost:9200'
+});
+
+client.search({
+  index: 'books',
+  type: 'book',
+  body: {
+    query: {
+      multi_match: {
+        query: 'express js',
+        fields: ['title', 'description']
+      }
+    }
+  }
+}).then(function(response) {
+  var hits = response.hits.hits;
+}, function(error) {
+  console.trace(error.message);
+});
+</code>
+</pre>

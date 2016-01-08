@@ -1,8 +1,6 @@
 <h3 id='res.attachment'>res.attachment([filename])</h3>
 
-Sets the HTTP response `Content-Disposition` header field to "attachment". If a `filename` is given,
-then it sets the Content-Type based on the extension name via `res.type()`,
-and sets the `Content-Disposition` "filename=" parameter.
+Configura o cabeçalho HTTP response `Content-Disposition` para "attachment" (´anexo´). Se `filename` é dado, configura o `Content-Type` com base no nome de extensão via `res.type()`, e configura o parâmetro "filename=" de `Content-Disposition`.
 
 ~~~js
 res.attachment();

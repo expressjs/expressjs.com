@@ -1,32 +1,32 @@
 <h3 id='router.use'>router.use([path], [function, ...] function)</h3>
 
-Uses the given middleware `function`, with optional mount path `path`, that defaults to "/".
+Usa a `function` middleware passada, com um caminho de montagem opcional `path`, que padroniza para "/".
 
-This method is similar to [app.use()](#app.use). A simple example and usecase is described below.
-See [app.use()](#app.use) for more information.
+Esse método é similar a [app.use()](#app.use). Um exemplo simples e caso de uso é descrito abaixo.
+Veja [app.use()](#app.use) para mais informações.
 
-Middleware is like a plumbing pipe, requests start at the first middleware you define
-and work their way "down" the middleware stack processing for each path they match.
+Um Middleware é como um encanamento, a requisição inicia no primeiro middleware que você definiu
+e trabalha por toda a pilha de middleware processando para cada caminho que ele encontra.
 
 ~~~js
 var express = require('express');
 var app = express();
 var router = express.Router();
 
-// simple logger for this router's requests
-// all requests to this router will first hit this middleware
+// loger simples para as requisições desse roteador
+// todas as requisições para esse roteador irão acertar primeiro esse middleware
 router.use(function(req, res, next) {
   console.log('%s %s %s', req.method, req.url, req.path);
   next();
 });
 
-// this will only be invoked if the path starts with /bar from the mount point
+// isso será chamado apenas se o caminho começar com /bar a partir do ponto de montagem
 router.use('/bar', function(req, res, next) {
-  // ... maybe some additional /bar logging ...
+  // ... talvez algum log adicional em /bar ...
   next();
 });
 
-// always invoked
+// sempre será chamado
 router.use(function(req, res, next) {
   res.send('Hello World');
 });
@@ -36,13 +36,14 @@ app.use('/foo', router);
 app.listen(3000);
 ~~~
 
-The "mount" path is stripped and is _not_ visible to the middleware `function`.
-The main effect of this feature is that mounted middleware may operate without
-code changes regardless of its "prefix" pathname.
+O caminho "mount" é desmembrado e _not_ visível à `function` middleware.
+O principal efeito dessa característica é que o middleware montado pode operar sem
+mudanças no código independentemente do seu "prefix" no nome do caminho.
 
-The order in which you define middleware with `router.use()` is very important.
-They are invoked sequentially, thus the order defines middleware precedence. For example,
-usually a logger is the very first middleware you would use, so every request is logged.
+A ordem em que você define o middleware com `router.use()` é muito impoertante.
+Eles são chamados sequencialmente, assim a ordem define a precedência do middleware.
+Por exemplo, geralmente um logger é um primeiro middleware que você usaria, então toda
+requisição é logada.
 
 ~~~js
 var logger = require('morgan');
@@ -54,8 +55,9 @@ router.use(function(req, res){
 });
 ~~~
 
-Now suppose you wanted to ignore logging requests for static files, but to continue
-logging routes and middleware defined after `logger()`.  You would simply move `static()` above:
+Agora suponha que você queria ignorar requisições de log para arquivos estáticos,
+mas continue a logar rotas e middlewares definidos após `logger()`. Você simplesmente
+move o `static()` acima:
 
 ~~~js
 router.use(express.static(__dirname + '/public'));
@@ -65,8 +67,8 @@ router.use(function(req, res){
 });
 ~~~
 
-Another concrete example is serving files from multiple directories,
-giving precedence to "./public" over the others:
+Outro exemplo concreto é servir arquivos de multiplos diretórios, dando precendência
+a "./public" sobre os outros:
 
 ~~~js
 app.use(express.static(__dirname + '/public'));
@@ -74,5 +76,5 @@ app.use(express.static(__dirname + '/files'));
 app.use(express.static(__dirname + '/uploads'));
 ~~~
 
-The `router.use()` method also supports named parameters so that your mount points
-for other routers can benefit from preloading using named parameters.
+O método `router.use()` também suporta parâmetros nomeados de modo que seus pontos
+de montagem para outras rotas podem se beneficiar da precarga utilizando parâmetros nomeados.

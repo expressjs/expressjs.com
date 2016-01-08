@@ -1,6 +1,6 @@
 ---
 layout: 4x-api
-title: Express 4.x - API 레퍼런스
+title: Express 4.x - API 참조
 menu: api
 lang: ko
 ---

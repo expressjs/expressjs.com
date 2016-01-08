@@ -1,43 +1,48 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
+### DO NOT CHANGE ANY OTHER TEXT. 
 layout: home
-title: Express - Node.jsのWebアプリケーションフレームワーク
+title: Express - Node.js Web アプリケーション・フレームワーク
 menu: home
 lang: ja
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
+
     <section id="description">
-    <a href="/" class="express">Express</a>
-    <span class="description">
-      <a href='http://nodejs.org'>Node.js</a>のための、高速で軽量なWebフレームワーク
-    </span>
+        <a href="/" class="express">Express</a>
+
+        <span class="description">特定の意見に固執しない、<a href='http://nodejs.org'>Node.js</a> 向けの高速で最小限の Web フレームワーク</span>
     </section>
+
     <div id="install-command">$ npm install express --save</div>
 </section>
 
-<section id="intro">
-    <div id="boxes" class="clearfix">
+<section id="doc-langs" markdown="1">
+  Express の資料は、他の言語 ([スペイン語](/es)、[日本語](/ja)、[ロシア語](/ru)、[中国語](/zh)、[韓国語](/ko)、[ポルトガル語](/pt-br)) でも提供されています。
+</section>
 
+<section id="intro">
+
+  <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h3>Web Applications</h3>
-          Expressは、Webおよびモバイルアプリケーションのための機能の堅牢なセットを提供し、最小限かつ柔軟なNode.jsのWebアプリケーションフレームワークです。
-      </div>
+          <h3>Web アプリケーション</h3> Express は、Web アプリケーションとモバイル・アプリケーション向けの一連の堅固な機能を提供する最小限の柔軟な Node.js Web アプリケーション・フレームワークです。</div>
 
       <div id="apis">
-          <h3>APIs</h3> 多数のHTTPユーティリティメソッドやミドルウェアを兼ね揃え、自由に、迅速かつ簡単に堅牢なAPIを作成することができます。
-      </div>
+          <h3>API</h3> 無数の HTTP ユーティリティー・メソッドとミドルウェアを自由に使用できるため、堅固な API を迅速かつ容易に作成できます。</div>
 
       <div id="performance">
-          <h3>Performance</h3> Expressは、あなたが好きなNode.jsの機能を覆い隠すことなく、基本で薄いレイヤーのWebアプリケーショの機能を提供しています。
-      </div>
+          <h3>パフォーマンス</h3> Express は、ユーザーが使い慣れている Node.js の機能をわかりやすくし、基礎的な Web アプリケーション機能をシンプルな階層で提供します。</div>
 
       <div id="sponsorship">
-          <a href="http://loopback.io/"><h3>LoopBack</h3> Expressベースのフレームワークを使用してモデル駆動型のアプリケーションを開発するにはloopback.ioで詳細をご覧ください。</a>
+          <a href="http://loopback.io/"><h3>LoopBack</h3> Express ベースのフレームワークを使用して、モデル駆動型アプリケーションを開発します。<br/>詳細については、loopback.io を参照してください。</a>
       </div>
-        
-    </div>
+  </div>
+
 </section>
 
 <!--

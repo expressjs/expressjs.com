@@ -1,86 +1,76 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Express FAQ
+title: Preguntas más frecuentes sobre Express
 menu: starter
-lang: en
+lang: es
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# FAQ
+# Preguntas más frecuentes
 
-## How should I structure my application?
+## ¿Cómo debo estructurar mi aplicación?
 
-There is no definitive answer to this question. It depends 
-on the scale of your application and the team involved. To be as
-flexible as possible, Express makes no assumptions in terms of structure.
+No hay una respuesta definitiva a esta pregunta. La respuesta depende de la escala de la aplicación y del equipo implicado. Para ser lo más flexible posible, Express no realiza suposiciones en cuanto a la estructura.
 
-Routes and other application-specific logic may live in as many files
-as you wish, in any directory structure you prefer. View the following
-examples for inspiration:
+Las rutas y otra lógica específica de la aplicación puede residir en tantos archivos como desee, con la estructura de directorios que prefiera. Vea los siguientes ejemplos como inspiración:
 
-* [Route listings](https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19)
-* [Route map](https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47)
-* [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Listas de rutas](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Correlación de rutas](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [Controladores de estilo MVC](https://github.com/strongloop/express/tree/master/examples/mvc)
 
-Also, there are third-party extensions for Express, which simplify some of these patterns:
+Asimismo, hay extensiones de terceros para Express, que simplifican algunos de estos patrones:
 
-* [Resourceful routing](https://github.com/expressjs/express-resource)
-* [Namespaced routing](https://github.com/expressjs/express-namespace)
+* [express-resource](https://github.com/expressjs/express-resource)
 
-## How do I define models?
+## ¿Cómo debo definir los modelos?
 
-Express has no notion of a database at all. This is
-left up to third-party Node modules, allowing you to
-interface with nearly any database.
+Express no tiene ninguna noción de base de datos. Este concepto se deja para los módulos de Node de terceros, lo que permite interactuar con prácticamente cualquier base de datos.
 
-See [LoopBack](http://loopback.io) for an Express-based framework centered around models.
+Consulte [LoopBack](http://loopback.io) para ver una infraestructura basada en Express centrada en modelos.
 
-## How can I authenticate users?
+## ¿Cómo puedo autenticar los usuarios?
 
-This is another opinionated area that Express does not
-venture into.  You may use any authentication scheme you wish.
-For a simple username / password scheme, see [this example](https://github.com/strongloop/express/tree/master/examples/auth).
+La autenticación es otra área rígida en la que no entra Express.  Puede utilizar el esquema de autenticación que desee.
+Para ver un esquema simple de nombre de usuario/contraseña, consulte [este ejemplo](https://github.com/strongloop/express/tree/master/examples/auth).
 
 
-## Which template engines does Express support?
+## ¿A qué motor de plantilla da soporte Express?
 
-Express supports any template engine that conforms with the `(path, locals, callback)` signature.
-To normalize template engine interfaces and caching, see the
-[consolidate.js](https://github.com/visionmedia/consolidate.js)
-project for support. Unlisted template engines may still support the Express signature.
+Express da soporte a cualquier motor de plantilla que cumpla la firma `(path, locals, callback)`.
+Para normalizar las interfaces de motor de plantilla y el almacenamiento en memoria caché, consulte el proyecto [consolidate.js](https://github.com/visionmedia/consolidate.js) para ver el soporte. Otros motores de plantilla que no aparezcan en la lista también pueden dar soporte a la firma de Express.
 
-## How do you handle 404s?
+## ¿Cómo puedo manejar las respuestas 404?
 
-In Express, 404s are not the result of an error. Therefore,
-the error-handler middleware will not capture 404s. This is
-because a 404 is simply the absence of additional work to do;
-in other words, Express has executed all middleware / routes,
-and found that none of them responded. All you need to
-do is add a middleware at the very bottom (below all others)
-to handle a 404:
+En Express, las respuestas 404 no son el resultado de un error, por lo que el middleware de manejador de errores no las capturará. Este comportamiento se debe a que una respuesta 404 simplemente indica la ausencia de trabajo adicional pendiente; es decir, Express ha ejecutado todas las rutas y funciones de middleware, y ha comprobado que ninguna de ellas responde. Lo único que debe hacer es añadir una función de middleware al final de la pila (debajo de las demás funciones) para manejar una respuesta 404:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.use(function(req, res, next) {
-  res.send(404, 'Sorry cant find that!');
+  res.status(404).send('Sorry cant find that!');
 });
-~~~
+</code>
+</pre>
 
-## How do you setup an error handler?
+## ¿Cómo configuro un manejador de errores?
 
-You define error-handling middleware the same way as other middleware,
-except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
+El middleware de manejo de errores se define de la misma forma que otro middleware, excepto con cuatro argumentos en lugar de tres; específicamente con la firma `(err, req, res, next)`:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.use(function(err, req, res, next) {
   console.error(err.stack);
-  res.send(500, 'Something broke!');
+  res.status(500).send('Something broke!');
 });
-~~~
+</code>
+</pre>
 
-For more information, see [Error handling](/guide/error-handling.html).
+Para obtener más información, consulte [Manejo de errores](/{{ page.lang }}/guide/error-handling.html).
 
-## How do I render plain HTML?
+## ¿Cómo represento el HTML sin formato?
 
-You don't! There's no need to "render" HTML with `res.render()`.
-If you have a specific file, use `res.sendFile()`.
-If you are serving many assets from a directory use the `express.static()`
-middleware.
+De ninguna manera. No es necesario "representar" HTML con la función `res.render()`.
+Si tiene un archivo específico, utilice la función `res.sendFile()`.
+Para el servicio de muchos activos desde un directorio, utilice la función de middleware `express.static()`.

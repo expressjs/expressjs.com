@@ -1,12 +1,12 @@
 <h3 id='app.get.method'>app.get(path, callback [, callback ...])</h3>
 
-Routes HTTP GET requests to the specified path with the specified callback functions.
-For more information, see the [routing guide](/guide/routing.html).
+Rotas de requisições HTTP GET para o caminho especificado com as funções de *callback* especificados.
+Para obter mais informações, consulte o [guia de roteamento](/guide/routing.html).
 
-You can provide multiple callback functions that behave just like middleware, except
-these callbacks can invoke `next('route')` to bypass the remaining route callback(s).
-You can use this mechanism to impose pre-conditions on a route, then pass control to
-subsequent routes if there's no reason to proceed with the current route.
+Você pode oferecer múltiplas funções de *callback* que se comportam exatamente como *middleware*,
+exceto esses *callbacks* podem chamar `next('route')` para ignorar o(s) *callback(s)* restante(s).
+Você pode usar esse mecanismo para impor pré-condições em uma rota, em seguida, passar o controle
+de rotas subseqüentes, se não há nenhuma razão para continuar com a rota atual.
 
 ~~~js
 app.get('/', function (req, res) {

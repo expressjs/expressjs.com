@@ -1,26 +1,33 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Генератор Express приложения
+title: Генератор приложений Express
 menu: starter
 lang: ru
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Генератор Express приложения
+# Генератор приложений Express
 
-Используйте инструмент генерации приложений, `express`, для быстрого создания скелета приложения.
+Для быстрого создания "скелета" приложения используется инструмент для генерации приложений `express`.
 
-Устанавливайте его с помощу команды.
+Установите `express` с помощью следующей команды:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install express-generator -g
-~~~
+</code>
+</pre>
 
-Для просмотра опций команды используйте `-h` опцию:
+Для просмотра опций команды воспользуйтесь опцией `-h`:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ express -h
 
-  Usage: express [options] [dir]
+  Usage: express [options][dir]
 
   Options:
 
@@ -29,13 +36,16 @@ $ express -h
     -e, --ejs           add ejs engine support (defaults to jade)
         --hbs           add handlebars engine support
     -H, --hogan         add hogan.js engine support
-    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass) (defaults to plain css)
+    -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
+        --git           add .gitignore
     -f, --force         force on non-empty directory
-~~~
+</code>
+</pre>
 
-Пример, следующая команда создаст Express приложение с именем _myapp_ в текущей директории.
+Например, следующая команда создает приложение Express с именем _myapp_ в текущем рабочем каталоге:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ express myapp
 
    create : myapp
@@ -55,53 +65,62 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-~~~
+</code>
+</pre>
 
-Далее вам нужно установить зависимости:
+Затем установите зависимости:
 
-~~~sh
-$ cd myapp 
+<pre>
+<code class="language-sh" translate="no">
+$ cd myapp
 $ npm install
-~~~
+</code>
+</pre>
 
-Запуск приложения (на MacOS или Linux):
+В MacOS или Linux запустите приложение с помощью следующей команды:
 
-~~~sh
-$ DEBUG=myapp ./bin/www
-~~~
+<pre>
+<code class="language-sh" translate="no">
+$ DEBUG=myapp:* npm start
+</code>
+</pre>
 
-На Windows, используйте слудующу команду:
+В Windows используется следующая команда:
 
-~~~sh
-> set DEBUG=myapp & node .\bin\www
-~~~
+<pre>
+<code class="language-sh" translate="no">
+> set DEBUG=myapp:* & npm start
+</code>
+</pre>
 
-Далее откройте `http://localhost:3000/` в вашем браузере что бы посмотреть работу приложения.
+Затем откройте страницу http://localhost:3000/ в браузере для доступа к приложению.
 
-Сгенерированя структура приложения выглядит следующим образом.
+Структура каталогов сгенерированного приложения выглядит следующим образом:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 .
 ├── app.js
 ├── bin
-│   └── www
+│   └── www
 ├── package.json
 ├── public
-│   ├── images
-│   ├── javascripts
-│   └── stylesheets
-│       └── style.css
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+│       └── style.css
 ├── routes
-│   ├── index.js
-│   └── users.js
+│   ├── index.js
+│   └── users.js
 └── views
     ├── error.jade
     ├── index.jade
     └── layout.jade
 
 7 directories, 9 files
-~~~
+</code>
+</pre>
 
 <div class="doc-box doc-info" markdown="1">
-Структура приложения сгенерированя с помощу генератора всего лишь один из множества способов организации структуры Express приложений. Вы можете не использовать даную структуру или изменить её лучшего использования под ваши нужды.
+Структура приложения, сгенерированная с помощью генератора, является всего лишь одним из множества способов организации структуры приложений Express. Вы можете использовать данную структуру или изменять ее в соответствии со своими потребностями.
 </div>

@@ -8,7 +8,12 @@ GitHub Pages websites being served through [Jekyll](http://jekyllrb.com/), you w
 
 [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) and [Jekyll](http://jekyllrb.com/docs/installation/) on your system, if you don't have them already.
 
-Once installed, `cd` to the respository directory and run Jekyll using the following command:
+Install the [jekyll-redirect-from](https://github.com/jekyll/jekyll-redirect-from) gem:
+```
+$ gem install jekyll-redirect-from`
+```
+
+Once installed, `cd` to the repository directory and run Jekyll using the following command:
 
 ```
 $ jekyll s
@@ -32,7 +37,21 @@ If you have an app you'd like to showcase on the site, open a pull request for i
 
 Jekyll comes built-in with GitHub Pages. Since we are already using GitHub Pages to host the website, it makes sense to leverage the capabilities it provides. It's all about using the right tool, for the right job, under the right circumstances.
 
-## How do I help translate the docs to a certain language?
+## How do I help translate the docs to another language?
+
+**IMPORTANT:** We [recently announced](https://strongloop.com/strongblog/express-goes-global/) that we are getting professional translation of the Express documentation into the following languages:
+- German
+- French
+- Italian
+- Spanish
+- Brazilian Portuguese
+- Japanese
+- Simplified Chinese
+- Traditional Chinese
+- Russian
+- Korean
+
+Therefore we can no longer accept community translations for these languages.  However, we welcome contributions of translations into other languages, following the procedure below.
 
 Follow these steps:
 
@@ -44,7 +63,5 @@ Follow these steps:
 5. Update the `title` variable in the copied markdown files.
 6. Create the header, footer, notice, and announcement file for the language in the `_includes/` directory, in the respective directories, and make necessary edits to the contents.
 7. Create the announcement file for the language in the `_includes/` directory.
-8. Create a copy of the `_includes/api/en` and rename it acording to the language code.
+8. Create a copy of the `_includes/api/en` and rename it according to the language code.
 9. Make sure to append `/{{ page.lang }}` to all the links within the site.
-
-

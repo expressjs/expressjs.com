@@ -1,21 +1,26 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Developing template engines for Express
+title: Разработка шаблонизаторов для Express
 menu: advanced
 lang: ru
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Developing template engines for Express
+# Разработка шаблонизаторов для Express
 
-Use the `app.engine(ext, callback)` method to create your own template engine. `ext` refers to the file extension, `callback` is the template engine function which accepts the location of the file, the options object, and the callback function, as its parameters.
+Для создания собственного шаблонизатора воспользуйтесь методом `app.engine(ext, callback)`. `ext` соответствует расширению имени файла, а `callback` является функцией шаблонизатора, принимающей в качестве параметров следующие элементы: расположение файла, объект опций и функцию обратного вызова.
 
-The following is an example of implementing a very simple template engine for rendering ".ntl" files.
+Приведенный ниже код служит примером реализации самого простого шаблонизатора для вывода файлов `.ntl`.
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
-    if (err) throw new Error(err);
+    if (err) return callback(new Error(err));
     // this is an extremely simple template engine
     var rendered = content.toString().replace('#title#', '<title>'+ options.title +'</title>')
     .replace('#message#', '<h1>'+ options.message +'</h1>');
@@ -24,19 +29,24 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
-~~~
+</code>
+</pre>
 
-Your app will now be able to render ".ntl" files. Create a file named "index.ntl" in the views directory with the following content.
+Теперь ваше приложение сможет отображать файлы `.ntl`. Создайте файл с именем `index.ntl` в каталоге `views` со следующим содержимым.
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 #title#
 #message#
-~~~
-Then, create the following route in your app.
+</code>
+</pre>
+Затем создайте следующий маршрут в своем приложении.
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 })
-~~~
-On making a request to the home page, "index.ntl" will be rendered as HTML.
+</code>
+</pre>
+При выполнении запроса к домашней странице файл `index.ntl` будет отображаться как HTML.

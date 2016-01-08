@@ -1,0 +1,128 @@
+<header>
+  <div id="mobile-menu">
+      <div id="nav-button" class="fa fa-bars fa-2x button"></div>
+  </div>
+  <section id="logo"><a href="/" class="express">Express</a>
+  </section>
+  <div id="navbar">
+      <ul id="navmenu">
+          <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Home</a></li>
+          <li>
+              <ul id="getting-started-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Einführung</a>
+                      <ul>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/installing.html">
+                              Installation
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/hello-world.html">
+                              Hello World
+                            </a>
+                          </li>
+                          <li>
+                          <a href="/{{ page.lang }}/starter/generator.html">
+                            Express Generator
+                          </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/basic-routing.html">
+                              Basisrouting
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/static-files.html">
+                              Statische Dateien
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/faq.html">
+                              Häufig gestellte Fragen</a>
+</li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="guide-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Leitfaden</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/guide/routing.html">Routing</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Middleware schreiben</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Middleware verwenden</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Template-Engines verwenden</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/error-handling.html">Fehlerbehandlung</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/debugging.html">Debugging</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express hinter Proxys</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">Wechsel zu Express 4</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/migrating-5.html">Wechsel zu Express 5</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/database-integration.html">Datenbankintegration</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="application-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API-Referenz</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/3x/api.html">3.x (veraltet)</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/2x/">2.x (veraltet)</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="advanced-topics-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Themen für Fortgeschrittene</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Template-Engines</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/pm.html">Process Manager verwenden</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">Sicherheitsupdates</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">Sicherheitsspezifische Best Practices</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Leistungsspezifische Best Practices</a>
+                          </li>
+
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="resources-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Ressourcen</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/resources/glossary.html">Glossar</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/community.html">Community</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/books-blogs.html">Handbücher und Blogs</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/applications.html">Anwendungen</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+  </div><a href="http://strongloop.com/node-js/training/" title="Node- und Express-Schulungen von StrongLoop" id="strongloop-header">Express- und Node.js-Schulungen von StrongLoop</a>
+</header>

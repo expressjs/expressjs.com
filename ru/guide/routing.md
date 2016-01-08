@@ -1,226 +1,284 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Express routing
+title: Маршрутизация в Express
 menu: guide
 lang: ru
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Routing
+# Маршрутизация
 
-Routing refers to the definition of end points (URIs) to an application and how it responds to client requests.
+*Маршрутизация* определяет, как приложение отвечает на клиентский запрос к конкретному адресу (URI).
+Вводную информацию о маршрутизации можно найти в разделе [Основы маршрутизации](/{{ page.lang }}/starter/basic-routing.html).
 
-A route is a combination of a URI, a HTTP request method (GET, POST, and so on), and one or more handlers for the endpoint. It takes the following structure `app.METHOD(path, [callback...], callback)`, where `app` is an instance of `express`, `METHOD` is an [HTTP request method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol), `path` is a path on the server, and `callback` is the function executed when the route is matched.
+Приведенный ниже код служит примером одного из самых простых маршрутов.
 
-The following is an example of a very basic route.
-
-~~~js
-var express = require('express')
-var app = express()
+<pre>
+<code class="language-javascript" translate="no">
+var express = require('express');
+var app = express();
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function(req, res) {
-  res.send('hello world')
-})
-~~~
+  res.send('hello world');
+});
+</code>
+</pre>
 
-<h2 id="route-methods">Route methods</h2>
+<h2 id="route-methods">Методы Route</h2>
 
-A route method is derived from one of the HTTP methods, and is attached to an instance of `express`.
+Метод route является производным от одного из методов HTTP и присоединяется к экземпляру класса `express`.
 
-The following is an example of routes defined for the GET and the POST methods to the root of the app.
+Приведенный ниже код служит примером маршрутов, определенных для методов запросов GET и POST к корневому каталогу приложения.
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 // GET method route
 app.get('/', function (req, res) {
-  res.send('GET request to the homepage')
-})
+  res.send('GET request to the homepage');
+});
 
 // POST method route
 app.post('/', function (req, res) {
-  res.send('POST request to the homepage')
-})
+  res.send('POST request to the homepage');
+});
+</code>
+</pre>
 
-~~~
-
-Express supports the following routing methods corresponding to HTTP methods: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
+Express поддерживает перечисленные далее методы маршрутизации, соответствующие методам HTTP: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search` и `connect`.
 
 <div class="doc-box doc-info" markdown="1">
-To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
+Для методов route, преобразуемых в недействительные имена переменных JavaScript, используйте нотацию в квадратных скобках. Например,
 `app['m-search']('/', function ...`
 </div>
 
-There is a special routing method, `app.all()`, which is not derived from any HTTP method. It is used for loading middleware at a path for all request methods.
+Существует особый метод маршрутизации, `app.all()`, не являющийся производным от какого-либо метода HTTP. Этот метод используется для загрузки функций промежуточной обработки в пути для всех методов запросов.
 
-In the following example, the handler will be executed for requests to "/secret" whether using GET, POST, PUT, DELETE, or any other HTTP request method.
+В приведенном ниже примере обработчик будет запущен для запросов, адресованных "/secret", независимо от того, используется ли GET, POST, PUT, DELETE или какой-либо другой метод запроса HTTP, поддерживаемый в [модуле http](https://nodejs.org/api/http.html#http_http_methods).
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.all('/secret', function (req, res, next) {
-  console.log('Accessing the secret section ...')
-  next() // pass control to the next handler
-})
-~~~
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+});
+</code>
+</pre>
 
-<h2 id="route-paths">Route paths</h2>
+<h2 id="route-paths">Пути маршрутов</h2>
 
-Route paths, in combination with a request method, define the endpoints at which requests can be made to. They can be strings, string patterns, or regular expressions.
-
-<div class="doc-box doc-warn" markdown="1">
-Query strings are not a part of the route path.
-</div>
-
-Examples of route paths based on strings:
-
-~~~js
-// with match request to the root
-app.get('/', function (req, res) {
-  res.send('root')
-})
-
-// will match requests to /about
-app.get('/about', function (req, res) {
-  res.send('about')
-})
-
-// will match request to /random.text
-app.get('/random.text', function (req, res) {
-  res.send('random.text')
-})
-~~~
-
-Examples of route paths based on string patterns:
-
-~~~js
-// will match acd and abcd
-app.get('/ab?cd', function(req, res) {
-  res.send('ab?cd')
-})
-
-// will match abcd, abbcd, abbbcd, and so on
-app.get('/ab+cd', function(req, res) {
-  res.send('ab+cd')
-})
-
-// will match abcd, abxcd, abRABDOMcd, ab123cd, and so on
-app.get('/ab*cd', function(req, res) {
-  res.send('ab*cd')
-})
-
-// will match /abe and /abcde
-app.get('/ab(cd)?e', function(req, res) {
- res.send('ab(cd)?e')
-})
-~~~
+Пути маршрутов, в сочетании с методом запроса, определяют конкретные адреса (конечные точки), в которых могут быть созданы запросы. Пути маршрутов могут представлять собой строки, шаблоны строк или регулярные выражения.
 
 <div class="doc-box doc-info" markdown="1">
-The characters ?, +, *, and () are subsets of their Regular Expression counterparts. The hyphen (-) and the dot (.) are interpreted literally by string-based paths.
+  В Express для сопоставления путей маршрутов используется [path-to-regexp](https://www.npmjs.com/package/path-to-regexp); в документации к path-to-regexp описаны все возможные варианты определения путей маршрутов. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) - удобный инструмент для тестирования простых маршрутов в Express, хотя и не поддерживает сопоставление шаблонов.
 </div>
 
-Examples of route paths based on regular expressions:
+<div class="doc-box doc-warn" markdown="1">
+Строки запросов не являются частью пути маршрута.
+</div>
 
-~~~js
-// will match anything with an a in the route name:
+Ниже приводятся примеры путей маршрутов на основе строк.
+
+Данный путь маршрута сопоставляет запросы с корневым маршрутом, `/`.
+
+<pre>
+<code class="language-javascript" translate="no">
+app.get('/', function (req, res) {
+  res.send('root');
+});
+</code>
+</pre>
+
+Данный путь маршрута сопоставляет запросы с `/about`.
+
+<pre>
+<code class="language-javascript" translate="no">
+app.get('/about', function (req, res) {
+  res.send('about');
+});
+</code>
+</pre>
+
+Данный путь маршрута сопоставляет запросы с `/random.text`.
+
+<pre>
+<code class="language-javascript" translate="no">
+app.get('/random.text', function (req, res) {
+  res.send('random.text');
+});
+</code>
+</pre>
+
+Ниже приводятся примеры путей маршрутов на основе шаблонов строк.
+
+Приведенный ниже путь маршрута сопоставляет `acd` и `abcd`.
+
+<pre>
+<code class="language-javascript" translate="no">
+app.get('/ab?cd', function(req, res) {
+  res.send('ab?cd');
+});
+</code>
+</pre>
+
+Этот путь маршрута сопоставляет `abcd`, `abbcd`, `abbbcd` и т.д.
+
+<pre>
+<code class="language-javascript" translate="no">
+app.get('/ab+cd', function(req, res) {
+  res.send('ab+cd');
+});
+</code>
+</pre>
+
+Этот путь маршрута сопоставляет `abcd`, `abxcd`, `abRABDOMcd`, `ab123cd` и т.д.
+
+<pre>
+<code class="language-javascript" translate="no">
+app.get('/ab*cd', function(req, res) {
+  res.send('ab*cd');
+});
+</code>
+</pre>
+
+Данный путь маршрута сопоставляет `/abe` и `/abcde`.
+
+<pre>
+<code class="language-javascript" translate="no">
+app.get('/ab(cd)?e', function(req, res) {
+ res.send('ab(cd)?e');
+});
+</code>
+</pre>
+
+<div class="doc-box doc-info" markdown="1">
+Символы ?, +, * и () представляют собой подмножества соответствующих им регулярных выражений. Дефис (-) и точка (.) интерпретируются буквально в путях на основе строк.
+</div>
+
+Примеры путей маршрутов на основе регулярных выражений:
+
+Данный путь маршрута сопоставляет любой элемент с "a" в имени маршрута.
+
+<pre>
+<code class="language-javascript" translate="no">
 app.get(/a/, function(req, res) {
-  res.send('/a/')
-})
+  res.send('/a/');
+});
+</code>
+</pre>
 
-// will match butterfly, dagonfly; but not butterflyman, dragonfly man, and so on
+Данный маршрут сопоставляет `butterfly` и `dragonfly`, но не `butterflyman`, `dragonfly man` и т.д.
+
+<pre>
+<code class="language-javascript" translate="no">
 app.get(/.*fly$/, function(req, res) {
-  res.send('/.*fly$/')
-})
-~~~
+  res.send('/.*fly$/');
+});
+</code>
+</pre>
 
-<h2 id="route-handlers">Route handlers</h2>
+<h2 id="route-handlers">Обработчики маршрутов</h2>
 
-You can provide multiple callback functions that behave just like [middleware](/guide/using-middleware.html) to handle a request. The only exception is that these callbacks may invoke `next('route')` to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+Для обработки запроса можно указать несколько функций обратного вызова, подобных [middleware](/{{ page.lang }}/guide/using-middleware.html). Единственным исключением является то, что эти обратные вызовы могут инициировать `next('route')` для обхода остальных обратных вызовов маршрута. С помощью этого механизма можно включить в маршрут предварительные условия, а затем передать управление последующим маршрутам, если продолжать работу с текущим маршрутом не нужно.
 
-Route handlers can come in the form of a function, an array of functions, or various combinations of both, as shown the following examples.
+Обработчики маршрутов могут принимать форму функции, массива функций или их сочетания, как показано в примерах ниже.
 
-A route can be handled using a single callback function:
+Одна функция обратного вызова может обрабатывать один маршрут.  Например:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/example/a', function (req, res) {
-  res.send('Hello from A!')
-})
-~~~
+  res.send('Hello from A!');
+});
+</code>
+</pre>
 
-A route can be handled using a more than one callback function (make sure to specify the `next` object):
+Один маршрут может обрабатываться несколькими функциями обратного вызова (обязательно укажите объект `next`). Например:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/example/b', function (req, res, next) {
-  console.log('response will be sent by the next function ...')
-  next()
+  console.log('the response will be sent by the next function ...');
+  next();
 }, function (req, res) {
-  res.send('Hello from B!')
-})
-~~~
+  res.send('Hello from B!');
+});
+</code>
+</pre>
 
-A route can be handled using an array of callback functions:
+Массив функций обратного вызова может обрабатывать один маршрут.  Например:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var cb0 = function (req, res, next) {
-  console.log('CB0')
-  next()
+  console.log('CB0');
+  next();
 }
 
 var cb1 = function (req, res, next) {
-  console.log('CB1')
-  next()
+  console.log('CB1');
+  next();
 }
 
 var cb2 = function (req, res) {
-  res.send('Hello from C!')
+  res.send('Hello from C!');
 }
 
-app.get('/example/c', [cb0, cb1, cb2])
-~~~
+app.get('/example/c', [cb0, cb1, cb2]);
+</code>
+</pre>
 
-A route can be handled using a combination of array of functions and independent functions:
+Маршрут может обрабатываться сочетанием независимых функций и массивов функций.  Например:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var cb0 = function (req, res, next) {
-  console.log('CB0')
-  next()
+  console.log('CB0');
+  next();
 }
 
 var cb1 = function (req, res, next) {
-  console.log('CB1')
-  next()
+  console.log('CB1');
+  next();
 }
 
 app.get('/example/d', [cb0, cb1], function (req, res, next) {
-  console.log('response will be sent by the next function ...')
-  next()
+  console.log('the response will be sent by the next function ...');
+  next();
 }, function (req, res) {
-  res.send('Hello from D!')
-})
-~~~
+  res.send('Hello from D!');
+});
+</code>
+</pre>
 
-<h2 id="response-methods">Response methods</h2>
+<h2 id="response-methods">Методы ответа</h2>
 
-The methods on the response object (`res`) in the following table can send a response to the client and terminate the request response cycle. If none of them is called from a route handler, the client request will be left hanging.
+Методы в объекте ответа (`res`), перечисленные в таблице ниже, могут передавать ответ клиенту и завершать цикл "запрос-ответ". Если ни один из этих методов не будет вызван из обработчика маршрута, клиентский запрос зависнет.
 
-| Method               | Description                           
+| Метод               | Описание
 |----------------------|--------------------------------------
-| [res.download()](/4x/api.html#res.download)   | Prompt a file to be downloaded.
-| [res.end()](/4x/api.html#res.end)        | End the response process.
-| [res.json()](/4x/api.html#res.json)       | Send a JSON response.
-| [res.jsonp()](/4x/api.html#res.jsonp)      | Send a JSON response with JSONP support.
-| [res.redirect()](/4x/api.html#res.redirect)   | Redirect a request.
-| [res.render()](/4x/api.html#res.render)     | Render a view template.
-| [res.send()](/4x/api.html#res.send)       | Send a response of various types.
-| [res.sendFile](/4x/api.html#res.sendFile)     | Send a file as an octet stream.
-| [res.sendStatus()](/4x/api.html#res.sendStatus) | Set the response status code and send its string representation as the response body.
+| [res.download()](/{{ page.lang }}/4x/api.html#res.download)   | Приглашение загрузки файла.
+| [res.end()](/{{ page.lang }}/4x/api.html#res.end)        | Завершение процесса ответа.
+| [res.json()](/{{ page.lang }}/4x/api.html#res.json)       | Отправка ответа JSON.
+| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)      | Отправка ответа JSON с поддержкой JSONP.
+| [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | Перенаправление ответа.
+| [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | Вывод шаблона представления.
+| [res.send()](/{{ page.lang }}/4x/api.html#res.send)       | Отправка ответа различных типов.
+| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)     | Отправка файла в виде потока октетов.
+| [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Установка кода состояния ответа и отправка представления в виде строки в качестве тела ответа.
 
 <h2 id="app-route">app.route()</h2>
 
-Chainable route handlers for a route path can be created using `app.route()`.
-Since the path is specified at a single location, it
-helps to create modular routes and reduce redundancy and typos. For more
-information on routes, see [Router() documentation](/4x/api.html#router).
+Метод `app.route()` позволяет создавать обработчики маршрутов, образующие цепочки, для пути маршрута.
+Поскольку путь указан в одном расположении, удобно создавать модульные маршруты, чтобы минимизировать избыточность и количество опечаток. Дополнительная информация о маршрутах приводится в документации [Router()](/{{ page.lang }}/4x/api.html#router).
 
-Here is an example of chained route handlers defined using `app.route()`.
+Ниже приведен пример объединенных в цепочку обработчиков маршрутов, определенных с помощью функции `app.route()`.
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -230,50 +288,50 @@ app.route('/book')
   })
   .put(function(req, res) {
     res.send('Update the book');
-  })
-~~~
+  });
+</code>
+</pre>
 
 <h2 id="express-router">express.Router</h2>
 
-The `express.Router` class can be used to create modular mountable
-route handlers. A `Router` instance is a complete middleware and
-routing system; for this reason it is often referred to as a "mini-app".
+С помощью класса `express.Router` можно создавать модульные, монтируемые обработчики маршрутов. Экземпляр `Router` представляет собой комплексную систему промежуточных обработчиков и маршрутизации; по этой причине его часто называют "мини-приложением".
 
-The following example creates a router as a module, loads a middleware in
-it, defines some routes, and mounts it on a path on the main app.
+В приведенном ниже примере создается маршрутизатор в виде модуля, в него загружается функция промежуточной обработки, определяется несколько маршрутов, и модуль маршрутизатора монтируется в путь в основном приложении.
 
-Create a router file named `birds.js` in the app directory,
-with the following content:
+Создайте файл маршрутизатора с именем `birds.js` в каталоге приложения со следующим содержанием:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var router = express.Router();
 
-// middleware specific to this router
+// middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
   next();
-})
+});
 // define the home page route
 router.get('/', function(req, res) {
   res.send('Birds home page');
-})
+});
 // define the about route
 router.get('/about', function(req, res) {
   res.send('About birds');
-})
+});
 
 module.exports = router;
-~~~
+</code>
+</pre>
 
-Then, load the router module in the app:
+Потом загрузите модуль маршрутизации в приложение:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-~~~
+</code>
+</pre>
 
-The app will now be able to handle requests to `/birds` and
-`/birds/about`, along with calling the `timeLog`
-middleware specific to the route.
+Данное приложение теперь сможет обрабатывать запросы, адресованные ресурсам `/birds` и
+`/birds/about`, а также вызывать специальную функцию промежуточной обработки `timeLog` данного маршрута.

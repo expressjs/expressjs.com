@@ -1,8 +1,13 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: home
 title: Express - Node.js web application framework
 menu: home
 lang: en
+redirect_from: "/en/index.html"
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 <section id="home-content">
@@ -12,20 +17,16 @@ lang: en
     <section id="description">
         <a href="/" class="express">Express</a>
 
-        <div id="conference">
-            <a href="http://events.linuxfoundation.org/events/node-interactive">
-                <img src="/images/node_int15.png" />
-            </a>
-        </div>
-
-        <span class="description">Fast, unopinionated, minimalist web framework for <a href='http://nodejs.org'>Node.js</a></span>
+        <span class="description">Fast, unopinionated, minimalist web framework for <a href='https://nodejs.org/en/'>Node.js</a></span>
     </section>
 
     <div id="install-command">$ npm install express --save</div>
 </section>
 
 <section id="doc-langs" markdown="1">
-  Express docs available in other languages: [Spanish](/es), [Japanese](/ja), [Russian](/ru), [Chinese](/zh), [Korean](/ko), [Portuguese](/pt-br).
+Express docs available in other languages: [French](/fr/), [German](/de/), [Spanish](/es/), [Italian](/it/), [Japanese](/ja/), [Russian](/ru/), [Chinese](/zh-cn/), [Traditional Chinese](/zh-tw/), [Korean](/ko/), [Portuguese](/pt-br/).
+
+Community translation available for: [Ukrainian](/uk) and [Uzbek](/uz/).
 </section>
 
 <section id="intro">
@@ -40,7 +41,7 @@ lang: en
       </div>
 
       <div id="performance">
-          <h3>Performance</h3> Express provides a thin layer of fundamental web application features, without obscuring Node features that you know and love.
+          <h3>Performance</h3> Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love.
       </div>
 
       <div id="sponsorship">

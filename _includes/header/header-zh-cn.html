@@ -1,0 +1,129 @@
+<header>
+  <div id="mobile-menu">
+      <div id="nav-button" class="fa fa-bars fa-2x button"></div>
+  </div>
+  <section id="logo"><a href="/" class="express">Express</a>
+  </section>
+  <div id="navbar">
+      <ul id="navmenu">
+          <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>主页</a></li>
+          <li>
+              <ul id="getting-started-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>入门</a>
+                      <ul>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/installing.html">
+                              安装
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/hello-world.html">
+                              Hello world
+                            </a>
+                          </li>
+                          <li>
+                          <a href="/{{ page.lang }}/starter/generator.html">
+                            Express 生成器
+                          </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/basic-routing.html">
+                              基本路由
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/static-files.html">
+                              静态文件
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/faq.html">
+                              常见问题及解答
+                            </a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="guide-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>指南</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/guide/routing.html">路由</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/writing-middleware.html">编写中间件</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">使用中间件</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">使用模板引擎</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/error-handling.html">错误处理</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/debugging.html">调试</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/behind-proxies.html">代理背后的 Express</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">迁移到 Express 4</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/migrating-5.html">迁移到 Express 5</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/database-integration.html">数据库集成</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="application-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API 参考</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/3x/api.html">3.x（不推荐）</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/2x/">2.x（不推荐）</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="advanced-topics-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>高级主题</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">模板引擎</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/pm.html">使用进程管理器</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">安全更新</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">安全最佳实践</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">性能最佳实践</a>
+                          </li>
+
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="resources-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>资源</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/resources/glossary.html">词汇表</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/middleware.html">中间件</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/community.html">社区</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/books-blogs.html">书籍和博客</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/applications.html">应用程序</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+  </div><a href="http://strongloop.com/node-js/training/" title="来自 StrongLoop 的 Node 和 Express 培训" id="strongloop-header">来自 StrongLoop 的 Express 和 Node.js 培训</a>
+</header>

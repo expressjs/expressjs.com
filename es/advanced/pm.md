@@ -1,69 +1,77 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Process managers for Express apps
+title: Gestores de procesos para las aplicaciones Express
 menu: advanced
-lang: en
+lang: es
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Process managers for Express apps
+# Gestores de procesos para las aplicaciones Express
 
-When running Express apps for production, it is helpful to use a _process manager_ to:
+Cuando ejecuta aplicaciones Express para la producción, es muy útil utilizar un *gestor de procesos* para realizar las siguientes tareas:
 
-- Restart the app automatically if it crashes.
-- Gain insights into runtime performance and resource consumption.
-- Modify settings dynamically to improve performance.
-- Control clustering.
+- Reiniciar la aplicación automáticamente si se bloquea.
+- Obtener información útil sobre el rendimiento en tiempo de ejecución y el consumo de recursos.
+- Modificar dinámicamente los valores para mejorar el rendimiento.
+- Controlar la agrupación en clúster.
 
-A process manager is somewhat like an application server: it's a "container" for applications that facilitates deployment,
-provides high availability, and enables you to manage the application at runtime.
+Un gestor de procesos es una especie de servidor de aplicaciones: un "contenedor" de aplicaciones que facilita el despliegue, proporciona una alta disponibilidad y permite gestionar la aplicación en el tiempo de ejecución.
 
-The most popular process managers for Express and other Node applications are:
+Los gestores de procesos más conocidos para Express y otras aplicaciones Node.js son los siguientes:
 
 - [StrongLoop Process Manager](#sl)
 - [PM2](#pm2)
 - [Forever](#forever)
 
 
-Using any of these three tools can be very helpful, however StrongLoop Process Manager is the only solution that provides a comprehensive runtime and deployment solution that address entire Node application life cycle with tooling for every step before and after production in an unified interface.
+El uso de estas tres herramientas puede ser muy útil, aunque StrongLoop Process Manager es la única que proporciona una solución completa de despliegue y tiempo de ejecución que gestiona el ciclo de vida completo de la aplicación Node.js, con herramientas para cada paso antes y después de la producción, en una interfaz unificada.
 
-Here's a brief look at each of these tools.
-For a detailed comparison, see [http://strong-pm.io/compare/](http://strong-pm.io/compare/).
+A continuación, se describe brevemente cada una de etas herramientas.
+Para ver una comparación detallada, consulte [http://strong-pm.io/compare/](http://strong-pm.io/compare/).
 
 ## <a id="sl">StrongLoop Process Manager</a>
 
-StrongLoop Process Manager (StrongLoop PM) is a production process manager for Node.js applications with built-in load balancing, monitoring, multi-host deployment, and a graphical console.
-It enables you to:
+StrongLoop Process Manager (StrongLoop PM) es un gestor de procesos de producción para las aplicaciones Node.js. StrongLoop PM tiene incorporado un despliegue de equilibrio de carga, supervisión y varios hosts, así como una consola gráfica.
+Puede utilizar StrongLoop PM para las siguientes tareas:
 
-- Build, package, and deploy your Node application to a local or remote system.
-- View CPU profiles and heap snapshots to optimize performance and diagnose memory leaks.
-- Keep processes and clusters alive forever.
-- View performance metrics on your application.
-- Easily manage multi-host deployments with Nginx integration.
-- Unify multiple StrongLoop PMs to a distributed microservices runtime managed from Arc.
+- Crear, empaquetar y desplegar la aplicación Node.js en un sistema local o remoto.
+- Ver perfiles de CPU e instantáneas de almacenamiento dinámico para optimizar el rendimiento y diagnosticar fugas de memoria.
+- Mantener activos siempre los clústeres y los procesos.
+- Ver medidas de rendimiento sobre la aplicación.
+- Gestionar fácilmente los despliegues de varios hosts con la integración de Nginx.
+- Unificar varios StrongLoop PM en un tiempo de ejecución de microservicios distribuidos que se gestiona desde Arc.
 
-You can work with StrongLoop PM using a powerful CLI tool, `slc`, or a graphical tool, Arc.  It's open source, with professional support provided by StrongLoop.
+Puede trabajar con StrongLoop PM utilizando una potente herramienta de interfaz de línea de mandatos denominada `slc` o una herramienta gráfica denominada Arc. Arc es de código abierto, con soporte profesional proporcionado por StrongLoop.
 
-For more information, see [http://strong-pm.io/](http://strong-pm.io/).
+Para obtener más información, consulte [http://strong-pm.io/](http://strong-pm.io/).
 
-Full documentation:
+Documentación completa:
 
-- [Operating Node apps (StrongLoop documentation)](http://docs.strongloop.com/display/SLC)
+- [Operating Node apps (documentación de StrongLoop)](http://docs.strongloop.com/display/SLC)
 - [Using StrongLoop Process Manager](http://docs.strongloop.com/display/SLC/Using+Process+Manager).
 
-### Installation
-~~~sh
+### Instalación
+<pre>
+<code class="language-sh" translate="no">
 $ [sudo] npm install -g strongloop
-~~~
+</code>
+</pre>
 
-### Basic use
-~~~sh
+### Uso básico
+<pre>
+<code class="language-sh" translate="no">
 $ cd my-app
 $ slc start
-~~~
+</code>
+</pre>
 
-View status of Process Manager and all deployed apps:
+Vea el estado del gestor de procesos y todas las aplicaciones desplegadas:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl
 Service ID: 1
 Service Name: my-app
@@ -79,57 +87,71 @@ Processes:
     1.1.57694  57694   2     0.0.0.0:3001
     1.1.57695  57695   3     0.0.0.0:3001
     1.1.57696  57696   4     0.0.0.0:3001
-~~~
+</code>
+</pre>
 
-List all apps (services) under management:
+Liste todas las aplicaciones (servicios) que se están gestionando:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl ls
 Id          Name         Scale
  1          my-app       1
-~~~
+</code>
+</pre>
 
-Stop an app:
+Detenga una aplicación:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl stop my-app
-~~~
+</code>
+</pre>
 
-Restart an app:
+Reinicie una aplicación:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl restart my-app
-~~~
+</code>
+</pre>
 
-You can also "soft restart," which gives worker processes a grace period to close existing connections, then restarts the current application:
+También puede realizar un "reinicio suave", que da a los procesos de trabajador un periodo de gracia para cerrar las conexiones existentes y, a continuación, reinicia la aplicación actual:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl soft-restart my-app
-~~~
+</code>
+</pre>
 
-To remove an app from management:
+Para eliminar una aplicación de la gestión:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl remove my-app
-~~~
+</code>
+</pre>
 
 ## <a id="pm2">PM2</a>
 
-PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and will facilitate common system admin tasks.  It also enables you to manage application logging, monitoring, and clustering.
+PM2 es un gestor de procesos de producción para las aplicaciones Node.js que tiene un equilibrador de carga incorporado. PM2 permite mantener siempre activas las aplicaciones y volver a cargarlas sin ningún tiempo de inactividad, a la vez que facilita tareas comunes de administrador del sistema.  PM2 también permite gestionar el registro de aplicaciones, la supervisión y la agrupación en clúster.
 
-For more information, see [https://github.com/Unitech/pm2](https://github.com/Unitech/pm2).
+Para obtener más información, consulte [https://github.com/Unitech/pm2](https://github.com/Unitech/pm2).
 
-### Installation
+### Instalación
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ [sudo] npm install pm2 -g
-~~~
+</code>
+</pre>
 
-### Basic use
+### Uso básico
 
-Starting an app with `pm2` requires the path of the app to be specified. However, stopping, restarting, and deleting requires just the name or the id of the app.
+Cuando inicia una aplicación utilizando el mandato `pm2`, debe especificar la vía de acceso de la aplicación. No obstante, cuando detiene, reinicia o suprime una aplicación, sólo puede especificar el nombre o el ID de la aplicación.
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 start app.js
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
@@ -137,102 +159,129 @@ $ pm2 start app.js
 ├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────────────┼──────────┤
 │ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
- Use `pm2 show <id|name>` to get more details about an app
-~~~
+ Use the `pm2 show <id|name>` command to get more details about an app.
+</code>
+</pre>
 
-Starting an app with `pm2` will immediately send it to the background. You can control the background app from the command line using various `pm2` commands.
+Cuando inicia una aplicación utilizando el mandato `pm2`, la aplicación se envía inmediatamente al segundo plano. Puede controlar la aplicación en segundo plano desde la línea de mandatos utilizando varios mandatos `pm2`.
 
-Once an app is started with `pm2` it is registered in `pm2`'s list of processes with an ID, which makes it possible to manage apps with the same name from different directories on the system, using their IDs.
+Cuando se inicia una aplicación utilizando el mandato `pm2`, se registra en la lista de procesos de PM2 con un ID. Por lo tanto, puede gestionar las aplicaciones con el mismo nombre de distintos directorios en el sistema utilizando su ID.
 
-Note that if more than one app with the same name is running, `pm2` commands affect all of them. So use IDs instead of names to manage individual apps.
+Tenga en cuenta que si se ejecuta más de una aplicación con el mismo nombre, los mandatos `pm2` se aplican en todas ellas. Por lo tanto, utilice ID en lugar de nombres para gestionar aplicaciones individuales.
 
-List all running processes:
+Liste todos los procesos en ejecución:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 list
-~~~
+</code>
+</pre>
 
-Stop an app:
+Detenga una aplicación:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 stop 0
-~~~
+</code>
+</pre>
 
-Restart an app:
+Reinicie una aplicación:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 restart 0
-~~~
+</code>
+</pre>
 
-To view detailed information about an app:
+Para ver información detallada sobre una aplicación:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 show 0
-~~~
+</code>
+</pre>
 
-To remove an app from `pm2`'s registry:
+Para eliminar una aplicación del registro de PM2:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ pm2 delete 0
-~~~
+</code>
+</pre>
 
 
 ## <a id="forever">Forever</a>
 
-Forever is a simple CLI tool for ensuring that a given script runs continuously (forever). Its simple interface makes it ideal for running smaller deployments of Node apps and scripts.
+Forever es una herramienta de interfaz de línea de mandatos simple que permite garantizar la ejecución continua (forever/siempre) de un determinado script. La sencilla interfaz de Forever hace que sea ideal para ejecutar los despliegues más pequeños de scripts y aplicaciones Node.js.
 
-For more information, see [https://github.com/foreverjs/forever](https://github.com/foreverjs/forever).
+Para obtener más información, consulte [https://github.com/foreverjs/forever](https://github.com/foreverjs/forever).
 
-### Installation
+### Instalación
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ [sudo] npm install forever -g
-~~~
+</code>
+</pre>
 
-### Basic use
+### Uso básico
 
-To start a script, use the `forever start` command and specify the path of the script:
+Para iniciar un script, utilice el mandato `forever start` y especifique la vía de acceso del script:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ forever start script.js
-~~~
+</code>
+</pre>
 
-This will run the script in daemon mode (in the background).
+Este mandato ejecutará el script en modalidad daemon (en segundo plano).
 
-To run the script attached to the terminal, omit `start`:
+Para ejecutar el script para que se adjunte al terminal, omita `start`:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ forever script.js
-~~~
+</code>
+</pre>
 
-It is a good idea to log output from forever and the script using the logging options `-l`, `-o`, `-e`, as shown this example:
+Se recomienda registrar la salida de la herramienta Forever y el script utilizando las opciones de registro `-l`, `-o` y `-e`, como se muestra en este ejemplo:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ forever start -l forever.log -o out.log -e err.log script.js
-~~~
+</code>
+</pre>
 
-To view the list of scripts started by forever:
+Para ver la lista de scripts que ha iniciado Forever:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ forever list
-~~~
+</code>
+</pre>
 
-To stop a script started by forever use the `forever stop` command and specify the process index (as listed by the `forever list` command).
+Para detener un script iniciado por Forever, utilice el mandato `forever stop` y especifique el índice de procesos (como se lista con el mandato `forever list`).
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ forever stop 1
-~~~
+</code>
+</pre>
 
-Alternatively, specify the path of the file:
+De manera alternativa, puede especificar la vía de acceso del archivo:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ forever stop script.js
-~~~
+</code>
+</pre>
 
-To stop all the scripts started by `forever`:
+Para detener todos los scripts que ha iniciado Forever:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ forever stopall
-~~~
+</code>
+</pre>
 
-Forever has many more options, and it also provides a programmatic API.
+Forever tiene más opciones y también proporciona una API mediante programación.

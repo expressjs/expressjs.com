@@ -1,57 +1,64 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Migrating to Express 4
+title: Migrando para o Express 4
 menu: guide
-lang: en
+lang: pt-br
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Moving to Express 4
+# Migrando para o Express 4
 
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Visão Geral</h2>
 
-Express 4 is a breaking change from Express 3. That means an existing Express 3 app will not work if you update the Express version in its dependencies.
+Express 4 é uma alteração de ruptura do Express 3. Isso significa que um aplicativo Express 3 existente não irá funcionar
+se você atualizar a versão do Express nas suas dependências.
 
-This article covers:
+Este artigo cobre:
 
 <ul class="doclist">
-  <li><a href="#changes">Changes in Express 4.</a></li>
-  <li><a href="#example-migration">An example</a> of migrating an Express 3 app to Express 4.</li>
-  <li><a href="#app-gen">Upgrading to the Express 4 app generator.</a></li>
+  <li><a href="#changes">Mudanças no Express 4.</a></li>
+  <li><a href="#example-migration">Um exemplo</a> de migração de um aplicativo do Express 3 para o Express 4.</li>
+  <li><a href="#app-gen">Fazendo o upgrade para o gerador de aplicativos do Express 4.</a></li>
 </ul>
 
-<h2 id="changes">Changes in Express 4</h2>
+<h2 id="changes">Mudanças no Express 4</h2>
 
-The main changes in Express 4 are:
+Existem várias mudanças significativas no Express 4:
 
 <ul class="doclist">
-  <li><a href="#core-changes">Changes to Express core and middleware system: </a>The dependency on Connect and built-in middleware were removed, so you must add middleware yourself.
+  <li><a href="#core-changes">Mudanças no núcleo e sistemas middleware do Express.</a> As
+dependências no Connect e middlewares integrados foram removidos, de forma que você mesmo deve incluir os middlewares.
   </li>
-  <li><a href="#routing">Changes to the routing system.</a></li>
-  <li><a href="#other-changes">Various other changes.</a></li>
+  <li><a href="#routing">Mudanças no sistema de roteamento.</a></li>
+  <li><a href="#other-changes">Várias outras mudanças.</a></li>
 </ul>
 
-See also:
+Consulte também:
 
-* [New features in 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
-* [Migrating from 3.x to 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
+* [Novos recursos no 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
+* [Migrando do 3.x para o 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
 
 <h3 id="core-changes">
-Changes to Express core and middleware system
+Mudanças no núcleo e sistemas middleware do Express
 </h3>
 
-Express 4 no longer depends on Connect, and removes all built-in
-middleware from its core, except `express.static`. This means
-Express is now an independent routing and middleware web framework, and
-Express versioning and releases are not affected by middleware updates.
+O Express 4 não depende mais do Connect, e remove todos os
+middlewares integrados do seu núcleo, exceto pela função
+`express.static`. Isso significa que o
+Express é agora um framework web de middleware e roteamento
+independente, e que o versionamento e as liberações do Express não
+são mais afetadas por atualizações nos middlewares.
 
-With the built-in middleware gone, you must explicitly add all the
-middleware required to run your app.  Simply follow these steps:
+Sem os middlewares integrados, você deve incluir explicitamente todos os middlewares necessários para a execução do seu aplicativo. Simplesmente siga esses passos:
 
-1. Install the module: `npm install --save <module-name>`
-2. In your app, require the module: `require('module-name')`
-3. Use the module according to its documentation: `app.use( ... )`
+1. Instale o módulo: `npm install --save <module-name>`
+2. No seu aplicativo, solicite o módulo: `require('module-name')`
+3. Use o módulo de acordo com sua documentação: `app.use( ... )`
 
-The following table lists Express 3 middleware and their counterparts in Express 4.
+A tabela a seguir lista os middlewares do Express 3 e suas contrapartes no Express 4.
 
 <table class="doctable" border="1">
 <tr><th>Express 3</th><th>Express 4</th></tr>
@@ -88,49 +95,56 @@ The following table lists Express 3 middleware and their counterparts in Express
 <td><a href="https://github.com/expressjs/serve-static">serve-static</a></td></tr>
 </table>
 
-Here is the [complete list](https://github.com/senchalabs/connect#middleware) of Express 4 middleware.
+Aqui está a [lista completa](https://github.com/senchalabs/connect#middleware) de middlewares do Express 4.
 
-In most cases, you can simply replace the old version 3 middleware with
-its Express 4 counterpart. For details, see the module documentation in
-GitHub.
+Na maioria dos casos, é possível simplesmente substituir a antiga versão 3 do middleware pela sua contraparte do Express4. Para obter detalhes, consulte a documentação do módulo no GitHub.
 
-<h4 id="app-use"><code>app.use</code> accepts parameters</h4>
+<h4 id="app-use">O <code>app.use</code> aceita parâmetros</h4>
 
-In version 4 you can now load middleware on a path with a variable
-parameter and read the parameter value from the route handler.
-For example:
+Na versão 4 é possível utilizar uma variável de parâmetro para
+definir o caminho onde as funções do middleware estão carregadas, e
+em seguida ler o valor do parâmetro a partir do manipulador de rota.
+Por exemplo:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.use('/book/:id', function(req, res, next) {
   console.log('ID:', req.params.id);
   next();
 });
-~~~
+</code>
+</pre>
 <h3 id="routing">
-The routing system
+O sistema de roteamento
 </h3>
 
-Apps now implicitly load routing middleware, so you no longer have to
-worry about the order in which middleware is loaded with respect to
-the `router` middleware.
+Os aplicativos agora carregam implicitamente middlewares de
+roteamento, para que não seja mais necessário se preocupar com a
+ordem em que os middlewares são carregados no que diz respeito ao
+middleware `router`.
 
-The way you define routes is unchanged, but the routing system has two
-new features to help organize your routes:
+A forma como as rotas são definidas são as mesmas, mas  o
+sistema de roteamento possui dois novos recursos para ajudá-lo a
+organizar suas rotas:
 
 {: .doclist }
-* A new method, `app.route()`, to create chainable route handlers for a route path.
-* A new class, `express.Router`, to create modular mountable route handlers.
+* Um novo método, `app.route()`, para criar
+manipuladores de rotas encadeáveis para um caminho de rota.
+* Uma nova classe, `express.Router`, para
+criar manipuladores de rotas modulares montáveis
 
-<h4 id="app-route"><code>app.route()</code> method</h4>
+<h4 id="app-route">O método <code>app.route()</code></h4>
 
-The new `app.route()` method enables you to create chainable route handlers
-for a route path. Since the path is specified in a single location, it
-helps to create modular routes and reduce redundancy and typos. For more
-information on routes, see [`Router()` documentation](/4x/api.html#router).
+O novo método `app.route()` permite que sejam
+criados manipuladores de rotas encadeáveis para um caminho de rota. Como o caminho é especificado em uma localização única, criar rotas
+modulares é útil, já que reduz redundâncias e erros tipográficos. Para
+obter mais informações sobre rotas, consulte a [`documentação do Router()` ](/{{ page.lang }}/4x/api.html#router).
 
-Here is an example of chained route handlers defined using `app.route()`.
+Aqui está um exemplo de manipuladores de rotas encadeáveis que
+são definidos usando a função `app.route()`.
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -141,22 +155,27 @@ app.route('/book')
   .put(function(req, res) {
     res.send('Update the book');
   });
-~~~
+</code>
+</pre>
 
-<h4 id="express-router"><code>express.Router</code> class</h4>
+<h4 id="express-router">classe <code>express.Router</code></h4>
 
-The other feature to help organize routes is a new class,
-`express.Router`, that you can use to create modular mountable
-route handlers. A `Router` instance is a complete middleware and
-routing system; for this reason it is often referred to as a "mini-app".
+O outro recurso que ajuda na organização das rotas é uma nova
+classe, `express.Router`, que pode ser usada para
+criar manipuladores de rotas modulares montáveis. Uma instância de `Router` é um middleware e sistema
+de roteamento completo; por essa razão ela é frequentemente referida
+como um "mini-aplicativo"
 
-The following example creates a router as a module, loads a middleware in
-it, defines some routes, and mounts it on a path on the main app.
+O seguinte exemplo cria um roteador como um módulo, carrega o
+middleware nele, define algumas rotas, e monta-o em um caminho no
+aplicativo principal.
 
-Create a router file named `birds.js` in the app directory,
-with the following content:
+Por exemplo, cria um arquivo roteador chamado
+`birds.js` no diretório do aplicativo, com o
+conteúdo a seguir:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var router = express.Router();
 
@@ -175,43 +194,48 @@ router.get('/about', function(req, res) {
 });
 
 module.exports = router;
-~~~
+</code>
+</pre>
 
-Then, load the router module in the app:
+Em seguida, carregue o módulo roteador no aplicativo:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-~~~
+</code>
+</pre>
 
-The app will now be able to handle requests to `/birds` and
-`/birds/about`, along with calling the `timeLog`
-middleware specific to the route.
+O aplicativo será agora capaz de manipular solicitações aos
+caminhos `/birds` e `/birds/about`,
+e irá chamar o middleware `timeLog`
+que é específico para a rota.
 
 <h3 id="other-changes">
-Other changes
+Outras mudanças
 </h3>
 
-The following table lists other small but important changes in Express 4.
+A seguinte tabela lista outras pequenas, porém importantes, mudanças no Express 4:
 
 <table class="doctable" border="1">
 <tr>
-<th>Object</th>
-<th>Description</th>
+<th>Objeto</th>
+<th>Descrição</th>
 </tr>
 <tr>
-<td>Node</td>
-<td>Express 4 requires Node 0.10.x or later and has dropped support for
-Node 0.8.x.</td>
+<td>Node.js</td>
+<td>O Express 4 requer o Node.js 0.10.x ou posterior e descartou o
+suporte ao Node.js 0.8.x.</td>
 </tr>
 <tr>
 <td markdown="1">
 `http.createServer()`
 </td>
 <td markdown="1">
-The `http` module is no longer needed, unless you need to directly work with it (socket.io/SPDY/HTTPS). The app can be started using
-`app.listen()`.
+O módulo `http` não é mais necessário, a não ser
+que você precise trabalhar diretamente com ele (socket.io/SPDY/HTTPS). O
+aplicativo pode ser iniciado usando a função `app.listen()`.
 </td>
 </tr>
 <tr>
@@ -219,9 +243,9 @@ The `http` module is no longer needed, unless you need to directly work with it 
 `app.configure()`
 </td>
 <td markdown="1">
-`app.configure()` has been removed.  Use
-`process.env.NODE_ENV` or
-`app.get('env')` to detect the environment and configure the app accordingly.
+A função `app.configure()` foi removida.  Use a função `process.env.NODE_ENV` ou
+`app.get('env')` para detectar o ambiente e
+configurar o aplicativo de acordo com ele.
 </td>
 </tr>
 <tr>
@@ -229,7 +253,8 @@ The `http` module is no longer needed, unless you need to directly work with it 
 `json spaces`
 </td>
 <td markdown="1">
-The `json spaces` application property is disabled by default in Express 4.
+A propriedade de aplicativo `json spaces` está
+desativada por padrão no Express 4.
 </td>
 </tr>
 <tr>
@@ -238,7 +263,7 @@ The `json spaces` application property is disabled by default in Express 4.
 </td>
 <td markdown="1">
 Use `req.accepts()`, `req.acceptsEncodings()`,
-`req.acceptsCharsets()`, and `req.acceptsLanguages()`.
+`req.acceptsCharsets()`, e `req.acceptsLanguages()`.
 </td>
 </tr>
 <tr>
@@ -246,7 +271,7 @@ Use `req.accepts()`, `req.acceptsEncodings()`,
 `res.location()`
 </td>
 <td markdown="1">
-No longer resolves relative URLs.
+Não resolve mais URLs relativas.
 </td>
 </tr>
 <tr>
@@ -254,7 +279,7 @@ No longer resolves relative URLs.
 `req.params`
 </td>
 <td markdown="1">
-Was an array; now an object.
+Era uma matriz; agora é um objeto.
 </td>
 </tr>
 <tr>
@@ -262,7 +287,7 @@ Was an array; now an object.
 `res.locals`
 </td>
 <td markdown="1">
-Was a function; now an object.
+Era uma função; agora é um objeto.
 </td>
 </tr>
 <tr>
@@ -270,7 +295,7 @@ Was a function; now an object.
 `res.headerSent`
 </td>
 <td markdown="1">
-Changed to `res.headersSent`.
+Mudado para `res.headersSent`.
 </td>
 </tr>
 <tr>
@@ -278,7 +303,7 @@ Changed to `res.headersSent`.
 `app.route`
 </td>
 <td markdown="1">
-Now available as `app.mountpath`.
+Agora disponível como `app.mountpath`.
 </td>
 </tr>
 <tr>
@@ -286,7 +311,7 @@ Now available as `app.mountpath`.
 `res.on('header')`
 </td>
 <td markdown="1">
-Removed.
+Removido.
 </td>
 </tr>
 <tr>
@@ -294,7 +319,7 @@ Removed.
 `res.charset`
 </td>
 <td markdown="1">
-Removed.
+Removido.
 </td>
 </tr>
 <tr>
@@ -302,26 +327,29 @@ Removed.
 `res.setHeader('Set-Cookie', val)`
 </td>
 <td markdown="1">
-Functionality is now limited to setting the basic cookie value. Use
-`res.cookie()` for added functionality.
+A funcionalidade é agora limitada a configurar o valor básico do
+cookie. Use `res.cookie()` para funcionalidades
+adicionais.
 </td>
 </tr>
 </table>
 
-<h2 id="example-migration">Example app migration</h2>
+<h2 id="example-migration">Exemplo de migração de aplicativo</h2>
 
-Here is an example of migrating an Express 3 application to Express 4.
-The files of interest are `app.js` and `package.json`.
+Aqui está um eemplo de migração de um aplicativo Express 3 para
+o Express 4.
+Os arquivos de interesse são `app.js` e `package.json`.
 
 <h3 id="">
-Version 3 app
+Aplicativo da Versão 3
 </h3>
 
 <h4 id=""><code>app.js</code></h4>
 
-Consider an Express v.3 application with the following `app.js` file:
+Considere um aplicativo do Express v.3 com o seguinte arquivo `app.js`:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -353,14 +381,16 @@ app.get('/users', user.list);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-~~~
+</code>
+</pre>
 
 <h4 id=""><code>package.json</code></h4>
 
-The accompanying version 3 `package.json` file might look
-  something like this:
+O arquivo `package.json` que acompanha a
+versão 3 pode parecer com algo assim:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -373,42 +403,48 @@ The accompanying version 3 `package.json` file might look
     "jade": "*"
   }
 }
-~~~
+</code>
+</pre>
 
 <h3 id="">
-Process
+Processo
 </h3>
 
-Begin the migration process by installing the required middleware for the
-Express 4 app and updating Express and Jade to their respective latest
-version with the following command:
+Comece o processo de migração instalando os middlewares
+necessários para o aplicativo Express 4 e atualizando o Express e o
+Jade para as suas respectivas versões mais recentes com o seguinte
+comando:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
-~~~
+</code>
+</pre>
 
-Make the following changes to `app.js`:
+Faça as seguintes alterações no `app.js`:
 
-1. The built-in Express middleware `express.favicon`,
+1. As funções de middleware integradas do Express `express.favicon`,
     `express.logger`, `express.methodOverride`,
-    `express.session`, `express.bodyParser` and
-    `express.errorHandler` are no longer available on the
-    `express` object.  You must install their alternatives
-    manually and load them in the app.
+    `express.session`, `express.bodyParser` e
+    `express.errorHandler` não estão mais disponíveis no objeto `express`.  É
+preciso instalar manualmente as alternativas e carregá-las no aplicativo.
 
-2. You no longer need to load `app.router`.
-    It is not a valid Express 4 app object, so remove
-    `app.use(app.router);`
+2. Não é mais necessário carregar a função `app.router`.
+    Ela não é um objeto válido para aplicativos Express 4, portanto
+remova o código do `app.use(app.router);`.
 
-3. Make sure the middleware are loaded in the right order - load `errorHandler` after loading the app routes.
+3. Certifique-se deque as funções de middleware sejam carregadas na ordem correta - carregar a
+`errorHandler` após carregar as rotas de aplicativo.
 
-<h3 id="">Version 4 app</h3>
+<h3 id="">Aplicativo da Versão 4</h3>
 
 <h4 id=""><code>package.json</code></h4>
 
-Running the above `npm` command will update `package.json` as follows:
+A execução do comando `npm` acima irá
+atualizar o `package.json` como a seguir:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -428,14 +464,16 @@ Running the above `npm` command will update `package.json` as follows:
     "serve-favicon": "^2.0.1"
   }
 }
-~~~
+</code>
+</pre>
 
 <h4 id=""><code>app.js</code></h4>
 
-Then, remove invalid code, load the required middleware, and make other
-changes as necessary. Then `app.js` will look like this:
+Em seguida, remova o código inválido, carregue o middleware
+necessário e faça outras alterações conforme necessárias. O arquivo `app.js` irá parecer com isso:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
@@ -479,125 +517,164 @@ var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-~~~
+</code>
+</pre>
 
 <div class="doc-box doc-info" markdown="1">
-Unless you need to work directly with the `http` module (socket.io/SPDY/HTTPS), loading it is not required, and the app can be simple started this way:
-<pre><code class="language-js">app.listen(app.get('port'), function(){
+A não ser que precise trabalhar diretamente com
+o módulo `http` (socket.io/SPDY/HTTPS),
+carregá-lo não é necessário, e o aplicativo pode ser iniciado
+simplesmente desta forma:
+<pre>
+<code class="language-js" translate="no">app.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
-});</code></pre>
+});</code>
+</pre>
 </div>
 
-<h3 id="">Run the app</h3>
+<h3 id="">Execute o aplicativo</h3>
 
-With that, the migration process is complete, and the app is now an
-Express 4 app. To confirm, start the app with the following command:
+O processo de migração está concluído, e o aplicativo é agora
+um aplicativo Express 4. Para confirmar, inicie o aplicativo usando o
+seguinte comando:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ node .
-~~~
+</code>
+</pre>
 
-Load [http://localhost:3000](http://localhost:3000)
-  and see the home page being rendered by Express 4.
+Carregue [http://localhost:3000](http://localhost:3000)
+  e veja a página inicial sendo renderizada pelo Express 4.
 
-<h2 id="app-gen">Upgrading to the Express 4 app generator</h2>
+<h2 id="app-gen">Fazendo o upgrade para o gerador de aplicativos do
+Express 4</h2>
 
-The command-line tool to generate an Express app is still
-  `express`, but to upgrade to the new version, you must uninstall
-  the Express 3 app generator and then install the new
-  `express-generator`.
+A ferramenta de linha de comandos para gerar um aplicativo
+Express ainda é a `express`, mas para fazer o
+upgrade para a nova versão , é preciso desinstalar o gerador de
+aplicativos Express 3 e, em seguida, instalar o novo `express-generator`.
 
-<h3 id="">Installing </h3>
+<h3 id="">Instalação </h3>
 
-If you already have the Express 3 app generator installed on your system,
-you must uninstall it  as follows:
+Se já tiver o gerador de aplicativos do Express 3 instalado no
+seu sistema, é preciso desinstalá-lo:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm uninstall -g express
-~~~
-Depending on how your file and directory privileges are configured,
-you may need to run this command with `sudo`.
+</code>
+</pre>
+Dependendo de como os seus privilégios de arquivos e diretórios estão
+configurados, pode ser necessário executar este comando com `sudo`.
 
-Now install the new generator:
+Agora instale o novo gerador:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install -g express-generator
-~~~
+</code>
+</pre>
 
-Depending on how your file and directory privileges are configured,
-you may need to run this command with `sudo`.
+Dependendo de como os seus privilégios de arquivos e diretórios
+estão configurados, pode ser necessário executar este comando com
+`sudo`.
 
-Now the `express` command on your system is updated to the
-Express 4 generator.
+Agora o comando `express` no seu sistema está
+atualizado para o gerador do Express 4.
 
-<h3 id="">Changes to the app generator </h3>
+<h3 id="">Mudanças no gerador de aplicativos </h3>
 
-Command options and use largely remain the same, with the following exceptions:
+As opções e o uso do comando permanecem em grande parte as
+mesmas, com as seguintes exceções:
 
 {: .doclist }
-* Removed the `--sessions` option.
-* Removed the `--jshtml` option.
-* Added the `--hogan` option to support [Hogan.js](http://twitter.github.io/hogan.js/).
+* Foi removida a opção `--sessions`.
+* Foi removida a opção `--jshtml`.
+* Foi incluída a opção `--hogan` para
+suportar o [Hogan.js](http://twitter.github.io/hogan.js/).
 
-<h3 id="">Example</h3>
+<h3 id="">Exemplo</h3>
 
-Execute the following command to create an Express 4 app:
+Execute o seguinte comando para criar um aplicativo do Express 4:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ express app4
-~~~
+</code>
+</pre>
 
-If you look at the contents of `app4/app.js`, you will notice 
-that all the middleware (except `express.static`) required for 
-the app are loaded as independent modules and the `router` middleware
-is no longer explicitly loaded in the app.
+Se olhar o conteúdo do arquivo `app4/app.js`,
+você verá que todas as funções de middleware (exceto
+`express.static`) que são requeridas pelo aplicativo
+estão a carregadas como módulos independentes, e o middleware de
+`router` não está mais explicitamente carregado no
+aplicativo.
 
-You will also notice that the `app.js` file is now a Node module,
-compared to the standalone app generated by the old generator.
+Você irá também notar que o arquivo `app.js` é
+agora um módulo do Node.js, ao invés do aplicativo independente
+gerado pelo antigo gerador.
 
-After installing the dependencies, start the app using the following command:
+Após instalar as dependências, inicie o aplicativo usando o
+seguinte comando:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm start
-~~~
+</code>
+</pre>
 
-If you peek at the npm start script in `package.json` file,
-you will notice that the actual command that starts the app is
-`node ./bin/www`, which used to be `node app.js`
-in Express 3.
+Se olhar o script de inicialização npm no arquivo
+`package.json`, você irá notar que o comando real
+que inicia o aplicativo é o `node ./bin/www`, que
+antes era `node app.js` no Express 3.
 
-Since the `app.js` file generated by the Express 4 generator
-is now a Node module, it can no longer be started independently as an app
-(unless you modify the code). It has to be to be loaded in a Node file
-and started via the Node file. The Node file is `./bin/www`
-in this case.
+Como o arquivo `app.js` que foi gerado pelo
+gerador do Express 4 é agora um módulo do Node.js, ele não pode mais
+ser iniciado independentemente como um aplicativo
+(a não ser que modifique o código). O módulo deve ser carregado em um
+arquivo Node.js e iniciado através do arquivo Node.js. O arquivo
+Node.js é `./bin/www`
+neste caso.
 
-Neither the `bin` directory nor the extensionless `www`
-file is mandatory for creating an Express app or starting the app. They are
-just suggestions by the generator, so feel free to modify them to suit your
-needs.
+Nem o diretório `bin` e nem o arquivo sem
+extensão `www` são obrigatórios para a criação ou
+inicialização de um aplicativo Express. Eles são apenas sugestões
+feitas pelo gerador, portanto fique a vontade para modificá-los para
+adequá-los às suas necessidades.
 
-To get rid of the `www` directory and keep things the "Express 3 way",
-delete the line that says `module.exports = app;` at the end of
-`app.js`, and paste the following code in its place.
+Se livre do diretório `www` e mantenha as
+coisas "da maneira do Express 3", exclua a linha que diz
+`module.exports = app;` no final do arquivo
+`app.js`, em seguida cole o seguinte código em seu
+lugar:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
-~~~
+</code>
+</pre>
 
-Make sure to load the `debug` module at the top of `app.js` with the following code.
+Assegure-se de carregar o módulo `debug` em
+cima do arquivo `app.js` usando o seguinte código:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var debug = require('debug')('app4');
-~~~
+</code>
+</pre>
 
-Next, change `"start": "node ./bin/www"` in the `package.json` file to `"start": "node app.js"`.
+Em seguida, mude o `"start": "node ./bin/www"`
+no arquivo `package.json` para `"start": "node
+app.js"`.
 
-With that, you just moved the functionality of `./bin/www` back to
-`app.js`.  Not that it is recommended, but the exercise helps
-to understand how `./bin/www` works, and why `app.js`
-won't start on its own anymore.
+Você agora moveu a funcionalidade do
+`./bin/www` de volta para o
+`app.js`.  Esta mudança não é recomendada, mas o
+exercício ajuda você a entender como o arquivo
+`./bin/www` funciona, e porque o arquivo
+`app.js` não é mais iniciado por conta própria.

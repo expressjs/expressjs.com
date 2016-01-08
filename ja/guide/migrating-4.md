@@ -1,136 +1,129 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Migrating to Express 4
+title: Express 4 への移行
 menu: guide
 lang: ja
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Moving to Express 4
+# Express 4 への移行
 
-<h2 id="overview">Overview</h2>
+<h2 id="overview">概説</h2>
 
-Express 4 is a breaking change from Express 3. That means an existing Express 3 app will not work if you update the Express version in its dependencies.
+Express 4 では、Express 3 とは互換性のない変更が行われています。つまり、依存関係にある Express のバージョンを更新すると、既存の Express 3 アプリケーションは機能しません。
 
-This article covers:
-
-<ul class="doclist">
-  <li><a href="#changes">Changes in Express 4.</a></li>
-  <li><a href="#example-migration">An example</a> of migrating an Express 3 app to Express 4.</li>
-  <li><a href="#app-gen">Upgrading to the Express 4 app generator.</a></li>
-</ul>
-
-<h2 id="changes">Changes in Express 4</h2>
-
-The main changes in Express 4 are:
+この記事では以下の内容を扱います。
 
 <ul class="doclist">
-  <li><a href="#core-changes">Changes to Express core and middleware system: </a>The dependency on Connect and built-in middleware were removed, so you must add middleware yourself.
-  </li>
-  <li><a href="#routing">Changes to the routing system.</a></li>
-  <li><a href="#other-changes">Various other changes.</a></li>
+  <li><a href="#changes">Express 4 における変更点</a></li>
+  <li>Express 3 アプリケーションを Express 4 に移行する<a href="#example-migration">例</a></li>
+  <li><a href="#app-gen">Express 4 アプリケーション・ジェネレーターへのアップグレード</a></li>
 </ul>
 
-See also:
+<h2 id="changes">Express 4 における変更点</h2>
 
-* [New features in 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
-* [Migrating from 3.x to 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
+Express 4 では、いくつかの大きな変更が行われています。
+
+<ul class="doclist">
+  <li><a href="#core-changes">Express コアおよびミドルウェア・システムの変更。</a>Connect と標準装備ミドルウェアに対する依存関係が削除されたため、ユーザーが自分でミドルウェアを追加する必要があります。</li>
+  <li><a href="#routing">ルーティング・システムの変更。</a></li>
+  <li><a href="#other-changes">その他の各種変更。</a></li>
+</ul>
+
+以下も参照してください。
+
+* [4.x の新機能](https://github.com/strongloop/express/wiki/New-features-in-4.x)
+* [3.x から 4.x への移行](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
 
 <h3 id="core-changes">
-Changes to Express core and middleware system
+Express コアおよびミドルウェア・システムの変更
 </h3>
 
-Express 4 no longer depends on Connect, and removes all the built-in
-middleware from its core, except `express.static`. This means
-Express is now an independent routing and middleware web framework, and
-Express versioning and releases are not affected by middleware updates.
+Express 4 は、Connect に依存しなくなり、`express.static` 関数を除くすべての標準装備ミドルウェアをコアから削除しました。つまり、Express は独立したルーティングおよびミドルウェアの Web フレームワークになり、Express のバージョン管理とリリースはミドルウェア更新の影響を受けません。
 
-With the built-in middleware gone, you must explicitly add all the
-middleware required to run your app.  Simply follow these steps:
+標準装備ミドルウェアがないため、アプリケーションの実行に必要なすべてのミドルウェアを明示的に追加する必要があります。そのためには、単に以下のステップを実行してください。
 
-1. Install the module: `npm install --save <module-name>`
-2. In your app, require the module: `require('module-name')`
-3. Use the module according to its documentation: `app.use( ... )`
+1. モジュールをインストールします。`npm install --save <module-name>`
+2. アプリケーションでモジュールを要求します。`require('module-name')`
+3. モジュールの資料に従ってモジュールを使用します。`app.use( ... )`
 
-The following table lists Express 3 middleware and their counterparts in Express 4.
+次の表に、Express 3 のミドルウェアと、それぞれに対応する Express 4 のミドルウェアをリストします。
 
 <table class="doctable" border="1">
 <tr><th>Express 3</th><th>Express 4</th></tr>
-<tr><td>express.bodyParser</td>
+<tr><td><code>express.bodyParser</code></td>
 <td><a href="https://github.com/expressjs/body-parser">body-parser</a> +
 <a href="https://github.com/expressjs/multer">multer</a></td></tr>
-<tr><td>express.compress</td>
+<tr><td><code>express.compress</code></td>
 <td><a href="https://github.com/expressjs/compression">compression</a></td></tr>
-<tr><td>express.cookieSession</td>
+<tr><td><code>express.cookieSession</code></td>
 <td><a href="https://github.com/expressjs/cookie-session">cookie-session</a></td></tr>
-<tr><td>express.cookieParser</td>
+<tr><td><code>express.cookieParser</code></td>
 <td><a href="https://github.com/expressjs/cookie-parser">cookie-parser</a></td></tr>
-<tr><td>express.logger</td>
+<tr><td><code>express.logger</code></td>
 <td><a href="https://github.com/expressjs/morgan">morgan</a></td></tr>
-<tr><td>express.session</td>
+<tr><td><code>express.session</code></td>
 <td><a href="https://github.com/expressjs/session">express-session</a></td></tr>
-<tr><td>express.favicon</td>
+<tr><td><code>express.favicon</code></td>
 <td><a href="https://github.com/expressjs/serve-favicon">serve-favicon</a></td></tr>
-<tr><td>express.responseTime</td>
+<tr><td><code>express.responseTime</code></td>
 <td><a href="https://github.com/expressjs/response-time">response-time</a></td></tr>
-<tr><td>express.errorHandler</td>
+<tr><td><code>express.errorHandler</code></td>
 <td><a href="https://github.com/expressjs/errorhandler">errorhandler</a></td></tr>
-<tr><td>express.methodOverride</td>
+<tr><td><code>express.methodOverride</code></td>
 <td><a href="https://github.com/expressjs/method-override">method-override</a></td></tr>
-<tr><td>express.timeout</td>
+<tr><td><code>express.timeout</code></td>
 <td><a href="https://github.com/expressjs/timeout">connect-timeout</a></td></tr>
-<tr><td>express.vhost</td>
+<tr><td><code>express.vhost</code></td>
 <td><a href="https://github.com/expressjs/vhost">vhost</a></td></tr>
-<tr><td>express.csrf</td>
+<tr><td><code>express.csrf</code></td>
 <td><a href="https://github.com/expressjs/csurf">csurf</a></td></tr>
-<tr><td>express.directory</td>
+<tr><td><code>express.directory</code></td>
 <td><a href="https://github.com/expressjs/serve-index">serve-index</a></td></tr>
-<tr><td>express.static</td>
+<tr><td><code>express.static</code></td>
 <td><a href="https://github.com/expressjs/serve-static">serve-static</a></td></tr>
 </table>
 
-Here is the [complete list](https://github.com/senchalabs/connect#middleware) of Express 4 middleware.
+Express 4 のミドルウェアの完全なリストは、[ここ](https://github.com/senchalabs/connect#middleware)を参照してください。
 
-In most cases, you can simply replace the old version 3 middleware with
-its Express 4 counterpart. For details, see the module documentation in
-GitHub.
+ほとんどの場合、旧バージョン 3 のミドルウェアを単に Express 4 のミドルウェアに置き換えるだけですみます。詳細については、GitHub でモジュールの資料を参照してください。
 
-<h4 id="app-use">app.use accepts parameters</h4>
+<h4 id="app-use"><code>app.use</code> がパラメーターを受け入れます</h4>
 
-In version 4 you can now load middleware on a path with a variable
-parameter and read the parameter value from the route handler.
-For example:
+バージョン 4 では、変数パラメーターを使用して、ミドルウェア関数がロードされるパスを定義し、ルート・ハンドラーからパラメーターの値を読み取ることができます。
+次に例を示します。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.use('/book/:id', function(req, res, next) {
   console.log('ID:', req.params.id);
   next();
-})
-~~~
+});
+</code>
+</pre>
 <h3 id="routing">
-The routing system
+ルーティング・システム
 </h3>
 
-Apps now implicitly load routing middleware, so you no longer have to
-worry about the order in which middleware is loaded with respect to
-the `router` middleware.
+アプリケーションがルーティング・ミドルウェアを暗黙的にロードするようになったため、`router` ミドルウェアに関してミドルウェアがロードされる順序を考慮する必要がなくなりました。
 
-The way you define routes is unchanged, but the routing system has two
-new features to help organize your routes:
+ルートの定義方法は変わりませんが、ルーティング・システムには、ルートの編成に役立つ 2 つの新機能があります。
 
 {: .doclist }
-* A new method, `app.route()`, to create chainable route handlers for a route path.
-* A new class, `express.Router`, to create modular mountable route handlers.
+* 新しいメソッド `app.route()` は、ルート・パスのチェーン可能なルート・ハンドラーを作成します。
+* 新しいクラス `express.Router` は、モジュール式のマウント可能なルート・ハンドラーを作成します。
 
-<h4 id="app-route">app.route() method</h4>
+<h4 id="app-route"><code>app.route()</code> メソッド</h4>
 
-The new `app.route()` method enables you to create chainable route handlers
-for a route path. Since the path is specified in a single location, it
-helps to create modular routes and reduce redundancy and typos. For more
-information on routes, see [Router() documentation](/4x/api.html#router).
+新しい `app.route()` メソッドを使用すると、ルート・パスのチェーン可能なルート・ハンドラーを作成できます。パスは単一の場所で指定されるため、モジュール式のルートを作成すると、便利であるほか、冗長性とタイプミスを減らすことができます。ルートについて詳しくは、[`Router()` 資料](/{{ page.lang }}/4x/api.html#router)を参照してください。
 
-Here is an example of chained route handlers defined using `app.route()`.
+次に、`app.route()` 関数を使用して定義された、チェーニングされたルート・ハンドラーの例を示します。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -140,23 +133,20 @@ app.route('/book')
   })
   .put(function(req, res) {
     res.send('Update the book');
-  })
-~~~
+  });
+</code>
+</pre>
 
-<h4 id="express-router">express.Router class</h4>
+<h4 id="express-router"><code>express.Router</code> クラス</h4>
 
-The other feature to help organize routes is a new class,
-`express.Router`, that you can use to create modular mountable
-route handlers. A `Router` instance is a complete middleware and
-routing system; for this reason it is often referred to as a "mini-app".
+ルートの編成に役立つもう 1 つの機能は、新しいクラス `express.Router` です。これを使用すると、モジュール式のマウント可能なルート・ハンドラーを作成できます。`Router` インスタンスは、完全なミドルウェアおよびルーティング・システムです。そのため、よく「ミニアプリケーション」と呼ばれます。
 
-The following example creates a router as a module, loads a middleware in
-it, defines some routes, and mounts it on a path on the main app.
+次の例では、ルーターをモジュールとして作成し、その中にミドルウェアをロードして、いくつかのルートを定義し、それをメインアプリケーションのパスにマウントします。
 
-Create a router file named `birds.js` in the app directory,
-with the following content:
+例えば、アプリケーション・ディレクトリーに次の内容で `birds.js` というルーター・ファイルを作成します。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var router = express.Router();
 
@@ -164,54 +154,53 @@ var router = express.Router();
 router.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
   next();
-})
+});
 // define the home page route
 router.get('/', function(req, res) {
   res.send('Birds home page');
-})
+});
 // define the about route
 router.get('/about', function(req, res) {
   res.send('About birds');
-})
+});
 
 module.exports = router;
-~~~
+</code>
+</pre>
 
-Then, load the router module in the app:
+次に、ルーター・モジュールをアプリケーションにロードします。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-~~~
+</code>
+</pre>
 
-The app will now be able to handle requests to `/birds` and
-`/birds/about`, along with calling the `timeLog`
-middleware specific to the route.
+これで、アプリケーションは、`/birds` および `/birds/about` のパスに対する要求を処理できるようになり、ルートに固有の `timeLog` ミドルウェアを呼び出します。
 
 <h3 id="other-changes">
-Other changes
+その他の変更点
 </h3>
 
-The following table lists other small but important changes in Express 4.
+次の表に、Express 4 におけるその他の小規模ながらも重要な変更点をリストします。
 
 <table class="doctable" border="1">
 <tr>
-<th>Object</th>
-<th>Description</th>
+<th>オブジェクト</th>
+<th>説明</th>
 </tr>
 <tr>
-<td>Node</td>
-<td>Express 4 requires Node 0.10.x or later and has dropped support for
-Node 0.8.x.</td>
+<td>Node.js</td>
+<td>Express 4 には、Node.js 0.10.x 以降が必要です。Node.js 0.8.x に対するサポートは除去されました。</td>
 </tr>
 <tr>
 <td markdown="1">
 `http.createServer()`
 </td>
 <td markdown="1">
-The http module is no longer needed. The app is started using
-`app.listen()`.
+`http` モジュールは、このモジュールを直接処理する必要がある場合を除き、不要になりました (socket.io/SPDY/HTTPS)。アプリケーションは、`app.listen()` 関数を使用して開始できます。
 </td>
 </tr>
 <tr>
@@ -219,9 +208,7 @@ The http module is no longer needed. The app is started using
 `app.configure()`
 </td>
 <td markdown="1">
-`app.configure()` has been removed.  Use
-`process.env.NODE_ENV` or
-`app.get('env')` to detect the environment and configure the app accordingly.
+`app.configure()` 関数は削除されました。環境を検出して、アプリケーションを適宜に構成するには、`process.env.NODE_ENV` 関数または `app.get('env')` 関数を使用してください。
 </td>
 </tr>
 <tr>
@@ -229,7 +216,7 @@ The http module is no longer needed. The app is started using
 `json spaces`
 </td>
 <td markdown="1">
-The `json spaces` application property is disabled by default in Express 4.
+`json spaces` アプリケーション・プロパティーは、Express 4 ではデフォルトで無効になっています。
 </td>
 </tr>
 <tr>
@@ -237,8 +224,7 @@ The `json spaces` application property is disabled by default in Express 4.
 `req.accepted()`
 </td>
 <td markdown="1">
-Use `req.accepts()`, `req.acceptsEncodings()`,
-`req.acceptsCharsets()`, and `req.acceptsLanguages()`.
+`req.accepts()`、`req.acceptsEncodings()`、`req.acceptsCharsets()`、および `req.acceptsLanguages()` を使用してください。
 </td>
 </tr>
 <tr>
@@ -246,7 +232,7 @@ Use `req.accepts()`, `req.acceptsEncodings()`,
 `res.location()`
 </td>
 <td markdown="1">
-No longer resolves relative URLs.
+相対 URL を解決しなくなりました。
 </td>
 </tr>
 <tr>
@@ -254,7 +240,7 @@ No longer resolves relative URLs.
 `req.params`
 </td>
 <td markdown="1">
-Was an array, is now an object.
+以前は配列でしたが、現在ではオブジェクトになりました。
 </td>
 </tr>
 <tr>
@@ -262,7 +248,7 @@ Was an array, is now an object.
 `res.locals`
 </td>
 <td markdown="1">
-Was a function, is now an object.
+以前は関数でしたが、現在ではオブジェクトになりました。
 </td>
 </tr>
 <tr>
@@ -270,7 +256,7 @@ Was a function, is now an object.
 `res.headerSent`
 </td>
 <td markdown="1">
-Changed to `res.headersSent`.
+`res.headersSent` に変更されました。
 </td>
 </tr>
 <tr>
@@ -278,7 +264,7 @@ Changed to `res.headersSent`.
 `app.route`
 </td>
 <td markdown="1">
-Now available as `app.mountpath`.
+今後は `app.mountpath` として使用できます。
 </td>
 </tr>
 <tr>
@@ -286,7 +272,7 @@ Now available as `app.mountpath`.
 `res.on('header')`
 </td>
 <td markdown="1">
-Removed.
+削除されました。
 </td>
 </tr>
 <tr>
@@ -294,7 +280,7 @@ Removed.
 `res.charset`
 </td>
 <td markdown="1">
-Removed.
+削除されました。
 </td>
 </tr>
 <tr>
@@ -302,26 +288,26 @@ Removed.
 `res.setHeader('Set-Cookie', val)`
 </td>
 <td markdown="1">
-Functionality is now limited to setting the basic cookie value. Use
-`res.cookie()` for added functionality.
+機能が基本的な Cookie 値の設定に限定されるようになりました。機能を追加するには、`res.cookie()` を使用してください。
 </td>
 </tr>
 </table>
 
-<h2 id="example-migration">Example app migration</h2>
+<h2 id="example-migration">移行の例</h2>
 
-Here is an example of migrating an Express 3 application to Express 4.
-The files of interest are `app.js` and `package.json`.
+次に、Express 3 アプリケーションを Express 4 に移行する例を示します。
+使用しているファイルは、`app.js` および `package.json` です。
 
 <h3 id="">
-Version 3 app
+バージョン 3 アプリケーション
 </h3>
 
-<h4 id="">app.js</h4>
+<h4 id=""><code>app.js</code></h4>
 
-Consider an Express v.3 application with the following `app.js` file:
+次の `app.js` ファイルを使用する Express v.3 アプリケーションがあるとします。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -353,14 +339,15 @@ app.get('/users', user.list);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-~~~
+</code>
+</pre>
 
-<h4 id="">package.json</h4>
+<h4 id=""><code>package.json</code></h4>
 
-The accompanying version 3 `package.json` file might look
-  something like this:
+付随するバージョン 3 の `package.json` ファイルの内容は次のようになります。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -373,48 +360,37 @@ The accompanying version 3 `package.json` file might look
     "jade": "*"
   }
 }
-~~~
+</code>
+</pre>
 
 <h3 id="">
-Process
+プロセス
 </h3>
 
-Begin the migration process by installing the required middleware for the
-Express 4 app and updating Express and Jade to their respective latest
-version with the following command:
+移行プロセスを開始するには、次のコマンドを使用して、Express 4 アプリケーションに必要なミドルウェアをインストールし、Express と Jade をそれぞれの最新バージョンに更新します。
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
-~~~
+</code>
+</pre>
 
-Make the following changes to `app.js`:
+`app.js` に以下の変更を加えます。
 
-1. The `http` module is longer required, so remove
-    `var http = require('http');`
+1. 標準装備の Express ミドルウェア関数 `express.favicon`、`express.logger`、`express.methodOverride`、`express.session`、`express.bodyParser`、および `express.errorHandler` は `express` オブジェクトで使用できなくなりました。代わりの関数を手動でインストールして、アプリケーションにロードする必要があります。
 
-2. The built-in Express middleware `express.favicon`,
-    `express.logger`, `express.methodOverride`,
-    `express.session`, `express.bodyParser` and
-    `express.errorHandler` are no longer available on the
-    `express` object.  You must install their alternatives
-    manually and load them in the app.
+2. `app.router` 関数をロードする必要がなくなりました。この関数は有効な Express 4 アプリケーション・オブジェクトではないため、`app.use(app.router);` コードを削除してください。
 
-3. You no longer need to load `app.router`.
-    It is not a valid Express 4 app object, so remove
-    `app.use(app.router);`
+3. ミドルウェア関数が正しい順序でロードされていることを確認してください。つまり、アプリケーション・ルートをロードした後で `errorHandler` をロードしてください。
 
-4. Make sure the middleware are loaded in the right order - load `errorHandler` after loading the app routes.
+<h3 id="">バージョン 4 アプリケーション</h3>
 
-5. Start the app with `app.listen()` instead of
-    `http.createServer`.
+<h4 id=""><code>package.json</code></h4>
 
-<h3 id="">Version 4 app</h3>
+上記の `npm` コマンドを実行すると、`package.json` が次のように更新されます。
 
-<h4 id="">package.json</h4>
-
-Running the above `npm` command will update `package.json` as follows:
-
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -434,14 +410,16 @@ Running the above `npm` command will update `package.json` as follows:
     "serve-favicon": "^2.0.1"
   }
 }
-~~~
+</code>
+</pre>
 
-<h4 id="">app.js</h4>
+<h4 id=""><code>app.js</code></h4>
 
-Then, remove invalid code, load the required middleware, and make other
-changes as necessary. Then `app.js` will look like this:
+次に、無効なコードを削除して、必要なミドルウェアをロードし、必要に応じてその他の変更を行います。`app.js` ファイルの内容は次のようになります。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
+var http = require('http');
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -480,122 +458,117 @@ if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
 
-app.listen(app.get('port'), function(){
+var server = http.createServer(app);
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-~~~
+</code>
+</pre>
 
-<h3 id="">Run the app</h3>
+<div class="doc-box doc-info" markdown="1">
+`http` モジュール (socket.io/SPDY/HTTPS) を直接処理する必要がある場合を除き、このモジュールをロードする必要はありません。次のようにして、アプリケーションを簡単に開始できます。
+<pre>
+<code class="language-js" translate="no">app.listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});</code>
+</pre>
+</div>
 
-With that, the migration process is complete, and the app is now an
-Express 4 app. To confirm, start the app with the following command:
+<h3 id="">アプリケーションの実行</h3>
 
-~~~sh
+これで移行プロセスは完了して、アプリケーションは Express 4 アプリケーションになりました。確認するには、次のコマンドを使用してアプリケーションを開始します。
+
+<pre>
+<code class="language-sh" translate="no">
 $ node .
-~~~
+</code>
+</pre>
 
-Load [http://localhost:3000](http://localhost:3000)
-  and see the home page being rendered by Express 4.
+[http://localhost:3000](http://localhost:3000) をロードして、Express 4 によってレンダリングされるホーム・ページを確認します。
 
-<h2 id="app-gen">Upgrading to the Express 4 app generator</h2>
+<h2 id="app-gen">Express 4 アプリケーション・ジェネレーターへのアップグレード</h2>
 
-The command-line tool to generate an Express app is still
-  `express`, but to upgrade to the new version, you must uninstall
-  the Express 3 app generator and then install the new
-  `express-generator`.
+Express アプリケーションを生成するためのコマンド・ライン・ツールは引き続き `express` ですが、新規バージョンにアップグレードするには、Express 3 アプリケーション・ジェネレーターをアンインストールしてから、新しい `express-generator` をインストールする必要があります。
 
-<h3 id="">Installing </h3>
+<h3 id="">インストール</h3>
 
-If you already have the Express 3 app generator installed on your system,
-you must uninstall it  as follows:
+システムに Express 3 アプリケーション・ジェネレーターがインストールされている場合は、次のようにしてアンインストールする必要があります。
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm uninstall -g express
-~~~
-Depending on how your file and directory privileges are configured,
-you may need to run this command with `sudo`.
+</code>
+</pre>
+ファイルおよびディレクトリーの特権が構成されている方法によっては、このコマンドを `sudo` で実行することが必要になる場合があります。
+次に、新しいジェネレーターをインストールします。
 
-Now install the new generator:
-
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install -g express-generator
-~~~
+</code>
+</pre>
 
-Depending on how your file and directory privileges are configured,
-you may need to run this command with `sudo`.
+ファイルおよびディレクトリーの特権が構成されている方法によっては、このコマンドを `sudo` で実行することが必要になる場合があります。
 
-Now the `express` command on your system is updated to the
-Express 4 generator.
+これで、システム上の `express` コマンドは Express 4 ジェネレーターに更新されました。
 
-<h3 id="">Changes to the app generator </h3>
+<h3 id="">アプリケーション・ジェネレーターの変更</h3>
 
-Command options and use largely remain the same, with the following exceptions:
+コマンドのオプションと使用法の大部分は以前と同じですが、以下の例外があります。
 
 {: .doclist }
-* The `--sessions` option has been removed.
-* The `--jshtml` option has been removed.
-* The `--hogan` option has been added to support [Hogan.js](http://twitter.github.io/hogan.js/).
+* `--sessions` オプションを削除しました。
+* `--jshtml` オプションを削除しました。
+* [Hogan.js](http://twitter.github.io/hogan.js/) をサポートするために `--hogan` オプションを追加しました。
 
-<h3 id="">Example</h3>
+<h3 id="">例</h3>
 
-Execute the following command to create an Express 4 app:
+次のコマンドを実行して、Express 4 アプリケーションを作成します。
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ express app4
-~~~
+</code>
+</pre>
 
-If you look at the contents of the `app.js` file in the
-`app4` directory, you will notice that all the middleware
-(except `express.static`) required for the app are loaded as
-independent modules and the `router` middleware
-is no longer explicitly loaded in the app.
+`app4/app.js` ファイルの内容を見ると、アプリケーションに必要な (`express.static` を除く) すべてのミドルウェア関数が独立したモジュールとしてロードされており、`router` ミドルウェアがアプリケーションに明示的にロードされなくなったことが分かります。
 
-You will also notice that the `app.js` file is now a Node module,
-compared to the standalone app generated by the old generator.
+また、`app.js` ファイルが Node.js モジュールになったことも分かります。対照的に以前はジェネレーターによって生成されるスタンドアロン・モジュールでした。
 
-After installing the dependencies, start the app using the following command:
+依存関係をインストールした後、次のコマンドを使用してアプリケーションを開始します。
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm start
-~~~
+</code>
+</pre>
 
-If you peek at the npm start script in `package.json` file,
-you will notice that the actual command that starts the app is
-`node ./bin/www`, which used to be `node app.js`
-in Express 3.
+`package.json` ファイルで npm start スクリプトを見ると、アプリケーションを開始する実際のコマンドは `node ./bin/www` であることが分かります。これは、Express 3 では `node app.js` でした。
 
-Since the `app.js` file generated by the Express 4 generator
-is now a Node module, it can no longer be started independently as an app
-(unless you modify the code). It has to be to be loaded in a Node file
-and started via the Node file. The Node file is `./bin/www`
-in this case.
+Express 4 ジェネレーターによって生成される `app.js` ファイルが Node.js モジュールになったため、(コードを変更しない限り) アプリケーションとして単独では開始できなくなりました。モジュールを Node.js ファイルにロードして、Node.js ファイルから開始する必要があります。この場合、Node.js ファイルは `./bin/www` です。
 
-Neither the `bin` directory nor the extensionless `www`
-file is mandatory for creating an Express app or starting the app. They are
-just suggestions by the generator, so feel free to modify them to suit your
-needs.
+Express アプリケーションの作成またはアプリケーションの開始のために、`bin` ディレクトリーも、拡張子のない `www` ファイルも必須ではありません。これらは単にジェネレーターが推奨するものであるため、ニーズに合わせて自由に変更してください。
 
-To get rid of the `www` directory and keep things the "Express 3 way",
-delete the line that says `module.exports = app;` at the end of
-`app.js`, and paste the following code in its place.
+`www` ディレクトリーを削除して、処理を「Express 3 の方法」で実行するには、`app.js` ファイルの最後にある `module.exports = app;` という行を削除して、その場所に以下のコードを貼り付けます。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
-~~~
+</code>
+</pre>
 
-Make sure to load the `debug` module at the top of `app.js` with the following code.
+次のコードを使用して `debug` モジュールを `app.js` ファイルの先頭にロードしたことを確認します。
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 var debug = require('debug')('app4');
-~~~
+</code>
+</pre>
 
-Next, change `"start": "node ./bin/www"` in the `package.json` file to `"start": "node app.js"`.
+次に、`package.json` ファイル内の `"start": "node ./bin/www"` を `"start": "node app.js"` に変更します。
 
-With that, you just moved the functionality of `./bin/www` back to
-`app.js`.  Not that it is recommended, but the exercise helps
-to understand how `./bin/www` works and why `app.js`
-won't start on its own anymore.
+これで、`./bin/www` の機能を `app.js` に戻しました。この変更は推奨されるものではありませんが、この演習により、`./bin/www` ファイルの仕組みと、`app.js` ファイルが単独で開始されなくなった理由を理解できます。

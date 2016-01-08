@@ -1,54 +1,85 @@
 ---
+### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
+### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
+### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Usando template engines com o Express
+title: Usando mecanismos de modelo com o Express
 menu: guide
 lang: pt-br
+### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Usando template engines com o Express
+# Usando mecanismos de modelo com o Express
 
-Antes que o Express possa renderizar arquivos de template, as seguintes configurações precisão ser feitas na aplicação.
+Antes do Express poder renderizar arquivos de modelo, as
+seguintes configurações do aplicativo devem ser configuradas:
 
-* `views`, o diretório onde os arquivos de templates estão localizados. Exemplo: `app.set('views', './views')`
-* `view engine`, a template engine que será utilizada. Exemplo: `app.set('view engine', 'jade')`
+* `views`, é o diretório onde os arquivos de
+modelo estão localizados. Por exemplo: `app.set('views',
+'./views')`
+* `view engine`, o mecanismo de modelo a ser
+usado. Por Exemplo: `app.set('view engine', 'jade')`
 
-Então instalamos os pacotes npm da templete engine correspondente.
+Em seguida instale o pacote npm correspondente ao mecanismo de modelo:
 
-~~~sh
+<pre>
+<code class="language-sh" translate="no">
 $ npm install jade --save
-~~~
+</code>
+</pre>
 
 <div class="doc-box doc-notice" markdown="1">
-Templates engines compatíveis com o Express, como a Jade, exportam uma função assinada como __express(filePath, options, callback) que é chamada por `res.render()` para renderizar o código do template.
+Mecanismos de modelo compatíveis com o Express como o Jade exportam
+uma função chamada `__express(filePath, options,
+callback)`, que é chamada pela função
+`res.render()` para renderizar o código de modelo.
 
-Algumas templates engines não seguem esta convenção. A biblioteca [Consolidate.js](https://www.npmjs.org/package/consolidate) foi criada para mapear todas as template engines populares do nodeJS para esta convenção, permitindo que todas funcionem perfeitamente com o Express.
+Alguns mecanismos de modelo não seguem esta convenção. A
+biblioteca [Consolidate.js](https://www.npmjs.org/package/consolidate)
+segue esta convenção mapeando todos os mecanismos de modelo populares
+do Node.js, e portanto funciona de forma harmoniosa com o Express.
 </div>
 
-Uma vez que a view engine estiver definida, você não precisa especificá-la explicitamente nem carregar o módulo da engine no seu app. O Express fará isso internamente como mostrado a seguir.
+Após o mecanismo de visualização estar configurado, você não
+precisa especificar o mecanismo ou carregar o módulo do mecanismo de
+modelo no seu aplicativo; o Express carrega o módulo internamente,
+como mostrado abaixo (para o exemplo acima).
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.set('view engine', 'jade');
-~~~
+</code>
+</pre>
 
-	Crie um arquivo de template jade chamado "index.jade" no diretório views, com o seguinte conteúdo
+Crie um arquivo de modelo do Jade
+chamado `index.jade` no diretório
+`views`, com o seguinte conteúdo:
 
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 html
   head
     title!= title
   body
     h1!= message
-~~~
+</code>
+</pre>
 
-Crie então uma rota para renderizar o arquivo "index.jade". Se a propriedade `view engine` estiver definida, você pode omitir a extensão do arquivo view, caso contrário a extensão precisará ser especificada.
+Em seguida crie uma rota para renderizar o arquivo
+`index.jade`. Se a propriedade `view
+engine` não estiver configurada, é preciso especificar a
+extensão do arquivo `view`. Caso contrário, é
+possível omití-la.
 
-
-~~~js
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-~~~
+</code>
+</pre>
 
-Ao ser feita uma requisição GET para a home page  o arquivo "index.jade" será renderizado como HTML.
+Ao fazer uma solicitação à página inicial, o arquivo `index.jade` será renderizado como HTML.
 
-Para entender melhor como templates engines trabalham no Express, leia ["Desenvolvendo templates engines para o Express"](/advanced/developing-template-engines.html).
+Para aprender mais sobre como mecanismos de modelo funcionam no
+Express, consulte: ["Desenvolvendo mecanismos de para o Express"](/{{ page.lang }}/advanced/developing-template-engines.html).

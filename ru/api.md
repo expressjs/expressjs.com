@@ -1,6 +1,6 @@
 ---
 layout: 4x-api
-title: Express 4.x - API Reference
+title: Express 4.x - Справочник API
 lang: ru
 ---
 <div id="api-doc" markdown="1">
@@ -10,13 +10,13 @@ lang: ru
   <a id='express' class='h2'></a>
   {% include api/{{ page.lang }}/4x/express.md %}
 
-  <a id='application' class='h2'></a>
+  <a id='app' class='h2'></a>
   {% include api/{{ page.lang }}/4x/app.md %}
 
-  <a id='request' class='h2'></a>
+  <a id='req' class='h2'></a>
   {% include api/{{ page.lang }}/4x/req.md %}
 
-  <a id='response' class='h2'></a>
+  <a id='res' class='h2'></a>
   {% include api/{{ page.lang }}/4x/res.md %}
 
   <a id='router' class='h2'></a>

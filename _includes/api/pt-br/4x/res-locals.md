@@ -1,11 +1,9 @@
 <h3 id='res.locals'>res.locals</h3>
 
-An object that contains response local variables scoped to the request, and therefore available only to
-the view(s) rendered during that request / response cycle (if any). Otherwise,
-this property is identical to [app.locals](#app.locals).
+Um objeto que contém variáveis locais no escopo da requisição, e por isso, disponíveis somente durante a renderização das views durante o ciclo requisição/resposta (se houver). Fora isso, esta propriedade é idêntica a [app.locals](#app.locals).
 
-This property is useful for exposing request-level information such as the request path name,
-authenticated user, user settings, and so on.
+
+Esta propriedade é útil para mostrar informações a nível de requisição, como o path da requisição, usuário autenticado, configurações de usuário e assim por diante.
 
 ~~~js
 app.use(function(req, res, next){
