@@ -28,12 +28,9 @@ app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-var server = app.listen(3000, function () {
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('Example app listening at http://%s:%s', host, port);
-});
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+})
 </code></pre>
 
 The app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
