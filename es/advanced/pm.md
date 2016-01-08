@@ -11,7 +11,7 @@ lang: es
 
 # Gestores de procesos para las aplicaciones Express
 
-Cuando ejecuta aplicaciones Express para la producción, es muy útil utilizar un *gestor de procesos* para realizar las siguientes tareas:
+Cuando ejecuta aplicaciones Express en producción, es muy útil utilizar un *gestor de procesos* para realizar las siguientes tareas:
 
 - Reiniciar la aplicación automáticamente si se bloquea.
 - Obtener información útil sobre el rendimiento en tiempo de ejecución y el consumo de recursos.
@@ -29,7 +29,7 @@ Los gestores de procesos más conocidos para Express y otras aplicaciones Node.j
 
 El uso de estas tres herramientas puede ser muy útil, aunque StrongLoop Process Manager es la única que proporciona una solución completa de despliegue y tiempo de ejecución que gestiona el ciclo de vida completo de la aplicación Node.js, con herramientas para cada paso antes y después de la producción, en una interfaz unificada.
 
-A continuación, se describe brevemente cada una de etas herramientas.
+A continuación, se describe brevemente cada una de estas herramientas.
 Para ver una comparación detallada, consulte [http://strong-pm.io/compare/](http://strong-pm.io/compare/).
 
 ## <a id="sl">StrongLoop Process Manager</a>
