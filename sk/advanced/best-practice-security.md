@@ -3,41 +3,41 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
 ### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Security Best Practices for Express in Production
+title: Security - Osvedčené postupy pre Express v produkcii
 menu: advanced
-lang: en
+lang: sk
 redirect_from: "/advanced/best-practice-security.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Production Best Practices: Security
+# Security - Osvedčené postupy pre Express v produkcii
 
-## Overview
+## Prehľad
 
-The term _"production"_ refers to the stage in the software lifecycle when an application or API is generally available to its end-users or consumers. In contrast, in the _"development"_ stage, you're still actively writing and testing code, and the application is not open to external access. The corresponding system environments are known as _production_ and _development_ environments, respectively.
+Termín _"production"_ znamená stav životného cyklu softvéru, kedy je aplikácia alebo API všeobecne prístupné koncovým používateľom. Naopak, termín _"development"_ znamená, že sa kód aktívne vyvíja a testuje a aplikácia nieje verejne prístupná. K tomu korešpondujúce systémové prostredia sa nazývajú _production_ resp. _development_ prostredie.
 
-Development and production environments are usually set up differently and have vastly different requirements. What's fine in development may not be acceptable in production. For example, in a development environment you may want verbose logging of errors for debugging, while the same behavior can become a security concern in a production environment. And in development, you don't need to worry about scalability, reliability, and performance, while those concerns become critical in production.
+Development a production prostredia sú zvyčajne nakonfigurované odlišne a majú často diametrálne odlišné požiadavky. Čo je povolené v developmente nemusí byť akceptovateľné v produkcii. Napr., v development prostredí môžete chcieť logovať maximum error-ov pre debugovanie, ale takéto správananie systému môže byť považované za security problém v prípade production prostredia. V prípade development-u sa často nemusíte starať o veci ako sú škálovateľnosť, spoľahlivosť a výkonnosť, kým v produkcii sa tieto veci považujú za kritické.
 
-This article discusses some security best practices for Express applications deployed to production.
+Tento článok diskutuje niektoré osvedčené postupy z pohľadu security Express aplikácií v produkcii.
 
-**NOTE**: If you believe you have discovered a security vulnerability in Express, please see
+**POZN.**: Ak si myslíte, že ste objavili security vulnerabilitu Express-u, prosím pozrite si
 [Security Policies and Procedures](https://github.com/strongloop/express/blob/master/Security.md).
 
-## Don't use deprecated or vulnerable versions of Express
+## Nepoužívajte deprecated a vulnerable verzie Express-u
 
-Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them!  If you haven't moved to version 4, follow the [migration guide](/{{ page.lang }}/guide/migrating-4.html).
+Express 2.x a 3.x už nie sú viacej udržované. Security a performance problémy v týchto verziách už nik neopravuje. Preto ich nepoužívajte!  Ak ste vaše Express aplikácie ešte nezmigrovali na verziu 4, postupujte podľa príručky [Prechod na Express 4](/{{ page.lang }}/guide/migrating-4.html).
 
-Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/{{ page.lang }}/advanced/security-updates.html). If you are, update to one of the stable releases, preferably the latest.
+Taktiež sa uistite, že nepoužívate žiadnu z vulnerable Express verzií nachádzajúcu sa na stránke [Security - aktualizácie](/{{ page.lang }}/advanced/security-updates.html). Ak áno, updatnite vašu aplikáciu na niektorú zo stabilných verzií, ideálne na najnovšiu.
 
-## Use TLS
+## Používajte TLS
 
-If your app deals with or transmits sensitive data, use [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) to secure the connection and the data. This technology encrypts data before it is sent from the client to the server, thus preventing some common (and easy) hacks. Although Ajax and POST requests might not be visibly obvious and seem "hidden" in browsers, their network traffic is vulnerable to [packet sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) and [man-in-the-middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
+Ak vaša aplikácia pracuje alebo prenáša citlivé dáta, použivajte pre zabepečenie spojenia a dát [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS). Táto technológia šifruje dáta ich pred odoslaním z klienta na server, čím predchádza niektorým bežným (a jednoduchým) útokom. Hoci Ajax a POST requesty nemusia byť viditeľné a zdajú sa skruté v prehliadači, ich network traffic je vulnerable na [packet sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) a [man-in-the-middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-You may be familiar with Secure Socket Layer (SSL) encryption. [TLS is simply the next progression of SSL](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx). In other words, if you were using SSL before, consider upgrading to TLS.  In general, we recommend Nginx to handle TLS.  For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Možno ste sa už stretli s Secure Socket Layer (SSL) šifrovaním. [TLS je ďalšou modifikáciou SSL](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx). Inými slovami, ak ste predtým používali SSL, zvážte upgrade na TLS. Vo všeobecnosti odporúčame pre handlovanie TLS použivať Nginx. Ako dobrú referenciu ako nakonfigurovať TLS na Ngix-e (a ďalších serveroch) sa pozrite na [Recommended Server Configurations (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
-Also, a handy tool to get a free TLS certificate is [Let's Encrypt](https://letsencrypt.org/about/), a free, automated, and open certificate authority (CA) provided by the [Internet Security Research Group (ISRG)](https://letsencrypt.org/isrg/).
+Taktiež sa vám môže hodiť tento nástroj [Let's Encrypt](https://letsencrypt.org/about/), pomocou ktorého môžete získať TLS certifikát zdarma. Je voľnou, automatizovanou a otvorenou certifikačnou authoritov (CA) prevádzkovanou [Internet Security Research Group (ISRG)](https://letsencrypt.org/isrg/).
 
-## Use Helmet
+## Používajte Helmet
 
 [Helmet](https://www.npmjs.com/package/helmet) can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
 
