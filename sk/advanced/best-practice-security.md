@@ -14,7 +14,7 @@ redirect_from: "/advanced/best-practice-security.html"
 
 ## Prehľad
 
-Termín _"production"_ znamená stav životného cyklu softvéru, kedy je aplikácia alebo API všeobecne prístupné koncovým používateľom. Naopak, termín _"development"_ znamená, že sa kód aktívne vyvíja a testuje a aplikácia nieje verejne prístupná. K tomu korešpondujúce systémové prostredia sa nazývajú _production_ resp. _development_ prostredie.
+Termín _"production"_ znamená stav životného cyklu softvéru, kedy je aplikácia, alebo jej API, všeobecne prístupné koncovým používateľom. Naopak, termín _"development"_ znamená, že sa kód aktívne vyvíja a testuje a aplikácia nie je verejne prístupná. K tomu korešpondujúce systémové prostredia sa nazývajú _production_ resp. _development_ prostredie.
 
 Development a production prostredia sú zvyčajne nakonfigurované odlišne a majú často diametrálne odlišné požiadavky. Čo je povolené v developmente nemusí byť akceptovateľné v produkcii. Napr., v development prostredí môžete chcieť logovať maximum error-ov pre debugovanie, ale takéto správananie systému môže byť považované za security problém v prípade production prostredia. V prípade development-u sa často nemusíte starať o veci ako sú škálovateľnosť, spoľahlivosť a výkonnosť, kým v produkcii sa tieto veci považujú za kritické.
 
@@ -39,27 +39,27 @@ Taktiež sa vám môže hodiť tento nástroj [Let's Encrypt](https://letsencryp
 
 ## Používajte Helmet
 
-[Helmet](https://www.npmjs.com/package/helmet) can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
+[Helmet](https://www.npmjs.com/package/helmet) môže pomôť ochrániť vašu aplikáciu voči niektorým, všeobecne známym zraniteľnostiam pomocou správneho nastavenia HTTP hlavičiek.
 
-Helmet is actually just a collection of nine smaller middleware functions that set security-related HTTP headers:
+Helmet je v skutočnosti len kolekcia deviatich menších middleware funkcií nastavujúcich HTTP hlavičky týkajúce sa bezpečnosti:
 
-* [csp](https://github.com/helmetjs/csp) sets the `Content-Security-Policy` header to help prevent cross-site scripting attacks and other cross-site injections.
-* [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) removes the `X-Powered-By` header.
-* [hpkp](https://github.com/helmetjs/hpkp) Adds [Public Key Pinning](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning) headers to prevent man-in-the-middle attacks with forged certificates.
-* [hsts](https://github.com/helmetjs/hsts) sets `Strict-Transport-Security` header that enforces secure (HTTP over SSL/TLS) connections to the server.
-* [ieNoOpen](https://github.com/helmetjs/ienoopen) sets `X-Download-Options` for IE8+.
-* [noCache](https://github.com/helmetjs/nocache) sets `Cache-Control` and Pragma headers to disable client-side caching.
-* [noSniff](https://github.com/helmetjs/dont-sniff-mimetype) sets `X-Content-Type-Options` to prevent browsers from MIME-sniffing a response away from the declared content-type.
-* [frameguard](https://github.com/helmetjs/frameguard) sets the `X-Frame-Options` header to provide [clickjacking](https://www.owasp.org/index.php/Clickjacking) protection.
-* [xssFilter](https://github.com/helmetjs/x-xss-protection) sets `X-XSS-Protection` to enable the Cross-site scripting (XSS) filter in most recent web browsers.
+* [csp](https://github.com/helmetjs/csp) nastavuje `Content-Security-Policy` hlavičku, čím pomáha predchádzať cross-site scripting útokom a ďalším cross-site zraniteľnostiam.
+* [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) odstraňuje `X-Powered-By` hlavičku.
+* [hpkp](https://github.com/helmetjs/hpkp) nastavuje [Public Key Pinning](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning) hlavičky, čím predchádza útokom typu man-in-the-middle so sfalšovanými certifikátmi.
+* [hsts](https://github.com/helmetjs/hsts) nastavuje `Strict-Transport-Security` hlavičku čím si vynúti zabezpečené (HTTP over SSL/TLS) spojenie so serverom.
+* [ieNoOpen](https://github.com/helmetjs/ienoopen) nastavuje hlavičku `X-Download-Options` pre IE8+.
+* [noCache](https://github.com/helmetjs/nocache) nastavuje hlavičky `Cache-Control` a Pragma pre zakázanie client-side caching-u.
+* [noSniff](https://github.com/helmetjs/dont-sniff-mimetype) nastavuje `X-Content-Type-Options` hlavičku, čím zabraňuje prehliadačom MIME-sniffing odpovede od deklaroveného content-type-u.
+* [frameguard](https://github.com/helmetjs/frameguard) nastavuje `X-Frame-Options` hlavičku čim poskytuje ochranu pred [clickjacking](https://www.owasp.org/index.php/Clickjacking).
+* [xssFilter](https://github.com/helmetjs/x-xss-protection) nastavuje `X-XSS-Protection` hlavičku čim povolí Cross-site scripting (XSS) filter vo väčšine najnovších prehliadačov.
 
-Install Helmet like any other module:
+Helmet nainštalujete rovnako, ako akýkoľvek iný modul:
 
 <pre><code class="language-sh" translate="no">
 $ npm install --save helmet
 </code></pre>
 
-Then to use it in your code:
+Potom ho môžete použiť vo vašom kóde takto:
 
 <pre><code class="language-javascript" translate="no">
 ...
@@ -68,36 +68,36 @@ app.use(helmet());
 ...
 </code></pre>
 
-### At a minimum, disable X-Powered-By header
+### Určite aspoň zakážte X-Powered-By hlavičku
 
-If you don't want to use Helmet, then at least disable the `X-Powered-By` header.  Attackers can use this header (which is enabled by default) to detect apps running Express and then launch specifically-targeted attacks.
+Ak nechcete použiť Helmet, potom určite aspoň zakážte `X-Powered-By` hlavičku. Útočník dokáže zneužiť túto hlavičku (ktorá je defaultne povolená) k detekcii Express aplikácií a následne vykonať špecifické typy útokov.
 
-So, best practice is to to turn off the header with the `app.disable()` method:
+Preto sa odporúča, vypnúť túto hlavičku pomocou `app.disable()` metódy:
 
 <pre><code class="language-javascript" translate="no">
 app.disable('x-powered-by');
 </code></pre>
 
-If you use `helmet.js`, it takes care of this for you.
+V prípade, že použijete modul `helmet.js`, ten sa o to postará.
 
-## Use cookies securely
+## Používajte cookies bezpečným spôsobom
 
-To ensure cookies don't open your app to exploits, don't use the default session cookie name and set cookie security options appropriately.
+Aby ste sa uistili, že cookies nepredstavujú zraniteľnosť vašej aplikácie, nepoužívajte pre session cookie defaultný názov a nastavte správne security parametre.
 
-There are two main middleware cookie session modules:
+Pre prácu s cookie existujú dva hlavné middleware moduly:
 
-* [express-session](https://www.npmjs.com/package/express-session) that replaces `express.session` middleware built-in to Express 3.x.
-* [cookie-session](https://www.npmjs.com/package/cookie-session) that replaces `express.cookieSession` middleware built-in to Express 3.x.
+* [express-session](https://www.npmjs.com/package/express-session), ktorý nahrádza `express.session` middleware vstavaný v Express 3.x.
+* [cookie-session](https://www.npmjs.com/package/cookie-session), ktorý nahrádza `express.cookieSession` middleware vstavaný v Express 3.x.
 
-The main difference between these two modules is how they save cookie session data.  The [express-session](https://www.npmjs.com/package/express-session) middleware stores session data on the server; it only saves the session ID in the cookie itself, not session data.  By default, it uses in-memory storage and is not designed for a production environment.  In production, you'll need to set up a scalable session-store; see the list of [compatible session stores](https://github.com/expressjs/session#compatible-session-stores).
+Hlavným rozdielom medzi týmito modulmi je spôsob ukladania cookie session dát. [express-session](https://www.npmjs.com/package/express-session) middleware ukladá session dáta na servery; v samotnej cookie sa ukladá len session ID, nie session dáta.  Defaultne je použité ako úložisko pamäť, čo je nevhodné pre použitie v production prostredí. Tam budete musieť nastaviť škálovateľné session úložisko; pozrite sa na [compatible session stores](https://github.com/expressjs/session#compatible-session-stores).
 
-In contrast, [cookie-session](https://www.npmjs.com/package/cookie-session) middleware implements cookie-backed storage: it serializes the entire session to the cookie, rather than just a session key.  Only use it when session data is relatively small and easily encoded as primitive values (rather than objects).  Although browsers are supposed to support at least 4096 bytes per cookie, to ensure you don't exceed the limit, don't exceed a size of 4093 bytes per domain.  Also, be aware that the cookie data will be visible to the client, so if there is any reason to keep it secure or obscure, then express-session may be a better choice.
+[cookie-session](https://www.npmjs.com/package/cookie-session) middleware implementuje vlastné cookie-backed úložisko: serializuje celú session do cookie a nie len jej session ID. Použitie tejto implementácie sa odporúča v prípade, že sú session dáta relatívne malé a ľahko šifrovateĺné, ako jednoduché hodnoty (skôr než objekty). Hoci by prehliadače mali podporovať veľkosť cookie aspoň 4096 bytes, aby ste sa uistili, že nepresiahnete limit, nreprekračujte veľkosť 4093 bytes pre doménu. Taktiež si musíte uvedomiť, že cookie dáta budú na klientovi viditeľné, takže ak existuje dôvod, prečo by ste ich chceli uchovávať radšej zabezpečené a utajené, potom je lepšie použiť express-session modul.
 
-### Don't use the default session cookie name
+### Nepoužívajte defaultný session cookie názov
 
-Using the default session cookie name can open your app to attacks.  The security issue posed is similar to `X-Powered-By`: a potential attacker can use it to fingerprint the server and target attacks accordingly.
+Používaním defaultného názvu session cookie vystavujete aplikáciu možným útokom. Táto zraniteľnosť je podobná tej `X-Powered-By`: útočník dokáže zneužiť túto informáciu a vykonať cielené útoky.
 
-To avoid this problem, use generic cookie names; for example using [express-session](https://www.npmjs.com/package/express-session) middleware:
+Aby ste sa vyhli tomuto problému, použite generické názvy cookie; napr použitím [express-session](https://www.npmjs.com/package/express-session) middleware-u:
 
 <pre><code class="language-javascript" translate="no">
 var session = require('express-session');
@@ -109,17 +109,17 @@ app.use( session({
 );
 </code></pre>
 
-### Set cookie security options
+### Nastavte cookie security parametre
 
-Set the following cookie options to enhance security:
+Pre zlepšenie bezpečnosti nastavte nasledujúce cookie parametre:
 
-* `secure` - Ensures the browser only sends the cookie over HTTPS.
-* `httpOnly` - Ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against cross-site scripting attacks.
-* `domain` - indicates the domain of the cookie; use it to compare against the domain of the server in which the URL is being requested. If they match, then check the path attribute next.
-* `path` - indicates the path of the cookie; use it to compare against the request path. If this and domain match, then send the cookie in the request.
-* `expires` - use to set expiration date for persistent cookies.
+* `secure` - zabezpečí, že prehliadač zašle cookie iba cez HTTPS.
+* `httpOnly` - zabezpečí, že cookie bude poslaná iba cez HTTP(S), nie prostredníctvom JavaScript-u na klientovi, čím pomáha ochraňovať proti cross-site scripting útokom.
+* `domain` - udáva doménu cookie; použite to k porovnaniu domény servera, na ktorom bola URL zavolaná. Ak sú zhodné, potom porovnajte ešte path atribút.
+* `path` - udáva path pre cookie; použite to k porovnaniu path-u request-u. Ak sa spolu s domain parametrom zhodujú, tak cookie v requeste pošlite.
+* `expires` - sa používa na nastavenie dátumu expirácie trvalých cookies.
 
-Here is an example using [cookie-session](https://www.npmjs.com/package/cookie-session) middleware:
+Tu je príklad použitia [cookie-session](https://www.npmjs.com/package/cookie-session) middleware modulu:
 
 <pre><code class="language-javascript" translate="no">
 var session = require('cookie-session');
