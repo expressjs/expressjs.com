@@ -1,7 +1,7 @@
 <h2>Request</h2>
 
-The `req` object represents the HTTP request and has properties for the 
-request query string, parameters, body, HTTP headers, and so on.  In this documentation and by convention, 
+The `req` object represents the HTTP request and has properties for the
+request query string, parameters, body, HTTP headers, and so on.  In this documentation and by convention,
 the object is always referred to as `req` (and the HTTP response is `res`) but its actual name is determined
 by the parameters to the callback function in which you're working.
 
@@ -57,6 +57,10 @@ In Express 4, `req.files` is no longer available on the `req` object by default.
 
 <section markdown="1">
   {% include api/{{ page.lang }}/4x/req-ips.md %}
+</section>
+
+<section markdown="1">
+  {% include api/{{ page.lang }}/4x/req-method.md %}
 </section>
 
 <section markdown="1">

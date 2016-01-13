@@ -81,6 +81,8 @@
             </li>
             <li><a href="#req.ips">req.ips</a>
             </li>
+            <li><a href="#req.method">req.method</a>
+            </li>
             <li><a href="#req.originalUrl">req.originalUrl</a>
             </li>
             <li><a href="#req.params">req.params</a>
