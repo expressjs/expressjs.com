@@ -82,7 +82,7 @@ rota.
 
 ### roteador
 
-Consulte [roteador](/{{ page.lang }}/en/4x/api.html#router) na referência da API.
+Consulte [roteador](/{{ page.lang }}/4x/api.html#router) na referência da API.
 
 ### solicitação
 
