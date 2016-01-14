@@ -3,39 +3,39 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
 ### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Performance Best Practices Using Express in Production
+title: Performance - Osvedčené postupy pre Express v produkcii
 menu: advanced
 lang: sk
 redirect_from: "/advanced/best-practice-performance.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Production best practices: performance and reliability
+# Osvedčené postupy pre Express v produkcii: performance and spoĺahlivosť
 
-## Overview
+## Prehľad
 
-This article discusses performance and reliability best practices for Express applications deployed to production.
+Tento článok popisuje niektoré osvedčené postupy z pohľadu výkonnosti a spoľahlivosti Express aplikácií v produkcii.
 
-This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts:
+Táto časť jasne spadá do tzv. "devops" sveta, dotýkajúca sa tradičného vývoja i prevádzky. Podĺa toho sú tieto informácie rozdelené do dvoch častí:
 
-* [Things to do in your code](#code) (the dev part).
-* [Things to do in your environment / setup](#env) (the ops part).
+* [Veci, ktoré je potrebné vykonať vo vašom kóde](#code) (časť vývoja).
+* [Veci, ktoré je potrebné nastaviť na vašom environment-e](#env) (časť prevádzky).
 
 <a name="code"></a>
 
-## Things to do in your code
+## Veci, ktoré je potrebné vykonať vo vašom kóde
 
-Here are some things you can do in your code to improve your application's performance:
+Tu je niekoľko vecí, ktoré môžete vykonať vo vašom kóde k zlepšeniu výkonnosti vašej aplikácie:
 
-* Use gzip compression
-* Don't use synchronous functions
-* Use middleware to serve static files
-* Do logging correctly
-* Handle exceptions properly
+* Používajte gzip kompresiu
+* Nepoužívajte synchrónne funkcie
+* Pre servovanie statických súborov používajte middleware
+* Správne logujte
+* Správne odchytávajte a handlujte výnimky
 
-### Use gzip compression
+### Používajte gzip kompresiu
 
-Gzip compressing can greatly decrease the size of the response body and hence increase the speed of a web app. Use the [compression](https://www.npmjs.com/package/compression) middleware for gzip compression in your Express app. For example:
+Použitie gzip kompresie môže veľmi znížiť veľkosť response body a tým zvýšíť rýchlosť webovej aplikácie. Pre zapnutie gzip kompresie vo vašej Express aplikácii používajte [compression](https://www.npmjs.com/package/compression) middleware. Napr.:
 
 <pre><code class="language-javascript" translate="no">
 var compression = require('compression');
@@ -44,25 +44,25 @@ var app = express();
 app.use(compression());
 </code></pre>
 
-For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
+Pre stránky s vysokou návštevnosťou sa odporúča implementovať kompresiu na úrovni reverse proxy (pozrite [Použitie reverse proxy](#proxy)). V takom prípade nemusíte použiť compression middleware. Pre viac detailov ohľadom zapnutia gzip kompresie na Nginx serveri sa pozrite na [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) v Nginx dokumentácii.
 
-### Don't use synchronous functions
+### Nepoužívajte synchrónne funkcie
 
-Synchronous functions and methods tie up the executing process until they return. A single call to a synchronous function might return in a few microseconds or milliseconds, however in high-traffic websites, these calls add up and reduce the performance of the app. Avoid their use in production.
+Synchrónne funkcie a metódy "držia" proces vykonania až do kým nebudú spracované. Jedno volanie synchrónnej funkcie môže trvať pár mikrosekúnd, či milisekúnd, avšak v prípade stránok s vysokou návštevnosťou, takéto volania znižujú výkonnosť aplikácie. Preto sa ich používaniu v produkcii vyhnite.
 
-Although Node and many modules provide synchronous and asynchronous versions of their functions, always use the asynchronous version in production. The only time when a synchronous function can be justified is upon initial startup.
+Hoci samotný Node i mnohé moduly poskytujú synchrónne a asynchrónne verzie ich funkcií, v produkcii vždy používajte ich asynchrónne verzie. Jediná situácia, kedy by malo použitie synchrónnej funkcie opodstatnenie je pri prvotnom spustení aplikácie.
 
-If you are using Node.js 4.0+ or io.js 2.1.0+, you can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Of course, you wouldn't want to actually use this in production, but rather to ensure that your code is ready for production. See the [Weekly update for io.js 2.1.0](https://nodejs.org/en/blog/weekly-updates/weekly-update.2015-05-22/#2-1-0) for more information.
+Ak používate Node.js 4.0+ alebo io.js 2.1.0+, môžete použiť prepínač `--trace-sync-io`, ktorý vypíše warning a stack trace vždy, keď vaša aplikácia použije synchrónne API. V production to samozrejme nepoužívajte, ale už pri developmente sa uistite, že vaša aplikácia je pripravená pre production. Pre viac informácií sa pozrite na [Weekly update for io.js 2.1.0](https://nodejs.org/en/blog/weekly-updates/weekly-update.2015-05-22/#2-1-0).
 
-### Use middleware to serve static files
+### Pre servovanie statických súborov používajte middleware
 
-In development, you can use [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile) to serve static files. But don't do this in production, because this function has to read from the file system for every file request, so it will encounter significant latency and affect the overall performance of the app. Note that `res.sendFile()` is _not_ implemented with the [sendfile](http://linux.die.net/man/2/sendfile) system call, which would make it far more efficient.
+V development-e môžete pre servovanie statických súborov používať [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile). Avšak, v produkcii to nepoužívajte, pretože táto funkcia musí pri každom requeste čítať z file systému, čo má za následok značné oneskorenie a celkovo nepriaznivo ovlyvňuje výkonnosť aplikácie. `res.sendFile()` funkcia _nie_ je implementovaná pomocou [sendfile](http://linux.die.net/man/2/sendfile) systémového volania, ktoré by ju robilo oveľa efektívnejšou.
 
-Instead, use [serve-static](https://www.npmjs.com/package/serve-static) middleware (or something equivalent), that is optimized for serving files for Express apps.
+Namiesto toho používajte [serve-static](https://www.npmjs.com/package/serve-static) middleware (prípadne podobný ekvivalent), ktorý je optimalizovaný pre servovanie statických súborov v Express aplikáciách.
 
-An even better option is to use a reverse proxy to serve static files; see [Use a reverse proxy](#proxy) for more information.
+Ešte lepšou možnosťou pre servovanie statických súborov je použitie reverse proxy; pre viac informácií sa pozrite na [Použitie reverse proxy](#proxy).
 
-### Do logging correctly
+### Správne logujte
 
 In general, there are two reasons for logging from your app: For debugging and for logging app activity (essentially, everything else). Using `console.log()` or `console.err()` to print log messages to the terminal is common practice in development. But [these functions are synchronous](https://nodejs.org/api/console.html#console_console_1) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
 
