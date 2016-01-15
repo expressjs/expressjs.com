@@ -79,7 +79,7 @@ $ DEBUG=myapp:* npm start
 On Windows, use this command:
 
 <pre><code class="language-sh" translate="no">
-> set DEBUG=myapp:* & npm start
+> set DEBUG=myapp:*&&npm start
 </code></pre>
 
 Then load `http://localhost:3000/` in your browser to access the app.
