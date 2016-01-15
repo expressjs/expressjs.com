@@ -29,7 +29,7 @@ Aqui estão alguns dos vários livros sobre Express:
 
 ###Adicione seu livro aqui!
 
-[Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) e adicione um link para o seu livro, então envie um pull request (necessário login no GitHub).  Siga o formato da listagem acima.
+[Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) e adicione um link para o seu livro, então envie um pull request (necessário login no GitHub).  Siga o formato da listagem acima.
 
 ## Blogs
 
