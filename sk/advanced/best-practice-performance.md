@@ -10,7 +10,7 @@ redirect_from: "/advanced/best-practice-performance.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Osvedčené postupy pre Express v produkcii: performance and spoĺahlivosť
+# Osvedčené postupy pre Express v produkcii: výkonnosť and spoľahlivosť
 
 ## Prehľad
 
@@ -31,7 +31,7 @@ Tu je niekoľko vecí, ktoré môžete vykonať vo vašom kóde k zlepšeniu vý
 * Nepoužívajte synchrónne funkcie
 * Pre servovanie statických súborov používajte middleware
 * Správne logujte
-* Správne odchytávajte a handlujte výnimky
+* Správne odchytávajte a spracovávajte výnimky
 
 ### Používajte gzip kompresiu
 
@@ -50,13 +50,13 @@ Pre stránky s vysokou návštevnosťou sa odporúča implementovať kompresiu n
 
 Synchrónne funkcie a metódy "držia" proces vykonania až do kým nebudú spracované. Jedno volanie synchrónnej funkcie môže trvať pár mikrosekúnd, či milisekúnd, avšak v prípade stránok s vysokou návštevnosťou, takéto volania znižujú výkonnosť aplikácie. Preto sa ich používaniu v produkcii vyhnite.
 
-Hoci samotný Node i mnohé moduly poskytujú synchrónne a asynchrónne verzie ich funkcií, v produkcii vždy používajte ich asynchrónne verzie. Jediná situácia, kedy by malo použitie synchrónnej funkcie opodstatnenie je pri prvotnom spustení aplikácie.
+Hoci samotný Node i mnohé jeho moduly poskytujú synchrónne a asynchrónne verzie ich funkcií, v produkcii vždy používajte ich asynchrónne verzie. Jediná situácia, kedy by malo použitie synchrónnej funkcie opodstatnenie je pri prvotnom spustení aplikácie.
 
-Ak používate Node.js 4.0+ alebo io.js 2.1.0+, môžete použiť prepínač `--trace-sync-io`, ktorý vypíše warning a stack trace vždy, keď vaša aplikácia použije synchrónne API. V production to samozrejme nepoužívajte, ale už pri developmente sa uistite, že vaša aplikácia je pripravená pre production. Pre viac informácií sa pozrite na [Weekly update for io.js 2.1.0](https://nodejs.org/en/blog/weekly-updates/weekly-update.2015-05-22/#2-1-0).
+Ak používate Node.js 4.0+ alebo io.js 2.1.0+, môžete použiť prepínač `--trace-sync-io`, ktorý vypíše warning a stack trace vždy, keď vaša aplikácia použije synchrónne API. V produkcii to samozrejme nepoužívajte, ale už pri developmente sa uistite, že vaša aplikácia je pripravená pre produkciu. Pre viac informácií sa pozrite na [Weekly update for io.js 2.1.0](https://nodejs.org/en/blog/weekly-updates/weekly-update.2015-05-22/#2-1-0).
 
 ### Pre servovanie statických súborov používajte middleware
 
-V development-e môžete pre servovanie statických súborov používať [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile). Avšak, v produkcii to nepoužívajte, pretože táto funkcia musí pri každom requeste čítať z file systému, čo má za následok značné oneskorenie a celkovo nepriaznivo ovlyvňuje výkonnosť aplikácie. `res.sendFile()` funkcia _nie_ je implementovaná pomocou [sendfile](http://linux.die.net/man/2/sendfile) systémového volania, ktoré by ju robilo oveľa efektívnejšou.
+V developmente môžete pre servovanie statických súborov používať [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile). V produkcii to však nepoužívajte, pretože táto funkcia musí pri každom requeste čítať z file systému, čo má za následok značné oneskorenie a celkovo nepriaznivo ovlyvňuje výkonnosť aplikácie. `res.sendFile()` funkcia _nie_ je implementovaná pomocou [sendfile](http://linux.die.net/man/2/sendfile) systémového volania, ktoré by ju robilo oveľa efektívnejšou.
 
 Namiesto toho používajte [serve-static](https://www.npmjs.com/package/serve-static) middleware (prípadne podobný ekvivalent), ktorý je optimalizovaný pre servovanie statických súborov v Express aplikáciách.
 
@@ -64,35 +64,35 @@ Ešte lepšou možnosťou pre servovanie statických súborov je použitie rever
 
 ### Správne logujte
 
-In general, there are two reasons for logging from your app: For debugging and for logging app activity (essentially, everything else). Using `console.log()` or `console.err()` to print log messages to the terminal is common practice in development. But [these functions are synchronous](https://nodejs.org/api/console.html#console_console_1) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
+Vo všeobecnosti existujú dva dôvody k logovaniu vo vašej aplkácii a to debugovanie a logovanie aktivít vašej aplikácie. Použitie `console.log()` príp. `console.err()` k vypísaniu log správy je bežnou praxou počas developmentu. Avšak pozor, [tieto funkcie sú synchrónne](https://nodejs.org/api/console.html#console_console_1) v prípade, ak je výstupom terminál príp. súbor, takže nie sú vhodné pre produkčné prostredie, pokiaľ výstup nepresmerujete do iného programu.
 
-#### For debugging
+#### Logovanie z dôvodu debugovania
 
-If you're logging for purposes of debugging, then instead of using `console.log()`, use a special debugging module like [debug](https://www.npmjs.com/package/debug). This module enables you to use the DEBUG environment variable to control what debug messages are sent to `console.err()`, if any. To keep your app purely asynchronous, you'd still want to pipe `console.err()` to another program. But then, you're not really going to debug in production, are you?
+Ak používate logovanie kvôli debugovaniu, tak namiesto `console.log()` používajte špeciálny modul na debugovanie, ako napr. [debug](https://www.npmjs.com/package/debug). Tento modul vám umožňuje použivať environment premennú DEBUG, pomocou ktorej dokážete kontrolovať, ktoré debug výpisy budú vypísané pomocou `console.err()`, príp. žiadne. Ak chcete, aby vaša aplikácia bola čisto asynchrónna, budete stále potrebovať presmerovať výstup  `console.err()` do iného programu. Ale v skutočnosti asi nechcete debugovať v produkcii, však?
 
-#### For app activity
+#### Logovanie aktivít aplikácie
 
-If you're logging app activity (for example, tracking traffic or API calls), instead of using `console.log()`, use a logging library like [Winston](https://www.npmjs.com/package/winston) or [Bunyan](https://www.npmjs.com/package/bunyan). For a detailed comparison of these two libraries, see the StrongLoop blog post [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
+Ak používate logovanie na sledovanie aktivít aplikácie (napr. sledovanie traffic-u, príp. API volaní), tak  namiesto `console.log()` používajte logovacie knižnice, ako sú napr. [Winston](https://www.npmjs.com/package/winston) či [Bunyan](https://www.npmjs.com/package/bunyan). Ak vás zaujíma detailnejšie porovnanie týchto dvoch knižníc, prečítajte si tento blog post: [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
 
 <a name="exceptions"></a>
 
-### Handle exceptions properly
+### Správne odchytávajte a spracovávajte výnimky
 
-Node apps crash when they encounter an uncaught exception. Not handling exceptions and taking appropriate actions will make your Express app crash and go offline. If you follow the advice in [Ensure your app automatically restarts](#restart) below, then your app will recover from a crash. Fortunately, Express apps typically have a short startup time. Nevertheless, you want to avoid crashing in the first place, and to do that, you need to handle exceptions properly.
+V prípade neodchytenia výnimky Node.js aplikácie spadnú. Tzn, že v prípade nespracovania výnimky a nevykonania správnej akcie vaša Express aplikácia spadne. Ak budete pokračovať podľa rád v časti [Zabežpečte aby vaša aplikácia bola automaticku reštartovaná](#restart), tak sa vaša aplikácia z pádu zotaví. Express applikácie potrebujú naštastie len krátky čas k naštartovaniu. Avšak, bez ohľadu nato, by ste sa mali pádom aplikácie v prvom rade vyhnúť a k tomu potrebujete správne odchytávať výnimky.
 
-To ensure you handle all exceptions, use the following techniques:
+K uisteniu sa, že spracovávate všetky výnimky, používajte tieto techniky:
 
-* [Use try-catch](#try-catch)
-* [Use promises](#promises)
+* [Používajte try-catch](#try-catch)
+* [Používajte promises](#promises)
 
-Before diving into these topics, you should have a basic understanding of Node/Express error handling: using error-first callbacks, and propagating errors in middleware. Node uses an "error-first callback" convention for returning errors from asynchronous functions, where the first parameter to the callback function is the error object, followed by result data in succeeding parameters. To indicate no error, pass null as the first parameter. The callback function must correspondingly follow the error-first callback convention to meaningfully handle the error. And in Express, the best practice is to use the next() function to propagate errors through the middleware chain.
+Predtým, ako sa hlbšie pustíme do týchto tém, mali by ste mať základné znalosti Node/Express error handlingu, akými sú používanie error-first callback-ov a šírenie errorov middlewarmi. Node používa pre návrat errorov z asynchrónnych funkcií konvenciu "error-first callbackov", kde prvým argymentom callback funkcie je error objekt, nasledovaný ostatnými návratovými hodnotami úspešného spracovanie funkcie. Ak nenastal žiaden error, zabezpečte aby prvým parametrom bol null. Definícia callback funkcie musí korešpondovať s error-first callback konvenciou a musí zmysluplne spracovať error. V Express aplikáciách je pre šírenie erroru middlewarmi osvedčenou a odporúčanou technikou použitie next() funkcie.
 
-For more on the fundamentals of error handling, see:
+Pre viac informácií ohľadom základov error handlingu sa pozrite na:
 
 * [Error Handling in Node.js](https://www.joyent.com/developers/node/design/errors)
 * [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop blog)
 
-#### What not to do
+#### Čo nerobiť
 
 One thing you should _not_ do is to listen for the `uncaughtException` event, emitted when an exception bubbles all the way back to the event loop. Adding an event listener for `uncaughtException` will change the default behavior of the process that is encountering an exception; the process will continue to run despite the exception. This might sound like a good way of preventing your app from crashing, but continuing to run the app after an uncaught exception is a dangerous practice and is not recommended, because the state of the process becomes unreliable and unpredictable.
 
