@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
-})
+});
 </code></pre>
 
 The app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
