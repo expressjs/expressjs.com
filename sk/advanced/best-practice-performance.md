@@ -94,22 +94,22 @@ Pre viac informácií ohľadom základov error handlingu sa pozrite na:
 
 #### Čo nerobiť
 
-One thing you should _not_ do is to listen for the `uncaughtException` event, emitted when an exception bubbles all the way back to the event loop. Adding an event listener for `uncaughtException` will change the default behavior of the process that is encountering an exception; the process will continue to run despite the exception. This might sound like a good way of preventing your app from crashing, but continuing to run the app after an uncaught exception is a dangerous practice and is not recommended, because the state of the process becomes unreliable and unpredictable.
+Jedna z vecí, ktorú by ste robiť _nemali_ je počúvať na `uncaughtException` event, ktorý je emitovaný v okamihu kedy výnimka "bublá" celou cestu späť do event loop-u. Pridanie event listenera `uncaughtException` zmení defaultné chovanie procesu ktorý narazil na výnimku; proces bude pokračovať napriek výnimke. Toto sa môže zdať ako dobrým riešením, ako predísť pádu vašej aplikácie, avšak pokračovaním behu vašej aplikácie, v prípade neodchytenej výnimky, je nebezpečnou praktikou a nepodporúča sa, pretože sa tým stav procesu stáva nespoľahlivým a nepredpovedateľným.
 
-Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process.html#process_event_uncaughtexception) and there is a [proposal](https://github.com/nodejs/node-v0.x-archive/issues/2582) to remove it from the core. So listening for `uncaughtException` is just a bad idea. This is why we recommend things like multiple processes and supervisors: crashing and restarting is often the most reliable way to recover from an error.
+Navyše, použitie `uncaughtException` je oficiálne uznané ako [hrubé](https://nodejs.org/api/process.html#process_event_uncaughtexception) a existuje [návrh](https://github.com/nodejs/node-v0.x-archive/issues/2582) na jeho odstŕanenie z jadra. Takže počúvanie na  `uncaughtException` nie je dobrým nápadom. To je dôvod, prečo odporúčame veci ako viacero procesov a supervisorov: pád a reštartovanie je často najspolalivejším spôsobom zotavenia sa z erorru.
 
-We also don't recommend using [domains](https://nodejs.org/api/domain.html). It generally doesn't solve the problem and is a deprecated module.
+Taktiež neodporúčame používať [domain](https://nodejs.org/api/domain.html) modul. Všeobecne nerieši žiaden problém a je označený ako deprecated modul.
 
 <a name="try-catch"></a>
 
-#### Use try-catch
+#### Používajte try-catch
 
-Try-catch is a JavaScript language construct that you can use to catch exceptions in synchronous code. Use try-catch, for example, to handle JSON parsing errors as shown below.
+Try-catch je klasická konštrukcia v jazyku JavaScript, pomocou ktorej dokážete odchytiť výnimky v synchrónnom kóde. Použite try-catch, napr. na spracovanie chýb pri JSON parsingu, ako na ukážke nižšie.
 
-Use a tool such as [JSHint](http://jshint.com/) or [JSLint](http://www.jslint.com/) to help you find implicit exceptions like [reference errors on undefined variables](http://www.jshint.com/docs/options/#undef).
+Používajte nástroje [JSHint](http://jshint.com/) príp. [JSLint](http://www.jslint.com/), ktoré vám pomôžu nájsť implicitné výnimky, ako napr. [reference errors on undefined variables](http://www.jshint.com/docs/options/#undef).
 
-Here is an example of using try-catch to handle a potential process-crashing exception.
-This middleware function accepts a query field parameter named "params" that is a JSON object.
+Tu je príklad použitia try-catch k odchyteniu potenciálnej výnimky zapríčiňujúcej pád procesu.
+Táto middleware funkcia príjma query parameter nazvaný "params" ktorý je JSON objekt.
 
 <pre><code class="language-javascript" translate="no">
 app.get('/search', function (req, res) {
@@ -126,13 +126,13 @@ app.get('/search', function (req, res) {
 });
 </code></pre>
 
-However, try-catch works only for synchronous code. Because the Node platform is primarily asynchronous (particularly in a production environment), try-catch won't catch a lot of exceptions.
+Avšak, try-catch funguje len pre synchrónny kód. Vzhľadom nato, že Node platforma je primárne asynchrońna (obzvlášť v produkčnom prostredí), veľa výnimiek try-catch neodchytí.
 
 <a name="promises"></a>
 
-#### Use promises
+#### Používajte promises
 
-Promises will handle any exceptions (both explicit and implicit) in asynchronous code blocks that use `then()`. Just add `.catch(next)` to the end of promise chains. For example:
+Promises dokážu spracovať všetky typy výnimiek (explicitné aj implicitné) v asynchrónnych blokoch kódu používajuce `then()`, pridaním `.catch(next)` na koniec promise reťazca. Napr.:
 
 <pre><code class="language-javascript" translate="no">
 app.get('/', function (req, res, next) {
@@ -153,12 +153,12 @@ app.use(function (err, req, res, next) {
 })
 </code></pre>
 
-Now all errors asynchronous and synchronous get propagated to the error middleware.
+Takto sa všetky asynchrónne i synchrónne errory prešíria do error middleware-u.
 
-However, there are two caveats:
+Avšak, dve upozornenia:
 
-1.  All your asynchronous code must return promises (except emitters). If a particular library does not return promises, convert the base object by using a helper function like [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
-2.  Event emitters (like streams) can still cause uncaught exceptions. So make sure you are handling the error event properly; for example:
+1.  Všetky vaše asynchrónne kódy musia vracať promises (okrem emitorov). Ak niektorá z knižníc nevracia promises, konvertnite základný objekt použitím funkcie ako napr. [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
+2.  Event emitory (ako sú streams) môžu spôsobiť neodchytené výnimky. Preto sa uistite, že správne spracováte error eventy; napr.:
 
 <pre><code class="language-javascript" translate="no">
 app.get('/', wrap(async (req, res, next) => {
@@ -168,7 +168,7 @@ app.get('/', wrap(async (req, res, next) => {
 }))
 </code></pre>
 
-For more information about error-handling by using promises, see:
+Pre viac informácií ohľadom error handling-u použitím promises si prečítajte:
 
 * [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
 * [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
