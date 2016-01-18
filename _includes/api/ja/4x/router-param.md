@@ -29,7 +29,7 @@ A param callback will be called only once in a request-response cycle, even if t
 router.param('id', function (req, res, next, id) {
   console.log('CALLED ONLY ONCE');
   next();
-})
+});
 
 router.get('/user/:id', function (req, res, next) {
   console.log('although this matches');

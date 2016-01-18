@@ -61,7 +61,7 @@ IP アドレスまたはサブネットは、指定されると、アドレス�
 <code class="language-js" translate="no">app.set('trust proxy', function (ip) {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
   else return false;
-})</code>
+});</code>
 </pre>
 </td>
     </tr>
