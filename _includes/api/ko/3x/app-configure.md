@@ -9,17 +9,17 @@ required in order to use `app.set()` and other configuration methods.
 // all environments
 app.configure(function(){
   app.set('title', 'My Application');
-})
+});
 
 // development only
 app.configure('development', function(){
   app.set('db uri', 'localhost/dev');
-})
+});
 
 // production only
 app.configure('production', function(){
   app.set('db uri', 'n.n.n.n/prod');
-})
+});
 ~~~
 
 Is effectively sugar for:
