@@ -45,7 +45,7 @@ Then create a route to render the "index.jade" file. If the `view engine` proper
 <pre><code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
-})
+});
 </code></pre>
 
 On making a request to the home page, "index.jade" will be rendered as HTML.
