@@ -37,8 +37,8 @@ When an `Array` or `Object` is
 given Express will respond with the JSON representation:
 
 ~~~js
-res.send({ user: 'tobi' })
-res.send([1,2,3])
+res.send({ user: 'tobi' });
+res.send([1,2,3]);
 ~~~
 
 Finally when a `Number` is given without
