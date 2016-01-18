@@ -16,5 +16,5 @@ app.route('/events')
 })
 .post(function(req, res, next) {
   // maybe add a new event...
-})
+});
 ~~~

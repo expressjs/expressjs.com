@@ -6,7 +6,7 @@ The currently-matched route, a string.  For example:
 app.get('/user/:id?', function userIdHandler(req, res) {
   console.log(req.route);
   res.send('GET');
-})
+});
 ~~~
 
 Example output from the previous snippet:
