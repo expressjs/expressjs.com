@@ -10,7 +10,7 @@ res.set({
   'Content-Type': 'text/plain',
   'Content-Length': '123',
   'ETag': '12345'
-})
+});
 ~~~
 
 Aliased as `res.header(field [, value])`.
