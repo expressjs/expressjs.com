@@ -5,7 +5,7 @@ However, you can use it to convert other values to JSON, such as `null`, and `un
 (although these are technically not valid JSON).
 
 ~~~js
-res.json(null)
-res.json({ user: 'tobi' })
-res.status(500).json({ error: 'message' })
+res.json(null);
+res.json({ user: 'tobi' });
+res.status(500).json({ error: 'message' });
 ~~~
