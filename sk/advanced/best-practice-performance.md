@@ -78,7 +78,7 @@ Ak používate logovanie na sledovanie aktivít aplikácie (napr. sledovanie tra
 
 ### Správne odchytávajte a spracovávajte výnimky
 
-V prípade neodchytenia výnimky Node.js aplikácie spadnú. Tzn, že v prípade nespracovania výnimky a nevykonania správnej akcie vaša Express aplikácia spadne. Ak budete pokračovať podľa rád v časti [Zabežpečte aby vaša aplikácia bola automaticku reštartovaná](#restart), tak sa vaša aplikácia z pádu zotaví. Express applikácie potrebujú naštastie len krátky čas k naštartovaniu. Avšak, bez ohľadu nato, by ste sa mali pádom aplikácie v prvom rade vyhnúť a k tomu potrebujete správne odchytávať výnimky.
+V prípade neodchytenia výnimky Node.js aplikácie spadnú. Tzn, že v prípade nespracovania výnimky a nevykonania správnej akcie vaša Express aplikácia spadne. Ak budete pokračovať podľa rád v časti [Zabežpečte, aby sa vaša aplikácia automaticky reštartovala](#restart), tak sa vaša aplikácia z pádu zotaví. Express aplikácie potrebujú naštastie len krátky čas k naštartovaniu. Avšak, bez ohľadu nato, by ste sa mali pádom aplikácie v prvom rade vyhnúť a k tomu potrebujete správne odchytávať výnimky.
 
 K uisteniu sa, že spracovávate všetky výnimky, používajte tieto techniky:
 
@@ -158,7 +158,7 @@ Takto sa všetky asynchrónne i synchrónne errory prešíria do error middlewar
 Avšak, dve upozornenia:
 
 1.  Všetky vaše asynchrónne kódy musia vracať promises (okrem emitorov). Ak niektorá z knižníc nevracia promises, konvertnite základný objekt použitím funkcie ako napr. [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
-2.  Event emitory (ako sú streams) môžu spôsobiť neodchytené výnimky. Preto sa uistite, že správne spracováte error eventy; napr.:
+2.  Event emitory (ako sú streams) môžu spôsobiť neodchytené výnimky. Preto sa uistite, že správne spracovávate error eventy; napr.:
 
 <pre><code class="language-javascript" translate="no">
 app.get('/', wrap(async (req, res, next) => {
@@ -175,107 +175,107 @@ Pre viac informácií ohľadom error handling-u použitím promises si prečíta
 
 <a name="env"></a>
 
-## Things to do in your environment / setup
+## Veci, ktoré je potrebné nastaviť na vašom environment-e
 
-Here are some things you can do in your system environment to improve your app's performance:
+Tu je niekoľko vecí, ktoré môžete nastaviť na vašom environment-e pre zlepšenie výkonnosti vašej aplikácie:
 
-* Set NODE_ENV to "production"
-* Ensure your app automatically restarts
-* Run your app in a cluster
-* Cache request results
-* Use a load balancer
-* Use a reverse proxy
+* Nastavte NODE_ENV premennú na "production"
+* Zabezpečte automatický reštart vašej aplikácie
+* Zabezpečte, aby vaša aplikácia bežala v clusteri
+* Cachujte request resulty
+* Používajte load balancer
+* Používajte reverse proxy
 
-### Set NODE_ENV to "production"
+### Nastavte NODE_ENV premennú na "production"
 
-The NODE_ENV environment variable specifies the environment in which an application is running (usually, development or production). One of the simplest things you can do to improve performance is to set NODE_ENV to "production."
+NODE_ENV environment premenná špecifikuje, v ktorom environmente vaša aplikácia beží, zvyčajne (development alebo production). Jedna z najjednoduchších vecí, ktorú môžete vykonať k zlepšeniu výkonnosti vašej aplikácie je nastavenie premennej NODE_ENV na "production".
 
-Setting NODE_ENV to "production" makes Express:
+Nastavenie NODE_ENV na "production" zabezpečí, aby Express:
 
-* Cache view templates.
-* Cache CSS files generated from CSS extensions.
-* Generate less verbose error messages.
+* Cacheoval view templaty.
+* Cacheoval CSS súbory generované z CSS extenzií.
+* Generuje "menej ukecané" error správy.
 
-[Tests indicate](http://apmblog.dynatrace.com/2015/07/22/the-drastic-effects-of-omitting-node_env-in-your-express-js-applications/) that just doing this can improve app performance by a factor of three!
+[Testy ukazujú](http://apmblog.dynatrace.com/2015/07/22/the-drastic-effects-of-omitting-node_env-in-your-express-js-applications/), že tym dokážete zlepšiť výkonnosť aplikácie až trojnásobne!
 
-If you need to write environment-specific code, you can check the value of NODE_ENV with `process.env.NODE_ENV`. Be aware that checking the value of any environment variable incurs a performance penalty, and so should be done sparingly.
+Ak potrebujete písať kód, ktorý je environment-specific, môžete hodnotu NODE_ENV premennej zistiť pomocou `process.env.NODE_ENV`. Pamätajte však nato, že zisťovanie hodnoty akejkoĺvek environment premennej má čiastočný dopad na výkonnosť, preto by ste to mali robiť skôr sporadicky.
 
-In development, you typically set environment variables in your interactive shell, for example by using `export` or your `.bash_profile` file. But in general you shouldn't do that on a production server; instead, use your OS's init system (systemd or Upstart). The next section provides more details about using your init system in general, but setting NODE_ENV is so important for performance (and easy to do), that it's highlighted here.
+Počas vývoja nastavujete environment premenné zvyčajne pomocou shellu, napr. použitím `export` vo vašom `.bash_profile` súbore. Toto by ste však nemali robiť na produkčnom serveri; namiesto toho, použite init systém vášho operačného systému (systemd alebo Upstart). Nasledujúca sekcia poskytuje viac detailov ohľadom použitia init systému, pričom nastavenie NODE_ENV premennej je veľmi dôležité z pohľadu výkonnosti (a zároveň veľmi jednoduché), ako je načrtnuté tu:
 
-With Upstart, use the `env` keyword in your job file. For example:
+Pomocou Upstart, použite kľúčové slovo `env` vo vašom job súbore. Napr.:
 
 <pre><code class="language-sh" translate="no">
 # /etc/init/env.conf
  env NODE_ENV=production
 </code></pre>
 
-For more information, see the [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables).
+Pre viac informácií si prečítajte [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables).
 
-With systemd, use the `Environment` directive in your unit file. For example:
+Pomocou systemd, použite direktívu `Environment` vo vašom unit súbore. Napr.:
 
 <pre><code class="language-sh" translate="no">
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
 </code></pre>
 
-For more information, see [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
+Pre viac informácií si prečítajte [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
 
-If you are using StrongLoop Process Manager, you can also [set the environment variable when you install StrongLoop PM as a service](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-Setenvironmentvariables).
+Ak používate StrongLoop Process Manager, môžete [nastaviť environment premennú taktiež keď nainštalujete StrongLoop PM ako službu](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-Setenvironmentvariables).
 
-### Ensure your app automatically restarts
+### Zabežpečte, aby sa vaša aplikácia automaticky reštartovala
 
-In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server itself crashes. Although you hope that neither of those events occurs, realistically you must account for both eventualities by:
+V produkcii zvyčajne nechcete, aby vaša aplikácia bola offline, nikdy. To znamená, že musíte zabezpečiť, aby sa reštartovala v obidvoch prípadoch, či už je to pád aplikácie, alebo servera samotného. Hoci si určite želáte, aby sa ani jedna z týchto vecí nestala, musíte s tým počítať pomocou:
 
-* Using a process manager to restart the app (and Node) when it crashes.
-* Using the init system provided by your OS to restart the process manager when the OS crashes. It's also possible to use the init system without a process manager.
+* Použitím správcu procesov k reštartovaniu aplikácie (a Node procesu) v prípade pádu.
+* Použitím init systému poskytovaného vašim OS na reštartovanie správcu procesov v prípade pádu OS. Taktiež je možné použiť init systém bez správcu procesov.
 
-Node applications crash if they encounter an uncaught exception. The foremost thing you need to do is to ensure your app is well-tested and handles all exceptions (see [handle exceptions properly](#exceptions) for details). But as a fail-safe, put a mechanism in place to ensure that if and when your app crashes, it will automatically restart.
+Node aplikácie zhavarujú v prípade výskytu neodchytenej výnimky. Ako prvé, by ste sa mali uistiť, že vaša aplikácia je dostatočne otestovaná a spracováva všetky výnimky (pre viac detailov si pozrite časť [Správne odchytávajte a spracovávajte výnimky](#exceptions)). Ako záchranu vytvorte/nastavte mechanizmus automatického reštartu.
 
-#### Use a process manager
+#### Používajte správcu procesov
 
-In development, you started your app simply from the command line with `node server.js` or something similar. But doing this in production is a recipe for disaster. If the app crashes, it will be offline until you restart it. To ensure your app restarts if it crashes, use a process manager. A process manager is a "container" for applications that facilitates deployment, provides high availability, and enables you to manage the application at runtime.
+Počas vývoja štartujete vašu aplikáciu jednoducho z príkazového riadka pomocou `node server.js`,  príp. niečoho podobného. Tento spôsob je však v prípade produkcie cesta do pekla. Ak vaša aplikácia spadne, bude offline až dokým ju nereštartujete. Aby ste sa uistili, že sa vaša aplikácia v prípade pádu reštartuje, používajte správcu procesov. Správca procesov je "kontainer" pre aplikácie, ktorý vám pomáha pri deploymente, poskytuje vysokú dostupnosť a umožňuje správu aplikácie v runtime.
 
-In addition to restarting your app when it crashes, a process manager can enable you to:
+Správca procesov umožňuje okrem automatického reštartu vašej aplikácie taktiež:
 
-* Gain insights into runtime performance and resource consumption.
-* Modify settings dynamically to improve performance.
-* Control clustering (StrongLoop PM and pm2).
+* Získať pohľad na výkonnosť runtime a spotrebu resourcov.
+* Upravovať dynamicky nastavenia pre zlepšenie výkonnosti.
+* Kontrolu clusteringu (StrongLoop PM a pm2).
 
-The most popular process managers for Node are as follows:
+Spomedzi správcov procesov pre Node sú najpopulárnejši:
 
 * [StrongLoop Process Manager](http://strong-pm.io/)
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-For a feature-by-feature comparison of the three process managers, see [http://strong-pm.io/compare/](http://strong-pm.io/compare/). For a more detailed introduction to all three, see [Process managers for Express apps](/{{ page.lang }}/advanced/pm.html).
+Pre detailnejšie porovnanie vlastností si pozrite [http://strong-pm.io/compare/](http://strong-pm.io/compare/). Pre detailnejšie intro si pozrite [Process managers for Express apps](/{{ page.lang }}/advanced/pm.html).
 
-Using any of these process managers will suffice to keep your application up, even if it does crash from time to time.
+Použitím hociktorého z týchto správcov procesov zabezpečíte, aby vaša aplikácia zostala "hore" i v prípade občasného pádu.
 
-However, StrongLoop PM has lots of features that specifically target production deployment. You can use it and the related StrongLoop tools to:
+Avšak, StrongLoop PM má veľa ďalších features, ktoré sú špeciálne určené pre produkčné prostredie. Môžete ich použiť na:
 
-* Build and package your app locally, then deploy it securely to your production system.
-* Automatically restart your app if it crashes for any reason.
-* Manage your clusters remotely.
-* View CPU profiles and heap snapshots to optimize performance and diagnose memory leaks.
-* View performance metrics for your application.
-* Easily scale to multiple hosts with integrated control for Nginx load balancer.
+* Vytvorenie buildu vašej aplikácie lokálne a následný bezpečný deployment do produkcie.
+* Automatický reštart vašej aplikácie v prípade pádu.
+* Vzdialenú správu vášho clustera.
+* Zobrazenie CPU profilov a heap snapshotov k optimalizácii výkonnosti a diagnostike memory leakov.
+* Zabrazenie performance metrík vašej aplikácie.
+* Jednoduchú škálovateľnosť na viacero hostov s intergrovanou kontrolou pre Nginx load balancer.
 
-As explained below, when you install StrongLoop PM as an operating system service using your init system, it will automatically restart when the system restarts. Thus, it will keep your application processes and clusters alive forever.
+Ako je vysvetlené nižšie, pri inštalácii StrongLoop PM pomocou init systému, ako služby operačného systému, sa služba automaticky reštartuje po reštartovaní systému. Takto bude vaša aplikácia a cluster bežať navždy.
 
-#### Use an init system
+#### Používajte init systém
 
-The next layer of reliability is to ensure that your app restarts when the server restarts. Systems can still go down for a variety of reasons. To ensure that your app restarts if the server crashes, use the init system built into your OS. The two main init systems in use today are [systemd](https://wiki.debian.org/systemd) and [Upstart](http://upstart.ubuntu.com/).
+Ďalšiou vrstvou spoľahlivosti je zabezpečenie, aby sa vaša aplikácia reštartovala pri reštartovaní servera. Systémy môžu spadnúť z rôznych dôvodov. Aby bolo zaistené, aby sa vaša aplikácie reštartovala v prípade, ak dôjde k chybe servera, použite init systém zabudovaný do vášho operačného systému. Dva hlavné init systémy používané v súčasnosti sú [systemd](https://wiki.debian.org/systemd) a [Upstart](http://upstart.ubuntu.com/).
 
-There are two ways to use init systems with your Express app:
+Existujú dva spôsoby použitia init systémov s vašou Express aplikáciou: 
 
-* Run your app in a process manager, and install the process manager as a service with the init system. The process manager will restart your app when the app crashes, and the init system will restart the process manager when the OS restarts. This is the recommended approach.
-* Run your app (and Node) directly with the init system. This is somewhat simpler, but you don't get the additional advantages of using a process manager.
+* Spustite vašu aplikáciu v správcovi procesov a nainštalujte správcu procesov ako službu s init systémom. Správca procesov zabezpečí reštart aplikácie pri jej páde a init systém reštartuje správcu procesov v prípade reštartu OS. Jedná sa o odporúčaný postup. 
+* Spustite vašu aplikáciu (a Node) priamo s init systémom. Tento postup je trocha jednoduchší, ale prídete tým o ďalšie výhody plynúce z použitia správcu procesov.
 
 ##### Systemd
 
-Systemd is a Linux system and service manager. Most major Linux distributions have adopted systemd as their default init system.
+Systemd je správca služieb používaný v niektorými distribúciami Linuxu. Väčšina hlavných linuxových distribúcií prijala systemd ako svoj defaultný init systém.
 
-A systemd service configuration file is called a _unit file_, with a filename ending in .service. Here's an example unit file to manage a Node app directly (replace the bold text with values for your system and app):
+Konfiguračný súbor pre systemd sa nazýva _unit file_, ktorého názov má príponu .service. Tu je príklad súboru pre priamu správu Node aplikácie (nahradte tučný text s hodnotami vášho systéme a aplikácie):
 
 <pre><code class="language-sh" translate="no">
 [Unit]
@@ -306,33 +306,33 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 </code></pre>
-For more information on systemd, see the [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
+Pre viac informácií ohľadom systemd si prečítajte [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
 
-##### StrongLoop PM as a systemd service
+##### StrongLoop PM ako systemd služba
 
-You can easily install StrongLoop Process Manager as a systemd service. After you do, when the server restarts, it will automatically restart StrongLoop PM, which will then restart all the apps it is managing.
+StrongLoop PM možete jednoducho nainštalovať ako systemd službu. Potom ako tak vykonáte, v prípade že nastane reštart servra, systemd automaticky reštartuje i StrongLoop PM, ktorý následne reštartuje aj aplikácie ktoré spravuje.
 
-To install StrongLoop PM as a systemd service:
+Pre inštaláciu StrongLoop PM ako systemd služby spustite:
 
 <pre><code class="language-sh" translate="no">
 $ sudo sl-pm-install --systemd
 </code></pre>
 
-Then start the service with:
+Potom spustite službu pomocou:
 
 <pre><code class="language-sh" translate="no">
 $ sudo /usr/bin/systemctl start strong-pm
 </code></pre>
 
-For more information, see [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10).
+Pre viac informácií si prečítajte [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10).
 
 ##### Upstart
 
-Upstart is a system tool available on many Linux distributions for starting tasks and services during system startup, stopping them during shutdown, and supervising them. You can configure your Express app or process manager as a service and then Upstart will automatically restart it when it crashes.
+Upstart je systémový nástroj dostupný v mnohých linuxových distribúciách slúžiaci na  spúšťanie taskov a služieb počas štartu systému, ich zastavenie počas vypnutia a dohľadu nad nimi. Vašu Express aplikáciu alebo správcu procesov môžete nakonfigurovať ako službu a potom Upstart zabezpečí jej reštart v prípade pádu. 
 
-An Upstart service is defined in a job configuration file (also called a "job") with filename ending in `.conf`. The following example shows how to create a job called "myapp" for an app named "myapp" with the main file located at `/projects/myapp/index.js`.
+Upstart služba je definovaná v konfiguračnom súbore (tiež nazývaný "job") s názvom súboru končiacim `.conf`. Nasledujúci príklad ukazuje, ako vytvoriť job súbor s názvom "myapp" pre aplikáciu s názvom "myapp" s hlavným súbor umiestneným v `/projects/myapp/index.js`.
 
-Create a file named `myapp.conf` at `/etc/init/` with the following content (replace the bold text with values for your system and app):
+Vytvorte súbor s názvom `myapp.conf` umiestnený v `/etc/init /` s nasledujúcim obsahom (nahradte tučný text s hodnotami pre váš systém a aplikáciu):
 
 <pre><code class="language-sh" translate="no">
 # When to start the process
@@ -364,35 +364,35 @@ respawn
 respawn limit 10 10
 </code></pre>
 
-NOTE: This script requires Upstart 1.4 or newer, supported on Ubuntu 12.04-14.10.
+Pozn.: Tento skript vyžaduje Upstart 1.4 príp. novší, podporovaný na Ubuntu 12.04-14.10.
 
-Since the job is configured to run when the system starts, your app will be started along with the operating system, and automatically restarted if the app crashes or the system goes down.
+Potom ako je job nakonfigurovaný k spusteniu po štarte systému bude vaša aplikácia spustená spolu s operačným systémom a automaticky reštartovaná v prípade pádu aplikácie alebo reštartu samotného systému.
 
-Apart from automatically restarting the app, Upstart enables you to use these commands:
+Okrem automatického reštartovania aplikácie, Upstart umožňuje použíť tieto príkazy:
 
 * `start myapp` – Start the app
 * `restart myapp` – Restart the app
 * `stop myapp` – Stop the app.
 
-For more information on Upstart, see [Upstart Intro, Cookbook and Best Practises](http://upstart.ubuntu.com/cookbook).
+Ore viac informácií ohľadom Upstart si prečítajte [Upstart Intro, Cookbook and Best Practises](http://upstart.ubuntu.com/cookbook).
 
-##### StrongLoop PM as an Upstart service
+##### StrongLoop PM ako Upstart služba
 
-You can easily install StrongLoop Process Manager as an Upstart service. After you do, when the server restarts, it will automatically restart StrongLoop PM, which will then restart all the apps it is managing.
+StrongLoop PM možete jednoducho nainštalovať ako systemd službu. Potom ako tak vykonáte, v prípade že nastane reštart servra, Upstart automaticky reštartuje i StrongLoop PM, ktorý následne reštartuje aj aplikácie ktoré spravuje.
 
-To install StrongLoop PM as an Upstart 1.4 service:
+Pre inštaláciu StrongLoop PM ako Upstart 1.4 služby:
 
 <pre><code class="language-sh" translate="no">
 $ sudo sl-pm-install
 </code></pre>
 
-Then run the service with:
+Pre spustenie služby:
 
 <pre><code class="language-sh" translate="no">
 $ sudo /sbin/initctl start strong-pm
 </code></pre>
 
-NOTE: On systems that don't support Upstart 1.4, the commands are slightly different. See [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10) for more information.
+Pozn.: Pre systémy bez podpory Upstart 1.4 sú príkazy mierne odlišné. Pre viac informácií sa pozrite na [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10).
 
 ### Run your app in a cluster
 
