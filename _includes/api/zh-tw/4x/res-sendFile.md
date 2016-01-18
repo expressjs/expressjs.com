@@ -52,7 +52,7 @@ app.get('/file/:name', function (req, res, next) {
     }
   });
 
-})
+});
 ~~~
 
 `res.sendFile` provides fine-grained support for file serving as illustrated in the following example:
