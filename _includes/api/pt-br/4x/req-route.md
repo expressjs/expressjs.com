@@ -6,7 +6,7 @@ A string correspondente a rota atual: Por exemplo:
 app.get('/user/:id?', function userIdHandler(req, res) {
   console.log(req.route);
   res.send('GET');
-})
+});
 ~~~
 
 Saída de exemplo do fragmento anterior:

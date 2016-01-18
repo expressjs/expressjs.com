@@ -69,5 +69,5 @@ No exemplo a seguir, o `handler` é executado em requsições para "/secret" qua
 app.all('/secret', function (req, res, next) {
   console.log('Accessing the secret section ...')
   next() // repassa o controle para o próximo handler
-})
+});
 ~~~

@@ -38,7 +38,7 @@ como mostrado nos seguintes exemplos.
 router.param('id', function (req, res, next, id) {
   console.log('CALLED ONLY ONCE');
   next();
-})
+});
 
 app.get('/user/:id', function (req, res, next) {
   console.log('although this matches');
@@ -117,13 +117,13 @@ router.param('id', 1337);
 // roteando para desencadear a captura
 router.get('/user/:id', function (req, res) {
   res.send('OK');
-})
+});
 
 app.use(router);
 
 app.listen(3000, function () {
   console.log('Ready');
-})
+});
 ~~~
 
 Nesse exemplo, a assinatura `router.param(name, callback)` se mantém a mesma, mas ao invés de um middleware callback, uma função de verificação personalizada de dados foi definida para validar o tipo de dado do id do usuário.
@@ -138,7 +138,7 @@ router.param(function(param, validator) {
       res.sendStatus(403);
     }
   }
-})
+});
 
 router.param('id', function (candidate) {
   return !isNaN(parseFloat(candidate)) && isFinite(candidate);

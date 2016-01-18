@@ -11,7 +11,7 @@ res.set({
   'Content-Type': 'text/plain',
   'Content-Length': '123',
   'ETag': '12345'
-})
+});
 ~~~
 
 Alias como `res.header(field [, value])`.

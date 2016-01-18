@@ -19,5 +19,5 @@ app.use(multer()); // para realizar o parsing multipart/form-data
 app.post('/', function (req, res) {
   console.log(req.body);
   res.json(req.body);
-})
+});
 ~~~

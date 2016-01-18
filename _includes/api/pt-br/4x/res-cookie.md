@@ -31,7 +31,7 @@ A linha a seguir é equivalente ao segundo exemplo acima.
 
 
 ~~~js
-res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true })
+res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true });
 ~~~
 
 Você pode passar um objeto como parâmetro `value`, que será serializado como JSON e repassado pelo middleware `bodyParser()`.

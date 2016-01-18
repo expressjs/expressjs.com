@@ -32,7 +32,7 @@ Todos os parâmetros de callbacks serão chamados antes de qualquer `handler` de
 app.param('id', function (req, res, next, id) {
   console.log('CALLED ONLY ONCE');
   next();
-})
+});
 
 app.get('/user/:id', function (req, res, next) {
   console.log('although this matches');
@@ -57,7 +57,7 @@ and this matches too
 app.param(['id', 'page'], function (req, res, next, value) {
   console.log('CALLED ONLY ONCE with', value);
   next();
-})
+});
 
 app.get('/user/:id/:page', function (req, res, next) {
   console.log('although this matches');
@@ -116,11 +116,11 @@ app.param('id', 1337);
 // rota para acionar a captura
 app.get('/user/:id', function (req, res) {
   res.send('OK');
-})
+});
 
 app.listen(3000, function () {
   console.log('Ready');
-})
+});
 ~~~
 
 Nesse exemplo, a assinatura `app.param(name, callback)` continua a mesma, mas em vez de um callback middleware, foi definida uma função personalizada de verificação de tipo de dado para validar os dados de user id.
@@ -136,7 +136,7 @@ app.param(function(param, validator) {
       res.sendStatus(403);
     }
   }
-})
+});
 
 app.param('id', function (candidate) {
   return !isNaN(parseFloat(candidate)) && isFinite(candidate);
