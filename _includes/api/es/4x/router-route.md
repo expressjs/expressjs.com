@@ -39,7 +39,7 @@ router.route('/users/:user_id')
 })
 .delete(function(req, res, next) {
   next(new Error('not implemented'));
-})
+});
 ~~~
 
 This apporach re-uses the single '/users/:user_id' path and add handlers for

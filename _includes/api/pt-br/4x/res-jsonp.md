@@ -4,13 +4,13 @@ Envia uma resposta JSON com suporte a JSONP. Este método é idêntico a `res.js
 
 
 ~~~js
-res.jsonp(null)
+res.jsonp(null);
 // => null
 
-res.jsonp({ user: 'tobi' })
+res.jsonp({ user: 'tobi' });
 // => { "user": "tobi" }
 
-res.status(500).jsonp({ error: 'message' })
+res.status(500).jsonp({ error: 'message' });
 // => { "error": "message" }
 ~~~
 
@@ -21,12 +21,12 @@ A seguir alguns exemplos de respostas JSONP utilizando o mesmo código:
 
 ~~~js
 // ?callback=foo
-res.jsonp({ user: 'tobi' })
+res.jsonp({ user: 'tobi' });
 // => foo({ "user": "tobi" })
 
 app.set('jsonp callback name', 'cb');
 
 // ?cb=foo
-res.status(500).jsonp({ error: 'message' })
+res.status(500).jsonp({ error: 'message' });
 // => foo({ "error": "message" })
 ~~~

@@ -15,7 +15,7 @@ var admin = express(); // the sub app
 admin.get('/', function (req, res) {
   console.log(admin.mountpath); // /admin
   res.send('Admin Homepage');
-})
+});
 
 app.use('/admin', admin); // mount the sub app
 ~~~
@@ -30,7 +30,7 @@ var admin = express();
 admin.get('/', function (req, res) {
   console.log(admin.mountpath); // [ '/adm*n', '/manager' ]
   res.send('Admin Homepage');
-})
+});
 
 var secret = express();
 secret.get('/', function (req, res) {

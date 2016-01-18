@@ -201,7 +201,7 @@ A custom query string parsing function will receive the complete query string, a
   <pre><code class="language-js">app.set('trust proxy', function (ip) {
     if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
     else return false;
-  })</code></pre>
+  });</code></pre>
   </td>
       </tr>
     </tbody>
@@ -238,7 +238,7 @@ A custom query string parsing function will receive the complete query string, a
 
   <pre><code class="language-js">app.set('etag', function (body, encoding) {
   return generateHash(body, encoding); // consider the function is defined
-  })</code></pre>
+  });</code></pre>
 
   </td>
       </tr>

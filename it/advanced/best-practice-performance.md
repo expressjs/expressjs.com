@@ -124,7 +124,7 @@ app.get('/search', function (req, res) {
     } catch (e) {
       res.status(400).send('Invalid JSON string');
     }
-  })
+  });
 });
 </code>
 </pre>
@@ -149,12 +149,12 @@ app.get('/', function (req, res, next) {
     .then(function (csv) {
       // handle csv
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 app.use(function (err, req, res, next) {
   // handle error
-})
+});
 </code>
 </pre>
 

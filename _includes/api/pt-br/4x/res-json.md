@@ -4,7 +4,7 @@ Envia uma resposta em formato JSON. Este método é idêntico a `res.send()` com
 No entanto, você pode utilizá-lo para converter outros valores como `null` e `undefined` para JSON (uma vez que tecnicamente estes valores não são JSONs válidos).
 
 ~~~js
-res.json(null)
-res.json({ user: 'tobi' })
-res.status(500).json({ error: 'message' })
+res.json(null);
+res.json({ user: 'tobi' });
+res.status(500).json({ error: 'message' });
 ~~~

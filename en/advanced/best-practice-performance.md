@@ -122,7 +122,7 @@ app.get('/search', function (req, res) {
     } catch (e) {
       res.status(400).send('Invalid JSON string');
     }
-  })
+  });
 });
 </code></pre>
 
@@ -145,12 +145,12 @@ app.get('/', function (req, res, next) {
     .then(function (csv) {
       // handle csv
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 app.use(function (err, req, res, next) {
   // handle error
-})
+});
 </code></pre>
 
 Now all errors asynchronous and synchronous get propagated to the error middleware.
@@ -165,7 +165,7 @@ app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id)
   let stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
-}))
+}));
 </code></pre>
 
 For more information about error-handling by using promises, see:

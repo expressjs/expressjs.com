@@ -1,6 +1,6 @@
 <h3 id='app.param'>app.param([name], callback)</h3>
 
-Add callback triggers to route parameters, where `name` is the name of the parameter or an array of them, and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, the value of the parameter and the name of the parameter, in that order. 
+Add callback triggers to route parameters, where `name` is the name of the parameter or an array of them, and `function` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, the value of the parameter and the name of the parameter, in that order.
 
 If `name` is an array, the `callback` trigger is registered for each parameter declared in it, in the order in which they are declared. Furthermore, for each declared parameter except the last one, a call to `next` inside the callback will call the callback for the next declared parameter. For the last parameter, a call to `next` will call the next middleware in place for the route currently being processed, just like it would if `name` were just a string.
 
@@ -31,7 +31,7 @@ All param callbacks will be called before any handler of any route in which the 
 app.param('id', function (req, res, next, id) {
   console.log('CALLED ONLY ONCE');
   next();
-})
+});
 
 app.get('/user/:id', function (req, res, next) {
   console.log('although this matches');
@@ -56,7 +56,7 @@ and this matches too
 app.param(['id', 'page'], function (req, res, next, value) {
   console.log('CALLED ONLY ONCE with', value);
   next();
-})
+});
 
 app.get('/user/:id/:page', function (req, res, next) {
   console.log('although this matches');
@@ -112,11 +112,11 @@ app.param('id', 1337);
 // route to trigger the capture
 app.get('/user/:id', function (req, res) {
   res.send('OK');
-})
+});
 
 app.listen(3000, function () {
   console.log('Ready');
-})
+});
 ~~~
 
 In this example, the `app.param(name, callback)` signature remains the same, but instead of a middleware callback, a custom data type checking function has been defined to validate the data type of the user id.
@@ -131,7 +131,7 @@ app.param(function(param, validator) {
       res.sendStatus(403);
     }
   }
-})
+});
 
 app.param('id', function (candidate) {
   return !isNaN(parseFloat(candidate)) && isFinite(candidate);
@@ -141,16 +141,16 @@ app.param('id', function (candidate) {
 <div class="doc-box doc-info" markdown="1">
 The '`.`' character can't be used to capture a character in your capturing regexp. For example you can't use `'/user-.+/'` to capture `'users-gami'`, use `[\\s\\S]` or `[\\w\\W]` instead (as in `'/user-[\\s\\S]+/'`.
 
-Examples: 
+Examples:
 
 <pre><code class="language-js">//captures '1-a_6' but not '543-azser-sder'
-router.get('/[0-9]+-[[\\w]]*', function); 
+router.get('/[0-9]+-[[\\w]]*', function);
 
 //captures '1-a_6' and '543-az(ser"-sder' but not '5-a s'
-router.get('/[0-9]+-[[\\S]]*', function); 
+router.get('/[0-9]+-[[\\S]]*', function);
 
 //captures all (equivalent to '.*')
-router.get('[[\\s\\S]]*', function); 
+router.get('[[\\s\\S]]*', function);
 </code></pre>
 
 </div>

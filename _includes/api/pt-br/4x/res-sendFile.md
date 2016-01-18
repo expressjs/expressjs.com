@@ -48,7 +48,7 @@ app.get('/file/:name', function (req, res, next) {
     }
   });
 
-})
+});
 ~~~
 
 `res.sendFile` fornece suporte para baixa granulidade para os arquivos que serve, como ilustrado no exemplo a seguir:

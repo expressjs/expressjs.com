@@ -61,7 +61,7 @@ Custom trust implementation. Use this only if you know what you are doing.
 <pre><code class="language-js" translate="no">app.set('trust proxy', function (ip) {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
   else return false;
-})</code></pre>
+});</code></pre>
 </td>
     </tr>
   </tbody>

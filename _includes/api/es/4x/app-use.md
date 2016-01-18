@@ -17,7 +17,7 @@ Since `path` defaults to "/", middleware mounted without a path will be executed
 app.use(function (req, res, next) {
   console.log('Time: %d', Date.now());
   next();
-})
+});
 ~~~
 
 Middleware functions are executed sequentially, therefore the order of middleware inclusion is important.
@@ -26,12 +26,12 @@ Middleware functions are executed sequentially, therefore the order of middlewar
 // this middleware will not allow the request to go beyond it
 app.use(function(req, res, next) {
   res.send('Hello World');
-})
+});
 
 // requests will never reach this route
 app.get('/', function (req, res) {
   res.send('Welcome');
-})
+});
 ~~~
 
 `path` can be a string representing a path, a path pattern, a regular expression to match paths,
@@ -58,7 +58,7 @@ The middleware in the below are simple examples.
         <pre><code class="language-js">// will match paths starting with /abcd
 app.use('/abcd', function (req, res, next) {
   next();
-})</code></pre>
+});</code></pre>
       </td>
     </tr>
 
@@ -68,22 +68,22 @@ app.use('/abcd', function (req, res, next) {
         <pre><code class="language-js">// will match paths starting with /abcd and /abd
 app.use('/abc?d', function (req, res, next) {
   next();
-})
+});
 
 // will match paths starting with /abcd, /abbcd, /abbbbbcd and so on
 app.use('/ab+cd', function (req, res, next) {
   next();
-})
+});
 
 // will match paths starting with /abcd, /abxcd, /abFOOcd, /abbArcd and so on
 app.use('/ab\*cd', function (req, res, next) {
   next();
-})
+});
 
 // will match paths starting with /ad and /abcd
 app.use('/a(bc)?d', function (req, res, next) {
   next();
-})</code></pre>
+});</code></pre>
       </td>
     </tr>
 
@@ -93,7 +93,7 @@ app.use('/a(bc)?d', function (req, res, next) {
         <pre><code class="language-js">// will match paths starting with /abc and /xyz
 app.use(/\/abc|\/xyz/, function (req, res, next) {
   next();
-})</code></pre>
+});</code></pre>
       </td>
     </tr>
 
@@ -103,7 +103,7 @@ app.use(/\/abc|\/xyz/, function (req, res, next) {
         <pre><code class="language-js">// will match paths starting with /abcd, /xyza, /lmn, and /pqr
 app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
   next();
-})</code></pre>
+});</code></pre>
       </td>
     </tr>
 
@@ -132,14 +132,14 @@ as you would any other middleware function.
       <td>You can define and mount a middleware function locally.
 <pre><code class="language-js">app.use(function (req, res, next) {
   next();
-})
+});
 </code></pre>
 A router is valid middleware.
 
 <pre><code class="language-js">var router = express.Router();
 router.get('/', function (req, res, next) {
   next();
-})
+});
 app.use(router);
 </code></pre>
 
@@ -147,7 +147,7 @@ An Express app is valid middleware.
 <pre><code class="language-js">var subApp = express();
 subApp.get('/', function (req, res, next) {
   next();
-})
+});
 app.use(subApp);
 </code></pre>
       </td>
@@ -160,12 +160,12 @@ app.use(subApp);
 <pre><code class="language-js">var r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
-})
+});
 
 var r2 = express.Router();
 r2.get('/', function (req, res, next) {
   next();
-})
+});
 
 app.use(r1, r2);
 </code></pre>
@@ -180,12 +180,12 @@ app.use(r1, r2);
 <pre><code class="language-js">var r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
-})
+});
 
 var r2 = express.Router();
 r2.get('/', function (req, res, next) {
   next();
-})
+});
 
 app.use('/', [r1, r2]);
 </code></pre>

@@ -194,7 +194,7 @@ Se `name` for uma das configurações da aplicação (app), o comportamento do a
   <pre><code class="language-js">app.set('trust proxy', function (ip) {
     if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
     else return false;
-  })</code></pre>
+  });</code></pre>
   </td>
       </tr>
     </tbody>
@@ -231,7 +231,7 @@ Se `name` for uma das configurações da aplicação (app), o comportamento do a
 
   <pre><code class="language-js">app.set('etag', function (body, encoding) {
   return generateHash(body, encoding); // consider the function is defined
-  })</code></pre>
+  });</code></pre>
 
   </td>
       </tr>

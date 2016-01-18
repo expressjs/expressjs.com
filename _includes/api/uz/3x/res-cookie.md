@@ -13,7 +13,7 @@ relative to the current time in milliseconds. The following is equivalent to
 the previous example.
 
 ~~~js
-res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true })
+res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true });
 ~~~
 
 An object may be passed which is then serialized as JSON, which is

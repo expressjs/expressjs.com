@@ -38,7 +38,7 @@ that load resources, perform validations, etc.
 ~~~js
 app.get('/user/:id', user.load, function(){
   // ... 
-})
+});
 ~~~
 
 These callbacks may be passed within arrays as well, these arrays are
@@ -49,9 +49,9 @@ var middleware = [loadForum, loadThread];
 
 app.get('/forum/:fid/thread/:tid', middleware, function(){
   // ...
-})
+});
 
 app.post('/forum/:fid/thread/:tid', middleware, function(){
   // ...
-})
+});
 ~~~

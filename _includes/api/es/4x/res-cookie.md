@@ -30,7 +30,7 @@ The `maxAge` option is a convenience option for setting "expires" relative to th
 The following is equivalent to the second example above.
 
 ~~~js
-res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true })
+res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true });
 ~~~
 
 You can pass an object as the `value` parameter; it is then serialized as JSON and parsed by `bodyParser()` middleware.

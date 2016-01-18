@@ -29,7 +29,7 @@ A param callback will be called only once in a request-response cycle, even if t
 router.param('id', function (req, res, next, id) {
   console.log('CALLED ONLY ONCE');
   next();
-})
+});
 
 router.get('/user/:id', function (req, res, next) {
   console.log('although this matches');
@@ -77,13 +77,13 @@ router.param('id', 1337);
 // route to trigger the capture
 router.get('/user/:id', function (req, res) {
   res.send('OK');
-})
+});
 
 app.use(router);
 
 app.listen(3000, function () {
   console.log('Ready');
-})
+});
 ~~~
 
 In this example, the `router.param(name, callback)` signature remains the same, but instead of a middleware callback, a custom data type checking function has been defined to validate the data type of the user id.
@@ -98,7 +98,7 @@ router.param(function(param, validator) {
       res.sendStatus(403);
     }
   }
-})
+});
 
 router.param('id', function (candidate) {
   return !isNaN(parseFloat(candidate)) && isFinite(candidate);
