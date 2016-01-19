@@ -332,7 +332,7 @@ Upstart je systémový nástroj dostupný v mnohých linuxových distribúciách
 
 Upstart služba je definovaná v konfiguračnom súbore (tiež nazývaný "job") s názvom súboru končiacim `.conf`. Nasledujúci príklad ukazuje, ako vytvoriť job súbor s názvom "myapp" pre aplikáciu s názvom "myapp" s hlavným súbor umiestneným v `/projects/myapp/index.js`.
 
-Vytvorte súbor s názvom `myapp.conf` umiestnený v `/etc/init /` s nasledujúcim obsahom (nahradte tučný text s hodnotami pre váš systém a aplikáciu):
+Vytvorte súbor s názvom `myapp.conf` umiestnený v `/etc/init /` s nasledujúcim obsahom (nahraďte tučný text s hodnotami pre váš systém a aplikáciu):
 
 <pre><code class="language-sh" translate="no">
 # When to start the process
@@ -394,33 +394,33 @@ $ sudo /sbin/initctl start strong-pm
 
 Pozn.: Pre systémy bez podpory Upstart 1.4 sú príkazy mierne odlišné. Pre viac informácií sa pozrite na [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10).
 
-### Run your app in a cluster
+### Zabezpečte aby vaša aplikácia bežala v clusteri
 
-In a multi-core system, you can increase the performance of a Node app by many times by launching a cluster of processes. A cluster runs multiple instances of the app, ideally one instance on each CPU core, thereby distributing the load and tasks among the instances.
+V prípade multi-core systémov môžete zvýšiť výkonnosť Node aplikácie niekoľko násobne jej spustením clusterom procesov. V clusteri beží niekoľko inštancií aplikácie, ideálne jedna pre každé CPU jadro, čím sa rozloží záťaž a úlohy medzi jednotlívé inštancie.
 
-![Balancing between application instances using the cluster API](/images/clustering.png)
+![Balancovanie medzi inštanciami aplikácie použitím cluster API](/images/clustering.png)
 
-IMPORTANT: Since the app instances run as separate processes, they do not share the same memory space. That is, objects are local to each instance of the app. Therefore, you cannot maintain state in the application code. However, you can use an in-memory datastore like [Redis](http://redis.io/) to store session-related data and state. This caveat applies to essentially all forms of horizontal scaling, whether clustering with multiple processes or multiple physical servers.
+Dôležité: Od momentu kedy inštancia aplikácie beží ako samostatný proces, nezdieľajú spoločnu pamäť. Tzn. objekty sú lokálne pre každú inštanciu aplikácie. Preto nedokážete spravovať stav v kóde aplikácie. Namiesto toho môžete k ukladaniu dát týkajúcich sa session a stavu použiť tzv. in-memory datastore ako [Redis](http://redis.io/). Toto varovanie platí v podstate pre všetky formy horizontálneho škálovania, či už clustering s viacerými procesmi alebo viacero fyzických servrov.
 
-In clustered apps, worker processes can crash individually without affecting the rest of the processes. Apart from performance advantages, failure isolation is another reason to run a cluster of app processes. Whenever a worker process crashes, always make sure to log the event and spawn a new process using cluster.fork().
+V clusterovaných aplikáciách, worker procesy môžu spadnúť individuálne bez toho, aby ovplyvnili zvyšok procesov. Okrem výhody z pohľadu výkonnosti, izolovanie chybovosti je ďalším dôvodom pre beh clustra procesov aplikácie. V prípade, že worker proces spadne, zabezpečte že vždy sa zalogujte event a vytvorí nový process (spawn) pomocou cluster.fork().
 
-#### Using Node's cluster module
+#### Použite Node cluster modulu
 
-Clustering is made possible with Node's [cluster module](https://nodejs.org/dist/latest-v4.x/docs/api/cluster.html). This enables a master process to spawn worker processes and distribute incoming connections among the workers. However, rather than using this module directly, it's far better to use one of the many tools out there that does it for you automatically; for example [node-pm](https://www.npmjs.com/package/node-pm) or [cluster-service](https://www.npmjs.com/package/cluster-service).
+Clustering je možný pomocou Node [cluster modulu](https://nodejs.org/dist/latest-v4.x/docs/api/cluster.html). Ten dovoľuje master procesu vyrobiť (spawn) worker procesy a rozdistribuovať prichádzajúce spojenia medzi workerov. Avšak, However, lepšie než priame použitie tohto modulu je použiť jeden z mnohých existujúcich toolov, ktoré to robia automaticky, napr. [node-pm](https://www.npmjs.com/package/node-pm) alebo [cluster-service](https://www.npmjs.com/package/cluster-service).
 
-#### Using StrongLoop PM
+#### Použitie StrongLoop PM
 
-If you deploy your application to StrongLoop Process Manager (PM), then you can take advantage of clustering _without_ modifying your application code.
+V prípade, že deploynete vašu aplikáciu do StrongLoop Process Manager (PM), získate tým výhody clusteringu _bez_ modifikácie kódu vašej aplikácie.
 
-When StrongLoop Process Manager (PM) runs an application, it automatically runs it in a cluster with a number of workers equal to the number of CPU cores on the system. You can manually change the number of worker processes in the cluster using the slc command line tool without stopping the app.
+Keď StrongLoop Process Manager (PM) spúšta aplikáciu, aplikácia je spustená automaticky v clusteri s takým množstvom workerov, aý je počet jadier CPU systéme. Počet worker procesov v clustri môžete manuálne zmeniť  použitím slc nástroja bez nutnosti stopnutia aplikácie.
 
-For example, assuming you've deployed your app to prod.foo.com and StrongLoop PM is listening on port 8701 (the default), then to set the cluster size to eight using slc:
+Napr., predpokladajúc, že ste deployli vašu aplikáciu na prod.foo.com a StrongLoop PM počúva na porte 8701 (defaultný), tak nastavenie veľkosti clustera na osem vykonáte pomocou slc takto:
 
 <pre><code class="language-sh" translate="no">
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 </code></pre>
 
-For more information on clustering with StrongLoop PM, see [Clustering](https://docs.strongloop.com/display/SLC/Clustering) in StrongLoop documentation.
+Pre viac informácií ohľadom clusteringu pomocou StrongLoop PM sa pozrite na časť [Clustering](https://docs.strongloop.com/display/SLC/Clustering) v StrongLoop dokumentácii.
 
 ### Cache request results
 
