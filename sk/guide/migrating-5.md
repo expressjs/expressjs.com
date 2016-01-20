@@ -70,7 +70,7 @@ Ak používate niektorú z nasledujúcich metód, alebo properties vo vašej apl
 
 Express 5 už viac nepodporuje `app.del()` funkciu. V prípade použitia tejto metódy nastane error. Namiesto nej použite pre zaregistrovanie HTTP DELETE route-ov funkciu `app.delete()`.
 
-Pôvodne bola funkcia `del` používaná namiesto `delete`, pretože `delete` je v JavaScript-e rezervované kľúčové slovo. Avšak od ECMAScript 6, `delete` a ďalšie rezervované klúčové slová môžu byť bezpečne použité ako názov property. Diskusiu, ktorá viedla k odstráneniu `app.del` funkcie si môžete prečítať tu.
+Pôvodne bola funkcia `del` používaná namiesto `delete`, pretože `delete` je v JavaScript-e rezervované kľúčové slovo. Avšak od ECMAScript 6, `delete` a ďalšie rezervované klúčové slová môžu byť bezpečne použité ako názov property.
 
 <h4 id="app.param">app.param(fn)</h4>
 
