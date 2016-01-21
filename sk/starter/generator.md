@@ -90,7 +90,7 @@ Na Windows, príkazom:
 
 <pre>
 <code class="language-sh" translate="no">
-> set DEBUG=myapp:* & npm start
+> set DEBUG=myapp:* && npm start
 </code>
 </pre>
 
