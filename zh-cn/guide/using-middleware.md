@@ -228,7 +228,7 @@ Express 中唯一内置的中间件函数是 `express.static`。此函数基于 
 | `redirect`    | 当路径名是目录时重定向到结尾的“/”。 | 布尔 | `true` |
 | `setHeaders`  | 用于设置随文件一起提供的 HTTP 头的函数。 | 函数 |  |
 
-以下示例将使用了 `express.static` 中间件，并且提供了一个用于详细说明上述选项的对象'options'：
+以下示例将使用了 `express.static` 中间件，并且提供了一个详细的'options'对象（作为示例）：
 
 <pre>
 <code class="language-javascript" translate="no">
