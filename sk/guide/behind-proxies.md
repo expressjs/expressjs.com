@@ -41,10 +41,10 @@ IP adresa, subnet, alebo pole IP adries a subnet-ov (podsietí), ktorým má apl
 IP adresy môžete nastaviť ktorýmkoľvek z nasledujúcich spôsobov:
 
 <pre>
-<code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
-app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
-app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
+<code class="language-js" translate="no">app.set('trust proxy', 'loopback'); // specify a single subnet
+app.set('trust proxy', 'loopback, 123.123.123.123'); // specify a subnet and an address
+app.set('trust proxy', 'loopback, linklocal, uniquelocal'); // specify multiple subnets as CSV
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // specify multiple subnets as an array</code>
 </pre>
 
 Pri zadaní IP adresy alebo subnet-ov, sú tieto vylúčené z procesu vyhodnocovania a nedôveryhodná IP adresa najbližsie k aplikačnému serveru je vyhodnotená ako IP adresa klienta.
@@ -64,7 +64,7 @@ Vlastná implementácia dôveryhodnosti. Použite to iba v prípade, ak viete č
 <code class="language-js" translate="no">app.set('trust proxy', function (ip) {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
   else return false;
-})</code>
+});</code>
 </pre>
 </td>
     </tr>

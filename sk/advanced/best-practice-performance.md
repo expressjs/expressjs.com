@@ -122,7 +122,7 @@ app.get('/search', function (req, res) {
     } catch (e) {
       res.status(400).send('Invalid JSON string');
     }
-  })
+  });
 });
 </code></pre>
 
@@ -140,17 +140,17 @@ app.get('/', function (req, res, next) {
   queryDb()
     .then(function (data) {
       // handle data
-      return makeCsv(data)
+      return makeCsv(data);
     })
     .then(function (csv) {
       // handle csv
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 app.use(function (err, req, res, next) {
   // handle error
-})
+});
 </code></pre>
 
 Takto sa všetky asynchrónne i synchrónne errory prešíria do error middleware-u.
@@ -162,10 +162,10 @@ Avšak, dve upozornenia:
 
 <pre><code class="language-javascript" translate="no">
 app.get('/', wrap(async (req, res, next) => {
-  let company = await getCompanyById(req.query.id)
-  let stream = getLogoStreamById(company.id)
-  stream.on('error', next).pipe(res)
-}))
+  let company = await getCompanyById(req.query.id);
+  let stream = getLogoStreamById(company.id);
+  stream.on('error', next).pipe(res);
+}));
 </code></pre>
 
 Pre viac informácií ohľadom error handling-u použitím promises si prečítajte:
