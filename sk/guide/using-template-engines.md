@@ -12,12 +12,21 @@ redirect_from: "/guide/using-template-engines.html"
 
 # Použitie templatovacích enginov v Express
 
-Aby Express dokázal spracovať a vyrendrovať template súbory, musí aplikácia obsahovať nasledujúce nastavenia:
+_Template engine_ umožňuje použitie statických template súborov vo vašej aplikácii. Template engine nahradí počas runtimu premenné aktuálnymi hodnotami a pretransformuje template do HTML súboru poslaného klientovi.
+Tento prístup robí návrh HTML stránok jednoduchším.
 
-* `views`, cesta k priečinku kde sa nachádzajú template súbory. Napr: `app.set('views', './views')`
-* `view engine`, templatovací engine ktorý chcete použiť. Napr: `app.set('view engine', 'jade')`
+Medzi populárne templatovacie enginy fungujúce s Express patria [Jade](http://jade-lang.com/), [Mustache](https://www.npmjs.com/package/mustache) a [EJS](https://www.npmjs.com/package/ejs).
+[Express generátor](/{{ page.lang }}/starter/generator.html) požíva ako defaultný Jade, avšak podporuje aj mnohé ďalšie.
 
-Potom nainštalujte vybraný templatovací engine ako npm dependenciu:
+Zoznam podporovaných templatovacích enginov nájdete tu: [Template Engines (Express wiki)](https://github.com/strongloop/express/wiki#template-engines).
+Pozrite si taktiež [Comparing JavaScript Templating Engines: Jade, Mustache, Dust and More](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/).
+
+Aby Express dokázal spracovať a vyrendrovať template súbory, musí aplikácia obsahovať [nasledujúce nastavenia](/{{ page.lang }}/4x/api.html#app.set):
+
+* `views`, cesta k priečinku kde sa nachádzajú template súbory. Napr: `app.set('views', './views')`. Defaultne to je priečinok `views` nachádzajúci sa v hlavnom priečinku aplikácie.
+* `view engine`, templatovací engine ktorý chcete použiť. Napr., ak by ste chceli použiť Jade: `app.set('view engine', 'jade')`
+
+Potom nainštalujte vybraný templatovací engine ako npm dependenciu. Napr. pre inštaláciu Jade spustite:
 
 <pre>
 <code class="language-sh" translate="no">
@@ -45,13 +54,13 @@ Vo `views` priečinku vytvorte Jade template súbor s názvom `index.jade` s tak
 <code class="language-javascript" translate="no">
 html
   head
-    title!= title
+    title= title
   body
-    h1!= message
+    h1= message
 </code>
 </pre>
 
-Potom zadefinujte route pre rendrovanie `index.jade` súboru. Ak `view engine` parameter nebol nastavený, musíte špecifikovať príponu vášho `view` súboru. V opačnom prípade ju špecifikovať netreba.
+Potom zadefinujte route pre rendrovanie `index.jade` súboru. Ak `view engine` parameter nie je nastavený, musíte špecifikovať príponu vášho `view` súboru. V opačnom prípade ju špecifikovať netreba.
 
 <pre>
 <code class="language-javascript" translate="no">
