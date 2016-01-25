@@ -374,11 +374,11 @@ Okrem automatického reštartovania aplikácie, Upstart umožňuje použíť tie
 * `restart myapp` – Restart the app
 * `stop myapp` – Stop the app.
 
-Ore viac informácií ohľadom Upstart si prečítajte [Upstart Intro, Cookbook and Best Practises](http://upstart.ubuntu.com/cookbook).
+Pre viac informácií ohľadom Upstart si prečítajte [Upstart Intro, Cookbook and Best Practises](http://upstart.ubuntu.com/cookbook).
 
 ##### StrongLoop PM ako Upstart služba
 
-StrongLoop PM možete jednoducho nainštalovať ako systemd službu. Potom ako tak vykonáte, v prípade že nastane reštart servra, Upstart automaticky reštartuje i StrongLoop PM, ktorý následne reštartuje aj aplikácie ktoré spravuje.
+StrongLoop PM možete jednoducho nainštalovať ako Upstart službu. Potom ako tak vykonáte, v prípade že nastane reštart servra, Upstart automaticky reštartuje i StrongLoop PM, ktorý následne reštartuje aj aplikácie ktoré spravuje.
 
 Pre inštaláciu StrongLoop PM ako Upstart 1.4 služby:
 
@@ -406,7 +406,7 @@ V clusterovaných aplikáciách, worker procesy môžu spadnúť individuálne b
 
 #### Použite Node cluster modulu
 
-Clustering je možný pomocou Node [cluster modulu](https://nodejs.org/dist/latest-v4.x/docs/api/cluster.html). Ten dovoľuje master procesu vyrobiť (spawn) worker procesy a rozdistribuovať prichádzajúce spojenia medzi workerov. Avšak, However, lepšie než priame použitie tohto modulu je použiť jeden z mnohých existujúcich toolov, ktoré to robia automaticky, napr. [node-pm](https://www.npmjs.com/package/node-pm) alebo [cluster-service](https://www.npmjs.com/package/cluster-service).
+Clustering je možný pomocou Node [cluster modulu](https://nodejs.org/dist/latest-v4.x/docs/api/cluster.html). Ten dovoľuje master procesu vyrobiť (spawn) worker procesy a rozdistribuovať prichádzajúce spojenia medzi workerov. Avšak, lepšie než priame použitie tohto modulu je použiť jeden z mnohých existujúcich toolov, ktoré to robia automaticky, napr. [node-pm](https://www.npmjs.com/package/node-pm) alebo [cluster-service](https://www.npmjs.com/package/cluster-service).
 
 #### Použitie StrongLoop PM
 
