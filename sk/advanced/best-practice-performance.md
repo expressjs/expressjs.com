@@ -422,19 +422,19 @@ $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 
 Pre viac informácií ohľadom clusteringu pomocou StrongLoop PM sa pozrite na časť [Clustering](https://docs.strongloop.com/display/SLC/Clustering) v StrongLoop dokumentácii.
 
-### Cache request results
+### Cache-ovanie odpovedí requestov
 
-Another strategy to improve the performance in production is to cache the result of requests, so that your app does not repeat the operation to serve the same request repeatedly.
+Ďalšou stratégiou pre zlepšenie výkonosti v produkcii je cachovanie odpovedí na prichádzajúce requesty, čím zabezpečíte, že vaša aplikácia nemusí opakovanie vykonávat tie isté operácie pre obslúženie rovnakých requestov.
 
-Use a caching server like [Varnish](https://www.varnish-cache.org/) or [Nginx](https://www.nginx.com/resources/wiki/start/topics/examples/reverseproxycachingexample/) (see also [Nginx Caching](https://serversforhackers.com/nginx-caching/)) to greatly improve the speed and performance of your app.
+Použite caching servra, ako [Varnish] (https://www.varnish-cache.org/) alebo [Nginx](https://www.nginx.com/resources/wiki/start/topics/examples/reverseproxycachingexample/) (pozrite si tiež [Nginx Caching](https://serversforhackers.com/nginx-caching/)) výrazne zvýši rýchlosť a výkon vášej aplikácie.
 
-### Use a load balancer
+### Použitie load balancera
 
-No matter how optimized an app is, a single instance can handle only a limited amount of load and traffic. One way to scale an app is to run multiple instances of it and distribute the traffic via a load balancer. Setting up a load balancer can improve your app's performance and speed, and enable it to scale more than is possible with a single instance.
+Bez ohľadu na to, ako je optimalizovaná aplikácia, jedná inštancia môže spracovať iba obmedzené množstvo záťaže a requestov. Jedným spôsobom škálovania aplikácie je spustenei jej viacerých inštancií a distribuovať zaťaženie pomocou load balancera. Zapojenie load balancera môže zlepšiť výkon a rýchlosť vašej aplikácie a umožní jej vačšie škálovania, než by bolo možné v prípade jedinej inštancie.
 
-A load balancer is usually a reverse proxy that orchestrates traffic to and from multiple application instances and servers. You can easily set up a load balancer for your app by using [Nginx](http://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+Load balancer je zvyčajne reverzné proxy, ktoré organizuje prevádzku medzi viacerými inštanciami aplikácie a serverov. Load balancer môžete pre vašu aplikáciu setupnúť jednoducho použítím [Nginx](http://nginx.org/en/docs/http/load_balancing.html), alebo [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
-With load balancing, you might have to ensure that requests that are associated with a particular session ID connect to the process that originated them. This is known as _session affinity_, or _sticky sessions_, and may be addressed by the suggestion above to use a data store such as Redis for session data (depending on your application). For a discussion, see [Using multiple nodes](http://socket.io/docs/using-multiple-nodes/).
+Load balancer zabezpečí správne spárovanie requestov súvisiacich s konkrétnym session ID a procesom, ktorý ho túto session spravuje. Tento prístup sa nazýva _session affinity_ alebo _sticky sessions_, a môže byť riešený návrhom popísaným vyššie, teda použitím dátového úložiska ako je Redis (v závislosti od aplikácie). Prečítajte si nasledujúcu diskusiu [Using multiple nodes](http://socket.io/docs/using-multiple-nodes/).
 
 #### Using StrongLoop PM with an Nginx load balancer
 
