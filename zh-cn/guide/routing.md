@@ -32,7 +32,7 @@ app.get('/', function(req, res) {
 
 路由方法派生自 HTTP 方法之一，附加到 `express` 类的实例。
 
-以下代码是为应用程序根的 GET 和 POST 方法定义的路由示例。
+以下代码是为访问应用程序根目录的 GET 和 POST 方法定义的路由示例。
 
 <pre>
 <code class="language-javascript" translate="no">

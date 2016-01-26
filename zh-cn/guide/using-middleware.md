@@ -211,24 +211,24 @@ app.use(function(err, req, res, next) {
 
 <h4 id='express.static'>express.static(root, [options])</h4>
 
-Express 中唯一内置的中间件函数是 `express.static`。此函数基于 [serve-static](https://github.com/expressjs/serve-static)，负责提供 Express 应用程序的静态资产。
+Express 中唯一内置的中间件函数是 `express.static`。此函数基于 [serve-static](https://github.com/expressjs/serve-static)，负责提供 Express 应用程序的静态资源。
 
-`root` 自变量指定从其中提供静态资产的根目录。
+`root` 自变量指定从其中提供静态资源的根目录。
 
 可选的 `options` 对象可以具有以下属性：
 
 | 属性          |        描述                                                           |   类型      |  缺省值         |
 |---------------|-----------------------------------------------------------------------|-------------|-----------------|
-| `dotfiles`    | 用于提供点文件的选项。有效值包括“allow”、“deny”和“ignore” | 字符串 | “ignore” |
+| `dotfiles`    | 是否对外输出文件名以点（.）开头的文件。有效值包括“allow”、“deny”和“ignore” | 字符串 | “ignore” |
 | `etag`        | 启用或禁用 etag 生成  | 布尔 | `true` |
-| `extensions`  | 设置后备文件扩展名。 | 数组 | `[]` |
-| `index`       | 发送目录索引文件。设置为 `false` 可禁用目录索引建立。 | 混合 | “index.html” |
- `lastModified` | 将 `Last-Modified` 头设置为操作系统上该文件的上次修改日期。有效值包括 `true` 或 `false`。 | 布尔 | `true` |
+| `extensions`  | 用于设置后备文件扩展名。 | 数组 | `[]` |
+| `index`       | 发送目录索引文件。设置为 `false` 可禁用建立目录索引。 | 混合 | “index.html” |
+ `lastModified` | 将 `Last-Modified` 的头设置为操作系统上该文件的上次修改日期。有效值包括 `true` 或 `false`。 | 布尔 | `true` |
 | `maxAge`      | 设置 Cache-Control 头的 max-age 属性（以毫秒或者 [ms 格式](https://www.npmjs.org/package/ms)中的字符串为单位） | 数字 | 0 |
 | `redirect`    | 当路径名是目录时重定向到结尾的“/”。 | 布尔 | `true` |
 | `setHeaders`  | 用于设置随文件一起提供的 HTTP 头的函数。 | 函数 |  |
 
-以下示例将 `express.static` 中间件函数用于详细说明选项对象：
+以下示例将使用了 `express.static` 中间件，并且提供了一个详细的'options'对象（作为示例）：
 
 <pre>
 <code class="language-javascript" translate="no">
