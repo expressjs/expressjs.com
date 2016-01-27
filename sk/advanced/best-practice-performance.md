@@ -436,13 +436,13 @@ Load balancer je zvyčajne reverzné proxy, ktoré organizuje prevádzku medzi v
 
 Load balancer zabezpečí správne spárovanie requestov súvisiacich s konkrétnym session ID a procesom, ktorý ho túto session spravuje. Tento prístup sa nazýva _session affinity_ alebo _sticky sessions_, a môže byť riešený návrhom popísaným vyššie, teda použitím dátového úložiska ako je Redis (v závislosti od aplikácie). Prečítajte si nasledujúcu diskusiu [Using multiple nodes](http://socket.io/docs/using-multiple-nodes/).
 
-#### Using StrongLoop PM with an Nginx load balancer
+#### Použitie StrongLoop PM spolu s Nginx load balancerom
 
-[StrongLoop Process Manager](http://strong-pm.io/) integrates with an Nginx Controller, making it easy to configure multi-host production environment configurations. For more information, see [Scaling to multiple servers](https://docs.strongloop.com/display/SLC/Scaling+to+multiple+servers) (StrongLoop documentation).
+[StrongLoop Process Manager](http://strong-pm.io/) je integrovaný s Nginx Controller-om, čo uľahčuje konfiguráciu multi-host produkčného prostredia. Pre viac informácií sa pozrite na [Scaling to multiple servers](https://docs.strongloop.com/display/SLC/Scaling+to+multiple+servers) (StrongLoop dokumentácia).
 <a name="proxy"></a>
 
-### Use a reverse proxy
+### Použitie reverzného proxy
 
-A reverse proxy sits in front of a web app and performs supporting operations on the requests, apart from directing requests to the app. It can handle error pages, compression, caching, serving files, and load balancing among other things.
+Reverzné proxy je umiestnené pred webovou aplikáciou a vykonáva podporné operácie k requestom smerovaných na aplikáciu. Medzi inným, dokáže handlovať stránky s errormi, kompresiu, caching, servovanie súborov a load balancing.
 
-Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.com/) or [HAProxy](http://www.haproxy.org/) in production.
+Odovzdanie úloh, ktoré nevyžadujú znalosť stavu aplikácie reverznému proxy, odbremení Express aplikáciu a umožní jej vykonávať špecializované úlohy. Z tohto dôvodu sa v produkcii odporúča fungovanie Express za reverzným proxy ako je [Nginx](https://www.nginx.com/) či [HAProxy](http://www.haproxy.org/).
