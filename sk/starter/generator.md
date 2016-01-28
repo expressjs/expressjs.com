@@ -14,7 +14,7 @@ redirect_from: "/starter/generator.html"
 
 Pre rýchle vygenerovanie skeletonu aplikácie môžete použit nástroj `express`.
 
-`express` nainštalujte pomocou nasledujúceho príkazu:
+Nainštalujte `express` pomocou nasledujúceho príkazu:
 
 <pre>
 <code class="language-sh" translate="no">
@@ -43,7 +43,7 @@ $ express -h
 </code>
 </pre>
 
-Napr., nasledujúci príkaz vytvorí Express aplikáciu s názvom _myapp_ v aktuálnom priečinku:
+Nasledujúci príkaz vytvorí v aktuálnom priečinku Express aplikáciu s názvom _myapp_:
 
 <pre>
 <code class="language-sh" translate="no">
@@ -123,5 +123,5 @@ Vygenerovaná aplikácia má naslednovnú štruktúru priečinkov:
 </pre>
 
 <div class="doc-box doc-info" markdown="1">
-Takáto štruktúra aplikácie je len jednou z mnohých spôsobov usporiadania Express aplikácie. Môžete ju použit, alebo ju zmeniť tak, ako vám bude najlepšie vyhovovať.
+Takáto štruktúra aplikácie je len jedným z mnohých spôsobov usporiadania Express aplikácie. Môžete ju použit, alebo ju zmeniť tak, ako vám bude najlepšie vyhovovať.
 </div>

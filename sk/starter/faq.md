@@ -15,8 +15,8 @@ redirect_from: "/starter/faq.html"
 ## Akú štruktúru priečinkov by som mal zvoliť pre svoju aplikáciu?
 
 Jednoznačná odpoveď na túto otázku neexistuje. Odpoveď závisí od rozsahu
-aplikácie a tímu, ktorí na nej pracuje. Z dôvodu maximálnej flexibility,
-Express nedefinuje žiadne pravidlá, či obmedzenia.
+aplikácie a tímu, ktorí na nej pracuje. Z dôvodu maximálnej flexibility nedefinuje
+Express žiadne pravidlá, či obmedzenia.
 
 Samotná logika pre routing a ostatné špecifické časti aplikácie môže byť rozdelená
 do ľubovoľného počtu súborov a organizovaná v ľubovoľnej štruktúre priečinkov,
@@ -26,7 +26,7 @@ presne tak, ako vám to vyhovuje. Pre inšpiráciu sa pozrite sa na nasledujúce
 * [Route maping](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
 * [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
 
-Existujú taktiež mnohé rozšírenia tretích strán, ktoré tieto paterny zjednodušujú:
+Existujú taktiež mnohé rozšírenia tretích strán, ktoré toto zjednodušujú:
 
 * [Resourceful routing](https://github.com/expressjs/express-resource)
 
@@ -44,16 +44,16 @@ Autentifikácia je ďalšia otvorená oblasť do ktorej Express priamo nezasahuj
 Môžete si zvoliť akúkoľvek autentifikačnú schému, ktorá vám vyhovuje. Pre jednoduchú meno / heslo autentifikáciu si pozrite [tento príklad](https://github.com/strongloop/express/tree/master/examples/auth).
 
 
-## Aké templatovacie enginy Express podporuje?
+## Aké template enginy Express podporuje?
 
-Express podporuje všetky templatovacie enginy definujúce `(path, locals, callback)` signatúru.
-Pre porovnanie rozhraní templatovacích enginov a caching-u sa pozrite na projekt
+Express podporuje všetky template enginy definujúce `(path, locals, callback)` signatúru.
+Pre porovnanie rozhraní template enginov a caching-u sa pozrite na projekt
 [consolidate.js](https://github.com/visionmedia/consolidate.js).
 Templatovacie enginy, ktoré nie sú v zozname, môžu byť Express-om taktiež podporované.
 
 ## Ako handlovať 404-ky?
 
-V Express-e nie sú odpovede 404 výsledkom chyby, preto ich error-handler middleware nezachytí.
+V Express aplikácii nie sú odpovede 404 výsledkom chyby, preto ich error-handler middleware nezachytí.
 Toto správanie je z dôvodu, že odpoveď 404 jednoducho indikuje absenciu práce, ktorú treba vykonať,
 inými slovami, Express vykonal všetky middlware funkcie a nenašiel žiaden routing,
 ktorý by na danú požiadavku vedel odpovedať. Všetko čo musíte spraviť k odchyteniu 404-ky je, že pridáte nasledovnú middleware funkciu pod všetky ostatné definície:
@@ -87,5 +87,5 @@ Viac informácií sa dozviete v kapitole [Error handling](/{{ page.lang }}/guide
 
 Nedokážeš! Nie je žiaden dôvod na rendrovanie HTML pomocou `res.render()` funkcie.
 Ak máte konkrétny súbor, použite `res.sendFile()` funkciu.
-Ak potrebujete servovať veľa statických súborov z konkrétneho adresára, použite `express.static()`
+Ak potrebujete servovať veľa statických súborov z konkrétneho priečinka, použite `express.static()`
 middleware.

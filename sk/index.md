@@ -27,7 +27,7 @@ redirect_from: "/"
 
   <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h3>Webové aplikácie</h3> Express je minimalistický a flexibilný Node.js webový aplikačný framework poskytujúci robustnú škálu funkcionality pre webové a mobilné aplikácie.
+          <h3>Webové aplikácie</h3> Express je minimalistický, flexibilný, webový Node.js framework poskytujúci robustnú škálu funkcionality pre webové a mobilné aplikácie.
       </div>
 
       <div id="apis">
@@ -35,7 +35,7 @@ redirect_from: "/"
       </div>
 
       <div id="performance">
-      <h3>Vyhotovenie</h3> Express predstavuje vrstvu základných funkcií webovej aplikácie bez toho, aby boli prekryté Node.js funkcie, ktoré poznáte a milujete.
+      <h3>Vyhotovenie</h3> Express predstavuje tenkú vrstvu elementárnych prvkov webovej aplikácie bez skrývania Node.js prvkov, ktoré poznáte a milujete.
       </div>
 
       <div id="sponsorship">

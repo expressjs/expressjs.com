@@ -13,10 +13,10 @@ redirect_from: "/starter/hello-world.html"
 # Hello world príklad
 
 <div class="doc-box doc-info" markdown="1">
-Toto bude v podstate najjednoduchšia Express aplikácia akú možete vytvoriť. Aplikácia s jedným súborom &mdash; _nie_ taká, ako keby ste použili [Express generátor](/{{ page.lang }}/starter/generator.html), ktorý vytvorí základnú štruktúru pre plnohodnotnú aplikáciu s niekoľkými JavaScript súbormi, Jade templatami a podadresármi pre rôzne účely.
+Toto bude v podstate najjednoduchšia Express aplikácia akú možete vytvoriť. Aplikácia s jedným súborom &mdash; _nie_ taká, ako keby ste použili [Express generátor](/{{ page.lang }}/starter/generator.html), ktorý vytvorí základnú štruktúru pre plnohodnotnú aplikáciu s niekoľkými JavaScript súbormi, Jade templatami a pod-adresármi pre rôzne účely.
 </div>
 
-Najskôr si vytvorte priečinok s názvom `myapp`, presuňte sa tam a spustite `npm init`. Potom nainštalujte `express` ako dependenciu podľa [inštalačnej príručky](/{{ page.lang }}/starter/installing.html).
+Najskôr si vytvorte priečinok s názvom `myapp`, presuňte sa tam a spustite príkaz `npm init`. Potom nainštalujte `express` ako dependenciu podľa [inštalačnej príručky](/{{ page.lang }}/starter/installing.html).
 
 V priečinku `myapp` vytvorte súbor s názvom `app.js` a vložte do neho nasledovný kód:
 
@@ -35,13 +35,13 @@ app.listen(3000, function () {
 </code>
 </pre>
 
-Aplikácia naštartuje server a začne počúvať na porte 3000 na pripojenia. Aplikácia odpovie "Hello World!" na request na hlavnú URL (`/`) alebo _route_. Pre každú inú URL odpovie prostredníctvom **404 Not Found**.
+Aplikácia naštartuje server a na porte 3000 začne počúvať na pripojenia. Aplikácia odpovie "Hello World!" na request na hlavnú URL (`/`) alebo _route_. Pre každú inú URL odpovie prostredníctvom **404 Not Found**.
 
 <div class="doc-box doc-notice" markdown="1">
 Request (požiadavka) `req` a response (odpoveď) `res` sú presne rovnaké objekty, ktoré Node štandardne poskytuje, takže môžete spraviť `req.pipe()`, `req.on('data', callback)` a hocičo iné, čo by ste spravili v prípade, ak by ste nepoužili Express.
 </div>
 
-Aplikáciu spustíte pomocou nasledujúceho príkazu:
+Spustite aplikáciu pomocou nasledujúceho príkazu:
 
 <pre>
 <code class="language-sh" translate="no">
@@ -49,5 +49,5 @@ $ node app.js
 </code>
 </pre>
 
-Potom v prehliadači zadajte [http://localhost:3000/](http://localhost:3000/) a sledujte výstup.
+Potom v prehliadači zadajte [http://localhost:3000/](http://localhost:3000/) a pozrite si výstup.
 

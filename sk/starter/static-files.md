@@ -14,7 +14,7 @@ redirect_from: "/starter/static-files.html"
 
 Na servovanie statických súborov ako sú obrázky, CSS a JavaScript súbory používajte vstavaný `express.static` middleware.
 
-Pre priame servovanie statického obsahu zavolajte `express.static` middleware funkcii s parametrom názvu priečinka obsahujúceho statické súbory. Napr., pre servovanie obrázkov, CSS a JavaScript súborov z priečinka `public` použite:
+Pre priame servovanie statického obsahu zavolajte `express.static` middleware s parametrom predstavujúcim názov priečinka obsahujúceho statické súbory. Napr., pre servovanie obrázkov, CSS a JavaScript súborov z priečinka `public` použite:
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -35,10 +35,10 @@ http://localhost:3000/hello.html
 </pre>
 
 <div class="doc-box doc-info">
-Express vyhľadáva súbory relatívne od priečinka so statickým obsahom, takže názov tohto priečinka nieje súčasťou URL.
+Express vyhľadáva súbory relatívne od priečinka so statickým obsahom, takže názov tohto priečinka nie je súčasťou URL.
 </div>
 
-V prípade, ak chcete použiť viacero priečinkov so statickým obsahom, zavolajte `express.static` middleware funkciu osobitne pre každý priečinok:
+V prípade, že chcete použiť viacero priečinkov so statickým obsahom, zavolajte `express.static` funkciu osobitne pre každý priečinok:
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -47,9 +47,9 @@ app.use(express.static('files'));
 </code>
 </pre>
 
-Express vyhľadáva súbory v jednotlivých adresároch podľa toho v akom poradí sú zadefinované pomocou použitia `express.static` middleware funkcie.
+Express vyhľadáva súbory v jednotlivých adresároch podľa toho, v akom poradí sú zadefinované pomocou použitia `express.static` funkcie.
 
-Ak potrebujete vytvoriť virtuálny prefix pre cestu k statickým súborom (kde taká cesta v skutočnosti na súborovom systéme neexistuje) servovaným pomocou `express.static` funkcie, [špecifikujte cestu](/{{ page.lang }}/4x/api.html#app.use) k statickému obsahu nasledovne:
+Ak potrebujete vytvoriť virtuálny prefix pre cestu k statickým súborom (kde taká cesta (path) v skutočnosti na súborovom systéme neexistuje) servovaným pomocou `express.static` funkcie, [špecifikujte cestu](/{{ page.lang }}/4x/api.html#app.use) k statickému obsahu nasledovne:
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -57,7 +57,7 @@ app.use('/static', express.static('public'));
 </code>
 </pre>
 
-Teraz môžete načítať súbory nachádzajúce sa v `public` priečinku z cesty s prefixom `/static`.
+Teraz môžete načítať súbory nachádzajúce sa v priečinku `public` na ceste s prefixom `/static`.
 
 <pre>
 <code class="plain-text" translate="no">
@@ -69,7 +69,7 @@ http://localhost:3000/static/hello.html
 </code>
 </pre>
 
-Avšak, cesta ktorú poskytnete `express.static` funkcii je relatívna k priečinku, z ktorého ste spustili váš `node` proces. Ak spúšťate express aplikáciu z iného priečinka, je bezpečnejšie použiť absolútnu cestu k priečinku, ktorý chcete servovať:
+Pozor však na to, že cesta ktorú poskytnete `express.static` funkcii je relatívna k priečinku, z ktorého ste spustili váš `node` proces. Ak spúšťate express aplikáciu z iného priečinka, je bezpečnejšie použiť absolútnu cestu k priečinku, ktorý chcete servovať:
 
 <pre>
 <code class="language-javascript" translate="no">

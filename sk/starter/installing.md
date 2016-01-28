@@ -12,7 +12,7 @@ redirect_from: "/starter/installing.html"
 
 # Inštalácia
 
-Za predpokladu, že ste si už nainštalovali [Node.js](https://nodejs.org/), vytvorte priečinok pre vašu aplikáciu a presuňte sa tam.
+Za predpokladu, že už máte nainštalovaný [Node.js](https://nodejs.org/), vytvorte priečinok pre vašu aplikáciu a presuňte sa tam.
 
 <pre>
 <code class="language-sh" translate="no">
@@ -22,7 +22,7 @@ $ cd myapp
 </pre>
 
 Pomocou príkazu `npm init` vytvorte pre vašu aplikáciu súbor `package.json`.
-Viac informácií o tom, ako funguje `package.json` sa dozviete pri prečítaní [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
+Viac informácií o tom, ako funguje `package.json` sa dozviete po prečítaní [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
 
 <pre>
 <code class="language-sh" translate="no">
@@ -41,7 +41,7 @@ entry point: (index.js)
 
 Zadajte `app.js`, prípadne akýkoľvek iný názov hlavného súboru vašej aplikácie. Ak ho chcete nazvať `index.js`, stlačte ENTER k potvrdeniu navrhovaného názvu súboru.
 
-Teraz nainštalujte Express v `app` priečinku a pridajte ho ako dependenciu do package.json. Takto:
+Teraz v `app` priečinku nainštalujte Express a pridajte ho ako dependenciu do package.json. Takto:
 
 <pre>
 <code class="language-sh" translate="no">
@@ -59,5 +59,5 @@ $ npm install express
 
 <div class="doc-box doc-info" markdown="1">
 Node moduly inštalované s prepínačom `--save` sú automaticky pridané do `dependencies` zoznamu v súbore `package.json`.
-Neskôr spustením príkazu `npm install` v `app` priečinku sa všetky dependencie zo zoznamu automaticky nainštalujú.
+Následne spustením príkazu `npm install` v `app` priečinku sa všetky dependencie zo zoznamu automaticky nainštalujú.
 </div>

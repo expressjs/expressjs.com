@@ -12,9 +12,9 @@ redirect_from: "/starter/basic-routing.html"
 
 # Základný routing
 
-_Routing_ rozhoduje o tom, ako aplikácia odpovedá na požiadavky klientov na jednotlivých koncových bodoch (endpointoch) reprezentovaných pomocou URI (alebo cesty) a špecifickej HTTP request metódy (GET, POST, atď.).
+_Routing_ rozhoduje o tom, ako aplikácia odpovedá na požiadavky (requesty) klientov na jednotlivých koncových bodoch (endpointoch) reprezentovaných pomocou URI (alebo cesty) a špecifickej HTTP request metódy (GET, POST, atď.).
 
-Každý definovaný route môže mať jednu alebo viacero handler funkcií, ktoré sa vykonajú v prípade, ak je route spárovaný s požiadavkou klienta.
+Každý definovaný route môže mať jednu, alebo viacero handler funkcií, ktoré sa vykonajú v prípade, ak je route spárovaný s požiadavkou klienta.
 
 Route definícia má nasledovnú štruktúru:
 <pre>
@@ -34,7 +34,7 @@ Kde:
 Tento tutoriál predpokladá, že existuje inštancia `express` aplikácie s názvom `app` a server je spustený. Ak nie ste oboznámení s vytváraním a spuštaním aplikácií, začnite [Hello world prikladom](/{{ page.lang }}/starter/hello-world.html).
 </div>
 
-Nasledujúce priklady ilustrujú definovanie jednoducých route-ov.
+Nasledujúce priklady ilustrujú definovanie jednoduchých route-ov.
 
 Odpoveď s textom `Hello World!` na hlavnej stránke:
 
