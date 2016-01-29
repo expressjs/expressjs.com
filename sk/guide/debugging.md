@@ -12,14 +12,14 @@ redirect_from: "/guide/debugging.html"
 
 # Debuggovanie Express
 
-Express interne používa modul [debug](https://www.npmjs.com/package/debug) k logovaniu informácií ohľadom route matchingu, použitých middleware funkciách, aplikačného módu a toku request response cyklu.
+Express interne používa k logovaniu informácií ohľadom route matchingu, použitých middleware funkciách, aplikačného módu a toku request response cyklu modul [debug](https://www.npmjs.com/package/debug).
 
 <div class="doc-box doc-info" markdown="1">
-`debug` je ako rozšírena verzia `console.log`, ale narozdiel od `console.log`, nemusíte zakomentovávať volania `debug`  v produkčnom kóde. Logovanie je vypnuté defaultne a je možné ho zapnúť použitím `DEBUG` environment premennej.
+`debug` je ako rozšírena verzia `console.log`, ale narozdiel od `console.log`, nemusíte zakomentovávať volania `debug` v produkčnom kóde. Logovanie je vypnuté defaultne a je možné ho zapnúť použitím `DEBUG` environment premennej.
 </div>
 
-Ak chcete vidieť všetky interné logy Express-u, nastavte `DEBUG` environment premennú na hodnotu
-`express:*` pri spúštaní vašej aplikácie.
+Ak chcete vidieť všetky interné logy Express-u, nastavte pri spúštaní vašej aplikácie environment premennú `DEBUG` na hodnotu
+`express:*`.
 
 <pre>
 <code class="language-sh" translate="no">
@@ -83,7 +83,7 @@ $ DEBUG=express:* node ./bin/www
 </code>
 </pre>
 
-Následne keď aplikácia odchytí request, uvidíte nasledujúce logy špecifikované v Express kóde:
+Následne, keď aplikácia odchytí request, uvidíte nasledujúce logy špecifikované v Express kóde:
 
 <pre>
 <code class="language-sh" translate="no">
@@ -105,13 +105,13 @@ Následne keď aplikácia odchytí request, uvidíte nasledujúce logy špecifik
 </code>
 </pre>
 
-Ak chcete vidieť iba logy z router implentácie, nastavte hodnotu premennej `DEBUG` na `express:router`. Podobne, ak chcete vidieť iba logy z implementácie aplikácie, nastavte hodnotu premennej `DEBUG` na `express:application` atď.
+Ak chcete vidieť iba logy z router implementácie, nastavte hodnotu premennej `DEBUG` na `express:router`. Podobne, ak chcete vidieť iba logy z implementácie aplikácie, nastavte hodnotu premennej `DEBUG` na `express:application` atď.
 
 ## Aplikácie vygenerované príkazom `express`
 
 Aplikácia vygenerovaná príkazom `express` taktiež používa modul `debug` a jej debug namespace je dostupný pod názvom aplikácie.
 
-Napr., ak vygenerujete aplikáciu pomocou `$ express sample-app`, môžete povoliť debug príkaz pomocou nasledujúceho zápisu:
+Pomocou nasledujúceho príkazu, dokážete povoliť debug výpisy pre aplikáciu vygenerovanú pomocou `$ express sample-app` takto:
 
 <pre>
 <code class="language-sh" translate="no">
@@ -119,7 +119,7 @@ $ DEBUG=sample-app node ./bin/www
 </code>
 </pre>
 
-Pomocou zápisu čiarkou oddeleného zoznamu názvov môžete špecifikovať viac ako jeden debug namespace:
+Pomocou čiarkou oddeleného zoznamu názvov môžete špecifikovať viac ako jeden debug namespace:
 
 <pre>
 <code class="language-sh" translate="no">
@@ -127,4 +127,4 @@ $ DEBUG=http,mail,express:* node index.js
 </code>
 </pre>
 
-Pre viac informácií ohľadom `debug` si pozrite [debug](https://www.npmjs.com/package/debug).
+Pre viac informácií ohľadom `debug` modulu si pozrite [debug](https://www.npmjs.com/package/debug).

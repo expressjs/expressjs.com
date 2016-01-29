@@ -16,9 +16,9 @@ redirect_from: "/guide/migrating-5.html"
 
 Hoci je Express 5.0 ešte len v alpha release verzii, tu je náhľad zmien, ktoré budú v tomto release a návod ako zmigrovať vašu aplikáciu z verzie Express 4 na Express 5.
 
-Express 5 sa od Express 4 veľmi nelíši: Zmeny v API nie sú tak veľké, ako v pŕipade prechodu z verzie 3.0 na 4.0. Hoci základné API zostáva rovnaké, sú tam niektoré podstatné zmeny; inými slovami, existujúca Express 4 aplikácia nemusí po update na Express 5 fungovať.
+Express 5 sa od Express 4 veľmi nelíši: Zmeny v API nie sú tak veľké, ako v pŕipade prechodu z verzie 3.0 na 4.0. Hoci základné API zostáva rovnaké, sú tam niektoré podstatné zmeny; inými slovami, existujúca Express 4 aplikácia nemusí po upgrade na Express 5 fungovať.
 
-Pre nainštalovanie poslednej alpha verzie Express 5, spustite nasledujúci príkaz v hlavnom priečinku vašej aplikácie:
+Pre nainštalovanie poslednej alpha verzie Express 5, spustite v hlavnom priečinku vašej aplikácie nasledujúci príkaz:
 
 <pre>
 <code class="language-sh" translate="no">
@@ -26,7 +26,7 @@ $ npm install express@5.0.0-alpha.2 --save
 </code>
 </pre>
 
-Potom môžete spustiť vaše automatizované testy, aby ste videli čo padá a opravili tieto problémy podľa informácií nižšie. Následne, ako identifikujete padajúce testy, spustite aplikáciu, aby ste videli aké errory nastávajú. Okamžite zistíte, či aplikácia používa niektorú z metód, alebo properties, ktoré nie sú podporované.
+Potom môžete spustiť vaše automatizované testy, aby ste videli čo padá a opravili tieto problémy podľa informácií nižšie. Potom, ako identifikujete padajúce testy, spustite aplikáciu, aby ste videli aké errory nastávajú. Okamžite zistíte, či aplikácia používa niektorú z metód, alebo properties, ktoré nie sú podporované.
 
 <h2 id="changes">Zmeny v Express 5</h2>
 
@@ -90,7 +90,7 @@ Nasledujúce názvy metód boli pluralizované. Používanie pôvodných názvov
 
 Dvojbodka (:) na začiatku v name argumente volania `app.param(name, fn)` funkcie je pozostatkom z Express 3 a v záujme spätnej kompatibility ju Express 4 podporoval s deprecation warning-om. Express 5 ju bude ticho ignorovať a používa name parameter bez prefixu počiatočnej dvojbodky.
 
-Táto zmena by nemala ovplyvniť váš kód ak postupujete podľa dokumentácie k Express 4 [app.param](/{{ page.lang }}/4x/api.html#app.param), kde sa žiadna počiatočná dvojbodka už nespomína.
+Táto zmena by nemala ovplyvniť váš kód v prípade, ak postupujete podľa dokumentácie k Express 4 [app.param](/{{ page.lang }}/4x/api.html#app.param), kde sa žiadna počiatočná dvojbodka už nespomína.
 
 <h4 id="req.param">req.param(name)</h4>
 

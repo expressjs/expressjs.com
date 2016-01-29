@@ -15,7 +15,7 @@ redirect_from: "/guide/behind-proxies.html"
 Ak chcete, aby vaša Express aplikácia bežala za proxy, nastavte (pomocou [app.set()](/{{ page.lang }}/4x/api.html#app.set)) aplikačnú premennú `trust proxy` na jednu z hodnôt z nasledujúcej tabuľky.
 
 <div class="doc-box doc-info" markdown="1">
-Aplikácia bude bežať i v prípade, ak aplikačná premenná `trust proxy` nieje nastavená. Aplikácia však nesprávne zaregistruje IP adresu proxy, ako klientskú IP adresu dokým `trust proxy` nebude nastavené.
+Aplikácia bude bežať i v prípade, ak aplikačná premenná `trust proxy` nie je nastavená. Aplikácia však nesprávne zaregistruje IP adresu proxy, ako klientskú IP adresu dokým `trust proxy` nebude nastavené.
 </div>
 
 <table class="doctable" border="1" markdown="1">

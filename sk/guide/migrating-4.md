@@ -21,7 +21,7 @@ Tento článok pokrýva:
 <ul class="doclist">
   <li><a href="#changes">Zmeny v Express 4.</a></li>
   <li><a href="#example-migration">Príklad</a> migrácie Express 3 aplikácie na Express 4.</li>
-  <li><a href="#app-gen">Upgrading na Express 4 app generátor.</a></li>
+  <li><a href="#app-gen">Prechod na Express 4 app generátor.</a></li>
 </ul>
 
 <h2 id="changes">Zmeny v Express 4</h2>
@@ -29,7 +29,7 @@ Tento článok pokrýva:
 Express 4 prináša niekoĺko podstatných zmien:
 
 <ul class="doclist">
-  <li><a href="#core-changes">Zmeny Express jadra a middleware systému.</a> Boli odstránené závislosti na Connect a vstavaných middleware-och, takže ich bude musieť pridať sami.
+  <li><a href="#core-changes">Zmeny Express jadra a middleware systému.</a> Boli odstránené závislosti na Connect module a vstavaných middleware-och, takže ich budete musieť pridať sami.
   </li>
   <li><a href="#routing">Zmeny v routing systéme.</a></li>
   <li><a href="#other-changes">Ďalšie rôzne zmeny.</a></li>
@@ -37,18 +37,18 @@ Express 4 prináša niekoĺko podstatných zmien:
 
 Pozrite sa taktiež na:
 
-* [Nove features verzie 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
-* [Prechod z 3.x na 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
+* [New features in 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
+* [Migrating from 3.x to 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
 
 <h3 id="core-changes">
 Zmeny Express jadra a middleware systému
 </h3>
 
-Express 4 už nie je závislý na Connect a boli odstránené všetky vstavané middleware funkcie z jeho jadra, okrem `express.static` funkcie. To znamená že Express je teraz nezávislým routing a middleware webovým frameworkom a taktiež verzionovanie Express-u a jeho releasy nie sú ovplyvnené update-ami middlewarov.
+Express 4 už nie je závislý na Connect a z jeho jadra boli odstránené všetky vstavané middleware funkcie, okrem `express.static` funkcie. To znamená, že Express je teraz nezávislým routing a middleware webovým frameworkom a taktiež verzionovanie Express a jeho releasy nie sú ovplyvnené updatami middlewarov.
 
-Teraz musíte bez vstavaných middlewarov explicitne pridať všetky middleware funkcie, ktoré vaša aplikácia potrebuje k svojmu fungovaniu. Jednoducho pokračujte podľa nasledujúcich krokov:
+Terazm bez vstavaných middlewarov, musíte explicitne pridať všetky middleware funkcie, ktoré vaša aplikácia potrebuje k svojmu fungovaniu. Jednoducho pokračujte podľa nasledujúcich krokov:
 
-1. Nainštalujte modul: `npm install --save <module-name>`
+1. Nainštalujte požadovaný modul: `npm install --save <module-name>`
 2. Pridajte vo vašej aplikácii require na daný modul: `require('module-name')`
 3. Použite modul podľa jeho dokumentácie: `app.use( ... )`
 
@@ -203,7 +203,7 @@ Nasledujúca tabuľka obsahuje zoznam drobných, ale dôležitých zmien v Expre
 `http.createServer()`
 </td>
 <td markdown="1">
-`http` modul už nieje potrebný, pokiaľ s ním nepotrebujete priamo pracovať (socket.io/SPDY/HTTPS). Aplikácie dokážete naštartovať pomocou `app.listen()` funkcie.
+`http` modul už nie je potrebný, pokiaľ s ním nepotrebujete priamo pracovať (socket.io/SPDY/HTTPS). Aplikáciu dokážete naštartovať pomocou `app.listen()` funkcie.
 </td>
 </tr>
 <tr>
@@ -487,7 +487,7 @@ Pokiaľ nepotrebujete priamo pracovať s `http` modulom (socket.io/SPDY/HTTPS), 
 
 <h3 id="">Spustite aplikáciu</h3>
 
-Proces migrácie je kompletný a aplikácia je teraz Express 4 aplikáciou. Pre overenie si, spustite aplikáciu pomocou nasledujúceho príkazu:
+Proces migrácie je kompletný a aplikácia je teraz Express 4 aplikáciou. Pre overenie spustite aplikáciu pomocou nasledujúceho príkazu:
 
 <pre>
 <code class="language-sh" translate="no">
@@ -498,12 +498,12 @@ $ node .
 Načítajte v prehliadači [http://localhost:3000](http://localhost:3000)
   a pozrite si domovskú stránku aplikácie vyrendrovanú pomocou Express 4.
 
-<h2 id="app-gen">Upgrading na Express 4 app generátor</h2>
+<h2 id="app-gen">Prechod na Express 4 app generátor</h2>
 
 Tento command-line tool slúžiaci na generovanie Express aplikácie je stále
-  `express`, ale k tomu, aby ste ho vykonali upgrade na novú verziu musíte najprv pôvodný Express 3 app generátor odinštalovať a potom nainštalovať nový `express-generator`.
+  `express`, ale k tomu, aby ste vykonali upgrade na novú verziu musíte najprv pôvodný Express 3 app generátor odinštalovať a potom nainštalovať nový `express-generator`.
 
-<h3 id="">Inštalácia </h3>
+<h3 id="">Inštalácia</h3>
 
 Ak už máte Express 3 app generátor na vašom systéme nainštalovaný, musíte ho najskôr odinštalovať:
 
@@ -512,7 +512,7 @@ Ak už máte Express 3 app generátor na vašom systéme nainštalovaný, musít
 $ npm uninstall -g express
 </code>
 </pre>
-V závislosti od toho, ako sú nakonfigurované vaše file a directory oprávnenia,
+V závislosti od toho, ako sú nakonfigurované vaše oprávnenia k súborom a priečinkom,
 môže byť potrebné spustiť tento príkaz pomocou `sudo`.
 
 Teraz nainštalujte nový generátor:
@@ -523,13 +523,13 @@ $ npm install -g express-generator
 </code>
 </pre>
 
-V závislosti od toho, ako sú nakonfigurované vaše file a directory oprávnenia,
+V závislosti od toho, ako sú nakonfigurované vaše oprávnenia k súborom a priečinkom,
 môže byť potrebné spustiť tento príkaz pomocou `sudo`.
 
 Teraz je príkaz `express` aktualizovaný na vašom systéme na 
 Express 4 generátor.
 
-<h3 id="">Zmeny app generátora </h3>
+<h3 id="">Zmeny app generátora</h3>
 
 Prepínače a použitia príkazu zostali prevažne rovnaké, okrem nasledujúcich výnimiek:
 
@@ -565,10 +565,10 @@ všimnete si, že aktuálny príkaz pre spustenie aplikácie je
 `node ./bin/www`, ktorý bol v Express 3 pôvodne `node app.js`.
 
 Pretože súbor `app.js`, ktorý bol vygenerovaný Express 4 generátorom je odteraz Node.js modul, 
-už nemôže byť viacej spustený nezávisle ako aplikácia (pokým nezmeníte kód). 
+už nemôže byť viacej spustený nezávisle ako aplikácia (pokiaľ nezmeníte kód).
 Modul musí byť načítaný a spustený ako Node.js súbor. Node.js súbor je v tomto prípade`./bin/www`.
 
-Pričinok `bin` ani bezpríponový súbor `www` nie sú povinné k vytvoreniu ani spusteniu aplikácie. 
+Priečinok `bin` ani bezpríponový súbor `www` nie sú povinné k vytvoreniu ani spusteniu aplikácie. 
 Sú len návrhom vyrobeným generátorom, takže ich môzete zmeniť podľa vašich potrieb.
 
 Ak sa chcete zbaviť `www` priečinka a ponechať to v starom "Express 3 formáte",
@@ -594,4 +594,4 @@ var debug = require('debug')('app4');
 
 Ďalej zmeňte v súbore `package.json` riadok `"start": "node ./bin/www"`  na `"start": "node app.js"`.
 
-Týmto ste presunuli funkcionalitu `./bin/www` späť do `app.js`. Táto zmena sa neodporúča, ale toto cvičenie vám pomôže porozumieť ako `./bin/www` súbor pracuje a prečo `app.js` už viac nieje možné samostatne spustiť.
+Týmto ste presunuli funkcionalitu `./bin/www` späť do `app.js`. Táto zmena sa neodporúča, ale toto cvičenie vám pomôže porozumieť ako `./bin/www` súbor pracuje a prečo `app.js` už viac nie je možné samostatne spustiť.

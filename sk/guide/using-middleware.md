@@ -33,14 +33,14 @@ Express aplikácia môže použiť nasledovné typy middleware funkcií:
  - [Built-in middleware](#middleware.built-in)
  - [Third-party middleware](#middleware.third-party)
 
-Application-level a router-level middleware môžete načítať s voliteľnu cestou (path-om).
+Application-level a router-level middleware môžete načítať s voliteľnou cestou (path-om).
 Môžete taktiež načítať skupinu middleware funkcií dohromady, čím vytvoríte sub-stack middleware systém na danej ceste.
 
 <h2 id='middleware.application'>Application-level middleware</h2>
 
-Pripojte application-level middleware k inštancii [app objektu](/{{ page.lang }}/4x/api.html#app) použitím `app.use()` a `app.METHOD()` funkcií, kde `METHOD` je typicky HTTP metóda requestu ktorý mddleware funkcia handluje (ako napr. GET, PUT, či POST) zapísaná v lowercase formáte.
+Pripojte application-level middleware k inštancii [app objektu](/{{ page.lang }}/4x/api.html#app) použitím `app.use()` a `app.METHOD()` funkcií, kde `METHOD` je typicky HTTP metóda requestu, ktorý mddleware funkcia handluje (ako napr. GET, PUT, či POST) zapísaná v lowercase formáte.
 
-Nasledujúci príklad ukazuje middleware funkciu, ktorá nieje pripojená na žiadny path. Funkcia bude vykonaná vždy, keď aplikácia obdrží request.
+Nasledujúci príklad ukazuje middleware funkciu, ktorá nie je pripojená na žiaden path. Funkcia bude vykonaná vždy, keď aplikácia obdrží request.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -88,7 +88,7 @@ app.use('/user/:id', function(req, res, next) {
 </code>
 </pre>
 
-Route handlery dovoľujú definovať viacero route-ov pre jednu cestu. Nasledujúci príklad definuje dva routy pre GET requesty na ceste `/user/:id`. Definovanie  druhého route nespôsobí žiadne problémy, ale ani sa nikdy nezavolá, pretože prvý route ukončí request-response cyklus.
+Route handlery dovoľujú definovať viacero route-ov pre jednu cestu. Nasledujúci príklad definuje dva routy pre GET requesty na ceste `/user/:id`. Definovanie druhého route nespôsobí žiadne problémy, ale ani sa nikdy nezavolá, pretože prvý route ukončí request-response cyklus.
 
 Tento príklad zobrazuje middleware sub-stack ktorý handluje GET requesty na ceste `/user/:id`.
 
@@ -108,7 +108,7 @@ app.get('/user/:id', function (req, res, next) {
 </code>
 </pre>
 
-Ak chcete preskočiť zostávajúce middleware funkcie z router middleware stack-u, zavolajte `next('route')` čim posuniete obsluhu ďalšiemu route.
+Ak chcete preskočiť zostávajúce middleware funkcie z router middleware stack-u, zavolajte `next('route')` čím posuniete obsluhu ďalšiemu route.
 **POZNÁMKA**: `next('route')` zafunguje iba v takých middleware funkciách, ktoré boli načítané pomocou `app.METHOD()` alebo `router.METHOD()` funkcií.
 
 Tento príklad zobrazuje middleware sub-stack, ktorý handluje GET requesty na ceste `/user/:id`.
@@ -190,7 +190,7 @@ app.use('/', router);
 <h2 id='middleware.error-handling'>Error-handling middleware</h2>
 
 <div class="doc-box doc-notice" markdown="1">
-Error-handling middleware príjma vždy _štyri_ argumenty.  Aby bolo možné identifikovať error-handling middleware funkciu, musíte jej definovať vždy štyri argumenty. Aj v situácii, kedy nepotrebujete použiť `next` objekt, musíte ho definovať, aby ste dodržali dohodnutú signatúru. V opačnom prípade bude `next` objekt interpretovaný ako bežný middleware, ktorý nedokáže handlovať errory.
+Error-handling middleware príjma vždy _štyri_ argumenty.  Aby bolo možné identifikovať error-handling middleware funkciu, musíte jej definovať vždy štyri argumenty. Musíte ho definovať aj v situácii, kedy nepotrebujete použiť `next` objekt, aby ste dodržali dohodnutú signatúru. V opačnom prípade bude `next` objekt interpretovaný ako bežný middleware, ktorý nedokáže handlovať errory.
 </div>
 
 Error-handling middleware funkcie sa definujú rovnako ako ostatné middleware funkcie, len majú štyri argumenty namiesto troch, špecificky podľa signatúry `(err, req, res, next)`:
@@ -208,11 +208,11 @@ Pre viac informácií ohľadom error-handling middlewarov si pozrite sekciu: [Er
 
 <h2 id='middleware.built-in'>Built-in middleware</h2>
 
-Express od verzie 4.x nie je závislý na [Connect](https://github.com/senchalabs/connect) module. Okrem výnimky `express.static`, všetky predošlé middleware funkcie pôvodne obsiahnuté v Express sú teraz samostatné moduly. Pozrite si [zoznam middleware funkcií](https://github.com/senchalabs/connect#middleware).
+Express od verzie 4.x nie je závislý na [Connect](https://github.com/senchalabs/connect) module. Okrem výnimky `express.static`, všetky predošlé middleware funkcie pôvodne obsiahnuté v Express sú teraz samostatné moduly. Zoznam middleware funkcií [si pozrite tu](https://github.com/senchalabs/connect#middleware).
 
 <h4 id='express.static'>express.static(root, [options])</h4>
 
-Jediným vstavaným  middlewarom v Express je `express.static`. Táto funkcia je založená na [serve-static](https://github.com/expressjs/serve-static) a je zodpovedná za servovanie statického obsahu v Express aplikácii.
+Jediným vstavaným  middlewarom v Express je `express.static` funkcia. Táto funkcia je založená na [serve-static](https://github.com/expressjs/serve-static) module a je zodpovedná za servovanie statického obsahu v Express aplikácii.
 
 Parameter `root` špecifikuje hlavný adresár z ktorého bude statický obsah servovaný.
 
@@ -227,7 +227,7 @@ Voľiteľný `options` objekt môže mať nasledovné properties:
  `lastModified` | Nastaví `Last-Modified` header na hodnotu dátumu poslednej modifikácie súboru podĺa OS. Možné hodnoty sú `true` alebo `false`. | Boolean | `true` |
 | `maxAge`      | Nastaví max-age parameter pre Cache-Control header, v milisekundách alebo string v [ms formáte](https://www.npmjs.org/package/ms) | Number | 0 |
 | `redirect`    | Presmeruje na koncové "/" ak je cesta priečinkom. | Boolean | `true` |
-| `setHeaders`  | Funkcia pre nastavenie HTTP headera servovaného so súborom. | Function |  |
+| `setHeaders`  | Funkcia pre nastavenie HTTP header-a servovaného so súborom. | Function |  |
 
 Tu je príklad použitia `express.static` middleware funkcie s rôznou konfiguráciou options objektu:
 
@@ -259,13 +259,13 @@ app.use(express.static('files'));
 </code>
 </pre>
 
-Pre viac detailov ohľadom funkcie `serve-static` a jej možnostiach si pozrite dokumentáciu k [serve-static](https://github.com/expressjs/serve-static) modulu.
+Pre viac detailov ohľadom `serve-static` funkcie a jej možnostiach si pozrite dokumentáciu k [serve-static](https://github.com/expressjs/serve-static) modulu.
 
 <h2 id='middleware.third-party'>Third-party middleware</h2>
 
 V Express aplikácii možete využiť taktiež third-party middleware funkcionalitu.
 
-Nainštalujte požadovaný Node.js modul a načítajte ho do aplikácie ako aplikačný či router middleware.
+Nainštalujte požadovaný Node.js modul a načítajte ho do aplikácie ako aplikačný, či router middleware.
 
 Nasledujúci príklad demonštruje inštaláciu a načítanie middleware funkcie `cookie-parser` slúžiacej na prácu s cookies.
 

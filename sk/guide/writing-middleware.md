@@ -9,7 +9,7 @@ lang: sk
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Tvorba middleware pre použitie v Express applikáciách
+# Tvorba middleware pre použitie v Express aplikáciách
 
 <h2>Prehľad</h2>
 
@@ -60,7 +60,7 @@ app.listen(3000);
 </code>
 </pre>
 
-<h2>Development</h2>
+<h2>Príklad</h2>
 
 Tu je príklad jednoduchej middleware funkcie nazvanej "myLogger". Táto funkcia len vypíše "LOGGED", vždy keď aplikácia odchytí request. Middleware funkcia je priradená premennej nazvanej `myLogger`.
 
@@ -75,7 +75,7 @@ var myLogger = function (req, res, next) {
 
 <div class="doc-box doc-notice" markdown="1">
 Všimnite si volanie `next()` metódy hore. Zavolanie tejto funkcie vyvolá ďalší middleware v aplikácii.
-Funkcia `next()` nieje súčasťou Node.js či Express API, ale je tretím argumentom s ktorým je middleware funkcia vyvolaná.
+Funkcia `next()` nie je súčasťou Node.js či Express API, ale je tretím argumentom s ktorým je middleware funkcia vyvolaná.
 Funkcia `next()` môže byť nazvaná hocijako, ale podľa konvencie sa zvykne nazývať vždy "next". Aby ste predišli zmätkom používajte túto konvenciu.
 </div>
 

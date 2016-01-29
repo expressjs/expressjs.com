@@ -12,7 +12,7 @@ redirect_from: "/guide/database-integration.html"
 
 # Integrácia s databázou
 
-Pridanie schopnosti pripojenia Express aplikácie na databázu je len otázkou načítania správneho Node.js driver-a. Tento dokument v stručnosti popisuje ako je možné pridať a použiť niektorý z obľúbených Node.js modulov pre pripojenie sa vašej Express aplikácie na databázu:
+Pridanie schopnosti pripojenia Express aplikácie na databázu je len otázkou načítania správneho Node.js drivera. Tento dokument v stručnosti popisuje možnosti pridania a použitia niektorých z obľúbených Node.js modulov pre pripojenie sa vašej Express aplikácie na databázu:
 
 * [Cassandra](#cassandra)
 * [CouchDB](#couchdb)
@@ -26,7 +26,7 @@ Pridanie schopnosti pripojenia Express aplikácie na databázu je len otázkou n
 * [ElasticSearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
-Tieto databázové drivery su len časť z mnoha ďalších, ktoré sú dostupné. Nájdete ich na [npm](https://www.npmjs.com/) stránke.
+Tieto databázové drivery predstavujú len časť z mnoha ďalších, ktoré sú dostupné. Nájdete ich na [npm](https://www.npmjs.com/) stránke.
 </div>
 
 <a name="cassandra"></a>
@@ -87,7 +87,7 @@ books.insert({name: 'The Art of war'}, null, function(err, body) {
 //Get a list of all books
 books.list(function(err, body){
   console.log(body.rows);
-}
+});
 </code>
 </pre>
 
@@ -116,7 +116,7 @@ db.put('name', 'LevelUP', function (err) {
   if (err) return console.log('Ooops!', err);
   db.get('name', function (err, value) {
     if (err) return console.log('Ooops!', err);
-    console.log('name=' + value)
+    console.log('name=' + value);
   });
 
 });

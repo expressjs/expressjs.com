@@ -125,7 +125,7 @@ Volania `next()` a `next(err)` hovoria, že aktuálny handler dokončil svoju ú
 
 Express obsahuje vstavaný error handler, ktorý sa stará o všetky errory, aké sa môžu v aplikácii vyskytnúť. Táto defaultná error-handling middleware funkcia je pridaná na koniec stacku middleware funkcií.
 
-Ak funkcii `next()` predáte error a nespracujete ho vlatným error handlerom, error bude spracovaný vstavaným error handlerom, pričom error a jeho stack trace bude vrátený klientovi. Stack trace nieje vrátený v prípade produkčného módu.
+Ak funkcii `next()` predáte error a nespracujete ho vlatným error handlerom, error bude spracovaný vstavaným error handlerom, pričom error a jeho stack trace bude vrátený klientovi. Stack trace nie je vrátený v prípade produkčného módu.
 
 <div class="doc-box doc-info" markdown="1">
 Ak chcete aplikáciu spustiť v produkčnom móde, nastavte environment premennú `NODE_ENV` na `production`.

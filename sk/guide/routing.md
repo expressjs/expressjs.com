@@ -15,7 +15,7 @@ redirect_from: "/guide/routing.html"
 _Routing_ definuje tzv. koncové body aplikácie (URI) a spôsob, akým odpovedajú na requesty klientov.
 Základné informácie o routing-u sa dozviete v sekcii [Základný routing](/{{ page.lang }}/starter/basic-routing.html).
 
-Tu je príklad, ako definovať základný routing.
+Tu je príklad, ako zadefinovať základný routing.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -49,14 +49,14 @@ app.post('/', function (req, res) {
 </code>
 </pre>
 
-Express podporuje tieto routing metódy korešpondujúce k HTTP metódam: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
+Express podporuje tieto routing metódy korešpondujúce k HTTP metódam: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search` a `connect`.
 
 <div class="doc-box doc-info" markdown="1">
 Tie routing metódy, ktorých názov nie je validným názvom pre JavaScript premennú, zapisujte pomocou zátvorkovej notácie. Napr.:
 `app['m-search']('/', function ...`
 </div>
 
-Existuje špeciálna routing metóda `app.all()`, ktorá nieje odvodená zo žiadnej HTTP metódy. Táto metóda sa používa ako middleware funkcia pre konkrétny koncový bod a všetky jej request metódy.
+Existuje špeciálna routing metóda `app.all()`, ktorá nie je odvodená zo žiadnej HTTP metódy. Táto metóda sa používa ako middleware funkcia pre konkrétny koncový bod a všetky jej request metódy.
 
 Na nasledujúcom príklade je ukážka handler funkcie, ktorá bude vykonaná pri requeste na "/secret" bez ohľadu nato, či bude použitá GET, POST, PUT, DELETE, alebo akákoľvek iná HTTP request metóda podporovaná [http modulom](https://nodejs.org/api/http.html#http_http_methods).
 
@@ -181,11 +181,11 @@ app.get(/.*fly$/, function(req, res) {
 </code>
 </pre>
 
-<h2 id="route-handlers">Route handlers</h2>
+<h2 id="route-handlers">Route handler</h2>
 
-Pre spracovanie requestu je možné zadefinovať viacero callback funkcií správajúcich sa ako [middleware](/{{ page.lang }}/guide/using-middleware.html). Jedinou výnimkou je, že tieto callback-y môžu samé vyvolať `next('route')` a tak vynechať zostávajúce definície callback-ov. Tento mechanizmus môžete použiť k stanoveniu podmienok spracovania a následne potom "odovzdať" riadenie ďalším route definíciám v prípade, ak nie je dôvod ho ďalej spracovávať v aktuálnej route definícii.
+Pre spracovanie requestu je možné zadefinovať viacero callback funkcií správajúcich sa ako [middleware](/{{ page.lang }}/guide/using-middleware.html). Jedinou výnimkou je, že tieto callback-y môžu samé vyvolať `next('route')` a tak vynechať zostávajúce definície callback-ov. Tento mechanizmus môžete použiť k stanoveniu podmienok spracovania a následne potom "odovzdať" riadenie ďalším route definíciám v prípade, že nie je dôvod ho ďalej spracovávať v aktuálnej route definícii.
 
-Route handler môže byť definovaný ako funkcia, či pole funkcií alebo kombinácia oboch, ako na nasledujúcich príkladoch.
+Route handler môže byť definovaný ako funkcia, pole funkcií či kombinácia oboch, ako na nasledujúcich príkladoch.
 
 Jedna callback funkcia pre obsluhu spracovania:
 
