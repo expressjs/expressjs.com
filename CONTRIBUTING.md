@@ -4,6 +4,15 @@ This repository is only for issues related to the website [http://expressjs.com]
 
 Feel free to make changes to the template files or the document files. The supporting docs are located in their respective directories, and the API docs are located under the `_includes` directory.
 
+## Code of Conduct
+
+The [Code of Conduct][] explains the bare minimum behavior expectations for all contributors to Express documentation. Please read it before participating.
+
+## Developer's Certificate of Origin
+
+All code contributions to Express documentation fall under the Express documentation [Developer's Certificate of Origin][].
+
+
 ## Help translate the docs to other languages
 
 We are looking for volunteers to help translate the Express docs to other languages.
@@ -38,3 +47,6 @@ Then, load [http://localhost:4000/](http://localhost:4000/) on your browser.
 Jekyll uses a variant of Markdown known as [Kramdown](http://kramdown.gettalong.org/quickref.html), read up the docs if you need to go beyond basic Markdown in the doc files.
 
 To understand the template system used by Jekyll, read up the [Liquid template engine docs](http://liquidmarkup.org/).
+
+[Code of Conduct]: CODE_OF_CONDUCT.md
+[Developer's Certificate of Origin]: DCO.md
