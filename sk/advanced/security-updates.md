@@ -32,7 +32,7 @@ Zoznam nižšie obsahuje objavené a opravené vulnereability Express-u v špeci
   * 4.8.4
     * Node.js 0.10 obsahuje leak `file descriptorov` čo v určitých situáciách ovplyvňuje `express.static` a `res.sendfile`. Malicious (škodlivé) requesty môžu spôsobiť leakovanie `file descriptorov` a môžu eventuálne viesť k `EMFILE` errorom a neresponzívnosti servera.
   * 4.8.0
-    * Sparse polia s extrémne vysokými indexami v query stringoch môžu spôsobiť, že pre realizáciu procesu nieje dostatok pamäte a následne crash servera.
+    * Sparse polia s extrémne vysokými indexami v query stringoch môžu spôsobiť, že pre realizáciu procesu nie je dostatok pamäte a následne crash servera.
     * Extrémne vnorené query string objekty môžu spôsobiť zablokovanie procesu a dočasnú neresponzívnosť servera.
 
 ## 3.x
@@ -52,7 +52,7 @@ Zoznam nižšie obsahuje objavené a opravené vulnereability Express-u v špeci
   * 3.16.6
     * Node.js 0.10 obsahuje leak `file descriptorov` čo v určitých situáciách ovplyvňuje `express.static` a `res.sendfile`. Malicious (škodlivé) requesty môžu spôsobiť leakovanie `file descriptorov` a môžu eventuálne viesť k `EMFILE` errorom a neresponzívnosti servera.
   * 3.16.0
-    * Sparse polia s extrémne vysokými indexami v query stringoch môžu spôsobiť, že pre realizáciu procesu nieje dostatok pamäte a následne crash servera.
+    * Sparse polia s extrémne vysokými indexami v query stringoch môžu spôsobiť, že pre realizáciu procesu nie je dostatok pamäte a následne crash servera.
     * Extrémne vnorené query string objekty môžu spôsobiť zablokovanie procesu a dočasnú neresponzívnosť servera.
   * 3.3.0
     * Odpoveď 404-ka na pokus o nepodporovaný method override bola náchylná na cross-site scripting útok.

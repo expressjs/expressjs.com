@@ -3,26 +3,26 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
 ### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Použitie process manager-ov pre Express aplikácie
+title: Použitie správcov procesov pre Express aplikácie
 menu: advanced
 lang: sk
 redirect_from: "/advanced/pm.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Použitie process manager-ov pre Express aplikácie
+# Použitie správcov procesov pre Express aplikácie
 
-Ak vaša Express aplikácia pobeží v produkcii, môže byť k dosiahnutiu nasledujúcich úloh vhodné použiť _process manager_:
+Ak vaša Express aplikácia pobeží v produkcii, môže byť k dosiahnutiu nasledujúcich úloh vhodné použiť _správcu processov (process manager)_:
 
 - Reštart aplikácie v prípade pádu.
 - Získanie prehľadu o spotrebe zdrojov a výkonnosti aplikácie.
 - Dynamická zmena nastavení k zlepšeniu výkonnosti.
 - Kontrola nad clustering-om.
 
-Process manager je čiastočne ako aplikačný server: je to "kontainer" pre aplikácie uľahčujúci ich deployment,
+Správca procesov je čiastočne akoby aplikačný server: je to "kontainer" pre aplikácie uľahčujúci ich deployment,
 poskytujúci vysokú dostupnosť a umožňujúci správu aplikácie v runtime.
 
-Medzi najpopulárnejšie process manager-y pre Express i ostatné Node.js aplikácie patria:
+Najpopulárnejšie s pomedzi správcov procesov pre Express i ostatné Node.js aplikácie patria:
 
 - [StrongLoop Process Manager](#sl)
 - [PM2](#pm2)
@@ -35,7 +35,7 @@ Tu je jednoduchý náhľad na každý z týchto nástrojov. Pre detailnejšie po
 
 ## <a id="sl">StrongLoop Process Manager</a>
 
-StrongLoop Process Manager (StrongLoop PM) je produkčný process manager pre Node.js aplikácie. StrongLoop PM má vstavaný load balancing, monitoring, multi-host deployment a grafickú konzolu.
+StrongLoop Process Manager (StrongLoop PM) je produkčný správca procesov pre Node.js aplikácie. StrongLoop PM má vstavaný load balancing, monitoring, multi-host deployment a grafickú konzolu.
 StrongLoop PM môžete využiť na tieto úlohy:
 
 - Build, package, a deploy vašej Node.js aplikácie na lokálny alebo remote systém.
@@ -65,7 +65,7 @@ $ cd my-app
 $ slc start
 </code></pre>
 
-Zobrazenie stavu Process Manager-a a všetkých deploynutých aplikácií:
+Zobrazenie stavu správcu procesov a všetkých deploynutých aplikácií:
 
 <pre><code class="language-sh" translate="no">
 $ slc ctl
@@ -119,7 +119,7 @@ $ slc ctl remove my-app
 
 ## <a id="pm2">PM2</a>
 
-PM2 je produkčný process manager pre Node.js aplikácie so vstavaným load balancer-om. PM2 dokáže udržať aplikáciu nažive a vykonať jej prípadný reload bez výpadku a umožní vykonávať bežné system admin úlohy.  PM2 taktiež umožňuje spravovať logovanie, monitoring a clustering aplikácií.
+PM2 je produkčný správca procesov pre Node.js aplikácie so vstavaným load balancerom. PM2 dokáže udržať aplikáciu nažive a vykonať jej prípadný reload bez výpadku a umožní vykonávať bežné system admin úlohy.  PM2 taktiež umožňuje spravovať logovanie, monitoring a clustering aplikácií.
 
 Pre viac informácií sa pozrite na [https://github.com/Unitech/pm2](https://github.com/Unitech/pm2).
 

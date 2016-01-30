@@ -3,18 +3,18 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
 ### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Vývoj templatovacích enginov pre Express
+title: Vývoj template enginov pre Express
 menu: advanced
 lang: sk
 redirect_from: "/advanced/developing-template-engines.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Vývoj templatovacích enginov pre Express
+# Vývoj template enginov pre Express
 
-Pre vytvorenie vlastného templatovacieho enginu použite metódu `app.engine(ext, callback)`. Parameter `ext` špecifikuje príponu súborov a `callback` je samotná funkcia templatovacieho enginu, ktorá príjma nasledujúce prvky ako parametre: cesta k súboru, options objekt a callback funkciu.
+Pre vytvorenie vlastného template enginu použite metódu `app.engine(ext, callback)`. Parameter `ext` špecifikuje príponu súborov a `callback` je samotná funkcia template enginu, ktorá príjma nasledujúce prvky ako parametre: cesta k súboru, options objekt a callback funkciu.
 
-Nasledujúci kód je príkladom implementácie veľmi jednoduchého templatovacieho enginu pre rendrovanie `.ntl` súborov.
+Nasledujúci kód je príkladom implementácie veľmi jednoduchého template enginu pre rendrovanie `.ntl` súborov.
 
 <pre><code class="language-javascript" translate="no">
 var fs = require('fs'); // this engine requires the fs module

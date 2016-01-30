@@ -3,20 +3,20 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
 ### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
-title: Security - Osvedčené postupy pre Express v produkcii
+title: Osvedčené postupy pre Express v produkcii - Security
 menu: advanced
 lang: sk
 redirect_from: "/advanced/best-practice-security.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Security - Osvedčené postupy pre Express v produkcii
+# Osvedčené postupy pre Express v produkcii - Security
 
 ## Prehľad
 
-Termín _"production"_ znamená stav životného cyklu softvéru, kedy je aplikácia, alebo jej API, všeobecne prístupná koncovým používateľom. Naopak, termín _"development"_ znamená, že sa kód aktívne vyvíja a testuje a aplikácia nie je verejne prístupná. K tomu korešpondujúce systémové prostredia sa nazývajú _production_ resp. _development_ prostredie.
+Termín _"production"_ znamená stav životného cyklu softvéru, kedy je aplikácia, alebo jej API, všeobecne prístupná koncovým používateľom. Naopak, termín _"development"_ znamená, že sa kód aktívne vyvíja, testuje a aplikácia nie je verejne prístupná. K tomu korešpondujúce systémové prostredia sa nazývajú _production_ resp. _development_ prostredie.
 
-Development a production prostredia sú zvyčajne nakonfigurované odlišne a majú často diametrálne odlišné požiadavky. Čo je povolené v developmente nemusí byť akceptovateľné v produkcii. Napr., v development prostredí môžete chcieť logovať maximum error-ov pre debugovanie, ale takéto správananie systému môže byť považované za security problém v prípade production prostredia. V prípade development-u sa často nemusíte starať o veci ako sú škálovateľnosť, spoľahlivosť a výkonnosť, kým v produkcii sa tieto veci považujú za kritické.
+Development a production prostredia sú zvyčajne nakonfigurované odlišne a majú často diametrálne odlišné požiadavky. Čo je povolené v developmente nemusí byť akceptovateľné v produkcii. Napr., v development prostredí môžete chcieť logovať maximum errorov pre debugovanie, ale takéto správanie sa systému môže byť považované za security problém v prípade production prostredia. V prípade developmentu sa často nemusíte starať o veci ako sú škálovateľnosť, spoľahlivosť a výkonnosť, kým v produkcii sa tieto veci považujú za kritické.
 
 Tento článok popisuje niektoré osvedčené postupy z pohľadu bezpečnosti Express aplikácií v produkcii.
 
@@ -33,7 +33,7 @@ Taktiež sa uistite, že nepoužívate žiadnu z vulnerable Express verzií nach
 
 Ak vaša aplikácia pracuje, alebo prenáša citlivé dáta, použivajte [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) pre zabepečenie spojenia a dát. Táto technológia šifruje dáta pred ich odoslaním z klienta na server, čím predchádza niektorým bežným (a jednoduchým) útokom. Hoci Ajax a POST requesty nemusia byť viditeľné a zdajú sa skryté v prehliadači, ich network traffic je zraniteľný na [packet sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) a [man-in-the-middle útoky](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Možno ste sa už stretli so Secure Socket Layer (SSL) šifrovaním. [TLS je ďalšou modifikáciou SSL](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx). Inými slovami, ak ste predtým používali SSL, zvážte upgrade na TLS. Vo všeobecnosti odporúčame pre handlovanie TLS používať Nginx. Ako dobrú referenciu ako nakonfigurovať TLS na Ngix-e (a ďalších serveroch) sa pozrite na [Recommended Server Configurations (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Možno ste sa už stretli so Secure Socket Layer (SSL) šifrovaním. [TLS je ďalšou modifikáciou SSL](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx). Inými slovami, ak ste predtým používali SSL, zvážte upgrade na TLS. Vo všeobecnosti odporúčame pre handlovanie TLS používať Nginx. Ako dobrú referenciu ako nakonfigurovať TLS na Ngix-e (a ďalších serveroch) uvádzame [Recommended Server Configurations (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
 Taktiež sa vám môže hodiť nástroj [Let's Encrypt](https://letsencrypt.org/about/), pomocou ktorého môžete získať TLS certifikát zdarma. Je voľnou, automatizovanou a otvorenou certifikačnou autoritou (CA) prevádzkovanou [Internet Security Research Group (ISRG)](https://letsencrypt.org/isrg/).
 
@@ -142,7 +142,7 @@ app.use(session({
 
 ## Uistite sa, že používate bezpečné dependencie
 
-Používanie npm, ku správe dependencií aplikácie, je efektívne a pohodlné, avšak dependencie ktoré používate môžu obsahovať kritické bezpečnostné diery, ktoré môžu ovplyvniť taktiež vašu aplikáciu. Bezpečnosť vašej aplikácie je len tak silná, ako je "najslabší článok" vašej aplikácie.
+Používanie npm, ku správe dependencií aplikácie je efektívne a pohodlné, avšak dependencie ktoré používate môžu obsahovať kritické bezpečnostné diery, ktoré môžu taktiež ovplyvniť vašu aplikáciu. Bezpečnosť vašej aplikácie je len tak silná, ako je "najslabší článok" vašej aplikácie.
 
 Pre uistenie sa, že sú vaše dependencie bezpečné, použite niektorý z nasledujúcich toolov: [nsp](https://www.npmjs.com/package/nsp) a [requireSafe](https://requiresafe.com/). Oba robia v princípe to isté.
 
@@ -188,4 +188,4 @@ Tu sú ďalšie odporúčania zo skvelého [Node.js Security Checklist](https://
 
 Sledujte [Node Security Project](https://nodesecurity.io/advisories) odporučania, ktoré môžu ovplyvňovať Express, príp. ostatné moduly vašej aplikácie. Vo všeobecnosti je Node Security Project skvelým zdrojom znalostí a toolov ohľadom bezpečnosti Node.js.
 
-Na záver dodajme, že Express aplikácie - ako akékoľvek iné webové aplikácie - môžu byť náchylné na mnohé typy útokov. Zoznámte sa so zoznamom známych [web vulnerabilities](https://www.owasp.org/index.php/Top_10_2013-Top_10) a prijmite opatrenie, aby ste im vyhli.
+Na záver dodajme, že Express aplikácie - ako akékoľvek iné webové aplikácie - môžu byť náchylné na mnohé typy útokov. Zoznámte sa so zoznamom známych [web vulnerabilities](https://www.owasp.org/index.php/Top_10_2013-Top_10) a prijmite opatrenia, aby ste sa im vyhli.
