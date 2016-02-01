@@ -3,45 +3,39 @@
 ### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
 ### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
-title: Express community
+title: Express komunita
 menu: resources
-lang: en
+lang: sk
 redirect_from: "/resources/community.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
-# Community
+# Komunita
 
-##Mailing List
+##Mailová skupina
 
-Join over 2000 Express users or browse over 5000
-discussions in the [Google Group](https://groups.google.com/group/express-js).
+Pridajte sa k 2000 Express používateľom alebo sa pozrite na viac než 5000
+[Google Group](https://groups.google.com/group/express-js) diskusií.
 
 ##Gitter
 
-The [strongloop/express chatroom](https://gitter.im/strongloop/express) is great place
-for developers interested in the everyday discussions related to Express.
+[Strongloop/express chatroom](https://gitter.im/strongloop/express) je skvelým miestom pre developerov zaujímajúcich sa a diskutujúcich o Express-e.
 
-##IRC Channel
+##IRC kanál
 
-Hundreds of developers idle in #express on freenode every day.
-If you have questions about the framework, jump in for quick
-feedback.
+Stovky developerov nájdete každý deň na #express kanály.
+Ak máte otázky ohľadom frameworku, spýtajte sa.
 
-##Examples
+#Príklady
 
-View dozens of Express application [examples](https://github.com/strongloop/express/tree/master/examples)
-in the repository covering everything from API design and authentication
-to template engine integration.
+Pozrite sa na desiatky Express aplikácií v priečinku [examples](https://github.com/strongloop/express/tree/master/examples)
+v Express repozitári pokrývajúcich všetko od návrhu API a autentifikácie až po integráciu template enginov.
 
-##Issues
+##Problémy
 
-If you've come across what you think is a bug, or just want to make
-a feature request open a ticket in the [issue queue](https://github.com/strongloop/express/issues).
+Ak ste sa stretli s problémom, o ktorom si myslíte že je bug, alebo len chcete požiadať o pridanie novej funkcionality, založte tiket v [issue queue](https://github.com/strongloop/express/issues).
 
-##Third Party
+##Tretie strany
 
-Our vibrant community has created a large variety of extensions,
-[middleware modules](/{{ page.lang }}/resources/middleware.html) and higher level frameworks. Check them out in the
-[wiki](https://github.com/strongloop/express/wiki).
+Naša aktívna komunita vytvorila množstvo rozšírení, [middleware modulov](/{{ page.lang }}/resources/middleware.html) a frameworkov. Pre viac info si pozrite [wiki](https://github.com/strongloop/express/wiki).
 
