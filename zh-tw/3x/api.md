@@ -15,18 +15,18 @@ lang: zh-tw
   <h1>3.x API</h1>
 
   <a id='express' class='h2'></a>
-  {% include api/{{ page.lang }}/3x/express.md %}
+  {% include api/en/3x/express.md %}
 
   <a id='application' class='h2'></a>
-  {% include api/{{ page.lang }}/3x/app.md %}
+  {% include api/en/3x/app.md %}
 
   <a id='request' class='h2'></a>
-  {% include api/{{ page.lang }}/3x/req.md %}
+  {% include api/en/3x/req.md %}
 
   <a id='response' class='h2'></a>
-  {% include api/{{ page.lang }}/3x/res.md %}
+  {% include api/en/3x/res.md %}
 
   <a id='middleware' class='h2'></a>
-  {% include api/{{ page.lang }}/3x/middleware.md %}
+  {% include api/en/3x/middleware.md %}
 
 </div>

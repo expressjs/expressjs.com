@@ -10,27 +10,27 @@ A router behaves like middleware itself, so you can use it as an argument to
 
 The top-level `express` object has a `Router()` function that creates a new `router` object.
 
-{% include api/{{ page.lang }}/4x/router-Router.md %}
+{% include api/en/4x/router-Router.md %}
 </section>
 
 <h3 id='router.methods'>Methods</h3>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/router-all.md %}
+  {% include api/en/4x/router-all.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/router-METHOD.md %}
+  {% include api/en/4x/router-METHOD.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/router-param.md %}
+  {% include api/en/4x/router-param.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/router-route.md %}
+  {% include api/en/4x/router-route.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/router-use.md %}
+  {% include api/en/4x/router-use.md %}
 </section>

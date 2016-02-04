@@ -8,16 +8,10 @@
     <section class="content">
 
       {% include header/header-{{ page.lang }}.html %}
-    
-      {% include api/{{ page.lang }}/3x/menu.md %}
+
+      {% include api/en/3x/menu.md %}
 
       <div id="overlay"></div>
-
-      {% if page.lang != 'en' %}
-        <div id="i18n-notice-box" class="doc-box doc-warn">
-          {% include i18n-notice.html %}
-        </div>
-      {% endif %}
 
       {{ content }}
 

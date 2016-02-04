@@ -28,111 +28,111 @@ In Express 4, `req.files` is no longer available on the `req` object by default.
 </div>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-app.md %}
+  {% include api/en/4x/req-app.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-baseUrl.md %}
+  {% include api/en/4x/req-baseUrl.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-body.md %}
+  {% include api/en/4x/req-body.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-cookies.md %}
+  {% include api/en/4x/req-cookies.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-fresh.md %}
+  {% include api/en/4x/req-fresh.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-hostname.md %}
+  {% include api/en/4x/req-hostname.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-ip.md %}
+  {% include api/en/4x/req-ip.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-ips.md %}
+  {% include api/en/4x/req-ips.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-method.md %}
+  {% include api/en/4x/req-method.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-originalUrl.md %}
+  {% include api/en/4x/req-originalUrl.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-params.md %}
+  {% include api/en/4x/req-params.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-path.md %}
+  {% include api/en/4x/req-path.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-protocol.md %}
+  {% include api/en/4x/req-protocol.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-query.md %}
+  {% include api/en/4x/req-query.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-route.md %}
+  {% include api/en/4x/req-route.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-secure.md %}
+  {% include api/en/4x/req-secure.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-signedCookies.md %}
+  {% include api/en/4x/req-signedCookies.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-stale.md %}
+  {% include api/en/4x/req-stale.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-subdomains.md %}
+  {% include api/en/4x/req-subdomains.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-xhr.md %}
+  {% include api/en/4x/req-xhr.md %}
 </section>
 
 <h3 id='req.methods'>Methods</h3>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-accepts.md %}
+  {% include api/en/4x/req-accepts.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-acceptsCharsets.md %}
+  {% include api/en/4x/req-acceptsCharsets.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-acceptsEncodings.md %}
+  {% include api/en/4x/req-acceptsEncodings.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-acceptsLanguages.md %}
+  {% include api/en/4x/req-acceptsLanguages.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-get.md %}
+  {% include api/en/4x/req-get.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-is.md %}
+  {% include api/en/4x/req-is.md %}
 </section>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/req-param.md %}
+  {% include api/en/4x/req-param.md %}
 </section>
