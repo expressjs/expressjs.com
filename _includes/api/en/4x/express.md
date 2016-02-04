@@ -10,5 +10,5 @@ var app = express();
 <h3 id='express.methods'>Methods</h3>
 
 <section markdown="1">
-  {% include api/{{ page.lang }}/4x/express.static.md %}
+  {% include api/en/4x/express.static.md %}
 </section>
