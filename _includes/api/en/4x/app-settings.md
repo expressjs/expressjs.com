@@ -1,25 +1,41 @@
-If `name` is one of the application settings, it affects the behavior of the application. The following table lists application settings.
+The following table lists application settings.
+
+Note that sub-apps will:
+
+* Not inherit the value of settings that have a default value.  You must set the value in the sub-app.
+* Inherit the value of settings with no default value; these are explicitly noted in the table below.
+
+Exceptions: Sub-apps will inherit the value of `trust proxy` even though it does not have a default value (for backward-compatibility);
+Sub-apps will not inherit the value of `view cache` in production (when `NODE_ENV` is "production").
 
 <div class="table-scroller">
   <table class="doctable" border="1">
-    <thead><tr><th id="app-settings-property">Property</th><th>Type</th><th>Value</th><th>Default</th></tr></thead>
+    <thead><tr><th id="app-settings-property">Property</th><th>Type</th><th>Description</th><th>Default</th></tr></thead>
     <tbody>
     <tr>
   <td markdown="1">
   `case sensitive routing`
   </td>
       <td>Boolean</td>
-      <td>Enable case sensitivity.</td>
-      <td>Disabled. Treats "/Foo" and "/foo" as the same.</td>
+      <td>Enable case sensitivity.
+      When enabled, "/Foo" and "/foo" are different routes.
+      When disabled, "/Foo" and "/foo" are treated the same.
+      </td>
+      <td>N/A (undefined)
+      <br/>NOTE: Sub-apps will inherit the value of this setting.
+      </td>
     </tr>
     <tr>
   <td markdown="1">
   `env`
   </td>
       <td>String</td>
-      <td>Environment mode.</td>
+      <td>Environment mode.
+      Be sure to set to "production" in a production environment;
+      see [Production best practices: performance and reliability](/advanced/best-practice-performance.html#env).
+      </td>
   <td markdown="1">
-  `process.env.NODE_ENV` (`NODE_ENV` environment variable) or "development".
+  `process.env.NODE_ENV` (`NODE_ENV` environment variable) or "development" if `NODE_ENV` is not set.
   </td>
     </tr>
     <tr>
@@ -43,7 +59,7 @@ If `name` is one of the application settings, it affects the behavior of the app
       <td>String</td>
       <td>Specifies the default JSONP callback name.</td>
   <td markdown="1">
-  `?callback=`
+  "callback"
   </td>
     </tr>
     <tr>
@@ -51,18 +67,20 @@ If `name` is one of the application settings, it affects the behavior of the app
   `json replacer`
   </td>
       <td>String</td>
-      <td>JSON replacer callback.</td>
-  <td markdown="1">
-  `null`
-  </td>
+      <td>JSON replacer callback function.
+        <br/>NOTE: Sub-apps will inherit the value of this setting.
+      </td>
+  <td>N/A (undefined) </td>
     </tr>
     <tr>
   <td markdown="1">
   `json spaces`
   </td>
       <td>Number</td>
-      <td>When set, sends prettified JSON string indented with the specified amount of spaces.</td>
-      <td>Disabled.</td>
+      <td>When set, sends prettified JSON string indented with the specified amount of spaces.
+        <br/>NOTE: Sub-apps will inherit the value of this setting.
+      </td>
+      <td>N/A (undefined)</td>
     </tr>
     <tr>
   <td markdown="1">
@@ -85,8 +103,12 @@ A custom query string parsing function will receive the complete query string, a
   `strict routing`
   </td>
       <td>Boolean</td>
-      <td>Enable strict routing.</td>
-      <td>Disabled. Treats "/foo" and "/foo/" as the same by the router.</td>
+      <td>Enable strict routing.
+      When enabled, the router treats "/foo" and "/foo/" as different.
+      Otherwise, the router treats "/foo" and "/foo/" as the same.
+        <br/>NOTE: Sub-apps will inherit the value of this setting.
+      </td>
+      <td>N/A (undefined) </td>
     </tr>
     <tr>
   <td markdown="1">
@@ -107,8 +129,11 @@ A custom query string parsing function will receive the complete query string, a
   `trust proxy` is disabled by default. When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The `req.ips` property, then, contains an array of IP addresses the client is connected through. To enable it, use the values described in the [`trust proxy` options table](#trust.proxy.options.table).
 
   The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.org/package/proxy-addr) package.  For more information, see its documentation.
+
+ <br/>NOTE: Sub-apps _will_ inherit the value of this setting, even though it has a default value.
+
   </td>
-      <td>Disabled.</td>
+      <td>`false` (disabled)</td>
     </tr>
     <tr>
   <td markdown="1">
@@ -125,9 +150,11 @@ A custom query string parsing function will receive the complete query string, a
   `view cache`
   </td>
       <td>Boolean</td>
-      <td>Enables view template compilation caching.</td>
+      <td>Enables view template compilation caching.
+      <br/>NOTE: Sub-apps will not inherit the value of this setting in production (when `NODE_ENV` is "production").
+      </td>
   <td markdown="1">
-  `true` in production.
+  `true` in production, otherwise undefined.
   </td>
     </tr>
     <tr>
@@ -135,8 +162,10 @@ A custom query string parsing function will receive the complete query string, a
   `view engine`
   </td>
       <td>String</td>
-      <td>The default engine extension to use when omitted.</td>
-      <td></td>
+      <td>The default engine extension to use when omitted.
+        <br/>NOTE: Sub-apps will inherit the value of this setting.
+      </td>
+      <td>N/A (undefined)</td>
     </tr>
     <tr>
   <td markdown="1">
