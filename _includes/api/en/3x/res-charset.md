@@ -2,8 +2,8 @@
 
 Assign the charset. Defaults to "utf-8".
 
-~~~js
+{% highlight js %}
 res.charset = 'value';
 res.send('<p>some html</p>');
 // => Content-Type: text/html; charset=value
-~~~
+{% endhighlight %}

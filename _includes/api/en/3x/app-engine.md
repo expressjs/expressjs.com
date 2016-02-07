@@ -8,18 +8,18 @@ a "foo.jade" file Express will invoke the following internally,
 and cache the `require()` on subsequent calls to increase
 performance.
 
-~~~js
+{% highlight js %}
 app.engine('jade', require('jade').__express);
-~~~
+{% endhighlight %}
 
 For engines that do not provide `.__express` out of the box -
 or if you wish to "map" a different extension to the template engine
 you may use this method. For example mapping the EJS template engine to
 ".html" files:
 
-~~~js
+{% highlight js %}
 app.engine('html', require('ejs').renderFile);
-~~~
+{% endhighlight %}
 
 In this case EJS provides a `.renderFile()` method with
 the same signature that Express expects: `(path, options, callback)`,
@@ -32,8 +32,8 @@ library was created to map all of node's popular template
 engines to follow this convention, thus allowing them to
 work seemlessly within Express.
 
-~~~js
+{% highlight js %}
 var engines = require('consolidate');
 app.engine('haml', engines.haml);
 app.engine('html', engines.hogan);
-~~~
+{% endhighlight %}
