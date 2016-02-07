@@ -10,7 +10,7 @@ GitHub Pages websites being served through [Jekyll](http://jekyllrb.com/), you w
 
 Install the [jekyll-redirect-from](https://github.com/jekyll/jekyll-redirect-from) gem:
 ```
-$ gem install jekyll-redirect-from`
+$ gem install jekyll-redirect-from
 ```
 
 Once installed, `cd` to the repository directory and run Jekyll using the following command:
