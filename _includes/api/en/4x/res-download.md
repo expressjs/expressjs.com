@@ -7,7 +7,7 @@ Override this default with the `filename` parameter.
 When an error ocurrs or transfer is complete, the method calls the optional callback function `fn`.
 This method uses [res.sendFile()](#res.sendFile) to transfer the file.
 
-~~~js
+{% highlight js %}
 res.download('/report-12345.pdf');
 
 res.download('/report-12345.pdf', 'report.pdf');
@@ -20,4 +20,4 @@ res.download('/report-12345.pdf', 'report.pdf', function(err){
     // decrement a download credit, etc.
   }
 });
-~~~
+{% endhighlight %}

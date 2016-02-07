@@ -3,7 +3,7 @@
 The `app` object conventionally denotes the Express application.
 Create it by calling the top-level `express()` function exported by the Express module:
 
-~~~js
+{% highlight js %}
 var express = require('express');
 var app = express();
 
@@ -12,7 +12,7 @@ app.get('/', function(req, res){
 });
 
 app.listen(3000);
-~~~
+{% endhighlight %}
 
 The `app` object has methods for
 

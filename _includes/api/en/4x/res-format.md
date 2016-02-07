@@ -11,7 +11,7 @@ this within the callback using methods such as `res.set()` or `res.type()`.
 The following example would respond with `{ "message": "hey" }` when the `Accept` header field is set
 to "application/json" or "\*/json" (however if it is "\*/\*", then the response will be "hey").
 
-~~~js
+{% highlight js %}
 res.format({
   'text/plain': function(){
     res.send('hey');
@@ -30,12 +30,12 @@ res.format({
     res.status(406).send('Not Acceptable');
   }
 });
-~~~
+{% endhighlight %}
 
 In addition to canonicalized MIME types, you may also use extension names mapped
 to these types for a slightly less verbose implementation:
 
-~~~js
+{% highlight js %}
 res.format({
   text: function(){
     res.send('hey');
@@ -49,4 +49,4 @@ res.format({
     res.send({ message: 'hey' });
   }
 });
-~~~
+{% endhighlight %}

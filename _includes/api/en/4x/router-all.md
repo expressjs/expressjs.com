@@ -1,6 +1,6 @@
 <h3 id='router.all'>router.all(path, [callback, ...] callback)</h3>
 
-This method functions just like the `router.METHOD()` methods, except that it matches all HTTP verbs. 
+This method functions just like the `router.METHOD()` methods, except that it matches all HTTP verbs.
 
 This method is extremely useful for
 mapping "global" logic for specific path prefixes or arbitrary matches.
@@ -11,21 +11,21 @@ that these callbacks do not have to act as end points; `loadUser`
 can perform a task, then call `next()` to continue matching subsequent
 routes.
 
-~~~js
+{% highlight js %}
 router.all('*', requireAuthentication, loadUser);
-~~~
+{% endhighlight %}
 
 Or the equivalent:
 
-~~~js
+{% highlight js %}
 router.all('*', requireAuthentication)
 router.all('*', loadUser);
-~~~
+{% endhighlight %}
 
 Another example of this is white-listed "global" functionality. Here
 the example is much like before, but it only restricts paths prefixed with
 "/api":
 
-~~~js
+{% highlight js %}
 router.all('/api/*', requireAuthentication);
-~~~
+{% endhighlight %}

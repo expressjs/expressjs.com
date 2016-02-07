@@ -2,7 +2,7 @@
 
 The `mount` event is fired on a sub-app, when it is mounted on a parent app. The parent app is passed to the callback function.
 
-~~~js
+{% highlight js %}
 var admin = express();
 
 admin.on('mount', function (parent) {
@@ -15,4 +15,4 @@ admin.get('/', function (req, res) {
 });
 
 app.use('/admin', admin);
-~~~
+{% endhighlight %}

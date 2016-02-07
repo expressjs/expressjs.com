@@ -7,18 +7,18 @@ For example, if you try to render a "foo.jade" file, Express invokes the
 following internally, and caches the `require()` on subsequent calls to increase
 performance.
 
-~~~js
+{% highlight js %}
 app.engine('jade', require('jade').__express);
-~~~
+{% endhighlight %}
 
 Use this method for engines that do not provide `.__express` out of the box,
 or if you wish to "map" a different extension to the template engine.
 
 For example, to map the EJS template engine to ".html" files:
 
-~~~js
+{% highlight js %}
 app.engine('html', require('ejs').renderFile);
-~~~
+{% endhighlight %}
 
 In this case, EJS provides a `.renderFile()` method with
 the same signature that Express expects: `(path, options, callback)`,
@@ -29,8 +29,8 @@ Some template engines do not follow this convention.  The
 [consolidate.js](https://github.com/tj/consolidate.js) library maps Node template engines to follow this convention,
 so they work seemlessly with Express.
 
-~~~js
+{% highlight js %}
 var engines = require('consolidate');
 app.engine('haml', engines.haml);
 app.engine('html', engines.hogan);
-~~~
+{% endhighlight %}

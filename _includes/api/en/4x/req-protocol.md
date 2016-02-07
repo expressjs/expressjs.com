@@ -7,7 +7,7 @@ to a non-falsey value, the value of the `X-Forwarded-Proto` header field will
 be trusted and used if present. This header can be set by the client or by
 the proxy.
 
-~~~js
+{% highlight js %}
 req.protocol
 // => "http"
-~~~
+{% endhighlight %}

@@ -5,13 +5,13 @@ Mounts the [middleware](/guide/using-middleware.html) `function`(s) at the `path
 <div class="doc-box doc-info" markdown="1">
   A route will match any path that follows its path immediately with a "<code>/</code>".
   For example: <code>app.use('/apple', ...)</code> will match "/apple", "/apple/images",
-  "/apple/images/news", and so on.  
+  "/apple/images/news", and so on.
 </div>
 
 <div class="doc-box doc-info" markdown="1">
 `req.originalUrl` in a middleware is a combination of `req.baseUrl` and `req.path`, as shown in the following example.
 
-~~~js
+{% highlight js %}
 app.use('/admin', function(req, res, next) {
   // GET 'http://www.example.com/admin/new'
   console.log(req.originalUrl); // '/admin/new'
@@ -19,24 +19,24 @@ app.use('/admin', function(req, res, next) {
   console.log(req.path); // '/new'
   next();
 });
-~~~
+{% endhighlight %}
 </div>
 
 Mounting a middleware at a `path` will cause the middleware function to be executed whenever the base of the requested path matches the `path`.
 
 Since `path` defaults to "/", middleware mounted without a path will be executed for every request to the app.
 
-~~~js
+{% highlight js %}
 // this middleware will be executed for every request to the app
 app.use(function (req, res, next) {
   console.log('Time: %d', Date.now());
   next();
 });
-~~~
+{% endhighlight %}
 
 Middleware functions are executed sequentially, therefore the order of middleware inclusion is important.
 
-~~~js
+{% highlight js %}
 // this middleware will not allow the request to go beyond it
 app.use(function(req, res, next) {
   res.send('Hello World');
@@ -46,7 +46,7 @@ app.use(function(req, res, next) {
 app.get('/', function (req, res) {
   res.send('Welcome');
 });
-~~~
+{% endhighlight %}
 
 `path` can be a string representing a path, a path pattern, a regular expression to match paths,
 or an array of combinations thereof.
@@ -236,29 +236,29 @@ middleware in an Express app.
 
 Serve static content for the app from the "public" directory in the application directory:
 
-~~~js
+{% highlight js %}
 // GET /style.css etc
 app.use(express.static(__dirname + '/public'));
-~~~
+{% endhighlight %}
 
 Mount the middleware at "/static" to serve static content only when their request path is prefixed with "/static":
 
-~~~js
+{% highlight js %}
 // GET /static/style.css etc.
 app.use('/static', express.static(__dirname + '/public'));
-~~~
+{% endhighlight %}
 
 Disable logging for static content requests by loading the logger middleware after the static middleware:
 
-~~~js
+{% highlight js %}
 app.use(express.static(__dirname + '/public'));
 app.use(logger());
-~~~
+{% endhighlight %}
 
 Serve static files from multiple directories, but give precedence to "./public" over the others:
 
-~~~js
+{% highlight js %}
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/files'));
 app.use(express.static(__dirname + '/uploads'));
-~~~
+{% endhighlight %}
