@@ -119,7 +119,7 @@ app.get('/ab+cd', function(req, res) {
 });
 </code></pre>
 
-This route path will match `abcd`, `abxcd`, `abRABDOMcd`, `ab123cd`, and so on.
+This route path will match `abcd`, `abxcd`, `abRANDOMcd`, `ab123cd`, and so on.
 
 <pre><code class="language-javascript" translate="no">
 app.get('/ab*cd', function(req, res) {
