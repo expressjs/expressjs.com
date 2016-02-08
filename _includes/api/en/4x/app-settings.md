@@ -20,9 +20,9 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
       <td>Enable case sensitivity.
       When enabled, "/Foo" and "/foo" are different routes.
       When disabled, "/Foo" and "/foo" are treated the same.
+        <br/><b>NOTE</b>: Sub-apps will inherit the value of this setting.
       </td>
       <td>N/A (undefined)
-      <br/>NOTE: Sub-apps will inherit the value of this setting.
       </td>
     </tr>
     <tr>
@@ -68,9 +68,10 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   </td>
       <td>String</td>
       <td>JSON replacer callback function.
-        <br/>NOTE: Sub-apps will inherit the value of this setting.
+        <br/><b>NOTE</b>: Sub-apps will inherit the value of this setting.
       </td>
-  <td>N/A (undefined) </td>
+  <td>N/A (undefined)
+  </td>
     </tr>
     <tr>
   <td markdown="1">
@@ -78,7 +79,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   </td>
       <td>Number</td>
       <td>When set, sends prettified JSON string indented with the specified amount of spaces.
-        <br/>NOTE: Sub-apps will inherit the value of this setting.
+        <br/><b>NOTE</b>: Sub-apps will inherit the value of this setting.
       </td>
       <td>N/A (undefined)</td>
     </tr>
@@ -106,7 +107,7 @@ A custom query string parsing function will receive the complete query string, a
       <td>Enable strict routing.
       When enabled, the router treats "/foo" and "/foo/" as different.
       Otherwise, the router treats "/foo" and "/foo/" as the same.
-        <br/>NOTE: Sub-apps will inherit the value of this setting.
+        <br/><b>NOTE</b>: Sub-apps will inherit the value of this setting.
       </td>
       <td>N/A (undefined) </td>
     </tr>
@@ -130,7 +131,7 @@ A custom query string parsing function will receive the complete query string, a
 
   The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.org/package/proxy-addr) package.  For more information, see its documentation.
 
- <br/>NOTE: Sub-apps _will_ inherit the value of this setting, even though it has a default value.
+<b>NOTE</b>: Sub-apps _will_ inherit the value of this setting, even though it has a default value.
 
   </td>
       <td>`false` (disabled)</td>
@@ -151,7 +152,7 @@ A custom query string parsing function will receive the complete query string, a
   </td>
       <td>Boolean</td>
       <td>Enables view template compilation caching.
-      <br/>NOTE: Sub-apps will not inherit the value of this setting in production (when `NODE_ENV` is "production").
+      <br/><b>NOTE</b>: Sub-apps will not inherit the value of this setting in production (when `NODE_ENV` is "production").
       </td>
   <td markdown="1">
   `true` in production, otherwise undefined.
@@ -163,7 +164,7 @@ A custom query string parsing function will receive the complete query string, a
   </td>
       <td>String</td>
       <td>The default engine extension to use when omitted.
-        <br/>NOTE: Sub-apps will inherit the value of this setting.
+        <br/><b>NOTE</b>: Sub-apps will inherit the value of this setting.
       </td>
       <td>N/A (undefined)</td>
     </tr>
