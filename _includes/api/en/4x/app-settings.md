@@ -5,7 +5,7 @@ Note that sub-apps will:
 * Not inherit the value of settings that have a default value.  You must set the value in the sub-app.
 * Inherit the value of settings with no default value; these are explicitly noted in the table below.
 
-Exceptions: Sub-apps will inherit the value of `trust proxy` even though it does not have a default value (for backward-compatibility);
+Exceptions: Sub-apps will inherit the value of `trust proxy` even though it has a default value (for backward-compatibility);
 Sub-apps will not inherit the value of `view cache` in production (when `NODE_ENV` is "production").
 
 <div class="table-scroller">
