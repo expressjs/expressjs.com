@@ -9,14 +9,14 @@ For example if a <strong>file</strong> field was named "image",
 and a file was uploaded, `req.files.image` would contain
 the following `File` object:
 
-~~~js
+{% highlight js %}
 { size: 74643,
   path: '/tmp/8ef9c52abe857867fd0a4e9a819d1876',
   name: 'edge.png',
   type: 'image/png',
   hash: false,
   lastModifiedDate: Thu Aug 09 2012 20:07:51 GMT-0700 (PDT),
-  _writeStream: 
+  _writeStream:
    { path: '/tmp/8ef9c52abe857867fd0a4e9a819d1876',
      fd: 13,
      writable: false,
@@ -31,7 +31,7 @@ the following `File` object:
   length: [Getter],
   filename: [Getter],
   mime: [Getter] }
-~~~
+{% endhighlight %}
 
 The `bodyParser()` middleware utilizes the
 <a href="https://github.com/felixge/node-formidable">node-formidable</a>
@@ -40,6 +40,6 @@ is the `keepExtensions` formidable option, defaulting to <strong>false</strong>
 which in this case gives you the filename "/tmp/8ef9c52abe857867fd0a4e9a819d1876" void of
 the ".png" extension. To enable this, and others you may pass them to `bodyParser()`:
 
-~~~js
+{% highlight js %}
 app.use(express.bodyParser({ keepExtensions: true, uploadDir: '/my/files' }));
-~~~
+{% endhighlight %}

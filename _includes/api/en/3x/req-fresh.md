@@ -3,7 +3,7 @@
 Check if the request is fresh - aka Last-Modified and/or the ETag still match,
 indicating that the resource is "fresh".
 
-~~~js
+{% highlight js %}
 req.fresh
 // => true
-~~~
+{% endhighlight %}

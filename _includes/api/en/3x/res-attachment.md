@@ -5,11 +5,11 @@ a `filename` is given then the Content-Type will be
 automatically set based on the extname via `res.type()`,
 and the Content-Disposition's "filename=" parameter will be set.
 
-~~~js
+{% highlight js %}
 res.attachment();
 // Content-Disposition: attachment
 
 res.attachment('path/to/logo.png');
 // Content-Disposition: attachment; filename="logo.png"
 // Content-Type: image/png
-~~~
+{% endhighlight %}

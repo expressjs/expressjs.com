@@ -6,7 +6,7 @@ If `name` is an array, the `callback` trigger is registered for each parameter d
 
 For example, when `:user` is present in a route path, you may map user loading logic to automatically provide `req.user` to the route, or perform validations on the parameter input.
 
-~~~js
+{% highlight js %}
 app.param('user', function(req, res, next, id) {
 
   // try to get the user details from the User model and attach it to the request object
@@ -21,13 +21,13 @@ app.param('user', function(req, res, next, id) {
     }
   });
 });
-~~~
+{% endhighlight %}
 
 Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on `app` will be triggered only by route parameters defined on `app` routes.
 
 All param callbacks will be called before any handler of any route in which the param occurs, and they will each be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following examples.
 
-~~~js
+{% highlight js %}
 app.param('id', function (req, res, next, id) {
   console.log('CALLED ONLY ONCE');
   next();
@@ -42,17 +42,17 @@ app.get('/user/:id', function (req, res) {
   console.log('and this matches too');
   res.end();
 });
-~~~
+{% endhighlight %}
 
 On `GET /user/42`, the following is printed:
 
-~~~
+```
 CALLED ONLY ONCE
 although this matches
 and this matches too
-~~~
+```
 
-~~~js
+{% highlight js %}
 app.param(['id', 'page'], function (req, res, next, value) {
   console.log('CALLED ONLY ONCE with', value);
   next();
@@ -67,16 +67,16 @@ app.get('/user/:id/:page', function (req, res) {
   console.log('and this matches too');
   res.end();
 });
-~~~
+{% endhighlight %}
 
 On `GET /user/42/3`, the following is printed:
 
-~~~
+```
 CALLED ONLY ONCE with 42
 CALLED ONLY ONCE with 3
 although this matches
 and this matches too
-~~~
+```
 
 <div class="doc-box doc-warn" markdown="1">
 The following section describes `app.param(callback)`, which is deprecated as of v4.11.0.
@@ -90,7 +90,7 @@ The middleware returned by the function decides the behavior of what happens whe
 
 In this example, the `app.param(name, callback)` signature is modified to `app.param(name, accessId)`. Instead of accepting a name and a callback, `app.param()` will now accept a name and a number.
 
-~~~js
+{% highlight js %}
 var express = require('express');
 var app = express();
 
@@ -117,11 +117,11 @@ app.get('/user/:id', function (req, res) {
 app.listen(3000, function () {
   console.log('Ready');
 });
-~~~
+{% endhighlight %}
 
 In this example, the `app.param(name, callback)` signature remains the same, but instead of a middleware callback, a custom data type checking function has been defined to validate the data type of the user id.
 
-~~~js
+{% highlight js %}
 app.param(function(param, validator) {
   return function (req, res, next, val) {
     if (validator(val)) {
@@ -136,7 +136,7 @@ app.param(function(param, validator) {
 app.param('id', function (candidate) {
   return !isNaN(parseFloat(candidate)) && isFinite(candidate);
 });
-~~~
+{% endhighlight %}
 
 <div class="doc-box doc-info" markdown="1">
 The '`.`' character can't be used to capture a character in your capturing regexp. For example you can't use `'/user-.+/'` to capture `'users-gami'`, use `[\\s\\S]` or `[\\w\\W]` instead (as in `'/user-[\\s\\S]+/'`.

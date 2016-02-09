@@ -1,10 +1,10 @@
 <h3 id='cookieParser'>cookieParser()</h3>
 
 Parses the Cookie header field and populates `req.cookies`
-with an object keyed by the cookie names. Optionally you may enabled 
+with an object keyed by the cookie names. Optionally you may enabled
 signed cookie support by passing a `secret` string.
 
-~~~js
+{% highlight js %}
 app.use(express.cookieParser());
 app.use(express.cookieParser('some secret'));
-~~~
+{% endhighlight %}

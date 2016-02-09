@@ -3,7 +3,7 @@
 Check if the request is stale - aka Last-Modified and/or the ETag do not match,
 indicating that the resource is "stale".
 
-~~~js
+{% highlight js %}
 req.stale
 // => true
-~~~
+{% endhighlight %}

@@ -3,7 +3,7 @@
 Returns the specified HTTP request header field (case-insensitive match).
 The `Referrer` and `Referer` fields are interchangeable.
 
-~~~js
+{% highlight js %}
 req.get('Content-Type');
 // => "text/plain"
 
@@ -12,6 +12,6 @@ req.get('content-type');
 
 req.get('Something');
 // => undefined
-~~~
+{% endhighlight %}
 
 Aliased as `req.header(field)`.

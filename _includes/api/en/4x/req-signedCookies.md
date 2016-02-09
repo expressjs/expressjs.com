@@ -7,10 +7,10 @@ in a different object to show developer intent; otherwise, a malicious attack co
 or encrypted; but simply prevents tampering (because the secret used to sign is private).
 If no signed cookies are sent, the property defaults to `{}`.
 
-~~~js
+{% highlight js %}
 // Cookie: user=tobi.CP7AWaXDfAKIRfH49dQzKJx7sKzzSoPq7/AcBBRVwlI3
 req.signedCookies.user
 // => "tobi"
-~~~
+{% endhighlight %}
 
 For more information, issues, or concerns, see [cookie-parser](https://github.com/expressjs/cookie-parser).

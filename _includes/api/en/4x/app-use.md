@@ -43,7 +43,6 @@ Sub-apps will:
 For details, see [Application settings](/en/4x/api.html#app.settings.table).
 </div>
 
-
 Middleware functions are executed sequentially, therefore the order of middleware inclusion is important.
 
 {% highlight js %}

@@ -6,8 +6,8 @@ freely for internal routing purposes. For example the "mounting" feature
 of <a href="#app.use">app.use()</a> will rewrite `req.url` to
 strip the mount point.
 
-~~~js
+{% highlight js %}
 // GET /search?q=something
 req.originalUrl
 // => "/search?q=something"
-~~~
+{% endhighlight %}

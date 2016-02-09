@@ -6,7 +6,7 @@ Deprecated. Use either `req.params`, `req.body` or `req.query`, as applicable.
 
 Return the value of param `name` when present.
 
-~~~js
+{% highlight js %}
 // ?name=tobi
 req.param('name')
 // => "tobi"
@@ -15,10 +15,10 @@ req.param('name')
 req.param('name')
 // => "tobi"
 
-// /user/tobi for /user/:name 
+// /user/tobi for /user/:name
 req.param('name')
 // => "tobi"
-~~~
+{% endhighlight %}
 
 Lookup is performed in the following order:
 

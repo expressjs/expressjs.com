@@ -46,7 +46,7 @@ Express supports the following routing methods corresponding to the HTTP methods
 </table>
 
 <div class="doc-box doc-info" markdown="1">
-  To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example, 
+  To route methods which translate to invalid JavaScript variable names, use the bracket notation. For example,
   `app['m-search']('/', function ...`.
 </div>
 
@@ -67,9 +67,9 @@ It loads middleware at a path for all request methods.
 In the following example, the handler is executed for requests to "/secret" whether using
 GET, POST, PUT, DELETE, or any other HTTP request method.
 
-~~~js
+{% highlight js %}
 app.all('/secret', function (req, res, next) {
   console.log('Accessing the secret section ...')
   next() // pass control to the next handler
 });
-~~~
+{% endhighlight %}

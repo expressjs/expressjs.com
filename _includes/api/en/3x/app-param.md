@@ -11,7 +11,7 @@ providing the additional value of the parameter, here named as `id`.
 An attempt to load the user is then performed, assigning `req.user`,
 otherwise passing an error to `next(err)`.
 
-~~~js
+{% highlight js %}
 app.param('user', function(req, res, next, id){
   User.find(id, function(err, user){
     if (err) {
@@ -24,18 +24,18 @@ app.param('user', function(req, res, next, id){
     }
   });
 });
-~~~
+{% endhighlight %}
 
 Alternatively you may pass only a `callback`, in which
 case you have the opportunity to alter the `app.param()` API.
 For example the <a href="http://github.com/expressjs/express-params">express-params</a>
 defines the following callback which allows you to restrict parameters to a given
-regular expression. 
+regular expression.
 
 This example is a bit more advanced, checking if the second argument is a regular
 expression, returning the callback which acts much like the "user" param example.
 
-~~~js
+{% highlight js %}
 app.param(function(name, fn){
   if (fn instanceof RegExp) {
     return function(req, res, next, val){
@@ -49,12 +49,12 @@ app.param(function(name, fn){
     }
   }
 });
-~~~
+{% endhighlight %}
 
 The method could now be used to effectively validate parameters, or also
 parse them to provide capture groups:
 
-~~~js
+{% highlight js %}
 app.param('id', /^\d+$/);
 
 app.get('/user/:id', function(req, res){
@@ -67,4 +67,4 @@ app.get('/range/:range', function(req, res){
   var range = req.params.range;
   res.send('from ' + range[1] + ' to ' + range[2]);
 });
-~~~
+{% endhighlight %}
