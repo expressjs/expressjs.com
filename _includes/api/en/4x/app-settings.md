@@ -30,7 +30,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   `env`
   </td>
       <td>String</td>
-      <td>Environment mode.
+      <td markdown="1">Environment mode.
       Be sure to set to "production" in a production environment;
       see [Production best practices: performance and reliability](/advanced/best-practice-performance.html#env).
       </td>
