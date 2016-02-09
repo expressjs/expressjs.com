@@ -30,9 +30,9 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   `env`
   </td>
       <td>String</td>
-      <td markdown="1">Environment mode.
+      <td>Environment mode.
       Be sure to set to "production" in a production environment;
-      see [Production best practices: performance and reliability](/advanced/best-practice-performance.html#env).
+      see <a href="/advanced/best-practice-performance.html#env">Production best practices: performance and reliability</a>.
       </td>
   <td markdown="1">
   `process.env.NODE_ENV` (`NODE_ENV` environment variable) or "development" if `NODE_ENV` is not set.
@@ -124,43 +124,45 @@ A custom query string parsing function will receive the complete query string, a
   `trust proxy`
   </td>
       <td>Varied</td>
-  <td markdown="1">
-  Indicates the app is behind a front-facing proxy, and to use the `X-Forwarded-*` headers to determine the connection and the IP address of the client. NOTE: `X-Forwarded-*` headers are easily spoofed and the detected IP addresses are unreliable.
+  <td>
+  Indicates the app is behind a front-facing proxy, and to use the <code>>X-Forwarded-*</code> headers to determine the connection and the IP address of the client. NOTE: <code>X-Forwarded-*</code> headers are easily spoofed and the detected IP addresses are unreliable.
 
-  `trust proxy` is disabled by default. When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The `req.ips` property, then, contains an array of IP addresses the client is connected through. To enable it, use the values described in the [`trust proxy` options table](#trust.proxy.options.table).
+  <code>trust proxy</code> is disabled by default. When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The <code>req.ips</code> property, then, contains an array of IP addresses the client is connected through. To enable it, use the values described in the <a href="#trust.proxy.options.table">trust proxy options table</a>.
 
-  The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.org/package/proxy-addr) package.  For more information, see its documentation.
+  The <code>trust proxy</code> setting is implemented using the <a href="https://www.npmjs.org/package/proxy-addr">proxy-addr</a> package.  For more information, see its documentation.
 
-<b>NOTE</b>: Sub-apps _will_ inherit the value of this setting, even though it has a default value.
+<b>NOTE</b>: Sub-apps <i>will</i> inherit the value of this setting, even though it has a default value.
 
   </td>
-      <td>`false` (disabled)</td>
+      <td>
+      <code>false</code> (disabled)
+      </td>
     </tr>
     <tr>
-  <td markdown="1">
-  `views`
+  <td>
+  <code>views</code>
   </td>
       <td>String or Array</td>
       <td>A directory or an array of directories for the application's views. If an array, the views are looked up in the order they occur in the array.</td>
   <td markdown="1">
-  `process.cwd() + '/views'`
+  <code>process.cwd() + '/views'</code>
   </td>
     </tr>
     <tr>
   <td markdown="1">
-  `view cache`
+  <code>view cache</code>
   </td>
       <td>Boolean</td>
       <td>Enables view template compilation caching.
-      <br/><b>NOTE</b>: Sub-apps will not inherit the value of this setting in production (when `NODE_ENV` is "production").
+      <br/><b>NOTE</b>: Sub-apps will not inherit the value of this setting in production (when <code>NODE_ENV</code> is "production").
       </td>
   <td markdown="1">
-  `true` in production, otherwise undefined.
+  <code>true</code> in production, otherwise undefined.
   </td>
     </tr>
     <tr>
   <td markdown="1">
-  `view engine`
+  <code>view engine</code>
   </td>
       <td>String</td>
       <td>The default engine extension to use when omitted.
@@ -170,18 +172,18 @@ A custom query string parsing function will receive the complete query string, a
     </tr>
     <tr>
   <td markdown="1">
-  `x-powered-by`
+  <code>x-powered-by</code>
   </td>
       <td>Boolean</td>
       <td>Enables the "X-Powered-By: Express" HTTP header.</td>
   <td markdown="1">
-  `true`
+  <code>true</code>
   </td>
     </tr>
     </tbody>
   </table>
 
-  <h5 id="trust.proxy.options.table">Options for `trust proxy` setting</h5>
+  <h5 id="trust.proxy.options.table">Options for <code>trust proxy</code> setting</h5>
 
   <p markdown="1">
   Read [Express behind proxies](/guide/behind-proxies.html) for more
@@ -194,9 +196,9 @@ A custom query string parsing function will receive the complete query string, a
       <tr>
         <td>Boolean</td>
   <td markdown="1">
-  If `true`, the client's IP address is understood as the left-most entry in the `X-Forwarded-*` header.
+  If <code>true</code>, the client's IP address is understood as the left-most entry in the <code>X-Forwarded-*</code> header.
 
-  If `false`, the app is understood as directly facing the Internet and the client's IP address is derived from `req.connection.remoteAddress`. This is the default setting.
+  If <code>false</code>, the app is understood as directly facing the Internet and the client's IP address is derived from <code>req.connection.remoteAddress</code>. This is the default setting.
   </td>
       </tr>
       <tr>
@@ -204,9 +206,9 @@ A custom query string parsing function will receive the complete query string, a
   <td markdown="1">
   An IP address, subnet, or an array of IP addresses, and subnets to trust. The following is the list of pre-configured subnet names.
 
-  * loopback - `127.0.0.1/8`, `::1/128`
-  * linklocal - `169.254.0.0/16`, `fe80::/10`
-  * uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
+  * loopback - <code>127.0.0.1/8</code>, <code>::1/128</code>
+  * linklocal - <code>169.254.0.0/16</code>, <code>fe80::/10</code>
+  * uniquelocal - <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>, <code>fc00::/7</code>
 
   Set IP addresses in any of the following ways:
 
@@ -221,7 +223,7 @@ A custom query string parsing function will receive the complete query string, a
       <tr>
         <td>Number</td>
   <td markdown="1">
-  Trust the `n`th hop from the front-facing proxy server as the client.
+  Trust the nth hop from the front-facing proxy server as the client.
   </td>
       </tr>
       <tr>
@@ -237,7 +239,7 @@ A custom query string parsing function will receive the complete query string, a
     </tbody>
   </table>
 
-  <h5 id="etag.options.table">Options for `etag` setting</h5>
+  <h5 id="etag.options.table">Options for <code>etag</code> setting</h5>
 
   <p markdown="1">
   The ETag functionality is implemented using the
@@ -251,8 +253,8 @@ A custom query string parsing function will receive the complete query string, a
       <tr>
         <td>Boolean</td>
   <td markdown="1">
-  `true` enables weak ETag. This is the default setting.<br>
-  `false` disables ETag altogether.
+  <code>true</code> enables weak ETag. This is the default setting.<br>
+  <code>false</code> disables ETag altogether.
   </td>
       </tr>
       <tr>
