@@ -5,13 +5,12 @@ Mounts the [middleware](/guide/using-middleware.html) `function`(s) at the `path
 <div class="doc-box doc-info" markdown="1">
   A route will match any path that follows its path immediately with a "<code>/</code>".
   For example: <code>app.use('/apple', ...)</code> will match "/apple", "/apple/images",
-  "/apple/images/news", and so on.  
+  "/apple/images/news", and so on.
 </div>
 
-<div class="doc-box doc-info" markdown="1">
-`req.originalUrl` in a middleware is a combination of `req.baseUrl` and `req.path`, as shown in the following example.
+Note that `req.originalUrl` in a middleware function is a combination of `req.baseUrl` and `req.path`, as shown in the following example.
 
-~~~js
+{% highlight js %}
 app.use('/admin', function(req, res, next) {
   // GET 'http://www.example.com/admin/new'
   console.log(req.originalUrl); // '/admin/new'
@@ -19,24 +18,35 @@ app.use('/admin', function(req, res, next) {
   console.log(req.path); // '/new'
   next();
 });
-~~~
-</div>
+{% endhighlight %}
 
-Mounting a middleware at a `path` will cause the middleware function to be executed whenever the base of the requested path matches the `path`.
+Mounting a middleware function at a `path` will cause the middleware function to be executed whenever the base of the requested path matches the `path`.
 
 Since `path` defaults to "/", middleware mounted without a path will be executed for every request to the app.
 
-~~~js
+{% highlight js %}
 // this middleware will be executed for every request to the app
 app.use(function (req, res, next) {
   console.log('Time: %d', Date.now());
   next();
 });
-~~~
+{% endhighlight %}
+
+<div class="doc-box doc-info" markdown="1">
+**NOTE**
+
+Sub-apps will:
+
+* Not inherit the value of settings that have a default value.  You must set the value in the sub-app.
+* Inherit the value of settings with no default value.
+
+For details, see [Application settings](/en/4x/api.html#app.settings.table).
+</div>
+
 
 Middleware functions are executed sequentially, therefore the order of middleware inclusion is important.
 
-~~~js
+{% highlight js %}
 // this middleware will not allow the request to go beyond it
 app.use(function(req, res, next) {
   res.send('Hello World');
@@ -46,14 +56,13 @@ app.use(function(req, res, next) {
 app.get('/', function (req, res) {
   res.send('Welcome');
 });
-~~~
+{% endhighlight %}
 
 `path` can be a string representing a path, a path pattern, a regular expression to match paths,
 or an array of combinations thereof.
 
-<div class="doc-box doc-notice" markdown="1">
-The middleware in the below are simple examples.
-</div>
+
+The following table provides some simple examples of mounting middleware.
 
 <div class="table-scroller">
 <table class="doctable" border="1">
@@ -69,8 +78,8 @@ The middleware in the below are simple examples.
     <tr>
       <td>Path</td>
       <td>
-        <pre><code class="language-js">// will match paths starting with /abcd
-app.use('/abcd', function (req, res, next) {
+      This will match paths starting with `/abcd`:
+        <pre><code class="language-js">app.use('/abcd', function (req, res, next) {
   next();
 });</code></pre>
       </td>
@@ -79,22 +88,25 @@ app.use('/abcd', function (req, res, next) {
     <tr>
       <td>Path Pattern</td>
       <td>
-        <pre><code class="language-js">// will match paths starting with /abcd and /abd
-app.use('/abc?d', function (req, res, next) {
+      This will match paths starting with `/abcd` and `/abd`:
+        <pre><code class="language-js">app.use('/abc?d', function (req, res, next) {
   next();
-});
+});</code></pre>
 
-// will match paths starting with /abcd, /abbcd, /abbbbbcd and so on
+This will match paths starting with `/abcd`, `/abbcd`, `/abbbbbcd`, and so on:
+<pre><code class="language-js">
 app.use('/ab+cd', function (req, res, next) {
   next();
-});
+});</code></pre>
 
-// will match paths starting with /abcd, /abxcd, /abFOOcd, /abbArcd and so on
+This will match paths starting with `/abcd`, `/abxcd`, `/abFOOcd`, `/abbArcd`, and so on:
+<pre><code class="language-js">
 app.use('/ab\*cd', function (req, res, next) {
   next();
-});
+});</code></pre>
 
-// will match paths starting with /ad and /abcd
+This will match paths starting with `/ad` and `/abcd`:
+<pre><code class="language-js">
 app.use('/a(bc)?d', function (req, res, next) {
   next();
 });</code></pre>
@@ -104,8 +116,8 @@ app.use('/a(bc)?d', function (req, res, next) {
     <tr>
       <td>Regular Expression</td>
       <td>
-        <pre><code class="language-js">// will match paths starting with /abc and /xyz
-app.use(/\/abc|\/xyz/, function (req, res, next) {
+      This will match paths starting with `/abc` and `/xyz`:
+        <pre><code class="language-js">app.use(/\/abc|\/xyz/, function (req, res, next) {
   next();
 });</code></pre>
       </td>
@@ -114,8 +126,8 @@ app.use(/\/abc|\/xyz/, function (req, res, next) {
     <tr>
       <td>Array</td>
       <td>
-        <pre><code class="language-js">// will match paths starting with /abcd, /xyza, /lmn, and /pqr
-app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
+      This will match paths starting with `/abcd`, `/xyza`, `/lmn`, and `/pqr`:
+        <pre><code class="language-js">app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
   next();
 });</code></pre>
       </td>
@@ -236,29 +248,29 @@ middleware in an Express app.
 
 Serve static content for the app from the "public" directory in the application directory:
 
-~~~js
+{% highlight js %}
 // GET /style.css etc
 app.use(express.static(__dirname + '/public'));
-~~~
+{% endhighlight %}
 
 Mount the middleware at "/static" to serve static content only when their request path is prefixed with "/static":
 
-~~~js
+{% highlight js %}
 // GET /static/style.css etc.
 app.use('/static', express.static(__dirname + '/public'));
-~~~
+{% endhighlight %}
 
 Disable logging for static content requests by loading the logger middleware after the static middleware:
 
-~~~js
+{% highlight js %}
 app.use(express.static(__dirname + '/public'));
 app.use(logger());
-~~~
+{% endhighlight %}
 
 Serve static files from multiple directories, but give precedence to "./public" over the others:
 
-~~~js
+{% highlight js %}
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/files'));
 app.use(express.static(__dirname + '/uploads'));
-~~~
+{% endhighlight %}
