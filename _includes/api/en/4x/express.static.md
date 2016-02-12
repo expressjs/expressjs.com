@@ -16,5 +16,6 @@ The optional `options` object can have the following properties.
 | `maxAge`      | Set the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms) | Number | 0 |
 | `redirect`    | Redirect to trailing "/" when the pathname is a directory. | Boolean | `true` |
 | `setHeaders`  | Function for setting HTTP headers to serve with the file. | Function |  |
+| `fallthrough`  | Let client errors fall-through as unhandled requests, otherwise forward a client error. | Boolean | `true` |
 
 For details on using the middleware, refer [Serving static files in Express](/starter/static-files.html).
