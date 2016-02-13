@@ -182,8 +182,6 @@
     </li>
     <li id="router-api"><a href="#router">Router</a>
         <ul id="router-menu">
-            <li><a href="#router">Router()</a>
-            </li>
             <li><em>Methods</em>
             </li>
             <li><a href="#router.all">router.all()</a>
