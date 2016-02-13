@@ -27,7 +27,7 @@ so if you're using ".ejs" extensions you don't need to do anything.
 
 Some template engines do not follow this convention.  The
 [consolidate.js](https://github.com/tj/consolidate.js) library maps Node template engines to follow this convention,
-so they work seemlessly with Express.
+so they work seamlessly with Express.
 
 {% highlight js %}
 var engines = require('consolidate');
