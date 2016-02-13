@@ -1,6 +1,6 @@
 <h3 id='req.route'>req.route</h3>
 
-The currently-matched route, a string.  For example:
+Contains the currently-matched route, a string.  For example:
 
 {% highlight js %}
 app.get('/user/:id?', function userIdHandler(req, res) {

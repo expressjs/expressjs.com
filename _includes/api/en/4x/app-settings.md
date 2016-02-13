@@ -20,7 +20,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
       <td>Enable case sensitivity.
       When enabled, "/Foo" and "/foo" are different routes.
       When disabled, "/Foo" and "/foo" are treated the same.
-        <br/><b>NOTE</b>: Sub-apps will inherit the value of this setting.
+        <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
       </td>
       <td>N/A (undefined)
       </td>
@@ -33,7 +33,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
       <td>Environment mode.
       Be sure to set to "production" in a production environment;
       see <a href="/advanced/best-practice-performance.html#env">Production best practices: performance and reliability</a>.
-      </td>
+    </td>
   <td markdown="1">
   `process.env.NODE_ENV` (`NODE_ENV` environment variable) or "development" if `NODE_ENV` is not set.
   </td>
@@ -68,7 +68,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   </td>
       <td>String</td>
       <td>JSON replacer callback function.
-        <br/><b>NOTE</b>: Sub-apps will inherit the value of this setting.
+        <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
       </td>
   <td>N/A (undefined)
   </td>
@@ -79,7 +79,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   </td>
       <td>Number</td>
       <td>When set, sends prettified JSON string indented with the specified amount of spaces.
-        <br/><b>NOTE</b>: Sub-apps will inherit the value of this setting.
+        <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
       </td>
       <td>N/A (undefined)</td>
     </tr>
@@ -107,7 +107,7 @@ A custom query string parsing function will receive the complete query string, a
       <td>Enable strict routing.
       When enabled, the router treats "/foo" and "/foo/" as different.
       Otherwise, the router treats "/foo" and "/foo/" as the same.
-        <br/><b>NOTE</b>: Sub-apps will inherit the value of this setting.
+        <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
       </td>
       <td>N/A (undefined) </td>
     </tr>
@@ -125,14 +125,14 @@ A custom query string parsing function will receive the complete query string, a
   </td>
       <td>Varied</td>
   <td>
-  Indicates the app is behind a front-facing proxy, and to use the <code>>X-Forwarded-*</code> headers to determine the connection and the IP address of the client. NOTE: <code>X-Forwarded-*</code> headers are easily spoofed and the detected IP addresses are unreliable.
-
-  <code>trust proxy</code> is disabled by default. When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The <code>req.ips</code> property, then, contains an array of IP addresses the client is connected through. To enable it, use the values described in the <a href="#trust.proxy.options.table">trust proxy options table</a>.
-
+  Indicates the app is behind a front-facing proxy, and to use the <code>X-Forwarded-*</code> headers to determine the connection and the IP address of the client. NOTE: <code>X-Forwarded-*</code> headers are easily spoofed and the detected IP addresses are unreliable.
+<p>
+  When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The <code>req.ips</code> property, then contains an array of IP addresses the client is connected through. To enable it, use the values described in the <a href="#trust.proxy.options.table">trust proxy options table</a>.
+</p><p>
   The <code>trust proxy</code> setting is implemented using the <a href="https://www.npmjs.org/package/proxy-addr">proxy-addr</a> package.  For more information, see its documentation.
-
+</p><p>
 <b>NOTE</b>: Sub-apps <i>will</i> inherit the value of this setting, even though it has a default value.
-
+</p>
   </td>
       <td>
       <code>false</code> (disabled)
@@ -204,7 +204,7 @@ A custom query string parsing function will receive the complete query string, a
       <tr>
         <td>IP addresses</td>
   <td markdown="1">
-  An IP address, subnet, or an array of IP addresses, and subnets to trust. The following is the list of pre-configured subnet names.
+  An IP address, subnet, or an array of IP addresses, and subnets to trust. Pre-configured subnet names are:
 
   * loopback - <code>127.0.0.1/8</code>, <code>::1/128</code>
   * linklocal - <code>169.254.0.0/16</code>, <code>fe80::/10</code>
@@ -213,9 +213,9 @@ A custom query string parsing function will receive the complete query string, a
   Set IP addresses in any of the following ways:
 
   <pre><code class="language-js">app.set('trust proxy', 'loopback') // specify a single subnet
-  app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
-  app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-  app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code></pre>
+app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
+app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code></pre>
 
   When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client's IP address.
   </td>

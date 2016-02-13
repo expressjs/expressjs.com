@@ -1,6 +1,10 @@
 <h3 id='req.baseUrl'>req.baseUrl</h3>
 
 The URL path on which a router instance was mounted.
+
+The `req.baseUrl` property is similar to the [mountpath](#app.mountpath) property of the `app` object,
+except `app.mountpath` returns the matched path pattern(s).
+
 For example:
 
 {% highlight js %}
@@ -24,6 +28,3 @@ app.use(['/gre+t', '/hel{2}o'], greet); // load the router on '/gre+t' and '/hel
 
 When a request is made to `/greet/jp`, `req.baseUrl` is "/greet".  When a request is
 made to `/hello/jp`, `req.baseUrl` is "/hello".
-
-`req.baseUrl` is similar to the [mountpath](#app.mountpath) property of the `app` object,
-except `app.mountpath` returns the matched path pattern(s).

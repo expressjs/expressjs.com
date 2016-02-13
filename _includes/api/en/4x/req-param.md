@@ -4,7 +4,7 @@
 Deprecated. Use either `req.params`, `req.body` or `req.query`, as applicable.
 </div>
 
-Return the value of param `name` when present.
+Returns the value of param `name` when present.
 
 {% highlight js %}
 // ?name=tobi

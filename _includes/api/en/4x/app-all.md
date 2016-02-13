@@ -23,7 +23,7 @@ app.all('*', loadUser);
 {% endhighlight %}
 
 Another example is white-listed "global" functionality.
-The example is much like before, however it only restricts paths that start with
+The example is similar to the ones above, but it only restricts paths that start with
 "/api":
 
 {% highlight js %}

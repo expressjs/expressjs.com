@@ -4,6 +4,7 @@
     <ul id="express-menu">
         <li><em>Methods</em></li>
         <li id="express-static-middleware"><a href="#express.static">express.static()</a></li>
+        <li id="express-router"><a href="#express.router">express.Router()</a></li>
     </ul>
     </li>
 

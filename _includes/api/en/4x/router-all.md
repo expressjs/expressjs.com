@@ -1,6 +1,6 @@
 <h3 id='router.all'>router.all(path, [callback, ...] callback)</h3>
 
-This method functions just like the `router.METHOD()` methods, except that it matches all HTTP verbs.
+This method is just like the `router.METHOD()` methods, except that it matches all HTTP methods (verbs).
 
 This method is extremely useful for
 mapping "global" logic for specific path prefixes or arbitrary matches.

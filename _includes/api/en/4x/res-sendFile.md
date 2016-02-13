@@ -55,7 +55,8 @@ app.get('/file/:name', function (req, res, next) {
 });
 {% endhighlight %}
 
-`res.sendFile` provides fine-grained support for file serving as illustrated in the following example:
+The following example illustrates using
+`res.sendFile` to provide fine-grained support for serving files:
 
 {% highlight js %}
 app.get('/user/:uid/photos/:file', function(req, res){
