@@ -1,11 +1,11 @@
 <h3 id='router.use'>router.use([path], [function, ...] function)</h3>
 
-Uses the given middleware `function`, with optional mount path `path`, that defaults to "/".
+Uses the specified middleware function or functions, with optional mount path `path`, that defaults to "/".
 
-This method is similar to [app.use()](#app.use). A simple example and usecase is described below.
+This method is similar to [app.use()](#app.use). A simple example and use case is described below.
 See [app.use()](#app.use) for more information.
 
-Middleware is like a plumbing pipe, requests start at the first middleware you define
+Middleware is like a plumbing pipe: requests start at the first middleware function defined
 and work their way "down" the middleware stack processing for each path they match.
 
 {% highlight js %}
@@ -36,13 +36,13 @@ app.use('/foo', router);
 app.listen(3000);
 {% endhighlight %}
 
-The "mount" path is stripped and is _not_ visible to the middleware `function`.
-The main effect of this feature is that mounted middleware may operate without
+The "mount" path is stripped and is _not_ visible to the middleware function.
+The main effect of this feature is that a mounted middleware function may operate without
 code changes regardless of its "prefix" pathname.
 
 The order in which you define middleware with `router.use()` is very important.
 They are invoked sequentially, thus the order defines middleware precedence. For example,
-usually a logger is the very first middleware you would use, so every request is logged.
+usually a logger is the very first middleware you would use, so that every request gets logged.
 
 {% highlight js %}
 var logger = require('morgan');
@@ -55,7 +55,8 @@ router.use(function(req, res){
 {% endhighlight %}
 
 Now suppose you wanted to ignore logging requests for static files, but to continue
-logging routes and middleware defined after `logger()`.  You would simply move `static()` above:
+logging routes and middleware defined after `logger()`.  You would simply move the call to `express.static()` to the top,
+before adding the logger middleware:
 
 {% highlight js %}
 router.use(express.static(__dirname + '/public'));
@@ -65,7 +66,7 @@ router.use(function(req, res){
 });
 {% endhighlight %}
 
-Another concrete example is serving files from multiple directories,
+Another example is serving files from multiple directories,
 giving precedence to "./public" over the others:
 
 {% highlight js %}

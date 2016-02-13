@@ -1,9 +1,9 @@
 <h3 id='app.mountpath'>app.mountpath</h3>
 
-The `app.mountpath` property is the path pattern(s) on which a sub app was mounted.
+The `app.mountpath` property contains one or more path patterns on which a sub-app was mounted.
 
 <div class="doc-box doc-info" markdown="1">
-  A sub app is an instance of `express` which may be used for handling the request to a route.
+  A sub-app is an instance of `express` that may be used for handling the request to a route.
 </div>
 
 {% highlight js %}
@@ -20,9 +20,11 @@ admin.get('/', function (req, res) {
 app.use('/admin', admin); // mount the sub app
 {% endhighlight %}
 
-It is similar to the [baseUrl](#req.baseUrl) property of the `req` object, except `req.baseUrl` returns the matched URL path, instead of the matched pattern(s).
+It is similar to the [baseUrl](#req.baseUrl) property of the `req` object, except `req.baseUrl`
+returns the matched URL path, instead of the matched patterns.
 
-If a sub-app is mounted on multiple path patterns, `app.mountpath` returns the list of patterns it is mounted on, as shown in the following example.
+If a sub-app is mounted on multiple path patterns, `app.mountpath` returns the list of
+patterns it is mounted on, as shown in the following example.
 
 {% highlight js %}
 var admin = express();

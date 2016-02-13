@@ -1,6 +1,7 @@
 <h3 id='app.use'>app.use([path,] function [, function...])</h3>
 
-Mounts the [middleware](/guide/using-middleware.html) `function`(s) at the `path`. If `path` is not specified, it defaults to "/".
+Mounts the specified [middleware](/guide/using-middleware.html) function or functions at the specified path.
+If `path` is not specified, it defaults to "/".
 
 <div class="doc-box doc-info" markdown="1">
   A route will match any path that follows its path immediately with a "<code>/</code>".
@@ -201,7 +202,8 @@ app.use(r1, r2);
       <td>Array</td>
       <td>
       Use an array to group middleware logically.
-      If you pass an array of middleware as the first or only middleware parameters, then you _must_ specify the mount path.
+      If you pass an array of middleware as the first or only middleware parameters,
+      then you <em>must</em> specify the mount path.
 <pre><code class="language-js">var r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();

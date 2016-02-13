@@ -30,8 +30,8 @@ res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly
 The `encode` option allows you to choose the function used for cookie value encoding.
 Does not support asynchronous functions.
 
-Example use case: You need to set a domain wide cookie for another site in your organization to use.
-This other site (not under your administrative control) does not use URI encoded cookie values.
+Example use case: You need to set a domain-wide cookie for another site in your organization.
+This other site (not under your administrative control) does not use URI-encoded cookie values.
 
 {% highlight js %}
 //Default encoding
