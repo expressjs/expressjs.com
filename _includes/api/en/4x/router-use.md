@@ -79,9 +79,9 @@ The `router.use()` method also supports named parameters so that your mount poin
 for other routers can benefit from preloading using named parameters.
 
 __NOTE__: Although these middleware functions are added via a particular router, _when_
-they run is defined by the path they are attached to (not the router). Therefore a piece
-of middleware added via one router may run for routes of other routers if its routes
-match. For example, if two different routers are mounted on the same path:
+they run is defined by the path they are attached to (not the router). Therefore,
+middleware added via one router may run for other routers if its routes
+match. For example, this code shows two different routers mounted on the same path:
 
 {% highlight js %}
 var authRouter = express.Router();
@@ -89,14 +89,18 @@ var openRouter = express.Router();
 
 authRouter.use(require('./authenticate').basic(usersdb));
 
-authRouter.get('/:user_id/edit', function(req, res, next) { ... edit user ui ... });
-openRouter.get('/', function(req, res, next) { ... list users ... })
-openRouter.get('/:user_id', function(req, res, next) { ... view user ... })
+authRouter.get('/:user_id/edit', function(req, res, next) { 
+  // ... Edit user UI ...  
+});
+openRouter.get('/', function(req, res, next) { 
+  // ... List users ... 
+})
+openRouter.get('/:user_id', function(req, res, next) { 
+  // ... View user ... 
+})
 
 app.use('/users', authRouter);
 app.use('/users', openRouter);
 {% endhighlight %}
 
-Even though the authentication middleware was added via the `authRouter` it will run on the routes defined by the `openRouter` as well since both routers were mounted on `/users`.
-
-If this behavior is not desired then the paths must be different for each router.
+Even though the authentication middleware was added via the `authRouter` it will run on the routes defined by the `openRouter` as well since both routers were mounted on `/users`.  To avoid this behavior, use different paths for each router.
