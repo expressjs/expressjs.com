@@ -103,7 +103,7 @@ app.get('/random.text', function (req, res) {
 
 Here are some examples of route paths based on string patterns.
 
-This route path will match `acd` and `abcd`.
+This route path will match `abcd` and `acd`.
 
 <pre><code class="language-javascript" translate="no">
 app.get('/ab?cd', function(req, res) {
