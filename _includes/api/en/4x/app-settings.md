@@ -66,8 +66,8 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   <td markdown="1">
   `json replacer`
   </td>
-      <td>String</td>
-      <td>JSON replacer callback function.
+      <td>Varied</td>
+      <td>The [`replacer` argument used by `JSON.stringify`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter)
         <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
       </td>
   <td>N/A (undefined)
@@ -77,8 +77,10 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   <td markdown="1">
   `json spaces`
   </td>
-      <td>Number</td>
-      <td>When set, sends prettified JSON string indented with the specified amount of spaces.
+      <td>Varied</td>
+      <td>The [`space` argument used by `JSON.stringify`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_space_argument)
+
+This is typically set to the number of spaces to use to indent prettified JSON.
         <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
       </td>
       <td>N/A (undefined)</td>
