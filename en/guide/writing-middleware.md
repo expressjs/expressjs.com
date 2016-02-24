@@ -45,7 +45,7 @@ The following figure shows the elements of a middleware function call:
 </td></tr>
 </table>
 
-Here is an example of a simple "Hello World" Express application, for which you will define two middleware functions:
+Here is an example of a simple "Hello World" Express application, for which you will define a middleware function:
 
 <pre><code class="language-javascript" translate="no">
 var express = require('express');
