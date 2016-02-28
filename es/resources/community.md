@@ -11,7 +11,7 @@ lang: es
 
 # Comunidad
 
-##Lista de envío de correos
+## Lista de envío de correos
 
 Únase a más de 2000 usuarios de Express o explore más de 5000 discusiones en [Google Group](https://groups.google.com/group/express-js).
 
