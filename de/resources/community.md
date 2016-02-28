@@ -11,28 +11,28 @@ lang: de
 
 # Community
 
-##Mailing-Liste
+## Mailing-Liste
 
 Werden Sie Teil von über 2000 Express-Benutzern oder durchsuchen Sie über 5000
 Diskussionen in der [Google Group](https://groups.google.com/group/express-js).
 
-##Gitter
+## Gitter
 
 Der [strongloop/express-Chatroom](https://gitter.im/strongloop/express) eignet sich besonders für Entwickler, die sich für die täglichen Diskussionen zu Express interessieren.
 
-##IRC-Channel
+## IRC-Channel
 
 Hunderte von Entwicklern, die jeden Tag in #express auf freenode auf Ihre Fragen warten. Wenn Sie Fragen zum Framework haben, schauen Sie doch einfach vorbei und holen Sie sich dazu geeignetes Feedback.
 
-##Beispiele
+## Beispiele
 
 Zeigen Sie Dutzende von [Beispielen](https://github.com/strongloop/express/tree/master/examples) zu Express-Anwendungen im Repository an, das alles abdeckt – von API-Design und Authentifizierung bis zur Einbindung von Template-Engines.
 
-##Probleme
+## Probleme
 
 Wenn Sie Ihrer Meinung nach einen Fehler festgestellt haben oder lediglich ein Feature/eine Funktion anfordern wollen, können Sie in der [Issue Queue](https://github.com/strongloop/express/issues) ein Ticket öffnen.
 
-##Andere Anbieter
+## Andere Anbieter
 
 Unsere lebhafte Community hat zu einer Vielzahl von Erweiterungen, [Middlewaremodulen](/{{ page.lang }}/resources/middleware.html) und Frameworks der höheren Ebene geführt. Diese können Sie im
 [Wiki](https://github.com/strongloop/express/wiki) genauer begutachten.
