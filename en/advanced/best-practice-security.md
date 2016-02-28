@@ -152,16 +152,10 @@ Use either or both of the following two tools to help ensure the security of thi
 $ npm i nsp -g
 </code></pre>
 
-Use this command to submit the `npm-shrinkwrap.json` file for validation to [nodesecurity.io](https://nodesecurity.io/):
+Use this command to submit the `npm-shrinkwrap.json` / `package.json` files for validation to [nodesecurity.io](https://nodesecurity.io/):
 
 <pre><code class="language-sh" translate="no">
-$ nsp audit-shrinkwrap
-</code></pre>
-
-Use this command to submit the `package.json` file for validation to [nodesecurity.io](https://nodesecurity.io/):
-
-<pre><code class="language-sh" translate="no">
-$ nsp audit-package
+$ nsp check
 </code></pre>
 
 Here's how to use [requireSafe](https://requiresafe.com/) to audit your Node modules:
