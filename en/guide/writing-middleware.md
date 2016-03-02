@@ -6,6 +6,7 @@ layout: page
 title: Writing middleware for use in Express apps
 menu: guide
 lang: en
+redirect_from: "/guide/writing-middleware.html"
 ### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
