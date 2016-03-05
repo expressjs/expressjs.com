@@ -1,13 +1,13 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Installation d'Express
 menu: starter
 lang: fr
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # Installation
 

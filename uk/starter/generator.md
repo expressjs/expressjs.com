@@ -4,6 +4,10 @@ title: Генератор Express додатку
 menu: starter
 lang: uk
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # Генератор Express додатку
 

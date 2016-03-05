@@ -1,17 +1,15 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express 용어집
 menu: resources
 lang: ko
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # 용어집
-
-<div class="doc-box doc-warn">이 문서는 현재 작업 중인 초안 문서입니다.</div>
 
 ### 라우터(router)
 

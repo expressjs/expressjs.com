@@ -4,6 +4,10 @@ title: Express books and blogs
 menu: resources
 lang: uz
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # Books and blogs
 

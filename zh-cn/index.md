@@ -1,14 +1,13 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: home
 title: Express - Node.js Web 应用程序框架
 menu: home
 lang: zh-cn
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
-
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>

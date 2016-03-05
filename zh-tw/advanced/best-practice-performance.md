@@ -1,13 +1,13 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: 在正式作業中使用 Express 的效能最佳作法
 menu: advanced
 lang: zh-tw
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # 正式作業最佳作法：效能和可靠性
 

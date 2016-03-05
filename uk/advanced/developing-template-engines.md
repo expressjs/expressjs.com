@@ -4,6 +4,10 @@ title: Developing template engines for Express
 menu: advanced
 lang: uk
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # Developing template engines for Express
 

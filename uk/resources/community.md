@@ -4,6 +4,10 @@ title: Express community
 menu: resources
 lang: uk
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # Community
 

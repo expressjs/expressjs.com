@@ -1,17 +1,15 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express 词汇表
 menu: resources
 lang: zh-cn
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # 词汇表
-
-<div class="doc-box doc-warn">当前这是工作草稿</div>
 
 ### 开放源码 (open-source, open source)
 

@@ -4,6 +4,10 @@ title: Express glossary
 menu: resources
 lang: uk
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # Glossary
 

@@ -4,6 +4,10 @@ title: Express security updates
 menu: advanced
 lang: uk
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # Security updates
 

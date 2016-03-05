@@ -1,15 +1,14 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: home
 title: Express - Node.js web application framework
 menu: home
 lang: en
 redirect_from: "/en/index.html"
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
-
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
@@ -39,7 +38,7 @@ redirect_from: "/en/index.html"
       </div>
 
       <div id="frameworks">
-          <h3>Frameworks</h3> Many <a href="/resources/frameworks.html">popular frameworks</a> are based on Express.
+          <h3>Frameworks</h3> Many <a href="en/resources/frameworks.html">popular frameworks</a> are based on Express.
       </div>
   </div>
 

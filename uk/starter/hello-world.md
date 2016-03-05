@@ -4,6 +4,10 @@ title: Express "Hello World" приклад
 menu: starter
 lang: uk
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # Hello world приклад
 

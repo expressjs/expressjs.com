@@ -4,6 +4,10 @@ title: Expressni o'rnatish
 menu: starter
 lang: uz
 ---
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 
 # O'rnatish
 
