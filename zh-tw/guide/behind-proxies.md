@@ -4,10 +4,6 @@ title: 位於 Proxy 背後的 Express
 menu: guide
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 位於 Proxy 背後的 Express
 

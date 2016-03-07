@@ -4,10 +4,6 @@ title: Express용 템플리트 엔진 개발
 menu: advanced
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express용 템플리트 엔진 개발
 

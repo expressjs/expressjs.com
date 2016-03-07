@@ -4,10 +4,6 @@ title: Express 기본 라우팅
 menu: starter
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 기본 라우팅
 

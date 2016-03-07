@@ -4,10 +4,6 @@ title: 安裝 Express
 menu: starter
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 安裝
 

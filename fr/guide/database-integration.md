@@ -4,10 +4,6 @@ title: Express database integration
 menu: guide
 lang: fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Intégration de bases de données
 

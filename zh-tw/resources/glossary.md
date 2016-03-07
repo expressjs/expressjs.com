@@ -4,10 +4,6 @@ title: Express 名詞解釋
 menu: resources
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 名詞解釋
 

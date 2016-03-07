@@ -4,10 +4,6 @@ title: Express の用語集
 menu: resources
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 用語集
 

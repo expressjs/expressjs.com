@@ -4,10 +4,6 @@ title: Preguntas más frecuentes sobre Express
 menu: starter
 lang: es
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Preguntas más frecuentes
 

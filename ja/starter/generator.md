@@ -4,10 +4,6 @@ title: Express のアプリケーション生成プログラム
 menu: starter
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express のアプリケーション生成プログラム
 

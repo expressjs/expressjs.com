@@ -4,10 +4,6 @@ title: Express와 함께 템플리트 엔진 사용
 menu: guide
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express와 함께 템플리트 엔진을 사용
 

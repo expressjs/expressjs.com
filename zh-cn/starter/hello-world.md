@@ -4,10 +4,6 @@ title: Express“Hello World”示例
 menu: starter
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Hello world 示例
 

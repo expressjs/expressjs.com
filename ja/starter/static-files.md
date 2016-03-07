@@ -4,10 +4,6 @@ title: Express での静的ファイルの提供
 menu: starter
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express での静的ファイルの提供
 

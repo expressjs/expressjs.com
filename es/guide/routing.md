@@ -4,10 +4,6 @@ title: Direccionamiento de Express
 menu: guide
 lang: es
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Direccionamiento
 

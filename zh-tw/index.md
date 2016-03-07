@@ -4,10 +4,6 @@ title: Express - Node.js Web 應用程式架構
 menu: home
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>

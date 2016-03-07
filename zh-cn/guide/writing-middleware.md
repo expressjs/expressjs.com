@@ -4,10 +4,6 @@ title: 编写中间件以用于 Express 应用程序
 menu: guide
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 编写中间件以用于 Express 应用程序
 

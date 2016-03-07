@@ -4,10 +4,6 @@ title: Express - framework de aplicativo da web Node.js
 menu: home
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>

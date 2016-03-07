@@ -4,10 +4,6 @@ title: 開發 Express 範本引擎
 menu: advanced
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 開發 Express 範本引擎
 

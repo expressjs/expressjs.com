@@ -4,10 +4,6 @@ title: Middleware Express
 menu: resources
 lang: it
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Middleware di terzi
 

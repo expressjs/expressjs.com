@@ -4,10 +4,6 @@ title: Installazione di Express
 menu: starter
 lang: it
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Installazione
 

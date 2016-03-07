@@ -4,10 +4,6 @@ title: Express 中间件
 menu: resources
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 第三方中间件
 

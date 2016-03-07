@@ -4,10 +4,6 @@ title: Express con i proxy
 menu: guide
 lang: it
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express con i proxy
 

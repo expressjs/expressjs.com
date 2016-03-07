@@ -4,10 +4,6 @@ title: Express 数据库集成
 menu: guide
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 数据库集成
 

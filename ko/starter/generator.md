@@ -4,10 +4,6 @@ title: Express 애플리케이션 생성기
 menu: starter
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express 애플리케이션 생성기
 

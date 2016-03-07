@@ -4,10 +4,6 @@ title: Express のコミュニティー
 menu: resources
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # コミュニティー
 

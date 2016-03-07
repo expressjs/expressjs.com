@@ -4,10 +4,6 @@ title: Compilazione del middleware per l'utilizzo nelle applicazioni Express
 menu: guide
 lang: it
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Compilazione del middleware per l'utilizzo nelle applicazioni Express
 

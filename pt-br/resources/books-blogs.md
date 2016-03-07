@@ -4,10 +4,6 @@ title: Livros e Blogs sobre Express
 menu: Recursos
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Livros e Blogs
 

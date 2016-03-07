@@ -4,10 +4,6 @@ title: Express 常见问题及解答
 menu: starter
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 常见问题及解答
 

@@ -4,10 +4,6 @@ title: Express 應用程式的程序管理程式
 menu: advanced
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express 應用程式的程序管理程式
 

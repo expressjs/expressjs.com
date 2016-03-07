@@ -4,10 +4,6 @@ title: 移轉至 Express 4
 menu: guide
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 移至 Express 4
 

@@ -4,10 +4,6 @@ title: Ecriture de middleware utilisable dans les applications Express
 menu: guide
 lang: fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Ecriture de middleware utilisable dans les applications Express
 

@@ -5,10 +5,6 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/best-practice-security.html"
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Production Best Practices: Security
 

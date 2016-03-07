@@ -4,10 +4,6 @@ title: Express - Node.js фреймворк для веб-додатків.
 menu: home
 lang: uk
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>

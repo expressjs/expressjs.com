@@ -4,10 +4,6 @@ title: Express 應用程式產生器
 menu: starter
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express 應用程式產生器
 

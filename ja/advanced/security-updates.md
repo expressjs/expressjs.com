@@ -4,10 +4,6 @@ title: Express のセキュリティー更新
 menu: advanced
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # セキュリティー更新
 

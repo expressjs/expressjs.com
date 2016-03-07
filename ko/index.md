@@ -4,10 +4,6 @@ title: Express - Node.js 웹 애플리케이션 프레임워크
 menu: home
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>

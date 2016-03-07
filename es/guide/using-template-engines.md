@@ -4,10 +4,6 @@ title: Utilización de motores de plantilla con Express
 menu: guide
 lang: es
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Utilización de motores de plantilla con Express
 

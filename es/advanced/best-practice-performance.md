@@ -4,10 +4,6 @@ title: Mejores prácticas de rendimiento cuando se utiliza Express en producció
 menu: advanced
 lang: es
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Mejores prácticas de producción: rendimiento y fiabilidad
 

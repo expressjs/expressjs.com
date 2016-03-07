@@ -4,10 +4,6 @@ title: Использование шаблонизаторов в Express
 menu: guide
 lang: ru
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Использование шаблонизаторов в Express
 

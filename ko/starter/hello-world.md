@@ -4,10 +4,6 @@ title: Express "Hello World" 예제
 menu: starter
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Hello world 예제
 

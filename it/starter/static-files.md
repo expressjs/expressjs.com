@@ -4,10 +4,6 @@ title: Gestione dei file statici in Express
 menu: starter
 lang: it
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Gestione dei file statici in Express
 

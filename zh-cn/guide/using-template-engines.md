@@ -4,10 +4,6 @@ title: 将模板引擎用于 Express
 menu: guide
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 将模板引擎用于 Express
 

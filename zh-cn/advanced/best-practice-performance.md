@@ -4,10 +4,6 @@ title: 在生产环境中使用 Express 的性能最佳实践
 menu: advanced
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 生产环境最佳实践：性能和可靠性
 

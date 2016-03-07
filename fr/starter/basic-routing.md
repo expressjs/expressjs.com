@@ -4,10 +4,6 @@ title: Routage de base Express
 menu: starter
 lang: fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Routage de base
 

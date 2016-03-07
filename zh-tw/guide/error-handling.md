@@ -4,10 +4,6 @@ title: Express 錯誤處理
 menu: guide
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 錯誤處理
 

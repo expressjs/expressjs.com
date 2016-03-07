@@ -4,10 +4,6 @@ title: Prozessmanager für Express-Anwendungen
 menu: advanced
 lang: de
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Prozessmanager für Express-Anwendungen
 

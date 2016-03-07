@@ -4,10 +4,6 @@ title: Exemple "Hello world" Express
 menu: starter
 lang : fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Exemple Hello world
 

@@ -4,10 +4,6 @@ title: 调试 Express
 menu: guide
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 调试 Express
 

@@ -5,10 +5,6 @@ menu: starter
 lang: en
 redirect_from: "/starter/hello-world.html"
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Hello world example
 

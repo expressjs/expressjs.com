@@ -4,10 +4,6 @@ title: Express 安全性更新
 menu: advanced
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 安全更新
 

@@ -4,10 +4,6 @@ title: Express に関する FAQ
 menu: starter
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # FAQ
 

@@ -4,10 +4,6 @@ title: Integração de banco de dados do Express
 menu: guide
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Integração de Banco de dados
 

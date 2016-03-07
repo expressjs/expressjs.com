@@ -5,10 +5,6 @@ menu: resources
 lang: en
 redirect_from: "/resources/middleware.html"
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Third-party middleware
 

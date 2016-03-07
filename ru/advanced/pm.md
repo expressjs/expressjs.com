@@ -4,10 +4,6 @@ title: Диспетчеры процессов для приложений Expre
 menu: advanced
 lang: ru
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Диспетчеры процессов для приложений Express
 

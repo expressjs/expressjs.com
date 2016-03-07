@@ -4,10 +4,6 @@ title: Sicherheitsspezifische Best Practices für Express-Anwendungen in Produkt
 menu: advanced
 lang: de
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Best Practices in Produktionsumgebungen: Sicherheit
 

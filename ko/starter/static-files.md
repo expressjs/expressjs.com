@@ -4,10 +4,6 @@ title: Express에서 정적 파일 제공
 menu: starter
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express에서 정적 파일 제공
 

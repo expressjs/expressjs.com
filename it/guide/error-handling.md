@@ -4,10 +4,6 @@ title: Gestione degli errori di Express
 menu: guide
 lang: it
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Gestione degli errori
 

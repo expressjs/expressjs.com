@@ -4,10 +4,6 @@ title: Express 미들웨어
 menu: resources
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 써드파티 미들웨어
 

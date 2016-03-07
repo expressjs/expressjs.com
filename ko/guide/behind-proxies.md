@@ -4,10 +4,6 @@ title: 프록시 환경에서 Express 사용
 menu: guide
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 프록시 환경에서 Express 사용
 

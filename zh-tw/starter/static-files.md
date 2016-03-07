@@ -4,10 +4,6 @@ title: 在 Express 中提供靜態檔案
 menu: starter
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 在 Express 中提供靜態檔案
 

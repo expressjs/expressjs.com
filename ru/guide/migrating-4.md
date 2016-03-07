@@ -4,10 +4,6 @@ title: Миграция до версии Express 4
 menu: guide
 lang: ru
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Переход к Express 4
 

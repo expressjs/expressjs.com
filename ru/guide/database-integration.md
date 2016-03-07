@@ -4,10 +4,6 @@ title: Интеграция Express с базами данных
 menu: guide
 lang: ru
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Интеграция с базами данных
 

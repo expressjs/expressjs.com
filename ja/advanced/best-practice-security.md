@@ -4,10 +4,6 @@ title: 実稼働環境における Express のセキュリティーに関する�
 menu: advanced
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 実稼働環境におけるベスト・プラクティス: セキュリティー
 

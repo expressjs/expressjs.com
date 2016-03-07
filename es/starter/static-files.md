@@ -4,10 +4,6 @@ title: Servicio de archivos estáticos en Express
 menu: starter
 lang: es
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Servicio de archivos estáticos en Express
 

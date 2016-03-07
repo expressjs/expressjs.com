@@ -4,10 +4,6 @@ title: Express ミドルウェアの使用
 menu: guide
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # ミドルウェアの使用
 

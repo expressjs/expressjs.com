@@ -4,10 +4,6 @@ title: Melhores Práticas de Segurança para o Express em Produção
 menu: advanced
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Melhores Práticas em Produção: Segurança
 

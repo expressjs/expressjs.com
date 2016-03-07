@@ -4,10 +4,6 @@ title: Express asosiy marshrutizatsiya
 menu: starter
 lang: uz
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Asosiy marshrutizatsiya
 Ushbu material Expressda asosiy marshrutizatsiyalar bilan ishlash haqidadir. Marshrutizatsiya dasturda HTTP so'rovlarga (GET, POST va b.sh) murojat qilinganda, ma'lum bir manzilga(endpoint) qanday javob berishini aniqlaydi.

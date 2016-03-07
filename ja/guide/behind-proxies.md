@@ -4,10 +4,6 @@ title: プロキシーの背後の Express
 menu: guide
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # プロキシーの背後の Express
 

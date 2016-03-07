@@ -4,10 +4,6 @@ title: Лучшие практические методы защиты для Ex
 menu: advanced
 lang: ru
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Лучшие практические методы для рабочей среды: Защита
 

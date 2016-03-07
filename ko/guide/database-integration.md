@@ -4,10 +4,6 @@ title: Express 데이터베이스 통합
 menu: guide
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 데이터베이스 통합
 

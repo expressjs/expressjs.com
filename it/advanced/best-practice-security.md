@@ -4,10 +4,6 @@ title: Best Practice sulla sicurezza per Express in fase di produzione
 menu: advanced
 lang: it
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Best Practice sulla produzione: Sicurezza
 

@@ -4,10 +4,6 @@ title: Meilleures pratiques en termes de performances pour l'utilisation d'Expre
 menu: advanced
 lang: fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Meilleures pratiques en production : performances et fiabilité
 

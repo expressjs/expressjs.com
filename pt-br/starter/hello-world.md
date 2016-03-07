@@ -4,10 +4,6 @@ title: Exemplo "Hello World" do Express
 menu: starter
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Exemplo Hello World
 

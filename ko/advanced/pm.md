@@ -4,10 +4,6 @@ title: Express 앱용 프로세스 관리자
 menu: advanced
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express 앱용 프로세스 관리자
 

@@ -4,10 +4,6 @@ title: Express 4로의 마이그레이션
 menu: guide
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express 4로의 이전
 

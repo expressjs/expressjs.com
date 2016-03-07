@@ -4,10 +4,6 @@ title: Express 설치
 menu: starter
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 설치
 

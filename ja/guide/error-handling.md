@@ -4,10 +4,6 @@ title: Express でのエラー処理
 menu: guide
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # エラー処理
 

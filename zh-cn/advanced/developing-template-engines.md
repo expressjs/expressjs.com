@@ -4,10 +4,6 @@ title: 为 Express 开发模板引擎
 menu: advanced
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 为 Express 开发模板引擎
 

@@ -4,10 +4,6 @@ title: Express 5 への移行
 menu: guide
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express 5 への移行
 

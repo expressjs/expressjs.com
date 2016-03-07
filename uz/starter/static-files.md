@@ -4,10 +4,6 @@ title: Expressda server statik fayllar
 menu: starter
 lang: uz
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Expressda server statik fayllar
 Serverda statik fayllar bu rasmlar, CSS, JavaScript va fayllarni misol qilish mumkin, ular Expressda o'rnatilgan Expressda o'rnatilgan `express.static` middleware orqali ko'rsatiladi.

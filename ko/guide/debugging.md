@@ -4,10 +4,6 @@ title: Express 디버깅
 menu: guide
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express 디버깅
 

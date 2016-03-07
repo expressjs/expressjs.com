@@ -4,10 +4,6 @@ title: Express atrás de proxies
 menu: guide
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express atrás de proxies
 

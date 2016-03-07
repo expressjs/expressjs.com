@@ -4,10 +4,6 @@ title: Escrevendo middlewares para uso em aplicativos do Express
 menu: guide
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Escrevendo middlewares pra uso em aplicativos do Express
 

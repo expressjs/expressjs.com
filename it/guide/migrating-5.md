@@ -4,10 +4,6 @@ title: Migrazione a Express 5
 menu: guide
 lang: it
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Passaggio a Express 5
 

@@ -4,10 +4,6 @@ title: 使用 Express 中间件
 menu: guide
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 使用中间件
 

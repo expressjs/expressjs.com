@@ -4,10 +4,6 @@ title: Développement de moteurs de modèles pour Express
 menu: advanced
 lang: fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Développement de moteurs de modèles pour Express
 

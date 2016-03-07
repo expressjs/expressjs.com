@@ -4,10 +4,6 @@ title: Express 앱에서 사용하기 위한 미들웨어 작성
 menu: guide
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express 앱에서 사용하기 위한 미들웨어 작성
 

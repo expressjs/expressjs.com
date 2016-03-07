@@ -4,10 +4,6 @@ title: 安装 Express
 menu: starter
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 安装
 

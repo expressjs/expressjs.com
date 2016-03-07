@@ -4,10 +4,6 @@ title: Express の「Hello World」の例
 menu: starter
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Hello World の例
 

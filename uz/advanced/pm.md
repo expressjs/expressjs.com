@@ -4,10 +4,6 @@ title: Process managers for Express apps
 menu: advanced
 lang: uz
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Process managers for Express apps
 

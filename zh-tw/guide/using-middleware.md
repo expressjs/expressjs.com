@@ -4,10 +4,6 @@ title: 使用 Express 中介軟體
 menu: guide
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 使用中介軟體
 

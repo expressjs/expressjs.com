@@ -4,10 +4,6 @@ title: Migrating to Express 4
 menu: guide
 lang: uk
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Moving to Express 4
 

@@ -4,10 +4,6 @@ title: Express 用のテンプレート・エンジンの開発
 menu: advanced
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express 用のテンプレート・エンジンの開発
 

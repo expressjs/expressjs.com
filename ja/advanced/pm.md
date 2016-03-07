@@ -4,10 +4,6 @@ title: Express アプリケーション用のプロセス・マネージャー
 menu: advanced
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express アプリケーション用のプロセス・マネージャー
 

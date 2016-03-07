@@ -4,10 +4,6 @@ title: Utilizzo di motori di template con Express
 menu: guide
 lang: it
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Utilizzo di motori di template con Express
 

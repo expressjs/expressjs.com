@@ -4,10 +4,6 @@ title: Часто задаваемые вопросы (FAQ) по Express
 menu: starter
 lang: ru
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Часто задаваемые вопросы (FAQ)
 

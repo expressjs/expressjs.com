@@ -4,10 +4,6 @@ title: Express 용어집
 menu: resources
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 용어집
 

@@ -4,10 +4,6 @@ title: Desenvolvendo mecanismos de modelo para o Express
 menu: advanced
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Desenvolvendo mecanismos de modelo para o Express
 

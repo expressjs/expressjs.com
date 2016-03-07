@@ -4,10 +4,6 @@ title: Traitement d'erreurs Express
 menu: guide
 lang: fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Traitement d'erreurs
 

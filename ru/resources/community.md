@@ -4,10 +4,6 @@ title: Сообщество Express
 menu: resources
 lang: ru
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Сообщество
 

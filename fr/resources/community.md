@@ -4,10 +4,6 @@ title: Communauté Express
 menu: ressources
 lang: fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Communauté
 

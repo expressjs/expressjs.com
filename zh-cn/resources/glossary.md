@@ -4,10 +4,6 @@ title: Express 词汇表
 menu: resources
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 词汇表
 

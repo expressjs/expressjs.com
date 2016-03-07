@@ -4,10 +4,6 @@ title: Template-Engines für Express entwickeln
 menu: advanced
 lang: de
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Template-Engines für Express entwickeln
 

@@ -4,10 +4,6 @@ title: Serveurs proxy derrière Express
 menu: guide
 lang: fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express derrière proxys
 

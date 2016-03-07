@@ -4,10 +4,6 @@ title: 生产环境中 Express 的安全最佳实践
 menu: advanced
 lang: zh-cn
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 生产环境最佳实践：安全
 

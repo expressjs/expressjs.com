@@ -4,10 +4,6 @@ title: Using template engines with Express
 menu: guide
 lang: uz
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Using template engines with Express
 

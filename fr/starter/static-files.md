@@ -4,10 +4,6 @@ title: Servir des fichiers statiques dans Express
 menu: démarrage
 lang: fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Servir des fichiers statiques dans Express
 

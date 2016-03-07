@@ -4,10 +4,6 @@ title: Обработка ошибок в Express
 menu: guide
 lang: ru
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Обработка ошибок
 

@@ -4,10 +4,6 @@ title: Предоставление статических файлов в Expre
 menu: starter
 lang: ru
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Предоставление статических файлов в Express
 

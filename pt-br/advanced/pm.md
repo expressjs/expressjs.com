@@ -4,10 +4,6 @@ title: Gerenciadores de processos para aplicativos do Express
 menu: advanced
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Gerenciadores de processos para aplicativos do Express
 

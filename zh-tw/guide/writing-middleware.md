@@ -4,10 +4,6 @@ title: 撰寫中介軟體以用於 Express 應用程式中
 menu: guide
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 撰寫中介軟體以用於 Express 應用程式中
 

@@ -5,10 +5,6 @@ menu: starter
 lang: en
 redirect_from: "/starter/static-files.html"
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Serving static files in Express
 

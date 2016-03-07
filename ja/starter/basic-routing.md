@@ -4,10 +4,6 @@ title: Express の基本的なルーティング
 menu: starter
 lang: ja
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 基本的なルーティング
 

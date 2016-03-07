@@ -4,10 +4,6 @@ title: Fehlerbehandlung in Express
 menu: guide
 lang: de
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Fehlerbehandlung
 

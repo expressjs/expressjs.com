@@ -4,10 +4,6 @@ title: Express 커뮤니티
 menu: resources
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 커뮤니티
 

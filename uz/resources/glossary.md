@@ -4,10 +4,6 @@ title: Express glossary
 menu: resources
 lang: uz
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Glossary
 

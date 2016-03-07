@@ -4,10 +4,6 @@ title: Разработка шаблонизаторов для Express
 menu: advanced
 lang: ru
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Разработка шаблонизаторов для Express
 

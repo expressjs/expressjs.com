@@ -4,10 +4,6 @@ title: Frameworks built on Express
 menu: frameworks
 lang: en
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Frameworks built on Express
 

@@ -4,10 +4,6 @@ title: Leistungsspezifische Best Practices für Express-Anwendungen in Produktio
 menu: advanced
 lang: de
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Best Practices in Produktionsumgebungen: Leistung und Zuverlässigkeit
 

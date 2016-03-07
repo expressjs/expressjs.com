@@ -5,10 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/routing.html"
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Routing
 

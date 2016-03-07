@@ -4,10 +4,6 @@ title: Manipulação de erros do Express
 menu: guide
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Manipulação de erros
 

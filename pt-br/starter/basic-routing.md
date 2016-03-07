@@ -4,10 +4,6 @@ title: Roteamento básico no Express
 menu: starter
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Roteamento Básico
 

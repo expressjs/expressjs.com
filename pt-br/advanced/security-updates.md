@@ -4,10 +4,6 @@ title: Atualizações de segurança do Express
 menu: advanced
 lang: pt-br
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Atualizações de segurança
 

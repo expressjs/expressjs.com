@@ -5,10 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/using-template-engines.html"
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Using template engines with Express
 

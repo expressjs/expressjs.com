@@ -4,10 +4,6 @@ title: Statische Dateien in Express bereitstellen
 menu: starter
 lang: de
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Statische Dateien in Express bereitstellen
 

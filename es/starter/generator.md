@@ -4,10 +4,6 @@ title: Generador de aplicaciones Express
 menu: starter
 lang: es
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Generador de aplicaciones Express
 

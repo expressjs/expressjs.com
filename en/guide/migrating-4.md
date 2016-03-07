@@ -5,10 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/migrating-4.html"
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Moving to Express 4
 

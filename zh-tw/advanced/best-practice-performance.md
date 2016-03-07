@@ -4,10 +4,6 @@ title: 在正式作業中使用 Express 的效能最佳作法
 menu: advanced
 lang: zh-tw
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 正式作業最佳作法：效能和可靠性
 

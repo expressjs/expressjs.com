@@ -4,10 +4,6 @@ title: Sviluppo dei motori di template per Express
 menu: advanced
 lang: it
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Sviluppo dei motori di template per Express
 

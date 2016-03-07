@@ -4,10 +4,6 @@ title: Express 보안 업데이트
 menu: advanced
 lang: ko
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # 보안 업데이트
 

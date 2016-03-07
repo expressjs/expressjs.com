@@ -4,10 +4,6 @@ title: Débogage d'Express
 menu: guide
 lang: fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Débogage d'Express
 

@@ -4,10 +4,6 @@ title: Промежуточные обработчики в Express
 menu: resources
 lang: ru
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Промежуточные обработчики сторонних поставщиков ПО
 
