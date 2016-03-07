@@ -1,13 +1,9 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
 title: Migrating to Express 5
 menu: guide
 lang: en
 redirect_from: "/guide/migrating-5.html"
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Moving to Express 5

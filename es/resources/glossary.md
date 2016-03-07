@@ -1,17 +1,11 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Glosario de Express
 menu: resources
 lang: es
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Glosario
-
-<div class="doc-box doc-warn">Actualmente es sólo un borrador de trabajo</div>
 
 ### API
 
@@ -60,4 +54,3 @@ Parte de un URL que identifica un recurso.  Por ejemplo, en `http://foo.com/prod
 ### solicitud
 
 Una solicitud HTTP.  Un cliente envía un mensaje de solicitud HTTP a un servidor, que devuelve una respuesta.  La solicitud debe utilizar uno de los [métodos de solicitud](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) como, por ejemplo, GET, POST, etc.
-

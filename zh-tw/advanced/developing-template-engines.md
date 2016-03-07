@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: 開發 Express 範本引擎
 menu: advanced
 lang: zh-tw
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # 開發 Express 範本引擎

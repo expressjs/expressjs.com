@@ -4,7 +4,6 @@ title: Express - Node.js фреймворк для веб-додатків.
 menu: home
 lang: uk
 ---
-
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>

@@ -1,17 +1,11 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Glossario di Express
 menu: resources
 lang: it
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Glossario
-
-<div class="doc-box doc-warn">Questa è una bozza in lavorazione</div>
 
 ### applicazione
 

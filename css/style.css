@@ -1,3 +1,8 @@
+/*
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+*/
+
 /* general */
 
 * {
@@ -244,12 +249,13 @@ a {
   margin-left: 10px;
 }
 
-#intro, #doc-langs {
+#intro {
   margin-left: 5%;
 }
 
 #doc-langs {
-  font-size: 11px;
+  text-align: center;
+  font-size: 12px;
 }
 
 #sponsorship, #sponsorship a {
@@ -571,7 +577,7 @@ pre, code {
 
 footer {
   font-size: 11px;
-  margin: 30px 10px 30px 10px;
+  margin: 70px 10px 30px 10px;
 }
 
 #footer-content {

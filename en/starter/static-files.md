@@ -1,13 +1,9 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Serving static files in Express
 menu: starter
 lang: en
 redirect_from: "/starter/static-files.html"
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Serving static files in Express
