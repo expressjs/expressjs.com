@@ -1,17 +1,11 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Glossaire Express
 menu: resources
 lang: fr
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Glossaire
-
-<div class="doc-box doc-warn">Il s'agit d'une première ébauche</div>
 
 ### application
 

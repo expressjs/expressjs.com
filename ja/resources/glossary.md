@@ -1,17 +1,11 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express の用語集
 menu: resources
 lang: ja
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # 用語集
-
-<div class="doc-box doc-warn">現在作業中のドラフトです。</div>
 
 ### アプリケーション
 

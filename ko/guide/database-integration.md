@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express 데이터베이스 통합
 menu: guide
 lang: ko
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # 데이터베이스 통합

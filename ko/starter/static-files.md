@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express에서 정적 파일 제공
 menu: starter
 lang: ko
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Express에서 정적 파일 제공

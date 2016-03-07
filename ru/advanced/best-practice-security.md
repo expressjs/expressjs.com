@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Лучшие практические методы защиты для Express в рабочей среде
 menu: advanced
 lang: ru
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Лучшие практические методы для рабочей среды: Защита

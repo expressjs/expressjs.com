@@ -1,13 +1,9 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express community
 menu: resources
 lang: en
 redirect_from: "/resources/community.html"
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Community
@@ -44,4 +40,3 @@ a feature request open a ticket in the [issue queue](https://github.com/stronglo
 Our vibrant community has created a large variety of extensions,
 [middleware modules](/{{ page.lang }}/resources/middleware.html) and higher level frameworks. Check them out in the
 [wiki](https://github.com/strongloop/express/wiki).
-

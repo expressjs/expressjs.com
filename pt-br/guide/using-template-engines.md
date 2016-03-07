@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Usando mecanismos de modelo com o Express
 menu: guide
 lang: pt-br
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Usando mecanismos de modelo com o Express

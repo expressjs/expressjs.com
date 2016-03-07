@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express 애플리케이션 생성기
 menu: starter
 lang: ko
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Express 애플리케이션 생성기

@@ -1,14 +1,9 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
 layout: home
 title: Express - Node.js Web 應用程式架構
 menu: home
 lang: zh-tw
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
-
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
