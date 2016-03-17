@@ -3,7 +3,6 @@ layout: page
 title: Базова маршрутизація Express
 menu: starter
 lang: uk
-redirect_from: "/starter/basic-routing.html"
 ---
 
 # Базова маршрутизація

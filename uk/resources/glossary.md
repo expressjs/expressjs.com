@@ -3,7 +3,6 @@ layout: page
 title: Голосарій Express
 menu: resources
 lang: uk
-redirect_from: "/resources/glossary.html"
 ---
 
 # Голосарій

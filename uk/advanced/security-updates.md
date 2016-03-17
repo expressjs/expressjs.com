@@ -3,7 +3,6 @@ layout: page
 title: Оновлення безпеки Express
 menu: advanced
 lang: uk
-redirect_from: "/advanced/security-updates.html"
 ---
 
 # Оновлення безпеки

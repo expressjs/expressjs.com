@@ -3,7 +3,6 @@ layout: page
 title: Проміжні обробники Express
 menu: resources
 lang: uk
-redirect_from: "/resources/middleware.html"
 ---
 
 # Проміжні обробники третій сторін

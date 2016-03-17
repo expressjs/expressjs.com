@@ -3,7 +3,6 @@ layout: page
 title: Встановлення Express
 menu: starter
 lang: uk
-redirect_from: "/starter/installing.html"
 ---
 
 # Встановлення

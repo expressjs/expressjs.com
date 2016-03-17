@@ -3,7 +3,6 @@ layout: page
 title: Використання проміжних обробників Express
 menu: guide
 lang: uk
-redirect_from: "/guide/using-middleware.html"
 ---
 
 # Використання проміжних обробників

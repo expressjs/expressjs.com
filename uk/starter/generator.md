@@ -3,7 +3,6 @@ layout: page
 title: Генератор структури застосунків Express
 menu: starter
 lang: uk
-redirect_from: "/starter/generator.html"
 ---
 
 # Генератор структури застосунків Express

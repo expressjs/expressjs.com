@@ -3,7 +3,6 @@ layout: page
 title: Менеджери процесів для Express застосунків
 menu: advanced
 lang: uk
-redirect_from: "/advanced/pm.html"
 ---
 
 # Менеджери процесів для Express застосунків

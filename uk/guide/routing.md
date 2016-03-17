@@ -3,7 +3,6 @@ layout: page
 title: Маршрутизація Express
 menu: guide
 lang: uk
-redirect_from: "/guide/routing.html"
 ---
 
 # Маршрутизація

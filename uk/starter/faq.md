@@ -3,7 +3,6 @@ layout: page
 title: ЧАПи Express
 menu: starter
 lang: uk
-redirect_from: "/starter/faq.html"
 ---
 
 # Часті Питання (ЧАПи)

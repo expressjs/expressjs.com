@@ -3,7 +3,6 @@ layout: page
 title: Книги та блоги Express
 menu: resources
 lang: uk
-redirect_from: "/resources/books-blogs.html"
 ---
 
 # Книги та блоги

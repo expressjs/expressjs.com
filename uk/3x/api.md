@@ -2,8 +2,7 @@
 layout: 3x-api
 title: Express 3.x - Довідник API
 menu: api
-lang: en
-redirect_from: "/3x/api.html"
+lang: uk
 ---
 <div id="api-doc" markdown="1">
 

@@ -3,7 +3,6 @@ layout: page
 title: Express позаду проксі
 menu: guide
 lang: uk
-redirect_from: "/guide/behind-proxies.html"
 ---
 
 # Express позаду проксі

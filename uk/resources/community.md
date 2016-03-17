@@ -3,7 +3,6 @@ layout: page
 title: Спільнота Express
 menu: resources
 lang: uk
-redirect_from: "/resources/community.html"
 ---
 
 # Спільнота

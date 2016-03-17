@@ -3,7 +3,6 @@ layout: page
 title: Обробка статичних файлів в Express
 menu: starter
 lang: uk
-redirect_from: "/starter/static-files.html"
 ---
 
 # Обробка статичних файлів в Express

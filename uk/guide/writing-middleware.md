@@ -3,7 +3,6 @@ layout: page
 title: Створення проміжних обробників для використання у Express застосунках
 menu: guide
 lang: uk
-redirect_from: "/guide/writing-middleware.html"
 ---
 
 # Створення проміжних обробників для використання у Express застосунках

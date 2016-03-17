@@ -3,7 +3,6 @@ layout: home
 title: Express - це фреймворк для веб-застосунків, побудованих на Node.js
 menu: home
 lang: uk
-redirect_from: "/uk/index.html"
 ---
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}

@@ -3,7 +3,6 @@ layout: page
 title: Кращі практики безпеки для Express в експлуатації
 menu: advanced
 lang: uk
-redirect_from: "/advanced/best-practice-security.html"
 ---
 
 # Кращі практики експлуатації: Безпека

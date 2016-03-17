@@ -3,7 +3,6 @@ layout: page
 title: Перехід на Express 4
 menu: guide
 lang: uk
-redirect_from: "/guide/migrating-4.html"
 ---
 
 # Перехід на Express 4

@@ -3,7 +3,6 @@ layout: page
 title: Обробка помилок в Express
 menu: guide
 lang: uk
-redirect_from: "/guide/error-handling.html"
 ---
 
 # Обробка помилок

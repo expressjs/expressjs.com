@@ -3,7 +3,6 @@ layout: page
 title: Використання шаблонізаторів в Express
 menu: guide
 lang: uk
-redirect_from: "/guide/using-template-engines.html"
 ---
 
 # Використання шаблонізаторів в Express

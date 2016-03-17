@@ -3,7 +3,6 @@ layout: page
 title: Розробка шаблонізаторів для Express
 menu: advanced
 lang: uk
-redirect_from: "/advanced/developing-template-engines.html"
 ---
 
 # Розробка шаблонізаторів для Express

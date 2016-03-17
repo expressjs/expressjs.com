@@ -3,7 +3,6 @@ layout: page
 title: Інтеграція з базами даних Express
 menu: guide
 lang: uk
-redirect_from: "/guide/database-integration.html"
 ---
 
 # Інтеграція з базами даних

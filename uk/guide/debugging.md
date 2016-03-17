@@ -3,7 +3,6 @@ layout: page
 title: Зневадження в Express
 menu: guide
 lang: uk
-redirect_from: "/guide/debugging.html"
 ---
 
 # Зневадження в Express

@@ -3,7 +3,6 @@ layout: page
 title: Кращі практики експлуатації при використанні Express
 menu: advanced
 lang: uk
-redirect_from: "/advanced/best-practice-performance.html"
 ---
 
 # Кращі практики експлуатації: продуктивність та надійність
