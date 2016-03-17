@@ -1,13 +1,14 @@
 ---
 layout: page
-title: Express database integration
+title: Інтеграція з базами даних Express
 menu: guide
 lang: uk
+redirect_from: "/guide/database-integration.html"
 ---
 
-# Database integration
+# Інтеграція з базами даних
 
-Adding database connectivity capability to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node modules for database systems in your Express app:
+Adding the capability to connect databases to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node.js modules for database systems in your Express app:
 
 * [Cassandra](#cassandra)
 * [CouchDB](#couchdb)
@@ -18,6 +19,7 @@ Adding database connectivity capability to Express apps is just a matter of load
 * [PostgreSQL](#postgres)
 * [Redis](#redis)
 * [SQLite](#sqlite)
+* [ElasticSearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
 These database drivers are among many that are available.  For other options,
@@ -86,7 +88,7 @@ books.list(function(err, body){
 **Installation**
 
 <pre><code class="language-sh" translate="no">
-$ npm install level
+$ npm install level levelup leveldown
 </code></pre>
 
 **Example**
@@ -141,25 +143,32 @@ connection.end();
 
 ## MongoDB
 
-**Module**: [mongoskin](https://github.com/kissjs/node-mongoskin)
+**Module**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Installation**
 
 <pre><code class="language-sh" translate="no">
-$ npm install mongoskin
+$ npm install mongodb
 </code></pre>
 
 **Example**
 
 <pre><code class="language-javascript" translate="no">
-var db = require('mongoskin').db('localhost:27017/animals');
+var MongoClient = require('mongodb').MongoClient;
 
-db.collection('mamals').find().toArray(function(err, result) {
-  if (err) throw err;
-  console.log(result);
+MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
+  if (err) {
+    throw err;
+  }
+  db.collection('mammals').find().toArray(function(err, result) {
+    if (err) {
+      throw err;
+    }
+    console.log(result);
+  });
 });
 </code></pre>
 
-If you want a object model driver for MongoDB, checkout [Mongoose](https://github.com/LearnBoost/mongoose).
+If you want an object model driver for MongoDB, look at [Mongoose](https://github.com/LearnBoost/mongoose).
 
 <a name="neo4j"></a>
 
@@ -283,4 +292,41 @@ db.serialize(function() {
 });
 
 db.close();
+</code></pre>
+
+<a name="elasticsearch"></a>
+
+## ElasticSearch
+
+**Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
+**Installation**
+
+<pre><code class="language-sh" translate="no">
+$ npm install elasticsearch
+</code></pre>
+
+**Example**
+
+<pre><code class="language-javascript" translate="no">
+var elasticsearch = require('elasticsearch');
+var client = elasticsearch.Client({
+  host: 'localhost:9200'
+});
+
+client.search({
+  index: 'books',
+  type: 'book',
+  body: {
+    query: {
+      multi_match: {
+        query: 'express js',
+        fields: ['title', 'description']
+      }
+    }
+  }
+}).then(function(response) {
+  var hits = response.hits.hits;
+}, function(error) {
+  console.trace(error.message);
+});
 </code></pre>

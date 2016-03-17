@@ -1,36 +1,43 @@
 ---
 layout: home
-title: Express - Node.js фреймворк для веб-додатків.
+title: Express - це фреймворк для веб-застосунків, побудованих на Node.js
 menu: home
 lang: uk
+redirect_from: "/uk/index.html"
 ---
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>
+
     <section id="description">
-        <a href="/" class="express" title="Express">Express</a>
-        <span class="description">
-            Швидкий, гнучкий, мінімалістичний веб-фреймворк для <a href='https://nodejs.org/en/' title="Express веб-фреймворк для Node.js">Node.js</a>
-        </span>
+        <a href="/" class="express">Express</a>
+
+        <span class="description">Швидкий, гнучкий, мінімалістичний фреймворк для веб-застосунків, побудованих на <a href='https://nodejs.org/en/'>Node.js</a></span>
     </section>
+
     <div id="install-command">$ npm install express --save</div>
 </section>
 
 <section id="intro">
-    <div id="boxes" class="clearfix">
-        <div id="web-applications">
-            <h3>Веб Додатки</h3> Express мінімалістичний і гнучкий фреймворк для Node.js веб-додатків який забезпечує широкий набір можливостей для веб і мобільних додатків.
-        </div>
-        <div id="apis">
-            <h3>APIs</h3> З безліччю утілітних HTTP методів і проміжних обробників у вашому розпорядженні, створення надійного API буде швидким і легким.
-        </div>
-        <div id="performance">
-            <h3>Продуктивність</h3> Express забезпечує тонкий шар основних особливостей веб-додатків, не обмежуючи Node можливості, які ви знаєте і любите.
-        </div>
-        <div id="sponsorship">
-            <a href="http://loopback.io/" title="LoopBack"><h3>LoopBack</h3> Розробка model-driven додатків на основі Express фреймворку.<br/>Дізнайтеся більше на loopback.io.</a>
-        </div>
-    </div>
+
+  <div id="boxes" class="clearfix">
+      <div id="web-applications">
+          <h3>Веб-застосунки</h3> Express - це мінімалістичний та гнучкий фреймворк для веб-застосунків, побудованих на Node.js, що надає широкий набір функціональності.
+      </div>
+
+      <div id="apis">
+          <h3>API</h3> Маючи в свому розпорядженні безліч допоміжних HTTP-методів та проміжних обробників, створювати надійні API можна легко і швидко.
+      </div>
+
+      <div id="performance">
+          <h3>Продуктивність</h3> Express забезпечує тонкий прошарок базової функціональності для веб-застосунків, що не спотворює звичну та зручну функціональність Node.js.
+      </div>
+
+      <div id="frameworks">
+          <h3>Фреймворки</h3> Багато <a href="en/resources/frameworks.html">популярних фреймворків</a> грунтуються на Express.
+      </div>
+  </div>
+
 </section>
 
 <!--

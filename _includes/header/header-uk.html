@@ -6,14 +6,14 @@
   </section>
   <div id="navbar">
       <ul id="navmenu">
-          <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Home</a></li>
+          <li><a href="/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Початкова сторінка</a></li>
           <li>
               <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Getting started</a>
+                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Ознайомлення</a>
                       <ul>
                           <li>
                             <a href="/{{ page.lang }}/starter/installing.html">
-                              Installing
+                              Встановлення
                             </a>
                           </li>
                           <li>
@@ -23,22 +23,22 @@
                           </li>
                           <li>
                           <a href="/{{ page.lang }}/starter/generator.html">
-                            Express generator
+                            Генератор структури Express
                           </a>
                           </li>
                           <li>
                             <a href="/{{ page.lang }}/starter/basic-routing.html">
-                              Basic routing
+                              Базова маршрутизація
                             </a>
                           </li>
                           <li>
                             <a href="/{{ page.lang }}/starter/static-files.html">
-                              Static files
+                              Статичні файли
                             </a>
                           </li>
                           <li>
                             <a href="/{{ page.lang }}/starter/faq.html">
-                              FAQ
+                              ЧАПи
                             </a>
                           </li>
                       </ul>
@@ -47,27 +47,27 @@
           </li>
           <li>
               <ul id="guide-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Guide</a>
+                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Гід</a>
                       <ul>
-                          <li><a href="/{{ page.lang }}/guide/routing.html">Routing</a>
+                          <li><a href="/{{ page.lang }}/guide/routing.html">Маршрутизація</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Writing middleware</a>
+                          <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Створення проміжних обробників</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Using middleware</a>
+                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Використання проміжних обробників</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Using template engines</a>
+                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Використання шаблонізаторів</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/error-handling.html">Error handling</a>
+                          <li><a href="/{{ page.lang }}/guide/error-handling.html">Обробка помилок</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/debugging.html">Debugging</a>
+                          <li><a href="/{{ page.lang }}/guide/debugging.html">Зневадження</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express behind proxies</a>
+                          <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express позаду проксі</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">Moving to Express 4</a>
+                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">Перехід на Express 4</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/migrating-5.html">Moving to Express 5</a>
+                          <li><a href="/{{ page.lang }}/guide/migrating-5.html">Перехід на Express 5</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/guide/database-integration.html">Database integration</a>
+                          <li><a href="/{{ page.lang }}/guide/database-integration.html">Інтеграція з базами даних</a>
                           </li>
                       </ul>
                   </li>
@@ -75,13 +75,11 @@
           </li>
           <li>
               <ul id="application-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API reference</a>
+                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Довідник API</a>
                       <ul>
                           <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/3x/api.html">3.x (deprecated)</a>
-                          </li>
-                          <li><a href="/2x/">2.x (deprecated)</a>
+                          <li><a href="/{{ page.lang }}/3x/api.html">3.x (застаріла)</a>
                           </li>
                       </ul>
                   </li>
@@ -89,17 +87,17 @@
           </li>
           <li>
               <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Advanced topics</a>
+                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Додаткові можливості</a>
                       <ul>
-                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Template engines</a>
+                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Шаблонізатори</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/advanced/pm.html">Using process managers</a>
+                          <li><a href="/{{ page.lang }}/advanced/pm.html">Використання менеджерів процесів</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">Security updates</a>
+                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">Оновлення безпеки</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">Security best practices</a>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">Кращі практики безпеки</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Performance best practices</a>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Кращі практики продуктивності</a>
                           </li>
 
                       </ul>
@@ -108,20 +106,22 @@
           </li>
           <li>
               <ul id="resources-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Resources</a>
+                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Ресурси</a>
                       <ul>
-                          <li><a href="/{{ page.lang }}/resources/glossary.html">Glossary</a>
+                          <li><a href="/{{ page.lang }}/resources/glossary.html">Голосарій</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
+                          <li><a href="/{{ page.lang }}/resources/middleware.html">Проміжний обробник</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/resources/community.html">Community</a>
+                          <li><a href="/{{ page.lang }}/resources/community.html">Спільнота</a>
                           </li>
-                          <li><a href="/{{ page.lang }}/resources/books-blogs.html">Books and blogs</a>
+                          <li><a href="/{{ page.lang }}/resources/frameworks.html">Фреймворки</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/resources/books-blogs.html">Книги та блоги</a>
                           </li>
                       </ul>
                   </li>
               </ul>
           </li>
       </ul>
-  </div><a href="http://strongloop.com/node-js/training/" title="Node and Express Training from StrongLoop" id="strongloop-header">Express and Node.js Training from StrongLoop</a>
+  </div>
 </header>

@@ -1,15 +1,16 @@
 ---
 layout: page
-title: Migrating to Express 4
+title: Перехід на Express 4
 menu: guide
 lang: uk
+redirect_from: "/guide/migrating-4.html"
 ---
 
-# Moving to Express 4
+# Перехід на Express 4
 
 <h2 id="overview">Overview</h2>
 
-Express 4 is a breaking change from Express 3. That means an existing Express 3 app will not work if you update the Express version in its dependencies.
+Express 4 is a breaking change from Express 3, so. That means an existing Express 3 app will not work if you update the Express version in its dependencies.
 
 This article covers:
 
@@ -21,10 +22,10 @@ This article covers:
 
 <h2 id="changes">Changes in Express 4</h2>
 
-The main changes in Express 4 are:
+There are several significant changes in Express 4:
 
 <ul class="doclist">
-  <li><a href="#core-changes">Changes to Express core and middleware system: </a>The dependency on Connect and built-in middleware were removed, so you must add middleware yourself.
+  <li><a href="#core-changes">Changes to Express core and middleware system.</a> The dependencies on Connect and built-in middleware were removed, so you must add middleware yourself.
   </li>
   <li><a href="#routing">Changes to the routing system.</a></li>
   <li><a href="#other-changes">Various other changes.</a></li>
@@ -39,13 +40,13 @@ See also:
 Changes to Express core and middleware system
 </h3>
 
-Express 4 no longer depends on Connect, and removes all the built-in
-middleware from its core, except `express.static`. This means
+Express 4 no longer depends on Connect, and removes all built-in
+middleware from its core, except for the `express.static` function. This means that
 Express is now an independent routing and middleware web framework, and
 Express versioning and releases are not affected by middleware updates.
 
-With the built-in middleware gone, you must explicitly add all the
-middleware required to run your app.  Simply follow these steps:
+Without built-in middleware, you must explicitly add all the
+middleware that is required to run your app. Simply follow these steps:
 
 1. Install the module: `npm install --save <module-name>`
 2. In your app, require the module: `require('module-name')`
@@ -55,36 +56,36 @@ The following table lists Express 3 middleware and their counterparts in Express
 
 <table class="doctable" border="1">
 <tr><th>Express 3</th><th>Express 4</th></tr>
-<tr><td>express.bodyParser</td>
+<tr><td><code>express.bodyParser</code></td>
 <td><a href="https://github.com/expressjs/body-parser">body-parser</a> +
 <a href="https://github.com/expressjs/multer">multer</a></td></tr>
-<tr><td>express.compress</td>
+<tr><td><code>express.compress</code></td>
 <td><a href="https://github.com/expressjs/compression">compression</a></td></tr>
-<tr><td>express.cookieSession</td>
+<tr><td><code>express.cookieSession</code></td>
 <td><a href="https://github.com/expressjs/cookie-session">cookie-session</a></td></tr>
-<tr><td>express.cookieParser</td>
+<tr><td><code>express.cookieParser</code></td>
 <td><a href="https://github.com/expressjs/cookie-parser">cookie-parser</a></td></tr>
-<tr><td>express.logger</td>
+<tr><td><code>express.logger</code></td>
 <td><a href="https://github.com/expressjs/morgan">morgan</a></td></tr>
-<tr><td>express.session</td>
+<tr><td><code>express.session</code></td>
 <td><a href="https://github.com/expressjs/session">express-session</a></td></tr>
-<tr><td>express.favicon</td>
+<tr><td><code>express.favicon</code></td>
 <td><a href="https://github.com/expressjs/serve-favicon">serve-favicon</a></td></tr>
-<tr><td>express.responseTime</td>
+<tr><td><code>express.responseTime</code></td>
 <td><a href="https://github.com/expressjs/response-time">response-time</a></td></tr>
-<tr><td>express.errorHandler</td>
+<tr><td><code>express.errorHandler</code></td>
 <td><a href="https://github.com/expressjs/errorhandler">errorhandler</a></td></tr>
-<tr><td>express.methodOverride</td>
+<tr><td><code>express.methodOverride</code></td>
 <td><a href="https://github.com/expressjs/method-override">method-override</a></td></tr>
-<tr><td>express.timeout</td>
+<tr><td><code>express.timeout</code></td>
 <td><a href="https://github.com/expressjs/timeout">connect-timeout</a></td></tr>
-<tr><td>express.vhost</td>
+<tr><td><code>express.vhost</code></td>
 <td><a href="https://github.com/expressjs/vhost">vhost</a></td></tr>
-<tr><td>express.csrf</td>
+<tr><td><code>express.csrf</code></td>
 <td><a href="https://github.com/expressjs/csurf">csurf</a></td></tr>
-<tr><td>express.directory</td>
+<tr><td><code>express.directory</code></td>
 <td><a href="https://github.com/expressjs/serve-index">serve-index</a></td></tr>
-<tr><td>express.static</td>
+<tr><td><code>express.static</code></td>
 <td><a href="https://github.com/expressjs/serve-static">serve-static</a></td></tr>
 </table>
 
@@ -94,17 +95,16 @@ In most cases, you can simply replace the old version 3 middleware with
 its Express 4 counterpart. For details, see the module documentation in
 GitHub.
 
-<h4 id="app-use">app.use accepts parameters</h4>
+<h4 id="app-use"><code>app.use</code> accepts parameters</h4>
 
-In version 4 you can now load middleware on a path with a variable
-parameter and read the parameter value from the route handler.
+In version 4 you can use a variable parameter to define the path where middleware functions are loaded, then read the value of the parameter from the route handler.
 For example:
 
 <pre><code class="language-javascript" translate="no">
 app.use('/book/:id', function(req, res, next) {
   console.log('ID:', req.params.id);
   next();
-})
+});
 </code></pre>
 <h3 id="routing">
 The routing system
@@ -121,14 +121,13 @@ new features to help organize your routes:
 * A new method, `app.route()`, to create chainable route handlers for a route path.
 * A new class, `express.Router`, to create modular mountable route handlers.
 
-<h4 id="app-route">app.route() method</h4>
+<h4 id="app-route"><code>app.route()</code> method</h4>
 
 The new `app.route()` method enables you to create chainable route handlers
-for a route path. Since the path is specified in a single location, it
-helps to create modular routes and reduce redundancy and typos. For more
-information on routes, see [Router() documentation](/4x/api.html#router).
+for a route path. Because the path is specified in a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more
+information about routes, see [`Router()` documentation](/{{ page.lang }}/4x/api.html#router).
 
-Here is an example of chained route handlers defined using `app.route()`.
+Here is an example of chained route handlers that are defined by using the `app.route()` function.
 
 <pre><code class="language-javascript" translate="no">
 app.route('/book')
@@ -140,20 +139,20 @@ app.route('/book')
   })
   .put(function(req, res) {
     res.send('Update the book');
-  })
+  });
 </code></pre>
 
-<h4 id="express-router">express.Router class</h4>
+<h4 id="express-router"><code>express.Router</code> class</h4>
 
-The other feature to help organize routes is a new class,
+The other feature that helps to organize routes is a new class,
 `express.Router`, that you can use to create modular mountable
 route handlers. A `Router` instance is a complete middleware and
 routing system; for this reason it is often referred to as a "mini-app".
 
-The following example creates a router as a module, loads a middleware in
+The following example creates a router as a module, loads middleware in
 it, defines some routes, and mounts it on a path on the main app.
 
-Create a router file named `birds.js` in the app directory,
+For example, create a router file named `birds.js` in the app directory,
 with the following content:
 
 <pre><code class="language-javascript" translate="no">
@@ -164,15 +163,15 @@ var router = express.Router();
 router.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
   next();
-})
+});
 // define the home page route
 router.get('/', function(req, res) {
   res.send('Birds home page');
-})
+});
 // define the about route
 router.get('/about', function(req, res) {
   res.send('About birds');
-})
+});
 
 module.exports = router;
 </code></pre>
@@ -185,15 +184,15 @@ var birds = require('./birds');
 app.use('/birds', birds);
 </code></pre>
 
-The app will now be able to handle requests to `/birds` and
-`/birds/about`, along with calling the `timeLog`
-middleware specific to the route.
+The app will now be able to handle requests to the `/birds` and
+`/birds/about` paths, and will call the `timeLog`
+middleware that is specific to the route.
 
 <h3 id="other-changes">
 Other changes
 </h3>
 
-The following table lists other small but important changes in Express 4.
+The following table lists other small but important changes in Express 4:
 
 <table class="doctable" border="1">
 <tr>
@@ -201,17 +200,17 @@ The following table lists other small but important changes in Express 4.
 <th>Description</th>
 </tr>
 <tr>
-<td>Node</td>
-<td>Express 4 requires Node 0.10.x or later and has dropped support for
-Node 0.8.x.</td>
+<td>Node.js</td>
+<td>Express 4 requires Node.js 0.10.x or later and has dropped support for
+Node.js 0.8.x.</td>
 </tr>
 <tr>
 <td markdown="1">
 `http.createServer()`
 </td>
 <td markdown="1">
-The http module is no longer needed. The app is started using
-`app.listen()`.
+The `http` module is no longer needed, unless you need to directly work with it (socket.io/SPDY/HTTPS). The app can be started by using the
+`app.listen()` function.
 </td>
 </tr>
 <tr>
@@ -219,9 +218,9 @@ The http module is no longer needed. The app is started using
 `app.configure()`
 </td>
 <td markdown="1">
-`app.configure()` has been removed.  Use
+The `app.configure()` function has been removed.  Use the
 `process.env.NODE_ENV` or
-`app.get('env')` to detect the environment and configure the app accordingly.
+`app.get('env')` function to detect the environment and configure the app accordingly.
 </td>
 </tr>
 <tr>
@@ -254,7 +253,7 @@ No longer resolves relative URLs.
 `req.params`
 </td>
 <td markdown="1">
-Was an array, is now an object.
+Was an array; now an object.
 </td>
 </tr>
 <tr>
@@ -262,7 +261,7 @@ Was an array, is now an object.
 `res.locals`
 </td>
 <td markdown="1">
-Was a function, is now an object.
+Was a function; now an object.
 </td>
 </tr>
 <tr>
@@ -317,7 +316,7 @@ The files of interest are `app.js` and `package.json`.
 Version 3 app
 </h3>
 
-<h4 id="">app.js</h4>
+<h4 id=""><code>app.js</code></h4>
 
 Consider an Express v.3 application with the following `app.js` file:
 
@@ -355,7 +354,7 @@ http.createServer(app).listen(app.get('port'), function(){
 });
 </code></pre>
 
-<h4 id="">package.json</h4>
+<h4 id=""><code>package.json</code></h4>
 
 The accompanying version 3 `package.json` file might look
   something like this:
@@ -389,28 +388,22 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
 
 Make the following changes to `app.js`:
 
-1. The `http` module is longer required, so remove
-    `var http = require('http');`
-
-2. The built-in Express middleware `express.favicon`,
+1. The built-in Express middleware functions `express.favicon`,
     `express.logger`, `express.methodOverride`,
     `express.session`, `express.bodyParser` and
     `express.errorHandler` are no longer available on the
     `express` object.  You must install their alternatives
     manually and load them in the app.
 
-3. You no longer need to load `app.router`.
-    It is not a valid Express 4 app object, so remove
-    `app.use(app.router);`
+2. You no longer need to load the `app.router` function.
+    It is not a valid Express 4 app object, so remove the
+    `app.use(app.router);` code.
 
-4. Make sure the middleware are loaded in the right order - load `errorHandler` after loading the app routes.
-
-5. Start the app with `app.listen()` instead of
-    `http.createServer`.
+3. Make sure that the middleware functions are loaded in the correct order - load `errorHandler` after loading the app routes.
 
 <h3 id="">Version 4 app</h3>
 
-<h4 id="">package.json</h4>
+<h4 id=""><code>package.json</code></h4>
 
 Running the above `npm` command will update `package.json` as follows:
 
@@ -436,12 +429,13 @@ Running the above `npm` command will update `package.json` as follows:
 }
 </code></pre>
 
-<h4 id="">app.js</h4>
+<h4 id=""><code>app.js</code></h4>
 
 Then, remove invalid code, load the required middleware, and make other
-changes as necessary. Then `app.js` will look like this:
+changes as necessary. The `app.js` file will look like this:
 
 <pre><code class="language-javascript" translate="no">
+var http = require('http');
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -480,15 +474,23 @@ if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
 
-app.listen(app.get('port'), function(){
+var server = http.createServer(app);
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 </code></pre>
 
+<div class="doc-box doc-info" markdown="1">
+Unless you need to work directly with the `http` module (socket.io/SPDY/HTTPS), loading it is not required, and the app can be simply started this way:
+<pre><code class="language-js">app.listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});</code></pre>
+</div>
+
 <h3 id="">Run the app</h3>
 
-With that, the migration process is complete, and the app is now an
-Express 4 app. To confirm, start the app with the following command:
+The migration process is complete, and the app is now an
+Express 4 app. To confirm, start the app by using the following command:
 
 <pre><code class="language-sh" translate="no">
 $ node .
@@ -507,13 +509,13 @@ The command-line tool to generate an Express app is still
 <h3 id="">Installing </h3>
 
 If you already have the Express 3 app generator installed on your system,
-you must uninstall it  as follows:
+you must uninstall it:
 
 <pre><code class="language-sh" translate="no">
 $ npm uninstall -g express
 </code></pre>
 Depending on how your file and directory privileges are configured,
-you may need to run this command with `sudo`.
+you might need to run this command with `sudo`.
 
 Now install the new generator:
 
@@ -522,7 +524,7 @@ $ npm install -g express-generator
 </code></pre>
 
 Depending on how your file and directory privileges are configured,
-you may need to run this command with `sudo`.
+you might need to run this command with `sudo`.
 
 Now the `express` command on your system is updated to the
 Express 4 generator.
@@ -532,9 +534,9 @@ Express 4 generator.
 Command options and use largely remain the same, with the following exceptions:
 
 {: .doclist }
-* The `--sessions` option has been removed.
-* The `--jshtml` option has been removed.
-* The `--hogan` option has been added to support [Hogan.js](http://twitter.github.io/hogan.js/).
+* Removed the `--sessions` option.
+* Removed the `--jshtml` option.
+* Added the `--hogan` option to support [Hogan.js](http://twitter.github.io/hogan.js/).
 
 <h3 id="">Example</h3>
 
@@ -544,40 +546,38 @@ Execute the following command to create an Express 4 app:
 $ express app4
 </code></pre>
 
-If you look at the contents of the `app.js` file in the
-`app4` directory, you will notice that all the middleware
-(except `express.static`) required for the app are loaded as
-independent modules and the `router` middleware
+If you look at the contents of the `app4/app.js` file, you will notice
+that all the middleware functions (except `express.static`) that are required for
+the app are loaded as independent modules, and the `router` middleware
 is no longer explicitly loaded in the app.
 
-You will also notice that the `app.js` file is now a Node module,
-compared to the standalone app generated by the old generator.
+You will also notice that the `app.js` file is now a Node.js module, in contrast to the standalone app that was generated by the old generator.
 
-After installing the dependencies, start the app using the following command:
+After installing the dependencies, start the app by using the following command:
 
 <pre><code class="language-sh" translate="no">
 $ npm start
 </code></pre>
 
-If you peek at the npm start script in `package.json` file,
+If you look at the npm start script in the `package.json` file,
 you will notice that the actual command that starts the app is
 `node ./bin/www`, which used to be `node app.js`
 in Express 3.
 
-Since the `app.js` file generated by the Express 4 generator
-is now a Node module, it can no longer be started independently as an app
-(unless you modify the code). It has to be to be loaded in a Node file
-and started via the Node file. The Node file is `./bin/www`
+Because the `app.js` file that was generated by the Express 4 generator
+is now a Node.js module, it can no longer be started independently as an app
+(unless you modify the code). The module must be loaded in a Node.js file
+and started via the Node.js file. The Node.js file is `./bin/www`
 in this case.
 
 Neither the `bin` directory nor the extensionless `www`
 file is mandatory for creating an Express app or starting the app. They are
-just suggestions by the generator, so feel free to modify them to suit your
+just suggestions made by the generator, so feel free to modify them to suit your
 needs.
 
 To get rid of the `www` directory and keep things the "Express 3 way",
-delete the line that says `module.exports = app;` at the end of
-`app.js`, and paste the following code in its place.
+delete the line that says `module.exports = app;` at the end of the
+`app.js` file, then paste the following code in its place:
 
 <pre><code class="language-javascript" translate="no">
 app.set('port', process.env.PORT || 3000);
@@ -587,7 +587,7 @@ var server = app.listen(app.get('port'), function() {
 });
 </code></pre>
 
-Make sure to load the `debug` module at the top of `app.js` with the following code.
+Ensure that you load the `debug` module at the top of the `app.js` file by using the following code:
 
 <pre><code class="language-javascript" translate="no">
 var debug = require('debug')('app4');
@@ -595,7 +595,7 @@ var debug = require('debug')('app4');
 
 Next, change `"start": "node ./bin/www"` in the `package.json` file to `"start": "node app.js"`.
 
-With that, you just moved the functionality of `./bin/www` back to
-`app.js`.  Not that it is recommended, but the exercise helps
-to understand how `./bin/www` works and why `app.js`
-won't start on its own anymore.
+You have now moved the functionality of `./bin/www` back to
+`app.js`.  This change is not recommended, but the exercise helps you
+to understand how the `./bin/www` file works, and why the `app.js` file
+no longer starts on its own.
