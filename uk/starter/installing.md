@@ -15,34 +15,35 @@ $ cd myapp
 </code></pre>
 
 Використовуйте команду `npm init` для створення файлу `package.json`.
-Більш детальну інформацію про те як працює `package.json` можна проглянути в [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
+Більш детальну інформацію про те як працює `package.json`, можна проглянути в [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
 
 <pre><code class="language-sh" translate="no">
 $ npm init
 </code></pre>
 
-This command prompts you for a number of things, such as the name and version of your application.
-For now, you can simply hit RETURN to accept the defaults for most of them, with the following exception:
+Під час виконання цієї програми, у вас спитають про деякі моменти, такі як ім’я та версія вашого застосунку.
+Тепер, ви можете просто натискати Enter, щоб приймати запропоновані початкові варіанти для більшості пунктів, за виключенням цього:
 
 <pre><code class="language-sh" translate="no">
 entry point: (index.js)
 </code></pre>
 
-Enter `app.js`, or whatever you want the name of the main file to be. If you want it to be `index.js`, hit RETURN to accept the suggested default file name.
+Введіть `app.js`, або будь-яке інше ім’я для головного файла. Якщо ви хочете залишити запропоноване ім’я - `index.js`,
+натискайте Enter.
 
-Now install Express in the `app` directory and save it in the dependencies list. For example:
+Тепер встановіть Express в новоствореній директорії та збережіть його в списку залежностей:
 
 <pre><code class="language-sh" translate="no">
 $ npm install express --save
 </code></pre>
 
-To install Express temporarily and not add it to the dependencies list, omit the `--save` option:
+Щоб встановити Express без додавання його в список залежностій, опустіть параметр `--save`:
 
 <pre><code class="language-sh" translate="no">
 $ npm install express
 </code></pre>
 
 <div class="doc-box doc-info" markdown="1">
-Node modules installed with the `--save` option are added to the `dependencies` list in the `package.json` file.
-Afterwards, running `npm install` in the `app` directory will automatically install modules in the dependencies list.
+Модулі Node.js, встановлені з параметром `--save`, додаються до списку `залежностей` у файл `package.json`, що знаходиться в корені робочого каталогу.
+Цей список використовується при запуску команди `npm install` щоб автоматично встановлювати вказані там модулі.
 </div>

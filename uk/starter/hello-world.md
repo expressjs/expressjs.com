@@ -1,19 +1,21 @@
 ---
 layout: page
-title: Express "Hello World" example
+title: Приклад з "Hello World" в Express
 menu: starter
 lang: uk
 ---
 
-# Hello world example
+# Приклад виводу "Hello world"
 
 <div class="doc-box doc-info" markdown="1">
-This is essentially going to be the simplest Express app you can create. It is a single file app &mdash; _not_ what you'd get if you use the [Express generator](/{{ page.lang }}/starter/generator.html), which creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and sub-directories for various purposes.
+Далі показано дуже спрощений варіант створення застосунку Express. Тут використовується єдиний файл &mdash; _не_ те, що ви отримуєте в результаті роботи [генератора Express](/{{ page.lang }}/starter/generator.html), який створює каркас для повноцінного, хоча й мінімалістичного застосунку, з декількома файлами JavaScript, шаблонами Jade,
+та субдиректоріями для деяких потреб.
 </div>
 
-First create a directory named `myapp`, change to it and run `npm init`. Then install `express` as a dependency, as per the [installation guide](/{{ page.lang }}/starter/installing.html).
+Для початку, створіть директорію з ім’ям `myapp`, перейдіть в неї та запустіть `npm init`. Потім встановіть `express` як залежність,
+так як це показано в [керівництві встановлення](/{{ page.lang }}/starter/installing.html).
 
-In the `myapp` directory, create a file named `app.js` and add the following code:
+В директорії `myapp`, створіть файл з ім’ям `app.js` та додайте наступний код:
 
 <pre><code class="language-javascript" translate="no">
 var express = require('express');
@@ -24,22 +26,22 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('Приклад застосунку, який прослуховує 3000-ий порт!');
 });
 </code></pre>
 
-The app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
-to the root URL (`/`) or _route_. For every other path, it will respond with a **404 Not Found**.
+Цей скрипт запускає сервер та прослуховує з’єднання на 3000-му порті. В результаті виводиться "Hello World!",
+коли запити адресуються до кореневого URL (`/`) або _маршруту_. Для усіх інших адрес, формується відповідь **404 Not Found**.
 
 <div class="doc-box doc-notice" markdown="1">
-The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
-`req.pipe()`, `req.on('data', callback)`, and anything else you would do without Express involved.
+Змінні `req` (request) та `res` (response) є точно такими ж об’єктами, які надає Node.js, тобто ви можете викликати
+`req.pipe()`, `req.on('data', callback)`, та виконувати будь-які інші дії без участі Express.
 </div>
 
-Run the app with the following command:
+Запустіть скрипт наступною командою:
 
 <pre><code class="language-sh" translate="no">
 $ node app.js
 </code></pre>
 
-Then, load `http://localhost:3000/` in a browser to see the output.
+Після чого, відкривайте браузер за адресою `http://localhost:3000/` щоб побачити результат.
