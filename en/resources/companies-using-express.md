@@ -40,13 +40,6 @@ redirect_from: "/resources/companies-using-express.html"
     <a target="_new" class="imagelink" href="http://www.exove.com/">
       <img alt="Exove" class="memberlogo" src="/images/exove_logo_red_rgb_1000.png" />
     </a>
-    <div style="text-align:center; border: 1px solid red; width: 120px; padding: 0; display: inline;">
-        Intesso<br/>
-        <a target="_new" class="imagelink" href="http://intesso.com/">
-          <img alt="Intesso" class="memberlogo" src="/images/intesso_logo.png" style="max-width: 100px;" />
-
-        </a>
-    </div>
 </div>
 
 If your company is using Express, let us know:
