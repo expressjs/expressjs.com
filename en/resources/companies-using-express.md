@@ -6,11 +6,11 @@ lang: en
 redirect_from: "/resources/companies-using-express.html"
 ---
 
-# Companies using express in production
+# Companies using Express in production
 
 
 <div style="text-align:center;">
-<a target="_new" class="imagelink" href="//yandex/">
+<a target="_new" class="imagelink" href="https://www.yandex.ru/">
   <img alt="Yandex" class="memberlogo" src="/images/yandex.png" />
 </a>
 <a target="_new" class="imagelink" href="http://ibm.com">
@@ -19,25 +19,25 @@ redirect_from: "/resources/companies-using-express.html"
 <a target="_new" class="imagelink" href="http://www.foxsports.com.au/">
   <img alt="Fox Sports Australia" class="memberlogo" src="/images/Fox_Sports_logo.svg" />
 </a>
-<a target="_new" class="imagelink" href="//risingstack.com">
+<a target="_new" class="imagelink" href="http://risingstack.com">
   <img alt="Rising Stack" class="memberlogo" src="/images/risingstack_logo.png" />
 </a>
-<a target="_new" class="imagelink" href="//mulesoft.com">
+<a target="_new" class="imagelink" href="http://mulesoft.com">
   <img alt="Mulesoft" class="memberlogo" src="/images/new_mulesoft_logo_r.png" />
 </a>
-<a target="_new" class="imagelink" href="//ripjar.com">
+<a target="_new" class="imagelink" href="http://ripjar.com">
   <img alt="Ripjar" class="memberlogo" src="/images/s300_ripjar_white_background_logo.png" />
 </a>
-<a target="_new" class="imagelink" href="//uber.com">
+<a target="_new" class="imagelink" href="http://uber.com">
   <img alt="Uber" class="memberlogo" src="/images/uber-logo-transparent.png" />
 </a>
-<a target="_new" class="imagelink" href="//https://nodebb.org/">
+<a target="_new" class="imagelink" href="https://nodebb.org/">
   <img alt="NodeBB" class="memberlogo" src="/images/nodeBB.png" />
 </a>
-<a target="_new" class="imagelink" href="//https://dentisphere.com/">
+<a target="_new" class="imagelink" href="https://dentisphere.com/">
   <img alt="Dentisphere" class="memberlogo" src="/images/denti.png" />
 </a>
 </div>
 
-If your company is using express, Let us know
+If your company is using Express, let us know:
 [callback@us.ibm.com](mailto:callback@us.ibm.com).
