@@ -1,13 +1,21 @@
 ---
 layout: page
-title: Express "Hello World" приклад
+title: Приклад з "Hello World" в Express
 menu: starter
 lang: uk
 ---
 
-# Hello world приклад
+# Приклад виводу "Hello world"
 
-Тут наведено приклад дуже простого Express додатку.
+<div class="doc-box doc-info" markdown="1">
+Далі показано дуже спрощений варіант створення застосунку Express. Тут використовується єдиний файл &mdash; тобто _не_ те, що ви отримуєте в результаті роботи [генератора Express](/{{ page.lang }}/starter/generator.html), який створює каркас для повноцінного, хоча й мінімалістичного застосунку, з декількома файлами JavaScript, шаблонами Jade,
+та субдиректоріями для деяких потреб.
+</div>
+
+Для початку, створіть директорію з ім’ям `myapp`, перейдіть в неї та запустіть `npm init`. Потім встановіть `express` як залежність,
+так як це показано в [керівництві встановлення](/{{ page.lang }}/starter/installing.html).
+
+В директорії `myapp`, створіть файл з ім’ям `app.js` та додайте наступний код:
 
 <pre><code class="language-javascript" translate="no">
 var express = require('express');
@@ -18,21 +26,22 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('Приклад застосунку, який прослуховує 3000-ий порт!');
 });
 </code></pre>
 
+Цей скрипт запускає сервер та прослуховує з’єднання на 3000-му порті. В результаті виводиться "Hello World!",
+коли запити адресуються до кореневого URL (`/`) або кореневого _маршруту_. Для усіх інших адрес формується відповідь **404 Not Found**.
+
 <div class="doc-box doc-notice" markdown="1">
-`req` (request) і` res` (response) є тими ж об'єктами які надає Node, тому ви можете виконати
-`req.pipe ()`, `req.on ('data', callback)` і все інше, що не вимагає участі Express.
+Змінні `req` (request) та `res` (response) містять ті ж об’єкти, які надає Node.js, тобто ви можете викликати
+`req.pipe()`, `req.on('data', callback)`, та виконувати будь-які інші дії без участі Express.
 </div>
 
-Додаток запусте сервер і буде слухати з'єднання на порту 3000. У відповідь на запит головної сторінки буде відправлено "Hello World!". Для всіх інших шляхів, відповіддю буде ** 404 Not Found **.
-
-Збережіть код в файл під назвою `app.js` і запустіть за допомогою наступних команд.
+Запустіть застосунок наступною командою:
 
 <pre><code class="language-sh" translate="no">
 $ node app.js
 </code></pre>
 
-Завантажте [http://localhost:3000/](http://localhost:3000/) в браузері щоб побачити результат.
+Після чого, відкрийте браузер за адресою `http://localhost:3000/` щоб побачити результат.

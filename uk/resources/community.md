@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Express community
+title: Спільнота Express
 menu: resources
 lang: uk
 ---
 
-# Community
+# Спільнота
 
 ## Mailing List
 
@@ -26,7 +26,7 @@ feedback.
 ## Examples
 
 View dozens of Express application [examples](https://github.com/strongloop/express/tree/master/examples)
-in the repo covering everything from API design and auth
+in the repository covering everything from API design and authentication
 to template engine integration.
 
 ## Issues
@@ -37,5 +37,5 @@ a feature request open a ticket in the [issue queue](https://github.com/stronglo
 ## Third Party
 
 Our vibrant community has created a large variety of extensions,
-[middleware](/resources/middleware.html) and higher level frameworks. Check them out in the
+[middleware modules](/{{ page.lang }}/resources/middleware.html) and higher level frameworks. Check them out in the
 [wiki](https://github.com/strongloop/express/wiki).

@@ -1,21 +1,21 @@
 ---
 layout: page
-title: Генератор Express додатку
+title: Генератор структури застосунків Express
 menu: starter
 lang: uk
 ---
 
-# Генератор Express додатку
+# Генератор структури застосунків Express
 
-Використовуйте інструмент генерації додатків, `express`, для швидкого створення скелета додатку.
+Можна використовувати інструмент `express-generator`, для швидкого створення каркасу застосунку.
 
-Встановлюйте його за допомогою команди.
+Встановлюється `express-generator` наступною командою:
 
 <pre><code class="language-sh" translate="no">
 $ npm install express-generator -g
 </code></pre>
 
-Для перегляду опцій команди використовуйте `-h` опцію:
+З параметром `-h` можна проглянути доступні опції:
 
 <pre><code class="language-sh" translate="no">
 $ express -h
@@ -29,11 +29,12 @@ $ express -h
     -e, --ejs           add ejs engine support (defaults to jade)
         --hbs           add handlebars engine support
     -H, --hogan         add hogan.js engine support
-    -c, --css &lt;engine>  add stylesheet &lt;engine> support (less|stylus|compass) (defaults to plain css)
+    -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
+        --git           add .gitignore
     -f, --force         force on non-empty directory
 </code></pre>
 
-Приклад, наступна команда створює Express додаток з ім'ям _myapp_ в поточній директорії.
+В наступному прикладі створюється каркас застосунку Express з іменем _myapp_ в поточній директорії:
 
 <pre><code class="language-sh" translate="no">
 $ express myapp
@@ -57,43 +58,43 @@ $ express myapp
    create : myapp/bin/www
 </code></pre>
 
-Далі вам потрібно встановити залежності:
+Після чого треба встановити залежності:
 
 <pre><code class="language-sh" translate="no">
 $ cd myapp
 $ npm install
 </code></pre>
 
-Запуск програми (на MacOS або Linux):
+На MacOS чи Linux, запустіть застосунок такою командою:
 
 <pre><code class="language-sh" translate="no">
-$ DEBUG=myapp ./bin/www
+$ DEBUG=myapp:* npm start
 </code></pre>
 
-На Windows, використовуйте наступну команду:
+На Windows, запускайте так:
 
 <pre><code class="language-sh" translate="no">
-> set DEBUG=myapp & node .\bin\www
+> set DEBUG=myapp:* & npm start
 </code></pre>
 
-Далі відкрийте `http://localhost:3000/` у вашому браузері щоб подивитися роботу програми.
+Тепер вводьте в адресному рядку браузера `http://localhost:3000/`.
 
-Згенерована структура додатку виглядає наступним чином.
+Згенерований застосунок має наступну структуру директорій:
 
 <pre><code class="language-sh" translate="no">
 .
 ├── app.js
 ├── bin
-│   └── www
+│   └── www
 ├── package.json
 ├── public
-│   ├── images
-│   ├── javascripts
-│   └── stylesheets
-│       └── style.css
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+│       └── style.css
 ├── routes
-│   ├── index.js
-│   └── users.js
+│   ├── index.js
+│   └── users.js
 └── views
     ├── error.jade
     ├── index.jade
@@ -103,5 +104,6 @@ $ DEBUG=myapp ./bin/www
 </code></pre>
 
 <div class="doc-box doc-info" markdown="1">
-Структура додатку згенерувала за допомогою генератора, всього лише один з безлічі способів організації структури Express додатків. Ви можете не використовувати Дану структуру або змінити її кращого використання під ваші потреби.
+Створена структура за допомогою генератора є лише однією із багатьох можливих варіантів структури застосунків Express.
+Не обмежуйте себе лише такою структурою, змінюйте її під свої потреби.
 </div>
