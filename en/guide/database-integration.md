@@ -77,7 +77,7 @@ books.insert({name: 'The Art of war'}, null, function(err, body) {
 //Get a list of all books
 books.list(function(err, body){
   console.log(body.rows);
-}
+});
 </code></pre>
 
 <a name="leveldb"></a>
@@ -102,7 +102,7 @@ db.put('name', 'LevelUP', function (err) {
   if (err) return console.log('Ooops!', err);
   db.get('name', function (err, value) {
     if (err) return console.log('Ooops!', err);
-    console.log('name=' + value)
+    console.log('name=' + value);
   });
 
 });
