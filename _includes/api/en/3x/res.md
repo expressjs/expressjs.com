@@ -1,5 +1,8 @@
 <h2>Response</h2>
 
+The `res` object is an enhanced version of Node's own response object
+and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_serverresponse).
+
 <section markdown="1">
   {% include api/en/3x/res-status.md %}
 </section>

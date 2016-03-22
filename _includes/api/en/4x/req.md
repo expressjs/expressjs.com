@@ -21,6 +21,9 @@ app.get('/user/:id', function(request, response) {
 });
 {% endhighlight %}
 
+The `req` object is an enhanced version of Node's own request object
+and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_incomingmessage).
+
 <h3 id='req.properties'>Properties</h3>
 
 <div class="doc-box doc-notice" markdown="1">
