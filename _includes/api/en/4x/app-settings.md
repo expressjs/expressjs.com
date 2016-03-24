@@ -17,9 +17,9 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   `case sensitive routing`
   </td>
       <td>Boolean</td>
-      <td>Enable case sensitivity.
+      <td><p>Enable case sensitivity.
       When enabled, "/Foo" and "/foo" are different routes.
-      When disabled, "/Foo" and "/foo" are treated the same.
+      When disabled, "/Foo" and "/foo" are treated the same.</p>
         <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
       </td>
       <td>N/A (undefined)
@@ -42,7 +42,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   <td markdown="1">
   `etag`
   </td>
-      <td>Varied</td>
+  <td>Varied</td>
   <td markdown="1">
   Set the ETag response header. For possible values, see the [`etag` options table](#etag.options.table).
 
@@ -67,7 +67,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   `json replacer`
   </td>
       <td>Varied</td>
-      <td>The [`replacer` argument used by `JSON.stringify`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter).
+      <td>The <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter">'replacer' argument used by <code>JSON.stringify</code></a>.
         <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
       </td>
   <td>N/A (undefined)
@@ -78,8 +78,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   `json spaces`
   </td>
       <td>Varied</td>
-      <td>The [`space` argument used by `JSON.stringify`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_space_argument).
-
+      <td>The <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_space_argument">'space' argument used by <code>JSON.stringify</code></a>.
 This is typically set to the number of spaces to use to indent prettified JSON.
         <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
       </td>
@@ -106,9 +105,9 @@ A custom query string parsing function will receive the complete query string, a
   `strict routing`
   </td>
       <td>Boolean</td>
-      <td>Enable strict routing.
+      <td><p>Enable strict routing.
       When enabled, the router treats "/foo" and "/foo/" as different.
-      Otherwise, the router treats "/foo" and "/foo/" as the same.
+      Otherwise, the router treats "/foo" and "/foo/" as the same.</p>
         <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
       </td>
       <td>N/A (undefined) </td>
@@ -155,8 +154,8 @@ A custom query string parsing function will receive the complete query string, a
   <code>view cache</code>
   </td>
       <td>Boolean</td>
-      <td>Enables view template compilation caching.
-      <br/><b>NOTE</b>: Sub-apps will not inherit the value of this setting in production (when <code>NODE_ENV</code> is "production").
+      <td><p>Enables view template compilation caching.</p>
+      <p><b>NOTE</b>: Sub-apps will not inherit the value of this setting in production (when <code>NODE_ENV</code> is "production").</p>
       </td>
   <td markdown="1">
   <code>true</code> in production, otherwise undefined.
@@ -168,7 +167,7 @@ A custom query string parsing function will receive the complete query string, a
   </td>
       <td>String</td>
       <td>The default engine extension to use when omitted.
-        <br/><b>NOTE</b>: Sub-apps will inherit the value of this setting.
+        <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
       </td>
       <td>N/A (undefined)</td>
     </tr>
@@ -204,7 +203,7 @@ A custom query string parsing function will receive the complete query string, a
   </td>
       </tr>
       <tr>
-        <td>IP addresses</td>
+        <td>String<br/>String containing comma-separated values<br/>Array of strings </td>
   <td markdown="1">
   An IP address, subnet, or an array of IP addresses, and subnets to trust. Pre-configured subnet names are:
 
@@ -225,7 +224,7 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify mult
       <tr>
         <td>Number</td>
   <td markdown="1">
-  Trust the nth hop from the front-facing proxy server as the client.
+  Trust the <i>n</i><sup>th</sup> hop from the front-facing proxy server as the client.
   </td>
       </tr>
       <tr>
@@ -242,6 +241,11 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify mult
   </table>
 
   <h5 id="etag.options.table">Options for <code>etag</code> setting</h5>
+
+<p markdown="1">
+**NOTE**:  These settings apply only to dynamic files, not static files.
+The [express.static](#express.static) middleware ignores these settings.
+</p>
 
   <p markdown="1">
   The ETag functionality is implemented using the

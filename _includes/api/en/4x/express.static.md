@@ -13,7 +13,7 @@ The following table describes the properties of the `options` object.
 | Property      | Description                                                           |   Type      | Default         |
 |---------------|-----------------------------------------------------------------------|-------------|-----------------|
 | `dotfiles`    | Determines how dotfiles (files or directories that begin with a dot ".") are treated.  <br/><br/>See [dotfiles](#dotfiles) below. | String | "ignore"|
-| `etag`        | Enable or disable etag generation  | Boolean | `true` |
+| `etag`        | Enable or disable etag generation <br/><br/>NOTE: `express.static` always sends weak ETags. | Boolean | `true` |
 | `extensions`  | Sets file extension fallbacks: If a file is not found, search for files with the specified extensions and serve the first one found. Example: `['html', 'htm']`.| Boolean | `false` |
 | `fallthrough`  | Let client errors fall-through as unhandled requests, otherwise forward a client error. <br/><br/>See [fallthrough](#fallthrough) below.| Boolean | `true` |
 | `index`       | Sends the specified directory index file. Set to `false` to disable directory indexing. | Mixed | "index.html" |
