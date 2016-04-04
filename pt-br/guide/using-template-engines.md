@@ -14,18 +14,18 @@ seguintes configurações do aplicativo devem ser configuradas:
 modelo estão localizados. Por exemplo: `app.set('views',
 './views')`
 * `view engine`, o mecanismo de modelo a ser
-usado. Por Exemplo: `app.set('view engine', 'jade')`
+usado. Por Exemplo: `app.set('view engine', 'pug')`
 
 Em seguida instale o pacote npm correspondente ao mecanismo de modelo:
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install jade --save
+$ npm install pug --save
 </code>
 </pre>
 
 <div class="doc-box doc-notice" markdown="1">
-Mecanismos de modelo compatíveis com o Express como o Jade exportam
+Mecanismos de modelo compatíveis com o Express como o Pug exportam
 uma função chamada `__express(filePath, options,
 callback)`, que é chamada pela função
 `res.render()` para renderizar o código de modelo.
@@ -43,12 +43,12 @@ como mostrado abaixo (para o exemplo acima).
 
 <pre>
 <code class="language-javascript" translate="no">
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 </code>
 </pre>
 
-Crie um arquivo de modelo do Jade
-chamado `index.jade` no diretório
+Crie um arquivo de modelo do pug
+chamado `index.pug` no diretório
 `views`, com o seguinte conteúdo:
 
 <pre>
@@ -62,7 +62,7 @@ html
 </pre>
 
 Em seguida crie uma rota para renderizar o arquivo
-`index.jade`. Se a propriedade `view
+`index.pug`. Se a propriedade `view
 engine` não estiver configurada, é preciso especificar a
 extensão do arquivo `view`. Caso contrário, é
 possível omití-la.
@@ -75,7 +75,7 @@ app.get('/', function (req, res) {
 </code>
 </pre>
 
-Ao fazer uma solicitação à página inicial, o arquivo `index.jade` será renderizado como HTML.
+Ao fazer uma solicitação à página inicial, o arquivo `index.pug` será renderizado como HTML.
 
 Para aprender mais sobre como mecanismos de modelo funcionam no
 Express, consulte: ["Desenvolvendo mecanismos de para o Express"](/{{ page.lang }}/advanced/developing-template-engines.html).

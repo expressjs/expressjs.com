@@ -8,7 +8,7 @@ lang: zh-tw
 # Hello world 範例
 
 <div class="doc-box doc-info" markdown="1">
-本質上，這是您所能建立的最簡易 Express 應用程式。它是單一檔案應用程式 &mdash; 與您使用 [Express 產生器](/{{ page.lang }}/starter/generator.html)所產生的結果*不同*，Express 產生器會建立完整應用程式框架，其中含有眾多 JavaScript 檔案、Jade 範本，以及各種用途的子目錄。
+本質上，這是您所能建立的最簡易 Express 應用程式。它是單一檔案應用程式 &mdash; 與您使用 [Express 產生器](/{{ page.lang }}/starter/generator.html)所產生的結果*不同*，Express 產生器會建立完整應用程式框架，其中含有眾多 JavaScript 檔案、Pug 範本，以及各種用途的子目錄。
 </div>
 
 首先請建立一個名為 `myapp` 的目錄，切換至該目錄，並執行 `npm init`。然後按照[安裝手冊](/{{ page.lang }}/starter/installing.html)，將 `express` 安裝成一個相依關係。
@@ -45,4 +45,3 @@ $ node app.js
 </pre>
 
 然後在瀏覽器中載入 [http://localhost:3000/](http://localhost:3000/)，以查看輸出。
-

@@ -20,7 +20,7 @@ Aqui estão alguns dos vários livros sobre Express:
  - **[Node.js in Action](http://www.manning.com/cantelon/)**, Manning Publications, October 2013.
  - **[Express Web Application Development](https://www.packtpub.com/web-development/express-web-application-development)**, Packt Publishing, June 2013.
  - **[express - Middleware für node.js](http://www.amazon.de/express-Middleware-node-js-J%C3%B6rg-Krause/dp/1517281342/ref=sr_1_1?ie=UTF8&qid=1442001556&sr=8-1&keywords=1517281342)**, texxtoor, September 2015. Em Alemão.
- - **[JADE - die Template Engine für node.js](http://www.amazon.de/JADE-Die-Template-Engine-node-js/dp/1517282098/ref=sr_1_1?ie=UTF8&qid=1442001592&sr=8-1&keywords=1517282098)**, texxtoor, September 2015. Em Alemão.
+ - **[Pug - die Template Engine für node.js](http://www.amazon.de/JADE-Die-Template-Engine-node-js/dp/1517282098/ref=sr_1_1?ie=UTF8&qid=1442001592&sr=8-1&keywords=1517282098)**, texxtoor, September 2015. Em Alemão.
  - **[Node Web Development, 2nd edition](https://www.packtpub.com/web-development/node-web-development-second-edition)**, Packt Publishing, August 2013
 
 ### Adicione seu livro aqui!
