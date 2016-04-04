@@ -16,8 +16,8 @@ var express = require('../')
 program
   .version(express.version)
   .option('-s, --sessions', 'add session support')
-  .option('-e, --ejs', 'add ejs engine support (defaults to jade)')
-  .option('-J, --jshtml', 'add jshtml engine support (defaults to jade)')
+  .option('-e, --ejs', 'add ejs engine support (defaults to pug)')
+  .option('-J, --jshtml', 'add jshtml engine support (defaults to pug)')
   .option('-S, --stylus', 'add stylus support')
   .option('-f, --force', 'force on non-empty directory')
   .parse(process.argv);
@@ -32,7 +32,7 @@ var eol = 'win32' == os.platform() ? '\r\n' : '\n'
 
 // Template engine
 
-program.template = 'jade';
+program.template = 'pug';
 if (program.ejs) program.template = 'ejs';
 if (program.jshtml) program.template = 'jshtml';
 
@@ -58,10 +58,10 @@ var index = [
 ].join(eol);
 
 /**
- * Jade layout template.
+ * Pug layout template.
  */
 
-var jadeLayout = [
+var pugLayout = [
     '!!!'
   , 'html'
   , '  head'
@@ -72,10 +72,10 @@ var jadeLayout = [
 ].join(eol);
 
 /**
- * Jade index template.
+ * Pug index template.
  */
 
-var jadeIndex = [
+var pugIndex = [
     'extends layout'
   , ''
   , 'block content'
@@ -268,9 +268,9 @@ function createApplicationAt(path) {
         case 'ejs':
           write(path + '/views/index.ejs', ejsIndex);
           break;
-        case 'jade':
-          write(path + '/views/layout.jade', jadeLayout);
-          write(path + '/views/index.jade', jadeIndex);
+        case 'pug':
+          write(path + '/views/layout.pug', pugLayout);
+          write(path + '/views/index.pug', pugIndex);
           break;
         case 'jshtml':
           write(path + '/views/layout.jshtml', jshtmlLayout);

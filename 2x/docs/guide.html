@@ -175,8 +175,8 @@
 		</script>
 	</head>
 	<body>
-		<a href='http://github.com/visionmedia/express'> 
-		  <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png' /> 
+		<a href='http://github.com/visionmedia/express'>
+		  <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png' />
 		</a>
 		<div id="wrapper">
 			<div id="container"><ul id="toc">
@@ -243,7 +243,7 @@
 <li><a href="#app.listen()">listen()</a></li>
 </ul></li>
 </ul>
-				<a href='http://github.com/visionmedia/express' id='logo'>Express</a> 
+				<a href='http://github.com/visionmedia/express' id='logo'>Express</a>
 				<p id="tagline">
 				   High performance, high class web development for
 				  <a href="http://nodejs.org">Node.js</a>
@@ -516,7 +516,7 @@ app.get('*', function(req, res){
   res.send('what???', 404);
 });
 
-app.listen(3000); 
+app.listen(3000);
 </code></pre>
 
 <h3 id="middleware">Middleware</h3>
@@ -694,7 +694,7 @@ app.use(express.methodOverride());
   &lt;input type="hidden" name="_method" value="put" /&gt;
   &lt;input type="text" name="user[name]" /&gt;
   &lt;input type="text" name="user[email]" /&gt;
-  &lt;input type="submit" value="Submit" /&gt;    
+  &lt;input type="submit" value="Submit" /&gt;
 &lt;/form&gt;
 
 app.put('/', function(){
@@ -737,7 +737,7 @@ handle exceptions in different ways based on the environment.</p>
 
 <pre><code>app.error(function(err, req, res, next){
     if (err instanceof NotFound) {
-        res.render('404.jade');
+        res.render('404.pug');
     } else {
         next(err);
     }
@@ -748,7 +748,7 @@ handle exceptions in different ways based on the environment.</p>
 this demo, however you can choose whatever you like. For example when node performs filesystem syscalls, you may receive an error object with the <em>error.code</em> of <em>ENOENT</em>, meaning &ldquo;no such file or directory&rdquo;, we can utilize this in our error handling and display a page specific to this if desired.</p>
 
 <pre><code>app.error(function(err, req, res){
-  res.render('500.jade', {
+  res.render('500.pug', {
      error: err
   });
 });
@@ -779,7 +779,7 @@ is present, which is useful for developing apps that rely heavily on client-side
     if (err) return next(err);
     res.send('user ' + user.name);
   });
-}); 
+});
 </code></pre>
 
 <p>With preconditions our params can be mapped to callbacks which may perform validation, coercion, or even loading data from a database. Below we invoke <em>app.param()</em> with the parameter name we wish to map to some middleware, as you can see we receive the <em>id</em> argument which contains the placeholder value. Using this we load the user and perform error handling as usual, and simple call <em>next()</em> to pass control to the next precondition or route handler.</p>
@@ -808,19 +808,19 @@ of the module that will be required. For example the view <em>layout.ejs</em> wi
 tell the view system to <em>require(&lsquo;ejs&rsquo;)</em>, the module being loaded must export the method <em>exports.compile(str, options)</em>, and return a <em>Function</em> to comply with Express. To alter this behaviour
 <em>app.register()</em> can be used to map engines to file extensions, so that for example &ldquo;foo.html&rdquo; can be rendered by ejs.</p>
 
-<p>Below is an example using <a href="http://github.com/visionmedia/jade">Jade</a> to render <em>index.html</em>,
-and since we do not use <em>layout: false</em> the rendered contents of <em>index.jade</em> will be passed as
-the <em>body</em> local variable in <em>layout.jade</em>.</p>
+<p>Below is an example using <a href="http://github.com/visionmedia/jade">Pug</a> to render <em>index.html</em>,
+and since we do not use <em>layout: false</em> the rendered contents of <em>index.pug</em> will be passed as
+the <em>body</em> local variable in <em>layout.pug</em>.</p>
 
 <pre><code>app.get('/', function(req, res){
-    res.render('index.jade', { title: 'My Site' });
+    res.render('index.pug', { title: 'My Site' });
 });
 </code></pre>
 
 <p>The new <em>view engine</em> setting allows us to specify our default template engine,
-so for example when using jade we could set:</p>
+so for example when using pug we could set:</p>
 
-<pre><code>app.set('view engine', 'jade');
+<pre><code>app.set('view engine', 'pug');
 </code></pre>
 
 <p>Allowing us to render with:</p>
@@ -830,7 +830,7 @@ so for example when using jade we could set:</p>
 
 <p>vs:</p>
 
-<pre><code>res.render('index.jade');
+<pre><code>res.render('index.pug');
 </code></pre>
 
 <p>When <em>view engine</em> is set, extensions are entirely optional, however we can still
@@ -851,19 +851,19 @@ mix and match template engines:</p>
 <pre><code>res.render('myview.ejs', { layout: true });
 </code></pre>
 
-<p>When an alternate layout is required, we may also specify a path. For example if we have <em>view engine</em> set to <em>jade</em> and a file named <em>./views/mylayout.jade</em> we can simply pass:</p>
+<p>When an alternate layout is required, we may also specify a path. For example if we have <em>view engine</em> set to <em>pug</em> and a file named <em>./views/mylayout.pug</em> we can simply pass:</p>
 
 <pre><code>res.render('page', { layout: 'mylayout' });
 </code></pre>
 
 <p>Otherwise we must specify the extension:</p>
 
-<pre><code>res.render('page', { layout: 'mylayout.jade' });
+<pre><code>res.render('page', { layout: 'mylayout.pug' });
 </code></pre>
 
 <p>These paths may also be absolute:</p>
 
-<pre><code>res.render('page', { layout: __dirname + '/../../mylayout.jade' });
+<pre><code>res.render('page', { layout: __dirname + '/../../mylayout.pug' });
 </code></pre>
 
 <p>A good example of this is specifying custom <em>ejs</em> opening and closing tags:</p>
@@ -906,11 +906,11 @@ for free:</p>
 
 <h3 id="view-lookup">View Lookup</h3>
 
-<p>View lookup is performed relative to the parent view, for example if we had a page view named <em>views/user/list.jade</em>, and within that view we did <em>partial(&lsquo;edit&rsquo;)</em> it would attempt to load <em>views/user/edit.jade</em>, whereas <em>partial(&lsquo;../messages&rsquo;)</em> would load <em>views/messages.jade</em>.</p>
+<p>View lookup is performed relative to the parent view, for example if we had a page view named <em>views/user/list.pug</em>, and within that view we did <em>partial(&lsquo;edit&rsquo;)</em> it would attempt to load <em>views/user/edit.pug</em>, whereas <em>partial(&lsquo;../messages&rsquo;)</em> would load <em>views/messages.pug</em>.</p>
 
-<p>The view system also allows for index templates, allowing you to have a directory of the same name. For example within a route we may have <em>res.render(&lsquo;users&rsquo;)</em> either <em>views/users.jade</em>, or <em>views/users/index.jade</em>.</p>
+<p>The view system also allows for index templates, allowing you to have a directory of the same name. For example within a route we may have <em>res.render(&lsquo;users&rsquo;)</em> either <em>views/users.pug</em>, or <em>views/users/index.pug</em>.</p>
 
-<p>When utilizing index views as shown above, we may reference <em>views/users/index.jade</em> from a view in the same directory by <em>partial(&lsquo;users&rsquo;)</em>, and the view system will try <em>../users/index</em>, preventing us from needing to call <em>partial(&lsquo;index&rsquo;)</em>.</p>
+<p>When utilizing index views as shown above, we may reference <em>views/users/index.pug</em> from a view in the same directory by <em>partial(&lsquo;users&rsquo;)</em>, and the view system will try <em>../users/index</em>, preventing us from needing to call <em>partial(&lsquo;index&rsquo;)</em>.</p>
 
 <h3 id="template-engines">Template Engines</h3>
 
@@ -918,7 +918,7 @@ for free:</p>
 
 <ul>
 <li><a href="http://github.com/visionmedia/haml.js">Haml</a> haml implementation</li>
-<li><a href="http://jade-lang.com">Jade</a> haml.js successor</li>
+<li><a href="http://jade-lang.com">pug</a> haml.js successor</li>
 <li><a href="http://github.com/visionmedia/ejs">EJS</a> Embedded JavaScript</li>
 <li><a href="http://github.com/mauricemach/coffeekup">CoffeeKup</a> CoffeeScript based templating</li>
 <li><a href="https://github.com/kof/node-jqtpl">jQuery Templates</a> for node</li>
@@ -1287,7 +1287,7 @@ the &ldquo;home&rdquo; setting and defaults to &ldquo;/&rdquo;.</p>
 
 <p>Sets the given cookie <em>name</em> to <em>val</em>, with options <em>httpOnly</em>, <em>secure</em>, <em>expires</em> etc.</p>
 
-<pre><code>// "Remember me" for 15 minutes 
+<pre><code>// "Remember me" for 15 minutes
 res.cookie('rememberme', 'yes', { expires: new Date(Date.now() + 900000), httpOnly: true });
 </code></pre>
 
@@ -1347,10 +1347,10 @@ For example <em>video.html</em> will have a object <em>video</em> available to i
 <p>The following are equivalent, and the name of collection value when passed
 to the partial will be <em>movie</em> as derived from the name.</p>
 
-<pre><code>partial('theatre/movie.jade', { collection: movies });
-partial('theatre/movie.jade', movies);
-partial('movie.jade', { collection: movies });
-partial('movie.jade', movies);
+<pre><code>partial('theatre/movie.pug', { collection: movies });
+partial('theatre/movie.pug', movies);
+partial('movie.pug', { collection: movies });
+partial('movie.pug', movies);
 partial('movie', movies);
 // In view: movie.director
 </code></pre>
@@ -1399,7 +1399,7 @@ partial('movie', movie)
 
 <p>The exception of this, is when a &ldquo;plain&rdquo; object, aka &ldquo;{}&rdquo; or &ldquo;new Object&rdquo; is passed, which is considered an object with local variable. For example some may expect a &ldquo;movie&rdquo; local with the following, however since it is a plain object &ldquo;director&rdquo; and &ldquo;title&rdquo; are simply locals:</p>
 
-<pre><code>var movie = { title: 'Nightmare Before Christmas', director: 'Tim Burton' }; 
+<pre><code>var movie = { title: 'Nightmare Before Christmas', director: 'Tim Burton' };
 partial('movie', movie)
 </code></pre>
 
@@ -1744,9 +1744,9 @@ app.use(blog);
 
 <p>Register the given template engine <em>exports</em>
 as <em>ext</em>. For example we may wish to map &ldquo;.html&rdquo;
-files to jade:</p>
+files to pug:</p>
 
-<pre><code> app.register('.html', require('jade'));
+<pre><code> app.register('.html', require('pug'));
 </code></pre>
 
 <p>This is also useful for libraries that may not
