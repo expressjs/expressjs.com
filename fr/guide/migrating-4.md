@@ -332,7 +332,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
@@ -370,7 +370,7 @@ Voici à quoi ressemble le fichier `package.json` qui accompagne la version 3 :
   },
   "dependencies": {
     "express": "3.12.0",
-    "jade": "*"
+    "pug": "*"
   }
 }
 </code>
@@ -381,11 +381,11 @@ Processus
 </h3>
 
 Commencez le processus de migration en installant le middleware requis pour l'application
-Express 4 et en mettant à jour Express et Jade vers leur version la plus récente respective à l'aide de la commande suivante :
+Express 4 et en mettant à jour Express et Pug vers leur version la plus récente respective à l'aide de la commande suivante :
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
+$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
 </code>
 </pre>
 
@@ -424,7 +424,7 @@ Le fait d'exécuter la commande `npm` ci-dessus mettra à jour `package.json` co
     "errorhandler": "^1.1.1",
     "express": "^4.8.0",
     "express-session": "^1.7.2",
-    "jade": "^1.5.0",
+    "pug": "^1.5.0",
     "method-override": "^2.1.2",
     "morgan": "^1.2.2",
     "multer": "^0.1.3",
@@ -460,7 +460,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(methodOverride());

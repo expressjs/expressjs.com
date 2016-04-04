@@ -29,7 +29,7 @@ $ express -h
 
     -h, --help          output usage information
     -V, --version       output the version number
-    -e, --ejs           add ejs engine support (defaults to jade)
+    -e, --ejs           add ejs engine support (defaults to pug)
         --hbs           add handlebars engine support
     -H, --hogan         add hogan.js engine support
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
@@ -56,9 +56,9 @@ $ express myapp
    create : myapp/public/stylesheets
    create : myapp/public/stylesheets/style.css
    create : myapp/views
-   create : myapp/views/index.jade
-   create : myapp/views/layout.jade
-   create : myapp/views/error.jade
+   create : myapp/views/index.pug
+   create : myapp/views/layout.pug
+   create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
 </code>
@@ -109,9 +109,9 @@ Windows では、次のコマンドを使用します。
 │   ├── index.js
 │   └── users.js
 └── views
-    ├── error.jade
-    ├── index.jade
-    └── layout.jade
+    ├── error.pug
+    ├── index.pug
+    └── layout.pug
 
 7 directories, 9 files
 </code>

@@ -4,12 +4,12 @@ Register the given template engine `callback` as `ext`
 
 By default will `require()` the engine based on the
 file extension. For example if you try to render
-a "foo.jade" file Express will invoke the following internally,
+a "foo.pug" file Express will invoke the following internally,
 and cache the `require()` on subsequent calls to increase
 performance.
 
 {% highlight js %}
-app.engine('jade', require('jade').__express);
+app.engine('pug', require('pug').__express);
 {% endhighlight %}
 
 For engines that do not provide `.__express` out of the box -

@@ -10,7 +10,7 @@ lang: pt-br
 <div class="doc-box doc-info" markdown="1">
 Este é essencialmente o aplicativo mais simples do Express que é possível criar. Ele
 é um aplicativo de arquivo único &mdash; *não* é o que você iria obter usando o [Gerador Express](/{{ page.lang }}/starter/generator.html),
-que cria a estrutura para um aplicativo completo com inúmeros arquivos JavaScript, modelos Jade, e subdiretórios para vários
+que cria a estrutura para um aplicativo completo com inúmeros arquivos JavaScript, modelos Pug, e subdiretórios para vários
 propósitos.
 </div>
 
@@ -58,4 +58,3 @@ $ node app.js
 
 Em seguida, carregue [http://localhost:3000/](http://localhost:3000/) em
 um navegador para visualizar a saída
-

@@ -8,7 +8,7 @@ lang: es
 # Ejemplo Hello world
 
 <div class="doc-box doc-info" markdown="1">
-Esta es básicamente la aplicación Express más sencilla que puede crear. Es una aplicación de archivo simple &mdash; *no* lo que obtendrá si utiliza el [generador de Express](/{{ page.lang }}/starter/generator.html), que crea el andamiaje para una aplicación completa con varios archivos JavaScript, plantillas Jade y subdirectorios para distintos propósitos.
+Esta es básicamente la aplicación Express más sencilla que puede crear. Es una aplicación de archivo simple &mdash; *no* lo que obtendrá si utiliza el [generador de Express](/{{ page.lang }}/starter/generator.html), que crea el andamiaje para una aplicación completa con varios archivos JavaScript, plantillas Pug y subdirectorios para distintos propósitos.
 </div>
 
 En primer lugar, cree un directorio denominado `myapp`, cámbielo y ejecute `npm init`. A continuación, instale `express` como una dependencia, según se describe en la [guía de instalación](/{{ page.lang }}/starter/installing.html).
@@ -45,4 +45,3 @@ $ node app.js
 </pre>
 
 A continuación, cargue [http://localhost:3000/](http://localhost:3000/) en un navegador para ver la salida.
-

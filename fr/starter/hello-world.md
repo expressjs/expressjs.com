@@ -9,7 +9,7 @@ lang : fr
 
 <div class="doc-box doc-info" markdown="1">
 Il s'agit de l'application Express la plus simple que vous puissiez créer. Cette application ne contient qu'un seul fichier, c'est-à-dire *tout l'inverse* de ce que vous obtiendriez avec le
-[générateur Express](/{{ page.lang }}/starter/generator.html), qui crée l'échafaudage d'une application entière, avec des fichiers JavaScript, des modèles Jade et des sous-répertoires pour divers motifs.
+[générateur Express](/{{ page.lang }}/starter/generator.html), qui crée l'échafaudage d'une application entière, avec des fichiers JavaScript, des modèles Pug et des sous-répertoires pour divers motifs.
 </div>
 
 Premièrement, créez un répertoire appelé `myapp`, rendez-vous dedans et exécutez la commande `npm init`.
@@ -49,4 +49,3 @@ $ node app.js
 </pre>
 
 Puis chargez [http://localhost:3000/](http://localhost:3000/) dans un navigateur pour consulter le résultat.
-
