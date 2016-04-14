@@ -1,15 +1,13 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express routing
 menu: guide
 lang: sk
-redirect_from: "/guide/routing.html"
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
-
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
 # Routing
 
 _Routing_ definuje tzv. koncové body aplikácie (URI) a spôsob, akým odpovedajú na requesty klientov.
