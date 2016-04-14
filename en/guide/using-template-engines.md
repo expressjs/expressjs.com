@@ -12,9 +12,9 @@ A _template engine_ enables you to use static template files in your application
 variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
 This approach makes it easier to design an HTML page.
 
-Some popular template engines that work with Express are [Jade](http://jade-lang.com/),
+Some popular template engines that work with Express are [Pug](http://jade-lang.com/),
 [Mustache](https://www.npmjs.com/package/mustache), and [EJS](https://www.npmjs.com/package/ejs).
-The [Express application generator](/{{ page.lang }}/starter/generator.html) uses Jade as its default, but it also supports several others.
+The [Express application generator](/{{ page.lang }}/starter/generator.html) uses Pug as its default, but it also supports several others.
 
 See [Template Engines (Express wiki)](https://github.com/strongloop/express/wiki#template-engines)
 for a list of template engines you can use with Express.
@@ -24,16 +24,16 @@ To render template files, set the following [application setting properties](/{{
 
 * `views`, the directory where the template files are located. Eg: `app.set('views', './views')`.
 This defaults to the `views` directory in the application root directory.
-* `view engine`, the template engine to use. For example, to use the Jade template engine: `app.set('view engine', 'jade')`.
+* `view engine`, the template engine to use. For example, to use the Pug template engine: `app.set('view engine', 'pug')`.
 
-Then install the corresponding template engine npm package; for example to install Jade:
+Then install the corresponding template engine npm package; for example to install Pug:
 
 <pre><code class="language-sh" translate="no">
-$ npm install jade --save
+$ npm install pug --save
 </code></pre>
 
 <div class="doc-box doc-notice" markdown="1">
-Express-compliant template engines such as Jade export a function named `__express(filePath, options, callback)`,
+Express-compliant template engines such as Pug export a function named `__express(filePath, options, callback)`,
 which is called by the `res.render()` function to render the template code.
 
 Some template engines do not follow this convention. The [Consolidate.js](https://www.npmjs.org/package/consolidate)
@@ -44,10 +44,10 @@ After the view engine is set, you don't have to specify the engine or load the t
 Express loads the module internally, as shown below (for the above example).
 
 <pre><code class="language-javascript" translate="no">
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 </code></pre>
 
-Create a Jade template file named `index.jade` in the `views` directory, with the following content:
+Create a Pug template file named `index.pug` in the `views` directory, with the following content:
 
 <pre><code class="language-javascript" translate="no">
 html
@@ -57,7 +57,7 @@ html
     h1= message
 </code></pre>
 
-Then create a route to render the `index.jade` file. If the `view engine` property is not set,
+Then create a route to render the `index.pug` file. If the `view engine` property is not set,
 you must specify the extension of the `view` file. Otherwise, you can omit it.
 
 <pre><code class="language-javascript" translate="no">
@@ -66,7 +66,7 @@ app.get('/', function (req, res) {
 });
 </code></pre>
 
-When you make a request to the home page, the `index.jade` file will be rendered as HTML.
+When you make a request to the home page, the `index.pug` file will be rendered as HTML.
 
 To learn more about how template engines work in Express, see:
 ["Developing template engines for Express"](/{{ page.lang }}/advanced/developing-template-engines.html).
