@@ -1,13 +1,9 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Performance Best Practices Using Express in Production
 menu: advanced
 lang: en
 redirect_from: "/advanced/best-practice-performance.html"
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Production best practices: performance and reliability
@@ -96,7 +92,7 @@ For more on the fundamentals of error handling, see:
 
 One thing you should _not_ do is to listen for the `uncaughtException` event, emitted when an exception bubbles all the way back to the event loop. Adding an event listener for `uncaughtException` will change the default behavior of the process that is encountering an exception; the process will continue to run despite the exception. This might sound like a good way of preventing your app from crashing, but continuing to run the app after an uncaught exception is a dangerous practice and is not recommended, because the state of the process becomes unreliable and unpredictable.
 
-Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process.html#process_event_uncaughtexception) and there is a [proposal](https://github.com/nodejs/node-v0.x-archive/issues/2582) to remove it from the core. So listening for `uncaughtException` is just a bad idea. This is why we recommend things like multiple processes and supervisors: crashing and restarting is often the most reliable way to recover from an error.
+Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process.html#process_event_uncaughtexception). So listening for `uncaughtException` is just a bad idea. This is why we recommend things like multiple processes and supervisors: crashing and restarting is often the most reliable way to recover from an error.
 
 We also don't recommend using [domains](https://nodejs.org/api/domain.html). It generally doesn't solve the problem and is a deprecated module.
 
@@ -122,7 +118,7 @@ app.get('/search', function (req, res) {
     } catch (e) {
       res.status(400).send('Invalid JSON string');
     }
-  })
+  });
 });
 </code></pre>
 
@@ -145,12 +141,12 @@ app.get('/', function (req, res, next) {
     .then(function (csv) {
       // handle csv
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 app.use(function (err, req, res, next) {
   // handle error
-})
+});
 </code></pre>
 
 Now all errors asynchronous and synchronous get propagated to the error middleware.
@@ -165,7 +161,7 @@ app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id)
   let stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
-}))
+}));
 </code></pre>
 
 For more information about error-handling by using promises, see:

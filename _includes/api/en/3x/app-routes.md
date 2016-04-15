@@ -6,10 +6,10 @@ for example Express uses this internally not only for routing but to provide def
 <string>OPTIONS</string> behaviour unless `app.options()` is used. Your application
 or framework may also remove routes by simply by removing them from this object.
 
-~~~js
+{% highlight js %}
 console.log(app.routes)
 
-{ get: 
+{ get:
    [ { path: '/',
        method: 'get',
        callbacks: [Object],
@@ -20,10 +20,10 @@ console.log(app.routes)
        callbacks: [Object],
        keys: [{ name: 'id', optional: false }],
        regexp: /^\/user\/(?:([^\/]+?))\/?$/i } ],
-  delete: 
+  delete:
    [ { path: '/user/:id',
        method: 'delete',
        callbacks: [Object],
        keys: [Object],
        regexp: /^\/user\/(?:([^\/]+?))\/?$/i } ] }
-~~~
+{% endhighlight %}

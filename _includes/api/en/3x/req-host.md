@@ -2,8 +2,8 @@
 
 Returns the hostname from the "Host" header field (void of portno).
 
-~~~js
+{% highlight js %}
 // Host: "example.com:3000"
 req.host
 // => "example.com"
-~~~
+{% endhighlight %}

@@ -1,17 +1,17 @@
 <h3 id='req.route'>req.route</h3>
 
-The currently-matched route, a string.  For example:
+Contains the currently-matched route, a string.  For example:
 
-~~~js
+{% highlight js %}
 app.get('/user/:id?', function userIdHandler(req, res) {
   console.log(req.route);
   res.send('GET');
-})
-~~~
+});
+{% endhighlight %}
 
 Example output from the previous snippet:
 
-~~~js
+{% highlight js %}
 { path: '/user/:id?',
   stack:
    [ { handle: [Function: userIdHandler],
@@ -22,4 +22,4 @@ Example output from the previous snippet:
        regexp: /^\/?$/i,
        method: 'get' } ],
   methods: { get: true } }
-~~~
+{% endhighlight %}

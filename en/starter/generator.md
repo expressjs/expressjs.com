@@ -1,20 +1,16 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
 title: Express application generator
 menu: starter
 lang: en
 redirect_from: "/starter/generator.html"
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Express application generator
 
-Use the application generator tool, `express`, to quickly create an application skeleton.
+Use the application generator tool, `express-generator`, to quickly create an application skeleton.
 
-Install `express` with the following command:
+Install `express-generator` with the following command:
 
 <pre><code class="language-sh" translate="no">
 $ npm install express-generator -g

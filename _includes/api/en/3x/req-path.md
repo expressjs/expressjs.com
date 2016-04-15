@@ -2,8 +2,8 @@
 
 Returns the request URL pathname.
 
-~~~js
+{% highlight js %}
 // example.com/users?sort=desc
 req.path
 // => "/users"
-~~~
+{% endhighlight %}

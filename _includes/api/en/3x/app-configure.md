@@ -5,26 +5,26 @@ aka `process.env.NODE_ENV`. This method remains for legacy reasons, and is effec
 an `if` statement as illustrated in the following snippets. These functions are <em>not</em>
 required in order to use `app.set()` and other configuration methods.
 
-~~~js
+{% highlight js %}
 // all environments
 app.configure(function(){
   app.set('title', 'My Application');
-})
+});
 
 // development only
 app.configure('development', function(){
   app.set('db uri', 'localhost/dev');
-})
+});
 
 // production only
 app.configure('production', function(){
   app.set('db uri', 'n.n.n.n/prod');
-})
-~~~
+});
+{% endhighlight %}
 
 Is effectively sugar for:
 
-~~~js
+{% highlight js %}
 // all environments
 app.set('title', 'My Application');
 
@@ -37,4 +37,4 @@ if ('development' == app.get('env')) {
 if ('production' == app.get('env')) {
   app.set('db uri', 'n.n.n.n/prod');
 }
-~~~
+{% endhighlight %}

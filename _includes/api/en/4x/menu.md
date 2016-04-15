@@ -4,6 +4,7 @@
     <ul id="express-menu">
         <li><em>Methods</em></li>
         <li id="express-static-middleware"><a href="#express.static">express.static()</a></li>
+        <li id="express-router"><a href="#express.router">express.Router()</a></li>
     </ul>
     </li>
 
@@ -80,6 +81,8 @@
             <li><a href="#req.ip">req.ip</a>
             </li>
             <li><a href="#req.ips">req.ips</a>
+            </li>
+            <li><a href="#req.method">req.method</a>
             </li>
             <li><a href="#req.originalUrl">req.originalUrl</a>
             </li>
@@ -179,8 +182,6 @@
     </li>
     <li id="router-api"><a href="#router">Router</a>
         <ul id="router-menu">
-            <li><a href="#router">Router()</a>
-            </li>
             <li><em>Methods</em>
             </li>
             <li><a href="#router.all">router.all()</a>

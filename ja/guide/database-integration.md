@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express でのデータベースの統合
 menu: guide
 lang: ja
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # データベースの統合
@@ -86,7 +82,7 @@ books.insert({name: 'The Art of war'}, null, function(err, body) {
 //Get a list of all books
 books.list(function(err, body){
   console.log(body.rows);
-}
+});
 </code>
 </pre>
 
@@ -115,7 +111,7 @@ db.put('name', 'LevelUP', function (err) {
   if (err) return console.log('Ooops!', err);
   db.get('name', function (err, value) {
     if (err) return console.log('Ooops!', err);
-    console.log('name=' + value)
+    console.log('name=' + value);
   });
 
 });
@@ -226,12 +222,12 @@ apoc.query('match (n) return n').exec().then(
 
 ## PostgreSQL
 
-**モジュール**: [pg](https://github.com/brianc/node-postgres)
+**モジュール**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **インストール**
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install pg
+$ npm install pg-promise
 </code>
 </pre>
 
@@ -239,23 +235,16 @@ $ npm install pg
 
 <pre>
 <code class="language-javascript" translate="no">
-var pg = require('pg');
-var conString = "postgres://username:password@localhost/database";
+var pgp = require("pg-promise")(/*options*/);
+var db = pgp("postgres://username:password@host:port/database");
 
-pg.connect(conString, function(err, client, done) {
-
-  if (err) {
-    return console.error('error fetching client from pool', err);
-  }
-  client.query('SELECT $1::int AS number', ['1'], function(err, result) {
-    done();
-    if (err) {
-      return console.error('error running query', err);
-    }
-    console.log(result.rows[0].number);
-  });
-
-});
+db.one("SELECT $1 AS value", 123)
+    .then(function (data) {
+        console.log("DATA:", data.value);
+    })
+    .catch(function (error) {
+        console.log("ERROR:", error);
+    });
 </code>
 </pre>
 

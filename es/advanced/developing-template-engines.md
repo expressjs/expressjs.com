@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Desarrollo de motores de plantilla para Express
 menu: advanced
 lang: es
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Desarrollo de motores de plantilla para Express
@@ -25,7 +21,7 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
     var rendered = content.toString().replace('#title#', '<title>'+ options.title +'</title>')
     .replace('#message#', '<h1>'+ options.message +'</h1>');
     return callback(null, rendered);
-  })
+  });
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
@@ -46,7 +42,7 @@ A continuación, cree la ruta siguiente en la aplicación.
 <code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
-})
+});
 </code>
 </pre>
 Cuando realice una solicitud a la página de inicio, `index.ntl` se representará como HTML.

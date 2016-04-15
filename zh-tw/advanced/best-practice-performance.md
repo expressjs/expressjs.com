@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: 在正式作業中使用 Express 的效能最佳作法
 menu: advanced
 lang: zh-tw
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # 正式作業最佳作法：效能和可靠性
@@ -125,7 +121,7 @@ app.get('/search', function (req, res) {
     } catch (e) {
       res.status(400).send('Invalid JSON string');
     }
-  })
+  });
 });
 </code>
 </pre>
@@ -151,12 +147,12 @@ app.get('/', function (req, res, next) {
     .then(function (csv) {
       // handle csv
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 app.use(function (err, req, res, next) {
   // handle error
-})
+});
 </code>
 </pre>
 

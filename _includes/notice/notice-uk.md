@@ -1,1 +1,1 @@
-This document might be outdated relative to the documentation in English. For the latest updates, please refer to the <a href="/">documentation in English</a>.
+Цей документ може бути застарілим, в порівнянні з оригінальною <a href="/">англійською версією документації</a>.

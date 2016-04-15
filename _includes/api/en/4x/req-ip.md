@@ -1,12 +1,12 @@
 <h3 id='req.ip'>req.ip</h3>
 
-The remote IP address of the request.
+Contains the remote IP address of the request.
 
-When the [`trust proxy` setting](/4x/api.html#trust.proxy.options.table) is set
-to a non-falsey value, the value is derived from the left-most entry in the
+When the [`trust proxy` setting](/4x/api.html#trust.proxy.options.table) does not evaluate to `false`,
+the value of this property is derived from the left-most entry in the
 `X-Forwarded-For` header. This header can be set by the client or by the proxy.
 
-~~~js
+{% highlight js %}
 req.ip
 // => "127.0.0.1"
-~~~
+{% endhighlight %}

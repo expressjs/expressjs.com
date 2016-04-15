@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Esempio di "Hello World" di express
 menu: starter
 lang: it
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Esempio di Hello world
@@ -28,11 +24,8 @@ app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-var server = app.listen(3000, function () {
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('Example app listening at http://%s:%s', host, port);
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
 });
 </code>
 </pre>

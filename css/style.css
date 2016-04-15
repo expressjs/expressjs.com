@@ -1,3 +1,8 @@
+/*
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+*/
+
 /* general */
 
 * {
@@ -244,12 +249,13 @@ a {
   margin-left: 10px;
 }
 
-#intro, #doc-langs {
+#intro {
   margin-left: 5%;
 }
 
 #doc-langs {
-  font-size: 11px;
+  text-align: center;
+  font-size: 12px;
 }
 
 #sponsorship, #sponsorship a {
@@ -274,6 +280,16 @@ header {
 .scroll header {
   border-bottom: 1px solid #ddd;
   box-shadow: 0 0 4px #eee;
+}
+
+/* companies using express */
+
+img.memberlogo {
+  vertical-align: middle;
+  width: 200px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 5px;
 }
 
 /* code */
@@ -571,7 +587,7 @@ pre, code {
 
 footer {
   font-size: 11px;
-  margin: 30px 10px 30px 10px;
+  margin: 70px 10px 30px 10px;
 }
 
 #footer-content {
@@ -588,7 +604,6 @@ footer {
 }
 
 #sponsor {
-  background-image: url(/images/strongloop-logo.png);
   background-size: 20px 16px;
   padding-left: 25px;
 }

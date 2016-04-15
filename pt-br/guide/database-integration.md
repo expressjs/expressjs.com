@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Integração de banco de dados do Express
 menu: guide
 lang: pt-br
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Integração de Banco de dados
@@ -89,7 +85,7 @@ books.insert({name: 'The Art of war'}, null, function(err, body) {
 //Get a list of all books
 books.list(function(err, body){
   console.log(body.rows);
-}
+});
 </code>
 </pre>
 
@@ -118,7 +114,7 @@ db.put('name', 'LevelUP', function (err) {
   if (err) return console.log('Ooops!', err);
   db.get('name', function (err, value) {
     if (err) return console.log('Ooops!', err);
-    console.log('name=' + value)
+    console.log('name=' + value);
   });
 
 });

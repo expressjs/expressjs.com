@@ -9,8 +9,8 @@ remaining route callback(s). You can use this mechanism to impose pre-conditions
 a route, then pass control to subsequent routes if there's no reason to proceed with
 the current route.
 
-~~~js
+{% highlight js %}
 app.post('/', function (req, res) {
   res.send('POST request to homepage');
 });
-~~~
+{% endhighlight %}

@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Leistungsspezifische Best Practices für Express-Anwendungen in Produktionsumgebungen
 menu: advanced
 lang: de
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Best Practices in Produktionsumgebungen: Leistung und Zuverlässigkeit
@@ -123,7 +119,7 @@ app.get('/search', function (req, res) {
     } catch (e) {
       res.status(400).send('Invalid JSON string');
     }
-  })
+  });
 });
 </code>
 </pre>
@@ -148,12 +144,12 @@ app.get('/', function (req, res, next) {
     .then(function (csv) {
       // handle csv
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 app.use(function (err, req, res, next) {
   // handle error
-})
+});
 </code>
 </pre>
 
@@ -170,7 +166,7 @@ app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id)
   let stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
-}))
+}));
 </code>
 </pre>
 

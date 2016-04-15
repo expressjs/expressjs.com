@@ -1,9 +1,9 @@
 <h3 id='req.query'>req.query</h3>
 
-An object containing a property for each query string parameter in the route.
+This property is an object containing a property for each query string parameter in the route.
 If there is no query string, it is the empty object, `{}`.
 
-~~~js
+{% highlight js %}
 // GET /search?q=tobi+ferret
 req.query.q
 // => "tobi ferret"
@@ -17,4 +17,4 @@ req.query.shoe.color
 
 req.query.shoe.type
 // => "converse"
-~~~
+{% endhighlight %}

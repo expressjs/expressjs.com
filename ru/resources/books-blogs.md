@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express books and blogs
 menu: resources
 lang: ru
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Books and blogs
@@ -35,9 +31,9 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 texxtoor, September 2015. In deutscher Sprache / in German language
 - **[Node Web Development, 2nd edition](https://www.packtpub.com/web-development/node-web-development-second-edition)**, Packt Publishing, August 2013
 
-###Add your book here!
+### Add your book here!
 
-[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) and add a link to your book, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) and add a link to your book, then submit a pull request (GitHub login required).  Follow the format of the above listings.
 
 ## Blogs
 
@@ -46,6 +42,6 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 - [Codeforgeek Blog: Express category](http://codeforgeek.com/code/nodejs/express/)
 - [Node-tricks Blog: Express category](http://node-tricks.com/category/express/)
 
-###Add your blog here!
+### Add your blog here!
 
-[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.

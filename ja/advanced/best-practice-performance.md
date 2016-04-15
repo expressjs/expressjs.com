@@ -1,12 +1,8 @@
-﻿---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
+---
 layout: page
 title: 実稼働環境における Express の使用におけるパフォーマンスに関するベスト・プラクティス
 menu: advanced
 lang: ja
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # 実稼働環境におけるベスト・プラクティス: パフォーマンスと信頼性
@@ -124,7 +120,7 @@ app.get('/search', function (req, res) {
     } catch (e) {
       res.status(400).send('Invalid JSON string');
     }
-  })
+  });
 });
 </code>
 </pre>
@@ -149,12 +145,12 @@ app.get('/', function (req, res, next) {
     .then(function (csv) {
       // handle csv
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 app.use(function (err, req, res, next) {
   // handle error
-})
+});
 </code>
 </pre>
 

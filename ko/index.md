@@ -1,14 +1,9 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: home
 title: Express - Node.js 웹 애플리케이션 프레임워크
 menu: home
 lang: ko
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
-
 <section id="home-content">
     {% include header/header-{{ page.lang }}.html %}
     <div id="overlay"></div>

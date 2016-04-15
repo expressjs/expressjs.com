@@ -10,7 +10,7 @@ GitHub Pages websites being served through [Jekyll](http://jekyllrb.com/), you w
 
 Install the [jekyll-redirect-from](https://github.com/jekyll/jekyll-redirect-from) gem:
 ```
-$ gem install jekyll-redirect-from`
+$ gem install jekyll-redirect-from
 ```
 
 Once installed, `cd` to the repository directory and run Jekyll using the following command:
@@ -29,17 +29,13 @@ To understand the template system used by Jekyll, read up the [Liquid template e
 
 Feel free to make changes to the template files or the document files. The supporting docs are located in their respective directories, and the API docs are located under the `_includes` directory.
 
-## Showcasing
-
-If you have an app you'd like to showcase on the site, open a pull request for it.
-
 ## Why use Jekyll instead of an Express-based solution?
 
 Jekyll comes built-in with GitHub Pages. Since we are already using GitHub Pages to host the website, it makes sense to leverage the capabilities it provides. It's all about using the right tool, for the right job, under the right circumstances.
 
 ## How do I help translate the docs to another language?
 
-**IMPORTANT:** We [recently announced](https://strongloop.com/strongblog/express-goes-global/) that we are getting professional translation of the Express documentation into the following languages:
+**IMPORTANT:** We have professional translations of the Express documentation into:
 - German
 - French
 - Italian

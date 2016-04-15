@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express applications
 menu: resources
 lang: ru
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Applications
@@ -200,5 +196,5 @@ Visit [Gugamarket](http://www.gugamarket.com)
 
 ##Add your app or site
 
-[Edit the the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/applications.md),
+[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/applications.md),
 add a link to your app, then submit a pull request (GitHub login required).  Follow the format of the above listings.

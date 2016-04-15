@@ -1,13 +1,9 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
 title: Using Express middleware
 menu: guide
 lang: en
 redirect_from: "/guide/using-middleware.html"
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Using middleware
@@ -192,27 +188,19 @@ For details about error-handling middleware, see: [Error handling](/{{ page.lang
 
 <h2 id='middleware.built-in'>Built-in middleware</h2>
 
-Since version 4.x, Express no longer depends on [Connect](https://github.com/senchalabs/connect). With the exception of `express.static`, all of the middleware
+Starting with version 4.x, Express no longer depends on [Connect](https://github.com/senchalabs/connect). With the exception of `express.static`, all of the middleware
 functions that were previously included with Express' are now in separate modules. Please view [the list of middleware functions](https://github.com/senchalabs/connect#middleware).
 
-<h4 id='express.static'>express.static(root, [options])</h4>
+The only built-in middleware function in Express is `express.static`. This function is based on [serve-static](https://github.com/expressjs/serve-static), and is responsible for serving static assets such as HTML files, images, and so on.
 
-The only built-in middleware function in Express is `express.static`. This function is based on [serve-static](https://github.com/expressjs/serve-static), and is responsible for serving the static assets of an Express application.
+The function signature is:
+<pre><code class="language-javascript" translate="no">
+express.static(root, [options])
+</code></pre>
 
 The `root` argument specifies the root directory from which to serve static assets.
 
-The optional `options` object can have the following properties:
-
-| Property      | Description                                                           |   Type      | Default         |
-|---------------|-----------------------------------------------------------------------|-------------|-----------------|
-| `dotfiles`    | Option for serving dotfiles. Possible values are "allow", "deny", and "ignore" | String | "ignore" |
-| `etag`        | Enable or disable etag generation  | Boolean | `true` |
-| `extensions`  | Sets file extension fallbacks. | Array | `[]` |
-| `index`       | Sends directory index file. Set `false` to disable directory indexing. | Mixed | "index.html" |
- `lastModified` | Set the `Last-Modified` header to the last modified date of the file on the OS. Possible values are `true` or `false`. | Boolean | `true` |
-| `maxAge`      | Set the max-age property of the Cache-Control header, in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms) | Number | 0 |
-| `redirect`    | Redirect to trailing "/" when the pathname is a directory. | Boolean | `true` |
-| `setHeaders`  | Function for setting HTTP headers to serve with the file. | Function |  |
+For information on the `options` argument and more details on this middleware function, see [express.static](/en/4x/api.html#express.static).
 
 Here is an example of using the `express.static` middleware function with an elaborate options object:
 

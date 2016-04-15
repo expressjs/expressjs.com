@@ -20,7 +20,7 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
     var rendered = content.toString().replace('#title#', '<title>'+ options.title +'</title>')
     .replace('#message#', '<h1>'+ options.message +'</h1>');
     return callback(null, rendered);
-  })
+  });
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
@@ -37,6 +37,6 @@ Then, create the following route in your app.
 <pre><code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
-})
+});
 </code></pre>
 On making a request to the home page, "index.ntl" will be rendered as HTML.

@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: 代理背后的 Express
 menu: guide
 lang: zh-cn
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # 代理背后的 Express
@@ -61,7 +57,7 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify mult
 <code class="language-js" translate="no">app.set('trust proxy', function (ip) {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
   else return false;
-})</code>
+});</code>
 </pre>
 </td>
     </tr>

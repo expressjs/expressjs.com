@@ -3,8 +3,8 @@
 Transfer the file at the given `path`.
 
 Automatically defaults the Content-Type response header field based
-on the filename's extension. The callback `fn(err)` is 
-invoked when the transfer is complete or when an error occurs. 
+on the filename's extension. The callback `fn(err)` is
+invoked when the transfer is complete or when an error occurs.
 
 Options:
 
@@ -14,7 +14,7 @@ Options:
 This method provides fine-grained support for file serving
 as illustrated in the following example:
 
-~~~js
+{% highlight js %}
 app.get('/user/:uid/photos/:file', function(req, res){
   var uid = req.params.uid
     , file = req.params.file;
@@ -27,4 +27,4 @@ app.get('/user/:uid/photos/:file', function(req, res){
     }
   });
 });
-~~~
+{% endhighlight %}

@@ -1,13 +1,9 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express routing
 menu: guide
 lang: en
 redirect_from: "/guide/routing.html"
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Routing
@@ -119,7 +115,7 @@ app.get('/ab+cd', function(req, res) {
 });
 </code></pre>
 
-This route path will match `abcd`, `abxcd`, `abRABDOMcd`, `ab123cd`, and so on.
+This route path will match `abcd`, `abxcd`, `abRANDOMcd`, `ab123cd`, and so on.
 
 <pre><code class="language-javascript" translate="no">
 app.get('/ab*cd', function(req, res) {

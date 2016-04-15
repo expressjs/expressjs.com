@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Glossário do Express
 menu: resources
 lang: pt-br
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Glossário
@@ -82,7 +78,7 @@ rota.
 
 ### roteador
 
-Consulte [roteador](/{{ page.lang }}/en/4x/api.html#router) na referência da API.
+Consulte [roteador](/{{ page.lang }}/4x/api.html#router) na referência da API.
 
 ### solicitação
 

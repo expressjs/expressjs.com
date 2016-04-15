@@ -1,38 +1,34 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Comunidad de Express
 menu: resources
 lang: es
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Comunidad
 
-##Lista de envío de correos
+## Lista de envío de correos
 
 Únase a más de 2000 usuarios de Express o explore más de 5000 discusiones en [Google Group](https://groups.google.com/group/express-js).
 
-##Gitter
+## Gitter
 
 La [sala de conversación strongloop/express](https://gitter.im/strongloop/express) es un excelente recurso para los desarrolladores interesados en las discusiones diarias relacionadas con Express.
 
-##Canal de IRC
+## Canal de IRC
 
 Cientos de desarrolladores añaden comentarios en #express en Freenode cada día.
 Si tiene preguntas sobre la infraestructura, entre para realizar consultas rápidas.
 
-##Ejemplos
+## Ejemplos
 
 Vea docenas de [ejemplos](https://github.com/strongloop/express/tree/master/examples) de aplicaciones Express en el repositorio, que van desde la autenticación y el diseño de API hasta la integración del motor de plantillas.
 
-##Problemas
+## Problemas
 
 Si se encuentra con lo que cree es un error o simplemente desea realizar una solicitud de característica, abra un ticket en la [cola de problemas](https://github.com/strongloop/express/issues).
 
-##Terceros
+## Terceros
 
 Nuestra vibrante comunidad ha creado una gran variedad de extensiones, [módulos de middleware](/{{ page.lang }}/resources/middleware.html) e infraestructuras de nivel superior. Investíguelos en la [wiki](https://github.com/strongloop/express/wiki).
 

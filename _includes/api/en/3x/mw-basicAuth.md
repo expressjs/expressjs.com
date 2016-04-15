@@ -5,23 +5,23 @@ with the username.
 
 Simple username and password:
 
-~~~js
+{% highlight js %}
 app.use(express.basicAuth('username', 'password'));
-~~~
+{% endhighlight %}
 
 Callback verification:
 
-~~~js
+{% highlight js %}
  app.use(express.basicAuth(function(user, pass){
    return 'tj' == user && 'wahoo' == pass;
  }));
-~~~
+{% endhighlight %}
 
 Async callback verification, accepting `fn(err, user)`,
 in this case `req.user` will be the user object passed.
 
-~~~js
+{% highlight js %}
 app.use(express.basicAuth(function(user, pass, fn){
   User.authenticate({ user: user, pass: pass }, fn);
 }))
-~~~
+{% endhighlight %}

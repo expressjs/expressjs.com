@@ -3,7 +3,7 @@
 Returns an instance of a single route, which you can then use to handle HTTP verbs with optional middleware.
 Use `app.route()` to avoid duplicate route names (and thus typo errors).
 
-~~~js
+{% highlight js %}
 var app = express();
 
 app.route('/events')
@@ -16,5 +16,5 @@ app.route('/events')
 })
 .post(function(req, res, next) {
   // maybe add a new event...
-})
-~~~
+});
+{% endhighlight %}

@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Template-Engines für Express entwickeln
 menu: advanced
 lang: de
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Template-Engines für Express entwickeln
@@ -25,7 +21,7 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
     var rendered = content.toString().replace('#title#', '<title>'+ options.title +'</title>')
     .replace('#message#', '<h1>'+ options.message +'</h1>');
     return callback(null, rendered);
-  })
+  });
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
@@ -45,7 +41,7 @@ Erstellen Sie dann in Ihrer Anwendung die folgende Route.
 <code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
-})
+});
 </code>
 </pre>
 Wenn Sie eine Anforderung zur Homepage einleiten, wird `index.ntl` im HTML-Format ausgegeben.

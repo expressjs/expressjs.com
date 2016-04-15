@@ -1,13 +1,9 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE. 
-### DO NOT CHANGE ANY OTHER TEXT. 
 layout: page
 title: Debugging Express
 menu: guide
 lang: en
 redirect_from: "/guide/debugging.html"
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Debugging Express
@@ -95,9 +91,9 @@ When a request is then made to the app, you will see the logs specified in the E
   express:router serveStatic  : / +2ms
   express:router router  : / +2ms
   express:router dispatching GET / +1ms
-  express:view lookup "index.jade" +338ms
-  express:view stat "/projects/example/views/index.jade" +0ms
-  express:view render "/projects/example/views/index.jade" +1ms
+  express:view lookup "index.pug" +338ms
+  express:view stat "/projects/example/views/index.pug" +0ms
+  express:view render "/projects/example/views/index.pug" +1ms
 </code></pre>
 
 To see the logs only from the router implementation set the value of `DEBUG` to `express:router`. Likewise, to see logs only from the application implementation set the value of `DEBUG` to `express:application`, and so on.

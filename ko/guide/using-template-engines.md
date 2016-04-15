@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Express와 함께 템플리트 엔진 사용
 menu: guide
 lang: ko
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Express와 함께 템플리트 엔진을 사용

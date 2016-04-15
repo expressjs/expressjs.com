@@ -1,12 +1,8 @@
 ---
-### TRANSLATION INSTRUCTIONS FOR THIS SECTION:
-### TRANSLATE THE VALUE OF THE title ATTRIBUTE AND UPDATE THE VALUE OF THE lang ATTRIBUTE.
-### DO NOT CHANGE ANY OTHER TEXT.
 layout: page
 title: Livros e Blogs sobre Express
 menu: Recursos
 lang: pt-br
-### END HEADER BLOCK - BEGIN GENERAL TRANSLATION
 ---
 
 # Livros e Blogs
@@ -27,9 +23,9 @@ Aqui estão alguns dos vários livros sobre Express:
  - **[JADE - die Template Engine für node.js](http://www.amazon.de/JADE-Die-Template-Engine-node-js/dp/1517282098/ref=sr_1_1?ie=UTF8&qid=1442001592&sr=8-1&keywords=1517282098)**, texxtoor, September 2015. Em Alemão.
  - **[Node Web Development, 2nd edition](https://www.packtpub.com/web-development/node-web-development-second-edition)**, Packt Publishing, August 2013
 
-###Adicione seu livro aqui!
+### Adicione seu livro aqui!
 
-[Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) e adicione um link para o seu livro, então envie um pull request (necessário login no GitHub).  Siga o formato da listagem acima.
+[Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) e adicione um link para o seu livro, então envie um pull request (necessário login no GitHub).  Siga o formato da listagem acima.
 
 ## Blogs
 
@@ -38,6 +34,6 @@ Aqui estão alguns dos vários livros sobre Express:
 - [Codeforgeek Blog: Express category](http://codeforgeek.com/code/nodejs/express/)
 - [Node-tricks Blog: Express category](http://node-tricks.com/category/express/)
 
-###Adicione seu blog aqui!
+### Adicione seu blog aqui!
 
 [Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) e adicione um link para o seu blog, então envie um pull request (necessário login no GitHub). Siga o formato da listagem acima.
