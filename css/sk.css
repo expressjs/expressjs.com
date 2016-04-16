@@ -1,3 +1,7 @@
+/*
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+*/
 /* For image callouts in writing-middleware.md */
 
 #callout1 {top: 40px; }
@@ -11,3 +15,7 @@
 #callout5 {top: 170px;}
 
 #callout6 {top: 195px;}
+
+.dropit .dropit-submenu {
+  min-width: 250px;
+}
