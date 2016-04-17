@@ -11,9 +11,9 @@ lang: sk
 
 # Express generátor
 
-Pre rýchle vygenerovanie skeletonu aplikácie môžete použit nástroj `express`.
+Pre rýchle vygenerovanie skeletonu aplikácie môžete použit nástroj `express-generator`.
 
-Nainštalujte `express` pomocou nasledujúceho príkazu:
+Nainštalujte `express-generator` pomocou nasledujúceho príkazu:
 
 <pre>
 <code class="language-sh" translate="no">
