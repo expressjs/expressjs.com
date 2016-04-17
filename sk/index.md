@@ -25,19 +25,19 @@ lang: sk
 
   <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h3>Webové aplikácie</h3> Express je minimalistický, flexibilný, webový Node.js framework poskytujúci robustnú škálu funkcionality pre webové a mobilné aplikácie.
+        <h3>Webové aplikácie</h3> Express je minimalistický, flexibilný, webový Node.js framework poskytujúci robustnú škálu funkcionality pre webové a mobilné aplikácie.
       </div>
 
       <div id="apis">
-      <h3>API</h3> S nespočetným množstvom dostupných HTTP utilít a middlewarov je tvorba robustného API rýchla a jednoduchá.
+        <h3>API</h3> S nespočetným množstvom dostupných HTTP utilít a middlewarov je tvorba robustného API rýchla a jednoduchá.
       </div>
 
       <div id="performance">
-      <h3>Vyhotovenie</h3> Express predstavuje tenkú vrstvu elementárnych prvkov webovej aplikácie bez skrývania Node.js prvkov, ktoré poznáte a milujete.
+        <h3>Vyhotovenie</h3> Express predstavuje tenkú vrstvu elementárnych prvkov webovej aplikácie bez skrývania Node.js prvkov, ktoré poznáte a milujete.
       </div>
 
-      <div id="sponsorship">
-          <a href="http://loopback.io/"><h3>LoopBack</h3> Vývoj model-driven aplikácií pomocou Express frameworku.<br/>Viac na loopback.io.</a>
+      <div id="frameworks">
+        <h3>Frameworky</h3> Mnohé <a href="/sk/resources/frameworks.html">známe frameworky</a> sú založené na Express-e.
       </div>
   </div>
 
