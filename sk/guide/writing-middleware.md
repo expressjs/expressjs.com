@@ -45,7 +45,11 @@ Nasledujúci diagram ukazuje jednotlivé časti volania middleware funkcie:
 </td></tr>
 </table>
 
-Tu je príklad jednoduchej "Hello World" Express aplikácie, pre ktorú zadefinujeme dve middleware funkcie:
+<h2>Príklad</h2>
+
+Tu je príklad jednoduchej "Hello World" Express aplikácie.
+Zvyšná časť tohto článku definuje a pridáva do aplikácie dve middleware funkcie:
+jedna nazvaná `myLogger` ktorá vypíše jednoduchú log message a druhá nazvaná `requestTime` ktorá vypíše timestamp HTTP requestu.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -60,7 +64,7 @@ app.listen(3000);
 </code>
 </pre>
 
-<h2>Príklad</h2>
+<h2>Middleware funkcia myLogger</h2>
 
 Tu je príklad jednoduchej middleware funkcie nazvanej "myLogger". Táto funkcia len vypíše "LOGGED", vždy keď aplikácia odchytí request. Middleware funkcia je priradená premennej nazvanej `myLogger`.
 
@@ -76,7 +80,8 @@ var myLogger = function (req, res, next) {
 <div class="doc-box doc-notice" markdown="1">
 Všimnite si volanie `next()` metódy hore. Zavolanie tejto funkcie vyvolá ďalší middleware v aplikácii.
 Funkcia `next()` nie je súčasťou Node.js či Express API, ale je tretím argumentom s ktorým je middleware funkcia vyvolaná.
-Funkcia `next()` môže byť nazvaná hocijako, ale podľa konvencie sa zvykne nazývať vždy "next". Aby ste predišli zmätkom používajte túto konvenciu.
+Funkcia `next()` môže byť nazvaná hocijako, ale podľa konvencie sa zvykne nazývať vždy "next".
+Aby ste predišli zmätkom používajte túto konvenciu.
 </div>
 
 Pre načítanie middleware funkcie zavolajte `app.use()`, prostredníctvom ktorej ho špecifikujete.
@@ -104,13 +109,15 @@ app.listen(3000);
 
 Vždy keď aplikácia obdrží request požiadavku, vypíše do konzoly správu "LOGGED".
 
-Poradie načítania middleware-ov je dôležité: middleware funkcie ktoré sú načítane prvé, sú aj ako prvé vykonané.
+Poradie načítania middleware-ov je dôležité: middleware funkcie, ktoré sú načítane prvé, sú aj ako prvé vyvolané.
 
 Ak by `myLogger` bol načítaný až za definíciou route pre hlavnú stránku aplikácie, nikdy by ho request nedosiahol a aplikácia by nevypísala "LOGGED", pretože route handler ukončí request-response cyklus.
 
 Táto `myLogger` middleware funkcia len vypisuje správu a posunie spracovanie ďalšej middleware funkcii v poradí zavolaním funkcie `next()`.
 
-Ďalší príklad pridáva do request objektu atribút s názvom `requestTime`. Túto middleware funkciu nazveme "requestTime".
+<h3>Middleware funkcia requestTime</h3>
+
+Ďalej vytvoríme middleware funkciu s názvom "requestTime" a ktorá pridáva `requestTime` atribút na request objekt.
 
 <pre>
 <code class="language-javascript" translate="no">

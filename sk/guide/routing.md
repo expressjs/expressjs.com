@@ -133,7 +133,7 @@ app.get('/ab+cd', function(req, res) {
 </code>
 </pre>
 
-Táto route cesta sa spáruje s requestom `abcd`, `abxcd`, `abRABDOMcd`, `ab123cd`, atď.
+Táto route cesta sa spáruje s requestom `abcd`, `abxcd`, `abRANDOMcd`, `ab123cd`, atď.
 
 <pre>
 <code class="language-javascript" translate="no">
