@@ -207,26 +207,21 @@ Pre viac informácií ohľadom error-handling middlewarov si pozrite sekciu: [Er
 
 <h2 id='middleware.built-in'>Built-in middleware</h2>
 
-Express od verzie 4.x nie je závislý na [Connect](https://github.com/senchalabs/connect) module. Okrem výnimky `express.static`, všetky predošlé middleware funkcie pôvodne obsiahnuté v Express sú teraz samostatné moduly. Zoznam middleware funkcií [si pozrite tu](https://github.com/senchalabs/connect#middleware).
+Express počnúc od verzie 4.x nie je závislý na [Connect](https://github.com/senchalabs/connect) module. Okrem výnimky `express.static`, všetky predošlé middleware funkcie pôvodne obsiahnuté v Express sú teraz samostatné moduly. Zoznam middleware funkcií [si pozrite tu](https://github.com/senchalabs/connect#middleware).
 
-<h4 id='express.static'>express.static(root, [options])</h4>
+Jediným vstavaným  middlewarom v Express je `express.static` funkcia. Tento middleware je založený na [serve-static](https://github.com/expressjs/serve-static) module a je zodpovedný za servovanie statických assetov ako HTML súbory, obráky atď.
 
-Jediným vstavaným  middlewarom v Express je `express.static` funkcia. Táto funkcia je založená na [serve-static](https://github.com/expressjs/serve-static) module a je zodpovedná za servovanie statického obsahu v Express aplikácii.
+Signatúra tejto funkcie je:
+
+<pre>
+<code class="language-javascript" translate="no">
+express.static(root, [options])
+</code>
+</pre>
 
 Parameter `root` špecifikuje hlavný adresár z ktorého bude statický obsah servovaný.
 
-Voľiteľný `options` objekt môže mať nasledovné properties:
-
-| Property      | Popis                                                                     |    Typ    | Default         |
-|---------------|---------------------------------------------------------------------------|-----------|-----------------|
-| `dotfiles`    | Možnosť servovať dotfiles. Možné hodnoty sú "allow", "deny", a "ignore"   | String    | "ignore"  |
-| `etag`        | Zapne/vypne generovanie etag headra.                                      | Boolean   | `true`    |
-| `extensions`  | Nastavuje file extension fallbacks. | Array | `[]` |
-| `index`       | Odošle index súbor priečinka. Nastavte na `false` pre zakázanie indexovania. | Mixed | "index.html" |
- `lastModified` | Nastaví `Last-Modified` header na hodnotu dátumu poslednej modifikácie súboru podĺa OS. Možné hodnoty sú `true` alebo `false`. | Boolean | `true` |
-| `maxAge`      | Nastaví max-age parameter pre Cache-Control header, v milisekundách alebo string v [ms formáte](https://www.npmjs.org/package/ms) | Number | 0 |
-| `redirect`    | Presmeruje na koncové "/" ak je cesta priečinkom. | Boolean | `true` |
-| `setHeaders`  | Funkcia pre nastavenie HTTP header-a servovaného so súborom. | Function |  |
+Informácie ohľadom `options` parametra ako i ďalšie detaily ohľadom tohto middleware nájdete tu: [express.static](/sk/4x/api.html#express.static).
 
 Tu je príklad použitia `express.static` middleware funkcie s rôznou konfiguráciou options objektu:
 
