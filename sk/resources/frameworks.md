@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Frameworky postavené na Express-e
+title: Frameworky založené na Express-e
 menu: frameworks
 lang: sk
 ---
@@ -9,9 +9,9 @@ lang: sk
  License: MIT
 -->
 
-# Frameworky postavené na Express-e
+# Frameworky založené na Express-e
 
-Na Express-e je postavených niekoľko populárnych Node.js frameworkov:
+Na Express-e je založených niekoľko populárnych Node.js frameworkov, ako napr.:
 
 - [LoopBack](http://loopback.io)
 - [Sails](http://sailsjs.org/)
