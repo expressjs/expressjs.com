@@ -36,12 +36,14 @@ Dodržiavanie nasledujúcich postupov vo vašom kóde môže viesť k zlepšeniu
 
 Použitie gzip kompresie môže veľmi znížiť veľkosť response body a tým zvýšíť rýchlosť webovej aplikácie. Pre zapnutie gzip kompresie vo vašej Express aplikácii používajte [compression](https://www.npmjs.com/package/compression) middleware. Napr.:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var compression = require('compression');
 var express = require('express');
 var app = express();
 app.use(compression());
-</code></pre>
+</code>
+</pre>
 
 Pre stránky s vysokou návštevnosťou sa odporúča implementovať kompresiu na úrovni reverse proxy (pozrite sa na [Použitie reverse proxy](#proxy)). V takom prípade nemusíte použiť compression middleware. Pre viac detailov ohľadom zapnutia gzip kompresie na Nginx serveri sa pozrite na [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) v Nginx dokumentácii.
 
@@ -110,7 +112,8 @@ Používajte nástroje [JSHint](http://jshint.com/) príp. [JSLint](http://www.j
 Tu je príklad použitia try-catch k odchyteniu potenciálnej výnimky zapríčiňujúcej pád procesu.
 Táto middleware funkcia príjma query parameter nazvaný "params" ktorý je JSON objekt.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/search', function (req, res) {
   // Simulating async operation
   setImmediate(function () {
@@ -123,7 +126,8 @@ app.get('/search', function (req, res) {
     }
   });
 });
-</code></pre>
+</code>
+</pre>
 
 Pozor, try-catch funguje len pre synchrónny kód. Vzhľadom nato, že Node platforma je primárne asynchrónna (obzvlášť v produkčnom prostredí), veľa výnimiek try-catch neodchytí.
 
@@ -133,7 +137,8 @@ Pozor, try-catch funguje len pre synchrónny kód. Vzhľadom nato, že Node plat
 
 Promises dokážu spracovať všetky typy výnimiek (explicitné aj implicitné) v asynchrónnych blokoch kódu používajuce `then()`, pridaním `.catch(next)` na koniec promise reťazca. Napr.:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', function (req, res, next) {
   // do some sync stuff
   queryDb()
@@ -150,7 +155,8 @@ app.get('/', function (req, res, next) {
 app.use(function (err, req, res, next) {
   // handle error
 });
-</code></pre>
+</code>
+</pre>
 
 Takto sa všetky asynchrónne i synchrónne errory prešíria do error middleware-u.
 
@@ -160,13 +166,15 @@ Avšak, dve upozornenia:
 2.  Event emitory (ako sú streams) môžu spôsobiť neodchytené výnimky. Preto sa uistite, že správne spracovávate error eventy.
 Napr.:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id);
   let stream = getLogoStreamById(company.id);
   stream.on('error', next).pipe(res);
 }));
-</code></pre>
+</code>
+</pre>
 
 Pre viac informácií ohľadom error handling-u použitím promises si prečítajte:
 
@@ -204,19 +212,23 @@ Počas vývoja nastavujete environment premenné zvyčajne pomocou shellu, napr.
 
 Pomocou Upstart, použite kľúčové slovo `env` vo vašom job súbore. Napr.:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 # /etc/init/env.conf
  env NODE_ENV=production
-</code></pre>
+</code>
+</pre>
 
 Pre viac informácií si prečítajte [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables).
 
 Pomocou systemd, použite direktívu `Environment` vo vašom unit súbore. Napr.:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code></pre>
+</code>
+</pre>
 
 Pre viac informácií si prečítajte [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
 
@@ -277,7 +289,8 @@ Systemd je správca služieb používaný niektorými distribúciami Linuxu. Vä
 
 Konfiguračný súbor pre systemd sa nazýva _unit file_, ktorého názov má príponu .service. Tu je príklad súboru pre priamu správu Node aplikácie (nahradte tučný text s hodnotami vášho systéme a aplikácie):
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 [Unit]
 Description=Awesome Express App
 
@@ -305,7 +318,8 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code></pre>
+</code>
+</pre>
 Pre viac informácií ohľadom systemd si prečítajte [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
 
 ##### StrongLoop PM ako systemd služba
@@ -314,15 +328,19 @@ StrongLoop PM možete jednoducho nainštalovať ako systemd službu. Následne, 
 
 Pre inštaláciu StrongLoop PM ako systemd služby spustite:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ sudo sl-pm-install --systemd
-</code></pre>
+</code>
+</pre>
 
 Potom spustite službu pomocou:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ sudo /usr/bin/systemctl start strong-pm
-</code></pre>
+</code>
+</pre>
 
 Pre viac informácií si prečítajte [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10).
 
@@ -334,7 +352,8 @@ Upstart služba je definovaná v konfiguračnom súbore (tiež nazývaný "job")
 
 Vytvorte súbor s názvom `myapp.conf` umiestnený v `/etc/init /` s nasledujúcim obsahom (nahraďte tučný text s hodnotami pre váš systém a aplikáciu):
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 # When to start the process
 start on runlevel [2345]
 
@@ -362,7 +381,8 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code></pre>
+</code>
+</pre>
 
 Pozn.: Tento skript vyžaduje Upstart 1.4 príp. novší, podporovaný na Ubuntu 12.04-14.10.
 
@@ -382,15 +402,19 @@ StrongLoop PM možete jednoducho nainštalovať ako Upstart službu. Následne, 
 
 Pre inštaláciu StrongLoop PM ako Upstart 1.4 služby:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ sudo sl-pm-install
-</code></pre>
+</code>
+</pre>
 
 Pre spustenie služby:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ sudo /sbin/initctl start strong-pm
-</code></pre>
+</code>
+</pre>
 
 Pozn.: Pre systémy bez podpory Upstart 1.4 sú príkazy mierne odlišné. Pre viac informácií sa pozrite na [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10).
 
@@ -416,9 +440,11 @@ Keď StrongLoop Process Manager (PM) spúšta aplikáciu, aplikácia je spusten�
 
 Napr., predpokladajúc, že ste deployli vašu aplikáciu na prod.foo.com a StrongLoop PM počúva na porte 8701 (defaultný), tak nastavenie veľkosti clustera na osem vykonáte pomocou slc takto:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code></pre>
+</code>
+</pre>
 
 Pre viac informácií ohľadom clusteringu pomocou StrongLoop PM sa pozrite na časť [Clustering](https://docs.strongloop.com/display/SLC/Clustering) v StrongLoop dokumentácii.
 

@@ -54,18 +54,22 @@ Helmet je v skutočnosti len kolekcia deviatich menších middleware funkcií na
 
 Helmet nainštalujete rovnako, ako akýkoľvek iný modul:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install --save helmet
-</code></pre>
+</code>
+</pre>
 
 Potom ho môžete použiť vo vašom kóde takto:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 ...
 var helmet = require('helmet');
 app.use(helmet());
 ...
-</code></pre>
+</code>
+</pre>
 
 ### Určite aspoň zakážte X-Powered-By hlavičku
 
@@ -73,9 +77,11 @@ Ak nechcete použiť Helmet, potom určite aspoň zakážte `X-Powered-By` hlavi
 
 Preto sa odporúča, vypnúť túto hlavičku pomocou `app.disable()` metódy:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.disable('x-powered-by');
-</code></pre>
+</code>
+</pre>
 
 V prípade, že použijete modul `helmet.js`, ten sa o to postará.
 
@@ -98,7 +104,8 @@ Používaním defaultného názvu session cookie vystavujete aplikáciu možným
 
 Aby ste sa vyhli tomuto problému, použite generické názvy cookie; napr použitím [express-session](https://www.npmjs.com/package/express-session) middlewaru:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var session = require('express-session');
 app.set('trust proxy', 1); // trust first proxy
 app.use( session({
@@ -106,7 +113,8 @@ app.use( session({
    name : 'sessionId',
   })
 );
-</code></pre>
+</code>
+</pre>
 
 ### Nastavte cookie security parametre
 
@@ -120,7 +128,8 @@ Pre zlepšenie bezpečnosti nastavte nasledujúce cookie parametre:
 
 Tu je príklad použitia [cookie-session](https://www.npmjs.com/package/cookie-session) middleware modulu:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var session = require('cookie-session');
 var express = require('express');
 var app = express();
@@ -137,7 +146,8 @@ app.use(session({
           }
   })
 );
-</code></pre>
+</code>
+</pre>
 
 ## Uistite sa, že používate bezpečné dependencie
 
@@ -147,29 +157,29 @@ Pre uistenie sa, že sú vaše dependencie bezpečné, použite niektorý z nasl
 
 [nsp](https://www.npmjs.com/package/nsp) je command-line tool, ktorý porovnáva [Node Security Project](https://nodesecurity.io/) vulnerability databázu voči dependenciám použitých vo vašej aplikácii a zisťuje, či neobsahujú niektoré zo známych vulnerabilities. Tento tool nainštalujete takto:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm i nsp -g
-</code></pre>
+</code>
+</pre>
 
-Pomocou nasledujúceho príkazu submitnete súbor `npm-shrinkwrap.json` na validáciu do [nodesecurity.io](https://nodesecurity.io/):
+Pomocou nasledujúceho príkazu submitnete `npm-shrinkwrap.json` / `package.json` na validáciu do [nodesecurity.io](https://nodesecurity.io/):
 
-<pre><code class="language-sh" translate="no">
-$ nsp audit-shrinkwrap
-</code></pre>
-
-Pomocou nasledujúceho príkazu submitnete súbor `package.json` na validáciu do [nodesecurity.io](https://nodesecurity.io/):
-
-<pre><code class="language-sh" translate="no">
-$ nsp audit-package
-</code></pre>
+<pre>
+<code class="language-sh" translate="no">
+$ nsp check
+</code>
+</pre>
 
 Tu je príklad použitia [requireSafe](https://requiresafe.com/) pre audit vašich Node modulov:
 
-<pre><code class="language-sh" translate="no">
+<pre>
+<code class="language-sh" translate="no">
 $ npm install -g requiresafe
 $ cd your-app
 $ requiresafe check
-</code></pre>
+</code>
+</pre>
 
 ## Ďalšie odporúčania
 

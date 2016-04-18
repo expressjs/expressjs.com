@@ -15,7 +15,8 @@ Pre vytvorenie vlastného template enginu použite metódu `app.engine(ext, call
 
 Nasledujúci kód je príkladom implementácie veľmi jednoduchého template enginu pre rendrovanie `.ntl` súborov.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
@@ -28,19 +29,24 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
-</code></pre>
+</code>
+</pre>
 
 Odteraz bude vaša aplikácia schopná rendrovať `.ntl` súbory. Vytvorte súbor s názvom `index.ntl` a `views` priečinok s nasledujúcim obsahom.
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 #title#
 #message#
-</code></pre>
+</code>
+</pre>
 Potom vo vašej aplikácii vytvorte takýto route:
 
-<pre><code class="language-javascript" translate="no">
+<pre>
+<code class="language-javascript" translate="no">
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code></pre>
+</code>
+</pre>
 Keď vykonáte request na home page, `index.ntl` bude vyrendrované ako HTML.
