@@ -34,14 +34,12 @@ para melhorar o desempenho dos aplicativos:
 
 A compactação Gzip pode diminuir bastante o tamanho do corpo de resposta e assim aumentar a velocidade de um aplicativo da web. Use o middleware [compression](https://www.npmjs.com/package/compression) para fazer a compactação gzip no seu aplicativo do Express. Por exemplo:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var compression = require('compression');
 var express = require('express');
 var app = express();
 app.use(compression());
-</code>
-</pre>
+```
 
 Para um website com tráfego intenso na produção, a melhor maneira de colocar a compactação em prática, é implementá-la em um
 nível de proxy reverso (consulte [Use um proxy reverso](#proxy)). Neste caso, não é necessário usar o middleware de compactação. Para obter detalhes sobre a ativação da compactação gzip no Nginx, consulte o [Módulo
@@ -160,8 +158,7 @@ Aqui está um exemplo de uso de try-catch para tratar uma
 potencial exceção causadora de queda de processo.
 Esta função middleware aceita um parâmetro de campo de consulta chamado "params" que é um objeto JSON.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/search', function (req, res) {
   // Simulating async operation
   setImmediate(function () {
@@ -174,8 +171,7 @@ app.get('/search', function (req, res) {
     }
   });
 });
-</code>
-</pre>
+```
 
 Entretanto, o try-catch funciona apenas para códigos síncronos. Como
 a plataforma Node é a princípio assíncrona (particularmente em um ambiente de produção), o try-catch deixará de capturar muitas
@@ -188,8 +184,7 @@ exceções.
 Promessas irão tratar quaisquer exceções (ambas explícitas e implícitas) em blocos de códigos assíncronos que usem
 `then()`. Apenas inclua `.catch(next)` no final da cadeia de promessas. Por exemplo:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res, next) {
   // do some sync stuff
   queryDb()
@@ -206,8 +201,7 @@ app.get('/', function (req, res, next) {
 app.use(function (err, req, res, next) {
   // handle error
 });
-</code>
-</pre>
+```
 
 Agora todos os erros assíncronos e síncronos são propagados para o middleware de erros.
 
@@ -221,15 +215,13 @@ converta o objeto base através do uso de uma função auxiliar como
 exceções não capturadas. Portanto certifique-se de que está tratando
 o evento de erro apropriadamente; por exemplo:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id)
   let stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
-</code>
-</pre>
+```
 
 Para obter mais informações sobre o manipulação de erros usando
 promessas, consulte:
@@ -278,23 +270,19 @@ mas configurando NODE_ENV é tão importante para o desempenho (e fácil de faze
 Com o Upstart, use a palavra-chave `env` no
 seu arquivo de tarefa. Por exemplo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code>
-</pre>
+```
 
 Para obter mais informações, consulte o [Introdução, Cookbook e Melhores Práticas para o Upstart](http://upstart.ubuntu.com/cookbook/#environment-variables).
 
 Com o systemd, use a diretiva `Environment` no seu arquivo de unidade. Por exemplo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code>
-</pre>
+```
 
 Para obter mais informações, consulte [Usando
 Variáveis de Ambiente em Unidades systemd](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
@@ -399,8 +387,7 @@ terminando em .service. Aqui está um exemplo de arquivo de unidade
 para gerenciar um aplicativo Node diretamente (substitua o texto em
 negrito com valores para o seu sistema e aplicativo):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -428,8 +415,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code>
-</pre>
+```
 Para obter mais informações sobre o systemd, consulte a
 [referência
 do systemd (página do manual)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
@@ -443,19 +429,15 @@ então reiniciar todos os aplicativos que está gerenciando.
 
 Para instalar o StrongLoop PM como um serviço do systemd:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 Em seguida inicie o serviço com:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```
 
 Para obter mais informações, consulte
 [Configurando
@@ -479,8 +461,7 @@ Crie um arquivo chamado `myapp.conf` em
 `/etc/init/` com o seguinte conteúdo (substitua o
 texto em negrito com os valores para o seu sistema e aplicativo):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -508,8 +489,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code>
-</pre>
+```
 
 NOTA: Este script requer o Upstart 1.4 ou mais novo, suportado no Ubuntu 12.04-14.10.
 
@@ -538,19 +518,15 @@ então reiniciar todos os aplicativos que está gerenciando.
 
 Para instalar o StrongLoop PM como um serviço do Upstart 1.4:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 Em seguida execute o serviço com:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 NOTA: Em sistemas que não suportam o Upstart 1.4, os comandos
 são ligeiramente diferentes. Consulte [Configurando
@@ -600,11 +576,9 @@ para prod.foo.com e o StrongLoop PM está escutando na porta 8701 (a
 padrão), em seguida configurar o tamanho do cluster para oito usando
 o slc:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 Para obter mais informações sobre clusterização com o StrongLoop
 PM, consulte por [Clusterização](https://docs.strongloop.com/display/SLC/Clustering)

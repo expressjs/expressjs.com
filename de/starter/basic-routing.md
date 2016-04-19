@@ -12,11 +12,9 @@ Per *Routing* wird bestimmt, wie eine Antwort auf eine Clientanforderung an eine
 Jede Weiterleitung (Route) kann eine oder mehrere Handlerfunktionen haben, die ausgeführt werden, wenn die Weiterleitung abgeglichen wird.
 
 Weiterleitungsdefinitionen haben die folgende Struktur:
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 Bedeutung:
 
@@ -33,42 +31,34 @@ Die folgenden Beispiele veranschaulichen das Definieren einfacher Weiterleitunge
 
 Antworten Sie mit `Hello World!` auf der Homepage:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
-</code>
-</pre>
+```
 
 Antworten Sie auf POST-Anforderungen auf die Weiterleitung zum Stammverzeichnis (`/`), der Homepage der Anwendung:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
-</code>
-</pre>
+```
 
 Antworten Sie auf eine PUT-Anforderung zur Weiterleitung `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
-</code>
-</pre>
+```
 
 Antworten Sie auf eine DELETE-Anforderung zur Weiterleitung `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-</code>
-</pre>
+```
 
 Details zum Thema Routing finden Sie in der entsprechenden [Routinganleitung](/{{ page.lang }}/guide/routing.html).

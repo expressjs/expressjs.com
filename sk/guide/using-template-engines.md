@@ -27,11 +27,9 @@ Aby Express dokázal spracovať a vyrendrovať template súbory, musí aplikáci
 
 Potom nainštalujte vybraný template engine ako npm dependenciu. Napr. pre inštaláciu Jade spustite:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install jade --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Templatovacie enginy kompatibilné s Express ako napr. Jade exportujú funkciu `__express(filePath, options, callback)`, ktorá je volaná pomocou `res.render()` funkcie k vyrendrovaniu template kódu.
@@ -41,33 +39,27 @@ Niektoré template enginy používajú inú konvenciu. [Consolidate.js](https://
 
 Nastavenie parametra view engine zabezpečí, že nie je potrebné špecifikovať engine, ani načítať modul template enginu vo vašej aplikácii; Express načíta tento modul interne, ako je (pre príklad hore) zobrazené nižšie.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.set('view engine', 'jade');
-</code>
-</pre>
+```
 
 Vo `views` priečinku vytvorte Jade template súbor s názvom `index.jade` s takýmto obsahom:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 html
   head
     title= title
   body
     h1= message
-</code>
-</pre>
+```
 
 Potom zadefinujte route pre rendrovanie `index.jade` súboru. Ak `view engine` parameter nie je nastavený, musíte špecifikovať príponu vášho `view` súboru. V opačnom prípade ju špecifikovať netreba.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 
 Po vykonaní requestu na hlavnú stránku, sa súbor `index.jade` vyrendruje ako HTML.
 

@@ -2,8 +2,8 @@
 
 Set setting `name` to `true`.
 
-{% highlight js %}
+```js
 app.enable('trust proxy');
 app.get('trust proxy');
 // => true
-{% endhighlight %}
+```

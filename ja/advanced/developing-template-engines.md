@@ -11,8 +11,7 @@ lang: ja
 
 次のコードは、`.ntl` ファイルをレンダリングするための極めて単純なテンプレート・エンジンを実装する例です。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
@@ -25,23 +24,18 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
-</code>
-</pre>
+```
 
 これで、アプリケーションは `.ntl` ファイルをレンダリングできるようになります。以下のコンテンツで `index.ntl` というファイルを `views` ディレクトリーに作成します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 #title#
 #message#
-</code>
-</pre>
+```
 次に、アプリケーションで次のルートを作成します。
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 ホーム・ページに要求すると、`index.ntl` ファイルは HTML としてレンダリングされます。

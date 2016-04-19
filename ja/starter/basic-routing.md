@@ -12,11 +12,9 @@ lang: ja
 各ルートには、1 つ以上のハンドラー関数があり、それらはルートが一致したときに実行されます。
 
 ルート定義では、次の構造を使用します。
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 各部分の意味は次のとおりです。
 
@@ -33,42 +31,34 @@ app.METHOD(PATH, HANDLER)
 
 ホーム・ページで `Hello World!` と応答します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
-</code>
-</pre>
+```
 
 アプリケーションのホーム・ページであるルートのルート (`/`) で POST 要求に応答します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
-</code>
-</pre>
+```
 
 `/user` ルートに対する PUT 要求に応答します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
-</code>
-</pre>
+```
 
 `/user` ルートに対する DELETE 要求に応答します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-</code>
-</pre>
+```
 
 ルーティングについて詳しくは、[ルーティング・ガイド](/{{ page.lang }}/guide/routing.html)を参照してください。

@@ -17,8 +17,7 @@ Ensuite, installez `express` en tant que dépendance en suivant les instructions
 
 Dans le répertoire `myapp`, créez un fichier appelé `app.js` et ajoutez le code suivant :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -29,8 +28,7 @@ app.get('/', function (req, res) {
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
-</code>
-</pre>
+```
 
 L'application démarre un serveur et écoute le port 3000 à la recherche de connexions. L'application répond "Hello World!" aux demandes adressées
 à l'URL racine (`/`) ou à la *route* racine. Pour tous les autres chemins d'accès, elle répondra par **404 Not Found**.
@@ -42,11 +40,9 @@ Les objets `req` (demande) et `res` (réponse) sont exactement les mêmes que ce
 
 Exécutez l'application avec la commande suivante :
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ node app.js
-</code>
-</pre>
+```
 
 Puis chargez [http://localhost:3000/](http://localhost:3000/) dans un navigateur pour consulter le résultat.
 

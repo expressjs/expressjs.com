@@ -47,22 +47,18 @@ Helmet 实际上只使用以下九个较小中间件函数的集合，这些功�
 
 像安装其他模块一样安装 Helmet：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 然后将其用于您的代码：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 ...
 var helmet = require('helmet');
 app.use(helmet());
 ...
-</code>
-</pre>
+```
 
 ### 至少禁用 X-Powered-By 头
 
@@ -70,11 +66,9 @@ app.use(helmet());
 
 所以，最佳实践是使用 `app.disable()` 方法禁用此头：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.disable('x-powered-by');
-</code>
-</pre>
+```
 
 如果使用 `helmet.js`，它会为您执行此功能。
 
@@ -97,8 +91,7 @@ app.disable('x-powered-by');
 
 为避免此问题，请使用通用 cookie 名称；例如，使用 [express-session](https://www.npmjs.com/package/express-session) 中间件：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('express-session');
 app.set('trust proxy', 1) // trust first proxy
 app.use( session({
@@ -106,8 +99,7 @@ app.use( session({
    name : 'sessionId',
   })
 );
-</code>
-</pre>
+```
 
 ### 设置 cookie 安全性选项
 
@@ -121,8 +113,7 @@ app.use( session({
 
 以下是使用 [cookie-session](https://www.npmjs.com/package/cookie-session) 中间件的示例：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('cookie-session');
 var express = require('express');
 var app = express();
@@ -139,8 +130,7 @@ app.use(session({
           }
   })
 );
-</code>
-</pre>
+```
 
 ## 确保依赖项的安全
 
@@ -150,37 +140,29 @@ app.use(session({
 
 [nsp](https://www.npmjs.com/package/nsp) 是一种命令行工具，用于检查 [Node 安全项目](https://nodesecurity.io/)漏洞数据库，确定应用程序是否使用具有已知漏洞的软件包。可通过以下命令安装该工具：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm i nsp -g
-</code>
-</pre>
+```
 
 使用以下命令将 `npm-shrinkwrap.json` 文件提交至 [nodesecurity.io](https://nodesecurity.io/) 以进行验证：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-shrinkwrap
-</code>
-</pre>
+```
 
 使用以下命令将 `package.json` 文件提交至 [nodesecurity.io](https://nodesecurity.io/) 以进行验证：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-package
-</code>
-</pre>
+```
 
 以下示例说明如何使用 [requireSafe](https://requiresafe.com/) 来审计 Node 模块：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install -g requiresafe
 $ cd your-app
 $ requiresafe check
-</code>
-</pre>
+```
 
 ## 其他注意事项
 

@@ -15,8 +15,7 @@ Základné informácie o routing-u sa dozviete v sekcii [Základný routing](/{{
 
 Tu je príklad, ako zadefinovať základný routing.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -24,8 +23,7 @@ var app = express();
 app.get('/', function(req, res) {
   res.send('hello world');
 });
-</code>
-</pre>
+```
 
 <h2 id="route-methods">Route metódy</h2>
 
@@ -33,8 +31,7 @@ Route metóda je odvodená z niektorej HTTP metódy a pripojená k inštancii `e
 
 Nasledujúci kód je ukážkou definície routing-u pre GET a POST metódy hlavnej stránky aplikácie.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 // GET method route
 app.get('/', function (req, res) {
   res.send('GET request to the homepage');
@@ -44,8 +41,7 @@ app.get('/', function (req, res) {
 app.post('/', function (req, res) {
   res.send('POST request to the homepage');
 });
-</code>
-</pre>
+```
 
 Express podporuje tieto routing metódy korešpondujúce k HTTP metódam: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search` a `connect`.
 
@@ -58,14 +54,12 @@ Existuje špeciálna routing metóda `app.all()`, ktorá nie je odvodená zo ži
 
 Na nasledujúcom príklade je ukážka handler funkcie, ktorá bude vykonaná pri requeste na "/secret" bez ohľadu nato, či bude použitá GET, POST, PUT, DELETE, alebo akákoľvek iná HTTP request metóda podporovaná [http modulom](https://nodejs.org/api/http.html#http_http_methods).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.all('/secret', function (req, res, next) {
   console.log('Accessing the secret section ...');
   next(); // pass control to the next handler
 });
-</code>
-</pre>
+```
 
 <h2 id="route-paths">Route cesty</h2>
 
@@ -83,75 +77,61 @@ Tu je niekoľko príkladov route ciest na základe stringov.
 
 Táto route cesta sa spáruje s requestom na hlavný route, `/`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.send('root');
 });
-</code>
-</pre>
+```
 
 Táto route cesta sa spáruje s requestom na `/about`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/about', function (req, res) {
   res.send('about');
 });
-</code>
-</pre>
+```
 
 Táto route cesta sa spáruje s requestom na `/random.text`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/random.text', function (req, res) {
   res.send('random.text');
 });
-</code>
-</pre>
+```
 
 Tu je niekoľko príkladov route ciest na základe stringových patternov.
 
 Táto route cesta sa spáruje s requestom `acd` a `abcd`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab?cd', function(req, res) {
   res.send('ab?cd');
 });
-</code>
-</pre>
+```
 
 Táto route cesta sa spáruje s requestom `abcd`, `abbcd`, `abbbcd`, atď.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab+cd', function(req, res) {
   res.send('ab+cd');
 });
-</code>
-</pre>
+```
 
 Táto route cesta sa spáruje s requestom `abcd`, `abxcd`, `abRANDOMcd`, `ab123cd`, atď.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab*cd', function(req, res) {
   res.send('ab*cd');
 });
-</code>
-</pre>
+```
 
 Táto route cesta sa spáruje s requestom `/abe` a `/abcde`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab(cd)?e', function(req, res) {
  res.send('ab(cd)?e');
 });
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 Znaky ?, +, *, a () sú podmnožinami ich regulárnych výrazov. Pomlčka (-) a bodka (.) sa reprezentujú ako text.
@@ -161,23 +141,19 @@ Príklady definícií route ciest s využitím regulárnych výrazov:
 
 Táto route cesta bude spárovaná s každým requestom obsahujúcim "a".
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get(/a/, function(req, res) {
   res.send('/a/');
 });
-</code>
-</pre>
+```
 
 Táto route cesta sa spáruje s requestom `butterfly` a `dragonfly`, ale nie `butterflyman`, `dragonfly man`, atď.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get(/.*fly$/, function(req, res) {
   res.send('/.*fly$/');
 });
-</code>
-</pre>
+```
 
 <h2 id="route-handlers">Route handler</h2>
 
@@ -187,31 +163,26 @@ Route handler môže byť definovaný ako funkcia, pole funkcií či kombinácia
 
 Jedna callback funkcia pre obsluhu spracovania:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/example/a', function (req, res) {
   res.send('Hello from A!');
 });
-</code>
-</pre>
+```
 
 Môžete použiť aj viac ako jednu callback funkciu (nezabudnite špecifikovať `next` objekt). Napríklad:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/example/b', function (req, res, next) {
   console.log('the response will be sent by the next function ...');
   next();
 }, function (req, res) {
   res.send('Hello from B!');
 });
-</code>
-</pre>
+```
 
 Môžete použiť aj pole callback funkcií.  Napr.:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var cb0 = function (req, res, next) {
   console.log('CB0');
   next();
@@ -227,13 +198,11 @@ var cb2 = function (req, res) {
 }
 
 app.get('/example/c', [cb0, cb1, cb2]);
-</code>
-</pre>
+```
 
 Tu je ukážka kombinácia nezávislých funkcií a poľa funkcií:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var cb0 = function (req, res, next) {
   console.log('CB0');
   next();
@@ -250,8 +219,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 }, function (req, res) {
   res.send('Hello from D!');
 });
-</code>
-</pre>
+```
 
 <h2 id="response-methods">Response metódy</h2>
 
@@ -276,8 +244,7 @@ Pretože je route cesta špecifikovaná na jednom mieste, tvorba takýchto route
 
 Tu je príklad zreťazenia route handlerov definovaných pomocou `app.route()`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -288,8 +255,7 @@ app.route('/book')
   .put(function(req, res) {
     res.send('Update the book');
   });
-</code>
-</pre>
+```
 
 <h2 id="express-router">express.Router</h2>
 
@@ -299,8 +265,7 @@ Nasledujúci príklad demonštruje vytvorenie router modulu, načítanie middlew
 
 V priečinku aplikácie vytvorte router súbor nazvaný `birds.js` s takýmto obsahom:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var router = express.Router();
 
@@ -319,17 +284,14 @@ router.get('/about', function(req, res) {
 });
 
 module.exports = router;
-</code>
-</pre>
+```
 
 Následne načítajte tento router modul do aplikácie:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-</code>
-</pre>
+```
 
 Aplikácia bude teraz schopná obslúžiť prichádzajúce požiadavky na ceste `/birds` a `/birds/about`, a taktiež vyvolať `timeLog` middleware funkciu, ktorá je špecifická pre tento route.

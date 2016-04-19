@@ -9,48 +9,38 @@ lang: ja
 
 既に [Node.js](https://nodejs.org/) をインストールしてあることを想定して、ここではアプリケーションを保持するディレクトリーを作成して、それを作業ディレクトリーにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ mkdir myapp
 $ cd myapp
-</code>
-</pre>
+```
 
 `npm init` コマンドを使用して、アプリケーション用の `package.json` ファイルを作成します。
 `package.json` の機能について詳しくは、[Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json) を参照してください。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm init
-</code>
-</pre>
+```
 
 次のコマンドは、アプリケーションの名前やバージョンなど多くの情報の指定を求めるプロンプトを表示します。
 ここでは、単に RETURN キーを押し、以下を例外として大半の情報に関してデフォルトを受け入れます。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 entry point: (index.js)
-</code>
-</pre>
+```
 
 `app.js`、またはメインファイルに指定したい名前を入力します。`index.js` にする場合は、RETURN キーを押して、示されたデフォルトのファイル名を受け入れます。
 
 次に、Express を `app` ディレクトリーにインストールして、依存関係リストに保存します。次に例を示します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install express --save
-</code>
-</pre>
+```
 
 Express を一時的にインストールして、依存関係リストに追加しない場合は、`--save` オプションを省略します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install express
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 `--save` オプションを指定してインストールされた Node モジュールは、`package.json` ファイル内の `dependencies` リストに追加されます。

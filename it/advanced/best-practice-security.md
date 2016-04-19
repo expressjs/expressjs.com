@@ -47,22 +47,18 @@ Attualmente, Helmet non è altro che una raccolta di nove funzioni middleware pi
 
 Installare Helmet come qualsiasi altro modulo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 Successivamente, per utilizzarlo nel codice:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 ...
 var helmet = require('helmet');
 app.use(helmet());
 ...
-</code>
-</pre>
+```
 
 ### Disattivare almeno l'intestazione X-Powered-By
 
@@ -70,11 +66,9 @@ Se non si desidera Helmet, disattivare almeno l'intestazione `X-Powered-By`.  Gl
 
 Quindi, la miglior cosa da fare è disattivare l'intestazione con il metodo `app.disable()`:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.disable('x-powered-by');
-</code>
-</pre>
+```
 
 Se si utilizza `helmet.js`, questa operazione sarà effettuata per conto dell'utente.
 
@@ -97,8 +91,7 @@ L'utilizzo del nome del cookie della sessione predefinito potrebbe esporre l'app
 
 Per evitare questo problema, utilizzare i nomi dei cookie predefiniti; ad esempio, utilizzando il middleware [express-session](https://www.npmjs.com/package/express-session):
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('express-session');
 app.set('trust proxy', 1) // trust first proxy
 app.use( session({
@@ -106,8 +99,7 @@ app.use( session({
    name : 'sessionId',
   })
 );
-</code>
-</pre>
+```
 
 ### Impostare le opzioni di sicurezza dei cookie
 
@@ -121,8 +113,7 @@ Impostare le seguenti opzioni per i cookie per aumentare la sicurezza:
 
 Esempio di utilizzo del middleware [cookie-session](https://www.npmjs.com/package/cookie-session):
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('cookie-session');
 var express = require('express');
 var app = express();
@@ -139,8 +130,7 @@ app.use(session({
           }
   })
 );
-</code>
-</pre>
+```
 
 ## Assicurarsi che le dipendenze siano sicure
 
@@ -150,37 +140,29 @@ Utilizzare uno o entrambi dei due strumenti di seguito indicati per garantire la
 
 [nsp](https://www.npmjs.com/package/nsp) è uno strumento della riga comandi che verifica il database delle vulnerabilità [Node Security Project](https://nodesecurity.io/) per determinare se l'applicazione utilizza pacchetti con vulnerabilità note. Installarlo come segue:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm i nsp -g
-</code>
-</pre>
+```
 
 Utilizzare questo comando per inviare il file `npm-shrinkwrap.json` per la convalida a [nodesecurity.io](https://nodesecurity.io/):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-shrinkwrap
-</code>
-</pre>
+```
 
 Utilizzare questo comando per inviare il file `package.json` per la convalida a [nodesecurity.io](https://nodesecurity.io/):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-package
-</code>
-</pre>
+```
 
 Seguono alcune indicazioni su come utilizzare [requireSafe](https://requiresafe.com/) per verificare i moduli Node:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install -g requiresafe
 $ cd your-app
 $ requiresafe check
-</code>
-</pre>
+```
 
 ## Ulteriori informazioni
 

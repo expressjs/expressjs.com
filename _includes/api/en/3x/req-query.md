@@ -3,7 +3,7 @@
 This property is an object containing the parsed query-string,
 defaulting to `{}`.
 
-{% highlight js %}
+```js
 // GET /search?q=tobi+ferret
 req.query.q
 // => "tobi ferret"
@@ -17,4 +17,4 @@ req.query.shoe.color
 
 req.query.shoe.type
 // => "converse"
-{% endhighlight %}
+```

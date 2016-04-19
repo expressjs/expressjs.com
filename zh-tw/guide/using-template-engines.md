@@ -14,11 +14,9 @@ lang: zh-tw
 
 然後安裝對應的範本引擎 npm 套件：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install jade --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 與 Express 相容的範本引擎（例如 Jade）會匯出一個名稱是 `__express(filePath, options, callback)` 的函數，以供 `res.render()` 函數呼叫，來呈現範本程式碼。
@@ -28,33 +26,27 @@ $ npm install jade --save
 
 設定視圖引擎之後，您不必指定引擎或將範本引擎模組載入到應用程式中；Express 會在內部載入模組，如以下所示（針對上述範例）。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.set('view engine', 'jade');
-</code>
-</pre>
+```
 
 在 `views` 目錄中，建立一個名稱是 `index.jade` 的 Jade 範本檔，內含下列內容：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 html
   head
     title!= title
   body
     h1!= message
-</code>
-</pre>
+```
 
 然後建立路由，以呈現 `index.jade` 檔。如果未設定 `view engine` 內容，您必須指定 `view` 檔的副檔名。否則，您可以省略它。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 
 當您向首頁提出要求時，`index.jade` 檔會呈現成 HTML。
 

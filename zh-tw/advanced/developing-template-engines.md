@@ -11,8 +11,7 @@ lang: zh-tw
 
 下列程式碼範例說明如何實作一個相當簡單的範本引擎，以呈現 `.ntl` 檔。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
@@ -25,24 +24,19 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
-</code>
-</pre>
+```
 
 現在，您的應用程式能夠呈現 `.ntl` 檔。請在 `views` 目錄中建立一個名稱是 `index.ntl` 的檔案，內含下列內容。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 #title#
 #message#
-</code>
-</pre>
+```
 然後在應用程式中建立下列路由。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 當您向首頁提出要求時，`index.ntl` 會呈現成 HTML。

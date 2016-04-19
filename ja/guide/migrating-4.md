@@ -92,14 +92,12 @@ Express 4 のミドルウェアの完全なリストは、[ここ](https://githu
 バージョン 4 では、変数パラメーターを使用して、ミドルウェア関数がロードされるパスを定義し、ルート・ハンドラーからパラメーターの値を読み取ることができます。
 次に例を示します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/book/:id', function(req, res, next) {
   console.log('ID:', req.params.id);
   next();
 });
-</code>
-</pre>
+```
 <h3 id="routing">
 ルーティング・システム
 </h3>
@@ -118,8 +116,7 @@ app.use('/book/:id', function(req, res, next) {
 
 次に、`app.route()` 関数を使用して定義された、チェーニングされたルート・ハンドラーの例を示します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -130,8 +127,7 @@ app.route('/book')
   .put(function(req, res) {
     res.send('Update the book');
   });
-</code>
-</pre>
+```
 
 <h4 id="express-router"><code>express.Router</code> クラス</h4>
 
@@ -141,8 +137,7 @@ app.route('/book')
 
 例えば、アプリケーション・ディレクトリーに次の内容で `birds.js` というルーター・ファイルを作成します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var router = express.Router();
 
@@ -161,18 +156,15 @@ router.get('/about', function(req, res) {
 });
 
 module.exports = router;
-</code>
-</pre>
+```
 
 次に、ルーター・モジュールをアプリケーションにロードします。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-</code>
-</pre>
+```
 
 これで、アプリケーションは、`/birds` および `/birds/about` のパスに対する要求を処理できるようになり、ルートに固有の `timeLog` ミドルウェアを呼び出します。
 
@@ -302,8 +294,7 @@ app.use('/birds', birds);
 
 次の `app.js` ファイルを使用する Express v.3 アプリケーションがあるとします。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -335,15 +326,13 @@ app.get('/users', user.list);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-</code>
-</pre>
+```
 
 <h4 id=""><code>package.json</code></h4>
 
 付随するバージョン 3 の `package.json` ファイルの内容は次のようになります。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -356,8 +345,7 @@ http.createServer(app).listen(app.get('port'), function(){
     "jade": "*"
   }
 }
-</code>
-</pre>
+```
 
 <h3 id="">
 プロセス
@@ -365,11 +353,9 @@ http.createServer(app).listen(app.get('port'), function(){
 
 移行プロセスを開始するには、次のコマンドを使用して、Express 4 アプリケーションに必要なミドルウェアをインストールし、Express と Jade をそれぞれの最新バージョンに更新します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
-</code>
-</pre>
+```
 
 `app.js` に以下の変更を加えます。
 
@@ -385,8 +371,7 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
 
 上記の `npm` コマンドを実行すると、`package.json` が次のように更新されます。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -406,15 +391,13 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
     "serve-favicon": "^2.0.1"
   }
 }
-</code>
-</pre>
+```
 
 <h4 id=""><code>app.js</code></h4>
 
 次に、無効なコードを削除して、必要なミドルウェアをロードし、必要に応じてその他の変更を行います。`app.js` ファイルの内容は次のようになります。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
@@ -458,27 +441,22 @@ var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 `http` モジュール (socket.io/SPDY/HTTPS) を直接処理する必要がある場合を除き、このモジュールをロードする必要はありません。次のようにして、アプリケーションを簡単に開始できます。
-<pre>
-<code class="language-js" translate="no">app.listen(app.get('port'), function(){
+```jsapp.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
-});</code>
-</pre>
+});```
 </div>
 
 <h3 id="">アプリケーションの実行</h3>
 
 これで移行プロセスは完了して、アプリケーションは Express 4 アプリケーションになりました。確認するには、次のコマンドを使用してアプリケーションを開始します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ node .
-</code>
-</pre>
+```
 
 [http://localhost:3000](http://localhost:3000) をロードして、Express 4 によってレンダリングされるホーム・ページを確認します。
 
@@ -490,19 +468,15 @@ Express アプリケーションを生成するためのコマンド・ライン
 
 システムに Express 3 アプリケーション・ジェネレーターがインストールされている場合は、次のようにしてアンインストールする必要があります。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm uninstall -g express
-</code>
-</pre>
+```
 ファイルおよびディレクトリーの特権が構成されている方法によっては、このコマンドを `sudo` で実行することが必要になる場合があります。
 次に、新しいジェネレーターをインストールします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 ファイルおよびディレクトリーの特権が構成されている方法によっては、このコマンドを `sudo` で実行することが必要になる場合があります。
 
@@ -521,11 +495,9 @@ $ npm install -g express-generator
 
 次のコマンドを実行して、Express 4 アプリケーションを作成します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ express app4
-</code>
-</pre>
+```
 
 `app4/app.js` ファイルの内容を見ると、アプリケーションに必要な (`express.static` を除く) すべてのミドルウェア関数が独立したモジュールとしてロードされており、`router` ミドルウェアがアプリケーションに明示的にロードされなくなったことが分かります。
 
@@ -533,11 +505,9 @@ $ express app4
 
 依存関係をインストールした後、次のコマンドを使用してアプリケーションを開始します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm start
-</code>
-</pre>
+```
 
 `package.json` ファイルで npm start スクリプトを見ると、アプリケーションを開始する実際のコマンドは `node ./bin/www` であることが分かります。これは、Express 3 では `node app.js` でした。
 
@@ -547,23 +517,19 @@ Express アプリケーションの作成またはアプリケーションの開
 
 `www` ディレクトリーを削除して、処理を「Express 3 の方法」で実行するには、`app.js` ファイルの最後にある `module.exports = app;` という行を削除して、その場所に以下のコードを貼り付けます。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
-</code>
-</pre>
+```
 
 次のコードを使用して `debug` モジュールを `app.js` ファイルの先頭にロードしたことを確認します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var debug = require('debug')('app4');
-</code>
-</pre>
+```
 
 次に、`package.json` ファイル内の `"start": "node ./bin/www"` を `"start": "node app.js"` に変更します。
 

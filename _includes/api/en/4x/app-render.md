@@ -14,7 +14,7 @@ The local variable `cache` is reserved for enabling view cache. Set it to `true`
 cache view during development; view caching is enabled in production by default.
 </div>
 
-{% highlight js %}
+```js
 app.render('email', function(err, html){
   // ...
 });
@@ -22,4 +22,4 @@ app.render('email', function(err, html){
 app.render('email', { name: 'Tobi' }, function(err, html){
   // ...
 });
-{% endhighlight %}
+```

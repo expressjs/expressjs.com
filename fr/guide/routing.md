@@ -12,8 +12,7 @@ Pour une introduction au routage, voir [Basic routing](/{{ page.lang }}/starter/
 
 Le code suivant est un exemple de routage très basique.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -21,8 +20,7 @@ var app = express();
 app.get('/', function(req, res) {
   res.send('hello world');
 });
-</code>
-</pre>
+```
 
 <h2 id="route-methods">Méthodes de routage</h2>
 
@@ -30,8 +28,7 @@ Une méthode de routage est dérivée de l'une des méthodes HTTP, et est liée 
 
 Le code suivant est un exemple de routes qui sont définies pour les méthodes GET et POST jusqu'à la route de l'application.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 // GET method route
 app.get('/', function (req, res) {
   res.send('GET request to the homepage');
@@ -41,8 +38,7 @@ app.get('/', function (req, res) {
 app.post('/', function (req, res) {
   res.send('POST request to the homepage');
 });
-</code>
-</pre>
+```
 
 Express prend en charge les méthodes de routage suivantes qui correspondent aux méthodes HTTP : `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
 
@@ -55,14 +51,12 @@ Il existe une méthode de routage spéciale, `app.all()`, qui n'est pas dérivé
 
 Dans l'exemple suivant, le gestionnaire sera exécuté pour les demandes de "/secret", que vous utilisiez GET, POST, PUT, DELETE ou toute autre méthode de demande HTTP prise en charge dans le [module http](https://nodejs.org/api/http.html#http_http_methods).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.all('/secret', function (req, res, next) {
   console.log('Accessing the secret section ...');
   next(); // pass control to the next handler
 });
-</code>
-</pre>
+```
 
 <h2 id="route-paths">Chemins de routage</h2>
 
@@ -80,75 +74,61 @@ Il s'agit d'exemples de chemins de routage basés sur des chaînes.
 
 Ce chemin de routage fera correspondre des demandes à la route racine, `/`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.send('root');
 });
-</code>
-</pre>
+```
 
 Ce chemin de routage fera correspondre des demandes à `/about`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/about', function (req, res) {
   res.send('about');
 });
-</code>
-</pre>
+```
 
 Ce chemin de routage fera correspondre des demandes à `/random.text`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/random.text', function (req, res) {
   res.send('random.text');
 });
-</code>
-</pre>
+```
 
 Il s'agit d'exemples de chemins de routage basés sur des masques de chaîne.
 
 Ce chemin de routage fait correspondre `acd` et `abcd`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab?cd', function(req, res) {
   res.send('ab?cd');
 });
-</code>
-</pre>
+```
 
 Ce chemin de routage fait correspondre `abcd`, `abbcd`, `abbbcd`, etc.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab+cd', function(req, res) {
   res.send('ab+cd');
 });
-</code>
-</pre>
+```
 
 Ce chemin de routage fait correspondre `abcd`, `abxcd`, `abRABDOMcd`, `ab123cd`, etc.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab*cd', function(req, res) {
   res.send('ab*cd');
 });
-</code>
-</pre>
+```
 
 Ce chemin de routage fait correspondre `/abe` et `/abcde`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab(cd)?e', function(req, res) {
  res.send('ab(cd)?e');
 });
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 Les caractères ?, +, * et () sont des sous-ensembles de leur expression régulière équivalente. Le trait d'union (-) et le point (.) sont interprétés littéralement par des chemins d'accès basés sur des chaînes.
@@ -158,23 +138,19 @@ Exemples de chemins de routage basés sur des expressions régulières :
 
 Ce chemin de routage fera correspondre tout élément dont le nom de chemin comprend la lettre "a".
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get(/a/, function(req, res) {
   res.send('/a/');
 });
-</code>
-</pre>
+```
 
 Ce chemin de routage fera correspondre `butterfly` et `dragonfly`, mais pas `butterflyman`, `dragonfly man`, etc.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get(/.*fly$/, function(req, res) {
   res.send('/.*fly$/');
 });
-</code>
-</pre>
+```
 
 <h2 id="route-handlers">Gestionnaires de routage</h2>
 
@@ -184,31 +160,26 @@ Les gestionnaires de route se trouvent sous la forme d'une fonction, d'un tablea
 
 Une fonction de rappel unique peut traiter une route.  Par exemple :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/example/a', function (req, res) {
   res.send('Hello from A!');
 });
-</code>
-</pre>
+```
 
 Plusieurs fonctions de rappel peuvent traiter une route (n'oubliez pas de spécifier l'objet `next`). Par exemple :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/example/b', function (req, res, next) {
   console.log('the response will be sent by the next function ...');
   next();
 }, function (req, res) {
   res.send('Hello from B!');
 });
-</code>
-</pre>
+```
 
 Un tableau de fonctions de rappel peut traiter une route.  Par exemple :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var cb0 = function (req, res, next) {
   console.log('CB0');
   next();
@@ -224,13 +195,11 @@ var cb2 = function (req, res) {
 }
 
 app.get('/example/c', [cb0, cb1, cb2]);
-</code>
-</pre>
+```
 
 Une combinaison de fonctions indépendantes et des tableaux de fonctions peuvent gérer une route.  Par exemple :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var cb0 = function (req, res, next) {
   console.log('CB0');
   next();
@@ -247,8 +216,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 }, function (req, res) {
   res.send('Hello from D!');
 });
-</code>
-</pre>
+```
 
 <h2 id="response-methods">Méthodes de réponse</h2>
 
@@ -273,8 +241,7 @@ Etant donné que le chemin est spécifié à une seul emplacement, la création 
 
 Voici quelques exemples de gestionnaires de chemin de chaînage définis à l'aide de `app.route()`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -285,8 +252,7 @@ app.route('/book')
   .put(function(req, res) {
     res.send('Update the book');
   });
-</code>
-</pre>
+```
 
 <h2 id="express-router">express.Router</h2>
 
@@ -296,8 +262,7 @@ L'exemple suivant créé une routeur en tant que module, charge une fonction mid
 
 Créez un fichier de routage nommé `birds.js` dans le répertoire app, avec le contenu suivant :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var router = express.Router();
 
@@ -316,17 +281,14 @@ router.get('/about', function(req, res) {
 });
 
 module.exports = router;
-</code>
-</pre>
+```
 
 Puis, chargez le module de routage dans l'application :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-</code>
-</pre>
+```
 
 L'application pourra dorénavant gérer des demandes dans `/birds` et `/birds/about`, et appeler la fonction middleware`timeLog` spécifique à la route.

@@ -27,9 +27,9 @@ This defaults to the `views` directory in the application root directory.
 
 Then install the corresponding template engine npm package; for example to install Jade:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install jade --save
-</code></pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Express-compliant template engines such as Jade export a function named `__express(filePath, options, callback)`,
@@ -42,28 +42,28 @@ library follows this convention by mapping all of the popular Node.js template e
 After the view engine is set, you don't have to specify the engine or load the template engine module in your app;
 Express loads the module internally, as shown below (for the above example).
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.set('view engine', 'jade');
-</code></pre>
+```
 
 Create a Jade template file named `index.jade` in the `views` directory, with the following content:
 
-<pre><code class="language-javascript" translate="no">
+```js
 html
   head
     title= title
   body
     h1= message
-</code></pre>
+```
 
 Then create a route to render the `index.jade` file. If the `view engine` property is not set,
 you must specify the extension of the `view` file. Otherwise, you can omit it.
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code></pre>
+```
 
 When you make a request to the home page, the `index.jade` file will be rendered as HTML.
 

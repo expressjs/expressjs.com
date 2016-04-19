@@ -32,16 +32,13 @@ lang: ko
 **모듈**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **설치**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install cassandra-driver
-</code>
-</pre>
+```
 
 **예제**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var cassandra = require('cassandra-driver');
 var client = new cassandra.Client({ contactPoints: ['localhost']});
 
@@ -49,8 +46,7 @@ client.execute('select key from system.local', function(err, result) {
   if (err) throw err;
   console.log(result.rows[0]);
 });
-</code>
-</pre>
+```
 
 <a name="couchdb"></a>
 
@@ -59,16 +55,13 @@ client.execute('select key from system.local', function(err, result) {
 **모듈**: [nano](https://github.com/dscape/nano)
 **설치**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install nano
-</code>
-</pre>
+```
 
 **예제**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var nano = require('nano')('http://localhost:5984');
 nano.db.create('books');
 var books = nano.db.use('books');
@@ -84,8 +77,7 @@ books.insert({name: 'The Art of war'}, null, function(err, body) {
 books.list(function(err, body){
   console.log(body.rows);
 });
-</code>
-</pre>
+```
 
 <a name="leveldb"></a>
 
@@ -94,16 +86,13 @@ books.list(function(err, body){
 **모듈**: [levelup](https://github.com/rvagg/node-levelup)
 **설치**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install level levelup leveldown
-</code>
-</pre>
+```
 
 **예제**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var levelup = require('levelup');
 var db = levelup('./mydb');
 
@@ -116,8 +105,7 @@ db.put('name', 'LevelUP', function (err) {
   });
 
 });
-</code>
-</pre>
+```
 
 <a name="mysql"></a>
 
@@ -126,16 +114,13 @@ db.put('name', 'LevelUP', function (err) {
 **모듈**: [mysql](https://github.com/felixge/node-mysql/)
 **설치**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install mysql
-</code>
-</pre>
+```
 
 **예제**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -151,8 +136,7 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 });
 
 connection.end();
-</code>
-</pre>
+```
 
 <a name="mongo"></a>
 
@@ -161,16 +145,13 @@ connection.end();
 **모듈**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **설치**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install mongodb
-</code>
-</pre>
+```
 
 **예제**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var MongoClient = require('mongodb').MongoClient;
 
 MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
@@ -184,8 +165,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
     console.log(result);
   });
 });
-</code>
-</pre>
+```
 
 MongoDB용 오브젝트 모델 드라이버가 필요한 경우에는 [Mongoose](https://github.com/LearnBoost/mongoose)를 확인하십시오.
 
@@ -196,16 +176,13 @@ MongoDB용 오브젝트 모델 드라이버가 필요한 경우에는 [Mongoose]
 **모듈**: [apoc](https://github.com/hacksparrow/apoc)
 **설치**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install apoc
-</code>
-</pre>
+```
 
 **예제**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var apoc = require('apoc');
 
 apoc.query('match (n) return n').exec().then(
@@ -216,8 +193,7 @@ apoc.query('match (n) return n').exec().then(
     console.log(fail);
   }
 );
-</code>
-</pre>
+```
 
 <a name="postgres"></a>
 
@@ -226,16 +202,13 @@ apoc.query('match (n) return n').exec().then(
 **모듈**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **설치**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install pg-promise
-</code>
-</pre>
+```
 
 **예제**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var pgp = require("pg-promise")(/*options*/);
 var db = pgp("postgres://username:password@host:port/database");
 
@@ -246,8 +219,7 @@ db.one("SELECT $1 AS value", 123)
     .catch(function (error) {
         console.log("ERROR:", error);
     });
-</code>
-</pre>
+```
 
 <a name="redis"></a>
 
@@ -256,16 +228,13 @@ db.one("SELECT $1 AS value", 123)
 **모듈**: [redis](https://github.com/mranney/node_redis)
 **설치**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install redis
-</code>
-</pre>
+```
 
 **예제**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var client = require('redis').createClient();
 
 client.on('error', function (err) {
@@ -286,8 +255,7 @@ client.hkeys('hash key', function (err, replies) {
   client.quit();
 
 });
-</code>
-</pre>
+```
 
 <a name="sqlite"></a>
 
@@ -296,16 +264,13 @@ client.hkeys('hash key', function (err, replies) {
 **모듈**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **설치**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install sqlite3
-</code>
-</pre>
+```
 
 **예제**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(':memory:');
 
@@ -326,8 +291,7 @@ db.serialize(function() {
 });
 
 db.close();
-</code>
-</pre>
+```
 
 <a name="elasticsearch"></a>
 
@@ -336,16 +300,13 @@ db.close();
 **모듈**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **설치**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install elasticsearch
-</code>
-</pre>
+```
 
 **예제**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var elasticsearch = require('elasticsearch');
 var client = elasticsearch.Client({
   host: 'localhost:9200'
@@ -367,5 +328,4 @@ client.search({
 }, function(error) {
   console.trace(error.message);
 });
-</code>
-</pre>
+```

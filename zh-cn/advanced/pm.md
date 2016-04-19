@@ -50,24 +50,19 @@ StrongLoop Process Manager (StrongLoop PM) 是 Node.js 应用程序的生产进�
 - [Using StrongLoop Process Manager](http://docs.strongloop.com/display/SLC/Using+Process+Manager).
 
 ### 安装
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install -g strongloop
-</code>
-</pre>
+```
 
 ### 基本使用
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ cd my-app
 $ slc start
-</code>
-</pre>
+```
 
 查看进程管理器和所有部署的应用程序的状态：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl
 Service ID: 1
 Service Name: my-app
@@ -83,50 +78,39 @@ Processes:
     1.1.57694  57694   2     0.0.0.0:3001
     1.1.57695  57695   3     0.0.0.0:3001
     1.1.57696  57696   4     0.0.0.0:3001
-</code>
-</pre>
+```
 
 列出受到管理的所有应用程序（服务）：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl ls
 Id          Name         Scale
  1          my-app       1
-</code>
-</pre>
+```
 
 停止应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl stop my-app
-</code>
-</pre>
+```
 
 重新启动应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl restart my-app
-</code>
-</pre>
+```
 
 还可以“软重新启动”，这使工作进程有一个宽限期来关闭现有连接，然后重新启动当前应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl soft-restart my-app
-</code>
-</pre>
+```
 
 要移除受到管理的应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl remove my-app
-</code>
-</pre>
+```
 
 ## <a id="pm2">PM2</a>
 
@@ -136,18 +120,15 @@ PM2 是 Node.js 应用程序的生产进程管理器，具有内置的负载均�
 
 ### 安装
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install pm2 -g
-</code>
-</pre>
+```
 
 ### 基本使用
 
 在使用 `pm2` 命令启动应用程序时，必须指定应用程序的路径。但在停止、重新启动或删除应用程序时，只需指定应用程序的名称或标识。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 start app.js
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
@@ -156,8 +137,7 @@ $ pm2 start app.js
 │ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
  Use the `pm2 show <id|name>` command to get more details about an app.
-</code>
-</pre>
+```
 
 使用 `pm2` 命令启动应用程序时，立即将应用程序发送到后台。可以使用各种 `pm2` 命令从命令行控制后台应用程序。
 
@@ -167,43 +147,33 @@ $ pm2 start app.js
 
 列出所有正在运行的进程：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 list
-</code>
-</pre>
+```
 
 停止应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 stop 0
-</code>
-</pre>
+```
 
 重新启动应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 restart 0
-</code>
-</pre>
+```
 
 要查看关于应用程序的详细信息：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 show 0
-</code>
-</pre>
+```
 
 要从 PM2 的注册表移除应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 delete 0
-</code>
-</pre>
+```
 
 
 ## <a id="forever">Forever</a>
@@ -214,70 +184,54 @@ Forever 是一种简单的命令行界面工具，用于确保特定脚本持续
 
 ### 安装
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install forever -g
-</code>
-</pre>
+```
 
 ### 基本使用
 
 要启动脚本，请使用 `forever start` 命令并指定脚本的路径：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever start script.js
-</code>
-</pre>
+```
 
 此命令（在后台）以守护程序方式运行脚本。
 
 要运行脚本以便其附加到终端，请省略 `start`：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever script.js
-</code>
-</pre>
+```
 
 使用日志记录选项 `-l`、`-o` 和 `-e`（如此示例中所示）记录来自 Forever 工具和脚本的输出，是很好的构想：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever start -l forever.log -o out.log -e err.log script.js
-</code>
-</pre>
+```
 
 要查看 Forever 启动的脚本的列表：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever list
-</code>
-</pre>
+```
 
 要停止由 Forever 启动的脚本，请使用 `forever stop` 命令并指定进程索引（如 `forever list` 命令所列出）。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stop 1
-</code>
-</pre>
+```
 
 或者，指定文件的路径：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stop script.js
-</code>
-</pre>
+```
 
 要停止 Forever 启动的所有脚本：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stopall
-</code>
-</pre>
+```
 
 Forever 还有许多其他选项，还提供编程 API。

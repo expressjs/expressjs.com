@@ -31,16 +31,13 @@ Estos son algunos de los muchos controladores de base de datos que hay disponibl
 **Módulo**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Instalación**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install cassandra-driver
-</code>
-</pre>
+```
 
 **Ejemplo**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var cassandra = require('cassandra-driver');
 var client = new cassandra.Client({ contactPoints: ['localhost']});
 
@@ -48,8 +45,7 @@ client.execute('select key from system.local', function(err, result) {
   if (err) throw err;
   console.log(result.rows[0]);
 });
-</code>
-</pre>
+```
 
 <a name="couchdb"></a>
 
@@ -58,16 +54,13 @@ client.execute('select key from system.local', function(err, result) {
 **Módulo**: [nano](https://github.com/dscape/nano)
 **Instalación**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install nano
-</code>
-</pre>
+```
 
 **Ejemplo**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var nano = require('nano')('http://localhost:5984');
 nano.db.create('books');
 var books = nano.db.use('books');
@@ -83,8 +76,7 @@ books.insert({name: 'The Art of war'}, null, function(err, body) {
 books.list(function(err, body){
   console.log(body.rows);
 });
-</code>
-</pre>
+```
 
 <a name="leveldb"></a>
 
@@ -93,16 +85,13 @@ books.list(function(err, body){
 **Módulo**: [levelup](https://github.com/rvagg/node-levelup)
 **Instalación**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install level levelup leveldown
-</code>
-</pre>
+```
 
 **Ejemplo**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var levelup = require('levelup');
 var db = levelup('./mydb');
 
@@ -115,8 +104,7 @@ db.put('name', 'LevelUP', function (err) {
   });
 
 });
-</code>
-</pre>
+```
 
 <a name="mysql"></a>
 
@@ -125,16 +113,13 @@ db.put('name', 'LevelUP', function (err) {
 **Módulo**: [mysql](https://github.com/felixge/node-mysql/)
 **Instalación**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install mysql
-</code>
-</pre>
+```
 
 **Ejemplo**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -150,8 +135,7 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 });
 
 connection.end();
-</code>
-</pre>
+```
 
 <a name="mongo"></a>
 
@@ -160,16 +144,13 @@ connection.end();
 **Módulo**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Instalación**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install mongodb
-</code>
-</pre>
+```
 
 **Ejemplo**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var MongoClient = require('mongodb').MongoClient;
 
 MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
@@ -183,8 +164,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
     console.log(result);
   });
 });
-</code>
-</pre>
+```
 
 Si desea un controlador de modelo de objeto para MongoDB, consulte [Mongoose](https://github.com/LearnBoost/mongoose).
 
@@ -195,16 +175,13 @@ Si desea un controlador de modelo de objeto para MongoDB, consulte [Mongoose](ht
 **Módulo**: [apoc](https://github.com/hacksparrow/apoc)
 **Instalación**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install apoc
-</code>
-</pre>
+```
 
 **Ejemplo**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var apoc = require('apoc');
 
 apoc.query('match (n) return n').exec().then(
@@ -215,8 +192,7 @@ apoc.query('match (n) return n').exec().then(
     console.log(fail);
   }
 );
-</code>
-</pre>
+```
 
 <a name="postgres"></a>
 
@@ -225,16 +201,13 @@ apoc.query('match (n) return n').exec().then(
 **Módulo**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **Instalación**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install pg-promise
-</code>
-</pre>
+```
 
 **Ejemplo**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var pgp = require("pg-promise")(/*options*/);
 var db = pgp("postgres://username:password@host:port/database");
 
@@ -245,8 +218,7 @@ db.one("SELECT $1 AS value", 123)
     .catch(function (error) {
         console.log("ERROR:", error);
     });
-</code>
-</pre>
+```
 
 <a name="redis"></a>
 
@@ -255,16 +227,13 @@ db.one("SELECT $1 AS value", 123)
 **Módulo**: [redis](https://github.com/mranney/node_redis)
 **Instalación**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install redis
-</code>
-</pre>
+```
 
 **Ejemplo**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var client = require('redis').createClient();
 
 client.on('error', function (err) {
@@ -285,8 +254,7 @@ client.hkeys('hash key', function (err, replies) {
   client.quit();
 
 });
-</code>
-</pre>
+```
 
 <a name="sqlite"></a>
 
@@ -295,16 +263,13 @@ client.hkeys('hash key', function (err, replies) {
 **Módulo**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Instalación**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install sqlite3
-</code>
-</pre>
+```
 
 **Ejemplo**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(':memory:');
 
@@ -325,8 +290,7 @@ db.serialize(function() {
 });
 
 db.close();
-</code>
-</pre>
+```
 
 <a name="elasticsearch"></a>
 
@@ -335,16 +299,13 @@ db.close();
 **Módulo**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Instalación**
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install elasticsearch
-</code>
-</pre>
+```
 
 **Ejemplo**
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var elasticsearch = require('elasticsearch');
 var client = elasticsearch.Client({
   host: 'localhost:9200'
@@ -366,5 +327,4 @@ client.search({
 }, function(error) {
   console.trace(error.message);
 });
-</code>
-</pre>
+```

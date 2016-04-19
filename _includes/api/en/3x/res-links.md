@@ -2,16 +2,16 @@
 
 Join the given `links` to populate the "Link" response header field.
 
-{% highlight js %}
+```js
 res.links({
   next: 'http://api.example.com/users?page=2',
   last: 'http://api.example.com/users?page=5'
 });
-{% endhighlight %}
+```
 
 p yields:
 
-{% highlight js %}
+```js
 Link: &lt;http://api.example.com/users?page=2&gt;; rel="next",
       &lt;http://api.example.com/users?page=5&gt;; rel="last"
-{% endhighlight %}
+```

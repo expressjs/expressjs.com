@@ -57,27 +57,23 @@ e non ha riscontrato nessuna risposta da parte di quest'ultimi. L'unica cosa da 
 una funzione middleware alla parte finale dello stack (sotto tutte le altre funzioni)
 per gestire una risposta 404:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(function(req, res, next) {
   res.status(404).send('Sorry cant find that!');
 });
-</code>
-</pre>
+```
 
 ## In che modo è possibile impostare un gestore degli errori?
 
 È possibile definire il middleware di gestione degli errori nello stesso modo in cui si definisce qualsiasi altro middleware,
 ad eccezione delle funzioni di gestione degli errori che hanno quattro argomenti invece di tre; nello specifico la firma `(err, req, res, next)`:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-</code>
-</pre>
+```
 
 Per ulteriori informazioni, consultare [Gestione degli errori](/{{ page.lang }}/guide/error-handling.html).
 

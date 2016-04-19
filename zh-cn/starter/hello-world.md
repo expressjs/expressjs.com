@@ -15,8 +15,7 @@ lang: zh-cn
 
 在 `myapp` 目录中，创建名为 `app.js` 的文件，然后添加以下代码：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -27,8 +26,7 @@ app.get('/', function (req, res) {
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
-</code>
-</pre>
+```
 
 应用程序会启动服务器，并在端口 3000 上侦听连接。此应用程序以“Hello World!”响应针对根 URL (`/`) 或*路由*的请求。对于其他所有路径，它将以 **404 Not Found** 进行响应。
 
@@ -38,11 +36,9 @@ app.listen(3000, function () {
 
 使用以下命令运行应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ node app.js
-</code>
-</pre>
+```
 
 然后，在浏览器中装入 [http://localhost:3000/](http://localhost:3000/) 以查看输出。
 

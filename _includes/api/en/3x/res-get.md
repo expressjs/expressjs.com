@@ -2,7 +2,7 @@
 
 Get the case-insensitive response header `field`.
 
-{% highlight js %}
+```js
 res.get('Content-Type');
 // => "text/plain"
-{% endhighlight %}
+```

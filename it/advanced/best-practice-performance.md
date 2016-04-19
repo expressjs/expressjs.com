@@ -32,14 +32,12 @@ Di seguito sono elencate alcune operazioni che è possibile effettuare nel codic
 
 La compressione gzip è in grado di ridurre notevolmente la dimensione del contenuto della risposta e di conseguenza aumentare la velocità di un'applicazione web. Utilizzare il middleware di [compressione](https://www.npmjs.com/package/compression) per la compressione gzip nell'applicazione Express. Ad esempio:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var compression = require('compression');
 var express = require('express');
 var app = express();
 app.use(compression());
-</code>
-</pre>
+```
 
 Per un sito web ad elevato traffico nella produzione, il miglior modo per utilizzare la compressione è quello di implementarla ad un livello di proxy inverso (consultare [Utilizzare un proxy inverso](#proxy)). In questo caso, non è necessario utilizzare il middleware di compressione. Per dettagli su come abilitare la compressione gzip in Nginx, consultare [Modulo ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) nella documentazione Nginx.
 
@@ -108,8 +106,7 @@ Utilizzare uno strumento come [JSHint](http://jshint.com/) o [JSLint](http://www
 Di seguito viene riportato un esempio di utilizzo di try-catch per la gestione di un'eccezione che dà origine a un arresto anomalo del processo.
 Questa funzione middleware accetta un parametro del campo query denominato "params" che è un oggetto JSON.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/search', function (req, res) {
   // Simulating async operation
   setImmediate(function () {
@@ -122,8 +119,7 @@ app.get('/search', function (req, res) {
     }
   });
 });
-</code>
-</pre>
+```
 
 Tuttavia, try-catch funziona solo per il codice sincrono. Poiché la piattaforma Node è principalmente asincrona (nello specifico in un ambiente di produzione), try-catch non sarà in grado di rilevare molte eccezioni.
 
@@ -133,8 +129,7 @@ Tuttavia, try-catch funziona solo per il codice sincrono. Poiché la piattaforma
 
 Promises gestirà qualsiasi eccezione (sia implicita che esplicita) in blocchi di codice asincrono che utilizzano `then()`. Aggiungere `.catch(next)` alla fine della catena promise. Ad esempio:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res, next) {
   // do some sync stuff
   queryDb()
@@ -151,8 +146,7 @@ app.get('/', function (req, res, next) {
 app.use(function (err, req, res, next) {
   // handle error
 });
-</code>
-</pre>
+```
 
 Ora, tutti gli errori asincroni e sincroni vengono inoltrati al middleware degli errori.
 
@@ -161,15 +155,13 @@ Tuttavia, esistono due punti a cui prestare attenzione:
 1.  Tutto il codice asincrono deve restituire promises (ad eccezione di emettitori). Se una libreria particolare non restituire promises, convertire l'oggetto base utilizzando una funzione di supporto come [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
 2.  Emettitori evento (come flussi) possono ancora dare origine ad eccezioni non rilevate. Quindi, assicurarsi di gestire l'evento di errore in modo appropriato, ad esempio:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id)
   let stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
-</code>
-</pre>
+```
 
 Per ulteriori informazioni sulla gestione degli errori mediante l'utilizzo di promises, consultare:
 
@@ -207,23 +199,19 @@ Nello sviluppo, solitamente si impostano le variabili di ambiente nella shell in
 
 Con Upstart, utilizzare la parola chiave `env` nel file job. Ad esempio:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code>
-</pre>
+```
 
 Per ulteriori informazioni, consultare [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables).
 
 Con systemd, utilizzare la direttiva `Environment` nel file unit. Ad esempio:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code>
-</pre>
+```
 
 Per ulteriori informazioni, consultare [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
 
@@ -284,8 +272,7 @@ Systemd è un sistema Linux e un service manager. Le più importanti distribuzio
 
 Un file di configurazione del servizio systemd è denominato *unit file*, con un nome file che termina con .service. Segue un unit file di esempio per gestire un'applicazione Node direttamente (sostituire il testo in grassetto con i valori appropriati per il proprio sistema e applicazione):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -313,8 +300,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code>
-</pre>
+```
 Per ulteriori informazioni su systemd, consultare [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
 
 ##### StrongLoop PM in qualità di servizio systemd
@@ -323,19 +309,15 @@ Per ulteriori informazioni su systemd, consultare [systemd reference (man page)]
 
 Per installare StrongLoop PM in qualità di servizio systemd:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 Successivamente, avviare il servizio con:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```
 
 Per ulteriori informazioni, consultare [Configurazione di un host di produzione (documentazione StrongLoop)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10).
 
@@ -347,8 +329,7 @@ Un servizio Upstart è definito in un file di configurazione del lavoro (anche n
 
 Creare un file denominato `myapp.conf` in `/etc/init/` con il seguente contenuto (sostituire il testo in grassetto con i valori appropriati per il proprio sistema e applicazione):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -376,8 +357,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code>
-</pre>
+```
 
 NOTA: questo script richiede Upstart 1.4 o versione successiva, supportato su Ubuntu 12.04-14.10.
 
@@ -397,19 +377,15 @@ Per ulteriori informazioni su Upstart, consultare [Upstart Intro, Cookbook and B
 
 Per installare StrongLoop PM in qualità di servizio Upstart 1.4:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 Successivamente, eseguire il servizio con:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 NOTA: su sistemi che non supportano Upstart 1.4, i comandi sono leggermente differenti. Consultare [Configurazione di un host di produzione (documentazione StrongLoop)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10) per ulteriori informazioni.
 
@@ -435,11 +411,9 @@ Quando StrongLoop Process Manager (PM) esegue un'applicazione, la esegue automat
 
 Ad esempio, se l'applicazione è stata implementata su prod.foo.com e StrongLoop PM è in ascolto sulla porta 8701 (quella predefinita), per impostare la dimensione del cluster a otto utilizzando slc:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 Per ulteriori informazioni sul processo di clustering con StrongLoop PM, consultare [Processo di clustering](https://docs.strongloop.com/display/SLC/Clustering) nella documentazione StrongLoop.
 

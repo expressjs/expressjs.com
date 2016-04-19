@@ -32,14 +32,12 @@ lang: zh-cn
 
 通过 Gzip 压缩，有助于显著降低响应主体的大小，从而提高 Web 应用程序的速度。可使用[压缩](https://www.npmjs.com/package/compression)中间件进行 Express 应用程序中的 gzip 压缩。例如：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var compression = require('compression');
 var express = require('express');
 var app = express();
 app.use(compression());
-</code>
-</pre>
+```
 
 对于生产环境中的大流量网站，实施压缩的最佳位置是在逆向代理级别（请参阅[使用逆向代理](#proxy)）。在此情况下，不需要使用压缩中间件。有关在 Nginx 中启用 gzip 压缩的详细信息，请参阅 Nginx 文档中的 [ngx_http_gzip_module 模块](http://nginx.org/en/docs/http/ngx_http_gzip_module.html)。
 
@@ -108,8 +106,7 @@ Try-catch 是一种 JavaScript 语言构造，可用于捕获同步代码中的�
 以下示例使用 try-catch 来处理潜在的进程崩溃异常。
 此中间件函数接受名为“params”的查询字段参数（JSON 对象）。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/search', function (req, res) {
   // Simulating async operation
   setImmediate(function () {
@@ -122,8 +119,7 @@ app.get('/search', function (req, res) {
     }
   });
 });
-</code>
-</pre>
+```
 
 然而，try-catch 仅适用于同步代码。而由于 Node 平台主要采用异步方式（尤其在生产环境中），因此 try-catch 不会捕获大量异常。
 
@@ -133,8 +129,7 @@ app.get('/search', function (req, res) {
 
 Promise 可以处理使用 `then()` 的异步代码块中的任何异常（显式和隐式）。只需将 `.catch(next)` 添加到 Promise 链的末尾。例如：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res, next) {
   // do some sync stuff
   queryDb()
@@ -151,8 +146,7 @@ app.get('/', function (req, res, next) {
 app.use(function (err, req, res, next) {
   // handle error
 });
-</code>
-</pre>
+```
 
 现在，所有异步和同步错误都会传播到错误中间件。
 
@@ -161,15 +155,13 @@ app.use(function (err, req, res, next) {
 1.  所有异步代码必须返回 Promise（除了发射器）。如果特定库未返回 Promise，请使用类似 [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html) 的助手函数来转换基本对象。
 2.  事件发射器（比如流）仍然会导致未捕获的异常。所以请确保正确处理错误事件；例如：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id)
   let stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
-</code>
-</pre>
+```
 
 有关使用 Promise 来处理错误的更多信息，请参阅：
 
@@ -207,23 +199,19 @@ NODE_ENV 环境变量指定运行应用程序的环境（通常是开发或者�
 
 对于 Upstart，请使用作业文件中的 `env` 关键字。例如：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code>
-</pre>
+```
 
 有关更多信息，请参阅 [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables)。
 
 对于 systemd，请使用单元文件中的 `Environment` 伪指令。例如：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code>
-</pre>
+```
 
 有关更多信息，请参阅 [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html)。
 
@@ -284,8 +272,7 @@ Systemd 是一个 Linux 系统和服务管理器。大多数主要 Linux 分发�
 
 systemd 服务配置文件称为*单元文件*，扩展名为 .service。以下是一个用于直接管理 Node 应用程序的单元文件示例（请将粗体文本替换为系统和应用程序的值）：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -313,8 +300,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code>
-</pre>
+```
 有关 systemd 的更多信息，请参阅 [systemd 参考（联机帮助页）](http://www.freedesktop.org/software/systemd/man/systemd.unit.html)。
 ##### 作为 systemd 服务的 StrongLoop PM
 
@@ -322,19 +308,15 @@ WantedBy=multi-user.target
 
 要将 StrongLoop PM 作为 systemd 服务安装：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 使用以下命令启动此服务：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```
 
 有关更多信息，请参阅[Setting up a production host](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10)（StrongLoop 文档）。
 
@@ -346,8 +328,7 @@ Upstart 服务以作业配置文件（也称为“作业”）形式定义，扩
 
 在 `/etc/init/` 中创建名为 `myapp.conf` 的文件，其中包含以下内容（请将粗体文本替换为系统和应用程序的值）：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -375,8 +356,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code>
-</pre>
+```
 
 注：此脚本需要 Ubuntu 12.04-14.10 上受支持的 Upstart 1.4 或更新版本。
 
@@ -396,19 +376,15 @@ respawn limit 10 10
 
 要将 StrongLoop PM 作为 Upstart 1.4 服务安装：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 使用以下命令运行此服务：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 注：在不支持 Upstart 1.4 的系统上，这些命令略有不同。请参阅 [Setting up a production host](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10)（StrongLoop 文档），以了解更新信息。
 
@@ -434,11 +410,9 @@ $ sudo /sbin/initctl start strong-pm
 
 例如，假设要将应用程序部署到 prod.foo.com，并且 StrongLoop PM 正在端口 8701（缺省值）上侦听，那么可使用 slc 将集群大小设置为 8：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 有关使用 StrongLoop PM 建立集群的更多信息，请参阅 StrongLoop 文档中的[集群](https://docs.strongloop.com/display/SLC/Clustering)。
 

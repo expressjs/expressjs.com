@@ -17,7 +17,7 @@ lang: uk
 
 В директорії `myapp`, створіть файл з ім’ям `app.js` та додайте наступний код:
 
-<pre><code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -28,7 +28,7 @@ app.get('/', function (req, res) {
 app.listen(3000, function () {
   console.log('Приклад застосунку, який прослуховує 3000-ий порт!');
 });
-</code></pre>
+```
 
 Цей скрипт запускає сервер та прослуховує з’єднання на 3000-му порті. В результаті виводиться "Hello World!",
 коли запити адресуються до кореневого URL (`/`) або кореневого _маршруту_. Для усіх інших адрес формується відповідь **404 Not Found**.
@@ -40,8 +40,8 @@ app.listen(3000, function () {
 
 Запустіть застосунок наступною командою:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ node app.js
-</code></pre>
+```
 
 Після чого, відкрийте браузер за адресою `http://localhost:3000/` щоб побачити результат.

@@ -14,11 +14,9 @@ Express でテンプレート・ファイルをレンダリングするには、
 
 次に、対応するテンプレート・エンジンの npm パッケージをインストールします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install jade --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Jade などの Express 対応テンプレート・エンジンは、`__express(filePath, options, callback)` という関数をエクスポートします。この関数は、テンプレート・コードをレンダリングするために `res.render()` 関数によって呼び出されます。
@@ -27,33 +25,27 @@ Jade などの Express 対応テンプレート・エンジンは、`__express(f
 
 ビュー・エンジンが設定された後は、アプリケーションでエンジンを指定したり、テンプレート・エンジンをロードしたりする必要はありません。(上記の例に対応した) 下記のように、Express がモジュールを内部的にロードします。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.set('view engine', 'jade');
-</code>
-</pre>
+```
 
 以下の内容で `index.jade` という Jade テンプレート・ファイルを `views` ディレクトリーに作成します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 html
   head
     title!= title
   body
     h1!= message
-</code>
-</pre>
+```
 
 次に、`index.jade` ファイルをレンダリングするためのルートを作成します。`view engine` プロパティーが設定されていない場合は、`view` ファイルの拡張子を指定する必要があります。そうでない場合は、省略できます。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 
 ホーム・ページに要求すると、`index.jade` ファイルは HTML としてレンダリングされます。
 

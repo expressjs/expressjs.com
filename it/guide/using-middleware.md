@@ -37,44 +37,37 @@ Associare il middleware al livello dell'applicazione ad un'istanza dell'[oggetto
 
 Questo esempio presenta una funzione middleware senza percorso di montaggio. La funzione viene eseguita ogni volta che l'app riceve una richiesta.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var app = express();
 
 app.use(function (req, res, next) {
   console.log('Time:', Date.now());
   next();
 });
-</code>
-</pre>
+```
 
 Questo esempio presenta una funzione middleware montata nel percorso `/user/:id`. La funzione viene eseguita per qualsiasi tipo di
 richiesta HTTP nel percorso `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/user/:id', function (req, res, next) {
   console.log('Request Type:', req.method);
   next();
 });
-</code>
-</pre>
+```
 
 Questo esempio presenta una route e la relativa funzione handler (sistema middleware). La funzione gestisce richieste GET nel percorso `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   res.send('USER');
 });
-</code>
-</pre>
+```
 
 Ecco un esempio di caricamento di una serie di funzioni middleware in un punto di montaggio, con un percorso di montaggio.
 Illustra un sotto-stack middleware che stampa informazioni sulla richiesta per qualsiasi tipo di richiesta HTTP nel percorso `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/user/:id', function(req, res, next) {
   console.log('Request URL:', req.originalUrl);
   next();
@@ -82,15 +75,13 @@ app.use('/user/:id', function(req, res, next) {
   console.log('Request Type:', req.method);
   next();
 });
-</code>
-</pre>
+```
 
 Gli handler di route consentono di definire molteplici route per un percorso. Nell'esempio sottostante sono definite due route per richieste GET nel percorso `/user/:id`. La seconda route non provocherà alcun problema, ma non verrà mai chiamata, poiché la prima route termina il ciclo di richiesta-risposta.
 
 Questo esempio presenta un sotto-stack middleware che gestisce richieste GET nel percorso `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   console.log('ID:', req.params.id);
   next();
@@ -102,16 +93,14 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.end(req.params.id);
 });
-</code>
-</pre>
+```
 
 Per ignorare le restanti funzioni middleware da uno stack di middleware del router, richiamare `next('route')` per passare il controllo alla route successiva.
 **NOTA**: `next('route')` funzionerà solo in funzioni middleware che sono state caricate utilizzando le funzioni `app.METHOD()` o `router.METHOD()`.
 
 Questo esempio presenta un sotto-stack middleware che gestisce richieste GET nel percorso `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   // if the user ID is 0, skip to the next route
   if (req.params.id == 0) next('route');
@@ -126,24 +115,20 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.render('special');
 });
-</code>
-</pre>
+```
 
 <h2 id='middleware.router'>Middleware a livello del router</h2>
 
 Il middleware a livello del router funziona nello stesso modo di quello a livello dell'applicazione, fatta eccezione per il fatto di essere associato ad un'istanza di `express.Router()`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var router = express.Router();
-</code>
-</pre>
+```
 Caricare il middleware a livello del router utilizzando le funzioni `router.use()` e `router.METHOD()`.
 
 Il seguente codice di esempio replica il sistema middleware mostrato sopra per il middleware a livello dell'applicazione, utilizzando il middleware a livello del router:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var app = express();
 var router = express.Router();
 
@@ -181,8 +166,7 @@ router.get('/user/:id', function (req, res, next) {
 
 // mount the router on the app
 app.use('/', router);
-</code>
-</pre>
+```
 
 <h2 id='middleware.error-handling'>Middleware di gestione degli errori</h2>
 
@@ -192,14 +176,12 @@ Il middleware di gestione degli errori impiega sempre *quattro* argomenti.  È n
 
 Definire le funzioni middleware di gestione degli errori nello stesso modo delle altre funzioni middleware, ma con quattro argomenti invece di tre, nello specifico con la firma `(err, req, res, next)`):
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-</code>
-</pre>
+```
 
 Per dettagli sul middleware di gestione degli errori, consultare la sezione: [Gestione degli errori](/{{ page.lang }}/guide/error-handling.html).
 
@@ -229,8 +211,7 @@ L'oggetto facoltativo `options` può avere le seguenti proprietà:
 
 Ecco un esempio di utilizzo della funzione middleware `express.static` con un oggetto opzioni elaborato:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var options = {
   dotfiles: 'ignore',
   etag: false,
@@ -244,18 +225,15 @@ var options = {
 }
 
 app.use(express.static('public', options));
-</code>
-</pre>
+```
 
 È possibile avere più di una directory statica per app:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 app.use(express.static('files'));
-</code>
-</pre>
+```
 
 Per ulteriori dettagli sulla funzione `serve-static` e sulle relative opzioni, consultare: documentazione [serve-static](https://github.com/expressjs/serve-static).
 
@@ -267,21 +245,17 @@ Installare il modulo Node.js per la funzionalità richiesta, quindi, caricarlo n
 
 Il seguente esempio illustra l'installazione e il caricamento della funzione middleware di analisi dei cookie `cookie-parser`.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install cookie-parser
-</code>
-</pre>
+```
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');
 
 // load the cookie-parsing middleware
 app.use(cookieParser());
-</code>
-</pre>
+```
 
 Per un elenco parziale delle funzioni middleware di terzi comunemente utilizzate con Express, consultare la sezione: [Middleware di terzi](../resources/middleware.html).

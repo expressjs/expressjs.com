@@ -93,14 +93,12 @@ Express 4 不再相依於 Connect，除了 `express.static` 函數，其他所�
 在第 4 版中，您可以使用變數參數，來定義中介軟體函數的載入路徑，然後從路由處理程式讀取參數值。例如：
 
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/book/:id', function(req, res, next) {
   console.log('ID:', req.params.id);
   next();
 });
-</code>
-</pre>
+```
 <h3 id="routing">
 路由系統
 </h3>
@@ -119,8 +117,7 @@ Apps 現在隱含地載入了路由中介軟體，因此您不用再擔心該中
 
 下列範例顯示利用 `app.route()` 函數所定義的路由處理程式鏈。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -131,8 +128,7 @@ app.route('/book')
   .put(function(req, res) {
     res.send('Update the book');
   });
-</code>
-</pre>
+```
 
 <h4 id="express-router"><code>express.Router</code> 類別</h4>
 
@@ -144,8 +140,7 @@ app.route('/book')
 
 例如，在應用程式目錄中建立一個名為 `birds.js` 的路由器檔案，內含下列內容：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var router = express.Router();
 
@@ -164,18 +159,15 @@ router.get('/about', function(req, res) {
 });
 
 module.exports = router;
-</code>
-</pre>
+```
 
 然後將路由器模組載入應用程式中：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-</code>
-</pre>
+```
 
 現在，應用程式就能夠處理發給 `/birds` 和 `/birds/about` 路徑的要求，並且會呼叫該路由特定的 `timeLog` 中介軟體。
 
@@ -304,8 +296,7 @@ Express 4 中依預設會停用 `json spaces` 應用程式內容。
 
 假設 Express 第 3 版應用程式具有下列的 `app.js` 檔：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -337,15 +328,13 @@ app.get('/users', user.list);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-</code>
-</pre>
+```
 
 <h4 id=""><code>package.json</code></h4>
 
 附帶的第 3 版 `package.json` 檔可能類似如下：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -358,8 +347,7 @@ http.createServer(app).listen(app.get('port'), function(){
     "jade": "*"
   }
 }
-</code>
-</pre>
+```
 
 <h3 id="">
 程序
@@ -367,11 +355,9 @@ http.createServer(app).listen(app.get('port'), function(){
 
 開始移轉程序，作法是使用下列指令，為 Express 4 應用程式安裝必要的中介軟體，並將 Express 和 Jade 更新為其個別的最新版本：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
-</code>
-</pre>
+```
 
 對 `app.js` 進行下列變更：
 
@@ -388,8 +374,7 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
 
 執行上述 `npm` 指令，將會更新 `package.json`，如下所示：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -409,15 +394,13 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
     "serve-favicon": "^2.0.1"
   }
 }
-</code>
-</pre>
+```
 
 <h4 id=""><code>app.js</code></h4>
 
 然後移除無效的程式碼、載入必要的中介軟體，並視需要進行其他的變更。`app.js` 檔看似如下：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
@@ -461,27 +444,22 @@ var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 除非您需要直接使用 `http` 模組 (socket.io/SPDY/HTTPS)，並不需要載入它，只需採下列方式就能啟動應用程式：
-<pre>
-<code class="language-js" translate="no">app.listen(app.get('port'), function(){
+```jsapp.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
-});</code>
-</pre>
+});```
 </div>
 
 <h3 id="">執行應用程式</h3>
 
 移轉程序已完成，現在應用程式是一個 Express 4 應用程式。若要確認，請使用下列指令來啟動應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ node .
-</code>
-</pre>
+```
 
 載入 [http://localhost:3000](http://localhost:3000)，並查看 Express 4 所呈現的首頁。
 
@@ -493,20 +471,16 @@ $ node .
 
 如果您的系統已安裝 Express 3 應用程式產生器，必須解除安裝它：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm uninstall -g express
-</code>
-</pre>
+```
 視您如何配置檔案與目錄專用權而定，您可能需要使用 `sudo` 來執行這個指令。
 
 現在安裝新的產生器：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 視您如何配置檔案與目錄專用權而定，您可能需要使用 `sudo` 來執行這個指令。
 
@@ -525,11 +499,9 @@ $ npm install -g express-generator
 
 執行下列指令，以建立 Express 4 應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ express app4
-</code>
-</pre>
+```
 
 如果您查看 `app4/app.js` 檔的內容，您會發現應用程式所需要的所有中介軟體函數（但不包括 `express.static`）都載入成獨立模組，且 `router` 中介軟體不再明確載入到應用程式中。
 
@@ -537,11 +509,9 @@ $ express app4
 
 安裝相依關係之後，請使用下列指令來啟動應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm start
-</code>
-</pre>
+```
 
 如果您查看 `package.json` 檔中的 npm 啟動 Script，您會發現，啟動應用程式的實際指令是 `node ./bin/www`，這在 Express 3 中是 `node app.js`。
 
@@ -552,23 +522,19 @@ $ npm start
 
 若要除去 `www` 目錄，並採用「Express 3 形式」，請刪除 `app.js` 檔尾端的 `module.exports = app;` 字行，然後在該處貼上下列程式碼：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
-</code>
-</pre>
+```
 
 請使用下列程式碼，確定 `debug` 模組是載入於 `app.js` 檔頂端：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var debug = require('debug')('app4');
-</code>
-</pre>
+```
 
 然後將 `package.json` 檔中的 `"start": "node ./bin/www"` 變更為 `"start": "node app.js"`。
 

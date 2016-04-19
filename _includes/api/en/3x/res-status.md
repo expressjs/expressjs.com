@@ -2,6 +2,6 @@
 
 Chainable alias of node's `res.statusCode=`.
 
-{% highlight js %}
+```js
 res.status(404).sendfile('path/to/404.png');
-{% endhighlight %}
+```

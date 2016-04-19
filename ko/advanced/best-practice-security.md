@@ -47,22 +47,18 @@ Express 2.x 및 3.x에 대한 유지보수는 더 이상 이루어지지 않습�
 
 다른 모든 모듈처럼 Helmet은 다음과 같이 설치할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 이후 코드에서 Helmet을 사용하는 방법은 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 ...
 var helmet = require('helmet');
 app.use(helmet());
 ...
-</code>
-</pre>
+```
 
 ### 적어도 X-Powered-By 헤더는 사용하지 않도록 설정
 
@@ -70,11 +66,9 @@ Helmet의 사용을 원치 않는 경우에는 적어도 `X-Powered-By` 헤더�
 
 따라서 우수 사례는 다음과 같이 `app.disable()` 메소드를 이용해 이 헤더를 끄는 것입니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.disable('x-powered-by');
-</code>
-</pre>
+```
 
 `helmet.js`를 사용하는 경우에는 사용자를 대신하여 `helmet.js`가 위의 작업을 실행합니다.
 
@@ -97,8 +91,7 @@ app.disable('x-powered-by');
 
 이러한 문제점을 피하려면 일반적인 쿠키 이름을 사용하십시오. 예를 들면 [express-session](https://www.npmjs.com/package/express-session) 미들웨어를 이용해 다음과 같이 하십시오.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('express-session');
 app.set('trust proxy', 1) // trust first proxy
 app.use( session({
@@ -106,8 +99,7 @@ app.use( session({
    name : 'sessionId',
   })
 );
-</code>
-</pre>
+```
 
 ### 쿠키 보안 옵션 설정
 
@@ -121,8 +113,7 @@ app.use( session({
 
 다음에는 [cookie-session](https://www.npmjs.com/package/cookie-session) 미들웨어를 사용한 예가 표시되어 있습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('cookie-session');
 var express = require('express');
 var app = express();
@@ -139,8 +130,7 @@ app.use(session({
           }
   })
 );
-</code>
-</pre>
+```
 
 ## 종속 항목이 안전한지 확인하십시오
 
@@ -150,37 +140,29 @@ npm을 이용해 애플리케이션의 종속 항목을 관리하는 것은 강�
 
 [nsp](https://www.npmjs.com/package/nsp)는 [Node Security Project](https://nodesecurity.io/) 취약성 데이터베이스를 확인하여, 알려진 취약성이 있는 패키지가 애플리케이션에 사용되었는지 파악하는 명령행 도구입니다. nsp를 설치하려면 다음과 같이 하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm i nsp -g
-</code>
-</pre>
+```
 
 유효성 검증을 위한 `npm-shrinkwrap.json` 파일을 [nodesecurity.io](https://nodesecurity.io/)에 제출하려면 다음과 같은 명령을 사용하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-shrinkwrap
-</code>
-</pre>
+```
 
 유효성 검증을 위한 `package.json` 파일을 [nodesecurity.io](https://nodesecurity.io/)에 제출하려면 다음과 같은 명령을 사용하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-package
-</code>
-</pre>
+```
 
 [requireSafe](https://requiresafe.com/)를 이용해 Node 모듈에 대한 감사를 실행하는 방법은 다음과 같습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install -g requiresafe
 $ cd your-app
 $ requiresafe check
-</code>
-</pre>
+```
 
 ## 추가적인 고려사항
 

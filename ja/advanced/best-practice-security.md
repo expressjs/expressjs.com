@@ -47,22 +47,18 @@ Helmet は、実際には、セキュリティー関連の HTTP ヘッダーを�
 
 その他のモジュールと同様に Helmet をインストールします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 次に、コードで使用します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 ...
 var helmet = require('helmet');
 app.use(helmet());
 ...
-</code>
-</pre>
+```
 
 ### 少なくとも X-Powered-By ヘッダーを無効にする
 
@@ -70,11 +66,9 @@ Helmet を使用しない場合は、少なくとも `X-Powered-By` ヘッダー
 
 そのため、`app.disable()` メソッドを使用してこのヘッダーをオフにすることがベスト・プラクティスです。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.disable('x-powered-by');
-</code>
-</pre>
+```
 
 `helmet.js` を使用する場合は、この操作が自動的に実行されます。
 
@@ -97,8 +91,7 @@ Cookie を介してアプリケーションが悪用されないように、デ�
 
 この問題を回避するには、汎用 Cookie 名を使用します。例えば、[express-session](https://www.npmjs.com/package/express-session) ミドルウェアを使用します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('express-session');
 app.set('trust proxy', 1) // trust first proxy
 app.use( session({
@@ -106,8 +99,7 @@ app.use( session({
    name : 'sessionId',
   })
 );
-</code>
-</pre>
+```
 
 ### Cookie のセキュリティー・オプションを設定する
 
@@ -121,8 +113,7 @@ app.use( session({
 
 次に、[cookie-session](https://www.npmjs.com/package/cookie-session) ミドルウェアの使用例を示します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('cookie-session');
 var express = require('express');
 var app = express();
@@ -139,8 +130,7 @@ app.use(session({
           }
   })
 );
-</code>
-</pre>
+```
 
 ## 依存関係がセキュアであることを確認する
 
@@ -150,37 +140,29 @@ npm を使用したアプリケーションの依存関係の管理は、強力�
 
 [nsp](https://www.npmjs.com/package/nsp) は、[Node Security Project](https://nodesecurity.io/) の脆弱性データベースを確認して、アプリケーションが既知の脆弱性を持つパッケージを使用しているかどうかを判別するコマンド・ライン・ツールです。次のようにしてインストールします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm i nsp -g
-</code>
-</pre>
+```
 
 このコマンドを使用して、`npm-shrinkwrap.json` ファイルを検証のために [nodesecurity.io](https://nodesecurity.io/) に送信します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-shrinkwrap
-</code>
-</pre>
+```
 
 このコマンドを使用して、`package.json` ファイルを検証のために [nodesecurity.io](https://nodesecurity.io/) に送信します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-package
-</code>
-</pre>
+```
 
 次に、Node モジュールを監査するための [requireSafe](https://requiresafe.com/) の使用例を示します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install -g requiresafe
 $ cd your-app
 $ requiresafe check
-</code>
-</pre>
+```
 
 ## その他の考慮事項
 

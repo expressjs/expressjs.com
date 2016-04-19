@@ -50,24 +50,19 @@ StrongLoop PM で作業するには、`slc` という強力なコマンド・ラ
 - [Using StrongLoop Process Manager](http://docs.strongloop.com/display/SLC/Using+Process+Manager).
 
 ### インストール
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install -g strongloop
-</code>
-</pre>
+```
 
 ### 基本的な使用法
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ cd my-app
 $ slc start
-</code>
-</pre>
+```
 
 プロセス・マネージャーとすべてのデプロイ済みアプリケーションを表示するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl
 Service ID: 1
 Service Name: my-app
@@ -83,50 +78,39 @@ Processes:
     1.1.57694  57694   2     0.0.0.0:3001
     1.1.57695  57695   3     0.0.0.0:3001
     1.1.57696  57696   4     0.0.0.0:3001
-</code>
-</pre>
+```
 
 すべての管理対象アプリケーション (サービス) をリストするには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl ls
 Id          Name         Scale
  1          my-app       1
-</code>
-</pre>
+```
 
 アプリケーションを停止するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl stop my-app
-</code>
-</pre>
+```
 
 アプリケーションを再始動するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl restart my-app
-</code>
-</pre>
+```
 
 「ソフト再始動」も実行できます。こうすると、ワーカー・プロセスに既存の接続をクローズするための猶予期間を与えた後で、現行のアプリケーションが再始動されます。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl soft-restart my-app
-</code>
-</pre>
+```
 
 アプリケーションを管理対象から削除するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl remove my-app
-</code>
-</pre>
+```
 
 ## <a id="pm2">PM2</a>
 
@@ -136,18 +120,15 @@ PM2 は、ロード・バランサーが組み込まれた、Node.js アプリ�
 
 ### インストール
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install pm2 -g
-</code>
-</pre>
+```
 
 ### 基本的な使用法
 
 `pm2` コマンドを使用してアプリケーションを開始する場合、アプリケーションのパスを指定する必要があります。ただし、アプリケーションの停止、再始動、または削除を行う場合は、アプリケーションの名前または ID を指定するだけですみます。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 start app.js
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
@@ -156,8 +137,7 @@ $ pm2 start app.js
 │ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
  Use the `pm2 show <id|name>` command to get more details about an app.
-</code>
-</pre>
+```
 
 `pm2` コマンドを使用してアプリケーションを開始する場合、アプリケーションは即時にバックグラウンドに送信されます。さまざまな `pm2` コマンドを使用して、コマンド・ラインからバックグラウンド・アプリケーションを制御できます。
 
@@ -167,43 +147,33 @@ $ pm2 start app.js
 
 実行中のプロセスをすべてリストするには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 list
-</code>
-</pre>
+```
 
 アプリケーションを停止するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 stop 0
-</code>
-</pre>
+```
 
 アプリケーションを再始動するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 restart 0
-</code>
-</pre>
+```
 
 アプリケーションに関する詳細情報を表示するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 show 0
-</code>
-</pre>
+```
 
 アプリケーションを PM2 のレジストリーから削除するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 delete 0
-</code>
-</pre>
+```
 
 
 ## <a id="forever">Forever</a>
@@ -214,70 +184,54 @@ Forever は、特定のスクリプトが確実に継続的 (永続的) に実�
 
 ### インストール
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install forever -g
-</code>
-</pre>
+```
 
 ### 基本的な使用法
 
 スクリプトを開始するには、次のように `forever start` コマンドを使用して、スクリプトのパスを指定します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever start script.js
-</code>
-</pre>
+```
 
 このコマンドは、スクリプトをデーモン・モード (バックグラウンド) で実行します。
 
 端末に接続されるようにスクリプトを実行するには、次のように `start` を省略します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever script.js
-</code>
-</pre>
+```
 
 次の例に示すように、ロギング・オプション `-l`、`-o`、および `-e` を使用して Forever ツールおよびスクリプトの出力をログに記録することをお勧めします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever start -l forever.log -o out.log -e err.log script.js
-</code>
-</pre>
+```
 
 Forever によって開始されたスクリプトのリストを表示するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever list
-</code>
-</pre>
+```
 
 Forever によって開始されたスクリプトを停止するには、`forever stop` コマンドを使用して、プロセス索引 (`forever list` コマンドによってリストされます) を指定します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stop 1
-</code>
-</pre>
+```
 
 あるいは、次のようにファイルのパスを指定します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stop script.js
-</code>
-</pre>
+```
 
 Forever によって開始されたすべてのスクリプトを停止するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stopall
-</code>
-</pre>
+```
 
 Forever には、さらに多くのオプションがあり、プログラマチック API もあります。

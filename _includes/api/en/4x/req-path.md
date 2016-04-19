@@ -2,11 +2,11 @@
 
 Contains the path part of the request URL.
 
-{% highlight js %}
+```js
 // example.com/users?sort=desc
 req.path
 // => "/users"
-{% endhighlight %}
+```
 
 <div class="doc-box doc-info" markdown="1">
 When called from a middleware, the mount point is not included in `req.path`. See [app.use()](/4x/api.html#app.use) for more details.

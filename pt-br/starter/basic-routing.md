@@ -16,11 +16,9 @@ Cada rota pode ter uma ou mais funções de manipulação, que são
 executadas quando a rota é correspondida.
 
 A definição de rotas aceita a seguinte estrutura:
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 Onde:
 
@@ -40,42 +38,34 @@ Os seguintes exemplos ilustram a definição de rotas simples.
 
 Responder com `Hello World!` na página inicial:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
-</code>
-</pre>
+```
 
 Responder a uma solicitação POST na rota raiz (`/`) com a página inicial do aplicativo:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
-</code>
-</pre>
+```
 
 Responder a uma solicitação PUT para a rota `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
-</code>
-</pre>
+```
 
 Responder a uma solicitação DELETE para a rota `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-</code>
-</pre>
+```
 
 Para obter mais detalhes  sobre roteamento, consulte o [guia de roteamento](/{{ page.lang }}/guide/routing.html).

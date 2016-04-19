@@ -43,8 +43,7 @@ lang: ru
 
 Далее приводится пример простого приложения Ниже Express "Hello World", для которого будут определены две функции промежуточных обработчиков:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -53,21 +52,18 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 <h2>Разработка</h2>
 
 Ниже приводится простой пример промежуточного обработчика "myLogger". Эта функция печатает слово "LOGGED" при прохождении запроса, адресованного приложению, через приложение. Данная функция промежуточного обработчика присвоена переменной с именем `myLogger`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var myLogger = function (req, res, next) {
   console.log('LOGGED');
   next();
 };
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Обратите внимание на вызов `next()` выше.  Вызов этой функции активирует следующую функцию промежуточной обработки в приложении.
@@ -77,8 +73,7 @@ var myLogger = function (req, res, next) {
 Для того чтобы загрузить функцию промежуточного обработчика вызовите `app.use()` с указанием соответствующей функции.
 Например, приведенный ниже код загружает функцию промежуточного обработчика `myLogger` перед маршрутом к корневому расположению (/).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -94,8 +89,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 Каждый раз при получении запроса приложение выводит на терминал сообщение "LOGGED".
 
@@ -107,19 +101,16 @@ app.listen(3000);
 
 В следующем примере выполняется добавление свойства `requestTime` в объект запроса. Назовем эту функцию промежуточного обработчика "requestTime".
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var requestTime = function (req, res, next) {
   req.requestTime = Date.now();
   next();
 };
-</code>
-</pre>
+```
 
 Теперь приложением используется функция промежуточного обработчика `requestTime`. Кроме того, функция обратного вызова маршрута корневого расположения (пути) использует свойство, добавленную функций промежуточного обработчика в `req` (объект запроса).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -137,8 +128,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 Если запрос адресован корневому каталогу приложения, приложение выводит на экран системное время запроса в браузере.
 

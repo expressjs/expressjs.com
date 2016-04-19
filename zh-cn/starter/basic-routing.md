@@ -12,11 +12,9 @@ lang: zh-cn
 每个路由可以具有一个或多个处理程序函数，这些函数在路由匹配时执行。
 
 路由定义采用以下结构：
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 其中：
 
@@ -33,42 +31,34 @@ app.METHOD(PATH, HANDLER)
 
 以主页上的 `Hello World!` 进行响应：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
-</code>
-</pre>
+```
 
 在根路由 (`/`) 上（应用程序的主页）对 POST 请求进行响应：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
-</code>
-</pre>
+```
 
 对 `/user` 路由的 PUT 请求进行响应：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
-</code>
-</pre>
+```
 
 对 `/user` 路由的 DELETE 请求进行响应：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-</code>
-</pre>
+```
 
 有关路由的更多详细信息，请参阅[路由指南](/{{ page.lang }}/guide/routing.html)。

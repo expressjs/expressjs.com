@@ -11,8 +11,7 @@ lang: zh-cn
 
 以下代码示例实现非常简单的模板引擎以呈现 `.ntl` 文件。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
@@ -25,23 +24,18 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
-</code>
-</pre>
+```
 
 应用程序现在能够呈现 `.ntl` 文件。在 `views` 目录中创建名为 `index.ntl` 且包含以下内容的文件：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 #title#
 #message#
-</code>
-</pre>
+```
 然后，在应用程序中创建以下路径：
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 您向主页发出请求时，`index.ntl` 将呈现为 HTML。

@@ -4,26 +4,45 @@ This is the repository of the website [expressjs.com](http://expressjs.com). It 
 
 ## Local Setup
 
-GitHub Pages websites being served through [Jekyll](http://jekyllrb.com/), you will need to replicate the setup on your local machine to preview the website locally.
-
-[Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) and [Jekyll](http://jekyllrb.com/docs/installation/) on your system, if you don't have them already.
+To preview the website locally, install 
+[Ruby and Bundler](https://help.github.com/articles/setting-up-your-pages-site-locally-with-jekyll/) if you don't have them already.
 
 Install the [jekyll-redirect-from](https://github.com/jekyll/jekyll-redirect-from) gem:
 ```
 $ gem install jekyll-redirect-from
 ```
 
-Once installed, `cd` to the repository directory and run Jekyll using the following command:
+Once you installed these and cloned the repo, `cd` to the repository directory and run the following command:
 
 ```
-$ jekyll s
+$ bundle install
+```
+
+Bundler will look in the Gemfile for which gems to install. The `github-pages` gem includes the same version of Jekyll and other dependencies as used by GitHub Pages, so that your local setup mirrors GitHub Pages as closely as possible.
+
+Run Jekyll using the following command:
+
+```
+$ bundle exec jekyll serve
 ```
 
 Then, load [http://localhost:4000/](http://localhost:4000/) on your browser.
 
-Jekyll uses a variant of Markdown known as [Kramdown](http://kramdown.gettalong.org/quickref.html), read up the docs if you need to go beyond basic Markdown in the doc files.
+## Formatting
 
-To understand the template system used by Jekyll, read up the [Liquid template engine docs](http://liquidmarkup.org/).
+Jekyll uses a variant of Markdown known as [Kramdown](http://kramdown.gettalong.org/quickref.html).
+
+Jekyll uses the [Liquid template engine](http://liquidmarkup.org/) for templating.
+
+You can use [http://kramdown.gettalong.org/parser/gfm.html](GFM) fenced code blocks for JavaScript; for example:
+
+```js
+var express = require('express');
+var app = express();
+app.listen(3000);
+```
+`
+The default GitHub Pages syntax highlighting has been disabled in `_config.yml to allow highlighting with prism.js
 
 ## Contributing
 
