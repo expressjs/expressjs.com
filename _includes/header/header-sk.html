@@ -1,0 +1,130 @@
+<header>
+    <div id="mobile-menu">
+        <div id="nav-button" class="fa fa-bars fa-2x button"></div>
+    </div>
+    <section id="logo"><a href="/" class="express">Express</a>
+    </section>
+    <div id="navbar">
+        <ul id="navmenu">
+            <li><a href="/{{ page.lang }}/" id="home-menu" {% if page.menu == 'home' %} class="active" {% endif %}>Domov</a></li>
+            <li>
+                <ul id="getting-started-menu" class="menu">
+                    <li><a href="/{{ page.lang }}/starter/installing.html" {% if page.menu == 'starter' %} class="active" {% endif %}>Začíname</a>
+                        <ul>
+                            <li>
+                                <a href="/{{ page.lang }}/starter/installing.html">
+                              Inštalácia
+                            </a>
+                            </li>
+                            <li>
+                                <a href="/{{ page.lang }}/starter/hello-world.html">
+                              Hello world
+                            </a>
+                            </li>
+                            <li>
+                                <a href="/{{ page.lang }}/starter/generator.html">
+                            Express generátor
+                          </a>
+                            </li>
+                            <li>
+                                <a href="/{{ page.lang }}/starter/basic-routing.html">
+                              Základný routing
+                            </a>
+                            </li>
+                            <li>
+                                <a href="/{{ page.lang }}/starter/static-files.html">
+                              Statické súbory
+                            </a>
+                            </li>
+                            <li>
+                                <a href="/{{ page.lang }}/starter/faq.html">
+                              FAQ
+                            </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <ul id="guide-menu" class="menu">
+                    <li><a href="/{{ page.lang }}/guide/routing.html" {% if page.menu == 'guide' %} class="active" {% endif %}>Príručka</a>
+                        <ul>
+                            <li><a href="/{{ page.lang }}/guide/routing.html">Routing</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Tvorba middleware</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/guide/using-middleware.html">Použitie middleware</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Použitie template enginov</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/guide/error-handling.html">Error handling</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/guide/debugging.html">Debuggovanie</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Použitie Express za proxy</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/guide/migrating-4.html">Prechod na Express 4</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/guide/migrating-5.html">Prechod na Express 5</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/guide/database-integration.html">Integrácia s databázou</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <ul id="application-menu" class="menu">
+                    <li><a href="/{{ page.lang }}/4x/api.html" {% if page.menu == 'api' %} class="active" {% endif %}>API referenčná príručka</a>
+                        <ul>
+                            <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/3x/api.html">3.x (zastaralé)</a>
+                            </li>
+                            <li><a href="/2x/">2.x (zastaralé)</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <ul id="advanced-topics-menu" class="menu">
+                    <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html" {% if page.menu == 'advanced' %} class="active" {% endif %}>Pokročilé témy</a>
+                        <ul>
+                            <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Templatovacie enginy</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/advanced/pm.html">Použitie správcov procesov</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/advanced/security-updates.html">Security - aktualizácie</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">Security - osvedčené postupy</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Výkonnosť - osvedčené postupy</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <ul id="resources-menu" class="menu">
+                    <li><a href="/{{ page.lang }}/resources/glossary.html" {% if page.menu == 'resources' %} class="active" {% endif %}>Zdroje</a>
+                        <ul>
+                            <li><a href="/{{ page.lang }}/resources/glossary.html">Glosár</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/resources/community.html">Komunita</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/resources/frameworks.html">Frameworky</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/resources/books-blogs.html">Knihy a blogy</a>
+                            </li>
+                            <li><a href="/{{ page.lang }}/resources/companies-using-express.html">Firmy používajúce Express</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>

@@ -44,7 +44,7 @@ redirect_from: "/en/index.html"
 Documentation translations provided by <a href="http://strongloop.com">StrongLoop/IBM</a>:
 [French](/fr/), [German](/de/), [Spanish](/es/), [Italian](/it/), [Japanese](/ja/), [Russian](/ru/), [Chinese](/zh-cn/), [Traditional Chinese](/zh-tw/), [Korean](/ko/), [Portuguese](/pt-br/).
 
-Community translation available for: [Ukrainian](/uk) and [Uzbek](/uz/).
+Community translation available for: [Slovak](/sk), [Ukrainian](/uk) and [Uzbek](/uz/).
 </section>
 
 <!--
