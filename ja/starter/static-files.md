@@ -7,9 +7,9 @@ lang: ja
 
 # Express での静的ファイルの提供
 
-イメージ、CSS ファイル、JavaScript ファイルなどの静的ファイルを提供するには、Express に標準装備されている `express.static` ミドルウェア関数を使用します。
+イメージ、CSS ファイル、JavaScript ファイルなどの静的ファイルを提供するには、Express に標準実装されている `express.static` ミドルウェア関数を使用します。
 
-静的資産を格納しているディレクトリーの名前を `express.static` ミドルウェア関数に渡して、ファイルの直接提供を開始します。例えば、`public` というディレクトリー内のイメージ、CSS ファイル、JavaScript ファイルを提供するには、次のコードを使用します。
+静的アセットファイルを格納しているディレクトリーの名前を `express.static` ミドルウェア関数に渡して、ファイルの直接提供を開始します。例えば、`public` というディレクトリー内のイメージ、CSS ファイル、JavaScript ファイルを提供するには、次のコードを使用します。
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -33,7 +33,7 @@ http://localhost:3000/hello.html
 Express は、静的ディレクトリーから相対的なファイルを検索するため、静的ディレクトリーの名前は URL の一部ではありません。
 </div>
 
-複数の静的資産ディレクトリーを使用するには、`express.static` ミドルウェア関数を複数回呼び出します。
+複数の静的アセットディレクトリーを使用するには、`express.static` ミドルウェア関数を複数回呼び出します。
 
 <pre>
 <code class="language-javascript" translate="no">

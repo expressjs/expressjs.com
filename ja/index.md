@@ -25,7 +25,7 @@ lang: ja
 
   <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h3>Web アプリケーション</h3> Express は、Web アプリケーションとモバイル・アプリケーション向けの一連の堅固な機能を提供する最小限の柔軟な Node.js Web アプリケーション・フレームワークです。</div>
+          <h3>Web アプリケーション</h3> Express は、Web アプリケーションとモバイル・アプリケーション向けの一連の堅固な機能を提供する最小限で柔軟な Node.js Web アプリケーション・フレームワークです。</div>
 
       <div id="apis">
           <h3>API</h3> 無数の HTTP ユーティリティー・メソッドとミドルウェアを自由に使用できるため、堅固な API を迅速かつ容易に作成できます。</div>
