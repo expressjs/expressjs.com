@@ -9,7 +9,7 @@ lang: zh-cn
 
 为了提供诸如图像、CSS 文件和 JavaScript 文件之类的静态文件，请使用 Express 中的 `express.static` 内置中间件函数。
 
-将包含静态资产的目录的名称传递到 `express.static` 中间件函数，以便开始直接提供这些文件。例如，使用以下代码在名为 `public` 的目录中提供图像、CSS 文件和 JavaScript 文件：
+将包含静态资源的目录的名称传递给 `express.static` 中间件函数，以便开始直接提供这些文件。例如，使用以下代码在名为 `public` 的目录中提供图像、CSS 文件和 JavaScript 文件：
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -33,7 +33,7 @@ http://localhost:3000/hello.html
 Express 相对于静态目录查找文件，因此静态目录的名称不是此 URL 的一部分。
 </div>
 
-要使用多个静态资产目录，请多次调用 `express.static` 中间件函数：
+要使用多个静态资源目录，请多次调用 `express.static` 中间件函数：
 
 <pre>
 <code class="language-javascript" translate="no">
