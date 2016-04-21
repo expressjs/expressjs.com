@@ -1,4 +1,4 @@
-﻿---
+---
 layout: page
 title: Express の「Hello World」の例
 menu: starter
