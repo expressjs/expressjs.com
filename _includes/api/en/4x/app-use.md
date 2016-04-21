@@ -81,7 +81,8 @@ The following table provides some simple examples of mounting middleware.
       This will match paths starting with `/abcd`:
         <pre><code class="language-js">app.use('/abcd', function (req, res, next) {
   next();
-});```
+});
+</code></pre>
       </td>
     </tr>
 
@@ -91,25 +92,26 @@ The following table provides some simple examples of mounting middleware.
       This will match paths starting with `/abcd` and `/abd`:
         <pre><code class="language-js">app.use('/abc?d', function (req, res, next) {
   next();
-});```
+});
+</code></pre>
 
 This will match paths starting with `/abcd`, `/abbcd`, `/abbbbbcd`, and so on:
 <pre><code class="language-js">
 app.use('/ab+cd', function (req, res, next) {
   next();
-});```
+});</code></pre>
 
 This will match paths starting with `/abcd`, `/abxcd`, `/abFOOcd`, `/abbArcd`, and so on:
 <pre><code class="language-js">
 app.use('/ab\*cd', function (req, res, next) {
   next();
-});```
+});</code></pre>
 
 This will match paths starting with `/ad` and `/abcd`:
 <pre><code class="language-js">
 app.use('/a(bc)?d', function (req, res, next) {
   next();
-});```
+});</code></pre>
       </td>
     </tr>
 
@@ -119,7 +121,7 @@ app.use('/a(bc)?d', function (req, res, next) {
       This will match paths starting with `/abc` and `/xyz`:
         <pre><code class="language-js">app.use(/\/abc|\/xyz/, function (req, res, next) {
   next();
-});```
+});</code></pre>
       </td>
     </tr>
 
@@ -129,7 +131,7 @@ app.use('/a(bc)?d', function (req, res, next) {
       This will match paths starting with `/abcd`, `/xyza`, `/lmn`, and `/pqr`:
         <pre><code class="language-js">app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
   next();
-});```
+});</code></pre>
       </td>
     </tr>
 
@@ -159,7 +161,7 @@ as you would any other middleware function.
 <pre><code class="language-js">app.use(function (req, res, next) {
   next();
 });
-```
+</code></pre>
 A router is valid middleware.
 
 <pre><code class="language-js">var router = express.Router();
@@ -167,7 +169,7 @@ router.get('/', function (req, res, next) {
   next();
 });
 app.use(router);
-```
+</code></pre>
 
 An Express app is valid middleware.
 <pre><code class="language-js">var subApp = express();
@@ -175,7 +177,7 @@ subApp.get('/', function (req, res, next) {
   next();
 });
 app.use(subApp);
-```
+</code></pre>
       </td>
     </tr>
 
@@ -194,7 +196,7 @@ r2.get('/', function (req, res, next) {
 });
 
 app.use(r1, r2);
-```
+</code></pre>
       </td>
     </tr>
 
@@ -215,7 +217,7 @@ r2.get('/', function (req, res, next) {
 });
 
 app.use('/', [r1, r2]);
-```
+</code></pre>
       </td>
     </tr>
 
@@ -236,7 +238,7 @@ var subApp = express();
 subApp.get('/', function (req, res, next) { next(); });
 
 app.use(mw1, [mw2, r1, r2], subApp);
-```
+</code></pre>
       </td>
     </tr>
 

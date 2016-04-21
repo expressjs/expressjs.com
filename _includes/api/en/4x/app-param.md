@@ -46,7 +46,7 @@ app.get('/user/:id', function (req, res) {
 
 On `GET /user/42`, the following is printed:
 
-```
+```sh
 CALLED ONLY ONCE
 although this matches
 and this matches too
@@ -71,7 +71,7 @@ app.get('/user/:id/:page', function (req, res) {
 
 On `GET /user/42/3`, the following is printed:
 
-```
+```sh
 CALLED ONLY ONCE with 42
 CALLED ONLY ONCE with 3
 although this matches
@@ -143,7 +143,8 @@ The '`.`' character can't be used to capture a character in your capturing regex
 
 Examples:
 
-<pre><code class="language-js">//captures '1-a_6' but not '543-azser-sder'
+<pre><code class="language-js">
+//captures '1-a_6' but not '543-azser-sder'
 router.get('/[0-9]+-[[\\w]]*', function);
 
 //captures '1-a_6' and '543-az(ser"-sder' but not '5-a s'
@@ -151,6 +152,6 @@ router.get('/[0-9]+-[[\\S]]*', function);
 
 //captures all (equivalent to '.*')
 router.get('[[\\s\\S]]*', function);
-```
+</code></pre>
 
 </div>
