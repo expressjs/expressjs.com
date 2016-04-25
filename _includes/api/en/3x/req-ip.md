@@ -3,7 +3,7 @@
 Return the remote address, or when "trust proxy"
 is enabled - the upstream address.
 
-{% highlight js %}
+```js
 req.ip
 // => "127.0.0.1"
-{% endhighlight %}
+```

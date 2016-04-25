@@ -10,7 +10,7 @@ When an error has ocurred or transfer is complete the optional
 callback `fn` is invoked. This method uses <a href="#res.sendfile">res.sendfile()</a>
 to transfer the file.
 
-{% highlight js %}
+```js
 res.download('/report-12345.pdf');
 
 res.download('/report-12345.pdf', 'report.pdf');
@@ -23,4 +23,4 @@ res.download('/report-12345.pdf', 'report.pdf', function(err){
     // decrement a download credit etc
   }
 });
-{% endhighlight %}
+```

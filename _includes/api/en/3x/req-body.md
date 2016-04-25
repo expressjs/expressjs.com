@@ -5,7 +5,7 @@ is provided by the `bodyParser()` middleware, though other body
 parsing middleware may follow this convention as well. This property
 defaults to `{}` when `bodyParser()` is used.
 
-{% highlight js %}
+```js
 // POST user[name]=tobi&user[email]=tobi@learnboost.com
 req.body.user.name
 // => "tobi"
@@ -16,4 +16,4 @@ req.body.user.email
 // POST { "name": "tobi" }
 req.body.name
 // => "tobi"
-{% endhighlight %}
+```

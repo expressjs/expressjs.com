@@ -13,9 +13,10 @@ _Routing_ refers to determining how an application responds to a client request 
 Each route can have one or more handler functions, which are executed when the route is matched.
 
 Route definition takes the following structure:
-<pre><code class="language-javascript" translate="no">
+
+```js
 app.METHOD(PATH, HANDLER)
-</code></pre>
+```
 
 Where:
 
@@ -32,34 +33,34 @@ The following examples illustrate defining simple routes.
 
 Respond with `Hello World!` on the homepage:
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
-</code></pre>
+```
 
 Respond to POST request on the root route (`/`), the application's home page:
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
-</code></pre>
+```
 
 Respond to a PUT request to the `/user` route:
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
-</code></pre>
+```
 
 Respond to a DELETE request to the `/user` route:
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-</code></pre>
+```
 
 For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).

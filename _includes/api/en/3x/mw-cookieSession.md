@@ -8,12 +8,12 @@ This middleware takes the following options:
 * `cookie` session cookie settings, defaulting to `{ path: '/', httpOnly: true, maxAge: null }`
 * `proxy` trust the reverse proxy when setting secure cookies (via "x-forwarded-proto")
 
-{% highlight js %}
+```js
 app.use(express.cookieSession());
-{% endhighlight %}
+```
 
 To clear a cookie simply assign the session to null before responding:
 
-{% highlight js %}
+```js
 req.session = null
-{% endhighlight %}
+```

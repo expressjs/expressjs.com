@@ -100,12 +100,12 @@ GitHub.
 In version 4 you can use a variable parameter to define the path where middleware functions are loaded, then read the value of the parameter from the route handler.
 For example:
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.use('/book/:id', function(req, res, next) {
   console.log('ID:', req.params.id);
   next();
 });
-</code></pre>
+```
 <h3 id="routing">
 The routing system
 </h3>
@@ -129,7 +129,7 @@ information about routes, see [`Router()` documentation](/{{ page.lang }}/4x/api
 
 Here is an example of chained route handlers that are defined by using the `app.route()` function.
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -140,7 +140,7 @@ app.route('/book')
   .put(function(req, res) {
     res.send('Update the book');
   });
-</code></pre>
+```
 
 <h4 id="express-router"><code>express.Router</code> class</h4>
 
@@ -155,7 +155,7 @@ it, defines some routes, and mounts it on a path on the main app.
 For example, create a router file named `birds.js` in the app directory,
 with the following content:
 
-<pre><code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var router = express.Router();
 
@@ -174,15 +174,15 @@ router.get('/about', function(req, res) {
 });
 
 module.exports = router;
-</code></pre>
+```
 
 Then, load the router module in the app:
 
-<pre><code class="language-javascript" translate="no">
+```js
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-</code></pre>
+```
 
 The app will now be able to handle requests to the `/birds` and
 `/birds/about` paths, and will call the `timeLog`
@@ -320,7 +320,7 @@ Version 3 app
 
 Consider an Express v.3 application with the following `app.js` file:
 
-<pre><code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -352,14 +352,14 @@ app.get('/users', user.list);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-</code></pre>
+```
 
 <h4 id=""><code>package.json</code></h4>
 
 The accompanying version 3 `package.json` file might look
   something like this:
 
-<pre><code class="language-javascript" translate="no">
+```js
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -372,7 +372,7 @@ The accompanying version 3 `package.json` file might look
     "pug": "*"
   }
 }
-</code></pre>
+```
 
 <h3 id="">
 Process
@@ -382,9 +382,9 @@ Begin the migration process by installing the required middleware for the
 Express 4 app and updating Express and Pug to their respective latest
 version with the following command:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-</code></pre>
+```
 
 Make the following changes to `app.js`:
 
@@ -407,7 +407,7 @@ Make the following changes to `app.js`:
 
 Running the above `npm` command will update `package.json` as follows:
 
-<pre><code class="language-javascript" translate="no">
+```js
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -427,14 +427,14 @@ Running the above `npm` command will update `package.json` as follows:
     "serve-favicon": "^2.0.1"
   }
 }
-</code></pre>
+```
 
 <h4 id=""><code>app.js</code></h4>
 
 Then, remove invalid code, load the required middleware, and make other
 changes as necessary. The `app.js` file will look like this:
 
-<pre><code class="language-javascript" translate="no">
+```js
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
@@ -478,13 +478,16 @@ var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-</code></pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 Unless you need to work directly with the `http` module (socket.io/SPDY/HTTPS), loading it is not required, and the app can be simply started this way:
-<pre><code class="language-js">app.listen(app.get('port'), function(){
+
+```js
+app.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
-});</code></pre>
+});
+```
 </div>
 
 <h3 id="">Run the app</h3>
@@ -492,9 +495,9 @@ Unless you need to work directly with the `http` module (socket.io/SPDY/HTTPS), 
 The migration process is complete, and the app is now an
 Express 4 app. To confirm, start the app by using the following command:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ node .
-</code></pre>
+```
 
 Load [http://localhost:3000](http://localhost:3000)
   and see the home page being rendered by Express 4.
@@ -511,17 +514,17 @@ The command-line tool to generate an Express app is still
 If you already have the Express 3 app generator installed on your system,
 you must uninstall it:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm uninstall -g express
-</code></pre>
+```
 Depending on how your file and directory privileges are configured,
 you might need to run this command with `sudo`.
 
 Now install the new generator:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install -g express-generator
-</code></pre>
+```
 
 Depending on how your file and directory privileges are configured,
 you might need to run this command with `sudo`.
@@ -542,9 +545,9 @@ Command options and use largely remain the same, with the following exceptions:
 
 Execute the following command to create an Express 4 app:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ express app4
-</code></pre>
+```
 
 If you look at the contents of the `app4/app.js` file, you will notice
 that all the middleware functions (except `express.static`) that are required for
@@ -555,9 +558,9 @@ You will also notice that the `app.js` file is now a Node.js module, in contrast
 
 After installing the dependencies, start the app by using the following command:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm start
-</code></pre>
+```
 
 If you look at the npm start script in the `package.json` file,
 you will notice that the actual command that starts the app is
@@ -579,19 +582,19 @@ To get rid of the `www` directory and keep things the "Express 3 way",
 delete the line that says `module.exports = app;` at the end of the
 `app.js` file, then paste the following code in its place:
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
-</code></pre>
+```
 
 Ensure that you load the `debug` module at the top of the `app.js` file by using the following code:
 
-<pre><code class="language-javascript" translate="no">
+```js
 var debug = require('debug')('app4');
-</code></pre>
+```
 
 Next, change `"start": "node ./bin/www"` in the `package.json` file to `"start": "node app.js"`.
 

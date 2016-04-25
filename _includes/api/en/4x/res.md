@@ -8,19 +8,19 @@ by the parameters to the callback function in which you're working.
 
 For example:
 
-{% highlight js %}
+```js
 app.get('/user/:id', function(req, res){
   res.send('user ' + req.params.id);
 });
-{% endhighlight %}
+```
 
 But you could just as well have:
 
-{% highlight js %}
+```js
 app.get('/user/:id', function(request, response){
   response.send('user ' + request.params.id);
 });
-{% endhighlight %}
+```
 
 The `res` object is an enhanced version of Node's own response object
 and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_serverresponse).

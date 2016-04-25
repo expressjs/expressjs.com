@@ -2,7 +2,7 @@
 
 Return an array of Accepted languages ordered from highest quality to lowest.
 
-{% highlight js %}
+```js
 Accept-Language: en;q=.5, en-us
 // => ['en-us', 'en']
-{% endhighlight %}
+```

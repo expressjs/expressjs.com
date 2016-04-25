@@ -33,13 +33,13 @@ search on the [npm](https://www.npmjs.com/) site.
 **Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install cassandra-driver
-</code></pre>
+```
 
 **Example**
 
-<pre><code class="language-javascript" translate="no">
+```js
 var cassandra = require('cassandra-driver');
 var client = new cassandra.Client({ contactPoints: ['localhost']});
 
@@ -47,7 +47,7 @@ client.execute('select key from system.local', function(err, result) {
   if (err) throw err;
   console.log(result.rows[0]);
 });
-</code></pre>
+```
 
 <a name="couchdb"></a>
 
@@ -56,13 +56,13 @@ client.execute('select key from system.local', function(err, result) {
 **Module**: [nano](https://github.com/dscape/nano)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install nano
-</code></pre>
+```
 
 **Example**
 
-<pre><code class="language-javascript" translate="no">
+```js
 var nano = require('nano')('http://localhost:5984');
 nano.db.create('books');
 var books = nano.db.use('books');
@@ -78,7 +78,7 @@ books.insert({name: 'The Art of war'}, null, function(err, body) {
 books.list(function(err, body){
   console.log(body.rows);
 });
-</code></pre>
+```
 
 <a name="leveldb"></a>
 
@@ -87,13 +87,13 @@ books.list(function(err, body){
 **Module**: [levelup](https://github.com/rvagg/node-levelup)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install level levelup leveldown
-</code></pre>
+```
 
 **Example**
 
-<pre><code class="language-javascript" translate="no">
+```js
 var levelup = require('levelup');
 var db = levelup('./mydb');
 
@@ -106,7 +106,7 @@ db.put('name', 'LevelUP', function (err) {
   });
 
 });
-</code></pre>
+```
 
 <a name="mysql"></a>
 
@@ -115,13 +115,13 @@ db.put('name', 'LevelUP', function (err) {
 **Module**: [mysql](https://github.com/felixge/node-mysql/)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install mysql
-</code></pre>
+```
 
 **Example**
 
-<pre><code class="language-javascript" translate="no">
+```js
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -137,7 +137,7 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 });
 
 connection.end();
-</code></pre>
+```
 
 <a name="mongo"></a>
 
@@ -146,13 +146,13 @@ connection.end();
 **Module**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install mongodb
-</code></pre>
+```
 
 **Example**
 
-<pre><code class="language-javascript" translate="no">
+```js
 var MongoClient = require('mongodb').MongoClient;
 
 MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
@@ -166,7 +166,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
     console.log(result);
   });
 });
-</code></pre>
+```
 
 If you want an object model driver for MongoDB, look at [Mongoose](https://github.com/LearnBoost/mongoose).
 
@@ -177,13 +177,13 @@ If you want an object model driver for MongoDB, look at [Mongoose](https://githu
 **Module**: [apoc](https://github.com/hacksparrow/apoc)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install apoc
-</code></pre>
+```
 
 **Example**
 
-<pre><code class="language-javascript" translate="no">
+```js
 var apoc = require('apoc');
 
 apoc.query('match (n) return n').exec().then(
@@ -194,7 +194,7 @@ apoc.query('match (n) return n').exec().then(
     console.log(fail);
   }
 );
-</code></pre>
+```
 
 <a name="postgres"></a>
 
@@ -203,13 +203,13 @@ apoc.query('match (n) return n').exec().then(
 **Module**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install pg-promise
-</code></pre>
+```
 
 **Example**
 
-<pre><code class="language-javascript" translate="no">
+```js
 var pgp = require("pg-promise")(/*options*/);
 var db = pgp("postgres://username:password@host:port/database");
 
@@ -220,7 +220,7 @@ db.one("SELECT $1 AS value", 123)
     .catch(function (error) {
         console.log("ERROR:", error);
     });
-</code></pre>
+```
 
 <a name="redis"></a>
 
@@ -229,13 +229,13 @@ db.one("SELECT $1 AS value", 123)
 **Module**: [redis](https://github.com/mranney/node_redis)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install redis
-</code></pre>
+```
 
 **Example**
 
-<pre><code class="language-javascript" translate="no">
+```js
 var client = require('redis').createClient();
 
 client.on('error', function (err) {
@@ -256,7 +256,7 @@ client.hkeys('hash key', function (err, replies) {
   client.quit();
 
 });
-</code></pre>
+```
 
 <a name="sqlite"></a>
 
@@ -265,13 +265,13 @@ client.hkeys('hash key', function (err, replies) {
 **Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install sqlite3
-</code></pre>
+```
 
 **Example**
 
-<pre><code class="language-javascript" translate="no">
+```js
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(':memory:');
 
@@ -292,7 +292,7 @@ db.serialize(function() {
 });
 
 db.close();
-</code></pre>
+```
 
 <a name="elasticsearch"></a>
 
@@ -301,13 +301,13 @@ db.close();
 **Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install elasticsearch
-</code></pre>
+```
 
 **Example**
 
-<pre><code class="language-javascript" translate="no">
+```js
 var elasticsearch = require('elasticsearch');
 var client = elasticsearch.Client({
   host: 'localhost:9200'
@@ -329,4 +329,4 @@ client.search({
 }, function(error) {
   console.trace(error.message);
 });
-</code></pre>
+```
