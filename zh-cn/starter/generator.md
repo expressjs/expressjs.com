@@ -11,16 +11,13 @@ lang: zh-cn
 
 使用以下命令安装 `express`：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install express-generator -g
-</code>
-</pre>
+```
 
 使用 `-h` 选项显示命令选项：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ express -h
 
   Usage: express [options][dir]
@@ -35,13 +32,11 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
 例如，以下语句在当前工作目录中创建名为 _myapp_ 的 Express 应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ express myapp
 
    create : myapp
@@ -61,40 +56,32 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 然后安装依赖项：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ cd myapp
 $ npm install
-</code>
-</pre>
+```
 
 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 在 Windows 上，使用以下命令：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
 
 然后在浏览器中装入 `http://localhost:3000/` 以访问此应用程序。
 
 生成的应用程序具有以下目录结构：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 .
 ├── app.js
 ├── bin
@@ -114,8 +101,7 @@ $ DEBUG=myapp:* npm start
     └── layout.jade
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 生成器创建的应用程序结构只是构造 Express 应用程序的众多方法之一。请随意使用此结构或者对其进行修改以最大程度满足自己的需求。

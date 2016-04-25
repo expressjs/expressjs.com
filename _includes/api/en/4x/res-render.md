@@ -11,7 +11,7 @@ The local variable `cache` enables view caching. Set it to `true`,
 to cache the view during development; view caching is enabled in production by default.
 </div>
 
-{% highlight js %}
+```js
 // send the rendered view to the client
 res.render('index');
 
@@ -24,4 +24,4 @@ res.render('index', function(err, html) {
 res.render('user', { name: 'Tobi' }, function(err, html) {
   // ...
 });
-{% endhighlight %}
+```

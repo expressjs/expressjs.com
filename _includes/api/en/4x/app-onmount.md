@@ -13,7 +13,7 @@ Sub-apps will:
 For details, see [Application settings](/en/4x/api.html#app.settings.table).
 </div>
 
-{% highlight js %}
+```js
 var admin = express();
 
 admin.on('mount', function (parent) {
@@ -26,4 +26,4 @@ admin.get('/', function (req, res) {
 });
 
 app.use('/admin', admin);
-{% endhighlight %}
+```

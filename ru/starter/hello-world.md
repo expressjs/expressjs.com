@@ -15,8 +15,7 @@ lang: ru
 
 В каталоге `myapp` создайте файл с именем `app.js` и добавьте следующий код:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -27,8 +26,7 @@ app.get('/', function (req, res) {
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
-</code>
-</pre>
+```
 
 Приложение запускает сервер и слушает соединения на порте 3000. Приложение выдает ответ "Hello World!" на запросы, адресованные корневому URL (`/`) или *маршруту*. Для всех остальных путей ответом будет **404 Not Found**.
 
@@ -38,11 +36,9 @@ app.listen(3000, function () {
 
 Запустите приложение с помощью следующей команды:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ node app.js
-</code>
-</pre>
+```
 
 После этого откройте в браузере страницу [http://localhost:3000/](http://localhost:3000/), чтобы просмотреть результат.
 

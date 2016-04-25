@@ -12,16 +12,13 @@ para rapidamente criar uma estrutura básica de aplicativo.
 
 Instale o `express` com o comando a seguir:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install express-generator -g
-</code>
-</pre>
+```
 
 Exiba as opções de comando com a opção `-h`:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ express -h
 
   Usage: express [options][dir]
@@ -36,14 +33,12 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
 Por exemplo, o seguinte cria um aplicativo do Express chamado _myapp_
 no diretório atualmente em funcionamento:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ express myapp
 
    create : myapp
@@ -63,41 +58,33 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 Em seguida instale as dependências:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ cd myapp
 $ npm install
-</code>
-</pre>
+```
 
 No MacOS ou Linux, execute o aplicativo com este comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 No Windows, use este comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
 
 Em seguida carregue `http://localhost:3000/` no seu navegador para acessar o aplicativo.
 
 
 O aplicativo gerado possui a seguinte estrutura de diretórios:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 .
 ├── app.js
 ├── bin
@@ -117,8 +104,7 @@ O aplicativo gerado possui a seguinte estrutura de diretórios:
     └── layout.jade
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 A estrutura de aplicativo criada pelo gerador é apenas uma das várias maneiras de estruturar aplicativos do Express.

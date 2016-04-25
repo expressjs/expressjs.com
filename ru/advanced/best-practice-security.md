@@ -47,22 +47,18 @@ Helmet, по сути, представляет собой набор из де�
 
 Установите Helmet, как обычный модуль:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 Затем используйте его в своем коде:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 ...
 var helmet = require('helmet');
 app.use(helmet());
 ...
-</code>
-</pre>
+```
 
 ### Как минимум, отключите заголовок X-Powered-By
 
@@ -70,11 +66,9 @@ app.use(helmet());
 
 Поэтому рекомендуется отключить данный заголовок с помощью метода `app.disable()`6
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.disable('x-powered-by');
-</code>
-</pre>
+```
 
 Если вы используете `helmet.js`, это будет сделано автоматически.
 
@@ -97,8 +91,7 @@ app.disable('x-powered-by');
 
 Для того чтобы избежать такой проблемы, используйте обобщенные имена cookie; например, при использовании промежуточного обработчика [express-session](https://www.npmjs.com/package/express-session):
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('express-session');
 app.set('trust proxy', 1) // trust first proxy
 app.use( session({
@@ -106,8 +99,7 @@ app.use( session({
    name : 'sessionId',
   })
 );
-</code>
-</pre>
+```
 
 ### Настройка опций защиты cookie
 
@@ -121,8 +113,7 @@ app.use( session({
 
 Ниже приведен пример с использованием промежуточного обработчика [cookie-session](https://www.npmjs.com/package/cookie-session):
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('cookie-session');
 var express = require('express');
 var app = express();
@@ -139,8 +130,7 @@ app.use(session({
           }
   })
 );
-</code>
-</pre>
+```
 
 ## Обеспечение защиты зависимостей
 
@@ -150,37 +140,29 @@ app.use(session({
 
 [nsp](https://www.npmjs.com/package/nsp) - это инструмент командной строки, выполняющий проверку согласно базе данных уязвимостей [Node Security Project](https://nodesecurity.io/) и определяющий, используются ли вашим приложением пакеты с известными уязвимостями. Установите данный инструмент следующим образом:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm i nsp -g
-</code>
-</pre>
+```
 
 Воспользуйтесь этой командой, чтобы передать файл `npm-shrinkwrap.json` на проверку в [nodesecurity.io](https://nodesecurity.io/):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-shrinkwrap
-</code>
-</pre>
+```
 
 Воспользуйтесь этой командой, чтобы передать файл `package.json` на проверку в [nodesecurity.io](https://nodesecurity.io/):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-package
-</code>
-</pre>
+```
 
 Ниже показано, как используется [requireSafe](https://requiresafe.com/) для проверки модулей Node:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install -g requiresafe
 $ cd your-app
 $ requiresafe check
-</code>
-</pre>
+```
 
 ## Дополнительные замечания
 

@@ -12,11 +12,9 @@ Per *Routing* si intende determinare come un'applicazione risponde a una richies
 Ciascuna route può disporre di una o più funzioni dell'handler, le quali vengono eseguite quando si trova una corrispondenza per la route.
 
 La definizione della route ha la seguente struttura:
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 Dove:
 
@@ -33,42 +31,34 @@ I seguenti esempi mostrano come definire route semplici.
 
 Rispondere con `Hello World!` sulla homepage:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
-</code>
-</pre>
+```
 
 Rispondere alla richiesta POST sulla route principale (`/`), la home page dell'applicazione:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
-</code>
-</pre>
+```
 
 Rispondere a una richiesta PUT alla route `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
-</code>
-</pre>
+```
 
 Rispondere a una richiesta DELETE alla route `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-</code>
-</pre>
+```
 
 Per ulteriori dettagli sul routing, consultare il [Manuale routing](/{{ page.lang }}/guide/routing.html).

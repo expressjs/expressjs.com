@@ -43,8 +43,7 @@ lang: zh-tw
 
 下列範例顯示簡單的 "Hello World" Express 應用程式，您將為這個應用程式定義兩個中介軟體函數：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -53,21 +52,18 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 <h2>開發</h2>
 
 以下的簡單範例顯示一個稱為 "myLogger" 的中介軟體函數。當透過這個函數將要求傳遞給應用程式時，此函數只會列印 "LOGGED"。中介軟體函數會指派給名為 `myLogger` 的變數。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var myLogger = function (req, res, next) {
   console.log('LOGGED');
   next();
 };
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 請注意上述對 `next()` 的呼叫。呼叫這個函數時，會呼叫應用程式中的下一個中介軟體函數。`next()` 函數並非 Node.js 或 Express API 的一部分，而是傳遞給中介軟體函數的第三個引數。`next()` 函數雖沒有命名限制，但依慣例，都是稱為 "next"。為避免混淆，請一律採用此慣例。
@@ -75,8 +71,7 @@ var myLogger = function (req, res, next) {
 
 若要載入中介軟體函數，請呼叫 `app.use()`，以指定中介軟體函數。舉例來說，下列程式碼會在根路徑 (/) 路由之前先載入 `myLogger` 中介軟體函數。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -92,8 +87,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 每當應用程式收到要求時，它會將 "LOGGED" 訊息列印至終端機。
 
@@ -105,19 +99,16 @@ app.listen(3000);
 
 下一個範例是在要求物件中新增一個稱為 `requestTime` 的內容。我們將這個中介軟體函數命名為 "requestTime"。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var requestTime = function (req, res, next) {
   req.requestTime = Date.now();
   next();
 };
-</code>
-</pre>
+```
 
 現在，應用程式會使用 `requestTime` 中介軟體函數。此外，根路徑路由的回呼函數會使用中介軟體函數新增至 `req`（要求物件）的內容。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -135,8 +126,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 當您對應用程式根位置發出要求時，應用程式現在會在瀏覽器中顯示該要求的時間戳記。
 

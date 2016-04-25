@@ -15,8 +15,7 @@ lang: zh-tw
 
 在 `myapp` 目錄中，建立名為 `app.js` 的檔案，並新增下列程式碼：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -27,8 +26,7 @@ app.get('/', function (req, res) {
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
-</code>
-</pre>
+```
 
 應用程式會啟動伺服器，並在埠 3000 接聽連線。應用程式對指向根 URL (`/`) 或*路由*的要求，以 "Hello World!" 回應。對於其他每一個路徑，它的回應是 **404 找不到**。
 
@@ -38,11 +36,9 @@ app.listen(3000, function () {
 
 使用下列指令來執行應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ node app.js
-</code>
-</pre>
+```
 
 然後在瀏覽器中載入 [http://localhost:3000/](http://localhost:3000/)，以查看輸出。
 

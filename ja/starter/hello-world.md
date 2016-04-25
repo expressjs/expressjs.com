@@ -15,8 +15,7 @@ lang: ja
 
 `myapp` ディレクトリーで、`app.js` というファイルを作成して、以下のコードを追加します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -27,8 +26,7 @@ app.get('/', function (req, res) {
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
-</code>
-</pre>
+```
 
 アプリケーションは、サーバーを始動して、ポート 3000 で接続を listen します。アプリケーションは、ルート URL (`/`) または*ルート* に対する要求に「Hello World!」と応答します。その他すべてのパスについては、「**404 Not Found**」と応答します。
 
@@ -38,11 +36,9 @@ app.listen(3000, function () {
 
 次のコマンドを使用してアプリケーションを実行します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ node app.js
-</code>
-</pre>
+```
 
 次に、ブラウザーに [http://localhost:3000/](http://localhost:3000/) をロードして、出力を確認します。
 

@@ -43,8 +43,7 @@ lang: ja
 
 次に、単純な「Hello World」という Express アプリケーションの例を示します。ここでは、2 つのミドルウェア関数を定義します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -53,21 +52,18 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 <h2>開発</h2>
 
 次に、「myLogger」という単純なミドルウェア関数呼び出しの例を示します。この関数は、アプリケーションへの要求が経過するときに単に「LOGGED」を出力します。ミドルウェア関数は、`myLogger` という変数に割り当てられます。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var myLogger = function (req, res, next) {
   console.log('LOGGED');
   next();
 };
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 上記の `next()` の呼び出しに注意してください。この関数を呼び出すと、アプリケーション内の次のミドルウェア関数が呼び出されます。
@@ -77,8 +73,7 @@ var myLogger = function (req, res, next) {
 ミドルウェア関数をロードするには、ミドルウェア関数を指定して `app.use()` を呼び出します。
 例えば、次のコードは、ルート・パス (/) へのルートの前に `myLogger` ミドルウェア関数をロードします。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -94,8 +89,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 アプリケーションは、要求を受け取るたびに、端末にメッセージ「LOGGED」を出力します。
 
@@ -107,19 +101,16 @@ app.listen(3000);
 
 次の例では、`requestTime` というプロパティーを要求オブジェクトに追加します。ここでは、このミドルウェア関数に「requestTime」という名前を付けています。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var requestTime = function (req, res, next) {
   req.requestTime = Date.now();
   next();
 };
-</code>
-</pre>
+```
 
 これで、アプリケーションが `requestTime` ミドルウェア関数を使用するようになります。また、ルート・パス・ルートのコールバック関数は、ミドルウェア関数が `req` (要求オブジェクト) に追加するプロパティーを使用します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -137,8 +128,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 アプリケーションのルートに要求すると、アプリケーションは、要求のタイム・スタンプをブラウザーに表示します。
 

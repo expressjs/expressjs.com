@@ -70,24 +70,19 @@ Documentação completa:
 - [Usando o StrongLoop Process Manager](http://docs.strongloop.com/display/SLC/Using+Process+Manager).
 
 ### Instalação
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install -g strongloop
-</code>
-</pre>
+```
 
 ### Uso Básico
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ cd my-app
 $ slc start
-</code>
-</pre>
+```
 
 Visualizar o status do Gerenciador de Processos e todos os aplicativos implementados:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl
 Service ID: 1
 Service Name: my-app
@@ -103,53 +98,42 @@ Processes:
     1.1.57694  57694   2     0.0.0.0:3001
     1.1.57695  57695   3     0.0.0.0:3001
     1.1.57696  57696   4     0.0.0.0:3001
-</code>
-</pre>
+```
 
 Listar todos os aplicativos (serviços) sendo gerenciados:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl ls
 Id          Name         Scale
  1          my-app       1
-</code>
-</pre>
+```
 
 Parar um aplicativo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl stop my-app
-</code>
-</pre>
+```
 
 Reiniciar um aplicativo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl restart my-app
-</code>
-</pre>
+```
 
 É possível também fazer uma "reinicialização leve," que dá aos
 processos de trabalho um período de tolerância para fechar conexões
 existentes, e em seguida reiniciar o aplicativo atual:
 
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl soft-restart my-app
-</code>
-</pre>
+```
 
 Para remover um aplicativo do gerenciamento:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl remove my-app
-</code>
-</pre>
+```
 
 ## <a id="pm2">PM2</a>
 
@@ -165,11 +149,9 @@ Para obter mais informações, consulte: [https://github.com/Unitech/pm2](https:
 
 ### Instalação
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install pm2 -g
-</code>
-</pre>
+```
 
 ### Uso Básico
 
@@ -179,8 +161,7 @@ entanto, ao parar, reiniciar, ou excluir um aplicativo, é possível
 especificar apenas o nome ou o id do aplicativo.
 
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 start app.js
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
@@ -189,8 +170,7 @@ $ pm2 start app.js
 │ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
  Use the `pm2 show <id|name>` command to get more details about an app.
-</code>
-</pre>
+```
 
 Ao iniciar um aplicativo usando o comando `pm2`, o aplicativo será imediatamente enviado para
 o segundo plano. É possível controlar os aplicativos em segundo plano a partir da linha de comandos usando vários comandos `pm2`.
@@ -204,43 +184,33 @@ Portanto use os IDs ao invés dos nomes para gerenciar aplicativos individualmen
 
 Listar todos os processos em execução:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 list
-</code>
-</pre>
+```
 
 Parar um aplicativo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 stop 0
-</code>
-</pre>
+```
 
 Reiniciar um aplicativo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 restart 0
-</code>
-</pre>
+```
 
 Para visualizar informações detalhadas sobre um aplicativo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 show 0
-</code>
-</pre>
+```
 
 Para remover um aplicativo do registro do PM2:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 delete 0
-</code>
-</pre>
+```
 
 
 ## <a id="forever">Forever</a>
@@ -256,76 +226,60 @@ Para obter mais informações, consulte: [https://github.com/foreverjs/forever](
 
 ### Instalação
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install forever -g
-</code>
-</pre>
+```
 
 ### Uso Básico
 
 Para iniciar um script, use o comando `forever start` e especifique o caminho do script:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever start script.js
-</code>
-</pre>
+```
 
 Este comando irá executar o script em modo daemon (no segundo plano).
 
 Para executar o script de forma que ele seja anexado ao terminal, omita `start`:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever script.js
-</code>
-</pre>
+```
 
 É uma boa ideia registrar os logs da saída da ferramenta Forever e do script usando as opções de log `-l`,
 `-o`, e `-e`, como mostradas nesse exemplo:
 
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever start -l forever.log -o out.log -e err.log script.js
-</code>
-</pre>
+```
 
 Para visualizar a lista de scripts que foram iniciados pelo Forever:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever list
-</code>
-</pre>
+```
 
 Para parar um script que foi iniciado pelo Forever use o
 comando `forever stop` e especifique o índice do
 processo (conforme listado pelo comando `forever
 list`).
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stop 1
-</code>
-</pre>
+```
 
 Alternativamente, especifique o caminho do arquivo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stop script.js
-</code>
-</pre>
+```
 
 Para parar todos os scripts que foram iniciados pelo Forever:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stopall
-</code>
-</pre>
+```
 
 O Forever possui muitas outras opções, e ele também fornece uma API programática.
 

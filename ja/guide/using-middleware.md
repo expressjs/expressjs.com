@@ -37,43 +37,36 @@ Express アプリケーションは、以下のタイプのミドルウェアを
 
 次の例は、マウント・パスを指定しないミドルウェア関数を示しています。この関数は、アプリケーションが要求を受け取るたびに実行されます。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var app = express();
 
 app.use(function (req, res, next) {
   console.log('Time:', Date.now());
   next();
 });
-</code>
-</pre>
+```
 
 次の例は、`/user/:id` パスにマウントされたミドルウェア関数を示しています。この関数は、`/user/:id` パスに対するすべてのタイプの HTTP 要求で実行されます。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/user/:id', function (req, res, next) {
   console.log('Request Type:', req.method);
   next();
 });
-</code>
-</pre>
+```
 
 次の例は、ルートとそのハンドラー関数 (ミドルウェア・システム) を示しています。この関数は、`/user/:id` パスへの GET 要求を処理します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   res.send('USER');
 });
-</code>
-</pre>
+```
 
 次に、マウント・パスを指定して、一連のミドルウェア関数をマウント・ポイントにロードする例を示します。
 `/user/:id` パスへのすべてのタイプの HTTP 要求に関する要求情報を出力するミドルウェア・サブスタックを示しています。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/user/:id', function(req, res, next) {
   console.log('Request URL:', req.originalUrl);
   next();
@@ -81,15 +74,13 @@ app.use('/user/:id', function(req, res, next) {
   console.log('Request Type:', req.method);
   next();
 });
-</code>
-</pre>
+```
 
 ルート・ハンドラーを使用すると、パスに複数のルートを定義できます。下記の例では、`/user/:id` パスへの GET 要求に 2 つのルートを定義しています。2 番目のルートは、問題を発生させるものではありませんが、最初のルートが要求応答サイクルを終了するため、呼び出されることはありません。
 
 次の例は、`/user/:id` パスへの GET 要求を処理するミドルウェア・サブスタックを示しています。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   console.log('ID:', req.params.id);
   next();
@@ -101,16 +92,14 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.end(req.params.id);
 });
-</code>
-</pre>
+```
 
 ルーター・ミドルウェア・スタックの残りのミドルウェア関数をスキップするには、`next('route')` を呼び出して、次のルートに制御を渡します。
 **注**: `next('route')` は、`app.METHOD()` 関数または `router.METHOD()` 関数を使用してロードされたミドルウェア関数でのみ機能します。
 
 次の例は、`/user/:id` パスへの GET 要求を処理するミドルウェア・サブスタックを示しています。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   // if the user ID is 0, skip to the next route
   if (req.params.id == 0) next('route');
@@ -125,23 +114,19 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.render('special');
 });
-</code>
-</pre>
+```
 
 <h2 id='middleware.router'>ルーター・レベルのミドルウェア</h2>
 
 ルーター・レベルのミドルウェアは、`express.Router()` のインスタンスにバインドされる点を除き、アプリケーション・レベルのミドルウェアと同じように動作します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var router = express.Router();
-</code>
-</pre>
+```
 `router.use()` 関数と `router.METHOD()` 関数を使用して、ルーター・レベルのミドルウェアをロードします。
 次のコード例では、ルーター・レベルのミドルウェアを使用して、上記のアプリケーション・レベルのミドルウェアで示されているミドルウェア・システムを複製します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var app = express();
 var router = express.Router();
 
@@ -179,8 +164,7 @@ router.get('/user/:id', function (req, res, next) {
 
 // mount the router on the app
 app.use('/', router);
-</code>
-</pre>
+```
 
 <h2 id='middleware.error-handling'>エラー処理ミドルウェア</h2>
 
@@ -190,14 +174,12 @@ app.use('/', router);
 
 エラー処理ミドルウェア関数は、その他のミドルウェア関数と同じ方法で定義しますが、例外として、シグニチャーで 3 つではなく 4 つの引数 `(err、req、res、next)`) を明示的に指定します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-</code>
-</pre>
+```
 
 エラー処理ミドルウェアについて詳しくは、[エラー処理](/{{ page.lang }}/guide/error-handling.html)を参照してください。
 
@@ -226,8 +208,7 @@ Express の唯一の標準装備のミドルウェア関数は `express.static` 
 
 次に、詳細オプションのオブジェクトを指定した `express.static` ミドルウェア関数の使用例を示します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var options = {
   dotfiles: 'ignore',
   etag: false,
@@ -241,18 +222,15 @@ var options = {
 }
 
 app.use(express.static('public', options));
-</code>
-</pre>
+```
 
 アプリケーションごとに複数の静的ディレクトリーを使用できます。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 app.use(express.static('files'));
-</code>
-</pre>
+```
 
 `serve-static` 関数とそのオプションについて詳しくは、[serve-static](https://github.com/expressjs/serve-static) の資料を参照してください。
 
@@ -264,21 +242,17 @@ Express アプリケーションに機能を追加するには、サード・パ
 
 次の例は、Cookie 解析ミドルウェア関数 `cookie-parser` のインストールおよびロードを示しています。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install cookie-parser
-</code>
-</pre>
+```
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');
 
 // load the cookie-parsing middleware
 app.use(cookieParser());
-</code>
-</pre>
+```
 
 Express で一般的に使用されているサード・パーティー・ミドルウェア関数の一部のリストについては、[サード・パーティー・ミドルウェア](../resources/middleware.html)を参照してください。

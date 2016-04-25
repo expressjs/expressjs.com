@@ -9,7 +9,7 @@ such as "application/json", the extension name
 such as "json", a comma-delimited list or an array. When a list
 or array is given the best match, if any is returned.
 
-{% highlight js %}
+```js
 // Accept: text/html
 req.accepts('html');
 // => "html"
@@ -33,4 +33,4 @@ req.accepts('png');
 req.accepts(['html', 'json']);
 req.accepts('html, json');
 // => "json"
-{% endhighlight %}
+```

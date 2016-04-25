@@ -14,11 +14,9 @@ Para que Express pueda representar archivos de plantilla, deben establecerse los
 
 A continuación, instale el paquete npm de motor de plantilla correspondiente:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install jade --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Los motores de plantilla compatibles con Express como, por ejemplo, Jade exportan una función denominada `__express(filePath, options, callback)`, que es invocada por la función `res.render()` para representar el código de plantilla.
@@ -28,33 +26,27 @@ Algunos motores de plantilla no siguen esta convención. La biblioteca [Consolid
 
 Una vez establecida la propiedad view engine, no tiene que especificar el motor ni cargar el módulo de motor de plantilla en la aplicación; Express carga el módulo internamente, como se muestra a continuación (para el ejemplo anterior).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.set('view engine', 'jade');
-</code>
-</pre>
+```
 
 Cree un archivo de plantilla Jade denominado `index.jade` en el directorio `views`, con el siguiente contenido:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 html
   head
     title!= title
   body
     h1!= message
-</code>
-</pre>
+```
 
 A continuación, cree una ruta para representar el archivo `index.jade`. Si la propiedad `view engine` no se establece, debe especificar la extensión del archivo `view`. De lo contrario, puede omitirla.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 
 Cuando realice una solicitud a la página de inicio, el archivo `index.jade` se representará como HTML.
 

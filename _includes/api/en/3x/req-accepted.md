@@ -2,7 +2,7 @@
 
 Return an array of Accepted media types ordered from highest quality to lowest.
 
-{% highlight js %}
+```js
 [ { value: 'application/json',
     quality: 1,
     type: 'application',
@@ -11,4 +11,4 @@ Return an array of Accepted media types ordered from highest quality to lowest.
      quality: 0.5,
      type: 'text',
      subtype: 'html' } ]
-{% endhighlight %}
+```

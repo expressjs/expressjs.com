@@ -12,11 +12,9 @@ El *direccionamiento* hace referencia a la determinación de cómo responde una 
 Cada ruta puede tener una o varias funciones de manejador, que se excluyen cuando se correlaciona la ruta.
 
 La definición de ruta tiene la siguiente estructura:
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 Donde:
 
@@ -33,42 +31,34 @@ El siguiente ejemplo ilustra la definición de rutas simples.
 
 Responda con `Hello World!` en la página inicial:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
-</code>
-</pre>
+```
 
 Responda a la solicitud POST en la ruta raíz (`/`), la página de inicio de la aplicación:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
-</code>
-</pre>
+```
 
 Responda a una solicitud PUT en la ruta `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
-</code>
-</pre>
+```
 
 Responda a una solicitud DELETE en la ruta `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-</code>
-</pre>
+```
 
 Para obtener más detalles sobre el direccionamiento, consulte la [guía de direccionamiento](/{{ page.lang }}/guide/routing.html).

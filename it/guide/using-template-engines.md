@@ -14,11 +14,9 @@ Prima che Express possa eseguire il rendering di file template, è necessario sp
 
 Quindi, installare il pacchetto npm del motore di template corrispondente:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install jade --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 I motori di template compatibili con Express, ad esempio Jade esportano una funzione denominata `__express(filePath, options, callback)`, che viene richiamata dalla funzione `res.render()`, per il rendering del codice di template.
@@ -28,33 +26,27 @@ Alcuni motori di template non seguono questa convenzione. La libreria [Consolida
 
 Una volta specificata l'impostazione view engine, non è necessario specificare il motore o caricare il modulo del motore di template nella propria app; Express carica il modulo internamente, come mostrato di seguito (per l'esempio precedente).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.set('view engine', 'jade');
-</code>
-</pre>
+```
 
 Creare un file di template Jade denominato `index.jade` nella directory `views`, con il seguente contenuto:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 html
   head
     title!= title
   body
     h1!= message
-</code>
-</pre>
+```
 
 Quindi, creare una route per il rendering del file `index.jade`. Se la proprietà `view engine` non è impostata, è necessario specificare l'estensione del file `view`. Altrimenti, è possibile ometterla.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 
 Quando si fa una richiesta alla home page, verrà eseguito il rendering del file `index.jade` come HTML.
 

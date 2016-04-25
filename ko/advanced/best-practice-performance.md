@@ -32,14 +32,12 @@ lang: ko
 
 Gzip 압축을 사용하면 응답 본문의 크기를 크게 줄일 수 있으며, 따라서 웹 앱의 속도를 높일 수 있습니다. Express 앱에서 gzip 압축을 사용하려면 [compression](https://www.npmjs.com/package/compression) 미들웨어를 사용하십시오. 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var compression = require('compression');
 var express = require('express');
 var app = express();
 app.use(compression());
-</code>
-</pre>
+```
 
 많은 트래픽이 발생하는 프로덕션 환경의 웹사이트의 경우, 압축을 실행하는 가장 좋은 방법은 역방향 프록시 레벨에서 압축을 구현하는 것입니다([역방향 프록시 사용](#proxy) 참조). 그러한 경우에는 compression 미들웨어를 사용할 필요가 없습니다. Nginx에서 gzip 압축을 사용하는 방법에 대한 자세한 내용은 Nginx 문서의 [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html)을 참조하십시오.
 
@@ -108,8 +106,7 @@ Try-catch는 동기식 코드에서 예외를 처리하는 데 사용할 수 있
 아래에는 try-catch를 사용하여 잠재적인 프로세스 충돌 예외를 처리하는 예가 표시되어 있습니다.
 이 미들웨어 함수는 JSON 오브젝트이자 "params"라는 이름을 갖는 조회 필드를 수락합니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/search', function (req, res) {
   // Simulating async operation
   setImmediate(function () {
@@ -122,8 +119,7 @@ app.get('/search', function (req, res) {
     }
   });
 });
-</code>
-</pre>
+```
 
 그러나 try-catch는 동기식 코드에 대해서만 작동합니다. Node 플랫폼은 기본적으로 비동기식이므로(특히, 프로덕션 환경의 경우), try-catch를 통해 많은 예외를 처리할 수는 없을 것입니다.
 
@@ -133,8 +129,7 @@ app.get('/search', function (req, res) {
 
 `then()`을 사용하는 비동기식 코드 블록 내에서는 프라미스를 통해 모든 예외(명시적 예외 및 암시적 예외 모두)를 처리할 수 있습니다. 프라미스 체인의 끝에 `.catch(next)`만 추가하면 됩니다. 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res, next) {
   // do some sync stuff
   queryDb()
@@ -151,8 +146,7 @@ app.get('/', function (req, res, next) {
 app.use(function (err, req, res, next) {
   // handle error
 });
-</code>
-</pre>
+```
 
 이제 모든 비동기식 오류 및 동기식 오류는 error 미들웨어로 전파됩니다.
 
@@ -161,15 +155,13 @@ app.use(function (err, req, res, next) {
 1.  모든 비동기식 코드는 프라미스를 리턴해야 합니다(이미터 제외). 특정한 라이브러리가 프라미스를 리턴하지 않는 경우에는 [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html)과 같은 헬퍼 함수를 사용하여 기본 오브젝트를 변환하십시오.
 2.  이벤트 이미터(스트림 등)는 여전히 처리되지 않은 예외를 발생시킬 수 있습니다. 따라서 오류 이벤트를 올바르게 처리하고 있는지 확인하십시오. 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id)
   let stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
-</code>
-</pre>
+```
 
 프라미스를 사용한 오류 처리에 대한 자세한 정보는 다음을 참조하십시오.
 
@@ -207,23 +199,19 @@ NODE_ENV를 "production"으로 설정하면 Express는 다음과 같이 동작�
 
 Upstart를 이용하는 경우, 작업 파일에 `env` 키워드를 사용하십시오. 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code>
-</pre>
+```
 
 자세한 정보는 [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables)를 참조하십시오.
 
 systemd를 이용하는 경우, 유닛 파일에 `Environment` 지시문을 사용하십시오. 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code>
-</pre>
+```
 
 자세한 정보는 [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html)를 참조하십시오.
 
@@ -284,8 +272,7 @@ Systemd는 Linux용 시스템 및 서비스 관리자입니다. 대부분의 주
 
 systemd 서비스 구성 파일은 *유닛 파일(unit file)*로 불리며, 파일 이름이 .service로 끝납니다. Node 앱을 직접 관리하기 위한 유닛 파일의 예는 다음과 같습니다(굵은체로 표시된 텍스트를 해당 시스템 및 앱에 대한 값으로 바꾸십시오).
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -313,8 +300,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code>
-</pre>
+```
 systemd에 대한 자세한 정보는 [systemd 참조 자료(man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html)를 참조하십시오.
 
 ##### systemd의 서비스로서의 StrongLoop PM
@@ -323,19 +309,15 @@ StrongLoop Process Manager는 쉽게 systemd의 서비스로서 설치할 수 �
 
 StrongLoop PM을 systemd의 서비스로서 설치하는 방법은 다음과 같습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 이후 다음과 같이 서비스를 시작하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```
 
 자세한 정보는 [Setting up a production host(StrongLoop 문서)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10)를 참조하십시오.
 
@@ -347,8 +329,7 @@ Upstart 서비스는 파일 이름이 `.conf`로 끝나는 작업 구성 파일(
 
 다음의 내용이 입력된 `myapp.conf`라는 이름의 파일을 `/etc/init/`에 작성하십시오(굵은체로 표시된 텍스트를 해당 시스템 및 앱에 대한 값으로 바꾸십시오).
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -376,8 +357,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code>
-</pre>
+```
 
 참고: 이 스크립트를 실행하려면 Ubuntu 12.04-14.10에서 지원되는 Upstart 1.4 이상이 필요합니다.
 
@@ -397,19 +377,15 @@ StrongLoop Process Manager는 쉽게 Upstart의 서비스로 설치할 수 있�
 
 StrongLoop PM을 Upstart 1.4의 서비스로서 설치하는 방법은 다음과 같습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 이후 다음과 같이 서비스를 실행하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 참고: Upstart 1.4를 지원하지 않는 시스템에서는 약간 다른 명령이 사용됩니다. 자세한 정보는 [Setting up a production host(StrongLoop 문서)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10)를 참조하십시오.
 
@@ -435,11 +411,9 @@ StrongLoop Process Manager(PM)가 애플리케이션으로서 실행되면, Stro
 
 예를 들어 prod.foo.com에 앱을 배치했으며 StrongLoop PM이 포트 8701(기본값)에서 청취하는 경우를 가정하면, 다음과 같이 slc를 이용해 클러스터의 크기를 8로 설정할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 StrongLoop PM을 이용한 클러스터링에 대한 자세한 정보는 StrongLoop 문서 내의 [Clustering](https://docs.strongloop.com/display/SLC/Clustering)을 참조하십시오.
 

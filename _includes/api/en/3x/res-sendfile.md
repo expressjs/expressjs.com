@@ -14,7 +14,7 @@ Options:
 This method provides fine-grained support for file serving
 as illustrated in the following example:
 
-{% highlight js %}
+```js
 app.get('/user/:uid/photos/:file', function(req, res){
   var uid = req.params.uid
     , file = req.params.file;
@@ -27,4 +27,4 @@ app.get('/user/:uid/photos/:file', function(req, res){
     }
   });
 });
-{% endhighlight %}
+```

@@ -33,12 +33,12 @@ Express アプリケーションをプロキシーの背後で実行する場合
 
 以下のどの方法でも IP アドレスを設定できます。
 
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
+```js
+app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
-</pre>
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+```
 
 IP アドレスまたはサブネットは、指定されると、アドレス決定プロセスから除外されます。アプリケーション・サーバーに最も近い信頼できない IP アドレスがクライアントの IP アドレスに決定されます。
 </td>
@@ -53,12 +53,13 @@ IP アドレスまたはサブネットは、指定されると、アドレス�
       <td>関数</td>
 <td markdown="1">
 カスタムの信頼実装。実行内容を理解している場合にのみ、これを使用してください。
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', function (ip) {
+
+```js
+app.set('trust proxy', function (ip) {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
   else return false;
-});</code>
-</pre>
+});
+```
 </td>
     </tr>
   </tbody>

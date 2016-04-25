@@ -11,16 +11,13 @@ lang: ja
 
 次のコマンドを使用して、`express` をインストールします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install express-generator -g
-</code>
-</pre>
+```
 
 `-h` オプションを指定してコマンド・オプションを表示します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ express -h
 
   Usage: express [options][dir]
@@ -35,13 +32,11 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
 例えば、以下のコマンドでは、現行作業ディレクトリーに _myapp_ という Express アプリケーションを作成します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ express myapp
 
    create : myapp
@@ -61,40 +56,32 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 次に、依存関係をインストールします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ cd myapp
 $ npm install
-</code>
-</pre>
+```
 
 MacOS または Linux では、次のコマンドによってアプリケーションを実行します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 Windows では、次のコマンドを使用します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
 
 次に、ブラウザーに `http://localhost:3000/` をロードして、アプリケーションにアクセスします。
 
 生成されたアプリケーションには、以下のディレクトリー構造があります。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 .
 ├── app.js
 ├── bin
@@ -114,8 +101,7 @@ Windows では、次のコマンドを使用します。
     └── layout.jade
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 ここで生成プログラムによって作成されたアプリケーション構造は、Express アプリケーションを作成するための数多くの方法の 1 つにすぎません。この構造を自由に使用したり、ニーズに合わせて変更したりしてください。

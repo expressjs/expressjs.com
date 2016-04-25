@@ -36,42 +36,35 @@ Express 應用程式可以使用下列類型的中介軟體：
 
 本例顯示沒有裝載路徑的中介軟體函數。每當應用程式收到要求時，就會執行此函數。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var app = express();
 
 app.use(function (req, res, next) {
   console.log('Time:', Date.now());
   next();
 });
-</code>
-</pre>
+```
 
 本例顯示裝載在 `/user/:id` 路徑的中介軟體函數。會對 `/user/:id` 路徑上任何類型的 HTTP 要求，執行此函數。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/user/:id', function (req, res, next) {
   console.log('Request Type:', req.method);
   next();
 });
-</code>
-</pre>
+```
 
 本例顯示路由和其處理程式函數（中介軟體系統）。此函數會處理指向 `/user/:id` 路徑的 GET 要求。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   res.send('USER');
 });
-</code>
-</pre>
+```
 
 下列範例顯示使用裝載路徑在裝載點載入一系列中介軟體函數。其中說明中介軟體子堆疊，這個子堆疊會針對指向 `/user/:id` 路徑之任何類型的 HTTP 要求，列印其要求資訊。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/user/:id', function(req, res, next) {
   console.log('Request URL:', req.originalUrl);
   next();
@@ -79,15 +72,13 @@ app.use('/user/:id', function(req, res, next) {
   console.log('Request Type:', req.method);
   next();
 });
-</code>
-</pre>
+```
 
 路由處理程式可讓您為一個路徑定義多個路由。下列範例為指向 `/user/:id` 路徑的 GET 要求，定義兩個路由。第二個路由不會造成任何問題，卻絕不會呼叫，因為第一個路由會結束要求/回應循環。
 
 本例顯示中介軟體子堆疊，它處理了指向 `/user/:id` 路徑的 GET 要求。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   console.log('ID:', req.params.id);
   next();
@@ -99,16 +90,14 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.end(req.params.id);
 });
-</code>
-</pre>
+```
 
 如果要跳過路由器中介軟體堆疊中其餘的中介軟體函數，請呼叫 `next('route')`，將控制權傳遞給下一個路由。**附註**：
 `next('route')` 只適用於使用 `app.METHOD()` 或 `router.METHOD()` 函數載入的中介軟體函數。
 
 本例顯示中介軟體子堆疊，它處理了指向 `/user/:id` 路徑的 GET 要求。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   // if the user ID is 0, skip to the next route
   if (req.params.id == 0) next('route');
@@ -123,24 +112,20 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.render('special');
 });
-</code>
-</pre>
+```
 
 <h2 id='middleware.router'>路由器層次的中介軟體</h2>
 
 路由器層次的中介軟體的運作方式如同應用程式層次的中介軟體，不同之處在於它會連結至 `express.Router()` 實例。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var router = express.Router();
-</code>
-</pre>
+```
 請利用 `router.use()` 和 `router.METHOD()` 函數來載入路由器層次的中介軟體。
 
 下列的程式碼範例是使用路由器層次的中介軟體，抄寫上述針對應用程式層次的中介軟體顯示的中介軟體系統：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var app = express();
 var router = express.Router();
 
@@ -178,8 +163,7 @@ router.get('/user/:id', function (req, res, next) {
 
 // mount the router on the app
 app.use('/', router);
-</code>
-</pre>
+```
 
 <h2 id='middleware.error-handling'>錯誤處理中介軟體</h2>
 
@@ -189,14 +173,12 @@ app.use('/', router);
 
 錯誤處理中介軟體函數的定義方式，與其他中介軟體函數相同，差別在於引數是四個而非三個，具體來說，就是使用 `(err, req, res, next)`) 簽章：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-</code>
-</pre>
+```
 
 如需錯誤處理中介軟體的詳細資料，請參閱：[錯誤處理](/{{ page.lang }}/guide/error-handling.html)。
 
@@ -225,8 +207,7 @@ Express 唯一的內建中介軟體函數是 `express.static`。此函數以 [se
 
 下列範例顯示如何使用 `express.static` 中介軟體函數，且其中詳細闡述了 options 物件：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var options = {
   dotfiles: 'ignore',
   etag: false,
@@ -240,18 +221,15 @@ var options = {
 }
 
 app.use(express.static('public', options));
-</code>
-</pre>
+```
 
 每一個應用程式可有多個靜態目錄：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 app.use(express.static('files'));
-</code>
-</pre>
+```
 
 如需 `serve-static` 函數和其選項的詳細資料，請參閱 [serve-static](https://github.com/expressjs/serve-static) 說明文件。
 
@@ -263,21 +241,17 @@ app.use(express.static('files'));
 
 下列範例說明如何安裝和載入用來剖析 Cookie 的中介軟體函數 `cookie-parser`。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install cookie-parser
-</code>
-</pre>
+```
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');
 
 // load the cookie-parsing middleware
 app.use(cookieParser());
-</code>
-</pre>
+```
 
 如需 Express 中常用的部分協力廠商中介軟體函數清單，請參閱：[協力廠商中介軟體](../resources/middleware.html)。

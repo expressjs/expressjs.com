@@ -2,7 +2,7 @@
 
 Return the value of param `name` when present.
 
-{% highlight js %}
+```js
 // ?name=tobi
 req.param('name')
 // => "tobi"
@@ -14,7 +14,7 @@ req.param('name')
 // /user/tobi for /user/:name
 req.param('name')
 // => "tobi"
-{% endhighlight %}
+```
 
 Lookup is performed in the following order:
 

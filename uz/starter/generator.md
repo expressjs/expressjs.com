@@ -11,13 +11,13 @@ Dastur generatsiya qilish uchun `express` buyrug'idan foydalanishgiz mumkin, u d
 
 Uni o'rnatish uchun quyidagi buyruqlardan foydalaning.
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install express-generator -g
-</code></pre>
+```
 
 Qo'shimcha amallarda foydalanish uchun `-h` qo'shimchasini yozing:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ express -h
 
   Usage: express [options] [dir]
@@ -31,11 +31,11 @@ $ express -h
     -H, --hogan         add hogan.js engine support
     -c, --css &lt;engine>  add stylesheet &lt;engine> support (less|stylus|compass) (defaults to plain css)
     -f, --force         force on non-empty directory
-</code></pre>
+```
 
 Masalan, quyidagi buyruq _myapp_ nomi dasturni yaratadi.
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ express myapp
 
    create : myapp
@@ -55,32 +55,32 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-</code></pre>
+```
 
 Keyin dasturning kerakli modullarni o'rnatish kerak bo'ladi:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ cd myapp
 $ npm install
-</code></pre>
+```
 
 Dasturni ishga tushurish (MacOS va Linux):
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ DEBUG=myapp ./bin/www
-</code></pre>
+```
 
 Windowsda esa, quyidagicha:
 
-<pre><code class="language-sh" translate="no">
+```sh
 > set DEBUG=myapp & node .\bin\www
-</code></pre>
+```
 
 Undan keyin brauzerda `http://localhost:3000/` manziligaa kirib dastur ishalayotganini tekshiring.
 
 Generatsiya qilingan dasturning strukturasi quyidagicha bo'ladi.
 
-<pre><code class="language-sh" translate="no">
+```sh
 .
 ├── app.js
 ├── bin
@@ -100,7 +100,7 @@ Generatsiya qilingan dasturning strukturasi quyidagicha bo'ladi.
     └── layout.jade
 
 7 directories, 9 files
-</code></pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 Generator yordamida generatsiya qilingan struktra, Express dasturda yaratish mumkin bo'lgan strukturalardan bir usuli hisoblanadi. Siz bu strukturadan foydalanmasligingiz mumkin, o'zingizga kerakli ko'rinishda yaratishingiz mumkin.

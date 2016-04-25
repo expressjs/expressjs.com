@@ -17,8 +17,7 @@ de retorno de chamada.
 O código a seguir é um exemplo de implementação de um mecanismo
 de modelo muito simples para renderização de arquivos `.ntl`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
@@ -31,26 +30,21 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
-</code>
-</pre>
+```
 
 Seu aplicativo estará agora habilitado a renderizar arquivos `.ntl`. Crie
 um arquivo chamado `index.ntl` no diretório
 `views` com o seguinte conteúdo.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 #title#
 #message#
-</code>
-</pre>
+```
 Em seguida, crie a seguinte rota no seu aplicativo.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 Ao fazer uma solicitação à página inicial, o `index.ntl` será renderizado como HTML.

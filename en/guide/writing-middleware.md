@@ -49,7 +49,7 @@ The remainder of this article will define and add two middleware functions to th
 one called `myLogger` that prints a simple log message and another called `requestTime` that
 displays the timestamp of the HTTP request.
 
-<pre><code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -58,17 +58,17 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code></pre>
+```
 
 <h3>Middleware function myLogger</h3>
 Here is a simple example of a middleware function called "myLogger". This function just prints "LOGGED" when a request to the app passes through it. The middleware function is assigned to a variable named `myLogger`.
 
-<pre><code class="language-javascript" translate="no">
+```js
 var myLogger = function (req, res, next) {
   console.log('LOGGED');
   next();
 };
-</code></pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Notice the call above to `next()`.  Calling this function invokes the next middleware function in the app.
@@ -79,7 +79,7 @@ To avoid confusion, always use this convention.
 To load the middleware function, call `app.use()`, specifying the middleware function.
 For example, the following code loads the `myLogger` middleware function before the route to the root path (/).
 
-<pre><code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -95,7 +95,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code></pre>
+```
 
 Every time the app receives a request, it prints the message "LOGGED" to the terminal.
 
@@ -110,16 +110,16 @@ The middleware function `myLogger` simply prints a message, then passes on the r
 Next, we'll create a middleware function called "requestTime" and add it as a property called `requestTime` 
 to the request object. 
 
-<pre><code class="language-javascript" translate="no">
+```js
 var requestTime = function (req, res, next) {
   req.requestTime = Date.now();
   next();
 };
-</code></pre>
+```
 
 The app now uses the `requestTime` middleware function. Also, the callback function of the root path route uses the property that the middleware function adds to `req` (the request object).
 
-<pre><code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -137,7 +137,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code></pre>
+```
 
 When you make a request to the root of the app, the app now displays the timestamp of your request in the browser.
 

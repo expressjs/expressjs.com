@@ -500,13 +500,16 @@ html[xmlns] .clearfix {
   background: none repeat scroll 0 0 #fff;
 }
 
+/*
 .page pre[class*="language-"] {
   padding-top: 0 !important;
 }
 
+
 .non-en-doc .page pre[class*="language-"] {
   padding-bottom: 0 !important;
 }
+*/
 
 .page pre.plain-text, .page code.plain-text {
   padding-top: 0 !important;

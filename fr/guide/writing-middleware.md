@@ -42,15 +42,13 @@ L'exemple suivant montre les éléments d'un appel de fonction middleware:
 </table>
 
 <!--
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 app.get('/', function(req, res, next) {
 	next();
 });
-</code>
-</pre>
+```
 
 * <code>app.get</code>: Méthode HTTP à laquelle la fonction middleware s'applique.
 
@@ -67,8 +65,7 @@ app.get('/', function(req, res, next) {
 
 Voici un exemple d'une application Express "Hello World" simple, pour laquelle vous allez définir deux fonctions middleware :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -77,21 +74,18 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 <h2>Développement</h2>
 
 Voici un exemple simple de fonction middleware appelée "myLogger". Cette fonction imprime simplement "LOGGED" lorsqu'une demande traverse l'application. La fonction middleware est affectée à une variable nommée `myLogger`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var myLogger = function (req, res, next) {
   console.log('LOGGED');
   next();
 };
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Notez l'appel ci-dessus de la fonction `next()`,  qui appelle la fonction middleware suivant dans l'application. La fonction `next()` ne fait pas partie du Node.js ou de l'API Express, mais c'est le troisième argument qui est transmis à la fonction middleware.  La fonction `next()` peut porter n'importe quel nom, mais par convention elle est toujours appelée "next". Pour éviter toute confusion, il est préférable de respecter cette convention.
@@ -100,8 +94,7 @@ Notez l'appel ci-dessus de la fonction `next()`,  qui appelle la fonction middle
 Pour charger la fonction middleware, appelez `app.use()` en spécifiant la fonction middleware.
 Par exemple, le code suivant charge la fonction middleware `myLogger` avant la route au chemin racine (/).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -117,8 +110,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 Chaque fois que l'application reçoit une demande, elle imprime le message "LOGGED" sur le terminal.
 
@@ -130,19 +122,16 @@ La fonction middleware `myLogger` imprime simplement un message, puis traite la 
 
 L'exemple suivant ajoute une propriété appelée `requestTime` à l'objet Request. Nous nommerons cette fonction middleware "requestTime".
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var requestTime = function (req, res, next) {
   req.requestTime = Date.now();
   next();
 };
-</code>
-</pre>
+```
 
 L'application utilise désormais la fonction middleware `requestTime`. De plus, la fonction callback de la route du chemin racine utilise la propriété que la fonction middleware ajoute à `req` (l'objet Request).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -160,8 +149,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 Si vous effectuez une demande à la racine de l'application, cette dernière affiche maintenant l'horodatage de la demande dans le navigateur.
 

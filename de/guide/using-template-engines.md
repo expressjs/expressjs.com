@@ -14,11 +14,9 @@ Bevor über Express Vorlagendateien ausgegeben werden können, müssen die folge
 
 Installieren Sie dann das entsprechende npm-Paket für die Template-Engine:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install jade --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Express-konforme Template-Engines wie Jade exportieren eine Funktion namens `__express(filePath, options, callback)`, die über die Funktion `res.render()` aufgerufen wird, um den Vorlagencode ausgeben zu können. Einige Template-Engines folgen dieser Konvention nicht. Die Bibliothek [Consolidate.js](https://www.npmjs.org/package/consolidate) folgt dieser Konvention, indem alle gängigen Node.js-Template-Engines zugeordnet werden. Daher ist eine reibungslose Funktion in Express gewährleistet.
@@ -26,33 +24,27 @@ Express-konforme Template-Engines wie Jade exportieren eine Funktion namens `__e
 
 Nach der Festlegung der View-Engine muss die Engine nicht angegeben oder das Template-Engine-Modul nicht in Ihre Anwendung geladen werden. Express lädt das Modul intern (wie unten für das obige Beispiel gezeigt).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.set('view engine', 'jade');
-</code>
-</pre>
+```
 
 Erstellen Sie eine Jade-Vorlagendatei namens `index.jade` im Verzeichnis `views` mit dem folgenden Inhalt:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 html
   head
     title!= title
   body
     h1!= message
-</code>
-</pre>
+```
 
 Dann erstellen Sie eine Weiterleitung, um die Datei `index.jade` auszugeben. Wenn die Eigenschaft `view engine` nicht festgelegt wurde, müssen Sie die Erweiterung der Datei `view` angeben. Andernfalls müssen Sie diese Erweiterung nicht angeben.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 
 Wenn Sie eine Anforderung zur Homepage ausführen, wird die Datei `index.jade` im HTML-Format ausgegeben.
 

@@ -11,16 +11,13 @@ Mit dem Application Generator Tool `express` können Sie innerhalb kürzester Ze
 
 Installieren Sie `express` mit dem folgenden Befehl:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install express-generator -g
-</code>
-</pre>
+```
 
 Zeigen Sie die Befehlsoptionen mit der Option `-h` an:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ express -h
 
   Usage: express [options][dir]
@@ -35,13 +32,11 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
 Im folgenden Beispiel wird eine Express-Anwendung mit dem Namen _myapp_ im aktuellen Arbeitsverzeichnis erstellt:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ express myapp
 
    create : myapp
@@ -61,40 +56,32 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 Installieren Sie dann Abhängigkeiten:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ cd myapp
 $ npm install
-</code>
-</pre>
+```
 
 Führen Sie unter MacOS oder Linux die Anwendung mit diesem Befehl aus:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 Verwenden Sie unter Windows diesen Befehl:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
 
 Laden Sie dann `http://localhost:3000/` in Ihren Browser, um auf die Anwendung zuzugreifen.
 
 Die erstellte Anwendung hat die folgende Verzeichnisstruktur:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 .
 ├── app.js
 ├── bin
@@ -114,8 +101,7 @@ Die erstellte Anwendung hat die folgende Verzeichnisstruktur:
     └── layout.jade
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 Die vom Generator erstellte Anwendungsstruktur ist nur eine der vielen Möglichkeiten, Express-Anwendungen zu strukturieren. Sie können diese Struktur verwenden oder sie an Ihre Anforderungen anpassen.

@@ -37,43 +37,36 @@ Express 应用程序可以使用以下类型的中间件：
 
 此示例显示没有安装路径的中间件函数。应用程序每次收到请求时执行该函数。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var app = express();
 
 app.use(function (req, res, next) {
   console.log('Time:', Date.now());
   next();
 });
-</code>
-</pre>
+```
 
 此示例显示安装在 `/user/:id` 路径中的中间件函数。在 `/user/:id` 路径中为任何类型的 HTTP 请求执行此函数。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/user/:id', function (req, res, next) {
   console.log('Request Type:', req.method);
   next();
 });
-</code>
-</pre>
+```
 
 此示例显示一个路由及其处理程序函数（中间件系统）。此函数处理针对 `/user/:id` 路径的 GET 请求。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   res.send('USER');
 });
-</code>
-</pre>
+```
 
 以下是在安装点使用安装路径装入一系列中间件函数的示例。
 它演示一个中间件子堆栈，用于显示针对 `/user/:id` 路径的任何类型 HTTP 请求的信息。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/user/:id', function(req, res, next) {
   console.log('Request URL:', req.originalUrl);
   next();
@@ -81,15 +74,13 @@ app.use('/user/:id', function(req, res, next) {
   console.log('Request Type:', req.method);
   next();
 });
-</code>
-</pre>
+```
 
 路由处理程序使您可以为一个路径定义多个路由。以下示例为针对 `/user/:id` 路径的 GET 请求定义两个路由。第二个路由不会导致任何问题，但是永远都不会被调用，因为第一个路由结束了请求/响应循环。
 
 此示例显示一个中间件子堆栈，用于处理针对 `/user/:id` 路径的 GET 请求。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   console.log('ID:', req.params.id);
   next();
@@ -101,16 +92,14 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.end(req.params.id);
 });
-</code>
-</pre>
+```
 
 要跳过路由器中间件堆栈中剩余的中间件函数，请调用 `next('route')` 将控制权传递给下一个路由。
 **注**：`next('route')` 仅在使用 `app.METHOD()` 或 `router.METHOD()` 函数装入的中间件函数中有效。
 
 此示例显示一个中间件子堆栈，用于处理针对 `/user/:id` 路径的 GET 请求。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   // if the user ID is 0, skip to the next route
   if (req.params.id == 0) next('route');
@@ -125,23 +114,19 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.render('special');
 });
-</code>
-</pre>
+```
 
 <h2 id='middleware.router'>路由器层中间件</h2>
 
 路由器层中间件的工作方式与应用层中间件基本相同，差异之处在于它绑定到 `express.Router()` 的实例。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var router = express.Router();
-</code>
-</pre>
+```
 使用 `router.use()` 和 `router.METHOD()` 函数装入路由器层中间件。
 以下示例代码使用路由器层中间件复制以上为应用层中间件显示的中间件系统：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var app = express();
 var router = express.Router();
 
@@ -179,8 +164,7 @@ router.get('/user/:id', function (req, res, next) {
 
 // mount the router on the app
 app.use('/', router);
-</code>
-</pre>
+```
 
 <h2 id='middleware.error-handling'>错误处理中间件</h2>
 
@@ -190,14 +174,12 @@ app.use('/', router);
 
 错误处理中间件函数的定义方式与其他中间件函数基本相同，差别在于错误处理函数有四个自变量而不是三个，专门具有特征符 `(err, req, res, next)`：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-</code>
-</pre>
+```
 
 有关错误处理中间件的详细信息，请参阅：[错误处理](/{{ page.lang }}/guide/error-handling.html)。
 
@@ -226,8 +208,7 @@ Express 中唯一内置的中间件函数是 `express.static`。此函数基于 
 
 以下示例将使用了 `express.static` 中间件，并且提供了一个详细的'options'对象（作为示例）：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var options = {
   dotfiles: 'ignore',
   etag: false,
@@ -241,18 +222,15 @@ var options = {
 }
 
 app.use(express.static('public', options));
-</code>
-</pre>
+```
 
 对于每个应用程序，可以有多个静态目录：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 app.use(express.static('files'));
-</code>
-</pre>
+```
 
 有关 `serve-static` 函数及其选项的更多详细信息，请参阅：[serve-static](https://github.com/expressjs/serve-static) 文档。
 
@@ -264,21 +242,17 @@ app.use(express.static('files'));
 
 以下示例演示如何安装和装入 cookie 解析中间件函数 `cookie-parser`。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install cookie-parser
-</code>
-</pre>
+```
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');
 
 // load the cookie-parsing middleware
 app.use(cookieParser());
-</code>
-</pre>
+```
 
 有关 Express 常用的第三方中间件函数的部分列表，请参阅：[第三方中间件](../resources/middleware.html)。

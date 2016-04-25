@@ -213,10 +213,12 @@ A custom query string parsing function will receive the complete query string, a
 
   Set IP addresses in any of the following ways:
 
-  <pre><code class="language-js">app.set('trust proxy', 'loopback') // specify a single subnet
+```js
+app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code></pre>
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+```
 
   When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client's IP address.
   </td>
@@ -231,10 +233,12 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify mult
         <td>Function</td>
   <td markdown="1">
   Custom trust implementation. Use this only if you know what you are doing.
-  <pre><code class="language-js">app.set('trust proxy', function (ip) {
+```js
+app.set('trust proxy', function (ip) {
     if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
     else return false;
-  });</code></pre>
+  });
+  ```
   </td>
       </tr>
     </tbody>
@@ -274,9 +278,11 @@ The [express.static](#express.static) middleware ignores these settings.
         <td>Function</td>
   <td markdown="1">Custom ETag function implementation. Use this only if you know what you are doing.
 
-  <pre><code class="language-js">app.set('etag', function (body, encoding) {
+ ```js
+ app.set('etag', function (body, encoding) {
   return generateHash(body, encoding); // consider the function is defined
-  });</code></pre>
+  });
+  ```
 
   </td>
       </tr>

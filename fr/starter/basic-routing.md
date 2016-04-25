@@ -13,11 +13,9 @@ noeud final spécifique, c'est-à-dire un URI (ou chemin) et une méthode  de de
 Chaque route peut avoir une ou plusieurs fonctions de gestionnaire, qui sont exécutées lorsque la route est mise en correspondance.
 
 La définition de la route utilise la structure suivante :
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 Où :
 
@@ -35,42 +33,34 @@ Les exemples suivants illustrent la définition de routes simples.
 
 Réponse `Hello World!` sur la page d'accueil :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
-</code>
-</pre>
+```
 
 Réponse à une demande POST sur la route racine (`/`), sur la page d'accueil de l'application :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.post('/', function (req, res) {
   res.send('Got a POST request');
 });
-</code>
-</pre>
+```
 
 Réponse à une demande PUT sur la route `/user` :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.put('/user', function (req, res) {
   res.send('Got a PUT request at /user');
 });
-</code>
-</pre>
+```
 
 Réponse à une demande DELETE sur la route `/user` :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
-</code>
-</pre>
+```
 
 Pour plus de détails sur le routage, reportez-vous au [guide de routage](/{{ page.lang }}/guide/routing.html).

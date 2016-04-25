@@ -51,24 +51,19 @@ StrongLoop PM은 다음과 같은 태스크에 사용할 수 있습니다.
 - [Using StrongLoop Process Manager](http://docs.strongloop.com/display/SLC/Using+Process+Manager).
 
 ### 설치
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install -g strongloop
-</code>
-</pre>
+```
 
 ### 기본적인 사용
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ cd my-app
 $ slc start
-</code>
-</pre>
+```
 
 Process Manager 및 배치된 모든 앱의 상태를 확인:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl
 Service ID: 1
 Service Name: my-app
@@ -84,50 +79,39 @@ Processes:
     1.1.57694  57694   2     0.0.0.0:3001
     1.1.57695  57695   3     0.0.0.0:3001
     1.1.57696  57696   4     0.0.0.0:3001
-</code>
-</pre>
+```
 
 관리 중인 모든 앱(서비스)의 목록을 표시:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl ls
 Id          Name         Scale
  1          my-app       1
-</code>
-</pre>
+```
 
 앱을 중지:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl stop my-app
-</code>
-</pre>
+```
 
 앱을 다시 시작:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl restart my-app
-</code>
-</pre>
+```
 
 또한 작업자 프로세스에게 기존의 연결을 닫은 후 현재의 애플리케이션을 다시 시작할 수 있는 유예 기간을 제공하는 "소프트 다시 시작"을 다음과 같이 구현할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl soft-restart my-app
-</code>
-</pre>
+```
 
 관리 대상에서 앱을 제거:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl remove my-app
-</code>
-</pre>
+```
 
 ## <a id="pm2">PM2</a>
 
@@ -137,18 +121,15 @@ PM2는 Node.js 애플리케이션용 프로덕션 프로세스 관리자이며, 
 
 ### 설치
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install pm2 -g
-</code>
-</pre>
+```
 
 ### 기본적인 사용
 
 `pm2` 명령을 이용해 앱을 시작할 때는 앱의 경로를 지정해야 합니다. 그러나 앱을 중지하거나, 다시 시작하거나, 삭제할 때는 앱의 이름 또는 ID만 지정할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 start app.js
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
@@ -157,8 +138,7 @@ $ pm2 start app.js
 │ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
  Use the `pm2 show <id|name>` command to get more details about an app.
-</code>
-</pre>
+```
 
 `pm2` 명령을 이용해 앱을 시작할 때, 앱은 즉시 백그라운드로 보내집니다. 다양한 `pm2` 명령을 이용하면 명령행을 통해 백그라운드 앱을 제어할 수 있습니다.
 
@@ -168,43 +148,33 @@ $ pm2 start app.js
 
 실행 중인 모든 프로세스의 목록을 표시:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 list
-</code>
-</pre>
+```
 
 앱을 중지:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 stop 0
-</code>
-</pre>
+```
 
 앱을 다시 시작:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 restart 0
-</code>
-</pre>
+```
 
 앱에 대한 상세 정보를 확인:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 show 0
-</code>
-</pre>
+```
 
 PM2의 레지스트리에서 앱을 제거:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ pm2 delete 0
-</code>
-</pre>
+```
 
 
 ## <a id="forever">Forever</a>
@@ -215,70 +185,54 @@ Forever는 주어진 스크립트가 지속적으로(영원히) 실행되도록 
 
 ### 설치
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install forever -g
-</code>
-</pre>
+```
 
 ### 기본적인 사용
 
 스크립트를 시작하려면 `forever start` 명령을 이용해 해당 스크립트의 경로를 다음과 같이 지정하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever start script.js
-</code>
-</pre>
+```
 
 이 명령은 디먼 모드에서(백그라운드에서) 해당 스크립트를 실행합니다.
 
 터미널에 연결되도록 스크립트를 실행하려면 다음과 같이 `start`를 생략하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever script.js
-</code>
-</pre>
+```
 
 로깅 옵션인 `-l`, `-o` 및 `-e`를 이용해 Forever 도구 및 스크립트의 출력을 로깅하는 것은 좋은 생각이며, 아래에는 이에 대한 예가 표시되어 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever start -l forever.log -o out.log -e err.log script.js
-</code>
-</pre>
+```
 
 Forever를 통해 시작된 스크립트의 목록을 확인:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever list
-</code>
-</pre>
+```
 
 Forever를 통해 시작된 스크립트를 중지하려면 `forever stop` 명령을 이용해 프로세스 인덱스를 지정하십시오(인덱스는 `forever list` 명령을 통해 표시되는 목록을 참조).
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stop 1
-</code>
-</pre>
+```
 
 대안적으로, 다음과 같이 파일의 경로를 지정할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stop script.js
-</code>
-</pre>
+```
 
 Forever를 통해 시작된 모든 스크립트를 중지:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ forever stopall
-</code>
-</pre>
+```
 
 Forever에는 더 많은 옵션이 있으며 프로그래밍 방식의 API 또한 제공합니다.

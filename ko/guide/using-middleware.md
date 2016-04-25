@@ -37,44 +37,37 @@ Express 애플리케이션은 다음과 같은 유형의 미들웨어를 사용�
 
 다음 예에는 마운트 경로가 없는 미들웨어 함수가 표시되어 있습니다. 이 함수는 앱이 요청을 수신할 때마다 실행됩니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var app = express();
 
 app.use(function (req, res, next) {
   console.log('Time:', Date.now());
   next();
 });
-</code>
-</pre>
+```
 
 다음 예에는 `/user/:id` 경로에 마운트되는 미들웨어 함수가 표시되어 있습니다. 이 함수는 `/user/:id` 경로에
 대한 모든 유형의 HTTP 요청에 대해 실행됩니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/user/:id', function (req, res, next) {
   console.log('Request Type:', req.method);
   next();
 });
-</code>
-</pre>
+```
 
 다음 예에는 라우트 및 해당 라우트의 핸들러 함수(미들웨어 시스템)이 표시되어 있습니다. 이 함수는 `/user/:id` 경로에 대한 GET 요청을 처리합니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   res.send('USER');
 });
-</code>
-</pre>
+```
 
 아래에는 하나의 마운트 경로를 통해 일련의 미들웨어 함수를 하나의 마운트 위치에 로드하는 예가 표시되어 있습니다.
 이 예는 `/user/:id` 경로에 대한 모든 유형의 HTTP 요청에 대한 요청 정보를 인쇄하는 미들웨어 하위 스택을 나타냅니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/user/:id', function(req, res, next) {
   console.log('Request URL:', req.originalUrl);
   next();
@@ -82,15 +75,13 @@ app.use('/user/:id', function(req, res, next) {
   console.log('Request Type:', req.method);
   next();
 });
-</code>
-</pre>
+```
 
 라우트 핸들러를 이용하면 하나의 경로에 대해 여러 라우트를 정의할 수 있습니다. 아래의 예에서는 `/user/:id` 경로에 대한 GET 요청에 대해 2개의 라우트를 정의합니다. 두 번째 라우트는 어떠한 문제도 발생키지 않지만, 첫 번째 라우트가 요청-응답 주기를 종료시키므로 두 번째 라우트는 절대로 호출되지 않습니다.
 
 다음 예에는 `/user/:id` 경로에 대한 GET 요청을 처리하는 미들웨어 하위 스택이 표시되어 있습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   console.log('ID:', req.params.id);
   next();
@@ -102,16 +93,14 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.end(req.params.id);
 });
-</code>
-</pre>
+```
 
 라우터 미들웨어 스택의 나머지 미들웨어 함수들을 건너뛰려면 `next('route')`를 호출하여 제어를 그 다음 라우트로 전달하십시오.
 **참고**: `next('route')`는 `app.METHOD()` 또는 `router.METHOD()` 함수를 이용해 로드된 미들웨어 함수에서만 작동합니다.
 
 다음 예에는 `/user/:id` 경로에 대한 GET 요청을 처리하는 미들웨어 하위 스택이 표시되어 있습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/user/:id', function (req, res, next) {
   // if the user ID is 0, skip to the next route
   if (req.params.id == 0) next('route');
@@ -126,24 +115,20 @@ app.get('/user/:id', function (req, res, next) {
 app.get('/user/:id', function (req, res, next) {
   res.render('special');
 });
-</code>
-</pre>
+```
 
 <h2 id='middleware.router'>라우터 레벨 미들웨어</h2>
 
 라우터 레벨 미들웨어는 `express.Router()` 인스턴스에 바인드된다는 점을 제외하면 애플리케이션 레벨 미들웨어와 동일한 방식으로 작동합니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var router = express.Router();
-</code>
-</pre>
+```
 `router.use()` 및 `router.METHOD()` 함수를 사용하여 라우터 레벨 미들웨어를 로드하십시오.
 
 다음 예의 코드는 위에서 애플리케이션 레벨 미들웨어에 대해 표시된 미들웨어 시스템을 라우터 레벨 미들웨어를 사용하여 복제합니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var app = express();
 var router = express.Router();
 
@@ -181,8 +166,7 @@ router.get('/user/:id', function (req, res, next) {
 
 // mount the router on the app
 app.use('/', router);
-</code>
-</pre>
+```
 
 <h2 id='middleware.error-handling'>오류 처리 미들웨어</h2>
 
@@ -192,14 +176,12 @@ app.use('/', router);
 
 다른 미들웨어 함수와 동일반 방법으로 다음과 같이 오류 처리 미들웨어 함수를 정의할 수 있지만, 오류 처리 함수는 3개가 아닌 4개의 인수, 구체적으로 말하면 `(err, req, res, next)` 시그니처를 갖는다는 점이 다릅니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-</code>
-</pre>
+```
 
 오류 처리 미들웨어에 대한 상세 정보는 [오류 처리](/{{ page.lang }}/guide/error-handling.html)를 참조하십시오.
 
@@ -229,8 +211,7 @@ Express의 유일한 기본 제공 미들웨어 함수는 `express.static`입니
 
 아래에는 상세한 옵션 오브젝트와 함께 `express.static` 미들웨어 함수를 사용하는 예가 표시되어 있습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var options = {
   dotfiles: 'ignore',
   etag: false,
@@ -244,18 +225,15 @@ var options = {
 }
 
 app.use(express.static('public', options));
-</code>
-</pre>
+```
 
 다음과 같이, 하나의 앱은 2개 이상의 정적 디렉토리를 가질 수 있습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 app.use(express.static('files'));
-</code>
-</pre>
+```
 
 `serve-static` 함수 및 그 옵션에 대한 자세한 정보는 [serve-static](https://github.com/expressjs/serve-static) 문서를 참조하십시오.
 
@@ -267,21 +245,17 @@ Express 앱에 기능을 추가하려면 써드파티 미들웨어를 사용하�
 
 다음 예는 쿠키 구문 분석 미들웨어 함수인 `cookie-parser`의 설치 및 로드를 나타냅니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install cookie-parser
-</code>
-</pre>
+```
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');
 
 // load the cookie-parsing middleware
 app.use(cookieParser());
-</code>
-</pre>
+```
 
 Express와 함께 일반적으로 사용되고 있는 써드파티 미들웨어 함수의 일부 목록을 확인하려면 [써드파티 미들웨어](../resources/middleware.html)를 참조하십시오.

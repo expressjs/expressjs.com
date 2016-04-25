@@ -11,8 +11,7 @@ lang: ru
 
 Приведенный ниже код служит примером реализации самого простого шаблонизатора для вывода файлов `.ntl`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
@@ -25,24 +24,19 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
-</code>
-</pre>
+```
 
 Теперь ваше приложение сможет отображать файлы `.ntl`. Создайте файл с именем `index.ntl` в каталоге `views` со следующим содержимым.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 #title#
 #message#
-</code>
-</pre>
+```
 Затем создайте следующий маршрут в своем приложении.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 При выполнении запроса к домашней странице файл `index.ntl` будет отображаться как HTML.

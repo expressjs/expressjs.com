@@ -11,8 +11,7 @@ lang: ko
 
 다음의 코드는 `.ntl` 파일을 렌더링하기 위한 매우 간단한 템플리트 엔진을 구현하는 예입니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
@@ -25,24 +24,19 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
-</code>
-</pre>
+```
 
 앱은 이제 `.ntl` 파일을 렌더링할 수 있습니다. 다음의 내용이 입력된 `index.ntl`이라는 이름의 파일을 `views` 디렉토리에 작성하십시오.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 #title#
 #message#
-</code>
-</pre>
+```
 이후 앱에 다음과 같은 라우트를 작성하십시오.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 홈 페이지에 대한 요청을 실행할 때 `index.ntl`은 HTML로 렌더링됩니다.

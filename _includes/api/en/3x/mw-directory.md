@@ -4,10 +4,10 @@ Directory serving middleware, serves the given `path`.
 This middleware may be paired with `static()` to serve
 files, providing a full-featured file browser.
 
-{% highlight js %}
+```js
 app.use(express.directory('public'))
 app.use(express.static('public'))
-{% endhighlight %}
+```
 
 This middleware accepts the following options:
 

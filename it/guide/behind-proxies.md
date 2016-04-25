@@ -35,12 +35,12 @@ Un indirizzo IP, una subnet o un array di indirizzi IP e subnet a cui fornire at
 
 È possibile impostare gli indirizzi IP in uno dei seguenti modi:
 
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
+```js
+app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
-</pre>
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+```
 
 Quando specificati, gli indirizzi IP o le subnet vengono esclusi dal processo di determinazione dell'indirizzo e l'indirizzo IP non attendibile più vicino al server delle applicazioni viene considerato come indirizzo IP del client.
 </td>
@@ -55,12 +55,13 @@ Considerare attendibile una parte del percorso `n`th dal server proxy principale
       <td>Funzione</td>
 <td markdown="1">
 Implementazione attendibilità personalizzata. Questa funzione deve essere utilizzata solo da esperti.
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', function (ip) {
+
+```js
+app.set('trust proxy', function (ip) {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
   else return false;
-});</code>
-</pre>
+});
+```
 </td>
     </tr>
   </tbody>

@@ -42,15 +42,13 @@ I seguenti esempi mostrano gli elementi di una chiamata alla funzione middleware
 </table>
 
 <!--
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 app.get('/', function(req, res, next) {
 	next();
 });
-</code>
-</pre>
+```
 
 * <code>app.get</code>: Metodo HTTP per cui si applica la funzione middleware.
 
@@ -67,8 +65,7 @@ app.get('/', function(req, res, next) {
 
 Ecco un esempio di una semplice applicazione Express "Hello World", per cui si definiranno due funzioni middleware:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -77,21 +74,18 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 <h2>Sviluppo</h2>
 
 Ecco un semplice esempio di una funzione middleware, denominata "myLogger". Questa funzione stampa semplicemente la dicitura "LOGGED" quando una richiesta all'applicazione la attraversa. La funzione middleware è assegnata ad una variabile denominata `myLogger`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var myLogger = function (req, res, next) {
   console.log('LOGGED');
   next();
 };
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Si noti la chiamata precedente a `next()`.  Richiamando questa funzione si richiama la successiva funzione middleware nell'applicazione.
@@ -101,8 +95,7 @@ La funzione `next()` non fa parte dell'API Express o Node.js, ma è il terzo arg
 Per caricare la funzione middleware, richiamare `app.use()`, specificando la funzione middleware.
 Ad esempio, il seguente codice carica la funzione middleware `myLogger` prima della route al percorso root (/).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -118,8 +111,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 Ogni volta che un'applicazione riceve una richiesta, viene stampato il messaggio "LOGGED" sul terminale.
 
@@ -131,19 +123,16 @@ La funzione middleware `myLogger` stampa semplicemente un messaggio, successivam
 
 Nel successivo esempio viene aggiunta una proprietà denominata `requestTime` all'oggetto richiesta. Questa funzione middleware verrà denominata "requestTime".
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var requestTime = function (req, res, next) {
   req.requestTime = Date.now();
   next();
 };
-</code>
-</pre>
+```
 
 L'applicazione utilizza ora la funzione middleware `requestTime`. Inoltre, la funzione di callback della route percorso root utilizza la proprietà che la funzione middleware aggiunge a `req` (l'oggetto richiesta).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -161,8 +150,7 @@ app.get('/', function (req, res) {
 });
 
 app.listen(3000);
-</code>
-</pre>
+```
 
 Quando si effettua una richiesta al root dell'applicazione, l'applicazione mostra la cronologia data e ora della richiesta nel browser.
 

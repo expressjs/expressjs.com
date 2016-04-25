@@ -12,8 +12,7 @@ lang: ko
 
 다음 코드는 매우 기본적인 라우트의 예입니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -21,8 +20,7 @@ var app = express();
 app.get('/', function(req, res) {
   res.send('hello world');
 });
-</code>
-</pre>
+```
 
 <h2 id="route-methods">라우트 메소드</h2>
 
@@ -30,8 +28,7 @@ app.get('/', function(req, res) {
 
 다음 코드는 앱의 루트에 대한 GET 및 POST 메소드에 대해 정의된 라우트의 예입니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 // GET method route
 app.get('/', function (req, res) {
   res.send('GET request to the homepage');
@@ -41,8 +38,7 @@ app.get('/', function (req, res) {
 app.post('/', function (req, res) {
   res.send('POST request to the homepage');
 });
-</code>
-</pre>
+```
 
 Express는 HTTP 메소드에 해당하는 다음과 같은 라우팅 메소드를 지원합니다. `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search` 및 `connect`.
 
@@ -55,14 +51,12 @@ Express는 HTTP 메소드에 해당하는 다음과 같은 라우팅 메소드�
 
 다음 예에서는, GET, POST, PUT 또는 DELETE 메소드를 사용하는 경우, 또는 [http 모듈](https://nodejs.org/api/http.html#http_http_methods)에서 지원되는 기타 모든 HTTP 요청 메소드를 사용하는 경우 등의 "/secret"에 대한 요청을 위하여 핸들러가 실행됩니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.all('/secret', function (req, res, next) {
   console.log('Accessing the secret section ...');
   next(); // pass control to the next handler
 });
-</code>
-</pre>
+```
 
 <h2 id="route-paths">라우트 경로</h2>
 
@@ -80,75 +74,61 @@ app.all('/secret', function (req, res, next) {
 
 다음의 라우트 경로는 요청을 루트 라우트 `/`에 일치시킵니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.send('root');
 });
-</code>
-</pre>
+```
 
 다음의 라우트 경로는 요청을 `/about`에 일치시킵니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/about', function (req, res) {
   res.send('about');
 });
-</code>
-</pre>
+```
 
 다음의 라우트 경로는 요청을 `/random.text`에 일치시킵니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/random.text', function (req, res) {
   res.send('random.text');
 });
-</code>
-</pre>
+```
 
 문자열 패턴을 기반으로 하는 라우트 경로의 몇 가지 예는 다음과 같습니다.
 
 다음의 라우트 경로는 `acd` 및 `abcd`와 일치합니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab?cd', function(req, res) {
   res.send('ab?cd');
 });
-</code>
-</pre>
+```
 
 다음의 라우트 경로는 `abcd`, `abbcd` 및 `abbbcd` 등과 일치합니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab+cd', function(req, res) {
   res.send('ab+cd');
 });
-</code>
-</pre>
+```
 
 다음의 라우트 경로는 `abcd`, `abxcd`, `abRABDOMcd` 및 `ab123cd` 등과 일치합니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab*cd', function(req, res) {
   res.send('ab*cd');
 });
-</code>
-</pre>
+```
 
 다음의 라우트 경로는 `/abe` 및 `/abcde`와 일치합니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/ab(cd)?e', function(req, res) {
  res.send('ab(cd)?e');
 });
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 ?, +, * 및 () 문자는 정규식 문자의 서브세트입니다. 하이픈(-) 및 점(.)은 문자열 기반 경로에 의해 문자 그대로 해석됩니다.
@@ -158,23 +138,19 @@ app.get('/ab(cd)?e', function(req, res) {
 
 다음의 라우트 경로는 라우트 이름에 "a"가 포함된 모든 항목과 일치합니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get(/a/, function(req, res) {
   res.send('/a/');
 });
-</code>
-</pre>
+```
 
 다음의 라우트 경로는 `butterfly` 및 `dragonfly`와 일치하지만, `butterflyman` 및 `dragonfly man` 등과 일치하지 않습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get(/.*fly$/, function(req, res) {
   res.send('/.*fly$/');
 });
-</code>
-</pre>
+```
 
 <h2 id="route-handlers">라우트 핸들러</h2>
 
@@ -184,31 +160,26 @@ app.get(/.*fly$/, function(req, res) {
 
 하나의 콜백 함수는 하나의 라우트를 처리할 수 있습니다.  예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/example/a', function (req, res) {
   res.send('Hello from A!');
 });
-</code>
-</pre>
+```
 
 2개 이상의 콜백 함수는 하나의 라우트를 처리할 수 있습니다(`next` 오브젝트를 반드시 지정해야 함). 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/example/b', function (req, res, next) {
   console.log('the response will be sent by the next function ...');
   next();
 }, function (req, res) {
   res.send('Hello from B!');
 });
-</code>
-</pre>
+```
 
 하나의 콜백 함수 배열은 하나의 라우트를 처리할 수 있습니다.  예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var cb0 = function (req, res, next) {
   console.log('CB0');
   next();
@@ -224,13 +195,11 @@ var cb2 = function (req, res) {
 }
 
 app.get('/example/c', [cb0, cb1, cb2]);
-</code>
-</pre>
+```
 
 독립적인 함수와 함수 배열의 조합은 하나의 라우트를 처리할 수 있습니다.  예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var cb0 = function (req, res, next) {
   console.log('CB0');
   next();
@@ -247,8 +216,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 }, function (req, res) {
   res.send('Hello from D!');
 });
-</code>
-</pre>
+```
 
 <h2 id="response-methods">응답 메소드</h2>
 
@@ -273,8 +241,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 
 `app.route()`를 사용하여 정의된 체인 라우트 핸들러의 예는 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -285,8 +252,7 @@ app.route('/book')
   .put(function(req, res) {
     res.send('Update the book');
   });
-</code>
-</pre>
+```
 
 <h2 id="express-router">express.Router</h2>
 
@@ -296,8 +262,7 @@ app.route('/book')
 
 다음의 내용이 입력된 `birds.js`라는 이름의 라우터 파일을 앱 디렉토리에 작성하십시오.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var router = express.Router();
 
@@ -316,17 +281,14 @@ router.get('/about', function(req, res) {
 });
 
 module.exports = router;
-</code>
-</pre>
+```
 
 이후 앱 내에서 다음과 같이 라우터 모듈을 로드하십시오.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-</code>
-</pre>
+```
 
 앱은 이제 `/birds` 및 `/birds/about`에 대한 요청을 처리할 수 있게 되었으며, 해당 라우트에 대한 특정한 미들웨어 함수인 `timeLog`를 호출할 것입니다.

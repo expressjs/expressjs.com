@@ -2,11 +2,11 @@
 
 Check if setting `name` is disabled.
 
-{% highlight js %}
+```js
 app.disabled('trust proxy');
 // => true
 
 app.enable('trust proxy');
 app.disabled('trust proxy');
 // => false
-{% endhighlight %}
+```

@@ -17,7 +17,7 @@ Ushbu qo'llanmani foydalanishdan oldin `express` obyektidan ekzamplyar olib, uni
 
 Quyidagi kodlar marshrutizatsiyaga bir necha misollar keltirilgan.
 
-<pre><code class="language-javascript" translate="no">
+```js
 // Bosh sahifada "Hello World!" javobini qaytaradi.
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -37,6 +37,6 @@ app.put('/user', function (req, res) {
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 })
-</code></pre>
+```
 
 Marshrutizatsiya haqida to'liq ma'lumot olish uchun, ma'lumotnoma orqali [Marshrutizatsiya](/guide/routing.html) bo'limini o'qib chiqing.

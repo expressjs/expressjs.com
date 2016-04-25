@@ -7,7 +7,7 @@ field will be trusted. If you're running behind
 a reverse proxy that supplies https for you this
 may be enabled.
 
-{% highlight js %}
+```js
 req.protocol
 // => "http"
-{% endhighlight %}
+```

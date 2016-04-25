@@ -47,22 +47,18 @@ Ein handliches Tool zum Abrufen eines kostenloses TLS-Zertifikats ist außerdem 
 
 Installieren Sie "Helmet" wie alle anderen Module:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 So verwenden Sie "Helmet" in Ihrem Code:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 ...
 var helmet = require('helmet');
 app.use(helmet());
 ...
-</code>
-</pre>
+```
 
 ### Inaktivieren Sie mindestens den X-Powered-By-Header
 
@@ -70,11 +66,9 @@ Wenn Sie "Helmet" nicht verwenden wollen, sollten Sie mindestens den `X-Powered-
 
 Ein bewährtes Verfahren ist also, diesen Header mit der Methode `app.disable()` zu inaktivieren:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.disable('x-powered-by');
-</code>
-</pre>
+```
 
 Wenn Sie `helmet.js` verwenden, kümmert sich das Tool darum.
 
@@ -97,8 +91,7 @@ Die Verwendung des standardmäßigen Namens des Sitzungscookies kann Ihre Anwend
 
 Dieses Problem lässt sich vermeiden, wenn Sie allgemeine Cookienamen verwenden; z. B. durch Verwendung der [express-session](https://www.npmjs.com/package/express-session)-Middleware:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('express-session');
 app.set('trust proxy', 1) // trust first proxy
 app.use( session({
@@ -106,8 +99,7 @@ app.use( session({
    name : 'sessionId',
   })
 );
-</code>
-</pre>
+```
 
 ### Cookie-Sicherheitsoptionen festlegen
 
@@ -121,8 +113,7 @@ Legen Sie die folgenden Cookieoptionen fest, um die Sicherheit zu erhöhen:
 
 Dies ist ein Beispiel zur Verwendung der [cookie-session](https://www.npmjs.com/package/cookie-session)-Middleware:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var session = require('cookie-session');
 var express = require('express');
 var app = express();
@@ -139,8 +130,7 @@ app.use(session({
           }
   })
 );
-</code>
-</pre>
+```
 
 ## Stellen Sie sicher, dass Ihre Abhängigkeiten sicher sind
 
@@ -150,37 +140,29 @@ Verwenden Sie eines oder beide der folgenden Tools, um sicherzustellen, dass die
 
 [nsp](https://www.npmjs.com/package/nsp) ist ein Befehlszeilentool, das die [Node Security Project](https://nodesecurity.io/)-Datenbank mit Sicherheitslücken daraufhin überprüft, ob Ihre Anwendung Pakete mit bekannten Sicherheitslücken verwendet. Installieren Sie dieses Tool wie folgt:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm i nsp -g
-</code>
-</pre>
+```
 
 Verwenden Sie diesen Befehl, um die Datei `npm-shrinkwrap.json` zur Validierung an [nodesecurity.io](https://nodesecurity.io/) zu senden:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-shrinkwrap
-</code>
-</pre>
+```
 
 Verwenden Sie diesen Befehl, um die Datei `package.json` zur Validierung an [nodesecurity.io](https://nodesecurity.io/) zu senden:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ nsp audit-package
-</code>
-</pre>
+```
 
 So verwenden Sie [requireSafe](https://requiresafe.com/), um Ihre Node-Module zu überprüfen:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install -g requiresafe
 $ cd your-app
 $ requiresafe check
-</code>
-</pre>
+```
 
 ## Weitere Überlegungen
 

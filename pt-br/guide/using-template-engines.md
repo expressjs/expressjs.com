@@ -18,11 +18,9 @@ usado. Por Exemplo: `app.set('view engine', 'jade')`
 
 Em seguida instale o pacote npm correspondente ao mecanismo de modelo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install jade --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Mecanismos de modelo compatíveis com o Express como o Jade exportam
@@ -41,25 +39,21 @@ precisa especificar o mecanismo ou carregar o módulo do mecanismo de
 modelo no seu aplicativo; o Express carrega o módulo internamente,
 como mostrado abaixo (para o exemplo acima).
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.set('view engine', 'jade');
-</code>
-</pre>
+```
 
 Crie um arquivo de modelo do Jade
 chamado `index.jade` no diretório
 `views`, com o seguinte conteúdo:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 html
   head
     title!= title
   body
     h1!= message
-</code>
-</pre>
+```
 
 Em seguida crie uma rota para renderizar o arquivo
 `index.jade`. Se a propriedade `view
@@ -67,13 +61,11 @@ engine` não estiver configurada, é preciso especificar a
 extensão do arquivo `view`. Caso contrário, é
 possível omití-la.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 
 Ao fazer uma solicitação à página inicial, o arquivo `index.jade` será renderizado como HTML.
 

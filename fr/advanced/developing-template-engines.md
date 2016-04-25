@@ -11,8 +11,7 @@ Utilisez la méthode `app.engine(ext, callback)` pour créer votre propre moteur
 
 Le code suivant est un exemple d'implémentation d'un moteur de modèle très simple qui permet d'afficher le rendu des fichiers `.ntl`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var fs = require('fs'); // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
@@ -25,24 +24,19 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 });
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'ntl'); // register the template engine
-</code>
-</pre>
+```
 
 Votre application est désormais en mesure d'afficher le rendu des fichiers `.ntl`. Créez un fichier nommé  `index.ntl` dans le répertoire `views` avec le contenu suivant.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 #title#
 #message#
-</code>
-</pre>
+```
 ENsuite, créez la route suivante dans votre application.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
-</code>
-</pre>
+```
 Lorsque vous effectuerez une demande à la page d'accueil, `index.ntl` sera rendu au format HTML.

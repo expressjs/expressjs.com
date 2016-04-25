@@ -32,12 +32,12 @@ Here are some things you can do in your code to improve your application's perfo
 
 Gzip compressing can greatly decrease the size of the response body and hence increase the speed of a web app. Use the [compression](https://www.npmjs.com/package/compression) middleware for gzip compression in your Express app. For example:
 
-<pre><code class="language-javascript" translate="no">
+```js
 var compression = require('compression');
 var express = require('express');
 var app = express();
 app.use(compression());
-</code></pre>
+```
 
 For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
 
@@ -106,7 +106,7 @@ Use a tool such as [JSHint](http://jshint.com/) or [JSLint](http://www.jslint.co
 Here is an example of using try-catch to handle a potential process-crashing exception.
 This middleware function accepts a query field parameter named "params" that is a JSON object.
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.get('/search', function (req, res) {
   // Simulating async operation
   setImmediate(function () {
@@ -119,7 +119,7 @@ app.get('/search', function (req, res) {
     }
   });
 });
-</code></pre>
+```
 
 However, try-catch works only for synchronous code. Because the Node platform is primarily asynchronous (particularly in a production environment), try-catch won't catch a lot of exceptions.
 
@@ -129,7 +129,7 @@ However, try-catch works only for synchronous code. Because the Node platform is
 
 Promises will handle any exceptions (both explicit and implicit) in asynchronous code blocks that use `then()`. Just add `.catch(next)` to the end of promise chains. For example:
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res, next) {
   // do some sync stuff
   queryDb()
@@ -146,7 +146,7 @@ app.get('/', function (req, res, next) {
 app.use(function (err, req, res, next) {
   // handle error
 });
-</code></pre>
+```
 
 Now all errors asynchronous and synchronous get propagated to the error middleware.
 
@@ -155,13 +155,13 @@ However, there are two caveats:
 1.  All your asynchronous code must return promises (except emitters). If a particular library does not return promises, convert the base object by using a helper function like [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
 2.  Event emitters (like streams) can still cause uncaught exceptions. So make sure you are handling the error event properly; for example:
 
-<pre><code class="language-javascript" translate="no">
+```js
 app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id)
   let stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }));
-</code></pre>
+```
 
 For more information about error-handling by using promises, see:
 
@@ -199,19 +199,19 @@ In development, you typically set environment variables in your interactive shel
 
 With Upstart, use the `env` keyword in your job file. For example:
 
-<pre><code class="language-sh" translate="no">
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code></pre>
+```
 
 For more information, see the [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables).
 
 With systemd, use the `Environment` directive in your unit file. For example:
 
-<pre><code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code></pre>
+```
 
 For more information, see [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
 
@@ -272,7 +272,7 @@ Systemd is a Linux system and service manager. Most major Linux distributions ha
 
 A systemd service configuration file is called a _unit file_, with a filename ending in .service. Here's an example unit file to manage a Node app directly (replace the bold text with values for your system and app):
 
-<pre><code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -300,7 +300,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code></pre>
+```
 For more information on systemd, see the [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
 
 ##### StrongLoop PM as a systemd service
@@ -309,15 +309,15 @@ You can easily install StrongLoop Process Manager as a systemd service. After yo
 
 To install StrongLoop PM as a systemd service:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install --systemd
-</code></pre>
+```
 
 Then start the service with:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ sudo /usr/bin/systemctl start strong-pm
-</code></pre>
+```
 
 For more information, see [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10).
 
@@ -329,7 +329,7 @@ An Upstart service is defined in a job configuration file (also called a "job") 
 
 Create a file named `myapp.conf` at `/etc/init/` with the following content (replace the bold text with values for your system and app):
 
-<pre><code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -357,7 +357,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code></pre>
+```
 
 NOTE: This script requires Upstart 1.4 or newer, supported on Ubuntu 12.04-14.10.
 
@@ -377,15 +377,15 @@ You can easily install StrongLoop Process Manager as an Upstart service. After y
 
 To install StrongLoop PM as an Upstart 1.4 service:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install
-</code></pre>
+```
 
 Then run the service with:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ sudo /sbin/initctl start strong-pm
-</code></pre>
+```
 
 NOTE: On systems that don't support Upstart 1.4, the commands are slightly different. See [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10) for more information.
 
@@ -411,9 +411,9 @@ When StrongLoop Process Manager (PM) runs an application, it automatically runs 
 
 For example, assuming you've deployed your app to prod.foo.com and StrongLoop PM is listening on port 8701 (the default), then to set the cluster size to eight using slc:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code></pre>
+```
 
 For more information on clustering with StrongLoop PM, see [Clustering](https://docs.strongloop.com/display/SLC/Clustering) in StrongLoop documentation.
 

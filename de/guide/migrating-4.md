@@ -90,14 +90,12 @@ In den meisten Fällen können Sie einfach nur die Middleware der alten Version 
 
 In Version 4 können Sie über einen Variablenparameter den Pfad definieren, in den Middlewarefunktionen geladen werden. Dann können Sie den Wert des Parameters aus dem Routenhandler laden. Beispiel:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.use('/book/:id', function(req, res, next) {
   console.log('ID:', req.params.id);
   next();
 });
-</code>
-</pre>
+```
 <h3 id="routing">
 Das Routingsystem
 </h3>
@@ -116,8 +114,7 @@ Die neue Methode `app.route()` hilft beim Erstellen verkettbarer Routenhandler f
 
 Dies ist ein Beispiel für verkettete Routenhandler, die mit der Funktion `app.route()` definiert werden.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.route('/book')
   .get(function(req, res) {
     res.send('Get a random book');
@@ -128,8 +125,7 @@ app.route('/book')
   .put(function(req, res) {
     res.send('Update the book');
   });
-</code>
-</pre>
+```
 
 <h4 id="express-router">Die Klasse <code>express.Router</code></h4>
 
@@ -139,8 +135,7 @@ Im folgenden Beispiel wird ein Router als Modul erstellt, Middleware in das Modu
 
 Beispiel: Erstellen Sie eine Routerdatei namens `birds.js` mit dem folgenden Inhalt im Anwendungsverzeichnis:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var router = express.Router();
 
@@ -159,18 +154,15 @@ router.get('/about', function(req, res) {
 });
 
 module.exports = router;
-</code>
-</pre>
+```
 
 Laden Sie dann das Routermodul in die Anwendung:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var birds = require('./birds');
 ...
 app.use('/birds', birds);
-</code>
-</pre>
+```
 
 Die Anwendung kann nun Anforderungen an die Pfade `/birds` und `/birds/about` bearbeiten und ruft die Middleware `timeLog` auf, die speziell für diese Weiterleitung bestimmt ist.
 
@@ -300,8 +292,7 @@ Anwendung der Version 3
 
 Es wird eine Express v.3-Anwendung mit der folgenden Datei `app.js` angenommen:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -333,15 +324,13 @@ app.get('/users', user.list);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-</code>
-</pre>
+```
 
 <h4 id=""><code>package.json</code></h4>
 
 Die zugehörige `package.json`-Datei der Version 3 sieht in etwa wie folgt aus:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -354,8 +343,7 @@ Die zugehörige `package.json`-Datei der Version 3 sieht in etwa wie folgt aus:
     "jade": "*"
   }
 }
-</code>
-</pre>
+```
 
 <h3 id="">
 Prozess
@@ -363,11 +351,9 @@ Prozess
 
 Beginnen Sie den Migrationsprozess mit der Installation der erforderlichen Middleware für die Express 4-Anwendung und der Aktualisierung von Express und Jade auf die aktuellen Versionen. Verwenden Sie hierzu den folgenden Befehl:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
-</code>
-</pre>
+```
 
 Nehmen Sie an `app.js` die folgenden Änderungen vor:
 
@@ -386,8 +372,7 @@ Nehmen Sie an `app.js` die folgenden Änderungen vor:
 
 Durch Ausführung des Befehls `npm` wird `package.json` wie folgt aktualisiert:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -407,15 +392,13 @@ Durch Ausführung des Befehls `npm` wird `package.json` wie folgt aktualisiert:
     "serve-favicon": "^2.0.1"
   }
 }
-</code>
-</pre>
+```
 
 <h4 id=""><code>app.js</code></h4>
 
 Entfernen Sie dann ungültigen Code, laden Sie die erforderliche Middleware und nehmen Sie andere Änderungen nach Bedarf vor. Die Datei `app.js` sieht dann wie folgt aus:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
@@ -459,28 +442,23 @@ var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 Wenn Sie nicht direkt mit dem Modul `http` arbeiten müssen (socket.io/SPDY/HTTPS), ist das Laden des Moduls nicht erforderlich. Die Anwendung kann dann einfach wie folgt gestartet werden:
-<pre>
-<code class="language-js" translate="no">app.listen(app.get('port'), function(){
+```jsapp.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-</code>
-</pre>
+```
 </div>
 
 <h3 id="">Anwendung ausführen</h3>
 
 Der Migrationsprozess ist abgeschlossen und die Anwendung ist nun eine Express 4-Anwendung. Zum Bestätigen starten Sie die Anwendung mit dem folgenden Befehl:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ node .
-</code>
-</pre>
+```
 
 Laden Sie [http://localhost:3000](http://localhost:3000) und sehen Sie, wie die Homepage von Express 4 wiedergegeben wird.
 
@@ -492,19 +470,15 @@ Das Befehlszeilentool zum Generieren einer Express-Anwendung ist nach wie vor `e
 
 Wenn der Express 3 App Generator bereits auf Ihrem System installiert ist, müssen Sie diesen deinstallieren:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm uninstall -g express
-</code>
-</pre>
+```
 Abhängig davon, wie Ihre Datei- und Verzeichnissberechtigungen konfiguriert sind, müssen Sie diesen Befehl möglicherweise mit `sudo` ausführen.
 Installieren Sie nun den neuen Generator:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 Abhängig davon, wie Ihre Datei- und Verzeichnissberechtigungen konfiguriert sind, müssen Sie diesen Befehl möglicherweise mit `sudo` ausführen.
 
@@ -524,11 +498,9 @@ Befehlsoptionen und -nutzung bleiben größtenteils unverändert. Es gelten jedo
 
 Führen Sie den folgenden Befehl aus, um eine Express 4-Anwendung zu erstellen:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ express app4
-</code>
-</pre>
+```
 
 Wenn Sie sich den Inhalt der Datei `app4/app.js` ansehen, werden Sie feststellen, dass alle Middlewarefunktionen (außer `express.static`), die für die Anwendung  erforderlich sind, als unabhängige Module geladen werden und die Middleware `router` nicht mehr explizit in die Anwendung geladen wird.
 
@@ -536,11 +508,9 @@ Sie werden auch feststellen, dass die Datei `app.js` nun ein Node.js-Modul ist �
 
 Starten Sie nach der Installation der Abhängigkeiten die Anwendung mit dem folgenden Befehl:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm start
-</code>
-</pre>
+```
 
 Wenn Sie sich das npm-Startscript in der Datei `package.json` näher ansehen, werden Sie feststellen, dass der eigentliche Befehl, der die Anwendung startet, `node ./bin/www` heißt. Dieser Befehl lautete in Express 3 `node app.js`.
 
@@ -550,23 +520,19 @@ Weder das Verzeichnis `bin` noch die erweiterungslose Datei `www` ist für das E
 
 Um das Verzeichnis `www` zu löschen und alles im "Express 3-Stil" zu belassen, löschen Sie die Zeile mit dem Eintrag `module.exports = app;` am Ende der Datei `app.js`. Fügen Sie dann stattdessen den folgenden Code an derselben Position ein:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
-</code>
-</pre>
+```
 
 Stellen Sie sicher, dass Sie das Modul `debug` am Anfang der Datei `app.js` laden. Verwenden Sie dazu den folgenden Code:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var debug = require('debug')('app4');
-</code>
-</pre>
+```
 
 Ändern Sie als Nächstes `"start": "node ./bin/www"` in der Datei `package.json` in `"start": "node app.js"`.
 

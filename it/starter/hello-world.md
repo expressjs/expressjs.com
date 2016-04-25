@@ -15,8 +15,7 @@ Per prima cosa creare una directory denominata `myapp`, passare a quest'ultima e
 
 Nella directory `myapp`, creare un file denominato `app.js` e aggiungere il seguente codice:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var express = require('express');
 var app = express();
 
@@ -27,8 +26,7 @@ app.get('/', function (req, res) {
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
-</code>
-</pre>
+```
 
 L'applicazione avvia un server e resta in ascolto sulla porta 3000 per le connessioni. L'applicazione risponde con "Hello World!" per le richieste
 all'URL root (`/`) o *route*. Per qualsiasi altro percorso, risponderà con il messaggio **404 Non trovato**.
@@ -40,11 +38,9 @@ I valori `req` (richiesta) e `res` (risposta) sono esattamente gli stessi oggett
 
 Eseguire l'applicazione con il seguente comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ node app.js
-</code>
-</pre>
+```
 
 Successivamente, caricare [http://localhost:3000/](http://localhost:3000/) su un browser per visualizzare l'output.
 
