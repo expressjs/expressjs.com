@@ -1,12 +1,14 @@
 <h3 id='router.param'>router.param(name, callback)</h3>
 
-Adds callback triggers to route parameters, where `name` is the name of the parameter and `callback` is the callback function. The parameters of the callback function are:
+Adds callback triggers to route parameters, where `name` is the name of the parameter and `callback` is the callback function. 
 
-- `req`, the request object
-- `res`, the response object
-- `next`, indicating the next middleware function
-- The value of the `name` parameter
-- The name of the parameter
+The parameters of the callback function are:
+
+- `req`, the request object (required).
+- `res`, the response object (required).
+- `next`, indicating the next middleware function (required, unless you want to terminate the connection with a response).
+- The value of the `name` parameter (optional).
+- The name of the parameter (optional).
 
 Although `name` is technically optional, using this method without it is deprecated starting with Express v4.11.0 (see below).
 
