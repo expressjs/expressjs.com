@@ -12,7 +12,6 @@ Express supports the following routing methods corresponding to the HTTP methods
 <tr>
 <td style="background: none; border: 0px;" markdown="1">
 * `checkout`
-* `connect`
 * `copy`
 * `delete`
 * `get`
@@ -29,8 +28,6 @@ Express supports the following routing methods corresponding to the HTTP methods
 * `options`
 * `patch`
 * `post`
-* `propfind`
-* `proppatch`
 </td>
 <td style="background: none; border: 0px;" markdown="1">
 * `purge`
