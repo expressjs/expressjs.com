@@ -6,6 +6,7 @@ Adds callback triggers to route parameters, where `name` is the name of the para
 - `res`, the response object
 - `next`, indicating the next middleware function
 - The value of the `name` parameter
+- The name of the parameter
 
 Although `name` is technically optional, using this method without it is deprecated starting with Express v4.11.0 (see below).
 
