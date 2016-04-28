@@ -15,7 +15,7 @@ The following example would respond with `{ "message": "hey" }`
 when the Accept header field is set to "application/json" or "*/json",
 however if "*/*" is given then "hey" will be the response.
 
-{% highlight js %}
+```js
 res.format({
   'text/plain': function(){
     res.send('hey');
@@ -29,13 +29,13 @@ res.format({
     res.send({ message: 'hey' });
   }
 });
-{% endhighlight %}
+```
 
 In addition to canonicalized MIME types you may also
 use extnames mapped to these types, providing a slightly
 less verbose implementation:
 
-{% highlight js %}
+```js
 res.format({
   text: function(){
     res.send('hey');
@@ -49,4 +49,4 @@ res.format({
     res.send({ message: 'hey' });
   }
 });
-{% endhighlight %}
+```

@@ -2,8 +2,8 @@
 
 Return subdomains as an array.
 
-{% highlight js %}
+```js
 // Host: "tobi.ferrets.example.com"
 req.subdomains
 // => ["ferrets", "tobi"]
-{% endhighlight %}
+```

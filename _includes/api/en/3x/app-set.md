@@ -2,8 +2,8 @@
 
 Assigns setting `name` to `value`.
 
-{% highlight js %}
+```js
 app.set('title', 'My Site');
 app.get('title');
 // => "My Site"
-{% endhighlight %}
+```

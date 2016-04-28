@@ -2,7 +2,7 @@
 
 Clear cookie `name`. The `path` option defaults to "/".
 
-{% highlight js %}
+```js
 res.cookie('name', 'tobi', { path: '/admin' });
 res.clearCookie('name', { path: '/admin' });
-{% endhighlight %}
+```

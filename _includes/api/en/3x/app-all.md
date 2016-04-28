@@ -12,21 +12,21 @@ that these callbacks do not have to act as end points, `loadUser`
 can perform a task, then `next()` to continue matching subsequent
 routes.
 
-{% highlight js %}
+```js
   app.all('*', requireAuthentication, loadUser);
-{% endhighlight %}
+```
 
 Or the equivalent:
 
-{% highlight js %}
+```js
   app.all('*', requireAuthentication)
   app.all('*', loadUser);
-{% endhighlight %}
+```
 
 Another great example of this is white-listed "global" functionality. Here
 the example is much like before, however only restricting paths prefixed with
 "/api":
 
-{% highlight js %}
+```js
   app.all('/api/*', requireAuthentication);
-{% endhighlight %}
+```

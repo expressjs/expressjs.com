@@ -2,8 +2,8 @@
 
 Set setting `name` to `false`.
 
-{% highlight js %}
+```js
 app.disable('trust proxy');
 app.get('trust proxy');
 // => false
-{% endhighlight %}
+```

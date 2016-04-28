@@ -12,13 +12,13 @@ Use the application generator tool, `express-generator`, to quickly create an ap
 
 Install `express-generator` with the following command:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ npm install express-generator -g
-</code></pre>
+```
 
 Display the command options with the `-h` option:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ express -h
 
   Usage: express [options] [dir]
@@ -33,11 +33,11 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code></pre>
+```
 
 For example, the following creates an Express app named _myapp_ in the current working directory:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ express myapp
 
    create : myapp
@@ -57,32 +57,32 @@ $ express myapp
    create : myapp/views/error.jade
    create : myapp/bin
    create : myapp/bin/www
-</code></pre>
+```
 
 Then install dependencies:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ cd myapp
 $ npm install
-</code></pre>
+```
 
 On MacOS or Linux, run the app with this command:
 
-<pre><code class="language-sh" translate="no">
+```sh
 $ DEBUG=myapp:* npm start
-</code></pre>
+```
 
 On Windows, use this command:
 
-<pre><code class="language-sh" translate="no">
+```sh
 > set DEBUG=myapp:* & npm start
-</code></pre>
+```
 
 Then load `http://localhost:3000/` in your browser to access the app.
 
 The generated app has the following directory structure:
 
-<pre><code class="language-sh" translate="no">
+```sh
 .
 ├── app.js
 ├── bin
@@ -102,7 +102,7 @@ The generated app has the following directory structure:
     └── layout.jade
 
 7 directories, 9 files
-</code></pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.

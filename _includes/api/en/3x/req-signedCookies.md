@@ -8,8 +8,8 @@ Note that signing a cookie does not make it "hidden" or encrypted; this simply
 prevents tampering (because the secret used to sign is private). If no signed
 cookies are sent, it defaults to `{}`.
 
-{% highlight js %}
+```js
 // Cookie: user=tobi.CP7AWaXDfAKIRfH49dQzKJx7sKzzSoPq7/AcBBRVwlI3
 req.signedCookies.user
 // => "tobi"
-{% endhighlight %}
+```

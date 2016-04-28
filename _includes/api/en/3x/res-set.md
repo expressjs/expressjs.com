@@ -2,7 +2,7 @@
 
 Set header `field` to `value`, or pass an object to set multiple fields at once.
 
-{% highlight js %}
+```js
 res.set('Content-Type', 'text/plain');
 
 res.set({
@@ -10,6 +10,6 @@ res.set({
   'Content-Length': '123',
   'ETag': '12345'
 });
-{% endhighlight %}
+```
 
 Aliased as `res.header(field, [value])`.

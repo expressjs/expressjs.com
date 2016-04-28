@@ -3,7 +3,7 @@
 Check if the incoming request contains the "Content-Type"
 header field, and it matches the give mime `type`.
 
-{% highlight js %}
+```js
 // With Content-Type: text/html; charset=utf-8
 req.is('html');
 req.is('text/html');
@@ -18,4 +18,4 @@ req.is('application/*');
 
 req.is('html');
 // => false
-{% endhighlight %}
+```
