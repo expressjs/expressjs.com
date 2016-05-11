@@ -50,38 +50,8 @@ The default GitHub Pages syntax highlighting has been disabled in `_config.yml t
 
 Feel free to make changes to the template files or the document files. The supporting docs are located in their respective directories, and the API docs are located under the `_includes` directory.
 
+Please see the [Contributors' Guide](CONTRIBUTING.md) for more information on contributing to the documentation, including information on contributing translations.
+
 ## Why use Jekyll instead of an Express-based solution?
 
 Jekyll comes built-in with GitHub Pages. Since we are already using GitHub Pages to host the website, it makes sense to leverage the capabilities it provides. It's all about using the right tool, for the right job, under the right circumstances.
-
-## How do I help translate the docs to another language?
-
-**IMPORTANT:** We have professional translations of the Express documentation into:
-- German
-- French
-- Italian
-- Spanish
-- Brazilian Portuguese
-- Japanese
-- Simplified Chinese
-- Traditional Chinese
-- Russian
-- Korean
-
-Therefore we can no longer accept community translations for these languages, except for corrections
-to the existing translations. 
-
-We welcome contributions of translations into other languages, following the procedure below.
-
-Follow these steps:
-
-0. Clone the [Express repository](https://github.com/strongloop/expressjs.com)
-1. Create a directory for the language of your choice using its [ISO 639-1 code](http://www.loc.gov/standards/iso639-2/php/code_list.php) as its name.
-2. Copy `index.md`, `api.md`, `starter/`, `guide/`, `advanced/`, `resources/`, `4x/`, and `3x/`, to the language directory.
-3. Remove the link to 2.x docs from the "API Reference" menu.
-4. Update the `lang` variable in the copied markdown files.
-5. Update the `title` variable in the copied markdown files.
-6. Create the header, footer, notice, and announcement file for the language in the `_includes/` directory, in the respective directories, and make necessary edits to the contents.
-7. Create the announcement file for the language in the `_includes/` directory.
-8. Create a copy of the `_includes/api/en` and rename it according to the language code.
-9. Make sure to append `/{{ page.lang }}` to all the links within the site.
