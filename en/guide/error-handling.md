@@ -109,7 +109,7 @@ Calls to `next()` and `next(err)` indicate that the current handler is complete 
 
 ## The Default Error Handler
 
-Express comes with an in-built error handler, which takes care of any errors that might be encountered in the app. This default error-handling middleware function is added at the end of the middleware function stack.
+Express comes with a built-in error handler, which takes care of any errors that might be encountered in the app. This default error-handling middleware function is added at the end of the middleware function stack.
 
 If you pass an error to `next()` and you do not handle it in
 an error handler, it will be handled by the built-in error handler; the error will be written to the client with the
