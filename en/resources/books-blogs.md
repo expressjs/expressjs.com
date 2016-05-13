@@ -43,6 +43,7 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 - [Codeforgeek Blog: Express category](http://codeforgeek.com/code/nodejs/express/)
 - [Node-tricks Blog: Express category](http://node-tricks.com/category/express/)
 - [Baboon Blog: Express category](http://www.baboon.ir/tutorials/expressjs/) (Persian language)
+- [Techforgeek Blog: Express category](http://techforgeek.com/expressjs/)
 
 ### Add your blog here!
 
