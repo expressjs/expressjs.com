@@ -7,7 +7,7 @@ lang: uk
 
 # Встановлення
 
-Припускаючи що у вас вже встановлено [Node.js](https://nodejs.org/), створіть робочу директорію, де буде ваш застосунок:
+Припускаючи, що у вас вже встановлено [Node.js](https://nodejs.org/), створіть робочу директорію, де буде ваш застосунок:
 
 <pre><code class="language-sh" translate="no">
 $ mkdir myapp
@@ -37,7 +37,7 @@ entry point: (index.js)
 $ npm install express --save
 </code></pre>
 
-Щоб встановити Express без додавання його в список залежностій, не передавайте параметр `--save`:
+Щоб встановити Express без додавання його в список залежностей, не передавайте параметр `--save`:
 
 <pre><code class="language-sh" translate="no">
 $ npm install express
