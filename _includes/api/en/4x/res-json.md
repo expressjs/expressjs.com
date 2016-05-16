@@ -1,8 +1,10 @@
 <h3 id='res.json'>res.json([body])</h3>
 
-Sends a JSON response. This method sends a response with the provided argument stringified as json with the correct content-type.
-This method accepts any JSON type as the parameter (object, array, string, boolean number).
-However, you can use it to convert other values to JSON, such as `null`, and `undefined`.
+Sends a JSON response. This method sends a response (with the correct content-type) that is the parameter converted to a 
+JSON string using [JSON.stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
+
+The parameter can be any JSON type, including object, array, string, Boolean, or number,
+and you can also use it to convert other values to JSON, such as `null`, and `undefined` 
 (although these are technically not valid JSON).
 
 ```js
