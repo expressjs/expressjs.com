@@ -104,9 +104,9 @@ to the TC and the TC uses its standard consensus seeking process to evaluate whe
 not to add this new member. Members who do not participate consistently at the level of 
 a majority of the other members are expected to resign.
 
-## Express collaborator guide
+## Collaborator's guide
 
-> NOTE: This is copied from the [Collaborator guide in the repo](https://github.com/expressjs/express/blob/master/Collaborator-Guide.md).
+> NOTE: This is copied from the [Collaborator guide in the Express  repository](https://github.com/expressjs/express/blob/master/Collaborator-Guide.md).
 
 ### Website Issues
 
@@ -145,6 +145,8 @@ Things that will help get your question issue looked at:
 If you post a question and do not outline the above items or make it easy for us to understand and reproduce your issue, it will be closed.
 
 ## Security Policies and Procedures
+
+> NOTE: This is copied from [Security Policies and Procedures in the Express  repository](https://github.com/expressjs/express/blob/master/Security.md).
 
 This document outlines security procedures and general policies for the Express
 project.
