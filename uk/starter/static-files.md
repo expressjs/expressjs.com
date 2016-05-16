@@ -7,15 +7,15 @@ lang: uk
 
 # Обробка статичних файлів в Express
 
-To serve static files such as images, CSS files, and JavaScript files, use the `express.static` built-in middleware function in Express.
+Для обробки статичних файлів, таких як зображення, CSS файли, та JavaScript файли, використовуйте вбудовану у Express функцію `express.static`.
 
-Pass the name of the directory that contains the static assets to the `express.static` middleware function to start serving the files directly. For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
+Передайте ім'я директорії яка містить статичні файли у `express.static` щоб розпочати отримувати їх напряму. Наприклад, використовуйте цей код для того, щоб обробляти статичні файли у директорії з іменем `public`:
 
 <pre><code class="language-javascript" translate="no">
 app.use(express.static('public'));
 </code></pre>
 
-Now, you can load the files that are in the `public` directory:
+Тепер ви можете підключити файли з директорії `public`:
 
 <pre class="plain-text"><code class="plain-text" translate="no">
 http://localhost:3000/images/kitten.jpg
@@ -29,22 +29,22 @@ http://localhost:3000/hello.html
 Express looks up the files relative to the static directory, so the name of the static directory is not part of the URL.
 </div>
 
-To use multiple static assets directories, call the `express.static` middleware function multiple times:
+Щоб використовувати декілька директорій для статичних файлів, викличіть функцію `express.static`  декілька разів:
 
 <pre><code class="language-javascript" translate="no">
 app.use(express.static('public'));
 app.use(express.static('files'));
 </code></pre>
 
-Express looks up the files in the order in which you set the static directories with the `express.static` middleware function.
+Express шукає файли в тому порядку, в якому ви викликали функцію `express.static` та передали їй шлях до папки як аргумент.
 
-To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/{{ page.lang }}/4x/api.html#app.use) for the static directory, as shown below:
+Щоб створити віртуальний префікс для шляху (якщо шлях насправді відсутній у файловій системі) для файлів які обробляються функцією `express.static`, [та встановити власний маршрут](/{{ page.lang }}/4x/api.html#app.use) зробіть як показано нище:
 
 <pre><code class="language-javascript" translate="no">
 app.use('/static', express.static('public'));
 </code></pre>
 
-Now, you can load the files that are in the `public` directory from the `/static` path prefix.
+Тепер ви можете підключити файли, які знаходяться у директорії `public` з використанням префіксу `/static`.
 
 <pre class="plain-text"><code class="plain-text" translate="no">
 http://localhost:3000/static/images/kitten.jpg
@@ -54,7 +54,7 @@ http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
 </code></pre>
 
-However, the path that you provide to the `express.static` function is relative to the directory from where you launch your `node` process. If you run the express app from another directory, it's safer to use the absolute path of the directory that you want to serve:
+Проте, шлях який ви передаєте у функцію `express.static` є відносним до директорії з якої ви запускаєте ваш `node` процес. Якщо ви запускаєете додаток з іншої директорії, більш безпечним є вказувати абсолютний шлях:
 
 <pre><code class="language-javascript" translate="no">
 app.use('/static', express.static(__dirname + '/public'));
