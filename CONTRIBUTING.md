@@ -4,11 +4,26 @@ This repository is only for issues related to the website [http://expressjs.com]
 
 Feel free to make changes to the template files or the document files. The supporting docs are located in their respective directories, and the API docs are located under the `_includes` directory.
 
-## Help translate the docs to other languages
+## Contributing translations
 
-We are looking for volunteers to help translate the Express docs to other languages.
+**IMPORTANT:** We have professional translations of the Express documentation into:
+- German
+- French
+- Italian
+- Spanish
+- Brazilian Portuguese
+- Japanese
+- Simplified Chinese
+- Traditional Chinese
+- Russian
+- Korean
 
-Interested? Please follow these steps:
+Therefore we can no longer accept community translations for these languages, except for corrections
+to the existing translations. 
+
+We welcome contributions of translations into other languages, following the procedure below.
+
+Follow these steps:
 
 0. Clone the [Express repository](https://github.com/strongloop/expressjs.com)
 1. Create a directory for the language of your choice using its [ISO 639-1 code](http://www.loc.gov/standards/iso639-2/php/code_list.php) as its name.
@@ -20,21 +35,3 @@ Interested? Please follow these steps:
 7. Create the announcement file for the language in the `_includes/` directory.
 8. Create a copy of the `_includes/api/en` and rename it according to the language code.
 9. Make sure to append `/{{ page.lang }}` to all the links within the site.
-
-## Local Setup
-
-GitHub Pages websites being served through [Jekyll](http://jekyllrb.com/), you will need to replicate the setup on your local machine to preview the website locally.
-
-[Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) and [Jekyll](http://jekyllrb.com/docs/installation/) on your system, if you don't have them already.
-
-Once installed, `cd` to the repository directory and run Jekyll using the following command:
-
-```
-$ jekyll s
-```
-
-Then, load [http://localhost:4000/](http://localhost:4000/) on your browser.
-
-Jekyll uses a variant of Markdown known as [Kramdown](http://kramdown.gettalong.org/quickref.html), read up the docs if you need to go beyond basic Markdown in the doc files.
-
-To understand the template system used by Jekyll, read up the [Liquid template engine docs](http://liquidmarkup.org/).
