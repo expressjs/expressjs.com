@@ -194,6 +194,7 @@ functions that were previously included with Express' are now in separate module
 The only built-in middleware function in Express is `express.static`. This function is based on [serve-static](https://github.com/expressjs/serve-static), and is responsible for serving static assets such as HTML files, images, and so on.
 
 The function signature is:
+
 ```js
 express.static(root, [options])
 ```
