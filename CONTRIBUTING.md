@@ -1,6 +1,6 @@
 ## Contributing to expressjs.com
 
-This repository is only for issues related to the website [http://expressjs.com](http://expressjs.com). For issues related to Express, the framework, go to [https://github.com/strongloop/express](https://github.com/strongloop/express).
+This repository is only for issues related to the website [http://expressjs.com](http://expressjs.com). For issues related to Express, the framework, go to [https://github.com/expressjs/express](https://github.com/expressjs/express).
 
 Feel free to make changes to the template files or the document files. The supporting docs are located in their respective directories, and the API docs are located under the `_includes` directory.
 
@@ -19,13 +19,13 @@ Feel free to make changes to the template files or the document files. The suppo
 - Korean
 
 Therefore we can no longer accept community translations for these languages, except for corrections
-to the existing translations. 
+to the existing translations.
 
 We welcome contributions of translations into other languages, following the procedure below.
 
 Follow these steps:
 
-0. Clone the [Express repository](https://github.com/strongloop/expressjs.com)
+0. Clone the [`expressjs.com` repository](https://github.com/expressjs/expressjs.com)
 1. Create a directory for the language of your choice using its [ISO 639-1 code](http://www.loc.gov/standards/iso639-2/php/code_list.php) as its name.
 2. Copy `index.md`, `api.md`, `starter/`, `guide/`, `advanced/`, `resources/`, `4x/`, and `3x/`, to the language directory.
 3. Remove the link to 2.x docs from the "API Reference" menu.
