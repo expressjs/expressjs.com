@@ -6,11 +6,11 @@ Optional parameters:
 - `locals`, an object whose properties define local variables for the view.
 - `callback`, a callback function. If provided, the method returns both the possible error and rendered string, but does not perform an automated response. When an error occurs, the method invokes `next(err)` internally.
 
-The `view` argument is a string of the file path pointing to the view file to render. This can be an absolute path, or a path relative to the `views` setting. If the path does not contain a file extension, then the value of the `view engine` setting is used as the file extension. If the path does contain a file extension, than that file extension be will `require()`d and the loaded module's `__express` function will be used to render it.
+The `view` argument is a string that is the file path of the view file to render. This can be an absolute path, or a path relative to the `views` setting. If the path does not contain a file extension, then the `view engine` setting determines the file extension. If the path does contain a file extension, then Express will load the module for the specified template engine (via `require()`) and render it using the loaded module's `__express` function.
 
 For more information, see [Using template engines with Express](/guide/using-template-engines.html).
 
-**NOTE:** The `view` argument performs file system operations like reading a file from disk and evaluating Node.js modules, and as such should not contain user-controlled input.
+**NOTE:** The `view` argument performs file system operations like reading a file from disk and evaluating Node.js modules, and as so for security reasons should not contain input from the end-user.
 
 <div class="doc-box doc-notice" markdown="1">
 The local variable `cache` enables view caching. Set it to `true`,
