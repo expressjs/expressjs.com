@@ -24,6 +24,10 @@ The `app` object has methods for
 It also has settings (properties) that affect how the application behaves;
 for more information, see [Application settings](#app.settings.table).
 
+<div class="doc-box doc-info" markdown="1">
+The Express application object can be referred from the [request object](#req) and the [request object](#res) as `req.app`, and `res.app`, respectvely.
+</div>
+
 <h3 id='app.properties'>Properties</h3>
 
 <section markdown="1">
