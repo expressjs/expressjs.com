@@ -258,14 +258,6 @@ a {
   font-size: 12px;
 }
 
-#sponsorship, #sponsorship a {
-  color: #7DBD33;
-}
-
-#sponsorship h3 {
-  color: #08592B;
-}
-
 header {
   position: fixed;
   top: 0;
@@ -507,7 +499,7 @@ html[xmlns] .clearfix {
 
 /* Non-English pages use pre and code tags for code blocks */
 .non-en-doc .page pre[class*="language-"] {
-  padding-top: 0 !important;  
+  padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
 
@@ -607,10 +599,6 @@ footer {
   padding-bottom: 4px;
 }
 
-#sponsor {
-  background-size: 20px 16px;
-  padding-left: 25px;
-}
 
 #fork {
   background-image: url(/images/fork-icon.png);
@@ -619,10 +607,6 @@ footer {
 }
 
 @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-devicepixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx) {
-
-  #sponsor {
-    background-image: url(/images/strongloop-logo@2x.png);
-  }
 
   #fork {
     background-image: url(/images/fork-icon@2x.png);
@@ -1012,10 +996,6 @@ h2 a {
 
   #footer-content div {
     clear: both;
-  }
-
-  #sponsor {
-    margin-top: 30px;
   }
 
   #fork {
