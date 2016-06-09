@@ -25,7 +25,6 @@ Here are some things you can do in your code to improve your application's perfo
 
 * Use gzip compression
 * Don't use synchronous functions
-* Use middleware to serve static files
 * Do logging correctly
 * Handle exceptions properly
 
@@ -50,13 +49,6 @@ Although Node and many modules provide synchronous and asynchronous versions of 
 
 If you are using Node.js 4.0+ or io.js 2.1.0+, you can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Of course, you wouldn't want to actually use this in production, but rather to ensure that your code is ready for production. See the [Weekly update for io.js 2.1.0](https://nodejs.org/en/blog/weekly-updates/weekly-update.2015-05-22/#2-1-0) for more information.
 
-### Use middleware to serve static files
-
-In development, you can use [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile) to serve static files. But don't do this in production, because this function has to read from the file system for every file request, so it will encounter significant latency and affect the overall performance of the app. Note that `res.sendFile()` is _not_ implemented with the [sendfile](http://linux.die.net/man/2/sendfile) system call, which would make it far more efficient.
-
-Instead, use [serve-static](https://www.npmjs.com/package/serve-static) middleware (or something equivalent), that is optimized for serving files for Express apps.
-
-An even better option is to use a reverse proxy to serve static files; see [Use a reverse proxy](#proxy) for more information.
 
 ### Do logging correctly
 
