@@ -60,7 +60,9 @@ function logErrors(err, req, res, next) {
 }
 ```
 
-Also in this example, `clientErrorHandler` is defined as follows; in this case, the error is explicitly passed along to the next one:
+Also in this example, `clientErrorHandler` is defined as follows; in this case, the error is explicitly passed along to the next one.
+
+Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise those requests will "hang" and will not be eligible for garbage collection. 
 
 ```js
 function clientErrorHandler(err, req, res, next) {
