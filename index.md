@@ -40,15 +40,13 @@ redirect_from: "/en/index.html"
 
 </section>
 
+<section id="announcements">
+  {% include announcement/announcement-{{ page.lang }}.md %}
+</section>
+
 <section id="doc-langs" markdown="1">
 Documentation translations provided by <a href="http://strongloop.com">StrongLoop/IBM</a>:
 [French](/fr/), [German](/de/), [Spanish](/es/), [Italian](/it/), [Japanese](/ja/), [Russian](/ru/), [Chinese](/zh-cn/), [Traditional Chinese](/zh-tw/), [Korean](/ko/), [Portuguese](/pt-br/).
 
 Community translation available for: [Slovak](/sk), [Ukrainian](/uk) and [Uzbek](/uz/).
 </section>
-
-<!--
-<section id="announcements">
-  {% include announcement/announcement-{{ page.lang }}.md %}
-</section>
--->
