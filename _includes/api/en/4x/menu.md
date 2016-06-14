@@ -122,6 +122,8 @@
             </li>
             <li><a href="#req.param">req.param()</a>
             </li>
+            <li><a href="#req.range">req.range()</a>
+            </li>
         </ul>
     </li>
     <li id="res-api"><a href="#res">Response</a>

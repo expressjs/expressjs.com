@@ -145,3 +145,8 @@ or [pez](https://www.npmjs.com/package/pez).
 <section markdown="1">
   {% include api/en/4x/req-param.md %}
 </section>
+
+<section markdown="1">
+  {% include api/en/4x/req-range.md %}
+</section>
+
