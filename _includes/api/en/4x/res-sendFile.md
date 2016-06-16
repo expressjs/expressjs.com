@@ -1,7 +1,7 @@
 <h3 id='res.sendFile'>res.sendFile(path [, options] [, fn])</h3>
 
 <div class="doc-box doc-info" markdown="1">
-`res.sendFile()` is supported by Express v4.8.0 onwards
+`res.sendFile()` is supported by Express v4.8.0 onwards.
 </div>
 
 Transfers the file at the given `path`. Sets the `Content-Type` response HTTP header field
@@ -19,6 +19,8 @@ The following table provides details on the `options` parameter.
 | `lastModified`  | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.| Enabled | 4.9.0+ |
 | `headers`       | Object containing HTTP headers to serve with the file.|  |  |
 | `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" | &nbsp; |
+| `acceptRanges`  | Enable or disable accepting ranged requests. | `true` | 4.14+ |
+| `cacheControl`  | Enable or disable setting `Cache-Control` response header.| `true` | 4.14+ |
 
 </div>
 
