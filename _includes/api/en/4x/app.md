@@ -25,7 +25,7 @@ It also has settings (properties) that affect how the application behaves;
 for more information, see [Application settings](#app.settings.table).
 
 <div class="doc-box doc-info" markdown="1">
-The Express application object can be referred from the [request object](#req) and the [request object](#res) as `req.app`, and `res.app`, respectvely.
+The Express application object can be referred from the [request object](#req) and the [response object](#res) as `req.app`, and `res.app`, respectively.
 </div>
 
 <h3 id='app.properties'>Properties</h3>
@@ -121,4 +121,3 @@ The Express application object can be referred from the [request object](#req) a
 <section markdown="1">
   {% include api/en/4x/app-use.md %}
 </section>
-
