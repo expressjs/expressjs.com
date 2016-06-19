@@ -139,3 +139,6 @@ function errorHandler(err, req, res, next) {
   res.render('error', { error: err });
 }
 ```
+
+Note that the default error handler can get triggered if you call `next()` with an error 
+in your code more than once, even if custom error handling middleware is in place.
