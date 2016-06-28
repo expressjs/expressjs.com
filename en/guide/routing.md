@@ -63,6 +63,8 @@ app.all('/secret', function (req, res, next) {
 
 Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings, string patterns, or regular expressions.
 
+The characters `?`, `+`, `*`, and `()` are subsets of their regular expression counterparts. The hyphen (`-`) and the dot (`.`) are interpreted literally by string-based paths.
+
 <div class="doc-box doc-info" markdown="1">
   Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths; see the path-to-regexp documentation for all the possibilities in defining route paths. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) is a handy tool for testing basic Express routes, although it does not support pattern matching.
 </div>
@@ -131,10 +133,6 @@ app.get('/ab(cd)?e', function(req, res) {
 });
 ```
 
-<div class="doc-box doc-info" markdown="1">
-The characters ?, +, *, and () are subsets of their regular expression counterparts. The hyphen (-) and the dot (.) are interpreted literally by string-based paths.
-</div>
-
 Examples of route paths based on regular expressions:
 
 This route path will match anything with an "a" in the route name.
@@ -152,6 +150,42 @@ app.get(/.*fly$/, function(req, res) {
   res.send('/.*fly$/');
 });
 ```
+
+<h3 id="route-parameters">Route parameters</h3>
+
+Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
+
+```
+Route path: /users/:userId/books/:bookId
+Request URL: http://localhost:3000/users/34/books/8989
+req.params: { "userId": "34", "bookId": "8989" }
+```
+
+To define routes with route parameters, simply specify the route parameters in the path of the route as shown below.
+
+```js
+app.get('/users/:userId/books/:bookId', function(req, res) {
+  res.send(req.params);
+});
+```
+
+Since the hyphen (`-`) and the dot (`.`) are interpreted literally, they can be used along with route parameters for useful purposes.
+
+```
+Route path: /flights/:from-:to
+Request URL: http://localhost:3000/flights/LAX-SFO
+req.params: { "from": "LAX", "to": "SFO" }
+```
+
+```
+Route path: /plantae/:genus.:species
+Request URL: http://localhost:3000/plantae/Prunus.persica
+req.params: { "genus": "Prunus", "species": "persica" }
+```
+
+<div class="doc-box doc-notice" markdown="1">
+The name of route parameters must be made up of "word characters" ([A-Za-z0-9_]).
+</div>
 
 <h2 id="route-handlers">Route handlers</h2>
 
