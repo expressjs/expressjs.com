@@ -13,3 +13,4 @@ Several popular Node.js frameworks are built on Express:
 - **[Sails](http://sailsjs.org/)**: MVC framework for Node.js for building practical, production-ready apps.
 - **[Kraken](http://krakenjs.com/)**: Secure and scalable layer that extends Express by providing structure and convention.
 - **[MEAN](http://mean.io/)**: Opinionated fullstack JavaScript framework that simplifies and accelerates web application development.
+- **[Feathers](http://feathersjs.com)**: Build prototypes in minutes and production ready real-time apps in days.
