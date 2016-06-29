@@ -9,6 +9,7 @@ lang: en
 
 Several popular Node.js frameworks are built on Express:
 
+- **[LEAN-STACK](http://lean-stack.io)**: The Pure JavaScript Stack.
 - **[LoopBack](http://loopback.io)**: Highly-extensible, open-source Node.js framework for quickly creating dynamic end-to-end REST APIs.
 - **[Sails](http://sailsjs.org/)**: MVC framework for Node.js for building practical, production-ready apps.
 - **[Kraken](http://krakenjs.com/)**: Secure and scalable layer that extends Express by providing structure and convention.
