@@ -1028,3 +1028,9 @@ h2 a {
 #mw-fig-imgcell {margin: 0; padding: 0px; border: 0; width: 410px;}
 #mw-fig-img {margin: 0px; padding: 0px; width: 410px; height: 308px;}
 .mw-fig-callouts {margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;}
+
+#license { 
+  display: block;
+  text-align: center;
+  margin: 0 auto 0 auto;
+}
