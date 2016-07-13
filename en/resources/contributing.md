@@ -11,9 +11,16 @@ redirect_from: "/resources/community.html"
 Express and the other projects in the [expressjs organization on GitHub](https://github.com/expressjs) are projects of the [Node.js Foundation](https://nodejs.org/foundation/). 
 These projects are governed under the general policies and guidelines of the Node.js Foundation along with the additional guidelines below. 
 
+* [Technical committee](#technical-committee)
 * [Community contributing guide](#community-contributing-guide)
 * [Collaborator's guide](#collaborators-guide)
 * [Security policies and procedures](#security-policies-and-procedures)
+
+## Technical committee
+
+The Express technical committee meets online every two weeks to discuss development and maintenance of Express, and other issues relevant to the Express project.
+Each meeting is typically announced in an [expressjs/discussions issue](https://github.com/expressjs/discussions/issues) with a link to the Google Hangout, which is 
+open to all observers. 
 
 ## Community contributing guide
 
