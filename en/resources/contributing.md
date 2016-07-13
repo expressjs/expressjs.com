@@ -19,8 +19,21 @@ These projects are governed under the general policies and guidelines of the Nod
 ## Technical committee
 
 The Express technical committee meets online every two weeks to discuss development and maintenance of Express, and other issues relevant to the Express project.
-Each meeting is typically announced in an [expressjs/discussions issue](https://github.com/expressjs/discussions/issues) with a link to the Google Hangout, which is 
-open to all observers. 
+Each meeting is typically announced in an [expressjs/discussions issue](https://github.com/expressjs/discussions/issues) with a link to the Google Hangout, which is open to all observers. 
+
+Members of the Express technical committee are:
+
+- [@blakeembrey](https://github.com/blakeembrey) - Blake Embrey  
+- [@crandmck](https://github.com/crandmck) - Rand McKinney
+- [@dougwilson](https://github.com/dougwilson) - Douglas Wilson
+- [@Fishrock123](https://github.com/Fishrock123) - Jeremiah Senkpiel
+- [@hacksparrow](https://github.com/hacksparrow) - Hage Yaapa
+- [@jasnell](https://github.com/jasnell) - James M Snell
+- [@jonathanong](https://github.com/jonathanong) jongleberry
+- [@LinusU](https://github.com/LinusU) - Linus Unnebäck
+- [@mikeal](https://github.com/mikeal) - Mikeal Rogers
+- [@niftylettuce](https://github.com/niftylettuce) - niftylettuce
+- [@troygoode](https://github.com/troygoode) - Troy Goode
 
 ## Community contributing guide
 
