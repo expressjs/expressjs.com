@@ -32,9 +32,9 @@ lang: uz
             <h3>Ishlab chiqaruvchanlik</h3> Express Nodedagi siz bilgan va sevgan imkoniyatlarni cheklamagan holda web-dasturlardagi eng asosiy imkoniyatlar bilan ta'minlab beradi.
         </div>
 
-        <div id="sponsorship">
-            <a href="http://loopback.io/"><h3>LoopBack</h3> Express freymvork asosida model-driven dasturlar yaratish. <br/>loopback.io haqida batafsil ma'lumot.</a>
-        </div>
+ 		<div id="frameworks">
+          <h3>Freymvorklar</h3> Express asosida yaratilgan ko'plab <a href="en/resources/frameworks.html">mashxur freymvorklar</a> .
+      </div>
 
     </div>
 </section>
