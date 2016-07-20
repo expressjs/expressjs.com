@@ -9,4 +9,6 @@ req.cookies.name
 // => "tj"
 ```
 
+If the cookie has been signed, you have to use [req.signedCookies](#req.signedCookies).
+
 For more information, issues, or concerns, see [cookie-parser](https://github.com/expressjs/cookie-parser).
