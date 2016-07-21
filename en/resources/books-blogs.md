@@ -14,9 +14,9 @@ redirect_from: "/resources/books-blogs.html"
 
 Here are a few of the many books on Express:
 
+- **[Express.js in Action](http://www.manning.com/hahn/)**,
+Manning Publications, April 2016.
  - **[Getting MEAN with Mongo, Express, Angular, and Node](http://www.manning.com/sholmes/)**,
-Manning Publications, early 2015.
- - **[Express.js in Action](http://www.manning.com/hahn/)**,
 Manning Publications, early 2015.
  - **[Mastering Web Application Development with Express](https://www.packtpub.com/web-development/mastering-web-application-development-express-raw)**,
 Packt Publishing, September 2014.
