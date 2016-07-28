@@ -1,16 +1,8 @@
 <ul>
   <li>
-    <p><time datetime="2015-05-15 19:00">May 5, 2015</time> Ut enim ad minim veniam</p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    <p class="announcement-title"><time datetime="2016-06-16 19:00">16-iyun, 2016</time> Express 4.14.0 reliz qilindi</p>
+    <p markdown="1">
+    Express 4.14.0 da ko'plab xatolar to'g'irlandi, xavfsizlikni ta'minlash uchun o'zgarishlar kiritildi, ishlash unumdorligi oshirildi va boshqa yangi imkoniyatlar qo'shildi. To'liq ma'lumot uchun [4.14.0 changelog](/{{ page.lang }}/changelog/4x.html#4.14.0).
     </p>
   </li>
-
-  <li>
-    <p><time datetime="2015-05-15 19:00">May 5, 2015</time> Excepteur sint occaecat cupidatat non proident</p>
-    <p>
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-  </li>
-
 </ul>
