@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
+<html lang="{{ page.lang }}">
+
+  {% include head.html %}
+
+  {% if page.lang == 'en' %}
+  <body class="en-doc">
+  {% else %}
+  <body class="non-en-doc">
+  {% endif %}
+
+    <section class="page content">
+
+      {% include header/header-{{ page.lang }}.html %}
+
+      <div id="overlay"></div>
+
+      {% if page.lang != 'en' %}
+        <div id="i18n-notice-box" class="doc-box doc-warn">
+          {% include i18n-notice.html %}
+        </div>
+      {% endif %}
+
+      {% capture readme %}{% include middleware/{{page.name}} %}{% endcapture %}
+      {{ readme | markdownify }}
+
+    </section>
+
+    {% include footer/footer-{{ page.lang }}.html %}
+
+  </body>
+
+</html>
