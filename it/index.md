@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Express - Framework dell'applicazione web Node.js
+title: Express - Framework per applicazioni web Node.js
 menu: home
 lang: it
 ---
@@ -25,7 +25,7 @@ lang: it
 
   <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h3>Applicazioni web</h3> Express è un framework dell'applicazione web Node.js flessibile e leggero che fornisce una serie di funzioni avanzate per le applicazioni web e per dispositivi mobili.
+          <h3>Applicazioni web</h3> Express è un framework per applicazioni web Node.js flessibile e leggero che fornisce una serie di funzioni avanzate per le applicazioni web e per dispositivi mobili.
       </div>
 
       <div id="apis">
@@ -33,7 +33,7 @@ lang: it
       </div>
 
       <div id="performance">
-          <h3>Prestazioni</h3> Express fornisce una breve illustrazione delle funzioni per l'applicazione web fondamentali, senza mettere in secondo piano le funzioni Node.js che si conoscono e che sono apprezzate.
+          <h3>Prestazioni</h3> Express fornisce uno strato sottile di funzionalità di base per le applicazioni web, senza nascondere le funzioni Node.js che conosci e ami.
       </div>
 
       <div id="sponsorship">
