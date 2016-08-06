@@ -18,7 +18,7 @@ app.all('*', requireAuthentication, loadUser);
 Or the equivalent:
 
 ```js
-app.all('*', requireAuthentication)
+app.all('*', requireAuthentication);
 app.all('*', loadUser);
 ```
 
