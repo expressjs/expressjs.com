@@ -10,14 +10,14 @@ redirect_from: "/guide/migrating-4.html"
 
 <h2 id="overview">Overview</h2>
 
-Express 4 is a breaking change from Express 3, so. That means an existing Express 3 app will not work if you update the Express version in its dependencies.
+Express 4 is a breaking change from Express 3. That means an existing Express 3 app will _not_ work if you update the Express version in its dependencies.
 
 This article covers:
 
 <ul class="doclist">
-  <li><a href="#changes">Changes in Express 4.</a></li>
+  <li><a href="#changes">Changes in Express 4</a>.</li>
   <li><a href="#example-migration">An example</a> of migrating an Express 3 app to Express 4.</li>
-  <li><a href="#app-gen">Upgrading to the Express 4 app generator.</a></li>
+  <li><a href="#app-gen">Upgrading to the Express 4 app generator</a>.</li>
 </ul>
 
 <h2 id="changes">Changes in Express 4</h2>
