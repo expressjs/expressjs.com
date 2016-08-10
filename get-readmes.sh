@@ -1,62 +1,147 @@
-#!/bin/bash
-# Get repo names in expressjs org
-# curl https://api.github.com/orgs/expressjs/repos | grep full_name > _includes/middleware/repos.txt
+#!/bin/sh
 
-curl https://raw.githubusercontent.com/expressjs/express-messages/master/Readme.md > _includes/middleware/express-messages.md
-curl https://raw.githubusercontent.com/expressjs/express-resource/master/Readme.md > _includes/middleware/express-resource.md
-curl https://raw.githubusercontent.com/expressjs/express-expose/master/Readme.md > _includes/middleware/express-expose.md
-curl https://raw.githubusercontent.com/expressjs/express-params/master/Readme.md > _includes/middleware/express-params.md
-curl https://raw.githubusercontent.com/expressjs/connect-render/master/README.md > _includes/middleware/connect-render.md
-curl https://raw.githubusercontent.com/expressjs/urlrouter/master/README.md > _includes/middleware/urlrouter.md
-curl https://raw.githubusercontent.com/expressjs/cors/master/README.md > _includes/middleware/cors.md
-curl https://raw.githubusercontent.com/expressjs/restful-router/master/README.md > _includes/middleware/restful-router.md
-curl https://raw.githubusercontent.com/expressjs/domain-middleware/master/README.md > _includes/middleware/domain-middleware.md
-curl https://raw.githubusercontent.com/expressjs/connect-markdown/master/README.md > _includes/middleware/connect-markdown.md
-curl https://raw.githubusercontent.com/expressjs/generator/master/README.md > _includes/middleware/generator.md
-curl https://raw.githubusercontent.com/expressjs/routification/master/README.md > _includes/middleware/routification.md
-curl https://raw.githubusercontent.com/expressjs/vhostess/master/README.md > _includes/middleware/vhostess.md
-curl https://raw.githubusercontent.com/expressjs/compression/master/README.md > _includes/middleware/compression.md
-curl https://raw.githubusercontent.com/expressjs/body-parser/master/README.md > _includes/middleware/body-parser.md
-curl https://raw.githubusercontent.com/expressjs/basic-auth-connect/master/README.md > _includes/middleware/basic-auth-connect.md
-curl https://raw.githubusercontent.com/expressjs/connect-rid/master/README.md > _includes/middleware/connect-rid.md
-curl https://raw.githubusercontent.com/expressjs/multer/master/README.md > _includes/middleware/multer.md
-curl https://raw.githubusercontent.com/expressjs/serve-favicon/master/README.md > _includes/middleware/serve-favicon.md
-curl https://raw.githubusercontent.com/expressjs/response-time/master/README.md > _includes/middleware/response-time.md
-curl https://raw.githubusercontent.com/expressjs/morgan/master/README.md > _includes/middleware/morgan.md
-curl https://raw.githubusercontent.com/expressjs/cookie-parser/master/README.md > _includes/middleware/cookie-parser.md
-curl https://raw.githubusercontent.com/expressjs/session/master/README.md > _includes/middleware/session.md
-curl https://raw.githubusercontent.com/expressjs/cookie-session/master/README.md > _includes/middleware/cookie-session.md
-curl https://raw.githubusercontent.com/expressjs/errorhandler/master/README.md > _includes/middleware/errorhandler.md
-curl https://raw.githubusercontent.com/expressjs/method-override/master/README.md > _includes/middleware/method-override.md
-curl https://raw.githubusercontent.com/expressjs/timeout/master/README.md > _includes/middleware/timeout.md
+# Get the version number of the latest release
+# curl -i https://api.github.com/repos/<org>/<repo>/releases/latest
+# Look for "tag_name": "1.15.2",
+# First argument is org/owner name
+# Second argument is repo name
 
-# Get repo names in jshttp org
-# curl https://api.github.com/orgs/jshttp/repos | grep full_name > _includes/middleware/jshttp-repos.txt
+#Lazy way to use GitHub auth.. put your username & password here and add -u USER_PWD to curl commands
+#USER_PWD=""
 
-curl https://raw.githubusercontent.com/jshttp/negotiator/master/README.md > _includes/middleware/negotiator.md
-curl https://raw.githubusercontent.com/jshttp/cookie/master/README.md > _includes/middleware/cookie.md
-curl https://raw.githubusercontent.com/jshttp/fresh/master/README.md > _includes/middleware/fresh.md
-curl https://raw.githubusercontent.com/jshttp/range-parser/master/README.md > _includes/middleware/range-parser.md
-curl https://raw.githubusercontent.com/jshttp/methods/master/README.md > _includes/middleware/methods.md
-curl https://raw.githubusercontent.com/jshttp/basic-auth/master/README.md > _includes/middleware/basic-auth.md
-curl https://raw.githubusercontent.com/jshttp/compressible/master/README.md > _includes/middleware/compressible.md
-curl https://raw.githubusercontent.com/jshttp/on-finished/master/README.md > _includes/middleware/on-finished.md
-curl https://raw.githubusercontent.com/jshttp/http-assert/master/readme.md > _includes/middleware/http-assert.md
-curl https://raw.githubusercontent.com/jshttp/accepts/master/README.md > _includes/middleware/accepts.md
-curl https://raw.githubusercontent.com/jshttp/type-is/master/README.md > _includes/middleware/type-is.md
-curl https://raw.githubusercontent.com/jshttp/statuses/master/README.md > _includes/middleware/statuses.md
-curl https://raw.githubusercontent.com/jshttp/mime-types/master/README.md > _includes/middleware/mime-types.md
-curl https://raw.githubusercontent.com/jshttp/proxy-addr/master/README.md > _includes/middleware/proxy-addr.md
-curl https://raw.githubusercontent.com/jshttp/style-guide/master/README.md > _includes/middleware/style-guide.md
-curl https://raw.githubusercontent.com/jshttp/on-headers/master/README.md > _includes/middleware/on-headers.md
-curl https://raw.githubusercontent.com/jshttp/vary/master/README.md > _includes/middleware/vary.md
-curl https://raw.githubusercontent.com/jshttp/media-typer/master/README.md > _includes/middleware/media-typer.md
-curl https://raw.githubusercontent.com/jshttp/etag/master/README.md > _includes/middleware/etag.md
-curl https://raw.githubusercontent.com/jshttp/mime-db/master/README.md > _includes/middleware/mime-db.md
-curl https://raw.githubusercontent.com/jshttp/http-utils/master/README.md > _includes/middleware/http-utils.md
-curl https://raw.githubusercontent.com/jshttp/spdy-push/master/README.md > _includes/middleware/spdy-push.md
-curl https://raw.githubusercontent.com/jshttp/http-push/master/README.md > _includes/middleware/http-push.md
-curl https://raw.githubusercontent.com/jshttp/http-errors/master/README.md > _includes/middleware/http-errors.md
-curl https://raw.githubusercontent.com/jshttp/content-disposition/master/README.md > _includes/middleware/content-disposition.md
-curl https://raw.githubusercontent.com/jshttp/forwarded/master/README.md > _includes/middleware/forwarded.md
-curl https://raw.githubusercontent.com/jshttp/content-type/master/README.md > _includes/middleware/content-type.md
+get_release_vers() {
+  echo "Getting version of latest release from " https://api.github.com/repos/$1/$2/releases/latest
+  VERS=$(curl -s -i https://api.github.com/repos/$1/$2/releases/latest | grep "tag_name")
+
+  if [ -z "$VERS" ]
+  then
+    echo "Latest release not found; Falling back to master"
+    VERS="master"
+  else
+    echo "Getting latest tagged release... "
+    VERS=${VERS%??}
+    VERS=${VERS:15}
+    echo "Latest release is" $VERS
+  fi
+
+  RELEASE_VERS=$VERS
+  echo "RELEASE_VERS of $1/$2 is "$RELEASE_VERS
+}
+
+## First argument must be name of module
+## Optional second arg is name of README file. Default is README.md
+writefile_mw() {
+  FRONTMATTER="---\nlayout: middleware\ntitle: Express $1 middleware\nmenu: resources\nlang: en\nredirect_from: '/resources/middleware/$1.html'\nname: $1\n---\n"
+  FILE=en/resources/middleware/$1.md
+  README=${2:-README.md}
+  ORG=expressjs
+
+  echo $FRONTMATTER > $FILE
+  get_release_vers $ORG $1
+  curl -s https://raw.githubusercontent.com/$ORG/$1/$RELEASE_VERS/$README >> $FILE
+  echo "Curling to https://raw.githubusercontent.com/$ORG/$1/$RELEASE_VERS/$README"
+  echo "Writing $FILE"
+}
+
+## First argument must be name of module
+## Optional second arg is org (Default is "jshttp" or "pillarjs").
+## Optional third arg is name of README file. Default is README.md
+writefile_util() {
+  FRONTMATTER="---\nlayout: middleware\ntitle: Express $1 utility function\nmenu: resources\nlang: en\nredirect_from: '/resources/utils/$1.html'\nname: $1\n---\n"
+  FILE=en/resources/utils/$1.md
+  ORG=${2:-jshttp}
+  README=${3:-README.md}
+
+  echo $FRONTMATTER > $FILE
+  get_release_vers $ORG $1
+  curl -s https://raw.githubusercontent.com/$ORG/$1/$RELEASE_VERS/$README >> $FILE
+  echo "Curling to https://raw.githubusercontent.com/$ORG/$1/master/$README"
+  echo "Writing $FILE"
+}
+
+# expressjs
+# curl https://api.github.com/orgs/expressjs/repos | grep full_name
+# NOTE: Some repos removed manually
+get_middleware_readmes () {
+  writefile_mw "body-parser"
+  writefile_mw "compression"
+  writefile_mw "connect-markdown"
+  writefile_mw "connect-render"
+  writefile_mw "connect-rid"
+  writefile_mw "cookie-parser"
+  writefile_mw "cookie-session"
+  writefile_mw "cors"
+  writefile_mw "domain-middleware"
+  writefile_mw "errorhandler"
+  writefile_mw "express-messages" "Readme.md"
+  writefile_mw "express-resource" "Readme.md"
+  writefile_mw "express-expose" "Readme.md"
+  writefile_mw "method-override"
+  writefile_mw "morgan"
+  writefile_mw "multer"
+  writefile_mw "response-time"
+  writefile_mw "restful-router"
+  writefile_mw "routification"
+  writefile_mw "serve-favicon"
+  writefile_mw "session"
+  writefile_mw "timeout"
+  writefile_mw "urlrouter"
+  writefile_mw "vhostess"
+}
+
+# jshttp
+# curl https://api.github.com/orgs/jshttp/repos | grep full_name
+# NOTE: Some repos removed manually
+get_util_readmes() {
+  writefile_util "negotiator" "jshttp"
+  writefile_util "cookie" "jshttp"
+  writefile_util "fresh" "jshttp"
+  writefile_util "range-parser" "jshttp"
+  writefile_util "methods" "jshttp"
+  writefile_util "basic-auth" "jshttp"
+  writefile_util "compressible" "jshttp"
+  writefile_util "on-finished" "jshttp"
+  writefile_util "accepts" "jshttp"
+  writefile_util "type-is" "jshttp"
+  writefile_util "statuses" "jshttp"
+  writefile_util "mime-types" "jshttp"
+  writefile_util "proxy-addr" "jshttp"
+  writefile_util "style-guide" "jshttp"
+  writefile_util "on-headers" "jshttp"
+  writefile_util "vary" "jshttp"
+  writefile_util "media-typer" "jshttp"
+  writefile_util "etag" "jshttp"
+  writefile_util "mime-db" "jshttp"
+  writefile_util "http-utils" "jshttp"
+  writefile_util "spdy-push" "jshttp"
+  writefile_util "http-push" "jshttp"
+  writefile_util "http-errors" "jshttp"
+  writefile_util "content-disposition" "jshttp"
+  writefile_util "forwarded" "jshttp"
+  writefile_util "content-type" "jshttp"
+  writefile_util "http-assert" "jshttp" "readme.md"
+
+# pillarjs
+# curl https://api.github.com/orgs/pillarjs/repos | grep full_name
+# NOTE: Some repos removed manually
+  writefile_util "cookies" "pillarjs"
+  writefile_util "csrf" "pillarjs"
+  writefile_util "encodeurl" "pillarjs"
+  writefile_util "extend-proto" "pillarjs"
+  writefile_util "finalhandler" "pillarjs"
+  writefile_util "parseurl" "pillarjs"
+  writefile_util "path-match" "pillarjs"
+  writefile_util "path-to-regexp" "pillarjs" "Readme.md"
+  writefile_util "qs-strict" "pillarjs"
+  writefile_util "resolve-path" "pillarjs"
+  writefile_util "router" "pillarjs"
+  writefile_util "routington" "pillarjs"
+  writefile_util "send" "pillarjs"
+  writefile_util "ssl-redirect" "pillarjs"
+  writefile_util "templation" "pillarjs"
+  writefile_util "understanding-csrf" "pillarjs"
+}
+
+### HERE'S WHAT ACTUALLY GETS DONE:
+get_middleware_readmes
+#get_util_readmes

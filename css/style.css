@@ -1029,8 +1029,47 @@ h2 a {
 #mw-fig-img {margin: 0px; padding: 0px; width: 410px; height: 308px;}
 .mw-fig-callouts {margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;}
 
-#license { 
+#license {
   display: block;
   text-align: center;
   margin: 0 auto 0 auto;
+}
+
+/* For middleware pages */
+
+/*
+#mw-list {
+  float: left;
+  width: 180px;
+  margin: 0;
+  padding: 0 10px 0 10px;
+  font-size: 13px;
+ }
+
+#middleware {
+  min-width: 300px;
+}
+*/
+
+#mw-container {
+  display: flex;
+  display: -webkit-flex; /* Safari */
+  width: 100%;
+}
+
+#mw-list {
+  min-width: 180px;
+  margin: 0;
+  padding: 0 10px 0 10px;
+  font-size: 13px;
+  overflow-y: auto;
+ }
+
+#middleware {
+  /* flex: 0.85; */
+  margin-left: 10px;
+}
+
+#mw-list ul li {
+ margin-left: -20px;
 }

@@ -1,103 +1,59 @@
 ---
-layout: page
+layout: middleware
 title: Express middleware
 menu: resources
 lang: en
 redirect_from: "/resources/middleware.html"
 ---
-## Middleware in expressjs
 
-- [express-messages](middleware/express-messages.html)
-- [express-resource](middleware/express-resource.html)
-- [express-expose](middleware/express-expose.html)
-- [express-params](middleware/express-params.html)
-- [connect-render](middleware/connect-render.html)
-- [urlrouter](middleware/urlrouter.html)
-- [cors](middleware/cors.html)
-- [restful-router](middleware/restful-router.html)
-- [domain-middleware](middleware/domain-middleware.html)
-- [connect-markdown](middleware/connect-markdown.html)
-- [routification](middleware/routification.html)
-- [vhostess](middleware/vhostess.html)
-- [compression](middleware/compression.html)
-- [body-parser](middleware/body-parser.html)
-- [basic-auth-connect](middleware/basic-auth-connect.html)
-- [connect-rid](middleware/connect-rid.html)
-- [multer](middleware/multer.html)
-- [serve-favicon](middleware/serve-favicon.html)
-- [response-time](middleware/response-time.html)
-- [morgan](middleware/morgan.html)
-- [cookie-parser](middleware/cookie-parser.html)
-- [session](middleware/session.html)
-- [cookie-session](middleware/cookie-session.html)
-- [errorhandler](middleware/errorhandler.html)
-- [method-override](middleware/method-override.html)
-- [timeout](middleware/timeout.html)
+## Express middleware
 
-## Middleware in jshttp
+The Express middleware modules listed here are maintained by the Expressjs
+Starting with Express 4, all middleware functions that in Express 3 were built-in
+are in separate modules (except for `express.static`).
 
-- [negotiator](middleware/negotiator.html)
-- [cookie](middleware/cookie.html)
-- [fresh](middleware/fresh.html)
-- [range-parser](middleware/range-parser.html)
-- [methods](middleware/methods.html)
-- [basic-auth](middleware/basic-auth.html)
-- [compressible](middleware/compressible.html)
-- [on-finished](middleware/on-finished.html)
-- [http-assert](middleware/http-assert.html)
-- [accepts](middleware/accepts.html)
-- [type-is](middleware/type-is.html)
-- [statuses](middleware/statuses.html)
-- [mime-types](middleware/mime-types.html)
-- [proxy-addr](middleware/proxy-addr.html)
-- [on-headers](middleware/on-headers.html)
-- [vary](middleware/vary.html)
-- [media-typer](middleware/media-typer.html)
-- [etag](middleware/etag.html)
-- [mime-db](middleware/mime-db.html)
-- [http-utils](middleware/http-utils.html)
-- [spdy-push](middleware/spdy-push.html)
-- [http-errors](middleware/http-errors.html)
-- [content-disposition](middleware/content-disposition.html)
-- [forwarded](middleware/forwarded.html)
-- [content-type](middleware/content-type.html)
+|Express 3 Built-in Function| Middleware modules |
+|---------------------------|---------------------|
+| express.bodyParser | [body-parser](/{{page.lang}}/resources/middleware/body-parser.html) and [multer](/{{page.lang}}/resources/middleware/multer.html) |
+| express.compress | [compression](/{{page.lang}}/resources/middleware/compression.html) |
+| express.cookieSession | [cookie-session](/{{page.lang}}/resources/middleware/cookie-session.html) |
+| express.cookieParser| [cookie-parser](/{{page.lang}}/resources/middleware/cookie-parser.html) |
+| express.logger | [morgan](/{{page.lang}}/resources/middleware/morgan.html) |
+| express.session | [session](/{{page.lang}}/resources/middleware/express-session.html) |
+| express.favicon | [serve-favicon](/{{page.lang}}/resources/middleware/serve-favicon.html) |
+| express.responseTime | [response-time](/{{page.lang}}/resources/middleware/response-time.html) |
+| express.errorHandler | [errorhandler](/{{page.lang}}/resources/middleware/errorhandler.html) |
+| express.methodOverride | [method-override](/{{page.lang}}/resources/middleware/method-override.html) |
+| express.timeout | [timeout](/{{page.lang}}/resources/middleware/connect-timeout.html) |
+| express.vhost| [vhost](/{{page.lang}}/resources/middleware/vhost.html) |
+| express.csrf | [csurf](/{{page.lang}}/resources/middleware/csurf.html) |
+| express.directory | [serve-index](/{{page.lang}}/resources/middleware/serve-index.html) |
+| express.static | [serve-static](/{{page.lang}}/resources/middleware/serve-static.html) |
+
+For `body-parser` middleware, see also:
+    - [body](https://github.com/raynos/body)
+    - [co-body](https://github.com/visionmedia/co-body)
+    - [raw-body](https://github.com/stream-utils/raw-body)
+The `compression` middleware function was previously exposed as `express.compress`.
 
 ## Additional middleware
 
 Here are some Express middleware modules:
 
-  - [body-parser](https://github.com/expressjs/body-parser): previously `express.bodyParser`, `json`, and `urlencoded`.
-  See also:
-    - [body](https://github.com/raynos/body)
-    - [co-body](https://github.com/visionmedia/co-body)
-    - [raw-body](https://github.com/stream-utils/raw-body)
-  - [compression](https://github.com/expressjs/compression):  previously `express.compress`
-  - [connect-image-optimus](https://github.com/msemenistyi/connect-image-optimus): Connect/Express middleware modules for optimal image serving. Switches images to `.webp` or `.jxr`, if possible.
-  - [connect-timeout](https://github.com/expressjs/timeout): previously `express.timeout`
-  - [cookie-parser](https://github.com/expressjs/cookie-parser): previously `express.cookieParser`
-  - [cookie-session](https://github.com/expressjs/cookie-session): previously `express.cookieSession`
-  - [csurf](https://github.com/expressjs/csurf): previously `express.csrf`
-  - [errorhandler](https://github.com/expressjs/errorhandler): previously `express.errorHandler`
-  - [express-debug](https://github.com/devoidfury/express-debug): unobtrusive development tool that adds a tab with information about template variables (locals), current session, useful request data, and more to your application.
-  - [express-partial-response](https://github.com/nemtsov/express-partial-response): Express middleware module for filtering-out parts of JSON responses based on the `fields` query-string; by using Google API's Partial Response.
-  - [express-session](https://github.com/expressjs/session): previously `express.session`
-  - [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn): Express middleware module for using a CDN for static assets, with multiple host support (For example: cdn1.host.com, cdn2.host.com).
-  - [express-slash](https://github.com/ericf/express-slash): Express middleware module for people who are strict about trailing slashes.
-  - [express-stormpath](https://github.com/stormpath/stormpath-express): Express middleware module for user storage, authentication, authorization, SSO, and data security.
-  - [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize): middleware module for redirecting HTTP requests containing uppercase to a canonical lowercase form.
-  - [helmet](https://github.com/helmetjs/helmet): module to help secure your apps by setting various HTTP headers.
-  - [join-io](https://github.com/coderaiser/join-io "join-io"): module for joining files on the fly to reduce the requests count.
-  - [method-override](https://github.com/expressjs/method-override): previously `express.methodOverride`
-  - [morgan](https://github.com/expressjs/morgan):  previously `logger`
-  - [passport](https://github.com/jaredhanson/passport): Express middleware module for authentication.
-  - [response-time](https://github.com/expressjs/response-time): previously `express.responseTime`
-  - [serve-favicon](https://github.com/expressjs/serve-favicon): previously `express.favicon`
-  - [serve-index](https://github.com/expressjs/serve-index): previously `express.directory`
-  - [serve-static](https://github.com/expressjs/serve-static): module for serving static content.
-  - [static-expiry](https://github.com/paulwalker/connect-static-expiry): fingerprinted URLs or Caching Headers for static assets including support for one or more external domains.
-  - [vhost](https://github.com/expressjs/vhost): previously `express.vhost`
-  - [view-helpers](https://github.com/madhums/node-view-helpers): Express middleware module that provides common helper methods to the views.
-  - [sriracha-admin](https://github.com/hdngr/siracha): Express middleware module that dynamically generates an admin site for Mongoose.
+- [connect-image-optimus](https://github.com/msemenistyi/connect-image-optimus): Connect/Express middleware modules for optimal image serving. Switches images to `.webp` or `.jxr`, if possible.
+- [express-debug](https://github.com/devoidfury/express-debug): unobtrusive development tool that adds a tab with information about template variables (locals), current session, useful request data, and more to your application.
+- [express-partial-response](https://github.com/nemtsov/express-partial-response): Express middleware module for filtering-out parts of JSON responses based on the `fields` query-string; by using Google API's Partial Response.
+- [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn): Express middleware module for using a CDN for static assets, with multiple host support (For example: cdn1.host.com, cdn2.host.com).
+- [express-slash](https://github.com/ericf/express-slash): Express middleware module for people who are strict about trailing slashes.
+- [express-stormpath](https://github.com/stormpath/stormpath-express): Express middleware module for user storage, authentication, authorization, SSO, and data security.
+- [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize): middleware module for redirecting HTTP requests containing uppercase to a canonical lowercase form.
+- [helmet](https://github.com/helmetjs/helmet): module to help secure your apps by setting various HTTP headers.
+- [join-io](https://github.com/coderaiser/join-io): module for joining files on the fly to reduce the requests count.
+- [passport](https://github.com/jaredhanson/passport): Express middleware module for authentication.
+- [static-expiry](https://github.com/paulwalker/connect-static-expiry): fingerprinted URLs or Caching Headers for static assets including support for one or more external domains.
+- [vhost](https://github.com/expressjs/vhost): previously `express.vhost`
+- [view-helpers](https://github.com/madhums/node-view-helpers): Express middleware module that provides common helper methods to the views.
+- [sriracha-admin](https://github.com/hdngr/siracha): Express middleware module that dynamically generates an admin site for Mongoose.
 
 Some middleware modules previously included with Connect are no longer supported by the Connect/Express team. These modules are replaced by an alternative module, or should be superseded by a better module. Use one of the following alternatives:
 
@@ -115,7 +71,4 @@ Some middleware modules previously included with Connect are no longer supported
     - [st](https://github.com/isaacs/st)
     - [connect-static](https://github.com/andrewrk/connect-static)
 
-For more middleware modules, see:
-
- - [http-framework](https://github.com/Raynos/http-framework/wiki/Modules)
- - [expressjs](https://github.com/expressjs)
+For more middleware modules, see [http-framework](https://github.com/Raynos/http-framework/wiki/Modules).
