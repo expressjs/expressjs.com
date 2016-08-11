@@ -6,3 +6,5 @@ _site
 *.iml
 **/.idea
 **/Thumbs.db
+Gemfile.lock
+.jekyll-metadata
