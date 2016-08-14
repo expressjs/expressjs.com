@@ -42,7 +42,7 @@ router.route('/users/:user_id')
 });
 ```
 
-This approach re-uses the single `/users/:user_id` path and add handlers for
+This approach re-uses the single `/users/:user_id` path and adds handlers for
 various HTTP methods.
 
 <div class="doc-box doc-info" markdown="1">
