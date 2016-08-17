@@ -30,6 +30,11 @@ get_release_vers() {
 
 ## First argument must be name of module
 ## Optional second arg is name of README file. Default is README.md
+
+# <div class="doc-box doc-notice" markdown="1">
+# This doc was generated from <README URL> on <date>
+# </div>
+
 writefile_mw() {
   FRONTMATTER="---\nlayout: middleware\ntitle: Express $1 middleware\nmenu: resources\nlang: en\nredirect_from: '/resources/middleware/$1.html'\nname: $1\n---\n"
   FILE=en/resources/middleware/$1.md
@@ -55,7 +60,7 @@ writefile_util() {
   echo $FRONTMATTER > $FILE
   get_release_vers $ORG $1
   curl -s https://raw.githubusercontent.com/$ORG/$1/$RELEASE_VERS/$README >> $FILE
-  echo "Curling to https://raw.githubusercontent.com/$ORG/$1/master/$README"
+  echo "Curling to https://raw.githubusercontent.com/$ORG/$1/$RELEASE_VERS/$README"
   echo "Writing $FILE"
 }
 
@@ -65,31 +70,25 @@ writefile_util() {
 get_middleware_readmes () {
   writefile_mw "body-parser"
   writefile_mw "compression"
-  writefile_mw "connect-markdown"
-  writefile_mw "connect-render"
   writefile_mw "connect-rid"
   writefile_mw "cookie-parser"
   writefile_mw "cookie-session"
   writefile_mw "cors"
-  writefile_mw "domain-middleware"
+  writefile_mw "csurf"
   writefile_mw "errorhandler"
-  writefile_mw "express-messages" "Readme.md"
-  writefile_mw "express-resource" "Readme.md"
-  writefile_mw "express-expose" "Readme.md"
   writefile_mw "method-override"
   writefile_mw "morgan"
   writefile_mw "multer"
   writefile_mw "response-time"
-  writefile_mw "restful-router"
-  writefile_mw "routification"
   writefile_mw "serve-favicon"
+  writefile_mw "serve-index"
+  writefile_mw "serve-static"
   writefile_mw "session"
   writefile_mw "timeout"
-  writefile_mw "urlrouter"
-  writefile_mw "vhostess"
+  writefile_mw "vhost"
 }
 
-# jshttp
+# jshttp - These are not currently used.
 # curl https://api.github.com/orgs/jshttp/repos | grep full_name
 # NOTE: Some repos removed manually
 get_util_readmes() {
@@ -112,8 +111,6 @@ get_util_readmes() {
   writefile_util "media-typer" "jshttp"
   writefile_util "etag" "jshttp"
   writefile_util "mime-db" "jshttp"
-  writefile_util "http-utils" "jshttp"
-  writefile_util "spdy-push" "jshttp"
   writefile_util "http-push" "jshttp"
   writefile_util "http-errors" "jshttp"
   writefile_util "content-disposition" "jshttp"
@@ -121,11 +118,11 @@ get_util_readmes() {
   writefile_util "content-type" "jshttp"
   writefile_util "http-assert" "jshttp" "readme.md"
 
-# pillarjs
+# pillarjs - These are not currently used.
 # curl https://api.github.com/orgs/pillarjs/repos | grep full_name
 # NOTE: Some repos removed manually
   writefile_util "cookies" "pillarjs"
-  writefile_util "csrf" "pillarjs"
+  writefile_util "csrf" "pillarjs" # Is this middleware?
   writefile_util "encodeurl" "pillarjs"
   writefile_util "extend-proto" "pillarjs"
   writefile_util "finalhandler" "pillarjs"
