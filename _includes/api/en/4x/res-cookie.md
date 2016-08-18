@@ -10,7 +10,7 @@ The `options` parameter is an object that can have the following properties.
 | `encode`    | Function | A synchronous function used for cookie value encoding. Defaults to `encodeURIComponent`.
 | `expires`   | Date | Expiry date of the cookie in GMT. If not specified or set to 0, creates a session cookie.
 | `httpOnly`  | Boolean | Flags the cookie to be accessible only by the web server.
-| `maxAge`    | String | Convenient option for setting the expiry time relative to the current time in milliseconds.
+| `maxAge`    | Number | Convenient option for setting the expiry time relative to the current time in milliseconds.
 | `path`      | String | Path for the cookie. Defaults to "/".
 | `secure`    | Boolean | Marks the cookie to be used with HTTPS only.
 | `signed`    | Boolean | Indicates if the cookie should be signed.
