@@ -68,7 +68,7 @@ var couchbase = require("couchbase");
 var bucket = (new couchbase.Cluster("http://localhost:8091")).openBucket("bucketName");
 
 // add a document to a bucket
-db.insert("document-key", { name: "Matt", shoeSize: 13}, function(error, result) {
+bucket.insert("document-key", { name: "Matt", shoeSize: 13}, function(error, result) {
     if(error)
       console.log(error);
     else
@@ -78,7 +78,7 @@ db.insert("document-key", { name: "Matt", shoeSize: 13}, function(error, result)
 // get all documents with shoe size 13
 var n1ql = "SELECT d.* FROM `bucketName` d WHERE shoeSize = $1;"
 var query = N1qlQuery.fromString(n1ql);
-db.query(query, [13], function(error, result) {
+bucket.query(query, [13], function(error, result) {
     if(error)
       console.log(error);
     else
