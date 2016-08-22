@@ -1,0 +1,16 @@
+---
+layout: page
+---
+<div id="mw-container">
+  <div id="mw-list">
+    {% if page.title contains 'middleware' %}
+      {% capture readme %}{% include mw-list.md %}{% endcapture %}
+    {% else %}
+      {% capture readme %}{% include util-list.md %}{% endcapture %}
+    {% endif %}
+    {{ readme | markdownify }}
+  </div>
+  <div id="middleware">
+      {{ content }}
+  </div>
+</div>
