@@ -76,7 +76,7 @@ db.insert("document-key", { name: "Matt", shoeSize: 13}, function(error, result)
 });
 
 // get all documents with shoe size 13
-var n1ql = "SELECT d.* FROM `bucketName` WHERE shoeSize = $1;"
+var n1ql = "SELECT d.* FROM `bucketName` d WHERE shoeSize = $1;"
 var query = N1qlQuery.fromString(n1ql);
 db.query(query, [13], function(error, result) {
     if(error)
