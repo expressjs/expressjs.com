@@ -11,6 +11,7 @@ redirect_from: "/guide/database-integration.html"
 Adding the capability to connect databases to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node.js modules for database systems in your Express app:
 
 * [Cassandra](#cassandra)
+* [Couchbase](#couchbase)
 * [CouchDB](#couchdb)
 * [LevelDB](#leveldb)
 * [MySQL](#mysql)
@@ -46,6 +47,42 @@ var client = new cassandra.Client({ contactPoints: ['localhost']});
 client.execute('select key from system.local', function(err, result) {
   if (err) throw err;
   console.log(result.rows[0]);
+});
+```
+
+<a name="couchbase"></a>
+
+## Couchbase
+
+**Module**: [couchnode](https://github.com/couchbase/couchnode)
+**Installation**
+
+```sh
+$ npm install couchbase
+```
+
+**Example**
+
+```js
+var couchbase = require("couchbase");
+var bucket = (new couchbase.Cluster("http://localhost:8091")).openBucket("bucketName");
+
+// add a document to a bucket
+db.insert("document-key", { name: "Matt", shoeSize: 13}, function(error, result) {
+    if(error)
+      console.log(error);
+    else
+      console.log(result);
+});
+
+// get all documents with shoe size 13
+var n1ql = "SELECT d.* FROM `bucketName` WHERE shoeSize = $1;"
+var query = N1qlQuery.fromString(n1ql);
+db.query(query, [13], function(error, result) {
+    if(error)
+      console.log(error);
+    else
+      console.log(result);
 });
 ```
 
