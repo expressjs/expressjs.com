@@ -1018,6 +1018,17 @@ h2 a {
   }
 }
 
+@media print {
+
+  header {
+    position: absolute;
+  }
+
+  #mobile-menu {
+    display:none;
+  }
+}
+
 /* For image callouts in writing-middleware.md  */
 
 .callout {position: relative;}
