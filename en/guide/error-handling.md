@@ -25,7 +25,10 @@ You define error-handling middleware last, after other `app.use()` and routes ca
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(function(err, req, res, next) {
   // logic
@@ -43,7 +46,10 @@ for requests made by using `XHR`, and those without, you might use the following
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(logErrors);
 app.use(clientErrorHandler);
