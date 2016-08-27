@@ -28,10 +28,8 @@ Members of the Express technical committee are:
 - [@dougwilson](https://github.com/dougwilson) - Douglas Wilson
 - [@Fishrock123](https://github.com/Fishrock123) - Jeremiah Senkpiel
 - [@hacksparrow](https://github.com/hacksparrow) - Hage Yaapa
-- [@jasnell](https://github.com/jasnell) - James M Snell
 - [@jonathanong](https://github.com/jonathanong) jongleberry
 - [@LinusU](https://github.com/LinusU) - Linus Unnebäck
-- [@mikeal](https://github.com/mikeal) - Mikeal Rogers
 - [@niftylettuce](https://github.com/niftylettuce) - niftylettuce
 - [@troygoode](https://github.com/troygoode) - Troy Goode
 
