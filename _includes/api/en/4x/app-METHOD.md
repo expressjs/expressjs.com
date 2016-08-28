@@ -4,6 +4,8 @@ Routes an HTTP request, where METHOD is the HTTP method of the request, such as 
 PUT, POST, and so on, in lowercase. Thus, the actual methods are `app.get()`,
 `app.post()`, `app.put()`, and so on.  See below for the complete list.
 
+The `path` argument can be a string representing a path, a path pattern, a regular expression to match paths, or an array of combinations thereof.
+
 For more information, see the [routing guide](/guide/routing.html).
 
 Express supports the following routing methods corresponding to the HTTP methods of the same names:

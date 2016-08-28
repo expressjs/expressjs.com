@@ -12,4 +12,19 @@ subsequent routes if there's no reason to proceed with the current route.
 app.get('/', function (req, res) {
   res.send('GET request to homepage');
 });
+
+// path could be array of strings
+app.get(['/foo/bar', '/other/bar'], function (req, res) {
+  res.send('GET request to any of above path');
+});
+
+// path could be regex
+app.get(/^\/yellboom(er|s)?$/, function (req, res) {
+  res.send('GET request to page that starts with startswithboom');
+});
+
+// path could be array of regex
+app.get([/^\/yellboom(er|s)?$/, /^\/ab(cd)?e$/], function (req, res) {
+  res.send('GET request to page that matches any of above regex path');
+});
 ```
