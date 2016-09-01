@@ -12,7 +12,7 @@ A _template engine_ enables you to use static template files in your application
 variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
 This approach makes it easier to design an HTML page.
 
-Some popular template engines that work with Express are [Pug](http://jade-lang.com/),
+Some popular template engines that work with Express are [Pug](https://pugjs.org/api/getting-started.html),
 [Mustache](https://www.npmjs.com/package/mustache), and [EJS](https://www.npmjs.com/package/ejs).
 The [Express application generator](/{{ page.lang }}/starter/generator.html) uses Pug as its default, but it also supports several others.
 
