@@ -2,7 +2,7 @@
 
 Returns an instance of a single route which you can then use to handle HTTP verbs
 with optional middleware. Use `router.route()` to avoid duplicate route naming and
-thus typo errors.
+thus typing errors.
 
 Building on the `router.param()` example above, the following code shows how to use
 `router.route()` to specify various HTTP method handlers.
