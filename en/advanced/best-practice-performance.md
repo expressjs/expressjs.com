@@ -210,6 +210,8 @@ For more information, see [Using Environment Variables In systemd Units](https:/
 
 If you are using StrongLoop Process Manager, you can also [set the environment variable when you install StrongLoop PM as a service](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-Setenvironmentvariables).
 
+<a name="restart"></a>
+
 ### Ensure your app automatically restarts
 
 In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server itself crashes. Although you hope that neither of those events occurs, realistically you must account for both eventualities by:
