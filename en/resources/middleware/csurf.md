@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/csurf.html'
 name: csurf
 ---
-
+<div id="page-doc" markdown="1">
 # csurf
 
 [![NPM Version][npm-image]][npm-url]
@@ -147,7 +147,7 @@ input field named `_csrf`:
 ```html
 <form action="/process" method="POST">
   <input type="hidden" name="_csrf" value="{{csrfToken}}">
-  
+
   Favorite color: <input type="text" name="favoriteColor">
   <button type="submit">Submit</button>
 </form>
@@ -194,3 +194,4 @@ app.use(function (err, req, res, next) {
 [downloads-url]: https://npmjs.org/package/csurf
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://gratipay.com/dougwilson/
+</div>

@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/session.html'
 name: session
 ---
-
+<div id="page-doc" markdown="1">
 # express-session
 
 [![NPM Version][npm-image]][npm-url]
@@ -662,3 +662,4 @@ app.get('/bar', function (req, res, next) {
 [downloads-url]: https://npmjs.org/package/express-session
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://gratipay.com/dougwilson/
+</div>

@@ -1,4 +1,4 @@
-<h2>Middleware</h2>
+<h2 id="middleware">Middleware</h2>
 
 <section markdown="1">
   {% include api/en/3x/mw-basicAuth.md %}

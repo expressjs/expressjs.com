@@ -5,7 +5,7 @@ menu: starter
 lang: en
 redirect_from: "/starter/generator.html"
 ---
-
+<div id="page-doc" markdown="1">
 # Express application generator
 
 Use the application generator tool, `express-generator`, to quickly create an application skeleton.
@@ -106,4 +106,5 @@ The generated app has the following directory structure:
 
 <div class="doc-box doc-info" markdown="1">
 The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
+</div>
 </div>

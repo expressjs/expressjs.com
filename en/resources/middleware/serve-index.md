@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/serve-index.html'
 name: serve-index
 ---
-
+<div id="page-doc" markdown="1">
 # serve-index
 
 [![NPM Version][npm-image]][npm-url]
@@ -153,3 +153,4 @@ are created by/copyright of [FAMFAMFAM](http://www.famfamfam.com/).
 [downloads-url]: https://npmjs.org/package/serve-index
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
+</div>

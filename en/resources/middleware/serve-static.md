@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/serve-static.html'
 name: serve-static
 ---
-
+<div id="page-doc" markdown="1">
 # serve-static
 
 [![NPM Version][npm-image]][npm-url]
@@ -252,3 +252,4 @@ function setCustomCacheControl (res, path) {
 [downloads-url]: https://npmjs.org/package/serve-static
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://gratipay.com/dougwilson/
+</div>

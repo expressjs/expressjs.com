@@ -5,7 +5,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/migrating-5.html"
 ---
-
+<div id="page-doc" markdown="1">
 # Moving to Express 5
 
 <h2 id="overview">Overview</h2>
@@ -64,7 +64,7 @@ If you use any of these methods or properties in your app, it will crash. So, yo
 
 Express 5 no longer supports the `app.del()` function. If you use this function an error is thrown. For registering HTTP DELETE routes, use the `app.delete()` function instead.
 
-Initially `del` was used instead of `delete`, because `delete` is a reserved keyword in JavaScript. However, as of ECMAScript 6, `delete` and other reserved keywords can legally be used as property names. 
+Initially `del` was used instead of `delete`, because `delete` is a reserved keyword in JavaScript. However, as of ECMAScript 6, `delete` and other reserved keywords can legally be used as property names.
 
 <h4 id="app.param">app.param(fn)</h4>
 
@@ -130,3 +130,4 @@ In Express 4.7 and Express 5 onwards, the query parser option can accept `false`
 <h4 id="res.render">res.render()</h4>
 
 This method now enforces asynchronous behavior for all view engines, avoiding bugs caused by view engines that had a synchronous implementation and that violated the recommended interface.
+</div>

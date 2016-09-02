@@ -5,7 +5,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/debugging.html"
 ---
-
+<div id="page-doc" markdown="1">
 # Debugging Express
 
 Express uses the [debug](https://www.npmjs.com/package/debug) module
@@ -115,3 +115,4 @@ $ DEBUG=http,mail,express:* node index.js
 ```
 
 For more information about `debug`, see the [debug](https://www.npmjs.com/package/debug).
+</div>

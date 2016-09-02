@@ -1,4 +1,4 @@
-<h2>Application</h2>
+<h2 id="app">Application</h2>
 
 The `app` object conventionally denotes the Express application.
 Create it by calling the top-level `express()` function exported by the Express module:

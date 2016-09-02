@@ -1,4 +1,4 @@
-<h2>Application</h2>
+<h2 id="application">Application</h2>
 
 <section markdown="1">
   {% include api/en/3x/app-set.md %}

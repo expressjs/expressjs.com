@@ -5,12 +5,12 @@ menu: guide
 lang: en
 redirect_from: "/guide/writing-middleware.html"
 ---
-
+<div id="page-doc" markdown="1">
 # Writing middleware for use in Express apps
 
 <h2>Overview</h2>
 
-_Middleware_ functions are functions that have access to the [request object](/4x/api.html#req)  (`req`), the [response object](/4x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/4x/api.html#req)  (`req`), the [response object](/{{ page.lang }}/4x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
 
 Middleware functions can perform the following tasks:
 
@@ -36,15 +36,15 @@ The following figure shows the elements of a middleware function call:
 
 <div class="callout" id="callout4">Callback argument to the middleware function, called "next" by convention.</div>
 
-<div class="callout" id="callout5">HTTP <a href="/en/4x/api.html#res">response</a> argument to the middleware function, called "res" by convention.</div>
+<div class="callout" id="callout5">HTTP <a href="/{{ page.lang }}/4x/api.html#res">response</a> argument to the middleware function, called "res" by convention.</div>
 
-<div class="callout" id="callout6">HTTP <a href="/en/4x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
+<div class="callout" id="callout6">HTTP <a href="/{{ page.lang }}/4x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
 </td></tr>
 </table>
 
 <h2>Example</h2>
 
-Here is an example of a simple "Hello World" Express application. 
+Here is an example of a simple "Hello World" Express application.
 The remainder of this article will define and add two middleware functions to the application:
 one called `myLogger` that prints a simple log message and another called `requestTime` that
 displays the timestamp of the HTTP request.
@@ -72,7 +72,7 @@ var myLogger = function (req, res, next) {
 
 <div class="doc-box doc-notice" markdown="1">
 Notice the call above to `next()`.  Calling this function invokes the next middleware function in the app.
-The `next()` function is not a part of the Node.js or Express API, but is the third argument that is passed to the middleware function.  The `next()` function could be named anything, but by convention it is always named "next". 
+The `next()` function is not a part of the Node.js or Express API, but is the third argument that is passed to the middleware function.  The `next()` function could be named anything, but by convention it is always named "next".
 To avoid confusion, always use this convention.
 </div>
 
@@ -107,8 +107,8 @@ The middleware function `myLogger` simply prints a message, then passes on the r
 
 <h3>Middleware function requestTime</h3>
 
-Next, we'll create a middleware function called "requestTime" and add it as a property called `requestTime` 
-to the request object. 
+Next, we'll create a middleware function called "requestTime" and add it as a property called `requestTime`
+to the request object.
 
 ```js
 var requestTime = function (req, res, next) {
@@ -143,4 +143,5 @@ When you make a request to the root of the app, the app now displays the timesta
 
 Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
 
-For more information about Express middleware, see: [Using Express middleware](/guide/using-middleware.html).
+For more information about Express middleware, see: [Using Express middleware](/{{ page.lang }}/guide/using-middleware.html).
+</div>

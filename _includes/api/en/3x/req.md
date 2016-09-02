@@ -1,4 +1,4 @@
-<h2>Request</h2>
+<h2 id="request">Request</h2>
 
 The `req` object is an enhanced version of Node's own request object
 and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_incomingmessage).

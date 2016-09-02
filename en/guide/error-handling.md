@@ -5,7 +5,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/error-handling.html"
 ---
-
+<div id="page-doc" markdown="1">
 # Error handling
 
 Define error-handling middleware functions in the same way as other middleware functions,
@@ -68,7 +68,7 @@ function logErrors(err, req, res, next) {
 
 Also in this example, `clientErrorHandler` is defined as follows; in this case, the error is explicitly passed along to the next one.
 
-Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise those requests will "hang" and will not be eligible for garbage collection. 
+Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise those requests will "hang" and will not be eligible for garbage collection.
 
 ```js
 function clientErrorHandler(err, req, res, next) {
@@ -146,5 +146,6 @@ function errorHandler(err, req, res, next) {
 }
 ```
 
-Note that the default error handler can get triggered if you call `next()` with an error 
+Note that the default error handler can get triggered if you call `next()` with an error
 in your code more than once, even if custom error handling middleware is in place.
+</div>

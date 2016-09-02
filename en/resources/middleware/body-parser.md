@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/body-parser.html'
 name: body-parser
 ---
-
+<div id="page-doc" markdown="1">
 # body-parser
 
 [![NPM Version][npm-image]][npm-url]
@@ -416,3 +416,4 @@ app.use(bodyParser.text({ type: 'text/html' }))
 [downloads-url]: https://npmjs.org/package/body-parser
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
+</div>

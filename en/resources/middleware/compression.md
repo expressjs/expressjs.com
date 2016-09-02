@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/compression.html'
 name: compression
 ---
-
+<div id="page-doc" markdown="1">
 # compression
 
 [![NPM Version][npm-image]][npm-url]
@@ -240,3 +240,4 @@ app.get('/events', function (req, res) {
 [downloads-url]: https://npmjs.org/package/compression
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
+</div>

@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/vhost.html'
 name: vhost
 ---
-
+<div id="page-doc" markdown="1">
 # vhost
 
 [![NPM Version][npm-image]][npm-url]
@@ -167,3 +167,4 @@ app.listen(3000)
 [downloads-url]: https://npmjs.org/package/vhost
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://gratipay.com/dougwilson/
+</div>

@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/errorhandler.html'
 name: errorhandler
 ---
-
+<div id="page-doc" markdown="1">
 # errorhandler
 
 [![NPM Version][npm-image]][npm-url]
@@ -131,3 +131,4 @@ function errorNotification(err, str, req) {
 [downloads-url]: https://npmjs.org/package/errorhandler
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
+</div>

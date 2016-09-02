@@ -1,4 +1,4 @@
-<h2>Response</h2>
+<h2 id="response">Response</h2>
 
 The `res` object is an enhanced version of Node's own response object
 and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_serverresponse).

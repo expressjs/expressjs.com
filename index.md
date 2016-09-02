@@ -34,7 +34,7 @@ redirect_from: "/en/index.html"
       </div>
 
       <div id="frameworks">
-          <h3>Frameworks</h3> Many <a href="en/resources/frameworks.html">popular frameworks</a> are based on Express.
+          <h3>Frameworks</h3> Many <a href="{{ page.lang }}/resources/frameworks.html">popular frameworks</a> are based on Express.
       </div>
   </div>
 

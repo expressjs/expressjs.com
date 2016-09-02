@@ -5,7 +5,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/behind-proxies.html"
 ---
-
+<div id="page-doc" markdown="1">
 # Express behind proxies
 
 When running an Express app behind a proxy, set (by using [app.set()](/{{ page.lang }}/4x/api.html#app.set)) the application variable `trust proxy` to one of the values listed in the following table.
@@ -80,3 +80,4 @@ Setting a non-`false` `trust proxy` value results in three important changes:
 </ul>
 
 The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.com/package/proxy-addr) package. For more information, see its documentation.
+</div>

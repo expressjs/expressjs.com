@@ -5,7 +5,7 @@ menu: starter
 lang: en
 redirect_from: "/starter/faq.html"
 ---
-
+<div id="page-doc" markdown="1">
 # FAQ
 
 ## How should I structure my application?
@@ -84,3 +84,4 @@ You don't! There's no need to "render" HTML with the `res.render()` function.
 If you have a specific file, use the `res.sendFile()` function.
 If you are serving many assets from a directory, use the `express.static()`
 middleware function.
+</div>

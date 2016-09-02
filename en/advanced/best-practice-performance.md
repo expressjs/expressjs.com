@@ -5,7 +5,7 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/best-practice-performance.html"
 ---
-
+<div id="page-doc" markdown="1">
 # Production best practices: performance and reliability
 
 ## Overview
@@ -14,12 +14,10 @@ This article discusses performance and reliability best practices for Express ap
 
 This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts:
 
-* [Things to do in your code](#code) (the dev part).
-* [Things to do in your environment / setup](#env) (the ops part).
+* [Things to do in your code](#in-code) (the dev part).
+* [Things to do in your environment / setup](#in-environment) (the ops part).
 
-<a name="code"></a>
-
-## Things to do in your code
+## Things to do in your code {#in-code}
 
 Here are some things you can do in your code to improve your application's performance:
 
@@ -49,7 +47,6 @@ Although Node and many modules provide synchronous and asynchronous versions of 
 
 If you are using Node.js 4.0+ or io.js 2.1.0+, you can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Of course, you wouldn't want to actually use this in production, but rather to ensure that your code is ready for production. See the [Weekly update for io.js 2.1.0](https://nodejs.org/en/blog/weekly-updates/weekly-update.2015-05-22/#2-1-0) for more information.
 
-
 ### Do logging correctly
 
 In general, there are two reasons for logging from your app: For debugging and for logging app activity (essentially, everything else). Using `console.log()` or `console.err()` to print log messages to the terminal is common practice in development. But [these functions are synchronous](https://nodejs.org/api/console.html#console_console_1) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
@@ -62,16 +59,14 @@ If you're logging for purposes of debugging, then instead of using `console.log(
 
 If you're logging app activity (for example, tracking traffic or API calls), instead of using `console.log()`, use a logging library like [Winston](https://www.npmjs.com/package/winston) or [Bunyan](https://www.npmjs.com/package/bunyan). For a detailed comparison of these two libraries, see the StrongLoop blog post [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
 
-<a name="exceptions"></a>
-
 ### Handle exceptions properly
 
-Node apps crash when they encounter an uncaught exception. Not handling exceptions and taking appropriate actions will make your Express app crash and go offline. If you follow the advice in [Ensure your app automatically restarts](#restart) below, then your app will recover from a crash. Fortunately, Express apps typically have a short startup time. Nevertheless, you want to avoid crashing in the first place, and to do that, you need to handle exceptions properly.
+Node apps crash when they encounter an uncaught exception. Not handling exceptions and taking appropriate actions will make your Express app crash and go offline. If you follow the advice in [Ensure your app automatically restarts](#ensure-restart) below, then your app will recover from a crash. Fortunately, Express apps typically have a short startup time. Nevertheless, you want to avoid crashing in the first place, and to do that, you need to handle exceptions properly.
 
 To ensure you handle all exceptions, use the following techniques:
 
-* [Use try-catch](#try-catch)
-* [Use promises](#promises)
+* [Use try-catch](#use-try-catch)
+* [Use promises](#use-promises)
 
 Before diving into these topics, you should have a basic understanding of Node/Express error handling: using error-first callbacks, and propagating errors in middleware. Node uses an "error-first callback" convention for returning errors from asynchronous functions, where the first parameter to the callback function is the error object, followed by result data in succeeding parameters. To indicate no error, pass null as the first parameter. The callback function must correspondingly follow the error-first callback convention to meaningfully handle the error. And in Express, the best practice is to use the next() function to propagate errors through the middleware chain.
 
@@ -87,8 +82,6 @@ One thing you should _not_ do is to listen for the `uncaughtException` event, em
 Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process.html#process_event_uncaughtexception). So listening for `uncaughtException` is just a bad idea. This is why we recommend things like multiple processes and supervisors: crashing and restarting is often the most reliable way to recover from an error.
 
 We also don't recommend using [domains](https://nodejs.org/api/domain.html). It generally doesn't solve the problem and is a deprecated module.
-
-<a name="try-catch"></a>
 
 #### Use try-catch
 
@@ -115,8 +108,6 @@ app.get('/search', function (req, res) {
 ```
 
 However, try-catch works only for synchronous code. Because the Node platform is primarily asynchronous (particularly in a production environment), try-catch won't catch a lot of exceptions.
-
-<a name="promises"></a>
 
 #### Use promises
 
@@ -161,9 +152,7 @@ For more information about error-handling by using promises, see:
 * [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
 * [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
 
-<a name="env"></a>
-
-## Things to do in your environment / setup
+## Things to do in your environment / setup {#in-environment}
 
 Here are some things you can do in your system environment to improve your app's performance:
 
@@ -210,16 +199,14 @@ For more information, see [Using Environment Variables In systemd Units](https:/
 
 If you are using StrongLoop Process Manager, you can also [set the environment variable when you install StrongLoop PM as a service](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-Setenvironmentvariables).
 
-<a name="restart"></a>
-
-### Ensure your app automatically restarts
+### Ensure your app automatically restarts {#ensure-restart}
 
 In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server itself crashes. Although you hope that neither of those events occurs, realistically you must account for both eventualities by:
 
 * Using a process manager to restart the app (and Node) when it crashes.
 * Using the init system provided by your OS to restart the process manager when the OS crashes. It's also possible to use the init system without a process manager.
 
-Node applications crash if they encounter an uncaught exception. The foremost thing you need to do is to ensure your app is well-tested and handles all exceptions (see [handle exceptions properly](#exceptions) for details). But as a fail-safe, put a mechanism in place to ensure that if and when your app crashes, it will automatically restart.
+Node applications crash if they encounter an uncaught exception. The foremost thing you need to do is to ensure your app is well-tested and handles all exceptions (see [handle exceptions properly](#handle-exceptions-properly) for details). But as a fail-safe, put a mechanism in place to ensure that if and when your app crashes, it will automatically restart.
 
 #### Use a process manager
 
@@ -436,3 +423,4 @@ With load balancing, you might have to ensure that requests that are associated 
 A reverse proxy sits in front of a web app and performs supporting operations on the requests, apart from directing requests to the app. It can handle error pages, compression, caching, serving files, and load balancing among other things.
 
 Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.com/) or [HAProxy](http://www.haproxy.org/) in production.
+</div>

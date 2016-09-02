@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/timeout.html'
 name: timeout
 ---
-
+<div id="page-doc" markdown="1">
 # connect-timeout
 
 [![NPM Version][npm-image]][npm-url]
@@ -169,3 +169,4 @@ app.listen(3000);
 [downloads-url]: https://npmjs.org/package/connect-timeout
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
+</div>

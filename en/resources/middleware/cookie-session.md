@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/cookie-session.html'
 name: cookie-session
 ---
-
+<div id="page-doc" markdown="1">
 # cookie-session
 
 [![NPM Version][npm-image]][npm-url]
@@ -198,3 +198,4 @@ move to an [alternative session strategy](https://github.com/expressjs/session#c
 [downloads-url]: https://npmjs.org/package/cookie-session
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
+</div>
