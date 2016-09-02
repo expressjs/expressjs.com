@@ -185,8 +185,10 @@ a {
   padding-top: 40px;
 }
 
-#api-doc h3:target, #api-doc h4:target {
-  padding-top: 80px;
+#api-doc *:target{
+ margin-top: -80px;
+ padding-top: 80px;
+ z-index: -1;
 }
 
 .outlined-img {
