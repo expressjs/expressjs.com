@@ -11,6 +11,8 @@ that these callbacks do not have to act as end-points: `loadUser`
 can perform a task, then call `next()` to continue matching subsequent
 routes.
 
+The `path` argument can be a string representing a path, a path pattern, a regular expression to match paths, or an array of combinations thereof.
+
 ```js
 app.all('*', requireAuthentication, loadUser);
 ```

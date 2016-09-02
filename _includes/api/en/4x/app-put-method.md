@@ -13,4 +13,19 @@ the current route.
 app.put('/', function (req, res) {
   res.send('PUT request to homepage');
 });
+
+// path could be array of strings
+app.put(['/foo/bar', '/other/bar'], function (req, res) {
+  res.send('PUT request to any of above path');
+});
+
+// path could be regex
+app.put(/^\/yellboom(er|s)?$/, function (req, res) {
+  res.send('PUT request to page that starts with startswithboom');
+});
+
+// path could be array of regex
+app.put([/^\/yellboom(er|s)?$/, /^\/ab(cd)?e$/], function (req, res) {
+  res.send('PUT request to page that matches any of above regex path');
+});
 ```
