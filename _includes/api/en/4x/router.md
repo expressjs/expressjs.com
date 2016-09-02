@@ -1,4 +1,4 @@
-<h2>Router</h2>
+<h2 id="router">Router</h2>
 
 <section markdown="1">
 A `router` object is an isolated instance of middleware and routes. You can think of it

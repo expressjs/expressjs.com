@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/serve-favicon.html'
 name: serve-favicon
 ---
-
+<div id="page-doc" markdown="1">
 # serve-favicon
 
 [![NPM Version][npm-image]][npm-url]
@@ -139,3 +139,4 @@ server.listen(3000);
 [downloads-url]: https://npmjs.org/package/serve-favicon
 [gittip-image]: https://img.shields.io/gittip/dougwilson.svg
 [gittip-url]: https://www.gittip.com/dougwilson/
+</div>

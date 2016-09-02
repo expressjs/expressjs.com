@@ -5,7 +5,7 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/best-practice-security.html"
 ---
-
+<div id="page-doc" markdown="1">
 # Production Best Practices: Security
 
 ## Overview
@@ -179,3 +179,4 @@ Here are some further recommendations from the excellent [Node.js Security Check
 Keep an eye out for [Node Security Project](https://nodesecurity.io/advisories) advisories that may affect Express or other modules that your app uses.  In general, the Node Security Project is an excellent resource for knowledge and tools about Node security.
 
 Finally, Express apps - like any other web apps - can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://www.owasp.org/index.php/Top_10_2013-Top_10) and take precautions to avoid them.
+</div>

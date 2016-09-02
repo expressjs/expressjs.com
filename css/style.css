@@ -185,9 +185,9 @@ a {
   padding-top: 40px;
 }
 
-#api-doc *:target{
- margin-top: -80px;
- padding-top: 80px;
+#api-doc *:target, #page-doc *:target {
+ margin-top: -60px;
+ padding-top: 60px;
  z-index: -1;
 }
 
@@ -739,20 +739,9 @@ footer {
   color: #259dff;
 }
 
-
-/* hash link scroll buffer */
-h2 a:before {
-  display: block;
-  content: ' ';
-  margin-top: -40px;
-  height: 40px;
-  visibility: hidden;
-}
-
 h2 a {
   color: #353535 !important;
 }
-
 
 /* responsive */
 

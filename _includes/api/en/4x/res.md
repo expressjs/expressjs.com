@@ -1,4 +1,4 @@
-<h2>Response</h2>
+<h2 id="res">Response</h2>
 
 The `res` object represents the HTTP response that an Express app sends when it gets an HTTP request.
 

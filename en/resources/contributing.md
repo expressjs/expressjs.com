@@ -5,11 +5,11 @@ menu: resources
 lang: en
 redirect_from: "/resources/community.html"
 ---
-
+<div id="page-doc" markdown="1">
 # Contributing to Express
 
-Express and the other projects in the [expressjs organization on GitHub](https://github.com/expressjs) are projects of the [Node.js Foundation](https://nodejs.org/foundation/). 
-These projects are governed under the general policies and guidelines of the Node.js Foundation along with the additional guidelines below. 
+Express and the other projects in the [expressjs organization on GitHub](https://github.com/expressjs) are projects of the [Node.js Foundation](https://nodejs.org/foundation/).
+These projects are governed under the general policies and guidelines of the Node.js Foundation along with the additional guidelines below.
 
 * [Technical committee](#technical-committee)
 * [Community contributing guide](#community-contributing-guide)
@@ -19,11 +19,11 @@ These projects are governed under the general policies and guidelines of the Nod
 ## Technical committee
 
 The Express technical committee meets online every two weeks to discuss development and maintenance of Express, and other issues relevant to the Express project.
-Each meeting is typically announced in an [expressjs/discussions issue](https://github.com/expressjs/discussions/issues) with a link to the Google Hangout, which is open to all observers. 
+Each meeting is typically announced in an [expressjs/discussions issue](https://github.com/expressjs/discussions/issues) with a link to the Google Hangout, which is open to all observers.
 
 Members of the Express technical committee are:
 
-- [@blakeembrey](https://github.com/blakeembrey) - Blake Embrey  
+- [@blakeembrey](https://github.com/blakeembrey) - Blake Embrey
 - [@crandmck](https://github.com/crandmck) - Rand McKinney
 - [@dougwilson](https://github.com/dougwilson) - Douglas Wilson
 - [@Fishrock123](https://github.com/Fishrock123) - Jeremiah Senkpiel
@@ -52,19 +52,19 @@ Vocabulary:
 
 * A **Contributor** is any individual creating or commenting on an issue or pull request.
 * A **Committer** is a subset of contributors who have been given write access to the repository.
-* A **TC (Technical Committee)** is a group of committers representing the required technical 
+* A **TC (Technical Committee)** is a group of committers representing the required technical
 expertise to resolve rare disputes.
 
 ### Logging issues
 
-Log an issue for any question or problem you might have. When in doubt, log an issue, 
+Log an issue for any question or problem you might have. When in doubt, log an issue,
 any additional policies about what to include will be provided in the responses. The only
 exception is security dislosures which should be sent privately.
 
 Committers may direct you to another repository, ask for additional clarifications, and
 add appropriate metadata before the issue is addressed.
 
-Please be courteous, respectful, and every participant is expected to follow the 
+Please be courteous, respectful, and every participant is expected to follow the
 project's Code of Conduct.
 
 ### Contributions
@@ -76,24 +76,24 @@ pull requests.
 No pull request can be merged without being reviewed.
 
 For non-trivial contributions, pull requests should sit for at least 36 hours to ensure that
-contributors in other timezones have time to review. Consideration should also be given to 
-weekends and other holiday periods to ensure active committers all have reasonable time to 
+contributors in other timezones have time to review. Consideration should also be given to
+weekends and other holiday periods to ensure active committers all have reasonable time to
 become involved in the discussion and review process if they wish.
 
 The default for each contribution is that it is accepted once no committer has an objection.
-During review committers may also request that a specific contributor who is most versed in a 
-particular area gives a "LGTM" before the PR can be merged. There is no additional "sign off" 
-process for contributions to land. Once all issues brought by committers are addressed it can 
+During review committers may also request that a specific contributor who is most versed in a
+particular area gives a "LGTM" before the PR can be merged. There is no additional "sign off"
+process for contributions to land. Once all issues brought by committers are addressed it can
 be landed by any committer.
 
-In the case of an objection being raised in a pull request by another committer, all involved 
-committers should seek to arrive at a consensus by way of addressing concerns being expressed 
+In the case of an objection being raised in a pull request by another committer, all involved
+committers should seek to arrive at a consensus by way of addressing concerns being expressed
 by discussion, compromise on the proposed change, or withdrawal of the proposed change.
 
 If a contribution is controversial and committers cannot agree about how to get it to land
 or if it should land then it should be escalated to the TC. TC members should regularly
-discuss pending contributions in order to find a resolution. It is expected that only a 
-small minority of issues be brought to the TC for resolution and that discussion and 
+discuss pending contributions in order to find a resolution. It is expected that only a
+small minority of issues be brought to the TC for resolution and that discussion and
 compromise among committers be the default resolution mechanism.
 
 ### Becoming a committer
@@ -106,20 +106,20 @@ proper review, and have other committers merge their pull requests.
 
 ### TC process
 
-The TC uses a "consensus seeking" process for issues that are escalated to the TC. 
+The TC uses a "consensus seeking" process for issues that are escalated to the TC.
 The group tries to find a resolution that has no open objections among TC members.
 If a consensus cannot be reached that has no objections then a majority wins vote
-is called. It is also expected that the majority of decisions made by the TC are via 
+is called. It is also expected that the majority of decisions made by the TC are via
 a consensus seeking process and that voting is only used as a last-resort.
 
-Resolution may involve returning the issue to committers with suggestions on how to 
-move forward towards a consensus. It is not expected that a meeting of the TC 
+Resolution may involve returning the issue to committers with suggestions on how to
+move forward towards a consensus. It is not expected that a meeting of the TC
 will resolve all issues on its agenda during that meeting and may prefer to continue
 the discussion happening among the committers.
 
 Members can be added to the TC at any time. Any committer can nominate another committer
 to the TC and the TC uses its standard consensus seeking process to evaluate whether or
-not to add this new member. Members who do not participate consistently at the level of 
+not to add this new member. Members who do not participate consistently at the level of
 a majority of the other members are expected to resign.
 
 ## Collaborator's guide
@@ -139,7 +139,7 @@ Open issues for the expressjs.com website in https://github.com/expressjs/expres
 ### Branches
 
 * Use the `master` branch for bug fixes or minor work that is intended for the current release stream
-* Use the correspondingly named branch, e.g. `5.0`, for anything intended for a future release of Express 
+* Use the correspondingly named branch, e.g. `5.0`, for anything intended for a future release of Express
 
 ### Steps for contributing
 
@@ -207,3 +207,4 @@ involving the following steps:
 
 If you have suggestions on how this process could be improved please submit a
 pull request.
+</div>
