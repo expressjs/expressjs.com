@@ -1,32 +1,21 @@
-<h3 id='app.use'>app.use([path,] function [, function...])</h3>
+<h3 id='app.use'>app.use([path,] callback [, callback...])</h3>
 
-Mounts the specified [middleware](/guide/using-middleware.html) function or functions at the specified path.
-If `path` is not specified, it defaults to "/".
+Mounts the specified [middleware](/guide/using-middleware.html) function or functions
+at the specified path:
+the middleware function is executed when the base of the requested path matches `path`.
 
-<div class="doc-box doc-info" markdown="1">
-  A route will match any path that follows its path immediately with a "<code>/</code>".
-  For example: <code>app.use('/apple', ...)</code> will match "/apple", "/apple/images",
-  "/apple/images/news", and so on.
-</div>
+{% include api/en/4x/routing-args.html %}
 
-Note that `req.originalUrl` in a middleware function is a combination of `req.baseUrl` and `req.path`, as shown in the following example.
+#### Description
 
-```js
-app.use('/admin', function(req, res, next) {
-  // GET 'http://www.example.com/admin/new'
-  console.log(req.originalUrl); // '/admin/new'
-  console.log(req.baseUrl); // '/admin'
-  console.log(req.path); // '/new'
-  next();
-});
-```
+A route will match any path that follows its path immediately with a "`/`".
+For example: `app.use('/apple', ...)` will match "/apple", "/apple/images",
+"/apple/images/news", and so on.
 
-Mounting a middleware function at a `path` will cause the middleware function to be executed whenever the base of the requested path matches the `path`.
-
-Since `path` defaults to "/", middleware mounted without a path will be executed for every request to the app.
+Since `path` defaults to "/", middleware mounted without a path will be executed for every request to the app.  
+For example, this middleware function will be executed for _every_ request to the app:
 
 ```js
-// this middleware will be executed for every request to the app
 app.use(function (req, res, next) {
   console.log('Time: %d', Date.now());
   next();
@@ -58,11 +47,23 @@ app.get('/', function (req, res) {
 });
 ```
 
-`path` can be a string representing a path, a path pattern, a regular expression to match paths,
-or an array of combinations thereof.
+**Error-handling middleware**
 
+Error-handling middleware always takes _four_ arguments.  You must provide four arguments to identify it as an error-handling middleware function. Even if you don't need to use the `next` object, you must specify it to maintain the signature. Otherwise, the `next` object will be interpreted as regular middleware and will fail to handle errors. For details about error-handling middleware, see: [Error handling](/{{ page.lang }}/guide/error-handling.html).
 
-The following table provides some simple examples of mounting middleware.
+Define error-handling middleware functions in the same way as other middleware functions, except with four arguments instead of three, specifically with the signature `(err, req, res, next)`):
+
+```js
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+#### Path examples
+
+The following table provides some simple examples of valid `path` values for
+mounting middleware.
 
 <div class="table-scroller">
 <table class="doctable" border="1">
@@ -96,20 +97,17 @@ The following table provides some simple examples of mounting middleware.
 </code></pre>
 
 This will match paths starting with `/abcd`, `/abbcd`, `/abbbbbcd`, and so on:
-<pre><code class="language-js">
-app.use('/ab+cd', function (req, res, next) {
+<pre><code class="language-js">app.use('/ab+cd', function (req, res, next) {
   next();
 });</code></pre>
 
 This will match paths starting with `/abcd`, `/abxcd`, `/abFOOcd`, `/abbArcd`, and so on:
-<pre><code class="language-js">
-app.use('/ab\*cd', function (req, res, next) {
+<pre><code class="language-js">app.use('/ab\*cd', function (req, res, next) {
   next();
 });</code></pre>
 
 This will match paths starting with `/ad` and `/abcd`:
-<pre><code class="language-js">
-app.use('/a(bc)?d', function (req, res, next) {
+<pre><code class="language-js">app.use('/a(bc)?d', function (req, res, next) {
   next();
 });</code></pre>
       </td>
@@ -140,10 +138,11 @@ app.use('/a(bc)?d', function (req, res, next) {
 </table>
 </div>
 
-`function` can be a middleware function, a series of middleware functions,
-an array of middleware functions, or a combination of all of them.
-Since [router](#router) and [app](#application) implement the middleware interface, you can use them
-as you would any other middleware function.
+#### Middleware callback function examples
+
+The following table provides some simple examples of middleware functions that
+can be used as the `callback` argument to `app.use()`, `app.METHOD()`, and `app.all()`.
+Even though the examples are for `app.use()`, they are also valid for `app.use()`, `app.METHOD()`, and `app.all()`.
 
 <table class="doctable" border="1">
 
@@ -245,17 +244,6 @@ app.use(mw1, [mw2, r1, r2], subApp);
   </tbody>
 
 </table>
-
-Error-handling middleware always takes _four_ arguments.  You must provide four arguments to identify it as an error-handling middleware function. Even if you don't need to use the `next` object, you must specify it to maintain the signature. Otherwise, the `next` object will be interpreted as regular middleware and will fail to handle errors. For details about error-handling middleware, see: [Error handling](/{{ page.lang }}/guide/error-handling.html).
-
-Define error-handling middleware functions in the same way as other middleware functions, except with four arguments instead of three, specifically with the signature `(err, req, res, next)`):
-
-```js
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-```
 
 Following are some examples of using the [express.static](/guide/using-middleware.html#middleware.built-in)
 middleware in an Express app.
