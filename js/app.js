@@ -188,7 +188,7 @@ $(function(){
         $(this).addClass('active-mobile-menu')
       }
     }
-    else {
+    else if (isMobile.any) {
       var path = $(this).find('a').attr('href')
       document.location = path
     }
@@ -206,8 +206,10 @@ $(function(){
 
   // sub menu navigation
   $('.dropit-submenu li').click(function () {
-    var path = $(this).find('a').attr('href')
-    document.location = path
+    if (isMobile.any) {
+      var path = $(this).find('a').attr('href')
+      document.location = path
+    }
   })
 
   // i18n notice
