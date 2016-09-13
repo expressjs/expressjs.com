@@ -18,6 +18,8 @@ Here are a few of the many books on Express:
 Manning Publications, April 2016.
  - **[Getting MEAN with Mongo, Express, Angular, and Node](http://www.manning.com/sholmes/)**,
 Manning Publications, early 2015.
+ - **[Pro Express.js: Master Express.js: The Node.js Framework For Your Web Development](http://www.apress.com/9781484200384)**,
+Apress, December 2014.
  - **[Mastering Web Application Development with Express](https://www.packtpub.com/web-development/mastering-web-application-development-express-raw)**,
 Packt Publishing, September 2014.
  - **[Web Development with Node and Express](http://shop.oreilly.com/product/0636920032977.do)**,
