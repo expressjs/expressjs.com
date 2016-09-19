@@ -2,7 +2,18 @@
  Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
  License: MIT
 */
+
 $(function(){
+
+  var isSmallScreen = checkSmallScreen()
+
+  $(window).resize(function () {
+    isSmallScreen = checkSmallScreen()
+  })
+
+  function checkSmallScreen() {
+    return window.innerWidth < 899 ? true : false
+  }
 
   var doc = $(document);
   var lang = document.location.pathname.split('/')[1]
@@ -188,7 +199,7 @@ $(function(){
         $(this).addClass('active-mobile-menu')
       }
     }
-    else if (isMobile.any) {
+    else if (isMobile.any || isSmallScreen) {
       var path = $(this).find('a').attr('href')
       document.location = path
     }
@@ -206,7 +217,7 @@ $(function(){
 
   // sub menu navigation
   $('.dropit-submenu li').click(function () {
-    if (isMobile.any) {
+    if (isMobile.any || isSmallScreen) {
       var path = $(this).find('a').attr('href')
       document.location = path
     }
