@@ -143,7 +143,7 @@ app.get(/a/, function(req, res) {
 });
 ```
 
-This route path will match `butterfly` and `dragonfly`, but not `butterflyman`, `dragonfly man`, and so on.
+This route path will match `butterfly` and `dragonfly`, but not `butterflyman`, `dragonflyman`, and so on.
 
 ```js
 app.get(/.*fly$/, function(req, res) {
