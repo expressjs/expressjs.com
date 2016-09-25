@@ -10,18 +10,18 @@ lang: ru
 Для того чтобы отображать в Express файлы шаблонов, необходимо задать следующие параметры приложения:
 
 * `views`, каталог, в котором находятся файлы шаблонов. Например: `app.set('views', './views')`
-* `view engine`, используемый шаблонизатор. Например: `app.set('view engine', 'jade')`
+* `view engine`, используемый шаблонизатор. Например: `app.set('view engine', 'pug')`
 
 Затем установите соответствующий пакет npm шаблонизатора:
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install jade --save
+$ npm install pug --save
 </code>
 </pre>
 
 <div class="doc-box doc-notice" markdown="1">
-Шаблонизаторы, совместимые с Express, например, Jade, экспортируют функцию `__express(filePath, options, callback)`, вызываемую с помощью функции `res.render()` для вывода кода шаблона.
+Шаблонизаторы, совместимые с Express, например, Pug, экспортируют функцию `__express(filePath, options, callback)`, вызываемую с помощью функции `res.render()` для вывода кода шаблона.
 
 Это правило действует не для всех шаблонизаторов. Библиотека [Consolidate.js](https://www.npmjs.org/package/consolidate) соблюдает его путем преобразования всех популярных шаблонизаторов Node.js, благодаря чему работает в Express без проблем.
 </div>
@@ -30,11 +30,11 @@ $ npm install jade --save
 
 <pre>
 <code class="language-javascript" translate="no">
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 </code>
 </pre>
 
-Создайте файл шаблона Jade с именем `index.jade` в каталоге `views` со следующим содержанием:
+Создайте файл шаблона Pug с именем `index.pug` в каталоге `views` со следующим содержанием:
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -46,7 +46,7 @@ html
 </code>
 </pre>
 
-Затем создайте маршрут для вывода файла `index.jade`. Если свойство `view engine` не задано, необходимо указать расширение файла `view`. В противном случае, можно не указывать расширение.
+Затем создайте маршрут для вывода файла `index.pug`. Если свойство `view engine` не задано, необходимо указать расширение файла `view`. В противном случае, можно не указывать расширение.
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -56,6 +56,6 @@ app.get('/', function (req, res) {
 </code>
 </pre>
 
-При выполнении запроса к домашней странице файл `index.jade` будет отображаться как HTML.
+При выполнении запроса к домашней странице файл `index.pug` будет отображаться как HTML.
 
 Для получения дополнительной информации о работе шаблонизаторов в Express обратитесь к разделу ["Разработка шаблонизаторов для Express"](/{{ page.lang }}/advanced/developing-template-engines.html).

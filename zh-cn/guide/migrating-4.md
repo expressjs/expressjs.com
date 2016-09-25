@@ -315,7 +315,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
@@ -353,7 +353,7 @@ http.createServer(app).listen(app.get('port'), function(){
   },
   "dependencies": {
     "express": "3.12.0",
-    "jade": "*"
+    "pug": "*"
   }
 }
 </code>
@@ -363,11 +363,11 @@ http.createServer(app).listen(app.get('port'), function(){
 进程
 </h3>
 
-使用以下命令安装 Express 4 应用程序的必需中间件并将 Express 和 Jade 分别更新到其最新版本，从而开始迁移过程：
+使用以下命令安装 Express 4 应用程序的必需中间件并将 Express 和 Pug 分别更新到其最新版本，从而开始迁移过程：
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
+$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
 </code>
 </pre>
 
@@ -399,7 +399,7 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
     "errorhandler": "^1.1.1",
     "express": "^4.8.0",
     "express-session": "^1.7.2",
-    "jade": "^1.5.0",
+    "pug": "^2.0.0-beta6",
     "method-override": "^2.1.2",
     "morgan": "^1.2.2",
     "multer": "^0.1.3",
@@ -434,7 +434,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(methodOverride());
