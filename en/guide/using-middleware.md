@@ -39,12 +39,12 @@ Bind application-level middleware to an instance of the [app object](/{{ page.la
 This example shows a middleware function with no mount path. The function is executed every time the app receives a request.
 
 ```js
-var app = express();
+var app = express()
 
 app.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
+  console.log('Time:', Date.now())
+  next()
+})
 ```
 
 This example shows a middleware function mounted on the `/user/:id` path. The function is executed for any type of
@@ -52,30 +52,30 @@ HTTP request on the `/user/:id` path.
 
 ```js
 app.use('/user/:id', function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
+  console.log('Request Type:', req.method)
+  next()
+})
 ```
 
 This example shows a route and its handler function (middleware system). The function handles GET requests to the `/user/:id` path.
 
 ```js
 app.get('/user/:id', function (req, res, next) {
-  res.send('USER');
-});
+  res.send('USER')
+})
 ```
 
 Here is an example of loading a series of middleware functions at a mount point, with a mount path.
 It illustrates a middleware sub-stack that prints request info for any type of HTTP request to the `/user/:id` path.
 
 ```js
-app.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
+app.use('/user/:id', function (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
 }, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
+  console.log('Request Type:', req.method)
+  next()
+})
 ```
 
 Route handlers enable you to define multiple routes for a path. The example below defines two routes for GET requests to the `/user/:id` path. The second route will not cause any problems, but it will never get called because the first route ends the request-response cycle.
@@ -84,16 +84,16 @@ This example shows a middleware sub-stack that handles GET requests to the `/use
 
 ```js
 app.get('/user/:id', function (req, res, next) {
-  console.log('ID:', req.params.id);
-  next();
+  console.log('ID:', req.params.id)
+  next()
 }, function (req, res, next) {
-  res.send('User Info');
-});
+  res.send('User Info')
+})
 
 // handler for the /user/:id path, which prints the user ID
 app.get('/user/:id', function (req, res, next) {
-  res.end(req.params.id);
-});
+  res.end(req.params.id)
+})
 ```
 
 To skip the rest of the middleware functions from a router middleware stack, call `next('route')` to pass control to the next route.
@@ -104,18 +104,18 @@ This example shows a middleware sub-stack that handles GET requests to the `/use
 ```js
 app.get('/user/:id', function (req, res, next) {
   // if the user ID is 0, skip to the next route
-  if (req.params.id == 0) next('route');
+  if (req.params.id === 0) next('route')
   // otherwise pass the control to the next middleware function in this stack
-  else next(); //
+  else next()
 }, function (req, res, next) {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
 app.get('/user/:id', function (req, res, next) {
-  res.render('special');
-});
+  res.render('special')
+})
 ```
 
 <h2 id='middleware.router'>Router-level middleware</h2>
@@ -123,50 +123,50 @@ app.get('/user/:id', function (req, res, next) {
 Router-level middleware works in the same way as application-level middleware, except it is bound to an instance of `express.Router()`.
 
 ```js
-var router = express.Router();
+var router = express.Router()
 ```
 Load router-level middleware by using the `router.use()` and `router.METHOD()` functions.
 
 The following example code replicates the middleware system that is shown above for application-level middleware, by using router-level middleware:
 
 ```js
-var app = express();
-var router = express.Router();
+var app = express()
+var router = express.Router()
 
 // a middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
+  console.log('Time:', Date.now())
+  next()
+})
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
-router.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
+router.use('/user/:id', function (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
 }, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
+  console.log('Request Type:', req.method)
+  next()
+})
 
 // a middleware sub-stack that handles GET requests to the /user/:id path
 router.get('/user/:id', function (req, res, next) {
   // if the user ID is 0, skip to the next router
-  if (req.params.id == 0) next('route');
+  if (req.params.id === 0) next('route')
   // otherwise pass control to the next middleware function in this stack
-  else next(); //
+  else next()
 }, function (req, res, next) {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
 router.get('/user/:id', function (req, res, next) {
-  console.log(req.params.id);
-  res.render('special');
-});
+  console.log(req.params.id)
+  res.render('special')
+})
 
 // mount the router on the app
-app.use('/', router);
+app.use('/', router)
 ```
 
 <h2 id='middleware.error-handling'>Error-handling middleware</h2>
@@ -178,10 +178,10 @@ Error-handling middleware always takes _four_ arguments.  You must provide four 
 Define error-handling middleware functions in the same way as other middleware functions, except with four arguments instead of three, specifically with the signature `(err, req, res, next)`):
 
 ```js
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 ```
 
 For details about error-handling middleware, see: [Error handling](/{{ page.lang }}/guide/error-handling.html).
@@ -214,19 +214,19 @@ var options = {
   maxAge: '1d',
   redirect: false,
   setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now());
+    res.set('x-timestamp', Date.now())
   }
 }
 
-app.use(express.static('public', options));
+app.use(express.static('public', options))
 ```
 
 You can have more than one static directory per app:
 
 ```js
-app.use(express.static('public'));
-app.use(express.static('uploads'));
-app.use(express.static('files'));
+app.use(express.static('public'))
+app.use(express.static('uploads'))
+app.use(express.static('files'))
 ```
 
 For more details about the `serve-static` function and its options, see: [serve-static](https://github.com/expressjs/serve-static) documentation.
@@ -244,12 +244,12 @@ $ npm install cookie-parser
 ```
 
 ```js
-var express = require('express');
-var app = express();
-var cookieParser = require('cookie-parser');
+var express = require('express')
+var app = express()
+var cookieParser = require('cookie-parser')
 
 // load the cookie-parsing middleware
-app.use(cookieParser());
+app.use(cookieParser())
 ```
 
 For a partial list of third-party middleware functions that are commonly used with Express, see: [Third-party middleware](../resources/middleware.html).

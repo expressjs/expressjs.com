@@ -58,10 +58,12 @@ $ npm install --save helmet
 Then to use it in your code:
 
 ```js
-...
-var helmet = require('helmet');
-app.use(helmet());
-...
+// ...
+
+var helmet = require('helmet')
+app.use(helmet())
+
+// ...
 ```
 
 ### At a minimum, disable X-Powered-By header
@@ -71,7 +73,7 @@ If you don't want to use Helmet, then at least disable the `X-Powered-By` header
 So, best practice is to to turn off the header with the `app.disable()` method:
 
 ```js
-app.disable('x-powered-by');
+app.disable('x-powered-by')
 ```
 
 If you use `helmet.js`, it takes care of this for you.
@@ -96,13 +98,12 @@ Using the default session cookie name can open your app to attacks.  The securit
 To avoid this problem, use generic cookie names; for example using [express-session](https://www.npmjs.com/package/express-session) middleware:
 
 ```js
-var session = require('express-session');
+var session = require('express-session')
 app.set('trust proxy', 1) // trust first proxy
-app.use( session({
-   secret : 's3Cur3',
-   name : 'sessionId',
-  })
-);
+app.use(session({
+  secret: 's3Cur3',
+  name: 'sessionId'
+}))
 ```
 
 ### Set cookie security options
@@ -118,22 +119,22 @@ Set the following cookie options to enhance security:
 Here is an example using [cookie-session](https://www.npmjs.com/package/cookie-session) middleware:
 
 ```js
-var session = require('cookie-session');
-var express = require('express');
-var app = express();
+var session = require('cookie-session')
+var express = require('express')
+var app = express()
 
-var expiryDate = new Date( Date.now() + 60 * 60 * 1000 ); // 1 hour
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],
-  cookie: { secure: true,
-            httpOnly: true,
-            domain: 'example.com',
-            path: 'foo/bar',
-            expires: expiryDate
-          }
-  })
-);
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    domain: 'example.com',
+    path: 'foo/bar',
+    expires: expiryDate
+  }
+}))
 ```
 
 ## Ensure your dependencies are secure

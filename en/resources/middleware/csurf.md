@@ -130,12 +130,12 @@ var app = express()
 // we need this because "cookie" is true in csrfProtection
 app.use(cookieParser())
 
-app.get('/form', csrfProtection, function(req, res) {
+app.get('/form', csrfProtection, function (req, res) {
   // pass the csrfToken to the view
   res.render('send', { csrfToken: req.csrfToken() })
 })
 
-app.post('/process', parseForm, csrfProtection, function(req, res) {
+app.post('/process', parseForm, csrfProtection, function (req, res) {
   res.send('data is being processed')
 })
 ```

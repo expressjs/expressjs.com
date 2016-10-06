@@ -14,13 +14,13 @@ For an introduction to routing, see [Basic routing](/{{ page.lang }}/starter/bas
 The following code is an example of a very basic route.
 
 ```js
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
 
 // respond with "hello world" when a GET request is made to the homepage
-app.get('/', function(req, res) {
-  res.send('hello world');
-});
+app.get('/', function (req, res) {
+  res.send('hello world')
+})
 ```
 
 <h2 id="route-methods">Route methods</h2>
@@ -32,13 +32,13 @@ The following code is an example of routes that are defined for the GET and the 
 ```js
 // GET method route
 app.get('/', function (req, res) {
-  res.send('GET request to the homepage');
-});
+  res.send('GET request to the homepage')
+})
 
 // POST method route
 app.post('/', function (req, res) {
-  res.send('POST request to the homepage');
-});
+  res.send('POST request to the homepage')
+})
 ```
 
 Express supports the following routing methods that correspond to HTTP methods: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
@@ -54,9 +54,9 @@ In the following example, the handler will be executed for requests to "/secret"
 
 ```js
 app.all('/secret', function (req, res, next) {
-  console.log('Accessing the secret section ...');
-  next(); // pass control to the next handler
-});
+  console.log('Accessing the secret section ...')
+  next() // pass control to the next handler
+})
 ```
 
 <h2 id="route-paths">Route paths</h2>
@@ -79,24 +79,24 @@ This route path will match requests to the root route, `/`.
 
 ```js
 app.get('/', function (req, res) {
-  res.send('root');
-});
+  res.send('root')
+})
 ```
 
 This route path will match requests to `/about`.
 
 ```js
 app.get('/about', function (req, res) {
-  res.send('about');
-});
+  res.send('about')
+})
 ```
 
 This route path will match requests to `/random.text`.
 
 ```js
 app.get('/random.text', function (req, res) {
-  res.send('random.text');
-});
+  res.send('random.text')
+})
 ```
 
 Here are some examples of route paths based on string patterns.
@@ -104,33 +104,33 @@ Here are some examples of route paths based on string patterns.
 This route path will match `acd` and `abcd`.
 
 ```js
-app.get('/ab?cd', function(req, res) {
-  res.send('ab?cd');
-});
+app.get('/ab?cd', function (req, res) {
+  res.send('ab?cd')
+})
 ```
 
 This route path will match `abcd`, `abbcd`, `abbbcd`, and so on.
 
 ```js
-app.get('/ab+cd', function(req, res) {
-  res.send('ab+cd');
-});
+app.get('/ab+cd', function (req, res) {
+  res.send('ab+cd')
+})
 ```
 
 This route path will match `abcd`, `abxcd`, `abRANDOMcd`, `ab123cd`, and so on.
 
 ```js
-app.get('/ab*cd', function(req, res) {
-  res.send('ab*cd');
-});
+app.get('/ab*cd', function (req, res) {
+  res.send('ab*cd')
+})
 ```
 
 This route path will match `/abe` and `/abcde`.
 
 ```js
-app.get('/ab(cd)?e', function(req, res) {
- res.send('ab(cd)?e');
-});
+app.get('/ab(cd)?e', function (req, res) {
+  res.send('ab(cd)?e')
+})
 ```
 
 Examples of route paths based on regular expressions:
@@ -138,17 +138,17 @@ Examples of route paths based on regular expressions:
 This route path will match anything with an "a" in the route name.
 
 ```js
-app.get(/a/, function(req, res) {
-  res.send('/a/');
-});
+app.get(/a/, function (req, res) {
+  res.send('/a/')
+})
 ```
 
 This route path will match `butterfly` and `dragonfly`, but not `butterflyman`, `dragonflyman`, and so on.
 
 ```js
-app.get(/.*fly$/, function(req, res) {
-  res.send('/.*fly$/');
-});
+app.get(/.*fly$/, function (req, res) {
+  res.send('/.*fly$/')
+})
 ```
 
 <h3 id="route-parameters">Route parameters</h3>
@@ -164,9 +164,9 @@ req.params: { "userId": "34", "bookId": "8989" }
 To define routes with route parameters, simply specify the route parameters in the path of the route as shown below.
 
 ```js
-app.get('/users/:userId/books/:bookId', function(req, res) {
-  res.send(req.params);
-});
+app.get('/users/:userId/books/:bookId', function (req, res) {
+  res.send(req.params)
+})
 ```
 
 Since the hyphen (`-`) and the dot (`.`) are interpreted literally, they can be used along with route parameters for useful purposes.
@@ -197,60 +197,60 @@ A single callback function can handle a route.  For example:
 
 ```js
 app.get('/example/a', function (req, res) {
-  res.send('Hello from A!');
-});
+  res.send('Hello from A!')
+})
 ```
 
 More than one callback function can handle a route (make sure you specify the `next` object). For example:
 
 ```js
 app.get('/example/b', function (req, res, next) {
-  console.log('the response will be sent by the next function ...');
-  next();
+  console.log('the response will be sent by the next function ...')
+  next()
 }, function (req, res) {
-  res.send('Hello from B!');
-});
+  res.send('Hello from B!')
+})
 ```
 
 An array of callback functions can handle a route.  For example:
 
 ```js
 var cb0 = function (req, res, next) {
-  console.log('CB0');
-  next();
+  console.log('CB0')
+  next()
 }
 
 var cb1 = function (req, res, next) {
-  console.log('CB1');
-  next();
+  console.log('CB1')
+  next()
 }
 
 var cb2 = function (req, res) {
-  res.send('Hello from C!');
+  res.send('Hello from C!')
 }
 
-app.get('/example/c', [cb0, cb1, cb2]);
+app.get('/example/c', [cb0, cb1, cb2])
 ```
 
 A combination of independent functions and arrays of functions can handle a route.  For example:
 
 ```js
 var cb0 = function (req, res, next) {
-  console.log('CB0');
-  next();
+  console.log('CB0')
+  next()
 }
 
 var cb1 = function (req, res, next) {
-  console.log('CB1');
-  next();
+  console.log('CB1')
+  next()
 }
 
 app.get('/example/d', [cb0, cb1], function (req, res, next) {
-  console.log('the response will be sent by the next function ...');
-  next();
+  console.log('the response will be sent by the next function ...')
+  next()
 }, function (req, res) {
-  res.send('Hello from D!');
-});
+  res.send('Hello from D!')
+})
 ```
 
 <h2 id="response-methods">Response methods</h2>
@@ -278,15 +278,15 @@ Here is an example of chained route handlers that are defined by using `app.rout
 
 ```js
 app.route('/book')
-  .get(function(req, res) {
-    res.send('Get a random book');
+  .get(function (req, res) {
+    res.send('Get a random book')
   })
-  .post(function(req, res) {
-    res.send('Add a book');
+  .post(function (req, res) {
+    res.send('Add a book')
   })
-  .put(function(req, res) {
-    res.send('Update the book');
-  });
+  .put(function (req, res) {
+    res.send('Update the book')
+  })
 ```
 
 <h2 id="express-router">express.Router</h2>
@@ -298,32 +298,34 @@ The following example creates a router as a module, loads a middleware function 
 Create a router file named `birds.js` in the app directory, with the following content:
 
 ```js
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
 // middleware that is specific to this router
-router.use(function timeLog(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-});
+router.use(function timeLog (req, res, next) {
+  console.log('Time: ', Date.now())
+  next()
+})
 // define the home page route
-router.get('/', function(req, res) {
-  res.send('Birds home page');
-});
+router.get('/', function (req, res) {
+  res.send('Birds home page')
+})
 // define the about route
-router.get('/about', function(req, res) {
-  res.send('About birds');
-});
+router.get('/about', function (req, res) {
+  res.send('About birds')
+})
 
-module.exports = router;
+module.exports = router
 ```
 
 Then, load the router module in the app:
 
 ```js
-var birds = require('./birds');
-...
-app.use('/birds', birds);
+var birds = require('./birds')
+
+// ...
+
+app.use('/birds', birds)
 ```
 
 The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.

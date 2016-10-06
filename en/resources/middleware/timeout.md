@@ -76,83 +76,83 @@ care to check if the request has timedout before you continue to act
 on the request.
 
 ```javascript
-var express = require('express');
-var timeout = require('connect-timeout');
+var express = require('express')
+var timeout = require('connect-timeout')
 
 // example of using this top-level; note the use of haltOnTimedout
 // after every middleware; it will stop the request flow on a timeout
-var app = express();
-app.use(timeout('5s'));
-app.use(bodyParser());
-app.use(haltOnTimedout);
-app.use(cookieParser());
-app.use(haltOnTimedout);
+var app = express()
+app.use(timeout('5s'))
+app.use(bodyParser())
+app.use(haltOnTimedout)
+app.use(cookieParser())
+app.use(haltOnTimedout)
 
 // Add your routes here, etc.
 
-function haltOnTimedout(req, res, next){
-  if (!req.timedout) next();
+function haltOnTimedout (req, res, next) {
+  if (!req.timedout) next()
 }
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 ### express 3.x
 
 ```javascript
-var express = require('express');
-var bodyParser = require('body-parser');
-var timeout = require('connect-timeout');
+var express = require('express')
+var bodyParser = require('body-parser')
+var timeout = require('connect-timeout')
 
-var app = express();
-app.post('/save', timeout('5s'), bodyParser.json(), haltOnTimedout, function(req, res, next){
-  savePost(req.body, function(err, id){
-    if (err) return next(err);
-    if (req.timedout) return;
-    res.send('saved as id ' + id);
-  });
-});
+var app = express()
+app.post('/save', timeout('5s'), bodyParser.json(), haltOnTimedout, function (req, res, next) {
+  savePost(req.body, function (err, id) {
+    if (err) return next(err)
+    if (req.timedout) return
+    res.send('saved as id ' + id)
+  })
+})
 
-function haltOnTimedout(req, res, next){
-  if (!req.timedout) next();
+function haltOnTimedout (req, res, next) {
+  if (!req.timedout) next()
 }
 
-function savePost(post, cb){
-  setTimeout(function(){
-    cb(null, ((Math.random()* 40000) >>> 0));
-  }, (Math.random()* 7000) >>> 0));
+function savePost (post, cb) {
+  setTimeout(function () {
+    cb(null, ((Math.random() * 40000) >>> 0))
+  }, ((Math.random() * 7000) >>> 0))
 }
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 ### connect
 
 ```javascript
-var bodyParser = require('body-parser');
-var connect = require('connect');
-var timeout = require('connect-timeout');
+var bodyParser = require('body-parser')
+var connect = require('connect')
+var timeout = require('connect-timeout')
 
-var app = require('connect');
-app.use('/save', timeout('5s'), bodyParser.json(), haltOnTimedout, function(req, res, next){
-  savePost(req.body, function(err, id){
-    if (err) return next(err);
-    if (req.timedout) return;
-    res.send('saved as id ' + id);
-  });
-});
+var app = require('connect')
+app.use('/save', timeout('5s'), bodyParser.json(), haltOnTimedout, function (req, res, next) {
+  savePost(req.body, function (err, id) {
+    if (err) return next(err)
+    if (req.timedout) return
+    res.send('saved as id ' + id)
+  })
+})
 
-function haltOnTimedout(req, res, next){
-  if (!req.timedout) next();
+function haltOnTimedout (req, res, next) {
+  if (!req.timedout) next()
 }
 
-function savePost(post, cb){
-  setTimeout(function(){
-    cb(null, ((Math.random()* 40000) >>> 0));
-  }, (Math.random()* 7000) >>> 0));
+function savePost (post, cb) {
+  setTimeout(function () {
+    cb(null, ((Math.random() * 40000) >>> 0))
+  }, ((Math.random() * 7000) >>> 0))
 }
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 ## License

@@ -107,7 +107,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(errorhandler({log: errorNotification}))
 }
 
-function errorNotification(err, str, req) {
+function errorNotification (err, str, req) {
   var title = 'Error in ' + req.method + ' ' + req.url
 
   notifier.notify({

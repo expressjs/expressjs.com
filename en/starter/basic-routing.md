@@ -35,32 +35,32 @@ Respond with `Hello World!` on the homepage:
 
 ```js
 app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+  res.send('Hello World!')
+})
 ```
 
 Respond to POST request on the root route (`/`), the application's home page:
 
 ```js
 app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
+  res.send('Got a POST request')
+})
 ```
 
 Respond to a PUT request to the `/user` route:
 
 ```js
 app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user');
-});
+  res.send('Got a PUT request at /user')
+})
 ```
 
 Respond to a DELETE request to the `/user` route:
 
 ```js
 app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user');
-});
+  res.send('Got a DELETE request at /user')
+})
 ```
 
 For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).

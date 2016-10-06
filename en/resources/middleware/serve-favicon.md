@@ -70,29 +70,31 @@ to avoid processing any other middleware if we already know the request is for
 ### express
 
 ```javascript
-var express = require('express');
-var favicon = require('serve-favicon');
+var path = require('path')
+var express = require('express')
+var favicon = require('serve-favicon')
 
-var app = express();
-app.use(favicon(__dirname + '/public/favicon.ico'));
+var app = express()
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')))
 
 // Add your routes here, etc.
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 ### connect
 
 ```javascript
-var connect = require('connect');
-var favicon = require('serve-favicon');
+var path = require('path')
+var connect = require('connect')
+var favicon = require('serve-favicon')
 
-var app = connect();
-app.use(favicon(__dirname + '/public/favicon.ico'));
+var app = connect()
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')))
 
 // Add your middleware here, etc.
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 ### vanilla http server
@@ -101,26 +103,27 @@ This middleware can be used anywhere, even outside express/connect. It takes
 `req`, `res`, and `callback`.
 
 ```javascript
-var http = require('http');
-var favicon = require('serve-favicon');
-var finalhandler = require('finalhandler');
+var http = require('http')
+var path = require('path')
+var favicon = require('serve-favicon')
+var finalhandler = require('finalhandler')
 
-var _favicon = favicon(__dirname + '/public/favicon.ico');
+var _favicon = favicon(path.join(__dirname, '/public/favicon.ico'))
 
-var server = http.createServer(function onRequest(req, res) {
-  var done = finalhandler(req, res);
+var server = http.createServer(function onRequest (req, res) {
+  var done = finalhandler(req, res)
 
-  _favicon(req, res, function onNext(err) {
-    if (err) return done(err);
+  _favicon(req, res, function onNext (err) {
+    if (err) return done(err)
 
     // continue to process the request here, etc.
 
-    res.statusCode = 404;
-    res.end('oops');
-  });
-});
+    res.statusCode = 404
+    res.end('oops')
+  })
+})
 
-server.listen(3000);
+server.listen(3000)
 ```
 
 ## License

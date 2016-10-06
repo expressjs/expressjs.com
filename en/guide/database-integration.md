@@ -41,13 +41,13 @@ $ npm install cassandra-driver
 **Example**
 
 ```js
-var cassandra = require('cassandra-driver');
-var client = new cassandra.Client({ contactPoints: ['localhost']});
+var cassandra = require('cassandra-driver')
+var client = new cassandra.Client({ contactPoints: ['localhost'] })
 
-client.execute('select key from system.local', function(err, result) {
-  if (err) throw err;
-  console.log(result.rows[0]);
-});
+client.execute('select key from system.local', function (err, result) {
+  if (err) throw err
+  console.log(result.rows[0])
+})
 ```
 
 <a name="couchbase"></a>
@@ -64,26 +64,28 @@ $ npm install couchbase
 **Example**
 
 ```js
-var couchbase = require("couchbase");
-var bucket = (new couchbase.Cluster("http://localhost:8091")).openBucket("bucketName");
+var couchbase = require('couchbase')
+var bucket = (new couchbase.Cluster('http://localhost:8091')).openBucket('bucketName')
 
 // add a document to a bucket
-bucket.insert("document-key", { name: "Matt", shoeSize: 13}, function(error, result) {
-    if(error)
-      console.log(error);
-    else
-      console.log(result);
-});
+bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, function (err, result) {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log(result)
+  }
+})
 
 // get all documents with shoe size 13
-var n1ql = "SELECT d.* FROM `bucketName` d WHERE shoeSize = $1;"
-var query = N1qlQuery.fromString(n1ql);
-bucket.query(query, [13], function(error, result) {
-    if(error)
-      console.log(error);
-    else
-      console.log(result);
-});
+var n1ql = 'SELECT d.* FROM `bucketName` d WHERE shoeSize = $1'
+var query = N1qlQuery.fromString(n1ql)
+bucket.query(query, [13], function (err, result) {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log(result)
+  }
+})
 ```
 
 <a name="couchdb"></a>
@@ -100,21 +102,27 @@ $ npm install nano
 **Example**
 
 ```js
-var nano = require('nano')('http://localhost:5984');
-nano.db.create('books');
-var books = nano.db.use('books');
+var nano = require('nano')('http://localhost:5984')
+nano.db.create('books')
+var books = nano.db.use('books')
 
-//Insert a book document in the books database
-books.insert({name: 'The Art of war'}, null, function(err, body) {
-  if (!err){
-    console.log(body);
+// Insert a book document in the books database
+books.insert({ name: 'The Art of war' }, null, function (err, body) {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log(body)
   }
-});
+})
 
-//Get a list of all books
-books.list(function(err, body){
-  console.log(body.rows);
-});
+// Get a list of all books
+books.list(function (err, body) {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log(body.rows)
+  }
+})
 ```
 
 <a name="leveldb"></a>
@@ -131,18 +139,18 @@ $ npm install level levelup leveldown
 **Example**
 
 ```js
-var levelup = require('levelup');
-var db = levelup('./mydb');
+var levelup = require('levelup')
+var db = levelup('./mydb')
 
 db.put('name', 'LevelUP', function (err) {
+  if (err) return console.log('Ooops!', err)
 
-  if (err) return console.log('Ooops!', err);
   db.get('name', function (err, value) {
-    if (err) return console.log('Ooops!', err);
-    console.log('name=' + value);
-  });
+    if (err) return console.log('Ooops!', err)
 
-});
+    console.log('name=' + value)
+  })
+})
 ```
 
 <a name="mysql"></a>
@@ -159,21 +167,22 @@ $ npm install mysql
 **Example**
 
 ```js
-var mysql      = require('mysql');
+var mysql = require('mysql')
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'dbuser',
-  password : 's3kreee7'
-});
+  host: 'localhost',
+  user: 'dbuser',
+  password: 's3kreee7'
+})
 
-connection.connect();
+connection.connect()
 
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-  if (err) throw err;
-  console.log('The solution is: ', rows[0].solution);
-});
+connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
+  if (err) throw err
 
-connection.end();
+  console.log('The solution is: ', rows[0].solution)
+})
+
+connection.end()
 ```
 
 <a name="mongo"></a>
@@ -190,19 +199,17 @@ $ npm install mongodb
 **Example**
 
 ```js
-var MongoClient = require('mongodb').MongoClient;
+var MongoClient = require('mongodb').MongoClient
 
-MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
-  if (err) {
-    throw err;
-  }
-  db.collection('mammals').find().toArray(function(err, result) {
-    if (err) {
-      throw err;
-    }
-    console.log(result);
-  });
-});
+MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
+  if (err) throw err
+
+  db.collection('mammals').find().toArray(function (err, result) {
+    if (err) throw err
+
+    console.log(result)
+  })
+})
 ```
 
 If you want an object model driver for MongoDB, look at [Mongoose](https://github.com/LearnBoost/mongoose).
@@ -221,16 +228,16 @@ $ npm install apoc
 **Example**
 
 ```js
-var apoc = require('apoc');
+var apoc = require('apoc')
 
 apoc.query('match (n) return n').exec().then(
   function (response) {
-    console.log(response);
+    console.log(response)
   },
   function (fail) {
-    console.log(fail);
+    console.log(fail)
   }
-);
+)
 ```
 
 <a name="postgres"></a>
@@ -247,16 +254,16 @@ $ npm install pg-promise
 **Example**
 
 ```js
-var pgp = require("pg-promise")(/*options*/);
-var db = pgp("postgres://username:password@host:port/database");
+var pgp = require('pg-promise')(/*options*/)
+var db = pgp('postgres://username:password@host:port/database')
 
-db.one("SELECT $1 AS value", 123)
-    .then(function (data) {
-        console.log("DATA:", data.value);
-    })
-    .catch(function (error) {
-        console.log("ERROR:", error);
-    });
+db.one('SELECT $1 AS value', 123)
+  .then(function (data) {
+    console.log('DATA:', data.value)
+  })
+  .catch(function (error) {
+    console.log('ERROR:', error)
+  })
 ```
 
 <a name="redis"></a>
@@ -273,26 +280,25 @@ $ npm install redis
 **Example**
 
 ```js
-var client = require('redis').createClient();
+var client = require('redis').createClient()
 
 client.on('error', function (err) {
-  console.log('Error ' + err);
-});
+  console.log('Error ' + err)
+})
 
-client.set('string key', 'string val', redis.print);
-client.hset('hash key', 'hashtest 1', 'some value', redis.print);
-client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print);
+client.set('string key', 'string val', redis.print)
+client.hset('hash key', 'hashtest 1', 'some value', redis.print)
+client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print)
 
 client.hkeys('hash key', function (err, replies) {
+  console.log(replies.length + ' replies:')
 
-  console.log(replies.length + ' replies:');
   replies.forEach(function (reply, i) {
-    console.log('    ' + i + ': ' + reply);
-  });
+    console.log('    ' + i + ': ' + reply)
+  })
 
-  client.quit();
-
-});
+  client.quit()
+})
 ```
 
 <a name="sqlite"></a>
@@ -309,26 +315,25 @@ $ npm install sqlite3
 **Example**
 
 ```js
-var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database(':memory:');
+var sqlite3 = require('sqlite3').verbose()
+var db = new sqlite3.Database(':memory:')
 
-db.serialize(function() {
-
-  db.run('CREATE TABLE lorem (info TEXT)');
-  var stmt = db.prepare('INSERT INTO lorem VALUES (?)');
+db.serialize(function () {
+  db.run('CREATE TABLE lorem (info TEXT)')
+  var stmt = db.prepare('INSERT INTO lorem VALUES (?)')
 
   for (var i = 0; i < 10; i++) {
-    stmt.run('Ipsum ' + i);
+    stmt.run('Ipsum ' + i)
   }
 
-  stmt.finalize();
+  stmt.finalize()
 
-  db.each('SELECT rowid AS id, info FROM lorem', function(err, row) {
-    console.log(row.id + ': ' + row.info);
-  });
-});
+  db.each('SELECT rowid AS id, info FROM lorem', function (err, row) {
+    console.log(row.id + ': ' + row.info)
+  })
+})
 
-db.close();
+db.close()
 ```
 
 <a name="elasticsearch"></a>
@@ -345,10 +350,10 @@ $ npm install elasticsearch
 **Example**
 
 ```js
-var elasticsearch = require('elasticsearch');
+var elasticsearch = require('elasticsearch')
 var client = elasticsearch.Client({
   host: 'localhost:9200'
-});
+})
 
 client.search({
   index: 'books',
@@ -361,10 +366,10 @@ client.search({
       }
     }
   }
-}).then(function(response) {
-  var hits = response.hits.hits;
-}, function(error) {
-  console.trace(error.message);
-});
+}).then(function (response) {
+  var hits = response.hits.hits
+}, function (error) {
+  console.trace(error.message)
+})
 ```
 </div>

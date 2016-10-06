@@ -111,9 +111,9 @@ var index = serveIndex('public/ftp', {'icons': true})
 var serve = serveStatic('public/ftp')
 
 // Create server
-var server = http.createServer(function onRequest(req, res){
+var server = http.createServer(function onRequest (req, res) {
   var done = finalhandler(req, res)
-  serve(req, res, function onNext(err) {
+  serve(req, res, function onNext (err) {
     if (err) return done(err)
     index(req, res, done)
   })
@@ -126,7 +126,7 @@ server.listen(3000)
 ### Serve directory indexes with express
 
 ```js
-var express    = require('express')
+var express = require('express')
 var serveIndex = require('serve-index')
 
 var app = express()

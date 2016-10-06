@@ -28,7 +28,7 @@ Basic usage example:
 
 ```javascript
 var express = require('express')
-var multer  = require('multer')
+var multer = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
 var app = express()
@@ -60,7 +60,7 @@ In case you need to handle a text-only multipart form, you can use any of the mu
 ```javascript
 var express = require('express')
 var app = express()
-var multer  = require('multer')
+var multer = require('multer')
 var upload = multer()
 
 app.post('/profile', upload.array(), function (req, res, next) {
@@ -241,7 +241,6 @@ should be skipped. The function should look like this:
 
 ```javascript
 function fileFilter (req, file, cb) {
-
   // The function should call `cb` with a boolean
   // to indicate if the file should be accepted
 
@@ -253,7 +252,6 @@ function fileFilter (req, file, cb) {
 
   // You can always pass an error if something goes wrong:
   cb(new Error('I don\'t have a clue!'))
-
 }
 ```
 
