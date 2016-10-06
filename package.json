@@ -1,0 +1,24 @@
+{
+  "name": "expressjs.com",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "eslint --ext md en/"
+  },
+  "devDependencies": {
+    "eslint": "^3.7.1",
+    "eslint-config-standard": "^6.2.0",
+    "eslint-plugin-markdown": "^1.0.0-beta.2",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-standard": "^2.0.1"
+  },
+  "eslintConfig": {
+    "extends": "standard",
+    "plugins": ["markdown"],
+    "rules": {
+      "handle-callback-err": 0,
+      "no-undef": 0,
+      "no-unused-vars": 0
+    }
+  }
+}
