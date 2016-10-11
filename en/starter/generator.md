@@ -10,7 +10,7 @@ redirect_from: "/starter/generator.html"
 
 Use the application generator tool, `express-generator`, to quickly create an application skeleton.
 
-Install the `express` command line tool with the following example:
+The `express-generator` package installs the `express` command-line tool. Use the following command to do so:
 
 ```sh
 $ npm install express-generator -g
