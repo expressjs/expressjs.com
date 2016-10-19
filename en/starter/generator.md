@@ -69,7 +69,7 @@ $ npm install
 On MacOS or Linux, run the app with this command:
 
 ```sh
-$ DEBUG=myapp:* npm start
+$ DEBUG=myapp:* && npm start
 ```
 
 On Windows, use this command:
