@@ -14,13 +14,17 @@ This approach makes it easier to design an HTML page.
 
 Some popular template engines that work with Express are [Pug](https://pugjs.org/api/getting-started.html),
 [Mustache](https://www.npmjs.com/package/mustache), and [EJS](https://www.npmjs.com/package/ejs).
-The [Express application generator](/{{ page.lang }}/starter/generator.html) uses Pug as its default, but it also supports several others.
+The [Express application generator](/{{ page.lang }}/starter/generator.html) uses [Jade](https://www.npmjs.com/package/jade) as its default, but it also supports several others.
 
 See [Template Engines (Express wiki)](https://github.com/strongloop/express/wiki#template-engines)
 for a list of template engines you can use with Express.
 See also [Comparing JavaScript Templating Engines: Jade, Mustache, Dust and More](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/).
 
-To render template files, set the following [application setting properties](/{{ page.lang }}/4x/api.html#app.set):
+<div class="doc-box doc-notice" markdown="1">
+**Note**: Jade has been renamed to [Pug](https://www.npmjs.com/package/pug).  You can continue to use Jade in your app, and it will work just fine.  However if you want the latest updates to the template engine, you must replace Jade with Pug in your app.
+</div>
+
+To render template files, set the following [application setting properties](/{{ page.lang }}/4x/api.html#app.set), set in `app.js` in the default app created by the generator:
 
 * `views`, the directory where the template files are located. Eg: `app.set('views', './views')`.
 This defaults to the `views` directory in the application root directory.
@@ -33,7 +37,7 @@ $ npm install pug --save
 ```
 
 <div class="doc-box doc-notice" markdown="1">
-Express-compliant template engines such as Pug export a function named `__express(filePath, options, callback)`,
+Express-compliant template engines such as Jade and Pug export a function named `__express(filePath, options, callback)`,
 which is called by the `res.render()` function to render the template code.
 
 Some template engines do not follow this convention. The [Consolidate.js](https://www.npmjs.org/package/consolidate)
