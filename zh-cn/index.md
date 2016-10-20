@@ -33,9 +33,10 @@ Express 文档英文以外的语言版本包括：[西班牙语](/es)、[日语]
       <div id="performance">
           <h3>性能</h3> Express 提供精简的基本 Web 应用程序功能，而不会隐藏您了解和青睐的 Node.js 功能。</div>
 
-      <div id="sponsorship">
-          <a href="http://loopback.io/"><h3>LoopBack</h3> 使用基于 Express 的框架来开发模型驱动的应用程序。<br/>可在 loopback.io 了解更多信息。</a>
+      <div id="frameworks">
+          <h3>框架</h3> 许多基于 Express 的 <a href="{{ page.lang }}/resources/frameworks.html">流行框架</a> 。
       </div>
+      
   </div>
 
 </section>
