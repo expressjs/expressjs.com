@@ -1,3 +1,14 @@
+<h3 id='app.listen'>app.listen(path, [callback])</h3>
+
+Starts a UNIX socket and listens for connections on the given path.
+This method is identical to Node's [http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen_path_callback).
+
+```js
+var express = require('express');
+var app = express();
+app.listen('/tmp/sock');
+```
+
 <h3 id='app.listen'>app.listen(port, [hostname], [backlog], [callback])</h3>
 
 Binds and listens for connections on the specified host and port.
