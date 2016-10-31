@@ -25,10 +25,12 @@ $ express -h
   Options:
 
     -h, --help          output usage information
-    -V, --version       output the version number
-    -e, --ejs           add ejs engine support (defaults to jade)
+        --version       output the version number
+    -e, --ejs           add ejs engine support
         --hbs           add handlebars engine support
+        --pug           add pug engine support
     -H, --hogan         add hogan.js engine support
+    -v, --view &lt;engine&gt; add view &lt;engine&gt; support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
@@ -37,7 +39,7 @@ $ express -h
 В наступному прикладі створюється каркас застосунку Express з іменем _myapp_ в поточній директорії:
 
 <pre><code class="language-sh" translate="no">
-$ express myapp
+$ express --view=jade myapp
 
    create : myapp
    create : myapp/package.json
