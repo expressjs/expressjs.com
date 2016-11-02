@@ -180,7 +180,7 @@ The default value is a function which uses the `uid-safe` library to generate ID
 
 ```js
 app.use(session({
-  genid: function(req) {
+  genid: function (req) {
     return genuuid() // use UUIDs for session IDs
   },
   secret: 'keyboard cat'
@@ -293,10 +293,10 @@ are typically fine. For example below is a user-specific view counter:
 
 ```js
 // Use the session middleware
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 } }))
 
 // Access the session as req.session
-app.get('/', function(req, res, next) {
+app.get('/', function (req, res, next) {
   var sess = req.session
   if (sess.views) {
     sess.views++
@@ -317,7 +317,7 @@ To regenerate the session simply invoke the method. Once complete,
 a new SID and `Session` instance will be initialized at `req.session`.
 
 ```js
-req.session.regenerate(function(err) {
+req.session.regenerate(function (err) {
   // will have a new session here
 })
 ```
@@ -327,7 +327,7 @@ req.session.regenerate(function(err) {
 Destroys the session, removing `req.session`; will be re-generated next request.
 
 ```js
-req.session.destroy(function(err) {
+req.session.destroy(function (err) {
   // cannot access session here
 })
 ```
@@ -337,7 +337,7 @@ req.session.destroy(function(err) {
 Reloads the session data.
 
 ```js
-req.session.reload(function(err) {
+req.session.reload(function (err) {
   // session updated
 })
 ```
@@ -357,7 +357,7 @@ There are some cases where it is useful to call this method, for example, long-
 lived requests or in WebSockets.
 
 ```js
-req.session.save(function(err) {
+req.session.save(function (err) {
   // session saved
 })
 ```

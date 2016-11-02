@@ -31,10 +31,10 @@ Here are some things you can do in your code to improve your application's perfo
 Gzip compressing can greatly decrease the size of the response body and hence increase the speed of a web app. Use the [compression](https://www.npmjs.com/package/compression) middleware for gzip compression in your Express app. For example:
 
 ```js
-var compression = require('compression');
-var express = require('express');
-var app = express();
-app.use(compression());
+var compression = require('compression')
+var express = require('express')
+var app = express()
+app.use(compression())
 ```
 
 For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
@@ -96,15 +96,15 @@ This middleware function accepts a query field parameter named "params" that is 
 app.get('/search', function (req, res) {
   // Simulating async operation
   setImmediate(function () {
-    var jsonStr = req.query.params;
+    var jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr);
-      res.send('Success');
+      var jsonObj = JSON.parse(jsonStr)
+      res.send('Success')
     } catch (e) {
-      res.status(400).send('Invalid JSON string');
+      res.status(400).send('Invalid JSON string')
     }
-  });
-});
+  })
+})
 ```
 
 However, try-catch works only for synchronous code. Because the Node platform is primarily asynchronous (particularly in a production environment), try-catch won't catch a lot of exceptions.
@@ -124,12 +124,12 @@ app.get('/', function (req, res, next) {
     .then(function (csv) {
       // handle csv
     })
-    .catch(next);
-});
+    .catch(next)
+})
 
 app.use(function (err, req, res, next) {
   // handle error
-});
+})
 ```
 
 Now all errors asynchronous and synchronous get propagated to the error middleware.
@@ -144,7 +144,7 @@ app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id)
   let stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
-}));
+}))
 ```
 
 For more information about error-handling by using promises, see:

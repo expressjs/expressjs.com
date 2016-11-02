@@ -50,14 +50,14 @@ one called `myLogger` that prints a simple log message and another called `reque
 displays the timestamp of the HTTP request.
 
 ```js
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+  res.send('Hello World!')
+})
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 <h3>Middleware function myLogger</h3>
@@ -65,9 +65,9 @@ Here is a simple example of a middleware function called "myLogger". This functi
 
 ```js
 var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
+  console.log('LOGGED')
+  next()
+}
 ```
 
 <div class="doc-box doc-notice" markdown="1">
@@ -80,21 +80,21 @@ To load the middleware function, call `app.use()`, specifying the middleware fun
 For example, the following code loads the `myLogger` middleware function before the route to the root path (/).
 
 ```js
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
 
 var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
+  console.log('LOGGED')
+  next()
+}
 
-app.use(myLogger);
+app.use(myLogger)
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+  res.send('Hello World!')
+})
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 Every time the app receives a request, it prints the message "LOGGED" to the terminal.
@@ -112,31 +112,31 @@ to the request object.
 
 ```js
 var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
+  req.requestTime = Date.now()
+  next()
+}
 ```
 
 The app now uses the `requestTime` middleware function. Also, the callback function of the root path route uses the property that the middleware function adds to `req` (the request object).
 
 ```js
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
 
 var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
+  req.requestTime = Date.now()
+  next()
+}
 
-app.use(requestTime);
+app.use(requestTime)
 
 app.get('/', function (req, res) {
-  var responseText = 'Hello World!<br>';
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-  res.send(responseText);
-});
+  var responseText = 'Hello World!<br>'
+  responseText += '<small>Requested at: ' + req.requestTime + '</small>'
+  res.send(responseText)
+})
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 When you make a request to the root of the app, the app now displays the timestamp of your request in the browser.

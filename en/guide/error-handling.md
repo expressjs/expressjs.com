@@ -13,26 +13,26 @@ except error-handling functions have four arguments instead of three:
 `(err, req, res, next)`. For example:
 
 ```js
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 ```
 
 You define error-handling middleware last, after other `app.use()` and routes calls; for example:
 
 ```js
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+var bodyParser = require('body-parser')
+var methodOverride = require('method-override')
 
 app.use(bodyParser.urlencoded({
-	extended: true
-}));
-app.use(bodyParser.json());
-app.use(methodOverride());
-app.use(function(err, req, res, next) {
+  extended: true
+}))
+app.use(bodyParser.json())
+app.use(methodOverride())
+app.use(function (err, req, res, next) {
   // logic
-});
+})
 ```
 
 Responses from within a middleware function can be in any format that you prefer, such as an HTML error page, a simple message, or a JSON string.
@@ -43,26 +43,26 @@ regular middleware functions. For example, if you wanted to define an error-hand
 for requests made by using `XHR`, and those without, you might use the following commands:
 
 ```js
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+var bodyParser = require('body-parser')
+var methodOverride = require('method-override')
 
 app.use(bodyParser.urlencoded({
-	extended: true
-}));
-app.use(bodyParser.json());
-app.use(methodOverride());
-app.use(logErrors);
-app.use(clientErrorHandler);
-app.use(errorHandler);
+  extended: true
+}))
+app.use(bodyParser.json())
+app.use(methodOverride())
+app.use(logErrors)
+app.use(clientErrorHandler)
+app.use(errorHandler)
 ```
 
 In this example, the generic `logErrors` might write request and
 error information to `stderr`, for example:
 
 ```js
-function logErrors(err, req, res, next) {
-  console.error(err.stack);
-  next(err);
+function logErrors (err, req, res, next) {
+  console.error(err.stack)
+  next(err)
 }
 ```
 
@@ -71,11 +71,11 @@ Also in this example, `clientErrorHandler` is defined as follows; in this case, 
 Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise those requests will "hang" and will not be eligible for garbage collection.
 
 ```js
-function clientErrorHandler(err, req, res, next) {
+function clientErrorHandler (err, req, res, next) {
   if (req.xhr) {
-    res.status(500).send({ error: 'Something failed!' });
+    res.status(500).send({ error: 'Something failed!' })
   } else {
-    next(err);
+    next(err)
   }
 }
 ```
@@ -83,9 +83,9 @@ function clientErrorHandler(err, req, res, next) {
 The "catch-all" `errorHandler` function might be implemented as follows:
 
 ```js
-function errorHandler(err, req, res, next) {
-  res.status(500);
-  res.render('error', { error: err });
+function errorHandler (err, req, res, next) {
+  res.status(500)
+  res.render('error', { error: err })
 }
 ```
 
@@ -95,18 +95,17 @@ If you have a route handler with multiple callback functions you can use the `ro
 
 ```js
 app.get('/a_route_behind_paywall',
-  function checkIfPaidSubscriber(req, res, next) {
-    if(!req.user.hasPaid) {
-
+  function checkIfPaidSubscriber (req, res, next) {
+    if (!req.user.hasPaid) {
       // continue handling this request
-      next('route');
+      next('route')
     }
-  }, function getPaidContent(req, res, next) {
-    PaidContent.find(function(err, doc) {
-      if(err) return next(err);
-      res.json(doc);
-    });
-  });
+  }, function getPaidContent (req, res, next) {
+    PaidContent.find(function (err, doc) {
+      if (err) return next(err)
+      res.json(doc)
+    })
+  })
 ```
 
 In this example, the `getPaidContent` handler will be skipped but any remaining handlers in `app` for `/a_route_behind_paywall` would continue to be executed.
@@ -137,12 +136,12 @@ the default error handling mechanisms in Express, when the headers
 have already been sent to the client:
 
 ```js
-function errorHandler(err, req, res, next) {
+function errorHandler (err, req, res, next) {
   if (res.headersSent) {
-    return next(err);
+    return next(err)
   }
-  res.status(500);
-  res.render('error', { error: err });
+  res.status(500)
+  res.render('error', { error: err })
 }
 ```
 
