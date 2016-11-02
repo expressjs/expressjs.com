@@ -19,7 +19,7 @@ app.use(function (err, req, res, next) {
 })
 ```
 
-You define error-handling middleware last, after other `app.use()` and routes calls for example:
+You define error-handling middleware last, after other `app.use()` and routes calls; for example:
 
 ```js
 var bodyParser = require('body-parser')
@@ -66,7 +66,7 @@ function logErrors (err, req, res, next) {
 }
 ```
 
-Also in this example, `clientErrorHandler` is defined as follows in this case, the error is explicitly passed along to the next one.
+Also in this example, `clientErrorHandler` is defined as follows; in this case, the error is explicitly passed along to the next one.
 
 Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise those requests will "hang" and will not be eligible for garbage collection.
 
@@ -119,7 +119,7 @@ Calls to `next()` and `next(err)` indicate that the current handler is complete 
 Express comes with a built-in error handler, which takes care of any errors that might be encountered in the app. This default error-handling middleware function is added at the end of the middleware function stack.
 
 If you pass an error to `next()` and you do not handle it in
-an error handler, it will be handled by the built-in error handler the error will be written to the client with the
+an error handler, it will be handled by the built-in error handler; the error will be written to the client with the
 stack trace. The stack trace is not included in the production environment.
 
 <div class="doc-box doc-info" markdown="1">
