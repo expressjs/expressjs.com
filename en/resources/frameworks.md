@@ -17,4 +17,5 @@ Several popular Node.js frameworks are built on Express:
 - **[LoopBack](http://loopback.io)**: Highly-extensible, open-source Node.js framework for quickly creating dynamic end-to-end REST APIs.
 - **[MEAN](http://mean.io/)**: Opinionated fullstack JavaScript framework that simplifies and accelerates web application development.
 - **[Sails](http://sailsjs.org/)**: MVC framework for Node.js for building practical, production-ready apps.
+- **[Bottr](http://bottr.co/)**: Framework for which simplifies building chatbot applications.
 </div>
