@@ -14,10 +14,20 @@ The term _"production"_ refers to the stage in the software lifecycle when an ap
 
 Development and production environments are usually set up differently and have vastly different requirements. What's fine in development may not be acceptable in production. For example, in a development environment you may want verbose logging of errors for debugging, while the same behavior can become a security concern in a production environment. And in development, you don't need to worry about scalability, reliability, and performance, while those concerns become critical in production.
 
-This article discusses some security best practices for Express applications deployed to production.
-
-**NOTE**: If you believe you have discovered a security vulnerability in Express, please see
+{% include note.html content="If you believe you have discovered a security vulnerability in Express, please see
 [Security Policies and Procedures](https://github.com/strongloop/express/blob/master/Security.md).
+" %}
+
+Security best practices for Express applications in production include:
+
+- [Don’t use deprecated or vulnerable versions of Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
+- [Use TLS](#use-tls)
+- [Use Helmet](#use-helmet)
+- [Use cookies securely](#use-cookies-securely)
+- [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
+- [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
+- [Additional considerations](#additional-considerations)
+
 
 ## Don't use deprecated or vulnerable versions of Express
 
@@ -77,6 +87,11 @@ app.disable('x-powered-by')
 ```
 
 If you use `helmet.js`, it takes care of this for you.
+
+{% include note.html content="Disabling the `X-Powered-By header` does not prevent
+a sophisticated attacker from determining that an app is running Express.  It may
+discourage a casual exploit, but there are other ways to determine an app is running
+Express. "%}
 
 ## Use cookies securely
 
@@ -163,6 +178,12 @@ $ cd your-app
 $ requiresafe check
 ```
 
+## Avoid other known vulnerabilities
+
+Keep an eye out for [Node Security Project](https://nodesecurity.io/advisories) advisories that may affect Express or other modules that your app uses.  In general, the Node Security Project is an excellent resource for knowledge and tools about Node security.
+
+Finally, Express apps - like any other web apps - can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://www.owasp.org/index.php/Top_10_2013-Top_10) and take precautions to avoid them.
+
 ## Additional considerations
 
 Here are some further recommendations from the excellent [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/).  Refer to that blog post for all the details on these recommendations:
@@ -175,9 +196,4 @@ Here are some further recommendations from the excellent [Node.js Security Check
 * Use the [nmap](https://nmap.org/) and [sslyze](https://github.com/nabla-c0d3/sslyze) tools to test the configuration of your SSL ciphers, keys, and renegotiation as well as the validity of your certificate.
 * Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
 
-## Avoid other known vulnerabilities
-
-Keep an eye out for [Node Security Project](https://nodesecurity.io/advisories) advisories that may affect Express or other modules that your app uses.  In general, the Node Security Project is an excellent resource for knowledge and tools about Node security.
-
-Finally, Express apps - like any other web apps - can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://www.owasp.org/index.php/Top_10_2013-Top_10) and take precautions to avoid them.
 </div>
