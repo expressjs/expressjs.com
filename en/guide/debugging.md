@@ -116,3 +116,142 @@ $ DEBUG=http,mail,express:* node index.js
 
 For more information about `debug`, see the [debug](https://www.npmjs.com/package/debug).
 </div>
+
+## Tracing
+
+Express offers tracing capabilities. It allows you to follow and inspect the
+behaviour of your controllers through the response object.
+It requires that you instrument your application with tracers. Then you can simply call a `trace` method on your response object each time you want to record something.
+
+### Example 1: add debug messages.
+
+```
+var express = require('express')
+var debug = require('debug')('trace:response')
+
+var app = express()
+
+app.instrument(function (options){
+  debug(options.date + ' ' + options.event)
+})
+
+app.get('/', function (req, res){
+  res.trace('index:hello')
+  res.send('hello world')
+})
+```
+
+### Example 2: Time interval
+
+In some cases you, may want to capture time spent on a specific request. Here
+is a way to do it through tracing.
+
+```
+var express = require('express');
+var debug = require('debug')('trace:response');
+
+var app = express();
+var responseTime = {};
+
+app.instrument(function (options){
+  if (options.event === 'duration:start') {
+    responseTime[options.res.id] = options.date;
+  } else if (options.event === 'duration:end') {
+    var interval = options.date - responseTime[options.res.id];
+    debug(options.req.path + ' - ' + interval + 'ms');
+    delete responseTime[options.res.id];
+  }
+})
+
+app.use(function(req, res, next){
+  res.id = Math.floor(Math.random() * 1000000);
+  res.trace('duration:start');
+  next();
+});
+
+app.get('/', function (req, res){
+  res.trace('index:hello');
+  res.send('hello world');
+  res.trace('duration:end');
+})
+```
+
+### Example 3: send information to dtrace.
+
+Dtrace is a common tool for tracing. It generates probes that will listen and
+report any event targeted to it. You can simply reach the probe via the trace
+function.
+
+```
+var express = require('express');
+var dtrace = require('dtrace-provider');
+
+var app = express();
+
+var dtp = dtrace.createDTraceProvider("nodeapp");
+var p1 = dtp.addProbe("probe1", "char *", "char *");
+var p2 = dtp.addProbe("probe2", "char *", "char *");
+dtp.enable();
+
+app.instrument(function (options){
+  dtp.fire("probe1", function(){
+    return [options.event, options.date];
+  });
+  dtp.fire("probe2", function(){
+    return [options.event, options.args[0]];
+  });
+});
+
+app.get('/', function (req, res){
+  res.trace('index:hello');
+  res.send('hello world');
+})
+
+app.listen(3000);
+```
+
+### Example 4: Send information to chrome tracer.
+
+You may want to use the chrome tracer to analyze only some response behaviour.
+
+```
+var express = require('./index');
+var app = express();
+
+var events = [];
+
+app.instrument(function (options){
+  if (options.event === 'start') {
+    events.push({
+      "name": options.args[0],
+      "cat": "PERF",
+      "ph": "B",
+      "pid": process.pid,
+      "ts": options.date.getTime()
+    });
+  } else if (options.event === 'end') {
+    events.push({
+      "name": options.args[0],
+      "cat": "PERF",
+      "ph": "E",
+      "pid": process.pid,
+      "ts": options.date.getTime()
+    });
+  }
+})
+
+app.get('/', function (req, res, next){
+  res.trace('start', 'index');
+  setTimeout(function () {
+    res.send('hello world');
+    res.trace('end');
+  }, Math.random() * 100);
+})
+
+process.on('SIGINT', function (){
+  require('fs').writeFileSync('./myfile', JSON.stringify(events));
+  process.exit(0);
+})
+
+app.listen(3000);
+```
