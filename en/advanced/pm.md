@@ -5,7 +5,7 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/pm.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Process managers for Express apps
 
 When you run Express apps for production, it is helpful to use a _process manager_ to achieve the following tasks:
@@ -237,4 +237,3 @@ $ forever stopall
 ```
 
 Forever has many more options, and it also provides a programmatic API.
-</div>

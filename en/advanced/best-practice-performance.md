@@ -5,7 +5,7 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/best-practice-performance.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Production best practices: performance and reliability
 
 ## Overview
@@ -423,4 +423,3 @@ With load balancing, you might have to ensure that requests that are associated 
 A reverse proxy sits in front of a web app and performs supporting operations on the requests, apart from directing requests to the app. It can handle error pages, compression, caching, serving files, and load balancing among other things.
 
 Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.com/) or [HAProxy](http://www.haproxy.org/) in production.
-</div>

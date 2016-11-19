@@ -5,7 +5,7 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/security-updates.html"
 ---
-<div id="page-doc" markdown="1">
+
 
 # Security updates
 
@@ -53,4 +53,3 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
     * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
   * 3.3.0
     * The 404 response of an unsupported method override attempt was susceptible to cross-site scripting attacks.
-</div>

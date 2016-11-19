@@ -5,7 +5,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/writing-middleware.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Writing middleware for use in Express apps
 
 <h2>Overview</h2>
@@ -144,4 +144,3 @@ When you make a request to the root of the app, the app now displays the timesta
 Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
 
 For more information about Express middleware, see: [Using Express middleware](/{{ page.lang }}/guide/using-middleware.html).
-</div>

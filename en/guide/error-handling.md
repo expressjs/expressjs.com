@@ -5,7 +5,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/error-handling.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Error handling
 
 Define error-handling middleware functions in the same way as other middleware functions,
@@ -147,4 +147,3 @@ function errorHandler (err, req, res, next) {
 
 Note that the default error handler can get triggered if you call `next()` with an error
 in your code more than once, even if custom error handling middleware is in place.
-</div>

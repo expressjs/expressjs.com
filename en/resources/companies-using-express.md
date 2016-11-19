@@ -5,7 +5,6 @@ menu: resources
 lang: en
 redirect_from: "/resources/companies-using-express.html"
 ---
-<div id="page-doc" markdown="1">
 # Companies using Express in production
 
 <div style="text-align:center;">
@@ -55,4 +54,3 @@ redirect_from: "/resources/companies-using-express.html"
 
 If your company is using Express, let us know:
 [callback@us.ibm.com](mailto:callback@us.ibm.com).
-</div>

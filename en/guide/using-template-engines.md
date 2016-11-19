@@ -5,7 +5,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/using-template-engines.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Using template engines with Express
 
 A _template engine_ enables you to use static template files in your application.   At runtime, the template engine replaces
@@ -74,4 +74,3 @@ When you make a request to the home page, the `index.pug` file will be rendered 
 
 To learn more about how template engines work in Express, see:
 ["Developing template engines for Express"](/{{ page.lang }}/advanced/developing-template-engines.html).
-</div>

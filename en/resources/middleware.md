@@ -1,11 +1,10 @@
 ---
-layout: middleware
+layout: page
 title: Express middleware
 menu: resources
 lang: en
 redirect_from: "/resources/middleware.html"
 ---
-<div id="page-doc" markdown="1">
 ## Express middleware
 
 The Express middleware modules listed here are maintained by the
@@ -66,4 +65,3 @@ These are some additional popular middleware modules.
 | [sriracha-admin](https://github.com/hdngr/siracha) | Dynamically generate an admin site for Mongoose. |
 
 For more middleware modules, see [http-framework](https://github.com/Raynos/http-framework/wiki/Modules).
-</div>

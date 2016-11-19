@@ -5,7 +5,6 @@ menu: starter
 lang: en
 redirect_from: "/starter/installing.html"
 ---
-<div id="page-doc" markdown="1">
 # Installing
 
 Assuming you've already installed [Node.js](https://nodejs.org/), create a directory to hold your application, and make that your working directory.
@@ -46,5 +45,4 @@ $ npm install express
 <div class="doc-box doc-info" markdown="1">
 Node modules installed with the `--save` option are added to the `dependencies` list in the `package.json` file.
 Afterwards, running `npm install` in the `app` directory will automatically install modules in the dependencies list.
-</div>
 </div>

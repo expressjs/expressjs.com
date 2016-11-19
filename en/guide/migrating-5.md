@@ -5,7 +5,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/migrating-5.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Moving to Express 5
 
 <h2 id="overview">Overview</h2>
@@ -130,4 +130,3 @@ In Express 4.7 and Express 5 onwards, the query parser option can accept `false`
 <h4 id="res.render">res.render()</h4>
 
 This method now enforces asynchronous behavior for all view engines, avoiding bugs caused by view engines that had a synchronous implementation and that violated the recommended interface.
-</div>

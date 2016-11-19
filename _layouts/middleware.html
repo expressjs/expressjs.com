@@ -3,14 +3,35 @@ layout: page
 ---
 <div id="mw-container">
   <div id="mw-list">
-    {% if page.title contains 'middleware' %}
-      {% capture readme %}{% include mw-list.md %}{% endcapture %}
-    {% else %}
-      {% capture readme %}{% include util-list.md %}{% endcapture %}
-    {% endif %}
-    {{ readme | markdownify }}
+    {% capture mw-list %}{% include mw-list.md %}{% endcapture %}
+    {{ mw-list | markdownify }}
   </div>
   <div id="middleware">
-      {{ content }}
+
+    {% if page.source %}
+      {% if page.branch %}
+        {% assign repo-branch = page.source | append: '/tree/' | append: page.branch %}
+        {% assign readme-file = page.source | append: '-' | append: page.branch %}
+      {% else %}
+        {% assign repo-branch = page.source  %}
+        {% assign readme-file = page.source  %}
+      {% endif %}
+
+      {% assign org = page.org | default: "expressjs" %}
+      <div class="doc-box doc-info" markdown="1"><i class="fa fa-info-circle"></i>
+        <b>Note:</b> This page was generated from the
+        <a href="https://github.com/{{org}}/{{repo-branch}}">{{page.source}} README</a>.
+      </div>
+
+      {{content}}
+
+      {% capture included-readme %}{% include_relative readmes/{{readme-file}}.md %}{% endcapture %}
+      {{ included-readme | markdownify }}
+    {% else %}
+      <h3>ERROR: No source specified for README</h3>
+    {% endif %}
+
+
+
   </div>
 </div>

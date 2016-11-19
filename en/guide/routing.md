@@ -5,7 +5,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/routing.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Routing
 
 _Routing_ refers to the definition of application end points (URIs) and how they respond to client requests.
@@ -329,4 +329,3 @@ app.use('/birds', birds)
 ```
 
 The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.
-</div>

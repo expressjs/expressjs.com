@@ -5,7 +5,6 @@ menu: starter
 lang: en
 redirect_from: "/starter/static-files.html"
 ---
-<div id="page-doc" markdown="1">
 # Serving static files in Express
 
 To serve static files such as images, CSS files, and JavaScript files, use the `express.static` built-in middleware function in Express.
@@ -60,4 +59,3 @@ However, the path that you provide to the `express.static` function is relative 
 ```js
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
-</div>

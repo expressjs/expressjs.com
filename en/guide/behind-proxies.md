@@ -5,14 +5,13 @@ menu: guide
 lang: en
 redirect_from: "/guide/behind-proxies.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Express behind proxies
 
 When running an Express app behind a proxy, set (by using [app.set()](/{{ page.lang }}/4x/api.html#app.set)) the application variable `trust proxy` to one of the values listed in the following table.
 
-<div class="doc-box doc-info" markdown="1">
-Although the app will not fail to run if the application variable `trust proxy` is not set, it will incorrectly register the proxy's IP address as the client IP address unless `trust proxy` is configured.
-</div>
+{% include info.html content="Although the app will not fail to run if the application variable `trust proxy` is not set, it will incorrectly register the proxy's IP address as the client IP address unless `trust proxy` is configured.
+" %}
 
 <table class="doctable" border="1" markdown="1">
   <thead><tr><th>Type</th><th>Value</th></tr></thead>
@@ -80,4 +79,3 @@ Setting a non-`false` `trust proxy` value results in three important changes:
 </ul>
 
 The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.com/package/proxy-addr) package. For more information, see its documentation.
-</div>
