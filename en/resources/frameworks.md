@@ -18,4 +18,5 @@ Several popular Node.js frameworks are built on Express:
 - **[MEAN](http://mean.io/)**: Opinionated fullstack JavaScript framework that simplifies and accelerates web application development.
 - **[Sails](http://sailsjs.org/)**: MVC framework for Node.js for building practical, production-ready apps.
 - **[Bottr](http://bottr.co/)**: Framework that simplifies building chatbot applications.
+- **[Hydra-Express](https://github.com/flywheelsports/fwsp-hydra-express)**: Hydra-Express is a light-weight library which facilitates building Node.js Microservices using ExpressJS.
 </div>
