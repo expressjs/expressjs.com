@@ -302,7 +302,7 @@ pre {
   line-height: 1.4;
   padding: 16px;
   border-radius: 3px;
-  overflow: scroll;
+  overflow: auto;
   border: 1px solid #ddd;
 }
 
