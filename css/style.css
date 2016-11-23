@@ -222,8 +222,17 @@ a {
   display: block;
   font: 4.5em "Helvetica Neue", "Open Sans", sans-serif;
   font-weight: 100;
-  color: #353535;
   margin-bottom: .25em;
+}
+
+#description .express a {
+  color: #353535;
+}
+
+#express-version {
+  font-size: 0.2em;
+  margin-left: 0.5em;
+  color: #259dff !important;
 }
 
 #description {
@@ -589,12 +598,14 @@ pre, code {
 
 footer {
   font-size: 11px;
-  margin: 70px 10px 30px 10px;
+  margin: 60px 10px 30px 10px;
+  padding-left: 5%;
+  max-width: 1090px;
 }
 
 #footer-content {
   display: table;
-  margin: 0 auto;
+  margin: 20px auto 0;
 }
 
 #footer-content div {
@@ -605,6 +616,19 @@ footer {
   padding-bottom: 4px;
 }
 
+#github {
+  margin-right: 5px !important;
+}
+
+#license {
+  text-align: center;
+  margin-top: -5px;
+}
+
+#license img {
+  position: relative;
+  top: 3px;
+}
 
 #fork {
   background-image: url(/images/fork-icon.png);
@@ -1028,12 +1052,6 @@ h2 a {
 #mw-fig-imgcell {margin: 0; padding: 0px; border: 0; width: 410px;}
 #mw-fig-img {margin: 0px; padding: 0px; width: 410px; height: 308px;}
 .mw-fig-callouts {margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;}
-
-#license {
-  display: block;
-  text-align: center;
-  margin: 0 auto 0 auto;
-}
 
 /* For middleware pages */
 
