@@ -29,7 +29,7 @@ The Express middleware modules listed here are maintained by the
 | [serve-index](/{{page.lang}}/resources/middleware/serve-index.html) | Serve directory listing for a given path.| express.directory |
 | [serve-static](/{{page.lang}}/resources/middleware/serve-static.html) |Serve static files. |express.static |
 | [session](/{{page.lang}}/resources/middleware/session.html) | Establish server-based sessions (development only). | express.session |
-| [timeout](/{{page.lang}}/resources/middleware/connect-timeout.html) | Set a timeout period for HTTP request processing.|express.timeout |
+| [timeout](/{{page.lang}}/resources/middleware/timeout.html) | Set a timeout period for HTTP request processing.|express.timeout |
 | [vhost](/{{page.lang}}/resources/middleware/vhost.html) |Create virtual domains.|express.vhost|
 
 <!--
