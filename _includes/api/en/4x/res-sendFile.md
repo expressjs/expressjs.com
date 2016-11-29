@@ -69,7 +69,7 @@ app.get('/user/:uid/photos/:file', function(req, res){
     if (yes) {
       res.sendFile('/uploads/' + uid + '/' + file);
     } else {
-      res.status(403).send('Sorry! you cant see that.');
+      res.status(403).send('Sorry! You can't see that.');
     }
   });
 });
