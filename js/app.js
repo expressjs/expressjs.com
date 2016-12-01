@@ -85,9 +85,9 @@ $(function(){
   var prev;
   var n = 0;
 
-  var headings = $('.h2, h3').map(function(i, el){
+  var headings = $('h2, h3').map(function(i, el){
     return {
-      top: $(el).offset().top - 100,
+      top: $(el).offset().top - 200,
       id: el.id
     }
   });
@@ -98,7 +98,7 @@ $(function(){
     var i = headings.length;
     while (i--) {
       h = headings[i];
-      if (top >= h.top - 1) return h;
+      if (top >= h.top) return h;
     }
   }
 
