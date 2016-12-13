@@ -5,6 +5,12 @@ where METHOD is one of the HTTP methods, such as GET, PUT, POST, and so on,
 in lowercase.  Thus, the actual methods are `router.get()`, `router.post()`,
 `router.put()`, and so on.
 
+<div class="doc-box doc-info" markdown="1">
+  The `router.get()` function is automatically called for `HEAD` method in
+  addition to the `GET`   method if no `router.head()` was called for the
+  path before `router.get()`.
+</div>
+
 You can provide multiple callbacks, and all are treated equally, and behave just
 like middleware, except that these callbacks may invoke `next('route')`
 to bypass the remaining route callback(s).  You can use this mechanism to perform
