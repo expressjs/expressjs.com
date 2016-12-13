@@ -53,6 +53,11 @@ However, the other methods listed above work in exactly the same way.
   `app['m-search']('/', function ...`.
 </div>
 
+<div class="doc-box doc-info" markdown="1">
+  The `app.get()` function is automatically called for `HEAD` method in addition to the `GET`
+  method if no `app.head()` was called for the path before `app.get()`.
+</div>
+
 The method, `app.all()`, is not derived from any HTTP method and loads middleware at
 the specified path for _all_ HTTP request methods.
 For more information, see [app.all](#app.all).
