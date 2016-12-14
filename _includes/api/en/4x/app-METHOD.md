@@ -48,14 +48,11 @@ The API documentation has explicit entries only for the most popular HTTP method
 `app.post()`, `app.put()`, and `app.delete()`.
 However, the other methods listed above work in exactly the same way.
 
-<div class="doc-box doc-info" markdown="1">
-  To route methods that translate to invalid JavaScript variable names, use the bracket notation. For example,
-  `app['m-search']('/', function ...`.
-</div>
+To route methods that translate to invalid JavaScript variable names, use the bracket notation. For example, `app['m-search']('/', function ...`.
 
 <div class="doc-box doc-info" markdown="1">
-  The `app.get()` function is automatically called for `HEAD` method in addition to the `GET`
-  method if no `app.head()` was called for the path before `app.get()`.
+  The `app.get()` function is automatically called for the HTTP `HEAD` method in addition to the `GET`
+  method if `app.head()` was not called for the path before `app.get()`.
 </div>
 
 The method, `app.all()`, is not derived from any HTTP method and loads middleware at

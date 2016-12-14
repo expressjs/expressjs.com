@@ -6,8 +6,8 @@ in lowercase.  Thus, the actual methods are `router.get()`, `router.post()`,
 `router.put()`, and so on.
 
 <div class="doc-box doc-info" markdown="1">
-  The `router.get()` function is automatically called for `HEAD` method in
-  addition to the `GET`   method if no `router.head()` was called for the
+  The `router.get()` function is automatically called for the HTTP `HEAD` method in
+  addition to the `GET` method if `router.head()` was not called for the
   path before `router.get()`.
 </div>
 
