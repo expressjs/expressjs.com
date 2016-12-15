@@ -11,3 +11,5 @@ kramdown:
   hard_wrap: false
   syntax_highlighter_opts:
     disable : true
+
+exclude: [uk/CHANGELOG.md]
