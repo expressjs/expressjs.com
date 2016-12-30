@@ -23,6 +23,7 @@ The most popular process managers for Express and other Node.js applications are
 - [StrongLoop Process Manager](#sl)
 - [PM2](#pm2)
 - [Forever](#forever)
+- [SystemD](#systemd)
 
 
 Using any of these three tools can be very helpful, however StrongLoop Process Manager is the only tool that provides a comprehensive runtime and deployment solution that addresses the entire Node.js application life cycle, with tooling for every step before and after production, in a unified interface.
@@ -238,3 +239,59 @@ $ forever stopall
 
 Forever has many more options, and it also provides a programmatic API.
 </div>
+
+## <a id="pm2">SystemD</a>
+
+### Introduction
+
+SystemD is the default process manager on modern Linux distributions. Running a node service based on SystemD is very simple. (Based on [this blog post](https://www.axllent.org/docs/view/nodejs-service-with-systemd/) by Ralph Slooten (@axllent))
+
+### Set up the service
+
+Create a file in /etc/systemd/system/express.service:
+
+```
+[Unit]
+Description=Express
+# Set dependencies to other services (optional)
+#After=mongodb.service
+
+[Service]
+# Run Grunt before starting the server (optional)
+#ExecStartPre=/usr/bin/grunt
+
+# Start the js-file starting the express server
+ExecStart=/usr/bin/node server.js
+WorkingDirectory=/usr/local/express
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=Express
+# Change to a non-root user (optional, but recommended)
+#User=<alternate user>
+#Group=<alternate group>
+# Set environment options
+Environment=NODE_ENV=production PORT=8080
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### Enable service
+
+```
+$ systemctl enable express.service
+```
+
+### Start service
+
+```
+$ systemctl start express.service
+```
+
+### Check service status
+
+```
+$ systemctl status express.service
+```
