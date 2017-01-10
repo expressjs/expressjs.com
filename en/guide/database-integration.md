@@ -357,10 +357,7 @@ function executeStatement() {
 
   connection.execSql(request);
 }
-
-
 ```
-
 
 <a name="sqlite"></a>
 
