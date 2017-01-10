@@ -19,6 +19,7 @@ Adding the capability to connect databases to Express apps is just a matter of l
 * [Neo4j](#neo4j)
 * [PostgreSQL](#postgres)
 * [Redis](#redis)
+* [SQL Server](#mssql)
 * [SQLite](#sqlite)
 * [ElasticSearch](#elasticsearch)
 
@@ -300,6 +301,66 @@ client.hkeys('hash key', function (err, replies) {
   client.quit()
 })
 ```
+
+<a name="mssql"></a>
+
+## SQL Server
+
+**Module**: [tedious](https://github.com/tediousjs/tedious)
+**Installation**
+
+```sh
+$ npm install tedious
+```
+
+**Example**
+
+```js
+var Connection = require('tedious').Connection;
+var Request = require('tedious').Request;
+
+var config = {
+  userName: 'your_username', // update me
+  password: 'your_password', // update me
+  server: 'localhost'
+}
+
+var connection = new Connection(config);
+
+connection.on('connect', function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    executeStatement();
+  }
+});
+
+function executeStatement() {
+  request = new Request("select 123, 'hello world'", function(err, rowCount) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(rowCount + ' rows');
+    }
+    connection.close();
+  });
+
+  request.on('row', function(columns) {
+    columns.forEach(function(column) {
+      if (column.value === null) {
+        console.log('NULL');
+      } else {
+        console.log(column.value);
+      }
+    });
+  });
+
+  connection.execSql(request);
+}
+
+
+```
+
 
 <a name="sqlite"></a>
 
