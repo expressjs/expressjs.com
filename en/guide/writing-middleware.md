@@ -42,6 +42,35 @@ The following figure shows the elements of a middleware function call:
 </td></tr>
 </table>
 
+<h2>Publishing as a package</h2>
+
+To make a package publicly available it is recommended to create a middleware factory; to wrap it in a function that will accept some options and return the middleware:
+
+```js
+module.exports = function(options){
+  return function(req, res, next){
+    // Here you can access options
+    // ... your code
+    next();
+  }
+}
+```
+
+In this way the developer using this middleware can pass different options and the middleware can access them to be configured properly. Then, when someone is using this middleware they will have to pass the options:
+
+```js
+var middle = require('middleware-name');
+
+// ...
+
+app.use(middle({ option1: '1', option2: '2' }));
+```
+
+See [cookie-session](https://github.com/expressjs/cookie-session) or [compression](https://github.com/expressjs/compression) as examples.
+
+
+
+
 <h2>Example</h2>
 
 Here is an example of a simple "Hello World" Express application.
