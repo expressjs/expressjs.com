@@ -14,6 +14,7 @@ The `options` parameter is an object that can have the following properties.
 | `path`      | String | Path for the cookie. Defaults to "/".
 | `secure`    | Boolean | Marks the cookie to be used with HTTPS only.
 | `signed`    | Boolean | Indicates if the cookie should be signed.
+| `sameSite`  | Boolean or String | Value of the "SameSite" **Set-Cookie** attribute. More information at [https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00#section-4.1.1](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00#section-4.1.1).
 
 <div class="doc-box doc-notice" markdown="1">
 All `res.cookie()` does is set the HTTP `Set-Cookie` header with the options provided.
