@@ -69,6 +69,24 @@ strong, th {
   margin: 120px 0 2% 5%;
   max-width: 900px;
   padding-right: 9%;
+  display: flex;
+}
+
+#homepage-leftpane {
+  min-width: 500px;
+  margin-right: 30px;
+  font-size: 90%;
+  padding-top: 13px;
+}
+
+#homepage-rightpane {
+  min-width: 500px;
+  padding: 25px 30px 0px 0px; 
+}
+
+#homepage-rightpane iframe {
+  min-width: 100%;
+  min-height: 273px;
 }
 
 #announcements {
@@ -236,16 +254,16 @@ a {
 }
 
 #description {
-  margin-bottom: 40px;
+  margin-bottom: 43px;
   -webkit-font-smoothing: antialiased;
 }
 
 #description .description {
   position: relative;
   top: -5px;
-  font: 100 4.2em "Helvetica Neue", "Open Sans", sans-serif;
+  font: 100 4.1em "Helvetica Neue", "Open Sans", sans-serif;
   color: #aeaeae;
-  line-height: .75;
+  line-height: .87;
 }
 
 #description em {
@@ -651,15 +669,20 @@ footer {
 /* navigation */
 
 #navbar {
-  padding-left: 10%;
-  max-width: 1193px;
+  padding-left: 5%;
+  width: 1000px;
+  height: 100%;
   position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  top: 15px;
+  box-sizing: content-box;
 }
 
 #navbar a {
   color: #666;
-  margin: 0 5px;
-  padding-right: 15px;
+  padding-left: 20px;
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
@@ -674,10 +697,7 @@ footer {
 #navmenu {
   padding: 0;
   margin: 0;
-  position: absolute;
-  right: 183px;
-  top: 15px;
-  padding-left: 5%;
+  right: 0px;
   z-index: 1000;
 }
 
@@ -776,6 +796,28 @@ h2 a {
     margin-right: 10px;
   }
 
+  #home-content {
+    flex-direction: column;
+  }
+
+  #install-command {
+    display: none;
+  }
+
+  #home-content .pane {
+    min-width: auto;
+    font-size: 74%;
+  }
+
+  #homepage-leftpane {
+    padding-top: 0px;
+  }
+  
+  #homepage-rightpane {
+    padding-top: 0;
+    padding-right: 0;
+  }
+
   .table-scroller {
     width: 100%;
     overflow: scroll;
@@ -843,6 +885,7 @@ h2 a {
   #description .description {
     font-size: 3em;
     line-height: .9em;
+    font-weight: 200;
   }
 
   #install-command {
@@ -983,6 +1026,28 @@ h2 a {
     color: #666 !important;
   }
 
+  #footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #footer-content div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  #footer-content div#sponsor {
+    display: block;
+  }
+
+  #doc-langs {
+    `font-size: 11px;
+  }
+
 }
 
 
@@ -1005,16 +1070,20 @@ h2 a {
   }
 
   footer {
-    margin: 0;
+    margin-top: 14px 0 0 0;
   }
 
   #footer-content {
-    display: block;
     margin-left: 5%;
   }
 
   #footer-content div {
     clear: both;
+  }
+
+  #footer-content div:nth-child(4) {
+    white-space: pre-line;
+    text-align: center;
   }
 
   #fork {

@@ -6,14 +6,18 @@ lang: fr
 
 ---
 <section id="home-content">
-    {% include header/header-{{ page.lang }}.html %}
-    <div id="overlay"></div>
-
+  {% include header/header-{{ page.lang }}.html %}
+  <div id="overlay"></div>
+  <div id="homepage-leftpane" class="pane">
     <section id="description">
-        <a href="/" class="express">Express</a>
-
-        <span class="description">Infrastructure Web minimaliste, souple et rapide pour <a href='http://nodejs.org'>Node.js</a></span> </section>
+        <div class="express"><a href="/">Express</a><a href="/{{ page.lang }}/changelog/4x.html#4.14.0" id="express-version">4.14.0</a></div>
+        <span class="description">Infrastructure Web minimaliste, souple et rapide pour <a href='http://nodejs.org'>Node.js</a></span> 
+    </section>
     <div id="install-command">$ npm install express --save</div>
+  </div>
+  <div id="homepage-rightpane" class="pane">
+    <iframe src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
+  </div>
 </section>
 
 <!--<section id="doc-langs" markdown="1">
