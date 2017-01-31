@@ -81,7 +81,7 @@ strong, th {
 
 #homepage-rightpane {
   min-width: 500px;
-  padding: 25px 30px 0px 0px; 
+  padding: 25px 30px 0px 0px;
 }
 
 #homepage-rightpane iframe {
@@ -227,6 +227,7 @@ a {
   padding: 10px 25px;
   width: auto;
   border-left: none;
+  z-index: 1;
 }
 
 #logo .express {
@@ -812,7 +813,7 @@ h2 a {
   #homepage-leftpane {
     padding-top: 0px;
   }
-  
+
   #homepage-rightpane {
     padding-top: 0;
     padding-right: 0;
