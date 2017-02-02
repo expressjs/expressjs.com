@@ -1,4 +1,10 @@
 # Site settings
+defaults:
+  -
+    scope:
+      path: "" # all pages
+    values:
+      current_express_version: "4.14.0"
 
 # Build settings
 markdown: kramdown

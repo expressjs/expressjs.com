@@ -9,7 +9,7 @@ lang: ko
   <div id="overlay"></div>
   <div id="homepage-leftpane" class="pane">
     <section id="description">
-        <div class="express"><a href="/">Express</a><a href="/{{ page.lang }}/changelog/4x.html#4.14.0" id="express-version">4.14.0</a></div>
+        <div class="express"><a href="/">Express</a><a href="/{{ page.lang }}/changelog/4x.html#{{ page.current_express_version }}" id="express-version">{{ page.current_express_version }}</a></div>
         <span class="description"><a href='http://nodejs.org'>Node.js</a>를 위한 빠르고 개방적인 간결한 웹 프레임워크</span>
     </section>
     <div id="install-command">$ npm install express --save</div>
