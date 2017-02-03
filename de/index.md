@@ -9,7 +9,7 @@ lang: de
     <div id="overlay"></div>
     <div id="homepage-leftpane" class="pane">
     <section id="description">
-        <div><a href="/" class="express">Express</a><a href="/{{ page.lang }}/changelog/4x.html#4.14.0" id="express-version">4.14.0</a></div>
+        <div class="express"><a href="/">Express</a><a href="/{{ page.lang }}/changelog/4x.html#4.14.0" id="express-version">4.14.0</a></div>
         <span class="description">Schnelles, offenes, unkompliziertes Web-Framework für <a href='http://nodejs.org'>Node.js</a></span>
     </section>
     <div id="install-command">$ npm install express --save</div>
