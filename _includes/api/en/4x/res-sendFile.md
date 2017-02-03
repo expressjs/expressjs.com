@@ -46,10 +46,8 @@ app.get('/file/:name', function (req, res, next) {
   var fileName = req.params.name;
   res.sendFile(fileName, options, function (err) {
     if (err) {
-      console.log(err);
-      res.status(err.status).end();
-    }
-    else {
+      next(err);
+    } else {
       console.log('Sent:', fileName);
     }
   });
