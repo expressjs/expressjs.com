@@ -227,6 +227,7 @@ a {
   padding: 10px 25px;
   width: auto;
   border-left: none;
+  z-index: 1;
 }
 
 #logo .express {
