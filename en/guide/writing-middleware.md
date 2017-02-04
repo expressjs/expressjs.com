@@ -144,4 +144,29 @@ When you make a request to the root of the app, the app now displays the timesta
 Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
 
 For more information about Express middleware, see: [Using Express middleware](/{{ page.lang }}/guide/using-middleware.html).
+
+<h2>Configurable middleware</h2>
+
+If you need your middleware to be configurable, export a function which accepts an options object or other parameters, which, then returns the middleware implementation based on the input parameters.
+
+File: `my-middleware.js`
+
+```js
+module.exports = function(options) {
+  return function(req, res, next) {
+    // Implement the middleware function based on the options object
+    next()
+  }
+}
+```
+
+The middleware can now be used as shown below.
+
+```js
+var mw = require('./my-middleware.js')
+
+app.use(mw({ option1: '1', option2: '2' }))
+```
+
+Refer to [cookie-session](https://github.com/expressjs/cookie-session) and [compression](https://github.com/expressjs/compression) for examples of configurable middleware.
 </div>
