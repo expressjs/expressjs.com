@@ -9,7 +9,7 @@ lang: zh-cn
   <div id="overlay"></div>
   <div id="homepage-leftpane" class="pane">
     <section id="description">
-        <div class="express"><a href="/">Express</a><a href="/{{ page.lang }}/changelog/4x.html#4.14.0" id="express-version">4.14.0</a></div>
+        <div class="express"><a href="/">Express</a></div>
         <span class="description">高度包容、快速而极简的 <a href='http://nodejs.org'>Node.js</a> Web 框架</span>
     </section>
     <div id="install-command">$ npm install express --save</div>
@@ -38,7 +38,7 @@ Express 文档英文以外的语言版本包括：[西班牙语](/es)、[日语]
       <div id="frameworks">
           <h3>框架</h3> 许多基于 Express 的 <a href="{{ page.lang }}/resources/frameworks.html">流行框架</a> 。
       </div>
-      
+
   </div>
 
 </section>
