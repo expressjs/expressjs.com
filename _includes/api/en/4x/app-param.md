@@ -101,7 +101,7 @@ app.param(function(param, option) {
       next();
     }
     else {
-      res.sendStatus(403);
+      next('route');
     }
   }
 });
@@ -128,7 +128,7 @@ app.param(function(param, validator) {
       next();
     }
     else {
-      res.sendStatus(403);
+      next('route');
     }
   }
 });
