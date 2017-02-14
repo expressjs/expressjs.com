@@ -791,6 +791,10 @@ h2 a {
 /* responsive */
 
 @media all and (max-width: 899px) {
+  
+  #navbar {
+    top: 0;
+  }
 
   #conference a img {
     width: 150px;
