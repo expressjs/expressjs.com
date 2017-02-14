@@ -44,7 +44,7 @@ $ express -h
 
 <pre>
 <code class="language-sh" translate="no">
-$ express --view=jade myapp
+$ express --view=pug myapp
 
    create : myapp
    create : myapp/package.json
@@ -58,9 +58,9 @@ $ express --view=jade myapp
    create : myapp/public/stylesheets
    create : myapp/public/stylesheets/style.css
    create : myapp/views
-   create : myapp/views/index.jade
-   create : myapp/views/layout.jade
-   create : myapp/views/error.jade
+   create : myapp/views/index.pug
+   create : myapp/views/layout.pug
+   create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
 </code>
@@ -111,9 +111,9 @@ Windows에서는 다음 명령을 사용하십시오.
 │   ├── index.js
 │   └── users.js
 └── views
-    ├── error.jade
-    ├── index.jade
-    └── layout.jade
+    ├── error.pug
+    ├── index.pug
+    └── layout.pug
 
 7 directories, 9 files
 </code>

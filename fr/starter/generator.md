@@ -40,11 +40,11 @@ $ express -h
 </code>
 </pre>
 
-Par exemple, ce qui suit crée une application Express nommée _myapp_ dans le répertoire de travail en cours :
+Par exemple, ce code crée une application Express nomée _myapp_. L'application sera crée dans le dossier _myapp_, lui meme placé dans le repertoir de travail courant. Le moteur de vue sera configuré avec <a href="pugjs.org" target="_blank" title="Documentation Pug">Pug</a>:
 
 <pre>
 <code class="language-sh" translate="no">
-$ express --view=jade myapp
+$ express --view=pug myapp
 
    create : myapp
    create : myapp/package.json
@@ -58,9 +58,9 @@ $ express --view=jade myapp
    create : myapp/public/stylesheets
    create : myapp/public/stylesheets/style.css
    create : myapp/views
-   create : myapp/views/index.jade
-   create : myapp/views/layout.jade
-   create : myapp/views/error.jade
+   create : myapp/views/index.pug
+   create : myapp/views/layout.pug
+   create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
 </code>
@@ -111,9 +111,9 @@ L'application générée possède la structure de répertoire suivante :
 │   ├── index.js
 │   └── users.js
 └── views
-    ├── error.jade
-    ├── index.jade
-    └── layout.jade
+    ├── error.pug
+    ├── index.pug
+    └── layout.pug
 
 7 directories, 9 files
 </code>

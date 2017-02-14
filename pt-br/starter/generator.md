@@ -46,7 +46,7 @@ no diretório atualmente em funcionamento:
 
 <pre>
 <code class="language-sh" translate="no">
-$ express --view=jade myapp
+$ express --view=pug myapp
 
    create : myapp
    create : myapp/package.json
@@ -60,9 +60,9 @@ $ express --view=jade myapp
    create : myapp/public/stylesheets
    create : myapp/public/stylesheets/style.css
    create : myapp/views
-   create : myapp/views/index.jade
-   create : myapp/views/layout.jade
-   create : myapp/views/error.jade
+   create : myapp/views/index.pug
+   create : myapp/views/layout.pug
+   create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
 </code>
@@ -114,9 +114,9 @@ O aplicativo gerado possui a seguinte estrutura de diretórios:
 │   ├── index.js
 │   └── users.js
 └── views
-    ├── error.jade
-    ├── index.jade
-    └── layout.jade
+    ├── error.pug
+    ├── index.pug
+    └── layout.pug
 
 7 directories, 9 files
 </code>
