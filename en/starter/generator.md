@@ -37,10 +37,10 @@ $ express -h
     -f, --force         force on non-empty directory
 ```
 
-For example, the following creates an Express app named _myapp_ in the current working directory:
+For example, the following creates an Express app named _myapp_. The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
 ```sh
-$ express --view=jade myapp
+$ express --view=pug myapp
 
    create : myapp
    create : myapp/package.json
@@ -54,9 +54,9 @@ $ express --view=jade myapp
    create : myapp/public/stylesheets
    create : myapp/public/stylesheets/style.css
    create : myapp/views
-   create : myapp/views/index.jade
-   create : myapp/views/layout.jade
-   create : myapp/views/error.jade
+   create : myapp/views/index.pug
+   create : myapp/views/layout.pug
+   create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
 ```
@@ -99,9 +99,9 @@ The generated app has the following directory structure:
 │   ├── index.js
 │   └── users.js
 └── views
-    ├── error.jade
-    ├── index.jade
-    └── layout.jade
+    ├── error.pug
+    ├── index.pug
+    └── layout.pug
 
 7 directories, 9 files
 ```
