@@ -934,6 +934,7 @@ h2 a {
 
   #navbar {
     padding: 0;
+    top: 1px;
   }
 
   #navbar a {
