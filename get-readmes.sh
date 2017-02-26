@@ -36,14 +36,16 @@ get_release_vers() {
 # </div>
 
 writefile_mw() {
-  FRONTMATTER="---\nlayout: middleware\ntitle: Express $1 middleware\nmenu: resources\nlang: en\nredirect_from: '/resources/middleware/$1.html'\nname: $1\n---\n"
+  FRONTMATTER=$'---\nlayout: middleware\ntitle: Express '$1$' middleware\nmenu: resources\nlang: en\nredirect_from: \'/resources/middleware/'$1$'.html\'\nname: '$1$'\n---'
   FILE=en/resources/middleware/$1.md
   README=${2:-README.md}
   ORG=expressjs
 
-  echo $FRONTMATTER > $FILE
+  echo "$FRONTMATTER" > $FILE
   get_release_vers $ORG $1
+  echo '<div id="page-doc" markdown="1">' >> $FILE
   curl -s https://raw.githubusercontent.com/$ORG/$1/$RELEASE_VERS/$README >> $FILE
+  echo '</div>' >> $FILE
   echo "Curling to https://raw.githubusercontent.com/$ORG/$1/$RELEASE_VERS/$README"
   echo "Writing $FILE"
 }
@@ -52,14 +54,16 @@ writefile_mw() {
 ## Optional second arg is org (Default is "jshttp" or "pillarjs").
 ## Optional third arg is name of README file. Default is README.md
 writefile_util() {
-  FRONTMATTER="---\nlayout: middleware\ntitle: Express $1 utility function\nmenu: resources\nlang: en\nredirect_from: '/resources/utils/$1.html'\nname: $1\n---\n"
+  FRONTMATTER=$'---\nlayout: middleware\ntitle: Express '$1$' utility function\nmenu: resources\nlang: en\nredirect_from: \'/resources/utils/'$1$'.html\'\nname: '$1$'\n---'
   FILE=en/resources/utils/$1.md
   ORG=${2:-jshttp}
   README=${3:-README.md}
 
-  echo $FRONTMATTER > $FILE
+  echo "$FRONTMATTER" > $FILE
   get_release_vers $ORG $1
+  echo '<div id="page-doc" markdown="1">' >> $FILE
   curl -s https://raw.githubusercontent.com/$ORG/$1/$RELEASE_VERS/$README >> $FILE
+  echo '</div>' >> $FILE
   echo "Curling to https://raw.githubusercontent.com/$ORG/$1/$RELEASE_VERS/$README"
   echo "Writing $FILE"
 }
