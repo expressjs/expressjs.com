@@ -17,13 +17,11 @@ name: cookie-session
 
   Simple cookie-based session middleware.
 
-## Semantics
-
-  This module provides "guest" sessions, meaning any visitor will have a session,
-  authenticated or not. If a session is _new_ a `Set-Cookie` will be produced regardless
-  of populating the session.
-
 ## Install
+
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
 ```bash
 $ npm install cookie-session
@@ -33,11 +31,31 @@ $ npm install cookie-session
 
 ```js
 var cookieSession = require('cookie-session')
+var express = require('express')
+
+var app = express()
+
+app.use(cookieSession({
+  name: 'session',
+  keys: [/* secret keys */],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 ```
 
 ### cookieSession(options)
 
-Create a new cookie session middleware with the provided options.
+Create a new cookie session middleware with the provided options. This middleware
+will attach the property `session` to `req`, which provides an object representing
+the loaded session. This session is either a new session if no valid session was
+provided in the request, or a loaded session from the request.
+
+The middleware will automatically add a `Set-Cookie` header to the response if the
+contents of `req.session` were altered. _Note_ that no `Set-Cookie` header will be
+in the response (and thus no session created for a specific user) unless there are
+contents in the session, so be sure to add something to `req.session` as soon as
+you have identifying information to store for the session.
 
 #### Options
 
@@ -62,15 +80,15 @@ A string which will be used as single key if `keys` is not provided.
 Other options are passed to `cookies.get()` and `cookies.set()` allowing you
 to control security, domain, path, and signing among other settings.
 
-The options can also contain any of the follow (for the full list, see
+The options can also contain any of the following (for the full list, see
 [cookies module documentation](https://www.npmjs.org/package/cookies#readme):
 
   - `maxAge`: a number representing the milliseconds from `Date.now()` for expiry
   - `expires`: a `Date` object indicating the cookie's expiration date (expires at the end of session by default).
   - `path`: a string indicating the path of the cookie (`/` by default).
   - `domain`: a string indicating the domain of the cookie (no default).
-  - `secure`: a boolean indicating whether the cookie is only to be sent over HTTPS (`false` by default for HTTP, `true` by default for HTTPS).
-  - `secureProxy`: a boolean indicating whether the cookie is only to be sent over HTTPS (use this if you handle SSL not in your node process).
+  - `sameSite`: a boolean or string indicating whether the cookie is a "same site" cookie (`false` by default). This can be set to `'strict'`, `'lax'`, or `true` (which maps to `'strict'`).
+  - `secure`: a boolean indicating whether the cookie is only to be sent over HTTPS (`false` by default for HTTP, `true` by default for HTTPS). If this is set to `true` and Node.js is not directly over a TLS connection, be sure to read how to [setup Express behind proxies](https://expressjs.com/en/guide/behind-proxies.html) or the cookie may not ever set correctly.
   - `httpOnly`: a boolean indicating whether the cookie is only to be sent over HTTP(S), and not made available to client JavaScript (`true` by default).
   - `signed`: a boolean indicating whether the cookie is to be signed (`true` by default). If this is true, another cookie of the same name with the `.sig` suffix appended will also be sent, with a 27-byte url-safe base64 SHA1 value representing the hash of _cookie-name_=_cookie-value_ against the first [Keygrip](https://github.com/expressjs/keygrip) key. This signature key is used to detect tampering the next time a cookie is received.
   - `overwrite`: a boolean indicating whether to overwrite previously set cookies of the same name (`true` by default). If this is true, all cookies set during the same request with the same name (regardless of path or domain) are filtered out of the Set-Cookie header when setting this cookie.
@@ -99,13 +117,13 @@ altered to change cookie setting behavior on a per-request basis.
 
 ### Destroying a session
 
-  To destroy a session simply set it to `null`:
+To destroy a session simply set it to `null`:
 
-```js
+```
 req.session = null
 ```
 
-## Example
+## Examples
 
 ### Simple view counter example
 
@@ -122,7 +140,7 @@ app.use(cookieSession({
   keys: ['key1', 'key2']
 }))
 
-app.use(function (req, res, next) {
+app.get('/', function (req, res, next) {
   // Update views
   req.session.views = (req.session.views || 0) + 1
 
@@ -133,7 +151,7 @@ app.use(function (req, res, next) {
 app.listen(3000)
 ```
 
-## Per-user sticky max age
+### Per-user sticky max age
 
 ```js
 var cookieSession = require('cookie-session')
@@ -152,6 +170,35 @@ app.use(cookieSession({
 // have a different value than the default.
 app.use(function (req, res, next) {
   req.sessionOptions.maxAge = req.session.maxAge || req.sessionOptions.maxAge
+  next()
+})
+
+// ... your logic here ...
+```
+
+### Extending the session expiration
+
+This module does not send a `Set-Cookie` header if the contents of the session
+have not changed. This means that to extend the expiration of a session in the
+user's browser (in response to user activity, for example) some kind of
+modification to the session needs be made.
+
+```js
+var cookieSession = require('cookie-session')
+var express = require('express')
+
+var app = express()
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
+
+// Update a value in the cookie so that the set-cookie will be sent.
+// Only changes every minute so that it's not sent with every request.
+app.use(function (req, res, next) {
+  req.session.nowInMinutes = Date.now() / 60e3
+  next()
 })
 
 // ... your logic here ...
@@ -164,7 +211,7 @@ app.use(function (req, res, next) {
 Because the entire session object is encoded and stored in a cookie, it is
 possible to exceed the maxium cookie size limits on different browsers. The
 [RFC6265 specification](https://tools.ietf.org/html/rfc6265#section-6.1)
-reccomends that a browser **SHOULD** allow
+recommends that a browser **SHOULD** allow
 
 > At least 4096 bytes per cookie (as measured by the sum of the length of
 > the cookie's name, value, and attributes)

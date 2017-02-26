@@ -24,11 +24,17 @@ The following compression codings are supported:
 
 ## Install
 
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
 ```bash
 $ npm install compression
 ```
 
 ## API
+
+<!-- eslint-disable no-unused-vars -->
 
 ```js
 var compression = require('compression')
@@ -151,6 +157,10 @@ The default `filter` function. This is used to construct a custom filter
 function that is an extension of the default function.
 
 ```js
+var compression = require('compression')
+var express = require('express')
+
+var app = express()
 app.use(compression({filter: shouldCompress}))
 
 function shouldCompress (req, res) {
@@ -182,7 +192,7 @@ var express = require('express')
 
 var app = express()
 
-// compress all requests
+// compress all responses
 app.use(compression())
 
 // add all routes

@@ -17,7 +17,7 @@ name: body-parser
 
 Node.js body parsing middleware.
 
-Parse incoming request bodies in a middleware before your handlers, availabe
+Parse incoming request bodies in a middleware before your handlers, available
 under the `req.body` property.
 
 [Learn about the anatomy of an HTTP transaction in Node.js](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/).
@@ -52,6 +52,8 @@ $ npm install body-parser
 ```
 
 ## API
+
+<!-- eslint-disable no-unused-vars -->
 
 ```js
 var bodyParser = require('body-parser')
@@ -392,6 +394,11 @@ All the parsers accept a `type` option which allows you to change the
 `Content-Type` that the middleware will parse.
 
 ```js
+var express = require('express')
+var bodyParser = require('body-parser')
+
+var app = express()
+
 // parse various different custom JSON types as JSON
 app.use(bodyParser.json({ type: 'application/*+json' }))
 

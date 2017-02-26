@@ -17,6 +17,10 @@ name: session
 
 ## Installation
 
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
 ```bash
 $ npm install express-session
 ```
@@ -57,13 +61,13 @@ Settings object for the session ID cookie. The default value is
 
 The following are options that can be set in this object.
 
-###### domain
+##### cookie.domain
 
 Specifies the value for the `Domain` `Set-Cookie` attribute. By default, no domain
 is set, and most clients will consider the cookie to apply to only the current
 domain.
 
-###### expires
+##### cookie.expires
 
 Specifies the `Date` object to be the value for the `Expires` `Set-Cookie` attribute.
 By default, no expiration is set, and most clients will consider this a
@@ -76,7 +80,7 @@ defined in the object is what is used.
 **Note** The `expires` option should not be set directly; instead only use the `maxAge`
 option.
 
-###### httpOnly
+##### cookie.httpOnly
 
 Specifies the `boolean` value for the `HttpOnly` `Set-Cookie` attribute. When truthy,
 the `HttpOnly` attribute is set, otherwise it is not. By default, the `HttpOnly`
@@ -85,7 +89,7 @@ attribute is set.
 **Note** be careful when setting this to `true`, as compliant clients will not allow
 client-side JavaScript to see the cookie in `document.cookie`.
 
-###### maxAge
+##### cookie.maxAge
 
 Specifies the `number` (in milliseconds) to use when calculating the `Expires`
 `Set-Cookie` attribute. This is done by taking the current server time and adding
@@ -95,12 +99,12 @@ no maximum age is set.
 **Note** If both `expires` and `maxAge` are set in the options, then the last one
 defined in the object is what is used.
 
-###### path
+##### cookie.path
 
 Specifies the value for the `Path` `Set-Cookie`. By default, this is set to `'/'`, which
 is the root path of the domain.
 
-###### sameSite
+##### cookie.sameSite
 
 Specifies the `boolean` or `string` to be the value for the `SameSite` `Set-Cookie` attribute.
 
@@ -115,7 +119,7 @@ https://tools.ietf.org/html/draft-west-first-party-cookies-07#section-4.1.1
 **Note** This is an attribute that has not yet been fully standardized, and may change in
 the future. This also means many clients may ignore this attribute until they understand it.
 
-###### secure
+##### cookie.secure
 
 Specifies the `boolean` value for the `Secure` `Set-Cookie` attribute. When truthy,
 the `Secure` attribute is set, otherwise it is not. By default, the `Secure`
@@ -180,7 +184,7 @@ The default value is a function which uses the `uid-safe` library to generate ID
 
 ```js
 app.use(session({
-  genid: function (req) {
+  genid: function(req) {
     return genuuid() // use UUIDs for session IDs
   },
   secret: 'keyboard cat'
@@ -293,10 +297,10 @@ are typically fine. For example below is a user-specific view counter:
 
 ```js
 // Use the session middleware
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 } }))
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
 // Access the session as req.session
-app.get('/', function (req, res, next) {
+app.get('/', function(req, res, next) {
   var sess = req.session
   if (sess.views) {
     sess.views++
@@ -311,38 +315,41 @@ app.get('/', function (req, res, next) {
 })
 ```
 
-#### Session.regenerate()
+#### Session.regenerate(callback)
 
 To regenerate the session simply invoke the method. Once complete,
-a new SID and `Session` instance will be initialized at `req.session`.
+a new SID and `Session` instance will be initialized at `req.session`
+and the `callback` will be invoked.
 
 ```js
-req.session.regenerate(function (err) {
+req.session.regenerate(function(err) {
   // will have a new session here
 })
 ```
 
-#### Session.destroy()
+#### Session.destroy(callback)
 
-Destroys the session, removing `req.session`; will be re-generated next request.
+Destroys the session and will unset the `req.session` property.
+Once complete, the `callback` will be invoked.
 
 ```js
-req.session.destroy(function (err) {
+req.session.destroy(function(err) {
   // cannot access session here
 })
 ```
 
-#### Session.reload()
+#### Session.reload(callback)
 
-Reloads the session data.
+Reloads the session data from the store and re-populates the
+`req.session` object. Once complete, the `callback` will be invoked.
 
 ```js
-req.session.reload(function (err) {
+req.session.reload(function(err) {
   // session updated
 })
 ```
 
-#### Session.save()
+#### Session.save(callback)
 
 Save the session back to the store, replacing the contents on the store with the
 contents in memory (though a store may do something else--consult the store's
@@ -357,7 +364,7 @@ There are some cases where it is useful to call this method, for example, long-
 lived requests or in WebSockets.
 
 ```js
-req.session.save(function (err) {
+req.session.save(function(err) {
   // session saved
 })
 ```
@@ -486,6 +493,11 @@ potentially resetting the idle timer.
 The following modules implement a session store that is compatible with this
 module. Please make a PR to add additional modules :)
 
+[![★][aerospike-session-store-image] aerospike-session-store][aerospike-session-store-url] A session store using [Aerospike](http://www.aerospike.com/).
+
+[aerospike-session-store-url]: https://www.npmjs.com/package/aerospike-session-store
+[aerospike-session-store-image]: https://img.shields.io/github/stars/aerospike/aerospike-session-store-expressjs.svg?label=%E2%98%85
+
 [![★][cassandra-store-image] cassandra-store][cassandra-store-url] An Apache Cassandra-based session store.
 
 [cassandra-store-url]: https://www.npmjs.com/package/cassandra-store
@@ -508,10 +520,30 @@ and other multi-core embedded devices).
 [connect-couchbase-url]: https://www.npmjs.com/package/connect-couchbase
 [connect-couchbase-image]: https://img.shields.io/github/stars/christophermina/connect-couchbase.svg?label=%E2%98%85
 
+[![★][connect-datacache-image] connect-datacache][connect-datacache-url] An [IBM Bluemix Data Cache](http://www.ibm.com/cloud-computing/bluemix/)-based session store.
+
+[connect-datacache-url]: https://www.npmjs.com/package/connect-datacache
+[connect-datacache-image]: https://img.shields.io/github/stars/adriantanasa/connect-datacache.svg?label=%E2%98%85
+
+[![★][connect-db2-image] connect-db2][connect-db2-url] An IBM DB2-based session store built using [ibm_db](https://www.npmjs.com/package/ibm_db) module.
+
+[connect-db2-url]: https://www.npmjs.com/package/connect-db2
+[connect-db2-image]: https://img.shields.io/github/stars/wallali/connect-db2.svg?label=%E2%98%85
+
 [![★][connect-dynamodb-image] connect-dynamodb][connect-dynamodb-url] A DynamoDB-based session store.
 
 [connect-dynamodb-url]: https://github.com/ca98am79/connect-dynamodb
 [connect-dynamodb-image]: https://img.shields.io/github/stars/ca98am79/connect-dynamodb.svg?label=%E2%98%85
+
+[![★][connect-loki-image] connect-loki][connect-loki-url] A Loki.js-based session store.
+
+[connect-loki-url]: https://www.npmjs.com/package/connect-loki
+[connect-loki-image]: https://img.shields.io/github/stars/Requarks/connect-loki.svg?label=%E2%98%85
+
+[![★][connect-ml-image] connect-ml][connect-ml-url] A MarkLogic Server-based session store.
+
+[connect-ml-url]: https://www.npmjs.com/package/connect-ml
+[connect-ml-image]: https://img.shields.io/github/stars/bluetorch/connect-ml.svg?label=%E2%98%85
 
 [![★][connect-mssql-image] connect-mssql][connect-mssql-url] A SQL Server-based session store.
 
@@ -566,20 +598,61 @@ and other multi-core embedded devices).
 [express-mysql-session-url]: https://www.npmjs.com/package/express-mysql-session
 [express-mysql-session-image]: https://img.shields.io/github/stars/chill117/express-mysql-session.svg?label=%E2%98%85
 
+[![★][express-oracle-session-image] express-oracle-session][express-oracle-session-url] A session store using native
+[oracle](https://www.oracle.com/) via the [node-oracledb](https://www.npmjs.com/package/oracledb) module.
+
+[express-oracle-session-url]: https://www.npmjs.com/package/express-oracle-session
+[express-oracle-session-image]: https://img.shields.io/github/stars/slumber86/express-oracle-session.svg?label=%E2%98%85
+
+[![★][express-sessions-image] express-sessions][express-sessions-url]: A session store supporting both MongoDB and Redis.
+[express-sessions-url]: https://www.npmjs.com/package/express-sessions
+[express-sessions-image]: https://img.shields.io/github/stars/konteck/express-sessions.svg?label=%E2%98%85
+
 [![★][connect-sqlite3-image] connect-sqlite3][connect-sqlite3-url] A [SQLite3](https://github.com/mapbox/node-sqlite3) session store modeled after the TJ's `connect-redis` store.
 
 [connect-sqlite3-url]: https://www.npmjs.com/package/connect-sqlite3
 [connect-sqlite3-image]: https://img.shields.io/github/stars/rawberg/connect-sqlite3.svg?label=%E2%98%85
+
+[![★][documentdb-session-image] documentdb-session][documentdb-session-url] A session store for Microsoft Azure's [DocumentDB](https://azure.microsoft.com/en-us/services/documentdb/) NoSQL database service.
+
+[documentdb-session-url]: https://www.npmjs.com/package/documentdb-session
+[documentdb-session-image]: https://img.shields.io/github/stars/dwhieb/documentdb-session.svg?label=%E2%98%85
 
 [![★][express-nedb-session-image] express-nedb-session][express-nedb-session-url] A NeDB-based session store.
 
 [express-nedb-session-url]: https://www.npmjs.com/package/express-nedb-session
 [express-nedb-session-image]: https://img.shields.io/github/stars/louischatriot/express-nedb-session.svg?label=%E2%98%85
 
+[![★][express-session-level-image] express-session-level][express-session-level-url] A [LevelDB](https://github.com/Level/levelup) based session store.
+
+[express-session-level-url]: https://www.npmjs.com/package/express-session-level
+[express-session-level-image]: https://img.shields.io/github/stars/tgohn/express-session-level.svg?label=%E2%98%85
+
+[![★][express-etcd-image] express-etcd][express-etcd-url] An [etcd](https://github.com/stianeikeland/node-etcd) based session store.
+
+[express-etcd-url]: https://www.npmjs.com/package/express-etcd
+[express-etcd-image]: https://img.shields.io/github/stars/gildean/express-etcd.svg?label=%E2%98%85
+
+[![★][fortune-session-image] fortune-session][fortune-session-url] A [Fortune.js](https://github.com/fortunejs/fortune)
+based session store. Supports all backends supported by Fortune (MongoDB, Redis, Postgres, NeDB).
+
+[fortune-session-url]: https://www.npmjs.com/package/fortune-session
+[fortune-session-image]: https://img.shields.io/github/stars/aliceklipper/fortune-session.svg?label=%E2%98%85
+
+[![★][hazelcast-store-image] hazelcast-store][hazelcast-store-url] A Hazelcast-based session store built on the [Hazelcast Node Client](https://www.npmjs.com/package/hazelcast-client).
+
+[hazelcast-store-url]: https://www.npmjs.com/package/hazelcast-store
+[hazelcast-store-image]: https://img.shields.io/github/stars/jackspaniel/hazelcast-store.svg?label=%E2%98%85
+
 [![★][level-session-store-image] level-session-store][level-session-store-url] A LevelDB-based session store.
 
 [level-session-store-url]: https://www.npmjs.com/package/level-session-store
 [level-session-store-image]: https://img.shields.io/github/stars/scriptollc/level-session-store.svg?label=%E2%98%85
+
+[![★][medea-session-store-image] medea-session-store][medea-session-store-url] A Medea-based session store.
+
+[medea-session-store-url]: https://www.npmjs.com/package/medea-session-store
+[medea-session-store-image]: https://img.shields.io/github/stars/BenjaminVadant/medea-session-store.svg?label=%E2%98%85
 
 [![★][mssql-session-store-image] mssql-session-store][mssql-session-store-url] A SQL Server-based session store.
 

@@ -35,6 +35,10 @@ for the response between HTML, JSON, and plain text.
 
 ## Install
 
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
 ```sh
 $ npm install errorhandler
 ```
@@ -107,7 +111,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(errorhandler({log: errorNotification}))
 }
 
-function errorNotification (err, str, req) {
+function errorNotification(err, str, req) {
   var title = 'Error in ' + req.method + ' ' + req.url
 
   notifier.notify({

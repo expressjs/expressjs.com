@@ -18,11 +18,17 @@ name: serve-static
 
 ## Install
 
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
 ```sh
 $ npm install serve-static
 ```
 
 ## API
+
+<!-- eslint-disable no-unused-vars -->
 
 ```js
 var serveStatic = require('serve-static')
@@ -200,6 +206,7 @@ a fallback.
 
 ```js
 var express = require('express')
+var path = require('path')
 var serveStatic = require('serve-static')
 
 var app = express()
@@ -217,6 +224,7 @@ is for 1 day.
 
 ```js
 var express = require('express')
+var path = require('path')
 var serveStatic = require('serve-static')
 
 var app = express()
