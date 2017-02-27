@@ -42,8 +42,6 @@ redirect_from: "/en/index.html"
 
 </section>
 
-<!--
 <section id="announcements">
   {% include announcement/announcement-{{ page.lang }}.md %}
 </section>
--->
