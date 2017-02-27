@@ -31,11 +31,17 @@ If you have questions on how this module is implemented, please read
 
 ## Installation
 
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
 ```sh
 $ npm install csurf
 ```
 
 ## API
+
+<!-- eslint-disable no-unused-vars -->
 
 ```js
 var csurf = require('csurf')
@@ -147,10 +153,61 @@ input field named `_csrf`:
 ```html
 <form action="/process" method="POST">
   <input type="hidden" name="_csrf" value="{{csrfToken}}">
-
+  
   Favorite color: <input type="text" name="favoriteColor">
   <button type="submit">Submit</button>
 </form>
+```
+
+### Ignoring Routes
+
+**Note** CSRF checks should only be disabled for requests that you expect to
+come from outside of your website. Do not disable CSRF checks for requests
+that you expect to only come from your website. An existing session, even if
+it belongs to an authenticated user, is not enough to protect against CSRF
+attacks.
+
+The following is an example of how to order your routes so that certain endpoints
+do not check for a valid CSRF token.
+
+```js
+var cookieParser = require('cookie-parser')
+var csrf = require('csurf')
+var bodyParser = require('body-parser')
+var express = require('express')
+
+// create express app
+var app = express()
+
+// create api router
+var api = createApiRouter()
+
+// mount api before csrf is appended to the app stack
+app.use('/api', api)
+
+// now add csrf and other middlewares, after the "/api" was mounted
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(csrf({ cookie: true }))
+
+app.get('/form', function (req, res) {
+  // pass the csrfToken to the view
+  res.render('send', { csrfToken: req.csrfToken() })
+})
+
+app.post('/process', function (req, res) {
+  res.send('csrf was required to get here')
+})
+
+function createApiRouter () {
+  var router = new express.Router()
+
+  router.post('/getProfile', function (req, res) {
+    res.send('no csrf to get here')
+  })
+
+  return router
+}
 ```
 
 ### Custom error handling

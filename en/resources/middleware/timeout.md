@@ -19,6 +19,10 @@ Times out a request in the Connect/Express application framework.
 
 ## Install
 
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
 ```sh
 $ npm install connect-timeout
 ```
@@ -76,6 +80,8 @@ care to check if the request has timedout before you continue to act
 on the request.
 
 ```javascript
+var bodyParser = require('body-parser')
+var cookieParser = require('cookie-parser')
 var express = require('express')
 var timeout = require('connect-timeout')
 
@@ -120,7 +126,7 @@ function haltOnTimedout (req, res, next) {
 function savePost (post, cb) {
   setTimeout(function () {
     cb(null, ((Math.random() * 40000) >>> 0))
-  }, ((Math.random() * 7000) >>> 0))
+  }, (Math.random() * 7000) >>> 0)
 }
 
 app.listen(3000)
@@ -133,7 +139,7 @@ var bodyParser = require('body-parser')
 var connect = require('connect')
 var timeout = require('connect-timeout')
 
-var app = require('connect')
+var app = connect()
 app.use('/save', timeout('5s'), bodyParser.json(), haltOnTimedout, function (req, res, next) {
   savePost(req.body, function (err, id) {
     if (err) return next(err)
@@ -149,7 +155,7 @@ function haltOnTimedout (req, res, next) {
 function savePost (post, cb) {
   setTimeout(function () {
     cb(null, ((Math.random() * 40000) >>> 0))
-  }, ((Math.random() * 7000) >>> 0))
+  }, (Math.random() * 7000) >>> 0)
 }
 
 app.listen(3000)

@@ -27,11 +27,11 @@ $ npm install connect-rid
 ## Usage
 
 ```js
-var rid = require('connect-rid')
+var rid = require('connect-rid');
 
 app.use(rid({
   // headerName: 'X-RID'
-}))
+}));
 ```
 
 ## License

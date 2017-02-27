@@ -14,6 +14,12 @@ on top of [busboy](https://github.com/mscdex/busboy) for maximum efficiency.
 
 **NOTE**: Multer will not process any form which is not multipart (`multipart/form-data`).
 
+## Translations 
+
+This README is also available in other languages:
+
+- [简体中文](https://github.com/expressjs/multer/blob/master/doc/README-zh-cn.md) (Chinese)
+
 ## Installation
 
 ```sh
@@ -28,7 +34,7 @@ Basic usage example:
 
 ```javascript
 var express = require('express')
-var multer = require('multer')
+var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
 var app = express()
@@ -60,7 +66,7 @@ In case you need to handle a text-only multipart form, you can use any of the mu
 ```javascript
 var express = require('express')
 var app = express()
-var multer = require('multer')
+var multer  = require('multer')
 var upload = multer()
 
 app.post('/profile', upload.array(), function (req, res, next) {
@@ -102,6 +108,7 @@ Key | Description
 `dest` or `storage` | Where to store the files
 `fileFilter` | Function to control which files are accepted
 `limits` | Limits of the uploaded data
+`preservePath` | Keep the full path of files instead of just the base name
 
 In an average web app, only `dest` might be required, and configured as shown in
 the following example.
@@ -241,6 +248,7 @@ should be skipped. The function should look like this:
 
 ```javascript
 function fileFilter (req, file, cb) {
+
   // The function should call `cb` with a boolean
   // to indicate if the file should be accepted
 
@@ -252,6 +260,7 @@ function fileFilter (req, file, cb) {
 
   // You can always pass an error if something goes wrong:
   cb(new Error('I don\'t have a clue!'))
+
 }
 ```
 
@@ -280,8 +289,7 @@ app.post('/profile', function (req, res) {
 
 ## Custom storage engine
 
-See [the documentation here](/StorageEngine.md) if you want to build your own
-storage engine.
+For information on how to build your own storage engine, see [Multer Storage Engine](https://github.com/expressjs/multer/blob/master/StorageEngine.md).
 
 ## License
 

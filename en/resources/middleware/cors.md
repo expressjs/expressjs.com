@@ -15,7 +15,7 @@ CORS is a node.js package for providing a [Connect](http://www.senchalabs.org/co
 
 [![NPM](https://nodei.co/npm/cors.png?downloads=true&stars=true)](https://nodei.co/npm/cors/)
 
-[![build status](https://secure.travis-ci.org/expressjs/cors.png)](http://travis-ci.org/expressjs/cors)
+[![build status](https://secure.travis-ci.org/expressjs/cors.svg?branch=master)](http://travis-ci.org/expressjs/cors)
 * [Installation](#installation)
 * [Usage](#usage)
   * [Simple Usage](#simple-usage-enable-all-cors-requests)
@@ -62,7 +62,7 @@ var cors = require('cors')
 var app = express()
 
 app.get('/products/:id', cors(), function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for all origins!'})
+  res.json({msg: 'This is CORS-enabled for a Single Route'})
 })
 
 app.listen(80, function () {
@@ -78,7 +78,8 @@ var cors = require('cors')
 var app = express()
 
 var corsOptions = {
-  origin: 'http://example.com'
+  origin: 'http://example.com',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
 app.get('/products/:id', cors(corsOptions), function (req, res, next) {
@@ -101,7 +102,7 @@ var whitelist = ['http://example1.com', 'http://example2.com']
 var corsOptions = {
   origin: function (origin, callback) {
     var originIsWhitelisted = whitelist.indexOf(origin) !== -1
-    callback(null, originIsWhitelisted)
+    callback(originIsWhitelisted ? null : 'Bad Request', originIsWhitelisted)
   }
 }
 
@@ -153,10 +154,10 @@ var app = express()
 
 var whitelist = ['http://example1.com', 'http://example2.com']
 var corsOptionsDelegate = function (req, callback) {
-  var corsOptions
+  var corsOptions;
   if (whitelist.indexOf(req.header('Origin')) !== -1) {
     corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-  } else {
+  }else{
     corsOptions = { origin: false } // disable CORS for this request
   }
   callback(null, corsOptions) // callback expects two parameters: error and options
@@ -183,8 +184,9 @@ app.listen(80, function () {
 * `allowedHeaders`: Configures the **Access-Control-Allow-Headers** CORS header. Expects a comma-delimited string (ex: 'Content-Type,Authorization') or an array (ex: `['Content-Type', 'Authorization']`). If not specified, defaults to reflecting the headers specified in the request's **Access-Control-Request-Headers** header.
 * `exposedHeaders`: Configures the **Access-Control-Expose-Headers** CORS header. Expects a comma-delimited string (ex: 'Content-Range,X-Content-Range') or an array (ex: `['Content-Range', 'X-Content-Range']`). If not specified, no custom headers are exposed.
 * `credentials`: Configures the **Access-Control-Allow-Credentials** CORS header. Set to `true` to pass the header, otherwise it is omitted.
-* `maxAge`: Configures the **Access-Control-Allow-Max-Age** CORS header. Set to an integer to pass the header, otherwise it is omitted.
+* `maxAge`: Configures the **Access-Control-Max-Age** CORS header. Set to an integer to pass the header, otherwise it is omitted.
 * `preflightContinue`: Pass the CORS preflight response to the next handler.
+* `optionsSuccessStatus`: Provides a status code to use for successful `OPTIONS` requests, since some legacy browsers (IE11, various SmartTVs) choke on `204`.
 
 The default configuration is the equivalent of:
 
@@ -192,7 +194,8 @@ The default configuration is the equivalent of:
 {
   "origin": "*",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "preflightContinue": false
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
 }
 ```
 
