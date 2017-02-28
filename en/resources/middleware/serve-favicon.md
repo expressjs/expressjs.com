@@ -14,7 +14,7 @@ name: serve-favicon
 [![Linux Build][travis-image]][travis-url]
 [![Windows Build][appveyor-image]][appveyor-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
-[![Gittip][gittip-image]][gittip-url]
+[![Gratipay][gratipay-image]][gratipay-url]
 
 Node.js middleware for serving a favicon.
 
@@ -44,8 +44,8 @@ This is a [Node.js](https://nodejs.org/en/) module available through the
 [npm registry](https://www.npmjs.com/). Installation is done using the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```bash
-npm install serve-favicon
+```sh
+$ npm install serve-favicon
 ```
 
 ## API
@@ -144,6 +144,6 @@ server.listen(3000)
 [coveralls-url]: https://coveralls.io/r/expressjs/serve-favicon?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/serve-favicon.svg
 [downloads-url]: https://npmjs.org/package/serve-favicon
-[gittip-image]: https://img.shields.io/gittip/dougwilson.svg
-[gittip-url]: https://www.gittip.com/dougwilson/
+[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
+[gratipay-url]: https://www.gratipay.com/dougwilson/
 </div>
