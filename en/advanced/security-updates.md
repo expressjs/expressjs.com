@@ -20,6 +20,8 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
 
 ## 4.x
 
+  * 4.15.0
+    * The dependency `qs` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:qs:20170213), but this issue does not impact Express. Updating to 4.15.0 is a good practice, but not required to address the vulnerability.
   * 4.11.1
     * Fixed root path disclosure vulnerability in `express.static`, `res.sendfile`, and `res.sendFile`
   * 4.10.7
