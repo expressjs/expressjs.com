@@ -169,6 +169,31 @@ router.get('/user/:id', function (req, res, next) {
 app.use('/', router)
 ```
 
+To skip the rest of the router's middleware functions, call `next('router')`
+to pass control back out of the router instance.
+
+This example shows a middleware sub-stack that handles GET requests to the `/user/:id` path.
+
+```js
+var app = express()
+var router = express.Router()
+
+// predicate the router with a check and bail out when needed
+router.use(function (req, res, next) {
+  if (!req.headers['x-auth']) return next('router')
+  next()
+})
+
+router.get('/', function (req, res) {
+  res.send('hello, user!')
+})
+
+// use the router and 401 anything falling through
+app.use('/admin', router, function (req, res) {
+  res.sendStatus(401)
+})
+```
+
 <h2 id='middleware.error-handling'>Error-handling middleware</h2>
 
 <div class="doc-box doc-notice" markdown="1">
