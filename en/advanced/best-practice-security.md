@@ -156,7 +156,7 @@ app.use(session({
 
 Using npm to manage your application's dependencies is powerful and convenient.  But the packages that you use may contain critical security vulnerabilities that could also affect your application.  The security of your app is only as strong as the "weakest link" in your dependencies.
 
-Use either or both of the following two tools to help ensure the security of third-party packages that you use: [nsp](https://www.npmjs.com/package/nsp) and [requireSafe](https://requiresafe.com/).  These two tools do largely the same thing.
+Use either or both of the following two tools to help ensure the security of third-party packages that you use: [nsp](https://www.npmjs.com/package/nsp) and [Snyk](https://snyk.io/).
 
 [nsp](https://www.npmjs.com/package/nsp) is a command-line tool that checks the [Node Security Project](https://nodesecurity.io/) vulnerability database to determine if your application uses packages with known vulnerabilities. Install it as follows:
 
@@ -170,17 +170,28 @@ Use this command to submit the `npm-shrinkwrap.json` / `package.json` files for 
 $ nsp check
 ```
 
-Here's how to use [requireSafe](https://requiresafe.com/) to audit your Node modules:
+Snyk offers both a [command-line tool](https://www.npmjs.com/package/snyk) and a [Github integration](https://snyk.io/docs/github) that checks your application against [Snyk's open source vulnerability database](https://snyk.io/vuln/) for any known vulnerabilities in your dependencies. Install the CLI as follows:
 
 ```sh
-$ npm install -g requiresafe
+$ npm install -g snyk
 $ cd your-app
-$ requiresafe check
+```
+
+Use this command to test your application for vulnerabilities: 
+
+```sh
+$ snyk test
+```
+
+Use this command to open a wizard that walks you through the process of applying updates or patches to fix the vulnerabilities that were found:
+
+```sh
+$ snyk wizard
 ```
 
 ## Avoid other known vulnerabilities
 
-Keep an eye out for [Node Security Project](https://nodesecurity.io/advisories) advisories that may affect Express or other modules that your app uses.  In general, the Node Security Project is an excellent resource for knowledge and tools about Node security.
+Keep an eye out for [Node Security Project](https://nodesecurity.io/advisories) or [Snyk](https://snyk.io/vuln/) advisories that may affect Express or other modules that your app uses.  In general, these databases are excellent resources for knowledge and tools about Node security.
 
 Finally, Express apps - like any other web apps - can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://www.owasp.org/index.php/Top_10_2013-Top_10) and take precautions to avoid them.
 
