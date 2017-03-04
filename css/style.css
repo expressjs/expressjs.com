@@ -1029,6 +1029,11 @@ h2 a {
     color: #666 !important;
   }
 
+  footer {
+    margin: 60px 0px 30px 0px;
+    padding: 0 5%;
+  }
+
   #footer-content {
     display: flex;
     flex-wrap: wrap;
@@ -1048,7 +1053,7 @@ h2 a {
   }
 
   #doc-langs {
-    `font-size: 11px;
+    font-size: 11px;
   }
 
 }
@@ -1073,7 +1078,7 @@ h2 a {
   }
 
   footer {
-    margin-top: 14px 0 0 0;
+    margin-top: 14px;
   }
 
   #footer-content {
