@@ -51,8 +51,11 @@ redirect_from: "/resources/companies-using-express.html"
     <a target="_new" class="imagelink" href="https://www.yandex.ru/">
       <img alt="Yandex" class="memberlogo" src="/images/companies/yandex-logo.png" />
     </a>
+    <a target="_new" class="imagelink" href="http://www.agrippa.no/en">
+      <img alt="Agrippa Solutions AS" class="memberlogo" src="/images/companies/OrgASLogo.png" />
+    </a>    
 </div>
-
-If your company is using Express, let us know:
-[callback@us.ibm.com](mailto:callback@us.ibm.com).
+<p style="margin-top: 30px;">
+To add your logo to this page, please <a href="https://github.com/expressjs/expressjs.com/blob/gh-pages/en/resources/companies-using-express.md">open a pull request</a>.
+</p>
 </div>
