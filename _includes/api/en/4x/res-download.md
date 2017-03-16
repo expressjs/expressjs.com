@@ -4,7 +4,7 @@ Transfers the file at `path` as an "attachment". Typically, browsers will prompt
 By default, the `Content-Disposition` header "filename=" parameter is `path` (this typically appears in the browser dialog).
 Override this default with the `filename` parameter.
 
-When an error ocurrs or transfer is complete, the method calls the optional callback function `fn`.
+When an error occurs or transfer is complete, the method calls the optional callback function `fn`.
 This method uses [res.sendFile()](#res.sendFile) to transfer the file.
 
 ```js
