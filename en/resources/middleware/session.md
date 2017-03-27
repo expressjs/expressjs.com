@@ -21,7 +21,7 @@ This is a [Node.js](https://nodejs.org/en/) module available through the
 [npm registry](https://www.npmjs.com/). Installation is done using the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```bash
+```sh
 $ npm install express-session
 ```
 
@@ -515,6 +515,11 @@ and other multi-core embedded devices).
 [connect-azuretables-url]: https://www.npmjs.com/package/connect-azuretables
 [connect-azuretables-image]: https://img.shields.io/github/stars/mike-goodwin/connect-azuretables.svg?label=%E2%98%85
 
+[![★][connect-cloudant-store-image] connect-cloudant-store][connect-cloudant-store-url] An [IBM Cloudant](https://cloudant.com/)-based session store.
+
+[connect-cloudant-store-url]: https://www.npmjs.com/package/connect-cloudant-store
+[connect-cloudant-store-image]: https://img.shields.io/github/stars/adriantanasa/connect-cloudant-store.svg?label=%E2%98%85
+
 [![★][connect-couchbase-image] connect-couchbase][connect-couchbase-url] A [couchbase](http://www.couchbase.com/)-based session store.
 
 [connect-couchbase-url]: https://www.npmjs.com/package/connect-couchbase
@@ -605,6 +610,7 @@ and other multi-core embedded devices).
 [express-oracle-session-image]: https://img.shields.io/github/stars/slumber86/express-oracle-session.svg?label=%E2%98%85
 
 [![★][express-sessions-image] express-sessions][express-sessions-url]: A session store supporting both MongoDB and Redis.
+
 [express-sessions-url]: https://www.npmjs.com/package/express-sessions
 [express-sessions-image]: https://img.shields.io/github/stars/konteck/express-sessions.svg?label=%E2%98%85
 
