@@ -7,15 +7,17 @@ redirect_from: '/resources/middleware/cors.html'
 name: cors
 ---
 <div id="page-doc" markdown="1">
-# `cors`
+# cors
+
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![Build Status][travis-image]][travis-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
 
 CORS is a node.js package for providing a [Connect](http://www.senchalabs.org/connect/)/[Express](http://expressjs.com/) middleware that can be used to enable [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) with various options.
 
 **[Follow me (@troygoode) on Twitter!](https://twitter.com/intent/user?screen_name=troygoode)**
 
-[![NPM](https://nodei.co/npm/cors.png?downloads=true&stars=true)](https://nodei.co/npm/cors/)
-
-[![build status](https://secure.travis-ci.org/expressjs/cors.svg?branch=master)](http://travis-ci.org/expressjs/cors)
 * [Installation](#installation)
 * [Usage](#usage)
   * [Simple Usage](#simple-usage-enable-all-cors-requests)
@@ -28,9 +30,13 @@ CORS is a node.js package for providing a [Connect](http://www.senchalabs.org/co
 * [License](#license)
 * [Author](#author)
 
-## Installation (via [npm](https://npmjs.org/package/cors))
+## Installation
 
-```bash
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
 $ npm install cors
 ```
 
@@ -101,8 +107,11 @@ var app = express()
 var whitelist = ['http://example1.com', 'http://example2.com']
 var corsOptions = {
   origin: function (origin, callback) {
-    var originIsWhitelisted = whitelist.indexOf(origin) !== -1
-    callback(originIsWhitelisted ? null : 'Bad Request', originIsWhitelisted)
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
   }
 }
 
@@ -175,11 +184,11 @@ app.listen(80, function () {
 ## Configuration Options
 
 * `origin`: Configures the **Access-Control-Allow-Origin** CORS header. Possible values:
- - `Boolean` - set `origin` to `true` to reflect the [request origin](http://tools.ietf.org/html/draft-abarth-origin-09), as defined by `req.header('Origin')`, or set it to `false` to disable CORS.
- - `String` - set `origin` to a specific origin. For example if you set it to `"http://example.com"` only requests from "http://example.com" will be allowed.
- - `RegExp` - set `origin` to a regular expression pattern which will be used to test the request origin. If it's a match, the request origin will be reflected. For example the pattern `/example\.com$/` will reflect any request that is coming from an origin ending with "example.com".
- - `Array` - set `origin` to an array of valid origins. Each origin can be a `String` or a `RegExp`. For example `["http://example1.com", /\.example2\.com$/]` will accept any request from "http://example1.com" or from a subdomain of "example2.com".
- - `Function` - set `origin` to a function implementing some custom logic. The function takes the request origin as the first parameter and a callback (which expects the signature `err [object], allow [bool]`) as the second.
+  - `Boolean` - set `origin` to `true` to reflect the [request origin](http://tools.ietf.org/html/draft-abarth-origin-09), as defined by `req.header('Origin')`, or set it to `false` to disable CORS.
+  - `String` - set `origin` to a specific origin. For example if you set it to `"http://example.com"` only requests from "http://example.com" will be allowed.
+  - `RegExp` - set `origin` to a regular expression pattern which will be used to test the request origin. If it's a match, the request origin will be reflected. For example the pattern `/example\.com$/` will reflect any request that is coming from an origin ending with "example.com".
+  - `Array` - set `origin` to an array of valid origins. Each origin can be a `String` or a `RegExp`. For example `["http://example1.com", /\.example2\.com$/]` will accept any request from "http://example1.com" or from a subdomain of "example2.com".
+  - `Function` - set `origin` to a function implementing some custom logic. The function takes the request origin as the first parameter and a callback (which expects the signature `err [object], allow [bool]`) as the second.
 * `methods`: Configures the **Access-Control-Allow-Methods** CORS header. Expects a comma-delimited string (ex: 'GET,PUT,POST') or an array (ex: `['GET', 'PUT', 'POST']`).
 * `allowedHeaders`: Configures the **Access-Control-Allow-Headers** CORS header. Expects a comma-delimited string (ex: 'Content-Type,Authorization') or an array (ex: `['Content-Type', 'Authorization']`). If not specified, defaults to reflecting the headers specified in the request's **Access-Control-Request-Headers** header.
 * `exposedHeaders`: Configures the **Access-Control-Expose-Headers** CORS header. Expects a comma-delimited string (ex: 'Content-Range,X-Content-Range') or an array (ex: `['Content-Range', 'X-Content-Range']`). If not specified, no custom headers are exposed.
@@ -217,4 +226,13 @@ Code for that demo can be found here:
 ## Author
 
 [Troy Goode](https://github.com/TroyGoode) ([troygoode@gmail.com](mailto:troygoode@gmail.com))
+
+[coveralls-image]: https://img.shields.io/coveralls/expressjs/cors/master.svg
+[coveralls-url]: https://coveralls.io/r/expressjs/cors?branch=master
+[downloads-image]: https://img.shields.io/npm/dm/cors.svg
+[downloads-url]: https://npmjs.org/package/cors
+[npm-image]: https://img.shields.io/npm/v/cors.svg
+[npm-url]: https://npmjs.org/package/cors
+[travis-image]: https://img.shields.io/travis/expressjs/cors/master.svg
+[travis-url]: https://travis-ci.org/expressjs/cors
 </div>
