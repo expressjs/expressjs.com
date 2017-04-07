@@ -5,13 +5,13 @@ except that it opts-in to JSONP callback support.
 
 ```js
 res.jsonp(null);
-// => null
+// => callback(null)
 
 res.jsonp({ user: 'tobi' });
-// => { "user": "tobi" }
+// => callback({ "user": "tobi" })
 
 res.status(500).jsonp({ error: 'message' });
-// => { "error": "message" }
+// => callback({ "error": "message" })
 ```
 
 By default, the JSONP callback name is simply `callback`. Override this with the
