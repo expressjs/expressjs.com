@@ -142,7 +142,7 @@ var router = express.Router();
 
 <pre>
 <code class="language-javascript" translate="no">
-var app = express();
+var express = express();
 var router = express.Router();
 
 // a middleware function with no mount path. This code is executed for every request to the router
