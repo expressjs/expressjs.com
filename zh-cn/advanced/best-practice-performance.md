@@ -41,7 +41,7 @@ app.use(compression());
 </code>
 </pre>
 
-对于生产环境中的大流量网站，实施压缩的最佳位置是在逆向代理级别（请参阅[使用逆向代理](#proxy)）。在此情况下，不需要使用压缩中间件。有关在 Nginx 中启用 gzip 压缩的详细信息，请参阅 Nginx 文档中的 [ngx_http_gzip_module 模块](http://nginx.org/en/docs/http/ngx_http_gzip_module.html)。
+对于生产环境中的大流量网站，实施压缩的最佳位置是在反向代理层级（请参阅[使用反向代理](#proxy)）。在此情况下，不需要使用压缩中间件。有关在 Nginx 中启用 gzip 压缩的详细信息，请参阅 Nginx 文档中的 [ngx_http_gzip_module 模块](http://nginx.org/en/docs/http/ngx_http_gzip_module.html)。
 
 ### 不使用同步函数
 
@@ -49,15 +49,7 @@ app.use(compression());
 
 虽然 Node 和许多模块提供函数的同步和异步版本，但是在生产环境中请始终使用异步版本。只有在初始启动时才适合使用同步函数。
 
-如果您使用 Node.js 4.0+ 或 io.js 2.1.0+，那么可以使用 `--trace-sync-io` 命令行标记，每当应用程序使用同步 API 时就显示一条警告消息和堆栈跟踪。当然，您不会希望在生产环境中实际使用此功能，这只是为了确保代码已准备好用于生产环境。请参阅 [io.js 2.1.0 的每周更新](https://nodejs.org/en/blog/weekly-updates/weekly-update.2015-05-22/#2-1-0)以了解更多信息。
-
-### 使用中间件提供静态文件
-
-在开发过程中，可以使用 [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile) 提供静态文件。但是，请勿在生产环境中执行此函数，因为它必须针对每次文件请求读取文件系统，所以会产生严重的延迟，影响应用程序的总体性能。请注意，`res.sendFile()` *并非*通过效率要高很多的 [sendfile](http://linux.die.net/man/2/sendfile) 系统调用来实现的。
-
-因此，建议使用 [serve-static](https://www.npmjs.com/package/serve-static) 中间件（或者等效项），该中间件经过优化，用于为 Express 应用程序提供文件。
-
-还有一个更好的选项，就是使用逆向代理提供静态文件；请参阅[使用逆向代理](#proxy)以了解更多信息。
+如果您使用 Node.js 4.0+ 或 io.js 2.1.0+，那么可以使用 `--trace-sync-io` 命令行标记，每当应用程序使用同步 API 时就显示一条警告消息和堆栈跟踪。当然，您不会希望在生产环境中实际使用此功能，这只是为了确保代码已准备好用于生产环境。请参阅 [node 命令行选项文档](https://nodejs.org/api/cli.html#cli_trace_sync_io)以了解更多信息。
 
 ### 正确进行日志记录
 
