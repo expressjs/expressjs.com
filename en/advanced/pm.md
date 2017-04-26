@@ -26,7 +26,7 @@ The most popular process managers for Express and other Node.js applications are
 - [SystemD](#systemd)
 
 
-Using any of these three tools can be very helpful, however StrongLoop Process Manager is the only tool that provides a comprehensive runtime and deployment solution that addresses the entire Node.js application life cycle, with tooling for every step before and after production, in a unified interface.
+Using any of these four tools can be very helpful, however StrongLoop Process Manager is the only tool that provides a comprehensive runtime and deployment solution that addresses the entire Node.js application life cycle, with tooling for every step before and after production, in a unified interface.
 
 Here's a brief look at each of these tools.
 For a detailed comparison, see [http://strong-pm.io/compare/](http://strong-pm.io/compare/).
