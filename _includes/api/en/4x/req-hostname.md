@@ -11,3 +11,5 @@ This header can be set by the client or by the proxy.
 req.hostname
 // => "example.com"
 ```
+
+**Note:** Starting from Express v4.5.0, `req.host` was replaced by `req.hostname`. Use `req.host` if using earlier version.
