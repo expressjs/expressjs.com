@@ -171,6 +171,10 @@ app.get('/users/:userId/books/:bookId', function (req, res) {
 })
 ```
 
+<div class="doc-box doc-notice" markdown="1">
+The name of route parameters must be made up of "word characters" ([A-Za-z0-9_]).
+</div>
+
 Since the hyphen (`-`) and the dot (`.`) are interpreted literally, they can be used along with route parameters for useful purposes.
 
 ```
@@ -185,8 +189,20 @@ Request URL: http://localhost:3000/plantae/Prunus.persica
 req.params: { "genus": "Prunus", "species": "persica" }
 ```
 
-<div class="doc-box doc-notice" markdown="1">
-The name of route parameters must be made up of "word characters" ([A-Za-z0-9_]).
+To have more control over the exact string that can be matched by a route parameter, you can append a regular expression in parentheses (`()`):
+
+```
+Route path: /user/:userId(\d+)
+Request URL: http://localhost:3000/user/42
+req.params: {"userId": "42"}
+```
+
+<div class="doc-box doc-warn" markdown="1">
+Because the regular expression is usually part of a literal string, be sure to escape any <code>\</code> characters with an additional backslash, for example <code>\\d+</code>.
+</div>
+
+<div class="doc-box doc-warn" markdown="1">
+In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the <code>*</code> character in regular expressions is not interpreted in the usual way</a>. As a workaround, use <code>{0,}</code> instead of <code>*</code>. This will likely be fixed in Express 5.
 </div>
 
 <h2 id="route-handlers">Route handlers</h2>
