@@ -672,7 +672,7 @@ footer {
 
 #navbar {
   padding-left: 5%;
-  width: 1000px;
+  max-width: 1000px;
   height: 100%;
   position: relative;
   display: flex;
@@ -701,6 +701,7 @@ footer {
   margin: 0;
   right: 0px;
   z-index: 1000;
+  margin-right: 15px;
 }
 
 #navmenu > li {
