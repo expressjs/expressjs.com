@@ -39,17 +39,16 @@ $ npm install express --save
 
 To install Express temporarily and not add it to the dependencies list:
 
-1. omit the `--save` option for older version for npm.
-  ```sh
-$ npm install express
-```
-2. add the `--no-save` option for npm 5.0.0 and above.
+If using npm 5.0.0 or later, use the --no-save option:
   ```sh
 $ npm install express --no-save
 ```
+If using npm version prior to 5.0.0, omit the --save option:
+  ```sh
+$ npm install express
+```
 
 <div class="doc-box doc-info" markdown="1">
-Node modules installed with the `--save` option are added to the `dependencies` list in the `package.json` file.
-Afterwards, running `npm install` in the `app` directory will automatically install modules in the dependencies list.
+By default with version npm 5.0+ npm install adds the module to the `dependencies` list in the `package.json` file; with earlier versions of npm, you must specify the `--save` option explicitly. Then, afterwards, running `npm install` in the app directory will automatically install modules in the dependencies list.
 </div>
 </div>
