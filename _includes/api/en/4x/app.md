@@ -83,6 +83,10 @@ The Express application object can be referred from the [request object](#req) a
 </section>
 
 <section markdown="1">
+  {% include api/en/4x/app-instrument.md %}
+</section>
+
+<section markdown="1">
   {% include api/en/4x/app-listen.md %}
 </section>
 

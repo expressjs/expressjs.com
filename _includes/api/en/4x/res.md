@@ -122,5 +122,9 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
 </section>
 
 <section markdown="1">
+  {% include api/en/4x/res-trace.md %}
+</section>
+
+<section markdown="1">
   {% include api/en/4x/res-vary.md %}
 </section>
