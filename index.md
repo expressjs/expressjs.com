@@ -1,9 +1,9 @@
 ---
 layout: home
-title: Express - Node.js web application framework
+title: Express - Node.js Web Uygulama Çatısı
 menu: home
-lang: en
-redirect_from: "/en/index.html"
+lang: tr
+redirect_from: "/tr/index.html"
 ---
 <section id="home-content">
   {% include header/header-{{ page.lang }}.html %}
@@ -11,7 +11,7 @@ redirect_from: "/en/index.html"
   <div id="homepage-leftpane" class="pane">
     <section id="description">
         <div class="express"><a href="/">Express</a><a href="{{ page.lang }}/changelog/4x.html#{{ site.data.express.current_version }}" id="express-version">{{ site.data.express.current_version }}</a></div>
-        <span class="description">Fast, unopinionated, minimalist web framework for <a href='https://nodejs.org/en/'>Node.js</a></span>
+        <span class="description"><a href='https://nodejs.org/en/'>Node.js</a> için hızlı, kolay, sade web çatısı</span>
     </section>
     <div id="install-command">$ npm install express --save</div>
   </div>
@@ -24,19 +24,21 @@ redirect_from: "/en/index.html"
 
   <div id="boxes" class="clearfix">
     <div id="web-applications">
-      <h3>Web Applications</h3> Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+      <h3>Web Uygulamaları</h3>
+	  Express, Web ve Mobil uygulamalar için sağlam özellikler sağlayan sade ve esnek bir Node.js web uygulama çatısıdır.
     </div>
 
     <div id="apis">
-      <h3>APIs</h3> With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy.
+      <h3>API'ler</h3> 
+	  Sınırsız HTTP yardımcı araç ve katmanlar sayesinde sağlam bir API oluşturmak hızlı ve kolaydır.
     </div>
 
     <div id="performance">
-      <h3>Performance</h3> Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love.
+      <h3>Performans</h3> Express, bildiğiniz ve sevdiğiniz Node.js özelliklerini gizlemeden ince bir temel web uygulaması özellikleri katmanı sağlar.	  
     </div>
 
     <div id="frameworks">
-      <h3>Frameworks</h3> Many <a href="{{ page.lang }}/resources/frameworks.html">popular frameworks</a> are based on Express.
+      <h3>Çatılar</h3> Birçok <a href="{{ page.lang }}/resources/frameworks.html">popüler çatı</a> Express tabanlıdır.
     </div>
   </div>
 
