@@ -36,5 +36,4 @@ Follow these steps:
 5. Update the `title` variable in the copied markdown files.
 6. Create the header, footer, notice, and announcement file for the language in the `_includes/` directory, in the respective directories, and make necessary edits to the contents.
 7. Create the announcement file for the language in the `_includes/` directory.
-8. Create a copy of the `_includes/api/en` and rename it according to the language code.
 9. Make sure to append `/{{ page.lang }}` to all the links within the site.
