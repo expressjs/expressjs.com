@@ -23,6 +23,38 @@ app.param('user', function(req, res, next, id) {
 });
 ```
 
+Param callback functions must not modify `req.params` keys other than the key(s) specified in their `app.param` registration.
+Modifications or assignments to other keys on `app.params` may be overwritten or cleared by the addition of subsequent middleware.
+Either replace the value for the key referenced in the handler callback or assign the value somewhere else on the request (like in the `req.user = user` example above).
+
+```js
+// BAD:
+app.param('fooId', function(req, res, nex,t id) {
+  Foo.find(id, function(err, foo) {
+    if (err) {
+      next(err);
+    } else {
+      // This code is setting property 'foo' but param handler key is 'fooId'
+      req.params.foo = foo;
+      next();
+    }
+  })
+});
+
+// GOOD:
+app.param('foo', function(req, res, nex,t id) {
+  Foo.find(id, function(err, foo) {
+    if (err) {
+      next(err);
+    } else {
+      // Replacing param scalar value with a different object is fine
+      req.params.foo = foo;
+      next();
+    }
+  })
+});
+```
+
 Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on `app` will be triggered only by route parameters defined on `app` routes.
 
 All param callbacks will be called before any handler of any route in which the param occurs, and they will each be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following examples.
