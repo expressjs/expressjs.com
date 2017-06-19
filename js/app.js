@@ -42,7 +42,7 @@ $(function(){
 
   // edit page link
   var latest = '';
-  var branchPath = 'https://github.com/strongloop/expressjs.com';
+  var branchPath = 'https://github.com/expressjs/expressjs.com';
   var pathName = document.location.pathname;
 
   var currentVersion = pathName.split('/').splice(-2)[0] || '4x'; // defaults to current version
