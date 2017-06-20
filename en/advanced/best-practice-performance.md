@@ -14,17 +14,27 @@ This article discusses performance and reliability best practices for Express ap
 
 This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts:
 
-* [Things to do in your code](#in-code) (the dev part).
-* [Things to do in your environment / setup](#in-environment) (the ops part).
+* Things to do in your code (the dev part).
+  * [Use gzip compression](#use-gzip-compression)
+  * [Don't use synchronous functions](#dont-use-synchronous-functions)
+  * [Do logging correctly](#do-logging-correctly)
+  * [Handle exceptions properly](#handle-exceptions-properly)
+* Things to do in your environment / setup (the ops part).
+  * [Set NODE_ENV to "production"](#set-nodeenv-to-production)
+  * [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
+  * [Run your app in a cluster](#run-your-app-in-a-cluster)
+  * [Cache request results](#cache-request-results)
+  * [Use a load balancer](#use-a-load-balancer)
+  * [Use a reverse proxy](#use-a-reverse-proxy)
 
 ## Things to do in your code {#in-code}
 
 Here are some things you can do in your code to improve your application's performance:
 
-* Use gzip compression
-* Don't use synchronous functions
-* Do logging correctly
-* Handle exceptions properly
+* [Use gzip compression](use-gzip-compression)
+* [Don't use synchronous functions](dont-use-synchronous-functions)
+* [Do logging correctly](do-logging-correctly)
+* [Handle exceptions properly](handle-exceptions-properly)
 
 ### Use gzip compression
 
@@ -37,7 +47,7 @@ var app = express()
 app.use(compression())
 ```
 
-For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
+For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#use-a-reverse-proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
 
 ### Don't use synchronous functions
 
@@ -61,7 +71,7 @@ If you're logging app activity (for example, tracking traffic or API calls), ins
 
 ### Handle exceptions properly
 
-Node apps crash when they encounter an uncaught exception. Not handling exceptions and taking appropriate actions will make your Express app crash and go offline. If you follow the advice in [Ensure your app automatically restarts](#ensure-restart) below, then your app will recover from a crash. Fortunately, Express apps typically have a short startup time. Nevertheless, you want to avoid crashing in the first place, and to do that, you need to handle exceptions properly.
+Node apps crash when they encounter an uncaught exception. Not handling exceptions and taking appropriate actions will make your Express app crash and go offline. If you follow the advice in [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts) below, then your app will recover from a crash. Fortunately, Express apps typically have a short startup time. Nevertheless, you want to avoid crashing in the first place, and to do that, you need to handle exceptions properly.
 
 To ensure you handle all exceptions, use the following techniques:
 
@@ -156,12 +166,12 @@ For more information about error-handling by using promises, see:
 
 Here are some things you can do in your system environment to improve your app's performance:
 
-* Set NODE_ENV to "production"
-* Ensure your app automatically restarts
-* Run your app in a cluster
-* Cache request results
-* Use a load balancer
-* Use a reverse proxy
+* [Set NODE_ENV to "production"](#set-nodeenv-to-production)
+* [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
+* [Run your app in a cluster](#run-your-app-in-a-cluster)
+* [Cache request results](#cache-request-results)
+* [Use a load balancer](#use-a-load-balancer)
+* [Use a reverse proxy](#use-a-reverse-proxy)
 
 ### Set NODE_ENV to "production"
 
@@ -197,9 +207,7 @@ Environment=NODE_ENV=production
 
 For more information, see [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
 
-If you are using StrongLoop Process Manager, you can also [set the environment variable when you install StrongLoop PM as a service](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-Setenvironmentvariables).
-
-### Ensure your app automatically restarts {#ensure-restart}
+### Ensure your app automatically restarts
 
 In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server itself crashes. Although you hope that neither of those events occurs, realistically you must account for both eventualities by:
 
@@ -413,14 +421,11 @@ A load balancer is usually a reverse proxy that orchestrates traffic to and from
 
 With load balancing, you might have to ensure that requests that are associated with a particular session ID connect to the process that originated them. This is known as _session affinity_, or _sticky sessions_, and may be addressed by the suggestion above to use a data store such as Redis for session data (depending on your application). For a discussion, see [Using multiple nodes](http://socket.io/docs/using-multiple-nodes/).
 
-#### Using StrongLoop PM with an Nginx load balancer
-
-[StrongLoop Process Manager](http://strong-pm.io/) integrates with an Nginx Controller, making it easy to configure multi-host production environment configurations. For more information, see [Scaling to multiple servers](https://docs.strongloop.com/display/SLC/Scaling+to+multiple+servers) (StrongLoop documentation).
-<a name="proxy"></a>
-
 ### Use a reverse proxy
 
 A reverse proxy sits in front of a web app and performs supporting operations on the requests, apart from directing requests to the app. It can handle error pages, compression, caching, serving files, and load balancing among other things.
 
 Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.com/) or [HAProxy](http://www.haproxy.org/) in production.
+
+
 </div>
