@@ -39,7 +39,7 @@ If you found the above behavior confusing, think of path segments as directories
 
 Path-relative redirects are also possible. If you were on
 `http://example.com/admin/post/new`, the following would redirect to
-`http//example.com/admin/post`:
+`http://example.com/admin/post`:
 
 ```js
 res.redirect('..');

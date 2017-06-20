@@ -36,7 +36,7 @@ Jekyll uses a variant of Markdown known as [Kramdown](http://kramdown.gettalong.
 
 Jekyll uses the [Liquid template engine](http://liquidmarkup.org/) for templating.
 
-You can use [http://kramdown.gettalong.org/parser/gfm.html](GFM) fenced code blocks for JavaScript; for example:
+You can use [GFM](http://kramdown.gettalong.org/parser/gfm.html) fenced code blocks for JavaScript; for example:
 
 ```js
 var express = require('express')

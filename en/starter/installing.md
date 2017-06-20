@@ -37,14 +37,13 @@ Now install Express in the `myapp` directory and save it in the dependencies lis
 $ npm install express --save
 ```
 
-To install Express temporarily and not add it to the dependencies list, omit the `--save` option:
+To install Express temporarily and not add it to the dependencies list:
 
 ```sh
-$ npm install express
+$ npm install express --no-save
 ```
 
 <div class="doc-box doc-info" markdown="1">
-Node modules installed with the `--save` option are added to the `dependencies` list in the `package.json` file.
-Afterwards, running `npm install` in the `app` directory will automatically install modules in the dependencies list.
+By default with version npm 5.0+ npm install adds the module to the `dependencies` list in the `package.json` file; with earlier versions of npm, you must specify the `--save` option explicitly. Then, afterwards, running `npm install` in the app directory will automatically install modules in the dependencies list.
 </div>
 </div>
