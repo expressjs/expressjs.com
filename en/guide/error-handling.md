@@ -100,8 +100,9 @@ app.get('/a_route_behind_paywall',
       // continue handling this request
       next('route')
     }
-    
-    next();
+    else{
+      next();
+    }
   }, function getPaidContent (req, res, next) {
     PaidContent.find(function (err, doc) {
       if (err) return next(err)
