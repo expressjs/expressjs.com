@@ -104,7 +104,81 @@ The generated app has the following directory structure:
     └── layout.pug
 
 7 directories, 9 files
+```  
+      
+## Express-quicker
+
+[Express-quiecker](https://github.com/ushelp/Express-quicker "an application generator tool for Express-quicker") is a Express application generator tool, to quickly create an application skeleton based on [Express-quickstart](https://github.com/ushelp/Express-quickstart "Node.js Express development skeleton based on EasyTemplateJS engine. ").
+
+**Use**
+
+- Installs command-line tool:
+	```
+	npm install express-quicker -g
+	```
+
+- Creates an Express-quickstart app:
+	```
+	equicker [app-name]
+	```
+
+- Then install dependencies:
+	```
+	npm install
+	```
+	
+- Startup:
+	```
+	npm start
+	```
+
+- Load:
+
+  `http://localhost:3000/`
+
+**directory structure**
+
+
+```sh
+.
+├── app.js
+├── package.json
+├── public
+│   ├── img
+│   ├── js
+│   └── css
+│       └── style.css
+│   └── favicon.
+│   └── upload.html
+├── routes
+│   ├── index.js
+│   └── users.js
+└── views
+    ├── error.etj
+    ├── index.etj
+    └── users.etj
+
+6 directories, 10 files
 ```
+
+**Basic integration components**
+
+- CORS
+- Cookie
+- Session(Cookie/Redis)
+- Logging(Morgan&Winston)
+- Body-parse
+- Multer
+- Serve-favicon
+- Compression
+- Exception Handler
+   
+
+**Why choose EasyTemplateJS?**
+
+Pug and other template engine with a custom language, the need for high learning costs, and the need for internal transformation of the template template.
+
+EasyTemplateJS is based on native HTML and JavaScript for template compilation and rendering. To maximize the advantages of EasyTemplateJS high performance, compact and easy to use.
 
 <div class="doc-box doc-info" markdown="1">
 The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
