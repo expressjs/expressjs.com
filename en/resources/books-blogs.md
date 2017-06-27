@@ -42,7 +42,7 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 
 ## Blogs
 
-- [StrongLoop Blog: Express category](http://strongloop.com/strongblog/category/express/)
+- [StrongLoop Blog: Express category](https://strongloop.com/strongblog/tag_Express.html)
 - [Hage Yaapa's Blog: Express category](http://www.hacksparrow.com/category/express-js)
 - [Codeforgeek Blog: Express category](http://codeforgeek.com/code/nodejs/express/)
 - [Node-tricks Blog: Express category](http://node-tricks.com/category/express/)
