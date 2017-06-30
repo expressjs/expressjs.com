@@ -26,10 +26,10 @@ app.listen(3000, function () {
 })
 </code></pre></div>
 
-The example above is actually a working server, go ahead and click on the URL. You'll get a response, with real time logs right here on the page, and any changes you make will be reflected in real time. Below, you'll find instructions for running the same app on your local machine.
-
-The app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
+This app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
 to the root URL (`/`) or _route_. For every other path, it will respond with a **404 Not Found**.
+
+The example above is actually a working server, go ahead and click on the URL. You'll get a response, with real time logs right here on the page, and any changes you make will be reflected in real time. This is powered by RunKit, which provides an interactive JavaScript playground connected to a complete Node environment that runs in your web browser. RunKit is a third-party service not affiliated with the Express project. Below, you'll find instructions for running the same app on your local machine.
 
 ### Running Locally
 
