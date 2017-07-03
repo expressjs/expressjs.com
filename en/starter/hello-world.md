@@ -9,14 +9,11 @@ redirect_from: "/starter/hello-world.html"
 # Hello world example
 
 <div class="doc-box doc-info" markdown="1">
-This is essentially going to be the simplest Express app you can create. It is a single file app &mdash; _not_ what you'd get if you use the [Express generator](/{{ page.lang }}/starter/generator.html), which creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and sub-directories for various purposes.
+Embedded below is essentially the simplest Express app you can create. It is a single file app &mdash; _not_ what you'd get if you use the [Express generator](/{{ page.lang }}/starter/generator.html), which creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and sub-directories for various purposes.
 </div>
 
-First create a directory named `myapp`, change to it and run `npm init`. Then install `express` as a dependency, as per the [installation guide](/{{ page.lang }}/starter/installing.html).
-
-In the `myapp` directory, create a file named `app.js` and add the following code:
-
-```js
+<script src="https://embed.runkit.com" data-element-id="hello-example" data-mode="endpoint" async defer></script>
+<div id="hello-example"><pre><code class="language-js">
 const express = require('express')
 const app = express()
 
@@ -27,10 +24,18 @@ app.get('/', function (req, res) {
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
-```
+</code></pre></div>
 
-The app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
+This app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
 to the root URL (`/`) or _route_. For every other path, it will respond with a **404 Not Found**.
+
+The example above is actually a working server, go ahead and click on the URL. You'll get a response, with real time logs right here on the page, and any changes you make will be reflected in real time. This is powered by [RunKit](https://runkit.com), which provides an interactive JavaScript playground connected to a complete Node environment that runs in your web browser. RunKit is a third-party service not affiliated with the Express project. Below, you'll find instructions for running the same app on your local machine.
+
+### Running Locally
+
+First create a directory named `myapp`, change to it and run `npm init`. Then install `express` as a dependency, as per the [installation guide](/{{ page.lang }}/starter/installing.html).
+
+In the `myapp` directory, create a file named `app.js` and copy in the code from the example above.
 
 <div class="doc-box doc-notice" markdown="1">
 The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
