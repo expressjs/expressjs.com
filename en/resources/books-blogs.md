@@ -49,6 +49,7 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 - [Baboon Blog: Express category](http://www.baboon.ir/tutorials/expressjs/) (Persian language)
 - [Techforgeek Blog: Express category](http://techforgeek.com/expressjs/)
 - [RoseHosting.com Blog: Express tag](https://www.rosehosting.com/blog/tag/express/)
+- [Node.js Recipes](http://www.nodejsrecipes.com/)
 
 ### Add your blog here!
 
