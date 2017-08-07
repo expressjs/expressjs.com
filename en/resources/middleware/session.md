@@ -301,15 +301,14 @@ app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
 // Access the session as req.session
 app.get('/', function(req, res, next) {
-  var sess = req.session
-  if (sess.views) {
-    sess.views++
+  if (req.session.views) {
+    req.session.views++
     res.setHeader('Content-Type', 'text/html')
-    res.write('<p>views: ' + sess.views + '</p>')
-    res.write('<p>expires in: ' + (sess.cookie.maxAge / 1000) + 's</p>')
+    res.write('<p>views: ' + req.session.views + '</p>')
+    res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
     res.end()
   } else {
-    sess.views = 1
+    req.session.views = 1
     res.end('welcome to the session demo. refresh!')
   }
 })
@@ -360,8 +359,8 @@ session data has been altered (though this behavior can be altered with various
 options in the middleware constructor). Because of this, typically this method
 does not need to be called.
 
-There are some cases where it is useful to call this method, for example, long-
-lived requests or in WebSockets.
+There are some cases where it is useful to call this method, for example,
+redirects, long-lived requests or in WebSockets.
 
 ```js
 req.session.save(function(err) {
@@ -376,8 +375,10 @@ not necessary to call, as the session middleware does this for you.
 
 ### req.session.id
 
-Each session has a unique ID associated with it. This property will
-contain the session ID and cannot be modified.
+Each session has a unique ID associated with it. This property is an
+alias of [`req.sessionID`](#reqsessionid-1) and cannot be modified.
+It has been added to make the session ID accessible from the `session`
+object.
 
 ### req.session.cookie
 
@@ -585,6 +586,12 @@ and other multi-core embedded devices).
 [connect-memcached-url]: https://www.npmjs.com/package/connect-memcached
 [connect-memcached-image]: https://img.shields.io/github/stars/balor/connect-memcached.svg?label=%E2%98%85
 
+[![★][connect-memjs-image] connect-memjs][connect-memjs-url] A memcached-based session store using
+[memjs](https://www.npmjs.com/package/memjs) as the memcached client.
+
+[connect-memjs-url]: https://www.npmjs.com/package/connect-memjs
+[connect-memjs-image]: https://img.shields.io/github/stars/liamdon/connect-memjs.svg?label=%E2%98%85
+
 [![★][connect-session-knex-image] connect-session-knex][connect-session-knex-url] A session store using
 [Knex.js](http://knexjs.org/), which is a SQL query builder for PostgreSQL, MySQL, MariaDB, SQLite3, and Oracle.
 
@@ -596,6 +603,11 @@ and other multi-core embedded devices).
 
 [connect-session-sequelize-url]: https://www.npmjs.com/package/connect-session-sequelize
 [connect-session-sequelize-image]: https://img.shields.io/github/stars/mweibel/connect-session-sequelize.svg?label=%E2%98%85
+
+[![★][dynamodb-store-image] dynamodb-store][dynamodb-store-url] A DynamoDB-based session store.
+
+[dynamodb-store-url]: https://www.npmjs.com/package/dynamodb-store
+[dynamodb-store-image]: https://img.shields.io/github/stars/rafaelrpinto/dynamodb-store.svg?label=%E2%98%85
 
 [![★][express-mysql-session-image] express-mysql-session][express-mysql-session-url] A session store using native
 [MySQL](https://www.mysql.com/) via the [node-mysql](https://github.com/felixge/node-mysql) module.
@@ -628,6 +640,13 @@ and other multi-core embedded devices).
 
 [express-nedb-session-url]: https://www.npmjs.com/package/express-nedb-session
 [express-nedb-session-image]: https://img.shields.io/github/stars/louischatriot/express-nedb-session.svg?label=%E2%98%85
+
+[![★][express-session-cache-manager-image] express-session-cache-manager][express-session-cache-manager-url] 
+A store that implements [cache-manager](https://www.npmjs.com/package/cache-manager), which supports
+a [variety of storage types](https://www.npmjs.com/package/cache-manager#store-engines).
+
+[express-session-cache-manager-url]: https://www.npmjs.com/package/express-session-cache-manager
+[express-session-cache-manager-image]: https://img.shields.io/github/stars/theogravity/express-session-cache-manager.svg?label=%E2%98%85
 
 [![★][express-session-level-image] express-session-level][express-session-level-url] A [LevelDB](https://github.com/Level/levelup) based session store.
 
@@ -703,17 +722,15 @@ app.use(session({
 }))
 
 app.use(function (req, res, next) {
-  var views = req.session.views
-
-  if (!views) {
-    views = req.session.views = {}
+  if (!req.session.views) {
+    req.session.views = {}
   }
 
   // get the url pathname
   var pathname = parseurl(req).pathname
 
   // count the views
-  views[pathname] = (views[pathname] || 0) + 1
+  req.session.views[pathname] = (req.session.views[pathname] || 0) + 1
 
   next()
 })
