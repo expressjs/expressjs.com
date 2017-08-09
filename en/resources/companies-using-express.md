@@ -27,7 +27,6 @@ redirect_from: "/resources/companies-using-express.html"
     <a target="_new" class="imagelink" href="https://www.icicletech.com">
       <img alt="Icicle Technologies" class="memberlogo" src="/images/companies/icicle-logo.png" />
     </a>
-
     <a target="_new" class="imagelink" href="http://mulesoft.com">
       <img alt="Mulesoft" class="memberlogo" src="/images/companies/mulesoft-logo.png" />
     </a>
