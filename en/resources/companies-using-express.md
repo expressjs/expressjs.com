@@ -24,6 +24,9 @@ redirect_from: "/resources/companies-using-express.html"
     <a target="_new" class="imagelink" href="http://ibm.com">
       <img alt="IBM" class="memberlogo" src="/images/companies/ibm-logo.png" />
     </a>
+    <a target="_new" class="imagelink" href="https://www.icicletech.com">
+      <img alt="Icicle Technologies" class="memberlogo" src="/images/companies/icicle-logo.png" />
+    </a>
     <a target="_new" class="imagelink" href="http://mulesoft.com">
       <img alt="Mulesoft" class="memberlogo" src="/images/companies/mulesoft-logo.png" />
     </a>
@@ -53,10 +56,10 @@ redirect_from: "/resources/companies-using-express.html"
     </a>
     <a target="_new" class="imagelink" href="http://www.agrippa.no/en">
       <img alt="Agrippa Solutions AS" class="memberlogo" src="/images/companies/OrgASLogo.png" />
-    </a>    
+    </a>
     <a target="_new" class="imagelink" href="https://www.circlehd.com">
       <img alt="CircleHD" class="memberlogo" src="/images/companies/circlehd-logo.png" />
-    </a>    
+    </a>
 </div>
 <p style="margin-top: 30px;">
 To add your logo to this page, please <a href="https://github.com/expressjs/expressjs.com/blob/gh-pages/en/resources/companies-using-express.md">open a pull request</a>.
