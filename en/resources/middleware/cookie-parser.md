@@ -28,7 +28,7 @@ $ npm install cookie-parser
 ## API
 
 ```js
-var express = require('express')
+var express      = require('express')
 var cookieParser = require('cookie-parser')
 
 var app = express()
@@ -51,7 +51,7 @@ Given an object, this will iterate over the keys and call `JSONCookie` on each v
 
 ### cookieParser.signedCookie(str, secret)
 
-Parse a cookie value as a signed cookie. This will return the parsed unsigned value if it was a signed cookie and the signature was valid. If the value was not signed, the original value is returned. If the value was signed but the signature could not be validated, `false` is returned.
+Parse a cookie value as a signed cookie. This will return the parsed unsigned value if it was a signed cookie and the signature was valid, otherwise it will return the passed value.
 
 The `secret` argument can be an array or string. If a string is provided, this is used as the secret. If an array is provided, an attempt will be made to unsign the cookie with each secret in order.
 
@@ -64,18 +64,14 @@ The `secret` argument can be an array or string. If a string is provided, this i
 ## Example
 
 ```js
-var express = require('express')
+var express      = require('express')
 var cookieParser = require('cookie-parser')
 
 var app = express()
 app.use(cookieParser())
 
-app.get('/', function (req, res) {
-  // Cookies that have not been signed
+app.get('/', function(req, res) {
   console.log('Cookies: ', req.cookies)
-
-  // Cookies that have been signed
-  console.log('Signed Cookies: ', req.signedCookies)
 })
 
 app.listen(8080)
