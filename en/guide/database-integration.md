@@ -15,6 +15,7 @@ Adding the capability to connect databases to Express apps is just a matter of l
 * [CouchDB](#couchdb)
 * [LevelDB](#leveldb)
 * [MySQL](#mysql)
+* [Oracle](#oracle)
 * [MongoDB](#mongo)
 * [Neo4j](#neo4j)
 * [PostgreSQL](#postgres)
@@ -188,6 +189,49 @@ connection.end()
 ```
 
 <a name="mongo"></a>
+
+## Oracle
+
+**Module**: [oracledb](https://github.com/oracle/node-oracledb)
+**Installation**
+
+```sh
+$ npm install oracledb
+```
+
+**Example**
+
+```js
+const oracledb = require('oracledb');
+const config = {
+  user: '<your db user>',                // Update me
+  password: '<your db password>',        // Update me
+  connectString: 'localhost:1521/orcl'   // Update me
+};
+
+async function getEmployee(empId) {
+  let conn;
+
+  try {
+    conn = await oracledb.getConnection(config);
+
+    const result = await conn.execute(
+      'select * from employees where employee_id = :id',
+      [empId]
+    );
+
+    console.log(result.rows[0]);
+  } catch (err) {
+    console.log('Ouch!', err);
+  } finally {
+    if (conn) { // conn assignment worked, need to close
+       await conn.close();
+    }
+  }
+} 
+
+getEmployee(101);
+```
 
 ## MongoDB
 
