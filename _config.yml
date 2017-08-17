@@ -13,3 +13,5 @@ kramdown:
     disable : true
 
 exclude: [uk/CHANGELOG.md]
+
+github: [metadata]
