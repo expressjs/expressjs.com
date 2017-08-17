@@ -248,7 +248,7 @@ apoc.query('match (n) return n').exec().then(
 ## Oracle
 
 **Module**: [oracledb](https://github.com/oracle/node-oracledb)
-**Installation**
+**Installation** ([See installation prerequisites](https://github.com/oracle/node-oracledb#-installation))
 
 ```sh
 $ npm install oracledb
