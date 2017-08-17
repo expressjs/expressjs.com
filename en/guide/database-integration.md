@@ -15,12 +15,12 @@ Adding the capability to connect databases to Express apps is just a matter of l
 * [CouchDB](#couchdb)
 * [LevelDB](#leveldb)
 * [MySQL](#mysql)
-* [MongoDB](#mongo)
+* [MongoDB](#mongodb)
 * [Neo4j](#neo4j)
 * [Oracle](#oracle)
-* [PostgreSQL](#postgres)
+* [PostgreSQL](#postgresql)
 * [Redis](#redis)
-* [SQL Server](#mssql)
+* [SQL Server](#sql-server)
 * [SQLite](#sqlite)
 * [ElasticSearch](#elasticsearch)
 
@@ -29,18 +29,17 @@ These database drivers are among many that are available.  For other options,
 search on the [npm](https://www.npmjs.com/) site.
 </div>
 
-<a name="cassandra"></a>
-
 ## Cassandra
 
 **Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install cassandra-driver
 ```
 
-**Example**
+### Example
 
 ```js
 var cassandra = require('cassandra-driver')
@@ -52,18 +51,17 @@ client.execute('select key from system.local', function (err, result) {
 })
 ```
 
-<a name="couchbase"></a>
-
 ## Couchbase
 
 **Module**: [couchnode](https://github.com/couchbase/couchnode)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install couchbase
 ```
 
-**Example**
+### Example
 
 ```js
 var couchbase = require('couchbase')
@@ -90,18 +88,17 @@ bucket.query(query, [13], function (err, result) {
 })
 ```
 
-<a name="couchdb"></a>
-
 ## CouchDB
 
 **Module**: [nano](https://github.com/dscape/nano)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install nano
 ```
 
-**Example**
+### Example
 
 ```js
 var nano = require('nano')('http://localhost:5984')
@@ -127,18 +124,17 @@ books.list(function (err, body) {
 })
 ```
 
-<a name="leveldb"></a>
-
 ## LevelDB
 
 **Module**: [levelup](https://github.com/rvagg/node-levelup)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install level levelup leveldown
 ```
 
-**Example**
+### Example
 
 ```js
 var levelup = require('levelup')
@@ -155,18 +151,17 @@ db.put('name', 'LevelUP', function (err) {
 })
 ```
 
-<a name="mysql"></a>
-
 ## MySQL
 
 **Module**: [mysql](https://github.com/felixge/node-mysql/)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install mysql
 ```
 
-**Example**
+### Example
 
 ```js
 var mysql = require('mysql')
@@ -188,18 +183,17 @@ connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
 connection.end()
 ```
 
-<a name="mongo"></a>
-
 ## MongoDB
 
 **Module**: [mongodb](https://github.com/mongodb/node-mongodb-native)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install mongodb
 ```
 
-**Example**
+### Example
 
 ```js
 var MongoClient = require('mongodb').MongoClient
@@ -217,18 +211,17 @@ MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
 
 If you want an object model driver for MongoDB, look at [Mongoose](https://github.com/LearnBoost/mongoose).
 
-<a name="neo4j"></a>
-
 ## Neo4j
 
 **Module**: [apoc](https://github.com/hacksparrow/apoc)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install apoc
 ```
 
-**Example**
+### Example
 
 ```js
 var apoc = require('apoc')
@@ -243,18 +236,19 @@ apoc.query('match (n) return n').exec().then(
 )
 ```
 
-<a name="oracle"></a>
-
 ## Oracle
 
 **Module**: [oracledb](https://github.com/oracle/node-oracledb)
-**Installation** ([See installation prerequisites](https://github.com/oracle/node-oracledb#-installation))
+
+### Installation
+
+ NOTE: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
 
 ```sh
 $ npm install oracledb
 ```
 
-**Example**
+### Example
 
 ```js
 const oracledb = require('oracledb');
@@ -283,23 +277,22 @@ async function getEmployee(empId) {
        await conn.close();
     }
   }
-} 
+}
 
 getEmployee(101);
 ```
 
-<a name="postgres"></a>
-
 ## PostgreSQL
 
 **Module**: [pg-promise](https://github.com/vitaly-t/pg-promise)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install pg-promise
 ```
 
-**Example**
+### Example
 
 ```js
 var pgp = require('pg-promise')(/*options*/)
@@ -314,18 +307,17 @@ db.one('SELECT $1 AS value', 123)
   })
 ```
 
-<a name="redis"></a>
-
 ## Redis
 
 **Module**: [redis](https://github.com/mranney/node_redis)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install redis
 ```
 
-**Example**
+### Example
 
 ```js
 var client = require('redis').createClient()
@@ -349,18 +341,17 @@ client.hkeys('hash key', function (err, replies) {
 })
 ```
 
-<a name="mssql"></a>
-
 ## SQL Server
 
 **Module**: [tedious](https://github.com/tediousjs/tedious)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install tedious
 ```
 
-**Example**
+### Example
 
 ```js
 var Connection = require('tedious').Connection;
@@ -406,18 +397,17 @@ function executeStatement() {
 }
 ```
 
-<a name="sqlite"></a>
-
 ## SQLite
 
 **Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install sqlite3
 ```
 
-**Example**
+### Example
 
 ```js
 var sqlite3 = require('sqlite3').verbose()
@@ -441,18 +431,17 @@ db.serialize(function () {
 db.close()
 ```
 
-<a name="elasticsearch"></a>
-
 ## ElasticSearch
 
 **Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
-**Installation**
+
+### Installation
 
 ```sh
 $ npm install elasticsearch
 ```
 
-**Example**
+### Example
 
 ```js
 var elasticsearch = require('elasticsearch')
