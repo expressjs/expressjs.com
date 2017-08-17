@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/connect-rid.html'
 name: connect-rid
 ---
-<div id="page-doc" markdown="1">
+
 connect-rid
 =======
 

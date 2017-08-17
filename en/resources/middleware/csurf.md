@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/csurf.html'
 name: csurf
 ---
-<div id="page-doc" markdown="1">
+
 # csurf
 
 [![NPM Version][npm-image]][npm-url]

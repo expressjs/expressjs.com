@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/method-override.html'
 name: method-override
 ---
-<div id="page-doc" markdown="1">
+
 # method-override
 
 [![NPM Version][npm-image]][npm-url]

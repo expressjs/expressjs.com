@@ -25,9 +25,9 @@
           {% include i18n-notice.html %}
         </div>
       {% endif %}
-
-      {{ content }}
-
+      <div id="page-doc" markdown="1">
+{{ content }}
+      </div>
     </section>
 
     {% include footer/footer-{{ page.lang }}.html %}

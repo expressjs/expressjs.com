@@ -5,7 +5,7 @@ menu: resources
 lang: en
 redirect_from: "/resources/glossary.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Glossary
 
 ### application
@@ -24,7 +24,7 @@ A fast, un-opinionated, minimalist web framework for Node.js applications.  In g
 
 A multi-platform support library which focuses on asynchronous I/O, primarily developed for use by Node.js.
 
-### middleware
+### middleware 
 
 A function that is invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.  A few fine points of terminology around middleware:
 
@@ -55,4 +55,3 @@ Part of a URL that identifies a resource.  For example, in `http://foo.com/produ
 ### router
 
 See [router](/{{ page.lang }}/api.html#router) in the API reference.
-</div>

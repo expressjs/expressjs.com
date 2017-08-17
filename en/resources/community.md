@@ -5,7 +5,7 @@ menu: resources
 lang: en
 redirect_from: "/resources/community.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Community
 
 ## Mailing List
@@ -66,4 +66,3 @@ Additionally, the Express community maintains modules in these two GitHub orgs:
 - [pillarjs](https://pillarjs.github.io/): low-level modules that Express uses internally.
 
 See also the [Express wiki](https://github.com/expressjs/express/wiki).
-</div>

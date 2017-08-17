@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/vhost.html'
 name: vhost
 ---
-<div id="page-doc" markdown="1">
+
 # vhost
 
 [![NPM Version][npm-image]][npm-url]

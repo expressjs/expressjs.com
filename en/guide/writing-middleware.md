@@ -5,7 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/writing-middleware.html"
 ---
-<div id="page-doc" markdown="1">
 # Writing middleware for use in Express apps
 
 <h2>Overview</h2>
@@ -169,4 +168,3 @@ app.use(mw({ option1: '1', option2: '2' }))
 ```
 
 Refer to [cookie-session](https://github.com/expressjs/cookie-session) and [compression](https://github.com/expressjs/compression) for examples of configurable middleware.
-</div>

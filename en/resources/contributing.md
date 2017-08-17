@@ -5,7 +5,7 @@ menu: resources
 lang: en
 redirect_from: "/resources/community.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Contributing to Express
 
 Express and the other projects in the [expressjs organization on GitHub](https://github.com/expressjs) are projects of the [Node.js Foundation](https://nodejs.org/foundation/).
@@ -194,4 +194,3 @@ involving the following steps:
 
 If you have suggestions on how this process could be improved please submit a
 pull request.
-</div>

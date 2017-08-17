@@ -5,7 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/using-middleware.html"
 ---
-<div id="page-doc" markdown="1">
 # Using middleware
 
 Express is a routing and middleware web framework that has minimal functionality of its own: An Express application is essentially a series of middleware function calls.
@@ -278,4 +277,3 @@ app.use(cookieParser())
 ```
 
 For a partial list of third-party middleware functions that are commonly used with Express, see: [Third-party middleware](../resources/middleware.html).
-</div>

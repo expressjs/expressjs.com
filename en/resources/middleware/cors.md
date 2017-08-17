@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/cors.html'
 name: cors
 ---
-<div id="page-doc" markdown="1">
+
 # cors
 
 [![NPM Version][npm-image]][npm-url]

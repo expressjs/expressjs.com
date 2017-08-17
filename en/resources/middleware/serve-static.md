@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/serve-static.html'
 name: serve-static
 ---
-<div id="page-doc" markdown="1">
+
 # serve-static
 
 [![NPM Version][npm-image]][npm-url]

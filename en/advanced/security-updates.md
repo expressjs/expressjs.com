@@ -5,8 +5,6 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/security-updates.html"
 ---
-<div id="page-doc" markdown="1">
-
 # Security updates
 
 <div class="doc-box doc-notice" markdown="1">
@@ -16,7 +14,7 @@ Node.js vulnerabilities directly affect Express. Therefore [keep a watch on Node
 The list below enumerates the Express vulnerabilities that were fixed in the specified version update.
 
 **NOTE**: If you believe you have discovered a security vulnerability in Express, please see
-[Security Policies and Procedures](https://github.com/strongloop/express/blob/master/Security.md).
+[Security Policies and Procedures](/{{page.lang}}/resources/contributing.html#security-policies-and-procedures).
 
 ## 4.x
 
@@ -55,4 +53,3 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
     * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
   * 3.3.0
     * The 404 response of an unsupported method override attempt was susceptible to cross-site scripting attacks.
-</div>

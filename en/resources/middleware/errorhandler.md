@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/errorhandler.html'
 name: errorhandler
 ---
-<div id="page-doc" markdown="1">
+
 # errorhandler
 
 [![NPM Version][npm-image]][npm-url]

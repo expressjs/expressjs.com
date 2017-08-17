@@ -5,7 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/migrating-4.html"
 ---
-<div id="page-doc" markdown="1">
 # Moving to Express 4
 
 <h2 id="overview">Overview</h2>
@@ -604,4 +603,3 @@ You have now moved the functionality of `./bin/www` back to
 `app.js`.  This change is not recommended, but the exercise helps you
 to understand how the `./bin/www` file works, and why the `app.js` file
 no longer starts on its own.
-</div>

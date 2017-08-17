@@ -5,7 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/database-integration.html"
 ---
-<div id="page-doc" markdown="1">
 # Database integration
 
 Adding the capability to connect databases to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node.js modules for database systems in your Express app:
@@ -466,4 +465,3 @@ client.search({
   console.trace(error.message)
 })
 ```
-</div>

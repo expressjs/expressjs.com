@@ -5,7 +5,7 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/best-practice-security.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Production Best Practices: Security
 
 ## Overview
@@ -15,7 +15,7 @@ The term _"production"_ refers to the stage in the software lifecycle when an ap
 Development and production environments are usually set up differently and have vastly different requirements. What's fine in development may not be acceptable in production. For example, in a development environment you may want verbose logging of errors for debugging, while the same behavior can become a security concern in a production environment. And in development, you don't need to worry about scalability, reliability, and performance, while those concerns become critical in production.
 
 {% include note.html content="If you believe you have discovered a security vulnerability in Express, please see
-[Security Policies and Procedures](https://github.com/strongloop/express/blob/master/Security.md).
+[Security Policies and Procedures](/en/resources/contributing.html#security-policies-and-procedures).
 " %}
 
 Security best practices for Express applications in production include:
@@ -177,7 +177,7 @@ $ npm install -g snyk
 $ cd your-app
 ```
 
-Use this command to test your application for vulnerabilities: 
+Use this command to test your application for vulnerabilities:
 
 ```sh
 $ snyk test
@@ -206,5 +206,3 @@ Here are some further recommendations from the excellent [Node.js Security Check
 * Use the open-source [sqlmap](http://sqlmap.org/) tool to detect SQL injection vulnerabilities in your app.
 * Use the [nmap](https://nmap.org/) and [sslyze](https://github.com/nabla-c0d3/sslyze) tools to test the configuration of your SSL ciphers, keys, and renegotiation as well as the validity of your certificate.
 * Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
-
-</div>

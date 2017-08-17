@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/body-parser.html'
 name: body-parser
 ---
-<div id="page-doc" markdown="1">
+
 # body-parser
 
 [![NPM Version][npm-image]][npm-url]

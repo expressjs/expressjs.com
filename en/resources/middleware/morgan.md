@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/morgan.html'
 name: morgan
 ---
-<div id="page-doc" markdown="1">
+
 # morgan
 
 [![NPM Version][npm-image]][npm-url]

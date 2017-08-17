@@ -5,7 +5,7 @@ menu: resources
 lang: en
 redirect_from: "/resources/utilities.html"
 ---
-<div id="page-doc" markdown="1">
+
 ## Express utility functions
 
 The  [pillarjs](https://github.com/pillarjs) GitHub organization contains a number of modules
@@ -27,4 +27,3 @@ for utility functions that may be generally useful.
 
 
 For additional low-level HTTP-related modules, see [jshttp](http://jshttp.github.io/)  .
-</div>

@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/serve-index.html'
 name: serve-index
 ---
-<div id="page-doc" markdown="1">
+
 # serve-index
 
 [![NPM Version][npm-image]][npm-url]

@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/cookie-parser.html'
 name: cookie-parser
 ---
-<div id="page-doc" markdown="1">
+
 # cookie-parser
 
 [![NPM Version][npm-image]][npm-url]

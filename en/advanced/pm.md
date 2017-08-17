@@ -5,7 +5,7 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/pm.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Process managers for Express apps
 
 When you run Express apps for production, it is helpful to use a _process manager_ to achieve the following tasks:
@@ -20,7 +20,7 @@ provides high availability, and enables you to manage the application at runtime
 
 The most popular process managers for Express and other Node.js applications are as follows:
 
-- [StrongLoop Process Manager](#sl)
+- [StrongLoop Process Manager](#strongloop-process-manager)
 - [PM2](#pm2)
 - [Forever](#forever)
 - [SystemD](#systemd)
@@ -31,7 +31,7 @@ Using any of these four tools can be very helpful, however StrongLoop Process Ma
 Here's a brief look at each of these tools.
 For a detailed comparison, see [http://strong-pm.io/compare/](http://strong-pm.io/compare/).
 
-## <a id="sl">StrongLoop Process Manager</a>
+## StrongLoop Process Manager
 
 StrongLoop Process Manager (StrongLoop PM) is a production process manager for Node.js applications. StrongLoop PM has built-in load balancing, monitoring, and multi-host deployment, and a graphical console.
 You can use StrongLoop PM for the following tasks:
@@ -115,7 +115,7 @@ To remove an app from management:
 $ slc ctl remove my-app
 ```
 
-## <a id="pm2">PM2</a>
+## PM2
 
 PM2 is a production process manager for Node.js applications, that has a built-in load balancer. PM2 allows you to keep applications alive forever and reload them without downtime, and will facilitate common system admin tasks.  PM2 also enables you to manage application logging, monitoring, and clustering.
 
@@ -179,7 +179,7 @@ $ pm2 delete 0
 ```
 
 
-## <a id="forever">Forever</a>
+## Forever
 
 Forever is a simple command-line interface tool for ensuring that a given script runs continuously (forever). Forever's simple interface makes it ideal for running smaller deployments of Node.js apps and scripts.
 
@@ -238,17 +238,16 @@ $ forever stopall
 ```
 
 Forever has many more options, and it also provides a programmatic API.
-</div>
 
-## <a id="pm2">SystemD</a>
+## SystemD
 
 ### Introduction
 
-SystemD is the default process manager on modern Linux distributions. Running a node service based on SystemD is very simple. (Based on [this blog post](https://www.axllent.org/docs/view/nodejs-service-with-systemd/) by Ralph Slooten (@axllent))
+SystemD is the default process manager on modern Linux distributions. Running a Node service based on SystemD is very simple. NOTE: This section is based on [a blog post by Ralph Slooten (@axllent)](https://www.axllent.org/docs/view/nodejs-service-with-systemd/).
 
 ### Set up the service
 
-Create a file in /etc/systemd/system/express.service:
+Create a file in `/etc/systemd/system/express.service`:
 
 ```
 [Unit]

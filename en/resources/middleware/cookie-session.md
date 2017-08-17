@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/cookie-session.html'
 name: cookie-session
 ---
-<div id="page-doc" markdown="1">
+
 # cookie-session
 
 [![NPM Version][npm-image]][npm-url]

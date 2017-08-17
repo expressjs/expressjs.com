@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/serve-favicon.html'
 name: serve-favicon
 ---
-<div id="page-doc" markdown="1">
+
 # serve-favicon
 
 [![NPM Version][npm-image]][npm-url]

@@ -5,7 +5,7 @@ menu: starter
 lang: en
 redirect_from: "/starter/faq.html"
 ---
-<div id="page-doc" markdown="1">
+
 # FAQ
 
 ## How should I structure my application?
@@ -38,7 +38,7 @@ See [LoopBack](http://loopback.io) for an Express-based framework that is center
 
 Authentication is another opinionated area that Express does not
 venture into.  You may use any authentication scheme you wish.
-For a simple username / password scheme, see [this example](https://github.com/strongloop/express/tree/master/examples/auth).
+For a simple username / password scheme, see [this example](https://github.com/expressjs/express/tree/master/examples/auth).
 
 
 ## Which template engines does Express support?
@@ -47,6 +47,8 @@ Express supports any template engine that conforms with the `(path, locals, call
 To normalize template engine interfaces and caching, see the
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 project for support. Unlisted template engines might still support the Express signature.
+
+For more information, see [Using template engines with Express](/{{page.lang}}/guide/using-template-engines.html).
 
 ## How do I handle 404 responses?
 
@@ -84,4 +86,3 @@ You don't! There's no need to "render" HTML with the `res.render()` function.
 If you have a specific file, use the `res.sendFile()` function.
 If you are serving many assets from a directory, use the `express.static()`
 middleware function.
-</div>

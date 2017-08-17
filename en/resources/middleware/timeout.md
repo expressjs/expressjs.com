@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/timeout.html'
 name: timeout
 ---
-<div id="page-doc" markdown="1">
+
 # connect-timeout
 
 [![NPM Version][npm-image]][npm-url]

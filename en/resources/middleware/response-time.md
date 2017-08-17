@@ -6,7 +6,7 @@ lang: en
 redirect_from: '/resources/middleware/response-time.html'
 name: response-time
 ---
-<div id="page-doc" markdown="1">
+
 # response-time
 
 [![NPM Version][npm-image]][npm-url]
