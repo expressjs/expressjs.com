@@ -15,6 +15,7 @@ La adición de la funcionalidad de conectar bases de datos a las aplicaciones Ex
 * [MySQL](#mysql)
 * [MongoDB](#mongo)
 * [Neo4j](#neo4j)
+* [Oracle](#oracle)
 * [PostgreSQL](#postgres)
 * [Redis](#redis)
 * [SQLite](#sqlite)
@@ -217,6 +218,55 @@ apoc.query('match (n) return n').exec().then(
 );
 </code>
 </pre>
+
+<a name="oracle"></a>
+
+## Oracle
+
+**Módulo**: [oracledb](https://github.com/oracle/node-oracledb)
+
+### Instalación
+
+NOTA: [Vea los requisitos previos de instalación](https://github.com/oracle/node-oracledb#-installation).
+
+```sh
+$ npm install oracledb
+```
+
+### Ejemplo
+
+```js
+const oracledb = require('oracledb');
+const config = {
+  user: '<your db user>',                // Update me
+  password: '<your db password>',        // Update me
+  connectString: 'localhost:1521/orcl'   // Update me
+};
+
+async function getEmployee(empId) {
+  let conn;
+
+  try {
+    conn = await oracledb.getConnection(config);
+
+    const result = await conn.execute(
+      'select * from employees where employee_id = :id',
+      [empId]
+    );
+
+    console.log(result.rows[0]);
+  } catch (err) {
+    console.log('Ouch!', err);
+  } finally {
+    if (conn) { // conn assignment worked, need to close
+       await conn.close();
+    }
+  }
+}
+
+getEmployee(101);
+```
+
 
 <a name="postgres"></a>
 
