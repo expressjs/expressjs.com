@@ -22,9 +22,9 @@ See [LICENSE.md](LICENSE.md) for the full license.
 - Korean
 
 Therefore we can no longer accept community translations for these languages, except for corrections
-to the existing translations.
+to the existing translations and updates to align with changes or additions to the English documentation.
 
-We welcome contributions of translations into other languages, following the procedure below.
+To contribute a translation into another language, following the procedure below.
 
 Follow these steps:
 
