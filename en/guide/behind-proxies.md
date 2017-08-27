@@ -68,7 +68,7 @@ app.set('trust proxy', function (ip) {
   </tbody>
 </table>
 
-Setting `trust proxy` to `true` will results in three important changes:
+You can enable `trust proxy` in the following way: set it to `true`, pass a string, or use an array. Enabling `trust proxy` will have the following impact:
 
 <ul>
   <li markdown="1">The value of [req.hostname](/{{ page.lang }}/api.html#req.hostname) is derived from the value set in the `X-Forwarded-Host` header, which can be set by the client or by the proxy.
