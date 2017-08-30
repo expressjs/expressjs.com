@@ -1,0 +1,156 @@
+<header>
+  <div id="mobile-menu">
+      <div id="nav-button" class="fa fa-bars fa-2x button"></div>
+  </div>
+  <section id="logo"><a href="/" class="express">Express</a>
+  </section>
+  <div id="navbar">
+      <ul id="navmenu">
+          <li><a href="/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Anasayfa</a></li>
+          <li>
+              <ul id="getting-started-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Buradan Başlayın</a>
+                      <ul>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/installing.html">
+                              Kurulum
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/hello-world.html">
+                              Merhaba Dünya
+                            </a>
+                          </li>
+                          <li>
+                          <a href="/{{ page.lang }}/starter/generator.html">
+                            Express Oluşturucu
+                          </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/basic-routing.html">
+                              Basit Yönlendirme
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/static-files.html">
+                              Statik Dosyalar
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/starter/faq.html">
+                              SSS
+                            </a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="guide-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Kılavuz</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/guide/routing.html">Yönlendirme</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/writing-middleware.html">						  Middleware yazma</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Middleware kullanma</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Şablon motoru kullanma</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/error-handling.html">Hata işleme</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/debugging.html">Hata Ayıklama</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express behind proxies</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">Express 4 geçiş</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/migrating-5.html">Express 5 geçiş</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/guide/database-integration.html">Database Entegrasyonu</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="application-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API Kaynak</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/3x/api.html">3.x (Kullanımdan kaldırıldı)</a>
+                          </li>
+                          <li><a href="/2x/">2.x (Kullanımdan kaldırıldı)</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="advanced-topics-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Gelişmiş konular</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Şablon motorları</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/pm.html">Proses yöneticisi kullanma</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">Gğvenlik güncellemeleri</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">En iyi güvenlik uygulamaları</a>
+                          </li>
+                          <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">En iyi performans uygulamaları</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <ul id="resources-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Kaynaklar</a>
+                      <ul>
+                          <li>
+                            <a href="/{{ page.lang }}/resources/community.html">Topluluk</a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/resources/glossary.html">Terimler</a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/resources/utils.html">Yardımcı Modüller</a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/resources/frameworks.html">Yapılar</a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/resources/books-blogs.html">Kitap ve Bloglar</a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/resources/companies-using-express.html">Express kullanan şirket</a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/resources/contributing.html">Express'e katkıda bulunmak</a>
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/changelog/4x.html">Sürüm Notları</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <!--
+          <li>
+              <ul id="changelog-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/changelog/4x.html"{% if page.menu == 'changelog' %} class="active"{% endif %}>Changelog</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/changelog/4x.html">4.x</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+        -->
+      </ul>
+  </div>
+</header>
