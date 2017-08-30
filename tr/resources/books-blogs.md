@@ -2,8 +2,7 @@
 layout: page
 title: Express books and blogs
 menu: resources
-lang: en
-redirect_from: "/resources/books-blogs.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 # Books and blogs

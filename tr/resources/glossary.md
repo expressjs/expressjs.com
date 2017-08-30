@@ -2,8 +2,7 @@
 layout: page
 title: Express glossary
 menu: resources
-lang: en
-redirect_from: "/resources/glossary.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 # Glossary

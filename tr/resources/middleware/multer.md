@@ -2,8 +2,7 @@
 layout: middleware
 title: Express multer middleware
 menu: resources
-lang: en
-redirect_from: '/resources/middleware/multer.html'
+lang: tr
 name: multer
 ---
 <div id="page-doc" markdown="1">

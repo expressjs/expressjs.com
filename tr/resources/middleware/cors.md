@@ -2,8 +2,7 @@
 layout: middleware
 title: Express cors middleware
 menu: resources
-lang: en
-redirect_from: '/resources/middleware/cors.html'
+lang: tr
 name: cors
 ---
 <div id="page-doc" markdown="1">

@@ -2,8 +2,7 @@
 layout: page
 title: Express FAQ
 menu: starter
-lang: en
-redirect_from: "/starter/faq.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 # FAQ

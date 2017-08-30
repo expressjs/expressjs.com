@@ -3,7 +3,6 @@ layout: page
 title: Express için şablon motoru geliştirme
 menu: advanced
 lang: tr
-redirect_from: "/advanced/developing-template-engines.html"
 ---
 <div id="page-doc" markdown="1">
 # Developing template engines for Express

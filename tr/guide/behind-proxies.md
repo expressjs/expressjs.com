@@ -2,8 +2,7 @@
 layout: page
 title: Express behind proxies
 menu: guide
-lang: en
-redirect_from: "/guide/behind-proxies.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 # Express behind proxies

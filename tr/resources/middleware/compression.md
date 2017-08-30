@@ -2,8 +2,7 @@
 layout: middleware
 title: Express compression middleware
 menu: resources
-lang: en
-redirect_from: '/resources/middleware/compression.html'
+lang: tr
 name: compression
 ---
 <div id="page-doc" markdown="1">

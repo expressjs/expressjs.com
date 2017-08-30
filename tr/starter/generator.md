@@ -2,8 +2,7 @@
 layout: page
 title: Express application generator
 menu: starter
-lang: en
-redirect_from: "/starter/generator.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 # Express application generator

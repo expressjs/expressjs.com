@@ -2,8 +2,7 @@
 layout: middleware
 title: Express middleware
 menu: resources
-lang: en
-redirect_from: "/resources/middleware.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 ## Express middleware

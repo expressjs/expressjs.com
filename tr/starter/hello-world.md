@@ -2,8 +2,7 @@
 layout: page
 title: Express "Hello World" example
 menu: starter
-lang: en
-redirect_from: "/starter/hello-world.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 # Hello world example

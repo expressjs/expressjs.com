@@ -2,8 +2,7 @@
 layout: middleware
 title: Express method-override middleware
 menu: resources
-lang: en
-redirect_from: '/resources/middleware/method-override.html'
+lang: tr
 name: method-override
 ---
 <div id="page-doc" markdown="1">

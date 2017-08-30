@@ -2,8 +2,7 @@
 layout: page
 title: Express error handling
 menu: guide
-lang: en
-redirect_from: "/guide/error-handling.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 # Error handling

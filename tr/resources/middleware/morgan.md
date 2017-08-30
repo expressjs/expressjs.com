@@ -2,8 +2,7 @@
 layout: middleware
 title: Express morgan middleware
 menu: resources
-lang: en
-redirect_from: '/resources/middleware/morgan.html'
+lang: tr
 name: morgan
 ---
 <div id="page-doc" markdown="1">

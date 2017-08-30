@@ -2,8 +2,7 @@
 layout: page
 title: Debugging Express
 menu: guide
-lang: en
-redirect_from: "/guide/debugging.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 # Debugging Express

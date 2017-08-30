@@ -2,8 +2,7 @@
 layout: middleware
 title: Express serve-index middleware
 menu: resources
-lang: en
-redirect_from: '/resources/middleware/serve-index.html'
+lang: tr
 name: serve-index
 ---
 <div id="page-doc" markdown="1">

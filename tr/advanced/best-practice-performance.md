@@ -3,7 +3,6 @@ layout: page
 title: Üründe kullanılan Express için En İyi Performans Uygulamaları
 menu: advanced
 lang: tr
-redirect_from: "/advanced/best-practice-performance.html"
 ---
 <div id="page-doc" markdown="1">
 # Production best practices: performance and reliability

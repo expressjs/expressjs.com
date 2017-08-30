@@ -3,7 +3,6 @@ layout: page
 title: Express uygulamalarında proses yönetimi 
 menu: advanced
 lang: tr
-redirect_from: "/advanced/pm.html"
 ---
 <div id="page-doc" markdown="1">
 # Process managers for Express apps

@@ -2,8 +2,7 @@
 layout: middleware
 title: Express vhost middleware
 menu: resources
-lang: en
-redirect_from: '/resources/middleware/vhost.html'
+lang: tr
 name: vhost
 ---
 <div id="page-doc" markdown="1">

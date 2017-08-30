@@ -2,8 +2,7 @@
 layout: page
 title: Express database integration
 menu: guide
-lang: en
-redirect_from: "/guide/database-integration.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 # Database integration

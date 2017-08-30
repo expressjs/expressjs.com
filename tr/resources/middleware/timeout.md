@@ -2,8 +2,7 @@
 layout: middleware
 title: Express timeout middleware
 menu: resources
-lang: en
-redirect_from: '/resources/middleware/timeout.html'
+lang: tr
 name: timeout
 ---
 <div id="page-doc" markdown="1">

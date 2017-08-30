@@ -2,8 +2,7 @@
 layout: page
 title: Using template engines with Express
 menu: guide
-lang: en
-redirect_from: "/guide/using-template-engines.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 # Using template engines with Express

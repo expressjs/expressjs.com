@@ -2,8 +2,7 @@
 layout: page
 title: Installing Express
 menu: starter
-lang: en
-redirect_from: "/starter/installing.html"
+lang: tr
 ---
 <div id="page-doc" markdown="1">
 # Installing

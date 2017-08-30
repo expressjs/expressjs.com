@@ -2,8 +2,7 @@
 layout: middleware
 title: Express body-parser middleware
 menu: resources
-lang: en
-redirect_from: '/resources/middleware/body-parser.html'
+lang: tr
 name: body-parser
 ---
 <div id="page-doc" markdown="1">

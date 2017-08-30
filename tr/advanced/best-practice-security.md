@@ -3,7 +3,6 @@ layout: page
 title: Üründe ki Express için En İyi Güvenlik Uygulamaları
 menu: advanced
 lang: tr
-redirect_from: "/advanced/best-practice-security.html"
 ---
 <div id="page-doc" markdown="1">
 # Production Best Practices: Security

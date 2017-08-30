@@ -3,7 +3,6 @@ layout: page
 title: Express Güvenlik Güncellemeleri
 menu: advanced
 lang: tr
-redirect_from: "/advanced/security-updates.html"
 ---
 <div id="page-doc" markdown="1">
 
