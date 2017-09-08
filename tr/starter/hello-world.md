@@ -5,7 +5,7 @@ menu: starter
 lang: tr
 ---
 <div id="page-doc" markdown="1">
-# Hello world example
+# Merhaba Dünya Örneği
 
 <div class="doc-box doc-info" markdown="1">
 This is essentially going to be the simplest Express app you can create. It is a single file app &mdash; _not_ what you'd get if you use the [Express generator](/{{ page.lang }}/starter/generator.html), which creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and sub-directories for various purposes.
