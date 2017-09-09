@@ -31,10 +31,10 @@ This topic clearly falls into the "devops" world, spanning both traditional deve
 
 Here are some things you can do in your code to improve your application's performance:
 
-* [Use gzip compression](use-gzip-compression)
-* [Don't use synchronous functions](dont-use-synchronous-functions)
-* [Do logging correctly](do-logging-correctly)
-* [Handle exceptions properly](handle-exceptions-properly)
+* [Use gzip compression](#use-gzip-compression)
+* [Don't use synchronous functions](#dont-use-synchronous-functions)
+* [Do logging correctly](#do-logging-correctly)
+* [Handle exceptions properly](#handle-exceptions-properly)
 
 ### Use gzip compression
 
