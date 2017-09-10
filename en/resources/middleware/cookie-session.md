@@ -15,7 +15,21 @@ name: cookie-session
 [![Test Coverage][coveralls-image]][coveralls-url]
 [![Gratipay][gratipay-image]][gratipay-url]
 
-  Simple cookie-based session middleware.
+Simple cookie-based session middleware.
+
+A user session can be stored in two main ways with cookies: on the server or on
+the client. This module stores the session data on the client within a cookie,
+while a module like [express-session](https://www.npmjs.com/package/express-session)
+stores only a session identifier on the client within a cookie and stores the
+session data on the server, typically in a database.
+
+The following points can help you choose which to use:
+
+  * `cookie-session` does not require any database / resources on the server side,
+    though the total session data cannot exceed the browser's max cookie size.
+  * `cookie-session` can simplify certain load-balanced scenarios.
+  * `cookie-session` can be used to store a "light" session and include an identifier
+    to look up a database-backed secondary store to reduce database lookups.
 
 ## Semantics
 
