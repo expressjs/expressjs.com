@@ -68,7 +68,7 @@ or an error occurred.
 The various errors returned by this module are described in the
 [errors section](#errors).
 
-### bodyParser.json(options)
+### bodyParser.json([options])
 
 Returns middleware that only parses `json` and only looks at requests where
 the `Content-Type` header matches the `type` option. This parser accepts any
@@ -80,7 +80,7 @@ object after the middleware (i.e. `req.body`).
 
 #### Options
 
-The `json` function takes an option `options` object that may contain any of
+The `json` function takes an optional `options` object that may contain any of
 the following keys:
 
 ##### inflate
@@ -122,7 +122,7 @@ The `verify` option, if supplied, is called as `verify(req, res, buf, encoding)`
 where `buf` is a `Buffer` of the raw request body and `encoding` is the
 encoding of the request. The parsing can be aborted by throwing an error.
 
-### bodyParser.raw(options)
+### bodyParser.raw([options])
 
 Returns middleware that parses all bodies as a `Buffer` and only looks at
 requests where the `Content-Type` header matches the `type` option. This
@@ -134,7 +134,7 @@ of the body.
 
 #### Options
 
-The `raw` function takes an option `options` object that may contain any of
+The `raw` function takes an optional `options` object that may contain any of
 the following keys:
 
 ##### inflate
@@ -166,7 +166,7 @@ The `verify` option, if supplied, is called as `verify(req, res, buf, encoding)`
 where `buf` is a `Buffer` of the raw request body and `encoding` is the
 encoding of the request. The parsing can be aborted by throwing an error.
 
-### bodyParser.text(options)
+### bodyParser.text([options])
 
 Returns middleware that parses all bodies as a string and only looks at
 requests where the `Content-Type` header matches the `type` option. This
@@ -178,7 +178,7 @@ body.
 
 #### Options
 
-The `text` function takes an option `options` object that may contain any of
+The `text` function takes an optional `options` object that may contain any of
 the following keys:
 
 ##### defaultCharset
@@ -214,7 +214,7 @@ The `verify` option, if supplied, is called as `verify(req, res, buf, encoding)`
 where `buf` is a `Buffer` of the raw request body and `encoding` is the
 encoding of the request. The parsing can be aborted by throwing an error.
 
-### bodyParser.urlencoded(options)
+### bodyParser.urlencoded([options])
 
 Returns middleware that only parses `urlencoded` bodies and only looks at
 requests where the `Content-Type` header matches the `type` option. This
@@ -228,7 +228,7 @@ key-value pairs, where the value can be a string or array (when `extended` is
 
 #### Options
 
-The `urlencoded` function takes an option `options` object that may contain
+The `urlencoded` function takes an optional `options` object that may contain
 any of the following keys:
 
 ##### extended
@@ -282,9 +282,11 @@ encoding of the request. The parsing can be aborted by throwing an error.
 ## Errors
 
 The middlewares provided by this module create errors depending on the error
-condition during parsing. The errors will typically have a `status` property
-that contains the suggested HTTP response code and a `body` property containing
-the read body, if available.
+condition during parsing. The errors will typically have a `status`/`statusCode`
+property that contains the suggested HTTP response code, an `expose` property
+to determine if the `message` property should be displayed to the client, a
+`type` property to determine the type of error without matching against the
+`message`, and a `body` property containing the read body, if available.
 
 The following are the common errors emitted, though any error can come through
 for various reasons.
@@ -293,48 +295,62 @@ for various reasons.
 
 This error will occur when the request had a `Content-Encoding` header that
 contained an encoding but the "inflation" option was set to `false`. The
-`status` property is set to `415`.
+`status` property is set to `415`, the `type` property is set to
+`'encoding.unsupported'`, and the `charset` property will be set to the
+encoding that is unsupported.
 
 ### request aborted
 
 This error will occur when the request is aborted by the client before reading
 the body has finished. The `received` property will be set to the number of
 bytes received before the request was aborted and the `expected` property is
-set to the number of expected bytes. The `status` property is set to `400`.
+set to the number of expected bytes. The `status` property is set to `400`
+and `type` property is set to `'request.aborted'`.
 
 ### request entity too large
 
 This error will occur when the request body's size is larger than the "limit"
 option. The `limit` property will be set to the byte limit and the `length`
 property will be set to the request body's length. The `status` property is
-set to `413`.
+set to `413` and the `type` property is set to `'entity.too.large'`.
 
 ### request size did not match content length
 
 This error will occur when the request's length did not match the length from
 the `Content-Length` header. This typically occurs when the request is malformed,
 typically when the `Content-Length` header was calculated based on characters
-instead of bytes. The `status` property is set to `400`.
+instead of bytes. The `status` property is set to `400` and the `type` property
+is set to `'request.size.invalid'`.
 
 ### stream encoding should not be set
 
 This error will occur when something called the `req.setEncoding` method prior
 to this middleware. This module operates directly on bytes only and you cannot
 call `req.setEncoding` when using this module. The `status` property is set to
-`500`.
+`500` and the `type` property is set to `'stream.encoding.set'`.
+
+### too many parameters
+
+This error will occur when the content of the request exceeds the configured
+`parameterLimit` for the `urlencoded` parser. The `status` property is set to
+`413` and the `type` property is set to `'parameters.too.many'`.
 
 ### unsupported charset "BOGUS"
 
 This error will occur when the request had a charset parameter in the
 `Content-Type` header, but the `iconv-lite` module does not support it OR the
 parser does not support it. The charset is contained in the message as well
-as in the `charset` property. The `status` property is set to `415`.
+as in the `charset` property. The `status` property is set to `415`, the
+`type` property is set to `'charset.unsupported'`, and the `charset` property
+is set to the charset that is unsupported.
 
 ### unsupported content encoding "bogus"
 
 This error will occur when the request had a `Content-Encoding` header that
 contained an unsupported encoding. The encoding is contained in the message
-as well as in the `encoding` property. The `status` property is set to `415`.
+as well as in the `encoding` property. The `status` property is set to `415`,
+the `type` property is set to `'encoding.unsupported'`, and the `encoding`
+property is set to the encoding that is unsupported.
 
 ## Examples
 
