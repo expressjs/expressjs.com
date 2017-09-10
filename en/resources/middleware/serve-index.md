@@ -157,4 +157,3 @@ are created by/copyright of [FAMFAMFAM](http://www.famfamfam.com/).
 [downloads-url]: https://npmjs.org/package/serve-index
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
-</div>

@@ -245,4 +245,3 @@ app.use(function (err, req, res, next) {
 [downloads-url]: https://npmjs.org/package/csurf
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://gratipay.com/dougwilson/
-</div>

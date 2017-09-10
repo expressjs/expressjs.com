@@ -92,4 +92,3 @@ app.listen(8080)
 [coveralls-url]: https://coveralls.io/r/expressjs/cookie-parser?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/cookie-parser.svg
 [downloads-url]: https://npmjs.org/package/cookie-parser
-</div>

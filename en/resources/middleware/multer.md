@@ -294,4 +294,3 @@ For information on how to build your own storage engine, see [Multer Storage Eng
 ## License
 
 [MIT](LICENSE)
-</div>

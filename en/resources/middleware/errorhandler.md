@@ -135,4 +135,3 @@ function errorNotification(err, str, req) {
 [downloads-url]: https://npmjs.org/package/errorhandler
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
-</div>

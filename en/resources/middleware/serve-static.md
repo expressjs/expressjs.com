@@ -260,4 +260,3 @@ function setCustomCacheControl (res, path) {
 [downloads-url]: https://npmjs.org/package/serve-static
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://gratipay.com/dougwilson/
-</div>

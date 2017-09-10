@@ -190,4 +190,3 @@ Example call with query override using HTML `<form>`:
 [downloads-url]: https://npmjs.org/package/method-override
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
-</div>

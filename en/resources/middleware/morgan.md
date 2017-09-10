@@ -387,4 +387,3 @@ function assignId (req, res, next) {
 [downloads-url]: https://npmjs.org/package/morgan
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
-</div>

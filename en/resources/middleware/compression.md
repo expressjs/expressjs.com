@@ -250,4 +250,3 @@ app.get('/events', function (req, res) {
 [downloads-url]: https://npmjs.org/package/compression
 [gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
 [gratipay-url]: https://www.gratipay.com/dougwilson/
-</div>
