@@ -53,6 +53,7 @@ $ npm install express
 </pre>
 
 <div class="doc-box doc-info" markdown="1">
-Les modules de noeuds installés à l'aide de l'option `--save` sont ajoutés à la liste `dependencies` dans le fichier `package.json`.
-Par la suite, l'exécution de `npm install` dans le répertoire `app` installera automatiquement les modules dans la liste des dépendances.
+Les modules Node.js installés à l'aide de l'option `--save` sont ajoutés à la liste des dépendances `dependencies`, dans le fichier `package.json`.
+Par défaut, depuis la version 5.0, `npm install <package-name>` ajoute automatiquement le module Node.js à la liste des dépendances.
+Par la suite, l'exécution de `npm install` dans le répertoire de l'application installera automatiquement les modules présents dans la liste des dépendances.
 </div>
