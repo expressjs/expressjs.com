@@ -85,7 +85,7 @@ http://localhost:3000/static/hello.html
 
 Cependant, le chemin d'accès que vous fournissez à la
 fonction `express.static` est en rapport avec
-le répertoire à partir duquel vous lancez votre processus `noeud`. Si
+le répertoire à partir duquel vous lancez votre processus `node`. Si
 vous exécutez l'application express à partir d'un autre répertoire, il
 est plus sûr d'utiliser le chemin d'accès absolu que vous voulez
 servir :

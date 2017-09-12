@@ -9,7 +9,7 @@ lang : fr
 
 <div class="doc-box doc-info" markdown="1">
 Il s'agit de l'application Express la plus simple que vous puissiez créer. Cette application ne contient qu'un seul fichier, c'est-à-dire *tout l'inverse* de ce que vous obtiendriez avec le
-[générateur Express](/{{ page.lang }}/starter/generator.html), qui crée l'échafaudage d'une application entière, avec des fichiers JavaScript, des modèles Jade et des sous-répertoires pour divers motifs.
+[générateur Express](/{{ page.lang }}/starter/generator.html), qui crée l'échafaudage d'une application entière, avec des fichiers JavaScript, des modèles <a href="pugjs.org" target="_blank" title="Documentation Pug">Pug</a> et des sous-répertoires pour divers motifs.
 </div>
 
 Premièrement, créez un répertoire appelé `myapp`, rendez-vous dedans et exécutez la commande `npm init`.
@@ -19,16 +19,16 @@ Dans le répertoire `myapp`, créez un fichier appelé `app.js` et ajoutez le co
 
 <pre>
 <code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+const express = require('express')
+const app = express()
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+  res.send('Hello World!')
+})
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
+  console.log('Example app listening on port 3000!')
+})
 </code>
 </pre>
 
@@ -36,7 +36,7 @@ L'application démarre un serveur et écoute le port 3000 à la recherche de con
 à l'URL racine (`/`) ou à la *route* racine. Pour tous les autres chemins d'accès, elle répondra par **404 Not Found**.
 
 <div class="doc-box doc-notice" markdown="1">
-Les objets `req` (demande) et `res` (réponse) sont exactement les mêmes que ceux que le Noeud fournit, vous pouvez donc appeler
+Les objets `req` (demande) et `res` (réponse) sont exactement les mêmes que ceux que Node fournit, vous pouvez donc appeler
 `req.pipe()`, `req.on('data', callback)` et tout autre objet sans recourir à Express.
 </div>
 

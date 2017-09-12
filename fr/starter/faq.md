@@ -36,7 +36,7 @@ Voir [LoopBack](http://loopback.io) pour obtenir une infrastructure basée sur E
 ## Comment puis-je authentifier des utilisateurs ?
 
 L'authentification est une autre partie complexe dans laquelle Express
-ne s'aventure pas.  Vous pouvez utiliser tous les schémas d'authentification que vous voulez.
+ne s'aventure pas. Vous pouvez utiliser tous les schémas d'authentification que vous voulez.
 Pour un schéma simple de type nom d'utilisateur/mot de passe, voir [cet exemple](https://github.com/strongloop/express/tree/master/examples/auth).
 
 
