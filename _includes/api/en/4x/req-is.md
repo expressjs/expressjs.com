@@ -1,6 +1,6 @@
 <h3 id='req.is'>req.is(type)</h3>
 
-Returns `true` if the incoming request's "Content-Type" HTTP header field
+Returns the matching content type if the incoming request's "Content-Type" HTTP header field
 matches the MIME type specified by the `type` parameter.
 Returns `false` otherwise.
 
@@ -9,13 +9,13 @@ Returns `false` otherwise.
 req.is('html');
 req.is('text/html');
 req.is('text/*');
-// => true
+// => 'html'
 
 // When Content-Type is application/json
 req.is('json');
 req.is('application/json');
 req.is('application/*');
-// => true
+// => 'html'
 
 req.is('html');
 // => false
