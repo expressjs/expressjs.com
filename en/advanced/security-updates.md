@@ -18,6 +18,8 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
 
 ## 4.x
 
+  * 4.15.3
+    * The dependency `ms` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:ms:20170412). This may affect your application if untrusted string input is passed to the `maxAge` option in the following APIs: `express.static`, `res.sendfile`, and `res.sendFile`.
   * 4.15.2
     * The dependency `qs` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:qs:20170213), but this issue does not impact Express. Updating to 4.15.2 is a good practice, but not required to address the vulnerability.
   * 4.11.1
