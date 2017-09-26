@@ -20,6 +20,10 @@ redirect_from: "/en/index.html"
   </div>
 </section>
 
+<section id="announcements">
+  {% include announcement/announcement-{{ page.lang }}.md %}
+</section>
+
 <section id="intro">
 
   <div id="boxes" class="clearfix">
@@ -40,8 +44,4 @@ redirect_from: "/en/index.html"
     </div>
   </div>
 
-</section>
-
-<section id="announcements">
-  {% include announcement/announcement-{{ page.lang }}.md %}
 </section>
