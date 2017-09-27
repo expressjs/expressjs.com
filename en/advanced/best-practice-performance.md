@@ -20,7 +20,7 @@ This topic clearly falls into the "devops" world, spanning both traditional deve
   * [Do logging correctly](#do-logging-correctly)
   * [Handle exceptions properly](#handle-exceptions-properly)
 * Things to do in your environment / setup (the ops part):
-  * [Set NODE_ENV to "production"](#set-nodeenv-to-production)
+  * [Set NODE_ENV to "production"](#set-node_env-to-production)
   * [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
   * [Run your app in a cluster](#run-your-app-in-a-cluster)
   * [Cache request results](#cache-request-results)
