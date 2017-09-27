@@ -166,7 +166,7 @@ For more information about error-handling by using promises, see:
 
 Here are some things you can do in your system environment to improve your app's performance:
 
-* [Set NODE_ENV to "production"](#set-nodeenv-to-production)
+* [Set NODE_ENV to "production"](#set-node_env-to-production)
 * [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
 * [Run your app in a cluster](#run-your-app-in-a-cluster)
 * [Cache request results](#cache-request-results)
