@@ -64,6 +64,17 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
     </tr>
     <tr>
   <td markdown="1">
+  `json escape`
+  </td>
+  <td>Boolean</td>
+  <td markdown="1">
+  Enable escaping JSON responses from the `res.json`, `res.jsonp`, and `res.send` APIs. This will escape the characters `<`, `>`, and `&` as Unicode escape sequences in JSON. The purpose of this it to assist with [mitigating certain types of persistent XSS attacks](https://blog.mozilla.org/security/2017/07/18/web-service-audits-firefox-accounts/) when clients sniff responses for HTML.
+  <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
+  </td>
+  <td>N/A (undefined)</td>
+    </tr>
+    <tr>
+  <td markdown="1">
   `json replacer`
   </td>
       <td>Varied</td>
