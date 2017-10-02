@@ -11,6 +11,21 @@ layout: page
     {{ readme | markdownify }}
   </div>
   <div id="middleware-content">
-      {{ content }}
+    {% if page.module == 'mw-home' %}    
+      {{content}} 
+      
+    {% elsif page.module %}
+      <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i>
+        <b>Note:</b> This page was generated from the
+        <a target="_blank" href="https://github.com/expressjs/{{page.module}}">{{page.module}} README</a>.
+      </div>
+
+      {% capture included-readme %}{% include readmes/{{page.module}}.md %}{% endcapture %}
+      {{ included-readme | markdownify }}    
+
+    {% else %}
+      <h3>ERROR: No source specified for README {{page.module}}</h3>
+    {% endif %}
+    {{content}}
   </div>
 </div>

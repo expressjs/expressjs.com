@@ -4,6 +4,7 @@ title: Express middleware
 menu: resources
 lang: en
 redirect_from: "/resources/middleware.html"
+module: mw-home
 ---
 
 ## Express middleware
@@ -31,19 +32,6 @@ The Express middleware modules listed here are maintained by the
 | [session](/{{page.lang}}/resources/middleware/session.html) | Establish server-based sessions (development only). | express.session |
 | [timeout](/{{page.lang}}/resources/middleware/timeout.html) | Set a timeout period for HTTP request processing.|express.timeout |
 | [vhost](/{{page.lang}}/resources/middleware/vhost.html) |Create virtual domains.|express.vhost|
-
-<!--
-- express.limit
-  - [raw-body](https://github.com/stream-utils/raw-body)
-- express.multipart
-  - [connect-busboy](https://github.com/mscdex/connect-busboy)
-  - [connect-multiparty](https://github.com/superjoe30/connect-multiparty)
-- express.query
-  - [qs](https://github.com/visionmedia/node-querystring)
-- express.staticCache
-  - [st](https://github.com/isaacs/st)
-  - [connect-static](https://github.com/andrewrk/connect-static)
--->
 
 ## Additional middleware modules
 
