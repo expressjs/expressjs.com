@@ -3,8 +3,10 @@
     <li id="express-api"><a href="#express">express()</a>
     <ul id="express-menu">
         <li><em>Methods</em></li>
+        <li id="express-json-middleware"><a href="#express.json">express.json()</a></li>
         <li id="express-static-middleware"><a href="#express.static">express.static()</a></li>
         <li id="express-router"><a href="#express.router">express.Router()</a></li>
+        <li id="express-urlencoded-middleware"><a href="#express.urlencoded">express.urlencoded()</a></li>
     </ul>
     </li>
 

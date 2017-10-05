@@ -10,9 +10,17 @@ var app = express();
 <h3 id='express.methods'>Methods</h3>
 
 <section markdown="1">
+  {% include api/en/4x/express.json.md %}
+</section>
+
+<section markdown="1">
   {% include api/en/4x/express.static.md %}
 </section>
 
 <section markdown="1">
   {% include api/en/4x/express.router.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/4x/express.urlencoded.md %}
 </section>

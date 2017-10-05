@@ -21,6 +21,7 @@ The following table provides details on the `options` parameter.
 | `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" | &nbsp; |
 | `acceptRanges`  | Enable or disable accepting ranged requests. | `true` | 4.14+ |
 | `cacheControl`  | Enable or disable setting `Cache-Control` response header.| `true` | 4.14+ |
+| `immutable`   | Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching. The `immutable` directive will prevent supported clients from making conditional requests during the life of the `maxAge` option to check if the file has changed. | `false` | 4.16+ |
 
 </div>
 
