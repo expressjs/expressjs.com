@@ -212,48 +212,14 @@ For details about error-handling middleware, see: [Error handling](/{{ page.lang
 
 <h2 id='middleware.built-in'>Built-in middleware</h2>
 
-Starting with version 4.x, Express no longer depends on [Connect](https://github.com/senchalabs/connect). With the exception of `express.static`, all of the middleware
-functions that were previously included with Express' are now in separate modules. Please view [the list of middleware functions](https://github.com/senchalabs/connect#middleware).
+Starting with version 4.x, Express no longer depends on [Connect](https://github.com/senchalabs/connect). The middleware
+functions that were previously included with Express are now in separate modules; see [the list of middleware functions](https://github.com/senchalabs/connect#middleware).
 
-The only built-in middleware function in Express is `express.static`. This function is based on [serve-static](https://github.com/expressjs/serve-static), and is responsible for serving static assets such as HTML files, images, and so on.
+Express has the following built-in middleware functions:
 
-The function signature is:
-
-```js
-express.static(root, [options])
-```
-
-The `root` argument specifies the root directory from which to serve static assets.
-
-For information on the `options` argument and more details on this middleware function, see [express.static](/en/4x/api.html#express.static).
-
-Here is an example of using the `express.static` middleware function with an elaborate options object:
-
-```js
-var options = {
-  dotfiles: 'ignore',
-  etag: false,
-  extensions: ['htm', 'html'],
-  index: false,
-  maxAge: '1d',
-  redirect: false,
-  setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now())
-  }
-}
-
-app.use(express.static('public', options))
-```
-
-You can have more than one static directory per app:
-
-```js
-app.use(express.static('public'))
-app.use(express.static('uploads'))
-app.use(express.static('files'))
-```
-
-For more details about the `serve-static` function and its options, see: [serve-static](https://github.com/expressjs/serve-static) documentation.
+- [express.static](/en/4x/api.html#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/4x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/4x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
 
 <h2 id='middleware.third-party'>Third-party middleware</h2>
 

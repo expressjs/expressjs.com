@@ -1,17 +1,18 @@
 <h3 id='express.static' class='h2'>express.static(root, [options])</h3>
 
 This is a built-in middleware function in Express.
-It serves static files and is based on [serve-static](https://github.com/expressjs/serve-static).
+It serves static files and is based on  [serve-static](/{{page.lang}}/resources/middleware/serve-static.html).
 
 <div class="doc-box doc-info" markdown="1">NOTE: For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
 </div>
 
-The `root` argument refers to the root directory from which the static assets are to be served.
-The file to serve will be determined by combining `req.url` with the provided `root` directory.
-When a file is not found, instead of sending a 404 response, this module will instead call `next()`
+The `root` argument specifies the root directory from which to serve static assets.
+The function determines the file to serve will by combining `req.url` with the provided `root` directory.
+When a file is not found, instead of sending a 404 response, it instead calls `next()`
 to move on to the next middleware, allowing for stacking and fall-backs.
 
 The following table describes the properties of the `options` object.
+See also the [example below](#example.of.express.static).
 
 | Property      | Description                                                           |   Type      | Default         |
 |---------------|-----------------------------------------------------------------------|-------------|-----------------|
@@ -27,6 +28,7 @@ The following table describes the properties of the `options` object.
 | `setHeaders`  | Function for setting HTTP headers to serve with the file. <br/><br/>See [setHeaders](#setHeaders) below. | Function |  |
 
 For more information, see [Serving static files in Express](/starter/static-files.html).
+and [Using middleware - Built-in middleware](/{{page.lang}}/guide/using-middleware.html#middleware.built-in).
 
 <h5 id='dotfiles'> dotfiles</h5>
 
@@ -66,3 +68,23 @@ Arguments:
 - `res`, the [response object](#res).
 - `path`, the file path that is being sent.
 - `stat`, the `stat` object of the file that is being sent.
+
+<h4 id='example.of.express.static'>Example of express.static</h4>
+
+Here is an example of using the `express.static` middleware function with an elaborate options object:
+
+```js
+var options = {
+  dotfiles: 'ignore',
+  etag: false,
+  extensions: ['htm', 'html'],
+  index: false,
+  maxAge: '1d',
+  redirect: false,
+  setHeaders: function (res, path, stat) {
+    res.set('x-timestamp', Date.now())
+  }
+}
+
+app.use(express.static('public', options))
+```
