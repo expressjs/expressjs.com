@@ -1,6 +1,6 @@
 <h3 id='express.static' class='h2'>express.static(root, [options])</h3>
 
-This is the only built-in middleware function in Express.
+This is a built-in middleware function in Express.
 It serves static files and is based on [serve-static](https://github.com/expressjs/serve-static).
 
 <div class="doc-box doc-info" markdown="1">NOTE: For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
