@@ -60,6 +60,9 @@ redirect_from: "/resources/companies-using-express.html"
     <a target="_new" class="imagelink" href="https://www.circlehd.com">
       <img alt="CircleHD" class="memberlogo" src="/images/companies/circlehd-logo.png" />
     </a>
+    <a target="_new" class="imagelink" href="https://www.teachoo.com">
+      <img alt="CircleHD" class="memberlogo" src="/images/companies/teachoo-logo.png" />
+    </a>
 </div>
 <p style="margin-top: 30px;">
 To add your logo to this page, please <a href="https://github.com/expressjs/expressjs.com/blob/gh-pages/en/resources/companies-using-express.md">open a pull request</a>.
