@@ -319,7 +319,8 @@ $ npm install redis
 ### Example
 
 ```js
-var client = require('redis').createClient()
+var redis = require('redis')
+var client = redis.createClient()
 
 client.on('error', function (err) {
   console.log('Error ' + err)
