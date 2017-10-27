@@ -19,3 +19,7 @@ req.params[0]
 If you need to make changes to a key in `req.params`, use the [app.param](/{{ page.lang }}/4x/api.html#app.param) handler. Changes are applicable only to [parameters](/{{ page.lang }}/guide/routing.html#route-parameters) already defined in the route path.
 
 Any changes made to the `req.params` object in a middleware or route handler will be reset.
+
+<div class="doc-box doc-info" markdown="1">
+NOTE: Express automatically decodes the values in `req.params` (using `decodeURIComponent`).
+</div>
