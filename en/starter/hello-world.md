@@ -14,7 +14,8 @@ Embedded below is essentially the simplest Express app you can create. It is a s
 
 <script src="https://embed.runkit.com" data-element-id="hello-example" data-mode="endpoint" async defer></script>
 <div id="hello-example"><pre><code class="language-js">
-const app = require('express')()
+const express = require('express')
+const app = express()
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
