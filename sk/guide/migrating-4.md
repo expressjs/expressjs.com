@@ -323,7 +323,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
@@ -361,7 +361,7 @@ Sprievodný `package.json` pre verziu 3 by vyzeral nejak takto:
   },
   "dependencies": {
     "express": "3.12.0",
-    "jade": "*"
+    "pug": "*"
   }
 }
 </code>
@@ -371,11 +371,11 @@ Sprievodný `package.json` pre verziu 3 by vyzeral nejak takto:
 Proces
 </h3>
 
-Proces migrácie začnite nainštalovaním všetkých potrebných middlewarov pre vašu Express 4 aplikáciu a updatom Express a Jade na ich prislúchajúce najnovšie verzie nasledujúcim príkazom:
+Proces migrácie začnite nainštalovaním všetkých potrebných middlewarov pre vašu Express 4 aplikáciu a updatom Express a Pug na ich prislúchajúce najnovšie verzie nasledujúcim príkazom:
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
+$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
 </code>
 </pre>
 
@@ -384,7 +384,7 @@ V `app.js` vykonajte tieto zmeny:
 1. Vstavané Express middleware funkcie `express.favicon`,
     `express.logger`, `express.methodOverride`,
     `express.session`, `express.bodyParser` a
-    `express.errorHandler` už nie sú dostupné na 
+    `express.errorHandler` už nie sú dostupné na
     `express` objekte. Musíte nainštalovať a načítať ich prislúchajúce alternatívy v aplikácii manuálne.
 
 2. Už viac nepotrebujete načítať `app.router` funkciu.
@@ -413,7 +413,7 @@ Spustením kódu vyššie, `npm` príkaz updatne `package.json` nasledovne:
     "errorhandler": "^1.1.1",
     "express": "^4.8.0",
     "express-session": "^1.7.2",
-    "jade": "^1.5.0",
+    "pug": "^2.0.0-beta6",
     "method-override": "^2.1.2",
     "morgan": "^1.2.2",
     "multer": "^0.1.3",
@@ -448,7 +448,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(methodOverride());
@@ -525,7 +525,7 @@ $ npm install -g express-generator
 V závislosti od toho, ako sú nakonfigurované vaše oprávnenia k súborom a priečinkom,
 môže byť potrebné spustiť tento príkaz pomocou `sudo`.
 
-Teraz je príkaz `express` aktualizovaný na vašom systéme na 
+Teraz je príkaz `express` aktualizovaný na vašom systéme na
 Express 4 generátor.
 
 <h3 id="">Zmeny app generátora</h3>
@@ -560,14 +560,14 @@ $ npm start
 </pre>
 
 Ak sa pozriete na npm start skript v `package.json` súbore,
-všimnete si, že aktuálny príkaz pre spustenie aplikácie je 
+všimnete si, že aktuálny príkaz pre spustenie aplikácie je
 `node ./bin/www`, ktorý bol v Express 3 pôvodne `node app.js`.
 
-Pretože súbor `app.js`, ktorý bol vygenerovaný Express 4 generátorom je odteraz Node.js modul, 
+Pretože súbor `app.js`, ktorý bol vygenerovaný Express 4 generátorom je odteraz Node.js modul,
 už nemôže byť viacej spustený nezávisle ako aplikácia (pokiaľ nezmeníte kód).
 Modul musí byť načítaný a spustený ako Node.js súbor. Node.js súbor je v tomto prípade`./bin/www`.
 
-Priečinok `bin` ani bezpríponový súbor `www` nie sú povinné k vytvoreniu ani spusteniu aplikácie. 
+Priečinok `bin` ani bezpríponový súbor `www` nie sú povinné k vytvoreniu ani spusteniu aplikácie.
 Sú len návrhom vyrobeným generátorom, takže ich môzete zmeniť podľa vašich potrieb.
 
 Ak sa chcete zbaviť `www` priečinka a ponechať to v starom "Express 3 formáte",
