@@ -53,4 +53,4 @@ These are some additional popular middleware modules.
 | [view-helpers](https://github.com/madhums/node-view-helpers) | Common helper methods for views.|
 | [sriracha-admin](https://github.com/hdngr/siracha) | Dynamically generate an admin site for Mongoose. |
 
-For more middleware modules, see [http-framework](https://github.com/Raynos/http-framework/wiki/Modules).
+For more middleware modules, see [http-framework](https://github.com/Raynos/http-framework#modules).
