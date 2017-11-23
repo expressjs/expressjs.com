@@ -21,3 +21,4 @@ Several popular Node.js frameworks are built on Express:
 - **[Hydra-Express](https://github.com/flywheelsports/fwsp-hydra-express)**: Hydra-Express is a light-weight library which facilitates building Node.js Microservices using ExpressJS.
 - **[Blueprint](http://github.com/onehilltech/blueprint)**: Highly-configurable MVC framework for composing production-ready services from reusable components
 - **[Locomotive](http://locomotivejs.org/)**: Powerful MVC web framework for Node.js from the maker of Passport.js
+- **[graphql-yoga](https://github.com/graphcool/graphql-yoga)**: Fully-featured, yet simple and lightweight GraphQL server 
