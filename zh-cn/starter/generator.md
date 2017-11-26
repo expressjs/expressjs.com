@@ -91,7 +91,7 @@ $ DEBUG=myapp:* npm start
 </code>
 </pre>
 
-然后在浏览器中装入 `http://localhost:3000/` 以访问此应用程序。
+然后在浏览器中输入 `http://localhost:3000/` 以访问此应用程序。
 
 生成的应用程序具有以下目录结构：
 

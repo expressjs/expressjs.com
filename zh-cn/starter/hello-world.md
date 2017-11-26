@@ -44,5 +44,5 @@ $ node app.js
 </code>
 </pre>
 
-然后，在浏览器中装入 [http://localhost:3000/](http://localhost:3000/) 以查看输出。
+然后，在浏览器中输入 [http://localhost:3000/](http://localhost:3000/) 以查看输出。
 

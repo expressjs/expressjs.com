@@ -17,7 +17,7 @@ app.use(express.static('public'));
 </code>
 </pre>
 
-现在，可以装入位于 `public` 目录中的文件：
+现在，可以访问位于 `public` 目录中的文件：
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -52,7 +52,7 @@ app.use('/static', express.static('public'));
 </code>
 </pre>
 
-现在，可以装入具有 `/static` 路径前缀的 `public` 目录中的文件。
+现在，可以访问具有 `/static` 路径前缀的 `public` 目录中的文件。
 
 <pre>
 <code class="language-javascript" translate="no">
