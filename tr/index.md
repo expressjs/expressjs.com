@@ -37,7 +37,7 @@ lang: tr
     </div>
 
     <div id="frameworks">
-      <h3>Çatılar</h3> Birçok <a href="/resources/frameworks.html">popüler çatı</a> Express tabanlıdır.
+      <h3>Çatılar</h3> Birçok <a href="resources/frameworks.html">popüler çatı</a> Express tabanlıdır.
     </div>
   </div>
 
