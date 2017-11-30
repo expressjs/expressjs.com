@@ -35,7 +35,7 @@ lang: uz
         </div>
 
  		<div id="frameworks">
-          <h3>Freymvorklar</h3> Express asosida yaratilgan ko'plab <a href="en/resources/frameworks.html">mashxur freymvorklar</a> .
+          <h3>Freymvorklar</h3> Express asosida yaratilgan ko'plab <a href="resources/frameworks.html">mashxur freymvorklar</a> .
       </div>
 
     </div>
