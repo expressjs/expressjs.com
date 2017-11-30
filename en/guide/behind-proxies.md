@@ -48,7 +48,7 @@ When specified, the IP addresses or the subnets are excluded from the address de
     <tr>
       <td>Number</td>
 <td markdown="1">
-Trust the `n`th hop from the front-facing proxy server as the client.
+Trust the `n`th hop from the express application server.
 </td>
     </tr>
     <tr>
