@@ -11,6 +11,24 @@ redirect_from: "/guide/routing.html"
 _Routing_ refers to the definition of application end points (URIs) and how they respond to client requests.
 For an introduction to routing, see [Basic routing](/{{ page.lang }}/starter/basic-routing.html).
 
+Routing uses the methods app.get() and app.post() functions.  The app.use() is also a very similar function.  To understand the basic functionality of how the app.get/post/use functions work you need to understand how the information is passed and to the handlers.  
+These three functions essentially develop a list of properties in the express object and then the list of properties are cycled through and called where appropriate. 
+
+Typical app.get will set the parameters of the express object as so: app([identifier], parameter)  where [identifier] is the url end route (for example base_url/images) and the parameter is the function that is to be called when the route is identified through the various means below.  Parameter does not necessarily have to be a function though it could be any object but the more usefull  part of express is the url routing and so the parameter is usually a function that is called.
+
+Typcially the app.listen(..) is called and this startes the cycle of listening for requests.  The requests are received and the base_url is stripped off leaving the tail end of the url to be comparied to the [identifier] list that was setup up through previous app.get(..) calls.  When listener finds a match it calls the function listed in parameter.
+
+This is why it is important to keep track of the next() functions to be called.  The controll will be passed to the function (aka a callback)  listed in the app.get(..., function)  and without the next() call, any other app.get(...)  that were assinged will not be called.
+
+Summary aof express Program Flow -- with specific emphasis on how routes fit into the picture.
+```
+set app.use() identifiers and functions ----> set app.get/post identifiers and functions ---> call app.listen(...)
+
+httpRequest is then received ----> strip base_url (something like 'http//google.com/')  ---> store identifier  (something like /index.html ) ---->  then match the identifier and call the function assinged.  Once the function assinged is called control is returned to you the developer to handel what the express server does in respons to the httpRequest call
+
+
+```
+
 The following code is an example of a very basic route.
 
 ```js
