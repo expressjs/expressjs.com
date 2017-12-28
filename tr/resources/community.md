@@ -41,7 +41,6 @@ Members of the Express technical committee are:
 - [@blakeembrey](https://github.com/blakeembrey) - Blake Embrey
 - [@crandmck](https://github.com/crandmck) - Rand McKinney
 - [@dougwilson](https://github.com/dougwilson) - Douglas Wilson
-- [@Fishrock123](https://github.com/Fishrock123) - Jeremiah Senkpiel
 - [@hacksparrow](https://github.com/hacksparrow) - Hage Yaapa
 - [@jonathanong](https://github.com/jonathanong) - jongleberry
 - [@LinusU](https://github.com/LinusU) - Linus Unnebäck
