@@ -66,6 +66,9 @@ redirect_from: "/resources/companies-using-express.html"
     <a target="_new" class="imagelink" href="https://www.taskade.com">
       <img alt="Taskade" class="memberlogo" src="/images/companies/taskade-logo.png" />
     </a>
+    <a target="_new" class="imagelink" href="https://hasura.io">
+      <img alt="Hasura" class="memberlogo" src="/images/companies/hasura-logo.png" />
+    </a>
 </div>
 <p style="margin-top: 30px;">
 To add your logo to this page, please <a href="https://github.com/expressjs/expressjs.com/blob/gh-pages/en/resources/companies-using-express.md">open a pull request</a>.
