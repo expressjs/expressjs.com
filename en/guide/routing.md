@@ -8,26 +8,19 @@ redirect_from: "/guide/routing.html"
 
 # Routing
 
-_Routing_ refers to the definition of application end points (URIs) and how they respond to client requests.
+_Routing_ refers to how an application's endpoints (URIs) respond to client requests.
 For an introduction to routing, see [Basic routing](/{{ page.lang }}/starter/basic-routing.html).
 
-Routing uses the methods app.get() and app.post() functions.  The app.use() is also a very similar function.  To understand the basic functionality of how the app.get/post/use functions work you need to understand how the information is passed and to the handlers.  
-These three functions essentially develop a list of properties in the express object and then the list of properties are cycled through and called where appropriate. 
+You define routing using methods of the Express `app` object that correspond to HTTP methods;
+for example, `app.get()` to handle GET requests and `app.post` to handle POST requests.  For a full list,
+see [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD).  You can also use [app.all()](/{{ page.lang }}/4x/api.html#app.all) to handle all HTTP methods and [app.use()](/{{ page.lang }}/4x/api.html#app.use) to
+specify middleware as the callback function (See [Using middleware](/{{ page.lang }}/4x/using-middleware.html) for details).
 
-Typical app.get will set the parameters of the express object as so: app([identifier], parameter)  where [identifier] is the url end route (for example base_url/images) and the parameter is the function that is to be called when the route is identified through the various means below.  Parameter does not necessarily have to be a function though it could be any object but the more usefull  part of express is the url routing and so the parameter is usually a function that is called.
+These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method.  In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
 
-Typcially the app.listen(..) is called and this startes the cycle of listening for requests.  The requests are received and the base_url is stripped off leaving the tail end of the url to be comparied to the [identifier] list that was setup up through previous app.get(..) calls.  When listener finds a match it calls the function listed in parameter.
-
-This is why it is important to keep track of the next() functions to be called.  The controll will be passed to the function (aka a callback)  listed in the app.get(..., function)  and without the next() call, any other app.get(...)  that were assinged will not be called.
-
-Summary aof express Program Flow -- with specific emphasis on how routes fit into the picture.
-```
-set app.use() identifiers and functions ----> set app.get/post identifiers and functions ---> call app.listen(...)
-
-httpRequest is then received ----> strip base_url (something like 'http//google.com/')  ---> store identifier  (something like /index.html ) ---->  then match the identifier and call the function assinged.  Once the function assinged is called control is returned to you the developer to handel what the express server does in respons to the httpRequest call
-
-
-```
+In fact, the routing methods can more than one callback function as arguments.
+With multiple callback functions, it is important to call provide `next` as an argument to the callback function and then call `next()` within the body of the function to hand off control
+to the next callback.  
 
 The following code is an example of a very basic route.
 
@@ -59,16 +52,10 @@ app.post('/', function (req, res) {
 })
 ```
 
-Express supports the following routing methods that correspond to HTTP methods: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch` and `search`.
+Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
+or a full list, see [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD).
 
-<div class="doc-box doc-info" markdown="1">
-To route methods that translate to invalid JavaScript variable names, use the bracket notation. For example,
-`app['m-search']('/', function ...`
-</div>
-
-There is a special routing method, `app.all()`, which is not derived from any HTTP method. This method is used for loading middleware functions at a path for all request methods.
-
-In the following example, the handler will be executed for requests to "/secret" whether you are using GET, POST, PUT, DELETE, or any other HTTP request method that is supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods.  For example, the following handler is executed for requests to the route "/secret" whether using GET, POST, PUT, DELETE, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', function (req, res, next) {
