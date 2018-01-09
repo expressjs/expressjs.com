@@ -18,6 +18,14 @@ object after the middleware (i.e. `req.body`), or an empty object (`{}`) if
 there was no body to parse, the `Content-Type` was not matched, or an error
 occurred.
 
+<div class="doc-box doc-warn" markdown="1">
+As `req.body`'s shape is based on user-controlled input, all properties and
+values in this object are untrusted and should be validated before trusting.
+For example, `req.body.foo.toString()` may fail in multiple ways, for example
+`foo` may not be there or may not be a string, and `toString` may not be a
+function and instead a string or other user-input.
+</div>
+
 The following table describes the properties of the optional `options` object.
 
 | Property      | Description                                                           |   Type      | Default         |

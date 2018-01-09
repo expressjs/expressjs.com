@@ -19,6 +19,14 @@ occurred. This object will contain key-value pairs, where the value can be
 a string or array (when `extended` is `false`), or any type (when `extended`
 is `true`).
 
+<div class="doc-box doc-warn" markdown="1">
+As `req.body`'s shape is based on user-controlled input, all properties and
+values in this object are untrusted and should be validated before trusting.
+For example, `req.body.foo.toString()` may fail in multiple ways, for example
+`foo` may not be there or may not be a string, and `toString` may not be a
+function and instead a string or other user-input.
+</div>
+
 The following table describes the properties of the optional `options` object.
 
 | Property         | Description                                                           |   Type      | Default         |
