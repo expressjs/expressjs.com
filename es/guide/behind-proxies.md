@@ -7,7 +7,7 @@ lang: es
 
 # Express detrás de proxies
 
-Cuando ejecute una aplicación Express detrás de un proxy, establezca (utilizando [app.set()](/{{ page.lang }}/4x/api.html#app.set)) la variable de aplicación `trust proxy` en uno de los valores de la tabla siguiente.
+Cuando ejecute una aplicación Express detrás de un proxy, establezca (utilizando [app.set()](/{{ page.lang }}/4x/api.html#app.set)) la variable de aplicación `trust proxy` en uno de los valores de la siguiente tabla.
 
 <div class="doc-box doc-info" markdown="1">
 Aunque la aplicación no dejará de ejecutarse si no se establece la variable de aplicación `trust proxy`, registrará incorrectamente la dirección IP del proxy como la dirección IP del cliente, a menos que se configure `trust proxy`.
@@ -27,7 +27,7 @@ Si es `false`, la aplicación se entiende como orientada directamente a Internet
     <tr>
       <td>Direcciones IP</td>
 <td markdown="1">
-Una dirección IP, una subred o una matriz de direcciones IP y subredes de confianza. La lista siguiente muestra los nombres de subred preconfigurados:
+Una dirección IP, una subred o una matriz de direcciones IP y subredes de confianza. La siguiente lista muestra los nombres de subred preconfigurados:
 
 * loopback - `127.0.0.1/8`, `::1/128`
 * linklocal - `169.254.0.0/16`, `fe80::/10`
