@@ -2,7 +2,7 @@
 layout: page
 title: Installing Express
 menu: starter
-lang: en
+lang: th
 redirect_from: "/starter/installing.html"
 ---
 

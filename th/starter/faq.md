@@ -2,7 +2,7 @@
 layout: page
 title: Express FAQ
 menu: starter
-lang: en
+lang: th
 redirect_from: "/starter/faq.html"
 ---
 

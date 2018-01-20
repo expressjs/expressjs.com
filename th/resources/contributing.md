@@ -2,7 +2,7 @@
 layout: page
 title: Contributing to Express
 menu: resources
-lang: en
+lang: th
 redirect_from: "/resources/community.html"
 ---
 

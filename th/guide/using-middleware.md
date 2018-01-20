@@ -2,7 +2,7 @@
 layout: page
 title: Using Express middleware
 menu: guide
-lang: en
+lang: th
 redirect_from: "/guide/using-middleware.html"
 ---
 # Using middleware

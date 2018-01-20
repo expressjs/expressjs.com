@@ -1,8 +1,8 @@
 <ul>
   <li>
-    <p class="announcement-title">Express 4.16.0 contains important security updates.</p>
+    <p class="announcement-title">Express รุ่น 4.16.0 มีคุณลักษณะความปลอดภัยล่าสุดที่สำคัญ</p>
     <p markdown="1">
-     For more information on what was added in this release, see the [4.16.0 changelog](/{{ page.lang }}/changelog/4x.html#4.16.0).
+     สำหรับข้อมูลว่าอะไรเพิ่มเติมบ้างในรุ่นนี้ สามารถดูใน [บันทึกการเปลี่ยนแปลง 4.16.0](/{{ page.lang }}/changelog/4x.html#4.16.0).
     </p>
   </li>
 </ul>

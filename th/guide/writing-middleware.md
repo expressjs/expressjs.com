@@ -2,7 +2,7 @@
 layout: page
 title: Writing middleware for use in Express apps
 menu: guide
-lang: en
+lang: th
 redirect_from: "/guide/writing-middleware.html"
 ---
 # Writing middleware for use in Express apps

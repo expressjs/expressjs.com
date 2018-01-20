@@ -2,7 +2,7 @@
 layout: page
 title: Express error handling
 menu: guide
-lang: en
+lang: th
 redirect_from: "/guide/error-handling.html"
 ---
 # Error handling

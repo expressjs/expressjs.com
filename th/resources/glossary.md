@@ -2,7 +2,7 @@
 layout: page
 title: Express glossary
 menu: resources
-lang: en
+lang: th
 redirect_from: "/resources/glossary.html"
 ---
 

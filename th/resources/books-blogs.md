@@ -2,7 +2,7 @@
 layout: page
 title: Express books and blogs
 menu: resources
-lang: en
+lang: th
 redirect_from: "/resources/books-blogs.html"
 ---
 

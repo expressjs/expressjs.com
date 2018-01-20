@@ -2,7 +2,7 @@
 layout: page
 title: Debugging Express
 menu: guide
-lang: en
+lang: th
 redirect_from: "/guide/debugging.html"
 ---
 # Debugging Express

@@ -2,7 +2,7 @@
 layout: page
 title: Express "Hello World" example
 menu: starter
-lang: en
+lang: th
 redirect_from: "/starter/hello-world.html"
 ---
 

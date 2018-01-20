@@ -2,7 +2,7 @@
 layout: page
 title: Performance Best Practices Using Express in Production
 menu: advanced
-lang: en
+lang: th
 redirect_from: "/advanced/best-practice-performance.html"
 ---
 

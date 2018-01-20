@@ -2,7 +2,7 @@
 layout: page
 title: Serving static files in Express
 menu: starter
-lang: en
+lang: th
 redirect_from: "/starter/static-files.html"
 ---
 

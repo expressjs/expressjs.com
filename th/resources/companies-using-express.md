@@ -2,7 +2,7 @@
 layout: page
 title: Companies using Express
 menu: resources
-lang: en
+lang: th
 redirect_from: "/resources/companies-using-express.html"
 ---
 

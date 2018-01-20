@@ -2,7 +2,7 @@
 layout: page
 title: Express basic routing
 menu: starter
-lang: en
+lang: th
 redirect_from: "/starter/basic-routing.html"
 ---
 

@@ -2,7 +2,7 @@
 layout: page
 title: Migrating to Express 4
 menu: guide
-lang: en
+lang: th
 redirect_from: "/guide/migrating-4.html"
 ---
 # Moving to Express 4

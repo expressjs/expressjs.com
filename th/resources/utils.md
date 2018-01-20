@@ -2,7 +2,7 @@
 layout: page
 title: Express utilities
 menu: resources
-lang: en
+lang: th
 redirect_from: "/resources/utilities.html"
 ---
 
