@@ -3,7 +3,6 @@ layout: page
 title: Debugging Express
 menu: guide
 lang: th
-redirect_from: "/guide/debugging.html"
 ---
 # Debugging Express
 

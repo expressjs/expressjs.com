@@ -3,7 +3,6 @@ layout: page
 title: Express utilities
 menu: resources
 lang: th
-redirect_from: "/resources/utilities.html"
 ---
 
 ## Express utility functions

@@ -3,7 +3,6 @@ layout: page
 title: Contributing to Express
 menu: resources
 lang: th
-redirect_from: "/resources/community.html"
 ---
 
 # Contributing to Express

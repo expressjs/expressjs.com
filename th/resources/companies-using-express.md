@@ -3,7 +3,6 @@ layout: page
 title: Companies using Express
 menu: resources
 lang: th
-redirect_from: "/resources/companies-using-express.html"
 ---
 
 # Companies using Express in production

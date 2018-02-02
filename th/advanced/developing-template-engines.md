@@ -3,7 +3,6 @@ layout: page
 title: Developing template engines for Express
 menu: advanced
 lang: th
-redirect_from: "/advanced/developing-template-engines.html"
 ---
 
 # Developing template engines for Express

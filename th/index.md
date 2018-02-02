@@ -3,7 +3,6 @@ layout: home
 title: Express - เว็บแอปพลิเคชันเฟรมเวอร์คสำหรับ Node.js
 menu: home
 lang: th
-redirect_from: "/en/index.html"
 ---
 <section id="home-content">
   {% include header/header-{{ page.lang }}.html %}

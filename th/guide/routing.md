@@ -3,7 +3,6 @@ layout: page
 title: Express routing
 menu: guide
 lang: th
-redirect_from: "/guide/routing.html"
 ---
 
 # Routing

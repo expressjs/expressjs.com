@@ -3,7 +3,6 @@ layout: page
 title: Express behind proxies
 menu: guide
 lang: th
-redirect_from: "/guide/behind-proxies.html"
 ---
 # Express behind proxies
 

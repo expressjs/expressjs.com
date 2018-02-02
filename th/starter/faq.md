@@ -3,7 +3,6 @@ layout: page
 title: Express FAQ
 menu: starter
 lang: th
-redirect_from: "/starter/faq.html"
 ---
 
 # FAQ
