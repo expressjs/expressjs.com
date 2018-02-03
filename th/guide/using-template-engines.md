@@ -3,7 +3,6 @@ layout: page
 title: Using template engines with Express
 menu: guide
 lang: th
-redirect_from: "/guide/using-template-engines.html"
 ---
 # Using template engines with Express
 

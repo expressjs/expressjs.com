@@ -3,7 +3,6 @@ layout: page
 title: Express application generator
 menu: starter
 lang: th
-redirect_from: "/starter/generator.html"
 ---
 
 # Express application generator

@@ -3,7 +3,6 @@ layout: page
 title: Express community
 menu: resources
 lang: th
-redirect_from: "/resources/community.html"
 ---
 
 # Community

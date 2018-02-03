@@ -3,7 +3,6 @@ layout: page
 title: Express books and blogs
 menu: resources
 lang: th
-redirect_from: "/resources/books-blogs.html"
 ---
 
 # Books and blogs

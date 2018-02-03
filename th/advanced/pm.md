@@ -3,7 +3,6 @@ layout: page
 title: Process managers for Express apps
 menu: advanced
 lang: th
-redirect_from: "/advanced/pm.html"
 ---
 
 # Process managers for Express apps

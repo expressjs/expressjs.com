@@ -3,7 +3,6 @@ layout: page
 title: Express security updates
 menu: advanced
 lang: th
-redirect_from: "/advanced/security-updates.html"
 ---
 # Security updates
 

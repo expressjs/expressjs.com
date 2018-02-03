@@ -3,7 +3,6 @@ layout: page
 title: Performance Best Practices Using Express in Production
 menu: advanced
 lang: th
-redirect_from: "/advanced/best-practice-performance.html"
 ---
 
 # Production best practices: performance and reliability

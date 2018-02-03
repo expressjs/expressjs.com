@@ -3,7 +3,6 @@ layout: page
 title: Migrating to Express 5
 menu: guide
 lang: th
-redirect_from: "/guide/migrating-5.html"
 ---
 # Moving to Express 5
 
