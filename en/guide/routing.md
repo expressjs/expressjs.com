@@ -19,7 +19,7 @@ specify middleware as the callback function (See [Using middleware](/{{ page.lan
 These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method.  In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
 
 In fact, the routing methods can have more than one callback function as arguments.
-With multiple callback functions, it is important to call provide `next` as an argument to the callback function and then call `next()` within the body of the function to hand off control
+With multiple callback functions, it is important to provide `next` as an argument to the callback function and then call `next()` within the body of the function to hand off control
 to the next callback.  
 
 The following code is an example of a very basic route.
