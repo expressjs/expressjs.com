@@ -21,7 +21,7 @@ Health checks of your applications are called by the load balancer of your appli
 
 ## Third-party solution: terminus
 
-[terminus](github.com/godaddy/terminus) is an open-source project, which adds health checks and graceful shutdown to your applications - to save you from the boilerplate code you would add otherwise. You only have to provide the cleanup logic for graceful shutdowns, and the health check logic for health checks, all the rest is handled by it.
+[terminus](https://github.com/godaddy/terminus) is an open-source project, which adds health checks and graceful shutdown to your applications - to save you from the boilerplate code you would add otherwise. You only have to provide the cleanup logic for graceful shutdowns, and the health check logic for health checks, all the rest is handled by it.
 
 ```js
 const http = require('http');
