@@ -10,22 +10,31 @@ redirect_from: "/advanced/healthcheck-graceful-shutdown.html"
 
 ## Graceful shutdown
 
-When you deploy a new version of your application, the old must be replaced. The process manager you are using *(no matter if it is Heroku, Kubernetes, supervisor or anything else)* will first send a SIGTERM signal to the application to let it know, that it will be killed. Once it gets this signal, it should stop accepting new requests, finish all the ongoing requests, and clean up the resources it used. Resources may include database connections or file locks.
+When you deploy a new version of your application, you must replace the previous version. The [process manager](pm.html) you're using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it will stop accepting new requests, finish all the ongoing requests, and clean up the resources it used,  including database connections and file locks.
 
 ## Health checks
 
-Health checks of your applications are called by the load balancer of your application to let it know if the application instance is healthy, and can server traffic. If you are using Kubernetes, Kubernetes has two distinct health checks:
+A load balancer uses health checks to determine if an application instance is healthy and can accept requests. For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
 
-* liveness is used by the kubelet to know when to restart a container,
-* readiness is used by the kubelet to know when a container is ready to start accepting traffic - when a pod is not ready, it is removed from the Service load balancers.
+* `liveness`, that determines when to restart a container.
+* `readiness`, that determines when a container is ready to start accepting traffic. When a pod is not ready, it is removed from the service load balancers.
 
 ## Third-party solution: terminus
 
-[terminus](github.com/godaddy/terminus) is an open-source project, which adds health checks and graceful shutdown to your applications - to save you from the boilerplate code you would add otherwise. You only have to provide the cleanup logic for graceful shutdowns, and the health check logic for health checks, all the rest is handled by it.
+[Terminus](https://github.com/godaddy/terminus) is an open-source project that adds health checks and graceful shutdown to your application to eliminate the need to write boilerplate code. You just provide the cleanup logic for graceful shutdowns and the health check logic for health checks, and terminus handles the rest.
+
+Install terminus as follows:
+
+```sh
+npm i @godaddy/terminus --save
+```
+
+Here's a basic template that illustrates using terminus.  For more information, see <https://github.com/godaddy/terminus>.
 
 ```js
 const http = require('http');
 const express = require('express');
+const terminus = require('@godaddy/terminus');
 
 const app = express();
 
