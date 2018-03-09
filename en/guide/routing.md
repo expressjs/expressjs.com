@@ -142,7 +142,7 @@ app.get('/ab(cd)?e', function (req, res) {
 
 Examples of route paths based on regular expressions:
 
-This route path will match anything with an "a" in the route name.
+This route path will match anything with an "a" in it.
 
 ```js
 app.get(/a/, function (req, res) {
