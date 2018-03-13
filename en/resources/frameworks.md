@@ -22,3 +22,4 @@ Several popular Node.js frameworks are built on Express:
 - **[Blueprint](http://github.com/onehilltech/blueprint)**: Highly-configurable MVC framework for composing production-ready services from reusable components
 - **[Locomotive](http://locomotivejs.org/)**: Powerful MVC web framework for Node.js from the maker of Passport.js
 - **[graphql-yoga](https://github.com/graphcool/graphql-yoga)**: Fully-featured, yet simple and lightweight GraphQL server 
+- **[Express Gateway](https://express-gateway.io)**: Fully-featured and extensible API Gateway using Express as foundation
