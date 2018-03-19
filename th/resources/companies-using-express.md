@@ -71,6 +71,9 @@ lang: th
     <a target="_new" class="imagelink" href="https://ilovecoding.org">
       <img alt="iLoveCoding" class="memberlogo" src="/images/companies/ilovecoding-logo.png" />
     </a>
+    <a target="_new" class="imagelink" href="https://www.kuali.co">
+      <img alt="kuali" class="memberlogo" src="/images/companies/kuali-logo.png" />
+    </a>
 </div>
 <p style="margin-top: 30px;">
 To add your logo to this page, please <a href="https://github.com/expressjs/expressjs.com/blob/gh-pages/en/resources/companies-using-express.md">open a pull request</a>.
