@@ -20,9 +20,9 @@ provides high availability, and enables you to manage the application at runtime
 
 The most popular process managers for Express and other Node.js applications are as follows:
 
-- [StrongLoop Process Manager](#strongloop-process-manager)
-- [PM2](#pm2)
 - [Forever](#forever)
+- [PM2](#pm2)
+- [StrongLoop Process Manager](#strongloop-process-manager)
 - [SystemD](#systemd)
 
 
@@ -30,6 +30,129 @@ Using any of these four tools can be very helpful, however StrongLoop Process Ma
 
 Here's a brief look at each of these tools.
 For a detailed comparison, see [http://strong-pm.io/compare/](http://strong-pm.io/compare/).
+
+## Forever
+
+Forever is a simple command-line interface tool for ensuring that a given script runs continuously (forever). Forever's simple interface makes it ideal for running smaller deployments of Node.js apps and scripts.
+
+For more information, see [https://github.com/foreverjs/forever](https://github.com/foreverjs/forever).
+
+### Installation
+
+```sh
+$ [sudo] npm install forever -g
+```
+
+### Basic use
+
+To start a script, use the `forever start` command and specify the path of the script:
+
+```sh
+$ forever start script.js
+```
+
+This command will run the script in daemon mode (in the background).
+
+To run the script so that it is attached to the terminal, omit `start`:
+
+```sh
+$ forever script.js
+```
+
+It is a good idea to log output from the Forever tool and the script by using the logging options `-l`, `-o`, and `-e`, as shown this example:
+
+```sh
+$ forever start -l forever.log -o out.log -e err.log script.js
+```
+
+To view the list of scripts that were started by Forever:
+
+```sh
+$ forever list
+```
+
+To stop a script that was started by Forever use the `forever stop` command and specify the process index (as listed by the `forever list` command).
+
+```sh
+$ forever stop 1
+```
+
+Alternatively, specify the path of the file:
+
+```sh
+$ forever stop script.js
+```
+
+To stop all the scripts that were started by Forever:
+
+```sh
+$ forever stopall
+```
+
+Forever has many more options, and it also provides a programmatic API.
+
+## PM2
+
+PM2 is a production process manager for Node.js applications, that has a built-in load balancer. PM2 allows you to keep applications alive forever and reload them without downtime, and will facilitate common system admin tasks.  PM2 also enables you to manage application logging, monitoring, and clustering.
+
+For more information, see [https://github.com/Unitech/pm2](https://github.com/Unitech/pm2).
+
+### Installation
+
+```sh
+$ [sudo] npm install pm2 -g
+```
+
+### Basic use
+
+When you start an app by using the `pm2` command, you must specify the path of the app. However, when you stop, restart, or delete an app, you can specify just the name or the id of the app.
+
+```sh
+$ pm2 start app.js
+[PM2] restartProcessId process id 0
+┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
+│ App name │ id │ mode │ pid   │ status │ restart │ uptime │ memory      │ watching │
+├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────────────┼──────────┤
+│ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
+└──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
+ Use the `pm2 show <id|name>` command to get more details about an app.
+```
+
+When you start an app by using the `pm2` command, the app is immediately sent to the background. You can control the background app from the command line by using various `pm2` commands.
+
+After an app is started by using the `pm2` command, it is registered in PM2's list of processes with an ID. You can therefore manage apps with the same name from different directories on the system, by using their IDs.
+
+Note that if more than one app with the same name is running, `pm2` commands affect all of them. So use IDs instead of names to manage individual apps.
+
+List all running processes:
+
+```sh
+$ pm2 list
+```
+
+Stop an app:
+
+```sh
+$ pm2 stop 0
+```
+
+Restart an app:
+
+```sh
+$ pm2 restart 0
+```
+
+To view detailed information about an app:
+
+```sh
+$ pm2 show 0
+```
+
+To remove an app from PM2's registry:
+
+```sh
+$ pm2 delete 0
+```
 
 ## StrongLoop Process Manager
 
@@ -114,130 +237,6 @@ To remove an app from management:
 ```sh
 $ slc ctl remove my-app
 ```
-
-## PM2
-
-PM2 is a production process manager for Node.js applications, that has a built-in load balancer. PM2 allows you to keep applications alive forever and reload them without downtime, and will facilitate common system admin tasks.  PM2 also enables you to manage application logging, monitoring, and clustering.
-
-For more information, see [https://github.com/Unitech/pm2](https://github.com/Unitech/pm2).
-
-### Installation
-
-```sh
-$ [sudo] npm install pm2 -g
-```
-
-### Basic use
-
-When you start an app by using the `pm2` command, you must specify the path of the app. However, when you stop, restart, or delete an app, you can specify just the name or the id of the app.
-
-```sh
-$ pm2 start app.js
-[PM2] restartProcessId process id 0
-┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
-│ App name │ id │ mode │ pid   │ status │ restart │ uptime │ memory      │ watching │
-├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────────────┼──────────┤
-│ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
-└──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
- Use the `pm2 show <id|name>` command to get more details about an app.
-```
-
-When you start an app by using the `pm2` command, the app is immediately sent to the background. You can control the background app from the command line by using various `pm2` commands.
-
-After an app is started by using the `pm2` command, it is registered in PM2's list of processes with an ID. You can therefore manage apps with the same name from different directories on the system, by using their IDs.
-
-Note that if more than one app with the same name is running, `pm2` commands affect all of them. So use IDs instead of names to manage individual apps.
-
-List all running processes:
-
-```sh
-$ pm2 list
-```
-
-Stop an app:
-
-```sh
-$ pm2 stop 0
-```
-
-Restart an app:
-
-```sh
-$ pm2 restart 0
-```
-
-To view detailed information about an app:
-
-```sh
-$ pm2 show 0
-```
-
-To remove an app from PM2's registry:
-
-```sh
-$ pm2 delete 0
-```
-
-
-## Forever
-
-Forever is a simple command-line interface tool for ensuring that a given script runs continuously (forever). Forever's simple interface makes it ideal for running smaller deployments of Node.js apps and scripts.
-
-For more information, see [https://github.com/foreverjs/forever](https://github.com/foreverjs/forever).
-
-### Installation
-
-```sh
-$ [sudo] npm install forever -g
-```
-
-### Basic use
-
-To start a script, use the `forever start` command and specify the path of the script:
-
-```sh
-$ forever start script.js
-```
-
-This command will run the script in daemon mode (in the background).
-
-To run the script so that it is attached to the terminal, omit `start`:
-
-```sh
-$ forever script.js
-```
-
-It is a good idea to log output from the Forever tool and the script by using the logging options `-l`, `-o`, and `-e`, as shown this example:
-
-```sh
-$ forever start -l forever.log -o out.log -e err.log script.js
-```
-
-To view the list of scripts that were started by Forever:
-
-```sh
-$ forever list
-```
-
-To stop a script that was started by Forever use the `forever stop` command and specify the process index (as listed by the `forever list` command).
-
-```sh
-$ forever stop 1
-```
-
-Alternatively, specify the path of the file:
-
-```sh
-$ forever stop script.js
-```
-
-To stop all the scripts that were started by Forever:
-
-```sh
-$ forever stopall
-```
-
-Forever has many more options, and it also provides a programmatic API.
 
 ## SystemD
 
