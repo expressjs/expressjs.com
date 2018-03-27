@@ -63,6 +63,9 @@ app.use(function (req, res, next) {
 })
 ```
 
+Add routes dynamically at runtime on an instance of `express.Router()`
+so the routes are not superseded by a middleware function.
+
 ## How do I setup an error handler?
 
 You define error-handling middleware in the same way as other middleware,
