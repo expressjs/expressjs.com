@@ -407,6 +407,34 @@ $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 
 For more information on clustering with StrongLoop PM, see [Clustering](https://docs.strongloop.com/display/SLC/Clustering) in StrongLoop documentation.
 
+#### Using PM2
+
+If you deploy your application with PM2, then you can take advantage of clustering _without_ modifying your application code.  You should ensure your [application is stateless](http://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) first, meaning no local data is stored in the process (such as sessions, websocket connections and the like).
+
+When running an application with PM2, you can enable **cluster mode** to run it in a cluster with a number of instances of your choosing, such as the matching the number of available CPUs on the machine. You can manually change the number of processes in the cluster using the `pm2` command line tool without stopping the app.
+
+To enable cluster mode, start your application like so:
+
+```sh
+# Start 4 worker processes
+$ pm2 start app.js -i 4
+# Auto-detect number of available CPUs and start that many worker processes
+$ pm2 start app.js -i max
+```
+
+This can also be configured within a PM2 process file (`ecosystem.config.js` or similar) by setting `exec_mode` to `cluster` and `instances` to the number of workers to start.
+
+Once running, a given application with the name `app` can be scaled like so:
+
+```sh
+# Add 3 more workers
+$ pm2 scale app +3
+# Scale to a specific number of workers
+$ pm2 scale app 2
+```
+
+For more information on clustering with PM2, see [Cluster Mode](https://pm2.keymetrics.io/docs/usage/cluster-mode/) in the PM2 documentation.
+
 ### Cache request results
 
 Another strategy to improve the performance in production is to cache the result of requests, so that your app does not repeat the operation to serve the same request repeatedly.
