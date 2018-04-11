@@ -9,9 +9,9 @@ lang: fr
 
 ## Présentation
 
-Le terme *"production"* fait référence à la phase du cycle de vie du logiciel au cours de laquelle une application ou une API est généralement disponible pour ses consommateurs ou utilisateurs finaux. En revanche, en phase de *"développement"*, l'écriture et le test de code se poursuite activement et l'application n'est pas ouverte pour un accès externe. Les environnements système correspondants sont respectivement appelés environnement de *production* et environnement de *développement*.
+Le terme *"production"* fait référence à la phase du cycle de vie du logiciel au cours de laquelle une application ou une API est généralement disponible pour ses consommateurs ou utilisateurs finaux. En revanche, en phase de *"développement"*, l'écriture et le test de code se poursuivent activement et l'application n'est pas ouverte pour un accès externe. Les environnements système correspondants sont respectivement appelés environnement de *production* et environnement de *développement*.
 
-Les environnement de développement et de production sont généralement configurés différemment et leurs exigences divergent grandement. Ce qui convient parfaitement en développement peut être inacceptable en production. Par exemple, dans un environnement de développement, vous pouvez souhaiter une consignation prolixe des erreurs en vue du débogage, alors que ce type de comportement présente des risques au niveau de la sécurité en environnement de production. De plus, en environnement de développement, vous n'avez pas à vous soucier de l'extensibilité, de la fiabilité et des performances, tandis que ces éléments sont essentiels en environnement de production.
+Les environnements de développement et de production sont généralement configurés différemment et leurs exigences divergent grandement. Ce qui convient parfaitement en développement peut être inacceptable en production. Par exemple, dans un environnement de développement, vous pouvez souhaiter une consignation prolixe des erreurs en vue du débogage, alors que ce type de comportement présente des risques au niveau de sécurité en environnement de production. De plus, en environnement de développement, vous n'avez pas à vous soucier de l'extensibilité, de la fiabilité et des performances, tandis que ces éléments sont essentiels en environnement de production.
 
 Cet article traite des meilleures pratiques en terme de sécurité pour les applications Express déployées en production.
 
@@ -144,11 +144,11 @@ app.use(session({
 
 ## Assurez-vous que vos dépendances sont sécurisées
 
-npm est un outil puissant et pratique de gestion des dépendances de votre application. Toutefois, les packages que vous utilisez sont susceptibles de contenir des vulnérabilités critiques en matière de sécurité qui risquent d'affecter également votre application.  La sécurité de votre application est aussi forte que le "lien de plus faible" de vos dépendances.
+npm est un outil puissant et pratique de gestion des dépendances de votre application. Toutefois, les packages que vous utilisez sont susceptibles de contenir des vulnérabilités critiques en matière de sécurité qui risquent d'affecter également votre application. La sécurité de votre application est aussi forte que le "lien de la plus faible" de vos dépendances.
 
-Utilisez l'un des outils suivants, ou les deux, pour vous aider à garantir la sécurité des packages tiers que vous utilisez : [nsp](https://www.npmjs.com/package/nsp) et [requireSafe](https://requiresafe.com/).  Ces deux outils effectuent globalement les mêmes opérations.
+Utilisez l'un des outils suivants, ou les deux, pour vous aider à garantir la sécurité des packages tiers que vous utilisez : [nsp](https://www.npmjs.com/package/nsp) et [requireSafe](https://requiresafe.com/). Ces deux outils effectuent globalement les mêmes opérations.
 
-[nsp](https://www.npmjs.com/package/nsp) est un outil de ligne de commande qui vérifie dans la base de données des vulnérabilités [Node Security Project](https://nodesecurity.io/) si votre application utilise des packages qui présentent des vulnérabilités connues. Installez-le comme suit :
+[nsp](https://www.npmjs.com/package/nsp) est un outil en ligne de commande qui vérifie dans la base de données des vulnérabilités [Node Security Project](https://nodesecurity.io/) si votre application utilise des packages qui présentent des vulnérabilités connues. Installez-le comme suit :
 
 <pre>
 <code class="language-sh" translate="no">
@@ -172,7 +172,7 @@ $ nsp audit-package
 </code>
 </pre>
 
-Pour auditer vos modules de noeud, utilisez [requireSafe](https://requiresafe.com/) comme suit :
+Pour auditer vos modules nodes, utilisez [requireSafe](https://requiresafe.com/) comme suit :
 
 <pre>
 <code class="language-sh" translate="no">
@@ -196,6 +196,6 @@ Voici d'autres recommandations issues de l'excellente [liste de contrôle de sé
 
 ## Eviter les autres vulnérabilités connues
 
-Gardez un oeil sur les recommandations [Node Security Project](https://nodesecurity.io/advisories) qui peuvent concerner Express ou d'autres utilisés par votre application.  En règle générale, Node Security Project est une excellente ressource de connaissances et d'outils sur la sécurité des noeuds.
+Gardez un oeil sur les recommandations [Node Security Project](https://nodesecurity.io/advisories) qui peuvent concerner Express ou d'autres modules utilisés par votre application. En règle générale, Node Security Project est une excellente ressource de connaissances et d'outils sur la sécurité de Node.
 
-Finalement, les applications Express - comme toutes les autres applications Web - peuvent être vulnérables à une variété d'attaques Web. Familiarisez vous avec les [vulnérabilités Web](https://www.owasp.org/index.php/Top_10_2013-Top_10) connues et prenez des précautions pour les éviter.
+Pour finir, les applications Express - comme toutes les autres applications Web - peuvent être vulnérables à une variété d'attaques Web. Familiarisez vous avec les [vulnérabilités Web](https://www.owasp.org/index.php/Top_10_2013-Top_10) connues et prenez des précautions pour les éviter.
