@@ -192,7 +192,7 @@ connection.end()
 $ npm install mongodb
 ```
 
-### Example
+### Example (v2.*)
 
 ```js
 var MongoClient = require('mongodb').MongoClient
@@ -207,6 +207,25 @@ MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
   })
 })
 ```
+
+### Example (v3.*)
+
+```js
+var MongoClient = require('mongodb').MongoClient
+
+MongoClient.connect('mongodb://localhost:27017/animals', function (err, client) {
+  if (err) throw err
+
+  var db = client.db('animals)
+  
+  db.collection('mammals').find().toArray(function (err, result) {
+    if (err) throw err
+
+    console.log(result)
+  })
+})
+```
+
 
 If you want an object model driver for MongoDB, look at [Mongoose](https://github.com/LearnBoost/mongoose).
 
