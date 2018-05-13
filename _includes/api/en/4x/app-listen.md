@@ -1,7 +1,7 @@
-<h3 id='app.listen'>app.listen(path, [callback])</h3>
+<h3 id='app.listen_path_callback'>app.listen(path, [callback])</h3>
 
 Starts a UNIX socket and listens for connections on the given path.
-This method is identical to Node's [http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen_path_callback).
+This method is identical to Node's [http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen).
 
 ```js
 var express = require('express');
@@ -9,10 +9,13 @@ var app = express();
 app.listen('/tmp/sock');
 ```
 
-<h3 id='app.listen'>app.listen(port, [hostname], [backlog], [callback])</h3>
+<h3 id='app.listen'>app.listen([port[, host[, backlog]]][, callback])</h3>
 
 Binds and listens for connections on the specified host and port.
-This method is identical to Node's [http.Server.listen()](http://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback).
+This method is identical to Node's [http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen).
+
+If port is omitted or is 0, the operating system will assign an arbitrary unused
+port, which is useful for cases like automated tasks (tests, etc.).
 
 ```js
 var express = require('express');
@@ -44,3 +47,9 @@ app.listen = function() {
   return server.listen.apply(server, arguments);
 };
 ```
+
+<div class="doc-box doc-info" markdown="1">
+NOTE: All the forms of Node's
+[http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen)
+method are in fact actually supported.
+</div>
