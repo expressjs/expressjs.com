@@ -53,7 +53,7 @@ app.post('/', function (req, res) {
 ```
 
 Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
-or a full list, see [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD).
+For a full list, see [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD).
 
 There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods.  For example, the following handler is executed for requests to the route "/secret" whether using GET, POST, PUT, DELETE, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
