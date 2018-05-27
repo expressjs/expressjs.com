@@ -5,32 +5,32 @@ menu: starter
 lang: th
 ---
 
-# Basic routing
+# เส้นทางเบื้องต้น
 
-_Routing_ refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, and so on).
+_เส้นทาง (Routing)_ เป็นการกำหนดการอ้างอิงว่าแอปพลิเคชันจะตอบสนองต่อคำร้องขอของเครื่องลูกข่ายที่มายังปลายทาง (endpoint) โดยเฉพาะได้อย่างไร ซึ่งเป็น URI (หรือ path) และวิธีการร้องขอ HTTP (GET, POST, และ อื่นๆ)
 
-Each route can have one or more handler functions, which are executed when the route is matched.
+แต่ละเส้นทางสามารถมีได้มากกว่าหนึ่งฟังชันส์จัดการ (handler function) ซึ่งสามารถดำเนินการเมื่อเส้นทางถูกจับคู่
 
-Route definition takes the following structure:
+การกำหนดเส้นทางใช้โครงสร้างดังนี้:
 
 ```js
 app.METHOD(PATH, HANDLER)
 ```
 
-Where:
+เมื่อ:
 
-- `app` is an instance of `express`.
-- `METHOD` is an [HTTP request method](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), in lowercase.
-- `PATH` is a path on the server.
-- `HANDLER` is the function executed when the route is matched.
+- `app` เป็นอินสแตนซ์ของ `express`.
+- `METHOD` เป็น [HTTP request method](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), เป็นตัวพิมพ์เล็ก.
+- `PATH` เป็นเส้นทางบนเซิร์ฟเวอร์.
+- `HANDLER` เป็นฟังชันส์ที่กระทำเมื่อเส้นทางถูกจับคู่.
 
 <div class="doc-box doc-notice" markdown="1">
-This tutorial assumes that an instance of `express` named `app` is created and the server is running. If you are not familiar with creating an app and starting it, see the [Hello world example](/{{ page.lang }}/starter/hello-world.html).
+การสอนนี้จะสมมติว่าอินสแตนซ์ของ `express` ชื่อว่า `app` จะถูกสร้างขึ้นเมื่อรันเซิร์ฟเวอร์ ถ้าไม่คุ้นเคยกับการสร้าง app และโครงสร้างของมัน ดูเพิ่มเติมได้ที่ [ตัวอย่าง Hello world](/{{ page.lang }}/starter/hello-world.html)
 </div>
 
-The following examples illustrate defining simple routes.
+ตัวอย่างดังต่อไปนี้จะแสดงให้เห็นการกำหนดเส้นทางอย่างง่าย
 
-Respond with `Hello World!` on the homepage:
+ตอบสนองด้วยข้อความ `Hello World!` บนเพจหลัก:
 
 ```js
 app.get('/', function (req, res) {
@@ -38,7 +38,7 @@ app.get('/', function (req, res) {
 })
 ```
 
-Respond to POST request on the root route (`/`), the application's home page:
+ตอบสนองต่อการร้องขอด้วยวิธี POST บนเส้นทาง root (`/`) บนเพจหลักของแอปพลิเคชัน:
 
 ```js
 app.post('/', function (req, res) {
@@ -46,7 +46,7 @@ app.post('/', function (req, res) {
 })
 ```
 
-Respond to a PUT request to the `/user` route:
+ตอบสนองต่อการร้องขอด้วยวิธี PUT บนเส้นทาง `/user`:
 
 ```js
 app.put('/user', function (req, res) {
@@ -54,12 +54,11 @@ app.put('/user', function (req, res) {
 })
 ```
 
-Respond to a DELETE request to the `/user` route:
+ตอบสนองต่อการร้องขอด้วยวิธี DELETE บนเส้นทาง `/user`:
 
 ```js
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user')
 })
 ```
-
-For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).
+สำหรับข้อมูลเพิ่มเติมเกี่ยวกับการกำหนดเส้นทาง ดูได้ที่ [คำแนะนำการกำหนดเส้นทาง](/{{ page.lang }}/guide/routing.html)

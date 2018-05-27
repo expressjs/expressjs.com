@@ -5,26 +5,26 @@ menu: starter
 lang: th
 ---
 
-# Serving static files in Express
+# ให้บริการไฟล์คงที่ใน Express
 
-To serve static files such as images, CSS files, and JavaScript files, use the `express.static` built-in middleware function in Express.
+เพื่อให้บริการไฟล์แบบคงที่อย่างเช่น ไฟล์รูปภาพ, ไฟล์ CSS, และไฟล์ JavaScript ใช้ฟังก์ชันของมิดเดิลแวร์ในตัว `express.static` ใน Express
 
-The function signature is:
+
+โครงสร้างของฟังก์ชันคือ:
 
 ```js
 express.static(root, [options])
 ```
 
-The `root` argument specifies the root directory from which to serve static assets.
-For more information on the `options` argument, see [express.static](/{{page.lang}}/4x/api.html#express.static).
+อาร์กิวเมนต์ `root` เป็นตัวกำหนดไดเรกเทอรีฐานราก ซึ่งให้บริการสินทรัพย์คงที่ (static assets)
+สำหรับข้อมูลเพิ่มเติมของอาร์กิวเมนต์ `options` ดูได้ที่ [express.static](/{{page.lang}}/4x/api.html#express.static)
 
-For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
+ตัวอย่างเช่น การใช้งานโค้ดข้างล่างนี้เพื่อให้บริการ ไฟล์รูปภาพ, ไฟล์ CSS, และไฟล์ JavaScript ในไดเรกเทอรีชื่อว่า `public`:
 
 ```js
 app.use(express.static('public'))
 ```
-
-Now, you can load the files that are in the `public` directory:
+ตอนนี้คุณสามารถโหลดไฟล์ที่อยู่ในไดเรกเทอรี `public` ได้ดังนี้:
 
 ```plain-text
 http://localhost:3000/images/kitten.jpg
@@ -35,28 +35,28 @@ http://localhost:3000/hello.html
 ```
 
 <div class="doc-box doc-info">
-Express looks up the files relative to the static directory, so the name of the static directory is not part of the URL.
+Express จะมองหาไฟล์ที่เกี่ยวข้องกับไดเรกเทอรีคงที่ ดังนั้นชื่อของไดเรกเทอรีคงที่จะต้องไม่เป็นส่วนหนึ่งของ URL
 </div>
 
-To use multiple static assets directories, call the `express.static` middleware function multiple times:
+เพื่อใช้สินทรัพย์คงที่หลายไดเรกเทอรี สามารถเรียกใช้มิดเดิลแวร์ฟังก์ชัน `express.static` ได้หลายครั้ง:
 
 ```js
 app.use(express.static('public'))
 app.use(express.static('files'))
 ```
 
-Express looks up the files in the order in which you set the static directories with the `express.static` middleware function.
+Express จะมองหาไฟล์ตามลำดับตามที่คุณตั้งค่าไดเรกเทอรี่คงที่ด้วยมิดเดิลแวร์ฟังก์ชัน `express.static`
 
-<div class="doc-box doc-info" markdown="1">NOTE: For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+<div class="doc-box doc-info" markdown="1">**หมายเหตุ:** สำหรับผลที่ดีที่สุด, [ใช้พร็อกซี่ย้อนกลับ](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) แคซเพื่อเพิ่มประสิทธิภาพของการใช้บริการสินทรัพย์ไฟล์คงที่
 </div>
 
-To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/{{ page.lang }}/4x/api.html#app.use) for the static directory, as shown below:
+เพื่อสร้างคำนำหน้าเส้นทางเสมือน (ที่ซึ่งเส้นทางไม่สามารถมายังที่อยู่ของไฟล์จริงในระบบได้) สำหรับไฟล์ที่ให้บริการโดยฟังก์ชัน `express.static` [ระบุเส้นทาง](/{{ page.lang }}/4x/api.html#app.use) สำหรับไดเรทเทอรีคงที่ ดังนี้:
 
 ```js
 app.use('/static', express.static('public'))
 ```
 
-Now, you can load the files that are in the `public` directory from the `/static` path prefix.
+ตอนนี้คุณสามารถโหลดไฟล์ที่อยู่ในไดเรกเทอรี `public` จากคำนำหน้าเส้นทาง `/static`
 
 ```plain-text
 http://localhost:3000/static/images/kitten.jpg
@@ -66,10 +66,10 @@ http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
 ```
 
-However, the path that you provide to the `express.static` function is relative to the directory from where you launch your `node` process. If you run the express app from another directory, it's safer to use the absolute path of the directory that you want to serve:
+อย่างไรก็ตาม เส้นทางที่คุณให้ไว้ในฟังก์ชัน `express.static` มีความสัมพันธ์กับไดเรกเทอรีจากที่ซึ่งคุณการบวนการรัน `node` ของคุณ ถ้าคุณรัน app จากไดเรกเทอรีอื่น มันจะปลอดภัยกว่าถ้าใช้เส้นทางจริงของไดเรกเทอรีที่คุณต้องการบริการไฟล์คงที่:
 
 ```js
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
 
-For more details about the `serve-static` function and its options, see  [serve-static](/{{page.lang}}/resources/middleware/serve-static.html).
+สำหรับข้อมูลเพิ่มเติมเกี่ยวกับฟังก์ชัน `serve-static` และตัวเลือก ดูได้ที่ [serve-static](/{{page.lang}}/resources/middleware/serve-static.html)
