@@ -31,7 +31,15 @@ entry point: (index.js)
 
 Enter `app.js`, or whatever you want the name of the main file to be. If you want it to be `index.js`, hit RETURN to accept the suggested default file name.
 
-Now install Express in the `myapp` directory and save it in the dependencies list. For example:
+Now install Express in the `myapp` directory and save it in the dependencies list.
+
+If you're using npm version that is >= 5, you can simply do the following:
+
+```sh
+$ npm install express
+```
+
+If have to use npm version that is < 5, you should use `--save` flag like this:
 
 ```sh
 $ npm install express --save
