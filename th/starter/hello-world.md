@@ -5,10 +5,10 @@ menu: starter
 lang: th
 ---
 
-# Hello world example
+# ตัวอย่าง Hello world
 
 <div class="doc-box doc-info" markdown="1">
-Embedded below is essentially the simplest Express app you can create. It is a single file app &mdash; _not_ what you'd get if you use the [Express generator](/{{ page.lang }}/starter/generator.html), which creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and sub-directories for various purposes.
+โค้ดด้านล่างนี้เป็นแอปพลิเคชัน Express จำเป็นแบบง่ายที่สุดที่คุณสามารถสร้างขึ้นได้ โดยเป็นไฟล์ app ไฟล์เดียว &mdash; _ไม่ใช้_ โค้ดที่ได้จาก [Express generator](/{{ page.lang }}/starter/generator.html) ที่สร้างโครงสร้างเริ่มต้นสำหรับแอปพลิเคชันตัวเต็มที่มีไฟล์ JavaScript มากมาย และไดเรทอรีย่อยสำหรับวัตถุประสงค์ต่างๆ
 </div>
 
 <script src="https://embed.runkit.com" data-element-id="hello-example" data-mode="endpoint" async defer></script>
@@ -21,31 +21,29 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 </code></pre></div>
 
-This app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
-to the root URL (`/`) or _route_. For every other path, it will respond with a **404 Not Found**.
+app นี้จะเริ่มต้นเซิร์ฟเวอร์และเฝ้าตรวจสอบ (listen) การเชื่อมต่อที่พอร์ต 3000 โดยที่ app จะตอบสนองด้วงคำว่า "Hello World!" สำหรับการร้องขอ
+มายัง root URL (`/`) หรือ _route_ แต่สำหรับ path อื่นๆ app จะตอบสนองด้วย **404 Not Found**
 
-The example above is actually a working server: Go ahead and click on the URL shown. You'll get a response, with real-time logs on the page, and any changes you make will be reflected in real time. This is powered by [RunKit](https://runkit.com), which provides an interactive JavaScript playground connected to a complete Node environment that runs in your web browser.
-Below are instructions for running the same app on your local machine.
+ตัวอย่างด้านบนเป็นเซิร์ฟเวอร์ที่ทำงานได้จริง โดยกดไปที่ลิงค์ URL ที่แสดงอยู่จะเปิดหน้าเว็บใหม่และตอบสนองคำร้องขอของคุณอย่างทันที และสิ่งที่คุณแก้ไขจะเปลี่ยนแปลงที่หน้าเว็บ เพียงกดไปที่ลิงค์อีกครั้ง ได้รับการสนับสนุนจาก [RunKit](https://runkit.com) ซึ่งให้การเชื่อมต่อ interactive JavaScript playground สำหรับสิ่งแวดล้อมที่สมบูรณ์ของ Node บนเว็บเบราว์เซอร์ คำสั่งด้านล้างสำหรับรัน app เดียวกันบนเครื่องของคุณ
 
 <div class="doc-box doc-info" markdown="1">
-RunKit is a third-party service not affiliated with the Express project.
+RunKit เป็นบริการของบริษัทอื่นที่ไม่ใช้หน่วยงานของโครงการ Express
 </div>
 
-### Running Locally
+### รันบนเครื่องของคุณ
 
-First create a directory named `myapp`, change to it and run `npm init`. Then install `express` as a dependency, as per the [installation guide](/{{ page.lang }}/starter/installing.html).
+เริ่มต้นด้วยการสร้างไดเรกทอรีชื่อว่า `myapp` เปลี่ยนไปที่ไดเรกทอรีที่สร้างขึ้นแล้วใสคำสั่ง `npm init` แล้วติดตั้ง `express` และ dependency ต่างๆ ดัง[ขั้นตอนการติดตั้ง](/{{ page.lang }}/starter/installing.html)
 
-In the `myapp` directory, create a file named `app.js` and copy in the code from the example above.
+ในไดเรกทอรี `myapp` สร้างไฟล์ `app.js` ขึ้นมาและคัดลอกโค้ดจากตัวอย่างข้างบนมากใส่ในไฟล์
 
 <div class="doc-box doc-notice" markdown="1">
-The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
-`req.pipe()`, `req.on('data', callback)`, and anything else you would do without Express involved.
+`req` (คำร้องขอ) และ `res` (คำตอบสนอง) เป็นอ็อบเจกต์เดียวกันที่จัดให้โดย Node ซึ่งคุณสมารถเรียกใช้ `req.pip()` `req.on('data', callback)` และอื่นๆ โดยไม่ต้องเรียกใช้ Express
 </div>
 
-Run the app with the following command:
+รัน app ด้วยคำสั่งนี้:
 
 ```sh
 $ node app.js
 ```
 
-Then, load `http://localhost:3000/` in a browser to see the output.
+แล้วโหลด `http://localhost:3000/` ในเว็บเบราว์เซอร์เพื่อดูผลลัพธ์

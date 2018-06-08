@@ -5,17 +5,16 @@ menu: starter
 lang: th
 ---
 
-# Express application generator
+# เครื่องมือสร้าง Express
 
-Use the application generator tool, `express-generator`, to quickly create an application skeleton.
+ใช้เครื่องมือสร้าง โดยพินพ์คำสั่ง `express-generator` เพื่อสร้างโครงสร้างหลักของแอปพลิเคชันอย่างรวดเร็ว
 
-The `express-generator` package installs the `express` command-line tool. Use the following command to do so:
+`express-generator` ติดตั้งแพ็กเกจไปยังชุดคำสั่ง `express`  ใช้คำสั่งด้านล่างนี้เพื่อติดตั้ง:
 
 ```sh
 $ npm install express-generator -g
 ```
-
-Display the command options with the `-h` option:
+แสดงตัวเลือกคำสั่งทั้งหมดด้วย `h`:
 
 ```sh
 $ express -h
@@ -35,8 +34,7 @@ $ express -h
         --git           add .gitignore
     -f, --force         force on non-empty directory
 ```
-
-For example, the following creates an Express app named _myapp_. The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
+สำหรับตัวอย่าง คำสั่งข้างล่างนี้เพื่อสร้าง Express app ที่ชื่อว่า _myapp_ โดยจะสร้างโฟล์เดอร์ชื่อ _myapp_ ในไดเรกเทอรีที่ใช้งานอยู่ และตั้ง view engine เป็น <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
 ```sh
 $ express --view=pug myapp
@@ -59,29 +57,28 @@ $ express --view=pug myapp
    create : myapp/bin
    create : myapp/bin/www
 ```
-
-Then install dependencies:
+แล้วติดตั้งโมดูลเกี่ยวโยง (dependencies):
 
 ```sh
 $ cd myapp
 $ npm install
 ```
 
-On MacOS or Linux, run the app with this command:
+บน MacOS หรือ Linux รัน app ด้วยคำสั่งนี้:
 
 ```sh
 $ DEBUG=myapp:* npm start
 ```
 
-On Windows, use this command:
+บน Windows ใช้คำสั่งนี้:
 
 ```sh
 > set DEBUG=myapp:* & npm start
 ```
 
-Then load `http://localhost:3000/` in your browser to access the app.
+แล้วโหลด `http://localhost:3000/` ในเว็บเบราว์เซอร์ของคุณเพื่อเข้าถึง app
 
-The generated app has the following directory structure:
+หลังจากสร้าง app แล้วจะได้โครงสร้างไดเรกทอรีดังนี้:
 
 ```sh
 .
@@ -106,5 +103,5 @@ The generated app has the following directory structure:
 ```
 
 <div class="doc-box doc-info" markdown="1">
-The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
+โครงสร้าง app ที่สร้างโดยเครื่องมือสร้างเป็นเพียงวิธีหนึ่งของอีกหลายวิธี ของการสร้างโครงสร้าง app ของ Express สามารถใช้โครงสร้างนี้ได้ หรือว่าจะแก้ไขเพื่อให้เหมาะสมที่สุดสำหรับความต้องการของคุณ
 </div>
