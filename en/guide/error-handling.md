@@ -5,7 +5,167 @@ menu: guide
 lang: en
 redirect_from: "/guide/error-handling.html"
 ---
-# Error handling
+# Error Handling
+
+**Error Handling** refers to how Express catches and processes errors that
+occur both synchronously and asynchronously. Express comes with a default error
+handler so you need not write your own to get started.
+
+## Catching Errors
+
+It's important to ensure that Express catches all errors that occur while
+running route handlers and middleware.
+
+Errors that occur in synchronous code inside route handlers and middleware
+require no extra work. If an error is thrown by that synchronous code then it
+will be caught by Express and processed accordingly. For example:
+
+```js
+app.get("/", function (req, res) {
+  throw new Error("BROKEN"); // Express will catch this on its own.
+});
+```
+
+Errors returned from asynchronous functions that are invoked by route handlers
+and middleware must be passed to the `next()` function where they will be
+caught by Express and processed accordingly. For example:
+
+```js
+app.get("/", function (req, res, next) {
+  fs.readFile("/file-does-not-exist", function (err, data) {
+    if (err) {
+      next(err); // Pass errors to Express.
+    }
+    else {
+      res.send(data);
+    }
+  });
+});
+```
+
+Where the callback in a sequence provides no data, only errors, this can be
+simplified as follows:
+
+```js
+app.get("/", [
+  function (req, res, next) {
+    fs.writeFile("/inaccessible-path", "data", next);
+  },
+  function (req, res) {
+    res.send("OK");
+  }
+]);
+```
+
+In the above example `next` is provided as the callback for `fs.writeFile`
+which is called with or without errors. If there is no error the second
+handler will be executed, otherwise the error will be caught by Express and
+processed accordingly.
+
+Errors that occur in asynchronous code that is invoked by route handlers or
+middleware must be caught and passed to Express so they are processed
+accordingly. For example:
+
+```js
+app.get("/", function (req, res, next) {
+  setTimeout(function () {
+    try {
+      throw new Error("BROKEN");
+    }
+    catch (err) {
+      next(err);
+    }
+  }, 100);
+});
+```
+
+In the above example we use a `try...catch` block to catch errors in the
+asynchronous code and pass them to Express. If we omitted the `try...catch`
+block Express would not catch the error as it is not part of the synchronous
+code of the handler.
+
+Promises can be used to avoid the overhead of the `try..catch` block, and
+more generally when using Promise-returning functions. For example:
+
+```js
+app.get("/", function (req, res, next) {
+  Promise.resolve().then(function () {
+    throw new new Error("BROKEN");
+  }).catch(next); // Errors will be passed to Express.
+});
+```
+
+As Promises automatically catch both synchronous errors and rejected promises
+we can simply provide `next` as the final catch handler and errors will be
+caught by Express, because the catch handler is given the error as the first
+argument.
+
+We could also use a chain of handlers to allow us to rely on sychronous error
+catching, by reducing the asynchronous code to something trivial. For example:
+
+
+```js
+app.get("/", [
+  function (req, res, next) {
+    fs.readFile("/maybe-valid-file", "utf8", function (err, data) {
+        res.locals.data = data;
+        next(err);
+    });
+  },
+  function (req, res) {
+    res.locals.data = res.locals.data.split(",")[1];
+    res.send(res.locals.data);
+  }
+]);
+```
+
+In the above example we have a couple of trivial statements from the `readFile`
+call. If `readFile` errors the error will be passed to Express, otherwise we
+quickly return to the world of synchronous error handling in the next handler
+in the chain. We then try to process the data. If this fails then the
+synchronous error handler will catch it. If we had done this processing inside
+the `readFile` callback then our application may exit and the Express error
+handlers would not run.
+
+Whichever method you use, if you want Express error handlers to kick in and the
+application to survive, you must ensure that Express receives the error.
+
+## The Default Error Handler
+
+Express comes with a built-in error handler, which takes care of any errors that might be encountered in the app. This default error-handling middleware function is added at the end of the middleware function stack.
+
+If you pass an error to `next()` and you do not handle it in a custom error
+handler, it will be handled by the built-in error handler; the error will be
+written to the client with the stack trace. The stack trace is not included
+in the production environment.
+
+<div class="doc-box doc-info" markdown="1">
+Set the environment variable `NODE_ENV` to `production`, to run the app in production mode.
+</div>
+
+If you call `next()` with an error after you have started writing the
+response (for example, if you encounter an error while streaming the
+response to the client) the Express default error handler closes the
+connection and fails the request.
+
+So when you add a custom error handler, you will want to delegate to
+the default error handling mechanisms in Express, when the headers
+have already been sent to the client:
+
+```js
+function errorHandler (err, req, res, next) {
+  if (res.headersSent) {
+    return next(err)
+  }
+  res.status(500)
+  res.render('error', { error: err })
+}
+```
+
+Note that the default error handler can get triggered if you call `next()` with an error
+in your code more than once, even if custom error handling middleware is in place.
+
+## Writing Error Handlers
 
 Define error-handling middleware functions in the same way as other middleware functions,
 except error-handling functions have four arguments instead of three:
@@ -115,37 +275,3 @@ In this example, the `getPaidContent` handler will be skipped but any remaining 
 <div class="doc-box doc-info" markdown="1">
 Calls to `next()` and `next(err)` indicate that the current handler is complete and in what state.  `next(err)` will skip all remaining handlers in the chain except for those that are set up to handle errors as described above.
 </div>
-
-## The Default Error Handler
-
-Express comes with a built-in error handler, which takes care of any errors that might be encountered in the app. This default error-handling middleware function is added at the end of the middleware function stack.
-
-If you pass an error to `next()` and you do not handle it in
-an error handler, it will be handled by the built-in error handler; the error will be written to the client with the
-stack trace. The stack trace is not included in the production environment.
-
-<div class="doc-box doc-info" markdown="1">
-Set the environment variable `NODE_ENV` to `production`, to run the app in production mode.
-</div>
-
-If you call `next()` with an error after you have started writing the
-response (for example, if you encounter an error while streaming the
-response to the client) the Express default error handler closes the
-connection and fails the request.
-
-So when you add a custom error handler, you will want to delegate to
-the default error handling mechanisms in Express, when the headers
-have already been sent to the client:
-
-```js
-function errorHandler (err, req, res, next) {
-  if (res.headersSent) {
-    return next(err)
-  }
-  res.status(500)
-  res.render('error', { error: err })
-}
-```
-
-Note that the default error handler can get triggered if you call `next()` with an error
-in your code more than once, even if custom error handling middleware is in place.
