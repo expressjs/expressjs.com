@@ -35,6 +35,7 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 - **[JADE - die Template Engine für node.js](http://www.amazon.de/JADE-Die-Template-Engine-node-js/dp/1517282098/ref=sr_1_1?ie=UTF8&qid=1442001592&sr=8-1&keywords=1517282098)**,
 texxtoor, September 2015. In deutscher Sprache / in German language
 - **[Node Web Development, 2nd edition](https://www.packtpub.com/web-development/node-web-development-second-edition)**, Packt Publishing, August 2013
+- **[MERN Quick Start Guide](https://www.amazon.com/dp/1787281086)**, Packt Publishing, May 2018
 
 ### Add your book here!
 
