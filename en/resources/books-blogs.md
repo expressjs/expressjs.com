@@ -52,6 +52,7 @@ self-published, February 2018.
 - [Techforgeek Blog: Express category](http://techforgeek.com/expressjs/)
 - [RoseHosting.com Blog: Express tag](https://www.rosehosting.com/blog/tag/express/)
 - [ThisHosting.Rocks: Express tag](https://thishosting.rocks/tag/express-js/)
+
 ### Add your blog here!
 
 [Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.
