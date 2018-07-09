@@ -128,7 +128,7 @@ com o seguinte comando:
 
 <pre>
 <code class="language-sh" translate="no">
-$ DEBUG=sample-app node ./bin/www
+$ DEBUG=sample-app:* node ./bin/www
 </code>
 </pre>
 
