@@ -60,6 +60,10 @@ self-published, February 2018.
 
 [Edit the Markdown file](https://github.com/expressjs/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/learning.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.
 
+## The DEV community
+
+[DEV's express tag](https://dev.to/t/express) is a place to share Express projects, articles and tutorials as well as start discussions and ask for feedback on Express-related topics. Developers of all skill-levels are welcome to take part.
+
 ## Video tutorials
 - [Learning ExpressJS: Express category](https://getbuzz.io/c/learning-expressjs)
 - [Learn Express.js in 14 days](https://iLoveCoding.org/courses/expressjs) - Practice Projects included
