@@ -107,13 +107,13 @@ app.get('/user/:id', function (req, res, next) {
   // otherwise pass the control to the next middleware function in this stack
   else next()
 }, function (req, res, next) {
-  // render a regular page
-  res.render('regular')
+  // send a regular response
+  res.send('regular')
 })
 
-// handler for the /user/:id path, which renders a special page
+// handler for the /user/:id path, which sends a special response
 app.get('/user/:id', function (req, res, next) {
-  res.render('special')
+  res.send('special')
 })
 ```
 

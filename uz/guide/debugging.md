@@ -110,7 +110,7 @@ $ express sample-app
 You can enable the debug statements with the following command
 
 <pre><code class="language-sh" translate="no">
-$ DEBUG=sample-app node ./bin/www
+$ DEBUG=sample-app:* node ./bin/www
 </code></pre>
 
 You can specify more than one debug namespace by assignning a comma separated list of names, as shown below.

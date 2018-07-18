@@ -90,7 +90,7 @@ more generally when using Promise-returning functions. For example:
 ```js
 app.get("/", function (req, res, next) {
   Promise.resolve().then(function () {
-    throw new new Error("BROKEN");
+    throw new Error("BROKEN");
   }).catch(next); // Errors will be passed to Express.
 });
 ```

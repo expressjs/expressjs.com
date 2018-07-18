@@ -37,6 +37,7 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 - **[Node Web Development, 2nd edition](https://www.packtpub.com/web-development/node-web-development-second-edition)**, Packt Publishing, August 2013
 - **[Builder Book: Build a Full Stack JavaScript Web App from Scratch](https://builderbook.org/book)**,
 self-published, February 2018.
+- **[MERN Quick Start Guide](https://www.amazon.com/dp/1787281086)**, Packt Publishing, May 2018
 
 ### Add your book here!
 

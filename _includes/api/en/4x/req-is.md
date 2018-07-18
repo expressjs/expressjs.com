@@ -1,7 +1,7 @@
 <h3 id='req.is'>req.is(type)</h3>
 
 Returns the matching content type if the incoming request's "Content-Type" HTTP header field
-matches the MIME type specified by the `type` parameter.
+matches the MIME type specified by the `type` parameter. If the request has no body, returns `null`.
 Returns `false` otherwise.
 
 ```js
