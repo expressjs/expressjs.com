@@ -259,7 +259,7 @@ Les méthodes de l'objet de réponse (`res`) décrites dans le tableau suivant p
 | [res.download()](/{{ page.lang }}/4x/api.html#res.download)   | Vous invite à télécharger un fichier.
 | [res.end()](/{{ page.lang }}/4x/api.html#res.end)        | Met fin au processus de réponse.
 | [res.json()](/{{ page.lang }}/4x/api.html#res.json)       | Envoie une réponse JSON.
-| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp))      | Envoie une réponse JSON avec une prise en charge JSONP.
+| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)      | Envoie une réponse JSON avec une prise en charge JSONP.
 | [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | Redirige une demande.
 | [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | Génère un modèle de vue.
 | [res.send()](/{{ page.lang }}/4x/api.html#res.send)        | Envoie une réponse de divers types.
@@ -329,4 +329,4 @@ app.use('/birds', birds);
 </code>
 </pre>
 
-L'application pourra dorénavant gérer des demandes dans `/birds` et `/birds/about`, et appeler la fonction middleware`timeLog` spécifique à la route.
+L'application pourra dorénavant gérer des demandes dans `/birds` et `/birds/about`, et appeler la fonction middleware `timeLog` spécifique à la route.
