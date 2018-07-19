@@ -13,4 +13,4 @@ redirect_from: "/resources/open-source-using-express.html"
 
 ### Add your project here!
 
-[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/en/resources/open-source-using-express.md) and add a link to your project, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+[Edit the Markdown file](https://github.com/expressjs/expressjs.com/blob/gh-pages/en/resources/open-source-using-express.md) and add a link to your project, then submit a pull request (GitHub login required).  Follow the format of the above listings.
