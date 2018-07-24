@@ -35,6 +35,9 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 - **[JADE - die Template Engine für node.js](http://www.amazon.de/JADE-Die-Template-Engine-node-js/dp/1517282098/ref=sr_1_1?ie=UTF8&qid=1442001592&sr=8-1&keywords=1517282098)**,
 texxtoor, September 2015. In deutscher Sprache / in German language
 - **[Node Web Development, 2nd edition](https://www.packtpub.com/web-development/node-web-development-second-edition)**, Packt Publishing, August 2013
+- **[Builder Book: Build a Full Stack JavaScript Web App from Scratch](https://builderbook.org/book)**,
+self-published, February 2018.
+- **[MERN Quick Start Guide](https://www.amazon.com/dp/1787281086)**, Packt Publishing, May 2018
 
 ### Add your book here!
 
@@ -50,6 +53,7 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 - [Techforgeek Blog: Express category](http://techforgeek.com/expressjs/)
 - [RoseHosting.com Blog: Express tag](https://www.rosehosting.com/blog/tag/express/)
 - [ThisHosting.Rocks: Express tag](https://thishosting.rocks/tag/express-js/)
+
 ### Add your blog here!
 
 [Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.

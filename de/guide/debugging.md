@@ -110,7 +110,7 @@ Beispiel: Wenn Sie die Anwendung mit `$ express sample-app` generiert haben, kö
 
 <pre>
 <code class="language-sh" translate="no">
-$ DEBUG=sample-app node ./bin/www
+$ DEBUG=sample-app:* node ./bin/www
 </code>
 </pre>
 

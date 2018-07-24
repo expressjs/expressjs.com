@@ -114,7 +114,7 @@ Pomocou nasledujúceho príkazu, dokážete povoliť debug výpisy pre aplikáci
 
 <pre>
 <code class="language-sh" translate="no">
-$ DEBUG=sample-app node ./bin/www
+$ DEBUG=sample-app:* node ./bin/www
 </code>
 </pre>
 

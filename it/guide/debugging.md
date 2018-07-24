@@ -113,7 +113,7 @@ Ad esempio, se l'applicazione è stata generata con `$ express sample-app`, è p
 
 <pre>
 <code class="language-sh" translate="no">
-$ DEBUG=sample-app node ./bin/www
+$ DEBUG=sample-app:* node ./bin/www
 </code>
 </pre>
 
