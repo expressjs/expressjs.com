@@ -64,7 +64,7 @@ You must catch errors that occur in asynchronous code invoked by route handlers 
 middleware and pass them to Express for processing. For example:
 
 ```js
-app.get("/", function (req, res, next) {k
+app.get("/", function (req, res, next) {
 
   setTimeout(function () {
     try {
