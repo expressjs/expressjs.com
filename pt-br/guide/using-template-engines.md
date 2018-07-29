@@ -55,9 +55,9 @@ chamado `index.pug` no diretório
 <code class="language-javascript" translate="no">
 html
   head
-    title!= title
+    title= title
   body
-    h1!= message
+    h1= message
 </code>
 </pre>
 

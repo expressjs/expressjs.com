@@ -35,9 +35,9 @@ Create a Pug template files named "index.pug" in the views directory, with the f
 <pre><code class="language-javascript" translate="no">
 html
   head
-    title!= title
+    title= title
   body
-    h1!= message
+    h1= message
 </code></pre>
 
 Then create a route to render the "index.pug" file. If the `view engine` property is not set, you will have to specify the extension of the view file, else you can omit it.

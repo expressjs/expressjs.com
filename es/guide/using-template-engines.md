@@ -40,9 +40,9 @@ Cree un archivo de plantilla Pug denominado `index.pug` en el directorio `views`
 <code class="language-javascript" translate="no">
 html
   head
-    title!= title
+    title= title
   body
-    h1!= message
+    h1= message
 </code>
 </pre>
 
