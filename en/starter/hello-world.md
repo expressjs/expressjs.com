@@ -19,7 +19,7 @@ const app = express()
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(port, host, () => console.log('Example app listening on port 3000!'))
 </code></pre></div>
 
 This app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
