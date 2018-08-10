@@ -34,6 +34,7 @@ $ express -h
         --hbs           add handlebars engine support
         --pug           add pug engine support
     -H, --hogan         add hogan.js engine support
+        --no-view       generate without view engine
     -v, --view &lt;engine&gt; add view &lt;engine&gt; support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
