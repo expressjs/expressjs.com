@@ -139,7 +139,7 @@ strong, th {
 .content {
   margin: 90px 3% 7%;
   max-width: 1090px;
-  padding-right: 140px;
+  padding-left: 225px;
 }
 
 span.block-section {
@@ -746,9 +746,9 @@ footer {
   margin: 0;
   padding: 0 10px 0 0;
   top: 90px;
-  right: 30px;
+  left: 30px;
   height: 500px;
-  text-align: right;
+  text-align: left;
   font-size: 13px;
   overflow-y: auto;
 }
@@ -769,6 +769,7 @@ footer {
 
 #menu ul.active {
   height: auto;
+  padding: 0;
 }
 
 #menu > li > a {
@@ -869,7 +870,7 @@ h2 a {
   }
 
   .content {
-    padding-right: 0;
+    padding-left: 0;
   }
 
   #home-content {
