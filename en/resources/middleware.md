@@ -52,6 +52,6 @@ These are some additional popular middleware modules.
 | [static-expiry](https://github.com/paulwalker/connect-static-expiry) | Fingerprint URLs or caching headers for static assets.|
 | [view-helpers](https://github.com/madhums/node-view-helpers) | Common helper methods for views.|
 | [sriracha-admin](https://github.com/hdngr/siracha) | Dynamically generate an admin site for Mongoose. |
-| [express-slick-css](https://github.com/ameerthehacker/express-slick-css) | Remove unwanted css rules before sending response |
+| [express-slick-css](https://github.com/ameerthehacker/express-slick-css) | Remove unused css rules before sending response |
 
 For more middleware modules, see [http-framework](https://github.com/Raynos/http-framework#modules).
