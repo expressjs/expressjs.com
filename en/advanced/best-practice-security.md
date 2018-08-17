@@ -193,7 +193,7 @@ Finally, Express apps - like any other web apps - can be vulnerable to a variety
 
 Here are some further recommendations from the excellent [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/).  Refer to that blog post for all the details on these recommendations:
 
-* Implement rate-limiting to prevent brute-force attacks against authentication.  One way to do this is to use [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) to enforce a rate-limiting policy.  Alternatively, you can use middleware such as [express-limiter](https://www.npmjs.com/package/express-limiter), but doing so will require you to modify your code somewhat.
+* Implement rate-limiting to prevent brute-force attacks against authentication.  One way to do this is to use [StrongLoop Microgateway](https://github.com/strongloop/microgateway) to enforce a rate-limiting policy.  Alternatively, you can use package such as [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) and configure limits.
 * Use [csurf](https://www.npmjs.com/package/csurf) middleware to protect against cross-site request forgery (CSRF).
 * Always filter and sanitize user input to protect against cross-site scripting (XSS) and command injection attacks.
 * Defend against SQL injection attacks by using parameterized queries or prepared statements.
