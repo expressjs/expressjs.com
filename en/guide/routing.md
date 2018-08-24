@@ -25,8 +25,8 @@ to the next callback.
 The following code is an example of a very basic route.
 
 ```js
-const express = require('express')
-const app = express()
+var express = require('express')
+var app = express()
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function (req, res) {
