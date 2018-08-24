@@ -10,6 +10,10 @@ lang: ja
 *ルーティング* とは、アプリケーション・エンドポイント (URI) と、クライアント要求に対するそれらの応答の定義のことです。
 ルーティングの概要については、[基本的なルーティング](/{{ page.lang }}/starter/basic-routing.html)を参照してください。
 
+ルーティングはHTTPメソッドに対応するExpressの`app`オブジェクトのメソッドを使用して定義します。たとえば、GETリクエストを処理する`app.get()`やPOSTリクエストを処理する`app.post`があります。
+完全なリストについては、[app.METHOD](/{{ page.lang }}/4x/ api.html#app.METHODを)を参照してください。
+また、すべてのHTTPメソッドを制御するために[app.all()](/{{ page.lang }}/4x/api.html#app.all)を、ミドルウェアを指定するために[app.use()](/{{ page.lang }}/4x/api.html#app.use)をコールバック関数として使用することができます(詳細については、[Using middleware](/{{ page.lang }}/guide/using-middleware.html)を参照してください)。
+
 次のコードは、極めて基本的なルートの例です。
 
 <pre>
