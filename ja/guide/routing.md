@@ -49,15 +49,10 @@ app.post('/', function (req, res) {
 });
 ```
 
-Express は、HTTP メソッドに対応する以下のルーティング・メソッドをサポートします。`get`、`post`、`put`、`head`、`delete`、`options`、`trace`、`copy`、`lock`、`mkcol`、`move`、`purge`、`propfind`、`proppatch`、`unlock`、`report`、`mkactivity`、`checkout`、`merge`、`m-search`、`notify`、`subscribe`、`unsubscribe`、`patch`、`search`、および `connect`。
+Expressは、すべてのHTTPリクエストメソッドに対応するメソッド（`get`、`post`など）をサポートしています。
+完全なリストについては、[app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD)を参照して下さい。
 
-<div class="doc-box doc-info" markdown="1">
-無効な JavaScript 変数名に変換されるメソッドをルーティングするには、大括弧の表記を使用します。例えば、`app['m-search']('/', function ...` を使用します。
-</div>
-
-どの HTTP メソッドからも派生されない `app.all()` という特殊なルーティング・メソッドがあります。このメソッドは、すべての要求メソッドのパスにミドルウェア関数をロードするために使用されます。
-
-次の例では、[http モジュール](https://nodejs.org/api/http.html#http_http_methods)でサポートされている GET、POST、PUT、DELETE、またはその他の HTTP 要求メソッドのいずれを使用している場合でも、ハンドラーは「/secret」への要求に対して実行されます。
+_すべての_ HTTPリクエストメソッドのパスにミドルウェア関数をロードするために使用される特別なルーティングメソッド、`app.all()`があります。 たとえば、GET、POST、PUT、DELETE、または[httpモジュール](https://nodejs.org/api/http.html#http_http_methods)でサポートされているその他のHTTPリクエストメソッドを使用するかどうかにかかわらず、"/secret"ルートへのリクエストに対して次のハンドラが実行されます。
 
 ```js
 app.all('/secret', function (req, res, next) {
@@ -70,12 +65,16 @@ app.all('/secret', function (req, res, next) {
 
 ルート・パスは、要求メソッドとの組み合わせにより、要求を実行できるエンドポイントを定義します。ルート・パスは、ストリング、ストリング・パターン、または正規表現にすることができます。
 
+文字`？`、`+`、`*`、`()`は正規表現の部分集合です。 ハイフン（`-`）とドット（`.`）は、文字列ベースのパスによって文字通り解釈されます。
+
+パス文字列でドル文字（`$`）を使用する必要がある場合は、`([`と`])`の中にエスケープして囲みます。たとえば、"/data/$book"でのリクエストのパス文字列は"`/data /([\$])book`"となります。
+
 <div class="doc-box doc-info" markdown="1">
 Express は、ルート・パスのマッチングに [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) を使用します。ルート・パスの定義におけるすべての可能性については、path-to-regexp 資料を参照してください。[Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) は、パターン・マッチングをサポートしていませんが、基本的な Express ルートをテストするための便利なツールです。
 </div>
 
 <div class="doc-box doc-warn" markdown="1">
-照会ストリングは、ルート・パスの一部ではありません。
+クエリ文字列は、ルート・パスの一部ではありません。
 </div>
 
 次に、ストリングに基づくルート・パスの例を示します。
