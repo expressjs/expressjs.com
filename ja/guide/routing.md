@@ -7,7 +7,7 @@ lang: ja
 
 # ルーティング
 
-*ルーティング* とは、アプリケーション・エンドポイント (URI) と、クライアント要求に対するそれらの応答の定義のことです。
+*ルーティング* とは、アプリケーション・エンドポイント (URI) と、クライアントリクエストに対するそれらのレスポンスの定義のことです。
 ルーティングの概要については、[基本的なルーティング](/{{ page.lang }}/starter/basic-routing.html)を参照してください。
 
 ルーティングはHTTPメソッドに対応するExpressの`app`オブジェクトのメソッドを使用して定義します。たとえば、GETリクエストを処理する`app.get()`やPOSTリクエストを処理する`app.post`があります。
@@ -63,7 +63,7 @@ app.all('/secret', function (req, res, next) {
 
 <h2 id="route-paths">ルート・パス</h2>
 
-ルート・パスは、要求メソッドとの組み合わせにより、要求を実行できるエンドポイントを定義します。ルート・パスは、ストリング、ストリング・パターン、または正規表現にすることができます。
+ルート・パスは、リクエストメソッドとの組み合わせにより、リクエストを実行できるエンドポイントを定義します。ルート・パスは、ストリング、ストリング・パターン、または正規表現にすることができます。
 
 文字`？`、`+`、`*`、`()`は正規表現の部分集合です。 ハイフン（`-`）とドット（`.`）は、文字列ベースのパスによって文字通り解釈されます。
 
@@ -79,7 +79,7 @@ Express は、ルート・パスのマッチングに [path-to-regexp](https://w
 
 次に、ストリングに基づくルート・パスの例を示します。
 
-このルート・パスは、要求をルートのルート `/` にマッチングします。
+このルート・パスは、リクエストをルートのルート `/` にマッチングします。
 
 ```js
 app.get('/', function (req, res) {
@@ -87,7 +87,7 @@ app.get('/', function (req, res) {
 });
 ```
 
-このルート・パスは、要求を `/about` にマッチングします。
+このルート・パスは、リクエストを `/about` にマッチングします。
 
 ```js
 app.get('/about', function (req, res) {
@@ -95,7 +95,7 @@ app.get('/about', function (req, res) {
 });
 ```
 
-このルート・パスは、要求を `/random.text` にマッチングします。
+このルート・パスは、リクエストを `/random.text` にマッチングします。
 
 ```js
 app.get('/random.text', function (req, res) {
@@ -137,10 +137,6 @@ app.get('/ab(cd)?e', function(req, res) {
 });
 ```
 
-<div class="doc-box doc-info" markdown="1">
-文字 ?、+、*、および () は、正規表現文字のサブセットです。ハイフン (-) およびドット (.) は、ストリングに基づくパスによってそのまま解釈されます。
-</div>
-
 次に、正規表現に基づくルート・パスの例を示します。
 
 このルート・パスは、ルート名に「a」が含まれるすべてのものをマッチングします。
@@ -159,9 +155,61 @@ app.get(/.*fly$/, function(req, res) {
 });
 ```
 
+<h3 id="route-parameters">ルート・パラメータ</h3>
+
+ルート・パラメータは、URL内の指定された値を取得するために使用されるURLセグメントのことを言います。捕捉された値は`req.params`オブジェクトの中で、パスに指定されたルート・パラメータの名前をそれぞれのキーとして設定されます。
+
+```
+ルート・パス: /users/:userId/books/:bookId
+リクエストURL: http://localhost:3000/users/34/books/8989
+req.params: { "userId": "34", "bookId": "8989" }
+```
+
+ルート・パラメータを使用してルートを定義するには、以下に示すようにルートのパスにルート・パラメータを指定するだけです。
+
+```js
+app.get('/users/:userId/books/:bookId', function (req, res) {
+  res.send(req.params)
+})
+```
+
+<div class="doc-box doc-notice" markdown="1">
+ルート・パラメータの名前は、「単語文字」([A-Za-z0-9_])で構成する必要があります。
+</div>
+
+ハイフン（`-`）とドット（`.`）は文字通りに解釈されるので、有用な目的のためにルート・パラメータとともに使用することができます。
+
+```
+ルート・パス: /flights/:from-:to
+リクエストURL: http://localhost:3000/flights/LAX-SFO
+req.params: { "from": "LAX", "to": "SFO" }
+```
+
+```
+ルート・パス: /plantae/:genus.:species
+リクエストURL: http://localhost:3000/plantae/Prunus.persica
+req.params: { "genus": "Prunus", "species": "persica" }
+```
+
+ルート・パラメータで一致させることができる正確な文字列をより詳細に制御するために、括弧（`()`）内で正規表現を追加できます：
+
+```
+ルート・パス: /user/:userId(\d+)
+リクエストURL: http://localhost:3000/user/42
+req.params: {"userId": "42"}
+```
+
+<div class="doc-box doc-warn" markdown="1">
+正規表現は通常リテラル文字列の一部なので、<code>\\d+</code>のように<code>\</code>文字をバックスラッシュでエスケープしてください。
+</div>
+
+<div class="doc-box doc-warn" markdown="1">
+Express 4.xでは、<a href="https://github.com/expressjs/express/issues/2495">正規表現の<code>*</code>文字は通常の方法で解釈されません。</a>回避策として、<code>*</code>の代わりに<code>{0,}</code>を使用してください。これは、Express 5で修正される可能性があります。
+</div>
+
 <h2 id="route-handlers">ルート・ハンドラー</h2>
 
-要求を処理するために、[ミドルウェア](/{{ page.lang }}/guide/using-middleware.html)のように動作する複数のコールバック関数を指定できます。唯一の例外は、これらのコールバックが `next('route')` を呼び出して、残りのルート・コールバックをバイパスすることです。このメカニズムを使用して、ルートに事前条件を適用し、現在のルートで続行する理由がない場合に後続のルートに制御を渡すことができます。
+リクエストを処理するために、[ミドルウェア](/{{ page.lang }}/guide/using-middleware.html)のように動作する複数のコールバック関数を指定できます。唯一の例外は、これらのコールバックが `next('route')` を呼び出して、残りのルート・コールバックをバイパスすることです。このメカニズムを使用して、ルートに事前条件を適用し、現在のルートで続行する理由がない場合に後続のルートに制御を渡すことができます。
 
 次の例に示すように、ルート・ハンドラーの形式は、関数、関数の配列、または両方の組み合わせにすることができます。
 
@@ -173,7 +221,7 @@ app.get('/example/a', function (req, res) {
 });
 ```
 
-複数のコールバック関数で 1 つのルートを処理できます (必ず、`next` オブジェクトを指定してください)。次に例を示します。
+複数のコールバック関数で1つのルートを処理できます (必ず、`next` オブジェクトを指定してください)。次に例を示します。
 
 ```js
 app.get('/example/b', function (req, res, next) {
@@ -204,7 +252,7 @@ var cb2 = function (req, res) {
 app.get('/example/c', [cb0, cb1, cb2]);
 ```
 
-独立した関数と関数の配列の組み合わせで 1 つのルートを処理できます。次に例を示します。
+独立した関数と、関数の配列の組み合わせで1つのルートを処理できます。次に例を示します。
 
 ```js
 var cb0 = function (req, res, next) {
@@ -225,25 +273,25 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 });
 ```
 
-<h2 id="response-methods">応答メソッド</h2>
+<h2 id="response-methods">レスポンスメソッド</h2>
 
-次の表に示す応答オブジェクト (`res`) のメソッドは、応答をクライアントに送信して、要求と応答のサイクルを終了することができます。これらのメソッドのいずれもルート・ハンドラーから呼び出されない場合、クライアント要求はハングしたままになります。
+次の表に示すレスポンスオブジェクト (`res`) のメソッドは、レスポンスをクライアントに送信して、リクエストとレスポンスのサイクルを終了することができます。これらのメソッドのいずれもルート・ハンドラーから呼び出されない場合、クライアントリクエストはハングしたままになります。
 
 | メソッド               | 説明
 |----------------------|--------------------------------------
 | [res.download()](/{{ page.lang }}/4x/api.html#res.download)   | ファイルのダウンロードのプロンプトを出します。
-| [res.end()](/{{ page.lang }}/4x/api.html#res.end)        | 応答プロセスを終了します。
-| [res.json()](/{{ page.lang }}/4x/api.html#res.json)       | JSON 応答を送信します。
-| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)      | JSONP をサポートする JSON 応答を送信します。
-| [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | 要求をリダイレクトします。
+| [res.end()](/{{ page.lang }}/4x/api.html#res.end)        | レスポンスプロセスを終了します。
+| [res.json()](/{{ page.lang }}/4x/api.html#res.json)       | JSON レスポンスを送信します。
+| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)      | JSONP をサポートする JSON レスポンスを送信します。
+| [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | リクエストをリダイレクトします。
 | [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | ビュー・テンプレートをレンダリングします。
-| [res.send()](/{{ page.lang }}/4x/api.html#res.send)       | さまざまなタイプの応答を送信します。
+| [res.send()](/{{ page.lang }}/4x/api.html#res.send)       | さまざまなタイプのレスポンスを送信します。
 | [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)     | ファイルをオクテット・ストリームとして送信します。
-| [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | 応答の状況コードを設定して、そのストリング表現を応答本文として送信します。
+| [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | レスポンスのステータスコードを設定して、そのストリング表現をレスポンス本文として送信します。
 
 <h2 id="app-route">app.route()</h2>
 
-`app.route()` を使用して、ルート・パスのチェーン可能なルート・ハンドラーを作成できます。
+`app.route()` を使用して、ルート・パスの連結可能なルート・ハンドラーを作成できます。
 パスは単一の場所で指定されるため、モジュール式のルートを作成すると、便利であるほか、冗長性とタイプミスを減らすことができます。ルートについて詳しくは、[Router() 資料](/{{ page.lang }}/4x/api.html#router)を参照してください。
 
 次に、`app.route()` を使用して定義された、チェーニングされたルート・ハンドラーの例を示します。
@@ -298,4 +346,4 @@ var birds = require('./birds');
 app.use('/birds', birds);
 ```
 
-これで、アプリケーションは、`/birds` および `/birds/about` に対する要求を処理するほか、ルートに固有の `timeLog` ミドルウェア関数を呼び出すことができるようになります。
+これで、アプリケーションは、`/birds` および `/birds/about` に対するリクエストを処理するほか、ルートに固有の `timeLog` ミドルウェア関数を呼び出すことができるようになります。
