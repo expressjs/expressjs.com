@@ -25,7 +25,7 @@ lang: ja
 
 ### ミドルウェア
 
-最後の要求ハンドラーの前に Express ルーティング層によって呼び出される関数。そのため、未加工要求と最後の目的のルートの間に配置される。ミドルウェアの用語に関しては、微妙な点がいくつかある。
+最後のリクエストハンドラーの前に Express ルーティング層によって呼び出される関数。そのため、未加工要求と最後の目的のルートの間に配置される。ミドルウェアの用語に関しては、微妙な点がいくつかある。
 
   * `var foo = require('middleware')` は、Node.js モジュールを*要求* または*使用* することで呼び出される。その後、通常はステートメント `var mw = foo()` がミドルウェアを返す。
   * `app.use(mw)` は、*グローバル処理スタックにミドルウェアを追加* することで呼び出される。
@@ -37,15 +37,15 @@ lang: ja
 
 ### オープン・ソース
 
-形容詞として使用する場合は、ハイフンを付ける (例: 「This is open-source software.」)。[Wikipedia の「Open-source software」](http://en.wikipedia.org/wiki/Open-source_software)を参照。注: 一般的にはこの用語にハイフンを付けないが、ここでは複合形容詞にハイフンを付けるという標準英語の規則に従う。
+形容詞として使用する場合は、ハイフンを付ける (例:「This is open-source software.」)。[Wikipedia の「Open-source software」](http://en.wikipedia.org/wiki/Open-source_software)を参照。注: 一般的にはこの用語にハイフンを付けないが、ここでは複合形容詞にハイフンを付けるという標準英語の規則に従う。
 
-### 要求
+### リクエスト
 
-HTTP 要求。クライアントは HTTP 要求メッセージをサーバーに送信して、サーバーは応答を返す。要求では、いずれかの[要求メソッド](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) (GET、POST など) を使用する必要がある。
+HTTP リクエスト。クライアントは HTTP リクエストメッセージをサーバーに送信して、サーバーはレスポンスを返す。リクエストでは、いずれかの[リクエストメソッド](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) (GET、POST など) を使用する必要がある。
 
-### 応答
+### レスポンス
 
-HTTP 応答。サーバーは、HTTP 応答メッセージをクライアントに返す。応答には要求の完了状況情報が含まれ、要求された内容がメッセージの本文に入っている場合もある。
+HTTP レスポンス。サーバーは、HTTP レスポンスメッセージをクライアントに返す。レスポンスにはリクエストの完了状況情報が含まれ、リクエストされた内容がメッセージの本文に入っている場合もある。
 
 ### ルート
 
