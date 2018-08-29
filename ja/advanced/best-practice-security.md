@@ -13,7 +13,17 @@ lang: ja
 
 開発環境と実稼働環境は通常、別々にセットアップされ、それぞれの要件は大きく異なっています。開発環境では許可されることが、実稼働環境では許可されないことがあります。例えば、開発環境ではデバッグのためにエラーの詳細なロギングを実行できますが、同じ動作が実稼働環境ではセキュリティー上の問題となります。開発環境では、スケーラビリティー、信頼性、パフォーマンスについて心配する必要はありませんが、それらは実稼働環境では重大な問題となります。
 
-この記事では、実稼働環境にデプロイされた Express アプリケーションのセキュリティーに関するベスト・プラクティスについて説明します。
+{% include note.html content="If you believe you have discovered a security vulnerability in Express, please see [Security Policies and Procedures](/en/resources/contributing.html#security-policies-and-procedures)." %}
+
+本番環境でのExpressアプリケーションのセキュリティのベスト・プラクティスは次のとおりです。
+
+- [非推奨バージョンや脆弱なバージョンの Express を使用しない](#dont-use-deprecated-or-vulnerable-versions-of-express)
+- [TLS を使用する](#use-tls)
+- [Helmet を使用する](#use-helmet)
+- [Cookie をセキュアに使用する](#use-cookies-securely)
+- [依存関係がセキュアであることを確認する](#ensure-your-dependencies-are-secure)
+- [その他の既知の脆弱性を回避する](#avoid-other-known-vulnerabilities)
+- [その他の考慮事項](#additional-considerations)
 
 ## 非推奨バージョンや脆弱なバージョンの Express を使用しない
 
@@ -47,22 +57,20 @@ Helmet は、実際には、セキュリティー関連の HTTP ヘッダーを�
 
 その他のモジュールと同様に Helmet をインストールします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 次に、コードで使用します。
 
-<pre>
-<code class="language-javascript" translate="no">
-...
-var helmet = require('helmet');
-app.use(helmet());
-...
-</code>
-</pre>
+```js
+// ...
+
+var helmet = require('helmet')
+app.use(helmet())
+
+// ...
+```
 
 ### 少なくとも X-Powered-By ヘッダーを無効にする
 
@@ -70,13 +78,13 @@ Helmet を使用しない場合は、少なくとも `X-Powered-By` ヘッダー
 
 そのため、`app.disable()` メソッドを使用してこのヘッダーをオフにすることがベスト・プラクティスです。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.disable('x-powered-by');
-</code>
-</pre>
+```js
+app.disable('x-powered-by')
+```
 
 `helmet.js` を使用する場合は、この操作が自動的に実行されます。
+
+{% include note.html content="Disabling the `X-Powered-By header` does not prevent a sophisticated attacker from determining that an app is running Express. It may discourage a casual exploit, but there are other ways to determine an app is running Express. "%}
 
 ## Cookie をセキュアに使用する
 
@@ -97,17 +105,14 @@ Cookie を介してアプリケーションが悪用されないように、デ�
 
 この問題を回避するには、汎用な Cookie 名を使用します。例えば、[express-session](https://www.npmjs.com/package/express-session) ミドルウェアを使用します。
 
-<pre>
-<code class="language-javascript" translate="no">
-var session = require('express-session');
+```js
+var session = require('express-session')
 app.set('trust proxy', 1) // trust first proxy
-app.use( session({
-   secret : 's3Cur3',
-   name : 'sessionId',
-  })
-);
-</code>
-</pre>
+app.use(session({
+  secret: 's3Cur3',
+  name: 'sessionId'
+}))
+```
 
 ### Cookie のセキュリティー・オプションを設定する
 
@@ -121,66 +126,61 @@ app.use( session({
 
 次に、[cookie-session](https://www.npmjs.com/package/cookie-session) ミドルウェアの使用例を示します。
 
-<pre>
-<code class="language-javascript" translate="no">
-var session = require('cookie-session');
-var express = require('express');
-var app = express();
+```js
+var session = require('cookie-session')
+var express = require('express')
+var app = express()
 
-var expiryDate = new Date( Date.now() + 60 * 60 * 1000 ); // 1 hour
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],
-  cookie: { secure: true,
-            httpOnly: true,
-            domain: 'example.com',
-            path: 'foo/bar',
-            expires: expiryDate
-          }
-  })
-);
-</code>
-</pre>
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    domain: 'example.com',
+    path: 'foo/bar',
+    expires: expiryDate
+  }
+}))
+```
 
 ## 依存関係がセキュアであることを確認する
 
 npm を使用したアプリケーションの依存関係の管理は、強力で便利な方法です。ただし、使用するパッケージに、アプリケーションにも影響を与える可能性がある重大なセキュリティーの脆弱性が含まれている可能性があります。アプリケーションのセキュリティーの強さは、依存関係の中で「最も弱いリンク」程度でしかありません。
 
-[nsp](https://www.npmjs.com/package/nsp) と [requireSafe](https://requiresafe.com/) という 2 つのツールの一方または両方を使用して、使用するサード・パーティー・パッケージのセキュリティーを確保します。これらの 2 つのツールが実行する処理は大体同じです。
+npm@6以降、npmはすべてのインストール要求を自動的に確認します。また、'npm audit'を使用して依存関係ツリーを分析することもできます。
 
-[nsp](https://www.npmjs.com/package/nsp) は、[Node Security Project](https://nodesecurity.io/) の脆弱性データベースを確認して、アプリケーションが既知の脆弱性を持つパッケージを使用しているかどうかを判別するコマンド・ライン・ツールです。次のようにしてインストールします。
+```sh
+$ npm audit
+```
 
-<pre>
-<code class="language-sh" translate="no">
-$ npm i nsp -g
-</code>
-</pre>
+よりセキュアな状態を保ちたい場合は、[Snyk](https://snyk.io/)を検討してください。
 
-このコマンドを使用して、`npm-shrinkwrap.json` ファイルを検証のために [nodesecurity.io](https://nodesecurity.io/) に送信します。
+Snykは、[Snykのオープンソース脆弱性データベース](https://snyk.io/vuln/)に対して、依存関係の既知の脆弱性に対するアプリケーションをチェックする[コマンドラインツール](https://www.npmjs.com/package/snyk)と[Github integration](https://snyk.io/docs/github)を提供しています。 次のようにCLIをインストールします。
 
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-shrinkwrap
-</code>
-</pre>
-
-このコマンドを使用して、`package.json` ファイルを検証のために [nodesecurity.io](https://nodesecurity.io/) に送信します。
-
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-package
-</code>
-</pre>
-
-次に、Node モジュールを監査するための [requireSafe](https://requiresafe.com/) の使用例を示します。
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm install -g requiresafe
+```sh
+$ npm install -g snyk
 $ cd your-app
-$ requiresafe check
-</code>
-</pre>
+```
+
+このコマンドを使用して、アプリケーションの脆弱性をテストします。
+
+```sh
+$ snyk test
+```
+
+このコマンドを使用して、検出された脆弱性を修正するための更新プログラムやパッチを適用するプロセスを案内するウィザードを開きます。
+
+```sh
+$ snyk wizard
+```
+
+## その他の既知の脆弱性を回避する
+
+アプリケーションで使用する Express やその他のモジュールに影響を与える可能性がある [Node Security Project](https://nodesecurity.io/advisories) のアドバイザリーに常に注意してください。一般に、Node Security Project は、Node のセキュリティーに関する知識とツールの優れたリソースです。
+
+最後に、Express アプリケーションは、その他の Web アプリケーションと同様、さまざまな Web ベースの攻撃に対して脆弱になりえます。既知の [Web の脆弱性](https://www.owasp.org/index.php/Top_10_2013-Top_10)をよく理解して、それらを回避するための予防措置を取ってください。
 
 ## その他の考慮事項
 
@@ -193,9 +193,3 @@ $ requiresafe check
 * オープン・ソースの [sqlmap](http://sqlmap.org/) ツールを使用して、アプリケーションの SQL インジェクションに対する脆弱性を検出してください。
 * [nmap](https://nmap.org/) ツールと [sslyze](https://github.com/nabla-c0d3/sslyze) ツールを使用して、SSL 暗号、鍵、再交渉の構成のほか、証明書の妥当性をテストしてください。
 * [safe-regex](https://www.npmjs.com/package/safe-regex) を使用して、使用している正規表現が[正規表現サービス妨害](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS)攻撃を受けやすくなっていないことを確認してください。
-
-## その他の既知の脆弱性を回避する
-
-アプリケーションで使用する Express やその他のモジュールに影響を与える可能性がある [Node Security Project](https://nodesecurity.io/advisories) のアドバイザリーに常に注意してください。一般に、Node Security Project は、Node のセキュリティーに関する知識とツールの優れたリソースです。
-
-最後に、Express アプリケーションは、その他の Web アプリケーションと同様、さまざまな Web ベースの攻撃に対して脆弱になりえます。既知の [Web の脆弱性](https://www.owasp.org/index.php/Top_10_2013-Top_10)をよく理解して、それらを回避するための予防措置を取ってください。

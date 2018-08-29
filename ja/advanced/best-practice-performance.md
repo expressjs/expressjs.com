@@ -13,33 +13,38 @@ lang: ja
 
 このトピックは、従来型の開発と運用の両方にわたる「DevOps」の世界に明確に分類されます。したがって、情報は次の 2 つの部分に分かれています。
 
-* [コードで実行する処理](#code) (開発部分)。
-* [環境/セットアップで実行する処理](#env) (運用部分)。
+* コードで実行する処理 (開発部分)
+  * [gzip 圧縮を使用する](#use-gzip-compression)
+  * [同期関数を使用しない](#dont-use-synchronous-functions)
+  * [ロギングを正確に実行する](#do-logging-correctly)
+  * [例外を適切に処理する](#handle-exceptions-properly)
+* 環境/セットアップで実行する処理 (運用部分)
+  * [Set NODE_ENV to "production"](#set-node_env-to-production)
+  * [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
+  * [Run your app in a cluster](#run-your-app-in-a-cluster)
+  * [Cache request results](#cache-request-results)
+  * [Use a load balancer](#use-a-load-balancer)
+  * [Use a reverse proxy](#use-a-reverse-proxy)
 
-<a name="code"></a>
-
-## コードで実行する処理
+## コードで実行する処理 {#in-code}
 
 以下に、アプリケーションのパフォーマンスを向上させるためにコードで実行できる処理をいくつか挙げます。
 
-* gzip 圧縮を使用する
-* 同期関数を使用しない
-* 静的ファイルを提供するためにミドルウェアを使用する
-* ロギングを正確に実行する
-* 例外を適切に処理する
+* [gzip 圧縮を使用する](#use-gzip-compression)
+* [同期関数を使用しない](#dont-use-synchronous-functions)
+* [ロギングを正確に実行する](#do-logging-correctly)
+* [例外を適切に処理する](#handle-exceptions-properly)
 
 ### gzip 圧縮を使用する
 
 Gzip 圧縮により、応答本体のサイズを大幅に縮小できるため、Web アプリケーションの速度が高くなります。Express アプリケーションで gzip 圧縮として [compression](https://www.npmjs.com/package/compression) ミドルウェアを使用してください。次に例を示します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 var compression = require('compression');
 var express = require('express');
 var app = express();
 app.use(compression());
-</code>
-</pre>
+```
 
 トラフィックが多い実稼働環境の Web サイトでは、圧縮を適用する最適な方法は、リバース・プロキシー・レベルで実装することです ([リバース・プロキシーの使用](#proxy)を参照)。その場合は、compression ミドルウェアを使用する必要はありません。Nginx で gzip 圧縮を有効にする方法について詳しくは、Nginx 資料の [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) を参照してください。
 
@@ -50,14 +55,6 @@ app.use(compression());
 ノードおよび多くのモジュールは、同期版と非同期版の関数を提供していますが、実稼働環境では必ず非同期版を使用してください。同期関数を使用しても構わないのは、初期始動時のみです。
 
 Node.js 4.0+ または io.js 2.1.0+ を使用している場合、アプリケーションで同期 API を使用するときに、いつでも `--trace-sync-io` コマンド・ライン・フラグを使用して、警告とスタック・トレースを出力することができます。無論、この機能を実際に実稼働環境で使用することはありませんが、コードを実稼働環境で使用する準備ができていることを確認するために使用できます。詳細については、[io.js 2.1.0 の週次更新](https://nodejs.org/en/blog/weekly-updates/weekly-update.2015-05-22/#2-1-0)を参照してください。
-
-### 静的ファイルを提供するためにミドルウェアを使用する
-
-開発環境では、静的ファイルを提供するために [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile) を使用できます。しかし、この関数を実稼働環境では使用しないでください。この関数は、ファイル要求ごとにファイル・システムから読み取る必要があり、著しい遅延を発生させ、アプリケーション全体のパフォーマンスに影響を与えるためです。効率をはるかに向上させることができる [sendfile](http://linux.die.net/man/2/sendfile) システム呼び出しで `res.sendFile()` は実装*されない*点に注意してください。
-
-代わりに Express アプリケーションにファイルを提供するために最適化された [serve-static](https://www.npmjs.com/package/serve-static) ミドルウェア (または同等の関数) を使用してください。
-
-さらに効果的なオプションとして、静的ファイルを提供するためにリバース・プロキシーを使用できます。詳細については、[リバース・プロキシーの使用](#proxy)を参照してください。
 
 ### ロギングを正確に実行する
 
@@ -70,8 +67,6 @@ Node.js 4.0+ または io.js 2.1.0+ を使用している場合、アプリケ�
 #### アプリケーション・アクティビティー
 
 アプリケーション・アクティビティー (例えば、トラフィックまたは API 呼び出しのトラッキング) のロギングを実行する場合は、`console.log()` を使用するのではなく、[Winston](https://www.npmjs.com/package/winston) や [Bunyan](https://www.npmjs.com/package/bunyan) などのロギング・ライブラリーを使用します。これらの 2 つのライブラリーの詳細な比較については、StrongLoop ブログ投稿の [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/) を参照してください。
-
-<a name="exceptions"></a>
 
 ### 例外を適切に処理する
 
@@ -97,8 +92,6 @@ Node アプリケーションは、キャッチされていない例外が発生
 
 また、[domain](https://nodejs.org/api/domain.html) の使用もお勧めしません。このモジュールは概して問題を解決しないため、推奨されていません。
 
-<a name="try-catch"></a>
-
 #### Try-catch の使用
 
 Try-catch は、同期コードで例外をキャッチするために使用できる JavaScript 言語構造体です。Try-catch は、例えば、下記のように JSON 構文解析エラーを処理するために使用します。
@@ -108,8 +101,7 @@ Try-catch は、同期コードで例外をキャッチするために使用で�
 次に、プロセスを異常終了させる可能性がある例外を処理するための Try-catch の使用例を示します。
 このミドルウェア関数は、JSON オブジェクトである「params」という照会フィールド・パラメーターを受け入れます。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/search', function (req, res) {
   // Simulating async operation
   setImmediate(function () {
@@ -122,19 +114,15 @@ app.get('/search', function (req, res) {
     }
   });
 });
-</code>
-</pre>
+```
 
 ただし、Try-catch は同期コードでのみ機能します。Node プラットフォームは主に (特に実稼働環境で) 非同期的であるため、Try-catch は多くの例外をキャッチしません。
-
-<a name="promises"></a>
 
 #### Promise の使用
 
 Promise は、`then()` を使用する非同期コード・ブロックのすべての例外 (明示的と暗黙的の両方) を処理します。単に、Promise チェーンの最後に `.catch(next)` を追加してください。次に例を示します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res, next) {
   // do some sync stuff
   queryDb()
@@ -151,8 +139,7 @@ app.get('/', function (req, res, next) {
 app.use(function (err, req, res, next) {
   // handle error
 });
-</code>
-</pre>
+```
 
 これで、非同期と同期のエラーがすべてエラー・ミドルウェアに伝搬されます。
 
@@ -161,33 +148,31 @@ app.use(function (err, req, res, next) {
 1.  すべての非同期コードが Promise を返す必要があります (エミッターを除く)。特定のライブラリーが Promise を返さない場合は、[Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html) などのヘルパー関数を使用して基本オブジェクトを変換します。
 2.  イベント・エミッター (ストリームなど) により、例外がキャッチされないことがあります。そのため、必ずエラー・イベントを適切に処理してください。次に例を示します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
 app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id)
   let stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
-</code>
-</pre>
+```
 
 Promise を使用するエラー処理の詳細については、下記を参照してください。
 
 * [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
 * [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
 
-<a name="env"></a>
-
 ## 環境/セットアップで実行する処理
 
 以下に、アプリケーションのパフォーマンスを向上させるためにシステム環境で実行できる処理をいくつか挙げます。
 
-* NODE_ENV を「production」に設定する
-* アプリケーションが確実に自動再始動するようにする
-* アプリケーションをクラスターで実行する
-* 要求の結果をキャッシュに入れる
-* ロード・バランサーを使用する
-* リバース・プロキシーを使用する
+* [NODE_ENV を「production」に設定する](#set-node_env-to-production)
+* [アプリケーションが確実に自動再始動するようにする](#ensure-your-app-automatically-restarts)
+* [アプリケーションをクラスターで実行する](#run-your-app-in-a-cluster)
+* [要求の結果をキャッシュに入れる](#cache-request-results)
+* [ロード・バランサーを使用する](#use-a-load-balancer)
+* [リバース・プロキシーを使用する](#use-a-reverse-proxy)
 
 ### NODE_ENV を「production」に設定する
 
@@ -207,27 +192,21 @@ NODE_ENV を「production」に設定すると、Express は次のようにな�
 
 Upstart では、ジョブ・ファイルで `env` キーワードを使用します。次に例を示します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code>
-</pre>
+```
 
 詳細については、[Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables) を参照してください。
 
 systemd では、unit ファイルで `Environment` ディレクティブを使用します。次に例を示します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code>
-</pre>
+```
 
 詳細については、[Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html) を参照してください。
-
-StrongLoop Process Manager を使用する場合は、[StrongLoop PM をサービスとしてインストールするときに環境変数を設定](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-Setenvironmentvariables)することもできます。
 
 ### アプリケーションが確実に自動再始動するようにする
 
@@ -284,8 +263,7 @@ Systemd は、Linux システムとサービス・マネージャーです。大
 
 Systemd サービス構成ファイルは、*unit ファイル* という名前で、ファイル名の末尾は .service です。次に、Node アプリケーションを直接管理するための unit ファイルの例を示します (太字のテキストを、ご使用のシステムとアプリケーションの値に置き換えてください)。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -313,28 +291,25 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code>
-</pre>
+```
+
 Systemd について詳しくは、[systemd の解説 (man ページ)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html) を参照してください。
+
 ##### Systemd サービスとしての StrongLoop PM
 
 StrongLoop Process Manager を Systemd サービスとして簡単にインストールできます。インストール後、サーバーが再始動すると、StrongLoop PM が自動的に再始動され、管理対象アプリケーションのすべてが再始動されます。
 
 StrongLoop PM を Systemd サービスとしてインストールするには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 次に、サービスを開始します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```
 
 詳しくは、[Setting up a production host (StrongLoop 資料)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10) を参照してください。
 
@@ -346,8 +321,7 @@ Upstart サービスは、ファイル名が `.conf` で終わるジョブ構成
 
 以下の内容で `myapp.conf` というファイルを `/etc/init/` に作成します (太字のテキストを、ご使用のシステムとアプリケーションの値に置き換えてください)。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -375,8 +349,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code>
-</pre>
+```
 
 注: このスクリプトには、Ubuntu 12.04-14.10 でサポートされる Upstart 1.4 以降が必要です。
 
@@ -396,19 +369,15 @@ StrongLoop Process Manager を Upstart サービスとして簡単にインス�
 
 StrongLoop PM を Upstart 1.4 サービスとしてインストールするには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 次に、サービスを実行します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 注: Upstart 1.4 をサポートしないシステムでは、コマンドが若干異なります。詳しくは、[Setting up a production host (StrongLoop 資料)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10) を参照してください。
 
@@ -434,13 +403,39 @@ StrongLoop Process Manager (PM) は、アプリケーションを実行する際
 
 例えば、アプリケーションを prod.foo.com にデプロイして、StrongLoop PM がポート 8701 (デフォルト) で listen している場合は、slc を使用してクラスター・サイズを 8 に設定します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 StrongLoop PM を使用したクラスタリングについて詳しくは、StrongLoop 資料の [Clustering](https://docs.strongloop.com/display/SLC/Clustering) を参照してください。
+
+#### PM2 の使用
+
+If you deploy your application with PM2, then you can take advantage of clustering _without_ modifying your application code.  You should ensure your [application is stateless](http://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) first, meaning no local data is stored in the process (such as sessions, websocket connections and the like).
+
+When running an application with PM2, you can enable **cluster mode** to run it in a cluster with a number of instances of your choosing, such as the matching the number of available CPUs on the machine. You can manually change the number of processes in the cluster using the `pm2` command line tool without stopping the app.
+
+To enable cluster mode, start your application like so:
+
+```sh
+# Start 4 worker processes
+$ pm2 start app.js -i 4
+# Auto-detect number of available CPUs and start that many worker processes
+$ pm2 start app.js -i max
+```
+
+This can also be configured within a PM2 process file (`ecosystem.config.js` or similar) by setting `exec_mode` to `cluster` and `instances` to the number of workers to start.
+
+Once running, a given application with the name `app` can be scaled like so:
+
+```sh
+# Add 3 more workers
+$ pm2 scale app +3
+# Scale to a specific number of workers
+$ pm2 scale app 2
+```
+
+For more information on clustering with PM2, see [Cluster Mode](https://pm2.keymetrics.io/docs/usage/cluster-mode/) in the PM2 documentation.
 
 ### 要求の結果をキャッシュに入れる
 
@@ -455,11 +450,6 @@ StrongLoop PM を使用したクラスタリングについて詳しくは、Str
 ロード・バランサーは通常、複数のアプリケーション・インスタンスやサーバーとの間のトラフィックを調整するリバース・プロキシーです。[Nginx](http://nginx.org/en/docs/http/load_balancing.html) や [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts) を使用して、アプリケーション用にロード・バランサーを簡単にセットアップできます。
 
 ロード・バランシングでは、特定のセッション ID に関連する要求が発信元のプロセスに接続することを確認する必要があります。これは、*セッション・アフィニティー* または*スティッキー・セッション* と呼ばれ、セッション・データに Redis などのデータ・ストアを使用する上記の提案によって対応できます (ご使用のアプリケーションによって異なります)。説明については、[Using multiple nodes](http://socket.io/docs/using-multiple-nodes/) を参照してください。
-
-#### Nginx ロード・バランサーとの StrongLoop PM の使用
-
-[StrongLoop Process Manager](http://strong-pm.io/) は、Nginx Controller と統合して、マルチホスト実稼働環境を簡単に構成できるようにしています。詳しくは、[Scaling to multiple servers](https://docs.strongloop.com/display/SLC/Scaling+to+multiple+servers) (StrongLoop 資料) を参照してください。
-<a name="proxy"></a>
 
 ### リバース・プロキシーを使用する
 
