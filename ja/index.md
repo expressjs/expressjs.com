@@ -11,7 +11,7 @@ lang: ja
   <div id="homepage-leftpane" class="pane">
     <section id="description">
         <div class="express"><a href="/">Express</a></div>
-        <span class="description">特定の意見に固執しない、<a href='http://nodejs.org'>Node.js</a> 向けの高速で最小限の Web フレームワーク</span>
+        <span class="description"><a href='https://nodejs.org/ja/'>Node.js</a> のための高速で、革新的な、最小限のWebフレームワーク
     </section>
     <div id="install-command">$ npm install express --save</div>
   </div>
