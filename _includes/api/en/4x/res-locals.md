@@ -7,6 +7,8 @@ this property is identical to [app.locals](#app.locals).
 This property is useful for exposing request-level information such as the request path name,
 authenticated user, user settings, and so on.
 
+Note: a `res.locals` object takes immediate precedent over `app.locals` during the request/response cycle.
+
 ```js
 app.use(function(req, res, next){
   res.locals.user = req.user;
