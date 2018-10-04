@@ -115,6 +115,21 @@ app.listen(80, function () {
 })
 ```
 
+If you do not want to block REST tools or server-to-server requests,
+add a `!origin` check in the origin function like so:
+
+```javascript
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+```
+
 ### Enabling CORS Pre-Flight
 
 Certain CORS requests are considered 'complex' and require an initial
@@ -157,7 +172,7 @@ var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
   if (whitelist.indexOf(req.header('Origin')) !== -1) {
     corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-  }else{
+  } else {
     corsOptions = { origin: false } // disable CORS for this request
   }
   callback(null, corsOptions) // callback expects two parameters: error and options

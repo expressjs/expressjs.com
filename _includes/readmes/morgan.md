@@ -4,7 +4,6 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
-[![Gratipay][gratipay-image]][gratipay-url]
 
 HTTP request logger middleware for node.js
 
@@ -188,11 +187,13 @@ The user authenticated as part of Basic auth for the request.
 
 ##### :req[header]
 
-The given `header` of the request.
+The given `header` of the request. If the header is not present, the
+value will be displayed as `"-"` in the log.
 
 ##### :res[header]
 
-The given `header` of the response.
+The given `header` of the response. If the header is not present, the
+value will be displayed as `"-"` in the log.
 
 ##### :response-time[digits]
 
@@ -293,10 +294,10 @@ var path = require('path')
 var app = express()
 
 // create a write stream (in append mode)
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
 // setup the logger
-app.use(morgan('combined', {stream: accessLogStream}))
+app.use(morgan('combined', { stream: accessLogStream }))
 
 app.get('/', function (req, res) {
   res.send('hello, world!')
@@ -329,7 +330,7 @@ var accessLogStream = rfs('access.log', {
 })
 
 // setup the logger
-app.use(morgan('combined', {stream: accessLogStream}))
+app.use(morgan('combined', { stream: accessLogStream }))
 
 app.get('/', function (req, res) {
   res.send('hello, world!')
@@ -363,7 +364,7 @@ app.use(morgan('dev', {
 
 // log all requests to access.log
 app.use(morgan('common', {
-  stream: fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
+  stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 }))
 
 app.get('/', function (req, res) {
@@ -411,5 +412,3 @@ function assignId (req, res, next) {
 [coveralls-url]: https://coveralls.io/r/expressjs/morgan?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/morgan.svg
 [downloads-url]: https://npmjs.org/package/morgan
-[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
-[gratipay-url]: https://www.gratipay.com/dougwilson/

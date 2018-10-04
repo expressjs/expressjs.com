@@ -4,7 +4,6 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
-[![Gratipay][gratipay-image]][gratipay-url]
 
 ## Install
 
@@ -43,11 +42,11 @@ var app = connect()
 
 app.use(vhost('*.*.example.com', function handle (req, res, next) {
   // for match of "foo.bar.example.com:8080" against "*.*.example.com":
-  req.vhost.host === 'foo.bar.example.com:8080'
-  req.vhost.hostname === 'foo.bar.example.com'
-  req.vhost.length === 2
-  req.vhost[0] === 'foo'
-  req.vhost[1] === 'bar'
+  console.dir(req.vhost.host) // => 'foo.bar.example.com:8080'
+  console.dir(req.vhost.hostname) // => 'foo.bar.example.com'
+  console.dir(req.vhost.length) // => 2
+  console.dir(req.vhost[0]) // => 'foo'
+  console.dir(req.vhost[1]) // => 'bar'
 }))
 ```
 
@@ -164,5 +163,3 @@ app.listen(3000)
 [coveralls-url]: https://coveralls.io/r/expressjs/vhost
 [downloads-image]: https://img.shields.io/npm/dm/vhost.svg
 [downloads-url]: https://npmjs.org/package/vhost
-[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
-[gratipay-url]: https://gratipay.com/dougwilson/

@@ -4,7 +4,6 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
-[![Gratipay][gratipay-image]][gratipay-url]
 
 ## Installation
 
@@ -393,12 +392,17 @@ req.session.cookie.maxAge = hour
 
 For example when `maxAge` is set to `60000` (one minute), and 30 seconds
 has elapsed it will return `30000` until the current request has completed,
-at which time `req.session.touch()` is called to reset `req.session.maxAge`
-to its original value.
+at which time `req.session.touch()` is called to reset
+`req.session.cookie.maxAge` to its original value.
 
 ```js
 req.session.cookie.maxAge // => 30000
 ```
+
+#### Cookie.originalMaxAge
+
+The `req.session.cookie.originalMaxAge` property returns the original
+`maxAge` (time-to-live), in milliseconds, of the session cookie.
 
 ### req.sessionID
 
@@ -522,6 +526,11 @@ and other multi-core embedded devices).
 [connect-datacache-url]: https://www.npmjs.com/package/connect-datacache
 [connect-datacache-image]: https://img.shields.io/github/stars/adriantanasa/connect-datacache.svg?label=%E2%98%85
 
+[![★][@google-cloud/connect-datastore-image] @google-cloud/connect-datastore][@google-cloud/connect-datastore-url] A [Google Cloud Datastore](https://cloud.google.com/datastore/docs/concepts/overview)-based session store.
+
+[@google-cloud/connect-datastore-url]: https://www.npmjs.com/package/@google-cloud/connect-datastore
+[@google-cloud/connect-datastore-image]: https://img.shields.io/github/stars/GoogleCloudPlatform/cloud-datastore-session-node.svg?label=%E2%98%85
+
 [![★][connect-db2-image] connect-db2][connect-db2-url] An IBM DB2-based session store built using [ibm_db](https://www.npmjs.com/package/ibm_db) module.
 
 [connect-db2-url]: https://www.npmjs.com/package/connect-db2
@@ -583,6 +592,11 @@ and other multi-core embedded devices).
 [connect-memjs-url]: https://www.npmjs.com/package/connect-memjs
 [connect-memjs-image]: https://img.shields.io/github/stars/liamdon/connect-memjs.svg?label=%E2%98%85
 
+[![★][connect-session-firebase-image] connect-session-firebase][connect-session-firebase-url] A session store based on the [Firebase Realtime Database](https://firebase.google.com/docs/database/)
+
+[connect-session-firebase-url]: https://www.npmjs.com/package/connect-session-firebase
+[connect-session-firebase-image]: https://img.shields.io/github/stars/benweier/connect-session-firebase.svg?label=%E2%98%85
+
 [![★][connect-session-knex-image] connect-session-knex][connect-session-knex-url] A session store using
 [Knex.js](http://knexjs.org/), which is a SQL query builder for PostgreSQL, MySQL, MariaDB, SQLite3, and Oracle.
 
@@ -594,6 +608,11 @@ and other multi-core embedded devices).
 
 [connect-session-sequelize-url]: https://www.npmjs.com/package/connect-session-sequelize
 [connect-session-sequelize-image]: https://img.shields.io/github/stars/mweibel/connect-session-sequelize.svg?label=%E2%98%85
+
+[![★][couchdb-expression-image] couchdb-expression][couchdb-expression-url] A [CouchDB](https://couchdb.apache.org/)-based session store.
+
+[couchdb-expression-url]: https://www.npmjs.com/package/couchdb-expression
+[couchdb-expression-image]: https://img.shields.io/github/stars/tkshnwesper/couchdb-expression.svg?label=%E2%98%85
 
 [![★][dynamodb-store-image] dynamodb-store][dynamodb-store-url] A DynamoDB-based session store.
 
@@ -649,6 +668,16 @@ a [variety of storage types](https://www.npmjs.com/package/cache-manager#store-e
 [express-etcd-url]: https://www.npmjs.com/package/express-etcd
 [express-etcd-image]: https://img.shields.io/github/stars/gildean/express-etcd.svg?label=%E2%98%85
 
+[![★][express-session-etcd3-image] express-session-etcd3][express-session-etcd3-url] An [etcd3](https://github.com/mixer/etcd3) based session store.
+
+[express-session-etcd3-url]: https://www.npmjs.com/package/express-session-etcd3
+[express-session-etcd3-image]: https://img.shields.io/github/stars/willgm/express-session-etcd3.svg?label=%E2%98%85
+
+[![★][firestore-store-image] firestore-store][firestore-store-url] A [Firestore](https://github.com/hendrysadrak/firestore-store)-based session store.
+
+[firestore-store-url]: https://github.com/hendrysadrak/firestore-store
+[firestore-store-image]: https://img.shields.io/github/stars/hendrysadrak/firestore-store.svg?label=%E2%98%85
+
 [![★][fortune-session-image] fortune-session][fortune-session-url] A [Fortune.js](https://github.com/fortunejs/fortune)
 based session store. Supports all backends supported by Fortune (MongoDB, Redis, Postgres, NeDB).
 
@@ -685,6 +714,11 @@ based session store. Supports all backends supported by Fortune (MongoDB, Redis,
 [nedb-session-store-url]: https://www.npmjs.com/package/nedb-session-store
 [nedb-session-store-image]: https://img.shields.io/github/stars/JamesMGreene/nedb-session-store.svg?label=%E2%98%85
 
+[![★][restsession-image] restsession][restsession-url] Store sessions utilizing a RESTful API
+
+[restsession-url]: https://www.npmjs.com/package/restsession
+[restsession-image]: https://img.shields.io/github/stars/jankal/restsession.svg?label=%E2%98%85
+
 [![★][sequelstore-connect-image] sequelstore-connect][sequelstore-connect-url] A session store using [Sequelize.js](http://sequelizejs.com/).
 
 [sequelstore-connect-url]: https://www.npmjs.com/package/sequelstore-connect
@@ -695,10 +729,20 @@ based session store. Supports all backends supported by Fortune (MongoDB, Redis,
 [session-file-store-url]: https://www.npmjs.com/package/session-file-store
 [session-file-store-image]: https://img.shields.io/github/stars/valery-barysok/session-file-store.svg?label=%E2%98%85
 
+[![★][session-pouchdb-store-image] session-pouchdb-store][session-pouchdb-store-url] Session store for PouchDB / CouchDB. Accepts embedded, custom, or remote PouchDB instance and realtime synchronization.
+
+[session-pouchdb-store-url]: https://www.npmjs.com/package/session-pouchdb-store
+[session-pouchdb-store-image]: https://img.shields.io/github/stars/solzimer/session-pouchdb-store.svg?label=%E2%98%85
+
 [![★][session-rethinkdb-image] session-rethinkdb][session-rethinkdb-url] A [RethinkDB](http://rethinkdb.com/)-based session store.
 
 [session-rethinkdb-url]: https://www.npmjs.com/package/session-rethinkdb
 [session-rethinkdb-image]: https://img.shields.io/github/stars/llambda/session-rethinkdb.svg?label=%E2%98%85
+
+[![★][sessionstore-image] sessionstore][sessionstore-url] A session store that works with various databases.
+
+[sessionstore-url]: https://www.npmjs.com/package/sessionstore
+[sessionstore-image]: https://img.shields.io/github/stars/adrai/sessionstore.svg?label=%E2%98%85
 
 ## Example
 
@@ -752,5 +796,3 @@ app.get('/bar', function (req, res, next) {
 [coveralls-url]: https://coveralls.io/r/expressjs/session?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/express-session.svg
 [downloads-url]: https://npmjs.org/package/express-session
-[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
-[gratipay-url]: https://gratipay.com/dougwilson/

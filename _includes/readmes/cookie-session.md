@@ -4,7 +4,6 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
-[![Gratipay][gratipay-image]][gratipay-url]
 
 Simple cookie-based session middleware.
 
@@ -72,9 +71,11 @@ The name of the cookie to set, defaults to `session`.
 
 ##### keys
 
-The list of keys to use to sign & verify cookie values. Set cookies are always
+The list of keys to use to sign & verify cookie values, or a configured
+[`Keygrip`](https://www.npmjs.com/package/keygrip) instance. Set cookies are always
 signed with `keys[0]`, while the other keys are valid for verification, allowing
-for key rotation.
+for key rotation. If a `Keygrip` instance is provided, it can be used to
+change signature parameters like the algorithm of the signature.
 
 ##### secret
 
@@ -209,6 +210,26 @@ app.use(function (req, res, next) {
 // ... your logic here ...
 ```
 
+### Using a custom signature algorithm
+
+This example shows creating a custom `Keygrip` instance as the `keys` option
+to provide keys and additional signature configuration.
+
+```js
+var cookieSession = require('cookie-session')
+var express = require('express')
+var Keygrip = require('keygrip')
+
+var app = express()
+
+app.use(cookieSession({
+  name: 'session',
+  keys: new Keygrip(['key1', 'key2'], 'SHA384', 'base64')
+}))
+
+// ... your logic here ...
+```
+
 ## Usage Limitations
 
 ### Max Cookie Size
@@ -248,5 +269,3 @@ move to an [alternative session strategy](https://github.com/expressjs/session#c
 [coveralls-url]: https://coveralls.io/r/expressjs/cookie-session?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/cookie-session.svg
 [downloads-url]: https://npmjs.org/package/cookie-session
-[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
-[gratipay-url]: https://www.gratipay.com/dougwilson/

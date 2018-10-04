@@ -5,7 +5,6 @@
 [![Linux Build][travis-image]][travis-url]
 [![Windows Build][appveyor-image]][appveyor-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
-[![Gratipay][gratipay-image]][gratipay-url]
 
   Serves pages that contain directory listings for a given path.
 
@@ -150,5 +149,3 @@ are created by/copyright of [FAMFAMFAM](http://www.famfamfam.com/).
 [coveralls-url]: https://coveralls.io/r/expressjs/serve-index?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/serve-index.svg
 [downloads-url]: https://npmjs.org/package/serve-index
-[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
-[gratipay-url]: https://www.gratipay.com/dougwilson/

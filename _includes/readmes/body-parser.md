@@ -4,12 +4,17 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
-[![Gratipay][gratipay-image]][gratipay-url]
 
 Node.js body parsing middleware.
 
 Parse incoming request bodies in a middleware before your handlers, available
 under the `req.body` property.
+
+**Note** As `req.body`'s shape is based on user-controlled input, all
+properties and values in this object are untrusted and should be validated
+before trusting. For example, `req.body.foo.toString()` may fail in multiple
+ways, for example the `foo` property may not be there or may not be a string,
+and `toString` may not be a function and instead a string or other user input.
 
 [Learn about the anatomy of an HTTP transaction in Node.js](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/).
 
@@ -394,13 +399,11 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // POST /login gets urlencoded bodies
 app.post('/login', urlencodedParser, function (req, res) {
-  if (!req.body) return res.sendStatus(400)
   res.send('welcome, ' + req.body.username)
 })
 
 // POST /api/users gets JSON bodies
 app.post('/api/users', jsonParser, function (req, res) {
-  if (!req.body) return res.sendStatus(400)
   // create user in req.body
 })
 ```
@@ -438,5 +441,3 @@ app.use(bodyParser.text({ type: 'text/html' }))
 [coveralls-url]: https://coveralls.io/r/expressjs/body-parser?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/body-parser.svg
 [downloads-url]: https://npmjs.org/package/body-parser
-[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
-[gratipay-url]: https://www.gratipay.com/dougwilson/

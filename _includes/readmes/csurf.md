@@ -4,7 +4,6 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
-[![Gratipay][gratipay-image]][gratipay-url]
 
 Node.js [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection middleware.
 
@@ -150,6 +149,48 @@ input field named `_csrf`:
 </form>
 ```
 
+#### Using AJAX
+
+When accessing protected routes via ajax both the csrf token will need to be
+passed in the request. Typically this is done using a request header, as adding
+a request header can typically be done at a central location easily without
+payload modification.
+
+The CSRF token is obtained from the `req.csrfToken()` call on the server-side.
+This token needs to be exposed to the client-side, typically by including it in
+the initial page content. One possibility is to store it in an HTML `<meta>` tag,
+where value can then be retrieved at the time of the request by JavaScript.
+
+The following can be included in your view (handlebar example below), where the
+`csrfToken` value came from `req.csrfToken()`:
+
+```html
+<meta name="csrf-token" content="{{csrfToken}}">
+```
+
+The following is an example of using the
+[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to post
+to the `/process` route with the CSRF token from the `<meta>` tag on the page:
+
+<!-- eslint-env browser -->
+
+```js
+// Read the CSRF token from the <meta> tag
+var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+
+// Make a request using the Fetch API
+fetch('/process', {
+  credentials: 'same-origin', // <-- includes cookies in the request
+  headers: {
+    'CSRF-Token': token // <-- is the csrf token as a header
+  },
+  method: 'POST',
+  body: {
+    favoriteColor: 'blue'
+  }
+})
+```
+
 ### Ignoring Routes
 
 **Note** CSRF checks should only be disabled for requests that you expect to
@@ -240,5 +281,3 @@ app.use(function (err, req, res, next) {
 [coveralls-url]: https://coveralls.io/r/expressjs/csurf?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/csurf.svg
 [downloads-url]: https://npmjs.org/package/csurf
-[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
-[gratipay-url]: https://gratipay.com/dougwilson/

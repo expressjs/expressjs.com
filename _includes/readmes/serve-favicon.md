@@ -5,7 +5,6 @@
 [![Linux Build][travis-image]][travis-url]
 [![Windows Build][appveyor-image]][appveyor-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
-[![Gratipay][gratipay-image]][gratipay-url]
 
 Node.js middleware for serving a favicon.
 
@@ -135,5 +134,3 @@ server.listen(3000)
 [coveralls-url]: https://coveralls.io/r/expressjs/serve-favicon?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/serve-favicon.svg
 [downloads-url]: https://npmjs.org/package/serve-favicon
-[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
-[gratipay-url]: https://www.gratipay.com/dougwilson/

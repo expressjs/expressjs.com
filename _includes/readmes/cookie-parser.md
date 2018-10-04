@@ -38,7 +38,7 @@ Parse a cookie value as a JSON cookie. This will return the parsed JSON value if
 
 ### cookieParser.JSONCookies(cookies)
 
-Given an object, this will iterate over the keys and call `JSONCookie` on each value. This will return the same object passed in.
+Given an object, this will iterate over the keys and call `JSONCookie` on each value, replacing the original value with the parsed value. This returns the same object that was passed in.
 
 ### cookieParser.signedCookie(str, secret)
 
