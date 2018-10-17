@@ -18,17 +18,141 @@ Express アプリケーションを実動で実行する際、以下のタスク
 
 Express およびその他の Node.js アプリケーション用の最も一般的なプロセス・マネージャーは次のとおりです。
 
-- [StrongLoop Process Manager](#sl)
-- [PM2](#pm2)
 - [Forever](#forever)
+- [PM2](#pm2)
+- [StrongLoop Process Manager](#strongloop-process-manager)
+- [SystemD](#systemd)
 
 
-上記の 3 つのツールのいずれを使用しても非常に役立ちますが、StrongLoop Process Manager は、Node.js アプリケーションのライフサイクル全体に対応した包括的な実行時とデプロイメントのソリューションを提供する唯一のツールであり、実動前と実動後のすべてのステップに関するツールを統合インターフェースで提供します。
+上記の 4 つのツールのいずれを使用しても非常に役立ちますが、StrongLoop Process Manager は、Node.js アプリケーションのライフサイクル全体に対応した包括的な実行時とデプロイメントのソリューションを提供する唯一のツールであり、実動前と実動後のすべてのステップに関するツールを統合インターフェースで提供します。
 
 以下に、これらの各ツールについて簡単に説明します。
 詳細な比較については、[http://strong-pm.io/compare/](http://strong-pm.io/compare/) を参照してください。
 
-## <a id="sl">StrongLoop Process Manager</a>
+## Forever
+
+Forever は、特定のスクリプトが確実に継続的 (永続的) に実行されるようにするための単純なコマンド・ライン・インターフェース・ツールです。Forever のインターフェースは単純であるため、Node.js アプリケーションおよびスクリプトの小規模なデプロイメントを実行するのに理想的です。
+
+詳細については、[https://github.com/foreverjs/forever](https://github.com/foreverjs/forever) を参照してください。
+
+### インストール
+
+```sh
+$ [sudo] npm install forever -g
+```
+
+### 基本的な使用法
+
+スクリプトを開始するには、次のように `forever start` コマンドを使用して、スクリプトのパスを指定します。
+
+```sh
+$ forever start script.js
+```
+
+このコマンドは、スクリプトをデーモン・モード (バックグラウンド) で実行します。
+
+端末に接続されるようにスクリプトを実行するには、次のように `start` を省略します。
+
+```sh
+$ forever script.js
+```
+
+次の例に示すように、ロギング・オプション `-l`、`-o`、および `-e` を使用して Forever ツールおよびスクリプトの出力をログに記録することをお勧めします。
+
+```sh
+$ forever start -l forever.log -o out.log -e err.log script.js
+```
+
+Forever によって開始されたスクリプトのリストを表示するには、次のようにします。
+
+```sh
+$ forever list
+```
+
+Forever によって開始されたスクリプトを停止するには、`forever stop` コマンドを使用して、プロセス索引 (`forever list` コマンドによってリストされます) を指定します。
+
+```sh
+$ forever stop 1
+```
+
+あるいは、次のようにファイルのパスを指定します。
+
+```sh
+$ forever stop script.js
+```
+
+Forever によって開始されたすべてのスクリプトを停止するには、次のようにします。
+
+```sh
+$ forever stopall
+```
+
+Forever には、さらに多くのオプションがあり、プログラマチック API もあります。
+
+## PM2
+
+PM2 は、ロード・バランサーが組み込まれた、Node.js アプリケーション用の実動プロセス・マネージャーです。PM2 では、アプリケーションの稼働を永続的に維持して、ダウン時間を発生させずに再ロードすることができ、共通のシステム管理タスクを簡単に実行できます。PM2 では、アプリケーションのロギング、モニター、クラスタリングを管理することもできます。
+
+詳細については、[https://github.com/Unitech/pm2](https://github.com/Unitech/pm2) を参照してください。
+
+### インストール
+
+```sh
+$ [sudo] npm install pm2 -g
+```
+
+### 基本的な使用法
+
+`pm2` コマンドを使用してアプリケーションを開始する場合、アプリケーションのパスを指定する必要があります。ただし、アプリケーションの停止、再始動、または削除を行う場合は、アプリケーションの名前または ID を指定するだけで済みます。
+
+```sh
+$ pm2 start app.js
+[PM2] restartProcessId process id 0
+┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
+│ App name │ id │ mode │ pid   │ status │ restart │ uptime │ memory      │ watching │
+├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────────────┼──────────┤
+│ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
+└──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
+ Use the `pm2 show <id|name>` command to get more details about an app.
+```
+
+`pm2` コマンドを使用してアプリケーションを開始する場合、アプリケーションは即時にバックグラウンドに送信されます。さまざまな `pm2` コマンドを使用して、コマンド・ラインからバックグラウンド・アプリケーションを制御できます。
+
+`pm2` コマンドを使用してアプリケーションが開始された後、アプリケーションはID を使用して PM2 のプロセス・リストに登録されます。そのため、システム上の別のディレクトリーからID を使用して同じ名前を持つアプリケーションを管理できます。
+
+同じ名前を持つ複数のアプリケーションが実行されている場合、`pm2` コマンドがすべてのアプリケーションに影響を与えることに注意してください。そのため、個々のアプリケーションを管理するには、名前ではなく ID を使用してください。
+
+実行中のプロセスをすべてリストするには、次のようにします。
+
+```sh
+$ pm2 list
+```
+
+アプリケーションを停止するには、次のようにします。
+
+```sh
+$ pm2 stop 0
+```
+
+アプリケーションを再始動するには、次のようにします。
+
+```sh
+$ pm2 restart 0
+```
+
+アプリケーションに関する詳細情報を表示するには、次のようにします。
+
+```sh
+$ pm2 show 0
+```
+
+アプリケーションを PM2 のレジストリーから削除するには、次のようにします。
+
+```sh
+$ pm2 delete 0
+```
+
+## StrongLoop Process Manager
 
 StrongLoop Process Manager (StrongLoop PM) は、Node.js アプリケーション用の実動プロセス・マネージャーです。StrongLoop PM には、ロード・バランシング、モニター、マルチホスト・デプロイメント、およびグラフィカル・コンソールが組み込まれています。
 StrongLoop PM は、以下のタスクに使用できます。
@@ -50,24 +174,19 @@ StrongLoop PM で作業するには、`slc` という強力なコマンド・ラ
 - [Using StrongLoop Process Manager](http://docs.strongloop.com/display/SLC/Using+Process+Manager).
 
 ### インストール
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ [sudo] npm install -g strongloop
-</code>
-</pre>
+```
 
 ### 基本的な使用法
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ cd my-app
 $ slc start
-</code>
-</pre>
+```
 
 プロセス・マネージャーとすべてのデプロイ済みアプリケーションを表示するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl
 Service ID: 1
 Service Name: my-app
@@ -83,201 +202,91 @@ Processes:
     1.1.57694  57694   2     0.0.0.0:3001
     1.1.57695  57695   3     0.0.0.0:3001
     1.1.57696  57696   4     0.0.0.0:3001
-</code>
-</pre>
+```
 
 すべての管理対象アプリケーション (サービス) をリストするには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl ls
 Id          Name         Scale
  1          my-app       1
-</code>
-</pre>
+```
 
 アプリケーションを停止するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl stop my-app
-</code>
-</pre>
+```
 
 アプリケーションを再始動するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl restart my-app
-</code>
-</pre>
+```
 
 「ソフト再始動」も実行できます。実行するとワーカー・プロセスに既存の接続をクローズするための猶予期間を与えた後で、現行のアプリケーションが再始動されます。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl soft-restart my-app
-</code>
-</pre>
+```
 
 アプリケーションを管理対象から削除するには、次のようにします。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl remove my-app
-</code>
-</pre>
+```
+## SystemD
 
-## <a id="pm2">PM2</a>
+### イントロダクション
 
-PM2 は、ロード・バランサーが組み込まれた、Node.js アプリケーション用の実動プロセス・マネージャーです。PM2 では、アプリケーションの稼働を永続的に維持して、ダウン時間を発生させずに再ロードすることができ、共通のシステム管理タスクを簡単に実行できます。PM2 では、アプリケーションのロギング、モニター、クラスタリングを管理することもできます。
+SystemDは現代のLinuxディストリビューションにおける、デフォルトのプロセスマネージャです。SystemDに基づいたノードサービスの実行は非常に簡単です。注：このセクションは、[Ralph Slooten(@axllent) のブログ記事](https://www.axllent.org/docs/view/nodejs-service-with-systemd/)に基づいています。
 
-詳細については、[https://github.com/Unitech/pm2](https://github.com/Unitech/pm2) を参照してください。
+### serviceのセットアップ
 
-### インストール
+Create a file in `/etc/systemd/system/express.service`:
 
-<pre>
-<code class="language-sh" translate="no">
-$ [sudo] npm install pm2 -g
-</code>
-</pre>
+```sh
+[Unit]
+Description=Express
+# Set dependencies to other services (optional)
+#After=mongodb.service
 
-### 基本的な使用法
+[Service]
+# Run Grunt before starting the server (optional)
+#ExecStartPre=/usr/bin/grunt
 
-`pm2` コマンドを使用してアプリケーションを開始する場合、アプリケーションのパスを指定する必要があります。ただし、アプリケーションの停止、再始動、または削除を行う場合は、アプリケーションの名前または ID を指定するだけで済みます。
+# Start the js-file starting the express server
+ExecStart=/usr/bin/node server.js
+WorkingDirectory=/usr/local/express
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=Express
+# Change to a non-root user (optional, but recommended)
+#User=<alternate user>
+#Group=<alternate group>
+# Set environment options
+Environment=NODE_ENV=production PORT=8080
 
-<pre>
-<code class="language-sh" translate="no">
-$ pm2 start app.js
-[PM2] restartProcessId process id 0
-┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
-│ App name │ id │ mode │ pid   │ status │ restart │ uptime │ memory      │ watching │
-├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────────────┼──────────┤
-│ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
-└──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
- Use the `pm2 show <id|name>` command to get more details about an app.
-</code>
-</pre>
+[Install]
+WantedBy=multi-user.target
+```
 
-`pm2` コマンドを使用してアプリケーションを開始する場合、アプリケーションは即時にバックグラウンドに送信されます。さまざまな `pm2` コマンドを使用して、コマンド・ラインからバックグラウンド・アプリケーションを制御できます。
+### serviceの有効化
 
-`pm2` コマンドを使用してアプリケーションが開始された後、アプリケーションはID を使用して PM2 のプロセス・リストに登録されます。そのため、システム上の別のディレクトリーからID を使用して同じ名前を持つアプリケーションを管理できます。
+```sh
+$ systemctl enable express.service
+```
 
-同じ名前を持つ複数のアプリケーションが実行されている場合、`pm2` コマンドがすべてのアプリケーションに影響を与えることに注意してください。そのため、個々のアプリケーションを管理するには、名前ではなく ID を使用してください。
+### serviceの起動
 
-実行中のプロセスをすべてリストするには、次のようにします。
+```sh
+$ systemctl start express.service
+```
 
-<pre>
-<code class="language-sh" translate="no">
-$ pm2 list
-</code>
-</pre>
+### serviceのステータスのチェック
 
-アプリケーションを停止するには、次のようにします。
-
-<pre>
-<code class="language-sh" translate="no">
-$ pm2 stop 0
-</code>
-</pre>
-
-アプリケーションを再始動するには、次のようにします。
-
-<pre>
-<code class="language-sh" translate="no">
-$ pm2 restart 0
-</code>
-</pre>
-
-アプリケーションに関する詳細情報を表示するには、次のようにします。
-
-<pre>
-<code class="language-sh" translate="no">
-$ pm2 show 0
-</code>
-</pre>
-
-アプリケーションを PM2 のレジストリーから削除するには、次のようにします。
-
-<pre>
-<code class="language-sh" translate="no">
-$ pm2 delete 0
-</code>
-</pre>
-
-
-## <a id="forever">Forever</a>
-
-Forever は、特定のスクリプトが確実に継続的 (永続的) に実行されるようにするための単純なコマンド・ライン・インターフェース・ツールです。Forever のインターフェースは単純であるため、Node.js アプリケーションおよびスクリプトの小規模なデプロイメントを実行するのに理想的です。
-
-詳細については、[https://github.com/foreverjs/forever](https://github.com/foreverjs/forever) を参照してください。
-
-### インストール
-
-<pre>
-<code class="language-sh" translate="no">
-$ [sudo] npm install forever -g
-</code>
-</pre>
-
-### 基本的な使用法
-
-スクリプトを開始するには、次のように `forever start` コマンドを使用して、スクリプトのパスを指定します。
-
-<pre>
-<code class="language-sh" translate="no">
-$ forever start script.js
-</code>
-</pre>
-
-このコマンドは、スクリプトをデーモン・モード (バックグラウンド) で実行します。
-
-端末に接続されるようにスクリプトを実行するには、次のように `start` を省略します。
-
-<pre>
-<code class="language-sh" translate="no">
-$ forever script.js
-</code>
-</pre>
-
-次の例に示すように、ロギング・オプション `-l`、`-o`、および `-e` を使用して Forever ツールおよびスクリプトの出力をログに記録することをお勧めします。
-
-<pre>
-<code class="language-sh" translate="no">
-$ forever start -l forever.log -o out.log -e err.log script.js
-</code>
-</pre>
-
-Forever によって開始されたスクリプトのリストを表示するには、次のようにします。
-
-<pre>
-<code class="language-sh" translate="no">
-$ forever list
-</code>
-</pre>
-
-Forever によって開始されたスクリプトを停止するには、`forever stop` コマンドを使用して、プロセス索引 (`forever list` コマンドによってリストされます) を指定します。
-
-<pre>
-<code class="language-sh" translate="no">
-$ forever stop 1
-</code>
-</pre>
-
-あるいは、次のようにファイルのパスを指定します。
-
-<pre>
-<code class="language-sh" translate="no">
-$ forever stop script.js
-</code>
-</pre>
-
-Forever によって開始されたすべてのスクリプトを停止するには、次のようにします。
-
-<pre>
-<code class="language-sh" translate="no">
-$ forever stopall
-</code>
-</pre>
-
-Forever には、さらに多くのオプションがあり、プログラマチック API もあります。
+```sh
+$ systemctl status express.service
+```
