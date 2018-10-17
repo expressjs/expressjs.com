@@ -11,7 +11,7 @@ lang: ja
   <div id="homepage-leftpane" class="pane">
     <section id="description">
         <div class="express"><a href="/">Express</a></div>
-        <span class="description"><a href='https://nodejs.org/ja/'>Node.js</a> のための高速で、革新的な、最小限のWebフレームワーク
+        <span class="description"><a href='https://nodejs.org/ja/'>Node.js</a> のための高速で、革新的な、最小限のWebフレームワーク</span>
     </section>
     <div id="install-command">$ npm install express --save</div>
   </div>
@@ -19,11 +19,11 @@ lang: ja
     <iframe src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
   </div>
 </section>
-
+<!--
 <section id="announcements">
   {% include announcement/announcement-{{ page.lang }}.md %}
 </section>
-
+-->
 <section id="doc-langs" markdown="1">
 
   Express の資料は、他の言語 ([スペイン語](/es)、[日本語](/ja)、[ロシア語](/ru)、[中国語](/zh-cn)、[韓国語](/ko)、[ポルトガル語](/pt-br)) でも提供されています。
