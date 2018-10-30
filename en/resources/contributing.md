@@ -115,7 +115,7 @@ a majority of the other members are expected to resign.
 
 ### Website Issues
 
-Open issues for the expressjs.com website in https://github.com/expressjs/expressjs.com.
+Open issues for the expressjs.com website in [https://github.com/expressjs/expressjs.com](https://github.com/expressjs/expressjs.com).
 
 ### PRs and code contributions
 
