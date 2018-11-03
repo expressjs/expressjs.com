@@ -8,7 +8,7 @@ redirect_from: "/resources/books-blogs.html"
 
 # Books and blogs
 
-<div class="doc-box doc-warn">Disclaimer: Unendorsed community content.</div>
+{% include community-caveat.html %}
 
 ## Books
 

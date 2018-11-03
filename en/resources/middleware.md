@@ -37,6 +37,8 @@ The Express middleware modules listed here are maintained by the
 
 These are some additional popular middleware modules.
 
+{% include community-caveat.html %}
+
 |Middleware&nbsp;module | Description |
 |---------------------------|---------------------|
 | [connect-image-optimus](https://github.com/msemenistyi/connect-image-optimus) | Optimize image serving. Switches images to `.webp` or `.jxr`, if possible.|
