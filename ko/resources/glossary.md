@@ -29,7 +29,7 @@ API 참조의 [라우터](/{{ page.lang }}/4x/api.html#router)를 참조하십�
 
 ### 오픈 소스(open-source, open source)
 
-영문에서 형용사로 사용될 때는 하이픈이 사용됩니다. 예: "이 소프트웨어는 오픈 소스 소프트웨어입니다(This is open-source software)." [Wikipedia의 Open-source software](http://en.wikipedia.org/wiki/Open-source_software)를 참조하십시오. 참고: 영문에서 이 용어에 하이픈이 사용되지 않는 경우가 흔하지만, 여기서는 합성 형용사에 하이픈을 추가하는 표준 영문 규칙을 사용합니다.
+영문에서 형용사로 사용될 때는 하이픈이 사용됩니다. (예: "이 소프트웨어는 오픈 소스 소프트웨어입니다" [Wikipedia의 Open-source software](http://en.wikipedia.org/wiki/Open-source_software)를 참조하십시오.) 참고로 영문에서 이 용어에 하이픈이 사용되지 않는 경우가 흔하지만, 여기서는 합성 형용사에 하이픈을 추가하는 표준 영문 규칙을 사용합니다.
 
 ### 요청(request)
 
