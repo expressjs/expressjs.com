@@ -23,3 +23,4 @@ Several popular Node.js frameworks are built on Express:
 - **[Express Gateway](https://express-gateway.io)**: Fully-featured and extensible API Gateway using Express as foundation
 - **[Dinoloop](https://github.com/ParallelTask/dinoloop)**: Rest API Application Framework powered by typescript with dependency injection
 - **[Kites](https://kites.nodejs.vn/)**: Template-based Web Application Framework
+- **[FoalTS](https://github.com/FoalTS/foal)**: Next-generation framework for building enterprise-grade Node.js applications (TypeScript).
