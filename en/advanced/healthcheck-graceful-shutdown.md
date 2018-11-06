@@ -21,6 +21,8 @@ A load balancer uses health checks to determine if an application instance is he
 
 ## Third-party solutions
 
+{% include community-caveat.html %}
+
 ### Terminus
 
 [Terminus](https://github.com/godaddy/terminus) is an open-source project that adds health checks and graceful shutdown to your application to eliminate the need to write boilerplate code. You just provide the cleanup logic for graceful shutdowns and the health check logic for health checks, and terminus handles the rest.

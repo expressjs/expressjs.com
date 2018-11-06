@@ -7,6 +7,8 @@ lang: en
 
 # Frameworks built on Express
 
+{% include community-caveat.html %}
+
 Several popular Node.js frameworks are built on Express:
 
 - **[Feathers](http://feathersjs.com)**: Build prototypes in minutes and production ready real-time apps in days.
@@ -19,7 +21,7 @@ Several popular Node.js frameworks are built on Express:
 - **[Hydra-Express](https://github.com/flywheelsports/fwsp-hydra-express)**: Hydra-Express is a light-weight library which facilitates building Node.js Microservices using ExpressJS.
 - **[Blueprint](http://github.com/onehilltech/blueprint)**: a SOLID framework for building APIs and backend services
 - **[Locomotive](http://locomotivejs.org/)**: Powerful MVC web framework for Node.js from the maker of Passport.js
-- **[graphql-yoga](https://github.com/graphcool/graphql-yoga)**: Fully-featured, yet simple and lightweight GraphQL server 
+- **[graphql-yoga](https://github.com/graphcool/graphql-yoga)**: Fully-featured, yet simple and lightweight GraphQL server
 - **[Express Gateway](https://express-gateway.io)**: Fully-featured and extensible API Gateway using Express as foundation
 - **[Dinoloop](https://github.com/ParallelTask/dinoloop)**: Rest API Application Framework powered by typescript with dependency injection
 - **[Kites](https://kites.nodejs.vn/)**: Template-based Web Application Framework
