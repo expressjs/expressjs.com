@@ -40,7 +40,7 @@ Ein handliches Tool zum Abrufen eines kostenloses TLS-Zertifikats ist außerdem 
 * Über [hpkp](https://github.com/helmetjs/hpkp) werden [Public Key Pinning](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning)-Header hinzugefügt, um Man-in-the-Middle-Attacken mit gefälschten Zertifikaten vorzubeugen.
 * Über [hsts](https://github.com/helmetjs/hsts) werden `Strict-Transport-Security`-Header festgelegt, über die sichere (HTTP over SSL/TLS) Verbindungen zum Server durchgesetzt werden.
 * Über [ieNoOpen](https://github.com/helmetjs/ienoopen) werden `X-Download-Options`-Header für IE8+ festgelegt.
-* Über [noCache](https://github.com/helmetjs/nocache) werden `Cache-Control`- und Pragma-Header festgelegt, um clientseitiges Caching zu inaktivieren.
+* Über [noCache](https://github.com/helmetjs/nocache) werden `Cache-Control`- und Pragma-Header festgelegt, um clientseitiges Caching zu deaktivieren.
 * Über [noSniff](https://github.com/helmetjs/dont-sniff-mimetype) werden `X-Content-Type-Options`-Header festgelegt, um bei Browsern MIME-Sniffing von Antworten weg vom deklarierten Inhaltstyp (declared content-type) vorzubeugen.
 * Über [frameguard](https://github.com/helmetjs/frameguard) wird der `X-Frame-Options`-Header festgelegt, um [Clickjacking](https://www.owasp.org/index.php/Clickjacking)-Schutz zu gewährleisten.
 * Über [xssFilter](https://github.com/helmetjs/x-xss-protection) werden `X-XSS-Protection`-Header festgelegt, um XSS-Filter (Cross-site Scripting) in den meisten aktuellen Web-Browsern zu aktivieren.
@@ -64,11 +64,11 @@ app.use(helmet());
 </code>
 </pre>
 
-### Inaktivieren Sie mindestens den X-Powered-By-Header
+### Deaktivieren Sie mindestens den X-Powered-By-Header
 
-Wenn Sie "Helmet" nicht verwenden wollen, sollten Sie mindestens den `X-Powered-By`-Header inaktivieren. Angreifer können diesen Header (der standardmäßig aktiviert ist) zum Erkennen von Anwendungen mit Express verwenden und dann gezielte Attacken in die Wege leiten.
+Wenn Sie "Helmet" nicht verwenden wollen, sollten Sie mindestens den `X-Powered-By`-Header deaktivieren. Angreifer können diesen Header (der standardmäßig aktiviert ist) zum Erkennen von Anwendungen mit Express verwenden und dann gezielte Attacken in die Wege leiten.
 
-Ein bewährtes Verfahren ist also, diesen Header mit der Methode `app.disable()` zu inaktivieren:
+Ein bewährtes Verfahren ist also, diesen Header mit der Methode `app.disable()` zu deaktivieren:
 
 <pre>
 <code class="language-javascript" translate="no">
