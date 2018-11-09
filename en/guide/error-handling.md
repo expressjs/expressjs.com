@@ -43,6 +43,8 @@ app.get("/", function (req, res, next) {
 });
 ```
 
+If you pass anything to the `next()` function (except the string `'route'`), Express regards the current request as being an error and will skip any remaining non-error handling routing and middleware functions.
+
 If the callback in a sequence provides no data, only errors, you can simplify this code as follows:
 
 ```js
@@ -244,8 +246,6 @@ function errorHandler (err, req, res, next) {
   res.render('error', { error: err })
 }
 ```
-
-If you pass anything to the `next()` function (except the string `'route'`), Express regards the current request as being an error and will skip any remaining non-error handling routing and middleware functions. If you want to handle that error, you'll have to create an error-handling route as described in the next section.
 
 If you have a route handler with multiple callback functions you can use the `route` parameter to skip to the next route handler.  For example:
 
