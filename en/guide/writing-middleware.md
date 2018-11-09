@@ -106,7 +106,7 @@ The middleware function `myLogger` simply prints a message, then passes on the r
 
 <h3>Middleware function requestTime</h3>
 
-Next, we'll create a middleware function called "requestTime" and add it as a property called `requestTime`
+Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
 to the request object.
 
 ```js
