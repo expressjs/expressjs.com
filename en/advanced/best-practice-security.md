@@ -47,7 +47,7 @@ Also, a handy tool to get a free TLS certificate is [Let's Encrypt](https://lets
 
 [Helmet](https://www.npmjs.com/package/helmet) can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
 
-Helmet is actually just a collection of nine smaller middleware functions that set security-related HTTP headers:
+Helmet is actually just a collection of smaller middleware functions that set security-related HTTP response headers:
 
 * [csp](https://github.com/helmetjs/csp) sets the `Content-Security-Policy` header to help prevent cross-site scripting attacks and other cross-site injections.
 * [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) removes the `X-Powered-By` header.
