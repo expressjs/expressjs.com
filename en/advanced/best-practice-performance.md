@@ -10,187 +10,297 @@ redirect_from: "/advanced/best-practice-performance.html"
 
 ## Overview
 
-This article discusses performance and reliability best practices for Express applications deployed to production.
+This article discusses performance and reliability best practices for Express applications.  Performance is a complex topic, and just following a general 
+set of guidelines is not enough, because of this we will also provide suggestions on how to [measure your application performance](#measuring-performance) and debug bottlenecks.  Once you
+know how to measure your application performance you can apply the best practice suggestions here and ensure they produce the performance results you expect.
 
-This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts:
+Those best practices are broken into two sections:
 
 * Things to do in your code (the dev part):
-  * [Use gzip compression](#use-gzip-compression)
   * [Don't use synchronous functions](#dont-use-synchronous-functions)
   * [Do logging correctly](#do-logging-correctly)
   * [Handle exceptions properly](#handle-exceptions-properly)
+  * [Use Node's cluster module](#use-cluster-module)
 * Things to do in your environment / setup (the ops part):
   * [Set NODE_ENV to "production"](#set-node_env-to-production)
   * [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
-  * [Run your app in a cluster](#run-your-app-in-a-cluster)
-  * [Cache request results](#cache-request-results)
-  * [Use a load balancer](#use-a-load-balancer)
   * [Use a reverse proxy](#use-a-reverse-proxy)
 
-## Things to do in your code {#in-code}
+## Measuring Performance {#measuring-performance}
+
+The most basic way to measure performance in your application is to use an external tool to measure the time from making a request to receiving the response.
+One example of a tool for this kind of testing is `siege`.  Siege will continually make requests to your application and measure the time and number of responses.
+Once you have siege installed you can run it like this:
+
+```
+$ siege -t 1m -c5 -g http://localhost:4000
+
+...The request output logs...
+
+Lifting the server siege...
+Transactions:		         358 hits
+Availability:		       72.47 %
+Elapsed time:		        0.82 secs
+Data transferred:	        2.11 MB
+Response time:		        0.04 secs
+Transaction rate:	      436.59 trans/sec
+Throughput:		        2.58 MB/sec
+Concurrency:		       16.76
+Successful transactions:         358
+Failed transactions:	         136
+Longest transaction:	        0.07
+Shortest transaction:	        0.01
+```
+
+As you can see you get a nice output with the average response time (`0.04 secs`), the availability (`72.45%` successful requests) and the highest and lowest times (`0.07` and `0.01` respectively).
+This is a great way to test the general request performance, but does not really capture the traffic you would really see in a production application.  To get a more realistic test you might want to 
+request a set of routes, you can do this with a file like so:
+
+```
+# urls.txt
+http://localhost:4000
+http://localhost:4000/en/advanced/best-practice-performance.html
+http://localhost:4000/en/4x/api.html
+
+# Example post request with body
+http://localhost:4000 POST {"hello":"world"}
+```
+
+```
+$ siege -t 1m --file=urls.txt
+```
+
+This will make requests to all of the urls in the text file, thus testing something more similar to a real world traffic pattern.  One other thing to consider when doing this kind of testing
+is that running `siege` on the same machine which is running the server can lead to contention between the two.  Because of this, it is best to run these from different machines.
+
+Often just doing this kind of testing will be enough to discover and debug performance bottlenecks, but sometimes you find that you have a route which is slow and cannot tell which part is causing the
+slowdown.  To debug this you need to dig a bit deeper.
+
+Express applications use middleware to organize and decouple different parts of the application logic, so often it is helpful to time
+the execution time from inside the application.  Depending on the situation, there are three types of timing measurements we might choose:
+
+1. [Measure total request time](#measure-total-request-time)
+  - This measures the complete time spent in the middleware stack from beginning to end
+  - As a high level measurement, it might not give the detail you need on an individual middleware level
+  - Suggested module: `response-time`
+2. [Measure from a middleware to starting a response](#measure-middleware-response-time)
+  - This kind of test is good for middleware which always send a response
+  - This is more accurate for performance in this case than waiting for the `next` function or the end of the response (aka the `finished` event)
+  - This is not the best way to test middleware which do not always send a response because it would not only include the middelware but all following middleware until the response is sent
+  - Suggested module:  `response-time`
+3. [Measure a single middleware](#measure-single-middleware)
+  - This is great for testing middleware which do not send a response
+  - Because you are not required to call `next`, you need to make sure the middleware you are testing will always call `next` or you will miss measurements
+  - Suggested module: 
+
+### Measuring total request time {#measure-total-request-time}
+
+To measure complete request processing time you can use the middleware module `response-time` like this:
+
+```js
+const responseTime = require('response-time')
+const app = require('express')()
+
+// This middleware should be loaded before all others, that
+// ensures that the timer starts as soon as we can
+app.use(responseTime((req, res, time) => {
+  // This is one nice way I have used to get timing on a per route basis
+  const route = res.locals.routeName || 'unknown'
+
+  // Report your time to your metrics system, in this case just log
+  console.log('requestTime', {
+	  route,
+	  time,
+	  status: res.statusCode
+  })
+}))
+
+app.get('/', (req, res) => {
+  // Name the route, see above
+  res.locals.routeName = 'doSomething'
+
+  // do something that takes time, like a dataase query
+  doSomething((data) => {
+  	res.json(data)
+  })
+})
+
+app.get('/other-route', (req, res) => {
+  res.locals.routeName = 'otherRoute'
+  res.json({other: 'route'})
+})
+
+app.listen()
+```
+
+As you can see above we load in the middleware before all others with `.use` which will be run on every incoming request.  Because this middleware is used
+for all requests it will log data for both routes.  Most of the time you will want to tell the difference between the performance of each route individually,
+to do this we add a routeName to the response locals which is then made available in the `response-time` callback function.  (Note: this is just one way to achieve
+this separation of routes, but in this case it is nice because it shows off another feature of Express `res.locals`.  Use whichever other methods you like.)
+
+### Measure from a middleware to the start of a response {#measure-middleware-response-time}
+
+While very similar to the example above, it can be difficult to tell where the time is being spend in a long or complicated chain of middlware.  To separate these out,
+you can often time from the start of a middleware to the response being sent, to see how much it makes up of the complete response time.  To do this we can use the
+same module above, but wrapping a single middleware:
+
+```js
+const responseTime = require('response-time')
+const time = responseTime((req, res, time) => {
+	console.log('requestTime', {
+		route: 'onlyDoSomething',
+		time,
+		status: res.statusCode
+	})
+})
+
+app.get('/', (req, res) => {
+	time(req, res, () => {
+		doSomething((data) => {
+			res.json(data)
+		})
+	})
+})
+```
+
+As you can see above, we can move the response time middleware to wrap the middleware in question.  This will isolate the time to be just the time it took for the
+set of middleware following this leading up to the headers being sent.  If you have middleware which do other things before this the time taken there will not be measured and
+can then be compared with the total request time to see if this was your bottleneck.  Notice how we create the middleware function outside the request cycle, this limits the
+amount of code we run on each request to the performance monitoring code has the smallest impact it can.
+
+### Measure a single middleware {#measure-single-middleware}
+
+This last method for timing is the most fine-grained type.  If you have gone through the above steps to measure and still have not found your performance bottleneck, ofthen
+adding this kind of tracking to every segment of a request will be necessary.  Because we are not waiting on the headers and just timing to the call of `next` we do not want
+to use the `response-time` module for this.  Instead we will want to use
+
+<@TODO...>
+
+
+# Things to do in your code {#in-code}
+
+Seeing as Express is a library you utilize in your code we will start with some best practices for that implementation.  One thing to remember is that many of these
+best practices are not Express specific, but apply to all Node.js code and some to any web applications.
 
 Here are some things you can do in your code to improve your application's performance:
 
-* [Use gzip compression](#use-gzip-compression)
 * [Don't use synchronous functions](#dont-use-synchronous-functions)
 * [Do logging correctly](#do-logging-correctly)
 * [Handle exceptions properly](#handle-exceptions-properly)
+* [Use Node's cluster module](#use-cluster-module)
 
-### Use gzip compression
+## Don't use synchronous functions {#dont-use-synchronous-functions}
 
-Gzip compressing can greatly decrease the size of the response body and hence increase the speed of a web app. Use the [compression](https://www.npmjs.com/package/compression) middleware for gzip compression in your Express app. For example:
+Synchronous functions and methods tie up the executing process until they finish. A single call to a synchronous function might return in a few microseconds or
+milliseconds, however on websites with many concurrent users, these calls block each other and add up to reduce the performance of the whole app.
 
-```js
-var compression = require('compression')
-var express = require('express')
-var app = express()
-app.use(compression())
-```
+Although Node and many modules provide synchronous and asynchronous versions of their functions, always use the asynchronous version in your runtime code. The one exception
+when a synchronous function can be justified is upon initial startup.
 
-For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#use-a-reverse-proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
+If you are using Node.js 4.0+, you can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API.
+Of course, you wouldn't want to use this in production, but rather to ensure that your code is ready for production. See the [node command-line options documentation](https://nodejs.org/api/cli.html#cli_trace_sync_io)
+for more information.
 
-### Don't use synchronous functions
+## Do logging correctly {#do-logging-correctly}
 
-Synchronous functions and methods tie up the executing process until they return. A single call to a synchronous function might return in a few microseconds or milliseconds, however in high-traffic websites, these calls add up and reduce the performance of the app. Avoid their use in production.
+Using `console.log()` or `console.error()` to print log messages to the terminal is common practice in development, but [these functions can be synchronous](https://nodejs.org/api/process.html#process_a_note_on_process_i_o) 
+depending on the configuration of the process stdio.  To avoid any accidental synchronous io, as we learned above, you should be sure not to use `console.log`, `console.error` or their underlying
+`process.stdout` and `process.stderr` directly.
 
-Although Node and many modules provide synchronous and asynchronous versions of their functions, always use the asynchronous version in production. The only time when a synchronous function can be justified is upon initial startup.
+### For debugging
 
-If you are using Node.js 4.0+ or io.js 2.1.0+, you can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Of course, you wouldn't want to use this in production, but rather to ensure that your code is ready for production. See the [node command-line options documentation](https://nodejs.org/api/cli.html#cli_trace_sync_io) for more information.
+If you're logging for purposes of debugging, then instead of using `console.log()`, use a special debugging module like [debug](https://www.npmjs.com/package/debug). This module
+enables you to use the DEBUG environment variable to control what debug messages are sent to `console.error()`, if any. To keep your app purely asynchronous, you'd still want to
+pipe `console.error()` to another program. But then, you're not really going to debug in production, are you?
 
-### Do logging correctly
+### For app activity
 
-In general, there are two reasons for logging from your app: For debugging and for logging app activity (essentially, everything else). Using `console.log()` or `console.error()` to print log messages to the terminal is common practice in development. But [these functions are synchronous](https://nodejs.org/api/console.html#console_console_1) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
+If you're logging app activity (for example, tracking traffic or API calls), instead of using `console.log()`, use a logging library like [Winston](https://www.npmjs.com/package/winston)
+or [Bunyan](https://www.npmjs.com/package/bunyan). For a detailed comparison of these two libraries, see the StrongLoop blog post
+[Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
 
-#### For debugging
+### Handle exceptions properly {#handle-exceptions-properly}
 
-If you're logging for purposes of debugging, then instead of using `console.log()`, use a special debugging module like [debug](https://www.npmjs.com/package/debug). This module enables you to use the DEBUG environment variable to control what debug messages are sent to `console.err()`, if any. To keep your app purely asynchronous, you'd still want to pipe `console.err()` to another program. But then, you're not really going to debug in production, are you?
+Typically Node apps crash when they encounter an uncaught exception or a rejected promise without a `.catch`. Not handling these errors will cause your Express app to crash and go offline.
+If you follow the advice to [ensure your app automatically restarts](#ensure-your-app-automatically-restarts) below, then your app will restart after a crash. Fortunately,
+Express apps typically have a short startup time, but any requests made while starting up will fail, and this is not a great user experience. Generally, you want to avoid
+crashing in the first place, and to do that, you need to handle exceptions properly.
 
-#### For app activity
+Express tries to help you in this by building in handling for exceptions which happen during the middleware stack. If an error condition occurs in a synchronous section of code
+which is running as a part of a middleware, Express will catch the error and call the next [error handling middleware](/guide/error-handling.md#writing-error-handlers). This is
+good for most errors in an Express application, but often times you will have specific error handling, asynchronous, or other "out of the middleware stack" errors.  In order to
+avoid crashing you will need to handle these error conditions directly. See the section on [error handling for more on this topic](/guide/error-handling.md#writing-error-handlers).
 
-If you're logging app activity (for example, tracking traffic or API calls), instead of using `console.log()`, use a logging library like [Winston](https://www.npmjs.com/package/winston) or [Bunyan](https://www.npmjs.com/package/bunyan). For a detailed comparison of these two libraries, see the StrongLoop blog post [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
+Despite doing your best and having high attention to detail when handling errors, things will always occur in your program which you did not expect. In these cases it is helpful to use the
+global node error handlers.  There are two events, but both should be handled in the same way, gracefully shut down the server and initiate a restart.  Typically "gracefully" means four things:
 
-### Handle exceptions properly
+1. Close the server to new incoming requests
+2. Let other requests finish if they can
+3. Log relevant application state for debugging
+4. Exit the process with a non-zero code
 
-Node apps crash when they encounter an uncaught exception. Not handling exceptions and taking appropriate actions will make your Express app crash and go offline. If you follow the advice in [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts) below, then your app will recover from a crash. Fortunately, Express apps typically have a short startup time. Nevertheless, you want to avoid crashing in the first place, and to do that, you need to handle exceptions properly.
-
-To ensure you handle all exceptions, use the following techniques:
-
-* [Use try-catch](#use-try-catch)
-* [Use promises](#use-promises)
-
-Before diving into these topics, you should have a basic understanding of Node/Express error handling: using error-first callbacks, and propagating errors in middleware. Node uses an "error-first callback" convention for returning errors from asynchronous functions, where the first parameter to the callback function is the error object, followed by result data in succeeding parameters. To indicate no error, pass null as the first parameter. The callback function must correspondingly follow the error-first callback convention to meaningfully handle the error. And in Express, the best practice is to use the next() function to propagate errors through the middleware chain.
-
-For more on the fundamentals of error handling, see:
-
-* [Error Handling in Node.js](https://www.joyent.com/developers/node/design/errors)
-* [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop blog)
-
-#### What not to do
-
-One thing you should _not_ do is to listen for the `uncaughtException` event, emitted when an exception bubbles all the way back to the event loop. Adding an event listener for `uncaughtException` will change the default behavior of the process that is encountering an exception; the process will continue to run despite the exception. This might sound like a good way of preventing your app from crashing, but continuing to run the app after an uncaught exception is a dangerous practice and is not recommended, because the state of the process becomes unreliable and unpredictable.
-
-Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process.html#process_event_uncaughtexception). So listening for `uncaughtException` is just a bad idea. This is why we recommend things like multiple processes and supervisors: crashing and restarting is often the most reliable way to recover from an error.
-
-We also don't recommend using [domains](https://nodejs.org/api/domain.html). It generally doesn't solve the problem and is a deprecated module.
-
-#### Use try-catch
-
-Try-catch is a JavaScript language construct that you can use to catch exceptions in synchronous code. Use try-catch, for example, to handle JSON parsing errors as shown below.
-
-Use a tool such as [JSHint](http://jshint.com/) or [JSLint](http://www.jslint.com/) to help you find implicit exceptions like [reference errors on undefined variables](http://www.jshint.com/docs/options/#undef).
-
-Here is an example of using try-catch to handle a potential process-crashing exception.
-This middleware function accepts a query field parameter named "params" that is a JSON object.
+Here is an example of gracefully handling these kind of unrecoverable errors:
 
 ```js
-app.get('/search', function (req, res) {
-  // Simulating async operation
-  setImmediate(function () {
-    var jsonStr = req.query.params
-    try {
-      var jsonObj = JSON.parse(jsonStr)
-      res.send('Success')
-    } catch (e) {
-      res.status(400).send('Invalid JSON string')
-    }
-  })
-})
+const app = require('express')()
+let server
+
+// ... app setup ...
+
+let isClosing = false
+function handleErrors (err) {
+	// Log all errors even if we are closing
+	log.error(err)
+
+	if (isClosing) {
+		return
+	}
+  isClosing = true
+	server.close(() => {
+		// This is called whtn the server finishes all
+		// outgoing responses and has fully closed the server
+		process.exit(1)
+	})
+}
+process.on('uncaughtException', handleErrors)
+process.on('unhandledRejection', handleErrors)
+
+server = app.listen()
 ```
 
-However, try-catch works only for synchronous code. Because the Node platform is primarily asynchronous (particularly in a production environment), try-catch won't catch a lot of exceptions.
+*NOTE:* A previous version of this guide recommended against using these event callbacks because they do not kill the process if you listen for them. This is still true,
+so remember to ALWAYS exit the process on both `uncaughtException` and `uncaughtRejection`.  The reason it is not recommended to use the default process exiting behavior
+is that it gives you no ability to gracefully let the other http requests finish, which can cause odd behavior like incomplete or corrupt response bodies.
 
-#### Use promises
+### Using Node's cluster module {#use-cluster-module}
 
-Promises will handle any exceptions (both explicit and implicit) in asynchronous code blocks that use `then()`. Just add `.catch(next)` to the end of promise chains. For example:
-
-```js
-app.get('/', function (req, res, next) {
-  // do some sync stuff
-  queryDb()
-    .then(function (data) {
-      // handle data
-      return makeCsv(data)
-    })
-    .then(function (csv) {
-      // handle csv
-    })
-    .catch(next)
-})
-
-app.use(function (err, req, res, next) {
-  // handle error
-})
-```
-
-Now all errors asynchronous and synchronous get propagated to the error middleware.
-
-However, there are two caveats:
-
-1.  All your asynchronous code must return promises (except emitters). If a particular library does not return promises, convert the base object by using a helper function like [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
-2.  Event emitters (like streams) can still cause uncaught exceptions. So make sure you are handling the error event properly; for example:
-
-```js
-const wrap = fn => (...args) => fn(...args).catch(args[2])
-
-app.get('/', wrap(async (req, res, next) => {
-  let company = await getCompanyById(req.query.id)
-  let stream = getLogoStreamById(company.id)
-  stream.on('error', next).pipe(res)
-}))
-```
-
-The `wrap()` function is a wrapper that catches rejected promises and calls `next()` with the error as the first argument.
-For details, see [Asynchronous
-Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/#cleaner-code-with-generators).
-
-For more information about error-handling by using promises, see [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/).
+Clustering enables a master process to spawn worker processes and distribute incoming connections among the workers. On most modern server configurations you have multiple
+cpu cores you can utilize in your app, but because javascript and node are single threaded, you need multiple processes to maximize this hardware's performance.  This is made
+possible with Node's [cluster module](https://nodejs.org/api/cluster.html). However, rather than using this module directly, it's better to use one of the many tools out there that
+does it for you automatically; for example [node-pm](https://www.npmjs.com/package/node-pm) or [cluster-service](https://www.npmjs.com/package/cluster-service).
 
 ## Things to do in your environment / setup {#in-environment}
 
+After you have done all the things above in your application code, there are a bunch of things will you should do for any web application you run. Some of these, since they are not
+Express specific and can change often, will just get small mentions here.  If you have questions you can check out the [Express Gitter](https://gitter.im/expressjs/express) or ask about
+it on [Stack Overflow](https://stackoverflow.com).
+
 Here are some things you can do in your system environment to improve your app's performance:
 
-* [Set NODE_ENV to "production"](#set-node_env-to-production)
-* [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
-* [Run your app in a cluster](#run-your-app-in-a-cluster)
-* [Cache request results](#cache-request-results)
-* [Use a load balancer](#use-a-load-balancer)
-* [Use a reverse proxy](#use-a-reverse-proxy)
+### Set `NODE_ENV` to "production"
 
-### Set NODE_ENV to "production"
+The NODE_ENV environment variable specifies the environment in which an application is running (usually, development or production). One of the simplest things you can do to
+improve performance is to set NODE_ENV to "production."  This has many effects in Express and is a common practice for other node libraries.  Setting NODE_ENV to "production" makes Express:
 
-The NODE_ENV environment variable specifies the environment in which an application is running (usually, development or production). One of the simplest things you can do to improve performance is to set NODE_ENV to "production."
-
-Setting NODE_ENV to "production" makes Express:
-
-* Cache view templates.
-* Cache CSS files generated from CSS extensions.
-* Generate less verbose error messages.
+* Cache view templates
+* Cache CSS or JS files generated from CSS
+* Generate less verbose error messages
 
 [Tests indicate](http://apmblog.dynatrace.com/2015/07/22/the-drastic-effects-of-omitting-node_env-in-your-express-js-applications/) that just doing this can improve app performance by a factor of three!
 
-If you need to write environment-specific code, you can check the value of NODE_ENV with `process.env.NODE_ENV`. Be aware that checking the value of any environment variable incurs a performance penalty, and so should be done sparingly.
-
-In development, you typically set environment variables in your interactive shell, for example by using `export` or your `.bash_profile` file. But in general you shouldn't do that on a production server; instead, use your OS's init system (systemd or Upstart). The next section provides more details about using your init system in general, but setting NODE_ENV is so important for performance (and easy to do), that it's highlighted here.
+In development, you typically set environment variables in your interactive shell, for example by using `export` or your `.bash_profile` file. But in general
+you shouldn't do that on a production server; instead, use your OS's init system (systemd or Upstart). The next section provides more details about using your
+init system in general, but setting NODE_ENV is so important for performance (and easy to do), that it's highlighted here.
 
 With Upstart, use the `env` keyword in your job file. For example:
 
@@ -212,248 +322,56 @@ For more information, see [Using Environment Variables In systemd Units](https:/
 
 ### Ensure your app automatically restarts
 
-In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server itself crashes. Although you hope that neither of those events occurs, realistically you must account for both eventualities by:
-
-* Using a process manager to restart the app (and Node) when it crashes.
-* Using the init system provided by your OS to restart the process manager when the OS crashes. It's also possible to use the init system without a process manager.
-
-Node applications crash if they encounter an uncaught exception. The foremost thing you need to do is to ensure your app is well-tested and handles all exceptions (see [handle exceptions properly](#handle-exceptions-properly) for details). But as a fail-safe, put a mechanism in place to ensure that if and when your app crashes, it will automatically restart.
-
-#### Use a process manager
-
-In development, you started your app simply from the command line with `node server.js` or something similar. But doing this in production is a recipe for disaster. If the app crashes, it will be offline until you restart it. To ensure your app restarts if it crashes, use a process manager. A process manager is a "container" for applications that facilitates deployment, provides high availability, and enables you to manage the application at runtime.
-
-In addition to restarting your app when it crashes, a process manager can enable you to:
-
-* Gain insights into runtime performance and resource consumption.
-* Modify settings dynamically to improve performance.
-* Control clustering (StrongLoop PM and pm2).
-
-The most popular process managers for Node are as follows:
-
-* [StrongLoop Process Manager](http://strong-pm.io/)
-* [PM2](https://github.com/Unitech/pm2)
-* [Forever](https://www.npmjs.com/package/forever)
-
-For a feature-by-feature comparison of the three process managers, see [http://strong-pm.io/compare/](http://strong-pm.io/compare/). For a more detailed introduction to all three, see [Process managers for Express apps](/{{ page.lang }}/advanced/pm.html).
-
-Using any of these process managers will suffice to keep your application up, even if it does crash from time to time.
-
-However, StrongLoop PM has lots of features that specifically target production deployment. You can use it and the related StrongLoop tools to:
-
-* Build and package your app locally, then deploy it securely to your production system.
-* Automatically restart your app if it crashes for any reason.
-* Manage your clusters remotely.
-* View CPU profiles and heap snapshots to optimize performance and diagnose memory leaks.
-* View performance metrics for your application.
-* Easily scale to multiple hosts with integrated control for Nginx load balancer.
-
-As explained below, when you install StrongLoop PM as an operating system service using your init system, it will automatically restart when the system restarts. Thus, it will keep your application processes and clusters alive forever.
-
-#### Use an init system
-
-The next layer of reliability is to ensure that your app restarts when the server restarts. Systems can still go down for a variety of reasons. To ensure that your app restarts if the server crashes, use the init system built into your OS. The two main init systems in use today are [systemd](https://wiki.debian.org/systemd) and [Upstart](http://upstart.ubuntu.com/).
-
-There are two ways to use init systems with your Express app:
-
-* Run your app in a process manager, and install the process manager as a service with the init system. The process manager will restart your app when the app crashes, and the init system will restart the process manager when the OS restarts. This is the recommended approach.
-* Run your app (and Node) directly with the init system. This is somewhat simpler, but you don't get the additional advantages of using a process manager.
-
-##### Systemd
-
-Systemd is a Linux system and service manager. Most major Linux distributions have adopted systemd as their default init system.
-
-A systemd service configuration file is called a _unit file_, with a filename ending in .service. Here's an example unit file to manage a Node app directly (replace the bold text with values for your system and app):
-
-```sh
-[Unit]
-Description=Awesome Express App
-
-[Service]
-Type=simple
-ExecStart=/usr/local/bin/node /projects/myapp/index.js
-WorkingDirectory=/projects/myapp
-
-User=nobody
-Group=nogroup
-
-# Environment variables:
-Environment=NODE_ENV=production
-
-# Allow many incoming connections
-LimitNOFILE=infinity
-
-# Allow core dumps for debugging
-LimitCORE=infinity
-
-StandardInput=null
-StandardOutput=syslog
-StandardError=syslog
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-For more information on systemd, see the [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
-
-##### StrongLoop PM as a systemd service
-
-You can easily install StrongLoop Process Manager as a systemd service. After you do, when the server restarts, it will automatically restart StrongLoop PM, which will then restart all the apps it is managing.
-
-To install StrongLoop PM as a systemd service:
-
-```sh
-$ sudo sl-pm-install --systemd
-```
-
-Then start the service with:
-
-```sh
-$ sudo /usr/bin/systemctl start strong-pm
-```
-
-For more information, see [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10).
-
-##### Upstart
-
-Upstart is a system tool available on many Linux distributions for starting tasks and services during system startup, stopping them during shutdown, and supervising them. You can configure your Express app or process manager as a service and then Upstart will automatically restart it when it crashes.
-
-An Upstart service is defined in a job configuration file (also called a "job") with filename ending in `.conf`. The following example shows how to create a job called "myapp" for an app named "myapp" with the main file located at `/projects/myapp/index.js`.
-
-Create a file named `myapp.conf` at `/etc/init/` with the following content (replace the bold text with values for your system and app):
-
-```sh
-# When to start the process
-start on runlevel [2345]
-
-# When to stop the process
-stop on runlevel [016]
-
-# Increase file descriptor limit to be able to handle more requests
-limit nofile 50000 50000
-
-# Use production mode
-env NODE_ENV=production
-
-# Run as www-data
-setuid www-data
-setgid www-data
-
-# Run from inside the app dir
-chdir /projects/myapp
-
-# The process to start
-exec /usr/local/bin/node /projects/myapp/index.js
-
-# Restart the process if it is down
-respawn
-
-# Limit restart attempt to 10 times within 10 seconds
-respawn limit 10 10
-```
-
-NOTE: This script requires Upstart 1.4 or newer, supported on Ubuntu 12.04-14.10.
-
-Since the job is configured to run when the system starts, your app will be started along with the operating system, and automatically restarted if the app crashes or the system goes down.
-
-Apart from automatically restarting the app, Upstart enables you to use these commands:
-
-* `start myapp` – Start the app
-* `restart myapp` – Restart the app
-* `stop myapp` – Stop the app.
-
-For more information on Upstart, see [Upstart Intro, Cookbook and Best Practises](http://upstart.ubuntu.com/cookbook).
-
-##### StrongLoop PM as an Upstart service
-
-You can easily install StrongLoop Process Manager as an Upstart service. After you do, when the server restarts, it will automatically restart StrongLoop PM, which will then restart all the apps it is managing.
-
-To install StrongLoop PM as an Upstart 1.4 service:
-
-```sh
-$ sudo sl-pm-install
-```
-
-Then run the service with:
-
-```sh
-$ sudo /sbin/initctl start strong-pm
-```
-
-NOTE: On systems that don't support Upstart 1.4, the commands are slightly different. See [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10) for more information.
-
-### Run your app in a cluster
-
-In a multi-core system, you can increase the performance of a Node app by many times by launching a cluster of processes. A cluster runs multiple instances of the app, ideally one instance on each CPU core, thereby distributing the load and tasks among the instances.
-
-![Balancing between application instances using the cluster API](/images/clustering.png)
-
-IMPORTANT: Since the app instances run as separate processes, they do not share the same memory space. That is, objects are local to each instance of the app. Therefore, you cannot maintain state in the application code. However, you can use an in-memory datastore like [Redis](http://redis.io/) to store session-related data and state. This caveat applies to essentially all forms of horizontal scaling, whether clustering with multiple processes or multiple physical servers.
-
-In clustered apps, worker processes can crash individually without affecting the rest of the processes. Apart from performance advantages, failure isolation is another reason to run a cluster of app processes. Whenever a worker process crashes, always make sure to log the event and spawn a new process using cluster.fork().
-
-#### Using Node's cluster module
-
-Clustering is made possible with Node's [cluster module](https://nodejs.org/dist/latest-v4.x/docs/api/cluster.html). This enables a master process to spawn worker processes and distribute incoming connections among the workers. However, rather than using this module directly, it's far better to use one of the many tools out there that does it for you automatically; for example [node-pm](https://www.npmjs.com/package/node-pm) or [cluster-service](https://www.npmjs.com/package/cluster-service).
-
-#### Using StrongLoop PM
-
-If you deploy your application to StrongLoop Process Manager (PM), then you can take advantage of clustering _without_ modifying your application code.
-
-When StrongLoop Process Manager (PM) runs an application, it automatically runs it in a cluster with a number of workers equal to the number of CPU cores on the system. You can manually change the number of worker processes in the cluster using the slc command line tool without stopping the app.
-
-For example, assuming you've deployed your app to prod.foo.com and StrongLoop PM is listening on port 8701 (the default), then to set the cluster size to eight using slc:
-
-```sh
-$ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-```
-
-For more information on clustering with StrongLoop PM, see [Clustering](https://docs.strongloop.com/display/SLC/Clustering) in StrongLoop documentation.
-
-#### Using PM2
-
-If you deploy your application with PM2, then you can take advantage of clustering _without_ modifying your application code.  You should ensure your [application is stateless](http://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) first, meaning no local data is stored in the process (such as sessions, websocket connections and the like).
-
-When running an application with PM2, you can enable **cluster mode** to run it in a cluster with a number of instances of your choosing, such as the matching the number of available CPUs on the machine. You can manually change the number of processes in the cluster using the `pm2` command line tool without stopping the app.
-
-To enable cluster mode, start your application like so:
-
-```sh
-# Start 4 worker processes
-$ pm2 start app.js -i 4
-# Auto-detect number of available CPUs and start that many worker processes
-$ pm2 start app.js -i max
-```
-
-This can also be configured within a PM2 process file (`ecosystem.config.js` or similar) by setting `exec_mode` to `cluster` and `instances` to the number of workers to start.
-
-Once running, a given application with the name `app` can be scaled like so:
-
-```sh
-# Add 3 more workers
-$ pm2 scale app +3
-# Scale to a specific number of workers
-$ pm2 scale app 2
-```
-
-For more information on clustering with PM2, see [Cluster Mode](https://pm2.keymetrics.io/docs/usage/cluster-mode/) in the PM2 documentation.
-
-### Cache request results
-
-Another strategy to improve the performance in production is to cache the result of requests, so that your app does not repeat the operation to serve the same request repeatedly.
-
-Use a caching server like [Varnish](https://www.varnish-cache.org/) or [Nginx](https://www.nginx.com/resources/wiki/start/topics/examples/reverseproxycachingexample/) (see also [Nginx Caching](https://serversforhackers.com/nginx-caching/)) to greatly improve the speed and performance of your app.
-
-### Use a load balancer
-
-No matter how optimized an app is, a single instance can handle only a limited amount of load and traffic. One way to scale an app is to run multiple instances of it and distribute the traffic via a load balancer. Setting up a load balancer can improve your app's performance and speed, and enable it to scale more than is possible with a single instance.
-
-A load balancer is usually a reverse proxy that orchestrates traffic to and from multiple application instances and servers. You can easily set up a load balancer for your app by using [Nginx](http://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
-
-With load balancing, you might have to ensure that requests that are associated with a particular session ID connect to the process that originated them. This is known as _session affinity_, or _sticky sessions_, and may be addressed by the suggestion above to use a data store such as Redis for session data (depending on your application). For a discussion, see [Using multiple nodes](http://socket.io/docs/using-multiple-nodes/).
+In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server
+itself crashes. Although you hope that neither of those events occurs, realistically you must account for both eventualities.  There are many options for this, but
+a few good ones are:
+
+* Using a process manager to restart the app when it crashes	
+  * Examples: [StrongLoop Process Manager](http://strong-pm.io/), [PM2](https://github.com/Unitech/pm2), [Forever](https://www.npmjs.com/package/forever)
+  * Gain insights into runtime performance and resource consumption
+  * Modify settings dynamically to improve performance
+  * Control clustering (StrongLoop PM and pm2)
+  * Does not restart itself (for example at server restart) unless you also use an init system
+* Using the init system provided by your OS to restart the app (or process manager)
+  * Examples: [systemd](https://wiki.debian.org/systemd) and [Upstart](http://upstart.ubuntu.com/)
+  * Restarts when the server restarts or the process crashes
+  * Common across languages or server frameworks
+  * Does not take advantage of node specific things like the cluster module
+* Using an external monitoring system
+  * @TODO
+  * Examples: Consul
+  * Typically used by larger, more advanced, or complicated organizations
+  * Agnostic to server or language constraints
 
 ### Use a reverse proxy
 
-A reverse proxy sits in front of a web app and performs supporting operations on the requests, apart from directing requests to the app. It can handle error pages, compression, caching, serving files, and load balancing among other things.
+A reverse proxy sits in front of a web app and performs supporting operations on the requests. It can handle error pages, SSL termination, compression, caching, serving files, and load balancing among other things.
 
-Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.com/) or [HAProxy](http://www.haproxy.org/) in production.
+Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks.
+For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.com/) or [HAProxy](http://www.haproxy.org/) in production.
+
+#### Reverse Proxy as a Load Balancer
+
+No matter how optimized an app is, a single instance can handle only a limited amount of load and traffic. One way to scale an app is to
+run multiple instances of it and distribute the traffic via a load balancer. Setting up a load balancer can improve your app's performance
+and speed, and enable it to scale more than is possible with a single instance.
+
+#### Caching Reverse Proxy
+
+Another strategy to improve the performance in production is to cache the result of requests, so that your app does not repeat the operation to serve the same request repeatedly.
+With a caching reverse proxy you ensure that your application only handles requests for which it actually needs to do new work.  Examples of caching reverse proxies include
+[Varnish](https://www.varnish-cache.org/) and [Nginx](https://www.nginx.com/resources/wiki/start/topics/examples/reverseproxycachingexample/)
+(see also [Nginx Caching](https://serversforhackers.com/nginx-caching/)) to greatly improve the speed and performance of your app.
+
+#### Reverse proxy for SSL Termination
+
+Because javascript (and therefore node) is single threaded, many cpu intensive tasks on a single process can cause severe performance degresation.  One such example
+is doing strong encryption like in SSL (serving `https://` websites).  Because of this, it is reccomended that you always use something like Nginx for termenation of SSL connections.
+This means that your application will serve only `http` requests and should be firewalled from the external world.  All incoming client requests should go to the reverse proxy and
+only forward on an http connection.  The flow would look like this: `browser -> https:// -> nginx -> http:// -> express app`.
+
+#### Enable Gzip Compression
+
+Gzip compressing can greatly decrease the size of the response body and hence increase the speed of a web app. This can be done most efficiently on your reverse proxy but can also
+be done directly in your node app via the [compression](https://www.npmjs.com/package/compression) middleware.  In nginx you can even combine gzip with caching so that nginx will cache
+the already gziped response, saving even more performance.
