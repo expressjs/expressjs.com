@@ -8,6 +8,16 @@ Transfers the file at the given `path`. Sets the `Content-Type` response HTTP he
 based on the filename's extension. Unless the `root` option is set in
 the options object, `path` must be an absolute path to the file.
 
+<div class="doc-box doc-warn" markdown="1">
+This API provides access to data on the running file system. Ensure that either (a) the way in
+which the `path` argument was constructed into an absolute path is secure if it contains user
+input or (b) set the `root` option to the absolute path of a directory to contain access within.
+
+When the `root` option is provided, the `path` argument is allowed to be a relative path,
+including containing `..`. Express will validate that the relative path provided as `path` will
+resolve within the given `root` option.
+</div>
+
 The following table provides details on the `options` parameter.
 
 <div class="table-scroller" markdown="1">
