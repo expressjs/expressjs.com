@@ -7,7 +7,10 @@ redirect_from: "/resources/template-engines.html"
 ---
 
 # Template engines
-These template engines work "out-of-the-box" with ExpressJS:
+
+{% include warning.html content="The packages listed below may be outdated, no longer maintained or even broken.  Listing here does not constitute an endorsement or recommendation from the Expressjs project team. Use at your own risk." %}
+
+These template engines work "out-of-the-box" with Express:
 
 - **[Pug](https://github.com/pugjs/pug)**: Haml-inspired template engine (formerly Jade).
 - **[Haml.js](https://github.com/tj/haml.js)**: Haml implementation.
