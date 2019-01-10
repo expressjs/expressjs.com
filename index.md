@@ -15,14 +15,12 @@ redirect_from: "/en/index.html"
     </section>
     <div id="install-command">$ npm install express --save</div>
   </div>
-  <div id="homepage-rightpane" class="pane">
-    <iframe src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
-  </div>
 </section>
-
+<!--
 <section id="announcements">
   {% include announcement/announcement-{{ page.lang }}.md %}
 </section>
+-->
 
 <section id="intro">
 
