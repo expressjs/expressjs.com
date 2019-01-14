@@ -4,9 +4,9 @@
 This middleware is available in Express v4.16.0 onwards.
 </div>
 
-This is a built-in middleware function in Express. It parses incoming requests
-with JSON payloads and is based on
-[body-parser](/{{ page.lang }}/resources/middleware/body-parser.html).
+This is a middleware function in Express. It parses incoming requests
+with JSON payloads and is a convenience method that can be used instead of explicitly including 
+[body-parser](/{{ page.lang }}/resources/middleware/body-parser.html) in your app.
 
 Returns middleware that only parses JSON and only looks at requests where
 the `Content-Type` header matches the `type` option. This parser accepts any
@@ -36,3 +36,11 @@ The following table describes the properties of the optional `options` object.
 | `strict`      | Enables or disables only accepting arrays and objects; when disabled will accept anything `JSON.parse` accepts. | Boolean | `true` |
 | `type`        | This is used to determine what media type the middleware will parse. This option can be a string, array of strings, or a function. If not a function, `type` option is passed directly to the [type-is](https://www.npmjs.org/package/type-is#readme) library and this can be an extension name (like `json`), a mime type (like `application/json`), or a mime type with a wildcard (like `*/*` or `*/json`). If a function, the `type` option is called as `fn(req)` and the request is parsed if it returns a truthy value. | Mixed | `"application/json"` |
 | `verify`      | This option, if supplied, is called as `verify(req, res, buf, encoding)`, where `buf` is a `Buffer` of the raw request body and `encoding` is the encoding of the request. The parsing can be aborted by throwing an error. | Function | `undefined` |
+
+<h4 id='example.of.express.json'>Example of express.json</h4>
+
+Here is an example of using the `express.json` middleware function:
+
+```js
+app.use(express.json())
+```
