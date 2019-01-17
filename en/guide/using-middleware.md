@@ -117,6 +117,27 @@ app.get('/user/:id', function (req, res, next) {
 })
 ```
 
+Middleware can also be declared in an array for reusability.
+
+This example shows an array with a middleware sub-stack that handles GET requests to the `/user/:id` path
+
+```js
+function logOriginalUrl (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
+} 
+
+function logMethod(req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+}
+
+var logStuff = [logOriginalUrl, logMethod]
+app.get('/user/:id', logStuff, function (req, res, next) {
+  res.send('User Info')
+})
+```
+
 <h2 id='middleware.router'>Router-level middleware</h2>
 
 Router-level middleware works in the same way as application-level middleware, except it is bound to an instance of `express.Router()`.
