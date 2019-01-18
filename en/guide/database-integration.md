@@ -377,9 +377,14 @@ var Connection = require('tedious').Connection
 var Request = require('tedious').Request
 
 var config = {
-  userName: 'your_username', // update me
-  password: 'your_password', // update me
-  server: 'localhost'
+  server: 'localhost',
+  authentication: {
+    type: 'default',
+    options: {
+      userName: 'your_username', // update me
+      password: 'your_password' // update me
+    }
+  }
 }
 
 var connection = new Connection(config)
