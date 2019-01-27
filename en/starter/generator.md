@@ -81,6 +81,11 @@ On Windows, use this command:
 > set DEBUG=myapp:* & npm start
 ```
 
+On Windows 10, use this command:
+```sh
+> set DEBUG=myapp:* | npm start
+```
+
 Then load `http://localhost:3000/` in your browser to access the app.
 
 The generated app has the following directory structure:
