@@ -6,7 +6,7 @@ lang: en
 redirect_from: "/resources/books-blogs.html"
 ---
 
-# Books, blogs and video tutorials
+# Books, blogs, and video tutorials
 
 {% include community-caveat.html %}
 
