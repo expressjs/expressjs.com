@@ -6,7 +6,7 @@ lang: en
 redirect_from: "/resources/books-blogs.html"
 ---
 
-# Books and blogs
+# Books, blogs and video tutorials
 
 {% include community-caveat.html %}
 
@@ -57,3 +57,6 @@ self-published, February 2018.
 ### Add your blog here!
 
 [Edit the Markdown file](https://github.com/expressjs/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+
+## Video tutorials
+- [Learning ExpressJS: Express category](https://getbuzz.io/c/learning-expressjs)
