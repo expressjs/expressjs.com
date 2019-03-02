@@ -89,3 +89,5 @@ You don't! There's no need to "render" HTML with the `res.render()` function.
 If you have a specific file, use the `res.sendFile()` function.
 If you are serving many assets from a directory, use the `express.static()`
 middleware function.
+
+###  [Previous: Static Files ](/{{ page.lang }}/starter/static-files.html)
