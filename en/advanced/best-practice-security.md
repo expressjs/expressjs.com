@@ -24,6 +24,7 @@ Security best practices for Express applications in production include:
 - [Use TLS](#use-tls)
 - [Use Helmet](#use-helmet)
 - [Use cookies securely](#use-cookies-securely)
+- [Prevent brute-force attacks against authorisation](#prevent-brute-force-attacks-against-authorisation)
 - [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
 - [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
 - [Additional considerations](#additional-considerations)
@@ -152,6 +153,16 @@ app.use(session({
 }))
 ```
 
+## Prevent brute-force attacks against authorisation
+
+Make sure login endpoints are protected to make private data more secure.
+
+One simple and in the same time quite powerful way is to block authorisation attempts by 2 metrics:
+1. The first is number of consecutive failed attempts by Username and IP pair. 
+1. The second is number of failed attempts from IP per long period of time. For example, block IP on 100 failed attempts per day.
+
+[rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) package provides tools to make that easy and fast. You can find [an example of brute-force protection in docs](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection)
+
 ## Ensure your dependencies are secure
 
 Using npm to manage your application's dependencies is powerful and convenient.  But the packages that you use may contain critical security vulnerabilities that could also affect your application.  The security of your app is only as strong as the "weakest link" in your dependencies.
@@ -193,7 +204,6 @@ Finally, Express apps - like any other web apps - can be vulnerable to a variety
 
 Here are some further recommendations from the excellent [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/).  Refer to that blog post for all the details on these recommendations:
 
-* Implement rate-limiting to prevent brute-force attacks against authentication.  One way to do this is to use [StrongLoop Microgateway](https://github.com/strongloop/microgateway) to enforce a rate-limiting policy.  Alternatively, you can use package such as [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) and configure limits.
 * Use [csurf](https://www.npmjs.com/package/csurf) middleware to protect against cross-site request forgery (CSRF).
 * Always filter and sanitize user input to protect against cross-site scripting (XSS) and command injection attacks.
 * Defend against SQL injection attacks by using parameterized queries or prepared statements.
