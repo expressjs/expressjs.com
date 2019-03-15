@@ -51,3 +51,5 @@ $ node app.js
 ```
 
 Then, load `http://localhost:3000/` in a browser to see the output.
+
+###  [Previous: Installing ](/{{ page.lang }}/starter/installing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Express Navigator ](/{{ page.lang }}/starter/generator.html)

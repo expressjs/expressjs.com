@@ -64,3 +64,5 @@ app.delete('/user', function (req, res) {
 ```
 
 For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).
+
+###  [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)
