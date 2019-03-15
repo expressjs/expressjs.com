@@ -60,3 +60,4 @@ self-published, February 2018.
 
 ## Video tutorials
 - [Learning ExpressJS: Express category](https://getbuzz.io/c/learning-expressjs)
+- [Learn Express.js in 14 days](https://iLoveCoding.org/courses/expressjs) - Practice Projects included
