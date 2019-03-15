@@ -24,7 +24,7 @@ Security best practices for Express applications in production include:
 - [Use TLS](#use-tls)
 - [Use Helmet](#use-helmet)
 - [Use cookies securely](#use-cookies-securely)
-- [Prevent brute-force attacks against authorisation](#prevent-brute-force-attacks-against-authorisation)
+- [Prevent brute-force attacks against authorization](#prevent-brute-force-attacks-against-authorization)
 - [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
 - [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
 - [Additional considerations](#additional-considerations)
@@ -153,15 +153,15 @@ app.use(session({
 }))
 ```
 
-## Prevent brute-force attacks against authorisation
+## Prevent brute-force attacks against authorization
 
 Make sure login endpoints are protected to make private data more secure.
 
-One simple and in the same time quite powerful way is to block authorisation attempts by 2 metrics:
-1. The first is number of consecutive failed attempts by Username and IP pair. 
-1. The second is number of failed attempts from IP per long period of time. For example, block IP on 100 failed attempts per day.
+A simple and powerful technique is to block authorization attempts using two metrics:
+1. The first is number of consecutive failed attempts by the same user name and IP address. 
+1. The second is number of failed attempts from an IP address over some long period of time. For example, block an IP address if it makes 100 failed attempts in one day.
 
-[rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) package provides tools to make that easy and fast. You can find [an example of brute-force protection in docs](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection)
+[rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) package provides tools to make this technique easy and fast.  You can find [an example of brute-force protection in the documentation](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection)
 
 ## Ensure your dependencies are secure
 
