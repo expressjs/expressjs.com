@@ -21,4 +21,8 @@ req.query.shoe.color
 
 req.query.shoe.type
 // => "converse"
+
+// GET /shoes?color[]=blue&color[]=black&color[]=red
+req.query.color
+// => [blue, black, red]
 ```
