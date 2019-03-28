@@ -42,16 +42,16 @@ module: mw-home
 |---------------------------|---------------------|
 | [connect-image-optimus](https://github.com/msemenistyi/connect-image-optimus) | 이미지 제공을 최적화힙니다. 할 수 있다면 이미지를 `.webp`나 `.jxr`로 바꿉니다.|
 | [express-debug](https://github.com/devoidfury/express-debug) | 템플릿 변수 (지역), 현재 세션, 기타 등등에 대한 정보를 제공하는 개발 도구입니다.|
-| [express-partial-response](https://github.com/nemtsov/express-partial-response) | Filters out parts of JSON responses based on the `fields` query-string; Google API의 Partial Response를 활용합니다.|
-| [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn) | Use a CDN for static assets, with multiple host support.|
-| [express-slash](https://github.com/ericf/express-slash) | Handles routes with and without trailing slashes.|
-| [express-stormpath](https://github.com/stormpath/stormpath-express) | User storage, authentication, authorization, SSO, and data security.|
-| [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize) | Redirects HTTP requests containing uppercase to a canonical lowercase form.|
-| [helmet](https://github.com/helmetjs/helmet) |Helps secure your apps by setting various HTTP headers.|
-| [join-io](https://github.com/coderaiser/join-io) | Joins files on the fly to reduce the requests count.|
-| [passport](https://github.com/jaredhanson/passport) | Authentication using "strategies" such as OAuth, OpenID and many others.  See [http://passportjs.org/](http://passportjs.org/) for more information.|
-| [static-expiry](https://github.com/paulwalker/connect-static-expiry) | Fingerprint URLs or caching headers for static assets.|
-| [view-helpers](https://github.com/madhums/node-view-helpers) | Common helper methods for views.|
-| [sriracha-admin](https://github.com/hdngr/siracha) | Dynamically generate an admin site for Mongoose. |
+| [express-partial-response](https://github.com/nemtsov/express-partial-response) | JSON 응답을 URL의 `fields`를 받아서 필터링합니다. Google API의 Partial Response를 활용합니다.|
+| [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn) | 정적 요소들을 위해 CDN을 사용하도록 도와줍니다. 다양한 호스트를 지원합니다.|
+| [express-slash](https://github.com/ericf/express-slash) | 구현된 루터에 맟춰서 슬래쉬 유무를 맞춰줍니다.|
+| [express-stormpath](https://github.com/stormpath/stormpath-express) | 사용자 저장소, 인증 확인, 인증, SSO, 그리고 데이터 보안에 관련된 모듈입니다. (Okta로 합쳐졌습니다)|
+| [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize) | 대문자를 포함하는 HTTP 요청들을 표준 소문자 폼으로 리다이렉트시킵니다. containing uppercase to a canonical lowercase form.|
+| [helmet](https://github.com/helmetjs/helmet) |다양한 HTTP 헤더를 설정해 앱이 안전하게 도와줍니다.|
+| [join-io](https://github.com/coderaiser/join-io) | 요청 횟수를 줄이기 위해 파일들을 묶어줍니다.|
+| [passport](https://github.com/jaredhanson/passport) | OAuth, OpenID 같은 방법들을 사용하는 인증 체계입니다. 자세한 정보는 [http://passportjs.org/](http://passportjs.org/)에서 확인하세요.|
+| [static-expiry](https://github.com/paulwalker/connect-static-expiry) | 정적 에셋을 위해 헤더를 캐싱하거나 URL을 고유화합니다..|
+| [view-helpers](https://github.com/madhums/node-view-helpers) | 뷰 엔진들을 위한 일반적인 도움을 제공합니다.| <!-- 아마도 오역 -->
+| [sriracha-admin](https://github.com/hdngr/siracha) | 동적으로 Mongoose의 관리 사이트를 만듭니다. |
 
-For more middleware modules, see [http-framework](https://github.com/Raynos/http-framework#modules).
+[http-framework](https://github.com/Raynos/http-framework#modules)에서 더 많은 모듈들을 찾을 수 있습니다..
