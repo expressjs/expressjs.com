@@ -90,4 +90,4 @@ If you have a specific file, use the `res.sendFile()` function.
 If you are serving many assets from a directory, use the `express.static()`
 middleware function.
 
-###  [Previous: Static Files ](/{{ page.lang }}/starter/static-files.html)
+###  [Previous: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)
