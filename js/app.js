@@ -45,7 +45,7 @@ $(function(){
   var branchPath = 'https://github.com/expressjs/expressjs.com';
   var pathName = document.location.pathname;
 
-  var currentVersion = pathName.split('/').splice(-2)[0] || '4x'; // defaults to current version
+  var currentVersion = (pathName.match(/^(?:\/[a-z]{2})?\/([0-9]x|)/) || [])[1] || '4x'; // defaults to current version
   var fileName = pathName.split('/').splice(-2)[1];
   var pagePath;
   var editPath;
