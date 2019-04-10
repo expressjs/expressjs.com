@@ -13,8 +13,19 @@ lang: ko
 
 이 주제는 명백하게 "DevOps" 분야로 구분할 수 있으며 종래의 개발 및 운영 모두를 다룹니다. 따라서, 정보는 다음과 같은 두 개의 파트로 나뉘어 있습니다.
 
-* [코드에서 수행할 항목](#code)(dev 파트).
-* [환경/설정에서 수행할 항목](#env)(ops 파트).
+
+* [코드에서 수행할 항목](#code) (개발 파트):
+  * [gzip 압축 사용](#use-gzip-compression)
+  * [동기식 함수 사용하지 않기](#dont-use-synchronous-functions)
+  * [정확한 로깅](#do-logging-correctly)
+  * [올바른 예외 처리](#handle-exceptions-properly)
+* [환경/설정에서 수행할 항목](#env) (운영 파트):
+  * [NODE_ENV를 "production"으로 설정](#set-node_env-to-production)
+  * [앱이 자동으로 다시 시작되도록 보장](#ensure-your-app-automatically-restarts)
+  * [앱을 클러스터에서 실행](#run-your-app-in-a-cluster)
+  * [요청 결과를 캐싱](#cache-request-results)
+  * [로드 밸런서 사용](#use-a-load-balancer)
+  * [역방향 프록시 사용](#use-a-reverse-proxy)
 
 <a name="code"></a>
 
@@ -22,43 +33,37 @@ lang: ko
 
 애플리케이션의 성능을 향상시키기 위해서 코드를 통해 할 수 있는 몇 가지는 다음과 같습니다.
 
-* gzip 압축 사용
-* 동기식 함수 사용하지 않음
-* 미들웨어를 사용하여 정적 파일 제공
-* 정확한 로깅
-* 올바른 예외 처리
+ * [gzip 압축 사용](#use-gzip-compression)
+ * [동기식 함수 사용하지 않기](#dont-use-synchronous-functions)
+ * [정확한 로깅](#do-logging-correctly)
+ * [올바른 예외 처리](#exceptions)
 
+
+<a name="use-gzip-compression"></a>
 ### gzip 압축 사용
 
 Gzip 압축을 사용하면 응답 본문의 크기를 크게 줄일 수 있으며, 따라서 웹 앱의 속도를 높일 수 있습니다. Express 앱에서 gzip 압축을 사용하려면 [compression](https://www.npmjs.com/package/compression) 미들웨어를 사용하십시오. 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
-var compression = require('compression');
-var express = require('express');
-var app = express();
-app.use(compression());
-</code>
-</pre>
+```js
+var compression = require('compression')
+var express = require('express')
+var app = express()
+app.use(compression())
+```
 
 많은 트래픽이 발생하는 프로덕션 환경의 웹사이트의 경우, 압축을 실행하는 가장 좋은 방법은 역방향 프록시 레벨에서 압축을 구현하는 것입니다([역방향 프록시 사용](#proxy) 참조). 그러한 경우에는 compression 미들웨어를 사용할 필요가 없습니다. Nginx에서 gzip 압축을 사용하는 방법에 대한 자세한 내용은 Nginx 문서의 [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html)을 참조하십시오.
 
-### 동기식 함수 사용하지 않음
+
+<a name="dont-use-synchronous-functions"></a>
+### 동기식 함수 사용하지 않기
 
 동기식 함수 및 메소드는 리턴될 때까지 실행 프로세스를 묶어 둡니다. 동기식 함수에 대한 한 건의 호출은 몇 마이크로초 또는 밀리초 내에 리턴될 수도 있지만, 많은 트래픽이 발생하는 웹사이트에서 이러한 동기식 호출들이 합산되면 앱의 성능이 낮아집니다. 프로덕션 환경에서는 동기식 함수의 사용을 피하십시오.
 
 Node 및 다수의 모듈은 동기식 및 비동기식 버전의 함수를 제공하지만, 프로덕션 환경에서는 항상 비동기식 버전을 사용하십시오. 동기식 함수의 사용이 정당화되는 유일한 경우는 초기 시작 시에 사용되는 경우입니다.
 
-Node.js 4.0 이상 또는 io.js 2.1.0 이상을 사용하는 경우, `--trace-sync-io` 명령행 플래그를 사용하면 애플리케이션이 동기식 API를 사용할 때마다 경고 및 스택 추적이 출력되도록 수 있습니다. 물론, 프로덕션 환경에서 이러한 플래그를 실제로 사용해서는 안 되며, 이는 코드가 프로덕션 환경에서 사용될 준비가 되었다는 것을 보장하기 위한 것입니다. 자세한 정보는 [Weekly update for io.js 2.1.0](https://nodejs.org/en/blog/weekly-updates/weekly-update.2015-05-22/#2-1-0)을 참조하십시오.
+Node.js 4.0 이상 또는 io.js 2.1.0 이상을 사용하는 경우, `--trace-sync-io` 명령행 플래그를 사용하면 애플리케이션이 동기식 API를 사용할 때마다 경고 및 스택 추적이 출력되도록 수 있습니다. 물론, 프로덕션 환경에서 이러한 플래그를 실제로 사용해서는 안 되며, 이는 코드가 프로덕션 환경에서 사용될 준비가 되었다는 것을 보장하기 위한 것입니다. 자세한 정보는 [node 커맨드라인 옵션 문서](https://nodejs.org/api/cli.html#cli_trace_sync_io)를 참조하십시오.
 
-### 미들웨어를 사용하여 정적 파일 제공
-
-개발 중에는 [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)을 이용해 정적 파일을 제공할 수 있습니다. 그러나 이 함수는 모든 파일 요청에 대해 파일 시스템을 읽어야 하며, 따라서 상당한 대기 시간이 발생하고 앱의 전체적인 성능에 영향을 미치므로 프로덕션 환경에서 이 함수를 사용해서는 안 됩니다. `res.sendFile()`은 효율성을 훨씬 더 높일 수 있는 [sendfile](http://linux.die.net/man/2/sendfile) 시스템 호출을 이용해 구현되지 *않았다*는 점을 참고하십시오.
-
-대신, Express 앱을 위한 파일 제공에 최적화된 [serve-static](https://www.npmjs.com/package/serve-static) 미들웨어(또는 이와 동등한 항목)을 사용하십시오.
-
-그보다 훨씬 더 좋은 방법은 역방향 프록시를 사용하여 정적 파일을 제공하는 것입니다. 자세한 정보는 [역방향 프록시 사용](#proxy)을 참조하십시오.
-
+<a name="do-logging-correctly"></a>
 ### 정확한 로깅
 
 일반적으로 앱은 디버깅 그리고 앱 활동 로깅(사실상 디버깅 이외의 모든 것)이라는 두 가지 이유로 인해 로깅을 실행합니다. `console.log()` 또는 `console.err()`을 사용하여 터미널에 로그 메시지를 출력하는 것이 일반적인 개발 작업 방식입니다. 그러나 대상이 터미널 또는 파일인 경우 [이들 함수는 동기식으로 작동하며](https://nodejs.org/api/console.html#console_console_1), 따라서 다른 프로그램으로 출력을 전송하는 경우가 아니라면 이러한 함수는 프로덕션 환경에 적합하지 않습니다.
@@ -80,7 +85,7 @@ Node 앱은 처리되지 않은 예외가 발생할 때 충돌이 발생합니�
 모든 예외를 처리하도록 보장하려면 다음의 기법을 사용하십시오.
 
 * [try-catch 사용](#try-catch)
-* [프라미스 사용](#promises)
+* [프미스 사용](#promises)
 
 이 주제에 대해 자세히 살펴보기 전에 먼저 Node/Express의 오류 처리, 즉 오류 우선(error-first) 콜백의 사용 및 미들웨어를 통한 오류의 전파에 대한 기본적인 사항을 이해해야 합니다. Node는 비동기식 함수로부터 오류를 리턴하기 위해 "오류 우선 콜백" 방식을 사용하며, 여기서 콜백 함수의 첫 번째 매개변수는 오류 오브젝트이고 그 후속 매개변수에 결과 데이터가 뒤따릅니다. 오류가 없음을 나타낼 때는 첫 번째 매개변수로 널(null)을 전달합니다. 의미 있는 방식으로 오류를 처리하려면 콜백 함수는 이에 맞게 오류 우선 콜백 방식을 따라야 합니다. 그리고 Express에서의 우수 사례는 next() 함수를 사용하여 미들웨어 체인을 통해 오류를 전파하는 것입니다.
 
@@ -108,33 +113,30 @@ Try-catch는 동기식 코드에서 예외를 처리하는 데 사용할 수 있
 아래에는 try-catch를 사용하여 잠재적인 프로세스 충돌 예외를 처리하는 예가 표시되어 있습니다.
 이 미들웨어 함수는 JSON 오브젝트이자 "params"라는 이름을 갖는 조회 필드를 수락합니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/search', function (req, res) {
   // Simulating async operation
   setImmediate(function () {
-    var jsonStr = req.query.params;
+    var jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr);
-      res.send('Success');
+      var jsonObj = JSON.parse(jsonStr)
+      res.send('Success')
     } catch (e) {
-      res.status(400).send('Invalid JSON string');
+      res.status(400).send('Invalid JSON string')
     }
-  });
-});
-</code>
-</pre>
+  })
+})
+```
 
 그러나 try-catch는 동기식 코드에 대해서만 작동합니다. Node 플랫폼은 기본적으로 비동기식이므로(특히, 프로덕션 환경의 경우), try-catch를 통해 많은 예외를 처리할 수는 없을 것입니다.
 
 <a name="promises"></a>
 
-#### 프라미스 사용
+#### 프로미스 사용
 
-`then()`을 사용하는 비동기식 코드 블록 내에서는 프라미스를 통해 모든 예외(명시적 예외 및 암시적 예외 모두)를 처리할 수 있습니다. 프라미스 체인의 끝에 `.catch(next)`만 추가하면 됩니다. 예를 들면 다음과 같습니다.
+`then()`을 사용하는 비동기식 코드 블록 내에서는 프로미스를 통해 모든 예외(명시적 예외 및 암시적 예외 모두)를 처리할 수 있습니다. 프로미스 체인의 끝에 `.catch(next)`만 추가하면 됩니다. 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/', function (req, res, next) {
   // do some sync stuff
   queryDb()
@@ -145,35 +147,36 @@ app.get('/', function (req, res, next) {
     .then(function (csv) {
       // handle csv
     })
-    .catch(next);
-});
+    .catch(next)
+})
 
 app.use(function (err, req, res, next) {
   // handle error
-});
-</code>
-</pre>
+})
+```
 
 이제 모든 비동기식 오류 및 동기식 오류는 error 미들웨어로 전파됩니다.
 
 그러나 주의해야 할 사항이 두 가지 있습니다.
 
-1.  모든 비동기식 코드는 프라미스를 리턴해야 합니다(이미터 제외). 특정한 라이브러리가 프라미스를 리턴하지 않는 경우에는 [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html)과 같은 헬퍼 함수를 사용하여 기본 오브젝트를 변환하십시오.
+1.  모든 비동기식 코드는 프로미스를 리턴해야 합니다(이미터 제외). 특정한 라이브러리가 프로미스를 리턴하지 않는 경우에는 [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html)과 같은 헬퍼 함수를 사용하여 기본 오브젝트를 변환하십시오.
 2.  이벤트 이미터(스트림 등)는 여전히 처리되지 않은 예외를 발생시킬 수 있습니다. 따라서 오류 이벤트를 올바르게 처리하고 있는지 확인하십시오. 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
 app.get('/', wrap(async (req, res, next) => {
   let company = await getCompanyById(req.query.id)
   let stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
-</code>
-</pre>
+```
 
-프라미스를 사용한 오류 처리에 대한 자세한 정보는 다음을 참조하십시오.
 
+`wrap()` 함수는 거부된 프로미스를 캐치해서 에러를 첫번째 인수로 두고 `next()`를 호출합니다. 자세한 정보는 다음을 참조하십시오.
 * [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
+
+프로미스를 사용한 오류 처리에 대한 자세한 정보는 다음을 참조하십시오.
 * [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
 
 <a name="env"></a>
@@ -182,13 +185,14 @@ app.get('/', wrap(async (req, res, next) => {
 
 앱의 성능을 향상시키기 위해서 시스템 환경에서 할 수 있는 몇 가지는 다음과 같습니다.
 
-* NODE_ENV를 "production"으로 설정
-* 앱이 자동으로 다시 시작되도록 보장
-* 앱을 클러스터에서 실행
-* 요청 결과를 캐싱
-* 로드 밸런서 사용
-* 역방향 프록시 사용
+* [NODE_ENV를 "production"으로 설정](#set-node_env-to-production)
+* [앱이 자동으로 다시 시작되도록 보장](#ensure-your-app-automatically-restarts)
+* [앱을 클러스터에서 실행](#run-your-app-in-a-cluster)
+* [요청 결과를 캐싱](#cache-request-results)
+* [로드 밸런서 사용](#use-a-load-balancer)
+* [역방향 프록시 사용](#proxy)
 
+<a name="set-node_env-to-production"></a>
 ### NODE_ENV를 "production"으로 설정
 
 NODE_ENV 환경 변수는 애플리케이션이 실행되는 환경(일반적으로 개발 환경 또는 프로덕션 환경)을 지정합니다. 성능을 향상시키기 위해 할 수 있는 가장 간단한 일 중 하나는 NODE_ENV를 "production"으로 설정하는 것입니다.
@@ -207,28 +211,26 @@ NODE_ENV를 "production"으로 설정하면 Express는 다음과 같이 동작�
 
 Upstart를 이용하는 경우, 작업 파일에 `env` 키워드를 사용하십시오. 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code>
-</pre>
+```
 
 자세한 정보는 [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables)를 참조하십시오.
 
 systemd를 이용하는 경우, 유닛 파일에 `Environment` 지시문을 사용하십시오. 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code>
-</pre>
+```
 
 자세한 정보는 [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html)를 참조하십시오.
 
 StrongLoop Process Manager를 이용하는 경우에는 [StrongLoop PM을 서비스로 설치할 때 환경 변수를 설정](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-Setenvironmentvariables)할 수도 있습니다.
 
+<a name="ensure-your-app-automatically-restarts"></a>
 ### 앱이 자동으로 다시 시작되도록 보장
 
 프로덕션 환경에서 애플리케이션이 오프라인 상태가 되어서는 절대로 안 됩니다. 따라서 앱에서 충돌이 발생하거나 서버 자체에서 충돌이 발생하는 경우 모두 앱이 다시 시작되도록 해야 합니다. 이러한 일 중 어느 하나라도 발생하지 않는 것이 바람직하지만, 현실적으로는 다음과 같은 방법을 통해 이 두 가지 만일의 사태를 처리해야 합니다.
@@ -284,8 +286,7 @@ Systemd는 Linux용 시스템 및 서비스 관리자입니다. 대부분의 주
 
 systemd 서비스 구성 파일은 *유닛 파일(unit file)*로 불리며, 파일 이름이 .service로 끝납니다. Node 앱을 직접 관리하기 위한 유닛 파일의 예는 다음과 같습니다(굵은체로 표시된 텍스트를 해당 시스템 및 앱에 대한 값으로 바꾸십시오).
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -313,8 +314,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code>
-</pre>
+```
 systemd에 대한 자세한 정보는 [systemd 참조 자료(man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html)를 참조하십시오.
 
 ##### systemd의 서비스로서의 StrongLoop PM
@@ -331,11 +331,9 @@ $ sudo sl-pm-install --systemd
 
 이후 다음과 같이 서비스를 시작하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
-$ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```sh
+$ sudo sl-pm-install --systemd
+```
 
 자세한 정보는 [Setting up a production host(StrongLoop 문서)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10)를 참조하십시오.
 
@@ -347,8 +345,7 @@ Upstart 서비스는 파일 이름이 `.conf`로 끝나는 작업 구성 파일(
 
 다음의 내용이 입력된 `myapp.conf`라는 이름의 파일을 `/etc/init/`에 작성하십시오(굵은체로 표시된 텍스트를 해당 시스템 및 앱에 대한 값으로 바꾸십시오).
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -376,8 +373,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code>
-</pre>
+```
 
 참고: 이 스크립트를 실행하려면 Ubuntu 12.04-14.10에서 지원되는 Upstart 1.4 이상이 필요합니다.
 
@@ -397,22 +393,22 @@ StrongLoop Process Manager는 쉽게 Upstart의 서비스로 설치할 수 있�
 
 StrongLoop PM을 Upstart 1.4의 서비스로서 설치하는 방법은 다음과 같습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+
+```sh
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 이후 다음과 같이 서비스를 실행하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+
+```sh
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 참고: Upstart 1.4를 지원하지 않는 시스템에서는 약간 다른 명령이 사용됩니다. 자세한 정보는 [Setting up a production host(StrongLoop 문서)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10)를 참조하십시오.
 
+
+<a name="run-your-app-in-a-cluster"></a>
 ### 앱을 클러스터에서 실행
 
 멀티코어 시스템에서는 프로세스 클러스터를 실행하여 Node 앱의 성능을 여러 배 높일 수 있습니다. 클러스터는 해당 앱의 인스턴스를 여러 개 실행하여(이상적인 경우 각 CPU 코어에서 하나의 인스턴스를 실행) 인스턴스들 사이에서 로드 및 태스크를 분배합니다.
@@ -435,20 +431,49 @@ StrongLoop Process Manager(PM)가 애플리케이션으로서 실행되면, Stro
 
 예를 들어 prod.foo.com에 앱을 배치했으며 StrongLoop PM이 포트 8701(기본값)에서 청취하는 경우를 가정하면, 다음과 같이 slc를 이용해 클러스터의 크기를 8로 설정할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 StrongLoop PM을 이용한 클러스터링에 대한 자세한 정보는 StrongLoop 문서 내의 [Clustering](https://docs.strongloop.com/display/SLC/Clustering)을 참조하십시오.
 
+#### PM2 사용
+
+애플리케이션을 PM2에 배치하면, 애플리케이션 코드를 수정하지 *않고도* 클러스터링을 활용할 수 있습니다. 먼저 여러분의 [애플리케이션이 stateless인지](http://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) 확실하게 해야합니다. 어떠한 로컬 데이터도 프로세스에 저장되지 않아야 합니다. (세션이나 웹소켓 같은 것들 말입니다).
+
+PM2로 애플리케이션을 실행하고 있을 때, 특정한 수의 인스턴스에 실행하는 **클러스터 모드**를 켤 수 있습니다. 머신의 가용 CPU 수같은 것들이 특정한 수입니다. 애플리케이션을 끌 필요 없이 `pm2` 커맨드라인 명령을 이용해 클러스터에 있는 프로세스의 수를 직접 바꿀 수도 있습니다.
+
+아래와 같은 방법으로 클러스터 모드를 킵니다.
+
+```sh
+# Start 4 worker processes
+$ pm2 start app.js -i 4
+# Auto-detect number of available CPUs and start that many worker processes
+$ pm2 start app.js -i max
+```
+
+이 수는 PM2 프로세스 파일 (`ecosystem.config.js`나 그와 유사한 파일) 안의 `exec_mode`를 `cluster`나 `instances`를 설정해서 수정될 수 있습니다.
+
+실행이 시작되면, `app`으로 이름지어진 애플리케이션을 아래와 같은 방법으로 스케일링 할 수 있습니다.
+
+```sh
+# Add 3 more workers
+$ pm2 scale app +3
+# Scale to a specific number of workers
+$ pm2 scale app 2
+```
+
+PM2의 클러스터링에 관한 추가 정보는 PM2 문서의 [Cluster Mode](https://pm2.keymetrics.io/docs/usage/cluster-mode/)를 참고해주세요.
+
+<a name="cache-request-results"></a>
 ### 요청 결과를 캐싱
 
 프로덕션 환경 내에서의 성능을 향상시키기 위한 또 다른 전략은 요청의 결과를 캐싱하여 앱이 동일한 요청을 반복적으로 제공하는 작업을 반복하지 않도록 하는 것입니다.
 
 [Varnish](https://www.varnish-cache.org/) 또는 [Nginx](https://www.nginx.com/resources/wiki/start/topics/examples/reverseproxycachingexample/)([Nginx Caching](https://serversforhackers.com/nginx-caching/) 또한 참조)와 같은 캐싱 서버를 이용하면 앱의 속도 및 성능을 크게 향상시킬 수 있습니다.
 
+
+<a name="use-a-load-balancer"></a>
 ### 로드 밸런서 사용
 
 앱의 최적화 수준에 상관없이, 하나의 인스턴스는 제한된 양의 로드 및 트래픽만을 처리할 수 있습니다. 앱을 확장하는 방법 중 하나는 해당 앱의 인스턴스를 여러 개 실행하고 로드 밸런서를 통해 트래픽을 분배하는 것입니다. 로드 밸런서를 설정하면 앱의 성능 및 속도를 향상시킬 수 있으며, 하나의 인스턴스를 이용할 때보다 훨씬 더 높은 수준으로 확장할 수 있습니다.
