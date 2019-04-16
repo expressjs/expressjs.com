@@ -53,6 +53,7 @@ self-published, February 2018.
 - [Techforgeek Blog: Express category](http://techforgeek.com/expressjs/)
 - [RoseHosting.com Blog: Express tag](https://www.rosehosting.com/blog/tag/express/)
 - [ThisHosting.Rocks: Express tag](https://thishosting.rocks/tag/express-js/)
+- [Code with Hugo blog: Express tag](https://codewithhugo.com/tags/express)
 
 ### Add your blog here!
 
