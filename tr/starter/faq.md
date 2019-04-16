@@ -1,89 +1,68 @@
 ---
 layout: page
-title: Express FAQ
+title: Express Sıkça Sorulan Sorular
 menu: starter
 lang: tr
 ---
-<div id="page-doc" markdown="1">
-# FAQ
+# Sıkça Sorulan Sorular
 
-## How should I structure my application?
+## Uygulamamın yapısı nasıl olmalı?
 
-There is no definitive answer to this question. The answer depends
-on the scale of your application and the team that is involved. To be as
-flexible as possible, Express makes no assumptions in terms of structure.
+Bu soruya verilebilecek kesin bir cevap yoktur. Cevap, uygulamanızın boyutuna ve uygulamaya dahil ekibe göre değişir. En üst seviyede esneklik için Express uygulama yapısı için herhangi bir varsayım yapmaz.
 
-Routes and other application-specific logic can live in as many files
-as you wish, in any directory structure you prefer. View the following
-examples for inspiration:
+Yollar ve diğer uygulamaya özel mantık istediğiniz yapıda, istediğiniz kadar dosyanın içinde barınabilir. Örnek olarak şunlara göz atabilirsiniz:
 
-* [Route listings](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Route listings](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-L47)
 * [Route map](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
 * [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
 
-Also, there are third-party extensions for Express, which simplify some of these patterns:
+Ayrıca, bu dizaynlardan bazılarını basitleştiren, üçüncü parti bir Express uzantısı bulunmaktadır:
 
 * [Resourceful routing](https://github.com/expressjs/express-resource)
 
-## How do I define models?
+## Nasıl model tanımlarım?
 
-Express has no notion of a database. This concept is
-left up to third-party Node modules, allowing you to
-interface with nearly any database.
+Express'te veritabanı kavramı bulunmamaktadır. Bu konsept diğer üçüncü parti modüllerine bırakılmıştır, bu sayede neredeyse herhangi bir veritabanına bağlantı sağlayabilirsiniz.
 
-See [LoopBack](http://loopback.io) for an Express-based framework that is centered around models.
+Model üzerine Express tabanlı bir framework için [LoopBack](http://loopback.io) adresini ziyaret edin.
 
-## How can I authenticate users?
+## Kimlik doğrulamasını nasıl sağlarım?
 
-Authentication is another opinionated area that Express does not
-venture into.  You may use any authentication scheme you wish.
-For a simple username / password scheme, see [this example](https://github.com/strongloop/express/tree/master/examples/auth).
+Kimlik doğrulama Express'in bulundurmayı tercih etmediği başka bir konu. İstediğiniz herhangi bir kimlik doğrulama planını kullanabilirsiniz. Basit kullanıcı adı / şifre planı için [bu örneğe](https://github.com/expressjs/express/tree/master/examples/auth) göz atın.
 
+## Express hangi görünüm (view) motorlarını destekliyor?
 
-## Which template engines does Express support?
+Express `(path, locals, callback)` kalıbını sağlayan herhangi bir görünüm motorunu destekler. Şablon motoru arayüzlerini ve önbelleklemeyi normalleştirmek için, [consolidate.js](https://github.com/visionmedia/consolidate.js)'e göz atın. Listelenmeyen görünüm motorları da Express'in yapısına uygun olabilir.
 
-Express supports any template engine that conforms with the `(path, locals, callback)` signature.
-To normalize template engine interfaces and caching, see the
-[consolidate.js](https://github.com/visionmedia/consolidate.js)
-project for support. Unlisted template engines might still support the Express signature.
+Daha fazla bilgi için, [Express ile görünüm motorlarını kullanmak](/{{page.lang}}/guide/using-template-engines.html).
 
-## How do I handle 404 responses?
+## 404 cevapları ile nasıl başa çıkarım?
 
-In Express, 404 responses are not the result of an error, so
-the error-handler middleware will not capture them. This behavior is
-because a 404 response simply indicates the absence of additional work to do;
-in other words, Express has executed all middleware functions and routes,
-and found that none of them responded. All you need to
-do is add a middleware function at the very bottom of the stack (below all other functions)
-to handle a 404 response:
+Express'te 404 cevapları bir hatanın sonucu olarak ortaya çıkmaz, bu yüzden hata işleyici ara katman bunları yakalamaz. Bunun sebebi 404 cevabı sadece yapılacak ekstra işin eksik olduğunu belirtir; başka bir sözle, Express tüm ara katman fonksiyonlarını ve yolları çalıştırdı, ve bunların hiçbirinin cevap döndürmediğini fark etti. Tek yapmanız gereken, bu yığının (tüm fonksiyonların) en sonuna 404'ü işleyen bir ara katman fonksiyonu yazmak:
 
 ```js
 app.use(function (req, res, next) {
-  res.status(404).send("Sorry can't find that!")
+  res.status(404).send("Üzgünüm, dosyayı bulamadım!")
 })
 ```
 
-Add routes dynamically at runtime on an instance of `express.Router()`
-so the routes are not superseded by a middleware function.
+Yolları dinamik olarak `express.Router()`'ın bir örneği üzerine tanımlayın, böylece tanımlarınızın yerine ara katman fonksiyonları geçmez.
 
-## How do I setup an error handler?
+## Hata işleyici fonksiyonları nasıl kullanabilirim?
 
-You define error-handling middleware in the same way as other middleware,
-except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
+Hata ile ilgili ara katman fonksiyonları da tıpkı diğer ara katman fonksiyonları gibi tanımlanır. Aradaki tek fark üç argüman yerine şu şekilde dört argüman kullanılmasıdır `(err, req, res, next)`:
 
 ```js
 app.use(function (err, req, res, next) {
   console.error(err.stack)
-  res.status(500).send('Something broke!')
+  res.status(500).send('Bir hata oluştu!')
 })
 ```
 
-For more information, see [Error handling](/{{ page.lang }}/guide/error-handling.html).
+Daha fazla bilgi için, [Hata işleme](/{{ page.lang }}/guide/error-handling.html).
 
-## How do I render plain HTML?
+## Yalın HTML dosyalarını nasıl işlerim?
 
-You don't! There's no need to "render" HTML with the `res.render()` function.
-If you have a specific file, use the `res.sendFile()` function.
-If you are serving many assets from a directory, use the `express.static()`
-middleware function.
-</div>
+Yalın HTML için `res.render()` fonksiyonun kullanmak zorunda değilsiniz. Eğer dosyanız belirli ise, `res.sendFile()` fonksiyonunu kullanın. Eğer bir dizinden birden çok içerik sunuyorsanız, `express.static()` ara katman fonksiyonunu kullanın.
+
+###  [Önceki: Statik Dosyalar ](/{{ page.lang }}/starter/static-files.html)

@@ -1,46 +1,54 @@
 ---
 layout: page
-title: Express "Hello World" example
+title: Express "Merhaba Dünya" örneği
 menu: starter
 lang: tr
 ---
-<div id="page-doc" markdown="1">
+
 # Merhaba Dünya Örneği
 
 <div class="doc-box doc-info" markdown="1">
-This is essentially going to be the simplest Express app you can create. It is a single file app &mdash; _not_ what you'd get if you use the [Express generator](/{{ page.lang }}/starter/generator.html), which creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and sub-directories for various purposes.
+Aşağıda verilmiş olan, Express ile oluşturabileceğiniz en basit uygulamadır. Bu, birçok JavaScript dosyası, Jade şablonları ve çeşitli alt dizinler içeren [Express generator](/{{ page.lang }}/starter/generator.html) ile oluşturacağınız projelerin aksine tek dosyadan oluşan bir projedir.
 </div>
 
-First create a directory named `myapp`, change to it and run `npm init`. Then install `express` as a dependency, as per the [installation guide](/{{ page.lang }}/starter/installing.html).
-
-In the `myapp` directory, create a file named `app.js` and add the following code:
-
-```js
+<script src="https://embed.runkit.com" data-element-id="hello-example" data-mode="endpoint" async defer></script>
+<div id="hello-example"><pre><code class="language-js">
 const express = require('express')
 const app = express()
+const port = 3000
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
+app.get('/', (req, res) => res.send('Merhaba Dünya!'))
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
-```
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+</code></pre></div>
 
-The app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
-to the root URL (`/`) or _route_. For every other path, it will respond with a **404 Not Found**.
+Bu uygulama bir sunucu çalıştırır ve gelen bağlantılar için 3000 portunu dinler. (`/`) kök dizinine gelen isteklere "Hello World!" ile yanıt verir. Bunun haricindeki tüm adreslere, **404 Not Found** hatası verecektir.
 
-<div class="doc-box doc-notice" markdown="1">
-The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
-`req.pipe()`, `req.on('data', callback)`, and anything else you would do without Express involved.
+Yukarıdaki örnek gerçekten de çalışmakta olan bir sunucudur: Yukarıda verilen adrese tıklayın. Gerçek zamanlı günlüklerle sunucunun bir cevap verdiğini göreceksiniz, ve yukarıda yapacağınız her değişiklik eş zamanlı olarak çalıştırılacaktır. Bu özellik arkada bir Node sistemine bağlı olup, tarayıcınızda bu sisteme bir arayüz sağlayan [RunKit](https://runkit.com) sayesinde bulunmaktadır.
+
+
+<div class="doc-box doc-info" markdown="1">
+RunKit bir üçüncü parti uygulamasıdır ve Express projesi ile bir bağı yoktur.
 </div>
 
-Run the app with the following command:
+### Bilgisayarınızda Çalıştırmak
+
+İlk olarak `myapp` adında bir dizin oluşturun, o dizine geçin ve `npm init` komutunu çalıştırın. Sonra `express`i [bu sayfada](/{{ page.lang }}/starter/installing.html) gösterildiği gibi bir bağımlılık olarak kurun.
+
+`myapp` dizininde `app.js` adında bir dosya oluşturun ve yukarıdaki kodu bu dosyaya kopyalayın.
+
+<div class="doc-box doc-notice" markdown="1">
+`req` (request/istek) ve `res` (response/cevap) objeleri Node'da bulunanlar ile birebir aynıdır, bu yüzden
+`req.pipe()`, `req.on('data', callback)`, gibi komutları Express dahil olmadan kullanabilirsiniz.
+</div>
+
+Uygulamayı aşağıdaki komutla çalıştırın:
 
 ```sh
 $ node app.js
 ```
 
-Then, load `http://localhost:3000/` in a browser to see the output.
-</div>
+Sonucu görmek için sunucunuzda `http://localhost:3000/` adresini ziyaret edin.
+
+###  [Önceki: Kurulum ](/{{ page.lang }}/starter/installing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Sonraki: Express Oluşturucu ](/{{ page.lang }}/starter/generator.html)
+

@@ -1,21 +1,20 @@
 ---
 layout: page
-title: Express application generator
+title: Express uygulama oluşturucu
 menu: starter
 lang: tr
 ---
-<div id="page-doc" markdown="1">
-# Express application generator
+# Express uygulama oluşturucu
 
-Use the application generator tool, `express-generator`, to quickly create an application skeleton.
+Çabukça bir uygulama iskeleti oluşturmak için, `express-generator` aracını kullanın.
 
-The `express-generator` package installs the `express` command-line tool. Use the following command to do so:
+`express-generator` paketi `express` komut-satır aracını kurar. Bunu yapmak için aşağıdaki komutu çalıştırın:
 
 ```sh
 $ npm install express-generator -g
 ```
 
-Display the command options with the `-h` option:
+Komut seçeneklerini `-h` opsiyonu ile görüntüleyin:
 
 ```sh
 $ express -h
@@ -37,7 +36,7 @@ $ express -h
     -f, --force         force on non-empty directory
 ```
 
-For example, the following creates an Express app named _myapp_. The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
+aşağıdaki örnek, _myapp_ adında bir Express uygulaması yaratır. Uygulama _myapp_ dizininde barınacak ve görünüm (view) motoru <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a> olarak ayarlanacaktır.
 
 ```sh
 $ express --view=pug myapp
@@ -61,28 +60,28 @@ $ express --view=pug myapp
    create : myapp/bin/www
 ```
 
-Then install dependencies:
+Daha sonrasında bağımlılıkları kurun:
 
 ```sh
 $ cd myapp
 $ npm install
 ```
 
-On MacOS or Linux, run the app with this command:
+MacOS veya Linux için uygulamayı bu komut ile çalıştırın:
 
 ```sh
 $ DEBUG=myapp:* npm start
 ```
 
-On Windows, use this command:
+Windows için bu komutu kullanın:
 
 ```sh
 > set DEBUG=myapp:* & npm start
 ```
 
-Then load `http://localhost:3000/` in your browser to access the app.
+Uygulamaya erişmek için tarayıcınızda `http://localhost:3000/` adresini ziyaret edin.
 
-The generated app has the following directory structure:
+Oluşturulan uygulamanın dizini aşağıdaki yapıda olacaktır:
 
 ```sh
 .
@@ -107,6 +106,7 @@ The generated app has the following directory structure:
 ```
 
 <div class="doc-box doc-info" markdown="1">
-The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
+Burada oluşturulan dizin yapısı, Express uygulamasını yapılandırabileceğiniz birçok seçenekten sadece birisidir. İhtiyacınıza en uygun şekilde bu yapıyı kullanabilir ya da düzenleyebilirsiniz.
 </div>
-</div>
+
+###  [Önceki: Merhaba Dünya ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Sonraki: Basit Yol Atama](/{{ page.lang }}/starter/basic-routing.html)

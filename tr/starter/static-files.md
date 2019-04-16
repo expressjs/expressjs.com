@@ -1,21 +1,29 @@
 ---
 layout: page
-title: Serving static files in Express
+title: Express ile statik dosyalar
 menu: starter
 lang: tr
 ---
-<div id="page-doc" markdown="1">
-# Serving static files in Express
+# Express ile statik dosyaları sunmak
 
-To serve static files such as images, CSS files, and JavaScript files, use the `express.static` built-in middleware function in Express.
+Görseller, CSS dosyaları ve JavaScript dosyaları gibi statik dosyaları sunmak için, Express'te bulunan `express.static` ara katmanını kullanın.
 
-Pass the name of the directory that contains the static assets to the `express.static` middleware function to start serving the files directly. For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
+Fonksiyonun yapısı şu şekildedir:
+
+```js
+express.static(root, [options])
+```
+
+`root` argümanı statik dosyaların bulunduğu ana dizine karşılık gelir. 
+`options` argümanı hakkında detaylı bilgi için, [express.static](/{{page.lang}}/4x/api.html#express.static) sayfasını ziyaret edin.
+
+Örneğin, `public` dizininde bulunan görselleri, CSS dosyalarını ve JavaScript dosyalarını sunmak için bunu kullanın:
 
 ```js
 app.use(express.static('public'))
 ```
 
-Now, you can load the files that are in the `public` directory:
+Artık `public` dizininde bulunan statik dosyaları görebilirsiniz:
 
 ```plain-text
 http://localhost:3000/images/kitten.jpg
@@ -26,25 +34,29 @@ http://localhost:3000/hello.html
 ```
 
 <div class="doc-box doc-info">
-Express looks up the files relative to the static directory, so the name of the static directory is not part of the URL.
+Express statik dosyaların yerlerine ana dizine bağlı olarak bakar. Bu yüzden statik dosyaları barındıran ana dizin URL'de bulunmaz.
 </div>
 
-To use multiple static assets directories, call the `express.static` middleware function multiple times:
+Birden fazla statik dosya dizini kullanmak için `express.static` fonksiyonun birden fazla kullanabilirsiniz.
 
 ```js
 app.use(express.static('public'))
 app.use(express.static('files'))
 ```
 
-Express looks up the files in the order in which you set the static directories with the `express.static` middleware function.
+Express statik dosyalara `express.static` ile tanımladığınız sırayla bakar.
 
-To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/{{ page.lang }}/4x/api.html#app.use) for the static directory, as shown below:
+<div class="doc-box doc-info" markdown="1">NOT: En iyi sonuç için, statik dosyaları sunarken performansı artırmak için [reverse proxy](/{{page.lang}}/advanced/ önbelleği kullanın.
+</div>
+
+`express.static` ile sunulan dosyalar için sanal bir yol (statik dizinin aslında gerçekte bulunmadığı) yaratmak için, statik dizine aşağıdaki gibi bir [path tanımlayın](/{{ page.lang }}/4x/api.html#app.use).
+
 
 ```js
 app.use('/static', express.static('public'))
 ```
 
-Now, you can load the files that are in the `public` directory from the `/static` path prefix.
+Artık `public` dizinindeki dosyalara `/static` önekiyle ulaşabilirsiniz.
 
 ```plain-text
 http://localhost:3000/static/images/kitten.jpg
@@ -54,9 +66,12 @@ http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
 ```
 
-However, the path that you provide to the `express.static` function is relative to the directory from where you launch your `node` process. If you run the express app from another directory, it's safer to use the absolute path of the directory that you want to serve:
+`express.static` fonksiyonu ile tanımladığınız yollar `node` processini çalıştırdığınız dizine bağlıdır. Bu yüzden, eğer express uygulamasını başka bir dizinden çalıştırıyorsanız, statik dizini tam adres olarak tanımlamanız daha güvenli olur.
 
 ```js
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
-</div>
+
+`serve-static` hakkında daha fazla bilgi almak için, [serve-static](/{{page.lang}}/resources/middleware/serve-static.html) sayfasına göz atın.
+
+### [Önceki: Basit Yol Atama ](/{{ page.lang }}/starter/basic-routing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Sonraki: Sıkça Sorulan Sorular ](/{{ page.lang }}/starter/faq.html)

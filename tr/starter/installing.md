@@ -1,48 +1,53 @@
 ---
 layout: page
-title: Installing Express
+title: Express Kurulumu
 menu: starter
 lang: tr
 ---
-<div id="page-doc" markdown="1">
-# Installing
 
-Assuming you've already installed [Node.js](https://nodejs.org/), create a directory to hold your application, and make that your working directory.
+# Kurulum
+
+[Node.js](https://nodejs.org/)'in kurulu olduğunu varsayarak, uygulamanızı
+barındıracak bir dizin oluşturun ve o dizine geçiş yapın.
 
 ```sh
 $ mkdir myapp
 $ cd myapp
 ```
 
-Use the `npm init` command to create a `package.json` file for your application.
-For more information on how `package.json` works, see [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
+Uygulamanız için `package.json` dosyasını oluşturmak için `npm init` komutunu
+çalıştırın. 
+`package.json` dosyasının nasıl çalıştığı hakkında daha fazla bilgi edinmek için [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json) adresini kullanın.
 
 ```sh
 $ npm init
 ```
 
-This command prompts you for a number of things, such as the name and version of your application.
-For now, you can simply hit RETURN to accept the defaults for most of them, with the following exception:
+Bu komut size uygulamanızın adı ve versiyonu gibi bir kaç soru yöneltecektir.
+Şimdilik, çoğu soru için ENTER tuşuna basıp varsayılan ayarları uygulayabilirsiniz, aşağıdaki hariç:
+
 
 ```sh
 entry point: (index.js)
 ```
 
-Enter `app.js`, or whatever you want the name of the main file to be. If you want it to be `index.js`, hit RETURN to accept the suggested default file name.
+`app.js` ya da ana dosyanıza vermek istediğiniz ismi girin. Eğer ana dosyanızın `index.js` olmasını istiyorsanız, ENTER tuşu ile varsayılanı uygulayabilirsiniz.
 
-Now install Express in the `myapp` directory and save it in the dependencies list. For example:
+Şimdi Express'i `myapp` dizinine kurun ve bağımlı uygulamalar listesine ekleyin. Örneğin:
+
 
 ```sh
 $ npm install express --save
 ```
 
-To install Express temporarily and not add it to the dependencies list:
+Express'i geçici olarak kurmak ve bağımlı uygulamalar listesine eklememek istiyorsanız:
 
 ```sh
 $ npm install express --no-save
 ```
 
 <div class="doc-box doc-info" markdown="1">
-By default with version npm 5.0+ npm install adds the module to the `dependencies` list in the `package.json` file; with earlier versions of npm, you must specify the `--save` option explicitly. Then, afterwards, running `npm install` in the app directory will automatically install modules in the dependencies list.
+npm 5.0+ versiyonları için npm install komutu, kurulacak modülü varsayılan olarak `package.json` içindeki bağımlılıklar listesine ekler; daha eski npm versiyonları için `--save` ayrıca belirtilmelidir. Daha sonrasında, uygulama dizininde `npm install` komutunu çalıştırmak, bağımlılık listesindeki uygulamaları otomatik olarak yükler.
 </div>
-</div>
+
+###  [Sonraki: Merhaba Dünya ](/{{ page.lang }}/starter/hello-world.html)

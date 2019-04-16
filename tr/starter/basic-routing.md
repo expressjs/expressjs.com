@@ -1,66 +1,66 @@
 ---
 layout: page
-title: Express basic routing
+title: Express yol atama
 menu: starter
 lang: tr
 ---
-<div id="page-doc" markdown="1">
-# Basic routing
+# Basit yol atama
 
-_Routing_ refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, and so on).
+Yol atama, bir uygulamanın belrili bir adreste belirli bir HTTP methodu ile (GET, POST gibi) gelen isteğe ne şekilde cevap vereceğine karşılık gelir.
 
-Each route can have one or more handler functions, which are executed when the route is matched.
+Her yol, girilen adres eşleştiğinde bir veya daha fazla fonksiyon tarafından işlenebilir.
 
-Route definition takes the following structure:
+Yol tanımları aşağıdaki şekilde yapılanmıştır:
 
 ```js
 app.METHOD(PATH, HANDLER)
 ```
 
-Where:
+Burada:
 
-- `app` is an instance of `express`.
-- `METHOD` is an [HTTP request method](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), in lowercase.
-- `PATH` is a path on the server.
-- `HANDLER` is the function executed when the route is matched.
+- `app`, `express`'in bir örneği.
+- `METHOD`, [HTTP istek methodu](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), küçük harflerle.
+- `PATH`, sunucuda bulunan yol.
+- `HANDLER`, adres bu yol ile eşleştiğinde çalıştırılan fonksiyon.
 
 <div class="doc-box doc-notice" markdown="1">
-This tutorial assumes that an instance of `express` named `app` is created and the server is running. If you are not familiar with creating an app and starting it, see the [Hello world example](/{{ page.lang }}/starter/hello-world.html).
+Bu konu `express` ve `app` örneklerinin bulunduğunu ve sunucunun çalıştığını varsayar. Eğer bir uygulama oluşturup çalıştırmak hakkında bir bilginiz yoksa, [Merhaba Dünya örneği](/{{ page.lang }}/starter/hello-world.html) sayfasını ziyaret edin.
 </div>
 
-The following examples illustrate defining simple routes.
+Aşağıdaki örnekler nasıl basit bir şekilde yol tanımlayabileceğinizi gösterir.
 
-Respond with `Hello World!` on the homepage:
+Anasayfada `Merhaba Dünya!` ile cevap verin:
 
 ```js
 app.get('/', function (req, res) {
-  res.send('Hello World!')
+  res.send('Merhaba Dünya!')
 })
 ```
 
-Respond to POST request on the root route (`/`), the application's home page:
+Kök dizine (`/`) gelen POST isteğine bir cevap verin:
 
 ```js
 app.post('/', function (req, res) {
-  res.send('Got a POST request')
+  res.send('POST isteği geldi!')
 })
 ```
 
-Respond to a PUT request to the `/user` route:
+`/user` yoluna gelen PUT isteği:
 
 ```js
 app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user')
+  res.send('/user adresinde bir PUT isteği')
 })
 ```
 
-Respond to a DELETE request to the `/user` route:
+`/user` yoluna gelen DELETE isteği:
 
 ```js
 app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user')
+  res.send('/user adresinde bir DELETE isteği')
 })
 ```
 
-For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).
-</div>
+Yol atama ile ilgili daha fazla detay için, [yol atama](/{{ page.lang }}/guide/routing.html) sayfasını ziyaret edin.
+
+###  [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)
