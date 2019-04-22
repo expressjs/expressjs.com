@@ -271,9 +271,9 @@ $ npm install oracledb
 ```js
 const oracledb = require('oracledb')
 const config = {
-  user: '<your db user>',                // Update me
-  password: '<your db password>',        // Update me
-  connectString: 'localhost:1521/orcl'   // Update me
+  user: '<your db user>',
+  password: '<your db password>',
+  connectString: 'localhost:1521/orcl'
 }
 
 async function getEmployee (empId) {
@@ -313,7 +313,7 @@ $ npm install pg-promise
 ### Example
 
 ```js
-var pgp = require('pg-promise')(/*options*/)
+var pgp = require('pg-promise')(/* options */)
 var db = pgp('postgres://username:password@host:port/database')
 
 db.one('SELECT $1 AS value', 123)
