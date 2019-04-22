@@ -14,7 +14,9 @@
   },
   "eslintConfig": {
     "extends": "standard",
-    "plugins": ["markdown"],
+    "plugins": [
+      "markdown"
+    ],
     "rules": {
       "handle-callback-err": 0,
       "no-undef": 0,

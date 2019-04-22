@@ -36,37 +36,35 @@ npm i @godaddy/terminus --save
 Here's a basic template that illustrates using terminus.  For more information, see <https://github.com/godaddy/terminus>.
 
 ```js
-const http = require('http');
-const express = require('express');
-const terminus = require('@godaddy/terminus');
+const http = require('http')
+const express = require('express')
+const terminus = require('@godaddy/terminus')
 
-const app = express();
+const app = express()
 
 app.get('/', (req, res) => {
-  res.send('ok');
-});
+  res.send('ok')
+})
 
-const server = http.createServer(app);
+const server = http.createServer(app)
 
-function onSignal() {
-  console.log('server is starting cleanup');
+function onSignal () {
+  console.log('server is starting cleanup')
   // start cleanup of resource, like databases or file descriptors
 }
 
-async function onHealthCheck() {
+async function onHealthCheck () {
   // checks if the system is healthy, like the db connection is live
   // resolves, if health, rejects if not
 }
 
 terminus(server, {
   signal: 'SIGINT',
-   healthChecks: {
-    '/healthcheck': onHealthCheck,
-  },
+  healthChecks: { '/healthcheck': onHealthCheck },
   onSignal
-});
+})
 
-server.listen(3000);
+server.listen(3000)
 ```
 
 ### Lightship
@@ -83,24 +81,24 @@ npm install lightship
 Basic template that illustrates using Lightship:
 
 ```js
-const http = require('http');
-const express = require('express');
+const http = require('http')
+const express = require('express')
 const {
   createLightship
-} = require('lightship');
+} = require('lightship')
 
 // Lightship will start a HTTP service on port 9000.
-const lightship = createLightship();
+const lightship = createLightship()
 
-const app = express();
+const app = express()
 
 app.get('/', (req, res) => {
-  res.send('ok');
-});
+  res.send('ok')
+})
 
 app.listen(3000, () => {
-  lightship.signalReady();
-});
+  lightship.signalReady()
+})
 
 // You can signal that the service is not ready using `lightship.signalNotReady()`.
 

@@ -21,9 +21,9 @@ require no extra work. If synchronous code throws an error, then Express will
 catch and process it. For example:
 
 ```js
-app.get("/", function (req, res) {
-  throw new Error("BROKEN"); // Express will catch this on its own.
-});
+app.get('/', function (req, res) {
+  throw new Error('BROKEN') // Express will catch this on its own.
+})
 ```
 
 For errors returned from asynchronous functions invoked by route handlers
@@ -31,16 +31,15 @@ and middleware, you must pass them to the `next()` function, where Express will
 catch and process them.  For example:
 
 ```js
-app.get("/", function (req, res, next) {
-  fs.readFile("/file-does-not-exist", function (err, data) {
+app.get('/', function (req, res, next) {
+  fs.readFile('/file-does-not-exist', function (err, data) {
     if (err) {
-      next(err); // Pass errors to Express.
+      next(err) // Pass errors to Express.
+    } else {
+      res.send(data)
     }
-    else {
-      res.send(data);
-    }
-  });
-});
+  })
+})
 ```
 
 If you pass anything to the `next()` function (except the string `'route'`), Express regards the current request as being an error and will skip any remaining non-error handling routing and middleware functions.
@@ -48,14 +47,14 @@ If you pass anything to the `next()` function (except the string `'route'`), Exp
 If the callback in a sequence provides no data, only errors, you can simplify this code as follows:
 
 ```js
-app.get("/", [
+app.get('/', [
   function (req, res, next) {
-    fs.writeFile("/inaccessible-path", "data", next);
+    fs.writeFile('/inaccessible-path', 'data', next)
   },
   function (req, res) {
-    res.send("OK");
+    res.send('OK')
   }
-]);
+])
 ```
 
 In the above example `next` is provided as the callback for `fs.writeFile`,
@@ -66,17 +65,15 @@ You must catch errors that occur in asynchronous code invoked by route handlers 
 middleware and pass them to Express for processing. For example:
 
 ```js
-app.get("/", function (req, res, next) {
-
+app.get('/', function (req, res, next) {
   setTimeout(function () {
     try {
-      throw new Error("BROKEN");
+      throw new Error('BROKEN')
+    } catch (err) {
+      next(err)
     }
-    catch (err) {
-      next(err);
-    }
-  }, 100);
-});
+  }, 100)
+})
 ```
 
 The above example uses a `try...catch` block to catch errors in the
@@ -88,11 +85,11 @@ Use promises to avoid the overhead of the `try..catch` block or when using funct
 that return promises.  For example:
 
 ```js
-app.get("/", function (req, res, next) {
+app.get('/', function (req, res, next) {
   Promise.resolve().then(function () {
-    throw new Error("BROKEN");
-  }).catch(next); // Errors will be passed to Express.
-});
+    throw new Error('BROKEN')
+  }).catch(next) // Errors will be passed to Express.
+})
 ```
 
 Since promises automatically catch both synchronous errors and rejected promises,
@@ -104,18 +101,18 @@ catching, by reducing the asynchronous code to something trivial. For example:
 
 
 ```js
-app.get("/", [
+app.get('/', [
   function (req, res, next) {
-    fs.readFile("/maybe-valid-file", "utf8", function (err, data) {
-        res.locals.data = data;
-        next(err);
-    });
+    fs.readFile('/maybe-valid-file', 'utf-8', function (err, data) {
+      res.locals.data = data
+      next(err)
+    })
   },
   function (req, res) {
-    res.locals.data = res.locals.data.split(",")[1];
-    res.send(res.locals.data);
+    res.locals.data = res.locals.data.split(',')[1]
+    res.send(res.locals.data)
   }
-]);
+])
 ```
 
 The above example has a couple of trivial statements from the `readFile`
@@ -255,9 +252,8 @@ app.get('/a_route_behind_paywall',
     if (!req.user.hasPaid) {
       // continue handling this request
       next('route')
-    }
-    else{
-      next();
+    } else {
+      next()
     }
   }, function getPaidContent (req, res, next) {
     PaidContent.find(function (err, doc) {

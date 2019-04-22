@@ -125,9 +125,9 @@ This example shows an array with a middleware sub-stack that handles GET request
 function logOriginalUrl (req, res, next) {
   console.log('Request URL:', req.originalUrl)
   next()
-} 
+}
 
-function logMethod(req, res, next) {
+function logMethod (req, res, next) {
   console.log('Request Type:', req.method)
   next()
 }
