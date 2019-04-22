@@ -1,8 +1,7 @@
 # cookie-parser
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Node.js Version][node-version-image]][node-version-url]
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
@@ -34,7 +33,7 @@ app.use(cookieParser())
 
 ### cookieParser.JSONCookie(str)
 
-Parse a cookie value as a JSON cookie. This will return the parsed JSON value if it was a JSON cookie, otherwise it will return the passed value.
+Parse a cookie value as a JSON cookie. This will return the parsed JSON value if it was a JSON cookie, otherwise, it will return the passed value.
 
 ### cookieParser.JSONCookies(cookies)
 
@@ -77,13 +76,10 @@ app.listen(8080)
 
 ### [MIT Licensed](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/cookie-parser.svg
-[npm-url]: https://npmjs.org/package/cookie-parser
-[node-version-image]: https://img.shields.io/node/v/cookie-parser.svg
-[node-version-url]: https://nodejs.org/en/download
-[travis-image]: https://img.shields.io/travis/expressjs/cookie-parser/master.svg
-[travis-url]: https://travis-ci.org/expressjs/cookie-parser
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/cookie-parser/master.svg
+[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/cookie-parser/master
 [coveralls-url]: https://coveralls.io/r/expressjs/cookie-parser?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/cookie-parser.svg
-[downloads-url]: https://npmjs.org/package/cookie-parser
+[npm-downloads-image]: https://badgen.net/npm/dm/cookie-parser
+[npm-url]: https://npmjs.org/package/cookie-parser
+[npm-version-image]: https://badgen.net/npm/v/cookie-parser
+[travis-image]: https://badgen.net/travis/expressjs/cookie-parser/master
+[travis-url]: https://travis-ci.org/expressjs/cookie-parser

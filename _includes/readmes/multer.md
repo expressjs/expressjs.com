@@ -11,6 +11,7 @@ This README is also available in other languages:
 
 - [简体中文](https://github.com/expressjs/multer/blob/master/doc/README-zh-cn.md) (Chinese)
 - [한국어](https://github.com/expressjs/multer/blob/master/doc/README-ko.md) (Korean)
+- [Русский язык](https://github.com/expressjs/multer/blob/master/doc/README-ru.md) (Russian)
 
 ## Installation
 
@@ -270,7 +271,7 @@ When encountering an error, Multer will delegate the error to Express. You can
 display a nice error page using [the standard express way](http://expressjs.com/guide/error-handling.html).
 
 If you want to catch errors specifically from Multer, you can call the
-middleware function by yourself. Also, if you want to catch only [the Multer errors](https://github.com/expressjs/multer/blob/master/lib/make-error.js#L1-L9), you can use the `MulterError` class that is attached to the `multer` object itself (e.g. `err instanceof multer.MulterError`).
+middleware function by yourself. Also, if you want to catch only [the Multer errors](https://github.com/expressjs/multer/blob/master/lib/multer-error.js), you can use the `MulterError` class that is attached to the `multer` object itself (e.g. `err instanceof multer.MulterError`).
 
 ```javascript
 var multer = require('multer')
@@ -280,7 +281,7 @@ app.post('/profile', function (req, res) {
   upload(req, res, function (err) {
     if (err instanceof multer.MulterError) {
       // A Multer error occurred when uploading.
-    } else {
+    } else if (err) {
       // An unknown error occurred when uploading.
     }
 

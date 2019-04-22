@@ -1,7 +1,7 @@
 # morgan
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
@@ -312,21 +312,16 @@ file per day in the `log/` directory using the
 
 ```js
 var express = require('express')
-var fs = require('fs')
 var morgan = require('morgan')
 var path = require('path')
 var rfs = require('rotating-file-stream')
 
 var app = express()
-var logDirectory = path.join(__dirname, 'log')
-
-// ensure log directory exists
-fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
 
 // create a rotating write stream
 var accessLogStream = rfs('access.log', {
   interval: '1d', // rotate daily
-  path: logDirectory
+  path: path.join(__dirname, 'log')
 })
 
 // setup the logger
@@ -404,11 +399,10 @@ function assignId (req, res, next) {
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/morgan.svg
-[npm-url]: https://npmjs.org/package/morgan
-[travis-image]: https://img.shields.io/travis/expressjs/morgan/master.svg
-[travis-url]: https://travis-ci.org/expressjs/morgan
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/morgan/master.svg
+[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/morgan/master
 [coveralls-url]: https://coveralls.io/r/expressjs/morgan?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/morgan.svg
-[downloads-url]: https://npmjs.org/package/morgan
+[npm-downloads-image]: https://badgen.net/npm/dm/morgan
+[npm-url]: https://npmjs.org/package/morgan
+[npm-version-image]: https://badgen.net/npm/v/morgan
+[travis-image]: https://badgen.net/travis/expressjs/morgan/master
+[travis-url]: https://travis-ci.org/expressjs/morgan

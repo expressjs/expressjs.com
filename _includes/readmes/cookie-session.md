@@ -1,7 +1,7 @@
 # cookie-session
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
@@ -261,11 +261,10 @@ move to an [alternative session strategy](https://github.com/expressjs/session#c
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/cookie-session.svg
-[npm-url]: https://npmjs.org/package/cookie-session
-[travis-image]: https://img.shields.io/travis/expressjs/cookie-session/master.svg
-[travis-url]: https://travis-ci.org/expressjs/cookie-session
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/cookie-session.svg
+[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/cookie-session/master
 [coveralls-url]: https://coveralls.io/r/expressjs/cookie-session?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/cookie-session.svg
-[downloads-url]: https://npmjs.org/package/cookie-session
+[npm-downloads-image]: https://badgen.net/npm/dm/cookie-session
+[npm-url]: https://npmjs.org/package/cookie-session
+[npm-version-image]: https://badgen.net/npm/v/cookie-session
+[travis-image]: https://badgen.net/travis/expressjs/cookie-session/master
+[travis-url]: https://travis-ci.org/expressjs/cookie-session

@@ -1,7 +1,7 @@
 # csurf
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][node-url]
 [![Build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
 
@@ -273,11 +273,11 @@ app.use(function (err, req, res, next) {
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/csurf.svg
-[npm-url]: https://npmjs.org/package/csurf
-[travis-image]: https://img.shields.io/travis/expressjs/csurf/master.svg
-[travis-url]: https://travis-ci.org/expressjs/csurf
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/csurf/master.svg
+[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/csurf/master
 [coveralls-url]: https://coveralls.io/r/expressjs/csurf?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/csurf.svg
-[downloads-url]: https://npmjs.org/package/csurf
+[node-url]: https://nodejs.org/en/download
+[npm-downloads-image]: https://badgen.net/npm/dm/csurf
+[npm-url]: https://npmjs.org/package/csurf
+[npm-version-image]: https://badgen.net/npm/v/csurf
+[travis-image]: https://badgen.net/travis/expressjs/csurf/master
+[travis-url]: https://travis-ci.org/expressjs/csurf
