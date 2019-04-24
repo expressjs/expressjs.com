@@ -1,0 +1,3 @@
+# config: https://github.com/algolia/docsearch-configs/blob/master/configs/expressjs.json
+apiKey: 7164e33055faa6ecddefd9e08fc59f5d
+indexName: expressjs
