@@ -14,6 +14,7 @@ Several popular Node.js frameworks are built on Express:
 - **[Feathers](http://feathersjs.com)**: Build prototypes in minutes and production ready real-time apps in days.
 - **[ItemsAPI](https://www.itemsapi.com/)**: Search backend for web and mobile applications built on Express and Elasticsearch.
 - **[KeystoneJS](http://keystonejs.com/)**: Website and API Application Framework / CMS with an auto-generated React.js Admin UI.
+- **[Poet](http://jsantell.github.io/poet)**: Lightweight Markdown Blog Engine with instant pagination, tag and category views.
 - **[Kraken](http://krakenjs.com/)**: Secure and scalable layer that extends Express by providing structure and convention.
 - **[LoopBack](http://loopback.io)**: Highly-extensible, open-source Node.js framework for quickly creating dynamic end-to-end REST APIs.
 - **[MEAN](http://mean.io/)**: Opinionated fullstack JavaScript framework that simplifies and accelerates web application development.
