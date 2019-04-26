@@ -14,3 +14,9 @@
 .algolia-autocomplete #q {
   display: initial
 }
+
+@media all and (max-width: 899px) {
+  .algolia-autocomplete {
+    display: none !important;
+  }
+}
