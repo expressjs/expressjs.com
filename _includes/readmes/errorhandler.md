@@ -1,7 +1,7 @@
 # errorhandler
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
@@ -102,7 +102,7 @@ var app = connect()
 
 if (process.env.NODE_ENV === 'development') {
   // only use in development
-  app.use(errorhandler({log: errorNotification}))
+  app.use(errorhandler({ log: errorNotification }))
 }
 
 function errorNotification (err, str, req) {
@@ -119,11 +119,10 @@ function errorNotification (err, str, req) {
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/errorhandler.svg
-[npm-url]: https://npmjs.org/package/errorhandler
-[travis-image]: https://img.shields.io/travis/expressjs/errorhandler/master.svg
-[travis-url]: https://travis-ci.org/expressjs/errorhandler
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/errorhandler/master.svg
+[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/errorhandler/master
 [coveralls-url]: https://coveralls.io/r/expressjs/errorhandler?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/errorhandler.svg
-[downloads-url]: https://npmjs.org/package/errorhandler
+[npm-downloads-image]: https://badgen.net/npm/dm/errorhandler
+[npm-url]: https://npmjs.org/package/errorhandler
+[npm-version-image]: https://badgen.net/npm/v/errorhandler
+[travis-image]: https://badgen.net/travis/expressjs/errorhandler/master
+[travis-url]: https://travis-ci.org/expressjs/errorhandler

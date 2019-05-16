@@ -68,8 +68,16 @@ following keys:
   - `key` - the name of the cookie to use to store the token secret
     (defaults to `'_csrf'`).
   - `path` - the path of the cookie (defaults to `'/'`).
-  - any other [res.cookie](http://expressjs.com/4x/api.html#res.cookie)
-    option can be set.
+  - `signed` - indicates if the cookie should be signed (defaults to `false`).
+  - `secure` - marks the cookie to be used with HTTPS only (defaults to
+    `false`).
+  - `maxAge` - the number of seconds after which the cookie will expire
+    (defaults to session length).
+  - `httpOnly` - flags the cookie to be accessible only by the web server
+    (defaults to `false`).
+  - `sameSite` - sets the same site policy for the cookie (defaults to none).
+  - `domain` - sets the domain the cookie is valid on (defaults to current
+    domain).
 
 ##### ignoreMethods
 
@@ -188,6 +196,28 @@ fetch('/process', {
   body: {
     favoriteColor: 'blue'
   }
+})
+```
+
+#### Single Page Application (SPA)
+
+Many SPA frameworks like Angular have CSRF support built in automatically.
+Typically they will reflect the value from a specific cookie, like
+`XSRF-TOKEN` (which is the case for Angular).
+
+To take advantage of this, set the value from `req.csrfToken()` in the cookie
+used by the SPA framework. This is only necessary to do on the route that
+renders the page (where `res.render` or `res.sendFile` is called in Express,
+for example).
+
+The following is an example for Express of a typical SPA response:
+
+<!-- eslint-disable no-undef -->
+
+```js
+app.all('*', function (req, res) {
+  res.cookie('XSRF-TOKEN', req.csrfToken())
+  res.render('index')
 })
 ```
 
