@@ -1,5 +1,5 @@
 ---
-layout: middleware
+layout: page
 title: Express middleware
 menu: resources
 lang: tr
