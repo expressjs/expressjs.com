@@ -40,10 +40,10 @@ lang: ja
 Gzip 圧縮により、応答本体のサイズを大幅に縮小できるため、Web アプリケーションの速度が高くなります。Express アプリケーションで gzip 圧縮として [compression](https://www.npmjs.com/package/compression) ミドルウェアを使用してください。次に例を示します。
 
 ```js
-var compression = require('compression');
-var express = require('express');
-var app = express();
-app.use(compression());
+var compression = require('compression')
+var express = require('express')
+var app = express()
+app.use(compression())
 ```
 
 トラフィックが多い実稼働環境の Web サイトでは、圧縮を適用する最適な方法は、リバース・プロキシー・レベルで実装することです ([リバース・プロキシーの使用](#proxy)を参照)。その場合は、compression ミドルウェアを使用する必要はありません。Nginx で gzip 圧縮を有効にする方法について詳しくは、Nginx 資料の [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) を参照してください。
@@ -105,15 +105,15 @@ Try-catch は、同期コードで例外をキャッチするために使用で�
 app.get('/search', function (req, res) {
   // Simulating async operation
   setImmediate(function () {
-    var jsonStr = req.query.params;
+    var jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr);
-      res.send('Success');
+      var jsonObj = JSON.parse(jsonStr)
+      res.send('Success')
     } catch (e) {
-      res.status(400).send('Invalid JSON string');
+      res.status(400).send('Invalid JSON string')
     }
-  });
-});
+  })
+})
 ```
 
 ただし、Try-catch は同期コードでのみ機能します。Node プラットフォームは主に (特に実稼働環境で) 非同期的であるため、Try-catch は多くの例外をキャッチしません。
@@ -133,12 +133,12 @@ app.get('/', function (req, res, next) {
     .then(function (csv) {
       // handle csv
     })
-    .catch(next);
-});
+    .catch(next)
+})
 
 app.use(function (err, req, res, next) {
   // handle error
-});
+})
 ```
 
 これで、非同期と同期のエラーがすべてエラー・ミドルウェアに伝搬されます。

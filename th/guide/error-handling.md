@@ -97,9 +97,8 @@ app.get('/a_route_behind_paywall',
     if (!req.user.hasPaid) {
       // continue handling this request
       next('route')
-    }
-    else{
-      next();
+    } else {
+      next()
     }
   }, function getPaidContent (req, res, next) {
     PaidContent.find(function (err, doc) {

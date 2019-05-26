@@ -46,14 +46,14 @@ lang: ja
 次に、簡単な「Hello World」Expressアプリケーションの例を示します。 この記事の残りの部分では、アプリケーションに2つのミドルウェア関数、つまり単純なログメッセージを出力する`myLogger`と、HTTP要求のタイムスタンプを表示する`requestTime`という2つのミドルウェア関数を定義して追加します。
 
 ```js
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+  res.send('Hello World!')
+})
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 <h3>ミドルウェア関数 myLogger</h3>
@@ -62,9 +62,9 @@ app.listen(3000);
 
 ```js
 var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
+  console.log('LOGGED')
+  next()
+}
 ```
 
 <div class="doc-box doc-notice" markdown="1">
@@ -77,21 +77,21 @@ var myLogger = function (req, res, next) {
 例えば、次のコードは、ルート・パス (/) へのルートの前に `myLogger` ミドルウェア関数をロードします。
 
 ```js
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
 
 var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
+  console.log('LOGGED')
+  next()
+}
 
-app.use(myLogger);
+app.use(myLogger)
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+  res.send('Hello World!')
+})
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 アプリケーションは、リクエストを受け取るたびに、端末にメッセージ「LOGGED」を出力します。
@@ -108,31 +108,31 @@ app.listen(3000);
 
 ```js
 var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
+  req.requestTime = Date.now()
+  next()
+}
 ```
 
 これで、アプリケーションが `requestTime` ミドルウェア関数を使用するようになります。また、ルート・パス・ルートのコールバック関数は、ミドルウェア関数が `req` (リクエストオブジェクト) に追加するプロパティーを使用します。
 
 ```js
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
 
 var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
+  req.requestTime = Date.now()
+  next()
+}
 
-app.use(requestTime);
+app.use(requestTime)
 
 app.get('/', function (req, res) {
-  var responseText = 'Hello World!<br>';
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-  res.send(responseText);
-});
+  var responseText = 'Hello World!<br>'
+  responseText += '<small>Requested at: ' + req.requestTime + '</small>'
+  res.send(responseText)
+})
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 アプリケーションのルートにリクエストすると、アプリケーションは、リクエストのタイムスタンプをブラウザーに表示します。
@@ -148,8 +148,8 @@ Express ミドルウェアについて詳しくは、[Express ミドルウェア
 File: `my-middleware.js`
 
 ```js
-module.exports = function(options) {
-  return function(req, res, next) {
+module.exports = function (options) {
+  return function (req, res, next) {
     // Implement the middleware function based on the options object
     next()
   }

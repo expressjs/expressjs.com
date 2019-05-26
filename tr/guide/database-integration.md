@@ -169,11 +169,11 @@ $ npm install mysql
 ```js
 var mysql = require('mysql')
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'dbuser',
-  password : 's3kreee7',
-  database : 'my_db'
-});
+  host: 'localhost',
+  user: 'dbuser',
+  password: 's3kreee7',
+  database: 'my_db'
+})
 
 connection.connect()
 
@@ -255,7 +255,7 @@ $ npm install pg-promise
 **Example**
 
 ```js
-var pgp = require('pg-promise')(/*options*/)
+var pgp = require('pg-promise')(/* options */)
 var db = pgp('postgres://username:password@host:port/database')
 
 db.one('SELECT $1 AS value', 123)
@@ -316,8 +316,8 @@ $ npm install tedious
 **Example**
 
 ```js
-var Connection = require('tedious').Connection;
-var Request = require('tedious').Request;
+var Connection = require('tedious').Connection
+var Request = require('tedious').Request
 
 var config = {
   userName: 'your_username', // update me
@@ -325,37 +325,37 @@ var config = {
   server: 'localhost'
 }
 
-var connection = new Connection(config);
+var connection = new Connection(config)
 
-connection.on('connect', function(err) {
+connection.on('connect', function (err) {
   if (err) {
-    console.log(err);
+    console.log(err)
   } else {
-    executeStatement();
+    executeStatement()
   }
-});
+})
 
-function executeStatement() {
-  request = new Request("select 123, 'hello world'", function(err, rowCount) {
+function executeStatement () {
+  request = new Request("select 123, 'hello world'", function (err, rowCount) {
     if (err) {
-      console.log(err);
+      console.log(err)
     } else {
-      console.log(rowCount + ' rows');
+      console.log(rowCount + ' rows')
     }
-    connection.close();
-  });
+    connection.close()
+  })
 
-  request.on('row', function(columns) {
-    columns.forEach(function(column) {
+  request.on('row', function (columns) {
+    columns.forEach(function (column) {
       if (column.value === null) {
-        console.log('NULL');
+        console.log('NULL')
       } else {
-        console.log(column.value);
+        console.log(column.value)
       }
-    });
-  });
+    })
+  })
 
-  connection.execSql(request);
+  connection.execSql(request)
 }
 ```
 

@@ -150,8 +150,8 @@ If you need your middleware to be configurable, export a function which accepts 
 File: `my-middleware.js`
 
 ```js
-module.exports = function(options) {
-  return function(req, res, next) {
+module.exports = function (options) {
+  return function (req, res, next) {
     // Implement the middleware function based on the options object
     next()
   }

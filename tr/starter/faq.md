@@ -42,7 +42,7 @@ Express'te 404 cevapları bir hatanın sonucu olarak ortaya çıkmaz, bu yüzden
 
 ```js
 app.use(function (req, res, next) {
-  res.status(404).send("Üzgünüm, dosyayı bulamadım!")
+  res.status(404).send('Üzgünüm, dosyayı bulamadım!')
 })
 ```
 

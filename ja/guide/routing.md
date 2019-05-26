@@ -22,13 +22,13 @@ lang: ja
 次のコードは、極めて基本的なルートの例です。
 
 ```js
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
 
 // respond with "hello world" when a GET request is made to the homepage
-app.get('/', function(req, res) {
-  res.send('hello world');
-});
+app.get('/', function (req, res) {
+  res.send('hello world')
+})
 ```
 
 <h2 id="route-methods">route メソッド</h2>
@@ -40,13 +40,13 @@ route メソッドは、いずれかの HTTP メソッドから派生され、`e
 ```js
 // GET method route
 app.get('/', function (req, res) {
-  res.send('GET request to the homepage');
-});
+  res.send('GET request to the homepage')
+})
 
 // POST method route
 app.post('/', function (req, res) {
-  res.send('POST request to the homepage');
-});
+  res.send('POST request to the homepage')
+})
 ```
 
 Expressは、すべてのHTTPリクエストメソッドに対応するメソッド（`get`、`post`など）をサポートしています。
@@ -56,9 +56,9 @@ _すべての_ HTTPリクエストメソッドのパスにミドルウェア関�
 
 ```js
 app.all('/secret', function (req, res, next) {
-  console.log('Accessing the secret section ...');
-  next(); // pass control to the next handler
-});
+  console.log('Accessing the secret section ...')
+  next() // pass control to the next handler
+})
 ```
 
 <h2 id="route-paths">ルート・パス</h2>
@@ -83,24 +83,24 @@ Express は、ルート・パスのマッチングに [path-to-regexp](https://w
 
 ```js
 app.get('/', function (req, res) {
-  res.send('root');
-});
+  res.send('root')
+})
 ```
 
 このルート・パスは、リクエストを `/about` にマッチングします。
 
 ```js
 app.get('/about', function (req, res) {
-  res.send('about');
-});
+  res.send('about')
+})
 ```
 
 このルート・パスは、リクエストを `/random.text` にマッチングします。
 
 ```js
 app.get('/random.text', function (req, res) {
-  res.send('random.text');
-});
+  res.send('random.text')
+})
 ```
 
 次に、ストリング・パターンに基づくルート・パスの例を示します。
@@ -108,33 +108,33 @@ app.get('/random.text', function (req, res) {
 このルート・パスは、`acd` および `abcd` をマッチングします。
 
 ```js
-app.get('/ab?cd', function(req, res) {
-  res.send('ab?cd');
-});
+app.get('/ab?cd', function (req, res) {
+  res.send('ab?cd')
+})
 ```
 
 このルート・パスは、`abcd`、`abbcd`、`abbbcd` などをマッチングします。
 
 ```js
-app.get('/ab+cd', function(req, res) {
-  res.send('ab+cd');
-});
+app.get('/ab+cd', function (req, res) {
+  res.send('ab+cd')
+})
 ```
 
 このルート・パスは、`abcd`、`abxcd`、`abRABDOMcd`、`ab123cd` などをマッチングします。
 
 ```js
-app.get('/ab*cd', function(req, res) {
-  res.send('ab*cd');
-});
+app.get('/ab*cd', function (req, res) {
+  res.send('ab*cd')
+})
 ```
 
 このルート・パスは、`/abe` および `/abcde` をマッチングします。
 
 ```js
-app.get('/ab(cd)?e', function(req, res) {
- res.send('ab(cd)?e');
-});
+app.get('/ab(cd)?e', function (req, res) {
+  res.send('ab(cd)?e')
+})
 ```
 
 次に、正規表現に基づくルート・パスの例を示します。
@@ -142,17 +142,17 @@ app.get('/ab(cd)?e', function(req, res) {
 このルート・パスは、ルート名に「a」が含まれるすべてのものをマッチングします。
 
 ```js
-app.get(/a/, function(req, res) {
-  res.send('/a/');
-});
+app.get(/a/, function (req, res) {
+  res.send('/a/')
+})
 ```
 
 このルート・パスは、`butterfly` および `dragonfly` をマッチングしますが、`butterflyman`、`dragonfly man` などはマッチングしません。
 
 ```js
-app.get(/.*fly$/, function(req, res) {
-  res.send('/.*fly$/');
-});
+app.get(/.*fly$/, function (req, res) {
+  res.send('/.*fly$/')
+})
 ```
 
 <h3 id="route-parameters">ルート・パラメータ</h3>
@@ -217,60 +217,60 @@ Express 4.xでは、<a href="https://github.com/expressjs/express/issues/2495">�
 
 ```js
 app.get('/example/a', function (req, res) {
-  res.send('Hello from A!');
-});
+  res.send('Hello from A!')
+})
 ```
 
 複数のコールバック関数で1つのルートを処理できます (必ず、`next` オブジェクトを指定してください)。次に例を示します。
 
 ```js
 app.get('/example/b', function (req, res, next) {
-  console.log('the response will be sent by the next function ...');
-  next();
+  console.log('the response will be sent by the next function ...')
+  next()
 }, function (req, res) {
-  res.send('Hello from B!');
-});
+  res.send('Hello from B!')
+})
 ```
 
 コールバック関数の配列で 1 つのルートを処理できます。次に例を示します。
 
 ```js
 var cb0 = function (req, res, next) {
-  console.log('CB0');
-  next();
+  console.log('CB0')
+  next()
 }
 
 var cb1 = function (req, res, next) {
-  console.log('CB1');
-  next();
+  console.log('CB1')
+  next()
 }
 
 var cb2 = function (req, res) {
-  res.send('Hello from C!');
+  res.send('Hello from C!')
 }
 
-app.get('/example/c', [cb0, cb1, cb2]);
+app.get('/example/c', [cb0, cb1, cb2])
 ```
 
 独立した関数と、関数の配列の組み合わせで1つのルートを処理できます。次に例を示します。
 
 ```js
 var cb0 = function (req, res, next) {
-  console.log('CB0');
-  next();
+  console.log('CB0')
+  next()
 }
 
 var cb1 = function (req, res, next) {
-  console.log('CB1');
-  next();
+  console.log('CB1')
+  next()
 }
 
 app.get('/example/d', [cb0, cb1], function (req, res, next) {
-  console.log('the response will be sent by the next function ...');
-  next();
+  console.log('the response will be sent by the next function ...')
+  next()
 }, function (req, res) {
-  res.send('Hello from D!');
-});
+  res.send('Hello from D!')
+})
 ```
 
 <h2 id="response-methods">レスポンスメソッド</h2>
@@ -298,15 +298,15 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 
 ```js
 app.route('/book')
-  .get(function(req, res) {
-    res.send('Get a random book');
+  .get(function (req, res) {
+    res.send('Get a random book')
   })
-  .post(function(req, res) {
-    res.send('Add a book');
+  .post(function (req, res) {
+    res.send('Add a book')
   })
-  .put(function(req, res) {
-    res.send('Update the book');
-  });
+  .put(function (req, res) {
+    res.send('Update the book')
+  })
 ```
 
 <h2 id="express-router">express.Router</h2>
@@ -318,32 +318,32 @@ app.route('/book')
 アプリケーション・ディレクトリーに次の内容で `birds.js` というルーター・ファイルを作成します。
 
 ```js
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
 // middleware that is specific to this router
-router.use(function timeLog(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-});
+router.use(function timeLog (req, res, next) {
+  console.log('Time: ', Date.now())
+  next()
+})
 // define the home page route
-router.get('/', function(req, res) {
-  res.send('Birds home page');
-});
+router.get('/', function (req, res) {
+  res.send('Birds home page')
+})
 // define the about route
-router.get('/about', function(req, res) {
-  res.send('About birds');
-});
+router.get('/about', function (req, res) {
+  res.send('About birds')
+})
 
-module.exports = router;
+module.exports = router
 ```
 
 次に、ルーター・モジュールをアプリケーションにロードします。
 
 ```js
-var birds = require('./birds');
-...
-app.use('/birds', birds);
+var birds = require('./birds')
+// ...
+app.use('/birds', birds)
 ```
 
 これで、アプリケーションは、`/birds` および `/birds/about` に対するリクエストを処理するほか、ルートに固有の `timeLog` ミドルウェア関数を呼び出すことができるようになります。

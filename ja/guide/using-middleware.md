@@ -38,42 +38,42 @@ Express アプリケーションは、以下のタイプのミドルウェアを
 次の例は、マウント・パスを指定しないミドルウェア関数を示しています。この関数は、アプリケーションがリクエストを受け取るたびに実行されます。
 
 ```js
-var app = express();
+var app = express()
 
 app.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
+  console.log('Time:', Date.now())
+  next()
+})
 ```
 
 次の例は、`/user/:id` パスにマウントされたミドルウェア関数を示しています。この関数は、`/user/:id` パスに対するすべてのタイプの HTTP リクエストで実行されます。
 
 ```js
 app.use('/user/:id', function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
+  console.log('Request Type:', req.method)
+  next()
+})
 ```
 
 次の例は、ルートとそのハンドラー関数 (ミドルウェア・システム) を示しています。この関数は、`/user/:id` パスへの GET リクエストを処理します。
 
 ```js
 app.get('/user/:id', function (req, res, next) {
-  res.send('USER');
-});
+  res.send('USER')
+})
 ```
 
 次に、マウント・パスを指定して、一連のミドルウェア関数をマウント・ポイントにロードする例を示します。
 `/user/:id` パスへのすべてのタイプの HTTP リクエストに関するリクエスト情報を出力するミドルウェア・サブスタックを示しています。
 
 ```js
-app.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
+app.use('/user/:id', function (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
 }, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
+  console.log('Request Type:', req.method)
+  next()
+})
 ```
 
 ルート・ハンドラーを使用すると、パスに複数のルートを定義できます。下記の例では、`/user/:id` パスへの GET リクエストに 2 つのルートを定義しています。2 番目のルートは、問題を発生させるものではありませんが、最初のルートがリクエストレスポンスサイクルを終了するため、呼び出されることはありません。
@@ -82,16 +82,16 @@ app.use('/user/:id', function(req, res, next) {
 
 ```js
 app.get('/user/:id', function (req, res, next) {
-  console.log('ID:', req.params.id);
-  next();
+  console.log('ID:', req.params.id)
+  next()
 }, function (req, res, next) {
-  res.send('User Info');
-});
+  res.send('User Info')
+})
 
 // handler for the /user/:id path, which prints the user ID
 app.get('/user/:id', function (req, res, next) {
-  res.end(req.params.id);
-});
+  res.end(req.params.id)
+})
 ```
 
 ルーター・ミドルウェア・スタックの残りのミドルウェア関数をスキップするには、`next('route')` を呼び出して、次のルートに制御を渡します。
@@ -102,18 +102,18 @@ app.get('/user/:id', function (req, res, next) {
 ```js
 app.get('/user/:id', function (req, res, next) {
   // if the user ID is 0, skip to the next route
-  if (req.params.id == 0) next('route');
+  if (Number(req.params.id) === 0) next('route')
   // otherwise pass the control to the next middleware function in this stack
-  else next(); //
+  else next()
 }, function (req, res, next) {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
 app.get('/user/:id', function (req, res, next) {
-  res.render('special');
-});
+  res.render('special')
+})
 ```
 
 <h2 id='middleware.router'>ルーター・レベルのミドルウェア</h2>
@@ -121,7 +121,7 @@ app.get('/user/:id', function (req, res, next) {
 ルーター・レベルのミドルウェアは、`express.Router()` のインスタンスにバインドされる点を除き、アプリケーション・レベルのミドルウェアと同じように動作します。
 
 ```js
-var router = express.Router();
+var router = express.Router()
 ```
 
 `router.use()` 関数と `router.METHOD()` 関数を使用して、ルーター・レベルのミドルウェアをロードします。
@@ -129,43 +129,43 @@ var router = express.Router();
 次のコードの例では、ルーター・レベルのミドルウェアを使用して、上記のアプリケーション・レベルのミドルウェアで示されているミドルウェア・システムを複製します。
 
 ```js
-var app = express();
-var router = express.Router();
+var app = express()
+var router = express.Router()
 
 // a middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
+  console.log('Time:', Date.now())
+  next()
+})
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
-router.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
+router.use('/user/:id', function (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
 }, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
+  console.log('Request Type:', req.method)
+  next()
+})
 
 // a middleware sub-stack that handles GET requests to the /user/:id path
 router.get('/user/:id', function (req, res, next) {
   // if the user ID is 0, skip to the next router
-  if (req.params.id == 0) next('route');
+  if (Number(req.params.id) === 0) next('route')
   // otherwise pass control to the next middleware function in this stack
-  else next(); //
+  else next()
 }, function (req, res, next) {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
 router.get('/user/:id', function (req, res, next) {
-  console.log(req.params.id);
-  res.render('special');
-});
+  console.log(req.params.id)
+  res.render('special')
+})
 
 // mount the router on the app
-app.use('/', router);
+app.use('/', router)
 ```
 
 ルータのミドルウェア機能の残りの部分をスキップするには、`next('router')`を呼び出してルータインスタンスから制御を戻します。
@@ -202,10 +202,10 @@ app.use('/admin', router, function (req, res) {
 エラー処理ミドルウェア関数は、その他のミドルウェア関数と同じ方法で定義しますが、例外として、シグニチャーで3つではなく4つの引数 `(err、req、res、next)`) を明示的に指定します。
 
 ```js
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 ```
 
 エラー処理ミドルウェアについて詳しくは、[エラー処理](/{{ page.lang }}/guide/error-handling.html)を参照してください。
@@ -233,12 +233,12 @@ $ npm install cookie-parser
 ```
 
 ```js
-var express = require('express');
-var app = express();
-var cookieParser = require('cookie-parser');
+var express = require('express')
+var app = express()
+var cookieParser = require('cookie-parser')
 
 // load the cookie-parsing middleware
-app.use(cookieParser());
+app.use(cookieParser())
 ```
 
 Express で一般的に使用されているサード・パーティー・ミドルウェア関数の一部のリストについては、[サード・パーティー・ミドルウェア](../resources/middleware.html)を参照してください。
