@@ -4,14 +4,14 @@ The `app` object conventionally denotes the Express application.
 Create it by calling the top-level `express()` function exported by the Express module:
 
 ```js
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
 
-app.get('/', function(req, res){
-  res.send('hello world');
-});
+app.get('/', function (req, res) {
+  res.send('hello world')
+})
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 The `app` object has methods for

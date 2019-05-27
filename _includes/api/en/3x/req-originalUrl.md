@@ -8,6 +8,6 @@ strip the mount point.
 
 ```js
 // GET /search?q=something
-req.originalUrl
+console.log(req.originalUrl)
 // => "/search?q=something"
 ```

@@ -11,16 +11,16 @@ callback `fn` is invoked. This method uses <a href="#res.sendfile">res.sendfile(
 to transfer the file.
 
 ```js
-res.download('/report-12345.pdf');
+res.download('/report-12345.pdf')
 
-res.download('/report-12345.pdf', 'report.pdf');
+res.download('/report-12345.pdf', 'report.pdf')
 
-res.download('/report-12345.pdf', 'report.pdf', function(err){
+res.download('/report-12345.pdf', 'report.pdf', function (err) {
   if (err) {
     // handle error, keep in mind the response may be partially-sent
     // so check res.headerSent
   } else {
     // decrement a download credit etc
   }
-});
+})
 ```

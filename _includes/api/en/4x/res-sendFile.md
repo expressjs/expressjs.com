@@ -44,43 +44,41 @@ Here is an example of using `res.sendFile` with all its arguments.
 
 ```js
 app.get('/file/:name', function (req, res, next) {
-
   var options = {
-    root: __dirname + '/public/',
+    root: path.join(__dirname, 'public'),
     dotfiles: 'deny',
     headers: {
-        'x-timestamp': Date.now(),
-        'x-sent': true
+      'x-timestamp': Date.now(),
+      'x-sent': true
     }
-  };
+  }
 
-  var fileName = req.params.name;
+  var fileName = req.params.name
   res.sendFile(fileName, options, function (err) {
     if (err) {
-      next(err);
+      next(err)
     } else {
-      console.log('Sent:', fileName);
+      console.log('Sent:', fileName)
     }
-  });
-
-});
+  })
+})
 ```
 
 The following example illustrates using
 `res.sendFile` to provide fine-grained support for serving files:
 
 ```js
-app.get('/user/:uid/photos/:file', function(req, res){
+app.get('/user/:uid/photos/:file', function (req, res) {
   var uid = req.params.uid
-    , file = req.params.file;
+  var file = req.params.file
 
-  req.user.mayViewFilesFrom(uid, function(yes){
+  req.user.mayViewFilesFrom(uid, function (yes) {
     if (yes) {
-      res.sendFile('/uploads/' + uid + '/' + file);
+      res.sendFile('/uploads/' + uid + '/' + file)
     } else {
-      res.status(403).send("Sorry! You can't see that.");
+      res.status(403).send("Sorry! You can't see that.")
     }
-  });
-});
+  })
+})
 ```
 For more information, or if you have issues or concerns, see [send](https://github.com/pillarjs/send).

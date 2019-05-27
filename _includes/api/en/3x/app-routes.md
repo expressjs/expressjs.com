@@ -6,9 +6,9 @@ for example Express uses this internally not only for routing but to provide def
 <string>OPTIONS</string> behaviour unless `app.options()` is used. Your application
 or framework may also remove routes by simply by removing them from this object.
 
-```js
-console.log(app.routes)
+The output of `console.log(app.routes)`:
 
+```
 { get:
    [ { path: '/',
        method: 'get',

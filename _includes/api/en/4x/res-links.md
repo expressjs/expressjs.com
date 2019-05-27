@@ -9,12 +9,12 @@ For example, the following call:
 res.links({
   next: 'http://api.example.com/users?page=2',
   last: 'http://api.example.com/users?page=5'
-});
+})
 ```
 
 Yields the following results:
 
-```js
+```
 Link: <http://api.example.com/users?page=2>; rel="next",
       <http://api.example.com/users?page=5>; rel="last"
 ```

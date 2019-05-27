@@ -2,7 +2,7 @@
 
 Return an array of Accepted media types ordered from highest quality to lowest.
 
-```js
+```
 [ { value: 'application/json',
     quality: 1,
     type: 'application',

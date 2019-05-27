@@ -6,22 +6,22 @@ with the username.
 Simple username and password:
 
 ```js
-app.use(express.basicAuth('username', 'password'));
+app.use(express.basicAuth('username', 'password'))
 ```
 
 Callback verification:
 
 ```js
- app.use(express.basicAuth(function(user, pass){
-   return 'tj' == user && 'wahoo' == pass;
- }));
+app.use(express.basicAuth(function (user, pass) {
+  return user === 'tj' && pass === 'wahoo'
+}))
 ```
 
 Async callback verification, accepting `fn(err, user)`,
 in this case `req.user` will be the user object passed.
 
 ```js
-app.use(express.basicAuth(function(user, pass, fn){
-  User.authenticate({ user: user, pass: pass }, fn);
+app.use(express.basicAuth(function (user, pass, fn) {
+  User.authenticate({ user: user, pass: pass }, fn)
 }))
 ```

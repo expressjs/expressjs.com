@@ -5,8 +5,8 @@ should be placed "high" within the stack to ensure all
 responses may be compressed.
 
 ```js
-app.use(express.logger());
-app.use(express.compress());
-app.use(express.methodOverride());
-app.use(express.bodyParser());
+app.use(express.logger())
+app.use(express.compress())
+app.use(express.methodOverride())
+app.use(express.bodyParser())
 ```

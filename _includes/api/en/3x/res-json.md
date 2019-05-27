@@ -7,7 +7,7 @@ explicit JSON conversion of non-objects (null, undefined, etc),
 though these are technically not valid JSON.
 
 ```js
-res.json(null);
-res.json({ user: 'tobi' });
-res.json(500, { error: 'message' });
+res.json(null)
+res.json({ user: 'tobi' })
+res.json(500, { error: 'message' })
 ```

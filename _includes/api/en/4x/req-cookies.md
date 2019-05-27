@@ -5,8 +5,8 @@ contains cookies sent by the request.  If the request contains no cookies, it de
 
 ```js
 // Cookie: name=tj
-req.cookies.name
-// => "tj"
+console.dir(req.cookies.name)
+// => 'tj'
 ```
 
 If the cookie has been signed, you have to use [req.signedCookies](#req.signedCookies).

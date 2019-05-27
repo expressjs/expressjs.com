@@ -3,7 +3,7 @@
 Assign the charset. Defaults to "utf-8".
 
 ```js
-res.charset = 'value';
-res.send('<p>some html</p>');
+res.charset = 'value'
+res.send('<p>some html</p>')
 // => Content-Type: text/html; charset=value
 ```

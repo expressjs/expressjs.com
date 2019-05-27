@@ -4,9 +4,9 @@ Starts a UNIX socket and listens for connections on the given path.
 This method is identical to Node's [http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen).
 
 ```js
-var express = require('express');
-var app = express();
-app.listen('/tmp/sock');
+var express = require('express')
+var app = express()
+app.listen('/tmp/sock')
 ```
 
 <h3 id='app.listen'>app.listen([port[, host[, backlog]]][, callback])</h3>
@@ -18,9 +18,9 @@ If port is omitted or is 0, the operating system will assign an arbitrary unused
 port, which is useful for cases like automated tasks (tests, etc.).
 
 ```js
-var express = require('express');
-var app = express();
-app.listen(3000);
+var express = require('express')
+var app = express()
+app.listen(3000)
 ```
 
 The `app` returned by `express()` is in fact a JavaScript
@@ -30,22 +30,22 @@ your app with the same code base, as the app does not inherit from these
 (it is simply a callback):
 
 ```js
-var express = require('express');
-var https = require('https');
-var http = require('http');
-var app = express();
+var express = require('express')
+var https = require('https')
+var http = require('http')
+var app = express()
 
-http.createServer(app).listen(80);
-https.createServer(options, app).listen(443);
+http.createServer(app).listen(80)
+https.createServer(options, app).listen(443)
 ```
 
 The `app.listen()` method returns an [http.Server](https://nodejs.org/api/http.html#http_class_http_server) object and (for HTTP) is a convenience method for the following:
 
 ```js
-app.listen = function() {
-  var server = http.createServer(this);
-  return server.listen.apply(server, arguments);
-};
+app.listen = function () {
+  var server = http.createServer(this)
+  return server.listen.apply(server, arguments)
+}
 ```
 
 <div class="doc-box doc-info" markdown="1">

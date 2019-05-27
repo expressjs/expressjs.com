@@ -4,8 +4,8 @@ An array of subdomains in the domain name of the request.
 
 ```js
 // Host: "tobi.ferrets.example.com"
-req.subdomains
-// => ["ferrets", "tobi"]
+console.dir(req.subdomains)
+// => ['ferrets', 'tobi']
 ```
 
 The application property `subdomain offset`, which defaults to 2, is used for determining the

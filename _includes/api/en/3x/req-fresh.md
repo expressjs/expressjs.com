@@ -4,6 +4,6 @@ Check if the request is fresh - aka Last-Modified and/or the ETag still match,
 indicating that the resource is "fresh".
 
 ```js
-req.fresh
+console.dir(req.fresh)
 // => true
 ```

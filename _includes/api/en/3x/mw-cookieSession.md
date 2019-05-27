@@ -9,7 +9,7 @@ This middleware takes the following options:
 * `proxy` trust the reverse proxy when setting secure cookies (via "x-forwarded-proto")
 
 ```js
-app.use(express.cookieSession());
+app.use(express.cookieSession())
 ```
 
 To clear a cookie simply assign the session to null before responding:

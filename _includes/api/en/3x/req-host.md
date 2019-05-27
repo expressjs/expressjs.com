@@ -4,6 +4,6 @@ Returns the hostname from the "Host" header field (void of portno).
 
 ```js
 // Host: "example.com:3000"
-req.host
-// => "example.com"
+console.dir(req.host)
+// => 'example.com'
 ```

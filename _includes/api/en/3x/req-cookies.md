@@ -6,6 +6,6 @@ defaults to `{}`.
 
 ```js
 // Cookie: name=tj
-req.cookies.name
+console.log(req.cookies.name)
 // => "tj"
 ```

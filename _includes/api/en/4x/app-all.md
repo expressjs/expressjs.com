@@ -14,7 +14,7 @@ GET, POST, PUT, DELETE, or any other HTTP request method:
 app.all('/secret', function (req, res, next) {
   console.log('Accessing the secret section ...')
   next() // pass control to the next handler
-});
+})
 ```
 
 The `app.all()` method is useful for mapping "global" logic for specific path prefixes or arbitrary matches.  For example, if you put the following at the top of all other
@@ -25,14 +25,14 @@ can perform a task, then call `next()` to continue matching subsequent
 routes.
 
 ```js
-app.all('*', requireAuthentication, loadUser);
+app.all('*', requireAuthentication, loadUser)
 ```
 
 Or the equivalent:
 
 ```js
-app.all('*', requireAuthentication);
-app.all('*', loadUser);
+app.all('*', requireAuthentication)
+app.all('*', loadUser)
 ```
 
 Another example is white-listed "global" functionality.
@@ -40,5 +40,5 @@ The example is similar to the ones above, but it only restricts paths that start
 "/api":
 
 ```js
-app.all('/api/*', requireAuthentication);
+app.all('/api/*', requireAuthentication)
 ```

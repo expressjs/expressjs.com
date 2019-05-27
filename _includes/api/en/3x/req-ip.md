@@ -4,6 +4,6 @@ Return the remote address, or when "trust proxy"
 is enabled - the upstream address.
 
 ```js
-req.ip
-// => "127.0.0.1"
+console.dir(req.ip)
+// => '127.0.0.1'
 ```

@@ -3,7 +3,7 @@
 Creates a new [router](#router) object.
 
 ```js
-var router = express.Router([options]);
+var router = express.Router([options])
 ```
 
 The optional `options` parameter specifies the behavior of the router.

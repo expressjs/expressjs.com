@@ -6,8 +6,8 @@ is available to you as `req.params.name`. This object defaults to `{}`.
 
 ```js
 // GET /user/tj
-req.params.name
-// => "tj"
+console.dir(req.params.name)
+// => 'tj'
 ```
 
 When a regular expression is used for the route definition, capture groups
@@ -17,6 +17,6 @@ with string routes such as `/file/*`:
 
 ```js
 // GET /file/javascripts/jquery.js
-req.params[0]
-// => "javascripts/jquery.js"
+console.dir(req.params[0])
+// => 'javascripts/jquery.js'
 ```

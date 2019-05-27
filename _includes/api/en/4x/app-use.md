@@ -17,9 +17,9 @@ For example, this middleware function will be executed for _every_ request to th
 
 ```js
 app.use(function (req, res, next) {
-  console.log('Time: %d', Date.now());
-  next();
-});
+  console.log('Time: %d', Date.now())
+  next()
+})
 ```
 
 <div class="doc-box doc-info" markdown="1">
@@ -37,14 +37,14 @@ Middleware functions are executed sequentially, therefore the order of middlewar
 
 ```js
 // this middleware will not allow the request to go beyond it
-app.use(function(req, res, next) {
-  res.send('Hello World');
-});
+app.use(function (req, res, next) {
+  res.send('Hello World')
+})
 
 // requests will never reach this route
 app.get('/', function (req, res) {
-  res.send('Welcome');
-});
+  res.send('Welcome')
+})
 ```
 
 **Error-handling middleware**
@@ -54,10 +54,10 @@ Error-handling middleware always takes _four_ arguments.  You must provide four 
 Define error-handling middleware functions in the same way as other middleware functions, except with four arguments instead of three, specifically with the signature `(err, req, res, next)`):
 
 ```js
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 ```
 
 #### Path examples
@@ -252,27 +252,27 @@ Serve static content for the app from the "public" directory in the application 
 
 ```js
 // GET /style.css etc
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')))
 ```
 
 Mount the middleware at "/static" to serve static content only when their request path is prefixed with "/static":
 
 ```js
 // GET /static/style.css etc.
-app.use('/static', express.static(__dirname + '/public'));
+app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
 
 Disable logging for static content requests by loading the logger middleware after the static middleware:
 
 ```js
-app.use(express.static(__dirname + '/public'));
-app.use(logger());
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(logger())
 ```
 
 Serve static files from multiple directories, but give precedence to "./public" over the others:
 
 ```js
-app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/files'));
-app.use(express.static(__dirname + '/uploads'));
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'files')))
+app.use(express.static(path.join(__dirname, 'uploads')))
 ```

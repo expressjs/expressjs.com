@@ -9,7 +9,7 @@ and cache the `require()` on subsequent calls to increase
 performance.
 
 ```js
-app.engine('jade', require('jade').__express);
+app.engine('jade', require('jade').__express)
 ```
 
 For engines that do not provide `.__express` out of the box -
@@ -18,7 +18,7 @@ you may use this method. For example mapping the EJS template engine to
 ".html" files:
 
 ```js
-app.engine('html', require('ejs').renderFile);
+app.engine('html', require('ejs').renderFile)
 ```
 
 In this case EJS provides a `.renderFile()` method with
@@ -33,7 +33,7 @@ engines to follow this convention, thus allowing them to
 work seemlessly within Express.
 
 ```js
-var engines = require('consolidate');
-app.engine('haml', engines.haml);
-app.engine('html', engines.hogan);
+var engines = require('consolidate')
+app.engine('haml', engines.haml)
+app.engine('html', engines.hogan)
 ```

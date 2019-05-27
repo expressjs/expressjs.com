@@ -9,7 +9,7 @@ For example if a <strong>file</strong> field was named "image",
 and a file was uploaded, `req.files.image` would contain
 the following `File` object:
 
-```js
+```
 { size: 74643,
   path: '/tmp/8ef9c52abe857867fd0a4e9a819d1876',
   name: 'edge.png',
@@ -41,5 +41,5 @@ which in this case gives you the filename "/tmp/8ef9c52abe857867fd0a4e9a819d1876
 the ".png" extension. To enable this, and others you may pass them to `bodyParser()`:
 
 ```js
-app.use(express.bodyParser({ keepExtensions: true, uploadDir: '/my/files' }));
+app.use(express.bodyParser({ keepExtensions: true, uploadDir: '/my/files' }))
 ```

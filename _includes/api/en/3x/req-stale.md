@@ -4,6 +4,6 @@ Check if the request is stale - aka Last-Modified and/or the ETag do not match,
 indicating that the resource is "stale".
 
 ```js
-req.stale
+console.dir(req.stale)
 // => true
 ```

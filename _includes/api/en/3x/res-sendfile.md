@@ -15,16 +15,16 @@ This method provides fine-grained support for file serving
 as illustrated in the following example:
 
 ```js
-app.get('/user/:uid/photos/:file', function(req, res){
+app.get('/user/:uid/photos/:file', function (req, res) {
   var uid = req.params.uid
-    , file = req.params.file;
+  var file = req.params.file
 
-  req.user.mayViewFilesFrom(uid, function(yes){
+  req.user.mayViewFilesFrom(uid, function (yes) {
     if (yes) {
-      res.sendfile('/uploads/' + uid + '/' + file);
+      res.sendfile('/uploads/' + uid + '/' + file)
     } else {
-      res.send(403, 'Sorry! you cant see that.');
+      res.send(403, 'Sorry! you cant see that.')
     }
-  });
-});
+  })
+})
 ```

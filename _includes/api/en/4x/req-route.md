@@ -3,15 +3,15 @@
 Contains the currently-matched route, a string.  For example:
 
 ```js
-app.get('/user/:id?', function userIdHandler(req, res) {
-  console.log(req.route);
-  res.send('GET');
-});
+app.get('/user/:id?', function userIdHandler (req, res) {
+  console.log(req.route)
+  res.send('GET')
+})
 ```
 
 Example output from the previous snippet:
 
-```js
+```
 { path: '/user/:id?',
   stack:
    [ { handle: [Function: userIdHandler],

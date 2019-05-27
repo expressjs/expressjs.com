@@ -3,5 +3,6 @@
 A Boolean property that is true if a TLS connection is established. Equivalent to:
 
 ```js
-'https' == req.protocol;
+console.dir(req.protocol === 'https')
+// => true
 ```

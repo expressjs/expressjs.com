@@ -7,34 +7,34 @@ required in order to use `app.set()` and other configuration methods.
 
 ```js
 // all environments
-app.configure(function(){
-  app.set('title', 'My Application');
-});
+app.configure(function () {
+  app.set('title', 'My Application')
+})
 
 // development only
-app.configure('development', function(){
-  app.set('db uri', 'localhost/dev');
-});
+app.configure('development', function () {
+  app.set('db uri', 'localhost/dev')
+})
 
 // production only
-app.configure('production', function(){
-  app.set('db uri', 'n.n.n.n/prod');
-});
+app.configure('production', function () {
+  app.set('db uri', 'n.n.n.n/prod')
+})
 ```
 
 Is effectively sugar for:
 
 ```js
 // all environments
-app.set('title', 'My Application');
+app.set('title', 'My Application')
 
 // development only
-if ('development' == app.get('env')) {
-  app.set('db uri', 'localhost/dev');
+if (app.get('env') === 'development') {
+  app.set('db uri', 'localhost/dev')
 }
 
 // production only
-if ('production' == app.get('env')) {
-  app.set('db uri', 'n.n.n.n/prod');
+if (app.get('env') === 'production') {
+  app.set('db uri', 'n.n.n.n/prod')
 }
 ```

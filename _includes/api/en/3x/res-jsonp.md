@@ -5,13 +5,13 @@ to `res.json()` however opts-in to JSONP callback
 support.
 
 ```js
-res.jsonp(null);
+res.jsonp(null)
 // => null
 
-res.jsonp({ user: 'tobi' });
+res.jsonp({ user: 'tobi' })
 // => { "user": "tobi" }
 
-res.jsonp(500, { error: 'message' });
+res.jsonp(500, { error: 'message' })
 // => { "error": "message" }
 ```
 
@@ -22,12 +22,12 @@ code:
 
 ```js
 // ?callback=foo
-res.jsonp({ user: 'tobi' });
+res.jsonp({ user: 'tobi' })
 // => foo({ "user": "tobi" })
 
-app.set('jsonp callback name', 'cb');
+app.set('jsonp callback name', 'cb')
 
 // ?cb=foo
-res.jsonp(500, { error: 'message' });
+res.jsonp(500, { error: 'message' })
 // => foo({ "error": "message" })
 ```

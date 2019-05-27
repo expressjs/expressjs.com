@@ -7,6 +7,6 @@ this property will use the value of the `X-Forwarded-Proto` header field if pres
 This header can be set by the client or by the proxy.
 
 ```js
-req.protocol
-// => "http"
+console.dir(req.protocol)
+// => 'http'
 ```

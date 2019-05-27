@@ -17,18 +17,18 @@ however if "*/*" is given then "hey" will be the response.
 
 ```js
 res.format({
-  'text/plain': function(){
-    res.send('hey');
+  'text/plain': function () {
+    res.send('hey')
   },
 
-  'text/html': function(){
-    res.send('<p>hey</p>');
+  'text/html': function () {
+    res.send('<p>hey</p>')
   },
 
-  'application/json': function(){
-    res.send({ message: 'hey' });
+  'application/json': function () {
+    res.send({ message: 'hey' })
   }
-});
+})
 ```
 
 In addition to canonicalized MIME types you may also
@@ -37,16 +37,16 @@ less verbose implementation:
 
 ```js
 res.format({
-  text: function(){
-    res.send('hey');
+  text: function () {
+    res.send('hey')
   },
 
-  html: function(){
-    res.send('<p>hey</p>');
+  html: function () {
+    res.send('<p>hey</p>')
   },
 
-  json: function(){
-    res.send({ message: 'hey' });
+  json: function () {
+    res.send({ message: 'hey' })
   }
-});
+})
 ```

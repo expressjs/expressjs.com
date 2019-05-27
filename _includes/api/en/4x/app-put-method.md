@@ -8,6 +8,6 @@ Routes HTTP PUT requests to the specified path with the specified callback funct
 
 ```js
 app.put('/', function (req, res) {
-  res.send('PUT request to homepage');
-});
+  res.send('PUT request to homepage')
+})
 ```

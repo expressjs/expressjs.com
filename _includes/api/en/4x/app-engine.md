@@ -8,7 +8,7 @@ following internally, and caches the `require()` on subsequent calls to increase
 performance.
 
 ```js
-app.engine('pug', require('pug').__express);
+app.engine('pug', require('pug').__express)
 ```
 
 Use this method for engines that do not provide `.__express` out of the box,
@@ -17,7 +17,7 @@ or if you wish to "map" a different extension to the template engine.
 For example, to map the EJS template engine to ".html" files:
 
 ```js
-app.engine('html', require('ejs').renderFile);
+app.engine('html', require('ejs').renderFile)
 ```
 
 In this case, EJS provides a `.renderFile()` method with
@@ -30,7 +30,7 @@ Some template engines do not follow this convention.  The
 so they work seamlessly with Express.
 
 ```js
-var engines = require('consolidate');
-app.engine('haml', engines.haml);
-app.engine('html', engines.hogan);
+var engines = require('consolidate')
+app.engine('haml', engines.haml)
+app.engine('html', engines.hogan)
 ```

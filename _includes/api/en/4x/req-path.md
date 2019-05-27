@@ -4,8 +4,8 @@ Contains the path part of the request URL.
 
 ```js
 // example.com/users?sort=desc
-req.path
-// => "/users"
+console.dir(req.path)
+// => '/users'
 ```
 
 <div class="doc-box doc-info" markdown="1">

@@ -4,15 +4,15 @@ Returns the canonical path of the app, a string.
 
 ```js
 var app = express()
-  , blog = express()
-  , blogAdmin = express();
+var blog = express()
+var blogAdmin = express()
 
-app.use('/blog', blog);
-blog.use('/admin', blogAdmin);
+app.use('/blog', blog)
+blog.use('/admin', blogAdmin)
 
-console.log(app.path()); // ''
-console.log(blog.path()); // '/blog'
-console.log(blogAdmin.path()); // '/blog/admin'
+console.dir(app.path()) // ''
+console.dir(blog.path()) // '/blog'
+console.dir(blogAdmin.path()) // '/blog/admin'
 ```
 
 The behavior of this method can become very complicated in complex cases of mounted apps:

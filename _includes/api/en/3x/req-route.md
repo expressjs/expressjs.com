@@ -5,14 +5,14 @@ several properties such as the route's original path
 string, the regexp generated, and so on.
 
 ```js
-app.get('/user/:id?', function(req, res){
-  console.log(req.route);
-});
+app.get('/user/:id?', function (req, res) {
+  console.dir(req.route)
+})
 ```
 
 Example output from the previous snippet:
 
-```js
+```
 { path: '/user/:id?',
   method: 'get',
   callbacks: [ [Function] ],

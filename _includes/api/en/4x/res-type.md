@@ -5,9 +5,14 @@ Sets the `Content-Type` HTTP header to the MIME type as determined by
 If `type` contains the "/" character, then it sets the `Content-Type` to `type`.
 
 ```js
-res.type('.html');              // => 'text/html'
-res.type('html');               // => 'text/html'
-res.type('json');               // => 'application/json'
-res.type('application/json');   // => 'application/json'
-res.type('png');                // => image/png:
+res.type('.html')
+// => 'text/html'
+res.type('html')
+// => 'text/html'
+res.type('json')
+// => 'application/json'
+res.type('application/json')
+// => 'application/json'
+res.type('png')
+// => 'image/png'
 ```

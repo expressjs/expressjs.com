@@ -11,8 +11,8 @@ property is the same as calling `app.disable('foo')`.
 Retrieve the value of a setting with [`app.get()`](#app.get).
 
 ```js
-app.set('title', 'My Site');
-app.get('title'); // "My Site"
+app.set('title', 'My Site')
+app.get('title') // "My Site"
 ```
 
 <h4 id='app.settings.table'>Application Settings</h4>

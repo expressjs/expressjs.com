@@ -6,10 +6,10 @@ automatically set based on the extname via `res.type()`,
 and the Content-Disposition's "filename=" parameter will be set.
 
 ```js
-res.attachment();
+res.attachment()
 // Content-Disposition: attachment
 
-res.attachment('path/to/logo.png');
+res.attachment('path/to/logo.png')
 // Content-Disposition: attachment; filename="logo.png"
 // Content-Type: image/png
 ```

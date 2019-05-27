@@ -9,31 +9,31 @@ Middleware is like a plumbing pipe: requests start at the first middleware funct
 and work their way "down" the middleware stack processing for each path they match.
 
 ```js
-var express = require('express');
-var app = express();
-var router = express.Router();
+var express = require('express')
+var app = express()
+var router = express.Router()
 
 // simple logger for this router's requests
 // all requests to this router will first hit this middleware
-router.use(function(req, res, next) {
-  console.log('%s %s %s', req.method, req.url, req.path);
-  next();
-});
+router.use(function (req, res, next) {
+  console.log('%s %s %s', req.method, req.url, req.path)
+  next()
+})
 
 // this will only be invoked if the path starts with /bar from the mount point
-router.use('/bar', function(req, res, next) {
+router.use('/bar', function (req, res, next) {
   // ... maybe some additional /bar logging ...
-  next();
-});
+  next()
+})
 
 // always invoked
-router.use(function(req, res, next) {
-  res.send('Hello World');
-});
+router.use(function (req, res, next) {
+  res.send('Hello World')
+})
 
-app.use('/foo', router);
+app.use('/foo', router)
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 The "mount" path is stripped and is _not_ visible to the middleware function.
@@ -45,13 +45,14 @@ They are invoked sequentially, thus the order defines middleware precedence. For
 usually a logger is the very first middleware you would use, so that every request gets logged.
 
 ```js
-var logger = require('morgan');
+var logger = require('morgan')
+var path = require('path')
 
-router.use(logger());
-router.use(express.static(__dirname + '/public'));
-router.use(function(req, res){
-  res.send('Hello');
-});
+router.use(logger())
+router.use(express.static(path.join(__dirname, 'public')))
+router.use(function (req, res) {
+  res.send('Hello')
+})
 ```
 
 Now suppose you wanted to ignore logging requests for static files, but to continue
@@ -59,20 +60,20 @@ logging routes and middleware defined after `logger()`.  You would simply move t
 before adding the logger middleware:
 
 ```js
-router.use(express.static(__dirname + '/public'));
-router.use(logger());
-router.use(function(req, res){
-  res.send('Hello');
-});
+router.use(express.static(path.join(__dirname, 'public')))
+router.use(logger())
+router.use(function (req, res) {
+  res.send('Hello')
+})
 ```
 
 Another example is serving files from multiple directories,
 giving precedence to "./public" over the others:
 
 ```js
-app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/files'));
-app.use(express.static(__dirname + '/uploads'));
+router.use(express.static(path.join(__dirname, 'public')))
+router.use(express.static(path.join(__dirname, 'files')))
+router.use(express.static(path.join(__dirname, 'uploads')))
 ```
 
 The `router.use()` method also supports named parameters so that your mount points
@@ -84,23 +85,23 @@ middleware added via one router may run for other routers if its routes
 match. For example, this code shows two different routers mounted on the same path:
 
 ```js
-var authRouter = express.Router();
-var openRouter = express.Router();
+var authRouter = express.Router()
+var openRouter = express.Router()
 
-authRouter.use(require('./authenticate').basic(usersdb));
+authRouter.use(require('./authenticate').basic(usersdb))
 
-authRouter.get('/:user_id/edit', function(req, res, next) { 
-  // ... Edit user UI ...  
-});
-openRouter.get('/', function(req, res, next) { 
-  // ... List users ... 
+authRouter.get('/:user_id/edit', function (req, res, next) {
+  // ... Edit user UI ...
 })
-openRouter.get('/:user_id', function(req, res, next) { 
-  // ... View user ... 
+openRouter.get('/', function (req, res, next) {
+  // ... List users ...
+})
+openRouter.get('/:user_id', function (req, res, next) {
+  // ... View user ...
 })
 
-app.use('/users', authRouter);
-app.use('/users', openRouter);
+app.use('/users', authRouter)
+app.use('/users', openRouter)
 ```
 
 Even though the authentication middleware was added via the `authRouter` it will run on the routes defined by the `openRouter` as well since both routers were mounted on `/users`.  To avoid this behavior, use different paths for each router.

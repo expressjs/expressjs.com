@@ -4,21 +4,21 @@ Use the given middleware `function`, with optional mount `path`,
 defaulting to "/".
 
 ```js
-var express = require('express');
-var app = express();
+var express = require('express')
+var app = express()
 
 // simple logger
-app.use(function(req, res, next){
-  console.log('%s %s', req.method, req.url);
-  next();
-});
+app.use(function (req, res, next) {
+  console.log('%s %s', req.method, req.url)
+  next()
+})
 
 // respond
-app.use(function(req, res, next){
-  res.send('Hello World');
-});
+app.use(function (req, res, next) {
+  res.send('Hello World')
+})
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 The "mount" path is stripped and is <strong>not</strong> visible
@@ -37,7 +37,7 @@ using the `express.static()` middleware:
 // GET /javascripts/jquery.js
 // GET /style.css
 // GET /favicon.ico
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')))
 ```
 
 Say for example you wanted to prefix all static files with "/static", you could
@@ -51,7 +51,7 @@ unless they are mounted as well.
 // GET /static/javascripts/jquery.js
 // GET /static/style.css
 // GET /static/favicon.ico
-app.use('/static', express.static(__dirname + '/public'));
+app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
 
 The order of which middleware are "defined" using `app.use()` is
@@ -60,11 +60,11 @@ precedence. For example usually `express.logger()` is the very
 first middleware you would use, logging every request:
 
 ```js
-app.use(express.logger());
-app.use(express.static(__dirname + '/public'));
-app.use(function(req, res){
-  res.send('Hello');
-});
+app.use(express.logger())
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(function (req, res) {
+  res.send('Hello')
+})
 ```
 
 Now suppose you wanted to ignore logging requests for static files, but to
@@ -72,18 +72,18 @@ continue logging routes and middleware defined after `logger()`,
 you would simply move `static()` above:
 
 ```js
-app.use(express.static(__dirname + '/public'));
-app.use(express.logger());
-app.use(function(req, res){
-  res.send('Hello');
-});
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.logger())
+app.use(function (req, res) {
+  res.send('Hello')
+})
 ```
 
 Another concrete example would be serving files from multiple directories,
 giving precedence to "./public" over the others:
 
 ```js
-app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/files'));
-app.use(express.static(__dirname + '/uploads'));
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'files')))
+app.use(express.static(path.join(__dirname, 'uploads')))
 ```
