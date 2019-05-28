@@ -222,7 +222,6 @@ a {
 
 #logo {
   position: fixed;
-  top: 2px;
   margin: 0;
   padding: 10px 25px;
   width: auto;
@@ -671,8 +670,6 @@ footer {
 /* navigation */
 
 #navbar {
-  padding-left: 5%;
-  max-width: 1000px;
   height: 100%;
   position: relative;
   display: flex;
@@ -701,7 +698,7 @@ footer {
   margin: 0;
   right: 0px;
   z-index: 1000;
-  margin-right: 15px;
+  margin-right: 25px;
 }
 
 #navmenu > li {
