@@ -7,7 +7,7 @@ The parameter can be any JSON type, including object, array, string, Boolean, nu
 and you can also use it to convert other values to JSON.
 
 ```js
-res.json(null);
-res.json({ user: 'tobi' });
-res.status(500).json({ error: 'message' });
+res.json(null)
+res.json({ user: 'tobi' })
+res.status(500).json({ error: 'message' })
 ```

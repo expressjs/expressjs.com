@@ -10,6 +10,6 @@ For more information, see the [routing guide](/guide/routing.html).
 
 ```js
 app.get('/', function (req, res) {
-  res.send('GET request to homepage');
-});
+  res.send('GET request to homepage')
+})
 ```

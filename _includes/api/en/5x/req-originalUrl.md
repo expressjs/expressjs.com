@@ -17,10 +17,10 @@ req.originalUrl
 In a middleware function, `req.originalUrl` is a combination of `req.baseUrl` and `req.path`, as shown in the following example.
 
 ```js
-app.use('/admin', function(req, res, next) {  // GET 'http://www.example.com/admin/new'
-  console.log(req.originalUrl); // '/admin/new'
-  console.log(req.baseUrl); // '/admin'
-  console.log(req.path); // '/new'
-  next();
-});
+app.use('/admin', function (req, res, next) { // GET 'http://www.example.com/admin/new'
+  console.log(req.originalUrl) // '/admin/new'
+  console.log(req.baseUrl) // '/admin'
+  console.log(req.path) // '/new'
+  next()
+})
 ```

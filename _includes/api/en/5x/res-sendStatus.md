@@ -3,10 +3,10 @@
 Sets the response HTTP status code to `statusCode` and send its string representation as the response body.
 
 ```js
-res.sendStatus(200); // equivalent to res.status(200).send('OK')
-res.sendStatus(403); // equivalent to res.status(403).send('Forbidden')
-res.sendStatus(404); // equivalent to res.status(404).send('Not Found')
-res.sendStatus(500); // equivalent to res.status(500).send('Internal Server Error')
+res.sendStatus(200) // equivalent to res.status(200).send('OK')
+res.sendStatus(403) // equivalent to res.status(403).send('Forbidden')
+res.sendStatus(404) // equivalent to res.status(404).send('Not Found')
+res.sendStatus(500) // equivalent to res.status(500).send('Internal Server Error')
 ```
 
 If an unsupported status code is specified, the HTTP status is still set to `statusCode` and the string version of the code is sent as the response body.
@@ -18,7 +18,7 @@ the HTTP server documentation for the Node.js version being used.
 </div>
 
 ```js
-res.sendStatus(9999); // equivalent to res.status(9999).send('9999')
+res.sendStatus(9999) // equivalent to res.status(9999).send('9999')
 ```
 
 [More about HTTP Status Codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes)

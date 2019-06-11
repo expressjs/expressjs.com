@@ -19,15 +19,15 @@ to cache the view during development; view caching is enabled in production by d
 
 ```js
 // send the rendered view to the client
-res.render('index');
+res.render('index')
 
 // if a callback is specified, the rendered HTML string has to be sent explicitly
-res.render('index', function(err, html) {
-  res.send(html);
-});
+res.render('index', function (err, html) {
+  res.send(html)
+})
 
 // pass a local variable to the view
-res.render('user', { name: 'Tobi' }, function(err, html) {
+res.render('user', { name: 'Tobi' }, function (err, html) {
   // ...
-});
+})
 ```

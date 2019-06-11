@@ -10,26 +10,26 @@ list or array, the method returns the *best* match (if any).
 
 ```js
 // Accept: text/html
-req.accepts('html');
+req.accepts('html')
 // => "html"
 
 // Accept: text/*, application/json
-req.accepts('html');
+req.accepts('html')
 // => "html"
-req.accepts('text/html');
+req.accepts('text/html')
 // => "text/html"
-req.accepts(['json', 'text']);
+req.accepts(['json', 'text'])
 // => "json"
-req.accepts('application/json');
+req.accepts('application/json')
 // => "application/json"
 
 // Accept: text/*, application/json
-req.accepts('image/png');
-req.accepts('png');
+req.accepts('image/png')
+req.accepts('png')
 // => undefined
 
 // Accept: text/*;q=.5, application/json
-req.accepts(['html', 'json']);
+req.accepts(['html', 'json'])
 // => "json"
 ```
 

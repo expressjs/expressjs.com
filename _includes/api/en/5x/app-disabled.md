@@ -4,10 +4,10 @@ Returns `true` if the Boolean setting `name` is disabled (`false`), where `name`
 the [app settings table](#app.settings.table).
 
 ```js
-app.disabled('trust proxy');
+app.disabled('trust proxy')
 // => true
 
-app.enable('trust proxy');
-app.disabled('trust proxy');
+app.enable('trust proxy')
+app.disabled('trust proxy')
 // => false
 ```

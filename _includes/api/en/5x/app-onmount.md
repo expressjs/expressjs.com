@@ -14,16 +14,16 @@ For details, see [Application settings](/en/4x/api.html#app.settings.table).
 </div>
 
 ```js
-var admin = express();
+var admin = express()
 
 admin.on('mount', function (parent) {
-  console.log('Admin Mounted');
-  console.log(parent); // refers to the parent app
-});
+  console.log('Admin Mounted')
+  console.log(parent) // refers to the parent app
+})
 
 admin.get('/', function (req, res) {
-  res.send('Admin Homepage');
-});
+  res.send('Admin Homepage')
+})
 
-app.use('/admin', admin);
+app.use('/admin', admin)
 ```

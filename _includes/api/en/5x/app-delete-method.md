@@ -9,6 +9,6 @@ For more information, see the [routing guide](/guide/routing.html).
 
 ```js
 app.delete('/', function (req, res) {
-  res.send('DELETE request to homepage');
-});
+  res.send('DELETE request to homepage')
+})
 ```

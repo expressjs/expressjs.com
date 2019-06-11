@@ -15,16 +15,16 @@ The optional `options` argument passes through to the underlying [res.sendFile()
 call, and takes the exact same parameters.
 
 ```js
-res.download('/report-12345.pdf');
+res.download('/report-12345.pdf')
 
-res.download('/report-12345.pdf', 'report.pdf');
+res.download('/report-12345.pdf', 'report.pdf')
 
-res.download('/report-12345.pdf', 'report.pdf', function(err){
+res.download('/report-12345.pdf', 'report.pdf', function (err) {
   if (err) {
     // Handle error, but keep in mind the response may be partially-sent
     // so check res.headersSent
   } else {
     // decrement a download credit, etc.
   }
-});
+})
 ```

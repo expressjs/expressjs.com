@@ -227,19 +227,19 @@ A custom query string parsing function will receive the complete query string, a
 Specify a single subnet:
 
 ```js
-app.set('trust proxy', 'loopback') 
+app.set('trust proxy', 'loopback')
 ```
 
 Specify a subnet and an address:
 
 ```js
-app.set('trust proxy', 'loopback, 123.123.123.123') 
+app.set('trust proxy', 'loopback, 123.123.123.123')
 ```
 
 Specify multiple subnets as CSV:
 
 ```js
-app.set('trust proxy', 'loopback, linklocal, uniquelocal') 
+app.set('trust proxy', 'loopback, linklocal, uniquelocal')
 ```
 
 Specify multiple subnets as an array:
@@ -264,9 +264,9 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
 
 ```js
 app.set('trust proxy', function (ip) {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
-  else return false;
-});
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
+  else return false
+})
 ```
   </td>
       </tr>
@@ -309,8 +309,8 @@ The [express.static](#express.static) middleware ignores these settings.
 
 ```js
 app.set('etag', function (body, encoding) {
-  return generateHash(body, encoding); // consider the function is defined
-});
+  return generateHash(body, encoding) // consider the function is defined
+})
 ```
   </td>
       </tr>

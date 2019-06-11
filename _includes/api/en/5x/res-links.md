@@ -9,7 +9,7 @@ For example, the following call:
 res.links({
   next: 'http://api.example.com/users?page=2',
   last: 'http://api.example.com/users?page=5'
-});
+})
 ```
 
 Yields the following results:
