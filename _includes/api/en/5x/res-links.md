@@ -14,7 +14,7 @@ res.links({
 
 Yields the following results:
 
-```js
+```
 Link: <http://api.example.com/users?page=2>; rel="next",
       <http://api.example.com/users?page=5>; rel="last"
 ```

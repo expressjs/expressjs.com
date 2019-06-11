@@ -10,7 +10,7 @@ the "mounting" feature of [app.use()](#app.use) will rewrite `req.url` to strip 
 
 ```js
 // GET /search?q=something
-req.originalUrl
+console.dir(req.originalUrl)
 // => "/search?q=something"
 ```
 
@@ -18,9 +18,9 @@ In a middleware function, `req.originalUrl` is a combination of `req.baseUrl` an
 
 ```js
 app.use('/admin', function (req, res, next) { // GET 'http://www.example.com/admin/new'
-  console.log(req.originalUrl) // '/admin/new'
-  console.log(req.baseUrl) // '/admin'
-  console.log(req.path) // '/new'
+  console.dir(req.originalUrl) // '/admin/new'
+  console.dir(req.baseUrl) // '/admin'
+  console.dir(req.path) // '/new'
   next()
 })
 ```

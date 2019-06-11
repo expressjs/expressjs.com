@@ -96,7 +96,7 @@ var app = express()
 // customizing the behavior of app.param()
 app.param(function (param, option) {
   return function (req, res, next, val) {
-    if (val == option) {
+    if (val === option) {
       next()
     } else {
       next('route')

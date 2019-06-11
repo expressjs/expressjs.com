@@ -11,7 +11,7 @@ of the following are true:
 match the `etag` response header.
 
 ```js
-req.fresh
+console.dir(req.fresh)
 // => true
 ```
 

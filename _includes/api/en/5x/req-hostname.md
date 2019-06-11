@@ -8,6 +8,6 @@ This header can be set by the client or by the proxy.
 
 ```js
 // Host: "example.com:3000"
-req.hostname
+console.dir(req.hostname)
 // => "example.com"
 ```

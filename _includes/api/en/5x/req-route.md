@@ -11,7 +11,7 @@ app.get('/user/:id?', function userIdHandler (req, res) {
 
 Example output from the previous snippet:
 
-```js
+```
 { path: '/user/:id?',
   stack:
    [ { handle: [Function: userIdHandler],

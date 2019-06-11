@@ -6,7 +6,7 @@ The `body` parameter can be a `Buffer` object, a `String`, an object, or an `Arr
 For example:
 
 ```js
-res.send(new Buffer('whoop'))
+res.send(Buffer.from('whoop'))
 res.send({ some: 'json' })
 res.send('<p>some html</p>')
 res.status(404).send('Sorry, we cannot find that!')
@@ -22,7 +22,7 @@ response header field  to "application/octet-stream", unless previously defined 
 
 ```js
 res.set('Content-Type', 'text/html')
-res.send(new Buffer('<p>some html</p>'))
+res.send(Buffer.from('<p>some html</p>'))
 ```
 
 When the parameter is a `String`, the method sets the `Content-Type` to "text/html":

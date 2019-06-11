@@ -4,7 +4,7 @@ This property is an object containing properties mapped to the [named route "par
 
 ```js
 // GET /user/tj
-req.params.name
+console.dir(req.params.name)
 // => "tj"
 ```
 
@@ -12,7 +12,7 @@ When you use a regular expression for the route definition, capture groups are p
 
 ```js
 // GET /file/javascripts/jquery.js
-req.params[0]
+console.dir(req.params[0])
 // => "javascripts/jquery.js"
 ```
 

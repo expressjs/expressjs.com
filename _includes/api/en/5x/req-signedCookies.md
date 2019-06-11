@@ -10,7 +10,7 @@ If no signed cookies are sent, the property defaults to `{}`.
 
 ```js
 // Cookie: user=tobi.CP7AWaXDfAKIRfH49dQzKJx7sKzzSoPq7/AcBBRVwlI3
-req.signedCookies.user
+console.dir(req.signedCookies.user)
 // => "tobi"
 ```
 

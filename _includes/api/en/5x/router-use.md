@@ -48,7 +48,7 @@ usually a logger is the very first middleware you would use, so that every reque
 var logger = require('morgan')
 
 router.use(logger())
-router.use(express.static(__dirname + '/public'))
+router.use(express.static(path.join(__dirname, 'public')))
 router.use(function (req, res) {
   res.send('Hello')
 })
@@ -59,7 +59,7 @@ logging routes and middleware defined after `logger()`.  You would simply move t
 before adding the logger middleware:
 
 ```js
-router.use(express.static(__dirname + '/public'))
+router.use(express.static(path.join(__dirname, 'public')))
 router.use(logger())
 router.use(function (req, res) {
   res.send('Hello')
@@ -70,9 +70,9 @@ Another example is serving files from multiple directories,
 giving precedence to "./public" over the others:
 
 ```js
-app.use(express.static(__dirname + '/public'))
-app.use(express.static(__dirname + '/files'))
-app.use(express.static(__dirname + '/uploads'))
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'files')))
+app.use(express.static(path.join(__dirname, 'uploads')))
 ```
 
 The `router.use()` method also supports named parameters so that your mount points

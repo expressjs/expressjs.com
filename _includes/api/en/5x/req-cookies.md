@@ -5,7 +5,7 @@ contains cookies sent by the request.  If the request contains no cookies, it de
 
 ```js
 // Cookie: name=tj
-req.cookies.name
+console.dir(req.cookies.name)
 // => "tj"
 ```
 

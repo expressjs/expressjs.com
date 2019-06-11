@@ -45,7 +45,7 @@ Here is an example of using `res.sendFile` with all its arguments.
 ```js
 app.get('/file/:name', function (req, res, next) {
   var options = {
-    root: __dirname + '/public/',
+    root: path.join(__dirname, 'public'),
     dotfiles: 'deny',
     headers: {
       'x-timestamp': Date.now(),

@@ -4,7 +4,7 @@ An array of subdomains in the domain name of the request.
 
 ```js
 // Host: "tobi.ferrets.example.com"
-req.subdomains
+console.dir(req.subdomains)
 // => ["ferrets", "tobi"]
 ```
 

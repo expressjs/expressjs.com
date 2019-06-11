@@ -3,10 +3,10 @@
 The `app.locals` object has properties that are local variables within the application.
 
 ```js
-app.locals.title
+console.dir(app.locals.title)
 // => 'My App'
 
-app.locals.email
+console.dir(app.locals.email)
 // => 'me@myapp.com'
 ```
 

@@ -81,7 +81,7 @@ var router = express.Router()
 // customizing the behavior of router.param()
 router.param(function (param, option) {
   return function (req, res, next, val) {
-    if (val == option) {
+    if (val === option) {
       next()
     } else {
       res.sendStatus(403)

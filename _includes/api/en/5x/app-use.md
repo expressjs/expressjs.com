@@ -252,27 +252,27 @@ Serve static content for the app from the "public" directory in the application 
 
 ```js
 // GET /style.css etc
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(path.join(__dirname, 'public')))
 ```
 
 Mount the middleware at "/static" to serve static content only when their request path is prefixed with "/static":
 
 ```js
 // GET /static/style.css etc.
-app.use('/static', express.static(__dirname + '/public'))
+app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
 
 Disable logging for static content requests by loading the logger middleware after the static middleware:
 
 ```js
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(logger())
 ```
 
 Serve static files from multiple directories, but give precedence to "./public" over the others:
 
 ```js
-app.use(express.static(__dirname + '/public'))
-app.use(express.static(__dirname + '/files'))
-app.use(express.static(__dirname + '/uploads'))
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'files')))
+app.use(express.static(path.join(__dirname, 'uploads')))
 ```
