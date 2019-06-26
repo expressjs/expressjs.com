@@ -10,10 +10,17 @@ redirect_from: "/starter/generator.html"
 
 Use the application generator tool, `express-generator`, to quickly create an application skeleton.
 
-The `express-generator` package installs the `express` command-line tool. Use the following command to do so:
+You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
 ```sh
-$ npm install express-generator -g
+$ npx express-generator
+```
+
+For earlier Node versions, install the application generator as a global npm package and then launch it.
+
+```sh
+$ npm install -g express-generator
+$ express
 ```
 
 Display the command options with the `-h` option:
