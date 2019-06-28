@@ -2,7 +2,7 @@
 
 Routes HTTP GET requests to the specified path with the specified callback functions.
 
-{% include api/en/4x/routing-args.html %}
+{% include api/en/5x/routing-args.html %}
 
 For more information, see the [routing guide](/guide/routing.html).
 

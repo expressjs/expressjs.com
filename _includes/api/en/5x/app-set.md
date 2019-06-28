@@ -17,4 +17,4 @@ app.get('title') // "My Site"
 
 <h4 id='app.settings.table'>Application Settings</h4>
 
-{% include api/en/4x/app-settings.md %}
+{% include api/en/5x/app-settings.md %}

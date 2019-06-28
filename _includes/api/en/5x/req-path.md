@@ -9,5 +9,5 @@ console.dir(req.path)
 ```
 
 <div class="doc-box doc-info" markdown="1">
-When called from a middleware, the mount point is not included in `req.path`. See [app.use()](/4x/api.html#app.use) for more details.
+When called from a middleware, the mount point is not included in `req.path`. See [app.use()](/5x/api.html#app.use) for more details.
 </div>

@@ -16,7 +16,7 @@ console.dir(req.params[0])
 // => "javascripts/jquery.js"
 ```
 
-If you need to make changes to a key in `req.params`, use the [app.param](/{{ page.lang }}/4x/api.html#app.param) handler. Changes are applicable only to [parameters](/{{ page.lang }}/guide/routing.html#route-parameters) already defined in the route path.
+If you need to make changes to a key in `req.params`, use the [app.param](/{{ page.lang }}/5x/api.html#app.param) handler. Changes are applicable only to [parameters](/{{ page.lang }}/guide/routing.html#route-parameters) already defined in the route path.
 
 Any changes made to the `req.params` object in a middleware or route handler will be reset.
 
