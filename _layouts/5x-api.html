@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
+<html lang="{{ page.lang }}">
+
+  {% include head.html %}
+
+  <body>
+
+    <section class="content">
+
+      {% include header/header-{{ page.lang }}.html %}
+
+      {% include api/en/5x/menu.md %}
+
+      <div id="overlay"></div>
+
+      {{ content }}
+
+    </section>
+
+    {% include footer/footer-{{ page.lang }}.html %}
+
+  </body>
+
+</html>
