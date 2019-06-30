@@ -13,7 +13,7 @@ This approach makes it easier to design an HTML page.
 
 Some popular template engines that work with Express are [Pug](https://pugjs.org/api/getting-started.html),
 [Mustache](https://www.npmjs.com/package/mustache), and [EJS](https://www.npmjs.com/package/ejs).
-The [Express application generator](/{{ page.lang }}/starter/generator.html) uses [Jade](https://www.npmjs.com/package/jade) as its default, but it also supports several others.
+The [Express application generator](/{{ page.lang }}/starter/generator.html) uses [Pug](https://pugjs.org/api/getting-started.html) as its default, but it also supports several others.
 
 See [Template Engines (Express wiki)](https://github.com/strongloop/express/wiki#template-engines)
 for a list of template engines you can use with Express.
