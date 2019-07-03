@@ -40,21 +40,21 @@ app.use('/calendar', router)
 <h3 id='router.methods'>Methods</h3>
 
 <section markdown="1">
-  {% include api/en/4x/router-all.md %}
+  {% include api/en/5x/router-all.md %}
 </section>
 
 <section markdown="1">
-  {% include api/en/4x/router-METHOD.md %}
+  {% include api/en/5x/router-METHOD.md %}
 </section>
 
 <section markdown="1">
-  {% include api/en/4x/router-param.md %}
+  {% include api/en/5x/router-param.md %}
 </section>
 
 <section markdown="1">
-  {% include api/en/4x/router-route.md %}
+  {% include api/en/5x/router-route.md %}
 </section>
 
 <section markdown="1">
-  {% include api/en/4x/router-use.md %}
+  {% include api/en/5x/router-use.md %}
 </section>

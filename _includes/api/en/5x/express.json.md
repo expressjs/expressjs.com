@@ -1,9 +1,5 @@
 <h3 id='express.json' class='h2'>express.json([options])</h3>
 
-<div class="doc-box doc-info" markdown="1">
-This middleware is available in Express v4.16.0 onwards.
-</div>
-
 This is a built-in middleware function in Express. It parses incoming requests
 with JSON payloads and is based on
 [body-parser](/{{ page.lang }}/resources/middleware/body-parser.html).

@@ -16,11 +16,9 @@ redirect_from: "/en/index.html"
     <div id="install-command">$ npm install express --save</div>
   </div>
 </section>
-<!--
 <section id="announcements">
-  {% include announcement/announcement-{{ page.lang }}.md %}
+  {% include announcement/announcement-en.md %}
 </section>
--->
 
 <section id="intro">
 

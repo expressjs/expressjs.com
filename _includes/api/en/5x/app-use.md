@@ -4,7 +4,7 @@ Mounts the specified [middleware](/guide/using-middleware.html) function or func
 at the specified path:
 the middleware function is executed when the base of the requested path matches `path`.
 
-{% include api/en/4x/routing-args.html %}
+{% include api/en/5x/routing-args.html %}
 
 #### Description
 
@@ -30,7 +30,7 @@ Sub-apps will:
 * Not inherit the value of settings that have a default value.  You must set the value in the sub-app.
 * Inherit the value of settings with no default value.
 
-For details, see [Application settings](/en/4x/api.html#app.settings.table).
+For details, see [Application settings](/en/5x/api.html#app.settings.table).
 </div>
 
 Middleware functions are executed sequentially, therefore the order of middleware inclusion is important.
