@@ -38,6 +38,7 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 - **[Builder Book: Build a Full Stack JavaScript Web App from Scratch](https://builderbook.org/book)**,
 self-published, February 2018.
 - **[MERN Quick Start Guide](https://www.amazon.com/dp/1787281086)**, Packt Publishing, May 2018
+- **[Functional Design Patterns for Express.js](https://jonathanleemartin.com/books/)**, self-published, June 2019.
 
 ### Add your book here!
 
