@@ -30,7 +30,7 @@ Some template engines do not follow this convention.  The
 so they work seamlessly with Express.
 
 ```js
-var engines = require('consolidate')
+const engines = require('consolidate')
 app.engine('haml', engines.haml)
 app.engine('html', engines.hogan)
 ```

@@ -4,8 +4,8 @@ Starts a UNIX socket and listens for connections on the given path.
 This method is identical to Node's [http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen).
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 app.listen('/tmp/sock')
 ```
 
@@ -18,8 +18,8 @@ If port is omitted or is 0, the operating system will assign an arbitrary unused
 port, which is useful for cases like automated tasks (tests, etc.).
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 app.listen(3000)
 ```
 
@@ -30,10 +30,10 @@ your app with the same code base, as the app does not inherit from these
 (it is simply a callback):
 
 ```js
-var express = require('express')
-var https = require('https')
-var http = require('http')
-var app = express()
+const express = require('express')
+const https = require('https')
+const http = require('http')
+const app = express()
 
 http.createServer(app).listen(80)
 https.createServer(options, app).listen(443)

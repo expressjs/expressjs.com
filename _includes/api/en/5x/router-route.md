@@ -8,7 +8,7 @@ Building on the `router.param()` example above, the following code shows how to 
 `router.route()` to specify various HTTP method handlers.
 
 ```js
-var router = express.Router()
+const router = express.Router()
 
 router.param('user_id', function (req, res, next, id) {
   // sample user, would actually fetch from DB, etc...

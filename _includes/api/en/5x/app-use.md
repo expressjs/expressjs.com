@@ -163,7 +163,7 @@ Even though the examples are for `app.use()`, they are also valid for `app.use()
 </code></pre>
 A router is valid middleware.
 
-<pre><code class="language-js">var router = express.Router();
+<pre><code class="language-js">const router = express.Router();
 router.get('/', function (req, res, next) {
   next();
 });
@@ -171,7 +171,7 @@ app.use(router);
 </code></pre>
 
 An Express app is valid middleware.
-<pre><code class="language-js">var subApp = express();
+<pre><code class="language-js">const subApp = express();
 subApp.get('/', function (req, res, next) {
   next();
 });
@@ -184,12 +184,12 @@ app.use(subApp);
       <td>Series of Middleware</td>
       <td>
         You can specify more than one middleware function at the same mount path.
-<pre><code class="language-js">var r1 = express.Router();
+<pre><code class="language-js">const r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
 });
 
-var r2 = express.Router();
+const r2 = express.Router();
 r2.get('/', function (req, res, next) {
   next();
 });
@@ -205,12 +205,12 @@ app.use(r1, r2);
       Use an array to group middleware logically.
       If you pass an array of middleware as the first or only middleware parameters,
       then you <em>must</em> specify the mount path.
-<pre><code class="language-js">var r1 = express.Router();
+<pre><code class="language-js">const r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
 });
 
-var r2 = express.Router();
+const r2 = express.Router();
 r2.get('/', function (req, res, next) {
   next();
 });
@@ -227,13 +227,13 @@ app.use('/', [r1, r2]);
 <pre><code class="language-js">function mw1(req, res, next) { next(); }
 function mw2(req, res, next) { next(); }
 
-var r1 = express.Router();
+const r1 = express.Router();
 r1.get('/', function (req, res, next) { next(); });
 
-var r2 = express.Router();
+const r2 = express.Router();
 r2.get('/', function (req, res, next) { next(); });
 
-var subApp = express();
+const subApp = express();
 subApp.get('/', function (req, res, next) { next(); });
 
 app.use(mw1, [mw2, r1, r2], subApp);

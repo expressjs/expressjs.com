@@ -44,7 +44,7 @@ Here is an example of using `res.sendFile` with all its arguments.
 
 ```js
 app.get('/file/:name', function (req, res, next) {
-  var options = {
+  const options = {
     root: path.join(__dirname, 'public'),
     dotfiles: 'deny',
     headers: {
@@ -53,7 +53,7 @@ app.get('/file/:name', function (req, res, next) {
     }
   }
 
-  var fileName = req.params.name
+  const fileName = req.params.name
   res.sendFile(fileName, options, function (err) {
     if (err) {
       next(err)
@@ -69,8 +69,8 @@ The following example illustrates using
 
 ```js
 app.get('/user/:uid/photos/:file', function (req, res) {
-  var uid = req.params.uid
-  var file = req.params.file
+  const uid = req.params.uid
+  const file = req.params.file
 
   req.user.mayViewFilesFrom(uid, function (yes) {
     if (yes) {
