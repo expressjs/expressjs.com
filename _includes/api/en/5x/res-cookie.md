@@ -66,4 +66,4 @@ Then `res.cookie()` will use the secret passed to `cookieParser(secret)` to sign
 res.cookie('name', 'tobi', { signed: true })
 ```
 
-Later you may access this value through the [req.signedCookie](#req.signedCookies) object.
+Later you may access this value through the [req.signedCookies](#req.signedCookies) object.
