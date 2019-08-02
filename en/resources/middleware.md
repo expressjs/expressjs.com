@@ -41,6 +41,7 @@ These are some additional popular middleware modules.
 
 |Middleware&nbsp;module | Description |
 |---------------------------|---------------------|
+| [cls-rtracer](https://github.com/puzpuzpuz/cls-rtracer) | Middleware for CLS-based request id generation. An out-of-the-box solution for adding request ids into your logs.|
 | [connect-image-optimus](https://github.com/msemenistyi/connect-image-optimus) | Optimize image serving. Switches images to `.webp` or `.jxr`, if possible.|
 | [express-debug](https://github.com/devoidfury/express-debug) | Development tool that adds information about template variables (locals), current session, and so on.|
 | [express-partial-response](https://github.com/nemtsov/express-partial-response) | Filters out parts of JSON responses based on the `fields` query-string; by using Google API's Partial Response.|
