@@ -28,6 +28,20 @@ res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: tru
 res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
 ```
 
+And if you want to set multiple key values, simply call `cookie` more than once.
+
+For example:
+
+```js
+res
+.status(201)
+.cookie("access_token", "Bearer " + token, {
+  expires: new Date(Date.now() + 8 * 3600000) // cookie will be removed after 8 hours
+})
+.cookie("test", "test")
+.redirect(301, "/admin");
+```
+
 The `encode` option allows you to choose the function used for cookie value encoding.
 Does not support asynchronous functions.
 
