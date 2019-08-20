@@ -28,9 +28,7 @@ res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: tru
 res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
 ```
 
-And if you want to set multiple key values, simply call `cookie` more than once.
-
-For example:
+You can set multiple cookies in a single response by calling res.cookie multiple times, for example:
 
 ```js
 res
