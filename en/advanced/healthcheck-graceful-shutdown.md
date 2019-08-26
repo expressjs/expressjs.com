@@ -38,7 +38,7 @@ Here's a basic template that illustrates using terminus.  For more information, 
 ```js
 const http = require('http')
 const express = require('express')
-const terminus = require('@godaddy/terminus')
+const { createTerminus } = require('@godaddy/terminus')
 
 const app = express()
 
@@ -58,7 +58,7 @@ async function onHealthCheck () {
   // resolves, if health, rejects if not
 }
 
-terminus(server, {
+createTerminus(server, {
   signal: 'SIGINT',
   healthChecks: { '/healthcheck': onHealthCheck },
   onSignal
