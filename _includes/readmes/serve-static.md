@@ -6,6 +6,10 @@
 [![Windows Build][appveyor-image]][appveyor-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
+Serves files that match the given path.
+
+**Note** The case-sensitivity of the underlying file system impacts the way resolution of paths is being performed by the `serve-static` module. A `req.url` for a path ending with `Image.jpg` for a file named `image.jpg` might fail to return a resource if the underlying file system is case-sensitive. An example of this occurring is in new version of MacOS like Mojave which uses the APFS in the case-sensitive variant by default.
+
 ## Install
 
 This is a [Node.js](https://nodejs.org/en/) module available through the
