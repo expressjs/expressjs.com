@@ -15,20 +15,16 @@ lang: ko
 
 `myapp` 디렉토리에 `app.js`라는 이름의 파일을 작성한 후 다음과 같은 코드를 추가하십시오.
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+<script src="https://embed.runkit.com" data-element-id="hello-example" data-mode="endpoint" async defer></script>
+<div id="hello-example"><pre><code class="language-js">
+const express = require('express')
+const app = express()
+const port = 3000
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => res.send('Hello World!'))
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
-</code>
-</pre>
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+</code></pre></div>
 
 앱은 서버를 시작하며 3000번 포트에서 연결을 청취합니다. 앱은 루트 URL(`/`) 또는 *라우트*에
 대한 요청에 "Hello World!"로 응답합니다. 다른 모든 경로에 대해서는 **404 Not Found**로 응답합니다.
