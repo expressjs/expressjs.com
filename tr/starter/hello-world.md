@@ -19,7 +19,7 @@ const port = 3000
 
 app.get('/', (req, res) => res.send('Merhaba Dünya!'))
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
 </code></pre></div>
 
 Bu uygulama bir sunucu çalıştırır ve gelen bağlantılar için 3000 portunu dinler. (`/`) kök dizinine gelen isteklere "Hello World!" ile yanıt verir. Bunun haricindeki tüm adreslere, **404 Not Found** hatası verecektir.
