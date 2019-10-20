@@ -144,9 +144,22 @@ Because you have access to the request object, the response object, the next mid
 
 For more information about Express middleware, see: [Using Express middleware](/{{ page.lang }}/guide/using-middleware.html).
 
+<h2>Error Handling Middleware</h2>
+
+An error handling middleware is defined like any other middleware, except that it takes 4 arguments. Even if you dont require these arguments, you need to specify them, otherwise it will be treated as a regular middleware by express, and will fail to handle errors. In an error handling middleware, the first argument is always the error.
+
+```js
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
+In the above example, if an error occurs, the error handling middleware will log the error stack and send error response with HTTP status 500.
+
 <h2>Configurable middleware</h2>
 
 If you need your middleware to be configurable, export a function which accepts an options object or other parameters, which, then returns the middleware implementation based on the input parameters.
+
 
 File: `my-middleware.js`
 
