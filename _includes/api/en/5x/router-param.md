@@ -74,9 +74,9 @@ The middleware returned by the function decides the behavior of what happens whe
 In this example, the `router.param(name, callback)` signature is modified to `router.param(name, accessId)`. Instead of accepting a name and a callback, `router.param()` will now accept a name and a number.
 
 ```js
-var express = require('express')
-var app = express()
-var router = express.Router()
+const express = require('express')
+const app = express()
+const router = express.Router()
 
 // customizing the behavior of router.param()
 router.param(function (param, option) {

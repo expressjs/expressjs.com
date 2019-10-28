@@ -17,7 +17,7 @@ An array of ranges will be returned or negative numbers indicating an error pars
 
 ```js
 // parse header from request
-var range = req.range(1000)
+const range = req.range(1000)
 
 // the type of the range
 if (range.type === 'bytes') {
