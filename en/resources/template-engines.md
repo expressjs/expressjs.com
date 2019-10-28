@@ -36,6 +36,7 @@ These template engines work "out-of-the-box" with Express:
 - **[Liquidjs](https://github.com/harttle/liquidjs)**: A Liquid engine implementation for both Node.js and browsers.
 - **[express-tl](https://github.com/Drulac/express-tl)**: A template-literal engine implementation for Express.
 - **[vuexpress](https://github.com/vuexpress/vuexpress)**: A Vue.js server side rendering engine for Express.js.
+- **[Twing](https://www.npmjs.com/package/twing)**: First-class Twig engine for Node.js.
 
 The [Consolidate.js](https://github.com/tj/consolidate.js) library unifies the APIs of these template engines to a single Express-compatible API.
 
