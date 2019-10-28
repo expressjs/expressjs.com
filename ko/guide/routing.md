@@ -44,7 +44,8 @@ app.post('/', function (req, res) {
 </code>
 </pre>
 
-Express는 HTTP 메소드에 해당하는 다음과 같은 라우팅 메소드를 지원합니다. `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search` 및 `connect`.
+Express는 HTTP 메소드에 해당하는 다음과 같은 라우팅 메소드를 지원합니다.
+`get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search` 및 `connect`.
 
 <div class="doc-box doc-info" markdown="1">
 올바르지 않은 JavaScript 변수 이름으로 변환되는 메소드를 라우팅하려면 대괄호 표기법을 사용하십시오. 예를 들면
