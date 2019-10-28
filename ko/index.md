@@ -37,7 +37,7 @@ lang: ko
     </div>
 
     <div id="frameworks">
-      <h3>Frameworks</h3> Many <a href="resources/frameworks.html">많은 유명한 프레임워크들이</a> Express를 기반으로 하고 있습니다..
+      <h3>Frameworks</h3> <a href="resources/frameworks.html">많은 유명한 프레임워크들이</a> Express를 기반으로 하고 있습니다.
     </div>
   </div>
 
