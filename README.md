@@ -10,13 +10,13 @@ To preview the website locally:
 
 1. Install the [jekyll-redirect-from](https://github.com/jekyll/jekyll-redirect-from) gem:
 
-   ```
+   ```shell
    $ gem install jekyll-redirect-from
    ```
 
 1. `cd` to the repository directory and run the following command:
 
-   ```
+   ```shell
    $ cd expressjs.com
    $ bundle install
    ```
@@ -25,7 +25,7 @@ To preview the website locally:
 
 1. Run Jekyll using the following command:
 
-   ```
+   ```shell
    $ bundle exec jekyll serve
    ```
 

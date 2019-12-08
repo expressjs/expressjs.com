@@ -279,18 +279,18 @@ WantedBy=multi-user.target
 
 ### Enable service
 
-```
+```shell
 $ systemctl enable express.service
 ```
 
 ### Start service
 
-```
+```shell
 $ systemctl start express.service
 ```
 
 ### Check service status
 
-```
+```shell
 $ systemctl status express.service
 ```
