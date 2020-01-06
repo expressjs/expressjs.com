@@ -24,3 +24,11 @@ var app = express()
 <section markdown="1">
   {% include api/en/4x/express.urlencoded.md %}
 </section>
+
+<section markdown="1">
+  {% include api/en/4x/express.raw.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/4x/express.text.md %}
+</section>
