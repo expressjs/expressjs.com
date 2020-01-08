@@ -28,4 +28,4 @@ Several popular Node.js frameworks are built on Express:
 - **[Kites](https://kites.nodejs.vn/)**: Template-based Web Application Framework
 - **[FoalTS](https://github.com/FoalTS/foal)**: Next-generation framework for building enterprise-grade Node.js applications (TypeScript).
 - **[NestJs](https://github.com/nestjs/nest)**: A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications on top of TypeScript & JavaScript (ES6, ES7, ES8)
-- **[Expressive Tea](https://github.com/Zero-OneiT/expresive-tea)**: A Small framework for building modulable, clean, fast and descriptive server-side aplications with Typescript and Express out of the box.
+- **[Expressive Tea](https://github.com/Zero-OneiT/expresive-tea)**: A Small framework for building modulable, clean, fast and descriptive server-side applications with Typescript and Express out of the box.
