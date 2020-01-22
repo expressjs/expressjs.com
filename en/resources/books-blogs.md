@@ -49,7 +49,6 @@ self-published, February 2018.
 - [StrongLoop Blog: Express category](https://strongloop.com/strongblog/tag_Express.html)
 - [Hage Yaapa's Blog: Express category](http://www.hacksparrow.com/category/express-js)
 - [Codeforgeek Blog: Express category](http://codeforgeek.com/code/nodejs/express/)
-- [Node-tricks Blog: Express category](http://node-tricks.com/category/express/)
 - [Baboon Blog: Express category](http://www.baboon.ir/tutorials/expressjs/) (Persian language)
 - [Techforgeek Blog: Express category](http://techforgeek.com/expressjs/)
 - [RoseHosting.com Blog: Express tag](https://www.rosehosting.com/blog/tag/express/)
