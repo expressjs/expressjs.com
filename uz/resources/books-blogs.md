@@ -35,7 +35,6 @@ Pack Publishing, June 2013.
 - [StrongLoop Blog: Express category](http://strongloop.com/strongblog/category/express/)
 - [Hage Yaapa's Blog: Express category](http://www.hacksparrow.com/category/express-js)
 - [Codeforgeek Blog: Express category](http://codeforgeek.com/code/nodejs/express/)
-- [Node-tricks Blog: Express category](http://node-tricks.com/category/express/)
 
 ### Add your blog here!
 
