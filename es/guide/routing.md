@@ -262,7 +262,7 @@ Los métodos en el objeto de respuesta (`res`) de la tabla siguiente pueden envi
 | [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | Redirecciona una solicitud.
 | [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | Representa una plantilla de vista.
 | [res.send()](/{{ page.lang }}/4x/api.html#res.send)       | Envía una respuesta de varios tipos.
-| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)     | Envía un archivo como una secuencia de octetos.
+| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | Envía un archivo como una secuencia de octetos.
 | [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Establece el código de estado de la respuesta y envía su representación de serie como el cuerpo de respuesta.
 
 <h2 id="app-route">app.route()</h2>
