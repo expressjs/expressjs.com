@@ -57,6 +57,9 @@ lang: sk
     <a target="_new" class="imagelink" href="https://www.kuali.co">
       <img alt="kuali" class="memberlogo" src="/images/companies/kuali-logo.png" />
     </a>
+    <a target="_new" class="imagelink" href="https://www.cbrebuild.com/">
+      <img alt="CBRE Build" class="memberlogo" src="/images/companies/cbre-logo.png" />
+    </a>
 </div>
 
 Ak vaša firma používa Express, dajte nám vedieť:
