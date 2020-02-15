@@ -268,7 +268,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 | [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | 將要求重新導向。
 | [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | 呈現視圖範本。
 | [res.send()](/{{ page.lang }}/4x/api.html#res.send)       | 傳送各種類型的回應。
-| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)     | 以八位元組串流形式傳送檔案。
+| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | 以八位元組串流形式傳送檔案。
 | [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | 設定回應狀態碼，並以回應內文形式傳送其字串表示法。
 
 <h2 id="app-route">app.route()</h2>

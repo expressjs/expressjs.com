@@ -262,7 +262,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 | [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)     | 重定向请求。
 | [res.render()](/{{ page.lang }}/4x/api.html#res.render)         | 呈现视图模板。
 | [res.send()](/{{ page.lang }}/4x/api.html#res.send)             | 发送各种类型的响应。
-| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)       | 以八位元流形式发送文件。
+| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)       | 以八位元流形式发送文件。
 | [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | 设置响应状态码并以响应主体形式发送其字符串表示。
 
 <h2 id="app-route">app.route()</h2>

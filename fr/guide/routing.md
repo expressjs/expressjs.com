@@ -263,7 +263,7 @@ Les méthodes de l'objet de réponse (`res`) décrites dans le tableau suivant p
 | [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | Redirige une demande.
 | [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | Génère un modèle de vue.
 | [res.send()](/{{ page.lang }}/4x/api.html#res.send)        | Envoie une réponse de divers types.
-| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)     | Envoie une réponse sous forme de flux d'octets.
+| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | Envoie une réponse sous forme de flux d'octets.
 | [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Définit le code de statut de réponse et envoie sa représentation sous forme de chaîne comme corps de réponse.
 
 <h2 id="app-route">app.route()</h2>
