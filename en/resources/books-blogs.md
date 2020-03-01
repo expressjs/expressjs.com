@@ -54,6 +54,7 @@ self-published, February 2018.
 - [RoseHosting.com Blog: Express tag](https://www.rosehosting.com/blog/tag/express/)
 - [ThisHosting.Rocks: Express tag](https://thishosting.rocks/tag/express-js/)
 - [Code with Hugo blog: Express tag](https://codewithhugo.com/tags/express)
+- [Dev.to blog: Express category](https://dev.to/ghvstcode/understanding-express-middleware-a-beginners-guide-g73)
 
 ### Add your blog here!
 
