@@ -97,31 +97,7 @@ app.use('/abcd', function (req, res, next) {
 This will match paths starting with `/abcd` and `/abd`:
 
 ```js
-app.use('/abc?d', function (req, res, next) {
-  next()
-})
-```
-
-This will match paths starting with `/abcd`, `/abbcd`, `/abbbbbcd`, and so on:
-
-```js
-app.use('/ab+cd', function (req, res, next) {
-  next()
-})
-```
-
-This will match paths starting with `/abcd`, `/abxcd`, `/abFOOcd`, `/abbArcd`, and so on:
-
-```js
-app.use('/ab*cd', function (req, res, next) {
-  next()
-})
-```
-
-This will match paths starting with `/ad` and `/abcd`:
-
-```js
-app.use('/a(bc)?d', function (req, res, next) {
+app.use('/ab(c?)d', function (req, res, next) {
   next()
 })
 ```
