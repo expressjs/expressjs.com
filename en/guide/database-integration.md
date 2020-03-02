@@ -21,7 +21,7 @@ Adding the capability to connect databases to Express apps is just a matter of l
 * [Redis](#redis)
 * [SQL Server](#sql-server)
 * [SQLite](#sqlite)
-* [ElasticSearch](#elasticsearch)
+* [Elasticsearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
 These database drivers are among many that are available.  For other options,
@@ -450,7 +450,7 @@ db.serialize(function () {
 db.close()
 ```
 
-## ElasticSearch
+## Elasticsearch
 
 **Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 
