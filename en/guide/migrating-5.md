@@ -44,6 +44,7 @@ See the [pull request](https://github.com/expressjs/express/pull/2237) for a lis
 **Changed**
 
 <ul class="doclist">
+  <li><a href="#path-syntax">Path route matching syntax</a></li>
   <li><a href="#app.router">app.router</a></li>
   <li><a href="#req.host">req.host</a></li>
   <li><a href="#req.query">req.query</a></li>
@@ -111,6 +112,20 @@ If you need to send a number by using the `res.send()` function, quote the numbe
 The `res.sendfile()` function has been replaced by a camel-cased version `res.sendFile()` in Express 5.
 
 <h3>Changed</h3>
+
+<h4 id="path-syntax">Path route matching syntax</h4>
+
+Path route matching syntax is when a string is supplied as the first parameter to the `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, and `router.use()` APIs. The following changes have been made to how the path string is matched to an incoming request:
+
+- Add new `?`, `*`, and `+` parameter modifiers.
+- Matching group expressions are only RegExp syntax.
+  * `(*)` is no longer valid and must be written as `(.*)`, for example.
+- Named matching groups no longer available by position in `req.params`.
+  * `/:foo(.*)` only captures as `req.params.foo` and not available as `req.params[0]`.
+- Regular expressions can only be used in a matching group.
+  * `/\\d+` is no longer valid and must be written as `/(\\d+)`.
+- Special `*` path segment behavior removed.
+  * `/foo/*/bar` will match a literal `*` as the middle segment.
 
 <h4 id="app.router">app.router</h4>
 
