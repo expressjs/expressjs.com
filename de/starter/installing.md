@@ -34,7 +34,7 @@ entry point: (index.js)
 
 Geben Sie `app.js` oder einen Namen Ihrer Vorstellung als Namen für die Hauptdatei ein. Wenn dieser Name `index.js` lauten soll, drücken Sie die Eingabetaste, um den vorgeschlagenen Standarddateinamen zu akzeptieren.
 
-Installieren Sie jetzt Express im Verzeichnis `app` und speichern Sie es in der Abhängigkeitsliste. Beispiel:
+Installieren Sie jetzt Express im Verzeichnis `myapp` und speichern Sie es in der Abhängigkeitsliste. Beispiel:
 
 <pre>
 <code class="language-sh" translate="no">

@@ -43,7 +43,7 @@ Insira `app.js`, ou qualquer nome que deseje
 para o arquivo principal. Se desejar que seja `index.js`, pressione RETURN para aceitar o nome de
 arquivo padrão sugerido.
 
-Agora instale o Express no diretório `app`
+Agora instale o Express no diretório `myapp`
 e salve-o na lista de dependências. Por exemplo:
 
 <pre>

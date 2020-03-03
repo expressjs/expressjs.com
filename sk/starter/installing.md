@@ -40,7 +40,7 @@ entry point: (index.js)
 
 Zadajte `app.js`, prípadne akýkoľvek iný názov hlavného súboru vašej aplikácie. Ak ho chcete nazvať `index.js`, stlačte ENTER k potvrdeniu navrhovaného názvu súboru.
 
-Teraz v `app` priečinku nainštalujte Express a pridajte ho ako dependenciu do package.json. Takto:
+Teraz v `myapp` priečinku nainštalujte Express a pridajte ho ako dependenciu do package.json. Takto:
 
 <pre>
 <code class="language-sh" translate="no">

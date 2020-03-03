@@ -36,7 +36,7 @@ entry point: (index.js)
 
 기본 파일의 이름을 `app.js`로 입력하거나 자유롭게 입력하십시오. 기본 파일의 이름을 `index.js`로 입력하기 원하는 경우에는 ENTER 키를 눌러 제안된 기본 파일 이름을 수락하십시오.
 
-이제 `app` 디렉토리에 Express를 설치한 후 종속 항목 목록에 저장하십시오. 예를 들면 다음과 같습니다.
+이제 `myapp` 디렉토리에 Express를 설치한 후 종속 항목 목록에 저장하십시오. 예를 들면 다음과 같습니다.
 
 <pre>
 <code class="language-sh" translate="no">

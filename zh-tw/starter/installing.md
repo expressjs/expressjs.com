@@ -34,7 +34,7 @@ entry point: (index.js)
 
 輸入 `app.js`，或您所要的主要檔名稱。如果您希望其名稱是 `index.js`，請按 RETURN 鍵，接受建議的預設檔名。
 
-現在，將 Express 安裝在 `app` 目錄中，並儲存在相依關係清單中。例如：
+現在，將 Express 安裝在 `myapp` 目錄中，並儲存在相依關係清單中。例如：
 
 
 <pre>

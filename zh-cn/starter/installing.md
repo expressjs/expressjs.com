@@ -36,7 +36,7 @@ entry point: (index.js)
 
 输入 `app.js`，或者您希望使用的任何主文件名称。如果希望文件名为 `index.js`，请按回车键以接受建议的缺省文件名。
 
-在 `app` 目录中安装 Express，然后将其保存在依赖项列表中。例如：
+在 `myapp` 目录中安装 Express，然后将其保存在依赖项列表中。例如：
 
 <pre>
 <code class="language-sh" translate="no">

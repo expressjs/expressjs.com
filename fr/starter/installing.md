@@ -36,7 +36,7 @@ entry point: (index.js)
 
 Entrez `app.js` ou un nom de votre choix pour le fichier principal. Si vous souhaitez que le nom soit `index.js`, appuyez sur la touche RETURN pour accepter le nom de fichier par défaut suggéré.
 
-Installez ensuite Express dans le répertoire `app`, puis sauvegardez-le dans la liste des dépendances. Par exemple :
+Installez ensuite Express dans le répertoire `myapp`, puis sauvegardez-le dans la liste des dépendances. Par exemple :
 
 <pre>
 <code class="language-sh" translate="no">
