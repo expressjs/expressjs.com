@@ -58,6 +58,3 @@ lang: sk
       <img alt="kuali" class="memberlogo" src="/images/companies/kuali-logo.png" />
     </a>
 </div>
-
-Ak vaša firma používa Express, dajte nám vedieť:
-[callback@us.ibm.com](mailto:callback@us.ibm.com).
