@@ -153,8 +153,8 @@ However, there are two caveats:
 const wrap = fn => (...args) => fn(...args).catch(args[2])
 
 app.get('/', wrap(async (req, res, next) => {
-  let company = await getCompanyById(req.query.id)
-  let stream = getLogoStreamById(company.id)
+  const company = await getCompanyById(req.query.id)
+  const stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
 ```

@@ -9,7 +9,7 @@ res.set('Content-Type', 'text/plain')
 res.set({
   'Content-Type': 'text/plain',
   'Content-Length': '123',
-  'ETag': '12345'
+  ETag: '12345'
 })
 ```
 
