@@ -17,7 +17,6 @@ Several popular Node.js frameworks are built on Express:
 - **[Poet](http://jsantell.github.io/poet)**: Lightweight Markdown Blog Engine with instant pagination, tag and category views.
 - **[Kraken](http://krakenjs.com/)**: Secure and scalable layer that extends Express by providing structure and convention.
 - **[LoopBack](http://loopback.io)**: Highly-extensible, open-source Node.js framework for quickly creating dynamic end-to-end REST APIs.
-- **[MEAN](https://meanjs.org/)**: Opinionated fullstack JavaScript framework that simplifies and accelerates web application development.
 - **[Sails](http://sailsjs.org/)**: MVC framework for Node.js for building practical, production-ready apps.
 - **[Hydra-Express](https://github.com/flywheelsports/fwsp-hydra-express)**: Hydra-Express is a light-weight library which facilitates building Node.js Microservices using ExpressJS.
 - **[Blueprint](http://github.com/onehilltech/blueprint)**: a SOLID framework for building APIs and backend services
