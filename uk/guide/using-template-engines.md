@@ -15,7 +15,7 @@ Some popular template engines that work with Express are [Pug](https://pugjs.org
 [Mustache](https://www.npmjs.com/package/mustache), and [EJS](https://www.npmjs.com/package/ejs).
 The [Express application generator](/{{ page.lang }}/starter/generator.html) uses Pug as its default, but it also supports several others.
 
-See [Template Engines (Express wiki)](https://github.com/strongloop/express/wiki#template-engines)
+See [Template Engines (Express wiki)](https://github.com/expressjs/express/wiki#template-engines)
 for a list of template engines you can use with Express.
 See also [Comparing JavaScript Templating Engines: Jade, Mustache, Dust and More](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/).
 

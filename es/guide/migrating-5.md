@@ -26,7 +26,7 @@ A continuación, puede ejecutar las pruebas automatizadas para ver qué falla y 
 <h2 id="changes">Cambios en Express 5</h2>
 
 A continuación, se muestra la lista de cambios (a partir del release alpha 2) que le afectarán como usuario de Express.
-Consulte la [Pull request](https://github.com/strongloop/express/pull/2237) para ver una lista de todas las características planificadas.
+Consulte la [Pull request](https://github.com/expressjs/express/pull/2237) para ver una lista de todas las características planificadas.
 
 **Métodos y propiedades eliminados**
 

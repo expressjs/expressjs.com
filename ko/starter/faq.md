@@ -17,9 +17,9 @@ lang: ko
 선호하는 모든 디렉토리 구조에 존재할 수 있습니다. 도움을 받으려면
 다음의 예를 확인하십시오.
 
-* [Route listings](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Route map](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Route listings](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Route map](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 또한, 이러한 패턴을 간략화할 수 있는 다음과 같은 Express용 써드파티 확장기능이 존재합니다.
 
@@ -37,7 +37,7 @@ Express에는 데이터베이스의 개념이 없습니다. 이러한 개념은
 
 인증은 또 다른 주관적인 영역이며, Express는
 이에 관여하지 않습니다.  개발자는 자신이 원하는 어떠한 인증 체계라도 사용할 수 있습니다.
-사용자 이름 / 비밀번호 체계에 대해서는 [이 예제](https://github.com/strongloop/express/tree/master/examples/auth)를 참조하십시오.
+사용자 이름 / 비밀번호 체계에 대해서는 [이 예제](https://github.com/expressjs/express/tree/master/examples/auth)를 참조하십시오.
 
 
 ## Express는 어느 템플리트 엔진을 지원합니까?

@@ -13,9 +13,9 @@ lang: ru
 
 Маршруты и другая логика приложений могут размещаться в любом количестве файлов, на ваше усмотрение, и в любой структуре каталогов, которую вы предпочтете. В качестве источника вдохновения, ознакомьтесь со следующими примерами:
 
-* [Объявления маршрутов](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Карта маршрутов](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [Контроллеры в MVC стиле](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Объявления маршрутов](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Карта маршрутов](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [Контроллеры в MVC стиле](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Также существуют сторонние расширения для Express, упрощающие некоторые из этих шаблонов:
 
@@ -31,7 +31,7 @@ lang: ru
 ## Как идентифицировать пользователей?
 
 Аутентификация - это еще одна своеобразная область, которую Express не охватывает.  Можно использовать любую схему аутентификации, по вашему желанию.
-Простая схема "имя пользователя / пароль" представлена в [следующем примере](https://github.com/strongloop/express/tree/master/examples/auth).
+Простая схема "имя пользователя / пароль" представлена в [следующем примере](https://github.com/expressjs/express/tree/master/examples/auth).
 
 
 ## Какие шаблонизаторы поддерживает Express?

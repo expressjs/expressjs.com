@@ -196,5 +196,5 @@ Visit [Gugamarket](http://www.gugamarket.com)
 
 ##Add your app or site
 
-[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/applications.md),
+[Edit the Markdown file](https://github.com/expressjs/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/applications.md),
 add a link to your app, then submit a pull request (GitHub login required).  Follow the format of the above listings.

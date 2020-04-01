@@ -17,7 +17,7 @@ Tento prístup robí návrh HTML stránok jednoduchším.
 Medzi populárne template enginy fungujúce s Express patria [Pug](https://pugjs.org/api/getting-started.html), [Mustache](https://www.npmjs.com/package/mustache) a [EJS](https://www.npmjs.com/package/ejs).
 [Express generátor](/{{ page.lang }}/starter/generator.html) požíva ako defaultný Pug, avšak podporuje aj mnohé ďalšie.
 
-Zoznam podporovaných template enginov nájdete tu: [Template Engines (Express wiki)](https://github.com/strongloop/express/wiki#template-engines).
+Zoznam podporovaných template enginov nájdete tu: [Template Engines (Express wiki)](https://github.com/expressjs/express/wiki#template-engines).
 Pozrite si taktiež [Comparing JavaScript Templating Engines: Jade, Mustache, Dust and More](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/).
 
 Aby Express dokázal spracovať a vyrendrovať template súbory, musí aplikácia obsahovať [nasledujúce nastavenia](/{{ page.lang }}/4x/api.html#app.set):

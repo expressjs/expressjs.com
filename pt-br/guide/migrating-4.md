@@ -34,8 +34,8 @@ dependências no Connect e middlewares integrados foram removidos, de forma que 
 
 Consulte também:
 
-* [Novos recursos no 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
-* [Migrando do 3.x para o 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
+* [Novos recursos no 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+* [Migrando do 3.x para o 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 <h3 id="core-changes">
 Mudanças no núcleo e sistemas middleware do Express

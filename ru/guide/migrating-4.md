@@ -32,8 +32,8 @@ Express 4, на самом деле, ломает существующий ко�
 
 См. также:
 
-* [Новые функции в 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
-* [Миграция из 3.x в 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
+* [Новые функции в 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+* [Миграция из 3.x в 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 <h3 id="core-changes">
 Изменения ядра Express и системы промежуточных обработчиков

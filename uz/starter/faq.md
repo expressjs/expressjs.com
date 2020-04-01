@@ -13,9 +13,9 @@ Bu savolga bitta javob yo'q. Bu dasturingiz hajmi va dasturchilar jamosiga bog'l
 
 Dasturning marshrutizatsiya va boshqa logika qismi ko'plab fayllarda joylashgan bo'lishi mumkin, struktura esa siz hohlagan holda yaratish imkoniyati mavjud. Ilhomlanish uchun quyidagi strukturalarni ko'rishingiz mumkin:
 
-* [Marshrutlarni e'lon qilish](https://github.com/strongloop/express/blob/master/examples/route-separation/index.js#L19)
-* [Marshrutlarni haritasi](https://github.com/strongloop/express/blob/master/examples/route-map/index.js#L47)
-* [MVC ko'rinishida kontrollerlar](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Marshrutlarni e'lon qilish](https://github.com/expressjs/express/blob/master/examples/route-separation/index.js#L19)
+* [Marshrutlarni haritasi](https://github.com/expressjs/express/blob/master/examples/route-map/index.js#L47)
+* [MVC ko'rinishida kontrollerlar](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Bundan tashqari, Express uchun qo'shimcha yordam beruvchi shablonlar mavjud:
 
@@ -31,7 +31,7 @@ Express qaysi ma'lumotlar ombori bilan ishlashni keltirilmagan. Siz hohlagan Nod
 ## Qanday qilish foydalanuvchini autenfikatsiya qilishim mumkin?
 
 Bu ham Express o'ziga olmaydigan qismi hisoblanadi. Siz hohlagan autenfikatsiya tizimini ishlatishingiz mumkin bo'ladi.
-Oddiy username / password sxemasini ishlatish uchun [ushbu misolni](https://github.com/strongloop/express/tree/master/examples/auth) ko'ring.
+Oddiy username / password sxemasini ishlatish uchun [ushbu misolni](https://github.com/expressjs/express/tree/master/examples/auth) ko'ring.
 
 ## Express qaysi shablonizator ishlatadi?
 

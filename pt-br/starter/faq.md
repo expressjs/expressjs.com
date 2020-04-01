@@ -18,9 +18,9 @@ Rotas e outras lógicas específicas do aplicativo podem ficar em
 quantos arquivos quiser, em qualquer estrutura de diretórios que
 preferir. Visualize os seguintes exemplos para obter inspiração:
 
-* [Listagens de rota](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Mapa de rota](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [Controladores com estilo MVC](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Listagens de rota](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Mapa de rota](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [Controladores com estilo MVC](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Além disso, existem extensões de terceiros para o Express, que
 simplificam alguns desses padrões:
@@ -42,7 +42,7 @@ Autenticação é outra área muito opinada que o Express não
 se arrisca a entrar.  Você pode usar qualquer esquema que desejar.
 Para um esquema simples com nome de usuário / senha, consulte
 [este
-exemplo](https://github.com/strongloop/express/tree/master/examples/auth).
+exemplo](https://github.com/expressjs/express/tree/master/examples/auth).
 
 
 ## Quais mecanismos de modelo o Express suporta?

@@ -21,9 +21,9 @@ Samotná logika pre routing a ostatné špecifické časti aplikácie môže by�
 do ľubovoľného počtu súborov a organizovaná v ľubovoľnej štruktúre priečinkov,
 presne tak, ako vám to vyhovuje. Pre inšpiráciu sa pozrite sa na nasledujúce príklady:
 
-* [Route listings](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Route maping](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Route listings](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Route maping](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Existujú taktiež mnohé rozšírenia tretích strán, ktoré toto zjednodušujú:
 
@@ -40,7 +40,7 @@ navštívte stránku [LoopBack](http://loopback.io).
 ## Ako dokážem autentifikovať používateľov?
 
 Autentifikácia je ďalšia otvorená oblasť do ktorej Express priamo nezasahuje.
-Môžete si zvoliť akúkoľvek autentifikačnú schému, ktorá vám vyhovuje. Pre jednoduchú meno / heslo autentifikáciu si pozrite [tento príklad](https://github.com/strongloop/express/tree/master/examples/auth).
+Môžete si zvoliť akúkoľvek autentifikačnú schému, ktorá vám vyhovuje. Pre jednoduchú meno / heslo autentifikáciu si pozrite [tento príklad](https://github.com/expressjs/express/tree/master/examples/auth).
 
 
 ## Aké template enginy Express podporuje?

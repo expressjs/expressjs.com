@@ -26,7 +26,7 @@ $ npm install express@5.0.0-alpha.2 --save
 <h2 id="changes">Express 5에서의 변경사항</h2>
 
 아래에는 Express 사용자에게 영향을 미치는 변경사항(알파 2 릴리스 기준)의 목록이 표시되어 있습니다.
-계획된 모든 기능의 목록을 확인하려면 [pull request](https://github.com/strongloop/express/pull/2237)를 참조하십시오.
+계획된 모든 기능의 목록을 확인하려면 [pull request](https://github.com/expressjs/express/pull/2237)를 참조하십시오.
 
 **제거된 메소드 및 특성**
 

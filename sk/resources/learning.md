@@ -37,7 +37,7 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 
 ### Pridajte vašu knihu!
 
-[Upravte Markdown súbor](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/learning.md) a pridajte odkaz na knihu, zašlite pull request (potrebné prihlásenie pomocou GitHub konta). Dodržiavajte formát zavedený v horeuvedenom zozname.
+[Upravte Markdown súbor](https://github.com/expressjs/expressjs.com/blob/gh-pages/resources/learning.md) a pridajte odkaz na knihu, zašlite pull request (potrebné prihlásenie pomocou GitHub konta). Dodržiavajte formát zavedený v horeuvedenom zozname.
 
 ## Blogy
 
@@ -48,4 +48,4 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 
 ### Pridajte váš blog!
 
-[Upravte Markdown súbor](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/learning.md) a pridajte odkaz na váš blog, zašlite pull request (potrebné prihlásenie pomocou GitHub konta). Dodržiavajte formát zavedený v horeuvedenom zozname.
+[Upravte Markdown súbor](https://github.com/expressjs/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/learning.md) a pridajte odkaz na váš blog, zašlite pull request (potrebné prihlásenie pomocou GitHub konta). Dodržiavajte formát zavedený v horeuvedenom zozname.

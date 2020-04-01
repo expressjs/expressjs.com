@@ -14,7 +14,7 @@ Diskussionen in der [Google Group](https://groups.google.com/group/express-js).
 
 ## Gitter
 
-Der [strongloop/express-Chatroom](https://gitter.im/strongloop/express) eignet sich besonders für Entwickler, die sich für die täglichen Diskussionen zu Express interessieren.
+Der [expressjs/express-Chatroom](https://gitter.im/expressjs/express) eignet sich besonders für Entwickler, die sich für die täglichen Diskussionen zu Express interessieren.
 
 ## IRC-Channel
 
@@ -22,14 +22,14 @@ Hunderte von Entwicklern, die jeden Tag in #express auf freenode auf Ihre Fragen
 
 ## Beispiele
 
-Zeigen Sie Dutzende von [Beispielen](https://github.com/strongloop/express/tree/master/examples) zu Express-Anwendungen im Repository an, das alles abdeckt – von API-Design und Authentifizierung bis zur Einbindung von Template-Engines.
+Zeigen Sie Dutzende von [Beispielen](https://github.com/expressjs/express/tree/master/examples) zu Express-Anwendungen im Repository an, das alles abdeckt – von API-Design und Authentifizierung bis zur Einbindung von Template-Engines.
 
 ## Probleme
 
-Wenn Sie Ihrer Meinung nach einen Fehler festgestellt haben oder lediglich ein Feature/eine Funktion anfordern wollen, können Sie in der [Issue Queue](https://github.com/strongloop/express/issues) ein Ticket öffnen.
+Wenn Sie Ihrer Meinung nach einen Fehler festgestellt haben oder lediglich ein Feature/eine Funktion anfordern wollen, können Sie in der [Issue Queue](https://github.com/expressjs/express/issues) ein Ticket öffnen.
 
 ## Andere Anbieter
 
 Unsere lebhafte Community hat zu einer Vielzahl von Erweiterungen, [Middlewaremodulen](/{{ page.lang }}/resources/middleware.html) und Frameworks der höheren Ebene geführt. Diese können Sie im
-[Wiki](https://github.com/strongloop/express/wiki) genauer begutachten.
+[Wiki](https://github.com/expressjs/express/wiki) genauer begutachten.
 

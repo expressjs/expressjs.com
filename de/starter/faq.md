@@ -14,9 +14,9 @@ Auf diese Frage gibt es keine verbindliche Antwort. Die Antwort hängt vom Umfan
 Weiterleitungen und andere anwendungsspezifische Logik können in einer beliebigen Anzahl von Dateien und in jeder von Ihnen bevorzugten Verzeichnisstruktur vorkommen. Die folgenden Beispiele sollen als Entscheidungshilfe dienen:
 
 
-* [Weiterleitungslisten](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Weiterleitungszuordnung](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [Controller im MVC-Stil](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Weiterleitungslisten](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Weiterleitungszuordnung](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [Controller im MVC-Stil](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Darüber hinaus gibt es Erweiterungen anderer Anbieter für Express, die zur Vereinfachung einiger dieser Muster beitragen:
 
@@ -30,7 +30,7 @@ Express hat keine Vorstellungen von einer Datenbank. Dieses Konzept bleibt Node-
 
 ## Wie kann ich Benutzer authentifizieren?
 
-Die Authentifizierung ist ein weiterer meinungsstarker Bereich, in den Express nicht eingreift. Sie können ein Authentifizierungsschema nach Ihren Vorstellungen verwenden. Ein einfaches Benutzername/Kennwort-Schema können Sie in [diesem Beispiel](https://github.com/strongloop/express/tree/master/examples/auth) sehen.
+Die Authentifizierung ist ein weiterer meinungsstarker Bereich, in den Express nicht eingreift. Sie können ein Authentifizierungsschema nach Ihren Vorstellungen verwenden. Ein einfaches Benutzername/Kennwort-Schema können Sie in [diesem Beispiel](https://github.com/expressjs/express/tree/master/examples/auth) sehen.
 
 
 ## Welche Template-Engines unterstützt Express?

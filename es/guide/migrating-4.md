@@ -32,8 +32,8 @@ Se han realizado varios cambios importantes en Express 4:
 
 Vea también:
 
-* [Nuevas características en 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
-* [Migración de 3.x a 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
+* [Nuevas características en 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+* [Migración de 3.x a 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 <h3 id="core-changes">
 Cambios en el sistema principal y de middleware de Express

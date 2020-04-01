@@ -18,7 +18,7 @@ Vulnereabilita (zraniteĺnosť) Node.js priamo ovplyvňuje Express. Preto [sledu
 Zoznam nižšie obsahuje objavené a opravené vulnereability Express-u v špecifických verziách updatov.
 
 **POZN.**: Ak si myslíte, že ste objavili security vulnerabilitu Express-u, prosím pozrite si
-[Security Policies and Procedures](https://github.com/strongloop/express/blob/master/Security.md).
+[Security Policies and Procedures](https://github.com/expressjs/express/blob/master/Security.md).
 
 ## 4.x
 

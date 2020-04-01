@@ -26,7 +26,7 @@ $ npm install express@5.0.0-alpha.2 --save
 <h2 id="changes">Modifiche in Express 5</h2>
 
 Di seguito viene riportato l'elenco di modifiche (a partire dal release alfa) che influenzeranno gli utenti di Express.
-Consultare [pull request](https://github.com/strongloop/express/pull/2237) per un elenco di funzioni pianificate.
+Consultare [pull request](https://github.com/expressjs/express/pull/2237) per un elenco di funzioni pianificate.
 
 **Proprietà e metodi rimossi**
 

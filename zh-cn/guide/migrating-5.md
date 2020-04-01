@@ -26,7 +26,7 @@ $ npm install express@5.0.0-alpha.2 --save
 <h2 id="changes">Express 5 中的更改</h2>
 
 以下是将影响 Express 用户的更改的列表（截至在 α R2）。
-请参阅 [pull request](https://github.com/strongloop/express/pull/2237) 以查看所有计划功能的列表。
+请参阅 [pull request](https://github.com/expressjs/express/pull/2237) 以查看所有计划功能的列表。
 
 **已移除的方法和属性**
 

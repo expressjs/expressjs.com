@@ -14,7 +14,7 @@ Node.js vulnerabilities directly affect Express. Therefore [keep a watch on Node
 The list below enumerates the Express vulnerabilities that were fixed in the specified version update.
 
 **NOTE**: If you believe you have discovered a security vulnerability in Express, please see
-[Security Policies and Procedures](https://github.com/strongloop/express/blob/master/Security.md).
+[Security Policies and Procedures](https://github.com/expressjs/express/blob/master/Security.md).
 
 ## 4.x
 

@@ -12,9 +12,9 @@ Bu soruya verilebilecek kesin bir cevap yoktur. Cevap, uygulamanızın boyutuna 
 
 Yollar ve diğer uygulamaya özel mantık istediğiniz yapıda, istediğiniz kadar dosyanın içinde barınabilir. Örnek olarak şunlara göz atabilirsiniz:
 
-* [Route listings](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-L47)
-* [Route map](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Route listings](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-L47)
+* [Route map](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Ayrıca, bu dizaynlardan bazılarını basitleştiren, üçüncü parti bir Express uzantısı bulunmaktadır:
 

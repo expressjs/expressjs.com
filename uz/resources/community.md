@@ -14,7 +14,7 @@ discussions in the [Google Group](https://groups.google.com/group/express-js).
 
 ## Gitter
 
-The [strongloop/express chatroom](https://gitter.im/strongloop/express) is great place
+The [expressjs/express chatroom](https://gitter.im/expressjs/express) is great place
 for developers interested in the everyday discussions related to Express.
 
 ## IRC Channel
@@ -25,17 +25,17 @@ feedback.
 
 ## Examples
 
-View dozens of Express application [examples](https://github.com/strongloop/express/tree/master/examples)
+View dozens of Express application [examples](https://github.com/expressjs/express/tree/master/examples)
 in the repo covering everything from API design and auth
 to template engine integration.
 
 ## Issues
 
 If you've come across what you think is a bug, or just want to make
-a feature request open a ticket in the [issue queue](https://github.com/strongloop/express/issues).
+a feature request open a ticket in the [issue queue](https://github.com/expressjs/express/issues).
 
 ## Third Party
 
 Our vibrant community has created a large variety of extensions,
 [middleware](/resources/middleware.html) and higher level frameworks. Check them out in the
-[wiki](https://github.com/strongloop/express/wiki).
+[wiki](https://github.com/expressjs/express/wiki).

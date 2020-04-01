@@ -16,7 +16,7 @@ Google](https://groups.google.com/group/express-js).
 ## Gitter
 
 A [sala
-de bate-papo strongloop/express](https://gitter.im/strongloop/express) é um ótimo lugar para
+de bate-papo expressjs/express](https://gitter.im/expressjs/express) é um ótimo lugar para
 desenvolvedores interessados nas discussões de dia-a-dia relacionadas
 ao Express.
 
@@ -27,17 +27,17 @@ Se tiver questões sobre o framework, entre para obter feedbacks rápidos.
 
 ## Exemplos
 
-Visualize dezenas de [exemplos](https://github.com/strongloop/express/tree/master/examples)
+Visualize dezenas de [exemplos](https://github.com/expressjs/express/tree/master/examples)
 de aplicativos do Express no repositório, cobrindo tudo desde o design de API e autenticação até a integração de mecanismo de modelo.
 
 ## Problemas
 
 Se se deparar com o que pensa ser um erro, ou apenas desejar fazer uma solicitação de recurso, abra um chamado na
-[fila de problemas](https://github.com/strongloop/express/issues).
+[fila de problemas](https://github.com/expressjs/express/issues).
 
 ## Terceiros
 
 Nossa vibrante comunidade criou uma ampla variedade de
 extensões, [módulos middleware](/{{ page.lang }}/resources/middleware.html) e frameworks de
-alto nível. Confira na [wiki](https://github.com/strongloop/express/wiki).
+alto nível. Confira na [wiki](https://github.com/expressjs/express/wiki).
 

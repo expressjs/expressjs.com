@@ -41,7 +41,7 @@ méthodes ou des propriétés.
 Voici la liste des modifications (par rapport à l'édition alpha
 2) qui vous concerneront en tant qu'utilisateur d'Express.
 Consultez la
-[demande d'extraction](https://github.com/strongloop/express/pull/2237)
+[demande d'extraction](https://github.com/expressjs/express/pull/2237)
 pour une liste de toutes les fonctions planifiées.
 
 **Méthodes et propriétés supprimées**

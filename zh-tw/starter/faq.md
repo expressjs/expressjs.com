@@ -13,9 +13,9 @@ lang: zh-tw
 
 您可以根據自己的喜好，將路由和應用程式特定的其他邏輯放在任意數目的檔案和任何的目錄結構中。請檢視下列範例，以獲得一些啟發：
 
-* [路由清單](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [路由對映](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [MVC 樣式控制器](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [路由清單](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [路由對映](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [MVC 樣式控制器](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 此外，Express 有一些協力廠商延伸，可簡化部分這些型樣：
 
@@ -29,7 +29,7 @@ Express 不會注意到資料庫的存在。此概念留給協力廠商 Node 模
 
 ## 如何鑑別使用者？
 
-鑑別是 Express 另一個不涉及的自用領域。您可以使用任何您想要的鑑別方法。如需簡易使用者名稱 / 密碼方法，請參閱[這個範例](https://github.com/strongloop/express/tree/master/examples/auth)。
+鑑別是 Express 另一個不涉及的自用領域。您可以使用任何您想要的鑑別方法。如需簡易使用者名稱 / 密碼方法，請參閱[這個範例](https://github.com/expressjs/express/tree/master/examples/auth)。
 
 
 ## Express 支援哪些範本引擎？

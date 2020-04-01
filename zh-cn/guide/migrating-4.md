@@ -31,8 +31,8 @@ Express 4 中进行了若干重大更改：
 
 另请参阅：
 
-* [New features in 4.x](https://github.com/strongloop/express/wiki/New-features-in-4.x)。
-* [Migrating from 3.x to 4.x](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)。
+* [New features in 4.x](https://github.com/expressjs/express/wiki/New-features-in-4.x)。
+* [Migrating from 3.x to 4.x](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)。
 
 <h3 id="core-changes">
 对 Express 核心和中间件系统的更改。

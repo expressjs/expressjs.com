@@ -13,7 +13,7 @@ lang: es
 
 ## Gitter
 
-La [sala de conversación strongloop/express](https://gitter.im/strongloop/express) es un excelente recurso para los desarrolladores interesados en las discusiones diarias relacionadas con Express.
+La [sala de conversación expressjs/express](https://gitter.im/expressjs/express) es un excelente recurso para los desarrolladores interesados en las discusiones diarias relacionadas con Express.
 
 ## Canal de IRC
 
@@ -22,13 +22,13 @@ Si tiene preguntas sobre la infraestructura, entre para realizar consultas rápi
 
 ## Ejemplos
 
-Vea docenas de [ejemplos](https://github.com/strongloop/express/tree/master/examples) de aplicaciones Express en el repositorio, que van desde la autenticación y el diseño de API hasta la integración del motor de plantillas.
+Vea docenas de [ejemplos](https://github.com/expressjs/express/tree/master/examples) de aplicaciones Express en el repositorio, que van desde la autenticación y el diseño de API hasta la integración del motor de plantillas.
 
 ## Problemas
 
-Si se encuentra con lo que cree es un error o simplemente desea realizar una solicitud de característica, abra un ticket en la [cola de problemas](https://github.com/strongloop/express/issues).
+Si se encuentra con lo que cree es un error o simplemente desea realizar una solicitud de característica, abra un ticket en la [cola de problemas](https://github.com/expressjs/express/issues).
 
 ## Terceros
 
-Nuestra vibrante comunidad ha creado una gran variedad de extensiones, [módulos de middleware](/{{ page.lang }}/resources/middleware.html) e infraestructuras de nivel superior. Investíguelos en la [wiki](https://github.com/strongloop/express/wiki).
+Nuestra vibrante comunidad ha creado una gran variedad de extensiones, [módulos de middleware](/{{ page.lang }}/resources/middleware.html) e infraestructuras de nivel superior. Investíguelos en la [wiki](https://github.com/expressjs/express/wiki).
 

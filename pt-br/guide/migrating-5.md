@@ -41,7 +41,7 @@ Aqui está a lista de mudanças (até a liberação alpha 2) que
 irão afetá-lo como um usuário do Express.
 Consulte por
 [solicitação
-de pull](https://github.com/strongloop/express/pull/2237) para obter uma lista de todas funcionalidades
+de pull](https://github.com/expressjs/express/pull/2237) para obter uma lista de todas funcionalidades
 planejadas.
 
 **Métodos e propriedades removidas**

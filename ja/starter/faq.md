@@ -13,9 +13,9 @@ lang: ja
 
 ルートやその他のアプリケーション固有のロジックは、必要な数だけのファイルや、任意のディレクトリー構造に存在できます。参考のために、以下の例を参照してください。
 
-* [ルートのリスト](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [ルートのマップ](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [MVC スタイルのコントローラー](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [ルートのリスト](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [ルートのマップ](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [MVC スタイルのコントローラー](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 また、これらのパターンを簡素化する、サード・パーティー製の Express 拡張版があります。
 
@@ -30,7 +30,7 @@ Express には、データベースの概念がありません。この概念は
 ## どのようにしてユーザーを認証するのですか?
 
 認証は、Express が足を踏み入れていないもう 1 つの分野です。任意の認証スキームを使用できます。
-単純なユーザー名/パスワードのスキームについては、[この例](https://github.com/strongloop/express/tree/master/examples/auth)を参照してください。
+単純なユーザー名/パスワードのスキームについては、[この例](https://github.com/expressjs/express/tree/master/examples/auth)を参照してください。
 
 
 ## Express はどのテンプレート・エンジンをサポートしているのですか?

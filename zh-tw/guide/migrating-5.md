@@ -25,7 +25,7 @@ $ npm install express@5.0.0-alpha.2 --save
 
 <h2 id="changes">Express 5 中的變更</h2>
 
-這裡列出將會影響您（作為 Express 使用者）的變更（起自 Alpha 2 版）。如需所有規劃的特性清單，請參閱 [pull request](https://github.com/strongloop/express/pull/2237)。
+這裡列出將會影響您（作為 Express 使用者）的變更（起自 Alpha 2 版）。如需所有規劃的特性清單，請參閱 [pull request](https://github.com/expressjs/express/pull/2237)。
 
 **已移除的方法和內容**
 

@@ -17,9 +17,9 @@ Le route e altre logiche specifiche dell'applicazione possono essere presenti in
 in qualsiasi struttura di directory desiderata. Visualizzare i seguenti
 esempi:
 
-* [Elenchi route](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Definizione route](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [Controllori stile MVC](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Elenchi route](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Definizione route](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [Controllori stile MVC](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Inoltre, ci sono delle estensioni di terze parti per Express, le quali semplificano alcuni di questi modelli:
 
@@ -37,7 +37,7 @@ Consultare [LoopBack](http://loopback.io) per un framework basato su Express inc
 
 L'autenticazione è un'altra area categorica in cui non si
 avventura Express.  È possibile utilizzare qualsiasi schema di autenticazione desiderato.
-Per uno schema nome utente / password semplice, consultare [questo esempio](https://github.com/strongloop/express/tree/master/examples/auth).
+Per uno schema nome utente / password semplice, consultare [questo esempio](https://github.com/expressjs/express/tree/master/examples/auth).
 
 
 ## Quale motore di template supporta Express?

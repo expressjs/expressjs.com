@@ -11,7 +11,7 @@ _テンプレートエンジン_ を使用すると、アプリケーション�
 
 Expressで動作する一般的なテンプレートエンジンには、[Pug](https://pugjs.org/api/getting-started.html)、[Mustache](https://www.npmjs.com/package/mustache)、[EJS](https://www.npmjs.com/package/ejs)があります。[Expressアプリケーションジェネレータ](/{{ page.lang }}/starter/generator.html)は[Jade](https://www.npmjs.com/package/jade)をデフォルトとして使用しますが、いくつかの他のものもサポートしています。
 
-Expressで使用できるテンプレートエンジンのリストについては、[テンプレートエンジン (Express wiki)](https://github.com/strongloop/express/wiki#template-engines)を参照してください。また、[JavaScript テンプレートエンジンの比較: Jade, Mustache, Dust など](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/)も参照してください。
+Expressで使用できるテンプレートエンジンのリストについては、[テンプレートエンジン (Express wiki)](https://github.com/expressjs/express/wiki#template-engines)を参照してください。また、[JavaScript テンプレートエンジンの比較: Jade, Mustache, Dust など](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/)も参照してください。
 
 <div class="doc-box doc-notice" markdown="1">
 

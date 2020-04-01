@@ -24,7 +24,7 @@ $ npm install express@>=5.0.0-alpha.1 --save
 <h2 id="changes">Express 5 における変更点</h2>
 
 次に、Express のユーザーに影響を与える (アルファ 2 リリースの時点での) 変更のリストを示します。
-予定されているすべての機能のリストについては、[プル要求](https://github.com/strongloop/express/pull/2237)を参照してください。
+予定されているすべての機能のリストについては、[プル要求](https://github.com/expressjs/express/pull/2237)を参照してください。
 
 **削除されたメソッドとプロパティー**
 

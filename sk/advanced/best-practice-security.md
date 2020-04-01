@@ -20,7 +20,7 @@ Development a production prostredia sú zvyčajne nakonfigurované odlišne a ma
 Tento článok popisuje niektoré osvedčené postupy z pohľadu bezpečnosti Express aplikácií v produkcii.
 
 **POZN.**: Ak si myslíte, že ste objavili security vulnerabilitu Express-u, prosím pozrite si
-[Security Policies and Procedures](https://github.com/strongloop/express/blob/master/Security.md).
+[Security Policies and Procedures](https://github.com/expressjs/express/blob/master/Security.md).
 
 ## Nepoužívajte deprecated a vulnerable verzie Express-u
 

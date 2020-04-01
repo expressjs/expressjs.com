@@ -30,7 +30,7 @@ Potom môžete spustiť vaše automatizované testy, aby ste videli čo padá a 
 <h2 id="changes">Zmeny v Express 5</h2>
 
 Tu je zoznam zmien (týkajúcich sa verzie alpha 2 release), ktoré vás, ako používateľa Express aplikácie, môžu ovplyvniť.
-Pozrite sa na zoznam [pull request-ov](https://github.com/strongloop/express/pull/2237) všetkých plánovaných zmien.
+Pozrite sa na zoznam [pull request-ov](https://github.com/expressjs/express/pull/2237) všetkých plánovaných zmien.
 
 **Odstránené metódy a properties**
 

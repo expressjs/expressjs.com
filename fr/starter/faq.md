@@ -17,9 +17,9 @@ Les routes et la logique propre à l'application peuvent être opérationnelles 
 que vous le souhaitez, et dans les structures de répertoire que vous préférez. Pour plus d'inspiration,
 consultez les exemples suivants :
 
-* [Listes de routes](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Feuille de route](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [Contrôleurs de style MVC](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Listes de routes](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Feuille de route](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [Contrôleurs de style MVC](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Il existe aussi des extensions tiers pour Express, permettant de simplifier certains de ces modèles :
 
@@ -37,7 +37,7 @@ Voir [LoopBack](http://loopback.io) pour obtenir une infrastructure basée sur E
 
 L'authentification est une autre partie complexe dans laquelle Express
 ne s'aventure pas. Vous pouvez utiliser tous les schémas d'authentification que vous voulez.
-Pour un schéma simple de type nom d'utilisateur/mot de passe, voir [cet exemple](https://github.com/strongloop/express/tree/master/examples/auth).
+Pour un schéma simple de type nom d'utilisateur/mot de passe, voir [cet exemple](https://github.com/expressjs/express/tree/master/examples/auth).
 
 
 ## Quels moteurs de modèles Express prend-il en charge ?

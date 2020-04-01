@@ -25,7 +25,7 @@ Sie können Ihre automatisierten Tests ausführen, um zu sehen, was fehlschlägt
 
 <h2 id="changes">Änderungen in Express 5</h2>
 
-Nachfolgend finden Sie eine Liste mit Änderungen (Stand: Alpha-2-Release), die sich auf Sie als Express-Benutzer auswirken werden. Siehe hierzu auch die [Pull-Anforderung](https://github.com/strongloop/express/pull/2237) mit einer Liste aller geplanten Features und Funktionen.
+Nachfolgend finden Sie eine Liste mit Änderungen (Stand: Alpha-2-Release), die sich auf Sie als Express-Benutzer auswirken werden. Siehe hierzu auch die [Pull-Anforderung](https://github.com/expressjs/express/pull/2237) mit einer Liste aller geplanten Features und Funktionen.
 
 **Entfernte Methoden und Eigenschaften**
 

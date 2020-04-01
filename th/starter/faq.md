@@ -15,9 +15,9 @@ lang: th
 เส้นทางและตรรกะเฉพาะแอปพลิเคชัน (application-specific) อื่นๆ สามารถทำงานในหลากหลายไฟล์ที่คุณต้องการ
 ในหลายๆ ไดเรกเทอรีที่คุณต้องการ สามารถดูตัวอย่างด้านล่างนี้เพื่อเป็นแนวทาง:
 
-* [Route listings](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Route map](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Route listings](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [Route map](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 ยังมีแหล่งตัวอย่างอื่นๆ สำหรับ Express ซึ่งทำให้ง่ายโดยใช้รูปแบบ:
 

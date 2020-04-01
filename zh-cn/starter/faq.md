@@ -13,9 +13,9 @@ lang: zh-cn
 
 路由和其他特定于应用程序的逻辑可以存在于您首选的任何目录结构的任意数量的文件中。请查看以下示例以获取灵感：
 
-* [路由列表](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [路由图](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [MVC 样式控制器](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [路由列表](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+* [路由图](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [MVC 样式控制器](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 另外还有针对 Express 的第三方扩展，这有助于简化某些模式：
 
@@ -30,7 +30,7 @@ Express 没有数据库概念。此概念留给第三方 Node 模块实现，因
 ## 如何对用户进行认证？
 
 认证是 Express 没有涉足的另一严格领域。您可使用所希望的任何认证方案。
-要了解简单的“用户名/密码”方案，请参阅[此示例](https://github.com/strongloop/express/tree/master/examples/auth)。
+要了解简单的“用户名/密码”方案，请参阅[此示例](https://github.com/expressjs/express/tree/master/examples/auth)。
 
 
 ## Express 支持哪些模板引擎？

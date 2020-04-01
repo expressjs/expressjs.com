@@ -23,7 +23,7 @@ You can then run your automated tests to see what fails, and fix problems accord
 <h2 id="changes">Changes in Express 5</h2>
 
 Here is the list of changes (as of the alpha 2 release ) that will affect you as a user of Express.
-See the [pull request](https://github.com/strongloop/express/pull/2237) for a list of all the planned features.
+See the [pull request](https://github.com/expressjs/express/pull/2237) for a list of all the planned features.
 
 **Removed methods and properties**
 
