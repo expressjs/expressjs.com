@@ -175,7 +175,8 @@ var storage = multer.diskStorage({
     cb(null, '/tmp/my-uploads')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix)
   }
 })
 
@@ -207,6 +208,10 @@ the file (`file`) to aid with the decision.
 Note that `req.body` might not have been fully populated yet. It depends on the
 order that the client transmits fields and files to the server.
 
+For understanding the calling convention used in the callback (needing to pass
+null as the first param), refer to
+[Node.js error handling](https://www.joyent.com/node-js/production/design/errors)
+
 #### `MemoryStorage`
 
 The memory storage engine stores the files in memory as `Buffer` objects. It
@@ -233,7 +238,7 @@ The following integer values are available:
 Key | Description | Default
 --- | --- | ---
 `fieldNameSize` | Max field name size | 100 bytes
-`fieldSize` | Max field value size | 1MB
+`fieldSize` | Max field value size (in bytes) | 1MB
 `fields` | Max number of non-file fields | Infinity
 `fileSize` | For multipart forms, the max file size (in bytes) | Infinity
 `files` | For multipart forms, the max number of file fields | Infinity

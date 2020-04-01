@@ -111,8 +111,9 @@ Standard Apache common log output.
 ##### dev
 
 Concise output colored by response status for development use. The `:status`
-token will be colored red for server error codes, yellow for client error
-codes, cyan for redirection codes, and uncolored for all other codes.
+token will be colored green for success codes, red for server error codes,
+yellow for client error codes, cyan for redirection codes, and uncolored
+for information codes.
 
 ```
 :method :url :status :response-time ms - :res[content-length]
@@ -210,6 +211,14 @@ The status code of the response.
 If the request/response cycle completes before a response was sent to the
 client (for example, the TCP socket closed prematurely by a client aborting
 the request), then the status will be empty (displayed as `"-"` in the log).
+
+##### :total-time[digits]
+
+The time between the request coming into `morgan` and when the response
+has finished being written out to the connection, in milliseconds.
+
+The `digits` argument is a number that specifies the number of digits to
+include on the number, defaulting to `3`, which provides microsecond precision.
 
 ##### :url
 
@@ -314,12 +323,12 @@ file per day in the `log/` directory using the
 var express = require('express')
 var morgan = require('morgan')
 var path = require('path')
-var rfs = require('rotating-file-stream')
+var rfs = require('rotating-file-stream') // version 2.x
 
 var app = express()
 
 // create a rotating write stream
-var accessLogStream = rfs('access.log', {
+var accessLogStream = rfs.createStream('access.log', {
   interval: '1d', // rotate daily
   path: path.join(__dirname, 'log')
 })

@@ -5,9 +5,10 @@
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
-Parse `Cookie` header and populate `req.cookies` with an object keyed by the cookie
-names. Optionally you may enable signed cookie support by passing a `secret` string,
-which assigns `req.secret` so it may be used by other middleware.
+Parse `Cookie` header and populate `req.cookies` with an object keyed by the
+cookie names. Optionally you may enable signed cookie support by passing a
+`secret` string, which assigns `req.secret` so it may be used by other
+middleware.
 
 ## Installation
 
@@ -27,29 +28,45 @@ app.use(cookieParser())
 
 ### cookieParser(secret, options)
 
-- `secret` a string or array used for signing cookies. This is optional and if not specified, will not parse signed cookies. If a string is provided, this is used as the secret. If an array is provided, an attempt will be made to unsign the cookie with each secret in order.
-- `options` an object that is passed to `cookie.parse` as the second option. See [cookie](https://www.npmjs.org/package/cookie) for more information.
+- `secret` a string or array used for signing cookies. This is optional and if
+  not specified, will not parse signed cookies. If a string is provided, this
+  is used as the secret. If an array is provided, an attempt will be made to
+  unsign the cookie with each secret in order.
+- `options` an object that is passed to `cookie.parse` as the second option. Se
+  [cookie](https://www.npmjs.org/package/cookie) for more information.
   - `decode` a function to decode the value of the cookie
 
 ### cookieParser.JSONCookie(str)
 
-Parse a cookie value as a JSON cookie. This will return the parsed JSON value if it was a JSON cookie, otherwise, it will return the passed value.
+Parse a cookie value as a JSON cookie. This will return the parsed JSON value
+if it was a JSON cookie, otherwise, it will return the passed value.
 
 ### cookieParser.JSONCookies(cookies)
 
-Given an object, this will iterate over the keys and call `JSONCookie` on each value, replacing the original value with the parsed value. This returns the same object that was passed in.
+Given an object, this will iterate over the keys and call `JSONCookie` on each
+value, replacing the original value with the parsed value. This returns the
+same object that was passed in.
 
 ### cookieParser.signedCookie(str, secret)
 
-Parse a cookie value as a signed cookie. This will return the parsed unsigned value if it was a signed cookie and the signature was valid. If the value was not signed, the original value is returned. If the value was signed but the signature could not be validated, `false` is returned.
+Parse a cookie value as a signed cookie. This will return the parsed unsigned
+value if it was a signed cookie and the signature was valid. If the value was
+not signed, the original value is returned. If the value was signed but the
+signature could not be validated, `false` is returned.
 
-The `secret` argument can be an array or string. If a string is provided, this is used as the secret. If an array is provided, an attempt will be made to unsign the cookie with each secret in order.
+The `secret` argument can be an array or string. If a string is provided, this
+is used as the secret. If an array is provided, an attempt will be made to
+unsign the cookie with each secret in order.
 
 ### cookieParser.signedCookies(cookies, secret)
 
-Given an object, this will iterate over the keys and check if any value is a signed cookie. If it is a signed cookie and the signature is valid, the key will be deleted from the object and added to the new object that is returned.
+Given an object, this will iterate over the keys and check if any value is a
+signed cookie. If it is a signed cookie and the signature is valid, the key
+will be deleted from the object and added to the new object that is returned.
 
-The `secret` argument can be an array or string. If a string is provided, this is used as the secret. If an array is provided, an attempt will be made to unsign the cookie with each secret in order.
+The `secret` argument can be an array or string. If a string is provided, this
+is used as the secret. If an array is provided, an attempt will be made to
+unsign the cookie with each secret in order.
 
 ## Example
 
