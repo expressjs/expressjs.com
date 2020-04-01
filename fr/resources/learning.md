@@ -1,21 +1,17 @@
 ---
 layout: page
-title: Knihy a blogy o Express
+title: Apprentissage supplémentaire
 menu: resources
-lang: sk
+lang: fr
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
-# Knihy a blogy
+# Apprentissage supplémentaire
 
-<div class="doc-box doc-warn">Upozornenie: Príspevky komunity nepodliehajúce schvalovaniu.</div>
+<div class="doc-box doc-warn">Disclaimer: Unendorsed community content.</div>
 
-## Knihy
+## Books
 
-Tu je zopár z mnohých kníh o Express:
+Here are a few of the many books on Express:
 
  - **[Getting MEAN with Mongo, Express, Angular, and Node](http://www.manning.com/sholmes/)**,
 Manning Publications, early 2015.
@@ -35,17 +31,16 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 texxtoor, September 2015. In deutscher Sprache / in German language
 - **[Node Web Development, 2nd edition](https://www.packtpub.com/web-development/node-web-development-second-edition)**, Packt Publishing, August 2013
 
-### Pridajte vašu knihu!
+### Add your book here!
 
-[Upravte Markdown súbor](https://github.com/strongloop/expressjs.com/blob/gh-pages/resources/books-blogs.md) a pridajte odkaz na knihu, zašlite pull request (potrebné prihlásenie pomocou GitHub konta). Dodržiavajte formát zavedený v horeuvedenom zozname.
+[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/learning.md) and add a link to your book, then submit a pull request (GitHub login required).  Follow the format of the above listings.
 
-## Blogy
+## Blogs
 
 - [StrongLoop Blog: Express category](http://strongloop.com/strongblog/category/express/)
 - [Hage Yaapa's Blog: Express category](http://www.hacksparrow.com/category/express-js)
 - [Codeforgeek Blog: Express category](http://codeforgeek.com/code/nodejs/express/)
-- [Baboon Blog: Express category](http://www.baboon.ir/tutorials/expressjs/) (Persian language)
 
-### Pridajte váš blog!
+### Add your blog here!
 
-[Upravte Markdown súbor](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) a pridajte odkaz na váš blog, zašlite pull request (potrebné prihlásenie pomocou GitHub konta). Dodržiavajte formát zavedený v horeuvedenom zozname.
+[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/learning.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.

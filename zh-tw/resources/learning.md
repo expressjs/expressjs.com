@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Express books and blogs
+title: 額外學習
 menu: resources
-lang: it
+lang: zh-tw
 ---
 
-# Books and blogs
+# 額外學習
 
 <div class="doc-box doc-warn">Disclaimer: Unendorsed community content.</div>
 
@@ -33,15 +33,14 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 
 ### Add your book here!
 
-[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) and add a link to your book, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/learning.md) and add a link to your book, then submit a pull request (GitHub login required).  Follow the format of the above listings.
 
 ## Blogs
 
 - [StrongLoop Blog: Express category](http://strongloop.com/strongblog/category/express/)
 - [Hage Yaapa's Blog: Express category](http://www.hacksparrow.com/category/express-js)
 - [Codeforgeek Blog: Express category](http://codeforgeek.com/code/nodejs/express/)
-- [Node-tricks Blog: Express category](http://node-tricks.com/category/express/)
 
 ### Add your blog here!
 
-[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/learning.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.

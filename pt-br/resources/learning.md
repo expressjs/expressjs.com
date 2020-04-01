@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Livros e Blogs sobre Express
+title: Aprendizagem adicional
 menu: Recursos
 lang: pt-br
 ---
 
-# Livros e Blogs
+# Aprendizagem adicional
 
 <div class="doc-box doc-warn">Atenção: Este conteúdo não é de responsabilidade da comunidade.</div>
 
@@ -25,7 +25,7 @@ Aqui estão alguns dos vários livros sobre Express:
 
 ### Adicione seu livro aqui!
 
-[Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) e adicione um link para o seu livro, então envie um pull request (necessário login no GitHub).  Siga o formato da listagem acima.
+[Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/learning.md) e adicione um link para o seu livro, então envie um pull request (necessário login no GitHub).  Siga o formato da listagem acima.
 
 ## Blogs
 
@@ -35,4 +35,4 @@ Aqui estão alguns dos vários livros sobre Express:
 
 ### Adicione seu blog aqui!
 
-[Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) e adicione um link para o seu blog, então envie um pull request (necessário login no GitHub). Siga o formato da listagem acima.
+[Edite o arquivo Markdown](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/learning.md) e adicione um link para o seu blog, então envie um pull request (necessário login no GitHub). Siga o formato da listagem acima.

@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Express books and blogs
+title: 追加学習
 menu: resources
-lang: tr
+lang: ja
 ---
-<div id="page-doc" markdown="1">
-# Books and blogs
+
+# 追加学習
 
 <div class="doc-box doc-warn">Disclaimer: Unendorsed community content.</div>
 
@@ -13,14 +13,10 @@ lang: tr
 
 Here are a few of the many books on Express:
 
-- **[Express.js in Action](http://www.manning.com/hahn/)**,
-Manning Publications, April 2016.
  - **[Getting MEAN with Mongo, Express, Angular, and Node](http://www.manning.com/sholmes/)**,
 Manning Publications, early 2015.
- - **[Getting MEAN with Mongo, Express, Angular, and Node, Second Edition](http://www.manning.com/sholmes2/)**,
-Manning Publications, April 2017.
- - **[Pro Express.js: Master Express.js: The Node.js Framework For Your Web Development](http://www.apress.com/9781484200384)**,
-Apress, December 2014.
+ - **[Express.js in Action](http://www.manning.com/hahn/)**,
+Manning Publications, early 2015.
  - **[Mastering Web Application Development with Express](https://www.packtpub.com/web-development/mastering-web-application-development-express-raw)**,
 Packt Publishing, September 2014.
  - **[Web Development with Node and Express](http://shop.oreilly.com/product/0636920032977.do)**,
@@ -37,7 +33,7 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 
 ### Add your book here!
 
-[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) and add a link to your book, then submit a pull request (GitHub login required).  Follow the format of the above listings.
+[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/learning.md) and add a link to your book, then submit a pull request (GitHub login required).  Follow the format of the above listings.
 
 ## Blogs
 
@@ -45,11 +41,7 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 - [Hage Yaapa's Blog: Express category](http://www.hacksparrow.com/category/express-js)
 - [Codeforgeek Blog: Express category](http://codeforgeek.com/code/nodejs/express/)
 - [Node-tricks Blog: Express category](http://node-tricks.com/category/express/)
-- [Baboon Blog: Express category](http://www.baboon.ir/tutorials/expressjs/) (Persian language)
-- [Techforgeek Blog: Express category](http://techforgeek.com/expressjs/)
-- [RoseHosting.com Blog: Express tag](https://www.rosehosting.com/blog/tag/express/)
 
 ### Add your blog here!
 
-[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/books-blogs.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.
-</div>
+[Edit the Markdown file](https://github.com/strongloop/expressjs.com/blob/gh-pages/{{ page.lang }}/resources/learning.md) and add a link to your blog, then submit a pull request (GitHub login required).  Follow the format of the above listings.
