@@ -75,7 +75,6 @@ segurança:
 
 * A [csp](https://github.com/helmetjs/csp) configura o cabeçalho `Content-Security-Policy` para ajudar a evitar ataques de cross-site scripting e outras injeções cross-site.
 * A [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) remove o cabeçalho `X-Powered-By`.
-* A [hpkp](https://github.com/helmetjs/hpkp) inclui os cabeçalhos [Public Key Pinning](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning) para evitar ataques man-in-the-middle com certificados falsificados.
 * A [hsts](https://github.com/helmetjs/hsts) configura o cabeçalho `Strict-Transport-Security`
 que impinge conexões seguras (HTTP sobre SSL/TLS) com o servidor.
 * A [ieNoOpen](https://github.com/helmetjs/ienoopen) configura o `X-Download-Options` para o IE8+.

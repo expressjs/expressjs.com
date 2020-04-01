@@ -37,7 +37,6 @@ Helmet 實際上只由 9 個小型中介軟體函數組成，這些函數會設�
 
 * [csp](https://github.com/helmetjs/csp) 會設定 `Content-Security-Policy` 標頭，以防範跨網站 Scripting 攻擊和其他跨網站注入。
 * [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) 會移除 `X-Powered-By` 標頭。
-* [hpkp](https://github.com/helmetjs/hpkp) 會新增 [Public Key Pinning](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning) 標頭，來防範使用偽造憑證的中間人攻擊。
 * [hsts](https://github.com/helmetjs/hsts) 會設定 `Strict-Transport-Security` 標頭，以施行安全的 (HTTP over SSL/TLS) 伺服器連線。
 * [ieNoOpen](https://github.com/helmetjs/ienoopen) 會設定 `X-Download-Options`（適用於 IE8+）。
 * [noCache](https://github.com/helmetjs/nocache) 會設定 `Cache-Control` 和 Pragma 標頭，以停用用戶端快取。

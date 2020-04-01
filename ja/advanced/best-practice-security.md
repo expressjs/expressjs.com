@@ -47,7 +47,6 @@ Helmet は、実際には、セキュリティー関連の HTTP ヘッダーを�
 
 * [csp](https://github.com/helmetjs/csp) は、クロスサイト・スクリプティング攻撃やその他のクロスサイト・インジェクションを防止するために `Content-Security-Policy` ヘッダーを設定します。
 * [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) は、`X-Powered-By` ヘッダーを削除します。
-* [hpkp](https://github.com/helmetjs/hpkp) は、偽の証明書による中間者攻撃を防止するために [Public Key Pinning](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning) ヘッダーを追加します。
 * [hsts](https://github.com/helmetjs/hsts) は、サーバーへのセキュア (SSL/TLS を介して HTTP) 接続を適用する `Strict-Transport-Security` ヘッダーを設定します。
 * [ieNoOpen](https://github.com/helmetjs/ienoopen) は、IE8+ の `X-Download-Options` を設定します。
 * [noCache](https://github.com/helmetjs/nocache) は、クライアント側のキャッシュを無効にするために `Cache-Control` ヘッダーと Pragma ヘッダーを設定します。

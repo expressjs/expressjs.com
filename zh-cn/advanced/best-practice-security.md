@@ -37,7 +37,6 @@ Helmet 实际上只使用以下九个较小中间件函数的集合，这些功�
 
 * [csp](https://github.com/helmetjs/csp) 用于设置 `Content-Security-Policy` 头，帮助抵御跨站点脚本编制攻击和其他跨站点注入攻击。
 * [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) 用于移除 `X-Powered-By` 头。
-* [hpkp](https://github.com/helmetjs/hpkp) 用于添加[公用密钥固定](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning)头，防止以伪造证书进行的中间人攻击。
 * [hsts](https://github.com/helmetjs/hsts) 用于设置 `Strict-Transport-Security` 头，实施安全的服务器连接 (HTTP over SSL/TLS)。
 * [ieNoOpen](https://github.com/helmetjs/ienoopen) 用于为 IE8+ 设置 `X-Download-Options`。
 * [noCache](https://github.com/helmetjs/nocache) 用于设置 `Cache-Control` 和 Pragma 头，以禁用客户端高速缓存。

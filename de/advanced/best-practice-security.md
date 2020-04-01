@@ -37,7 +37,6 @@ Ein handliches Tool zum Abrufen eines kostenloses TLS-Zertifikats ist außerdem 
 
 * Über [csp](https://github.com/helmetjs/csp) wird der `Content-Security-Policy`-Header festgelegt, um Cross-Site Scripting-Attacken und anderen standortübergreifenden Injektionen vorzubeugen.
 * Über [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) wird der `X-Powered-By`-Header entfernt.
-* Über [hpkp](https://github.com/helmetjs/hpkp) werden [Public Key Pinning](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning)-Header hinzugefügt, um Man-in-the-Middle-Attacken mit gefälschten Zertifikaten vorzubeugen.
 * Über [hsts](https://github.com/helmetjs/hsts) werden `Strict-Transport-Security`-Header festgelegt, über die sichere (HTTP over SSL/TLS) Verbindungen zum Server durchgesetzt werden.
 * Über [ieNoOpen](https://github.com/helmetjs/ienoopen) werden `X-Download-Options`-Header für IE8+ festgelegt.
 * Über [noCache](https://github.com/helmetjs/nocache) werden `Cache-Control`- und Pragma-Header festgelegt, um clientseitiges Caching zu deaktivieren.

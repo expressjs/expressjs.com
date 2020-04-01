@@ -37,7 +37,6 @@ Helmet n'est actuellement qu'une collection de neuf fonctions middleware plus pe
 
 * [csp](https://github.com/helmetjs/csp) définit l'en-tête `Content-Security-Policy` pour la protection contre les attaques de type cross-site scripting et autres injections intersites.
 * [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) supprime l'en-tête `X-Powered-By`.
-* [hpkp](https://github.com/helmetjs/hpkp) ajoute des en-têtes [Public Key Pinning](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning) (épinglage de clé publique) pour la protection contre les attaques d’intercepteur avec de faux certificats.
 * [hsts](https://github.com/helmetjs/hsts) définit l'en-tête `Strict-Transport-Security` qui imposer des connexions (HTTP sur SSL/TLS) sécurisées au serveur.
 * [ieNoOpen](https://github.com/helmetjs/ienoopen) définit `X-Download-Options` pour IE8+.
 * [noCache](https://github.com/helmetjs/nocache) définit des en-têtes `Cache-Control` et Pragma pour désactiver la mise en cache côté client.

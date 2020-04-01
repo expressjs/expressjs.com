@@ -44,7 +44,6 @@ Helmet je v skutočnosti len kolekcia deviatich menších middleware funkcií na
 
 * [csp](https://github.com/helmetjs/csp) nastavuje `Content-Security-Policy` hlavičku, čím pomáha predchádzať cross-site scripting útokom a ďalším cross-site zraniteľnostiam.
 * [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) odstraňuje `X-Powered-By` hlavičku.
-* [hpkp](https://github.com/helmetjs/hpkp) nastavuje [Public Key Pinning](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning) hlavičky, čím predchádza útokom typu man-in-the-middle so sfalšovanými certifikátmi.
 * [hsts](https://github.com/helmetjs/hsts) nastavuje `Strict-Transport-Security` hlavičku čím si vynúti zabezpečené (HTTP over SSL/TLS) spojenie so serverom.
 * [ieNoOpen](https://github.com/helmetjs/ienoopen) nastavuje hlavičku `X-Download-Options` pre IE8+.
 * [noCache](https://github.com/helmetjs/nocache) nastavuje hlavičky `Cache-Control` a Pragma pre zakázanie client-side caching-u.
