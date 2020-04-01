@@ -72,6 +72,6 @@ http://localhost:3000/static/hello.html
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
 
-`serve-static` hakkında daha fazla bilgi almak için, [serve-static](/{{page.lang}}/resources/middleware/serve-static.html) sayfasına göz atın.
+`serve-static` hakkında daha fazla bilgi almak için, [serve-static](/resources/middleware/serve-static.html) sayfasına göz atın.
 
 ### [Önceki: Basit Yol Atama ](/{{ page.lang }}/starter/basic-routing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Sonraki: Sıkça Sorulan Sorular ](/{{ page.lang }}/starter/faq.html)

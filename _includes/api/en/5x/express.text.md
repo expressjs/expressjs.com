@@ -2,7 +2,7 @@
 
 This is a built-in middleware function in Express. It parses incoming request
 payloads into a string and is based on
-[body-parser](/{{ page.lang }}/resources/middleware/body-parser.html).
+[body-parser](/resources/middleware/body-parser.html).
 
 Returns middleware that parses all bodies as a string and only looks at requests
 where the `Content-Type` header matches the `type` option. This parser accepts

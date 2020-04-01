@@ -2,7 +2,7 @@
 
 This is a built-in middleware function in Express. It parses incoming requests
 with JSON payloads and is based on
-[body-parser](/{{ page.lang }}/resources/middleware/body-parser.html).
+[body-parser](/resources/middleware/body-parser.html).
 
 Returns middleware that only parses JSON and only looks at requests where
 the `Content-Type` header matches the `type` option. This parser accepts any

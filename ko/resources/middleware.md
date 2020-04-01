@@ -13,24 +13,24 @@ module: mw-home
 
 | 미들웨어 모듈 | 설명 | 내장 함수 (Express 3)|
 |---------------------------|---------------------|----------------------|
-| [body-parser](/{{page.lang}}/resources/middleware/body-parser.html) | HTTP 요청 body를 파싱합니다. [body](https://github.com/raynos/body), [co-body](https://github.com/visionmedia/co-body), 그리고 [raw-body](https://github.com/stream-utils/raw-body)도 참고하세요. | express.bodyParser |
-| [compression](/{{page.lang}}/resources/middleware/compression.html) | HTTP 요청들을 압축합니다. | express.compress |
-| [connect-rid](/{{page.lang}}/resources/middleware/connect-rid.html) | 고유한 요청 ID를 생성합니다. | 없음 |
-| [cookie-parser](/{{page.lang}}/resources/middleware/cookie-parser.html) | 쿠키 헤더를 파싱하고 `req.cookies`에 할당합니다. [cookies](https://github.com/jed/cookies)와 [keygrip](https://github.com/jed/keygrip)도 참고하세요. | express.cookieParser|
-| [cookie-session](/{{page.lang}}/resources/middleware/cookie-session.html) | 쿠키 기반의 세션을 만듭니다.| express.cookieSession |
-| [cors](/{{page.lang}}/resources/middleware/cors.html) | 다양한 옵션들을 이용하여 Cross-origin resource sharing (CORS)를 활성화합니다. | 없음 |
-| [csurf](/{{page.lang}}/resources/middleware/csurf.html) | CSRF 취약점을 방어합니다.|express.csrf |
-| [errorhandler](/{{page.lang}}/resources/middleware/errorhandler.html) | 개발 중에 발생하는 에러를 핸들링하고 디버깅합니다. |express.errorHandler |
-| [method-override](/{{page.lang}}/resources/middleware/method-override.html) |헤더를 이용해 HTTP method를 덮어씁니다. |express.methodOverride |
-| [morgan](/{{page.lang}}/resources/middleware/morgan.html) | HTTP 요청 로그를 남깁니다. | express.logger |
-| [multer](/{{page.lang}}/resources/middleware/multer.html) | multi-part 폼 데이터를 처리합니다. | express.bodyParser |
-| [response-time](/{{page.lang}}/resources/middleware/response-time.html) | 응답 시간을 기록합니다. |express.responseTime |
-| [serve-favicon](/{{page.lang}}/resources/middleware/serve-favicon.html) | 파비콘을 제공합니다. |express.favicon |
-| [serve-index](/{{page.lang}}/resources/middleware/serve-index.html) | 주어진 경로의 디렉토리 리스트를 제공합니다.| express.directory |
-| [serve-static](/{{page.lang}}/resources/middleware/serve-static.html) | 정적 파일을 제공합니다. |express.static |
-| [session](/{{page.lang}}/resources/middleware/session.html) | 서버 기반의 세션을 만듭니다 (개발 전용). | express.session |
-| [timeout](/{{page.lang}}/resources/middleware/timeout.html) | HTTP 요청 처리를 위해 timeout을 만듭니다..|express.timeout |
-| [vhost](/{{page.lang}}/resources/middleware/vhost.html) |가상 도메인을 만듭니다.|express.vhost|
+| [body-parser](/resources/middleware/body-parser.html) | HTTP 요청 body를 파싱합니다. [body](https://github.com/raynos/body), [co-body](https://github.com/visionmedia/co-body), 그리고 [raw-body](https://github.com/stream-utils/raw-body)도 참고하세요. | express.bodyParser |
+| [compression](/resources/middleware/compression.html) | HTTP 요청들을 압축합니다. | express.compress |
+| [connect-rid](/resources/middleware/connect-rid.html) | 고유한 요청 ID를 생성합니다. | 없음 |
+| [cookie-parser](/resources/middleware/cookie-parser.html) | 쿠키 헤더를 파싱하고 `req.cookies`에 할당합니다. [cookies](https://github.com/jed/cookies)와 [keygrip](https://github.com/jed/keygrip)도 참고하세요. | express.cookieParser|
+| [cookie-session](/resources/middleware/cookie-session.html) | 쿠키 기반의 세션을 만듭니다.| express.cookieSession |
+| [cors](/resources/middleware/cors.html) | 다양한 옵션들을 이용하여 Cross-origin resource sharing (CORS)를 활성화합니다. | 없음 |
+| [csurf](/resources/middleware/csurf.html) | CSRF 취약점을 방어합니다.|express.csrf |
+| [errorhandler](/resources/middleware/errorhandler.html) | 개발 중에 발생하는 에러를 핸들링하고 디버깅합니다. |express.errorHandler |
+| [method-override](/resources/middleware/method-override.html) |헤더를 이용해 HTTP method를 덮어씁니다. |express.methodOverride |
+| [morgan](/resources/middleware/morgan.html) | HTTP 요청 로그를 남깁니다. | express.logger |
+| [multer](/resources/middleware/multer.html) | multi-part 폼 데이터를 처리합니다. | express.bodyParser |
+| [response-time](/resources/middleware/response-time.html) | 응답 시간을 기록합니다. |express.responseTime |
+| [serve-favicon](/resources/middleware/serve-favicon.html) | 파비콘을 제공합니다. |express.favicon |
+| [serve-index](/resources/middleware/serve-index.html) | 주어진 경로의 디렉토리 리스트를 제공합니다.| express.directory |
+| [serve-static](/resources/middleware/serve-static.html) | 정적 파일을 제공합니다. |express.static |
+| [session](/resources/middleware/session.html) | 서버 기반의 세션을 만듭니다 (개발 전용). | express.session |
+| [timeout](/resources/middleware/timeout.html) | HTTP 요청 처리를 위해 timeout을 만듭니다..|express.timeout |
+| [vhost](/resources/middleware/vhost.html) |가상 도메인을 만듭니다.|express.vhost|
 
 ## 추가 미들웨어 모듈
 

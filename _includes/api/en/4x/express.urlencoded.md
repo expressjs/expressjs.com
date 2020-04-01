@@ -5,7 +5,7 @@ This middleware is available in Express v4.16.0 onwards.
 </div>
 
 This is a built-in middleware function in Express. It parses incoming requests
-with urlencoded payloads and is based on [body-parser](/{{ page.lang }}/resources/middleware/body-parser.html).
+with urlencoded payloads and is based on [body-parser](/resources/middleware/body-parser.html).
 
 Returns middleware that only parses urlencoded bodies and only looks at
 requests where the `Content-Type` header matches the `type` option. This

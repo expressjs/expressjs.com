@@ -72,4 +72,4 @@ http://localhost:3000/static/hello.html
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
 
-สำหรับข้อมูลเพิ่มเติมเกี่ยวกับฟังก์ชัน `serve-static` และตัวเลือก ดูได้ที่ [serve-static](/{{page.lang}}/resources/middleware/serve-static.html)
+สำหรับข้อมูลเพิ่มเติมเกี่ยวกับฟังก์ชัน `serve-static` และตัวเลือก ดูได้ที่ [serve-static](/resources/middleware/serve-static.html)
