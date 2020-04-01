@@ -1,18 +1,13 @@
 <h3 id='req.fresh'>req.fresh</h3>
 
-Indicates whether the request is "fresh."  It is the opposite of `req.stale`.
+When the response is still "fresh" in the client's cache `true` is returned, otherwise `false` is returned to indicate that the client cache is now stale and the full response should be sent.
 
-It is true if the `cache-control` request header doesn't have a `no-cache` directive and any
-of the following are true:
+When a client sends the `Cache-Control: no-cache` request header to indicate an end-to-end reload request, this module will return `false` to make handling these requests transparent.
 
-* The `if-modified-since` request header is specified  and `last-modified` request header is equal to or earlier than the `modified` response header.
-* The `if-none-match` request header is `*`.
-* The `if-none-match` request header, after being parsed into its directives, does not
-match the `etag` response header.
+Further details for how cache validation works can be found in the
+[HTTP/1.1 Caching Specification](https://tools.ietf.org/html/rfc7234).
 
 ```js
 console.dir(req.fresh)
 // => true
 ```
-
-For more information, issues, or concerns, see [fresh](https://github.com/jshttp/fresh).
