@@ -41,12 +41,14 @@ The following figure shows the elements of a middleware function call:
 </td></tr>
 </table>
 
+Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
+
 <h2>Example</h2>
 
 Here is an example of a simple "Hello World" Express application.
-The remainder of this article will define and add two middleware functions to the application:
-one called `myLogger` that prints a simple log message and another called `requestTime` that
-displays the timestamp of the HTTP request.
+The remainder of this article will define and add three middleware functions to the application:
+one called `myLogger` that prints a simple log message, one called `requestTime` that
+displays the timestamp of the HTTP request, and one called `validateCookies` that validates incoming cookies.
 
 ```js
 var express = require('express')
@@ -139,6 +141,53 @@ app.listen(3000)
 ```
 
 When you make a request to the root of the app, the app now displays the timestamp of your request in the browser.
+
+<h3>Middleware function validateCookies</h3>
+
+Finally, we'll create a middleware function that validates incoming cookies and sends a 400 response if cookies are invalid.
+
+Here's an example function that validates cookies with an external async service.
+
+```js
+async function cookieValidator (cookies) {
+  try {
+    await externallyValidateCookie(cookies.testCookie)
+  } catch {
+    throw new Error('Invalid cookies')
+  }
+}
+```
+
+Here we use the [`cookie-parser`](/resources/middleware/cookie-parser.html) middleware to parse incoming cookies off the `req` object and pass them to our `cookieValidator` function.  The `validateCookies` middleware returns a Promise that upon rejection will automatically trigger our error handler.
+
+```js
+var express = require('express')
+var cookieParser = require('cookie-parser')
+var cookieValidator = require('./cookieValidator')
+
+var app = express()
+
+async function validateCookies (req, res, next) {
+  await cookieValidator(req.cookies)
+  next()
+}
+
+app.use(cookieParser)
+
+app.use(validateCookies)
+
+// error handler
+app.use(function (err, req, res, next) {
+  res.status(400).send(err.message)
+})
+
+app.listen(3000)
+
+```
+
+<div class="doc-box doc-notice" markdown="1">
+Note how `next()` is called after `await cookieValidator(req.cookies)`.  This ensures that if `cookieValidator` resolves, the next middleware in the stack will get called.  If you pass anything to the `next()` function (except the string `'route'` or `'router'`), Express regards the current request as being an error and will skip any remaining non-error handling routing and middleware functions.
+</div>
 
 Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
 

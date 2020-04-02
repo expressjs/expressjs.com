@@ -42,9 +42,27 @@ app.get('/', function (req, res, next) {
 })
 ```
 
-If you pass anything to the `next()` function (except the string `'route'`), Express regards the current request as being an error and will skip any remaining non-error handling routing and middleware functions.
+Starting with Express 5, route handlers and middleware that return a Promise
+will call `next(value)` automatically when they reject or throw an error.
+For example:
 
-If the callback in a sequence provides no data, only errors, you can simplify this code as follows:
+```js
+app.get('/user/:id', async function (req, res, next) {
+  var user = await getUserById(req.params.id)
+  res.send(user)
+})
+```
+
+If `getUserById` throws an error or rejects, `next` will be called with either
+the thrown error or the rejected value. If no rejected value is provided, `next`
+will be called with a default Error object provided by the Express router.
+
+If you pass anything to the `next()` function (except the string `'route'`),
+Express regards the current request as being an error and will skip any
+remaining non-error handling routing and middleware functions.
+
+If the callback in a sequence provides no data, only errors, you can simplify
+this code as follows:
 
 ```js
 app.get('/', [
