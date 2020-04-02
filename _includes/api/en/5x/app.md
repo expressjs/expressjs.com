@@ -38,6 +38,10 @@ The Express application object can be referred from the [request object](#req) a
   {% include api/en/5x/app-mountpath.md %}
 </section>
 
+<section markdown="1">
+  {% include api/en/5x/app-router.md %}
+</section>
+
 <h3 id='app.events'>Events</h3>
 
 <section markdown="1">

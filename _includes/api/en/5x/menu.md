@@ -18,6 +18,8 @@
             </li>
             <li><a href="#app.mountpath">app.mountpath</a>
             </li>
+            <li><a href="#app.router">app.router</a>
+            </li>
             <li><em>Events</em>
             </li>
             <li><a href="#app.onmount">mount</a>
