@@ -80,6 +80,8 @@
             </li>
             <li><a href="#req.fresh">req.fresh</a>
             </li>
+            <li><a href="#req.host">req.host</a>
+            </li>
             <li><a href="#req.hostname">req.hostname</a>
             </li>
             <li><a href="#req.ip">req.ip</a>

@@ -57,6 +57,10 @@ or [pez](https://www.npmjs.com/package/pez).
 </section>
 
 <section markdown="1">
+  {% include api/en/5x/req-host.md %}
+</section>
+
+<section markdown="1">
   {% include api/en/5x/req-hostname.md %}
 </section>
 
