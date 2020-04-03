@@ -40,3 +40,27 @@ router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function (req, res) {
   res.send('commit range ' + from + '..' + to)
 })
 ```
+
+You can use `next` primitive to implement a flow control between different
+middleware functions, based on a specific program state. Invoking `next` with
+the string `'router'` will cause all the remaining route callbacks on that router
+to be bypassed.
+
+The following example illustrates `next('router')` usage.
+
+```js
+function fn (req, res, next) {
+  console.log('I come here')
+  next('router')
+}
+router.get('/foo', fn, function (req, res, next) {
+  console.log('I dont come here')
+})
+router.get('/foo', function (req, res, next) {
+  console.log('I dont come here')
+})
+app.get('/foo', function (req, res) {
+  console.log(' I come here too')
+  res.end('good')
+})
+```
