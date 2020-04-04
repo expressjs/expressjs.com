@@ -145,7 +145,7 @@ Examples of route paths based on regular expressions:
 This route path will match anything with an "a" in it.
 
 ```js
-app.get(/a/, function (req, res) {
+app.get('/a/', function (req, res) {
   res.send('/a/')
 })
 ```
@@ -153,8 +153,8 @@ app.get(/a/, function (req, res) {
 This route path will match `butterfly` and `dragonfly`, but not `butterflyman`, `dragonflyman`, and so on.
 
 ```js
-app.get(/.*fly$/, function (req, res) {
-  res.send('/.*fly$/')
+app.get('/*fly$/', function (req, res) {
+  res.send('/*fly$/')
 })
 ```
 
