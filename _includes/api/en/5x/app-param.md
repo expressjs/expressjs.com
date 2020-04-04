@@ -1,4 +1,4 @@
-<h3 id='app.param'>app.param([name], callback)</h3>
+<h3 id='app.param'>app.param(name, callback)</h3>
 
 Add callback triggers to [route parameters](/{{ page.lang }}/guide/routing.html#route-parameters), where `name` is the name of the parameter or an array of them, and `callback` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, the value of the parameter and the name of the parameter, in that order.
 
@@ -76,79 +76,3 @@ CALLED ONLY ONCE with 3
 although this matches
 and this matches too
 ```
-
-<div class="doc-box doc-warn" markdown="1">
-The following section describes `app.param(callback)`, which is deprecated as of v4.11.0.
-</div>
-
-The behavior of the `app.param(name, callback)` method can be altered entirely by passing only a function to `app.param()`. This function is a custom implementation of how `app.param(name, callback)` should behave - it accepts two parameters and must return a middleware.
-
-The first parameter of this function is the name of the URL parameter that should be captured, the second parameter can be any JavaScript object which might be used for returning the middleware implementation.
-
-The middleware returned by the function decides the behavior of what happens when a URL parameter is captured.
-
-In this example, the `app.param(name, callback)` signature is modified to `app.param(name, accessId)`. Instead of accepting a name and a callback, `app.param()` will now accept a name and a number.
-
-```js
-const express = require('express')
-const app = express()
-
-// customizing the behavior of app.param()
-app.param(function (param, option) {
-  return function (req, res, next, val) {
-    if (val === option) {
-      next()
-    } else {
-      next('route')
-    }
-  }
-})
-
-// using the customized app.param()
-app.param('id', 1337)
-
-// route to trigger the capture
-app.get('/user/:id', function (req, res) {
-  res.send('OK')
-})
-
-app.listen(3000, function () {
-  console.log('Ready')
-})
-```
-
-In this example, the `app.param(name, callback)` signature remains the same, but instead of a middleware callback, a custom data type checking function has been defined to validate the data type of the user id.
-
-```js
-app.param(function (param, validator) {
-  return function (req, res, next, val) {
-    if (validator(val)) {
-      next()
-    } else {
-      next('route')
-    }
-  }
-})
-
-app.param('id', function (candidate) {
-  return !isNaN(parseFloat(candidate)) && isFinite(candidate)
-})
-```
-
-<div class="doc-box doc-info" markdown="1">
-The '`.`' character can't be used to capture a character in your capturing regexp. For example you can't use `'/user-.+/'` to capture `'users-gami'`, use `[\\s\\S]` or `[\\w\\W]` instead (as in `'/user-[\\s\\S]+/'`.
-
-Examples:
-
-<pre><code class="language-js">
-//captures '1-a_6' but not '543-azser-sder'
-router.get('/[0-9]+-[[\\w]]*', function);
-
-//captures '1-a_6' and '543-az(ser"-sder' but not '5-a s'
-router.get('/[0-9]+-[[\\S]]*', function);
-
-//captures all (equivalent to '.*')
-router.get('[[\\s\\S]]*', function);
-</code></pre>
-
-</div>
