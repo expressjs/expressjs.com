@@ -22,36 +22,34 @@ The Express technical committee consists of active project members, and guides d
 
 ## Community contributing guide
 
-> NOTE: This is copied from the [Contributing Guide in the repo](https://github.com/expressjs/express/blob/master/Contributing.md).
+<!-- SRC: https://raw.githubusercontent.com/expressjs/express/master/Contributing.md -->
 
-The goal of this guide is to create a contribution process that:
+The goal of this document is to create a contribution process that:
 
 * Encourages new contributions.
 * Encourages contributors to remain involved.
 * Avoids unnecessary processes and bureaucracy whenever possible.
-* Creates a transparent decision making process which makes it clear how
+* Creates a transparent decision making process that makes it clear how
 contributors can be involved in decision making.
 
-This document is based on much prior art in the Node.js community, io.js,
-and the Node.js project.
-
-Vocabulary:
+### Vocabulary
 
 * A **Contributor** is any individual creating or commenting on an issue or pull request.
 * A **Committer** is a subset of contributors who have been given write access to the repository.
 * A **TC (Technical Committee)** is a group of committers representing the required technical
 expertise to resolve rare disputes.
+* A **Triager** is a subset of contributors who have been given triage access to the repository.
 
-### Logging issues
+### Logging Issues
 
-Log an issue for any question or problem you might have. When in doubt, log an issue,
+Log an issue for any question or problem you might have. When in doubt, log an issue, and
 any additional policies about what to include will be provided in the responses. The only
-exception is security dislosures which should be sent privately.
+exception is security disclosures which should be sent privately.
 
 Committers may direct you to another repository, ask for additional clarifications, and
 add appropriate metadata before the issue is addressed.
 
-Please be courteous, respectful, and every participant is expected to follow the
+Please be courteous and respectful. Every participant is expected to follow the
 project's Code of Conduct.
 
 ### Contributions
@@ -68,7 +66,7 @@ weekends and other holiday periods to ensure active committers all have reasonab
 become involved in the discussion and review process if they wish.
 
 The default for each contribution is that it is accepted once no committer has an objection.
-During review committers may also request that a specific contributor who is most versed in a
+During a review, committers may also request that a specific contributor who is most versed in a
 particular area gives a "LGTM" before the PR can be merged. There is no additional "sign off"
 process for contributions to land. Once all issues brought by committers are addressed it can
 be landed by any committer.
@@ -83,7 +81,36 @@ discuss pending contributions in order to find a resolution. It is expected that
 small minority of issues be brought to the TC for resolution and that discussion and
 compromise among committers be the default resolution mechanism.
 
-### Becoming a committer
+### Becoming a Triager
+
+Anyone can become a triager! Read more about the process of being a triager in
+[the triage process document](Triager-Guide.md).
+
+[Open an issue in `expressjs/express` repo](https://github.com/expressjs/express/issues/new)
+to request the triage role. State that you have read and agree to the
+[Code of Conduct](Code-Of-Conduct.md) and details of the role.
+
+Here is an example issue content you can copy and paste:
+
+```
+Title: Request triager role for <your GitHub username>
+
+I have read and understood the project's Code of Conduct.
+I also have read and understood the process and best practices around Express triaging.
+
+I request for a triager role for the following GitHub organizations:
+
+jshttp
+pillarjs
+express
+```
+
+Once you have opened your issue, a member of the TC will add you to the `triage` team in
+the organizations requested. They will then close the issue.
+
+Happy triaging!
+
+### Becoming a Committer
 
 All contributors who land a non-trivial contribution should be on-boarded in a timely manner,
 and added as a committer, and be given write access to the repository.
@@ -91,7 +118,7 @@ and added as a committer, and be given write access to the repository.
 Committers are expected to follow this policy and continue to send pull requests, go through
 proper review, and have other committers merge their pull requests.
 
-### TC process
+### TC Process
 
 The TC uses a "consensus seeking" process for issues that are escalated to the TC.
 The group tries to find a resolution that has no open objections among TC members.
@@ -111,34 +138,47 @@ a majority of the other members are expected to resign.
 
 ## Collaborator's guide
 
-> NOTE: This is copied from the [Collaborator guide in the Express  repository](https://github.com/expressjs/express/blob/master/Collaborator-Guide.md).
+<!-- SRC: https://raw.githubusercontent.com/expressjs/express/master/Collaborator-Guide.md -->
 
 ### Website Issues
 
-Open issues for the expressjs.com website in [https://github.com/expressjs/expressjs.com](https://github.com/expressjs/expressjs.com).
+Open issues for the expressjs.com website in https://github.com/expressjs/expressjs.com.
 
-### PRs and code contributions
+### PRs and Code contributions
 
 * Tests must pass.
-* Follow existing coding style.
+* Follow the [JavaScript Standard Style](http://standardjs.com/) and `npm run lint`.
 * If you fix a bug, add a test.
 
 ### Branches
 
-* Use the `master` branch for bug fixes or minor work that is intended for the current release stream
-* Use the correspondingly named branch, e.g. `5.0`, for anything intended for a future release of Express
+Use the `master` branch for bug fixes or minor work that is intended for the
+current release stream.
+
+Use the correspondingly named branch, e.g. `5.0`, for anything intended for
+a future release of Express.
 
 ### Steps for contributing
 
-* [Create an issue](https://github.com/expressjs/express/issues/new) for the bug you want to fix or the feature that you want to add.
-* Create your own [fork](https://github.com/expressjs/express) on github, then checkout your fork.
-* Write your code in your local copy. It's good practice to create a branch for each new issue you work on, although not compulsory.
-* To run the test suite, first install the dependencies by running `npm install`, then run `npm test`.
-* If the tests pass, you can commit your changes to your fork and then create a pull request from there. Make sure to reference your issue from the pull request comments by including the issue number e.g. #123.
+1. [Create an issue](https://github.com/expressjs/express/issues/new) for the
+   bug you want to fix or the feature that you want to add.
+2. Create your own [fork](https://github.com/expressjs/express) on GitHub, then
+   checkout your fork.
+3. Write your code in your local copy. It's good practice to create a branch for
+   each new issue you work on, although not compulsory.
+4. To run the test suite, first install the dependencies by running `npm install`,
+   then run `npm test`.
+5. Ensure your code is linted by running `npm run lint` -- fix any issue you
+   see listed.
+6. If the tests pass, you can commit your changes to your fork and then create
+   a pull request from there. Make sure to reference your issue from the pull
+   request comments by including the issue number e.g. `#123`.
 
 ### Issues which are questions
 
-We will typically close any vague issues or questions that are specific to some app you are writing. Please double check the docs and other references before being trigger happy with posting a question issue.
+We will typically close any vague issues or questions that are specific to some
+app you are writing. Please double check the docs and other references before
+being trigger happy with posting a question issue.
 
 Things that will help get your question issue looked at:
 
@@ -147,11 +187,12 @@ Things that will help get your question issue looked at:
 * Clear description of the expected result.
 * Steps you have taken to debug it yourself.
 
-If you post a question and do not outline the above items or make it easy for us to understand and reproduce your issue, it will be closed.
+If you post a question and do not outline the above items or make it easy for
+us to understand and reproduce your issue, it will be closed.
 
 ## Security Policies and Procedures
 
-> NOTE: This is copied from [Security Policies and Procedures in the Express  repository](https://github.com/expressjs/express/blob/master/Security.md).
+<!-- SRC: https://raw.githubusercontent.com/expressjs/express/master/Security.md -->
 
 This document outlines security procedures and general policies for the Express
 project.
@@ -194,3 +235,4 @@ involving the following steps:
 
 If you have suggestions on how this process could be improved please submit a
 pull request.
+
