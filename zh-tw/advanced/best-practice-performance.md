@@ -233,6 +233,8 @@ Environment=NODE_ENV=production
 
 如果您使用 StrongLoop Process Manager，您也可以[在將 StrongLoop PM 安裝成服務時，設定環境變數](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-Setenvironmentvariables)。
 
+<a name="restart"></a>
+
 ### 確定您的應用程式自動重新啟動
 
 在正式作業中，您始終不希望您的應用程式離線。也就是說，不論是應用程式當機，或是伺服器本身當機，您都需要確保它會重新啟動。儘管最好這些事件都不要發生，您仍必須務實看待這兩種可能的情況，其作法如下：
