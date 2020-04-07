@@ -204,7 +204,7 @@ router.use(function (req, res, next) {
   next()
 })
 
-router.get('/', function (req, res) {
+router.get('/user/:id', function (req, res) {
   res.send('hello, user!')
 })
 
