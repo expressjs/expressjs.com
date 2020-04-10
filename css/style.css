@@ -1149,7 +1149,7 @@ h2 a {
 
 .callout {position: relative;}
 
-#mw-fig { padding: 0; border: 0; width: 960px; margin-bottom: 20px;}
+#mw-fig { border-collapse: separate; padding: 0; border: 0; width: 960px; margin-bottom: 20px;}
 #mw-fig-imgcell {margin: 0; padding: 0px; border: 0; width: 410px;}
 #mw-fig-img {margin: 0px; padding: 0px; width: 410px; height: 308px;}
 .mw-fig-callouts {margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;}
