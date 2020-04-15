@@ -13,7 +13,7 @@ Use the application generator tool, `express-generator`, to quickly create an ap
 You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
 ```sh
-$ npx express-generator
+$ npm express-generator
 ```
 
 For earlier Node versions, install the application generator as a global npm package and then launch it.
