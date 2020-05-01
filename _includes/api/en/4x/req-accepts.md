@@ -26,7 +26,7 @@ req.accepts('application/json')
 // Accept: text/*, application/json
 req.accepts('image/png')
 req.accepts('png')
-// => undefined
+// => false
 
 // Accept: text/*;q=.5, application/json
 req.accepts(['html', 'json'])
