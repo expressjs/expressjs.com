@@ -172,7 +172,7 @@ async function validateCookies (req, res, next) {
   next()
 }
 
-app.use(cookieParser)
+app.use(cookieParser())
 
 app.use(validateCookies)
 
