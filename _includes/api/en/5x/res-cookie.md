@@ -8,7 +8,7 @@ The `options` parameter is an object that can have the following properties.
 |-------------|-------------------------------------------------------------------------|
 | `domain`    | String | Domain name for the cookie. Defaults to the domain name of the app.
 | `encode`    | Function | A synchronous function used for cookie value encoding. Defaults to `encodeURIComponent`.
-| `expires`   | Date | Expiry date of the cookie in GMT. If not specified or set to 0, creates a session cookie.
+| `expire`   | Date | Expiry date of the cookie in GMT. If not specified or set to 0, creates a session cookie.
 | `httpOnly`  | Boolean | Flags the cookie to be accessible only by the web server.
 | `maxAge`    | Number | Convenient option for setting the expiry time relative to the current time in milliseconds.
 | `path`      | String | Path for the cookie. Defaults to "/".
@@ -25,7 +25,7 @@ For example:
 
 ```js
 res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: true })
-res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
+res.cookie('rememberme', '1', { expire: new Date(Date.now() + 900000), httpOnly: true })
 ```
 
 The `encode` option allows you to choose the function used for cookie value encoding.
@@ -44,7 +44,7 @@ res.cookie('some_cross_domain_cookie', 'http://mysubdomain.example.com', { domai
 // Result: 'some_cross_domain_cookie=http://mysubdomain.example.com; Domain=example.com; Path=/;'
 ```
 
-The `maxAge` option is a convenience option for setting "expires" relative to the current time in milliseconds.
+The `maxAge` option is a convenience option for setting "expire" relative to the current time in milliseconds.
 The following is equivalent to the second example above.
 
 ```js
