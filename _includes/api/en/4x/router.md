@@ -38,21 +38,21 @@ In this example the `req`, `res` and `next` arguments are imperatively passed to
 explicitly pass them within a callback.
 
 ```js
-const userRouter = express.Router();
+const userRouter = express.Router()
 
 userRouter.get('/calendar', (req, res, next) => {
-  const { user_id } = req.query;
+  const { userId } = req.query
   // return user specific calendar information
-});
+})
 
 app.use('*', (req, res, next) => {
-  if (req.query.user_id) {
+  if (req.query.userId) {
     // if a user id is passed in use the user specific router
-    userRouter(req, res, next);
+    userRouter(req, res, next)
   } else {
-    next();
+    next()
   }
-});
+})
 ```
 
 
