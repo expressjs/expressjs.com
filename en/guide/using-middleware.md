@@ -38,6 +38,7 @@ Bind application-level middleware to an instance of the [app object](/{{ page.la
 This example shows a middleware function with no mount path. The function is executed every time the app receives a request.
 
 ```js
+var express = require('express')
 var app = express()
 
 app.use(function (req, res, next) {
@@ -150,6 +151,7 @@ Load router-level middleware by using the `router.use()` and `router.METHOD()` f
 The following example code replicates the middleware system that is shown above for application-level middleware, by using router-level middleware:
 
 ```js
+var express = require('express')
 var app = express()
 var router = express.Router()
 
@@ -195,6 +197,7 @@ to pass control back out of the router instance.
 This example shows a middleware sub-stack that handles GET requests to the `/user/:id` path.
 
 ```js
+var express = require('express')
 var app = express()
 var router = express.Router()
 
