@@ -66,7 +66,7 @@ strong, th {
 }
 
 #home-content {
-  margin: 183px 0 2% 5%;
+  margin: 120px 0 2% 5%;
   max-width: 900px;
   padding-right: 9%;
   display: flex;
@@ -137,7 +137,7 @@ strong, th {
 }
 
 .content {
-  margin: 153px 3% 7%;
+  margin: 90px 3% 7%;
   max-width: 1090px;
   padding-left: 225px;
 }
@@ -231,7 +231,6 @@ a {
 }
 
 #logo .express {
-  margin-top: 63px;
   display: block;
   font: 25px "Helvetica Neue", "Open Sans", sans-serif;
   font-weight: 100;
@@ -302,7 +301,7 @@ header {
   left: 0;
   background: #eee;
   width: 100%;
-  height: 120px;
+  height: 55px;
   z-index: 100;
   border-bottom: 1px solid #ddd;
 }
@@ -746,7 +745,7 @@ footer {
   position: fixed;
   margin: 0;
   padding: 0 10px 0 0;
-  top: 153px;
+  top: 90px;
   left: 30px;
   height: 500px;
   text-align: left;
@@ -893,7 +892,7 @@ h2 a {
   }
 
   #home-content {
-    margin: 150px 0 0 5%;
+    margin: 100px 0 0 5%;
     padding-right: 5%;
   }
 
@@ -927,7 +926,6 @@ h2 a {
   }
 
   #logo .express {
-    margin-top: 0px;
     font-weight: bold;
   }
 
@@ -1193,18 +1191,4 @@ h2 a {
 
 #mw-list ul li {
  margin-left: -20px;
-}
-
-#blm-banner {
-  text-align: center;
-  background: #010101; 
-  color: #f1f1f1;
-  padding: 5px;
-  font-size: 16px;
-  width: 100%;
-}
-
-#blm-donate {
-  color: #5E80F7;
-  text-decoration: none;
 }
