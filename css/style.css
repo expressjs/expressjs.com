@@ -204,8 +204,8 @@ a {
 }
 
 #api-doc *:target, #page-doc *:target {
- margin-top: -60px;
- padding-top: 60px;
+ margin-top: -120px;
+ padding-top: 120px;
  z-index: -1;
 }
 
@@ -674,7 +674,6 @@ footer {
 #navbar {
   padding-left: 5%;
   max-width: 1000px;
-  height: 100%;
   position: relative;
   display: flex;
   justify-content: flex-end;
