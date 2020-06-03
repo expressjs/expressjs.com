@@ -9,6 +9,16 @@ HTTP request logger middleware for node.js
 
 > Named after [Dexter](http://en.wikipedia.org/wiki/Dexter_Morgan), a show you should not watch until completion.
 
+## Installation
+
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install morgan
+```
+
 ## API
 
 <!-- eslint-disable no-unused-vars -->
@@ -248,7 +258,7 @@ advanced uses, this compile function is directly available.
 
 ### express/connect
 
-Simple app that will log all request in the Apache combined format to STDOUT
+Sample app that will log all request in the Apache combined format to STDOUT
 
 ```js
 var express = require('express')
@@ -265,7 +275,7 @@ app.get('/', function (req, res) {
 
 ### vanilla http server
 
-Simple app that will log all request in the Apache combined format to STDOUT
+Sample app that will log all request in the Apache combined format to STDOUT
 
 ```js
 var finalhandler = require('finalhandler')
@@ -291,7 +301,7 @@ http.createServer(function (req, res) {
 
 #### single file
 
-Simple app that will log all requests in the Apache combined format to the file
+Sample app that will log all requests in the Apache combined format to the file
 `access.log`.
 
 ```js
@@ -315,7 +325,7 @@ app.get('/', function (req, res) {
 
 #### log file rotation
 
-Simple app that will log all requests in the Apache combined format to one log
+Sample app that will log all requests in the Apache combined format to one log
 file per day in the `log/` directory using the
 [rotating-file-stream module](https://www.npmjs.com/package/rotating-file-stream).
 

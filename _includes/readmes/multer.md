@@ -12,6 +12,7 @@ This README is also available in other languages:
 - [简体中文](https://github.com/expressjs/multer/blob/master/doc/README-zh-cn.md) (Chinese)
 - [한국어](https://github.com/expressjs/multer/blob/master/doc/README-ko.md) (Korean)
 - [Русский язык](https://github.com/expressjs/multer/blob/master/doc/README-ru.md) (Russian)
+- [Português](https://github.com/expressjs/multer/blob/master/doc/README-pt-br.md) (Português Brazil)
 
 ## Installation
 
@@ -74,6 +75,32 @@ app.post('/profile', upload.none(), function (req, res, next) {
   // req.body contains the text fields
 })
 ```
+
+Here's an example on how multer is used an HTML form. Take special note of the `enctype="multipart/form-data"` and `name="uploaded_file"` fields:
+
+```html
+<form action="/stats" enctype="multipart/form-data" method="post">
+  <div class="form-group">
+    <input type="file" class="form-control-file" name="uploaded_file">
+    <input type="text" class="form-control" placeholder="Number of speakers" name="nspeakers">
+    <input type="submit" value="Get me the stats!" class="btn btn-default">            
+  </div>
+</form>
+```
+
+Then in your javascript file you would add these lines to access both the file and the body. It is important that you use the `name` field value from the form in your upload function. This tells multer which field on the request it should look for the files in. If these fields aren't the same in the HTML form and on your server, your upload will fail:
+
+```javascript
+var multer  = require('multer')
+var upload = multer({ dest: './public/data/uploads/' })
+app.post('/stats', upload.single('uploaded_file'), function (req, res) {
+   // req.file is the name of your file in the form above, here 'uploaded_file'
+   // req.body will hold the text fields, if there were any 
+   console.log(req.file, req.body)
+});
+```
+
+
 
 ## API
 
