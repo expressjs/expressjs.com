@@ -34,8 +34,8 @@ You can then use a router for a particular root URL in this way separating your 
 app.use('/calendar', router)
 ```
 
-In this example the `req`, `res` and `next` arguments are imperatively passed to the `router` instance. You can also 
-explicitly pass them within a callback.
+In this example the `req`, `res` and `next` arguments are being imperatively passed to the `router` instance. You can also 
+explicitly pass them within another route handler.
 
 ```js
 const userRouter = express.Router()
@@ -59,6 +59,10 @@ app.use('*', (req, res, next) => {
 </section>
 
 <h3 id='router.methods'>Methods</h3>
+
+<section markdown="1">
+  {% include api/en/4x/router-instance.md %}
+</section>
 
 <section markdown="1">
   {% include api/en/4x/router-all.md %}

@@ -190,6 +190,7 @@
         <ul id="router-menu">
             <li><em>Methods</em>
             </li>
+            <li><a href="#router.instance">router(req, res, next)</a>
             <li><a href="#router.all">router.all()</a>
             </li>
             <li><a href="#router.METHOD">router.METHOD()</a>
