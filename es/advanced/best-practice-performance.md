@@ -16,7 +16,6 @@ Este tema entra claramente dentro del área de "DevOps", que abarca operaciones 
 -   Cosas que hacer en el código (la parte de desarrollo):
     -   [Utilizar la compresión de gzip](#utilizar-la-compresión-de-gzip)
     -   [No utilizar funciones síncronas](#no-utilizar-funciones-síncronas)
-    -   [Utilizar el middleware para el servicio de archivos estáticos](#utilizar-el-middleware-para-el-servicio-de-archivos-estáticos)
     -   [Realizar un registro correcto](#realizar-un-registro-correcto)
     -   [Manejar las excepciones correctamente](#manejar-las-excepciones-correctamente)
 -   Cosas que hacer en el entorno / configuración (la parte de operaciones):
@@ -36,7 +35,6 @@ Estas son algunas de las cosas que puede hacer en el código para mejorar el ren
 
 -   [Utilizar la compresión de gzip](#utilizar-la-compresión-de-gzip)
 -   [No utilizar funciones síncronas](#no-utilizar-funciones-síncronas)
--   [Utilizar el middleware para el servicio de archivos estáticos](#utilizar-el-middleware-para-el-servicio-de-archivos-estáticos)
 -   [Realizar un registro correcto](#realizar-un-registro-correcto)
 -   [Manejar las excepciones correctamente](#manejar-las-excepciones-correctamente)
 
@@ -62,14 +60,6 @@ Las funciones síncronas y los métodos impiden el avance del proceso de ejecuci
 Aunque Node y muchos módulos proporcionan versiones síncronas y asíncronas de las funciones, utilice siempre la versión asíncrona en producción. La única vez que está justificado utilizar una función síncrona es en el arranque inicial.
 
 Si utiliza Node.js 4.0+ o io.js 2.1.0+, puede utilizar el distintivo de línea de mandatos `--trace-sync-io` para imprimir un aviso y un seguimiento de la pila siempre que la aplicación utilice una API síncrona. Desde luego, no deseará utilizarlo en producción, sólo para garantizar que el código está listo para producción. Consulte [Weekly update for io.js 2.1.0](https://nodejs.org/en/blog/weekly-updates/weekly-update.2015-05-22/#2-1-0) para obtener más información.
-
-### Utilizar el middleware para el servicio de archivos estáticos
-
-En el desarrollo, puede utilizar [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile) para el servicio de archivos estáticos. Sin embargo, no lo haga en producción, porque esta función debe leer el sistema de archivos para cada solicitud de archivo, por lo que encontrará una latencia significativa y afectará al rendimiento general de la aplicación. Tenga en cuenta que `res.sendFile()` _no_ se implementa con la llamada al sistema [sendfile](http://linux.die.net/man/2/sendfile), lo que haría que fuera mucho más eficaz.
-
-En su lugar, utilice el middleware [serve-static](https://www.npmjs.com/package/serve-static) (o algo equivalente), que está optimizado para el servicio de archivos para aplicaciones Express.
-
-Una solución aún mejor es utilizar un proxy inverso para el servicio de archivos estáticos; consulte [Utilizar un proxy inverso](#proxy) para obtener más información.
 
 ### Realizar un registro correcto
 
