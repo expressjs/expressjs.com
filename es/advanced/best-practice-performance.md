@@ -171,12 +171,9 @@ app.get('/', wrap(async (req, res, next) => {
 </code>
 </pre>
 
-Para obtener más información sobre el manejo de errores utilizando promesas, consulte:
+La función `wrap()` es un envoltorio que toma las promesas rechazadas y llama a `next()` con el error como primer argumento. Para más detalles, vea [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/).
 
-* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
-* [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
-
-<a name="env"></a>
+Para más información acerca del manejo de errores utilizando promesas, vea [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/).
 
 ## Cosas que hacer en el entorno / configuración
 
