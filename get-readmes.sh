@@ -26,6 +26,7 @@ expressjs serve-static master
 expressjs session master
 expressjs timeout master
 expressjs vhost master
+expressjs express master/examples
 LIST_END
 ) | while read org repo branch; do
   # Write the README.md to a file named after the repo
