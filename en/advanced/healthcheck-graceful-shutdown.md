@@ -10,7 +10,17 @@ redirect_from: "/advanced/healthcheck-graceful-shutdown.html"
 
 ## Graceful shutdown
 
-When you deploy a new version of your application, you must replace the previous version. The [process manager](pm.html) you're using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it will stop accepting new requests, finish all the ongoing requests, and clean up the resources it used,  including database connections and file locks.
+When you deploy a new version of your application, you must replace the previous version. The [process manager](pm.html) you're using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it should stop accepting new requests, finish all the ongoing requests, clean up the resources it used,  including database connections and file locks then exit.
+
+### Example Graceful Shutdown
+```js
+process.on('SIGTERM', () => {
+  debug('SIGTERM signal received: closing HTTP server')
+  server.close(() => {
+    debug('HTTP server closed')
+  })
+})
+```
 
 ## Health checks
 
