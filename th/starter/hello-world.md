@@ -15,10 +15,15 @@ lang: th
 <div id="hello-example"><pre><code class="language-js">
 const express = require('express')
 const app = express()
+const port = 3000
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
 </code></pre></div>
 
 app นี้จะเริ่มต้นเซิร์ฟเวอร์และเฝ้าตรวจสอบ (listen) การเชื่อมต่อที่พอร์ต 3000 โดยที่ app จะตอบสนองด้วงคำว่า "Hello World!" สำหรับการร้องขอ

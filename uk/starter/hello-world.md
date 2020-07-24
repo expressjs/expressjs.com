@@ -21,13 +21,13 @@ lang: uk
 var express = require('express');
 var app = express();
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000, function () {
-  console.log('Приклад застосунку, який прослуховує 3000-ий порт!');
-});
+app.listen(3000, () => {
+  console.log('Приклад застосунку, який прослуховує 3000-ий порт!')
+})
 </code></pre>
 
 Цей скрипт запускає сервер та прослуховує з’єднання на 3000-му порті. В результаті виводиться "Hello World!",
