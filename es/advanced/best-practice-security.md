@@ -9,11 +9,23 @@ lang: es
 
 ## Visión general
 
-El término *"producción"* hace referencia a la etapa del ciclo de vida del software donde una aplicación o una API tiene disponibilidad general para sus consumidores o usuarios finales. Por su parte, en la etapa de *"desarrollo"*, todavía está escribiendo y probando activamente el código, y la aplicación no está abierta para el acceso externo. Los entornos del sistema correspondientes se conocen como los entornos de *producción* y *desarrollo*, respectivamente.
+El término *"producción"* hace referencia a la etapa del ciclo de vida del software donde una aplicación o una API tiene disponibilidad general para sus consumidores o usuarios finales. Por su parte, en la etapa de *"desarrollo"*, todavía estás escribiendo y probando activamente el código, y la aplicación no está abierta para el acceso externo. Los correspondientes entornos del sistema se conocen como los entornos de *producción* y *desarrollo*, respectivamente.
 
 Los entornos de desarrollo y producción se configuran normalmente de forma diferente y tiene requisitos también muy diferentes. Lo que funciona en el desarrollo puede que no sea aceptable en la producción. Por ejemplo, en un entorno de desarrollo, puede que desee el registro detallado de errores a efecto de depuración, mientras que el mismo comportamiento puede suponer un problema de seguridad en un entorno de producción. De la misma forma, en el desarrollo, no es necesario preocuparse por la escalabilidad, la fiabilidad y el rendimiento, mientras que estos son clave en la producción.
 
-En este artículo se describen las mejores prácticas de seguridad para las aplicaciones Express desplegadas en producción.
+{% include note.html content="Si crees haber encontrado una vulnerabilidad de seguridad en Express, por favor mira nuestras [Políticas de Seguridad y Procedimientos](/en/resources/contributing.html#security-policies-and-procedures).
+" %}
+
+Las mejores prácticas de seguridad para aplicaciones Express en producción incluyen:
+
+- [No utilizar versiones en desuso o vulnerables de Express](#no-utilizar-versiones-en-desuso-o-vulnerables-de-express)
+- [Utilizar TLS](#utilizar-tls)
+- [Utilizar Helmet](#utilizar-helmet)
+- [Utilizar cookies de forma segura](#utilizar-cookies-de-forma-segura)
+- [Prevenir ataques de fuerza bruta a la autenticación](#prevenir-ataques-de-fuerza-bruta-a-la-autenticación)
+- [Asegurarse de que las dependencias sean seguras](#asegurarse-de-que-las-dependencias-sean-seguras)
+- [Evitar otras vulnerabilidades conocidas](#evitar-otras-vulnerabilidades-conocidas)
+- [Consideraciones adicionales](#consideraciones-adicionales)
 
 ## No utilizar versiones en desuso o vulnerables de Express
 
@@ -141,45 +153,53 @@ app.use(session({
 </code>
 </pre>
 
+## Prevenir ataques de fuerza bruta a la autenticación
+
+Asegurate de que los puntos finales del inicio de sesión están protegidos para convertir los datos privados más seguros.
+
+Una simple y potente técnica es bloquear intentos de autorización usando dos métricas:
+
+1. Según el número de intentos fallidos consecutivos por el mismo nombre de usuario y dirección IP.
+2. Según el número fallido de intentos desde una dirección IP a lo largo de un cierto período de tiempo. Por ejemplo, bloquear una dirección IP si realiza 100 intentos fallidos en un día.
+
+El paquete [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) ofrece herramientas para realizar esta técnica de forma fácil y rápida. Aquí puedes encontrar un [ejemplo de protección de fuerza bruta en la documentación](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection).
+
 ## Asegurarse de que las dependencias sean seguras
 
 El uso de npm para gestionar las dependencias de la aplicación es muy útil y cómodo.  No obstante, los paquetes que utiliza pueden contener vulnerabilidades de seguridad críticas que también pueden afectar a la aplicación.  La seguridad de la aplicación sólo es tan fuerte como el "enlace más débil" de las dependencias.
 
-Utilice una o las dos herramientas siguientes para garantizar la seguridad de los paquetes de terceros que utiliza: [nsp](https://www.npmjs.com/package/nsp) y [requireSafe](https://requiresafe.com/).  Las dos herramientas hacen prácticamente lo mismo.
+Desde npm@6, npm revisa automáticamente cada solicitud de instalación. También puedes utilizar 'npm audit' para analizar tu árbol de dependencias.
 
-[nsp](https://www.npmjs.com/package/nsp) es una herramienta de línea de mandatos que comprueba la base de datos de vulnerabilidades de [Node Security Project](https://nodesecurity.io/) para determinar si la aplicación utiliza paquetes con vulnerabilidades conocidas. Instálela de la siguiente manera:
+```sh
+$ npm audit
+```
 
-<pre>
-<code class="language-sh" translate="no">
-$ npm i nsp -g
-</code>
-</pre>
+Si quieres mantener más seguro, considera [Snyk](https://snyk.io/).
 
-Utilice este mandato para enviar el archivo `npm-shrinkwrap.json` para su validación a [nodesecurity.io](https://nodesecurity.io/):
+Snyk ofrece tanto [herramienta de línea de comandos](https://www.npmjs.com/package/snyk) como una [integración de Github](https://snyk.io/docs/github) que comprueba tu aplicación contra [la base de datos de código abierto sobre vulnerabilidades de Snyk](https://snyk.io/vuln/) por cualquier vulnerabilidad conocida en tus dependencias. Instala la interfaz de línea de comandos:
 
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-shrinkwrap
-</code>
-</pre>
-
-Utilice este mandato para enviar el archivo `package.json` para su validación a [nodesecurity.io](https://nodesecurity.io/):
-
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-package
-</code>
-</pre>
-
-[requireSafe](https://requiresafe.com/) se utiliza de la siguiente manera para auditar los módulos de Node:
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm install -g requiresafe
+```sh
+$ npm install -g snyk
 $ cd your-app
-$ requiresafe check
-</code>
-</pre>
+```
+
+Usa este comando para comprobar tu aplicación contra vulnerabilidades:
+
+```sh
+$ snyk test
+```
+
+Usa este comando para abrir un asistente que te guiará mediante el proceso de aplicar actualizaciones o parches para arreglar las vulnerabilidades que hayan sido encontradas:
+
+```sh
+$ snyk wizard
+```
+
+## Evitar otras vulnerabilidades conocidas
+
+Esté atento a las advertencias de [Node Security Project](https://nodesecurity.io/advisories) que puedan afectar a Express u otros módulos que utilice la aplicación.  En general, Node Security Project es un excelente recurso de herramientas e información sobre la seguridad de Node.
+
+Por último, las aplicaciones de Express, como cualquier otra aplicación web, son vulnerables a una amplia variedad de ataques basados en web. Familiarícese con las [vulnerabilidades web](https://www.owasp.org/index.php/Top_10_2013-Top_10) conocidas y tome precauciones para evitarlas.
 
 ## Consideraciones adicionales
 
@@ -192,9 +212,3 @@ A continuación, se muestran algunas recomendaciones para la excelente lista de 
 * Utilice la herramienta [sqlmap](http://sqlmap.org/) de código abierto para detectar vulnerabilidades de inyección de SQL en la aplicación.
 * Utilice las herramientas [nmap](https://nmap.org/) y [sslyze](https://github.com/nabla-c0d3/sslyze) para probar la configuración de los cifrados SSL, las claves y la renegociación, así como la validez del certificado.
 * Utilice [safe-regex](https://www.npmjs.com/package/safe-regex) para asegurarse de que las expresiones regulares no sean susceptibles de ataques de [denegación de servicio de expresiones regulares](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS).
-
-## Evitar otras vulnerabilidades conocidas
-
-Esté atento a las advertencias de [Node Security Project](https://nodesecurity.io/advisories) que puedan afectar a Express u otros módulos que utilice la aplicación.  En general, Node Security Project es un excelente recurso de herramientas e información sobre la seguridad de Node.
-
-Por último, las aplicaciones de Express, como cualquier otra aplicación web, son vulnerables a una amplia variedad de ataques basados en web. Familiarícese con las [vulnerabilidades web](https://www.owasp.org/index.php/Top_10_2013-Top_10) conocidas y tome precauciones para evitarlas.
