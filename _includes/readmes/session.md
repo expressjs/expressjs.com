@@ -240,7 +240,7 @@ With this enabled, the session identifier cookie will expire in
 
 This is typically used in conjuction with short, non-session-length
 [`maxAge`](#cookiemaxage) values to provide a quick timeout of the session data
-with reduced potentional of it occurring during on going server interactions.
+with reduced potential of it occurring during on going server interactions.
 
 **Note** When this option is set to `true` but the `saveUninitialized` option is
 set to `false`, the cookie will not be set on a response with an uninitialized
@@ -272,7 +272,22 @@ it to be saved. *This has been fixed in PassportJS 0.3.0*
 This is the secret used to sign the session ID cookie. This can be either a string
 for a single secret, or an array of multiple secrets. If an array of secrets is
 provided, only the first element will be used to sign the session ID cookie, while
-all the elements will be considered when verifying the signature in requests.
+all the elements will be considered when verifying the signature in requests. The
+secret itself should be not easily parsed by a human and would best be a random set
+of characters. A best practice may include:
+
+  - The use of environment variables to store the secret, ensuring the secret itself
+    does not exist in your repository.
+  - Periodic updates of the secret, while ensuring the previous secret is in the
+    array.
+
+Using a secret that cannot be guessed will reduce the ability to hijack a session to
+only guessing the session ID (as determined by the `genid` option).
+
+Changing the secret value will invalidate all existing sessions. In order to rotate
+the secret without invalidating sessions, provide an array of secrets, with the new
+secret as first element of the array, and including previous secrets as the later
+elements.
 
 ##### store
 
@@ -602,11 +617,6 @@ and other multi-core embedded devices).
 [connect-mongodb-session-url]: https://www.npmjs.com/package/connect-mongodb-session
 [connect-mongodb-session-image]: https://badgen.net/github/stars/mongodb-js/connect-mongodb-session?label=%E2%98%85
 
-[![★][connect-mssql-image] connect-mssql][connect-mssql-url] A SQL Server-based session store.
-
-[connect-mssql-url]: https://www.npmjs.com/package/connect-mssql
-[connect-mssql-image]: https://badgen.net/github/stars/patriksimek/connect-mssql?label=%E2%98%85
-
 [![★][connect-pg-simple-image] connect-pg-simple][connect-pg-simple-url] A PostgreSQL-based session store.
 
 [connect-pg-simple-url]: https://www.npmjs.com/package/connect-pg-simple
@@ -648,11 +658,6 @@ and other multi-core embedded devices).
 
 [couchdb-expression-url]: https://www.npmjs.com/package/couchdb-expression
 [couchdb-expression-image]: https://badgen.net/github/stars/tkshnwesper/couchdb-expression?label=%E2%98%85
-
-[![★][documentdb-session-image] documentdb-session][documentdb-session-url] A session store for Microsoft Azure's [DocumentDB](https://azure.microsoft.com/en-us/services/documentdb/) NoSQL database service.
-
-[documentdb-session-url]: https://www.npmjs.com/package/documentdb-session
-[documentdb-session-image]: https://badgen.net/github/stars/dwhieb/documentdb-session?label=%E2%98%85
 
 [![★][dynamodb-store-image] dynamodb-store][dynamodb-store-url] A DynamoDB-based session store.
 
@@ -753,6 +758,11 @@ based session store. Supports all backends supported by Fortune (MongoDB, Redis,
 
 [nedb-session-store-url]: https://www.npmjs.com/package/nedb-session-store
 [nedb-session-store-image]: https://badgen.net/github/stars/JamesMGreene/nedb-session-store?label=%E2%98%85
+
+[![★][@quixo3/prisma-session-store-image] @quixo3/prisma-session-store][@quixo3/prisma-session-store-url] A session store for the [Prisma Framework](https://www.prisma.io).
+
+[@quixo3/prisma-session-store-url]: https://www.npmjs.com/package/@quixo3/prisma-session-store
+[@quixo3/prisma-session-store-image]: https://badgen.net/github/stars/kleydon/prisma-session-store?label=%E2%98%85
 
 [![★][restsession-image] restsession][restsession-url] Store sessions utilizing a RESTful API
 
