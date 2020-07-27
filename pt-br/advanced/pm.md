@@ -181,7 +181,7 @@ especificar apenas o nome ou o id do aplicativo.
 
 <pre>
 <code class="language-sh" translate="no">
-$ pm2 start app.js
+$ pm2 start npm --name my-app -- start
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
 │ App name │ id │ mode │ pid   │ status │ restart │ uptime │ memory      │ watching │

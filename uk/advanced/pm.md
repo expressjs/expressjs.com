@@ -130,7 +130,7 @@ $ [sudo] npm install pm2 -g
 When you start an app by using the `pm2` command, you must specify the path of the app. However, when you stop, restart, or delete an app, you can specify just the name or the id of the app.
 
 <pre><code class="language-sh" translate="no">
-$ pm2 start app.js
+$ pm2 start npm --name my-app -- start
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
 │ App name │ id │ mode │ pid   │ status │ restart │ uptime │ memory      │ watching │
