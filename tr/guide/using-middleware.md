@@ -1,41 +1,42 @@
 ---
 layout: page
-title: Using Express middleware
+title: Express ara yazılımı kullanmak
 menu: guide
 lang: tr
 ---
 <div id="page-doc" markdown="1">
-# Using middleware
+# Ara yazılım kullanmak
 
-Express is a routing and middleware web framework that has minimal functionality of its own: An Express application is essentially a series of middleware function calls.
+Express, kendine özgü minimal bir işlevselliği olan bir yönlendirme ve ara yazılım web çatısıdır: Bir Express uygulaması aslında bir dizi ara yazılım fonksiyon çağrısıdır.
 
-_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/4x/api.html#req)  (`req`), the [response object](/{{ page.lang }}/4x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
+_Middleware_ fonksiyonları, uygulamanın istek-yanıt döngüsündeki [istek objesi](/{{ page.lang }}/4x/api.html#req)  (`req`), [yanıt objesi](/{{ page.lang }}/4x/api.html#res) (`res`), ve bir sonraki ara yazılım fonksiyonuna erişebilen fonksiyonlardır. Bir sonraki ara yazılım fonksiyonu çoğunlukla `next` isimli bir değişken ile tanımlanır.
 
-Middleware functions can perform the following tasks:
+Ara yazılım fonksiyonları aşağıdaki görevleri yapabilir:
 
-* Execute any code.
-* Make changes to the request and the response objects.
-* End the request-response cycle.
-* Call the next middleware function in the stack.
+* Herhangi bir kodu koşma
+* İstek ve yanıt objelerine değişiklik yapma
+* İstek-yanıt döngüsünü bitirme
+* Kümedeki bir sonraki ara yazılım fonksiyonunu çağırma
 
-If the current middleware function does not end the request-response cycle, it must call `next()` to pass control to the next middleware function. Otherwise, the request will be left hanging.
+Şimdiki ara yazılım fonksiyonu istek-yanıt döngüsünü bitirmezse, bir sonraki ara yazılım fonksiyonuna kontrol vermek için `next()` metodunu çağırmalı. Aksi takdirde istek boşta asılı kalacaktır.
 
-An Express application can use the following types of middleware:
+Bir Express uygulaması aşağıdaki ara yazılım türlerini kullanabilir:
 
- - [Application-level middleware](#middleware.application)
- - [Router-level middleware](#middleware.router)
- - [Error-handling middleware](#middleware.error-handling)
- - [Built-in middleware](#middleware.built-in)
- - [Third-party middleware](#middleware.third-party)
+ - [Uygulama-düzeyi ara yazılım](#middleware.application)
+ - [Rota-düzeyi ara yazılım](#middleware.router)
+ - [Hata-işleme ara yazılım](#middleware.error-handling)
+ - [Gömülü ara yazılım](#middleware.built-in)
+ - [Üçüncü-parti ara yazılım](#middleware.third-party)
 
-You can load application-level and router-level middleware with an optional mount path.
-You can also load a series of middleware functions together, which creates a sub-stack of the middleware system at a mount point.
 
-<h2 id='middleware.application'>Application-level middleware</h2>
+Uygulama-düzeyi ve yönlendirici-düzeyi ara yazılımı bir opsiyonlu hedef yol ile yükleyebilirsiniz.
+Hedef bir yolda, bir ara katman yazılımı alt kümesi oluşturacak bir ara yazılım fonksiyonlar dizisi de yükleyebilirsiniz.
 
-Bind application-level middleware to an instance of the [app object](/{{ page.lang }}/4x/api.html#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
+<h2 id='middleware.application'>Uygulama-düzeyi ara yazılımı</h2>
 
-This example shows a middleware function with no mount path. The function is executed every time the app receives a request.
+Uygulama-düzeyi ara yazılımı `app.use()` ve `app.METHOD()` fonksiyonları kullanarak bir [uygulama objesi](/{{ page.lang }}/4x/api.html#app) örneğine bağlanır; `METHOD` ise, küçük harflerle, ara yazılım fonksiyonunun işlediği isteğin HTTP metodunun ismidir (örneğin GET, PUT, veya POST).
+
+Bu örnek, hedef yolu bulunmayan bir ara yazılım fonksiyonunu gösteriyor. Fonksiyon uygulama her istek aldığında çalışır.
 
 ```js
 var app = express()
@@ -46,8 +47,7 @@ app.use(function (req, res, next) {
 })
 ```
 
-This example shows a middleware function mounted on the `/user/:id` path. The function is executed for any type of
-HTTP request on the `/user/:id` path.
+Bu örnek, `/user/:id` yoluna yerleştirilmiş bir ara yazılım fonksiyonu gösterir. Bu fonksiyon `/user/:id` yoluna yapılan herhangi bir HTTP isteğinde çalışır.
 
 ```js
 app.use('/user/:id', function (req, res, next) {
@@ -56,7 +56,7 @@ app.use('/user/:id', function (req, res, next) {
 })
 ```
 
-This example shows a route and its handler function (middleware system). The function handles GET requests to the `/user/:id` path.
+Bu örnek bir rotayı ve işleyici fonksiyonunu gösterir (ara yazılım sistemi). Fonksiyon `/user/:id` yoluna yapılan GET isteklerini karşılıyor.
 
 ```js
 app.get('/user/:id', function (req, res, next) {
@@ -64,8 +64,8 @@ app.get('/user/:id', function (req, res, next) {
 })
 ```
 
-Here is an example of loading a series of middleware functions at a mount point, with a mount path.
-It illustrates a middleware sub-stack that prints request info for any type of HTTP request to the `/user/:id` path.
+Bu örnek, hedef bir yol ile, yerleştirilmiş bir noktada bir dizi ara yazılım fonksiyonları yükler.
+`/user/:id` yoluna yapılan herhangi bir tipte HTTP isteğinin istek bilgilerini yazdıran bir ara yazılım alt kümesini gösterir.
 
 ```js
 app.use('/user/:id', function (req, res, next) {
@@ -77,9 +77,9 @@ app.use('/user/:id', function (req, res, next) {
 })
 ```
 
-Route handlers enable you to define multiple routes for a path. The example below defines two routes for GET requests to the `/user/:id` path. The second route will not cause any problems, but it will never get called because the first route ends the request-response cycle.
+Rota işleyicileri bir yol için birden fazla rota tanımlamaya olanak sağlar. Aşağıdaki örnek `/user/:id` yoluna yapılan GET istekleri için iki rota tanımlıyor. İkinci rota herhangi bir problem yaratmayacak, ancak ilk rota istek-yanıt döngüsünü bitirdiği için ikinci rota hiç bir zaman çağrılmayacak.
 
-This example shows a middleware sub-stack that handles GET requests to the `/user/:id` path.
+Bu örnek `/user/:id` yoluna yapılan GET isteklerini işleyen ara yazılım alt kümesini gösterir.
 
 ```js
 app.get('/user/:id', function (req, res, next) {
@@ -89,56 +89,56 @@ app.get('/user/:id', function (req, res, next) {
   res.send('User Info')
 })
 
-// handler for the /user/:id path, which prints the user ID
+// kullanıcı ID'sini yazdıran, /user/:id yolunun işleyicisi
 app.get('/user/:id', function (req, res, next) {
   res.end(req.params.id)
 })
 ```
 
-To skip the rest of the middleware functions from a router middleware stack, call `next('route')` to pass control to the next route.
-**NOTE**: `next('route')` will work only in middleware functions that were loaded by using the `app.METHOD()` or `router.METHOD()` functions.
+Geriye kalan ara yazılım fonksiyonlarını yönlendirici ara yazılım kümesinden es geçmek için, `next('route')` metodunu çağırarak bir sonraki rotaya kontrolu verin.
+**NOT**: `next('route')` metodu sadece `app.METHOD()` veya `router.METHOD()` fonksiyonlarını kullanarak yüklenen ara yazılım fonksiyonları için geçerlidir.
 
-This example shows a middleware sub-stack that handles GET requests to the `/user/:id` path.
+Bu örnek `/user/:id` yolu için yapılan GET isteklerini işleyen bir ara yazılım alt-kümesini gösterir.
 
 ```js
 app.get('/user/:id', function (req, res, next) {
-  // if the user ID is 0, skip to the next route
+  // kullanıcı ID'si 0 ise, bir sonraki rotaya geç
   if (req.params.id === '0') next('route')
-  // otherwise pass the control to the next middleware function in this stack
+  // aksi takdirde kontrolü bu kümedeki bir sonraki ara yazılım fonksiyonuna ver
   else next()
 }, function (req, res, next) {
-  // render a regular page
+  // normal bir sayfa göster
   res.render('regular')
 })
 
-// handler for the /user/:id path, which renders a special page
+// özel bir sayfa gösteren, /user/:id yolunun işleyicisi
 app.get('/user/:id', function (req, res, next) {
   res.render('special')
 })
 ```
 
-<h2 id='middleware.router'>Router-level middleware</h2>
+<h2 id='middleware.router'>Yönlendirici-düzeyi ara yazılım</h2>
 
-Router-level middleware works in the same way as application-level middleware, except it is bound to an instance of `express.Router()`.
+Yönlendirici-düzeyi ara yazılımı, uygulama-düzeyi ara yazılımı ile aynı şekilde çalışır; ama `express.Router()` sınıfının bir örneğine bağlıdır.
 
 ```js
 var router = express.Router()
 ```
-Load router-level middleware by using the `router.use()` and `router.METHOD()` functions.
+`router.use()` ve `router.METHOD()` fonksiyonlarını kullanarak yönlendirici-düzeyi ara yazılımı yükle.
 
-The following example code replicates the middleware system that is shown above for application-level middleware, by using router-level middleware:
+Aşağıdaki örnek kod, yukarıda uygulama-düzeyi ara yazılım için gösterilen ara yazılım sistemini, yönlendirici-düzeyi ara yazılım kullanarak kopyalar:
 
 ```js
 var app = express()
 var router = express.Router()
 
-// a middleware function with no mount path. This code is executed for every request to the router
+// hedef yolu olmayan bir ara yazılım fonksiyonu. Bu kod yönlendiriciye yapılan her istekte çalışır
 router.use(function (req, res, next) {
   console.log('Time:', Date.now())
   next()
 })
 
-// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+// /user/:id yolu için yapılan herhangi bir HTTP tipi isteğinin istek bilgilerini gösteren bir ara yazılım alt-kümesi
 router.use('/user/:id', function (req, res, next) {
   console.log('Request URL:', req.originalUrl)
   next()
@@ -147,37 +147,36 @@ router.use('/user/:id', function (req, res, next) {
   next()
 })
 
-// a middleware sub-stack that handles GET requests to the /user/:id path
+// /user/:id yoluna yapılan GET isteklerini işleyen bir ara yazılım alt-kümesi
 router.get('/user/:id', function (req, res, next) {
-  // if the user ID is 0, skip to the next router
+  // kullanıcı ID'si 0 ise, bir sonraki yönlendiriciye geç
   if (req.params.id === '0') next('route')
-  // otherwise pass control to the next middleware function in this stack
+  // aksi takdirde kontrolü bu kümedeki bir sonraki ara yazılıma ver
   else next()
 }, function (req, res, next) {
-  // render a regular page
+  // normal bir sayfa göster
   res.render('regular')
 })
 
-// handler for the /user/:id path, which renders a special page
+// özel bir sayfa gösteren /user/:id yolu işleyicisi
 router.get('/user/:id', function (req, res, next) {
   console.log(req.params.id)
   res.render('special')
 })
 
-// mount the router on the app
+// yönlendiriciyi uygulamaya yerleştir
 app.use('/', router)
 ```
 
-To skip the rest of the router's middleware functions, call `next('router')`
-to pass control back out of the router instance.
+Yönlendiricinin kalan ara yazılım fonksiyonlarını geçmek için, yönlendirici örneğinden kontrolü almak için `next('router')` metodunu çağırın.
 
-This example shows a middleware sub-stack that handles GET requests to the `/user/:id` path.
+Bu örnek, `/user/:id` yoluna yapılan GET isteklerini işleyen bir ara yazılım alt-kümesini gösterir.
 
 ```js
 var app = express()
 var router = express.Router()
 
-// predicate the router with a check and bail out when needed
+// yönlendiriciyi bir kontrol ile doğrula ve gerektiğinde bir sonraki yönlendiriciye geçerek kurtul
 router.use(function (req, res, next) {
   if (!req.headers['x-auth']) return next('router')
   next()
@@ -187,47 +186,48 @@ router.get('/', function (req, res) {
   res.send('hello, user!')
 })
 
-// use the router and 401 anything falling through
+// geçen herhangi birşey için yönlendiriciyı ve 401'i kullan
 app.use('/admin', router, function (req, res) {
   res.sendStatus(401)
 })
 ```
 
-<h2 id='middleware.error-handling'>Error-handling middleware</h2>
+<h2 id='middleware.error-handling'>Hata-işleyici ara yazılım</h2>
 
 <div class="doc-box doc-notice" markdown="1">
-Error-handling middleware always takes _four_ arguments.  You must provide four arguments to identify it as an error-handling middleware function. Even if you don't need to use the `next` object, you must specify it to maintain the signature. Otherwise, the `next` object will be interpreted as regular middleware and will fail to handle errors.
+Hata-işleyici ara yazılımı her zaman _dört_ argüman alır. Bir hata-işleyici ara yazılım fonksiyonunu tanımlayabilmek için dört argüman sağlamalısınız. `next` objesini kullanmaya ihtiyacınız yoksa bile, metod imzasını koruyabilmek için tanımlamalısınız. Aksi takdirde, `next` objesi normal bir ara yazılım gibi değerlendirilecek ve hataları işlemede başarısız olacaktır.
 </div>
 
-Define error-handling middleware functions in the same way as other middleware functions, except with four arguments instead of three, specifically with the signature `(err, req, res, next)`):
+Hata-işleme ara yazılım fonksiyonlarını diğer ara yazılım fonksiyonları gibi tanımla, ancak istisna olarak üç argüman yerine 4 ile, özellikle `(err, req, res, next)` imzasıyla:
+
 
 ```js
 app.use(function (err, req, res, next) {
   console.error(err.stack)
-  res.status(500).send('Something broke!')
+  res.status(500).send('Birşeyler bozuk!')
 })
 ```
 
-For details about error-handling middleware, see: [Error handling](/{{ page.lang }}/guide/error-handling.html).
+Hata-işleyici ara yazılım hakkında daha fazla detay için bakınız [Hata-işleme](/{{ page.lang }}/guide/error-handling.html).
 
-<h2 id='middleware.built-in'>Built-in middleware</h2>
+<h2 id='middleware.built-in'>Gömülü ara yazılım</h2>
 
-Starting with version 4.x, Express no longer depends on [Connect](https://github.com/senchalabs/connect). With the exception of `express.static`, all of the middleware
-functions that were previously included with Express' are now in separate modules. Please view [the list of middleware functions](https://github.com/senchalabs/connect#middleware).
+4.x sürümünden başlayarak, Express [Connect](https://github.com/senchalabs/connect) ara yazılımına bağımlı değil.
+`express.static` hariç, Express ile daha önce dahil edilen tüm ara katman yazılımı fonksiyonları artık ayrı modüllerde. Lütfen bakınız [ara yazılım fonksiyonları listesi](https://github.com/senchalabs/connect#middleware).
 
-The only built-in middleware function in Express is `express.static`. This function is based on [serve-static](https://github.com/expressjs/serve-static), and is responsible for serving static assets such as HTML files, images, and so on.
+Express'teki tek gömülü ara yazılım fonksiyonu `express.static` fonksiyonudur. Bu fonksiyon [serve-static](https://github.com/expressjs/serve-static)'e dayanır, ve HTML dosyaları, görüntüler vb. gibi statik dosyaları sunmaktan sorumludur.
 
-The function signature is:
+Fonksiyon imzası böyledir:
 
 ```js
 express.static(root, [options])
 ```
 
-The `root` argument specifies the root directory from which to serve static assets.
+`root` argümanı statik dosyaların sunulacağı kök dizini belirtir.
 
-For information on the `options` argument and more details on this middleware function, see [express.static](/en/4x/api.html#express.static).
+`options` argümanı ve bu ara yazılım fonksiyonu hakkında daha detaylı bilgi için, bakınız [express.static](/en/4x/api.html#express.static).
 
-Here is an example of using the `express.static` middleware function with an elaborate options object:
+Bu örnek `express.static` ara yazılım fonksiyonunu ayrıntılı bir seçenekler objesiyle kullanımını gösterir:
 
 ```js
 var options = {
@@ -245,7 +245,7 @@ var options = {
 app.use(express.static('public', options))
 ```
 
-You can have more than one static directory per app:
+Her bir uygulama için birden fazla statik dizine sahip olabilirsiniz:
 
 ```js
 app.use(express.static('public'))
@@ -253,15 +253,15 @@ app.use(express.static('uploads'))
 app.use(express.static('files'))
 ```
 
-For more details about the `serve-static` function and its options, see: [serve-static](https://github.com/expressjs/serve-static) documentation.
+`serve-static` fonksiyonu ve seçenekleri hakkında daha detaylı bilgi için, [serve-static](https://github.com/expressjs/serve-static) dökümantasyonuna bakınız.
 
-<h2 id='middleware.third-party'>Third-party middleware</h2>
+<h2 id='middleware.third-party'>Üçüncü-parti ara yazılım</h2>
 
-Use third-party middleware to add functionality to Express apps.
+Express uygulamalarına işlevsellik katmak için üçüncü-parti ara yazılım kullan.
 
-Install the Node.js module for the required functionality, then load it in your app at the application level or at the router level.
+Gerekli işlevsellik için Node.js modülünü indir, ve daha sonra uygulamana uygulama-düzeyinde veya yönlendirici-düzeyinde yükle.
 
-The following example illustrates installing and loading the cookie-parsing middleware function `cookie-parser`.
+Aşağıdaki örnek `cookie-parser` çerez-ayrıştırma ara yazılım fonksiyonunu indirme ve yüklemeyi gösterir.
 
 ```sh
 $ npm install cookie-parser
@@ -272,9 +272,9 @@ var express = require('express')
 var app = express()
 var cookieParser = require('cookie-parser')
 
-// load the cookie-parsing middleware
+// çerez-ayrıştırıcı ara yazılımı yükle
 app.use(cookieParser())
 ```
 
-For a partial list of third-party middleware functions that are commonly used with Express, see: [Third-party middleware](../resources/middleware.html).
+Express ile yaygın olarak kullanılan üçüncü-parti ara yazılım fonksiyonlarının kısmi bir listesi için, bakınız: [Üçüncü-parti ara yazılım](../resources/middleware.html).
 </div>
