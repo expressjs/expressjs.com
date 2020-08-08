@@ -10,6 +10,12 @@ lang: tr
 _Routing_ uygulama bitiş noktalarının tanımını (URI'ler) ve istemci isteklerine nasıl yanıt verdiklerini ifade eder.
 Yönlendirme'ye giriş için, [Temel yönlendirme] sayfasına bakınız.(/{{ page.lang }}/starter/basic-routing.html).
 
+HTTP metod isimlerine karşılık gelen Express `app` objesinin metodlarını kullanarak yönlendirmeleri tanımlayabilirsiniz; örneğin, GET isteklerini işlemek için `app.get()` ve POST isteklerini işlemek için de `app.post()` kullanmak gibi. Tam liste için bakınız [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD). Bütün HTTP metodlarını işlemek için [app.all()](/{{ page.lang }}/4x/api.html#app.all), ve geri çağırma fonksiyonu olarak da ara yazılım tanımlamak için [app.use()](/{{ page.lang }}/4x/api.html#app.use) kullanabilirsiniz (Daha fazla detay için bakınız [Ara yazılım kullanmak](/{{ page.lang }}/guide/using-middleware.html)).
+
+Bu yönlendirme metodları, uygulamanın belirtilen bir rotaya (bitiş noktası) ve HTTP metoduna aldığı isteklerde çağrılan bir geri çağırma fonksiyonu belirtirler (bazen "işleyici fonksiyonlar" olarak isimlendirilirler). Başka bir deyişle, uygulama, belirtilen rota(lar) ve metod(lar) ile eşleşen istekleri "dinler", ve bir eşleşme algıladığında, ilgili geri çağırma fonksiyonunu çağırır.
+
+Aslında yönlendirme metodları birden fazla geri çağırma fonksiyonunu argüman olarak alabilir. Birden fazla geri çağırma fonksiyonu olduğunda, bir sonraki fonksiyona kontrolü vermek için geri çağırma fonksiyonuna `next`' argümanını verip, geri çağırma fonksiyonunun içinde `next()` metodunu çağırmak önemlidir.
+
 Aşağıdaki kod çok temel bir rota örneğidir.
 
 ```js
