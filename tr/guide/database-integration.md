@@ -1,44 +1,43 @@
 ---
 layout: page
-title: Express database integration
+title: Express veritabanı integrasyonu
 menu: guide
 lang: tr
+redirect_from: "/guide/database-integration.html"
 ---
-<div id="page-doc" markdown="1">
-# Database integration
+# Veritabanı integrasyonu
 
-Adding the capability to connect databases to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node.js modules for database systems in your Express app:
+Veritabanlarını Express uygulamalarına bağlama kabiliyeti eklemek, uygulamanızdaki veritabanı için uygun bir Node.js sürücüsünü yükleyerek yapılabilecek kadar kolaydır. Bu döküman, Express uygulamanıza veritabanı sistemleri için bazı popüler Node.js modüllerinin nasıl eklendiğini ve kullanıldığını kısaca anlatır:
 
 * [Cassandra](#cassandra)
 * [Couchbase](#couchbase)
 * [CouchDB](#couchdb)
 * [LevelDB](#leveldb)
 * [MySQL](#mysql)
-* [MongoDB](#mongo)
+* [MongoDB](#mongodb)
 * [Neo4j](#neo4j)
-* [PostgreSQL](#postgres)
+* [Oracle](#oracle)
+* [PostgreSQL](#postgresql)
 * [Redis](#redis)
-* [SQL Server](#mssql)
+* [SQL Server](#sql-server)
 * [SQLite](#sqlite)
-* [ElasticSearch](#elasticsearch)
+* [Elasticsearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
-These database drivers are among many that are available.  For other options,
-search on the [npm](https://www.npmjs.com/) site.
+Bu veritabanı sürücüleri mevcut olanların çoğunun arasındadır. Diğer seçenekler için, [npm](https://www.npmjs.com/) sitesinde arayınız.
 </div>
-
-<a name="cassandra"></a>
 
 ## Cassandra
 
 **Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install cassandra-driver
 ```
 
-**Example**
+### Örnek
 
 ```js
 var cassandra = require('cassandra-driver')
@@ -50,24 +49,23 @@ client.execute('select key from system.local', function (err, result) {
 })
 ```
 
-<a name="couchbase"></a>
-
 ## Couchbase
 
 **Module**: [couchnode](https://github.com/couchbase/couchnode)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install couchbase
 ```
 
-**Example**
+### Örnek
 
 ```js
 var couchbase = require('couchbase')
 var bucket = (new couchbase.Cluster('http://localhost:8091')).openBucket('bucketName')
 
-// add a document to a bucket
+// bir dökümanı bir kovaya ekle
 bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, function (err, result) {
   if (err) {
     console.log(err)
@@ -76,7 +74,7 @@ bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, function (err, res
   }
 })
 
-// get all documents with shoe size 13
+// "shoe" alanının değeri 13 olan bütün dökümanları getir
 var n1ql = 'SELECT d.* FROM `bucketName` d WHERE shoeSize = $1'
 var query = N1qlQuery.fromString(n1ql)
 bucket.query(query, [13], function (err, result) {
@@ -88,25 +86,24 @@ bucket.query(query, [13], function (err, result) {
 })
 ```
 
-<a name="couchdb"></a>
-
 ## CouchDB
 
 **Module**: [nano](https://github.com/dscape/nano)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install nano
 ```
 
-**Example**
+### Örnek
 
 ```js
 var nano = require('nano')('http://localhost:5984')
 nano.db.create('books')
 var books = nano.db.use('books')
 
-// Insert a book document in the books database
+// books veritabanına bir kitap ekle
 books.insert({ name: 'The Art of war' }, null, function (err, body) {
   if (err) {
     console.log(err)
@@ -115,7 +112,7 @@ books.insert({ name: 'The Art of war' }, null, function (err, body) {
   }
 })
 
-// Get a list of all books
+// bütün kitapların bir listesini getir
 books.list(function (err, body) {
   if (err) {
     console.log(err)
@@ -125,18 +122,17 @@ books.list(function (err, body) {
 })
 ```
 
-<a name="leveldb"></a>
-
 ## LevelDB
 
 **Module**: [levelup](https://github.com/rvagg/node-levelup)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install level levelup leveldown
 ```
 
-**Example**
+### Örnek
 
 ```js
 var levelup = require('levelup')
@@ -153,18 +149,17 @@ db.put('name', 'LevelUP', function (err) {
 })
 ```
 
-<a name="mysql"></a>
-
 ## MySQL
 
 **Module**: [mysql](https://github.com/felixge/node-mysql/)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install mysql
 ```
 
-**Example**
+### Örnek
 
 ```js
 var mysql = require('mysql')
@@ -186,18 +181,17 @@ connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
 connection.end()
 ```
 
-<a name="mongo"></a>
-
 ## MongoDB
 
 **Module**: [mongodb](https://github.com/mongodb/node-mongodb-native)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install mongodb
 ```
 
-**Example**
+### Örnek (v2.*)
 
 ```js
 var MongoClient = require('mongodb').MongoClient
@@ -213,20 +207,37 @@ MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
 })
 ```
 
-If you want an object model driver for MongoDB, look at [Mongoose](https://github.com/LearnBoost/mongoose).
+### Örnek (v3.*)
 
-<a name="neo4j"></a>
+```js
+var MongoClient = require('mongodb').MongoClient
+
+MongoClient.connect('mongodb://localhost:27017/animals', function (err, client) {
+  if (err) throw err
+
+  var db = client.db('animals')
+
+  db.collection('mammals').find().toArray(function (err, result) {
+    if (err) throw err
+
+    console.log(result)
+  })
+})
+```
+
+MongoDB için bir nesne model sürücüsü istiyorsanız, bakınız [Mongoose](https://github.com/LearnBoost/mongoose).
 
 ## Neo4j
 
 **Module**: [apoc](https://github.com/hacksparrow/apoc)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install apoc
 ```
 
-**Example**
+### Örnek
 
 ```js
 var apoc = require('apoc')
@@ -241,21 +252,66 @@ apoc.query('match (n) return n').exec().then(
 )
 ```
 
-<a name="postgres"></a>
+## Oracle
+
+**Module**: [oracledb](https://github.com/oracle/node-oracledb)
+
+### Yükleme
+
+ NOTE: [Yükleme önkoşulları için bakınız](https://github.com/oracle/node-oracledb#-installation).
+
+```sh
+$ npm install oracledb
+```
+
+### Örnek
+
+```js
+const oracledb = require('oracledb')
+const config = {
+  user: '<your db user>',
+  password: '<your db password>',
+  connectString: 'localhost:1521/orcl'
+}
+
+async function getEmployee (empId) {
+  let conn
+
+  try {
+    conn = await oracledb.getConnection(config)
+
+    const result = await conn.execute(
+      'select * from employees where employee_id = :id',
+      [empId]
+    )
+
+    console.log(result.rows[0])
+  } catch (err) {
+    console.log('Ouch!', err)
+  } finally {
+    if (conn) { // conn görevi çalıştı, kapatılmalı
+      await conn.close()
+    }
+  }
+}
+
+getEmployee(101)
+```
 
 ## PostgreSQL
 
 **Module**: [pg-promise](https://github.com/vitaly-t/pg-promise)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install pg-promise
 ```
 
-**Example**
+### Örnek
 
 ```js
-var pgp = require('pg-promise')(/* options */)
+var pgp = require('pg-promise')(/* seçenekler */)
 var db = pgp('postgres://username:password@host:port/database')
 
 db.one('SELECT $1 AS value', 123)
@@ -267,21 +323,21 @@ db.one('SELECT $1 AS value', 123)
   })
 ```
 
-<a name="redis"></a>
-
 ## Redis
 
 **Module**: [redis](https://github.com/mranney/node_redis)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install redis
 ```
 
-**Example**
+### Örnek
 
 ```js
-var client = require('redis').createClient()
+var redis = require('redis')
+var client = redis.createClient()
 
 client.on('error', function (err) {
   console.log('Error ' + err)
@@ -302,27 +358,31 @@ client.hkeys('hash key', function (err, replies) {
 })
 ```
 
-<a name="mssql"></a>
-
 ## SQL Server
 
 **Module**: [tedious](https://github.com/tediousjs/tedious)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install tedious
 ```
 
-**Example**
+### Örnek
 
 ```js
 var Connection = require('tedious').Connection
 var Request = require('tedious').Request
 
 var config = {
-  userName: 'your_username', // update me
-  password: 'your_password', // update me
-  server: 'localhost'
+  server: 'localhost',
+  authentication: {
+    type: 'default',
+    options: {
+      userName: 'your_username', // güncelle
+      password: 'your_password' // güncelle
+    }
+  }
 }
 
 var connection = new Connection(config)
@@ -359,18 +419,17 @@ function executeStatement () {
 }
 ```
 
-<a name="sqlite"></a>
-
 ## SQLite
 
 **Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install sqlite3
 ```
 
-**Example**
+### Örnek
 
 ```js
 var sqlite3 = require('sqlite3').verbose()
@@ -394,18 +453,17 @@ db.serialize(function () {
 db.close()
 ```
 
-<a name="elasticsearch"></a>
-
-## ElasticSearch
+## Elasticsearch
 
 **Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
-**Installation**
+
+### Yükleme
 
 ```sh
 $ npm install elasticsearch
 ```
 
-**Example**
+### Örnek
 
 ```js
 var elasticsearch = require('elasticsearch')
@@ -430,4 +488,3 @@ client.search({
   console.trace(error.message)
 })
 ```
-</div>
