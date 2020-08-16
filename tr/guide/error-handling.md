@@ -7,11 +7,6 @@ redirect_from: "/guide/error-handling.html"
 ---
 # Hata İşleme
 
-
-_Error Handling_ refers to how Express catches and processes errors that
-occur both synchronously and asynchronously. Express comes with a default error
-handler so you don't need to write your own to get started.
-
 _Error Handling_, senkron ve asenkron olarak meydana gelen hataların Express tarafından nasıl yakalandığına ve işlendiğine değinir. Express varsayılan olarak bir hata işleyiciyle gelir, bu nedenle hata işlemeye başlamak için kendinizin yazmanıza gerek yoktur.
 
 ## Hataları Yakalamak
@@ -51,9 +46,6 @@ app.get('/user/:id', async function (req, res, next) {
 `getUserById` bir hata fırlattığında veya ret verdiğinde, `next` fonksiyonu ya fırlatılan hatayla ya da ret verilen değer ile çağrılacaktır. Eğer herhangi bir ret değeri verilmediyse, `next` fonksiyonu Express yönlendiricisi tarafından sağlanan varsayılan Error objesiyle çağrılacak.
 
 Eğer `next()` fonksiyonuna herhangi birşey verdiğinizde (`'route'` karakter dizisi hariç), Express şimdiki isteği bir hata olarak sayıp hata işlemeyen yönlendirici ve ara yazılım fonksiyonlarını es geçecektir.
-
-If the callback in a sequence provides no data, only errors, you can simplify
-this code as follows:
 
 Eğer bir dizideki geri çağırma fonksiyonu veri sağlamıyorsa, sadece hataları veriyorsa, kodu bu şekilde basitleştirebilirsiniz:
 
@@ -221,7 +213,6 @@ function clientErrorHandler (err, req, res, next) {
 }
 ```
 
-Implement the "catch-all" `errorHandler` function as follows (for example):
 "Hepsini-yakala" `errorHandler` fonksiyonunu aşağıdaki gibi tanımlayın:
 
 ```js
