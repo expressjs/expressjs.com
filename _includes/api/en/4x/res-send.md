@@ -2,7 +2,7 @@
 
 Sends the HTTP response.
 
-The `body` parameter can be a `Buffer` object, a `String`, an object, or an `Array`.
+The `body` parameter can be a `Buffer` object, a `String`, an object, `Boolean`, or an `Array`.
 For example:
 
 ```js
