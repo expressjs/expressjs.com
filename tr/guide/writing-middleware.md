@@ -11,7 +11,7 @@ redirect_from: "/guide/writing-middleware.html"
 
 _Ara yazılım_ fonksiyonları uygulamanın istek-yanıt döngüsünde (`req`) [istek objesi](/{{ page.lang }}/4x/api.html#req), (`res`) [yanıt objesi](/{{ page.lang }}/4x/api.html#res), ve `next` metoduna sahip fonksiyonlardır. Express yönlendiricisinde bir fonksiyon olan `next`çağrıldığında şimdiki ara yazılımın ardından gelen ara yazılımı çalıştırır.
 
-Ara yazılım yonksiyonları aşağıdaki görevleri yerine getirebilir:
+Ara yazılım fonksiyonları aşağıdaki görevleri yerine getirebilir:
 
 * Herhangi bir kodu çalıştırma.
 * İstek ve yanıt objelerine değişiklik yapma.
