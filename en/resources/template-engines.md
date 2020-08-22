@@ -17,6 +17,7 @@ These template engines work "out-of-the-box" with Express:
 - **[EJS](https://github.com/tj/ejs)**: Embedded JavaScript template engine.
 - **[hbs](https://github.com/pillarjs/hbs)**: Adapter for Handlebars.js, an extension of Mustache.js template engine.
 - **[Squirrelly](https://github.com/squirrellyjs/squirrelly)**: Blazing-fast template engine that supports partials, helpers, custom tags, filters, and caching. Not white-space sensitive, works with any language.
+- **[Spacengine](https://github.com/ceyrex20/spacengine)**: Fast and simple embedded JavaScript template engine.
 - **[Eta](https://github.com/eta-dev/eta)**: Super-fast lightweight embedded JS template engine. Supports custom delimiters, async, whitespace control, partials, caching, plugins.
 - **[React](https://github.com/reactjs/express-react-views)**: Renders React components on the server. It renders static markup and does not support mounting those views on the client.
 - **[h4e](https://github.com/louischatriot/h4e)**: Adapter for Hogan.js, with support for partials and layouts.
