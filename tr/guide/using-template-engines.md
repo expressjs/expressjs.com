@@ -1,56 +1,49 @@
 ---
 layout: page
-title: Using template engines with Express
+title: Express ile şablon motorları kullanmak
 menu: guide
 lang: tr
+redirect_from: "/guide/using-template-engines.html"
 ---
-<div id="page-doc" markdown="1">
-# Using template engines with Express
+# Express ile şablon motorları kullanmak
 
-A _template engine_ enables you to use static template files in your application.   At runtime, the template engine replaces
-variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
-This approach makes it easier to design an HTML page.
+_Şablon motoru_, uygulamanızda statik şablon dosyaları kullanmanızı sağlar. Çalışma zamanında, şablon motoru bir şablon dosyasındaki değişkenleri alıp gerçek değerleyler değiştirir, ve şablonu bir HTML dosyasına dönüştürüp istemciye gönderir. Bu yaklaşım bir HTML sayfasını tasarlamayı kolaylaştırır.
 
-Some popular template engines that work with Express are [Pug](https://pugjs.org/api/getting-started.html),
-[Mustache](https://www.npmjs.com/package/mustache), and [EJS](https://www.npmjs.com/package/ejs).
-The [Express application generator](/{{ page.lang }}/starter/generator.html) uses [Jade](https://www.npmjs.com/package/jade) as its default, but it also supports several others.
+Express ile çalışan bazı popüler şablon motorları: [Pug](https://pugjs.org/api/getting-started.html), [Mustache](https://www.npmjs.com/package/mustache), ve [EJS](https://www.npmjs.com/package/ejs). [Express uygulama üreteci (generator)](/{{ page.lang }}/starter/generator.html) varsayılan olarak [Jade](https://www.npmjs.com/package/jade) kullanıyor, ancak aynı zamanda diğerlerini de destekler.
 
-See [Template Engines (Express wiki)](https://github.com/expressjs/express/wiki#template-engines)
-for a list of template engines you can use with Express.
-See also [Comparing JavaScript Templating Engines: Jade, Mustache, Dust and More](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/).
+Express ile kullanabileceğiniz şablon motorları listesi için bakınız [Şablon Motorları (Express wiki)](https://github.com/expressjs/express/wiki#template-engines).
+Ayrıca bakınız: [JavaScript Şablonlama Motorlarını Karşılaştırma:: Jade, Mustache, Dust ve Daha fazla](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/).
 
 <div class="doc-box doc-notice" markdown="1">
-**Note**: Jade has been renamed to [Pug](https://www.npmjs.com/package/pug).  You can continue to use Jade in your app, and it will work just fine.  However if you want the latest updates to the template engine, you must replace Jade with Pug in your app.
+**Not**: Jade, [Pug](https://www.npmjs.com/package/pug) olarak değiştirildi. Uygulamanızda Jade kullanmaya devam edebilirsiniz, ve problem olmadan çalışacaktır. Ancak şablon motorunun en son güncellemelerini almak istiyorsanız, uygulamanızda Jade'i Pug ile değiştirmelisiniz.
 </div>
 
-To render template files, set the following [application setting properties](/{{ page.lang }}/4x/api.html#app.set), set in `app.js` in the default app created by the generator:
+Şablon dosyalarını işlemek için, aşağıdaki [uygulama ayarları özelliklerini](/{{ page.lang }}/4x/api.html#app.set) ayarlayın, üretici (generator) tarafından yaratılan varsayılan uygulamada `app.js` dosyasında ayarlayın:
 
-* `views`, the directory where the template files are located. Eg: `app.set('views', './views')`.
-This defaults to the `views` directory in the application root directory.
-* `view engine`, the template engine to use. For example, to use the Pug template engine: `app.set('view engine', 'pug')`.
+* `views`, şablon dosyalarının bulunduğu dizindir. Örnek: `app.set('views', './views')`.
+Bu varsayılan olarak uygulamanın kök dizindeki `views` dizinine denk gelir.
 
-Then install the corresponding template engine npm package; for example to install Pug:
+* `view engine`, kullanılacak şablon motorudur. Örnek olarak, Pug şablon motorunu kullanmak için: `app.set('view engine', 'pug')`.
+
+Daha sonra ise, ilgili şablon motorunun npm paketini yükleyin; örneğin Pug yüklemek için:
 
 ```sh
 $ npm install pug --save
 ```
 
 <div class="doc-box doc-notice" markdown="1">
-Express-compliant template engines such as Jade and Pug export a function named `__express(filePath, options, callback)`,
-which is called by the `res.render()` function to render the template code.
+Jade ve Pug gibi Express-uyumlu şablon motorları, şablon kodunu işlemek için `res.render()` tarafından çağrılan `__express(filePath, options, callback)` isimli bir fonksiyon dışa aktarır.
 
-Some template engines do not follow this convention. The [Consolidate.js](https://www.npmjs.org/package/consolidate)
-library follows this convention by mapping all of the popular Node.js template engines, and therefore works seamlessly within Express.
+Bazı şablon motorları bu anlayışı takip etmez. [Consolidate.js](https://www.npmjs.org/package/consolidate) kütüphanesi bu anlayışı bütün popüler Node.js şablon motorlarını eşleyerek (mapping) takip eder, ve dolayısıyla Express içinde sorunsuz çalışır.
 </div>
 
-After the view engine is set, you don't have to specify the engine or load the template engine module in your app;
-Express loads the module internally, as shown below (for the above example).
+Görünüm motoru ayarlandıktan sonra, uygulamanızda motoru tanımlamanıza veya şablon motoru modülünü yüklemenize gerek yok; Aşağıda gösterildiği gibi (yukarıdaki örnek için) Express, modülü kendi içinde yükler.
 
 ```js
 app.set('view engine', 'pug')
 ```
 
-Create a Pug template file named `index.pug` in the `views` directory, with the following content:
+Aşağıdaki içerikle, `views` dizininde `index.pug` adlı bir Pug şablon dosyası yarat:
 
 ```pug
 html
@@ -60,8 +53,7 @@ html
     h1= message
 ```
 
-Then create a route to render the `index.pug` file. If the `view engine` property is not set,
-you must specify the extension of the `view` file. Otherwise, you can omit it.
+Ardından, `index.pug` dosyasını işlemek için bir rota yaratın. `view engine` özelliği ayarlanmadıysa, `view` dosyasının uzantısını belirtmelisiniz. Aksi takdirde belirtmenize gerek yok.
 
 ```js
 app.get('/', function (req, res) {
@@ -69,8 +61,8 @@ app.get('/', function (req, res) {
 })
 ```
 
-When you make a request to the home page, the `index.pug` file will be rendered as HTML.
+Ana sayfaya bir istek yaptığınızda, `index.pug` dosyası HTML olarak gösterilecek.
 
-To learn more about how template engines work in Express, see:
-["Developing template engines for Express"](/{{ page.lang }}/advanced/developing-template-engines.html).
-</div>
+Not: Görünüm motoru önbelleği şablonun çıktısını önbelleğine almaz, sadece şablonun temelini alır. Önbellek açık olsa bile, görünüm her istekle beraber yeniden işlenir.
+
+Şablon motorlarının Express'te nasıl çalıştıkları ile ilgili daha fazla bilgi için bakınız: ["Express için şablon motorları geliştirme"](/{{ page.lang }}/advanced/developing-template-engines.html).
