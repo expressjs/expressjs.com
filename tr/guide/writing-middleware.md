@@ -1,66 +1,65 @@
 ---
 layout: page
-title: Writing middleware for use in Express apps
+title: Express uygulamalarında kullanılacak ara yazılım yazmak
 menu: guide
 lang: tr
+redirect_from: "/guide/writing-middleware.html"
 ---
-<div id="page-doc" markdown="1">
-# Writing middleware for use in Express apps
+# Express uygulamalarında kullanılacak ara yazılım yazmak
 
-<h2>Overview</h2>
+<h2>Genel bakış</h2>
 
-_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/4x/api.html#req)  (`req`), the [response object](/{{ page.lang }}/4x/api.html#res) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
+_Ara yazılım_ fonksiyonları uygulamanın istek-yanıt döngüsünde (`req`) [istek objesi](/{{ page.lang }}/4x/api.html#req), (`res`) [yanıt objesi](/{{ page.lang }}/4x/api.html#res), ve `next` metoduna sahip fonksiyonlardır. Express yönlendiricisinde bir fonksiyon olan `next`çağrıldığında şimdiki ara yazılımın ardından gelen ara yazılımı çalıştırır.
 
-Middleware functions can perform the following tasks:
+Ara yazılım fonksiyonları aşağıdaki görevleri yerine getirebilir:
 
-* Execute any code.
-* Make changes to the request and the response objects.
-* End the request-response cycle.
-* Call the next middleware in the stack.
+* Herhangi bir kodu çalıştırma.
+* İstek ve yanıt objelerine değişiklik yapma.
+* İstek-yanıt döngüsünü sonlandırma.
+* Yığındaki bir sonraki ara yazılımı çağırma.
 
-If the current middleware function does not end the request-response cycle, it must call `next()` to pass control to the next middleware function. Otherwise, the request will be left hanging.
+Eğer şimdiki ara yazılım fonksiyonu istek-yanıt döngüsünü sonlandırmazsa, bir sonraki ara yazılım fonksiyonuna kontrolü vermek için `next` fonksiyounu çağrılmalı. Aksi takdirde, istek havada kalır.
 
-The following figure shows the elements of a middleware function call:
+Aşağıdaki şekil bir ara yazılım fonksiyon çağrısının öğelerini gösterir:
 
 <table id="mw-fig">
 <tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" id="mw-fig-img" />
 </td>
 <td class="mw-fig-callouts">
-<div class="callout" id="callout1">HTTP method for which the middleware function applies.</div>
+<div class="callout" id="callout1">Ara yazılım fonsiyonunu uyglandığı HTTP metodu.</div>
 
-<div class="callout" id="callout2">Path (route) for which the middleware function applies.</div>
+<div class="callout" id="callout2">Ara yazılım fonksiyonunun uygulandığı yol (rota).</div>
 
-<div class="callout" id="callout3">The middleware function.</div>
+<div class="callout" id="callout3">Ara yazılım fonksiyonu.</div>
 
-<div class="callout" id="callout4">Callback argument to the middleware function, called "next" by convention.</div>
+<div class="callout" id="callout4">Ara yazılım için geri çağırma argümanı, ortak anlayışa göre "next" olarak adlandırıldı.</div>
 
-<div class="callout" id="callout5">HTTP <a href="/{{ page.lang }}/4x/api.html#res">response</a> argument to the middleware function, called "res" by convention.</div>
+<div class="callout" id="callout5">Ara yazılım fonksiyonuna HTTP <a href="/{{ page.lang }}/4x/api.html#res">yanıtı</a> argümanı, ortak anlayışa göre "res" olarak adlandırıldı.</div>
 
-<div class="callout" id="callout6">HTTP <a href="/{{ page.lang }}/4x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
+<div class="callout" id="callout6">Ara yazılım fonksiyonuna HTTP <a href="/{{ page.lang }}/4x/api.html#req">isteği</a> argümanı, ortak anlayışa göre "req" olarak adlandırıldı.</div>
 </td></tr>
 </table>
 
-<h2>Example</h2>
+Express 5 ile başlayarak, Promise döndüren ara yazılım fonksiyonları reddettiklerinde veya hata fırlattıklarında `next(value)` fonksiyonunu çağırırlar. `next`, fırlatılan hata veya ret edilen değer ile çağrılacak.
 
-Here is an example of a simple "Hello World" Express application.
-The remainder of this article will define and add two middleware functions to the application:
-one called `myLogger` that prints a simple log message and another called `requestTime` that
-displays the timestamp of the HTTP request.
+<h2>Örnek</h2>
+
+Aşağıdaki basit bir "Merhaba Dünya" Ekspres uygulaması örneği. Bu yazının kalanında uygulamaya üç ara yazılım fonksiyonu tanımlanıp eklenecektir: basit bir log mesajı yazdıran `myLogger`, HTTP isteğinin zaman damgasını (timestamp) gösteren `requestTime`, ve gelen çerezleri doğrulayan `validateCookies`.
 
 ```js
 var express = require('express')
 var app = express()
 
 app.get('/', function (req, res) {
-  res.send('Hello World!')
+  res.send('Merhaba Dünya!')
 })
 
 app.listen(3000)
 ```
 
-<h3>Middleware function myLogger</h3>
-Here is a simple example of a middleware function called "myLogger". This function just prints "LOGGED" when a request to the app passes through it. The middleware function is assigned to a variable named `myLogger`.
+<h3>myLogger ara yazlım fonksiyonu</h3>
+İşte "myLogger" adında basit bir ara yazılım fonksiyonu. Uygulamaya gelen bir istek bu fonksiyondan geçtiğinde sadece "LOGGED" yazdırır. Bu ara yazılım fonksiyonu, `myLogger` adında bir değişkene atanmıştır.
 
 ```js
 var myLogger = function (req, res, next) {
@@ -70,13 +69,11 @@ var myLogger = function (req, res, next) {
 ```
 
 <div class="doc-box doc-notice" markdown="1">
-Notice the call above to `next()`.  Calling this function invokes the next middleware function in the app.
-The `next()` function is not a part of the Node.js or Express API, but is the third argument that is passed to the middleware function.  The `next()` function could be named anything, but by convention it is always named "next".
-To avoid confusion, always use this convention.
+Yukarıdaki örnekte `next()` çağrısına dikkat edin. Bu fonksiyonu çağırmak, uygulamadaki bir sonraki ara yazılım fonksiyonunu çağırır. `next()` fonskiyonu Express API veya Node.js'in bir parçası değil, ara yazılım fonksiyonuna geçilen üçüncü argümandır. `next()` fonksiyonu herhangi bir şekilde adlandırılabilir, ancak orta anlayışa göre her zaman "next" olarak adlandırıldı. Karışıklıktan kaçınmak için her zaman bu şekilde kullanın.
 </div>
 
-To load the middleware function, call `app.use()`, specifying the middleware function.
-For example, the following code loads the `myLogger` middleware function before the route to the root path (/).
+Ara yazılım fonksiyonunu yüklemek için, ara yazılım fonksiyonunu belirterek `app.use()` metodunu çağırın.
+Örneğin, aşağıdaki kod (/) kök yoluna yönlendirme yapılmadan önce `myLogger` ara yazılım fonksiyonunu yükler.
 
 ```js
 var express = require('express')
@@ -96,18 +93,17 @@ app.get('/', function (req, res) {
 app.listen(3000)
 ```
 
-Every time the app receives a request, it prints the message "LOGGED" to the terminal.
+Uygulama ne zaman bir istek aldığında, "LOGGED" mesajını terminale yazdırır.
 
-The order of middleware loading is important: middleware functions that are loaded first are also executed first.
+Ara yazılımları yükleme sırası önemlidir: ilk olarak yüklenen ara yazılım fonksiyonları yine ilk olarak çalışacaklardır.
 
-If `myLogger` is loaded after the route to the root path, the request never reaches it and the app doesn't print "LOGGED", because the route handler of the root path terminates the request-response cycle.
+`myLogger` kök yoluna yönlendirme yapıldıktan sonra yüklenirse, istek hiç ulaşmaz ve uygulama "LOGGED" mesajını yazdırmaz, çünkü kök yolu rota işleyicisi istek-yanıt döngüsünü sonlandırır.
 
-The middleware function `myLogger` simply prints a message, then passes on the request to the next middleware function in the stack by calling the `next()` function.
+`myLogger` ara yazılım fonksiyonu basit bir şekilde bir mesaj yazdırır, ve daha sonra `next()` metodunu çağırarak isteği yığındaki bir sonraki ara yazılım fonksiyonuna geçer.
 
-<h3>Middleware function requestTime</h3>
+<h3>requestTime ara yazılım fonksiyonu</h3>
 
-Next, we'll create a middleware function called "requestTime" and add it as a property called `requestTime`
-to the request object.
+Bir sonraki örnekte, "requestTime" adında bir ara yazılım fonksiyonu yaratıp `requestTime` adında bir özelliği istek objesine ekleyeceğiz.
 
 ```js
 var requestTime = function (req, res, next) {
@@ -116,7 +112,7 @@ var requestTime = function (req, res, next) {
 }
 ```
 
-The app now uses the `requestTime` middleware function. Also, the callback function of the root path route uses the property that the middleware function adds to `req` (the request object).
+Uygulama şimdi `requestTime` ara yazılım fonksiyonunu kullanıyor. Ayrıca, kök yol rotasının geri çağırma fonksiyonu, ara yazılımın `req` istek objesine eklediği özelliği kullanıyor.
 
 ```js
 var express = require('express')
@@ -138,28 +134,75 @@ app.get('/', function (req, res) {
 app.listen(3000)
 ```
 
-When you make a request to the root of the app, the app now displays the timestamp of your request in the browser.
+Uygulamanın kök yoluna bir istek yaptığınızda, uygulama şimdi tarayıcıda isteğinizin zaman damgasını yazdırıyor.
 
-Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
+<h3>validateCookies ara yazılım fonksiyonu</h3>
 
-For more information about Express middleware, see: [Using Express middleware](/{{ page.lang }}/guide/using-middleware.html).
+Son olarak, gelen çerezleri doğrulayan ve çerezler geçersiz olduğunda 400 yanıtı gönderen bir ara yazılım fonksiyonu yaratacağız.
 
-<h2>Configurable middleware</h2>
+Harici bir asenkron servisiyle çerezleri doğrulayan bir fonksiyonu örneği.
 
-If you need your middleware to be configurable, export a function which accepts an options object or other parameters, which, then returns the middleware implementation based on the input parameters.
+```js
+async function cookieValidator (cookies) {
+  try {
+    await externallyValidateCookie(cookies.testCookie)
+  } catch {
+    throw new Error('Geçersiz çerezler')
+  }
+}
+```
 
-File: `my-middleware.js`
+Burada `req` objesinden gelen çerezleri ayrıştırmak ve onları bizim `cookieValidator` fonksiyonuna geçmek için [`cookie-parser`](/resources/middleware/cookie-parser.html) ara yazılım fonksiyonunu kullanıyoruz. `validateCookies` ara yazılımı, ret durumunda otomatik olarak bizim hata işleyicisini tetikleyen bir Promise döndürür.
+
+```js
+var express = require('express')
+var cookieParser = require('cookie-parser')
+var cookieValidator = require('./cookieValidator')
+
+var app = express()
+
+async function validateCookies (req, res, next) {
+  await cookieValidator(req.cookies)
+  next()
+}
+
+app.use(cookieParser())
+
+app.use(validateCookies)
+
+// hata işleyicisi
+app.use(function (err, req, res, next) {
+  res.status(400).send(err.message)
+})
+
+app.listen(3000)
+
+```
+
+<div class="doc-box doc-notice" markdown="1">
+`next()` fonksiyonunun `await cookieValidator(req.cookies)` çağrısından sonra çağrıldığına bakınız. Bu, `cookieValidator` çözümlendiğinde yığındaki bir sonraki ara yazılımının çağrılmasını sağlar. `next()` fonksiyonuna `'route'` veya `'router'` karakter dizinleri dışında herhangi bir şey geçerseniz Express şimdiki isteği bir hata olarak değerlendirip arda kalan hata olmayan yönlendirme ve ara yazılım fonksiyonlarını es geçer.
+</div>
+
+İstek objesine, yanıt objesine, yığındaki bir sonraki ara yazılım fonksiyonuna, ve bütün Node.js API'sine erişme imkanına sahip olduğunuzdan, ara yazılım fonksiyonlarının imkanları sınırsızdır.
+
+Express ara yazılımı ile ilgili daha fazla bilgi için, bakınız: [Express ara yazılımı kullanmak](/{{ page.lang }}/guide/using-middleware.html).
+
+<h2>Yapılandırılabilir ara yazılım</h2>
+
+Ara yazılımınızın yapılandırılabilir olmasını istiyorsanız, seçenekler objesi veya diğer parametreleri kabul eden ve girdi parametrelerine göre ara yazılım implementasyonunu döndüren bir fonksiyon dışarıya aktarın.
+
+Dosya: `my-middleware.js`
 
 ```js
 module.exports = function (options) {
   return function (req, res, next) {
-    // Implement the middleware function based on the options object
+    // "options" objesine göre ara yazılım fonksiyonunu yaz
     next()
   }
 }
 ```
 
-The middleware can now be used as shown below.
+Bu ara yazılım şimdi aşağıdaki gibi kullanılabilir.
 
 ```js
 var mw = require('./my-middleware.js')
@@ -167,5 +210,4 @@ var mw = require('./my-middleware.js')
 app.use(mw({ option1: '1', option2: '2' }))
 ```
 
-Refer to [cookie-session](https://github.com/expressjs/cookie-session) and [compression](https://github.com/expressjs/compression) for examples of configurable middleware.
-</div>
+Yapılandırılabilir ara yazılım örnekleri için bakınız: [cookie-session](https://github.com/expressjs/cookie-session) ve [compression](https://github.com/expressjs/compression).
