@@ -80,7 +80,7 @@ app.use(helmet())
 
 If you don't want to use Helmet, then at least disable the `X-Powered-By` header.  Attackers can use this header (which is enabled by default) to detect apps running Express and then launch specifically-targeted attacks.
 
-So, best practice is to to turn off the header with the `app.disable()` method:
+So, best practice is to turn off the header with the `app.disable()` method:
 
 ```js
 app.disable('x-powered-by')
