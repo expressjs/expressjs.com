@@ -38,6 +38,7 @@ These template engines work "out-of-the-box" with Express:
 - **[express-tl](https://github.com/Drulac/express-tl)**: A template-literal engine implementation for Express.
 - **[vuexpress](https://github.com/vuexpress/vuexpress)**: A Vue.js server side rendering engine for Express.js.
 - **[Twing](https://www.npmjs.com/package/twing)**: First-class Twig engine for Node.js.
+- **[Sprightly](https://www.npmjs.com/package/sprightly)**: A very light-weight JS template engine (45 lines of code), that consists of all the bare-bones features that you want to see in a template engine.
 
 The [Consolidate.js](https://github.com/tj/consolidate.js) library unifies the APIs of these template engines to a single Express-compatible API.
 
