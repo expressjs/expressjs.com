@@ -7,7 +7,7 @@ lang: zh-cn
 
 # 代理背后的 Express
 
-在代理背后运行 Express 应用程序时，可使用 [app.set()](/{{ page.lang }}/4x/api.html#app.set)) 将应用程序变量 `trust proxy` 设置为下表中所列的某个值。
+在代理背后运行 Express 应用程序时，可使用 [app.set()](/{{ page.lang }}/4x/api.html#app.set) 将应用程序变量 `trust proxy` 设置为下表中所列的某个值。
 
 <div class="doc-box doc-info" markdown="1">
 尽管不设置应用程序变量 `trust proxy` 该应用程序也不会运行失败，但是它会误将代理的 IP 地址注册为客户机 IP 地址（除非配置了 `trust proxy`）。
