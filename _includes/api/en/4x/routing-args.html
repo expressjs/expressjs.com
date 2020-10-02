@@ -36,7 +36,8 @@ Callback functions; can be:
 <p>
 You can provide multiple callback functions that behave just like middleware, except
 that these callbacks can invoke <code>next('route')</code> to bypass
-the remaining route callback(s) or invoke <code>next('router')</code> to jump out of current router. You can use this mechanism to impose pre-conditions
+the remaining route callback(s) or invoke <code>next('router')</code> to jump out of the
+current router. You can use this mechanism to impose pre-conditions
 on a route, then pass control to subsequent routes if there is no reason to proceed with the current route.
 </p><p>
 Since <a href="#router">router</a> and <a href="#application">app</a> implement the middleware interface,
