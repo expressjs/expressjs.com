@@ -30,7 +30,7 @@ These template engines work "out-of-the-box" with Express:
 - **[Haml-Coffee](https://github.com/netzpirat/haml-coffee)**: Haml templates where you can write inline CoffeeScript.
 - **[Webfiller](https://github.com/haraldrudell/webfiller)**: Plain-html5 dual-side rendering, self-configuring routes, organized source tree, 100% js.
 - **[express-hbs](https://github.com/barc/express-hbs)**: Handlebars with layouts, partials and blocks for express 3 from Barc.
-- **[express-handlebars](https://github.com/ericf/express-handlebars)**: A Handlebars view engine for Express which doesn't suck.
+- **[express-handlebars](https://github.com/express-handlebars/express-handlebars)**: A Handlebars view engine for Express which doesn't suck.
 - **[express-views-dom](https://github.com/AndersDJohnson/express-views-dom)**: A DOM view engine for Express.
 - **[rivets-server](https://github.com/AndersDJohnson/rivets-server)**: Render Rivets.js templates on the server.
 - **[Exbars](https://github.com/YoussefKababe/exbars)**: A flexible Handlebars view engine for Express.
