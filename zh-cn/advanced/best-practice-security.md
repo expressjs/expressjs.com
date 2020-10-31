@@ -25,7 +25,7 @@ Express 2.x 和 3.x 不再得到维护。不会纠正这些版本中的安全问
 
 如果应用程序处理或传输敏感数据，请使用[传输层安全性](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) 来保护连接和数据。这种技术用于加密数据，然后将其从客户机发送到服务器，以防止某些常见的（而且容易的）黑客攻击。虽然 Ajax 和 POST 请求可能不是很明显，似乎“隐藏”在浏览器中，但是其网络流量很容易受到[包嗅探](https://en.wikipedia.org/wiki/Packet_analyzer)攻击和[中间人攻击](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)。
 
-您可能很熟悉安全套接字层 (SSL) 加密。[TLS 就是下一代的 SSL](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85)。换言之，如果您以前使用 SSL，请考虑升级到 TLS。一般而言，我们建议使用 Nginx 来处理 TLS。要获取在 Nginx（和其他服务器）上配置 TLS 的优秀参考信息，请参阅 [Recommended Server Configurations](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations) (Mozilla Wiki)。
+您可能很熟悉安全套接字层 (SSL) 加密。[TLS 就是下一代的 SSL](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx) 。换言之，如果您以前使用 SSL，请考虑升级到 TLS。一般而言，我们建议使用 Nginx 来处理 TLS。要获取在 Nginx（和其他服务器）上配置 TLS 的优秀参考信息，请参阅 [Recommended Server Configurations](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations) (Mozilla Wiki)。
 
 此外，可以使用一种方便的 [Let's Encrypt](https://letsencrypt.org/about/) 工具来获取免费的 TLS 证书，这是由[因特网安全研究组 (ISRG)](https://letsencrypt.org/isrg/) 提供的免费、自动化的开放式认证中心 (CA)。
 

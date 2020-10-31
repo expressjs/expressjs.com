@@ -7,13 +7,22 @@ lang: zh-cn
 
 # Express 应用程序生成器
 
-可使用应用程序生成器工具 (`express`) 快速创建应用程序框架。
+可使用应用程序生成器工具 (`express-generator`) 快速创建应用程序框架。
 
-使用以下命令安装 `express`：
+您可以使用 `npx` 命令（在 Node.js 8.2.0 中可用）运行应用程序生成器。
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install express-generator -g
+$ npx express-generator
+</code>
+</pre>
+
+对于早期的 Node 版本，可将应用程序生成器作为全局 npm 软件包安装，然后启动它。
+
+<pre>
+<code class="language-sh" translate="no">
+$ npm install -g express-generator
+$ express
 </code>
 </pre>
 
@@ -41,7 +50,7 @@ $ express -h
 </code>
 </pre>
 
-例如，以下语句在当前工作目录中创建名为 _myapp_ 的 Express 应用程序：
+例如，以下语句在当前工作目录中创建名为 _myapp_ 的 Express 应用程序并将视图引擎将设置为 [Pug](https://pugjs.org/) ：
 
 <pre>
 <code class="language-sh" translate="no">
@@ -84,11 +93,19 @@ $ DEBUG=myapp:* npm start
 </code>
 </pre>
 
-在 Windows 上，使用以下命令：
+在 Windows 命令提示符上，使用以下命令：
 
 <pre>
 <code class="language-sh" translate="no">
 > set DEBUG=myapp:* & npm start
+</code>
+</pre>
+
+在 Windows PowerShell 上，使用以下命令：
+
+<pre>
+<code class="language-sh" translate="no">
+PS> $env:DEBUG='myapp:*'; npm start
 </code>
 </pre>
 
