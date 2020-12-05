@@ -203,8 +203,6 @@ app.use(r1, r2);
       <td>Array</td>
       <td>
       Use an array to group middleware logically.
-      If you pass an array of middleware as the first or only middleware parameters,
-      then you <em>must</em> specify the mount path.
 <pre><code class="language-js">const r1 = express.Router();
 r1.get('/', function (req, res, next) {
   next();
@@ -215,7 +213,7 @@ r2.get('/', function (req, res, next) {
   next();
 });
 
-app.use('/', [r1, r2]);
+app.use([r1, r2]);
 </code></pre>
       </td>
     </tr>
