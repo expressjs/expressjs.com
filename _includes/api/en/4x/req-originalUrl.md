@@ -14,11 +14,12 @@ console.dir(req.originalUrl)
 // => '/search?q=something'
 ```
 
-In a middleware function, `req.originalUrl` is a combination of `req.baseUrl` and `req.path`, as shown in the following example.
+`req.originalUrl` is available both in middleware and router objects, and is a
+combination of `req.baseUrl` and `req.url`. Consider following example:
 
 ```js
-app.use('/admin', function (req, res, next) { // GET 'http://www.example.com/admin/new'
-  console.dir(req.originalUrl) // '/admin/new'
+app.use('/admin', function (req, res, next) { // GET 'http://www.example.com/admin/new?sort=desc'
+  console.dir(req.originalUrl) // '/admin/new?sort=desc'
   console.dir(req.baseUrl) // '/admin'
   console.dir(req.path) // '/new'
   next()
