@@ -1,23 +1,23 @@
 ---
 layout: page
-title: Express API Geçersiz Kılma
+title: Express API'yı Ezmek
 menu: guide
 lang: tr
 ---
 <div id="page-doc" markdown="1">
 
-# Express API'ı Geçersiz Kılmak
+# Express API'yı Ezmek
 
-Express API istek ve yanıt objelerindeki çeşitli özellik ve metodlardan oluşur. Bunlar prototip tarafından miras alınır. Express API'ın iki uzantı noktası vardır:
+Express API istek ve yanıt objelerindeki çeşitli özellik ve metotlardan oluşur. Bunlar prototip tarafından miras alınır. Express API'ın iki uzantı noktası vardır:
 
 1. `express.request` ve `express.response` alanlarındaki global prototipler.
 2. `app.request` ve `app.response` alanlarındaki uygulamaya özel prototipler.
 
-Global prototipleri değiştirmek aynı işlemde yüklenilen bütün Express uygulamalarını etkiler. İstenirse, yeni bir uygulama yaratıldıktan sonra sadece uygulamaya özel prototipleri değiştirerek, uygulama-spesifik değişiklikler yapılabilir.
+Global prototipleri değiştirmek aynı işlemde yüklenilen bütün Express uygulamalarını etkiler. İstenirse, yeni bir uygulama yaratıldıktan sonra sadece uygulamaya özel prototipleri değiştirerek, uygulama bazlı değişiklikler yapılabilir.
 
-## Metodlar
+## Metotlar
 
-Mevcut metodların davranış ve imzasını özel bir fonksiyon atayarak kendi metodlarınızla mevcutları geçersiz kılabilirsiniz.
+Mevcut metotların davranış ve imzasını özel bir fonksiyon atayarak kendi metotlarınızla mevcutları geçersiz kılabilirsiniz.
 
 Aşağıdaki örnek [res.sendStatus](/4x/api.html#res.sendStatus) metodunun davranışını geçersiz kılmayı gösterir:
 
@@ -30,9 +30,9 @@ app.response.sendStatus = function (statusCode, type, message) {
 }
 ```
 
-Yukarıdaki implementasyon `res.sendStatus` metodunun orijinal imzasını tamamen değiştiriyor. Şimdi ise bir statü kodu, kodlama tipi, ve isetmciye gönderilecek mesajı kabul ediyor.
+Yukarıdaki implementasyon `res.sendStatus` metodunun orijinal imzasını tamamen değiştiriyor. Şimdi ise bir statü kodu, kodlama tipi, ve istemciye gönderilecek mesajı kabul ediyor.
 
-Geçersiz kılınan metod şimdi bu şekilde kullanılabilir:
+Geçersiz kılınan metot şimdi bu şekilde kullanılabilir:
 
 ```js
 res.sendStatus(404, 'application/json', '{"error":"resource not found"}')
