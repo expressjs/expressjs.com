@@ -72,6 +72,9 @@ redirect_from: "/resources/companies-using-express.html"
     <a target="_new" class="imagelink" href="https://ilovecoding.org">
       <img alt="iLoveCoding" class="memberlogo" src="/images/companies/ilovecoding-logo.png" />
     </a>
+    <a target="_new" class="imagelink" href="https://nethunt.com">
+       <img alt="NetHunt" class="memberlogo" src="/images/companies/nethunt-logo.png" />
+    </a>
     <a target="_new" class="imagelink" href="https://www.kuali.co">
       <img alt="kuali" class="memberlogo" src="/images/companies/kuali-logo.png" />
     </a>
