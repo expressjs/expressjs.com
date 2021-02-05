@@ -7,8 +7,8 @@ lang: fr
 
 # Routage de base
 
-*Routage* fait référence à la détermination de la méthode dont une application répond à une demande client adressée à un
-noeud final spécifique, c'est-à-dire un URI (ou chemin) et une méthode  de demande HTTP (GET, POST, etc.).
+*Routage* fait référence à la détermination de la façon dont une application répond à un 
+nœud final spécifique, c'est-à-dire un URI (ou chemin) et une méthode de requête HTTP (GET, POST, etc.).
 
 Chaque route peut avoir une ou plusieurs fonctions de gestionnaire, qui sont exécutées lorsque la route est mise en correspondance.
 
