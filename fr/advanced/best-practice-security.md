@@ -37,7 +37,7 @@ Helmet n'est actuellement qu'une collection de neuf fonctions middleware plus pe
 
 * [csp](https://github.com/helmetjs/csp) définit l'en-tête `Content-Security-Policy` pour la protection contre les attaques de type cross-site scripting et autres injections intersites.
 * [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) supprime l'en-tête `X-Powered-By`.
-* [hsts](https://github.com/helmetjs/hsts) définit l'en-tête `Strict-Transport-Security` qui imposer des connexions (HTTP sur SSL/TLS) sécurisées au serveur.
+* [hsts](https://github.com/helmetjs/hsts) définit l'en-tête `Strict-Transport-Security` qui impose des connexions (HTTP sur SSL/TLS) sécurisées au serveur.
 * [ieNoOpen](https://github.com/helmetjs/ienoopen) définit `X-Download-Options` pour IE8+.
 * [noCache](https://github.com/helmetjs/nocache) définit des en-têtes `Cache-Control` et Pragma pour désactiver la mise en cache côté client.
 * [noSniff](https://github.com/helmetjs/dont-sniff-mimetype) définit `X-Content-Type-Options` pour protéger les navigateurs du reniflage du code MIME d'une réponse à partir du type de contenu déclaré.
@@ -185,7 +185,7 @@ $ requiresafe check
 
 Voici d'autres recommandations issues de l'excellente [liste de contrôle de sécurité Node.js](https://blog.risingstack.com/node-js-security-checklist/).  Pour tous les détails sur ces recommandations, reportez-vous à cet article de blogue :
 
-* Implémenter la limitation de débit pour empêcher les attaques de force brute liées à l'authentification.  Une façon de faire consiste à utiliser [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) pour mettre en place une règle de limitation de débit.  Sinon, vous pouvez utiliser des middleware tels que [express-limiter](https://www.npmjs.com/package/express-limiter), mais vous devrez alors modifier quelque peu votre code.
+* Implémentez la limitation de débit pour empêcher les attaques de force brute liées à l'authentification.  Une façon de faire consiste à utiliser [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) pour mettre en place une règle de limitation de débit.  Sinon, vous pouvez utiliser des middleware tels que [express-limiter](https://www.npmjs.com/package/express-limiter), mais vous devrez alors modifier quelque peu votre code.
 * Utilisez le middleware [csurf](https://www.npmjs.com/package/csurf) pour vous protéger contre les CSRF (Cross-Site Request Forgery).
 * Filtrez et nettoyez toujours les entrées utilisateur pour vous protéger contre les attaques de cross-site scripting (XSS) et d'injection de commande.
 * Défendez-vous contre les attaques par injection SQL en utilisant des requêtes paramétrées ou des instructions préparées.
