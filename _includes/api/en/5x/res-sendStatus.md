@@ -1,6 +1,6 @@
 <h3 id='res.sendStatus'>res.sendStatus(statusCode)</h3>
 
-Sets the response HTTP status code to `statusCode` and send its string representation as the response body.
+Sets the response HTTP status code to `statusCode` and sends its string representation as the response body.
 
 ```js
 res.sendStatus(200) // equivalent to res.status(200).send('OK')
