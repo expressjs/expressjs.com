@@ -68,72 +68,95 @@ mounting middleware.
 <div class="table-scroller">
 <table class="doctable" border="1">
 
-  <thead>
-    <tr>
-      <th> Type </th>
-      <th> Example </th>
-    </tr>
-  </thead>
-  <tbody>
+<thead>
+<tr>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
 
-    <tr>
-      <td>Path</td>
-      <td>
-      This will match paths starting with `/abcd`:
-        <pre><code class="language-js">app.use('/abcd', function (req, res, next) {
-  next();
-});
-</code></pre>
-      </td>
-    </tr>
+<tr>
+<td>Path</td>
+<td markdown="1">
+This will match paths starting with `/abcd`:
 
-    <tr>
-      <td>Path Pattern</td>
-      <td>
-      This will match paths starting with `/abcd` and `/abd`:
-        <pre><code class="language-js">app.use('/abc?d', function (req, res, next) {
-  next();
-});
-</code></pre>
+```js
+app.use('/abcd', function (req, res, next) {
+  next()
+})
+```
+
+</td>
+</tr>
+
+<tr>
+<td>Path Pattern</td>
+<td markdown="1">
+This will match paths starting with `/abcd` and `/abd`:
+
+```js
+app.use('/abc?d', function (req, res, next) {
+  next()
+})
+```
 
 This will match paths starting with `/abcd`, `/abbcd`, `/abbbbbcd`, and so on:
-<pre><code class="language-js">app.use('/ab+cd', function (req, res, next) {
-  next();
-});</code></pre>
+
+```js
+app.use('/ab+cd', function (req, res, next) {
+  next()
+})
+```
 
 This will match paths starting with `/abcd`, `/abxcd`, `/abFOOcd`, `/abbArcd`, and so on:
-<pre><code class="language-js">app.use('/ab\*cd', function (req, res, next) {
-  next();
-});</code></pre>
+
+```js
+app.use('/ab*cd', function (req, res, next) {
+  next()
+})
+```
 
 This will match paths starting with `/ad` and `/abcd`:
-<pre><code class="language-js">app.use('/a(bc)?d', function (req, res, next) {
-  next();
-});</code></pre>
-      </td>
-    </tr>
 
-    <tr>
-      <td>Regular Expression</td>
-      <td>
-      This will match paths starting with `/abc` and `/xyz`:
-        <pre><code class="language-js">app.use(/\/abc|\/xyz/, function (req, res, next) {
-  next();
-});</code></pre>
-      </td>
-    </tr>
+```js
+app.use('/a(bc)?d', function (req, res, next) {
+  next()
+})
+```
 
-    <tr>
-      <td>Array</td>
-      <td>
-      This will match paths starting with `/abcd`, `/xyza`, `/lmn`, and `/pqr`:
-        <pre><code class="language-js">app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
-  next();
-});</code></pre>
-      </td>
-    </tr>
+</td>
+</tr>
 
-  </tbody>
+<tr>
+<td>Regular Expression</td>
+<td markdown="1">
+This will match paths starting with `/abc` and `/xyz`:
+
+```js
+app.use(/\/abc|\/xyz/, function (req, res, next) {
+  next()
+})
+```
+
+</td>
+</tr>
+
+<tr>
+<td>Array</td>
+<td markdown="1">
+This will match paths starting with `/abcd`, `/xyza`, `/lmn`, and `/pqr`:
+
+```js
+app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
+  next()
+})
+```
+
+</td>
+</tr>
+
+</tbody>
 
 </table>
 </div>
@@ -146,100 +169,118 @@ Even though the examples are for `app.use()`, they are also valid for `app.use()
 
 <table class="doctable" border="1">
 
-  <thead>
-    <tr>
-      <th>Usage</th>
-      <th>Example</th>
-    </tr>
-  </thead>
-  <tbody>
+<thead>
+<tr>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
 
-    <tr>
-      <td>Single Middleware</td>
-      <td>You can define and mount a middleware function locally.
-<pre><code class="language-js">app.use(function (req, res, next) {
-  next();
-});
-</code></pre>
+<tbody>
+
+<tr>
+<td>Single Middleware</td>
+<td markdown="1">
+You can define and mount a middleware function locally.
+
+```js
+app.use(function (req, res, next) {
+  next()
+})
+```
+
 A router is valid middleware.
 
-<pre><code class="language-js">var router = express.Router();
+```js
+var router = express.Router()
 router.get('/', function (req, res, next) {
-  next();
-});
-app.use(router);
-</code></pre>
+  next()
+})
+app.use(router)
+```
 
 An Express app is valid middleware.
-<pre><code class="language-js">var subApp = express();
+
+```js
+var subApp = express()
 subApp.get('/', function (req, res, next) {
-  next();
-});
-app.use(subApp);
-</code></pre>
-      </td>
-    </tr>
+  next()
+})
+app.use(subApp)
+```
 
-    <tr>
-      <td>Series of Middleware</td>
-      <td>
-        You can specify more than one middleware function at the same mount path.
-<pre><code class="language-js">var r1 = express.Router();
+</td>
+</tr>
+
+<tr>
+<td>Series of Middleware</td>
+<td markdown="1">
+You can specify more than one middleware function at the same mount path.
+
+```js
+var r1 = express.Router()
 r1.get('/', function (req, res, next) {
-  next();
-});
+  next()
+})
 
-var r2 = express.Router();
+var r2 = express.Router()
 r2.get('/', function (req, res, next) {
-  next();
-});
+  next()
+})
 
-app.use(r1, r2);
-</code></pre>
-      </td>
-    </tr>
+app.use(r1, r2)
+```
 
-    <tr>
-      <td>Array</td>
-      <td>
-      Use an array to group middleware logically.
-<pre><code class="language-js">var r1 = express.Router();
+</td>
+</tr>
+
+<tr>
+<td>Array</td>
+<td markdown="1">
+Use an array to group middleware logically.
+
+```js
+var r1 = express.Router()
 r1.get('/', function (req, res, next) {
-  next();
-});
+  next()
+})
 
-var r2 = express.Router();
+var r2 = express.Router()
 r2.get('/', function (req, res, next) {
-  next();
-});
+  next()
+})
 
-app.use([r1, r2]);
-</code></pre>
-      </td>
-    </tr>
+app.use([r1, r2])
+```
 
-    <tr>
-      <td>Combination</td>
-      <td>
-        You can combine all the above ways of mounting middleware.
-<pre><code class="language-js">function mw1(req, res, next) { next(); }
-function mw2(req, res, next) { next(); }
+</td>
+</tr>
 
-var r1 = express.Router();
-r1.get('/', function (req, res, next) { next(); });
+<tr>
+<td>Combination</td>
+<td markdown="1">
+You can combine all the above ways of mounting middleware.
 
-var r2 = express.Router();
-r2.get('/', function (req, res, next) { next(); });
+```js
+function mw1 (req, res, next) { next() }
+function mw2 (req, res, next) { next() }
 
-var subApp = express();
-subApp.get('/', function (req, res, next) { next(); });
+var r1 = express.Router()
+r1.get('/', function (req, res, next) { next() })
 
-app.use(mw1, [mw2, r1, r2], subApp);
-</code></pre>
-      </td>
-    </tr>
+var r2 = express.Router()
+r2.get('/', function (req, res, next) { next() })
 
-  </tbody>
+var subApp = express()
+subApp.get('/', function (req, res, next) { next() })
+
+app.use(mw1, [mw2, r1, r2], subApp)
+```
+
+</td>
+</tr>
+
+</tbody>
 
 </table>
 
