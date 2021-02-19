@@ -140,15 +140,15 @@ The '`.`' character can't be used to capture a character in your capturing regex
 
 Examples:
 
-<pre><code class="language-js">
-//captures '1-a_6' but not '543-azser-sder'
-router.get('/[0-9]+-[[\\w]]*', function);
+```js
+// captures '1-a_6' but not '543-azser-sder'
+router.get('/[0-9]+-[[\\w]]*', function (req, res, next) { next() })
 
-//captures '1-a_6' and '543-az(ser"-sder' but not '5-a s'
-router.get('/[0-9]+-[[\\S]]*', function);
+// captures '1-a_6' and '543-az(ser"-sder' but not '5-a s'
+router.get('/[0-9]+-[[\\S]]*', function (req, res, next) { next() })
 
-//captures all (equivalent to '.*')
-router.get('[[\\s\\S]]*', function);
-</code></pre>
+// captures all (equivalent to '.*')
+router.get('[[\\s\\S]]*', function (req, res, next) { next() })
+```
 
 </div>
