@@ -7,11 +7,13 @@ redirect_from: "/guide/behind-proxies.html"
 ---
 # Express behind proxies
 
-When running an Express app behind a proxy, set (by using [app.set()](/{{ page.lang }}/4x/api.html#app.set)) the application variable `trust proxy` to one of the values listed in the following table.
+When running an Express app behind a reverse proxy, some of the Express APIs may return different values than expected. In order to adjust for this, the `trust proxy` application setting may be used to expose information provided by the reverse proxy in the Express APIs. The most common issue is express APIs that expose the client's IP address may instead show an internal IP address of the reverse proxy.
 
 <div class="doc-box doc-info" markdown="1">
-Although the app will not fail to run if the application variable `trust proxy` is not set, it will incorrectly register the proxy's IP address as the client IP address unless `trust proxy` is configured.
+When configuring the `trust proxy` setting, it is important to understand the exact setup of the reverse proxy. Since this setting will trust values provided in the request, it is important that the combination of the setting in Express matches how the reverse proxy operates.
 </div>
+
+The application setting `trust proxy` may be set to one of the values listed in the following table.
 
 <table class="doctable" border="1" markdown="1">
   <thead><tr><th>Type</th><th>Value</th></tr></thead>
@@ -19,15 +21,19 @@ Although the app will not fail to run if the application variable `trust proxy` 
     <tr>
       <td>Boolean</td>
 <td markdown="1">
-If `true`, the client's IP address is understood as the left-most entry in the `X-Forwarded-*` header.
+If `true`, the client's IP address is understood as the left-most entry in the `X-Forwarded-For` header.
 
-If `false`, the app is understood as directly facing the Internet and the client's IP address is derived from `req.connection.remoteAddress`. This is the default setting.
+If `false`, the app is understood as directly facing the client and the client's IP address is derived from `req.socket.remoteAddress`. This is the default setting.
+
+<div class="doc-box doc-warn" markdown="1">
+When setting to `true`, it is important to ensure that the last reverse proxy trusted is removing/overring all of the following HTTP headers: `X-Forwarded-For`, `X-Forwarded-Host`, and `X-Forwarded-Proto` otherwise it may be possible for the client to provide any value.
+</div>
 </td>
     </tr>
     <tr>
       <td>IP addresses</td>
 <td markdown="1">
-An IP address, subnet, or an array of IP addresses and subnets to trust. The following list shows the pre-configured subnet names:
+An IP address, subnet, or an array of IP addresses and subnets to trust as being a reverse proxy. The following list shows the pre-configured subnet names:
 
 * loopback - `127.0.0.1/8`, `::1/128`
 * linklocal - `169.254.0.0/16`, `fe80::/10`
@@ -42,19 +48,23 @@ app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple s
 app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
 ```
 
-When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client's IP address.
+When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client's IP address. This works by checking if `req.socket.remoteAddress` is trusted. If so, then each address in `X-Forwarded-For` is checked from right to left until the first non-trusted address.
 </td>
     </tr>
     <tr>
       <td>Number</td>
 <td markdown="1">
-Trust the `n`th hop from the front-facing proxy server as the client.
+Use the address that is at most `n` number of hops away from the Express application. `req.socket.remoteAddress` is the first hop, and the rest are looked for in the `X-Forwarded-For` header from right to left. A value of `0` means that the first untrusted address would be `req.socket.remoteAddress`, i.e. there is no reverse proxy.
+
+<div class="doc-box doc-warn" markdown="1">
+When using this setting, it is important to ensure there are not multiple, different-length paths to the Express application such that the client can be less than the configured number of hops away, otherwise it may be possible for the client to provide any value.
+</div>
 </td>
     </tr>
     <tr>
       <td>Function</td>
 <td markdown="1">
-Custom trust implementation. Use this only if you know what you are doing.
+Custom trust implementation.
 
 ```js
 app.set('trust proxy', function (ip) {
