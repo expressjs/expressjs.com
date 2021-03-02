@@ -57,7 +57,7 @@ Helmet is actually just a collection of smaller middleware functions that set se
 * [noCache](https://github.com/helmetjs/nocache) sets `Cache-Control` and Pragma headers to disable client-side caching.
 * [noSniff](https://github.com/helmetjs/dont-sniff-mimetype) sets `X-Content-Type-Options` to prevent browsers from MIME-sniffing a response away from the declared content-type.
 * [frameguard](https://github.com/helmetjs/frameguard) sets the `X-Frame-Options` header to provide [clickjacking](https://www.owasp.org/index.php/Clickjacking) protection.
-* [xssFilter](https://github.com/helmetjs/x-xss-protection) sets `X-XSS-Protection` to enable the Cross-site scripting (XSS) filter in most recent web browsers.
+* [xssFilter](https://github.com/helmetjs/x-xss-protection) sets `X-XSS-Protection` to disable the buggy Cross-site scripting (XSS) filter in web browsers.
 
 Install Helmet like any other module:
 
