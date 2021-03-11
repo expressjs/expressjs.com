@@ -29,7 +29,7 @@ These template engines work "out-of-the-box" with Express:
 - **[express-handlebars](https://github.com/express-handlebars/express-handlebars)**: A Handlebars view engine for Express which doesn't suck.
 - **[express-views-dom](https://github.com/AndersDJohnson/express-views-dom)**: A DOM view engine for Express.
 - **[rivets-server](https://github.com/AndersDJohnson/rivets-server)**: Render Rivets.js templates on the server.
-- **[Liquidjs](https://github.com/harttle/liquidjs)**: A Liquid engine implementation for both Node.js and browsers.
+- **[LiquidJS](https://github.com/harttle/liquidjs)**: A simple, expressive and safe template engine.
 - **[express-tl](https://github.com/Drulac/express-tl)**: A template-literal engine implementation for Express.
 - **[vuexpress](https://github.com/vuexpress/vuexpress)**: A Vue.js server side rendering engine for Express.js.
 - **[Twing](https://www.npmjs.com/package/twing)**: First-class Twig engine for Node.js.
