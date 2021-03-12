@@ -65,6 +65,9 @@ app.use(function (err, req, res, next) {
 The following table provides some simple examples of valid `path` values for
 mounting middleware.
 
+**Routers implement exactly matching for paths, instead of comparing only leading string**
+**For instance, the path `/abc` does NOT match `/abcd` in routers. (For middleware, it DOES match!)**
+
 <div class="table-scroller">
 <table class="doctable" border="1">
 
