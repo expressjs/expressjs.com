@@ -24,10 +24,10 @@ corrigidas na versão da atualização especificadas.
 raiz no `express.static`, `res.sendfile`, e `res.sendFile`
   * 4.10.7
     * Corrigida a vulnerabilidade de redirecionamento aberto
-no `express.static` ([recomendação](https://nodesecurity.io/advisories/serve-static-open-redirect),
+no `express.static` ([recomendação](https://npmjs.com/advisories/35),
 [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 4.8.8
-    * Corrigida a vulnerabilidade de travessia de diretório no `express.static` ([recomendação](http://nodesecurity.io/advisories/send-directory-traversal), [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
+    * Corrigida a vulnerabilidade de travessia de diretório no `express.static` ([recomendação](http://npmjs.com/advisories/32), [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
   * 4.8.4
     * O Node.js 0.10 pode vazar os `fd`s em certas situações que afetam o `express.static` e o
 `res.sendfile`. Solicitações maliciosas podem causar os `fd`s a vazar e eventualmente levar a erros
@@ -45,7 +45,7 @@ temporariamente não responsivo.
     * Corrigida a vulnerabilidade de divulgação do caminho raiz no `express.static`,
 `res.sendfile`, e `res.sendFile`
   * 3.19.0
-    * Corrigida a vulnerabilidade de redirecionamento aberto no `express.static` ([recomendação](https://nodesecurity.io/advisories/serve-static-open-redirect),
+    * Corrigida a vulnerabilidade de redirecionamento aberto no `express.static` ([recomendação](https://npmjs.com/advisories/35),
 [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 3.16.10
     * Corrigida a vulnerabilidade de travessia de diretório no `express.static`.

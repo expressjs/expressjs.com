@@ -20,12 +20,12 @@ Node.js の脆弱性は Express に直接影響を与えます。そのため、
 ## 4.x
 
   * 4.16.0
-    * 依存関係`forwarded`は、[脆弱性](https://nodesecurity.io/advisories/527)に対処するために更新されました。これは、`req.host`、`req.hostname`、`req.ip`、`req.ips`、`req.protocol`のAPIが使用されている場合、アプリケーションに影響を与える可能性があります。
-    * 依存関係`mime`は[脆弱性](https://nodesecurity.io/advisories/535)に対処するために更新されましたが、この問題はExpressには影響しません。
+    * 依存関係`forwarded`は、[脆弱性](https://npmjs.com/advisories/527)に対処するために更新されました。これは、`req.host`、`req.hostname`、`req.ip`、`req.ips`、`req.protocol`のAPIが使用されている場合、アプリケーションに影響を与える可能性があります。
+    * 依存関係`mime`は[脆弱性](https://npmjs.com/advisories/535)に対処するために更新されましたが、この問題はExpressには影響しません。
     * 依存関係`send`が更新され、[Node.js 8.5.0の脆弱性](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/)に対する保護が提供されています。これは特定のNode.jsバージョン8.5.0でExpressを実行する場合にのみ影響します。
   * 4.15.5
     * 依存関係`debug`は[脆弱性](https://snyk.io/vuln/npm:debug:20170905)に対処するために更新されましたが、この問題はExpressには影響しません。
-    * 依存関係`fresh`は、[脆弱性](https://nodesecurity.io/advisories/526)に対処するために更新されました。これは、次のAPIが使用されている場合、アプリケーションに影響します：`express.static`、`req.fresh`、`res.json`、`res.jsonp`、`res.send`、`res.sendfile`、`res.sendFile`、`res.sendStatus`
+    * 依存関係`fresh`は、[脆弱性](https://npmjs.com/advisories/526)に対処するために更新されました。これは、次のAPIが使用されている場合、アプリケーションに影響します：`express.static`、`req.fresh`、`res.json`、`res.jsonp`、`res.send`、`res.sendfile`、`res.sendFile`、`res.sendStatus`
   * 4.15.3
     * 依存関係`ms`は、[脆弱性](https://snyk.io/vuln/npm:ms:20170412)に対処するために更新されました。`express.static`、`res.sendfile`、および`res.sendFile`のAPIで、信頼できない文字列が入力され`maxAge`オプションに渡されると、アプリケーションに影響を与える可能性があります。
   * 4.15.2
@@ -33,9 +33,9 @@ Node.js の脆弱性は Express に直接影響を与えます。そのため、
   * 4.11.1
     * `express.static`、`res.sendfile`、および `res.sendFile` のルート・パス開示の脆弱性を修正しました。
   * 4.10.7
-    * `express.static` のオープン・リダイレクトの脆弱性を修正しました ([アドバイザリー](https://nodesecurity.io/advisories/serve-static-open-redirect)、[CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164))。
+    * `express.static` のオープン・リダイレクトの脆弱性を修正しました ([アドバイザリー](https://npmjs.com/advisories/35)、[CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164))。
   * 4.8.8
-    * `express.static` のディレクトリー・トラバーサルの脆弱性を修正しました ([アドバイザリー](http://nodesecurity.io/advisories/send-directory-traversal)、[CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394))。
+    * `express.static` のディレクトリー・トラバーサルの脆弱性を修正しました ([アドバイザリー](http://npmjs.com/advisories/32)、[CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394))。
   * 4.8.4
     * Node.js 0.10 は、特定の状況で `fd` をリークして、`express.static` および `res.sendfile` に影響を及ぼす可能性があります。悪意ある要求によって `fd` がリークされ、最終的に `EMFILE` エラーが発生したり、サーバーが応答しなくなったりする可能性があります。
   * 4.8.0
@@ -55,7 +55,7 @@ Node.js の脆弱性は Express に直接影響を与えます。そのため、
   * 3.19.1
     * `express.static`、`res.sendfile`、および `res.sendFile` のルート・パス開示の脆弱性を修正しました。
   * 3.19.0
-    * `express.static` のオープン・リダイレクトの脆弱性を修正しました ([アドバイザリー](https://nodesecurity.io/advisories/serve-static-open-redirect)、[CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164))。
+    * `express.static` のオープン・リダイレクトの脆弱性を修正しました ([アドバイザリー](https://npmjs.com/advisories/35)、[CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164))。
   * 3.16.10
     * `express.static` のディレクトリー・トラバーサルの脆弱性を修正しました。
   * 3.16.6

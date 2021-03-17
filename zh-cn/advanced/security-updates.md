@@ -18,9 +18,9 @@ Node.js 漏洞直接影响 Express。因此，请[监视 Node.js 漏洞](http://
   * 4.11.1
     * 修复了 `express.static`、`res.sendfile` 和 `res.sendFile` 中的根路径披露漏洞
   * 4.10.7
-    * 在 `express.static`（[公告](https://nodesecurity.io/advisories/serve-static-open-redirect)、[CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)）中修复了开放重定向漏洞。
+    * 在 `express.static`（[公告](https://npmjs.com/advisories/35)、[CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)）中修复了开放重定向漏洞。
   * 4.8.8
-    * 在 `express.static`（[公告](http://nodesecurity.io/advisories/send-directory-traversal)、[CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)）中修复了目录遍历漏洞。
+    * 在 `express.static`（[公告](http://npmjs.com/advisories/32)、[CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)）中修复了目录遍历漏洞。
   * 4.8.4
     * Node.js 0.10 在某些情况下可能会泄漏 `fd`，这会影响 `express.static` 和 `res.sendfile`。恶意请求会导致 `fd` 泄漏并最终导致 `EMFILE` 错误和服务器无响应。
   * 4.8.0
@@ -32,7 +32,7 @@ Node.js 漏洞直接影响 Express。因此，请[监视 Node.js 漏洞](http://
   * 3.19.1
     * 修复了 `express.static`、`res.sendfile` 和 `res.sendFile` 中的根路径披露漏洞
   * 3.19.0
-    * 在 `express.static`（[公告](https://nodesecurity.io/advisories/serve-static-open-redirect)、[CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)）中修复了开放重定向漏洞。
+    * 在 `express.static`（[公告](https://npmjs.com/advisories/35)、[CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)）中修复了开放重定向漏洞。
   * 3.16.10
     * 在 `express.static` 中修复了目录遍历漏洞。
   * 3.16.6

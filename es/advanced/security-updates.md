@@ -18,9 +18,9 @@ En la lista siguiente se muestran las vulnerabilidades de Express que se han sol
   * 4.11.1
     * Se ha solucionado la vulnerabilidad de divulgación de vía de acceso raíz en `express.static`, `res.sendfile` y `res.sendFile`
   * 4.10.7
-    * Se ha solucionado la vulnerabilidad de Open Redirect en `express.static` ([anuncio](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * Se ha solucionado la vulnerabilidad de Open Redirect en `express.static` ([anuncio](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 4.8.8
-    * Se han solucionado las vulnerabilidades de cruce de directorios en `express.static` ([anuncio](http://nodesecurity.io/advisories/send-directory-traversal) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
+    * Se han solucionado las vulnerabilidades de cruce de directorios en `express.static` ([anuncio](http://npmjs.com/advisories/32) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
   * 4.8.4
     * Node.js 0.10 puede tener fugas de `fd` en determinadas situaciones que afectan a `express.static` y `res.sendfile`. Las solicitudes maliciosas pueden provocar la fuga de `fd` y, en última instancia, generar errores `EMFILE` y anular la capacidad de respuesta del servidor.
   * 4.8.0
@@ -32,7 +32,7 @@ En la lista siguiente se muestran las vulnerabilidades de Express que se han sol
   * 3.19.1
     * Se ha solucionado la vulnerabilidad de divulgación de vía de acceso raíz en `express.static`, `res.sendfile` y `res.sendFile`
   * 3.19.0
-    * Se ha solucionado la vulnerabilidad de Open Redirect en `express.static` ([anuncio](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * Se ha solucionado la vulnerabilidad de Open Redirect en `express.static` ([anuncio](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 3.16.10
     * Se han solucionado las vulnerabilidades de cruce de directorios en `express.static`.
   * 3.16.6

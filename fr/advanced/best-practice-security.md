@@ -155,6 +155,6 @@ Voici d'autres recommandations issues de l'excellente [liste de contrôle de sé
 
 ## Eviter les autres vulnérabilités connues
 
-Gardez un oeil sur les recommandations [Node Security Project](https://nodesecurity.io/advisories) qui peuvent concerner Express ou d'autres modules utilisés par votre application. En règle générale, Node Security Project est une excellente ressource de connaissances et d'outils sur la sécurité de Node.
+Gardez un oeil sur les recommandations [Node Security Project](https://npmjs.com/advisories) qui peuvent concerner Express ou d'autres modules utilisés par votre application. En règle générale, Node Security Project est une excellente ressource de connaissances et d'outils sur la sécurité de Node.
 
 Pour finir, les applications Express - comme toutes les autres applications Web - peuvent être vulnérables à une variété d'attaques Web. Familiarisez vous avec les [vulnérabilités Web](https://www.owasp.org/index.php/Top_10_2013-Top_10) connues et prenez des précautions pour les éviter.

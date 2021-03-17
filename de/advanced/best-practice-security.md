@@ -155,6 +155,6 @@ Dies sind einige weitere Empfehlungen aus der hervorragenden [Node.js Security C
 
 ## Vermeiden Sie andere Schwachstellen
 
-Achten Sie auf [Node Security Project](https://nodesecurity.io/advisories)-Empfehlungen, die Express oder andere Module, die Ihre Anwendung nutzt, beeinträchtigen können. Im Allgemeinen ist Node Security Project aber eine exzellente Ressource mit Wissen und Tools zur Sicherheit von Node.
+Achten Sie auf [Node Security Project](https://npmjs.com/advisories)-Empfehlungen, die Express oder andere Module, die Ihre Anwendung nutzt, beeinträchtigen können. Im Allgemeinen ist Node Security Project aber eine exzellente Ressource mit Wissen und Tools zur Sicherheit von Node.
 
 Letztendlich können Express-Anwendungen – wie viele andere Webanwendungen auch – anfällig für eine Vielzahl webbasierter Attacken sein. Machen Sie sich deshalb mit bekannten [webspezifischen Schwachstellen](https://www.owasp.org/index.php/Top_10_2013-Top_10) vertraut und treffen Sie die geeigneten Vorkehrungen, um diese zu vermeiden.

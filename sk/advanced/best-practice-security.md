@@ -162,6 +162,6 @@ Tu sú ďalšie odporúčania zo skvelého [Node.js Security Checklist](https://
 
 ## Vyhnite sa ďalším známym zraniteľnostiam
 
-Sledujte [Node Security Project](https://nodesecurity.io/advisories) odporučania, ktoré môžu ovplyvňovať Express, príp. ostatné moduly vašej aplikácie. Vo všeobecnosti je Node Security Project skvelým zdrojom znalostí a toolov ohľadom bezpečnosti Node.js.
+Sledujte [Node Security Project](https://npmjs.com/advisories) odporučania, ktoré môžu ovplyvňovať Express, príp. ostatné moduly vašej aplikácie. Vo všeobecnosti je Node Security Project skvelým zdrojom znalostí a toolov ohľadom bezpečnosti Node.js.
 
 Na záver dodajme, že Express aplikácie - ako akékoľvek iné webové aplikácie - môžu byť náchylné na mnohé typy útokov. Zoznámte sa so zoznamom známych [web vulnerabilities](https://www.owasp.org/index.php/Top_10_2013-Top_10) a prijmite opatrenia, aby ste sa im vyhli.

@@ -18,9 +18,9 @@ lang: ru
   * 4.11.1
     * Исправлена уязвимость раскрытия корневого пути в `express.static`, `res.sendfile` и `res.sendFile`
   * 4.10.7
-    * Исправлена уязвимость открытого перенаправления в `express.static` ([advisory](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * Исправлена уязвимость открытого перенаправления в `express.static` ([advisory](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 4.8.8
-    * Исправлены уязвимости обхода каталогов в `express.static` ([advisory](http://nodesecurity.io/advisories/send-directory-traversal) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
+    * Исправлены уязвимости обхода каталогов в `express.static` ([advisory](http://npmjs.com/advisories/32) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
   * 4.8.4
     * В Node.js 0.10 возможна утечка `fd` в некоторых ситуациях, что влияет на `express.static` и `res.sendfile`. Утечка `fd` может возникнуть вследствие вредоносных запросов и в итоге привести к ошибкам `EMFILE` и недоступности сервера.
   * 4.8.0
@@ -32,7 +32,7 @@ lang: ru
   * 3.19.1
     * Исправлена уязвимость раскрытия корневого пути в `express.static`, `res.sendfile` и `res.sendFile`
   * 3.19.0
-    * Исправлена уязвимость открытого перенаправления в `express.static` ([advisory](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * Исправлена уязвимость открытого перенаправления в `express.static` ([advisory](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 3.16.10
     * Исправлены уязвимости обхода каталогов в `express.static`.
   * 3.16.6

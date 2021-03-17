@@ -239,7 +239,7 @@ a ataques [negação de serviço de expressões regulares](https://www.owasp.org
 
 Fique atento às recomendações do
 [Node Security
-Project](https://nodesecurity.io/advisories) que podem afetar o Express ou outros módulos usados
+Project](https://npmjs.com/advisories) que podem afetar o Express ou outros módulos usados
 pelo seu aplicativo.  Em geral, o Node Security Project é um excelente
 recurso para conhecimento e ferramentas sobre segurança do Node.
 

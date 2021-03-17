@@ -190,7 +190,7 @@ $ snyk wizard
 <a name="avoid-other-known-vulnerabilities"></a>
 ## 그 외의 알려져 있는 취약점 회피
 
-Express에, 또는 앱에 사용되는 다른 모듈에 영향을 미칠 수 있는 [Node Security Project](https://nodesecurity.io/advisories)의 보안 권고문에 항상 주의를 기울이십시오.  일반적으로 Node Security Project는 Node의 보안과 관련된 지식 및 도구에 대한 훌륭한 자원입니다.
+Express에, 또는 앱에 사용되는 다른 모듈에 영향을 미칠 수 있는 [Node Security Project](https://npmjs.com/advisories)의 보안 권고문에 항상 주의를 기울이십시오.  일반적으로 Node Security Project는 Node의 보안과 관련된 지식 및 도구에 대한 훌륭한 자원입니다.
 
 마지막으로, 다른 모든 웹 앱과 마찬가지로 Express 앱은 다양한 웹 기반 공격에 취약할 수 있습니다. 알려져 있는 [웹 취약성](https://www.owasp.org/index.php/Top_10_2013-Top_10)을 숙지한 후 이러한 취약성을 피하기 위한 예방 조치를 취하십시오.
 

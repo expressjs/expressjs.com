@@ -18,9 +18,9 @@ L'elenco seguente mostra le vulnerabilità di Express che sono state corrette ne
   * 4.11.1
     * Risolta la vulnerabilità del rilevamento del percorso root in `express.static`, `res.sendfile` e `res.sendFile`
   * 4.10.7
-    * Risolta la vulnerabilità del reindirizzamento aperto in `express.static` ([advisory](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * Risolta la vulnerabilità del reindirizzamento aperto in `express.static` ([advisory](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 4.8.8
-    * Risolte le vulnerabilità trasversali della directory in `express.static` ([advisory](http://nodesecurity.io/advisories/send-directory-traversal), [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
+    * Risolte le vulnerabilità trasversali della directory in `express.static` ([advisory](http://npmjs.com/advisories/32), [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
   * 4.8.4
     * Node.js 0.10 può portare alla perdita di `fd` in determinate situazioni che influenzano `express.static` e `res.sendfile`. Le richieste sospette potrebbero causare una perdita di `fd` ed eventualmente il verificarsi di errori `EMFILE` e risposte mancate del server.
   * 4.8.0
@@ -32,7 +32,7 @@ L'elenco seguente mostra le vulnerabilità di Express che sono state corrette ne
   * 3.19.1
     * Risolta la vulnerabilità del rilevamento del percorso root in `express.static`, `res.sendfile` e `res.sendFile`
   * 3.19.0
-    * Risolta la vulnerabilità del reindirizzamento aperto in `express.static` ([advisory](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * Risolta la vulnerabilità del reindirizzamento aperto in `express.static` ([advisory](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 3.16.10
     * Risolte le vulnerabilità trasversali della directory in `express.static`.
   * 3.16.6

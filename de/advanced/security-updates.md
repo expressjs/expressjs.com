@@ -18,9 +18,9 @@ Die folgende Liste enthält die Express-Schwachstellen, die im angegebenen Versi
   * 4.11.1
     * Offenlegungsgefahr beim Rootpfad in `express.static`, `res.sendfile` und `res.sendFile` behoben.
   * 4.10.7
-    * Offene Umadressierungsschwachstelle in `express.static` ([Empfehlung](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)) behoben.
+    * Offene Umadressierungsschwachstelle in `express.static` ([Empfehlung](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)) behoben.
   * 4.8.8
-    * Schwachstellen durch Directory-Traversal-Technik in `express.static` ([Empfehlung](http://nodesecurity.io/advisories/send-directory-traversal) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)) behoben.
+    * Schwachstellen durch Directory-Traversal-Technik in `express.static` ([Empfehlung](http://npmjs.com/advisories/32) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)) behoben.
   * 4.8.4
     * Node.js 0.10 kann in bestimmten Situationen Lecks bei `fd` aufweisen, die sich auf `express.static` und `res.sendfile` auswirken. Böswillige Anforderungen können zu Lecks bei `fd` führen und letztendlich `EMFILE`-Fehler nach sich ziehen und bewirken, dass Server nicht antworten.
   * 4.8.0
@@ -32,7 +32,7 @@ Die folgende Liste enthält die Express-Schwachstellen, die im angegebenen Versi
   * 3.19.1
     * Offenlegungsgefahr beim Rootpfad in `express.static`, `res.sendfile` und `res.sendFile` behoben.
   * 3.19.0
-    * Offene Umadressierungsschwachstelle in `express.static` ([Empfehlung](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)) behoben.
+    * Offene Umadressierungsschwachstelle in `express.static` ([Empfehlung](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)) behoben.
   * 3.16.10
     * Schwachstellen durch Directory-Traversal-Technik in `express.static` behoben.
   * 3.16.6

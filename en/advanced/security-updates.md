@@ -19,12 +19,12 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
 ## 4.x
 
   * 4.16.0
-    * The dependency `forwarded` has been updated to address a [vulnerability](https://nodesecurity.io/advisories/527). This may affect your application if the following APIs are used: `req.host`, `req.hostname`, `req.ip`, `req.ips`, `req.protocol`.
-    * The dependency `mime` has been updated to address a [vulnerability](https://nodesecurity.io/advisories/535), but this issue does not impact Express.
+    * The dependency `forwarded` has been updated to address a [vulnerability](https://npmjs.com/advisories/527). This may affect your application if the following APIs are used: `req.host`, `req.hostname`, `req.ip`, `req.ips`, `req.protocol`.
+    * The dependency `mime` has been updated to address a [vulnerability](https://npmjs.com/advisories/535), but this issue does not impact Express.
     * The dependency `send` has been updated to provide a protection against a [Node.js 8.5.0 vulnerability](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/). This only impacts running Express on the specific Node.js version 8.5.0.
   * 4.15.5
     * The dependency `debug` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:debug:20170905), but this issue does not impact Express.
-    * The dependency `fresh` has been updated to address a [vulnerability](https://nodesecurity.io/advisories/526). This will affect your application if the following APIs are used: `express.static`, `req.fresh`, `res.json`, `res.jsonp`, `res.send`, `res.sendfile` `res.sendFile`, `res.sendStatus`.
+    * The dependency `fresh` has been updated to address a [vulnerability](https://npmjs.com/advisories/526). This will affect your application if the following APIs are used: `express.static`, `req.fresh`, `res.json`, `res.jsonp`, `res.send`, `res.sendfile` `res.sendFile`, `res.sendStatus`.
   * 4.15.3
     * The dependency `ms` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:ms:20170412). This may affect your application if untrusted string input is passed to the `maxAge` option in the following APIs: `express.static`, `res.sendfile`, and `res.sendFile`.
   * 4.15.2
@@ -32,9 +32,9 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
   * 4.11.1
     * Fixed root path disclosure vulnerability in `express.static`, `res.sendfile`, and `res.sendFile`
   * 4.10.7
-    * Fixed open redirect vulnerability in `express.static` ([advisory](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * Fixed open redirect vulnerability in `express.static` ([advisory](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 4.8.8
-    * Fixed directory traversal vulnerabilities in `express.static` ([advisory](http://nodesecurity.io/advisories/send-directory-traversal) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
+    * Fixed directory traversal vulnerabilities in `express.static` ([advisory](http://npmjs.com/advisories/32) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
   * 4.8.4
     * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually lead to `EMFILE` errors and server unresponsiveness.
   * 4.8.0
@@ -52,7 +52,7 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
   * 3.19.1
     * Fixed root path disclosure vulnerability in `express.static`, `res.sendfile`, and `res.sendFile`
   * 3.19.0
-    * Fixed open redirect vulnerability in `express.static` ([advisory](https://nodesecurity.io/advisories/serve-static-open-redirect), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * Fixed open redirect vulnerability in `express.static` ([advisory](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 3.16.10
     * Fixed directory traversal vulnerabilities in `express.static`.
   * 3.16.6

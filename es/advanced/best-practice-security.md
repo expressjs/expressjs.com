@@ -197,7 +197,7 @@ $ snyk wizard
 
 ## Evitar otras vulnerabilidades conocidas
 
-Esté atento a las advertencias de [Node Security Project](https://nodesecurity.io/advisories) que puedan afectar a Express u otros módulos que utilice la aplicación.  En general, Node Security Project es un excelente recurso de herramientas e información sobre la seguridad de Node.
+Esté atento a las advertencias de [Node Security Project](https://npmjs.com/advisories) que puedan afectar a Express u otros módulos que utilice la aplicación.  En general, Node Security Project es un excelente recurso de herramientas e información sobre la seguridad de Node.
 
 Por último, las aplicaciones de Express, como cualquier otra aplicación web, son vulnerables a una amplia variedad de ataques basados en web. Familiarícese con las [vulnerabilidades web](https://www.owasp.org/index.php/Top_10_2013-Top_10) conocidas y tome precauciones para evitarlas.
 
