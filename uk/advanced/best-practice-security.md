@@ -138,27 +138,32 @@ app.use(session({
 
 Using npm to manage your application's dependencies is powerful and convenient.  But the packages that you use may contain critical security vulnerabilities that could also affect your application.  The security of your app is only as strong as the "weakest link" in your dependencies.
 
-Use either or both of the following two tools to help ensure the security of third-party packages that you use: [nsp](https://www.npmjs.com/package/nsp) and [requireSafe](https://requiresafe.com/).  These two tools do largely the same thing.
+Since npm@6, npm automatically reviews every install request. Also you can use 'npm audit' to analyze your dependency tree.
 
-[nsp](https://www.npmjs.com/package/nsp) is a command-line tool that checks the [Node Security Project](https://nodesecurity.io/) vulnerability database to determine if your application uses packages with known vulnerabilities. Install it as follows:
+```sh
+$ npm audit
+```
 
-<pre><code class="language-sh" translate="no">
-$ npm i nsp -g
-</code></pre>
+If you want to stay more secure, consider [Snyk](https://snyk.io/).
 
-Use this command to submit the `npm-shrinkwrap.json` / `package.json` files for validation to [nodesecurity.io](https://nodesecurity.io/):
+Snyk offers both a [command-line tool](https://www.npmjs.com/package/snyk) and a [Github integration](https://snyk.io/docs/github) that checks your application against [Snyk's open source vulnerability database](https://snyk.io/vuln/) for any known vulnerabilities in your dependencies. Install the CLI as follows:
 
-<pre><code class="language-sh" translate="no">
-$ nsp check
-</code></pre>
-
-Here's how to use [requireSafe](https://requiresafe.com/) to audit your Node modules:
-
-<pre><code class="language-sh" translate="no">
-$ npm install -g requiresafe
+```sh
+$ npm install -g snyk
 $ cd your-app
-$ requiresafe check
-</code></pre>
+```
+
+Use this command to test your application for vulnerabilities:
+
+```sh
+$ snyk test
+```
+
+Use this command to open a wizard that walks you through the process of applying updates or patches to fix the vulnerabilities that were found:
+
+```sh
+$ snyk wizard
+```
 
 ## Additional considerations
 

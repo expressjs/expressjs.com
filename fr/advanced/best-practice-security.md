@@ -141,46 +141,6 @@ app.use(session({
 </code>
 </pre>
 
-## Assurez-vous que vos dépendances sont sécurisées
-
-npm est un outil puissant et pratique de gestion des dépendances de votre application. Toutefois, les packages que vous utilisez sont susceptibles de contenir des vulnérabilités critiques en matière de sécurité qui risquent d'affecter également votre application. La sécurité de votre application est aussi forte que le "lien de la plus faible" de vos dépendances.
-
-Utilisez l'un des outils suivants, ou les deux, pour vous aider à garantir la sécurité des packages tiers que vous utilisez : [nsp](https://www.npmjs.com/package/nsp) et [requireSafe](https://requiresafe.com/). Ces deux outils effectuent globalement les mêmes opérations.
-
-[nsp](https://www.npmjs.com/package/nsp) est un outil en ligne de commande qui vérifie dans la base de données des vulnérabilités [Node Security Project](https://nodesecurity.io/) si votre application utilise des packages qui présentent des vulnérabilités connues. Installez-le comme suit :
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm i nsp -g
-</code>
-</pre>
-
-Utilisez cette commande afin de soumettre le fichier `npm-shrinkwrap.json` pour validation à [nodesecurity.io](https://nodesecurity.io/) :
-
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-shrinkwrap
-</code>
-</pre>
-
-Utilisez cette commande afin de soumettre le fichier `package.json` pour validation à [nodesecurity.io](https://nodesecurity.io/) :
-
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-package
-</code>
-</pre>
-
-Pour auditer vos modules nodes, utilisez [requireSafe](https://requiresafe.com/) comme suit :
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm install -g requiresafe
-$ cd your-app
-$ requiresafe check
-</code>
-</pre>
-
 ## Autres considérations
 
 Voici d'autres recommandations issues de l'excellente [liste de contrôle de sécurité Node.js](https://blog.risingstack.com/node-js-security-checklist/).  Pour tous les détails sur ces recommandations, reportez-vous à cet article de blogue :

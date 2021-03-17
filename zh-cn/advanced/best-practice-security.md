@@ -141,46 +141,6 @@ app.use(session({
 </code>
 </pre>
 
-## 确保依赖项的安全
-
-在管理应用程序的依赖项方面，npm 功能非常强大，而且使用方便。但是，您使用的软件包可能包含严重的安全漏洞，也可能会对应用程序产生影响。应用程序的安全取决于依赖项中“最弱”的一环。
-
-可以使用以下的任一或全部两种工具，帮助确保所使用的第三方软件包的安全性：[nsp](https://www.npmjs.com/package/nsp) 和 [requireSafe](https://requiresafe.com/)。这两种工具的功能大体相同。
-
-[nsp](https://www.npmjs.com/package/nsp) 是一种命令行工具，用于检查 [Node 安全项目](https://nodesecurity.io/)漏洞数据库，确定应用程序是否使用具有已知漏洞的软件包。可通过以下命令安装该工具：
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm i nsp -g
-</code>
-</pre>
-
-使用以下命令将 `npm-shrinkwrap.json` 文件提交至 [nodesecurity.io](https://nodesecurity.io/) 以进行验证：
-
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-shrinkwrap
-</code>
-</pre>
-
-使用以下命令将 `package.json` 文件提交至 [nodesecurity.io](https://nodesecurity.io/) 以进行验证：
-
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-package
-</code>
-</pre>
-
-以下示例说明如何使用 [requireSafe](https://requiresafe.com/) 来审计 Node 模块：
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm install -g requiresafe
-$ cd your-app
-$ requiresafe check
-</code>
-</pre>
-
 ## 其他注意事项
 
 以下是来自非常出色的 [Node.js 安全核对表](https://blog.risingstack.com/node-js-security-checklist/)的一些进一步建议。请参阅此博客帖子以了解关于这些建议的所有详细信息：

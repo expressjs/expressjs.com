@@ -215,57 +215,6 @@ app.use(session({
 </code>
 </pre>
 
-## Assegure que suas dependências sejam seguras
-
-Usar o npm para gerenciar as dependências do aplicativo é
-poderoso e conveniente.  Mas os pacotes utilizados podem conter
-vulnerabilidades críticas de segurança que poderiam afetar também o
-seu aplicativo.  A segurança do seu aplicativo é tão forte quanto o
-"elo mais fraco" em suas dependências.
-
-Use uma ou ambas das duas seguintes ferramentas para auxiliá-lo
-a assegurar a segurança de pacotes de terceiros utilizados por você:
-[nsp](https://www.npmjs.com/package/nsp) e [requireSafe](https://requiresafe.com/).  Essas
-duas ferramentas fazem em grande parte a mesma coisa.
-
-[nsp](https://www.npmjs.com/package/nsp) é uma
-ferramenta de linha de comandos que verifica o banco de dados de
-vulnerabilidades do  [Node
-Security Project](https://nodesecurity.io/) para determinar se o seu aplicativo utiliza
-pacotes com vulnerabilidades conhecidas. Instale-a como segue:
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm i nsp -g
-</code>
-</pre>
-
-Use este comando para enviar o arquivo `npm-shrinkwrap.json` para validação para o [nodesecurity.io](https://nodesecurity.io/):
-
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-shrinkwrap
-</code>
-</pre>
-
-Use este comando para enviar o arquivo `package.json` para validação para o [nodesecurity.io](https://nodesecurity.io/):
-
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-package
-</code>
-</pre>
-
-Aqui está como usar o [requireSafe](https://requiresafe.com/) para auditar seus módulos Node:
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm install -g requiresafe
-$ cd your-app
-$ requiresafe check
-</code>
-</pre>
-
 ## Considerações adicionais
 
 Aqui estão algumas recomendações adicionais da excelente [Lista

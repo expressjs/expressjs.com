@@ -141,46 +141,6 @@ app.use(session({
 </code>
 </pre>
 
-## Обеспечение защиты зависимостей
-
-Для управления зависимостями приложения удобно использовать многофункциональный инструмент npm.  Но пакеты, с которыми вы работаете, могут обладать критическими уязвимостями защиты, которые также могут повлиять на ваше приложение.  Надежность защиты вашего приложения определяется именно надежностью "самого слабого звена" среди зависимостей.
-
-Для того чтобы обеспечить защиту используемых вами сторонних пакетов, используйте один или оба инструмента: [nsp](https://www.npmjs.com/package/nsp) и [requireSafe](https://requiresafe.com/).  Эти два инструмента выполняют, в основном, одни и те же функции.
-
-[nsp](https://www.npmjs.com/package/nsp) - это инструмент командной строки, выполняющий проверку согласно базе данных уязвимостей [Node Security Project](https://nodesecurity.io/) и определяющий, используются ли вашим приложением пакеты с известными уязвимостями. Установите данный инструмент следующим образом:
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm i nsp -g
-</code>
-</pre>
-
-Воспользуйтесь этой командой, чтобы передать файл `npm-shrinkwrap.json` на проверку в [nodesecurity.io](https://nodesecurity.io/):
-
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-shrinkwrap
-</code>
-</pre>
-
-Воспользуйтесь этой командой, чтобы передать файл `package.json` на проверку в [nodesecurity.io](https://nodesecurity.io/):
-
-<pre>
-<code class="language-sh" translate="no">
-$ nsp audit-package
-</code>
-</pre>
-
-Ниже показано, как используется [requireSafe](https://requiresafe.com/) для проверки модулей Node:
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm install -g requiresafe
-$ cd your-app
-$ requiresafe check
-</code>
-</pre>
-
 ## Дополнительные замечания
 
 Ниже приводится несколько дополнительных рекомендаций, взятых из исчерпывающего [Контрольного списка требований к защите Node.js](https://blog.risingstack.com/node-js-security-checklist/).  В этой публикации можно найти дополнительную информацию по всем приведенным ниже рекомендациям:

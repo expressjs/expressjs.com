@@ -148,38 +148,6 @@ app.use(session({
 </code>
 </pre>
 
-## Uistite sa, že používate bezpečné dependencie
-
-Používanie npm, ku správe dependencií aplikácie je efektívne a pohodlné, avšak dependencie ktoré používate môžu obsahovať kritické bezpečnostné diery, ktoré môžu taktiež ovplyvniť vašu aplikáciu. Bezpečnosť vašej aplikácie je len tak silná, ako je "najslabší článok" vašej aplikácie.
-
-Pre uistenie sa, že sú vaše dependencie bezpečné, použite niektorý z nasledujúcich toolov: [nsp](https://www.npmjs.com/package/nsp) a [requireSafe](https://requiresafe.com/). Oba robia v princípe to isté.
-
-[nsp](https://www.npmjs.com/package/nsp) je command-line tool, ktorý porovnáva [Node Security Project](https://nodesecurity.io/) vulnerability databázu voči dependenciám použitých vo vašej aplikácii a zisťuje, či neobsahujú niektoré zo známych vulnerabilities. Tento tool nainštalujete takto:
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm i nsp -g
-</code>
-</pre>
-
-Pomocou nasledujúceho príkazu submitnete `npm-shrinkwrap.json` / `package.json` na validáciu do [nodesecurity.io](https://nodesecurity.io/):
-
-<pre>
-<code class="language-sh" translate="no">
-$ nsp check
-</code>
-</pre>
-
-Tu je príklad použitia [requireSafe](https://requiresafe.com/) pre audit vašich Node modulov:
-
-<pre>
-<code class="language-sh" translate="no">
-$ npm install -g requiresafe
-$ cd your-app
-$ requiresafe check
-</code>
-</pre>
-
 ## Ďalšie odporúčania
 
 Tu sú ďalšie odporúčania zo skvelého [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/) zoznamu. Pre viac detailov ohľadom jednotlivých odporúčaní si prečítajte samotný blog post:
