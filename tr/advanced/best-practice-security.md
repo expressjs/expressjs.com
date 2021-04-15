@@ -1,69 +1,69 @@
 ---
 layout: page
-title: Üründe ki Express için En İyi Güvenlik Uygulamaları
+title: Canlı Ortamda Express için En İyi Güvenlik Pratikleri
 menu: advanced
 lang: tr
 ---
-<div id="page-doc" markdown="1">
-# Production Best Practices: Security
 
-## Overview
+# En İyi Canlı Ortam Pratikleri: Güvenlik
 
-The term _"production"_ refers to the stage in the software lifecycle when an application or API is generally available to its end-users or consumers. In contrast, in the _"development"_ stage, you're still actively writing and testing code, and the application is not open to external access. The corresponding system environments are known as _production_ and _development_ environments, respectively.
+## Genel Bakış
 
-Development and production environments are usually set up differently and have vastly different requirements. What's fine in development may not be acceptable in production. For example, in a development environment you may want verbose logging of errors for debugging, while the same behavior can become a security concern in a production environment. And in development, you don't need to worry about scalability, reliability, and performance, while those concerns become critical in production.
+_"canlı ortam"_ terimi, bir uygulama veya API'nin genel olarak son kullanıcıları veya tüketicileri için hazır olduğu yazılım yaşam döngüsündeki aşamayı ifade eder. Buna kıyasla, _"geliştirme"_ aşamasında aktif olarak kod yazıyor ve test ediyorsunuz, ve uygulama dış erişime açık değildir. Bunlara karşılık gelen sistem ortamları sırasıyla _canlı ortam (production)_ ve _geliştirme (development)_ ortamları olarak bilinir.
 
-{% include note.html content="If you believe you have discovered a security vulnerability in Express, please see
-[Security Policies and Procedures](https://github.com/expressjs/express/blob/master/Security.md).
+Canlı ve geliştirme ortamları genel olarak farklı şekilde kurulurlar ve çok farklı gereksinimleri vardır. Geliştirme ortamında iyi olan bir şey canlı ortamda kabul edilebilir olmayabilir. Örneğin, geliştirme ortamında hata ayıklama için ayrıntılı hataların loglanmasını isteyebilirsiniz, ancak aynı şey canlı ortamda güvenlik açığı oluşturabilir. Ve geliştirme ortamında ölçeklenebilirlik, güvenilirlik ve performans hakkında endişe etmenize gerek yok iken, bu konular canlı ortamda kritikleşir.
+
+{% include note.html content="Express'te bir güvenlik açığı keşfettiğinizi düşünüyorsanız, lütfen bakınız
+[Güvenlik Politikaları ve Prosedürleri](https://github.com/expressjs/express/blob/master/Security.md).
 " %}
 
-Security best practices for Express applications in production include:
+Canlı ortamdaki Express uygulamaları için en iyi güvenlik pratikleri:
 
-- [Don’t use deprecated or vulnerable versions of Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
-- [Use TLS](#use-tls)
-- [Use Helmet](#use-helmet)
-- [Use cookies securely](#use-cookies-securely)
-- [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
-- [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
-- [Additional considerations](#additional-considerations)
+- [Express'in kullanımdan kaldırılmış veya bakımı yapılmayan versiyonlarını kullanmayın](#expressin-kullanımdan-kaldırılmış-veya-bakımı-yapılmayan-versiyonlarını-kullanmayın)
+- [TLS kullanın](#tls-kullanın)
+- [Helmet kullanın](#helmet-kullanın)
+- [Çerezleri güvenli kullanın](#çerezleri-güvenli-kullanın)
+- [Otorizasyona karşı yapılan brute-force saldırılarını engelleyin](#otorizasyona-karşı-yapılan-brute-force-saldırılarını-engelleyin)
+- [Bağımlılıklarınızın güvende olduğundan emin olun](#bağımlılıklarınızın-güvende-olduğundan-emin-olun)
+- [Bilinen diğer güvenlik açıklarından kaçının](#bilinen-diğer-güvenlik-açıklarından-kaçının)
+- [Ek hususlar](#ek-hususlar)
 
+## Express'in kullanımdan kaldırılmış veya bakımı yapılmayan versiyonlarını kullanmayın
 
-## Don't use deprecated or vulnerable versions of Express
+Express 2.x ve 3.x versiyonlarının bakımı artık yapılmıyor. Bu versiyonlardaki güvenlik ve performans sorunları çözülmeyecek. Bunları kullanmayın! 4. versiyona henüz geçmediyseniz, [taşıma rehberini](/{{ page.lang }}/guide/migrating-4.html) takip edin.
 
-Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them!  If you haven't moved to version 4, follow the [migration guide](/{{ page.lang }}/guide/migrating-4.html).
+Ayrıca [güvenlik güncellemeleri sayfası](/{{ page.lang }}/advanced/security-updates.html)'nda listelenen bakımı yapılmayan herhangi bir Express versiyonunu kullanmadığınızdan emin olun. Eğer kullanıyorsanız, stabil versiyonlardan birine geçin, tercihen en son versiyona.
 
-Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/{{ page.lang }}/advanced/security-updates.html). If you are, update to one of the stable releases, preferably the latest.
+## TLS kullanın
 
-## Use TLS
+Uygulamanız hassas verilerle ilgileniyor veya bunları iletiyorsa, veri ve bağlantıyı güvende tutmak için [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) kullanın. Bu teknoloji, verileri istemciden sunucuya gönderilmeden önce şifreler ve böylelikle bazı yaygın (ve kolay) saldırıları önler. Ajax ve POST istekleri gözle görülür şekilde açık olmayabilir ve tarayıcılarda "gizli" görünebilir, ancak bunların ağ trafiği [packet sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) ve [man-in-the-middle saldırılarına](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) karşı korumasızdır.
 
-If your app deals with or transmits sensitive data, use [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) to secure the connection and the data. This technology encrypts data before it is sent from the client to the server, thus preventing some common (and easy) hacks. Although Ajax and POST requests might not be visibly obvious and seem "hidden" in browsers, their network traffic is vulnerable to [packet sniffing](https://en.wikipedia.org/wiki/Packet_analyzer) and [man-in-the-middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
+Secure Socket Layer (SSL) şifrelemesine aşina olabilirsiniz. [TLS, SSL'nin bir sonraki geçişidir](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx). Bir başka deyişle, daha önce SSL kullanıyorsanız TLS'e yükseltmeyi düşünün. Genel olarak, TLS kullanmak için Nginx öneririz. Nginx'te (ve diğer sunucularda) TLS'yi yapılandırmak için, bakınız [Önerilen Sunucu Yapılandırmaları (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
-You may be familiar with Secure Socket Layer (SSL) encryption. [TLS is simply the next progression of SSL](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx). In other words, if you were using SSL before, consider upgrading to TLS.  In general, we recommend Nginx to handle TLS.  For a good reference to configure TLS on Nginx (and other servers), see [Recommended Server Configurations (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Ayrıca, [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/) tarafından sunulan ücretsiz, otomatik, ve açık bir sertifika yetkilisi (CA - Certificate Authority) olan [Let's Encrypt](https://letsencrypt.org/about/) ücretsiz bir TLS sertifikası alabileceğiniz araçtır.
 
-Also, a handy tool to get a free TLS certificate is [Let's Encrypt](https://letsencrypt.org/about/), a free, automated, and open certificate authority (CA) provided by the [Internet Security Research Group (ISRG)](https://letsencrypt.org/isrg/).
+## Helmet kullanın
 
-## Use Helmet
+[Helmet](https://www.npmjs.com/package/helmet), HTTP başlıklarını doğru ayarlayarak uygulamanızı bazı iyi bilinen web güvenlik açıklarına karşı koruyabilir.
 
-[Helmet](https://www.npmjs.com/package/helmet) can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
+Helmet aslında güvenlikle ilgili HTTP yanıt başlıklarını ayarlayan, daha küçük ara yazılım (middleware) fonksiyonlarından oluşan bir koleksiyondur:
 
-Helmet is actually just a collection of nine smaller middleware functions that set security-related HTTP headers:
+* [csp](https://github.com/helmetjs/csp) siteler arası (cross-site) komut dosyası çalıştırma saldırılarını ve diğer siteler arası enjeksiyonları önlemeye yardımcı olmak için `Content-Security-Policy` başlığını ayarlar.
+* [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) `X-Powered-By` başlığını kaldırır.
+* [hsts](https://github.com/helmetjs/hsts) sunucuya güvenli (SSL/TLS üzerinden HTTP) bağlantıları zorunlu kılan `Strict-Transport-Security` başlığını ayarlar.
+* [ieNoOpen](https://github.com/helmetjs/ienoopen) IE8+ için `X-Download-Options` başlığını ayarlar.
+* [noCache](https://github.com/helmetjs/nocache) istemci-taraflı önbelleğe alma (caching) işlevini devre dışı bırakmak için `Cache-Control` ve Pragma başlıklarını ayarlar.
+* [noSniff](https://github.com/helmetjs/dont-sniff-mimetype) tarayıcıların bildirilen içerik türünden farklı, bir sunucu yanıtına MIME-sniffing uygulanmasını önlemek için `X-Content-Type-Options` başlığını ayarlar.
+* [frameguard](https://github.com/helmetjs/frameguard) [clickjacking](https://www.owasp.org/index.php/Clickjacking) koruması sağlamak için `X-Frame-Options` başlığını ayarlar.
+* [xssFilter](https://github.com/helmetjs/x-xss-protection) siteler arası komut çalıştırma (Cross-site scripting (XSS)) filtresini en yeni tarayıcılarda etkinleştirmek için `X-XSS-Protection` başlığını ayarlar.
 
-* [csp](https://github.com/helmetjs/csp) sets the `Content-Security-Policy` header to help prevent cross-site scripting attacks and other cross-site injections.
-* [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) removes the `X-Powered-By` header.
-* [hsts](https://github.com/helmetjs/hsts) sets `Strict-Transport-Security` header that enforces secure (HTTP over SSL/TLS) connections to the server.
-* [ieNoOpen](https://github.com/helmetjs/ienoopen) sets `X-Download-Options` for IE8+.
-* [noCache](https://github.com/helmetjs/nocache) sets `Cache-Control` and Pragma headers to disable client-side caching.
-* [noSniff](https://github.com/helmetjs/dont-sniff-mimetype) sets `X-Content-Type-Options` to prevent browsers from MIME-sniffing a response away from the declared content-type.
-* [frameguard](https://github.com/helmetjs/frameguard) sets the `X-Frame-Options` header to provide [clickjacking](https://www.owasp.org/index.php/Clickjacking) protection.
-* [xssFilter](https://github.com/helmetjs/x-xss-protection) sets `X-XSS-Protection` to enable the Cross-site scripting (XSS) filter in most recent web browsers.
-
-Install Helmet like any other module:
+Helmet'ı diğer herhangi bir modül gibi kurun:
 
 ```sh
 $ npm install --save helmet
 ```
 
-Then to use it in your code:
+Daha sonra kodunuzda kullanmak için:
 
 ```js
 // ...
@@ -74,69 +74,66 @@ app.use(helmet())
 // ...
 ```
 
-### At a minimum, disable X-Powered-By header
+### En azından, X-Powered-By başlığını devre dışı bırakın
 
-If you don't want to use Helmet, then at least disable the `X-Powered-By` header.  Attackers can use this header (which is enabled by default) to detect apps running Express and then launch specifically-targeted attacks.
+Eğer Helmet kullanmak istemiyorsanız, o zaman en azından `X-Powered-By` başlığını devre dışı bırakın. Saldırganlar, Express çalıştıran uygulamaları tespit etmek ve ardından özel olarak hedeflenen saldırılar başlatmak için bu başlığı (varsayılan olarak etkindir) kullanabilir.
 
-So, best practice is to to turn off the header with the `app.disable()` method:
+Bu yüzden, `app.disable()` metodunu kullanarak bu başlığı devre dışı bırakmak en iyi pratiktir:
 
 ```js
 app.disable('x-powered-by')
 ```
 
-If you use `helmet.js`, it takes care of this for you.
+Eğer `helmet.js` kullanıyorsanız, bunu sizin için halleder.
 
-{% include note.html content="Disabling the `X-Powered-By header` does not prevent
-a sophisticated attacker from determining that an app is running Express.  It may
-discourage a casual exploit, but there are other ways to determine an app is running
-Express. "%}
+{% include note.html content="X-Powered-By başlığının devre dışı bırakılması, tecrübeli bir saldırganın bir uygulamanın Express çalıştırdığını belirlemesini önlemez. Bu, sıradan bir istismarı engelleyebilir, ancak bir uygulamanın Express çalıştırdığını belirlemenin başka yolları da var. "%}
 
-## Use cookies securely
+## Çerezleri güvenli kullanın
 
-To ensure cookies don't open your app to exploits, don't use the default session cookie name and set cookie security options appropriately.
+Çerezlerin uygulamanızı istismarlara açmamasını sağlamak için, varsayılan oturum çerez adını kullanmayın ve çerez güvenlik seçeneklerini uygun şekilde ayarlayın.
 
-There are two main middleware cookie session modules:
+İki ana ara yazılım çerez oturum modülü var:
 
-* [express-session](https://www.npmjs.com/package/express-session) that replaces `express.session` middleware built-in to Express 3.x.
-* [cookie-session](https://www.npmjs.com/package/cookie-session) that replaces `express.cookieSession` middleware built-in to Express 3.x.
+* [express-session](https://www.npmjs.com/package/express-session), Express 3.x versiyonlarında yer alan `express-session` yerleşik (built-in) ara yazılımının yerini alır.
+* [cookie-session](https://www.npmjs.com/package/cookie-session), Express 3.x versiyonlarında yer alan `express.cookieSession` yerleşik ara yazılımının yerini alır.
 
-The main difference between these two modules is how they save cookie session data.  The [express-session](https://www.npmjs.com/package/express-session) middleware stores session data on the server; it only saves the session ID in the cookie itself, not session data.  By default, it uses in-memory storage and is not designed for a production environment.  In production, you'll need to set up a scalable session-store; see the list of [compatible session stores](https://github.com/expressjs/session#compatible-session-stores).
+Bu iki modülün arasındaki ana fark, çerez oturum verisinin nasıl kaydedildiğidir. [express-session](https://www.npmjs.com/package/express-session) ara yazılımı oturum verisini sunucuda tutar; sadece oturum ID'sini çerezde tutar, oturum verisini değil. Varsayılan olarak, iç-bellek depolamayı kullanır ve canlı ortam için tasarlanmamıştır. Canlı ortamda, ölçeklenebilir bir oturum depolamayı kurmanız gerekecektir; [uyumlu oturum depolarını](https://github.com/expressjs/session#compatible-session-stores)'nı görmek için bakınız.
 
-In contrast, [cookie-session](https://www.npmjs.com/package/cookie-session) middleware implements cookie-backed storage: it serializes the entire session to the cookie, rather than just a session key.  Only use it when session data is relatively small and easily encoded as primitive values (rather than objects).  Although browsers are supposed to support at least 4096 bytes per cookie, to ensure you don't exceed the limit, don't exceed a size of 4093 bytes per domain.  Also, be aware that the cookie data will be visible to the client, so if there is any reason to keep it secure or obscure, then express-session may be a better choice.
+Buna kıyasla, [cookie-session](https://www.npmjs.com/package/cookie-session) ara yazılımı çerez-destekli depolamayı uygular: sadece bir oturum anahtarı yerine,  tüm oturumu çerezde serileştirir. Bunu yalnızca oturum verileri nispeten küçük olduğunda ve ilkel (primitive) değerler (objeler yerine) olarak kolayca kodlandığında kullanın. Tarayıcıların çerez başına en az 4096 baytı desteklemesine rağmen, limiti aşmamanızdan emin olmak için domain başına 4093 baytı aşmayın. Ayrıca, çerez verilerinin istemciye açık olacağını unutmayın, bu yüzden verilerin güvenli veya gizli olması için herhangi bir neden var ise, express-session daha iyi bir seçenek olabilir.
 
-### Don't use the default session cookie name
+### Varsayılan oturum çerez adını kullanmayın
 
-Using the default session cookie name can open your app to attacks.  The security issue posed is similar to `X-Powered-By`: a potential attacker can use it to fingerprint the server and target attacks accordingly.
+Varsayılan oturum çerez adı uygulamanızı saldırılara açık bırakabilir. Ortaya çıkan güvenlik sorunu `X-Powered-By` sorununa benzer: potansiyel bir saldırgan, sunucunun parmak izini almak ve saldırıları buna göre hedeflemek için kullanabilir.
 
-To avoid this problem, use generic cookie names; for example using [express-session](https://www.npmjs.com/package/express-session) middleware:
+Bu problemi önlemek için, jenerik çerez adlarını kullanın; örnek olarak [express-session](https://www.npmjs.com/package/express-session) ara yazılımının kullanımı:
 
 ```js
 var session = require('express-session')
-app.set('trust proxy', 1) // trust first proxy
+app.set('trust proxy', 1)
 app.use(session({
   secret: 's3Cur3',
   name: 'sessionId'
 }))
 ```
 
-### Set cookie security options
+### Çerez güvenlik seçeneklerini ayarlayın
 
-Set the following cookie options to enhance security:
+Güvenliği artırmak için aşağıdaki çerez seçeneklerini ayarlayın:
 
-* `secure` - Ensures the browser only sends the cookie over HTTPS.
-* `httpOnly` - Ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against cross-site scripting attacks.
-* `domain` - indicates the domain of the cookie; use it to compare against the domain of the server in which the URL is being requested. If they match, then check the path attribute next.
-* `path` - indicates the path of the cookie; use it to compare against the request path. If this and domain match, then send the cookie in the request.
-* `expires` - use to set expiration date for persistent cookies.
+* `secure` - Tarayıcının çerezi yalnızca HTTPS üzerinden göndermesini sağlar.
+* `httpOnly` - Çerezin JavaScript istemcisinden değil, yalnızca HTTP(S) üzerinden gönderilmesini sağlar ve böylelikle siteler arası komut dosyası çalıştırma saldırılarına karşı korumaya yardımcı olur.
+* `domain` - çerezin alan adını belirtir; URL'nin istendiği sunucunun alan adıyla karşılaştırmak için kullanın. Eğer eşleşiyorsa, ardından yol (path) alanını kontrol edin.
+* `path` - çerezin yolunu belirtir; bunu istek yoluyla karşılaştırmak için kullanın. Eğer bu ve alan adı eşleşiyorsa, istekte çerezi gönderebilirsiniz.
+* `expires` - kalıcı çerezler için son kullanma tarihini ayarlamak için kullanın.
 
-Here is an example using [cookie-session](https://www.npmjs.com/package/cookie-session) middleware:
+[cookie-session](https://www.npmjs.com/package/cookie-session) ara yazılımını kullanan bir örnek:
 
 ```js
 var session = require('cookie-session')
 var express = require('express')
 var app = express()
 
-var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 saat
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],
@@ -150,53 +147,62 @@ app.use(session({
 }))
 ```
 
-## Ensure your dependencies are secure
+## Otorizasyona karşı yapılan brute-force saldırılarını engelleyin
 
-Using npm to manage your application's dependencies is powerful and convenient.  But the packages that you use may contain critical security vulnerabilities that could also affect your application.  The security of your app is only as strong as the "weakest link" in your dependencies.
+Özel verileri daha güvenli hale getirmek için giriş uç noktalarının (endpoint) korunduğundan emin olun.
 
-Since npm@6, npm automatically reviews every install request. Also you can use 'npm audit' to analyze your dependency tree.
+Basit ve güçlü bir teknik olarak iki ölçüm kullanarak yetkilendirme girişimlerini engellemektir:
+1. Birincisi, aynı kullanıcı adı ve IP adresi ile art arda başarısız denemelerin sayısı.
+2. İkincisi, uzun bir süre boyunca bir IP adresinden başarısız denemelerin sayısıdır. Örneğin, bir IP adresi bir günde 100 başarısız deneme yaparsa engelleyin.
+
+[rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) paketi bu tekniği kolay ve hızlıca uygulamak için gerekli araçları sağlar. [brute-force korumasına bir örneği bu dökümantasyonda bulabilirsiniz](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection).
+
+## Bağımlılıklarınızın güvende olduğundan emin olun
+
+Uygulamanızın bağımlılıklarını yönetmek için npm kullanmak güçlü ve kullanışlıdır. Ancak kullandığınız paketler, uygulamanızı da etkileyebilecek kritik güvenlik açıkları içerebilir.  Uygulamanızın güvenliği, bağımlılıklarınızdaki "en zayıf halka" kadar güçlüdür.
+
+npm@6'dan beri npm otomatik olarak her yükleme isteğini inceler. Ayrıca 'npm audit' komutunu kullanarak bağımlılık ağacınızı analiz edebilirsiniz.
 
 ```sh
 $ npm audit
 ```
 
-If you want to stay more secure, consider [Snyk](https://snyk.io/).
+Daha fazla güvenli kalmak istiyorsanız, [Snyk](https://snyk.io/) aracını gözden geçirebilirsiniz.
 
-Snyk offers both a [command-line tool](https://www.npmjs.com/package/snyk) and a [Github integration](https://snyk.io/docs/github) that checks your application against [Snyk's open source vulnerability database](https://snyk.io/vuln/) for any known vulnerabilities in your dependencies. Install the CLI as follows:
+Bağımlılıklarınızdaki bilinen tüm güvenlik açıkları için [Synk'in açık kaynak güvenlik açığı veritabanı](https://snyk.io/vuln/)'na karşı uygulamanızı kontrol eden bir [komut satırı aracı](https://www.npmjs.com/package/snyk) ve de [Github integrasyonu](https://snyk.io/docs/github) sunar.
 
 ```sh
 $ npm install -g snyk
 $ cd your-app
 ```
 
-Use this command to test your application for vulnerabilities:
+Uygulamanızı güvenlik açıklarına karşı test etmek için bu komutu kullanın:
 
 ```sh
 $ snyk test
 ```
 
-Use this command to open a wizard that walks you through the process of applying updates or patches to fix the vulnerabilities that were found:
+Bulunan güvenlik açıklarını düzeltmek için güncelleme veya yama uygulama sürecinde size yol gösteren bir sihirbazı açmak için bu komutu kullanın:
 
 ```sh
 $ snyk wizard
 ```
 
-## Avoid other known vulnerabilities
+## Bilinen diğer güvenlik açıklarından kaçının
 
-Keep an eye out for [Node Security Project](https://npmjs.com/advisories) or [Snyk](https://snyk.io/vuln/) advisories that may affect Express or other modules that your app uses.  In general, these databases are excellent resources for knowledge and tools about Node security.
+Express'i veya uygulamanızın kullandığı diğer modülleri etkileyen [Snyk](https://snyk.io/vuln/) ve [Node Security Project](https://npmjs.com/advisories) tavsiyelerini takipte kalın. Genel olarak, bu veritabanları Node güvenliği hakkında bilgi ve araçlar için mükemmel kaynaklardır.
 
-Finally, Express apps - like any other web apps - can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://www.owasp.org/index.php/Top_10_2013-Top_10) and take precautions to avoid them.
+Son olarak, Express uygulamaları - diğer web uygulamaları gibi - çeşitli web tabanlı saldırılara karşı savunmasız olabilir. [Web güvenlik açıkları](https://www.owasp.org/index.php/Top_10-2017_Top_10) hakkında kendinizi bilgilendirin ve onlardan kaçınmak için önlemler alın.
 
-## Additional considerations
+## Ek hususlar
 
-Here are some further recommendations from the excellent [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/).  Refer to that blog post for all the details on these recommendations:
+İşte mükemmel [Node.js Güvenlik Kontrol Listesi](https://blog.risingstack.com/node-js-security-checklist/)'nden bazı ek öneriler. Bu önerilerle ilgili tüm ayrıntılar için o blog gönderisine bakın:
 
-* Implement rate-limiting to prevent brute-force attacks against authentication.  One way to do this is to use [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) to enforce a rate-limiting policy.  Alternatively, you can use middleware such as [express-limiter](https://www.npmjs.com/package/express-limiter), but doing so will require you to modify your code somewhat.
-* Use [csurf](https://www.npmjs.com/package/csurf) middleware to protect against cross-site request forgery (CSRF).
-* Always filter and sanitize user input to protect against cross-site scripting (XSS) and command injection attacks.
-* Defend against SQL injection attacks by using parameterized queries or prepared statements.
-* Use the open-source [sqlmap](http://sqlmap.org/) tool to detect SQL injection vulnerabilities in your app.
-* Use the [nmap](https://nmap.org/) and [sslyze](https://github.com/nabla-c0d3/sslyze) tools to test the configuration of your SSL ciphers, keys, and renegotiation as well as the validity of your certificate.
-* Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
+* Siteler arası istek sahteciliği'ne (CSRF) karşı korumak için [csurf](https://www.npmjs.com/package/csurf) ara yazılımını kullanın.
+* Siteler arası komut dosyası oluşturma (XSS) ve komut enjeksiyon saldırılarına karşı korumak için kullanıcı girişini her zaman filtreleyin ve sanitize edin.
+* Parametreli sorgular veya hazırlanmış ifadeler kullanarak SQL enjeksiyon saldırılarına karşı savunma yapın.
+* Uygulamanızdaki SQL enjeksion güvenlik açıklarını tespit etmek için açık kaynak olan [sqlmap](http://sqlmap.org/) aracını kullanın.
+* Sertifikanızın geçerliliğini kontrol etmenin yanında SSL şifrelerinin ve anahtarlarının konfigürasyonunu test etmek için [nmap](https://nmap.org/) ve [sslyze](https://github.com/nabla-c0d3/sslyze) araçlarını kullanın.
+* Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [Regular expression Denial of Service (ReDoS)](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
 
-</div>
+* RegExp kodlarınızın [Regular expression Denial of Service (ReDoS)](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) saldırılarına açık olmadığını sağlamak için [safe-regex](https://www.npmjs.com/package/safe-regex) paketini kullanın.
