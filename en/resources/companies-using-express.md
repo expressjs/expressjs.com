@@ -75,4 +75,7 @@ redirect_from: "/resources/companies-using-express.html"
     <a target="_new" class="imagelink" href="https://www.kuali.co">
       <img alt="kuali" class="memberlogo" src="/images/companies/kuali-logo.png" />
     </a>
+    <a target="_new" class="imagelink" href="https://wormhole.app">
+      <img alt="Wormhole" class="memberlogo" src="/images/companies/wormhole-logo.png" />
+    </a>
 </div>
