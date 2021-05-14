@@ -231,27 +231,31 @@ If you want an object model driver for MongoDB, look at [Mongoose](https://githu
 
 ## Neo4j
 
-**Module**: [apoc](https://github.com/hacksparrow/apoc)
+**Module**: [neo4j-driver](https://github.com/neo4j/neo4j-javascript-driver)
 
 ### Installation
 
 ```sh
-$ npm install apoc
+$ npm install neo4j-driver
 ```
 
 ### Example
 
 ```js
-var apoc = require('apoc')
+var neo4j = require('neo4j-driver')
+var driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.basic('neo4j', 'letmein'))
 
-apoc.query('match (n) return n').exec().then(
-  function (response) {
-    console.log(response)
-  },
-  function (fail) {
-    console.log(fail)
-  }
-)
+var session = driver.session()
+
+session.readTransaction(function (tx) {
+  return tx.run('MATCH (n) RETURN count(n) AS count')
+    .then(function (res) {
+      console.log(res.records[0].get('count'))
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+})
 ```
 
 ## Oracle
