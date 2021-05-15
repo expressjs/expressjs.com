@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "eslint --ignore-path .gitignore --ignore-pattern _includes/readmes/ **/*.md"
+    "test": "eslint --ignore-path .gitignore --ignore-pattern _includes/readmes/ \"**/*.md\""
   },
   "devDependencies": {
     "eslint": "^7.26.0",
