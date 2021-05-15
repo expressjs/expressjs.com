@@ -113,7 +113,6 @@ app.listen(3000, () => {
 })
 
 // You can signal that the service is not ready using `lightship.signalNotReady()`.
-
 ```
 
 [Lightship documentation](https://github.com/gajus/lightship) provides examples of the corresponding [Kubernetes configuration](https://github.com/gajus/lightship#lightship-usage-kubernetes-container-probe-configuration) and a complete example of integration with [Express.js](https://github.com/gajus/lightship#using-with-expressjs).
@@ -152,7 +151,6 @@ app.get('/', (req, res) => {
 setTimeout(() => {
   httpTerminator.terminate()
 }, 1000)
-
 ```
 
 [http-terminator documentation](https://github.com/gajus/http-terminator) provides API documentation and comparison to other existing third-party solutions.
@@ -178,7 +176,6 @@ const app = express()
 app.use(actuator())
 
 app.listen(3000)
-
 ```
 
 The [express-actuator documentation](https://github.com/rcruzper/express-actuator) provides different options for customization.

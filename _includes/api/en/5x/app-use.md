@@ -100,7 +100,6 @@ This will match paths starting with `/abcd` and `/abd`:
 app.use('/abc?d', function (req, res, next) {
   next()
 })
-
 ```
 
 This will match paths starting with `/abcd`, `/abbcd`, `/abbbbbcd`, and so on:

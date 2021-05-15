@@ -103,7 +103,6 @@ app.listen(3000, () => {
 })
 
 // You can signal that the service is not ready using `lightship.signalNotReady()`.
-
 ```
 
 [Lightship 문서](https://github.com/gajus/lightship)에서 [Kubernetes 설정](https://github.com/gajus/lightship#lightship-usage-kubernetes-container-probe-configuration)에 대한 예시와 [Express.js](https://github.com/gajus/lightship#using-with-expressjs)와의 통합 절차에 대한 완전한 예시를 제공합니다.
