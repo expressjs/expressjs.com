@@ -1,4 +1,4 @@
-<h3 id='res.cookie'>res.cookie(name, value [, options])</h3>
+<h3 id='res.cookie'>res.cookie(name, value, [options])</h3>
 
 Sets cookie `name` to `value`.  The `value` parameter may be a string or object converted to JSON.
 
