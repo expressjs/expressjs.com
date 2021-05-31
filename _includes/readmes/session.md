@@ -2,7 +2,7 @@
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][node-url]
-[![Build Status][travis-image]][travis-url]
+[![Build Status][ci-image]][ci-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
 ## Installation
@@ -109,6 +109,10 @@ More information about the different enforcement levels can be found in
 
 **Note** This is an attribute that has not yet been fully standardized, and may change in
 the future. This also means many clients may ignore this attribute until they understand it.
+
+**Note** There is a [draft spec](https://tools.ietf.org/html/draft-west-cookie-incrementalism-01)
+that requires that the `Secure` attribute be set to `true` when the `SameSite` attribute has been
+set to `'none'`. Some web browsers or other clients may be adopting this specification.
 
 ##### cookie.secure
 
@@ -519,6 +523,11 @@ module. Please make a PR to add additional modules :)
 [aerospike-session-store-url]: https://www.npmjs.com/package/aerospike-session-store
 [aerospike-session-store-image]: https://badgen.net/github/stars/aerospike/aerospike-session-store-expressjs?label=%E2%98%85
 
+[![★][better-sqlite3-session-store-image] better-sqlite3-session-store][better-sqlite3-session-store-url] A session store based on [better-sqlite3](https://github.com/JoshuaWise/better-sqlite3).
+
+[better-sqlite3-session-store-url]: https://www.npmjs.com/package/better-sqlite3-session-store
+[better-sqlite3-session-store-image]: https://badgen.net/github/stars/timdaub/better-sqlite3-session-store?label=%E2%98%85
+
 [![★][cassandra-store-image] cassandra-store][cassandra-store-url] An Apache Cassandra-based session store.
 
 [cassandra-store-url]: https://www.npmjs.com/package/cassandra-store
@@ -794,6 +803,11 @@ based session store. Supports all backends supported by Fortune (MongoDB, Redis,
 [session-rethinkdb-url]: https://www.npmjs.com/package/session-rethinkdb
 [session-rethinkdb-image]: https://badgen.net/github/stars/llambda/session-rethinkdb?label=%E2%98%85
 
+[![★][@databunker/session-store-image] @databunker/session-store][@databunker/session-store-url] A [Databunker](https://databunker.org/)-based encrypted session store.
+
+[@databunker/session-store-url]: https://www.npmjs.com/package/@databunker/session-store
+[@databunker/session-store-image]: https://badgen.net/github/stars/securitybunker/databunker-session-store?label=%E2%98%85
+
 [![★][sessionstore-image] sessionstore][sessionstore-url] A session store that works with various databases.
 
 [sessionstore-url]: https://www.npmjs.com/package/sessionstore
@@ -867,11 +881,11 @@ On Windows, use the corresponding command;
 [MIT](LICENSE)
 
 [rfc-6265bis-03-4.1.2.7]: https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03#section-4.1.2.7
+[ci-image]: https://badgen.net/github/checks/expressjs/session/master?label=ci
+[ci-url]: https://github.com/expressjs/session/actions?query=workflow%3Aci
 [coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/session/master
 [coveralls-url]: https://coveralls.io/r/expressjs/session?branch=master
 [node-url]: https://nodejs.org/en/download
 [npm-downloads-image]: https://badgen.net/npm/dm/express-session
 [npm-url]: https://npmjs.org/package/express-session
 [npm-version-image]: https://badgen.net/npm/v/express-session
-[travis-image]: https://badgen.net/travis/expressjs/session/master
-[travis-url]: https://travis-ci.org/expressjs/session
