@@ -186,7 +186,7 @@ router.get('/', function (req, res) {
   res.send('hello, user!')
 })
 
-// geçen herhangi birşey için yönlendiriciyı ve 401'i kullan
+// geçen herhangi bir şey için yönlendiriciyı ve 401'i kullan
 app.use('/admin', router, function (req, res) {
   res.sendStatus(401)
 })
@@ -204,7 +204,7 @@ Hata-işleme ara yazılım fonksiyonlarını diğer ara yazılım fonksiyonları
 ```js
 app.use(function (err, req, res, next) {
   console.error(err.stack)
-  res.status(500).send('Birşeyler bozuk!')
+  res.status(500).send('Bir şeyler bozuk!')
 })
 ```
 
