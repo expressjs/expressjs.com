@@ -69,6 +69,7 @@ http://localhost:3000/static/hello.html
 อย่างไรก็ตาม เส้นทางที่คุณให้ไว้ในฟังก์ชัน `express.static` มีความสัมพันธ์กับไดเรกเทอรีจากที่ซึ่งคุณการบวนการรัน `node` ของคุณ ถ้าคุณรัน app จากไดเรกเทอรีอื่น มันจะปลอดภัยกว่าถ้าใช้เส้นทางจริงของไดเรกเทอรีที่คุณต้องการบริการไฟล์คงที่:
 
 ```js
+const path = require('path')
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
 
