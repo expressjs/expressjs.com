@@ -99,7 +99,7 @@ asynchronous code and pass them to Express. If the `try...catch`
 block were omitted, Express would not catch the error since it is not part of the synchronous
 handler code.
 
-Use promises to avoid the overhead of the `try..catch` block or when using functions
+Use promises to avoid the overhead of the `try...catch` block or when using functions
 that return promises.  For example:
 
 ```js
