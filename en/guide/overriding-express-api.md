@@ -45,7 +45,7 @@ Properties in the Express API are either:
 1. Assigned properties (ex: `req.baseUrl`, `req.originalUrl`)
 2. Defined as getters (ex: `req.secure`, `req.ip`)
 
-Since properties under category 1 are dynamically assigned on the `request` and `response` objects in the context of the current request-response cycle, their behavior cannot be overriden.
+Since properties under category 1 are dynamically assigned on the `request` and `response` objects in the context of the current request-response cycle, their behavior cannot be overridden.
 
 Properties under category 2 can be overwritten using the Express API extensions API.
 
