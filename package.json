@@ -6,7 +6,7 @@
     "test": "eslint --ignore-path .gitignore --ignore-pattern _includes/readmes/ \"**/*.md\""
   },
   "devDependencies": {
-    "eslint": "^7.26.0",
+    "eslint": "^7.29.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.23.1",
     "eslint-plugin-markdown": "^2.1.0",
