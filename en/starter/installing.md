@@ -34,7 +34,7 @@ Enter `app.js`, or whatever you want the name of the main file to be. If you wan
 Now install Express in the `myapp` directory and save it in the dependencies list. For example:
 
 ```sh
-$ npm install express --save
+$ npm install express
 ```
 
 To install Express temporarily and not add it to the dependencies list:
