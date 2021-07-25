@@ -1,4 +1,4 @@
-<h3 id='res.locals'>res.locals</h3>
+<h3 id='res.app.locals'>res.app.locals</h3>
 
 An object that contains response local variables scoped to the request, and therefore available only to
 the view(s) rendered during that request / response cycle (if any). Otherwise,
@@ -9,8 +9,8 @@ authenticated user, user settings, and so on.
 
 ```js
 app.use(function (req, res, next) {
-  res.locals.user = req.user
-  res.locals.authenticated = !req.user.anonymous
+  res.app.locals.user = req.user
+  res.app.locals.authenticated = !req.user.anonymous
   next()
 })
 ```
