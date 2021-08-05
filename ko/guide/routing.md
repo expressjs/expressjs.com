@@ -264,7 +264,7 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 | [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | 요청의 경로를 재지정합니다.
 | [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | 보기 템플리트를 렌더링합니다.
 | [res.send()](/{{ page.lang }}/4x/api.html#res.send)       | 다양한 유형의 응답을 전송합니다.
-| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)     | 파일을 옥텟 스트림의 형태로 전송합니다.
+| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | 파일을 옥텟 스트림의 형태로 전송합니다.
 | [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | 응답 상태 코드를 설정한 후 해당 코드를 문자열로 표현한 내용을 응답 본문으로서 전송합니다.
 
 <h2 id="app-route">app.route()</h2>
