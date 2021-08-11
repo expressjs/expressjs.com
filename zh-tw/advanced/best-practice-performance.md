@@ -32,15 +32,12 @@ lang: zh-tw
 
 Gzip 壓縮可以大幅減少回應內文的大小，從而提高 Web 應用程式的速度。請使用 [compression](https://www.npmjs.com/package/compression) 中介軟體，在您的 Express 應用程式中進行 gzip 壓縮。例如：
 
-
-<pre>
-<code class="language-javascript" translate="no">
-var compression = require('compression');
-var express = require('express');
-var app = express();
-app.use(compression());
-</code>
-</pre>
+```js
+var compression = require('compression')
+var express = require('express')
+var app = express()
+app.use(compression())
+```
 
 在正式作業中，如果網站的資料流量極高，落實執行壓縮最好的作法是在反向 Proxy 層次實作它（請參閱[使用反向 Proxy](#proxy)）。在該情況下，就不需使用壓縮中介軟體。如需在 Nginx 中啟用 gzip 壓縮的詳細資料，請參閱 Nginx 說明文件中的 [ngx_http_gzip_module 模組](http://nginx.org/en/docs/http/ngx_http_gzip_module.html)。
 
@@ -109,22 +106,20 @@ try-catch 是一種 JavaScript 語言建構，可用來捕捉同步程式碼中�
 
 下列範例顯示如何使用 try-catch 來處理潛在的程序當機異常狀況。此中介軟體函數接受名稱是 "params" 的查詢欄位參數，它是一個 JSON 物件。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/search', function (req, res) {
+```js
+app.get('/search', (req, res) => {
   // Simulating async operation
-  setImmediate(function () {
-    var jsonStr = req.query.params;
+  setImmediate(() => {
+    var jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr);
-      res.send('Success');
+      var jsonObj = JSON.parse(jsonStr)
+      res.send('Success')
     } catch (e) {
-      res.status(400).send('Invalid JSON string');
+      res.status(400).send('Invalid JSON string')
     }
-  });
-});
-</code>
-</pre>
+  })
+})
+```
 
 不過，try-catch 只適用於同步程式碼。由於 Node 平台主要是非同步（尤其是在正式作業環境），try-catch 不會捕捉大量的異常狀況。
 
@@ -134,27 +129,19 @@ app.get('/search', function (req, res) {
 
 只要非同步程式碼區塊使用 `then()`，promise 就會處理其中的任何異常狀況（包括明確和隱含）。只需在 promise 鏈尾端新增 `.catch(next)` 即可。例如：
 
-
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res, next) {
+```js
+app.get('/', (req, res, next) => {
   // do some sync stuff
   queryDb()
-    .then(function (data) {
-      // handle data
-      return makeCsv(data)
-    })
-    .then(function (csv) {
-      // handle csv
-    })
-    .catch(next);
-});
+    .then((data) => makeCsv(data)) // handle data
+    .then((csv) => { /* handle csv */ })
+    .catch(next)
+})
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // handle error
-});
-</code>
-</pre>
+})
+```
 
 現在，所有非同步與同步錯誤都會傳播到錯誤中介軟體。
 
@@ -163,15 +150,15 @@ app.use(function (err, req, res, next) {
 1.  您所有的非同步程式碼都必須傳回 promise（不包括發射程式）。如果特定程式庫沒有傳回 promise，請使用 [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html) 等之類的 helper 函數來轉換基本物件。
 2.  事件發射程式（例如：串流）仍可能造成未捕捉到的異常狀況。因此，請確定錯誤事件的處理適當；例如：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
 app.get('/', wrap(async (req, res, next) => {
-  let company = await getCompanyById(req.query.id)
-  let stream = getLogoStreamById(company.id)
+  const company = await getCompanyById(req.query.id)
+  const stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
-</code>
-</pre>
+```
 
 如需使用 promise 來處理錯誤的相關資訊，請參閱：
 

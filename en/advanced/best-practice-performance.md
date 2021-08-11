@@ -103,9 +103,9 @@ Here is an example of using try-catch to handle a potential process-crashing exc
 This middleware function accepts a query field parameter named "params" that is a JSON object.
 
 ```js
-app.get('/search', function (req, res) {
+app.get('/search', (req, res) => {
   // Simulating async operation
-  setImmediate(function () {
+  setImmediate(() => {
     var jsonStr = req.query.params
     try {
       var jsonObj = JSON.parse(jsonStr)
@@ -124,20 +124,15 @@ However, try-catch works only for synchronous code. Because the Node platform is
 Promises will handle any exceptions (both explicit and implicit) in asynchronous code blocks that use `then()`. Just add `.catch(next)` to the end of promise chains. For example:
 
 ```js
-app.get('/', function (req, res, next) {
+app.get('/', (req, res, next) => {
   // do some sync stuff
   queryDb()
-    .then(function (data) {
-      // handle data
-      return makeCsv(data)
-    })
-    .then(function (csv) {
-      // handle csv
-    })
+    .then((data) => makeCsv(data)) // handle data
+    .then((csv) => { /* handle csv */ })
     .catch(next)
 })
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // handle error
 })
 ```

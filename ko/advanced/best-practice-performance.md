@@ -114,9 +114,9 @@ Try-catch는 동기식 코드에서 예외를 처리하는 데 사용할 수 있
 이 미들웨어 함수는 JSON 오브젝트이자 "params"라는 이름을 갖는 조회 필드를 수락합니다.
 
 ```js
-app.get('/search', function (req, res) {
+app.get('/search', (req, res) => {
   // Simulating async operation
-  setImmediate(function () {
+  setImmediate(() => {
     var jsonStr = req.query.params
     try {
       var jsonObj = JSON.parse(jsonStr)
@@ -137,20 +137,15 @@ app.get('/search', function (req, res) {
 `then()`을 사용하는 비동기식 코드 블록 내에서는 프로미스를 통해 모든 예외(명시적 예외 및 암시적 예외 모두)를 처리할 수 있습니다. 프로미스 체인의 끝에 `.catch(next)`만 추가하면 됩니다. 예를 들면 다음과 같습니다.
 
 ```js
-app.get('/', function (req, res, next) {
+app.get('/', (req, res, next) => {
   // do some sync stuff
   queryDb()
-    .then(function (data) {
-      // handle data
-      return makeCsv(data)
-    })
-    .then(function (csv) {
-      // handle csv
-    })
+    .then((data) => makeCsv(data)) // handle data
+    .then((csv) => { /* handle csv */ })
     .catch(next)
 })
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // handle error
 })
 ```

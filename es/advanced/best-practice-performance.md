@@ -42,14 +42,12 @@ Estas son algunas de las cosas que puede hacer en el código para mejorar el ren
 
 La compresión de gzip puede disminuir significativamente el tamaño del cuerpo de respuesta y, por lo tanto, aumentar la velocidad de una aplicación web. Utilice el middleware de [compresión](https://www.npmjs.com/package/compression) para la compresión de gzip en la aplicación Express. Por ejemplo:
 
-<pre>
-<code class="language-javascript" translate="no">
-var compression = require('compression');
-var express = require('express');
-var app = express();
-app.use(compression());
-</code>
-</pre>
+```js
+var compression = require('compression')
+var express = require('express')
+var app = express()
+app.use(compression())
+```
 
 Para un sitio web con un tráfico elevado en producción, la mejor forma de aplicar la compresión es implementarla como un nivel de proxy inverso (consulte [Utilizar un proxy inverso](#proxy)). En este caso, no es necesario utilizar el middleware de compresión. Para obtener detalles sobre cómo habilitar la compresión de gzip en Nginx, consulte [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) en la documentación de Nginx.
 
@@ -110,22 +108,20 @@ Utilice una herramienta como [JSHint](http://jshint.com/) o [JSLint](http://www.
 A continuación, se muestra un ejemplo de uso de try-catch para manejar una posible excepción de bloqueo de proceso.
 Esta función de middleware acepta un parámetro de campo de consulta denominado "params" que es un objeto JSON.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/search', function (req, res) {
+```js
+app.get('/search', (req, res) => {
   // Simulating async operation
-  setImmediate(function () {
-    var jsonStr = req.query.params;
+  setImmediate(() => {
+    var jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr);
-      res.send('Success');
+      var jsonObj = JSON.parse(jsonStr)
+      res.send('Success')
     } catch (e) {
-      res.status(400).send('Invalid JSON string');
+      res.status(400).send('Invalid JSON string')
     }
-  });
-});
-</code>
-</pre>
+  })
+})
+```
 
 No obstante, try-catch sólo funciona para el código síncrono. Como la plataforma de Node es principalmente asíncrona (particularmente en un entorno de producción), try-catch no capturará muchas excepciones.
 
@@ -135,26 +131,19 @@ No obstante, try-catch sólo funciona para el código síncrono. Como la platafo
 
 Las promesas manejarán todas las excepciones (explícitas e implícitas) en los bloques de códigos asíncronos que utilicen `then()`. Sólo tiene que añadir `.catch(next)` al final de las cadenas de promesas. Por ejemplo:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res, next) {
+```js
+app.get('/', (req, res, next) => {
   // do some sync stuff
   queryDb()
-    .then(function (data) {
-      // handle data
-      return makeCsv(data)
-    })
-    .then(function (csv) {
-      // handle csv
-    })
-    .catch(next);
-});
+    .then((data) => makeCsv(data)) // handle data
+    .then((csv) => { /* handle csv */ })
+    .catch(next)
+})
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // handle error
-});
-</code>
-</pre>
+})
+```
 
 Ahora todos los errores, asíncronos y síncronos, se propagarán al middleware de errores.
 
@@ -163,15 +152,15 @@ No obstante, hay dos advertencias:
 1.  Todo el código asíncrono debe devolver promesas (excepto los emisores). Si una determinada biblioteca no devuelve promesas, convierta el objeto base utilizando una función de ayuda como [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
 2.  Los emisores de sucesos (como las secuencias) todavía pueden provocar excepciones no capturadas. Por lo tanto, asegúrese de que está manejando el suceso de error correctamente; por ejemplo:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
 app.get('/', wrap(async (req, res, next) => {
-  let company = await getCompanyById(req.query.id)
-  let stream = getLogoStreamById(company.id)
+  const company = await getCompanyById(req.query.id)
+  const stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
-</code>
-</pre>
+```
 
 La función `wrap()` es un envoltorio que toma las promesas rechazadas y llama a `next()` con el error como primer argumento. Para más detalles, vea [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/).
 

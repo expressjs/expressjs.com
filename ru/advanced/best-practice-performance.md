@@ -32,14 +32,12 @@ lang: ru
 
 Сжатие gzip может значительно уменьшить размер тела ответа и, соответственно, увеличить быстродействие веб-приложения. Используйте промежуточный обработчик для [сжатия](https://www.npmjs.com/package/compression) gzip в приложениях Express. Например:
 
-<pre>
-<code class="language-javascript" translate="no">
-var compression = require('compression');
-var express = require('express');
-var app = express();
-app.use(compression());
-</code>
-</pre>
+```js
+var compression = require('compression')
+var express = require('express')
+var app = express()
+app.use(compression())
+```
 
 Для активно используемого веб-сайта в рабочей среде разумнее всего реализовать сжатие на уровне обратного прокси (см. раздел [Использование обратного прокси-сервера](#proxy)). В этом случае можно обойтись без промежуточного обработчика для сжатия данных. Более подробная информация об активации сжатия в Nginx приведена в разделе [Модуль сжатия ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) документации по Nginx.
 
@@ -108,22 +106,20 @@ app.use(compression());
 Ниже приводится пример использования конструкции try-catch для обработки потенциальной исключительной ситуации, приводящей к отказу процесса.
 Этот промежуточный обработчик принимает параметр поля запроса "params", который является объектом JSON.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/search', function (req, res) {
+```js
+app.get('/search', (req, res) => {
   // Simulating async operation
-  setImmediate(function () {
-    var jsonStr = req.query.params;
+  setImmediate(() => {
+    var jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr);
-      res.send('Success');
+      var jsonObj = JSON.parse(jsonStr)
+      res.send('Success')
     } catch (e) {
-      res.status(400).send('Invalid JSON string');
+      res.status(400).send('Invalid JSON string')
     }
-  });
-});
-</code>
-</pre>
+  })
+})
+```
 
 Однако конструкция try-catch работает только для синхронного кода. Поскольку платформа Node является преимущественно асинхронной (в частности, в рабочей среде), с помощью конструкции try-catch удастся перехватить не так уж много исключительных ситуаций.
 
@@ -133,26 +129,19 @@ app.get('/search', function (req, res) {
 
 Промисы (promises) обрабатывают любые исключительные ситуации (явные  и неявные) в блоках асинхронного кода, в которых используется метод `then()`. Просто добавьте `.catch(next)` в конце цепочки промисов. Например:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res, next) {
+```js
+app.get('/', (req, res, next) => {
   // do some sync stuff
   queryDb()
-    .then(function (data) {
-      // handle data
-      return makeCsv(data)
-    })
-    .then(function (csv) {
-      // handle csv
-    })
-    .catch(next);
-});
+    .then((data) => makeCsv(data)) // handle data
+    .then((csv) => { /* handle csv */ })
+    .catch(next)
+})
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // handle error
-});
-</code>
-</pre>
+})
+```
 
 Теперь все ошибки, асинхронные и синхронные, будут передаваться в промежуточный обработчик ошибок.
 
@@ -161,15 +150,15 @@ app.use(function (err, req, res, next) {
 1.  Весь асинхронный код должен возвращать промисы (кроме отправителей). Если какая-то библиотека не возвращает промисы, преобразуйте объект base при помощи вспомогательной функции типа [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
 2.  Отправители событий (такие как потоки) могут вызывать необрабатываемые исключительные ситуации. Поэтому проверьте правильность обработки событий ошибки; например:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
 app.get('/', wrap(async (req, res, next) => {
-  let company = await getCompanyById(req.query.id)
-  let stream = getLogoStreamById(company.id)
+  const company = await getCompanyById(req.query.id)
+  const stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
-</code>
-</pre>
+```
 
 Дополнительная информация об обработке ошибок с использованием промисов приведена в разделе:
 

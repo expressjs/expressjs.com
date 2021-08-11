@@ -32,14 +32,12 @@ Les actions suivantes peuvent être réalisées dans votre code afin d'améliore
 
 La compression Gzip peut considérablement réduire la taille du corps de réponse et ainsi augmenter la vitesse d'une application Web. Utilisez le middleware [compression](https://www.npmjs.com/package/compression) pour la compression gzip dans votre application Express. Par exemple :
 
-<pre>
-<code class="language-javascript" translate="no">
-var compression = require('compression');
-var express = require('express');
-var app = express();
-app.use(compression());
-</code>
-</pre>
+```js
+var compression = require('compression')
+var express = require('express')
+var app = express()
+app.use(compression())
+```
 
 Pour un site Web en production dont le trafic est élevé, la meilleure méthode pour mettre en place la compression consiste à l'implémenter au niveau d'un proxy inverse (voir [Utiliser un proxy inverse](#proxy)). Dans ce cas, vous n'avez pas besoin d'utiliser le middleware compression. Pour plus de détails sur l'activation de la compression gzip dans Nginx, voir [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) dans la documentation Nginx.
 
@@ -108,22 +106,20 @@ Utilisez un outil tel que [JSHint](http://jshint.com/) ou [JSLint](http://www.js
 Voici un exemple d'utilisation de try-catch pour traiter une exception potentielle de plantage de processus.
 Cette fonction middleware accepte un paramètre de zone de requête nommé "params" qui est un objet JSON.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/search', function (req, res) {
+```js
+app.get('/search', (req, res) => {
   // Simulating async operation
-  setImmediate(function () {
-    var jsonStr = req.query.params;
+  setImmediate(() => {
+    var jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr);
-      res.send('Success');
+      var jsonObj = JSON.parse(jsonStr)
+      res.send('Success')
     } catch (e) {
-      res.status(400).send('Invalid JSON string');
+      res.status(400).send('Invalid JSON string')
     }
-  });
-});
-</code>
-</pre>
+  })
+})
+```
 
 Toutefois, try-catch ne fonctionne que dans le code synchrone. Etant donné que la plateforme Node est principalement asynchrone (en particulier dans un environnement de production), try-catch n'interceptera pas beaucoup d'exceptions.
 
@@ -133,26 +129,19 @@ Toutefois, try-catch ne fonctionne que dans le code synchrone. Etant donné que 
 
 Les promesses vont traiter n'importe quelle exception (explicite et implicite) dans les blocs de code asynchrone qui utilisent `then()`. Contentez-vous d'ajouter `.catch(next)` à la fin des chaînes de promesse. Par exemple :
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res, next) {
+```js
+app.get('/', (req, res, next) => {
   // do some sync stuff
   queryDb()
-    .then(function (data) {
-      // handle data
-      return makeCsv(data)
-    })
-    .then(function (csv) {
-      // handle csv
-    })
-    .catch(next);
-});
+    .then((data) => makeCsv(data)) // handle data
+    .then((csv) => { /* handle csv */ })
+    .catch(next)
+})
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // handle error
-});
-</code>
-</pre>
+})
+```
 
 Toutes les erreurs asynchrones et synchrones sont à présent propagées vers le middleware de traitement des erreurs.
 
@@ -161,15 +150,15 @@ Observez toutefois les deux avertissements suivants :
 1.  L'intégralité de votre code asynchrone doit renvoyer des promesses (à l'exception des émetteurs). Si une bibliothèque spécifique ne renvoie pas de promesses, convertissez l'objet de base à l'aide d'une fonction d'aide telle que [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
 2.  Les émetteurs d'événements (comme les flux) peuvent toujours générer des exceptions non interceptées. Veillez donc à traiter l'événement d'erreur de manière appropriée ; par exemple :
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
 app.get('/', wrap(async (req, res, next) => {
-  let company = await getCompanyById(req.query.id)
-  let stream = getLogoStreamById(company.id)
+  const company = await getCompanyById(req.query.id)
+  const stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
-</code>
-</pre>
+```
 
 Pour plus d'informations sur le traitement des erreurs à l'aide de promesses, voir :
 

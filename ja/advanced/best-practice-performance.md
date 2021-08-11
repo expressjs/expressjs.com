@@ -102,9 +102,9 @@ Try-catch は、同期コードで例外をキャッチするために使用で�
 このミドルウェア関数は、JSON オブジェクトである「params」という照会フィールド・パラメーターを受け入れます。
 
 ```js
-app.get('/search', function (req, res) {
+app.get('/search', (req, res) => {
   // Simulating async operation
-  setImmediate(function () {
+  setImmediate(() => {
     var jsonStr = req.query.params
     try {
       var jsonObj = JSON.parse(jsonStr)
@@ -123,20 +123,15 @@ app.get('/search', function (req, res) {
 Promise は、`then()` を使用する非同期コード・ブロックのすべての例外 (明示的と暗黙的の両方) を処理します。単に、Promise チェーンの最後に `.catch(next)` を追加してください。次に例を示します。
 
 ```js
-app.get('/', function (req, res, next) {
+app.get('/', (req, res, next) => {
   // do some sync stuff
   queryDb()
-    .then(function (data) {
-      // handle data
-      return makeCsv(data)
-    })
-    .then(function (csv) {
-      // handle csv
-    })
+    .then((data) => makeCsv(data)) // handle data
+    .then((csv) => { /* handle csv */ })
     .catch(next)
 })
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // handle error
 })
 ```

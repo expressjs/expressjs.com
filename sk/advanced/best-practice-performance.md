@@ -36,14 +36,12 @@ Dodržiavanie nasledujúcich postupov vo vašom kóde môže viesť k zlepšeniu
 
 Použitie gzip kompresie môže veľmi znížiť veľkosť response body a tým zvýšíť rýchlosť webovej aplikácie. Pre zapnutie gzip kompresie vo vašej Express aplikácii používajte [compression](https://www.npmjs.com/package/compression) middleware. Napr.:
 
-<pre>
-<code class="language-javascript" translate="no">
-var compression = require('compression');
-var express = require('express');
-var app = express();
-app.use(compression());
-</code>
-</pre>
+```js
+var compression = require('compression')
+var express = require('express')
+var app = express()
+app.use(compression())
+```
 
 Pre stránky s vysokou návštevnosťou sa odporúča implementovať kompresiu na úrovni reverse proxy (pozrite sa na [Použitie reverse proxy](#proxy)). V takom prípade nemusíte použiť compression middleware. Pre viac detailov ohľadom zapnutia gzip kompresie na Nginx serveri sa pozrite na [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) v Nginx dokumentácii.
 
@@ -112,22 +110,20 @@ Používajte nástroje [JSHint](http://jshint.com/) príp. [JSLint](http://www.j
 Tu je príklad použitia try-catch k odchyteniu potenciálnej výnimky zapríčiňujúcej pád procesu.
 Táto middleware funkcia príjma query parameter nazvaný "params" ktorý je JSON objekt.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/search', function (req, res) {
+```js
+app.get('/search', (req, res) => {
   // Simulating async operation
-  setImmediate(function () {
-    var jsonStr = req.query.params;
+  setImmediate(() => {
+    var jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr);
-      res.send('Success');
+      var jsonObj = JSON.parse(jsonStr)
+      res.send('Success')
     } catch (e) {
-      res.status(400).send('Invalid JSON string');
+      res.status(400).send('Invalid JSON string')
     }
-  });
-});
-</code>
-</pre>
+  })
+})
+```
 
 Pozor, try-catch funguje len pre synchrónny kód. Vzhľadom nato, že Node platforma je primárne asynchrónna (obzvlášť v produkčnom prostredí), veľa výnimiek try-catch neodchytí.
 
@@ -137,26 +133,19 @@ Pozor, try-catch funguje len pre synchrónny kód. Vzhľadom nato, že Node plat
 
 Promises dokážu spracovať všetky typy výnimiek (explicitné aj implicitné) v asynchrónnych blokoch kódu používajuce `then()`, pridaním `.catch(next)` na koniec promise reťazca. Napr.:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res, next) {
+```js
+app.get('/', (req, res, next) => {
   // do some sync stuff
   queryDb()
-    .then(function (data) {
-      // handle data
-      return makeCsv(data);
-    })
-    .then(function (csv) {
-      // handle csv
-    })
-    .catch(next);
-});
+    .then((data) => makeCsv(data)) // handle data
+    .then((csv) => { /* handle csv */ })
+    .catch(next)
+})
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // handle error
-});
-</code>
-</pre>
+})
+```
 
 Takto sa všetky asynchrónne i synchrónne errory prešíria do error middleware-u.
 
@@ -166,15 +155,15 @@ Avšak, dve upozornenia:
 2.  Event emitory (ako sú streams) môžu spôsobiť neodchytené výnimky. Preto sa uistite, že správne spracovávate error eventy.
 Napr.:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
 app.get('/', wrap(async (req, res, next) => {
-  let company = await getCompanyById(req.query.id);
-  let stream = getLogoStreamById(company.id);
-  stream.on('error', next).pipe(res);
-}));
-</code>
-</pre>
+  const company = await getCompanyById(req.query.id)
+  const stream = getLogoStreamById(company.id)
+  stream.on('error', next).pipe(res)
+}))
+```
 
 Pre viac informácií ohľadom error handling-u použitím promises si prečítajte:
 

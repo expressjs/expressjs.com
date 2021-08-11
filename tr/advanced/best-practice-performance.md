@@ -103,9 +103,9 @@ Try-catch senkron kodda oluşan istisnaları yakalamak için kullanabileceğiniz
 Buradaki örnek potansyel bir süreç-patlatıcı istisnayı ele alman try-catch kullanımını gösterir. Bu ara yazılım fonksiyonu JSON objesi olan "params" adında bir sorgu alanı parametresi alıyor.
 
 ```js
-app.get('/search', function (req, res) {
-  // async işlem simüle etme
-  setImmediate(function () {
+app.get('/search', (req, res) => {
+  // Simulating async operation
+  setImmediate(() => {
     var jsonStr = req.query.params
     try {
       var jsonObj = JSON.parse(jsonStr)
@@ -124,21 +124,16 @@ Ancak, try-catch sadece senkron kod için çalışır. Node platformu birincil o
 Promise'lar `then()` kullanan asenkron kod bloklarında herhangi bir istisnayı (implicit / explicit) işleyebilir. Sadece `.catch(next)` ifadesini promise zincirlerinin sonuna ekleyin. Örneğin:
 
 ```js
-app.get('/', function (req, res, next) {
-  // senkron şeyler yap
+app.get('/', (req, res, next) => {
+  // do some sync stuff
   queryDb()
-    .then(function (data) {
-      // veri işle
-      return makeCsv(data)
-    })
-    .then(function (csv) {
-      // csv işle
-    })
+    .then((data) => makeCsv(data)) // handle data
+    .then((csv) => { /* handle csv */ })
     .catch(next)
 })
 
-app.use(function (err, req, res, next) {
-  // hata işle
+app.use((err, req, res, next) => {
+  // handle error
 })
 ```
 
