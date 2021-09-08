@@ -14,7 +14,7 @@ These template engines work "out-of-the-box" with Express:
 
 - **[Pug](https://github.com/pugjs/pug)**: Haml-inspired template engine (formerly Jade).
 - **[Haml.js](https://github.com/tj/haml.js)**: Haml implementation.
-- **[EJS](https://github.com/tj/ejs)**: Embedded JavaScript template engine.
+- **[EJS](https://github.com/mde/ejs)**: Embedded JavaScript template engine.
 - **[hbs](https://github.com/pillarjs/hbs)**: Adapter for Handlebars.js, an extension of Mustache.js template engine.
 - **[Squirrelly](https://github.com/squirrellyjs/squirrelly)**: Blazing-fast template engine that supports partials, helpers, custom tags, filters, and caching. Not white-space sensitive, works with any language.
 - **[Eta](https://github.com/eta-dev/eta)**: Super-fast lightweight embedded JS template engine. Supports custom delimiters, async, whitespace control, partials, caching, plugins.
