@@ -110,3 +110,7 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
 <section markdown="1">
   {% include api/en/3x/req-acceptsLanguage.md %}
 </section>
+
+<section markdown="1">
+  {% include api/en/3x/req-res.md %}
+</section>

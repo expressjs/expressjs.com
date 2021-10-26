@@ -39,6 +39,10 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
   {% include api/en/5x/res-locals.md %}
 </section>
 
+<section markdown="1">
+  {% include api/en/5x/res-req.md %}
+</section>
+
 <h3 id='res.methods'>Methods</h3>
 
 <section markdown="1">

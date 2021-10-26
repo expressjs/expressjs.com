@@ -97,6 +97,10 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
   {% include api/en/4x/res-render.md %}
 </section>
 
+<section>
+  {% include api/en/4x/res-req.md %}
+</section>
+
 <section markdown="1">
   {% include api/en/4x/res-send.md %}
 </section>
