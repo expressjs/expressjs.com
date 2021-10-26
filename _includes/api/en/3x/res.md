@@ -78,3 +78,7 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
 <section markdown="1">
   {% include api/en/3x/res-render.md %}
 </section>
+
+<section markdown="1">
+  {% include api/en/3x/res-req.md %}
+</section>

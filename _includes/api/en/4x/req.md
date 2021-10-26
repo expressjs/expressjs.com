@@ -93,6 +93,10 @@ or [pez](https://www.npmjs.com/package/pez).
 </section>
 
 <section markdown="1">
+  {% include api/en/4x/req-res.md %}
+</section>
+
+<section markdown="1">
   {% include api/en/4x/req-route.md %}
 </section>
 
