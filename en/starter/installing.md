@@ -37,7 +37,7 @@ Now install Express in the `myapp` directory and save it in the dependencies lis
 $ npm install express --save
 ```
 
-To install Express temporarily and not add it to the dependencies list:
+If you want to install Express temporarily and don't want to add it to the dependencies list:
 
 ```sh
 $ npm install express --no-save
