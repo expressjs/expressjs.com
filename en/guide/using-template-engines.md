@@ -17,7 +17,7 @@ The [Express application generator](/{{ page.lang }}/starter/generator.html) use
 
 See [Template Engines (Express wiki)](https://github.com/expressjs/express/wiki#template-engines)
 for a list of template engines you can use with Express.
-See also [Comparing JavaScript Templating Engines: Jade, Mustache, Dust and More](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/).
+See also [Comparing JavaScript Templating Engines: Jade, Mustache, Dust and More](https://medium.com/@jack.yin/comparing-javascript-templating-engines-jade-mustache-dust-and-more-6a4469ac716a).
 
 <div class="doc-box doc-notice" markdown="1">
 **Note**: Jade has been renamed to [Pug](https://www.npmjs.com/package/pug).  You can continue to use Jade in your app, and it will work just fine.  However if you want the latest updates to the template engine, you must replace Jade with Pug in your app.
