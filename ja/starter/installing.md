@@ -33,7 +33,7 @@ entry point: (index.js)
 Expressを `myapp` ディレクトリにインストールし、それを依存関係リストに保存してください。例えば：
 
 ```console
-$ npm install express --save
+$ npm install express
 ```
 
 Express を一時的にインストールし、それを依存関係リストに追加しないようにするには、次のようにします。

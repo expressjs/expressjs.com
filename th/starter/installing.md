@@ -34,7 +34,7 @@ entry point: (index.js)
 ต่อไปเป็นการติดตั้ง Express ในไดเรกเทอรี `myapp` และบันทึกไว้ในรายการเกี่ยวโยง (dependencies list) ตัวอย่างเช่น:
 
 ```console
-$ npm install express --save
+$ npm install express
 ```
 สามารถติดตั้ง Express ชั่วคราวได้โดยไม่ใส่ไว้ในรายการเกี่ยวโยง ด้วยคำสั่ง:
 

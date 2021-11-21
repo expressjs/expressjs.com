@@ -33,7 +33,7 @@ entry point: (index.js)
 在 `myapp` 目录中安装 Express，然后将其保存在依赖项列表中。例如：
 
 ```console
-$ npm install express --save
+$ npm install express
 ```
 
 要暂时安装 Express 而不将其添加到依赖项列表中：
