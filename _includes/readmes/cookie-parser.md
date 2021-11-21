@@ -2,7 +2,7 @@
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
+[![Build Status][ci-image]][ci-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
 Parse `Cookie` header and populate `req.cookies` with an object keyed by the
@@ -17,8 +17,6 @@ $ npm install cookie-parser
 ```
 
 ## API
-
-<!-- eslint-disable no-unused-vars -->
 
 ```js
 var cookieParser = require('cookie-parser')
@@ -112,10 +110,10 @@ app.listen(8080)
 
 [MIT](LICENSE)
 
+[ci-image]: https://badgen.net/github/checks/expressjs/cookie-parser/master?label=ci
+[ci-url]: https://github.com/expressjs/cookie-parser/actions?query=workflow%3Aci
 [coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/cookie-parser/master
 [coveralls-url]: https://coveralls.io/r/expressjs/cookie-parser?branch=master
 [npm-downloads-image]: https://badgen.net/npm/dm/cookie-parser
 [npm-url]: https://npmjs.org/package/cookie-parser
 [npm-version-image]: https://badgen.net/npm/v/cookie-parser
-[travis-image]: https://badgen.net/travis/expressjs/cookie-parser/master
-[travis-url]: https://travis-ci.org/expressjs/cookie-parser
