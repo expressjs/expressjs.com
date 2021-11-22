@@ -34,16 +34,11 @@ entry point: (index.js)
 Тепер встановіть Express в новоствореній директорії та збережіть його в списку залежностей:
 
 <pre><code class="language-sh" translate="no">
-$ npm install express --save
-</code></pre>
-
-Щоб встановити Express без додавання його в список залежностей, не передавайте параметр `--save`:
-
-<pre><code class="language-sh" translate="no">
 $ npm install express
 </code></pre>
 
-<div class="doc-box doc-info" markdown="1">
-Модулі Node.js, встановлені з параметром `--save`, додаються до списку `залежностей` у файл `package.json`, що знаходиться в корені робочого каталогу.
-Цей список використовується при запуску команди `npm install` щоб автоматично встановлювати вказані там модулі.
-</div>
+Щоб встановити Express без додавання його в список залежностей:
+
+<pre><code class="language-sh" translate="no">
+$ npm install express --no-save
+</code></pre>
