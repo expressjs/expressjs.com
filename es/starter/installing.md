@@ -40,15 +40,15 @@ A continuación, instale Express en el directorio `myapp` y guárdelo en la list
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install express --save
+$ npm install express
 </code>
 </pre>
 
-Para instalar Express temporalmente y no añadirlo a la lista de dependencias, omita la opción `--save`:
+Para instalar Express temporalmente y no añadirlo a la lista de dependencias:
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install express
+$ npm install express --no-save
 </code>
 </pre>
 
