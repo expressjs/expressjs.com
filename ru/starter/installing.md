@@ -40,19 +40,8 @@ entry point: (index.js)
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install express --save
-</code>
-</pre>
-
-Для временной установки Express, без добавления его в список зависимостей, не указывайте опцию `--save`:
-
-<pre>
-<code class="language-sh" translate="no">
 $ npm install express
 </code>
 </pre>
 
-<div class="doc-box doc-info" markdown="1">
-Модули Node, установленные с опцией `--save`, добавляются в список `dependencies` в файле `package.json`.
-В дальнейшем, при запуске `npm install` в каталоге `app` установка модулей из списка зависимостей будет выполняться автоматически.
-</div>
+
