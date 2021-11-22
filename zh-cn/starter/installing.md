@@ -40,7 +40,7 @@ entry point: (index.js)
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install express --save
+$ npm install express
 </code>
 </pre>
 
