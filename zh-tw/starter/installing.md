@@ -39,18 +39,14 @@ entry point: (index.js)
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install express --save
-</code>
-</pre>
-
-如果只想暫時安裝 Express，而不新增至相依關係清單，請省略 `--save` 選項：
-
-<pre>
-<code class="language-sh" translate="no">
 $ npm install express
 </code>
 </pre>
 
-<div class="doc-box doc-info" markdown="1">
-安裝 Node 模組時，如果指定了 `--save` 選項，則會將這些模組新增至 `package.json` 檔中的 `dependencies` 清單。之後，當您在 `app` 目錄中執行 `npm install` 時，就會自動安裝相依關係清單中的模組。
-</div>
+如果只想暫時安裝 Express，而不新增至相依關係清單：
+
+<pre>
+<code class="language-sh" translate="no">
+$ npm install express --no-save
+</code>
+</pre>
