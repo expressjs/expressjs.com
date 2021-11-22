@@ -38,13 +38,6 @@ Entrez `app.js` ou un nom de votre choix pour le fichier principal. Si vous souh
 
 Installez ensuite Express dans le répertoire `myapp`, puis sauvegardez-le dans la liste des dépendances. Par exemple :
 
-<pre>
-<code class="language-sh" translate="no">
-$ npm install express --save
-</code>
-</pre>
-
-Pour installer Express de façon temporaire et ne pas l'ajouter à la liste des dépendances, omettez l'option `--save` :
 
 <pre>
 <code class="language-sh" translate="no">
