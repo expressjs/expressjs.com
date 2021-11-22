@@ -40,19 +40,16 @@ Quindi installare Express nella directory `myapp` e salvarlo nell'elenco delle d
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install express --save
-</code>
-</pre>
-
-Per installare momentaneamente Express e non aggiungerlo all'elenco di dipendenze, omettere l'opzione `--save`:
-
-<pre>
-<code class="language-sh" translate="no">
 $ npm install express
 </code>
 </pre>
 
-<div class="doc-box doc-info" markdown="1">
-I moduli Node installati con l'opzione `--save` vengono aggiunti all'elenco `dependencies` nel file `package.json`.
-Successivamente, l'esecuzione di `npm install` nella directory `app` installerà automaticamente i moduli nell'elenco di dipendenze.
-</div>
+Per installare momentaneamente Express e non aggiungerlo all'elenco di dipendenze:
+
+<pre>
+<code class="language-sh" translate="no">
+$ npm install express --no-save
+</code>
+</pre>
+
+
