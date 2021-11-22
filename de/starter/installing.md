@@ -38,7 +38,7 @@ Installieren Sie jetzt Express im Verzeichnis `myapp` und speichern Sie es in de
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install express --save
+$ npm install express
 </code>
 </pre>
 
@@ -46,10 +46,6 @@ Wenn Sie Express vorübergehend installieren und nicht zur Abhängigkeitsliste h
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install express
+$ npm install express --no-save
 </code>
 </pre>
-
-<div class="doc-box doc-info" markdown="1">
-Node-Module, die mit der Option `--save` installiert werden, werden zur `Abhängigkeitsliste` in der Datei `package.json` hinzugefügt. Danach werden bei der Ausführung von `npm install` im Verzeichnis `app` automatisch alle Module in der Abhängigkeitsliste installiert.
-</div>
