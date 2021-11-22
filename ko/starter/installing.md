@@ -40,19 +40,15 @@ entry point: (index.js)
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install express --save
-</code>
-</pre>
-
-Express를 임시로 설치하고 종속 항목 목록에 추가하지 않으려면, 다음과 같이 `--save` 옵션을 생략하십시오.
-
-<pre>
-<code class="language-sh" translate="no">
 $ npm install express
 </code>
 </pre>
 
-<div class="doc-box doc-info" markdown="1">
-`--save` 옵션을 통해 설치된 Node 모듈은 `package.json` 파일 내의 `dependencies` 목록에 추가됩니다.
-이후 `app` 디렉토리에서 `npm install`을 실행하면 종속 항목 목록 내의 모듈이 자동으로 설치됩니다.
-</div>
+Express를 임시로 설치하고 종속 항목 목록에 추가하지 않으려면:
+
+<pre>
+<code class="language-sh" translate="no">
+$ npm install express --no-save
+</code>
+</pre>
+
