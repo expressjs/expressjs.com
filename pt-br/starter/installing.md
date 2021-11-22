@@ -48,24 +48,15 @@ e salve-o na lista de dependências. Por exemplo:
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install express --save
-</code>
-</pre>
-
-Para instalar o Express temporariamente não o inclua na lista
-de dependências, omita a opção `--save`:
-
-<pre>
-<code class="language-sh" translate="no">
 $ npm install express
 </code>
 </pre>
 
-<div class="doc-box doc-info" markdown="1">
-Módulos do Node instalados com a opção `--save`
-são incluídas na lista `dependencies` no arquivo
-`package.json`.
-Posteriormente, executando `npm install` no diretório
-`app` irá automaticamente instalar os módulos na
-lista de dependências.
-</div>
+Para instalar o Express temporariamente não o inclua na lista
+de dependências:
+
+<pre>
+<code class="language-sh" translate="no">
+$ npm install express --no-save
+</code>
+</pre>
