@@ -37,7 +37,7 @@ entry point: (index.js)
 
 
 ```sh
-$ npm install express --save
+$ npm install express
 ```
 
 Express'i geçici olarak kurmak ve bağımlı uygulamalar listesine eklememek istiyorsanız:
