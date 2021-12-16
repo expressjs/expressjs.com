@@ -53,11 +53,9 @@ Helmet je v skutočnosti len kolekcia deviatich menších middleware funkcií na
 
 Helmet nainštalujete rovnako, ako akýkoľvek iný modul:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 Potom ho môžete použiť vo vašom kóde takto:
 

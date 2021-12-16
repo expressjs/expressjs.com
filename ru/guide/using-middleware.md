@@ -266,11 +266,9 @@ app.use(express.static('files'));
 
 В приведенном ниже примере показана установка и загрузка функции промежуточной обработки для синтаксического анализа cookie `cookie-parser`.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install cookie-parser
-</code>
-</pre>
+```
 
 <pre>
 <code class="language-javascript" translate="no">

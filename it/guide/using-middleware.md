@@ -267,11 +267,9 @@ Installare il modulo Node.js per la funzionalità richiesta, quindi, caricarlo n
 
 Il seguente esempio illustra l'installazione e il caricamento della funzione middleware di analisi dei cookie `cookie-parser`.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install cookie-parser
-</code>
-</pre>
+```
 
 <pre>
 <code class="language-javascript" translate="no">

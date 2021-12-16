@@ -27,11 +27,9 @@ Aby Express dokázal spracovať a vyrendrovať template súbory, musí aplikáci
 
 Potom nainštalujte vybraný template engine ako npm dependenciu. Napr. pre inštaláciu Pug spustite:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install pug --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Templatovacie enginy kompatibilné s Express ako napr. Pug exportujú funkciu `__express(filePath, options, callback)`, ktorá je volaná pomocou `res.render()` funkcie k vyrendrovaniu template kódu.

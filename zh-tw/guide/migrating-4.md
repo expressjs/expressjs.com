@@ -367,11 +367,9 @@ http.createServer(app).listen(app.get('port'), function(){
 
 開始移轉程序，作法是使用下列指令，為 Express 4 應用程式安裝必要的中介軟體，並將 Express 和 Pug 更新為其個別的最新版本：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-</code>
-</pre>
+```
 
 對 `app.js` 進行下列變更：
 
@@ -477,11 +475,9 @@ server.listen(app.get('port'), function(){
 
 移轉程序已完成，現在應用程式是一個 Express 4 應用程式。若要確認，請使用下列指令來啟動應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node .
-</code>
-</pre>
+```
 
 載入 [http://localhost:3000](http://localhost:3000)，並查看 Express 4 所呈現的首頁。
 
@@ -493,20 +489,17 @@ $ node .
 
 如果您的系統已安裝 Express 3 應用程式產生器，必須解除安裝它：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm uninstall -g express
-</code>
-</pre>
+```
+
 視您如何配置檔案與目錄專用權而定，您可能需要使用 `sudo` 來執行這個指令。
 
 現在安裝新的產生器：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 視您如何配置檔案與目錄專用權而定，您可能需要使用 `sudo` 來執行這個指令。
 
@@ -525,11 +518,9 @@ $ npm install -g express-generator
 
 執行下列指令，以建立 Express 4 應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express app4
-</code>
-</pre>
+```
 
 如果您查看 `app4/app.js` 檔的內容，您會發現應用程式所需要的所有中介軟體函數（但不包括 `express.static`）都載入成獨立模組，且 `router` 中介軟體不再明確載入到應用程式中。
 
@@ -537,11 +528,9 @@ $ express app4
 
 安裝相依關係之後，請使用下列指令來啟動應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm start
-</code>
-</pre>
+```
 
 如果您查看 `package.json` 檔中的 npm 啟動 Script，您會發現，啟動應用程式的實際指令是 `node ./bin/www`，這在 Express 3 中是 `node app.js`。
 

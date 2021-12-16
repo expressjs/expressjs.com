@@ -14,11 +14,9 @@ Pour qu'Express puisse afficher le rendu des fichiers modèles, vous devez défi
 
 Ensuite, installez le package npm du moteur de modèle correspondant :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install pug --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Les moteurs de modèles conformes à Express tels que Pug exportent une fonction nommée `__express(filePath, options, callback)`, qui est appelée par la fonction `res.render()` pour générer le code de modèle.

@@ -35,11 +35,9 @@ Tieto databázové drivery predstavujú len časť z mnoha ďalších, ktoré s�
 **Modul**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Inštalácia**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install cassandra-driver
-</code>
-</pre>
+```
 
 **Príklad**
 
@@ -62,11 +60,9 @@ client.execute('select key from system.local', function(err, result) {
 **Modul**: [nano](https://github.com/dscape/nano)
 **Inštalácia**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install nano
-</code>
-</pre>
+```
 
 **Príklad**
 
@@ -97,11 +93,9 @@ books.list(function(err, body){
 **Modul**: [levelup](https://github.com/rvagg/node-levelup)
 **Inštalácia**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install level levelup leveldown
-</code>
-</pre>
+```
 
 **Príklad**
 
@@ -129,11 +123,9 @@ db.put('name', 'LevelUP', function (err) {
 **Modul**: [mysql](https://github.com/felixge/node-mysql/)
 **Inštalácia**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install mysql
-</code>
-</pre>
+```
 
 **Príklad**
 
@@ -164,11 +156,9 @@ connection.end();
 **Modul**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Inštalácia**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install mongodb
-</code>
-</pre>
+```
 
 **Príklad**
 
@@ -199,11 +189,9 @@ If you want an object model driver for MongoDB, look at [Mongoose](https://githu
 **Modul**: [apoc](https://github.com/hacksparrow/apoc)
 **Inštalácia**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install apoc
-</code>
-</pre>
+```
 
 **Príklad**
 
@@ -229,11 +217,9 @@ apoc.query('match (n) return n').exec().then(
 **Modul**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **Inštalácia**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install pg-promise
-</code>
-</pre>
+```
 
 **Príklad**
 
@@ -259,11 +245,9 @@ db.one("SELECT $1 AS value", 123)
 **Modul**: [redis](https://github.com/mranney/node_redis)
 **Inštalácia**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install redis
-</code>
-</pre>
+```
 
 **Príklad**
 
@@ -299,11 +283,9 @@ client.hkeys('hash key', function (err, replies) {
 **Modul**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Inštalácia**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install sqlite3
-</code>
-</pre>
+```
 
 **Príklad**
 
@@ -339,11 +321,9 @@ db.close();
 **Modul**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Inštalácia**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install elasticsearch
-</code>
-</pre>
+```
 
 **Príklad**
 

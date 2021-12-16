@@ -375,11 +375,9 @@ http.createServer(app).listen(app.get('port'), function(){
 
 Процесс миграции начинается с установки обязательных промежуточных обработчиков для приложения Express 4 и обновления Express и Pug до соответствующих последних версий с помощью следующей команды:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-</code>
-</pre>
+```
 
 Внесите в файл `app.js` следующие изменения:
 
@@ -491,11 +489,9 @@ server.listen(app.get('port'), function(){
 Процесс миграции завершен, и данное приложение теперь является приложением версии
 Express 4. Для подтверждения запустите приложение с помощью следующей команды:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node .
-</code>
-</pre>
+```
 
 Загрузите [http://localhost:3000](http://localhost:3000). Будет отображена домашняя страница в Express 4.
 
@@ -509,20 +505,17 @@ $ node .
 
 Если в системе уже установлен генератор приложений Express 3, его необходимо удалить:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm uninstall -g express
-</code>
-</pre>
+```
+
 В зависимости от настроек прав доступа к файлам и каталогам, эту команду, возможно, следует вызвать с помощью `sudo`.
 
 Теперь установите новый генератор:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 В зависимости от настроек прав доступа к файлам и каталогам, эту команду, возможно, следует вызвать с помощью `sudo`.
 
@@ -542,11 +535,9 @@ Express 4.
 
 Выполните следующую команду для создания приложения Express 4:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express app4
-</code>
-</pre>
+```
 
 Обратив внимание на содержимое файла `app4/app.js`, вы заметите, что все функции
 промежуточной обработки (кроме `express.static`), обязательные для приложения, загружаются
@@ -556,11 +547,9 @@ $ express app4
 
 После установки зависимостей запустите приложение с помощью следующей команды:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm start
-</code>
-</pre>
+```
 
 Обратив внимание на сценарий запуска npm в файле `package.json`,
 вы заметите, что, фактически, командой, запускающей приложение, является

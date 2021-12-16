@@ -228,7 +228,7 @@ Express アプリケーションに機能を追加するには、サード・パ
 
 次の例は、Cookie 解析ミドルウェア関数 `cookie-parser` のインストールおよびロードを示しています。
 
-```sh
+```console
 $ npm install cookie-parser
 ```
 

@@ -15,24 +15,19 @@ Express utiliza el módulo [debug](https://www.npmjs.com/package/debug) internam
 
 Para ver todos los registros internos utilizados en Express, establezca la variable de entorno `DEBUG` en `express:*` cuando inicie la aplicación.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node index.js
-</code>
-</pre>
+```
 
 En Windows, utilice el mandato correspondiente.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=express:* & node index.js
-</code>
-</pre>
+```
 
 La ejecución de este mandato en la aplicación predeterminada generada por el [generador de Express](/{{ page.lang }}/starter/generator.html) imprime la siguiente salida:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -74,13 +69,11 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +0ms
   express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-</code>
-</pre>
+```
 
 Cuando se realiza una solicitud a la aplicación, verá los registros especificados en el código de Express:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -96,8 +89,7 @@ Cuando se realiza una solicitud a la aplicación, verá los registros especifica
   express:view lookup "index.pug" +338ms
   express:view stat "/projects/example/views/index.pug" +0ms
   express:view render "/projects/example/views/index.pug" +1ms
-</code>
-</pre>
+```
 
 Para ver sólo los registros de la implementación de direccionador, establezca el valor de `DEBUG` en `express:router`. De la misma forma, para ver sólo los registros de la implementación de aplicación, establezca el valor de `DEBUG` en `express:application`, etc.
 
@@ -107,18 +99,14 @@ Una aplicación generada por el mandato `express` también utiliza el módulo `d
 
 Por ejemplo, si ha generado la aplicación con `$ express sample-app`, puede habilitar las sentencias de depuración con el siguiente mandato:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=sample-app:* node ./bin/www
-</code>
-</pre>
+```
 
 Puede especificar más de un espacio de nombres de depuración asignando una lista separada por comas de nombres:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=http,mail,express:* node index.js
-</code>
-</pre>
+```
 
 Para obtener más información sobre `debug`, consulte [debug](https://www.npmjs.com/package/debug).

@@ -55,7 +55,7 @@ router.get('/user/:id', function (req, res) {
 
 On `GET /user/42`, the following is printed:
 
-```sh
+```
 CALLED ONLY ONCE
 although this matches
 and this matches too

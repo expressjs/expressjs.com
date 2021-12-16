@@ -41,11 +41,9 @@ I valori `req` (richiesta) e `res` (risposta) sono esattamente gli stessi oggett
 
 Eseguire l'applicazione con il seguente comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node app.js
-</code>
-</pre>
+```
 
 Successivamente, caricare [http://localhost:3000/](http://localhost:3000/) su un browser per visualizzare l'output.
 

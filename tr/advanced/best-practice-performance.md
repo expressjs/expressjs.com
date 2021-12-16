@@ -295,13 +295,13 @@ StrongLoop süreç yöneticisini systemd servisi olarak kolaylıkla yükleyebili
 
 StrongLoop süreç yöneticisini bir systemd servisi olarak yüklemek için:
 
-```sh
+```console
 $ sudo sl-pm-install --systemd
 ```
 
 Daha sonra, servisi başlatmak için:
 
-```sh
+```console
 $ sudo /usr/bin/systemctl start strong-pm
 ```
 
@@ -363,13 +363,13 @@ StrongLoop süreç yöneticisini bir Upstart servisi olarak kolaylıkla yükleye
 
 Strong Loop süreç yöneticisini bir Upstart 1.4 servisi olarak yüklemek için:
 
-```sh
+```console
 $ sudo sl-pm-install
 ```
 
 Daha sonra servisi koşmak için:
 
-```sh
+```console
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -397,7 +397,7 @@ StrongLoop süreç yöneticisi bir uygulamayı koştuğunda, sistemdeki CPU çek
 
 Örnek olarak, uygulamanızı prod.foo.com'a dağıttığınızı ve StrongLoop süreç yöneticisinin de port 8701'de (varsayılan) dinlediğini varsayarsak, slc kullanarak kümenin büyüklüğünü sekize ayarlamak için:
 
-```sh
+```console
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 
@@ -411,7 +411,7 @@ PM2 ile bir uygulama koşulduğunda, seçtiğiniz örnek sayısıyla beraber bir
 
 Küme modunu etkinleştirmek için, uygulamanızı bu şekilde başlatın:
 
-```sh
+```console
 # 4 çalışan süreç başlat
 $ pm2 start app.js -i 4
 # Mevcut CPU sayısını otomatik olarak tespit et ve o sayı kadar çalışan süreç başlat
@@ -422,7 +422,7 @@ Bu aynı zamanda `exec_mode` değerini `cluster` ve `instances` değerini de ba�
 
 Koşmaya başladıktan sonra, `app` isminde belirli bir uygulama aşağıdaki gibi ölçeklenebilir:
 
-```sh
+```console
 # 3 tane daha çalışan ekle
 $ pm2 scale app +3
 # Belirli bir çalışan sayınıa ölçeklendir

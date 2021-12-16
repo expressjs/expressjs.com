@@ -370,11 +370,9 @@ Proceso
 
 Para empezar el proceso de migración, instale el middleware necesario para la aplicación Express 4 y actualice Express y Pug a su versión respectiva más reciente con el siguiente mandato:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-</code>
-</pre>
+```
 
 Realice los cambios siguientes en `app.js`:
 
@@ -484,11 +482,9 @@ A menos que necesite trabajar directamente con el módulo `http` (socket.io/SPDY
 El proceso de migración está completo y la aplicación es ahora una aplicación
 Express 4. Para confirmarlo, inicie la aplicación utilizando el siguiente mandato:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node .
-</code>
-</pre>
+```
 
 Cargue [http://localhost:3000](http://localhost:3000) y vea la página de inicio que representa Express 4.
 
@@ -500,20 +496,17 @@ La herramienta de línea de mandatos para generar una aplicación Express contin
 
 Si ya ha instalado el generador de aplicaciones Express 3 en el sistema, debe desinstalarlo:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm uninstall -g express
-</code>
-</pre>
+```
+
 Dependiendo de cómo se configuren los privilegios de archivos y directorios, deberá ejecutar este mandato con `sudo`.
 
 A continuación, instale el nuevo generador:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 Dependiendo de cómo se configuren los privilegios de archivos y directorios, deberá ejecutar este mandato con `sudo`.
 
@@ -532,11 +525,9 @@ Las opciones de mandato y el uso continúan prácticamente iguales, con las sigu
 
 Ejecute el siguiente mandato para crear una aplicación Express 4:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express app4
-</code>
-</pre>
+```
 
 Si consulta el contenido del archivo `app4/app.js`, observará que todas las funciones de middleware (excepto `express.static`) que son necesarias para la aplicación se cargan como módulos independientes y que el middleware de `router` ya no se carga de forma explícita en la aplicación.
 
@@ -544,11 +535,9 @@ También observará que el archivo `app.js` es ahora un módulo Node.js, a difer
 
 Después de instalar las dependencias, inicie la aplicación utilizando el siguiente mandato:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm start
-</code>
-</pre>
+```
 
 Si consulta el script de inicio npm en el archivo `package.json`, observará que el mandato que inicia la aplicación es `node ./bin/www`, que antes era `node app.js` en Express 3.
 

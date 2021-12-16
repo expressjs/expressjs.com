@@ -10,13 +10,13 @@ lang: tr
 
 `express-generator` paketi `express` komut-satır aracını kurar. Bunu yapmak için aşağıdaki komutu çalıştırın:
 
-```sh
+```console
 $ npm install express-generator -g
 ```
 
 Komut seçeneklerini `-h` opsiyonu ile görüntüleyin:
 
-```sh
+```console
 $ express -h
 
   Usage: express [options] [dir]
@@ -38,7 +38,7 @@ $ express -h
 
 aşağıdaki örnek, _myapp_ adında bir Express uygulaması yaratır. Uygulama _myapp_ dizininde barınacak ve görünüm (view) motoru <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a> olarak ayarlanacaktır.
 
-```sh
+```console
 $ express --view=pug myapp
 
    create : myapp
@@ -62,20 +62,20 @@ $ express --view=pug myapp
 
 Daha sonrasında bağımlılıkları kurun:
 
-```sh
+```console
 $ cd myapp
 $ npm install
 ```
 
 MacOS veya Linux için uygulamayı bu komut ile çalıştırın:
 
-```sh
+```console
 $ DEBUG=myapp:* npm start
 ```
 
 Windows için bu komutu kullanın:
 
-```sh
+```console
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -83,7 +83,7 @@ Uygulamaya erişmek için tarayıcınızda `http://localhost:3000/` adresini ziy
 
 Oluşturulan uygulamanın dizini aşağıdaki yapıda olacaktır:
 
-```sh
+```console
 .
 ├── app.js
 ├── bin

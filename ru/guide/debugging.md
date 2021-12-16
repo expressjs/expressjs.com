@@ -16,24 +16,19 @@ lang: ru
 
 Для просмотра всех внутренних протоколов, используемых в Express, при запуске приложения задайте для переменной среды `DEBUG` значение `express:*`.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node index.js
-</code>
-</pre>
+```
 
 В Windows используется соответствующая команда.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=express:* & node index.js
-</code>
-</pre>
+```
 
 При запуске этой команды в стандартном приложении, созданном с помощью  [генератора приложений Express](/{{ page.lang }}/starter/generator.html), будет получен следующий вывод:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -75,13 +70,11 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +0ms
   express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-</code>
-</pre>
+```
 
 При последующем запросе, адресованном приложению, вы увидите протоколы, заданные в коде Express:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -97,8 +90,7 @@ $ DEBUG=express:* node ./bin/www
   express:view lookup "index.pug" +338ms
   express:view stat "/projects/example/views/index.pug" +0ms
   express:view render "/projects/example/views/index.pug" +1ms
-</code>
-</pre>
+```
 
 Для просмотра протоколов только из реализации маршрутизатора, задайте для переменной `DEBUG` значение `express:router`. Аналгичным образом, для просмотра протоколов только из реализации приложения, задайте для переменной `DEBUG` значение `express:application` и т.д.
 
@@ -108,18 +100,14 @@ $ DEBUG=express:* node ./bin/www
 
 Например, если приложение сгенерировано с помощью команды `$ express sample-app`, операторы отладки (операторы debug) можно активировать с помощью следующей команды:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=sample-app:* node ./bin/www
-</code>
-</pre>
+```
 
 Можно указать несколько пространств имен для отладки, путем ввода списка имен через запятую:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=http,mail,express:* node index.js
-</code>
-</pre>
+```
 
 Дополнительная информация о модуле `debug` приведена на странице [debug](https://www.npmjs.com/package/debug).

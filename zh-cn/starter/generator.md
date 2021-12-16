@@ -11,25 +11,20 @@ lang: zh-cn
 
 您可以使用 `npx` 命令（在 Node.js 8.2.0 中可用）运行应用程序生成器。
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npx express-generator
-</code>
-</pre>
+```
 
 对于早期的 Node 版本，可将应用程序生成器作为全局 npm 软件包安装，然后启动它。
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install -g express-generator
 $ express
-</code>
-</pre>
+```
 
 使用 `-h` 选项显示命令选项：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express -h
 
   Usage: express [options][dir]
@@ -47,13 +42,11 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
 例如，以下语句在当前工作目录中创建名为 _myapp_ 的 Express 应用程序并将视图引擎将设置为 [Pug](https://pugjs.org/) ：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express --view=pug myapp
 
    create : myapp
@@ -73,48 +66,38 @@ $ express --view=pug myapp
    create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 然后安装依赖项：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ cd myapp
 $ npm install
-</code>
-</pre>
+```
 
 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 在 Windows 命令提示符上，使用以下命令：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
 
 在 Windows PowerShell 上，使用以下命令：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 PS> $env:DEBUG='myapp:*'; npm start
-</code>
-</pre>
+```
 
 然后在浏览器中输入 `http://localhost:3000/` 以访问此应用程序。
 
 生成的应用程序具有以下目录结构：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 .
 ├── app.js
 ├── bin
@@ -134,8 +117,7 @@ PS> $env:DEBUG='myapp:*'; npm start
     └── layout.pug
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 生成器创建的应用程序结构只是构造 Express 应用程序的众多方法之一。请随意使用此结构或者对其进行修改以最大程度满足自己的需求。

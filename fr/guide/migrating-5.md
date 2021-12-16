@@ -23,11 +23,9 @@ Pour installer la dernière version alpha et pour
 prévisualiser Express 5, entrez la commande suivante dans le
 répertoire principal de l'application :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install express@5.0.0-alpha.2 --save
-</code>
-</pre>
+```
 
 Vous pouvez alors exécuter les tests automatisés pour voir les
 échecs et corriger les problèmes en fonction des mises à jour

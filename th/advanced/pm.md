@@ -52,19 +52,19 @@ Full documentation:
 - [Using StrongLoop Process Manager](http://docs.strongloop.com/display/SLC/Using+Process+Manager).
 
 ### Installation
-```sh
+```console
 $ [sudo] npm install -g strongloop
 ```
 
 ### Basic use
-```sh
+```console
 $ cd my-app
 $ slc start
 ```
 
 View the status of Process Manager and all deployed apps:
 
-```sh
+```console
 $ slc ctl
 Service ID: 1
 Service Name: my-app
@@ -84,7 +84,7 @@ Processes:
 
 List all the apps (services) under management:
 
-```sh
+```console
 $ slc ctl ls
 Id          Name         Scale
  1          my-app       1
@@ -92,25 +92,25 @@ Id          Name         Scale
 
 Stop an app:
 
-```sh
+```console
 $ slc ctl stop my-app
 ```
 
 Restart an app:
 
-```sh
+```console
 $ slc ctl restart my-app
 ```
 
 You can also "soft restart," which gives worker processes a grace period to close existing connections, then restarts the current application:
 
-```sh
+```console
 $ slc ctl soft-restart my-app
 ```
 
 To remove an app from management:
 
-```sh
+```console
 $ slc ctl remove my-app
 ```
 
@@ -122,7 +122,7 @@ For more information, see [https://github.com/Unitech/pm2](https://github.com/Un
 
 ### Installation
 
-```sh
+```console
 $ [sudo] npm install pm2 -g
 ```
 
@@ -130,7 +130,7 @@ $ [sudo] npm install pm2 -g
 
 When you start an app by using the `pm2` command, you must specify the path of the app. However, when you stop, restart, or delete an app, you can specify just the name or the id of the app.
 
-```sh
+```console
 $ pm2 start npm --name my-app -- start
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
@@ -149,31 +149,31 @@ Note that if more than one app with the same name is running, `pm2` commands aff
 
 List all running processes:
 
-```sh
+```console
 $ pm2 list
 ```
 
 Stop an app:
 
-```sh
+```console
 $ pm2 stop 0
 ```
 
 Restart an app:
 
-```sh
+```console
 $ pm2 restart 0
 ```
 
 To view detailed information about an app:
 
-```sh
+```console
 $ pm2 show 0
 ```
 
 To remove an app from PM2's registry:
 
-```sh
+```console
 $ pm2 delete 0
 ```
 
@@ -186,7 +186,7 @@ For more information, see [https://github.com/foreverjs/forever](https://github.
 
 ### Installation
 
-```sh
+```console
 $ [sudo] npm install forever -g
 ```
 
@@ -194,7 +194,7 @@ $ [sudo] npm install forever -g
 
 To start a script, use the `forever start` command and specify the path of the script:
 
-```sh
+```console
 $ forever start script.js
 ```
 
@@ -202,37 +202,37 @@ This command will run the script in daemon mode (in the background).
 
 To run the script so that it is attached to the terminal, omit `start`:
 
-```sh
+```console
 $ forever script.js
 ```
 
 It is a good idea to log output from the Forever tool and the script by using the logging options `-l`, `-o`, and `-e`, as shown this example:
 
-```sh
+```console
 $ forever start -l forever.log -o out.log -e err.log script.js
 ```
 
 To view the list of scripts that were started by Forever:
 
-```sh
+```console
 $ forever list
 ```
 
 To stop a script that was started by Forever use the `forever stop` command and specify the process index (as listed by the `forever list` command).
 
-```sh
+```console
 $ forever stop 1
 ```
 
 Alternatively, specify the path of the file:
 
-```sh
+```console
 $ forever stop script.js
 ```
 
 To stop all the scripts that were started by Forever:
 
-```sh
+```console
 $ forever stopall
 ```
 

@@ -19,24 +19,19 @@ Express는 내부적으로 [debug](https://www.npmjs.com/package/debug) 모듈�
 Express에서 사용되는 모든 내부 로그를 확인하려면, 앱을 실행할 때 `DEBUG` 환경 변수를
 `express:*`로 설정하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node index.js
-</code>
-</pre>
+```
 
 Windows에서는 다음과 같은 명령을 사용하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=express:* & node index.js
-</code>
-</pre>
+```
 
 [Express 생성기](/{{ page.lang }}/starter/generator.html)가 생성한 기본 앱에 대해 이 명령을 실행하면 다음과 같이 인쇄됩니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -78,13 +73,11 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +0ms
   express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-</code>
-</pre>
+```
 
 이후 앱에 대한 요청이 이루어지면, Express 코드에 지정된 로그를 확인할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -100,8 +93,7 @@ $ DEBUG=express:* node ./bin/www
   express:view lookup "index.pug" +338ms
   express:view stat "/projects/example/views/index.pug" +0ms
   express:view render "/projects/example/views/index.pug" +1ms
-</code>
-</pre>
+```
 
 라우터 구현의 로그만 확인하려면 `DEBUG`의 값을 `express:router`로 설정하십시오. 마찬가지로, 애플리케이션 구현의 로그만 확인하려면 `DEBUG`의 값을 `express:application`으로 설정하십시오. 나머지도 이와 같습니다.
 
@@ -111,18 +103,14 @@ $ DEBUG=express:* node ./bin/www
 
 예를 들어 `$ express sample-app`을 통해 앱을 생성하는 경우에는 다음과 같은 명령을 통해 디버그 명령문을 사용할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=sample-app:* node ./bin/www
-</code>
-</pre>
+```
 
 다음과 같이 쉼표로 구분된 이름 목록을 지정하면 2개 이상의 디버그 네임스페이스를 지정할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=http,mail,express:* node index.js
-</code>
-</pre>
+```
 
 `debug`에 대한 자세한 정보는 [debug](https://www.npmjs.com/package/debug)를 참조하십시오.

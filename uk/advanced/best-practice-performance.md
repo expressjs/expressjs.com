@@ -306,15 +306,15 @@ You can easily install StrongLoop Process Manager as a systemd service. After yo
 
 To install StrongLoop PM as a systemd service:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install --systemd
-</code></pre>
+```
 
 Then start the service with:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ sudo /usr/bin/systemctl start strong-pm
-</code></pre>
+```
 
 For more information, see [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10).
 
@@ -374,15 +374,15 @@ You can easily install StrongLoop Process Manager as an Upstart service. After y
 
 To install StrongLoop PM as an Upstart 1.4 service:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install
-</code></pre>
+```
 
 Then run the service with:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ sudo /sbin/initctl start strong-pm
-</code></pre>
+```
 
 NOTE: On systems that don't support Upstart 1.4, the commands are slightly different. See [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10) for more information.
 
@@ -408,9 +408,9 @@ When StrongLoop Process Manager (PM) runs an application, it automatically runs 
 
 For example, assuming you've deployed your app to prod.foo.com and StrongLoop PM is listening on port 8701 (the default), then to set the cluster size to eight using slc:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code></pre>
+```
 
 For more information on clustering with StrongLoop PM, see [Clustering](https://docs.strongloop.com/display/SLC/Clustering) in StrongLoop documentation.
 

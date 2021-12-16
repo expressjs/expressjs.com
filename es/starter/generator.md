@@ -11,16 +11,13 @@ Utilice la herramienta de generador de aplicaciones, `express`, para crear rápi
 
 Instale `express` con el siguiente mandato:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install express-generator -g
-</code>
-</pre>
+```
 
 Muestre las opciones de mandato con la opción `-h`:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express -h
 
   Usage: express [options][dir]
@@ -38,13 +35,11 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
 Por ejemplo, el código siguiente crea una aplicación Express denominada _myapp_. La aplicación será creada en una carpeta llamada _myapp_ en el directorio de trabajo actual y el motor de vistas será asignado a <a href="https://pugjs.org/" target="_blank" title="Documentación de Pug">Pug</a>:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express --view=pug myapp
 
    create : myapp
@@ -64,40 +59,32 @@ $ express --view=pug myapp
    create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 A continuación, instale las dependencias:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ cd myapp
 $ npm install
-</code>
-</pre>
+```
 
 En MacOS o Linux, ejecute la aplicación con este mandato:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 En Windows, utilice este mandato:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
 
 A continuación, cargue `http://localhost:3000/` en el navegador para acceder a la aplicación.
 
 La aplicación generada tiene la siguiente estructura de directorios:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 .
 ├── app.js
 ├── bin
@@ -117,8 +104,7 @@ La aplicación generada tiene la siguiente estructura de directorios:
     └── layout.pug
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 La estructura de la aplicación creada por el generador es sólo una de las muchas formas de estructurar las aplicaciones Express. Puede utilizar esta estructura o modificarla según sus necesidades.

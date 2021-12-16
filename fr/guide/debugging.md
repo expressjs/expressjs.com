@@ -18,24 +18,19 @@ Le module `debug` est en quelque sorte une version étendue de `console.log`, ma
 
 Pour afficher tous les journaux internes utilisés dans Express, affectez à la variable d'environnement `DEBUG` la valeur `express:*` lors du lancement de votre application.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node index.js
-</code>
-</pre>
+```
 
 Sous Windows, utilisez la commande correspondante.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=express:* & node index.js
-</code>
-</pre>
+```
 
 L'exécution de cette commande sur l'application par défaut générée par le [générateur express](/{{ page.lang }}/starter/generator.html) imprime le résultat suivant :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -77,13 +72,11 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +0ms
   express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-</code>
-</pre>
+```
 
 Si une demande est par la suite effectuée à l'application, vous verrez les journaux spécifiés dans le code Express :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -99,8 +92,7 @@ Si une demande est par la suite effectuée à l'application, vous verrez les jou
   express:view lookup "index.pug" +338ms
   express:view stat "/projects/example/views/index.pug" +0ms
   express:view render "/projects/example/views/index.pug" +1ms
-</code>
-</pre>
+```
 
 Pour afficher les journaux uniquement à partir de l'implémentation du routeur, affectez à la variable d'environnement `DEBUG` la valeur `express:router`. De la même façon, pour afficher les journaux uniquement à partir de l'implémentation de l'application, affectez à la variable d'environnement `DEBUG` la valeur `express:application`, et ainsi de suite.
 
@@ -110,18 +102,14 @@ Une application générée par la commande `express` fait également appel au mo
 
 Ainsi, si vous avez généré l'application à l'aide de `$ express sample-app`, vous pouvez activer les instructions de débogage en exécutant la commande suivante :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=sample-app:* node ./bin/www
-</code>
-</pre>
+```
 
 Vous pouvez spécifier plusieurs espaces de noms de débogage en affectant une liste de noms séparés par des virgules :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=http,mail,express:* node index.js
-</code>
-</pre>
+```
 
 Pour plus d'informations sur le module `debug`, voir [debug](https://www.npmjs.com/package/debug).

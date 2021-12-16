@@ -297,13 +297,13 @@ You can easily install StrongLoop Process Manager as a systemd service. After yo
 
 To install StrongLoop PM as a systemd service:
 
-```sh
+```console
 $ sudo sl-pm-install --systemd
 ```
 
 Then start the service with:
 
-```sh
+```console
 $ sudo /usr/bin/systemctl start strong-pm
 ```
 
@@ -365,13 +365,13 @@ You can easily install StrongLoop Process Manager as an Upstart service. After y
 
 To install StrongLoop PM as an Upstart 1.4 service:
 
-```sh
+```console
 $ sudo sl-pm-install
 ```
 
 Then run the service with:
 
-```sh
+```console
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -399,7 +399,7 @@ When StrongLoop Process Manager (PM) runs an application, it automatically runs 
 
 For example, assuming you've deployed your app to prod.foo.com and StrongLoop PM is listening on port 8701 (the default), then to set the cluster size to eight using slc:
 
-```sh
+```console
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 
@@ -413,7 +413,7 @@ When running an application with PM2, you can enable **cluster mode** to run it 
 
 To enable cluster mode, start your application like so:
 
-```sh
+```console
 # Start 4 worker processes
 $ pm2 start npm --name my-app -i 4 -- start
 # Auto-detect number of available CPUs and start that many worker processes
@@ -424,7 +424,7 @@ This can also be configured within a PM2 process file (`ecosystem.config.js` or 
 
 Once running, the application can be scaled like so:
 
-```sh
+```console
 # Add 3 more workers
 $ pm2 scale my-app +3
 # Scale to a specific number of workers

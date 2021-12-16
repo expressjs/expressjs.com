@@ -11,13 +11,13 @@ Dastur generatsiya qilish uchun `express` buyrug'idan foydalanishgiz mumkin, u d
 
 Uni o'rnatish uchun quyidagi buyruqlardan foydalaning.
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install express-generator -g
-</code></pre>
+```
 
 Qo'shimcha amallarda foydalanish uchun `-h` qo'shimchasini yozing:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ express -h
 
   Usage: express [options] [dir]
@@ -35,11 +35,11 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code></pre>
+```
 
 Masalan, quyidagi buyruq _myapp_ nomi dasturni yaratadi.
 
-<pre><code class="language-sh" translate="no">
+```console
 $ express --view=pug myapp
 
    create : myapp
@@ -59,32 +59,32 @@ $ express --view=pug myapp
    create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
-</code></pre>
+```
 
 Keyin dasturning kerakli modullarni o'rnatish kerak bo'ladi:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ cd myapp
 $ npm install
-</code></pre>
+```
 
 Dasturni ishga tushurish (MacOS va Linux):
 
-<pre><code class="language-sh" translate="no">
+```console
 $ DEBUG=myapp ./bin/www
-</code></pre>
+```
 
 Windowsda esa, quyidagicha:
 
-<pre><code class="language-sh" translate="no">
+```console
 > set DEBUG=myapp & node .\bin\www
-</code></pre>
+```
 
 Undan keyin brauzerda `http://localhost:3000/` manziligaa kirib dastur ishalayotganini tekshiring.
 
 Generatsiya qilingan dasturning strukturasi quyidagicha bo'ladi.
 
-<pre><code class="language-sh" translate="no">
+```console
 .
 ├── app.js
 ├── bin
@@ -104,7 +104,7 @@ Generatsiya qilingan dasturning strukturasi quyidagicha bo'ladi.
     └── layout.pug
 
 7 directories, 9 files
-</code></pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 Generator yordamida generatsiya qilingan struktra, Express dasturda yaratish mumkin bo'lgan strukturalardan bir usuli hisoblanadi. Siz bu strukturadan foydalanmasligingiz mumkin, o'zingizga kerakli ko'rinishda yaratishingiz mumkin.

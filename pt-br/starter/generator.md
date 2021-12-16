@@ -12,16 +12,13 @@ para rapidamente criar uma estrutura básica de aplicativo.
 
 Instale o `express` com o comando a seguir:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install express-generator -g
-</code>
-</pre>
+```
 
 Exiba as opções de comando com a opção `-h`:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express -h
 
   Usage: express [options][dir]
@@ -39,14 +36,12 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
 Por exemplo, o seguinte cria um aplicativo do Express chamado _myapp_
 no diretório atualmente em funcionamento:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express --view=pug myapp
 
    create : myapp
@@ -66,41 +61,33 @@ $ express --view=pug myapp
    create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 Em seguida instale as dependências:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ cd myapp
 $ npm install
-</code>
-</pre>
+```
 
 No MacOS ou Linux, execute o aplicativo com este comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 No Windows, use este comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
 
 Em seguida carregue `http://localhost:3000/` no seu navegador para acessar o aplicativo.
 
 
 O aplicativo gerado possui a seguinte estrutura de diretórios:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 .
 ├── app.js
 ├── bin
@@ -120,8 +107,7 @@ O aplicativo gerado possui a seguinte estrutura de diretórios:
     └── layout.pug
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 A estrutura de aplicativo criada pelo gerador é apenas uma das várias maneiras de estruturar aplicativos do Express.

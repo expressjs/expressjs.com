@@ -312,19 +312,15 @@ Vous pouvez facilement installer StrongLoop Process Manager en tant que service 
 
 Pour installer StrongLoop PM en tant que service systemd :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 Démarrez ensuite le service comme suit :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```
 
 Pour plus d'informations, voir [Setting up a production host](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10) dans la documentation StrongLoop.
 
@@ -386,19 +382,15 @@ Vous pouvez facilement installer StrongLoop Process Manager en tant que service 
 
 Pour installer StrongLoop PM en tant que service Upstart 1.4 :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 Exécutez ensuite le service comme suit :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 REMARQUE : sur les systèmes qui ne prennent pas en charge Upstart 1.4, les commandes sont légèrement différentes. Pour plus d'informations, voir [Setting up a production host](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10) dans la documentation StrongLoop.
 
@@ -424,11 +416,9 @@ Lorsque StrongLoop Process Manager (PM) exécute une application, il l'exécute 
 
 Par exemple, en supposant que vous avez déployé votre application sur prod.foo.com et que StrongLoop PM est en mode écoute sur le port 8701 (par défaut), pour définir la taille du cluster sur 8 à l'aide de slc :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 Pour plus d'informations sur la mise en cluster avec StrongLoop PM, voir [Clustering](https://docs.strongloop.com/display/SLC/Clustering) dans la documentation StrongLoop.
 

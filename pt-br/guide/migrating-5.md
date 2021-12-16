@@ -22,11 +22,9 @@ funcionar se você atualizá-lo para usar o Express 5.
 Para instalar o alfa mais recente e ter uma prévia do Express
 5, digite o seguinte comando no diretório raiz do seu aplicativo:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install express@5.0.0-alpha.2 --save
-</code>
-</pre>
+```
 
 É possível em seguida executar seus testes automatizados para
 verificar o que falha, e corrigir os problemas de acordo com as

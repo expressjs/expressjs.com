@@ -14,11 +14,9 @@ Prima che Express possa eseguire il rendering di file template, è necessario sp
 
 Quindi, installare il pacchetto npm del motore di template corrispondente:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install pug --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 I motori di template compatibili con Express, ad esempio Pug esportano una funzione denominata `__express(filePath, options, callback)`, che viene richiamata dalla funzione `res.render()`, per il rendering del codice di template.

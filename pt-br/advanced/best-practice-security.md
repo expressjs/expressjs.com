@@ -91,11 +91,9 @@ de Cross-site scripting (XSS) nos navegadores da web mais recentes.
 
 Instale o Helmet como qualquer outro módulo:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 Em seguida use-o no seu código:
 

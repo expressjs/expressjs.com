@@ -46,11 +46,9 @@ Helmet 实际上只使用以下九个较小中间件函数的集合，这些功�
 
 像安装其他模块一样安装 Helmet：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 然后将其用于您的代码：
 

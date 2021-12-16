@@ -14,11 +14,9 @@ Express가 템플리트를 렌더링하려면 다음과 같은 애플리케이�
 
 이후 그에 맞는 템플리트 엔진 npm 패키지를 다음과 같이 설치하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install pug --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Express와 호환되는 템플리트 엔진(예: Pug)은 `__express(filePath, options, callback)`라는 이름의 함수를 내보내며, 이 함수는 `res.render()` 함수에 의해 호출되어 템플리트 코드를 렌더링합니다.

@@ -14,11 +14,9 @@ lang: ru
 
 Затем установите соответствующий пакет npm шаблонизатора:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install pug --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Шаблонизаторы, совместимые с Express, например, Pug, экспортируют функцию `__express(filePath, options, callback)`, вызываемую с помощью функции `res.render()` для вывода кода шаблона.

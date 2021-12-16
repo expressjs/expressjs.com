@@ -48,7 +48,7 @@ RunKit bir üçüncü parti uygulamasıdır ve Express projesi ile bir bağı yo
 
 Uygulamayı aşağıdaki komutla çalıştırın:
 
-```sh
+```console
 $ node app.js
 ```
 

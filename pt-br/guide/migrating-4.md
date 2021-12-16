@@ -411,11 +411,9 @@ necessários para o aplicativo Express 4 e atualizando o Express e o
 Pug para as suas respectivas versões mais recentes com o seguinte
 comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-</code>
-</pre>
+```
 
 Faça as seguintes alterações no `app.js`:
 
@@ -534,11 +532,9 @@ O processo de migração está concluído, e o aplicativo é agora
 um aplicativo Express 4. Para confirmar, inicie o aplicativo usando o
 seguinte comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node .
-</code>
-</pre>
+```
 
 Carregue [http://localhost:3000](http://localhost:3000)
   e veja a página inicial sendo renderizada pelo Express 4.
@@ -556,21 +552,18 @@ aplicativos Express 3 e, em seguida, instalar o novo `express-generator`.
 Se já tiver o gerador de aplicativos do Express 3 instalado no
 seu sistema, é preciso desinstalá-lo:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm uninstall -g express
-</code>
-</pre>
+```
+
 Dependendo de como os seus privilégios de arquivos e diretórios estão
 configurados, pode ser necessário executar este comando com `sudo`.
 
 Agora instale o novo gerador:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 Dependendo de como os seus privilégios de arquivos e diretórios
 estão configurados, pode ser necessário executar este comando com
@@ -594,11 +587,9 @@ suportar o [Hogan.js](http://twitter.github.io/hogan.js/).
 
 Execute o seguinte comando para criar um aplicativo do Express 4:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express app4
-</code>
-</pre>
+```
 
 Se olhar o conteúdo do arquivo `app4/app.js`,
 você verá que todas as funções de middleware (exceto
@@ -614,11 +605,9 @@ gerado pelo antigo gerador.
 Após instalar as dependências, inicie o aplicativo usando o
 seguinte comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm start
-</code>
-</pre>
+```
 
 Se olhar o script de inicialização npm no arquivo
 `package.json`, você irá notar que o comando real

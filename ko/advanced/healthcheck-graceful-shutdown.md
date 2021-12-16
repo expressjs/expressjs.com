@@ -29,8 +29,8 @@ A load balancer uses health checks to determine if an application instance is he
 
 아래 명령을 사용해 Terminus를 설치합니다.
 
-```sh
-npm i @godaddy/terminus --save
+```console
+$ npm i @godaddy/terminus --save
 ```
 
 다음은 Terminus를 사용하는 쉬운 예제입니다. 자세한 정보는 <https://github.com/godaddy/terminus> 를 참고하세요.
@@ -75,9 +75,8 @@ server.listen(3000)
 
 아래 명령을 사용해 Lightship을 설치합니다.
 
-```sh
-npm install lightship
-
+```console
+$ npm install lightship
 ```
 
 Lightship을 사용하는 쉬운 예제입니다.

@@ -39,11 +39,9 @@ app.listen(port, () => {
 
 使用以下命令运行应用程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node app.js
-</code>
-</pre>
+```
 
 然后，在浏览器中输入 [http://localhost:3000/](http://localhost:3000/) 以查看输出。
 

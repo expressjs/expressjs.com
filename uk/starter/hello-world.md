@@ -40,8 +40,8 @@ app.listen(3000, () => {
 
 Запустіть застосунок наступною командою:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ node app.js
-</code></pre>
+```
 
 Після чого, відкрийте браузер за адресою `http://localhost:3000/` щоб побачити результат.

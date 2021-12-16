@@ -12,20 +12,20 @@ Use the application generator tool, `express-generator`, to quickly create an ap
 
 You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
-```sh
+```console
 $ npx express-generator
 ```
 
 For earlier Node versions, install the application generator as a global npm package and then launch it:
 
-```sh
+```console
 $ npm install -g express-generator
 $ express
 ```
 
 Display the command options with the `-h` option:
 
-```sh
+```console
 $ express -h
 
   Usage: express [options] [dir]
@@ -47,7 +47,7 @@ $ express -h
 
 For example, the following creates an Express app named _myapp_. The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
-```sh
+```console
 $ express --view=pug myapp
 
    create : myapp
@@ -71,26 +71,26 @@ $ express --view=pug myapp
 
 Then install dependencies:
 
-```sh
+```console
 $ cd myapp
 $ npm install
 ```
 
 On MacOS or Linux, run the app with this command:
 
-```sh
+```console
 $ DEBUG=myapp:* npm start
 ```
 
 On Windows Command Prompt, use this command:
 
-```sh
+```console
 > set DEBUG=myapp:* & npm start
 ```
 
 On Windows PowerShell, use this command:
 
-```sh
+```console
 PS> $env:DEBUG='myapp:*'; npm start
 ```
 
@@ -99,7 +99,7 @@ Then load `http://localhost:3000/` in your browser to access the app.
 
 The generated app has the following directory structure:
 
-```sh
+```console
 .
 ├── app.js
 ├── bin

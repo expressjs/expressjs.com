@@ -15,11 +15,9 @@ Express 5 unterscheidet sich nicht allzu sehr von Express 4: Die Änderungen an 
 
 Zum Installieren der aktuellen Alpha-Version und zur Vorschau von Express 5 geben Sie den folgenden Befehl im Stammverzeichnis Ihrer Anwendung ein:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install express@5.0.0-alpha.2 --save
-</code>
-</pre>
+```
 
 Sie können Ihre automatisierten Tests ausführen, um zu sehen, was fehlschlägt, und Probleme gemäß den folgenden Updates beheben. Nachdem Sie alle Testfehler behoben haben, führen Sie Ihre Anwendung aus, um zu sehen, welche Fehler noch auftreten. Sie werden sofort feststellen, ob die Anwendung Methoden oder Eigenschaften verwendet, die nicht unterstützt werden.
 

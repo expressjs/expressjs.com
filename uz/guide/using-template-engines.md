@@ -14,9 +14,9 @@ Before Express can render template files, the following application settings hav
 
 Then install the corresponding template engine npm package.
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install pug --save
-</code></pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Express-compliant template engines such as Pug, export a function named `__express(filePath, options, callback)`, which is called by `res.render()` to render the template code.

@@ -46,11 +46,9 @@ Ein handliches Tool zum Abrufen eines kostenloses TLS-Zertifikats ist außerdem 
 
 Installieren Sie "Helmet" wie alle anderen Module:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 So verwenden Sie "Helmet" in Ihrem Code:
 

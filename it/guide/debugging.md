@@ -19,24 +19,19 @@ creare commenti per i log `debug` nel codice di produzione. Il processo di regis
 Per visualizzare tutti i log interni utilizzati in Express, impostare la variabile di ambiente `DEBUG` su
 `express:*` quando si avvia l'applicazione.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node index.js
-</code>
-</pre>
+```
 
 Su Windows, utilizzare il comando corrispondente.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=express:* & node index.js
-</code>
-</pre>
+```
 
 L'esecuzione di questo comando sull'applicazione predefinita generata da [Programma di creazione express](/{{ page.lang }}/starter/generator.html) consentirà di stampare il seguente output:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -78,13 +73,11 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +0ms
   express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-</code>
-</pre>
+```
 
 Quando successivamente viene effettuata una richiesta all'applicazione, verranno visualizzati i log specificati nel codice Express:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -100,8 +93,7 @@ Quando successivamente viene effettuata una richiesta all'applicazione, verranno
   express:view lookup "index.pug" +338ms
   express:view stat "/projects/example/views/index.pug" +0ms
   express:view render "/projects/example/views/index.pug" +1ms
-</code>
-</pre>
+```
 
 Per visualizzare i log solo dall'implementazione router impostare il valore `DEBUG` su `express:router`. In modo simile, per visualizzare i log solo dall'implementazione dell'applicazione impostare il valore `DEBUG` su `express:application` e così via.
 
@@ -111,18 +103,14 @@ Un'applicazione generata dal comando `express` utilizza inoltre il modulo `debug
 
 Ad esempio, se l'applicazione è stata generata con `$ express sample-app`, è possibile abilitare le istruzioni di debug con il seguente comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=sample-app:* node ./bin/www
-</code>
-</pre>
+```
 
 È possibile specificare più di uno spazio dei nomi di debug assegnando un elenco di nomi separati da virgola:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=http,mail,express:* node index.js
-</code>
-</pre>
+```
 
 Per ulteriori informazioni su `debug`, consultare [debug](https://www.npmjs.com/package/debug).

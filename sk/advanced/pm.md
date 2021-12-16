@@ -54,24 +54,21 @@ Celá dokumentácia:
 - [Using StrongLoop Process Manager](http://docs.strongloop.com/display/SLC/Using+Process+Manager).
 
 ### Inštalácia
-<pre>
-<code class="language-sh" translate="no">
+
+```console
 $ [sudo] npm install -g strongloop
-</code>
-</pre>
+```
 
 ### Základné použitie
-<pre>
-<code class="language-sh" translate="no">
+
+```console
 $ cd my-app
 $ slc start
-</code>
-</pre>
+```
 
 Zobrazenie stavu správcu procesov a všetkých deploynutých aplikácií:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl
 Service ID: 1
 Service Name: my-app
@@ -87,50 +84,39 @@ Processes:
     1.1.57694  57694   2     0.0.0.0:3001
     1.1.57695  57695   3     0.0.0.0:3001
     1.1.57696  57696   4     0.0.0.0:3001
-</code>
-</pre>
+```
 
 Vypísanie zoznamu všetkých aplikácií (servisov) pod správou:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl ls
 Id          Name         Scale
  1          my-app       1
-</code>
-</pre>
+```
 
 Stopnutie aplikácie:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl stop my-app
-</code>
-</pre>
+```
 
 Reštart aplikácie:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl restart my-app
-</code>
-</pre>
+```
 
 Môžete taktiež vykonať "mäkký reštart", ktorý dá worker procesom dostatok času na uzatvorenie existujúcich pripojení a následne reštartuje aplikáciu:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl soft-restart my-app
-</code>
-</pre>
+```
 
 Odstránenie aplikácie zo správy:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl remove my-app
-</code>
-</pre>
+```
 
 ## <a id="pm2">PM2</a>
 
@@ -140,18 +126,15 @@ Pre viac informácií sa pozrite na [https://github.com/Unitech/pm2](https://git
 
 ### Inštalácia
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ [sudo] npm install pm2 -g
-</code>
-</pre>
+```
 
 ### Základné použitie
 
 Pre naštartovanie aplikácie pomocou `pm2` príkazu musíte špecifikovať cestu k aplikácii. Avšak pre stop, reštart, alebo odstránenie aplikácie zo správy, postačuje špecifikovať len jej názov alebo ID.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 start npm --name my-app -- start
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
@@ -160,8 +143,7 @@ $ pm2 start npm --name my-app -- start
 │ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
  Use the `pm2 show <id|name>` command to get more details about an app.
-</code>
-</pre>
+```
 
 Po naštartovaní aplikácie pomocou `pm2` príkazu sa aplikácia automaticky spustí na backgrounde (pozadí). Background aplikáciu môžete ovládať z príkazového riadka pomocou rozličných `pm2` príkazov.
 
@@ -171,43 +153,33 @@ Pozn., ak Vám beží viac ako jedna aplikácia s rovnakým názvom, vykonanie `
 
 Vypísanie zoznamu všetkých bežiacich procesov:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 list
-</code>
-</pre>
+```
 
 Stopnutie aplikácie:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 stop 0
-</code>
-</pre>
+```
 
 Reštart aplikácie:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 restart 0
-</code>
-</pre>
+```
 
 Pre zobrazenie detailných informácií o aplikácii:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 show 0
-</code>
-</pre>
+```
 
 Odstránenie aplikácie z PM2 registra:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 delete 0
-</code>
-</pre>
+```
 
 
 ## <a id="forever">Forever</a>
@@ -218,70 +190,54 @@ Pre viac informácií sa pozrite na [https://github.com/foreverjs/forever](https
 
 ### Inštalácia
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ [sudo] npm install forever -g
-</code>
-</pre>
+```
 
 ### Základné použitie
 
 Pre naštartovanie použite príkaz `forever start` a špecifikujte cestu k skriptu:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever start script.js
-</code>
-</pre>
+```
 
 Tento príkaz spustí skript v tzv. daemon móde (na pozadí).
 
 Pre priame spistenie skriptu v termináli vynechajte `start`:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever script.js
-</code>
-</pre>
+```
 
 Je dobrým zvykom logovať výstup z nástroja Forever a skriptu pomocou prepínača `-l`, `-o` a `-e`,  ako je uvedené v príklade nižšie:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever start -l forever.log -o out.log -e err.log script.js
-</code>
-</pre>
+```
 
 Pre zobrazenie zoznamu skriptov, ktoré boli naštartované pomocou Forever použite:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever list
-</code>
-</pre>
+```
 
 Pre stopnutie skriptu naštartovaného pomocou Forever použite príkaz `forever stop` a špecifikujte index procesu (podľa výpisu z `forever list` príkazu).
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever stop 1
-</code>
-</pre>
+```
 
 Taktiež to môžete vykonať pomocou špecifikovania cesty k skriptu:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever stop script.js
-</code>
-</pre>
+```
 
 Pre stopnutie všetkých skriptov, ktoré boli naštartované pomocou Forever príkazu použite:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever stopall
-</code>
-</pre>
+```
 
 Nástroj Forever má veľa možností a taktiež poskytuje programové API.

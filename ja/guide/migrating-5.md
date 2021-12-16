@@ -15,7 +15,7 @@ Express 5 は Express 4 とあまり変わりません。API の変更は、3.0 
 
 最新のアルファをインストールして Express 5 をプレビューするには、アプリケーションのルート・ディレクトリーで次のコマンドを入力します。
 
-```sh
+```console
 $ npm install express@>=5.0.0-alpha.1 --save
 ```
 

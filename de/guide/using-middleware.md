@@ -261,11 +261,9 @@ Installieren Sie das Modul Node.js für die erforderliche Funktionalität. Laden
 
 Das folgende Beispiel veranschaulicht das Installieren und Laden der Middlewarefunktion `cookie-parser` für das Cookie-Parsing.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install cookie-parser
-</code>
-</pre>
+```
 
 <pre>
 <code class="language-javascript" translate="no">

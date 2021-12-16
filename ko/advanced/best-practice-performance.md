@@ -318,15 +318,13 @@ StrongLoop Process Manager는 쉽게 systemd의 서비스로서 설치할 수 �
 
 StrongLoop PM을 systemd의 서비스로서 설치하는 방법은 다음과 같습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 이후 다음과 같이 서비스를 시작하십시오.
 
-```sh
+```console
 $ sudo sl-pm-install --systemd
 ```
 
@@ -389,14 +387,14 @@ StrongLoop Process Manager는 쉽게 Upstart의 서비스로 설치할 수 있�
 StrongLoop PM을 Upstart 1.4의 서비스로서 설치하는 방법은 다음과 같습니다.
 
 
-```sh
+```console
 $ sudo sl-pm-install
 ```
 
 이후 다음과 같이 서비스를 실행하십시오.
 
 
-```sh
+```console
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -426,7 +424,7 @@ StrongLoop Process Manager(PM)가 애플리케이션으로서 실행되면, Stro
 
 예를 들어 prod.foo.com에 앱을 배치했으며 StrongLoop PM이 포트 8701(기본값)에서 청취하는 경우를 가정하면, 다음과 같이 slc를 이용해 클러스터의 크기를 8로 설정할 수 있습니다.
 
-```sh
+```console
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 
@@ -440,7 +438,7 @@ PM2로 애플리케이션을 실행하고 있을 때, 특정한 수의 인스턴
 
 아래와 같은 방법으로 클러스터 모드를 킵니다.
 
-```sh
+```console
 # Start 4 worker processes
 $ pm2 start app.js -i 4
 # Auto-detect number of available CPUs and start that many worker processes
@@ -451,7 +449,7 @@ $ pm2 start app.js -i max
 
 실행이 시작되면, `app`으로 이름지어진 애플리케이션을 아래와 같은 방법으로 스케일링 할 수 있습니다.
 
-```sh
+```console
 # Add 3 more workers
 $ pm2 scale app +3
 # Scale to a specific number of workers

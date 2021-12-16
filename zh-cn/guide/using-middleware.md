@@ -264,11 +264,9 @@ app.use(express.static('files'));
 
 以下示例演示如何安装和装入 cookie 解析中间件函数 `cookie-parser`。
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install cookie-parser
-</code>
-</pre>
+```
 
 <pre>
 <code class="language-javascript" translate="no">

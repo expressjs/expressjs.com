@@ -11,16 +11,13 @@ lang: ko
 
 다음의 명령을 이용해 `express`를 설치하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install express-generator -g
-</code>
-</pre>
+```
 
 다음과 같이 `-h` 옵션을 이용해 명령의 옵션을 표시하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express -h
 
   Usage: express [options][dir]
@@ -38,13 +35,11 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
 예를 들면, 다음의 예에서는 _myapp_라는 이름의 Express 앱을 현재 작업 디렉토리에 작성합니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express --view=pug myapp
 
    create : myapp
@@ -64,40 +59,32 @@ $ express --view=pug myapp
    create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 이후 다음과 같이 종속 항목을 설치하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ cd myapp
 $ npm install
-</code>
-</pre>
+```
 
 MacOS 또는 Linux에서는 다음 명령을 사용하여 앱을 실행하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 Windows에서는 다음 명령을 사용하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
 
 이후 브라우저에서 `http://localhost:3000/`을 로드하여 앱에 액세스하십시오.
 
 생성된 앱은 다음과 같은 디렉토리 구조를 갖습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 .
 ├── app.js
 ├── bin
@@ -117,8 +104,7 @@ Windows에서는 다음 명령을 사용하십시오.
     └── layout.pug
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 생성기에 의해 작성된 앱 구조는 Express 앱을 구조화하는 여러 방법 중 하나에 불과합니다. 이러한 구조를 사용하거나 사용자의 요구사항에 가장 적합하도록 구조를 수정하십시오.

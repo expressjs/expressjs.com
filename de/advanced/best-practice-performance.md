@@ -310,19 +310,15 @@ Sie können StrongLoop Process Manager problemlos als "systemd"-Service installi
 
 So installieren Sie StrongLoop Process Manager als "systemd"-Service:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 Starten Sie dann den Service mit:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```
 
 Weitere Informationen hierzu finden Sie im Thema [Produktionshost einrichten (in der StrongLoop-Dokumentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10).
 
@@ -384,19 +380,15 @@ Sie können StrongLoop Process Manager problemlos als "Upstart"-Service installi
 
 So installieren Sie StrongLoop Process Manager als "Upstart 1.4"-Service:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 Fühen Sie dann den Service aus mit:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 Hinweis: Auf Systemen, die Upstart 1.4 nicht unterstützen, sind die Befehle leicht unterschiedlich. Weitere Informationen hierzu siehe das
 Thema [Einrichtung eines Produktionshosts (in der StrongLoop-Dokumentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10).
@@ -423,11 +415,9 @@ Wenn StrongLoop Process Manager (PM) eine Anwendung ausführt, wird diese automa
 
 Beispiel: Angenommen, Sie haben Ihre Anwendung auf prod.foo.com bereitgestellt, und StrongLoop PM ist auf Port 8701 (Standardport) empfangsbereit. Dann müssen Sie die Clustergröße mithilfe von "slc" auf "8" einstellen.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 Weitere Informationen zum Clustering mit StrongLoop PM finden Sie im Thema [Clustering](https://docs.strongloop.com/display/SLC/Clustering) in der StrongLoop-Dokumentation.
 

@@ -15,11 +15,9 @@ Express 5 与 Express 4 的差异不是很大：对 API 的更改不像 3.0 到 
 
 要安装最新的 α 测试版以预览 Express 5，请在应用程序根目录中输入以下命令：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install express@5.0.0-alpha.2 --save
-</code>
-</pre>
+```
 
 随后，可以运行自动化测试以查看哪些地方发生故障，然后根据以下列出的更新修复问题。在解决测试故障问题之后，运行应用程序以查看发生哪些错误。如果应用程序使用任何不受支持的方法或属性，您马上就可以发现。
 

@@ -27,9 +27,9 @@ This defaults to the `views` directory in the application root directory.
 
 Then install the corresponding template engine npm package; for example to install Pug:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install pug --save
-</code></pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Express-compliant template engines such as Pug export a function named `__express(filePath, options, callback)`,

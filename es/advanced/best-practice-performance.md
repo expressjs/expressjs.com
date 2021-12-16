@@ -312,19 +312,15 @@ Puede instalar fácilmente StrongLoop Process Manager como un servicio systemd. 
 
 Para instalar StrongLoop PM como un servicio systemd:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 A continuación, inicie el servicio con:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```
 
 Para obtener más información, consulte [Setting up a production host (documentación de StrongLoop)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10).
 
@@ -386,19 +382,15 @@ Puede instalar fácilmente StrongLoop Process Manager como un servicio Upstart. 
 
 Para instalar StrongLoop PM como un servicio Upstart 1.4:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 A continuación, ejecute el servicio con:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 NOTA: en los sistemas que no dan soporte a Upstart 1.4, los mandatos son ligeramente diferentes. Consulte [Setting up a production host (documentación de StrongLoop)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10) para obtener más información.
 
@@ -424,11 +416,9 @@ Cuando StrongLoop Process Manager (PM) ejecuta una aplicación, la ejecuta autom
 
 Por ejemplo, suponiendo que ha desplegado la aplicación en prod.foo.com y que StrongLoop PM escucha en el puerto 8701 (el valor predeterminado), para establecer el tamaño de clúster en ocho utilizando slc:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 Para obtener más información sobre la agrupación en clúster con StrongLoop PM, consulte [Clustering](https://docs.strongloop.com/display/SLC/Clustering) en la documentación de StrongLoop.
 

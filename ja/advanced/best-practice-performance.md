@@ -296,13 +296,13 @@ StrongLoop Process Manager を Systemd サービスとして簡単にインス�
 
 StrongLoop PM を Systemd サービスとしてインストールするには、次のようにします。
 
-```sh
+```console
 $ sudo sl-pm-install --systemd
 ```
 
 次に、サービスを開始します。
 
-```sh
+```console
 $ sudo /usr/bin/systemctl start strong-pm
 ```
 
@@ -364,13 +364,13 @@ StrongLoop Process Manager を Upstart サービスとして簡単にインス�
 
 StrongLoop PM を Upstart 1.4 サービスとしてインストールするには、次のようにします。
 
-```sh
+```console
 $ sudo sl-pm-install
 ```
 
 次に、サービスを実行します。
 
-```sh
+```console
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -398,7 +398,7 @@ StrongLoop Process Manager (PM) は、アプリケーションを実行する際
 
 例えば、アプリケーションを prod.foo.com にデプロイして、StrongLoop PM がポート 8701 (デフォルト) で listen している場合は、slc を使用してクラスター・サイズを 8 に設定します。
 
-```sh
+```console
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 
@@ -412,7 +412,7 @@ When running an application with PM2, you can enable **cluster mode** to run it 
 
 To enable cluster mode, start your application like so:
 
-```sh
+```console
 # Start 4 worker processes
 $ pm2 start app.js -i 4
 # Auto-detect number of available CPUs and start that many worker processes
@@ -423,7 +423,7 @@ This can also be configured within a PM2 process file (`ecosystem.config.js` or 
 
 Once running, a given application with the name `app` can be scaled like so:
 
-```sh
+```console
 # Add 3 more workers
 $ pm2 scale app +3
 # Scale to a specific number of workers

@@ -263,11 +263,9 @@ Nainštalujte požadovaný Node.js modul a načítajte ho do aplikácie ako apli
 
 Nasledujúci príklad demonštruje inštaláciu a načítanie middleware funkcie `cookie-parser` slúžiacej na prácu s cookies.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install cookie-parser
-</code>
-</pre>
+```
 
 <pre>
 <code class="language-javascript" translate="no">

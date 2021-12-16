@@ -373,11 +373,9 @@ Proces
 
 Proces migrácie začnite nainštalovaním všetkých potrebných middlewarov pre vašu Express 4 aplikáciu a updatom Express a Pug na ich prislúchajúce najnovšie verzie nasledujúcim príkazom:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-</code>
-</pre>
+```
 
 V `app.js` vykonajte tieto zmeny:
 
@@ -488,11 +486,9 @@ Pokiaľ nepotrebujete priamo pracovať s `http` modulom (socket.io/SPDY/HTTPS), 
 
 Proces migrácie je kompletný a aplikácia je teraz Express 4 aplikáciou. Pre overenie spustite aplikáciu pomocou nasledujúceho príkazu:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node .
-</code>
-</pre>
+```
 
 Načítajte v prehliadači [http://localhost:3000](http://localhost:3000)
   a pozrite si domovskú stránku aplikácie vyrendrovanú pomocou Express 4.
@@ -506,21 +502,18 @@ Tento command-line tool slúžiaci na generovanie Express aplikácie je stále
 
 Ak už máte Express 3 app generátor na vašom systéme nainštalovaný, musíte ho najskôr odinštalovať:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm uninstall -g express
-</code>
-</pre>
+```
+
 V závislosti od toho, ako sú nakonfigurované vaše oprávnenia k súborom a priečinkom,
 môže byť potrebné spustiť tento príkaz pomocou `sudo`.
 
 Teraz nainštalujte nový generátor:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 V závislosti od toho, ako sú nakonfigurované vaše oprávnenia k súborom a priečinkom,
 môže byť potrebné spustiť tento príkaz pomocou `sudo`.
@@ -541,11 +534,9 @@ Prepínače a použitia príkazu zostali prevažne rovnaké, okrem nasledujúcic
 
 K vytvoreniu Express 4 aplikácie spustite nasledujúci príkaz:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express app4
-</code>
-</pre>
+```
 
 Ak sa pozriete na obsah `app4/app.js` súboru, všimnete si, že všetky middleware funkcie (okrem `express.static`), ktoré sú potrebné pre aplikáciu, sú načítané ako samostatné, nezávislé moduly a `router` middleware už nie je v aplikácii explicitne načítaný.
 
@@ -553,11 +544,9 @@ Taktiež si všimnite, že súbor `app.js` je odteraz Node.js modulom, v porovna
 
 Po nainštalovaní závislostí spustite aplikáciu pomocou nasledujúceho príkazu:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm start
-</code>
-</pre>
+```
 
 Ak sa pozriete na npm start skript v `package.json` súbore,
 všimnete si, že aktuálny príkaz pre spustenie aplikácie je

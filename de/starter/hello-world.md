@@ -39,11 +39,9 @@ Die Anwendung startet einen Server und ist an Port 3000 empfangsbereit für Verb
 
 Führen Sie die Anwendung mit dem folgenden Befehl aus:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node app.js
-</code>
-</pre>
+```
 
 Laden Sie dann [http://localhost:3000/](http://localhost:3000/) in einen Browser, um die Ausgabe zu sehen.
 

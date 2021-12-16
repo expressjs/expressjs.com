@@ -34,11 +34,9 @@ disponíveis. Para obter outras opções, procure no site [npm](https://www.npmj
 **Módulo**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Instalação**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install cassandra-driver
-</code>
-</pre>
+```
 
 **Exemplo**
 
@@ -61,11 +59,9 @@ client.execute('select key from system.local', function(err, result) {
 **Módulo**: [nano](https://github.com/dscape/nano)
 **Instalação**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install nano
-</code>
-</pre>
+```
 
 **Exemplo**
 
@@ -96,11 +92,9 @@ books.list(function(err, body){
 **Módulo**: [levelup](https://github.com/rvagg/node-levelup)
 **Instalação**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install level levelup leveldown
-</code>
-</pre>
+```
 
 **Exemplo**
 
@@ -128,11 +122,9 @@ db.put('name', 'LevelUP', function (err) {
 **Módulo**: [mysql](https://github.com/felixge/node-mysql/)
 **Instalação**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install mysql
-</code>
-</pre>
+```
 
 **Exemplo**
 
@@ -163,11 +155,9 @@ connection.end();
 **Módulo**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Instalação**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install mongodb
-</code>
-</pre>
+```
 
 **Exemplo**
 
@@ -199,11 +189,9 @@ consulte em [Mongoose](https://github.com/LearnBoost/mongoose).
 **Módulo**: [apoc](https://github.com/hacksparrow/apoc)
 **Instalação**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install apoc
-</code>
-</pre>
+```
 
 **Exemplo**
 
@@ -229,11 +217,9 @@ apoc.query('match (n) return n').exec().then(
 **Módulo**: [pg](https://github.com/brianc/node-postgres)
 **Instalação**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install pg
-</code>
-</pre>
+```
 
 **Exemplo**
 
@@ -266,11 +252,9 @@ pg.connect(conString, function(err, client, done) {
 **Módulo**: [redis](https://github.com/mranney/node_redis)
 **Instalação**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install redis
-</code>
-</pre>
+```
 
 **Exemplo**
 
@@ -306,11 +290,9 @@ client.hkeys('hash key', function (err, replies) {
 **Módulo**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Instalação**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install sqlite3
-</code>
-</pre>
+```
 
 **Exemplo**
 
@@ -346,11 +328,9 @@ db.close();
 **Módulo**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Instalação**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install elasticsearch
-</code>
-</pre>
+```
 
 **Exemplo**
 

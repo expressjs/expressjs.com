@@ -31,11 +31,9 @@ lang: ru
 **Модуль**: [cassandra-driver](https://github.com/datastax/nodejs-driver) -
 **Установка**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install cassandra-driver
-</code>
-</pre>
+```
 
 **Пример**
 
@@ -58,11 +56,9 @@ client.execute('select key from system.local', function(err, result) {
 **Модуль**: [nano](https://github.com/dscape/nano) -
 **Установка**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install nano
-</code>
-</pre>
+```
 
 **Пример**
 
@@ -93,11 +89,9 @@ books.list(function(err, body){
 **Модуль**: [levelup](https://github.com/rvagg/node-levelup) -
 **Установка**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install level levelup leveldown
-</code>
-</pre>
+```
 
 **Пример**
 
@@ -125,11 +119,9 @@ db.put('name', 'LevelUP', function (err) {
 **Модуль**: [mysql](https://github.com/felixge/node-mysql/) -
 **Установка**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install mysql
-</code>
-</pre>
+```
 
 **Пример**
 
@@ -160,11 +152,9 @@ connection.end();
 **Модуль**: [mongodb](https://github.com/mongodb/node-mongodb-native) -
 **Установка**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install mongodb
-</code>
-</pre>
+```
 
 **Пример**
 
@@ -195,11 +185,9 @@ MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
 **Модуль**: [apoc](https://github.com/hacksparrow/apoc) -
 **Установка**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install apoc
-</code>
-</pre>
+```
 
 **Пример**
 
@@ -225,11 +213,9 @@ apoc.query('match (n) return n').exec().then(
 **Модуль**: [pg-promise](https://github.com/vitaly-t/pg-promise) -
 **Установка**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install pg-promise
-</code>
-</pre>
+```
 
 **Пример**
 
@@ -255,11 +241,9 @@ db.one("SELECT $1 AS value", 123)
 **Модуль**: [redis](https://github.com/mranney/node_redis) -
 **Установка**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install redis
-</code>
-</pre>
+```
 
 **Пример**
 
@@ -295,11 +279,9 @@ client.hkeys('hash key', function (err, replies) {
 **Модуль**: [sqlite3](https://github.com/mapbox/node-sqlite3) -
 **Установка**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install sqlite3
-</code>
-</pre>
+```
 
 **Пример**
 
@@ -335,11 +317,9 @@ db.close();
 **Модуль**: [elasticsearch](https://github.com/elastic/elasticsearch-js) -
 **Установка**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install elasticsearch
-</code>
-</pre>
+```
 
 **Пример**
 

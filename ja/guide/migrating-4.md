@@ -355,7 +355,7 @@ http.createServer(app).listen(app.get('port'), function () {
 
 移行プロセスを開始するには、次のコマンドを使用して、Express 4 アプリケーションに必要なミドルウェアをインストールし、Express と Pug をそれぞれの最新バージョンに更新します。
 
-```sh
+```console
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
 ```
 
@@ -461,7 +461,7 @@ app.listen(app.get('port'), function () {
 
 これで移行プロセスは完了して、アプリケーションは Express 4 アプリケーションになりました。確認するには、次のコマンドを使用してアプリケーションを開始します。
 
-```sh
+```console
 $ node .
 ```
 
@@ -475,7 +475,7 @@ Express アプリケーションを生成するためのコマンド・ライン
 
 システムに Express 3 アプリケーション・ジェネレーターがインストールされている場合は、次のようにしてアンインストールする必要があります。
 
-```sh
+```console
 $ npm uninstall -g express
 ```
 
@@ -483,7 +483,7 @@ $ npm uninstall -g express
 
 次に、新しいジェネレーターをインストールします。
 
-```sh
+```console
 $ npm install -g express-generator
 ```
 
@@ -504,7 +504,7 @@ $ npm install -g express-generator
 
 次のコマンドを実行して、Express 4 アプリケーションを作成します。
 
-```sh
+```console
 $ express app4
 ```
 
@@ -514,7 +514,7 @@ $ express app4
 
 依存関係をインストールした後、次のコマンドを使用してアプリケーションを開始します。
 
-```sh
+```console
 $ npm start
 ```
 

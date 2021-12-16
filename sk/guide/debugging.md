@@ -20,24 +20,19 @@ Express interne používa k logovaniu informácií ohľadom route matchingu, pou
 Ak chcete vidieť všetky interné logy Express-u, nastavte pri spúštaní vašej aplikácie environment premennú `DEBUG` na hodnotu
 `express:*`.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node index.js
-</code>
-</pre>
+```
 
 Na Windows-e použite nasledujúci príkaz.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=express:* & node index.js
-</code>
-</pre>
+```
 
 Spustením tohto príkazu v prípade defaultnej aplikácie vygenerovanej pomocou [express generátora](/{{ page.lang }}/starter/generator.html) vypíše nasledujúci výstup:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -79,13 +74,11 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +0ms
   express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-</code>
-</pre>
+```
 
 Následne, keď aplikácia odchytí request, uvidíte nasledujúce logy špecifikované v Express kóde:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -101,8 +94,7 @@ Následne, keď aplikácia odchytí request, uvidíte nasledujúce logy špecifi
   express:view lookup "index.pug" +338ms
   express:view stat "/projects/example/views/index.pug" +0ms
   express:view render "/projects/example/views/index.pug" +1ms
-</code>
-</pre>
+```
 
 Ak chcete vidieť iba logy z router implementácie, nastavte hodnotu premennej `DEBUG` na `express:router`. Podobne, ak chcete vidieť iba logy z implementácie aplikácie, nastavte hodnotu premennej `DEBUG` na `express:application` atď.
 
@@ -112,18 +104,14 @@ Aplikácia vygenerovaná príkazom `express` taktiež používa modul `debug` a 
 
 Pomocou nasledujúceho príkazu, dokážete povoliť debug výpisy pre aplikáciu vygenerovanú pomocou `$ express sample-app` takto:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=sample-app:* node ./bin/www
-</code>
-</pre>
+```
 
 Pomocou čiarkou oddeleného zoznamu názvov môžete špecifikovať viac ako jeden debug namespace:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=http,mail,express:* node index.js
-</code>
-</pre>
+```
 
 Pre viac informácií ohľadom `debug` modulu si pozrite [debug](https://www.npmjs.com/package/debug).

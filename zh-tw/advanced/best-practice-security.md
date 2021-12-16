@@ -46,11 +46,9 @@ Helmet 實際上只由 9 個小型中介軟體函數組成，這些函數會設�
 
 安裝 Helmet 等之類的其他任何模組：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 然後在您的程式碼中使用它：
 

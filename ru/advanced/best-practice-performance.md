@@ -312,19 +312,15 @@ WantedBy=multi-user.target
 
 Для установки StrongLoop PM как службы systemd выполните следующие действия:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 Затем запустите службу в следующем порядке:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```
 
 Дополнительная информация приведена в разделе [Настройка хоста рабочей среды (документация по StrongLoop)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10).
 
@@ -386,19 +382,15 @@ respawn limit 10 10
 
 Для установки StrongLoop PM как службы Upstart 1.4 выполните следующие действия:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 Затем запустите службу в следующем порядке:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 ПРИМЕЧАНИЕ. В системах, не поддерживающих Upstart 1.4, команды будут иметь некоторые отличия. Дополнительная информация приведена в разделе [Настройка хоста рабочей среды (документация по StrongLoop)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10).
 
@@ -424,11 +416,9 @@ $ sudo /sbin/initctl start strong-pm
 
 Например, если вы развернули приложение на prod.foo.com и StrongLoop PM слушает соединения на порте 8701 (значение по умолчанию), укажите размер кластера, равный восьми, используя slc:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 Дополнительная информация о поддержке кластеров при помощи StrongLoop PM приведена в разделе [Кластеризация](https://docs.strongloop.com/display/SLC/Clustering) документации по StrongLoop.
 

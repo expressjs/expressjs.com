@@ -15,24 +15,19 @@ Express 在內部使用 [debug](https://www.npmjs.com/package/debug) 模組，�
 
 如果要查看 Express 中使用的所有內部日誌，在您啟動應用程式時，請將 `DEBUG` 環境變數設為 `express:*`。
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node index.js
-</code>
-</pre>
+```
 
 在 Windows 中，使用對應指令。
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=express:* & node index.js
-</code>
-</pre>
+```
 
 對 [express generator](/{{ page.lang }}/starter/generator.html) 產生的預設應用程式執行這個指令，會列印下列輸出：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -74,13 +69,11 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +0ms
   express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-</code>
-</pre>
+```
 
 當對應用程式發出要求時，您會看到 Express 程式碼中指定的日誌：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -96,8 +89,7 @@ $ DEBUG=express:* node ./bin/www
   express:view lookup "index.pug" +338ms
   express:view stat "/projects/example/views/index.pug" +0ms
   express:view render "/projects/example/views/index.pug" +1ms
-</code>
-</pre>
+```
 
 如果只想查看來自路由器實作的日誌，請將 `DEBUG` 的值設為 `express:router`。同樣地，如果只想查看來自應用程式實作的日誌，請將 `DEBUG` 的值設為 `express:application`，以此類推。
 
@@ -107,18 +99,14 @@ $ DEBUG=express:* node ./bin/www
 
 舉例來說，如果您使用 `$ express sample-app` 來產生應用程式，您可以利用下列指令來啟用除錯陳述式：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=sample-app:* node ./bin/www
-</code>
-</pre>
+```
 
 您可以指派以逗點區隔的名稱清單，來指定多個除錯名稱空間：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=http,mail,express:* node index.js
-</code>
-</pre>
+```
 
 如需 `debug` 的相關資訊，請參閱 [debug](https://www.npmjs.com/package/debug)。

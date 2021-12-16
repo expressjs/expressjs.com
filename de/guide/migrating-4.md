@@ -363,11 +363,9 @@ Prozess
 
 Beginnen Sie den Migrationsprozess mit der Installation der erforderlichen Middleware für die Express 4-Anwendung und der Aktualisierung von Express und Pug auf die aktuellen Versionen. Verwenden Sie hierzu den folgenden Befehl:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-</code>
-</pre>
+```
 
 Nehmen Sie an `app.js` die folgenden Änderungen vor:
 
@@ -476,11 +474,9 @@ Wenn Sie nicht direkt mit dem Modul `http` arbeiten müssen (socket.io/SPDY/HTTP
 
 Der Migrationsprozess ist abgeschlossen und die Anwendung ist nun eine Express 4-Anwendung. Zum Bestätigen starten Sie die Anwendung mit dem folgenden Befehl:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node .
-</code>
-</pre>
+```
 
 Laden Sie [http://localhost:3000](http://localhost:3000) und sehen Sie, wie die Homepage von Express 4 wiedergegeben wird.
 
@@ -492,19 +488,16 @@ Das Befehlszeilentool zum Generieren einer Express-Anwendung ist nach wie vor `e
 
 Wenn der Express 3 App Generator bereits auf Ihrem System installiert ist, müssen Sie diesen deinstallieren:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm uninstall -g express
-</code>
-</pre>
+```
+
 Abhängig davon, wie Ihre Datei- und Verzeichnissberechtigungen konfiguriert sind, müssen Sie diesen Befehl möglicherweise mit `sudo` ausführen.
 Installieren Sie nun den neuen Generator:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 Abhängig davon, wie Ihre Datei- und Verzeichnissberechtigungen konfiguriert sind, müssen Sie diesen Befehl möglicherweise mit `sudo` ausführen.
 
@@ -524,11 +517,9 @@ Befehlsoptionen und -nutzung bleiben größtenteils unverändert. Es gelten jedo
 
 Führen Sie den folgenden Befehl aus, um eine Express 4-Anwendung zu erstellen:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express app4
-</code>
-</pre>
+```
 
 Wenn Sie sich den Inhalt der Datei `app4/app.js` ansehen, werden Sie feststellen, dass alle Middlewarefunktionen (außer `express.static`), die für die Anwendung  erforderlich sind, als unabhängige Module geladen werden und die Middleware `router` nicht mehr explizit in die Anwendung geladen wird.
 
@@ -536,11 +527,9 @@ Sie werden auch feststellen, dass die Datei `app.js` nun ein Node.js-Modul ist �
 
 Starten Sie nach der Installation der Abhängigkeiten die Anwendung mit dem folgenden Befehl:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm start
-</code>
-</pre>
+```
 
 Wenn Sie sich das npm-Startscript in der Datei `package.json` näher ansehen, werden Sie feststellen, dass der eigentliche Befehl, der die Anwendung startet, `node ./bin/www` heißt. Dieser Befehl lautete in Express 3 `node app.js`.
 

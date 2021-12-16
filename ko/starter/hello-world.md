@@ -40,11 +40,9 @@ app.listen(port, () => {
 
 다음의 명령을 이용하여 앱을 실행하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node app.js
-</code>
-</pre>
+```
 
 이후 브라우저에서 [http://localhost:3000/](http://localhost:3000/)을 로드하여 결과물을 확인하십시오.
 

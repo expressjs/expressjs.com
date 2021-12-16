@@ -263,7 +263,7 @@ Gerekli işlevsellik için Node.js modülünü indir, ve daha sonra uygulamana u
 
 Aşağıdaki örnek `cookie-parser` çerez-ayrıştırma ara yazılım fonksiyonunu indirme ve yüklemeyi gösterir.
 
-```sh
+```console
 $ npm install cookie-parser
 ```
 

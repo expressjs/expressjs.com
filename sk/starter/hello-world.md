@@ -43,11 +43,9 @@ Request (požiadavka) `req` a response (odpoveď) `res` sú presne rovnaké obje
 
 Spustite aplikáciu pomocou nasledujúceho príkazu:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node app.js
-</code>
-</pre>
+```
 
 Potom v prehliadači zadajte [http://localhost:3000/](http://localhost:3000/) a pozrite si výstup.
 

@@ -14,18 +14,18 @@ Express, rota eşleştirmeleri, kullanımda olan ara yazılım fonksiyonları, u
 </div>
 Express uygulamasında kullanılan ütün dahili logları görmek için, uygulamanızı başlatırken `DEBUG` ortam değikenini `express:*` olarak güncelleyin.
 
-```sh
+```console
 $ DEBUG=express:* node index.js
 ```
 
 Windows'ta aynı komutun karşılığını kullanın.
 
-```sh
+```console
 > set DEBUG=express:* & node index.js
 ```
 [express generator](/{{ page.lang }}/starter/generator.html) kullanılarak yaratılan varsayılan uygulamada bu komutu koşmak aşağıdakileri yazdıracak:
 
-```sh
+```console
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -71,7 +71,7 @@ $ DEBUG=express:* node ./bin/www
 
 Ve uygulamaya bir istek yapıldığında, Express kodunda belirtilen logları göreceksiniz:
 
-```sh
+```console
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -97,13 +97,13 @@ Sadece yönlendirme implementasyonundan logları görmek için, `DEBUG` değişk
 
 Örneğin, `$ express sample-app` ile bir uygulama yarattığınızda, debug ifadelerini aşağıdaki komutla etkinleştirebilirsiniz:
 
-```sh
+```console
 $ DEBUG=sample-app:* node ./bin/www
 ```
 
 Virgül ile ayrılmış bir isimler listesini atayarak birden fazla debug isim alanı belirtebilirsiniz:
 
-```sh
+```console
 $ DEBUG=http,mail,express:* node index.js
 ```
 

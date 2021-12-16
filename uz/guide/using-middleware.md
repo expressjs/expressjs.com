@@ -211,9 +211,9 @@ Install the node module for the required functionality and loaded it in your app
 
 In the following example, `cookie-parser`, a cookie parsing middleware is installed and loaded in the app.
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install cookie-parser
-</code></pre>
+```
 
 <pre><code class="language-javascript" translate="no">
 var express = require('express');

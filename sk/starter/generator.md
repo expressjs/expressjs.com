@@ -15,16 +15,13 @@ Pre rýchle vygenerovanie skeletonu aplikácie môžete použit nástroj `expres
 
 Nainštalujte `express-generator` pomocou nasledujúceho príkazu:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install express-generator -g
-</code>
-</pre>
+```
 
 Pre zobrazenie ďalších možností príkazu zadajte prepínač `-h`:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express -h
 
   Usage: express [options] [dir]
@@ -42,13 +39,11 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
 Nasledujúci príkaz vytvorí v aktuálnom priečinku Express aplikáciu s názvom _myapp_:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express --view=pug myapp
 
    create : myapp
@@ -68,40 +63,32 @@ $ express --view=pug myapp
    create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 Potom nainštalujte dependencie:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ cd myapp
 $ npm install
-</code>
-</pre>
+```
 
 Na MacOS príp. Linux, spustíte aplikáciu príkazom:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 Na Windows, príkazom:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
 
 Potom v prehliadači zadajte `http://localhost:3000/`.
 
 Vygenerovaná aplikácia má naslednovnú štruktúru priečinkov:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 .
 ├── app.js
 ├── bin
@@ -121,8 +108,7 @@ Vygenerovaná aplikácia má naslednovnú štruktúru priečinkov:
     └── layout.pug
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 Takáto štruktúra aplikácie je len jedným z mnohých spôsobov usporiadania Express aplikácie. Môžete ju použit, alebo ju zmeniť tak, ako vám bude najlepšie vyhovovať.

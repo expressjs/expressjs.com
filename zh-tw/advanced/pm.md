@@ -49,24 +49,21 @@ StrongLoop Process Manager (StrongLoop PM) 是 Node.js 應用程式的正式作�
 - [Using StrongLoop Process Manager](http://docs.strongloop.com/display/SLC/Using+Process+Manager).
 
 ### 安裝
-<pre>
-<code class="language-sh" translate="no">
+
+```console
 $ [sudo] npm install -g strongloop
-</code>
-</pre>
+```
 
 ### 基本用法
-<pre>
-<code class="language-sh" translate="no">
+
+```console
 $ cd my-app
 $ slc start
-</code>
-</pre>
+```
 
 檢視 Process Manager 和所有已部署應用程式的狀態：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl
 Service ID: 1
 Service Name: my-app
@@ -82,50 +79,39 @@ Processes:
     1.1.57694  57694   2     0.0.0.0:3001
     1.1.57695  57695   3     0.0.0.0:3001
     1.1.57696  57696   4     0.0.0.0:3001
-</code>
-</pre>
+```
 
 列出所有受管理的應用程式（服務）：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl ls
 Id          Name         Scale
  1          my-app       1
-</code>
-</pre>
+```
 
 停止應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl stop my-app
-</code>
-</pre>
+```
 
 重新啟動應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl restart my-app
-</code>
-</pre>
+```
 
 您也可以「軟重新啟動」，這會提供工作者程序一個寬限期，使其有時間關閉現有的連線，再重新啟動現行應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl soft-restart my-app
-</code>
-</pre>
+```
 
 從管理中移除應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl remove my-app
-</code>
-</pre>
+```
 
 ## <a id="pm2">PM2</a>
 
@@ -135,18 +121,15 @@ PM2 是 Node.js 應用程式的正式作業程序管理程式，具有一個內�
 
 ### 安裝
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ [sudo] npm install pm2 -g
-</code>
-</pre>
+```
 
 ### 基本用法
 
 當您使用 `pm2` 指令啟動應用程式時，必須指定應用程式的路徑。不過，當您停止、重新啟動或刪除應用程式時，只需指定應用程式的名稱或 ID 即可。
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 start npm --name my-app -- start
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
@@ -155,8 +138,7 @@ $ pm2 start npm --name my-app -- start
 │ my-app   │ 0  │ fork │ 64029 │ online │ 1       │ 0s     │ 17.816 MB   │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
  Use the `pm2 show <id|name>` command to get more details about an app.
-</code>
-</pre>
+```
 
 當您使用 `pm2` 指令啟動應用程式時，會立即將應用程式傳送至背景。您可以從指令行使用各種 `pm2` 指令來控制背景的應用程式。
 
@@ -166,43 +148,33 @@ $ pm2 start npm --name my-app -- start
 
 列出所有正在執行的程序：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 list
-</code>
-</pre>
+```
 
 停止應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 stop 0
-</code>
-</pre>
+```
 
 重新啟動應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 restart 0
-</code>
-</pre>
+```
 
 檢視應用程式的詳細資訊：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 show 0
-</code>
-</pre>
+```
 
 將應用程式從 PM2 登錄移除：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ pm2 delete 0
-</code>
-</pre>
+```
 
 
 ## <a id="forever">Forever</a>
@@ -213,70 +185,54 @@ Forever 是一個簡式指令行介面工具，可確保給定的 Script 持續�
 
 ### 安裝
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ [sudo] npm install forever -g
-</code>
-</pre>
+```
 
 ### 基本用法
 
 如果要啟動 Script，請使用 `forever start` 指令，並指定 Script 路徑：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever start script.js
-</code>
-</pre>
+```
 
 這個指令會以常駐程式模式（在背景中）執行 Script。
 
 如果要執行 Script，使其附加至終端機，請省略 `start`：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever script.js
-</code>
-</pre>
+```
 
 建議您使用記載選項 `-l`、`-o` 和 `-e`，記載 Forever 工具和 Script 的輸出，如下列範例所示：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever start -l forever.log -o out.log -e err.log script.js
-</code>
-</pre>
+```
 
 檢視 Forever 已啟動的 Script 清單：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever list
-</code>
-</pre>
+```
 
 如果要停止 Forever 已啟動的 Script，請使用 `forever stop` 指令，並指定程序索引（如 `forever list` 指令所列）。
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever stop 1
-</code>
-</pre>
+```
 
 或者，指定檔案的路徑：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever stop script.js
-</code>
-</pre>
+```
 
 停止 Forever 已啟動的所有 Script：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ forever stopall
-</code>
-</pre>
+```
 
 Forever 還有諸多選項，也會提供一個程式化 API。

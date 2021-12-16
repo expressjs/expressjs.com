@@ -41,8 +41,8 @@ A load balancer uses health checks to determine if an application instance is he
 
 Install terminus as follows:
 
-```sh
-npm i @godaddy/terminus --save
+```console
+$ npm i @godaddy/terminus --save
 ```
 
 Here's a basic template that illustrates using terminus.  For more information, see <https://github.com/godaddy/terminus>.
@@ -85,9 +85,8 @@ server.listen(3000)
 
 Install Lightship as follows:
 
-```sh
-npm install lightship
-
+```console
+$ npm install lightship
 ```
 
 Basic template that illustrates using Lightship:
@@ -125,9 +124,8 @@ Terminating a HTTP server in Node.js requires keeping track of all open connecti
 
 Install http-terminator as follows:
 
-```sh
-npm install http-terminator
-
+```console
+$ npm install http-terminator
 ```
 
 Basic template that illustrates using http-terminator:
@@ -161,8 +159,8 @@ setTimeout(() => {
 
 Install express-actuator as follows:
 
-```sh
-npm install --save express-actuator
+```console
+$ npm install --save express-actuator
 ```
 
 Basic template that illustrates using express-actuator:

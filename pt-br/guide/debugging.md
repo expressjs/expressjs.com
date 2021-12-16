@@ -23,25 +23,20 @@ Para ver todos os logs interno usados no Express, configure a
 variável de ambiente `DEBUG` para
 `express:*` ao ativar seu aplicativo.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node index.js
-</code>
-</pre>
+```
 
 No Windows, use o comando correspondente.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 > set DEBUG=express:* & node index.js
-</code>
-</pre>
+```
 
 Executar este comando no aplicativo padrão gerado pelo
 [express generator](/{{ page.lang }}/starter/generator.html) imprime a seguinte saída:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -83,14 +78,12 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +0ms
   express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-</code>
-</pre>
+```
 
 Quando uma solicitação é feita em seguida para o aplicativo,
 você verá os logs especificados no código do Express:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -106,8 +99,7 @@ você verá os logs especificados no código do Express:
   express:view lookup "index.pug" +338ms
   express:view stat "/projects/example/views/index.pug" +0ms
   express:view render "/projects/example/views/index.pug" +1ms
-</code>
-</pre>
+```
 
 Para ver os logs apenas da implementação do roteador configure
 o valor de `DEBUG` para
@@ -126,20 +118,16 @@ Por exemplo, se você gerou o aplicativo com o `$ express
 sample-app`, é possível ativar as instruções de depuração
 com o seguinte comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=sample-app:* node ./bin/www
-</code>
-</pre>
+```
 
 É possível especificar mais do que um namespace de depuração
 designando uma lista de nomes separados por vírgulas:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ DEBUG=http,mail,express:* node index.js
-</code>
-</pre>
+```
 
 Para obter mais informações sobre `debug`,
 consulte o [debug](https://www.npmjs.com/package/debug).

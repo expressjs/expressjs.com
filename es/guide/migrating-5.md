@@ -15,11 +15,9 @@ Express 5 no es muy diferente de Express 4: los cambios en la API no son tan sig
 
 Para instalar el release alpha más reciente y obtener una vista previa de Express 5, especifique el siguiente mandato en el directorio raíz de la aplicación:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install express@5.0.0-alpha.2 --save
-</code>
-</pre>
+```
 
 A continuación, puede ejecutar las pruebas automatizadas para ver qué falla y solucionar los problemas según las actualizaciones siguientes. Después de solucionar los errores de las pruebas, ejecute la aplicación para ver qué errores se producen. Verá rápidamente si la aplicación utiliza métodos o propiedades que no están soportados.
 

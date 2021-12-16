@@ -31,9 +31,9 @@ search on the [npm](https://www.npmjs.com/) site.
 **Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install cassandra-driver
-</code></pre>
+```
 
 **Example**
 
@@ -54,9 +54,9 @@ client.execute('select key from system.local', function(err, result) {
 **Module**: [nano](https://github.com/dscape/nano)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install nano
-</code></pre>
+```
 
 **Example**
 
@@ -85,9 +85,9 @@ books.list(function(err, body){
 **Module**: [levelup](https://github.com/rvagg/node-levelup)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install level
-</code></pre>
+```
 
 **Example**
 
@@ -113,9 +113,9 @@ db.put('name', 'LevelUP', function (err) {
 **Module**: [mysql](https://github.com/felixge/node-mysql/)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install mysql
-</code></pre>
+```
 
 **Example**
 
@@ -144,9 +144,9 @@ connection.end();
 **Module**: [mongoskin](https://github.com/kissjs/node-mongoskin)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install mongoskin
-</code></pre>
+```
 
 **Example**
 
@@ -168,9 +168,9 @@ If you want a object model driver for MongoDB, checkout [Mongoose](https://githu
 **Module**: [apoc](https://github.com/hacksparrow/apoc)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install apoc
-</code></pre>
+```
 
 **Example**
 
@@ -194,9 +194,9 @@ apoc.query('match (n) return n').exec().then(
 **Module**: [pg](https://github.com/brianc/node-postgres)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install pg
-</code></pre>
+```
 
 **Example**
 
@@ -227,9 +227,9 @@ pg.connect(conString, function(err, client, done) {
 **Module**: [redis](https://github.com/mranney/node_redis)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install redis
-</code></pre>
+```
 
 **Example**
 
@@ -263,9 +263,9 @@ client.hkeys('hash key', function (err, replies) {
 **Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install sqlite3
-</code></pre>
+```
 
 **Example**
 

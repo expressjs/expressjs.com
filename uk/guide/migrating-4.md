@@ -381,9 +381,9 @@ Begin the migration process by installing the required middleware for the
 Express 4 app and updating Express and Pug to their respective latest
 version with the following command:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-</code></pre>
+```
 
 Make the following changes to `app.js`:
 
@@ -491,9 +491,9 @@ Unless you need to work directly with the `http` module (socket.io/SPDY/HTTPS), 
 The migration process is complete, and the app is now an
 Express 4 app. To confirm, start the app by using the following command:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ node .
-</code></pre>
+```
 
 Load [http://localhost:3000](http://localhost:3000)
   and see the home page being rendered by Express 4.
@@ -510,17 +510,18 @@ The command-line tool to generate an Express app is still
 If you already have the Express 3 app generator installed on your system,
 you must uninstall it:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm uninstall -g express
-</code></pre>
+```
+
 Depending on how your file and directory privileges are configured,
 you might need to run this command with `sudo`.
 
 Now install the new generator:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install -g express-generator
-</code></pre>
+```
 
 Depending on how your file and directory privileges are configured,
 you might need to run this command with `sudo`.
@@ -541,9 +542,9 @@ Command options and use largely remain the same, with the following exceptions:
 
 Execute the following command to create an Express 4 app:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ express app4
-</code></pre>
+```
 
 If you look at the contents of the `app4/app.js` file, you will notice
 that all the middleware functions (except `express.static`) that are required for
@@ -554,9 +555,9 @@ You will also notice that the `app.js` file is now a Node.js module, in contrast
 
 After installing the dependencies, start the app by using the following command:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm start
-</code></pre>
+```
 
 If you look at the npm start script in the `package.json` file,
 you will notice that the actual command that starts the app is

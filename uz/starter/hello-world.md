@@ -32,8 +32,8 @@ Dastur serverni ishga tushuradi va 3000 portdagi aloqani eshitib turadi. Javob s
 
 Kodni yozib, `app.js` faylida saqlab qoying. Uni ishga tushurish uchun quyidagi buyruqni ishga tushiring:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ node app.js
-</code></pre>
+```
 
 Natijani ko'rish uchun, brauzerdan [http://localhost:3000/](http://localhost:3000/) manziliga kiring.

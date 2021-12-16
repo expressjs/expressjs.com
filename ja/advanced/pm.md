@@ -37,7 +37,7 @@ Forever は、特定のスクリプトが確実に継続的 (永続的) に実�
 
 ### インストール
 
-```sh
+```console
 $ [sudo] npm install forever -g
 ```
 
@@ -45,7 +45,7 @@ $ [sudo] npm install forever -g
 
 スクリプトを開始するには、次のように `forever start` コマンドを使用して、スクリプトのパスを指定します。
 
-```sh
+```console
 $ forever start script.js
 ```
 
@@ -53,37 +53,37 @@ $ forever start script.js
 
 端末に接続されるようにスクリプトを実行するには、次のように `start` を省略します。
 
-```sh
+```console
 $ forever script.js
 ```
 
 次の例に示すように、ロギング・オプション `-l`、`-o`、および `-e` を使用して Forever ツールおよびスクリプトの出力をログに記録することをお勧めします。
 
-```sh
+```console
 $ forever start -l forever.log -o out.log -e err.log script.js
 ```
 
 Forever によって開始されたスクリプトのリストを表示するには、次のようにします。
 
-```sh
+```console
 $ forever list
 ```
 
 Forever によって開始されたスクリプトを停止するには、`forever stop` コマンドを使用して、プロセス索引 (`forever list` コマンドによってリストされます) を指定します。
 
-```sh
+```console
 $ forever stop 1
 ```
 
 あるいは、次のようにファイルのパスを指定します。
 
-```sh
+```console
 $ forever stop script.js
 ```
 
 Forever によって開始されたすべてのスクリプトを停止するには、次のようにします。
 
-```sh
+```console
 $ forever stopall
 ```
 
@@ -97,7 +97,7 @@ PM2 は、ロード・バランサーが組み込まれた、Node.js アプリ�
 
 ### インストール
 
-```sh
+```console
 $ [sudo] npm install pm2 -g
 ```
 
@@ -105,7 +105,7 @@ $ [sudo] npm install pm2 -g
 
 `pm2` コマンドを使用してアプリケーションを開始する場合、アプリケーションのパスを指定する必要があります。ただし、アプリケーションの停止、再始動、または削除を行う場合は、アプリケーションの名前または ID を指定するだけで済みます。
 
-```sh
+```console
 $ pm2 start npm --name my-app -- start
 [PM2] restartProcessId process id 0
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
@@ -124,31 +124,31 @@ $ pm2 start npm --name my-app -- start
 
 実行中のプロセスをすべてリストするには、次のようにします。
 
-```sh
+```console
 $ pm2 list
 ```
 
 アプリケーションを停止するには、次のようにします。
 
-```sh
+```console
 $ pm2 stop 0
 ```
 
 アプリケーションを再始動するには、次のようにします。
 
-```sh
+```console
 $ pm2 restart 0
 ```
 
 アプリケーションに関する詳細情報を表示するには、次のようにします。
 
-```sh
+```console
 $ pm2 show 0
 ```
 
 アプリケーションを PM2 のレジストリーから削除するには、次のようにします。
 
-```sh
+```console
 $ pm2 delete 0
 ```
 
@@ -174,19 +174,19 @@ StrongLoop PM で作業するには、`slc` という強力なコマンド・ラ
 - [Using StrongLoop Process Manager](http://docs.strongloop.com/display/SLC/Using+Process+Manager).
 
 ### インストール
-```sh
+```console
 $ [sudo] npm install -g strongloop
 ```
 
 ### 基本的な使用法
-```sh
+```console
 $ cd my-app
 $ slc start
 ```
 
 プロセス・マネージャーとすべてのデプロイ済みアプリケーションを表示するには、次のようにします。
 
-```sh
+```console
 $ slc ctl
 Service ID: 1
 Service Name: my-app
@@ -206,7 +206,7 @@ Processes:
 
 すべての管理対象アプリケーション (サービス) をリストするには、次のようにします。
 
-```sh
+```console
 $ slc ctl ls
 Id          Name         Scale
  1          my-app       1
@@ -214,25 +214,25 @@ Id          Name         Scale
 
 アプリケーションを停止するには、次のようにします。
 
-```sh
+```console
 $ slc ctl stop my-app
 ```
 
 アプリケーションを再始動するには、次のようにします。
 
-```sh
+```console
 $ slc ctl restart my-app
 ```
 
 「ソフト再始動」も実行できます。実行するとワーカー・プロセスに既存の接続をクローズするための猶予期間を与えた後で、現行のアプリケーションが再始動されます。
 
-```sh
+```console
 $ slc ctl soft-restart my-app
 ```
 
 アプリケーションを管理対象から削除するには、次のようにします。
 
-```sh
+```console
 $ slc ctl remove my-app
 ```
 ## SystemD
@@ -275,18 +275,18 @@ WantedBy=multi-user.target
 
 ### serviceの有効化
 
-```sh
+```console
 $ systemctl enable express.service
 ```
 
 ### serviceの起動
 
-```sh
+```console
 $ systemctl start express.service
 ```
 
 ### serviceのステータスのチェック
 
-```sh
+```console
 $ systemctl status express.service
 ```

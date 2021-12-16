@@ -303,19 +303,15 @@ WantedBy=multi-user.target
 
 要将 StrongLoop PM 作为 systemd 服务安装：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 使用以下命令启动此服务：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```
 
 有关更多信息，请参阅[Setting up a production host](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10)（StrongLoop 文档）。
 
@@ -377,19 +373,15 @@ respawn limit 10 10
 
 要将 StrongLoop PM 作为 Upstart 1.4 服务安装：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 使用以下命令运行此服务：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 注：在不支持 Upstart 1.4 的系统上，这些命令略有不同。请参阅 [Setting up a production host](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10)（StrongLoop 文档），以了解更新信息。
 
@@ -415,11 +407,9 @@ $ sudo /sbin/initctl start strong-pm
 
 例如，假设要将应用程序部署到 prod.foo.com，并且 StrongLoop PM 正在端口 8701（缺省值）上侦听，那么可使用 slc 将集群大小设置为 8：
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 有关使用 StrongLoop PM 建立集群的更多信息，请参阅 StrongLoop 文档中的[集群](https://docs.strongloop.com/display/SLC/Clustering)。
 

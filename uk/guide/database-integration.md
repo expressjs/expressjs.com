@@ -32,9 +32,9 @@ search on the [npm](https://www.npmjs.com/) site.
 **Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install cassandra-driver
-</code></pre>
+```
 
 **Example**
 
@@ -55,9 +55,9 @@ client.execute('select key from system.local', function(err, result) {
 **Module**: [nano](https://github.com/dscape/nano)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install nano
-</code></pre>
+```
 
 **Example**
 
@@ -86,9 +86,9 @@ books.list(function(err, body){
 **Module**: [levelup](https://github.com/rvagg/node-levelup)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install level levelup leveldown
-</code></pre>
+```
 
 **Example**
 
@@ -114,9 +114,9 @@ db.put('name', 'LevelUP', function (err) {
 **Module**: [mysql](https://github.com/felixge/node-mysql/)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install mysql
-</code></pre>
+```
 
 **Example**
 
@@ -145,9 +145,9 @@ connection.end();
 **Module**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install mongodb
-</code></pre>
+```
 
 **Example**
 
@@ -176,9 +176,9 @@ If you want an object model driver for MongoDB, look at [Mongoose](https://githu
 **Module**: [apoc](https://github.com/hacksparrow/apoc)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install apoc
-</code></pre>
+```
 
 **Example**
 
@@ -202,9 +202,9 @@ apoc.query('match (n) return n').exec().then(
 **Module**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install pg-promise
-</code></pre>
+```
 
 **Example**
 
@@ -228,9 +228,9 @@ db.one("SELECT $1 AS value", 123)
 **Module**: [redis](https://github.com/mranney/node_redis)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install redis
-</code></pre>
+```
 
 **Example**
 
@@ -264,9 +264,9 @@ client.hkeys('hash key', function (err, replies) {
 **Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install sqlite3
-</code></pre>
+```
 
 **Example**
 
@@ -300,9 +300,9 @@ db.close();
 **Module**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Installation**
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install elasticsearch
-</code></pre>
+```
 
 **Example**
 

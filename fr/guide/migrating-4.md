@@ -383,11 +383,9 @@ Processus
 Commencez le processus de migration en installant le middleware requis pour l'application
 Express 4 et en mettant à jour Express et Pug vers leur version la plus récente respective à l'aide de la commande suivante :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-</code>
-</pre>
+```
 
 Apportez les modifications suivantes à `app.js` :
 
@@ -501,11 +499,9 @@ A mois que vous deviez utiliser le module `http` (socket.io/SPDY/HTTPS) directem
 Le processus de migration est terminé et l'application est désormais une application
 Express 4. Pour confirmer, démarrez l'application en utilisant la commande suivante :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node .
-</code>
-</pre>
+```
 
 Chargez [http://localhost:3000](http://localhost:3000)
   et voyez comment la page d'accueil est générée par Express 4.
@@ -520,19 +516,16 @@ L'outil de ligne de commande qui permet de générer une application Express est
 
 Si le générateur d'applications Express 3 est installé sur votre système, vous devez le désinstaller :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm uninstall -g express
-</code>
-</pre>
+```
+
 En fonction de la configuration de vos privilèges de fichier et de répertoire,
 vous devrez exécuter cette commande avec `sudo`.A présent, installez le nouveau générateur :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 En fonction de la configuration de vos privilèges de fichier et de répertoire,
 vous devrez exécuter cette commande avec `sudo`.
@@ -552,11 +545,9 @@ Les options et les syntaxe de commande restent généralement identiques, avec l
 
 Exécutez la commande suivante pour créer une application Express 4 :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express app4
-</code>
-</pre>
+```
 
 Si vous examinez le contenu du fichier `app4/app.js`, vous remarquerez que toutes
 les fonctions middleware (sauf `express.static`) qui sont requises pour
@@ -567,11 +558,9 @@ Vous noterez également que le fichier `app.js` est désormais un module Node.js
 
 Après avoir installé les dépendances, démarrez l'application en utilisant la commande suivante :
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm start
-</code>
-</pre>
+```
 
 Si vous examinez le script de démarrage npm dans le fichier `package.json`,
 vous remarquerez dorénavant que la commande qui démarre l'application est

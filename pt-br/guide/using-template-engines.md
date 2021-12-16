@@ -18,11 +18,9 @@ usado. Por Exemplo: `app.set('view engine', 'pug')`
 
 Em seguida instale o pacote npm correspondente ao mecanismo de modelo:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install pug --save
-</code>
-</pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Mecanismos de modelo compatíveis com o Express como o Pug exportam

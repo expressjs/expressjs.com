@@ -11,13 +11,13 @@ lang: uk
 
 Встановлюється `express-generator` наступною командою:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ npm install express-generator -g
-</code></pre>
+```
 
 З параметром `-h` можна проглянути доступні опції:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ express -h
 
   Usage: express [options] [dir]
@@ -35,11 +35,11 @@ $ express -h
     -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code></pre>
+```
 
 В наступному прикладі створюється каркас застосунку Express з іменем _myapp_ в поточній директорії:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ express --view=pug myapp
 
    create : myapp
@@ -59,32 +59,32 @@ $ express --view=pug myapp
    create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
-</code></pre>
+```
 
 Після чого треба встановити залежності:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ cd myapp
 $ npm install
-</code></pre>
+```
 
 На MacOS чи Linux, запустіть застосунок такою командою:
 
-<pre><code class="language-sh" translate="no">
+```console
 $ DEBUG=myapp:* npm start
-</code></pre>
+```
 
 На Windows, запускайте так:
 
-<pre><code class="language-sh" translate="no">
+```console
 > set DEBUG=myapp:* & npm start
-</code></pre>
+```
 
 Тепер вводьте в адресному рядку браузера `http://localhost:3000/`.
 
 Згенерований застосунок має наступну структуру директорій:
 
-<pre><code class="language-sh" translate="no">
+```console
 .
 ├── app.js
 ├── bin
@@ -104,7 +104,7 @@ $ DEBUG=myapp:* npm start
     └── layout.pug
 
 7 directories, 9 files
-</code></pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 Створена структура за допомогою генератора є лише однією із багатьох можливих варіантів структури застосунків Express.

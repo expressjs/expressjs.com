@@ -46,11 +46,9 @@ Attualmente, Helmet non è altro che una raccolta di nove funzioni middleware pi
 
 Installare Helmet come qualsiasi altro modulo:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install --save helmet
-</code>
-</pre>
+```
 
 Successivamente, per utilizzarlo nel codice:
 

@@ -31,11 +31,9 @@ lang: zh-tw
 **模組**：[cassandra-driver](https://github.com/datastax/nodejs-driver)
 **安裝**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install cassandra-driver
-</code>
-</pre>
+```
 
 **範例**
 
@@ -58,11 +56,9 @@ client.execute('select key from system.local', function(err, result) {
 **模組**：[nano](https://github.com/dscape/nano)
 **安裝**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install nano
-</code>
-</pre>
+```
 
 **範例**
 
@@ -93,11 +89,9 @@ books.list(function(err, body){
 **模組**：[levelup](https://github.com/rvagg/node-levelup)
 **安裝**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install level levelup leveldown
-</code>
-</pre>
+```
 
 **範例**
 
@@ -125,11 +119,9 @@ db.put('name', 'LevelUP', function (err) {
 **模組**：[mysql](https://github.com/felixge/node-mysql/)
 **安裝**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install mysql
-</code>
-</pre>
+```
 
 **範例**
 
@@ -160,11 +152,9 @@ connection.end();
 **模組**：[mongodb](https://github.com/mongodb/node-mongodb-native)
 **安裝**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install mongodb
-</code>
-</pre>
+```
 
 **範例**
 
@@ -195,11 +185,9 @@ MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
 **模組**：[apoc](https://github.com/hacksparrow/apoc)
 **安裝**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install apoc
-</code>
-</pre>
+```
 
 **範例**
 
@@ -225,11 +213,9 @@ apoc.query('match (n) return n').exec().then(
 **模組**：[pg-promise](https://github.com/vitaly-t/pg-promise)
 **安裝**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install pg-promise
-</code>
-</pre>
+```
 
 **範例**
 
@@ -255,11 +241,9 @@ db.one("SELECT $1 AS value", 123)
 **模組**：[redis](https://github.com/mranney/node_redis)
 **安裝**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install redis
-</code>
-</pre>
+```
 
 **範例**
 
@@ -295,11 +279,9 @@ client.hkeys('hash key', function (err, replies) {
 **模組**：[sqlite3](https://github.com/mapbox/node-sqlite3)
 **安裝**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install sqlite3
-</code>
-</pre>
+```
 
 **範例**
 
@@ -335,11 +317,9 @@ db.close();
 **模組**：[elasticsearch](https://github.com/elastic/elasticsearch-js)
 **安裝**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install elasticsearch
-</code>
-</pre>
+```
 
 **範例**
 

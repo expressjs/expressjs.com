@@ -393,11 +393,9 @@ http.createServer(app).listen(app.get('port'), function(){
 각각 최신 버전으로 업데이트하여 마이그레이션 프로세스를
 시작하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
-</code>
-</pre>
+```
 
 `app.js`를 다음과 같이 변경하십시오.
 
@@ -511,11 +509,9 @@ server.listen(app.get('port'), function(){
 마이그레이션 프로세스가 완료되었으며, 이제 앱은
 Express 4 앱이 되었습니다. 확인을 위하여, 다음의 명령을 이용해 앱을 시작하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ node .
-</code>
-</pre>
+```
 
 [http://localhost:3000](http://localhost:3000)을
   로드한 후 홈 페이지가 Express 4에 의해 렌더링되는 것을 확인하십시오.
@@ -532,21 +528,18 @@ Express 앱을 생성하기 위한 명령행 도구는 여전히
 Express 3 앱 생성기가 이미 시스템에 설치되어 있는 경우, 다음과 같이
 Express 3 앱 생성기의 설치를 제거해야 합니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm uninstall -g express
-</code>
-</pre>
+```
+
 파일 및 디렉토리 권한이 구성된 방식에 따라서, 위의 명령은
 `sudo`를 이용해 실행해야 할 수도 있습니다.
 
 이제 다음과 같이 새 생성기를 설치하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 파일 및 디렉토리 권한이 구성된 방식에 따라서, 위의 명령은
 `sudo`를 이용해 실행해야 할 수도 있습니다.
@@ -567,11 +560,9 @@ $ npm install -g express-generator
 
 Express 4 앱을 작성하기 위하여 다음의 명령을 실행하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ express app4
-</code>
-</pre>
+```
 
 `app4/app.js` 파일의 내용을 살펴보면, 앱에 필요한 모든 미들웨어
 함수(`express.static` 제외)가 독립적인 모듈로서 로드되며
@@ -582,11 +573,9 @@ $ express app4
 
 종속 항목을 설치한 후, 다음의 명령을 이용해 앱을 시작하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm start
-</code>
-</pre>
+```
 
 `package.json` 파일 내의 npm 시작 스크립트를 살펴보면,
 Express 3에서는 `node app.js`를 이용해 앱을 시작했지만,

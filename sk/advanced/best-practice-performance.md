@@ -317,19 +317,15 @@ StrongLoop PM možete jednoducho nainštalovať ako systemd službu. Následne, 
 
 Pre inštaláciu StrongLoop PM ako systemd služby spustite:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install --systemd
-</code>
-</pre>
+```
 
 Potom spustite službu pomocou:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /usr/bin/systemctl start strong-pm
-</code>
-</pre>
+```
 
 Pre viac informácií si prečítajte [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHEL7+,Ubuntu15.04or15.10).
 
@@ -391,19 +387,15 @@ StrongLoop PM možete jednoducho nainštalovať ako Upstart službu. Následne, 
 
 Pre inštaláciu StrongLoop PM ako Upstart 1.4 služby:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo sl-pm-install
-</code>
-</pre>
+```
 
 Pre spustenie služby:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ sudo /sbin/initctl start strong-pm
-</code>
-</pre>
+```
 
 Pozn.: Pre systémy bez podpory Upstart 1.4 sú príkazy mierne odlišné. Pre viac informácií sa pozrite na [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10).
 
@@ -429,11 +421,9 @@ Keď StrongLoop Process Manager (PM) spúšta aplikáciu, aplikácia je spusten�
 
 Napr., predpokladajúc, že ste deployli vašu aplikáciu na prod.foo.com a StrongLoop PM počúva na porte 8701 (defaultný), tak nastavenie veľkosti clustera na osem vykonáte pomocou slc takto:
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
-</code>
-</pre>
+```
 
 Pre viac informácií ohľadom clusteringu pomocou StrongLoop PM sa pozrite na časť [Clustering](https://docs.strongloop.com/display/SLC/Clustering) v StrongLoop dokumentácii.
 

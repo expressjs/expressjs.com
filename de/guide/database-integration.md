@@ -32,11 +32,9 @@ Diese Datenbanktreiber sind neben zahlreichen anderen Treibern verfügbar. Weite
 **Modul**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Installation**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install cassandra-driver
-</code>
-</pre>
+```
 
 **Beispiel**
 
@@ -59,11 +57,9 @@ client.execute('select key from system.local', function(err, result) {
 **Modul**: [nano](https://github.com/dscape/nano)
 **Installation**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install nano
-</code>
-</pre>
+```
 
 **Beispiel**
 
@@ -94,11 +90,9 @@ books.list(function(err, body){
 **Modul**: [levelup](https://github.com/rvagg/node-levelup)
 **Installation**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install level levelup leveldown
-</code>
-</pre>
+```
 
 **Beispiel**
 
@@ -126,11 +120,9 @@ db.put('name', 'LevelUP', function (err) {
 **Modul**: [mysql](https://github.com/felixge/node-mysql/)
 **Installation**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install mysql
-</code>
-</pre>
+```
 
 **Beispiel**
 
@@ -161,11 +153,9 @@ connection.end();
 **Modul**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Installation**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install mongodb
-</code>
-</pre>
+```
 
 **Beispiel**
 
@@ -196,11 +186,9 @@ Wenn Sie nach einem Objektmodelltreiber für MongoDB suchen, schauen Sie unter [
 **Modul**: [apoc](https://github.com/hacksparrow/apoc)
 **Installation**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install apoc
-</code>
-</pre>
+```
 
 **Beispiel**
 
@@ -229,7 +217,7 @@ apoc.query('match (n) return n').exec().then(
 
 Anmerkung: [Siehe Installations-Voraussetzungen](https://github.com/oracle/node-oracledb#-installation).
 
-```sh
+```console
 $ npm install oracledb
 ```
 
@@ -274,11 +262,9 @@ getEmployee(101)
 **Modul**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **Installation**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install pg-promise
-</code>
-</pre>
+```
 
 **Beispiel**
 
@@ -304,11 +290,9 @@ db.one("SELECT $1 AS value", 123)
 **Modul**: [redis](https://github.com/mranney/node_redis)
 **Installation**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install redis
-</code>
-</pre>
+```
 
 **Beispiel**
 
@@ -344,11 +328,9 @@ client.hkeys('hash key', function (err, replies) {
 **Modul**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Installation**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install sqlite3
-</code>
-</pre>
+```
 
 **Beispiel**
 
@@ -384,11 +366,9 @@ db.close();
 **Modul**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Installation**
 
-<pre>
-<code class="language-sh" translate="no">
+```console
 $ npm install elasticsearch
-</code>
-</pre>
+```
 
 **Beispiel**
 
