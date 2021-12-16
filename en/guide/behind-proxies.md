@@ -26,7 +26,7 @@ If `true`, the client's IP address is understood as the left-most entry in the `
 If `false`, the app is understood as directly facing the client and the client's IP address is derived from `req.socket.remoteAddress`. This is the default setting.
 
 <div class="doc-box doc-warn" markdown="1">
-When setting to `true`, it is important to ensure that the last reverse proxy trusted is removing/overring all of the following HTTP headers: `X-Forwarded-For`, `X-Forwarded-Host`, and `X-Forwarded-Proto` otherwise it may be possible for the client to provide any value.
+When setting to `true`, it is important to ensure that the last reverse proxy trusted is removing/overwriting all of the following HTTP headers: `X-Forwarded-For`, `X-Forwarded-Host`, and `X-Forwarded-Proto` otherwise it may be possible for the client to provide any value.
 </div>
 </td>
     </tr>
