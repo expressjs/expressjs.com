@@ -2,7 +2,7 @@
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
+[![Build Status][ci-image]][ci-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
 Simple cookie-based session middleware.
@@ -243,7 +243,7 @@ app.use(cookieSession({
 ### Max Cookie Size
 
 Because the entire session object is encoded and stored in a cookie, it is
-possible to exceed the maxium cookie size limits on different browsers. The
+possible to exceed the maximum cookie size limits on different browsers. The
 [RFC6265 specification](https://tools.ietf.org/html/rfc6265#section-6.1)
 recommends that a browser **SHOULD** allow
 
@@ -269,10 +269,10 @@ move to an [alternative session strategy](https://github.com/expressjs/session#c
 
 [MIT](LICENSE)
 
+[ci-image]: https://badgen.net/github/checks/expressjs/cookie-session/master?label=ci
+[ci-url]: https://github.com/expressjs/cookie-session/actions?query=workflow%3Aci
 [coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/cookie-session/master
 [coveralls-url]: https://coveralls.io/r/expressjs/cookie-session?branch=master
 [npm-downloads-image]: https://badgen.net/npm/dm/cookie-session
 [npm-url]: https://npmjs.org/package/cookie-session
 [npm-version-image]: https://badgen.net/npm/v/cookie-session
-[travis-image]: https://badgen.net/travis/expressjs/cookie-session/master
-[travis-url]: https://travis-ci.org/expressjs/cookie-session
