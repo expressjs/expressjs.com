@@ -39,6 +39,8 @@ that these callbacks can invoke <code>next('route')</code> to bypass
 the remaining route callback(s). You can use this mechanism to impose pre-conditions
 on a route, then pass control to subsequent routes if there is no reason to proceed with the current route.
 </p><p>
+When a callback function throws an error or returns a rejected promise, `next(err)` will be invoked automatically.
+</p><p>
 Since <a href="#router">router</a> and <a href="#application">app</a> implement the middleware interface,
 you can use them as you would any other middleware function.
 </p><p>
