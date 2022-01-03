@@ -9,22 +9,20 @@ redirect_from: "/guide/migrating-5.html"
 
 <h2 id="overview">Overview</h2>
 
-Express 5.0 is still in the alpha release stage, but here is a preview of the changes that will be in the release and how to migrate your Express 4 app to Express 5.
+Express 5 is not very different from Express 4. Although the basic API remains the same, there are still breaking changes; in other words an existing Express 4 program might not work if you update it to use Express 5.
 
-Express 5 is not very different from Express 4: The changes to the API are not as significant as from 3.0 to 4.0.  Although the basic API remains the same, there are still breaking changes; in other words an existing Express 4 program might not work if you update it to use Express 5.
-
-To install the latest alpha and to preview Express 5, enter the following command in your application root directory:
+To install Express 5, execute the following command in your application directory:
 
 ```console
-$ npm install express@>=5.0.0-alpha.8 --save
+$ npm install --save express@>=5.0.0
 ```
 
-You can then run your automated tests to see what fails, and fix problems according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
+You can then run your tests to see what fails, and fix problems according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
 
 <h2 id="changes">Changes in Express 5</h2>
 
-Here is the list of changes (as of the alpha 2 release ) that will affect you as a user of Express.
-See the [pull request](https://github.com/expressjs/express/pull/2237) for a list of all the planned features.
+Here is the list of changes that will affect you as a user of Express.
+See [this pull request](https://github.com/expressjs/express/pull/2237) for a more detailed list of all features.
 
 **Removed methods and properties**
 
