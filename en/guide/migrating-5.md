@@ -40,6 +40,7 @@ You can then run your automated tests to see what fails, and fix problems accord
 
 <ul class="doclist">
   <li><a href="#path-syntax">Path route matching syntax</a></li>
+  <li><a href="#rejected-promises">Rejected promises handled from middleware and handlers</a></li>
   <li><a href="#app.router">app.router</a></li>
   <li><a href="#req.host">req.host</a></li>
   <li><a href="#req.query">req.query</a></li>
@@ -121,6 +122,12 @@ Path route matching syntax is when a string is supplied as the first parameter t
   * `/\\d+` is no longer valid and must be written as `/(\\d+)`.
 - Special `*` path segment behavior removed.
   * `/foo/*/bar` will match a literal `*` as the middle segment.
+
+<h4 id="rejected-promises">Rejected promises handled from middleware and handlers</h4>
+
+Request middleware and handlers that return rejected promises are now handled by forwarding the rejected value as an `Error` to the error handling middleware. This means that using `async` functions as middleware and handlers are easier than ever. When an error is thrown in an `async` function or a rejected promise is `await`ed inside an async function, those errors will be passed to the error handler as if calling `next(err)`.
+
+Details of how Express handles errors is covered in the [error handling documentation](/en/guide/error-handling.html).
 
 <h4 id="app.router">app.router</h4>
 
