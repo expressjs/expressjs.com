@@ -114,6 +114,14 @@ The `res.sendfile()` function has been replaced by a camel-cased version `res.se
 
 The `app.router` object, which was removed in Express 4, has made a comeback in Express 5. In the new version, this object is a just a reference to the base Express router, unlike in Express 3, where an app had to explicitly load it.
 
+The new version of the router contains **breaking changes** to the way paths are parsed:
+
+1. It is now possible to use named capturing groups in paths using `RegExp`, for example `/\/(?<group>.+)/` would result in `req.params.group` being populated.
+2. Custom prefix and suffix groups are now supported using `{}`, for example `/:entity{-:action}?` would match `/user` and `/user-delete`.
+3. Unbalanced patterns now produce an error. For example `/test(foo` previously worked, but now  the opening parenthesis `(` must be escaped to match the previous behavior:  `/test\\(foo`.
+4. As with parentheses, curly brackets also require escaping. That is, `/user{:id}` no longer matches `/user{42}` as before unless written as `/user\\{:id\\}`.
+
+
 <h4 id="req.host">req.host</h4>
 
 In Express 4, the `req.host` function incorrectly stripped off the port number if it was present. In Express 5 the port number is maintained.
@@ -121,6 +129,7 @@ In Express 4, the `req.host` function incorrectly stripped off the port number i
 <h4 id="req.query">req.query</h4>
 
 In Express 4.7 and Express 5 onwards, the query parser option can accept `false` to disable query string parsing when you want to use your own function for query string parsing logic.
+
 
 <h3>Improvements</h3>
 
