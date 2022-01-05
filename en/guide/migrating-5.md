@@ -114,12 +114,15 @@ The `res.sendfile()` function has been replaced by a camel-cased version `res.se
 
 The `app.router` object, which was removed in Express 4, has made a comeback in Express 5. In the new version, this object is a just a reference to the base Express router, unlike in Express 3, where an app had to explicitly load it.
 
-The new version of the router contains **breaking changes** to the way paths are parsed:
+The new version of the router contains **breaking changes** to the way paths are parsed due to an update in [paths-to-regexp from 0.1.7 to 6.2.0](https://github.com/pillarjs/path-to-regexp):
 
-1. It is now possible to use named capturing groups in paths using `RegExp`, for example `/\/(?<group>.+)/` would result in `req.params.group` being populated.
-2. Custom prefix and suffix groups are now supported using `{}`, for example `/:entity{-:action}?` would match `/user` and `/user-delete`.
-3. Unbalanced patterns now produce an error. For example `/test(foo` previously worked, but now  the opening parenthesis `(` must be escaped to match the previous behavior:  `/test\\(foo`.
-4. As with parentheses, curly brackets also require escaping. That is, `/user{:id}` no longer matches `/user{42}` as before unless written as `/user\\{:id\\}`.
+1. New `?`, `*`, and `+` parameter modifiers have been added. For example `/users/:user+` now matches `/users/1`, `/users/1/2`, etc. but not `/users`.
+2. The special `*` path segment behavior has been removed. This means that `*` is no longer a valid path and `/foo/*/bar` now matches a literal `'*'`. For the previous behaviour, a `(.*)` matching group should be used instead.
+3. Regular expressions can now only be used in a matching group. For example, `/users/\\d+` is invalid and should be written as `/users/(\\d+))`.
+4. It is now possible to use named capturing groups in paths using `RegExp`, for example `/\/(?<group>.+)/` would result in `req.params.group` being populated.
+5. Custom prefix and suffix groups are now supported using `{}`, for example `/:entity{-:action}?` would match `/user` and `/user-delete`.
+6. Unbalanced patterns now produce an error. For example `/test(foo` previously worked, but now  the opening parenthesis `(` must be escaped to match the previous behavior:  `/test\\(foo`.
+7. As with parentheses, curly brackets also require escaping. That is, `/user{:id}` no longer matches `/user{42}` as before unless written as `/user\\{:id\\}`.
 
 
 <h4 id="req.host">req.host</h4>
