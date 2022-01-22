@@ -46,18 +46,15 @@ Also, a handy tool to get a free TLS certificate is [Let's Encrypt](https://lets
 
 ## Use Helmet
 
-[Helmet](https://www.npmjs.com/package/helmet) can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
+[Helmet][helmet] can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
 
-Helmet is actually just a collection of smaller middleware functions that set security-related HTTP response headers:
+Helmet is a collection of several smaller middleware functions that set security-related HTTP response headers. Some examples include:
 
-* [csp](https://github.com/helmetjs/csp) sets the `Content-Security-Policy` header to help prevent cross-site scripting attacks and other cross-site injections.
-* [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) removes the `X-Powered-By` header.
-* [hsts](https://github.com/helmetjs/hsts) sets `Strict-Transport-Security` header that enforces secure (HTTP over SSL/TLS) connections to the server.
-* [ieNoOpen](https://github.com/helmetjs/ienoopen) sets `X-Download-Options` for IE8+.
-* [noCache](https://github.com/helmetjs/nocache) sets `Cache-Control` and Pragma headers to disable client-side caching.
-* [noSniff](https://github.com/helmetjs/dont-sniff-mimetype) sets `X-Content-Type-Options` to prevent browsers from MIME-sniffing a response away from the declared content-type.
-* [frameguard](https://github.com/helmetjs/frameguard) sets the `X-Frame-Options` header to provide [clickjacking](https://www.owasp.org/index.php/Clickjacking) protection.
-* [xssFilter](https://github.com/helmetjs/x-xss-protection) sets `X-XSS-Protection` to disable the buggy Cross-site scripting (XSS) filter in web browsers.
+* `helmet.contentSecurityPolicy` which sets the `Content-Security-Policy` header. This helps prevent cross-site scripting attacks among many other things.
+* `helmet.hsts` which sets the `Strict-Transport-Security` header. This helps enforce secure (HTTPS) connections to the server.
+* `helmet.frameguard` which sets the `X-Frame-Options` header. This provides [clickjacking](https://www.owasp.org/index.php/Clickjacking) protection.
+
+Helmet includes several other middleware functions which you can read about [at its documentation website][helmet].
 
 Install Helmet like any other module:
 
@@ -209,3 +206,5 @@ Here are some further recommendations from the excellent [Node.js Security Check
 * Use the open-source [sqlmap](http://sqlmap.org/) tool to detect SQL injection vulnerabilities in your app.
 * Use the [nmap](https://nmap.org/) and [sslyze](https://github.com/nabla-c0d3/sslyze) tools to test the configuration of your SSL ciphers, keys, and renegotiation as well as the validity of your certificate.
 * Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
+
+[helmet]: https://helmetjs.github.io/
