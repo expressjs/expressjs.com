@@ -295,7 +295,7 @@ The methods on the response object (`res`) in the following table can send a res
 <h2 id="app-route">app.route()</h2>
 
 You can create chainable route handlers for a route path by using `app.route()`.
-Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/{{ page.lang }}/4x/api.html#router).
+Because the path is specified at a single location, creating modular routes is helpful, as it’s reducing redundancy and typos. For more information about routes, see: [Router() documentation](/{{ page.lang }}/4x/api.html#router).
 
 Here is an example of chained route handlers that are defined by using `app.route()`.
 
