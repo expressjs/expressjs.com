@@ -18,7 +18,6 @@ These template engines work "out-of-the-box" with Express:
 - **[hbs](https://github.com/pillarjs/hbs)**: Adapter for Handlebars.js, an extension of Mustache.js template engine.
 - **[Squirrelly](https://github.com/squirrellyjs/squirrelly)**: Blazing-fast template engine that supports partials, helpers, custom tags, filters, and caching. Not white-space sensitive, works with any language.
 - **[Eta](https://github.com/eta-dev/eta)**: Super-fast lightweight embedded JS template engine. Supports custom delimiters, async, whitespace control, partials, caching, plugins.
-- **[React](https://github.com/reactjs/express-react-views)**: Renders React components on the server. It renders static markup and does not support mounting those views on the client.
 - **[combyne.js](https://github.com/tbranyen/combyne)**: A template engine that hopefully works the way you'd expect.
 - **[Nunjucks](https://github.com/mozilla/nunjucks)**: Inspired by jinja/twig.
 - **[marko](https://github.com/marko-js/marko)**: A fast and lightweight HTML-based templating engine that compiles templates to CommonJS modules and supports streaming, async rendering and custom tags. (Renders directly to the HTTP response stream).
