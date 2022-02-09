@@ -57,6 +57,7 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 - [Dev.to blog: Express category](https://dev.to/ghvstcode/understanding-express-middleware-a-beginners-guide-g73)
 - [LinuxStans Blog: Express tag](https://linuxstans.com/tag/express-js/)
 - [ButterCMS blog: Express category](https://buttercms.com/blog/tag/express/)
+- [Traveling Coderman Blog: Architecture Series](https://traveling-coderman.net/code/node-architecture/)
 
 ### Add your blog here!
 
