@@ -9,22 +9,20 @@ redirect_from: "/guide/migrating-5.html"
 
 <h2 id="overview">Overview</h2>
 
-Express 5.0 is still in the alpha release stage, but here is a preview of the changes that will be in the release and how to migrate your Express 4 app to Express 5.
+Express 5 is not very different from Express 4. Although the basic API remains the same, there are still breaking changes; in other words an existing Express 4 program might not work if you update it to use Express 5.
 
-Express 5 is not very different from Express 4: The changes to the API are not as significant as from 3.0 to 4.0.  Although the basic API remains the same, there are still breaking changes; in other words an existing Express 4 program might not work if you update it to use Express 5.
-
-To install the latest alpha and to preview Express 5, enter the following command in your application root directory:
+To install Express 5, execute the following command in your application directory:
 
 ```console
-$ npm install express@>=5.0.0-alpha.8 --save
+$ npm install --save express@>=5.0.0
 ```
 
-You can then run your automated tests to see what fails, and fix problems according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
+You can then run your tests to see what fails, and fix problems according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
 
 <h2 id="changes">Changes in Express 5</h2>
 
-Here is the list of changes (as of the alpha 2 release ) that will affect you as a user of Express.
-See the [pull request](https://github.com/expressjs/express/pull/2237) for a list of all the planned features.
+Here is the list of changes that will affect you as a user of Express.
+See [this pull request](https://github.com/expressjs/express/pull/2237) for a more detailed list of all features.
 
 **Removed methods and properties**
 
@@ -114,7 +112,18 @@ The `res.sendfile()` function has been replaced by a camel-cased version `res.se
 
 <h4 id="app.router">app.router</h4>
 
-The `app.router` object, which was removed in Express 4, has made a comeback in Express 5. In the new version, this object is a just a reference to the base Express router, unlike in Express 3, where an app had to explicitly load it.
+The `app.router` object, which was removed in Express 4, has made a comeback in Express 5.
+
+The Express v5 [router](https://github.com/pillarjs/router) contains **breaking changes** to the way paths are parsed due to an update in [paths-to-regexp from 0.1.7 to 6.2.0](https://github.com/pillarjs/path-to-regexp):
+
+1. New `?`, `*`, and `+` parameter modifiers have been added. For example `/users/:user+` now matches `/users/1`, `/users/1/2`, etc. but not `/users`.
+2. The special `*` path segment behavior has been removed. This means that `*` is no longer a valid path and `/foo/*/bar` now matches a literal `'*'`. For the previous behaviour, a `(.*)` matching group should be used instead.
+3. Regular expressions can now only be used in a matching group. For example, `/users/\\d+` is invalid and should be written as `/users/(\\d+))`.
+4. It is now possible to use named capturing groups in paths using `RegExp`, for example `/\/(?<group>.+)/` would result in `req.params.group` being populated.
+5. Custom prefix and suffix groups are now supported using `{}`, for example `/:entity{-:action}?` would match `/user` and `/user-delete`.
+6. Unbalanced patterns now produce an error. For example `/test(foo` previously worked, but now  the opening parenthesis `(` must be escaped to match the previous behavior:  `/test\\(foo`.
+7. As with parentheses, curly brackets also require escaping. That is, `/user{:id}` no longer matches `/user{42}` as before unless written as `/user\\{:id\\}`.
+
 
 <h4 id="req.host">req.host</h4>
 
@@ -123,6 +132,7 @@ In Express 4, the `req.host` function incorrectly stripped off the port number i
 <h4 id="req.query">req.query</h4>
 
 In Express 4.7 and Express 5 onwards, the query parser option can accept `false` to disable query string parsing when you want to use your own function for query string parsing logic.
+
 
 <h3>Improvements</h3>
 
