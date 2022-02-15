@@ -43,7 +43,7 @@ The `app.listen()` method returns an [http.Server](https://nodejs.org/api/http.h
 
 ```js
 app.listen = function () {
-  var server = http.createServer(this)
+  const server = http.createServer(this)
   return server.listen.apply(server, arguments)
 }
 ```

@@ -68,7 +68,7 @@ Daha sonra kodunuzda kullanmak için:
 ```js
 // ...
 
-var helmet = require('helmet')
+const helmet = require('helmet')
 app.use(helmet())
 
 // ...
@@ -108,7 +108,7 @@ Varsayılan oturum çerez adı uygulamanızı saldırılara açık bırakabilir.
 Bu problemi önlemek için, jenerik çerez adlarını kullanın; örnek olarak [express-session](https://www.npmjs.com/package/express-session) ara yazılımının kullanımı:
 
 ```js
-var session = require('express-session')
+const session = require('express-session')
 app.set('trust proxy', 1)
 app.use(session({
   secret: 's3Cur3',
@@ -129,11 +129,11 @@ Güvenliği artırmak için aşağıdaki çerez seçeneklerini ayarlayın:
 [cookie-session](https://www.npmjs.com/package/cookie-session) ara yazılımını kullanan bir örnek:
 
 ```js
-var session = require('cookie-session')
-var express = require('express')
-var app = express()
+const session = require('cookie-session')
+const express = require('express')
+const app = express()
 
-var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 saat
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 saat
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],

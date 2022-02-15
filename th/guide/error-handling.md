@@ -20,8 +20,8 @@ app.use(function (err, req, res, next) {
 You define error-handling middleware last, after other `app.use()` and routes calls; for example:
 
 ```js
-var bodyParser = require('body-parser')
-var methodOverride = require('method-override')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -41,8 +41,8 @@ regular middleware functions. For example, if you wanted to define an error-hand
 for requests made by using `XHR`, and those without, you might use the following commands:
 
 ```js
-var bodyParser = require('body-parser')
-var methodOverride = require('method-override')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 app.use(bodyParser.urlencoded({
   extended: true

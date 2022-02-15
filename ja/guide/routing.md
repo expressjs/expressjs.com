@@ -22,8 +22,8 @@ lang: ja
 次のコードは、極めて基本的なルートの例です。
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function (req, res) {
@@ -235,17 +235,17 @@ app.get('/example/b', function (req, res, next) {
 コールバック関数の配列で 1 つのルートを処理できます。次に例を示します。
 
 ```js
-var cb0 = function (req, res, next) {
+const cb0 = function (req, res, next) {
   console.log('CB0')
   next()
 }
 
-var cb1 = function (req, res, next) {
+const cb1 = function (req, res, next) {
   console.log('CB1')
   next()
 }
 
-var cb2 = function (req, res) {
+const cb2 = function (req, res) {
   res.send('Hello from C!')
 }
 
@@ -255,12 +255,12 @@ app.get('/example/c', [cb0, cb1, cb2])
 独立した関数と、関数の配列の組み合わせで1つのルートを処理できます。次に例を示します。
 
 ```js
-var cb0 = function (req, res, next) {
+const cb0 = function (req, res, next) {
   console.log('CB0')
   next()
 }
 
-var cb1 = function (req, res, next) {
+const cb1 = function (req, res, next) {
   console.log('CB1')
   next()
 }
@@ -318,8 +318,8 @@ app.route('/book')
 アプリケーション・ディレクトリーに次の内容で `birds.js` というルーター・ファイルを作成します。
 
 ```js
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 
 // middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
@@ -341,7 +341,7 @@ module.exports = router
 次に、ルーター・モジュールをアプリケーションにロードします。
 
 ```js
-var birds = require('./birds')
+const birds = require('./birds')
 // ...
 app.use('/birds', birds)
 ```

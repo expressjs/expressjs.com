@@ -33,9 +33,9 @@ Les actions suivantes peuvent être réalisées dans votre code afin d'améliore
 La compression Gzip peut considérablement réduire la taille du corps de réponse et ainsi augmenter la vitesse d'une application Web. Utilisez le middleware [compression](https://www.npmjs.com/package/compression) pour la compression gzip dans votre application Express. Par exemple :
 
 ```js
-var compression = require('compression')
-var express = require('express')
-var app = express()
+const compression = require('compression')
+const express = require('express')
+const app = express()
 app.use(compression())
 ```
 
@@ -110,9 +110,9 @@ Cette fonction middleware accepte un paramètre de zone de requête nommé "para
 app.get('/search', (req, res) => {
   // Simulating async operation
   setImmediate(() => {
-    var jsonStr = req.query.params
+    const jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr)
+      const jsonObj = JSON.parse(jsonStr)
       res.send('Success')
     } catch (e) {
       res.status(400).send('Invalid JSON string')

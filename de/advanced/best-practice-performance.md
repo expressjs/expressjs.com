@@ -33,9 +33,9 @@ Dies sind einige Beispiele für Maßnahmen, die Sie an Ihrem Code vornehmen kön
 Mit der GZIP-Komprimierung lässt sich die Größe des Antworthauptteils deutlich verringern und somit die Geschwindigkeit der Webanwendung erhöhen. Verwenden Sie die Middleware [compression](https://www.npmjs.com/package/compression) für die GZIP-Komprimierung in Ihrer Express-Anwendung. Beispiel:
 
 ```js
-var compression = require('compression')
-var express = require('express')
-var app = express()
+const compression = require('compression')
+const express = require('express')
+const app = express()
 app.use(compression())
 ```
 
@@ -109,9 +109,9 @@ Dies ist ein Beispiel zur Verwendung von "try-catch", um eine potenzielle "proce
 app.get('/search', (req, res) => {
   // Simulating async operation
   setImmediate(() => {
-    var jsonStr = req.query.params
+    const jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr)
+      const jsonObj = JSON.parse(jsonStr)
       res.send('Success')
     } catch (e) {
       res.status(400).send('Invalid JSON string')

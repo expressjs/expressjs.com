@@ -50,8 +50,8 @@ app.listen(3000)
 The result looks like this:
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 app.listen(3000)
 ```
 

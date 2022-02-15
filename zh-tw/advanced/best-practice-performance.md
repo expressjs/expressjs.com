@@ -33,9 +33,9 @@ lang: zh-tw
 Gzip 壓縮可以大幅減少回應內文的大小，從而提高 Web 應用程式的速度。請使用 [compression](https://www.npmjs.com/package/compression) 中介軟體，在您的 Express 應用程式中進行 gzip 壓縮。例如：
 
 ```js
-var compression = require('compression')
-var express = require('express')
-var app = express()
+const compression = require('compression')
+const express = require('express')
+const app = express()
 app.use(compression())
 ```
 
@@ -110,9 +110,9 @@ try-catch 是一種 JavaScript 語言建構，可用來捕捉同步程式碼中�
 app.get('/search', (req, res) => {
   // Simulating async operation
   setImmediate(() => {
-    var jsonStr = req.query.params
+    const jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr)
+      const jsonObj = JSON.parse(jsonStr)
       res.send('Success')
     } catch (e) {
       res.status(400).send('Invalid JSON string')

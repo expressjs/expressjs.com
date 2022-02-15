@@ -39,7 +39,7 @@ Uygulama-düzeyi ara yazılımı `app.use()` ve `app.METHOD()` fonksiyonları ku
 Bu örnek, hedef yolu bulunmayan bir ara yazılım fonksiyonunu gösteriyor. Fonksiyon uygulama her istek aldığında çalışır.
 
 ```js
-var app = express()
+const app = express()
 
 app.use(function (req, res, next) {
   console.log('Time:', Date.now())
@@ -122,15 +122,15 @@ app.get('/user/:id', function (req, res, next) {
 Yönlendirici-düzeyi ara yazılımı, uygulama-düzeyi ara yazılımı ile aynı şekilde çalışır; ama `express.Router()` sınıfının bir örneğine bağlıdır.
 
 ```js
-var router = express.Router()
+const router = express.Router()
 ```
 `router.use()` ve `router.METHOD()` fonksiyonlarını kullanarak yönlendirici-düzeyi ara yazılımı yükle.
 
 Aşağıdaki örnek kod, yukarıda uygulama-düzeyi ara yazılım için gösterilen ara yazılım sistemini, yönlendirici-düzeyi ara yazılım kullanarak kopyalar:
 
 ```js
-var app = express()
-var router = express.Router()
+const app = express()
+const router = express.Router()
 
 // hedef yolu olmayan bir ara yazılım fonksiyonu. Bu kod yönlendiriciye yapılan her istekte çalışır
 router.use(function (req, res, next) {
@@ -173,8 +173,8 @@ Yönlendiricinin kalan ara yazılım fonksiyonlarını geçmek için, yönlendir
 Bu örnek, `/user/:id` yoluna yapılan GET isteklerini işleyen bir ara yazılım alt-kümesini gösterir.
 
 ```js
-var app = express()
-var router = express.Router()
+const app = express()
+const router = express.Router()
 
 // yönlendiriciyi bir kontrol ile doğrula ve gerektiğinde bir sonraki yönlendiriciye geçerek kurtul
 router.use(function (req, res, next) {
@@ -230,7 +230,7 @@ express.static(root, [options])
 Bu örnek `express.static` ara yazılım fonksiyonunu ayrıntılı bir seçenekler objesiyle kullanımını gösterir:
 
 ```js
-var options = {
+const options = {
   dotfiles: 'ignore',
   etag: false,
   extensions: ['htm', 'html'],
@@ -268,9 +268,9 @@ $ npm install cookie-parser
 ```
 
 ```js
-var express = require('express')
-var app = express()
-var cookieParser = require('cookie-parser')
+const express = require('express')
+const app = express()
+const cookieParser = require('cookie-parser')
 
 // çerez-ayrıştırıcı ara yazılımı yükle
 app.use(cookieParser())

@@ -38,7 +38,7 @@ Express アプリケーションは、以下のタイプのミドルウェアを
 次の例は、マウント・パスを指定しないミドルウェア関数を示しています。この関数は、アプリケーションがリクエストを受け取るたびに実行されます。
 
 ```js
-var app = express()
+const app = express()
 
 app.use(function (req, res, next) {
   console.log('Time:', Date.now())
@@ -121,7 +121,7 @@ app.get('/user/:id', function (req, res, next) {
 ルーター・レベルのミドルウェアは、`express.Router()` のインスタンスにバインドされる点を除き、アプリケーション・レベルのミドルウェアと同じように動作します。
 
 ```js
-var router = express.Router()
+const router = express.Router()
 ```
 
 `router.use()` 関数と `router.METHOD()` 関数を使用して、ルーター・レベルのミドルウェアをロードします。
@@ -129,8 +129,8 @@ var router = express.Router()
 次のコードの例では、ルーター・レベルのミドルウェアを使用して、上記のアプリケーション・レベルのミドルウェアで示されているミドルウェア・システムを複製します。
 
 ```js
-var app = express()
-var router = express.Router()
+const app = express()
+const router = express.Router()
 
 // a middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
@@ -173,8 +173,8 @@ app.use('/', router)
 この例は、`/user/:id`パスに対するGET要求を処理するミドルウェアサブスタックを示しています。
 
 ```js
-var app = express()
-var router = express.Router()
+const app = express()
+const router = express.Router()
 
 // predicate the router with a check and bail out when needed
 router.use(function (req, res, next) {
@@ -233,9 +233,9 @@ $ npm install cookie-parser
 ```
 
 ```js
-var express = require('express')
-var app = express()
-var cookieParser = require('cookie-parser')
+const express = require('express')
+const app = express()
+const cookieParser = require('cookie-parser')
 
 // load the cookie-parsing middleware
 app.use(cookieParser())

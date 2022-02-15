@@ -3,9 +3,9 @@
 The application's in-built instance of router. This is created lazily, on first access.
 
 ```js
-var express = require('express')
-var app = express()
-var router = app.router
+const express = require('express')
+const app = express()
+const router = app.router
 
 router.get('/', function (req, res) {
   res.send('hello world')

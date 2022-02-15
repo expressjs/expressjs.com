@@ -38,7 +38,7 @@ Express 5 ile başlayarak, Promise döndüren rota işleyicileri ve ara yazılı
 
 ```js
 app.get('/user/:id', async function (req, res, next) {
-  var user = await getUserById(req.params.id)
+  const user = await getUserById(req.params.id)
   res.send(user)
 })
 ```
@@ -159,8 +159,8 @@ app.use(function (err, req, res, next) {
 Hata işleyici ara yazılımları diğer `app.use()` ve rotaların çağrılarından sonra, en son tanımlanır; örnek olarak:
 
 ```js
-var bodyParser = require('body-parser')
-var methodOverride = require('method-override')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -177,8 +177,8 @@ Ara yazılımdaki yanıtlar HTML hata sayfası, basit bir mesaj veya bir JSON ka
 Organizasyonel (ve daha üst-düzey çatı) amaçlar için, normal ara yazılım fonksiyonları gibi, birden fazla hata-işleyici ara yazılım fonksiyonu tanımlayabilirsiniz. Örnek olarak, `XHR` kullanılan ve `XHR` kullanılmayan istekler için bir hata işleyici tanımlamak gibi:
 
 ```js
-var bodyParser = require('body-parser')
-var methodOverride = require('method-override')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 app.use(bodyParser.urlencoded({
   extended: true

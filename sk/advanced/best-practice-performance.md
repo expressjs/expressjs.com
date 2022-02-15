@@ -37,9 +37,9 @@ Dodržiavanie nasledujúcich postupov vo vašom kóde môže viesť k zlepšeniu
 Použitie gzip kompresie môže veľmi znížiť veľkosť response body a tým zvýšíť rýchlosť webovej aplikácie. Pre zapnutie gzip kompresie vo vašej Express aplikácii používajte [compression](https://www.npmjs.com/package/compression) middleware. Napr.:
 
 ```js
-var compression = require('compression')
-var express = require('express')
-var app = express()
+const compression = require('compression')
+const express = require('express')
+const app = express()
 app.use(compression())
 ```
 
@@ -114,9 +114,9 @@ Táto middleware funkcia príjma query parameter nazvaný "params" ktorý je JSO
 app.get('/search', (req, res) => {
   // Simulating async operation
   setImmediate(() => {
-    var jsonStr = req.query.params
+    const jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr)
+      const jsonObj = JSON.parse(jsonStr)
       res.send('Success')
     } catch (e) {
       res.status(400).send('Invalid JSON string')

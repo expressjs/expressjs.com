@@ -48,8 +48,8 @@ one called `myLogger` that prints a simple log message and another called `reque
 displays the timestamp of the HTTP request.
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
@@ -62,7 +62,7 @@ app.listen(3000)
 Here is a simple example of a middleware function called "myLogger". This function just prints "LOGGED" when a request to the app passes through it. The middleware function is assigned to a variable named `myLogger`.
 
 ```js
-var myLogger = function (req, res, next) {
+const myLogger = function (req, res, next) {
   console.log('LOGGED')
   next()
 }
@@ -78,10 +78,10 @@ To load the middleware function, call `app.use()`, specifying the middleware fun
 For example, the following code loads the `myLogger` middleware function before the route to the root path (/).
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
-var myLogger = function (req, res, next) {
+const myLogger = function (req, res, next) {
   console.log('LOGGED')
   next()
 }
@@ -109,7 +109,7 @@ Next, we'll create a middleware function called "requestTime" and add it as a pr
 to the request object.
 
 ```js
-var requestTime = function (req, res, next) {
+const requestTime = function (req, res, next) {
   req.requestTime = Date.now()
   next()
 }
@@ -118,10 +118,10 @@ var requestTime = function (req, res, next) {
 The app now uses the `requestTime` middleware function. Also, the callback function of the root path route uses the property that the middleware function adds to `req` (the request object).
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
-var requestTime = function (req, res, next) {
+const requestTime = function (req, res, next) {
   req.requestTime = Date.now()
   next()
 }
@@ -129,7 +129,7 @@ var requestTime = function (req, res, next) {
 app.use(requestTime)
 
 app.get('/', function (req, res) {
-  var responseText = 'Hello World!<br>'
+  let responseText = 'Hello World!<br>'
   responseText += '<small>Requested at: ' + req.requestTime + '</small>'
   res.send(responseText)
 })
@@ -161,7 +161,7 @@ module.exports = function (options) {
 The middleware can now be used as shown below.
 
 ```js
-var mw = require('./my-middleware.js')
+const mw = require('./my-middleware.js')
 
 app.use(mw({ option1: '1', option2: '2' }))
 ```

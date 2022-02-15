@@ -141,8 +141,8 @@ app.use(function (err, req, res, next) {
 エラー処理ミドルウェアは、その他の `app.use()` およびルート呼び出しの後で最後に定義します。次に例を示します。
 
 ```js
-var bodyParser = require('body-parser')
-var methodOverride = require('method-override')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -159,8 +159,8 @@ app.use(function (err, req, res, next) {
 組織的な (および高水準フレームワークの) 目的で、通常のミドルウェア関数と同じように、複数のエラー処理のミドルウェア関数を定義できます。例えば、`XHR` を使用する要求と、使用しない要求のためのエラー・ハンドラーを定義するには、以下のコマンドを使用します。
 
 ```js
-var bodyParser = require('body-parser')
-var methodOverride = require('method-override')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 app.use(bodyParser.urlencoded({
   extended: true

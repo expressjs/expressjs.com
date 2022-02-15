@@ -33,9 +33,9 @@ lang: ru
 Сжатие gzip может значительно уменьшить размер тела ответа и, соответственно, увеличить быстродействие веб-приложения. Используйте промежуточный обработчик для [сжатия](https://www.npmjs.com/package/compression) gzip в приложениях Express. Например:
 
 ```js
-var compression = require('compression')
-var express = require('express')
-var app = express()
+const compression = require('compression')
+const express = require('express')
+const app = express()
 app.use(compression())
 ```
 
@@ -110,9 +110,9 @@ app.use(compression())
 app.get('/search', (req, res) => {
   // Simulating async operation
   setImmediate(() => {
-    var jsonStr = req.query.params
+    const jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr)
+      const jsonObj = JSON.parse(jsonStr)
       res.send('Success')
     } catch (e) {
       res.status(400).send('Invalid JSON string')

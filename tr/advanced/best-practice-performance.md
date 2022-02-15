@@ -42,9 +42,9 @@ Uygulamanızın performansını iyileştirmek için yapabileceğiniz bazı şeyl
 Gzip sıkıştırma, yanıt gövdesininin boyutunu büyük ölçüde azaltabilir ve dolayısıyla da web uygulamanın hızını arttırır. Express uygulamanızda gzip sıkıştırması için [compression](https://www.npmjs.com/package/compression) ara yazılımını kullanın. Örnek olarak:
 
 ```js
-var compression = require('compression')
-var express = require('express')
-var app = express()
+const compression = require('compression')
+const express = require('express')
+const app = express()
 app.use(compression())
 ```
 
@@ -106,9 +106,9 @@ Buradaki örnek potansyel bir süreç-patlatıcı istisnayı ele alman try-catch
 app.get('/search', (req, res) => {
   // Simulating async operation
   setImmediate(() => {
-    var jsonStr = req.query.params
+    const jsonStr = req.query.params
     try {
-      var jsonObj = JSON.parse(jsonStr)
+      const jsonObj = JSON.parse(jsonStr)
       res.send('Success')
     } catch (e) {
       res.status(400).send('Invalid JSON string')

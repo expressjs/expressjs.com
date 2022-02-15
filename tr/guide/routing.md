@@ -19,8 +19,8 @@ Aslında yönlendirme metodları birden fazla geri çağırma fonksiyonunu argü
 Aşağıdaki kod çok temel bir rota örneğidir.
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
 // anasayfaya bir GET isteği yapıldığında "merhaba dünya" ile yanıt verir
 app.get('/', function (req, res) {
@@ -238,17 +238,17 @@ app.get('/example/b', function (req, res, next) {
 Geri çağırma fonksiyonları dizini bir rotayı işleyebilir. Örneğin:
 
 ```js
-var cb0 = function (req, res, next) {
+const cb0 = function (req, res, next) {
   console.log('Geri çağırma 0')
   next()
 }
 
-var cb1 = function (req, res, next) {
+const cb1 = function (req, res, next) {
   console.log('Geri çağırma 1')
   next()
 }
 
-var cb2 = function (req, res) {
+const cb2 = function (req, res) {
   res.send('C\'den merhaba')
 }
 
@@ -258,12 +258,12 @@ app.get('/example/c', [cb0, cb1, cb2])
 Bağımsız fonksiyonlar ve fonksiyon dizilerinin bir kombinasyonu bir rotayı işleyebilir. Örneğin:
 
 ```js
-var cb0 = function (req, res, next) {
+const cb0 = function (req, res, next) {
   console.log('Geri çağırma 0')
   next()
 }
 
-var cb1 = function (req, res, next) {
+const cb1 = function (req, res, next) {
   console.log('Geri çağırma 1')
   next()
 }
@@ -321,8 +321,8 @@ Aşağıdaki örnek, bir yönlendiriciyi modül olarak oluşturur, içine bir ar
 Uygulama dizininde aşağıdaki içeriğe sahip `birds.js` adlı bir yönlendirici dosyası oluşturun:
 
 ```js
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 
 // bu yönlendiriciye özel ara katman yazılım
 router.use(function timeLog (req, res, next) {
@@ -344,7 +344,7 @@ module.exports = router
 Daha sonra, yönlendirici modülünü uygulamada yükle:
 
 ```js
-var birds = require('./birds')
+const birds = require('./birds')
 
 // ...
 

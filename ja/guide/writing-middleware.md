@@ -46,8 +46,8 @@ lang: ja
 次に、簡単な「Hello World」Expressアプリケーションの例を示します。 この記事の残りの部分では、アプリケーションに2つのミドルウェア関数、つまり単純なログメッセージを出力する`myLogger`と、HTTP要求のタイムスタンプを表示する`requestTime`という2つのミドルウェア関数を定義して追加します。
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
@@ -61,7 +61,7 @@ app.listen(3000)
 次に、"myLogger"というミドルウェア関数の簡単な例を示します。この関数は、アプリケーションへのリクエストがそれを通過するときに、単に "LOGGED"を出力します。ミドルウェア関数は、`myLogger`という名前の変数に割り当てられます。
 
 ```js
-var myLogger = function (req, res, next) {
+const myLogger = function (req, res, next) {
   console.log('LOGGED')
   next()
 }
@@ -77,10 +77,10 @@ var myLogger = function (req, res, next) {
 例えば、次のコードは、ルート・パス (/) へのルートの前に `myLogger` ミドルウェア関数をロードします。
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
-var myLogger = function (req, res, next) {
+const myLogger = function (req, res, next) {
   console.log('LOGGED')
   next()
 }
@@ -107,7 +107,7 @@ app.listen(3000)
 次に、「requestTime」というミドルウェア関数を作成し、`requestTime`というプロパティとしてリクエストオブジェクトに追加します。
 
 ```js
-var requestTime = function (req, res, next) {
+const requestTime = function (req, res, next) {
   req.requestTime = Date.now()
   next()
 }
@@ -116,10 +116,10 @@ var requestTime = function (req, res, next) {
 これで、アプリケーションが `requestTime` ミドルウェア関数を使用するようになります。また、ルート・パス・ルートのコールバック関数は、ミドルウェア関数が `req` (リクエストオブジェクト) に追加するプロパティーを使用します。
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
-var requestTime = function (req, res, next) {
+const requestTime = function (req, res, next) {
   req.requestTime = Date.now()
   next()
 }
@@ -127,7 +127,7 @@ var requestTime = function (req, res, next) {
 app.use(requestTime)
 
 app.get('/', function (req, res) {
-  var responseText = 'Hello World!<br>'
+  let responseText = 'Hello World!<br>'
   responseText += '<small>Requested at: ' + req.requestTime + '</small>'
   res.send(responseText)
 })
@@ -159,7 +159,7 @@ module.exports = function (options) {
 ミドルウェアは以下のように使用できるようになりました。
 
 ```js
-var mw = require('./my-middleware.js')
+const mw = require('./my-middleware.js')
 
 app.use(mw({ option1: '1', option2: '2' }))
 ```

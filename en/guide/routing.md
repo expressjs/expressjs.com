@@ -25,8 +25,8 @@ to the next callback.
 The following code is an example of a very basic route.
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function (req, res) {
@@ -238,17 +238,17 @@ app.get('/example/b', function (req, res, next) {
 An array of callback functions can handle a route.  For example:
 
 ```js
-var cb0 = function (req, res, next) {
+const cb0 = function (req, res, next) {
   console.log('CB0')
   next()
 }
 
-var cb1 = function (req, res, next) {
+const cb1 = function (req, res, next) {
   console.log('CB1')
   next()
 }
 
-var cb2 = function (req, res) {
+const cb2 = function (req, res) {
   res.send('Hello from C!')
 }
 
@@ -258,12 +258,12 @@ app.get('/example/c', [cb0, cb1, cb2])
 A combination of independent functions and arrays of functions can handle a route.  For example:
 
 ```js
-var cb0 = function (req, res, next) {
+const cb0 = function (req, res, next) {
   console.log('CB0')
   next()
 }
 
-var cb1 = function (req, res, next) {
+const cb1 = function (req, res, next) {
   console.log('CB1')
   next()
 }
@@ -321,8 +321,8 @@ The following example creates a router as a module, loads a middleware function 
 Create a router file named `birds.js` in the app directory, with the following content:
 
 ```js
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 
 // middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
@@ -344,7 +344,7 @@ module.exports = router
 Then, load the router module in the app:
 
 ```js
-var birds = require('./birds')
+const birds = require('./birds')
 
 // ...
 

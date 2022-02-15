@@ -65,7 +65,7 @@ $ npm install --save helmet
 ```js
 // ...
 
-var helmet = require('helmet')
+const helmet = require('helmet')
 app.use(helmet())
 
 // ...
@@ -105,7 +105,7 @@ Cookie を介してアプリケーションが悪用されないように、デ�
 この問題を回避するには、汎用な Cookie 名を使用します。例えば、[express-session](https://www.npmjs.com/package/express-session) ミドルウェアを使用します。
 
 ```js
-var session = require('express-session')
+const session = require('express-session')
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: 's3Cur3',
@@ -126,11 +126,11 @@ app.use(session({
 次に、[cookie-session](https://www.npmjs.com/package/cookie-session) ミドルウェアの使用例を示します。
 
 ```js
-var session = require('cookie-session')
-var express = require('express')
-var app = express()
+const session = require('cookie-session')
+const express = require('express')
+const app = express()
 
-var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],

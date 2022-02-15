@@ -12,12 +12,12 @@ Use the `app.engine(ext, callback)` method to create your own template engine. `
 The following code is an example of implementing a very simple template engine for rendering `.ntl` files.
 
 ```js
-var fs = require('fs') // this engine requires the fs module
+const fs = require('fs') // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
     if (err) return callback(err)
     // this is an extremely simple template engine
-    var rendered = content.toString().replace('#title#', '<title>' + options.title + '</title>')
+    const rendered = content.toString().replace('#title#', '<title>' + options.title + '</title>')
       .replace('#message#', '<h1>' + options.message + '</h1>')
     return callback(null, rendered)
   })

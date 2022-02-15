@@ -48,7 +48,7 @@ For example:
 
 ```js
 app.get('/user/:id', async function (req, res, next) {
-  var user = await getUserById(req.params.id)
+  const user = await getUserById(req.params.id)
   res.send(user)
 })
 ```
@@ -205,8 +205,8 @@ app.use(function (err, req, res, next) {
 You define error-handling middleware last, after other `app.use()` and routes calls; for example:
 
 ```js
-var bodyParser = require('body-parser')
-var methodOverride = require('method-override')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -226,8 +226,8 @@ regular middleware functions. For example, to define an error-handler
 for requests made by using `XHR` and those without:
 
 ```js
-var bodyParser = require('body-parser')
-var methodOverride = require('method-override')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 app.use(bodyParser.urlencoded({
   extended: true

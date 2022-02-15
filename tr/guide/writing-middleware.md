@@ -48,8 +48,8 @@ Express 5 ile başlayarak, Promise döndüren ara yazılım fonksiyonları redde
 Aşağıdaki basit bir "Merhaba Dünya" Ekspres uygulaması örneği. Bu yazının kalanında uygulamaya üç ara yazılım fonksiyonu tanımlanıp eklenecektir: basit bir log mesajı yazdıran `myLogger`, HTTP isteğinin zaman damgasını (timestamp) gösteren `requestTime`, ve gelen çerezleri doğrulayan `validateCookies`.
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
 app.get('/', function (req, res) {
   res.send('Merhaba Dünya!')
@@ -62,7 +62,7 @@ app.listen(3000)
 İşte "myLogger" adında basit bir ara yazılım fonksiyonu. Uygulamaya gelen bir istek bu fonksiyondan geçtiğinde sadece "LOGGED" yazdırır. Bu ara yazılım fonksiyonu, `myLogger` adında bir değişkene atanmıştır.
 
 ```js
-var myLogger = function (req, res, next) {
+const myLogger = function (req, res, next) {
   console.log('LOGGED')
   next()
 }
@@ -76,10 +76,10 @@ Ara yazılım fonksiyonunu yüklemek için, ara yazılım fonksiyonunu belirtere
 Örneğin, aşağıdaki kod (/) kök yoluna yönlendirme yapılmadan önce `myLogger` ara yazılım fonksiyonunu yükler.
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
-var myLogger = function (req, res, next) {
+const myLogger = function (req, res, next) {
   console.log('LOGGED')
   next()
 }
@@ -106,7 +106,7 @@ Ara yazılımları yükleme sırası önemlidir: ilk olarak yüklenen ara yazıl
 Bir sonraki örnekte, "requestTime" adında bir ara yazılım fonksiyonu yaratıp `requestTime` adında bir özelliği istek objesine ekleyeceğiz.
 
 ```js
-var requestTime = function (req, res, next) {
+const requestTime = function (req, res, next) {
   req.requestTime = Date.now()
   next()
 }
@@ -115,10 +115,10 @@ var requestTime = function (req, res, next) {
 Uygulama şimdi `requestTime` ara yazılım fonksiyonunu kullanıyor. Ayrıca, kök yol rotasının geri çağırma fonksiyonu, ara yazılımın `req` istek objesine eklediği özelliği kullanıyor.
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
-var requestTime = function (req, res, next) {
+const requestTime = function (req, res, next) {
   req.requestTime = Date.now()
   next()
 }
@@ -126,7 +126,7 @@ var requestTime = function (req, res, next) {
 app.use(requestTime)
 
 app.get('/', function (req, res) {
-  var responseText = 'Hello World!<br>'
+  let responseText = 'Hello World!<br>'
   responseText += '<small>Requested at: ' + req.requestTime + '</small>'
   res.send(responseText)
 })
@@ -155,11 +155,11 @@ async function cookieValidator (cookies) {
 Burada `req` objesinden gelen çerezleri ayrıştırmak ve onları bizim `cookieValidator` fonksiyonuna geçmek için [`cookie-parser`](/resources/middleware/cookie-parser.html) ara yazılım fonksiyonunu kullanıyoruz. `validateCookies` ara yazılımı, ret durumunda otomatik olarak bizim hata işleyicisini tetikleyen bir Promise döndürür.
 
 ```js
-var express = require('express')
-var cookieParser = require('cookie-parser')
-var cookieValidator = require('./cookieValidator')
+const express = require('express')
+const cookieParser = require('cookie-parser')
+const cookieValidator = require('./cookieValidator')
 
-var app = express()
+const app = express()
 
 async function validateCookies (req, res, next) {
   await cookieValidator(req.cookies)
@@ -204,7 +204,7 @@ module.exports = function (options) {
 Bu ara yazılım şimdi aşağıdaki gibi kullanılabilir.
 
 ```js
-var mw = require('./my-middleware.js')
+const mw = require('./my-middleware.js')
 
 app.use(mw({ option1: '1', option2: '2' }))
 ```

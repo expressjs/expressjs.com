@@ -72,7 +72,7 @@ $ npm install --save helmet
 ```js
 // ...
 
-var helmet = require('helmet')
+const helmet = require('helmet')
 app.use(helmet())
 
 // ...
@@ -114,7 +114,7 @@ app.disable('x-powered-by')
 이러한 문제점을 피하려면 일반적인 쿠키 이름을 사용하십시오. 예를 들면 [express-session](https://www.npmjs.com/package/express-session) 미들웨어를 이용해 다음과 같이 하십시오.
 
 ```js
-var session = require('express-session')
+const session = require('express-session')
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: 's3Cur3',
@@ -135,11 +135,11 @@ app.use(session({
 다음에는 [cookie-session](https://www.npmjs.com/package/cookie-session) 미들웨어를 사용한 예가 표시되어 있습니다.
 
 ```js
-var session = require('cookie-session')
-var express = require('express')
-var app = express()
+const session = require('cookie-session')
+const express = require('express')
+const app = express()
 
-var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],

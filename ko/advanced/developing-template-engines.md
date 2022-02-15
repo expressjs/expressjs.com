@@ -12,12 +12,12 @@ lang: ko
 다음의 코드는 `.ntl` 파일을 렌더링하기 위한 매우 간단한 템플릿 엔진을 구현하는 예입니다.
 
 ```js
-var fs = require('fs') // this engine requires the fs module
+const fs = require('fs') // this engine requires the fs module
 app.engine('ntl', function (filePath, options, callback) { // define the template engine
   fs.readFile(filePath, function (err, content) {
     if (err) return callback(err)
     // this is an extremely simple template engine
-    var rendered = content.toString().replace('#title#', '<title>' + options.title + '</title>')
+    const rendered = content.toString().replace('#title#', '<title>' + options.title + '</title>')
       .replace('#message#', '<h1>' + options.message + '</h1>')
     return callback(null, rendered)
   })

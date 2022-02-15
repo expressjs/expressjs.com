@@ -37,7 +37,7 @@ Bind application-level middleware to an instance of the [app object](/{{ page.la
 This example shows a middleware function with no mount path. The function is executed every time the app receives a request.
 
 ```js
-var app = express()
+const app = express()
 
 app.use(function (req, res, next) {
   console.log('Time:', Date.now())
@@ -121,15 +121,15 @@ app.get('/user/:id', function (req, res, next) {
 Router-level middleware works in the same way as application-level middleware, except it is bound to an instance of `express.Router()`.
 
 ```js
-var router = express.Router()
+const router = express.Router()
 ```
 Load router-level middleware by using the `router.use()` and `router.METHOD()` functions.
 
 The following example code replicates the middleware system that is shown above for application-level middleware, by using router-level middleware:
 
 ```js
-var app = express()
-var router = express.Router()
+const app = express()
+const router = express.Router()
 
 // a middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
@@ -173,8 +173,8 @@ to pass control back out of the router instance.
 This example shows a middleware sub-stack that handles GET requests to the `/user/:id` path.
 
 ```js
-var app = express()
-var router = express.Router()
+const app = express()
+const router = express.Router()
 
 // predicate the router with a check and bail out when needed
 router.use(function (req, res, next) {
@@ -233,9 +233,9 @@ $ npm install cookie-parser
 ```
 
 ```js
-var express = require('express')
-var app = express()
-var cookieParser = require('cookie-parser')
+const express = require('express')
+const app = express()
+const cookieParser = require('cookie-parser')
 
 // load the cookie-parsing middleware
 app.use(cookieParser())

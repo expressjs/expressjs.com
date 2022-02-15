@@ -40,8 +40,8 @@ $ npm install cassandra-driver
 ### 示例
 
 ```js
-var cassandra = require('cassandra-driver')
-var client = new cassandra.Client({ contactPoints: ['localhost'] })
+const cassandra = require('cassandra-driver')
+const client = new cassandra.Client({ contactPoints: ['localhost'] })
 
 client.execute('select key from system.local', function (err, result) {
   if (err) throw err
@@ -62,8 +62,8 @@ $ npm install couchbase
 ### 示例
 
 ```js
-var couchbase = require('couchbase')
-var bucket = (new couchbase.Cluster('http://localhost:8091')).openBucket('bucketName')
+const couchbase = require('couchbase')
+const bucket = (new couchbase.Cluster('http://localhost:8091')).openBucket('bucketName')
 
 // add a document to a bucket
 bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, function (err, result) {
@@ -75,8 +75,8 @@ bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, function (err, res
 })
 
 // get all documents with shoe size 13
-var n1ql = 'SELECT d.* FROM `bucketName` d WHERE shoeSize = $1'
-var query = N1qlQuery.fromString(n1ql)
+const n1ql = 'SELECT d.* FROM `bucketName` d WHERE shoeSize = $1'
+const query = N1qlQuery.fromString(n1ql)
 bucket.query(query, [13], function (err, result) {
   if (err) {
     console.log(err)
@@ -99,9 +99,9 @@ $ npm install nano
 ### 示例
 
 ```js
-var nano = require('nano')('http://localhost:5984')
+const nano = require('nano')('http://localhost:5984')
 nano.db.create('books')
-var books = nano.db.use('books')
+const books = nano.db.use('books')
 
 // Insert a book document in the books database
 books.insert({ name: 'The Art of war' }, null, function (err, body) {
@@ -135,8 +135,8 @@ $ npm install level levelup leveldown
 ### 示例
 
 ```js
-var levelup = require('levelup')
-var db = levelup('./mydb')
+const levelup = require('levelup')
+const db = levelup('./mydb')
 
 db.put('name', 'LevelUP', function (err) {
   if (err) return console.log('Ooops!', err)
@@ -162,8 +162,8 @@ $ npm install mysql
 ### 示例
 
 ```js
-var mysql = require('mysql')
-var connection = mysql.createConnection({
+const mysql = require('mysql')
+const connection = mysql.createConnection({
   host: 'localhost',
   user: 'dbuser',
   password: 's3kreee7',
@@ -194,7 +194,7 @@ $ npm install mongodb
 ### 示例（v2.*）
 
 ```js
-var MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient
 
 MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
   if (err) throw err
@@ -210,12 +210,12 @@ MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
 ### 示例（v3.*）
 
 ```js
-var MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient
 
 MongoClient.connect('mongodb://localhost:27017/animals', function (err, client) {
   if (err) throw err
 
-  var db = client.db('animals')
+  const db = client.db('animals')
 
   db.collection('mammals').find().toArray(function (err, result) {
     if (err) throw err
@@ -240,7 +240,7 @@ $ npm install apoc
 ### 示例
 
 ```js
-var apoc = require('apoc')
+const apoc = require('apoc')
 
 apoc.query('match (n) return n').exec().then(
   function (response) {
@@ -311,8 +311,8 @@ $ npm install pg-promise
 ### 示例
 
 ```js
-var pgp = require('pg-promise')(/* options */)
-var db = pgp('postgres://username:password@host:port/database')
+const pgp = require('pg-promise')(/* options */)
+const db = pgp('postgres://username:password@host:port/database')
 
 db.one('SELECT $1 AS value', 123)
   .then(function (data) {
@@ -336,8 +336,8 @@ $ npm install redis
 ### 示例
 
 ```js
-var redis = require('redis')
-var client = redis.createClient()
+const redis = require('redis')
+const client = redis.createClient()
 
 client.on('error', function (err) {
   console.log('Error ' + err)
@@ -371,10 +371,10 @@ $ npm install tedious
 ### 示例
 
 ```js
-var Connection = require('tedious').Connection
-var Request = require('tedious').Request
+const Connection = require('tedious').Connection
+const Request = require('tedious').Request
 
-var config = {
+const config = {
   server: 'localhost',
   authentication: {
     type: 'default',
@@ -385,7 +385,7 @@ var config = {
   }
 }
 
-var connection = new Connection(config)
+const connection = new Connection(config)
 
 connection.on('connect', function (err) {
   if (err) {
@@ -432,14 +432,14 @@ $ npm install sqlite3
 ### 示例
 
 ```js
-var sqlite3 = require('sqlite3').verbose()
-var db = new sqlite3.Database(':memory:')
+const sqlite3 = require('sqlite3').verbose()
+const db = new sqlite3.Database(':memory:')
 
 db.serialize(function () {
   db.run('CREATE TABLE lorem (info TEXT)')
-  var stmt = db.prepare('INSERT INTO lorem VALUES (?)')
+  const stmt = db.prepare('INSERT INTO lorem VALUES (?)')
 
-  for (var i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     stmt.run('Ipsum ' + i)
   }
 
@@ -466,8 +466,8 @@ $ npm install elasticsearch
 ### 示例
 
 ```js
-var elasticsearch = require('elasticsearch')
-var client = elasticsearch.Client({
+const elasticsearch = require('elasticsearch')
+const client = elasticsearch.Client({
   host: 'localhost:9200'
 })
 
@@ -483,7 +483,7 @@ client.search({
     }
   }
 }).then(function (response) {
-  var hits = response.hits.hits
+  const hits = response.hits.hits
 }, function (error) {
   console.trace(error.message)
 })
