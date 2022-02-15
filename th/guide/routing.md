@@ -28,7 +28,7 @@ const express = require('express')
 const app = express()
 
 // respond with "hello world" when a GET request is made to the homepage
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('hello world')
 })
 ```
@@ -41,12 +41,12 @@ The following code is an example of routes that are defined for the GET and the 
 
 ```js
 // GET method route
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('GET request to the homepage')
 })
 
 // POST method route
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
   res.send('POST request to the homepage')
 })
 ```
@@ -57,7 +57,7 @@ or a full list, see [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD).
 There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods.  For example, the following handler is executed for requests to the route "/secret" whether using GET, POST, PUT, DELETE, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
-app.all('/secret', function (req, res, next) {
+app.all('/secret', (req, res, next) => {
   console.log('Accessing the secret section ...')
   next() // pass control to the next handler
 })
@@ -84,7 +84,7 @@ Here are some examples of route paths based on strings.
 This route path will match requests to the root route, `/`.
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('root')
 })
 ```
@@ -92,7 +92,7 @@ app.get('/', function (req, res) {
 This route path will match requests to `/about`.
 
 ```js
-app.get('/about', function (req, res) {
+app.get('/about', (req, res) => {
   res.send('about')
 })
 ```
@@ -100,7 +100,7 @@ app.get('/about', function (req, res) {
 This route path will match requests to `/random.text`.
 
 ```js
-app.get('/random.text', function (req, res) {
+app.get('/random.text', (req, res) => {
   res.send('random.text')
 })
 ```
@@ -110,7 +110,7 @@ Here are some examples of route paths based on string patterns.
 This route path will match `acd` and `abcd`.
 
 ```js
-app.get('/ab?cd', function (req, res) {
+app.get('/ab?cd', (req, res) => {
   res.send('ab?cd')
 })
 ```
@@ -118,7 +118,7 @@ app.get('/ab?cd', function (req, res) {
 This route path will match `abcd`, `abbcd`, `abbbcd`, and so on.
 
 ```js
-app.get('/ab+cd', function (req, res) {
+app.get('/ab+cd', (req, res) => {
   res.send('ab+cd')
 })
 ```
@@ -126,7 +126,7 @@ app.get('/ab+cd', function (req, res) {
 This route path will match `abcd`, `abxcd`, `abRANDOMcd`, `ab123cd`, and so on.
 
 ```js
-app.get('/ab*cd', function (req, res) {
+app.get('/ab*cd', (req, res) => {
   res.send('ab*cd')
 })
 ```
@@ -134,7 +134,7 @@ app.get('/ab*cd', function (req, res) {
 This route path will match `/abe` and `/abcde`.
 
 ```js
-app.get('/ab(cd)?e', function (req, res) {
+app.get('/ab(cd)?e', (req, res) => {
   res.send('ab(cd)?e')
 })
 ```
@@ -144,7 +144,7 @@ Examples of route paths based on regular expressions:
 This route path will match anything with an "a" in the route name.
 
 ```js
-app.get(/a/, function (req, res) {
+app.get(/a/, (req, res) => {
   res.send('/a/')
 })
 ```
@@ -152,7 +152,7 @@ app.get(/a/, function (req, res) {
 This route path will match `butterfly` and `dragonfly`, but not `butterflyman`, `dragonflyman`, and so on.
 
 ```js
-app.get(/.*fly$/, function (req, res) {
+app.get(/.*fly$/, (req, res) => {
   res.send('/.*fly$/')
 })
 ```
@@ -170,7 +170,7 @@ req.params: { "userId": "34", "bookId": "8989" }
 To define routes with route parameters, simply specify the route parameters in the path of the route as shown below.
 
 ```js
-app.get('/users/:userId/books/:bookId', function (req, res) {
+app.get('/users/:userId/books/:bookId', (req, res) => {
   res.send(req.params)
 })
 ```
@@ -218,7 +218,7 @@ Route handlers can be in the form of a function, an array of functions, or combi
 A single callback function can handle a route.  For example:
 
 ```js
-app.get('/example/a', function (req, res) {
+app.get('/example/a', (req, res) => {
   res.send('Hello from A!')
 })
 ```
@@ -226,10 +226,10 @@ app.get('/example/a', function (req, res) {
 More than one callback function can handle a route (make sure you specify the `next` object). For example:
 
 ```js
-app.get('/example/b', function (req, res, next) {
+app.get('/example/b', (req, res, next) => {
   console.log('the response will be sent by the next function ...')
   next()
-}, function (req, res) {
+}, (req, res) => {
   res.send('Hello from B!')
 })
 ```
@@ -267,10 +267,10 @@ const cb1 = function (req, res, next) {
   next()
 }
 
-app.get('/example/d', [cb0, cb1], function (req, res, next) {
+app.get('/example/d', [cb0, cb1], (req, res, next) => {
   console.log('the response will be sent by the next function ...')
   next()
-}, function (req, res) {
+}, (req, res) => {
   res.send('Hello from D!')
 })
 ```
@@ -300,13 +300,13 @@ Here is an example of chained route handlers that are defined by using `app.rout
 
 ```js
 app.route('/book')
-  .get(function (req, res) {
+  .get((req, res) => {
     res.send('Get a random book')
   })
-  .post(function (req, res) {
+  .post((req, res) => {
     res.send('Add a book')
   })
-  .put(function (req, res) {
+  .put((req, res) => {
     res.send('Update the book')
   })
 ```
@@ -324,16 +324,16 @@ const express = require('express')
 const router = express.Router()
 
 // middleware that is specific to this router
-router.use(function timeLog (req, res, next) {
+router.use((req, res, next) => {
   console.log('Time: ', Date.now())
   next()
 })
 // define the home page route
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   res.send('Birds home page')
 })
 // define the about route
-router.get('/about', function (req, res) {
+router.get('/about', (req, res) => {
   res.send('About birds')
 })
 

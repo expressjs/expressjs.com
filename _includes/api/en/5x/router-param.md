@@ -17,9 +17,9 @@ Unlike `app.param()`, `router.param()` does not accept an array of route paramet
 For example, when `:user` is present in a route path, you may map user loading logic to automatically provide `req.user` to the route, or perform validations on the parameter input.
 
 ```js
-router.param('user', function (req, res, next, id) {
+router.param('user', (req, res, next, id) => {
   // try to get the user details from the User model and attach it to the request object
-  User.find(id, function (err, user) {
+  User.find(id, (err, user) => {
     if (err) {
       next(err)
     } else if (user) {
@@ -37,17 +37,17 @@ Param callback functions are local to the router on which they are defined. They
 A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following examples.
 
 ```js
-router.param('id', function (req, res, next, id) {
+router.param('id', (req, res, next, id) => {
   console.log('CALLED ONLY ONCE')
   next()
 })
 
-router.get('/user/:id', function (req, res, next) {
+router.get('/user/:id', (req, res, next) => {
   console.log('although this matches')
   next()
 })
 
-router.get('/user/:id', function (req, res) {
+router.get('/user/:id', (req, res) => {
   console.log('and this matches too')
   res.end()
 })
@@ -79,8 +79,8 @@ const app = express()
 const router = express.Router()
 
 // customizing the behavior of router.param()
-router.param(function (param, option) {
-  return function (req, res, next, val) {
+router.param((param, option) => {
+  return (req, res, next, val) => {
     if (val === option) {
       next()
     } else {
@@ -93,13 +93,13 @@ router.param(function (param, option) {
 router.param('id', 1337)
 
 // route to trigger the capture
-router.get('/user/:id', function (req, res) {
+router.get('/user/:id', (req, res) => {
   res.send('OK')
 })
 
 app.use(router)
 
-app.listen(3000, function () {
+app.listen(3000, () => {
   console.log('Ready')
 })
 ```
@@ -107,8 +107,8 @@ app.listen(3000, function () {
 In this example, the `router.param(name, callback)` signature remains the same, but instead of a middleware callback, a custom data type checking function has been defined to validate the data type of the user id.
 
 ```js
-router.param(function (param, validator) {
-  return function (req, res, next, val) {
+router.param((param, validator) => {
+  return (req, res, next, val) => {
     if (validator(val)) {
       next()
     } else {
@@ -117,7 +117,7 @@ router.param(function (param, validator) {
   }
 })
 
-router.param('id', function (candidate) {
+router.param('id', (candidate) => {
   return !isNaN(parseFloat(candidate)) && isFinite(candidate)
 })
 ```

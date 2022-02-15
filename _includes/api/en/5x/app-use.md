@@ -16,7 +16,7 @@ Since `path` defaults to "/", middleware mounted without a path will be executed
 For example, this middleware function will be executed for _every_ request to the app:
 
 ```js
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   console.log('Time: %d', Date.now())
   next()
 })
@@ -37,12 +37,12 @@ Middleware functions are executed sequentially, therefore the order of middlewar
 
 ```js
 // this middleware will not allow the request to go beyond it
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.send('Hello World')
 })
 
 // requests will never reach this route
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('Welcome')
 })
 ```
@@ -54,7 +54,7 @@ Error-handling middleware always takes _four_ arguments.  You must provide four 
 Define error-handling middleware functions in the same way as other middleware functions, except with four arguments instead of three, specifically with the signature `(err, req, res, next)`):
 
 ```js
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 })
@@ -83,7 +83,7 @@ mounting middleware.
 This will match paths starting with `/abcd`:
 
 ```js
-app.use('/abcd', function (req, res, next) {
+app.use('/abcd', (req, res, next) => {
   next()
 })
 ```
@@ -97,7 +97,7 @@ app.use('/abcd', function (req, res, next) {
 This will match paths starting with `/abcd` and `/abd`:
 
 ```js
-app.use('/ab(c?)d', function (req, res, next) {
+app.use('/ab(c?)d', (req, res, next) => {
   next()
 })
 ```
@@ -111,7 +111,7 @@ app.use('/ab(c?)d', function (req, res, next) {
 This will match paths starting with `/abc` and `/xyz`:
 
 ```js
-app.use(/\/abc|\/xyz/, function (req, res, next) {
+app.use(/\/abc|\/xyz/, (req, res, next) => {
   next()
 })
 ```
@@ -125,7 +125,7 @@ app.use(/\/abc|\/xyz/, function (req, res, next) {
 This will match paths starting with `/abcd`, `/xyza`, `/lmn`, and `/pqr`:
 
 ```js
-app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
+app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], (req, res, next) => {
   next()
 })
 ```
@@ -160,7 +160,7 @@ Even though the examples are for `app.use()`, they are also valid for `app.use()
 You can define and mount a middleware function locally.
 
 ```js
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   next()
 })
 ```
@@ -169,7 +169,7 @@ A router is valid middleware.
 
 ```js
 const router = express.Router()
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
   next()
 })
 app.use(router)
@@ -178,7 +178,7 @@ app.use(router)
 An Express app is valid middleware.
 ```js
 const subApp = express()
-subApp.get('/', function (req, res, next) {
+subApp.get('/', (req, res, next) => {
   next()
 })
 app.use(subApp)
@@ -194,12 +194,12 @@ You can specify more than one middleware function at the same mount path.
 
 ```js
 const r1 = express.Router()
-r1.get('/', function (req, res, next) {
+r1.get('/', (req, res, next) => {
   next()
 })
 
 const r2 = express.Router()
-r2.get('/', function (req, res, next) {
+r2.get('/', (req, res, next) => {
   next()
 })
 
@@ -216,12 +216,12 @@ Use an array to group middleware logically.
 
 ```js
 const r1 = express.Router()
-r1.get('/', function (req, res, next) {
+r1.get('/', (req, res, next) => {
   next()
 })
 
 const r2 = express.Router()
-r2.get('/', function (req, res, next) {
+r2.get('/', (req, res, next) => {
   next()
 })
 
@@ -241,13 +241,13 @@ function mw1 (req, res, next) { next() }
 function mw2 (req, res, next) { next() }
 
 const r1 = express.Router()
-r1.get('/', function (req, res, next) { next() })
+r1.get('/', (req, res, next) => { next() })
 
 const r2 = express.Router()
-r2.get('/', function (req, res, next) { next() })
+r2.get('/', (req, res, next) => { next() })
 
 const subApp = express()
-subApp.get('/', function (req, res, next) { next() })
+subApp.get('/', (req, res, next) => { next() })
 
 app.use(mw1, [mw2, r1, r2], subApp)
 ```

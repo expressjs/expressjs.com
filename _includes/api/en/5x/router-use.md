@@ -15,19 +15,19 @@ const router = express.Router()
 
 // simple logger for this router's requests
 // all requests to this router will first hit this middleware
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   console.log('%s %s %s', req.method, req.url, req.path)
   next()
 })
 
 // this will only be invoked if the path starts with /bar from the mount point
-router.use('/bar', function (req, res, next) {
+router.use('/bar', (req, res, next) => {
   // ... maybe some additional /bar logging ...
   next()
 })
 
 // always invoked
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   res.send('Hello World')
 })
 
@@ -49,7 +49,7 @@ const logger = require('morgan')
 
 router.use(logger())
 router.use(express.static(path.join(__dirname, 'public')))
-router.use(function (req, res) {
+router.use((req, res) => {
   res.send('Hello')
 })
 ```
@@ -61,7 +61,7 @@ before adding the logger middleware:
 ```js
 router.use(express.static(path.join(__dirname, 'public')))
 router.use(logger())
-router.use(function (req, res) {
+router.use((req, res) => {
   res.send('Hello')
 })
 ```
@@ -89,13 +89,13 @@ const openRouter = express.Router()
 
 authRouter.use(require('./authenticate').basic(usersdb))
 
-authRouter.get('/:user_id/edit', function (req, res, next) {
+authRouter.get('/:user_id/edit', (req, res, next) => {
   // ... Edit user UI ...
 })
-openRouter.get('/', function (req, res, next) {
+openRouter.get('/', (req, res, next) => {
   // ... List users ...
 })
-openRouter.get('/:user_id', function (req, res, next) {
+openRouter.get('/:user_id', (req, res, next) => {
   // ... View user ...
 })
 

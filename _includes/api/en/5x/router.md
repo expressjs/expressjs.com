@@ -15,14 +15,14 @@ and so on) to it just like an application.  For example:
 
 ```js
 // invoked for any requests passed to this router
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   // .. some logic here .. like any other middleware
   next()
 })
 
 // will handle any request that ends in /events
 // depends on where the router is "use()'d"
-router.get('/events', function (req, res, next) {
+router.get('/events', (req, res, next) => {
   // ..
 })
 ```

@@ -263,7 +263,7 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
   Custom trust implementation. Use this only if you know what you are doing.
 
 ```js
-app.set('trust proxy', function (ip) {
+app.set('trust proxy', (ip) => {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
   else return false
 })
@@ -308,7 +308,7 @@ The [express.static](#express.static) middleware ignores these settings.
   <td markdown="1">Custom ETag function implementation. Use this only if you know what you are doing.
 
 ```js
-app.set('etag', function (body, encoding) {
+app.set('etag', (body, encoding) => {
   return generateHash(body, encoding) // consider the function is defined
 })
 ```

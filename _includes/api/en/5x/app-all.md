@@ -11,7 +11,7 @@ The following callback is executed for requests to `/secret` whether using
 GET, POST, PUT, DELETE, or any other HTTP request method:
 
 ```js
-app.all('/secret', function (req, res, next) {
+app.all('/secret', (req, res, next) => {
   console.log('Accessing the secret section ...')
   next() // pass control to the next handler
 })

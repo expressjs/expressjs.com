@@ -22,7 +22,7 @@ const range = req.range(1000)
 // the type of the range
 if (range.type === 'bytes') {
   // the ranges
-  range.forEach(function (r) {
+  range.forEach((r) => {
     // do something with r.start and r.end
   })
 }

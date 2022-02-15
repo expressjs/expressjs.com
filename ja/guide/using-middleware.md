@@ -40,7 +40,7 @@ Express アプリケーションは、以下のタイプのミドルウェアを
 ```js
 const app = express()
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   console.log('Time:', Date.now())
   next()
 })
@@ -49,7 +49,7 @@ app.use(function (req, res, next) {
 次の例は、`/user/:id` パスにマウントされたミドルウェア関数を示しています。この関数は、`/user/:id` パスに対するすべてのタイプの HTTP リクエストで実行されます。
 
 ```js
-app.use('/user/:id', function (req, res, next) {
+app.use('/user/:id', (req, res, next) => {
   console.log('Request Type:', req.method)
   next()
 })
@@ -58,7 +58,7 @@ app.use('/user/:id', function (req, res, next) {
 次の例は、ルートとそのハンドラー関数 (ミドルウェア・システム) を示しています。この関数は、`/user/:id` パスへの GET リクエストを処理します。
 
 ```js
-app.get('/user/:id', function (req, res, next) {
+app.get('/user/:id', (req, res, next) => {
   res.send('USER')
 })
 ```
@@ -67,10 +67,10 @@ app.get('/user/:id', function (req, res, next) {
 `/user/:id` パスへのすべてのタイプの HTTP リクエストに関するリクエスト情報を出力するミドルウェア・サブスタックを示しています。
 
 ```js
-app.use('/user/:id', function (req, res, next) {
+app.use('/user/:id', (req, res, next) => {
   console.log('Request URL:', req.originalUrl)
   next()
-}, function (req, res, next) {
+}, (req, res, next) => {
   console.log('Request Type:', req.method)
   next()
 })
@@ -81,15 +81,15 @@ app.use('/user/:id', function (req, res, next) {
 次の例は、`/user/:id` パスへの GET リクエストを処理するミドルウェア・サブスタックを示しています。
 
 ```js
-app.get('/user/:id', function (req, res, next) {
+app.get('/user/:id', (req, res, next) => {
   console.log('ID:', req.params.id)
   next()
-}, function (req, res, next) {
+}, (req, res, next) => {
   res.send('User Info')
 })
 
 // handler for the /user/:id path, which prints the user ID
-app.get('/user/:id', function (req, res, next) {
+app.get('/user/:id', (req, res, next) => {
   res.end(req.params.id)
 })
 ```
@@ -100,18 +100,18 @@ app.get('/user/:id', function (req, res, next) {
 次の例は、`/user/:id` パスへの GET リクエストを処理するミドルウェア・サブスタックを示しています。
 
 ```js
-app.get('/user/:id', function (req, res, next) {
+app.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next route
   if (Number(req.params.id) === 0) next('route')
   // otherwise pass the control to the next middleware function in this stack
   else next()
-}, function (req, res, next) {
+}, (req, res, next) => {
   // render a regular page
   res.render('regular')
 })
 
 // handler for the /user/:id path, which renders a special page
-app.get('/user/:id', function (req, res, next) {
+app.get('/user/:id', (req, res, next) => {
   res.render('special')
 })
 ```
@@ -133,33 +133,33 @@ const app = express()
 const router = express.Router()
 
 // a middleware function with no mount path. This code is executed for every request to the router
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   console.log('Time:', Date.now())
   next()
 })
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
-router.use('/user/:id', function (req, res, next) {
+router.use('/user/:id', (req, res, next) => {
   console.log('Request URL:', req.originalUrl)
   next()
-}, function (req, res, next) {
+}, (req, res, next) => {
   console.log('Request Type:', req.method)
   next()
 })
 
 // a middleware sub-stack that handles GET requests to the /user/:id path
-router.get('/user/:id', function (req, res, next) {
+router.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next router
   if (Number(req.params.id) === 0) next('route')
   // otherwise pass control to the next middleware function in this stack
   else next()
-}, function (req, res, next) {
+}, (req, res, next) => {
   // render a regular page
   res.render('regular')
 })
 
 // handler for the /user/:id path, which renders a special page
-router.get('/user/:id', function (req, res, next) {
+router.get('/user/:id', (req, res, next) => {
   console.log(req.params.id)
   res.render('special')
 })
@@ -177,17 +177,17 @@ const app = express()
 const router = express.Router()
 
 // predicate the router with a check and bail out when needed
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   if (!req.headers['x-auth']) return next('router')
   next()
 })
 
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   res.send('hello, user!')
 })
 
 // use the router and 401 anything falling through
-app.use('/admin', router, function (req, res) {
+app.use('/admin', router, (req, res) => {
   res.sendStatus(401)
 })
 ```
@@ -202,7 +202,7 @@ app.use('/admin', router, function (req, res) {
 エラー処理ミドルウェア関数は、その他のミドルウェア関数と同じ方法で定義しますが、例外として、シグニチャーで3つではなく4つの引数 `(err、req、res、next)`) を明示的に指定します。
 
 ```js
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 })

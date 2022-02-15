@@ -3,7 +3,7 @@
 Contains the currently-matched route, a string.  For example:
 
 ```js
-app.get('/user/:id?', function userIdHandler (req, res) {
+app.get('/user/:id?', (req, res) => {
   console.log(req.route)
   res.send('GET')
 })

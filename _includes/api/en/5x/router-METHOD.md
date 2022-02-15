@@ -24,7 +24,7 @@ these matches, for example "GET /" would match the following route, as would
 "GET /?name=tobi".
 
 ```js
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   res.send('hello world')
 })
 ```
@@ -34,10 +34,10 @@ constraints, for example the following would match "GET /commits/71dbb9c" as wel
 as "GET /commits/71dbb9c..4c084f9".
 
 ```js
-router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function (req, res) {
+router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, (req, res) => {
   const from = req.params[0]
   const to = req.params[1] || 'HEAD'
-  res.send('commit range ' + from + '..' + to)
+  res.send(`commit range ${from}..${to}`)
 })
 ```
 
@@ -53,13 +53,13 @@ function fn (req, res, next) {
   console.log('I come here')
   next('router')
 }
-router.get('/foo', fn, function (req, res, next) {
+router.get('/foo', fn, (req, res, next) => {
   console.log('I dont come here')
 })
-router.get('/foo', function (req, res, next) {
+router.get('/foo', (req, res, next) => {
   console.log('I dont come here')
 })
-app.get('/foo', function (req, res) {
+app.get('/foo', (req, res) => {
   console.log(' I come here too')
   res.end('good')
 })

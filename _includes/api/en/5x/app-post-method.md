@@ -8,7 +8,7 @@ For more information, see the [routing guide](/guide/routing.html).
 #### Example
 
 ```js
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
   res.send('POST request to homepage')
 })
 ```

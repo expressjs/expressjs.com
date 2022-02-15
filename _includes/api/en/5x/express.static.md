@@ -79,7 +79,7 @@ const options = {
   index: false,
   maxAge: '1d',
   redirect: false,
-  setHeaders: function (res, path, stat) {
+  setHeaders (res, path, stat) {
     res.set('x-timestamp', Date.now())
   }
 }

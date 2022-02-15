@@ -10,34 +10,34 @@ Building on the `router.param()` example above, the following code shows how to 
 ```js
 const router = express.Router()
 
-router.param('user_id', function (req, res, next, id) {
+router.param('user_id', (req, res, next, id) => {
   // sample user, would actually fetch from DB, etc...
   req.user = {
-    id: id,
+    id,
     name: 'TJ'
   }
   next()
 })
 
 router.route('/users/:user_id')
-  .all(function (req, res, next) {
+  .all((req, res, next) => {
   // runs for all HTTP verbs first
   // think of it as route specific middleware!
     next()
   })
-  .get(function (req, res, next) {
+  .get((req, res, next) => {
     res.json(req.user)
   })
-  .put(function (req, res, next) {
+  .put((req, res, next) => {
   // just an example of maybe updating the user
     req.user.name = req.params.name
     // save user ... etc
     res.json(req.user)
   })
-  .post(function (req, res, next) {
+  .post((req, res, next) => {
     next(new Error('not implemented'))
   })
-  .delete(function (req, res, next) {
+  .delete((req, res, next) => {
     next(new Error('not implemented'))
   })
 ```

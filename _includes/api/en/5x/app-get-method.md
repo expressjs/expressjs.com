@@ -9,7 +9,7 @@ For more information, see the [routing guide](/guide/routing.html).
 #### Example
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('GET request to homepage')
 })
 ```

@@ -16,12 +16,12 @@ For details, see [Application settings](/en/5x/api.html#app.settings.table).
 ```js
 const admin = express()
 
-admin.on('mount', function (parent) {
+admin.on('mount', (parent) => {
   console.log('Admin Mounted')
   console.log(parent) // refers to the parent app
 })
 
-admin.get('/', function (req, res) {
+admin.get('/', (req, res) => {
   res.send('Admin Homepage')
 })
 

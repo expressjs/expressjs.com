@@ -34,7 +34,7 @@ The following examples illustrate defining simple routes.
 Respond with `Hello World!` on the homepage:
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 ```
@@ -42,7 +42,7 @@ app.get('/', function (req, res) {
 Respond to POST request on the root route (`/`), the application's home page:
 
 ```js
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
   res.send('Got a POST request')
 })
 ```
@@ -50,7 +50,7 @@ app.post('/', function (req, res) {
 Respond to a PUT request to the `/user` route:
 
 ```js
-app.put('/user', function (req, res) {
+app.put('/user', (req, res) => {
   res.send('Got a PUT request at /user')
 })
 ```
@@ -58,7 +58,7 @@ app.put('/user', function (req, res) {
 Respond to a DELETE request to the `/user` route:
 
 ```js
-app.delete('/user', function (req, res) {
+app.delete('/user', (req, res) => {
   res.send('Got a DELETE request at /user')
 })
 ```

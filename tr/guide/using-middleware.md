@@ -41,7 +41,7 @@ Bu örnek, hedef yolu bulunmayan bir ara yazılım fonksiyonunu gösteriyor. Fon
 ```js
 const app = express()
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   console.log('Time:', Date.now())
   next()
 })
@@ -50,7 +50,7 @@ app.use(function (req, res, next) {
 Bu örnek, `/user/:id` yoluna yerleştirilmiş bir ara yazılım fonksiyonu gösterir. Bu fonksiyon `/user/:id` yoluna yapılan herhangi bir HTTP isteğinde çalışır.
 
 ```js
-app.use('/user/:id', function (req, res, next) {
+app.use('/user/:id', (req, res, next) => {
   console.log('Request Type:', req.method)
   next()
 })
@@ -59,7 +59,7 @@ app.use('/user/:id', function (req, res, next) {
 Bu örnek bir rotayı ve işleyici fonksiyonunu gösterir (ara yazılım sistemi). Fonksiyon `/user/:id` yoluna yapılan GET isteklerini karşılıyor.
 
 ```js
-app.get('/user/:id', function (req, res, next) {
+app.get('/user/:id', (req, res, next) => {
   res.send('USER')
 })
 ```
@@ -68,10 +68,10 @@ Bu örnek, hedef bir yol ile, yerleştirilmiş bir noktada bir dizi ara yazılı
 `/user/:id` yoluna yapılan herhangi bir tipte HTTP isteğinin istek bilgilerini yazdıran bir ara yazılım alt kümesini gösterir.
 
 ```js
-app.use('/user/:id', function (req, res, next) {
+app.use('/user/:id', (req, res, next) => {
   console.log('Request URL:', req.originalUrl)
   next()
-}, function (req, res, next) {
+}, (req, res, next) => {
   console.log('Request Type:', req.method)
   next()
 })
@@ -82,15 +82,15 @@ Rota işleyicileri bir yol için birden fazla rota tanımlamaya olanak sağlar. 
 Bu örnek `/user/:id` yoluna yapılan GET isteklerini işleyen ara yazılım alt kümesini gösterir.
 
 ```js
-app.get('/user/:id', function (req, res, next) {
+app.get('/user/:id', (req, res, next) => {
   console.log('ID:', req.params.id)
   next()
-}, function (req, res, next) {
+}, (req, res, next) => {
   res.send('User Info')
 })
 
 // kullanıcı ID'sini yazdıran, /user/:id yolunun işleyicisi
-app.get('/user/:id', function (req, res, next) {
+app.get('/user/:id', (req, res, next) => {
   res.end(req.params.id)
 })
 ```
@@ -101,18 +101,18 @@ Geriye kalan ara yazılım fonksiyonlarını yönlendirici ara yazılım kümesi
 Bu örnek `/user/:id` yolu için yapılan GET isteklerini işleyen bir ara yazılım alt-kümesini gösterir.
 
 ```js
-app.get('/user/:id', function (req, res, next) {
+app.get('/user/:id', (req, res, next) => {
   // kullanıcı ID'si 0 ise, bir sonraki rotaya geç
   if (req.params.id === '0') next('route')
   // aksi takdirde kontrolü bu kümedeki bir sonraki ara yazılım fonksiyonuna ver
   else next()
-}, function (req, res, next) {
+}, (req, res, next) => {
   // normal bir sayfa göster
   res.render('regular')
 })
 
 // özel bir sayfa gösteren, /user/:id yolunun işleyicisi
-app.get('/user/:id', function (req, res, next) {
+app.get('/user/:id', (req, res, next) => {
   res.render('special')
 })
 ```
@@ -133,33 +133,33 @@ const app = express()
 const router = express.Router()
 
 // hedef yolu olmayan bir ara yazılım fonksiyonu. Bu kod yönlendiriciye yapılan her istekte çalışır
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   console.log('Time:', Date.now())
   next()
 })
 
 // /user/:id yolu için yapılan herhangi bir HTTP tipi isteğinin istek bilgilerini gösteren bir ara yazılım alt-kümesi
-router.use('/user/:id', function (req, res, next) {
+router.use('/user/:id', (req, res, next) => {
   console.log('Request URL:', req.originalUrl)
   next()
-}, function (req, res, next) {
+}, (req, res, next) => {
   console.log('Request Type:', req.method)
   next()
 })
 
 // /user/:id yoluna yapılan GET isteklerini işleyen bir ara yazılım alt-kümesi
-router.get('/user/:id', function (req, res, next) {
+router.get('/user/:id', (req, res, next) => {
   // kullanıcı ID'si 0 ise, bir sonraki yönlendiriciye geç
   if (req.params.id === '0') next('route')
   // aksi takdirde kontrolü bu kümedeki bir sonraki ara yazılıma ver
   else next()
-}, function (req, res, next) {
+}, (req, res, next) => {
   // normal bir sayfa göster
   res.render('regular')
 })
 
 // özel bir sayfa gösteren /user/:id yolu işleyicisi
-router.get('/user/:id', function (req, res, next) {
+router.get('/user/:id', (req, res, next) => {
   console.log(req.params.id)
   res.render('special')
 })
@@ -177,17 +177,17 @@ const app = express()
 const router = express.Router()
 
 // yönlendiriciyi bir kontrol ile doğrula ve gerektiğinde bir sonraki yönlendiriciye geçerek kurtul
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   if (!req.headers['x-auth']) return next('router')
   next()
 })
 
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   res.send('hello, user!')
 })
 
 // geçen herhangi bir şey için yönlendiriciyı ve 401'i kullan
-app.use('/admin', router, function (req, res) {
+app.use('/admin', router, (req, res) => {
   res.sendStatus(401)
 })
 ```
@@ -202,7 +202,7 @@ Hata-işleme ara yazılım fonksiyonlarını diğer ara yazılım fonksiyonları
 
 
 ```js
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('Bir şeyler bozuk!')
 })
@@ -237,7 +237,7 @@ const options = {
   index: false,
   maxAge: '1d',
   redirect: false,
-  setHeaders: function (res, path, stat) {
+  setHeaders (res, path, stat) {
     res.set('x-timestamp', Date.now())
   }
 }

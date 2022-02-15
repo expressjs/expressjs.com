@@ -51,7 +51,7 @@ displays the timestamp of the HTTP request.
 const express = require('express')
 const app = express()
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
@@ -88,7 +88,7 @@ const myLogger = function (req, res, next) {
 
 app.use(myLogger)
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
@@ -128,9 +128,9 @@ const requestTime = function (req, res, next) {
 
 app.use(requestTime)
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   let responseText = 'Hello World!<br>'
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>'
+  responseText += `<small>Requested at: ${req.requestTime}</small>`
   res.send(responseText)
 })
 

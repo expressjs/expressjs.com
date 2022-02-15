@@ -32,7 +32,7 @@ Aşağıdaki örnekler nasıl basit bir şekilde yol tanımlayabileceğinizi gö
 Anasayfada `Merhaba Dünya!` ile cevap verin:
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('Merhaba Dünya!')
 })
 ```
@@ -40,7 +40,7 @@ app.get('/', function (req, res) {
 Kök dizine (`/`) gelen POST isteğine bir cevap verin:
 
 ```js
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
   res.send('POST isteği geldi!')
 })
 ```
@@ -48,7 +48,7 @@ app.post('/', function (req, res) {
 `/user` yoluna gelen PUT isteği:
 
 ```js
-app.put('/user', function (req, res) {
+app.put('/user', (req, res) => {
   res.send('/user adresinde bir PUT isteği')
 })
 ```
@@ -56,7 +56,7 @@ app.put('/user', function (req, res) {
 `/user` yoluna gelen DELETE isteği:
 
 ```js
-app.delete('/user', function (req, res) {
+app.delete('/user', (req, res) => {
   res.send('/user adresinde bir DELETE isteği')
 })
 ```

@@ -7,9 +7,9 @@ If `name` is an array, the `callback` trigger is registered for each parameter d
 For example, when `:user` is present in a route path, you may map user loading logic to automatically provide `req.user` to the route, or perform validations on the parameter input.
 
 ```js
-app.param('user', function (req, res, next, id) {
+app.param('user', (req, res, next, id) => {
   // try to get the user details from the User model and attach it to the request object
-  User.find(id, function (err, user) {
+  User.find(id, (err, user) => {
     if (err) {
       next(err)
     } else if (user) {
@@ -27,17 +27,17 @@ Param callback functions are local to the router on which they are defined. They
 All param callbacks will be called before any handler of any route in which the param occurs, and they will each be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following examples.
 
 ```js
-app.param('id', function (req, res, next, id) {
+app.param('id', (req, res, next, id) => {
   console.log('CALLED ONLY ONCE')
   next()
 })
 
-app.get('/user/:id', function (req, res, next) {
+app.get('/user/:id', (req, res, next) => {
   console.log('although this matches')
   next()
 })
 
-app.get('/user/:id', function (req, res) {
+app.get('/user/:id', (req, res) => {
   console.log('and this matches too')
   res.end()
 })
@@ -52,17 +52,17 @@ and this matches too
 ```
 
 ```js
-app.param(['id', 'page'], function (req, res, next, value) {
+app.param(['id', 'page'], (req, res, next, value) => {
   console.log('CALLED ONLY ONCE with', value)
   next()
 })
 
-app.get('/user/:id/:page', function (req, res, next) {
+app.get('/user/:id/:page', (req, res, next) => {
   console.log('although this matches')
   next()
 })
 
-app.get('/user/:id/:page', function (req, res) {
+app.get('/user/:id/:page', (req, res) => {
   console.log('and this matches too')
   res.end()
 })

@@ -41,7 +41,7 @@ Daha fazla bilgi için, [Express ile görünüm motorlarını kullanmak](/{{page
 Express'te 404 cevapları bir hatanın sonucu olarak ortaya çıkmaz, bu yüzden hata işleyici ara katman bunları yakalamaz. Bunun sebebi 404 cevabı sadece yapılacak ekstra işin eksik olduğunu belirtir; başka bir sözle, Express tüm ara katman fonksiyonlarını ve yolları çalıştırdı, ve bunların hiçbirinin cevap döndürmediğini fark etti. Tek yapmanız gereken, bu yığının (tüm fonksiyonların) en sonuna 404'ü işleyen bir ara katman fonksiyonu yazmak:
 
 ```js
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.status(404).send('Üzgünüm, dosyayı bulamadım!')
 })
 ```
@@ -53,7 +53,7 @@ Yolları dinamik olarak `express.Router()`'ın bir örneği üzerine tanımlayı
 Hata ile ilgili ara katman fonksiyonları da tıpkı diğer ara katman fonksiyonları gibi tanımlanır. Aradaki tek fark üç argüman yerine şu şekilde dört argüman kullanılmasıdır `(err, req, res, next)`:
 
 ```js
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('Bir hata oluştu!')
 })

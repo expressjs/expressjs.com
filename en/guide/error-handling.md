@@ -21,7 +21,7 @@ require no extra work. If synchronous code throws an error, then Express will
 catch and process it. For example:
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   throw new Error('BROKEN') // Express will catch this on its own.
 })
 ```
@@ -31,8 +31,8 @@ and middleware, you must pass them to the `next()` function, where Express will
 catch and process them.  For example:
 
 ```js
-app.get('/', function (req, res, next) {
-  fs.readFile('/file-does-not-exist', function (err, data) {
+app.get('/', (req, res, next) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
     if (err) {
       next(err) // Pass errors to Express.
     } else {
@@ -47,7 +47,7 @@ will call `next(value)` automatically when they reject or throw an error.
 For example:
 
 ```js
-app.get('/user/:id', async function (req, res, next) {
+app.get('/user/:id', async (req, res, next) => {
   const user = await getUserById(req.params.id)
   res.send(user)
 })
@@ -83,8 +83,8 @@ You must catch errors that occur in asynchronous code invoked by route handlers 
 middleware and pass them to Express for processing. For example:
 
 ```js
-app.get('/', function (req, res, next) {
-  setTimeout(function () {
+app.get('/', (req, res, next) => {
+  setTimeout(() => {
     try {
       throw new Error('BROKEN')
     } catch (err) {
@@ -103,8 +103,8 @@ Use promises to avoid the overhead of the `try...catch` block or when using func
 that return promises.  For example:
 
 ```js
-app.get('/', function (req, res, next) {
-  Promise.resolve().then(function () {
+app.get('/', (req, res, next) => {
+  Promise.resolve().then(() => {
     throw new Error('BROKEN')
   }).catch(next) // Errors will be passed to Express.
 })
@@ -121,7 +121,7 @@ catching, by reducing the asynchronous code to something trivial. For example:
 ```js
 app.get('/', [
   function (req, res, next) {
-    fs.readFile('/maybe-valid-file', 'utf-8', function (err, data) {
+    fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
       res.locals.data = data
       next(err)
     })
@@ -196,7 +196,7 @@ except error-handling functions have four arguments instead of three:
 `(err, req, res, next)`. For example:
 
 ```js
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 })
@@ -213,7 +213,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 app.use(methodOverride())
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // logic
 })
 ```
@@ -276,15 +276,15 @@ If you have a route handler with multiple callback functions you can use the `ro
 
 ```js
 app.get('/a_route_behind_paywall',
-  function checkIfPaidSubscriber (req, res, next) {
+  (req, res, next) => {
     if (!req.user.hasPaid) {
       // continue handling this request
       next('route')
     } else {
       next()
     }
-  }, function getPaidContent (req, res, next) {
-    PaidContent.find(function (err, doc) {
+  }, (req, res, next) => {
+    PaidContent.find((err, doc) => {
       if (err) return next(err)
       res.json(doc)
     })

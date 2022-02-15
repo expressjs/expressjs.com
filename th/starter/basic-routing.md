@@ -33,7 +33,7 @@ app.METHOD(PATH, HANDLER)
 ตอบสนองด้วยข้อความ `Hello World!` บนเพจหลัก:
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 ```
@@ -41,7 +41,7 @@ app.get('/', function (req, res) {
 ตอบสนองต่อการร้องขอด้วยวิธี POST บนเส้นทาง root (`/`) บนเพจหลักของแอปพลิเคชัน:
 
 ```js
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
   res.send('Got a POST request')
 })
 ```
@@ -49,7 +49,7 @@ app.post('/', function (req, res) {
 ตอบสนองต่อการร้องขอด้วยวิธี PUT บนเส้นทาง `/user`:
 
 ```js
-app.put('/user', function (req, res) {
+app.put('/user', (req, res) => {
   res.send('Got a PUT request at /user')
 })
 ```
@@ -57,7 +57,7 @@ app.put('/user', function (req, res) {
 ตอบสนองต่อการร้องขอด้วยวิธี DELETE บนเส้นทาง `/user`:
 
 ```js
-app.delete('/user', function (req, res) {
+app.delete('/user', (req, res) => {
   res.send('Got a DELETE request at /user')
 })
 ```

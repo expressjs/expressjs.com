@@ -55,7 +55,7 @@ The following code rewrites how the value of `req.ip` is to be derived. Now, it 
 Object.defineProperty(app.request, 'ip', {
   configurable: true,
   enumerable: true,
-  get: function () { return this.get('Client-IP') }
+  get () { return this.get('Client-IP') }
 })
 ```
 </div>

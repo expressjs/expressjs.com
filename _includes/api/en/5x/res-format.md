@@ -13,19 +13,19 @@ to "application/json" or "\*/json" (however if it is "\*/\*", then the response 
 
 ```js
 res.format({
-  'text/plain': function () {
+  'text/plain' () {
     res.send('hey')
   },
 
-  'text/html': function () {
+  'text/html' () {
     res.send('<p>hey</p>')
   },
 
-  'application/json': function () {
+  'application/json' () {
     res.send({ message: 'hey' })
   },
 
-  default: function () {
+  default () {
     // log the request and respond with 406
     res.status(406).send('Not Acceptable')
   }
@@ -37,15 +37,15 @@ to these types for a slightly less verbose implementation:
 
 ```js
 res.format({
-  text: function () {
+  text () {
     res.send('hey')
   },
 
-  html: function () {
+  html () {
     res.send('<p>hey</p>')
   },
 
-  json: function () {
+  json () {
     res.send({ message: 'hey' })
   }
 })

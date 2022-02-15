@@ -7,7 +7,7 @@ Create it by calling the top-level `express()` function exported by the Express 
 const express = require('express')
 const app = express()
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('hello world')
 })
 

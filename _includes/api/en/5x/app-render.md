@@ -15,11 +15,11 @@ cache view during development; view caching is enabled in production by default.
 </div>
 
 ```js
-app.render('email', function (err, html) {
+app.render('email', (err, html) => {
   // ...
 })
 
-app.render('email', { name: 'Tobi' }, function (err, html) {
+app.render('email', { name: 'Tobi' }, (err, html) => {
   // ...
 })
 ```

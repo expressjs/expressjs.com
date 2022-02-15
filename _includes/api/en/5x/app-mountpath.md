@@ -12,7 +12,7 @@ const express = require('express')
 const app = express() // the main app
 const admin = express() // the sub app
 
-admin.get('/', function (req, res) {
+admin.get('/', (req, res) => {
   console.log(admin.mountpath) // /admin
   res.send('Admin Homepage')
 })
@@ -29,13 +29,13 @@ patterns it is mounted on, as shown in the following example.
 ```js
 const admin = express()
 
-admin.get('/', function (req, res) {
+admin.get('/', (req, res) => {
   console.log(admin.mountpath) // [ '/adm*n', '/manager' ]
   res.send('Admin Homepage')
 })
 
 const secret = express()
-secret.get('/', function (req, res) {
+secret.get('/', (req, res) => {
   console.log(secret.mountpath) // /secr*t
   res.send('Admin Secret')
 })

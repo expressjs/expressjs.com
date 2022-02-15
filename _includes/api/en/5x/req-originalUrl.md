@@ -19,7 +19,7 @@ combination of `req.baseUrl` and `req.url`. Consider following example:
 
 ```js
 // GET 'http://www.example.com/admin/new?sort=desc'
-app.use('/admin', function (req, res, next) {
+app.use('/admin', (req, res, next) => {
   console.dir(req.originalUrl) // '/admin/new?sort=desc'
   console.dir(req.baseUrl) // '/admin'
   console.dir(req.path) // '/new'

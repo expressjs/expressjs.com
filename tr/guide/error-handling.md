@@ -15,7 +15,7 @@ Express tarafından, rota işleyicileri ve ara yazılımları koşarken oluşan 
 Rota işleyicilerinde ve ara yazılımlarda senkron kodda oluşan hataları yakalamak için ek birşey yapmaka gerek yoktur. Eğer senkron kod bir hata fırlatırsa, Express onu yakalayıp işleyecektir. Örneğin:
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   throw new Error('BROKEN') // Express bunu kendi kendine yakalayacak
 })
 ```
@@ -23,8 +23,8 @@ app.get('/', function (req, res) {
 Rota işleyicileri ve ara yazılım tarafından çağrılan asenkron fonksiyonlardan dönen hataları Express'in yakalayp işleyeceği `next()` fonksiyonuna vermelisiniz. Örnek olarak:
 
 ```js
-app.get('/', function (req, res, next) {
-  fs.readFile('/file-does-not-exist', function (err, data) {
+app.get('/', (req, res, next) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
     if (err) {
       next(err) // Hataları Express'e ver
     } else {
@@ -37,7 +37,7 @@ app.get('/', function (req, res, next) {
 Express 5 ile başlayarak, Promise döndüren rota işleyicileri ve ara yazılımlar ret verdiklerinde (reject) veya hata fırlattıklarında otomatik olarak `next(value)` fonksiyonunu çağıracaklar. Örneğin:
 
 ```js
-app.get('/user/:id', async function (req, res, next) {
+app.get('/user/:id', async (req, res, next) => {
   const user = await getUserById(req.params.id)
   res.send(user)
 })
@@ -65,8 +65,8 @@ Yukarıdaki örnekte `next`, hata veya hatasız olarak çağrılan `fs.writeFile
 Rota işleyicileri ve ara yazılımlar tarafından çağrılan asenkron kodda oluşan hataları yakalayıp işlemesi için Express'e geçmelisiniz. Örnek olarak:
 
 ```js
-app.get('/', function (req, res, next) {
-  setTimeout(function () {
+app.get('/', (req, res, next) => {
+  setTimeout(() => {
     try {
       throw new Error('BROKEN')
     } catch (err) {
@@ -81,8 +81,8 @@ Yukarıdaki örnek asenkron kodda hataları yakalamak için bir `try...catch` bl
 `try..catch` blokunun yükünden kaçınmak için promise veya promise döndüren fonksiyonlar kullanın. Örnek olarak:
 
 ```js
-app.get('/', function (req, res, next) {
-  Promise.resolve().then(function () {
+app.get('/', (req, res, next) => {
+  Promise.resolve().then(() => {
     throw new Error('BROKEN')
   }).catch(next) // Hatalar Express'e geçer
 })
@@ -96,7 +96,7 @@ Senkron hata yakalamaya güvenmek için asenkron kodu basite indirgeyerek bir i�
 ```js
 app.get('/', [
   function (req, res, next) {
-    fs.readFile('/maybe-valid-file', 'utf-8', function (err, data) {
+    fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
       res.locals.data = data
       next(err)
     })
@@ -150,7 +150,7 @@ Kodunuzda `next()` fonksiyonunu bir hata ile birden fazla kez çağırdığını
 Hata işleyici ara yazılım fonksiyonlarını diğer ara yazılım fonksiyonları gibi tanımlayınız, bundan farklı olarak hata işleyici fonksiyonlar üç yerine dört argümana sahipler: `(err, req, res, next)`. Örneğin:
 
 ```js
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('Birşeyler bozuldu')
 })
@@ -167,7 +167,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 app.use(methodOverride())
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // iş mantığı
 })
 ```
@@ -226,15 +226,15 @@ Birden fazla geri çağırma fonksiyonu olan bir rota işleyiciniz var ise bir s
 
 ```js
 app.get('/a_route_behind_paywall',
-  function checkIfPaidSubscriber (req, res, next) {
+  (req, res, next) => {
     if (!req.user.hasPaid) {
       // bu isteği işlemeye devam et
       next('route')
     } else {
       next()
     }
-  }, function getPaidContent (req, res, next) {
-    PaidContent.find(function (err, doc) {
+  }, (req, res, next) => {
+    PaidContent.find((err, doc) => {
       if (err) return next(err)
       res.json(doc)
     })

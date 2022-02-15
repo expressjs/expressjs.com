@@ -7,14 +7,14 @@ Use `app.route()` to avoid duplicate route names (and thus typo errors).
 const app = express()
 
 app.route('/events')
-  .all(function (req, res, next) {
+  .all((req, res, next) => {
     // runs for all HTTP verbs first
     // think of it as route specific middleware!
   })
-  .get(function (req, res, next) {
+  .get((req, res, next) => {
     res.json({})
   })
-  .post(function (req, res, next) {
+  .post((req, res, next) => {
     // maybe add a new event...
   })
 ```

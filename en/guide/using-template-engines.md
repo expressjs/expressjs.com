@@ -64,7 +64,7 @@ Then create a route to render the `index.pug` file. If the `view engine` propert
 you must specify the extension of the `view` file. Otherwise, you can omit it.
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.render('index', { title: 'Hey', message: 'Hello there!' })
 })
 ```

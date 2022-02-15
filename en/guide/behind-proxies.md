@@ -67,7 +67,7 @@ When using this setting, it is important to ensure there are not multiple, diffe
 Custom trust implementation.
 
 ```js
-app.set('trust proxy', function (ip) {
+app.set('trust proxy', (ip) => {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
   else return false
 })

@@ -61,7 +61,7 @@ do is add a middleware function at the very bottom of the stack (below all other
 to handle a 404 response:
 
 ```js
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.status(404).send("Sorry can't find that!")
 })
 ```
@@ -75,7 +75,7 @@ You define error-handling middleware in the same way as other middleware,
 except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
 
 ```js
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 })

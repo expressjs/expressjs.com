@@ -19,7 +19,7 @@ res.download('/report-12345.pdf')
 
 res.download('/report-12345.pdf', 'report.pdf')
 
-res.download('/report-12345.pdf', 'report.pdf', function (err) {
+res.download('/report-12345.pdf', 'report.pdf', (err) => {
   if (err) {
     // Handle error, but keep in mind the response may be partially-sent
     // so check res.headersSent

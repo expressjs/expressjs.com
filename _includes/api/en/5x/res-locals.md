@@ -8,7 +8,7 @@ This property is useful for exposing request-level information such as the reque
 authenticated user, user settings, and so on.
 
 ```js
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.authenticated = !req.user.anonymous
   next()

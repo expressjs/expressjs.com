@@ -43,7 +43,7 @@ $ npm install cassandra-driver
 const cassandra = require('cassandra-driver')
 const client = new cassandra.Client({ contactPoints: ['localhost'] })
 
-client.execute('select key from system.local', function (err, result) {
+client.execute('select key from system.local', (err, result) => {
   if (err) throw err
   console.log(result.rows[0])
 })
@@ -66,7 +66,7 @@ const couchbase = require('couchbase')
 const bucket = (new couchbase.Cluster('http://localhost:8091')).openBucket('bucketName')
 
 // add a document to a bucket
-bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, function (err, result) {
+bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, (err, result) => {
   if (err) {
     console.log(err)
   } else {
@@ -77,7 +77,7 @@ bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, function (err, res
 // get all documents with shoe size 13
 const n1ql = 'SELECT d.* FROM `bucketName` d WHERE shoeSize = $1'
 const query = N1qlQuery.fromString(n1ql)
-bucket.query(query, [13], function (err, result) {
+bucket.query(query, [13], (err, result) => {
   if (err) {
     console.log(err)
   } else {
@@ -104,7 +104,7 @@ nano.db.create('books')
 const books = nano.db.use('books')
 
 // Insert a book document in the books database
-books.insert({ name: 'The Art of war' }, null, function (err, body) {
+books.insert({ name: 'The Art of war' }, null, (err, body) => {
   if (err) {
     console.log(err)
   } else {
@@ -113,7 +113,7 @@ books.insert({ name: 'The Art of war' }, null, function (err, body) {
 })
 
 // Get a list of all books
-books.list(function (err, body) {
+books.list((err, body) => {
   if (err) {
     console.log(err)
   } else {
@@ -138,13 +138,13 @@ $ npm install level levelup leveldown
 const levelup = require('levelup')
 const db = levelup('./mydb')
 
-db.put('name', 'LevelUP', function (err) {
+db.put('name', 'LevelUP', (err) => {
   if (err) return console.log('Ooops!', err)
 
-  db.get('name', function (err, value) {
+  db.get('name', (err, value) => {
     if (err) return console.log('Ooops!', err)
 
-    console.log('name=' + value)
+    console.log(`name=${value}`)
   })
 })
 ```
@@ -172,7 +172,7 @@ const connection = mysql.createConnection({
 
 connection.connect()
 
-connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
+connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
   if (err) throw err
 
   console.log('The solution is: ', rows[0].solution)
@@ -196,10 +196,10 @@ $ npm install mongodb
 ```js
 const MongoClient = require('mongodb').MongoClient
 
-MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
+MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
   if (err) throw err
 
-  db.collection('mammals').find().toArray(function (err, result) {
+  db.collection('mammals').find().toArray((err, result) => {
     if (err) throw err
 
     console.log(result)
@@ -212,12 +212,12 @@ MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
 ```js
 const MongoClient = require('mongodb').MongoClient
 
-MongoClient.connect('mongodb://localhost:27017/animals', function (err, client) {
+MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
   if (err) throw err
 
   const db = client.db('animals')
 
-  db.collection('mammals').find().toArray(function (err, result) {
+  db.collection('mammals').find().toArray((err, result) => {
     if (err) throw err
 
     console.log(result)
@@ -243,10 +243,10 @@ $ npm install apoc
 const apoc = require('apoc')
 
 apoc.query('match (n) return n').exec().then(
-  function (response) {
+  (response) => {
     console.log(response)
   },
-  function (fail) {
+  (fail) => {
     console.log(fail)
   }
 )
@@ -315,10 +315,10 @@ const pgp = require('pg-promise')(/* options */)
 const db = pgp('postgres://username:password@host:port/database')
 
 db.one('SELECT $1 AS value', 123)
-  .then(function (data) {
+  .then((data) => {
     console.log('DATA:', data.value)
   })
-  .catch(function (error) {
+  .catch((error) => {
     console.log('ERROR:', error)
   })
 ```
@@ -339,19 +339,19 @@ $ npm install redis
 const redis = require('redis')
 const client = redis.createClient()
 
-client.on('error', function (err) {
-  console.log('Error ' + err)
+client.on('error', (err) => {
+  console.log(`Error ${err}`)
 })
 
 client.set('string key', 'string val', redis.print)
 client.hset('hash key', 'hashtest 1', 'some value', redis.print)
 client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print)
 
-client.hkeys('hash key', function (err, replies) {
-  console.log(replies.length + ' replies:')
+client.hkeys('hash key', (err, replies) => {
+  console.log(`${replies.length} replies:`)
 
-  replies.forEach(function (reply, i) {
-    console.log('    ' + i + ': ' + reply)
+  replies.forEach((reply, i) => {
+    console.log(`    ${i}: ${reply}`)
   })
 
   client.quit()
@@ -387,7 +387,7 @@ const config = {
 
 const connection = new Connection(config)
 
-connection.on('connect', function (err) {
+connection.on('connect', (err) => {
   if (err) {
     console.log(err)
   } else {
@@ -396,17 +396,17 @@ connection.on('connect', function (err) {
 })
 
 function executeStatement () {
-  request = new Request("select 123, 'hello world'", function (err, rowCount) {
+  request = new Request("select 123, 'hello world'", (err, rowCount) => {
     if (err) {
       console.log(err)
     } else {
-      console.log(rowCount + ' rows')
+      console.log(`${rowCount} rows`)
     }
     connection.close()
   })
 
-  request.on('row', function (columns) {
-    columns.forEach(function (column) {
+  request.on('row', (columns) => {
+    columns.forEach((column) => {
       if (column.value === null) {
         console.log('NULL')
       } else {
@@ -435,18 +435,18 @@ $ npm install sqlite3
 const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database(':memory:')
 
-db.serialize(function () {
+db.serialize(() => {
   db.run('CREATE TABLE lorem (info TEXT)')
   const stmt = db.prepare('INSERT INTO lorem VALUES (?)')
 
   for (let i = 0; i < 10; i++) {
-    stmt.run('Ipsum ' + i)
+    stmt.run(`Ipsum ${i}`)
   }
 
   stmt.finalize()
 
-  db.each('SELECT rowid AS id, info FROM lorem', function (err, row) {
-    console.log(row.id + ': ' + row.info)
+  db.each('SELECT rowid AS id, info FROM lorem', (err, row) => {
+    console.log(`${row.id}: ${row.info}`)
   })
 })
 
@@ -482,9 +482,9 @@ client.search({
       }
     }
   }
-}).then(function (response) {
+}).then((response) => {
   const hits = response.hits.hits
-}, function (error) {
+}, (error) => {
   console.trace(error.message)
 })
 ```

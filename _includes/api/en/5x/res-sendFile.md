@@ -43,7 +43,7 @@ ending the request-response cycle, or by passing control to the next route.
 Here is an example of using `res.sendFile` with all its arguments.
 
 ```js
-app.get('/file/:name', function (req, res, next) {
+app.get('/file/:name', (req, res, next) => {
   const options = {
     root: path.join(__dirname, 'public'),
     dotfiles: 'deny',
@@ -54,7 +54,7 @@ app.get('/file/:name', function (req, res, next) {
   }
 
   const fileName = req.params.name
-  res.sendFile(fileName, options, function (err) {
+  res.sendFile(fileName, options, (err) => {
     if (err) {
       next(err)
     } else {
@@ -68,13 +68,13 @@ The following example illustrates using
 `res.sendFile` to provide fine-grained support for serving files:
 
 ```js
-app.get('/user/:uid/photos/:file', function (req, res) {
+app.get('/user/:uid/photos/:file', (req, res) => {
   const uid = req.params.uid
   const file = req.params.file
 
-  req.user.mayViewFilesFrom(uid, function (yes) {
+  req.user.mayViewFilesFrom(uid, (yes) => {
     if (yes) {
-      res.sendFile('/uploads/' + uid + '/' + file)
+      res.sendFile(`/uploads/${uid}/${file}`)
     } else {
       res.status(403).send("Sorry! You can't see that.")
     }

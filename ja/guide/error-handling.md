@@ -16,7 +16,7 @@ Expressがルート・ハンドラとミドルウェアの実行中に発生す�
 ルート・ハンドラとミドルウェア内の同期コードで発生するエラーは、余分な作業を必要としません。同期コードがエラーをスローすると、Expressはそれをキャッチして処理します。 例えば：
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   throw new Error('BROKEN') // Express will catch this on its own.
 })
 ```
@@ -24,8 +24,8 @@ app.get('/', function (req, res) {
 ルート・ハンドラとミドルウェアによって呼び出された非同期関数から返されたエラーについては、それらを`next()`関数に渡す必要があります。ここでExpressはそれらをキャッチして処理します。例えば：
 
 ```js
-app.get('/', function (req, res, next) {
-  fs.readFile('/file-does-not-exist', function (err, data) {
+app.get('/', (req, res, next) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
     if (err) {
       next(err) // Pass errors to Express.
     } else {
@@ -53,8 +53,8 @@ app.get('/', [
 ルート・ハンドラまたはミドルウェアによって呼び出された非同期コードで発生したエラーをキャッチして、Expressに渡して処理する必要があります。例えば：
 
 ```js
-app.get('/', function (req, res, next) {
-  setTimeout(function () {
+app.get('/', (req, res, next) => {
+  setTimeout(() => {
     try {
       throw new Error('BROKEN')
     } catch (err) {
@@ -69,8 +69,8 @@ app.get('/', function (req, res, next) {
 Promiseを使って`try..catch`ブロックのオーバーヘッドを避けるか、Promiseを返す関数を使うとき。例えば：
 
 ```js
-app.get('/', function (req, res, next) {
-  Promise.resolve().then(function () {
+app.get('/', (req, res, next) => {
+  Promise.resolve().then(() => {
     throw new Error('BROKEN')
   }).catch(next) // Errors will be passed to Express.
 })
@@ -83,7 +83,7 @@ Promiseは自動的に同期エラーと拒否されたPromiseをキャッチす
 ```js
 app.get('/', [
   function (req, res, next) {
-    fs.readFile('/maybe-valid-file', 'utf8', function (err, data) {
+    fs.readFile('/maybe-valid-file', 'utf8', (err, data) => {
       res.locals.data = data
       next(err)
     })
@@ -132,7 +132,7 @@ function errorHandler (err, req, res, next) {
 エラー処理ミドルウェア関数は、その他のミドルウェア関数と同じ方法で定義しますが、エラー処理関数の引数が3つではなく、4つ `(err、req、res、next)` であることが例外です。次に例を示します。
 
 ```js
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 })
@@ -149,7 +149,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 app.use(methodOverride())
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // logic
 })
 ```
@@ -210,15 +210,15 @@ function errorHandler (err, req, res, next) {
 
 ```js
 app.get('/a_route_behind_paywall',
-  function checkIfPaidSubscriber (req, res, next) {
+  (req, res, next) => {
     if (!req.user.hasPaid) {
       // continue handling this request
       next('route')
     } else {
       next()
     }
-  }, function getPaidContent (req, res, next) {
-    PaidContent.find(function (err, doc) {
+  }, (req, res, next) => {
+    PaidContent.find((err, doc) => {
       if (err) return next(err)
       res.json(doc)
     })

@@ -23,7 +23,7 @@ const express = require('express')
 const app = express()
 
 // anasayfaya bir GET isteği yapıldığında "merhaba dünya" ile yanıt verir
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('merhaba dünya')
 })
 ```
@@ -36,12 +36,12 @@ Aşağıdaki kod uygulamanın köküne GET ve POST metodları için tanımlanan 
 
 ```js
 // GET metodu rotası
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('anasayfaya GET isteği')
 })
 
 // POST metodu rotası
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
   res.send('anasayfaya POST isteği')
 })
 ```
@@ -58,7 +58,7 @@ Hiçbir HTTP metodundan türemeyen özel bir yönlendirme metodu olan `app.all()
 Bir sonraki örnekte, "/secret" rotasına yapılan isteklerde, GET, POST, PUT, DELETE veya [http modülü](https://nodejs.org/api/http.html#http_http_methods)'nde desteklenen herhangi bir HTTP istek metodu farketmeksizin bu işleyici çalıştırılacak.
 
 ```js
-app.all('/secret', function (req, res, next) {
+app.all('/secret', (req, res, next) => {
   console.log('Gizli bölümlere erişiliyor...')
   next() // bir sonraki işleyiciye kontrolü verir
 })
@@ -85,7 +85,7 @@ Karakter dizininlerine dayalı bazı rota yolları örnekleri.
 Bu rota yolu, istekleri kök rotaya eşleştirecek, `/`.
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('root')
 })
 ```
@@ -93,7 +93,7 @@ app.get('/', function (req, res) {
 Bu rota yolu istekleri `/about` ile eşleştirecek
 
 ```js
-app.get('/about', function (req, res) {
+app.get('/about', (req, res) => {
   res.send('about')
 })
 ```
@@ -101,7 +101,7 @@ app.get('/about', function (req, res) {
 Bu rota yolu istekleri `/random.text` ile eşleştirecek
 
 ```js
-app.get('/random.text', function (req, res) {
+app.get('/random.text', (req, res) => {
   res.send('random.text')
 })
 ```
@@ -111,7 +111,7 @@ Aşağıda, dizin modellerine dayalı rota yollarının bazı örnekleri verilmi
 Bu rota yolu, `acd` ve `abcd` ile eşleşecek.
 
 ```js
-app.get('/ab?cd', function (req, res) {
+app.get('/ab?cd', (req, res) => {
   res.send('ab?cd')
 })
 ```
@@ -119,7 +119,7 @@ app.get('/ab?cd', function (req, res) {
 Bu rota yolu, `abcd`, `abbcd`, `abbbcd` vb. ile eşleşecek.
 
 ```js
-app.get('/ab+cd', function (req, res) {
+app.get('/ab+cd', (req, res) => {
   res.send('ab+cd')
 })
 ```
@@ -127,7 +127,7 @@ app.get('/ab+cd', function (req, res) {
 Bu rota yolu, `abcd`, `abxcd`, `abRANDOMcd`, `ab123cd` vb. ile eşleşecek.
 
 ```js
-app.get('/ab*cd', function (req, res) {
+app.get('/ab*cd', (req, res) => {
   res.send('ab*cd')
 })
 ```
@@ -135,7 +135,7 @@ app.get('/ab*cd', function (req, res) {
 Bu rota yolu, `/abe` ve `/abcde` ile eşleşecek.
 
 ```js
-app.get('/ab(cd)?e', function (req, res) {
+app.get('/ab(cd)?e', (req, res) => {
   res.send('ab(cd)?e')
 })
 ```
@@ -145,7 +145,7 @@ Düzenli ifadelere dayalı rota yolları örnekleri:
 Bu rota yolu, rota isminde "a" karakteri olan herhangi bir şey ile eşleşecek.
 
 ```js
-app.get(/a/, function (req, res) {
+app.get(/a/, (req, res) => {
   res.send('/a/')
 })
 ```
@@ -153,7 +153,7 @@ app.get(/a/, function (req, res) {
 Bu rota yolu `butterfly` ve `dragonfly` ile eşleşir, ancak `butterflyman`, `dragonflyman` vb. ile değil.
 
 ```js
-app.get(/.*fly$/, function (req, res) {
+app.get(/.*fly$/, (req, res) => {
   res.send('/.*fly$/')
 })
 ```
@@ -171,7 +171,7 @@ req.params: { "userId": "34", "bookId": "8989" }
 Parametreli rota tanımlamak için, aşağıda gösterildiği gibi rota parametrelerini rotanın yolunda belirtmeniz yeterlidir.
 
 ```js
-app.get('/users/:userId/books/:bookId', function (req, res) {
+app.get('/users/:userId/books/:bookId', (req, res) => {
   res.send(req.params)
 })
 ```
@@ -220,7 +220,7 @@ Rota işleyicileri, aşağıdaki örneklerde gösterildiği gibi bir fonksiyon, 
 Bir geri çağırma fonksiyonu, bir rotayı işleyebilir. Örneğin:
 
 ```js
-app.get('/example/a', function (req, res) {
+app.get('/example/a', (req, res) => {
   res.send('A\'dan merhaba')
 })
 ```
@@ -228,10 +228,10 @@ app.get('/example/a', function (req, res) {
 Birden fazla geri çağırma fonksiyonu bir rotayı işleyebilir (`next` objesini belirttiğinizden emin olun). Örneğin:
 
 ```js
-app.get('/example/b', function (req, res, next) {
+app.get('/example/b', (req, res, next) => {
   console.log('yanıt bir sonraki fonksiyon tarafından gönderilecek')
   next()
-}, function (req, res) {
+}, (req, res) => {
   res.send('B\'den merhaba')
 })
 ```
@@ -268,10 +268,10 @@ const cb1 = function (req, res, next) {
   next()
 }
 
-app.get('/example/d', [cb0, cb1], function (req, res, next) {
+app.get('/example/d', [cb0, cb1], (req, res, next) => {
   console.log('yanıt bir sonraki fonksiyon tarafından gönderilecek')
   next()
-}, function (req, res) {
+}, (req, res) => {
   res.send('D\'den merhaba')
 })
 ```
@@ -301,13 +301,13 @@ Burada `app.route()` kullanılarak tanımlanan zincirleme rota işleyicilerine b
 
 ```js
 app.route('/book')
-  .get(function (req, res) {
+  .get((req, res) => {
     res.send('Rastgele bir kitap getir')
   })
-  .post(function (req, res) {
+  .post((req, res) => {
     res.send('Bir kitap ekle')
   })
-  .put(function (req, res) {
+  .put((req, res) => {
     res.send('Kitabı güncelle')
   })
 ```
@@ -325,16 +325,16 @@ const express = require('express')
 const router = express.Router()
 
 // bu yönlendiriciye özel ara katman yazılım
-router.use(function timeLog (req, res, next) {
+router.use((req, res, next) => {
   console.log('Time: ', Date.now())
   next()
 })
 // anasayfa rotası tanımla
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   res.send('Birds home page')
 })
 // define the about route
-router.get('/about', function (req, res) {
+router.get('/about', (req, res) => {
   res.send('About birds')
 })
 

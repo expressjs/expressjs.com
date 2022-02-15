@@ -51,7 +51,7 @@ Aşağıdaki basit bir "Merhaba Dünya" Ekspres uygulaması örneği. Bu yazın�
 const express = require('express')
 const app = express()
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('Merhaba Dünya!')
 })
 
@@ -86,7 +86,7 @@ const myLogger = function (req, res, next) {
 
 app.use(myLogger)
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
@@ -125,9 +125,9 @@ const requestTime = function (req, res, next) {
 
 app.use(requestTime)
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   let responseText = 'Hello World!<br>'
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>'
+  responseText += `<small>Requested at: ${req.requestTime}</small>`
   res.send(responseText)
 })
 
@@ -171,7 +171,7 @@ app.use(cookieParser())
 app.use(validateCookies)
 
 // hata işleyicisi
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   res.status(400).send(err.message)
 })
 

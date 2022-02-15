@@ -26,7 +26,7 @@ const express = require('express')
 const app = express()
 
 // respond with "hello world" when a GET request is made to the homepage
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('hello world')
 })
 ```
@@ -39,12 +39,12 @@ route メソッドは、いずれかの HTTP メソッドから派生され、`e
 
 ```js
 // GET method route
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('GET request to the homepage')
 })
 
 // POST method route
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
   res.send('POST request to the homepage')
 })
 ```
@@ -55,7 +55,7 @@ Expressは、すべてのHTTPリクエストメソッドに対応するメソッ
 _すべての_ HTTPリクエストメソッドのパスにミドルウェア関数をロードするために使用される特別なルーティングメソッド、`app.all()`があります。 たとえば、GET、POST、PUT、DELETE、または[httpモジュール](https://nodejs.org/api/http.html#http_http_methods)でサポートされているその他のHTTPリクエストメソッドを使用するかどうかにかかわらず、"/secret"ルートへのリクエストに対して次のハンドラが実行されます。
 
 ```js
-app.all('/secret', function (req, res, next) {
+app.all('/secret', (req, res, next) => {
   console.log('Accessing the secret section ...')
   next() // pass control to the next handler
 })
@@ -82,7 +82,7 @@ Express は、ルート・パスのマッチングに [path-to-regexp](https://w
 このルート・パスは、リクエストをルートのルート `/` にマッチングします。
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('root')
 })
 ```
@@ -90,7 +90,7 @@ app.get('/', function (req, res) {
 このルート・パスは、リクエストを `/about` にマッチングします。
 
 ```js
-app.get('/about', function (req, res) {
+app.get('/about', (req, res) => {
   res.send('about')
 })
 ```
@@ -98,7 +98,7 @@ app.get('/about', function (req, res) {
 このルート・パスは、リクエストを `/random.text` にマッチングします。
 
 ```js
-app.get('/random.text', function (req, res) {
+app.get('/random.text', (req, res) => {
   res.send('random.text')
 })
 ```
@@ -108,7 +108,7 @@ app.get('/random.text', function (req, res) {
 このルート・パスは、`acd` および `abcd` をマッチングします。
 
 ```js
-app.get('/ab?cd', function (req, res) {
+app.get('/ab?cd', (req, res) => {
   res.send('ab?cd')
 })
 ```
@@ -116,7 +116,7 @@ app.get('/ab?cd', function (req, res) {
 このルート・パスは、`abcd`、`abbcd`、`abbbcd` などをマッチングします。
 
 ```js
-app.get('/ab+cd', function (req, res) {
+app.get('/ab+cd', (req, res) => {
   res.send('ab+cd')
 })
 ```
@@ -124,7 +124,7 @@ app.get('/ab+cd', function (req, res) {
 このルート・パスは、`abcd`、`abxcd`、`abRABDOMcd`、`ab123cd` などをマッチングします。
 
 ```js
-app.get('/ab*cd', function (req, res) {
+app.get('/ab*cd', (req, res) => {
   res.send('ab*cd')
 })
 ```
@@ -132,7 +132,7 @@ app.get('/ab*cd', function (req, res) {
 このルート・パスは、`/abe` および `/abcde` をマッチングします。
 
 ```js
-app.get('/ab(cd)?e', function (req, res) {
+app.get('/ab(cd)?e', (req, res) => {
   res.send('ab(cd)?e')
 })
 ```
@@ -142,7 +142,7 @@ app.get('/ab(cd)?e', function (req, res) {
 このルート・パスは、ルート名に「a」が含まれるすべてのものをマッチングします。
 
 ```js
-app.get(/a/, function (req, res) {
+app.get(/a/, (req, res) => {
   res.send('/a/')
 })
 ```
@@ -150,7 +150,7 @@ app.get(/a/, function (req, res) {
 このルート・パスは、`butterfly` および `dragonfly` をマッチングしますが、`butterflyman`、`dragonfly man` などはマッチングしません。
 
 ```js
-app.get(/.*fly$/, function (req, res) {
+app.get(/.*fly$/, (req, res) => {
   res.send('/.*fly$/')
 })
 ```
@@ -168,7 +168,7 @@ req.params: { "userId": "34", "bookId": "8989" }
 ルート・パラメータを使用してルートを定義するには、以下に示すようにルートのパスにルート・パラメータを指定するだけです。
 
 ```js
-app.get('/users/:userId/books/:bookId', function (req, res) {
+app.get('/users/:userId/books/:bookId', (req, res) => {
   res.send(req.params)
 })
 ```
@@ -216,7 +216,7 @@ Express 4.xでは、<a href="https://github.com/expressjs/express/issues/2495">�
 単一のコールバック関数で 1 つのルートを処理できます。次に例を示します。
 
 ```js
-app.get('/example/a', function (req, res) {
+app.get('/example/a', (req, res) => {
   res.send('Hello from A!')
 })
 ```
@@ -224,10 +224,10 @@ app.get('/example/a', function (req, res) {
 複数のコールバック関数で1つのルートを処理できます (必ず、`next` オブジェクトを指定してください)。次に例を示します。
 
 ```js
-app.get('/example/b', function (req, res, next) {
+app.get('/example/b', (req, res, next) => {
   console.log('the response will be sent by the next function ...')
   next()
-}, function (req, res) {
+}, (req, res) => {
   res.send('Hello from B!')
 })
 ```
@@ -265,10 +265,10 @@ const cb1 = function (req, res, next) {
   next()
 }
 
-app.get('/example/d', [cb0, cb1], function (req, res, next) {
+app.get('/example/d', [cb0, cb1], (req, res, next) => {
   console.log('the response will be sent by the next function ...')
   next()
-}, function (req, res) {
+}, (req, res) => {
   res.send('Hello from D!')
 })
 ```
@@ -298,13 +298,13 @@ app.get('/example/d', [cb0, cb1], function (req, res, next) {
 
 ```js
 app.route('/book')
-  .get(function (req, res) {
+  .get((req, res) => {
     res.send('Get a random book')
   })
-  .post(function (req, res) {
+  .post((req, res) => {
     res.send('Add a book')
   })
-  .put(function (req, res) {
+  .put((req, res) => {
     res.send('Update the book')
   })
 ```
@@ -322,16 +322,16 @@ const express = require('express')
 const router = express.Router()
 
 // middleware that is specific to this router
-router.use(function timeLog (req, res, next) {
+router.use((req, res, next) => {
   console.log('Time: ', Date.now())
   next()
 })
 // define the home page route
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   res.send('Birds home page')
 })
 // define the about route
-router.get('/about', function (req, res) {
+router.get('/about', (req, res) => {
   res.send('About birds')
 })
 

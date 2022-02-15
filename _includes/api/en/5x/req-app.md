@@ -14,7 +14,7 @@ app.get('/viewdirectory', require('./mymiddleware.js'))
 
 ```js
 // mymiddleware.js
-module.exports = function (req, res) {
-  res.send('The views directory is ' + req.app.get('views'))
+module.exports = (req, res) => {
+  res.send(`The views directory is ${req.app.get('views')}`)
 }
 ```

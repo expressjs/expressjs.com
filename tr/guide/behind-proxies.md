@@ -59,7 +59,7 @@ Belirtildiğinde, IP adresleri veya alt ağlar adres belirleme işleminin dış�
 
 
 ```js
-app.set('trust proxy', function (ip) {
+app.set('trust proxy', (ip) => {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // güvenilen IP'ler
   else return false
 })

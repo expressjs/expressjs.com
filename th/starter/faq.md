@@ -52,7 +52,7 @@ Express รองรับทุก template engine ที่สอดคล้�
 สิ่งที่คุณต้องทำคือเพิ่มฟังก์ชันมิดเดิลแวร์ที่ด้านล่างสุดเพื่อจัดการกับการตอบสนอง 404:
 
 ```js
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.status(404).send("Sorry can't find that!")
 })
 ```
@@ -63,7 +63,7 @@ app.use(function (req, res, next) {
 ดังนี้ `(err, req, res, next)`
 
 ```js
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 })

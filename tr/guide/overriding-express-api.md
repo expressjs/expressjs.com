@@ -55,7 +55,7 @@ Aşağıdaki kod `req.ip` alanının değerinin nasıl türetileceğini yeniden 
 Object.defineProperty(app.request, 'ip', {
   configurable: true,
   enumerable: true,
-  get: function () { return this.get('Client-IP') }
+  get () { return this.get('Client-IP') }
 })
 ```
 </div>
