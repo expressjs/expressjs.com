@@ -9,22 +9,17 @@ redirect_from: "/guide/migrating-5.html"
 
 <h2 id="overview">Overview</h2>
 
-Express 5.0 is still in the alpha release stage, but here is a preview of the changes that will be in the release and how to migrate your Express 4 app to Express 5.
+Express 5.0 is still in the beta release stage, but here is a preview of the changes that will be in the release and how to migrate your Express 4 app to Express 5.
 
-Express 5 is not very different from Express 4: The changes to the API are not as significant as from 3.0 to 4.0.  Although the basic API remains the same, there are still breaking changes; in other words an existing Express 4 program might not work if you update it to use Express 5.
-
-To install the latest alpha and to preview Express 5, enter the following command in your application root directory:
+To install the latest beta and to preview Express 5, enter the following command in your application root directory:
 
 ```console
-$ npm install express@>=5.0.0-alpha.8 --save
+$ npm install express@>=5.0.0-beta.1 --save
 ```
 
 You can then run your automated tests to see what fails, and fix problems according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
 
 <h2 id="changes">Changes in Express 5</h2>
-
-Here is the list of changes (as of the alpha 2 release ) that will affect you as a user of Express.
-See the [pull request](https://github.com/expressjs/express/pull/2237) for a list of all the planned features.
 
 **Removed methods and properties**
 
@@ -137,7 +132,7 @@ In Express 4, the `req.host` function incorrectly stripped off the port number i
 
 <h4 id="req.query">req.query</h4>
 
-In Express 4.7 and Express 5 onwards, the query parser option can accept `false` to disable query string parsing when you want to use your own function for query string parsing logic.
+The `req.query` property is no longer a writable property and is instead a getter. The default query parser has been changed from "extended" to "simple".
 
 <h3>Improvements</h3>
 

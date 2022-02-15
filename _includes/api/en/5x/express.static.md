@@ -38,8 +38,6 @@ Possible values for this option are:
 - "deny" - Deny a request for a dotfile, respond with `403`, then call `next()`.
 - "ignore" - Act as if the dotfile does not exist, respond with `404`, then call `next()`.
 
-**NOTE**: With the default value, it will not ignore files in a directory that begins with a dot.
-
 <h5 id='fallthrough'>fallthrough</h5>
 
 When this option is `true`, client errors such as a bad request or a request to a non-existent
