@@ -1,6 +1,7 @@
 <h3 id='app.locals'>app.locals</h3>
 
-The `app.locals` object has properties that are local variables within the application.
+The `app.locals` object has properties that are local variables within the application,
+and will be available in templates rendered with [res.render](#res.render).
 
 ```js
 console.dir(app.locals.title)
