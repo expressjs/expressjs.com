@@ -78,4 +78,7 @@ redirect_from: "/resources/companies-using-express.html"
     <a target="_new" class="imagelink" href="https://wormhole.app">
       <img alt="Wormhole" class="memberlogo" src="/images/companies/wormhole-logo.png" />
     </a>
+    <a target="_new" class="imagelink" href="https://workinbiotech.com">
+      <img alt="Work in biotech" class="memberlogo" src="/images/companies/workinbiotech-logo.png" />
+    </a>
 </div>
