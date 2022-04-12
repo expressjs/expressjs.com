@@ -54,7 +54,7 @@ redirect_from: "/resources/companies-using-express.html"
     <a target="_new" class="imagelink" href="https://www.yandex.ru/">
       <img alt="Yandex" class="memberlogo" src="/images/companies/yandex-logo.png" />
     </a>
-    <a target="_new" class="imagelink" href="http://www.agrippa.no/en">
+    <a target="_new" class="imagelink" href="https://agrippa.no">
       <img alt="Agrippa Solutions AS" class="memberlogo" src="/images/companies/OrgASLogo.png" />
     </a>
     <a target="_new" class="imagelink" href="https://www.circlehd.com">
