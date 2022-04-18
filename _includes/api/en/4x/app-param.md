@@ -90,8 +90,8 @@ The middleware returned by the function decides the behavior of what happens whe
 In this example, the `app.param(name, callback)` signature is modified to `app.param(name, accessId)`. Instead of accepting a name and a callback, `app.param()` will now accept a name and a number.
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
 // customizing the behavior of app.param()
 app.param(function (param, option) {

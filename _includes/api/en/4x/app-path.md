@@ -3,9 +3,9 @@
 Returns the canonical path of the app, a string.
 
 ```js
-var app = express()
-var blog = express()
-var blogAdmin = express()
+const app = express()
+const blog = express()
+const blogAdmin = express()
 
 app.use('/blog', blog)
 blog.use('/admin', blogAdmin)

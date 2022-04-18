@@ -14,7 +14,7 @@ For details, see [Application settings](/en/4x/api.html#app.settings.table).
 </div>
 
 ```js
-var admin = express()
+const admin = express()
 
 admin.on('mount', function (parent) {
   console.log('Admin Mounted')

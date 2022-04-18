@@ -192,7 +192,7 @@ app.use(function (req, res, next) {
 A router is valid middleware.
 
 ```js
-var router = express.Router()
+const router = express.Router()
 router.get('/', function (req, res, next) {
   next()
 })
@@ -202,7 +202,7 @@ app.use(router)
 An Express app is valid middleware.
 
 ```js
-var subApp = express()
+const subApp = express()
 subApp.get('/', function (req, res, next) {
   next()
 })
@@ -218,12 +218,12 @@ app.use(subApp)
 You can specify more than one middleware function at the same mount path.
 
 ```js
-var r1 = express.Router()
+const r1 = express.Router()
 r1.get('/', function (req, res, next) {
   next()
 })
 
-var r2 = express.Router()
+const r2 = express.Router()
 r2.get('/', function (req, res, next) {
   next()
 })
@@ -240,12 +240,12 @@ app.use(r1, r2)
 Use an array to group middleware logically.
 
 ```js
-var r1 = express.Router()
+const r1 = express.Router()
 r1.get('/', function (req, res, next) {
   next()
 })
 
-var r2 = express.Router()
+const r2 = express.Router()
 r2.get('/', function (req, res, next) {
   next()
 })
@@ -265,13 +265,13 @@ You can combine all the above ways of mounting middleware.
 function mw1 (req, res, next) { next() }
 function mw2 (req, res, next) { next() }
 
-var r1 = express.Router()
+const r1 = express.Router()
 r1.get('/', function (req, res, next) { next() })
 
-var r2 = express.Router()
+const r2 = express.Router()
 r2.get('/', function (req, res, next) { next() })
 
-var subApp = express()
+const subApp = express()
 subApp.get('/', function (req, res, next) { next() })
 
 app.use(mw1, [mw2, r1, r2], subApp)

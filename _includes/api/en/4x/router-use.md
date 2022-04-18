@@ -9,9 +9,9 @@ Middleware is like a plumbing pipe: requests start at the first middleware funct
 and work their way "down" the middleware stack processing for each path they match.
 
 ```js
-var express = require('express')
-var app = express()
-var router = express.Router()
+const express = require('express')
+const app = express()
+const router = express.Router()
 
 // simple logger for this router's requests
 // all requests to this router will first hit this middleware
@@ -45,8 +45,8 @@ They are invoked sequentially, thus the order defines middleware precedence. For
 usually a logger is the very first middleware you would use, so that every request gets logged.
 
 ```js
-var logger = require('morgan')
-var path = require('path')
+const logger = require('morgan')
+const path = require('path')
 
 router.use(logger())
 router.use(express.static(path.join(__dirname, 'public')))
@@ -85,8 +85,8 @@ middleware added via one router may run for other routers if its routes
 match. For example, this code shows two different routers mounted on the same path:
 
 ```js
-var authRouter = express.Router()
-var openRouter = express.Router()
+const authRouter = express.Router()
+const openRouter = express.Router()
 
 authRouter.use(require('./authenticate').basic(usersdb))
 

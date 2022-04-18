@@ -7,10 +7,10 @@ The `app.mountpath` property contains one or more path patterns on which a sub-a
 </div>
 
 ```js
-var express = require('express')
+const express = require('express')
 
-var app = express() // the main app
-var admin = express() // the sub app
+const app = express() // the main app
+const admin = express() // the sub app
 
 admin.get('/', function (req, res) {
   console.log(admin.mountpath) // /admin
@@ -27,14 +27,14 @@ If a sub-app is mounted on multiple path patterns, `app.mountpath` returns the l
 patterns it is mounted on, as shown in the following example.
 
 ```js
-var admin = express()
+const admin = express()
 
 admin.get('/', function (req, res) {
   console.dir(admin.mountpath) // [ '/adm*n', '/manager' ]
   res.send('Admin Homepage')
 })
 
-var secret = express()
+const secret = express()
 secret.get('/', function (req, res) {
   console.log(secret.mountpath) // /secr*t
   res.send('Admin Secret')

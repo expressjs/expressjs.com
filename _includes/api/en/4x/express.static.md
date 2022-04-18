@@ -74,7 +74,7 @@ Arguments:
 Here is an example of using the `express.static` middleware function with an elaborate options object:
 
 ```js
-var options = {
+const options = {
   dotfiles: 'ignore',
   etag: false,
   extensions: ['htm', 'html'],

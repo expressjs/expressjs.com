@@ -3,8 +3,8 @@
 Creates an Express application. The `express()` function is a top-level function exported by the `express` module.
 
 ```js
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 ```
 
 <h3 id='express.methods'>Methods</h3>

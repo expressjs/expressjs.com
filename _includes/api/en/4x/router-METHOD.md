@@ -35,8 +35,8 @@ as "GET /commits/71dbb9c..4c084f9".
 
 ```js
 router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function (req, res) {
-  var from = req.params[0]
-  var to = req.params[1] || 'HEAD'
+  const from = req.params[0]
+  const to = req.params[1] || 'HEAD'
   res.send('commit range ' + from + '..' + to)
 })
 ```

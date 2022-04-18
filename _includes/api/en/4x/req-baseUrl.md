@@ -8,7 +8,7 @@ except `app.mountpath` returns the matched path pattern(s).
 For example:
 
 ```js
-var greet = express.Router()
+const greet = express.Router()
 
 greet.get('/jp', function (req, res) {
   console.log(req.baseUrl) // /greet

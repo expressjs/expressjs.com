@@ -4,7 +4,7 @@ Returns an instance of a single route, which you can then use to handle HTTP ver
 Use `app.route()` to avoid duplicate route names (and thus typo errors).
 
 ```js
-var app = express()
+const app = express()
 
 app.route('/events')
   .all(function (req, res, next) {
