@@ -2,7 +2,17 @@
 
 Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.
 By default, the `Content-Disposition` header "filename=" parameter is derrived from the `path` argument, but can be overridden with the `filename` parameter.
-If `path` is relative, then it will be based on the current working directory of the process.
+If `path` is relative, then it will be based on the current working directory of the process or
+the `root` option, if provided.
+
+<div class="doc-box doc-warn" markdown="1">
+This API provides access to data on the running file system. Ensure that either (a) the way in
+which the `path` argument was constructed is secure if it contains user input or (b) set the `root`
+option to the absolute path of a directory to contain access within.
+
+When the `root` option is provided, Express will validate that the relative path provided as
+`path` will resolve within the given `root` option.
+</div>
 
 The following table provides details on the `options` parameter.
 
@@ -15,6 +25,7 @@ The optional `options` argument is supported by Express v4.16.0 onwards.
 | Property        | Description                                     | Default     | Availability |
 |-----------------|-------------------------------------------------|-------------|--------------|
 | `maxAge`        | Sets the max-age property of the `Cache-Control` header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)| 0 | 4.16+ |
+| `root`          | Root directory for relative filenames.|  | 4.18+ |
 | `lastModified`  | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.| Enabled | 4.16+ |
 | `headers`       | Object containing HTTP headers to serve with the file. The header `Content-Disposition` will be overriden by the `filename` argument.|  | 4.16+ |
 | `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" | 4.16+ |
