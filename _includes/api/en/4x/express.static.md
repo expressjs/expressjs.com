@@ -8,7 +8,7 @@ It serves static files and is based on  [serve-static](/resources/middleware/ser
 
 The `root` argument specifies the root directory from which to serve static assets.
 The function determines the file to serve by combining `req.url` with the provided `root` directory.
-When a file is not found, instead of sending a 404 response, it instead calls `next()`
+When a file is not found, instead of sending a 404 response, it calls `next()`
 to move on to the next middleware, allowing for stacking and fall-backs.
 
 The following table describes the properties of the `options` object.
