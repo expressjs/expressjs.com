@@ -251,7 +251,7 @@ recommends that a browser **SHOULD** allow
 > the cookie's name, value, and attributes)
 
 In practice this limit differs slightly across browsers. See a list of
-[browser limits here](http://browsercookielimits.squawky.net/). As a rule
+[browser limits here](http://browsercookielimits.iain.guru). As a rule
 of thumb **don't exceed 4093 bytes per domain**.
 
 If your session object is large enough to exceed a browser limit when encoded,
