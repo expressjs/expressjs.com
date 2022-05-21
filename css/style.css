@@ -680,6 +680,7 @@ footer {
   align-items: flex-start;
   top: 15px;
   box-sizing: content-box;
+  line-height: 30px;
 }
 
 #navbar a {
