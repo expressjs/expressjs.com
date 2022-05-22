@@ -22,7 +22,7 @@ The Express technical committee consists of active project members, and guides d
 
 ## Community contributing guide
 
-<!-- SRC: https://raw.githubusercontent.com/expressjs/express/master/Contributing.md -->
+<!-- SRC: expressjs/express Contributing.md -->
 
 The goal of this document is to create a contribution process that:
 
@@ -84,11 +84,11 @@ compromise among committers be the default resolution mechanism.
 ### Becoming a Triager
 
 Anyone can become a triager! Read more about the process of being a triager in
-[the triage process document](Triager-Guide.md).
+[the triage process document](https://github.com/expressjs/express/blob/master/Triager-Guide.md).
 
 [Open an issue in `expressjs/express` repo](https://github.com/expressjs/express/issues/new)
 to request the triage role. State that you have read and agree to the
-[Code of Conduct](Code-Of-Conduct.md) and details of the role.
+[Code of Conduct](https://github.com/expressjs/express/blob/master/Code-Of-Conduct.md) and details of the role.
 
 Here is an example issue content you can copy and paste:
 
@@ -138,7 +138,7 @@ a majority of the other members are expected to resign.
 
 ## Collaborator's guide
 
-<!-- SRC: https://raw.githubusercontent.com/expressjs/express/master/Collaborator-Guide.md -->
+<!-- SRC: expressjs/express Collaborator-Guide.md -->
 
 ### Website Issues
 
@@ -192,7 +192,7 @@ us to understand and reproduce your issue, it will be closed.
 
 ## Security Policies and Procedures
 
-<!-- SRC: https://raw.githubusercontent.com/expressjs/express/master/Security.md -->
+<!-- SRC: expressjs/express Security.md -->
 
 This document outlines security procedures and general policies for the Express
 project.
