@@ -249,7 +249,7 @@ function setCustomCacheControl (res, path) {
 [coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/serve-static/master
 [coveralls-url]: https://coveralls.io/r/expressjs/serve-static?branch=master
 [github-actions-ci-image]: https://badgen.net/github/checks/expressjs/serve-static/master?label=linux
-[github-actions-ci-url]: https://github.com/expressjs/serve-static/actions?query=workflow%3Aci
+[github-actions-ci-url]: https://github.com/expressjs/serve-static/actions/workflows/ci.yml
 [node-image]: https://badgen.net/npm/node/serve-static
 [node-url]: https://nodejs.org/en/download/
 [npm-downloads-image]: https://badgen.net/npm/dm/serve-static
