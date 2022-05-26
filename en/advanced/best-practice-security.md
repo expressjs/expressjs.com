@@ -73,22 +73,46 @@ app.use(helmet())
 // ...
 ```
 
-### At a minimum, disable X-Powered-By header
+### Reduce Fingerprinting
 
-If you don't want to use Helmet, then at least disable the `X-Powered-By` header.  Attackers can use this header (which is enabled by default) to detect apps running Express and then launch specifically-targeted attacks.
+It can help to provide an extra layer of obsecurity to reduce server fingerprinting.
+Though not a security issue itself, a method to improve the overall posture of a web
+server is to take measures to reduce the ability to fingerprint the software being
+used on the server. Server software can be fingerprinted by kwirks in how they
+respond to specific requests.
 
-So, best practice is to turn off the header with the `app.disable()` method:
+By default, Express.js sends the `X-Powered-By` response header banner. This can be
+disabled using the `app.disable()` method:
 
 ```js
 app.disable('x-powered-by')
 ```
 
-If you use `helmet.js`, it takes care of this for you.
-
 {% include note.html content="Disabling the `X-Powered-By header` does not prevent
 a sophisticated attacker from determining that an app is running Express.  It may
 discourage a casual exploit, but there are other ways to determine an app is running
 Express. "%}
+
+Express.js also sends it's own formatted 404 Not Found messages and own formatter error
+response messages. These can be changed by
+[adding your own not found handler](/en/starter/faq.html#how-do-i-handle-404-responses)
+and
+[writing your own error handler](/en/guide/error-handling.html#writing-error-handlers):
+
+```js
+// last app.use calls right before app.listen():
+
+// custom 404
+app.use((req, res, next) => {
+  res.status(404).send("Sorry can't find that!")
+})
+
+// custom error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 ## Use cookies securely
 
