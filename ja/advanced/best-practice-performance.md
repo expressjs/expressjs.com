@@ -444,7 +444,7 @@ For more information on clustering with PM2, see [Cluster Mode](https://pm2.keym
 
 ロード・バランサーは通常、複数のアプリケーション・インスタンスやサーバーとの間のトラフィックを調整するリバース・プロキシーです。[Nginx](http://nginx.org/en/docs/http/load_balancing.html) や [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts) を使用して、アプリケーション用にロード・バランサーを簡単にセットアップできます。
 
-ロード・バランシングでは、特定のセッション ID に関連する要求が発信元のプロセスに接続することを確認する必要があります。これは、*セッション・アフィニティー* または*スティッキー・セッション* と呼ばれ、セッション・データに Redis などのデータ・ストアを使用する上記の提案によって対応できます (ご使用のアプリケーションによって異なります)。説明については、[Using multiple nodes](http://socket.io/docs/using-multiple-nodes/) を参照してください。
+ロード・バランシングでは、特定のセッション ID に関連する要求が発信元のプロセスに接続することを確認する必要があります。これは、*セッション・アフィニティー* または*スティッキー・セッション* と呼ばれ、セッション・データに Redis などのデータ・ストアを使用する上記の提案によって対応できます (ご使用のアプリケーションによって異なります)。説明については、[Using multiple nodes](https://socket.io/docs/using-multiple-nodes) を参照してください。
 
 ### リバース・プロキシーを使用する
 

@@ -425,7 +425,7 @@ $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 
 负载均衡器通常是逆向代理，用于编排进出多个应用程序实例和服务器的流量。可以使用 [Nginx](http://nginx.org/en/docs/http/load_balancing.html) 或 [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts) 轻松地为应用程序设置负载均衡器。
 
-对于负载均衡功能，可能必须确保与特定会话标识关联的请求连接到产生请求的进程。这称为*会话亲缘关系*或者*粘性会话*，可通过以上的建议来做到这一点：将 Redis 之类的数据存储器用于会话数据（取决于您的应用程序）。要了解相关讨论，请参阅 [Using multiple nodes](http://socket.io/docs/using-multiple-nodes/)。
+对于负载均衡功能，可能必须确保与特定会话标识关联的请求连接到产生请求的进程。这称为*会话亲缘关系*或者*粘性会话*，可通过以上的建议来做到这一点：将 Redis 之类的数据存储器用于会话数据（取决于您的应用程序）。要了解相关讨论，请参阅 [Using multiple nodes](https://socket.io/docs/using-multiple-nodes)。
 
 #### 将 StrongLoop PM 与 Nginx 负载均衡器一起使用
 

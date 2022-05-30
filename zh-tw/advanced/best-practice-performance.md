@@ -439,7 +439,7 @@ $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 
 負載平衡器通常是一個反向 Proxy，負責協調與多個應用程式實例和伺服器之間的資料流量。利用 [Nginx](http://nginx.org/en/docs/http/load_balancing.html) 或 [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts)，就能輕鬆設定您應用程式的負載平衡器。
 
-如果進行負載平衡，您可能得確定與特定階段作業 ID 相關聯的要求，會連接至發出該要求的程序。這就是所謂的*階段作業親緣性*或*組合階段作業*，如果要解決此情況，可按照上述建議，使用 Redis 等之類的資料儲存庫來儲存階段作業資料（視您的應用程式而定）。相關討論請參閱[使用多個節點](http://socket.io/docs/using-multiple-nodes/)。
+如果進行負載平衡，您可能得確定與特定階段作業 ID 相關聯的要求，會連接至發出該要求的程序。這就是所謂的*階段作業親緣性*或*組合階段作業*，如果要解決此情況，可按照上述建議，使用 Redis 等之類的資料儲存庫來儲存階段作業資料（視您的應用程式而定）。相關討論請參閱[使用多個節點](https://socket.io/docs/using-multiple-nodes)。
 
 #### StrongLoop PM 與 Nginx 負載平衡器搭配使用
 
