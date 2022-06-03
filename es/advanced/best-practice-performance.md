@@ -434,7 +434,7 @@ Independientemente de lo optimizada que esté una aplicación, una única instan
 
 Un equilibrador de carga normalmente es un proxy inverso que orquesta el tráfico hacia y desde los servidores y las instancias de aplicación. Puede configurar fácilmente un equilibrador de carga para la aplicación utilizando [Nginx](http://nginx.org/en/docs/http/load_balancing.html) o [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
-Con el equilibrio de carga, deberá asegurarse de que las solicitudes asociadas con un determinado ID de sesión se conecten al proceso que las ha originado. Esto se conoce como _afinidad de sesiones_ o _sesiones adhesivas_, y puede solucionarse con la recomendación anterior de utilizar un almacén de datos como, por ejemplo, Redis para los datos de sesión (dependiendo de la aplicación). Para obtener más información, consulte [Using multiple nodes](http://socket.io/docs/using-multiple-nodes/).
+Con el equilibrio de carga, deberá asegurarse de que las solicitudes asociadas con un determinado ID de sesión se conecten al proceso que las ha originado. Esto se conoce como _afinidad de sesiones_ o _sesiones adhesivas_, y puede solucionarse con la recomendación anterior de utilizar un almacén de datos como, por ejemplo, Redis para los datos de sesión (dependiendo de la aplicación). Para obtener más información, consulte [Using multiple nodes](https://socket.io/docs/v4/using-multiple-nodes/).
 
 #### Mediante StrongLoop PM con un equilibrador de carga Nginx
 
