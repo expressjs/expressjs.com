@@ -433,7 +433,7 @@ Unabhängig davon, wie gut eine Anwendung optimiert wurde, kann eine Einzelinsta
 
 Ein Load Balancer ist in der Regel ein Reverse Proxy, der den Datenverkehr zu und von mehreren Anwendungsinstanzen und Servern koordiniert. Sie können ohne großen Aufwand einen Load Balancer für Ihre Anwendung einrichten. Verwenden Sie hierzu [Nginx](http://nginx.org/en/docs/http/load_balancing.html) oder [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
-Bei einer solchen Lastverteilung müssen Sie sicherstellen, dass Anforderungen, die einer bestimmten Sitzungs-ID zugeordnet sind, mit dem Prozess verbunden sind, von dem sie ursprünglich stammen. Dies wird auch als *Sitzungsaffinität* oder *Affine Sitzungen* bezeichnet und kann durch den obigen Vorschlag, einen Datenspeicher wie Redis für Sitzungsdaten zu verwenden (je nach Anwendung), umgesetzt werden. Eine Beschreibung hierzu siehe [Mehrere Knoten verwenden](http://socket.io/docs/using-multiple-nodes/).
+Bei einer solchen Lastverteilung müssen Sie sicherstellen, dass Anforderungen, die einer bestimmten Sitzungs-ID zugeordnet sind, mit dem Prozess verbunden sind, von dem sie ursprünglich stammen. Dies wird auch als *Sitzungsaffinität* oder *Affine Sitzungen* bezeichnet und kann durch den obigen Vorschlag, einen Datenspeicher wie Redis für Sitzungsdaten zu verwenden (je nach Anwendung), umgesetzt werden. Eine Beschreibung hierzu siehe [Mehrere Knoten verwenden](https://socket.io/docs/v4/using-multiple-nodes/).
 
 #### StrongLoop Process Manager mit einem Nginx Load Balancer verwenden
 
