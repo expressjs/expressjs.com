@@ -443,7 +443,7 @@ Bir uygulama ne kadar optimize edilmiş olursa olsun, tek bir örnek yalnızca s
 
 Yük dengeleyici, genellikle birden çok uygulama örneği ve sunucusuna gelen ve giden trafiği düzenleyen bir ters proxy'dir. [Nginx](http://nginx.org/en/docs/http/load_balancing.html) veya [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts) kullanarak uygulamanız için bir yük dengeleyiciyi kolayca kurabilirsiniz.
 
-Yük dengeleyici kullanırken, belirli bir oturum kimliğiyle ilişkili isteklerin, onları oluşturan sürece bağlanmasını sağlamanız gerekebilir. Bu, _oturum yakınlığı (session affinity)_, veya _yapışkan oturumlar (sticky sessions)_ olarak bilinir, ve oturum verileri için Redis gibi bir veri deposunun kullanılması için yukarıdaki öneri ile ele alınabilir (uygulamanıza bağlı olarak). Tartışma için bakınız [Birden çok node kullanmak](http://socket.io/docs/using-multiple-nodes/).
+Yük dengeleyici kullanırken, belirli bir oturum kimliğiyle ilişkili isteklerin, onları oluşturan sürece bağlanmasını sağlamanız gerekebilir. Bu, _oturum yakınlığı (session affinity)_, veya _yapışkan oturumlar (sticky sessions)_ olarak bilinir, ve oturum verileri için Redis gibi bir veri deposunun kullanılması için yukarıdaki öneri ile ele alınabilir (uygulamanıza bağlı olarak). Tartışma için bakınız [Birden çok node kullanmak](https://socket.io/docs/v4/using-multiple-nodes/).
 
 ### Ters proxy kullan
 
