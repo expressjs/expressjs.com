@@ -32,7 +32,7 @@ Sie können Middleware auf Anwendungsebene und Routerebene mit einem optionalen 
 
 <h2 id='middleware.application'>Middleware auf Anwendungsebene</h2>
 
-Binden Sie Middleware auf Anwendungsebene zu einer Instanz des [Anwendungsobjekts](/{{ page.lang }}/4x/api.html#app), indem Sie die Funktionen `app.use()` und `app.METHOD()` verwenden. `METHOD` ist dabei die HTTP-Methode der Anforderung, die die Middlewarefunktion in Kleinschreibung verarbeitet (wie GET, PU oder POST).
+Binden Sie Middleware auf Anwendungsebene zu einer Instanz des [Anwendungsobjekts](/{{ page.lang }}/4x/api.html#app), indem Sie die Funktionen `app.use()` und `app.METHOD()` verwenden. `METHOD` ist dabei die HTTP-Methode der Anforderung, die die Middlewarefunktion in Kleinschreibung verarbeitet (wie GET, PUT oder POST).
 
 Dieses Beispiel zeigt eine Middlewarefunktion ohne Mountpfad. Die Funktion wird immer dann ausgeführt, wenn die Anwendung eine Anforderung erhält.
 
