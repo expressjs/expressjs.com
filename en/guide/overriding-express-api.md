@@ -10,7 +10,7 @@ lang: en
 
 The Express API consists of various methods and properties on the request and response objects. These are inherited by prototype. There are two extension points for the Express API:
 
-1. The global protoypes at `express.request` and `express.response`.
+1. The global prototypes at `express.request` and `express.response`.
 2. App-specific prototypes at `app.request` and `app.response`.
 
 Altering the global prototypes will affect all loaded Express apps in the same process. If desired, alterations can be made app-specific by only altering the app-specific prototypes after creating a new app.
