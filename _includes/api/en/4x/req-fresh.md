@@ -2,7 +2,7 @@
 
 When the response is still "fresh" in the client's cache `true` is returned, otherwise `false` is returned to indicate that the client cache is now stale and the full response should be sent.
 
-In order to check weather the response is still "fresh" in the client's cache or not, 2 Tags will be used ETag and If-None-Match, ETag will be fetched from response (saved internally from application) and other tag will be recieved from client's request.
+In order to check whether the response is still "fresh" in the client's cache or not, two tags will be used ETag and If-None-Match. ETag will be fetched from response (saved internally from application) and other tag will be received from client's request.
 
 When a client sends the `Cache-Control: no-cache` request header to indicate an end-to-end reload request, this module will return `false` to make handling these requests transparent.
 
