@@ -58,4 +58,17 @@ Object.defineProperty(app.request, 'ip', {
   get () { return this.get('Client-IP') }
 })
 ```
+
+## Prototype
+
+In order to provide the Express.js API, the request/response obects passed to Express.js (via `app(req, res)`, for example) need to interit from the same prototype chain. By default this is `http.IncomingRequest.prototype` for the request and `http.ServerResponse.prototype` for the response.
+
+Unless necessary, it is recommended that this be done only at the application level, rather than globally. Also, take care that the prototype that is being used matches the functionality as closely as possible to the default prototypes.
+
+```js
+// Use FakeRequest and FakeResponse in place of http.IncomingRequest and http.ServerResponse
+// for the given app reference
+Object.setPrototypeOf(Object.getPrototypeOf(app.request), FakeRequest.prototype)
+Object.setPrototypeOf(Object.getPrototypeOf(app.response), FakeResponse.prototype)
+```
 </div>
