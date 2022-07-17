@@ -126,8 +126,6 @@
             </li>
             <li><a href="#req.is">req.is()</a>
             </li>
-            <li><a href="#req.param">req.param()</a>
-            </li>
             <li><a href="#req.range">req.range()</a>
             </li>
         </ul>
