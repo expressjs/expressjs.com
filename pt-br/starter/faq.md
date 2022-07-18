@@ -30,7 +30,7 @@ simplificam alguns desses padrões:
 ## Como eu defino modelos?
 
 O Express não tem noção de banco de dados. Este conceito é
-deixado para módulos do Node de terceiros, permitindo que você fazer
+deixado para módulos do Node de terceiros, permitindo que você faça
 a interface com praticamente qualquer banco de dados.
 
 Consulte [LoopBack](http://loopback.io) para
