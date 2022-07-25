@@ -32,6 +32,7 @@ These template engines work "out-of-the-box" with Express:
 - **[express-tl](https://github.com/Drulac/express-tl)**: A template-literal engine implementation for Express.
 - **[Twing](https://www.npmjs.com/package/twing)**: First-class Twig engine for Node.js.
 - **[Sprightly](https://www.npmjs.com/package/sprightly)**: A very light-weight JS template engine (45 lines of code), that consists of all the bare-bones features that you want to see in a template engine.
+- **[jsonx](https://www.npmjs.com/package/jsonx)**:  JSON based template engine based templates to render React based views.
 
 The [Consolidate.js](https://github.com/tj/consolidate.js) library unifies the APIs of these template engines to a single Express-compatible API.
 
