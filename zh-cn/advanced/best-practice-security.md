@@ -155,4 +155,4 @@ app.use(session({
 
 关注 [Node 安全项目](https://npmjs.com/advisories)公告，这可能会影响 Express 或应用程序使用的其他模块。一般而言，Node 安全项目是有关 Node 安全性的知识和工具的出色资源。
 
-最后说明一点，和任何其他 Web 应用程序一样，Express 应用程序也容易受到各种基于 Web 的攻击。请熟悉已知的 [Web 漏洞](https://www.owasp.org/index.php/Top_10_2013-Top_10)并采取相应的预防措施。
+最后说明一点，和任何其他 Web 应用程序一样，Express 应用程序也容易受到各种基于 Web 的攻击。请熟悉已知的 [Web 漏洞](https://www.owasp.org/www-project-top-ten/)并采取相应的预防措施。

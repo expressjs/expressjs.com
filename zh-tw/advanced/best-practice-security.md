@@ -159,4 +159,4 @@ app.use(session({
 
 關注 [Node Security Project](https://npmjs.com/advisories) 中有關可能影響您應用程式所用之 Express 或其他模組的公告。一般而言，Node Security Project 是一個絕佳的資源，它提供 Node 安全的相關知識和工具。
 
-最後，如同其他任何的 Web 應用程式，Express 應用程式仍可能遭到各種 Web 型攻擊。請多加熟悉已知的 [Web 漏洞](https://www.owasp.org/index.php/Top_10_2013-Top_10)，並採取預防措施，來避免這些攻擊。
+最後，如同其他任何的 Web 應用程式，Express 應用程式仍可能遭到各種 Web 型攻擊。請多加熟悉已知的 [Web 漏洞](https://www.owasp.org/www-project-top-ten/)，並採取預防措施，來避免這些攻擊。

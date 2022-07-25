@@ -192,7 +192,7 @@ $ snyk wizard
 
 Express'i veya uygulamanızın kullandığı diğer modülleri etkileyen [Snyk](https://snyk.io/vuln/) ve [Node Security Project](https://npmjs.com/advisories) tavsiyelerini takipte kalın. Genel olarak, bu veritabanları Node güvenliği hakkında bilgi ve araçlar için mükemmel kaynaklardır.
 
-Son olarak, Express uygulamaları - diğer web uygulamaları gibi - çeşitli web tabanlı saldırılara karşı savunmasız olabilir. [Web güvenlik açıkları](https://www.owasp.org/index.php/Top_10-2017_Top_10) hakkında kendinizi bilgilendirin ve onlardan kaçınmak için önlemler alın.
+Son olarak, Express uygulamaları - diğer web uygulamaları gibi - çeşitli web tabanlı saldırılara karşı savunmasız olabilir. [Web güvenlik açıkları](https://www.owasp.org/www-project-top-ten/) hakkında kendinizi bilgilendirin ve onlardan kaçınmak için önlemler alın.
 
 ## Ek hususlar
 

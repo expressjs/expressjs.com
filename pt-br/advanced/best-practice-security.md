@@ -242,4 +242,4 @@ pelo seu aplicativo.  Em geral, o Node Security Project é um excelente
 recurso para conhecimento e ferramentas sobre segurança do Node.
 
 Finalmente, os aplicativos do Express - como outros aplicativos web - podem estar vulneráveis a uma variedade de ataques baseados na
-web. Familiarize-se com [vulnerabilidades web](https://www.owasp.org/index.php/Top_10_2013-Top_10) conhecidas e tome precauções para evitá-las.
+web. Familiarize-se com [vulnerabilidades web](https://www.owasp.org/www-project-top-ten/) conhecidas e tome precauções para evitá-las.

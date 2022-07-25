@@ -155,4 +155,4 @@ Ecco alcuni consigli sull'eccellente [Node.js Security Checklist](https://blog.r
 
 Prestare attenzione alle avvertenze [Node Security Project](https://npmjs.com/advisories) che potrebbero influenzare Express o altri moduli utilizzati dall'applicazione.  Solitamente, il Node Security Project è una risorsa eccellente per questioni di apprendimento e per gli strumenti sulla sicurezza di Node.
 
-Infine, le applicazioni Express, come anche altre applicazioni web, possono essere vulnerabili ad una vasta gamma di attacchi basati su web. Cercare di comprendere al meglio le [vulnerabilità web](https://www.owasp.org/index.php/Top_10_2013-Top_10) note e prendere precauzioni per evitarle.
+Infine, le applicazioni Express, come anche altre applicazioni web, possono essere vulnerabili ad una vasta gamma di attacchi basati su web. Cercare di comprendere al meglio le [vulnerabilità web](https://www.owasp.org/www-project-top-ten/) note e prendere precauzioni per evitarle.
