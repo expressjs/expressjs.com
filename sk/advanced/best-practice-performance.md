@@ -88,7 +88,6 @@ Predtým, ako sa hlbšie pustíme do týchto tém, mali by ste mať základné z
 
 Pre viac informácií ohľadom základov error handlingu sa pozrite na:
 
-* [Error Handling in Node.js](https://www.joyent.com/developers/node/design/errors)
 * [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop blog)
 
 #### Čo nerobiť
