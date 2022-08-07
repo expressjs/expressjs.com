@@ -84,7 +84,6 @@ app.use(compression())
 
 Более подробная информация об основных принципах обработки ошибок приведена в разделе:
 
-* [Обработка ошибок в Node.js](https://www.joyent.com/developers/node/design/errors)
 * [Разработка устойчивых к сбоям приложений Node: обработка ошибок](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (корпоративный блог StrongLoop)
 
 #### Чего не нужно делать
