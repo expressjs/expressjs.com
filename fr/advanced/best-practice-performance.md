@@ -84,7 +84,6 @@ Avant de s'immerger dans les rubriques qui suivent, il est conseillé de posséd
 
 Pour plus d'informations sur les bases du traitement des erreurs, voir :
 
-* [Error Handling in Node.js](https://www.joyent.com/developers/node/design/errors)
 * [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (blogue StrongLoop)
 
 #### A ne pas faire
