@@ -122,7 +122,6 @@ convenção de retorno de chamada erros-first para tratar o erro de forma signif
 
 Para obter mais informações sobre os fundamentos de manipulação de erros, consulte:
 
-* [Manipulação de Erros no Node.js](https://www.joyent.com/developers/node/design/errors)
 * [Construindo
 Aplicativos Node Robustos: Manipulação de Erros](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (blog do StrongLoop)
 
