@@ -86,6 +86,7 @@ Antes de profundizar en estos temas, deberá tener unos conocimientos básicos d
 
 Para obtener más información sobre los aspectos básicos del manejo de errores, consulte:
 
+-   [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
 -   [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (blog StrongLoop)
 
 #### Qué no debe hacer
