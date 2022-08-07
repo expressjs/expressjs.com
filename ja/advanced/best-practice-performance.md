@@ -81,7 +81,6 @@ Node アプリケーションは、キャッチされていない例外が発生
 
 エラー処理のその他の基礎については、下記を参照してください。
 
-* [Error Handling in Node.js](https://www.joyent.com/developers/node/design/errors)
 * [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop ブログ)
 
 #### 実行してはならないこと
