@@ -91,7 +91,6 @@ Node 앱은 처리되지 않은 예외가 발생할 때 충돌이 발생합니�
 
 오류 처리의 기본사항 대한 자세한 내용은 다음을 참조하십시오.
 
-* [Error Handling in Node.js](https://www.joyent.com/developers/node/design/errors)
 * [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/)(StrongLoop 블로그)
 
 #### 수행하지 않아야 하는 항목
