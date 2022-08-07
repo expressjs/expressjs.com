@@ -84,7 +84,6 @@ Um näher auf diese Themen eingehen zu können, müssen Sie sich ein grundlegend
 
 Weitere Informationen zu den Grundlagen der Fehlerbehandlung siehe:
 
-* [Fehlerbehandlung in Node.js](https://www.joyent.com/developers/node/design/errors)
 * [Aufbau leistungsfähiger Node-Anwendungen: Fehlerbehandlung](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop-Blog)
 
 #### Was Sie unterlassen sollten
