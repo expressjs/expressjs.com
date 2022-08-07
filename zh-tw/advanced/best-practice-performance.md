@@ -85,6 +85,7 @@ Node 應用程式一旦遇到未捕捉到的異常狀況，就會當機。如果
 
 如需進一步瞭解錯誤處理的基本概念，請參閱：
 
+* [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
 * [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop blog)
 
 #### 禁止事項
