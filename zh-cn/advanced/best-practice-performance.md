@@ -76,6 +76,7 @@ Node 应用程序在遇到未捕获的异常时会崩溃。不处理异常并采
 
 有关错误处理基本知识的更多信息，请参阅：
 
+* [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
 * [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/)（StrongLoop 博客）
 
 #### 请勿执行以下操作
