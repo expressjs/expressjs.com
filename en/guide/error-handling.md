@@ -189,6 +189,31 @@ function errorHandler (err, req, res, next) {
 Note that the default error handler can get triggered if you call `next()` with an error
 in your code more than once, even if custom error handling middleware is in place.
 
+## JSON API error handler
+
+The default error handler returns HTML, but one might want to instead return JSON when designing a pure API instead of a website. Express provides a package for this, [api-error-handler](https://github.com/expressjs/api-error-handler). It can be used in conjunction with a package like [http-errors](https://github.com/jshttp/http-errors) in order to easily throw HTTP errors with a status code with metadata and have them automatically returned by the API. For example:
+
+```js
+const createError = require('http-errors')
+const errorHandler = require('api-error-handler')
+
+app.get('/api/endpoint', (req, res) => {
+  throw createError(400, 'Invalid data sent')
+})
+
+app.use(errorHandler())
+```
+
+This will return a 400 with the following JSON response:
+```js
+{
+  "status":400,
+  "message":"Invalid data sent",
+  "name":"BadRequestError",
+  "stack":"BadRequestError: ...",
+}
+```
+
 ## Writing error handlers
 
 Define error-handling middleware functions in the same way as other middleware functions,
