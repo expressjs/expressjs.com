@@ -11,7 +11,7 @@ The value of this property can be configured with the [query parser application 
 
 ```js
 var qs = require('qs')
-app.setting('query parser', function (str) {
+app.set('query parser', function (str) {
   return qs.parse(str, { /* custom options */ })
 })
 ```
