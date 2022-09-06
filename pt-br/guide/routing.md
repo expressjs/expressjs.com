@@ -13,6 +13,21 @@ cliente.
 Para obter uma introdução a roteamento, consulte
 [Roteamento básico](/{{ page.lang }}/starter/basic-routing.html).
 
+Rotas são definidas utilizando métodos do objeto `app` do Express que correspondem aos métodos HTTP;
+por exemplo, `app.get()` para lidar com requisições GET e `app.post()` para requisições POST. 
+Para a lista completa, veja [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD). 
+Você também pode utilizar [app.all()](/{{ page.lang }}/4x/api.html#app.all) para lidar com todos os métodos HTTP
+e [app.use()](/{{ page.lang }}/4x/api.html#app.use) para especificar middleware como funções de retorno de chamada 
+(Veja [Usando middlewares](/{{ page.lang }}/guide/using-middleware.html) para mais detalhes).
+
+Esses métodos de roteamento especificam uma função de retorno de chamada a ser chamada quando a aplicação 
+recebe uma requisição à rota e método HTTP especificados. Em outras palavras, a aplicação "escuta" 
+requisições que se encaixam nas rotas e métodos especificados e, quando há alguma correspondência, 
+chama a função de retorno de chamada especificada.
+
+Na realidade, métodos de roteamento podem possuir mais de uma função de retorno de chamada como argumento. 
+Com múltiplas funções, é importante passar `next` como argumento da função e chamar `next()` para passar o controle para a próxima.
+
 O código a seguir é um exemplo de uma rota muito básica.
 
 <pre>
