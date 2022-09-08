@@ -61,15 +61,6 @@ app.post('/', (req, res) => {
 O Express suporta métodos que correspondem a todos os métodos de requisição HTTP: `get`, `post`, etc.
 Pra uma lista completa, veja [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD).
 
-Há um método especial, `app.all()`, que permite carregar _middleware_ em uma rota para _todos_ os métodos HTTP.
-Por exemplo, o manipulador a seguir é executado para requisições à rota "/secret" seja utilizando GET, POST, PUT, DELETE, ou qualquer outro método HTTP suportado no [http module](https://nodejs.org/api/http.html#http_http_methods).
-
-<div class="doc-box doc-info" markdown="1">
-Para métodos de rota que são traduzidos para nomes de variáveis
-inválidas no Javascript, use a notação de colchetes. Por exemplo,
-`app['m-search']('/', function ...`
-</div>
-
 Existe um método de roteamento especial,
 `app.all()`, que não é derivado de nenhum método
 HTTP. Este método é usado para carregar funções de middleware em um
@@ -81,14 +72,12 @@ DELETE, ou qualquer outro método de solicitação HTTP que é suportado
 no [módulo
 http](https://nodejs.org/api/http.html#http_http_methods).
 
-<pre>
-<code class="language-javascript" translate="no">
-app.all('/secret', function (req, res, next) {
-  console.log('Accessing the secret section ...');
-  next(); // pass control to the next handler
-});
-</code>
-</pre>
+```js
+app.all('/secret', (req, res, next) => {
+  console.log('Accessing the secret section ...')
+  next() // passa o controle pro próximo manipulador
+})
+```
 
 <h2 id="route-paths">Caminhos de rota</h2>
 
