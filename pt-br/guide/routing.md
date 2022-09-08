@@ -7,40 +7,35 @@ lang: pt-br
 
 # Roteamento
 
-O *Roteamento* refere-se à definição de terminais
-do aplicativo (URIs) e como eles respondem  às solicitações do
-cliente.
-Para obter uma introdução a roteamento, consulte
-[Roteamento básico](/{{ page.lang }}/starter/basic-routing.html).
+O _Roteamento_ refere-se a como os _endpoints_ de uma aplicação (URIs) respondem às requisições do cliente.
+Para uma introdução ao roteamento, consulte [Roteamento básico](/{{ page.lang }}/starter/basic-routing.html).
 
 Rotas são definidas utilizando métodos do objeto `app` do Express que correspondem aos métodos HTTP;
 por exemplo, `app.get()` para lidar com requisições GET e `app.post()` para requisições POST. 
 Para a lista completa, veja [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD). 
 Você também pode utilizar [app.all()](/{{ page.lang }}/4x/api.html#app.all) para lidar com todos os métodos HTTP
-e [app.use()](/{{ page.lang }}/4x/api.html#app.use) para especificar middleware como funções de retorno de chamada 
+e [app.use()](/{{ page.lang }}/4x/api.html#app.use) para especificar middleware como funções _callback_ 
 (Veja [Usando middlewares](/{{ page.lang }}/guide/using-middleware.html) para mais detalhes).
 
-Esses métodos de roteamento especificam uma função de retorno de chamada a ser chamada quando a aplicação 
+Esses métodos de roteamento especificam uma função _callback_ a ser chamada quando a aplicação 
 recebe uma requisição à rota e método HTTP especificados. Em outras palavras, a aplicação "escuta" 
 requisições que se encaixam nas rotas e métodos especificados e, quando há alguma correspondência, 
-chama a função de retorno de chamada especificada.
+chama a função _callback_ especificada.
 
-Na realidade, métodos de roteamento podem possuir mais de uma função de retorno de chamada como argumento. 
+Na realidade, métodos de roteamento podem possuir mais de uma função _callback_ como argumento. 
 Com múltiplas funções, é importante passar `next` como argumento da função e chamar `next()` para passar o controle para a próxima.
 
 O código a seguir é um exemplo de uma rota muito básica.
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', function(req, res) {
-  res.send('hello world');
-});
-</code>
-</pre>
+// Responde com 'hello world' quando uma requisição é feita à homepage
+app.get('/', (req, res) => {
+  res.send('hello world')
+})
+```
 
 <h2 id="route-methods">Métodos de roteamento</h2>
 
@@ -51,23 +46,23 @@ o código a seguir é um exemplo de rotas para a raiz do
 aplicativo que estão definidas para os
 métodos GET e POST.
 
-<pre>
-<code class="language-javascript" translate="no">
-// GET method route
-app.get('/', function (req, res) {
-  res.send('GET request to the homepage');
-});
+```js
+// rota do método GET
+app.get('/', (req, res) => {
+  res.send('GET request to the homepage')
+})
 
-// POST method route
-app.post('/', function (req, res) {
-  res.send('POST request to the homepage');
-});
-</code>
-</pre>
+// rota do método POST
+app.post('/', (req, res) => {
+  res.send('POST request to the homepage')
+})
+```
 
-O Express suporta os seguintes métodos de roteamento que
-correspondem aos métodos HTTP: `get`,
-`post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, e `connect`.
+O Express suporta métodos que correspondem a todos os métodos de requisição HTTP: `get`, `post`, etc.
+Pra uma lista completa, veja [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD).
+
+Há um método especial, `app.all()`, que permite carregar _middleware_ em uma rota para _todos_ os métodos HTTP.
+Por exemplo, o manipulador a seguir é executado para requisições à rota "/secret" seja utilizando GET, POST, PUT, DELETE, ou qualquer outro método HTTP suportado no [http module](https://nodejs.org/api/http.html#http_http_methods).
 
 <div class="doc-box doc-info" markdown="1">
 Para métodos de rota que são traduzidos para nomes de variáveis
@@ -219,11 +214,10 @@ app.get(/.*fly$/, function(req, res) {
 
 <h2 id="route-handlers">Manipuladores de rota</h2>
 
-É possível fornecer várias funções de retorno de chamada
+É possível fornecer várias funções _callback_
 que se comportam como [middleware](/{{ page.lang }}/guide/using-middleware.html) para
-manipular uma solicitação. A única exceção é que estes retornos de
-chamada podem chamar `next('route')` para efetuar um
-bypass nos retornos de chamada da rota restantes. É possível usar
+manipular uma solicitação. A única exceção é que estes _callbacks_ podem chamar `next('route')` para efetuar um
+bypass nos _callbacks_ restantes. É possível usar
 este mecanismo para impor pré-condições em uma rota, e em seguida
 passar o controle para rotas subsequentes se não houveram razões para
 continuar com a rota atual.
@@ -232,7 +226,7 @@ Manipuladores de rota podem estar na forma de uma função, uma
 matriz de funções, ou combinações de ambas, como mostrado nos
 seguintes exemplos.
 
-Uma única função de retorno de chamada pode manipular uma rota.  Por exemplo:
+Uma única função _callback_ pode manipular uma rota.  Por exemplo:
 
 <pre>
 <code class="language-javascript" translate="no">
@@ -242,7 +236,7 @@ app.get('/example/a', function (req, res) {
 </code>
 </pre>
 
-Mais de uma função de retorno de chamada pode manipular uma
+Mais de uma função _callback_ pode manipular uma
 rota (certifique-se de especificar o objeto `next` object). Por exemplo:
 
 <pre>
@@ -256,7 +250,7 @@ app.get('/example/b', function (req, res, next) {
 </code>
 </pre>
 
-Uma matriz de funções de retorno de chamada podem manipular uma
+Uma matriz de funções _callback_ podem manipular uma
 rota.  Por exemplo:
 
 <pre>
