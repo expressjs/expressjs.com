@@ -49,12 +49,12 @@ métodos GET e POST.
 ```js
 // rota do método GET
 app.get('/', (req, res) => {
-  res.send('GET request to the homepage')
+  res.send('requisição GET à homepage')
 })
 
 // rota do método POST
 app.post('/', (req, res) => {
-  res.send('POST request to the homepage')
+  res.send('requisição POST à homepage')
 })
 ```
 
@@ -73,8 +73,8 @@ no [módulo
 http](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
-app.all('/secret', (req, res, next) => {
-  console.log('Accessing the secret section ...')
+app.all('/secreto', (req, res, next) => {
+  console.log('Acessando a área secreta ...')
   next() // passa o controle pro próximo manipulador
 })
 ```
@@ -100,75 +100,61 @@ Aqui estão alguns exemplos de caminhos de rota baseados em sequências de carac
 
 Este caminho de rota corresponde a solicitações à rota raiz, `/`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.send('root');
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.send('raiz')
+})
+```
 
-Este caminho de rota irá corresponder a solicitações ao `/about`.
+Este caminho de rota irá corresponder a solicitações ao `/ajuda`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/about', function (req, res) {
-  res.send('about');
-});
-</code>
-</pre>
+```js
+app.get('/ajuda', (req, res) => {
+  res.send('ajuda')
+})
+```
 
-Este caminho de rota irá corresponder a solicitações ao `/random.text`.
+Este caminho de rota irá corresponder a solicitações ao `/qualquer.texto`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/random.text', function (req, res) {
-  res.send('random.text');
-});
-</code>
-</pre>
+```js
+app.get('/qualquer.texto', (req, res) => {
+  res.send('qualquer.texto')
+})
+```
 
 Aqui estão alguns exemplos de caminhos de rota baseados em padrões de sequência
 
 Este caminho de rota irá corresponder ao `acd` e `abcd`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/ab?cd', function(req, res) {
-  res.send('ab?cd');
-});
-</code>
-</pre>
+```js
+app.get('/ab?cd', (req, res) => {
+  res.send('ab?cd')
+})
+```
 
 Este caminho de rota irá corresponder ao `abcd`, `abbcd`, `abbbcd`, e assim por diante.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/ab+cd', function(req, res) {
-  res.send('ab+cd');
-});
-</code>
-</pre>
+```js
+app.get('/ab+cd', (req, res) => {
+  res.send('ab+cd')
+})
+```
 
-Este caminho de rota irá corresponder ao `abcd`, `abxcd`, `abRABDOMcd`, `ab123cd`, e assim por diante.
+Este caminho de rota irá corresponder ao `abcd`, `abxcd`, `abRANDOMcd`, `ab123cd`, e assim por diante.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/ab*cd', function(req, res) {
-  res.send('ab*cd');
-});
-</code>
-</pre>
+```js
+app.get('/ab*cd', (req, res) => {
+  res.send('ab*cd')
+})
+```
 
 Este caminho de rota irá corresponder ao `/abe` e `/abcde`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/ab(cd)?e', function(req, res) {
- res.send('ab(cd)?e');
-});
-</code>
-</pre>
+```js
+app.get('/ab(cd)?e', (req, res) => {
+  res.send('ab(cd)?e')
+})
+```
 
 <div class="doc-box doc-info" markdown="1">
 Os caracteres ?, +, *, e () são subconjuntos de suas contrapartes em
@@ -181,25 +167,21 @@ Exemplos de caminhos de rota baseados em expressões regulares:
 Este caminho de rota irá corresponder a qualquer coisa com um
 "a" no nome.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get(/a/, function(req, res) {
-  res.send('/a/');
-});
-</code>
-</pre>
+```js
+app.get(/a/, (req, res) => {
+  res.send('/a/')
+})
+```
 
 Este caminho de rota irá corresponder a `butterfly` e
 `dragonfly`, mas não a `butterflyman`,
 `dragonfly man`, e assim por diante.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get(/.*fly$/, function(req, res) {
-  res.send('/.*fly$/');
-});
-</code>
-</pre>
+```js
+app.get(/.*fly$/, (req, res) => {
+  res.send('/.*fly$/')
+})
+```
 
 <h2 id="route-handlers">Manipuladores de rota</h2>
 
@@ -217,74 +199,61 @@ seguintes exemplos.
 
 Uma única função _callback_ pode manipular uma rota.  Por exemplo:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/example/a', function (req, res) {
-  res.send('Hello from A!');
-});
-</code>
-</pre>
+```js
+app.get('/exemplo/a', (req, res) => {
+  res.send('A diz olá!')
+})
+```
 
 Mais de uma função _callback_ pode manipular uma
-rota (certifique-se de especificar o objeto `next` object). Por exemplo:
+rota (certifique-se de especificar o objeto `next`). Por exemplo:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/example/b', function (req, res, next) {
-  console.log('the response will be sent by the next function ...');
-  next();
-}, function (req, res) {
-  res.send('Hello from B!');
-});
-</code>
-</pre>
+```js
+app.get('/exemplo/b', (req, res, next) => {
+  console.log('a resposta será enviada para a próxima função ...')
+  next()
+}, (req, res) => {
+  res.send('B diz olá!')
+})
+```
 
 Uma matriz de funções _callback_ podem manipular uma
 rota.  Por exemplo:
 
-<pre>
-<code class="language-javascript" translate="no">
-var cb0 = function (req, res, next) {
-  console.log('CB0');
-  next();
+```js
+const cb0 = function (req, res, next) {
+  console.log('CB0')
+  next()
 }
-
-var cb1 = function (req, res, next) {
-  console.log('CB1');
-  next();
+const cb1 = function (req, res, next) {
+  console.log('CB1')
+  next()
 }
-
-var cb2 = function (req, res) {
-  res.send('Hello from C!');
+const cb2 = function (req, res) {
+  res.send('C diz olá!')
 }
-
-app.get('/example/c', [cb0, cb1, cb2]);
-</code>
-</pre>
+app.get('/exemplo/c', [cb0, cb1, cb2])
+```
 
 Uma combinação de funções independentes e matrizes de funções
 podem manipular uma rota.  Por exemplo:
 
-<pre>
-<code class="language-javascript" translate="no">
-var cb0 = function (req, res, next) {
-  console.log('CB0');
-  next();
+```js
+const cb0 = function (req, res, next) {
+  console.log('CB0')
+  next()
 }
-
-var cb1 = function (req, res, next) {
-  console.log('CB1');
-  next();
+const cb1 = function (req, res, next) {
+  console.log('CB1')
+  next()
 }
-
-app.get('/example/d', [cb0, cb1], function (req, res, next) {
-  console.log('the response will be sent by the next function ...');
-  next();
-}, function (req, res) {
-  res.send('Hello from D!');
-});
-</code>
-</pre>
+app.get('/example/d', [cb0, cb1], (req, res, next) => {
+  console.log('a resposta será enviada pela próxima função ...')
+  next()
+}, (req, res) => {
+  res.send('D diz olá!')
+})
+```
 
 <h2 id="response-methods">Métodos de resposta</h2>
 
@@ -313,20 +282,18 @@ Como o caminho é especificado em uma localização única, criar rotas modulare
 
 Aqui está um exemplo de manipuladores de rotas encadeáveis que são definidos usando `app.route()`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.route('/book')
-  .get(function(req, res) {
-    res.send('Get a random book');
+```js
+app.route('/livro')
+  .get((req, res) => {
+    res.send('Retorna um livro aleatório')
   })
-  .post(function(req, res) {
-    res.send('Add a book');
+  .post((req, res) => {
+    res.send('Adiciona um livro')
   })
-  .put(function(req, res) {
-    res.send('Update the book');
-  });
-</code>
-</pre>
+  .put((req, res) => {
+    res.send('Atualiza o livro')
+  })
+```
 
 <h2 id="express-router">express.Router</h2>
 
@@ -341,43 +308,37 @@ função de middleware nele, define algumas rotas, e monta o módulo
 router em um caminho no aplicativo principal.
 
 Crie um arquivo de roteador com um arquivo chamado
-`birds.js` no diretório do aplicativo, com o
+`passaros.js` no diretório do aplicativo, com o
 seguinte conteúdo:
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var router = express.Router();
-
-// middleware that is specific to this router
-router.use(function timeLog(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-});
-// define the home page route
-router.get('/', function(req, res) {
-  res.send('Birds home page');
-});
-// define the about route
-router.get('/about', function(req, res) {
-  res.send('About birds');
-});
-
-module.exports = router;
-</code>
-</pre>
+```js
+const express = require('express')
+const router = express.Router()
+// middleware específico para este roteador
+router.use((req, res, next) => {
+  console.log('Horário: ', Date.now())
+  next()
+})
+// define a rota da homepage
+router.get('/', (req, res) => {
+  res.send('Homepage de pássaros')
+})
+// define a rota 'ajuda'
+router.get('/ajuda', (req, res) => {
+  res.send('Ajuda sobre pássaros')
+})
+module.exports = router
+```
 
 Em seguida, carregue o módulo roteador no aplicativo:
 
-<pre>
-<code class="language-javascript" translate="no">
-var birds = require('./birds');
-...
-app.use('/birds', birds);
-</code>
-</pre>
+```js
+const passaros = require('./passaros')
+// ...
+app.use('/passaros', passaros)
+```
 
 O aplicativo será agora capaz de manipular solicitações aos
-caminhos `/birds` e `/birds/about`,
+caminhos `/passaros` e `/passaros/ajuda`,
 assim como chamar a função de middleware `timeLog` que
 é específica para a rota.
