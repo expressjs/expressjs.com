@@ -144,7 +144,6 @@ app.use(session({
 Ecco alcuni consigli sull'eccellente [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/).  Fare riferimento a quel post del blog per tutti i dettagli su questi consigli:
 
 * Implementare il limite di intervallo per evitare attacchi pesanti al processo di autenticazione.  Un modo per effettuare ciò è quello di utilizzare [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) per rafforzare una policy per il limite di intervallo.  In alternativa, è possibile utilizzare il middleware, ad esempio [express-limiter](https://www.npmjs.com/package/express-limiter), ma questo richiede di modificare in parte il codice.
-* Utilizzare il middleware [csurf](https://www.npmjs.com/package/csurf) come protezione contro CSRF (cross-site request forgery).
 * Filtrare sempre e verificare gli input utente come protezione contro attacchi XSS (cross-site scripting) e command injection.
 * Creare una difesa contro attacchi SQL injection utilizzando query con parametri o istruzioni preparate.
 * Utilizzare lo strumento [sqlmap](http://sqlmap.org/) open source per rilevare le vulnerabilità SQL injection nell'applicazione.

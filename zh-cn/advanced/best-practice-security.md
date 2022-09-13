@@ -144,7 +144,6 @@ app.use(session({
 以下是来自非常出色的 [Node.js 安全核对表](https://blog.risingstack.com/node-js-security-checklist/)的一些进一步建议。请参阅此博客帖子以了解关于这些建议的所有详细信息：
 
 * 实施速率限制，防止针对认证的暴力攻击。实现这一点的一种方式是使用 [StrongLoop API ](https://strongloop.com/node-js/api-gateway/)来强制实施速率限制策略。或者，可以使用诸如 [express-limiter](https://www.npmjs.com/package/express-limiter) 的中间件，但是这样做需要对代码作些修改。
-* 使用 [csurf](https://www.npmjs.com/package/csurf) 中间件来防御跨站点请求伪造 (CSRF)。
 * 始终过滤和净化用户输入，防御跨站点脚本编制 (XSS) 和命令注入攻击。
 * 使用参数化查询或预编译的语句来防御 SQL 注入攻击。
 * 使用开源的 [sqlmap](http://sqlmap.org/) 工具来检测应用程序中的 SQL 注入漏洞。

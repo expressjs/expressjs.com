@@ -198,7 +198,6 @@ Son olarak, Express uygulamaları - diğer web uygulamaları gibi - çeşitli we
 
 İşte mükemmel [Node.js Güvenlik Kontrol Listesi](https://blog.risingstack.com/node-js-security-checklist/)'nden bazı ek öneriler. Bu önerilerle ilgili tüm ayrıntılar için o blog gönderisine bakın:
 
-* Siteler arası istek sahteciliği'ne (CSRF) karşı korumak için [csurf](https://www.npmjs.com/package/csurf) ara yazılımını kullanın.
 * Siteler arası komut dosyası oluşturma (XSS) ve komut enjeksiyon saldırılarına karşı korumak için kullanıcı girişini her zaman filtreleyin ve sanitize edin.
 * Parametreli sorgular veya hazırlanmış ifadeler kullanarak SQL enjeksiyon saldırılarına karşı savunma yapın.
 * Uygulamanızdaki SQL enjeksion güvenlik açıklarını tespit etmek için açık kaynak olan [sqlmap](http://sqlmap.org/) aracını kullanın.

@@ -18,7 +18,6 @@ lang: zh-cn
   - [connect-timeout](https://github.com/expressjs/timeout)：先前为 `express.timeout`。
   - [cookie-parser](https://github.com/expressjs/cookie-parser)：先前为 `express.cookieParser`。
   - [cookie-session](https://github.com/expressjs/cookie-session)：先前为 `express.cookieSession`。
-  - [csurf](https://github.com/expressjs/csurf)：先前为 `express.csrf`。
   - [errorhandler](https://github.com/expressjs/errorhandler)：先前为 `express.errorHandler`。
   - [express-debug](https://github.com/devoidfury/express-debug)：不引人注目的开发工具，用于向应用程序添加一个选项卡，其中包含有关模板变量（本地）、当前会话、有用请求数据等方面的信息。
   - [express-partial-response](https://github.com/nemtsov/express-partial-response)：Express 中间件模块，使用 Google API 的 Partial Response，根据 `fields` 查询字符串过滤掉 JSON 响应的各个部分。

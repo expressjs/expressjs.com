@@ -144,7 +144,6 @@ app.use(session({
 Dies sind einige weitere Empfehlungen aus der hervorragenden [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/).  In diesem Blogbeitrag finden Sie alle Details zu diesen Empfehlungen:
 
 * Implementieren Sie Rate-Limiting, um Brute-Force-Attacken gegen Authentifizierungen zu verhindern. Hierfür können Sie beispielsweise das [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) verwenden, um eine Rate-Limiting-Richtlinie durchzusetzen. Alternativ können Sie eine Middleware wie [express-limiter](https://www.npmjs.com/package/express-limiter) verwenden. Hierzu müssen Sie jedoch Ihren Code etwas modifizieren.
-* Verwenden Sie die [csurf](https://www.npmjs.com/package/csurf)-Middleware, um CSRF-Attacken (Cross-Site Request Forgery) vorzubeugen.
 * Filtern und bereinigen Sie immer Benutzereingaben, um sich gegen XS-Angriffe (Cross-Site Scripting) und Befehlsinjektionsattacken zu schützen.
 * Implementieren Sie Verteidungsmaßnahmen gegen SQL-Injection-Attacken, indem sie parametrisierte Abfragen oder vorbereitete Anweisungen einsetzen.
 * Nutzen Sie das Open-Source-Tool [sqlmap](http://sqlmap.org/), um SQL-Injection-Schwachstellen in Ihrer Anwendung zu erkennen.

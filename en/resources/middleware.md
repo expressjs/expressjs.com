@@ -20,7 +20,6 @@ The Express middleware modules listed here are maintained by the
 | [cookie-parser](/resources/middleware/cookie-parser.html) | Parse cookie header and populate `req.cookies`. See also [cookies](https://github.com/jed/cookies) and [keygrip](https://github.com/jed/keygrip). | express.cookieParser|
 | [cookie-session](/resources/middleware/cookie-session.html) | Establish cookie-based sessions.| express.cookieSession |
 | [cors](/resources/middleware/cors.html) | Enable cross-origin resource sharing (CORS) with various options.| NA
-| [csurf](/resources/middleware/csurf.html) | Protect from CSRF exploits.|express.csrf |
 | [errorhandler](/resources/middleware/errorhandler.html) |Development error-handling/debugging. |express.errorHandler |
 | [method-override](/resources/middleware/method-override.html) |Override HTTP methods using header. |express.methodOverride |
 | [morgan](/resources/middleware/morgan.html) | HTTP request logger. | express.logger |

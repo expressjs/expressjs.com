@@ -223,7 +223,6 @@ bruta contra a autenticação.  Uma forma de fazer isso é usar o [Gateway
 da API do StrongLoop](https://strongloop.com/node-js/api-gateway/) para impingir políticas de limitação de tráfego.  Alternativamente,
 é possível usar um middleware como o [express-limiter](https://www.npmjs.com/package/express-limiter),
 mas fazer isso  irá requerer que você modifique seu código de alguma forma.
-* Use o middleware [csurf](https://www.npmjs.com/package/csurf) para se proteger contra falsificações de solicitação cross-site (CSRF).
 * Sempre filtrar e limpar a entrada do usuário para se proteger de ataques de cross-site scripting (XSS) e injeção de comando.
 * Proteja-se contra ataques de injeção de SQLs usando consultas parametrizadas ou instruções preparadas.
 * Use a ferramenta de software livre [sqlmap](http://sqlmap.org/) para detectar

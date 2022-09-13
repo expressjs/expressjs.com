@@ -19,7 +19,6 @@ Estos son algunos módulos de middleware de Express:
   - [connect-timeout](https://github.com/expressjs/timeout): anteriormente `express.timeout`
   - [cookie-parser](https://github.com/expressjs/cookie-parser): anteriormente `express.cookieParser`
   - [cookie-session](https://github.com/expressjs/cookie-session): anteriormente `express.cookieSession`
-  - [csurf](https://github.com/expressjs/csurf): anteriormente `express.csrf`
   - [errorhandler](https://github.com/expressjs/errorhandler): anteriormente `express.errorHandler`
   - [express-debug](https://github.com/devoidfury/express-debug): herramienta de desarrollo discreta que añade a la aplicación un separador con información sobre las variables de plantilla (locals), la sesión actual, datos de solicitud útiles, etc.
   - [express-partial-response](https://github.com/nemtsov/express-partial-response): módulo de middleware de Express middleware para filtrar partes de las respuestas JSON basándose en la serie de consulta `fields`; utiliza la respuesta parcial de la API de Google.

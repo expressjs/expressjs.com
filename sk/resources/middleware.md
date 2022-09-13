@@ -23,7 +23,6 @@ Tu je zoznam niektorých Express middleware modulov:
   - [connect-timeout](https://github.com/expressjs/timeout): kedysi `express.timeout`
   - [cookie-parser](https://github.com/expressjs/cookie-parser): kedysi `express.cookieParser`
   - [cookie-session](https://github.com/expressjs/cookie-session): kedysi `express.cookieSession`
-  - [csurf](https://github.com/expressjs/csurf): kedysi `express.csrf`
   - [errorhandler](https://github.com/expressjs/errorhandler): kedysi `express.errorHandler`
   - [express-debug](https://github.com/devoidfury/express-debug): nenápadný development tool, ktorý pridá panel s informáciami ohľadom template premenných, aktuálnej session, informácie o request dátach a ďalšie užitočné informácie.
   - [express-partial-response](https://github.com/nemtsov/express-partial-response): Express middleware modul slúžiaci k odfiltrovaniu častí JSON odpovedi na podľa hodnoty query parametra `fields`.

@@ -224,7 +224,6 @@ Finally, Express apps - like any other web apps - can be vulnerable to a variety
 
 Here are some further recommendations from the excellent [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/).  Refer to that blog post for all the details on these recommendations:
 
-* Use [csurf](https://www.npmjs.com/package/csurf) middleware to protect against cross-site request forgery (CSRF).
 * Always filter and sanitize user input to protect against cross-site scripting (XSS) and command injection attacks.
 * Defend against SQL injection attacks by using parameterized queries or prepared statements.
 * Use the open-source [sqlmap](http://sqlmap.org/) tool to detect SQL injection vulnerabilities in your app.

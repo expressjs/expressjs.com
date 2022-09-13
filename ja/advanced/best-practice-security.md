@@ -186,7 +186,6 @@ $ snyk wizard
 次に、優れた [Node.js セキュリティー・チェックリスト](https://blog.risingstack.com/node-js-security-checklist/)に記載されているその他の推奨事項をリストします。これらの推奨事項の詳細については、ブログの投稿を参照してください。
 
 * 認証に対する総当たり攻撃を防止するために、回数制限を実装してください。そのための 1 つの方法では、[StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) を使用して回数制限ポリシーを適用します。あるいは、[express-limiter](https://www.npmjs.com/package/express-limiter) などのミドルウェアを使用できますが、そのためにはコードを若干変更する必要があります。
-* クロスサイト・リクエスト・フォージェリー (CSRF) から保護するために、[csurf](https://www.npmjs.com/package/csurf) ミドルウェアを使用してください。
 * クロスサイト・スクリプティング (XSS) とコマンド・インジェクション攻撃から保護するために、必ず、ユーザー入力のフィルタリングとサニタイズを実行してください。
 * パラメーター化照会または作成済みステートメントを使用して、SQL インジェクション攻撃に対して防衛してください。
 * オープン・ソースの [sqlmap](http://sqlmap.org/) ツールを使用して、アプリケーションの SQL インジェクションに対する脆弱性を検出してください。

@@ -18,7 +18,6 @@ lang: zh-tw
   - [connect-timeout](https://github.com/expressjs/timeout)：即先前的 `express.timeout`
   - [cookie-parser](https://github.com/expressjs/cookie-parser)：即先前的 `express.cookieParser`
   - [cookie-session](https://github.com/expressjs/cookie-session)：即先前的 `express.cookieSession`
-  - [csurf](https://github.com/expressjs/csurf)：即先前的 `express.csrf`
   - [errorhandler](https://github.com/expressjs/errorhandler)：即先前的 `express.errorHandler`
   - [express-debug](https://github.com/devoidfury/express-debug)：低調的開發工具，可在您的應用程式中新增標籤，內含範本變數 (locals)、現行階段作業、有用的要求資料等相關資訊。
   - [express-partial-response](https://github.com/nemtsov/express-partial-response)：Express 中介軟體模組，會根據 `fields` 查詢字串，使用 Google API 的 Partial Response 來濾除 JSON 回應部分。

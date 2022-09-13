@@ -4,7 +4,6 @@
 - [cookie-parser](/resources/middleware/cookie-parser.html)
 - [cookie-session](/resources/middleware/cookie-session.html)
 - [cors](/resources/middleware/cors.html)
-- [csurf](/resources/middleware/csurf.html)
 - [errorhandler](/resources/middleware/errorhandler.html)
 - [method-override](/resources/middleware/method-override.html)
 - [morgan](/resources/middleware/morgan.html)
