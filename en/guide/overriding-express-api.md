@@ -61,7 +61,7 @@ Object.defineProperty(app.request, 'ip', {
 
 ## Prototype
 
-In order to provide the Express.js API, the request/response obects passed to Express.js (via `app(req, res)`, for example) need to inherit from the same prototype chain. By default this is `http.IncomingRequest.prototype` for the request and `http.ServerResponse.prototype` for the response.
+In order to provide the Express.js API, the request/response objects passed to Express.js (via `app(req, res)`, for example) need to inherit from the same prototype chain. By default this is `http.IncomingRequest.prototype` for the request and `http.ServerResponse.prototype` for the response.
 
 Unless necessary, it is recommended that this be done only at the application level, rather than globally. Also, take care that the prototype that is being used matches the functionality as closely as possible to the default prototypes.
 
