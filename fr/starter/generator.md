@@ -80,7 +80,7 @@ Sous Windows, utilisez la commande suivante :
 > set DEBUG=myapp:* & npm start
 ```
 
-Ensuite, chargez 'http://hôte_local:3000/' dans votre navigateur pour accéder à l'application.
+Ensuite, chargez 'http://localhost:3000/' dans votre navigateur pour accéder à l'application.
 
 L'application générée possède la structure de répertoire suivante :
 
