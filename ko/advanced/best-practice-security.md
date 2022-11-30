@@ -180,13 +180,6 @@ $ cd your-app
 $ snyk test
 ```
 
-Use this command to open a wizard that walks you through the process of applying updates or patches to fix the vulnerabilities that were found:
-아래 명령으로 찾은 취약점을 고치는 패치나 업데이트를 받는 설치 마법사를 실행합니다.
-
-```console
-$ snyk wizard
-```
-
 <a name="avoid-other-known-vulnerabilities"></a>
 ## 그 외의 알려져 있는 취약점 회피
 

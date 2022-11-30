@@ -175,12 +175,6 @@ Use this command to test your application for vulnerabilities:
 $ snyk test
 ```
 
-Use this command to open a wizard that walks you through the process of applying updates or patches to fix the vulnerabilities that were found:
-
-```console
-$ snyk wizard
-```
-
 ## Avoid other known vulnerabilities
 
 Keep an eye out for [Node Security Project](https://npmjs.com/advisories) or [Snyk](https://snyk.io/vuln/) advisories that may affect Express or other modules that your app uses.  In general, these databases are excellent resources for knowledge and tools about Node security.
