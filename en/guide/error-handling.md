@@ -104,7 +104,7 @@ that return promises.  For example:
 
 ```js
 app.get('/', (req, res, next) => {
-  Promise.resolve().then(() => {
+  return Promise.resolve().then(() => {
     throw new Error('BROKEN')
   }).catch(next) // Errors will be passed to Express.
 })
