@@ -46,7 +46,6 @@ These are some additional popular middleware modules.
 | [express-partial-response](https://github.com/nemtsov/express-partial-response) | Filters out parts of JSON responses based on the `fields` query-string; by using Google API's Partial Response.|
 | [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn) | Use a CDN for static assets, with multiple host support.|
 | [express-slash](https://github.com/ericf/express-slash) | Handles routes with and without trailing slashes.|
-| [express-stormpath](https://github.com/stormpath/stormpath-express) | User storage, authentication, authorization, SSO, and data security.|
 | [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize) | Redirects HTTP requests containing uppercase to a canonical lowercase form.|
 | [helmet](https://github.com/helmetjs/helmet) |Helps secure your apps by setting various HTTP headers.|
 | [join-io](https://github.com/coderaiser/join-io) | Joins files on the fly to reduce the requests count.|
