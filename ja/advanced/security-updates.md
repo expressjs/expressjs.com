@@ -9,7 +9,8 @@ lang: ja
 
 <div class="doc-box doc-notice" markdown="1">
 
-Node.js の脆弱性は Express に直接影響を与えます。そのため、[Node.js の脆弱性の監視を続けて](http://blog.nodejs.org/vulnerability/)、必ず、安定した最新バージョンの Node.js を使用してください。
+Node.js の脆弱性は Express に直接影響を与えます。そのため、[Node.js の脆弱性の監視を続けて](https://nodejs.org
+/en/blog/vulnerability/)、必ず、安定した最新バージョンの Node.js を使用してください。
 
 </div>
 
