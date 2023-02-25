@@ -33,6 +33,7 @@ These template engines work "out-of-the-box" with Express:
 - **[Twing](https://www.npmjs.com/package/twing)**: First-class Twig engine for Node.js.
 - **[Sprightly](https://www.npmjs.com/package/sprightly)**: A very light-weight JS template engine (45 lines of code), that consists of all the bare-bones features that you want to see in a template engine.
 - **[html-express-js](https://www.npmjs.com/package/html-express-js)**: A small template engine for those that want to just serve static or dynamic HTML pages using native JavaScript.
+- **[pghtml](https://pghtml.org/en/)**: Template engine using PostgreSQL.
 
 The [Consolidate.js](https://github.com/tj/consolidate.js) library unifies the APIs of these template engines to a single Express-compatible API.
 
