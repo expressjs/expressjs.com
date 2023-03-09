@@ -1,7 +1,7 @@
 <h3 id='res.download'>res.download(path [, filename] [, options] [, fn])</h3>
 
 Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.
-By default, the `Content-Disposition` header "filename=" parameter is derrived from the `path` argument, but can be overridden with the `filename` parameter.
+By default, the `Content-Disposition` header "filename=" parameter is derived from the `path` argument, but can be overridden with the `filename` parameter.
 If `path` is relative, then it will be based on the current working directory of the process or
 the `root` option, if provided.
 

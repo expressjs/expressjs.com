@@ -5,7 +5,7 @@ The optional `options` argument is supported by Express v4.16.0 onwards.
 </div>
 
 Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.
-By default, the `Content-Disposition` header "filename=" parameter is derrived from the `path` argument, but can be overridden with the `filename` parameter.
+By default, the `Content-Disposition` header "filename=" parameter is derived from the `path` argument, but can be overridden with the `filename` parameter.
 If `path` is relative, then it will be based on the current working directory of the process.
 
 The following table provides details on the `options` parameter.
