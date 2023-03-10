@@ -5,54 +5,52 @@ menu: resources
 lang: uz
 ---
 
-# Glossary
+# Lug'at
 
-<div class="doc-box doc-warn">This is currently a working draft</div>
+### ilova
 
-### application
-
-In general, one or more programs designed to carry out operations for a specific purpose.  In the context of Express, a program that uses the Express API running on the Node.js platform.  May also refer to an [app object](/api.html#express).
+Umuman olganda, ma'lum bir maqsad uchun operatsiyalarni bajarish uchun mo'ljallangan bir yoki bir nechta dasturlar. Express kontekstida, Node.js platformasida ishlaydigan Express API ishlatadigan dastur. [Ilova obyektiga](https://expressjs.com/en/api.html#express) ham murojaat qilishi mumkin .
 
 ### API
 
-Application programming interface.  Spell out on first use.
+Ilova dasturlash interfeysi. Qisqartma birinchi marta qo'llanganda uni yozing.
 
-### Express
+### Ekspress
 
-A fast, un-opinionated, minimalist web framework for Node.js applications.  In general, prefer simply "Express" to "Express.js," though the latter is acceptable.
+Node.js ilovalari uchun tezkor, noaniq, minimalist veb-ramka. Umuman olganda, "Express.js" dan ko'ra "Express" afzalroq, ammo ikkinchisi maqbuldir.
 
 ### libuv
 
-Multi-platform support library with focus on asynchronous I/O, primarily developed for use by Node.js.
+Asinxron kiritish-chiqarishga yoʻnaltirilgan koʻp platformali qoʻllab-quvvatlash kutubxonasi, asosan Node.js tomonidan foydalanish uchun ishlab chiqilgan.
 
-### middleware
+### o'rta dastur
 
-A function invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route.  A few fine points of terminology around middleware:
+Yakuniy so'rovni qayta ishlovchidan oldin Express marshrutlash qatlami tomonidan chaqiriladigan va shu tariqa xom so'rov va yakuniy mo'ljallangan marshrut o'rtasida joylashgan funksiya. O'rta dasturiy ta'minot atrofidagi terminologiyaning bir nechta nozik nuqtalari:
 
-  * `var foo = require('middleware')` is called _requiring_ or _using_ a Node.js module. Then the statement `var mw = foo()`  typically returns the middleware.
-  * `app.use(mw)` is called _adding the middleware to the global processing stack_.
-  * `app.get('/foo', mw, function (req, res) { ... })` is called _adding the middleware to the "GET /foo" processing stack_.
+- `var foo = require('middleware')`Node.js modulini *talab qilish* yoki *ishlatish* deb ataladi . Keyin bayonot `var mw = foo()`odatda o'rta dasturni qaytaradi.
+- `app.use(mw)`*o'rta dasturni global ishlov berish stekiga qo'shish* deb ataladi .
+- `app.get('/foo', mw, function (req, res) { ... })`*"GET /foo" ishlov berish stekiga o'rta dasturni qo'shish* deb ataladi .
 
 ### Node.js
 
-Software platform used to build scalable network applications. Node.js uses JavaScript as its scripting language, and achieves high throughput via non-blocking I/O and a single-threaded event loop.  See [nodejs.org](http://nodejs.org/). **Usage note**: Initially, "Node.js," thereafter "Node".
+Kengaytiriladigan tarmoq ilovalarini yaratish uchun foydalaniladigan dasturiy platforma. Node.js JavaScript-ni skript tili sifatida ishlatadi va bloklanmaydigan kiritish-chiqarish va bir torli voqea tsikli orqali yuqori o'tkazuvchanlikka erishadi. [nodejs.org](https://nodejs.org/en/) ga qarang . **Foydalanish bo'yicha eslatma** : Dastlab "Node.js", keyin "Node".
 
-### open-source, open source
+### ochiq manba, ochiq manba
 
-When used as an adjective, hyphenate; for example: "This is open-source software." See [Open-source software on Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Note: Although it is common not to hyphenate this term, we are using the standard English rules for hyphenating a compound adjective
+Sifat sifatida ishlatilganda, tire; masalan: "Bu ochiq kodli dasturiy ta'minot." [Vikipediyadagi ochiq kodli dasturiy taʼminotga](http://en.wikipedia.org/wiki/Open-source_software) qarang . Eslatma: Garchi bu atamani tire qo'ymaslik odatiy hol bo'lsa-da, biz qo'shma sifatni defislash uchun standart ingliz qoidalaridan foydalanamiz.
 
 ### request
 
-An HTTP request.  A client submits an HTTP request message to a server, which returns an response.  Must use one of several [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) such as GET, POST, and so on.
+HTTP so'rovi. Mijoz serverga HTTP so'rovi xabarini yuboradi, u javob qaytaradi. So'rovda GET, POST va boshqalar kabi bir nechta [so&#39;rov usullaridan birini qo&#39;llash kerak.](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods)
 
 ### response
 
-An HTTP response. A server returns an HTTP response message to the client. The response contains completion status information about the request and may also contain requested content in its message body.
+HTTP javobi. Server mijozga HTTP javob xabarini qaytaradi. Javobda soʻrov haqidagi yakuniy holat maʼlumotlari mavjud va uning xabar qismida soʻralgan kontent ham boʻlishi mumkin.
 
 ### route
 
-Part of a URL that identifies a resource.  For example, in `http://foo.com/products`, "/products/id" is the route.
+Resursni aniqlaydigan URLning bir qismi. Masalan, `http://foo.com/products/id`"/products/id" da marshrut.
 
 ### router
 
-See [http://expressjs.com/api#router](http://expressjs.com/api#router)
+API ma'lumotnomasida [marshrutizatorga](https://expressjs.com/en/api.html#router) qarang .
