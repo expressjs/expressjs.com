@@ -205,13 +205,12 @@ app.use((err, req, res, next) => {
 You define error-handling middleware last, after other `app.use()` and routes calls; for example:
 
 ```js
-const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
-app.use(bodyParser.urlencoded({
+app.use(express.urlencoded({
   extended: true
 }))
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(methodOverride())
 app.use((err, req, res, next) => {
   // logic
@@ -226,13 +225,12 @@ regular middleware functions. For example, to define an error-handler
 for requests made by using `XHR` and those without:
 
 ```js
-const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
-app.use(bodyParser.urlencoded({
+app.use(express.urlencoded({
   extended: true
 }))
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(methodOverride())
 app.use(logErrors)
 app.use(clientErrorHandler)
