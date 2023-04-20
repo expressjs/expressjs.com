@@ -27,7 +27,7 @@ The optional `options` argument is supported by Express v4.16.0 onwards.
 | `maxAge`        | Sets the max-age property of the `Cache-Control` header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)| 0 | 4.16+ |
 | `root`          | Root directory for relative filenames.|  | 4.18+ |
 | `lastModified`  | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.| Enabled | 4.16+ |
-| `headers`       | Object containing HTTP headers to serve with the file. The header `Content-Disposition` will be overriden by the `filename` argument.|  | 4.16+ |
+| `headers`       | Object containing HTTP headers to serve with the file. The header `Content-Disposition` will be overridden by the `filename` argument.|  | 4.16+ |
 | `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" | 4.16+ |
 | `acceptRanges`  | Enable or disable accepting ranged requests. | `true` | 4.16+ |
 | `cacheControl`  | Enable or disable setting `Cache-Control` response header.| `true` | 4.16+ |
