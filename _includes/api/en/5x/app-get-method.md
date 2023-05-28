@@ -4,7 +4,7 @@ Routes HTTP GET requests to the specified path with the specified callback funct
 
 {% include api/en/5x/routing-args.html %}
 
-For more information, see the [routing guide](/guide/routing.html).
+For more information, see the [routing guide](/{{page.lang}}/guide/routing.html).
 
 #### Example
 

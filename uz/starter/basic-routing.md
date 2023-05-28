@@ -39,4 +39,4 @@ app.delete('/user', function (req, res) {
 })
 </code></pre>
 
-Marshrutizatsiya haqida to'liq ma'lumot olish uchun, ma'lumotnoma orqali [Marshrutizatsiya](/guide/routing.html) bo'limini o'qib chiqing.
+Marshrutizatsiya haqida to'liq ma'lumot olish uchun, ma'lumotnoma orqali [Marshrutizatsiya](/{{page.lang}}/guide/routing.html) bo'limini o'qib chiqing.
