@@ -109,7 +109,7 @@ The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
 
 A custom query string parsing function will receive the complete query string, and must return an object of query keys and their values.
   </td>
-      <td>"extended"</td>
+      <td>"simple"</td>
     </tr>
     <tr>
   <td markdown="1">
