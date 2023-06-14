@@ -14,7 +14,7 @@
 
 body {
   font: 400 14px/1.6 "Open Sans", sans-serif;
-/*   background: url(/images/bg.jpg); */
+  background: url(/images/bg.jpg); 
   margin: 0;
   padding: 0;
   color: #555;
@@ -668,6 +668,12 @@ footer {
   }
 
 }
+
+@media (prefers-color-scheme:dark) {
+    .en-doc{
+        background: black;
+    }
+  }
 
 /* navigation */
 
