@@ -310,7 +310,9 @@ $ express /tmp/foo &amp;&amp; cd /tmp/foo
 
 <p> To create an instance of the <em>express.HTTPServer</em>, simply invoke the <em>createServer()</em> method. With our instance <em>app</em> we can then define routes based on the HTTP verbs, in this example <em>app.get()</em>.</p>
 
-<pre><code>var app = require('express').createServer();
+<pre><code>var express = require('express');
+var app = express();
+
 
 app.get('/', function(req, res){
   res.send('hello world');
