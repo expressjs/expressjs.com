@@ -47,4 +47,4 @@ $ npm install express --no-save
 NPM ५.० भन्दा माथिको ले `dependencies`मा `module` आफै हलिदीनछ तर तेस अगीकामा भने `--save` को पर्योग गर्नुपर्ने हुन्छ र तेस्पचात `npm install`को पर्योग गर्नुपर्ने हुन्छ।
 </div>
 
-### [Next: उदाहरण Hello World एप ](/{{ page.lang }}/starter/hello-world.html)
+### [अगी: उदाहरण Hello World एप ](/{{ page.lang }}/starter/hello-world.html)

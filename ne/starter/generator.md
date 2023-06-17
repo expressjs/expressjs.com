@@ -2,28 +2,27 @@
 layout: page
 title: Express application generator
 menu: starter
-lang: en
-redirect_from: "/starter/generator.html"
+lang: ne
 ---
 
-# Express application generator
+# एक्सप्रेस आवेदन जेनरेटर
 
-Use the application generator tool, `express-generator`, to quickly create an application skeleton.
+एप्लिकेसन जेनेरेटर उपकरण प्रयोग गर्नुहोस्, `एक्सप्रेस-जेनेरेटर`, छिट्टै एप्लिकेसन कंकाल सिर्जना गर्न।
 
-You can run the application generator with the `npx` command (available in Node.js 8.2.0).
+तपाईंले `npx` आदेश (Node.js 8.2.0 मा उपलब्ध) प्रयोग गरी एप्लिकेसन जनरेटर चलाउन सक्नुहुन्छ।
 
-```console
-$ npx express-generator
+```कन्सोल
+$ npx एक्सप्रेस-जेनरेटर
 ```
 
-For earlier Node versions, install the application generator as a global npm package and then launch it:
+अघिल्लो नोड संस्करणहरूको लागि, एप्लिकेसन जेनरेटरलाई ग्लोबल एनपीएम प्याकेजको रूपमा स्थापना गर्नुहोस् र त्यसपछि यसलाई सुरू गर्नुहोस्:
 
-```console
-$ npm install -g express-generator
-$ express
+```कन्सोल
+$ npm स्थापना -g एक्सप्रेस-जेनरेटर
+$ एक्सप्रेस
 ```
 
-Display the command options with the `-h` option:
+`-h` विकल्पसँग आदेश विकल्पहरू प्रदर्शन गर्नुहोस्:
 
 ```console
 $ express -h
@@ -45,7 +44,7 @@ $ express -h
     -f, --force         force on non-empty directory
 ```
 
-For example, the following creates an Express app named _myapp_. The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
+उदाहरणका लागि, निम्नले _myapp_ नामको एक्सप्रेस एप सिर्जना गर्छ। एप हालको काम गर्ने डाइरेक्टरीमा रहेको _myapp_ नामक फोल्डरमा बनाइनेछ र दृश्य इन्जिनलाई <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug मा सेट गरिनेछ। </a>:
 
 ```console
 $ express --view=pug myapp
@@ -69,37 +68,37 @@ $ express --view=pug myapp
    create : myapp/bin/www
 ```
 
-Then install dependencies:
+त्यसपछि निर्भरताहरू स्थापना गर्नुहोस्:
 
 ```console
 $ cd myapp
-$ npm install
+$ npm init
 ```
 
-On MacOS or Linux, run the app with this command:
+MacOS वा Linux मा, यो आदेशको साथ एप चलाउनुहोस्:
 
 ```console
 $ DEBUG=myapp:* npm start
 ```
 
-On Windows Command Prompt, use this command:
+Windows Command Prompt मा, यो आदेश प्रयोग गर्नुहोस्:
 
 ```console
 > set DEBUG=myapp:* & npm start
+
 ```
 
-On Windows PowerShell, use this command:
+Windows PowerShell मा, यो आदेश प्रयोग गर्नुहोस्:
 
 ```console
 PS> $env:DEBUG='myapp:*'; npm start
 ```
 
+त्यसपछि एप पहुँच गर्न आफ्नो ब्राउजरमा `http://localhost:3000/` लोड गर्नुहोस्।
 
-Then load `http://localhost:3000/` in your browser to access the app.
+उत्पन्न एपमा निम्न निर्देशिका संरचना छ:
 
-The generated app has the following directory structure:
-
-```console
+```कन्सोल
 .
 ├── app.js
 ├── bin
@@ -122,7 +121,7 @@ The generated app has the following directory structure:
 ```
 
 <div class="doc-box doc-info" markdown="1">
-The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
+जेनेरेटर द्वारा बनाईएको अनुप्रयोग संरचना एक्सप्रेस अनुप्रयोगहरू संरचना गर्न धेरै तरिकाहरू मध्ये एक मात्र हो। यो संरचना प्रयोग गर्न नहिचकिचाउनुहोस् वा यसलाई परिमार्जन गर्नुहोस् तपाईंको आवश्यकताहरू अनुरूप गर्न।
 </div>
 
-###  [Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)
+### [अघिल्लो: हेलो वर्ल्ड ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[अर्को: आधारभूत मार्ग](/{{ page.lang }} /starter/basic-routing.html)

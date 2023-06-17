@@ -55,6 +55,6 @@ RunKit तेस्रो पक्ष्यको सुविधा हो र
 $ node app.js
 ```
 
-तेस्पछि `http://localhost:3000/` खोलेर हेर्नु होस् ।
+तेस्पछि `http://localhost:3000/` खोलेर हेर्नुहोस् ।
 
-### [Previous: Installing ](/{{ page.lang }}/starter/installing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Express Generator ](/{{ page.lang }}/starter/generator.html)
+### [अघिल्लो: हाल्ने(इस्थापना गर्ने) ](/{{ page.lang }}/starter/installing.html)&nbsp;&nbsp;&nbsp;&nbsp;[अगी: Express Generator ](/{{ page.lang }}/starter/generator.html)
