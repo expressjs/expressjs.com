@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-<h2 id="route-methods">Route methods</h2>
+<h2 id="route-methods">Route methods <a href="#route-methods">🔗</a></h2>
 
 A route method is derived from one of the HTTP methods, and is attached to an instance of the `express` class.
 
@@ -64,7 +64,7 @@ app.all('/secret', (req, res, next) => {
 })
 ```
 
-<h2 id="route-paths">Route paths</h2>
+<h2 id="route-paths">Route paths <a href="#route-paths">🔗</a></h2>
 
 Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings, string patterns, or regular expressions.
 
@@ -158,7 +158,7 @@ app.get(/.*fly$/, (req, res) => {
 })
 ```
 
-<h3 id="route-parameters">Route parameters</h3>
+<h3 id="route-parameters">Route parameters <a href="#route-parameters">🔗</a></h3>
 
 Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
 
@@ -210,7 +210,7 @@ Because the regular expression is usually part of a literal string, be sure to e
 In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the <code>*</code> character in regular expressions is not interpreted in the usual way</a>. As a workaround, use <code>{0,}</code> instead of <code>*</code>. This will likely be fixed in Express 5.
 </div>
 
-<h2 id="route-handlers">Route handlers</h2>
+<h2 id="route-handlers">Route handlers <a href="#route-handlers">🔗</a></h2>
 
 You can provide multiple callback functions that behave like [middleware](/{{ page.lang }}/guide/using-middleware.html) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
 
@@ -276,7 +276,7 @@ app.get('/example/d', [cb0, cb1], (req, res, next) => {
 })
 ```
 
-<h2 id="response-methods">Response methods</h2>
+<h2 id="response-methods">Response methods <a href="#response-methods">🔗</a></h2>
 
 The methods on the response object (`res`) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.
 
@@ -292,7 +292,7 @@ The methods on the response object (`res`) in the following table can send a res
 | [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | Send a file as an octet stream.
 | [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Set the response status code and send its string representation as the response body.
 
-<h2 id="app-route">app.route()</h2>
+<h2 id="app-route">app.route() <a href="#app-route">🔗</a></h2>
 
 You can create chainable route handlers for a route path by using `app.route()`.
 Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/{{ page.lang }}/4x/api.html#router).
@@ -312,7 +312,7 @@ app.route('/book')
   })
 ```
 
-<h2 id="express-router">express.Router</h2>
+<h2 id="express-router">express.Router <a href="#express-router">🔗</a></h2>
 
 Use the `express.Router` class to create modular, mountable route handlers. A `Router` instance is a complete middleware and routing system; for this reason, it is often referred to as a "mini-app".
 
