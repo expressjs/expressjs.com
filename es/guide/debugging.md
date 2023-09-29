@@ -7,12 +7,6 @@ lang: es
 
 # Depuración de Express
 
-Express utiliza el módulo [debug](https://www.npmjs.com/package/debug) internamente para registrar información sobre las coincidencias de rutas, las funciones de middleware que se están utilizando, la modalidad de aplicación y el flujo del ciclo de solicitud/respuestas.
-
-<div class="doc-box doc-info" markdown="1">
-`debug` es como una versión aumentada de `console.log`, aunque a diferencia de `console.log`, no tiene que comentar los registros `debug` en el código de producción. El registro está desactivado de forma predeterminada y puede activarse condicionalmente utilizando la variable de entorno `DEBUG`.
-</div>
-
 Para ver todos los registros internos utilizados en Express, establezca la variable de entorno `DEBUG` en `express:*` cuando inicie la aplicación.
 
 ```console
@@ -95,7 +89,7 @@ Para ver sólo los registros de la implementación de direccionador, establezca 
 
 ## Aplicaciones generadas por `express`
 
-Una aplicación generada por el mandato `express` también utiliza el módulo `debug`, y el ámbito de su espacio de nombres de depuración se establece en el nombre de la aplicación.
+Una aplicación generada por el mandato `express` utiliza el módulo `debug`, y el ámbito de su espacio de nombres de depuración se establece en el nombre de la aplicación.
 
 Por ejemplo, si ha generado la aplicación con `$ express sample-app`, puede habilitar las sentencias de depuración con el siguiente mandato:
 
@@ -108,5 +102,3 @@ Puede especificar más de un espacio de nombres de depuración asignando una lis
 ```console
 $ DEBUG=http,mail,express:* node index.js
 ```
-
-Para obtener más información sobre `debug`, consulte [debug](https://www.npmjs.com/package/debug).

@@ -7,15 +7,6 @@ lang: ko
 
 # Express 디버깅
 
-Express는 내부적으로 [debug](https://www.npmjs.com/package/debug) 모듈을
-사용하여 라우트 일치, 사용 중인 미들웨어 함수, 애플리케이션 모드, 그리고 요청-응답 주기의
-플로우에 대한 정보를 로그합니다.
-
-<div class="doc-box doc-info" markdown="1">
-`debug`는 `console.log`의 보강된 버전과도 같지만, `console.log`와는 달리
-프로덕션 코드에서 `debug` 로그를 주석 처리할 필요가 없습니다. 로깅은 기본적으로 꺼져 있으며, `DEBUG` 환경 변수를 사용하여 조건부로 켤 수 있습니다.
-</div>
-
 Express에서 사용되는 모든 내부 로그를 확인하려면, 앱을 실행할 때 `DEBUG` 환경 변수를
 `express:*`로 설정하십시오.
 
@@ -112,5 +103,3 @@ $ DEBUG=sample-app:* node ./bin/www
 ```console
 $ DEBUG=http,mail,express:* node index.js
 ```
-
-`debug`에 대한 자세한 정보는 [debug](https://www.npmjs.com/package/debug)를 참조하십시오.

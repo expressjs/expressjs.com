@@ -7,15 +7,6 @@ lang: fr
 
 # Débogage d'Express
 
-Express fait appel au module [debug](https://www.npmjs.com/package/debug) en interne
-pour journaliser les informations concernant les correspondances de route, les fonctions middleware utilisées, le
-mode de l'application ainsi que le flux du cycle de demande-réponse.
-
-<div class="doc-box doc-info" markdown="1">
-Le module `debug` est en quelque sorte une version étendue de `console.log`, mais contrairement à ce dernier,`` vous n'avez pas besoin de mettre en commentaire les journaux de
-`debug` dans le code de production. La journalisation est désactivée par défaut et peut être activée de manière conditionnelle à l'aide de la variable d'environnement `DEBUG`.
-</div>
-
 Pour afficher tous les journaux internes utilisés dans Express, affectez à la variable d'environnement `DEBUG` la valeur `express:*` lors du lancement de votre application.
 
 ```console
@@ -98,7 +89,7 @@ Pour afficher les journaux uniquement à partir de l'implémentation du routeur,
 
 ## Applications générées par la commande `express`
 
-Une application générée par la commande `express` fait également appel au module `debug` et son espace de nom de débogage est délimité par le nom de l'application.
+Une application générée par la commande `express` également appel au module `debug` et son espace de nom de débogage est délimité par le nom de l'application.
 
 Ainsi, si vous avez généré l'application à l'aide de `$ express sample-app`, vous pouvez activer les instructions de débogage en exécutant la commande suivante :
 
@@ -111,5 +102,3 @@ Vous pouvez spécifier plusieurs espaces de noms de débogage en affectant une l
 ```console
 $ DEBUG=http,mail,express:* node index.js
 ```
-
-Pour plus d'informations sur le module `debug`, voir [debug](https://www.npmjs.com/package/debug).

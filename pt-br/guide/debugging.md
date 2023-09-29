@@ -7,18 +7,6 @@ lang: pt-br
 
 # Depurando o Express
 
-O Express usa o módulo de [depuração](https://www.npmjs.com/package/debug)
-internamente para registrar informações de log sobre a correspondência de rotas, as funções middleware que estão em uso, o modo de
-aplicativo, e o fluxo do ciclo solicitação-resposta.
-
-<div class="doc-box doc-info" markdown="1">
-O `debug` é como uma versão aumentada do `console.log` mas, diferente do
-`console.log`, não é preciso comentar os logs de
-`debug` no código na produção. O registro de logs
-está desligado por padrão e podem ser ligados condicionadamente
-usando a variável de ambiente `DEBUG`.
-</div>
-
 Para ver todos os logs interno usados no Express, configure a
 variável de ambiente `DEBUG` para
 `express:*` ao ativar seu aplicativo.
@@ -128,6 +116,3 @@ designando uma lista de nomes separados por vírgulas:
 ```console
 $ DEBUG=http,mail,express:* node index.js
 ```
-
-Para obter mais informações sobre `debug`,
-consulte o [debug](https://www.npmjs.com/package/debug).

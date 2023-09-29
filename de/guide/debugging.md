@@ -7,13 +7,6 @@ lang: de
 
 # Debugging bei Express
 
-Express verwendet das Modul [debug](https://www.npmjs.com/package/debug) intern, um Informationen zu Weiterleitungsübereinstimmungen, verwendete Middlewarefunktionen, Anwendungsmodi und den Verlauf des Anforderung/Antwort-Zyklus zu protokollieren.
-
-<div class="doc-box doc-info" markdown="1">
-`debug` ist praktisch eine erweiterte Version von `console.log`. Im Gegensatz zu `console.log` müssen jedoch
-keine `debug`-Protokolle im Produktionscode auskommentiert werden. Die Protokollierung wird standardmäßig inaktiviert und kann über die Umgebungsvariable `DEBUG` bedingt aktiviert werden.
-</div>
-
 Wenn Sie alle in Express verwendeten internen Protokolle anzeigen wollen, legen Sie beim Starten Ihrer Anwendung die Umgebungsvariable `DEBUG` auf `express:*` fest.
 
 ```console
@@ -96,8 +89,6 @@ Wenn Sie nur die Protokolle von der Routerimplementierung sehen wollen, legen Si
 
 ## Von `express` generierte Anwendungen
 
-Eine über den Befehl `express` generierte Anwendung verwendet ebenfalls das Modul `debug`. Der Debug-Namespace wird auf den Namen der Anwendung erweitert.
-
 Beispiel: Wenn Sie die Anwendung mit `$ express sample-app` generiert haben, können Sie die Debuganweisungen mit dem folgenden Befehl aktivieren:
 
 ```console
@@ -109,5 +100,3 @@ Sie können mehrere Debug-Namespaces in einer durch Kommas getrennten Namenslist
 ```console
 $ DEBUG=http,mail,express:* node index.js
 ```
-
-Weitere Informationen zu `debug` finden Sie unter [debug](https://www.npmjs.com/package/debug).
