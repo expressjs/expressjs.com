@@ -10,7 +10,11 @@ The `view` argument is a string that is the file path of the view file to render
 
 For more information, see [Using template engines with Express](/guide/using-template-engines.html).
 
-**NOTE:** The `view` argument performs file system operations like reading a file from disk and evaluating Node.js modules, and as so for security reasons should not contain input from the end-user.
+<div class="doc-box doc-warn" markdown="1">
+The `view` argument performs file system operations like reading a file from
+disk and evaluating Node.js modules, and as so for security reasons should not
+contain input from the end-user.
+</div>
 
 <div class="doc-box doc-notice" markdown="1">
 The local variable `cache` enables view caching. Set it to `true`,
