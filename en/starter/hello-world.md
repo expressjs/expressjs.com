@@ -16,7 +16,7 @@ Embedded below is essentially the simplest Express app you can create. It is a s
 <div id="hello-example"><pre><code class="language-js">
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
