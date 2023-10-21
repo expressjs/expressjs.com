@@ -460,5 +460,5 @@ app.use(bodyParser.text({ type: 'text/html' }))
 [coveralls-url]: https://coveralls.io/r/expressjs/body-parser?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/body-parser.svg
 [downloads-url]: https://npmjs.org/package/body-parser
-[github-actions-ci-image]: https://img.shields.io/github/workflow/status/expressjs/body-parser/ci/master?label=ci
+[github-actions-ci-image]: https://img.shields.io/github/actions/workflow/status/expressjs/body-parser/ci.yml?branch=master&label=ci
 [github-actions-ci-url]: https://github.com/expressjs/body-parser/actions/workflows/ci.yml
