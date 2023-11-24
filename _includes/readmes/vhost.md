@@ -2,7 +2,7 @@
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
-[![Build Status][travis-image]][travis-url]
+[![Build Status][github-actions-ci-image]][github-actions-ci-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
 ## Install
@@ -12,8 +12,6 @@ $ npm install vhost
 ```
 
 ## API
-
-<!-- eslint-disable no-unused-vars -->
 
 ```js
 var vhost = require('vhost')
@@ -157,9 +155,9 @@ app.listen(3000)
 
 [npm-image]: https://img.shields.io/npm/v/vhost.svg
 [npm-url]: https://npmjs.org/package/vhost
-[travis-image]: https://img.shields.io/travis/expressjs/vhost/master.svg
-[travis-url]: https://travis-ci.org/expressjs/vhost
 [coveralls-image]: https://img.shields.io/coveralls/expressjs/vhost/master.svg
 [coveralls-url]: https://coveralls.io/r/expressjs/vhost
 [downloads-image]: https://img.shields.io/npm/dm/vhost.svg
 [downloads-url]: https://npmjs.org/package/vhost
+[github-actions-ci-image]: https://img.shields.io/github/actions/workflow/status/expressjs/vhost/ci.yml?branch=master&label=ci
+[github-actions-ci-url]: https://github.com/expressjs/vhost/actions/workflows/ci.yml
