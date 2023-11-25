@@ -42,8 +42,6 @@
             </li>
             <li><a href="#app.get">app.get()</a>
             </li>
-            <li><a href="#app.get.method">app.get()</a>
-            </li>
             <li><a href="#app.listen">app.listen()</a>
             </li>
             <li><a href="#app.METHOD">app.METHOD()</a>
