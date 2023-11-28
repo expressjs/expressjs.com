@@ -158,7 +158,7 @@ app.get(/.*fly$/, (req, res) => {
 })
 ```
 
-<h3 id="route-parameters">Route parameters</h3>
+<h2 id="route-parameters">Route parameters</h2>
 
 Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
 

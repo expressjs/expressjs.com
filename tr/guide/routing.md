@@ -158,7 +158,7 @@ app.get(/.*fly$/, (req, res) => {
 })
 ```
 
-<h3 id="route-parameters">Rota parametreleri</h3>
+<h2 id="route-parameters">Rota parametreleri</h2>
 
 Rota parametreleri, URL'deki konumlarında belirtilen değerleri yakalamak için kullanılan adlandırılmış URL bölümleridir. Yakalanan değerler, yolda belirtilen rota parameterlerinin ilgili isimlerini alarak `req.params` objesinde tutulur.
 
