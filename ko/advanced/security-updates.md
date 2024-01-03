@@ -8,7 +8,8 @@ lang: ko
 # 보안 업데이트
 
 <div class="doc-box doc-notice" markdown="1">
-Node.js 취약성은 Express에 직접 영향을 미칩니다. 따라서 [Node.js 취약성을 항상 주시해야 하며](http://blog.nodejs.org/vulnerability/), 반드시 안정적인 최신 버전의 Node.js를 사용해야 합니다.
+Node.js 취약성은 Express에 직접 영향을 미칩니다. 따라서 [Node.js 취약성을 항상 주시해야 하며](https://nodejs.org
+/en/blog/vulnerability/), 반드시 안정적인 최신 버전의 Node.js를 사용해야 합니다.
 </div>
 
 아래의 목록에는 지정된 버전 업데이트에서 수정된 Express 취약성이 열거되어 있습니다.

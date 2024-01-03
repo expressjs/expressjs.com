@@ -131,7 +131,7 @@ app.get(/.*fly$/, function(req, res) {
 
 <h2 id="route-handlers">Route handlers</h2>
 
-You can provide multiple callback functions that behave just like [middleware](/guide/using-middleware.html) to handle a request. The only exception is that these callbacks may invoke `next('route')` to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+You can provide multiple callback functions that behave just like [middleware](/{{page.lang}}/guide/using-middleware.html) to handle a request. The only exception is that these callbacks may invoke `next('route')` to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
 
 Route handlers can come in the form of a function, an array of functions, or various combinations of both, as shown the following examples.
 

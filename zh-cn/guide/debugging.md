@@ -7,12 +7,6 @@ lang: zh-cn
 
 # 调试 Express
 
-Express 在内部使用[调试](https://www.npmjs.com/package/debug)模块来记录关于路由匹配、使用的中间件函数、应用程序模式以及请求/响应循环流程的信息。
-
-<div class="doc-box doc-info" markdown="1">
-`debug` 就像是扩充版的 `console.log`，但是与 `console.log` 不同，您不必注释掉生产代码中的 `debug` 日志。缺省情况下，日志记录功能已关闭，可以使用 `DEBUG` 环境变量有条件地开启日志记录。
-</div>
-
 要查看 Express 中使用的所有内部日志，在启动应用程序时，请将 `DEBUG` 环境变量设置为 `express:*`。
 
 ```console
@@ -108,5 +102,3 @@ $ DEBUG=sample-app:* node ./bin/www
 ```console
 $ DEBUG=http,mail,express:* node index.js
 ```
-
-有关 `debug` 的更多信息，请参阅 [debug](https://www.npmjs.com/package/debug)。

@@ -12,7 +12,8 @@ lang: sk
 # Security aktualizácie
 
 <div class="doc-box doc-notice" markdown="1">
-Vulnereabilita (zraniteĺnosť) Node.js priamo ovplyvňuje Express. Preto [sledujte vulnereabilitu Node.js](http://blog.nodejs.org/vulnerability/) a uistite sa, že používate poslednú stable verziu Node.js.
+Vulnereabilita (zraniteĺnosť) Node.js priamo ovplyvňuje Express. Preto [sledujte vulnereabilitu Node.js](https://nodejs.org
+/en/blog/vulnerability/) a uistite sa, že používate poslednú stable verziu Node.js.
 </div>
 
 Zoznam nižšie obsahuje objavené a opravené vulnereability Express-u v špecifických verziách updatov.

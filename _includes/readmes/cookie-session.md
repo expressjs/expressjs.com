@@ -21,6 +21,16 @@ The following points can help you choose which to use:
   * `cookie-session` can be used to store a "light" session and include an identifier
     to look up a database-backed secondary store to reduce database lookups.
 
+**NOTE** This module does not encrypt the session contents in the cookie, only provides
+signing to prevent tampering. The client will be able to read the session data by
+examining the cookie's value. Secret data should not be set in `req.session` without
+encrypting it, or use a server-side session instead.
+
+**NOTE** This module does not prevent session replay, as the expiration set is that
+of the cookie only; if that is a concern of your application, you can store an expiration
+date in `req.session` object and validate it on the sever, and implement any other logic
+to extend the session as your application needs.
+
 ## Install
 
 This is a [Node.js](https://nodejs.org/en/) module available through the
@@ -125,7 +135,7 @@ altered to change cookie setting behavior on a per-request basis.
 
 To destroy a session simply set it to `null`:
 
-```
+```js
 req.session = null
 ```
 

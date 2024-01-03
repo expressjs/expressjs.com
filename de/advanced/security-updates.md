@@ -8,7 +8,8 @@ lang: de
 # Sicherheitsupdates
 
 <div class="doc-box doc-notice" markdown="1">
-Schwachstellen bei Node.js wirken sich direkt auf Express aus. Daher sollten Sie [ein Auge auf Schwachstellen bei Node.js haben](http://blog.nodejs.org/vulnerability/) und sicherstellen, dass Sie die aktuelle stabile Version von Node.js haben.
+Schwachstellen bei Node.js wirken sich direkt auf Express aus. Daher sollten Sie [ein Auge auf Schwachstellen bei Node.js haben](https://nodejs.org
+/en/blog/vulnerability/) und sicherstellen, dass Sie die aktuelle stabile Version von Node.js haben.
 </div>
 
 Die folgende Liste enthält die Express-Schwachstellen, die im angegebenen Versionsupdate behoben wurden.

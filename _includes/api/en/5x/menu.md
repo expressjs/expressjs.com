@@ -100,6 +100,8 @@
             </li>
             <li><a href="#req.query">req.query</a>
             </li>
+            <li><a href="#req.res">req.res</a>
+            </li>
             <li><a href="#req.route">req.route</a>
             </li>
             <li><a href="#req.secure">req.secure</a>

@@ -7,7 +7,8 @@ lang: th
 # Security updates
 
 <div class="doc-box doc-notice" markdown="1">
-Node.js vulnerabilities directly affect Express. Therefore [keep a watch on Node.js vulnerabilities](http://blog.nodejs.org/vulnerability/) and make sure you are using the latest stable version of Node.js.
+Node.js vulnerabilities directly affect Express. Therefore [keep a watch on Node.js vulnerabilities](https://nodejs.org
+/en/blog/vulnerability/) and make sure you are using the latest stable version of Node.js.
 </div>
 
 The list below enumerates the Express vulnerabilities that were fixed in the specified version update.

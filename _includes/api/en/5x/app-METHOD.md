@@ -59,4 +59,4 @@ The method, `app.all()`, is not derived from any HTTP method and loads middlewar
 the specified path for _all_ HTTP request methods.
 For more information, see [app.all](#app.all).
 
-For more information on routing, see the [routing guide](/guide/routing.html).
+For more information on routing, see the [routing guide](/{{page.lang}}/guide/routing.html).
