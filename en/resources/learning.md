@@ -70,3 +70,4 @@ texxtoor, September 2015. In deutscher Sprache / in German language
 ## Video tutorials
 - [Learning ExpressJS: Express category](https://getbuzz.io/c/learning-expressjs)
 - [Learn Express.js in 14 days](https://iLoveCoding.org/courses/expressjs) - Practice Projects included
+- [Building Dynamic Websites with Node.js and Express](https://www.linkedin.com/learning/building-a-website-with-node-js-and-express-js-3)
