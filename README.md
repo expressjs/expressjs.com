@@ -34,7 +34,7 @@ To preview the website locally:
    ```
 
    Then, load <http://localhost:4000> in your browser.
-
+##APNA College -Roman Gurung
 ## Formatting
 
 Jekyll uses a variant of Markdown known as [Kramdown](https://kramdown.gettalong.org/quickref.html).
