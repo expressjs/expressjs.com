@@ -12,9 +12,10 @@ lang: en
 Several popular Node.js frameworks are built on Express:
 
 - **[Feathers](http://feathersjs.com)**: Build prototypes in minutes and production ready real-time apps in days.
+- **[Blazze](https://www.blazzejs.xyz/)**: Lightweight framework to write robust & secure APIs in TypeScript Blazingly fast with zero configs, no Boilerplate, and Request Caching powered by SWC.
 - **[ItemsAPI](https://www.itemsapi.com/)**: Search backend for web and mobile applications built on Express and Elasticsearch.
 - **[KeystoneJS](http://keystonejs.com/)**: Website and API Application Framework / CMS with an auto-generated React.js Admin UI.
-- **[Poet](http://jsantell.github.io/poet)**: Lightweight Markdown Blog Engine with instant pagination, tag and category views.
+- **[Poet](http://jsantell.github.io/poet)**: Lightweight Markdown Blog Engine with instant pagination, tag, and category views.
 - **[Kraken](http://krakenjs.com/)**: Secure and scalable layer that extends Express by providing structure and convention.
 - **[LoopBack](http://loopback.io)**: Highly-extensible, open-source Node.js framework for quickly creating dynamic end-to-end REST APIs.
 - **[Sails](http://sailsjs.org/)**: MVC framework for Node.js for building practical, production-ready apps.
@@ -27,4 +28,4 @@ Several popular Node.js frameworks are built on Express:
 - **[Kites](https://kites.nodejs.vn/)**: Template-based Web Application Framework
 - **[FoalTS](https://foalts.org/)**: Elegant and all-inclusive Node.Js web framework based on TypeScript.
 - **[NestJs](https://github.com/nestjs/nest)**: A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications on top of TypeScript & JavaScript (ES6, ES7, ES8)
-- **[Expressive Tea](https://github.com/Zero-OneiT/expresive-tea)**: A Small framework for building modulable, clean, fast and descriptive server-side applications with Typescript and Express out of the box.
+- **[Expressive Tea](https://github.com/Zero-OneiT/expresive-tea)**: A Small framework for building modulable, clean, fast, and descriptive server-side applications with Typescript and Express out of the box.
