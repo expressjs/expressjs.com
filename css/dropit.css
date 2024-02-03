@@ -9,7 +9,7 @@
 
 /* These styles assume you are using ul and li */
 .dropit {
-  list-style: none;
+  list-style: underline;
   padding: 0;
   margin: 0;
 }
