@@ -70,3 +70,6 @@ Please see the [Contributors' Guide](CONTRIBUTING.md) for more information on co
 ## Why use Jekyll instead of an Express-based solution?
 
 Jekyll comes built-in with GitHub Pages. Since we are already using GitHub Pages to host the website, it makes sense to leverage the capabilities it provides. It's all about using the right tool, for the right job, under the right circumstances.
+
+#Made By
+##Aayush Joshi
