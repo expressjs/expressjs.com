@@ -25,6 +25,7 @@ Members of the Express technical committee are:
 - [@crandmck](https://github.com/crandmck) - Rand McKinney
 - [@dougwilson](https://github.com/dougwilson) - Douglas Wilson
 - [@LinusU](https://github.com/LinusU) - Linus Unnebäck
+- [@ulisesgascon](https://github.com/ulisesGascon) - Ulises Gascón
 - [@wesleytodd](https://github.com/wesleytodd) - Wes Todd
 
 **Inactive:**
