@@ -7,10 +7,16 @@ on:
   push:
     branches:
     - gh-pages
+  pull_request_review:
+      types: [submitted]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.draft != true &&
+      (github.event_name == 'pull_request_review' && github.event.review.state == 'approved') ||
+      github.event_name != 'pull_request_review'
     strategy:
       matrix:
         node-version:
