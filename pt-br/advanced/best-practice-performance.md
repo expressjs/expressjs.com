@@ -626,8 +626,7 @@ conectam ao processo que as originou. Isto é conhecido como
 pegajosas*, e podem ser endereçadas pela sugestão acima para
 usar um armazenamento de dados como o Redis para os dados da sessão
 (dependendo do seu aplicativo). Para uma discussão, consulte por
-[Usando
-múltiplos nós](https://socket.io/docs/using-multiple-nodes).
+[Usando múltiplos nós](https://socket.io/docs/v4/using-multiple-nodes/).
 
 #### Usando o StrongLoop PM com um balanceador de carga Nginx
 
