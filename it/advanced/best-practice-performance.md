@@ -84,7 +84,7 @@ Prima di leggere questi argomenti, è necessario avere una conoscenza base della
 
 Per ulteriori informazioni sulle nozioni di base della gestione degli errori, consultare:
 
-* [Gestione degli errori in Node.js](https://www.joyent.com/developers/node/design/errors)
+* [Gestione degli errori in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
 * [Come creare applicazioni Node solide: Gestione degli errori](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (blog di StrongLoop)
 
 #### Cosa non fare

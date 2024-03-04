@@ -83,7 +83,7 @@ Bu konulara girmeden önce Node/Express istisna işleme ile ilgili temel bir anl
 
 Hata işleme temelleri hakkında daha fazla bilgi için bakınız: 
 
-* [Node.js'te Hata İşleme](https://www.joyent.com/developers/node/design/errors)
+* [Node.js'te Hata İşleme](https://www.tritondatacenter.com/node-js/production/design/errors)
 * [Güçlü Node Uygulamaları Yazmak: Hata İşleme](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop blogu)
 
 #### Ne yapmamalı
