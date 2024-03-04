@@ -9,14 +9,14 @@ lang: de
 
 <h2 id="overview">Überblick</h2>
 
-Express 5.0 befindet sich noch in der Alpha-Release-Phase. Hier finden Sie jedoch bereits eine Vorschau zu den Änderungen in diesem Release und zur Migration Ihrer Express 4-Anwendung auf Express 5.
+Express 5.0 befindet sich noch in der Beta-Release-Phase. Hier finden Sie jedoch bereits eine Vorschau zu den Änderungen in diesem Release und zur Migration Ihrer Express 4-Anwendung auf Express 5.
 
 Express 5 unterscheidet sich nicht allzu sehr von Express 4: Die Änderungen an der API sind nicht so signifikant wie von 3.0 zu 4.0. Auch wenn die Basis-API unverändert bleibt, wird es doch einige grundlegende Veränderungen geben. In anderen Worten: Ein vorhandenes Express 4-Programm funktioniert möglicherweise nicht mehr, wenn Sie es für Express 5 aktualisieren.
 
 Zum Installieren der aktuellen Alpha-Version und zur Vorschau von Express 5 geben Sie den folgenden Befehl im Stammverzeichnis Ihrer Anwendung ein:
 
 ```console
-$ npm install express@5.0.0-alpha.2 --save
+$ npm install "express@>=5.0.0-beta.1" --save
 ```
 
 Sie können Ihre automatisierten Tests ausführen, um zu sehen, was fehlschlägt, und Probleme gemäß den folgenden Updates beheben. Nachdem Sie alle Testfehler behoben haben, führen Sie Ihre Anwendung aus, um zu sehen, welche Fehler noch auftreten. Sie werden sofort feststellen, ob die Anwendung Methoden oder Eigenschaften verwendet, die nicht unterstützt werden.
