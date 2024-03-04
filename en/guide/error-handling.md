@@ -189,6 +189,8 @@ function errorHandler (err, req, res, next) {
 Note that the default error handler can get triggered if you call `next()` with an error
 in your code more than once, even if custom error handling middleware is in place.
 
+Other error handling middleware can be found at [Express middleware](/{{ page.lang }}/resources/middleware.html).
+
 ## Writing error handlers
 
 Define error-handling middleware functions in the same way as other middleware functions,
