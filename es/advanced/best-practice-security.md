@@ -187,12 +187,6 @@ Usa este comando para comprobar tu aplicación contra vulnerabilidades:
 $ snyk test
 ```
 
-Usa este comando para abrir un asistente que te guiará mediante el proceso de aplicar actualizaciones o parches para arreglar las vulnerabilidades que hayan sido encontradas:
-
-```console
-$ snyk wizard
-```
-
 ## Evitar otras vulnerabilidades conocidas
 
 Esté atento a las advertencias de [Node Security Project](https://npmjs.com/advisories) que puedan afectar a Express u otros módulos que utilice la aplicación.  En general, Node Security Project es un excelente recurso de herramientas e información sobre la seguridad de Node.

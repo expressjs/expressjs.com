@@ -182,12 +182,6 @@ Uygulamanızı güvenlik açıklarına karşı test etmek için bu komutu kullan
 $ snyk test
 ```
 
-Bulunan güvenlik açıklarını düzeltmek için güncelleme veya yama uygulama sürecinde size yol gösteren bir sihirbazı açmak için bu komutu kullanın:
-
-```console
-$ snyk wizard
-```
-
 ## Bilinen diğer güvenlik açıklarından kaçının
 
 Express'i veya uygulamanızın kullandığı diğer modülleri etkileyen [Snyk](https://snyk.io/vuln/) ve [Node Security Project](https://npmjs.com/advisories) tavsiyelerini takipte kalın. Genel olarak, bu veritabanları Node güvenliği hakkında bilgi ve araçlar için mükemmel kaynaklardır.

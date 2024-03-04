@@ -159,12 +159,6 @@ Use this command to test your application for vulnerabilities:
 $ snyk test
 ```
 
-Use this command to open a wizard that walks you through the process of applying updates or patches to fix the vulnerabilities that were found:
-
-```console
-$ snyk wizard
-```
-
 ## Additional considerations
 
 Here are some further recommendations from the excellent [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/).  Refer to that blog post for all the details on these recommendations:

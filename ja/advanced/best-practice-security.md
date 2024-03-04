@@ -169,12 +169,6 @@ $ cd your-app
 $ snyk test
 ```
 
-このコマンドを使用して、検出された脆弱性を修正するための更新プログラムやパッチを適用するプロセスを案内するウィザードを開きます。
-
-```console
-$ snyk wizard
-```
-
 ## その他の既知の脆弱性を回避する
 
 アプリケーションで使用する Express やその他のモジュールに影響を与える可能性がある [Node Security Project](https://npmjs.com/advisories) のアドバイザリーに常に注意してください。一般に、Node Security Project は、Node のセキュリティーに関する知識とツールの優れたリソースです。
