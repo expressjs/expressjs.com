@@ -8,7 +8,8 @@ lang: zh-tw
 # 安全更新
 
 <div class="doc-box doc-notice" markdown="1">
-Node.js 的漏洞會直接影響 Express。因此，請[隨時監看 Node.js 漏洞](http://blog.nodejs.org/vulnerability/)，並確保您所用的是最新的 Node.js 穩定版本。
+Node.js 的漏洞會直接影響 Express。因此，請[隨時監看 Node.js 漏洞](https://nodejs.org
+/en/blog/vulnerability/)，並確保您所用的是最新的 Node.js 穩定版本。
 </div>
 
 以下列舉已在指定的版本更新中修正的 Express 漏洞。

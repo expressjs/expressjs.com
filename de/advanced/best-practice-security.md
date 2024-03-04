@@ -144,7 +144,6 @@ app.use(session({
 Dies sind einige weitere Empfehlungen aus der hervorragenden [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/).  In diesem Blogbeitrag finden Sie alle Details zu diesen Empfehlungen:
 
 * Implementieren Sie Rate-Limiting, um Brute-Force-Attacken gegen Authentifizierungen zu verhindern. Hierfür können Sie beispielsweise das [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) verwenden, um eine Rate-Limiting-Richtlinie durchzusetzen. Alternativ können Sie eine Middleware wie [express-limiter](https://www.npmjs.com/package/express-limiter) verwenden. Hierzu müssen Sie jedoch Ihren Code etwas modifizieren.
-* Verwenden Sie die [csurf](https://www.npmjs.com/package/csurf)-Middleware, um CSRF-Attacken (Cross-Site Request Forgery) vorzubeugen.
 * Filtern und bereinigen Sie immer Benutzereingaben, um sich gegen XS-Angriffe (Cross-Site Scripting) und Befehlsinjektionsattacken zu schützen.
 * Implementieren Sie Verteidungsmaßnahmen gegen SQL-Injection-Attacken, indem sie parametrisierte Abfragen oder vorbereitete Anweisungen einsetzen.
 * Nutzen Sie das Open-Source-Tool [sqlmap](http://sqlmap.org/), um SQL-Injection-Schwachstellen in Ihrer Anwendung zu erkennen.
@@ -155,4 +154,4 @@ Dies sind einige weitere Empfehlungen aus der hervorragenden [Node.js Security C
 
 Achten Sie auf [Node Security Project](https://npmjs.com/advisories)-Empfehlungen, die Express oder andere Module, die Ihre Anwendung nutzt, beeinträchtigen können. Im Allgemeinen ist Node Security Project aber eine exzellente Ressource mit Wissen und Tools zur Sicherheit von Node.
 
-Letztendlich können Express-Anwendungen – wie viele andere Webanwendungen auch – anfällig für eine Vielzahl webbasierter Attacken sein. Machen Sie sich deshalb mit bekannten [webspezifischen Schwachstellen](https://www.owasp.org/index.php/Top_10_2013-Top_10) vertraut und treffen Sie die geeigneten Vorkehrungen, um diese zu vermeiden.
+Letztendlich können Express-Anwendungen – wie viele andere Webanwendungen auch – anfällig für eine Vielzahl webbasierter Attacken sein. Machen Sie sich deshalb mit bekannten [webspezifischen Schwachstellen](https://www.owasp.org/www-project-top-ten/) vertraut und treffen Sie die geeigneten Vorkehrungen, um diese zu vermeiden.

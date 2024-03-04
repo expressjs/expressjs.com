@@ -10,7 +10,7 @@ lang: en
 
 The Express API consists of various methods and properties on the request and response objects. These are inherited by prototype. There are two extension points for the Express API:
 
-1. The global protoypes at `express.request` and `express.response`.
+1. The global prototypes at `express.request` and `express.response`.
 2. App-specific prototypes at `app.request` and `app.response`.
 
 Altering the global prototypes will affect all loaded Express apps in the same process. If desired, alterations can be made app-specific by only altering the app-specific prototypes after creating a new app.
@@ -57,5 +57,18 @@ Object.defineProperty(app.request, 'ip', {
   enumerable: true,
   get () { return this.get('Client-IP') }
 })
+```
+
+## Prototype
+
+In order to provide the Express.js API, the request/response objects passed to Express.js (via `app(req, res)`, for example) need to inherit from the same prototype chain. By default this is `http.IncomingRequest.prototype` for the request and `http.ServerResponse.prototype` for the response.
+
+Unless necessary, it is recommended that this be done only at the application level, rather than globally. Also, take care that the prototype that is being used matches the functionality as closely as possible to the default prototypes.
+
+```js
+// Use FakeRequest and FakeResponse in place of http.IncomingRequest and http.ServerResponse
+// for the given app reference
+Object.setPrototypeOf(Object.getPrototypeOf(app.request), FakeRequest.prototype)
+Object.setPrototypeOf(Object.getPrototypeOf(app.response), FakeResponse.prototype)
 ```
 </div>

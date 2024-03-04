@@ -19,7 +19,6 @@ module: mw-home
 | [cookie-parser](/resources/middleware/cookie-parser.html) | 쿠키 헤더를 파싱하고 `req.cookies`에 할당합니다. [cookies](https://github.com/jed/cookies)와 [keygrip](https://github.com/jed/keygrip)도 참고하세요. | express.cookieParser |
 | [cookie-session](/resources/middleware/cookie-session.html) | 쿠키 기반의 세션을 만듭니다. | express.cookieSession |
 | [cors](/resources/middleware/cors.html) | 다양한 옵션들을 이용하여 Cross-origin resource sharing (CORS)를 활성화합니다. | 없음 |
-| [csurf](/resources/middleware/csurf.html) | CSRF 취약점을 방어합니다. | express.csrf |
 | [errorhandler](/resources/middleware/errorhandler.html) | 개발 중에 발생하는 에러를 핸들링하고 디버깅합니다. | express.errorHandler |
 | [method-override](/resources/middleware/method-override.html) | 헤더를 이용해 HTTP method를 덮어씁니다. | express.methodOverride |
 | [morgan](/resources/middleware/morgan.html) | HTTP 요청 로그를 남깁니다. | express.logger |

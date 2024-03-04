@@ -144,7 +144,6 @@ app.use(session({
 Voici d'autres recommandations issues de l'excellente [liste de contrôle de sécurité Node.js](https://blog.risingstack.com/node-js-security-checklist/).  Pour tous les détails sur ces recommandations, reportez-vous à cet article de blogue :
 
 * Implémentez la limitation de débit pour empêcher les attaques de force brute liées à l'authentification.  Une façon de faire consiste à utiliser [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) pour mettre en place une règle de limitation de débit.  Sinon, vous pouvez utiliser des middleware tels que [express-limiter](https://www.npmjs.com/package/express-limiter), mais vous devrez alors modifier quelque peu votre code.
-* Utilisez le middleware [csurf](https://www.npmjs.com/package/csurf) pour vous protéger contre les CSRF (Cross-Site Request Forgery).
 * Filtrez et nettoyez toujours les entrées utilisateur pour vous protéger contre les attaques de cross-site scripting (XSS) et d'injection de commande.
 * Défendez-vous contre les attaques par injection SQL en utilisant des requêtes paramétrées ou des instructions préparées.
 * Utilisez l'outil [sqlmap](http://sqlmap.org/) à code source ouvert pour détecter les vulnérabilités par injection SQL dans votre application.
@@ -155,4 +154,4 @@ Voici d'autres recommandations issues de l'excellente [liste de contrôle de sé
 
 Gardez un oeil sur les recommandations [Node Security Project](https://npmjs.com/advisories) qui peuvent concerner Express ou d'autres modules utilisés par votre application. En règle générale, Node Security Project est une excellente ressource de connaissances et d'outils sur la sécurité de Node.
 
-Pour finir, les applications Express - comme toutes les autres applications Web - peuvent être vulnérables à une variété d'attaques Web. Familiarisez vous avec les [vulnérabilités Web](https://www.owasp.org/index.php/Top_10_2013-Top_10) connues et prenez des précautions pour les éviter.
+Pour finir, les applications Express - comme toutes les autres applications Web - peuvent être vulnérables à une variété d'attaques Web. Familiarisez vous avec les [vulnérabilités Web](https://www.owasp.org/www-project-top-ten/) connues et prenez des précautions pour les éviter.

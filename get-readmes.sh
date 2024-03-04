@@ -14,7 +14,6 @@ expressjs connect-rid master
 expressjs cookie-parser master
 expressjs cookie-session master
 expressjs cors master
-expressjs csurf master
 expressjs errorhandler master
 expressjs method-override master
 expressjs morgan master

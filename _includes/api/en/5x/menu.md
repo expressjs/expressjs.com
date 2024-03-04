@@ -100,6 +100,8 @@
             </li>
             <li><a href="#req.query">req.query</a>
             </li>
+            <li><a href="#req.res">req.res</a>
+            </li>
             <li><a href="#req.route">req.route</a>
             </li>
             <li><a href="#req.secure">req.secure</a>
@@ -125,8 +127,6 @@
             <li><a href="#req.get">req.get()</a>
             </li>
             <li><a href="#req.is">req.is()</a>
-            </li>
-            <li><a href="#req.param">req.param()</a>
             </li>
             <li><a href="#req.range">req.range()</a>
             </li>

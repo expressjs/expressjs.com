@@ -151,7 +151,6 @@ app.use(session({
 Tu sú ďalšie odporúčania zo skvelého [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/) zoznamu. Pre viac detailov ohľadom jednotlivých odporúčaní si prečítajte samotný blog post:
 
 * Implementujte tzv. rate-limiting pre vyhnutie sa brute-force útokom voči autentifikácii.  Jednou z možností ako to dosiahnuť je použitie [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) k vynúteniu rate-limiting policy.  Ako alternatívu môžete použiť middleware, ako napr. [express-limiter](https://www.npmjs.com/package/express-limiter), avšak to si už vyžaduje mierny zásah do kódu vašej aplikácie.
-* Používajte [csurf](https://www.npmjs.com/package/csurf) middleware k ochrane voči útokom typu cross-site request forgery (CSRF).
 * Vždy filtrujte a overte vstup od používateľa, aby ste vašu aplikáciu ochránili voči útokom typu cross-site scripting (XSS) a command injection.
 * Bránte sa voči útokom typu SQL injection použitím parametrizovaych queries, príp. prepared statements.
 * Používajte open source tool [sqlmap](http://sqlmap.org/) k detekcii SQL injection vulnerabilities vo vašej aplikácii.
@@ -162,4 +161,4 @@ Tu sú ďalšie odporúčania zo skvelého [Node.js Security Checklist](https://
 
 Sledujte [Node Security Project](https://npmjs.com/advisories) odporučania, ktoré môžu ovplyvňovať Express, príp. ostatné moduly vašej aplikácie. Vo všeobecnosti je Node Security Project skvelým zdrojom znalostí a toolov ohľadom bezpečnosti Node.js.
 
-Na záver dodajme, že Express aplikácie - ako akékoľvek iné webové aplikácie - môžu byť náchylné na mnohé typy útokov. Zoznámte sa so zoznamom známych [web vulnerabilities](https://www.owasp.org/index.php/Top_10_2013-Top_10) a prijmite opatrenia, aby ste sa im vyhli.
+Na záver dodajme, že Express aplikácie - ako akékoľvek iné webové aplikácie - môžu byť náchylné na mnohé typy útokov. Zoznámte sa so zoznamom známych [web vulnerabilities](https://www.owasp.org/www-project-top-ten/) a prijmite opatrenia, aby ste sa im vyhli.

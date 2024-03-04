@@ -5,16 +5,19 @@ on top of [busboy](https://github.com/mscdex/busboy) for maximum efficiency.
 
 **NOTE**: Multer will not process any form which is not multipart (`multipart/form-data`).
 
-## Translations 
+## Translations
 
 This README is also available in other languages:
 
+- [العربية](https://github.com/expressjs/multer/blob/master/doc/README-ar.md) (Arabic)
 - [Español](https://github.com/expressjs/multer/blob/master/doc/README-es.md) (Spanish)
 - [简体中文](https://github.com/expressjs/multer/blob/master/doc/README-zh-cn.md) (Chinese)
 - [한국어](https://github.com/expressjs/multer/blob/master/doc/README-ko.md) (Korean)
 - [Русский язык](https://github.com/expressjs/multer/blob/master/doc/README-ru.md) (Russian)
 - [Việt Nam](https://github.com/expressjs/multer/blob/master/doc/README-vi.md) (Vietnam)
 - [Português](https://github.com/expressjs/multer/blob/master/doc/README-pt-br.md) (Portuguese Brazil)
+- [Français](https://github.com/expressjs/multer/blob/master/doc/README-fr.md) (French)
+- [O'zbek tili](https://github.com/expressjs/multer/blob/master/doc/README-uz.md) (Uzbek)
 
 ## Installation
 
@@ -85,7 +88,7 @@ Here's an example on how multer is used an HTML form. Take special note of the `
   <div class="form-group">
     <input type="file" class="form-control-file" name="uploaded_file">
     <input type="text" class="form-control" placeholder="Number of speakers" name="nspeakers">
-    <input type="submit" value="Get me the stats!" class="btn btn-default">            
+    <input type="submit" value="Get me the stats!" class="btn btn-default">
   </div>
 </form>
 ```
@@ -96,9 +99,9 @@ Then in your javascript file you would add these lines to access both the file a
 const multer  = require('multer')
 const upload = multer({ dest: './public/data/uploads/' })
 app.post('/stats', upload.single('uploaded_file'), function (req, res) {
-   // req.file is the name of your file in the form above, here 'uploaded_file'
-   // req.body will hold the text fields, if there were any 
-   console.log(req.file, req.body)
+  // req.file is the name of your file in the form above, here 'uploaded_file'
+  // req.body will hold the text fields, if there were any 
+  console.log(req.file, req.body)
 });
 ```
 
@@ -239,7 +242,7 @@ order that the client transmits fields and files to the server.
 
 For understanding the calling convention used in the callback (needing to pass
 null as the first param), refer to
-[Node.js error handling](https://www.joyent.com/node-js/production/design/errors)
+[Node.js error handling](https://web.archive.org/web/20220417042018/https://www.joyent.com/node-js/production/design/errors)
 
 #### `MemoryStorage`
 

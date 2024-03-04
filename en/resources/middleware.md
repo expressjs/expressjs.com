@@ -20,7 +20,6 @@ The Express middleware modules listed here are maintained by the
 | [cookie-parser](/resources/middleware/cookie-parser.html) | Parse cookie header and populate `req.cookies`. See also [cookies](https://github.com/jed/cookies) and [keygrip](https://github.com/jed/keygrip). | express.cookieParser|
 | [cookie-session](/resources/middleware/cookie-session.html) | Establish cookie-based sessions.| express.cookieSession |
 | [cors](/resources/middleware/cors.html) | Enable cross-origin resource sharing (CORS) with various options.| NA
-| [csurf](/resources/middleware/csurf.html) | Protect from CSRF exploits.|express.csrf |
 | [errorhandler](/resources/middleware/errorhandler.html) |Development error-handling/debugging. |express.errorHandler |
 | [method-override](/resources/middleware/method-override.html) |Override HTTP methods using header. |express.methodOverride |
 | [morgan](/resources/middleware/morgan.html) | HTTP request logger. | express.logger |
@@ -47,7 +46,6 @@ These are some additional popular middleware modules.
 | [express-partial-response](https://github.com/nemtsov/express-partial-response) | Filters out parts of JSON responses based on the `fields` query-string; by using Google API's Partial Response.|
 | [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn) | Use a CDN for static assets, with multiple host support.|
 | [express-slash](https://github.com/ericf/express-slash) | Handles routes with and without trailing slashes.|
-| [express-stormpath](https://github.com/stormpath/stormpath-express) | User storage, authentication, authorization, SSO, and data security.|
 | [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize) | Redirects HTTP requests containing uppercase to a canonical lowercase form.|
 | [helmet](https://github.com/helmetjs/helmet) |Helps secure your apps by setting various HTTP headers.|
 | [join-io](https://github.com/coderaiser/join-io) | Joins files on the fly to reduce the requests count.|

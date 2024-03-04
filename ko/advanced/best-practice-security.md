@@ -192,14 +192,13 @@ $ snyk wizard
 
 Express에, 또는 앱에 사용되는 다른 모듈에 영향을 미칠 수 있는 [Node Security Project](https://npmjs.com/advisories)의 보안 권고문에 항상 주의를 기울이십시오.  일반적으로 Node Security Project는 Node의 보안과 관련된 지식 및 도구에 대한 훌륭한 자원입니다.
 
-마지막으로, 다른 모든 웹 앱과 마찬가지로 Express 앱은 다양한 웹 기반 공격에 취약할 수 있습니다. 알려져 있는 [웹 취약성](https://www.owasp.org/index.php/Top_10_2013-Top_10)을 숙지한 후 이러한 취약성을 피하기 위한 예방 조치를 취하십시오.
+마지막으로, 다른 모든 웹 앱과 마찬가지로 Express 앱은 다양한 웹 기반 공격에 취약할 수 있습니다. 알려져 있는 [웹 취약성](https://www.owasp.org/www-project-top-ten/)을 숙지한 후 이러한 취약성을 피하기 위한 예방 조치를 취하십시오.
 
 <a name="additional-considerations"></a>
 ## 추가적인 고려사항
 
 유용한 [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/)에서 발췌한 몇 가지 추가적인 권장사항은 다음과 같습니다. 아래의 권장사항에 대한 모든 상세 정보를 확인하려면 해당 블로그 게시물을 참조하십시오.
 
-* [csurf](https://www.npmjs.com/package/csurf) 미들웨어를 이용하여 교차 사이트 요청 위조(CSRF)로부터 보호하십시오.
 * 항상 사용자 입력을 필터링하고 사용자 입력에서 민감한 데이터를 제거하여 XSS(Cross-site scripting) 및 명령 인젝션 공격으로부터 보호하십시오.
 * 매개변수화된 조회 또는 준비된 명령문을 이용하여 SQL 인젝션 공격으로부터 방어하십시오.
 * 오픈 소스 방식의 [sqlmap](http://sqlmap.org/) 도구를 이용하여 앱 내의 SQL 인젝션 취약성을 발견하십시오.

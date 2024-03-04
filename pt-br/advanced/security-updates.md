@@ -10,7 +10,8 @@ lang: pt-br
 <div class="doc-box doc-notice" markdown="1">
 As vulnerabilidades do Node.js afetam diretamente o Express. Portanto
 [fique atento às
-vulnerabilidades do Node.js](http://blog.nodejs.org/vulnerability/) e certifique-se de que você está
+vulnerabilidades do Node.js](https://nodejs.org
+/en/blog/vulnerability/) e certifique-se de que você está
 usando a versão estável mais recente do Node.js.
 </div>
 

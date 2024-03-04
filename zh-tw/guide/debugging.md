@@ -7,12 +7,6 @@ lang: zh-tw
 
 # 對 Express 除錯
 
-Express 在內部使用 [debug](https://www.npmjs.com/package/debug) 模組，來記載路由相符項、使用中的中介軟體函數、應用程式模式，以及要求/回應循環流程等相關資訊。
-
-<div class="doc-box doc-info" markdown="1">
-`debug` 像是 `console.log` 的擴增版本，但與 `console.log` 不同的是，您不必在正式作業程式碼中註銷 `debug` 日誌。依預設，會關閉記載，並且可以使用 `DEBUG` 環境變數有條件地開啟。
-</div>
-
 如果要查看 Express 中使用的所有內部日誌，在您啟動應用程式時，請將 `DEBUG` 環境變數設為 `express:*`。
 
 ```console
@@ -108,5 +102,3 @@ $ DEBUG=sample-app:* node ./bin/www
 ```console
 $ DEBUG=http,mail,express:* node index.js
 ```
-
-如需 `debug` 的相關資訊，請參閱 [debug](https://www.npmjs.com/package/debug)。

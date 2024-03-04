@@ -11,12 +11,6 @@ lang: sk
 
 # Debuggovanie Express
 
-Express interne používa k logovaniu informácií ohľadom route matchingu, použitých middleware funkciách, aplikačného módu a toku request response cyklu modul [debug](https://www.npmjs.com/package/debug).
-
-<div class="doc-box doc-info" markdown="1">
-`debug` je ako rozšírena verzia `console.log`, ale narozdiel od `console.log`, nemusíte zakomentovávať volania `debug` v produkčnom kóde. Logovanie je vypnuté defaultne a je možné ho zapnúť použitím `DEBUG` environment premennej.
-</div>
-
 Ak chcete vidieť všetky interné logy Express-u, nastavte pri spúštaní vašej aplikácie environment premennú `DEBUG` na hodnotu
 `express:*`.
 
@@ -113,5 +107,3 @@ Pomocou čiarkou oddeleného zoznamu názvov môžete špecifikovať viac ako je
 ```console
 $ DEBUG=http,mail,express:* node index.js
 ```
-
-Pre viac informácií ohľadom `debug` modulu si pozrite [debug](https://www.npmjs.com/package/debug).

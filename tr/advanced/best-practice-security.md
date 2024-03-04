@@ -192,13 +192,12 @@ $ snyk wizard
 
 Express'i veya uygulamanızın kullandığı diğer modülleri etkileyen [Snyk](https://snyk.io/vuln/) ve [Node Security Project](https://npmjs.com/advisories) tavsiyelerini takipte kalın. Genel olarak, bu veritabanları Node güvenliği hakkında bilgi ve araçlar için mükemmel kaynaklardır.
 
-Son olarak, Express uygulamaları - diğer web uygulamaları gibi - çeşitli web tabanlı saldırılara karşı savunmasız olabilir. [Web güvenlik açıkları](https://www.owasp.org/index.php/Top_10-2017_Top_10) hakkında kendinizi bilgilendirin ve onlardan kaçınmak için önlemler alın.
+Son olarak, Express uygulamaları - diğer web uygulamaları gibi - çeşitli web tabanlı saldırılara karşı savunmasız olabilir. [Web güvenlik açıkları](https://www.owasp.org/www-project-top-ten/) hakkında kendinizi bilgilendirin ve onlardan kaçınmak için önlemler alın.
 
 ## Ek hususlar
 
 İşte mükemmel [Node.js Güvenlik Kontrol Listesi](https://blog.risingstack.com/node-js-security-checklist/)'nden bazı ek öneriler. Bu önerilerle ilgili tüm ayrıntılar için o blog gönderisine bakın:
 
-* Siteler arası istek sahteciliği'ne (CSRF) karşı korumak için [csurf](https://www.npmjs.com/package/csurf) ara yazılımını kullanın.
 * Siteler arası komut dosyası oluşturma (XSS) ve komut enjeksiyon saldırılarına karşı korumak için kullanıcı girişini her zaman filtreleyin ve sanitize edin.
 * Parametreli sorgular veya hazırlanmış ifadeler kullanarak SQL enjeksiyon saldırılarına karşı savunma yapın.
 * Uygulamanızdaki SQL enjeksion güvenlik açıklarını tespit etmek için açık kaynak olan [sqlmap](http://sqlmap.org/) aracını kullanın.

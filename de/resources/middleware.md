@@ -19,7 +19,6 @@ Nachfolgend sind einige Express-Middlewaremodule aufgeführt:
   - [connect-timeout](https://github.com/expressjs/timeout): Bisher: `express.timeout`
   - [cookie-parser](https://github.com/expressjs/cookie-parser): Bisher: `express.cookieParser`
   - [cookie-session](https://github.com/expressjs/cookie-session): Bisher: `express.cookieSession`
-  - [csurf](https://github.com/expressjs/csurf): Bisher: `express.csrf`
   - [errorhandler](https://github.com/expressjs/errorhandler): Bisher: `express.errorHandler`
   - [express-debug](https://github.com/devoidfury/express-debug): Entwicklungstool, mit dem eine Registerkarte mit Informationen zu Vorlagenvariablen (lokalen Variablen), zur aktuellen Sitzung, zu hilfreichen Anforderungsdaten usw. Ihrer Anwendung hinzugefügt werden können.
   - [express-partial-response](https://github.com/nemtsov/express-partial-response): Express-Middlewaremodul für die Filterung von Teilen von JSON-Antworten auf Basis der Abfragezeichenfolge `fields` durch Verwendung der Google-API Partial Response.

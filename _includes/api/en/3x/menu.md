@@ -94,6 +94,8 @@
             </li>
             <li><a href="#req.acceptsLanguage">req.acceptsLanguage()</a>
             </li>
+            <li><a href="#req.res">req.res</a>
+            </li>
         </ul>
     </li>
     <li id="res-api"> <a href="#response">Response</a>

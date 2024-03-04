@@ -7,11 +7,6 @@ redirect_from: "/guide/debugging.html"
 ---
 # Express hata ayıklama
 
-Express, rota eşleştirmeleri, kullanımda olan ara yazılım fonksiyonları, uygulama modu, ve istek-yanıt döngüsü akışı ile ilgili bilgileri loglamak için dahili olarak [debug](https://www.npmjs.com/package/debug) mödülünü kullanmaktadır.
-
-<div class="doc-box doc-info" markdown="1">
-`debug`, `console.log` metodunun uzatılmış bir sürümü gibidir, ama `console.log` metodunun aksine, üretim kodunda `debug` ifadelerini yorum satırına almak zorunda değilsiniz. Loglama varsayılan olarak devre dışı bırakılmıştır ve şarta bağlı olarak `DEBUG` ortam değişkeni kullanılarak devreye alınabilir.
-</div>
 Express uygulamasında kullanılan ütün dahili logları görmek için, uygulamanızı başlatırken `DEBUG` ortam değikenini `express:*` olarak güncelleyin.
 
 ```console
@@ -121,7 +116,3 @@ Node.js üzerinden koşulduğunda hata ayıklama loglamasının davranışını 
 
 __Not:__ `DEBUG_` ile başlayan ortam değişkenleri, `%o`/`%O` biçemleyicileriyle kullanılmak üzere bir Seçenekler nesnesine dönüştürülür.
 Tam listeyi görmek için Node.js'in [`util.inspect()`](https://nodejs.org/api/util.html#util_util_inspect_object_options) dökümantasyonuna bakınız.
-
-## Kaynaklar
-
-`debug` ile ilgili daha fazla bilgi için bakınız [debug](https://www.npmjs.com/package/debug).

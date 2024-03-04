@@ -7,15 +7,6 @@ lang: it
 
 # Debug di Express
 
-Express utilizza il modulo [debug](https://www.npmjs.com/package/debug)
-internamente per registrare le informazioni sulle corrispondenze route, le funzioni middleware in uso, la modalità dell'applicazione
-e il flusso del ciclo richiesta/risposta.
-
-<div class="doc-box doc-info" markdown="1">
-`debug` corrisponde a una versione estesa di `console.log`, ma diversamente da `console.log`, non è necessario
-creare commenti per i log `debug` nel codice di produzione. Il processo di registrazione è disattivato per impostazione predefinita e può essere attivato utilizzando la variabile di ambiente `DEBUG`.
-</div>
-
 Per visualizzare tutti i log interni utilizzati in Express, impostare la variabile di ambiente `DEBUG` su
 `express:*` quando si avvia l'applicazione.
 
@@ -112,5 +103,3 @@ $ DEBUG=sample-app:* node ./bin/www
 ```console
 $ DEBUG=http,mail,express:* node index.js
 ```
-
-Per ulteriori informazioni su `debug`, consultare [debug](https://www.npmjs.com/package/debug).
