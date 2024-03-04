@@ -14,11 +14,11 @@ handler so you don't need to write your own to get started.
 ## General Javascript Error Handling
 
 Before we cover handling errors in Express, it is important to know how to handle errors in general.  We will touch on the
-three most common approaches to handling errors in javascript: try/catch, callbacks and promises.
+three most common approaches to handling errors in javaScript: try/catch, callbacks, and promises.
 
 ### Using `try`/`catch`
 
-Try-catch is a javascript language construct that you can use to catch exceptions in synchronous code.  While it can also be used to handle things like undefined variables it is better
+Try-catch is a JavaScript language construct that you can use to catch exceptions in synchronous code.  While it can also be used to handle things like undefined variables it is better
 to use a tool such as [ESLint](https://eslint.com/) to help you find exceptions like reference errors on undefined variables.
 
 Here is an example of using try/catch to handle a potential process-crashing exception while parsing JSON.  This middleware function accepts a query field parameter named
@@ -40,10 +40,10 @@ app.get('/search', function (req, res) {
 
 ### Using callbacks
 
-Using callbacks is one of the most common and robust ways to handle asynchronous activity in javascript code. By default it is up to the author of the function
+Using callbacks is one of the most common and robust ways to handle asynchronous activity in JavaScript code. By default it is up to the author of the function
 to decide how errors are exposed, but luckily the node ecosystem has long since standardized on the "error first" pattern for callbacks.  This pattern means that
 almost all callback code will return an error or `null` as the first argument to a callback (for example `thing((err, result) => { /* ... */})`).  Not only are
-callbacks the most common way we handle error in node, it is also the way Express deals with them in the `next` callback.
+callbacks the most common way to handle errors in Node.js, they are also how Express deals with them in the `next` callback.
 
 Here is an example of handling an error in a callback:
 
@@ -61,7 +61,7 @@ app.get('/search', function (req, res) {
 
 ### Using Promises
 
-Promises are a way to encapsulate async code into a common and standardized api.  They are supported natively in all currently supported versions of node and
+Promises are a way to encapsulate async code into a common and standardized API.  They are supported natively in all currently supported versions of Node.js and
 will be supported directly in Express starting in version 5.  Typically you interact with a promise by calling two methods on it, `.then` and `.catch`.  A promise
 starts out being "unresolved" and can only be resolved or rejected a single time with a single value.  If the promise resolves successfully it will call any
 callbacks registered with a call to `.then` and if it is rejected it will call any error handlers registered with the second argument to `.then` or the first
@@ -79,7 +79,7 @@ app.get('/search', function (req, res) {
 })
 ```
 
-In newer versions of node, there is support for `async`/`await`, which is "syntactic sugar" around promises which make them look more like synchronous code.  We will not go
+In newer versions of Node.js, there is support for `async`/`await`, which is "syntactic sugar" around promises which make them look more like synchronous code.  We will not go
 much into how they work, but here is the same example above written with `async`/`await`:
 
 ```js
