@@ -10,8 +10,7 @@ redirect_from: "/advanced/best-practice-performance.html"
 
 ## Overview
 
-This article discusses performance and reliability best practices for Express applications.  Performance is a complex topic, and just following a general 
-set of guidelines is not enough, because of this we will also provide suggestions on how to [measure your application performance](#measuring-performance) and debug bottlenecks.  Once you
+This article discusses performance and reliability best practices for Express applications.  Performance is a complex topic, and just following a general set of guidelines is not enough: This article also provides suggestions on how to [measure your application performance](#measuring-performance) and debug bottlenecks.  Once you
 know how to measure your application performance you can apply the best practice suggestions here and ensure they produce the performance results you expect.
 
 Those best practices are broken into two sections:
@@ -275,7 +274,7 @@ is that it gives you no ability to gracefully let the other http requests finish
 ### Using Node's cluster module {#use-cluster-module}
 
 Clustering enables a master process to spawn worker processes and distribute incoming connections among the workers. On most modern server configurations you have multiple
-cpu cores you can utilize in your app, but because javascript and node are single threaded, you need multiple processes to maximize this hardware's performance.  This is made
+cpu cores you can utilize in your app, but because JavaScript and node are single threaded, you need multiple processes to maximize this hardware's performance.  This is made
 possible with Node's [cluster module](https://nodejs.org/api/cluster.html). However, rather than using this module directly, it's better to use one of the many tools out there that
 does it for you automatically; for example [node-pm](https://www.npmjs.com/package/node-pm) or [cluster-service](https://www.npmjs.com/package/cluster-service).
 
@@ -365,7 +364,7 @@ With a caching reverse proxy you ensure that your application only handles reque
 
 #### Reverse proxy for SSL Termination
 
-Because javascript (and therefore node) is single threaded, many cpu intensive tasks on a single process can cause severe performance degresation.  One such example
+Because JavaScript (and therefore node) is single threaded, many cpu intensive tasks on a single process can cause severe performance degresation.  One such example
 is doing strong encryption like in SSL (serving `https://` websites).  Because of this, it is reccomended that you always use something like Nginx for termenation of SSL connections.
 This means that your application will serve only `http` requests and should be firewalled from the external world.  All incoming client requests should go to the reverse proxy and
 only forward on an http connection.  The flow would look like this: `browser -> https:// -> nginx -> http:// -> express app`.
