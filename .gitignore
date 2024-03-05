@@ -8,3 +8,5 @@ _site
 **/Thumbs.db
 Gemfile.lock
 .jekyll-metadata
+vendor
+.bundle

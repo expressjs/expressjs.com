@@ -3,7 +3,7 @@
 # Build settings
 markdown: kramdown
 
-gems:
+plugins:
   - jekyll-redirect-from
 
 kramdown:
@@ -12,6 +12,9 @@ kramdown:
   syntax_highlighter_opts:
     disable : true
 
-exclude: [uk/CHANGELOG.md]
+exclude: 
+  - [uk/CHANGELOG.md]
+  - vendor/bundle
+
 
 github: [metadata]
