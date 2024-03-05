@@ -14,11 +14,11 @@ res.status(500).send({ error: 'something blew up' })
 ```
 
 This method performs many useful tasks for simple non-streaming responses:
-For example, it automatically assigns the `Content-Length` HTTP response header field
-(unless previously defined) and provides automatic HEAD and HTTP cache freshness support.
+For example, it automatically assigns the `Content-Length` HTTP response header field 
+and provides automatic HEAD and HTTP cache freshness support.
 
 When the parameter is a `Buffer` object, the method sets the `Content-Type`
-response header field  to "application/octet-stream", unless previously defined as shown below:
+response header field to "application/octet-stream", unless previously defined as shown below:
 
 ```js
 res.set('Content-Type', 'text/html')
