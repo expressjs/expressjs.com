@@ -328,8 +328,8 @@ const router = express.Router()
 const timeLog = (req, res, next) => {
   console.log('Time: ', Date.now())
   next()
-};
-router.use(timeLog);
+}
+router.use(timeLog)
 
 // define the home page route
 router.get('/', (req, res) => {
