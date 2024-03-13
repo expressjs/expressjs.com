@@ -41,7 +41,7 @@ RunKit is a third-party service not affiliated with the Express project.
 
 First create a directory named `myapp`, change to it and run `npm init`. Then install `express` as a dependency, as per the [installation guide](/{{ page.lang }}/starter/installing.html).
 
-In the `myapp` directory, create a file named `app.js` and copy in the code from the example above.
+In the `myapp` directory, create a file named `app.js` and copy the code from the example above.
 
 <div class="doc-box doc-notice" markdown="1">
 The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
