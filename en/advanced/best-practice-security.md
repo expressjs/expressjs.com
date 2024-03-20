@@ -44,6 +44,31 @@ You may be familiar with Secure Socket Layer (SSL) encryption. [TLS is simply th
 
 Also, a handy tool to get a free TLS certificate is [Let's Encrypt](https://letsencrypt.org/about/), a free, automated, and open certificate authority (CA) provided by the [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
 
+## Do Not Trust User Input
+
+For web applications one of the most critical security requirements is proper user input validation and handling. This comes in many forms and we will not cover all of them here.
+Ultimately the responsibility for validating and correctly handling the types of user input your application accepts. Here are a few examples of validating user input specifically
+using a few `express` apis.
+
+### Prevent Open Redirects
+
+Open Redirects are when a web server accepts a url as user input (often in the url query, ex. `?url=https://example.com`) and uses `res.redirect` to set the `location` header and
+return a 3xx status. When doing this, your application is required to validate the incoming user input is a url you support redirecting to. If you do not it can result in malicious
+links sending users to phishing websites among other risks. Here is an example check you should do before using `res.redirect` or `res.location` on with user input:
+
+```js
+app.use((req, res) => {
+  try {
+    if (new Url(req.query.url).host === 'example.com') {
+      return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`)
+    }
+  } catch (e) {
+    return res.status(400).end(`Invalid url: ${req.query.url}`)
+  }
+  res.redirect(req.query.url)
+})
+```
+
 ## Use Helmet
 
 [Helmet][helmet] can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.

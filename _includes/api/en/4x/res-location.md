@@ -10,6 +10,8 @@ res.location('back')
 
 A `path` value of "back" has a special meaning, it refers to the URL specified in the `Referer` header of the request. If the `Referer` header was not specified, it refers to "/".
 
+See also our [security best practices around user input validation to prevent open redirect vulnerabilities](http://expressjs.com/en/advanced/best-practice-security.html#prevent-open-redirects). 
+
 <div class='doc-box doc-warn' markdown="1">
 After encoding the URL, if not encoded already, Express passes the specified URL to the browser in the `Location` header,
 without any validation.
