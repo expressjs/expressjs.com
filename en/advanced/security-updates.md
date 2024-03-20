@@ -18,6 +18,11 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
 
 ## 4.x
 
+  * 4.19.0
+    * When `res.location` and `res.redirect` are used with user provided input you must use an allow list to prevent [open redirects (cwe
+      601)](https://cwe.mitre.org/data/definitions/601.html). Due to an issue with the encoding in the `encodeurl` package even a correct check can be bypassed with a specially
+      crafted url leading to an open redirect vulnerability. [GHSA-rv95-896h-c2vc](https://github.com/expressjs/express/security/advisories/GHSA-rv95-896h-c2vc). 
+      * 4.19.1 fixes a regression where passing `URL` instances or other non-string inputs are passed. It is recommended to upgrade straight to this version.
   * 4.16.0
     * The dependency `forwarded` has been updated to address a [vulnerability](https://npmjs.com/advisories/527). This may affect your application if the following APIs are used: `req.host`, `req.hostname`, `req.ip`, `req.ips`, `req.protocol`.
     * The dependency `mime` has been updated to address a [vulnerability](https://npmjs.com/advisories/535), but this issue does not impact Express.
