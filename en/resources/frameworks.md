@@ -28,3 +28,5 @@ Several popular Node.js frameworks are built on Express:
 - **[FoalTS](https://foalts.org/)**: Elegant and all-inclusive Node.Js web framework based on TypeScript.
 - **[NestJs](https://github.com/nestjs/nest)**: A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications on top of TypeScript & JavaScript (ES6, ES7, ES8)
 - **[Expressive Tea](https://github.com/Zero-OneiT/expresive-tea)**: A Small framework for building modulable, clean, fast and descriptive server-side applications with Typescript and Express out of the box.
+- **[Tailwind Elements](https://tailwind-elements.com/docs/standard/integrations/express-integration/)**: Express integration with Tailwind Elements - a free, open-source UI Kit
+
