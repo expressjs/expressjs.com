@@ -812,6 +812,14 @@ h2 a {
 
 /* responsive */
 
+@media all and (min-width: 900px) {
+ 
+  #navmenu {
+   display: block !important;
+  }
+ 
+}
+
 @media all and (max-width: 899px) {
 
   #conference a img {
