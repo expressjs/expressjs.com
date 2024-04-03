@@ -22,13 +22,17 @@ Security best practices for Express applications in production include:
 
 - [Don’t use deprecated or vulnerable versions of Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
 - [Use TLS](#use-tls)
+- [Do not trust user input](#do-not-trust-user-input)
+  - [Prevent open redirects](#prevent-open-redirects)
 - [Use Helmet](#use-helmet)
+- [Reduce fingerprinting](#reduce-fingerprinting)
 - [Use cookies securely](#use-cookies-securely)
+  - [Don't use the default session cookie name](#dont-use-the-default-session-cookie-name)
+  - [Set cookie security options](#set-cookie-security-options)
 - [Prevent brute-force attacks against authorization](#prevent-brute-force-attacks-against-authorization)
 - [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
-- [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
+  - [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
 - [Additional considerations](#additional-considerations)
-
 
 ## Don't use deprecated or vulnerable versions of Express
 
@@ -44,17 +48,20 @@ You may be familiar with Secure Socket Layer (SSL) encryption. [TLS is simply th
 
 Also, a handy tool to get a free TLS certificate is [Let's Encrypt](https://letsencrypt.org/about/), a free, automated, and open certificate authority (CA) provided by the [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
 
-## Do Not Trust User Input
+## Do not trust user input
 
 For web applications one of the most critical security requirements is proper user input validation and handling. This comes in many forms and we will not cover all of them here.
 Ultimately the responsibility for validating and correctly handling the types of user input your application accepts. Here are a few examples of validating user input specifically
 using a few `express` apis.
 
-### Prevent Open Redirects
+### Prevent open redirects
 
-Open Redirects are when a web server accepts a url as user input (often in the url query, ex. `?url=https://example.com`) and uses `res.redirect` to set the `location` header and
-return a 3xx status. When doing this, your application is required to validate the incoming user input is a url you support redirecting to. If you do not it can result in malicious
-links sending users to phishing websites among other risks. Here is an example check you should do before using `res.redirect` or `res.location` on with user input:
+An example of potentially dangerous user input is an _open redirect_, where an application accepts a URL as user input (often in the URL query, for example `?url=https://example.com`) and uses `res.redirect` to set the `location` header and
+return a 3xx status. 
+
+An application must validate that it supports redirecting to the incoming URL to avoid sending users to malicious links such as phishing websites, among other risks. 
+
+Here is an example of checking URLs before using `res.redirect` or `res.location`:
 
 ```js
 app.use((req, res) => {
@@ -98,16 +105,16 @@ app.use(helmet())
 // ...
 ```
 
-### Reduce Fingerprinting
+## Reduce fingerprinting
 
-It can help to provide an extra layer of obsecurity to reduce server fingerprinting.
-Though not a security issue itself, a method to improve the overall posture of a web
-server is to take measures to reduce the ability to fingerprint the software being
-used on the server. Server software can be fingerprinted by kwirks in how they
-respond to specific requests.
+It can help to provide an extra layer of security to reduce the ability of attackers to determine
+the software that a server uses, known as "fingerprinting." Though not a security issue itself, 
+reducing the ability to fingerprint an application improves its overall security posture. 
+Server software can be fingerprinted by quirks in how it responds to specific requests, for example in 
+the HTTP response headers. 
 
-By default, Express.js sends the `X-Powered-By` response header banner. This can be
-disabled using the `app.disable()` method:
+By default, Express sends the `X-Powered-By` response header that you can 
+disable using the `app.disable()` method:
 
 ```js
 app.disable('x-powered-by')
@@ -118,7 +125,7 @@ a sophisticated attacker from determining that an app is running Express.  It ma
 discourage a casual exploit, but there are other ways to determine an app is running
 Express. "%}
 
-Express.js also sends it's own formatted 404 Not Found messages and own formatter error
+Express also sends its own formatted "404 Not Found" messages and formatter error
 response messages. These can be changed by
 [adding your own not found handler](/en/starter/faq.html#how-do-i-handle-404-responses)
 and
@@ -203,8 +210,8 @@ app.use(session({
 Make sure login endpoints are protected to make private data more secure.
 
 A simple and powerful technique is to block authorization attempts using two metrics:
-1. The first is number of consecutive failed attempts by the same user name and IP address. 
-1. The second is number of failed attempts from an IP address over some long period of time. For example, block an IP address if it makes 100 failed attempts in one day.
+1. The number of consecutive failed attempts by the same user name and IP address. 
+1. The number of failed attempts from an IP address over some long period of time. For example, block an IP address if it makes 100 failed attempts in one day.
 
 [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) package provides tools to make this technique easy and fast.  You can find [an example of brute-force protection in the documentation](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection)
 
@@ -233,11 +240,11 @@ Use this command to test your application for vulnerabilities:
 $ snyk test
 ```
 
-## Avoid other known vulnerabilities
+### Avoid other known vulnerabilities
 
 Keep an eye out for [Node Security Project](https://npmjs.com/advisories) or [Snyk](https://snyk.io/vuln/) advisories that may affect Express or other modules that your app uses.  In general, these databases are excellent resources for knowledge and tools about Node security.
 
-Finally, Express apps - like any other web apps - can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://www.owasp.org/www-project-top-ten/) and take precautions to avoid them.
+Finally, Express apps&mdash;like any other web apps&mdash;can be vulnerable to a variety of web-based attacks. Familiarize yourself with known [web vulnerabilities](https://www.owasp.org/www-project-top-ten/) and take precautions to avoid them.
 
 ## Additional considerations
 

@@ -52,5 +52,5 @@ defaulting to `/` when the referer is missing.
 res.redirect('back')
 ```
 
-See also our [security best practices around user input validation to prevent open redirect
+See also [Security best practices: Prevent open redirect 
 vulnerabilities](http://expressjs.com/en/advanced/best-practice-security.html#prevent-open-redirects). 
