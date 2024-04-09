@@ -45,7 +45,7 @@ true. Disabling this will ignore the `immutable` and `maxAge` options.
 
 ##### dotfiles
 
- Set how "dotfiles" are treated when encountered. A dotfile is a file
+Set how "dotfiles" are treated when encountered. A dotfile is a file
 or directory that begins with a dot ("."). Note this check is done on
 the path itself without checking if the path actually exists on the
 disk. If `root` is specified, only the dotfiles above the root are
@@ -80,7 +80,7 @@ this middleware to simply `next()` to your next middleware when this value
 is `true`. When this value is `false`, these errors (even 404s), will invoke
 `next(err)`.
 
-Typically `true` is desired such that multiple physical directories can be
+Typically, `true` is desired such that multiple physical directories can be
 mapped to the same web address or for routes to fill in non-existent files.
 
 The value `false` can be used if this middleware is mounted at a path that
@@ -100,8 +100,8 @@ supported clients from making conditional requests during the life of the
 
 ##### index
 
-By default this module will send "index.html" files in response to a request
-on a directory. To disable this set `false` or to supply a new index pass a
+By default, this module will send "index.html" files in response to a request
+on a directory. To disable this set `false` or to supply a new index, pass a
 string or an array in preferred order.
 
 ##### lastModified

@@ -142,9 +142,9 @@ var express = require('express')
 var methodOverride = require('method-override')
 var app = express()
 
-// NOTE: when using req.body, you must fully parse the request body
-//       before you call methodOverride() in your middleware stack,
-//       otherwise req.body will not be populated.
+// NOTE: when using `req.body`, you must fully parse the request body
+//       before you call `methodOverride()` in your middleware stack,
+//       otherwise `req.body` will not be populated.
 app.use(bodyParser.urlencoded())
 app.use(methodOverride(function (req, res) {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {

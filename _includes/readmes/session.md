@@ -214,7 +214,7 @@ The default value is `undefined`.
 ##### resave
 
 Forces the session to be saved back to the session store, even if the session
-was never modified during the request. Depending on your store this may be
+was never modified during the request. Depending on your store, this may be
 necessary, but it can also create race conditions where a client makes two
 parallel requests to your server and changes made to the session in one
 request may get overwritten when the other request ends, even if it made no
@@ -245,7 +245,7 @@ With this enabled, the session identifier cookie will expire in
 
 This is typically used in conjuction with short, non-session-length
 [`maxAge`](#cookiemaxage) values to provide a quick timeout of the session data
-with reduced potential of it occurring during on going server interactions.
+with reduced potential of it occurring during ongoing server interactions.
 
 **Note** When this option is set to `true` but the `saveUninitialized` option is
 set to `false`, the cookie will not be set on a response with an uninitialized
@@ -313,7 +313,7 @@ The default value is `'keep'`.
 
 To store or access session data, simply use the request property `req.session`,
 which is (generally) serialized as JSON by the store, so nested objects
-are typically fine. For example below is a user-specific view counter:
+are typically fine. For example, below is a user-specific view counter:
 
 ```js
 // Use the session middleware
@@ -336,7 +336,7 @@ app.get('/', function(req, res, next) {
 
 #### Session.regenerate(callback)
 
-To regenerate the session simply invoke the method. Once complete,
+To regenerate the session, simply invoke the method. Once complete,
 a new SID and `Session` instance will be initialized at `req.session`
 and the `callback` will be invoked.
 
@@ -403,13 +403,13 @@ object.
 ### req.session.cookie
 
 Each session has a unique cookie object accompany it. This allows
-you to alter the session cookie per visitor. For example we can
+you to alter the session cookie per visitor. For example, we can
 set `req.session.cookie.expires` to `false` to enable the cookie
 to remain for only the duration of the user-agent.
 
 #### Cookie.maxAge
 
-Alternatively `req.session.cookie.maxAge` will return the time
+Alternatively, `req.session.cookie.maxAge` will return the time
 remaining in milliseconds, which we may also re-assign a new value
 to adjust the `.expires` property appropriately. The following
 are essentially equivalent
@@ -420,8 +420,8 @@ req.session.cookie.expires = new Date(Date.now() + hour)
 req.session.cookie.maxAge = hour
 ```
 
-For example when `maxAge` is set to `60000` (one minute), and 30 seconds
-has elapsed it will return `30000` until the current request has completed,
+For example, when `maxAge` is set to `60000` (one minute) and 30 seconds
+has elapsed, it will return `30000` until the current request has completed,
 at which time `req.session.touch()` is called to reset
 `req.session.cookie.maxAge` to its original value.
 
@@ -452,7 +452,7 @@ and **optional**.
   * Optional methods are ones this module does not call at all, but helps
     present uniform stores to users.
 
-For an example implementation view the [connect-redis](http://github.com/visionmedia/connect-redis) repo.
+For an example implementation, view the [connect-redis](http://github.com/visionmedia/connect-redis) repo.
 
 ### store.all(callback)
 

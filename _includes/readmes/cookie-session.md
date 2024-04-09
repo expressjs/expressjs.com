@@ -133,7 +133,7 @@ altered to change cookie setting behavior on a per-request basis.
 
 ### Destroying a session
 
-To destroy a session simply set it to `null`:
+To destroy a session, simply set it to `null`:
 
 ```js
 req.session = null
@@ -190,7 +190,7 @@ app.use(cookieSession({
   keys: ['key1', 'key2']
 }))
 
-// This allows you to set req.session.maxAge to let certain sessions
+// This allows you to set `req.session.maxAge` to let certain sessions
 // have a different value than the default.
 app.use(function (req, res, next) {
   req.sessionOptions.maxAge = req.session.maxAge || req.sessionOptions.maxAge
@@ -262,7 +262,7 @@ recommends that a browser **SHOULD** allow
 
 In practice this limit differs slightly across browsers. See a list of
 [browser limits here](http://browsercookielimits.squawky.net/). As a rule
-of thumb **don't exceed 4093 bytes per domain**.
+of thumb, **don't exceed 4093 bytes per domain**.
 
 If your session object is large enough to exceed a browser limit when encoded,
 in most cases the browser will refuse to store the cookie. This will cause the
@@ -271,7 +271,7 @@ information or b) use old session information that was small enough to not
 exceed the cookie limit.
 
 If you find your session object is hitting these limits, it is best to
-consider if  data in your session should be loaded from a database on the
+consider if data in your session should be loaded from a database on the
 server instead of transmitted to/from the browser with every request. Or
 move to an [alternative session strategy](https://github.com/expressjs/session#compatible-session-stores)
 

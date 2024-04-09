@@ -58,7 +58,7 @@ app.post('/photos/upload', upload.array('photos', 12), function (req, res, next)
 
 const cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
 app.post('/cool-profile', cpUpload, function (req, res, next) {
-  // req.files is an object (String -> Array) where fieldname is the key, and the value is array of files
+  // req.files is an object (String -> Array) where fieldname is the key, and the value is an array of files
   //
   // e.g.
   //  req.files['avatar'][0] -> File
@@ -93,7 +93,7 @@ Here's an example on how multer is used an HTML form. Take special note of the `
 </form>
 ```
 
-Then in your javascript file you would add these lines to access both the file and the body. It is important that you use the `name` field value from the form in your upload function. This tells multer which field on the request it should look for the files in. If these fields aren't the same in the HTML form and on your server, your upload will fail:
+Then in your javascript file, you would add these lines to access both the file and the body. It is important that you use the `name` field value from the form in your upload function. This tells multer which field on the request it should look for the files in. If these fields aren't the same in the HTML form and on your server, your upload will fail:
 
 ```javascript
 const multer  = require('multer')
@@ -277,7 +277,7 @@ Key | Description | Default
 `parts` | For multipart forms, the max number of parts (fields + files) | Infinity
 `headerPairs` | For multipart forms, the max number of header key=>value pairs to parse | 2000
 
-Specifying the limits can help protect your site against denial of service (DoS) attacks.
+Specifying the limits can help protect your site against denial-of-service (DoS) attacks.
 
 ### `fileFilter`
 
@@ -290,10 +290,10 @@ function fileFilter (req, file, cb) {
   // The function should call `cb` with a boolean
   // to indicate if the file should be accepted
 
-  // To reject this file pass `false`, like so:
+  // To reject this file, pass `false`, like so:
   cb(null, false)
 
-  // To accept the file pass `true`, like so:
+  // To accept the file, pass `true`, like so:
   cb(null, true)
 
   // You can always pass an error if something goes wrong:

@@ -7,7 +7,7 @@ connect-rid
 
 ![logo](https://raw.github.com/fengmk2/connect-rid/master/logo.png)
 
-connect request id middleware, base on [rid](https://github.com/fengmk2/rid).
+Connect request id middleware, based on [rid](https://github.com/fengmk2/rid).
 
 ## Install
 

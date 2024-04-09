@@ -88,7 +88,7 @@ if (process.env.NODE_ENV === 'development') {
 
 ### Custom output location
 
-Sometimes you may want to output the errors to a different location than STDERR
+Sometimes, you may want to output the errors to a different location than STDERR
 during development, like a system notification, for example.
 
 <!-- eslint-disable handle-callback-err -->

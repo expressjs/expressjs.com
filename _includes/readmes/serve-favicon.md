@@ -57,7 +57,7 @@ module.
 
 ## Examples
 
-Typically this middleware will come very early in your stack (maybe even first)
+Typically, this middleware will come very early in your stack (maybe even first)
 to avoid processing any other middleware if we already know the request is for
 `/favicon.ico`.
 
