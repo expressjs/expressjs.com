@@ -58,9 +58,9 @@ If you use any of these methods or properties in your app, it will crash. So, yo
 
 <h4 id="app.del">app.del()</h4>
 
-Express 5 no longer supports the `app.del()` function. If you use this function an error is thrown. For registering HTTP DELETE routes, use the `app.delete()` function instead.
+Express 5 no longer supports the `app.del()` function. If you use this function, an error is thrown. For registering HTTP DELETE routes, use the `app.delete()` function instead.
 
-Initially `del` was used instead of `delete`, because `delete` is a reserved keyword in JavaScript. However, as of ECMAScript 6, `delete` and other reserved keywords can legally be used as property names.
+Initially, `del` was used instead of `delete`, because `delete` is a reserved keyword in JavaScript. However, as of ECMAScript 6, `delete` and other reserved keywords can legally be used as property names.
 
 <h4 id="app.param">app.param(fn)</h4>
 
@@ -68,7 +68,7 @@ The `app.param(fn)` signature was used for modifying the behavior of the `app.pa
 
 <h4 id="plural">Pluralized method names</h4>
 
-The following method names have been pluralized. In Express 4, using the old methods resulted in a deprecation warning.  Express 5 no longer supports them at all:
+The following method names have been pluralized. In Express 4, using the old methods resulted in a deprecation warning. Express 5 no longer supports them at all:
 
 `req.acceptsCharset()` is replaced by `req.acceptsCharsets()`.
 
@@ -135,7 +135,7 @@ The `app.router` object, which was removed in Express 4, has made a comeback in 
 
 <h4 id="req.host">req.host</h4>
 
-In Express 4, the `req.host` function incorrectly stripped off the port number if it was present. In Express 5 the port number is maintained.
+In Express 4, the `req.host` function incorrectly stripped off the port number if it was present. In Express 5, the port number is maintained.
 
 <h4 id="req.query">req.query</h4>
 

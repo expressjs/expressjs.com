@@ -24,7 +24,7 @@ Adding the capability to connect databases to Express apps is just a matter of l
 * [Elasticsearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
-These database drivers are among many that are available.  For other options,
+These database drivers are among many that are available. For other options,
 search on the [npm](https://www.npmjs.com/) site.
 </div>
 
