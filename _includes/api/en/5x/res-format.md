@@ -9,7 +9,7 @@ The `Content-Type` response header is set when a callback is selected. However, 
 this within the callback using methods such as `res.set()` or `res.type()`.
 
 The following example would respond with `{ "message": "hey" }` when the `Accept` header field is set
-to "application/json" or "\*/json" (however if it is "\*/\*", then the response will be "hey").
+to "application/json" or "\*/json" (however, if it is "\*/\*", then the response will be "hey").
 
 ```js
 res.format({

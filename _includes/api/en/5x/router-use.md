@@ -103,4 +103,4 @@ app.use('/users', authRouter)
 app.use('/users', openRouter)
 ```
 
-Even though the authentication middleware was added via the `authRouter` it will run on the routes defined by the `openRouter` as well since both routers were mounted on `/users`.  To avoid this behavior, use different paths for each router.
+Even though the authentication middleware was added via the `authRouter` it will run on the routes defined by the `openRouter` as well since both routers were mounted on `/users`. To avoid this behavior, use different paths for each router.
