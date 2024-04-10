@@ -1,0 +1,11 @@
+:root {
+    --dark_bg: #0d1117;
+    --dark_text: whitesmoke;
+  }
+  
+.dark-mode-body {
+    background: var(--dark_bg);
+    --dark_text: whitesmoke;
+    background: var(--dark_bg);
+    color: var(--dark_text);
+  }
