@@ -10,7 +10,7 @@ redirect_from: "/advanced/healthcheck-graceful-shutdown.html"
 
 ## Graceful shutdown
 
-When you deploy a new version of your application, you must replace the previous version. The [process manager](pm.html) you're using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it should stop accepting new requests, finish all the ongoing requests, clean up the resources it used,  including database connections and file locks then exit.
+When you deploy a new version of your application, you must replace the previous version. The [process manager](pm.html) you're using will first send a `SIGTERM` signal to the application to notify it that it will be killed. Once the application gets this signal, it should stop accepting new requests, finish all the ongoing requests, clean up the resources it used, including database connections and file locks then exit.
 
 ### Example Graceful Shutdown
 ```js
@@ -45,7 +45,7 @@ Install terminus as follows:
 $ npm i @godaddy/terminus --save
 ```
 
-Here's a basic template that illustrates using terminus.  For more information, see <https://github.com/godaddy/terminus>.
+Here's a basic template that illustrates using terminus. For more information, see <https://github.com/godaddy/terminus>.
 
 ```js
 const http = require('http')
@@ -120,9 +120,9 @@ app.listen(3000, () => {
 
 [http-terminator](https://github.com/gajus/http-terminator) implements logic for gracefully terminating an express.js server.
 
-Terminating a HTTP server in Node.js requires keeping track of all open connections and signaling them that the server is shutting down. http-terminator implements the logic for tracking all connections and their termination upon a timeout. http-terminator also ensures graceful communication of the server intention to shutdown to any clients that are currently receiving response from this server.
+Terminating a HTTP server in Node.js requires keeping track of all open connections and signaling them that the server is shutting down. `http-terminator` implements the logic for tracking all connections and their termination upon a timeout. `http-terminator` also ensures graceful communication of the server intention to shutdown to any clients that are currently receiving response from this server.
 
-Install http-terminator as follows:
+Install `http-terminator` as follows:
 
 ```console
 $ npm install http-terminator
@@ -157,13 +157,13 @@ setTimeout(() => {
 
 [express-actuator](https://github.com/rcruzper/express-actuator) is a middleware to add endpoints to help you monitor and manage applications.
 
-Install express-actuator as follows:
+Install `express-actuator` as follows:
 
 ```console
 $ npm install --save express-actuator
 ```
 
-Basic template that illustrates using express-actuator:
+Basic template that illustrates using `express-actuator`:
 
 ```js
 const express = require('express')
