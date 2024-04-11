@@ -6,7 +6,7 @@
 [![Test Coverage][coveralls-image]][coveralls-url]
 
 Parse `Cookie` header and populate `req.cookies` with an object keyed by the
-cookie names. Optionally, you may enable signed cookie support by passing a
+cookie names. Optionally you may enable signed cookie support by passing a
 `secret` string, which assigns `req.secret` so it may be used by other
 middleware.
 
@@ -37,11 +37,11 @@ Create a new cookie parser middleware function using the given `secret` and
 
 The middleware will parse the `Cookie` header on the request and expose the
 cookie data as the property `req.cookies` and, if a `secret` was provided, as
-the property `req.signedCookies`. These properties are name-value pairs of the
+the property `req.signedCookies`. These properties are name value pairs of the
 cookie name to cookie value.
 
 When `secret` is provided, this module will unsign and validate any signed cookie
-values and move those name-value pairs from `req.cookies` into `req.signedCookies`.
+values and move those name value pairs from `req.cookies` into `req.signedCookies`.
 A signed cookie is a cookie that has a value prefixed with `s:`. Signed cookies
 that fail signature validation will have the value `false` instead of the tampered
 value.
@@ -101,12 +101,9 @@ app.get('/', function (req, res) {
 })
 
 app.listen(8080)
-```
 
-```sh
-# curl command that sends an HTTP request with two cookies
-
-curl http://127.0.0.1:8080 --cookie "Cho=Kim;Greet=Hello"
+// curl command that sends an HTTP request with two cookies
+// curl http://127.0.0.1:8080 --cookie "Cho=Kim;Greet=Hello"
 ```
 
 ## License

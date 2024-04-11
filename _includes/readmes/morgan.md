@@ -121,8 +121,8 @@ Standard Apache common log output.
 ##### dev
 
 Concise output colored by response status for development use. The `:status`
-token will be colored _green_ for success codes, _red_ for server error codes,
-_yellow_ for client error codes, _cyan_ for redirection codes, and _uncolored_
+token will be colored green for success codes, red for server error codes,
+yellow for client error codes, cyan for redirection codes, and uncolored
 for information codes.
 
 ```
@@ -251,7 +251,7 @@ The function returned from `morgan.compile` takes three arguments `tokens`, `req
 `res` is the HTTP response. The function will return a string that will be the log line,
 or `undefined` / `null` to skip logging.
 
-Normally, formats are defined using `morgan.format(name, format)`, but for certain
+Normally formats are defined using `morgan.format(name, format)`, but for certain
 advanced uses, this compile function is directly available.
 
 ## Examples

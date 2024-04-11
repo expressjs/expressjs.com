@@ -190,7 +190,7 @@ app.use(compression())
 
 Because of the nature of compression this module does not work out of the box
 with server-sent events. To compress content, a window of the output needs to
-be buffered up in order to get good compression. Typically, when using server-sent
+be buffered up in order to get good compression. Typically when using server-sent
 events, there are certain block of data that need to reach the client.
 
 You can achieve this by calling `res.flush()` when you need the data written to
