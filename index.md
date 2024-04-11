@@ -35,8 +35,10 @@ redirect_from: "/en/index.html"
       <h3>Performance</h3> Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love.
     </div>
 
-    <div id="frameworks">
-      <h3>Frameworks</h3> Many <a href="{{ page.lang }}/resources/frameworks.html">popular frameworks</a> are based on Express.
+    <div id="middleware">
+      <h3>Middleware</h3> 
+      Express is a routing framework with minimal functionality of its own.  A lot of
+      functionality is contained in Express <a href="{{ page.lang }}/resources/middleware.html">middleware</a> modules.
     </div>
   </div>
 

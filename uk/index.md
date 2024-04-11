@@ -35,7 +35,6 @@ lang: uk
       </div>
 
       <div id="frameworks">
-          <h3>Фреймворки</h3> Багато <a href="resources/frameworks.html">популярних фреймворків</a> грунтуються на Express.
       </div>
   </div>
 
