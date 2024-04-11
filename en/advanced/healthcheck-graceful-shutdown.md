@@ -118,7 +118,7 @@ app.listen(3000, () => {
 
 ### http-terminator
 
-[http-terminator](https://github.com/gajus/http-terminator) implements logic for gracefully terminating an express.js server.
+[http-terminator](https://github.com/gajus/http-terminator) implements logic for gracefully terminating an Express server.
 
 Terminating a HTTP server in Node.js requires keeping track of all open connections and signaling them that the server is shutting down. `http-terminator` implements the logic for tracking all connections and their termination upon a timeout. `http-terminator` also ensures graceful communication of the server intention to shutdown to any clients that are currently receiving response from this server.
 
