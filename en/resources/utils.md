@@ -8,7 +8,7 @@ redirect_from: "/resources/utilities.html"
 
 ## Express utility functions
 
-The  [pillarjs](https://github.com/pillarjs) GitHub organization contains a number of modules
+The [pillarjs](https://github.com/pillarjs) GitHub organization contains a number of modules
 for utility functions that may be generally useful.
 
 | Utility modules | Description|
@@ -26,4 +26,4 @@ for utility functions that may be generally useful.
 | [templation](https://www.npmjs.com/package/templation) | View system similar to `res.render()` inspired by [co-views](https://github.com/visionmedia/co-views) and [consolidate.js](https://github.com/visionmedia/consolidate.js/). |
 
 
-For additional low-level HTTP-related modules, see [jshttp](http://jshttp.github.io/)  .
+For additional low-level HTTP-related modules, see [jshttp](http://jshttp.github.io/).

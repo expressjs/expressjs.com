@@ -1,6 +1,6 @@
 <h3 id='req.route'>req.route</h3>
 
-Contains the currently-matched route, a string.  For example:
+Contains the currently-matched route, a string. For example:
 
 ```js
 app.get('/user/:id?', (req, res) => {
@@ -21,5 +21,6 @@ Example output from the previous snippet:
        keys: [],
        regexp: /^\/?$/i,
        method: 'get' } ],
-  methods: { get: true } }
+  methods: { get: true }
+}
 ```

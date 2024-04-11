@@ -2,7 +2,7 @@ The following table lists application settings.
 
 Note that sub-apps will:
 
-* Not inherit the value of settings that have a default value.  You must set the value in the sub-app.
+* Not inherit the value of settings that have a default value. You must set the value in the sub-app.
 * Inherit the value of settings with no default value; these are explicitly noted in the table below.
 
 Exceptions: Sub-apps will inherit the value of `trust proxy` even though it has a default value (for backward-compatibility);
@@ -68,7 +68,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   </td>
   <td>Boolean</td>
   <td markdown="1">
-  Enable escaping JSON responses from the `res.json`, `res.jsonp`, and `res.send` APIs. This will escape the characters `<`, `>`, and `&` as Unicode escape sequences in JSON. The purpose of this it to assist with [mitigating certain types of persistent XSS attacks](https://blog.mozilla.org/security/2017/07/18/web-service-audits-firefox-accounts/) when clients sniff responses for HTML.
+  Enable escaping JSON responses from the `res.json`, `res.jsonp`, and `res.send` APIs. This will escape the characters `<`, `>`, and `&` as Unicode escape sequences in JSON. The purpose of this is to assist with [mitigating certain types of persistent XSS attacks](https://blog.mozilla.org/security/2017/07/18/web-service-audits-firefox-accounts/) when clients sniff responses for HTML.
   <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
   </td>
   <td>N/A (undefined)</td>
@@ -141,7 +141,7 @@ A custom query string parsing function will receive the complete query string, a
 <p>
   When enabled, Express attempts to determine the IP address of the client connected through the front-facing proxy, or series of proxies. The `req.ips` property, then contains an array of IP addresses the client is connected through. To enable it, use the values described in the <a href="#trust.proxy.options.table">trust proxy options table</a>.
 </p><p>
-  The `trust proxy` setting is implemented using the <a href="https://www.npmjs.org/package/proxy-addr">proxy-addr</a> package.  For more information, see its documentation.
+  The `trust proxy` setting is implemented using the <a href="https://www.npmjs.org/package/proxy-addr">proxy-addr</a> package. For more information, see its documentation.
 </p><p>
 <b>NOTE</b>: Sub-apps <i>will</i> inherit the value of this setting, even though it has a default value.
 </p>

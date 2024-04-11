@@ -9,7 +9,7 @@ redirect_from: "/guide/writing-middleware.html"
 
 <h2>Overview</h2>
 
-_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/4x/api.html#req)  (`req`), the [response object](/{{ page.lang }}/4x/api.html#res) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/4x/api.html#req) (`req`), the [response object](/{{ page.lang }}/4x/api.html#res) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
 
 Middleware functions can perform the following tasks:
 
@@ -72,8 +72,8 @@ const myLogger = function (req, res, next) {
 ```
 
 <div class="doc-box doc-notice" markdown="1">
-Notice the call above to `next()`.  Calling this function invokes the next middleware function in the app.
-The `next()` function is not a part of the Node.js or Express API, but is the third argument that is passed to the middleware function.  The `next()` function could be named anything, but by convention it is always named "next".
+Notice the call above to `next()`. Calling this function invokes the next middleware function in the app.
+The `next()` function is not a part of the Node.js or Express API, but is the third argument that is passed to the middleware function. The `next()` function could be named anything, but by convention it is always named "next".
 To avoid confusion, always use this convention.
 </div>
 
@@ -158,7 +158,7 @@ async function cookieValidator (cookies) {
 }
 ```
 
-Here we use the [`cookie-parser`](/resources/middleware/cookie-parser.html) middleware to parse incoming cookies off the `req` object and pass them to our `cookieValidator` function.  The `validateCookies` middleware returns a Promise that upon rejection will automatically trigger our error handler.
+Here, we use the [`cookie-parser`](/resources/middleware/cookie-parser.html) middleware to parse incoming cookies off the `req` object and pass them to our `cookieValidator` function. The `validateCookies` middleware returns a Promise that upon rejection will automatically trigger our error handler.
 
 ```js
 const express = require('express')
@@ -185,7 +185,7 @@ app.listen(3000)
 ```
 
 <div class="doc-box doc-notice" markdown="1">
-Note how `next()` is called after `await cookieValidator(req.cookies)`.  This ensures that if `cookieValidator` resolves, the next middleware in the stack will get called.  If you pass anything to the `next()` function (except the string `'route'` or `'router'`), Express regards the current request as being an error and will skip any remaining non-error handling routing and middleware functions.
+Note how `next()` is called after `await cookieValidator(req.cookies)`. This ensures that if `cookieValidator` resolves, the next middleware in the stack will get called. If you pass anything to the `next()` function (except the string `'route'` or `'router'`), Express regards the current request as being an error and will skip any remaining non-error handling routing and middleware functions.
 </div>
 
 Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.

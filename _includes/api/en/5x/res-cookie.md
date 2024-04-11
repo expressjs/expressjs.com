@@ -60,10 +60,10 @@ res.cookie('cart', { items: [1, 2, 3] }, { maxAge: 900000 })
 
 When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this method also
 supports signed cookies. Simply include the `signed` option set to `true`.
-Then `res.cookie()` will use the secret passed to `cookieParser(secret)` to sign the value.
+Then, `res.cookie()` will use the secret passed to `cookieParser(secret)` to sign the value.
 
 ```js
 res.cookie('name', 'tobi', { signed: true })
 ```
 
-Later you may access this value through the [req.signedCookies](#req.signedCookies) object.
+Later, you may access this value through the [req.signedCookies](#req.signedCookies) object.

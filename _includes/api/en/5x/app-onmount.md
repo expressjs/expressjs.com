@@ -7,7 +7,7 @@ The `mount` event is fired on a sub-app, when it is mounted on a parent app. The
 
 Sub-apps will:
 
-* Not inherit the value of settings that have a default value.  You must set the value in the sub-app.
+* Not inherit the value of settings that have a default value. You must set the value in the sub-app.
 * Inherit the value of settings with no default value.
 
 For details, see [Application settings](/en/5x/api.html#app.settings.table).
