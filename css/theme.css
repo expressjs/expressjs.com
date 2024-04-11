@@ -1,0 +1,26 @@
+:root {
+    --main_dark_bg: #010409;
+    --second_dark_bg: #0d1117;
+    --dark_text: #e6edf3;
+  }
+#theme-icon-container {
+  float : right;
+  background-color: var(--second_dark_bg);
+  color:white;
+  min-width: 50px;
+}
+.dark-mode-body {
+    background: var(--main_dark_bg);
+    --dark_text: whitesmoke;
+    background: var(--main_dark_bg);
+    color: var(--dark_text);
+  }
+  #blm-banner.dark-mode {
+    background-color: var(--main_dark_bg);
+    /* color: var(--dark_text); */
+  }
+  header {
+    background-color: var(--second_dark_bg);
+    color: var(--dark_text);
+
+  }
