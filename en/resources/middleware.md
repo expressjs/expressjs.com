@@ -48,7 +48,7 @@ These are some additional popular middleware modules.
 | [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn) | Use a CDN for static assets, with multiple host support.|
 | [express-slash](https://github.com/ericf/express-slash) | Handles routes with and without trailing slashes.|
 | [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize) | Redirects HTTP requests containing uppercase to a canonical lowercase form.|
-| [helmet](https://github.com/helmetjs/helmet) |Helps secure your apps by setting various HTTP headers.|
+| [helmet](https://github.com/helmetjs/helmet) | Helps secure your apps by setting various HTTP headers.|
 | [join-io](https://github.com/coderaiser/join-io) | Joins files on the fly to reduce the requests count.|
 | [passport](https://github.com/jaredhanson/passport) | Authentication using "strategies" such as OAuth, OpenID and many others.  See [http://passportjs.org/](http://passportjs.org/) for more information.|
 | [static-expiry](https://github.com/paulwalker/connect-static-expiry) | Fingerprint URLs or caching headers for static assets.|

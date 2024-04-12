@@ -26,5 +26,5 @@ following example, the `greet` router is loaded on two path patterns.
 app.use(['/gre+t', '/hel{2}o'], greet) // load the router on '/gre+t' and '/hel{2}o'
 ```
 
-When a request is made to `/greet/jp`, `req.baseUrl` is "/greet".  When a request is
+When a request is made to `/greet/jp`, `req.baseUrl` is "/greet". When a request is
 made to `/hello/jp`, `req.baseUrl` is "/hello".

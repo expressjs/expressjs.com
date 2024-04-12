@@ -393,7 +393,7 @@ Make the following changes to `app.js`:
     `express.logger`, `express.methodOverride`,
     `express.session`, `express.bodyParser` and
     `express.errorHandler` are no longer available on the
-    `express` object.  You must install their alternatives
+    `express` object. You must install their alternatives
     manually and load them in the app.
 
 2. You no longer need to load the `app.router` function.
@@ -565,7 +565,7 @@ After installing the dependencies, start the app by using the following command:
 $ npm start
 ```
 
-If you look at the npm start script in the `package.json` file,
+If you look at the `npm start` script in the `package.json` file,
 you will notice that the actual command that starts the app is
 `node ./bin/www`, which used to be `node app.js`
 in Express 3.
@@ -602,6 +602,6 @@ var debug = require('debug')('app4')
 Next, change `"start": "node ./bin/www"` in the `package.json` file to `"start": "node app.js"`.
 
 You have now moved the functionality of `./bin/www` back to
-`app.js`.  This change is not recommended, but the exercise helps you
+`app.js`. This change is not recommended, but the exercise helps you
 to understand how the `./bin/www` file works, and why the `app.js` file
 no longer starts on its own.

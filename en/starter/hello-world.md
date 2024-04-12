@@ -39,7 +39,7 @@ RunKit is a third-party service not affiliated with the Express project.
 
 ### Running Locally
 
-First create a directory named `myapp`, change to it and run `npm init`. Then install `express` as a dependency, as per the [installation guide](/{{ page.lang }}/starter/installing.html).
+First create a directory named `myapp`, change to it and run `npm init`. Then, install `express` as a dependency, as per the [installation guide](/{{ page.lang }}/starter/installing.html).
 
 In the `myapp` directory, create a file named `app.js` and copy the code from the example above.
 

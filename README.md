@@ -10,18 +10,18 @@ To preview the website locally:
 
 1. Install the [jekyll-redirect-from](https://github.com/jekyll/jekyll-redirect-from) gem:
 
-   ```
+   ```sh
    $ gem install jekyll-redirect-from
    ```
    
-1. clone this repository by running the following command:
-   ```
+1. Clone this repository by running the following command:
+   ```sh
    $ git clone https://github.com/expressjs/expressjs.com.git
    ```
 
-1. navigate to the cloned repository directory and run the following command:
+1. Navigate to the cloned repository directory and run the following command:
 
-   ```
+   ```sh
    $ bundle install
    ```
 
@@ -29,7 +29,7 @@ To preview the website locally:
 
 1. Run Jekyll using the following command:
 
-   ```
+   ```sh
    $ bundle exec jekyll serve
    ```
 

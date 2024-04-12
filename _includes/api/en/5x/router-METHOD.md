@@ -2,7 +2,7 @@
 
 The `router.METHOD()` methods provide the routing functionality in Express,
 where METHOD is one of the HTTP methods, such as GET, PUT, POST, and so on,
-in lowercase.  Thus, the actual methods are `router.get()`, `router.post()`,
+in lowercase. Thus, the actual methods are `router.get()`, `router.post()`,
 `router.put()`, and so on.
 
 <div class="doc-box doc-info" markdown="1">
@@ -13,7 +13,7 @@ in lowercase.  Thus, the actual methods are `router.get()`, `router.post()`,
 
 You can provide multiple callbacks, and all are treated equally, and behave just
 like middleware, except that these callbacks may invoke `next('route')`
-to bypass the remaining route callback(s).  You can use this mechanism to perform
+to bypass the remaining route callback(s). You can use this mechanism to perform
 pre-conditions on a route then pass control to subsequent routes when there is no
 reason to proceed with the route matched.
 

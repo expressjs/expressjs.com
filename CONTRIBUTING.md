@@ -21,7 +21,7 @@ See [LICENSE.md](LICENSE.md) for the full license.
 - Russian
 - Korean
 
-Therefore we can no longer accept community translations for these languages, except for corrections
+Therefore, we can no longer accept community translations for these languages, except for corrections
 to the existing translations and updates to align with changes or additions to the English documentation.
 
 To contribute a translation into another language, following the procedure below.
