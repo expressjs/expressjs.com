@@ -1,37 +1,41 @@
 ---
 layout: page
-title: Express basic routing
+title: Building a Node.js Express Server: Basic Routing
 menu: starter
 lang: en
 redirect_from: "/starter/basic-routing.html"
 ---
 
-# Basic routing
 
-_Routing_ refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, and so on).
+# Basic Routing with Express: A Step-by-Step Guide
 
-Each route can have one or more handler functions, which are executed when the route is matched.
+Welcome to the world of building web servers with Node.js and Express! In this guide, we'll explore the fundamentals of routing in Express, which is crucial for handling client requests effectively.
 
-Route definition takes the following structure:
+Understanding Routing
+Routing in Express determines how your application responds to specific client requests to different endpoints. Each route consists of a URI (or path) and an HTTP request method (such as GET, POST, etc.). When a route matches a client request, one or more handler functions are executed.
+
+Let's break down the structure of a route definition:
 
 ```js
 app.METHOD(PATH, HANDLER)
 ```
 
-Where:
+Here's what each component represents:
 
-- `app` is an instance of `express`.
-- `METHOD` is an [HTTP request method](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), in lowercase.
-- `PATH` is a path on the server.
-- `HANDLER` is the function executed when the route is matched.
+- app: An instance of the Express application.
+- METHOD: An HTTP request method, specified in lowercase.
+- PATH: The path on the server.
+- HANDLER: The function executed when the route is matched.
 
 <div class="doc-box doc-notice" markdown="1">
-This tutorial assumes that an instance of `express` named `app` is created and the server is running. If you are not familiar with creating an app and starting it, see the [Hello world example](/{{ page.lang }}/starter/hello-world.html).
+Assuming you have already created an instance of `express` named `app` and your server is up and running. If you need help with setting up your Express application, check out the [Hello World example](/{{ page.lang }}/starter/hello-world.html).
 </div>
 
-The following examples illustrate defining simple routes.
+## Examples of Basic Routes
 
-Respond with `Hello World!` on the homepage:
+Now, let's dive into some examples of defining simple routes:
+
+Respond with `'Hello World!'` on the Homepage:
 
 ```js
 app.get('/', (req, res) => {
@@ -39,7 +43,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-Respond to POST request on the root route (`/`), the application's home page:
+Handle POST Requests to the Root Route:
 
 ```js
 app.post('/', (req, res) => {
@@ -47,7 +51,7 @@ app.post('/', (req, res) => {
 })
 ```
 
-Respond to a PUT request to the `/user` route:
+Handle PUT Requests to the `'/user'` Route:
 
 ```js
 app.put('/user', (req, res) => {
@@ -55,14 +59,15 @@ app.put('/user', (req, res) => {
 })
 ```
 
-Respond to a DELETE request to the `/user` route:
-
+Handle DELETE Requests to the `'/user'` Route:
 ```js
 app.delete('/user', (req, res) => {
   res.send('Got a DELETE request at /user')
 })
 ```
 
-For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).
+### Further Resources
 
-###  [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)
+Ready to dive deeper into routing with Express? Check out the [routing guide](/{{ page.lang }}/guide/routing.html) for more detailed information.
+
+### [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)
