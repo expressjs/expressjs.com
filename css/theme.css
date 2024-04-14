@@ -4,6 +4,7 @@
   --dark_text: #e6edf3;
 }
 #theme-icon-container {
+  position: relative;
   float: right;
   background-color: var(--second_dark_bg);
   color: white;
@@ -23,13 +24,50 @@ header.dark-mode {
   background-color: var(--second_dark_bg);
   color: var(--dark_text);
 }
+.dark-mode-body div#overlay {
+  opacity: 0.5
+}
 #logo.dark-mode > a {
   color: var(--dark_text);
 }
 #navbar.dark-mode ul#navmenu  li.dropit-trigger a{
   color: var(--dark_text);
 }
+.dropit-submenu::hover{
+  background: var(--second_dark_bg);
+
+}
 #navbar.dark-mode ul#navmenu li a {
   color: var(--dark_text);
 }
+#navbar.dark-mode ul#navmenu 
+#navbar.dark-mode > span.algolia-autocomplete > input {
+  background-color: var(--second_dark_bg);
+}
+#navbar.dark-mode > span.algolia-autocomplete > input::placeholder {
+  color: var(--dark_text);
+}
+#navbar.dark-mode #navmenu  li  {
+  background: var(--second_dark_bg);
+  /* background-color: green; */
+}
 
+#description .dark-mode.express > a{
+  color: var(--dark_text);
+}
+#install-command.dark-mode {
+  background: var(--main_dark_bg)
+}
+#announcements {
+  background: var(--main_dark_bg)
+  
+}
+#boxes div > h3 {
+  color: var(--dark_text);
+
+}
+@media (max-width: 899px) {
+  #theme-icon-container {
+  bottom: 35px;
+  }
+}
