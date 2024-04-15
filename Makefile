@@ -16,7 +16,7 @@ help: ## This help
 
 serve: ## Local server
 	@echo "${BLUE}Servering website in localhost:4000${RESET}"
-	docker run -p 4000:4000 -v $(DIR):/usr/src/app my-jekyll-project
+	docker run -p 4000:4000 -v $(DIR):/usr/src/app expressjs.com
 
 build: ## Build site
 	@echo "${BLUE}Building site...${RESET}"
