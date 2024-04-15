@@ -42,6 +42,8 @@ To preview the website locally:
 2. Run `make serve` to serve the project, this include live reloading so any change will be reflected (it can take a while, check the logs).
 3. Run `make clean` to remove the docker images and resources generated.
 
+Note: You can run `make help` to obtain detailed information on how to use our make commands.
+
 ## Formatting
 
 Jekyll uses a variant of Markdown known as [Kramdown](https://kramdown.gettalong.org/quickref.html).
