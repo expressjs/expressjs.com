@@ -1,6 +1,8 @@
 :root {
   --main_dark_bg: #010409;
   --second_dark_bg: #0d1117;
+  --dark_hover: #383838;
+  --second_dark_hover: #484848;
   --dark_text: #e6edf3;
 }
 #theme-icon-container {
@@ -25,49 +27,52 @@ header.dark-mode {
   color: var(--dark_text);
 }
 .dark-mode-body div#overlay {
-  opacity: 0.5
+  opacity: 0.5;
 }
 #logo.dark-mode > a {
   color: var(--dark_text);
 }
-#navbar.dark-mode ul#navmenu  li.dropit-trigger a{
+#navbar.dark-mode ul#navmenu li.dropit-trigger a {
   color: var(--dark_text);
-}
-.dropit-submenu::hover{
-  background: var(--second_dark_bg);
-
 }
 #navbar.dark-mode ul#navmenu li a {
   color: var(--dark_text);
 }
-#navbar.dark-mode ul#navmenu 
 #navbar.dark-mode > span.algolia-autocomplete > input {
   background-color: var(--second_dark_bg);
 }
 #navbar.dark-mode > span.algolia-autocomplete > input::placeholder {
   color: var(--dark_text);
 }
-#navbar.dark-mode #navmenu  li  {
-  background: var(--second_dark_bg);
-  /* background-color: green; */
+/* top bar links hover */
+#navbar.dark-mode .menu ul.dropit-submenu a:hover {
+  background: var(--dark_hover);
 }
-
-#description .dark-mode.express > a{
+#navbar.dark-mode #navmenu li {
+  background: var(--second_dark_bg);
+}
+#description .dark-mode.express > a {
   color: var(--dark_text);
 }
 #install-command.dark-mode {
-  background: var(--main_dark_bg)
+  background: var(--main_dark_bg);
 }
 #announcements {
-  background: var(--main_dark_bg)
-  
+  background: var(--main_dark_bg);
 }
 #boxes div > h3 {
   color: var(--dark_text);
-
 }
 @media (max-width: 899px) {
   #theme-icon-container {
-  bottom: 35px;
+    bottom: 35px;
+  }
+  /* mobile menu links hover */
+  div#navbar.dark-mode ul#navmenu .dropit-trigger:hover {
+    background: var(--dark_hover);
+  }
+  div#navbar.dark-mode .menu ul.dropit-submenu a:hover {
+    background: var(--second_dark_hover);
+    color: var(--dark_text) !important;
   }
 }
