@@ -37,8 +37,8 @@ redirect_from: "/en/index.html"
 
     <div id="middleware">
       <h3>Middleware</h3> 
-      Express is a routing framework with minimal functionality of its own.  A lot of
-      functionality is contained in Express <a href="{{ page.lang }}/resources/middleware.html">middleware</a> modules.
+      Express is a lightweight and flexible routing framework with minimal core features 
+      meant to be augmented through the use of Express <a href="{{ page.lang }}/resources/middleware.html">middleware</a> modules.
     </div>
   </div>
 
