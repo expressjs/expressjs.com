@@ -251,7 +251,7 @@ StrongLoop Process Manager를 이용하는 경우에는 [StrongLoop PM을 서비
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-위 세 개의 프로세스 관리자에 대한 기능별 비교를 확인하려면 [http://strong-pm.io/compare/](http://strong-pm.io/compare/)를 참조하십시오. 세 프로세스 관리자 모두에 대한 자세한 내용은 [Express 앱용 프로세스 관리자](/{{ page.lang }}/advanced/pm.html)를 참조하십시오.
+위 세 개의 프로세스 관리자에 대한 기능별 비교를 확인하려면 [http://strong-pm.io/compare/](http://strong-pm.io/compare/)를 참조하십시오. 
 
 이러한 프로세스 관리자 중 어느 하나를 사용하면, 때때로 앱에서 충돌이 발생하는 경우에도, 충분히 앱이 지속적으로 작동하도록 할 수 있습니다.
 

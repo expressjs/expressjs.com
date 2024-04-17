@@ -39,8 +39,7 @@ Members of the Express technical committee are:
 ## Express is made of many modules
 
 Our vibrant community has created a large variety of extensions,
-[middleware modules](/{{ page.lang }}/resources/middleware.html) and
-[higher-level frameworks](frameworks.html).
+[middleware modules](/{{ page.lang }}/resources/middleware.html) and higher-level frameworks.
 
 Additionally, the Express community maintains modules in these two GitHub orgs:
 

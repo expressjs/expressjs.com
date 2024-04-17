@@ -39,7 +39,6 @@ lang: th
     </div>
 
     <div id="frameworks">
-      <h3>เฟรมเวอร์ค</h3> <a href="{{ page.lang }}/resources/frameworks.html">เฟรมเวอร์คยอดนิยมมากยาย</a> ที่มีพื้นฐานจาก Express.
     </div>
   </div>
 
