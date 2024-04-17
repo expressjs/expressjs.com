@@ -34,8 +34,10 @@ lang: pt-br
           <h3>Desempenho</h3> O Express fornece uma camada fina de recursos fundamentais para aplicativos da web, sem obscurecer os recursos do Node.js que você conhece e ama.
       </div>
 
-    <div id="frameworks">
-      <h3>Frameworks</h3> Muitos <a href="{{ page.lang }}/resources/frameworks.html">frameworks populares</a> são baseadas no Express.
+    <div id="middleware">
+      <h3>Middleware</h3>
+      Express é uma estrutura de roteamento leve e flexível com recursos básicos e mínimos que devem ser 
+      aumentados por meio do uso do módulo Express <a href="{{ page.lang }}/resources/middleware.html">middleware</a>.
     </div>
   </div>
 
