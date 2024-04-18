@@ -86,9 +86,24 @@ body.dark-mode .doc-box.doc-notice
   color: var(--dark_text);
   background: var(--main_dark_bg);
 }
-body.dark-mode h1 {
+body.dark-mode h1,
+body.dark-mode h3{
   color: var(--dark_text);
 }
 body.dark-mode code {
   color: var(--dark_text);
+}
+body.dark-mode em, 
+body.dark-mode strong {
+  color: var(--dark_text);
+}
+
+body.dark-mode pre {
+  background: var(--second_dark_bg);
+}
+body.dark-mode [class*="language-"] {
+  text-shadow: 0 1px var(--second_dark_bg);
+}
+body.dark-mode .token.operator {
+  background: inherit;
 }
