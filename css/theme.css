@@ -52,7 +52,7 @@ body.dark-mode #navbar > span.algolia-autocomplete > input::placeholder {
 body.dark-mode #navbar .menu ul.dropit-submenu a:hover {
   background: var(--dark_hover);
 }
- body.dark-mode #navbar #navmenu li {
+body.dark-mode #navbar #navmenu li {
   background: var(--second_dark_bg);
 }
 body.dark-mode #description .express > a {
@@ -81,19 +81,20 @@ body.dark-mode #boxes div > h3 {
   }
 }
 body.dark-mode .doc-box.doc-info,
-body.dark-mode .doc-box.doc-notice
- {
+body.dark-mode .doc-box.doc-notice,
+body.dark-mode .doc-box.doc-warn {
   color: var(--dark_text);
   background: var(--main_dark_bg);
 }
 body.dark-mode h1,
-body.dark-mode h3{
+body.dark-mode h2,
+body.dark-mode h3 {
   color: var(--dark_text);
 }
 body.dark-mode code {
   color: var(--dark_text);
 }
-body.dark-mode em, 
+body.dark-mode em,
 body.dark-mode strong {
   color: var(--dark_text);
 }
@@ -101,9 +102,13 @@ body.dark-mode strong {
 body.dark-mode pre {
   background: var(--second_dark_bg);
 }
-body.dark-mode [class*="language-"] {
+body.dark-mode [class*='language-'] {
   text-shadow: 0 1px var(--second_dark_bg);
 }
 body.dark-mode .token.operator {
   background: inherit;
+}
+body.dark-mode table thead tr:first-child th {
+  background-color: var(--second_dark_bg);
+  color: var(--dark_text);
 }
