@@ -4,13 +4,18 @@
   --dark_hover: #383838;
   --second_dark_hover: #484848;
   --dark_text: #e6edf3;
+  --second_dark_text: #e6edf3;
 }
 #theme-icon-container {
   position: relative;
   float: right;
-  background-color: var(--second_dark_bg);
   color: white;
   min-width: 50px;
+  color: black;
+}
+body.dark-mode #theme-icon-container {
+  color: var(--dark_text);
+  background-color: var(--second_dark_bg);
 }
 body.dark-mode {
   background: var(--main_dark_bg);
@@ -45,10 +50,10 @@ body.dark-mode #navbar ul#navmenu li a.current {
 body.dark-mode #navbar > span.algolia-autocomplete > input {
   background-color: var(--second_dark_bg);
 }
+body.dark-mode #navbar > span.algolia-autocomplete > input,
 body.dark-mode #navbar > span.algolia-autocomplete > input::placeholder {
   color: var(--dark_text);
 }
-/* top bar links hover */
 body.dark-mode #navbar .menu ul.dropit-submenu a:hover {
   background: var(--dark_hover);
 }
@@ -86,6 +91,9 @@ body.dark-mode .doc-box.doc-warn {
   color: var(--dark_text);
   background: var(--main_dark_bg);
 }
+body.dark-mode .doc-box.doc-info pre.language-javascript {
+  background: var(--main_dark_bg);
+}
 body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3 {
@@ -107,6 +115,19 @@ body.dark-mode [class*='language-'] {
 }
 body.dark-mode .token.operator {
   background: inherit;
+}
+body.dark-mode table tr:first-child th {
+  background-color: var(--second_dark_bg);
+  color: var(--dark_text);
+}
+body.dark-mode #menu li > * {
+  color: var(--dark_text);
+}
+body.dark-mode #menu li ul li > em {
+  color: silver;
+}
+body.dark-mode #menu li ul li > a {
+  color: grey;
 }
 body.dark-mode table thead tr:first-child th {
   background-color: var(--second_dark_bg);
