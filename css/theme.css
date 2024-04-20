@@ -46,11 +46,38 @@ body.dark-mode #navbar ul#navmenu li a {
 body.dark-mode #navbar ul#navmenu li a.current {
   background: var(--main_dark_bg);
 }
+/* search bar */
 body.dark-mode #navbar > span.algolia-autocomplete > input {
   background-color: var(--second_dark_bg);
 }
 body.dark-mode #navbar > span.algolia-autocomplete > input,
 body.dark-mode #navbar > span.algolia-autocomplete > input::placeholder {
+  color: var(--dark_text);
+}
+/* search bar french */
+:lang(fr) body.dark-mode #navbar ul#navmenu > span.algolia-autocomplete > input {
+  background-color: var(--second_dark_bg);
+  color: var(--dark_text);
+}
+/* search bar fixes uz, ru, de, fr  */
+:lang(uz) span.algolia-autocomplete {
+  max-width: 8em;
+  min-width: auto;
+}
+:lang(ru) span.algolia-autocomplete,
+:lang(de) span.algolia-autocomplete,
+:lang(fr) span.algolia-autocomplete
+ {
+  max-width: 9em;
+  min-width: auto;
+}
+:lang(uz) span.algolia-autocomplete > input,
+:lang(ru) span.algolia-autocomplete > input,
+:lang(de) span.algolia-autocomplete > input, 
+:lang(fr) span.algolia-autocomplete > input {
+  max-width: 100%;
+}
+body.dark-mode #navbar ul#navmenu > span.algolia-autocomplete > input::placeholder {
   color: var(--dark_text);
 }
 body.dark-mode #navbar .menu ul.dropit-submenu a:hover {
@@ -190,3 +217,8 @@ body.dark-mode
   .algolia-docsearch-suggestion--highlight {
   color: var(--link);
 }
+body.dark-mode .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--title,
+body.dark-mode .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--content{
+  background-color: var(--dark_hover);
+}
+
