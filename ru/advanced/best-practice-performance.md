@@ -243,7 +243,7 @@ Environment=NODE_ENV=production
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-Сравнение трех диспетчеров процессов по каждой характеристике можно найти в разделе [http://strong-pm.io/compare/](http://strong-pm.io/compare/). Более подробное представление трех диспетчеров приведено в разделе [Диспетчеры процессов для приложений Express](/{{ page.lang }}/advanced/pm.html).
+Сравнение трех диспетчеров процессов по каждой характеристике можно найти в разделе [http://strong-pm.io/compare/](http://strong-pm.io/compare/). 
 
 Наличие любого из этих диспетчеров процессов позволит обеспечить работоспособность приложения даже в случае возможных сбоев.
 

@@ -334,9 +334,7 @@ seguintes:
 * [Forever](https://www.npmjs.com/package/forever)
 
 Para uma comparação recurso por recurso dos três gerenciadores
-de processos, consulte [http://strong-pm.io/compare/](http://strong-pm.io/compare/). Para
-obter uma introdução mais detalhada para todos os três, consulte [Gerenciadores de Processos para aplicativos do
-Express](/{{ page.lang }}/advanced/pm.html).
+de processos, consulte [http://strong-pm.io/compare/](http://strong-pm.io/compare/). 
 
 Usando qualquer um desses gerenciadores de processos será o
 suficiente para manter seu aplicativo funcionando, mesmo se ele cair

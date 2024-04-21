@@ -228,7 +228,7 @@ Node için en popüler süreç yöneticileri aşağıdakilerdir:
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-Bu üç süreç yöneticisinin özellik bazında bir karşılaştırması için bakınız [http://strong-pm.io/compare/](http://strong-pm.io/compare/). Her üçü ile ilgili daha detaylı bir giriş için bakınız [Express uygulamaları için süreç yöneticileri](/{{ page.lang }}/advanced/pm.html).
+Bu üç süreç yöneticisinin özellik bazında bir karşılaştırması için bakınız [http://strong-pm.io/compare/](http://strong-pm.io/compare/). 
 
 Uygulamanız zaman zaman patlasa bile, bu süreç yöneticilerinden birini kullanmanız uygulamanızı ayakta tutmak için yeterli olacaktır.
 

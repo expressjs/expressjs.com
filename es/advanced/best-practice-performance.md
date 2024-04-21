@@ -242,7 +242,7 @@ Los gestores de procesos más conocidos para Node son los siguientes:
 -   [PM2](https://github.com/Unitech/pm2)
 -   [Forever](https://www.npmjs.com/package/forever)
 
-Para ver una comparación característica a característica de los tres gestores de procesos, consulte [http://strong-pm.io/compare/](http://strong-pm.io/compare/). Para ver una introducción más detallada de los tres, consulte [Gestores de procesos para las aplicaciones Express](/{{ page.lang }}/advanced/pm.html).
+Para ver una comparación característica a característica de los tres gestores de procesos, consulte [http://strong-pm.io/compare/](http://strong-pm.io/compare/). 
 
 El uso de cualquiera de estos gestores de procesos bastará para mantener activa la aplicación, aunque se bloquee cada cierto tiempo.
 

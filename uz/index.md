@@ -34,9 +34,8 @@ lang: uz
             <h3>Ishlab chiqaruvchanlik</h3> Express Nodedagi siz bilgan va sevgan imkoniyatlarni cheklamagan holda web-dasturlardagi eng asosiy imkoniyatlar bilan ta'minlab beradi.
         </div>
 
- 		<div id="frameworks">
-          <h3>Freymvorklar</h3> Express asosida yaratilgan ko'plab <a href="resources/frameworks.html">mashxur freymvorklar</a> .
-      </div>
+        <div id="frameworks">
+        </div>
 
     </div>
 </section>

@@ -228,7 +228,7 @@ Node 向けの最も一般的なプロセス・マネージャーは次のとお
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-3 つのプロセス・マネージャーの各機能の比較については、[http://strong-pm.io/compare/](http://strong-pm.io/compare/) を参照してください。3 つすべての詳細な紹介については、[Express アプリケーション用のプロセス・マネージャー](/{{ page.lang }}/advanced/pm.html) を参照してください。
+3 つのプロセス・マネージャーの各機能の比較については、[http://strong-pm.io/compare/](http://strong-pm.io/compare/) を参照してください。
 
 これらのプロセス・マネージャーのいずれかを使用すれば、時々異常終了してもアプリケーションの稼働状態を維持するのに十分です。
 

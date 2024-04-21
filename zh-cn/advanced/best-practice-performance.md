@@ -235,7 +235,7 @@ Node 的最流行进程管理器包括：
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-要了解对这三种进程管理器的逐个功能的比较，请参阅 [http://strong-pm.io/compare/](http://strong-pm.io/compare/)。有关这所有三种进程管理器的更详细介绍，请参阅 [Express 应用程序的进程管理器](/{{ page.lang }}/advanced/pm.html)。
+要了解对这三种进程管理器的逐个功能的比较，请参阅 [http://strong-pm.io/compare/](http://strong-pm.io/compare/)。
 
 即使应用程序会不时崩溃，使用其中任何进程管理器都足以使其成功启动。
 
