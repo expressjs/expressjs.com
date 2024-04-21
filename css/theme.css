@@ -21,8 +21,6 @@ body.dark-mode #theme-icon-container {
 }
 body.dark-mode {
   background: var(--main_dark_bg);
-  --dark_text: whitesmoke;
-  background: var(--main_dark_bg);
   color: var(--dark_text);
 }
 body.dark-mode #blm-banner {
@@ -113,14 +111,10 @@ body.dark-mode .doc-box.doc-info pre.language-javascript {
 }
 body.dark-mode h1,
 body.dark-mode h2,
-body.dark-mode h3 {
-  color: var(--dark_text);
-}
-body.dark-mode code {
-  color: var(--dark_text);
-}
+body.dark-mode h3,
+body.dark-mode code,
 body.dark-mode em,
-body.dark-mode strong {
+body.dark-mode strong  {
   color: var(--dark_text);
 }
 body.dark-mode pre {
