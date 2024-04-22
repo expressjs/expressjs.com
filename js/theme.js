@@ -1,13 +1,12 @@
 // system theme check
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+if (systemDarkMode()) {
   if(!hasLocalStorage()) {
-    darkModeOn()
-    // remove icon - cannot turn off
+    // remove icon - toggle not supported
     document.querySelector('#theme-icon-container').remove()
+    darkModeOn()
   } else {
-    // no use local storage til required
     const isDarkMode = localStorage.getItem('darkmode')
-    // unless toggled off, darkmode is on
+    // unless toggled off, dark scheme is on
     isDarkMode === 'false' ? darkModeOff()
     : darkModeOn()
     document.querySelector('.theme-toggle')
@@ -21,7 +20,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
       .querySelector('.theme-toggle')
       .addEventListener('click', toggleTheme)
   } else {
-    // remove theme-toggle icon
+    // remove icon - toggle not supported
     document.querySelector('#theme-icon-container').remove()
   }
 }
@@ -34,9 +33,10 @@ function toggleTheme(e) {
   } else if (isDarkMode === 'false') {
     localStorage.setItem('darkmode', 'true')
     darkModeOn()
-    // isDarkMode stilll undefined
+    // local storage not used until now so 
+    // isDarkMode still undefined
   } else {
-    // need to check state 
+    // need to check page state 
     if(darkModeState()) {
       localStorage.setItem('darkmode', 'false')
       darkModeOff()
@@ -57,4 +57,7 @@ function darkModeState() {
 }
 function hasLocalStorage() {
   return typeof Storage !== 'undefined'
+}
+function systemDarkMode() {
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 }
