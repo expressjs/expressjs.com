@@ -90,4 +90,11 @@ If you have a specific file, use the `res.sendFile()` function.
 If you are serving many assets from a directory, use the `express.static()`
 middleware function.
 
+<a name="which-is-the-minimum-version-of-nodejs-that-express-supports"></a>
+
+## Which is the minimum version of Node.js that Express supports?
+
+* [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
+* [Express 5.x](/{{ page.lang }}/5x/api.html) will require Node.js 18 or higher.
+
 ###  [Previous: More examples ](/{{ page.lang }}/starter/examples.html)
