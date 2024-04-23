@@ -28,6 +28,7 @@ Members of the Express technical committee are:
 - [@ulisesgascon](https://github.com/ulisesGascon) - Ulises Gascón
 - [@sheplu](https://github.com/sheplu) - Jean Burellier
 - [@wesleytodd](https://github.com/wesleytodd) - Wes Todd
+- [@jonchurch](https://github.com/jonchurch) - Jon Church
 
 **Inactive:**
 
