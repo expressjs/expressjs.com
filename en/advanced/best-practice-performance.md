@@ -137,12 +137,12 @@ app.use((err, req, res, next) => {
 })
 ```
 
-Now all errors asynchronous and synchronous get propagated to the error middleware.
+Now, all errors asynchronous and synchronous get propagated to the error middleware.
 
 However, there are two caveats:
 
 1.  All your asynchronous code must return promises (except emitters). If a particular library does not return promises, convert the base object by using a helper function like [Bluebird.promisifyAll()](http://bluebirdjs.com/docs/api/promise.promisifyall.html).
-2.  Event emitters (like streams) can still cause uncaught exceptions. So make sure you are handling the error event properly; for example:
+2.  Event emitters (like `streams`) can still cause uncaught exceptions. So make sure you are handling the error event properly; for example:
 
 ```js
 const wrap = fn => (...args) => fn(...args).catch(args[2])
@@ -185,7 +185,7 @@ Setting NODE_ENV to "production" makes Express:
 
 If you need to write environment-specific code, you can check the value of NODE_ENV with `process.env.NODE_ENV`. Be aware that checking the value of any environment variable incurs a performance penalty, and so should be done sparingly.
 
-In development, you typically set environment variables in your interactive shell, for example by using `export` or your `.bash_profile` file. But in general you shouldn't do that on a production server; instead, use your OS's init system (systemd or Upstart). The next section provides more details about using your init system in general, but setting NODE_ENV is so important for performance (and easy to do), that it's highlighted here.
+In development, you typically set environment variables in your interactive shell, for example by using `export` or your `.bash_profile` file. But in general, you shouldn't do that on a production server; instead, use your OS's init system (systemd or Upstart). The next section provides more details about using your init system in general, but setting `NODE_ENV` is so important for performance (and easy to do), that it's highlighted here.
 
 With Upstart, use the `env` keyword in your job file. For example:
 
@@ -230,7 +230,7 @@ The most popular process managers for Node are as follows:
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-For a feature-by-feature comparison of the three process managers, see [http://strong-pm.io/compare/](http://strong-pm.io/compare/). For a more detailed introduction to all three, see [Process managers for Express apps](/{{ page.lang }}/advanced/pm.html).
+For a feature-by-feature comparison of the three process managers, see [http://strong-pm.io/compare/](http://strong-pm.io/compare/). 
 
 Using any of these process managers will suffice to keep your application up, even if it does crash from time to time.
 
@@ -258,7 +258,7 @@ There are two ways to use init systems with your Express app:
 
 Systemd is a Linux system and service manager. Most major Linux distributions have adopted systemd as their default init system.
 
-A systemd service configuration file is called a _unit file_, with a filename ending in `.service`. Here's an example unit file to manage a Node app directly.  Replace the values enclosed in `<angle brackets>` for your system and app:
+A systemd service configuration file is called a _unit file_, with a filename ending in `.service`. Here's an example unit file to manage a Node app directly. Replace the values enclosed in `<angle brackets>` for your system and app:
 
 ```sh
 [Unit]

@@ -247,7 +247,7 @@ Node 應用程式一旦遇到未捕捉到的異常狀況，就會當機。首要
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-有關這三種程序管理程式的特性比較，請參閱 [http://strong-pm.io/compare/](http://strong-pm.io/compare/)。如需這三種的詳細介紹，請參閱 [Express 應用程式的程序管理程式](/{{ page.lang }}/advanced/pm.html)。
+有關這三種程序管理程式的特性比較，請參閱 [http://strong-pm.io/compare/](http://strong-pm.io/compare/)。
 
 即使您的應用程式不時發生當機，這些程序管理程式不論哪一個都足以讓您的應用程式維持作用中。
 

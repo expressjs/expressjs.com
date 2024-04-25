@@ -37,7 +37,7 @@ See [LoopBack](http://loopback.io) for an Express-based framework that is center
 ## How can I authenticate users?
 
 Authentication is another opinionated area that Express does not
-venture into.  You may use any authentication scheme you wish.
+venture into. You may use any authentication scheme you wish.
 For a simple username / password scheme, see [this example](https://github.com/expressjs/express/tree/master/examples/auth).
 
 

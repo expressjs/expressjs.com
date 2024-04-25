@@ -248,7 +248,7 @@ Spomedzi správcov procesov pre Node sú najpopulárnejši:
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-Pre detailnejšie porovnanie vlastností si pozrite [http://strong-pm.io/compare/](http://strong-pm.io/compare/). Pre detailnejšie intro si pozrite [Process managers for Express apps](/{{ page.lang }}/advanced/pm.html).
+Pre detailnejšie porovnanie vlastností si pozrite [http://strong-pm.io/compare/](http://strong-pm.io/compare/). 
 
 Použitím hociktorého z týchto správcov procesov zabezpečíte, aby vaša aplikácia zostala "hore" i v prípade občasného pádu.
 

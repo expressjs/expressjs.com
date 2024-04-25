@@ -243,7 +243,7 @@ Les gestionnaires de processus les plus populaires pour Node sont les suivants :
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-Pour obtenir une comparaison détaillée de ces trois gestionnaires de processus, voir [http://strong-pm.io/compare/](http://strong-pm.io/compare/). Pour obtenir une présentation détaillée, voir [Gestionnaires de processus pour les applications Express](/{{ page.lang }}/advanced/pm.html).
+Pour obtenir une comparaison détaillée de ces trois gestionnaires de processus, voir [http://strong-pm.io/compare/](http://strong-pm.io/compare/). 
 
 L'utilisation de l'un de ces trois gestionnaires de processus suffira à garder votre application active, même si elle plantera de temps en temps.
 

@@ -7,7 +7,7 @@ redirect_from: "/guide/using-template-engines.html"
 ---
 # Using template engines with Express
 
-A _template engine_ enables you to use static template files in your application.   At runtime, the template engine replaces
+A _template engine_ enables you to use static template files in your application. At runtime, the template engine replaces
 variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
 This approach makes it easier to design an HTML page.
 
@@ -20,7 +20,7 @@ for a list of template engines you can use with Express.
 See also [Comparing JavaScript Templating Engines: Jade, Mustache, Dust and More](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/).
 
 <div class="doc-box doc-notice" markdown="1">
-**Note**: Jade has been renamed to [Pug](https://www.npmjs.com/package/pug).  You can continue to use Jade in your app, and it will work just fine.  However if you want the latest updates to the template engine, you must replace Jade with Pug in your app.
+**Note**: Jade has been renamed to [Pug](https://www.npmjs.com/package/pug). You can continue to use Jade in your app, and it will work just fine. However if you want the latest updates to the template engine, you must replace Jade with Pug in your app.
 </div>
 
 To render template files, set the following [application setting properties](/{{ page.lang }}/4x/api.html#app.set), set in `app.js` in the default app created by the generator:

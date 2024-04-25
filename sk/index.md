@@ -39,7 +39,6 @@ lang: sk
       </div>
 
       <div id="frameworks">
-        <h3>Frameworky</h3> Mnohé <a href="/sk/resources/frameworks.html">známe frameworky</a> sú založené na Express-e.
       </div>
   </div>
 

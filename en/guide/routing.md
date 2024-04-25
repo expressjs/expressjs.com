@@ -12,11 +12,11 @@ _Routing_ refers to how an application's endpoints (URIs) respond to client requ
 For an introduction to routing, see [Basic routing](/{{ page.lang }}/starter/basic-routing.html).
 
 You define routing using methods of the Express `app` object that correspond to HTTP methods;
-for example, `app.get()` to handle GET requests and `app.post` to handle POST requests.  For a full list,
-see [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD).  You can also use [app.all()](/{{ page.lang }}/4x/api.html#app.all) to handle all HTTP methods and [app.use()](/{{ page.lang }}/4x/api.html#app.use) to
+for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
+see [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD). You can also use [app.all()](/{{ page.lang }}/4x/api.html#app.all) to handle all HTTP methods and [app.use()](/{{ page.lang }}/4x/api.html#app.use) to
 specify middleware as the callback function (See [Using middleware](/{{ page.lang }}/guide/using-middleware.html) for details).
 
-These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method.  In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
+These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
 
 In fact, the routing methods can have more than one callback function as arguments.
 With multiple callback functions, it is important to provide `next` as an argument to the callback function and then call `next()` within the body of the function to hand off control
@@ -55,7 +55,7 @@ app.post('/', (req, res) => {
 Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
 For a full list, see [app.METHOD](/{{ page.lang }}/4x/api.html#app.METHOD).
 
-There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods.  For example, the following handler is executed for requests to the route "/secret" whether using GET, POST, PUT, DELETE, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods. For example, the following handler is executed for requests to the route "/secret" whether using GET, POST, PUT, DELETE, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -158,7 +158,7 @@ app.get(/.*fly$/, (req, res) => {
 })
 ```
 
-<h3 id="route-parameters">Route parameters</h3>
+<h2 id="route-parameters">Route parameters</h2>
 
 Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
 
@@ -216,7 +216,7 @@ You can provide multiple callback functions that behave like [middleware](/{{ pa
 
 Route handlers can be in the form of a function, an array of functions, or combinations of both, as shown in the following examples.
 
-A single callback function can handle a route.  For example:
+A single callback function can handle a route. For example:
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -235,7 +235,7 @@ app.get('/example/b', (req, res, next) => {
 })
 ```
 
-An array of callback functions can handle a route.  For example:
+An array of callback functions can handle a route. For example:
 
 ```js
 const cb0 = function (req, res, next) {
@@ -255,7 +255,7 @@ const cb2 = function (req, res) {
 app.get('/example/c', [cb0, cb1, cb2])
 ```
 
-A combination of independent functions and arrays of functions can handle a route.  For example:
+A combination of independent functions and arrays of functions can handle a route. For example:
 
 ```js
 const cb0 = function (req, res, next) {
@@ -280,17 +280,17 @@ app.get('/example/d', [cb0, cb1], (req, res, next) => {
 
 The methods on the response object (`res`) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.
 
-| Method               | Description
-|----------------------|--------------------------------------
-| [res.download()](/{{ page.lang }}/4x/api.html#res.download)   | Prompt a file to be downloaded.
-| [res.end()](/{{ page.lang }}/4x/api.html#res.end)        | End the response process.
-| [res.json()](/{{ page.lang }}/4x/api.html#res.json)       | Send a JSON response.
-| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)      | Send a JSON response with JSONP support.
-| [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | Redirect a request.
-| [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | Render a view template.
-| [res.send()](/{{ page.lang }}/4x/api.html#res.send)       | Send a response of various types.
-| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | Send a file as an octet stream.
-| [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Set the response status code and send its string representation as the response body.
+| Method                                                          | Description                                                                           |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [res.download()](/{{ page.lang }}/4x/api.html#res.download)     | Prompt a file to be downloaded.                                                       |
+| [res.end()](/{{ page.lang }}/4x/api.html#res.end)               | End the response process.                                                             |
+| [res.json()](/{{ page.lang }}/4x/api.html#res.json)             | Send a JSON response.                                                                 |
+| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)           | Send a JSON response with JSONP support.                                              |
+| [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)     | Redirect a request.                                                                   |
+| [res.render()](/{{ page.lang }}/4x/api.html#res.render)         | Render a view template.                                                               |
+| [res.send()](/{{ page.lang }}/4x/api.html#res.send)             | Send a response of various types.                                                     |
+| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | Send a file as an octet stream.                                                       |
+| [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Set the response status code and send its string representation as the response body. |
 
 <h2 id="app-route">app.route()</h2>
 

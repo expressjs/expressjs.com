@@ -243,7 +243,7 @@ I process manager più noti per Node sono i seguenti:
 * [PM2](https://github.com/Unitech/pm2)
 * [Forever](https://www.npmjs.com/package/forever)
 
-Per un paragone a livello di funzioni dei tre process manager, consultare l'indirizzo [http://strong-pm.io/compare/](http://strong-pm.io/compare/). Per informazioni più dettagliate su tutti e tre i process manager, consultare [Process manager per le applicazioni Express](/{{ page.lang }}/advanced/pm.html).
+Per un paragone a livello di funzioni dei tre process manager, consultare l'indirizzo [http://strong-pm.io/compare/](http://strong-pm.io/compare/). 
 
 L'utilizzo di questi process manager sarà sufficiente per far restare attiva l'applicazione, anche se dovesse capitare che si arresti in modo anomalo.
 

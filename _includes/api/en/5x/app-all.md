@@ -17,7 +17,7 @@ app.all('/secret', (req, res, next) => {
 })
 ```
 
-The `app.all()` method is useful for mapping "global" logic for specific path prefixes or arbitrary matches.  For example, if you put the following at the top of all other
+The `app.all()` method is useful for mapping "global" logic for specific path prefixes or arbitrary matches. For example, if you put the following at the top of all other
 route definitions, it requires that all routes from that point on
 require authentication, and automatically load a user. Keep in mind
 that these callbacks do not have to act as end-points: `loadUser`
