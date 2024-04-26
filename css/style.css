@@ -1203,3 +1203,6 @@ h2 a {
   color: #5E80F7;
   text-decoration: none;
 }
+#page-doc:has(> h1#express-blog) {
+  min-height: 300px;
+}
