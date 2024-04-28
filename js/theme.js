@@ -1,47 +1,60 @@
-// system theme check
-if (systemDarkMode()) {
-  if(!hasLocalStorage()) {
+const themeWatcher = watchColorSchemeChange((colorScheme) => {
+  if (!hasLocalStorage()) {
     // remove icon - toggle not supported
     document.querySelector('#theme-icon-container').remove()
-    darkModeOn()
+    toggleSystemTheme(colorScheme)
   } else {
-    const isDarkMode = localStorage.getItem('darkmode')
-    // unless toggled off, dark scheme is on
-    isDarkMode === 'false' ? darkModeOff()
-    : darkModeOn()
-    document.querySelector('.theme-toggle')
-    .addEventListener('click', toggleTheme)
-  }
-} else {
-  if (hasLocalStorage()) {
-    const isDarkMode = localStorage.getItem('darkmode')
-    if (isDarkMode === 'true') darkModeOn()
+    const systemTheme = localStorage.getItem('system-theme')
+    const localTheme = localStorage.getItem('local-theme')
+    // // if no local theme set - system is default
+    if (localTheme === null) {
+      toggleSystemTheme(colorScheme)
+      localStorage.setItem('system-theme', colorScheme || 'light')
+    } else {
+      // listen for system changes, update if any 
+      if (colorScheme != systemTheme) {
+        toggleSystemTheme(colorScheme)
+        localStorage.setItem('system-theme', colorScheme || 'light')
+        // override local theme 
+        localStorage.removeItem('local-theme')
+      } else {
+        // else load local theme
+        if (localTheme === 'light') {
+          lightModeOn()
+        } else if (localTheme === 'dark') {
+          darkModeOn()
+        }
+      }
+    }
     document
       .querySelector('.theme-toggle')
-      .addEventListener('click', toggleTheme)
+      .addEventListener('click', toggleStorageTheme)
+  }
+})
+function toggleSystemTheme(theme) {
+  //  only support dark, else any other defaults to light 
+  if (theme === 'dark') {
+    darkModeOn()
   } else {
-    // remove icon - toggle not supported
-    document.querySelector('#theme-icon-container').remove()
+    lightModeOn()
   }
 }
-
-function toggleTheme(e) {
-  const isDarkMode = localStorage.getItem('darkmode')
-  if (isDarkMode === 'true') {
-    localStorage.setItem('darkmode', 'false')
-    darkModeOff()
-  } else if (isDarkMode === 'false') {
-    localStorage.setItem('darkmode', 'true')
+function toggleStorageTheme(e) {
+  const localTheme = localStorage.getItem('local-theme')
+  if (localTheme === 'light') {
+    localStorage.setItem('local-theme', 'dark')
     darkModeOn()
-    // local storage not used until now so 
-    // isDarkMode still undefined
+  } else if (localTheme === 'dark') {
+    localStorage.setItem('local-theme', 'light')
+    lightModeOn()
+    // localTheme still null
   } else {
-    // need to check page state 
-    if(darkModeState()) {
-      localStorage.setItem('darkmode', 'false')
-      darkModeOff()
+    // need to check page state then set
+    if (darkModeState()) {
+      localStorage.setItem('local-theme', 'light')
+      lightModeOn()
     } else {
-      localStorage.setItem('darkmode', 'true')
+      localStorage.setItem('local-theme', 'dark')
       darkModeOn()
     }
   }
@@ -49,7 +62,7 @@ function toggleTheme(e) {
 function darkModeOn() {
   document.body.classList.add('dark-mode')
 }
-function darkModeOff() {
+function lightModeOn() {
   document.body.classList.remove('dark-mode')
 }
 function darkModeState() {
@@ -58,6 +71,16 @@ function darkModeState() {
 function hasLocalStorage() {
   return typeof Storage !== 'undefined'
 }
-function systemDarkMode() {
-  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+function watchColorSchemeChange(callback) {
+  const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+  const handleChange = (event) => {
+    const newColorScheme = event.matches ? 'dark' : 'light'
+    callback(newColorScheme)
+  }
+  darkMediaQuery.addEventListener('change', handleChange)
+  // handle init load value
+  callback(darkMediaQuery.matches ? 'dark': 'light')
+  // Return a function to remove the event listener
+  return () => darkMediaQuery.removeEventListener('change', handleChange)
 }
