@@ -1206,3 +1206,54 @@ h2 a {
 #page-doc:has(> h1#express-blog) {
   min-height: 300px;
 }
+.blog-posts {
+  display: flex;
+  flex-direction: column;
+}
+.blog-post {
+  width: 95%;
+  background-color: #eee;
+  display: flex;
+  padding: 10px
+}
+.blog-post img {
+  max-width: 100%;
+  object-fit: cover;
+}
+.blog-post .left-col {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.blog-post .right-col {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.blog-tag {
+  font-size: 12px;
+}
+.blog-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+}
+.blog-title a {
+  color: #000;
+}
+@media (min-width:768px) {
+  .blog-post .left-col {
+    justify-content: flex-start;
+  }
+  .blog-tags {
+    margin-bottom: 20px;
+  } 
+  .blog-title {
+    font-weight: 600;
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+}
