@@ -154,10 +154,14 @@ $(function(){
   })
 
   // show mobile menu
-  $('#nav-button, #overlay').click(function () {
-    $('#navmenu').toggle()
-    $('#overlay').toggle()
-  })
+  $('#nav-button').click(function () {
+    $('#navmenu').toggleClass('open');
+  });
+
+  // close mobile menu
+  $('#overlay').click(function () {
+    $('#navmenu').removeClass('open');
+  });
 
   // dropdown menu
 
