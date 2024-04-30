@@ -90,8 +90,6 @@ If you have a specific file, use the `res.sendFile()` function.
 If you are serving many assets from a directory, use the `express.static()`
 middleware function.
 
-<a name="what-version-of-nodejs-does-express-require"></a>
-
 ## What version of Node.js does Express require?
 
 * [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
