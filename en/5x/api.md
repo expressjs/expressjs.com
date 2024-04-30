@@ -11,7 +11,7 @@ redirect_from: "/5x/api.html"
 
   {% include note.html content="This is early beta documentation that may be incomplete and is still under development." %}
 
-  {% include note.html content="Express 5.0 will require Node.js 18 or higher." %}
+  {% include note.html content="Express 5.0 requires Node.js 18 or higher." %}
 
   {% include api/{{ page.lang }}/5x/express.md %}
   {% include api/{{ page.lang }}/5x/app.md %}
