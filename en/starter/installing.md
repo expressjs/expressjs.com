@@ -10,9 +10,8 @@ redirect_from: "/starter/installing.html"
 
 Assuming you've already installed [Node.js](https://nodejs.org/), create a directory to hold your application, and make that your working directory.
 
-<div class="doc-box doc-info" markdown="1">
-Check the minimum required Node.js for each Express version [here](/{{ page.lang }}/starter/faq.html#which-is-the-minimum-version-of-nodejs-that-express-supports).
-</div>
+* [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
+* [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
 
 ```console
 $ mkdir myapp
