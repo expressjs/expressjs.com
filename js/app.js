@@ -155,12 +155,12 @@ $(function(){
 
   // show mobile menu
   $('#nav-button').click(function () {
-    $('#navmenu').toggleClass('open');
+    $('#navmenu').toggleClass('opens');
   });
 
   // close mobile menu
   $('#overlay').click(function () {
-    $('#navmenu').removeClass('open');
+    $('#navmenu').removeClass('opens');
   });
 
   // dropdown menu
