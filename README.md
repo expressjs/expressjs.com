@@ -35,6 +35,16 @@ To preview the website locally:
 
    Then, load <http://localhost:4000> in your browser.
 
+## Local Setup using Docker
+
+>[!TIP]
+> You can run `make help` to obtain detailed information on how to use our make commands.
+
+0. Ensure that you have Docker and Make installed.
+1. Run `make build` to build the project.
+2. Run `make serve` to serve the project, this include live reloading so any change will be reflected (it can take a while, check the logs).
+3. Run `make clean` to remove the docker images and resources generated.
+
 ## Formatting
 
 Jekyll uses a variant of Markdown known as [Kramdown](https://kramdown.gettalong.org/quickref.html).

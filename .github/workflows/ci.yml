@@ -45,3 +45,9 @@ jobs:
     - name: Run tests
       shell: bash
       run: npm test
+    
+    - name: Check Docker support
+      shell: bash
+      run: |
+        docker --version
+        make build
