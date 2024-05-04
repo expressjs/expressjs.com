@@ -156,13 +156,13 @@ $(function(){
   // show mobile menu
   $('#nav-button').click(function () {
     $('#navmenu').toggleClass('opens');
-    $('#overlay').toggleClass('blurred');
+    $('#overlay').toggleClass('blurs');
   });
 
   // close mobile menu
   $('#overlay').click(function () {
     $('#navmenu').removeClass('opens');
-    $('#overlay').removeClass('blurred');
+    $('#overlay').removeClass('blurs');
   });
 
   // dropdown menu
