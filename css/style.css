@@ -973,6 +973,10 @@ h2 a {
     display: block;
   }
 
+  #overlay.blurred{
+    display: block;
+  }
+
   #navmenu > li {
     float: none;
     border-bottom: 1px solid #ccc;
