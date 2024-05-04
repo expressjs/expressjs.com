@@ -15,8 +15,8 @@ help: ## This help
 .DEFAULT_GOAL := help
 
 serve: ## Local server
-	@echo "${BLUE}Servering website in localhost:4000${RESET}"
-	docker run -p 4000:4000 -v $(DIR):/usr/src/app expressjs.com
+	@echo "${BLUE}Starting expressjs.com at http://localhost:4000${RESET}"
+	docker run -p 4000:4000 -p 35729:35729 -v $(DIR):/usr/src/app expressjs.com
 
 build: ## Build site
 	@echo "${BLUE}Building site...${RESET}"
