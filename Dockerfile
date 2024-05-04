@@ -1,5 +1,5 @@
 # Use the official Jekyll image as the base
-FROM jekyll/jekyll:3.7
+FROM jekyll/jekyll:4.2.2
 
 # Set the working directory
 WORKDIR /usr/src/app
