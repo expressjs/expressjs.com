@@ -722,9 +722,7 @@ footer {
 .menu ul.dropit-submenu {
   background-color: #fcfcfa;
   border: 1px solid #b2b2b2;
-  padding: 6px 0;
   margin: 0 0 0 1px;
-  border-radius: 3px;
   box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
 }
 
