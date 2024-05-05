@@ -9,7 +9,7 @@ redirect_from: "/blog/posts.html"
  
 # Express Blog 
 
-{% if (site.posts.size != 0) %}
+{% if site.posts.size != 0 %}
 <div class="blog-posts">
 {% for post in site.posts %}
   <div class="blog-post">
@@ -23,8 +23,8 @@ redirect_from: "/blog/posts.html"
         <a href="{{ post.url }}"> {{ post.title }}</a>
       </div>
       <div class="blog-details">
-        <span>By {{ post.author }}</span>
-        <span>{{ post.date | date:"%b %d, %Y" }}</span>
+        <div>By {{ post.author }}</div>
+        <div>{{ post.date | date:"%b %d, %Y" }}</div>
       </div>
     </div>
      <div class="right-col">
