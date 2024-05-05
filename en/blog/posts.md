@@ -12,7 +12,7 @@ redirect_from: "/blog/posts.html"
 {% if site.posts.size != 0 %}
 <div class="blog-posts">
 {% for post in site.posts %}
-  <div class="blog-post">
+  <div class="blog-post{% if site.posts.first == post %} active{% endif %}">
     <div class="left-col">
       <div class="blog-tags">
         {% for tag in post.tags %}
@@ -24,8 +24,14 @@ redirect_from: "/blog/posts.html"
       </div>
       <div class="blog-details">
         <div>By {{ post.author }}</div>
-        <div>{{ post.date | date:"%b %d, %Y" }}</div>
+        <div>{{ post.date | date:"%b %d, %Y" }}</div> 
       </div>
+      <div class="blog-excerpt">
+       {% assign content_without_title = post.excerpt | remove: post.title %}
+       {% assign content_without_title_and_slug = content_without_title | remove: post.slug_line %}
+       {% assign content_without_html = content_without_title_and_slug | strip_html %}
+         {{ content_without_html | truncatewords: 20}}
+        </div>
     </div>
      <div class="right-col">
       <div class="blog-img">
