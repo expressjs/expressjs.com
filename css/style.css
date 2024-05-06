@@ -740,7 +740,8 @@ footer {
 
 /* secondary menu */
 
-#menu {
+#menu,
+#blog-side-menu {
   position: fixed;
   margin: 0;
   padding: 0 10px 0 0;
@@ -752,37 +753,44 @@ footer {
   overflow-y: auto;
 }
 
-#menu em {
+#menu em,
+#blog-side-menu em {
   font-weight: bold;
   color: #888;
 }
 
-#menu li {
+#menu li,
+#blog-side-menu li {
   list-style: none;
 }
 
-#menu ul {
+#menu ul,
+#blog-side-menu ul {
   height: 0;
   overflow: hidden;
 }
 
-#menu ul.active {
+#menu ul.active,
+#blog-side-menu ul.active {
   height: auto;
   padding: 0;
 }
 
-#menu > li > a {
+#menu > li > a,
+#blog-side-menu > li > a {
   color: #353535;
   font-weight: bold;
   font-size: 15px;
 }
 
-#menu ul a {
+#menu ul a,
+#blog-side-menu ul a {
   color: #555;
   padding-right: 7px;
 }
 
-#menu ul a.active {
+#menu ul a.active,
+#blog-side-menu ul a.active {
   color: #259dff;
 }
 
@@ -1203,19 +1211,21 @@ h2 a {
 }
 #page-doc:has(> h1#express-blog) {
   min-height: 300px;
+  overflow-y: scroll;
 }
 .blog-posts {
   display: flex;
   flex-direction: column;
+  row-gap: 10px;
 }
 .blog-post {
   width: 100%;
   background-color: #eee;
   display: flex;
-  padding: 10px
+  padding: 10px;
 }
-.blog-img {
-  height: 100%;
+.blog-post.active {
+  height: 300px;
 }
 .blog-post img {
   max-width: 100%;
@@ -1227,11 +1237,14 @@ h2 a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-right: 5px;
 }
 .blog-post .right-col {
   flex: 1;
   display: flex;
   align-items: center;
+  max-width: 100%;
+  overflow: hidden;
 }
 .blog-post .blog-details {
   display: flex;
@@ -1247,6 +1260,14 @@ h2 a {
 }
 .blog-title a {
   color: #000;
+}
+.blog-excerpt {
+  color: initial;
+  line-height: 1.2rem;
+}
+.blog-img {
+  max-width: 100%;
+  margin: auto;
 }
 /* blog tablet and up*/
 @media (min-width:768px) {
@@ -1275,6 +1296,13 @@ h2 a {
   }
   .blog-details  {
     font-size: 1rem;
+  }
+  .blog-excerpt {
+    line-height: initial;
+    font-size: 1.2em;
+    font-weight: 300;
+    margin-top: auto;
+    margin-bottom: 10px;
   }
 }
 /* blog desktop */
