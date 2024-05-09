@@ -48,6 +48,7 @@ Follow these steps:
 6. Create the header, footer, notice, and announcement file for the language in the `_includes/` directory, in the respective directories, and make necessary edits to the contents.
 7. Create the announcement file for the language in the `_includes/` directory.
 9. Make sure to append `/{{ page.lang }}` to all the links within the site.
+10. Update the `CONTRIBUTING.md` and the `.github/workflows/translation.yml` files with the new language
 
 
 Thank you for your interest in contributing to expressjs.com. Your efforts help make our documentation accessible to everyone!
