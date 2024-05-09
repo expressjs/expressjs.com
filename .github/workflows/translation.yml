@@ -20,6 +20,11 @@ on:
       - 'uz/**'
       - 'zh-cn/**'
       - 'zh-tw/**'
+  workflow_dispatch:
+    inputs:
+      prNumber:
+        description: 'PR number to check'
+        required: true
 
 jobs:
   check-translation:
@@ -33,15 +38,16 @@ jobs:
         with:
           script: |
             const languages = ['en', 'es', 'fr', 'it', 'ja', 'ko', 'pt-br', 'ru', 'sk', 'th', 'tr', 'uk', 'uz', 'zh-cn', 'zh-tw'];
+            const prNumber = context.eventName === 'workflow_dispatch' ? context.payload.inputs.prNumber : context.issue.number;
             const { data: pullRequest } = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: context.issue.number
+              pull_number: prNumber
             });
             const { data: files } = await github.rest.pulls.listFiles({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: context.issue.number
+              pull_number: prNumber
             });
             const modifiedLanguages = new Set(files.map(file => file.filename.split('/')[0]));
             const labelsToAdd = languages.filter(lang => !modifiedLanguages.has(lang)).map(lang => `requires-translation-${lang}`);
