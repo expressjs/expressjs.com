@@ -9,20 +9,31 @@ See [LICENSE.md](LICENSE.md) for the full license.
 
 ## Contributing translations
 
-**IMPORTANT:** We have professional translations of the Express documentation into:
-- German
-- French
-- Italian
-- Spanish
-- Brazilian Portuguese
-- Japanese
-- Simplified Chinese
-- Traditional Chinese
-- Russian
-- Korean
+We highly encourage community translations! We no longer have professional translations, and we believe in the power of our community to provide accurate and helpful translations.
 
-Therefore, we can no longer accept community translations for these languages, except for corrections
-to the existing translations and updates to align with changes or additions to the English documentation.
+We currently support translations for the following languages:
+- English (`en`)
+- Spanish (`es`)
+- French (`fr`)
+- Italian (`it`)
+- Japanese (`ja`)
+- Korean (`ko`)
+- Brazilian Portuguese (`pt-br`)
+- Russian (`ru`)
+- Slovak (`sk`)
+- Thai (`th`)
+- Turkish (`tr`)
+- Ukrainian (`uk`)
+- Uzbek (`uz`)
+- Simplified Chinese (`zh-cn`)
+- Traditional Chinese (`zh-tw`)
+
+To find translations that need to be done, you can [filter for merged PRs](https://github.com/expressjs/expressjs.com/pulls?q=is%3Apr+is%3Aclosed+label%3Arequires-translation-es) that include the tag for your language, such as `requires-translation-es`.
+
+When you contribute a translation, please reference the original PR. This helps the person merging your translation to remove the `requires-translation-es` tag from the original PR.
+
+
+### Adding new translations
 
 To contribute a translation into another language, following the procedure below.
 
@@ -37,3 +48,6 @@ Follow these steps:
 6. Create the header, footer, notice, and announcement file for the language in the `_includes/` directory, in the respective directories, and make necessary edits to the contents.
 7. Create the announcement file for the language in the `_includes/` directory.
 9. Make sure to append `/{{ page.lang }}` to all the links within the site.
+
+
+Thank you for your interest in contributing to expressjs.com. Your efforts help make our documentation accessible to everyone!
