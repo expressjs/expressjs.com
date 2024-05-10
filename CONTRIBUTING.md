@@ -11,7 +11,7 @@ See [LICENSE.md](LICENSE.md) for the full license.
 
 We highly encourage community translations! We no longer have professional translations, and we believe in the power of our community to provide accurate and helpful translations.
 
-We currently support translations for the following languages:
+The documentation is translated into these languages:
 - English (`en`)
 - Spanish (`es`)
 - French (`fr`)
