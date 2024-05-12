@@ -803,17 +803,24 @@ h2 a {
 #q {
   display: none;
   height: 2.5em;
-  min-width: 100%;
+  max-width: 100%;
   padding: 5px;
 }
 
 .algolia-autocomplete {
-  min-width: 12em;
+  max-width: 9em;
   top: -0.2em;
 }
 
 .algolia-autocomplete #q {
   display: initial
+}
+/* search-bar desktop re-sizing */
+@media all and (min-width: 950px) {
+  .algolia-autocomplete {
+    margin-right:15px;
+    max-width: 12em;
+  }
 }
 
 /* responsive */
@@ -890,7 +897,8 @@ h2 a {
     font-weight: normal;
   }
 
-  #menu {
+  #menu,
+  #blog-side-menu {
     display: none;
   }
 
@@ -1257,6 +1265,7 @@ h2 a {
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 500;
+  padding-right: .2em;
 }
 .blog-title a {
   color: #000;
