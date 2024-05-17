@@ -9,16 +9,15 @@
   <body>
     
     <section class="content">
-      <h1>BLOG POSTS LAYOUT</h1>
 
       {% include header/header-{{ page.lang }}.html %}
 
-      {% include blog/menu.md %}
+      {% include blog/example-menu.md %}
 
       <div id="overlay"></div>
-
+      <div id="blog-doc" markdown="1">
       {{ content }}
-
+      </div>  
     </section>
 
     {% include footer/footer-{{ page.lang }}.html %}

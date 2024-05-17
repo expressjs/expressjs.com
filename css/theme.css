@@ -1,11 +1,14 @@
 :root {
   --main_dark_bg: #010409;
   --second_dark_bg: #0d1117;
+  --darker_hover: #171b20;;
   --dark_hover: #383838;
   --second_dark_hover: #484848;
   --dark_text: #e6edf3;
   --dark_header_text: silver;
   --dark_inner_text: grey;
+  --dark_bright_text: wheat;
+  --dark_border: #ddd;
   --link: #259dff;
 }
 #theme-icon-container {
@@ -163,6 +166,9 @@ body.dark-mode #menu li ul li > em {
 body.dark-mode #menu li ul li > a {
   color: var(--dark_inner_text);
 }
+body.dark-mode #tags-side-menu ul li > a  {
+  color: var(--dark_inner_text);
+}
 body.dark-mode #api-doc > h3 {
   color: var(--dark_header_text);
 }
@@ -222,4 +228,23 @@ body.dark-mode .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--title,
 body.dark-mode .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--content{
   background-color: var(--dark_hover);
 }
-
+body.dark-mode .blog-post{
+  background-color: initial;
+  border: 1px solid var(--dark_border);
+  transition: 0.3s;
+} 
+body.dark-mode .blog-post:hover{
+  background-color: var(--darker_hover);
+}
+body.dark-mode .blog-title > a{
+  color: var(--dark_text);
+} 
+body.dark-mode .blog-title > a{
+  color: var(--dark_text);
+} 
+body.dark-mode .blog-excerpt{
+  color: var(--dark_bright_text);
+} 
+body.dark-mode #blog-side-menu > li > a{
+  color: var(--dark_header_text);
+}

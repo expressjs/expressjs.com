@@ -152,14 +152,11 @@ $(function(){
     }
 
   })
-  // show/hide blog side menu link
-  if (window.location.pathname.includes('/blog/posts.html')) {
-    $('#blog-side-menu').find('h3').on('click', function() {
-        // Remove prev 'active's 
-        $(this).next().siblings().removeClass('active');
-        $(this).next().addClass('active')
-      })
-  }
+  $('#tags-side-menu li').on('click', function() {
+      // Remove prev 'active's 
+      $(this).next().siblings().removeClass('active');
+      $(this).next().addClass('active')
+    })
 
   // show mobile menu
   $('#nav-button, #overlay').click(function () {

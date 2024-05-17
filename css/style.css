@@ -741,6 +741,7 @@ footer {
 /* secondary menu */
 
 #menu,
+#tags-side-menu,
 #blog-side-menu {
   position: fixed;
   margin: 0;
@@ -754,29 +755,35 @@ footer {
 }
 
 #menu em,
-#blog-side-menu em {
+#tags-side-menu em,
+#blog-side-menu em{
   font-weight: bold;
   color: #888;
 }
 
-#menu li,
-#blog-side-menu li {
+#menu li {
   list-style: none;
+}
+#tags-side-menu li {
+  list-style: none;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 #menu ul,
-#blog-side-menu ul {
+#tags-side-menu ul {
   height: 0;
   overflow: hidden;
 }
 
 #menu ul.active,
-#blog-side-menu ul.active {
+#tags-side-menu ul.active {
   height: auto;
   padding: 0;
 }
 
 #menu > li > a,
+#tags-side-menu > li > a,
 #blog-side-menu > li > a {
   color: #353535;
   font-weight: bold;
@@ -784,13 +791,17 @@ footer {
 }
 
 #menu ul a,
-#blog-side-menu ul a {
+#tags-side-menu ul a {
   color: #555;
   padding-right: 7px;
 }
+#tags-side-menu ul a{
+  font-size: 13px;
+  font-weight:initial;
+}
 
 #menu ul a.active,
-#blog-side-menu ul a.active {
+#tags-side-menu ul a.active {
   color: #259dff;
 }
 
@@ -898,7 +909,7 @@ h2 a {
   }
 
   #menu,
-  #blog-side-menu {
+  #tags-side-menu {
     display: none;
   }
 
@@ -1217,7 +1228,8 @@ h2 a {
   color: #5E80F7;
   text-decoration: none;
 }
-#page-doc:has(> h1#express-blog) {
+#blog-doc:has(> h1#express-blog), 
+#blog-doc:has(> h1#write-a-blog-post) {
   min-height: 300px;
   overflow-y: scroll;
 }
@@ -1231,6 +1243,13 @@ h2 a {
   background-color: #eee;
   display: flex;
   padding: 10px;
+  box-shadow: 2px 3px #E0E0E0;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.blog-post:hover {
+  background-color: #D3D3D3;
+  border: 1px solid grey;
 }
 .blog-post.active {
   height: 300px;
