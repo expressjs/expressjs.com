@@ -32,7 +32,7 @@ router.param('user', function (req, res, next, id) {
 })
 ```
 
-Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers. Hence, param callbacks defined on `router` will be triggered only by route parameters defined on `router` routes.
+Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers, nor are they triggered for route parameters inherited from parent routers. Hence, param callbacks defined on `router` will be triggered only by route parameters defined on `router` routes.
 
 A param callback will be called only once in a request-response cycle, even if the parameter is matched in multiple routes, as shown in the following examples.
 
