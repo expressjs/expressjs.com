@@ -3,9 +3,9 @@
     <a href="/blog/posts.html">Posts</a>
   </li>
   <li>
-    <a href="/blog/write.html">Write a Post</a>
+    <a href="/en/blog/write-post.html">Write a Post</a>
   </li>
   <li>
-    <a href="/blog/example.html">Example Post</a>
+    <a href="/en/blog/example-post.html">Example Post</a>
   </li>
 </ul>
