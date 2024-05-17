@@ -239,12 +239,9 @@ body.dark-mode .blog-post:hover{
 body.dark-mode .blog-title > a{
   color: var(--dark_text);
 } 
-body.dark-mode .blog-title > a{
-  color: var(--dark_text);
-} 
 body.dark-mode .blog-excerpt{
   color: var(--dark_bright_text);
 } 
 body.dark-mode #blog-side-menu > li > a{
-  color: var(--dark_header_text);
+  color: var(--dark_text);
 }

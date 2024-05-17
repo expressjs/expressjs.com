@@ -16,14 +16,14 @@ Check out an example [post](/{{ page.lang }}/blog/example.html)
 A local installation will be required it you want to preview your post. [Here](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#expressjscom) are the instructions for running locally. 
 
 - ### Create a new file in the `_posts` directory
-Create a new file and save it following the format: `YYYY-MM-DD-title.md`. The date should be the date of your post.
+Save it following the format: `YYYY-MM-DD-title.md`. The date should be the date of your post.
 
 - ### Adding the Required Front Matter
     The following front matter are required for each post. At the top of the file you just created, add the following:
 
     ```yaml
     ---
-    layout: blog-post
+    layout: blog-posts
     title: "<your-title>"
     sub_title: "<your-sub-title>"
     menu: blog
@@ -37,13 +37,14 @@ Create a new file and save it following the format: `YYYY-MM-DD-title.md`. The d
     ```
 
 - ### Add your Content
-    Finally, start writing your content. Format your content as follows, including the title and subtitle, and the `<!--more-->` following your first paragraph.
+    Finally, start writing your content. Format your content as follows, including the title and subtitle, and the put `<!--more-->` following your first paragraph.
 
     ```markdown
     {% raw %}
     # {{page.title}}
 
     ### {{page.sub_title}}
+    ### By {{page.author}}
     {% endraw %}
     Lorem ipsum dolor sit amet...
     <!--more-->

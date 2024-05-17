@@ -26,26 +26,22 @@ redirect_from: "/blog/posts.html"
         <div>By {{ post.author }}</div>
         <div>{{ post.date | date:"%b %d, %Y" }}</div> 
       </div>   
-      
       {% if site.posts.first == post %}
-
       <div class="blog-excerpt">
+      {%comment%} Show 20 word excerpt for first post on page {%endcomment%}
        {% assign content_without_title = post.excerpt | remove: post.title %}
        {% assign content_without_title_and_slug = content_without_title | remove: post.sub_title %}
        {% assign content_without_html = content_without_title_and_slug | strip_html %}
          {{ content_without_html | truncatewords: 20}}
-
         </div>
       {% endif %}
-
     </div>
      <div class="right-col">
       <div class="blog-img">
-          <img src="https://loremflickr.com/300/300"/>
+          <img src="{{ post.img }}"/>
         </div>
      </div>
   </div>
-
 {% endfor %}
 {% else %}
   There are currently no blog posts.
