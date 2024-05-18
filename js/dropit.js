@@ -11,7 +11,7 @@
 
     $.fn.dropit = function(method, minWidth) {
 
-        minWidth = minWidth || '770px';
+        minWidth = minWidth || '1060px';
 
         var methods = {
 
@@ -107,3 +107,8 @@
     $.fn.dropit.settings = {};
 
 })(jQuery);
+
+window.onresize = () => {
+    const displayType = (window.innerWidth >= 1060) ? "flex" : "block";
+    document.getElementById('navmenu').style.display = displayType;
+}

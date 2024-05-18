@@ -591,14 +591,15 @@ html[xmlns] .clearfix {
 
 #mobile-menu {
   display: none;
-  position: relative;
-  top: 9px;
-  left: 0;
 }
 
 #nav-button {
-  position: absolute;
-  left: 16px;
+  cursor: pointer;
+  width: 2.5rem;
+  aspect-ratio: 1;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('/images/hamburger-light.svg');
 }
 
 pre, code {
@@ -672,6 +673,7 @@ footer {
 /* navigation */
 
 #navbar {
+  position: relative;
   user-select: none;
   -webkit-user-select: none;
   padding: 0 2rem;
@@ -680,6 +682,7 @@ footer {
   justify-content: space-between;
   width: 100%;
   height: 60px;
+  gap: 1rem;
 }
 
 #navbar a {
@@ -712,6 +715,7 @@ footer {
 
 #home-menu,
 #navmenu > li > ul > li > a {
+  position: relative;
   padding: .7rem;
   margin-inline: .22rem;
   border-radius: var(--border-radius);
@@ -830,7 +834,7 @@ h2 a {
 
 /* responsive */
 
-@media all and (max-width: 1060px) {
+@media (max-width: 1060px) {
 
   #conference a img {
     width: 150px;
@@ -968,23 +972,23 @@ h2 a {
   }
 
   #navbar {
-    padding: 0;
-    top: 1px;
+    padding: 0 1rem;
   }
 
   #navbar a {
     font-size: 19px;
     margin: 0;
-    padding-left: 5%;
   }
 
   #navmenu {
+    position: absolute;
     left: 0;
     padding: 0;
-    top: 2px;
-    background: #fff;
+    top: calc(100% + 1px);
+    background: #eee;
     width: 100%;
     display: none;
+    border-radius: 0  0 var(--border-radius) var(--border-radius);
   }
 
   #navmenu > li {
@@ -1009,12 +1013,16 @@ h2 a {
     position: static;
   }
 
-  .dropit .dropit-submenu {
-    position: static !important;
+  #navmenu > li > ul > li > a,
+  #navmenu > li > ul > li > a:hover {
+    background-color: none;
+    border-radius: 0;
+    outline: none;
+    margin: 0;
   }
 
-  .dropit .dropit-trigger {
-    padding-top: 7px;
+  .dropit .dropit-submenu {
+    position: static !important;
   }
 
   .menu ul.dropit-submenu {
@@ -1032,7 +1040,6 @@ h2 a {
 
   .dropit-trigger > a {
     display: block;
-    margin-bottom: 8px !important;
   }
 
   .menu ul.dropit-submenu a {
@@ -1044,7 +1051,7 @@ h2 a {
   }
 
   .dropit-submenu a {
-    padding-left: 10% !important;
+    padding-left: 3rem !important;
   }
 
   .menu ul {

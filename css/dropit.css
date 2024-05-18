@@ -44,3 +44,33 @@
 }
 
 .dropit .dropit-open .dropit-submenu { display: block; }
+
+@media all and (max-width: 1060px) {
+  .submenu-holder {
+    position: static;
+    padding: 0;
+  }
+
+  .dropit .dropit-submenu > li > a {
+    border-radius: none;
+  }
+
+  .dropit .dropit-trigger > a::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    aspect-ratio: 1;
+    inset: 0 0 0 auto;
+    right: .6rem;
+    margin: auto;
+    background-size: cover;
+    background-image: url('/images/up-arrow-light.svg');
+    background-repeat: no-repeat;
+    transition: rotate 500ms;
+    rotate: -180deg;
+  }
+
+  #navmenu > li.active-mobile-menu > ul > li > a::after {
+    rotate: 0deg;
+  }
+}

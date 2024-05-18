@@ -9,7 +9,6 @@
   --link: #259dff;
 }
 #theme-icon-container {
-  margin-left: 1rem;
   position: relative;
   width: 1.6rem;
   height: 1.6rem;
@@ -26,6 +25,9 @@ body.dark-mode #blm-banner {
 body.dark-mode header {
   background-color: var(--second_dark_bg);
   color: var(--dark_text);
+}
+body.dark-mode #nav-button {
+  background-image: url('/images/hamburger-dark.svg');
 }
 body.dark-mode #logo > a {
   color: var(--dark_text);
@@ -97,10 +99,7 @@ body.dark-mode #navbar ul#navmenu > span.algolia-autocomplete > input::placehold
 body.dark-mode div#overlay {
   opacity: 0.5;
 }
-@media (max-width: 899px) {
-  #theme-icon-container {
-    bottom: 35px;
-  }
+@media (max-width: 1060px) {
   /* mobile menu main links hover */
   body.dark-mode div#navbar ul#navmenu .dropit-trigger:hover {
     background: var(--dark_hover);
@@ -109,6 +108,9 @@ body.dark-mode div#overlay {
   body.dark-mode div#navbar .menu ul.dropit-submenu a:hover {
     background: var(--second_dark_hover);
     color: var(--dark_text) !important;
+  }
+  body.dark-mode .dropit .dropit-trigger > a::after {
+    background-image: url('/images/up-arrow-dark.svg');
   }
 }
 body.dark-mode .doc-box.doc-info,
