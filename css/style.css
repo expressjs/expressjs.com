@@ -834,7 +834,7 @@ h2 a {
 
 /* responsive */
 
-@media (max-width: 1060px) {
+@media all and (max-width: 1060px) {
 
   #conference a img {
     width: 150px;

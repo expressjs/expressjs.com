@@ -11,7 +11,7 @@
 
     $.fn.dropit = function(method, minWidth) {
 
-        minWidth = minWidth || '1060px';
+        minWidth = minWidth || '1020px';
 
         var methods = {
 
