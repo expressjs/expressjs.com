@@ -9,7 +9,7 @@ redirect_from: "/blog/posts.html"
   
 # Express Blog
   
-{% if site.posts.size != 0 %}
+{% if site.posts.size !=  0 %}
 <div class="blog-posts">
 {% for post in site.posts %}
   <div class="blog-post{% if site.posts.first == post %} active{% endif %}">
@@ -43,7 +43,7 @@ redirect_from: "/blog/posts.html"
      </div>
   </div>
 {% endfor %}
+</div>
 {% else %}
   There are currently no blog posts.
 {% endif %}
-</div>
