@@ -60,11 +60,9 @@ function toggleStorageTheme(e) {
   }
 }
 function darkModeOn() {
-  document.getElementById('theme-icon').src = "images/ui/element/sun-icon.svg"
   document.body.classList.add('dark-mode')
 }
 function lightModeOn() {
-  document.getElementById('theme-icon').src = "images/ui/element/moon-icon.svg"
   document.body.classList.remove('dark-mode')
 }
 function darkModeState() {
