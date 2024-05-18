@@ -816,31 +816,14 @@ h2 a {
   padding: 5px;
 }
 
-.search-field {
-  display: flex;
-  align-items: center;
+.algolia-autocomplete {
   flex-grow: 1;
-}
-
-.search-icon {
-  width: 2.5em;
-  aspect-ratio: 1;
-  position: relative;
-  outline: 1px solid #b2b2b2;
-  border-radius: 0 7px 7px 0;
-}
-
-.search-icon > img {
-  position: absolute;
-  inset: 0;
-  margin: auto;
 }
 
 .algolia-autocomplete #q {
   display: initial;
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  border-radius: var(--border-radius);
   border: 1px solid #b2b2b2;
-  border-right: none;
   padding: 1.1rem;
   font-size: .81rem;
 }
