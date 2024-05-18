@@ -16,19 +16,31 @@
 
 .dropit .dropit-trigger {
   position: relative;
-  margin-bottom: 6px;
+}
+
+.submenu-holder {
+  position: absolute;
+  padding: .5rem calc(100% - .8rem) .5rem 0;
+  top: 31px;
+  left: 0.3rem;
 }
 
 .dropit .dropit-submenu {
   position: absolute;
-  top: 100%;
-  left: 0; /* dropdown left or right */
+  top: 14px;
   z-index: 1000;
   display: none;
   min-width: 215px;
   list-style: none;
-  padding: 0;
+  border-radius: 8px;
+  padding: 5px;
   margin: 0;
+  overflow: hidden;
+}
+
+.dropit .dropit-submenu > li > a {
+  padding: .5rem;
+  border-radius: var(--border-radius);
 }
 
 .dropit .dropit-open .dropit-submenu { display: block; }

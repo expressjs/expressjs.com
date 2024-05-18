@@ -9,15 +9,11 @@
   --link: #259dff;
 }
 #theme-icon-container {
+  margin-left: 1rem;
   position: relative;
-  float: right;
-  color: white;
-  min-width: 50px;
-  color: black;
-}
-body.dark-mode #theme-icon-container {
-  color: var(--dark_text);
-  background-color: var(--second_dark_bg);
+  width: 1.6rem;
+  height: 1.6rem;
+  cursor: pointer;
 }
 body.dark-mode {
   background: var(--main_dark_bg);
@@ -39,6 +35,14 @@ body.dark-mode #navbar ul#navmenu li a,
 body.dark-mode #navbar ul#navmenu li.dropit-trigger a {
   color: var(--dark_text);
 }
+body.dark-mode #navbar a.active{
+  background-color: var(--second_dark_hover);
+}
+body.dark-mode #home-menu:hover,
+body.dark-mode #navmenu > li > ul > li > a:hover {
+  background-color: var(--second_dark_hover);
+  outline: 1px solid silver;
+}
 /* first drop down link - some js is adding current class */
 body.dark-mode #navbar ul#navmenu li a.current {
   background: transparent;
@@ -47,7 +51,7 @@ body.dark-mode #navbar ul#navmenu li a.current:hover {
   background: var(--dark_hover);
 }
 body.dark-mode .menu ul.dropit-submenu {
-  background: var(--dark_bg);
+  background: var(--second_dark_bg);
 }
 /* drop down menu links  */
 body.dark-mode #navbar .menu ul.dropit-submenu a:hover {
@@ -173,7 +177,10 @@ body.dark-mode #api-doc section h5 {
 overriding search-bar results drop down  
 */
 body.dark-mode .ds-dropdown-menu .ds-dataset-1 {
-  background-color: var(--dark_bg);
+  background-color: var(--second_dark_bg);
+}
+body.dark-mode .ds-dropdown-menu.ds-with-1::before {
+  background-color: var(--second_dark_bg);
 }
 body.dark-mode .ds-dropdown-menu .ds-dataset-1 .ds-suggestion a {
   background-color: var(--second_dark_bg);
