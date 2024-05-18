@@ -1,153 +1,157 @@
 <header>
   <div id="blm-banner">
     Black Lives Matter. <br>
-    <a id="blm-donate"  href="https://support.eji.org/give/153413/#!/donation/checkout">Support the Equal Justice Initiative</a>.
+    <a id="blm-donate" href="https://support.eji.org/give/153413/#!/donation/checkout">Support the Equal Justice
+      Initiative</a>.
   </div>
-  <div id="mobile-menu">
-      <div id="nav-button" class="fa fa-bars fa-2x button"></div>
-  </div>
-  <section id="logo"><a href="/" class="express">Express</a>
-  </section>
   <div id="navbar">
-      <input id="q" placeholder="🔎 search">
-      <ul id="navmenu">
-          <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>หน้าแรก</a></li>
-          <li>
-              <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>เริ่มกันเลย</a>
-                      <ul>
-                          <li>
-                            <a href="/{{ page.lang }}/starter/installing.html">
-                              การติดตั้ง
-                            </a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/starter/hello-world.html">
-                              Hello world
-                            </a>
-                          </li>
-                          <li>
-                          <a href="/{{ page.lang }}/starter/generator.html">
-                            เครื่องมือสร้าง Express
-                          </a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/starter/basic-routing.html">
-                              เส้นทางเบื้องต้น
-                            </a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/starter/static-files.html">
-                              บริการไฟล์คงที่
-                            </a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/starter/faq.html">
-                              คำถามที่พบบ่อย
-                            </a>
-                          </li>
-                      </ul>
-                  </li>
+    <div id="mobile-menu">
+      <div id="nav-button"></div>
+    </div>
+    <section id="logo"><a href="/" class="express">Express</a></section>
+    <ul id="navmenu">
+      <li><a href="/{{ page.lang }}/" id="home-menu" {% if page.menu=='home' %} class="active" {% endif %}>หน้าแรก</a></li>
+      <li>
+        <ul id="getting-started-menu" class="menu">
+          <li><a href="/{{ page.lang }}/starter/installing.html" {% if page.menu=='starter' %} class="active" {% endif
+              %}>เริ่มกันเลย</a>
+            <div class="submenu-holder">
+              <ul>
+                <li>
+                  <a href="/{{ page.lang }}/starter/installing.html">
+                    การติดตั้ง
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/starter/hello-world.html">
+                    Hello world
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/starter/generator.html">
+                    เครื่องมือสร้าง Express
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/starter/basic-routing.html">
+                    เส้นทางเบื้องต้น
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/starter/static-files.html">
+                    บริการไฟล์คงที่
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/starter/faq.html">
+                    คำถามที่พบบ่อย
+                  </a>
+                </li>
               </ul>
+            </div>
           </li>
-          <li>
-              <ul id="guide-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>แนะนำ</a>
-                      <ul>
-                          <li><a href="/{{ page.lang }}/guide/routing.html">การใช้งานเราเตอร์</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/writing-middleware.html">การเขียนมิดเดิลแวร์</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">การใช้งานมิดเดิลแวร์</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">การใช้งานเครื่องสร้างโครงแบบ</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/error-handling.html">การจักการความผิดพลาด</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/debugging.html">การแก้จุดบกพร่อง</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express เบื่องหลังพร็อกซี</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">การย้ายไป Express 4</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/migrating-5.html">การย้ายไป Express 5</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/database-integration.html">การเชื่อมโยงกับฐานข้อมูล</a>
-                          </li>
-                      </ul>
-                  </li>
+        </ul>
+      </li>
+      <li>
+        <ul id="guide-menu" class="menu">
+          <li><a href="/{{ page.lang }}/guide/routing.html" {% if page.menu=='guide' %} class="active" {% endif
+              %}>แนะนำ</a>
+            <div class="submenu-holder">
+              <ul>
+                <li><a href="/{{ page.lang }}/guide/routing.html">การใช้งานเราเตอร์</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/writing-middleware.html">การเขียนมิดเดิลแวร์</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/using-middleware.html">การใช้งานมิดเดิลแวร์</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/using-template-engines.html">การใช้งานเครื่องสร้างโครงแบบ</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/error-handling.html">การจักการความผิดพลาด</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/debugging.html">การแก้จุดบกพร่อง</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express เบื่องหลังพร็อกซี</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/migrating-4.html">การย้ายไป Express 4</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/migrating-5.html">การย้ายไป Express 5</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/database-integration.html">การเชื่อมโยงกับฐานข้อมูล</a>
+                </li>
               </ul>
+            </div>
           </li>
-          <li>
-              <ul id="application-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>การอ้างอิง API</a>
-                      <ul>
-                          <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/3x/api.html">3.x (เลิกใช้)</a>
-                          </li>
-                          <li><a href="/2x/">2.x (เลิกใช้)</a>
-                          </li>
-                      </ul>
-                  </li>
+        </ul>
+      </li>
+      <li>
+        <ul id="application-menu" class="menu">
+          <li><a href="/{{ page.lang }}/4x/api.html" {% if page.menu=='api' %} class="active" {% endif %}>การอ้างอิง
+              API</a>
+            <div class="submenu-holder">
+              <ul>
+                <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
+                </li>
+                <li><a href="/{{ page.lang }}/3x/api.html">3.x (เลิกใช้)</a>
+                </li>
+                <li><a href="/2x/">2.x (เลิกใช้)</a>
+                </li>
               </ul>
+            </div>
           </li>
-          <li>
-              <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>หัวข้อขั้นสูง</a>
-                      <ul>
-                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">เครื่องสร้างโครงแบบ</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">ความปลอดภัยล่าสุด</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">แนวทางปฏิบัติความปลอดภัย</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">แนวทางปฏิบัติประสิทธิภาพ</a>
-                          </li>
-                      </ul>
-                  </li>
+        </ul>
+      </li>
+      <li>
+        <ul id="advanced-topics-menu" class="menu">
+          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html" {% if page.menu=='advanced' %}
+              class="active" {% endif %}>หัวข้อขั้นสูง</a>
+            <div class="submenu-holder">
+              <ul>
+                <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">เครื่องสร้างโครงแบบ</a>
+                </li>
+                <li><a href="/{{ page.lang }}/advanced/security-updates.html">ความปลอดภัยล่าสุด</a>
+                </li>
+                <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">แนวทางปฏิบัติความปลอดภัย</a>
+                </li>
+                <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">แนวทางปฏิบัติประสิทธิภาพ</a>
+                </li>
               </ul>
+            </div>
           </li>
-          <li>
-              <ul id="resources-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>แหล่งข้อมูลอื่น</a>
-                      <ul>
-                          <li>
-                            <a href="/{{ page.lang }}/resources/community.html">ชุมชน</a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/resources/glossary.html">ศัพย์</a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/resources/middleware.html">มิลเดิลแวร์</a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/resources/utils.html">โมดูลที่มีประโยชน์</a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/resources/contributing.html">มีส่วนร่วมกับ Express</a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/changelog/4x.html">บันทึกการเปลี่ยนแปลง</a>
-                          </li>
-                      </ul>
-                  </li>
+        </ul>
+      </li>
+      <li>
+        <ul id="resources-menu" class="menu">
+          <li><a href="/{{ page.lang }}/resources/glossary.html" {% if page.menu=='resources' %} class="active" {% endif
+              %}>แหล่งข้อมูลอื่น</a>
+            <div class="submenu-holder">
+              <ul>
+                <li>
+                  <a href="/{{ page.lang }}/resources/community.html">ชุมชน</a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/resources/glossary.html">ศัพย์</a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/resources/middleware.html">มิลเดิลแวร์</a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/resources/utils.html">โมดูลที่มีประโยชน์</a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/resources/contributing.html">มีส่วนร่วมกับ Express</a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/changelog/4x.html">บันทึกการเปลี่ยนแปลง</a>
+                </li>
               </ul>
+            </div>
           </li>
-          <!--
-          <li>
-              <ul id="changelog-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/changelog/4x.html"{% if page.menu == 'changelog' %} class="active"{% endif %}>Changelog</a>
-                      <ul>
-                          <li><a href="/{{ page.lang }}/changelog/4x.html">4.x</a></li>
-                      </ul>
-                  </li>
-              </ul>
-          </li>
-        -->
-      </ul>
-      <div id="theme-icon-container"  class="theme-toggle default-theme" title="toggle darkmode">
-        <i class="fa fa-moon-o fa-2x"></i>
-      </div> 
+        </ul>
+      </li>
+    </ul>
+    <input id="q" placeholder="Search">
+    <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
+      <i class="fa fa-moon-o fa-2x"></i>
+    </div>
   </div>
 </header>
