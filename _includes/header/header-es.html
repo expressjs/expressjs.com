@@ -1,127 +1,138 @@
 <header>
-  <div id="mobile-menu">
+  <div class="container">
+    <div id="mobile-menu">
       <div id="nav-button" class="fa fa-bars fa-2x button"></div>
-  </div>
-  <section id="logo"><a href="/" class="express">Express</a>
-  </section>
-  <div id="navbar">
-      <input id="q" placeholder="🔎 search">
-      <ul id="navmenu">
-          <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Inicio</a></li>
-          <li>
-              <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Cómo empezar</a>
-                      <ul>
-                          <li>
-                            <a href="/{{ page.lang }}/starter/installing.html">
-                              Instalación
-                            </a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/starter/hello-world.html">
-                              Hello world
-                            </a>
-                          </li>
-                          <li>
-                          <a href="/{{ page.lang }}/starter/generator.html">
-                            Generador de Express
-                          </a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/starter/basic-routing.html">
-                              Direccionamiento básico
-                            </a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/starter/static-files.html">
-                              Archivos estáticos
-                            </a>
-                          </li>
-                          <li>
-                            <a href="/{{ page.lang }}/starter/faq.html">
-                              Preguntas más frecuentes
-                            </a>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
-          </li>
-          <li>
-              <ul id="guide-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Guía</a>
-                      <ul>
-                          <li><a href="/{{ page.lang }}/guide/routing.html">Direccionamiento</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Escritura de middleware</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/using-middleware.html">Utilización del middleware</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Utilización de motores de plantilla</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/error-handling.html">Manejo de errores</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/debugging.html">Depuración</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express detrás de proxies</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/migrating-4.html">Migración a Express 4</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/migrating-5.html">Migración a Express 5</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/guide/database-integration.html">Integración de la base de datos</a>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
-          </li>
-          <li>
-              <ul id="application-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Referencia de API</a>
-                      <ul>
-                          <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/3x/api.html">3.x (en desuso)</a>
-                          </li>
-                          <li><a href="/2x/">2.x (en desuso)</a>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
-          </li>
-          <li>
-              <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Temas avanzados</a>
-                      <ul>
-                          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Motores de plantilla</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/advanced/security-updates.html">Actualizaciones de seguridad</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">Mejores prácticas de seguridad</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Mejores prácticas de rendimiento</a>
-                          </li>
+    </div>
+    <section id="logo"><a href="/" class="express">Express</a>
+    </section>
+    <div id="navbar">
 
-                      </ul>
-                  </li>
+      <ul id="navmenu">
+        <li><a href="/{{ page.lang }}/" id="home-menu" {% if page.menu=='home' %} class="active" {% endif %}>Inicio</a>
+        </li>
+        <li>
+          <ul id="getting-started-menu" class="menu">
+            <li><a href="/{{ page.lang }}/starter/installing.html" {% if page.menu=='starter' %} class="active" {% endif
+                %}>Cómo empezar</a>
+              <ul>
+                <li>
+                  <a href="/{{ page.lang }}/starter/installing.html">
+                    Instalación
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/starter/hello-world.html">
+                    Hello world
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/starter/generator.html">
+                    Generador de Express
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/starter/basic-routing.html">
+                    Direccionamiento básico
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/starter/static-files.html">
+                    Archivos estáticos
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{ page.lang }}/starter/faq.html">
+                    Preguntas más frecuentes
+                  </a>
+                </li>
               </ul>
-          </li>
-          <li>
-              <ul id="resources-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Recursos</a>
-                      <ul>
-                          <li><a href="/{{ page.lang }}/resources/glossary.html">Glosario</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
-                          </li>
-                          <li><a href="/{{ page.lang }}/resources/community.html">Comunidad</a>
-                          </li>
-                      </ul>
-                  </li>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul id="guide-menu" class="menu">
+            <li><a href="/{{ page.lang }}/guide/routing.html" {% if page.menu=='guide' %} class="active" {% endif
+                %}>Guía</a>
+              <ul>
+                <li><a href="/{{ page.lang }}/guide/routing.html">Direccionamiento</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Escritura de middleware</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/using-middleware.html">Utilización del middleware</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/using-template-engines.html">Utilización de motores de plantilla</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/error-handling.html">Manejo de errores</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/debugging.html">Depuración</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express detrás de proxies</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/migrating-4.html">Migración a Express 4</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/migrating-5.html">Migración a Express 5</a>
+                </li>
+                <li><a href="/{{ page.lang }}/guide/database-integration.html">Integración de la base de datos</a>
+                </li>
               </ul>
-          </li>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul id="application-menu" class="menu">
+            <li><a href="/{{ page.lang }}/4x/api.html" {% if page.menu=='api' %} class="active" {% endif %}>Referencia
+                de API</a>
+              <ul>
+                <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
+                </li>
+                <li><a href="/{{ page.lang }}/3x/api.html">3.x (en desuso)</a>
+                </li>
+                <li><a href="/2x/">2.x (en desuso)</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul id="advanced-topics-menu" class="menu">
+            <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html" {% if page.menu=='advanced' %}
+                class="active" {% endif %}>Temas avanzados</a>
+              <ul>
+                <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Motores de plantilla</a>
+                </li>
+                <li><a href="/{{ page.lang }}/advanced/security-updates.html">Actualizaciones de seguridad</a>
+                </li>
+                <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">Mejores prácticas de seguridad</a>
+                </li>
+                <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Mejores prácticas de
+                    rendimiento</a>
+                </li>
+
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul id="resources-menu" class="menu">
+            <li><a href="/{{ page.lang }}/resources/glossary.html" {% if page.menu=='resources' %} class="active" {%
+                endif %}>Recursos</a>
+              <ul>
+                <li><a href="/{{ page.lang }}/resources/glossary.html">Glosario</a>
+                </li>
+                <li><a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
+                </li>
+                <li><a href="/{{ page.lang }}/resources/community.html">Comunidad</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
-      <div id="theme-icon-container"  class="theme-toggle default-theme" title="toggle darkmode">
-        <i class="fa fa-moon-o fa-2x"></i>
-      </div> 
+      <input id="q" class="input-search" placeholder="Search ...">
+      <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
+        <i class="fa fa-moon-o fa-lg hidden-dark"></i>
+        <i class="fa fa-sun-o fa-lg hidden-light"></i>
+      </div>
+    </div>
   </div>
 </header>

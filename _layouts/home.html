@@ -5,18 +5,22 @@
 -->
 <html lang="{{ page.lang }}">
 
-  {% include head.html %}
+{% include head.html %}
 
-  {% if page.lang == 'en' %}
-  <body class="en-doc">
+{% if page.lang == 'en' %}
+
+<body class="en-doc">
   {% else %}
+
   <body class="non-en-doc">
     <div id="i18n-notice-box" class="doc-box doc-warn">
       {% include i18n-notice.html %}
     </div>
-  {% endif %}
+    {% endif %}
+    <div class="container">
+      {{ content }}
+    </div>
 
-    {{ content }}
 
     {% include footer/footer-{{ page.lang }}.html %}
     <script src="../js/theme.js"></script>

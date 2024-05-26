@@ -6,13 +6,15 @@
 {% if page.lang %}
 <html lang="{{ page.lang }}" prefix="og: http://ogp.me/ns#">
 
-  {% include head.html %}
+{% include head.html %}
 
-  {% if page.lang == 'en' %}
-  <body class="en-doc">
+{% if page.lang == 'en' %}
+
+<body class="en-doc">
   {% else %}
+
   <body class="non-en-doc">
-  {% endif %}
+    {% endif %}
 
     <section class="page content">
 
@@ -21,12 +23,16 @@
       <div id="overlay"></div>
 
       {% if page.lang != 'en' %}
-        <div id="i18n-notice-box" class="doc-box doc-warn">
-          {% include i18n-notice.html %}
-        </div>
+      <div id="i18n-notice-box" class="doc-box doc-warn">
+        {% include i18n-notice.html %}
+      </div>
       {% endif %}
-      <div id="page-doc" markdown="1">
-{{ content }}
+      <div class="container">
+        <div id="page-doc" markdown="1">
+
+          {{ content }}
+        </div>
+
       </div>
     </section>
 

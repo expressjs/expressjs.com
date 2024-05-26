@@ -1,221 +1,289 @@
 :root {
-  --main_dark_bg: #010409;
-  --second_dark_bg: #0d1117;
+  --main_dark_bg: rgba(0, 0, 0, .8);
+  --second_dark_bg: #111111;
   --dark_hover: #383838;
   --second_dark_hover: #484848;
   --dark_text: #e6edf3;
+  --dark_text-gray: #575757;
   --dark_header_text: silver;
   --dark_inner_text: grey;
   --link: #259dff;
 }
+
 #theme-icon-container {
   position: relative;
   float: right;
   color: white;
   min-width: 50px;
-  color: black;
+  color: #333;
+  text-align: center;
 }
+
+#theme-icon-container i {
+  cursor: pointer;
+  line-height: 30px;
+}
+
+#theme-icon-container .hidden-light {
+  display: none;
+}
+
+#theme-icon-container .hidden-dark {
+  display: block;
+}
+
+body.dark-mode #theme-icon-container .hidden-light {
+  display: block;
+}
+
+body.dark-mode #theme-icon-container .hidden-dark {
+  display: none;
+}
+
 body.dark-mode #theme-icon-container {
   color: var(--dark_text);
   background-color: var(--second_dark_bg);
 }
+
 body.dark-mode {
-  background: var(--main_dark_bg);
+  background: #000;
   color: var(--dark_text);
 }
+
 body.dark-mode header {
   background-color: var(--second_dark_bg);
   color: var(--dark_text);
+  border-bottom: 1px solid #626262;
 }
-body.dark-mode #logo > a {
+
+body.dark-mode pre,
+body.dark-mode .input-search {
+  border-color: var(--dark_text-gray);
+}
+
+body.dark-mode #logo>a {
   color: var(--dark_text);
 }
+
+body.dark-mode #navbar li a:hover {
+  color: var(--dark_text);
+}
+
 /* navbar links/drop down menu links */
 body.dark-mode #navbar ul#navmenu li a,
 body.dark-mode #navbar ul#navmenu li.dropit-trigger a {
-  color: var(--dark_text);
+  color: var(--dark_text-gray);
 }
+
 /* first drop down link - some js is adding current class */
 body.dark-mode #navbar ul#navmenu li a.current {
   background: transparent;
 }
+
+body.dark-mode #navbar a.active {
+  color: var(--dark_text) !important;
+}
+
 body.dark-mode #navbar ul#navmenu li a.current:hover {
   background: var(--dark_hover);
 }
+
 body.dark-mode .menu ul.dropit-submenu {
   background: var(--dark_bg);
+  border: 1px solid var(--dark_text-gray);
 }
+
 /* drop down menu links  */
 body.dark-mode #navbar .menu ul.dropit-submenu a:hover {
   background: var(--dark_hover);
 }
+
 body.dark-mode #navbar #navmenu li {
   background: var(--second_dark_bg);
 }
+
 /* search bar */
-body.dark-mode #navbar > span.algolia-autocomplete > input {
+body.dark-mode #navbar>span.algolia-autocomplete>input {
   background-color: var(--second_dark_bg);
 }
-body.dark-mode #navbar > span.algolia-autocomplete > input,
-body.dark-mode #navbar > span.algolia-autocomplete > input::placeholder {
+
+body.dark-mode #navbar>span.algolia-autocomplete>input,
+body.dark-mode #navbar>span.algolia-autocomplete>input::placeholder {
   color: var(--dark_text);
 }
+
 /* search bar french */
-:lang(fr) body.dark-mode #navbar ul#navmenu > span.algolia-autocomplete > input {
+:lang(fr) body.dark-mode #navbar ul#navmenu>span.algolia-autocomplete>input {
   background-color: var(--second_dark_bg);
   color: var(--dark_text);
 }
+
 /* search bar fixes uz, ru, de, fr  */
 :lang(uz) span.algolia-autocomplete {
   max-width: 8em;
   min-width: auto;
 }
+
 :lang(ru) span.algolia-autocomplete,
 :lang(de) span.algolia-autocomplete,
-:lang(fr) span.algolia-autocomplete
- {
+:lang(fr) span.algolia-autocomplete {
   max-width: 9em;
   min-width: auto;
 }
-:lang(uz) span.algolia-autocomplete > input,
-:lang(ru) span.algolia-autocomplete > input,
-:lang(de) span.algolia-autocomplete > input, 
-:lang(fr) span.algolia-autocomplete > input {
+
+:lang(uz) span.algolia-autocomplete>input,
+:lang(ru) span.algolia-autocomplete>input,
+:lang(de) span.algolia-autocomplete>input,
+:lang(fr) span.algolia-autocomplete>input {
   max-width: 100%;
 }
-body.dark-mode #navbar ul#navmenu > span.algolia-autocomplete > input::placeholder {
+
+body.dark-mode #navbar ul#navmenu>span.algolia-autocomplete>input::placeholder {
   color: var(--dark_text);
 }
+
 body.dark-mode div#overlay {
   opacity: 0.5;
 }
+
+body.dark-mode .icon-top-footer {
+  background: var(--dark_text-gray);
+}
+
 @media (max-width: 899px) {
   #theme-icon-container {
     bottom: 35px;
   }
+
   /* mobile menu main links hover */
   body.dark-mode div#navbar ul#navmenu .dropit-trigger:hover {
     background: var(--dark_hover);
   }
-    /* mobile menu inner links hover */
+
+  /* mobile menu inner links hover */
   body.dark-mode div#navbar .menu ul.dropit-submenu a:hover {
     background: var(--second_dark_hover);
     color: var(--dark_text) !important;
   }
 }
+
 body.dark-mode .doc-box.doc-info,
 body.dark-mode .doc-box.doc-notice,
 body.dark-mode .doc-box.doc-warn {
   color: var(--dark_text);
   background: var(--main_dark_bg);
 }
+
 body.dark-mode .doc-box.doc-info pre.language-javascript {
   background: var(--main_dark_bg);
 }
+
 body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3,
 body.dark-mode code,
 body.dark-mode em,
-body.dark-mode strong  {
+body.dark-mode strong {
   color: var(--dark_text);
 }
+
 body.dark-mode pre {
   background: var(--second_dark_bg);
 }
+
 /* index.html */
-body.dark-mode #description .express > a {
+body.dark-mode #description .express {
   color: var(--dark_text);
 }
+
+body.dark-mode #description .express>a {
+  color: var(--dark_text);
+}
+
 body.dark-mode #install-command {
-  background: var(--main_dark_bg);
+  background: var(--second_dark_bg);
+  border-color: var(--dark_text-gray);
 }
+
 body.dark-mode #announcements {
-  background: var(--main_dark_bg);
+  background: var(--second_dark_bg);
+  border-color: var(--dark_text-gray);
 }
-body.dark-mode #boxes div > h3 {
+
+body.dark-mode #boxes div>h3 {
   color: var(--dark_text);
 }
+
 /* basic-routing.htlm */
 body.dark-mode [class*='language-'] {
   text-shadow: 0 1px var(--second_dark_bg);
 }
+
 /* js fat arrow operator */
 body.dark-mode .token.operator {
   background: inherit;
 }
+
 /* debugging.htlm */
 body.dark-mode table tr:first-child th {
   background-color: var(--second_dark_bg);
   color: var(--dark_text);
 }
+
 /* api pages */
-body.dark-mode #menu li > * {
+body.dark-mode #menu li>* {
   color: var(--dark_text);
 }
-body.dark-mode #menu li ul li > em {
+
+body.dark-mode #menu li ul li>em {
   color: var(--dark_header_text);
 }
-body.dark-mode #menu li ul li > a {
+
+body.dark-mode #menu li ul li>a {
   color: var(--dark_inner_text);
 }
-body.dark-mode #api-doc > h3 {
+
+body.dark-mode #api-doc>h3 {
   color: var(--dark_header_text);
 }
+
 body.dark-mode #api-doc section h5 {
   color: var(--dark_header_text);
 }
+
 /* 
 overriding search-bar results drop down  
 */
 body.dark-mode .ds-dropdown-menu .ds-dataset-1 {
   background-color: var(--dark_bg);
 }
+
 body.dark-mode .ds-dropdown-menu .ds-dataset-1 .ds-suggestion a {
   background-color: var(--second_dark_bg);
   color: var(--dark_text);
 }
-body.dark-mode
-  .ds-dropdown-menu
-  .ds-dataset-1
-  .ds-suggestions
-  .algolia-docsearch-suggestion--category-header {
+
+body.dark-mode .ds-dropdown-menu .ds-dataset-1 .ds-suggestions .algolia-docsearch-suggestion--category-header {
   color: var(--dark_text);
-}
-body.dark-mode
-  .ds-dropdown-menu
-  .ds-dataset-1
-  .ds-suggestions
-  .algolia-docsearch-suggestion--wrapper
-  .algolia-docsearch-suggestion--subcategory-column {
-  color: var(--dark_header_text);
-}
-body.dark-mode
-  .ds-dropdown-menu
-  .ds-dataset-1
-  .ds-suggestions
-  .algolia-docsearch-suggestion--wrapper
-  .algolia-docsearch-suggestion--title {
-  color: var(--dark_text);
-}
-body.dark-mode
-  .ds-dropdown-menu
-  .ds-dataset-1
-  .ds-suggestions
-  .algolia-docsearch-suggestion--wrapper
-  .algolia-docsearch-suggestion--text {
-  color: var(--dark_text);
-}
-body.dark-mode
-  .ds-dropdown-menu
-  .ds-dataset-1
-  .ds-suggestions
-  .algolia-docsearch-suggestion--wrapper
-  .algolia-docsearch-suggestion--highlight {
-  color: var(--link);
-}
-body.dark-mode .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--title,
-body.dark-mode .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--content{
-  background-color: var(--dark_hover);
 }
 
+body.dark-mode .ds-dropdown-menu .ds-dataset-1 .ds-suggestions .algolia-docsearch-suggestion--wrapper .algolia-docsearch-suggestion--subcategory-column {
+  color: var(--dark_header_text);
+}
+
+body.dark-mode .ds-dropdown-menu .ds-dataset-1 .ds-suggestions .algolia-docsearch-suggestion--wrapper .algolia-docsearch-suggestion--title {
+  color: var(--dark_text);
+}
+
+body.dark-mode .ds-dropdown-menu .ds-dataset-1 .ds-suggestions .algolia-docsearch-suggestion--wrapper .algolia-docsearch-suggestion--text {
+  color: var(--dark_text);
+}
+
+body.dark-mode .ds-dropdown-menu .ds-dataset-1 .ds-suggestions .algolia-docsearch-suggestion--wrapper .algolia-docsearch-suggestion--highlight {
+  color: var(--link);
+}
+
+body.dark-mode .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--title,
+body.dark-mode .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--content {
+  background-color: var(--dark_hover);
+}
