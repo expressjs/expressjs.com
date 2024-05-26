@@ -26,10 +26,6 @@ body.dark-mode {
   background: var(--main_dark_bg);
   color: var(--dark_text);
 }
-body.dark-mode #blm-banner {
-  background-color: var(--main_dark_bg);
-  color: var(--dark _text);
-}
 body.dark-mode header {
   background-color: var(--second_dark_bg);
   color: var(--dark_text);

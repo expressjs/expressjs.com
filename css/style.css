@@ -231,7 +231,6 @@ a {
 }
 
 #logo .express {
-  margin-top: 63px;
   display: block;
   font: 25px "Helvetica Neue", "Open Sans", sans-serif;
   font-weight: 100;
@@ -302,7 +301,7 @@ header {
   left: 0;
   background: #eee;
   width: 100%;
-  height: 120px;
+  height: 57px;
   z-index: 100;
   border-bottom: 1px solid #ddd;
 }
@@ -1216,19 +1215,6 @@ h2 a {
  margin-left: -20px;
 }
 
-#blm-banner {
-  text-align: center;
-  background: #010101; 
-  color: #f1f1f1;
-  padding: 5px;
-  font-size: 16px;
-  width: 100%;
-}
-
-#blm-donate {
-  color: #5E80F7;
-  text-decoration: none;
-}
 #blog-doc:has(> h1#express-blog), 
 #blog-doc:has(> h1#write-a-blog-post) {
   min-height: 300px;
