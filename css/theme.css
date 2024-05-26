@@ -238,6 +238,9 @@ body.dark-mode .blog-title > a{
 body.dark-mode .blog-excerpt{
   color: var(--dark_bright_text);
 } 
+body.dark-mode #blog-side-menu-container h3 a{
+  color: var(--dark_header_text);
+}
 body.dark-mode #blog-side-menu > li > a{
-  color: var(--dark_text);
+  color: var(--dark_inner_text);
 }

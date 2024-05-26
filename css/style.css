@@ -803,6 +803,10 @@ footer {
   font-size: 15px;
 }
 
+#blog-side-menu-container > h3 > a  {
+  color: #353535
+}
+
 #blog-side-menu > li > a {
   color: #666
 }

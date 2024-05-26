@@ -8,7 +8,8 @@ redirect_from: "/blog/posts.html"
 ---
   
 # Express Blog
-  
+
+Want to write a post? See the submission [guidelines](/en/blog/write-post.html).
 {% if site.posts.size !=  0 %}
 <div class="blog-posts">
 {% for post in site.posts %}
