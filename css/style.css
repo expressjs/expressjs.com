@@ -741,7 +741,7 @@ footer {
 
 #menu,
 #tags-side-menu,
-#blog-side-menu {
+#blog-side-menu-container {
   position: fixed;
   margin: 0;
   padding: 0 10px 0 0;
@@ -751,6 +751,20 @@ footer {
   text-align: left;
   font-size: 13px;
   overflow-y: auto;
+}
+
+#blog-side-menu-container {
+  max-width: 210px;
+}
+
+#blog-side-menu-container li {
+  max-width: 100%;
+  margin-bottom: 5px;
+}
+
+#blog-side-menu {
+  list-style: none;
+  padding: 0;
 }
 
 #menu em,
@@ -787,6 +801,10 @@ footer {
   color: #353535;
   font-weight: bold;
   font-size: 15px;
+}
+
+#blog-side-menu > li > a {
+  color: #666
 }
 
 #menu ul a,
@@ -909,7 +927,7 @@ h2 a {
 
   #menu,
   #tags-side-menu,
-  #blog-side-menu {
+  #blog-side-menu-container {
     display: none;
   }
 

@@ -10,7 +10,7 @@ redirect_from: "/blog/write.html"
   
 ## Have an idea for a blog post? Write a post and make a PR.
 
-Check out an example [post](/{{ page.lang }}/blog/example-post.html)
+Follow the guildlines below to create a new blog post.
 
 - ### Setup the Repository 
 A local installation will be required it you want to preview your post. [Here](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#expressjscom) are the instructions for running locally. 
