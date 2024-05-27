@@ -72,7 +72,7 @@ body.dark-mode #navbar li a:hover {
 /* navbar links/drop down menu links */
 body.dark-mode #navbar ul#navmenu li a,
 body.dark-mode #navbar ul#navmenu li.dropit-trigger a {
-  color: var(--dark_text-gray);
+  color: #b6b6b6;
 }
 
 /* first drop down link - some js is adding current class */
