@@ -2,7 +2,7 @@
 
 layout: blog-posts
 title: "Welcome to The Express Blog" 
-sub_title: "Postings from the Express community leaders"
+sub_title: "Postings from Express community leaders"
 menu: blog
 date: 22-05-2024
 tags: site-admin
@@ -20,7 +20,7 @@ excerpt_separator: <!--more-->
 ### By {{page.author}}
 
 
-Welcome to the Express Blog! We are excited to have you here. This will be a place for leaders in the Express community to share any knowledge, experiences, or news.
+Welcome to the Express Blog! We are excited to have you here. This will be a place for leaders in the Express community to share knowledge, experiences, and news.
 <!--more-->
 
-A sampling of some of the topics we hope to cover include: Adoption of the OSSF scorecard, the inspiration behind Express 5.0, details about the Security Working Group, and an intro to the Express Forward Initiative.
+Some of the topics we hope to cover include: Adoption of the OSSF scorecard, the inspiration behind Express 5.0, details about the Security Working Group, and an intro to the Express Forward Initiative.
