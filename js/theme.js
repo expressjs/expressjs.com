@@ -1,8 +1,10 @@
 const themeWatcher = watchColorSchemeChange((colorScheme) => {
   if (!hasLocalStorage()) {
-    // remove icon - toggle not supported
-    document.querySelector('#theme-icon-container').remove()
-    toggleSystemTheme(colorScheme)
+    document?.addEventListener('DOMContentLoaded', () => {
+      // remove icon - toggle not supported
+      document.querySelector('#theme-icon-container').remove()
+      toggleSystemTheme(colorScheme)
+    })
   } else {
     const systemTheme = localStorage.getItem('system-theme')
     const localTheme = localStorage.getItem('local-theme')
@@ -26,9 +28,12 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
         }
       }
     }
-    document
-      .querySelector('.theme-toggle')
-      .addEventListener('click', toggleStorageTheme)
+    document.addEventListener('DOMContentLoaded', () => {
+
+      document
+        .querySelector('.theme-toggle')
+        .addEventListener('click', toggleStorageTheme)
+    })
   }
 })
 function toggleSystemTheme(theme) {
@@ -40,6 +45,7 @@ function toggleSystemTheme(theme) {
   }
 }
 function toggleStorageTheme(e) {
+  console.log("hello")
   const localTheme = localStorage.getItem('local-theme')
   if (localTheme === 'light') {
     localStorage.setItem('local-theme', 'dark')
@@ -60,22 +66,22 @@ function toggleStorageTheme(e) {
   }
 }
 function darkModeOn() {
-  document.body.classList.add('dark-mode')
+  document?.documentElement?.classList?.add('dark-mode')
 }
 function lightModeOn() {
-  document.body.classList.remove('dark-mode')
+  document?.documentElement?.classList.remove('dark-mode')
 }
 function darkModeState() {
-  return document.body.classList.contains('dark-mode')
+  return document.documentElement.classList.contains('dark-mode')
 }
 function hasLocalStorage() {
   return typeof Storage !== 'undefined'
 }
 function watchColorSchemeChange(callback) {
-  const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+  const darkMediaQuery = window?.matchMedia('(prefers-color-scheme: dark)')
 
   const handleChange = (event) => {
-    const newColorScheme = event.matches ? 'dark' : 'light'
+    const newColorScheme = event?.matches ? 'dark' : 'light'
     callback(newColorScheme)
   }
   darkMediaQuery.addEventListener('change', handleChange)
