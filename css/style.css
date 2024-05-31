@@ -966,6 +966,14 @@ h2 a {
     display: none;
   }
 
+  #navmenu.opens {
+    display: block;
+  }
+
+  #overlay.blurs{
+    display: block;
+  }
+
   #navmenu > li {
     float: none;
     border-bottom: 1px solid #ccc;
