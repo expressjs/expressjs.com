@@ -12,14 +12,15 @@ redirect_from: "/blog/write.html"
 
 Follow the guildlines below to create a new blog post.
 
-- ### Setup the Repository 
-A local installation will be required it you want to preview your post. [Here](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#expressjscom) are the instructions for running locally. 
+1. ### Fork the Repository 
+Fork the [expressJS.com](https://github.com/expressjs/expressjs.com) repo and clone it to your local machine.
+  - OPTIONAL: If you want to run a local installation, find the setup instructions [here](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#expressjscom) 
 
-- ### Create a new file in the `_posts` directory
-Save it following the format: `YYYY-MM-DD-title.md`. The date should be the date of your post.
+2. ### Create a new file in the `_posts` directory
+Open the files. Inside the `expressjs.com` directory, name your file using following the format: `YYYY-MM-DD-title.md`.
 
-- ### Adding the Required Front Matter
-    The following front matter are required for each post. At the top of the file you just created, add the following:
+3. ### Adding the Required Front Matter
+    The following front matter are required for each post. At the top of the file you created in the previous step, add the following:
 
     ```yaml
     ---
@@ -35,8 +36,8 @@ Save it following the format: `YYYY-MM-DD-title.md`. The date should be the date
     excerpt_separator: <!--more-->
     ---
     ```
-
-- ### Add your Content
+    - Posts must include a valid image in the `img` field. Either put your image (jpg or png) file into the `/images/blog/` directory, or reference it via URL.
+4. ### Add your Content
     Finally, start writing your content. Format your content as follows, including the title and subtitle, and the put `<!--more-->` following your first paragraph.
 
     ```markdown

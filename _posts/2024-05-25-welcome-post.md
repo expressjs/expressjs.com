@@ -6,7 +6,7 @@ sub_title: "Postings from Express community leaders"
 menu: blog
 date: 22-05-2024
 tags: site-admin
-img: "https://loremflickr.com/300/300"
+img: "/images/blog/music-player-7792956_1280_crop.jpg"
 author: "Rand McKinney and Chris Del"
 lang: en
 excerpt_separator: <!--more-->
