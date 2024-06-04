@@ -38,14 +38,14 @@ Open the files. Inside the `expressjs.com` directory, name your file using follo
     ```
     - Posts must include a valid image in the `img` field. Either put your image (jpg or png) file into the `/images/blog/` directory, or reference it via URL.
 4. ### Add your Content
-    Finally, start writing your content. Format your content as follows, including the title and subtitle, and the put `<!--more-->` following your first paragraph.
+    Finally, start writing your content. Format your content as follows, including the title, subtitle, and author headings, and put `<!--more-->` following your first paragraph. Make sure this is all below the dotted line for the front matter.
 
     ```markdown
     {% raw %}
     # {{page.title}}
 
-    ### {{page.sub_title}}
-    ### By {{page.author}}
+    ## {{page.sub_title}}
+    #### By {{page.author}}
     {% endraw %}
     Lorem ipsum dolor sit amet...
     <!--more-->

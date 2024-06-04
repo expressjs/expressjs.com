@@ -16,8 +16,8 @@ excerpt_separator: <!--more-->
 
 # {{page.title}}
 
-### {{page.sub_title}}
-### By {{page.author}}
+## {{page.sub_title}}
+#### By {{page.author}}
 
 
 

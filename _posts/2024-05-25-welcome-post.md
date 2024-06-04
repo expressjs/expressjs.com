@@ -16,8 +16,8 @@ excerpt_separator: <!--more-->
 
 # {{page.title}}
 
-### {{page.sub_title}}
-### By {{page.author}}
+## {{page.sub_title}}
+#### By {{page.author}}
 
 
 Welcome to the Express Blog! We are excited to have you here. This will be a place for leaders in the Express community to share knowledge, experiences, and news.
