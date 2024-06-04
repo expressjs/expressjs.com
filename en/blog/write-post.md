@@ -12,14 +12,18 @@ redirect_from: "/blog/write.html"
 
 Follow the guildlines below to create a new blog post.
 
+1. ### Propose your Post
+Before taking the time to write a post, please confirm that we will be able to publish it. We're looking for topics related very specifically to Express, and so we want to pre-approve all posts. For the moment, this means we aren't excepting any unsolicited posts. 
+  -  If you have an idea, please ask for approval first by opening an [issue](https://github.com/expressjs/expressjs.com/issues) entitled  `Blog Post Idea <your idea>`.
+
 1. ### Fork the Repository 
 Fork the [expressJS.com](https://github.com/expressjs/expressjs.com) repo and clone it to your local machine.
   - OPTIONAL: If you want to run a local installation, find the setup instructions [here](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#expressjscom) 
 
-2. ### Create a new file in the `_posts` directory
+1. ### Create a new file in the `_posts` directory
 Open the files. Inside the `expressjs.com` directory, name your file using following the format: `YYYY-MM-DD-title.md`.
 
-3. ### Adding the Required Front Matter
+1. ### Adding the Required Front Matter
     The following front matter are required for each post. At the top of the file you created in the previous step, add the following:
 
     ```yaml
@@ -37,7 +41,7 @@ Open the files. Inside the `expressjs.com` directory, name your file using follo
     ---
     ```
     - Posts must include a valid image in the `img` field. Either put your image (jpg or png) file into the `/images/blog/` directory, or reference it via URL.
-4. ### Add your Content
+2. ### Add your Content
     Finally, start writing your content. Format your content as follows, including the title, subtitle, and author headings, and put `<!--more-->` following your first paragraph. Make sure this is all below the dotted line for the front matter.
 
     ```markdown
