@@ -45,7 +45,6 @@ function toggleSystemTheme(theme) {
   }
 }
 function toggleStorageTheme(e) {
-  console.log("hello")
   const localTheme = localStorage.getItem('local-theme')
   if (localTheme === 'light') {
     localStorage.setItem('local-theme', 'dark')
