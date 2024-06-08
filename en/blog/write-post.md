@@ -61,4 +61,6 @@ Open the files. Inside the `expressjs.com` directory, name your file using follo
 3. ### Make a Pull Request
    If you do not have the app running locally, this is where you will be able to preview your results.  After you make your PR, there will be a section on the page entitled `Deploy Preview for expressjscom-preview ready!` Click here to see your work.
    
-   You can use this feature over multiple commits to refine your post, just make sure open your pull request as a `draft`. Once it's ready for review, switch it to a formal PR.
+   You can use this feature over multiple commits to refine your post, just make sure to open your pull request as a `draft`. Once it's ready for review, switch it to a formal PR.
+
+   
