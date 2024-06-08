@@ -1248,7 +1248,6 @@ h2 a {
 #blog-doc:has(> h1#express-blog), 
 #blog-doc:has(> h1#write-a-blog-post) {
   min-height: 300px;
-  overflow-y: scroll;
 }
 #blog-doc p {
   font-size: 1.1em;
