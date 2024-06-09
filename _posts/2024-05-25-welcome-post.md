@@ -20,7 +20,16 @@ excerpt_separator: <!--more-->
 #### By {{page.author}}
 
 
-Welcome to the Express Blog! We are excited to have you here. This will be a place for leaders in the Express community to share knowledge, experiences, and news.
+Welcome to the Express Blog. We are excited to have you here!  
+
+As we get started with this blog, some of the topics we hope to cover include: 
+- Adoption of the OSSF scorecard
+- The inspiration behind Express 5.0
+- Details about the Security Working Group
+- Intro to the Express Forward Initiative
+- More..
 <!--more-->
 
-Some of the topics we hope to cover include: Adoption of the OSSF scorecard, the inspiration behind Express 5.0, details about the Security Working Group, and an intro to the Express Forward Initiative.
+Our plan is to keep focused on posts by selected community leaders at first, while possibly opening it up to the community at large down the road.
+
+But if you think you have a great idea for a post, feel free to pitch the idea! Find the instructions on how to create a post [here](/en/blog/write-post.html). 
