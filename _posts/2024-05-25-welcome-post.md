@@ -2,7 +2,6 @@
 
 layout: blog-posts
 title: "Welcome to The Express Blog" 
-sub_title: "Postings from Express community leaders"
 menu: blog
 date: 22-05-2024
 tags: site-admin
@@ -20,16 +19,17 @@ excerpt_separator: <!--more-->
 #### By {{page.author}}
 
 
-Welcome to the Express Blog. We are excited to have you here!  
+Welcome to the brand-new Express Blog!
 
-As we get started with this blog, some of the topics we hope to cover include: 
-- Adoption of the OSSF scorecard
-- The inspiration behind Express 5.0
-- Details about the Security Working Group
-- Intro to the Express Forward Initiative
-- More..
+This is a new feature of the Express website, that will be a primary avenue of communication for the Express technical committee (TC).  
+
 <!--more-->
 
-Our plan is to keep focused on posts by selected community leaders at first, while possibly opening it up to the community at large down the road.
+The Express blog will be a venue:
+- For the Express TC to discuss issues of particular importance to the Express community.
+- For periodic information on new releases, pre-releases, plans, and ongoing work on the project.
+- To highlight security issues or other urgent information.
 
-But if you think you have a great idea for a post, feel free to pitch the idea! Find the instructions on how to create a post [here](/en/blog/write-post.html). 
+Initially, posts will be written by TC members (potentially collaborating others), mainly for the reason that we don't have bandwidth to review general posts from the broader community. Eventually, we would love to open up the blog for broader contributions, but for now the focus is on trying to release Express 5.0, and the reality of an open-source project is that everyone has finite time to contribute. 
+
+If you think you have a great idea for a post for future consideration, feel free to pitch the idea! The best approach is to open a new issue, and then after appropriate discussion, open a PR.  We've also written up simple [instructions to create a blog post](/en/blog/write-post.html). 
