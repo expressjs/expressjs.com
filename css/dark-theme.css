@@ -1,9 +1,9 @@
 :root {
-  --main_dark_bg: #010409;
-  --second_dark_bg: #0d1117;
+  --main_dark_bg: #262626;
+  --second_dark_bg: #1a1616;
   --dark_hover: #383838;
   --second_dark_hover: #484848;
-  --dark_text: #e6edf3;
+  --dark_text: #d3d3d3;
   --dark_header_text: silver;
   --dark_inner_text: grey;
   --link: #259dff;
@@ -11,7 +11,7 @@
 #theme-icon-container {
   position: relative;
   float: right;
-  color: white;
+  color: rgb(203, 203, 203);
   min-width: 50px;
   color: black;
 }
@@ -61,7 +61,12 @@ html.dark-mode #navbar > span.algolia-autocomplete > input::placeholder {
   color: var(--dark_text);
 }
 /* search bar french */
-:lang(fr) html.dark-mode #navbar ul#navmenu > span.algolia-autocomplete > input {
+:lang(fr)
+  html.dark-mode
+  #navbar
+  ul#navmenu
+  > span.algolia-autocomplete
+  > input {
   background-color: var(--second_dark_bg);
   color: var(--dark_text);
 }
@@ -72,18 +77,21 @@ html.dark-mode #navbar > span.algolia-autocomplete > input::placeholder {
 }
 :lang(ru) span.algolia-autocomplete,
 :lang(de) span.algolia-autocomplete,
-:lang(fr) span.algolia-autocomplete
- {
+:lang(fr) span.algolia-autocomplete {
   max-width: 9em;
   min-width: auto;
 }
 :lang(uz) span.algolia-autocomplete > input,
 :lang(ru) span.algolia-autocomplete > input,
-:lang(de) span.algolia-autocomplete > input, 
+:lang(de) span.algolia-autocomplete > input,
 :lang(fr) span.algolia-autocomplete > input {
   max-width: 100%;
 }
-html.dark-mode #navbar ul#navmenu > span.algolia-autocomplete > input::placeholder {
+html.dark-mode
+  #navbar
+  ul#navmenu
+  > span.algolia-autocomplete
+  > input::placeholder {
   color: var(--dark_text);
 }
 html.dark-mode div#overlay {
@@ -97,7 +105,7 @@ html.dark-mode div#overlay {
   html.dark-mode div#navbar ul#navmenu .dropit-trigger:hover {
     background: var(--dark_hover);
   }
-    /* mobile menu inner links hover */
+  /* mobile menu inner links hover */
   html.dark-mode div#navbar .menu ul.dropit-submenu a:hover {
     background: var(--second_dark_hover);
     color: var(--dark_text) !important;
@@ -117,7 +125,7 @@ html.dark-mode h2,
 html.dark-mode h3,
 html.dark-mode code,
 html.dark-mode em,
-html.dark-mode strong  {
+html.dark-mode strong {
   color: var(--dark_text);
 }
 html.dark-mode pre {
@@ -137,7 +145,7 @@ html.dark-mode #boxes div > h3 {
   color: var(--dark_text);
 }
 /* basic-routing.htlm */
-html.dark-mode [class*='language-'] {
+html.dark-mode [class*="language-"] {
   text-shadow: 0 1px var(--second_dark_bg);
 }
 /* js fat arrow operator */
@@ -215,7 +223,6 @@ html.dark-mode
   color: var(--link);
 }
 html.dark-mode .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--title,
-html.dark-mode .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--content{
+html.dark-mode .ds-suggestion.ds-cursor .algolia-docsearch-suggestion--content {
   background-color: var(--dark_hover);
 }
-
