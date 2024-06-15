@@ -13,8 +13,7 @@ Want to write a post? See the submission [guidelines](/en/blog/write-post.html).
 {% if site.posts.size !=  0 %}
 <div class="blog-posts">
 {% for post in site.posts %}
-  <div class="blog-post{% if site.posts.first == post %} active{% endif %}">
-    <div class="left-col">
+  <div class="blog-post {% if site.posts.first == post %} active{% endif %}">
       <div class="blog-tags">
         {% for tag in post.tags %}
           <span class="blog-tag">{{ tag|upcase }}</span>
@@ -41,12 +40,6 @@ Want to write a post? See the submission [guidelines](/en/blog/write-post.html).
          {{ content_without_html | truncatewords: 50}}
         </div>
       {% endif %}
-    </div>
-     <div class="right-col">
-      <div class="blog-img">
-          <img src="{{ post.img }}"/>
-        </div>
-     </div>
   </div>
 {% endfor %}
 </div>

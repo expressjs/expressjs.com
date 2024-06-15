@@ -1262,6 +1262,8 @@ h2 a {
   background-color: #eee;
   display: flex;
   padding: 10px;
+  flex-direction: column;
+  justify-content: space-between;
   box-shadow: 2px 3px #E0E0E0;
   border-radius: 5px;
   border: 1px solid #808080;  
@@ -1278,20 +1280,6 @@ h2 a {
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
-}
-.blog-post .left-col {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-right: 10px;
-}
-.blog-post .right-col {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  max-width: 100%;
-  overflow: hidden;
 }
 .blog-post .blog-details {
   display: flex;
@@ -1323,9 +1311,6 @@ h2 a {
     height: 200px;
     margin: auto;
   }
-  .blog-post .left-col {
-    justify-content: flex-start;
-  }
   .blog-tags {
     margin-bottom: 20px;
   } 
@@ -1350,5 +1335,6 @@ h2 a {
     font-weight: 300;
     margin-top: auto;
     margin-bottom: 10px;
+    max-width: 80%;
   }
 }
