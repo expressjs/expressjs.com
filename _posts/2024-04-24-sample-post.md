@@ -1,21 +1,14 @@
 ---
-layout: blog-posts
 title: "Express And AI: Using LLMs"
-sub_title: "About Express and LLMs"
+sub_title: "Subtitle - About Express and LLMs"
 menu: blog
 date: 24-04-2024
 tags: AI LLMs
 author: "Sam Doe"
 img: "https://loremflickr.com/300/300"
 lang: en
-excerpt_separator: <!--more-->
 
 ---
-
-# {{page.title}}
-
-## {{page.sub_title}}
-#### By {{page.author}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec lorem nisi. Donec pharetra sapien sed bibendum facilisis. Pellentesque pretium elit magna, ac vehicula ipsum elementum sit amet. Vivamus lacinia sollicitudin turpis sed porta. Ut commodo, orci eget congue dictum, sapien est scelerisque ante, vehicula ultricies ipsum justo in quam. Aliquam pretium diam vitae neque eleifend laoreet. Phasellus a ex hendrerit, dapibus justo id, dapibus mi. Phasellus in tempor velit. Sed dapibus sapien auctor massa tincidunt condimentum. Mauris sit amet sodales odio. Donec vel imperdiet dolor. Etiam egestas elit consequat, pharetra elit nec, aliquam nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla congue consequat ex.
 <!--more-->
