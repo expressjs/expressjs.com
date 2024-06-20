@@ -1,17 +1,13 @@
 ---
 title: "Welcome to The Express Blog!" 
-sub_title: ""
 date: 22-05-2024
 tags: site-admin
-img: "/images/blog/music-player-7792956_1280_crop.jpg"
 author: "Rand McKinney and Chris Del"
-lang: en
-excerpt_separator: <!--more-->
 ---
+
 
 The Express blog will be a primary means of communication for the Express technical committee (TC) and in the long run we hope it will become a communication hub for the entire Express community.
 
-<!--more-->
 
 The Express blog will be a venue:
 - For the Express TC to discuss issues of particular importance to the Express community.

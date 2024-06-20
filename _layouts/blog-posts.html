@@ -16,15 +16,22 @@
 
       <div id="overlay"></div>
       <div id="blog-doc" markdown="1">
-        <h1>{{page.title}}</h1>
-        {% if page.sub_title %} <h2>{{page.sub_title}}</h2> {% endif %}
-        <div class="blog-details">
-          <div>By {{page.author}}</div>
-          <div>{{page.date| date: "%d %b %Y" }}</div> 
-        </div>
-
-      {{ content }}
-      </div>  
+        {% if page.path contains '_posts' %}
+          {% if page.title %}
+          <h1>{{page.title}}</h1>
+          {% endif %} 
+          {% if page.sub_title %}
+          <h2>{{page.sub_title}}</h2>
+          {% endif %}
+          <div class="blog-details">
+            {% if page.author %}
+            <div>By {{page.author}}</div>
+            {% endif %}
+            <div>{{page.date| date: "%d %b %Y" }}</div>
+          </div>
+        {% endif %}
+        {{ content }}
+      </div>
     </section>
 
     {% include footer/footer-{{ page.lang }}.html %}

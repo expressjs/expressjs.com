@@ -7,6 +7,8 @@ defaults:
       type: "posts"
     values:
       layout: "blog-posts"
+      menu: blog
+      lang: en
 
 # Build settings
 markdown: kramdown
