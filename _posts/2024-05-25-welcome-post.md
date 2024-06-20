@@ -1,8 +1,8 @@
 ---
-title: "Welcome to The Express Blog!" 
+title: Welcome to The Express Blog! 
 date: 22-05-2024
 tags: site-admin
-author: "Rand McKinney and Chris Del"
+author: Rand McKinney and Chris Del
 ---
 
 
