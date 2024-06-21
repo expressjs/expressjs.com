@@ -1,37 +1,36 @@
 ---
 layout: page
-title: Express basic routing
+title: Dasar routing Express
 menu: starter
-lang: en
-redirect_from: "/starter/basic-routing.html"
+lang: id
 ---
 
-# Basic routing
+# Dasar _routing_
 
-_Routing_ refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, and so on).
+_Routing_ mengacu pada cara menentukan bagaimana aplikasi merespons permintaan klien ke titik akhir (_endpoint_) tertentu, yang merupakan URI (atau jalur) dan mengirimkan metode permintaan HTTP tertentu (GET, POST, dan seterusnya).
 
-Each route can have one or more handler functions, which are executed when the route is matched.
+Setiap rute dapat memiliki satu atau lebih fungsi pengendali, yang dijalankan ketika rute yang dipanggil tersebut cocok.
 
-Route definition takes the following structure:
+Definisi rute tersebut mengambil struktur sebagai berikut:
 
 ```js
 app.METHOD(PATH, HANDLER)
 ```
 
-Where:
+Dimana:
 
-- `app` is an instance of `express`.
-- `METHOD` is an [HTTP request method](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), in lowercase.
-- `PATH` is a path on the server.
-- `HANDLER` is the function executed when the route is matched.
+- `app` adalah sebuah _class_ dari `express`.
+- `METHOD` adalah sebuah [Metode _HTTP request_](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), dalam huruf kecil.
+- `PATH` adalah _path_ atau jalur yang didefinisikan di server.
+- `HANDLER` adalah _function_ yang dijalankan ketika rute yang dipanggil cocok.
 
 <div class="doc-box doc-notice" markdown="1">
-This tutorial assumes that an instance of `express` named `app` is created and the server is running. If you are not familiar with creating an app and starting it, see the [Hello world example](/{{ page.lang }}/starter/hello-world.html).
+Pada tutorial ini mengasumsikan bahwa <em>class</em> dari `express` bernama `app` telah dibuat dan server sedang berjalan. Jika Anda belum terbiasa dalam membuat sebuah aplikasi dan memulainya, Anda dapat melihat [Contoh hello world](/{{ page.lang }}/starter/hello-world.html).
 </div>
 
-The following examples illustrate defining simple routes.
+Contoh berikut ini akan mengilustrasikan cara pendefinisian rute secara sederhana.
 
-Respond with `Hello World!` on the homepage:
+Respons dengan `Hello World!` di halaman _home_:
 
 ```js
 app.get('/', (req, res) => {
@@ -39,7 +38,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-Respond to POST request on the root route (`/`), the application's home page:
+Respons dengan metode _request_ POST pada rute _root_ (`/`), halaman _home_ aplikasi:
 
 ```js
 app.post('/', (req, res) => {
@@ -47,7 +46,7 @@ app.post('/', (req, res) => {
 })
 ```
 
-Respond to a PUT request to the `/user` route:
+Respons dengan metode _request_ PUT pada rute `/user`:
 
 ```js
 app.put('/user', (req, res) => {
@@ -55,7 +54,7 @@ app.put('/user', (req, res) => {
 })
 ```
 
-Respond to a DELETE request to the `/user` route:
+Respons dengan metode _request_ DELETE pada rute `/user`:
 
 ```js
 app.delete('/user', (req, res) => {
@@ -63,6 +62,6 @@ app.delete('/user', (req, res) => {
 })
 ```
 
-For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).
+Untuk detail lebih lanjut tentang perutean, Anda dapat melihat [panduan _routing_](/{{ page.lang }}/guide/routing.html).
 
 ###  [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)

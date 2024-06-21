@@ -2,8 +2,7 @@
 layout: page
 title: Security Best Practices for Express in Production
 menu: advanced
-lang: en
-redirect_from: "/advanced/best-practice-security.html"
+lang: id
 ---
 
 # Production Best Practices: Security

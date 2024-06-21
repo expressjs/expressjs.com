@@ -2,8 +2,7 @@
 layout: middleware
 title: Express middleware
 menu: resources
-lang: en
-redirect_from: "/resources/middleware.html"
+lang: id
 module: mw-home
 ---
 

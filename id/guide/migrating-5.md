@@ -2,8 +2,7 @@
 layout: page
 title: Migrating to Express 5
 menu: guide
-lang: en
-redirect_from: "/guide/migrating-5.html"
+lang: id
 ---
 # Moving to Express 5
 

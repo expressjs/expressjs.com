@@ -1,15 +1,14 @@
 ---
 layout: page
-title: Express "Hello World" example
+title: Contoh Express "Hello World"
 menu: starter
-lang: en
-redirect_from: "/starter/hello-world.html"
+lang: id
 ---
 
-# Hello world example
+# Contoh hello world
 
 <div class="doc-box doc-info" markdown="1">
-Embedded below is essentially the simplest Express app you can create. It is a single file app &mdash; _not_ what you'd get if you use the [Express generator](/{{ page.lang }}/starter/generator.html), which creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and sub-directories for various purposes.
+Contoh di bawah ini pada dasarnya adalah aplikasi Express paling sederhana yang dapat Anda buat. Ini adalah aplikasi file tunggal &mdash; _bukan_ apa yang akan Anda dapatkan jika menggunakan [Generator Express](/{{ page.lang }}/starter/generator.html), yang membuat struktur untuk aplikasi lengkap dengan banyak file JavaScript, dengan templat Jade, dan sub- direktori untuk berbagai tujuan.
 </div>
 
 <script src="https://embed.runkit.com" data-element-id="hello-example" data-mode="endpoint" async defer></script>
@@ -27,33 +26,33 @@ app.listen(port, () => {
 })
 </code></pre></div>
 
-This app starts a server and listens on port 3000 for connections. The app responds with "Hello World!" for requests
-to the root URL (`/`) or _route_. For every other path, it will respond with a **404 Not Found**.
+Aplikasi ini memulai server dan mendengarkan koneksi pada _port_ 3000. Aplikasi merespon dengan "Hello World!" untuk _request_
+ke URL _root_ (`/`) atau _route_. Untuk setiap jalur lainnya, ia akan merespons dengan **404 Not Found**.
 
-The example above is actually a working server: Go ahead and click on the URL shown. You'll get a response, with real-time logs on the page, and any changes you make will be reflected in real time. This is powered by [RunKit](https://runkit.com), which provides an interactive JavaScript playground connected to a complete Node environment that runs in your web browser.
-Below are instructions for running the same app on your local machine.
+Contoh di atas sebenarnya adalah server yang berfungsi: Silakan klik URL yang ditampilkan. Anda akan mendapat respons, dengan log real-time di halaman, dan perubahan apa pun yang Anda buat akan terlihat secara real-time. Hal ini didukung oleh [RunKit](https://runkit.com), yang menyediakan _playground_ untuk JavaScript secara interaktif yang terhubung ke lingkungan Node secara lengkap yang berjalan di browser web Anda.
+Di bawah ini adalah petunjuk untuk menjalankan aplikasi yang sama di komputer lokal Anda.
 
 <div class="doc-box doc-info" markdown="1">
-RunKit is a third-party service not affiliated with the Express project.
+RunKit adalah layanan pihak ketiga yang tidak berafiliasi dengan proyek Express.
 </div>
 
-### Running Locally
+### Berjalan secara Lokal
 
-First create a directory named `myapp`, change to it and run `npm init`. Then, install `express` as a dependency, as per the [installation guide](/{{ page.lang }}/starter/installing.html).
+Pertama buat direktori bernama `myapp`, masuk ke direktori tersebut dan jalankan `npm init`. Kemudian, instal `express` sebagai dependensi, sesuai dengan [panduan instalasi](/{{ page.lang }}/starter/installing.html).
 
-In the `myapp` directory, create a file named `app.js` and copy the code from the example above.
+Di direktori `myapp`, buat file bernama `app.js` dan salin kode dari contoh di atas.
 
 <div class="doc-box doc-notice" markdown="1">
-The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can invoke
-`req.pipe()`, `req.on('data', callback)`, and anything else you would do without Express involved.
+`req` (<em>request</em>) dan `res` (<em>response</em>) adalah <em>objects</em> yang sama persis dengan yang disediakan Node, sehingga Anda dapat memanggilnya
+`req.pipe()`, `req.on('data', callback)`, dan apa pun yang akan Anda lakukan tanpa melibatkan Express.
 </div>
 
-Run the app with the following command:
+Jalankan aplikasi dengan perintah berikut:
 
 ```console
 $ node app.js
 ```
 
-Then, load `http://localhost:3000/` in a browser to see the output.
+Kemudian, kunjungi `http://localhost:3000/` di browser untuk melihat hasilnya.
 
 ###  [Previous: Installing ](/{{ page.lang }}/starter/installing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Express Generator ](/{{ page.lang }}/starter/generator.html)

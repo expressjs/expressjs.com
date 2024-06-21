@@ -2,8 +2,7 @@
 layout: page
 title: Express routing
 menu: guide
-lang: en
-redirect_from: "/guide/routing.html"
+lang: id
 ---
 
 # Routing

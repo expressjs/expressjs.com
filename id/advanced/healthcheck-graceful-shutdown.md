@@ -2,8 +2,7 @@
 layout: page
 title: Health Checks and Graceful Shutdown
 menu: advanced
-lang: en
-redirect_from: "/advanced/healthcheck-graceful-shutdown.html"
+lang: id
 ---
 
 # Health Checks and Graceful Shutdown

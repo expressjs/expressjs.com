@@ -2,8 +2,7 @@
 layout: page
 title: Express utilities
 menu: resources
-lang: en
-redirect_from: "/resources/utilities.html"
+lang: id
 ---
 
 ## Express utility functions

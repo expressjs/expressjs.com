@@ -1,16 +1,15 @@
 ---
 layout: 3x-api
-title: Express 3.x - API Reference
+title: Express 3.x - Referensi API
 menu: api
-lang: en
-redirect_from: "/3x/api.html"
+lang: id
 ---
 <div id="api-doc" markdown="1">
 
   <div class="doc-box doc-warn" markdown="1">
-  **Express 3.x IS NO LONGER MAINTAINED**
+  **Express 3.x TIDAK ADA LAGI PEMELIHARAAN**
 
-  Known and unknown security and performance issues in 3.x have not been addressed since the last update (1 August, 2015). It is highly recommended to use the latest version of Express.
+  Masalah keamanan dan kinerja yang diketahui dan tidak diketahui di versi 3.x belum diatasi sejak pembaruan terakhir (1 Agustus 2015). Sangat disarankan untuk menggunakan Express versi terbaru.
   </div>
 
   <h1>3.x API</h1>

@@ -2,97 +2,91 @@
 layout: page
 title: Express FAQ
 menu: starter
-lang: en
-redirect_from: "/starter/faq.html"
+lang: id
 ---
 
 # FAQ
 
-## How should I structure my application?
+## Bagaimana sebaiknya struktur aplikasi saya?
 
-There is no definitive answer to this question. The answer depends
-on the scale of your application and the team that is involved. To be as
-flexible as possible, Express makes no assumptions in terms of structure.
+Tidak ada jawaban pasti untuk pertanyaan ini. Jawabannya tergantung
+pada skala aplikasi Anda dan tim yang terlibat. Sefleksibel mungkin, sehingga Express tidak membuat asumsi dalam hal struktur.
 
-Routes and other application-specific logic can live in as many files
-as you wish, in any directory structure you prefer. View the following
-examples for inspiration:
+Kumpulan rute dan logika khusus lainnya di dalam aplikasi dapat berada di
+banyak file sesuai keinginan Anda, dalam struktur direktori apa pun yang Anda
+inginkan. Lihat contoh berikut ini sebagai inspirasi:
 
 * [Route listings](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-L47)
 * [Route map](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
 * [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
 
-Also, there are third-party extensions for Express, which simplify some of these patterns:
+Selain itu, ada ekstensi (_extension_) dari pihak ketiga untuk Express, yang menyederhanakan beberapa pola berikut:
 
 * [Resourceful routing](https://github.com/expressjs/express-resource)
 
-## How do I define models?
+## Bagaimana cara mendefinisikan model?
 
-Express has no notion of a database. This concept is
-left up to third-party Node modules, allowing you to
-interface with nearly any database.
+Express tidak memiliki gagasan tentang database. Jadi, konsep ini
+diserahkan kepada modul Node dari pihak ketiga, memungkinkan Anda
+melakukannya secara antarmuka dengan hampir semua database.
 
-See [LoopBack](http://loopback.io) for an Express-based framework that is centered around models.
+Lihat [LoopBack](http://loopback.io) untuk kerangka kerja berbasis
+Express yang berpusat pada model.
 
-## How can I authenticate users?
+## Bagaimana cara mengautentikasi pengguna?
 
-Authentication is another opinionated area that Express does not
-venture into. You may use any authentication scheme you wish.
-For a simple username / password scheme, see [this example](https://github.com/expressjs/express/tree/master/examples/auth).
+Otentikasi adalah area yang beropini (_opinionated area_) lainnya yang
+tidak dimasuki oleh Express. Sehingga Anda dapat menggunakan skema otentikasi apa pun yang Anda inginkan. Untuk skema _username/password_
+sederhana, Anda dapat melihat [contoh ini](https://github.com/expressjs/express/tree/master/examples/auth).
 
+## _Template engines_ mana saja yang mendukung Express?
 
-## Which template engines does Express support?
-
-Express supports any template engine that conforms with the `(path, locals, callback)` signature.
-To normalize template engine interfaces and caching, see the
+Express mendukung _template engine_ apa pun yang sesuai dengan _signature_ `(path, locals, callback)`.
+Untuk menormalkan antarmuka mesin _template engine_ dan _caching_, lihat
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
-project for support. Unlisted template engines might still support the Express signature.
+daftar _template engine_ yang mendukung express. _Template engine_ yang tidak terdaftar mungkin masih mendukung _signature_ dari Express.
 
-For more information, see [Using template engines with Express](/{{page.lang}}/guide/using-template-engines.html).
+Untuk informasi lebih lanjut, lihat [Penggunaan _template engine_ dengan Express](/{{page.lang}}/guide/using-template-engines.html).
 
-## How do I handle 404 responses?
+## Bagaimana cara menangani respon 404?
 
-In Express, 404 responses are not the result of an error, so
-the error-handler middleware will not capture them. This behavior is
-because a 404 response simply indicates the absence of additional work to do;
-in other words, Express has executed all middleware functions and routes,
-and found that none of them responded. All you need to
-do is add a middleware function at the very bottom of the stack (below all other functions)
-to handle a 404 response:
+Di Express, respon 404 bukanlah hasil dari sebuah _error_, jadi
+_error-handler middleware_ tidak akan menangkapnya. Perilaku ini terjadi
+karena respon 404 hanya menunjukkan tidak adanya pekerjaan tambahan yang harus dilakukan;
+dengan kata lain, Express telah menjalankan semua fungsi dan rute dari _middleware_ yang ada,
+kemudian menemukan bahwa tidak ada satupun dari mereka yang merespons. Jadi, yang Anda perlukan lakukan adalah menambahkan fungsi middleware di bagian paling bawah dari _stack_ yang ada (di bawah semua fungsi lainnya).
+Oleh karena itu, untuk menangani respon 404 secara sederhana adalah sebagai berikut:
 
 ```js
 app.use((req, res, next) => {
-  res.status(404).send("Sorry can't find that!")
+  res.status(404).send("Maaf data tidak dapat ditemukan!")
 })
 ```
 
-Add routes dynamically at runtime on an instance of `express.Router()`
-so the routes are not superseded by a middleware function.
+Tambahkan rute secara dinamis saat runtime pada _class_ (_instance_) `express.Router()` sehingga rute tidak digantikan oleh fungsi middleware.
 
-## How do I setup an error handler?
+## Bagaimana cara membuat _error handler_?
 
-You define error-handling middleware in the same way as other middleware,
-except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
+Anda dapat mendefinisikan _error-handler middleware_ dengan cara yang sama seperti _middleware_ lainnya, kecuali dengan empat argumen, bukan tiga; secara khusus dengan _signature_ `(err, req, res, next)`:
 
 ```js
 app.use((err, req, res, next) => {
   console.error(err.stack)
-  res.status(500).send('Something broke!')
+  res.status(500).send('Ada yang salah!')
 })
 ```
 
-For more information, see [Error handling](/{{ page.lang }}/guide/error-handling.html).
+Untuk informasi selengkapnya, lihat [Penanganan _Error_](/{{ page.lang }}/guide/error-handling.html).
 
-## How do I render plain HTML?
+## Bagaimana cara merender HTML biasa?
 
-You don't! There's no need to "render" HTML with the `res.render()` function.
-If you have a specific file, use the `res.sendFile()` function.
-If you are serving many assets from a directory, use the `express.static()`
-middleware function.
+Jangan lakukan! Tidak perlu "merender" HTML dengan fungsi `res.render()`.
+Jika Anda memiliki file tertentu, gunakan fungsi `res.sendFile()`.
+Jika Anda menyajikan banyak aset dari sebuah direktori, gunakan fungsi middleware `express.static()`.
 
-## What version of Node.js does Express require?
+## Versi Node.js apa yang dibutuhkan Express?
 
-* [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
-* [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
+* [Express versi 4.x](/{{ page.lang }}/4x/api.html) memerlukan Node.js versi 0.10 atau yang lebih tinggi.
+* [Express versi 5.x](/{{ page.lang }}/5x/api.html) memerlukan Node.js versi 18 atau yang lebih tinggi.
 
 ###  [Previous: More examples ](/{{ page.lang }}/starter/examples.html)

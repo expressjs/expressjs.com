@@ -2,8 +2,7 @@
 layout: page
 title: Express community
 menu: resources
-lang: en
-redirect_from: "/resources/community.html"
+lang: id
 ---
 
 # Community

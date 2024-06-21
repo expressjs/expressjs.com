@@ -2,8 +2,7 @@
 layout: page
 title: Express security updates
 menu: advanced
-lang: en
-redirect_from: "/advanced/security-updates.html"
+lang: id
 ---
 # Security updates
 

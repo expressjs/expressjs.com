@@ -2,8 +2,7 @@
 layout: page
 title: Developing template engines for Express
 menu: advanced
-lang: en
-redirect_from: "/advanced/developing-template-engines.html"
+lang: id
 ---
 
 # Developing template engines for Express
