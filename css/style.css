@@ -1267,7 +1267,7 @@ h2 a {
   box-shadow: 2px 3px #E0E0E0;
   border-radius: 5px;
   border: 1px solid #808080;  
-  transition: 0.3s;
+  transition: 0.1s;
 }
 .blog-post:hover {
   background-color: #D3D3D3;
