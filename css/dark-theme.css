@@ -22,6 +22,14 @@
 #theme-icon-container .hidden-light {
   display: none;
 }
+.sun-icon {
+  background-image: url(/images/sun-icon.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 27px;
+  height: 27px;
+  cursor: pointer;
+}
 #theme-icon-container .hidden-dark {
   display: block;
 }
