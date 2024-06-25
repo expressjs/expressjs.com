@@ -1,8 +1,8 @@
 <ul>
   <li>
-    <p class="announcement-title">Express 5.0 beta documentation is now available.</p>
+    <p class="announcement-title">Dokumentasi Express 5.0 versi beta kini telah tersedia.</p>
     <p markdown="1">
-     The beta <a href="{{ page.lang }}/5x/api.html">API documentation</a> is a work in progress.  For information on what's in the release, see the Express <a href="https://github.com/expressjs/express/blob/5.0/History.md">release history</a>.
+     <a href="{{ page.lang }}/5x/api.html">Dokumentasi API</a> beta masih dalam proses. Untuk informasi tentang apa yang ada dalam rilis, lihat <a href="https://github.com/expressjs/express/blob/5.0/History.md">riwayat rilis</a> Express.
     </p>
   </li>
 </ul>
