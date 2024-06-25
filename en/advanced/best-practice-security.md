@@ -253,7 +253,7 @@ Here are some further recommendations from the excellent [Node.js Security Check
 * Always filter and sanitize user input to protect against cross-site scripting (XSS) and command injection attacks.
 * Defend against SQL injection attacks by using parameterized queries or prepared statements.
 * Use the open-source [sqlmap](http://sqlmap.org/) tool to detect SQL injection vulnerabilities in your app.
-* Use the [nmap](https://nmap.org/) and [sslyze](https://github.com/nabla-c0d3/sslyze) tools to test the configuration of your SSL ciphers, keys, and renegotiation as well as the validity of your certificate.
+* Use the [nmap](https://nmap.org/), [sslyze](https://github.com/nabla-c0d3/sslyze) and [TLS Cipher Suite](https://stellastra.com/cipher-suite) tools to test the configuration of your SSL ciphers, keys, and renegotiation as well as the validity of your certificate.
 * Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
 
 [helmet]: https://helmetjs.github.io/
