@@ -59,7 +59,7 @@ Oleh karena itu, untuk menangani respon 404 secara sederhana adalah sebagai beri
 
 ```js
 app.use((req, res, next) => {
-  res.status(404).send("Maaf data tidak dapat ditemukan!")
+  res.status(404).send('Maaf data tidak dapat ditemukan!')
 })
 ```
 
