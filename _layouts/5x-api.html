@@ -13,15 +13,18 @@
 
       {% include header/header-{{ page.lang }}.html %}
 
-      {% include api/en/5x/menu.md %}
-
       <div id="overlay"></div>
 
-      {{ content }}
+      <div class="container-api">
+        {% include api/en/5x/menu.md %} 
+        {{ content }}
+      </div>
 
     </section>
 
-    {% include footer/footer-{{ page.lang }}.html %}
+    <div>
+      {% include footer/footer-{{ page.lang }}.html %}
+    </div>
 
   </body>
 

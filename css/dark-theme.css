@@ -1,6 +1,6 @@
 :root {
-  --main_dark_bg: #010409;
-  --second_dark_bg: #0d1117;
+  --main_dark_bg: rgba(0, 0, 0, .8);
+  --second_dark_bg: #111111;
   --dark_hover: #383838;
   --second_dark_hover: #484848;
   --dark_text: #e6edf3;
@@ -13,27 +13,60 @@
   float: right;
   color: white;
   min-width: 50px;
-  color: black;
+  color: #333;
+  text-align: center;
 }
+
+#theme-icon-container i {
+  cursor: pointer;
+  line-height: 30px;
+}
+
+#theme-icon-container .hidden-light {
+  display: none;
+}
+
+#theme-icon-container .hidden-dark {
+  display: block;
+}
+
+html.dark-mode #theme-icon-container .hidden-light {
+  display: block;
+}
+
+html.dark-mode #theme-icon-container .hidden-dark {
+  display: none;
+}
+
+html.dark-mode > body {
+  background: #000;
+  color: var(--dark_text);
+}
+
 html.dark-mode #theme-icon-container {
   color: var(--dark_text);
   background-color: var(--second_dark_bg);
 }
-html.dark-mode > body {
-  background: var(--main_dark_bg);
-  color: var(--dark_text);
-}
+
 html.dark-mode header {
   background-color: var(--second_dark_bg);
   color: var(--dark_text);
+  border-bottom: 1px solid #626262;
 }
-html.dark-mode #logo > a {
+
+html.dark-mode pre,
+html.dark-mode .input-search {
+  border-color: var(--dark_text-gray);
+}
+
+html.dark-mode #logo > a,
+html.dark-mode #navbar li a:hover {
   color: var(--dark_text);
 }
 /* navbar links/drop down menu links */
 html.dark-mode #navbar ul#navmenu li a,
 html.dark-mode #navbar ul#navmenu li.dropit-trigger a {
-  color: var(--dark_text);
+  color: #b6b6b6;
 }
 /* first drop down link - some js is adding current class */
 html.dark-mode #navbar ul#navmenu li a.current {
@@ -44,11 +77,17 @@ html.dark-mode #navbar ul#navmenu li a.current:hover {
 }
 html.dark-mode .menu ul.dropit-submenu {
   background: var(--dark_bg);
+  border: 1px solid var(--dark_text-gray);
 }
 /* drop down menu links  */
 html.dark-mode #navbar .menu ul.dropit-submenu a:hover {
   background: var(--dark_hover);
 }
+
+html.dark-mode #navbar a.active {
+  color: var(--dark_text) !important;
+}
+
 html.dark-mode #navbar #navmenu li {
   background: var(--second_dark_bg);
 }
@@ -89,6 +128,11 @@ html.dark-mode #navbar ul#navmenu > span.algolia-autocomplete > input::placehold
 html.dark-mode div#overlay {
   opacity: 0.5;
 }
+
+body.dark-mode .icon-top-footer {
+  background: var(--dark_text-gray);
+}
+
 @media (max-width: 899px) {
   #theme-icon-container {
     bottom: 35px;
@@ -124,14 +168,19 @@ html.dark-mode pre {
   background: var(--second_dark_bg);
 }
 /* index.html */
-html.dark-mode #description .express > a {
+html.dark-mode #description .express > a,
+html.dark-mode #description .express {
   color: var(--dark_text);
 }
+
+
 html.dark-mode #install-command {
-  background: var(--main_dark_bg);
+  background: var(--second_dark_bg);
+  border-color: var(--dark_text-gray);
 }
 html.dark-mode #announcements {
-  background: var(--main_dark_bg);
+  background: var(--second_dark_bg);
+  border-color: var(--dark_text-gray);
 }
 html.dark-mode #boxes div > h3 {
   color: var(--dark_text);

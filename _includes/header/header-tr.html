@@ -1,4 +1,5 @@
 <header>
+  <div class="container">
   <div style="text-align: center; background: #010101; color: #f1f1f1; padding: 16px; font-size: 16px; width: 100vw">
     Black Lives Matter. <a style="color: #5E80F7; text-decoration: none;" href="https://support.eji.org/give/153413/#!/donation/checkout">Support the Equal Justice Initiative</a>.
   </div>
@@ -8,7 +9,7 @@
   <section id="logo"><a href="/" class="express">Express</a>
   </section>
   <div id="navbar">
-      <input id="q" placeholder="🔎 search" />
+      
       <ul id="navmenu">
           <li><a href="/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Anasayfa</a></li>
           <li>
@@ -146,8 +147,11 @@
           </li>
         -->
       </ul>
-      <div id="theme-icon-container"  class="theme-toggle default-theme" title="toggle darkmode">
-        <i class="fa fa-moon-o fa-2x"></i>
-      </div> 
+      <input id="q" class="input-search" placeholder="Search ...">
+      <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
+        <i class="fa fa-moon-o fa-lg hidden-dark"></i>
+        <i class="fa fa-sun-o fa-lg hidden-light"></i>
+      </div>  
+  </div>
   </div>
 </header>

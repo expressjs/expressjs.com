@@ -25,6 +25,31 @@ h1 {
   line-height: 36px;
 }
 
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.container-api {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 5%;
+  overflow: auto;
+}
+
+.input-search {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding-left: 8px !important;
+}
+
+.input-search:focus-visible,
+.input-search:focus {
+  border-color: #333 !important;
+}
+
 #intro h3, #api-doc h1 {
   font-weight: normal;
 }
@@ -137,9 +162,9 @@ strong, th {
 }
 
 .content {
-  margin: 153px 3% 7%;
   max-width: 1090px;
-  padding-left: 225px;
+  margin: auto;
+  margin-top: 120px;
 }
 
 span.block-section {
@@ -153,6 +178,11 @@ li code {
 #intro h3 {
   font-size: 25px;
   margin-bottom: 10px;
+}
+
+#api-doc {
+  width: 80%;
+  float: right;
 }
 
 #api-doc section {
@@ -234,13 +264,13 @@ a {
   display: block;
   font: 25px "Helvetica Neue", "Open Sans", sans-serif;
   font-weight: 100;
-  color: #444;
+  color: #0d0d0d;
 }
 
 #description .express {
   display: block;
-  font: 4.5em "Helvetica Neue", "Open Sans", sans-serif;
-  font-weight: 100;
+  font: 5em "Helvetica Neue", "Open Sans", sans-serif;
+  font-weight: 200;
   margin-bottom: .25em;
 }
 
@@ -621,6 +651,8 @@ footer {
   margin: 60px 10px 30px 10px;
   padding-left: 5%;
   max-width: 1090px;
+  margin: auto;
+  margin-top: 20px;
 }
 
 #footer-content {
@@ -723,6 +755,7 @@ footer {
   border: 1px solid #b2b2b2;
   margin: 0 0 0 1px;
   box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+  border-radius: 5px;
 }
 
 .menu ul.dropit-submenu a {
@@ -740,12 +773,12 @@ footer {
 /* secondary menu */
 
 #menu {
-  position: fixed;
+  width: 20%;
+  float: left;
   margin: 0;
   padding: 0 10px 0 0;
   top: 153px;
   left: 30px;
-  height: 500px;
   text-align: left;
   font-size: 13px;
   overflow-y: auto;

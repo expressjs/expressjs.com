@@ -1,11 +1,12 @@
 <header>
+  <div class="container">
   <div id="mobile-menu">
       <div id="nav-button" class="fa fa-bars fa-2x button"></div>
   </div>
   <section id="logo"><a href="/" class="express">Express</a>
   </section>
   <div id="navbar">
-      <input id="q" placeholder="🔎 search">
+      
       <ul id="navmenu">
           <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Página Inicial</a></li>
           <li>
@@ -120,8 +121,11 @@
               </ul>
           </li>
       </ul>
-      <div id="theme-icon-container"  class="theme-toggle default-theme" title="toggle darkmode">
-        <i class="fa fa-moon-o fa-2x"></i>
+      <input id="q" class="input-search" placeholder="Search ...">
+      <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
+        <i class="fa fa-moon-o fa-lg hidden-dark"></i>
+        <i class="fa fa-sun-o fa-lg hidden-light"></i>
       </div> 
+  </div>
   </div>
 </header>
