@@ -801,6 +801,7 @@ h2 a {
 .algolia-autocomplete {
   min-width: 12em;
   top: -0.2em;
+  margin-right: 3px;
 }
 
 .algolia-autocomplete #q {
