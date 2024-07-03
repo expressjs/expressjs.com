@@ -15,6 +15,30 @@
   min-width: 50px;
   color: black;
 }
+#theme-icon-container i {
+  cursor: pointer;
+  line-height: 30px;
+}
+#theme-icon-container .hidden-light {
+  display: none;
+}
+.sun-icon {
+  background-image: url(/images/sun-icon.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 27px;
+  height: 27px;
+  cursor: pointer;
+}
+#theme-icon-container .hidden-dark {
+  display: block;
+}
+html.dark-mode #theme-icon-container .hidden-light {
+  display: block;
+}
+html.dark-mode #theme-icon-container .hidden-dark {
+  display: none;
+}
 html.dark-mode #theme-icon-container {
   color: var(--dark_text);
   background-color: var(--second_dark_bg);
