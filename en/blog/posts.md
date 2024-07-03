@@ -1,5 +1,5 @@
 ---
-layout: blog-posts
+layout: post
 title: Express Blog Posts
 menu: blog
 lang: en

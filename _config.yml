@@ -6,7 +6,7 @@ defaults:
       path: "_posts" 
       type: "posts"
     values:
-      layout: "blog-posts"
+      layout: "post"
       menu: blog
       lang: en
 

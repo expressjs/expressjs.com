@@ -1305,6 +1305,15 @@ h2 a {
   max-width: 100%;
   margin: auto;
 }
+.blog-author {
+  font-style: italic;
+}
+
+.blog-date {
+  font-weight: bold;
+  font-size: 85%;
+}
+
 /* blog tablet and up*/
 @media (min-width:768px) {
   .blog-post {

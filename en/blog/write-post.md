@@ -1,30 +1,30 @@
 ---
-layout: blog-posts
-title: Write a Blog Post
+layout: post
+title: How to write a blog post
 menu: blog
 lang: en
 redirect_from: "/blog/write.html"
 ---
-  
-# Write A Blog Post
-  
-## Have an idea for a blog post? Write a post and make a PR.
 
-Follow the guildlines below to create a new blog post.
+![Blogger]({{site.url}}/images/blogger.jpg){: style="width: 200px; float: right; margin-left: 15px;"}
 
-1. ### Propose your Post
-Before taking the time to write a post, please confirm that we will be able to publish it. We're looking for topics related very specifically to Express, and so we want to pre-approve all posts. For the moment, this means we aren't excepting any unsolicited posts. 
-  -  If you have an idea, please ask for approval first by opening an [issue](https://github.com/expressjs/expressjs.com/issues) entitled  `Blog Post Idea <your idea>`.
+If you have an idea for a blog post, follow these steps to propose it and potentially get it published!
 
-1. ### Fork the Repository 
-Fork the [expressJS.com](https://github.com/expressjs/expressjs.com) repo and clone it to your local machine. You don't need to get it runnning locally as you'll be able to preview your post on Github. See point 6 below.
-  - OPTIONAL: If you want to run a local installation, find the setup instructions [here](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#expressjscom)
+1. ### Propose your post
+Before taking the time to write a post, please confirm that we will be able to publish it. We're looking for topics specifically related to Express, and so we want to pre-approve all posts. For the moment, this means we aren't accepting any unsolicited posts. To propose a blog post, [open an issue](https://github.com/expressjs/expressjs.com/issues) entitled  `Blog post proposal: <your idea>`.
 
-1. ### Create a new file in the `_posts` directory
-Open the files. Inside the `expressjs.com` directory, name your file using following the format: `YYYY-MM-DD-title.md`.
 
-1. ### Adding the Required Front Matter
-    Copy the following front matter, including the dotted lines, and paste it at the top of file you just created in the previous step. Fill in with your own values.
+1. ### Fork the repository 
+If the Express TC accepts your proposal, start to write your post by forking the [expressjs.com](https://github.com/expressjs/expressjs.com) repository and cloning it to your local machine. Once you open a pull request, you'll be able to preview your post on GitHub. See step six below.
+
+	Optional: To run the site locally and preview your post before opening a PR, see the [setup instructions in the README](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#expressjscom).
+	{: .doc-box .doc-info}
+
+1. ### Create a new file
+Create a new file in the `_posts` directory named using following the format: `YYYY-MM-DD-title.md`.
+
+1. ### Add the required front matter
+    Copy the following front matter, including the dotted lines, and paste it at the top of file you just created. Replace the placeholder values with as desired.
 
     ```yaml
     ---
@@ -35,27 +35,11 @@ Open the files. Inside the `expressjs.com` directory, name your file using follo
     author: <your-name>
     ---
     ```
-2. ### Add your Content
-    Finally, start writing your content. 
-    
-     Add your text content below the front matter. Make sure to fill in your own values.
-    ```markdown
-    ---
-    title: My Random Title 
-    sub_title: Showing how to post 
-    date: 01-01-1900
-    tags: AI Security
-    author: Joseph Schmoe
-    ---
-    Lorem ipsum dolor sit amet ivamus lacinia sollicitudin turpis sed porta. 
-    Ut commodo, orci eget congue dictum
-     
-    Sapien est scelerisque ante, vehicula ultricies ipsum justo in quam. 
-    Aliquam pretium diam vitae neque eleifend laoreet. 
-    ```
+2. ### Add your content
+    Finally, start writing your content below the front matter.  Use standard markdown formatting.
 
-3. ### Make a Pull Request
-   If you do not have the app running locally, this is where you will be able to preview your results.  After you make your PR, there will be a section on the page entitled `Deploy Preview for expressjscom-preview ready!` Click here to see your work.
+1. ### Open a pull request (PR)
+   Once you open a PR, you will be able to preview your results: There will be a section on the page entitled `Deploy Preview for expressjscom-preview ready!` Click the link to see the site rendered from your fork/branch.
    
    You can use this feature over multiple commits to refine your post by making a `draft` pull request. Once it's ready for review, switch it to a formal PR.
 
