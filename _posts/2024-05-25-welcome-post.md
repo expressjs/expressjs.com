@@ -8,7 +8,6 @@ author: Rand McKinney and Chris Del
 
 The Express blog will be a primary means of communication for the Express technical committee (TC) and in the long run we hope it will become a communication hub for the entire Express community.
 
-
 The Express blog will be a venue:
 - For the Express TC to discuss issues of particular importance to the Express community.
 - For periodic information on new releases, pre-releases, plans, and ongoing work on the project.

@@ -16,7 +16,7 @@
 
       <div id="overlay"></div>
       <div id="blog-doc" markdown="1">
-        {% if page.path contains '_posts' %}
+       <!-- { if page.path contains '_posts' %} --> 
           {% if page.title %}
           <h1>{{page.title}}</h1>
           {% endif %} 
@@ -25,11 +25,11 @@
           {% endif %}
           <div class="blog-details">
             {% if page.author %}
-            <div>By {{page.author}}</div>
+            <div class="blog-author">By {{page.author}}</div>
             {% endif %}
-            <div>{{page.date| date: "%d %b %Y" }}</div>
+            <div class="blog-date">{{page.date| date: "%d %b %Y" }}</div>
           </div>
-        {% endif %}
+        <!--  { endif %} -->
         {{ content }}
       </div>
     </section>
