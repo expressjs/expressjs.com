@@ -842,6 +842,7 @@ h2 a {
 .algolia-autocomplete {
   max-width: 9em;
   top: -0.2em;
+  margin-right: 3px;
 }
 
 .algolia-autocomplete #q {
