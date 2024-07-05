@@ -1,7 +1,6 @@
 ---
 title: "Express Optimization"
 sub_title: "Making Express Faster"
-date: 31-05-2020
 tags: optimization
 author: "Jane Doe"
 ---

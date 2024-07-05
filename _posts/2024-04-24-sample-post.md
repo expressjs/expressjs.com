@@ -1,7 +1,6 @@
 ---
 title: "Express And AI: Using LLMs"
 sub_title: "Subtitle - About Express and LLMs"
-date: 24-04-2024
 tags: AI LLMs
 author: "Sam Doe"
 
