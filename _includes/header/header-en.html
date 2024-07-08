@@ -143,11 +143,14 @@
           </li>
           <li>
               <ul id="blog-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/blog/posts.html"{% if page.menu == 'blog' %} class="active"{% endif %}>Blog</a>
+                  <li><a href="{{site.posts.first.url}}"{% if page.menu == 'blog' %} class="active"{% endif %}>Blog</a>
                       <ul>
                           <li>
-                            <a href="{{site.url}}/{{site.posts[0].url}}">Posts</a> 
+                            <a href="{{site.posts.first.url}}">Latest post</a> 
                           </li>
+                          <li>
+                            <a href="/{{ page.lang }}/blog/posts.html">All posts</a> 
+                          </li>                          
                           <li>
                             <a href="/{{ page.lang }}/blog/write-post.html">Write a Post</a>
                           </li>
