@@ -28,8 +28,8 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
 
 <div class="doc-box doc-notice" markdown="1">
 In Express 4, `req.files` is no longer available on the `req` object by default. To access uploaded files
-on the `req.files` object, use multipart-handling middleware like [busboy](https://www.npmjs.
-com/package/busboy), [multer](https://www.npmjs.com/package/multer),
+on the `req.files` object, use multipart-handling middleware like
+[busboy](https://www.npmjs.com/package/busboy), [multer](https://www.npmjs.com/package/multer),
 [formidable](https://www.npmjs.com/package/formidable),
 [multiparty](https://www.npmjs.com/package/multiparty),
 [connect-multiparty](https://www.npmjs.com/package/connect-multiparty),
