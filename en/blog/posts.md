@@ -5,12 +5,12 @@ menu: blog
 lang: en
 redirect_from: "/blog/posts.html"
 ---
-
+ 
 Want to write a post? See the submission [guidelines](/en/blog/write-post.html).
 {% if site.posts.size !=  0 %}
 <div class="blog-posts">
 {% for post in site.posts %}
-  <div class="blog-post {% if site.posts.first == post %} active{% endif %}">
+  <div class="blog-post">
       <div class="blog-title">
         <a href="{{ post.url }}"> {{ post.title }}</a>
       </div>
