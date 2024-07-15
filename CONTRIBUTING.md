@@ -16,6 +16,7 @@ The documentation is translated into these languages:
 - Spanish (`es`)
 - French (`fr`)
 - Italian (`it`)
+- Indonesian (`id`)
 - Japanese (`ja`)
 - Korean (`ko`)
 - Brazilian Portuguese (`pt-br`)
