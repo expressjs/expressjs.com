@@ -1358,6 +1358,9 @@ h2 a {
     margin-left: 1rem; 
     font-size: 90%;
   }
+  .blog-post .blog-details div:first-child {
+    margin-right: 20px;
+  }
   .blog-details  {
     font-size: 1rem;
   }
