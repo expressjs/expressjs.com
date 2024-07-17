@@ -798,8 +798,7 @@ footer {
 #menu > li > a,
 #tags-side-menu > li > a,
 #blog-side-menu > li > a {
-  /*color: #353535;
-  font-weight: bold;*/
+  font-weight: bold;
   font-size: 13px;
 }
 
@@ -1247,7 +1246,7 @@ h2 a {
 #mw-list ul li {
  margin-left: -20px;
 }
-
+/* Blog page styles*/
 #blog-doc {
   margin: 0 10px;
 }
@@ -1292,6 +1291,9 @@ h2 a {
   display: flex;
   flex-direction: column;
 }
+.blog-details div:first-child {
+  margin-bottom: 5px;
+}
 .blog-tag {
   font-size: 12px;
 }
@@ -1315,7 +1317,6 @@ h2 a {
 .blog-author {
   font-style: italic;
 }
-
 .blog-date {
   font-weight: bold;
   font-size: 85%;
@@ -1326,7 +1327,8 @@ h2 a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 5px;
+    margin: 0;
+    padding-right: 10px;
   }
   #blog-doc .blog-details + p {
     display: flex;
@@ -1353,9 +1355,8 @@ h2 a {
   .blog-post .blog-details {
     display: flex;
     flex-direction: row;
-  }
-  .blog-details div:first-child {
-    margin-right: 20px;
+    margin-left: 1rem; 
+    font-size: 90%;
   }
   .blog-details  {
     font-size: 1rem;

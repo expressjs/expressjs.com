@@ -6,7 +6,8 @@ lang: en
 redirect_from: "/blog/posts.html"
 ---
  
-Want to write a post? See the submission [guidelines](/en/blog/write-post.html).
+Want to write a post? See the submission [guidelines.](/en/blog/write-post.html)
+
 {% if site.posts.size !=  0 %}
 <div class="blog-posts">
 {% for post in site.posts %}
@@ -14,7 +15,7 @@ Want to write a post? See the submission [guidelines](/en/blog/write-post.html).
       <div class="blog-title">
         <a href="{{ post.url }}"> {{ post.title }}</a>
       </div>
-      <div class="blog-details" style="margin-left: 1rem; font-size: 90%;">
+      <div class="blog-details">
         <div>By {{ post.author }}</div> 
         <div >{{ post.date | date:"%b %d, %Y" }}</div> 
       </div>   
