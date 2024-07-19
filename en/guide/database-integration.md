@@ -22,6 +22,7 @@ Adding the capability to connect databases to Express apps is just a matter of l
 * [SQL Server](#sql-server)
 * [SQLite](#sqlite)
 * [Elasticsearch](#elasticsearch)
+* [DuckDB](#duckdb)
 
 <div class="doc-box doc-notice" markdown="1">
 These database drivers are among many that are available. For other options,
@@ -493,4 +494,33 @@ client.search({
 }, (error) => {
   console.trace(error.message)
 })
+```
+
+## DuckDB
+**Module**: [duckdb]([https://github.com/elastic/elasticsearch-js](https://github.com/duckdb/duckdb))
+
+### Installation
+
+```console
+$ npm install duckdb
+```
+
+### Example
+
+```js
+var express = require('express');
+var router = express.Router();
+const duckdb = require('duckdb');
+
+const db = new duckdb.Database(":memory:"); // or a file name for a persistent DB For ex:C:\\duckdb\\duckdb.db
+
+router.get('/', (req, res, next) => {
+  db.all('SELECT 42 AS fortytwo', (err, rows) => {
+    if (err) {
+      return res.status(500).send({ error: 'Connection error', details: err.message });
+    }
+    res.send({ message: 'connection succesfully', details: rows }); // "fortytwo": 42
+  });
+});
+module.exports = router;
 ```
