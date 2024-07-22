@@ -739,7 +739,9 @@ footer {
 
 /* secondary menu */
 
-#menu {
+#menu,
+#tags-side-menu,
+#blog-side-menu-container {
   position: fixed;
   margin: 0;
   padding: 0 10px 0 0;
@@ -751,7 +753,23 @@ footer {
   overflow-y: auto;
 }
 
-#menu em {
+#blog-side-menu-container {
+  max-width: 210px;
+}
+
+#blog-side-menu-container li {
+  max-width: 100%;
+  margin-bottom: 5px;
+}
+
+#blog-side-menu {
+  list-style: none;
+  padding: 0;
+}
+
+#menu em,
+#tags-side-menu em,
+#blog-side-menu em{
   font-weight: bold;
   color: #888;
 }
@@ -759,29 +777,53 @@ footer {
 #menu li {
   list-style: none;
 }
+#tags-side-menu li {
+  list-style: none;
+  font-size: 15px;
+  font-weight: bold;
+}
 
-#menu ul {
+#menu ul,
+#tags-side-menu ul {
   height: 0;
   overflow: hidden;
 }
 
-#menu ul.active {
+#menu ul.active,
+#tags-side-menu ul.active {
   height: auto;
   padding: 0;
 }
 
-#menu > li > a {
-  color: #353535;
+#menu > li > a,
+#tags-side-menu > li > a,
+#blog-side-menu > li > a {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 13px;
 }
 
-#menu ul a {
+#blog-side-menu > li > a {
+  color: #666
+}
+
+#blog-side-menu-container > h3 > a  {
+  color: #353535
+}
+
+
+
+#menu ul a,
+#tags-side-menu ul a {
   color: #555;
   padding-right: 7px;
 }
+#tags-side-menu ul a{
+  font-size: 13px;
+  font-weight:initial;
+}
 
-#menu ul a.active {
+#menu ul a.active,
+#tags-side-menu ul a.active {
   color: #259dff;
 }
 
@@ -794,18 +836,25 @@ h2 a {
 #q {
   display: none;
   height: 2.5em;
-  min-width: 100%;
+  max-width: 100%;
   padding: 5px;
 }
 
 .algolia-autocomplete {
-  min-width: 12em;
+  max-width: 9em;
   top: -0.2em;
   margin-right: 3px;
 }
 
 .algolia-autocomplete #q {
   display: initial
+}
+/* search-bar desktop re-sizing */
+@media all and (min-width: 950px) {
+  .algolia-autocomplete {
+    margin-right:15px;
+    max-width: 12em;
+  }
 }
 
 /* responsive */
@@ -882,7 +931,9 @@ h2 a {
     font-weight: normal;
   }
 
-  #menu {
+  #menu,
+  #tags-side-menu,
+  #blog-side-menu-container {
     display: none;
   }
 
@@ -1194,4 +1245,131 @@ h2 a {
 
 #mw-list ul li {
  margin-left: -20px;
+}
+/* Blog page styles*/
+#blog-doc {
+  margin: 0 10px;
+}
+#blog-doc:has(> h1#express-blog), 
+#blog-doc:has(> h1#write-a-blog-post) {
+  min-height: 300px;
+}
+#blog-doc .blog-details ~ p > img {
+  width: 200px;
+  float: right;
+}
+#blog-doc p {
+  font-size: 1.1em;
+}
+.blog-posts {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.blog-post {
+  width: 100%;
+  background-color: #eee;
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 2px 3px #E0E0E0;
+  border-radius: 5px;
+  border: 1px solid #808080;  
+  transition: 0.1s;
+}
+.blog-post:hover {
+  background-color: #D3D3D3;
+  border: 1px solid #303030;
+}
+.blog-post img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+.blog-post .blog-details {
+  display: flex;
+  flex-direction: column;
+}
+.blog-details div:first-child {
+  margin-bottom: 5px;
+}
+.blog-tag {
+  font-size: 12px;
+}
+.blog-title {
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  padding-right: .2em;
+}
+.blog-title a {
+  color: #000;
+}
+.blog-excerpt {
+  color: initial;
+  font-size: .75rem;
+}
+.blog-img {
+  max-width: 100%;
+  margin: auto;
+}
+.blog-author {
+  font-style: italic;
+}
+.blog-date {
+  font-weight: bold;
+  font-size: 85%;
+}
+/* mobile-only */
+@media (max-width: 500px) {
+  #blog-doc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding-right: 10px;
+  }
+  #blog-doc .blog-details + p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #blog-doc .blog-details + p > img {
+    margin-bottom: 15px;
+  }
+}
+/* blog tablet and up*/
+@media (min-width: 768px) {
+  .blog-post {
+    margin: auto;
+  }
+  .blog-tags {
+    margin-bottom: 20px;
+  } 
+  .blog-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    line-height: 1.5rem;
+  }
+  .blog-post .blog-details {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1rem; 
+    font-size: 90%;
+  }
+  .blog-post .blog-details div:first-child {
+    margin-right: 20px;
+  }
+  .blog-details  {
+    font-size: 1rem;
+  }
+  .blog-excerpt {
+    line-height: initial;
+    font-size: .85rem;
+    font-weight: 300;
+    margin-top: auto;
+    margin-bottom: 10px;
+    max-width: 80%;
+  }
 }
