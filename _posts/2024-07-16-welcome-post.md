@@ -15,4 +15,8 @@ Eventually, we hope the blog will evolve into a more general communication hub f
 
 Initially, posts will be written by TC members (potentially collaborating others), mainly because we don't have bandwidth to review general posts from the broader community. Eventually, we would love to open up the blog for broader contributions, but for now the focus is on trying to release Express 5.0, and the reality of an open-source project is that everyone has finite time to contribute. 
 
-If you think you have a great idea for a post for future consideration, feel free to pitch the idea! The best approach is to open a new issue, and then after appropriate discussion, open a PR.  We've also written up simple [instructions to create a blog post](/en/blog/write-post.html). 
+Express TC member [Ulises Gascón](https://github.com/UlisesGascon) suggested a number of interesting topics for blog posts in [expressjs.com issue 1500](https://github.com/expressjs/expressjs.com/issues/1500), but there are undoubtedly many others. 
+
+If you have an idea for a post, feel free to pitch the idea! You can add a comment to [expressjs.com issue 1500](https://github.com/expressjs/expressjs.com/issues/1500) or open a new issue, and then after appropriate discussion, open a PR.  We've also written up simple [instructions to create a blog post](/en/blog/write-post.html). 
+
+Happy blogging!
