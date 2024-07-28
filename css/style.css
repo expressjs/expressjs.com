@@ -642,6 +642,7 @@ footer {
 #footer-copyright a {
   width: fit-content;
 }
+
 #footer-copyright img {
   max-width: 125px;
 }
@@ -1108,6 +1109,12 @@ h2 a {
 
   #footer-content {
     flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #footer-copyright > a {
+    width: 100%;
+    display: flex;
     justify-content: center;
   }
 
