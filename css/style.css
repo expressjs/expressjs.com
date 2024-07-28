@@ -628,18 +628,21 @@ footer {
 #footer-content {
   width: 100%;
   justify-content: space-between;
-  align-items: center;
-  gap:12px;
+  gap: 32px;
   display: flex;
 }
 
 #footer-copyright {
   display: flex;
-  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
   gap: 20px;
 }
 
-#footer-copyright img{
+#footer-copyright a {
+  width: fit-content;
+}
+#footer-copyright img {
   max-width: 125px;
 }
 
@@ -648,12 +651,16 @@ footer {
 }
 
 #footer-policy{
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 8px;
+  justify-content: center;
   font-size: 15px;
 }
 
 #footer-links{
   display: flex;
-  align-items: center;
   gap: 20px;
 }
 
