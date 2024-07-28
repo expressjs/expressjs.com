@@ -5,6 +5,16 @@
 
 /* general */
 
+:root {
+  --box-fg: rgb(24, 24, 24);
+  --info-bg: rgb(207, 212, 252);
+  --info-accent: rgb(15, 28, 138);
+  --notice-bg: rgb(252, 234, 197);
+  --notice-accent: rgb(115, 82, 13);
+  --warn-bg: rgb(250, 209, 223);
+  --warn-accent: rgb(138, 15, 58);
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -501,11 +511,10 @@ html[xmlns] .clearfix {
 /* doc boxes */
 
 .doc-box {
-  font-size: 12px;
-  line-height: 14px;
-  padding: 10px;
-  border-radius: 3px;
-  margin: 20px 3% 20px 3%;
+  padding: 16px;
+  color: var(--box-fg);
+  border-radius: 0 6px 6px 0;
+  margin-top: 1rem;
 }
 
 .doc-box pre {
@@ -546,18 +555,46 @@ html[xmlns] .clearfix {
 
 
 .doc-notice {
-  background: #faf6e8;
-  border: 1px solid #ded8c1;
+  background: var(--notice-bg);
+  border-left: 3px solid var(--notice-accent);
+}
+
+.doc-notice a{
+  color: var(--notice-accent);
+  text-decoration: underline;
 }
 
 .doc-info {
-  background: #f7faec;
-  border: 1px solid #dfe2d3;
+  background: var(--info-bg);
+  border-left: 3px solid var(--info-accent);
+}
+
+.doc-info a{
+  color: var(--info-accent);
+  text-decoration: underline;
+}
+
+.doc-info-title {
+  color: var(--info-accent);
+  font-weight: 600;
 }
 
 .doc-warn {
-  background: #f9f1f1;
-  border: 1px solid #e2d3d3;
+  background: var(--warn-bg);
+  border-left: 3px solid var(--warn-accent);
+}
+
+.doc-warn-title {
+  color: var(--warn-accent);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.doc-warn a {
+  color: var(--warn-accent);
+  text-decoration: underline;
 }
 
 #i18n-notice-box {

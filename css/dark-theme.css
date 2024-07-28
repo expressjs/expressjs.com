@@ -1,7 +1,17 @@
+.dark-mode:root{
+  --box-fg: rgb(255, 255, 255);
+  --info-bg: rgb(23, 29, 79);
+  --info-accent: rgb(189, 195, 255);
+  --notice-bg: rgb(78, 64, 34);
+  --notice-accent: rgb(249, 232, 195);
+  --warn-bg: rgb(78, 34, 50);
+  --warn-accent: rgb(249, 195, 214);
+}
+
 :root {
   --main_dark_bg: #010409;
   --second_dark_bg: #0d1117;
-  --darker_hover: #171b20;;
+  --darker_hover: #171b20;
   --dark_hover: #383838;
   --second_dark_hover: #484848;
   --dark_inner_text: #888888;
@@ -130,15 +140,11 @@ html.dark-mode div#overlay {
     color: var(--dark_main_text) !important;
   }
 }
-html.dark-mode .doc-box.doc-info,
-html.dark-mode .doc-box.doc-notice,
-html.dark-mode .doc-box.doc-warn {
-  color: var(--dark_main_text);
-  background: var(--main_dark_bg);
-}
+
 html.dark-mode .doc-box.doc-info pre.language-javascript {
   background: var(--main_dark_bg);
 }
+
 html.dark-mode h1,
 html.dark-mode h2,
 html.dark-mode h3,
