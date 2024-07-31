@@ -278,4 +278,4 @@ app.use(cookieParser());
 </code>
 </pre>
 
-Čiastočný zoznam bežne používaných third-party middleware funkcií pre Express nájdete v sekcii: [Third-party middleware](../resources/middleware.html).
+Čiastočný zoznam bežne používaných third-party middleware funkcií pre Express nájdete v sekcii: [Third-party middleware](/{{page.lang}}/resources/middleware.html).

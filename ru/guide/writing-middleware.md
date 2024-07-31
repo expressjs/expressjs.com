@@ -35,9 +35,9 @@ lang: ru
 
 <div class="callout" id="callout4">Аргумент обратного вызова для функции промежуточного обработчика, именуемый "next" согласно стандарту.</div>
 
-<div class="callout" id="callout5">Аргумент <a href="../4x/api.html#res">ответа</a> HTTP, именуемый "res" согласно стандарту.</div>
+<div class="callout" id="callout5">Аргумент <a href="/{{page.lang}}/4x/api.html#res">ответа</a> HTTP, именуемый "res" согласно стандарту.</div>
 
-<div class="callout" id="callout6">Аргумент <a href="../4x/api.html#req">запроса</a> HTTP, именуемый "req" согласно стандарту.</div>
+<div class="callout" id="callout6">Аргумент <a href="/{{page.lang}}/4x/api.html#req">запроса</a> HTTP, именуемый "req" согласно стандарту.</div>
 </td></tr>
 </table>
 

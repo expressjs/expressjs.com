@@ -279,4 +279,4 @@ app.use(cookieParser());
 </code>
 </pre>
 
-有关 Express 常用的第三方中间件函数的部分列表，请参阅：[第三方中间件](../resources/middleware.html)。
+有关 Express 常用的第三方中间件函数的部分列表，请参阅：[第三方中间件](/{{page.lang}}/resources/middleware.html)。

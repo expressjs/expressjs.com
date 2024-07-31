@@ -241,4 +241,4 @@ const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 ```
 
-Express で一般的に使用されているサード・パーティー・ミドルウェア関数の一部のリストについては、[サード・パーティー・ミドルウェア](../resources/middleware.html)を参照してください。
+Express で一般的に使用されているサード・パーティー・ミドルウェア関数の一部のリストについては、[サード・パーティー・ミドルウェア](/{{page.lang}}/resources/middleware.html)を参照してください。

@@ -278,4 +278,4 @@ app.use(cookieParser());
 </code>
 </pre>
 
-如需 Express 中常用的部分協力廠商中介軟體函數清單，請參閱：[協力廠商中介軟體](../resources/middleware.html)。
+如需 Express 中常用的部分協力廠商中介軟體函數清單，請參閱：[協力廠商中介軟體](/{{page.lang}}/resources/middleware.html)。

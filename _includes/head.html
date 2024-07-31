@@ -1,13 +1,13 @@
 <head>
-    <title>{{ page.title }}</title>
+    <title>{{ title }}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="og:image" content="https://expressjs.com/images/express-facebook-share.png">
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <script src="/js/theme.js"></script>
-    <link rel="stylesheet" href="/css/dark-theme.css?_={{ site.time | date: '%s' }}">
-    <link rel="stylesheet" href="/css/style.css?_={{ site.time | date: '%s' }}">
+    <link rel="stylesheet" href="/css/dark-theme.css?_={{ page.date | date: '%s' }}">
+    <link rel="stylesheet" href="/css/style.css?_={{ page.date | date: '%s' }}">
     <link rel="stylesheet" href="/css/dropit.css">
     <link rel="stylesheet" href="/css/prism.css">
     <link rel="stylesheet" href="/css/font-awesome.min.css">

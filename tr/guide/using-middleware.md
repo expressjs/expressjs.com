@@ -276,5 +276,5 @@ const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 ```
 
-Express ile yaygın olarak kullanılan üçüncü-parti ara yazılım fonksiyonlarının kısmi bir listesi için, bakınız: [Üçüncü-parti ara yazılım](../resources/middleware.html).
+Express ile yaygın olarak kullanılan üçüncü-parti ara yazılım fonksiyonlarının kısmi bir listesi için, bakınız: [Üçüncü-parti ara yazılım](/{{page.lang}}/resources/middleware.html).
 </div>

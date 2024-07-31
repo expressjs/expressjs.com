@@ -35,9 +35,9 @@ lang: ko
 
 <div class="callout" id="callout4">미들웨어 함수에 대한 콜백 인수(일반적으로 "next"라 불림).</div>
 
-<div class="callout" id="callout5">미들웨어 함수에 대한 HTTP <a href="../4x/api.html#res">응답</a> 인수(일반적으로 "res"라 불림).</div>
+<div class="callout" id="callout5">미들웨어 함수에 대한 HTTP <a href="/{{page.lang}}/4x/api.html#res">응답</a> 인수(일반적으로 "res"라 불림).</div>
 
-<div class="callout" id="callout6">미들웨어 함수에 대한 HTTP <a href="../4x/api.html#req">요청</a> 인수(일반적으로 "req"라 불림).</div>
+<div class="callout" id="callout6">미들웨어 함수에 대한 HTTP <a href="/{{page.lang}}/4x/api.html#req">요청</a> 인수(일반적으로 "req"라 불림).</div>
 </td></tr>
 </table>
 

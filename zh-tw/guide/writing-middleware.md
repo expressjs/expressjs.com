@@ -35,9 +35,9 @@ lang: zh-tw
 
 <div class="callout" id="callout4">中介軟體函數的回呼引數，依慣例，稱為 "next"。</div>
 
-<div class="callout" id="callout5">中介軟體函數的 HTTP <a href="../4x/api.html#res">response</a> 引數，依慣例，稱為 "res"。</div>
+<div class="callout" id="callout5">中介軟體函數的 HTTP <a href="/{{page.lang}}/4x/api.html#res">response</a> 引數，依慣例，稱為 "res"。</div>
 
-<div class="callout" id="callout6">中介軟體函數的 HTTP <a href="../4x/api.html#req">request</a> 引數，依慣例，稱為 "req"。</div>
+<div class="callout" id="callout6">中介軟體函數的 HTTP <a href="/{{page.lang}}/4x/api.html#req">request</a> 引數，依慣例，稱為 "req"。</div>
 </td></tr>
 </table>
 

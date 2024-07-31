@@ -9,7 +9,7 @@ lang: id
   <div id="overlay"></div>
   <div id="homepage-leftpane" class="pane">
     <section id="description">
-        <div class="express"><a href="/">Express</a><a href="{{ page.lang }}/changelog/4x.html#{{ site.data.express.current_version }}" id="express-version">{{ site.data.express.current_version }}</a></div>
+        <div class="express"><a href="/">Express</a><a href="{{ page.lang }}/changelog/4x.html#{{ express.current_version }}" id="express-version">{{ express.current_version }}</a></div>
         <span class="description">Kerangka web yang cepat, tidak beropini, dan minimalis untuk <a href='https://nodejs.org/en/'>Node.js</a></span>
     </section>
     <div id="install-command">$ npm install express --save</div>

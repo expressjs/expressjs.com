@@ -35,9 +35,9 @@ El siguiente ejemplo muestra los elementos de una llamada a función de middlewa
 
 <div class="callout" id="callout4">Argumento de devolución de llamada a la función de middleware, denominado "next" por convención.</div>
 
-<div class="callout" id="callout5">Argumento de <a href="../4x/api.html#res">respuesta</a> HTTP a la función de middleware, denominado "res" por convención.</div>
+<div class="callout" id="callout5">Argumento de <a href="/{{page.lang}}/4x/api.html#res">respuesta</a> HTTP a la función de middleware, denominado "res" por convención.</div>
 
-<div class="callout" id="callout6">Argumento de <a href="../4x/api.html#req">solicitud</a> HTTP a la función de middleware, denominado "req" por convención.</div>
+<div class="callout" id="callout6">Argumento de <a href="/{{page.lang}}/4x/api.html#req">solicitud</a> HTTP a la función de middleware, denominado "req" por convención.</div>
 </td></tr>
 </table> 
 

@@ -8,18 +8,18 @@ redirect_from: "/blog/posts.html"
  
 Want to write a post? See the submission [guidelines.](/en/blog/write-post.html)
 
-{% if site.posts.size !=  0 %}
+{% if collections.post_en !=  0 %}
 <div class="blog-posts">
-{% for post in site.posts %}
+{% for post in collections.post_en %}
   <div class="blog-post">
-      <div class="blog-title">
-        <a href="{{ post.url }}"> {{ post.title }}</a>
-      </div>
-      <div class="blog-details">
-        <div>By {{ post.author }}</div> 
-        <div >{{ post.date | date:"%b %d, %Y" }}</div> 
-      </div>   
-      <div class="blog-excerpt"> {{post.excerpt | truncate: 240 | markdownify }} </div>
+    <div class="blog-title">
+      <a href="{{ post.url }}"> {{ post.data.title }}</a>
+    </div>
+    <div class="blog-details">
+      <div>By {{ post.data.author }}</div> 
+      <div >{{ post.page.date | date:"%b %d, %Y" }}</div> 
+    </div>   
+    <div class="blog-excerpt">{{ post.data.page.excerpt | truncate: 240  }}</div>
   </div>
 {% endfor %}
 </div>

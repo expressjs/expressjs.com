@@ -35,9 +35,9 @@ Das folgende Beispiel zeigt die Elemente eines Middlewarefunktionsaufrufs:
 
 <div class="callout" id="callout4">Callback-Argument zur Middlewarefunktion, die nach der geltenden Konvention als "next" bezeichnet wird.</div>
 
-<div class="callout" id="callout5">HTTP-<a href="../4x/api.html#res">Antwort</a>argument zur Middlewarefunktion, die nach der geltenden Konvention als "res" bezeichnet wird.</div>
+<div class="callout" id="callout5">HTTP-<a href="/{{page.lang}}/4x/api.html#res">Antwort</a>argument zur Middlewarefunktion, die nach der geltenden Konvention als "res" bezeichnet wird.</div>
 
-<div class="callout" id="callout6">HTTP-<a href="../4x/api.html#req">Anforderungs</a>argument zur Middlewarefunktion, die nach der geltenden Konvention als "req" bezeichnet wird.</div>
+<div class="callout" id="callout6">HTTP-<a href="/{{page.lang}}/4x/api.html#req">Anforderungs</a>argument zur Middlewarefunktion, die nach der geltenden Konvention als "req" bezeichnet wird.</div>
 </td></tr>
 </table>
 

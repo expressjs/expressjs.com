@@ -339,4 +339,4 @@ app.use(cookieParser());
 
 Para obter uma lista parcial de funções de middleware de
 terceiros que são comumente utilizadas com o Express, consulte:
-[Middleware de Terceiros](../resources/middleware.html).
+[Middleware de Terceiros](/{{page.lang}}/resources/middleware.html).

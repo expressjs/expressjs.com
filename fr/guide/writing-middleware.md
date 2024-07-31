@@ -35,9 +35,9 @@ L'exemple suivant montre les éléments d'un appel de fonction middleware:
 
 <div class="callout" id="callout4">Argument de rappel à la fonction middleware, appelée "next" par convention.</div>
 
-<div class="callout" id="callout5">Argument de <a href="../4x/api.html#res">réponse</a> HTTP à la fonction middleware, appelé "res" par convention.</div>
+<div class="callout" id="callout5">Argument de <a href="/{{page.lang}}/4x/api.html#res">réponse</a> HTTP à la fonction middleware, appelé "res" par convention.</div>
 
-<div class="callout" id="callout6">Argument de <a href="../4x/api.html#req">demande</a> HTTP à la fonction middleware, appelé "req" par convention.</div>
+<div class="callout" id="callout6">Argument de <a href="/{{page.lang}}/4x/api.html#req">demande</a> HTTP à la fonction middleware, appelé "req" par convention.</div>
 </td></tr>
 </table>
 
@@ -58,9 +58,9 @@ app.get('/', function(req, res, next) {
 
 * <code>function</code>: Fonction de middleware.
 
-* <code>req</code>: Argument de <a href="../4x/api.html#req">demande</a> HTTP à la fonction middleware, appelé "req" par convention.
+* <code>req</code>: Argument de <a href="/{{page.lang}}/4x/api.html#req">demande</a> HTTP à la fonction middleware, appelé "req" par convention.
 
-* <code>res</code>: Argument de <a href="../4x/api.html#res">réponse</a> HTTP à la fonction middleware, appelé "res" par convention.
+* <code>res</code>: Argument de <a href="/{{page.lang}}/4x/api.html#res">réponse</a> HTTP à la fonction middleware, appelé "res" par convention.
 
 * <code>next</code>: Argument de rappel à la fonction middleware, appelée "next" par convention.
 -->

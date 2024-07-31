@@ -35,9 +35,9 @@ lang: zh-cn
 
 <div class="callout" id="callout4">中间件函数的回调自变量，按约定称为“next”。</div>
 
-<div class="callout" id="callout5">中间件函数的 HTTP <a href="../4x/api.html#res">响应</a>自变量，按约定称为“res”。</div>
+<div class="callout" id="callout5">中间件函数的 HTTP <a href="/{{page.lang}}/4x/api.html#res">响应</a>自变量，按约定称为“res”。</div>
 
-<div class="callout" id="callout6">中间件函数的 HTTP <a href="../4x/api.html#req">请求</a>自变量，按约定称为“req”。</div>
+<div class="callout" id="callout6">中间件函数的 HTTP <a href="/{{page.lang}}/4x/api.html#req">请求</a>自变量，按约定称为“req”。</div>
 </td></tr>
 </table>
 

@@ -10,3 +10,4 @@ Gemfile.lock
 .jekyll-metadata
 vendor
 .bundle
+dist

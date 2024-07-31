@@ -35,9 +35,9 @@ I seguenti esempi mostrano gli elementi di una chiamata alla funzione middleware
 
 <div class="callout" id="callout4">Argomento di callback nella funzione middleware, denominata per convenzione "next".</div>
 
-<div class="callout" id="callout5">Argomento <a href="../4x/api.html#res">risposta</a> HTTP nella funzione middleware, denominato "res" per convenzione.</div>
+<div class="callout" id="callout5">Argomento <a href="/{{page.lang}}/4x/api.html#res">risposta</a> HTTP nella funzione middleware, denominato "res" per convenzione.</div>
 
-<div class="callout" id="callout6">Argomento <a href="../4x/api.html#req">richiesta</a> HTTP nella funzione middleware, denominato "req" per convenzione.</div>
+<div class="callout" id="callout6">Argomento <a href="/{{page.lang}}/4x/api.html#req">richiesta</a> HTTP nella funzione middleware, denominato "req" per convenzione.</div>
 </td></tr>
 </table>
 
@@ -58,9 +58,9 @@ app.get('/', function(req, res, next) {
 
 * <code>function</code>: La funzione middleware.
 
-* <code>req</code>: Argomento <a href="../4x/api.html#req">richiesta</a> HTTP nella funzione middleware, denominato "req" per convenzione.
+* <code>req</code>: Argomento <a href="/{{page.lang}}/4x/api.html#req">richiesta</a> HTTP nella funzione middleware, denominato "req" per convenzione.
 
-* <code>res</code>: Argomento <a href="../4x/api.html#res">risposta</a> HTTP nella funzione middleware, denominato "res" per convenzione.
+* <code>res</code>: Argomento <a href="/{{page.lang}}/4x/api.html#res">risposta</a> HTTP nella funzione middleware, denominato "res" per convenzione.
 
 * <code>next</code>: Argomento di callback nella funzione middleware, denominata per convenzione "next".
 -->

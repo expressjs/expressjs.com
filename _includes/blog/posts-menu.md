@@ -3,9 +3,9 @@
     <a href="/{{ page.lang }}/blog/posts">Posts</a>
   </h3>
   <ul id="blog-side-menu">
-      {% for post in site.posts %}
+      {% for post in collections.post_en %}
     <li>
-      <a href="{{post.url}}">{{ post.title }}</a>
+      <a href="{{post.url}}">{{ post.data.title }}</a>
     </li>
       {% endfor %}
   </ul>

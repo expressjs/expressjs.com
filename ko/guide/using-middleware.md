@@ -282,4 +282,4 @@ app.use(cookieParser());
 </code>
 </pre>
 
-Express와 함께 일반적으로 사용되고 있는 써드파티 미들웨어 함수의 일부 목록을 확인하려면 [써드파티 미들웨어](../resources/middleware.html)를 참조하십시오.
+Express와 함께 일반적으로 사용되고 있는 써드파티 미들웨어 함수의 일부 목록을 확인하려면 [써드파티 미들웨어](/{{page.lang}}/resources/middleware.html)를 참조하십시오.

@@ -224,4 +224,4 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 </code></pre>
 
-See [Third-party middleware](../resources/middleware.html) for a partial list of third-party middleware commonly used with Express.
+See [Third-party middleware](/{{page.lang}}/resources/middleware.html) for a partial list of third-party middleware commonly used with Express.

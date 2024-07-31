@@ -35,9 +35,9 @@ lang: ja
 
 <div class="callout" id="callout4">ミドルウェア関数へのコールバック引数 (慣習的に「next」と呼ばれます)。</div>
 
-<div class="callout" id="callout5">ミドルウェア関数への HTTP <a href="../4x/api.html#res">レスポンス</a>引数 (慣習的に「res」と呼ばれます)。</div>
+<div class="callout" id="callout5">ミドルウェア関数への HTTP <a href="/{{page.lang}}/4x/api.html#res">レスポンス</a>引数 (慣習的に「res」と呼ばれます)。</div>
 
-<div class="callout" id="callout6">ミドルウェア関数への HTTP <a href="../4x/api.html#req">リクエスト</a>引数 (慣習的に「req」と呼ばれます)。</div>
+<div class="callout" id="callout6">ミドルウェア関数への HTTP <a href="/{{page.lang}}/4x/api.html#req">リクエスト</a>引数 (慣習的に「req」と呼ばれます)。</div>
 </td></tr>
 </table>
 
