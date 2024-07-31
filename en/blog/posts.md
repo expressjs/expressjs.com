@@ -8,9 +8,10 @@ redirect_from: "/blog/posts.html"
  
 Want to write a post? See the submission [guidelines.](/en/blog/write-post.html)
 
-{% if collections.post_en !=  0 %}
+{% if collections.posts !=  0 %}
 <div class="blog-posts">
-{% for post in collections.post_en %}
+{% assign sort_post = collections.posts | order %}
+{% for post in sort_post %}
   <div class="blog-post">
     <div class="blog-title">
       <a href="{{ post.url }}"> {{ post.data.title }}</a>

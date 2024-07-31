@@ -1,3 +1,21 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+[[redirects]]
+  from = "/resources/*"
+  to = "/en/resources/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/en/"
+  to = "/"
+  status = 200
+  force = true 
+
+[[redirects]]
+  from = "/2024/*"
+  to = "/en/blog/2024/:splat"
+  status = 200
+  force = true 

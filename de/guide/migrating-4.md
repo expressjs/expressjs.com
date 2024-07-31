@@ -106,7 +106,6 @@ Anwendungen laden nun implizit Routing-Middleware. Sie müssen sich also keine G
 
 Die Art und Weise, wie Weiterleitungen (Routen) definiert werden, bleibt unverändert. Das Routingsystem verfügt jedoch über zwei neue Funktionen, die beim Organisieren Ihrer Weiterleitungen helfen:
 
-{: .doclist }
 * Die neue Methode `app.route()` zum Erstellen verkettbarer Routenhandler für einen Weiterleitungspfad
 * Die neue Klasse `express.Router` zum Erstellen modular einbindbarer Routenhandler
 
@@ -508,7 +507,6 @@ Nun wird der Befehl `express` auf Ihrem System auf den Express 4 App Generator a
 
 Befehlsoptionen und -nutzung bleiben größtenteils unverändert. Es gelten jedoch folgende Ausnahmen:
 
-{: .doclist }
 * Option `--sessions` wurde entfernt.
 * Option `--jshtml` wurde entfernt.
 * Option `--hogan` wurde hinzugefügt, um [Hogan.js](http://twitter.github.io/hogan.js/) zu unterstützen.

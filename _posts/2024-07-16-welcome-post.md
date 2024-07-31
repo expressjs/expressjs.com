@@ -1,10 +1,9 @@
 ---
 title: Welcome to The Express Blog!
 layout: post
-lang: en
 tags: 
     - site-admin
-    - post_en
+    - posts
 author: Rand McKinney and Chris Del
 --- 
 

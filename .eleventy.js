@@ -1,4 +1,6 @@
-const { EleventyI18nPlugin } = require("@11ty/eleventy");
+const { EleventyI18nPlugin, EleventyHtmlBasePlugin } = require("@11ty/eleventy");
+const { compareDesc } = require("date-fns");
+
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 module.exports = function(eleventyConfig) {
@@ -7,9 +9,18 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("images")
     eleventyConfig.addPassthroughCopy("fonts")
 
+	eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
     eleventyConfig.addPlugin(EleventyI18nPlugin, {
 		defaultLanguage: "en",
 	});
+
+	eleventyConfig.addFilter("order", (array) => {
+		if(!Array.isArray(array) || array.length === 0) {
+			return [];
+		}
+
+		return array.sort((a,b) => compareDesc(a.page.date, b.page.date));
+	}); 
 
     eleventyConfig.setFrontMatterParsingOptions({
         excerpt: true,
@@ -26,6 +37,7 @@ module.exports = function(eleventyConfig) {
 			"html",
             "liquid"
 		],
+        htmlTemplateEngine: "liquid",
         dir: {
             includes: "_includes",
             layouts: "_layouts",
