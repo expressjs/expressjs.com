@@ -20,7 +20,7 @@ Express 5 sa od Express 4 veľmi nelíši: Zmeny v API nie sú tak veľké, ako 
 Pre nainštalovanie poslednej alpha verzie Express 5, spustite v hlavnom priečinku vašej aplikácie nasledujúci príkaz:
 
 ```console
-$ npm install express@5.0.0-alpha.2 --save
+$ npm install "express@>={{ site.data.express.next_version }}" --save
 ```
 
 Potom môžete spustiť vaše automatizované testy, aby ste videli čo padá a opravili tieto problémy podľa informácií nižšie. Potom, ako identifikujete padajúce testy, spustite aplikáciu, aby ste videli aké errory nastávajú. Okamžite zistíte, či aplikácia používa niektorú z metód, alebo properties, ktoré nie sú podporované.
