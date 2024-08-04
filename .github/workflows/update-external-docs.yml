@@ -18,7 +18,7 @@ jobs:
             - name: Create Pull Request
               uses: peter-evans/create-pull-request@v5
               with: 
-                token: ${{ secrets.ACTIONS_BOT_TOKEN }}
+                token: ${{ secrets.GITHUB_TOKEN }}
                 commit-message: update external docs
                 title: 'Update external docs'
                 body: >
