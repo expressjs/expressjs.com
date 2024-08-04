@@ -6,15 +6,13 @@
 /* general */
 
 * {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 body {
   font: 400 14px/1.6 "Open Sans", sans-serif;
-  background: url(/images/bg.jpg);
+  background: #fff;
   margin: 0;
   padding: 0;
   color: #555;
@@ -209,11 +207,6 @@ a {
  z-index: -1;
 }
 
-.outlined-img {
-  border: 1px solid #eaeaea;
-  width: 90%;
-}
-
 .current {
   background: #e0f5ff;
 }
@@ -276,12 +269,6 @@ a {
   margin-left: 5px;
 }
 
-#conference {
-  display: inline;
-  float: right;
-  margin-left: 10px;
-}
-
 #intro {
   margin-left: 5%;
 }
@@ -309,14 +296,6 @@ header {
 .scroll header {
   border-bottom: 1px solid #ddd;
   box-shadow: 0 0 4px #eee;
-}
-
-/* companies using express */
-
-img.memberlogo {
-  vertical-align: middle;
-  width: 240px;
-  padding: 10px 20px;
 }
 
 /* code */
@@ -349,7 +328,7 @@ pre code {
 #top {
   line-height: 0;
   background: black;
-  -webkit-border-radius: 2px;
+  border-radius: 2px;
   position: fixed;
   bottom: 15px;
   right: 15px;
@@ -357,7 +336,7 @@ pre code {
   text-decoration: none;
   color: white;
   opacity: 0;
-  -webkit-transition: opacity 300ms;
+  transition: opacity 300ms;
 }
 
 #top:hover {
@@ -425,44 +404,7 @@ html[xmlns] .clearfix {
   width: 100%;
   margin-top: 5px;
   margin-bottom: 20px;
-}
-
-/* applications page */
-
-#applications .section {
-  display: block;
-  margin-bottom: 50px;
-}
-
-.application h2 {
-  margin: 0;
-}
-
-.application {
-  padding: 80px 0;
-  height: 600px;
-  position: relative;
-}
-
-.application p {
-  float: left;
-  width: 30%;
-}
-
-.application img {
-  float: right;
-}
-
-.application .link {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
-}
-
-.application .link a {
-  margin-left: 4px;
-}
-
+}     
 
 /* doc specific */
 
@@ -602,18 +544,6 @@ html[xmlns] .clearfix {
 
 pre, code {
   white-space: pre-wrap !important;
-}
-
-#strongloop-header {
-  font-size: 0.7em;
-  display: block;
-  position: absolute;
-  right: 2%;
-  top: 11px;
-  width: 150px;
-  border-radius: 3px;
-  color: #08592B;
-  padding: 3px;
 }
 
 footer {
@@ -860,12 +790,6 @@ h2 a {
 /* responsive */
 
 @media all and (max-width: 899px) {
-
-  #conference a img {
-    width: 150px;
-    margin-right: 10px;
-  }
-
   #home-content {
     flex-direction: column;
   }
@@ -978,10 +902,6 @@ h2 a {
   #logo .express {
     margin-top: 0px;
     font-weight: bold;
-  }
-
-  .github-fork-ribbon-wrapper {
-    display: none;
   }
 
   #mobile-menu {
@@ -1138,17 +1058,8 @@ h2 a {
 
 
 @media all and (max-width: 420px) {
-
-  #conference {
-    display:none;
-  }
-
   #app-settings-property {
     width: auto;
-  }
-
-  #strongloop-header {
-    display: none;
   }
 
   #description .express {
@@ -1209,20 +1120,6 @@ h2 a {
 .mw-fig-callouts {margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;}
 
 /* For middleware pages */
-
-/*
-#mw-list {
-  float: left;
-  width: 180px;
-  margin: 0;
-  padding: 0 10px 0 10px;
-  font-size: 13px;
- }
-
-#middleware {
-  min-width: 300px;
-}
-*/
 
 #mw-container {
   display: flex;
