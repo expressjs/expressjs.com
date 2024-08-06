@@ -3,278 +3,237 @@
  License: MIT
 */
 
-$(function(){
+// It uses `window.matchMedia` instead of `window.addEventListener('resize')` because `matchMedia` performs better by not changing its value with every screen resize.
+const mobileScreen = window.matchMedia("(max-width: 899px)");
+let isSmallScreen = false;
 
-  var isSmallScreen = checkSmallScreen()
+mobileScreen.addEventListener("change", (event) => {
+	if (event.matches) {
+		isSmallScreen = true;
+	}
+});
 
-  $(window).resize(function () {
-    isSmallScreen = checkSmallScreen()
-  })
+// ------------------- codehighligh -------------------------
 
-  function checkSmallScreen() {
-    return window.innerWidth < 899 ? true : false
-  }
+const $codejs = document.querySelectorAll("code.language-js");
+const $codesh = document.querySelectorAll("code.language-sh");
 
-  var doc = $(document);
-  var lang = document.location.pathname.split('/')[1]
+for (const el of $codejs) {
+	el.classList.add("language-javascript");
+	el.classList.remove("language-js");
+}
 
-  // hilight the menu item of the current page
-  $('#navmenu ul ul').find('a[href="'+ document.location.pathname + '"]').addClass('current')
+for (const el of $codesh) {
+	el.parentElement.classList.add("language-sh");
+}
 
-  // top link
-  $('#top').click(function(e){
-    $('html, body').animate({scrollTop : 0}, 500);
-    return false;
-  });
+Prism.highlightAll();
 
-  // scrolling links
-  var added;
-  doc.scroll(function(e){
-    if (doc.scrollTop() > 5) {
-      if (added) return;
-      added = true;
-      $('body').addClass('scroll');
-    } else {
-      $('body').removeClass('scroll');
-      added = false;
-    }
-  })
+// ------------------- scroll -------------------------------
 
-  // edit page link
-  var latest = '';
-  var branchPath = 'https://github.com/expressjs/expressjs.com';
-  var pathName = document.location.pathname;
+let added = false;
 
-  var currentVersion = (pathName.match(/^(?:\/[a-z]{2})?\/([0-9]x|)/) || [])[1] || '4x'; // defaults to current version
-  var fileName = pathName.split('/').splice(-2)[1];
-  var pagePath;
-  var editPath;
+window.addEventListener("scroll", () => {
+	if (scrollY > 5) {
+		if (added) return;
+		added = true;
 
-  // the api doc cannot be edited individually, we'll have to link to the dir instead
-  if (fileName == 'api.html') {
-    editPath = branchPath + '/tree/gh-pages/_includes/api/en/'+ currentVersion;
-  }
-  // link to individual doc files
-  else {
-    pagePath = pathName.replace(/\.html$/, '.md');
-    editPath = branchPath + '/blob/gh-pages' + pagePath;
-  }
+		document.body.classList.add("scroll");
+	} else {
+		added = false;
+		document.body.classList.remove("scroll");
+	}
+});
 
-  var editLink;
+// ------------------- menu api -----------------------------
 
-  if (lang === 'en') {
-    if (pathName == '/') editLink = '<a href="' + branchPath + '">Fork the website on GitHub</a>.';
-    else editLink = '<a href="' + editPath + '">Edit this page on GitHub</a>.';
-    $('#fork').html(editLink);
-  }
+const $headings = document.querySelectorAll("h2, h3");
+const headings = [];
 
-  // code highlight
+let currentApiPrefix;
+let parentMenuSelector;
+let lastApiPrefix;
 
-  $('code.language-js').each(function(){
-    $(this).addClass('language-javascript').removeClass('language-js')
-  })
+for (const heading of $headings) {
+	const rect = heading.getBoundingClientRect();
+	const win = heading.ownerDocument.defaultView;
 
-  $('code.language-sh').each(function(){
-    $(this).parent().addClass('language-sh')
-  })
+	headings.push({
+		top: rect.top + win.pageYOffset - 200,
+		id: heading.id,
+	});
+}
 
-  Prism.highlightAll()
+function closest() {
+	let h;
+	const top = document.scrollingElement.scrollTop;
 
-  // menu bar
+	let i = headings.length;
 
-  var prev;
-  var n = 0;
+	while (i--) {
+		h = headings[i];
 
-  var headings = $('h2, h3').map(function(i, el){
-    return {
-      top: $(el).offset().top - 200,
-      id: el.id
-    }
-  });
+		if (top >= h.top) return h;
+	}
+}
 
-  function closest() {
-    var h;
-    var top = $(window).scrollTop();
-    var i = headings.length;
-    while (i--) {
-      h = headings[i];
-      if (top >= h.top) return h;
-    }
-  }
+window.addEventListener("scroll", () => {
+	const h = closest();
+	if (!h) return;
 
-  var currentApiPrefix;
-  var parentMenuSelector;
-  var lastApiPrefix;
+	currentApiPrefix = h.id.split(".")[0];
+	parentMenuSelector = document.querySelector(`#${currentApiPrefix}-menu`);
 
-  $(window).bind('load resize', function() {
+	parentMenuSelector.classList.add("active");
 
-    $('#menu').css('height', ($(this).height() - 150) + 'px');
+	if (lastApiPrefix && lastApiPrefix !== currentApiPrefix) {
+		document.querySelector(`#${lastApiPrefix}-menu`).classList.remove("active");
+	}
 
-  });
+	document.querySelector("#menu li a").classList.remove("active");
 
-  $(document).scroll(function() {
+	document.querySelector(`a[href="#${h.id}"]`).classList.add("active");
 
-    var h = closest();
-    if (!h) return;
+	lastApiPrefix = currentApiPrefix.split(".")[0];
+});
 
-
-    if (window.location.pathname == '/3x/api.html') {
-
-      if (prev) {
-      prev.removeClass('active');
-      prev.parent().parent().removeClass('active');
-      }
-      var a = $('a[href="#' + h.id + '"]');
-      a.addClass('active');
-      a.parent().parent().addClass('active');
-      prev = a;
-
-    }
-
-    else {
-
-      currentApiPrefix = h.id.split('.')[0];
-      parentMenuSelector = '#'+ currentApiPrefix + '-menu';
-
-      $(parentMenuSelector).addClass('active');
-
-      if (lastApiPrefix && (lastApiPrefix != currentApiPrefix)) {
-        $('#'+ lastApiPrefix + '-menu').removeClass('active');
-      }
-
-      $('#menu li a').removeClass('active');
-
-      var a = $('a[href="#' + h.id + '"]');
-      a.addClass('active');
-
-      lastApiPrefix = currentApiPrefix.split('.')[0];
-
-    }
-
-  })
-  $('#tags-side-menu li').on('click', function() {
-      // Remove prev 'active's 
-      $(this).next().siblings().removeClass('active');
-      $(this).next().addClass('active')
-    })
-
-  // show mobile menu
-  $('#nav-button').click(function () {
-    $('#navmenu').toggleClass('opens');
-    $('#overlay').toggleClass('blurs');
-  });
-
-  // close mobile menu
-  $('#overlay').click(function () {
-    $('#navmenu').removeClass('opens');
-    $('#overlay').removeClass('blurs');
-  });
-
-  // dropdown menu
-
-  if ('ontouchstart' in document.documentElement) {
-    $('#application-menu').dropit({ action: 'click' })
-    $('#getting-started-menu').dropit({ action: 'click' })
-    $('#guide-menu').dropit({ action: 'click' })
-    $('#advanced-topics-menu').dropit({ action: 'click' })
-    $('#resources-menu').dropit({ action: 'click' })
-    $('#blog-menu').dropit({ action: 'click' })
-    $('#lb-menu').dropit({ action: 'click' })
-    $('#changelog-menu').dropit({ action: 'click' })
-  }
-  else {
-    $('#application-menu').dropit({ action: 'mouseenter' })
-    $('#getting-started-menu').dropit({ action: 'mouseenter' })
-    $('#guide-menu').dropit({ action: 'mouseenter' })
-    $('#advanced-topics-menu').dropit({ action: 'mouseenter' })
-    $('#resources-menu').dropit({ action: 'mouseenter' })
-    $('#blog-menu').dropit({ action: 'mouseenter' })
-    $('#lb-menu').dropit({ action: 'mouseenter' })
-    $('#changelog-menu').dropit({ action: 'mouseenter' })
-  }
-
-  // mobile
-
-  // main menu
-  $('#navmenu > li').click(function () {
-
-    // applicable only if it has a menu
-    if ($(this).find('ul').length) {
-
-      if ($(this).hasClass('active-mobile-menu')) {
-        $(this).removeClass('active-mobile-menu')
-        $(this).find('.dropit .dropit-submenu').hide()
-      }
-      else {
-        $('.dropit .dropit-submenu').hide()
-        $(this).find('.dropit .dropit-submenu').show()
-        $('#navmenu li.active-mobile-menu').removeClass('active-mobile-menu')
-        $(this).addClass('active-mobile-menu')
-      }
-    }
-    else if (isMobile.any || isSmallScreen) {
-      var path = $(this).find('a').attr('href')
-      document.location = path
-    }
-
-  })
-
-  // when in mobile mode, menu names should open the submenu
-  $('.dropit-trigger a').click(function (e) {
-
-    if (window.matchMedia('(max-width: 899px)').matches) {
-      e.preventDefault()
-    }
-
-  })
-
-  // sub menu navigation
-  $('.dropit-submenu li').click(function () {
-    if (isMobile.any || isSmallScreen) {
-      var path = $(this).find('a').attr('href')
-      document.location = path
-    }
-  })
-
-  // i18n notice
-  if (readCookie('i18nClose')) {
-    $('#i18n-notice-box').hide()
-  }
-  else {
-    $('#close-i18n-notice-box').on('click', function () {
-      $('#i18n-notice-box').hide()
-      createCookie('i18nClose', 1);
-    })
-  }
-
-})
-
-
+//  ------------------- cookies -----------------------------
 
 function createCookie(name, value, days) {
-  var expires;
+	let expires;
 
-  if (days) {
-    var date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    expires = "; expires=" + date.toGMTString();
-  } else {
-   expires = "";
-  }
-  document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+	if (days) {
+		const date = new Date();
+		date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+		expires = `; expires=${date.toGMTString()}`;
+	} else {
+		expires = "";
+	}
+
+	document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}${expires}; path=/`;
 }
 
 function readCookie(name) {
-  var nameEQ = encodeURIComponent(name) + "=";
-  var ca = document.cookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
-  }
-  return null;
+	const nameEQ = `${encodeURIComponent(name)}=`;
+	const ca = document.cookie.split(";");
+
+	for (let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+
+		while (c.charAt(0) === " ") c = c.substring(1, c.length);
+
+		if (c.indexOf(nameEQ) === 0)
+			return decodeURIComponent(c.substring(nameEQ.length, c.length));
+	}
+
+	return null;
 }
 
 function eraseCookie(name) {
-  createCookie(name, "", -1);
+	createCookie(name, "", -1);
 }
+
+// ------------------- i18n notice --------------------------
+
+const $i18nNoticeBox = document.querySelector("#i18n-notice-box");
+
+if (readCookie("i18nClose")) {
+	$i18nNoticeBox.style.display = "none";
+} else {
+	document
+		.querySelector("#close-i18n-notice-box")
+		.addEventListener("click", () => {
+			$i18nNoticeBox.style.display = "none";
+
+			createCookie("i18nClose", 1);
+		});
+}
+
+$(function () {
+	// hilighth e menu item of the current page
+	$("#navmenu ul ul")
+		.find('a[href="' + document.location.pathname + '"]')
+		.addClass("current");
+
+	// menu bar
+
+	$(window).bind("load resize", function () {
+		$("#menu").css("height", $(this).height() - 150 + "px");
+	});
+
+	$("#tags-side-menu li").on("click", function () {
+		// Remove prev 'active's
+		$(this).next().siblings().removeClass("active");
+		$(this).next().addClass("active");
+	});
+
+	// show mobile menu
+	$("#nav-button").click(function () {
+		$("#navmenu").toggleClass("opens");
+		$("#overlay").toggleClass("blurs");
+	});
+
+	// close mobile menu
+	$("#overlay").click(function () {
+		$("#navmenu").removeClass("opens");
+		$("#overlay").removeClass("blurs");
+	});
+
+	// dropdown menu
+
+	if ("ontouchstart" in document.documentElement) {
+		$("#application-menu").dropit({ action: "click" });
+		$("#getting-started-menu").dropit({ action: "click" });
+		$("#guide-menu").dropit({ action: "click" });
+		$("#advanced-topics-menu").dropit({ action: "click" });
+		$("#resources-menu").dropit({ action: "click" });
+		$("#blog-menu").dropit({ action: "click" });
+		$("#lb-menu").dropit({ action: "click" });
+		$("#changelog-menu").dropit({ action: "click" });
+	} else {
+		$("#application-menu").dropit({ action: "mouseenter" });
+		$("#getting-started-menu").dropit({ action: "mouseenter" });
+		$("#guide-menu").dropit({ action: "mouseenter" });
+		$("#advanced-topics-menu").dropit({ action: "mouseenter" });
+		$("#resources-menu").dropit({ action: "mouseenter" });
+		$("#blog-menu").dropit({ action: "mouseenter" });
+		$("#lb-menu").dropit({ action: "mouseenter" });
+		$("#changelog-menu").dropit({ action: "mouseenter" });
+	}
+
+	// mobile
+
+	// main menu
+	$("#navmenu > li").click(function () {
+		// applicable only if it has a menu
+		if ($(this).find("ul").length) {
+			if ($(this).hasClass("active-mobile-menu")) {
+				$(this).removeClass("active-mobile-menu");
+				$(this).find(".dropit .dropit-submenu").hide();
+			} else {
+				$(".dropit .dropit-submenu").hide();
+				$(this).find(".dropit .dropit-submenu").show();
+				$("#navmenu li.active-mobile-menu").removeClass("active-mobile-menu");
+				$(this).addClass("active-mobile-menu");
+			}
+		} else if (isMobile.any || isSmallScreen) {
+			var path = $(this).find("a").attr("href");
+			document.location = path;
+		}
+	});
+
+	// when in mobile mode, menu names should open the submenu
+	$(".dropit-trigger a").click(function (e) {
+		if (window.matchMedia("(max-width: 899px)").matches) {
+			e.preventDefault();
+		}
+	});
+
+	// sub menu navigation
+	$(".dropit-submenu li").click(function () {
+		if (isMobile.any || isSmallScreen) {
+			var path = $(this).find("a").attr("href");
+			document.location = path;
+		}
+	});
+});

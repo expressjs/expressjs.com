@@ -12,6 +12,10 @@
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+html, body { 
+  scroll-behavior: smooth
+}
+
 body {
   font: 400 14px/1.6 "Open Sans", sans-serif;
   background: url(/images/bg.jpg);
