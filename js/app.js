@@ -8,9 +8,9 @@ const mobileScreen = window.matchMedia("(max-width: 899px)");
 let isSmallScreen = false;
 
 mobileScreen.addEventListener("change", (event) => {
-	if (event.matches) {
-		isSmallScreen = true;
-	}
+  if (event.matches) {
+	isSmallScreen = true;
+  }
 });
 
 // ------------------- codehighligh -------------------------
@@ -19,12 +19,12 @@ const $codejs = document.querySelectorAll("code.language-js");
 const $codesh = document.querySelectorAll("code.language-sh");
 
 for (const el of $codejs) {
-	el.classList.add("language-javascript");
-	el.classList.remove("language-js");
+  el.classList.add("language-javascript");
+  el.classList.remove("language-js");
 }
 
 for (const el of $codesh) {
-	el.parentElement.classList.add("language-sh");
+  el.parentElement.classList.add("language-sh");
 }
 
 Prism.highlightAll();
@@ -34,15 +34,15 @@ Prism.highlightAll();
 let added = false;
 
 window.addEventListener("scroll", () => {
-	if (scrollY > 5) {
-		if (added) return;
-		added = true;
+  if (scrollY > 5) {
+	if (added) return;
+	  added = true;
 
-		document.body.classList.add("scroll");
+	  document.body.classList.add("scroll");
 	} else {
-		added = false;
-		document.body.classList.remove("scroll");
-	}
+	  added = false;
+	  document.body.classList.remove("scroll");
+  }
 });
 
 // ------------------- menu api -----------------------------
@@ -55,98 +55,101 @@ let parentMenuSelector;
 let lastApiPrefix;
 
 for (const heading of $headings) {
-	const rect = heading.getBoundingClientRect();
-	const win = heading.ownerDocument.defaultView;
+  const rect = heading.getBoundingClientRect();
+  const win = heading.ownerDocument.defaultView;
 
-	headings.push({
-		top: rect.top + win.pageYOffset - 200,
-		id: heading.id,
-	});
+  headings.push({
+	top: rect.top + win.pageYOffset - 200,
+	id: heading.id,
+  });
 }
 
 function closest() {
-	let h;
-	const top = document.scrollingElement.scrollTop;
+  let h;
+  const top = document.scrollingElement.scrollTop;
 
-	let i = headings.length;
+  let i = headings.length;
 
-	while (i--) {
-		h = headings[i];
+  while (i--) {
+	h = headings[i];
 
-		if (top >= h.top) return h;
-	}
+	if (top >= h.top) return h;
+  }
 }
 
 window.addEventListener("scroll", () => {
-	const h = closest();
-	if (!h) return;
+  const h = closest();
+  if (!h) return;
 
-	currentApiPrefix = h.id.split(".")[0];
-	parentMenuSelector = document.querySelector(`#${currentApiPrefix}-menu`);
+  currentApiPrefix = h.id.split(".")[0];
+  parentMenuSelector = document.querySelector(`#${currentApiPrefix}-menu`);
+  parentMenuSelector.classList.add("active");
 
-	parentMenuSelector.classList.add("active");
+  if (lastApiPrefix && lastApiPrefix !== currentApiPrefix) {
+	document.querySelector(`#${lastApiPrefix}-menu`).classList.remove("active");
+  }
 
-	if (lastApiPrefix && lastApiPrefix !== currentApiPrefix) {
-		document.querySelector(`#${lastApiPrefix}-menu`).classList.remove("active");
-	}
+  document.querySelectorAll("#menu li a").forEach(el => el.classList.remove("active"));
 
-	document.querySelector("#menu li a").classList.remove("active");
+  document.querySelector(`a[href="#${h.id}"]`).classList.add("active");
 
-	document.querySelector(`a[href="#${h.id}"]`).classList.add("active");
-
-	lastApiPrefix = currentApiPrefix.split(".")[0];
+  lastApiPrefix = currentApiPrefix.split(".")[0];
 });
 
 //  ------------------- cookies -----------------------------
 
 function createCookie(name, value, days) {
-	let expires;
+  let expires;
 
-	if (days) {
-		const date = new Date();
-		date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-		expires = `; expires=${date.toGMTString()}`;
-	} else {
-		expires = "";
-	}
+  if (days) {
+	const date = new Date();
 
-	document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}${expires}; path=/`;
+	date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+
+	expires = `; expires=${date.toGMTString()}`;
+  } else {
+	expires = "";
+  }
+
+  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}${expires}; path=/`;
 }
 
 function readCookie(name) {
-	const nameEQ = `${encodeURIComponent(name)}=`;
-	const ca = document.cookie.split(";");
+  const nameEQ = `${encodeURIComponent(name)}=`;
+  const ca = document.cookie.split(";");
 
-	for (let i = 0; i < ca.length; i++) {
-		let c = ca[i];
+  for (let i = 0; i < ca.length; i++) {
+	let c = ca[i];
 
-		while (c.charAt(0) === " ") c = c.substring(1, c.length);
+	while (c.charAt(0) === " ") c = c.substring(1, c.length);
 
-		if (c.indexOf(nameEQ) === 0)
-			return decodeURIComponent(c.substring(nameEQ.length, c.length));
-	}
+	if (c.indexOf(nameEQ) === 0)
+	  return decodeURIComponent(c.substring(nameEQ.length, c.length));
+  }
 
-	return null;
+  return null;
 }
 
 function eraseCookie(name) {
-	createCookie(name, "", -1);
+  createCookie(name, "", -1);
 }
 
 // ------------------- i18n notice --------------------------
 
 const $i18nNoticeBox = document.querySelector("#i18n-notice-box");
 
-if (readCookie("i18nClose")) {
-	$i18nNoticeBox.style.display = "none";
+if (readCookie("i18nClose") && $i18nNoticeBox != null) {
+  $i18nNoticeBox.style.display = "none";
 } else {
+  if ($i18nNoticeBox != null) {
 	document
-		.querySelector("#close-i18n-notice-box")
-		.addEventListener("click", () => {
-			$i18nNoticeBox.style.display = "none";
+	  .querySelector("#close-i18n-notice-box")
+	  .addEventListener("click", () => {
+		$i18nNoticeBox.style.display = "none";
 
-			createCookie("i18nClose", 1);
-		});
+		createCookie("i18nClose", 1);
+	  });
+  }
 }
 
 $(function () {
