@@ -4,22 +4,8 @@
 */
 
 $(function(){
-
-  var isSmallScreen = checkSmallScreen()
-
-  $(window).resize(function () {
-    isSmallScreen = checkSmallScreen()
-  })
-
-  function checkSmallScreen() {
-    return window.innerWidth < 899 ? true : false
-  }
-
   var doc = $(document);
   var lang = document.location.pathname.split('/')[1]
-
-  // hilight the menu item of the current page
-  $('#navmenu ul ul').find('a[href="'+ document.location.pathname + '"]').addClass('current')
 
   // top link
   $('#top').click(function(e){
@@ -169,72 +155,6 @@ $(function(){
     $('#navmenu').removeClass('opens');
     $('#overlay').removeClass('blurs');
   });
-
-  // dropdown menu
-
-  if ('ontouchstart' in document.documentElement) {
-    $('#application-menu').dropit({ action: 'click' })
-    $('#getting-started-menu').dropit({ action: 'click' })
-    $('#guide-menu').dropit({ action: 'click' })
-    $('#advanced-topics-menu').dropit({ action: 'click' })
-    $('#resources-menu').dropit({ action: 'click' })
-    $('#blog-menu').dropit({ action: 'click' })
-    $('#lb-menu').dropit({ action: 'click' })
-    $('#changelog-menu').dropit({ action: 'click' })
-  }
-  else {
-    $('#application-menu').dropit({ action: 'mouseenter' })
-    $('#getting-started-menu').dropit({ action: 'mouseenter' })
-    $('#guide-menu').dropit({ action: 'mouseenter' })
-    $('#advanced-topics-menu').dropit({ action: 'mouseenter' })
-    $('#resources-menu').dropit({ action: 'mouseenter' })
-    $('#blog-menu').dropit({ action: 'mouseenter' })
-    $('#lb-menu').dropit({ action: 'mouseenter' })
-    $('#changelog-menu').dropit({ action: 'mouseenter' })
-  }
-
-  // mobile
-
-  // main menu
-  $('#navmenu > li').click(function () {
-
-    // applicable only if it has a menu
-    if ($(this).find('ul').length) {
-
-      if ($(this).hasClass('active-mobile-menu')) {
-        $(this).removeClass('active-mobile-menu')
-        $(this).find('.dropit .dropit-submenu').hide()
-      }
-      else {
-        $('.dropit .dropit-submenu').hide()
-        $(this).find('.dropit .dropit-submenu').show()
-        $('#navmenu li.active-mobile-menu').removeClass('active-mobile-menu')
-        $(this).addClass('active-mobile-menu')
-      }
-    }
-    else if (isMobile.any || isSmallScreen) {
-      var path = $(this).find('a').attr('href')
-      document.location = path
-    }
-
-  })
-
-  // when in mobile mode, menu names should open the submenu
-  $('.dropit-trigger a').click(function (e) {
-
-    if (window.matchMedia('(max-width: 899px)').matches) {
-      e.preventDefault()
-    }
-
-  })
-
-  // sub menu navigation
-  $('.dropit-submenu li').click(function () {
-    if (isMobile.any || isSmallScreen) {
-      var path = $(this).find('a').attr('href')
-      document.location = path
-    }
-  })
 
   // i18n notice
   if (readCookie('i18nClose')) {
