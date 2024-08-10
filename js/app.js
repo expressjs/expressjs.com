@@ -3,16 +3,6 @@
  License: MIT
 */
 
-// It uses `window.matchMedia` instead of `window.addEventListener('resize')` because `matchMedia` performs better by not changing its value with every screen resize.
-const mobileScreen = window.matchMedia("(max-width: 899px)");
-let isSmallScreen = false;
-
-mobileScreen.addEventListener("change", (event) => {
-  if (event.matches) {
-	isSmallScreen = true;
-  }
-});
-
 // ------------------- codehighligh -------------------------
 
 const $codejs = document.querySelectorAll("code.language-js");
@@ -153,6 +143,17 @@ if (readCookie("i18nClose") && $i18nNoticeBox != null) {
 }
 
 $(function () {
+	var isSmallScreen = checkSmallScreen()
+		
+	$(window).resize(function () {
+	  isSmallScreen = true;
+	  isSmallScreen = checkSmallScreen()
+	})
+	
+	function checkSmallScreen() {
+	  return window.innerWidth < 899 ? true : false
+	}
+		
 	// hilighth e menu item of the current page
 	$("#navmenu ul ul")
 		.find('a[href="' + document.location.pathname + '"]')
