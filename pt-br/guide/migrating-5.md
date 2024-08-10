@@ -23,7 +23,7 @@ Para instalar o alfa mais recente e ter uma prévia do Express
 5, digite o seguinte comando no diretório raiz do seu aplicativo:
 
 ```console
-$ npm install express@5.0.0-alpha.2 --save
+$ npm install "express@>={{ site.data.express.next_version }}" --save
 ```
 
 É possível em seguida executar seus testes automatizados para

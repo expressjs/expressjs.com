@@ -152,6 +152,11 @@ $(function(){
     }
 
   })
+  $('#tags-side-menu li').on('click', function() {
+      // Remove prev 'active's 
+      $(this).next().siblings().removeClass('active');
+      $(this).next().addClass('active')
+    })
 
   // show mobile menu
   $('#nav-button').click(function () {
@@ -173,6 +178,7 @@ $(function(){
     $('#guide-menu').dropit({ action: 'click' })
     $('#advanced-topics-menu').dropit({ action: 'click' })
     $('#resources-menu').dropit({ action: 'click' })
+    $('#blog-menu').dropit({ action: 'click' })
     $('#lb-menu').dropit({ action: 'click' })
     $('#changelog-menu').dropit({ action: 'click' })
   }
@@ -182,6 +188,7 @@ $(function(){
     $('#guide-menu').dropit({ action: 'mouseenter' })
     $('#advanced-topics-menu').dropit({ action: 'mouseenter' })
     $('#resources-menu').dropit({ action: 'mouseenter' })
+    $('#blog-menu').dropit({ action: 'mouseenter' })
     $('#lb-menu').dropit({ action: 'mouseenter' })
     $('#changelog-menu').dropit({ action: 'mouseenter' })
   }

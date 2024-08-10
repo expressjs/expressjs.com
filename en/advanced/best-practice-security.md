@@ -66,7 +66,7 @@ Here is an example of checking URLs before using `res.redirect` or `res.location
 ```js
 app.use((req, res) => {
   try {
-    if (new Url(req.query.url).host === 'example.com') {
+    if (new Url(req.query.url).host !== 'example.com') {
       return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`)
     }
   } catch (e) {

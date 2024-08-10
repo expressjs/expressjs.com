@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!---
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+-->
+<html lang="{{ page.lang }}">
+  {% include head.html %}
+  
+  <body>
+    
+    <section class="content">
+
+      {% include header/header-{{ page.lang }}.html %}
+
+      {% include blog/posts-menu.md %}
+
+      <div id="overlay"></div>
+      <div id="blog-doc" markdown="1">
+          {% if page.title %}
+          <h1>{{page.title}}</h1>
+          {% endif %} 
+          {% if page.sub_title %}
+          <h2>{{page.sub_title}}</h2>
+          {% endif %}
+          <div class="blog-details">
+            {% if page.author %}
+            <div class="blog-author">By {{page.author}}</div>
+            {% endif %}
+            <div class="blog-date">{{page.date| date: "%d %b %Y" }}</div>
+          </div>
+        {{ content }}
+      </div>
+    </section>
+
+    {% include footer/footer-{{ page.lang }}.html %}
+
+  </body>
+
+</html>

@@ -9,6 +9,7 @@ on:
       - 'es/**'
       - 'fr/**'
       - 'it/**'
+      - 'id/**'
       - 'ja/**'
       - 'ko/**'
       - 'pt-br/**'
@@ -37,7 +38,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            const languages = ['en', 'es', 'fr', 'it', 'ja', 'ko', 'pt-br', 'ru', 'sk', 'th', 'tr', 'uk', 'uz', 'zh-cn', 'zh-tw'];
+            const languages = ['en', 'es', 'fr', 'it', 'id', 'ja', 'ko', 'pt-br', 'ru', 'sk', 'th', 'tr', 'uk', 'uz', 'zh-cn', 'zh-tw'];
             const prNumber = context.eventName === 'workflow_dispatch' ? context.payload.inputs.prNumber : context.issue.number;
             const { data: pullRequest } = await github.rest.pulls.get({
               owner: context.repo.owner,
