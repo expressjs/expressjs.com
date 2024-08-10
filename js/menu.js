@@ -22,11 +22,11 @@ for (const el of $itemsMenu) {
 	});
 
 	el.addEventListener("click", () => {
-		$itemsMenu.forEach((item) => {
+		for (const item of $itemsMenu) {
 			if (item.id !== el.id) {
 				item.classList.remove("open");
 			}
-		});
+		}	
 		el.classList.toggle("open");
 	});
 }
@@ -35,6 +35,8 @@ for (const el of $itemsMenu) {
 
 const $linkItemsMenu = document.querySelectorAll(".submenu > a");
 const $linkItemsContentMenu = document.querySelectorAll(".submenu-content a");
+const $menu = document.querySelector("#navmenu");
+const $overlay = document.querySelector("#overlay");
 
 for (const el of $linkItemsMenu) {
 	el.addEventListener("click", (e) => {
@@ -45,6 +47,17 @@ for (const el of $linkItemsMenu) {
 		}
 	});
 }
+
+document.querySelector("#nav-button").addEventListener("click", () => {
+	$menu.classList.toggle("opens");
+	$overlay.classList.toggle("blurs");
+});
+
+// close mobile menu
+$overlay.addEventListener("click", () => {
+	$menu.classList.remove("opens");
+	$overlay.classList.remove("blurs");
+});
 
 // hilight the menu item of the current page
 document

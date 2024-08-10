@@ -82,6 +82,7 @@
     #navbar {
         padding: 0;
         top: 1px;
+        position: static;
     }
 
     #navmenu>li:first-child {
@@ -155,6 +156,7 @@
     .submenu-content li a {
         font-size: 16px !important;
         padding: 5px 5px 5px 5%;
+        padding-left: 10% !important;
     }
 
     .submenu-content li {
@@ -164,5 +166,10 @@
     .submenu-content li a:hover {
         background: #cccccc;
         color: #666 !important;
+    }
+
+    #theme-icon-container{
+        position: absolute;bottom: 15px;
+        z-index: 10000;
     }
 }

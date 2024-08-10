@@ -144,18 +144,6 @@ $(function(){
       $(this).next().addClass('active')
     })
 
-  // show mobile menu
-  $('#nav-button').click(function () {
-    $('#navmenu').toggleClass('opens');
-    $('#overlay').toggleClass('blurs');
-  });
-
-  // close mobile menu
-  $('#overlay').click(function () {
-    $('#navmenu').removeClass('opens');
-    $('#overlay').removeClass('blurs');
-  });
-
   // i18n notice
   if (readCookie('i18nClose')) {
     $('#i18n-notice-box').hide()
