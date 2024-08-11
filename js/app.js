@@ -142,6 +142,22 @@ if (readCookie("i18nClose") && $i18nNoticeBox != null) {
   }
 }
 
+// ------------------- menu bar -----------------------------
+
+const $menu = document.querySelector("#menu")
+
+window.addEventListener("load", ()=> {
+	if($menu != null){
+		$menu.style.height = window.innerHeight - 150 + "px"
+	}
+})
+
+window.addEventListener("resize", ()=> {
+	if($menu != null){
+		$menu.style.height = window.innerHeight - 150 + "px"
+	}
+})
+
 $(function () {
 	var isSmallScreen = checkSmallScreen()
 		
@@ -157,19 +173,7 @@ $(function () {
 	// hilighth e menu item of the current page
 	$("#navmenu ul ul")
 		.find('a[href="' + document.location.pathname + '"]')
-		.addClass("current");
-
-	// menu bar
-
-	$(window).bind("load resize", function () {
-		$("#menu").css("height", $(this).height() - 150 + "px");
-	});
-
-	$("#tags-side-menu li").on("click", function () {
-		// Remove prev 'active's
-		$(this).next().siblings().removeClass("active");
-		$(this).next().addClass("active");
-	});
+		.addClass("current");	
 
 	// show mobile menu
 	$("#nav-button").click(function () {
