@@ -15,6 +15,11 @@ redirect_from: "/3x/api.html"
 
   <h1>3.x API</h1>
 
+  See also:
+  
+  * [New features in 3.x.](../guide/new-features-in-3x.md)
+  * [Migrating from 2.x to 3.x.](../guide/migrating-from-2x-to-3x.md)
+
   {% include api/{{ page.lang }}/3x/express.md %}
   {% include api/{{ page.lang }}/3x/app.md %}
   {% include api/{{ page.lang }}/3x/req.md %}
