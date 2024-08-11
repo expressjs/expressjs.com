@@ -1,3 +1,10 @@
+---
+layout: page
+title: Migrating from 3.x to 4.x
+menu: guide
+lang: en
+redirect_from: "/guide/migrating-from-3.x-to-4.x.html"
+---
 # Migrating from 3.x to 4.x
 
 Express 3.x to 4.0 migration guide. You may also be interested in [New features in 4.x][new-in-4x].

@@ -1,3 +1,10 @@
+---
+layout: page
+title: New features in 4.x
+menu: guide
+lang: en
+redirect_from: "/guide/new-features-in-4x.html"
+---
 # New features in 4.x
 
 See [Express 4.x docs](http://expressjs.com/4x/api.html) for more examples and complete API documentation. You may also be interested in \[Migrating from 3.x to 4.x\](Migrating from 3.x to 4.x).
