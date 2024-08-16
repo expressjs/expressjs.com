@@ -1,8 +1,8 @@
 # Use the official Jekyll image as the base
 FROM jekyll/jekyll:4.2.2
 
-# Install the latest version of Ruby
-RUN npm update ruby --save
+# version of Ruby
+ENV RUBY_VERSION=3.1.1
 
 # Set the working directory
 WORKDIR /usr/src/app
