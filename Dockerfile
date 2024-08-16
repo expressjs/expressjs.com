@@ -1,8 +1,10 @@
 # Use the official Jekyll image as the base
 FROM jekyll/jekyll:4.2.2
 
-# version of Ruby
+# Set version of Ruby and Jekyll
 ENV RUBY_VERSION=3.1.1
+ENV RUBY_MAJOR=3.1
+ENV JEKYLL_VERSION=4.3.3
 
 # Set the working directory
 WORKDIR /usr/src/app
