@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby file: ".ruby-version"
+ruby '3.1.1'
 
 gem 'github-pages', group: :jekyll_plugins
 gem 'webrick'
