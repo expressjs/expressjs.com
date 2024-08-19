@@ -24,7 +24,7 @@ To preview the website locally:
    ```sh
    $ bundle install
    ```
-
+   #gaurav
    Bundler will look in the Gemfile for which gems to install. The `github-pages` gem includes the same version of Jekyll and other dependencies as used by GitHub Pages, so that your local setup mirrors GitHub Pages as closely as possible.
 
 1. Run Jekyll using the following command:
