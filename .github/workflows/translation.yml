@@ -30,6 +30,11 @@ on:
 jobs:
   check-translation:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -52,9 +57,11 @@ jobs:
             });
             const modifiedLanguages = new Set(files.map(file => file.filename.split('/')[0]));
             const labelsToAdd = languages.filter(lang => !modifiedLanguages.has(lang)).map(lang => `requires-translation-${lang}`);
-            await github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: pullRequest.number,
-              labels: labelsToAdd
-            });
+            if (labelsToAdd.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pullRequest.number,
+                labels: labelsToAdd
+              });
+            }
