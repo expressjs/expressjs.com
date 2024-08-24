@@ -617,51 +617,55 @@ pre, code {
 }
 
 footer {
-  font-size: 11px;
-  margin: 60px 10px 30px 10px;
-  padding-left: 5%;
+  font-size: 12px;
+  margin: 60px 5% 30px;
   max-width: 1090px;
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
 }
 
 #footer-content {
-  display: table;
-  margin: 20px auto 0;
+  width: 100%;
+  justify-content: space-between;
+  gap: 32px;
+  display: flex;
 }
 
-#footer-content div {
-  float: left;
-  margin-right: 20px;
-  background-repeat: no-repeat;
-  background-position: 0 1px;
-  padding-bottom: 4px;
+#footer-copyright {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  gap: 20px;
 }
 
-#github {
-  margin-right: 5px !important;
+#footer-copyright a {
+  width: fit-content;
 }
 
-#license {
-  text-align: center;
-  margin-top: -5px;
+#footer-copyright img {
+  max-width: 125px;
 }
 
-#license img {
-  position: relative;
-  top: 3px;
+#github{
+  font-size: 20px;
 }
 
-#fork {
-  background-image: url(/images/fork-icon.png);
-  background-size: 11px 16px;
-  padding-left: 15px;
+#footer-policy{
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 8px;
+  justify-content: center;
+  font-size: 15px;
+}
+
+#footer-links{
+  display: flex;
+  gap: 20px;
 }
 
 @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-devicepixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx) {
-
-  #fork {
-    background-image: url(/images/fork-icon@2x.png);
-  }
-
   #announcements p:first-child {
     background-image: url(/images/announcement-icon@2x.png);
   }
@@ -1103,27 +1107,15 @@ h2 a {
     color: #666 !important;
   }
 
-  footer {
-    margin: 60px 0px 30px 0px;
-    padding: 0 5%;
-  }
-
   #footer-content {
-    display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
   }
 
-  #footer-content div {
+  #footer-copyright > a {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    white-space: nowrap;
-  }
-
-  #footer-content div#sponsor {
-    display: block;
+    justify-content: center;
   }
 
   #doc-langs {
@@ -1154,31 +1146,6 @@ h2 a {
   #description .express {
     display: none;
   }
-
-  footer {
-    margin-top: 14px;
-  }
-
-  #footer-content {
-    margin-left: 5%;
-  }
-
-  #footer-content div {
-    clear: both;
-  }
-
-  #footer-content div:nth-child(4) {
-    white-space: pre-line;
-    text-align: center;
-  }
-
-  #fork {
-    margin-left: 7px;
-    margin-top: 2px;
-    margin-bottom: 30px;
-    padding-left: 18px;
-  }
-
 }
 
 @media all and (max-width: 320px) {
