@@ -1,0 +1,30 @@
+name: Update External Docs
+on:
+    schedule:
+    - cron:  '0 8 * * 1'
+
+
+permissions:
+    pull-requests: write
+    contents: write
+
+jobs:
+    update-docs:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Run scripts
+              run: bash ./get-contributing.sh && bash ./get-readmes.sh
+            - name: Create Pull Request
+              uses: peter-evans/create-pull-request@v5
+              with: 
+                token: ${{ secrets.GITHUB_TOKEN }}
+                commit-message: update external docs
+                title: 'Update external docs'
+                body: >
+                  This auto-generated PR updates external documentation to the expressjs.com repository.
+                labels: doc
+                branch: external-docs-${{ github.sha }}
+                delete-branch: true
+
+
