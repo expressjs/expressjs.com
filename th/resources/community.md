@@ -7,22 +7,6 @@ lang: th
 
 # Community
 
-## Mailing List
-
-Join over 2000 Express users or browse over 5000
-discussions in the [Google Group](https://groups.google.com/group/express-js).
-
-## Gitter
-
-The [expressjs/express chatroom](https://gitter.im/expressjs/express) is great place
-for developers interested in the everyday discussions related to Express.
-
-## IRC channel
-
-Hundreds of developers idle in #express on freenode every day.
-If you have questions about the framework, jump in for quick
-feedback.
-
 ## Issues
 
 If you've come across what you think is a bug, or just want to make
