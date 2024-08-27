@@ -58,3 +58,7 @@ a feature request open a ticket in the [issue queue](https://github.com/expressj
 
 View dozens of Express application [examples](https://github.com/expressjs/express/tree/master/examples)
 in the repository covering everything from API design and authentication to template engine integration.
+
+## Github Discussions
+
+The [GitHub Discussions](https://github.com/expressjs/discussions) section is an excellent space to engage in conversations about the development and maintenance of Express, as well as to share ideas and discuss topics related to its usage.
