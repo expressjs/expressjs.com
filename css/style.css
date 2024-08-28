@@ -1362,3 +1362,18 @@ h2 a {
     max-width: 80%;
   }
 }
+
+.no-release {
+  color: gray;
+  opacity: 0.8;
+}
+html.dark-mode .no-release {
+  color: #abc8c3;
+}
+
+.supported {
+  color: green !important;
+}
+.eol {
+  color: red !important;
+}
