@@ -39,7 +39,7 @@ jobs:
           npm install
           npm run verify-translation
          
-          git checkout feat/create-status-page
+          # git checkout feat/create-status-page
           git config --global user.name 'Carlos Stenzel'
           git config --global user.email "carlosstenzel@hotmail.com"
           git add .
