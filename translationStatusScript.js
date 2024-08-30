@@ -104,5 +104,6 @@ fs.writeFile("./en/resources/status-translate.md", content, (err) => {
     console.error(err);
   } else {
     // file written successfully
+    console.log("Status Translate file created");
   }
 });
