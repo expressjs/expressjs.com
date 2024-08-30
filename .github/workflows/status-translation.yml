@@ -38,8 +38,10 @@ jobs:
       - run: | 
           npm install
           npm run verify-translation
+
+          echo ${GITHUB_REF#refs/heads/}
           
-          #git checkout ${GITHUB_REF#refs/heads/}
+          git checkout ${GITHUB_REF#refs/heads/}
           git config --global user.name "github-actions"
           git config --global user.email "carlosstenzel@hotmail.com"
           git add .
