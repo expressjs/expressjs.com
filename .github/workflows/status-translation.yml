@@ -45,6 +45,7 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "carlosstenzel@hotmail.com"
           git add .
+          git status
           git commit -m "generated"
           git push
 
