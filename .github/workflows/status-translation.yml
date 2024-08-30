@@ -31,10 +31,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/github-script@v7
+      - uses: actions/setup-node@v2
         with:
-          script: |
-            const script = require('./translationStatusScript.js')
-            console.log(script({github, context}))
+          node-version: '20'
+      - run: node ./translationStatusScript.js'
           
-        
