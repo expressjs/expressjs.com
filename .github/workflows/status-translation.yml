@@ -35,10 +35,13 @@ jobs:
       - run: | 
           npm install
           npm run verify-translation
+          echo ${{GITHUB_REF#refs/heads/}}
+          git checkout ${{GITHUB_REF#refs/heads/}}
+          git config --global user.name ${{ github.event.commits[0].author.name }}
+          git config --global user.email "carlosstenzel@hotmail.com"
+          git add .
+          git status
+          git commit -m "generated"
+          git push
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "[Bot] Update status translate!"
-          commit_user_name: Carlos Stenzel
-          commit_user_email: carlosstenzel@hotmail.com
-          commit_author: Carlos Stenzel <carlosstenzel@hotmail.com>
+          
