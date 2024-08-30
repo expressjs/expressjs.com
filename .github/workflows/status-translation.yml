@@ -22,13 +22,14 @@ on:
       - 'zh-cn/**'
       - 'zh-tw/**'
 
-permissions:
-  contents: write
+
 
 
 jobs:
   verify-translation:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
@@ -38,8 +39,9 @@ jobs:
           npm install
           npm run verify-translation
           
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          #git checkout ${GITHUB_REF#refs/heads/}
+          git config --global user.name "github-actions"
+          git config --global user.email "carlosstenzel@hotmail.com"
           git add .
           git commit -m "generated"
           git push
