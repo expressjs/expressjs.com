@@ -1,0 +1,40 @@
+name: status-transalation
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'en/**'
+      - 'de/**'
+      - 'es/**'
+      - 'fr/**'
+      - 'it/**'
+      - 'ja/**'
+      - 'ko/**'
+      - 'pt-br/**'
+      - 'ru/**'
+      - 'sk/**'
+      - 'th/**'
+      - 'tr/**'
+      - 'uk/**'
+      - 'uz/**'
+      - 'zh-cn/**'
+      - 'zh-tw/**'
+
+permissions:
+  contents: write
+
+
+jobs:
+  verify-translation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const script = require('../../translationStatusScript.js')
+            console.log(script({github, context}))
+          
+        
