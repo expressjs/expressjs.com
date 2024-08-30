@@ -1,5 +1,5 @@
 ---
-layout: Status Translate
+layout: page
 title: Status Translate
 menu: resources
 lang: en
