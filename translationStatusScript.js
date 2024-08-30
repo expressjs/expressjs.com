@@ -35,7 +35,7 @@ verifyLanguage.forEach(() => {
 
 content = content + '\n'
 
-const ignoreFiles = ['status-translate']
+const ignoreFiles = ['resources/status-translate']
 
 const languageBaseFiles = ['guide', 'resources', 'resources/middleware', 'starter', 'advanced', '3x', '4x', '5x']
 
