@@ -38,7 +38,6 @@ jobs:
           npm install
           npm run verify-translation
          
-          # git checkout ${{GITHUB_REF#refs/heads/}}
           git config --global user.name ${{ github.event.commits[0].author.name }}
           git config --global user.email "carlosstenzel@hotmail.com"
           git add .
