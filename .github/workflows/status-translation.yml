@@ -28,9 +28,9 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
         with:
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Display event name 
         run: echo "github.event_name=${{ github.event_name }}"
@@ -41,6 +41,7 @@ jobs:
           npm install
           npm run verify-translation
          
+
           git config --global user.name 'Carlos Stenzel'
           git config --global user.email "carlosstenzel@hotmail.com"
           git add .
