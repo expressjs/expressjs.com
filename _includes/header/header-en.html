@@ -144,6 +144,23 @@
                   </li>
               </ul>
           </li>
+          <li>
+              <ul id="blog-menu" class="menu">
+                  <li><a href="{{site.posts.first.url}}"{% if page.menu == 'blog' %} class="active"{% endif %}>Blog</a>
+                      <ul>
+                          <li>
+                            <a href="{{site.posts.first.url}}">Latest post</a> 
+                          </li>
+                          <li>
+                            <a href="/{{ page.lang }}/blog/posts.html">All posts</a> 
+                          </li>                          
+                          <li>
+                            <a href="/{{ page.lang }}/blog/write-post.html">Write a Post</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
           <!--
           <li>
               <ul id="changelog-menu" class="menu">
@@ -156,8 +173,11 @@
           </li>
         -->
       </ul>
-      <div id="theme-icon-container"  class="theme-toggle default-theme" title="toggle darkmode">
-        <i class="fa fa-moon-o fa-2x"></i>
-      </div> 
+      <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
+        <i class="fa fa-moon-o fa-lg hidden-dark"></i>
+        <span class="sun-icon hidden-light"></span>
+       
+        <!--<i class="fa fa-sun-o fa-lg hidden-light"></i>-->
+      </div>
   </div>
 </header>

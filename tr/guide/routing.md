@@ -164,7 +164,7 @@ Rota parametreleri, URL'deki konumlarında belirtilen değerleri yakalamak için
 
 ```
 Rota yolu: /users/:userId/books/:bookId
-İStek URL'i: http://localhost:3000/users/34/books/8989
+İstek URL'i: http://localhost:3000/users/34/books/8989
 req.params: { "userId": "34", "bookId": "8989" }
 ```
 
@@ -184,7 +184,7 @@ Tire (`-`) ve nokta (`.`) oldukları gibi değerlendirildikleri için, kullanı�
 
 ```
 Rota yolu: /flights/:from-:to
-İtek URL'i: http://localhost:3000/flights/LAX-SFO
+İstek URL'i: http://localhost:3000/flights/LAX-SFO
 req.params: { "from": "LAX", "to": "SFO" }
 ```
 

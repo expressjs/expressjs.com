@@ -9,6 +9,7 @@ on:
       - 'es/**'
       - 'fr/**'
       - 'it/**'
+      - 'id/**'
       - 'ja/**'
       - 'ko/**'
       - 'pt-br/**'
@@ -29,6 +30,11 @@ on:
 jobs:
   check-translation:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -37,7 +43,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            const languages = ['en', 'es', 'fr', 'it', 'ja', 'ko', 'pt-br', 'ru', 'sk', 'th', 'tr', 'uk', 'uz', 'zh-cn', 'zh-tw'];
+            const languages = ['en', 'es', 'fr', 'it', 'id', 'ja', 'ko', 'pt-br', 'ru', 'sk', 'th', 'tr', 'uk', 'uz', 'zh-cn', 'zh-tw'];
             const prNumber = context.eventName === 'workflow_dispatch' ? context.payload.inputs.prNumber : context.issue.number;
             const { data: pullRequest } = await github.rest.pulls.get({
               owner: context.repo.owner,
@@ -51,9 +57,11 @@ jobs:
             });
             const modifiedLanguages = new Set(files.map(file => file.filename.split('/')[0]));
             const labelsToAdd = languages.filter(lang => !modifiedLanguages.has(lang)).map(lang => `requires-translation-${lang}`);
-            await github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: pullRequest.number,
-              labels: labelsToAdd
-            });
+            if (labelsToAdd.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pullRequest.number,
+                labels: labelsToAdd
+              });
+            }
