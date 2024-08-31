@@ -26,7 +26,8 @@ jobs:
   verify-translation:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+       contents: write
+       pull-requests: write
     steps:
       - uses: actions/checkout@v3
         
