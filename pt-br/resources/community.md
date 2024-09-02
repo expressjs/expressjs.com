@@ -48,11 +48,6 @@ Além disso, a comunidade Express mantém módulos nestes duas organizações no
 
 Para acompanhar o que está acontecendo em toda a comunidade, Confira a [ExpressJS StatusBoard](https://expressjs.github.io/statusboard/).
 
-## Gitter
-
-O [expressjs/express chatroom](https://gitter.im/expressjs/express) é um ótimo lugar
-para desenvolvedores interessados ​​nas discussões cotidianas relacionadas ao Express.
-
 ## Issues
 
 Se você se deparou com o que acha que é um bug ou apenas deseja fazer
@@ -62,13 +57,3 @@ uma solicitação de recurso abre um ticket no [issue queue](https://github.com/
 
 Veja dezenas de aplicativos Express [exemplos](https://github.com/expressjs/express/tree/master/examples)
 no repositório temos de tudo, desde design de API e autenticação até integração de mecanismo de template.
-
-## Lista de discussão
-
-Junte-se a mais de 2.000 usuários Express ou navegue em mais de 5.000
-discussões no [Google Grupos](https://groups.google.com/group/express-js).
-
-## IRC channel
-
-Centenas de desenvolvedores ficam disponíveis no #express no freenode todos os dias.
-Se você tiver dúvidas sobre a estrutura, obtenha feedback rápido.
