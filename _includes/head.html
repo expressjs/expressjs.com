@@ -3,7 +3,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="og:image" content="https://expressjs.com/images/express-facebook-share.png">
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <script src="/js/theme.js"></script>
     <link rel="stylesheet" href="/css/dark-theme.css?_={{ site.time | date: '%s' }}">
@@ -13,7 +12,23 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext">
     <link rel="stylesheet" href="/css/{{ page.lang }}.css">
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="{{page.description}}">
+
+    <meta property="og:url" content="https://expressjs.com">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{page.title}}">
+    <meta property="og:description" content="{{page.description}}">
+    <meta property="og:image" content="https://expressjs.com/images/og.png">                
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="expressjs.com">
+    <meta property="twitter:url" content="https://expressjs.com">
+    <meta name="twitter:title" content="{{page.title}}">
+    <meta name="twitter:description" content="{{page.description}}">
+    <meta name="twitter:image" content="https://expressjs.com/images/og.png">
+
     <script data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script data-cfasync="false" src="/js/ismobile.js"></script>
     <script data-cfasync="false" src="/js/app.js"></script>
