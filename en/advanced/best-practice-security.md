@@ -14,7 +14,7 @@ The term _"production"_ refers to the stage in the software lifecycle when an ap
 
 Development and production environments are usually set up differently and have vastly different requirements. What's fine in development may not be acceptable in production. For example, in a development environment you may want verbose logging of errors for debugging, while the same behavior can become a security concern in a production environment. And in development, you don't need to worry about scalability, reliability, and performance, while those concerns become critical in production.
 
-{% include note.html content="If you believe you have discovered a security vulnerability in Express, please see
+{% include admonitions/note.html content="If you believe you have discovered a security vulnerability in Express, please see
 [Security Policies and Procedures](/en/resources/contributing.html#security-policies-and-procedures).
 " %}
 
@@ -120,7 +120,7 @@ disable using the `app.disable()` method:
 app.disable('x-powered-by')
 ```
 
-{% include note.html content="Disabling the `X-Powered-By header` does not prevent
+{% include admonitions/note.html content="Disabling the `X-Powered-By header` does not prevent
 a sophisticated attacker from determining that an app is running Express. It may
 discourage a casual exploit, but there are other ways to determine an app is running
 Express." %}
