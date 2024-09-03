@@ -11,7 +11,7 @@ A _template engine_ enables you to use static template files in your application
 variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
 This approach makes it easier to design an HTML page.
 
-The [Express application generator](/{{ page.lang }}/starter/generator.html) uses [Pug](https://pugjs.org/api/getting-started.html) as its default, but it also supports [Handlebars](https://www.npmjs.com/package/handlebars), and [EJS](https://www.npmjs.com/package/ejs).
+The [Express application generator](/{{ page.lang }}/starter/generator.html) uses [Pug](https://pugjs.org/api/getting-started.html) as its default, but it also supports [Handlebars](https://www.npmjs.com/package/handlebars), and [EJS](https://www.npmjs.com/package/ejs), among others.
 
 To render template files, set the following [application setting properties](/{{ page.lang }}/4x/api.html#app.set), in the default `app.js` created by the generator:
 
@@ -29,7 +29,7 @@ $ npm install pug --save
 Express-compliant template engines such as Pug export a function named `__express(filePath, options, callback)`,
 which `res.render()` calls to render the template code.
 
-Some template engines do not follow this convention. The [Consolidate.js](https://www.npmjs.org/package/consolidate)
+Some template engines do not follow this convention. The [@ladjs/consolidate](https://www.npmjs.com/package/@ladjs/consolidate)
 library follows this convention by mapping all of the popular Node.js template engines, and therefore works seamlessly within Express.
 </div>
 
