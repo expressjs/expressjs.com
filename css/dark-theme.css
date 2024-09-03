@@ -43,6 +43,11 @@
   height: 27px;
   cursor: pointer;
 }
+
+html.dark-mode .button {
+  color: #e5e5e6;  
+}
+
 #theme-icon-container .hidden-dark {
   display: block;
 }
