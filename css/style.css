@@ -562,7 +562,7 @@ html[xmlns] .clearfix {
 }
 
 #i18n-notice-box {
-  margin-top: 150px;
+  margin: 100px 3% 20px 3%;
   position: relative;
 }
 
@@ -570,7 +570,7 @@ html[xmlns] .clearfix {
   position: absolute;
   top: 3px;
   right: 4px;
-  color: #550000;
+  color: var(--notice-accent);
   cursor: pointer;
 }
 
