@@ -1311,3 +1311,25 @@ html.dark-mode .no-release {
 .eol {
   color: red !important;
 }
+
+.logo-table {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  column-gap: 48px;
+}
+
+.logo-table h3{
+  margin-bottom: 12px;
+}
+
+.hidden-dark {
+  display: block;
+}
+
+html.dark-mode .hidden-light {
+  display: block;
+}
+html.dark-mode .hidden-dark {
+  display: none;
+}
