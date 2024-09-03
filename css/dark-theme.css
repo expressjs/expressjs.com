@@ -271,3 +271,11 @@ html.dark-mode #blog-side-menu-container h3 a{
 html.dark-mode #blog-side-menu > li > a{
   color: var(--dark_inner_text);
 }
+
+html.dark-mode pre code {
+  background-color: inherit;
+}
+
+html.dark-mode code {
+  background-color:  #0d1117;
+}

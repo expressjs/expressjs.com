@@ -349,6 +349,15 @@ pre {
 pre code {
   overflow: scroll;
   word-break: break-all;
+  background-color: inherit;
+}
+
+code {
+  background-color: #eeeeee;
+  margin-block: -.125rem;
+  font-size: 13px;
+  padding: .125rem .375rem;
+  line-height: 28px;
 }
 
 /* top button */
