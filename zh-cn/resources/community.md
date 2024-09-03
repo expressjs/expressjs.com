@@ -7,19 +7,6 @@ lang: zh-cn
 
 # 社区
 
-## 邮件发送列表
-
-在 [Google Group](https://groups.google.com/group/express-js) 中加入超过 2000 名 Express 用户的行列，浏览超过 5000 个讨论。
-
-## Gitter
-
-[expressjs/express 聊天室](https://gitter.im/expressjs/express)是对 Express 相关的日常讨论感兴趣的开发人员的理想去处。
-
-## IRC 频道
-
-数百名开发人员每天参与讨论 freenode 的 #express 话题。
-如果您存在有关框架的问题，请马上加入讨论以获得快速反馈。
-
 ## 示例
 
 查看存储库中数十个 Express 应用程序[示例](https://github.com/expressjs/express/tree/master/examples)，这些示例涵盖从 API 设计和认证到模板引擎集成的一切内容。

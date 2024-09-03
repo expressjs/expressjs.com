@@ -13,7 +13,7 @@ __"프로덕션 (production)"__ 이라는 용어는 소프트웨어 라이프사
 
 개발 환경 및 프로덕션 환경은 일반적으로 서로 다르게 설정되며 두 환경의 요구사항은 크게 다릅니다. 개발 환경에서는 좋은 것일지라도 프로덕션 환경에서는 허용되지 않을 수도 있습니다. 예를 들면, 개발 환경에서는 디버깅을 위해 상세한 오류 로깅이 선호될 수 있지만, 이러한 행동은 프로덕션 환경에서 보안 우려사항이 될 수 있습니다. 그리고 개발 환경에서는 확장성, 신뢰성 및 성능에 대해 걱정할 필요가 없지만, 이러한 요인들은 프로덕션 환경에서 매우 중요해집니다.
 
-{% include note.html content="Express의 보안 취약점을 발견하신것 같다면,
+{% include admonitions/note.html content="Express의 보안 취약점을 발견하신것 같다면,
 [Security Policies and Procedures](/en/resources/contributing.html#security-policies-and-procedures)를 따라주십시오.
 " %}
 
@@ -91,7 +91,7 @@ app.disable('x-powered-by')
 
 `helmet.js`를 사용하는 경우에는 사용자를 대신하여 `helmet.js`가 위의 작업을 실행합니다.
 
-{% include note.html content="`X-Powered-By header`를 비활성화하는 행위는 고수준의 공격자가 앱이 Express를 사용하고 있는지 확인하는 걸 막을 수 없습니다. 일반적인 취약점은 막을지 모르지만, 앱이 Express를 사용하고 있는지 알아내는 다른 방법은 많이 있습니다. "%}
+{% include admonitions/note.html content="`X-Powered-By header`를 비활성화하는 행위는 고수준의 공격자가 앱이 Express를 사용하고 있는지 확인하는 걸 막을 수 없습니다. 일반적인 취약점은 막을지 모르지만, 앱이 Express를 사용하고 있는지 알아내는 다른 방법은 많이 있습니다. "%}
 
 <a name="use-cookies-securely"></a>
 ## 쿠키를 안전하게 사용

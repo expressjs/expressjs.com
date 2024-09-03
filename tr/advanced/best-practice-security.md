@@ -13,7 +13,7 @@ _"canlı ortam"_ terimi, bir uygulama veya API'nin genel olarak son kullanıcıl
 
 Canlı ve geliştirme ortamları genel olarak farklı şekilde kurulurlar ve çok farklı gereksinimleri vardır. Geliştirme ortamında iyi olan bir şey canlı ortamda kabul edilebilir olmayabilir. Örneğin, geliştirme ortamında hata ayıklama için ayrıntılı hataların loglanmasını isteyebilirsiniz, ancak aynı şey canlı ortamda güvenlik açığı oluşturabilir. Ve geliştirme ortamında ölçeklenebilirlik, güvenilirlik ve performans hakkında endişe etmenize gerek yok iken, bu konular canlı ortamda kritikleşir.
 
-{% include note.html content="Express'te bir güvenlik açığı keşfettiğinizi düşünüyorsanız, lütfen bakınız
+{% include admonitions/note.html content="Express'te bir güvenlik açığı keşfettiğinizi düşünüyorsanız, lütfen bakınız
 [Güvenlik Politikaları ve Prosedürleri](https://github.com/expressjs/express/blob/master/Security.md).
 " %}
 
@@ -86,7 +86,7 @@ app.disable('x-powered-by')
 
 Eğer `helmet.js` kullanıyorsanız, bunu sizin için halleder.
 
-{% include note.html content="X-Powered-By başlığının devre dışı bırakılması, tecrübeli bir saldırganın bir uygulamanın Express çalıştırdığını belirlemesini önlemez. Bu, sıradan bir istismarı engelleyebilir, ancak bir uygulamanın Express çalıştırdığını belirlemenin başka yolları da var. "%}
+{% include admonitions/note.html content="X-Powered-By başlığının devre dışı bırakılması, tecrübeli bir saldırganın bir uygulamanın Express çalıştırdığını belirlemesini önlemez. Bu, sıradan bir istismarı engelleyebilir, ancak bir uygulamanın Express çalıştırdığını belirlemenin başka yolları da var. "%}
 
 ## Çerezleri güvenli kullanın
 

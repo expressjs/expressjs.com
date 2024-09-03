@@ -11,20 +11,6 @@ lang: sk
 
 # Komunita
 
-## Mailová skupina
-
-Pridajte sa k 2000 Express používateľom alebo sa pozrite na viac než 5000
-[Google Group](https://groups.google.com/group/express-js) diskusií.
-
-## Gitter
-
-[Strongloop/express chatroom](https://gitter.im/expressjs/express) je skvelým miestom pre developerov zaujímajúcich sa a diskutujúcich o Express-e.
-
-## IRC kanál
-
-Stovky developerov nájdete každý deň na #express kanály.
-Ak máte otázky ohľadom frameworku, spýtajte sa.
-
 # Príklady
 
 Pozrite sa na desiatky Express aplikácií v priečinku [examples](https://github.com/expressjs/express/tree/master/examples)

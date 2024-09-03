@@ -13,7 +13,7 @@ lang: ja
 
 開発環境と実稼働環境は通常、別々にセットアップされ、それぞれの要件は大きく異なっています。開発環境では許可されることが、実稼働環境では許可されないことがあります。例えば、開発環境ではデバッグのためにエラーの詳細なロギングを実行できますが、同じ動作が実稼働環境ではセキュリティー上の問題となります。開発環境では、スケーラビリティー、信頼性、パフォーマンスについて心配する必要はありませんが、それらは実稼働環境では重大な問題となります。
 
-{% include note.html content="If you believe you have discovered a security vulnerability in Express, please see [Security Policies and Procedures](/en/resources/contributing.html#security-policies-and-procedures)." %}
+{% include admonitions/note.html content="If you believe you have discovered a security vulnerability in Express, please see [Security Policies and Procedures](/en/resources/contributing.html#security-policies-and-procedures)." %}
 
 本番環境でのExpressアプリケーションのセキュリティのベスト・プラクティスは次のとおりです。
 
@@ -83,7 +83,7 @@ app.disable('x-powered-by')
 
 `helmet.js` を使用する場合は、この操作が自動的に実行されます。
 
-{% include note.html content="Disabling the `X-Powered-By header` does not prevent a sophisticated attacker from determining that an app is running Express. It may discourage a casual exploit, but there are other ways to determine an app is running Express. "%}
+{% include admonitions/note.html content="Disabling the `X-Powered-By header` does not prevent a sophisticated attacker from determining that an app is running Express. It may discourage a casual exploit, but there are other ways to determine an app is running Express. "%}
 
 ## Cookie をセキュアに使用する
 
