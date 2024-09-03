@@ -68,8 +68,7 @@ html.dark-mode #logo > a {
   color: var(--dark_main_text);
 }
 /* navbar links/drop down menu links */
-html.dark-mode #navbar ul#navmenu li a,
-html.dark-mode #navbar ul#navmenu li.dropit-trigger a {
+html.dark-mode #navbar ul#navmenu li a {
   color: var(--dark_main_text);
 }
 /* first drop down link - some js is adding current class */
@@ -79,13 +78,9 @@ html.dark-mode #navbar ul#navmenu li a.current {
 html.dark-mode #navbar ul#navmenu li a.current:hover {
   background: var(--dark_hover);
 }
-html.dark-mode .menu ul.dropit-submenu {
-  background: var(--dark_bg);
-}
+
 /* drop down menu links  */
-html.dark-mode #navbar .menu ul.dropit-submenu a:hover {
-  background: var(--dark_hover);
-}
+
 html.dark-mode #navbar #navmenu li {
   background: var(--second_dark_bg);
 }
@@ -125,20 +120,6 @@ html.dark-mode #navbar ul#navmenu > span.algolia-autocomplete > input::placehold
 }
 html.dark-mode div#overlay {
   opacity: 0.5;
-}
-@media (max-width: 899px) {
-  #theme-icon-container {
-    bottom: 35px;
-  }
-  /* mobile menu main links hover */
-  html.dark-mode div#navbar ul#navmenu .dropit-trigger:hover {
-    background: var(--dark_hover);
-  }
-    /* mobile menu inner links hover */
-  html.dark-mode div#navbar .menu ul.dropit-submenu a:hover {
-    background: var(--second_dark_hover);
-    color: var(--dark_main_text) !important;
-  }
 }
 
 html.dark-mode .doc-box.doc-info pre.language-javascript {
