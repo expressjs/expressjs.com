@@ -74,10 +74,14 @@ strong, th {
 }
 
 #home-content {
-  margin: 183px 0 2% 5%;
+  margin: 40px 0 2% 5%;
   max-width: 900px;
   padding-right: 9%;
   display: flex;
+}
+
+.en-doc #home-content {
+  margin-top: 150px;
 }
 
 #homepage-leftpane {
@@ -929,7 +933,7 @@ h2 a {
   }
 
   #home-content {
-    margin: 150px 0 0 5%;
+    margin: 60px 0 0 5%;
     padding-right: 5%;
   }
 
