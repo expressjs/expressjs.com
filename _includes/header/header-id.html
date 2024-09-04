@@ -8,10 +8,9 @@
         <input id="q" placeholder="🔎 search">
         <ul id="navmenu">
             <li><a href="/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Home</a></li>
-            <li>
-                <ul id="getting-started-menu" class="menu">
-                    <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Mulai</a>
-                        <ul>
+            <li id="getting-started-menu" class="submenu">
+                    <a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Mulai</a>
+                        <ul class="submenu-content">
                             <li>
                               <a href="/{{ page.lang }}/starter/installing.html">
                                 Menginstal
@@ -48,13 +47,10 @@
                               </a>
                             </li>
                         </ul>
-                    </li>
-                </ul>
             </li>
-            <li>
-                <ul id="guide-menu" class="menu">
-                    <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Panduan</a>
-                        <ul>
+            <li id="guide-menu" class="submenu">
+                    <a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Panduan</a>
+                        <ul class="submenu-content">
                             <li><a href="/{{ page.lang }}/guide/routing.html">Routing</a>
                             </li>
                             <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Membuat middleware</a>
@@ -78,13 +74,10 @@
                             <li><a href="/{{ page.lang }}/guide/database-integration.html">Integrasi Database</a>
                             </li>
                         </ul>
-                    </li>
-                </ul>
             </li>
-            <li>
-                <ul id="application-menu" class="menu">
-                    <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Referensi API</a>
-                        <ul>
+            <li id="application-menu" class="submenu">
+                    <a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Referensi API</a>
+                        <ul class="submenu-content">
                             <li><a href="/{{ page.lang }}/5x/api.html">5.x (beta)</a>
                             </li>
                             <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
@@ -94,13 +87,10 @@
                             <li><a href="/2x/">2.x (deprecated)</a>
                             </li>
                         </ul>
-                    </li>
-                </ul>
             </li>
-            <li>
-                <ul id="advanced-topics-menu" class="menu">
-                    <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Topik lanjutan</a>
-                        <ul>
+            <li id="advanced-topics-menu" class="submenu">
+                    <a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Topik lanjutan</a>
+                        <ul class="submenu-content">
                             <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Membangun template engines</a>
                             </li>
                             <li><a href="/{{ page.lang }}/advanced/security-updates.html">Security updates</a>
@@ -112,13 +102,10 @@
                             <li><a href="/{{ page.lang }}/advanced/healthcheck-graceful-shutdown.html">Health checks & shutdown</a>
                             </li>
                         </ul>
-                    </li>
-                </ul>
             </li>
-            <li>
-                <ul id="resources-menu" class="menu">
-                    <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Resources</a>
-                        <ul>
+            <li id="resources-menu" class="submenu">
+                    <a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Resources</a>
+                        <ul class="submenu-content">
                             <li>
                               <a href="/{{ page.lang }}/resources/community.html">Community</a>
                             </li>
@@ -138,20 +125,7 @@
                               <a href="/{{ page.lang }}/changelog/4x.html">Release Change Log</a>
                             </li>
                         </ul>
-                    </li>
-                </ul>
             </li>
-            <!--
-            <li>
-                <ul id="changelog-menu" class="menu">
-                    <li><a href="/{{ page.lang }}/changelog/4x.html"{% if page.menu == 'changelog' %} class="active"{% endif %}>Changelog</a>
-                        <ul>
-                            <li><a href="/{{ page.lang }}/changelog/4x.html">4.x</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-          -->
         </ul>
         <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
           <i class="fa fa-moon-o fa-2x hidden-dark"></i>

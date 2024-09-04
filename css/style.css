@@ -693,9 +693,9 @@ footer {
   top: 100%;
   left: 0;
   margin: 0 0 0 1px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 1px 3px #00000026;
   z-index: 1000;
-  min-width: 215px;
+  min-width: 230px;
   width: fit-content;
   background-color: #fcfcfa;
   border: 1px solid #b2b2b2;
@@ -719,17 +719,13 @@ footer {
 .submenu-content li a {
   display: block;
   color: #777;
-  padding: 2 8px 2px 8px;
+  padding: 2px 8px 2px 8px;
 }
 
 .submenu-content a:hover {
   background: #259dff;
   color: #fff !important;
   text-decoration: none;
-}
-
-.menu ul {
-  display: none;
 }
 
 /* secondary menu */

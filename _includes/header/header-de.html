@@ -8,10 +8,9 @@
       <input id="q" placeholder="🔎 search">
       <ul id="navmenu">
           <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Home</a></li>
-          <li>
-              <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Einführung</a>
-                      <ul>
+          <li id="getting-started-menu" class="submenu">
+                  <a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Einführung</a>
+                      <ul class="submenu-content">
                           <li>
                             <a href="/{{ page.lang }}/starter/installing.html">
                               Installation
@@ -40,15 +39,12 @@
                           <li>
                             <a href="/{{ page.lang }}/starter/faq.html">
                               Häufig gestellte Fragen</a>
-</li>
+                          </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="guide-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Leitfaden</a>
-                      <ul>
+          <li id="guide-menu" class="submenu">
+                  <a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Leitfaden</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/guide/routing.html">Routing</a>
                           </li>
                           <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Middleware schreiben</a>
@@ -70,13 +66,10 @@
                           <li><a href="/{{ page.lang }}/guide/database-integration.html">Datenbankintegration</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="application-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API-Referenz</a>
-                      <ul>
+          <li id="application-menu" class="submenu">
+                  <a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API-Referenz</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
                           </li>
                           <li><a href="/{{ page.lang }}/3x/api.html">3.x (veraltet)</a>
@@ -84,31 +77,23 @@
                           <li><a href="/2x/">2.x (veraltet)</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Themen für Fortgeschrittene</a>
-                      <ul>
+          <li id="advanced-topics-menu" class="submenu">
+                  <a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Themen für Fortgeschrittene</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Template-Engines</a>
                           </li>
-
                           <li><a href="/{{ page.lang }}/advanced/security-updates.html">Sicherheitsupdates</a>
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">Sicherheitsspezifische Best Practices</a>
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Leistungsspezifische Best Practices</a>
                           </li>
-
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="resources-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Ressourcen</a>
-                      <ul>
+          <li id="resources-menu" class="submenu">
+                  <a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Ressourcen</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/resources/glossary.html">Glossar</a>
                           </li>
                           <li><a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
@@ -116,8 +101,6 @@
                           <li><a href="/{{ page.lang }}/resources/community.html">Community</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
       </ul>
       <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
