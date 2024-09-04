@@ -246,9 +246,7 @@ a {
 /* logo */
 
 #logo {
-  padding: 10px 25px;
   width: auto;
-  border-left: none;
   z-index: 1;
 }
 
