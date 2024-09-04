@@ -656,8 +656,6 @@ footer {
 
 #navbar {
   line-height: 30px;
-  max-width: 1200px;
-  width: fit-content;
   display: flex;
   align-items: center;
 }
@@ -691,7 +689,7 @@ footer {
 .submenu-content {
   position: absolute;
   top: 100%;
-  left: -50%;
+  right: -50%;
   margin: auto;
   box-shadow: 0px 1px 3px #00000026;
   z-index: 1000;
@@ -705,11 +703,11 @@ footer {
   display: none;
 }
 
-.submenu-content li:first-child a{
+.submenu-content li:first-child a {
   border-radius: 12px 12px 0 0;
 }
 
- .submenu-content li:last-child a {
+.submenu-content li:last-child a {
   border-radius: 0px 0px 12px 12px;
 }
 

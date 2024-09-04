@@ -86,9 +86,10 @@ html.dark-mode .submenu-content a:hover {
 
 /* drop down menu links  */
 
-html.dark-mode #navbar #navmenu li {
+html.dark-mode #navbar #navmenu li ul {
   background: var(--second_dark_bg);
 }
+
 /* search bar */
 html.dark-mode #navbar > span.algolia-autocomplete > input {
   background-color: var(--second_dark_bg);
