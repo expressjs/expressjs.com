@@ -84,6 +84,10 @@ html.dark-mode .submenu-content a:hover {
   background: var(--dark_hover);
 }
 
+html.dark-mode #navmenu > li {
+  background: var(--second_dark_bg);
+}
+
 html.dark-mode #q {
   border-color: #979797 !important;
 }
@@ -99,6 +103,16 @@ html.dark-mode #navbar #navmenu li ul {
   background: var(--second_dark_bg);
 }
 
+@media all and (max-width: 1064px) {
+  html.dark-mode #navbar #navmenu li ul {
+    background: var(--main_dark_bg) !important;
+  }
+
+  html.dark-mode .submenu-content li a:hover {
+    background: var(--dark_hover) !important;
+    color: var(--dark_main_text) !important;
+  }
+}
 /* search bar */
 html.dark-mode #navbar > span.algolia-autocomplete > input {
   background-color: var(--second_dark_bg);

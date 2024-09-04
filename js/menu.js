@@ -51,12 +51,14 @@ for (const el of $linkItemsMenu) {
 document.querySelector("#nav-button").addEventListener("click", () => {
 	$menu.classList.toggle("opens");
 	$overlay.classList.toggle("blurs");
+	document.body.classList.toggle("no-scroll")
 });
 
 // close mobile menu
 $overlay.addEventListener("click", () => {
 	$menu.classList.remove("opens");
 	$overlay.classList.remove("blurs");
+	document.body.classList.remove("no-scroll")
 });
 
 // hilight the menu item of the current page

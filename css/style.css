@@ -28,6 +28,10 @@ body {
   color: #555;
 }
 
+body.no-scroll{
+  overflow: hidden;
+}
+
 h1 {
   font-size: 30px;
   line-height: 36px;
@@ -1301,7 +1305,7 @@ html.dark-mode .hidden-dark {
     align-items: initial !important;
   }
 
-  .submenu.open>a {
+  .submenu.open > a {
     display: flex;
     align-items: center;
     min-height: 47px;
@@ -1313,6 +1317,7 @@ html.dark-mode .hidden-dark {
     display: none;
     margin-top: 7px;
     background: #ddd;
+    color: #333;
     padding: 0;
     margin: 0;
     border: none;
@@ -1321,6 +1326,19 @@ html.dark-mode .hidden-dark {
     max-height: 190px;
     overflow-y: scroll;
     overflow-x: hidden;
+    transform: none;
+  }
+
+  .submenu-content li > a {
+    width: 100%;
+  }
+
+  .submenu-content li:first-child a {
+    border-radius: 0;
+  }
+  
+  .submenu-content li:last-child a {
+    border-radius: 0;
   }
 
   .submenu-content.open {
