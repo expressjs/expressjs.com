@@ -23,9 +23,8 @@
 }
 #theme-icon-container {
   position: relative;
-  float: right;
-  color: white;
-  min-width: 50px;
+  min-width: 27px;
+  min-height: 27px;
   color: black;
 }
 #theme-icon-container i {
@@ -80,7 +79,8 @@ html.dark-mode #navbar ul#navmenu li a {
 html.dark-mode #navbar ul#navmenu li a.current {
   background: transparent;
 }
-html.dark-mode #navbar ul#navmenu li a.current:hover {
+html.dark-mode #navbar ul#navmenu li a.current:hover,
+html.dark-mode .submenu-content a:hover {
   background: var(--dark_hover);
 }
 

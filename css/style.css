@@ -318,7 +318,7 @@ header {
   height: 57px;
   display: flex;
   align-items: center;
-  column-gap: 32px;
+  column-gap: 40px;
   justify-content: center;
   z-index: 100;
   border-bottom: 1px solid #ddd;
@@ -664,7 +664,6 @@ footer {
 
 #navbar a {
   color: #666;
-  padding-left: 20px;
 }
 
 #navbar a.active {
@@ -678,6 +677,7 @@ footer {
 
 #navmenu {
   display: flex;
+  gap: 20px;
 }
 
 
@@ -691,17 +691,26 @@ footer {
 .submenu-content {
   position: absolute;
   top: 100%;
-  left: 0;
-  margin: 0 0 0 1px;
+  left: -50%;
+  margin: auto;
   box-shadow: 0px 1px 3px #00000026;
   z-index: 1000;
   min-width: 230px;
   width: fit-content;
   background-color: #fcfcfa;
   border: 1px solid #b2b2b2;
+  border-radius: 12px;
   list-style: none;
   padding: 0;
   display: none;
+}
+
+.submenu-content li:first-child a{
+  border-radius: 12px 12px 0 0;
+}
+
+ .submenu-content li:last-child a {
+  border-radius: 0px 0px 12px 12px;
 }
 
 .submenu.open .submenu-content {
@@ -719,7 +728,7 @@ footer {
 .submenu-content li a {
   display: block;
   color: #777;
-  padding: 2px 8px 2px 8px;
+  padding: 2px 20px 2px 20px;
 }
 
 .submenu-content a:hover {
