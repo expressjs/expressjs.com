@@ -8,10 +8,9 @@
       <input id="q" placeholder="🔎 search">
       <ul id="navmenu">
           <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Página Inicial</a></li>
-          <li>
-              <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Introdução</a>
-                      <ul>
+          <li id="getting-started-menu" class="submenu">
+                  <a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Introdução</a>
+                      <ul class="submenu-content">
                           <li>
                             <a href="/{{ page.lang }}/starter/installing.html">
                               Instalação
@@ -43,13 +42,10 @@
                             </a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="guide-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Guia</a>
-                      <ul>
+          <li id="guide-menu" class="submenu">
+                  <a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Guia</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/guide/routing.html">Roteamento</a>
                           </li>
                           <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Escrevendo o middleware</a>
@@ -71,13 +67,10 @@
                           <li><a href="/{{ page.lang }}/guide/database-integration.html">Integração de Banco de dados</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="application-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Referência da API</a>
-                      <ul>
+          <li id="application-menu" class="submenu">
+                  <a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Referência da API</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
                           </li>
                           <li><a href="/{{ page.lang }}/3x/api.html">3.x (descontinuada)</a>
@@ -85,13 +78,10 @@
                           <li><a href="/2x/">2.x (descontinuada)</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Tópicos Avançados</a>
-                      <ul>
+          <li id="advanced-topics-menu" class="submenu">
+                  <a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Tópicos Avançados</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Mecanismos de modelo</a>
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/security-updates.html">Atualizações de segurança</a>
@@ -100,15 +90,11 @@
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Melhores práticas de desempenho</a>
                           </li>
-
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="resources-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Recursos</a>
-                      <ul>
+          <li id="resources-menu" class="submenu">
+                  <a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Recursos</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/resources/glossary.html">Glossário</a>
                           </li>
                           <li><a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
@@ -116,8 +102,6 @@
                           <li><a href="/{{ page.lang }}/resources/community.html">Comunidade</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
       </ul>
       <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
