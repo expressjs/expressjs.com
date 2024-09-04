@@ -689,7 +689,8 @@ footer {
 .submenu-content {
   position: absolute;
   top: 100%;
-  right: -50%;
+  left: 50%;
+  transform: translate(-50%);
   margin: auto;
   box-shadow: 0px 1px 3px #00000026;
   z-index: 1000;
@@ -840,12 +841,22 @@ h2 a {
 
 .algolia-autocomplete {
   max-width: 9em;
-  margin-right: 3px;
 }
 
 .algolia-autocomplete #q {
-  display: initial
+  display: initial;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: color .3s ease;
+  padding-inline: 12px;
+  outline: none;
 }
+
+.algolia-autocomplete #q:focus-visible,
+.algolia-autocomplete #q:focus {
+  border-color: #333 !important;
+}
+
 /* search-bar desktop re-sizing */
 @media all and (min-width: 950px) {
   .algolia-autocomplete {

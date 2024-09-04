@@ -84,6 +84,15 @@ html.dark-mode .submenu-content a:hover {
   background: var(--dark_hover);
 }
 
+html.dark-mode #q {
+  border-color: #979797 !important;
+}
+
+html.dark-mode .algolia-autocomplete #q:focus-visible,
+html.dark-mode .algolia-autocomplete #q:focus {
+  border-color: var(--dark_border) !important;
+}
+
 /* drop down menu links  */
 
 html.dark-mode #navbar #navmenu li ul {
