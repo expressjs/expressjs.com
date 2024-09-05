@@ -3,7 +3,7 @@
 This is a built-in middleware function in Express.
 It serves static files and is based on  [serve-static](/resources/middleware/serve-static.html).
 
-<div class="doc-box doc-info" markdown="1">NOTE: For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+<div class="doc-box doc-info" markdown="1">For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
 </div>
 
 The `root` argument specifies the root directory from which to serve static assets.
@@ -38,7 +38,7 @@ Possible values for this option are:
 - "deny" - Deny a request for a dotfile, respond with `403`, then call `next()`.
 - "ignore" - Act as if the dotfile does not exist, respond with `404`, then call `next()`.
 
-**NOTE**: With the default value, it will not ignore files in a directory that begins with a dot.
+{% include admonitions/note.html content="With the default value, it will not ignore files in a directory that begins with a dot." %}
 
 <h5 id='fallthrough'>fallthrough</h5>
 

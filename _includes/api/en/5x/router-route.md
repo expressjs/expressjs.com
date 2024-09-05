@@ -45,6 +45,4 @@ router.route('/users/:user_id')
 This approach re-uses the single `/users/:user_id` path and adds handlers for
 various HTTP methods.
 
-<div class="doc-box doc-info" markdown="1">
-NOTE: When you use `router.route()`, middleware ordering is based on when the _route_ is created, not when method handlers are added to the route. For this purpose, you can consider method handlers to belong to the route to which they were added.
-</div>
+{% include admonitions/note.html content="When you use `router.route()`, middleware ordering is based on when the _route_ is created, not when method handlers are added to the route. For this purpose, you can consider method handlers to belong to the route to which they were added." %}
