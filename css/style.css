@@ -1298,6 +1298,8 @@ html.dark-mode .hidden-dark {
   #navbar a {
     font-size: 19px;
     margin: 0;
+    width: 100%;
+    height: 100%;
     padding-left: 5%;
   }
 

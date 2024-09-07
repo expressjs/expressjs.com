@@ -5,6 +5,8 @@ let isSmallScreen = false;
 mobileScreen.addEventListener("change", (event) => {
 	if (event.matches) {
 		isSmallScreen = true;
+	} else {
+		document.body.classList.remove("no-scroll")
 	}
 });
 
@@ -13,22 +15,24 @@ mobileScreen.addEventListener("change", (event) => {
 const $itemsMenu = document.querySelectorAll(".submenu");
 
 for (const el of $itemsMenu) {
-	el.addEventListener("mouseenter", () => {
-		el.classList.add("open");
-	});
-
-	el.addEventListener("mouseleave", () => {
-		el.classList.remove("open");
-	});
-
-	el.addEventListener("click", () => {
-		for (const item of $itemsMenu) {
-			if (item.id !== el.id) {
-				item.classList.remove("open");
+	if (isSmallScreen || 'ontouchstart' in document.documentElement) {
+		el.addEventListener("click", () => {
+			for (const item of $itemsMenu) {
+				if (item.id !== el.id) {
+					item.classList.remove("open");
+				}
 			}
-		}	
-		el.classList.toggle("open");
-	});
+			el.classList.toggle("open");
+		});
+	} else {
+		el.addEventListener("mouseenter", () => {
+			el.classList.add("open");
+		});
+		
+		el.addEventListener("mouseleave", () => {
+			el.classList.remove("open");
+		});
+	}
 }
 
 // Mobile Menu
@@ -42,7 +46,9 @@ for (const el of $linkItemsMenu) {
 	el.addEventListener("click", (e) => {
 		if (el.classList.contains("open")) {
 			el.classList.remove("open");
-		} else if (mobileScreen.matches) {
+		}  
+		
+		if (isSmallScreen || 'ontouchstart' in document.documentElement) {
 			e.preventDefault();
 		}
 	});
