@@ -6,6 +6,7 @@
   --notice-accent: rgb(249, 232, 195);
   --warn-bg: rgb(78, 34, 50);
   --warn-accent: rgb(249, 195, 214);
+  --code-bg: #0d1117;
 }
 
 :root {
@@ -274,8 +275,4 @@ html.dark-mode #blog-side-menu > li > a{
 
 html.dark-mode pre code {
   background-color: inherit;
-}
-
-html.dark-mode code {
-  background-color:  #0d1117;
-}
+} 

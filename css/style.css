@@ -13,6 +13,7 @@
   --notice-accent: rgb(115, 82, 13);
   --warn-bg: rgb(250, 209, 223);
   --warn-accent: rgb(138, 15, 58);
+  --code-bg: #eeeeee;
 }
 
 * {
@@ -353,7 +354,7 @@ pre code {
 }
 
 code {
-  background-color: #eeeeee;
+  background-color: var(--code-bg);
   margin-block: -.125rem;
   font-size: 13px;
   padding: .125rem .375rem;
