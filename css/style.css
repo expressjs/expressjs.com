@@ -1327,7 +1327,7 @@ html.dark-mode .hidden-dark {
     border-radius: 0;
     box-shadow: none;
     max-height: 190px;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     transform: none;
   }
@@ -1339,7 +1339,11 @@ html.dark-mode .hidden-dark {
   .submenu-content li:first-child a {
     border-radius: 0;
   }
-  
+
+  .submenu-content li:last-child {
+    border-bottom: 0;
+  }
+
   .submenu-content li:last-child a {
     border-radius: 0;
   }
