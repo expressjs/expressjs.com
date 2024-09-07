@@ -13,7 +13,7 @@
   --notice-accent: rgb(115, 82, 13);
   --warn-bg: rgb(250, 209, 223);
   --warn-accent: rgb(138, 15, 58);
-  --code-bg: #eeeeee;
+  --code-bg: #f0f1f3;
 }
 
 * {
@@ -359,6 +359,7 @@ code {
   font-size: 13px;
   padding: .125rem .375rem;
   line-height: 28px;
+  border-radius: 6px;
 }
 
 /* top button */
