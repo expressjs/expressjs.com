@@ -1,1 +1,1 @@
-Bu doküman ingilizce dokümana göre eski olabilir. Son güncellemeler için lütfen <a href="/">İngilizce Dokümanı</a>. ziyaret edin
+Bu doküman ingilizce dokümana göre eski olabilir. Son güncellemeler için lütfen <a href='{{ page.url | replace: page.lang, "en" }}'>İngilizce Dokümanı</a>. ziyaret edin
