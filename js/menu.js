@@ -15,24 +15,28 @@ mobileScreen?.addEventListener("change", (event) => {
 const $itemsMenu = document.querySelectorAll(".submenu");
 
 for (const el of $itemsMenu) {
-	if (isSmallScreen || 'ontouchstart' in document.documentElement) {
-		el.addEventListener("click", () => {
+	el.addEventListener("click", () => {
+		if (isSmallScreen || 'ontouchstart' in document.documentElement) {
 			for (const item of $itemsMenu) {
 				if (item.id !== el.id) {
 					item.classList.remove("open");
 				}
 			}
 			el.classList.toggle("open");
-		});
-	} else {
-		el.addEventListener("mouseenter", () => {
+		}
+	});
+
+	el.addEventListener("mouseenter", () => {
+		if (!isSmallScreen) {
 			el.classList.add("open");
-		});
-		
-		el.addEventListener("mouseleave", () => {
+		}
+	});
+	
+	el.addEventListener("mouseleave", () => {
+		if (!isSmallScreen) {
 			el.classList.remove("open");
-		});
-	}
+		}
+	});
 }
 
 // Mobile Menu
