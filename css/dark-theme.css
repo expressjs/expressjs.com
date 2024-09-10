@@ -24,8 +24,6 @@
 }
 #theme-icon-container {
   position: relative;
-  min-width: 27px;
-  min-height: 27px;
   color: black;
 }
 #theme-icon-container i {
@@ -42,10 +40,6 @@
   width: 27px;
   height: 27px;
   cursor: pointer;
-}
-
-html.dark-mode .button {
-  color: #e5e5e6;  
 }
 
 #theme-icon-container .hidden-dark {
