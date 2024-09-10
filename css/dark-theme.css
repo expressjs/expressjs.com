@@ -83,13 +83,13 @@ html.dark-mode #navmenu > li {
   background: var(--second_dark_bg);
 }
 
-html.dark-mode #q {
-  border-color: #979797 !important;
+html.dark-mode #navbar #q {
+  border-color: #979797;
 }
 
-html.dark-mode .algolia-autocomplete #q:focus-visible,
-html.dark-mode .algolia-autocomplete #q:focus {
-  border-color: var(--dark_border) !important;
+html.dark-mode #navbar .algolia-autocomplete #q:focus-visible,
+html.dark-mode #navbar .algolia-autocomplete #q:focus {
+  border-color: var(--dark_border);
 }
 
 /* drop down menu links  */
@@ -100,12 +100,12 @@ html.dark-mode #navbar #navmenu li ul {
 
 @media all and (max-width: 1064px) {
   html.dark-mode #navbar #navmenu li ul {
-    background: var(--main_dark_bg) !important;
+    background: var(--main_dark_bg);
   }
 
-  html.dark-mode .submenu-content li a:hover {
-    background: var(--dark_hover) !important;
-    color: var(--dark_main_text) !important;
+  html.dark-mode #navbar .submenu-content li a:hover {
+    background: var(--dark_hover) ;
+    color: var(--dark_main_text);
   }
 }
 /* search bar */

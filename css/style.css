@@ -749,9 +749,9 @@ footer {
   padding: 2px 20px 2px 20px;
 }
 
-.submenu-content a:hover {
+#navbar .submenu-content a:hover {
   background: #259dff;
-  color: #fff !important;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -873,7 +873,7 @@ h2 a {
 
 .algolia-autocomplete #q:focus-visible,
 .algolia-autocomplete #q:focus {
-  border-color: #333 !important;
+  border-color: #333;
 }
 
 /* search-bar desktop re-sizing */
