@@ -2,7 +2,7 @@
 const mobileScreen = window.matchMedia("(max-width: 1064px)");
 let isSmallScreen = false;
 
-mobileScreen?.addEventListener("change", (event) => {
+mobileScreen.addEventListener("change", (event) => {
 	if (event.matches) {
 		isSmallScreen = true;
 	} else {
@@ -42,6 +42,7 @@ for (const el of $itemsMenu) {
 // Mobile Menu
 
 const $linkItemsMenu = document.querySelectorAll(".submenu > a");
+const $linkItemsContentMenu = document.querySelectorAll(".submenu-content a");
 const $menu = document.querySelector("#navmenu");
 const $overlay = document.querySelector("#overlay");
 
@@ -57,20 +58,20 @@ for (const el of $linkItemsMenu) {
 	});
 }
 
-document.querySelector("#nav-button")?.addEventListener("click", () => {
-	$menu?.classList.toggle("opens");
-	$overlay?.classList.toggle("blurs");
+document.querySelector("#nav-button").addEventListener("click", () => {
+	$menu.classList.toggle("opens");
+	$overlay.classList.toggle("blurs");
 	document.body.classList.toggle("no-scroll")
 });
 
 // close mobile menu
-$overlay?.addEventListener("click", () => {
-	$menu?.classList.remove("opens");
-	$overlay?.classList.remove("blurs");
+$overlay.addEventListener("click", () => {
+	$menu.classList.remove("opens");
+	$overlay.classList.remove("blurs");
 	document.body.classList.remove("no-scroll")
 });
 
 // hilight the menu item of the current page
 document
 	.querySelector(`.submenu-content a[href="${document.location.pathname}"]`)
-	?.classList.add("current");
+	.classList.add("current");
