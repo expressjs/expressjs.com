@@ -1,11 +1,11 @@
 // It uses `window.matchMedia` instead of `window.addEventListener('resize')` because `matchMedia` performs better by not changing its value with every screen resize.
 const mobileScreen = window.matchMedia("(max-width: 1064px)");
-let isSmallScreen = false;
+let isSmallScreen = mobileScreen?.matches;
 
-mobileScreen.addEventListener("change", (event) => {
-	if (event.matches) {
-		isSmallScreen = true;
-	} else {
+mobileScreen?.addEventListener("change", (event) => {
+	isSmallScreen = event.matches
+
+	if (!event.matches) {
 		document.body.classList.remove("no-scroll")
 	}
 });
@@ -42,7 +42,6 @@ for (const el of $itemsMenu) {
 // Mobile Menu
 
 const $linkItemsMenu = document.querySelectorAll(".submenu > a");
-const $linkItemsContentMenu = document.querySelectorAll(".submenu-content a");
 const $menu = document.querySelector("#navmenu");
 const $overlay = document.querySelector("#overlay");
 
@@ -58,16 +57,16 @@ for (const el of $linkItemsMenu) {
 	});
 }
 
-document.querySelector("#nav-button").addEventListener("click", () => {
-	$menu.classList.toggle("opens");
-	$overlay.classList.toggle("blurs");
+document.querySelector("#nav-button")?.addEventListener("click", () => {
+	$menu?.classList.toggle("opens");
+	$overlay?.classList.toggle("blurs");
 	document.body.classList.toggle("no-scroll")
 });
 
 // close mobile menu
-$overlay.addEventListener("click", () => {
-	$menu.classList.remove("opens");
-	$overlay.classList.remove("blurs");
+$overlay?.addEventListener("click", () => {
+	$menu?.classList.remove("opens");
+	$overlay?.classList.remove("blurs");
 	document.body.classList.remove("no-scroll")
 });
 
