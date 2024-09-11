@@ -73,4 +73,4 @@ $overlay?.addEventListener("click", () => {
 // hilight the menu item of the current page
 document
 	.querySelector(`.submenu-content a[href="${document.location.pathname}"]`)
-	.classList.add("current");
+	?.classList.add("current");
