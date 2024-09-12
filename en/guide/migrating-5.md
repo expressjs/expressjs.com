@@ -31,6 +31,7 @@ You can then run your automated tests to see what fails, and fix problems accord
   <li><a href="#req.param">req.param(name)</a></li>
   <li><a href="#res.json">res.json(obj, status)</a></li>
   <li><a href="#res.jsonp">res.jsonp(obj, status)</a></li>
+  <li><a href="#res.redirect">res.redirect(url, status)</a></li>
   <li><a href="#res.send.body">res.send(body, status)</a></li>
   <li><a href="#res.send.status">res.send(status)</a></li>
   <li><a href="#res.sendfile">res.sendfile()</a></li>
@@ -44,6 +45,7 @@ You can then run your automated tests to see what fails, and fix problems accord
   <li><a href="#app.router">app.router</a></li>
   <li><a href="#req.host">req.host</a></li>
   <li><a href="#req.query">req.query</a></li>
+  <li><a href="#res.vary">res.vary</a></li>
 </ul>
 
 **Improvements**
@@ -94,6 +96,10 @@ Express 5 no longer supports the signature `res.json(obj, status)`. Instead, set
 
 Express 5 no longer supports the signature `res.jsonp(obj, status)`. Instead, set the status and then chain it to the `res.jsonp()` method like this: `res.status(status).jsonp(obj)`.
 
+<h4 id="res.redirect">res.redirect(url, status)</h4>
+
+Express 5 no longer supports the signature `res.redirect(url, status)`. Instead, use the following signature: `res.redirect(status, url)`.
+
 <h4 id="res.send.body">res.send(body, status)</h4>
 
 Express 5 no longer supports the signature `res.send(obj, status)`. Instead, set the status and then chain it to the `res.send()` method like this: `res.status(status).send(obj)`.
@@ -140,6 +146,10 @@ In Express 4, the `req.host` function incorrectly stripped off the port number i
 <h4 id="req.query">req.query</h4>
 
 The `req.query` property is no longer a writable property and is instead a getter. The default query parser has been changed from "extended" to "simple".
+
+<h4 id="res.query">res.vary</h4>
+
+The `res.vary` throws an error when the `field` argument is missing. In Express 4, if the argument was omitted, it gave a warning in the console
 
 <h3>Improvements</h3>
 
