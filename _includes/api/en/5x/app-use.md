@@ -12,7 +12,7 @@ A route will match any path that follows its path immediately with a "`/`".
 For example: `app.use('/apple', ...)` will match "/apple", "/apple/images",
 "/apple/images/news", and so on.
 
-Since `path` defaults to "/", middleware mounted without a path will be executed for every request to the app.  
+Since `path` defaults to "/", middleware mounted without a path will be executed for every request to the app.
 For example, this middleware function will be executed for _every_ request to the app:
 
 ```js
@@ -142,7 +142,6 @@ app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], (req, res, next) => {
 
 The following table provides some simple examples of middleware functions that
 can be used as the `callback` argument to `app.use()`, `app.METHOD()`, and `app.all()`.
-Even though the examples are for `app.use()`, they are also valid for `app.use()`, `app.METHOD()`, and `app.all()`.
 
 <table class="doctable" border="1">
 
@@ -176,6 +175,7 @@ app.use(router)
 ```
 
 An Express app is valid middleware.
+
 ```js
 const subApp = express()
 subApp.get('/', (req, res, next) => {
