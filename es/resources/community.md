@@ -9,13 +9,13 @@ lang: es
 
 ## Comité Técnico
 
-El comité técnico de Express se reúne en línea cada dos semanas (según sea necesario) para discutir el desarrollo y el mantenimiento de Express, entre otras incidencias relevantes para el proyecto Express. Cada reunión se anuncia normalmente en una [incidencia de expressjs/discussions](https://github.com/expressjs/discussions/issues) con un enlace para unirse o ver la reunión, que está abierta a todos los observadores.
+El comité técnico de Express se reúne en línea cada dos semanas (según sea necesario) para discutir el desarrollo y el mantenimiento de Express, entre otros problemas relevantes para el proyecto Express. Cada reunión se anuncia normalmente en un [problema de expressjs/discussions](https://github.com/expressjs/discussions/issues) con un enlace para unirse o ver la reunión, que está abierta a todos los observadores.
 
 Las reuniones son grabadas; para ver la lista de las grabaciones, consulte el [canal de YouTube de Express.js](https://www.youtube.com/channel/UCYjxjAeH6TRik9Iwy5nXw7g).
 
 Los miembros del comité técnico de Express son:
 
-**Activo:**
+**Activos:**
 
 - [@blakeembrey](https://github.com/blakeembrey) - Blake Embrey
 - [@crandmck](https://github.com/crandmck) - Rand McKinney
@@ -25,7 +25,7 @@ Los miembros del comité técnico de Express son:
 - [@wesleytodd](https://github.com/wesleytodd) - Wes Todd
 - [@jonchurch](https://github.com/jonchurch) - Jon Church
 
-**Inactivo:**
+**Inactivos:**
 
 - [@dougwilson](https://github.com/dougwilson) - Douglas Wilson
 - [@hacksparrow](https://github.com/hacksparrow) - Hage Yaapa
@@ -44,9 +44,9 @@ Además, la comunidad de Express mantiene módulos en estas dos organizaciones d
 
 Para mantenerse al tanto de lo que está sucediendo en toda la comunidad, consulte [ExpressJS StatusBoard](https://expressjs.github.io/statusboard/).
 
-## Incidencias (Issues)
+## Problemas
 
-Si ha encontrado lo que cree que es un error, o simplemente quiere hacer una solicitud de función, abre un ticket en la [cola de incidencias](https://github.com/expressjs/express/issues).
+Si ha encontrado lo que cree que es un error, o simplemente quiere hacer una solicitud de función, abre un ticket en la [cola de problemas](https://github.com/expressjs/express/issues).
 
 ## Ejemplos
 
