@@ -42,7 +42,9 @@ You can then run your automated tests to see what fails, and fix problems accord
 <ul class="doclist">
   <li><a href="#path-syntax">Path route matching syntax</a></li>
   <li><a href="#rejected-promises">Rejected promises handled from middleware and handlers</a></li>
+  <li><a href="#express.urlencoded">express.urlencoded</a></li>
   <li><a href="#app.router">app.router</a></li>
+  <li><a href="#req.body">req.body</a></li>
   <li><a href="#req.host">req.host</a></li>
   <li><a href="#req.query">req.query</a></li>
   <li><a href="#res.vary">res.vary</a></li>
@@ -135,9 +137,17 @@ Request middleware and handlers that return rejected promises are now handled by
 
 Details of how Express handles errors is covered in the [error handling documentation](/en/guide/error-handling.html).
 
+<h4 id="express.urlencoded">express.urlencoded</h4>
+
+The `express.urlencoded` method makes the `extended` option `false` by default.
+
 <h4 id="app.router">app.router</h4>
 
 The `app.router` object, which was removed in Express 4, has made a comeback in Express 5. In the new version, this object is a just a reference to the base Express router, unlike in Express 3, where an app had to explicitly load it.
+
+<h4 id="req.body">req.body</h4> 
+
+The `req.body` property returns `undefined` when the body has not been parsed. In Express 4, it returns `{}` by default.
 
 <h4 id="req.host">req.host</h4>
 
