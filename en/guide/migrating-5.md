@@ -9,9 +9,9 @@ redirect_from: "/guide/migrating-5.html"
 
 <h2 id="overview">Overview</h2>
 
-Express 5.0 is still in the beta release stage, but here is a preview of the changes that will be in the release and how to migrate your Express 4 app to Express 5.
+Express 5 is not very different from Express 4; although it maintains the same basic API, there are still changes that break compatibility with the previous version. Therefore, an application built with Express 4 might not work if you update it to use Express 5.
 
-To install the latest beta and to preview Express 5, enter the following command in your application root directory:
+To install this version, you need to have a Node.js version 18 or higher. Then, execute the following command in your application directory:
 
 ```console
 $ npm install "express@>={{ site.data.express.next_version }}" --save
