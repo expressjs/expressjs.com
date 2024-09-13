@@ -1,5 +1,15 @@
 # Site settings
 
+defaults:
+  -
+    scope:
+      path: "_posts" 
+      type: "posts"
+    values:
+      layout: "post"
+      menu: blog
+      lang: en
+
 # Build settings
 markdown: kramdown
 

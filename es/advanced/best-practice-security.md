@@ -13,7 +13,7 @@ El término *"producción"* hace referencia a la etapa del ciclo de vida del sof
 
 Los entornos de desarrollo y producción se configuran normalmente de forma diferente y tiene requisitos también muy diferentes. Lo que funciona en el desarrollo puede que no sea aceptable en la producción. Por ejemplo, en un entorno de desarrollo, puede que desee el registro detallado de errores a efecto de depuración, mientras que el mismo comportamiento puede suponer un problema de seguridad en un entorno de producción. De la misma forma, en el desarrollo, no es necesario preocuparse por la escalabilidad, la fiabilidad y el rendimiento, mientras que estos son clave en la producción.
 
-{% include note.html content="Si crees haber encontrado una vulnerabilidad de seguridad en Express, por favor mira nuestras [Políticas de Seguridad y Procedimientos](/en/resources/contributing.html#security-policies-and-procedures).
+{% include admonitions/note.html content="Si crees haber encontrado una vulnerabilidad de seguridad en Express, por favor mira nuestras [Políticas de Seguridad y Procedimientos](/en/resources/contributing.html#security-policies-and-procedures).
 " %}
 
 Las mejores prácticas de seguridad para aplicaciones Express en producción incluyen:

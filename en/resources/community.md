@@ -23,7 +23,6 @@ Members of the Express technical committee are:
 
 - [@blakeembrey](https://github.com/blakeembrey) - Blake Embrey
 - [@crandmck](https://github.com/crandmck) - Rand McKinney
-- [@dougwilson](https://github.com/dougwilson) - Douglas Wilson
 - [@LinusU](https://github.com/LinusU) - Linus Unnebäck
 - [@ulisesgascon](https://github.com/ulisesGascon) - Ulises Gascón
 - [@sheplu](https://github.com/sheplu) - Jean Burellier
@@ -32,6 +31,7 @@ Members of the Express technical committee are:
 
 **Inactive:**
 
+- [@dougwilson](https://github.com/dougwilson) - Douglas Wilson
 - [@hacksparrow](https://github.com/hacksparrow) - Hage Yaapa
 - [@jonathanong](https://github.com/jonathanong) - jongleberry
 - [@niftylettuce](https://github.com/niftylettuce) - niftylettuce
@@ -49,11 +49,6 @@ Additionally, the Express community maintains modules in these two GitHub orgs:
 
 To keep up with what is going on in the whole community, check out the [ExpressJS StatusBoard](https://expressjs.github.io/statusboard/).
 
-## Gitter
-
-The [expressjs/express chatroom](https://gitter.im/expressjs/express) is great place
-for developers interested in the everyday discussions related to Express.
-
 ## Issues
 
 If you've come across what you think is a bug, or just want to make
@@ -64,13 +59,34 @@ a feature request open a ticket in the [issue queue](https://github.com/expressj
 View dozens of Express application [examples](https://github.com/expressjs/express/tree/master/examples)
 in the repository covering everything from API design and authentication to template engine integration.
 
-## Mailing List
+## Github Discussions
 
-Join over 2000 Express users or browse over 5000
-discussions in the [Google Group](https://groups.google.com/group/express-js).
+The [GitHub Discussions](https://github.com/expressjs/discussions) section is an excellent space to engage in conversations about the development and maintenance of Express, as well as to share ideas and discuss topics related to its usage.
 
-## IRC channel
 
-Hundreds of developers idle in #express on freenode every day.
-If you have questions about the framework, jump in for quick
-feedback.
+# Branding of Express.js
+
+## Express.js Logo
+
+Express is a project of the OpenJS Foundation. Please review the [trademark policy](https://trademark-policy.openjsf.org/) for information about permissible use of Express.js logos and marks.
+
+<div class="logo-table">
+    <div>
+        <h3>Logotype</h3>
+        <a href="/images/brand/logotype-light.svg" class="hidden-dark">
+            <img src="/images/brand/logotype-light.svg" width="250" height="56"/>
+        </a>
+        <a href="/images/brand/logotype-dark.svg" class="hidden-light">
+            <img src="/images/brand/logotype-dark.svg" width="250" height="56"/>
+        </a>
+    </div>
+    <div>
+        <h3>Logomark</h3>
+        <a href="/images/brand/logo-light.svg" class="hidden-dark">
+            <img src="/images/brand/logo-light.svg" width="96.5" height="56"/>
+        </a>
+        <a href="/images/brand/logo-dark.svg" class="hidden-light">
+            <img src="/images/brand/logo-dark.svg" width="96.5" height="56"/>
+        </a>
+    </div>
+<div>

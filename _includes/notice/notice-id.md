@@ -1,0 +1,1 @@
+Dokumen ini mungkin sudah ketinggalan zaman jika dibandingkan dengan dokumentasi dalam bahasa Inggris. Untuk informasi terkini, lihat <a href='{{ page.url | replace: page.lang, "en" }}'>dokumentasi dalam bahasa Inggris</a>.
