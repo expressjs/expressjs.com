@@ -47,6 +47,8 @@ You can then run your automated tests to see what fails, and fix problems accord
   <li><a href="#req.body">req.body</a></li>
   <li><a href="#req.host">req.host</a></li>
   <li><a href="#req.query">req.query</a></li>
+  <li><a href="#res.status">res.status</a></li>
+  <li><a href="#res.clearCookie">res.clearCookie</a></li>
   <li><a href="#res.vary">res.vary</a></li>
 </ul>
 
@@ -156,6 +158,14 @@ In Express 4, the `req.host` function incorrectly stripped off the port number i
 <h4 id="req.query">req.query</h4>
 
 The `req.query` property is no longer a writable property and is instead a getter. The default query parser has been changed from "extended" to "simple".
+
+<h4 id="res.clearCookie">res.clearCookie</h4>
+
+The `res.clearCookie` method ignores the `maxAge` and `expires` options provided by the user.
+
+<h4 id="res.status">res.status</h4>
+
+The `res.status` method only accepts integers in the range of `100` to `999`, following the behavior defined by Node.js, and it returns an error when the status code is not an integer.
 
 <h4 id="res.query">res.vary</h4>
 
