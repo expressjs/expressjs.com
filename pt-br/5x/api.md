@@ -9,9 +9,9 @@ lang: pt-br
 
   <h1>5.x API</h1>
 
-{% include note.html content="This is early beta documentation that may be incomplete and is still under development." %}
+{% include admonitions/caution.html content="This is early beta documentation that may be incomplete and is still under development." %}
 
-{% include note.html content="Express 5.0 requires Node.js 18 or higher." %}
+{% include admonitions/note.html content="Express 5.0 requires Node.js 18 or higher." %}
 
 {% include api/en/5x/express.md %}
 {% include api/en/5x/app.md %}
