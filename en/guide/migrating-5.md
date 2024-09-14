@@ -129,15 +129,14 @@ The `res.sendfile()` function has been replaced by a camel-cased version `res.se
 
 Path route matching syntax is when a string is supplied as the first parameter to the `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, and `router.use()` APIs. The following changes have been made to how the path string is matched to an incoming request:
 
-- Add new `?`, `*`, and `+` parameter modifiers.
-- Matching group expressions are only RegExp syntax.
-  * `(*)` is no longer valid and must be written as `(.*)`, for example.
-- Named matching groups no longer available by position in `req.params`.
-  * `/:foo(.*)` only captures as `req.params.foo` and not available as `req.params[0]`.
-- Regular expressions can only be used in a matching group.
-  * `/\\d+` is no longer valid and must be written as `/(\\d+)`.
-- Special `*` path segment behavior removed.
-  * `/foo/*/bar` will match a literal `*` as the middle segment.
+- Add new `?`, `*`, and `+` parameter modifiers. For example `/users/:user+` now matches `/users/1`, `/users/1/2`, etc. but not `/users`.
+- The special `*` path segment behavior has been removed. This means that `*` is no longer a valid path and `/foo/*/bar` now matches a literal `'*'`. For the previous behaviour, a `(.*)` matching group should be used instead.
+- Named matching groups no longer available by position in `req.params`. For example, `/:foo(.*)` only captures as `req.params.foo` and not available as `req.params[0]`.
+- Regular expressions can now only be used in a matching group. For example, `/users/\\d+` is invalid and should be written as `/users/(\\d+))`.
+- It is now possible to use named capturing groups in paths using `RegExp`, for example `/\/(?<group>.+)/` would result in `req.params.group` being populated.
+- Custom prefix and suffix groups are now supported using `{}`, for example `/:entity{-:action}?` would match `/user` and `/user-delete`.
+- Unbalanced patterns now produce an error. For example `/test(foo` previously worked, but now the opening parenthesis `(` must be escaped to match the previous behavior: `/test\\(foo`.
+- As with parentheses, curly brackets also require escaping. That is, `/user{:id}` no longer matches `/user{42}` as before unless written as `/user\\{:id\\}`.
 
 <h4 id="rejected-promises">Rejected promises handled from middleware and handlers</h4>
 
