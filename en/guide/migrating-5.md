@@ -57,6 +57,7 @@ You can then run your automated tests to see what fails, and fix problems accord
 
 <ul class="doclist">
   <li><a href="#res.render">res.render()</a></li>
+  <li><a href="#brotli-support">Brotli encoding support</a></li>
 </ul>
 
 <h3>Removed methods and properties</h3>
@@ -181,3 +182,7 @@ The `res.vary` throws an error when the `field` argument is missing. In Express 
 <h4 id="res.render">res.render()</h4>
 
 This method now enforces asynchronous behavior for all view engines, avoiding bugs caused by view engines that had a synchronous implementation and that violated the recommended interface.
+
+<h4 id="brotli-support">Brotli encoding support</h4>
+
+Express 5 supports Brotli encoding for requests..
