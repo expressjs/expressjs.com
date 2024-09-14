@@ -31,6 +31,7 @@ You can then run your automated tests to see what fails, and fix problems accord
   <li><a href="#req.param">req.param(name)</a></li>
   <li><a href="#res.json">res.json(obj, status)</a></li>
   <li><a href="#res.jsonp">res.jsonp(obj, status)</a></li>
+  <li><a href="#magic-redirect">res.redirect('back') and res.location('back')</a></li>  
   <li><a href="#res.redirect">res.redirect(url, status)</a></li>
   <li><a href="#res.send.body">res.send(body, status)</a></li>
   <li><a href="#res.send.status">res.send(status)</a></li>
@@ -47,8 +48,8 @@ You can then run your automated tests to see what fails, and fix problems accord
   <li><a href="#req.body">req.body</a></li>
   <li><a href="#req.host">req.host</a></li>
   <li><a href="#req.query">req.query</a></li>
-  <li><a href="#res.status">res.status</a></li>
   <li><a href="#res.clearCookie">res.clearCookie</a></li>
+  <li><a href="#res.status">res.status</a></li>
   <li><a href="#res.vary">res.vary</a></li>
 </ul>
 
@@ -103,6 +104,11 @@ Express 5 no longer supports the signature `res.jsonp(obj, status)`. Instead, se
 <h4 id="res.redirect">res.redirect(url, status)</h4>
 
 Express 5 no longer supports the signature `res.redirect(url, status)`. Instead, use the following signature: `res.redirect(status, url)`.
+
+
+<h4 id="magic-redirect">res.redirect('back') and res.location('back')</h4>
+
+Express 5 no longer supports the magic string `back` in the `res.redirect()` and `res.location()` methods. Instead, use the `req.get('Referrer') || '/'` value to redirect back to the previous page. In Express 4, the res.`redirect('back')` and `res.location('back')` methods were deprecated.
 
 <h4 id="res.send.body">res.send(body, status)</h4>
 
