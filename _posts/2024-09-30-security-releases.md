@@ -9,7 +9,7 @@ Recently, the Express team has been made aware of a number of security vulnerabi
 
 ## CVE-2024-45590 (High) in `body-parser`
 
-**body-parser vulnerable to denial of service when url encoding is enabled**
+**[body-parser](https://www.npmjs.com/package/body-parser) vulnerable to denial of service when url encoding is enabled**
 
 body-parser `<1.20.3` is vulnerable to denial of service when url encoding is enabled. a malicious actor using a specially crafted payload could flood the server with a large number of requests, resulting in denial of service.
 
