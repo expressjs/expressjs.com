@@ -1,5 +1,8 @@
-# Use the official Jekyll image as the base
-FROM jekyll/jekyll:4.2.2
+# Use the official Ruby image as the base
+FROM ruby:3.3.5
+
+# Install Jekyll and Bundler
+RUN gem install jekyll bundler
 
 # Set the working directory
 WORKDIR /usr/src/app
