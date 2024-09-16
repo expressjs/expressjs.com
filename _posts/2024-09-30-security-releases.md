@@ -28,7 +28,7 @@ More details area available in [GHSA-qwcr-r2fm-qrc7](https://github.com/expressj
 
 ## CVE-2024-43796 (moderate) in `express`
 
-**express vulnerable to XSS via `response.redirect()`**
+**[express](https://www.npmjs.com/package/express) vulnerable to XSS via `response.redirect()`**
 
 In express <4.20.0, passing untrusted user input - even after sanitizing it - to `response.redirect()` may execute untrusted code
 
