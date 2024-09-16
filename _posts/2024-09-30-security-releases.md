@@ -48,7 +48,7 @@ More details area available in [GHSA-qw6h-vgh9-j6wx](https://github.com/expressj
 
 ## CVE-2024-43799 (moderate) in `send`.
 
-**Template injection that can lead to XSS**
+**[send](https://www.npmjs.com/package/send) is vulnerable to template injection that can lead to XSS**
 
 Passing untrusted user input - even after sanitizing it - to `SendStream.redirect()` may execute untrusted code
 
