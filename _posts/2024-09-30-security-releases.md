@@ -68,7 +68,7 @@ More details area available in [GHSA-m6fv-jmcg-4jfg](https://github.com/pillarjs
 
 **[serve-static](https://www.npmjs.com/package/serve-static) vulnerable to template injection that can lead to XSS**
 
-Passing untrusted user input - even after sanitizing it - to `redirect()` may execute untrusted code
+Passing untrusted user input - even after sanitizing it - to `redirect()` may execute untrusted code.
 
 **Affected versions** 
 - `< 1.16.0`
