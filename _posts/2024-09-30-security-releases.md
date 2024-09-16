@@ -46,7 +46,7 @@ This vulnerability was discovered during the [OSTIF audit to Express](https://gi
 More details area available in [GHSA-qw6h-vgh9-j6wx](https://github.com/expressjs/express/security/advisories/GHSA-qw6h-vgh9-j6wx)
 
 
-## CVE-2024-43799 (moderate) in Send.
+## CVE-2024-43799 (moderate) in `send`.
 
 **Template injection that can lead to XSS**
 
