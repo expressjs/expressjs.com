@@ -26,7 +26,7 @@ More details area available in [GHSA-qwcr-r2fm-qrc7](https://github.com/expressj
 
 
 
-## CVE-2024-43796 (moderate) in Express
+## CVE-2024-43796 (moderate) in `express`
 
 **express vulnerable to XSS via `response.redirect()`**
 
