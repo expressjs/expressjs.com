@@ -18,7 +18,7 @@ body-parser `<1.20.3` is vulnerable to denial of service when url encoding is en
 - `<1.20.3`
 
 **Patched versions**
-- `1.20.3`
+- `>=1.20.3`
 
 This vulnerability was discovered during the [OSTIF audit to Express](https://github.com/expressjs/security-wg/issues/6) and was mitigated by [the Express Securty triage team](https://github.com/expressjs/security-wg?tab=readme-ov-file#security-triage-team).
 
