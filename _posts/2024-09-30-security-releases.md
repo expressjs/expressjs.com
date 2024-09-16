@@ -85,7 +85,7 @@ More details area available in [GHSA-cm22-4g7w-348p](https://github.com/expressj
 
 ## CVE-2024-45296 (moderate) in `path-to-regexp`
 
-**Backtracking regular expressions cause ReDoS**
+**[path-to-regexp](https://www.npmjs.com/package/path-to-regexp) vulnerable to regular expression denial of service (ReDoS)**
 
 A bad regular expression is generated any time you have two parameters within a single segment, separated by something that is not a period (`.`). For example, `/:a-:b`.
 
