@@ -64,7 +64,7 @@ This vulnerability was discovered during the [OSTIF audit to Express](https://gi
 More details area available in [GHSA-m6fv-jmcg-4jfg](https://github.com/pillarjs/send/security/advisories/GHSA-m6fv-jmcg-4jfg)
 
 
-## CVE-2024-43800 (moderate) in Serve-static
+## CVE-2024-43800 (moderate) in `serve-static`
 
 **Template injection that can lead to XSS**
 
