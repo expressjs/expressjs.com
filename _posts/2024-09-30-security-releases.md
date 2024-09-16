@@ -83,7 +83,7 @@ This vulnerability was discovered during the [OSTIF audit to Express](https://gi
 More details area available in [GHSA-cm22-4g7w-348p](https://github.com/expressjs/serve-static/security/advisories/GHSA-cm22-4g7w-348p)
 
 
-## CVE-2024-45296 (moderate) in Path-to-regexp
+## CVE-2024-45296 (moderate) in `path-to-regexp`
 
 **Backtracking regular expressions cause ReDoS**
 
