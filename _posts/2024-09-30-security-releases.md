@@ -57,7 +57,7 @@ Passing untrusted user input - even after sanitizing it - to `SendStream.redirec
 - `< 0.19.0`
 
 **Patched versions**
-- `0.19.0`
+- `>=0.19.0`
 
 This vulnerability was discovered during the [OSTIF audit to Express](https://github.com/expressjs/security-wg/issues/6) and was mitigated by [the Express Securty triage team](https://github.com/expressjs/security-wg?tab=readme-ov-file#security-triage-team).
 
