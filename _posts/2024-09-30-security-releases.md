@@ -7,7 +7,7 @@ author: Ulises gascón
 Recently, the Express team has been made aware of a number of security vulnerabilities in the Express project.  We have released a number of patches to address these vulnerabilities.  We strongly recommend that all users of Express upgrade to the latest version as soon as possible.  The following vulnerabilities have been addressed:
 
 
-## CVE-2024-45590 (High) in body-parser
+## CVE-2024-45590 (High) in `body-parser`
 
 **body-parser vulnerable to denial of service when url encoding is enabled**
 
