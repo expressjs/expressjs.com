@@ -37,8 +37,8 @@ In express <4.20.0, passing untrusted user input - even after sanitizing it - to
 - `>=5.0.0-alpha.1`, `<5.0.0`
 
 **Patched versions**
-- `4.20.0`
-- `5.0.0`
+- `>=4.20.0`
+- `>=5.0.0`
 
 
 This vulnerability was discovered during the [OSTIF audit to Express](https://github.com/expressjs/security-wg/issues/6) and was mitigated by [the Express Securty triage team](https://github.com/expressjs/security-wg?tab=readme-ov-file#security-triage-team).
