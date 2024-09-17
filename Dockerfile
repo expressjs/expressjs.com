@@ -10,11 +10,11 @@ WORKDIR /usr/src/app
 # Change the permissions of the working directory
 RUN chmod 777 /usr/src/app
 
-# Copy the Gemfile and Gemfile.lock into the image
-COPY Gemfile Gemfile.lock ./
+# Copy the Gemfile into the image
+COPY Gemfile ./
 
-# Install the gems
-RUN bundle install --no-cache
+# Install the gems and delete the Gemfile.lock
+RUN bundle install --no-cache && rm Gemfile.lock
 
 # Copy the rest of the project into the image
 COPY . .
