@@ -12,6 +12,7 @@ RUN chmod 777 /usr/src/app
 
 # Copy the Gemfile into the image
 COPY Gemfile ./
+COPY Gemfile.lock ./
 
 # Install the gems
 RUN bundle install --no-cache
