@@ -117,7 +117,7 @@ Express 5 no longer supports the signature `res.send(obj, status)`. Instead, set
 
 <h4 id="res.send.status">res.send(status)</h4>
 
-Express 5 no longer supports the signature <code>res.send(<em>status</em>)</code>, where _`status`_ is a number. Instead, use the `res.sendStatus(statusCode)` function, which sets the HTTP response header status code and sends the text version of the code: "Not Found", "Internal Server Error", and so on.
+Express 5 no longer supports the signature `res.send(status)`, where `status` is a number. Instead, use the `res.sendStatus(statusCode)` function, which sets the HTTP response header status code and sends the text version of the code: "Not Found", "Internal Server Error", and so on.
 If you need to send a number by using the `res.send()` function, quote the number to convert it to a string, so that Express does not interpret it as an attempt to use the unsupported old signature.
 
 <h4 id="res.sendfile">res.sendfile()</h4>
@@ -130,14 +130,23 @@ The `res.sendfile()` function has been replaced by a camel-cased version `res.se
 
 Path route matching syntax is when a string is supplied as the first parameter to the `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, and `router.use()` APIs. The following changes have been made to how the path string is matched to an incoming request:
 
-- Add new `?`, `*`, and `+` parameter modifiers. For example `/users/:user+` now matches `/users/1`, `/users/1/2`, etc. but not `/users`.
-- The special `*` path segment behavior has been removed. This means that `*` is no longer a valid path and `/foo/*/bar` now matches a literal `'*'`. For the previous behaviour, a `(.*)` matching group should be used instead.
-- Named matching groups no longer available by position in `req.params`. For example, `/:foo(.*)` only captures as `req.params.foo` and not available as `req.params[0]`.
-- Regular expressions can now only be used in a matching group. For example, `/users/\\d+` is invalid and should be written as `/users/(\\d+))`.
-- It is now possible to use named capturing groups in paths using `RegExp`, for example `/\/(?<group>.+)/` would result in `req.params.group` being populated.
-- Custom prefix and suffix groups are now supported using `{}`, for example `/:entity{-:action}?` would match `/user` and `/user-delete`.
-- Unbalanced patterns now produce an error. For example `/test(foo` previously worked, but now the opening parenthesis `(` must be escaped to match the previous behavior: `/test\\(foo`.
-- As with parentheses, curly brackets also require escaping. That is, `/user{:id}` no longer matches `/user{42}` as before unless written as `/user\\{:id\\}`.
+- The wildcard `*` must have a name, matching the behavior of parameters `:`, use `/*splat` instead of `/*`
+- The optional character `?` is no longer supported, use braces instead: `/:file{.:ext}`.
+- Regexp characters are not supported. For example:
+```js
+app.get('/[discussion|page]/:slug', async (req, res) => {
+  res.status(200).send('ok')
+})
+``` 
+should be changed to:
+```js
+app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
+  res.status(200).send('ok')
+})
+```
+
+- Some characters have been reserved to avoid confusion during upgrade (`()[]?+!`), use `\` to escape them. 
+- Parameter names now support valid JavaScript identifiers, or quoted like `:"this"`.
 
 <h4 id="rejected-promises">Rejected promises handled from middleware and handlers</h4>
 
@@ -185,4 +194,4 @@ This method now enforces asynchronous behavior for all view engines, avoiding bu
 
 <h4 id="brotli-support">Brotli encoding support</h4>
 
-Express 5 supports Brotli encoding for requests..
+Express 5 supports Brotli encoding for requests received from clients that support it.
