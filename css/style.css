@@ -352,6 +352,7 @@ pre {
 }
 
 pre code {
+  padding: 0;
   overflow: scroll;
   word-break: break-all;
   background-color: inherit;
