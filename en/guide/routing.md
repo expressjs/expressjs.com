@@ -114,8 +114,6 @@ app.get('/random.text', (req, res) => {
 
 {% include admonitions/caution.html content=caution-string-patterns %}
 
-{% include admonitions/caution.html content="The string patterns in Express 5 no longer work. Please refer to the migration guide for more information" %}
-
 This route path will match `acd` and `abcd`.
 
 ```js
