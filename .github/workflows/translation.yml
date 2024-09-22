@@ -21,6 +21,7 @@ on:
       - 'uz/**'
       - 'zh-cn/**'
       - 'zh-tw/**'
+      - 'fa/**'
   workflow_dispatch:
     inputs:
       prNumber:
@@ -43,7 +44,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            const languages = ['en', 'es', 'fr', 'it', 'id', 'ja', 'ko', 'pt-br', 'ru', 'sk', 'th', 'tr', 'uk', 'uz', 'zh-cn', 'zh-tw'];
+            const languages = ['en', 'es', 'fr', 'it', 'id', 'ja', 'ko', 'pt-br', 'ru', 'sk', 'th', 'tr', 'uk', 'uz', 'zh-cn', 'zh-tw', 'fa'];
             const prNumber = context.eventName === 'workflow_dispatch' ? context.payload.inputs.prNumber : context.issue.number;
             const { data: pullRequest } = await github.rest.pulls.get({
               owner: context.repo.owner,

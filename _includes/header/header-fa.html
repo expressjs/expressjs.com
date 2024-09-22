@@ -1,0 +1,181 @@
+<header>
+  <div id="mobile-menu">
+    <div id="nav-button" class="fa fa-bars fa-2x button"></div>
+  </div>
+  <section id="logo"><a href="/" class="express">Express</a>
+  </section>
+  <div id="navbar">
+    <input id="q" placeholder="🔎 search">
+    <ul id="navmenu">
+      <li><a href="/" id="home-menu" {% if page.menu=='home' %} class="active" {% endif %}>خانه</a></li>
+      <li>
+        <ul id="getting-started-menu" class="menu">
+          <li><a href="/{{ page.lang }}/starter/installing.html" {% if page.menu=='starter' %} class="active" {% endif
+              %}>شروع کار</a>
+            <ul>
+              <li>
+                <a href="/{{ page.lang }}/starter/installing.html">
+                  نصب کردن
+                </a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/starter/hello-world.html">
+                  سلام جهان
+                </a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/starter/generator.html">
+                  Express generator
+                </a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/starter/basic-routing.html">
+                  مقدماتی routing
+                </a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/starter/static-files.html">
+                  فایل های ایستا
+                </a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/starter/examples.html">
+                  مثال های بیشتر
+                </a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/starter/faq.html">
+                  سوالات پرتکرار
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <ul id="guide-menu" class="menu">
+          <li><a href="/{{ page.lang }}/guide/routing.html" {% if page.menu=='guide' %} class="active" {% endif
+              %}>Guide</a>
+            <ul>
+              <li><a href="/{{ page.lang }}/guide/routing.html">Routing</a>
+              </li>
+              <li><a href="/{{ page.lang }}/guide/writing-middleware.html">نوشتن middleware</a>
+              </li>
+              <li><a href="/{{ page.lang }}/guide/using-middleware.html">استفاده‌کردن از middleware</a>
+              </li>
+              <li><a href="/{{ page.lang }}/guide/overriding-express-api.html">دوباره نوشتن Express API</a>
+              </li>
+              <li><a href="/{{ page.lang }}/guide/using-template-engines.html">استفاده کردن از template engines</a>
+              </li>
+              <li><a href="/{{ page.lang }}/guide/error-handling.html">رسیدگی به ارورها</a>
+              </li>
+              <li><a href="/{{ page.lang }}/guide/debugging.html">اشکال‌زدایی</a>
+              </li>
+              <li><a href="/{{ page.lang }}/guide/behind-proxies.html">Express پشت پروکسی</a>
+              </li>
+              <li><a href="/{{ page.lang }}/guide/migrating-4.html">مهاجرت به Express 4</a>
+              </li>
+              <li><a href="/{{ page.lang }}/guide/migrating-5.html">مهاجرت به Express 5</a>
+              </li>
+              <li><a href="/{{ page.lang }}/guide/database-integration.html">یکپارچه کردن با پایگاه‌های داده</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <ul id="application-menu" class="menu">
+          <li><a href="/{{ page.lang }}/4x/api.html" {% if page.menu=='api' %} class="active" {% endif %}>API ارجاع</a>
+            <ul>
+              <li><a href="/{{ page.lang }}/5x/api.html">5.x (بتا)</a>
+              </li>
+              <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
+              </li>
+              <li><a href="/{{ page.lang }}/3x/api.html">3.x (منسوخ شده)</a>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <ul id="advanced-topics-menu" class="menu">
+          <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html" {% if page.menu=='advanced' %}
+              class="active" {% endif %}>مباحث پیشرفته</a>
+            <ul>
+              <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">ساختن template engines</a>
+              </li>
+              <li><a href="/{{ page.lang }}/advanced/security-updates.html">آپدیت‌های امنیتی</a>
+              </li>
+              <li><a href="/{{ page.lang }}/advanced/best-practice-security.html">امنیتی best practices</a>
+              </li>
+              <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">عملکردی best practices</a>
+              </li>
+              <li><a href="/{{ page.lang }}/advanced/healthcheck-graceful-shutdown.html">چک‌کردن سلامت و خاموشی</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <ul id="resources-menu" class="menu">
+          <li><a href="/{{ page.lang }}/resources/glossary.html" {% if page.menu=='resources' %} class="active" {% endif
+              %}>Resources</a>
+            <ul>
+              <li>
+                <a href="/{{ page.lang }}/resources/community.html">اجتماع</a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/resources/glossary.html">واژه نامه</a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/resources/middleware.html">Middleware</a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/resources/utils.html">Utility ماژول‌های</a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/resources/contributing.html">مشارکت در Express</a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/changelog/4x.html">گزارش تغییرات نسخه‌ها</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="/{{ page.lang }}/support" id="support-menu" {% if page.menu=='support' %} class="active" {% endif
+          %}>حمایت</a></li>
+      <li>
+        <ul id="blog-menu" class="menu">
+          <li><a href="{{site.posts.first.url}}" {% if page.menu=='blog' %} class="active" {% endif %}>بلاگ</a>
+            <ul>
+              <li>
+                <a href="{{site.posts.first.url}}">آخرین پست‌ها</a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/blog/posts.html">همه پست‌ها</a>
+              </li>
+              <li>
+                <a href="/{{ page.lang }}/blog/write-post.html">انتشار پست جدید</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <!--
+          <li>
+              <ul id="changelog-menu" class="menu">
+                  <li><a href="/{{ page.lang }}/changelog/4x.html"{% if page.menu == 'changelog' %} class="active"{% endif %}>Changelog</a>
+                      <ul>
+                          <li><a href="/{{ page.lang }}/changelog/4x.html">4.x</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+        -->
+    </ul>
+    <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
+      <i class="fa fa-moon-o fa-2x hidden-dark"></i>
+      <span class="sun-icon hidden-light"></span>
+    </div>
+  </div>
+</header>
