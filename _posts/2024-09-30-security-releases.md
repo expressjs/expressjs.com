@@ -1,5 +1,6 @@
 ---
 title: September 2024 Security Releases! 
+description: Security releases for Express, body-parser, send, serve-static, and path-to-regexp have been published. We recommend that all users upgrade as soon as possible.
 tags: security, vulnerabilities
 author: Ulises gascón
 ---
@@ -102,10 +103,10 @@ Because JavaScript is single threaded and regex matching runs on the main thread
 
 
 **Patched versions**
-- `8.0.0`
-- `1.9.0`
-- `0.1.10`
-- `3.3.0`
+- `>8.0.0`
+- `>1.9.0`
+- `>=0.1.10`
+- `>3.3.0`
 
 
 Thanks to [Blake Embrey](https://github.com/blakeembrey) who reported and created the security patch.
