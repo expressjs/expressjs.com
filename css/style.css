@@ -13,6 +13,7 @@
   --notice-accent: rgb(115, 82, 13);
   --warn-bg: rgb(250, 209, 223);
   --warn-accent: rgb(138, 15, 58);
+  --code-bg: #f0f1f3;
 }
 
 * {
@@ -74,10 +75,14 @@ strong, th {
 }
 
 #home-content {
-  margin: 183px 0 2% 5%;
+  margin: 40px 0 2% 5%;
   max-width: 900px;
   padding-right: 9%;
   display: flex;
+}
+
+.en-doc #home-content {
+  margin-top: 150px;
 }
 
 #homepage-leftpane {
@@ -349,6 +354,16 @@ pre {
 pre code {
   overflow: scroll;
   word-break: break-all;
+  background-color: inherit;
+}
+
+code {
+  background-color: var(--code-bg);
+  margin-block: -.125rem;
+  font-size: 13px;
+  padding: .125rem .375rem;
+  line-height: 28px;
+  border-radius: 6px;
 }
 
 /* top button */
@@ -562,7 +577,7 @@ html[xmlns] .clearfix {
 }
 
 #i18n-notice-box {
-  margin-top: 150px;
+  margin: 100px 3% 20px 3%;
   position: relative;
 }
 
@@ -570,7 +585,7 @@ html[xmlns] .clearfix {
   position: absolute;
   top: 3px;
   right: 4px;
-  color: #550000;
+  color: var(--notice-accent);
   cursor: pointer;
 }
 
@@ -929,7 +944,7 @@ h2 a {
   }
 
   #home-content {
-    margin: 150px 0 0 5%;
+    margin: 60px 0 0 5%;
     padding-right: 5%;
   }
 
