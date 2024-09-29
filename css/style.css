@@ -516,16 +516,9 @@ html[xmlns] .clearfix {
 }
 
 /* English pages use backticks for code blocks */
-.en-doc .page pre[class*="language-"] {
+.page pre[class*="language-"] {
   padding-top: 10px !important;
 }
-
-/* Non-English pages use pre and code tags for code blocks */
-.non-en-doc .page pre[class*="language-"] {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
 
 .page pre.plain-text, .page code.plain-text {
   padding-top: 0 !important;
