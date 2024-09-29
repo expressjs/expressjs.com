@@ -52,7 +52,8 @@ Dem `n`-ten Hop vom Proxy-Server soll als Client vertraut werden.
     <tr>
       <td>Funktion</td>
 <td markdown="1">
-Individuell angepasste, vertrauenswürdige Implementierung. Dies sollten Sie nur verwenden, wenn Sie genau wissen, was Sie tun. <pre>
+Individuell angepasste, vertrauenswürdige Implementierung. Dies sollten Sie nur verwenden, wenn Sie genau wissen, was Sie tun. 
+<pre>
 <code class="language-js" translate="no">app.set('trust proxy', function (ip) {
   if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
   else return false;
