@@ -120,13 +120,14 @@ Because JavaScript is single-threaded and regex matching runs on the main thread
 - `>=0.2.0`, `<1.9.0`
 - `<0.1.10`
 - `>=2.0.0`, `<3.3.0`
-
+- `>=4.0.0`, `<6.3.0`
 
 **Patched versions**:
-- `>8.0.0`
-- `>1.9.0`
+- `>=8.0.0`
+- `>=1.9.0`
 - `>=0.1.10`
-- `>3.3.0`
+- `>=3.3.0`
+- `>=6.3.0`
 
 Thanks to [Blake Embrey](https://github.com/blakeembrey) who reported and created the security patch.
 
