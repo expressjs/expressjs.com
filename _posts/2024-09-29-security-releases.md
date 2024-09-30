@@ -14,6 +14,7 @@ content="We strongly recommend that you upgrade these modules to the recommended
 The following vulnerabilities have been addressed:
 
 - [High severity vulnerability CVE-2024-45590 in body-parser middleware](#high-severity-vulnerability-cve-2024-45590-in-body-parser-middleware)
+- [High severity vulnerability CVE-2024-47178 in basic-auth-connect middleware](#high-severity-vulnerability-cve-2024-47178-in-basic-auth-connect-middleware)
 - [Moderate severity vulnerability CVE-2024-43796 in Express core](#moderate-severity-vulnerability-cve-2024-43796-in-express-core)
 - [Moderate severity vulnerability CVE-2024-43799 in send utility module](#moderate-severity-vulnerability-cve-2024-43799-in-send-utility-module)
 - [Moderate severity vulnerability CVE-2024-43800 in serve-static middleware](#moderate-severity-vulnerability-cve-2024-43800-in-serve-static-middleware)
@@ -32,6 +33,23 @@ A malicious actor using a specially-crafted payload could flood the server with 
 This vulnerability was discovered during the [OSTIF audit to Express](https://github.com/expressjs/security-wg/issues/6) and was mitigated by [the Express security triage team](https://github.com/expressjs/security-wg?tab=readme-ov-file#security-triage-team).
 
 For more details, see [GHSA-qwcr-r2fm-qrc7](https://github.com/expressjs/body-parser/security/advisories/GHSA-qwcr-r2fm-qrc7).
+
+## High severity vulnerability CVE-2024-47178 in basic-auth-connect middleware
+
+**[basic-auth-connect](https://www.npmjs.com/package/basic-auth-connect) uses a timing-unsafe equality comparison**
+
+basic-auth-connect `<1.1.0` uses a timing-unsafe equality comparison that can leak timing information
+
+**Affected versions**
+- `<1.1.0`
+
+**Patched versions**
+- `>=1.1.0`
+
+This vulnerability was discovered during the [OSTIF audit to Express](https://github.com/expressjs/security-wg/issues/6) and was mitigated by [the Express Securty triage team](https://github.com/expressjs/security-wg?tab=readme-ov-file#security-triage-team).
+
+More details area available in [GHSA-7p89-p6hx-q4fw](https://github.com/expressjs/basic-auth-connect/security/advisories/GHSA-7p89-p6hx-q4fw)
+
 
 
 ## Moderate severity vulnerability CVE-2024-43796 in Express core
