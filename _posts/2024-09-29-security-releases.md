@@ -8,7 +8,7 @@ author: Ulises gascón
 Recently, the Express team has been made aware of a number of security vulnerabilities in the Express project.  We have released a number of patches to address these vulnerabilities.  
 
 {% include admonitions/warning.html 
-content="We strongly recommend that all users of Express upgrade to the latest version as soon as possible."
+content="We strongly recommend that you upgrade these modules to the recommended (or latest) version as soon as possible."
 %}
 
 The following vulnerabilities have been addressed:
