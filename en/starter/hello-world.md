@@ -13,8 +13,7 @@ Embedded below is essentially the simplest Express app you can create. It is a s
 </div>
 
 ```js
-import express from 'express'
-
+const express = require('express')
 const app = express()
 const port = 3000
 

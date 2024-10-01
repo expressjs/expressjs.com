@@ -12,8 +12,7 @@ Contoh di bawah ini pada dasarnya adalah aplikasi Express paling sederhana yang 
 </div>
 
 ```js
-import express from 'express'
-
+const express = require('express')
 const app = express()
 const port = 3000
 
