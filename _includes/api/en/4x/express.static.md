@@ -16,7 +16,7 @@ See also the [example below](#example.of.express.static).
 
 | Property      | Description                                                           |   Type      | Default         |
 |---------------|-----------------------------------------------------------------------|-------------|-----------------|
-| `dotfiles`    | Determines how dotfiles (files or directories that begin with a dot ".") are treated.  <br/><br/>See [dotfiles](#dotfiles) below. | String | [See below](#dotfiles) |
+| `dotfiles`    | Determines how dotfiles (files or directories that begin with a dot ".") are treated.  <br/><br/>See [dotfiles](#dotfiles) below. | String | `undefined` |
 | `etag`        | Enable or disable etag generation <br/><br/>NOTE: `express.static` always sends weak ETags. | Boolean | `true` |
 | `extensions`  | Sets file extension fallbacks: If a file is not found, search for files with the specified extensions and serve the first one found. Example: `['html', 'htm']`.| Mixed | `false` |
 | `fallthrough`  | Let client errors fall-through as unhandled requests, otherwise forward a client error. <br/><br/>See [fallthrough](#fallthrough) below.| Boolean | `true` |
@@ -37,12 +37,7 @@ Possible values for this option are:
 - "allow" - No special treatment for dotfiles.
 - "deny" - Deny a request for a dotfile, respond with `403`, then call `next()`.
 - "ignore" - Act as if the dotfile does not exist, respond with `404`, then call `next()`.
-
-{% capture dotfiles %}
-When this property is not set and so uses the default value, the behavior is similar to 'ignore', with the exception that files in a directory that begins with a dot are **NOT** ignored. This behavior is based on the 1.x version of [serve-static](https://expressjs.com/en/resources/middleware/serve-static.html) middleware.
-{% endcapture %}
-
-{% include admonitions/caution.html content=dotfiles %}
+- `undefined` - Act as ignore, except that files in a directory that begins with a dot are **NOT** ignored.
 
 <h5 id='fallthrough'>fallthrough</h5>
 
