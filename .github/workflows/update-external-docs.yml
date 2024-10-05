@@ -13,8 +13,12 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
+            - name: Use Node.js 20
+              uses: actions/setup-node@v4
+              with:
+                node-version: 20
             - name: Run scripts
-              run: bash ./get-contributing.sh && bash ./get-readmes.sh
+              run: bash ./get-contributing.sh && bash ./get-readmes.sh && node ./get-express-version.mjs
             - name: Create Pull Request
               uses: peter-evans/create-pull-request@v5
               with: 
