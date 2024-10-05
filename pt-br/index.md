@@ -16,7 +16,7 @@ lang: pt-br
   </div>
 </section>
 <section id="announcements">
-  {% include announcement/announcement-en.md %}
+  {% include announcement/announcement-pt-br.md %}
 </section>
 
 <section id="intro">
