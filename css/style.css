@@ -150,9 +150,8 @@ strong, th {
 }
 
 .content {
-  margin: 153px 3% 7%;
-  max-width: 1090px;
-  padding-left: 225px;
+  margin: 153px 2% 7%;
+  max-width: 1590px;
 }
 
 span.block-section {
@@ -1266,16 +1265,16 @@ h2 a {
     flex-wrap: wrap;
     flex-direction: column;
     align-items: flex-start;
-    margin: 0;
+    margin-right: 0;
     padding-right: 10px;
-    row-gap: 40px;
   }
   #blog-doc .blog-details + p {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: flex-start;
-    row-gap: 40px;
+    margin-right: 0;
+    padding-right: 10px;
   }
   #blog-doc .blog-details + p > img {
     margin-bottom: 15px;
