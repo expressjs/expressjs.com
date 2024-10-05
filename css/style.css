@@ -1263,20 +1263,26 @@ h2 a {
 @media (max-width: 500px) {
   #blog-doc {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     margin: 0;
     padding-right: 10px;
+    row-gap: 40px;
   }
   #blog-doc .blog-details + p {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    row-gap: 40px;
   }
   #blog-doc .blog-details + p > img {
     margin-bottom: 15px;
   }
+
 }
+
 /* blog tablet and up*/
 @media (min-width: 768px) {
   .blog-post {
