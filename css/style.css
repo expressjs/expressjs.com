@@ -150,8 +150,9 @@ strong, th {
 }
 
 .content {
-  margin: 153px 2% 7%;
-  max-width: 1590px;
+  margin: 153px 3% 7%;
+  max-width: 1090px;
+  padding-left: 225px;
 }
 
 span.block-section {
@@ -1264,23 +1265,24 @@ h2 a {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin-right: 0;
     padding-right: 10px;
   }
-  #blog-doc .blog-details + p {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-right: 0;
-    padding-right: 10px;
+  
+
+
+  #blog-doc .blog-details + p a,
+  #blog-doc .blog-details + p a + span {
+    white-space: nowrap;
   }
+
   #blog-doc .blog-details + p > img {
     margin-bottom: 15px;
   }
-
 }
+
+
 
 /* blog tablet and up*/
 @media (min-width: 768px) {
