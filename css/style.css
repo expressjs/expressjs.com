@@ -1272,11 +1272,6 @@ h2 a {
   
 
 
-  #blog-doc .blog-details + p a,
-  #blog-doc .blog-details + p a + span {
-    white-space: nowrap;
-  }
-
   #blog-doc .blog-details + p > img {
     margin-bottom: 15px;
   }
