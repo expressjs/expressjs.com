@@ -7,7 +7,7 @@
 Appends the specified `value` to the HTTP response header `field`.  If the header is not already set,
 it creates the header with the specified value. The `value` parameter can be a string or an array.
 
-Note: calling `res.set()` after `res.append()` will reset the previously-set header value.
+{% include admonitions/note.html content="calling `res.set()` after `res.append()` will reset the previously-set header value." %}
 
 ```js
 res.append('Link', ['<http://localhost/>', '<http://localhost:3000/>'])

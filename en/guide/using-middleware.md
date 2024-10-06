@@ -97,7 +97,8 @@ app.get('/user/:id', (req, res, next) => {
 ```
 
 To skip the rest of the middleware functions from a router middleware stack, call `next('route')` to pass control to the next route.
-**NOTE**: `next('route')` will work only in middleware functions that were loaded by using the `app.METHOD()` or `router.METHOD()` functions.
+
+{% include admonitions/note.html content="`next('route')` will work only in middleware functions that were loaded by using the `app.METHOD()` or `router.METHOD()` functions." %}
 
 This example shows a middleware sub-stack that handles GET requests to the `/user/:id` path.
 

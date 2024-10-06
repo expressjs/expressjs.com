@@ -3,8 +3,10 @@
 This is a built-in middleware function in Express.
 It serves static files and is based on  [serve-static](/resources/middleware/serve-static.html).
 
-<div class="doc-box doc-info" markdown="1">NOTE: For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
-</div>
+{% capture alert_content %}
+For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+{% endcapture %}
+{% include admonitions/note.html content=alert_content %}
 
 The `root` argument specifies the root directory from which to serve static assets.
 The function determines the file to serve by combining `req.url` with the provided `root` directory.
