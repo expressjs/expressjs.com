@@ -1350,3 +1350,11 @@ html.dark-mode .hidden-light {
 html.dark-mode .hidden-dark {
   display: none;
 }
+
+blockquote {
+  margin-left: 0;
+  font-weight: 600;
+  font-style: italic;
+  padding-left: 1.2em;
+  border-left: .25rem solid #ccc;
+}
