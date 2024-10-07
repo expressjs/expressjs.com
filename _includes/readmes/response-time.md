@@ -1,8 +1,9 @@
 # response-time
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Build Status][travis-image]][travis-url]
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-url]
+[![Node.js Version][node-image]][node-url]
+[![Build Status][ci-image]][ci-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
 Response time for Node.js servers.
@@ -130,11 +131,12 @@ app.get('/', function (req, res) {
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/response-time.svg
+[npm-version-image]: https://badgen.net/npm/v/response-time
 [npm-url]: https://npmjs.org/package/response-time
-[travis-image]: https://img.shields.io/travis/expressjs/response-time/master.svg
-[travis-url]: https://travis-ci.org/expressjs/response-time
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/response-time/master.svg
-[coveralls-url]: https://coveralls.io/r/expressjs/response-time?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/response-time.svg
-[downloads-url]: https://npmjs.org/package/response-time
+[npm-downloads-image]: https://badgen.net/npm/dm/response-time
+[node-image]: https://badgen.net/npm/node/response-time
+[node-url]: https://nodejs.org/en/download
+[ci-image]: https://badgen.net/github/checks/express/response-time/master?label=ci
+[ci-url]: https://github.com/express/response-time/actions/workflows/ci.yml
+[coveralls-image]: https://badgen.net/coveralls/c/github/express/response-time/master
+[coveralls-url]: https://coveralls.io/r/express/response-time?branch=master

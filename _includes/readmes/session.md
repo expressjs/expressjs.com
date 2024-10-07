@@ -89,10 +89,36 @@ no maximum age is set.
 **Note** If both `expires` and `maxAge` are set in the options, then the last one
 defined in the object is what is used.
 
+##### cookie.partitioned
+
+Specifies the `boolean` value for the [`Partitioned` `Set-Cookie`](rfc-cutler-httpbis-partitioned-cookies)
+attribute. When truthy, the `Partitioned` attribute is set, otherwise it is not.
+By default, the `Partitioned` attribute is not set.
+
+**Note** This is an attribute that has not yet been fully standardized, and may
+change in the future. This also means many clients may ignore this attribute until
+they understand it.
+
+More information about can be found in [the proposal](https://github.com/privacycg/CHIPS).
+
 ##### cookie.path
 
 Specifies the value for the `Path` `Set-Cookie`. By default, this is set to `'/'`, which
 is the root path of the domain.
+
+##### cookie.priority
+
+Specifies the `string` to be the value for the [`Priority` `Set-Cookie` attribute][rfc-west-cookie-priority-00-4.1].
+
+  - `'low'` will set the `Priority` attribute to `Low`.
+  - `'medium'` will set the `Priority` attribute to `Medium`, the default priority when not set.
+  - `'high'` will set the `Priority` attribute to `High`.
+
+More information about the different priority levels can be found in
+[the specification][rfc-west-cookie-priority-00-4.1].
+
+**Note** This is an attribute that has not yet been fully standardized, and may change in the future.
+This also means many clients may ignore this attribute until they understand it.
 
 ##### cookie.sameSite
 
@@ -274,12 +300,13 @@ it to be saved. *This has been fixed in PassportJS 0.3.0*
 
 **Required option**
 
-This is the secret used to sign the session ID cookie. This can be either a string
-for a single secret, or an array of multiple secrets. If an array of secrets is
-provided, only the first element will be used to sign the session ID cookie, while
-all the elements will be considered when verifying the signature in requests. The
-secret itself should be not easily parsed by a human and would best be a random set
-of characters. A best practice may include:
+This is the secret used to sign the session ID cookie. The secret can be any type
+of value that is supported by Node.js `crypto.createHmac` (like a string or a
+`Buffer`). This can be either a single secret, or an array of multiple secrets. If
+an array of secrets is provided, only the first element will be used to sign the
+session ID cookie, while all the elements will be considered when verifying the
+signature in requests. The secret itself should be not easily parsed by a human and
+would best be a random set of characters. A best practice may include:
 
   - The use of environment variables to store the secret, ensuring the secret itself
     does not exist in your repository.
@@ -293,6 +320,9 @@ Changing the secret value will invalidate all existing sessions. In order to rot
 the secret without invalidating sessions, provide an array of secrets, with the new
 secret as first element of the array, and including previous secrets as the later
 elements.
+
+**Note** HMAC-256 is used to sign the session ID. For this reason, the secret should
+contain at least 32 bytes of entropy.
 
 ##### store
 
@@ -556,6 +586,11 @@ and other multi-core embedded devices).
 [connect-cloudant-store-url]: https://www.npmjs.com/package/connect-cloudant-store
 [connect-cloudant-store-image]: https://badgen.net/github/stars/adriantanasa/connect-cloudant-store?label=%E2%98%85
 
+[![★][connect-cosmosdb-image] connect-cosmosdb][connect-cosmosdb-url] An Azure [Cosmos DB](https://azure.microsoft.com/en-us/products/cosmos-db/)-based session store.
+
+[connect-cosmosdb-url]: https://www.npmjs.com/package/connect-cosmosdb
+[connect-cosmosdb-image]: https://badgen.net/github/stars/thekillingspree/connect-cosmosdb?label=%E2%98%85
+
 [![★][connect-couchbase-image] connect-couchbase][connect-couchbase-url] A [couchbase](http://www.couchbase.com/)-based session store.
 
 [connect-couchbase-url]: https://www.npmjs.com/package/connect-couchbase
@@ -642,6 +677,11 @@ and other multi-core embedded devices).
 [connect-neo4j-url]: https://www.npmjs.com/package/connect-neo4j
 [connect-neo4j-image]: https://badgen.net/github/stars/MaxAndersson/connect-neo4j?label=%E2%98%85
 
+[![★][connect-ottoman-image] connect-ottoman][connect-ottoman-url] A [couchbase ottoman](http://www.couchbase.com/)-based session store.
+
+[connect-ottoman-url]: https://www.npmjs.com/package/connect-ottoman
+[connect-ottoman-image]: https://badgen.net/github/stars/noiissyboy/connect-ottoman?label=%E2%98%85
+
 [![★][connect-pg-simple-image] connect-pg-simple][connect-pg-simple-url] A PostgreSQL-based session store.
 
 [connect-pg-simple-url]: https://www.npmjs.com/package/connect-pg-simple
@@ -688,6 +728,11 @@ and other multi-core embedded devices).
 
 [dynamodb-store-url]: https://www.npmjs.com/package/dynamodb-store
 [dynamodb-store-image]: https://badgen.net/github/stars/rafaelrpinto/dynamodb-store?label=%E2%98%85
+
+[![★][dynamodb-store-v3-image] dynamodb-store-v3][dynamodb-store-v3-url] Implementation of a session store using DynamoDB backed by the [AWS SDK for JavaScript v3](https://github.com/aws/aws-sdk-js-v3).
+
+[dynamodb-store-v3-url]: https://www.npmjs.com/package/dynamodb-store-v3
+[dynamodb-store-v3-image]: https://badgen.net/github/stars/FryDay/dynamodb-store-v3?label=%E2%98%85
 
 [![★][express-etcd-image] express-etcd][express-etcd-url] An [etcd](https://github.com/stianeikeland/node-etcd) based session store.
 
@@ -809,10 +854,10 @@ based session store. Supports all backends supported by Fortune (MongoDB, Redis,
 [session-pouchdb-store-url]: https://www.npmjs.com/package/session-pouchdb-store
 [session-pouchdb-store-image]: https://badgen.net/github/stars/solzimer/session-pouchdb-store?label=%E2%98%85
 
-[![★][session-rethinkdb-image] session-rethinkdb][session-rethinkdb-url] A [RethinkDB](http://rethinkdb.com/)-based session store.
+[![★][@cyclic.sh/session-store-image] @cyclic.sh/session-store][@cyclic.sh/session-store-url] A DynamoDB-based session store for [Cyclic.sh](https://www.cyclic.sh/) apps.
 
-[session-rethinkdb-url]: https://www.npmjs.com/package/session-rethinkdb
-[session-rethinkdb-image]: https://badgen.net/github/stars/llambda/session-rethinkdb?label=%E2%98%85
+[@cyclic.sh/session-store-url]: https://www.npmjs.com/package/@cyclic.sh/session-store
+[@cyclic.sh/session-store-image]: https://badgen.net/github/stars/cyclic-software/session-store?label=%E2%98%85
 
 [![★][@databunker/session-store-image] @databunker/session-store][@databunker/session-store-url] A [Databunker](https://databunker.org/)-based encrypted session store.
 
@@ -975,6 +1020,8 @@ On Windows, use the corresponding command;
 [MIT](LICENSE)
 
 [rfc-6265bis-03-4.1.2.7]: https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03#section-4.1.2.7
+[rfc-cutler-httpbis-partitioned-cookies]: https://tools.ietf.org/html/draft-cutler-httpbis-partitioned-cookies/
+[rfc-west-cookie-priority-00-4.1]: https://tools.ietf.org/html/draft-west-cookie-priority-00#section-4.1
 [ci-image]: https://badgen.net/github/checks/expressjs/session/master?label=ci
 [ci-url]: https://github.com/expressjs/session/actions?query=workflow%3Aci
 [coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/session/master

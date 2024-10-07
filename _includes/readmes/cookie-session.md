@@ -103,6 +103,8 @@ The options can also contain any of the following (for the full list, see
   - `expires`: a `Date` object indicating the cookie's expiration date (expires at the end of session by default).
   - `path`: a string indicating the path of the cookie (`/` by default).
   - `domain`: a string indicating the domain of the cookie (no default).
+  - `partitioned`: a boolean indicating whether to partition the cookie in Chrome for the [CHIPS Update](https://developers.google.com/privacy-sandbox/3pcd/chips) (`false` by default). If this is true, Cookies from embedded sites will be partitioned and only readable from the same top level site from which it was created.
+  - `priority`: a string indicating the cookie priority. This can be set to `'low'`, `'medium'`, or `'high'`.
   - `sameSite`: a boolean or string indicating whether the cookie is a "same site" cookie (`false` by default). This can be set to `'strict'`, `'lax'`, `'none'`, or `true` (which maps to `'strict'`).
   - `secure`: a boolean indicating whether the cookie is only to be sent over HTTPS (`false` by default for HTTP, `true` by default for HTTPS). If this is set to `true` and Node.js is not directly over a TLS connection, be sure to read how to [setup Express behind proxies](https://expressjs.com/en/guide/behind-proxies.html) or the cookie may not ever set correctly.
   - `httpOnly`: a boolean indicating whether the cookie is only to be sent over HTTP(S), and not made available to client JavaScript (`true` by default).
@@ -261,7 +263,7 @@ recommends that a browser **SHOULD** allow
 > the cookie's name, value, and attributes)
 
 In practice this limit differs slightly across browsers. See a list of
-[browser limits here](http://browsercookielimits.squawky.net/). As a rule
+[browser limits here](http://browsercookielimits.iain.guru). As a rule
 of thumb **don't exceed 4093 bytes per domain**.
 
 If your session object is large enough to exceed a browser limit when encoded,

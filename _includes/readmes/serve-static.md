@@ -45,7 +45,7 @@ true. Disabling this will ignore the `immutable` and `maxAge` options.
 
 ##### dotfiles
 
- Set how "dotfiles" are treated when encountered. A dotfile is a file
+Set how "dotfiles" are treated when encountered. A dotfile is a file
 or directory that begins with a dot ("."). Note this check is done on
 the path itself without checking if the path actually exists on the
 disk. If `root` is specified, only the dotfiles above the root are
@@ -56,8 +56,7 @@ to "deny").
   - `'deny'` Deny a request for a dotfile and 403/`next()`.
   - `'ignore'` Pretend like the dotfile does not exist and 404/`next()`.
 
-The default value is similar to `'ignore'`, with the exception that this
-default will not ignore the files within a directory that begins with a dot.
+The default value is `'ignore'`.
 
 ##### etag
 
@@ -215,7 +214,7 @@ app.listen(3000)
 #### Different settings for paths
 
 This example shows how to set a different max age depending on the served
-file type. In this example, HTML files are not cached, while everything else
+file. In this example, HTML files are not cached, while everything else
 is for 1 day.
 
 ```js
@@ -232,8 +231,8 @@ app.use(serveStatic(path.join(__dirname, 'public'), {
 
 app.listen(3000)
 
-function setCustomCacheControl (res, path) {
-  if (serveStatic.mime.lookup(path) === 'text/html') {
+function setCustomCacheControl (res, file) {
+  if (path.extname(file) === '.html') {
     // Custom Cache-Control for HTML files
     res.setHeader('Cache-Control', 'public, max-age=0')
   }
