@@ -14,12 +14,15 @@ jobs:
         if: github.repository_owner == 'expressjs'
         steps:
             - uses: actions/checkout@v4
-            - name: Use Node.js 20
+            - name: Set up Node.js
               uses: actions/setup-node@v4
               with:
                 node-version: 20
             - name: Run scripts
-              run: bash ./get-contributing.sh && bash ./get-readmes.sh && node ./get-express-version.mjs
+              run: |
+                bash ./get-contributing.sh
+                bash ./get-readmes.sh
+                node ./get-express-version.mjs  
             - name: Create Pull Request
               uses: gr2m/create-or-update-pull-request-action@v1
               env:
