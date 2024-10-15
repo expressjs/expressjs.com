@@ -352,6 +352,7 @@ pre {
 }
 
 pre code {
+  padding: 0;
   overflow: scroll;
   word-break: break-all;
   background-color: inherit;
@@ -1263,20 +1264,22 @@ h2 a {
 @media (max-width: 500px) {
   #blog-doc {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    margin: 0;
+    margin-right: 0;
     padding-right: 10px;
   }
-  #blog-doc .blog-details + p {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  
+
+
   #blog-doc .blog-details + p > img {
     margin-bottom: 15px;
   }
 }
+
+
+
 /* blog tablet and up*/
 @media (min-width: 768px) {
   .blog-post {
@@ -1347,4 +1350,12 @@ html.dark-mode .hidden-light {
 }
 html.dark-mode .hidden-dark {
   display: none;
+}
+
+blockquote {
+  margin-left: 0;
+  font-weight: 600;
+  font-style: italic;
+  padding-left: 1.2em;
+  border-left: .25rem solid #ccc;
 }

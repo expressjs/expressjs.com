@@ -20,6 +20,4 @@ If you need to make changes to a key in `req.params`, use the [app.param](/{{ pa
 
 Any changes made to the `req.params` object in a middleware or route handler will be reset.
 
-<div class="doc-box doc-info" markdown="1">
-NOTE: Express automatically decodes the values in `req.params` (using `decodeURIComponent`).
-</div>
+{% include admonitions/note.html content="Express automatically decodes the values in `req.params` (using `decodeURIComponent`)." %}

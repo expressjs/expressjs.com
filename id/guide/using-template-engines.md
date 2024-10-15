@@ -70,7 +70,7 @@ app.get('/', (req, res) => {
 
 When you make a request to the home page, the `index.pug` file will be rendered as HTML.
 
-Note: The view engine cache does not cache the contents of the template's output, only the underlying template itself. The view is still re-rendered with every request even when the cache is on.
+{% include admonitions/note.html content="The view engine cache does not cache the contents of the template's output, only the underlying template itself. The view is still re-rendered with every request even when the cache is on."%}
 
 To learn more about how template engines work in Express, see:
 ["Developing template engines for Express"](/{{ page.lang }}/advanced/developing-template-engines.html).

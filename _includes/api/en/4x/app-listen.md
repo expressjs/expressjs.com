@@ -48,8 +48,6 @@ app.listen = function () {
 }
 ```
 
-<div class="doc-box doc-info" markdown="1">
-NOTE: All the forms of Node's
+{% include admonitions/note.html content="All the forms of Node's
 [http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen)
-method are in fact actually supported.
-</div>
+method are in fact actually supported." %}

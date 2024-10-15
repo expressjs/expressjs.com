@@ -39,7 +39,9 @@ Software platform used to build scalable network applications. Node.js uses Java
 
 ### open-source, open source
 
-When used as an adjective, hyphenate; for example: "This is open-source software." See [Open-source software on Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Note: Although it is common not to hyphenate this term, we are using the standard English rules for hyphenating a compound adjective
+When used as an adjective, hyphenate; for example: "This is open-source software." See [Open-source software on Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). 
+
+{% include admonitions/note.html content="Although it is common not to hyphenate this term, we are using the standard English rules for hyphenating a compound adjective." %}
 
 ### request
 

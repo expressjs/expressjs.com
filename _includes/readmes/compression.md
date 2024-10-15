@@ -31,7 +31,7 @@ var compression = require('compression')
 ### compression([options])
 
 Returns the compression middleware using the given `options`. The middleware
-will attempt to compress response bodies for all request that traverse through
+will attempt to compress response bodies for all requests that traverse through
 the middleware, based on the given `options`.
 
 This middleware will never compress responses that include a `Cache-Control`

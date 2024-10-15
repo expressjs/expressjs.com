@@ -346,7 +346,7 @@ respawn
 respawn limit 10 10
 ```
 
-NOTE: This script requires Upstart 1.4 or newer, supported on Ubuntu 12.04-14.10.
+{% include admonitions/note.html content="This script requires Upstart 1.4 or newer, supported on Ubuntu 12.04-14.10." %}
 
 Since the job is configured to run when the system starts, your app will be started along with the operating system, and automatically restarted if the app crashes or the system goes down.
 
@@ -374,7 +374,7 @@ Then run the service with:
 $ sudo /sbin/initctl start strong-pm
 ```
 
-NOTE: On systems that don't support Upstart 1.4, the commands are slightly different. See [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10) for more information.
+{% include admonitions/note.html content="On systems that don't support Upstart 1.4, the commands are slightly different. See [Setting up a production host (StrongLoop documentation)](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-RHELLinux5and6,Ubuntu10.04-.10,11.04-.10) for more information." %}
 
 ### Run your app in a cluster
 

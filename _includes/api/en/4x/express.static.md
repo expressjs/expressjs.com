@@ -3,8 +3,10 @@
 This is a built-in middleware function in Express.
 It serves static files and is based on  [serve-static](/resources/middleware/serve-static.html).
 
-<div class="doc-box doc-info" markdown="1">NOTE: For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
-</div>
+{% capture alert_content %}
+For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+{% endcapture %}
+{% include admonitions/note.html content=alert_content %}
 
 The `root` argument specifies the root directory from which to serve static assets.
 The function determines the file to serve by combining `req.url` with the provided `root` directory.
@@ -16,7 +18,7 @@ See also the [example below](#example.of.express.static).
 
 | Property      | Description                                                           |   Type      | Default         |
 |---------------|-----------------------------------------------------------------------|-------------|-----------------|
-| `dotfiles`    | Determines how dotfiles (files or directories that begin with a dot ".") are treated.  <br/><br/>See [dotfiles](#dotfiles) below. | String | "ignore"|
+| `dotfiles`    | Determines how dotfiles (files or directories that begin with a dot ".") are treated.  <br/><br/>See [dotfiles](#dotfiles) below. | String | `undefined` |
 | `etag`        | Enable or disable etag generation <br/><br/>NOTE: `express.static` always sends weak ETags. | Boolean | `true` |
 | `extensions`  | Sets file extension fallbacks: If a file is not found, search for files with the specified extensions and serve the first one found. Example: `['html', 'htm']`.| Mixed | `false` |
 | `fallthrough`  | Let client errors fall-through as unhandled requests, otherwise forward a client error. <br/><br/>See [fallthrough](#fallthrough) below.| Boolean | `true` |
@@ -30,15 +32,14 @@ See also the [example below](#example.of.express.static).
 For more information, see [Serving static files in Express](/starter/static-files.html).
 and [Using middleware - Built-in middleware](/{{page.lang}}/guide/using-middleware.html#middleware.built-in).
 
-<h5 id='dotfiles'> dotfiles</h5>
+<h5 id='dotfiles'>dotfiles</h5>
 
 Possible values for this option are:
 
 - "allow" - No special treatment for dotfiles.
 - "deny" - Deny a request for a dotfile, respond with `403`, then call `next()`.
 - "ignore" - Act as if the dotfile does not exist, respond with `404`, then call `next()`.
-
-**NOTE**: With the default value, it will not ignore files in a directory that begins with a dot.
+- `undefined` - Act as ignore, except that files in a directory that begins with a dot are **NOT** ignored.
 
 <h5 id='fallthrough'>fallthrough</h5>
 
