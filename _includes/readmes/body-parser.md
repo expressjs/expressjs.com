@@ -4,6 +4,7 @@
 [![NPM Downloads][npm-downloads-image]][npm-url]
 [![Build Status][ci-image]][ci-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
+[![OpenSSF Scorecard Badge][ossf-scorecard-badge]][ossf-scorecard-visualizer]
 
 Node.js body parsing middleware.
 
@@ -55,9 +56,7 @@ var bodyParser = require('body-parser')
 
 The `bodyParser` object exposes various factories to create middlewares. All
 middlewares will populate the `req.body` property with the parsed body when
-the `Content-Type` request header matches the `type` option, or an empty
-object (`{}`) if there was no body to parse, the `Content-Type` was not matched,
-or an error occurred.
+the `Content-Type` request header matches the `type` option.
 
 The various errors returned by this module are described in the
 [errors section](#errors).
@@ -66,8 +65,8 @@ The various errors returned by this module are described in the
 
 Returns middleware that only parses `json` and only looks at requests where
 the `Content-Type` header matches the `type` option. This parser accepts any
-Unicode encoding of the body and supports automatic inflation of `gzip` and
-`deflate` encodings.
+Unicode encoding of the body and supports automatic inflation of `gzip`,
+`br` (brotli) and `deflate` encodings.
 
 A new `body` object containing the parsed data is populated on the `request`
 object after the middleware (i.e. `req.body`).
@@ -121,7 +120,8 @@ encoding of the request. The parsing can be aborted by throwing an error.
 
 Returns middleware that parses all bodies as a `Buffer` and only looks at
 requests where the `Content-Type` header matches the `type` option. This
-parser supports automatic inflation of `gzip` and `deflate` encodings.
+parser supports automatic inflation of `gzip`, `br` (brotli) and `deflate`
+encodings.
 
 A new `body` object containing the parsed data is populated on the `request`
 object after the middleware (i.e. `req.body`). This will be a `Buffer` object
@@ -166,7 +166,8 @@ encoding of the request. The parsing can be aborted by throwing an error.
 
 Returns middleware that parses all bodies as a string and only looks at
 requests where the `Content-Type` header matches the `type` option. This
-parser supports automatic inflation of `gzip` and `deflate` encodings.
+parser supports automatic inflation of `gzip`, `br` (brotli) and `deflate`
+encodings.
 
 A new `body` string containing the parsed data is populated on the `request`
 object after the middleware (i.e. `req.body`). This will be a string of the
@@ -216,7 +217,7 @@ encoding of the request. The parsing can be aborted by throwing an error.
 Returns middleware that only parses `urlencoded` bodies and only looks at
 requests where the `Content-Type` header matches the `type` option. This
 parser accepts only UTF-8 encoding of the body and supports automatic
-inflation of `gzip` and `deflate` encodings.
+inflation of `gzip`, `br` (brotli) and `deflate` encodings.
 
 A new `body` object containing the parsed data is populated on the `request`
 object after the middleware (i.e. `req.body`). This object will contain
@@ -230,16 +231,12 @@ any of the following keys:
 
 ##### extended
 
-The `extended` option allows to choose between parsing the URL-encoded data
-with the `querystring` library (when `false`) or the `qs` library (when
-`true`). The "extended" syntax allows for rich objects and arrays to be
-encoded into the URL-encoded format, allowing for a JSON-like experience
-with URL-encoded. For more information, please
-[see the qs library](https://www.npmjs.org/package/qs#readme).
+The "extended" syntax allows for rich objects and arrays to be encoded into the
+URL-encoded format, allowing for a JSON-like experience with URL-encoded. For
+more information, please [see the qs
+library](https://www.npmjs.org/package/qs#readme).
 
-Defaults to `true`, but using the default has been deprecated. Please
-research into the difference between `qs` and `querystring` and choose the
-appropriate setting.
+Defaults to `false`.
 
 ##### inflate
 
@@ -276,6 +273,27 @@ to `application/x-www-form-urlencoded`.
 The `verify` option, if supplied, is called as `verify(req, res, buf, encoding)`,
 where `buf` is a `Buffer` of the raw request body and `encoding` is the
 encoding of the request. The parsing can be aborted by throwing an error.
+
+##### defaultCharset
+
+The default charset to parse as, if not specified in content-type. Must be
+either `utf-8` or `iso-8859-1`. Defaults to `utf-8`.
+
+##### charsetSentinel
+
+Whether to let the value of the `utf8` parameter take precedence as the charset
+selector. It requires the form to contain a parameter named `utf8` with a value
+of `✓`. Defaults to `false`.
+
+##### interpretNumericEntities
+
+Whether to decode numeric entities such as `&#9786;` when parsing an iso-8859-1
+form. Defaults to `false`.
+
+
+#### depth
+
+The `depth` option is used to configure the maximum depth of the `qs` library when `extended` is `true`. This allows you to limit the amount of keys that are parsed and can be useful to prevent certain types of abuse. Defaults to `32`. It is recommended to keep this value as low as possible.
 
 ## Errors
 
@@ -373,6 +391,10 @@ as well as in the `encoding` property. The `status` property is set to `415`,
 the `type` property is set to `'encoding.unsupported'`, and the `encoding`
 property is set to the encoding that is unsupported.
 
+### The input exceeded the depth
+
+This error occurs when using `bodyParser.urlencoded` with the `extended` property set to `true` and the input exceeds the configured `depth` option. The `status` property is set to `400`. It is recommended to review the `depth` option and evaluate if it requires a higher value. When the `depth` option is set to `32` (default value), the error will not be thrown.
+
 ## Examples
 
 ### Express/Connect top-level generic
@@ -388,7 +410,7 @@ var bodyParser = require('body-parser')
 var app = express()
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded())
 
 // parse application/json
 app.use(bodyParser.json())
@@ -396,7 +418,7 @@ app.use(bodyParser.json())
 app.use(function (req, res) {
   res.setHeader('Content-Type', 'text/plain')
   res.write('you posted:\n')
-  res.end(JSON.stringify(req.body, null, 2))
+  res.end(String(JSON.stringify(req.body, null, 2)))
 })
 ```
 
@@ -416,15 +438,17 @@ var app = express()
 var jsonParser = bodyParser.json()
 
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded()
 
 // POST /login gets urlencoded bodies
 app.post('/login', urlencodedParser, function (req, res) {
+  if (!req.body || !req.body.username) res.sendStatus(400)
   res.send('welcome, ' + req.body.username)
 })
 
 // POST /api/users gets JSON bodies
 app.post('/api/users', jsonParser, function (req, res) {
+  if (!req.body) res.sendStatus(400)
   // create user in req.body
 })
 ```
@@ -463,3 +487,5 @@ app.use(bodyParser.text({ type: 'text/html' }))
 [npm-downloads-image]: https://badgen.net/npm/dm/body-parser
 [npm-url]: https://npmjs.org/package/body-parser
 [npm-version-image]: https://badgen.net/npm/v/body-parser
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/body-parser/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/body-parser
