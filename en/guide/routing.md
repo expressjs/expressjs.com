@@ -72,7 +72,10 @@ Route paths, in combination with a request method, define the endpoints at which
 
 {% include admonitions/caution.html content=caution-character %}
 
-If you need to use the dollar character (`$`) in a path string, escape it with `\`. For example, the path string for requests at `/data/$book`, would be `/data/\$book`.
+{% capture note-dollar-character %}In express 5, you don't need to escape the dollar character (`$`) with `\`.
+{% endcapture %}
+
+{% include admonitions/note.html content=note-dollar-character %}
 
 {% capture note-path-to-regexp %}
   Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths; see the path-to-regexp documentation for all the possibilities in defining route paths. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) is a handy tool for testing basic Express routes, although it does not support pattern matching.
