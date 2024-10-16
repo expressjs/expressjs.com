@@ -22,7 +22,9 @@
 }
 
 body {
-  font: 400 14px/1.6 "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  line-height: 28px;
   background: #fff;
   margin: 0;
   padding: 0;
@@ -55,7 +57,7 @@ p em {
 
 p {
   margin: 10px 0;
-  line-height: 1.35em;
+  text-wrap: pretty;
 }
 
 strong, th {
@@ -295,7 +297,6 @@ a {
   top: -5px;
   font: 100 4.1em "Helvetica Neue", "Open Sans", sans-serif;
   color: #aeaeae;
-  line-height: .87;
 }
 
 #description em {
@@ -466,7 +467,6 @@ html[xmlns] .clearfix {
 
 .doctable td, .doctable th, section table td, section table th {
   padding: 7px;
-  line-height: 120%;
   vertical-align: top;
   border: 1px solid #c6c6c6;
 }
