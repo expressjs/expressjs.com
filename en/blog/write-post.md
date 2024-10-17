@@ -30,6 +30,7 @@ Create a new file in the `_posts` directory named using following the format: `Y
     ---
     title: <your-title>
     sub_title: <your-optional-sub-title>
+    description: <description-of-your-post>
     tags: <white-space-separated-topics>
     author: <your-name>
     ---
