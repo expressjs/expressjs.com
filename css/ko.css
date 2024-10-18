@@ -4,6 +4,10 @@
 */
 /* For image callouts in writing-middleware.md */
 
+@import url('../fonts/ko/Pretendard.css');
+
+html, body {font-family: Pretendard, Arial, sans-serif;}
+
 .callout {position: relative;}
 
 #callout1 {top: 40px; }
