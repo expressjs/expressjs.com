@@ -1,5 +1,8 @@
-# Use the official Jekyll image as the base
-FROM jekyll/jekyll:4.2.2
+# Use the official Ruby image as the base
+FROM ruby:3.3.5
+
+# Install Jekyll and Bundler
+RUN gem install jekyll bundler
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -9,9 +12,10 @@ RUN chmod 777 /usr/src/app
 
 # Copy the Gemfile into the image
 COPY Gemfile ./
+COPY Gemfile.lock ./
 
-# Install the gems and delete the Gemfile.lock
-RUN bundle install --no-cache && rm Gemfile.lock
+# Install the gems
+RUN bundle install --no-cache
 
 # Copy the rest of the project into the image
 COPY . .
