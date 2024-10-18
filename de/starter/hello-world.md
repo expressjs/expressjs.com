@@ -15,8 +15,7 @@ Erstellen Sie zunächst ein Verzeichnis namens `myapp`, wechseln Sie in das Verz
 
 Erstellen Sie im Verzeichnis `myapp` eine Datei namens `app.js` und fügen Sie den folgenden Code hinzu:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 const express = require('express')
 const app = express()
 const port = 3000
@@ -28,8 +27,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-</code>
-</pre>
+```
 
 Die Anwendung startet einen Server und ist an Port 3000 empfangsbereit für Verbindungen. Die Anwendung antwortet mit "Hello World!" auf Anforderungen zur Stamm-URL (`/`) oder zu *route*. Bei jedem anderen Pfad lautet die Antwort **404 Not Found**.
 
