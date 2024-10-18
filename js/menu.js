@@ -12,12 +12,12 @@ mobileScreen?.addEventListener("change", (event) => {
 
 // Desktop Menu
 
-const $itemsMenu = document.querySelectorAll(".submenu");
+const itemsMenu = document.querySelectorAll(".submenu");
 
-for (const el of $itemsMenu) {
+for (const el of itemsMenu) {
 	el.addEventListener("click", () => {
 		if (isSmallScreen || 'ontouchstart' in document.documentElement) {
-			for (const item of $itemsMenu) {
+			for (const item of itemsMenu) {
 				if (item.id !== el.id) {
 					item.classList.remove("open");
 				}
@@ -41,11 +41,11 @@ for (const el of $itemsMenu) {
 
 // Mobile Menu
 
-const $linkItemsMenu = document.querySelectorAll(".submenu > a");
-const $menu = document.querySelector("#navmenu");
-const $overlay = document.querySelector("#overlay");
+const linkItemsMenu = document.querySelectorAll(".submenu > a");
+const menu = document.querySelector("#navmenu");
+const overlay = document.querySelector("#overlay");
 
-for (const el of $linkItemsMenu) {
+for (const el of linkItemsMenu) {
 	el.addEventListener("click", (e) => {
 		if (el.classList.contains("open")) {
 			el.classList.remove("open");
@@ -58,19 +58,19 @@ for (const el of $linkItemsMenu) {
 }
 
 document.querySelector("#nav-button")?.addEventListener("click", () => {
-	$menu?.classList.toggle("opens");
-	$overlay?.classList.toggle("blurs");
+	menu?.classList.toggle("opens");
+	overlay?.classList.toggle("blurs");
 	document.body.classList.toggle("no-scroll")
 });
 
 // close mobile menu
-$overlay?.addEventListener("click", () => {
-	$menu?.classList.remove("opens");
-	$overlay?.classList.remove("blurs");
+overlay?.addEventListener("click", () => {
+	menu?.classList.remove("opens");
+	overlay?.classList.remove("blurs");
 	document.body.classList.remove("no-scroll")
 });
 
 // hilight the menu item of the current page
 document
-	.querySelector(`.submenu-content a[href="${document.location.pathname}"]`)
+	.querySelector(`.submenu-content a[href="{document.location.pathname}"]`)
 	?.classList.add("current");
