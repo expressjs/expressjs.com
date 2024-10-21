@@ -5,12 +5,12 @@
   <section id="logo"><a href="/" class="express">Express</a>
   </section>
   <div id="navbar">
+      <input id="q" placeholder="🔎 search">
       <ul id="navmenu">
           <li><a href="/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Початкова сторінка</a></li>
-          <li>
-              <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Ознайомлення</a>
-                      <ul>
+          <li id="getting-started-menu" class="submenu">
+                  <a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Ознайомлення</a>
+                      <ul class="submenu-content">
                           <li>
                             <a href="/{{ page.lang }}/starter/installing.html">
                               Встановлення
@@ -42,13 +42,10 @@
                             </a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="guide-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Гід</a>
-                      <ul>
+          <li id="guide-menu" class="submenu">
+                  <a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Гід</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/guide/routing.html">Маршрутизація</a>
                           </li>
                           <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Створення проміжних обробників</a>
@@ -70,13 +67,10 @@
                           <li><a href="/{{ page.lang }}/guide/database-integration.html">Інтеграція з базами даних</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="application-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Довідник API</a>
-                      <ul>
+          <li id="application-menu" class="submenu">
+                  <a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>Довідник API</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/5x/api.html">5.x</a>
                           </li>
                           <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
@@ -84,13 +78,10 @@
                           <li><a href="/{{ page.lang }}/3x/api.html">3.x (застаріла)</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Додаткові можливості</a>
-                      <ul>
+          <li id="advanced-topics-menu" class="submenu">
+                  <a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Додаткові можливості</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Шаблонізатори</a>
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/security-updates.html">Оновлення безпеки</a>
@@ -99,15 +90,11 @@
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Кращі практики продуктивності</a>
                           </li>
-
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="resources-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Ресурси</a>
-                      <ul>
+          <li id="resources-menu" class="submenu">
+                  <a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Ресурси</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/resources/glossary.html">Голосарій</a>
                           </li>
                           <li><a href="/{{ page.lang }}/resources/middleware.html">Проміжний обробник</a>
@@ -115,8 +102,6 @@
                           <li><a href="/{{ page.lang }}/resources/community.html">Спільнота</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
       </ul>
       <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
