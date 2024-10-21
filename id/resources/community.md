@@ -27,6 +27,8 @@ Members of the Express technical committee are:
 - [@sheplu](https://github.com/sheplu) - Jean Burellier
 - [@wesleytodd](https://github.com/wesleytodd) - Wes Todd
 - [@jonchurch](https://github.com/jonchurch) - Jon Church
+- [@ctcpip](https://github.com/ctcpip) - Chris de Almeida
+
 
 **Inactive:**
 
