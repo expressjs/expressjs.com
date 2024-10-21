@@ -27,3 +27,26 @@ for utility functions that may be generally useful.
 
 
 For additional low-level HTTP-related modules, see [jshttp](http://jshttp.github.io/).
+
+
+## Others Modules
+
+Misc modules that extend Express or provide useful utilities.
+
+-   [session.socket.io (SessionSockets)](https://github.com/functioncallback/session.socket.io) -- Connect middleware sessions in socket.io
+-   [Express Expose](http://github.com/visionmedia/express-expose) -- Expose js objects, functions, and modules to client-side scripts
+-   [Express Messages](http://github.com/visionmedia/express-messages) -- Flash message display dynamicHelper
+-   [Express Configuration](http://github.com/visionmedia/express-configuration) -- Async configuration
+-   [Express Resource](http://github.com/visionmedia/express-resource) -- Resourceful routing
+-   [Express Helpers](https://github.com/masahiroh/express-helpers) -- Misc view helpers for Express (broken link, [try this package](https://github.com/tanema/express-helpers))
+-   [Express Load](https://github.com/jarradseers/express-load) -- Autoload scripts (routes, models, controllers...) into application instance for large Express applications
+-   [express-error](https://github.com/barc/express-error) -- Injects source code into Express 3 error stack for JavaScript and CoffeeScript. Very useful for CoffeeScript. From [Barc](http://barc.com/)
+-   [express-error-with-sources](https://github.com/floatdrop/express-error-with-sources) -- Plain javascript port of [express-error](https://github.com/barc/express-error) that have syntax highlighting.
+-   [express-group](https://github.com/damienklinnert/express-group) -- Group express routes and middleware
+-   [express-module-server](https://github.com/jaitaiwan/express-module-server) -- Middleware wrapper for google's [module-server](https://github.com/google/module-server)
+-   [Express Path](https://github.com/hyubs/express-path) -- Easy route mapping for Express
+-   [Express State](https://github.com/yahoo/express-state) -- Share configuration and state data of an Express app with the client-side via JavaScript.
+-   [Express Shared Routes](https://github.com/hrajchert/express-shared-routes) -- Small library that let you name routes and easily create navigation components like menus and breadcrumbs.
+-   [express-switch](https://github.com/B3rn475/express-switch) -- express-switch is a pattern matching middleware for express
+-   [Express run middleware](https://github.com/AminaG/node-run-middleware) - Small utility to manually trigger (calling) express routres, from your code.
+-   [krauter](https://github.com/brandon-d-mckay/krauter) -- An extended Router that accepts strings/objects and generates middleware that performs parameterized database queries
