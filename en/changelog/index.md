@@ -1,12 +1,23 @@
 ---
 layout: page
-title: Express 4.x changelog
+title: Express changelog
 menu: changelog
 lang: en
-redirect_from: "/changelog/4x.html"
+redirect_from: 
+  - "/changelog/4x.html"
+  - "en/changelog/4x.html"
 ---
 
-# Release Change Log
+# Express release changelog
+
+All the latest updates, improvements, and fixes to Express
+
+## 4.21.1 - Release date: 2024-10-08
+{: id="4.21.1"}
+
+The 4.21.1 patch release includes one security fix:
+
+* Update [jshttps/cookie](https://www.npmjs.com/package/cookie) to address a [vulnerability](https://github.com/advisories/GHSA-pxg6-pf52-xh8x).
 
 ## 4.21.0 - Release date: 2024-09-11
 {: id="4.21.0"}
