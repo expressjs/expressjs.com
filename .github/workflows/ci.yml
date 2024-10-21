@@ -17,35 +17,22 @@ jobs:
       github.event.pull_request.draft != true &&
       (github.event_name == 'pull_request_review' && github.event.review.state == 'approved') ||
       github.event_name != 'pull_request_review'
-    strategy:
-      matrix:
-        node-version:
-        - "16"
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
-    - name: Install Node.js ${{ matrix.node-version }}
-      shell: bash -l {0}
-      run: |
-        nvm install --default ${{ matrix.node-version }}
-        dirname "$(npm which)" >> "$GITHUB_PATH"
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
 
     - name: Install Node.js dependencies
       run: npm install
 
-    - name: List environment
-      id: list_env
-      shell: bash
-      run: |
-        echo "node@$(node -v)"
-        echo "npm@$(npm -v)"
-        npm -s ls
-
     - name: Run tests
       shell: bash
       run: npm test
-    
+
     - name: Check Docker support
       shell: bash
       run: |
