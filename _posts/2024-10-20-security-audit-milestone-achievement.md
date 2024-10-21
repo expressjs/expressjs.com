@@ -48,7 +48,7 @@ This audit would not have been possible without the efforts and expertise of man
 - OSTIF for their coordination and support throughout the audit process.
 - The OpenJS Foundation for sponsoring this important initiative.
 - Our Express.js community, who continue to support and trust us with their projects.
-- [Jordan Harband](https://github.com/ljharb) his amazing support while we needed changes in [qs](https://www.npmjs.com/package/qs).
+- [Jordan Harband](https://github.com/ljharb) for his amazing support while we needed changes in [qs](https://www.npmjs.com/package/qs).
 
 
 Together, we’ve made Express.js stronger, more resilient, and ready for the challenges ahead. We look forward to continuing to serve our community with a focus on excellence and security.
