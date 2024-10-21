@@ -5,7 +5,6 @@ author: Express Technical Committee
 description: Celebrating the successful completion of the Express.js security audit conducted by Ada Logics and facilitated by OSTIF.
 ---
 
-# Express.js Security Audit: A Milestone Achievement
 
 We are thrilled to announce the successful completion of a comprehensive security audit for Express.js, conducted by [Ada Logics](https://adalogics.com/) and facilitated by [OSTIF](https://ostif.org/). This extensive review of our framework and its core components marks a significant milestone in our commitment to ensuring the security and reliability of Express.js for our community.
 
