@@ -24,6 +24,8 @@ Los miembros del comité técnico de Express son:
 - [@sheplu](https://github.com/sheplu) - Jean Burellier
 - [@wesleytodd](https://github.com/wesleytodd) - Wes Todd
 - [@jonchurch](https://github.com/jonchurch) - Jon Church
+- [@ctcpip](https://github.com/ctcpip) - Chris de Almeida
+
 
 **Inactivos:**
 

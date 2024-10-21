@@ -27,6 +27,7 @@ Os membros do comitê técnico do Express são:
 - [@sheplu](https://github.com/sheplu) - Jean Burellier
 - [@wesleytodd](https://github.com/wesleytodd) - Wes Todd
 - [@jonchurch](https://github.com/jonchurch) - Jon Church
+- [@ctcpip](https://github.com/ctcpip) - Chris de Almeida
 
 **Inativo:**
 
