@@ -327,8 +327,8 @@ header {
   height: 57px;
   display: flex;
   align-items: center;
-  column-gap: 6%;
-  justify-content: center;
+  justify-content: space-between;
+  padding-inline: 45px;
   z-index: 100;
   border-bottom: 1px solid #ddd;
 }
@@ -887,7 +887,7 @@ h2 a {
 
 /* responsive */
 
-@media all and (max-width: 1064px) {
+@media all and (max-width: 1110px) {
   #home-content {
     flex-direction: column;
   }
@@ -1269,7 +1269,7 @@ blockquote {
   border-left: .25rem solid #ccc;
 }
 
-@media all and (max-width: 1064px) {
+@media all and (max-width: 1110px) {
   header {
     column-gap: 12px;
     padding-inline: 32px;

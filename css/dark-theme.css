@@ -103,7 +103,7 @@ html.dark-mode #navbar .submenu-content li a:hover {
   color: var(--dark_main_text);
 }
 
-@media all and (max-width: 1064px) {
+@media all and (max-width: 1110px) {
   html.dark-mode #navbar #navmenu li ul {
     background: var(--main_dark_bg);
   }
