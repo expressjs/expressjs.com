@@ -8,10 +8,9 @@
       <input id="q" placeholder="🔎 search">
       <ul id="navmenu">
           <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>首頁</a></li>
-          <li>
-              <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>入門</a>
-                      <ul>
+          <li id="getting-started-menu" class="submenu">
+                  <a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>入門</a>
+                      <ul class="submenu-content">
                           <li>
                             <a href="/{{ page.lang }}/starter/installing.html">
                               安裝
@@ -43,13 +42,10 @@
                             </a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="guide-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>手冊</a>
-                      <ul>
+          <li id="guide-menu" class="submenu">
+                  <a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>手冊</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/guide/routing.html">路由</a>
                           </li>
                           <li><a href="/{{ page.lang }}/guide/writing-middleware.html">撰寫中介軟體</a>
@@ -71,13 +67,10 @@
                           <li><a href="/{{ page.lang }}/guide/database-integration.html">資料庫整合</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="application-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API 參照</a>
-                      <ul>
+          <li id="application-menu" class="submenu">
+                  <a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API 參照</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/5x/api.html">5.x</a>
                           </li>
                           <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
@@ -87,13 +80,10 @@
                           <li><a href="/2x/">2.x（已淘汰）</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>進階主題</a>
-                      <ul>
+          <li id="advanced-topics-menu" class="submenu">
+                  <a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>進階主題</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">範本引擎</a>
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/security-updates.html">安全更新</a>
@@ -103,13 +93,10 @@
                           <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">效能最佳作法</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="resources-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>資源</a>
-                      <ul>
+          <li id="resources-menu" class="submenu">
+                  <a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>資源</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/resources/glossary.html">名詞解釋</a>
                           </li>
                           <li><a href="/{{ page.lang }}/resources/middleware.html">中介軟體</a>
@@ -117,13 +104,11 @@
                           <li><a href="/{{ page.lang }}/resources/community.html">社群</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
       </ul>
-      <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
-        <i class="fa fa-moon-o fa-2x hidden-dark"></i>
-        <span class="sun-icon hidden-light"></span>
-      </div>
+  </div>
+  <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
+    <i class="fa fa-moon-o fa-2x hidden-dark"></i>
+    <span class="sun-icon hidden-light"></span>
   </div>
 </header>

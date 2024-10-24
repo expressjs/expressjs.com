@@ -8,10 +8,9 @@
       <input id="q" placeholder="🔎 search">
       <ul id="navmenu">
           <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Главная</a></li>
-          <li>
-              <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Начало работы</a>
-                      <ul>
+          <li id="getting-started-menu" class="submenu">
+                  <a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Начало работы</a>
+                      <ul class="submenu-content">
                           <li>
                             <a href="/{{ page.lang }}/starter/installing.html">
                               Установка
@@ -43,13 +42,10 @@
                             </a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="guide-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Руководство</a>
-                      <ul>
+          <li id="guide-menu" class="submenu">
+                  <a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Руководство</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/guide/routing.html">Маршрутизация</a>
                           </li>
                           <li><a href="/{{ page.lang }}/guide/writing-middleware.html">Написание кода промежуточных обработчиков</a>
@@ -71,13 +67,10 @@
                           <li><a href="/{{ page.lang }}/guide/database-integration.html">Интеграция с базами данных</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="application-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API</a>
-                      <ul>
+          <li id="application-menu" class="submenu">
+                  <a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/5x/api.html">5.x</a>
                           </li>
                           <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
@@ -87,13 +80,10 @@
                           <li><a href="/2x/">2.x (устарел)</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Расширенные возможности</a>
-                      <ul>
+          <li id="advanced-topics-menu" class="submenu">
+                  <a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Расширенные возможности</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Шаблонизаторы</a>
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/security-updates.html">Обновления системы безопасности</a>
@@ -102,15 +92,11 @@
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">Лучшие практические методы улучшения производительности</a>
                           </li>
-
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="resources-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Ресурсы</a>
-                      <ul>
+          <li id="resources-menu" class="submenu">
+                  <a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Ресурсы</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/resources/glossary.html">Глоссарий</a>
                           </li>
                           <li><a href="/{{ page.lang }}/resources/middleware.html">Промежуточный обработчик</a>
@@ -118,13 +104,11 @@
                           <li><a href="/{{ page.lang }}/resources/community.html">Сообщество</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
       </ul>
-      <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
-        <i class="fa fa-moon-o fa-2x hidden-dark"></i>
-        <span class="sun-icon hidden-light"></span>
-      </div>
+  </div>
+  <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
+    <i class="fa fa-moon-o fa-2x hidden-dark"></i>
+    <span class="sun-icon hidden-light"></span>
   </div>
 </header>

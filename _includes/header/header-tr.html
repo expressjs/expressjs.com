@@ -1,7 +1,4 @@
 <header>
-  <div style="text-align: center; background: #010101; color: #f1f1f1; padding: 16px; font-size: 16px; width: 100vw">
-    Black Lives Matter. <a style="color: #5E80F7; text-decoration: none;" href="https://support.eji.org/give/153413/#!/donation/checkout">Support the Equal Justice Initiative</a>.
-  </div>
   <div id="mobile-menu">
       <div id="nav-button" class="fa fa-bars fa-2x button"></div>
   </div>
@@ -11,10 +8,9 @@
       <input id="q" placeholder="🔎 search" />
       <ul id="navmenu">
           <li><a href="/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>Anasayfa</a></li>
-          <li>
-              <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Buradan Başlayın</a>
-                      <ul>
+          <li id="getting-started-menu" class="submenu">
+                  <a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>Buradan Başlayın</a>
+                      <ul class="submenu-content">
                           <li>
                             <a href="/{{ page.lang }}/starter/installing.html">
                               Kurulum
@@ -46,13 +42,10 @@
                             </a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="guide-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Kılavuz</a>
-                      <ul>
+          <li id="guide-menu" class="submenu">
+                  <a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>Kılavuz</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/guide/routing.html">Yönlendirme</a>
                           </li>
                           <li><a href="/{{ page.lang }}/guide/writing-middleware.html">
@@ -75,13 +68,10 @@
                           <li><a href="/{{ page.lang }}/guide/database-integration.html">Database Entegrasyonu</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="application-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API Kaynak</a>
-                      <ul>
+          <li id="application-menu" class="submenu">
+                  <a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>API Kaynak</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/5x/api.html">5.x</a>
                           </li>
                           <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
@@ -91,13 +81,10 @@
                           <li><a href="/2x/">2.x (Kullanımdan kaldırıldı)</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Gelişmiş konular</a>
-                      <ul>
+          <li id="advanced-topics-menu" class="submenu">
+                  <a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>Gelişmiş konular</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">Şablon motorları</a>
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/security-updates.html">Gğvenlik güncellemeleri</a>
@@ -107,13 +94,10 @@
                           <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">En iyi performans uygulamaları</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="resources-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Kaynaklar</a>
-                      <ul>
+          <li id="resources-menu" class="submenu">
+                  <a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>Kaynaklar</a>
+                      <ul class="submenu-content">
                           <li>
                             <a href="/{{ page.lang }}/resources/community.html">Topluluk</a>
                           </li>
@@ -133,24 +117,11 @@
                             <a href="/{{ page.lang }}/changelog/4x.html">Sürüm Notları</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <!--
-          <li>
-              <ul id="changelog-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/changelog/4x.html"{% if page.menu == 'changelog' %} class="active"{% endif %}>Changelog</a>
-                      <ul>
-                          <li><a href="/{{ page.lang }}/changelog/4x.html">4.x</a></li>
-                      </ul>
-                  </li>
-              </ul>
-          </li>
-        -->
       </ul>
-      <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
-        <i class="fa fa-moon-o fa-2x hidden-dark"></i>
-        <span class="sun-icon hidden-light"></span>
-      </div>
+  </div>
+  <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
+    <i class="fa fa-moon-o fa-2x hidden-dark"></i>
+    <span class="sun-icon hidden-light"></span>
   </div>
 </header>

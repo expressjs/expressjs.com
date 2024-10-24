@@ -8,10 +8,9 @@
       <input id="q" placeholder="🔎 search">
       <ul id="navmenu">
           <li><a href="/{{ page.lang }}/" id="home-menu"{% if page.menu == 'home' %} class="active"{% endif %}>หน้าแรก</a></li>
-          <li>
-              <ul id="getting-started-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>เริ่มกันเลย</a>
-                      <ul>
+          <li id="getting-started-menu" class="submenu">
+                  <a href="/{{ page.lang }}/starter/installing.html"{% if page.menu == 'starter' %} class="active"{% endif %}>เริ่มกันเลย</a>
+                      <ul class="submenu-content">
                           <li>
                             <a href="/{{ page.lang }}/starter/installing.html">
                               การติดตั้ง
@@ -43,13 +42,10 @@
                             </a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="guide-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>แนะนำ</a>
-                      <ul>
+          <li id="guide-menu" class="submenu">
+                  <a href="/{{ page.lang }}/guide/routing.html"{% if page.menu == 'guide' %} class="active"{% endif %}>แนะนำ</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/guide/routing.html">การใช้งานเราเตอร์</a>
                           </li>
                           <li><a href="/{{ page.lang }}/guide/writing-middleware.html">การเขียนมิดเดิลแวร์</a>
@@ -71,13 +67,10 @@
                           <li><a href="/{{ page.lang }}/guide/database-integration.html">การเชื่อมโยงกับฐานข้อมูล</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="application-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>การอ้างอิง API</a>
-                      <ul>
+          <li id="application-menu" class="submenu">
+                  <a href="/{{ page.lang }}/4x/api.html"{% if page.menu == 'api' %} class="active"{% endif %}>การอ้างอิง API</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/5x/api.html">5.x</a>
                           </li>
                           <li><a href="/{{ page.lang }}/4x/api.html">4.x</a>
@@ -87,13 +80,10 @@
                           <li><a href="/2x/">2.x (เลิกใช้)</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="advanced-topics-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>หัวข้อขั้นสูง</a>
-                      <ul>
+          <li id="advanced-topics-menu" class="submenu">
+                  <a href="/{{ page.lang }}/advanced/developing-template-engines.html"{% if page.menu == 'advanced' %} class="active"{% endif %}>หัวข้อขั้นสูง</a>
+                      <ul class="submenu-content">
                           <li><a href="/{{ page.lang }}/advanced/developing-template-engines.html">เครื่องสร้างโครงแบบ</a>
                           </li>
                           <li><a href="/{{ page.lang }}/advanced/security-updates.html">ความปลอดภัยล่าสุด</a>
@@ -103,13 +93,10 @@
                           <li><a href="/{{ page.lang }}/advanced/best-practice-performance.html">แนวทางปฏิบัติประสิทธิภาพ</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <li>
-              <ul id="resources-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>แหล่งข้อมูลอื่น</a>
-                      <ul>
+          <li id="resources-menu" class="submenu">
+                  <a href="/{{ page.lang }}/resources/glossary.html"{% if page.menu == 'resources' %} class="active"{% endif %}>แหล่งข้อมูลอื่น</a>
+                      <ul class="submenu-content">
                           <li>
                             <a href="/{{ page.lang }}/resources/community.html">ชุมชน</a>
                           </li>
@@ -129,24 +116,11 @@
                             <a href="/{{ page.lang }}/changelog/4x.html">บันทึกการเปลี่ยนแปลง</a>
                           </li>
                       </ul>
-                  </li>
-              </ul>
           </li>
-          <!--
-          <li>
-              <ul id="changelog-menu" class="menu">
-                  <li><a href="/{{ page.lang }}/changelog/4x.html"{% if page.menu == 'changelog' %} class="active"{% endif %}>Changelog</a>
-                      <ul>
-                          <li><a href="/{{ page.lang }}/changelog/4x.html">4.x</a></li>
-                      </ul>
-                  </li>
-              </ul>
-          </li>
-        -->
       </ul>
-      <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
-        <i class="fa fa-moon-o fa-2x hidden-dark"></i>
-        <span class="sun-icon hidden-light"></span>
-      </div>
+  </div>
+  <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
+    <i class="fa fa-moon-o fa-2x hidden-dark"></i>
+    <span class="sun-icon hidden-light"></span>
   </div>
 </header>
