@@ -43,29 +43,27 @@ Das folgende Beispiel zeigt die Elemente eines Middlewarefunktionsaufrufs:
 
 Dies ist ein Beispiel einer einfachen Express-Anwendung namens "Hello World", für die Sie zwei Middlewarefunktionen definieren:
 
-<pre><code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000);
-</code></pre>
+app.listen(3000)
+```
 
 <h2>Entwicklung</h2>
 
 Dies ist ein einfaches Beispiel einer Middlewarefunktion namens "myLogger". Diese Funktion gibt lediglich "LOGGED" aus, wenn eine Anforderung zur Anwendung über diese Funktion läuft. Die Middlewarefunktion ist der Variablen `myLogger` zugeordnet.
 
-<pre>
-<code class="language-javascript" translate="no">
-var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
-</code>
-</pre>
+```js
+const myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Beachten Sie den Aufruf oben zu `next()`. Durch den Aufruf dieser Funktion wird die nächste Middlewarefunktion in der Anwendung aufgerufen. Die Funktion `next()` ist nicht Teil der Node.js- oder Express-API, sondern das dritte Argument, das an die Middlewarefunktion übergeben wird. Die Funktion `next()` kann jeden beliebigen Namen haben, per Konvention erhält sie jedoch immer den Namen "next". Um Unklarheiten zu vermeiden, sollten Sie immer diese Konvention verwenden.
@@ -74,25 +72,23 @@ Beachten Sie den Aufruf oben zu `next()`. Durch den Aufruf dieser Funktion wird 
 
 Zum Laden der Middlewarefunktion rufen Sie `app.use()` auf und geben die Middlewarefunktion an. Beispiel: Durch den folgenden Code wird die Middlewarefunktion `myLogger` vor der Weiterleitung zum Stammverzeichnispfad (/) geladen.
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
+const myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
 
-app.use(myLogger);
+app.use(myLogger)
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000);
-</code>
-</pre>
+app.listen(3000)
+```
 
 Sobald die Anwendung eine Anforderung erhält, gibt sie die Nachricht "LOGGED" an das Terminal aus.
 
@@ -104,38 +100,34 @@ Die Middlewarefunktion `myLogger` gibt einfach eine Nachricht aus und übergibt 
 
 Im nächsten Beispiel wird die Eigenschaft `requestTime` zum Anforderungsobjekt hinzugefügt. Diese Middlewarefunktion erhält den Namen "requestTime".
 
-<pre>
-<code class="language-javascript" translate="no">
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
-</code>
-</pre>
+```js
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
+```
 
 Die Anwendung verwendet nun die Middlewarefunktion `requestTime`. Außerdem verwendet die Callback-Funktion der Weiterleitung zum Stammverzeichnispfad die Eigenschaft, die die Middlewarefunktion zu `req` (dem Anforderungsobjekt) hinzufügt.
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
 
-app.use(requestTime);
+app.use(requestTime)
 
-app.get('/', function (req, res) {
-  var responseText = 'Hello World!<br>';
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-  res.send(responseText);
-});
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>'
+  responseText += `<small>Requested at: ${req.requestTime}</small>`
+  res.send(responseText)
+})
 
-app.listen(3000);
-</code>
-</pre>
+app.listen(3000)
+```
 
 Wenn Sie eine Anforderung zum Stammverzeichnis der Anwendung einleiten, zeigt die Anwendung nun die Zeitmarke Ihrer Anforderung im Browser an.
 
