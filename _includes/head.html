@@ -17,17 +17,13 @@
     <meta name="description" content="{{page.description}}">
 
     <meta property="og:url" content="https://expressjs.com{{page.url}}">
-    {% if page.url contains "post" %}
-    <meta property="og:type" content="article" >
-    {% else %}
     <meta property="og:type" content="website" >
-    {% endif %}
-    {% if page contains "author" %}
-    <meta property="og:article:author" content="{{ page.author }}">
+    {% if page.author %}
+    <meta property="og:article:author" content="{{page.author}}">
     {% endif %}
     <meta name="title" property="og:title" content="{{page.title}}">
     <meta property="og:description" content="{{page.description}}">
-    {% if page contains "image" %}
+    {% if page.image %}
     <meta property="og:image" content="{{ page.image | 'https://expressjs.com/images/og.png' }}" > 
     {% else %}
     <meta property="og:image" content="https://expressjs.com/images/og.png" >    
