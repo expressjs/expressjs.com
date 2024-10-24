@@ -22,11 +22,13 @@ Members of the Express technical committee are:
 
 - [@blakeembrey](https://github.com/blakeembrey) - Blake Embrey
 - [@crandmck](https://github.com/crandmck) - Rand McKinney
-- [@LinusU](https://github.com/LinusU) - Linus Unnebäck
-- [@ulisesgascon](https://github.com/ulisesGascon) - Ulises Gascón
-- [@sheplu](https://github.com/sheplu) - Jean Burellier
-- [@wesleytodd](https://github.com/wesleytodd) - Wes Todd
+- [@ctcpip](https://github.com/ctcpip) - Chris de Almeida
 - [@jonchurch](https://github.com/jonchurch) - Jon Church
+- [@LinusU](https://github.com/LinusU) - Linus Unnebäck
+- [@sheplu](https://github.com/sheplu) - Jean Burellier
+- [@ulisesgascon](https://github.com/ulisesGascon) - Ulises Gascón
+- [@wesleytodd](https://github.com/wesleytodd) - Wes Todd
+
 
 **Inactive:**
 
