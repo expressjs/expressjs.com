@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "eslint --ignore-path .gitignore --ignore-pattern _includes/readmes/ \"**/*.md\""
+    "test": "eslint --ignore-path .gitignore --ignore-pattern _includes/readmes/ \"**/*.md\"",
+    "verify-translation": "node ./translationStatusScript.js"
   },
   "devDependencies": {
     "eslint": "^8.54.0",

@@ -1,0 +1,53 @@
+name: status-translation
+
+on:
+  pull_request:
+    branches:
+      - gh-pages
+    paths:
+      - 'en/**'
+      - 'de/**'
+      - 'es/**'
+      - 'fr/**'
+      - 'it/**'
+      - 'ja/**'
+      - 'ko/**'
+      - 'pt-br/**'
+      - 'ru/**'
+      - 'sk/**'
+      - 'th/**'
+      - 'tr/**'
+      - 'uk/**'
+      - 'uz/**'
+      - 'zh-cn/**'
+      - 'zh-tw/**'
+
+jobs:
+  verify-translation:
+    runs-on: ubuntu-latest
+    permissions:
+       contents: write
+       pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+        
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: | 
+          
+          npm run verify-translation
+         
+          git branch --show-current
+
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email "carlosstenzel@hotmail.com"
+          git add .
+          git status
+          git commit -m "generated"
+          git push
+
+          
