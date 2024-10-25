@@ -15,19 +15,32 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="description" content="{{page.description}}">
-
-    <meta property="og:url" content="https://expressjs.com">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="{{page.title}}">
+    <meta property="og:url" content="https://expressjs.com{{page.url}}">
+    
+    {% if page.author %}
+    <meta property="og:type" content="article" >
+    <meta property="og:article:author" content="{{page.author}}">
+    {% else %}
+    <meta property="og:type" content="website" >
+    {% endif %}
+    
+    <meta name="title" property="og:title" content="{{page.title}}">
     <meta property="og:description" content="{{page.description}}">
-    <meta property="og:image" content="https://expressjs.com/images/og.png">                
-
+    {% if page.image %}
+    <meta property="og:image" content="{{page.image}}" > 
+    {% else %}
+    <meta property="og:image" content="https://expressjs.com/images/og.png" >    
+    {% endif %}
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="expressjs.com">
-    <meta property="twitter:url" content="https://expressjs.com">
+    <meta property="twitter:url" content="https://expressjs.com{{page.url}}">
     <meta name="twitter:title" content="{{page.title}}">
     <meta name="twitter:description" content="{{page.description}}">
-    <meta name="twitter:image" content="https://expressjs.com/images/og.png">
+    {% if page contains "image" %}
+    <meta property="twitter:image" content="{{ page.image }}" > 
+    {% else %}
+    <meta property="twitter:image" content="https://expressjs.com/images/og.png" >    
+    {% endif %}
 
     <script data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script data-cfasync="false" src="/js/ismobile.js"></script>
