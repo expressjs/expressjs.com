@@ -15,12 +15,15 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="description" content="{{page.description}}">
-
     <meta property="og:url" content="https://expressjs.com{{page.url}}">
-    <meta property="og:type" content="website" >
+    
     {% if page.author %}
+    <meta property="og:type" content="article" >
     <meta property="og:article:author" content="{{page.author}}">
+    {% else %}
+    <meta property="og:type" content="website" >
     {% endif %}
+    
     <meta name="title" property="og:title" content="{{page.title}}">
     <meta property="og:description" content="{{page.description}}">
     {% if page.image %}
