@@ -652,10 +652,6 @@ footer {
   max-width: 125px;
 }
 
-#github{
-  font-size: 20px;
-}
-
 #footer-policy{
   display: flex;
   flex-wrap: wrap;
@@ -667,7 +663,15 @@ footer {
 
 #footer-links{
   display: flex;
+  align-items: center;
   gap: 20px;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 20px;
 }
 
 @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-devicepixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx) {
