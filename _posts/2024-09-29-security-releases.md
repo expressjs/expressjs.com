@@ -3,6 +3,7 @@ title: September 2024 Security Releases
 description: Security releases for Express, body-parser, send, serve-static, and path-to-regexp have been published. We recommend that all users upgrade as soon as possible.
 tags: security, vulnerabilities
 author: Ulises Gascón
+image: images/security-audit-post.webp
 ---
 
 Recently, the Express team has been made aware of a number of security vulnerabilities in the Express project.  We have released a number of patches to address these vulnerabilities.  
