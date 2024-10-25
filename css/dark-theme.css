@@ -33,9 +33,7 @@
   cursor: pointer;
   line-height: 30px;
 }
-#theme-icon-container .hidden-light {
-  display: none;
-}
+
 .sun-icon {
   background-image: url(/images/sun-icon.png);
   background-size: 100%;
@@ -44,15 +42,22 @@
   height: 27px;
   cursor: pointer;
 }
-#theme-icon-container .hidden-dark {
+
+html .hidden-dark {
   display: block;
 }
-html.dark-mode #theme-icon-container .hidden-light {
-  display: block;
-}
-html.dark-mode #theme-icon-container .hidden-dark {
+
+html .hidden-light {
   display: none;
 }
+
+html.dark-mode .hidden-light {
+  display: block;
+}
+html.dark-mode .hidden-dark {
+  display: none;
+}
+
 html.dark-mode #theme-icon-container {
   color: var(--dark_main_text);
   background-color: var(--second_dark_bg);
