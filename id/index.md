@@ -40,7 +40,7 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
     <div id="middleware">
       <h3>Middleware</h3>
       Express memiliki kerangka perutean yang ringan dan fleksibel dengan fitur inti yang minimalis
-      hal ini dimaksudkan dapat ditingkatkan melalui penggunaan modul dari Express <a class="link-underlined" href="{{ page.lang }}/resources/middleware.html">middleware</a>.
+      hal ini dimaksudkan dapat ditingkatkan melalui penggunaan modul dari Express <a href="{{ page.lang }}/resources/middleware.html">middleware</a>.
     </div>
 
   </div>

@@ -24,10 +24,6 @@ h1 {
   font-weight: normal;
 }
 
-.link-underlined {
-  text-decoration: underline;
-}
-
 h1, h2, h3 {
   margin: 5px 0;
   color: var(--card-fg);
@@ -220,7 +216,7 @@ span.block-section {
 
 a {
   color: var(--link);
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .h2:target {
@@ -241,11 +237,15 @@ a {
   z-index: 1;
 }
 
+#logo a {
+  text-decoration: none;
+}
+
 #logo .express {
   display: block;
   font: 25px "Helvetica Neue", "Open Sans", sans-serif;
   font-weight: 100;
-  color: var(--card-fg)
+  color: var(--card-fg);
 }
 
 #description .express {
@@ -257,6 +257,7 @@ a {
 
 #description .express > a {
   color: var(--card-fg);
+  text-decoration: none;
 }
 
 #description .express a#express-version {
@@ -264,6 +265,7 @@ a {
   margin-left: 0.5em;
   color: var(--link);
   font-weight: 400;
+  text-decoration: underline;
 }
 
 #description {
@@ -279,6 +281,10 @@ a {
   line-height: .87;
 }
 
+#description .description a {
+  text-decoration: none;
+}
+
 #doc-langs {
   text-align: center;
   font-size: 12px;
@@ -286,10 +292,6 @@ a {
 
 #doc-langs p {
   margin: 3px 0;
-}
-
-#doc-langs a {
-  text-decoration: underline;
 }
 
 .header-right {
@@ -598,6 +600,7 @@ footer {
 
 #navbar a {
   color: var(--card-fg);
+  text-decoration: none;
 }
 
 #navbar a.active {
@@ -958,6 +961,7 @@ h2 a {
   #logo a {
     display: table !important;
     margin: 0 auto;
+    text-decoration: none;
   }
 
   #logo .express {

@@ -53,7 +53,7 @@ app.listen(port, () => {
     <div id="middleware">
       <h3>Middleware</h3>
       Express é uma estrutura de roteamento leve e flexível com recursos básicos e mínimos que devem ser 
-      aumentados por meio do uso do módulo Express <a class="link-underlined" href="{{ page.lang }}/resources/middleware.html">middleware</a>.
+      aumentados por meio do uso do módulo Express <a href="{{ page.lang }}/resources/middleware.html">middleware</a>.
     </div>
   </div>
 
