@@ -11,8 +11,8 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
   <div id="overlay"></div>
   <div id="homepage-leftpane" class="pane">
     <section id="description">
-        <h1 class="express"><a href="/">Express</a></h1>
-        <span class="description"> <a href='https://nodejs.org/en/'>Node.js</a> uchun tezkor, moslashuvchan, minimalistik web-freymvork.</span>
+        <div class="express"><a href="/">Express</a></div>
+        <h1 class="description"> <a href='https://nodejs.org/en/'>Node.js</a> uchun tezkor, moslashuvchan, minimalistik web-freymvork.</h1>
     </section>
     <div id="install-command">$ npm install express --save</div>
   </div>

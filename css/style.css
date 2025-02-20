@@ -273,6 +273,7 @@ a {
   font: 100 4.1em "Helvetica Neue", "Open Sans", sans-serif;
   color: var(--menu-grey);
   line-height: .87;
+  margin: unset
 }
 
 #doc-langs {

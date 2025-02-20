@@ -9,6 +9,7 @@
     font: 100 4.1em "TH SarabunNew", "Helvetica Neue", "Open Sans", sans-serif;
     color: #aeaeae;
     line-height: .87;
+    margin: unset;
   }
 
   /* Non-English pages use pre and code tags for code blocks */
