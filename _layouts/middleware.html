@@ -1,6 +1,20 @@
 ---
 layout: page
 ---
+
+<div class="toc-container">
+  <button id="menu-toggle" title="show express middlewares">Express middlewares <span>&#x25BA;</span></button>
+  <ul id="menu">
+    <li class="toc-title" role="heading" aria-level="3"><em>Express middlewares</em></li>
+      {% if page.title contains 'middleware' %}
+        {% capture readme %}{% include mw-list.md %}{% endcapture %}
+      {% else %}
+        {% capture readme %}{% include util-list.md %}{% endcapture %}
+      {% endif %}
+      {{ readme | markdownify }}
+  </ul>
+</div>
+
   <div id="page-doc">
     {% if page.module == 'mw-home' %}    
       {{content}} 
@@ -21,16 +35,3 @@ layout: page
     {% endif %}
 
   </div>
-
-  <div>
-    <ul id="menu">
-      <li class="toc-title" role="heading" aria-level="3"><em>Express middlewares</em></li>
-        {% if page.title contains 'middleware' %}
-          {% capture readme %}{% include mw-list.md %}{% endcapture %}
-        {% else %}
-          {% capture readme %}{% include util-list.md %}{% endcapture %}
-        {% endif %}
-        {{ readme | markdownify }}
-    </ul>
-    <button id="menu-toggle" title="show express middlewares">Express middlewares &#x25BC;</button>
-</div>

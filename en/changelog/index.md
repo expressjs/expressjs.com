@@ -8,6 +8,17 @@ redirect_from:
   - "en/changelog/4x.html"
 ---
 
+<div class="toc-container">
+  <button id="menu-toggle" title="show express versions">Express versions <span>&#x25BA;</span></button>
+  <ul id="menu">
+    <li class="toc-title" role="heading" aria-level="3"><em>Versions</em></li>
+    {% capture readme %}{% include changelog/menu.md %}{% endcapture %}
+    <li>
+      {{ readme | markdownify }}
+    </li>
+  </ul>
+</div>
+
 <div markdown="1" id="page-doc">
 
 # Release changelog
@@ -553,15 +564,4 @@ The 4.14.0 minor release includes bug fixes, security update, performance improv
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4140--2016-06-16).
 
-</div>
-
-<div>
-  <ul id="menu">
-    <li class="toc-title" role="heading" aria-level="3"><em>Versions</em></li>
-    {% capture readme %}{% include changelog/menu.md %}{% endcapture %}
-    <li>
-      {{ readme | markdownify }}
-    </li>
-  </ul>
-  <button id="menu-toggle" title="show express versions">Express versions &#x25BC;</button>
 </div>

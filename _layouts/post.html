@@ -7,6 +7,9 @@
     <div id="overlay"></div>
     
     <section class="content">
+      <div class="toc-container">
+        {% include blog/posts-menu.md %}
+      </div>
       <div id="blog-doc" markdown="1">
           {% if page.title %}
           <h1>{{page.title}}</h1>
@@ -21,9 +24,6 @@
             <div class="blog-date">{{page.date| date: "%d %b %Y" }}</div>
           </div>
         {{ content }}
-      </div>
-      <div>
-        {% include blog/posts-menu.md %}
       </div>
     </section>
 

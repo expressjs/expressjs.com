@@ -50,9 +50,7 @@ const menu = document.querySelector("#navmenu");
 const overlay = document.querySelector("#overlay");
 const navButton = document.querySelector("#nav-button");
 const languagePickerButton = document.querySelector("#language-picker-button");
-const toggleBtn = document.getElementById("menu-toggle");
-const tocList = document.getElementById("menu");
-const blogList = document.getElementById("blog-side-menu");
+
 
 for (const el of linkItemsMenu) {
 	el.addEventListener("click", (e) => {
@@ -83,54 +81,34 @@ for (const el of languageItems) {
 
 navButton?.addEventListener("click", () => {
 	const isLanguageMenuOpen = languagePickerMenu?.classList.contains("opens");
-	const isTocOpen = tocList?.classList.contains("open");
-	const isBlogTocOpen = blogList?.classList.contains("open");
 	if (isLanguageMenuOpen) {
 		languagePickerMenu?.classList.remove("opens");
-		menu?.classList.toggle("opens");
-	} else if (isTocOpen || isBlogTocOpen) {
-		tocList?.classList.remove("open");
-		blogList?.classList.remove("open");
 		menu?.classList.toggle("opens");
 	} else {
 		menu?.classList.toggle("opens");
 		overlay?.classList.toggle("blurs");
 		document.body.classList.toggle("no-scroll");
-		tocScreen && !menu?.classList.contains("opens") ? toggleBtn?.classList.add("show") : toggleBtn?.classList.remove("show");
 	}
 });
 
 languagePickerButton?.addEventListener("click", () => {
 	const isMenuOpen = menu?.classList.contains("opens");
-	const isTocOpen = tocList?.classList.contains("open");
-	const isBlogTocOpen = blogList?.classList.contains("open");
 	if (isMenuOpen) {
 		menu?.classList.remove("opens");
-		languagePickerMenu?.classList.toggle("opens");
-	} else if (isTocOpen || isBlogTocOpen) {
-		tocList?.classList.remove("open");
-		blogList?.classList.remove("open");
 		languagePickerMenu?.classList.toggle("opens");
 	} else {
 		languagePickerMenu?.classList.toggle("opens");
 		overlay?.classList.toggle("blurs");
 		document.body.classList.toggle("no-scroll");
-		tocScreen && !languagePickerMenu?.classList.contains("opens") ? toggleBtn?.classList.add("show") : toggleBtn?.classList.remove("show");
 	}
 });
 
 overlay?.addEventListener("click", () => {
-	const isTocOpen = tocList?.classList.contains("open");
-	const isBlogTocOpen = blogList?.classList.contains("open");
 	if (menu?.classList.contains("opens")) {
 		menu.classList.remove("opens");
 	}
 	if (languagePickerMenu?.classList.contains("opens")) {
 		languagePickerMenu.classList.remove("opens");
-	}
-	if(isTocOpen || isBlogTocOpen) {
-		tocList?.classList.remove("open");
-		blogList?.classList.remove("open");
 	}
 	overlay.classList.remove("blurs");
 	document.body.classList.remove("no-scroll");
@@ -140,10 +118,10 @@ document
 	.querySelector(`.submenu-content a[href="${document.location.pathname}"]`)
 	?.classList.add("current");
 
-// TOC
-const tocSubMenu = document.querySelectorAll("#menu > li > ul");
+// TOC 
+const toggleBtn = document.getElementById("menu-toggle");
+const tocList = document.getElementById("menu");
 
-// TOC btn Visibility using scroll event
 function updateTocVisibility() {
 	if (isTocScreen) {
 	  toggleBtn?.classList.add("show");
@@ -152,7 +130,7 @@ function updateTocVisibility() {
 	}
   }
 
-// Show toc button on page load
+// toc button on page load
 updateTocVisibility();
 
 // Listen for changes in screen size
@@ -163,36 +141,17 @@ tocScreen.addEventListener("change", (event) => {
 
 // Toggle toc menu on button click
 toggleBtn?.addEventListener("click", (e) => {
-  blogList?.classList.toggle("open");
-  tocList?.classList.toggle("open");
-  overlay?.classList.toggle("blurs");
-  document.body.classList.toggle("no-scroll");
+  if(tocList?.classList.contains("open")) {
+	toggleBtn.children[0].innerHTML = "&#x25BA;";
+	tocList.classList.remove("open");
+  } else {
+	toggleBtn.children[0].innerHTML = "&#x25BC;";
+	tocList.classList.add("open");
+  }
 });
-
-// Close toc on link click on small screen
-document.querySelectorAll("#menu > li > ul a").forEach((link) => {
-  link.addEventListener("click", function () {
-   if(isTocScreen) {
-		tocList?.classList.remove("open");
-		overlay?.classList.remove("blurs");
-		document.body.classList.remove("no-scroll");
-   }
-  });
-});
-
-// Close TOC on small screens when a link is clicked
-document.querySelectorAll("#menu > li > ul a").forEach((link) => {
-	link.addEventListener("click", function () {
-	  if (isTocScreen) {
-		tocList?.classList.remove("open");
-		overlay?.classList.remove("blurs");
-		document.body.classList.remove("no-scroll");
-	  }
-	});
-  });
   
-  // Open/Close sub TOC content on click
-  document.querySelectorAll("#menu > li > a").forEach((link) => {
+// Open/Close sub TOC content on click
+document.querySelectorAll("#menu > li > a").forEach((link) => {
 	link.addEventListener("click", function (event) {
 	  event.preventDefault(); // stop navigation to submenu
   

@@ -141,9 +141,10 @@ main.home {
 
 .content {
   margin: 153px auto 7%;
-  max-width: 1200px;
+  max-width: 1090px;
   display: flex;
-  gap: 3rem;
+  gap: 2rem;
+  flex-direction: row-reverse;
 }
 
 #page-doc {
@@ -610,14 +611,18 @@ footer {
   gap: 20px;
 }
 
-/* api doc */
+/* content doc */
 
 #api-doc,
 #page-doc {
-  padding-inline-start: 10rem;
-  width: 60vw;
+  width: 50vw;
 }
 
+#blog-doc {
+  padding: 0.5rem;
+  width: fit-content;
+  text-align: justify;
+}
 
 /* dropdown menu */
 
@@ -679,28 +684,34 @@ footer {
 
 /* page width without sidebar menu */
 #page-doc.no-sidebar {
-  width: 70vw;
+  width: 60vw;
+  padding-inline-start: 0;
+  padding-inline-end: 8rem;
 }
 
 /* TOC side menu */
 
 #menu {
   position: sticky;
-  min-width: 17vw;
+  top: 100px;
+  min-width: 13rem;
   padding-inline: 0.5rem;
-  top: 153px;
   font-size: 1rem;
   overflow-y: auto;
   max-height: 65vh;
+  padding-block-end: 0.5rem;
 }
 
 #menu ul a,
 #menu > li > a {
   display: block;
   color: var(--menu-grey);
+  padding-inline: 0.5rem;
 
   &:is(:hover,:active,:focus) {
-    color: var(--menu-hover-grey);
+    border-radius: 0.3rem;
+    color: var(--fg);
+    outline: 1px solid var(--card-fg);
   }
 }
 
@@ -722,6 +733,8 @@ color: var(--fg)
 
 #menu ul,
 ul#side-menu  {
+  display: none;
+  opacity: 0;
   height: 0;
   overflow: hidden;
 }
@@ -729,12 +742,20 @@ ul#side-menu  {
 #menu ul.active,
 ul#side-menu.active {
   height: auto;
-  padding: 0;
+  padding-inline: 0.5rem;
+  display: block;
+  opacity: 1;
+  padding-block: 0.5rem;
+}
+
+ul#side-menu.active.blog-side-menu {
+  max-width: 20rem;
 }
 
 #menu > li > a {
   font-weight: bold;
   font-size: 1rem;
+  padding-inline-start: 1rem;
 }
 
 /* can't find this in proj*/
@@ -848,6 +869,7 @@ h2 a {
 #menu li.toc-title {
   display: block;
   cursor: default;
+  padding-inline-start: 1rem;
   & > em {
     font-weight: bold;
     color: var(--menu-em);
@@ -859,20 +881,16 @@ h2 a {
 /* TOC btn */
 
 #menu-toggle {
-  position: absolute;
-  top: 57px;
-  left: 0;
   cursor: pointer;
   display: none;
-  margin: 1rem;
   font-size: 1rem;
   padding: 0.5rem;
   opacity: 0;
+  width: fit-content;
   border: 1px solid #000;
   border-radius: 0.3rem;
   color: #000;
   background-color: #fff;
-  transition: opacity 0.2s ease;
 
   &:is(:hover, :active, :focus) {
     background-color: #ebf2f5;
@@ -885,12 +903,20 @@ h2 a {
   #menu{
     top: 75px;
   }
+  #blog-doc {
+    padding-inline-start: 10rem;
+  }
 }
 
 @media all and (max-width: 1110px) {
   #api-doc,
   #page-doc {
     width: 75vw;
+    padding-inline-start: 10rem;
+  }
+
+  #blog-doc {
+    padding-inline-start: 8rem;
   }
 
   #boxes {
@@ -1053,6 +1079,11 @@ h2 a {
 
 /* TOC responsive */
 @media all and (max-width: 800px) {
+  .content {
+    margin-block-start: 100px;
+    flex-direction: column;
+  }
+  
   #api-doc,
   #blog-doc,
   #page-doc {
@@ -1062,25 +1093,32 @@ h2 a {
 
   #page-doc.no-sidebar {
     width: 100%;
+    padding-inline: 1rem;
+  }
+
+  .toc-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem;
   }
 
   #menu {
-    position: fixed;
+    display: none;
+    opacity: 0;
     max-height: 0;
-    top: 57px;
-    left: 0;
     background-color: var(--card-bg);
-    padding-inline: 0.5rem;
     min-width: 100%;
-    transition: max-height 0.5s ease;
   }
 
   #menu.open {
-    max-height: 50dvh;
+    display: block;
+    opacity: 1;
+    max-height: 50vh;
     padding-inline: 1rem;
-    border-bottom: 1px solid var(--border);
-    z-index: 100;
+    border-left: 1px solid var(--border);
     margin-top: 0;
+    border-radius: 0.5rem;
   }
 
   #menu-toggle.show {
@@ -1090,18 +1128,12 @@ h2 a {
 
   #menu > li > a,
   #menu ul a {
-    color: var(--card-fg);
     padding-block: 0.5rem;
     padding-inline: 0.5rem;
-    border-bottom: 1px solid var(--border);
 
-    &:is(:hover,:active,:focus) {
+    &:is(:hover,:active) {
       background: var(--hover-bg);
     }
-  }
-
-  #overlay.blurs {
-    display: block;
   }
 
   #menu li ul li > em {
@@ -1114,6 +1146,10 @@ h2 a {
 
    #menu li.toc-title{
     display: none;
+  }
+
+  ul#side-menu.active.blog-side-menu {
+    max-width: fit-content;
   }
 }
 
@@ -1134,11 +1170,6 @@ h2 a {
   }
 }
 
-@media all and (max-width: 390px) {
-  #menu-toggle.position-fixed {
-    width: 115vw;
-  }
-}
 
 @media print {
 
@@ -1184,6 +1215,9 @@ h2 a {
 /* Blog page styles*/
 #blog-doc {
   margin: 0 1rem;
+  @media all and (max-width: 800px) {
+    margin: 0;
+  }
 }
 #blog-doc:has(> h1#express-blog),
 #blog-doc:has(> h1#write-a-blog-post) {
@@ -1192,6 +1226,7 @@ h2 a {
 #blog-doc .blog-details ~ p > img {
   width: 200px;
   float: right;
+  margin: 0.5rem;
 }
 #blog-doc p {
   font-size: 1.1em;

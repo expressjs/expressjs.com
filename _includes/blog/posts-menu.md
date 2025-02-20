@@ -1,7 +1,8 @@
+<button id="menu-toggle" title="show blogs list">All Blogs <span>&#x25BA;</span></button>
 <ul id="menu">
   <li class="toc-title" role="heading" aria-level="3"><em>Blog posts</em></li>
   <li>
-    <ul id="side-menu" class="active">
+    <ul id="side-menu" class="active blog-side-menu">
     <li>
       <a href="/{{ page.lang }}/blog/posts">All Posts</a>
     </li>
@@ -13,4 +14,3 @@
   </ul>
   </li>
 </ul> 
-<button id="menu-toggle" title="show blogs list">All Blogs &#x25BC;</button>
