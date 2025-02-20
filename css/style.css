@@ -409,6 +409,11 @@ html[xmlns] .clearfix {
   padding-top: 0;
 }
 
+#boxes h3 a {
+  text-decoration: none;
+  color: var(--card-fg);
+}
+
 #boxes div {
   list-style: none;
 }

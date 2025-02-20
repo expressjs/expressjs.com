@@ -41,7 +41,7 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
       </div>
 
       <div id="sponsorship">
-          <a href="http://loopback.io/"><h3>LoopBack</h3> Desarrolle aplicaciones basadas en modelos con una infraestructura basada en Express.<br/>Encontrará más información en loopback.io.</a>
+          <h3>LoopBack</h3><a href="http://loopback.io/"> Desarrolle aplicaciones basadas en modelos con una infraestructura basada en Express.<br/>Encontrará más información en loopback.io.</a>
       </div>
   </div>
 
