@@ -845,9 +845,9 @@ h2 a {
 }
 
 /* toc title */
-.toc-title {
+#menu li.toc-title {
   display: block;
-
+  cursor: default;
   & > em {
     font-weight: bold;
     color: var(--menu-em);
@@ -1112,7 +1112,7 @@ h2 a {
     border-radius: 0.3rem;
    }
 
-  .toc-title {
+   #menu li.toc-title{
     display: none;
   }
 }
@@ -1179,30 +1179,6 @@ h2 a {
   padding: 0 0 0 5px;
   border: 0;
   width: 550px;
-}
-
-/* For middleware pages */
-
-#mw-container {
-  display: flex;
-  display: -webkit-flex; /* Safari */
-  width: 100%;
-}
-
-#mw-list {
-  min-width: 180px;
-  margin: 0;
-  padding: 0 10px 0 10px;
-  font-size: 13px;
-  overflow-y: auto;
- }
-
-#middleware-content {
-  margin-left: 10px;
-}
-
-#mw-list ul li {
- margin-left: -20px;
 }
 
 /* Blog page styles*/

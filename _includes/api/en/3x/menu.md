@@ -1,5 +1,5 @@
 <ul id="menu">
-    <span class="toc-title"><em>On this page</em></span>
+    <li class="toc-title" role="heading" aria-level="3"><em>On this page</em></li>
     <li><a href="#express">express()</a></li>
     <li id="app-api"> <a href="#application">Application</a>
         <ul id="app-menu">
@@ -160,4 +160,4 @@
         </ul>
     </li>
 </ul>
-<button id="menu-toggle" title="show table of content">Table of content &#x25BC;</button>
+<button id="menu-toggle" title="show table of content">On this page &#x25BC;</button>

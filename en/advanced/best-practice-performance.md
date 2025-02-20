@@ -319,7 +319,7 @@ Handing over tasks that do not require knowledge of application state to a rever
 
 <div>
 <ul id="menu">
-  <span class="toc-title"><em>Best Practices</em></span>
+  <li class="toc-title" role="heading" aria-level="3"><em>Best Practices</em></li>
   <li>
     <a href="#">Development practices</a>
     <ul id="side-menu" class="active">
@@ -341,7 +341,7 @@ Handing over tasks that do not require knowledge of application state to a rever
     <a href="#">Operations practices</a>
     <ul id="side-menu" class="active">
     <li>
-      <a href="#set-node_env-to-production">Set NODE_ENV to "production"</a>
+      <a href="#set-nodeenv-to-production">Set NODE_ENV to "production"</a>
     </li>
      <li>
       <a href="#ensure-your-app-automatically-restarts">Ensure your app automatically restarts</a>
@@ -362,5 +362,5 @@ Handing over tasks that do not require knowledge of application state to a rever
   </li>
 </ul> 
 
-<button id="menu-toggle" title="show best practices">Table of content &#x25BC;</button>
+<button id="menu-toggle" title="show best practices">Performance best practices &#x25BC;</button>
 </div>

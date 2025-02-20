@@ -557,7 +557,7 @@ For a complete list of changes in this release, see [History.md](https://github.
 
 <div>
   <ul id="menu">
-    <span class="toc-title" role="heading" aria-level="3"><em>Versions</em></span>
+    <li class="toc-title" role="heading" aria-level="3"><em>Versions</em></li>
     {% capture readme %}{% include changelog/menu.md %}{% endcapture %}
     <li>
       {{ readme | markdownify }}

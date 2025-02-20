@@ -1,5 +1,5 @@
 <ul id="menu">
-  <span class="toc-title"><em>Blog posts</em></span>
+  <li class="toc-title" role="heading" aria-level="3"><em>Blog posts</em></li>
   <li>
     <ul id="side-menu" class="active">
     <li>
