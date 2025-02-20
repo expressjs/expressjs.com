@@ -8,15 +8,7 @@ redirect_from:
   - "en/changelog/4x.html"
 ---
 
-<div id="mw-container">
-
-<div markdown="1" id="mw-list">
-
-{% include changelog/menu.md %}
-
-</div>
-
-<div markdown="1" id="mw-content">
+<div markdown="1" id="page-doc">
 
 # Release changelog
 
@@ -563,4 +555,13 @@ For a complete list of changes in this release, see [History.md](https://github.
 
 </div>
 
+<div>
+  <ul id="menu">
+    <span class="toc-title" role="heading" aria-level="3"><em>Versions</em></span>
+    {% capture readme %}{% include changelog/menu.md %}{% endcapture %}
+    <li>
+      {{ readme | markdownify }}
+    </li>
+  </ul>
+  <button id="menu-toggle" title="show express versions">Express versions &#x25BC;</button>
 </div>
