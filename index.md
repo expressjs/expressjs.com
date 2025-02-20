@@ -35,9 +35,12 @@ app.listen(port, () => {
 
   </div>
 </section>
+
+{% if site.announcement %}
 <section id="announcements">
   {% include announcement.html %}
 </section>
+{% endif %}
 
 <section id="intro">
 
