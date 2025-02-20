@@ -7,7 +7,7 @@ lang: en
 redirect_from: "/advanced/best-practice-security.html"
 ---
 
-<div id="page-doc" markdown="1">
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Production Best Practices: Security
 
 ## Overview

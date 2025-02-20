@@ -7,6 +7,7 @@ lang: en
 redirect_from: "/resources/glossary.html"
 ---
 
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Glossary
 
 ### application
@@ -58,3 +59,4 @@ Part of a URL that identifies a resource. For example, in `http://foo.com/produc
 ### router
 
 See [router](/{{ page.lang }}/api.html#router) in the API reference.
+</div>

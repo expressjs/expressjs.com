@@ -7,7 +7,7 @@ lang: en
 redirect_from: "/advanced/security-updates.html"
 ---
 
-<div id="page-doc" markdown="1">
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Security updates
 
 <div class="doc-box doc-notice" markdown="1">

@@ -7,6 +7,7 @@ lang: en
 redirect_from: "/resources/community.html"
 ---
 
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Community
 
 ## Technical committee
@@ -92,3 +93,4 @@ Express is a project of the OpenJS Foundation. Please review the [trademark poli
         </a>
     </div>
 <div>
+</div>

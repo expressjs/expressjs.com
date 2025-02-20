@@ -7,6 +7,7 @@ lang: en
 redirect_from: "/starter/basic-routing.html"
 ---
 
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Basic routing
 
 _Routing_ refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, and so on).
@@ -67,3 +68,4 @@ app.delete('/user', (req, res) => {
 For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).
 
 ###  [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)
+</div>

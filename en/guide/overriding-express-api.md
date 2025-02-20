@@ -5,7 +5,7 @@ description: Discover how to customize and extend the Express.js API by overridi
 menu: guide
 lang: en
 ---
-<div id="page-doc" markdown="1">
+<div id="page-doc" class="no-sidebar" markdown="1">
 
 # Overriding the Express API
 

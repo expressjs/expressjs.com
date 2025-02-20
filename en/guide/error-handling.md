@@ -6,6 +6,8 @@ menu: guide
 lang: en
 redirect_from: "/guide/error-handling.html"
 ---
+
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Error Handling
 
 _Error Handling_ refers to how Express catches and processes errors that
@@ -298,4 +300,5 @@ In this example, the `getPaidContent` handler will be skipped but any remaining 
 
 <div class="doc-box doc-info" markdown="1">
 Calls to `next()` and `next(err)` indicate that the current handler is complete and in what state.  `next(err)` will skip all remaining handlers in the chain except for those that are set up to handle errors as described above.
+</div>
 </div>

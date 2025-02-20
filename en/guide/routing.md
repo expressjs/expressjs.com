@@ -7,6 +7,7 @@ lang: en
 redirect_from: "/guide/routing.html"
 ---
 
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Routing
 
 _Routing_ refers to how an application's endpoints (URIs) respond to client requests.
@@ -375,3 +376,4 @@ But if the parent route `/birds` has path parameters, it will not be accessible 
 ```js
 const router = express.Router({ mergeParams: true })
 ```
+</div>

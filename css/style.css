@@ -677,6 +677,11 @@ footer {
   display: none;
 }
 
+/* page width without sidebar menu */
+#page-doc.no-sidebar {
+  width: 70vw;
+}
+
 /* TOC side menu */
 
 #menu {
@@ -1052,6 +1057,10 @@ h2 a {
   #blog-doc,
   #page-doc {
     padding-inline: 1rem;
+    width: 100%;
+  }
+
+  #page-doc.no-sidebar {
     width: 100%;
   }
 

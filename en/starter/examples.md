@@ -7,6 +7,7 @@ lang: en
 redirect_from: "/starter/examples.html"
 ---
 
+<div id="page-doc" class="no-sidebar" markdown="1">
 {% capture examples %}{% include readmes/express-master/examples.md %}{% endcapture %}
 {{ examples | replace: "](.", "](https://github.com/expressjs/express/tree/master/examples" }}
 
@@ -20,3 +21,4 @@ These are some additional examples with more extensive integrations.
 - [prisma-rest-api-ts](https://github.com/prisma/prisma-examples/tree/latest/orm/express) - REST API with Express in TypeScript using [Prisma](https://www.npmjs.com/package/prisma) as an ORM
 
 ### [Previous: Static Files ](/{{ page.lang }}/starter/static-files.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: FAQ ](/{{ page.lang }}/starter/faq.html)
+</div>

@@ -7,6 +7,7 @@ lang: en
 redirect_from: "/starter/installing.html"
 ---
 
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Installing
 
 Assuming you've already installed [Node.js](https://nodejs.org/), create a directory to hold your application, and make that your working directory.
@@ -52,3 +53,4 @@ By default with version npm 5.0+, `npm install` adds the module to the `dependen
 </div>
 
 ###  [Next: Hello World ](/{{ page.lang }}/starter/hello-world.html)
+</div>

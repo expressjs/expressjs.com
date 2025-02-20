@@ -6,6 +6,8 @@ menu: guide
 lang: en
 redirect_from: "/guide/migrating-5.html"
 ---
+
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Moving to Express 5
 
 <h2 id="overview">Overview</h2>
@@ -400,3 +402,4 @@ This method now enforces asynchronous behavior for all view engines, avoiding bu
 <h4 id="brotli-support">Brotli encoding support</h4>
 
 Express 5 supports Brotli encoding for requests received from clients that support it.
+</div>

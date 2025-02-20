@@ -7,6 +7,7 @@ lang: en
 redirect_from: "/starter/generator.html"
 ---
 
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Express application generator
 
 Use the application generator tool, `express-generator`, to quickly create an application skeleton.
@@ -127,3 +128,4 @@ The app structure created by the generator is just one of many ways to structure
 </div>
 
 ###  [Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)
+</div>

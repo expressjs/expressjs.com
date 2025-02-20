@@ -7,7 +7,7 @@ lang: en
 redirect_from: "/advanced/developing-template-engines.html"
 ---
 
-<div id="page-doc" markdown="1">
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Developing template engines for Express
 
 Use the `app.engine(ext, callback)` method to create your own template engine. `ext` refers to the file extension, and `callback` is the template engine function, which accepts the following items as parameters: the location of the file, the options object, and the callback function.

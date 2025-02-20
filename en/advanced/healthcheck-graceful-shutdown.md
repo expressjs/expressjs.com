@@ -7,7 +7,7 @@ lang: en
 redirect_from: "/advanced/healthcheck-graceful-shutdown.html"
 ---
 
-<div id="page-doc" markdown="1">
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Health Checks and Graceful Shutdown
 
 ## Graceful shutdown

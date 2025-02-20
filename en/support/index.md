@@ -6,6 +6,7 @@ menu: support
 lang: en
 ---
 
+<div id="page-doc" class="no-sidebar" markdown="1">
 # Version Support
 
 Only the latest version of any given major release line is supported.
@@ -26,3 +27,4 @@ Versions that are EOL (end-of-life) _may_ receive updates for critical security 
 If you are unable to update to a supported version of Express, please contact one of our partners to receive security updates:
 
  - [HeroDevs Never-Ending Support](http://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)
+</div>
