@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: var(--box-fg);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -1114,11 +1114,12 @@ h2 a {
   #menu.open {
     display: block;
     opacity: 1;
-    max-height: 50vh;
+    max-height: 35vh;
     padding-inline: 1rem;
-    border-left: 1px solid var(--border);
-    margin-top: 0;
-    border-radius: 0.5rem;
+    border-left: 2px solid var(--border);
+    margin-top: 0.3rem;
+    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
   }
 
   #menu-toggle.show {
@@ -1128,10 +1129,8 @@ h2 a {
 
   #menu > li > a,
   #menu ul a {
-    padding-block: 0.5rem;
-    padding-inline: 0.5rem;
-
-    &:is(:hover,:active) {
+    padding: 0.5rem;
+    &:is(:hover,:active,:focus) {
       background: var(--hover-bg);
     }
   }

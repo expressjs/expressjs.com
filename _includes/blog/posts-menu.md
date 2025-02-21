@@ -3,9 +3,6 @@
   <li class="toc-title" role="heading" aria-level="3"><em>Blog posts</em></li>
   <li>
     <ul id="side-menu" class="active blog-side-menu">
-    <li>
-      <a href="/{{ page.lang }}/blog/posts">All Posts</a>
-    </li>
       {% for post in site.posts %}
     <li>
       <a href="{{post.url}}">{{ post.title }}</a>
