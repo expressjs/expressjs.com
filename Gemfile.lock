@@ -40,6 +40,7 @@ GEM
       logger
     faraday-net_http (3.3.0)
       net-http
+    ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x64-mingw-ucrt)
     ffi (1.17.0-x86_64-linux-gnu)
     forwardable-extended (2.6.0)
@@ -229,6 +230,8 @@ GEM
     minitest (5.25.1)
     net-http (0.4.1)
       uri
+    nokogiri (1.16.7-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.16.7-x64-mingw-ucrt)
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
@@ -268,6 +271,7 @@ GEM
     webrick (1.8.1)
 
 PLATFORMS
+  arm64-darwin-22
   x64-mingw-ucrt
   x86_64-linux
 
