@@ -35,6 +35,10 @@ h1, h2, h3 {
   margin-bottom: 20px;
 }
 
+.content table a {
+  text-decoration: none;
+}
+
 p em {
   font-weight: bold;
   color: var(--card-fg);
