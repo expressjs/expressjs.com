@@ -65,6 +65,11 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
   If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/{{ page.lang }}/support#commercial-support-options).
   </div>
 
+  * The following CVEs have been fixed by the commercial options:
+    * [CVE-2024-10491](https://www.cve.org/CVERecord?id=CVE-2024-10491)
+    * [CVE-2024-47764](https://www.cve.org/CVERecord?id=CVE-2024-47764)
+    * [CVE-2024-9266](https://www.cve.org/CVERecord?id=CVE-2024-9266)
+    * [CVE-2024-43796](https://www.cve.org/CVERecord?id=CVE-2024-43796)
   * 3.19.1
     * Fixed root path disclosure vulnerability in `express.static`, `res.sendfile`, and `res.sendFile`
   * 3.19.0
