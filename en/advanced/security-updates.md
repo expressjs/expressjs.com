@@ -18,7 +18,8 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
 [Security Policies and Procedures](/{{page.lang}}/resources/contributing.html#security-policies-and-procedures).
 
 ## 4.x
-
+  * 4.19.0, 4.19.1
+    * Fixed open redirect vulnerability in `res.location` and `res.redirect` ([advisory](https://github.com/expressjs/express/security/advisories/GHSA-rv95-896h-c2vc), [CVE-2024-29041](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-29041))
   * 4.17.3
     * The dependency `qs` has been updated to address a [vulnerability](https://github.com/advisories/GHSA-hrpp-h998-j3pp). This may affect your application if the following APIs are used: `req.query`, `req.body`, `req.param`
   * 4.16.0
