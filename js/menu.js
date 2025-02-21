@@ -5,7 +5,7 @@ let isSmallScreen = mobileScreen?.matches;
 mobileScreen?.addEventListener("change", (event) => {
 	isSmallScreen = event.matches
 
-	if (!event.matches) {
+  if (!isSmallScreen) {
 		document.body.classList.remove("no-scroll")
 	}
 });
@@ -13,11 +13,31 @@ mobileScreen?.addEventListener("change", (event) => {
 // Desktop Menu
 
 const itemsMenu = document.querySelectorAll(".submenu");
+const navDrawers = document.querySelectorAll('#navmenu > li')
+let activeDrawer // active dropdown nav link
+
 
 for (const el of itemsMenu) {
 	el.addEventListener("click", () => {
 		if (isSmallScreen || 'ontouchstart' in document.documentElement) {
+		// HANDLE ACTIVE LINKS IN DROPDOWN NAV	
+		// if no activeDrawer set then page was set in md logic
+		if (!activeDrawer) {
+			// remove default active link
+			removeActiveFromDrawers(navDrawers)
+			// set new active drawer to clicked
+			activeDrawer = el
+			// add active class
+			addActiveToDrawer(el)
+		// remove prev activeDrawer and set current to active
+		} else if (activeDrawer.id !== el.id) {
+			activeDrawer.querySelector('a').classList.remove('active')
+			addActiveToDrawer(el)
+			activeDrawer = el
+		}
+
 			for (const item of itemsMenu) {
+        // close any open drawers on click next drawer
 				if (item.id !== el.id) {
 					item.classList.remove("open");
 				}
@@ -114,5 +134,16 @@ overlay?.addEventListener("click", () => {
 });
 
 document
-	.querySelector(`.submenu-content a[href="${document.location.pathname}"]`)
+	.querySelector(`.submenu-content a[href="{document.location.pathname}"]`)
 	?.classList.add("current");
+
+// when active is unknown, loop over and remove any active link
+function removeActiveFromDrawers(navDrawers) {
+  for (const item of navDrawers) {
+    item.querySelector('a').classList.remove('active')
+  }
+}
+// add active to known link
+function addActiveToDrawer(drawer) {
+	drawer.querySelector('a').classList.add('active')
+}
