@@ -94,7 +94,7 @@ Now you'll need a way to see your changes, which means you'll need a running ver
 >[!NOTE]
 >If you're only making changes to the content, you most likely won't need to run the site locally.
 
-1. __Run Locally__: This gets the local version of the application up and running on your machine. Follow our [Local Setup Guide](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#local-setup) to use this option.  
+1. __Run Locally__: This gets the local version of the application up and running on your machine. Follow our [Local Setup Guide](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#build-the-website-locally) to use this option.  
     - This is the recommended option for moderate to complex work. 
 
 2. __Run using Deploy Preview__: Use this option if you don't want to bother with a local installation. Part of our continuous integration pipeline includes [Netlify Deploy Preview](https://docs.netlify.com/site-deploys/deploy-previews/). 
