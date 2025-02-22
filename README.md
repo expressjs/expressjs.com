@@ -2,9 +2,32 @@
 
 This is the repository of the website [expressjs.com](https://expressjs.com). It is hosted directly from the repository as a [GitHub Pages](https://pages.github.com/) website.
 
-## Local Setup
+## Contributing
 
-To preview the website locally:
+Any person who wants to contribute to the Website is welcome! Please read [Contributors' Guide](CONTRIBUTING.md) for more information on contributing to the Express.js documentation.
+
+## Translations
+
+If you're interested in contributing to the site's translations, you can find more information [here](https://github.com/expressjs/expressjs.com/blob/gh-pages/CONTRIBUTING.md#contributing-translations).
+
+## Build the website locally
+
+>[!NOTE]
+>If you're only making changes to the content, you most likely won't need to run the site locally.
+
+To preview the website locally, we have two options: using Docker or using Bundler.
+
+### Using Docker
+
+>[!TIP]
+> You can run `make help` to obtain detailed information on how to use our make commands.
+
+1. Ensure that you have Docker and Make installed.
+1. Run `make build` to build the project.
+1. Run `make serve` to serve the project, this include live reloading so any change will be reflected (it can take a while, check the logs).
+1. Run `make clean` to remove the docker images and resources generated.
+
+### Using Bundle
 
 1. Install [Ruby and Bundler](https://help.github.com/articles/setting-up-your-pages-site-locally-with-jekyll/) if you don't have them already.
 
@@ -15,6 +38,7 @@ To preview the website locally:
    ```
    
 1. Clone this repository by running the following command:
+
    ```sh
    $ git clone https://github.com/expressjs/expressjs.com.git
    ```
@@ -35,46 +59,6 @@ To preview the website locally:
 
    Then, load <http://localhost:4000> in your browser.
 
-## Local Setup using Docker
+## License
 
->[!TIP]
-> You can run `make help` to obtain detailed information on how to use our make commands.
-
-0. Ensure that you have Docker and Make installed.
-1. Run `make build` to build the project.
-2. Run `make serve` to serve the project, this include live reloading so any change will be reflected (it can take a while, check the logs).
-3. Run `make clean` to remove the docker images and resources generated.
-
-## Formatting
-
-Jekyll uses a variant of Markdown known as [Kramdown](https://kramdown.gettalong.org/quickref.html).
-
-Jekyll uses the [Liquid template engine](https://shopify.github.io/liquid/) for templating.
-
-You can use [GFM](https://kramdown.gettalong.org/parser/gfm.html) fenced code blocks for JavaScript; for example:
-
-<pre>
-```js
-var express = require('express')
-var app = express()
-app.listen(3000)
-```
-</pre>
-
-The result looks like this:
-
-```js
-const express = require('express')
-const app = express()
-app.listen(3000)
-```
-
-The default GitHub Pages syntax highlighting has been disabled in `_config.yml` to allow highlighting with [prism.js](https://prismjs.com/).
-
-## Contributing
-
-Please see the [Contributors' Guide](CONTRIBUTING.md) for more information on contributing to the Express JS documentation, including information on contributing translations.
-
-## Why use Jekyll instead of an Express-based solution?
-
-Jekyll comes built-in with GitHub Pages. Since we are already using GitHub Pages to host the website, it makes sense to leverage the capabilities it provides. It's all about using the right tool, for the right job, under the right circumstances.
+Content submitted to [expressjs.com](expressjs.com) is Creative Commons Attribution-ShareAlike 3.0 licensed, as found in the [LICENSE.md](LICENSE.md) file.
