@@ -13,7 +13,7 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
   <div id="homepage-leftpane" class="pane">
     <section id="description">
         <div class="express"><a href="/">Express</a></div>
-        <span class="description"><a href='https://nodejs.org/ja/'>Node.js</a> のための高速で、革新的な、最小限のWebフレームワーク</span>
+        <h1 class="description"><a href='https://nodejs.org/ja/'>Node.js</a> のための高速で、革新的な、最小限のWebフレームワーク</h1>
     </section>
     <div id="install-command">$ npm install express --save</div>
   </div>
@@ -32,19 +32,19 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
 
   <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h3>Web アプリケーション</h3> Express は、Web アプリケーションとモバイル・アプリケーション向けの一連の堅固な機能を提供する最小限で柔軟な Node.js Web アプリケーション・フレームワークです。
+          <h2>Web アプリケーション</h2> Express は、Web アプリケーションとモバイル・アプリケーション向けの一連の堅固な機能を提供する最小限で柔軟な Node.js Web アプリケーション・フレームワークです。
       </div>
 
       <div id="apis">
-          <h3>API</h3> 無数の HTTP ユーティリティー・メソッドとミドルウェアを自由に使用できるため、堅固な API を迅速かつ容易に作成できます。
+          <h2>API</h2> 無数の HTTP ユーティリティー・メソッドとミドルウェアを自由に使用できるため、堅固な API を迅速かつ容易に作成できます。
       </div>
 
       <div id="performance">
-          <h3>パフォーマンス</h3> Express は、ユーザーが使い慣れている Node.js の機能をわかりやすくし、基礎的な Web アプリケーション機能をシンプルな階層で提供します。
+          <h2>パフォーマンス</h2> Express は、ユーザーが使い慣れている Node.js の機能をわかりやすくし、基礎的な Web アプリケーション機能をシンプルな階層で提供します。
       </div>
 
       <div id="sponsorship">
-          <h3><a href="http://loopback.io/">LoopBack</a></h3> <a href="http://loopback.io/">Express ベースのフレームワークを使用して、モデル駆動型アプリケーションを開発します。<br/>詳細については、loopback.io を参照してください。</a>
+          <h2><a href="http://loopback.io/">LoopBack</a></h2> <a href="http://loopback.io/">Express ベースのフレームワークを使用して、モデル駆動型アプリケーションを開発します。<br/>詳細については、loopback.io を参照してください。</a>
       </div>
   </div>
 

@@ -12,7 +12,7 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
   <div id="homepage-leftpane" class="pane">
     <section id="description">
         <div class="express"><a href="/">Express</a></div>
-        <span class="description"> <a href='https://nodejs.org/en/'>Node.js</a> uchun tezkor, moslashuvchan, minimalistik web-freymvork.</span>
+        <h1 class="description"> <a href='https://nodejs.org/en/'>Node.js</a> uchun tezkor, moslashuvchan, minimalistik web-freymvork.</h1>
     </section>
     <div id="install-command">$ npm install express --save</div>
   </div>
@@ -25,15 +25,15 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
     <div id="boxes" class="clearfix">
 
         <div id="web-applications">
-            <h3>Web dasturlar</h3> Express, Node.jsda web-dasturlarni yaratishda keng ko'lamda yordam beruvchi, minimalistik va moslashuvchan freymvorkdir.
+            <h2>Web dasturlar</h2> Express, Node.jsda web-dasturlarni yaratishda keng ko'lamda yordam beruvchi, minimalistik va moslashuvchan freymvorkdir.
         </div>
 
         <div id="apis">
-            <h3>APIs</h3> Ko'plab HTTP metodlar, oraliq qayta ishlovchi(middleware)lar yordamida, ishonchli tezkor va oson API server yaratish mumkin bo'ladi.
+            <h2>APIs</h2> Ko'plab HTTP metodlar, oraliq qayta ishlovchi(middleware)lar yordamida, ishonchli tezkor va oson API server yaratish mumkin bo'ladi.
         </div>
 
         <div id="performance">
-            <h3>Ishlab chiqaruvchanlik</h3> Express Nodedagi siz bilgan va sevgan imkoniyatlarni cheklamagan holda web-dasturlardagi eng asosiy imkoniyatlar bilan ta'minlab beradi.
+            <h2>Ishlab chiqaruvchanlik</h2> Express Nodedagi siz bilgan va sevgan imkoniyatlarni cheklamagan holda web-dasturlardagi eng asosiy imkoniyatlar bilan ta'minlab beradi.
         </div>
 
         <div id="frameworks">
