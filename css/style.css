@@ -287,7 +287,8 @@ a {
 }
 
 #description .description a {
-  text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 #doc-langs {
