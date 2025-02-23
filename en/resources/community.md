@@ -76,19 +76,19 @@ Express is a project of the OpenJS Foundation. Please review the [trademark poli
     <div>
         <h3>Logotype</h3>
         <a href="/images/brand/logotype-light.svg" class="hidden-dark">
-            <img src="/images/brand/logotype-light.svg" width="250" height="56"/>
+            <img src="/images/brand/logotype-light.svg" alt="Express.js logo" width="250" height="56"/>
         </a>
         <a href="/images/brand/logotype-dark.svg" class="hidden-light">
-            <img src="/images/brand/logotype-dark.svg" width="250" height="56"/>
+            <img src="/images/brand/logotype-dark.svg" alt="Express.js logo" width="250" height="56"/>
         </a>
     </div>
     <div>
         <h3>Logomark</h3>
         <a href="/images/brand/logo-light.svg" class="hidden-dark">
-            <img src="/images/brand/logo-light.svg" width="96.5" height="56"/>
+            <img src="/images/brand/logo-light.svg" alt="Express.js mark" width="96.5" height="56"/>
         </a>
         <a href="/images/brand/logo-dark.svg" class="hidden-light">
-            <img src="/images/brand/logo-dark.svg" width="96.5" height="56"/>
+            <img src="/images/brand/logo-dark.svg"  alt="Express.js mark" width="96.5" height="56"/>
         </a>
     </div>
 <div>
