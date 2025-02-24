@@ -46,7 +46,7 @@ as compressing will transform the body.
 #### Options
 
 `compression()` accepts these properties in the options object. In addition to
-those listed below, [zlib](http://nodejs.org/api/zlib.html) options may be
+those listed below, [zlib](https://nodejs.org/api/zlib.html) options may be
 passed in to the options object or
 [brotli](https://nodejs.org/api/zlib.html#zlib_class_brotlioptions) options.
 
@@ -55,7 +55,7 @@ passed in to the options object or
 Type: `Number`<br>
 Default: `zlib.constants.Z_DEFAULT_CHUNK`, or `16384`.
 
-See [Node.js documentation](http://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
+See [Node.js documentation](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
 regarding the usage.
 
 ##### filter
@@ -107,7 +107,7 @@ This specifies how much memory should be allocated for the internal compression
 state and is an integer in the range of `1` (minimum level) and `9` (maximum
 level).
 
-See [Node.js documentation](http://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
+See [Node.js documentation](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
 regarding the usage.
 
 ##### brotli
@@ -161,7 +161,7 @@ set a `Content-Length` response header.
 Type: `Number`<br>
 Default: `zlib.constants.Z_DEFAULT_WINDOWBITS`, or `15`
 
-See [Node.js documentation](http://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
+See [Node.js documentation](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
 regarding the usage.
 
 ##### enforceEncoding
