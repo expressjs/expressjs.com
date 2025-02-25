@@ -34,7 +34,7 @@ O exemplo a seguir mostra os elementos de uma chamada de função de middleware:
 
 <table id="mw-fig"> 
 <tr><td id="mw-fig-imgcell">
-<img src="/images/express-mw.png" id="mw-fig-img" />
+<img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
 </td>
 <td class="mw-fig-callouts">
 <div class="callout" id="callout1">O método HTTP para o qual a função de middleware é aplicada.</div>
