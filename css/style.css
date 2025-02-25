@@ -15,6 +15,10 @@ body.no-scroll{
   overflow: hidden;
 }
 
+body .language-js .highlight .c1 {
+  color: green;
+}
+
 h1 {
   font-size: 30px;
   line-height: 36px;
