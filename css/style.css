@@ -73,9 +73,6 @@ main.home {
 
 #home-content {
   display: flex;
-}
-
-.en-doc #home-content {
   margin-top: 150px;
 }
 
