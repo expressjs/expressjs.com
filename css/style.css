@@ -231,6 +231,9 @@ span.block-section {
 a {
   color: var(--link);
   text-decoration: underline;
+  text-underline-offset: 4.5px;
+  text-decoration-thickness: 1.5px;
+  text-decoration-style: solid;
 }
 
 .h2:target {
