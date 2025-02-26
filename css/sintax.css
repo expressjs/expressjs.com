@@ -115,10 +115,13 @@
 .highlight .cm, 
 .highlight .cp, 
 .highlight .cpf, 
-.highlight .c1, 
 .highlight .cs,
 .highlight .gt {
   color: var(--gray);
+}
+
+.highlight .c1 {
+  color: var(--green);
 }
 
 .highlight .ni,
