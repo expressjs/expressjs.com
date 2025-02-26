@@ -510,7 +510,7 @@ html[xmlns] .clearfix {
 }
 
 #i18n-notice-box {
-  margin: 100px 3% 20px 3%;
+  margin: 100px 3% -130px 3%;
   position: relative;
 }
 
