@@ -87,6 +87,7 @@
 .highlight .ow,
 .highlight .gh,
 .highlight .gu,
+.highlight .s2,
 .highlight .dl   {
   color: var(--blue-light);
 }
@@ -97,7 +98,7 @@
 .highlight .gu {
   font-weight: bold;
 }
-.highlight .s, .highlight .sa, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .sx, .highlight .ss {
+.highlight .s, .highlight .sa, .highlight .sc, .highlight .sd,  .highlight .se, .highlight .sh, .highlight .sx, .highlight .ss {
   color: var(--blue-darker);
 }
 .highlight .nd, .highlight .nf, .highlight .fm {
