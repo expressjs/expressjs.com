@@ -147,6 +147,10 @@ main.home {
   flex-direction: row-reverse;
 }
 
+.flex-row-content {
+  flex-direction: row;
+}
+
 #page-doc {
   padding-inline: 16px;
 }
@@ -702,6 +706,11 @@ footer {
   padding-block-end: 0.5rem;
 }
 
+#menu.blog-side-menu {
+  max-width: 20rem;
+  max-height: fit-content;
+}
+
 #menu ul a,
 #menu > li > a {
   display: block;
@@ -746,10 +755,6 @@ ul#side-menu.active {
   display: block;
   opacity: 1;
   padding-block: 0.5rem;
-}
-
-ul#side-menu.active.blog-side-menu {
-  max-width: 20rem;
 }
 
 #menu > li > a {
@@ -1145,10 +1150,6 @@ h2 a {
 
    #menu li.toc-title{
     display: none;
-  }
-
-  ul#side-menu.active.blog-side-menu {
-    max-width: fit-content;
   }
 }
 
