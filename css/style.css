@@ -750,7 +750,9 @@ footer {
 }
 
 #menu ul a.active {
-color: var(--fg)  
+  border-radius: 0.3rem;    
+  color: var(--fg);
+  outline: 1px solid var(--card-fg); 
 }
 
 #menu em {
