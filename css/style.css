@@ -1085,6 +1085,7 @@ h2 a {
 /* TOC responsive */
 @media all and (max-width: 800px) {
   .content {
+    margin-inline: 0.5rem;
     margin-block-start: 100px;
     flex-direction: column;
   }
