@@ -19,10 +19,16 @@
           {% include i18n-notice.html %}
       </div>
   {% endif %}
-    
-  <section class="content">
+
+  {% if page.title contains 'middleware' %}
+    <section class="content flex-row-content">
       {{ content }}
-  </section>
+    </section>
+  {% else %}
+    <section class="content">
+      {{ content }}
+    </section>
+  {% endif %}
 
   {% include footer.html %}
 
