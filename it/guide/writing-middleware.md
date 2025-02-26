@@ -26,7 +26,7 @@ I seguenti esempi mostrano gli elementi di una chiamata alla funzione middleware
 
 <table style="padding: 0; border: 0; width: 960px; margin-bottom: 10px;">
 <tr><td style="margin: 0; padding: 0px; border: 0; width: 410px;">
-<img src="/images/express-mw.png" style="margin: 0px; padding: 0px; width: 410px; height: 308px;" />
+<img src="/images/express-mw.png" alt="Elements of a middleware function call" style="margin: 0px; padding: 0px; width: 410px; height: 308px;" />
 </td>
 <td style="margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;">
 <div class="callout" id="callout1">Metodo HTTP per cui si applica la funzione middleware.</div>
