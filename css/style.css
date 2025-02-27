@@ -539,6 +539,19 @@ html[xmlns] .clearfix {
   color: var(--box-fg);
 }
 
+a.edit-github-btn{
+  display: flex;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+
+  &:is(:hover, :active, :focus) {
+    color: var(--fg);
+    background-color: var(--hover-bg);
+  }
+}
+
 #mobile-menu {
   display: none;
   position: relative;
