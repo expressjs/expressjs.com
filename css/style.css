@@ -1291,6 +1291,10 @@ strong.eol {
   display: block;
 }
 
+.hidden-light {
+  display: none;
+}
+
 blockquote {
   margin-left: 0;
   font-weight: 600;
