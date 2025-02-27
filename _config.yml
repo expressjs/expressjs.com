@@ -36,4 +36,5 @@ exclude:
   - node_modules/
 
 
-github: [metadata]
+github:
+  repository_url: "https://github.com/expressjs/expressjs.com"
