@@ -231,7 +231,7 @@ span.block-section {
 a {
   color: var(--link);
   text-decoration: underline;
-  text-underline-offset: 4.5px;
+  text-underline-offset: 3px;
   text-decoration-thickness: 1.5px;
   text-decoration-style: solid;
 }
@@ -741,6 +741,7 @@ footer {
   display: block;
   color: var(--menu-grey);
   padding-inline: 0.5rem;
+  text-decoration: none;
 
   &:is(:hover,:active,:focus) {
     border-radius: 0.3rem;
