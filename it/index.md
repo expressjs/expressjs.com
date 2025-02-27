@@ -17,7 +17,7 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
     <div id="install-command">$ npm install express --save</div>
   </div>
   <div id="homepage-rightpane" class="pane">
-    <iframe src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
+    <iframe title="KEYNOTE: Express, State of the Union by Doug Wilson, Express - YouTube" src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
   </div>
 
 </section>
@@ -42,7 +42,7 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
       </div>
 
       <div id="sponsorship">
-          <a href="http://loopback.io/"><h2>LoopBack</h2> Sviluppare applicazioni basate sul modello con un framework basato su Express.<br/>Ulteriori informazioni su loopback.io.</a>
+          <h2><a href="http://loopback.io/">LoopBack</a></h2><a href="http://loopback.io/"> Sviluppare applicazioni basate sul modello con un framework basato su Express.<br/>Ulteriori informazioni su loopback.io.</a>
       </div>
   </div>
 

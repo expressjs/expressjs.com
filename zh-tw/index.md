@@ -17,7 +17,7 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
     <div id="install-command">$ npm install express --save</div>
   </div>
   <div id="homepage-rightpane" class="pane">
-    <iframe src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
+    <iframe title="KEYNOTE: Express, State of the Union by Doug Wilson, Express - YouTube" src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
   </div>
 </section>
 
@@ -39,7 +39,7 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
       </div>
 
       <div id="sponsorship">
-          <a href="http://loopback.io/"><h2>LoopBack</h2> 使用基於 Express 的架構來開發模型驅動的應用程式。<br/>在 loopback.io 取得更多資訊。</a>
+          <h2><a href="http://loopback.io/">LoopBack</a></h2><a href="http://loopback.io/"> 使用基於 Express 的架構來開發模型驅動的應用程式。<br/>在 loopback.io 取得更多資訊。</a>
       </div>
   </div>
 

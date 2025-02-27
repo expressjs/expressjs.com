@@ -6,6 +6,7 @@ menu: home
 lang: en
 redirect_from: "/en/index.html"
 ---
+
 <section id="home-content">
   {% include header.html %}
   <div id="overlay"></div>
