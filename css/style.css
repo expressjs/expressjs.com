@@ -476,7 +476,7 @@ html[xmlns] .clearfix {
   padding: 16px;
   color: var(--box-fg);
   border-radius: 0 6px 6px 0;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .doc-box p {
@@ -720,15 +720,19 @@ footer {
 
 /* TOC side menu */
 
-#menu {
+.toc-container {
   position: sticky;
   top: 100px;
+}
+
+#menu {
   min-width: 13rem;
   padding-inline: 0.5rem;
   font-size: 1rem;
   overflow-y: auto;
   max-height: 65vh;
   padding-block-end: 0.5rem;
+  margin-block: 0;
 }
 
 #menu.blog-side-menu {
@@ -899,7 +903,7 @@ h2 a {
 }
 
 /* toc title */
-#menu li.toc-title {
+.toc-heading {
   display: block;
   cursor: default;
   padding-inline-start: 1rem;
@@ -1178,7 +1182,7 @@ h2 a {
     border-radius: 0.3rem;
    }
 
-   #menu li.toc-title{
+   .toc-heading{
     display: none;
   }
 }

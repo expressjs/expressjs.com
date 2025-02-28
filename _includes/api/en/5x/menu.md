@@ -1,6 +1,5 @@
 <button id="menu-toggle" title="show table of content">On this page <span>&#x25BA;</span></button>
 <ul id="menu">
-    <li class="toc-title" role="heading" aria-level="3"><em>On this page</em></li>
     <li id="express-api"><a href="#express">express()</a>
     <ul id="express-menu">
         <li><em>Methods</em></li>

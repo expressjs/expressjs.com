@@ -20,14 +20,14 @@
       </div>
   {% endif %}
 
-  {% if page.title contains 'middleware' %}
-    <section class="content flex-row-content">
+  {% if page.layout == 'middleware' %}
+    <div class="content flex-row-content">
       {{ content }}
-    </section>
+    </div>
   {% else %}
-    <section class="content">
+    <main class="content">
       {{ content }}
-    </section>
+    </main>
   {% endif %}
 
   {% include footer.html %}

@@ -8,16 +8,18 @@ redirect_from:
   - "en/changelog/4x.html"
 ---
 
-<div class="toc-container">
-  <button id="menu-toggle" title="show express versions">Express versions <span>&#x25BA;</span></button>
-  <ul id="menu">
-    <li class="toc-title" role="heading" aria-level="3"><em>Versions</em></li>
-    {% capture readme %}{% include changelog/menu.md %}{% endcapture %}
-    <li>
-      {{ readme | markdownify }}
-    </li>
-  </ul>
-</div>
+<nav aria-label="sidebar-heading">
+  <div class="toc-container">
+    <h3 id="sidebar-heading" class="toc-heading"><em>Versions</em></h3>
+    <button id="menu-toggle" title="show express versions">Versions <span>&#x25BA;</span></button>
+    <ul id="menu">
+      {% capture readme %}{% include changelog/menu.md %}{% endcapture %}
+      <li>
+        {{ readme | markdownify }}
+      </li>
+    </ul>
+  </div>
+</nav>
 
 <div markdown="1" id="page-doc">
 
