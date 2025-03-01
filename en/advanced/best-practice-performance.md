@@ -6,60 +6,7 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/best-practice-performance.html"
 ---
-
-<nav aria-labelledby="sidebar-heading">
-  <div class="toc-container">
-  <h3 id="sidebar-heading" class="toc-heading"><em>Performance practices</em></h3>
-  <button id="menu-toggle" title="show best practices">Performance best practices <span>&#x25BA;</span></button>
-  <ul id="menu">
-    <li>
-      <a href="#">Development practices</a>
-      <ul id="side-menu" class="active">
-      <li>
-        <a href="#use-gzip-compression">Use gzip compression</a>
-      </li>
-      <li>
-        <a href="#dont-use-synchronous-functions">Don't use synchronous functions</a>
-      </li>
-      <li>
-        <a href="#do-logging-correctly">Do logging correctly</a>
-      </li>
-      <li>
-        <a href="#handle-exceptions-properly">Handle exceptions properly</a>
-      </li>
-    </ul>
-    </li>
-    <li>
-      <a href="#">Operations practices</a>
-      <ul id="side-menu">
-      <li>
-        <a href="#set-nodeenv-to-production">Set NODE_ENV to "production"</a>
-      </li>
-      <li>
-        <a href="#ensure-your-app-automatically-restarts">Ensure your app automatically restarts</a>
-      </li>
-      <li>
-        <a href="#run-your-app-in-a-cluster">Run your app in a cluster</a>
-      </li>
-      <li>
-        <a href="#cache-request-results">Cache request results</a>
-      </li>
-      <li>
-        <a href="#use-a-load-balancer">Use a load balancer</a>
-      </li>
-      <li>
-        <a href="#use-a-reverse-proxy">Use a reverse proxy</a>
-      </li>
-    </ul>
-    </li>
-  </ul> 
-  </div>
-</nav>
-
-<div id="page-doc" markdown="1">
 # Production best practices: performance and reliability
-
-## Overview
 
 This article discusses performance and reliability best practices for Express applications deployed to production.
 
@@ -364,4 +311,3 @@ A reverse proxy sits in front of a web app and performs supporting operations on
 Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.org/) or [HAProxy](https://www.haproxy.org/) in production.
 
 Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.com/) or [HAProxy](http://www.haproxy.org/) in production.
-</div>
