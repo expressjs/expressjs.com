@@ -439,21 +439,21 @@ html[xmlns] .clearfix {
 
 /* doc specific */
 
-.doctable, section table {
+.doctable, table {
   margin: 1em 1em 1em 0;
   border: 1px solid var(--border);
   border-collapse: collapse;
   width: 100%;
 }
 
-.doctable td, .doctable th, section table td, section table th {
+.doctable td, .doctable th, table td, table th {
   padding: 7px;
   line-height: 120%;
   vertical-align: top;
   border: 1px solid var(--border);
 }
 
-.doctable tr th, section table tr th {
+.doctable tr th, table tr th {
   background: var(--card-bg);
   font-size: 110%;
 }
