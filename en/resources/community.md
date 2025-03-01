@@ -7,7 +7,6 @@ lang: en
 redirect_from: "/resources/community.html"
 ---
 
-<div id="page-doc" class="no-sidebar" markdown="1">
 # Community
 
 ## Technical committee

@@ -7,7 +7,6 @@ lang: en
 redirect_from: "/guide/debugging.html"
 ---
 
-<div id="page-doc" class="no-sidebar" markdown="1">
 # Debugging Express
 
 To see all the internal logs used in Express, set the `DEBUG` environment variable to
@@ -124,4 +123,3 @@ converted into an Options object that gets used with `%o`/`%O` formatters.
 See the Node.js documentation for
 [`util.inspect()`](https://nodejs.org/api/util.html#util_util_inspect_object_options)
 for the complete list." %}
-</div>

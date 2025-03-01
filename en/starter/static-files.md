@@ -7,7 +7,6 @@ lang: en
 redirect_from: "/starter/static-files.html"
 ---
 
-<div id="page-doc" class="no-sidebar" markdown="1">
 # Serving static files in Express
 
 To serve static files such as images, CSS files, and JavaScript files, use the `express.static` built-in middleware function in Express.
@@ -81,4 +80,3 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 For more details about the `serve-static` function and its options, see  [serve-static](/resources/middleware/serve-static.html).
 
 ### [Previous: Basic Routing ](/{{ page.lang }}/starter/basic-routing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: More examples ](/{{ page.lang }}/starter/examples.html)
-</div>

@@ -7,7 +7,6 @@ lang: en
 redirect_from: "/resources/community.html"
 ---
 
-<div id="page-doc" class="no-sidebar" markdown="1">
 # Contributing to Express
 
 ### Looking to contribute to Expressjs.com? Click [here](#expressjs-website-contributing).
@@ -538,4 +537,3 @@ To translate Expressjs.com into a new language, follow these steps:
 Many site translations are still missing pages. To find which ones we need help with, you can [filter for merged PRs](https://github.com/expressjs/expressjs.com/pulls?q=is%3Apr+is%3Aclosed+label%3Arequires-translation-es) that include the tag for your language, such as `requires-translation-es` for requires Spanish translation.   
 
 If you contribute a page or section translation, please reference the original PR. This helps the person merging your translation to remove the tag from the original PR.
-</div>

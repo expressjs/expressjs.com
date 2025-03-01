@@ -7,7 +7,6 @@ lang: en
 redirect_from: "/starter/hello-world.html"
 ---
 
-<div id="page-doc" class="no-sidebar" markdown="1">
 # Hello world example
 
 <div class="doc-box doc-info" markdown="1">
@@ -51,4 +50,3 @@ $ node app.js
 Then, load `http://localhost:3000/` in a browser to see the output.
 
 ###  [Previous: Installing ](/{{ page.lang }}/starter/installing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Express Generator ](/{{ page.lang }}/starter/generator.html)
-</div>

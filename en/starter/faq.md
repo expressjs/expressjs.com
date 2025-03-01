@@ -7,7 +7,6 @@ lang: en
 redirect_from: "/starter/faq.html"
 ---
 
-<div id="page-doc" class="no-sidebar" markdown="1">
 # FAQ
 
 ## How should I structure my application?
@@ -98,4 +97,3 @@ middleware function.
 * [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
 
 ###  [Previous: More examples ](/{{ page.lang }}/starter/examples.html)
-</div>

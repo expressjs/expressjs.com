@@ -7,7 +7,6 @@ lang: en
 redirect_from: "/advanced/best-practice-security.html"
 ---
 
-<div id="page-doc" class="no-sidebar" markdown="1">
 # Production Best Practices: Security
 
 ## Overview
@@ -270,4 +269,3 @@ Here are some further recommendations from the excellent [Node.js Security Check
 * Use [safe-regex](https://www.npmjs.com/package/safe-regex) to ensure your regular expressions are not susceptible to [regular expression denial of service](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) attacks.
 
 [helmet]: https://helmetjs.github.io/
-</div>
