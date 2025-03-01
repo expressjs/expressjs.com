@@ -1,16 +1,23 @@
 ---
 layout: page
 ---
-<div id="mw-container">
-  <div id="mw-list">
-    {% if page.title contains 'middleware' %}
-      {% capture readme %}{% include mw-list.md %}{% endcapture %}
-    {% else %}
-      {% capture readme %}{% include util-list.md %}{% endcapture %}
-    {% endif %}
-    {{ readme | markdownify }}
+
+<nav aria-labelledby="sidebar-heading">
+  <div class="toc-container">
+    <h3 id="sidebar-heading" class="toc-heading"><em>Middlewares</em></h3>
+    <button id="menu-toggle" title="show express middlewares">Middlewares <span>&#x25BA;</span></button>
+    <ul id="menu">
+        {% if page.title contains 'middleware' %}
+          {% capture readme %}{% include mw-list.md %}{% endcapture %}
+        {% else %}
+          {% capture readme %}{% include util-list.md %}{% endcapture %}
+        {% endif %}
+        {{ readme | markdownify }}
+    </ul>
   </div>
-  <div id="middleware-content">
+</nav>
+
+<main id="page-doc">
     {% if page.module == 'mw-home' %}    
       {{content}} 
       
@@ -29,5 +36,4 @@ layout: page
       <h3>ERROR: No source specified for README {{page.module}}</h3>
     {% endif %}
 
-  </div>
-</div>
+</main>

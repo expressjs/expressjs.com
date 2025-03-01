@@ -56,12 +56,6 @@ $(function(){
     }  
   }
 
-  $(window).bind('load resize', function() {
-
-    $('#menu').css('height', ($(this).height() - 150) + 'px');
-
-  });
-
   $(document).scroll(function() {
     var h = closest();
     if (!h) return;
