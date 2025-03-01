@@ -1133,6 +1133,10 @@ h2 a {
     border-top-right-radius: 0.5rem;
   }
 
+  .toc-container {
+    width: 100%;
+  }
+
   #menu-toggle.show {
     display: block;
     opacity: 1;
