@@ -144,19 +144,19 @@ main.home {
 }
 
 .content {
-  margin: 153px auto 7%;
-  max-width: 1090px;
+  margin: 153px 0 7%;
   display: flex;
   gap: 2rem;
   flex-direction: row-reverse;
 }
 
-.flex-row-content {
-  flex-direction: row;
+.content main {
+  max-width: 900px;
+  margin-inline: auto;
 }
 
-#page-doc {
-  padding-inline: 16px;
+.flex-row-content {
+  flex-direction: row;
 }
 
 span.block-section {
@@ -642,11 +642,6 @@ footer {
 
 /* content doc */
 
-#api-doc,
-#page-doc {
-  width: 50vw;
-}
-
 #blog-doc {
   padding: 0.5rem;
   width: fit-content;
@@ -711,18 +706,12 @@ footer {
   display: none;
 }
 
-/* page width without sidebar menu */
-#page-doc.no-sidebar {
-  width: 60vw;
-  padding-inline-start: 0;
-  padding-inline-end: 8rem;
-}
-
 /* TOC side menu */
 
 .toc-container {
   position: sticky;
   top: 100px;
+  width: 270px
 }
 
 #menu {
@@ -940,20 +929,12 @@ h2 a {
   #menu{
     top: 75px;
   }
-  #blog-doc {
-    padding-inline-start: 10rem;
-  }
 }
 
 @media all and (max-width: 1110px) {
   #api-doc,
   #page-doc {
     width: 75vw;
-    padding-inline-start: 10rem;
-  }
-
-  #blog-doc {
-    padding-inline-start: 8rem;
   }
 
   #boxes {
@@ -1128,11 +1109,6 @@ h2 a {
   #page-doc {
     padding-inline: 1rem;
     width: 100%;
-  }
-
-  #page-doc.no-sidebar {
-    width: 100%;
-    padding-inline: 1rem;
   }
 
   .toc-container {

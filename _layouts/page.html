@@ -25,9 +25,11 @@
       {{ content }}
     </div>
   {% else %}
-    <main class="content">
-      {{ content }}
-    </main>
+    <div class="content">
+      <main>
+        {{ content }}
+      </main>
+    </div>
   {% endif %}
 
   {% include footer.html %}
