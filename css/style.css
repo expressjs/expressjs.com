@@ -146,11 +146,11 @@ main.home {
 .content {
   margin: 153px 0 7%;
   display: flex;
-  gap: 2rem;
   flex-direction: row-reverse;
 }
 
 .content main {
+  padding-inline: 16px;
   max-width: 900px;
   margin-inline: auto;
 }
@@ -928,11 +928,6 @@ h2 a {
 }
 
 @media all and (max-width: 1110px) {
-  #api-doc,
-  #page-doc {
-    width: 75vw;
-  }
-
   #boxes {
     grid-template-columns: 1fr 1fr;
   }
