@@ -19,6 +19,7 @@ announcement: false # Enable or disable the announcements.
 
 plugins:
   - jekyll-redirect-from
+  - jekyll-github-metadata
 
 highlighter: rouge
 # library used for syntax highlighting
@@ -34,7 +35,3 @@ exclude:
   - [uk/CHANGELOG.md]
   - vendor/bundle
   - node_modules/
-
-
-github:
-  repository_url: "https://github.com/expressjs/expressjs.com"

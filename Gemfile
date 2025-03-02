@@ -4,4 +4,4 @@ ruby '3.3.5'
 
 gem 'github-pages', group: :jekyll_plugins
 gem 'webrick'
-
+gem 'jekyll-github-metadata'
