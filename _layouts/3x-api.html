@@ -4,21 +4,22 @@
   {% include head.html %}
 
   <body>
+    {% include header.html %}
+    <div id="overlay"></div>
 
-    <section class="content">
-
-      {% include header.html %}
-
-      {% include api/en/3x/menu.md %}
-
-      <div id="overlay"></div>
-
-      {{ content }}
-
-    </section>
+    <div class="content">
+      <nav aria-labelledby="sidebar-heading">
+        <div class="toc-container">
+          <h3 id="sidebar-heading" class="toc-heading"><em>On this page</em></h3>
+          {% include api/en/3x/menu.md %}
+        </div>
+      </nav>
+      <main>
+        {{ content }}
+      </main>
+    </div>
 
     {% include footer.html %}
-
 
   </body>
 

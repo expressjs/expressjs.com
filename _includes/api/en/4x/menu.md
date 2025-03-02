@@ -1,5 +1,5 @@
+<button id="menu-toggle" title="show table of content">On this page <span>&#x25BA;</span></button>
 <ul id="menu">
-
     <li id="express-api"><a href="#express">express()</a>
     <ul id="express-menu">
         <li><em>Methods</em></li>
@@ -136,7 +136,7 @@
         <ul id="res-menu">
             <li><em>Properties</em>
             </li>
-            <li><a href="#res.app">res.app      </a>
+            <li><a href="#res.app">res.app</a>
             </li>
             <li><a href="#res.headersSent">res.headersSent</a>
             </li>
@@ -205,3 +205,4 @@
         </ul>
     </li>
 </ul>
+
