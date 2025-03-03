@@ -6,6 +6,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/using-template-engines.html"
 ---
+
 # Using template engines with Express
 
 A _template engine_ enables you to use static template files in your application. At runtime, the template engine replaces
@@ -63,4 +64,3 @@ app.get('/', (req, res) => {
 When you make a request to the home page, the `index.pug` file will be rendered as HTML.
 
 The view engine cache does not cache the contents of the template's output, only the underlying template itself. The view is still re-rendered with every request even when the cache is on.
-

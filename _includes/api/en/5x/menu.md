@@ -1,5 +1,5 @@
+<button id="menu-toggle" title="show table of content">On this page <span>&#x25BA;</span></button>
 <ul id="menu">
-
     <li id="express-api"><a href="#express">express()</a>
     <ul id="express-menu">
         <li><em>Methods</em></li>

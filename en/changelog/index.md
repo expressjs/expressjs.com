@@ -8,15 +8,20 @@ redirect_from:
   - "en/changelog/4x.html"
 ---
 
-<div id="mw-container">
+<nav aria-label="sidebar-heading">
+  <div class="toc-container">
+    <h3 id="sidebar-heading" class="toc-heading"><em>Versions</em></h3>
+    <button id="menu-toggle" title="show express versions">Versions <span>&#x25BA;</span></button>
+    <ul id="menu">
+      {% capture readme %}{% include changelog/menu.md %}{% endcapture %}
+      <li>
+        {{ readme | markdownify }}
+      </li>
+    </ul>
+  </div>
+</nav>
 
-<div markdown="1" id="mw-list">
-
-{% include changelog/menu.md %}
-
-</div>
-
-<div markdown="1" id="mw-content">
+<div markdown="1" id="page-doc">
 
 # Release changelog
 
@@ -560,7 +565,5 @@ The 4.14.0 minor release includes bug fixes, security update, performance improv
 </ul>
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4140--2016-06-16).
-
-</div>
 
 </div>
