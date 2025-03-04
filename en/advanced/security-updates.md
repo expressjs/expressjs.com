@@ -6,6 +6,7 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/security-updates.html"
 ---
+
 # Security updates
 
 <div class="doc-box doc-notice" markdown="1">

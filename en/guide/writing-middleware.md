@@ -6,6 +6,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/writing-middleware.html"
 ---
+
 # Writing middleware for use in Express apps
 
 <h2>Overview</h2>

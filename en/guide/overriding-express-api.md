@@ -5,7 +5,6 @@ description: Discover how to customize and extend the Express.js API by overridi
 menu: guide
 lang: en
 ---
-<div id="page-doc" markdown="1">
 
 # Overriding the Express API
 
@@ -72,4 +71,3 @@ Unless necessary, it is recommended that this be done only at the application le
 Object.setPrototypeOf(Object.getPrototypeOf(app.request), FakeRequest.prototype)
 Object.setPrototypeOf(Object.getPrototypeOf(app.response), FakeResponse.prototype)
 ```
-</div>

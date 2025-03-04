@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: var(--box-fg);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -144,9 +144,19 @@ main.home {
 }
 
 .content {
-  margin: 153px 3% 7%;
-  max-width: 1090px;
-  padding-left: 225px;
+  margin: 153px 0 7%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.content main {
+  padding-inline: 16px;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.flex-row-content {
+  flex-direction: row;
 }
 
 span.block-section {
@@ -426,21 +436,21 @@ html[xmlns] .clearfix {
 
 /* doc specific */
 
-.doctable, section table {
+.doctable, table {
   margin: 1em 1em 1em 0;
   border: 1px solid var(--border);
   border-collapse: collapse;
   width: 100%;
 }
 
-.doctable td, .doctable th, section table td, section table th {
+.doctable td, .doctable th, table td, table th {
   padding: 7px;
   line-height: 120%;
   vertical-align: top;
   border: 1px solid var(--border);
 }
 
-.doctable tr th, section table tr th {
+.doctable tr th, table tr th {
   background: var(--card-bg);
   font-size: 110%;
 }
@@ -463,7 +473,7 @@ html[xmlns] .clearfix {
   padding: 16px;
   color: var(--box-fg);
   border-radius: 0 6px 6px 0;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .doc-box p {
@@ -627,6 +637,12 @@ footer {
   gap: 20px;
 }
 
+/* content doc */
+
+#blog-doc {
+  padding: 0.5rem;
+  width: fit-content;
+}
 
 /* dropdown menu */
 
@@ -686,73 +702,82 @@ footer {
   display: none;
 }
 
-/* secondary menu */
+/* TOC side menu */
 
-#menu,
-#blog-side-menu-container {
-  position: fixed;
-  margin: 0;
-  padding: 0 10px 0 0;
-  top: 153px;
-  left: 30px;
-  height: 500px;
-  text-align: left;
-  font-size: 13px;
+.toc-container {
+  position: sticky;
+  top: 100px;
+  width: 270px
+}
+
+#menu {
+  min-width: 13rem;
+  padding-inline: 0.5rem;
+  font-size: 1rem;
   overflow-y: auto;
+  max-height: 65vh;
+  padding-block-end: 0.5rem;
+  margin-block: 0;
 }
 
-#blog-side-menu-container {
-  max-width: 210px;
+#menu.blog-side-menu {
+  max-width: 20rem;
+  max-height: fit-content;
 }
 
-#blog-side-menu-container li {
-  max-width: 100%;
-  margin-bottom: 5px;
-}
+#menu ul a,
+#menu > li > a {
+  display: block;
+  color: var(--menu-grey);
+  padding-inline: 0.5rem;
+  text-decoration: none;
 
-#blog-side-menu-container > h3 > a  {
-  color: var(--fg)
-}
-
-#blog-side-menu {
-  list-style: none;
-  padding: 0;
+  &:is(:hover,:active,:focus) {
+    border-radius: 0.3rem;
+    color: var(--fg);
+    outline: 1px solid var(--card-fg);
+  }
 }
 
 #menu ul a.active {
-color: var(--fg)  
+  border-radius: 0.3rem;    
+  color: var(--fg);
+  outline: 1px solid var(--card-fg); 
 }
 
 #menu em {
   font-weight: bold;
-  color: var(--card-fg);
+  color: var(--menu-em);
+  font-size: 1rem;
 }
 
 #menu li {
+  cursor: pointer;
   list-style: none;
+  margin-block-start: 0.3rem;
 }
 
-#menu ul {
+#menu ul,
+ul#side-menu  {
+  display: none;
+  opacity: 0;
   height: 0;
   overflow: hidden;
 }
 
-#menu ul.active {
+#menu ul.active,
+ul#side-menu.active {
   height: auto;
-  padding: 0;
+  padding-inline: 0.5rem;
+  display: block;
+  opacity: 1;
+  padding-block: 0.5rem;
 }
-#menu a {
-  color: var(--menu-grey);}
 
-#menu > li > a,
-#blog-side-menu > li > a {
-  color: var(--menu-grey);
+#menu > li > a {
   font-weight: bold;
-  font-size: 13px;
-}
-
-#menu ul a {
-  padding-right: 7px;
+  font-size: 1rem;
+  padding-inline-start: 1rem;
 }
 
 /* can't find this in proj*/
@@ -862,7 +887,45 @@ h2 a {
   }
 }
 
+/* toc title */
+.toc-heading {
+  display: block;
+  cursor: default;
+  padding-inline-start: 1rem;
+  & > em {
+    font-weight: bold;
+    color: var(--menu-em);
+    font-size: 1rem;
+  }
+}
+
+
+/* TOC btn */
+
+#menu-toggle {
+  cursor: pointer;
+  display: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+  opacity: 0;
+  width: fit-content;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+  color: #000;
+  background-color: #fff;
+
+  &:is(:hover, :active, :focus) {
+    background-color: #ebf2f5;
+  }
+}
+
 /* responsive */
+
+@media all and (max-width: 1440px) {
+  #menu{
+    top: 75px;
+  }
+}
 
 @media all and (max-width: 1110px) {
   #boxes {
@@ -896,10 +959,6 @@ h2 a {
     overflow: scroll;
   }
 
-  #api-doc section {
-    padding-left: 0;
-  }
-
   code {
     word-break: break-all;
   }
@@ -928,15 +987,6 @@ h2 a {
     font-size: 16px;
     line-height: 18px;
     font-weight: normal;
-  }
-
-  #menu,
-  #blog-side-menu-container {
-    display: none;
-  }
-
-  .content {
-    padding-left: 0;
   }
 
   #home-content {
@@ -1037,6 +1087,77 @@ h2 a {
   }
 }
 
+/* TOC responsive */
+@media all and (max-width: 800px) {
+  .content {
+    margin-inline: 0.5rem;
+    margin-block-start: 100px;
+    flex-direction: column;
+  }
+  
+  #api-doc,
+  #blog-doc,
+  #page-doc {
+    padding-inline: 1rem;
+    width: 100%;
+  }
+
+  .toc-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem;
+  }
+
+  #menu {
+    display: none;
+    opacity: 0;
+    max-height: 0;
+    background-color: var(--card-bg);
+    min-width: 100%;
+  }
+
+  #menu.open {
+    display: block;
+    opacity: 1;
+    max-height: 35vh;
+    padding-inline: 1rem;
+    border-left: 2px solid var(--border);
+    margin-top: 0.3rem;
+    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+
+  .toc-container {
+    width: 100%;
+  }
+
+  #menu-toggle.show {
+    display: block;
+    opacity: 1;
+  }
+
+  #menu > li > a,
+  #menu ul a {
+    padding: 0.5rem;
+    &:is(:hover,:active,:focus) {
+      background: var(--hover-bg);
+    }
+  }
+
+  #menu li ul li > em {
+    font-size: 0.8rem;
+    padding-inline: 1rem;
+    padding-block: 0.3rem;
+    background-color: var(--hover-bg);
+    border-radius: 0.3rem;
+   }
+
+   .toc-heading{
+    display: none;
+  }
+}
+
 
 @media all and (max-width: 540px) {
   #boxes {
@@ -1054,12 +1175,6 @@ h2 a {
   }
 }
 
-@media all and (max-width: 320px) {
-
-  #install-command {
-    font-size: 12px;
-  }
-}
 
 @media print {
 
@@ -1102,33 +1217,12 @@ h2 a {
   width: 550px;
 }
 
-/* For middleware pages */
-
-#mw-container {
-  display: flex;
-  display: -webkit-flex; /* Safari */
-  width: 100%;
-}
-
-#mw-list {
-  min-width: 180px;
-  margin: 0;
-  padding: 0 10px 0 10px;
-  font-size: 13px;
-  overflow-y: auto;
- }
-
-#middleware-content {
-  margin-left: 10px;
-}
-
-#mw-list ul li {
- margin-left: -20px;
-}
-
 /* Blog page styles*/
 #blog-doc {
-  margin: 0 10px;
+  margin: 0 1rem;
+  @media all and (max-width: 800px) {
+    margin: 0;
+  }
 }
 #blog-doc:has(> h1#express-blog),
 #blog-doc:has(> h1#write-a-blog-post) {
@@ -1137,6 +1231,7 @@ h2 a {
 #blog-doc .blog-details ~ p > img {
   width: 200px;
   float: right;
+  margin: 0.5rem;
 }
 #blog-doc p {
   font-size: 1.1em;
