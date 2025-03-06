@@ -14,3 +14,5 @@ res.type('application/json')
 res.type('png')
 // => 'image/png'
 ```
+
+Aliased as `res.contentType(type)`.

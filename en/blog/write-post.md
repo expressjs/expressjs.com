@@ -27,7 +27,7 @@ Create a new file in the `_posts` directory named using following the format: `Y
 1. ### Add the required front matter
     Copy the following front matter, including the dotted lines, and paste it at the top of file you just created. Replace the placeholder values with as desired.
 
-    ```yaml
+    ```markdown
     ---
     title: <your-title>
     sub_title: <your-optional-sub-title>

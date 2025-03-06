@@ -16,7 +16,7 @@ help: ## This help
 
 serve: ## Local server
 	@echo "${BLUE}Starting expressjs.com at http://localhost:4000${RESET}"
-	docker run -p 4000:4000 -p 35729:35729 -v $(DIR):/usr/src/app expressjs.com bundle exec jekyll serve --host 0.0.0.0
+	docker run -p 4000:4000 -p 35729:35729 -v $(DIR):/usr/src/app expressjs.com bundle exec jekyll serve --host 0.0.0.0 --incremental
 
 build: ## Build site
 	@echo "${BLUE}Building site...${RESET}"

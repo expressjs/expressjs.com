@@ -1,3 +1,6 @@
+url: "https://expressjs.com"
+baseurl: "/"
+
 # Site settings
 
 defaults:
@@ -9,6 +12,8 @@ defaults:
       layout: "post"
       menu: blog
       lang: en
+
+announcement: false # Enable or disable the announcements.
 
 # Build settings
 

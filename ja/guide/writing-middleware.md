@@ -26,7 +26,7 @@ description: Learn how to write custom middleware functions for Express.js appli
 
 <table id="mw-fig">
 <tr><td id="mw-fig-imgcell">
-<img src="/images/express-mw.png" id="mw-fig-img" />
+<img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
 </td>
 <td class="mw-fig-callouts">
 <div class="callout" id="callout1">ミドルウェア関数が適用される HTTP メソッド。</div>

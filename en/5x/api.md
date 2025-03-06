@@ -12,10 +12,10 @@ redirect_from: "/5x/api.html"
 
   {% include admonitions/note.html content="Express 5.0 requires Node.js 18 or higher." %}
 
-  {% include api/{{ page.lang }}/5x/express.md %}
-  {% include api/{{ page.lang }}/5x/app.md %}
-  {% include api/{{ page.lang }}/5x/req.md %}
-  {% include api/{{ page.lang }}/5x/res.md %}
-  {% include api/{{ page.lang }}/5x/router.md %}
+  {% include api/en/5x/express.md %}
+  {% include api/en/5x/app.md %}
+  {% include api/en/5x/req.md %}
+  {% include api/en/5x/res.md %}
+  {% include api/en/5x/router.md %}
 
 </div>

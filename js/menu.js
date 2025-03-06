@@ -1,11 +1,13 @@
 // It uses `window.matchMedia` instead of `window.addEventListener('resize')` because `matchMedia` performs better by not changing its value with every screen resize.
 const mobileScreen = window.matchMedia("(max-width: 1110px)");
 let isSmallScreen = mobileScreen?.matches;
+const tocScreen = window.matchMedia("(max-width: 800px)");
+let isTocScreen = tocScreen.matches;
 
 mobileScreen?.addEventListener("change", (event) => {
 	isSmallScreen = event.matches
 
-	if (!event.matches) {
+  if (!isSmallScreen) {
 		document.body.classList.remove("no-scroll")
 	}
 });
@@ -13,11 +15,31 @@ mobileScreen?.addEventListener("change", (event) => {
 // Desktop Menu
 
 const itemsMenu = document.querySelectorAll(".submenu");
+const navDrawers = document.querySelectorAll('#navmenu > li')
+let activeDrawer // active dropdown nav link
+
 
 for (const el of itemsMenu) {
 	el.addEventListener("click", () => {
 		if (isSmallScreen || 'ontouchstart' in document.documentElement) {
+		// HANDLE ACTIVE LINKS IN DROPDOWN NAV	
+		// if no activeDrawer set then page was set in md logic
+		if (!activeDrawer) {
+			// remove default active link
+			removeActiveFromDrawers(navDrawers)
+			// set new active drawer to clicked
+			activeDrawer = el
+			// add active class
+			addActiveToDrawer(el)
+		// remove prev activeDrawer and set current to active
+		} else if (activeDrawer.id !== el.id) {
+			activeDrawer.querySelector('a').classList.remove('active')
+			addActiveToDrawer(el)
+			activeDrawer = el
+		}
+
 			for (const item of itemsMenu) {
+        // close any open drawers on click next drawer
 				if (item.id !== el.id) {
 					item.classList.remove("open");
 				}
@@ -49,6 +71,7 @@ const overlay = document.querySelector("#overlay");
 const navButton = document.querySelector("#nav-button");
 const languagePickerButton = document.querySelector("#language-picker-button");
 
+
 for (const el of linkItemsMenu) {
 	el.addEventListener("click", (e) => {
 		if (el.classList.contains("open")) {
@@ -78,7 +101,6 @@ for (const el of languageItems) {
 
 navButton?.addEventListener("click", () => {
 	const isLanguageMenuOpen = languagePickerMenu?.classList.contains("opens");
-
 	if (isLanguageMenuOpen) {
 		languagePickerMenu?.classList.remove("opens");
 		menu?.classList.toggle("opens");
@@ -91,7 +113,6 @@ navButton?.addEventListener("click", () => {
 
 languagePickerButton?.addEventListener("click", () => {
 	const isMenuOpen = menu?.classList.contains("opens");
-
 	if (isMenuOpen) {
 		menu?.classList.remove("opens");
 		languagePickerMenu?.classList.toggle("opens");
@@ -114,5 +135,72 @@ overlay?.addEventListener("click", () => {
 });
 
 document
-	.querySelector(`.submenu-content a[href="${document.location.pathname}"]`)
+	.querySelector(`.submenu-content a[href="{document.location.pathname}"]`)
 	?.classList.add("current");
+
+// when active is unknown, loop over and remove any active link
+function removeActiveFromDrawers(navDrawers) {
+  for (const item of navDrawers) {
+    item.querySelector('a').classList.remove('active')
+  }
+}
+// add active to known link
+function addActiveToDrawer(drawer) {
+	drawer.querySelector('a').classList.add('active')
+}
+
+// TOC 
+const toggleBtn = document.getElementById("menu-toggle");
+const tocList = document.getElementById("menu");
+
+function updateTocVisibility() {
+	if (isTocScreen) {
+	  toggleBtn?.classList.add("show");
+	} else {
+	  toggleBtn?.classList.remove("show");
+	}
+  }
+
+// toc button on page load
+updateTocVisibility();
+
+// Listen for changes in screen size
+tocScreen.addEventListener("change", (event) => {
+  isTocScreen = event.matches;
+  updateTocVisibility();
+});
+
+// Toggle toc menu on button click
+toggleBtn?.addEventListener("click", (e) => {
+  if(tocList?.classList.contains("open")) {
+	toggleBtn.children[0].innerHTML = "&#x25BA;";
+	tocList.classList.remove("open");
+  } else {
+	toggleBtn.children[0].innerHTML = "&#x25BC;";
+	tocList.classList.add("open");
+  }
+});
+  
+// Open/Close sub TOC content on click
+document.querySelectorAll("#menu > li > a").forEach((link) => {
+	link.addEventListener("click", function (event) {
+	  event.preventDefault(); // stop navigation to submenu
+  
+	  // Find the closest parent <li>
+	  const closestLiParent = link.closest("li");
+	  const childUlSubMenu = closestLiParent.children[1];
+  
+	  // If submenu is already active, remove "active" class (toggle behavior)
+	  if (childUlSubMenu?.classList.contains("active")) {
+		childUlSubMenu.classList.remove("active");
+	  } else {
+		// Remove "active" from all other submenus
+		document.querySelectorAll("#menu > li > ul").forEach((subMenu) => {
+		  subMenu.classList.remove("active");
+		});
+  
+		// Add "active" to the clicked submenu
+		childUlSubMenu?.classList.add("active");
+	  }
+	});
+  });

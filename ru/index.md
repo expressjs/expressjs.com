@@ -12,12 +12,12 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
   <div id="homepage-leftpane" class="pane">
     <section id="description">
         <div class="express"><a href="/">Express</a></div>
-        <span class="description">Быстрый, гибкий, минималистичный веб-фреймворк для приложений <a href='http://nodejs.org'>Node.js</a></span>
+        <h1 class="description">Быстрый, гибкий, минималистичный веб-фреймворк для приложений <a href='http://nodejs.org'>Node.js</a></h1>
     </section>
     <div id="install-command">$ npm install express --save</div>
   </div>
   <div id="homepage-rightpane" class="pane">
-    <iframe src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
+    <iframe title="KEYNOTE: Express, State of the Union by Doug Wilson, Express - YouTube" src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
   </div>
 </section>
 
@@ -29,26 +29,20 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
 
   <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h3>Веб-приложения</h3> Express - это минималистичный и гибкий веб-фреймворк для приложений Node.js, предоставляющий обширный набор функций для мобильных и веб-приложений.
+          <h2>Веб-приложения</h2> Express - это минималистичный и гибкий веб-фреймворк для приложений Node.js, предоставляющий обширный набор функций для мобильных и веб-приложений.
       </div>
 
       <div id="apis">
-          <h3>API</h3> Имея в своем распоряжении множество служебных методов HTTP и промежуточных обработчиков, создать надежный API можно быстро и легко.
+          <h2>API</h2> Имея в своем распоряжении множество служебных методов HTTP и промежуточных обработчиков, создать надежный API можно быстро и легко.
       </div>
 
       <div id="performance">
-          <h3>Производительность</h3> Express предоставляет тонкий слой фундаментальных функций веб-приложений, которые не мешают вам работать с давно знакомыми и любимыми вами функциями Node.js.
+          <h2>Производительность</h2> Express предоставляет тонкий слой фундаментальных функций веб-приложений, которые не мешают вам работать с давно знакомыми и любимыми вами функциями Node.js.
       </div>
 
       <div id="sponsorship">
-          <a href="http://loopback.io/"><h3>LoopBack</h3> Разработка приложений, управляемых моделями, с помощью фреймворка на основе Express.<br/>Дополнительную информацию можно найти на странице loopback.io.</a>
+          <h2><a href="http://loopback.io/">LoopBack</a></h2><a href="http://loopback.io/"> Разработка приложений, управляемых моделями, с помощью фреймворка на основе Express.<br/>Дополнительную информацию можно найти на странице loopback.io.</a>
       </div>
   </div>
 
 </section>
-
-<!--
-<section id="announcements">
-  {% include announcement/announcement-{{ page.lang }}.md %}
-</section>
--->

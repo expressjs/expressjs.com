@@ -49,7 +49,7 @@ To preview the website locally:
 
 Jekyll uses a variant of Markdown known as [Kramdown](https://kramdown.gettalong.org/quickref.html).
 
-Jekyll uses the [Liquid template engine](http://liquidmarkup.org/) for templating.
+Jekyll uses the [Liquid template engine](https://shopify.github.io/liquid/) for templating.
 
 You can use [GFM](https://kramdown.gettalong.org/parser/gfm.html) fenced code blocks for JavaScript; for example:
 

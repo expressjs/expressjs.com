@@ -6,6 +6,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/migrating-5.html"
 ---
+
 # Moving to Express 5
 
 <h2 id="overview">Overview</h2>
@@ -55,6 +56,7 @@ You can find the list of available codemods [here](https://github.com/expressjs/
   <li><a href="#res.send.body">res.send(body, status)</a></li>
   <li><a href="#res.send.status">res.send(status)</a></li>
   <li><a href="#res.sendfile">res.sendfile()</a></li>
+  <li><a href="#express.static.mime">express.static.mime</a></li>
 </ul>
 
 **Changed**
@@ -330,6 +332,20 @@ app.get('/user', (req, res) => {
 app.get('/user', (req, res) => {
   res.sendFile('/path/to/file')
 })
+```
+
+<h4 id="express.static.mime">express.static.mime</h4>
+
+In Express 5, `mime` is no longer an exported property of the `static` field.
+Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work with MIME type values.
+
+```js
+// v4
+express.static.mime.lookup('json')
+
+// v5
+const mime = require('mime-types')
+mime.lookup('json')
 ```
 
 <h3>Changed</h3>
