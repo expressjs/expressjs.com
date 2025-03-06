@@ -13,29 +13,25 @@ description: Understand how Express.js handles errors in synchronous and asynchr
 오류 처리 함수는 3개가 아닌 4개의 인수, 즉 `(err, req, res, next)`를
 갖는다는 점이 다릅니다. 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-</code>
-</pre>
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 오류 처리 미들웨어는 다른 `app.use()` 및 라우트 호출을 정의한 후에 마지막으로 정의해야 하며, 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+```js
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
-app.use(bodyParser());
-app.use(methodOverride());
-app.use(function(err, req, res, next) {
+app.use(bodyParser())
+app.use(methodOverride())
+app.use((err, req, res, next) => {
   // logic
-});
-</code>
-</pre>
+})
+```
 
 미들웨어 함수 내부로부터의 응답은 HTML 오류 페이지, 단순한 메시지 또는 JSON 문자열 등 여러분이 선호하는 모든 형식일 수 있습니다.
 
@@ -44,78 +40,66 @@ app.use(function(err, req, res, next) {
 매우 비슷합니다. 예를 들어 `XHR`를 이용한 요청 및
 그렇지 않은 요청에 대한 오류 처리를 정의하려는 경우, 다음과 같은 명령을 사용할 수 있습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+```js
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
-app.use(bodyParser());
-app.use(methodOverride());
-app.use(logErrors);
-app.use(clientErrorHandler);
-app.use(errorHandler);
-</code>
-</pre>
+app.use(bodyParser())
+app.use(methodOverride())
+app.use(logErrors)
+app.use(clientErrorHandler)
+app.use(errorHandler)
+```
 
 이 예에서 일반 `logErrors`는 요청 및 오류 정보를 `stderr`에
 기록할 수도 있으며, 예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
-function logErrors(err, req, res, next) {
-  console.error(err.stack);
-  next(err);
+```js
+function logErrors (err, req, res, next) {
+  console.error(err.stack)
+  next(err)
 }
-</code>
-</pre>
+```
 
 또한 이 예에서 `clientErrorHandler`는 다음과 같이 정의되며, 이 경우 오류는 명시적으로 그 다음 항목으로 전달됩니다.
 
-<pre>
-<code class="language-javascript" translate="no">
-function clientErrorHandler(err, req, res, next) {
+```js
+function clientErrorHandler (err, req, res, next) {
   if (req.xhr) {
-    res.status(500).send({ error: 'Something failed!' });
+    res.status(500).send({ error: 'Something failed!' })
   } else {
-    next(err);
+    next(err)
   }
 }
-</code>
-</pre>
-
+```
 "모든 오류를 처리하는(catch-all)" `errorHandler` 함수는 다음과 같이 구현될 수 있습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
-function errorHandler(err, req, res, next) {
-  res.status(500);
-  res.render('error', { error: err });
+```js
+function errorHandler (err, req, res, next) {
+  res.status(500)
+  res.render('error', { error: err })
 }
-</code>
-</pre>
+```
 
 `next()` 함수로 어떠한 내용을 전달하는 경우(`'route'`라는 문자열 제외), Express는 현재의 요청에 오류가 있는 것으로 간주하며, 오류 처리와 관련되지 않은 나머지 라우팅 및 미들웨어 함수를 건너뜁니다. 이러한 오류를 어떻게든 처리하기 원하는 경우, 다음 섹션에 설명된 것과 같이 오류 처리 라우트를 작성해야 합니다.
 
 여러 콜백 함수를 갖는 라우트 핸들러가 있는 경우에는 `route` 매개변수를 사용하여 그 다음의 라우트 핸들러로 건너뛸 수 있습니다.  예를 들면 다음과 같습니다.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/a_route_behind_paywall',
-  function checkIfPaidSubscriber(req, res, next) {
-    if(!req.user.hasPaid) {
+  (req, res, next) => {
+    if (!req.user.hasPaid) {
 
       // continue handling this request
-      next('route');
+      next('route')
     }
-  }, function getPaidContent(req, res, next) {
-    PaidContent.find(function(err, doc) {
-      if(err) return next(err);
-      res.json(doc);
-    });
-  });
-</code>
-</pre>
-
+  }, (req, res, next) => {
+    PaidContent.find((err, doc) => {
+      if (err) return next(err)
+      res.json(doc)
+    })
+  })
+```
 이 예에서 `getPaidContent` 핸들러의 실행은 건너뛰지만, `/a_route_behind_paywall`에 대한 `app` 내의 나머지 핸들러는 계속하여 실행됩니다.
 
 <div class="doc-box doc-info" markdown="1">
@@ -142,16 +126,14 @@ Express는 내장된 오류 핸들러와 함께 제공되며, 내장 오류 핸�
 따라서 사용자 정의 오류 핸들러를 추가할 때, 헤더가 이미 클라이언트로 전송된 경우에는
 다음과 같이 Express 내의 기본 오류 처리 메커니즘에 위임해야 합니다:
 
-<pre>
-<code class="language-javascript" translate="no">
-function errorHandler(err, req, res, next) {
+```js
+function errorHandler (err, req, res, next) {
   if (res.headersSent) {
-    return next(err);
+    return next(err)
   }
-  res.status(500);
-  res.render('error', { error: err });
+  res.status(500)
+  res.render('error', { error: err })
 }
-</code>
-</pre>
+```
 
 만약 `next()`를 여러분의 코드에서 여러 번 호출한다면, 사용자 정의 오류 핸들러가 있음에도 불구하고 기본 오류 핸들러가 발동될 수 있음에 주의하십시오.

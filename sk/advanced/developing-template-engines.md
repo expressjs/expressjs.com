@@ -6,10 +6,6 @@ lang: sk
 description: Learn how to develop custom template engines for Express.js using app.engine(),
   with examples on creating and integrating your own template rendering logic.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Vývoj template enginov pre Express
 
@@ -17,38 +13,32 @@ Pre vytvorenie vlastného template enginu použite metódu `app.engine(ext, call
 
 Nasledujúci kód je príkladom implementácie veľmi jednoduchého template enginu pre rendrovanie `.ntl` súborov.
 
-<pre>
-<code class="language-javascript" translate="no">
-var fs = require('fs'); // this engine requires the fs module
-app.engine('ntl', function (filePath, options, callback) { // define the template engine
-  fs.readFile(filePath, function (err, content) {
-    if (err) return callback(new Error(err));
+```js
+const fs = require('fs') // this engine requires the fs module
+app.engine('ntl', (filePath, options, callback) => { // define the template engine
+  fs.readFile(filePath, (err, content) => {
+    if (err) return callback(new Error(err))
     // this is an extremely simple template engine
-    var rendered = content.toString().replace('#title#', '<title>'+ options.title +'</title>')
-    .replace('#message#', '<h1>'+ options.message +'</h1>');
-    return callback(null, rendered);
-  });
-});
-app.set('views', './views'); // specify the views directory
-app.set('view engine', 'ntl'); // register the template engine
-</code>
-</pre>
+    const rendered = content.toString().replace('#title#', `<title>${options.title}</title>`)
+      .replace('#message#', `<h1>${options.message}</h1>`)
+    return callback(null, rendered)
+  })
+})
+app.set('views', './views') // specify the views directory
+app.set('view engine', 'ntl') // register the template engine
+```
 
 Odteraz bude vaša aplikácia schopná rendrovať `.ntl` súbory. Vytvorte súbor s názvom `index.ntl` a `views` priečinok s nasledujúcim obsahom.
 
-<pre>
-<code class="language-javascript" translate="no">
+```pug
 #title#
 #message#
-</code>
-</pre>
+```
 Potom vo vašej aplikácii vytvorte takýto route:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+```
 Keď vykonáte request na home page, `index.ntl` bude vyrendrované ako HTML.

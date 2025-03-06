@@ -37,12 +37,12 @@ IP-адрес, подсеть или массив IP-адресов и подс�
 
 IP-адреса можно задать любым из указанных ниже способов:
 
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
+```js
+app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
-</pre>
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+```
 
 Если IP-адреса или подсети указаны, они исключаются из процесса определения адреса, и незащищенный IP-адрес, ближайший к серверу приложений, будет определен как IP-адрес клиента.
 </td>
@@ -57,12 +57,14 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify mult
       <td>Функция</td>
 <td markdown="1">
 Реализация нестандартного механизма защиты. Используйте этот метод, только если вы уверены в своих знаниях.
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', function (ip) {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
-  else return false;
-});</code>
-</pre>
+
+
+```js
+app.set('trust proxy', (ip) => {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
+  else return false
+})
+```
 </td>
     </tr>
   </tbody>

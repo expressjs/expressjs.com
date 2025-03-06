@@ -1,12 +1,12 @@
-<div id="blog-side-menu-container">
-  <h3>
-    <a href="/{{ page.lang }}/blog/posts">Posts</a>
-  </h3>
-  <ul id="blog-side-menu">
+<button id="menu-toggle" title="show blogs list">All Blogs <span>&#x25BA;</span></button>
+<ul id="menu" class="blog-side-menu">
+  <li>
+    <ul id="side-menu" class="active">
       {% for post in site.posts %}
     <li>
       <a href="{{post.url}}">{{ post.title }}</a>
     </li>
       {% endfor %}
   </ul>
-</div> 
+  </li>
+</ul> 

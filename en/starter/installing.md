@@ -14,7 +14,7 @@ Assuming you've already installed [Node.js](https://nodejs.org/), create a direc
 * [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
 * [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
 
-```console
+```bash
 $ mkdir myapp
 $ cd myapp
 ```
@@ -22,7 +22,7 @@ $ cd myapp
 Use the `npm init` command to create a `package.json` file for your application.
 For more information on how `package.json` works, see [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
 
-```console
+```bash
 $ npm init
 ```
 
@@ -37,13 +37,13 @@ Enter `app.js`, or whatever you want the name of the main file to be. If you wan
 
 Now, install Express in the `myapp` directory and save it in the dependencies list. For example:
 
-```console
+```bash
 $ npm install express
 ```
 
 To install Express temporarily and not add it to the dependencies list:
 
-```console
+```bash
 $ npm install express --no-save
 ```
 

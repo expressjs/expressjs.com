@@ -1,0 +1,96 @@
+<a id="top" href="#">{% include icons/arrow.svg %}</a>
+
+<footer>
+  <section id="doc-langs">
+    Documentation translations provided by StrongLoop/IBM:
+    <a href="/fr/">French</a>, <a href="/de/">German</a>, <a href="/es/">Spanish</a>, <a href="/it/">Italian</a>, <a
+      href="/ja/">Japanese</a>, <a href="/ru/">Russian</a>, <a href="/zh-cn/">Chinese</a>, <a href="/zh-tw/">Traditional
+      Chinese</a>, <a href="/ko/">Korean</a>, <a href="/pt-br/">Portuguese</a>.
+    <br>
+    Community translation available for: <a href="/sk/">Slovak</a>, <a href="/uk/">Ukrainian</a>, <a
+      href="/uz/">Uzbek</a>, <a href="/tr/">Turkish</a>, <a href="/th/">Thai</a> and <a href="/id/">Indonesian</a>.
+  </section>
+  <section id="footer-content">
+    <div id="footer-copyright">
+      <a href="https://openjsf.org/">
+        <img
+          src="https://raw.githubusercontent.com/openjs-foundation/artwork/main/openjs_foundation/openjs_foundation-logo-horizontal-color.svg"
+          alt="OpenJS Foundation" width="125" height="39" class="hidden-dark" />
+        <img
+          src="https://raw.githubusercontent.com/openjs-foundation/artwork/main/openjs_foundation/openjs_foundation-logo-horizontal-white.svg"
+          alt="OpenJS Foundation" width="125" height="39" class="hidden-light" />
+      </a>
+      <div id="footer-policy">
+        <a href="https://terms-of-use.openjsf.org">
+          {{ site.data[page.lang].footer.terms_of_use }}
+        </a>
+        <a href="https://privacy-policy.openjsf.org">
+          {{ site.data[page.lang].footer.privacy_policy }}
+        </a>
+        <a id="coc" href="https://github.com/expressjs/express/blob/master/Code-Of-Conduct.md">
+          {{ site.data[page.lang].footer.coc }}
+        </a>
+        <a href="https://trademark-policy.openjsf.org">
+          {{ site.data[page.lang].footer.trademark_policy }}
+        </a>
+        <a id="security" href="https://github.com/expressjs/express/security/policy">
+          {{ site.data[page.lang].footer.security_policy }}
+        </a>
+        <a id="license" href="https://github.com/expressjs/express/blob/master/LICENSE">
+          {{ site.data[page.lang].footer.license }}
+        </a>
+      </div>
+    </div>
+    <div id="footer-links">
+      <div class="footer-social">
+        <div>
+          <a href="https://github.com/expressjs/express" aria-label="Go to the repository on GitHub">
+            <span class="hidden-dark">
+              {% include icons/github-light.svg %}
+            </span>
+            <span class="hidden-light">
+              {% include icons/github-dark.svg %}
+            </span>
+          </a>
+        </div>
+        <div>
+          <a href="https://www.youtube.com/channel/UCYjxjAeH6TRik9Iwy5nXw7g"
+            aria-label="Go to the repository on Youtube">{% include icons/youtube.svg %}</a>
+        </div>
+        <div>
+          <a href="https://x.com/UseExpressJS" aria-label="Go to the repository on X">
+            <span class="hidden-dark">
+              {% include icons/x-light.svg %}
+            </span>
+            <span class="hidden-light">
+              {% include icons/x-dark.svg %}
+            </span>
+          </a>
+        </div>
+        <div>
+          <a href="https://openjs-foundation.slack.com/archives/C02QB1731FH"
+            aria-label="Go to the repository on Slack">{% include icons/slack.svg %}</a>
+        </div>
+        <div>
+          <a href="https://opencollective.com/express" aria-label="Go to the repository on Open Collective">{% include
+            icons/opencollective.svg %}</a>
+        </div>
+        <div>
+          <a href="https://bsky.app/profile/expressjs.bsky.social" aria-label="Go to the repository on Bluesky">{%
+            include icons/bluesky.svg %}</a>
+        </div>
+      </div>
+      <a href="https://www.netlify.com">
+        <img src="https://www.netlify.com/v3/img/components/netlify-color-accent.svg" alt="Preview Deploys by Netlify"
+          width="80" />
+      </a>
+    </div>
+  </section>
+</footer>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" onload="docsearch({
+  apiKey: '{{ site.data.docsearch.apiKey }}',
+  indexName: '{{ site.data.docsearch.indexName }}',
+  inputSelector: '#q',
+  algoliaOptions: { 'facetFilters': ['lang:{{ page.lang }}'] }
+})" async></script>

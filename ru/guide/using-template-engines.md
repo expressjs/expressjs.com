@@ -16,7 +16,7 @@ description: Discover how to integrate and use template engines like Pug, Handle
 
 Затем установите соответствующий пакет npm шаблонизатора:
 
-```console
+```bash
 $ npm install pug --save
 ```
 
@@ -28,33 +28,27 @@ $ npm install pug --save
 
 После указания механизма визуализации (view engine) не нужно указывать его или загружать модуль шаблонизатора в приложение; Express загружает модуль внутренними средствами, как показано далее (для примера, приведенного выше).
 
-<pre>
-<code class="language-javascript" translate="no">
-app.set('view engine', 'pug');
-</code>
-</pre>
+```js
+app.set('view engine', 'pug')
+```
 
 Создайте файл шаблона Pug с именем `index.pug` в каталоге `views` со следующим содержанием:
 
-<pre>
-<code class="language-javascript" translate="no">
+```pug
 html
   head
     title= title
   body
     h1= message
-</code>
-</pre>
+```
 
 Затем создайте маршрут для вывода файла `index.pug`. Если свойство `view engine` не задано, необходимо указать расширение файла `view`. В противном случае, можно не указывать расширение.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+```
 
 При выполнении запроса к домашней странице файл `index.pug` будет отображаться как HTML.
 

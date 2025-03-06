@@ -38,151 +38,134 @@ Express 應用程式可以使用下列類型的中介軟體：
 
 本例顯示沒有裝載路徑的中介軟體函數。每當應用程式收到要求時，就會執行此函數。
 
-<pre>
-<code class="language-javascript" translate="no">
-var app = express();
+```js
+const app = express()
 
-app.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
-</code>
-</pre>
+app.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
+```
 
 本例顯示裝載在 `/user/:id` 路徑的中介軟體函數。會對 `/user/:id` 路徑上任何類型的 HTTP 要求，執行此函數。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use('/user/:id', function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
-</code>
-</pre>
+```js
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+```
 
 本例顯示路由和其處理程式函數（中介軟體系統）。此函數會處理指向 `/user/:id` 路徑的 GET 要求。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
-  res.send('USER');
-});
-</code>
-</pre>
+```js
+app.get('/user/:id', (req, res, next) => {
+  res.send('USER')
+})
+```
 
 下列範例顯示使用裝載路徑在裝載點載入一系列中介軟體函數。其中說明中介軟體子堆疊，這個子堆疊會針對指向 `/user/:id` 路徑之任何類型的 HTTP 要求，列印其要求資訊。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
-}, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
-</code>
-</pre>
+```js
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+```
 
 路由處理程式可讓您為一個路徑定義多個路由。下列範例為指向 `/user/:id` 路徑的 GET 要求，定義兩個路由。第二個路由不會造成任何問題，卻絕不會呼叫，因為第一個路由會結束要求/回應循環。
 
 本例顯示中介軟體子堆疊，它處理了指向 `/user/:id` 路徑的 GET 要求。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
-  console.log('ID:', req.params.id);
-  next();
-}, function (req, res, next) {
-  res.send('User Info');
-});
+```js
+app.get('/user/:id', (req, res, next) => {
+  console.log('ID:', req.params.id)
+  next()
+}, (req, res, next) => {
+  res.send('User Info')
+})
 
 // handler for the /user/:id path, which prints the user ID
-app.get('/user/:id', function (req, res, next) {
-  res.end(req.params.id);
-});
-</code>
-</pre>
+app.get('/user/:id', (req, res, next) => {
+  res.end(req.params.id)
+})
+```
 
 如果要跳過路由器中介軟體堆疊中其餘的中介軟體函數，請呼叫 `next('route')`，將控制權傳遞給下一個路由。**附註**：
 `next('route')` 只適用於使用 `app.METHOD()` 或 `router.METHOD()` 函數載入的中介軟體函數。
 
 本例顯示中介軟體子堆疊，它處理了指向 `/user/:id` 路徑的 GET 要求。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
+```js
+app.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next route
-  if (req.params.id == 0) next('route');
+  if (req.params.id === '0') next('route')
   // otherwise pass the control to the next middleware function in this stack
-  else next(); //
-}, function (req, res, next) {
+  else next() //
+}, (req, res, next) => {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
-app.get('/user/:id', function (req, res, next) {
-  res.render('special');
-});
-</code>
-</pre>
+app.get('/user/:id', (req, res, next) => {
+  res.render('special')
+})
+```
 
 <h2 id='middleware.router'>路由器層次的中介軟體</h2>
 
 路由器層次的中介軟體的運作方式如同應用程式層次的中介軟體，不同之處在於它會連結至 `express.Router()` 實例。
 
-<pre>
-<code class="language-javascript" translate="no">
-var router = express.Router();
-</code>
-</pre>
+```js
+const router = express.Router()
+```
 請利用 `router.use()` 和 `router.METHOD()` 函數來載入路由器層次的中介軟體。
 
 下列的程式碼範例是使用路由器層次的中介軟體，抄寫上述針對應用程式層次的中介軟體顯示的中介軟體系統：
 
-<pre>
-<code class="language-javascript" translate="no">
-var app = express();
-var router = express.Router();
+```js
+const app = express()
+const router = express.Router()
 
 // a middleware function with no mount path. This code is executed for every request to the router
-router.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
+router.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
-router.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
-}, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
+router.use('/user/:id', (req, res, next) => {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
 
 // a middleware sub-stack that handles GET requests to the /user/:id path
-router.get('/user/:id', function (req, res, next) {
+router.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next router
-  if (req.params.id == 0) next('route');
+  if (req.params.id === '0') next('route')
   // otherwise pass control to the next middleware function in this stack
-  else next(); //
-}, function (req, res, next) {
+  else next() //
+}, (req, res, next) => {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
-router.get('/user/:id', function (req, res, next) {
-  console.log(req.params.id);
-  res.render('special');
-});
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id)
+  res.render('special')
+})
 
 // mount the router on the app
-app.use('/', router);
-</code>
-</pre>
-
+app.use('/', router)
+```
 <h2 id='middleware.error-handling'>錯誤處理中介軟體</h2>
 
 <div class="doc-box doc-notice" markdown="1">
@@ -191,14 +174,12 @@ app.use('/', router);
 
 錯誤處理中介軟體函數的定義方式，與其他中介軟體函數相同，差別在於引數是四個而非三個，具體來說，就是使用 `(err, req, res, next)`) 簽章：
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-</code>
-</pre>
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 如需錯誤處理中介軟體的詳細資料，請參閱：[錯誤處理](/{{ page.lang }}/guide/error-handling.html)。
 
@@ -227,9 +208,8 @@ Express 唯一的內建中介軟體函數是 `express.static`。此函數以 [se
 
 下列範例顯示如何使用 `express.static` 中介軟體函數，且其中詳細闡述了 options 物件：
 
-<pre>
-<code class="language-javascript" translate="no">
-var options = {
+```js
+const options = {
   dotfiles: 'ignore',
   etag: false,
   extensions: ['htm', 'html'],
@@ -237,23 +217,20 @@ var options = {
   maxAge: '1d',
   redirect: false,
   setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now());
+    res.set('x-timestamp', Date.now())
   }
 }
 
-app.use(express.static('public', options));
-</code>
-</pre>
+app.use(express.static('public', options))
+```
 
 每一個應用程式可有多個靜態目錄：
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(express.static('public'));
-app.use(express.static('uploads'));
-app.use(express.static('files'));
-</code>
-</pre>
+```js
+app.use(express.static('public'))
+app.use(express.static('uploads'))
+app.use(express.static('files'))
+```
 
 如需 `serve-static` 函數和其選項的詳細資料，請參閱 [serve-static](https://github.com/expressjs/serve-static) 說明文件。
 
@@ -265,19 +242,17 @@ app.use(express.static('files'));
 
 下列範例說明如何安裝和載入用來剖析 Cookie 的中介軟體函數 `cookie-parser`。
 
-```console
+```bash
 $ npm install cookie-parser
 ```
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-var cookieParser = require('cookie-parser');
+```js
+const express = require('express')
+const app = express()
+const cookieParser = require('cookie-parser')
 
 // load the cookie-parsing middleware
-app.use(cookieParser());
-</code>
-</pre>
+app.use(cookieParser())
+```
 
 如需 Express 中常用的部分協力廠商中介軟體函數清單，請參閱：[協力廠商中介軟體](../resources/middleware.html)。

@@ -17,8 +17,7 @@ En primer lugar, cree un directorio denominado `myapp`, cámbielo y ejecute `npm
 
 En el directorio `myapp`, cree un archivo denominado `app.js` y añada el código siguiente:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 const express = require('express')
 const app = express()
 const port = 3000
@@ -30,8 +29,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-</code>
-</pre>
+```
 
 La aplicación inicia un servidor y escucha las conexiones en el puerto 3000. La aplicación responde con "Hello World!" para las solicitudes al URL raíz (`/`) o a la *ruta* raíz. Para cada vía de acceso diferente, responderá con un error **404 Not Found**.
 
@@ -41,7 +39,7 @@ La aplicación inicia un servidor y escucha las conexiones en el puerto 3000. La
 
 Ejecute la aplicación con el siguiente mandato:
 
-```console
+```bash
 $ node app.js
 ```
 

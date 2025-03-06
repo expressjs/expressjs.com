@@ -13,13 +13,13 @@ Utilice la herramienta de generador de aplicaciones, `express`, para crear rápi
 
 Instale `express` con el siguiente mandato:
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 
 Muestre las opciones de mandato con la opción `-h`:
 
-```console
+```bash
 $ express -h
 
   Usage: express [options][dir]
@@ -41,7 +41,7 @@ $ express -h
 
 Por ejemplo, el código siguiente crea una aplicación Express denominada _myapp_. La aplicación será creada en una carpeta llamada _myapp_ en el directorio de trabajo actual y el motor de vistas será asignado a <a href="https://pugjs.org/" target="_blank" title="Documentación de Pug">Pug</a>:
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -65,20 +65,20 @@ $ express --view=pug myapp
 
 A continuación, instale las dependencias:
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 En MacOS o Linux, ejecute la aplicación con este mandato:
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 En Windows, utilice este mandato:
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -86,7 +86,7 @@ A continuación, cargue `http://localhost:3000/` en el navegador para acceder a 
 
 La aplicación generada tiene la siguiente estructura de directorios:
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

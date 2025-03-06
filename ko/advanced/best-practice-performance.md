@@ -76,7 +76,7 @@ Node.js 4.0 이상 또는 io.js 2.1.0 이상을 사용하는 경우, `--trace-sy
 
 #### 앱 활동에 대한 로깅
 
-앱 활동을 로깅하는 경우(예: 트래픽 또는 API 호출을 추적)에는 `console.log()`를 사용하는 대신 [Winston](https://www.npmjs.com/package/winston) 또는 [Bunyan](https://www.npmjs.com/package/bunyan)과 같은 로깅 라이브러리를 사용하십시오. 이 두 라이브러리에 대한 자세한 비교는 StrongLoop 블로그 게시물 [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/)을 참조하십시오.
+앱 활동을 로깅하는 경우(예: 트래픽 또는 API 호출을 추적)에는 `console.log()`를 사용하는 대신 [Winston](https://www.npmjs.com/package/winston) 또는 [Bunyan](https://www.npmjs.com/package/bunyan)과 같은 로깅 라이브러리를 사용하십시오. 이 두 라이브러리에 대한 자세한 비교는 StrongLoop 블로그 게시물 [Comparing Winston and Bunyan Node.js Logging](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/)을 참조하십시오.
 
 <a name="exceptions"></a>
 
@@ -94,7 +94,7 @@ Node 앱은 처리되지 않은 예외가 발생할 때 충돌이 발생합니�
 오류 처리의 기본사항 대한 자세한 내용은 다음을 참조하십시오.
 
 * [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
-* [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/)(StrongLoop 블로그)
+* [Building Robust Node Applications: Error Handling](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/robust-node-applications-error-handling/)(StrongLoop 블로그)
 
 #### 수행하지 않아야 하는 항목
 
@@ -171,10 +171,10 @@ app.get('/', wrap(async (req, res, next) => {
 
 
 `wrap()` 함수는 거부된 프로미스를 캐치해서 에러를 첫번째 인수로 두고 `next()`를 호출합니다. 자세한 정보는 다음을 참조하십시오.
-* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
+* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
 
 프로미스를 사용한 오류 처리에 대한 자세한 정보는 다음을 참조하십시오.
-* [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
+* [Promises in Node.js with Q – An Alternative to Callbacks](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
 
 <a name="env"></a>
 
@@ -320,13 +320,13 @@ StrongLoop Process Manager는 쉽게 systemd의 서비스로서 설치할 수 �
 
 StrongLoop PM을 systemd의 서비스로서 설치하는 방법은 다음과 같습니다.
 
-```console
+```bash
 $ sudo sl-pm-install --systemd
 ```
 
 이후 다음과 같이 서비스를 시작하십시오.
 
-```console
+```bash
 $ sudo sl-pm-install --systemd
 ```
 
@@ -389,14 +389,14 @@ StrongLoop Process Manager는 쉽게 Upstart의 서비스로 설치할 수 있�
 StrongLoop PM을 Upstart 1.4의 서비스로서 설치하는 방법은 다음과 같습니다.
 
 
-```console
+```bash
 $ sudo sl-pm-install
 ```
 
 이후 다음과 같이 서비스를 실행하십시오.
 
 
-```console
+```bash
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -426,7 +426,7 @@ StrongLoop Process Manager(PM)가 애플리케이션으로서 실행되면, Stro
 
 예를 들어 prod.foo.com에 앱을 배치했으며 StrongLoop PM이 포트 8701(기본값)에서 청취하는 경우를 가정하면, 다음과 같이 slc를 이용해 클러스터의 크기를 8로 설정할 수 있습니다.
 
-```console
+```bash
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 
@@ -440,7 +440,7 @@ PM2로 애플리케이션을 실행하고 있을 때, 특정한 수의 인스턴
 
 아래와 같은 방법으로 클러스터 모드를 킵니다.
 
-```console
+```bash
 # Start 4 worker processes
 $ pm2 start app.js -i 4
 # Auto-detect number of available CPUs and start that many worker processes
@@ -451,7 +451,7 @@ $ pm2 start app.js -i max
 
 실행이 시작되면, `app`으로 이름지어진 애플리케이션을 아래와 같은 방법으로 스케일링 할 수 있습니다.
 
-```console
+```bash
 # Add 3 more workers
 $ pm2 scale app +3
 # Scale to a specific number of workers

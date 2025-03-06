@@ -69,7 +69,7 @@ Se si sta effettuando la registrazione per motivi di debug, allora invece di uti
 
 #### Per l'attività dell'applicazione
 
-Se si sta registrando l'attività dell'applicazione (ad esempio, si sta tenendo traccia del traffico e delle chiamate API), invece di utilizzare `console.log()`, utilizzare una libreria di registrazione quale [Winston](https://www.npmjs.com/package/winston) o [Bunyan](https://www.npmjs.com/package/bunyan). Per un confronto dettagliato di queste due librerie, consultare il post del blog di StrongLoop [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
+Se si sta registrando l'attività dell'applicazione (ad esempio, si sta tenendo traccia del traffico e delle chiamate API), invece di utilizzare `console.log()`, utilizzare una libreria di registrazione quale [Winston](https://www.npmjs.com/package/winston) o [Bunyan](https://www.npmjs.com/package/bunyan). Per un confronto dettagliato di queste due librerie, consultare il post del blog di StrongLoop [Comparing Winston and Bunyan Node.js Logging](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
 
 <a name="exceptions"></a>
 
@@ -87,7 +87,7 @@ Prima di leggere questi argomenti, è necessario avere una conoscenza base della
 Per ulteriori informazioni sulle nozioni di base della gestione degli errori, consultare:
 
 * [Gestione degli errori in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
-* [Come creare applicazioni Node solide: Gestione degli errori](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (blog di StrongLoop)
+* [Come creare applicazioni Node solide: Gestione degli errori](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/robust-node-applications-error-handling/) (blog di StrongLoop)
 
 #### Cosa non fare
 
@@ -164,8 +164,8 @@ app.get('/', wrap(async (req, res, next) => {
 
 Per ulteriori informazioni sulla gestione degli errori mediante l'utilizzo di promises, consultare:
 
-* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
-* [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
+* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
+* [Promises in Node.js with Q – An Alternative to Callbacks](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
 
 <a name="env"></a>
 
@@ -198,23 +198,19 @@ Nello sviluppo, solitamente si impostano le variabili di ambiente nella shell in
 
 Con Upstart, utilizzare la parola chiave `env` nel file job. Ad esempio:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code>
-</pre>
+```
 
 Per ulteriori informazioni, consultare [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables).
 
 Con systemd, utilizzare la direttiva `Environment` nel file unit. Ad esempio:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code>
-</pre>
+```
 
 Per ulteriori informazioni, consultare [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
 
@@ -275,8 +271,7 @@ Systemd è un sistema Linux e un service manager. Le più importanti distribuzio
 
 Un file di configurazione del servizio systemd è denominato *unit file*, con un nome file che termina con .service. Segue un unit file di esempio per gestire un'applicazione Node direttamente (sostituire il testo in grassetto con i valori appropriati per il proprio sistema e applicazione):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -304,8 +299,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code>
-</pre>
+```
 Per ulteriori informazioni su systemd, consultare [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
 
 ##### StrongLoop PM in qualità di servizio systemd
@@ -314,13 +308,13 @@ Per ulteriori informazioni su systemd, consultare [systemd reference (man page)]
 
 Per installare StrongLoop PM in qualità di servizio systemd:
 
-```console
+```bash
 $ sudo sl-pm-install --systemd
 ```
 
 Successivamente, avviare il servizio con:
 
-```console
+```bash
 $ sudo /usr/bin/systemctl start strong-pm
 ```
 
@@ -334,8 +328,7 @@ Un servizio Upstart è definito in un file di configurazione del lavoro (anche n
 
 Creare un file denominato `myapp.conf` in `/etc/init/` con il seguente contenuto (sostituire il testo in grassetto con i valori appropriati per il proprio sistema e applicazione):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -363,8 +356,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code>
-</pre>
+```
 
 NOTA: questo script richiede Upstart 1.4 o versione successiva, supportato su Ubuntu 12.04-14.10.
 
@@ -384,13 +376,13 @@ Per ulteriori informazioni su Upstart, consultare [Upstart Intro, Cookbook and B
 
 Per installare StrongLoop PM in qualità di servizio Upstart 1.4:
 
-```console
+```bash
 $ sudo sl-pm-install
 ```
 
 Successivamente, eseguire il servizio con:
 
-```console
+```bash
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -418,7 +410,7 @@ Quando StrongLoop Process Manager (PM) esegue un'applicazione, la esegue automat
 
 Ad esempio, se l'applicazione è stata implementata su prod.foo.com e StrongLoop PM è in ascolto sulla porta 8701 (quella predefinita), per impostare la dimensione del cluster a otto utilizzando slc:
 
-```console
+```bash
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 

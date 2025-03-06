@@ -35,7 +35,7 @@ description: Discover how to integrate various databases with Express.js applica
 
 ### 安装
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -57,7 +57,7 @@ client.execute('select key from system.local', (err, result) => {
 
 ### 安装
 
-```console
+```bash
 $ npm install couchbase
 ```
 
@@ -94,7 +94,7 @@ bucket.query(query, [13], (err, result) => {
 
 ### 安装
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -130,7 +130,7 @@ books.list((err, body) => {
 
 ### 安装
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -157,7 +157,7 @@ db.put('name', 'LevelUP', (err) => {
 
 ### 安装
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -189,7 +189,7 @@ connection.end()
 
 ### 安装
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -235,7 +235,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
 
 ### 安装
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -262,7 +262,7 @@ apoc.query('match (n) return n').exec().then(
 
  注意: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
 
-```console
+```bash
 $ npm install oracledb
 ```
 
@@ -306,7 +306,7 @@ getEmployee(101)
 
 ### 安装
 
-```console
+```bash
 $ npm install pg-promise
 ```
 
@@ -331,7 +331,7 @@ db.one('SELECT $1 AS value', 123)
 
 ### 安装
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -366,7 +366,7 @@ client.hkeys('hash key', (err, replies) => {
 
 ### 安装
 
-```console
+```bash
 $ npm install tedious
 ```
 
@@ -427,7 +427,7 @@ function executeStatement () {
 
 ### 安装
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -461,7 +461,7 @@ db.close()
 
 ### 安装
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 

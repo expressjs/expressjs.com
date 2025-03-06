@@ -13,13 +13,13 @@ Dastur generatsiya qilish uchun `express` buyrug'idan foydalanishgiz mumkin, u d
 
 Uni o'rnatish uchun quyidagi buyruqlardan foydalaning.
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 
 Qo'shimcha amallarda foydalanish uchun `-h` qo'shimchasini yozing:
 
-```console
+```bash
 $ express -h
 
   Usage: express [options] [dir]
@@ -41,7 +41,7 @@ $ express -h
 
 Masalan, quyidagi buyruq _myapp_ nomi dasturni yaratadi.
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -65,20 +65,20 @@ $ express --view=pug myapp
 
 Keyin dasturning kerakli modullarni o'rnatish kerak bo'ladi:
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 Dasturni ishga tushurish (MacOS va Linux):
 
-```console
+```bash
 $ DEBUG=myapp ./bin/www
 ```
 
 Windowsda esa, quyidagicha:
 
-```console
+```bash
 > set DEBUG=myapp & node .\bin\www
 ```
 
@@ -86,7 +86,7 @@ Undan keyin brauzerda `http://localhost:3000/` manziligaa kirib dastur ishalayot
 
 Generatsiya qilingan dasturning strukturasi quyidagicha bo'ladi.
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

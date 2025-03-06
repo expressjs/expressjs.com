@@ -68,7 +68,7 @@ If you're logging for purposes of debugging, then instead of using `console.log(
 
 #### For app activity
 
-If you're logging app activity (for example, tracking traffic or API calls), instead of using `console.log()`, use a logging library like [Winston](https://www.npmjs.com/package/winston) or [Bunyan](https://www.npmjs.com/package/bunyan). For a detailed comparison of these two libraries, see the StrongLoop blog post [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
+If you're logging app activity (for example, tracking traffic or API calls), instead of using `console.log()`, use a logging library like [Winston](https://www.npmjs.com/package/winston) or [Bunyan](https://www.npmjs.com/package/bunyan). For a detailed comparison of these two libraries, see the StrongLoop blog post [Comparing Winston and Bunyan Node.js Logging](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
 
 ### Handle exceptions properly
 
@@ -84,7 +84,7 @@ Before diving into these topics, you should have a basic understanding of Node/E
 For more on the fundamentals of error handling, see:
 
 * [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
-* [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop blog)
+* [Building Robust Node Applications: Error Handling](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop blog)
 
 #### What not to do
 
@@ -157,9 +157,9 @@ app.get('/', wrap(async (req, res, next) => {
 
 The `wrap()` function is a wrapper that catches rejected promises and calls `next()` with the error as the first argument.
 For details, see [Asynchronous
-Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/#cleaner-code-with-generators).
+Error Handling in Express with Promises, Generators and ES7](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/#cleaner-code-with-generators).
 
-For more information about error-handling by using promises, see [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/).
+For more information about error-handling by using promises, see [Promises in Node.js with Q – An Alternative to Callbacks](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/).
 
 ## Things to do in your environment / setup {#in-environment}
 
@@ -298,13 +298,13 @@ You can easily install StrongLoop Process Manager as a systemd service. After yo
 
 To install StrongLoop PM as a systemd service:
 
-```console
+```bash
 $ sudo sl-pm-install --systemd
 ```
 
 Then start the service with:
 
-```console
+```bash
 $ sudo /usr/bin/systemctl start strong-pm
 ```
 
@@ -366,13 +366,13 @@ You can easily install StrongLoop Process Manager as an Upstart service. After y
 
 To install StrongLoop PM as an Upstart 1.4 service:
 
-```console
+```bash
 $ sudo sl-pm-install
 ```
 
 Then run the service with:
 
-```console
+```bash
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -400,7 +400,7 @@ When StrongLoop Process Manager (PM) runs an application, it automatically runs 
 
 For example, assuming you've deployed your app to prod.foo.com and StrongLoop PM is listening on port 8701 (the default), then to set the cluster size to eight using slc:
 
-```console
+```bash
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 
@@ -414,7 +414,7 @@ When running an application with PM2, you can enable **cluster mode** to run it 
 
 To enable cluster mode, start your application like so:
 
-```console
+```bash
 # Start 4 worker processes
 $ pm2 start npm --name my-app -i 4 -- start
 # Auto-detect number of available CPUs and start that many worker processes
@@ -425,7 +425,7 @@ This can also be configured within a PM2 process file (`ecosystem.config.js` or 
 
 Once running, the application can be scaled like so:
 
-```console
+```bash
 # Add 3 more workers
 $ pm2 scale my-app +3
 # Scale to a specific number of workers

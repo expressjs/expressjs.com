@@ -6,10 +6,6 @@ lang: sk
 description: Discover performance and reliability best practices for Express apps
   in production, covering code optimizations and environment setups for optimal performance.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Osvedčené postupy pre Express v produkcii: výkonnosť a spoľahlivosť
 
@@ -73,7 +69,7 @@ Ak používate na debugovanie logovanie pomocou `console.log()`, používajte ra
 
 #### Logovanie aktivít aplikácie
 
-Ak používate logovanie na sledovanie aktivít aplikácie (napr. sledovanie traffic-u, príp. API volaní), používajte namiesto `console.log()` logovacie knižnice, ako sú napr. [Winston](https://www.npmjs.com/package/winston) či [Bunyan](https://www.npmjs.com/package/bunyan). Ak vás zaujíma detailnejšie porovnanie týchto dvoch knižníc, prečítajte si tento blog post: [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
+Ak používate logovanie na sledovanie aktivít aplikácie (napr. sledovanie traffic-u, príp. API volaní), používajte namiesto `console.log()` logovacie knižnice, ako sú napr. [Winston](https://www.npmjs.com/package/winston) či [Bunyan](https://www.npmjs.com/package/bunyan). Ak vás zaujíma detailnejšie porovnanie týchto dvoch knižníc, prečítajte si tento blog post: [Comparing Winston and Bunyan Node.js Logging](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
 
 <a name="exceptions"></a>
 
@@ -91,7 +87,7 @@ Predtým, ako sa hlbšie pustíme do týchto tém, mali by ste mať základné z
 Pre viac informácií ohľadom základov error handlingu sa pozrite na:
 
 * [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
-* [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop blog)
+* [Building Robust Node Applications: Error Handling](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop blog)
 
 #### Čo nerobiť
 
@@ -169,8 +165,8 @@ app.get('/', wrap(async (req, res, next) => {
 
 Pre viac informácií ohľadom error handling-u použitím promises si prečítajte:
 
-* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
-* [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
+* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
+* [Promises in Node.js with Q – An Alternative to Callbacks](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
 
 <a name="env"></a>
 
@@ -203,23 +199,19 @@ Počas vývoja nastavujete environment premenné zvyčajne pomocou shellu, napr.
 
 Pomocou Upstart, použite kľúčové slovo `env` vo vašom job súbore. Napr.:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code>
-</pre>
+```
 
 Pre viac informácií si prečítajte [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables).
 
 Pomocou systemd, použite direktívu `Environment` vo vašom unit súbore. Napr.:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code>
-</pre>
+```
 
 Pre viac informácií si prečítajte [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
 
@@ -280,8 +272,7 @@ Systemd je správca služieb používaný niektorými distribúciami Linuxu. Vä
 
 Konfiguračný súbor pre systemd sa nazýva _unit file_, ktorého názov má príponu .service. Tu je príklad súboru pre priamu správu Node aplikácie (nahradte tučný text s hodnotami vášho systéme a aplikácie):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -309,8 +300,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code>
-</pre>
+```
 Pre viac informácií ohľadom systemd si prečítajte [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
 
 ##### StrongLoop PM ako systemd služba
@@ -319,13 +309,13 @@ StrongLoop PM možete jednoducho nainštalovať ako systemd službu. Následne, 
 
 Pre inštaláciu StrongLoop PM ako systemd služby spustite:
 
-```console
+```bash
 $ sudo sl-pm-install --systemd
 ```
 
 Potom spustite službu pomocou:
 
-```console
+```bash
 $ sudo /usr/bin/systemctl start strong-pm
 ```
 
@@ -339,8 +329,7 @@ Upstart služba je definovaná v konfiguračnom súbore (tiež nazývaný "job")
 
 Vytvorte súbor s názvom `myapp.conf` umiestnený v `/etc/init /` s nasledujúcim obsahom (nahraďte tučný text s hodnotami pre váš systém a aplikáciu):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -368,8 +357,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code>
-</pre>
+```
 
 Pozn.: Tento skript vyžaduje Upstart 1.4 príp. novší, podporovaný na Ubuntu 12.04-14.10.
 
@@ -389,13 +377,13 @@ StrongLoop PM možete jednoducho nainštalovať ako Upstart službu. Následne, 
 
 Pre inštaláciu StrongLoop PM ako Upstart 1.4 služby:
 
-```console
+```bash
 $ sudo sl-pm-install
 ```
 
 Pre spustenie služby:
 
-```console
+```bash
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -423,7 +411,7 @@ Keď StrongLoop Process Manager (PM) spúšta aplikáciu, aplikácia je spusten�
 
 Napr., predpokladajúc, že ste deployli vašu aplikáciu na prod.foo.com a StrongLoop PM počúva na porte 8701 (defaultný), tak nastavenie veľkosti clustera na osem vykonáte pomocou slc takto:
 
-```console
+```bash
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 

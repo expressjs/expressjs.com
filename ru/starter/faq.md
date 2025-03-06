@@ -48,26 +48,22 @@ Express поддерживает все шаблонизаторы, соглас
 В Express код 404 не является результатом ошибки. Обработчик ошибок
 не фиксирует их, потому что код ответа 404 указывает лишь на факт отсутствия дополнительной работы.  Другими словами, Express выполнил все функции промежуточной обработки и маршруты и обнаружил, что ни один из них не отвечает. Все, что вам нужно сделать, - добавить промежуточный обработчик в конец стека (после всех остальных функций) для обработки кода 404:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(req, res, next) {
-  res.status(404).send('Sorry cant find that!');
-});
-</code>
-</pre>
+```js
+app.use((req, res, next) => {
+  res.status(404).send('Sorry cant find that!')
+})
+```
 
 ## Как определяется обработчик ошибок?
 
 Функции промежуточного обработчика для обработки ошибок определяются так же, как и другие промежуточные обработчики, но с указанием не трех, а четырех аргументов в сигнатуре `(err, req, res, next)`).
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-</code>
-</pre>
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 Дополнительная информация содержится в разделе [Обработка ошибок](/{{ page.lang }}/guide/error-handling.html).
 

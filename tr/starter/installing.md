@@ -12,7 +12,7 @@ description: Learn how to install Express.js in your Node.js environment, includ
 [Node.js](https://nodejs.org/)'in kurulu olduğunu varsayarak, uygulamanızı
 barındıracak bir dizin oluşturun ve o dizine geçiş yapın.
 
-```console
+```bash
 $ mkdir myapp
 $ cd myapp
 ```
@@ -21,7 +21,7 @@ Uygulamanız için `package.json` dosyasını oluşturmak için `npm init` komut
 çalıştırın. 
 `package.json` dosyasının nasıl çalıştığı hakkında daha fazla bilgi edinmek için [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json) adresini kullanın.
 
-```console
+```bash
 $ npm init
 ```
 
@@ -29,7 +29,7 @@ Bu komut size uygulamanızın adı ve versiyonu gibi bir kaç soru yöneltecekti
 Şimdilik, çoğu soru için ENTER tuşuna basıp varsayılan ayarları uygulayabilirsiniz, aşağıdaki hariç:
 
 
-```console
+```bash
 entry point: (index.js)
 ```
 
@@ -38,13 +38,13 @@ entry point: (index.js)
 Şimdi Express'i `myapp` dizinine kurun ve bağımlı uygulamalar listesine ekleyin. Örneğin:
 
 
-```console
+```bash
 $ npm install express
 ```
 
 Express'i geçici olarak kurmak ve bağımlı uygulamalar listesine eklememek istiyorsanız:
 
-```console
+```bash
 $ npm install express --no-save
 ```
 

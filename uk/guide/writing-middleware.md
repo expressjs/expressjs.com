@@ -26,7 +26,7 @@ The following figure shows the elements of a middleware function call:
 
 <table id="mw-fig">
 <tr><td id="mw-fig-imgcell">
-<img src="/images/express-mw.png" id="mw-fig-img" />
+<img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
 </td>
 <td class="mw-fig-callouts">
 <div class="callout" id="callout1">HTTP method for which the middleware function applies.</div>
@@ -50,26 +50,26 @@ The remainder of this article will define and add two middleware functions to th
 one called `myLogger` that prints a simple log message and another called `requestTime` that
 displays the timestamp of the HTTP request.
 
-<pre><code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000);
-</code></pre>
+app.listen(3000)
+```
 
 <h3>Middleware function myLogger</h3>
 Here is a simple example of a middleware function called "myLogger". This function just prints "LOGGED" when a request to the app passes through it. The middleware function is assigned to a variable named `myLogger`.
 
-<pre><code class="language-javascript" translate="no">
-var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
-</code></pre>
+```js
+const myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Notice the call above to `next()`.  Calling this function invokes the next middleware function in the app.
@@ -80,23 +80,23 @@ To avoid confusion, always use this convention.
 To load the middleware function, call `app.use()`, specifying the middleware function.
 For example, the following code loads the `myLogger` middleware function before the route to the root path (/).
 
-<pre><code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
+const myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
 
-app.use(myLogger);
+app.use(myLogger)
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000);
-</code></pre>
+app.listen(3000)
+```
 
 Every time the app receives a request, it prints the message "LOGGED" to the terminal.
 
@@ -111,34 +111,34 @@ The middleware function `myLogger` simply prints a message, then passes on the r
 Next, we'll create a middleware function called "requestTime" and add it as a property called `requestTime` 
 to the request object. 
 
-<pre><code class="language-javascript" translate="no">
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
-</code></pre>
+```js
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
+```
 
 The app now uses the `requestTime` middleware function. Also, the callback function of the root path route uses the property that the middleware function adds to `req` (the request object).
 
-<pre><code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
 
-app.use(requestTime);
+app.use(requestTime)
 
-app.get('/', function (req, res) {
-  var responseText = 'Hello World!<br>';
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-  res.send(responseText);
-});
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>'
+  responseText += `<small>Requested at: ${req.requestTime}</small>`
+  res.send(responseText)
+})
 
-app.listen(3000);
-</code></pre>
+app.listen(3000)
+```
 
 When you make a request to the root of the app, the app now displays the timestamp of your request in the browser.
 

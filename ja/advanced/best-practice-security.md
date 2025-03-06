@@ -58,7 +58,7 @@ Helmet は、実際には、セキュリティー関連の HTTP ヘッダーを�
 
 その他のモジュールと同様に Helmet をインストールします。
 
-```console
+```bash
 $ npm install --save helmet
 ```
 
@@ -152,7 +152,7 @@ npm を使用したアプリケーションの依存関係の管理は、強力�
 
 npm@6以降、npmはすべてのインストール要求を自動的に確認します。また、'npm audit'を使用して依存関係ツリーを分析することもできます。
 
-```console
+```bash
 $ npm audit
 ```
 
@@ -160,14 +160,14 @@ $ npm audit
 
 Snykは、[Snykのオープンソース脆弱性データベース](https://snyk.io/vuln/)に対して、依存関係の既知の脆弱性に対するアプリケーションをチェックする[コマンドラインツール](https://www.npmjs.com/package/snyk)と[Github integration](https://snyk.io/docs/github)を提供しています。 次のようにCLIをインストールします。
 
-```console
+```bash
 $ npm install -g snyk
 $ cd your-app
 ```
 
 このコマンドを使用して、アプリケーションの脆弱性をテストします。
 
-```console
+```bash
 $ snyk test
 ```
 
@@ -181,7 +181,7 @@ $ snyk test
 
 次に、優れた [Node.js セキュリティー・チェックリスト](https://blog.risingstack.com/node-js-security-checklist/)に記載されているその他の推奨事項をリストします。これらの推奨事項の詳細については、ブログの投稿を参照してください。
 
-* 認証に対する総当たり攻撃を防止するために、回数制限を実装してください。そのための 1 つの方法では、[StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) を使用して回数制限ポリシーを適用します。あるいは、[express-limiter](https://www.npmjs.com/package/express-limiter) などのミドルウェアを使用できますが、そのためにはコードを若干変更する必要があります。
+* 認証に対する総当たり攻撃を防止するために、回数制限を実装してください。そのための 1 つの方法では、[StrongLoop API Gateway](https://web.archive.org/web/20240000000000/https://strongloop.com/node-js/api-gateway/) を使用して回数制限ポリシーを適用します。あるいは、[express-limiter](https://www.npmjs.com/package/express-limiter) などのミドルウェアを使用できますが、そのためにはコードを若干変更する必要があります。
 * クロスサイト・スクリプティング (XSS) とコマンド・インジェクション攻撃から保護するために、必ず、ユーザー入力のフィルタリングとサニタイズを実行してください。
 * パラメーター化照会または作成済みステートメントを使用して、SQL インジェクション攻撃に対して防衛してください。
 * オープン・ソースの [sqlmap](http://sqlmap.org/) ツールを使用して、アプリケーションの SQL インジェクションに対する脆弱性を検出してください。

@@ -33,7 +33,7 @@ description: Discover how to integrate various databases with Express.js applica
 **Модуль**: [cassandra-driver](https://github.com/datastax/nodejs-driver) -
 **Установка**
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -58,7 +58,7 @@ client.execute('select key from system.local', function(err, result) {
 **Модуль**: [nano](https://github.com/dscape/nano) -
 **Установка**
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -91,7 +91,7 @@ books.list(function(err, body){
 **Модуль**: [levelup](https://github.com/rvagg/node-levelup) -
 **Установка**
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -121,7 +121,7 @@ db.put('name', 'LevelUP', function (err) {
 **Модуль**: [mysql](https://github.com/felixge/node-mysql/) -
 **Установка**
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -154,7 +154,7 @@ connection.end();
 **Модуль**: [mongodb](https://github.com/mongodb/node-mongodb-native) -
 **Установка**
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -187,7 +187,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
 **Модуль**: [apoc](https://github.com/hacksparrow/apoc) -
 **Установка**
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -215,7 +215,7 @@ apoc.query('match (n) return n').exec().then(
 **Модуль**: [pg-promise](https://github.com/vitaly-t/pg-promise) -
 **Установка**
 
-```console
+```bash
 $ npm install pg-promise
 ```
 
@@ -243,7 +243,7 @@ db.one("SELECT $1 AS value", 123)
 **Модуль**: [redis](https://github.com/mranney/node_redis) -
 **Установка**
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -281,7 +281,7 @@ client.hkeys('hash key', function (err, replies) {
 **Модуль**: [sqlite3](https://github.com/mapbox/node-sqlite3) -
 **Установка**
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -319,7 +319,7 @@ db.close();
 **Модуль**: [elasticsearch](https://github.com/elastic/elasticsearch-js) -
 **Установка**
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 

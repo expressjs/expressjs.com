@@ -65,7 +65,7 @@ Express 2.x 및 3.x에 대한 유지보수는 더 이상 이루어지지 않습�
 
 다른 모든 모듈처럼 Helmet은 다음과 같이 설치할 수 있습니다.
 
-```console
+```bash
 $ npm install --save helmet
 ```
 
@@ -162,7 +162,7 @@ npm을 이용해 애플리케이션의 종속 항목을 관리하는 것은 강�
 
 npm@6부터 npm은 자동으로 모든 설치 요청을 검사합니다. 또한 `npm audit`을 이용해 여러분의 의존성 트리를 검사할 수 있습니다.
 
-```console
+```bash
 $ npm audit
 ```
 
@@ -171,14 +171,14 @@ $ npm audit
 Snyk offers both a [command-line tool](https://www.npmjs.com/package/snyk) and a [Github 통합](https://snyk.io/docs/github) that checks your application against [Snyk's open source vulnerability database](https://snyk.io/vuln/) for any known vulnerabilities in your dependencies. Install the CLI as follows:
 Sync는 [커맨드라인 도구](https://www.npmjs.com/package/snyk)와 [Snyk's open source vulnerability database](https://snyk.io/vuln/)에 있는 여러분의 의존성들의 알려진 취약성에 대한 검사를 실행하는 [Github integration](https://snyk.io/docs/github)을 제공합니다. 아래 커맨드로 설치합니다.
 
-```console
+```bash
 $ npm install -g snyk
 $ cd your-app
 ```
 
 아래 명령으로 애플리케이션의 취약점을 검사합니다.
 
-```console
+```bash
 $ snyk test
 ```
 

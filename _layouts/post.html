@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 <html lang="{{ page.lang }}">
   {% include head.html %}
   
   <body>
+    {% include header.html %}
+    <div id="overlay"></div>
     
-    <section class="content">
-
-      {% include header/header-{{ page.lang }}.html %}
-
-      {% include blog/posts-menu.md %}
-
-      <div id="overlay"></div>
-      <div id="blog-doc" markdown="1">
+    <div class="content flex-row-content">
+      <nav aria-labelledby="sidebar-heading">
+        <div class="toc-container">
+          <h3 id="sidebar-heading" class="toc-heading"><em>Blog posts</em></h3>
+          {% include blog/posts-menu.md %}
+        </div>
+      </nav>
+      <main id="blog-doc" markdown="1">
           {% if page.title %}
           <h1>{{page.title}}</h1>
           {% endif %} 
@@ -29,10 +27,10 @@
             <div class="blog-date">{{page.date| date: "%d %b %Y" }}</div>
           </div>
         {{ content }}
-      </div>
-    </section>
+      </main>
+    </div>
 
-    {% include footer/footer-{{ page.lang }}.html %}
+    {% include footer.html %}
 
   </body>
 

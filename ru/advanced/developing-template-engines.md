@@ -13,38 +13,32 @@ description: Learn how to develop custom template engines for Express.js using a
 
 Приведенный ниже код служит примером реализации самого простого шаблонизатора для вывода файлов `.ntl`.
 
-<pre>
-<code class="language-javascript" translate="no">
-var fs = require('fs'); // this engine requires the fs module
-app.engine('ntl', function (filePath, options, callback) { // define the template engine
-  fs.readFile(filePath, function (err, content) {
-    if (err) return callback(new Error(err));
+```js
+const fs = require('fs') // this engine requires the fs module
+app.engine('ntl', (filePath, options, callback) => { // define the template engine
+  fs.readFile(filePath, (err, content) => {
+    if (err) return callback(new Error(err))
     // this is an extremely simple template engine
-    var rendered = content.toString().replace('#title#', '<title>'+ options.title +'</title>')
-    .replace('#message#', '<h1>'+ options.message +'</h1>');
-    return callback(null, rendered);
-  });
-});
-app.set('views', './views'); // specify the views directory
-app.set('view engine', 'ntl'); // register the template engine
-</code>
-</pre>
+    const rendered = content.toString().replace('#title#', `<title>${options.title}</title>`)
+      .replace('#message#', `<h1>${options.message}</h1>`)
+    return callback(null, rendered)
+  })
+})
+app.set('views', './views') // specify the views directory
+app.set('view engine', 'ntl') // register the template engine
+```
 
 Теперь ваше приложение сможет отображать файлы `.ntl`. Создайте файл с именем `index.ntl` в каталоге `views` со следующим содержимым.
 
-<pre>
-<code class="language-javascript" translate="no">
+```pug
 #title#
 #message#
-</code>
-</pre>
+```
 Затем создайте следующий маршрут в своем приложении.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+```
 При выполнении запроса к домашней странице файл `index.ntl` будет отображаться как HTML.

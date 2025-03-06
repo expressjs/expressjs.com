@@ -93,20 +93,20 @@ de Cross-site scripting (XSS) nos navegadores da web mais recentes.
 
 Instale o Helmet como qualquer outro módulo:
 
-```console
+```bash
 $ npm install --save helmet
 ```
 
 Em seguida use-o no seu código:
 
-<pre>
-<code class="language-javascript" translate="no">
-...
-var helmet = require('helmet');
-app.use(helmet());
-...
-</code>
-</pre>
+```js
+/// ...
+
+const helmet = require('helmet')
+app.use(helmet())
+
+/// ...
+```
 
 ### No mínimo, desative o cabeçalho X-Powered-By
 
@@ -119,11 +119,9 @@ especificamente direcionados a eles.
 Portanto, a melhor prática é desligar o cabeçalho com o método
 `app.disable()`:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.disable('x-powered-by');
-</code>
-</pre>
+```js
+app.disable('x-powered-by')
+```
 
 Se usar o `helmet.js`, ele cuida disso por você.
 
@@ -166,17 +164,15 @@ ataques de acordo com ele.
 Para evitar este problema, use nomes de cookie genéricos; por
 exemplo usando o middleware [express-session](https://www.npmjs.com/package/express-session):
 
-<pre>
-<code class="language-javascript" translate="no">
-var session = require('express-session');
+```js
+const session = require('express-session')
 app.set('trust proxy', 1) // trust first proxy
-app.use( session({
-   secret : 's3Cur3',
-   name : 'sessionId',
-  })
-);
-</code>
-</pre>
+app.use(session({
+  secret: 's3Cur3',
+  name: 'sessionId'
+})
+)
+```
 
 ### Configure as opções de segurança de cookie
 
@@ -194,26 +190,25 @@ expiração para cookies persistentes.
 
 Aqui está um exemplo usando o middleware [cookie-session](https://www.npmjs.com/package/cookie-session):
 
-<pre>
-<code class="language-javascript" translate="no">
-var session = require('cookie-session');
-var express = require('express');
-var app = express();
+```js
+const session = require('cookie-session')
+const express = require('express')
+const app = express()
 
-var expiryDate = new Date( Date.now() + 60 * 60 * 1000 ); // 1 hour
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],
-  cookie: { secure: true,
-            httpOnly: true,
-            domain: 'example.com',
-            path: 'foo/bar',
-            expires: expiryDate
-          }
-  })
-);
-</code>
-</pre>
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    domain: 'example.com',
+    path: 'foo/bar',
+    expires: expiryDate
+  }
+})
+)
+```
 
 ## Considerações adicionais
 
@@ -222,7 +217,7 @@ de Verificação de Segurança do Node.js](https://blog.risingstack.com/node-js-
 
 * Implemente limitações de tráfego para evitar ataques de força
 bruta contra a autenticação.  Uma forma de fazer isso é usar o [Gateway
-da API do StrongLoop](https://strongloop.com/node-js/api-gateway/) para impingir políticas de limitação de tráfego.  Alternativamente,
+da API do StrongLoop](https://web.archive.org/web/20240000000000/https://strongloop.com/node-js/api-gateway/) para impingir políticas de limitação de tráfego.  Alternativamente,
 é possível usar um middleware como o [express-limiter](https://www.npmjs.com/package/express-limiter),
 mas fazer isso  irá requerer que você modifique seu código de alguma forma.
 * Sempre filtrar e limpar a entrada do usuário para se proteger de ataques de cross-site scripting (XSS) e injeção de comando.

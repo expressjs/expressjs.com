@@ -20,7 +20,7 @@ usado. Por Exemplo: `app.set('view engine', 'pug')`
 
 Em seguida instale o pacote npm correspondente ao mecanismo de modelo:
 
-```console
+```bash
 $ npm install pug --save
 ```
 
@@ -41,25 +41,21 @@ precisa especificar o mecanismo ou carregar o módulo do mecanismo de
 modelo no seu aplicativo; o Express carrega o módulo internamente,
 como mostrado abaixo (para o exemplo acima).
 
-<pre>
-<code class="language-javascript" translate="no">
-app.set('view engine', 'pug');
-</code>
-</pre>
+```js
+app.set('view engine', 'pug')
+```
 
 Crie um arquivo de modelo do Pug
 chamado `index.pug` no diretório
 `views`, com o seguinte conteúdo:
 
-<pre>
-<code class="language-javascript" translate="no">
+```pug
 html
   head
     title= title
   body
     h1= message
-</code>
-</pre>
+```
 
 Em seguida crie uma rota para renderizar o arquivo
 `index.pug`. Se a propriedade `view
@@ -67,13 +63,11 @@ engine` não estiver configurada, é preciso especificar a
 extensão do arquivo `view`. Caso contrário, é
 possível omití-la.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+```
 
 Ao fazer uma solicitação à página inicial, o arquivo `index.pug` será renderizado como HTML.
 

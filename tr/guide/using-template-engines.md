@@ -14,7 +14,7 @@ _Şablon motoru_, uygulamanızda statik şablon dosyaları kullanmanızı sağla
 Express ile çalışan bazı popüler şablon motorları: [Pug](https://pugjs.org/api/getting-started.html), [Mustache](https://www.npmjs.com/package/mustache), ve [EJS](https://www.npmjs.com/package/ejs). [Express uygulama üreteci (generator)](/{{ page.lang }}/starter/generator.html) varsayılan olarak [Jade](https://www.npmjs.com/package/jade) kullanıyor, ancak aynı zamanda diğerlerini de destekler.
 
 Express ile kullanabileceğiniz şablon motorları listesi için bakınız [Şablon Motorları (Express wiki)](https://github.com/expressjs/express/wiki#template-engines).
-Ayrıca bakınız: [JavaScript Şablonlama Motorlarını Karşılaştırma:: Jade, Mustache, Dust ve Daha fazla](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/).
+Ayrıca bakınız: [JavaScript Şablonlama Motorlarını Karşılaştırma:: Jade, Mustache, Dust ve Daha fazla](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/).
 
 <div class="doc-box doc-notice" markdown="1">
 **Not**: Jade, [Pug](https://www.npmjs.com/package/pug) olarak değiştirildi. Uygulamanızda Jade kullanmaya devam edebilirsiniz, ve problem olmadan çalışacaktır. Ancak şablon motorunun en son güncellemelerini almak istiyorsanız, uygulamanızda Jade'i Pug ile değiştirmelisiniz.
@@ -29,7 +29,7 @@ Bu varsayılan olarak uygulamanın kök dizindeki `views` dizinine denk gelir.
 
 Daha sonra ise, ilgili şablon motorunun npm paketini yükleyin; örneğin Pug yüklemek için:
 
-```console
+```bash
 $ npm install pug --save
 ```
 

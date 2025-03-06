@@ -33,7 +33,7 @@ search on the [npm](https://www.npmjs.com/) site.
 **Module**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Installation**
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -56,7 +56,7 @@ client.execute('select key from system.local', function(err, result) {
 **Module**: [nano](https://github.com/dscape/nano)
 **Installation**
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -87,7 +87,7 @@ books.list(function(err, body){
 **Module**: [levelup](https://github.com/rvagg/node-levelup)
 **Installation**
 
-```console
+```bash
 $ npm install level
 ```
 
@@ -115,7 +115,7 @@ db.put('name', 'LevelUP', function (err) {
 **Module**: [mysql](https://github.com/felixge/node-mysql/)
 **Installation**
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -146,7 +146,7 @@ connection.end();
 **Module**: [mongoskin](https://github.com/kissjs/node-mongoskin)
 **Installation**
 
-```console
+```bash
 $ npm install mongoskin
 ```
 
@@ -170,7 +170,7 @@ If you want a object model driver for MongoDB, checkout [Mongoose](https://githu
 **Module**: [apoc](https://github.com/hacksparrow/apoc)
 **Installation**
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -196,7 +196,7 @@ apoc.query('match (n) return n').exec().then(
 **Module**: [pg](https://github.com/brianc/node-postgres)
 **Installation**
 
-```console
+```bash
 $ npm install pg
 ```
 
@@ -229,7 +229,7 @@ pg.connect(conString, function(err, client, done) {
 **Module**: [redis](https://github.com/mranney/node_redis)
 **Installation**
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -265,7 +265,7 @@ client.hkeys('hash key', function (err, replies) {
 **Module**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Installation**
 
-```console
+```bash
 $ npm install sqlite3
 ```
 

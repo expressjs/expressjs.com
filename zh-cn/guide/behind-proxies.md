@@ -35,12 +35,12 @@ description: Learn how to configure Express.js applications to work correctly be
 
 您可以按以下某种方法设置 IP 地址：
 
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
+```js
+app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
-</pre>
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+```
 
 如果指定 IP 地址或子网，那么会在地址确定过程中排除这些项，而将最接近应用程序服务器的不受信任的 IP 地址确定为客户机的 IP 地址。
 </td>
@@ -55,12 +55,14 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify mult
       <td>函数</td>
 <td markdown="1">
 定制信任实现。仅当您知道自己要做什么时，方可使用该选项。
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', function (ip) {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
-  else return false;
-});</code>
-</pre>
+
+
+```js
+app.set('trust proxy', (ip) => {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
+  else return false
+})
+```
 </td>
     </tr>
   </tbody>

@@ -1,0 +1,59 @@
+# Home
+home: Inicio
+
+# Getting started
+getting_started: Cómo empezar
+installing: Instalación
+hello_world: Hello world
+generator: Generador de Express
+basic_routing: Direccionamiento básico
+static_files: Archivos estáticos
+examples: More examples
+faq: Preguntas más frecuentes
+
+# Guide
+guide: Guía
+routing: Direccionamiento
+writing_middleware: Escritura de middleware
+using_middleware: Utilización del middleware
+overriding_express_api: Overriding the Express API
+using_template_engines: Utilización de motores de plantilla
+error_handling: Manejo de errores
+debugging: Depuración
+behind_proxies: Express detrás de proxies
+migrating_4: Migración a Express 4
+migrating_5: Migración a Express 5
+database_integration: Integración de la base de datos
+
+# API reference
+api: Referencia de API
+5x: 5.x
+4x: 4.x
+3x: 3.x (en desuso)
+2x: 2.x (en desuso)
+
+# Advanced topics
+advanced: Temas avanzados
+developing_template_engines: Motores de plantilla
+security_updates: Actualizaciones de seguridad
+best_practice_security: Mejores prácticas de seguridad
+best_practice_performance: Mejores prácticas de rendimiento
+healthcheck_graceful_shutdown: Health checks & shutdown
+
+# Resources
+resources: Recursos
+glossary: Glosario
+middleware: Middleware
+community: Comunidad
+utils: Utility modules
+contributing: Contributing to Express
+changelog: Release Change Log
+
+# Support
+support: Support
+
+# Blog
+blog: Blog
+latest_post: Latest post
+all_posts: All posts
+write_post: Write a Post

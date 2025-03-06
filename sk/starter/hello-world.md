@@ -6,10 +6,6 @@ lang: sk
 description: Get started with Express.js by building a simple 'Hello World' application,
   demonstrating the basic setup and server creation for beginners.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Hello world príklad
 
@@ -21,8 +17,7 @@ Najskôr si vytvorte priečinok s názvom `myapp`, presuňte sa tam a spustite p
 
 V priečinku `myapp` vytvorte súbor s názvom `app.js` a vložte do neho nasledovný kód:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 const express = require('express')
 const app = express()
 const port = 3000
@@ -34,8 +29,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-</code>
-</pre>
+```
 
 Aplikácia naštartuje server a na porte 3000 začne počúvať na pripojenia. Aplikácia odpovie "Hello World!" na request na hlavnú URL (`/`) alebo _route_. Pre každú inú URL odpovie prostredníctvom **404 Not Found**.
 
@@ -45,7 +39,7 @@ Request (požiadavka) `req` a response (odpoveď) `res` sú presne rovnaké obje
 
 Spustite aplikáciu pomocou nasledujúceho príkazu:
 
-```console
+```bash
 $ node app.js
 ```
 

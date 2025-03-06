@@ -1,0 +1,60 @@
+# Home
+home: Главная
+
+# Getting started
+getting_started: Начало работы
+installing: Установка
+hello_world: Hello world
+generator: Генератор приложений Express
+basic_routing: Основы маршрутизации
+static_files: Статические файлы
+examples: More examples
+faq: FAQ
+
+# Guide
+guide: Руководство
+routing: Маршрутизация
+writing_middleware: Написание кода промежуточных обработчиков
+using_middleware: Использование промежуточных обработчиков
+overriding_express_api: Overriding the Express API
+using_template_engines: Использование шаблонизаторов
+error_handling: Обработка ошибок
+debugging: Отладка
+behind_proxies: Express за прокси
+migrating_4: Переход к Express 4
+migrating_5: Переход к Express 5
+database_integration: Интеграция с базами данных
+
+# API reference
+
+api: API
+5x: 5.x
+4x: 4.x
+3x: 3.x (устарел)
+2x: 2.x (устарел)
+
+# Advanced topics
+advanced: Расширенные возможности
+developing_template_engines: Шаблонизаторы
+security_updates: Обновления системы безопасности
+best_practice_security: Лучшие практические методы в области защиты
+best_practice_performance: Лучшие практические методы улучшения производительности
+healthcheck_graceful_shutdown: Health checks & shutdown
+
+# Resources
+resources: Ресурсы
+glossary: Глоссарий
+middleware: Промежуточный обработчик
+community: Сообщество
+utils: Utility modules
+contributing: Contributing to Express
+changelog: Release Change Log
+
+# Support
+support: Support
+
+# Blog
+blog: Blog
+latest_post: Latest post
+all_posts: All posts
+write_post: Write a Post

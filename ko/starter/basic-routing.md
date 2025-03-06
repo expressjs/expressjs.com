@@ -15,11 +15,9 @@ description: Learn the fundamentals of routing in Express.js applications, inclu
 각 라우트는 하나 이상의 핸들러 함수를 가질 수 있으며, 이러한 함수는 라우트가 일치할 때 실행됩니다.
 
 라우트 정의에는 다음과 같은 구조가 필요합니다.
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 여기서,
 
@@ -36,42 +34,34 @@ app.METHOD(PATH, HANDLER)
 
 홈 페이지에서 `Hello World!`로 응답:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+```
 
 애플리케이션의 홈 페이지인 루트 라우트(`/`)에서 POST 요청에 응답:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
-</code>
-</pre>
+```js
+app.post('/', (req, res) => {
+  res.send('Got a POST request')
+})
+```
 
 `/user` 라우트에 대한 PUT 요청에 응답:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user');
-});
-</code>
-</pre>
+```js
+app.put('/user', (req, res) => {
+  res.send('Got a PUT request at /user')
+})
+```
 
 `/user` 라우트에 대한 DELETE 요청에 응답:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user');
-});
-</code>
-</pre>
+```js
+app.delete('/user', (req, res) => {
+  res.send('Got a DELETE request at /user')
+})
+```
 
 라우팅에 대한 자세한 내용을 확인하려면 [라우팅 안내서](/{{ page.lang }}/guide/routing.html)를 참조하십시오.

@@ -34,7 +34,7 @@ description: Discover how to integrate various databases with Express.js applica
 **모듈**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **설치**
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -59,7 +59,7 @@ client.execute('select key from system.local', function(err, result) {
 **모듈**: [nano](https://github.com/dscape/nano)
 **설치**
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -92,7 +92,7 @@ books.list(function(err, body){
 **모듈**: [levelup](https://github.com/rvagg/node-levelup)
 **설치**
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -122,7 +122,7 @@ db.put('name', 'LevelUP', function (err) {
 **모듈**: [mysql](https://github.com/felixge/node-mysql/)
 **설치**
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -155,7 +155,7 @@ connection.end();
 **모듈**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **설치**
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -188,7 +188,7 @@ MongoDB용 오브젝트 모델 드라이버가 필요한 경우에는 [Mongoose]
 **모듈**: [apoc](https://github.com/hacksparrow/apoc)
 **설치**
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -216,7 +216,7 @@ apoc.query('match (n) return n').exec().then(
 **모듈**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **설치**
 
-```console
+```bash
 $ npm install pg-promise
 ```
 
@@ -244,7 +244,7 @@ db.one("SELECT $1 AS value", 123)
 **모듈**: [redis](https://github.com/mranney/node_redis)
 **설치**
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -282,7 +282,7 @@ client.hkeys('hash key', function (err, replies) {
 **모듈**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **설치**
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -320,7 +320,7 @@ db.close();
 **모듈**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **설치**
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 

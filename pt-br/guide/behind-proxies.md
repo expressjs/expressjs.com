@@ -51,12 +51,12 @@ pré-configurados:
 É possível configurar endereços de IP de qualquer uma das
 formas a seguir:
 
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
+```js
+app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
-</pre>
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+```
 
 Quando especificados, os endereços de IP ou sub-redes são
 excluídos do processo de determinação de endereço, e o endereço de
@@ -75,12 +75,14 @@ proxy frontal como o cliente.
       <td>Função</td>
 <td markdown="1">
 Implementação de confiança customizada. Use apenas se souber o que está fazendo.
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', function (ip) {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
-  else return false;
-});</code>
-</pre>
+
+
+```js
+app.set('trust proxy', (ip) => {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
+  else return false
+})
+```
 </td>
     </tr>
   </tbody>

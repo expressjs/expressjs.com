@@ -13,13 +13,13 @@ Utilisez l'outil de générateur d'applications, `express`, pour créer rapideme
 
 Installez `express` à l'aide de la commande suivante :
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 
 Affichez les options de commande à l'aide de l'option `-h` :
 
-```console
+```bash
 $ express -h
 
   Usage: express [options][dir]
@@ -41,7 +41,7 @@ $ express -h
 
 Par exemple, ce code crée une application Express nomée _myapp_. L'application sera crée dans le dossier _myapp_, lui meme placé dans le repertoir de travail courant. Le moteur de vue sera configuré avec <a href="pugjs.org" target="_blank" title="Documentation Pug">Pug</a>:
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -65,20 +65,20 @@ $ express --view=pug myapp
 
 Ensuite, installez les dépendances :
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 Sous MacOS ou Linux, exécutez l'application à l'aide de la commande suivante :
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 Sous Windows, utilisez la commande suivante :
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -86,7 +86,7 @@ Ensuite, chargez 'http://hôte_local:3000/' dans votre navigateur pour accéder 
 
 L'application générée possède la structure de répertoire suivante :
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

@@ -13,20 +13,20 @@ Gunakan alat generator aplikasi, `express-generator`, untuk membuat kerangka apl
 
 Anda dapat menjalankan generator aplikasi dengan perintah `npx` (tersedia di Node.js versi 8.2.0).
 
-```console
+```bash
 $ npx express-generator
 ```
 
 Untuk versi Node sebelumnya, instal generator aplikasi sebagai paket npm secara global lalu jalankan:
 
-```console
+```bash
 $ npm install -g express-generator
 $ express
 ```
 
 Tampilkan daftar opsi perintah dengan opsi `-h`:
 
-```console
+```bash
 $ express -h
 
   Usage: express [options] [dir]
@@ -48,7 +48,7 @@ $ express -h
 
 Misal, tutorial berikut ini kita akan membuat aplikasi Express bernama _myapp_. Aplikasi akan dibuat dalam folder bernama _myapp_ di direktori kerja saat ini dan _view engine_ yang akan digunakan adalah <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -72,26 +72,26 @@ $ express --view=pug myapp
 
 Kemudian instal semua dependensi project:
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 Di MacOS atau Linux, jalankan aplikasi dengan perintah ini:
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 Di _Command Prompt_ Windows, gunakan perintah ini:
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
 Di _PowerShell_ Windows, gunakan perintah ini:
 
-```console
+```bash
 PS> $env:DEBUG='myapp:*'; npm start
 ```
 
@@ -100,7 +100,7 @@ Kemudian, kunjungi `http://localhost:3000/` di browser Anda untuk mengakses apli
 
 Aplikasi yang dihasilkan memiliki struktur direktori sebagai berikut:
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

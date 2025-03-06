@@ -56,23 +56,23 @@ Express підтримує будь-які шаблонізатори, що уз
 в такому випадку, - це додати проміжну функцію в самий низ черги обробників, яка якраз і буде призначатись для
 формування 404-тої відповіді:
 
-<pre><code class="language-javascript" translate="no">
-app.use(function(req, res, next) {
-  res.status(404).send('Вибачте, такої сторінки не існує!');
-});
-</code></pre>
+```js
+app.use((req, res, next) => {
+  res.status(404).send('Вибачте, такої сторінки не існує!')
+})
+```
 
 ## Як можна встановити обробника помилок?
 
 Проміжні обробники помилок визначаються точно так само, як і інші проміжні обробники,
 тільки передається до них чотири параметра, а не три; точніше, вони мають таку сигнатуру `(err, req, res, next)`:
 
-<pre><code class="language-javascript" translate="no">
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Щось поламалось!');
-});
-</code></pre>
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Щось поламалось!')
+})
+```
 
 Більш детально, можна проглянути розділ [обробка помилок](/{{ page.lang }}/guide/error-handling.html).
 

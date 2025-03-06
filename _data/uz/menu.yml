@@ -1,0 +1,60 @@
+# Home
+home: Bosh sahifa
+
+# Getting started
+getting_started: Boshlang'ich ishlar
+installing: O'rnatish
+hello_world: Hello world
+generator: Express generator
+basic_routing: Oddiy routing
+static_files: Statik fayllar
+examples: More examples
+faq: FAQ
+
+# Guide
+guide: Qo'llanma
+routing: Routing
+writing_middleware: Middleware yozish
+using_middleware: Middleware ishlatish
+overriding_express_api: Overriding the Express API
+using_template_engines: Template engine ishlatish
+error_handling: Xatolarni qayta ishlash
+debugging: Debug qilish
+behind_proxies: Express proksilar bilan
+migrating_4: Express 4ga o'tish
+migrating_5: Express 5ga o'tish
+database_integration: Ma'lumotlar omboriga ulash
+
+# API reference
+
+api: API qo'llanma
+5x: 5.x
+4x: 4.x
+3x: 3.x (eskirgan)
+2x: 2.x (eskirgan)
+
+# Advanced topics
+advanced: Advanced topics
+developing_template_engines: Building template engines
+security_updates: Security updates
+best_practice_security: Security best practices
+best_practice_performance: Performance best practices
+healthcheck_graceful_shutdown: Health checks & shutdown
+
+# Resources
+resources: Resources
+glossary: Glossary
+middleware: Middleware
+community: Community
+utils: Utility modules
+contributing: Contributing to Express
+changelog: Release Change Log
+
+# Support
+support: Support
+
+# Blog
+blog: Blog
+latest_post: Latest post
+all_posts: All posts
+write_post: Write a Post

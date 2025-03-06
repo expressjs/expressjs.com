@@ -36,7 +36,7 @@ effettuare una ricerca nel sito [npm](https://www.npmjs.com/).
 [cassandra-driver](https://github.com/datastax/nodejs-driver)
 
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -62,7 +62,7 @@ client.execute('select key from system.local', function(err, result) {
 [nano](https://github.com/dscape/nano)
 
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -96,7 +96,7 @@ books.list(function(err, body){
 [levelup](https://github.com/rvagg/node-levelup)
 
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -127,7 +127,7 @@ db.put('name', 'LevelUP', function (err) {
 [mysql](https://github.com/felixge/node-mysql/)
 
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -161,7 +161,7 @@ connection.end();
 [mongodb](https://github.com/mongodb/node-mongodb-native)
 
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -195,7 +195,7 @@ Se si desidera un driver del modello oggetto per MongoDB, consultare [Mongoose](
 [apoc](https://github.com/hacksparrow/apoc)
 
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -226,7 +226,7 @@ apoc.query('match (n) return n').exec().then(
 
  NOTA: [Vedi i prerequisiti di installazione](https://github.com/oracle/node-oracledb#-installation).
 
-```console
+```bash
 $ npm install oracledb
 ```
 
@@ -272,7 +272,7 @@ getEmployee(101)
 [pg](https://github.com/brianc/node-postgres)
 
 
-```console
+```bash
 $ npm install pg
 ```
 
@@ -308,7 +308,7 @@ pg.connect(conString, function(err, client, done) {
 [redis](https://github.com/mranney/node_redis)
 
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -347,7 +347,7 @@ client.hkeys('hash key', function (err, replies) {
 [sqlite3](https://github.com/mapbox/node-sqlite3)
 
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -386,7 +386,7 @@ db.close();
 [elasticsearch](https://github.com/elastic/elasticsearch-js)
 
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 

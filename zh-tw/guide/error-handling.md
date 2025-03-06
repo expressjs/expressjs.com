@@ -12,106 +12,90 @@ description: Understand how Express.js handles errors in synchronous and asynchr
 錯誤處理中介軟體函數的定義方式，與其他中介軟體函數相同，差別在於錯誤處理函數的引數是四個而非三個：`(err, req, res, next)`。例如：
 
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-</code>
-</pre>
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 您是在定義其他 `app.use()` 和路由呼叫之後，最後才定義錯誤處理中介軟體；例如：
 
-<pre>
-<code class="language-javascript" translate="no">
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+```js
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
-app.use(bodyParser());
-app.use(methodOverride());
-app.use(function(err, req, res, next) {
+app.use(bodyParser())
+app.use(methodOverride())
+app.use((err, req, res, next) => {
   // logic
-});
-</code>
-</pre>
+})
+```
 
 中介軟體函數內的回應可以是任何您喜好的格式，如：HTML 錯誤頁面、簡式訊息或 JSON 字串。
 
 為了方便組織（和更高層次的架構），您可以定義數個錯誤處理中介軟體函數，就像您處理一般中介軟體函數一樣。舉例來說，如果您想為使用及沒有使用 `XHR` 所建立的要求，各定義一個錯誤處理程式，您可以使用下列指令：
 
-<pre>
-<code class="language-javascript" translate="no">
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+```js
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
-app.use(bodyParser());
-app.use(methodOverride());
-app.use(logErrors);
-app.use(clientErrorHandler);
-app.use(errorHandler);
-</code>
-</pre>
+app.use(bodyParser())
+app.use(methodOverride())
+app.use(logErrors)
+app.use(clientErrorHandler)
+app.use(errorHandler)
+```
 
 在本例中，通用的 `logErrors` 可能將要求和錯誤資訊寫入至 `stderr`，例如：
 
-<pre>
-<code class="language-javascript" translate="no">
-function logErrors(err, req, res, next) {
-  console.error(err.stack);
-  next(err);
+```js
+function logErrors (err, req, res, next) {
+  console.error(err.stack)
+  next(err)
 }
-</code>
-</pre>
+```
 
 此外在本例中，`clientErrorHandler` 定義成如下；在此情況下，會將錯誤明確傳遞給下一個：
 
-<pre>
-<code class="language-javascript" translate="no">
-function clientErrorHandler(err, req, res, next) {
+```js
+function clientErrorHandler (err, req, res, next) {
   if (req.xhr) {
-    res.status(500).send({ error: 'Something failed!' });
+    res.status(500).send({ error: 'Something failed!' })
   } else {
-    next(err);
+    next(err)
   }
 }
-</code>
-</pre>
-
+```
 "catch-all" `errorHandler` 函數的實作方式如下：
 
-<pre>
-<code class="language-javascript" translate="no">
-function errorHandler(err, req, res, next) {
-  res.status(500);
-  res.render('error', { error: err });
+```js
+function errorHandler (err, req, res, next) {
+  res.status(500)
+  res.render('error', { error: err })
 }
-</code>
-</pre>
+```
 
 不論您傳遞何者給 `next()` 函數（`'route'` 字串除外），Express 都會將現行要求視為發生錯誤，且會跳過其餘任何的非錯誤處理路由和中介軟體函數。如果您想以某種方式來處理該錯誤，您必須按照下一節的說明來建立錯誤處理路由。
 
 如果您的路由處理程式有多個回呼函數，可以使用 `route` 參數來跳到下一個路由處理程式。例如：
 
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.get('/a_route_behind_paywall',
-  function checkIfPaidSubscriber(req, res, next) {
-    if(!req.user.hasPaid) {
+  (req, res, next) => {
+    if (!req.user.hasPaid) {
 
       // continue handling this request
-      next('route');
+      next('route')
     }
-  }, function getPaidContent(req, res, next) {
-    PaidContent.find(function(err, doc) {
-      if(err) return next(err);
-      res.json(doc);
-    });
-  });
-</code>
-</pre>
-
+  }, (req, res, next) => {
+    PaidContent.find((err, doc) => {
+      if (err) return next(err)
+      res.json(doc)
+    })
+  })
+```
 在本例中，會跳過 `getPaidContent` 處理程式，但是會繼續執行 `app` 中 `/a_route_behind_paywall` 的其餘處理程式。
 
 <div class="doc-box doc-info" markdown="1">
@@ -131,14 +115,12 @@ Express 隨附一個內建錯誤處理常式，它會處理應用程式中可能
 
 因此，在您新增自訂錯誤處理常式時，如果標頭已傳送給用戶端，您會希望委派給 Express 中的預設錯誤處理機制處理：
 
-<pre>
-<code class="language-javascript" translate="no">
-function errorHandler(err, req, res, next) {
+```js
+function errorHandler (err, req, res, next) {
   if (res.headersSent) {
-    return next(err);
+    return next(err)
   }
-  res.status(500);
-  res.render('error', { error: err });
+  res.status(500)
+  res.render('error', { error: err })
 }
-</code>
-</pre>
+```

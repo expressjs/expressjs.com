@@ -10,20 +10,20 @@ lang: de
 
 Angenommen, Sie haben [Node.js](https://nodejs.org/) bereits installiert. Erstellen Sie ein Verzeichnis für Ihre Anwendung und definieren Sie dieses Verzeichnis als Ihr Arbeitsverzeichnis.
 
-```console
+```bash
 $ mkdir myapp
 $ cd myapp
 ```
 
 Erstellen Sie mit dem Befehl `npm init` eine Datei namens `package.json` für Ihre Anwendung. Weitere Informationen zur Funktionsweise von `package.json` finden Sie in den [Angaben zur Handhabung der npm-Datei package.json](https://docs.npmjs.com/files/package.json).
 
-```console
+```bash
 $ npm init
 ```
 
 Dieser Befehl fordert Sie zur Eingabe verschiedener Angaben wie Name und Version Ihrer Anwendung auf. Für den Moment reicht es, die Eingabetaste zu drücken und die Standardwerte für die meisten Angaben zu akzeptieren. Es gilt jedoch folgende Ausnahme:
 
-```console
+```bash
 entry point: (index.js)
 ```
 
@@ -31,13 +31,13 @@ Geben Sie `app.js` oder einen Namen Ihrer Vorstellung als Namen für die Hauptda
 
 Installieren Sie jetzt Express im Verzeichnis `myapp` und speichern Sie es in der Abhängigkeitsliste. Beispiel:
 
-```console
+```bash
 $ npm install express --save
 ```
 
 Wenn Sie Express vorübergehend installieren und nicht zur Abhängigkeitsliste hinzufügen wollen, geben Sie die Option `--save` nicht an:
 
-```console
+```bash
 $ npm install express
 ```
 

@@ -17,8 +17,7 @@ description: Get started with Express.js by building a simple 'Hello World' appl
 
 В каталоге `myapp` создайте файл с именем `app.js` и добавьте следующий код:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 const express = require('express')
 const app = express()
 const port = 3000
@@ -30,8 +29,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-</code>
-</pre>
+```
 
 Приложение запускает сервер и слушает соединения на порте 3000. Приложение выдает ответ "Hello World!" на запросы, адресованные корневому URL (`/`) или *маршруту*. Для всех остальных путей ответом будет **404 Not Found**.
 
@@ -41,7 +39,7 @@ app.listen(port, () => {
 
 Запустите приложение с помощью следующей команды:
 
-```console
+```bash
 $ node app.js
 ```
 

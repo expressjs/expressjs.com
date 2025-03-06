@@ -35,12 +35,12 @@ Adresse IP, sous-réseau ou tableau d'adresses IP et de sous-réseaux auxquels f
 
 Vous pouvez définir les adresses IP de l'une des manières suivantes :
 
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
+```js
+app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
-</pre>
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+```
 
 S'ils sont spécifiés, les sous-réseaux ou les adresses IP sont exclus du processus d'identification d'adresse, et l'adresse IP sans confiance la plus proche du serveur d'applications est identifiée comme étant l'adresse IP du client.
 </td>
@@ -55,12 +55,14 @@ Approuve le `n`ème tronçon à partir proxy de face comme étant le client.
       <td>Fonction</td>
 <td markdown="1">
 Implémentation de confiance personnalisée. N'utilisez cette option que si vous êtes sûr de vous.
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', function (ip) {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
-  else return false;
-});</code>
-</pre>
+
+
+```js
+app.set('trust proxy', (ip) => {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
+  else return false
+})
+```
 </td>
     </tr>
   </tbody>

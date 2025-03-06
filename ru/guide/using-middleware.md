@@ -39,153 +39,136 @@ Express - это веб-фреймворк маршрутизации и про�
 
 В данном примере представлена функция промежуточной обработки без пути монтирования. Эта функция выполняется при каждом получении запроса приложением.
 
-<pre>
-<code class="language-javascript" translate="no">
-var app = express();
+```js
+const app = express()
 
-app.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
-</code>
-</pre>
+app.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
+```
 
 В данном примере представлена функция промежуточной обработки, монтируемая в путь `/user/:id`. Эта функция выполняется для всех типов запросов
 HTTP в пути `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use('/user/:id', function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
-</code>
-</pre>
+```js
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+```
 
 В данном примере представлен маршрут и функция его обработки (система промежуточных обработчиков). Эта функция обрабатывает запросы GET, адресованные ресурсам в пути `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
-  res.send('USER');
-});
-</code>
-</pre>
+```js
+app.get('/user/:id', (req, res, next) => {
+  res.send('USER')
+})
+```
 
 Ниже приводится пример загрузки последовательности функций промежуточной обработки в точку монтирования, с указанием пути монтирования.
 Этот пример иллюстрирует создание вспомогательного стека промежуточных обработчиков, с выводом информации о запросе для всех типов запросов HTTP, адресованных ресурсам в пути `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
-}, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
-</code>
-</pre>
+```js
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+```
 
 Обработчики маршрутов позволяют определить несколько маршрутов для одного пути. В приведенном ниже примере определено два маршрута для запросов GET, адресованных ресурсам в пути `/user/:id`. Второй маршрут не создает никаких неудобств, но его вызов никогда не будет выполнен, поскольку первый маршрут завершает цикл "запрос-ответ".
 
 В данном примере представлен вспомогательный стек промежуточных обработчиков для обработки запросов GET, адресованных ресурсам в пути `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
-  console.log('ID:', req.params.id);
-  next();
-}, function (req, res, next) {
-  res.send('User Info');
-});
+```js
+app.get('/user/:id', (req, res, next) => {
+  console.log('ID:', req.params.id)
+  next()
+}, (req, res, next) => {
+  res.send('User Info')
+})
 
 // handler for the /user/:id path, which prints the user ID
-app.get('/user/:id', function (req, res, next) {
-  res.end(req.params.id);
-});
-</code>
-</pre>
+app.get('/user/:id', (req, res, next) => {
+  res.end(req.params.id)
+})
+```
 
 Для того чтобы пропустить остальные функции дополнительной обработки в стеке промежуточных обработчиков маршрутизатора, вызовите `next('route')` для передачи управления следующему маршруту.
 **ПРИМЕЧАНИЕ**: `next('route')` работает только в функциях промежуточной обработки, загруженных с помощью функций `app.METHOD()` или `router.METHOD()`.
 
 В данном примере представлен вспомогательный стек промежуточных обработчиков для обработки запросов GET, адресованных ресурсам в пути `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
+```js
+app.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next route
-  if (req.params.id == 0) next('route');
+  if (req.params.id === '0') next('route')
   // otherwise pass the control to the next middleware function in this stack
-  else next(); //
-}, function (req, res, next) {
+  else next() //
+}, (req, res, next) => {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
-app.get('/user/:id', function (req, res, next) {
-  res.render('special');
-});
-</code>
-</pre>
+app.get('/user/:id', (req, res, next) => {
+  res.render('special')
+})
+```
 
 <h2 id='middleware.router'>Промежуточный обработчик уровня маршрутизатора</h2>
 
 Промежуточный обработчик уровня маршрутизатора работает так же, как и промежуточный обработчик уровня приложения, но он привязан к экземпляру `express.Router()`.
 
-<pre>
-<code class="language-javascript" translate="no">
-var router = express.Router();
-</code>
-</pre>
+```js
+const router = express.Router()
+```
 Загрузите промежуточный обработчик уровня маршрутизатора с помощью функций `router.use()` и `router.METHOD()`.
 
 В приведенном ниже примере с помощью промежуточного обработчика уровня маршрутизатора создается копия системы промежуточных обработчиков, представленной выше для обработчиков уровня приложения:
 
-<pre>
-<code class="language-javascript" translate="no">
-var app = express();
-var router = express.Router();
+```js
+const app = express()
+const router = express.Router()
 
 // a middleware function with no mount path. This code is executed for every request to the router
-router.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
+router.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
-router.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
-}, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
+router.use('/user/:id', (req, res, next) => {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
 
 // a middleware sub-stack that handles GET requests to the /user/:id path
-router.get('/user/:id', function (req, res, next) {
+router.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next router
-  if (req.params.id == 0) next('route');
+  if (req.params.id === '0') next('route')
   // otherwise pass control to the next middleware function in this stack
-  else next(); //
-}, function (req, res, next) {
+  else next() //
+}, (req, res, next) => {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
-router.get('/user/:id', function (req, res, next) {
-  console.log(req.params.id);
-  res.render('special');
-});
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id)
+  res.render('special')
+})
 
 // mount the router on the app
-app.use('/', router);
-</code>
-</pre>
-
+app.use('/', router)
+```
 <h2 id='middleware.error-handling'>Промежуточный обработчик для обработки ошибок</h2>
 
 <div class="doc-box doc-notice" markdown="1">
@@ -194,14 +177,12 @@ app.use('/', router);
 
 Определите функции промежуточного обработчика для обработки ошибок так же, как другие функции промежуточной обработки, но с указанием не трех, а четырех аргументов в сигнатуре `(err, req, res, next)`):
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-</code>
-</pre>
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 Подробная информация о промежуточном обработчике ошибок приведена в разделе [Обработка ошибок](/{{ page.lang }}/guide/error-handling.html).
 
@@ -230,9 +211,8 @@ app.use(function(err, req, res, next) {
 
 Ниже приводится пример использования функции промежуточной обработки `express.static` с объектом дополнительных опций:
 
-<pre>
-<code class="language-javascript" translate="no">
-var options = {
+```js
+const options = {
   dotfiles: 'ignore',
   etag: false,
   extensions: ['htm', 'html'],
@@ -240,23 +220,20 @@ var options = {
   maxAge: '1d',
   redirect: false,
   setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now());
+    res.set('x-timestamp', Date.now())
   }
 }
 
-app.use(express.static('public', options));
-</code>
-</pre>
+app.use(express.static('public', options))
+```
 
 Для каждого приложения допускается наличие нескольких статических каталогов:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(express.static('public'));
-app.use(express.static('uploads'));
-app.use(express.static('files'));
-</code>
-</pre>
+```js
+app.use(express.static('public'))
+app.use(express.static('uploads'))
+app.use(express.static('files'))
+```
 
 Дополнительную информацию о функции `serve-static` и ее опциях можно найти в документации по [serve-static](https://github.com/expressjs/serve-static).
 
@@ -268,19 +245,17 @@ app.use(express.static('files'));
 
 В приведенном ниже примере показана установка и загрузка функции промежуточной обработки для синтаксического анализа cookie `cookie-parser`.
 
-```console
+```bash
 $ npm install cookie-parser
 ```
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-var cookieParser = require('cookie-parser');
+```js
+const express = require('express')
+const app = express()
+const cookieParser = require('cookie-parser')
 
 // load the cookie-parsing middleware
-app.use(cookieParser());
-</code>
-</pre>
+app.use(cookieParser())
+```
 
 Список функций промежуточных обработчиков, предоставляемых сторонними поставщиками ПО и часто используемых в Express, приведен в разделе  [Промежуточные обработчики сторонних поставщиков ПО](../resources/middleware.html).

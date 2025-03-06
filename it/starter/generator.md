@@ -13,13 +13,13 @@ Utilizzare lo strumento di creazione dell'applicazione, `express`, per creare ve
 
 Installare `express` con il seguente comando:
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 
 Visualizzare le opzioni del comando con l'opzione `-h`:
 
-```console
+```bash
 $ express -h
 
   Usage: express [options][dir]
@@ -41,7 +41,7 @@ $ express -h
 
 Ad esempio, quanto segue crea un'applicazione Express denominata _myapp_ nella directory di lavoro corrente:
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -65,20 +65,20 @@ $ express --view=pug myapp
 
 Successivamente, installare le dipendenze:
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 Su MacOS o Linux, eseguire l'applicazione con il seguente comando:
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 Su Windows, utilizzare questo comando:
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -86,7 +86,7 @@ Quindi caricare `http://localhost:3000/` sul browser per accedere all'applicazio
 
 L'applicazione creata dispone della seguente struttura per la directory:
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

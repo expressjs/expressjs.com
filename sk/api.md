@@ -5,10 +5,7 @@ lang: sk
 description: Access the API reference for Express.js detailing all modules, methods,
   and properties for building web applications with this version.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
+
 <div id="api-doc" markdown="1">
 
   <h1>4.x API</h1>

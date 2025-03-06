@@ -91,7 +91,7 @@ Helmet includes several other middleware functions which you can read about [at 
 
 Install Helmet like any other module:
 
-```console
+```bash
 $ npm install --save helmet
 ```
 
@@ -222,7 +222,7 @@ Using npm to manage your application's dependencies is powerful and convenient. 
 
 Since npm@6, npm automatically reviews every install request. Also, you can use `npm audit` to analyze your dependency tree.
 
-```console
+```bash
 $ npm audit
 ```
 
@@ -230,14 +230,14 @@ If you want to stay more secure, consider [Snyk](https://snyk.io/).
 
 Snyk offers both a [command-line tool](https://www.npmjs.com/package/snyk) and a [Github integration](https://snyk.io/docs/github) that checks your application against [Snyk's open source vulnerability database](https://snyk.io/vuln/) for any known vulnerabilities in your dependencies. Install the CLI as follows:
 
-```console
+```bash
 $ npm install -g snyk
 $ cd your-app
 ```
 
 Use this command to test your application for vulnerabilities:
 
-```console
+```bash
 $ snyk test
 ```
 

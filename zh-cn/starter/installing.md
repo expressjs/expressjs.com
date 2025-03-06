@@ -11,7 +11,7 @@ description: Learn how to install Express.js in your Node.js environment, includ
 
 假设您已经安装了 [Node.js](https://nodejs.org/)，创建目录以保存应用程序，并将其设置为工作目录。
 
-```console
+```bash
 $ mkdir myapp
 $ cd myapp
 ```
@@ -19,14 +19,14 @@ $ cd myapp
 使用 `npm init` 命令为应用程序创建 `package.json` 文件。
 有关 `package.json` 工作方式的更多信息，请参阅 [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json)。
 
-```console
+```bash
 $ npm init
 ```
 
 此命令提示您输入若干项，例如应用程序的名称和版本。
 现在，只需按回车键以接受其中大多数项的缺省值，但以下情况例外：
 
-```console
+```bash
 entry point: (index.js)
 ```
 
@@ -34,13 +34,13 @@ entry point: (index.js)
 
 在 `myapp` 目录中安装 Express，然后将其保存在依赖项列表中。例如：
 
-```console
+```bash
 $ npm install express
 ```
 
 要暂时安装 Express 而不将其添加到依赖项列表中：
 
-```console
+```bash
 $ npm install express --no-save
 ```
 

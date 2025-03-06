@@ -13,13 +13,13 @@ description: Learn how to use the Express application generator tool to quickly 
 
 使用下列指令來安裝 `express`：
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 
 使用 `-h` 選項來顯示指令選項：
 
-```console
+```bash
 $ express -h
 
   Usage: express [options][dir]
@@ -41,7 +41,7 @@ $ express -h
 
 舉例來說，以下是在現行工作目錄中建立一個名為 _myapp_ 的 Express 應用程式：
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -65,20 +65,20 @@ $ express --view=pug myapp
 
 然後安裝相依項目：
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 在 MacOS 或 Linux 中，使用下列指令來執行應用程式：
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 在 Windows 中，使用下列指令：
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -86,7 +86,7 @@ $ DEBUG=myapp:* npm start
 
 產生的應用程式具有如下的目錄結構：
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

@@ -1,0 +1,60 @@
+# Home
+home: Anasayfa
+
+# Getting started
+getting_started: Buradan Başlayın
+installing: Kurulum
+hello_world: Merhaba Dünya
+generator: Express Oluşturucu
+basic_routing: Basit Yönlendirme
+static_files: Statik Dosyalar
+examples: More examples
+faq: SSS
+
+# Guide
+guide: Kılavuz
+routing: Yönlendirme
+writing_middleware: Middleware yazma
+using_middleware: Şablon motoru kullanma
+overriding_express_api: Overriding the Express API
+using_template_engines: Hata işleme
+error_handling: Hata işleme
+debugging: Hata Ayıklama
+behind_proxies: Express behind proxies
+migrating_4: Express 4 geçiş
+migrating_5: Express 5 geçiş
+database_integration: Database Entegrasyonu
+
+# API reference
+
+api: API Kaynak
+5x: 5.x
+4x: 4.x
+3x: 3.x (Kullanımdan kaldırıldı)
+2x: 2.x (Kullanımdan kaldırıldı)
+
+# Advanced topics
+advanced: Gelişmiş konular
+developing_template_engines: Şablon motorları
+security_updates: Gğvenlik güncellemeleri
+best_practice_security: En iyi güvenlik uygulamaları
+best_practice_performance: En iyi performans uygulamaları
+healthcheck_graceful_shutdown: Health checks & shutdown
+
+# Resources
+resources: Kaynaklar
+glossary: Terimler
+middleware: Middleware
+community: Topluluk
+utils: Yardımcı Modüller
+contributing: Express'e katkıda bulunmak
+changelog: Sürüm Notları
+
+# Support
+support: Support
+
+# Blog
+blog: Blog
+latest_post: Latest post
+all_posts: All posts
+write_post: Write a Post

@@ -21,19 +21,21 @@ Development and production environments are usually set up differently and have 
 
 Security best practices for Express applications in production include:
 
-- [Don’t use deprecated or vulnerable versions of Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
-- [Use TLS](#use-tls)
-- [Do not trust user input](#do-not-trust-user-input)
-  - [Prevent open redirects](#prevent-open-redirects)
-- [Use Helmet](#use-helmet)
-- [Reduce fingerprinting](#reduce-fingerprinting)
-- [Use cookies securely](#use-cookies-securely)
-  - [Don't use the default session cookie name](#dont-use-the-default-session-cookie-name)
-  - [Set cookie security options](#set-cookie-security-options)
-- [Prevent brute-force attacks against authorization](#prevent-brute-force-attacks-against-authorization)
-- [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
-  - [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
-- [Additional considerations](#additional-considerations)
+- [Production Best Practices: Security](#production-best-practices-security)
+  - [Overview](#overview)
+  - [Don't use deprecated or vulnerable versions of Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
+  - [Use TLS](#use-tls)
+  - [Do not trust user input](#do-not-trust-user-input)
+    - [Prevent open redirects](#prevent-open-redirects)
+  - [Use Helmet](#use-helmet)
+  - [Reduce fingerprinting](#reduce-fingerprinting)
+  - [Use cookies securely](#use-cookies-securely)
+    - [Don't use the default session cookie name](#dont-use-the-default-session-cookie-name)
+    - [Set cookie security options](#set-cookie-security-options)
+  - [Prevent brute-force attacks against authorization](#prevent-brute-force-attacks-against-authorization)
+  - [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
+    - [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
+  - [Additional considerations](#additional-considerations)
 
 ## Don't use deprecated or vulnerable versions of Express
 
@@ -80,18 +82,28 @@ app.use((req, res) => {
 
 [Helmet][helmet] can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
 
-Helmet is a collection of several smaller middleware functions that set security-related HTTP response headers. Some examples include:
+Helmet is a middleware function that sets security-related HTTP response headers. Helmet sets the following headers by default:
 
-* `helmet.contentSecurityPolicy` which sets the `Content-Security-Policy` header. This helps prevent cross-site scripting attacks among many other things.
-* `helmet.hsts` which sets the `Strict-Transport-Security` header. This helps enforce secure (HTTPS) connections to the server.
-* `helmet.frameguard` which sets the `X-Frame-Options` header. This provides [clickjacking](https://www.owasp.org/index.php/Clickjacking) protection.
+- `Content-Security-Policy`: A powerful allow-list of what can happen on your page which mitigates many attacks
+- `Cross-Origin-Opener-Policy`: Helps process-isolate your page
+- `Cross-Origin-Resource-Policy`: Blocks others from loading your resources cross-origin
+- `Origin-Agent-Cluster`: Changes process isolation to be origin-based
+- `Referrer-Policy`: Controls the [`Referer`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer) header
+- `Strict-Transport-Security`: Tells browsers to prefer HTTPS
+- `X-Content-Type-Options`: Avoids [MIME sniffing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#mime_sniffing)
+- `X-DNS-Prefetch-Control`: Controls DNS prefetching
+- `X-Download-Options`: Forces downloads to be saved (Internet Explorer only)
+- `X-Frame-Options`: Legacy header that mitigates [Clickjacking](https://en.wikipedia.org/wiki/Clickjacking) attacks
+- `X-Permitted-Cross-Domain-Policies`: Controls cross-domain behavior for Adobe products, like Acrobat
+- `X-Powered-By`: Info about the web server. Removed because it could be used in simple attacks
+- `X-XSS-Protection`: Legacy header that tries to mitigate [XSS attacks](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting), but makes things worse, so Helmet disables it
 
-Helmet includes several other middleware functions which you can read about [at its documentation website][helmet].
+Each header can be configured or disabled. To read more about it please go to [its documentation website][helmet].
 
 Install Helmet like any other module:
 
-```console
-$ npm install --save helmet
+```bash
+$ npm install helmet
 ```
 
 Then to use it in your code:
@@ -221,7 +233,7 @@ Using npm to manage your application's dependencies is powerful and convenient. 
 
 Since npm@6, npm automatically reviews every install request. Also, you can use `npm audit` to analyze your dependency tree.
 
-```console
+```bash
 $ npm audit
 ```
 
@@ -229,14 +241,14 @@ If you want to stay more secure, consider [Snyk](https://snyk.io/).
 
 Snyk offers both a [command-line tool](https://www.npmjs.com/package/snyk) and a [Github integration](https://snyk.io/docs/github) that checks your application against [Snyk's open source vulnerability database](https://snyk.io/vuln/) for any known vulnerabilities in your dependencies. Install the CLI as follows:
 
-```console
+```bash
 $ npm install -g snyk
 $ cd your-app
 ```
 
 Use this command to test your application for vulnerabilities:
 
-```console
+```bash
 $ snyk test
 ```
 

@@ -34,7 +34,7 @@ Estos son algunos de los muchos controladores de base de datos que hay disponibl
 **Módulo**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Instalación**
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -59,7 +59,7 @@ client.execute('select key from system.local', function(err, result) {
 **Módulo**: [nano](https://github.com/dscape/nano)
 **Instalación**
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -92,7 +92,7 @@ books.list(function(err, body){
 **Módulo**: [levelup](https://github.com/rvagg/node-levelup)
 **Instalación**
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -122,7 +122,7 @@ db.put('name', 'LevelUP', function (err) {
 **Módulo**: [mysql](https://github.com/felixge/node-mysql/)
 **Instalación**
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -155,7 +155,7 @@ connection.end();
 **Módulo**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Instalación**
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -188,7 +188,7 @@ Si desea un controlador de modelo de objeto para MongoDB, consulte [Mongoose](ht
 **Módulo**: [apoc](https://github.com/hacksparrow/apoc)
 **Instalación**
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -219,7 +219,7 @@ apoc.query('match (n) return n').exec().then(
 
 NOTA: [Vea los requisitos previos de instalación](https://github.com/oracle/node-oracledb#-installation).
 
-```console
+```bash
 $ npm install oracledb
 ```
 
@@ -265,7 +265,7 @@ getEmployee(101)
 **Módulo**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **Instalación**
 
-```console
+```bash
 $ npm install pg-promise
 ```
 
@@ -293,7 +293,7 @@ db.one("SELECT $1 AS value", 123)
 **Módulo**: [redis](https://github.com/mranney/node_redis)
 **Instalación**
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -331,7 +331,7 @@ client.hkeys('hash key', function (err, replies) {
 **Módulo**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Instalación**
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -369,7 +369,7 @@ db.close();
 **Módulo**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Instalación**
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 

@@ -43,7 +43,7 @@ The `req` (request) and `res` (response) are the exact same objects that Node pr
 
 Run the app with the following command:
 
-```console
+```bash
 $ node app.js
 ```
 

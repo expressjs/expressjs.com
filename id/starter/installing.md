@@ -14,7 +14,7 @@ Kami asumsikan Anda telah menginstal [Node.js](https://nodejs.org/), buatlah dir
 * [Express versi 4.x](/{{ page.lang }}/4x/api.html) memerlukan Node.js versi 0.10 atau yang lebih tinggi.
 * [Express versi 5.x](/{{ page.lang }}/5x/api.html) memerlukan Node.js versi 18 atau yang lebih tinggi.
 
-```console
+```bash
 $ mkdir myapp
 $ cd myapp
 ```
@@ -22,7 +22,7 @@ $ cd myapp
 Gunakan perintah `npm init` untuk membuat file `package.json` untuk aplikasi Anda.
 Untuk informasi selengkapnya tentang cara kerja `package.json`, lihat [Spesifikasi penggunaan package.json dari npm](https://docs.npmjs.com/files/package.json).
 
-```console
+```bash
 $ npm init
 ```
 
@@ -37,13 +37,13 @@ Masukan `app.js`, atau apa pun nama file utamanya yang Anda inginkan. Jika Anda 
 
 Sekarang, instal Express di direktori `myapp` dan simpan di daftar dependensi. Misalnya:
 
-```console
+```bash
 $ npm install express
 ```
 
 Untuk menginstal Express secara sementara dan tidak menambahkannya ke daftar dependensi, jalankan perintah berikut:
 
-```console
+```bash
 $ npm install express --no-save
 ```
 

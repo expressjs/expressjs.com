@@ -80,6 +80,7 @@ var errorhandler = require('errorhandler')
 
 var app = connect()
 
+// assumes NODE_ENV is set by the user
 if (process.env.NODE_ENV === 'development') {
   // only use in development
   app.use(errorhandler())
@@ -100,6 +101,7 @@ var notifier = require('node-notifier')
 
 var app = connect()
 
+// assumes NODE_ENV is set by the user
 if (process.env.NODE_ENV === 'development') {
   // only use in development
   app.use(errorhandler({ log: errorNotification }))

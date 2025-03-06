@@ -61,7 +61,7 @@ Helmet aslında güvenlikle ilgili HTTP yanıt başlıklarını ayarlayan, daha 
 
 Helmet'ı diğer herhangi bir modül gibi kurun:
 
-```console
+```bash
 $ npm install --save helmet
 ```
 
@@ -165,7 +165,7 @@ Uygulamanızın bağımlılıklarını yönetmek için npm kullanmak güçlü ve
 
 npm@6'dan beri npm otomatik olarak her yükleme isteğini inceler. Ayrıca 'npm audit' komutunu kullanarak bağımlılık ağacınızı analiz edebilirsiniz.
 
-```console
+```bash
 $ npm audit
 ```
 
@@ -173,14 +173,14 @@ Daha fazla güvenli kalmak istiyorsanız, [Snyk](https://snyk.io/) aracını gö
 
 Bağımlılıklarınızdaki bilinen tüm güvenlik açıkları için [Synk'in açık kaynak güvenlik açığı veritabanı](https://snyk.io/vuln/)'na karşı uygulamanızı kontrol eden bir [komut satırı aracı](https://www.npmjs.com/package/snyk) ve de [Github integrasyonu](https://snyk.io/docs/github) sunar.
 
-```console
+```bash
 $ npm install -g snyk
 $ cd your-app
 ```
 
 Uygulamanızı güvenlik açıklarına karşı test etmek için bu komutu kullanın:
 
-```console
+```bash
 $ snyk test
 ```
 

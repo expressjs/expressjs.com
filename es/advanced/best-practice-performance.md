@@ -71,7 +71,7 @@ Si realiza el registro a efectos de depuración, en lugar de utilizar `console.l
 
 #### Para la actividad de la aplicación
 
-Si está registrando la actividad de la aplicación (por ejemplo, realizando un seguimiento del tráfico o las llamadas de API), en lugar de utilizar `console.log()`, utilice una biblioteca de registro como [Winston](https://www.npmjs.com/package/winston) o [Bunyan](https://www.npmjs.com/package/bunyan). Para ver una comparación detallada de estas dos bibliotecas, consulte el post del blog StrongLoop [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
+Si está registrando la actividad de la aplicación (por ejemplo, realizando un seguimiento del tráfico o las llamadas de API), en lugar de utilizar `console.log()`, utilice una biblioteca de registro como [Winston](https://www.npmjs.com/package/winston) o [Bunyan](https://www.npmjs.com/package/bunyan). Para ver una comparación detallada de estas dos bibliotecas, consulte el post del blog StrongLoop [Comparing Winston and Bunyan Node.js Logging](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
 
 <a name="exceptions"></a>
 
@@ -89,7 +89,7 @@ Antes de profundizar en estos temas, deberá tener unos conocimientos básicos d
 Para obtener más información sobre los aspectos básicos del manejo de errores, consulte:
 
 -   [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
--   [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (blog StrongLoop)
+-   [Building Robust Node Applications: Error Handling](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/robust-node-applications-error-handling/) (blog StrongLoop)
 
 #### Qué no debe hacer
 
@@ -164,9 +164,9 @@ app.get('/', wrap(async (req, res, next) => {
 }))
 ```
 
-La función `wrap()` es un envoltorio que toma las promesas rechazadas y llama a `next()` con el error como primer argumento. Para más detalles, vea [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/).
+La función `wrap()` es un envoltorio que toma las promesas rechazadas y llama a `next()` con el error como primer argumento. Para más detalles, vea [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/).
 
-Para más información acerca del manejo de errores utilizando promesas, vea [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/).
+Para más información acerca del manejo de errores utilizando promesas, vea [Promises in Node.js with Q – An Alternative to Callbacks](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/).
 
 ## Cosas que hacer en el entorno / configuración
 
@@ -197,23 +197,19 @@ En el desarrollo, normalmente establece las variables de entorno en el shell int
 
 Con Upstart, utilice la palabra clave `env` en el archivo de trabajo. Por ejemplo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code>
-</pre>
+```
 
 Para obtener más información, consulte [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables).
 
 Con systemd, utilice la directiva `Environment` en el archivo unit. Por ejemplo:
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code>
-</pre>
+```
 
 Para obtener más información, consulte [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
 
@@ -274,8 +270,7 @@ Systemd es un administrador de servicios y sistemas Linux. La mayoría de las pr
 
 Un archivo de configuración de servicio de systemd se denomina un _archivo unit_, con un nombre de archivo terminado en .service. A continuación, se muestra un archivo unit de ejemplo para gestionar directamente una aplicación Node (sustituya el texto en negrita por los valores de su sistema y su aplicación):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -303,8 +298,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code>
-</pre>
+```
 
 Para obtener más información sobre systemd, consulte [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
 
@@ -314,13 +308,13 @@ Puede instalar fácilmente StrongLoop Process Manager como un servicio systemd. 
 
 Para instalar StrongLoop PM como un servicio systemd:
 
-```console
+```bash
 $ sudo sl-pm-install --systemd
 ```
 
 A continuación, inicie el servicio con:
 
-```console
+```bash
 $ sudo /usr/bin/systemctl start strong-pm
 ```
 
@@ -334,8 +328,7 @@ Un servicio de Upstart se define en un archivo de configuración de trabajo (tam
 
 Cree un archivo denominado `myapp.conf` en `/etc/init/` con el siguiente contenido (sustituya el texto en negrita por los valores de su sistema y su aplicación):
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -363,8 +356,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code>
-</pre>
+```
 
 NOTA: este script requiere Upstart 1.4 o posterior, soportado en Ubuntu 12.04-14.10.
 
@@ -384,13 +376,13 @@ Puede instalar fácilmente StrongLoop Process Manager como un servicio Upstart. 
 
 Para instalar StrongLoop PM como un servicio Upstart 1.4:
 
-```console
+```bash
 $ sudo sl-pm-install
 ```
 
 A continuación, ejecute el servicio con:
 
-```console
+```bash
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -418,7 +410,7 @@ Cuando StrongLoop Process Manager (PM) ejecuta una aplicación, la ejecuta autom
 
 Por ejemplo, suponiendo que ha desplegado la aplicación en prod.foo.com y que StrongLoop PM escucha en el puerto 8701 (el valor predeterminado), para establecer el tamaño de clúster en ocho utilizando slc:
 
-```console
+```bash
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 

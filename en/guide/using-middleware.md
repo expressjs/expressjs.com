@@ -6,6 +6,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/using-middleware.html"
 ---
+
 # Using middleware
 
 Express is a routing and middleware web framework that has minimal functionality of its own: An Express application is essentially a series of middleware function calls.
@@ -255,7 +256,7 @@ Install the Node.js module for the required functionality, then load it in your 
 
 The following example illustrates installing and loading the cookie-parsing middleware function `cookie-parser`.
 
-```console
+```bash
 $ npm install cookie-parser
 ```
 

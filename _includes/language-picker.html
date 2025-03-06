@@ -1,0 +1,28 @@
+<div id="navbar">
+  <ul id="navmenu">
+    {% assign url_parts = page.url | split: '/' %}
+
+    {% assign url_remainder = url_parts | slice: 2, url_parts.size | join: '/' %}
+
+    <li class="submenu">
+      <div id="current-lang" class="current-lang"></div>
+      <div id="languageData"
+      data-languages='{{ site.data.languages | jsonify }}'
+      style="display:none;">
+      </div>
+      <ul class="submenu-content">
+        {% for lang in site.data.languages %}
+        <li>
+          <a href="/{{ lang.code }}/{{ url_remainder }}">
+            {% if lang.code | to_s == current_lang | to_s %}
+              <strong>{{ lang.name }}</strong>
+            {% else %}
+              {{ lang.name }}
+            {% endif %}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+  </ul>
+</div>

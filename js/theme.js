@@ -6,16 +6,19 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
       toggleSystemTheme(colorScheme)
     })
   } else {
+    // user's PS system theme settings
     const systemTheme = localStorage.getItem('system-theme')
+    // setting stored in local storage    
     const localTheme = localStorage.getItem('local-theme')
     // // if no local theme set - system is default
     if (localTheme === null) {
-      toggleSystemTheme(colorScheme)
+      setTheme(colorScheme)
       localStorage.setItem('system-theme', colorScheme || 'light')
+    // page load - load any stored themes or set theme
     } else {
       // listen for system changes, update if any 
       if (colorScheme != systemTheme) {
-        toggleSystemTheme(colorScheme)
+        setTheme(colorScheme)
         localStorage.setItem('system-theme', colorScheme || 'light')
         // override local theme 
         localStorage.removeItem('local-theme')
@@ -28,23 +31,26 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
         }
       }
     }
+    // wait for load then and add listner on button
     document.addEventListener('DOMContentLoaded', () => {
 
       document
         .querySelector('.theme-toggle')
-        .addEventListener('click', toggleStorageTheme)
+        .addEventListener('click', toggleLocalStorageTheme)
     })
   }
 })
-function toggleSystemTheme(theme) {
-  //  only support dark, else any other defaults to light 
+// set the theme to given value
+function setTheme(theme) {
+  //  only support dark else any other defaults to light 
   if (theme === 'dark') {
     darkModeOn()
   } else {
     lightModeOn()
   }
 }
-function toggleStorageTheme(e) {
+// toggle btwn themes or set a theme if none set
+function toggleLocalStorageTheme(e) {
   const localTheme = localStorage.getItem('local-theme')
   if (localTheme === 'light') {
     localStorage.setItem('local-theme', 'dark')
@@ -65,18 +71,21 @@ function toggleStorageTheme(e) {
   }
 }
 function darkModeOn() {
+  document?.documentElement?.classList?.remove('light-mode')
   document?.documentElement?.classList?.add('dark-mode')
 }
 function lightModeOn() {
   document?.documentElement?.classList.remove('dark-mode')
+  document?.documentElement?.classList?.add('light-mode')
 }
 function darkModeState() {
-  return document.documentElement.classList.contains('dark-mode')
+  return document?.documentElement?.classList.contains('dark-mode')
 }
 function hasLocalStorage() {
   return typeof Storage !== 'undefined'
 }
 function watchColorSchemeChange(callback) {
+  // query user's machine for system setting & use that
   const darkMediaQuery = window?.matchMedia('(prefers-color-scheme: dark)')
 
   const handleChange = (event) => {

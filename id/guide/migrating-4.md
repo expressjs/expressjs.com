@@ -384,7 +384,7 @@ Begin the migration process by installing the required middleware for the
 Express 4 app and updating Express and Pug to their respective latest
 version with the following command:
 
-```console
+```bash
 $ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
 ```
 
@@ -499,7 +499,7 @@ app.listen(app.get('port'), () => {
 The migration process is complete, and the app is now an
 Express 4 app. To confirm, start the app by using the following command:
 
-```console
+```bash
 $ node .
 ```
 
@@ -518,7 +518,7 @@ The command-line tool to generate an Express app is still
 If you already have the Express 3 app generator installed on your system,
 you must uninstall it:
 
-```console
+```bash
 $ npm uninstall -g express
 ```
 Depending on how your file and directory privileges are configured,
@@ -526,7 +526,7 @@ you might need to run this command with `sudo`.
 
 Now install the new generator:
 
-```console
+```bash
 $ npm install -g express-generator
 ```
 
@@ -549,7 +549,7 @@ Command options and use largely remain the same, with the following exceptions:
 
 Execute the following command to create an Express 4 app:
 
-```console
+```bash
 $ express app4
 ```
 
@@ -562,7 +562,7 @@ You will also notice that the `app.js` file is now a Node.js module, in contrast
 
 After installing the dependencies, start the app by using the following command:
 
-```console
+```bash
 $ npm start
 ```
 

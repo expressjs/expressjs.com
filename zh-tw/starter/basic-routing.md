@@ -15,11 +15,9 @@ description: Learn the fundamentals of routing in Express.js applications, inclu
 每一個路由可以有一或多個處理程式函數，當路由相符時，就會執行這些函數。
 
 路由定義的結構如下：
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 其中：
 
@@ -36,42 +34,34 @@ app.METHOD(PATH, HANDLER)
 
 首頁中以 `Hello World!` 回應。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+```
 
 對根路由 (`/`)（應用程式的首頁）發出 POST 要求時的回應：
 
-<pre>
-<code class="language-javascript" translate="no">
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
-</code>
-</pre>
+```js
+app.post('/', (req, res) => {
+  res.send('Got a POST request')
+})
+```
 
 對 `/user` 路由發出 PUT 要求時的回應：
 
-<pre>
-<code class="language-javascript" translate="no">
-app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user');
-});
-</code>
-</pre>
+```js
+app.put('/user', (req, res) => {
+  res.send('Got a PUT request at /user')
+})
+```
 
 對 `/user` 路由發出 DELETE 要求時的回應：
 
-<pre>
-<code class="language-javascript" translate="no">
-app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user');
-});
-</code>
-</pre>
+```js
+app.delete('/user', (req, res) => {
+  res.send('Got a DELETE request at /user')
+})
+```
 
 如需路由的詳細資料，請參閱[路由手冊](/{{ page.lang }}/guide/routing.html)。

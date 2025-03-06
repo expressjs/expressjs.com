@@ -17,8 +17,7 @@ description: Get started with Express.js by building a simple 'Hello World' appl
 
 `myapp` ディレクトリーで、`app.js` というファイルを作成して、以下のコードを追加します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 const express = require('express')
 const app = express()
 const port = 3000
@@ -30,8 +29,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-</code>
-</pre>
+```
 
 アプリケーションは、サーバーを始動して、ポート 3000 で接続を listen します。アプリケーションは、ルート URL (`/`) または*ルート* に対する要求に「Hello World!」と応答します。その他すべてのパスについては、「**404 Not Found**」と応答します。
 
@@ -41,7 +39,7 @@ app.listen(port, () => {
 
 次のコマンドを使用してアプリケーションを実行します。
 
-```console
+```bash
 $ node app.js
 ```
 

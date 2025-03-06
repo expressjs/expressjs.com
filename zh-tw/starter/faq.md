@@ -43,26 +43,22 @@ Express 支援符合 `(path, locals, callback)` 簽章的任何範本引擎。�
 
 在 Express 中，404 回應並不是錯誤的結果，因此錯誤處理常式中介軟體不會擷取它們。會有此行為是因為 404 回應僅表示沒有額外的工作來執行；換句話說，Express 已執行所有的中介軟體函數和路由，並發現它們都沒有回應。您唯一要做的是在堆疊的最底端（其他所有函數下方），新增一個中介軟體函數，以處理 404 回應：
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(req, res, next) {
-  res.status(404).send('Sorry cant find that!');
-});
-</code>
-</pre>
+```js
+app.use((req, res, next) => {
+  res.status(404).send('Sorry cant find that!')
+})
+```
 
 ## 如何設定錯誤處理程式？
 
 錯誤處理中介軟體的定義方式，與其他中介軟體相同，差別在於引數是四個而非三個，具體來說，就是使用 `(err, req, res, next)` 簽章：
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-</code>
-</pre>
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 如需相關資訊，請參閱[錯誤處理](/{{ page.lang }}/guide/error-handling.html)。
 

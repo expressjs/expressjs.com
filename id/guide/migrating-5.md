@@ -14,7 +14,7 @@ Express 5.0 is still in the beta release stage, but here is a preview of the cha
 
 To install the latest beta and to preview Express 5, enter the following command in your application root directory:
 
-```console
+```bash
 $ npm install "express@^{{ site.data.express.next_version }}" --save
 ```
 

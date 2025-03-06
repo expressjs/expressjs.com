@@ -11,19 +11,19 @@ description: Learn how to enable and use debugging logs in Express.js applicatio
 
 如果要查看 Express 中使用的所有內部日誌，在您啟動應用程式時，請將 `DEBUG` 環境變數設為 `express:*`。
 
-```console
+```bash
 $ DEBUG=express:* node index.js
 ```
 
 在 Windows 中，使用對應指令。
 
-```console
+```bash
 > set DEBUG=express:* & node index.js
 ```
 
 對 [express generator](/{{ page.lang }}/starter/generator.html) 產生的預設應用程式執行這個指令，會列印下列輸出：
 
-```console
+```bash
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -69,7 +69,7 @@ $ DEBUG=express:* node ./bin/www
 
 當對應用程式發出要求時，您會看到 Express 程式碼中指定的日誌：
 
-```console
+```bash
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -95,12 +95,12 @@ $ DEBUG=express:* node ./bin/www
 
 舉例來說，如果您使用 `$ express sample-app` 來產生應用程式，您可以利用下列指令來啟用除錯陳述式：
 
-```console
+```bash
 $ DEBUG=sample-app:* node ./bin/www
 ```
 
 您可以指派以逗點區隔的名稱清單，來指定多個除錯名稱空間：
 
-```console
+```bash
 $ DEBUG=http,mail,express:* node index.js
 ```

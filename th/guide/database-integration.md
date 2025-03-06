@@ -35,7 +35,7 @@ search on the [npm](https://www.npmjs.com/) site.
 
 ### Installation
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -57,7 +57,7 @@ client.execute('select key from system.local', (err, result) => {
 
 ### Installation
 
-```console
+```bash
 $ npm install couchbase
 ```
 
@@ -94,7 +94,7 @@ bucket.query(query, [13], (err, result) => {
 
 ### Installation
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -130,7 +130,7 @@ books.list((err, body) => {
 
 ### Installation
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -157,7 +157,7 @@ db.put('name', 'LevelUP', (err) => {
 
 ### Installation
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -189,7 +189,7 @@ connection.end()
 
 ### Installation
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -217,7 +217,7 @@ If you want an object model driver for MongoDB, look at [Mongoose](https://githu
 
 ### Installation
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -244,7 +244,7 @@ apoc.query('match (n) return n').exec().then(
 
  NOTE: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
 
-```console
+```bash
 $ npm install oracledb
 ```
 
@@ -288,7 +288,7 @@ getEmployee(101)
 
 ### Installation
 
-```console
+```bash
 $ npm install pg-promise
 ```
 
@@ -313,7 +313,7 @@ db.one('SELECT $1 AS value', 123)
 
 ### Installation
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -348,7 +348,7 @@ client.hkeys('hash key', (err, replies) => {
 
 ### Installation
 
-```console
+```bash
 $ npm install tedious
 ```
 
@@ -404,7 +404,7 @@ function executeStatement () {
 
 ### Installation
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -438,7 +438,7 @@ db.close()
 
 ### Installation
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 

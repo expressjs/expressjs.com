@@ -48,20 +48,20 @@ Helmet n'est actuellement qu'une collection de neuf fonctions middleware plus pe
 
 Installez Helmet comme n'importe quel autre module :
 
-```console
+```bash
 $ npm install --save helmet
 ```
 
 Puis, pour l'utiliser dans votre code :
 
-<pre>
-<code class="language-javascript" translate="no">
-...
-var helmet = require('helmet');
-app.use(helmet());
-...
-</code>
-</pre>
+```js
+/// ...
+
+const helmet = require('helmet')
+app.use(helmet())
+
+/// ...
+```
 
 ### Désactivez au minimum l'en-tête X-Powered-By
 
@@ -69,11 +69,9 @@ Si vous ne voulez pas utiliser Helmet, désactivez au minimum l'en-tête `X-Powe
 
 Il est donc conseillé de neutraliser l'en-tête à l'aide de la méthode `app.disable()` comme suit :
 
-<pre>
-<code class="language-javascript" translate="no">
-app.disable('x-powered-by');
-</code>
-</pre>
+```js
+app.disable('x-powered-by')
+```
 
 Si vous utilisez `helmet.js`, cette opération s'effectue automatiquement.
 
@@ -96,17 +94,15 @@ L'utilisation d'un nom de cookie de session par défaut risque d'ouvrir votre ap
 
 Pour éviter ce problème, utilisez des noms de cookie génériques, par exemple à l'aide du middleware [express-session](https://www.npmjs.com/package/express-session) :
 
-<pre>
-<code class="language-javascript" translate="no">
-var session = require('express-session');
+```js
+const session = require('express-session')
 app.set('trust proxy', 1) // trust first proxy
-app.use( session({
-   secret : 's3Cur3',
-   name : 'sessionId',
-  })
-);
-</code>
-</pre>
+app.use(session({
+  secret: 's3Cur3',
+  name: 'sessionId'
+})
+)
+```
 
 ### Définissez des options de sécurité de cookie
 
@@ -120,32 +116,31 @@ Définissez les options de cookie suivantes pour accroître la sécurité :
 
 Exemple d'utilisation du middleware [cookie-session](https://www.npmjs.com/package/cookie-session) :
 
-<pre>
-<code class="language-javascript" translate="no">
-var session = require('cookie-session');
-var express = require('express');
-var app = express();
+```js
+const session = require('cookie-session')
+const express = require('express')
+const app = express()
 
-var expiryDate = new Date( Date.now() + 60 * 60 * 1000 ); // 1 hour
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],
-  cookie: { secure: true,
-            httpOnly: true,
-            domain: 'example.com',
-            path: 'foo/bar',
-            expires: expiryDate
-          }
-  })
-);
-</code>
-</pre>
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    domain: 'example.com',
+    path: 'foo/bar',
+    expires: expiryDate
+  }
+})
+)
+```
 
 ## Autres considérations
 
 Voici d'autres recommandations issues de l'excellente [liste de contrôle de sécurité Node.js](https://blog.risingstack.com/node-js-security-checklist/).  Pour tous les détails sur ces recommandations, reportez-vous à cet article de blogue :
 
-* Implémentez la limitation de débit pour empêcher les attaques de force brute liées à l'authentification.  Une façon de faire consiste à utiliser [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) pour mettre en place une règle de limitation de débit.  Sinon, vous pouvez utiliser des middleware tels que [express-limiter](https://www.npmjs.com/package/express-limiter), mais vous devrez alors modifier quelque peu votre code.
+* Implémentez la limitation de débit pour empêcher les attaques de force brute liées à l'authentification.  Une façon de faire consiste à utiliser [StrongLoop API Gateway](https://web.archive.org/web/20240000000000/https://strongloop.com/node-js/api-gateway/) pour mettre en place une règle de limitation de débit.  Sinon, vous pouvez utiliser des middleware tels que [express-limiter](https://www.npmjs.com/package/express-limiter), mais vous devrez alors modifier quelque peu votre code.
 * Filtrez et nettoyez toujours les entrées utilisateur pour vous protéger contre les attaques de cross-site scripting (XSS) et d'injection de commande.
 * Défendez-vous contre les attaques par injection SQL en utilisant des requêtes paramétrées ou des instructions préparées.
 * Utilisez l'outil [sqlmap](http://sqlmap.org/) à code source ouvert pour détecter les vulnérabilités par injection SQL dans votre application.

@@ -43,7 +43,7 @@ Di direktori `myapp`, buat file bernama `app.js` dan salin kode dari contoh di a
 
 Jalankan aplikasi dengan perintah berikut:
 
-```console
+```bash
 $ node app.js
 ```
 

@@ -6,6 +6,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/behind-proxies.html"
 ---
+
 # Express behind proxies
 
 When running an Express app behind a reverse proxy, some of the Express APIs may return different values than expected. In order to adjust for this, the `trust proxy` application setting may be used to expose information provided by the reverse proxy in the Express APIs. The most common issue is express APIs that expose the client's IP address may instead show an internal IP address of the reverse proxy.

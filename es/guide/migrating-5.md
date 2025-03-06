@@ -17,7 +17,7 @@ Express 5 no es muy diferente de Express 4: los cambios en la API no son tan sig
 
 Para instalar el release alpha más reciente y obtener una vista previa de Express 5, especifique el siguiente mandato en el directorio raíz de la aplicación:
 
-```console
+```bash
 $ npm install "express@^{{ site.data.express.next_version }}" --save
 ```
 

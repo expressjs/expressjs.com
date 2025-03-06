@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  {% include head.html %}
+
+  {% if page.lang == 'en' %}
+  <body class="en-doc">
+  {% else %}
+  <body class="non-en-doc">
+  {% endif %}
+    {% include header.html %}
+    <div id="overlay"></div>
+    <main class="content-404">
+      {{ content }}
+    </main>
+    {% include footer.html %}
+  </body>
+</html>

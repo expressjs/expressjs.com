@@ -28,7 +28,7 @@ app.use(express.static('public'))
 ```
 ตอนนี้คุณสามารถโหลดไฟล์ที่อยู่ในไดเรกเทอรี `public` ได้ดังนี้:
 
-```plain-text
+```text
 http://localhost:3000/images/kitten.jpg
 http://localhost:3000/css/style.css
 http://localhost:3000/js/app.js
@@ -60,7 +60,7 @@ app.use('/static', express.static('public'))
 
 ตอนนี้คุณสามารถโหลดไฟล์ที่อยู่ในไดเรกเทอรี `public` จากคำนำหน้าเส้นทาง `/static`
 
-```plain-text
+```text
 http://localhost:3000/static/images/kitten.jpg
 http://localhost:3000/static/css/style.css
 http://localhost:3000/static/js/app.js

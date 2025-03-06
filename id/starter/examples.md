@@ -3,7 +3,8 @@ layout: page
 title: Contoh Penggunaan Express
 menu: starter
 lang: id
-description: Explore a collection of Express.js application examples covering various
+description:
+  Explore a collection of Express.js application examples covering various
   use cases, integrations, and advanced configurations to help you learn and build
   your projects.
 ---
@@ -17,10 +18,7 @@ Ini adalah beberapa contoh tambahan penggunaan Express dengan integrasi yang leb
 
 {% include community-caveat.html %}
 
-- [prisma-express-graphql](https://github.com/prisma/prisma-examples/tree/latest/typescript/graphql-express) - GraphQL API dengan `express-graphql` menggunakan [Prisma](https://www.npmjs.com/package/prisma) sebagai ORM
-- [prisma-fullstack](https://github.com/prisma/prisma-examples/tree/latest/typescript/rest-nextjs-express) - Aplikasi fullstack dengan Next.js menggunakan [Prisma](https://www.npmjs.com/package/prisma) sebagai ORM
-- [prisma-rest-api-js](https://github.com/prisma/prisma-examples/tree/latest/javascript/rest-express) - REST API dengan Express dalam JavaScript menggunakan [Prisma](https://www.npmjs.com/package/prisma) sebagai ORM
-- [prisma-rest-api-ts](https://github.com/prisma/prisma-examples/tree/latest/typescript/rest-express) - REST API dengan Express dalam TypeScript menggunakan [Prisma](https://www.npmjs.com/package/prisma) sebagai ORM
+- [prisma-fullstack](https://github.com/prisma/prisma-examples/tree/latest/pulse/fullstack-simple-chat) - Aplikasi fullstack dengan Next.js menggunakan [Prisma](https://www.npmjs.com/package/prisma) sebagai ORM
+- [prisma-rest-api-ts](https://github.com/prisma/prisma-examples/tree/latest/orm/express) - REST API dengan Express dalam TypeScript menggunakan [Prisma](https://www.npmjs.com/package/prisma) sebagai ORM
 
-
-###  [Previous: Static Files ](/{{ page.lang }}/starter/static-files.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: FAQ ](/{{ page.lang }}/starter/faq.html)
+### [Previous: Static Files ](/{{ page.lang }}/starter/static-files.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: FAQ ](/{{ page.lang }}/starter/faq.html)

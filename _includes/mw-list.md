@@ -15,3 +15,4 @@
 - [session](/resources/middleware/session.html)
 - [timeout](/resources/middleware/timeout.html)
 - [vhost](/resources/middleware/vhost.html)
+{: #side-menu .active}

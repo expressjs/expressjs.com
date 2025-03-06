@@ -15,11 +15,9 @@ description: Learn the fundamentals of routing in Express.js applications, inclu
 各ルートには、1 つ以上のハンドラー関数があり、それらはルートが一致したときに実行されます。
 
 ルート定義では、次の構造を使用します。
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 各部分の意味は次のとおりです。
 
@@ -36,42 +34,34 @@ app.METHOD(PATH, HANDLER)
 
 ホーム・ページで `Hello World!` と応答します。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+```
 
 アプリケーションのホーム・ページであるルートのルート (`/`) で POST 要求に応答します。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
-</code>
-</pre>
+```js
+app.post('/', (req, res) => {
+  res.send('Got a POST request')
+})
+```
 
 `/user` ルートに対する PUT 要求に応答します。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user');
-});
-</code>
-</pre>
+```js
+app.put('/user', (req, res) => {
+  res.send('Got a PUT request at /user')
+})
+```
 
 `/user` ルートに対する DELETE 要求に応答します。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user');
-});
-</code>
-</pre>
+```js
+app.delete('/user', (req, res) => {
+  res.send('Got a DELETE request at /user')
+})
+```
 
 ルーティングについて詳しくは、[ルーティング・ガイド](/{{ page.lang }}/guide/routing.html)を参照してください。

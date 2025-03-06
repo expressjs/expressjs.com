@@ -17,8 +17,7 @@ description: Get started with Express.js by building a simple 'Hello World' appl
 
 在 `myapp` 目录中，创建名为 `app.js` 的文件，然后添加以下代码：
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 const express = require('express')
 const app = express()
 const port = 3000
@@ -30,8 +29,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-</code>
-</pre>
+```
 
 应用程序会启动服务器，并在端口 3000 上侦听连接。此应用程序以“Hello World!”响应针对根 URL (`/`) 或*路由*的请求。对于其他所有路径，它将以 **404 Not Found** 进行响应。
 
@@ -41,7 +39,7 @@ app.listen(port, () => {
 
 使用以下命令运行应用程序：
 
-```console
+```bash
 $ node app.js
 ```
 

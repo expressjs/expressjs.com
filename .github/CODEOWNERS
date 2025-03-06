@@ -1,0 +1,8 @@
+# Website development
+* @expressjs/docs-captains @expressjs/docs-collaborators
+
+# Codeowners
+.github/CODEOWNERS @expressjs/docs-captains
+
+# Blog
+_posts @expressjs/express-tc

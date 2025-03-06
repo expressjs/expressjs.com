@@ -6,10 +6,6 @@ lang: sk
 description: Discover crucial security best practices for Express apps in production,
   including using TLS, input validation, secure cookies, and preventing vulnerabilities.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Osvedčené postupy pre Express v produkcii - Security
 
@@ -55,20 +51,20 @@ Helmet je v skutočnosti len kolekcia deviatich menších middleware funkcií na
 
 Helmet nainštalujete rovnako, ako akýkoľvek iný modul:
 
-```console
+```bash
 $ npm install --save helmet
 ```
 
 Potom ho môžete použiť vo vašom kóde takto:
 
-<pre>
-<code class="language-javascript" translate="no">
-...
-var helmet = require('helmet');
-app.use(helmet());
-...
-</code>
-</pre>
+```js
+/// ...
+
+const helmet = require('helmet')
+app.use(helmet())
+
+/// ...
+```
 
 ### Určite aspoň zakážte X-Powered-By hlavičku
 
@@ -76,11 +72,9 @@ Ak nechcete použiť Helmet, potom určite aspoň zakážte `X-Powered-By` hlavi
 
 Preto sa odporúča, vypnúť túto hlavičku pomocou `app.disable()` metódy:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.disable('x-powered-by');
-</code>
-</pre>
+```js
+app.disable('x-powered-by')
+```
 
 V prípade, že použijete modul `helmet.js`, ten sa o to postará.
 
@@ -103,17 +97,15 @@ Používaním defaultného názvu session cookie vystavujete aplikáciu možným
 
 Aby ste sa vyhli tomuto problému, použite generické názvy cookie; napr použitím [express-session](https://www.npmjs.com/package/express-session) middlewaru:
 
-<pre>
-<code class="language-javascript" translate="no">
-var session = require('express-session');
-app.set('trust proxy', 1); // trust first proxy
-app.use( session({
-   secret : 's3Cur3',
-   name : 'sessionId',
-  })
-);
-</code>
-</pre>
+```js
+const session = require('express-session')
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 's3Cur3',
+  name: 'sessionId'
+})
+)
+```
 
 ### Nastavte cookie security parametre
 
@@ -127,32 +119,31 @@ Pre zlepšenie bezpečnosti nastavte nasledujúce cookie parametre:
 
 Tu je príklad použitia [cookie-session](https://www.npmjs.com/package/cookie-session) middleware modulu:
 
-<pre>
-<code class="language-javascript" translate="no">
-var session = require('cookie-session');
-var express = require('express');
-var app = express();
+```js
+const session = require('cookie-session')
+const express = require('express')
+const app = express()
 
-var expiryDate = new Date( Date.now() + 60 * 60 * 1000 ); // 1 hour
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],
-  cookie: { secure: true,
-            httpOnly: true,
-            domain: 'example.com',
-            path: 'foo/bar',
-            expires: expiryDate
-          }
-  })
-);
-</code>
-</pre>
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    domain: 'example.com',
+    path: 'foo/bar',
+    expires: expiryDate
+  }
+})
+)
+```
 
 ## Ďalšie odporúčania
 
 Tu sú ďalšie odporúčania zo skvelého [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/) zoznamu. Pre viac detailov ohľadom jednotlivých odporúčaní si prečítajte samotný blog post:
 
-* Implementujte tzv. rate-limiting pre vyhnutie sa brute-force útokom voči autentifikácii.  Jednou z možností ako to dosiahnuť je použitie [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) k vynúteniu rate-limiting policy.  Ako alternatívu môžete použiť middleware, ako napr. [express-limiter](https://www.npmjs.com/package/express-limiter), avšak to si už vyžaduje mierny zásah do kódu vašej aplikácie.
+* Implementujte tzv. rate-limiting pre vyhnutie sa brute-force útokom voči autentifikácii.  Jednou z možností ako to dosiahnuť je použitie [StrongLoop API Gateway](https://web.archive.org/web/20240000000000/https://strongloop.com/node-js/api-gateway/) k vynúteniu rate-limiting policy.  Ako alternatívu môžete použiť middleware, ako napr. [express-limiter](https://www.npmjs.com/package/express-limiter), avšak to si už vyžaduje mierny zásah do kódu vašej aplikácie.
 * Vždy filtrujte a overte vstup od používateľa, aby ste vašu aplikáciu ochránili voči útokom typu cross-site scripting (XSS) a command injection.
 * Bránte sa voči útokom typu SQL injection použitím parametrizovaych queries, príp. prepared statements.
 * Používajte open source tool [sqlmap](http://sqlmap.org/) k detekcii SQL injection vulnerabilities vo vašej aplikácii.

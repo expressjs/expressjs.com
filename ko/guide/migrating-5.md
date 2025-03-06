@@ -17,7 +17,7 @@ Express 5는 Express 4와 크게 다르지 않으며, API에 대한 변경은 3.
 
 Express 5의 최신 알파 버전을 설치하고 미리보려면, 애플리케이션 루트 디렉토리에서 다음의 명령을 입력하십시오.
 
-```console
+```bash
 $ npm install "express@^{{ site.data.express.next_version }}" --save
 ```
 

@@ -16,7 +16,7 @@ Pour qu'Express puisse afficher le rendu des fichiers modèles, vous devez défi
 
 Ensuite, installez le package npm du moteur de modèle correspondant :
 
-```console
+```bash
 $ npm install pug --save
 ```
 
@@ -28,33 +28,27 @@ Certaines moteurs de modèles ne suivent pas cette convention. La bibliothèque 
 
 Une fois le moteur de vue défini, vous n'avez pas à spécifier le moteur ou à charger le module de moteur de modèles dans votre application ; Express charge le module en interne, comme indiqué ci-dessous (pour l'exemple ci-dessus).
 
-<pre>
-<code class="language-javascript" translate="no">
-app.set('view engine', 'pug');
-</code>
-</pre>
+```js
+app.set('view engine', 'pug')
+```
 
 Créez un fichier de modèle Pug nommé `index.pug` dans le répertoire `views`, avec le contenu suivant :
 
-<pre>
-<code class="language-javascript" translate="no">
+```pug
 html
   head
     title= title
   body
     h1= message
-</code>
-</pre>
+```
 
 Puis, créez une route pour générer le fichier `index.pug`. Si la propriété `view engine` n'est pas définie, vous devez spécifier l'extension du fichier `view`. Sinon, vous pouvez l'omettre.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+```
 
 Lorsque vous faites une demande vers la page d'accueil, le fichier `index.pug` est généré en HTML.
 

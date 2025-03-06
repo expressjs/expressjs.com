@@ -1,0 +1,60 @@
+# Home
+home: หน้าแรก
+
+# Getting started
+getting_started: หน้าแรก
+installing: การติดตั้ง
+hello_world: Hello world
+generator: เครื่องมือสร้าง Express
+basic_routing: เส้นทางเบื้องต้น
+static_files: บริการไฟล์คงที่
+examples: More examples
+faq: คำถามที่พบบ่อย
+
+# Guide
+guide: แนะนำ
+routing: การใช้งานเราเตอร์
+writing_middleware: การเขียนมิดเดิลแวร์
+using_middleware: การใช้งานมิดเดิลแวร์
+overriding_express_api: Overriding the Express API
+using_template_engines: การใช้งานเครื่องสร้างโครงแบบ
+error_handling: การจักการความผิดพลาด
+debugging: การแก้จุดบกพร่อง
+behind_proxies: Express เบื่องหลังพร็อกซี
+migrating_4: การย้ายไป Express 4
+migrating_5: การย้ายไป Express 5
+database_integration: การเชื่อมโยงกับฐานข้อมูล
+
+# API reference
+
+api: การอ้างอิง API
+5x: 5.x
+4x: 4.x
+3x: 3.x (เลิกใช้)
+2x: 2.x (เลิกใช้)
+
+# Advanced topics
+advanced: หัวข้อขั้นสูง
+developing_template_engines: เครื่องสร้างโครงแบบ
+security_updates: ความปลอดภัยล่าสุด
+best_practice_security: แนวทางปฏิบัติความปลอดภัย
+best_practice_performance: แนวทางปฏิบัติประสิทธิภาพ
+healthcheck_graceful_shutdown: Health checks & shutdown
+
+# Resources
+resources: แหล่งข้อมูลอื่น
+glossary: ศัพย์
+middleware: มิลเดิลแวร์
+community: ชุมชน
+utils: โมดูลที่มีประโยชน์
+contributing: มีส่วนร่วมกับ Express
+changelog: บันทึกการเปลี่ยนแปลง
+
+# Support
+support: Support
+
+# Blog
+blog: Blog
+latest_post: Latest post
+all_posts: All posts
+write_post: Write a Post

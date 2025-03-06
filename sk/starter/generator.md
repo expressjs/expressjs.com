@@ -6,10 +6,6 @@ lang: sk
 description: Learn how to use the Express application generator tool to quickly create
   a skeleton for your Express.js applications, streamlining setup and configuration.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Express generátor
 
@@ -17,13 +13,13 @@ Pre rýchle vygenerovanie skeletonu aplikácie môžete použit nástroj `expres
 
 Nainštalujte `express-generator` pomocou nasledujúceho príkazu:
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 
 Pre zobrazenie ďalších možností príkazu zadajte prepínač `-h`:
 
-```console
+```bash
 $ express -h
 
   Usage: express [options] [dir]
@@ -45,7 +41,7 @@ $ express -h
 
 Nasledujúci príkaz vytvorí v aktuálnom priečinku Express aplikáciu s názvom _myapp_:
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -69,20 +65,20 @@ $ express --view=pug myapp
 
 Potom nainštalujte dependencie:
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 Na MacOS príp. Linux, spustíte aplikáciu príkazom:
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 Na Windows, príkazom:
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -90,7 +86,7 @@ Potom v prehliadači zadajte `http://localhost:3000/`.
 
 Vygenerovaná aplikácia má naslednovnú štruktúru priečinkov:
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

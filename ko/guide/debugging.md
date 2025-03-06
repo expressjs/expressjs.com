@@ -12,19 +12,19 @@ description: Learn how to enable and use debugging logs in Express.js applicatio
 Express에서 사용되는 모든 내부 로그를 확인하려면, 앱을 실행할 때 `DEBUG` 환경 변수를
 `express:*`로 설정하십시오.
 
-```console
+```bash
 $ DEBUG=express:* node index.js
 ```
 
 Windows에서는 다음과 같은 명령을 사용하십시오.
 
-```console
+```bash
 > set DEBUG=express:* & node index.js
 ```
 
 [Express 생성기](/{{ page.lang }}/starter/generator.html)가 생성한 기본 앱에 대해 이 명령을 실행하면 다음과 같이 인쇄됩니다.
 
-```console
+```bash
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -70,7 +70,7 @@ $ DEBUG=express:* node ./bin/www
 
 이후 앱에 대한 요청이 이루어지면, Express 코드에 지정된 로그를 확인할 수 있습니다.
 
-```console
+```bash
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -96,12 +96,12 @@ $ DEBUG=express:* node ./bin/www
 
 예를 들어 `$ express sample-app`을 통해 앱을 생성하는 경우에는 다음과 같은 명령을 통해 디버그 명령문을 사용할 수 있습니다.
 
-```console
+```bash
 $ DEBUG=sample-app:* node ./bin/www
 ```
 
 다음과 같이 쉼표로 구분된 이름 목록을 지정하면 2개 이상의 디버그 네임스페이스를 지정할 수 있습니다.
 
-```console
+```bash
 $ DEBUG=http,mail,express:* node index.js
 ```

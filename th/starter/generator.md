@@ -13,12 +13,12 @@ description: Learn how to use the Express application generator tool to quickly 
 
 `express-generator` ติดตั้งแพ็กเกจไปยังชุดคำสั่ง `express`  ใช้คำสั่งด้านล่างนี้เพื่อติดตั้ง:
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 แสดงตัวเลือกคำสั่งทั้งหมดด้วย `h`:
 
-```console
+```bash
 $ express -h
 
   Usage: express [options] [dir]
@@ -39,7 +39,7 @@ $ express -h
 ```
 สำหรับตัวอย่าง คำสั่งข้างล่างนี้เพื่อสร้าง Express app ที่ชื่อว่า _myapp_ โดยจะสร้างโฟล์เดอร์ชื่อ _myapp_ ในไดเรกเทอรีที่ใช้งานอยู่ และตั้ง view engine เป็น <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -62,20 +62,20 @@ $ express --view=pug myapp
 ```
 แล้วติดตั้งโมดูลเกี่ยวโยง (dependencies):
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 บน MacOS หรือ Linux รัน app ด้วยคำสั่งนี้:
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 บน Windows ใช้คำสั่งนี้:
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -83,7 +83,7 @@ $ DEBUG=myapp:* npm start
 
 หลังจากสร้าง app แล้วจะได้โครงสร้างไดเรกทอรีดังนี้:
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

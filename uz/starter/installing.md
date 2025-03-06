@@ -11,26 +11,26 @@ description: Learn how to install Express.js in your Node.js environment, includ
 
 Avval, agar ish direktoryasini yaratmagan bo'lsangiz, uni yarating va ish direktoriyasiga aylantiring.
 
-```console
+```bash
 $ mkdir myapp
 $ cd myapp
 ```
 
 Agar sizning direktoriyangizda `package.json` fayli mavjud bo'lmasa, uni `npm init` buyrug'i orqali yarating.
 
-```console
+```bash
 $ npm init
 ```
 
 Expressni dastur direktoriyangizga o'rnating va uning kerakli modullarini saqlab qo'ying:
 
-```console
+```bash
 $ npm install express --save
 ```
 
 Expressni vaqtinchalik o'rnatish uchun va uning kerakli modullarni saqlab qo'ymaslik uchun `--save` qo'shimchasini olib tashlang::
 
-```console
+```bash
 $ npm install express
 ```
 

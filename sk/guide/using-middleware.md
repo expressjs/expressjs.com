@@ -6,10 +6,6 @@ lang: sk
 description: Learn how to use middleware in Express.js applications, including application-level
   and router-level middleware, error handling, and integrating third-party middleware.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Použitie middleware
 
@@ -43,151 +39,134 @@ Pripojte application-level middleware k inštancii [app objektu](/{{ page.lang }
 
 Nasledujúci príklad ukazuje middleware funkciu, ktorá nie je pripojená na žiaden path. Funkcia bude vykonaná vždy, keď aplikácia obdrží request.
 
-<pre>
-<code class="language-javascript" translate="no">
-var app = express();
+```js
+const app = express()
 
-app.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
-</code>
-</pre>
+app.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
+```
 
 Nasledujúci príklad ukazuje middleware funkciu pripojenú na ceste `/user/:id`. Funkcia bude vykonaná vždy, keď aplikácia održí request na `/user/:id` a to bez ohľadu na typ použitej HTTP metódy.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use('/user/:id', function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
-</code>
-</pre>
+```js
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+```
 
 Nasledujúci príklad ukazuje route a jej handler funkciu (middleware systém). Táto funkcia handluje GET requesty na ceste `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
-  res.send('USER');
-});
-</code>
-</pre>
+```js
+app.get('/user/:id', (req, res, next) => {
+  res.send('USER')
+})
+```
 
 Tu je príklad načítania skupiny middleware funkcií pripojených na konkrétnu cesty. Príklad ilustruje sub-stack middleware, ktorý vypíše info o requeste pre všetky typy HTTP requestov vykonaných na `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
-}, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
-</code>
-</pre>
+```js
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+```
 
 Route handlery dovoľujú definovať viacero route-ov pre jednu cestu. Nasledujúci príklad definuje dva routy pre GET requesty na ceste `/user/:id`. Definovanie druhého route nespôsobí žiadne problémy, ale ani sa nikdy nezavolá, pretože prvý route ukončí request-response cyklus.
 
 Tento príklad zobrazuje middleware sub-stack ktorý handluje GET requesty na ceste `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
-  console.log('ID:', req.params.id);
-  next();
-}, function (req, res, next) {
-  res.send('User Info');
-});
+```js
+app.get('/user/:id', (req, res, next) => {
+  console.log('ID:', req.params.id)
+  next()
+}, (req, res, next) => {
+  res.send('User Info')
+})
 
 // handler for the /user/:id path, which prints the user ID
-app.get('/user/:id', function (req, res, next) {
-  res.end(req.params.id);
-});
-</code>
-</pre>
+app.get('/user/:id', (req, res, next) => {
+  res.end(req.params.id)
+})
+```
 
 Ak chcete preskočiť zostávajúce middleware funkcie z router middleware stack-u, zavolajte `next('route')` čím posuniete obsluhu ďalšiemu route.
 **POZNÁMKA**: `next('route')` zafunguje iba v takých middleware funkciách, ktoré boli načítané pomocou `app.METHOD()` alebo `router.METHOD()` funkcií.
 
 Tento príklad zobrazuje middleware sub-stack, ktorý handluje GET requesty na ceste `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
+```js
+app.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next route
-  if (req.params.id == 0) next('route');
+  if (req.params.id === '0') next('route')
   // otherwise pass the control to the next middleware function in this stack
-  else next(); //
-}, function (req, res, next) {
+  else next() //
+}, (req, res, next) => {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
-app.get('/user/:id', function (req, res, next) {
-  res.render('special');
-});
-</code>
-</pre>
+app.get('/user/:id', (req, res, next) => {
+  res.render('special')
+})
+```
 
 <h2 id='middleware.router'>Router-level middleware</h2>
 
 Router-level middleware funguje rovnakým spôsobom ako application-level middleware, avšak je pripojený k `express.Router()` inštancii.
 
-<pre>
-<code class="language-javascript" translate="no">
-var router = express.Router();
-</code>
-</pre>
+```js
+const router = express.Router()
+```
 Router-level middleware načítate pomocou `router.use()` a `router.METHOD()` funkcií.
 
 Nasledujúci príklad replikuje vyššie zobrazený application-level middleware použitím router-level middlewaru:
 
-<pre>
-<code class="language-javascript" translate="no">
-var app = express();
-var router = express.Router();
+```js
+const app = express()
+const router = express.Router()
 
 // a middleware function with no mount path. This code is executed for every request to the router
-router.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
+router.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
-router.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
-}, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
+router.use('/user/:id', (req, res, next) => {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
 
 // a middleware sub-stack that handles GET requests to the /user/:id path
-router.get('/user/:id', function (req, res, next) {
+router.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next router
-  if (req.params.id == 0) next('route');
+  if (req.params.id === '0') next('route')
   // otherwise pass control to the next middleware function in this stack
-  else next(); //
-}, function (req, res, next) {
+  else next() //
+}, (req, res, next) => {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
-router.get('/user/:id', function (req, res, next) {
-  console.log(req.params.id);
-  res.render('special');
-});
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id)
+  res.render('special')
+})
 
 // mount the router on the app
-app.use('/', router);
-</code>
-</pre>
-
+app.use('/', router)
+```
 <h2 id='middleware.error-handling'>Error-handling middleware</h2>
 
 <div class="doc-box doc-notice" markdown="1">
@@ -196,14 +175,12 @@ Error-handling middleware príjma vždy _štyri_ argumenty.  Aby bolo možné id
 
 Error-handling middleware funkcie sa definujú rovnako ako ostatné middleware funkcie, len majú štyri argumenty namiesto troch, špecificky podľa signatúry `(err, req, res, next)`:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-</code>
-</pre>
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 Pre viac informácií ohľadom error-handling middlewarov si pozrite sekciu: [Error handling](/{{ page.lang }}/guide/error-handling.html).
 
@@ -215,11 +192,9 @@ Jediným vstavaným  middlewarom v Express je `express.static` funkcia. Tento mi
 
 Signatúra tejto funkcie je:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 express.static(root, [options])
-</code>
-</pre>
+```
 
 Parameter `root` špecifikuje hlavný adresár z ktorého bude statický obsah servovaný.
 
@@ -227,9 +202,8 @@ Informácie ohľadom `options` parametra ako i ďalšie detaily ohľadom tohto m
 
 Tu je príklad použitia `express.static` middleware funkcie s rôznou konfiguráciou options objektu:
 
-<pre>
-<code class="language-javascript" translate="no">
-var options = {
+```js
+const options = {
   dotfiles: 'ignore',
   etag: false,
   extensions: ['htm', 'html'],
@@ -237,23 +211,20 @@ var options = {
   maxAge: '1d',
   redirect: false,
   setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now());
+    res.set('x-timestamp', Date.now())
   }
 }
 
-app.use(express.static('public', options));
-</code>
-</pre>
+app.use(express.static('public', options))
+```
 
 Môžete nastaviť aj viac ako jeden priečinok so statickým obsahom:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(express.static('public'));
-app.use(express.static('uploads'));
-app.use(express.static('files'));
-</code>
-</pre>
+```js
+app.use(express.static('public'))
+app.use(express.static('uploads'))
+app.use(express.static('files'))
+```
 
 Pre viac detailov ohľadom `serve-static` funkcie a jej možnostiach si pozrite dokumentáciu k [serve-static](https://github.com/expressjs/serve-static) modulu.
 
@@ -265,19 +236,17 @@ Nainštalujte požadovaný Node.js modul a načítajte ho do aplikácie ako apli
 
 Nasledujúci príklad demonštruje inštaláciu a načítanie middleware funkcie `cookie-parser` slúžiacej na prácu s cookies.
 
-```console
+```bash
 $ npm install cookie-parser
 ```
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-var cookieParser = require('cookie-parser');
+```js
+const express = require('express')
+const app = express()
+const cookieParser = require('cookie-parser')
 
 // load the cookie-parsing middleware
-app.use(cookieParser());
-</code>
-</pre>
+app.use(cookieParser())
+```
 
 Čiastočný zoznam bežne používaných third-party middleware funkcií pre Express nájdete v sekcii: [Third-party middleware](../resources/middleware.html).

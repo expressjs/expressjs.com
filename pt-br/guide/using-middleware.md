@@ -55,41 +55,35 @@ Este exemplo mostra uma função de middleware sem um caminho de
 montagem. A função é executada sempre que o aplicativo receber uma
 solicitação.
 
-<pre>
-<code class="language-javascript" translate="no">
-var app = express();
+```js
+const app = express()
 
-app.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
-</code>
-</pre>
+app.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
+```
 
 Este exemplo mostra uma função de middleware montada no caminho
 `/user/:id`. A função é executada para qualquer tipo
 de solicitação HTTP no caminho `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use('/user/:id', function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
-</code>
-</pre>
+```js
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+```
 
 Este exemplo mostra uma rota e sua função
 manipuladora (sistema de middleware). A função manipula solicitações
 GET ao caminho `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
-  res.send('USER');
-});
-</code>
-</pre>
+```js
+app.get('/user/:id', (req, res, next) => {
+  res.send('USER')
+})
+```
 
 Aqui está um exemplo de carregamento de um série de funções de
 middleware em um ponto de montagem, com um caminho de montagem.
@@ -97,17 +91,15 @@ Ele
 ilustra uma sub-pilha de middleware que imprime informações de
 solicitação para qualquer tipo de solicitação HTTP no caminho `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
-}, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
-</code>
-</pre>
+```js
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
+```
 
 Manipuladores de rota permitem a você definir várias rotas para
 um caminho. O exemplo abaixo define duas rotas para solicitações GET
@@ -118,21 +110,19 @@ rota termina o ciclo solicitação-resposta.
 Este exemplo mostra uma sub-pilha de middleware que manipula
 solicitações GET no caminho `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
-  console.log('ID:', req.params.id);
-  next();
-}, function (req, res, next) {
-  res.send('User Info');
-});
+```js
+app.get('/user/:id', (req, res, next) => {
+  console.log('ID:', req.params.id)
+  next()
+}, (req, res, next) => {
+  res.send('User Info')
+})
 
 // handler for the /user/:id path, which prints the user ID
-app.get('/user/:id', function (req, res, next) {
-  res.end(req.params.id);
-});
-</code>
-</pre>
+app.get('/user/:id', (req, res, next) => {
+  res.end(req.params.id)
+})
+```
 
 Para pular o restante das funções de middleware de uma pilha de
 middlewares do roteador, chame `next('route')`
@@ -144,24 +134,22 @@ as funções `app.METHOD()` ou `router.METHOD()`.
 Este exemplo mostra uma sub-pilha de middleware que manipula
 solicitações GET no caminho `/user/:id`.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/user/:id', function (req, res, next) {
+```js
+app.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next route
-  if (req.params.id == 0) next('route');
+  if (req.params.id === '0') next('route')
   // otherwise pass the control to the next middleware function in this stack
-  else next(); //
-}, function (req, res, next) {
+  else next() //
+}, (req, res, next) => {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
-app.get('/user/:id', function (req, res, next) {
-  res.render('special');
-});
-</code>
-</pre>
+app.get('/user/:id', (req, res, next) => {
+  res.render('special')
+})
+```
 
 <h2 id='middleware.router'>Middleware de nível de roteador</h2>
 
@@ -169,59 +157,54 @@ Middlewares de nível de roteador funcionam da mesma forma que
 os middlewares de nível do aplicativo, mas estão vinculados a uma
 instância do `express.Router()`.
 
-<pre>
-<code class="language-javascript" translate="no">
-var router = express.Router();
-</code>
-</pre>
+```js
+const router = express.Router()
+```
 Carregue os middlewares de nível de roteador usando as funções `router.use()` e `router.METHOD()`.
 
 O seguinte código de exemplo replica o sistema de middleware
 que é mostrado acima para o middleware de nível do aplicativo, usando
 um middleware de nível de roteador:
 
-<pre>
-<code class="language-javascript" translate="no">
-var app = express();
-var router = express.Router();
+```js
+const app = express()
+const router = express.Router()
 
 // a middleware function with no mount path. This code is executed for every request to the router
-router.use(function (req, res, next) {
-  console.log('Time:', Date.now());
-  next();
-});
+router.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
-router.use('/user/:id', function(req, res, next) {
-  console.log('Request URL:', req.originalUrl);
-  next();
-}, function (req, res, next) {
-  console.log('Request Type:', req.method);
-  next();
-});
+router.use('/user/:id', (req, res, next) => {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, (req, res, next) => {
+  console.log('Request Type:', req.method)
+  next()
+})
 
 // a middleware sub-stack that handles GET requests to the /user/:id path
-router.get('/user/:id', function (req, res, next) {
+router.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next router
-  if (req.params.id == 0) next('route');
+  if (req.params.id === '0') next('route')
   // otherwise pass control to the next middleware function in this stack
-  else next(); //
-}, function (req, res, next) {
+  else next() //
+}, (req, res, next) => {
   // render a regular page
-  res.render('regular');
-});
+  res.render('regular')
+})
 
 // handler for the /user/:id path, which renders a special page
-router.get('/user/:id', function (req, res, next) {
-  console.log(req.params.id);
-  res.render('special');
-});
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id)
+  res.render('special')
+})
 
 // mount the router on the app
-app.use('/', router);
-</code>
-</pre>
-
+app.use('/', router)
+```
 <h2 id='middleware.error-handling'>Middleware de manipulação de erros</h2>
 
 <div class="doc-box doc-notice" markdown="1">
@@ -238,14 +221,12 @@ erros da mesma forma que outras funções de middleware, exceto que com
 quatro argumentos ao invés de três, especificamente com a assinatura
 `(err, req, res, next)`):
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-</code>
-</pre>
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 Para obter detalhes sobre middleware de manipulação de erros,
 consulte [Manipulação de erros](/{{ page.lang }}/guide/error-handling.html).
@@ -285,9 +266,8 @@ seguintes propriedades:
 
 Aqui está um exemplo de uso da função de middleware `express.static` com um objeto options elaborado:
 
-<pre>
-<code class="language-javascript" translate="no">
-var options = {
+```js
+const options = {
   dotfiles: 'ignore',
   etag: false,
   extensions: ['htm', 'html'],
@@ -295,23 +275,20 @@ var options = {
   maxAge: '1d',
   redirect: false,
   setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now());
+    res.set('x-timestamp', Date.now())
   }
 }
 
-app.use(express.static('public', options));
-</code>
-</pre>
+app.use(express.static('public', options))
+```
 
 É possível ter mais do que um diretório estático por aplicativo:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(express.static('public'));
-app.use(express.static('uploads'));
-app.use(express.static('files'));
-</code>
-</pre>
+```js
+app.use(express.static('public'))
+app.use(express.static('uploads'))
+app.use(express.static('files'))
+```
 
 Para obter mais detalhes sobre a função `serve-static` e suas opções, consulte: documentação do[serve-static](https://github.com/expressjs/serve-static).
 
@@ -324,20 +301,18 @@ Instale o módulo Node.js para a funcionalidade requerida, em seguida carregue-a
 O exemplo a seguir ilustra a instalação e carregamento da
 função de middleware para análise sintática de cookies `cookie-parser`.
 
-```console
+```bash
 $ npm install cookie-parser
 ```
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-var cookieParser = require('cookie-parser');
+```js
+const express = require('express')
+const app = express()
+const cookieParser = require('cookie-parser')
 
 // load the cookie-parsing middleware
-app.use(cookieParser());
-</code>
-</pre>
+app.use(cookieParser())
+```
 
 Para obter uma lista parcial de funções de middleware de
 terceiros que são comumente utilizadas com o Express, consulte:

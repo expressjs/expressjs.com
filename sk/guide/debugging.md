@@ -6,29 +6,25 @@ lang: sk
 description: Learn how to enable and use debugging logs in Express.js applications
   by setting the DEBUG environment variable for enhanced troubleshooting.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Debuggovanie Express
 
 Ak chcete vidieť všetky interné logy Express-u, nastavte pri spúštaní vašej aplikácie environment premennú `DEBUG` na hodnotu
 `express:*`.
 
-```console
+```bash
 $ DEBUG=express:* node index.js
 ```
 
 Na Windows-e použite nasledujúci príkaz.
 
-```console
+```bash
 > set DEBUG=express:* & node index.js
 ```
 
 Spustením tohto príkazu v prípade defaultnej aplikácie vygenerovanej pomocou [express generátora](/{{ page.lang }}/starter/generator.html) vypíše nasledujúci výstup:
 
-```console
+```bash
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -74,7 +70,7 @@ $ DEBUG=express:* node ./bin/www
 
 Následne, keď aplikácia odchytí request, uvidíte nasledujúce logy špecifikované v Express kóde:
 
-```console
+```bash
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -100,12 +96,12 @@ Aplikácia vygenerovaná príkazom `express` taktiež používa modul `debug` a 
 
 Pomocou nasledujúceho príkazu, dokážete povoliť debug výpisy pre aplikáciu vygenerovanú pomocou `$ express sample-app` takto:
 
-```console
+```bash
 $ DEBUG=sample-app:* node ./bin/www
 ```
 
 Pomocou čiarkou oddeleného zoznamu názvov môžete špecifikovať viac ako jeden debug namespace:
 
-```console
+```bash
 $ DEBUG=http,mail,express:* node index.js
 ```

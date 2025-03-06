@@ -13,20 +13,20 @@ Para ver todos os logs interno usados no Express, configure a
 variável de ambiente `DEBUG` para
 `express:*` ao ativar seu aplicativo.
 
-```console
+```bash
 $ DEBUG=express:* node index.js
 ```
 
 No Windows, use o comando correspondente.
 
-```console
+```bash
 > set DEBUG=express:* & node index.js
 ```
 
 Executar este comando no aplicativo padrão gerado pelo
 [express generator](/{{ page.lang }}/starter/generator.html) imprime a seguinte saída:
 
-```console
+```bash
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -73,7 +73,7 @@ $ DEBUG=express:* node ./bin/www
 Quando uma solicitação é feita em seguida para o aplicativo,
 você verá os logs especificados no código do Express:
 
-```console
+```bash
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -108,13 +108,13 @@ Por exemplo, se você gerou o aplicativo com o `$ express
 sample-app`, é possível ativar as instruções de depuração
 com o seguinte comando:
 
-```console
+```bash
 $ DEBUG=sample-app:* node ./bin/www
 ```
 
 É possível especificar mais do que um namespace de depuração
 designando uma lista de nomes separados por vírgulas:
 
-```console
+```bash
 $ DEBUG=http,mail,express:* node index.js
 ```

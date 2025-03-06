@@ -70,7 +70,7 @@ Hata ayıklama amacıyla loglama yapıyorsanız, o zaman `console.log()` yerine 
 
 #### Uygulama aktivitesi için
 
-Uygulama aktivitesini logluyorsanız (örneğin trafik izleme veya API çağrıları), `console.log()` yerine [Winston](https://www.npmjs.com/package/winston) veya [Bunyan](https://www.npmjs.com/package/bunyan) gibi bir loglama kütüphanesi kullanın. Bu iki kütüphanenin detaylı bir karşılaştırması için, StrongLoop blog yazısına bakınız [Winston ve Bunyan Node.js Loglama Karşılaştırması](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
+Uygulama aktivitesini logluyorsanız (örneğin trafik izleme veya API çağrıları), `console.log()` yerine [Winston](https://www.npmjs.com/package/winston) veya [Bunyan](https://www.npmjs.com/package/bunyan) gibi bir loglama kütüphanesi kullanın. Bu iki kütüphanenin detaylı bir karşılaştırması için, StrongLoop blog yazısına bakınız [Winston ve Bunyan Node.js Loglama Karşılaştırması](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
 
 ### İstisnaları düzgün işle
 
@@ -86,7 +86,7 @@ Bu konulara girmeden önce Node/Express istisna işleme ile ilgili temel bir anl
 Hata işleme temelleri hakkında daha fazla bilgi için bakınız: 
 
 * [Node.js'te Hata İşleme](https://www.tritondatacenter.com/node-js/production/design/errors)
-* [Güçlü Node Uygulamaları Yazmak: Hata İşleme](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop blogu)
+* [Güçlü Node Uygulamaları Yazmak: Hata İşleme](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop blogu)
 
 #### Ne yapmamalı
 
@@ -156,9 +156,9 @@ app.get('/', wrap(async (req, res, next) => {
 }))
 ```
 
-`wrap()` fonksiyonu ret edilen promise'ları yakalayıp birinci argümanı hata olarak `next()` fonkisyonunu çağıran bir sarıcıdır (wrapper). Detaylar için, bakınız [Express'te Promise, Generator ve ES7 ile Asenkron Hata Ele Alma](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/#cleaner-code-with-generators).
+`wrap()` fonksiyonu ret edilen promise'ları yakalayıp birinci argümanı hata olarak `next()` fonkisyonunu çağıran bir sarıcıdır (wrapper). Detaylar için, bakınız [Express'te Promise, Generator ve ES7 ile Asenkron Hata Ele Alma](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/#cleaner-code-with-generators).
 
-Promise'lerle hata ele alma ile ilgili daha fazla bilgi için bakınız [Node.js'te Q ile Promis'ler – Geri çağrımalara Bir Alternatif](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/).
+Promise'lerle hata ele alma ile ilgili daha fazla bilgi için bakınız [Node.js'te Q ile Promis'ler – Geri çağrımalara Bir Alternatif](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/).
 
 ## Ortamınızda / kurulumunuzda yapılacak şeyler {#in-environment}
 
@@ -297,13 +297,13 @@ StrongLoop süreç yöneticisini systemd servisi olarak kolaylıkla yükleyebili
 
 StrongLoop süreç yöneticisini bir systemd servisi olarak yüklemek için:
 
-```console
+```bash
 $ sudo sl-pm-install --systemd
 ```
 
 Daha sonra, servisi başlatmak için:
 
-```console
+```bash
 $ sudo /usr/bin/systemctl start strong-pm
 ```
 
@@ -365,13 +365,13 @@ StrongLoop süreç yöneticisini bir Upstart servisi olarak kolaylıkla yükleye
 
 Strong Loop süreç yöneticisini bir Upstart 1.4 servisi olarak yüklemek için:
 
-```console
+```bash
 $ sudo sl-pm-install
 ```
 
 Daha sonra servisi koşmak için:
 
-```console
+```bash
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -399,7 +399,7 @@ StrongLoop süreç yöneticisi bir uygulamayı koştuğunda, sistemdeki CPU çek
 
 Örnek olarak, uygulamanızı prod.foo.com'a dağıttığınızı ve StrongLoop süreç yöneticisinin de port 8701'de (varsayılan) dinlediğini varsayarsak, slc kullanarak kümenin büyüklüğünü sekize ayarlamak için:
 
-```console
+```bash
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 
@@ -413,7 +413,7 @@ PM2 ile bir uygulama koşulduğunda, seçtiğiniz örnek sayısıyla beraber bir
 
 Küme modunu etkinleştirmek için, uygulamanızı bu şekilde başlatın:
 
-```console
+```bash
 # 4 çalışan süreç başlat
 $ pm2 start app.js -i 4
 # Mevcut CPU sayısını otomatik olarak tespit et ve o sayı kadar çalışan süreç başlat
@@ -424,7 +424,7 @@ Bu aynı zamanda `exec_mode` değerini `cluster` ve `instances` değerini de ba�
 
 Koşmaya başladıktan sonra, `app` isminde belirli bir uygulama aşağıdaki gibi ölçeklenebilir:
 
-```console
+```bash
 # 3 tane daha çalışan ekle
 $ pm2 scale app +3
 # Belirli bir çalışan sayınıa ölçeklendir

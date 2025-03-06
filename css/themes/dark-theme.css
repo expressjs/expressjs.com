@@ -1,0 +1,33 @@
+html.dark-mode {
+
+  .sun-icon {
+    background-image: url(/images/sun-icon.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 27px;
+    height: 27px;
+  }
+
+  .hidden-light {
+    display: block;
+  }
+
+  .hidden-dark {
+    display: none;
+  }
+
+  .submenu-content {
+    box-shadow: 1px 2px var(--hover-bg);
+    background-color: var(--card-bg);
+  }
+
+  #navmenu>li:hover {
+    ul {
+      background-color: var(--card-bg);
+    }
+  }
+  
+  .blog-excerpt {
+    color: var(--notice-accent);
+  }
+}

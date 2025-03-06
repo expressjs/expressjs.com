@@ -49,7 +49,7 @@ To preview the website locally:
 
 Jekyll uses a variant of Markdown known as [Kramdown](https://kramdown.gettalong.org/quickref.html).
 
-Jekyll uses the [Liquid template engine](http://liquidmarkup.org/) for templating.
+Jekyll uses the [Liquid template engine](https://shopify.github.io/liquid/) for templating.
 
 You can use [GFM](https://kramdown.gettalong.org/parser/gfm.html) fenced code blocks for JavaScript; for example:
 
@@ -73,9 +73,7 @@ The default GitHub Pages syntax highlighting has been disabled in `_config.yml` 
 
 ## Contributing
 
-Feel free to make changes to the template files or the document files. The supporting docs are located in their respective directories, and the API docs are located under the `_includes` directory.
-
-Please see the [Contributors' Guide](CONTRIBUTING.md) for more information on contributing to the documentation, including information on contributing translations.
+Please see the [Contributors' Guide](CONTRIBUTING.md) for more information on contributing to the Express JS documentation, including information on contributing translations.
 
 ## Why use Jekyll instead of an Express-based solution?
 

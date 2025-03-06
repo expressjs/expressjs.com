@@ -48,20 +48,20 @@ Helmet 實際上只由 9 個小型中介軟體函數組成，這些函數會設�
 
 安裝 Helmet 等之類的其他任何模組：
 
-```console
+```bash
 $ npm install --save helmet
 ```
 
 然後在您的程式碼中使用它：
 
-<pre>
-<code class="language-javascript" translate="no">
-...
-var helmet = require('helmet');
-app.use(helmet());
-...
-</code>
-</pre>
+```js
+/// ...
+
+const helmet = require('helmet')
+app.use(helmet())
+
+/// ...
+```
 
 ### 至少停用 X-Powered-By 標頭
 
@@ -69,11 +69,9 @@ app.use(helmet());
 
 因此最佳作法是使用 `app.disable()` 方法來關閉標頭：
 
-<pre>
-<code class="language-javascript" translate="no">
-app.disable('x-powered-by');
-</code>
-</pre>
+```js
+app.disable('x-powered-by')
+```
 
 如果您使用 `helmet.js`，自會為您處理此事。
 
@@ -100,17 +98,15 @@ app.disable('x-powered-by');
 為了避免發生此問題，請使用通用 Cookie 名稱；
 例如，使用 [express-session](https://www.npmjs.com/package/express-session) 中介軟體：
 
-<pre>
-<code class="language-javascript" translate="no">
-var session = require('express-session');
+```js
+const session = require('express-session')
 app.set('trust proxy', 1) // trust first proxy
-app.use( session({
-   secret : 's3Cur3',
-   name : 'sessionId',
-  })
-);
-</code>
-</pre>
+app.use(session({
+  secret: 's3Cur3',
+  name: 'sessionId'
+})
+)
+```
 
 ### 設定 Cookie 安全選項
 
@@ -124,32 +120,31 @@ app.use( session({
 
 下列範例使用 [cookie-session](https://www.npmjs.com/package/cookie-session) 中介軟體：
 
-<pre>
-<code class="language-javascript" translate="no">
-var session = require('cookie-session');
-var express = require('express');
-var app = express();
+```js
+const session = require('cookie-session')
+const express = require('express')
+const app = express()
 
-var expiryDate = new Date( Date.now() + 60 * 60 * 1000 ); // 1 hour
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(session({
   name: 'session',
   keys: ['key1', 'key2'],
-  cookie: { secure: true,
-            httpOnly: true,
-            domain: 'example.com',
-            path: 'foo/bar',
-            expires: expiryDate
-          }
-  })
-);
-</code>
-</pre>
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    domain: 'example.com',
+    path: 'foo/bar',
+    expires: expiryDate
+  }
+})
+)
+```
 
 ## 其他注意事項
 
 以下是優異的 [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist/) 所提供的進一步建議。如需這些建議的所有詳細資料，請參閱該部落格文章：
 
-* 實作速率限制，以防對鑑別發動強制入侵攻擊。其中一個作法是使用 [StrongLoop API Gateway](https://strongloop.com/node-js/api-gateway/) 來施行速率限制原則。或者，您可以使用 [express-limiter](https://www.npmjs.com/package/express-limiter) 之類的中介軟體，但是如果這樣做，您需要稍微修改程式碼。
+* 實作速率限制，以防對鑑別發動強制入侵攻擊。其中一個作法是使用 [StrongLoop API Gateway](https://web.archive.org/web/20240000000000/https://strongloop.com/node-js/api-gateway/) 來施行速率限制原則。或者，您可以使用 [express-limiter](https://www.npmjs.com/package/express-limiter) 之類的中介軟體，但是如果這樣做，您需要稍微修改程式碼。
 * 一律對使用者輸入進行過濾和消毒，來防範跨網站 Scripting (XSS) 和指令注入攻擊。
 * 使用參數化查詢或備妥陳述式，來防禦 SQL 注入攻擊。
 * 使用開放程式碼 [sqlmap](http://sqlmap.org/) 工具，來偵測您應用程式中的 SQL 注入漏洞。

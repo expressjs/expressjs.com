@@ -37,12 +37,12 @@ Una dirección IP, una subred o una matriz de direcciones IP y subredes de confi
 
 Puede establecer direcciones IP de varias formas:
 
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
+```js
+app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
-</pre>
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+```
 
 Cuando se especifican, las direcciones IP o las subredes se excluyen del proceso de determinación de direcciones, y la dirección IP no de confianza más próxima al servidor de aplicaciones se establece como la dirección IP del cliente.
 </td>
@@ -57,12 +57,14 @@ Confíe en la porción `n` entre el origen y el destino del servidor proxy acces
       <td>Función</td>
 <td markdown="1">
 Implementación de confianza personalizada. Utilícela sólo si sabe lo que está haciendo.
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', function (ip) {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
-  else return false;
-});</code>
-</pre>
+
+
+```js
+app.set('trust proxy', (ip) => {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
+  else return false
+})
+```
 </td>
     </tr>
   </tbody>

@@ -17,8 +17,7 @@ description: Get started with Express.js by building a simple 'Hello World' appl
 
 `myapp` 디렉토리에 `app.js`라는 이름의 파일을 작성한 후 다음과 같은 코드를 추가하십시오.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 const express = require('express')
 const app = express()
 const port = 3000
@@ -30,7 +29,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-</code></pre>
+```
 
 앱은 서버를 시작하며 3000번 포트에서 연결을 청취합니다. 앱은 루트 URL(`/`) 또는 *라우트*에
 대한 요청에 "Hello World!"로 응답합니다. 다른 모든 경로에 대해서는 **404 Not Found**로 응답합니다.
@@ -42,7 +41,7 @@ app.listen(port, () => {
 
 다음의 명령을 이용하여 앱을 실행하십시오.
 
-```console
+```bash
 $ node app.js
 ```
 

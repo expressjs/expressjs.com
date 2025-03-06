@@ -13,13 +13,13 @@ description: Learn how to use the Express application generator tool to quickly 
 
 次のコマンドを使用して、`express` をインストールします。
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 
 `-h` オプションを指定してコマンド・オプションを表示します。
 
-```console
+```bash
 $ express -h
 
   Usage: express [options][dir]
@@ -41,7 +41,7 @@ $ express -h
 
 例えば、以下のコマンドでは、現行作業ディレクトリーに _myapp_ という Express アプリケーションを作成します。
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -65,20 +65,20 @@ $ express --view=pug myapp
 
 次に、依存関係をインストールします。
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 MacOS または Linux では、次のコマンドによってアプリケーションを実行します。
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 Windows では、次のコマンドを使用します。
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -86,7 +86,7 @@ Windows では、次のコマンドを使用します。
 
 生成されたアプリケーションには、以下のディレクトリー構造があります。
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

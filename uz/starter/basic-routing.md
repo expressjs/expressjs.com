@@ -20,26 +20,26 @@ Ushbu qo'llanmani foydalanishdan oldin `express` obyektidan ekzamplyar olib, uni
 
 Quyidagi kodlar marshrutizatsiyaga bir necha misollar keltirilgan.
 
-<pre><code class="language-javascript" translate="no">
+```js
 // Bosh sahifada "Hello World!" javobini qaytaradi.
-app.get('/', function (req, res) {
-  res.send('Hello World!');
+app.get('/', (req, res) => {
+  res.send('Hello World!')
 })
 
 // Bosh sahifada POST so'rovni qabul qilish.
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
+app.post('/', (req, res) => {
+  res.send('Got a POST request')
 })
 
 // /user manzilida PUT so'rovni qabul qilish.
-app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user');
+app.put('/user', (req, res) => {
+  res.send('Got a PUT request at /user')
 })
 
 // /user mazilida DELETE so'rovni qabul qilish.
-app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user');
+app.delete('/user', (req, res) => {
+  res.send('Got a DELETE request at /user')
 })
-</code></pre>
+```
 
 Marshrutizatsiya haqida to'liq ma'lumot olish uchun, ma'lumotnoma orqali [Marshrutizatsiya](/{{page.lang}}/guide/routing.html) bo'limini o'qib chiqing.

@@ -1,0 +1,60 @@
+# Home
+home: 首頁
+
+# Getting started
+getting_started: 入門
+installing: 安裝
+hello_world: Hello world
+generator: Express 產生器
+basic_routing: 基本路由
+static_files: 靜態檔案
+examples: More examples
+faq: 常見問題 (FAQ)
+
+# Guide
+guide: 手冊
+routing: 路由
+writing_middleware: 撰寫中介軟體
+using_middleware: 使用中介軟體
+overriding_express_api: Overriding the Express API
+using_template_engines: 使用範本引擎
+error_handling: 錯誤處理
+debugging: 除錯
+behind_proxies: 位於 Proxy 背後的 Express
+migrating_4: 移至 Express 4
+migrating_5: 移至 Express 5
+database_integration: 資料庫整合
+
+# API reference
+
+api: API 參照
+5x: 5.x
+4x: 4.x
+3x: 3.x 已淘汰
+2x: 2.x (已淘汰）
+
+# Advanced topics
+advanced: 進階主題
+developing_template_engines: 範本引擎
+security_updates: 安全更新
+best_practice_security: 安全最佳作法
+best_practice_performance: 效能最佳作法
+healthcheck_graceful_shutdown: Health checks & shutdown
+
+# Resources
+resources: 資源
+glossary: 名詞解釋
+middleware: 中介軟體
+community: 社群
+utils: Utility modules
+contributing: Contributing to Express
+changelog: Release Change Log
+
+# Support
+support: Support
+
+# Blog
+blog: Blog
+latest_post: Latest post
+all_posts: All posts
+write_post: Write a Post

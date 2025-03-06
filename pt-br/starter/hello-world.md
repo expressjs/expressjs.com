@@ -22,8 +22,7 @@ instale o `express` como uma dependência, de acordo com o [guia de instalação
 
 No diretório `myapp`, crie um arquivo chamado `app.js` e inclua o seguinte código:
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 const express = require('express')
 const app = express()
 const port = 3000
@@ -35,8 +34,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-</code>
-</pre>
+```
 
 O aplicativo inicia um servidor e escuta a porta 3000 por
 conexões. O aplicativo responde com "Hello World!" à solicitações
@@ -53,7 +51,7 @@ que desejaria fazer sem o envolvimento do Express.
 
 Execute o aplicativo com o seguinte comando:
 
-```console
+```bash
 $ node app.js
 ```
 

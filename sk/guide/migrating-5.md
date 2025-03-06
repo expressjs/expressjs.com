@@ -6,10 +6,6 @@ lang: sk
 description: A comprehensive guide to migrating your Express.js applications from
   version 4 to 5, detailing breaking changes, deprecated methods, and new improvements.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Prechod na Express 5
 
@@ -21,7 +17,7 @@ Express 5 sa od Express 4 veľmi nelíši: Zmeny v API nie sú tak veľké, ako 
 
 Pre nainštalovanie poslednej alpha verzie Express 5, spustite v hlavnom priečinku vašej aplikácie nasledujúci príkaz:
 
-```console
+```bash
 $ npm install "express@^{{ site.data.express.next_version }}" --save
 ```
 

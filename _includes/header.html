@@ -1,0 +1,252 @@
+<header>
+  <div id="mobile-menu">
+    <div id="nav-button" class="fa fa-bars fa-2x button"></div>
+  </div>
+  <section id="logo"><a href="/" class="express">Express</a>
+  </section>
+  <div id="navbar">
+    <input id="q" placeholder="🔎 search">
+    <ul id="navmenu">
+      <li>
+        <a href="/" id="home-menu" {% if page.menu=='home' %} class="active" {% endif %}>
+          {{ site.data[page.lang].menu.home }}
+        </a>
+      </li>
+      <li id="getting-started-menu" class="submenu">
+        <a href="/{{ page.lang }}/starter/installing.html" {% if page.menu=='starter' %} class="active" {% endif%}>
+          {{ site.data[page.lang].menu.getting_started }}
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/{{ page.lang }}/starter/installing.html">
+              {{ site.data[page.lang].menu.installing }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/starter/hello-world.html">
+              {{ site.data[page.lang].menu.hello_world }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/starter/generator.html">
+              {{ site.data[page.lang].menu.generator }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/starter/basic-routing.html">
+              {{ site.data[page.lang].menu.basic_routing }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/starter/static-files.html">
+              {{ site.data[page.lang].menu.static_files }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/starter/examples.html">
+              {{ site.data[page.lang].menu.examples }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/starter/faq.html">
+              {{ site.data[page.lang].menu.faq }}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="guide-menu" class="submenu">
+        <a href="/{{ page.lang }}/guide/routing.html" {% if page.menu=='guide' %} class="active" {% endif %}>
+          {{ site.data[page.lang].menu.guide }}
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/{{ page.lang }}/guide/routing.html">
+              {{ site.data[page.lang].menu.routing }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/guide/writing-middleware.html">
+              {{ site.data[page.lang].menu.writing_middleware }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/guide/using-middleware.html">
+              {{ site.data[page.lang].menu.using_middleware }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/guide/overriding-express-api.html">
+              {{ site.data[page.lang].menu.overriding_express_api }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/guide/using-template-engines.html">
+              {{ site.data[page.lang].menu.using_template_engines }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/guide/error-handling.html">
+              {{ site.data[page.lang].menu.error_handling }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/guide/debugging.html">
+              {{ site.data[page.lang].menu.debugging }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/guide/behind-proxies.html">
+              {{ site.data[page.lang].menu.behind_proxies }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/guide/migrating-4.html">
+              {{ site.data[page.lang].menu.migrating_4 }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/guide/migrating-5.html">
+              {{ site.data[page.lang].menu.migrating_5 }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/guide/database-integration.html">
+              {{ site.data[page.lang].menu.database_integration }}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="application-menu" class="submenu">
+        <a href="/{{ page.lang }}/5x/api.html" {% if page.menu=='api' %} class="active" {% endif %}>
+          {{ site.data[page.lang].menu.api }}
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/{{ page.lang }}/5x/api.html">
+              {{ site.data[page.lang].menu.5x }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/4x/api.html">
+              {{ site.data[page.lang].menu.4x }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/3x/api.html">
+              {{ site.data[page.lang].menu.3x }}
+            </a>
+          </li>
+          <li>
+            <a href="/2x/">
+              {{ site.data[page.lang].menu.2x }}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="advanced-topics-menu" class="submenu">
+        <a href="/{{ page.lang }}/advanced/developing-template-engines.html" {% if page.menu=='advanced' %} class="active" {% endif %}>
+          {{ site.data[page.lang].menu.advanced }}
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/{{ page.lang }}/advanced/developing-template-engines.html">
+              {{ site.data[page.lang].menu.developing_template_engines }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/advanced/security-updates.html">
+              {{ site.data[page.lang].menu.security_updates }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/advanced/best-practice-security.html">
+              {{ site.data[page.lang].menu.best_practice_security }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/advanced/best-practice-performance.html">
+              {{ site.data[page.lang].menu.best_practice_performance }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/advanced/healthcheck-graceful-shutdown.html">
+              {{ site.data[page.lang].menu.healthcheck_graceful_shutdown }}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="resources-menu" class="submenu">
+        <a href="/{{ page.lang }}/resources/glossary.html" {% if page.menu=='resources' %} class="active" {% endif %}>
+          {{ site.data[page.lang].menu.resources }}
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/{{ page.lang }}/resources/community.html">
+              {{ site.data[page.lang].menu.community }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/resources/glossary.html">
+              {{ site.data[page.lang].menu.glossary }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/resources/middleware.html">
+              {{ site.data[page.lang].menu.middleware }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/resources/utils.html">
+              {{ site.data[page.lang].menu.utils }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/resources/contributing.html">
+              {{ site.data[page.lang].menu.contributing }}
+            </a>
+          </li>
+          <li>
+            <a href="/{{ page.lang }}/changelog">
+              {{ site.data[page.lang].menu.changelog }}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/{{ page.lang }}/support" id="support-menu" {% if page.menu=='support' %} class="active" {% endif %}>
+          {{ site.data[page.lang].menu.support }}
+        </a>
+      </li>
+      <li id="blog-menu" class="submenu">
+        <a href="{{site.posts.first.url}}" {% if page.menu=='blog' %} class="active" {% endif %}>
+          {{ site.data[page.lang].menu.blog }}
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="{{site.posts.first.url}}">
+              {{ site.data[page.lang].menu.latest_post }}
+            </a>
+          </li>
+          <li>
+            <a href="/en/blog/posts.html">
+              {{ site.data[page.lang].menu.all_posts }}
+            </a>
+          </li>
+          <li>
+            <a href="/en/blog/write-post.html">
+              {{ site.data[page.lang].menu.write_post }}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="header-right">
+    <div id="theme-icon-container" class="theme-toggle default-theme" title="toggle darkmode">
+      <i class="fa fa-moon-o fa-2x hidden-dark"></i>
+      <span class="sun-icon hidden-light"></span>
+    </div>
+    {% include language-picker.html %}
+    {% include language-picker-mobile.html %}
+  </div>
+</header>

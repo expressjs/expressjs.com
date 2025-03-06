@@ -4,10 +4,6 @@ title: Frameworky založené na Express-e
 menu: frameworks
 lang: sk
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Frameworky založené na Express-e
 

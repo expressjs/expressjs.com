@@ -10,19 +10,19 @@ lang: de
 
 Wenn Sie alle in Express verwendeten internen Protokolle anzeigen wollen, legen Sie beim Starten Ihrer Anwendung die Umgebungsvariable `DEBUG` auf `express:*` fest.
 
-```console
+```bash
 $ DEBUG=express:* node index.js
 ```
 
 Verwenden Sie unter Windows den entsprechenden Befehl.
 
-```console
+```bash
 > set DEBUG=express:* & node index.js
 ```
 
 Die Ausführung dieses Befehls für die durch [express generator](/{{ page.lang }}/starter/generator.html) generierte Standardanwendung resultiert in folgender Ausgabe:
 
-```console
+```bash
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -68,7 +68,7 @@ $ DEBUG=express:* node ./bin/www
 
 Bei einer Anforderung an die Anwendung sind die Protokolle im Express-Code angegeben:
 
-```console
+```bash
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -92,12 +92,12 @@ Wenn Sie nur die Protokolle von der Routerimplementierung sehen wollen, legen Si
 
 Beispiel: Wenn Sie die Anwendung mit `$ express sample-app` generiert haben, können Sie die Debuganweisungen mit dem folgenden Befehl aktivieren:
 
-```console
+```bash
 $ DEBUG=sample-app:* node ./bin/www
 ```
 
 Sie können mehrere Debug-Namespaces in einer durch Kommas getrennten Namensliste angeben:
 
-```console
+```bash
 $ DEBUG=http,mail,express:* node index.js
 ```

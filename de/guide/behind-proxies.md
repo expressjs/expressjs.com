@@ -34,12 +34,12 @@ Eine einzelne IP-Adresse, ein Teilnetz oder ein Array von IP-Adressen und Teilne
 
 Sie können IP-Adressen wie folgt festlegen:
 
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
+```js
+app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
-</pre>
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+```
 
 Sobald die Werte angegeben wurden, werden die betreffenden IP-Adressen und Teilnetze aus dem Adressfeststellungsprozess ausgeschlossen. Die nicht vertrauenswürdige IP-Adresse, die am nächsten zum Anwendungsserver liegt, wird als IP-Adresse des Clients festgelegt.
 </td>
@@ -53,12 +53,14 @@ Dem `n`-ten Hop vom Proxy-Server soll als Client vertraut werden.
     <tr>
       <td>Funktion</td>
 <td markdown="1">
-Individuell angepasste, vertrauenswürdige Implementierung. Dies sollten Sie nur verwenden, wenn Sie genau wissen, was Sie tun. <pre>
-<code class="language-js" translate="no">app.set('trust proxy', function (ip) {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
-  else return false;
-});</code>
-</pre>
+Individuell angepasste, vertrauenswürdige Implementierung. Dies sollten Sie nur verwenden, wenn Sie genau wissen, was Sie tun. 
+
+```js
+app.set('trust proxy', (ip) => {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
+  else return false
+})
+```
 </td>
     </tr>
   </tbody>

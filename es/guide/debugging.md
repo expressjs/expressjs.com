@@ -11,19 +11,19 @@ description: Learn how to enable and use debugging logs in Express.js applicatio
 
 Para ver todos los registros internos utilizados en Express, establezca la variable de entorno `DEBUG` en `express:*` cuando inicie la aplicación.
 
-```console
+```bash
 $ DEBUG=express:* node index.js
 ```
 
 En Windows, utilice el mandato correspondiente.
 
-```console
+```bash
 > set DEBUG=express:* & node index.js
 ```
 
 La ejecución de este mandato en la aplicación predeterminada generada por el [generador de Express](/{{ page.lang }}/starter/generator.html) imprime la siguiente salida:
 
-```console
+```bash
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -69,7 +69,7 @@ $ DEBUG=express:* node ./bin/www
 
 Cuando se realiza una solicitud a la aplicación, verá los registros especificados en el código de Express:
 
-```console
+```bash
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -95,12 +95,12 @@ Una aplicación generada por el mandato `express` utiliza el módulo `debug`, y 
 
 Por ejemplo, si ha generado la aplicación con `$ express sample-app`, puede habilitar las sentencias de depuración con el siguiente mandato:
 
-```console
+```bash
 $ DEBUG=sample-app:* node ./bin/www
 ```
 
 Puede especificar más de un espacio de nombres de depuración asignando una lista separada por comas de nombres:
 
-```console
+```bash
 $ DEBUG=http,mail,express:* node index.js
 ```

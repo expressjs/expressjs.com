@@ -6,10 +6,6 @@ lang: sk
 description: Discover how to integrate various databases with Express.js applications,
   including setup examples for MongoDB, MySQL, PostgreSQL, and more.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Integrácia s databázou
 
@@ -37,7 +33,7 @@ Tieto databázové drivery predstavujú len časť z mnoha ďalších, ktoré s�
 **Modul**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Inštalácia**
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -62,7 +58,7 @@ client.execute('select key from system.local', function(err, result) {
 **Modul**: [nano](https://github.com/dscape/nano)
 **Inštalácia**
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -95,7 +91,7 @@ books.list(function(err, body){
 **Modul**: [levelup](https://github.com/rvagg/node-levelup)
 **Inštalácia**
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -125,7 +121,7 @@ db.put('name', 'LevelUP', function (err) {
 **Modul**: [mysql](https://github.com/felixge/node-mysql/)
 **Inštalácia**
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -158,7 +154,7 @@ connection.end();
 **Modul**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Inštalácia**
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -191,7 +187,7 @@ If you want an object model driver for MongoDB, look at [Mongoose](https://githu
 **Modul**: [apoc](https://github.com/hacksparrow/apoc)
 **Inštalácia**
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -219,7 +215,7 @@ apoc.query('match (n) return n').exec().then(
 **Modul**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **Inštalácia**
 
-```console
+```bash
 $ npm install pg-promise
 ```
 
@@ -247,7 +243,7 @@ db.one("SELECT $1 AS value", 123)
 **Modul**: [redis](https://github.com/mranney/node_redis)
 **Inštalácia**
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -285,7 +281,7 @@ client.hkeys('hash key', function (err, replies) {
 **Modul**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Inštalácia**
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -323,7 +319,7 @@ db.close();
 **Modul**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Inštalácia**
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 

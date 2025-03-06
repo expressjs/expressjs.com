@@ -11,7 +11,7 @@ description: Learn how to install Express.js in your Node.js environment, includ
 
 Suponiendo que ya ha instalado [Node.js](https://nodejs.org/), cree un directorio para que contenga la aplicación y conviértalo en el directorio de trabajo.
 
-```console
+```bash
 $ mkdir myapp
 $ cd myapp
 ```
@@ -19,14 +19,14 @@ $ cd myapp
 Utilice el mandato `npm init` para crear un archivo `package.json` para la aplicación.
 Para obtener más información sobre cómo funciona `package.json`, consulte [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
 
-```console
+```bash
 $ npm init
 ```
 
 Este mandato solicita varios elementos como, por ejemplo, el nombre y la versión de la aplicación.
 Por ahora, sólo tiene que pulsar INTRO para aceptar los valores predeterminados para la mayoría de ellos, con la siguiente excepción:
 
-```console
+```bash
 entry point: (index.js)
 ```
 
@@ -34,13 +34,13 @@ Especifique `app.js` o el nombre que desee para el archivo principal. Si desea q
 
 A continuación, instale Express en el directorio `myapp` y guárdelo en la lista de dependencias. Por ejemplo:
 
-```console
+```bash
 $ npm install express --save
 ```
 
 Para instalar Express temporalmente y no añadirlo a la lista de dependencias, omita la opción `--save`:
 
-```console
+```bash
 $ npm install express
 ```
 

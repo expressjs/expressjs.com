@@ -7,17 +7,17 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
   providing a robust set of features for web and mobile applications.
 ---
 <section id="home-content">
-  {% include header/header-{{ page.lang }}.html %}
+  {% include header.html %}
   <div id="overlay"></div>
   <div id="homepage-leftpane" class="pane">
     <section id="description">
         <div class="express"><a href="/">Express</a></div>
-        <span class="description">Швидкий, гнучкий, мінімалістичний фреймворк для веб-застосунків, побудованих на <a href='https://nodejs.org/en/'>Node.js</a></span>
+        <h1 class="description">Швидкий, гнучкий, мінімалістичний фреймворк для веб-застосунків, побудованих на <a href='https://nodejs.org/en/'>Node.js</a></h1>
     </section>
     <div id="install-command">$ npm install express --save</div>
   </div>
   <div id="homepage-rightpane" class="pane">
-    <iframe src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
+    <iframe title="KEYNOTE: Express, State of the Union by Doug Wilson, Express - YouTube" src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
   </div>
 </section>
 
@@ -25,27 +25,21 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
 
   <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h3>Веб-застосунки</h3> Express - це мінімалістичний та гнучкий фреймворк для веб-застосунків, побудованих на Node.js, що надає широкий набір функціональності.
+          <h2>Веб-застосунки</h2> Express - це мінімалістичний та гнучкий фреймворк для веб-застосунків, побудованих на Node.js, що надає широкий набір функціональності.
       </div>
 
       <div id="apis">
-          <h3>API</h3> Маючи в свому розпорядженні безліч допоміжних HTTP-методів та проміжних обробників, створювати надійні API можна легко і швидко.
+          <h2>API</h2> Маючи в свому розпорядженні безліч допоміжних HTTP-методів та проміжних обробників, створювати надійні API можна легко і швидко.
       </div>
 
       <div id="performance">
-          <h3>Продуктивність</h3> Express забезпечує тонкий прошарок базової функціональності для веб-застосунків, що не спотворює звичну та зручну функціональність Node.js.
+          <h2>Продуктивність</h2> Express забезпечує тонкий прошарок базової функціональності для веб-застосунків, що не спотворює звичну та зручну функціональність Node.js.
       </div>
 
       <div id="middleware">
-        <h3>Проміжні модулі</h3>
+        <h2>Проміжні модулі</h2>
         Express — це легкий та гнучкий фреймворк для маршрутизації з мінімальним набором функцій, покликаний бути розширеним використовуючи <a href="{{ page.lang }}/resources/middleware.html">проміжні Express-модулі</a>.
       </div>
   </div>
 
 </section>
-
-<!--
-<section id="announcements">
-  {% include announcement/announcement-{{ page.lang }}.md %}
-</section>
--->

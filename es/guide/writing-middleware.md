@@ -26,7 +26,7 @@ El siguiente ejemplo muestra los elementos de una llamada a función de middlewa
 
 <table id="mw-fig">
 <tr><td id="mw-fig-imgcell">
-<img src="/images/express-mw.png" id="mw-fig-img" />
+<img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
 </td>
 <td class="mw-fig-callouts">
 <div class="callout" id="callout1">Método HTTP para el que se aplica la función de middleware.</div>
@@ -45,31 +45,27 @@ El siguiente ejemplo muestra los elementos de una llamada a función de middlewa
 
 A continuación, se muestra un ejemplo de una aplicación Express simple, "Hello World", para la que definirá dos funciones de middleware:
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000);
-</code>
-</pre>
+app.listen(3000)
+```
 
 <h2>Desarrollo</h2>
 
 Este es un ejemplo simple de una función de middleware denominada "myLogger". Esta función simplemente imprime "LOGGED" cuando una solicitud de la aplicación pasa por ella. La función de middleware se asigna a una variable denominada `myLogger`.
 
-<pre>
-<code class="language-javascript" translate="no">
-var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
-</code>
-</pre>
+```js
+const myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Observe la llamada anterior a `next()`.  La llamada a esta función invoca la siguiente función de middleware en la aplicación.
@@ -79,25 +75,23 @@ La función `next()` no forma parte de la API de Express o Node.js, pero es el t
 Para cargar la función de middleware, llame a `app.use()`, especificando la función de middleware.
 Por ejemplo, el siguiente código carga la función de middleware `myLogger` antes de la ruta a la vía de acceso raíz (/).
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
+const myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
 
-app.use(myLogger);
+app.use(myLogger)
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000);
-</code>
-</pre>
+app.listen(3000)
+```
 
 Cada vez que la aplicación recibe una solicitud, imprime el mensaje "LOGGED" en el terminal.
 
@@ -109,39 +103,34 @@ La función de middleware `myLogger` simplemente imprime un mensaje y, a continu
 
 El siguiente ejemplo añade una propiedad denominada `requestTime` al objeto de solicitud. Llamaremos a esta función de middleware "requestTime".
 
-<pre>
-<code class="language-javascript" translate="no">
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
-</code>
-</pre>
+```js
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
+```
 
 La aplicación ahora utiliza la función de middleware `requestTime`. Asimismo, la función de devolución de llamada de la ruta de vía de acceso raíz utiliza la propiedad que la función de middleware añade a `req` (el objeto de solicitud).
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
 
-app.use(requestTime);
+app.use(requestTime)
 
-app.get('/', function (req, res) {
-  var responseText = 'Hello World!<br>';
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-  res.send(responseText);
-});
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>'
+  responseText += `<small>Requested at: ${req.requestTime}</small>`
+  res.send(responseText)
+})
 
-app.listen(3000);
-</code>
-</pre>
-
+app.listen(3000)
+```
 Cuando realiza una solicitud a la raíz de la aplicación, la aplicación ahora muestra la indicación de fecha y hora de la solicitud en el navegador.
 
 Como tiene acceso al objeto de solicitud, el objeto de respuesta, la siguiente función de middleware de la pila y toda la API de Node.js, las posibilidades con las funciones de middleware son ilimitadas.

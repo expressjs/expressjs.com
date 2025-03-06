@@ -33,7 +33,7 @@ description: Discover how to integrate various databases with Express.js applica
 **模組**：[cassandra-driver](https://github.com/datastax/nodejs-driver)
 **安裝**
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -58,7 +58,7 @@ client.execute('select key from system.local', function(err, result) {
 **模組**：[nano](https://github.com/dscape/nano)
 **安裝**
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -91,7 +91,7 @@ books.list(function(err, body){
 **模組**：[levelup](https://github.com/rvagg/node-levelup)
 **安裝**
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -121,7 +121,7 @@ db.put('name', 'LevelUP', function (err) {
 **模組**：[mysql](https://github.com/felixge/node-mysql/)
 **安裝**
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -154,7 +154,7 @@ connection.end();
 **模組**：[mongodb](https://github.com/mongodb/node-mongodb-native)
 **安裝**
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -187,7 +187,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
 **模組**：[apoc](https://github.com/hacksparrow/apoc)
 **安裝**
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -215,7 +215,7 @@ apoc.query('match (n) return n').exec().then(
 **模組**：[pg-promise](https://github.com/vitaly-t/pg-promise)
 **安裝**
 
-```console
+```bash
 $ npm install pg-promise
 ```
 
@@ -243,7 +243,7 @@ db.one("SELECT $1 AS value", 123)
 **模組**：[redis](https://github.com/mranney/node_redis)
 **安裝**
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -281,7 +281,7 @@ client.hkeys('hash key', function (err, replies) {
 **模組**：[sqlite3](https://github.com/mapbox/node-sqlite3)
 **安裝**
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -319,7 +319,7 @@ db.close();
 **模組**：[elasticsearch](https://github.com/elastic/elasticsearch-js)
 **安裝**
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 

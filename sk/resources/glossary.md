@@ -6,10 +6,6 @@ lang: sk
 description: A comprehensive glossary of terms related to Express.js, Node.js, middleware,
   routing, and other key concepts to help you understand and use Express effectively.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Slovník
 

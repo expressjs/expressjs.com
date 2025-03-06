@@ -11,7 +11,7 @@ description: Get started with Express.js by building a simple 'Hello World' appl
 
 Bu yerda Express dasturga eng sodda misol keltirilgan.
 
-<pre><code class="language-javascript" translate="no">
+```js
 const express = require('express')
 const app = express()
 const port = 3000
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-</code></pre>
+```
 
 <div class="doc-box doc-notice" markdown="1">
 `req` (request) va `res` (response) Node taqdim etayotgan obyektlar hisoblanadi, shuning uchun
@@ -34,7 +34,7 @@ Dastur serverni ishga tushuradi va 3000 portdagi aloqani eshitib turadi. Javob s
 
 Kodni yozib, `app.js` faylida saqlab qoying. Uni ishga tushurish uchun quyidagi buyruqni ishga tushiring:
 
-```console
+```bash
 $ node app.js
 ```
 

@@ -13,20 +13,20 @@ description: Learn how to use the Express application generator tool to quickly 
 
 您可以使用 `npx` 命令（在 Node.js 8.2.0 中可用）运行应用程序生成器。
 
-```console
+```bash
 $ npx express-generator
 ```
 
 对于早期的 Node 版本，可将应用程序生成器作为全局 npm 软件包安装，然后启动它。
 
-```console
+```bash
 $ npm install -g express-generator
 $ express
 ```
 
 使用 `-h` 选项显示命令选项：
 
-```console
+```bash
 $ express -h
 
   Usage: express [options][dir]
@@ -48,7 +48,7 @@ $ express -h
 
 例如，以下语句在当前工作目录中创建名为 _myapp_ 的 Express 应用程序并将视图引擎将设置为 [Pug](https://pugjs.org/) ：
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -72,26 +72,26 @@ $ express --view=pug myapp
 
 然后安装依赖项：
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 在 Windows 命令提示符上，使用以下命令：
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
 在 Windows PowerShell 上，使用以下命令：
 
-```console
+```bash
 PS> $env:DEBUG='myapp:*'; npm start
 ```
 
@@ -99,7 +99,7 @@ PS> $env:DEBUG='myapp:*'; npm start
 
 生成的应用程序具有以下目录结构：
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

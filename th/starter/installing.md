@@ -11,7 +11,7 @@ description: Learn how to install Express.js in your Node.js environment, includ
 
 สมมุติว่าคุณได้ติดตั้ง [Node.js](https://nodejs.org/) ในเครื่องคุณเรียบร้อยแล้ว ใช้คำสั่งข้างล่างนี้เพื่อสร้างไดเรกทอรีสำหรับเก็บแอปพลิเคชันของคุณ และใช้เป็นเก็บไฟล์ที่จะสร้างขึ้นต่อไป
 
-```console
+```bash
 $ mkdir myapp
 $ cd myapp
 ```
@@ -20,14 +20,14 @@ $ cd myapp
 
 สำหรับข้อมูลเพิ่มเติมว่า `package.json` ทำงานอย่างไร สำมารถดูได้ที่ [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json)
 
-```console
+```bash
 $ npm init
 ```
 
 หลังจากใส่คำสั่งนี้จะมีข้อความพร้อมรับให้คุณใส่ข้อมูลต่างๆ สำหรับการสร้างแอปพลิเคชัน เช่น ชื่อและรุ่นของแอปพลิเคชันของคุณ
 สำหรับตอนนี้ คุณเพียงแต่กดปุ่ม ENTER เพื่อใช้ค่าเริ่มต้นของข้อมูลส่วนต่างๆ ยกเว้นข้อมูลดังต่อไปนี้
 
-```console
+```bash
 entry point: (index.js)
 ```
 
@@ -35,12 +35,12 @@ entry point: (index.js)
 
 ต่อไปเป็นการติดตั้ง Express ในไดเรกเทอรี `myapp` และบันทึกไว้ในรายการเกี่ยวโยง (dependencies list) ตัวอย่างเช่น:
 
-```console
+```bash
 $ npm install express
 ```
 สามารถติดตั้ง Express ชั่วคราวได้โดยไม่ใส่ไว้ในรายการเกี่ยวโยง ด้วยคำสั่ง:
 
-```console
+```bash
 $ npm install express --no-save
 ```
 

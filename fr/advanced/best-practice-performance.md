@@ -70,7 +70,7 @@ Si vous utilisez la journalisation à des fins de débogage, utilisez un module 
 
 #### Pour journaliser l'activité de votre application
 
-Si vous journalisez l'activité de votre application (par exemple, pour suivre le trafic ou les appels API), utilisez une bibliothèque de journalisation telle que [Winston](https://www.npmjs.com/package/winston) ou [Bunyan](https://www.npmjs.com/package/bunyan) plutôt que d'utiliser `console.log()`. Pour obtenir une comparaison détaillée de ces deux bibliothèques, consultez l'article StrongLoop intitulé [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
+Si vous journalisez l'activité de votre application (par exemple, pour suivre le trafic ou les appels API), utilisez une bibliothèque de journalisation telle que [Winston](https://www.npmjs.com/package/winston) ou [Bunyan](https://www.npmjs.com/package/bunyan) plutôt que d'utiliser `console.log()`. Pour obtenir une comparaison détaillée de ces deux bibliothèques, consultez l'article StrongLoop intitulé [Comparing Winston and Bunyan Node.js Logging](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/).
 
 <a name="exceptions"></a>
 
@@ -88,7 +88,7 @@ Avant de s'immerger dans les rubriques qui suivent, il est conseillé de posséd
 Pour plus d'informations sur les bases du traitement des erreurs, voir :
 
 * [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
-* [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (blogue StrongLoop)
+* [Building Robust Node Applications: Error Handling](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/robust-node-applications-error-handling/) (blogue StrongLoop)
 
 #### A ne pas faire
 
@@ -165,8 +165,8 @@ app.get('/', wrap(async (req, res, next) => {
 
 Pour plus d'informations sur le traitement des erreurs à l'aide de promesses, voir :
 
-* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
-* [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
+* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
+* [Promises in Node.js with Q – An Alternative to Callbacks](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
 
 <a name="env"></a>
 
@@ -199,23 +199,19 @@ En développement, vous définissez généralement les variables d'environnement
 
 Avec Upstart, utilisez le mot clé `env` dans votre fichier de travail. Par exemple :
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code>
-</pre>
+```
 
 Pour plus d'informations, voir [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables).
 
 Avec systemd, utilisez la directive `Environment` dans votre fichier d'unité. Par exemple :
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code>
-</pre>
+```
 
 Pour plus d'informations, voir [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
 
@@ -276,8 +272,7 @@ Systemd est un système Linux et un gestionnaire de services. La plupart des dis
 
 Un fichier de configuration de service systemd est appelé *fichier d'unité* et porte l'extension .service. Voici un exemple de fichier d'unité permettant de gérer une application Node directement (remplacez le texte en gras par les valeurs appropriées à votre système et votre application) :
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -305,8 +300,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code>
-</pre>
+```
 Pour plus d'informations sur systemd, voir la [page d'aide de systemd](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
 
 ##### StrongLoop PM en tant que service systemd
@@ -315,13 +309,13 @@ Vous pouvez facilement installer StrongLoop Process Manager en tant que service 
 
 Pour installer StrongLoop PM en tant que service systemd :
 
-```console
+```bash
 $ sudo sl-pm-install --systemd
 ```
 
 Démarrez ensuite le service comme suit :
 
-```console
+```bash
 $ sudo /usr/bin/systemctl start strong-pm
 ```
 
@@ -335,8 +329,7 @@ Un service Upstart est défini dans un fichier de configuration de travail (éga
 
 Créez un fichier nommé `myapp.conf` dans `/etc/init/` avec le contenu suivant (remplacez le texte en gras par les valeurs appropriées à votre système et votre application) :
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -364,8 +357,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code>
-</pre>
+```
 
 REMARQUE : ce script nécessite Upstart 1.4 ou ultérieur, pris en charge sur Ubuntu 12.04-14.10.
 
@@ -385,13 +377,13 @@ Vous pouvez facilement installer StrongLoop Process Manager en tant que service 
 
 Pour installer StrongLoop PM en tant que service Upstart 1.4 :
 
-```console
+```bash
 $ sudo sl-pm-install
 ```
 
 Exécutez ensuite le service comme suit :
 
-```console
+```bash
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -419,7 +411,7 @@ Lorsque StrongLoop Process Manager (PM) exécute une application, il l'exécute 
 
 Par exemple, en supposant que vous avez déployé votre application sur prod.foo.com et que StrongLoop PM est en mode écoute sur le port 8701 (par défaut), pour définir la taille du cluster sur 8 à l'aide de slc :
 
-```console
+```bash
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 

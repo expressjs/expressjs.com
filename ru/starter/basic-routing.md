@@ -15,11 +15,9 @@ description: Learn the fundamentals of routing in Express.js applications, inclu
 Каждый маршрут может иметь одну или несколько функций обработки, которые выполняются при сопоставлении маршрута.
 
 Определение маршрута имеет следующую структуру:
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 Где:
 
@@ -36,42 +34,34 @@ app.METHOD(PATH, HANDLER)
 
 Ответ `Hello World!` на домашней странице:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+```
 
 Ответ на запрос POST в корневом маршруте (`/`), на домашней странице приложения:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
-</code>
-</pre>
+```js
+app.post('/', (req, res) => {
+  res.send('Got a POST request')
+})
+```
 
 Ответ на запрос PUT, адресованный маршруту `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user');
-});
-</code>
-</pre>
+```js
+app.put('/user', (req, res) => {
+  res.send('Got a PUT request at /user')
+})
+```
 
 Ответ на запрос DELETE, адресованный маршруту `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user');
-});
-</code>
-</pre>
+```js
+app.delete('/user', (req, res) => {
+  res.send('Got a DELETE request at /user')
+})
+```
 
 Дополнительная информация о маршрутизации приведена в [руководстве по маршрутизации](/{{ page.lang }}/guide/routing.html).

@@ -33,7 +33,7 @@ Diese Datenbanktreiber sind neben zahlreichen anderen Treibern verfügbar. Weite
 **Modul**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Installation**
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -58,7 +58,7 @@ client.execute('select key from system.local', function(err, result) {
 **Modul**: [nano](https://github.com/dscape/nano)
 **Installation**
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -91,7 +91,7 @@ books.list(function(err, body){
 **Modul**: [levelup](https://github.com/rvagg/node-levelup)
 **Installation**
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -121,7 +121,7 @@ db.put('name', 'LevelUP', function (err) {
 **Modul**: [mysql](https://github.com/felixge/node-mysql/)
 **Installation**
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -154,7 +154,7 @@ connection.end();
 **Modul**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Installation**
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -187,7 +187,7 @@ Wenn Sie nach einem Objektmodelltreiber für MongoDB suchen, schauen Sie unter [
 **Modul**: [apoc](https://github.com/hacksparrow/apoc)
 **Installation**
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -218,7 +218,7 @@ apoc.query('match (n) return n').exec().then(
 
 Anmerkung: [Siehe Installations-Voraussetzungen](https://github.com/oracle/node-oracledb#-installation).
 
-```console
+```bash
 $ npm install oracledb
 ```
 
@@ -263,7 +263,7 @@ getEmployee(101)
 **Modul**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **Installation**
 
-```console
+```bash
 $ npm install pg-promise
 ```
 
@@ -291,7 +291,7 @@ db.one("SELECT $1 AS value", 123)
 **Modul**: [redis](https://github.com/mranney/node_redis)
 **Installation**
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -329,7 +329,7 @@ client.hkeys('hash key', function (err, replies) {
 **Modul**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Installation**
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -367,7 +367,7 @@ db.close();
 **Modul**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Installation**
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 

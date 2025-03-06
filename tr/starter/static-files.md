@@ -27,7 +27,7 @@ app.use(express.static('public'))
 
 Artık `public` dizininde bulunan statik dosyaları görebilirsiniz:
 
-```plain-text
+```text
 http://localhost:3000/images/kitten.jpg
 http://localhost:3000/css/style.css
 http://localhost:3000/js/app.js
@@ -60,7 +60,7 @@ app.use('/static', express.static('public'))
 
 Artık `public` dizinindeki dosyalara `/static` önekiyle ulaşabilirsiniz.
 
-```plain-text
+```text
 http://localhost:3000/static/images/kitten.jpg
 http://localhost:3000/static/css/style.css
 http://localhost:3000/static/js/app.js

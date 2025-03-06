@@ -14,13 +14,13 @@ para rapidamente criar uma estrutura básica de aplicativo.
 
 Instale o `express` com o comando a seguir:
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 
 Exiba as opções de comando com a opção `-h`:
 
-```console
+```bash
 $ express -h
 
   Usage: express [options][dir]
@@ -43,7 +43,7 @@ $ express -h
 Por exemplo, o seguinte cria um aplicativo do Express chamado _myapp_
 no diretório atualmente em funcionamento:
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -67,20 +67,20 @@ $ express --view=pug myapp
 
 Em seguida instale as dependências:
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 No MacOS ou Linux, execute o aplicativo com este comando:
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 No Windows, use este comando:
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -89,7 +89,7 @@ Em seguida carregue `http://localhost:3000/` no seu navegador para acessar o apl
 
 O aplicativo gerado possui a seguinte estrutura de diretórios:
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

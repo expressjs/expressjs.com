@@ -2,44 +2,71 @@
 layout: page
 title: Express changelog
 description: Stay updated with the release changelog for Express.js, detailing new features, bug fixes, and important changes across versions.
-menu: changelog
 lang: en
 redirect_from: 
   - "/changelog/4x.html"
   - "en/changelog/4x.html"
 ---
 
+<nav aria-label="sidebar-heading">
+  <div class="toc-container">
+    <h3 id="sidebar-heading" class="toc-heading"><em>Versions</em></h3>
+    <button id="menu-toggle" title="show express versions">Versions <span>&#x25BA;</span></button>
+    <ul id="menu">
+      {% capture readme %}{% include changelog/menu.md %}{% endcapture %}
+      <li>
+        {{ readme | markdownify }}
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div markdown="1" id="page-doc">
+
 # Release changelog
 
 All the latest updates, improvements, and fixes to Express
 
-## 5.0.1 - Release date: 2024-10-08
+## Express v5
+{: id="5.x"} 
+
+### 5.0.1 - Release date: 2024-10-08
 {: id="5.0.1"}
 
 The 5.0.1 patch release includes one security fix:
 
 * Update [jshttps/cookie](https://www.npmjs.com/package/cookie) to address a [vulnerability](https://github.com/advisories/GHSA-pxg6-pf52-xh8x).
 
-## 5.0.0 - Release date: 2024-09-09
+### 5.0.0 - Release date: 2024-09-09
 {: id="5.0.0"}
 
-Check the [migration guide]({{page.lang}}/guide/migrating-5.html) with all the changes in this new version of Express.  
+Check the [migration guide](/{{page.lang}}/guide/migrating-5.html) with all the changes in this new version of Express.
 
-## 4.21.1 - Release date: 2024-10-08
+## Express v4
+{: id="4.x"}
+
+### 4.21.2 - Release date: 2024-11-06
+{: id="4.21.2"}
+
+The 4.21.2 patch release includes one security fix:
+
+* Update [pillajs/path-to-regexp](https://www.npmjs.com/package/path-to-regexp) to address a [vulnerability](https://github.com/advisories/GHSA-rhx6-c78j-4q9w).
+
+### 4.21.1 - Release date: 2024-10-08
 {: id="4.21.1"}
 
 The 4.21.1 patch release includes one security fix:
 
 * Update [jshttps/cookie](https://www.npmjs.com/package/cookie) to address a [vulnerability](https://github.com/advisories/GHSA-pxg6-pf52-xh8x).
 
-## 4.21.0 - Release date: 2024-09-11
+### 4.21.0 - Release date: 2024-09-11
 {: id="4.21.0"}
 
 The 4.21.0 minor release includes one new feature:
 
 * Deprecate `res.location("back")` and `res.redirect("back")` magic string
 
-## 4.20.0 - Release date: 2024-09-10
+### 4.20.0 - Release date: 2024-09-10
 {: id="4.20.0"}
 
 The 4.20.0 minor release includes bug fixes and some new features, including:
@@ -52,21 +79,21 @@ The 4.20.0 minor release includes bug fixes and some new features, including:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4200--2024-09-10)
 
-## 4.19.2 - Release date: 2024-03-25
+### 4.19.2 - Release date: 2024-03-25
 {: id="4.19.2"}
 
 * Improved fix for open redirect allow list bypass
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4192--2024-03-25)
 
-## 4.19.1 - Release date: 2024-03-20
+### 4.19.1 - Release date: 2024-03-20
 {: id="4.19.1"}
 
 * Allow passing non-strings to res.location with new encoding handling checks
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4191--2024-03-20)
 
-## 4.19.0 - Release date: 2024-03-20
+### 4.19.0 - Release date: 2024-03-20
 {: id="4.19.0"}
 
 * Prevent open redirect allow list bypass due to encodeurl
@@ -74,7 +101,7 @@ For a complete list of changes in this release, see [History.md](https://github.
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4190--2024-03-20)
 
-## 4.18.3 - Release date: 2024-02-29
+### 4.18.3 - Release date: 2024-02-29
 {: id="4.18.3"}
 
 The 4.18.3 patch release includes the following bug fix:
@@ -87,7 +114,7 @@ The 4.18.3 patch release includes the following bug fix:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4183--2024-02-26)
 
-## 4.18.2 - Release date: 2022-10-08
+### 4.18.2 - Release date: 2022-10-08
 {: id="4.18.2"}
 
 The 4.18.2 patch release includes the following bug fix:
@@ -100,7 +127,7 @@ The 4.18.2 patch release includes the following bug fix:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4182--2022-10-08)
 
-## 4.18.1 - Release date: 2022-04-29
+### 4.18.1 - Release date: 2022-04-29
 {: id="4.18.1"}
 
 The 4.18.1 patch release includes the following bug fix:
@@ -113,7 +140,7 @@ The 4.18.1 patch release includes the following bug fix:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4181--2022-04-29).
 
-## 4.18.0 - Release date: 2022-04-25
+### 4.18.0 - Release date: 2022-04-25
 {: id="4.18.0"}
 
 The 4.18.0 minor release includes bug fixes and some new features, including:
@@ -166,7 +193,7 @@ The 4.18.0 minor release includes bug fixes and some new features, including:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4180--2022-04-25).
 
-## 4.17.3 - Release date: 2022-02-16
+### 4.17.3 - Release date: 2022-02-16
 {: id="4.17.3"}
 
 The 4.17.3 patch release includes one bug fix:
@@ -179,7 +206,7 @@ The 4.17.3 patch release includes one bug fix:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4173--2022-02-16).
 
-## 4.17.2 - Release date: 2021-12-16
+### 4.17.2 - Release date: 2021-12-16
 {: id="4.17.2"}
 
 The 4.17.2 patch release includes the following bug fixes:
@@ -209,7 +236,7 @@ The 4.17.2 patch release includes the following bug fixes:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4172--2021-12-16).
 
-## 4.17.1 - Release date: 2019-05-25
+### 4.17.1 - Release date: 2019-05-25
 {: id="4.17.1"}
 
 The 4.17.1 patch release includes one bug fix:
@@ -222,7 +249,7 @@ The 4.17.1 patch release includes one bug fix:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4171--2019-05-25).
 
-## 4.17.0 - Release date: 2019-05-16
+### 4.17.0 - Release date: 2019-05-16
 {: id="4.17.0"}
 
 The 4.17.0 minor release includes bug fixes and some new features, including:
@@ -255,7 +282,7 @@ The 4.17.0 minor release includes bug fixes and some new features, including:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4170--2019-05-16).
 
-## 4.16.4 - Release date: 2018-10-10
+### 4.16.4 - Release date: 2018-10-10
 {: id="4.16.4"}
 
 The 4.16.4 patch release includes various bug fixes:
@@ -268,7 +295,7 @@ The 4.16.4 patch release includes various bug fixes:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4164--2018-10-10).
 
-## 4.16.3 - Release date: 2018-03-12
+### 4.16.3 - Release date: 2018-03-12
 {: id="4.16.3"}
 
 The 4.16.3 patch release includes various bug fixes:
@@ -289,7 +316,7 @@ The 4.16.3 patch release includes various bug fixes:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4163--2018-03-12).
 
-## 4.16.2 - Release date: 2017-10-09
+### 4.16.2 - Release date: 2017-10-09
 {: id="4.16.2"}
 
 The 4.16.2 patch release includes a regression bug fix:
@@ -302,7 +329,7 @@ The 4.16.2 patch release includes a regression bug fix:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4162--2017-10-09).
 
-## 4.16.1 - Release date: 2017-09-29
+### 4.16.1 - Release date: 2017-09-29
 {: id="4.16.1"}
 
 The 4.16.1 patch release includes a regression bug fix:
@@ -315,7 +342,7 @@ The 4.16.1 patch release includes a regression bug fix:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4161--2017-09-29).
 
-## 4.16.0 - Release date: 2017-09-28
+### 4.16.0 - Release date: 2017-09-28
 {: id="4.16.0"}
 
 The 4.16.0 minor release includes security updates, bug fixes, performance enhancements, and some new features, including:
@@ -360,7 +387,7 @@ The 4.16.0 minor release includes security updates, bug fixes, performance enhan
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4160--2017-09-28).
 
-## 4.15.5 - Release date: 2017-09-24
+### 4.15.5 - Release date: 2017-09-24
 {: id="4.15.5"}
 
 The 4.15.5 patch release includes security updates, some minor performance enhancements, and a bug fix:
@@ -381,7 +408,7 @@ The 4.15.5 patch release includes security updates, some minor performance enhan
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4155--2017-09-24).
 
-## 4.15.4 - Release date: 2017-08-06
+### 4.15.4 - Release date: 2017-08-06
 {: id="4.15.4"}
 
 The 4.15.4 patch release includes some minor bug fixes:
@@ -394,7 +421,7 @@ The 4.15.4 patch release includes some minor bug fixes:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4154--2017-08-06).
 
-## 4.15.3 - Release date: 2017-05-16
+### 4.15.3 - Release date: 2017-05-16
 {: id="4.15.3"}
 
 The 4.15.3 patch release includes a security update and some minor bug fixes:
@@ -415,7 +442,7 @@ The 4.15.3 patch release includes a security update and some minor bug fixes:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4153--2017-05-16).
 
-## 4.15.2 - Release date: 2017-03-06
+### 4.15.2 - Release date: 2017-03-06
 {: id="4.15.2"}
 
 The 4.15.2 patch release includes a minor bug fix:
@@ -428,7 +455,7 @@ The 4.15.2 patch release includes a minor bug fix:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4152--2017-03-06).
 
-## 4.15.1 - Release date: 2017-03-05
+### 4.15.1 - Release date: 2017-03-05
 {: id="4.15.1"}
 
 The 4.15.1 patch release includes a minor bug fix:
@@ -441,7 +468,7 @@ The 4.15.1 patch release includes a minor bug fix:
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4151--2017-03-05).
 
-## 4.15.0 - Release date: 2017-03-01
+### 4.15.0 - Release date: 2017-03-01
 {: id="4.15.0"}
 
 The 4.15.0 minor release includes bug fixes, performance improvements, and other minor feature additions, including:
@@ -466,7 +493,7 @@ The 4.15.0 minor release includes bug fixes, performance improvements, and other
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4150--2017-03-01).
 
-## 4.14.1 - Release date: 2017-01-28
+### 4.14.1 - Release date: 2017-01-28
 {: id="4.14.1"}
 
 The 4.14.1 patch release includes bug fixes and performance improvements, including:
@@ -479,7 +506,7 @@ The 4.14.1 patch release includes bug fixes and performance improvements, includ
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4141--2017-01-28).
 
-## 4.14.0 - Release date: 2016-06-16
+### 4.14.0 - Release date: 2016-06-16
 {: id="4.14.0"}
 
 The 4.14.0 minor release includes bug fixes, security update, performance improvements, and other minor feature additions, including:
@@ -538,3 +565,5 @@ The 4.14.0 minor release includes bug fixes, security update, performance improv
 </ul>
 
 For a complete list of changes in this release, see [History.md](https://github.com/expressjs/express/blob/master/History.md#4140--2016-06-16).
+
+</div>

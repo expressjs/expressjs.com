@@ -26,7 +26,7 @@ I seguenti esempi mostrano gli elementi di una chiamata alla funzione middleware
 
 <table style="padding: 0; border: 0; width: 960px; margin-bottom: 10px;">
 <tr><td style="margin: 0; padding: 0px; border: 0; width: 410px;">
-<img src="/images/express-mw.png" style="margin: 0px; padding: 0px; width: 410px; height: 308px;" />
+<img src="/images/express-mw.png" alt="Elements of a middleware function call" style="margin: 0px; padding: 0px; width: 410px; height: 308px;" />
 </td>
 <td style="margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;">
 <div class="callout" id="callout1">Metodo HTTP per cui si applica la funzione middleware.</div>
@@ -69,31 +69,27 @@ app.get('/', function(req, res, next) {
 
 Ecco un esempio di una semplice applicazione Express "Hello World", per cui si definiranno due funzioni middleware:
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000);
-</code>
-</pre>
+app.listen(3000)
+```
 
 <h2>Sviluppo</h2>
 
 Ecco un semplice esempio di una funzione middleware, denominata "myLogger". Questa funzione stampa semplicemente la dicitura "LOGGED" quando una richiesta all'applicazione la attraversa. La funzione middleware è assegnata ad una variabile denominata `myLogger`.
 
-<pre>
-<code class="language-javascript" translate="no">
-var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
-</code>
-</pre>
+```js
+const myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Si noti la chiamata precedente a `next()`.  Richiamando questa funzione si richiama la successiva funzione middleware nell'applicazione.
@@ -103,25 +99,23 @@ La funzione `next()` non fa parte dell'API Express o Node.js, ma è il terzo arg
 Per caricare la funzione middleware, richiamare `app.use()`, specificando la funzione middleware.
 Ad esempio, il seguente codice carica la funzione middleware `myLogger` prima della route al percorso root (/).
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
+const myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
 
-app.use(myLogger);
+app.use(myLogger)
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000);
-</code>
-</pre>
+app.listen(3000)
+```
 
 Ogni volta che un'applicazione riceve una richiesta, viene stampato il messaggio "LOGGED" sul terminale.
 
@@ -133,39 +127,34 @@ La funzione middleware `myLogger` stampa semplicemente un messaggio, successivam
 
 Nel successivo esempio viene aggiunta una proprietà denominata `requestTime` all'oggetto richiesta. Questa funzione middleware verrà denominata "requestTime".
 
-<pre>
-<code class="language-javascript" translate="no">
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
-</code>
-</pre>
+```js
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
+```
 
 L'applicazione utilizza ora la funzione middleware `requestTime`. Inoltre, la funzione di callback della route percorso root utilizza la proprietà che la funzione middleware aggiunge a `req` (l'oggetto richiesta).
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
 
-app.use(requestTime);
+app.use(requestTime)
 
-app.get('/', function (req, res) {
-  var responseText = 'Hello World!<br>';
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-  res.send(responseText);
-});
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>'
+  responseText += `<small>Requested at: ${req.requestTime}</small>`
+  res.send(responseText)
+})
 
-app.listen(3000);
-</code>
-</pre>
-
+app.listen(3000)
+```
 Quando si effettua una richiesta al root dell'applicazione, l'applicazione mostra la cronologia data e ora della richiesta nel browser.
 
 Poiché si dispone dell'accesso all'oggetto richiesta, l'oggetto risposta, la successiva funzione middleware nello stack e l'API Node.js completo, le possibilità con le funzioni middleware sono infinite.

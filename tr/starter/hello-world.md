@@ -43,7 +43,7 @@ Bu uygulama bir sunucu çalıştırır ve gelen bağlantılar için 3000 portunu
 
 Uygulamayı aşağıdaki komutla çalıştırın:
 
-```console
+```bash
 $ node app.js
 ```
 

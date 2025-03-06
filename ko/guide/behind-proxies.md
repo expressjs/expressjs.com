@@ -37,12 +37,12 @@ description: Learn how to configure Express.js applications to work correctly be
 
 다음의 방법 중 하나로 IP 주소를 설정할 수 있습니다.
 
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
+```js
+app.set('trust proxy', 'loopback') // specify a single subnet
 app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
 app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
-</pre>
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+```
 
 IP 주소 또는 서브넷이 지정되는 경우, 해당 IP 주소 또는 서브넷은 주소 결정 프로세스에서 제외되며, 신뢰할 수 있는 것으로 지정되지 않은 IP 주소 중 애플리케이션 서버에서 가장 가까운 IP 주소가 클라이언트의 IP 주소로 결정됩니다.
 </td>
@@ -57,12 +57,14 @@ IP 주소 또는 서브넷이 지정되는 경우, 해당 IP 주소 또는 서�
       <td>함수</td>
 <td markdown="1">
 사용자 정의 신뢰 구현입니다. 이 방법을 올바르게 숙지하고 있는 경우에만 이 방법을 사용하십시오.
-<pre>
-<code class="language-js" translate="no">app.set('trust proxy', function (ip) {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
-  else return false;
-});</code>
-</pre>
+
+
+```js
+app.set('trust proxy', (ip) => {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
+  else return false
+})
+```
 </td>
     </tr>
   </tbody>

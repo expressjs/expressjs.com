@@ -6,6 +6,7 @@ menu: guide
 lang: en
 redirect_from: "/guide/error-handling.html"
 ---
+
 # Error Handling
 
 _Error Handling_ refers to how Express catches and processes errors that

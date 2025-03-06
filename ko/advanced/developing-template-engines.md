@@ -30,7 +30,7 @@ app.set('view engine', 'ntl') // register the template engine
 
 앱은 이제 `.ntl` 파일을 렌더링할 수 있습니다. 다음의 내용이 입력된 `index.ntl`이라는 이름의 파일을 `views` 디렉토리에 작성하십시오.
 
-```text
+```pug
 #title#
 #message#
 ```

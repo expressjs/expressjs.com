@@ -3,7 +3,9 @@
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][github-actions-ci-image]][github-actions-ci-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
+[![OpenSSF Scorecard Badge][ossf-scorecard-badge]][ossf-scorecard-visualizer]
+[![Funding][funding-image]][funding-url]
+
 
 Node.js compression middleware.
 
@@ -11,6 +13,9 @@ The following compression codings are supported:
 
   - deflate
   - gzip
+  - br (brotli)
+
+**Note** Brotli is supported only since Node.js versions v11.7.0 and v10.16.0.
 
 ## Install
 
@@ -41,17 +46,21 @@ as compressing will transform the body.
 #### Options
 
 `compression()` accepts these properties in the options object. In addition to
-those listed below, [zlib](http://nodejs.org/api/zlib.html) options may be
-passed in to the options object.
+those listed below, [zlib](https://nodejs.org/api/zlib.html) options may be
+passed in to the options object or
+[brotli](https://nodejs.org/api/zlib.html#zlib_class_brotlioptions) options.
 
 ##### chunkSize
 
-The default value is `zlib.Z_DEFAULT_CHUNK`, or `16384`.
+Type: `Number`<br>
+Default: `zlib.constants.Z_DEFAULT_CHUNK`, or `16384`.
 
-See [Node.js documentation](http://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
+See [Node.js documentation](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
 regarding the usage.
 
 ##### filter
+
+Type: `Function`
 
 A function to decide if the response should be considered for compression.
 This function is called as `filter(req, res)` and is expected to return
@@ -63,6 +72,9 @@ module to determine if `res.getHeader('Content-Type')` is compressible.
 
 ##### level
 
+Type: `Number`<br>
+Default: `zlib.constants.Z_DEFAULT_COMPRESSION`, or `-1`
+
 The level of zlib compression to apply to responses. A higher level will result
 in better compression, but will take longer to complete. A lower level will
 result in less compression, but will be much faster.
@@ -72,59 +84,71 @@ compression). The special value `-1` can be used to mean the "default
 compression level", which is a default compromise between speed and
 compression (currently equivalent to level 6).
 
-  - `-1` Default compression level (also `zlib.Z_DEFAULT_COMPRESSION`).
-  - `0` No compression (also `zlib.Z_NO_COMPRESSION`).
-  - `1` Fastest compression (also `zlib.Z_BEST_SPEED`).
+  - `-1` Default compression level (also `zlib.constants.Z_DEFAULT_COMPRESSION`).
+  - `0` No compression (also `zlib.constants.Z_NO_COMPRESSION`).
+  - `1` Fastest compression (also `zlib.constants.Z_BEST_SPEED`).
   - `2`
   - `3`
   - `4`
   - `5`
-  - `6` (currently what `zlib.Z_DEFAULT_COMPRESSION` points to).
+  - `6` (currently what `zlib.constants.Z_DEFAULT_COMPRESSION` points to).
   - `7`
   - `8`
-  - `9` Best compression (also `zlib.Z_BEST_COMPRESSION`).
-
-The default value is `zlib.Z_DEFAULT_COMPRESSION`, or `-1`.
+  - `9` Best compression (also `zlib.constants.Z_BEST_COMPRESSION`).
 
 **Note** in the list above, `zlib` is from `zlib = require('zlib')`.
 
 ##### memLevel
 
+Type: `Number`<br>
+Default: `zlib.constants.Z_DEFAULT_MEMLEVEL`, or `8`
+
 This specifies how much memory should be allocated for the internal compression
 state and is an integer in the range of `1` (minimum level) and `9` (maximum
 level).
 
-The default value is `zlib.Z_DEFAULT_MEMLEVEL`, or `8`.
-
-See [Node.js documentation](http://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
+See [Node.js documentation](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
 regarding the usage.
 
+##### brotli
+
+Type: `Object`
+
+This specifies the options for configuring Brotli. See [Node.js documentation](https://nodejs.org/api/zlib.html#class-brotlioptions) for a complete list of available options.
+
+
 ##### strategy
+
+Type: `Number`<br>
+Default: `zlib.constants.Z_DEFAULT_STRATEGY`
 
 This is used to tune the compression algorithm. This value only affects the
 compression ratio, not the correctness of the compressed output, even if it
 is not set appropriately.
 
-  - `zlib.Z_DEFAULT_STRATEGY` Use for normal data.
-  - `zlib.Z_FILTERED` Use for data produced by a filter (or predictor).
+  - `zlib.constants.Z_DEFAULT_STRATEGY` Use for normal data.
+  - `zlib.constants.Z_FILTERED` Use for data produced by a filter (or predictor).
     Filtered data consists mostly of small values with a somewhat random
     distribution. In this case, the compression algorithm is tuned to
     compress them better. The effect is to force more Huffman coding and less
-    string matching; it is somewhat intermediate between `zlib.Z_DEFAULT_STRATEGY`
-    and `zlib.Z_HUFFMAN_ONLY`.
-  - `zlib.Z_FIXED` Use to prevent the use of dynamic Huffman codes, allowing
+    string matching; it is somewhat intermediate between `zlib.constants.Z_DEFAULT_STRATEGY`
+    and `zlib.constants.Z_HUFFMAN_ONLY`.
+  - `zlib.constants.Z_FIXED` Use to prevent the use of dynamic Huffman codes, allowing
     for a simpler decoder for special applications.
-  - `zlib.Z_HUFFMAN_ONLY` Use to force Huffman encoding only (no string match).
-  - `zlib.Z_RLE` Use to limit match distances to one (run-length encoding).
-    This is designed to be almost as fast as `zlib.Z_HUFFMAN_ONLY`, but give
+  - `zlib.constants.Z_HUFFMAN_ONLY` Use to force Huffman encoding only (no string match).
+  - `zlib.constants.Z_RLE` Use to limit match distances to one (run-length encoding).
+    This is designed to be almost as fast as `zlib.constants.Z_HUFFMAN_ONLY`, but give
     better compression for PNG image data.
 
 **Note** in the list above, `zlib` is from `zlib = require('zlib')`.
 
 ##### threshold
 
+Type: `Number` or `String`<br>
+Default: `1kb`
+
 The byte threshold for the response body size before compression is considered
-for the response, defaults to `1kb`. This is a number of bytes or any string
+for the response. This is a number of bytes or any string
 accepted by the [bytes](https://www.npmjs.com/package/bytes) module.
 
 **Note** this is only an advisory setting; if the response size cannot be determined
@@ -134,16 +158,18 @@ set a `Content-Length` response header.
 
 ##### windowBits
 
-The default value is `zlib.Z_DEFAULT_WINDOWBITS`, or `15`.
+Type: `Number`<br>
+Default: `zlib.constants.Z_DEFAULT_WINDOWBITS`, or `15`
 
-See [Node.js documentation](http://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
+See [Node.js documentation](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
 regarding the usage.
 
 ##### enforceEncoding
 
-This is the default encoding to use when the client does not specify an encoding in the request's [Accept-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding) header.
+Type: `String`<br>
+Default: `identity`
 
-The default value is `identity`.
+This is the default encoding to use when the client does not specify an encoding in the request's [Accept-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding) header.
 
 #### .filter
 
@@ -155,6 +181,7 @@ var compression = require('compression')
 var express = require('express')
 
 var app = express()
+
 app.use(compression({ filter: shouldCompress }))
 
 function shouldCompress (req, res) {
@@ -175,9 +202,9 @@ response to be flushed to the client.
 
 ## Examples
 
-### express/connect
+### express
 
-When using this module with express or connect, simply `app.use` the module as
+When using this module with express, simply `app.use` the module as
 high as you like. Requests that pass through the middleware will be compressed.
 
 ```js
@@ -190,6 +217,36 @@ var app = express()
 app.use(compression())
 
 // add all routes
+```
+
+### Node.js HTTP server
+
+```js
+var compression = require('compression')({ threshold: 0 })
+var http = require('http')
+
+function createServer (fn) {
+  return http.createServer(function (req, res) {
+    compression(req, res, function (err) {
+      if (err) {
+        res.statusCode = err.status || 500
+        res.end(err.message)
+        return
+      }
+
+      fn(req, res)
+    })
+  })
+}
+
+var server = createServer(function (req, res) {
+  res.setHeader('Content-Type', 'text/plain')
+  res.end('hello world!')
+})
+
+server.listen(3000, () => {
+  console.log('> Listening at http://localhost:3000')
+})
 ```
 
 ### Server-Sent Events
@@ -230,15 +287,25 @@ app.get('/events', function (req, res) {
 })
 ```
 
+##  Contributing
+
+The Express.js project welcomes all constructive contributions. Contributions take many forms,
+from code for bug fixes and enhancements, to additions and fixes to documentation, additional
+tests, triaging incoming pull requests and issues, and more!
+
+See the [Contributing Guide](https://github.com/expressjs/express/blob/master/Contributing.md) for more technical details on contributing.
+
 ## License
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/compression.svg
+[npm-image]: https://badgen.net/npm/v/compression
 [npm-url]: https://npmjs.org/package/compression
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/compression/master.svg
-[coveralls-url]: https://coveralls.io/r/expressjs/compression?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/compression.svg
-[downloads-url]: https://npmjs.org/package/compression
-[github-actions-ci-image]: https://badgen.net/github/checks/expressjs/compression/master?label=ci
+[downloads-image]: https://badgen.net/npm/dm/compression
+[downloads-url]: https://npmcharts.com/compare/compression?minimal=true
+[github-actions-ci-image]: https://badgen.net/github/checks/expressjs/compression/master?label=CI
 [github-actions-ci-url]: https://github.com/expressjs/compression/actions?query=workflow%3Aci
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/compression/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/compression
+[funding-url]: https://opencollective.com/express
+[funding-image]: https://badgen.net/badge/icon/sponsor/pink?icon=github&label=Open%20Collective

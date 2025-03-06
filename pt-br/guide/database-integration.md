@@ -36,7 +36,7 @@ disponíveis. Para obter outras opções, procure no site [npm](https://www.npmj
 **Módulo**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **Instalação**
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -61,7 +61,7 @@ client.execute('select key from system.local', function(err, result) {
 **Módulo**: [nano](https://github.com/dscape/nano)
 **Instalação**
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -94,7 +94,7 @@ books.list(function(err, body){
 **Módulo**: [levelup](https://github.com/rvagg/node-levelup)
 **Instalação**
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -124,7 +124,7 @@ db.put('name', 'LevelUP', function (err) {
 **Módulo**: [mysql](https://github.com/felixge/node-mysql/)
 **Instalação**
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -157,7 +157,7 @@ connection.end();
 **Módulo**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **Instalação**
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -191,7 +191,7 @@ consulte em [Mongoose](https://github.com/LearnBoost/mongoose).
 **Módulo**: [apoc](https://github.com/hacksparrow/apoc)
 **Instalação**
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -219,7 +219,7 @@ apoc.query('match (n) return n').exec().then(
 **Módulo**: [pg](https://github.com/brianc/node-postgres)
 **Instalação**
 
-```console
+```bash
 $ npm install pg
 ```
 
@@ -254,7 +254,7 @@ pg.connect(conString, function(err, client, done) {
 **Módulo**: [redis](https://github.com/mranney/node_redis)
 **Instalação**
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -292,7 +292,7 @@ client.hkeys('hash key', function (err, replies) {
 **Módulo**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **Instalação**
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -330,7 +330,7 @@ db.close();
 **Módulo**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **Instalação**
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 

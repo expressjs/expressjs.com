@@ -13,13 +13,13 @@ description: Learn how to use the Express application generator tool to quickly 
 
 다음의 명령을 이용해 `express`를 설치하십시오.
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 
 다음과 같이 `-h` 옵션을 이용해 명령의 옵션을 표시하십시오.
 
-```console
+```bash
 $ express -h
 
   Usage: express [options][dir]
@@ -41,7 +41,7 @@ $ express -h
 
 예를 들면, 다음의 예에서는 _myapp_라는 이름의 Express 앱을 현재 작업 디렉토리에 작성합니다.
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -65,20 +65,20 @@ $ express --view=pug myapp
 
 이후 다음과 같이 종속 항목을 설치하십시오.
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 MacOS 또는 Linux에서는 다음 명령을 사용하여 앱을 실행하십시오.
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 Windows에서는 다음 명령을 사용하십시오.
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -86,7 +86,7 @@ Windows에서는 다음 명령을 사용하십시오.
 
 생성된 앱은 다음과 같은 디렉토리 구조를 갖습니다.
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

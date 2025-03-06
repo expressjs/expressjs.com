@@ -24,7 +24,7 @@ funcionar se você atualizá-lo para usar o Express 5.
 Para instalar o alfa mais recente e ter uma prévia do Express
 5, digite o seguinte comando no diretório raiz do seu aplicativo:
 
-```console
+```bash
 $ npm install "express@^{{ site.data.express.next_version }}" --save
 ```
 

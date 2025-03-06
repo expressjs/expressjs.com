@@ -11,19 +11,19 @@ description: Learn how to enable and use debugging logs in Express.js applicatio
 
 要查看 Express 中使用的所有内部日志，在启动应用程序时，请将 `DEBUG` 环境变量设置为 `express:*`。
 
-```console
+```bash
 $ DEBUG=express:* node index.js
 ```
 
 在 Windows 上，使用对应的命令。
 
-```console
+```bash
 > set DEBUG=express:* & node index.js
 ```
 
 在 [Express 生成器](/{{ page.lang }}/starter/generator.html)所生成的缺省应用程序上运行此命令将显示以下输出：
 
-```console
+```bash
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -69,7 +69,7 @@ $ DEBUG=express:* node ./bin/www
 
 向应用程序发出请求时，可以看到 Express 代码中指定的日志：
 
-```console
+```bash
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -95,12 +95,12 @@ $ DEBUG=express:* node ./bin/www
 
 例如，如果您以 `$ express sample-app` 生成应用程序，那么可以使用以下命令来启用调试语句：
 
-```console
+```bash
 $ DEBUG=sample-app:* node ./bin/www
 ```
 
 可以通过分配逗号分隔的名称列表来指定多个调试名称空间：
 
-```console
+```bash
 $ DEBUG=http,mail,express:* node index.js
 ```

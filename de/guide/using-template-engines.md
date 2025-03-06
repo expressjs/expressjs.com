@@ -15,7 +15,7 @@ Bevor über Express Vorlagendateien ausgegeben werden können, müssen die folge
 
 Installieren Sie dann das entsprechende npm-Paket für die Template-Engine:
 
-```console
+```bash
 $ npm install pug --save
 ```
 
@@ -25,33 +25,27 @@ Express-konforme Template-Engines wie Pug exportieren eine Funktion namens `__ex
 
 Nach der Festlegung der View-Engine muss die Engine nicht angegeben oder das Template-Engine-Modul nicht in Ihre Anwendung geladen werden. Express lädt das Modul intern (wie unten für das obige Beispiel gezeigt).
 
-<pre>
-<code class="language-javascript" translate="no">
-app.set('view engine', 'pug');
-</code>
-</pre>
+```js
+app.set('view engine', 'pug')
+```
 
 Erstellen Sie eine Pug-Vorlagendatei namens `index.pug` im Verzeichnis `views` mit dem folgenden Inhalt:
 
-<pre>
-<code class="language-javascript" translate="no">
+```pug
 html
   head
     title= title
   body
     h1= message
-</code>
-</pre>
+```
 
 Dann erstellen Sie eine Weiterleitung, um die Datei `index.pug` auszugeben. Wenn die Eigenschaft `view engine` nicht festgelegt wurde, müssen Sie die Erweiterung der Datei `view` angeben. Andernfalls müssen Sie diese Erweiterung nicht angeben.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+```
 
 Wenn Sie eine Anforderung zur Homepage ausführen, wird die Datei `index.pug` im HTML-Format ausgegeben.
 

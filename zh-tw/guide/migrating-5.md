@@ -17,7 +17,7 @@ Express 5 與 Express 4 之間差異不大：API 的變更不會像從 3.0 至 4
 
 如果要安裝最新的 Alpha 版並預覽 Express 5，請在您應用程式根目錄中輸入下列指令：
 
-```console
+```bash
 $ npm install "express@^{{ site.data.express.next_version }}" --save
 ```
 

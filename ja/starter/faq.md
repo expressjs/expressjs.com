@@ -45,26 +45,22 @@ Express は、`(パス、ロケール、コールバック)` シグニチャー�
 
 Express では、404 応答はエラーの結果ではありません。そのため、エラー・ハンドラー・ミドルウェアはそれらをキャプチャーしません。このように動作するのは、404 応答は単に追加の処理が存在しないことを示しているためです。つまり、Express は、すべてのミドルウェア関数とルートを実行して、そのいずれも応答しなかったことを検出したということです。404 応答に対応するには、スタックの最下部 (他のすべての関数の下) にミドルウェア関数を追加するだけですみます。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(req, res, next) {
-  res.status(404).send('Sorry cant find that!');
-});
-</code>
-</pre>
+```js
+app.use((req, res, next) => {
+  res.status(404).send('Sorry cant find that!')
+})
+```
 
 ## どのようにしてエラー・ハンドラーをセットアップするのですか?
 
 エラー処理ミドルウェアの定義方法は、他のミドルウェアと同じですが、引数の数が 3 つではなく 4 つである点が異なります。具体的には、シグニチャー `(err、req、res、next)` です。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-</code>
-</pre>
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 詳細については、[エラー処理](/{{ page.lang }}/guide/error-handling.html)を参照してください。
 

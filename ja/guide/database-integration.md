@@ -37,7 +37,7 @@ description: Discover how to integrate various databases with Express.js applica
 
 **インストール**
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -59,7 +59,7 @@ client.execute('select key from system.local', (err, result) => {
 
 ### インストール
 
-```console
+```bash
 $ npm install couchbase
 ```
 
@@ -96,7 +96,7 @@ bucket.query(query, [13], (err, result) => {
 
 **インストール**
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -132,7 +132,7 @@ books.list((err, body) => {
 
 ### インストール
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -159,7 +159,7 @@ db.put('name', 'LevelUP', (err) => {
 
 ### インストール
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -191,7 +191,7 @@ connection.end()
 
 **インストール**
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -237,7 +237,7 @@ MongoDB 用のオブジェクト・モデル・ドライバーが必要な場合
 
 ### インストール
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -264,7 +264,7 @@ apoc.query('match (n) return n').exec().then(
 
  NOTE: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
 
-```console
+```bash
 $ npm install oracledb
 ```
 
@@ -308,7 +308,7 @@ getEmployee(101)
 
 ### インストール
 
-```console
+```bash
 $ npm install pg-promise
 ```
 
@@ -333,7 +333,7 @@ db.one('SELECT $1 AS value', 123)
 
 ### インストール
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -368,7 +368,7 @@ client.hkeys('hash key', (err, replies) => {
 
 ### インストール
 
-```console
+```bash
 $ npm install tedious
 ```
 
@@ -424,7 +424,7 @@ function executeStatement () {
 
 ### インストール
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -458,7 +458,7 @@ db.close()
 
 ### インストール
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 

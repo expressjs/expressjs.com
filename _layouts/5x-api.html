@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 <html lang="{{ page.lang }}">
 
   {% include head.html %}
 
   <body>
+    {% include header.html %}
+    <div id="overlay"></div>
 
-    <section class="content">
+    <div class="content">
+      <nav aria-labelledby="sidebar-heading">
+        <div class="toc-container">
+          <h3 id="sidebar-heading" class="toc-heading"><em>On this page</em></h3>
+          {% include api/en/5x/menu.md %}
+        </div>
+      </nav>
+      <main>
+        {{ content }}
+      </main>
+    </div>
 
-      {% include header/header-{{ page.lang }}.html %}
-
-      {% include api/en/5x/menu.md %}
-
-      <div id="overlay"></div>
-
-      {{ content }}
-
-    </section>
-
-    {% include footer/footer-{{ page.lang }}.html %}
+    {% include footer.html %}
 
   </body>
 

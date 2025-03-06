@@ -1,0 +1,60 @@
+# Home
+home: Domov
+
+# Getting started
+getting_started: Začíname
+installing: Inštalácia
+hello_world: Hello world
+generator: Express generátor
+basic_routing: Základný routing
+static_files: Statické súbory
+examples: More examples
+faq: FAQ
+
+# Guide
+guide: Príručka
+routing: Routing
+writing_middleware: Tvorba middleware
+using_middleware: Použitie middleware
+overriding_express_api: Overriding the Express API
+using_template_engines: Použitie template enginov
+error_handling: Error handling
+debugging: Debuggovanie
+behind_proxies: Použitie Express za proxy
+migrating_4: Prechod na Express 4
+migrating_5: Prechod na Express 5
+database_integration: Integrácia s databázou
+
+# API reference
+
+api: API referenčná príručka
+5x: 5.x
+4x: 4.x
+3x: 3.x (zastaralé)
+2x: 2.x (zastaralé)
+
+# Advanced topics
+advanced: Pokročilé témy
+developing_template_engines: Templatovacie enginy
+security_updates: Security - aktualizácie
+best_practice_security: Security - osvedčené postupy
+best_practice_performance: Výkonnosť - osvedčené postupy
+healthcheck_graceful_shutdown: Health checks & shutdown
+
+# Resources
+resources: Zdroje
+glossary: Glosár
+middleware: Middleware
+community: Komunita
+utils: Utility modules
+contributing: Contributing to Express
+changelog: Release Change Log
+
+# Support
+support: Support
+
+# Blog
+blog: Blog
+latest_post: Latest post
+all_posts: All posts
+write_post: Write a Post

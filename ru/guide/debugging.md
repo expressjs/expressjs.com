@@ -11,19 +11,19 @@ description: Learn how to enable and use debugging logs in Express.js applicatio
 
 Для просмотра всех внутренних протоколов, используемых в Express, при запуске приложения задайте для переменной среды `DEBUG` значение `express:*`.
 
-```console
+```bash
 $ DEBUG=express:* node index.js
 ```
 
 В Windows используется соответствующая команда.
 
-```console
+```bash
 > set DEBUG=express:* & node index.js
 ```
 
 При запуске этой команды в стандартном приложении, созданном с помощью  [генератора приложений Express](/{{ page.lang }}/starter/generator.html), будет получен следующий вывод:
 
-```console
+```bash
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -69,7 +69,7 @@ $ DEBUG=express:* node ./bin/www
 
 При последующем запросе, адресованном приложению, вы увидите протоколы, заданные в коде Express:
 
-```console
+```bash
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -95,12 +95,12 @@ $ DEBUG=express:* node ./bin/www
 
 Например, если приложение сгенерировано с помощью команды `$ express sample-app`, операторы отладки (операторы debug) можно активировать с помощью следующей команды:
 
-```console
+```bash
 $ DEBUG=sample-app:* node ./bin/www
 ```
 
 Можно указать несколько пространств имен для отладки, путем ввода списка имен через запятую:
 
-```console
+```bash
 $ DEBUG=http,mail,express:* node index.js
 ```

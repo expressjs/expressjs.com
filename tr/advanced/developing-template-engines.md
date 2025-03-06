@@ -30,7 +30,7 @@ app.set('view engine', 'ntl') // register the template engine
 
 Your app will now be able to render `.ntl` files. Create a file named `index.ntl` in the `views` directory with the following content.
 
-```text
+```pug
 #title#
 #message#
 ```

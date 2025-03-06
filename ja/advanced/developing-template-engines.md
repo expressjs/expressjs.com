@@ -30,7 +30,7 @@ app.set('view engine', 'ntl') // register the template engine
 
 これで、アプリケーションは `.ntl` ファイルをレンダリングできるようになります。以下のコンテンツで `index.ntl` というファイルを `views` ディレクトリーに作成します。
 
-```text
+```pug
 #title#
 #message#
 ```

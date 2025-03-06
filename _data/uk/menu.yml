@@ -1,0 +1,60 @@
+# Home
+home: Початкова сторінка
+
+# Getting started
+getting_started: Ознайомлення
+installing: Встановлення
+hello_world: Hello world
+generator: Генератор структури Express
+basic_routing: Базова маршрутизація
+static_files: Статичні файли
+examples: More examples
+faq: ЧАПи
+
+# Guide
+guide: Гід
+routing: Маршрутизація
+writing_middleware: Створення проміжних обробників
+using_middleware: Використання проміжних обробників
+overriding_express_api: Overriding the Express API
+using_template_engines: Використання шаблонізаторів
+error_handling: Обробка помилок
+debugging: Зневадження
+behind_proxies: Express позаду проксі
+migrating_4: Перехід на Express 4
+migrating_5: Перехід на Express 5
+database_integration: Інтеграція з базами даних
+
+# API reference
+
+api: Довідник API
+5x: 5.x
+4x: 4.x
+3x: 3.x (застаріла)
+2x: 2.x (застаріла)
+
+# Advanced topics
+advanced: Додаткові можливості
+developing_template_engines: Шаблонізатори
+security_updates: Оновлення безпеки
+best_practice_security: Кращі практики безпеки
+best_practice_performance: Кращі практики продуктивності
+healthcheck_graceful_shutdown: Health checks & shutdown
+
+# Resources
+resources: Ресурси
+glossary: Голосарій
+middleware: Проміжний обробник
+community: Спільнота
+utils: Utility modules
+contributing: Contributing to Express
+changelog: Release Change Log
+
+# Support
+support: Support
+
+# Blog
+blog: Blog
+latest_post: Latest post
+all_posts: All posts
+write_post: Write a Post

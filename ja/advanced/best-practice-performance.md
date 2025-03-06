@@ -68,7 +68,7 @@ Node.js 4.0+ または io.js 2.1.0+ を使用している場合、アプリケ�
 
 #### アプリケーション・アクティビティー
 
-アプリケーション・アクティビティー (例えば、トラフィックまたは API 呼び出しのトラッキング) のロギングを実行する場合は、`console.log()` を使用するのではなく、[Winston](https://www.npmjs.com/package/winston) や [Bunyan](https://www.npmjs.com/package/bunyan) などのロギング・ライブラリーを使用します。これらの 2 つのライブラリーの詳細な比較については、StrongLoop ブログ投稿の [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/) を参照してください。
+アプリケーション・アクティビティー (例えば、トラフィックまたは API 呼び出しのトラッキング) のロギングを実行する場合は、`console.log()` を使用するのではなく、[Winston](https://www.npmjs.com/package/winston) や [Bunyan](https://www.npmjs.com/package/bunyan) などのロギング・ライブラリーを使用します。これらの 2 つのライブラリーの詳細な比較については、StrongLoop ブログ投稿の [Comparing Winston and Bunyan Node.js Logging](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/) を参照してください。
 
 ### 例外を適切に処理する
 
@@ -84,7 +84,7 @@ Node アプリケーションは、キャッチされていない例外が発生
 エラー処理のその他の基礎については、下記を参照してください。
 
 * [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
-* [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop ブログ)
+* [Building Robust Node Applications: Error Handling](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/robust-node-applications-error-handling/) (StrongLoop ブログ)
 
 #### 実行してはならないこと
 
@@ -157,8 +157,8 @@ app.get('/', wrap(async (req, res, next) => {
 
 Promise を使用するエラー処理の詳細については、下記を参照してください。
 
-* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
-* [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
+* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
+* [Promises in Node.js with Q – An Alternative to Callbacks](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
 
 ## 環境/セットアップで実行する処理
 
@@ -298,13 +298,13 @@ StrongLoop Process Manager を Systemd サービスとして簡単にインス�
 
 StrongLoop PM を Systemd サービスとしてインストールするには、次のようにします。
 
-```console
+```bash
 $ sudo sl-pm-install --systemd
 ```
 
 次に、サービスを開始します。
 
-```console
+```bash
 $ sudo /usr/bin/systemctl start strong-pm
 ```
 
@@ -366,13 +366,13 @@ StrongLoop Process Manager を Upstart サービスとして簡単にインス�
 
 StrongLoop PM を Upstart 1.4 サービスとしてインストールするには、次のようにします。
 
-```console
+```bash
 $ sudo sl-pm-install
 ```
 
 次に、サービスを実行します。
 
-```console
+```bash
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -400,7 +400,7 @@ StrongLoop Process Manager (PM) は、アプリケーションを実行する際
 
 例えば、アプリケーションを prod.foo.com にデプロイして、StrongLoop PM がポート 8701 (デフォルト) で listen している場合は、slc を使用してクラスター・サイズを 8 に設定します。
 
-```console
+```bash
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 
@@ -414,7 +414,7 @@ When running an application with PM2, you can enable **cluster mode** to run it 
 
 To enable cluster mode, start your application like so:
 
-```console
+```bash
 # Start 4 worker processes
 $ pm2 start app.js -i 4
 # Auto-detect number of available CPUs and start that many worker processes
@@ -425,7 +425,7 @@ This can also be configured within a PM2 process file (`ecosystem.config.js` or 
 
 Once running, a given application with the name `app` can be scaled like so:
 
-```console
+```bash
 # Add 3 more workers
 $ pm2 scale app +3
 # Scale to a specific number of workers

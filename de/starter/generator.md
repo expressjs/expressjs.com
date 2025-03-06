@@ -12,13 +12,13 @@ Mit dem Application Generator Tool `express` können Sie innerhalb kürzester Ze
 
 Installieren Sie `express` mit dem folgenden Befehl:
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 
 Zeigen Sie die Befehlsoptionen mit der Option `-h` an:
 
-```console
+```bash
 $ express -h
 
   Usage: express [options][dir]
@@ -40,7 +40,7 @@ $ express -h
 
 Im folgenden Beispiel wird eine Express-Anwendung mit dem Namen _myapp_ im aktuellen Arbeitsverzeichnis erstellt:
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -64,20 +64,20 @@ $ express --view=pug myapp
 
 Installieren Sie dann Abhängigkeiten:
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 Führen Sie unter MacOS oder Linux die Anwendung mit diesem Befehl aus:
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 Verwenden Sie unter Windows diesen Befehl:
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -85,7 +85,7 @@ Laden Sie dann `http://localhost:3000/` in Ihren Browser, um auf die Anwendung z
 
 Die erstellte Anwendung hat die folgende Verzeichnisstruktur:
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

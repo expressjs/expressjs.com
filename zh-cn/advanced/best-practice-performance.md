@@ -61,7 +61,7 @@ app.use(compression())
 
 #### 出于应用程序活动目的
 
-如果要对应用程序活动进行日志记录（例如，跟踪流量或 API 调用），请使用 [Winston](https://www.npmjs.com/package/winston) 或 [Bunyan](https://www.npmjs.com/package/bunyan) 之类的日志记录库，而不要使用 `console.log()`。要了解这两个库的详细对比，请参阅 StrongLoop 博客帖子 [Comparing Winston and Bunyan Node.js Logging](https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/)。
+如果要对应用程序活动进行日志记录（例如，跟踪流量或 API 调用），请使用 [Winston](https://www.npmjs.com/package/winston) 或 [Bunyan](https://www.npmjs.com/package/bunyan) 之类的日志记录库，而不要使用 `console.log()`。要了解这两个库的详细对比，请参阅 StrongLoop 博客帖子 [Comparing Winston and Bunyan Node.js Logging](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/compare-node-js-logging-winston-bunyan/)。
 
 <a name="exceptions"></a>
 
@@ -79,7 +79,7 @@ Node 应用程序在遇到未捕获的异常时会崩溃。不处理异常并采
 有关错误处理基本知识的更多信息，请参阅：
 
 * [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
-* [Building Robust Node Applications: Error Handling](https://strongloop.com/strongblog/robust-node-applications-error-handling/)（StrongLoop 博客）
+* [Building Robust Node Applications: Error Handling](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/robust-node-applications-error-handling/)（StrongLoop 博客）
 
 #### 请勿执行以下操作
 
@@ -156,8 +156,8 @@ app.get('/', wrap(async (req, res, next) => {
 
 有关使用 Promise 来处理错误的更多信息，请参阅：
 
-* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
-* [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
+* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
+* [Promises in Node.js with Q – An Alternative to Callbacks](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
 
 <a name="env"></a>
 
@@ -190,23 +190,19 @@ NODE_ENV 环境变量指定运行应用程序的环境（通常是开发或者�
 
 对于 Upstart，请使用作业文件中的 `env` 关键字。例如：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/init/env.conf
  env NODE_ENV=production
-</code>
-</pre>
+```
 
 有关更多信息，请参阅 [Upstart Intro, Cookbook and Best Practices](http://upstart.ubuntu.com/cookbook/#environment-variables)。
 
 对于 systemd，请使用单元文件中的 `Environment` 伪指令。例如：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # /etc/systemd/system/myservice.service
 Environment=NODE_ENV=production
-</code>
-</pre>
+```
 
 有关更多信息，请参阅 [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html)。
 
@@ -267,8 +263,7 @@ Systemd 是一个 Linux 系统和服务管理器。大多数主要 Linux 分发�
 
 systemd 服务配置文件称为*单元文件*，扩展名为 .service。以下是一个用于直接管理 Node 应用程序的单元文件示例（请将粗体文本替换为系统和应用程序的值）：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 [Unit]
 Description=Awesome Express App
 
@@ -296,8 +291,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-</code>
-</pre>
+```
 有关 systemd 的更多信息，请参阅 [systemd 参考（联机帮助页）](http://www.freedesktop.org/software/systemd/man/systemd.unit.html)。
 ##### 作为 systemd 服务的 StrongLoop PM
 
@@ -305,13 +299,13 @@ WantedBy=multi-user.target
 
 要将 StrongLoop PM 作为 systemd 服务安装：
 
-```console
+```bash
 $ sudo sl-pm-install --systemd
 ```
 
 使用以下命令启动此服务：
 
-```console
+```bash
 $ sudo /usr/bin/systemctl start strong-pm
 ```
 
@@ -325,8 +319,7 @@ Upstart 服务以作业配置文件（也称为“作业”）形式定义，扩
 
 在 `/etc/init/` 中创建名为 `myapp.conf` 的文件，其中包含以下内容（请将粗体文本替换为系统和应用程序的值）：
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 # When to start the process
 start on runlevel [2345]
 
@@ -354,8 +347,7 @@ respawn
 
 # Limit restart attempt to 10 times within 10 seconds
 respawn limit 10 10
-</code>
-</pre>
+```
 
 注：此脚本需要 Ubuntu 12.04-14.10 上受支持的 Upstart 1.4 或更新版本。
 
@@ -375,13 +367,13 @@ respawn limit 10 10
 
 要将 StrongLoop PM 作为 Upstart 1.4 服务安装：
 
-```console
+```bash
 $ sudo sl-pm-install
 ```
 
 使用以下命令运行此服务：
 
-```console
+```bash
 $ sudo /sbin/initctl start strong-pm
 ```
 
@@ -409,7 +401,7 @@ $ sudo /sbin/initctl start strong-pm
 
 例如，假设要将应用程序部署到 prod.foo.com，并且 StrongLoop PM 正在端口 8701（缺省值）上侦听，那么可使用 slc 将集群大小设置为 8：
 
-```console
+```bash
 $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 ```
 

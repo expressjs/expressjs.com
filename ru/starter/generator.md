@@ -13,13 +13,13 @@ description: Learn how to use the Express application generator tool to quickly 
 
 Установите `express` с помощью следующей команды:
 
-```console
+```bash
 $ npm install express-generator -g
 ```
 
 Для просмотра опций команды воспользуйтесь опцией `-h`:
 
-```console
+```bash
 $ express -h
 
   Usage: express [options][dir]
@@ -41,7 +41,7 @@ $ express -h
 
 Например, следующая команда создает приложение Express с именем _myapp_ в текущем рабочем каталоге:
 
-```console
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -65,20 +65,20 @@ $ express --view=pug myapp
 
 Затем установите зависимости:
 
-```console
+```bash
 $ cd myapp
 $ npm install
 ```
 
 В MacOS или Linux запустите приложение с помощью следующей команды:
 
-```console
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
 В Windows используется следующая команда:
 
-```console
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
@@ -86,7 +86,7 @@ $ DEBUG=myapp:* npm start
 
 Структура каталогов сгенерированного приложения выглядит следующим образом:
 
-```console
+```bash
 .
 ├── app.js
 ├── bin

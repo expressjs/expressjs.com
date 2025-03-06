@@ -16,7 +16,7 @@ description: Discover how to integrate and use template engines like Pug, Handle
 
 然后安装对应的模板引擎 npm 包：
 
-```console
+```bash
 $ npm install pug --save
 ```
 
@@ -27,33 +27,27 @@ $ npm install pug --save
 
 在设置视图引擎之后，不必指定该引擎或者在应用程序中装入模板引擎模块；Express 在内部装入此模块，如下所示（针对以上示例）。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.set('view engine', 'pug');
-</code>
-</pre>
+```js
+app.set('view engine', 'pug')
+```
 
 在 `views` 目录中创建名为 `index.pug` 的 Pug 模板文件，其中包含以下内容：
 
-<pre>
-<code class="language-javascript" translate="no">
+```pug
 html
   head
     title= title
   body
     h1= message
-</code>
-</pre>
+```
 
 随后创建路由以呈现 `index.pug` 文件。如果未设置 `view engine` 属性，必须指定 `view` 文件的扩展名。否则，可以将其忽略。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+```
 
 向主页发出请求时，`index.pug` 文件将呈现为 HTML。
 

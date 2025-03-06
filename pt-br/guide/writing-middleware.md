@@ -34,7 +34,7 @@ O exemplo a seguir mostra os elementos de uma chamada de função de middleware:
 
 <table id="mw-fig"> 
 <tr><td id="mw-fig-imgcell">
-<img src="/images/express-mw.png" id="mw-fig-img" />
+<img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
 </td>
 <td class="mw-fig-callouts">
 <div class="callout" id="callout1">O método HTTP para o qual a função de middleware é aplicada.</div>
@@ -54,18 +54,16 @@ O exemplo a seguir mostra os elementos de uma chamada de função de middleware:
 Aqui está um exemplo de um simples aplicativo "Hello World" do
 Express, para o qual serão definidas duas funções de middleware:
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000);
-</code>
-</pre>
+app.listen(3000)
+```
 
 <h2>Desenvolvimento</h2>
 
@@ -73,14 +71,12 @@ Aqui está um exemplo simples de uma função de middleware chamada "myLogger". 
 função apenas imprime "LOGGED" quando uma solicitação para o aplicativo passa por ela. A
 função de middleware é designada para uma variável chamada `myLogger`.
 
-<pre>
-<code class="language-javascript" translate="no">
-var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
-</code>
-</pre>
+```js
+const myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
+```
 
 <div class="doc-box doc-notice" markdown="1">
 Observe a chamada acima para `next()`.  A chamada
@@ -95,25 +91,23 @@ evitar confusão, sempre use esta convenção.
 Para carregar a função de middleware, chame `app.use()`, especificando a função de middleware.
 Por exemplo, o código a seguir carrega a função de middleware do `myLogger` antes da rota para o caminho raiz (/).
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};
+const myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
 
-app.use(myLogger);
+app.use(myLogger)
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000);
-</code>
-</pre>
+app.listen(3000)
+```
 
 Sempre que o aplicativo recebe uma chamada, ele imprime a mensagem "LOGGED" no terminal.
 
@@ -132,42 +126,37 @@ O próximo exemplo inclui uma propriedade chamada
 `requestTime` ao objeto da solicitação. Iremos
 chamar esta função de middleware de "requestTime".
 
-<pre>
-<code class="language-javascript" translate="no">
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
-</code>
-</pre>
+```js
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
+```
 
 O aplicativo agora usa a função de middleware `requestTime`. Além
 disso, a função de retorno de chamada do caminho raiz usa a
 propriedade que a função de middleware inclui no
 `req` (o objeto da solicitação).
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+```js
+const express = require('express')
+const app = express()
 
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
 
-app.use(requestTime);
+app.use(requestTime)
 
-app.get('/', function (req, res) {
-  var responseText = 'Hello World!<br>';
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-  res.send(responseText);
-});
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>'
+  responseText += `<small>Requested at: ${req.requestTime}</small>`
+  res.send(responseText)
+})
 
-app.listen(3000);
-</code>
-</pre>
-
+app.listen(3000)
+```
 Ao fazer uma solicitação para a raiz do aplicativo, o
 aplicativo agora exibe o registro de data e hora da sua solicitação
 no navegador.

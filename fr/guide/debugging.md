@@ -11,19 +11,19 @@ description: Learn how to enable and use debugging logs in Express.js applicatio
 
 Pour afficher tous les journaux internes utilisés dans Express, affectez à la variable d'environnement `DEBUG` la valeur `express:*` lors du lancement de votre application.
 
-```console
+```bash
 $ DEBUG=express:* node index.js
 ```
 
 Sous Windows, utilisez la commande correspondante.
 
-```console
+```bash
 > set DEBUG=express:* & node index.js
 ```
 
 L'exécution de cette commande sur l'application par défaut générée par le [générateur express](/{{ page.lang }}/starter/generator.html) imprime le résultat suivant :
 
-```console
+```bash
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -69,7 +69,7 @@ $ DEBUG=express:* node ./bin/www
 
 Si une demande est par la suite effectuée à l'application, vous verrez les journaux spécifiés dans le code Express :
 
-```console
+```bash
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -95,12 +95,12 @@ Une application générée par la commande `express` également appel au module 
 
 Ainsi, si vous avez généré l'application à l'aide de `$ express sample-app`, vous pouvez activer les instructions de débogage en exécutant la commande suivante :
 
-```console
+```bash
 $ DEBUG=sample-app:* node ./bin/www
 ```
 
 Vous pouvez spécifier plusieurs espaces de noms de débogage en affectant une liste de noms séparés par des virgules :
 
-```console
+```bash
 $ DEBUG=http,mail,express:* node index.js
 ```

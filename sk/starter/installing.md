@@ -6,16 +6,12 @@ lang: sk
 description: Learn how to install Express.js in your Node.js environment, including
   setting up your project directory and managing dependencies with npm.
 ---
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 
 # Inštalácia
 
 Za predpokladu, že už máte nainštalovaný [Node.js](https://nodejs.org/), vytvorte priečinok pre vašu aplikáciu a presuňte sa tam.
 
-```console
+```bash
 $ mkdir myapp
 $ cd myapp
 ```
@@ -23,14 +19,14 @@ $ cd myapp
 Pomocou príkazu `npm init` vytvorte pre vašu aplikáciu súbor `package.json`.
 Viac informácií o tom, ako funguje `package.json` sa dozviete po prečítaní [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
 
-```console
+```bash
 $ npm init
 ```
 
 Tento príkaz vás vyzve k zadaniu viacerých informácií, ako sú napr. názov a verzia vašej aplikácie.
 Teraz, kvôli zjednodušeniu, stlačte len ENTER k potvrdeniu defaultných hodnôt väčšiny z nich, okrem bodu:
 
-```console
+```bash
 entry point: (index.js)
 ```
 
@@ -38,13 +34,13 @@ Zadajte `app.js`, prípadne akýkoľvek iný názov hlavného súboru vašej apl
 
 Teraz v `myapp` priečinku nainštalujte Express a pridajte ho ako dependenciu do package.json. Takto:
 
-```console
+```bash
 $ npm install express --save
 ```
 
 Ak chcete nainštalovať Express bez toho, aby bol pridaný ako dependencia, vynechajte prepínač `--save`
 
-```console
+```bash
 $ npm install express
 ```
 

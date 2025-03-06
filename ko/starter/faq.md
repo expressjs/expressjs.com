@@ -60,27 +60,23 @@ Express에서 404 응답은 오류로 인해 발생하는 결과가 아니며, �
 다음과 같이 404 응답을 처리하기 위한 미들웨어 함수를 스택의 가장 아래(다른 모든 함수의 아래)에
 추가하기만 하면 됩니다.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(req, res, next) {
-  res.status(404).send('Sorry cant find that!');
-});
-</code>
-</pre>
+```js
+app.use((req, res, next) => {
+  res.status(404).send('Sorry cant find that!')
+})
+```
 
 ## 오류 핸들러를 어떻게 설정해야 합니까?
 
 오류 처리 미들웨어는 다른 미들웨어와 동일한 방식으로 정의할 수 있지만,
 다음과 같이 오류 처리 함수는 3개가 아닌 4개의 인수, 구체적으로 말하면 `(err, req, res, next)` 시그니처를 갖는다는 점이 다릅니다.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-</code>
-</pre>
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 자세한 정보는 [오류 처리](/{{ page.lang }}/guide/error-handling.html)를 참조하십시오.
 

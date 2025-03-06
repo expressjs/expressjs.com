@@ -35,7 +35,7 @@ Bu veritabanı sürücüleri mevcut olanların çoğunun arasındadır. Diğer s
 
 ### Yükleme
 
-```console
+```bash
 $ npm install cassandra-driver
 ```
 
@@ -57,7 +57,7 @@ client.execute('select key from system.local', (err, result) => {
 
 ### Yükleme
 
-```console
+```bash
 $ npm install couchbase
 ```
 
@@ -94,7 +94,7 @@ bucket.query(query, [13], (err, result) => {
 
 ### Yükleme
 
-```console
+```bash
 $ npm install nano
 ```
 
@@ -130,7 +130,7 @@ books.list((err, body) => {
 
 ### Yükleme
 
-```console
+```bash
 $ npm install level levelup leveldown
 ```
 
@@ -157,7 +157,7 @@ db.put('name', 'LevelUP', (err) => {
 
 ### Yükleme
 
-```console
+```bash
 $ npm install mysql
 ```
 
@@ -189,7 +189,7 @@ connection.end()
 
 ### Yükleme
 
-```console
+```bash
 $ npm install mongodb
 ```
 
@@ -235,7 +235,7 @@ MongoDB için bir nesne model sürücüsü istiyorsanız, bakınız [Mongoose](h
 
 ### Yükleme
 
-```console
+```bash
 $ npm install apoc
 ```
 
@@ -262,7 +262,7 @@ apoc.query('match (n) return n').exec().then(
 
  NOTE: [Yükleme önkoşulları için bakınız](https://github.com/oracle/node-oracledb#-installation).
 
-```console
+```bash
 $ npm install oracledb
 ```
 
@@ -306,7 +306,7 @@ getEmployee(101)
 
 ### Yükleme
 
-```console
+```bash
 $ npm install pg-promise
 ```
 
@@ -331,7 +331,7 @@ db.one('SELECT $1 AS value', 123)
 
 ### Yükleme
 
-```console
+```bash
 $ npm install redis
 ```
 
@@ -366,7 +366,7 @@ client.hkeys('hash key', (err, replies) => {
 
 ### Yükleme
 
-```console
+```bash
 $ npm install tedious
 ```
 
@@ -427,7 +427,7 @@ function executeStatement () {
 
 ### Yükleme
 
-```console
+```bash
 $ npm install sqlite3
 ```
 
@@ -461,7 +461,7 @@ db.close()
 
 ### Yükleme
 
-```console
+```bash
 $ npm install elasticsearch
 ```
 
