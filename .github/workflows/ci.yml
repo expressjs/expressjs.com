@@ -21,6 +21,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Setup Ruby    
+      uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4 # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
+      with:
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
@@ -32,6 +37,9 @@ jobs:
     - name: Run tests
       shell: bash
       run: npm test
+    
+    - name: Jekyll Build
+      run: bundle exec jekyll build
 
     - name: Check Docker support
       shell: bash
