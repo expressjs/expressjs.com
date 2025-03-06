@@ -476,13 +476,6 @@ html[xmlns] .clearfix {
   margin-bottom: 1rem;
 }
 
-.doc-box pre {
-  font-size: 12px;
-  line-height: 14px;
-  padding: 1em;
-  margin: 0;
-}
-
 .doc-box p {
   margin: 0 0 8px 0;
 }
