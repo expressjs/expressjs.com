@@ -21,6 +21,24 @@ npm install "express@^{{ site.data.express.next_version }}"
 
 You can then run your automated tests to see what fails, and fix problems according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
 
+## Express 5 Codemods
+
+To help you migrate your express server, we have created a set of codemods that will help you automatically update your code to the latest version of Express.
+
+Run the following command for run all the codemods available:
+
+```sh
+npx @expressjs/codemod upgrade
+```
+
+If you want to run a specific codemod, you can run the following command:
+
+```sh
+npx @expressjs/codemod name-of-the-codemod
+```
+
+You can find the list of available codemods [here](https://github.com/expressjs/codemod?tab=readme-ov-file#available-codemods).
+
 <h2 id="changes">Changes in Express 5</h2>
 
 **Removed methods and properties**
@@ -74,6 +92,16 @@ Express 5 no longer supports the `app.del()` function. If you use this function,
 
 Initially, `del` was used instead of `delete`, because `delete` is a reserved keyword in JavaScript. However, as of ECMAScript 6, `delete` and other reserved keywords can legally be used as property names.
 
+{% capture codemod-deprecated-signatures %}
+You can replace the deprecated signatures with the following command:
+
+```plain-text
+npx @expressjs/codemod v4-deprecated-signatures
+```
+{% endcapture %}
+
+{% include admonitions/note.html content=codemod-deprecated-signatures %}
+
 ```js
 // v4
 app.del('/user/:id', (req, res) => {
@@ -99,6 +127,16 @@ The following method names have been pluralized. In Express 4, using the old met
 `req.acceptsEncoding()` is replaced by `req.acceptsEncodings()`.
 
 `req.acceptsLanguage()` is replaced by `req.acceptsLanguages()`.
+
+{% capture codemod-pluralized-methods %}
+You can replace the deprecated signatures with the following command:
+
+```plain-text
+npx @expressjs/codemod pluralized-methods
+```
+{% endcapture %}
+
+{% include admonitions/note.html content=codemod-pluralized-methods %}
 
 ```js
 // v4
@@ -130,6 +168,16 @@ This should not affect your code if you follow the Express 4 documentation of [a
 
 This potentially confusing and dangerous method of retrieving form data has been removed. You will now need to specifically look for the submitted parameter name in the `req.params`, `req.body`, or `req.query` object.
 
+{% capture codemod-req-param %}
+You can replace the deprecated signatures with the following command:
+
+```plain-text
+npx @expressjs/codemod req-param
+```
+{% endcapture %}
+
+{% include admonitions/note.html content=codemod-req-param %}
+
 ```js
 // v4
 app.post('/user', (req, res) => {
@@ -154,6 +202,8 @@ app.post('/user', (req, res) => {
 
 Express 5 no longer supports the signature `res.json(obj, status)`. Instead, set the status and then chain it to the `res.json()` method like this: `res.status(status).json(obj)`.
 
+{% include admonitions/note.html content=codemod-deprecated-signatures %}
+
 ```js
 // v4
 app.post('/user', (req, res) => {
@@ -170,6 +220,8 @@ app.post('/user', (req, res) => {
 
 Express 5 no longer supports the signature `res.jsonp(obj, status)`. Instead, set the status and then chain it to the `res.jsonp()` method like this: `res.status(status).jsonp(obj)`.
 
+{% include admonitions/note.html content=codemod-deprecated-signatures %}
+
 ```js
 // v4
 app.post('/user', (req, res) => {
@@ -185,6 +237,8 @@ app.post('/user', (req, res) => {
 <h4 id="res.redirect">res.redirect(url, status)</h4>
 
 Express 5 no longer supports the signature `res.redirect(url, status)`. Instead, use the following signature: `res.redirect(status, url)`.
+
+{% include admonitions/note.html content=codemod-deprecated-signatures %}
 
 ```js
 // v4
@@ -203,6 +257,16 @@ app.get('/user', (req, res) => {
 
 Express 5 no longer supports the magic string `back` in the `res.redirect()` and `res.location()` methods. Instead, use the `req.get('Referrer') || '/'` value to redirect back to the previous page. In Express 4, the res.`redirect('back')` and `res.location('back')` methods were deprecated.
 
+{% capture codemod-magic-redirect %}
+You can replace the deprecated signatures with the following command:
+
+```plain-text
+npx @expressjs/codemod magic-redirect
+```
+{% endcapture %}
+
+{% include admonitions/note.html content=codemod-magic-redirect %}
+
 ```js
 // v4
 app.get('/user', (req, res) => {
@@ -218,6 +282,8 @@ app.get('/user', (req, res) => {
 <h4 id="res.send.body">res.send(body, status)</h4>
 
 Express 5 no longer supports the signature `res.send(obj, status)`. Instead, set the status and then chain it to the `res.send()` method like this: `res.status(status).send(obj)`.
+
+{% include admonitions/note.html content=codemod-deprecated-signatures %}
 
 ```js
 // v4
@@ -236,6 +302,8 @@ app.get('/user', (req, res) => {
 Express 5 no longer supports the signature `res.send(status)`, where `status` is a number. Instead, use the `res.sendStatus(statusCode)` function, which sets the HTTP response header status code and sends the text version of the code: "Not Found", "Internal Server Error", and so on.
 If you need to send a number by using the `res.send()` function, quote the number to convert it to a string, so that Express does not interpret it as an attempt to use the unsupported old signature.
 
+{% include admonitions/note.html content=codemod-deprecated-signatures %}
+
 ```js
 // v4
 app.get('/user', (req, res) => {
@@ -251,6 +319,8 @@ app.get('/user', (req, res) => {
 <h4 id="res.sendfile">res.sendfile()</h4>
 
 The `res.sendfile()` function has been replaced by a camel-cased version `res.sendFile()` in Express 5.
+
+{% include admonitions/note.html content=codemod-deprecated-signatures %}
 
 ```js
 // v4
