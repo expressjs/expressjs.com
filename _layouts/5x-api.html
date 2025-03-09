@@ -16,6 +16,15 @@
       </nav>
       <main>
         {{ content }}
+        <a role="button" class="edit-github-btn" href="{{ site.github.repository_url }}/tree/gh-pages/_includes/{{page.menu}}/en/5x" aria-label="GitHub button">
+          <!-- for translated api pages, replace /en/ with /{{page.lang}}/ -->
+          <span class="hidden-dark">
+            {% include icons/github-light.svg %}
+          </span>
+          <span class="hidden-light">
+            {% include icons/github-dark.svg %}
+          </span>
+          Edit this page</a>
       </main>
     </div>
 
