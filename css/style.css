@@ -76,11 +76,11 @@ main.home {
 }
 
 .en-doc #home-content {
-  margin-top: 150px;
+  margin-top: 80px;
 }
 
 .non-en-doc:has(#i18n-notice-box.hidden) #home-content {
-  margin-top: 150px;
+  margin-top: 40px;
 }
 
 #homepage-leftpane {
