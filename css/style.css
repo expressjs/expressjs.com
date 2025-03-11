@@ -554,12 +554,11 @@ a.edit-github-btn{
   gap: 0.5rem;
   width: fit-content;
   padding: 0.5rem;
-  color: var(--info-accent) ;
   border-radius: 0.3rem;
-  background-color: var(--info-bg);
 
   &:is(:hover, :active, :focus) {
     color: var(--fg);
+    background-color: var(--hover-bg);
     outline: 1px solid var(--card-fg);
   }
 }
