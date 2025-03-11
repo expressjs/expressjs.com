@@ -79,6 +79,14 @@ main.home {
   margin-top: 150px;
 }
 
+.non-en-doc:has(#i18n-notice-box.hidden) #home-content {
+  margin-top: 150px;
+}
+
+.non-en-doc:has(#i18n-notice-box:not(.hidden)) .content {
+  margin-top: 50px;
+}
+
 #homepage-leftpane {
   min-width: 500px;
   margin-right: 30px;

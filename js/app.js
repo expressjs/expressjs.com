@@ -79,11 +79,13 @@ $(function(){
 
   // i18n notice
   if (readCookie('i18nClose')) {
-    $('#i18n-notice-box').hide()
+    $('#i18n-notice-box').hide();
+    $("#i18n-notice-box").addClass("hidden");
   }
   else {
     $('#close-i18n-notice-box').on('click', function () {
-      $('#i18n-notice-box').hide()
+      $('#i18n-notice-box').hide();
+      $("#i18n-notice-box").addClass("hidden");
       createCookie('i18nClose', 1);
     })
   }
