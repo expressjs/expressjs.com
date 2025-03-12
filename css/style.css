@@ -616,11 +616,15 @@ footer {
   font-size: 20px;
 }
 
-/* navigation */
-#theme-icon-container {
+/* theme btn */
+button#theme-icon-container {
   cursor: pointer;
+  appearance: none;
+  background-color: inherit;
+  border: 0;
 }
 
+/* navigation */
 #navbar {
   line-height: 30px;
   display: flex;
