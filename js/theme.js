@@ -2,7 +2,7 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
   if (!hasLocalStorage()) {
     document?.addEventListener('DOMContentLoaded', () => {
       // remove icon - toggle not supported
-      document.querySelector('#theme-icon-container').remove()
+      document.querySelector('.theme-btn').remove()
       toggleSystemTheme(colorScheme)
     })
   } else {
@@ -35,7 +35,7 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
     document.addEventListener('DOMContentLoaded', () => {
 
       document
-        .querySelector('.theme-toggle')
+        .querySelector('.theme-btn')
         .addEventListener('click', toggleLocalStorageTheme)
     })
   }

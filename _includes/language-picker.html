@@ -2,7 +2,7 @@
 {% assign url_parts = page.url | split: '/' %}
 {% assign url_remainder = url_parts | slice: 2, url_parts.size | join: '/' %}
 <button class="lang-btn" type="button" aria-haspopup="menu" aria-label="Change language">
-  <span id="current-lang">English</span>
+  <span id="current-lang"></span>
 </button>
 <ul class="lang-list submenu-content" aria-labelledby="current-lang" >
   {% for lang in site.data.languages %}

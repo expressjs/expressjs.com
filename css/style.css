@@ -617,7 +617,7 @@ footer {
 }
 
 /* theme and lang btn */
-button#theme-icon-container,
+button.theme-btn,
 button.lang-btn {
   cursor: pointer;
   appearance: none;
@@ -1591,9 +1591,4 @@ blockquote {
   .submenu-content li {
     border-bottom: 1px solid var(--border);
   }
-
-  #theme-icon-container{
-    z-index: 10000;
-  }
-
 }
