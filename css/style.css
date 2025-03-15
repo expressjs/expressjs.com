@@ -560,9 +560,14 @@ html[xmlns] .clearfix {
 a.edit-github-btn{
   display: flex;
   gap: 0.5rem;
+  align-items: center;
   width: fit-content;
   padding: 0.5rem;
   border-radius: 0.3rem;
+
+  span {
+    height: 20px;
+  }
 
   &:is(:hover, :active, :focus) {
     color: var(--fg);
