@@ -1,6 +1,8 @@
 url: "https://expressjs.com"
 baseurl: "/"
 
+repository: expressjs/expressjs.com
+
 # Site settings
 
 defaults:
@@ -19,6 +21,7 @@ announcement: false # Enable or disable the announcements.
 
 plugins:
   - jekyll-redirect-from
+  - jekyll-github-metadata
 
 highlighter: rouge
 # library used for syntax highlighting
@@ -34,6 +37,3 @@ exclude:
   - [uk/CHANGELOG.md]
   - vendor/bundle
   - node_modules/
-
-
-github: [metadata]
