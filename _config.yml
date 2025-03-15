@@ -1,6 +1,8 @@
 url: "https://expressjs.com"
 baseurl: "/"
 
+repository: expressjs/expressjs.com
+
 # Site settings
 
 defaults:
@@ -35,5 +37,3 @@ exclude:
   - [uk/CHANGELOG.md]
   - vendor/bundle
   - node_modules/
-
-github: [metadata]
