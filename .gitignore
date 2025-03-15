@@ -10,3 +10,5 @@ _site
 .jekyll-metadata
 vendor
 .bundle
+
+.stylelintcache

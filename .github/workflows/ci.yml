@@ -26,11 +26,11 @@ jobs:
         node-version: 20
 
     - name: Install Node.js dependencies
-      run: npm install
+      run: npm ci
 
-    - name: Run tests
+    - name: Run Lint
       shell: bash
-      run: npm test
+      run: npm run lint
     
     - name: Jekyll Build
       run: bundle exec jekyll build
