@@ -557,6 +557,25 @@ html[xmlns] .clearfix {
   color: var(--box-fg);
 }
 
+a.edit-github-btn{
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+
+  span {
+    height: 20px;
+  }
+
+  &:is(:hover, :active, :focus) {
+    color: var(--fg);
+    background-color: var(--hover-bg);
+    outline: 1px solid var(--card-fg);
+  }
+}
+
 #mobile-menu {
   display: none;
   position: relative;
@@ -1451,6 +1470,10 @@ strong.eol {
 
 .hidden-dark {
   display: block;
+}
+
+.hidden-light {
+  display: none;
 }
 
 blockquote {
