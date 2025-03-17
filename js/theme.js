@@ -3,7 +3,7 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
     document?.addEventListener('DOMContentLoaded', () => {
       // remove icon - toggle not supported
       document.querySelector('.theme-btn').remove()
-      toggleSystemTheme(colorScheme)
+      setTheme(colorScheme);
     })
   } else {
     // user's PS system theme settings
