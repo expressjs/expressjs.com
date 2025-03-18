@@ -699,6 +699,7 @@ div.desktop-lang-switcher {
       display: block;
       padding: 5px 20px 5px 20px;
       text-decoration: none;
+      color: var(--card-fg);
       &:is(:hover, :focus) {
         background: var(--hover-bg);
       }
