@@ -7,18 +7,29 @@ layout: null
   <url>
     <loc>{{site.url}}/{{ lang.code }}/</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <xhtml:link rel="alternate" hreflang="x-default" href="{{site.url}}"/>
+      <xhtml:link rel="alternate" hreflang="x-default" href="{{site.url}}/{{ lang.code }}/"/>
     {% for alt_lang in site.data.languages %}
       <xhtml:link rel="alternate" hreflang="{{ alt_lang.code }}" href="{{ site.url }}/{{ alt_lang.code }}/" />
     {% endfor %}
   </url>
 {% endfor %}
-  {% for post in site.posts %}
+{% for page in site.html_pages %}
+  {% assign clean_url = page.url | split: '/' | slice: 2,  page.url.size | join: '/' %}
+    {% if page.layout != 404 %}
+  <url>
+    <loc>{{site.url}}{{ page.url}}</loc>
+    {% for lang in site.data.languages %}
+    <xhtml:link rel="alternate" hreflang="{{ lang.code }}" href="{{ site.url }}/{{ lang.code }}/{{ clean_url }}" />
+    {% endfor %}
+  </url>
+    {% endif %}
+{% endfor %}
+{% for post in site.posts %}
   <url>
     <loc>{{site.url}}{{post.url}}</loc>
     <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
   </url>
-  {% endfor %}
+{% endfor %}
   <url>
     <loc>https://nodejs.org/en/</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
