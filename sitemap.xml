@@ -7,7 +7,6 @@ layout: null
   <url>
     <loc>{{site.url}}/{{ lang.code }}/</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-      <xhtml:link rel="alternate" hreflang="x-default" href="{{site.url}}/{{ lang.code }}/"/>
     {% for alt_lang in site.data.languages %}
       <xhtml:link rel="alternate" hreflang="{{ alt_lang.code }}" href="{{ site.url }}/{{ alt_lang.code }}/" />
     {% endfor %}
