@@ -57,6 +57,7 @@ You can find the list of available codemods [here](https://github.com/expressjs/
   <li><a href="#res.send.status">res.send(status)</a></li>
   <li><a href="#res.sendfile">res.sendfile()</a></li>
   <li><a href="#express.static.mime">express.static.mime</a></li>
+  <li><a href="#express:router-debug-logs">express:router debug logs</a></li>
 </ul>
 
 **Changed**
@@ -346,6 +347,25 @@ express.static.mime.lookup('json')
 // v5
 const mime = require('mime-types')
 mime.lookup('json')
+```
+
+<h4 id="express:router-debug-logs">express:router debug logs</h4>
+
+In Express 5, router handling logic is performed by a dependency. Therefore, the
+debug logs for the router are no longer available under the `express:` namespace.
+In v4, the logs were available under the namespaces `express:router`, `express:router:layer`,
+and `express:router:route`. All of these were included under the namespace `express:*`.
+In v5.1+, the logs are available under the namespaces `router`, `router:layer`, and `router:route`.
+The logs from `router:layer` and `router:route` are included in the namespace `router:*`.
+To achieve the same detail of debug logging when using `express:*` in v4, use a conjunction of
+`express:*`, `router`, and `router:*`.
+
+```sh
+# v4
+DEBUG=express:* node index.js
+
+# v5
+DEBUG=express:*,router,router:* node index.js
 ```
 
 <h3>Changed</h3>
