@@ -492,6 +492,13 @@ html[xmlns] .clearfix {
   margin: 0;
 }
 
+.doc-title {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 600;
+}
+
 .doc-notice {
   background: var(--notice-bg);
   border-left: 3px solid var(--notice-accent);
@@ -510,11 +517,6 @@ html[xmlns] .clearfix {
 .doc-info a{
   color: var(--info-accent);
   text-decoration: underline;
-}
-
-.doc-info-title {
-  color: var(--info-accent);
-  font-weight: 600;
 }
 
 .doc-warn {
