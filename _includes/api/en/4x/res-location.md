@@ -8,6 +8,8 @@ res.location('http://example.com')
 res.location('back')
 ```
 
+{% include admonitions/note.html content="`'back'` was deprecated in 4.21.0, use `req.get('Referrer') || '/'` as an argument instead." %}
+
 A `path` value of "back" has a special meaning, it refers to the URL specified in the `Referer` header of the request. If the `Referer` header was not specified, it refers to "/".
 
 See also [Security best practices: Prevent open redirect 

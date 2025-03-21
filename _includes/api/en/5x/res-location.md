@@ -5,13 +5,7 @@ Sets the response `Location` HTTP header to the specified `path` parameter.
 ```js
 res.location('/foo/bar')
 res.location('http://example.com')
-res.location('back')
 ```
-
-A `path` value of "back" has a special meaning, it refers to the URL specified in the `Referer` header of the request. If the `Referer` header was not specified, it refers to "/".
-
-See also [Security best practices: Prevent open redirect 
-vulnerabilities](http://expressjs.com/en/advanced/best-practice-security.html#prevent-open-redirects). 
 
 <div class='doc-box doc-warn' markdown="1">
 After encoding the URL, if not encoded already, Express passes the specified URL to the browser in the `Location` header,
