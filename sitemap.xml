@@ -1,28 +1,45 @@
 ---
 layout: null
+sitemap: false
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {% for lang in site.data.languages %}
   <url>
+    {% if lang.code == 'en' %}
+    <loc>{{site.url}}</loc>
+    {% else %}
     <loc>{{site.url}}/{{ lang.code }}/</loc>
+    {% endif %}
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}" />
     {% for alt_lang in site.data.languages %}
-      <xhtml:link rel="alternate" hreflang="{{ alt_lang.code }}" href="{{ site.url }}/{{ alt_lang.code }}/" />
+      {% if alt_lang.code == 'en' %}
+    <xhtml:link rel="alternate" hreflang="en" href="{{ site.url }}" />
+      {% else %}
+    <xhtml:link rel="alternate" hreflang="{{ alt_lang.code }}" href="{{ site.url }}/{{ alt_lang.code }}/" />
+      {% endif %}
     {% endfor %}
   </url>
 {% endfor %}
 {% for page in site.html_pages %}
   {% assign clean_url = page.url | split: '/' | slice: 2,  page.url.size | join: '/' %}
-    {% if page.layout != 404 %}
+    {% if clean_url.size > 0 %}
+    {% if page.layout != 404 and page.sitemap != false %}
   <url>
     <loc>{{site.url}}{{ page.url}}</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}/en/{{ clean_url }}" />
     {% for lang in site.data.languages %}
     <xhtml:link rel="alternate" hreflang="{{ lang.code }}" href="{{ site.url }}/{{ lang.code }}/{{ clean_url }}" />
     {% endfor %}
   </url>
     {% endif %}
+    {% endif %}
 {% endfor %}
+  <url>
+      <loc>https://expressjs.com/en/changelog/</loc>
+      <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+  </url>
 {% for post in site.posts %}
   <url>
     <loc>{{site.url}}{{post.url}}</loc>
@@ -31,6 +48,10 @@ layout: null
 {% endfor %}
   <url>
     <loc>https://nodejs.org/en/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+  </url>
+  <url>
+    <loc>https://www.netlify.com/</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
   </url>
   <url>
