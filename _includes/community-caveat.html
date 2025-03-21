@@ -1,4 +1,5 @@
-{% include admonitions/warning.html content="This information refers to third-party sites,
-products, or modules that are not maintained by the Expressjs team.  Listing here does not constitute
-an endorsement or recommendation from the Expressjs project team.
-" %}
+{% capture alert_content %}
+{{ site.data[page.lang].general.community-caveat-alert }}
+{% endcapture %}
+
+{% include admonitions/warning.html content=alert_content %}
