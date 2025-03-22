@@ -9,7 +9,7 @@ html.dark-mode {
   }
 
   .hidden-light {
-    display: block;
+    display: flex;
   }
 
   .hidden-dark {
