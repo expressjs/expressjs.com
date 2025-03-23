@@ -253,21 +253,8 @@ a {
 }
 
 /* logo */
-
-#logo {
-  width: auto;
-  z-index: 1;
-}
-
-#logo a {
+.logo-container a {
   text-decoration: none;
-}
-
-#logo .express {
-  display: block;
-  font: 25px "Helvetica Neue", "Open Sans", sans-serif;
-  font-weight: 100;
-  color: var(--card-fg);
 }
 
 #description .express {
@@ -1112,21 +1099,8 @@ h2 a {
     margin-right: 5%;
   }
 
-  #logo {
-    position: static;
-    width: 100%;
-    margin-left: 60px;
-  }
-
-  #logo a {
-    display: table !important;
-    margin: 0 auto;
-    text-decoration: none;
-  }
-
-  #logo .express {
-    margin-top: 0px;
-    font-weight: bold;
+  .logo-container {
+    margin-inline: auto;
   }
 
   #home-menu {
@@ -1469,7 +1443,7 @@ strong.eol {
 }
 
 .hidden-dark {
-  display: block;
+  display: flex;
 }
 
 .hidden-light {
