@@ -2,8 +2,8 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
   if (!hasLocalStorage()) {
     document?.addEventListener('DOMContentLoaded', () => {
       // remove icon - toggle not supported
-      document.querySelector('#theme-icon-container').remove()
-      toggleSystemTheme(colorScheme)
+      document.querySelector('#theme-toggle').remove()
+      setTheme(colorScheme);
     })
   } else {
     // user's PS system theme settings
@@ -35,7 +35,7 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
     document.addEventListener('DOMContentLoaded', () => {
 
       document
-        .querySelector('.theme-toggle')
+        .querySelector('#theme-toggle')
         .addEventListener('click', toggleLocalStorageTheme)
     })
   }

@@ -621,11 +621,84 @@ footer {
   font-size: 20px;
 }
 
-/* navigation */
-#theme-icon-container {
+/* theme and lang btn */
+button.theme-btn,
+button.lang-btn {
   cursor: pointer;
+  appearance: none;
+  background-color: inherit;
+  border: 0;
 }
 
+button.lang-btn {
+  color: var(--card-fg);
+  padding: 0.2rem;
+  font-size: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--card-fg);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    cursor: pointer;
+    pointer-events: none;
+    transition: transform 0.2s ease-in-out;
+  }
+}
+
+div.desktop-lang-switcher {
+  position: relative;
+  > button.lang-btn {
+    &:is(:focus, :hover) {
+      & + ul {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  /* enable lang list tabbing on keyboard focus */
+  &:focus-within .lang-list {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  > ul.lang-list {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    list-style: none;
+    visibility: hidden;
+    &:is(:hover, :focus) {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+    }
+    li  a {
+      display: block;
+      padding: 5px 20px 5px 20px;
+      text-decoration: none;
+      color: var(--card-fg);
+      &:is(:hover, :focus) {
+        background: var(--hover-bg);
+      }
+    }
+  }
+
+  /* rotate arrow */
+  &:is(:hover,:focus-within) button.lang-btn::after {
+    transform: rotate(180deg);
+  }
+}
+
+/* navigation */
 #navbar {
   line-height: 30px;
   display: flex;
@@ -1391,6 +1464,10 @@ blockquote {
     padding-inline: 32px;
   }
 
+  .desktop-lang-switcher {
+    display: none;
+  }
+
   #mobile-menu {
     display: block;
   }
@@ -1511,9 +1588,4 @@ blockquote {
   .submenu-content li {
     border-bottom: 1px solid var(--border);
   }
-
-  #theme-icon-container{
-    z-index: 10000;
-  }
-
 }
