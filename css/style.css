@@ -360,19 +360,34 @@ pre:has(code) {
       display: block;
     }
   }
+
+  &:focus-within button {
+    display: block;
+  }
 }
 
 pre:has(code) button{
   position: absolute;
   top: 5px;
   right: 5px;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: var(--code-bg);
-  color: var(--card-fg);
+  background-color: var(--card-fg);
+  mask-image: url("../images/copy-btn.svg");
+  mask-size: 1.5rem;
+  mask-repeat: no-repeat;
   border: none;
-  outline: solid 2px var(--border);
   display: none;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  @media all and (max-width: 370px) { 
+    width: 1rem;
+    height: 1rem;
+    mask-size: 1rem;
+  }
+}
+
+pre:has(code) button.copied {
+  background-color: var(--supported-fg);
 }
 
 /* top button */

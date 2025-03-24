@@ -1,19 +1,19 @@
-const blocks = document.querySelectorAll("pre:has(code)");
-const copyButtonLabel = "Copy Code";
+const codeBlocks = document.querySelectorAll("pre:has(code)");
 
-
-blocks.forEach((block) => {
+codeBlocks.forEach((block) => {
   // only add button if browser supports Clipboard API
-  if (navigator.clipboard) {
-    const button = document.createElement("button");
-    button.innerText = copyButtonLabel;
-    block.appendChild(button);
-    block.setAttribute("tabindex", 0); //add keyboard a11y for pre 
+  if (!navigator.clipboard) return;
 
-    button.addEventListener("click", async () => {
-      await copyCode(block, button);
-    });
-  }
+  const button = document.createElement("button");
+  button.setAttribute("title", "copy code");
+  button.setAttribute("aria-label","copy code");
+  block.appendChild(button);
+  block.setAttribute("tabindex", 0); //add keyboard a11y for <pre></pre> 
+
+  button.addEventListener("click", async () => {
+    await copyCode(block, button);
+  });
+
 });
 
 async function copyCode(block, button) {
@@ -21,16 +21,18 @@ async function copyCode(block, button) {
     const text = code.innerText;
   
     await navigator.clipboard.writeText(text);
-  
-    // visual feedback that task is completed
-    button.innerText = "✔ Copied!";
-    button.setAttribute("aria-live", "polite"); // screen reader will  announce text is copied to clipboard
-  
+    // screen reader will  announce text is copied to clipboard
+    button.setAttribute("aria-label","copied!");
+    button.setAttribute("aria-live", "polite"); 
+    button.classList.add("copied");
+
+    // remove previous timer on multiple clicks (data-timer-id)
+    if (button.dataset.timerId) clearTimeout(button.dataset.timerId);
+    
     const timer = setTimeout(() => {
-      button.innerText = copyButtonLabel;
+      button.classList.remove("copied");
+      button.setAttribute("aria-label","copy code");
     }, 1000);
 
-    // remove previous timer on multiple clicks
-    button.dataset.timerId && clearTimeout(button.dataset.timerId); 
     button.dataset.timerId = timer;
   };
