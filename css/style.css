@@ -422,7 +422,8 @@ pre:has(code) button.copied {
     font-size: 0.85rem;
     position: absolute;
     left: -58px;
-    content: "copied !";
+    content: "copied!";
+
     width: fit-content;
     height: fit-content;
     padding: 4px;
