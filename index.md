@@ -15,7 +15,7 @@ redirect_from: "/en/index.html"
         <div class="express"><a href="/">Express</a><a href="{{ page.lang }}/changelog/4x.html#{{ site.data.express.current_version }}" id="express-version">{{ site.data.express.current_version }}</a></div>
         <h1 class="description">Fast, unopinionated, minimalist web framework for <a href='https://nodejs.org/en/'>Node.js</a></h1>
     </section>
-    <div id="install-command">$ npm install express --save</div>
+    <pre class="install-command"><code>$ npm install express --save</code></pre>
   </div>
 
   <div id="homepage-rightpane" class="pane" markdown="1">
