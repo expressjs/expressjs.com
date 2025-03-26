@@ -379,6 +379,7 @@ pre:has(code) button {
   top: 5px;
   right: 5px;
   border: none;
+  z-index: 100;
   display: none;
   cursor: pointer;
   background-color: inherit;
