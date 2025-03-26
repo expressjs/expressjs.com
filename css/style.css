@@ -347,9 +347,12 @@ pre {
   border: 1px solid #ddd;
   background-color: var(--code-bg);
 /* keyboard focus offset improve visibility */
-  &:focus {
-    outline-offset: 2px;
-    outline: 2px solid var(--hover-border);
+/* focus on desktop */
+  @media all and (min-width: 1010px) { 
+    &:focus {
+      outline-offset: 2px;
+      outline: 2px solid var(--hover-border);
+    }
   }
 }
 
@@ -365,7 +368,7 @@ pre:has(code) {
       display: flex;
     }
   }
-
+  /* focus copy btn by keyboard */
   &:focus-within button {
     display: flex;
   }
@@ -399,6 +402,7 @@ pre:has(code) button {
 
   @media all and (max-width: 370px) { 
     padding: 1px;
+
     &::after {
       mask-size: 1rem;
       width: 1rem;
@@ -409,8 +413,31 @@ pre:has(code) button {
 
 pre:has(code) button.copied {
   outline-color: var(--supported-fg);
+
   &::after { 
     background-color: var(--supported-fg);
+  }
+  
+  &::before {
+    font-size: 0.85rem;
+    position: absolute;
+    left: -58px;
+    content: "copied !";
+    width: fit-content;
+    height: fit-content;
+    padding: 4px;
+    border-radius: 2px;
+    color: var(--card-fg);
+    background-color: var(--card-bg);
+    outline: 1px solid var(--hover-border);
+  }
+
+  @media all and (max-width: 400px) { 
+    &::before {
+      left: -50px;
+      font-size: 0.7rem;
+      padding: 3px;
+    }
   }
 }
 

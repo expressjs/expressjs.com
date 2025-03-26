@@ -6,7 +6,7 @@ codeBlocks.forEach((block) => {
 
   const button = document.createElement("button");
   button.setAttribute("title", "copy code");
-  button.setAttribute("aria-label","copy code");
+  button.setAttribute("aria-label","click to copy code");
   block.appendChild(button);
   block.setAttribute("tabindex", 0); //add keyboard a11y for <pre></pre> 
 
@@ -22,8 +22,8 @@ async function copyCode(block, button) {
   
     await navigator.clipboard.writeText(text);
     // screen reader will  announce text is copied to clipboard
-    button.setAttribute("aria-label","copied!");
-    button.setAttribute("aria-live", "polite"); 
+    button.setAttribute("aria-live", "polite");
+    button.setAttribute("aria-label","code is copied!"); 
     button.classList.add("copied");
 
     // remove previous timer on multiple clicks (data-timer-id)
@@ -31,7 +31,7 @@ async function copyCode(block, button) {
     
     const timer = setTimeout(() => {
       button.classList.remove("copied");
-      button.setAttribute("aria-label","copy code");
+      button.setAttribute("aria-label","click to copy code");
     }, 1000);
 
     button.dataset.timerId = timer;
