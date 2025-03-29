@@ -30,6 +30,28 @@ All the latest updates, improvements, and fixes to Express
 ## Express v5
 {: id="5.x"} 
 
+### 5.1.0 - Release date: 2025-03-31
+
+The 5.1.0 minor release includes some new features and improvements:
+
+* Support for sending responses as Uint8Array
+* Transitioned all remaining dependencies to use `^` ranges instead of locked versions
+* Add package.json funding field to highlight our OpenCollective 
+* Added support for ETag option in `res.sendFile()`
+* Added support for adding multiple links with the same rel with `res.links()`
+* Performance: Use loop for acceptParams
+* [body-parser@2.2.0](https://github.com/expressjs/body-parser/releases/tag/v2.2.0)
+  * Remove legacy node.js support checks for Brotli & `AsyncLocalStorage`
+  * Remove `unpipe` & `destroy`
+* [router@2.2.0](https://github.com/pillarjs/router/releases/tag/v2.2.0)
+  * Restore `debug`. Now with the `router` scope instead of `express`.
+  * Remove legacy node.js support checks for `setImmediate`
+  * Deprecate non-native promise support
+  * Remove `after`, `safe-buffer`, `array-flatten`, `setprotoypeof`, `methods`, `utils-merge`
+* [finalhandler@2.1.0](https://github.com/pillarjs/finalhandler/releases/tag/v2.1.0)
+    * Remove legacy node.js support checks for `headersSent`, `setImmediate`, & http2 support
+    * Remove `unpipe`
+
 ### 5.0.1 - Release date: 2024-10-08
 {: id="5.0.1"}
 
