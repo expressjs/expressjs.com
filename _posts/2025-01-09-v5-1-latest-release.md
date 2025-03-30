@@ -37,7 +37,7 @@ some time to get all of that updated before we had everyone moving over. Particu
 beginner user base who may not know the blog post they are reading is not compatible with what they get from
 `npm i express`.
 
-We know this will still be an issue no matter how we handle this transition, but thanks to work from ecosystem partners
+We recognize that some friction is inevitable during major upgrades, but thanks to work from ecosystem partners
 like [Kamil](https://github.com/kamilmysliwiec) from NestJS [working to update `express` before we went `latest`](https://github.com/expressjs/express/issues/5944#issuecomment-2523074127)
 we will hopefully be ahead of the curve. And as I said above, we always welcome help to make this transition easier for
 those who follow after you, PRs are the best support you can give.
