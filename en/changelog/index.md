@@ -35,8 +35,6 @@ All the latest updates, improvements, and fixes to Express
 The 5.1.0 minor release includes some new features and improvements:
 
 * Support for sending responses as Uint8Array
-* Transitioned all remaining dependencies to use `^` ranges instead of locked versions
-* Add package.json funding field to highlight our OpenCollective 
 * Added support for ETag option in `res.sendFile()`
 * Added support for adding multiple links with the same rel with `res.links()`
 * Performance: Use loop for acceptParams
@@ -51,6 +49,8 @@ The 5.1.0 minor release includes some new features and improvements:
 * [finalhandler@2.1.0](https://github.com/pillarjs/finalhandler/releases/tag/v2.1.0)
     * Remove legacy node.js support checks for `headersSent`, `setImmediate`, & http2 support
     * Remove `unpipe`
+* Transitioned all remaining dependencies to use `^` ranges instead of locked versions
+* Add package.json funding field to highlight our OpenCollective 
 
 ### 5.0.1 - Release date: 2024-10-08
 {: id="5.0.1"}
