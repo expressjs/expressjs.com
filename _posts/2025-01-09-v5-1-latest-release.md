@@ -112,82 +112,35 @@ provide a bit longer support. We want to do what is best for the ecosystem, so c
 
 ## Finally, what changed in v5.1.0
 
-This release primarily focused on tech debt from supporting so many old Node.js versions and other things that stagnated
-but were not landed before v5.0.0 went out.
+This release primarily focused on tech debt from supporting so many old Node.js versions and other things that stagnated but were not landed before v5.0.0 went out.
+
+### Express 5.1.0 Main Changes
 
 * Transitioned all remaining dependencies to use `^` ranges instead of locked versions
 * Add package.json funding field to highlight our OpenCollective 
 * Added support for ETag option in `res.sendFile()`
 * Added support for adding multiple links with the same rel with `res.links()`
 * Performance: Use loop for acceptParams
-* New Contributors: 
-  * @bhavya3024 made their first contribution in https://github.com/expressjs/express/pull/6071
-  * @jonkoops made their first contribution in https://github.com/expressjs/express/pull/6196
-  * @Abdel-Monaam-Aouini made their first contribution in https://github.com/expressjs/express/pull/6211
-  * @slagiewka made their first contribution in https://github.com/expressjs/express/pull/6236
-  * @hamirmahal made their first contribution in https://github.com/expressjs/express/pull/6256
-  * @pr4j3sh made their first contribution in https://github.com/expressjs/express/pull/6297
-  * @Ayoub-Mabrouk made their first contribution in https://github.com/expressjs/express/pull/6097
-  * @dpopp07 made their first contribution in https://github.com/expressjs/express/pull/6317
-  * @agungjati made their first contribution in https://github.com/expressjs/express/pull/6122
-  * @andvea made their first contribution in https://github.com/expressjs/express/pull/4885
-* `body-parser@^2.1.0` then `body-parser@^2.2.0`
+
+**Full Changelog**: [https://github.com/expressjs/express/compare/5.0.1...v5.1.0](https://github.com/expressjs/express/compare/5.0.1...v5.1.0)
+
+
+### Dependencies updated
+
+We also invested time to prepare several releases in the packages that Express depend on. Most of this packages are used by other libraries and framework as individual libraries.
+
+* [body-parser@2.2.0](https://github.com/expressjs/body-parser/releases/tag/v2.2.0)
   * Remove legacy node.js support checks for Brotli & `AsyncLocalStorage`
   * Remove `unpipe` & `destroy`
-  * `type-is@^2.0.0`
-  * `iconv-lite@^0.6.3`
-  * New Contributors: 
-    * @Binilkks made their first contribution in https://github.com/expressjs/body-parser/pull/581
-    * @aqeelat made their first contribution in https://github.com/expressjs/body-parser/pull/588
-    * @wojtekmaj made their first contribution in https://github.com/expressjs/body-parser/pull/591
-* `router@^2.1.0` then `router@^2.2.0`
+* [router@2.2.0](https://github.com/pillarjs/router/releases/tag/v2.2.0)
   * Restore `debug`. Now with the `router` scope instead of `express`.
   * Remove legacy node.js support checks for `setImmediate`
   * Deprecate non-native promise support
   * Remove `after`, `safe-buffer`, `array-flatten`, `setprotoypeof`, `methods`, `utils-merge`
-  * `finalhandler@^2.1.0`
-  * `parseurl@^1.3.3`
-  * `is-promise@^4.0.0`
-  * New Contributors:
-    * @bjohansebas made their first contribution in https://github.com/pillarjs/router/pull/152
-    * @dpopp07 made their first contribution in https://github.com/pillarjs/router/pull/151
-    * @raksbisht made their first contribution in https://github.com/pillarjs/router/pull/107
-    * @Phillip9587 made their first contribution in https://github.com/pillarjs/router/pull/126
-    * @jonkoops made their first contribution in https://github.com/pillarjs/router/pull/127
-    * @ctcpip made their first contribution in https://github.com/pillarjs/router/pull/131
-    * @raiandexter0607 made their first contribution in https://github.com/pillarjs/router/pull/135
-    * @UlisesGascon made their first contribution in https://github.com/pillarjs/router/pull/139
-* `finalhandler@2.1.0`
+* [finalhandler@2.1.0](https://github.com/pillarjs/finalhandler/releases/tag/v2.1.0)
     * Remove legacy node.js support checks for `headersSent`, `setImmediate`, & http2 support
     * Remove `unpipe`
-    * `encodeurl@^2.0.0`
-    * New Contributors:
-      * @Phillip9587 made their first contribution in https://github.com/pillarjs/finalhandler/pull/67
-      * @bjohansebas made their first contribution in https://github.com/pillarjs/finalhandler/pull/83
-* `serve-static@^2.2.0`
-  * `send@^1.2.0`
-  * New Contributors: 
-    * @Ayoub-Mabrouk made their first contribution in https://github.com/expressjs/serve-static/pull/182
-    * @bjohansebas made their first contribution in https://github.com/expressjs/serve-static/pull/186
-    * @dpopp07 made their first contribution in https://github.com/expressjs/serve-static/pull/194
-    * @ljeda made their first contribution in https://github.com/expressjs/serve-static/pull/190
-    * @Phillip9587 made their first contribution in https://github.com/expressjs/serve-static/pull/191
-* `qs@^6.14.0`
-  * Added throwOnLimitExceeded option https://github.com/ljharb/qs/pull/517 & https://github.com/ljharb/qs/commit/b189ed49c8dfe5b41afe6cecabdaa562de56764b
-* `type-is@^2.0.1`
-  * New Contributors
-    * @Ayoub-Mabrouk made their first contribution in https://github.com/jshttp/type-is/pull/61
-    * @CommanderRoot made their first contribution in https://github.com/jshttp/type-is/pull/50
-    * @UlisesGascon made their first contribution in https://github.com/jshttp/type-is/pull/64
-* `debug@^4.4.0`
-* Removed dependencies:
-  * `setprototypeof`
-  * `safe-buffer`
-  * `methods`
-  * `utils-merge`
-  * `depd`
-
-**Full Changelog**: https://github.com/expressjs/express/compare/5.0.1...v5.1.0
+* [serve-static@2.2.0](https://github.com/expressjs/serve-static/releases/tag/v2.2.0)
 
 ---
 
