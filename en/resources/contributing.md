@@ -25,7 +25,7 @@ The Express technical committee consists of active project members, and guides d
 
 ## Community contributing guide
 
-<!-- SRC: expressjs/express Contributing.md -->
+<!-- SRC: expressjs/.github GOVERNANCE.md -->
 
 The goal of this document is to create a contribution process that:
 
@@ -273,7 +273,7 @@ By making a contribution to this project, I certify that:
 
 ## Collaborator's guide
 
-<!-- SRC: expressjs/express Collaborator-Guide.md -->
+<!-- SRC: expressjs/.github CONTRIBUTING.md -->
 
 ### Website Issues
 
@@ -327,7 +327,7 @@ us to understand and reproduce your issue, it will be closed.
 
 ## Security Policies and Procedures
 
-<!-- SRC: expressjs/express Security.md -->
+<!-- SRC: expressjs/express SECURITY.md -->
 
 This document outlines security procedures and general policies for the Express
 project.
