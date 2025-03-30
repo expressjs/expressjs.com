@@ -150,7 +150,8 @@ Thanks so much to everyone involved in Express over the past year, the work all 
 incredible, and we couldn't do it without them. If you are not able to become a contributor yourself, please consider
 asking your companies to support the project financially on [OpenCollective](https://opencollective.com/express).
 
-Next up our focus is shifting to Performance. We will be kicking off [Performance Working Group](https://github.com/expressjs/discussions/pull/306)
-to focus on measuring, tracking, and debugging framework performance issues. We hope the next minor releases will
-benefit from this and fix longstanding performance bottlenecks. Additionally we will be starting to ramp up plans for v6
-later this year, so look out for updates! See you in the issues!
+As we look ahead, we’re excited to keep building momentum. If you haven’t read it yet, our [Rewind 2024 + 2025 Vision blog post](https://expressjs.com/2025/01/09/rewind-2024-triumphs-and-2025-vision.html) lays out where we’ve been and where we're headed. This includes performances scoped packages, better automation, security hardening, and more.
+
+One major initiative is our new [Performance Working Group](https://github.com/expressjs/discussions/pull/306), focused on identifying and fixing long-standing bottlenecks in Express. We're grateful to be kicking this off with support from the [Sovereign Tech Fund (STF)](https://openjsf.org/sovereign-tech-fund/), who are helping us invest in long-term sustainability and performance of core infrastructure.
+
+And yes, v6 discussions are already starting to heat up. Keep an eye out for updates, and as always, see you in the issues!
