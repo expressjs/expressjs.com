@@ -24,9 +24,13 @@ Big thanks to <TODO: should we pull a list of contributors to thank here?>
 
 ### Migration Support
 
-Due to the awesome work of [Sebastian](https://github.com/bjohansebas) and [Filip](https://github.com/kjugi) we have a
-new [codemod package](https://github.com/expressjs/codemod) to help folks migrate from v4 to v5. You can find docs in
-the readme and on the migration guide. 
+We know that migrating between versions can be challenging, especially when it involves significant changes in a widely used framework like Express. That's why we have worked on a solution to simplify part of the process and reduce the impact on developers.  
+
+Thanks to the incredible efforts of [Sebastian](https://github.com/bjohansebas) and [Filip](https://github.com/kjugi), we have developed a new [codemod package](https://www.npmjs.com/package/@expressjs/codemod) specifically designed to facilitate the transition from Express v4 to v5, as well as future major versions. This package automates many of the necessary code changes, minimizing manual effort and making the upgrade as smooth and efficient as possible.  
+
+However, we understand that not all changes can be automated. Some breaking changes, such as the [new Path Route Matching syntax](https://expressjs.com/en/guide/migrating-5.html#path-syntax), require manual modifications by developers.  
+
+For more details on the migration process and how to use the codemod package, check the [repository’s README](https://github.com/expressjs/codemod#readme) and the [migration guide](https://expressjs.com/en/guide/migrating-5.html).
 
 ### Ecosystem compatibility
 
