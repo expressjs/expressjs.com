@@ -1,5 +1,5 @@
 ---
-title: "v5.1.0 Release takes v5 to latest"
+title: "Express@5.1.0: Now the Default on npm with LTS Timeline"
 tags: news, release 
 author: Express Technical Committee
 description: Express goes latest with the 5.1.0 release and announces an LTS schedule for v4 and v5 release lines.
