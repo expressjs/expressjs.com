@@ -32,7 +32,7 @@ the readme and on the migration guide.
 
 The Express ecosystem is one of its strongest assets. It goes back to the early days of Node.js and is the backbone
 that keeps express popular. When it goes [10 years without a major release](https://expressjs.com/2024/10/15/v5-release.html)
-you can bet there is everything from middleware to blog posts that will need updating. We wanted to make sure folks had
+everything from middleware to documentation needed updates. We wanted to make sure folks had
 some time to get all of that updated before we had everyone moving over. Particularly we care about our very large
 beginner user base who may not know the blog post they are reading is not compatible with what they get from
 `npm i express`.
