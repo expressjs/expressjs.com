@@ -120,6 +120,7 @@ This release primarily focused on tech debt from supporting so many old Node.js 
 
 ### Express 5.1.0 Main Changes
 
+* Add support for `Uint8Array` in `res.send()`
 * Transitioned all remaining dependencies to use `^` ranges instead of locked versions
 * Add package.json funding field to highlight our OpenCollective 
 * Added support for ETag option in `res.sendFile()`
