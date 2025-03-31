@@ -127,7 +127,7 @@ This release primarily focused on tech debt from supporting so many old Node.js 
 * Added support for adding multiple links with the same rel with `res.links()`
 * Performance: Use loop for acceptParams
 
-[Changelog v5.1.0](https://github.com/expressjs/express/compare/5.0.1...v5.1.0)
+[Changelog v5.1.0](https://github.com/expressjs/express/releases/tag/5.1.0)
 
 
 ### Dependencies updated
