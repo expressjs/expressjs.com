@@ -52,7 +52,7 @@ The 5.1.0 minor release includes some new features and improvements:
     * Remove `unpipe`
 * Transitioned all remaining dependencies to use `^` ranges instead of locked versions
 * Add package.json funding field to highlight our OpenCollective 
-
+[Changelog v5.1.0](https://github.com/expressjs/express/releases/tag/5.1.0)
 ### 5.0.1 - Release date: 2024-10-08
 {: id="5.0.1"}
 
