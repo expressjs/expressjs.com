@@ -2,7 +2,7 @@ name: Crowdin Action
 
 on:
   push:
-    branches: [ gh-pages ]
+    branches: [ gh-pages, crowdin-action ]
   workflow_dispatch:
 
 permissions: write-all
