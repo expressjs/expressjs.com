@@ -98,6 +98,7 @@ Express major versions will go through three supported phases:
 
 For the existing release lines, we will set the following phase dates:
 
+<div markdown="1" style="overflow-x: auto; max-width: 100%;">
 
 | Major | CURRENT | ACTIVE | MAINTENANCE | EOL |
 | ----- | ------- | ------ | ----------- | --- |
@@ -105,6 +106,7 @@ For the existing release lines, we will set the following phase dates:
 | 5.x   | 2024-09-11 | 2025-03-31 | 2026-04-01 | 2027-04-01 |
 | 6.x   | TBD after 2025-10-01 | | | |
 
+</div>
 As you can see, this means that v5.1.0 being tagged `latest` indicates that we moved from `CURRENT` to `ACTIVE` which
 starts the clock on EOL for v4 by moving it to `MAINTENANCE`. We recognize that v4 is a special case having been the
 only major version for most of the history of Node.js itself. Because of this, we want to remain flexible and also
