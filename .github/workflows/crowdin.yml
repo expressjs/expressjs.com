@@ -5,7 +5,9 @@ on:
     branches: [ gh-pages ]
   workflow_dispatch:
 
-permissions: write-all
+permissions:
+    contents: write
+    pull-requests: write
 
 jobs:
   synchronize-with-crowdin:
