@@ -2,7 +2,7 @@ name: Crowdin Action
 
 on:
   push:
-    branches: [ gh-pages ]
+    branches: [ gh-pages, crowdin-action ]
   workflow_dispatch:
 
 permissions: write-all
@@ -27,7 +27,15 @@ jobs:
           pull_request_body: 'New Crowdin translations by [Crowdin GH Action](https://github.com/crowdin/github-action)'
           pull_request_base_branch_name: 'gh-pages'
           base_url: 'https://express.api.crowdin.com'
+          download_translations_args: --all
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: upload
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: zippyzip
+          path: /github/workspace/CrowdinTranslations*
