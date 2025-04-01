@@ -104,7 +104,7 @@ For the existing release lines, we will set the following phase dates:
 | ----- | ------- | ------ | ----------- | --- |
 | 4.x   |         |        | 2025-04-01 | *no sooner than 2026-10-01 |
 | 5.x   | 2024-09-11 | 2025-03-31 | **no sooner than 2026-04-01 | **no sooner than 2027-04-01 |
-| 6.x   | ***no sooner than 2025-10-01 | | | |
+| 6.x   | ***no sooner than 2026-01-01 | | | |
 
 </div>
 
