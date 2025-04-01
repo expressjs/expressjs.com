@@ -116,7 +116,7 @@ provide a bit longer support. We want to do what is best for the ecosystem, so c
 *: v4 is a special case, and we may extend MAINTENENCE support
 **: v5 MAINTENENCE and EOL dates are determined by when v6 is released, these dates reflect the earliest dates if we
 were to ship v6 on 2025-10-01
-***: v6 work has not been officially started yet, this is simply the earliest date we can ship based on our proposed policy
+***: v6 work has not officially started yet, this is simply the earliest date we can ship based on our proposed policy
 
 ---
 
