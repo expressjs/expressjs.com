@@ -114,7 +114,7 @@ only major version for most of the history of Node.js itself. Because of this, w
 provide a bit longer support. We want to do what is best for the ecosystem, so consider these goals not commitments.
 
 *: v4 is a special case, and we may extend MAINTENENCE support
-**: v5 MAINTENENCE and EOL dates are determined by when v6 is released, these dates reflect the earliest datest if we
+**: v5 MAINTENENCE and EOL dates are determined by when v6 is released, these dates reflect the earliest dates if we
 were to ship v6 on 2025-10-01
 ***: v6 work has not been officially started yet, this is simply the earliest date we can ship based on our proposed policy
 
