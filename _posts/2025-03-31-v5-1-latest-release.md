@@ -102,15 +102,21 @@ For the existing release lines, we will set the following phase dates:
 
 | Major | CURRENT | ACTIVE | MAINTENANCE | EOL |
 | ----- | ------- | ------ | ----------- | --- |
-| 4.x   |         |        | 2025-04-01 | 2026-10-01 or later |
-| 5.x   | 2024-09-11 | 2025-03-31 | 2026-04-01 | 2027-04-01 |
-| 6.x   | TBD after 2025-10-01 | | | |
+| 4.x   |         |        | 2025-04-01 | *no sooner than 2026-10-01 |
+| 5.x   | 2024-09-11 | 2025-03-31 | **no sooner than 2026-04-01 | **no sooner than 2027-04-01 |
+| 6.x   | ***no sooner than 2026-01-01 | | | |
 
 </div>
+
 As you can see, this means that v5.1.0 being tagged `latest` indicates that we moved from `CURRENT` to `ACTIVE` which
 starts the clock on EOL for v4 by moving it to `MAINTENANCE`. We recognize that v4 is a special case having been the
 only major version for most of the history of Node.js itself. Because of this, we want to remain flexible and also
 provide a bit longer support. We want to do what is best for the ecosystem, so consider these goals not commitments.
+
+*: v4 is a special case, and we may extend MAINTENENCE support
+**: v5 MAINTENENCE and EOL dates are determined by when v6 is released, these dates reflect the earliest dates if we
+were to ship v6 on 2025-10-01
+***: v6 work has not officially started yet, this is simply the earliest date we can ship based on our proposed policy
 
 ---
 
