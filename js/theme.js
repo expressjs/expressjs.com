@@ -1,14 +1,14 @@
-const themeWatcher = watchColorSchemeChange((colorScheme) => {
+watchColorSchemeChange((_error, colorScheme) => {
   if (!hasLocalStorage()) {
     document?.addEventListener('DOMContentLoaded', () => {
       // remove icon - toggle not supported
       document.querySelector('#theme-toggle').remove()
-      setTheme(colorScheme);
+      setTheme(colorScheme)
     })
   } else {
     // user's PS system theme settings
     const systemTheme = localStorage.getItem('system-theme')
-    // setting stored in local storage    
+    // setting stored in local storage
     const localTheme = localStorage.getItem('local-theme')
     // // if no local theme set - system is default
     if (localTheme === null) {
@@ -16,11 +16,11 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
       localStorage.setItem('system-theme', colorScheme || 'light')
     // page load - load any stored themes or set theme
     } else {
-      // listen for system changes, update if any 
-      if (colorScheme != systemTheme) {
+      // listen for system changes, update if any
+      if (colorScheme !== systemTheme) {
         setTheme(colorScheme)
         localStorage.setItem('system-theme', colorScheme || 'light')
-        // override local theme 
+        // override local theme
         localStorage.removeItem('local-theme')
       } else {
         // else load local theme
@@ -33,7 +33,6 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
     }
     // wait for load then and add listner on button
     document.addEventListener('DOMContentLoaded', () => {
-
       document
         .querySelector('#theme-toggle')
         .addEventListener('click', toggleLocalStorageTheme)
@@ -41,8 +40,8 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
   }
 })
 // set the theme to given value
-function setTheme(theme) {
-  //  only support dark else any other defaults to light 
+function setTheme (theme) {
+  //  only support dark else any other defaults to light
   if (theme === 'dark') {
     darkModeOn()
   } else {
@@ -50,7 +49,7 @@ function setTheme(theme) {
   }
 }
 // toggle btwn themes or set a theme if none set
-function toggleLocalStorageTheme(e) {
+function toggleLocalStorageTheme (e) {
   const localTheme = localStorage.getItem('local-theme')
   if (localTheme === 'light') {
     localStorage.setItem('local-theme', 'dark')
@@ -70,31 +69,31 @@ function toggleLocalStorageTheme(e) {
     }
   }
 }
-function darkModeOn() {
+function darkModeOn () {
   document?.documentElement?.classList?.remove('light-mode')
   document?.documentElement?.classList?.add('dark-mode')
 }
-function lightModeOn() {
+function lightModeOn () {
   document?.documentElement?.classList.remove('dark-mode')
   document?.documentElement?.classList?.add('light-mode')
 }
-function darkModeState() {
+function darkModeState () {
   return document?.documentElement?.classList.contains('dark-mode')
 }
-function hasLocalStorage() {
+function hasLocalStorage () {
   return typeof Storage !== 'undefined'
 }
-function watchColorSchemeChange(callback) {
+function watchColorSchemeChange (callback) {
   // query user's machine for system setting & use that
   const darkMediaQuery = window?.matchMedia('(prefers-color-scheme: dark)')
 
   const handleChange = (event) => {
     const newColorScheme = event?.matches ? 'dark' : 'light'
-    callback(newColorScheme)
+    callback(undefined, newColorScheme)
   }
   darkMediaQuery.addEventListener('change', handleChange)
   // handle init load value
-  callback(darkMediaQuery.matches ? 'dark': 'light')
+  callback(undefined, darkMediaQuery.matches ? 'dark' : 'light')
   // Return a function to remove the event listener
   return () => darkMediaQuery.removeEventListener('change', handleChange)
 }
