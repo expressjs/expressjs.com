@@ -21,6 +21,10 @@
     "plugins": [
       "markdown"
     ],
+    "env": {
+      "browser": true,
+      "jquery": true
+    },
     "overrides": [
       {
         "files": "**/*.md",
