@@ -145,7 +145,7 @@ main.home {
 
 .install-command {
   font-family: Consolas, Monaco, "Andale Mono", monospace;
-  padding: 5px 10px;
+  padding: 10px;
   border: 1px solid var(--border);
   border-radius: 3px;
   max-width: 375px;
