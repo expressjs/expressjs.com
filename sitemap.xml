@@ -11,7 +11,6 @@ sitemap: false
     {% else %}
     <loc>{{site.url}}/{{ lang.code }}/</loc>
     {% endif %}
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
     <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}" />
     {% for alt_lang in site.data.languages %}
       {% if alt_lang.code == 'en' %}
@@ -38,7 +37,6 @@ sitemap: false
 {% endfor %}
   <url>
       <loc>https://expressjs.com/en/changelog/</loc>
-      <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
   </url>
 {% for post in site.posts %}
   <url>
@@ -48,38 +46,20 @@ sitemap: false
 {% endfor %}
   <url>
     <loc>https://nodejs.org/en/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-  </url>
-  <url>
-    <loc>https://www.netlify.com/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
   </url>
   <url>
     <loc>https://openjsf.org/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
   </url>
   <url>
     <loc>https://terms-of-use.openjsf.org/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
   </url>
   <url>
     <loc>https://privacy-policy.openjsf.org/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
   </url>
   <url>
     <loc>https://github.com/expressjs/express/blob/master/Code-Of-Conduct.md</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
   </url>
   <url>
     <loc>https://trademark-policy.openjsf.org/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/expressjs/express/security/policy</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/expressjs/express/blob/master/LICENSE</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
   </url>
 </urlset>
