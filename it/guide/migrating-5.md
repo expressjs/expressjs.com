@@ -18,7 +18,7 @@ Express 5 non è molto differente da Express 4: le modifiche all'API non sono co
 Per installare l'ultima alfa e per vedere in anteprima Express 5, immettere il seguente comando nella directory root dell'applicazione:
 
 ```bash
-$ npm install "express@^{{ site.data.express.next_version }}" --save
+$ npm install "express@5" --save
 ```
 
 È quindi possibile eseguire i test automatizzati per trovare errori e correggere i problemi in base agli aggiornamenti elencati di seguito. Dopo aver gestito gli errori del test, avviare l'applicazione per verificare gli errori. Si noterà subito se l'applicazione utilizza qualsiasi metodo o proprietà non supportati.
