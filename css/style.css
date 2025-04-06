@@ -431,7 +431,38 @@ pre:has(code) button.copied {
     border-radius: 2px;
     color: var(--card-fg);
     background-color: var(--card-bg);
-    outline: 1px solid var(--hover-border);
+    outline: 1px solid var(--supported-fg);
+  }
+
+  @media all and (max-width: 400px) { 
+    &::before {
+      left: -50px;
+      font-size: 0.7rem;
+      padding: 3px;
+    }
+  }
+}
+
+pre:has(code) button.failed {
+  outline-color: var(--eol-fg);
+
+  &::after { 
+    background-color: var(--eol-fg);
+  }
+  
+  &::before {
+    font-size: 0.85rem;
+    position: absolute;
+    left: -58px;
+    content: "failed!";
+
+    width: fit-content;
+    height: fit-content;
+    padding: 4px;
+    border-radius: 2px;
+    color: var(--card-fg);
+    background-color: var(--card-bg);
+    outline: 1px solid var(--eol-fg);
   }
 
   @media all and (max-width: 400px) { 
