@@ -16,7 +16,7 @@ Express 5 is not very different from Express 4; although it maintains the same b
 To install this version, you need to have a Node.js version 18 or higher. Then, execute the following command in your application directory:
 
 ```sh
-npm install "express@^{{ site.data.express.next_version }}"
+npm install "express@5"
 ```
 
 You can then run your automated tests to see what fails, and fix problems according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.

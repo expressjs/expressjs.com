@@ -437,7 +437,7 @@ html[xmlns] .clearfix {
 /* doc specific */
 
 .doctable, table {
-  margin: 1em 1em 1em 0;
+  margin: 1em 0;
   border: 1px solid var(--border);
   border-collapse: collapse;
   width: 100%;
