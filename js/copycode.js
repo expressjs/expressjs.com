@@ -50,7 +50,8 @@ async function copyCode(block, button) {
       const timer = setTimeout(() => {
         button.classList.remove("failed");
         button.setAttribute("aria-label","click to copy code");
-      }, 100000);
+      }, 1000);
+
 
       button.dataset.timerId = timer;
     }
