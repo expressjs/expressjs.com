@@ -2,8 +2,7 @@
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
-[![Linux Build][github-actions-ci-image]][github-actions-ci-url]
-[![Windows Build][appveyor-image]][appveyor-url]
+[![CI][github-actions-ci-image]][github-actions-ci-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
 ## Install
@@ -243,8 +242,6 @@ function setCustomCacheControl (res, file) {
 
 [MIT](LICENSE)
 
-[appveyor-image]: https://badgen.net/appveyor/ci/dougwilson/serve-static/master?label=windows
-[appveyor-url]: https://ci.appveyor.com/project/dougwilson/serve-static
 [coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/serve-static/master
 [coveralls-url]: https://coveralls.io/r/expressjs/serve-static?branch=master
 [github-actions-ci-image]: https://badgen.net/github/checks/expressjs/serve-static/master?label=linux
