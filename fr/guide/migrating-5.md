@@ -26,7 +26,7 @@ prévisualiser Express 5, entrez la commande suivante dans le
 répertoire principal de l'application :
 
 ```bash
-$ npm install "express@^{{ site.data.express.next_version }}" --save
+$ npm install "express@5" --save
 ```
 
 Vous pouvez alors exécuter les tests automatisés pour voir les
