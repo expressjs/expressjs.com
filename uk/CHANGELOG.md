@@ -1,3 +1,6 @@
+---
+sitemap: false
+---
 18.03.2016 Додано сторінки для наступних лінків:
 * http://expressjs.com/uk/starter/static-files.html (у головному меню)
 * http://expressjs.com/uk/guide/writing-middleware.html (у головному меню)
