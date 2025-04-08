@@ -6,6 +6,7 @@ menu: changelog
 lang: id
 redirect_from: 
   - "id/changelog/4x.html"
+sitemap: false
 ---
 
 # Release changelog

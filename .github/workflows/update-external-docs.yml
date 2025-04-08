@@ -36,3 +36,29 @@ jobs:
                 labels: doc
                 team_reviewers: expressjs/docs-captains
                 branch: external-docs-${{ github.sha }}
+
+    synchronize-with-crowdin:
+        runs-on: ubuntu-latest
+        if: github.repository_owner == 'expressjs'
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              # see all the options at https://github.com/crowdin/github-action
+            - name: Crowdin PR
+              uses: crowdin/github-action@v2
+              with:
+                # do not upload anything - this is a one-way operation download
+                upload_sources: false
+                upload_translations: false
+                # the rest of this controls how the PR comes in with new translations
+                download_translations: true
+                localization_branch_name: crowdin/translations
+                create_pull_request: true
+                pull_request_title: 'New Crowdin Translations'
+                pull_request_body: > 
+                  New Crowdin translations from the [express.js crowdin project](https://express.crowdin.com/u/projects/1). cc: @expressjs/docs-wg
+                pull_request_base_branch_name: 'gh-pages'
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+                CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
