@@ -6,6 +6,7 @@ menu: changelog
 lang: th
 redirect_from: 
   - "th/changelog/4x.html"
+sitemap: false
 ---
 
 # Release changelog
