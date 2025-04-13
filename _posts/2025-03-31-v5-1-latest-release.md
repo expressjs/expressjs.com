@@ -1,6 +1,6 @@
 ---
 title: "Express@5.1.0: Now the Default on npm with LTS Timeline"
-tags: news, release 
+tags: news release
 author: Express Technical Committee
 description: Express 5.1.0 is now the default on npm, and we're introducing an official LTS schedule for the v4 and v5 release lines.
 ---

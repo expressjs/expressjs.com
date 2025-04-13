@@ -1,6 +1,6 @@
 ---
 title: "Express.js Security Audit: A Milestone Achievement"
-tags: security, audit, releases
+tags: security audit releases
 author: Express Technical Committee
 description: Celebrating the successful completion of the Express.js security audit conducted by Ada Logics and facilitated by OSTIF.
 ---
