@@ -1,20 +1,20 @@
 ---
-layout: page
+layout: página
 title: Direccionamiento básico de Express
-menu: starter
+description: Aprenda los fundamentos de la enrutamiento en aplicaciones Express.js, incluyendo cómo definir rutas, manejar métodos HTTP y crear manejadores de rutas para su servidor web.
+menu: iniciador
 lang: es
-description: Learn the fundamentals of routing in Express.js applications, including
-  how to define routes, handle HTTP methods, and create route handlers for your web
-  server.
+redirect_from: /starter/basic-routing.html
 ---
 
 # Direccionamiento básico
 
-El *direccionamiento* hace referencia a la determinación de cómo responde una aplicación a una solicitud de cliente en un determinado punto final, que es un URI (o una vía de acceso) y un método de solicitud HTTP específico (GET, POST, etc.).
+El _direccionamiento_ hace referencia a la determinación de cómo responde una aplicación a una solicitud de cliente en un determinado punto final, que es un URI (o una vía de acceso) y un método de solicitud HTTP específico (GET, POST, etc.).
 
 Cada ruta puede tener una o varias funciones de manejador, que se excluyen cuando se correlaciona la ruta.
 
 La definición de ruta tiene la siguiente estructura:
+
 ```js
 app.METHOD(PATH, HANDLER)
 ```
@@ -36,7 +36,7 @@ Responda con `Hello World!` en la página inicial:
 
 ```js
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('¡Hola Mundo!')
 })
 ```
 
@@ -44,7 +44,7 @@ Responda a la solicitud POST en la ruta raíz (`/`), la página de inicio de la 
 
 ```js
 app.post('/', (req, res) => {
-  res.send('Got a POST request')
+  res.send('Obtiene una solicitud POST')
 })
 ```
 
@@ -52,7 +52,7 @@ Responda a una solicitud PUT en la ruta `/user`:
 
 ```js
 app.put('/user', (req, res) => {
-  res.send('Got a PUT request at /user')
+  res.send('Obtener una solicitud PUT en /user')
 })
 ```
 
@@ -60,8 +60,10 @@ Responda a una solicitud DELETE en la ruta `/user`:
 
 ```js
 app.delete('/user', (req, res) => {
-  res.send('Got a DELETE request at /user')
+  res.send('Obtuvo una solicitud DELETE en /user')
 })
 ```
 
 Para obtener más detalles sobre el direccionamiento, consulte la [guía de direccionamiento](/{{ page.lang }}/guide/routing.html).
+
+### [Anterior: generador de aplicaciones exprés ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Siguiente: expandiendo archivos estáticos en Express ](/{{ page.lang }}/starter/static-files.html)

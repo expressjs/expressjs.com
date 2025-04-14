@@ -1,30 +1,24 @@
 ---
 layout: page
 title: Express でのテンプレート・エンジンの使用
+description: Discover how to integrate and use template engines like Pug, Handlebars, and EJS with Express.js to render dynamic HTML pages efficiently.
 menu: guide
 lang: ja
-description: Discover how to integrate and use template engines like Pug, Handlebars,
-  and EJS with Express.js to render dynamic HTML pages efficiently.
+redirect_from: /guide/using-template-engines.html
 ---
 
 # Express でのテンプレート・エンジンの使用
 
-_テンプレートエンジン_ を使用すると、アプリケーションで静的なテンプレートファイルを使用できます。実行時に、テンプレートエンジンはテンプレートファイルの変数を実際の値に置き換え、テンプレートをクライアントに送信するHTMLファイルに変換します。このアプローチにより、HTMLページの設計が容易になります。
+A _template engine_ enables you to use static template files in your application. _テンプレートエンジン_ を使用すると、アプリケーションで静的なテンプレートファイルを使用できます。実行時に、テンプレートエンジンはテンプレートファイルの変数を実際の値に置き換え、テンプレートをクライアントに送信するHTMLファイルに変換します。このアプローチにより、HTMLページの設計が容易になります。
+This approach makes it easier to design an HTML page.
 
 Expressで動作する一般的なテンプレートエンジンには、[Pug](https://pugjs.org/api/getting-started.html)、[Mustache](https://www.npmjs.com/package/mustache)、[EJS](https://www.npmjs.com/package/ejs)があります。[Expressアプリケーションジェネレータ](/{{ page.lang }}/starter/generator.html)は[Jade](https://www.npmjs.com/package/jade)をデフォルトとして使用しますが、いくつかの他のものもサポートしています。
 
-Expressで使用できるテンプレートエンジンのリストについては、[テンプレートエンジン (Express wiki)](https://github.com/expressjs/express/wiki#template-engines)を参照してください。また、[JavaScript テンプレートエンジンの比較: Jade, Mustache, Dust など](https://web.archive.org/web/20240000000000/https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/)も参照してください。
-
-<div class="doc-box doc-notice" markdown="1">
-
-**注**：Jadeは[Pug](https://www.npmjs.com/package/pug)に改名されました。あなたはアプリで引き続きJadeを使うことができ、うまく動くでしょう。しかしながら、テンプレートエンジンを最新のバージョンにアップデートしたい場合は、アプリでJadeをPugに置き換える必要があります。
-
-</div>
-
 テンプレートファイルをレンダリングするには、次の[アプリケーション設定プロパティ](/{{ page.lang }}/4x/api.html#app.set)を設定し、ジェネレータで作成されたデフォルトアプリの`app.js`にセットします。
 
-* `views`はテンプレートファイルが置かれているディレクトリ。例：`app.set('views', './views')`。これは、デフォルトではアプリケーションのルートディレクトリ内の`views`ディレクトリになります
-* `view engine`は使用するテンプレートエンジン。たとえば、Pugテンプレートエンジンを使用するには、`app.set('view engine', 'pug')`を使用します
+- `views`, the directory where the template files are located. `views`はテンプレートファイルが置かれているディレクトリ。例：`app.set('views', './views')`。これは、デフォルトではアプリケーションのルートディレクトリ内の`views`ディレクトリになります
+  This defaults to the `views` directory in the application root directory.
+- `view engine`, the template engine to use. `view engine`は使用するテンプレートエンジン。たとえば、Pugテンプレートエンジンを使用するには、`app.set('view engine', 'pug')`を使用します
 
 次に、対応するテンプレートエンジンnpmパッケージをインストールします。たとえばPugをインストールするには：
 
@@ -32,10 +26,11 @@ Expressで使用できるテンプレートエンジンのリストについて�
 $ npm install pug --save
 ```
 
-<div class="doc-box doc-notice" markdown="1">
-
-Pug などの Express 対応テンプレート・エンジンは、`__express(filePath, options, callback)` という関数をエクスポートします。この関数は、テンプレート・コードをレンダリングするために `res.render()` 関数によって呼び出されます。
+<div class="doc-box doc-notice" markdown="1">Pug などの Express 対応テンプレート・エンジンは、`__express(filePath, options, callback)` という関数をエクスポートします。この関数は、テンプレート・コードをレンダリングするために `res.render()` 関数によって呼び出されます。
 一部のテンプレート・エンジンは、この規則に従いません。[Consolidate.js](https://www.npmjs.org/package/consolidate) ライブラリーは、すべての一般的な Node.js テンプレート・エンジンをマップすることで、この規則に従います。そのため、Express 内でシームレスに動作します。
+
+Some template engines do not follow this convention. The [@ladjs/consolidate](https://www.npmjs.com/package/@ladjs/consolidate)
+library follows this convention by mapping all of the popular Node.js template engines, and therefore works seamlessly within Express.
 
 </div>
 
@@ -55,7 +50,8 @@ html
     h1= message
 ```
 
-次に、`index.pug` ファイルをレンダリングするためのルートを作成します。`view engine` プロパティーが設定されていない場合は、`view` ファイルの拡張子を指定する必要があります。そうでない場合は、省略できます。
+Create a route to render the `index.pug` file. If the `view engine` property is not set,
+you must specify the extension of the `view` file. Otherwise, you can omit it.
 
 ```js
 app.get('/', (req, res) => {
@@ -65,6 +61,4 @@ app.get('/', (req, res) => {
 
 ホーム・ページに要求すると、`index.pug` ファイルは HTML としてレンダリングされます。
 
-注：view engine のキャッシュは、テンプレートの出力内容をキャッシュしません。基本となるテンプレート自体だけです。このビューは、キャッシュがオンの場合でも、すべてのリクエストで再レンダリングされます。
-
-Express でのテンプレート・エンジンの動作について詳しくは、[Express 用のテンプレート・エンジンの開発](/{{ page.lang }}/advanced/developing-template-engines.html)を参照してください。
+注：view engine のキャッシュは、テンプレートの出力内容をキャッシュしません。基本となるテンプレート自体だけです。このビューは、キャッシュがオンの場合でも、すべてのリクエストで再レンダリングされます。 The view is still re-rendered with every request even when the cache is on.

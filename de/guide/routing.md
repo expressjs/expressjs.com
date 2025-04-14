@@ -4,11 +4,24 @@ title: Weiterleitung in Express
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
 menu: guide
 lang: de
+redirect_from: /guide/routing.html
 ---
 
 # Weiterleitung (Routing)
 
-Der Begriff *Weiterleitung* (Routing) bezieht sich auf die Definition von Anwendungsendpunkten (URIs) und deren Antworten auf Clientanforderungen. Eine Einführung in dieses Routing siehe [Basisrouting](/{{ page.lang }}/starter/basic-routing.html).
+Der Begriff _Weiterleitung_ (Routing) bezieht sich auf die Definition von Anwendungsendpunkten (URIs) und deren Antworten auf Clientanforderungen.
+Eine Einführung in dieses Routing siehe [Basisrouting](/{{ page.lang }}/starter/basic-routing.html).
+
+You define routing using methods of the Express `app` object that correspond to HTTP methods;
+for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
+see [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD). You can also use [app.all()](/{{ page.lang }}/5x/api.html#app.all) to handle all HTTP methods and [app.use()](/{{ page.lang }}/5x/api.html#app.use) to
+specify middleware as the callback function (See [Using middleware](/{{ page.lang }}/guide/using-middleware.html) for details).
+
+These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
+
+In fact, the routing methods can have more than one callback function as arguments.
+With multiple callback functions, it is important to provide `next` as an argument to the callback function and then call `next()` within the body of the function to hand off control
+to the next callback.
 
 Der folgende Code ist ein Beispiel für ein sehr einfaches Basisrouting.
 
@@ -40,15 +53,10 @@ app.post('/', (req, res) => {
 })
 ```
 
-Express unterstützt die folgenden Weiterleitungsmethoden, die den HTTP-Methoden entsprechen: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search` und `connect`.
+Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
+For a full list, see [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD).
 
-<div class="doc-box doc-info" markdown="1">
-Verwenden Sie zum Weiterleiten von Methoden, die zu den JavaScript-Variablennamen führen, die Notation "Eckige Klammer". Beispiel: `app['m-search']('/', function ...`
-</div>
-
-Es gibt eine spezielle Weiterleitungsmethode, `app.all()`, die nicht von einer HTTP-Methode abgeleitet wird. Diese Methode wird zum Laden von Middlewarefunktionen bei einem Pfad für alle Anforderungsmethoden verwendet.
-
-Im folgenden Beispiel wird der Handler für Anforderungen zur Weiterleitung "/secret" ausgeführt, um herauszufinden, ob Sie GET-, POST-, PUT-, DELETE- oder andere HTTP-Anforderungsmethoden verwenden, die im [HTTP-Modul](https://nodejs.org/api/http.html#http_http_methods) unterstützt werden.
+Es gibt eine spezielle Weiterleitungsmethode, `app.all()`, die nicht von einer HTTP-Methode abgeleitet wird. Diese Methode wird zum Laden von Middlewarefunktionen bei einem Pfad für alle Anforderungsmethoden verwendet. Im folgenden Beispiel wird der Handler für Anforderungen zur Weiterleitung "/secret" ausgeführt, um herauszufinden, ob Sie GET-, POST-, PUT-, DELETE- oder andere HTTP-Anforderungsmethoden verwenden, die im [HTTP-Modul](https://nodejs.org/api/http.html#http_http_methods) unterstützt werden.
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -61,15 +69,23 @@ app.all('/secret', (req, res, next) => {
 
 Über Weiterleitungspfade werden in Kombination mit einer Anforderungsmethode die Endpunkte definiert, bei denen Anforderungen erfolgen können. Weiterleitungspfade können Zeichenfolgen, Zeichenfolgemuster oder reguläre Ausdrücke sein.
 
-<div class="doc-box doc-info" markdown="1">
+{% capture caution-character %} In express 5, the characters `?`, `+`, `*`, `[]`, and `()` are handled differently than in version 4, please review the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax) for more information.{% endcapture %}
+
+{% include admonitions/caution.html content=caution-character %}
+
+{% capture note-dollar-character %}In express 4, regular expression characters such as `$` need to be escaped with a `\`.
+{% endcapture %}
+
+{% include admonitions/caution.html content=note-dollar-character %}
+
 Express verwendet für den Abgleich der Weiterleitungspfade [path-to-regexp](https://www.npmjs.com/package/path-to-regexp). In der Dokumentation zu "path-to-regexp" finden Sie alle Möglichkeiten zum Definieren von Weiterleitungspfaden. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) ist ein handliches Tool zum Testen von Express-Basisweiterleitungen, auch wenn dieses Tool keine Musterabgleiche unterstützt.
-</div>
+{% endcapture %}
 
-<div class="doc-box doc-warn" markdown="1">
-Abfragezeichenfolgen sind nicht Teil des Weiterleitungspfads.
-</div>
+{% include admonitions/note.html content=note-path-to-regexp %}
 
-Dies sind einige Beispiele für Weiterleitungspfade auf Basis von Zeichenfolgen.
+{% include admonitions/warning.html content="Query strings are not part of the route path." %}
+
+### Route paths based on strings
 
 Dieser Weiterleitungspfad gleicht Weiterleitungsanforderungen zum Stammverzeichnis (`/`) ab.
 
@@ -95,7 +111,11 @@ app.get('/random.text', (req, res) => {
 })
 ```
 
-Dies sind einige Beispiele für Weiterleitungspfade auf Basis von Zeichenfolgemustern.
+### Route paths based on string patterns
+
+{% capture caution-string-patterns %} The string patterns in Express 5 no longer work. Please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax) for more information.{% endcapture %}
+
+{% include admonitions/caution.html content=caution-string-patterns %}
 
 Dieser Weiterleitungspfad gleicht `acd` und `abcd` ab.
 
@@ -105,7 +125,7 @@ app.get('/ab?cd', (req, res) => {
 })
 ```
 
-Dieser Weiterleitungspfad gleicht `abcd`, `abbcd`, `abbbcd` usw. ab.
+Dies sind einige Beispiele für Weiterleitungspfade auf Basis von Zeichenfolgemustern.
 
 ```js
 app.get('/ab+cd', (req, res) => {
@@ -113,7 +133,7 @@ app.get('/ab+cd', (req, res) => {
 })
 ```
 
-Dieser Weiterleitungspfad gleicht `abcd`, `abxcd`, `abRABDOMcd`, `ab123cd` usw. ab.
+Dies sind einige Beispiele für Weiterleitungspfade auf Basis von Zeichenfolgen.
 
 ```js
 app.get('/ab*cd', (req, res) => {
@@ -129,11 +149,7 @@ app.get('/ab(cd)?e', (req, res) => {
 })
 ```
 
-<div class="doc-box doc-info" markdown="1">
-Die Zeichen ?, +, * und () sind Subsets ihrer Entsprechungen in regulären Ausdrücken. Der Bindestrich (-) und der Punkt (.) werden von zeichenfolgebasierten Pfaden förmlich interpretiert.
-</div>
-
-Beispiele für Weiterleitungspfade auf Basis regulärer Ausdrücke:
+### Route paths based on regular expressions
 
 Dieser Weiterleitungspfad gleicht alle Weiterleitungsnamen ab, die den Buchstaben "a" enthalten.
 
@@ -143,13 +159,70 @@ app.get(/a/, (req, res) => {
 })
 ```
 
-Dieser Weiterleitungspfad gleicht `butterfly` und `dragonfly`, jedoch nicht `butterflyman`, `dragonfly man` usw. ab.
+Dieser Weiterleitungspfad gleicht `butterfly` und `dragonfly`, jedoch nicht `butterflyman`, `dragonfly man` usw.
 
 ```js
 app.get(/.*fly$/, (req, res) => {
   res.send('/.*fly$/')
 })
 ```
+
+<h2 id="route-parameters">Route parameters</h2>
+
+Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
+
+```
+Route path: /users/:userId/books/:bookId
+Request URL: http://localhost:3000/users/34/books/8989
+req.params: { "userId": "34", "bookId": "8989" }
+```
+
+To define routes with route parameters, simply specify the route parameters in the path of the route as shown below.
+
+```js
+app.get('/users/:userId/books/:bookId', (req, res) => {
+  res.send(req.params)
+})
+```
+
+<div class="doc-box doc-notice" markdown="1">
+The name of route parameters must be made up of "word characters" ([A-Za-z0-9_]).
+</div>
+
+Since the hyphen (`-`) and the dot (`.`) are interpreted literally, they can be used along with route parameters for useful purposes.
+
+```
+Route path: /flights/:from-:to
+Request URL: http://localhost:3000/flights/LAX-SFO
+req.params: { "from": "LAX", "to": "SFO" }
+```
+
+```
+Route path: /plantae/:genus.:species
+Request URL: http://localhost:3000/plantae/Prunus.persica
+req.params: { "genus": "Prunus", "species": "persica" }
+```
+
+{% capture warning-regexp %}
+In express 5, Regexp characters are not supported in route paths, for more information please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax).{% endcapture %}
+
+{% include admonitions/caution.html content=warning-regexp %}
+
+To have more control over the exact string that can be matched by a route parameter, you can append a regular expression in parentheses (`()`):
+
+```
+Route path: /user/:userId(\d+)
+Request URL: http://localhost:3000/user/42
+req.params: {"userId": "42"}
+```
+
+{% include admonitions/warning.html content="Because the regular expression is usually part of a literal string, be sure to escape any `\` characters with an additional backslash, for example `\\d+`." %}
+
+{% capture warning-version %}
+In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `*` character in regular expressions is not interpreted in the usual way</a>. As a workaround, use `{0,}` instead of `*`. This will likely be fixed in Express 5.
+{% endcapture %}
+
+{% include admonitions/warning.html content=warning-version %}
 
 <h2 id="route-handlers">Routenhandler (Weiterleitungsroutinen)</h2>
 
@@ -175,6 +248,7 @@ app.get('/example/b', (req, res, next) => {
   res.send('Hello from B!')
 })
 ```
+
 Ein Array von Callback-Funktionen kann eine Weiterleitung verarbeiten. Beispiel:
 
 ```js
@@ -220,21 +294,22 @@ app.get('/example/d', [cb0, cb1], (req, res, next) => {
 
 Über die Methoden für das Antwortobjekt (`res`) in der folgenden Tabelle kann eine Antwort an den Client gesendet und der Anforderung/Antwort-Zyklus beendet werden. Wenn keine dieser Methoden über einen Routenhandler aufgerufen wird, bleibt die Clientanforderung im Status "blockiert".
 
-| Methode               | Beschreibung
-|----------------------|--------------------------------------
-| [res.download()](/{{ page.lang }}/4x/api.html#res.download)   | Gibt eine Eingabeaufforderung zum Herunterladen einer Datei aus.
-| [res.end()](/{{ page.lang }}/4x/api.html#res.end)        | Beendet den Prozess "Antwort".
-| [res.json()](/{{ page.lang }}/4x/api.html#res.json)       | Sendet eine JSON-Antwort.
-| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)      | Sendet eine JSON-Antwort mit JSONP-Unterstützung.
-| [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | Leitet eine Anforderung um.
-| [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | Gibt eine Anzeigevorlage aus.
-| [res.send()](/{{ page.lang }}/4x/api.html#res.send)       | Sendet eine Antwort mit unterschiedlichen Typen.
-| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)     | Sendet eine Datei als Oktett-Stream.
-| [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Legt den Antwortstatuscode fest und sendet dessen Zeichenfolgedarstellung als Antworthauptteil.
+| Methode                                                                                                                                                                                                                   | Beschreibung                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| [res.download()](/{{ page.lang }}/4x/api.html#res.download)     | Gibt eine Eingabeaufforderung zum Herunterladen einer Datei aus.                                |
+| [res.end()](/{{ page.lang }}/4x/api.html#res.end)               | End the response process.                                                                       |
+| [res.json()](/{{ page.lang }}/4x/api.html#res.json)             | Sendet eine JSON-Antwort.                                                                       |
+| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)           | Sendet eine JSON-Antwort mit JSONP-Unterstützung.                                               |
+| [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)     | Leitet eine Anforderung um.                                                                     |
+| [res.render()](/{{ page.lang }}/4x/api.html#res.render)         | Render a view template.                                                                         |
+| [res.send()](/{{ page.lang }}/4x/api.html#res.send)             | Sendet eine Antwort mit unterschiedlichen Typen.                                                |
+| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)                          | Sendet eine Datei als Oktett-Stream.                                                            |
+| [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Legt den Antwortstatuscode fest und sendet dessen Zeichenfolgedarstellung als Antworthauptteil. |
 
 <h2 id="app-route">app.route()</h2>
 
-Sie können mithilfe von `app.route()` verkettbare Routenhandler für einen Weiterleitungspfad erstellen. Da der Pfad an einer einzelnen Position angegeben wird, ist das Erstellen modularer Weiterleitungen hilfreich, da Redundanzen und Schreibfehler reduziert werden. Weitere Informationen zu Weiterleitungen finden Sie in der Dokumentation zu [Router()](/{{ page.lang }}/4x/api.html#router).
+Sie können mithilfe von `app.route()` verkettbare Routenhandler für einen Weiterleitungspfad erstellen.
+Da der Pfad an einer einzelnen Position angegeben wird, ist das Erstellen modularer Weiterleitungen hilfreich, da Redundanzen und Schreibfehler reduziert werden. Weitere Informationen zu Weiterleitungen finden Sie in der Dokumentation zu [Router()](/{{ page.lang }}/4x/api.html#router).
 
 Dies ist ein Beispiel für verkettete Routenhandler, die mit der Funktion `app.route()` definiert werden.
 
@@ -291,3 +366,9 @@ app.use('/birds', birds)
 ```
 
 Die Anwendung kann nun Anforderungen an die Pfade `/birds` und `/birds/about` bearbeiten und ruft die Middlewarefunktion `timeLog` auf, die speziell für diese Weiterleitung bestimmt ist.
+
+But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/{{ page.lang }}/5x/api.html#app.use).
+
+```js
+Express unterstützt die folgenden Weiterleitungsmethoden, die den HTTP-Methoden entsprechen: `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search` und `connect`.
+```

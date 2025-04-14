@@ -4,6 +4,7 @@ title: Template-Engines für Express entwickeln
 description: Learn how to develop custom template engines for Express.js using app.engine(), with examples on creating and integrating your own template rendering logic.
 menu: advanced
 lang: de
+redirect_from: /advanced/developing-template-engines.html
 ---
 
 # Template-Engines für Express entwickeln
@@ -33,10 +34,13 @@ Ihre Anwendung ist jetzt in der Lage, `.ntl`-Dateien auszugeben. Erstellen Sie i
 #title#
 #message#
 ```
+
 Erstellen Sie dann in Ihrer Anwendung die folgende Route.
+
 ```js
 app.get('/', (req, res) => {
   res.render('index', { title: 'Hey', message: 'Hello there!' })
 })
 ```
+
 Wenn Sie eine Anforderung zur Homepage einleiten, wird `index.ntl` im HTML-Format ausgegeben.

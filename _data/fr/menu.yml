@@ -1,6 +1,5 @@
 # Home
 home: Accueil
-
 # Getting started
 getting_started: Mise en route
 installing: Installing
@@ -10,7 +9,6 @@ basic_routing: Routage de base
 static_files: Fichiers statiques
 examples: More examples
 faq: FAQ
-
 # Guide
 guide: Guide
 routing: Routage
@@ -24,15 +22,12 @@ behind_proxies: Express derrière Proxys
 migrating_4: Migration vers Express 4
 migrating_5: Migration vers Express 5
 database_integration: Intégration de bases de données
-
 # API reference
-
 api: API reference
 5x: 5.x
 4x: 4.x
 3x: 3.x (obsolète)
 2x: 2.x (obsolète)
-
 # Advanced topics
 advanced: Rubriques avancées
 developing_template_engines: Moteurs de modèles
@@ -40,7 +35,6 @@ security_updates: Mises à jour de sécurité
 best_practice_security: Meilleures pratiques en termes de sécurité
 best_practice_performance: Meilleures pratiques en termes de performances
 healthcheck_graceful_shutdown: Health checks & shutdown
-
 # Resources
 resources: Ressources
 glossary: Glossaire
@@ -49,10 +43,8 @@ community: Communauté
 utils: Utility modules
 contributing: Contributing to Express
 changelog: Release Change Log
-
 # Support
 support: Support
-
 # Blog
 blog: Blog
 latest_post: Latest post

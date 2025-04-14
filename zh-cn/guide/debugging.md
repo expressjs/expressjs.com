@@ -1,10 +1,10 @@
 ---
 layout: page
 title: 调试 Express
+description: Learn how to enable and use debugging logs in Express.js applications by setting the DEBUG environment variable for enhanced troubleshooting.
 menu: guide
-lang: zh-cn
-description: Learn how to enable and use debugging logs in Express.js applications
-  by setting the DEBUG environment variable for enhanced troubleshooting.
+lang: en
+redirect_from: /guide/debugging.html
 ---
 
 # 调试 Express
@@ -18,7 +18,7 @@ $ DEBUG=express:* node index.js
 在 Windows 上，使用对应的命令。
 
 ```bash
-> set DEBUG=express:* & node index.js
+> $env:DEBUG = "express:*"; node index.js
 ```
 
 在 [Express 生成器](/{{ page.lang }}/starter/generator.html)所生成的缺省应用程序上运行此命令将显示以下输出：
@@ -87,7 +87,7 @@ $ DEBUG=express:* node ./bin/www
   express:view render "/projects/example/views/index.pug" +1ms
 ```
 
-要仅查看来自路由器实现的日志，请将 `DEBUG` 的值设置为 `express:router`。与此类似，要仅查看来自应用程序实现的日志，请将 `DEBUG` 的值设置为 `express:application`，以此类推。
+要仅查看来自路由器实现的日志，请将 `DEBUG` 的值设置为 `express:router`。与此类似，要仅查看来自应用程序实现的日志，请将 `DEBUG` 的值设置为 `express:application`，以此类推。 Likewise, to see logs only from the application implementation, set the value of `DEBUG` to `express:application`, and so on.
 
 ## `express` 生成的应用程序
 
@@ -104,3 +104,21 @@ $ DEBUG=sample-app:* node ./bin/www
 ```bash
 $ DEBUG=http,mail,express:* node index.js
 ```
+
+## Advanced options
+
+When running through Node.js, you can set a few environment variables that will change the behavior of the debug logging:
+
+| Name                | Purpose                                                           |
+| ------------------- | ----------------------------------------------------------------- |
+| `DEBUG`             | Enables/disables specific debugging namespaces.   |
+| `DEBUG_COLORS`      | Whether or not to use colors in the debug output. |
+| `DEBUG_DEPTH`       | Object inspection depth.                          |
+| `DEBUG_FD`          | File descriptor to write debug output to.         |
+| `DEBUG_SHOW_HIDDEN` | Shows hidden properties on inspected objects.     |
+
+{% include admonitions/note.html content="The environment variables beginning with `DEBUG_` end up being
+converted into an Options object that gets used with `%o`/`%O` formatters.
+See the Node.js documentation for
+[`util.inspect()`](https://nodejs.org/api/util.html#util_util_inspect_object_options)
+for the complete list." %}

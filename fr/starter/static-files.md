@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Servir des fichiers statiques dans Express
+description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
 menu: démarrage
 lang: fr
-description: Understand how to serve static files like images, CSS, and JavaScript
-  in Express.js applications using the built-in 'static' middleware.
+redirect_from: /starter/static-files.html
 ---
 
 # Servir des fichiers statiques dans Express
@@ -13,10 +13,16 @@ Pour servir des fichiers statiques tels que les images, les
 fichiers CSS et les fichiers JavaScript, utilisez la fonction de
 logiciel intermédiaire intégré `express.static` dans Express.
 
-Passez le nom du répertoire qui contient les actifs
-statiques dans la fonction de logiciel intermédiaire
-`express.static` afin de commencer à servir
-les fichiers directement. Par exemple, utilisez le code suivant pour
+The function signature is:
+
+```js
+express.static(root, [options])
+```
+
+The `root` argument specifies the root directory from which to serve static assets.
+For more information on the `options` argument, see [express.static](/{{page.lang}}/4x/api.html#express.static).
+
+Par exemple, utilisez le code suivant pour
 servir des images, des fichiers CSS et des fichiers JavaScript dans
 un répertoire nommé `public` :
 
@@ -52,6 +58,11 @@ app.use(express.static('files'))
 Express recherche les fichiers dans l'ordre dans lequel vous
 avez établi les répertoires statiques avec la fonction middleware `express.static`.
 
+{% capture alert_content %}
+For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+{% endcapture %}
+{% include admonitions/note.html content=alert_content %}
+
 Pour créer un préfixe de chemin d'accès virtuel (dans lequel le
 chemin d'accès n'existe pas vraiment dans le système de fichiers)
 pour les fichiers qui sont servis par la fonction
@@ -86,3 +97,7 @@ servir :
 const path = require('path')
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
+
+For more details about the `serve-static` function and its options, see  [serve-static](/resources/middleware/serve-static.html).
+
+### [Previous: Basic Routing ](/{{ page.lang }}/starter/basic-routing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: More examples ](/{{ page.lang }}/starter/examples.html)

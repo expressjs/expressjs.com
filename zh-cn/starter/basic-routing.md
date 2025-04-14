@@ -1,25 +1,25 @@
 ---
 layout: page
 title: Express 基本路由
+description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
-lang: zh-cn
-description: Learn the fundamentals of routing in Express.js applications, including
-  how to define routes, handle HTTP methods, and create route handlers for your web
-  server.
+lang: en
+redirect_from: /starter/basic-routing.html
 ---
 
 # 基本路由
 
-*路由*用于确定应用程序如何响应对特定端点的客户机请求，包含一个 URI（或路径）和一个特定的 HTTP 请求方法（GET、POST 等）。
+_路由_用于确定应用程序如何响应对特定端点的客户机请求，包含一个 URI（或路径）和一个特定的 HTTP 请求方法（GET、POST 等）。
 
 每个路由可以具有一个或多个处理程序函数，这些函数在路由匹配时执行。
 
 路由定义采用以下结构：
+
 ```js
 app.METHOD(PATH, HANDLER)
 ```
 
-其中：
+Where:
 
 - `app` 是 `express` 的实例。
 - `METHOD` 是 [HTTP 请求方法](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)。
@@ -27,7 +27,9 @@ app.METHOD(PATH, HANDLER)
 - `HANDLER` 是在路由匹配时执行的函数。
 
 <div class="doc-box doc-notice" markdown="1">
+This tutorial assumes that an instance of `express` named `app` is created and the server is running. 
 本教程假定创建了名为 `app` 的 `express` 实例且服务器正在运行。如果您对创建和启动应用程序并不熟悉，请参阅 [Hello world 示例](/{{ page.lang }}/starter/hello-world.html)。
+
 </div>
 
 以下示例演示了如何定义简单路由。
@@ -65,3 +67,5 @@ app.delete('/user', (req, res) => {
 ```
 
 有关路由的更多详细信息，请参阅[路由指南](/{{ page.lang }}/guide/routing.html)。
+
+### [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)

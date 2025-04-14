@@ -1,22 +1,28 @@
 ---
 layout: page
 title: Usando mecanismos de modelo com o Express
+description: Discover how to integrate and use template engines like Pug, Handlebars, and EJS with Express.js to render dynamic HTML pages efficiently.
 menu: guide
 lang: pt-br
-description: Discover how to integrate and use template engines like Pug, Handlebars,
-  and EJS with Express.js to render dynamic HTML pages efficiently.
+redirect_from: /guide/using-template-engines.html
 ---
 
 # Usando mecanismos de modelo com o Express
 
-Antes do Express poder renderizar arquivos de modelo, as
-seguintes configurações do aplicativo devem ser configuradas:
+A _template engine_ enables you to use static template files in your application. At runtime, the template engine replaces
+variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
+This approach makes it easier to design an HTML page.
 
-* `views`, é o diretório onde os arquivos de
-modelo estão localizados. Por exemplo: `app.set('views',
-'./views')`
-* `view engine`, o mecanismo de modelo a ser
-usado. Por Exemplo: `app.set('view engine', 'pug')`
+The [Express application generator](/{{ page.lang }}/starter/generator.html) uses [Pug](https://pugjs.org/api/getting-started.html) as its default, but it also supports [Handlebars](https://www.npmjs.com/package/handlebars), and [EJS](https://www.npmjs.com/package/ejs), among others.
+
+To render template files, set the following [application setting properties](/{{ page.lang }}/4x/api.html#app.set), in the default `app.js` created by the generator:
+
+- `views`, é o diretório onde os arquivos de
+  modelo estão localizados. Por exemplo: `app.set('views',
+  './views')`
+  This defaults to the `views` directory in the application root directory.
+- `view engine`, o mecanismo de modelo a ser
+  usado. Por Exemplo: `app.set('view engine', 'pug')`
 
 Em seguida instale o pacote npm correspondente ao mecanismo de modelo:
 
@@ -34,6 +40,7 @@ Alguns mecanismos de modelo não seguem esta convenção. A
 biblioteca [Consolidate.js](https://www.npmjs.org/package/consolidate)
 segue esta convenção mapeando todos os mecanismos de modelo populares
 do Node.js, e portanto funciona de forma harmoniosa com o Express.
+
 </div>
 
 Após o mecanismo de visualização estar configurado, você não
@@ -71,5 +78,4 @@ app.get('/', (req, res) => {
 
 Ao fazer uma solicitação à página inicial, o arquivo `index.pug` será renderizado como HTML.
 
-Para aprender mais sobre como mecanismos de modelo funcionam no
-Express, consulte: ["Desenvolvendo mecanismos de para o Express"](/{{ page.lang }}/advanced/developing-template-engines.html).
+The view engine cache does not cache the contents of the template's output, only the underlying template itself. The view is still re-rendered with every request even when the cache is on.

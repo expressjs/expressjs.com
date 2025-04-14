@@ -1,16 +1,27 @@
 ---
 layout: page
 title: Routage Express
+description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
 menu: guide
 lang: fr
-description: Learn how to define and use routes in Express.js applications, including
-  route methods, route paths, parameters, and using Router for modular routing.
+redirect_from: /guide/routing.html
 ---
 
 # Routage
 
-*Routage* fait référence à la définition de points finaux d'application (URI) et à la façon dont ils répondent aux demandes client.
+_Routage_ fait référence à la définition de points finaux d'application (URI) et à la façon dont ils répondent aux demandes client.
 Pour une introduction au routage, voir [Basic routing](/{{ page.lang }}/starter/basic-routing.html).
+
+You define routing using methods of the Express `app` object that correspond to HTTP methods;
+for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
+see [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD). You can also use [app.all()](/{{ page.lang }}/5x/api.html#app.all) to handle all HTTP methods and [app.use()](/{{ page.lang }}/5x/api.html#app.use) to
+specify middleware as the callback function (See [Using middleware](/{{ page.lang }}/guide/using-middleware.html) for details).
+
+These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
+
+In fact, the routing methods can have more than one callback function as arguments.
+With multiple callback functions, it is important to provide `next` as an argument to the callback function and then call `next()` within the body of the function to hand off control
+to the next callback.
 
 Le code suivant est un exemple de routage très basique.
 
@@ -42,16 +53,10 @@ app.post('/', (req, res) => {
 })
 ```
 
-Express prend en charge les méthodes de routage suivantes qui correspondent aux méthodes HTTP : `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
-
-<div class="doc-box doc-info" markdown="1">
-Pour router des méthodes qui se traduisent par des noms de variables JavaScript non valides, utilisez la notation entre crochets. For example,
-`app['m-search']('/', function ...`
-</div>
+Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
+For a full list, see [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD).
 
 Il existe une méthode de routage spéciale, `app.all()`, qui n'est pas dérivée d'une méthode HTTP. Cette méthode est utilisée pour charger des fonctions middleware à un chemin d'accès pour toutes les méthodes de demande.
-
-Dans l'exemple suivant, le gestionnaire sera exécuté pour les demandes de "/secret", que vous utilisiez GET, POST, PUT, DELETE ou toute autre méthode de demande HTTP prise en charge dans le [module http](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -64,15 +69,23 @@ app.all('/secret', (req, res, next) => {
 
 Les chemins de routage, combinés à une méthode de demande, définissent les noeuds finaux sur lesquels peuvent être effectuées les demandes. Les chemins de routage peuvent être des chaînes, des masques de chaîne ou des expressions régulières.
 
-<div class="doc-box doc-info" markdown="1">
-  Express utilise [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) pour faire correspondre les chemins de routage ; pour connaître toutes les façons de définir des chemins de routage, voir la documentation path-to-regexp. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) est un outil pratique permettant de tester des routes Express de base, bien qu'il ne prenne pas en charge le filtrage par motif.
-</div>
+{% capture caution-character %} In express 5, the characters `?`, `+`, `*`, `[]`, and `()` are handled differently than in version 4, please review the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax) for more information.{% endcapture %}
 
-<div class="doc-box doc-warn" markdown="1">
-Les chaînes de requête ne font pas partie du chemin de routage.
-</div>
+{% include admonitions/caution.html content=caution-character %}
 
-Il s'agit d'exemples de chemins de routage basés sur des chaînes.
+{% capture note-dollar-character %}In express 4, regular expression characters such as `$` need to be escaped with a `\`.
+{% endcapture %}
+
+{% include admonitions/caution.html content=note-dollar-character %}
+
+Express utilise [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) pour faire correspondre les chemins de routage ; pour connaître toutes les façons de définir des chemins de routage, voir la documentation path-to-regexp. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) est un outil pratique permettant de tester des routes Express de base, bien qu'il ne prenne pas en charge le filtrage par motif.
+{% endcapture %}
+
+{% include admonitions/note.html content=note-path-to-regexp %}
+
+{% include admonitions/warning.html content="Query strings are not part of the route path." %}
+
+### Il s'agit d'exemples de chemins de routage basés sur des chaînes.
 
 Ce chemin de routage fera correspondre des demandes à la route racine, `/`.
 
@@ -98,7 +111,11 @@ app.get('/random.text', (req, res) => {
 })
 ```
 
-Il s'agit d'exemples de chemins de routage basés sur des masques de chaîne.
+### Il s'agit d'exemples de chemins de routage basés sur des masques de chaîne.
+
+{% capture caution-string-patterns %} The string patterns in Express 5 no longer work. Please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax) for more information.{% endcapture %}
+
+{% include admonitions/caution.html content=caution-string-patterns %}
 
 Ce chemin de routage fait correspondre `acd` et `abcd`.
 
@@ -132,11 +149,7 @@ app.get('/ab(cd)?e', (req, res) => {
 })
 ```
 
-<div class="doc-box doc-info" markdown="1">
-Les caractères ?, +, * et () sont des sous-ensembles de leur expression régulière équivalente. Le trait d'union (-) et le point (.) sont interprétés littéralement par des chemins d'accès basés sur des chaînes.
-</div>
-
-Exemples de chemins de routage basés sur des expressions régulières :
+### Exemples de chemins de routage basés sur des expressions régulières :
 
 Ce chemin de routage fera correspondre tout élément dont le nom de chemin comprend la lettre "a".
 
@@ -154,13 +167,72 @@ app.get(/.*fly$/, (req, res) => {
 })
 ```
 
+<h2 id="route-parameters">
+Les chaînes de requête ne font pas partie du chemin de routage.
+</h2>
+
+Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
+
+```
+Route path: /users/:userId/books/:bookId
+Request URL: http://localhost:3000/users/34/books/8989
+req.params: { "userId": "34", "bookId": "8989" }
+```
+
+To define routes with route parameters, simply specify the route parameters in the path of the route as shown below.
+
+```js
+app.get('/users/:userId/books/:bookId', (req, res) => {
+  res.send(req.params)
+})
+```
+
+<div class="doc-box doc-notice" markdown="1">
+The name of route parameters must be made up of "word characters" ([A-Za-z0-9_]).
+</div>
+
+Since the hyphen (`-`) and the dot (`.`) are interpreted literally, they can be used along with route parameters for useful purposes.
+
+```
+Route path: /flights/:from-:to
+Request URL: http://localhost:3000/flights/LAX-SFO
+req.params: { "from": "LAX", "to": "SFO" }
+```
+
+```
+Route path: /plantae/:genus.:species
+Request URL: http://localhost:3000/plantae/Prunus.persica
+req.params: { "genus": "Prunus", "species": "persica" }
+```
+
+{% capture warning-regexp %}
+In express 5, Regexp characters are not supported in route paths, for more information please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax).{% endcapture %}
+
+{% include admonitions/caution.html content=warning-regexp %}
+
+To have more control over the exact string that can be matched by a route parameter, you can append a regular expression in parentheses (`()`):
+
+```
+Route path: /user/:userId(\d+)
+Request URL: http://localhost:3000/user/42
+req.params: {"userId": "42"}
+```
+
+{% include admonitions/warning.html content="Because the regular expression is usually part of a literal string, be sure to escape any `\` characters with an additional backslash, for example `\\d+`." %}
+
+{% capture warning-version %}
+In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `*` character in regular expressions is not interpreted in the usual way</a>. As a workaround, use `{0,}` instead of `*`. This will likely be fixed in Express 5.
+{% endcapture %}
+
+{% include admonitions/warning.html content=warning-version %}
+
 <h2 id="route-handlers">Gestionnaires de routage</h2>
 
 Vous pouvez fournir plusieurs fonctions de rappel qui se comportent comme des [middleware](/{{ page.lang }}/guide/using-middleware.html) pour gérer une demande. La seule exception est que ces fonctions de rappel peuvent faire appel à `next('route')` pour ignorer les rappels de route restants. Vous pouvez utiliser ce mécanisme pour imposer des conditions préalables sur une route, puis passer aux routes suivantes si aucune raison n'est fournie pour traiter la route actuelle.
 
 Les gestionnaires de route se trouvent sous la forme d'une fonction, d'un tableau de fonctions ou d'une combinaison des deux, tel qu'indiqué dans les exemples suivants.
 
-Une fonction de rappel unique peut traiter une route.  Par exemple :
+Une fonction de rappel unique peut traiter une route. Par exemple :
 
 ```js
 app.get('/example/a', (req, res) => {
@@ -178,7 +250,8 @@ app.get('/example/b', (req, res, next) => {
   res.send('Hello from B!')
 })
 ```
-Un tableau de fonctions de rappel peut traiter une route.  Par exemple :
+
+Un tableau de fonctions de rappel peut traiter une route. Par exemple :
 
 ```js
 const cb0 = function (req, res, next) {
@@ -198,7 +271,7 @@ const cb2 = function (req, res) {
 app.get('/example/c', [cb0, cb1, cb2])
 ```
 
-Une combinaison de fonctions indépendantes et des tableaux de fonctions peuvent gérer une route.  Par exemple :
+Une combinaison de fonctions indépendantes et des tableaux de fonctions peuvent gérer une route. Par exemple :
 
 ```js
 const cb0 = function (req, res, next) {
@@ -223,17 +296,17 @@ app.get('/example/d', [cb0, cb1], (req, res, next) => {
 
 Les méthodes de l'objet de réponse (`res`) décrites dans le tableau suivant peuvent envoyer une réponse au client, et mettre fin au cycle de demande-réponse. Si aucune de ces méthodes n'est appelée par un gestionnaire de routage, la demande du client restera bloquée.
 
-| Méthode               | Description
-|----------------------|--------------------------------------
-| [res.download()](/{{ page.lang }}/4x/api.html#res.download)   | Vous invite à télécharger un fichier.
-| [res.end()](/{{ page.lang }}/4x/api.html#res.end)        | Met fin au processus de réponse.
-| [res.json()](/{{ page.lang }}/4x/api.html#res.json)       | Envoie une réponse JSON.
-| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)      | Envoie une réponse JSON avec une prise en charge JSONP.
-| [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)   | Redirige une demande.
-| [res.render()](/{{ page.lang }}/4x/api.html#res.render)     | Génère un modèle de vue.
-| [res.send()](/{{ page.lang }}/4x/api.html#res.send)        | Envoie une réponse de divers types.
-| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | Envoie une réponse sous forme de flux d'octets.
-| [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Définit le code de statut de réponse et envoie sa représentation sous forme de chaîne comme corps de réponse.
+| Méthode                                                                                                                                                                                                                   | Description                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [res.download()](/{{ page.lang }}/4x/api.html#res.download)     | Vous invite à télécharger un fichier.                                                                         |
+| [res.end()](/{{ page.lang }}/4x/api.html#res.end)               | Met fin au processus de réponse.                                                                              |
+| [res.json()](/{{ page.lang }}/4x/api.html#res.json)             | Envoie une réponse JSON.                                                                                      |
+| [res.jsonp()](/{{ page.lang }}/4x/api.html#res.jsonp)           | Envoie une réponse JSON avec une prise en charge JSONP.                                                       |
+| [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)     | Redirige une demande.                                                                                         |
+| [res.render()](/{{ page.lang }}/4x/api.html#res.render)         | Génère un modèle de vue.                                                                                      |
+| [res.send()](/{{ page.lang }}/4x/api.html#res.send)             | Envoie une réponse de divers types.                                                                           |
+| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | Send a file as an octet stream.                                                                               |
+| [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Définit le code de statut de réponse et envoie sa représentation sous forme de chaîne comme corps de réponse. |
 
 <h2 id="app-route">app.route()</h2>
 
@@ -295,3 +368,9 @@ app.use('/birds', birds)
 ```
 
 L'application pourra dorénavant gérer des demandes dans `/birds` et `/birds/about`, et appeler la fonction middleware `timeLog` spécifique à la route.
+
+But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/{{ page.lang }}/5x/api.html#app.use).
+
+```js
+Express prend en charge les méthodes de routage suivantes qui correspondent aux méthodes HTTP : `get`, `post`, `put`, `head`, `delete`, `options`, `trace`, `copy`, `lock`, `mkcol`, `move`, `purge`, `propfind`, `proppatch`, `unlock`, `report`, `mkactivity`, `checkout`, `merge`, `m-search`, `notify`, `subscribe`, `unsubscribe`, `patch`, `search`, and `connect`.
+```

@@ -1,11 +1,10 @@
 ---
 layout: page
 title: FAQ di Express
+description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
 lang: it
-description: Find answers to frequently asked questions about Express.js, including
-  topics on application structure, models, authentication, template engines, error
-  handling, and more.
+redirect_from: /starter/faq.html
 ---
 
 # FAQ
@@ -20,13 +19,13 @@ Le route e altre logiche specifiche dell'applicazione possono essere presenti in
 in qualsiasi struttura di directory desiderata. Visualizzare i seguenti
 esempi:
 
-* [Elenchi route](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Definizione route](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [Controllori stile MVC](https://github.com/expressjs/express/tree/master/examples/mvc)
+- [Elenchi route](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+- [Definizione route](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+- [Controllori stile MVC](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Inoltre, ci sono delle estensioni di terze parti per Express, le quali semplificano alcuni di questi modelli:
 
-* [Routing pieno di risorse](https://github.com/expressjs/express-resource)
+- [Routing pieno di risorse](https://github.com/expressjs/express-resource)
 
 ## In che modo è possibile definire i modelli?
 
@@ -39,9 +38,8 @@ Consultare [LoopBack](http://loopback.io) per un framework basato su Express inc
 ## In che modo è possibile autenticare gli utenti?
 
 L'autenticazione è un'altra area categorica in cui non si
-avventura Express.  È possibile utilizzare qualsiasi schema di autenticazione desiderato.
+avventura Express. È possibile utilizzare qualsiasi schema di autenticazione desiderato.
 Per uno schema nome utente / password semplice, consultare [questo esempio](https://github.com/expressjs/express/tree/master/examples/auth).
-
 
 ## Quale motore di template supporta Express?
 
@@ -49,6 +47,8 @@ Express supporta qualsiasi motore di template conforme alla sigla `(path, locals
 Per normalizzare le interfacce del motore di template e la memorizzazione in cache, consultare il progetto
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 per il supporto. I motori di template potrebbero ancora non supportare Express.
+
+For more information, see [Using template engines with Express](/{{page.lang}}/guide/using-template-engines.html).
 
 ## In che modo è possibile gestire le risposte 404?
 
@@ -65,6 +65,9 @@ app.use((req, res, next) => {
   res.status(404).send('Sorry cant find that!')
 })
 ```
+
+Add routes dynamically at runtime on an instance of `express.Router()`
+so the routes are not superseded by a middleware function.
 
 ## In che modo è possibile impostare un gestore degli errori?
 
@@ -86,3 +89,10 @@ Non è necessario farlo! Non è necessario "eseguire il rendering" dell'HTML con
 Se si dispone di un file specifico, utilizzare la funzione `res.sendFile()`.
 Se si stanno gestendo molti asset da una directory, utilizzare la funzione middleware
 `express.static()`.
+
+## What version of Node.js does Express require?
+
+- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
+- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
+
+### [Previous: More examples ](/{{ page.lang }}/starter/examples.html)

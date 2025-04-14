@@ -1,16 +1,15 @@
 ---
 layout: page
 title: Roteamento básico no Express
+description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
 lang: pt-br
-description: Learn the fundamentals of routing in Express.js applications, including
-  how to define routes, handle HTTP methods, and create route handlers for your web
-  server.
+redirect_from: /starter/basic-routing.html
 ---
 
 # Roteamento Básico
 
-O *Roteamento* refere-se à determinação de como um
+O _Roteamento_ refere-se à determinação de como um
 aplicativo responde a uma solicitação do cliente por um endpoint
 específico, que é uma URI (ou caminho) e um método de solicitação HTTP
 específico (GET, POST, e assim por diante).
@@ -19,6 +18,7 @@ Cada rota pode ter uma ou mais funções de manipulação, que são
 executadas quando a rota é correspondida.
 
 A definição de rotas aceita a seguinte estrutura:
+
 ```js
 app.METHOD(PATH, HANDLER)
 ```
@@ -72,3 +72,5 @@ app.delete('/user', (req, res) => {
 ```
 
 Para obter mais detalhes  sobre roteamento, consulte o [guia de roteamento](/{{ page.lang }}/guide/routing.html).
+
+### [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)

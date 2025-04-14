@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Gerador de aplicativos do Express
+description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
 menu: starter
 lang: pt-br
-description: Learn how to use the Express application generator tool to quickly create
-  a skeleton for your Express.js applications, streamlining setup and configuration.
+redirect_from: /starter/generator.html
 ---
 
 # Gerador de aplicativos do Express
@@ -12,10 +12,17 @@ description: Learn how to use the Express application generator tool to quickly 
 Use a ferramenta geradora de aplicativos, `express`,
 para rapidamente criar uma estrutura básica de aplicativo.
 
-Instale o `express` com o comando a seguir:
+You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
 ```bash
 $ npm install express-generator -g
+```
+
+For earlier Node versions, install the application generator as a global npm package and then launch it:
+
+```bash
+$ npm install -g express-generator
+$ express
 ```
 
 Exiba as opções de comando com a opção `-h`:
@@ -41,7 +48,7 @@ $ express -h
 ```
 
 Por exemplo, o seguinte cria um aplicativo do Express chamado _myapp_
-no diretório atualmente em funcionamento:
+no diretório atualmente em funcionamento: The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
 ```bash
 $ express --view=pug myapp
@@ -84,8 +91,13 @@ No Windows, use este comando:
 > set DEBUG=myapp:* & npm start
 ```
 
-Em seguida carregue `http://localhost:3000/` no seu navegador para acessar o aplicativo.
+Instale o `express` com o comando a seguir:
 
+```bash
+PS> $env:DEBUG='myapp:*'; npm start
+```
+
+Em seguida carregue `http://localhost:3000/` no seu navegador para acessar o aplicativo.
 
 O aplicativo gerado possui a seguinte estrutura de diretórios:
 
@@ -112,6 +124,7 @@ O aplicativo gerado possui a seguinte estrutura de diretórios:
 ```
 
 <div class="doc-box doc-info" markdown="1">
-A estrutura de aplicativo criada pelo gerador é apenas uma das várias maneiras de estruturar aplicativos do Express.
-É possível utilizar esta estrutura ou modificá-la para melhor se adequar às suas necessidades.
+A estrutura de aplicativo criada pelo gerador é apenas uma das várias maneiras de estruturar aplicativos do Express. É possível utilizar esta estrutura ou modificá-la para melhor se adequar às suas necessidades.
 </div>
+
+### [Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)

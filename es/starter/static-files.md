@@ -1,17 +1,26 @@
 ---
-layout: page
+layout: página
 title: Servicio de archivos estáticos en Express
-menu: starter
+description: Describa cómo servir archivos estáticos como imágenes, CSS y JavaScript en aplicaciones Express.js usando el middleware 'static' incorporado.
+menu: iniciador
 lang: es
-description: Understand how to serve static files like images, CSS, and JavaScript
-  in Express.js applications using the built-in 'static' middleware.
+redirect_from: /starter/static-files.html
 ---
 
 # Servicio de archivos estáticos en Express
 
 Para el servicio de archivos estáticos como, por ejemplo, imágenes, archivos CSS y archivos JavaScript, utilice la función de middleware incorporado `express.static` de Express.
 
-Pase el nombre del directorio que contiene los activos estáticos a la función de middleware `express.static` para empezar directamente el servicio de los archivos. Por ejemplo, utilice el siguiente código para el servicio de imágenes, archivos CSS y archivos JavaScript en un directorio denominado `public`:
+La firma de la función es:
+
+```js
+express.static(raíz, [options])
+```
+
+El argumento `root` especifica el directorio raíz desde el cual servir activos estáticos.
+Para más información sobre el argumento `options`, vea [express.static](/{{page.lang}}/4x/api.html#express.static).
+
+Por ejemplo, utilice el siguiente código para el servicio de imágenes, archivos CSS y archivos JavaScript en un directorio denominado `public`:
 
 ```js
 app.use(express.static('public'))
@@ -40,6 +49,11 @@ app.use(express.static('files'))
 
 Express busca los archivos en el orden en el que se definen los directorios estáticos con la función de middleware `express.static`.
 
+{% capture alert_content %}
+Para mejores resultados, [usa un proxy inverso](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) caché para mejorar el rendimiento de los activos estáticos.
+{% endcapture %}
+{% include admonitions/note.html content=alert_content %}
+
 Para crear un prefijo de vía de acceso virtual (donde la vía de acceso no existe realmente en el sistema de archivos) para los archivos a los que da servicio la función `express.static`, [especifique una vía de acceso de montaje](/{{ page.lang }}/4x/api.html#app.use) para el directorio estático, como se muestra a continuación:
 
 ```js
@@ -62,3 +76,7 @@ No obstante, la vía de acceso que proporciona a la función `express.static` es
 const path = require('path')
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
+
+Para más detalles sobre la función `serve-static` y sus opciones, vea  [serve-static](/resources/middleware/serve-static.html).
+
+### [Anterior: Ruta Básica](/{{ page.lang }}/starter/basic-routing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Siguiente: Más ejemplos ](/{{ page.lang }}/starter/examples.html)

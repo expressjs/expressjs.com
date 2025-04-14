@@ -1,15 +1,18 @@
 ---
 layout: page
 title: Installation d'Express
+description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
 menu: starter
 lang: fr
-description: Learn how to install Express.js in your Node.js environment, including
-  setting up your project directory and managing dependencies with npm.
+redirect_from: /starter/installing.html
 ---
 
 # Installation
 
 En supposant que [Node.js](https://nodejs.org/) est déjà installé, créez un répertoire pour héberger votre application et faites-en votre répertoire de travail.
+
+- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
+- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
 
 ```bash
 $ mkdir myapp
@@ -26,7 +29,7 @@ $ npm init
 Cette commande vous invite à fournir un certain nombre d'informations, telles que le nom et la version de votre application.
 Pour le moment, vous pouvez simplement appuyer sur la touche RETURN pour accepter les valeurs par défaut, à l'exception de ce qui suit :
 
-```bash
+```
 entry point: (index.js)
 ```
 
@@ -35,17 +38,17 @@ Entrez `app.js` ou un nom de votre choix pour le fichier principal. Si vous souh
 Installez ensuite Express dans le répertoire `myapp`, puis sauvegardez-le dans la liste des dépendances. Par exemple :
 
 ```bash
-$ npm install express --save
+$ npm install express
 ```
 
 Pour installer Express de façon temporaire et ne pas l'ajouter à la liste des dépendances, omettez l'option `--save` :
 
 ```bash
-$ npm install express
+$ npm install express --save
 ```
 
 <div class="doc-box doc-info" markdown="1">
-Les modules Node.js installés à l'aide de l'option `--save` sont ajoutés à la liste des dépendances `dependencies`, dans le fichier `package.json`.
-Par défaut, depuis la version 5.0, `npm install <package-name>` ajoute automatiquement le module Node.js à la liste des dépendances.
-Par la suite, l'exécution de `npm install` dans le répertoire de l'application installera automatiquement les modules présents dans la liste des dépendances.
+` ajoute automatiquement le module Node.js à la liste des dépendances. Par la suite, l'exécution de `npm install` dans le répertoire de l'application installera automatiquement les modules présents dans la liste des dépendances.
 </div>
+
+### [Next: Hello World ](/{{ page.lang }}/starter/hello-world.html)

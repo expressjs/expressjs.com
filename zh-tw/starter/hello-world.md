@@ -1,21 +1,19 @@
 ---
 layout: page
 title: Express "Hello World" 範例
+description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
 menu: starter
 lang: zh-tw
-description: Get started with Express.js by building a simple 'Hello World' application,
-  demonstrating the basic setup and server creation for beginners.
+redirect_from: /starter/hello-world.html
 ---
 
 # Hello world 範例
 
 <div class="doc-box doc-info" markdown="1">
+Embedded below is essentially the simplest Express app you can create. 
 本質上，這是您所能建立的最簡易 Express 應用程式。它是單一檔案應用程式 &mdash; 與您使用 [Express 產生器](/{{ page.lang }}/starter/generator.html)所產生的結果*不同*，Express 產生器會建立完整應用程式框架，其中含有眾多 JavaScript 檔案、Jade 範本，以及各種用途的子目錄。
+
 </div>
-
-首先請建立一個名為 `myapp` 的目錄，切換至該目錄，並執行 `npm init`。然後按照[安裝手冊](/{{ page.lang }}/starter/installing.html)，將 `express` 安裝成一個相依關係。
-
-在 `myapp` 目錄中，建立名為 `app.js` 的檔案，並新增下列程式碼：
 
 ```js
 const express = require('express')
@@ -31,7 +29,13 @@ app.listen(port, () => {
 })
 ```
 
-應用程式會啟動伺服器，並在埠 3000 接聽連線。應用程式對指向根 URL (`/`) 或*路由*的要求，以 "Hello World!" 回應。對於其他每一個路徑，它的回應是 **404 找不到**。
+This app starts a server and listens on port 3000 for connections. 應用程式會啟動伺服器，並在埠 3000 接聽連線。應用程式對指向根 URL (`/`) 或_路由_的要求，以 "Hello World!" 回應。對於其他每一個路徑，它的回應是 **404 找不到**。
+
+### Running Locally
+
+首先請建立一個名為 `myapp` 的目錄，切換至該目錄，並執行 `npm init`。然後按照[安裝手冊](/{{ page.lang }}/starter/installing.html)，將 `express` 安裝成一個相依關係。 Then, install `express` as a dependency, as per the [installation guide](/{{ page.lang }}/starter/installing.html).
+
+在 `myapp` 目錄中，建立名為 `app.js` 的檔案，並新增下列程式碼：
 
 <div class="doc-box doc-notice" markdown="1">
 `req`（要求）和 `res`（回應）與 Node 提供的物件完全相同，因此您可以呼叫 `req.pipe()`、`req.on('data', callback)`，以及任何您要執行的項目，而不需要 Express 涉及。
@@ -45,3 +49,4 @@ $ node app.js
 
 然後在瀏覽器中載入 [http://localhost:3000/](http://localhost:3000/)，以查看輸出。
 
+### [Previous: Installing ](/{{ page.lang }}/starter/installing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Express Generator ](/{{ page.lang }}/starter/generator.html)

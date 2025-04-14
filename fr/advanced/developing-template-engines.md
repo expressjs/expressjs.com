@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Développement de moteurs de modèles pour Express
+description: Learn how to develop custom template engines for Express.js using app.engine(), with examples on creating and integrating your own template rendering logic.
 menu: advanced
 lang: fr
-description: Learn how to develop custom template engines for Express.js using app.engine(),
-  with examples on creating and integrating your own template rendering logic.
+redirect_from: /advanced/developing-template-engines.html
 ---
 
 # Développement de moteurs de modèles pour Express
@@ -34,6 +34,7 @@ Votre application est désormais en mesure d'afficher le rendu des fichiers `.nt
 #title#
 #message#
 ```
+
 ENsuite, créez la route suivante dans votre application.
 
 ```js
@@ -41,4 +42,5 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Hey', message: 'Hello there!' })
 })
 ```
+
 Lorsque vous effectuerez une demande à la page d'accueil, `index.ntl` sera rendu au format HTML.
