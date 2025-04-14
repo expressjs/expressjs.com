@@ -1,17 +1,26 @@
 ---
 layout: page
 title: 在 Express 中提供靜態檔案
+description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
 menu: starter
 lang: zh-tw
-description: Understand how to serve static files like images, CSS, and JavaScript
-  in Express.js applications using the built-in 'static' middleware.
+redirect_from: /starter/static-files.html
 ---
 
 # 在 Express 中提供靜態檔案
 
-如果要提供影像、CSS 檔案和 JavaScript 檔案等之類的靜態檔案，請使用 Express 中的 `express.static` 內建中介軟體函數。
+To serve static files such as images, CSS files, and JavaScript files, use the `express.static` built-in middleware function in Express.
 
-將含有靜態資產的目錄名稱傳遞給 `express.static` 中介軟體函數，就能直接開始提供檔案。舉例來說，使用下列程式碼在名稱是 `public` 的目錄中，提供影像、CSS 檔案和 JavaScript 檔案：
+The function signature is:
+
+```js
+express.static(root, [options])
+```
+
+The `root` argument specifies the root directory from which to serve static assets.
+For more information on the `options` argument, see [express.static](/{{page.lang}}/4x/api.html#express.static).
+
+For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
 
 ```js
 app.use(express.static('public'))
@@ -31,14 +40,19 @@ http://localhost:3000/hello.html
 Express 會查閱靜態目錄的相對檔案，因此靜態目錄的名稱不是 URL 的一部分。
 </div>
 
-如果要使用多個靜態資產目錄，請呼叫 `express.static` 中介軟體函數多次：
+To use multiple static assets directories, call the `express.static` middleware function multiple times:
 
 ```js
 app.use(express.static('public'))
 app.use(express.static('files'))
 ```
 
-Express 在查閱檔案時，會依照您使用 `express.static` 中介軟體函數來設定靜態目錄的順序。
+Express looks up the files in the order in which you set the static directories with the `express.static` middleware function.
+
+{% capture alert_content %}
+For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+{% endcapture %}
+{% include admonitions/note.html content=alert_content %}
 
 如果要為 `express.static` 函數所提供的檔案，建立虛擬路徑字首（其中的路徑事實上不存在於檔案系統中），請為靜態目錄[指定裝載路徑](/{{ page.lang }}/4x/api.html#app.use)，如下所示：
 
@@ -56,9 +70,13 @@ http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
 ```
 
-不過，您提供給 `express.static` 函數的路徑，是相對於您從中啟動 `node` 程序的目錄。如果您是從另一個目錄執行 Express 應用程式，保險作法是使用您想提供之目錄的絕對路徑：
+不過，您提供給 `express.static` 函數的路徑，是相對於您從中啟動 `node` 程序的目錄。如果您是從另一個目錄執行 Express 應用程式，保險作法是使用您想提供之目錄的絕對路徑： If you run the express app from another directory, it's safer to use the absolute path of the directory that you want to serve:
 
 ```js
 const path = require('path')
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
+
+For more details about the `serve-static` function and its options, see  [serve-static](/resources/middleware/serve-static.html).
+
+### [Previous: Basic Routing ](/{{ page.lang }}/starter/basic-routing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: More examples ](/{{ page.lang }}/starter/examples.html)

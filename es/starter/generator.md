@@ -1,20 +1,27 @@
 ---
-layout: page
+layout: página
 title: Generador de aplicaciones Express
-menu: starter
+description: Aprenda cómo utilizar la herramienta del generador de aplicaciones Express para crear rápidamente un esqueleto para sus aplicaciones Express.js, configuración de streamlining y configuración.
+menu: iniciador
 lang: es
-description: Learn how to use the Express application generator tool to quickly create
-  a skeleton for your Express.js applications, streamlining setup and configuration.
+redirect_from: /es/starter/generator.html
 ---
 
 # Generador de aplicaciones Express
 
 Utilice la herramienta de generador de aplicaciones, `express`, para crear rápidamente un esqueleto de aplicación.
 
-Instale `express` con el siguiente mandato:
+Puede ejecutar el generador de aplicaciones con el comando `npx` (disponible en Node.js 8.2.0).
 
 ```bash
 $ npm install express-generator -g
+```
+
+Para versiones anteriores de Node, instale el generador de aplicaciones como un paquete global npm y luego ejecute:
+
+```bash
+$ npm install -g express-generator
+$ expreso
 ```
 
 Muestre las opciones de mandato con la opción `-h`:
@@ -46,19 +53,19 @@ $ express --view=pug myapp
 
    create : myapp
    create : myapp/package.json
-   create : myapp/app.js
+   create : myapp/app. s
    create : myapp/public
    create : myapp/public/javascripts
    create : myapp/public/images
    create : myapp/routes
-   create : myapp/routes/index.js
-   create : myapp/routes/users.js
+   create : myapp/routes/index. s
+   crear : miapp/rutas/usuarios. s
    create : myapp/public/stylesheets
-   create : myapp/public/stylesheets/style.css
+   create : myapp/public/stylesheets/style. ★
    create : myapp/views
-   create : myapp/views/index.pug
+   create : myapp/views/index. ug
    create : myapp/views/layout.pug
-   create : myapp/views/error.pug
+   create : myapp/views/error. ug
    create : myapp/bin
    create : myapp/bin/www
 ```
@@ -73,13 +80,19 @@ $ npm install
 En MacOS o Linux, ejecute la aplicación con este mandato:
 
 ```bash
-$ DEBUG=myapp:* npm start
+$ DEBUG=miapp:* npm inicio
 ```
 
 En Windows, utilice este mandato:
 
 ```bash
-> set DEBUG=myapp:* & npm start
+> establecer DEBUG=miapp:* & npm start
+```
+
+En Windows PowerShell, utilice este comando:
+
+```bash
+PS> $env:DEBUG='miapp:*'; npm start
 ```
 
 A continuación, cargue `http://localhost:3000/` en el navegador para acceder a la aplicación.
@@ -111,3 +124,5 @@ La aplicación generada tiene la siguiente estructura de directorios:
 <div class="doc-box doc-info" markdown="1">
 La estructura de la aplicación creada por el generador es sólo una de las muchas formas de estructurar las aplicaciones Express. Puede utilizar esta estructura o modificarla según sus necesidades.
 </div>
+
+### [Anterior: Hola Mundo](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Siguiente: Enrutamiento básico](/{{ page.lang }}/starter/basic-routing.html)

@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: página
 title: Comunidad de Express
-menu: resources
+description: Conéctate con la comunidad de Express.js, aprende sobre el comité técnico, encuentra recursos, explora los módulos aportados por la comunidad y participa en las discusiones.
+menu: recursos
 lang: es
-description: Connect with the Express.js community, learn about the technical committee,
-  find resources, explore community-contributed modules, and get involved in discussions.
+redirect_from: /resources/community.html
 ---
 
 # Comunidad
@@ -21,20 +21,20 @@ Los miembros del comité técnico de Express son:
 
 - [@blakeembrey](https://github.com/blakeembrey) - Blake Embrey
 - [@crandmck](https://github.com/crandmck) - Rand McKinney
-- [@LinusU](https://github.com/LinusU) - Linus Unnebäck
-- [@ulisesgascon](https://github.com/ulisesGascon) - Ulises Gascón
+- [@LinusU](https://github.com/LinusU) - Linus Unnebäck
+- [@ulisesgascon](https://github.com/ulisesGascon) - Ulises Gascón
 - [@sheplu](https://github.com/sheplu) - Jean Burellier
 - [@wesleytodd](https://github.com/wesleytodd) - Wes Todd
-- [@jonchurch](https://github.com/jonchurch) - Jon Church
+- [@jonchurch](https://github.com/jonchurch) - Iglesia Jon
 - [@ctcpip](https://github.com/ctcpip/) - Chris de Almeida
 
 **Inactivos:**
 
 - [@dougwilson](https://github.com/dougwilson) - Douglas Wilson
-- [@hacksparrow](https://github.com/hacksparrow) - Hage Yaapa
+- [@hacksparrow](https://github.com/hacksparrow) - Mala Yaapa
 - [@jonathanong](https://github.com/jonathanong) - jongleberry
 - [@niftylettuce](https://github.com/niftylettuce) - niftylettuce
-- [@troygoode](https://github.com/troygoode) - Troy Goode
+- [@troybien](https://github.com/troygoode) - Bienvenidos de Troy
 
 ## Express está hecho de muchos módulos
 
@@ -59,7 +59,6 @@ Mire docenas de [ejemplos](https://github.com/expressjs/express/tree/master/exam
 
 La sección de [Discusiones de GitHub](https://github.com/expressjs/discussions) es un excelente espacio para participar en conversaciones sobre el desarrollo y mantenimiento de Express, así como para compartir ideas y debatir temas relacionados con su uso.
 
-
 # Marca de Express.js
 
 ## Logo de Express.js
@@ -68,8 +67,7 @@ Express es un proyecto de la Fundación OpenJS. Por favor, revise la [política 
 
 <div class="logo-table">
     <div>
-        <h3>Logotipo</h3>
-        <a href="/images/brand/logotype-light.svg" class="hidden-dark">
+        <h3>Logotipo</h3><a href="/images/brand/logotype-light.svg" class="hidden-dark">
             <img src="/images/brand/logotype-light.svg" alt="Express.js logo" width="250" height="56"/>
         </a>
         <a href="/images/brand/logotype-dark.svg" class="hidden-light">
@@ -77,13 +75,12 @@ Express es un proyecto de la Fundación OpenJS. Por favor, revise la [política 
         </a>
     </div>
     <div>
-        <h3>Logo de Marca</h3>
-        <a href="/images/brand/logo-light.svg" class="hidden-dark">
+        <h3>Logo de Marca</h3><a href="/images/brand/logo-light.svg" class="hidden-dark">
             <img src="/images/brand/logo-light.svg" alt="Express.js mark" width="96.5" height="56"/>
         </a>
         <a href="/images/brand/logo-dark.svg" class="hidden-light">
-            <img src="/images/brand/logo-dark.svg" alt="Express.js mark" width="96.5" height="56"/>
+            <img src="/images/brand/logo-dark.svg"  alt="Express.js mark" width="96.5" height="56"/>
         </a>
     </div>
 <div>
-
+</div>

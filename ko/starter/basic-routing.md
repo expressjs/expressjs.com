@@ -1,20 +1,20 @@
 ---
 layout: page
 title: Express 기본 라우팅
+description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
 lang: ko
-description: Learn the fundamentals of routing in Express.js applications, including
-  how to define routes, handle HTTP methods, and create route handlers for your web
-  server.
+redirect_from: /starter/basic-routing.html
 ---
 
 # 기본 라우팅
 
-*라우팅*은 URI(또는 경로) 및 특정한 HTTP 요청 메소드(GET, POST 등)인 특정 엔드포인트에 대한 클라이언트 요청에 애플리케이션이 응답하는 방법을 결정하는 것을 말합니다.
+_라우팅_은 URI(또는 경로) 및 특정한 HTTP 요청 메소드(GET, POST 등)인 특정 엔드포인트에 대한 클라이언트 요청에 애플리케이션이 응답하는 방법을 결정하는 것을 말합니다.
 
 각 라우트는 하나 이상의 핸들러 함수를 가질 수 있으며, 이러한 함수는 라우트가 일치할 때 실행됩니다.
 
 라우트 정의에는 다음과 같은 구조가 필요합니다.
+
 ```js
 app.METHOD(PATH, HANDLER)
 ```
@@ -65,3 +65,5 @@ app.delete('/user', (req, res) => {
 ```
 
 라우팅에 대한 자세한 내용을 확인하려면 [라우팅 안내서](/{{ page.lang }}/guide/routing.html)를 참조하십시오.
+
+### [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)

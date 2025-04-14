@@ -4,7 +4,7 @@ title: Exemplos do Express
 description: Explore uma coleção de exemplos de aplicações em Express.js cobrindo diversos casos de uso, integrações e configurações avançadas para te ajudar a aprender e construir seus projetos.
 menu: starter
 lang: pt-br
-redirect_from: "/starter/examples.html"
+redirect_from: /starter/examples.html
 ---
 
 {% capture examples %}{% include readmes/express-master/examples.md %}{% endcapture %}

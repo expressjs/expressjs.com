@@ -1,15 +1,18 @@
 ---
 layout: page
 title: Express 설치
+description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
 menu: starter
 lang: ko
-description: Learn how to install Express.js in your Node.js environment, including
-  setting up your project directory and managing dependencies with npm.
+redirect_from: /starter/installing.html
 ---
 
 # 설치
 
 [Node.js](https://nodejs.org/)가 이미 설치되었다고 가정한 상태에서, 애플리케이션을 보관할 디렉토리를 작성하고 그 디렉토리를 작업 디렉토리로 설정하십시오.
+
+- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
+- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
 
 ```bash
 $ mkdir myapp
@@ -26,7 +29,7 @@ $ npm init
 이 명령을 실행하면 애플리케이션의 이름 및 버전과 같은 몇 가지 정보에 대해 프롬프트합니다.
 지금은 다음의 항목을 제외한 대부분의 항목에서 ENTER 키를 눌러 기본값을 수락할 수 있습니다.
 
-```bash
+```
 entry point: (index.js)
 ```
 
@@ -35,16 +38,17 @@ entry point: (index.js)
 이제 `myapp` 디렉토리에 Express를 설치한 후 종속 항목 목록에 저장하십시오. 예를 들면 다음과 같습니다.
 
 ```bash
-$ npm install express --save
+$ npm install express
 ```
 
 Express를 임시로 설치하고 종속 항목 목록에 추가하지 않으려면, 다음과 같이 `--save` 옵션을 생략하십시오.
 
 ```bash
-$ npm install express
+$ npm install express --save
 ```
 
 <div class="doc-box doc-info" markdown="1">
-`--save` 옵션을 통해 설치된 Node 모듈은 `package.json` 파일 내의 `dependencies` 목록에 추가됩니다.
-이후 `app` 디렉토리에서 `npm install`을 실행하면 종속 항목 목록 내의 모듈이 자동으로 설치됩니다.
+`--save` 옵션을 통해 설치된 Node 모듈은 `package.json` 파일 내의 `dependencies` 목록에 추가됩니다. 이후 `app` 디렉토리에서 `npm install`을 실행하면 종속 항목 목록 내의 모듈이 자동으로 설치됩니다.
 </div>
+
+### [Next: Hello World ](/{{ page.lang }}/starter/hello-world.html)

@@ -1,34 +1,34 @@
 ---
 layout: page
 title: Utilizzo del middleware Express
+description: Learn how to use middleware in Express.js applications, including application-level and router-level middleware, error handling, and integrating third-party middleware.
 menu: guide
 lang: it
-description: Learn how to use middleware in Express.js applications, including application-level
-  and router-level middleware, error handling, and integrating third-party middleware.
+redirect_from: /guide/using-middleware.html
 ---
 
 # Utilizzo del middleware
 
 Express è un framework Web di routing e middleware, con funzionalità sua propria minima: un'applicazione Express è essenzialmente a serie di chiamate a funzioni middleware.
 
-Le funzioni *middleware* sono funzioni con accesso all'[oggetto richiesta](/{{ page.lang }}/4x/api.html#req)  (`req`), all'[oggetto risposta](/{{ page.lang }}/4x/api.html#res) (`res`) e alla successiva funzione middleware nel ciclo richiesta-risposta dell'applicazione. La successiva funzione middleware viene comunemente denotata da una variabile denominata `next`.
+Le funzioni _middleware_ sono funzioni con accesso all'[oggetto richiesta](/{{ page.lang }}/4x/api.html#req)  (`req`), all'[oggetto risposta](/{{ page.lang }}/4x/api.html#res) (`res`) e alla successiva funzione middleware nel ciclo richiesta-risposta dell'applicazione. La successiva funzione middleware viene comunemente denotata da una variabile denominata `next`.
 
 Le funzioni middleware possono eseguire le attività elencate di seguito:
 
-* Eseguire qualsiasi codice.
-* Apportare modifiche agli oggetti richiesta e risposta.
-* Terminare il ciclo richiesta-risposta.
-* Chiamare la successiva funzione middleware nello stack.
+- Eseguire qualsiasi codice.
+- Apportare modifiche agli oggetti richiesta e risposta.
+- Terminare il ciclo richiesta-risposta.
+- Chiamare la successiva funzione middleware nello stack.
 
 Se la funzione middleware corrente non termina il ciclo richiesta-risposta, deve richiamare `next()` per passare il controllo alla successiva funzione middleware. Altrimenti, la richiesta verrà lasciata in sospeso.
 
 Un'applicazione Express può utilizzare i seguenti tipi di middleware:
 
- - [Middleware a livello dell'applicazione](#middleware.application)
- - [Middleware a livello del router](#middleware.router)
- - [Middleware di gestione degli errori](#middleware.error-handling)
- - [Middleware integrato](#middleware.built-in)
- - [Middleware di terzi](#middleware.third-party)
+- [Middleware a livello dell'applicazione](#middleware.application)
+- [Middleware a livello del router](#middleware.router)
+- [Middleware di gestione degli errori](#middleware.error-handling)
+- [Middleware integrato](#middleware.built-in)
+- [Middleware di terzi](#middleware.third-party)
 
 È possibile caricare il middleware a livello dell'applicazione e del router con un percorso di montaggio facoltativo.
 È possibile inoltre caricare una serie di funzioni middleware contemporaneamente e, in questo modo, si crea un sotto-stack del sistema middleware in un punto di montaggio.
@@ -97,8 +97,9 @@ app.get('/user/:id', (req, res, next) => {
 })
 ```
 
-Per ignorare le restanti funzioni middleware da uno stack di middleware del router, richiamare `next('route')` per passare il controllo alla route successiva.
-**NOTA**: `next('route')` funzionerà solo in funzioni middleware che sono state caricate utilizzando le funzioni `app.METHOD()` o `router.METHOD()`.
+`redirect`
+
+**NOTA**: `next('route')` funzionerà solo in funzioni middleware che sono state caricate utilizzando le funzioni `app.METHOD()` o `router.METHOD()`. %}
 
 Questo esempio presenta un sotto-stack middleware che gestisce richieste GET nel percorso `/user/:id`.
 
@@ -119,6 +120,27 @@ app.get('/user/:id', (req, res, next) => {
 })
 ```
 
+Middleware can also be declared in an array for reusability.
+
+Ecco un esempio di utilizzo della funzione middleware `express.static` con un oggetto opzioni elaborato:
+
+```js
+function logOriginalUrl (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}
+
+function logMethod (req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+}
+
+const logStuff = [logOriginalUrl, logMethod]
+app.get('/user/:id', logStuff, (req, res, next) => {
+  res.send('User Info')
+})
+```
+
 <h2 id='middleware.router'>Middleware a livello del router</h2>
 
 Il middleware a livello del router funziona nello stesso modo di quello a livello dell'applicazione, fatta eccezione per il fatto di essere associato ad un'istanza di `express.Router()`.
@@ -126,6 +148,7 @@ Il middleware a livello del router funziona nello stesso modo di quello a livell
 ```js
 const router = express.Router()
 ```
+
 Caricare il middleware a livello del router utilizzando le funzioni `router.use()` e `router.METHOD()`.
 
 Il seguente codice di esempio replica il sistema middleware mostrato sopra per il middleware a livello dell'applicazione, utilizzando il middleware a livello del router:
@@ -169,10 +192,31 @@ router.get('/user/:id', (req, res, next) => {
 // mount the router on the app
 app.use('/', router)
 ```
+
+Per ulteriori dettagli sulla funzione `serve-static` e sulle relative opzioni, consultare: documentazione [serve-static](https://github.com/expressjs/serve-static).
+
+L'argomento `root` specifica la directory root da cui fornire gli asset statici.
+
+```js
+const options = {
+  dotfiles: 'ignore',
+  etag: false,
+  extensions: ['htm', 'html'],
+  index: false,
+  maxAge: '1d',
+  redirect: false,
+  setHeaders: function (res, path, stat) {
+    res.set('x-timestamp', Date.now())
+  }
+}
+
+app.use(express.static('public', options))
+```
+
 <h2 id='middleware.error-handling'>Middleware di gestione degli errori</h2>
 
 <div class="doc-box doc-notice" markdown="1">
-Il middleware di gestione degli errori impiega sempre *quattro* argomenti.  È necessario fornire quattro argomenti per identificarlo come funzione middleware di gestione degli errori. Anche se non è necessario utilizzare l'oggetto `next`, lo si deve specificare per mantenere la firma. Altrimenti, l'oggetto `next` verrà interpretato come middleware regolare e non sarà in grado di gestire gli errori.
+Il middleware di gestione degli errori impiega sempre *quattro* argomenti. È necessario fornire quattro argomenti per identificarlo come funzione middleware di gestione degli errori. Anche se non è necessario utilizzare l'oggetto `next`, lo si deve specificare per mantenere la firma. Altrimenti, l'oggetto `next` verrà interpretato come middleware regolare e non sarà in grado di gestire gli errori.
 </div>
 
 Definire le funzioni middleware di gestione degli errori nello stesso modo delle altre funzioni middleware, ma con quattro argomenti invece di tre, nello specifico con la firma `(err, req, res, next)`):
@@ -191,52 +235,11 @@ Per dettagli sul middleware di gestione degli errori, consultare la sezione: [Ge
 Dalla versione 4.x, Express non dipende più da [Connect](https://github.com/senchalabs/connect). Fatta eccezione per `express.static`, tutte le funzioni
 middleware che prima erano state incluse in Express, ora sono in moduli separati. Vedere [l'elenco delle funzioni middleware](https://github.com/senchalabs/connect#middleware).
 
-<h4 id='express.static'>express.static(root, [options])</h4>
+L'unica funzione middleware integrata in Express è `express.static`.
 
-L'unica funzione middleware integrata in Express è `express.static`. Questa funzione è basata su [serve-static](https://github.com/expressjs/serve-static) ed è responsabile della fornitura degli asset statici di un'applicazione Express.
-
-L'argomento `root` specifica la directory root da cui fornire gli asset statici.
-
-L'oggetto facoltativo `options` può avere le seguenti proprietà:
-
-| Proprietà      | Descrizione                                                           |   Tipo      | Valore predefinito         |
-|---------------|-----------------------------------------------------------------------|-------------|-----------------|
-| `dotfiles`    | Opzione per la fornitura di dotfiles. Valori possibili sono "allow", "deny" e "ignore" | Stringa | "ignore" |
-| `etag`        | Abilitare o disabilitare la generazione di etag  | Booleano | `true` |
-| `extensions`  | Imposta i fallback dell'estensione file. | Array | `[]` |
-| `index`       | Invia un file di indice di directory. Impostare su `false` per disabilitare l'indicizzazione della directory. | Misto | "index.html" |
- `lastModified` | Impostare l'intestazione `Last-Modified`sulla data dell'ultima modifica del file nel sistema operativo. I valori possibili sono `true` o `false`. | Booleano | `true` |
-| `maxAge`      | Impostare la proprietà dell'intestazione Cache-Control, in millisecondi o una stringa in [formato ms](https://www.npmjs.org/package/ms) | Numero | 0 |
-| `redirect`    | Reindirizzare al carattere "/" finale, quando il nome percorso è una directory. | Booleano | `true` |
-| `setHeaders`  | Funzione per l'impostazione delle intestazioni HTTP perché siano adatte al file. | Funzione |  |
-
-Ecco un esempio di utilizzo della funzione middleware `express.static` con un oggetto opzioni elaborato:
-
-```js
-const options = {
-  dotfiles: 'ignore',
-  etag: false,
-  extensions: ['htm', 'html'],
-  index: false,
-  maxAge: '1d',
-  redirect: false,
-  setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now())
-  }
-}
-
-app.use(express.static('public', options))
-```
-
-È possibile avere più di una directory statica per app:
-
-```js
-app.use(express.static('public'))
-app.use(express.static('uploads'))
-app.use(express.static('files'))
-```
-
-Per ulteriori dettagli sulla funzione `serve-static` e sulle relative opzioni, consultare: documentazione [serve-static](https://github.com/expressjs/serve-static).
+- [express.static](/en/4x/api.html#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/4x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/4x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
 
 <h2 id='middleware.third-party'>Middleware di terzi</h2>
 

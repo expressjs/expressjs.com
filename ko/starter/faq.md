@@ -1,11 +1,10 @@
 ---
 layout: page
 title: Express 자주 묻는 질문(FAQ)
+description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
 lang: ko
-description: Find answers to frequently asked questions about Express.js, including
-  topics on application structure, models, authentication, template engines, error
-  handling, and more.
+redirect_from: /starter/faq.html
 ---
 
 # 자주 묻는 질문(FAQ)
@@ -20,13 +19,13 @@ description: Find answers to frequently asked questions about Express.js, includ
 선호하는 모든 디렉토리 구조에 존재할 수 있습니다. 도움을 받으려면
 다음의 예를 확인하십시오.
 
-* [Route listings](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Route map](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
+- [Route listings](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+- [Route map](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+- [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 또한, 이러한 패턴을 간략화할 수 있는 다음과 같은 Express용 써드파티 확장기능이 존재합니다.
 
-* [Resourceful routing](https://github.com/expressjs/express-resource)
+- [Resourceful routing](https://github.com/expressjs/express-resource)
 
 ## 모델을 어떻게 정의해야 합니까?
 
@@ -39,9 +38,8 @@ Express에는 데이터베이스의 개념이 없습니다. 이러한 개념은
 ## 어떻게 사용자를 인증할 수 있습니까?
 
 인증은 또 다른 주관적인 영역이며, Express는
-이에 관여하지 않습니다.  개발자는 자신이 원하는 어떠한 인증 체계라도 사용할 수 있습니다.
+이에 관여하지 않습니다. 개발자는 자신이 원하는 어떠한 인증 체계라도 사용할 수 있습니다.
 사용자 이름 / 비밀번호 체계에 대해서는 [이 예제](https://github.com/expressjs/express/tree/master/examples/auth)를 참조하십시오.
-
 
 ## Express는 어느 템플리트 엔진을 지원합니까?
 
@@ -49,6 +47,8 @@ Express는 `(path, locals, callback)` 시그니처를 준수하는 모든 템플
 템플리트 엔진 인터페이스 및 캐싱을 정규화하려면
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 프로젝트를 참조하여 지원을 받으십시오. 목록에 포함되지 않은 템플리트 엔진이 Express 시그니처를 지원할 수도 있습니다.
+
+For more information, see [Using template engines with Express](/{{page.lang}}/guide/using-template-engines.html).
 
 ## 404 응답을 어떻게 처리해야 합니까?
 
@@ -65,6 +65,9 @@ app.use((req, res, next) => {
   res.status(404).send('Sorry cant find that!')
 })
 ```
+
+Add routes dynamically at runtime on an instance of `express.Router()`
+so the routes are not superseded by a middleware function.
 
 ## 오류 핸들러를 어떻게 설정해야 합니까?
 
@@ -86,3 +89,10 @@ app.use((err, req, res, next) => {
 특정한 파일을 렌더링해야 하는 경우에는 `res.sendFile()` 함수를 사용하십시오.
 하나의 디렉토리에서 여러 자산을 제공하는 경우에는 `express.static()`
 미들웨어 함수를 사용하십시오.
+
+## What version of Node.js does Express require?
+
+- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
+- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
+
+### [Previous: More examples ](/{{ page.lang }}/starter/examples.html)

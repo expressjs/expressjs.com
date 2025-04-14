@@ -1,15 +1,13 @@
 ---
 layout: page
 title: Glossário do Express
+description: A comprehensive glossary of terms related to Express.js, Node.js, middleware, routing, and other key concepts to help you understand and use Express effectively.
 menu: resources
 lang: pt-br
-description: A comprehensive glossary of terms related to Express.js, Node.js, middleware,
-  routing, and other key concepts to help you understand and use Express effectively.
+redirect_from: /resources/glossary.html
 ---
 
 # Glossário
-
-<div class="doc-box doc-warn">Este é atualmente um rascunho de trabalho</div>
 
 ### aplicativo
 
@@ -20,11 +18,11 @@ também se referir a um [objeto app](/{{ page.lang }}/api.html#express).
 
 ### API
 
-Interface de programação de aplicativos.  Especifique o significado da abreviação no seu primeiro uso.
+Interface de programação de aplicativos. Especifique o significado da abreviação no seu primeiro uso.
 
 ### Express
 
-Uma estrutura web rápida, flexível e minimalista para aplicativos Node.js.  Em
+Uma estrutura web rápida, flexível e minimalista para aplicativos Node.js. Em
 geral, "Express" é preferido a "Express.js," apesar de que o último ser aceitável.
 
 ### libuv
@@ -36,34 +34,44 @@ assíncrona, primeiramente desenvolvida para uso pelo Node.js.
 
 Uma função que é chamada pela camada de roteamento do Express
 antes do manipulador final da solicitação, e assim ficando no meio,
-entre uma solicitação bruta a rota final desejada.  Alguns poucos
+entre uma solicitação bruta a rota final desejada. Alguns poucos
 pontos de refinamento da terminologia envolvendo middleware:
 
-  * `var foo = require('middleware')` é
-chamado *requerendo* ou *usando* um módulo
-do Node.js. Então a instrução `var mw = foo()`
-tipicamente retorna o middleware.
-  * `app.use(mw)` é chamado *incluindo
-o middleware na pilha global de processamento*.
-  * `app.get('/foo', mw, function (req, res) { ... })`
-é chamado *incluindo o  middleware para a pilha de
-processamento do "GET /foo" *.
+- `var foo = require('middleware')` é
+  chamado _requerendo_ ou _usando_ um módulo
+  do Node.js. Então a instrução `var mw = foo()`
+  tipicamente retorna o middleware.
+- `app.use(mw)` é chamado _incluindo
+  o middleware na pilha global de processamento_.
+- `app.get('/foo', mw, function (req, res) { ... })`
+  é chamado \*incluindo o  middleware para a pilha de
+  processamento do "GET /foo" \*.
 
 ### Node.js
 
 Uma plataforma de software que é usada para construir aplicativos de rede escaláveis. O Node.js usa o JavaScript como
 linguagem de script, e alcança rendimentos altos através de E/S não
-bloqueante e um loop de eventos de thread única.  Consulte [nodejs.org](http://nodejs.org/). **Nota
+bloqueante e um loop de eventos de thread única. Consulte [nodejs.org](http://nodejs.org/). **Nota
 de uso**: Inicialmente, "Node.js," posteriormente "Node".
 
 ### open-source, open source
 
 Quando usado como adjetivo, colocar o hífen; por exemplo "Este
 é um software open-source". Consulte
-[Software
-Open-source na Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Nota: Apesar de ser comum não
+Software
+Open-source na Wikipedia.
+
+Nota: Apesar de ser comum não
 colocar o hífen neste termo, estamos usando as regras padrões do
-Inglês para colocar o hífen em adjetivos compostos.
+Inglês para colocar o hífen em adjetivos compostos. %}
+
+### solicitação
+
+Uma solicitação HTTP. Um cliente envia uma mensagem HTTP para
+um servidor, que retorna uma resposta.  A solicitação deve usar um dos
+vários
+métodos
+de solicitação como GET, POST, e assim por diante.
 
 ### resposta
 
@@ -74,18 +82,10 @@ solicitação no corpo da mensagem.
 
 ### rota
 
-Parte de uma URL que identifica um recurso.  Por exemplo, em
+Parte de uma URL que identifica um recurso. Por exemplo, em
 `http://foo.com/products/id`, "/products/id" é a
 rota.
 
 ### roteador
 
 Consulte [roteador](/{{ page.lang }}/4x/api.html#router) na referência da API.
-
-### solicitação
-
-Uma solicitação HTTP.  Um cliente envia uma mensagem HTTP para
-um servidor, que retorna uma resposta.  A solicitação deve usar um dos
-vários
-[métodos
-de solicitação](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) como GET, POST, e assim por diante.

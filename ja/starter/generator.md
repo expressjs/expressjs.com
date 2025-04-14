@@ -1,20 +1,27 @@
 ---
 layout: page
 title: Express のアプリケーション生成プログラム
+description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
 menu: starter
 lang: ja
-description: Learn how to use the Express application generator tool to quickly create
-  a skeleton for your Express.js applications, streamlining setup and configuration.
+redirect_from: /starter/generator.html
 ---
 
 # Express のアプリケーション生成プログラム
 
 アプリケーション生成プログラム・ツールの `express` を使用すると、アプリケーション・スケルトンを素早く作成できます。
 
-次のコマンドを使用して、`express` をインストールします。
+You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
 ```bash
 $ npm install express-generator -g
+```
+
+For earlier Node versions, install the application generator as a global npm package and then launch it:
+
+```bash
+$ npm install -g express-generator
+$ express
 ```
 
 `-h` オプションを指定してコマンド・オプションを表示します。
@@ -39,7 +46,7 @@ $ express -h
     -f, --force         force on non-empty directory
 ```
 
-例えば、以下のコマンドでは、現行作業ディレクトリーに _myapp_ という Express アプリケーションを作成します。
+例えば、以下のコマンドでは、現行作業ディレクトリーに _myapp_ という Express アプリケーションを作成します。 The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
 ```bash
 $ express --view=pug myapp
@@ -70,16 +77,22 @@ $ cd myapp
 $ npm install
 ```
 
-MacOS または Linux では、次のコマンドによってアプリケーションを実行します。
+Windows では、次のコマンドを使用します。
 
 ```bash
 $ DEBUG=myapp:* npm start
 ```
 
-Windows では、次のコマンドを使用します。
+On Windows Command Prompt, use this command:
 
 ```bash
 > set DEBUG=myapp:* & npm start
+```
+
+On Windows PowerShell, use this command:
+
+```bash
+PS> $env:DEBUG='myapp:*'; npm start
 ```
 
 次に、ブラウザーに `http://localhost:3000/` をロードして、アプリケーションにアクセスします。
@@ -109,5 +122,7 @@ Windows では、次のコマンドを使用します。
 ```
 
 <div class="doc-box doc-info" markdown="1">
-ここで生成プログラムによって作成されたアプリケーション構造は、Express アプリケーションを作成するための数多くの方法の 1 つにすぎません。この構造を自由に使用したり、ニーズに合わせて変更したりしてください。
+The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
 </div>
+
+### [Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)

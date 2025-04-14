@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: página
 title: Depuración de Express
-menu: guide
+description: Aprenda cómo habilitar y utilizar los registros de depuración en aplicaciones Express.js configurando la variable de entorno DEBUG para solucionar problemas mejorados.
+menu: guía
 lang: es
-description: Learn how to enable and use debugging logs in Express.js applications
-  by setting the DEBUG environment variable for enhanced troubleshooting.
+redirect_from: /es/guide/debugging.html
 ---
 
 # Depuración de Express
@@ -12,13 +12,13 @@ description: Learn how to enable and use debugging logs in Express.js applicatio
 Para ver todos los registros internos utilizados en Express, establezca la variable de entorno `DEBUG` en `express:*` cuando inicie la aplicación.
 
 ```bash
-$ DEBUG=express:* node index.js
+$ DEBUG=express:* nodo index.js
 ```
 
 En Windows, utilice el mandato correspondiente.
 
 ```bash
-> set DEBUG=express:* & node index.js
+> $env:DEBUG = "express:*"; node index.js
 ```
 
 La ejecución de este mandato en la aplicación predeterminada generada por el [generador de Express](/{{ page.lang }}/starter/generator.html) imprime la siguiente salida:
@@ -96,11 +96,28 @@ Una aplicación generada por el mandato `express` utiliza el módulo `debug`, y 
 Por ejemplo, si ha generado la aplicación con `$ express sample-app`, puede habilitar las sentencias de depuración con el siguiente mandato:
 
 ```bash
-$ DEBUG=sample-app:* node ./bin/www
+$ DEBUG=sample-app:* nodo ./bin/www
 ```
 
 Puede especificar más de un espacio de nombres de depuración asignando una lista separada por comas de nombres:
 
 ```bash
-$ DEBUG=http,mail,express:* node index.js
+$ DEBUG=http,mail,express:* nodo index.js
 ```
+
+## Opciones avanzadas
+
+Cuando se ejecuta a través de Node.js, puede establecer algunas variables de entorno que cambiarán el comportamiento del registro de depuración:
+
+| Nombre              | Propósito                                                                             |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `DEBUG`             | Habilita o deshabilita espacios de nombres específicos de depuración. |
+| `DEBUG_COLORS`      | Usar o no colores en la salida de depuración.                         |
+| `DEBUG_DEPTH`       | Profundidad de inspección de objetos.                                 |
+| `DEBUG_FD`          | Descriptor de archivo en el que escribir salida de depuración.        |
+| `DEBUG_SHOW_HIDDEN` | Muestra propiedades ocultas en los objetos esperados.                 |
+
+{% include admonitions/note. tml content="Las variables de entorno que empiezan con `DEBUG_` terminan siendo
+convertidas en un objeto de opciones que se usa con formateadores%o`/`%O`.
+Vea la documentación de Node.js para [`util.inspect()\`](https://nodejs.org/api/util.html#util_util_inspect_object_options)
+para la lista completa." %}
