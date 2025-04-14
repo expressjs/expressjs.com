@@ -1,11 +1,10 @@
 ---
 layout: page
 title: Pergunta mais Frequentes do Express
+description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
 lang: pt-br
-description: Find answers to frequently asked questions about Express.js, including
-  topics on application structure, models, authentication, template engines, error
-  handling, and more.
+redirect_from: /starter/faq.html
 ---
 
 # Perguntas mais frequentes
@@ -21,14 +20,14 @@ Rotas e outras lógicas específicas do aplicativo podem ficar em
 quantos arquivos quiser, em qualquer estrutura de diretórios que
 preferir. Visualize os seguintes exemplos para obter inspiração:
 
-* [Listagens de rota](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Mapa de rota](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [Controladores com estilo MVC](https://github.com/expressjs/express/tree/master/examples/mvc)
+- [Listagens de rota](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+- [Mapa de rota](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+- [Controladores com estilo MVC](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Além disso, existem extensões de terceiros para o Express, que
 simplificam alguns desses padrões:
 
-* [Roteamento engenhoso](https://github.com/expressjs/express-resource)
+- [Resourceful routing](https://github.com/expressjs/express-resource)
 
 ## Como eu defino modelos?
 
@@ -42,11 +41,10 @@ uma estrutura baseada no Express que é centrada em modelos.
 ## Como posso autenticar usuários?
 
 Autenticação é outra área muito opinada que o Express não
-se arrisca a entrar.  Você pode usar qualquer esquema que desejar.
+se arrisca a entrar. Você pode usar qualquer esquema que desejar.
 Para um esquema simples com nome de usuário / senha, consulte
-[este
-exemplo](https://github.com/expressjs/express/tree/master/examples/auth).
-
+este
+exemplo.
 
 ## Quais mecanismos de modelo o Express suporta?
 
@@ -58,6 +56,8 @@ cache de mecanismo de modelo, consulte o projeto
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 para obter suporte. Mecanismos de modelo não listados podem ainda
 assim suportar a assinatura do Express.
+
+[Roteamento engenhoso](https://github.com/expressjs/express-resource)
 
 ## Como manipulo respostas 404?
 
@@ -74,6 +74,9 @@ app.use((req, res, next) => {
   res.status(404).send('Sorry cant find that!')
 })
 ```
+
+Add routes dynamically at runtime on an instance of `express.Router()`
+so the routes are not superseded by a middleware function.
 
 ## Como configuro um manipulador de erros?
 
@@ -98,3 +101,10 @@ se você tiver um arquivo
 específico, use a função `res.sendFile()`.
 Se estiver entregando muitos ativos a partir de um diretório, use a
 função de middleware `express.static()`.
+
+## What version of Node.js does Express require?
+
+- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
+- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
+
+### [Previous: More examples ](/{{ page.lang }}/starter/examples.html)

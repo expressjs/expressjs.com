@@ -1,20 +1,20 @@
 ---
 layout: page
 title: Routing di base Express
+description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
 lang: it
-description: Learn the fundamentals of routing in Express.js applications, including
-  how to define routes, handle HTTP methods, and create route handlers for your web
-  server.
+redirect_from: /starter/basic-routing.html
 ---
 
 # Routing di base
 
-Per *Routing* si intende determinare come un'applicazione risponde a una richiesta client a un endpoint particolare, il quale è un URI (o percorso) e un metodo di richiesta HTTP specifico (GET, POST e così via).
+Per _Routing_ si intende determinare come un'applicazione risponde a una richiesta client a un endpoint particolare, il quale è un URI (o percorso) e un metodo di richiesta HTTP specifico (GET, POST e così via).
 
 Ciascuna route può disporre di una o più funzioni dell'handler, le quali vengono eseguite quando si trova una corrispondenza per la route.
 
 La definizione della route ha la seguente struttura:
+
 ```js
 app.METHOD(PATH, HANDLER)
 ```
@@ -65,3 +65,5 @@ app.delete('/user', (req, res) => {
 ```
 
 Per ulteriori dettagli sul routing, consultare il [Manuale routing](/{{ page.lang }}/guide/routing.html).
+
+### [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)

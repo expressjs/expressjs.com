@@ -1,32 +1,35 @@
 ---
 layout: page
 title: Express 数据库集成
+description: Discover how to integrate various databases with Express.js applications, including setup examples for MongoDB, MySQL, PostgreSQL, and more.
 menu: guide
-lang: zh-cn
-description: Discover how to integrate various databases with Express.js applications,
-  including setup examples for MongoDB, MySQL, PostgreSQL, and more.
+lang: en
+redirect_from: /guide/database-integration.html
 ---
 
 # 数据库集成
 
-要将数据库连接到 Express 应用程序，只需在该应用程序中为数据库装入相应的 Node.js 驱动程序。本文档简要说明如何在 Express 应用程序中为数据库系统添加和使用某些最流行的 Node.js 模块：
+要将数据库连接到 Express 应用程序，只需在该应用程序中为数据库装入相应的 Node.js 驱动程序。本文档简要说明如何在 Express 应用程序中为数据库系统添加和使用某些最流行的 Node.js 模块： This document briefly explains how to add and use some of the most popular Node.js modules for database systems in your Express app:
 
-* [Cassandra](#cassandra)
-* [Couchbase](#couchbase)
-* [CouchDB](#couchdb)
-* [LevelDB](#leveldb)
-* [MySQL](#mysql)
-* [MongoDB](#mongodb)
-* [Neo4j](#neo4j)
-* [Oracle](#oracle)
-* [PostgreSQL](#postgresql)
-* [Redis](#redis)
-* [SQL Server](#sql-server)
-* [SQLite](#sqlite)
-* [Elasticsearch](#elasticsearch)
+- [Cassandra](#cassandra)
+- [Couchbase](#couchbase)
+- [CouchDB](#couchdb)
+- [LevelDB](#leveldb)
+- [MySQL](#mysql)
+- [MongoDB](#mongodb)
+- [Neo4j](#neo4j)
+- [Oracle](#oracle)
+- [PostgreSQL](#postgresql)
+- [Redis](#redis)
+- [SQL Server](#sql-server)
+- [SQLite](#sqlite)
+- [Elasticsearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
+
 这些数据库驱动程序是众多可用数据库驱动程序的一部分。要了解其他选项，请在 [npm](https://www.npmjs.com/) 站点上搜索。
+ For other options,
+search on the [npm](https://www.npmjs.com/) site.
 </div>
 
 ## Cassandra
@@ -193,7 +196,7 @@ connection.end()
 $ npm install mongodb
 ```
 
-### 示例（v2.*）
+### 示例（v2.\*）
 
 ```js
 const MongoClient = require('mongodb').MongoClient
@@ -209,7 +212,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
 })
 ```
 
-### 示例（v3.*）
+### 示例（v3.\*）
 
 ```js
 const MongoClient = require('mongodb').MongoClient
@@ -231,7 +234,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
 
 ## Neo4j
 
-**模块**：[apoc](https://github.com/hacksparrow/apoc)
+**Module**: [neo4j-driver](https://github.com/neo4j/neo4j-javascript-driver)
 
 ### 安装
 
@@ -242,16 +245,20 @@ $ npm install apoc
 ### 示例
 
 ```js
-const apoc = require('apoc')
+const neo4j = require('neo4j-driver')
+const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.basic('neo4j', 'letmein'))
 
-apoc.query('match (n) return n').exec().then(
-  (response) => {
-    console.log(response)
-  },
-  (fail) => {
-    console.log(fail)
-  }
-)
+const session = driver.session()
+
+session.readTransaction((tx) => {
+  return tx.run('MATCH (n) RETURN count(n) AS count')
+    .then((res) => {
+      console.log(res.records[0].get('count'))
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+})
 ```
 
 ## Oracle
@@ -260,7 +267,7 @@ apoc.query('match (n) return n').exec().then(
 
 ### 安装
 
- 注意: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
+注意: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
 
 ```bash
 $ npm install oracledb
@@ -302,7 +309,7 @@ getEmployee(101)
 
 ## PostgreSQL
 
-**模块**：[pg](https://github.com/brianc/node-postgres)
+**Module**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 
 ### 安装
 

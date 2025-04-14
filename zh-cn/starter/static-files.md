@@ -1,17 +1,26 @@
 ---
 layout: page
 title: 在 Express 中提供静态文件
+description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
 menu: starter
-lang: zh-cn
-description: Understand how to serve static files like images, CSS, and JavaScript
-  in Express.js applications using the built-in 'static' middleware.
+lang: en
+redirect_from: /starter/static-files.html
 ---
 
 # 在 Express 中提供静态文件
 
 为了提供诸如图像、CSS 文件和 JavaScript 文件之类的静态文件，请使用 Express 中的 `express.static` 内置中间件函数。
 
-将包含静态资源的目录的名称传递给 `express.static` 中间件函数，以便开始直接提供这些文件。例如，使用以下代码在名为 `public` 的目录中提供图像、CSS 文件和 JavaScript 文件：
+The function signature is:
+
+```js
+express.static(root, [options])
+```
+
+The `root` argument specifies the root directory from which to serve static assets.
+For more information on the `options` argument, see [express.static](/{{page.lang}}/4x/api.html#express.static).
+
+For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
 
 ```js
 app.use(express.static('public'))
@@ -40,6 +49,11 @@ app.use(express.static('files'))
 
 Express 以您使用 `express.static` 中间件函数设置静态目录的顺序来查找文件。
 
+{% capture alert_content %}
+For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+{% endcapture %}
+{% include admonitions/note.html content=alert_content %}
+
 要为 `express.static` 函数提供的文件创建虚拟路径前缀（路径并不实际存在于文件系统中），请为静态目录[指定安装路径](/{{ page.lang }}/4x/api.html#app.use)，如下所示：
 
 ```js
@@ -56,9 +70,13 @@ http://localhost:3000/static/images/bg.png
 http://localhost:3000/static/hello.html
 ```
 
-然而，向 `express.static` 函数提供的路径相对于您在其中启动 `node` 进程的目录。如果从另一个目录运行 Express 应用程序，那么对于提供资源的目录使用绝对路径会更安全：
+然而，向 `express.static` 函数提供的路径相对于您在其中启动 `node` 进程的目录。如果从另一个目录运行 Express 应用程序，那么对于提供资源的目录使用绝对路径会更安全： If you run the express app from another directory, it's safer to use the absolute path of the directory that you want to serve:
 
 ```js
 const path = require('path')
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
+
+For more details about the `serve-static` function and its options, see  [serve-static](/resources/middleware/serve-static.html).
+
+### [Previous: Basic Routing ](/{{ page.lang }}/starter/basic-routing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: More examples ](/{{ page.lang }}/starter/examples.html)

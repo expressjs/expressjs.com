@@ -1,20 +1,27 @@
 ---
 layout: page
 title: Express 應用程式產生器
+description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
 menu: starter
 lang: zh-tw
-description: Learn how to use the Express application generator tool to quickly create
-  a skeleton for your Express.js applications, streamlining setup and configuration.
+redirect_from: /starter/generator.html
 ---
 
 # Express 應用程式產生器
 
-使用應用程式產生器工具 `express`，快速建立應用程式架構。
+Use the application generator tool, `express-generator`, to quickly create an application skeleton.
 
-使用下列指令來安裝 `express`：
+You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
 ```bash
 $ npm install express-generator -g
+```
+
+For earlier Node versions, install the application generator as a global npm package and then launch it:
+
+```bash
+$ npm install -g express-generator
+$ express
 ```
 
 使用 `-h` 選項來顯示指令選項：
@@ -39,7 +46,7 @@ $ express -h
     -f, --force         force on non-empty directory
 ```
 
-舉例來說，以下是在現行工作目錄中建立一個名為 _myapp_ 的 Express 應用程式：
+舉例來說，以下是在現行工作目錄中建立一個名為 _myapp_ 的 Express 應用程式： The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
 ```bash
 $ express --view=pug myapp
@@ -82,9 +89,15 @@ $ DEBUG=myapp:* npm start
 > set DEBUG=myapp:* & npm start
 ```
 
-然後在瀏覽器中載入 `http://localhost:3000/`，以存取應用程式。
+On Windows PowerShell, use this command:
 
-產生的應用程式具有如下的目錄結構：
+```bash
+PS> $env:DEBUG='myapp:*'; npm start
+```
+
+Then, load `http://localhost:3000/` in your browser to access the app.
+
+The generated app has the following directory structure:
 
 ```bash
 .
@@ -109,5 +122,7 @@ $ DEBUG=myapp:* npm start
 ```
 
 <div class="doc-box doc-info" markdown="1">
-使用產生器來建立應用程式結構，只是多種用來建立 Express 應用程式結構的其中一種方式。您有權使用這種結構，或是加以修改盡量符合您的需求。
+The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
 </div>
+
+### [Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)

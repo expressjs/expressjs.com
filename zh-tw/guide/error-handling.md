@@ -1,16 +1,195 @@
 ---
 layout: page
 title: Express 錯誤處理
+description: Understand how Express.js handles errors in synchronous and asynchronous code, and learn to implement custom error handling middleware for your applications.
 menu: guide
 lang: zh-tw
-description: Understand how Express.js handles errors in synchronous and asynchronous
-  code, and learn to implement custom error handling middleware for your applications.
+redirect_from: /guide/error-handling.html
 ---
 
 # 錯誤處理
 
-錯誤處理中介軟體函數的定義方式，與其他中介軟體函數相同，差別在於錯誤處理函數的引數是四個而非三個：`(err, req, res, next)`。例如：
+_Error Handling_ refers to how Express catches and processes errors that
+occur both synchronously and asynchronously. Express comes with a default error
+handler so you don't need to write your own to get started.
 
+## Catching Errors
+
+It's important to ensure that Express catches all errors that occur while
+running route handlers and middleware.
+
+Errors that occur in synchronous code inside route handlers and middleware
+require no extra work. If synchronous code throws an error, then Express will
+catch and process it. For example:
+
+```js
+app.get('/', (req, res) => {
+  throw new Error('BROKEN') // Express will catch this on its own.
+})
+```
+
+For errors returned from asynchronous functions invoked by route handlers
+and middleware, you must pass them to the `next()` function, where Express will
+catch and process them.  For example:
+
+```js
+app.get('/', (req, res, next) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
+    if (err) {
+      next(err) // Pass errors to Express.
+    } else {
+      res.send(data)
+    }
+  })
+})
+```
+
+Starting with Express 5, route handlers and middleware that return a Promise
+will call `next(value)` automatically when they reject or throw an error.
+For example:
+
+```js
+app.get('/user/:id', async (req, res, next) => {
+  const user = await getUserById(req.params.id)
+  res.send(user)
+})
+```
+
+If `getUserById` throws an error or rejects, `next` will be called with either
+the thrown error or the rejected value. If no rejected value is provided, `next`
+will be called with a default Error object provided by the Express router.
+
+If you pass anything to the `next()` function (except the string `'route'`),
+Express regards the current request as being an error and will skip any
+remaining non-error handling routing and middleware functions.
+
+If the callback in a sequence provides no data, only errors, you can simplify
+this code as follows:
+
+```js
+app.get('/', [
+  function (req, res, next) {
+    fs.writeFile('/inaccessible-path', 'data', next)
+  },
+  function (req, res) {
+    res.send('OK')
+  }
+])
+```
+
+In the above example, `next` is provided as the callback for `fs.writeFile`,
+which is called with or without errors. If there is no error, the second
+handler is executed, otherwise Express catches and processes the error.
+
+You must catch errors that occur in asynchronous code invoked by route handlers or
+middleware and pass them to Express for processing. For example:
+
+```js
+app.get('/', (req, res, next) => {
+  setTimeout(() => {
+    try {
+      throw new Error('BROKEN')
+    } catch (err) {
+      next(err)
+    }
+  }, 100)
+})
+```
+
+The above example uses a `try...catch` block to catch errors in the
+asynchronous code and pass them to Express. If the `try...catch`
+block were omitted, Express would not catch the error since it is not part of the synchronous
+handler code.
+
+Use promises to avoid the overhead of the `try...catch` block or when using functions
+that return promises.  For example:
+
+```js
+app.get('/', (req, res, next) => {
+  Promise.resolve().then(() => {
+    throw new Error('BROKEN')
+  }).catch(next) // Errors will be passed to Express.
+})
+```
+
+Since promises automatically catch both synchronous errors and rejected promises,
+you can simply provide `next` as the final catch handler and Express will catch errors,
+because the catch handler is given the error as the first argument.
+
+You could also use a chain of handlers to rely on synchronous error
+catching, by reducing the asynchronous code to something trivial. For example:
+
+```js
+app.get('/', [
+  function (req, res, next) {
+    fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
+      res.locals.data = data
+      next(err)
+    })
+  },
+  function (req, res) {
+    res.locals.data = res.locals.data.split(',')[1]
+    res.send(res.locals.data)
+  }
+])
+```
+
+The above example has a couple of trivial statements from the `readFile`
+call. If `readFile` causes an error, then it passes the error to Express, otherwise you
+quickly return to the world of synchronous error handling in the next handler
+in the chain. Then, the example above tries to process the data. If this fails, then the
+synchronous error handler will catch it. If you had done this processing inside
+the `readFile` callback, then the application might exit and the Express error
+handlers would not run.
+
+Whichever method you use, if you want Express error handlers to be called in and the
+application to survive, you must ensure that Express receives the error.
+
+## The default error handler
+
+Express comes with a built-in error handler that takes care of any errors that might be encountered in the app. This default error-handling middleware function is added at the end of the middleware function stack.
+
+如果您傳遞錯誤至 `next()`，且您沒有在錯誤處理常式中處理它，將會交由內建錯誤處理常式處理；該錯誤會連同堆疊追蹤寫入至用戶端。在正式作業環境中，則不包含堆疊追蹤。 The stack trace is not included
+in the production environment.
+
+<div class="doc-box doc-info" markdown="1">
+將 `NODE_ENV` 環境變數設為 `production`，以便在正式作業模式下執行應用程式。
+</div>
+
+When an error is written, the following information is added to the
+response:
+
+- The `res.statusCode` is set from `err.status` (or `err.statusCode`). If
+  this value is outside the 4xx or 5xx range, it will be set to 500.
+- The `res.statusMessage` is set according to the status code.
+- The body will be the HTML of the status code message when in production
+  environment, otherwise will be `err.stack`.
+- Any headers specified in an `err.headers` object.
+
+在您開始撰寫回應之後，一旦在呼叫 `next()` 時才發生錯誤（例如，當您將回應串流輸出至用戶端時遇到錯誤），Express 的預設錯誤處理程式會關閉連線，並使要求失敗。
+
+So when you add a custom error handler, you must delegate to
+the default Express error handler, when the headers
+have already been sent to the client:
+
+```js
+function errorHandler (err, req, res, next) {
+  if (res.headersSent) {
+    return next(err)
+  }
+  res.status(500)
+  res.render('error', { error: err })
+}
+```
+
+Note that the default error handler can get triggered if you call `next()` with an error
+in your code more than once, even if custom error handling middleware is in place.
+
+Other error handling middleware can be found at [Express middleware](/{{ page.lang }}/resources/middleware.html).
+
+## Writing error handlers
+
+錯誤處理中介軟體函數的定義方式，與其他中介軟體函數相同，差別在於錯誤處理函數的引數是四個而非三個：`(err, req, res, next)`。例如： For example:
 
 ```js
 app.use((err, req, res, next) => {
@@ -32,9 +211,12 @@ app.use((err, req, res, next) => {
 })
 ```
 
-中介軟體函數內的回應可以是任何您喜好的格式，如：HTML 錯誤頁面、簡式訊息或 JSON 字串。
+Responses from within a middleware function can be in any format, such as an HTML error page, a simple message, or a JSON string.
 
-為了方便組織（和更高層次的架構），您可以定義數個錯誤處理中介軟體函數，就像您處理一般中介軟體函數一樣。舉例來說，如果您想為使用及沒有使用 `XHR` 所建立的要求，各定義一個錯誤處理程式，您可以使用下列指令：
+For organizational (and higher-level framework) purposes, you can define
+several error-handling middleware functions, much as you would with
+regular middleware functions. For example, to define an error-handler
+for requests made by using `XHR` and those without:
 
 ```js
 const bodyParser = require('body-parser')
@@ -58,6 +240,8 @@ function logErrors (err, req, res, next) {
 
 此外在本例中，`clientErrorHandler` 定義成如下；在此情況下，會將錯誤明確傳遞給下一個：
 
+Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
+
 ```js
 function clientErrorHandler (err, req, res, next) {
   if (req.xhr) {
@@ -67,6 +251,7 @@ function clientErrorHandler (err, req, res, next) {
   }
 }
 ```
+
 "catch-all" `errorHandler` 函數的實作方式如下：
 
 ```js
@@ -76,10 +261,7 @@ function errorHandler (err, req, res, next) {
 }
 ```
 
-不論您傳遞何者給 `next()` 函數（`'route'` 字串除外），Express 都會將現行要求視為發生錯誤，且會跳過其餘任何的非錯誤處理路由和中介軟體函數。如果您想以某種方式來處理該錯誤，您必須按照下一節的說明來建立錯誤處理路由。
-
-如果您的路由處理程式有多個回呼函數，可以使用 `route` 參數來跳到下一個路由處理程式。例如：
-
+If you have a route handler with multiple callback functions, you can use the `route` parameter to skip to the next route handler. For example:
 
 ```js
 app.get('/a_route_behind_paywall',
@@ -96,31 +278,9 @@ app.get('/a_route_behind_paywall',
     })
   })
 ```
+
 在本例中，會跳過 `getPaidContent` 處理程式，但是會繼續執行 `app` 中 `/a_route_behind_paywall` 的其餘處理程式。
 
 <div class="doc-box doc-info" markdown="1">
-呼叫 `next()` 和 `next(err)`，指出現行處理程式已完成以及處於何種狀態。除了依上述說明設定成用來處理錯誤的那些處理程式，`next(err)` 會跳過處理程式鏈中其餘所有的處理程式。</div>
-
-## 預設錯誤處理程式
-
-Express 隨附一個內建錯誤處理常式，它會處理應用程式中可能遇到的任何錯誤。這個預設錯誤處理中介軟體函數新增於中介軟體函數堆疊尾端。
-
-如果您傳遞錯誤至 `next()`，且您沒有在錯誤處理常式中處理它，將會交由內建錯誤處理常式處理；該錯誤會連同堆疊追蹤寫入至用戶端。在正式作業環境中，則不包含堆疊追蹤。
-
-<div class="doc-box doc-info" markdown="1">
-將 `NODE_ENV` 環境變數設為 `production`，以便在正式作業模式下執行應用程式。
+Calls to `next()` and `next(err)` indicate that the current handler is complete and in what state.  `next(err)` will skip all remaining handlers in the chain except for those that are set up to handle errors as described above.
 </div>
-
-在您開始撰寫回應之後，一旦在呼叫 `next()` 時才發生錯誤（例如，當您將回應串流輸出至用戶端時遇到錯誤），Express 的預設錯誤處理程式會關閉連線，並使要求失敗。
-
-因此，在您新增自訂錯誤處理常式時，如果標頭已傳送給用戶端，您會希望委派給 Express 中的預設錯誤處理機制處理：
-
-```js
-function errorHandler (err, req, res, next) {
-  if (res.headersSent) {
-    return next(err)
-  }
-  res.status(500)
-  res.render('error', { error: err })
-}
-```

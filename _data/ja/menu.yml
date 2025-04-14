@@ -1,6 +1,5 @@
 # Home
 home: ホーム
-
 # Getting started
 getting_started: 概説
 installing: インストール
@@ -10,7 +9,6 @@ basic_routing: 基本的なルーティング
 static_files: 静的ファイル
 examples: More examples
 faq: FAQ
-
 # Guide
 guide: ガイド
 routing: ルーティング
@@ -24,15 +22,12 @@ behind_proxies: プロキシーの背後の Express
 migrating_4: Express 4 への移行
 migrating_5: Express 5 への移行
 database_integration: データベースの統合
-
 # API reference
-
 api: API リファレンス
 5x: 5.x
 4x: 4.x
 3x: 3.x (非推奨)
 2x: 2.x (非推奨)
-
 # Advanced topics
 advanced: 高度なトピック
 developing_template_engines: テンプレート・エンジン
@@ -40,7 +35,6 @@ security_updates: セキュリティー更新
 best_practice_security: セキュリティーに関するベスト・プラクティス
 best_practice_performance: パフォーマンスに関するベスト・プラクティス
 healthcheck_graceful_shutdown: Health checks & shutdown
-
 # Resources
 resources: リソース
 glossary: 用語集
@@ -49,10 +43,8 @@ community: コミュニティー
 utils: Utility modules
 contributing: Contributing to Express
 changelog: Release Change Log
-
 # Support
 support: Support
-
 # Blog
 blog: Blog
 latest_post: Latest post

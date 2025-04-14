@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Desenvolvendo mecanismos de modelo para o Express
+description: Learn how to develop custom template engines for Express.js using app.engine(), with examples on creating and integrating your own template rendering logic.
 menu: advanced
 lang: pt-br
-description: Learn how to develop custom template engines for Express.js using app.engine(),
-  with examples on creating and integrating your own template rendering logic.
+redirect_from: /advanced/developing-template-engines.html
 ---
 
 # Desenvolvendo mecanismos de modelo para o Express
@@ -42,6 +42,7 @@ um arquivo chamado `index.ntl` no diretório
 #title#
 #message#
 ```
+
 Em seguida, crie a seguinte rota no seu aplicativo.
 
 ```js
@@ -49,4 +50,5 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Hey', message: 'Hello there!' })
 })
 ```
+
 Ao fazer uma solicitação à página inicial, o `index.ntl` será renderizado como HTML.

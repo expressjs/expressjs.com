@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Glossario di Express
+description: A comprehensive glossary of terms related to Express.js, Node.js, middleware, routing, and other key concepts to help you understand and use Express effectively.
 menu: resources
 lang: it
-description: A comprehensive glossary of terms related to Express.js, Node.js, middleware,
-  routing, and other key concepts to help you understand and use Express effectively.
+redirect_from: /resources/glossary.html
 ---
 
 # Glossario
@@ -15,11 +15,11 @@ Solitamente, uno o più programmi progettati per gestire operazioni per uno scop
 
 ### API
 
-Interfaccia di programmazione dell'applicazione.  Si consiglia di scrivere per intero l'acronimo quando lo si usa per la prima volta.
+Interfaccia di programmazione dell'applicazione. Si consiglia di scrivere per intero l'acronimo quando lo si usa per la prima volta.
 
 ### Express
 
-Un framework web veloce, non categorico e minimalista per le applicazioni Node.js.  Solitamente, si preferisce utilizzare "Express" piuttosto che "Express.js," anche se il secondo è accettabile.
+Un framework web veloce, non categorico e minimalista per le applicazioni Node.js. Solitamente, si preferisce utilizzare "Express" piuttosto che "Express.js," anche se il secondo è accettabile.
 
 ### libuv
 
@@ -27,23 +27,25 @@ Una libreria di supporto multi-piattaforma che si focalizza su I/O asincrono, in
 
 ### middleware
 
-Una funzione che viene richiamata dal livello di routing Express prima dell'handler di richiesta finale, pertanto si trova al centro tra una richiesta base e la route prevista.  Segue un elenco che indica alcune terminologie utilizzate per middleware:
+Una funzione che viene richiamata dal livello di routing Express prima dell'handler di richiesta finale, pertanto si trova al centro tra una richiesta base e la route prevista. Segue un elenco che indica alcune terminologie utilizzate per middleware:
 
-  * `var foo = require('middleware')` significa *richiesta* o *utilizzo* di un modulo Node.js. E l'istruzione `var mw = foo()` solitamente restituisce il middleware.
-  * `app.use(mw)` significa *aggiunta del middleware allo stack di elaborazione globale*.
-  * `app.get('/foo', mw, function (req, res) { ... })` significa *aggiunta del middleware allo stack di elaborazione "GET /foo"*.
+- `var foo = require('middleware')` significa _richiesta_ o _utilizzo_ di un modulo Node.js. E l'istruzione `var mw = foo()` solitamente restituisce il middleware.
+- `app.use(mw)` significa _aggiunta del middleware allo stack di elaborazione globale_.
+- `app.get('/foo', mw, function (req, res) { ... })` significa _aggiunta del middleware allo stack di elaborazione "GET /foo"_.
 
 ### Node.js
 
-Una piattaforma software utilizzata per creare applicazioni di rete scalabili. Node.js utilizza JavaScript e il relativo linguaggio di scripting e raggiunge una trasmissione di dati elevata tramite un I/O non a blocchi e un loop di evento a thread singolo.  Consultare [nodejs.org](http://nodejs.org/). **Nota di utilizzo**: Inizialmente, "Node.js," successivamente "Node".
+Una piattaforma software utilizzata per creare applicazioni di rete scalabili. Node.js utilizza JavaScript e il relativo linguaggio di scripting e raggiunge una trasmissione di dati elevata tramite un I/O non a blocchi e un loop di evento a thread singolo. Consultare [nodejs.org](http://nodejs.org/). **Nota di utilizzo**: Inizialmente, "Node.js," successivamente "Node".
 
 ### open-source, open source
 
-Quando utilizzato come aggettivo, viene aggiunto un trattino; ad esempio: "Questo è un software open-source." Consultare [Software open-source su Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). Nota: anche se è molto comune scriverlo senza trattino, stiamo utilizzando le regole dell'inglese standard che richiedono di inserire un trattino in un aggettivo composto.
+Quando utilizzato come aggettivo, viene aggiunto un trattino; ad esempio: "Questo è un software open-source." Consultare [Software open-source su Wikipedia](http://en.wikipedia.org/wiki/Open-source_software).
+
+Nota: anche se è molto comune scriverlo senza trattino, stiamo utilizzando le regole dell'inglese standard che richiedono di inserire un trattino in un aggettivo composto. %}
 
 ### richiesta
 
-Una richiesta HTTP.  Un client un messaggio di richiesta HTTP a un server, il quale restituisce una risposta.  La richiesta deve utilizzare uno dei diversi [metodi di richiesta](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) ad esempio GET, POST e così via.
+Una richiesta HTTP. Un client un messaggio di richiesta HTTP a un server, il quale restituisce una risposta.  La richiesta deve utilizzare uno dei diversi [metodi di richiesta](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) ad esempio GET, POST e così via.
 
 ### risposta
 
@@ -51,7 +53,7 @@ Una risposta HTTP. Un server restituisce un messaggio di risposta HTTP al client
 
 ### route
 
-Parte di un URL che identifica una risorsa.  Ad esempio, in `http://foo.com/products/id`, "/products/id" è la route.
+Parte di un URL che identifica una risorsa. Ad esempio, in `http://foo.com/products/id`, "/products/id" è la route.
 
 ### router
 

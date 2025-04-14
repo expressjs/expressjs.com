@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Exemplo "Hello World" do Express
+description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
 menu: starter
 lang: pt-br
-description: Get started with Express.js by building a simple 'Hello World' application,
-  demonstrating the basic setup and server creation for beginners.
+redirect_from: /starter/hello-world.html
 ---
 
 # Exemplo Hello World
@@ -15,12 +15,6 @@ Este é essencialmente o aplicativo mais simples do Express que é possível cri
 que cria a estrutura para um aplicativo completo com inúmeros arquivos JavaScript, modelos Jade, e subdiretórios para vários
 propósitos.
 </div>
-
-Primeiro crie um diretório chamado `myapp`,
-mude para ele e execute o `npm init`. Em seguida
-instale o `express` como uma dependência, de acordo com o [guia de instalação](/{{ page.lang }}/starter/installing.html).
-
-No diretório `myapp`, crie um arquivo chamado `app.js` e inclua o seguinte código:
 
 ```js
 const express = require('express')
@@ -38,8 +32,16 @@ app.listen(port, () => {
 
 O aplicativo inicia um servidor e escuta a porta 3000 por
 conexões. O aplicativo responde com "Hello World!" à solicitações
-para a URL raiz (`/`) ou *rota*. Para
+para a URL raiz (`/`) ou _rota_. Para
 todos os outros caminhos, ele irá responder com um **404 Não Encontrado**.
+
+### Running Locally
+
+Primeiro crie um diretório chamado `myapp`,
+mude para ele e execute o `npm init`. Em seguida
+instale o `express` como uma dependência, de acordo com o [guia de instalação](/{{ page.lang }}/starter/installing.html).
+
+No diretório `myapp`, crie um arquivo chamado `app.js` e inclua o seguinte código:
 
 <div class="doc-box doc-notice" markdown="1">
 O `req` (solicitação) e `res`
@@ -58,3 +60,4 @@ $ node app.js
 Em seguida, carregue [http://localhost:3000/](http://localhost:3000/) em
 um navegador para visualizar a saída
 
+### [Previous: Installing ](/{{ page.lang }}/starter/installing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Express Generator ](/{{ page.lang }}/starter/generator.html)

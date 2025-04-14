@@ -1,34 +1,34 @@
 ---
 layout: page
 title: Utilisation de middleware Express
+description: Learn how to use middleware in Express.js applications, including application-level and router-level middleware, error handling, and integrating third-party middleware.
 menu: guide
 lang: fr
-description: Learn how to use middleware in Express.js applications, including application-level
-  and router-level middleware, error handling, and integrating third-party middleware.
+redirect_from: /guide/using-middleware.html
 ---
 
 # Utilisation de middleware
 
 Express est une infrastructure web middleware et de routage, qui a des fonctions propres minimes : une application Express n'est ni plus ni moins qu'une succession d'appels de fonctions middleware.
 
-Les fonctions de *middleware* sont des fonctions qui peuvent accéder à l'[objet Request](/{{ page.lang }}/4x/api.html#req)  (`req`), l'[objet response](/{{ page.lang }}/4x/api.html#res) (`res`) et à la fonction middleware suivant dans le cycle demande-réponse de l'application. La fonction middleware suivant est couramment désignée par une variable nommée `next`.
+Les fonctions de _middleware_ sont des fonctions qui peuvent accéder à l'[objet Request](/{{ page.lang }}/4x/api.html#req)  (`req`), l'[objet response](/{{ page.lang }}/4x/api.html#res) (`res`) et à la fonction middleware suivant dans le cycle demande-réponse de l'application. La fonction middleware suivant est couramment désignée par une variable nommée `next`.
 
 Les fonctions middleware effectuent les tâches suivantes :
 
-* Exécuter tout type de code.
-* Apporter des modifications aux objets de demande et de réponse.
-* Terminer le cycle de demande-réponse.
-* Appeler la fonction middleware suivant dans la pile.
+- Exécuter tout type de code.
+- Apporter des modifications aux objets de demande et de réponse.
+- Terminer le cycle de demande-réponse.
+- Appeler la fonction middleware suivant dans la pile.
 
 Si la fonction middleware en cours ne termine pas le cycle de demande-réponse, elle doit appeler la fonction `next()` pour transmettre le contrôle à la fonction middleware suivant. Sinon, la demande restera bloquée.
 
 Une application Express peut utiliser les types de middleware suivants :
 
- - [Middleware niveau application](#middleware.application)
- - [Middleware niveau routeur](#middleware.router)
- - [Middleware de traitement d'erreurs](#middleware.error-handling)
- - [Middleware intégré](#middleware.built-in)
- - [Middleware tiers](#middleware.third-party)
+- [Middleware niveau application](#middleware.application)
+- [Middleware niveau routeur](#middleware.router)
+- [Middleware de traitement d'erreurs](#middleware.error-handling)
+- [Middleware intégré](#middleware.built-in)
+- [Middleware tiers](#middleware.third-party)
 
 Vous pouvez charger le middleware niveau application et niveau routeur à l'aide d'un chemin de montage facultatif.
 Vous pouvez également charger une série de fonctions middleware ensemble, ce qui crée une sous-pile du système de middleware à un point de montage.
@@ -98,9 +98,10 @@ app.get('/user/:id', (req, res, next) => {
 ```
 
 Pour ignorer les fonctions middleware issues d'une pile de middleware de routeur, appelez `next('route')` pour passer le contrôle à la prochaine route.
-**REMARQUE **: `next('route')` ne fonctionnera qu'avec les fonctions middleware qui ont été chargées via les fonctions `app.METHOD()` ou `router.METHOD()`.
 
-Cet exemple illustre une sous-pile de middleware qui gère les demandes GET adressées au chemin `/user/:id`.
+\*\*REMARQUE \*\*: `next('route')` ne fonctionnera qu'avec les fonctions middleware qui ont été chargées via les fonctions `app.METHOD()` ou `router.METHOD()`. %}
+
+Réapplique les barres obliques "/" lorsque le chemin d'accès est un répertoire.
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -119,6 +120,27 @@ app.get('/user/:id', (req, res, next) => {
 })
 ```
 
+Middleware can also be declared in an array for reusability.
+
+Voici un exemple d'utilisation de la fonction middleware `express.static` avec un objet options élaboré :
+
+```js
+function logOriginalUrl (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}
+
+function logMethod (req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+}
+
+const logStuff = [logOriginalUrl, logMethod]
+app.get('/user/:id', logStuff, (req, res, next) => {
+  res.send('User Info')
+})
+```
+
 <h2 id='middleware.router'>Middleware niveau routeur</h2>
 
 Le middleware niveau routeur fonctionne de la même manière que le middleware niveau application, à l'exception près qu'il est lié à une instance de `express.Router()`.
@@ -126,6 +148,7 @@ Le middleware niveau routeur fonctionne de la même manière que le middleware n
 ```js
 const router = express.Router()
 ```
+
 Chargez le middleware niveau routeur par le biais des fonctions `router.use()` et `router.METHOD()`.
 
 Le code d'exemple suivant réplique le système de middleware illustré ci-dessus pour le middleware niveau application, en utilisant un middleware niveau routeur :
@@ -169,10 +192,31 @@ router.get('/user/:id', (req, res, next) => {
 // mount the router on the app
 app.use('/', router)
 ```
+
+Pour obtenir plus de détails sur la fonction `serve-static` et ses options, reportez-vous à la documentation [serve-static](https://github.com/expressjs/serve-static).
+
+Cet exemple illustre une sous-pile de middleware qui gère les demandes GET adressées au chemin `/user/:id`.
+
+```js
+const options = {
+  dotfiles: 'ignore',
+  etag: false,
+  extensions: ['htm', 'html'],
+  index: false,
+  maxAge: '1d',
+  redirect: false,
+  setHeaders: function (res, path, stat) {
+    res.set('x-timestamp', Date.now())
+  }
+}
+
+app.use(express.static('public', options))
+```
+
 <h2 id='middleware.error-handling'>Middleware de traitement d'erreurs</h2>
 
 <div class="doc-box doc-notice" markdown="1">
-Le middleware de traitement d'erreurs comporte toujours *quatre* arguments.  Vous devez fournir quatre arguments pour l'identifier comme une fonction middleware de traitement d'erreurs. Même si vous n'avez pas besoin d'utiliser l'objet `next`, vous devez le spécifier pour maintenir la signature. Sinon, l'objet `next` sera interprété comme un middleware ordinaire et n'arrivera pas à gérer les erreurs.
+Le middleware de traitement d'erreurs comporte toujours *quatre* arguments. Vous devez fournir quatre arguments pour l'identifier comme une fonction middleware de traitement d'erreurs. Même si vous n'avez pas besoin d'utiliser l'objet `next`, vous devez le spécifier pour maintenir la signature. Sinon, l'objet `next` sera interprété comme un middleware ordinaire et n'arrivera pas à gérer les erreurs.
 </div>
 
 Définissez les fonctions middleware de traitement d'erreurs de la même façon que d'autres fonctions middleware, à l'exception près qu'il faudra 4 arguments au lieu de 3, et plus particulièrement avec la signature `(err, req, res, next)`) :
@@ -191,52 +235,11 @@ Pour obtenir des détails sur le middleware de traitement d'erreurs, reportez-vo
 Depuis la version 4.x, Express ne dépend plus de [Connect](https://github.com/senchalabs/connect). A l'exception de `express.static`, toutes les fonctions middleware
 précédemment incluses à Express' font désormais partie de modules distincts. Veuillez vous reporter à [la liste des fonctions middleware](https://github.com/senchalabs/connect#middleware).
 
-<h4 id='express.static'>express.static(root, [options])</h4>
+La seule fonction middleware intégrée dans Express est `express.static`.
 
-La seule fonction middleware intégrée dans Express est `express.static`. Cette fonction est basée sur [serve-static](https://github.com/expressjs/serve-static) et a la responsabilité de servir les actifs statiques d'une application Express.
-
-L'argument `root` spécifie le répertoire racine à partir duquel servir les actifs statiques.
-
-L'objet `options` facultatif peut avoir les propriétés suivantes :
-
-| Propriété      | Description                                                           |   Type      | Valeur par défaut          |
-|---------------|-----------------------------------------------------------------------|-------------|-----------------|
-| `dotfiles`    | Option pour servir les fichiers dotfiles. Les valeurs possibles sont "allow", "deny" et "ignore" | Chaîne | "ignore" |
-| `etag`        | Activer ou désactiver la génération etag  | Booléen | `true` |
-| `extensions`  | Définit l'extension de fichier de rechange. | Tableau | `[]` |
-| `index`       | Envoie le fichier d'index du répertoire. Utilisez `false` pour désactiver l'indexation de répertoire. | Mix | "index.html" |
- `lastModified` | Définit l'en-tête `Last-Modified` sur la date de dernière modification du fichier dans le système d'exploitation. Les valeurs possibles sont `true` ou `false`. | Booléen | `true` |
-| `maxAge`      | Définit la propriété max-age de l'en-tête Cache-Control, en millisecondes ou par une chaîne au format [ms format](https://www.npmjs.org/package/ms) | Numérique | 0 |
-| `redirect`    | Réapplique les barres obliques "/" lorsque le chemin d'accès est un répertoire. | Booléen | `true` |
-| `setHeaders`  | Fonction pour définir les en-têtes HTTP à servir avec le fichier. | Fonction |  |
-
-Voici un exemple d'utilisation de la fonction middleware `express.static` avec un objet options élaboré :
-
-```js
-const options = {
-  dotfiles: 'ignore',
-  etag: false,
-  extensions: ['htm', 'html'],
-  index: false,
-  maxAge: '1d',
-  redirect: false,
-  setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now())
-  }
-}
-
-app.use(express.static('public', options))
-```
-
-Vous pouvez avoir plusieurs répertoires statiques par application :
-
-```js
-app.use(express.static('public'))
-app.use(express.static('uploads'))
-app.use(express.static('files'))
-```
-
-Pour obtenir plus de détails sur la fonction `serve-static` et ses options, reportez-vous à la documentation [serve-static](https://github.com/expressjs/serve-static).
+- [express.static](/en/4x/api.html#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/4x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/4x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
 
 <h2 id='middleware.third-party'>Middleware tiers</h2>
 

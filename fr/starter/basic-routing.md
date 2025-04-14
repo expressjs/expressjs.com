@@ -1,21 +1,21 @@
 ---
 layout: page
 title: Routage de base Express
-menu: starter
+description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
+menu: démarrage
 lang: fr
-description: Learn the fundamentals of routing in Express.js applications, including
-  how to define routes, handle HTTP methods, and create route handlers for your web
-  server.
+redirect_from: /starter/basic-routing.html
 ---
 
 # Routage de base
 
-*Routage* fait référence à la détermination de la façon dont une application répond à un 
+_Routage_ fait référence à la détermination de la façon dont une application répond à un
 nœud final spécifique, c'est-à-dire un URI (ou chemin) et une méthode de requête HTTP (GET, POST, etc.).
 
 Chaque route peut avoir une ou plusieurs fonctions de gestionnaire, qui sont exécutées lorsque la route est mise en correspondance.
 
 La définition de la route utilise la structure suivante :
+
 ```js
 app.METHOD(PATH, HANDLER)
 ```
@@ -28,8 +28,7 @@ Où :
 - `HANDLER` est la fonction exécutée lorsque la route est mise en correspondance.
 
 <div class="doc-box doc-notice" markdown="1">
-Ce tutoriel suppose qu'une instance d'`express` appelée `app` soit créée et que le serveur soit en cours d'exécution.
-Si vous ne savez pas créer et démarrer une application, reportez-vous à l'[exemple Hello world](/{{ page.lang }}/starter/hello-world.html).
+Ce tutoriel suppose qu'une instance d'`express` appelée `app` soit créée et que le serveur soit en cours d'exécution. Si vous ne savez pas créer et démarrer une application, reportez-vous à l'[exemple Hello world](/{{ page.lang }}/starter/hello-world.html).
 </div>
 
 Les exemples suivants illustrent la définition de routes simples.
@@ -67,3 +66,5 @@ app.delete('/user', (req, res) => {
 ```
 
 Pour plus de détails sur le routage, reportez-vous au [guide de routage](/{{ page.lang }}/guide/routing.html).
+
+### [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)

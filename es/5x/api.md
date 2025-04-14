@@ -1,17 +1,15 @@
 ---
 layout: 5x-api
 title: Express 5.x - Referencia de API
+description: Acceda a la referencia API para Express.js 5.x, detallando todos los módulos, métodos y propiedades para construir aplicaciones web con esta última versión.
 menu: api
 lang: es
-description: Access the API reference for Express.js 5.x, detailing all modules, methods,
-  and properties for building web applications with this latest version.
+redirect_from: /5x/api.html
 ---
 
 <div id="api-doc" markdown="1">
 
   <h1>5.x API</h1>
-
-{% include admonitions/caution.html content="This is early beta documentation that may be incomplete and is still under development." %}
 
 {% include admonitions/note.html content="Express 5.0 requires Node.js 18 or higher." %}
 

@@ -1,6 +1,5 @@
 # Home
 home: 主页
-
 # Getting started
 getting_started: 入门
 installing: 安装
@@ -10,7 +9,6 @@ basic_routing: 基本路由
 static_files: 静态文件
 examples: More examples
 faq: 常见问题及解答
-
 # Guide
 guide: 指南
 routing: 路由
@@ -24,15 +22,12 @@ behind_proxies: 代理背后的 Express
 migrating_4: 迁移到 Express 4
 migrating_5: 迁移到 Express 5
 database_integration: 数据库集成
-
 # API reference
-
 api: API 参考
 5x: 5.x
 4x: 4.x
 3x: 3.x (不推荐）
 2x: 2.x (不推荐）
-
 # Advanced topics
 advanced: 高级主题
 developing_template_engines: 模板引擎
@@ -40,7 +35,6 @@ security_updates: 安全更新
 best_practice_security: 安全最佳实践
 best_practice_performance: 性能最佳实践
 healthcheck_graceful_shutdown: Health checks & shutdown
-
 # Resources
 resources: 资源
 glossary: 词汇表
@@ -49,10 +43,8 @@ community: 社区
 utils: Utility modules
 contributing: Contributing to Express
 changelog: Release Change Log
-
 # Support
 support: Support
-
 # Blog
 blog: Blog
 latest_post: Latest post
