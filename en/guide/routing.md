@@ -361,7 +361,7 @@ module.exports = router
 Then, load the router module in the app:
 
 ```js
-const birds = require('./birds')
+const birds = require('./birds.js')
 
 // ...
 
