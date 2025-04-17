@@ -344,16 +344,13 @@ code {
 pre {
   padding: 16px;
   border-radius: 3px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   background-color: var(--code-bg);
 /* keyboard focus offset improve visibility */
-/* focus on desktop */
-  @media all and (min-width: 1010px) { 
     &:focus {
-      outline-offset: 2px;
-      outline: 2px solid var(--hover-border);
+      border-width: 2px;
+      border-color: var(--hover-border);
     }
-  }
 }
 
 pre code {
