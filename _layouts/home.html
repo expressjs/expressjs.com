@@ -7,10 +7,17 @@
   <body class="en-doc">
   {% else %}
   <body class="non-en-doc">
-    <div id="i18n-notice-box" class="doc-box doc-notice">
-      {% include i18n-notice.html %}
-    </div>
   {% endif %}
+
+    {% include header.html %}
+
+    <div id="overlay"></div>
+
+    {% if page.lang != 'en' %}
+         <div id="i18n-notice-box" class="doc-box doc-notice">
+            {% include i18n-notice.html %}
+        </div>
+    {% endif %}
 
     <main class="home">
       {{ content }}

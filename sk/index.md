@@ -8,8 +8,6 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
 ---
 
 <section id="home-content">
-  {% include header.html %}
-  <div id="overlay"></div>
   <div id="homepage-leftpane" class="pane">
     <section id="description">
         <div class="express"><a href="/">Express</a></div>
