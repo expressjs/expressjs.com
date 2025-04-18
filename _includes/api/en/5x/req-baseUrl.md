@@ -23,7 +23,7 @@ the `baseUrl` property returns the matched string, not the pattern(s). In the
 following example, the `greet` router is loaded on two path patterns.
 
 ```js
-app.use(['/gre+t', '/hel{2}o'], greet) // load the router on '/gre+t' and '/hel{2}o'
+app.use(['/gre:"param"t', '/hel{l}o'], greet) // load the router on '/gre:"param"t' and '/hel{l}o'
 ```
 
 When a request is made to `/greet/jp`, `req.baseUrl` is "/greet". When a request is

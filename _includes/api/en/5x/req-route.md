@@ -3,8 +3,8 @@
 Contains the currently-matched route, a string. For example:
 
 ```js
-app.get('/user/:id?', (req, res) => {
-  console.log(req.route)
+app.get('/user/{:id}', function userIdHandler (req, res) {
+  console.dir(req.route, { depth: null })
   res.send('GET')
 })
 ```
@@ -12,15 +12,20 @@ app.get('/user/:id?', (req, res) => {
 Example output from the previous snippet:
 
 ```
-{ path: '/user/:id?',
-  stack:
-   [ { handle: [Function: userIdHandler],
-       name: 'userIdHandler',
-       params: undefined,
-       path: undefined,
-       keys: [],
-       regexp: /^\/?$/i,
-       method: 'get' } ],
-  methods: { get: true }
+Route {
+  path: '/user/{:id}',
+  stack: [
+    Layer {
+      handle: [Function: userIdHandler],
+      keys: [],
+      name: 'userIdHandler',
+      params: undefined,
+      path: undefined,
+      slash: false,
+      matchers: [ [Function: match] ],
+      method: 'get'
+    }
+  ],
+  methods: [Object: null prototype] { get: true }
 }
 ```
