@@ -1,58 +1,58 @@
 const codeBlocks = document.querySelectorAll("pre:has(code)");
 
 codeBlocks.forEach((block) => {
-  // only add button if browser supports Clipboard API
+  // Only add button if browser supports Clipboard API
   if (!navigator.clipboard) return;
 
-  const button = document.createElement("button");
-  button.setAttribute("title", "copy code");
-  button.setAttribute("aria-label","click to copy code");
+  const button = createCopyButton();
   block.appendChild(button);
-  block.setAttribute("tabindex", 0); //add keyboard a11y for <pre></pre> 
+  block.setAttribute("tabindex", 0); // Add keyboard a11y for <pre></pre>
 
   button.addEventListener("click", async () => {
     await copyCode(block, button);
   });
-
 });
 
+function createCopyButton() {
+  const button = document.createElement("button");
+  setButtonAttributes(button, {
+    type: "button", // button doesn't act as a submit button
+    title: "copy code",
+    "aria-label": "click to copy code",
+  });
+  return button;
+}
+
+function setButtonAttributes(button, attributes) {
+  for (const [key, value] of Object.entries(attributes)) {
+    button.setAttribute(key, value);
+  }
+}
+
 async function copyCode(block, button) {
-    const code = block.querySelector("code");
-    const text = code.innerText;
+  const code = block.querySelector("code");
+  const text = code.innerText;
 
-    try {
-      // success UI update
-      await navigator.clipboard.writeText(text);
-      // screen reader will  announce text is copied to clipboard
-      button.setAttribute("aria-live", "polite");
-      button.setAttribute("aria-label","code is copied!"); 
-      button.classList.add("copied");
+  try {
+    await navigator.clipboard.writeText(text);
+    updateButtonState(button, "copied", "code is copied!");
+  } catch {
+    updateButtonState(button, "failed", "failed!");
+  }
+}
 
-      // remove previous timer on multiple clicks (data-timer-id)
-      if (button.dataset.timerId) clearTimeout(button.dataset.timerId);
-      
-      const timer = setTimeout(() => {
-        button.classList.remove("copied");
-        button.setAttribute("aria-label","click to copy code");
-      }, 1000);
+function updateButtonState(button, statusClass, ariaLabel) {
+  button.setAttribute("aria-live", "polite");
+  button.setAttribute("aria-label", ariaLabel);
+  button.classList.add(statusClass);
 
-      button.dataset.timerId = timer;
-    }catch{
-      //  failed UI update
-      // screen reader will  announce text is copied to clipboard
-      button.setAttribute("aria-live", "polite");
-      button.setAttribute("aria-label","failed!"); 
-      button.classList.add("failed");
+  // Clear any existing timer
+  if (button.dataset.timerId) clearTimeout(button.dataset.timerId);
 
-      // remove previous timer on multiple clicks (data-timer-id)
-      if (button.dataset.timerId) clearTimeout(button.dataset.timerId);
-      
-      const timer = setTimeout(() => {
-        button.classList.remove("failed");
-        button.setAttribute("aria-label","click to copy code");
-      }, 1000);
+  const timer = setTimeout(() => {
+    button.classList.remove(statusClass);
+    button.setAttribute("aria-label", "click to copy code");
+  }, 1000);
 
-
-      button.dataset.timerId = timer;
-    }
-  };
+  button.dataset.timerId = timer;
+}
