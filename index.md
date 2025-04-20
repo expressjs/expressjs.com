@@ -13,7 +13,13 @@ redirect_from: "/en/index.html"
         <div class="express"><a href="/">Express</a><a href="{{ page.lang }}/changelog/4x.html#{{ site.data.express.current_version }}" id="express-version">{{ site.data.express.current_version }}</a></div>
         <h1 class="description">Fast, unopinionated, minimalist web framework for <a href='https://nodejs.org/en/'>Node.js</a></h1>
     </section>
-    <div id="install-command">$ npm install express --save</div>
+    <div id="install-container" style="display: flex; align-items: center; gap: 10px;">
+  <code id="install-command">npm install express --save</code>
+  <button onclick="copyInstallCommand()" style="padding: 5px 10px; background-color: #333; color: white; border: none; border-radius: 4px; cursor: pointer;">
+    📋 Copy
+  </button>
+</div>
+
   </div>
 
   <div id="homepage-rightpane" class="pane" markdown="1">
@@ -62,5 +68,13 @@ app.listen(port, () => {
       meant to be augmented through the use of Express <a href="{{ page.lang }}/resources/middleware.html">middleware</a> modules.
     </div>
   </div>
-
 </section>
+<script>
+  function copyInstallCommand() {
+    const text = document.getElementById("install-command").innerText;
+    navigator.clipboard.writeText(text)
+      .then(() => alert("✅ Copied to clipboard!"))
+      .catch(() => alert("❌ Failed to copy"));
+  }
+</script>
+
