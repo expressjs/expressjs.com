@@ -3,7 +3,7 @@
 Contains the currently-matched route, a string. For example:
 
 ```js
-app.get('/user/{:id}', function userIdHandler (req, res) {
+app.get('/user/{:id}', (req, res) => {
   console.dir(req.route, { depth: null })
   res.send('GET')
 })
@@ -16,9 +16,9 @@ Route {
   path: '/user/{:id}',
   stack: [
     Layer {
-      handle: [Function: userIdHandler],
+      handle: [Function (anonymous)],
       keys: [],
-      name: 'userIdHandler',
+      name: '<anonymous>',
       params: undefined,
       path: undefined,
       slash: false,
