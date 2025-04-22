@@ -47,8 +47,7 @@ function updateButtonState(button, statusClass, ariaLabel) {
   button.classList.add(statusClass);
 
   // Clear any existing timer
-  if (button.dataset.timerId) clearTimeout(button.dataset.timerId);
-
+  if (button.dataset.timerId) clearTimeout(Number(button.dataset.timerId));
   const timer = setTimeout(() => {
     button.classList.remove(statusClass);
     button.setAttribute("aria-label", "click to copy code");
