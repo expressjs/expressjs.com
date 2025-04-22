@@ -348,7 +348,6 @@ pre {
   background-color: var(--code-bg);
 /* keyboard focus offset improve visibility */
     &:focus {
-      border-width: 2px;
       border-color: var(--hover-border);
     }
 }
