@@ -30,16 +30,16 @@ patterns it is mounted on, as shown in the following example.
 const admin = express()
 
 admin.get('/', (req, res) => {
-  console.log(admin.mountpath) // [ '/adm*n', '/manager' ]
+  console.log(admin.mountpath) // [ '/adm{*splat}n', '/manager' ]
   res.send('Admin Homepage')
 })
 
 const secret = express()
 secret.get('/', (req, res) => {
-  console.log(secret.mountpath) // /secr*t
+  console.log(secret.mountpath) // /secr{*splat}t
   res.send('Admin Secret')
 })
 
-admin.use('/secr*t', secret) // load the 'secret' router on '/secr*t', on the 'admin' sub app
-app.use(['/adm*n', '/manager'], admin) // load the 'admin' router on '/adm*n' and '/manager', on the parent app
+admin.use('/secr{*splat}t', secret) // load the 'secret' router on '/secr{*splat}t', on the 'admin' sub app
+app.use(['/adm{*splat}n', '/manager'], admin) // load the 'admin' router on '/adm{*splat}n' and '/manager', on the parent app
 ```
