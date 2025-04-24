@@ -15,6 +15,14 @@ disk and evaluating Node.js modules, and as so for security reasons should not
 contain input from the end-user.
 </div>
 
+<div class="doc-box doc-warn" markdown="1">
+The `locals` object is used by view engines to render a response. The object
+keys may be particularly sensitive and should not contain user-controlled
+input, as it may affect the operation of the view engine or provide a path to
+cross-site scripting. Consult the documentation for the used view engine for
+additional considerations.
+</div>
+
 <div class="doc-box doc-notice" markdown="1">
 The local variable `cache` is reserved for enabling view cache. Set it to `true`, if you want to
 cache view during development; view caching is enabled in production by default.

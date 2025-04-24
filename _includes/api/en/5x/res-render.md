@@ -12,6 +12,12 @@ For more information, see [Using template engines with Express](/{{page.lang}}/g
 
 {% include admonitions/warning.html content="The `view` argument performs file system operations like reading a file from disk and evaluating Node.js modules, and as so for security reasons should not contain input from the end-user." %}
 
+{% include admonitions/warning.html content="The `locals` object is used by view engines to render a response. The object
+keys may be particularly sensitive and should not contain user-controlled
+input, as it may affect the operation of the view engine or provide a path to
+cross-site scripting. Consult the documentation for the used view engine for
+additional considerations." %}
+
 {% include admonitions/caution.html content="The local variable `cache` enables view caching. Set it to `true`,
 to cache the view during development; view caching is enabled in production by default." %}
 
