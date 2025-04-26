@@ -344,12 +344,130 @@ code {
 pre {
   padding: 16px;
   border-radius: 3px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   background-color: var(--code-bg);
+/* keyboard focus offset improve visibility */
+    &:focus {
+      border-color: var(--hover-border);
+    }
 }
 
 pre code {
   padding: 0;
+}
+
+pre:has(code) {
+  position: relative;
+
+  &:is(:hover, :focus) {
+    button {
+      display: flex;
+    }
+  }
+  /* focus copy btn by keyboard */
+  &:focus-within button {
+    display: flex;
+  }
+}
+
+pre:has(code) button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: none;
+  z-index: 100;
+  display: none;
+  cursor: pointer;
+  background-color: inherit;
+  padding: 2px;
+  border-radius: 5px;
+
+  &::after {
+  content: "";
+  background-color: var(--card-fg);
+  mask-image: url("../images/copy-btn.svg");
+  mask-size: 1.5rem;
+  mask-repeat: no-repeat;
+  width: 1.5rem;
+  height: 1.5rem;
+  }
+
+  &:is(:hover, :focus) {
+    background-color: var(--hover-bg);
+    outline: 2px solid var(--hover-border);
+  }
+
+  @media all and (max-width: 370px) { 
+    padding: 1px;
+
+    &::after {
+      mask-size: 1rem;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+pre:has(code) button.copied {
+  outline-color: var(--supported-fg);
+
+  &::after { 
+    background-color: var(--supported-fg);
+  }
+  
+  &::before {
+    font-size: 0.85rem;
+    position: absolute;
+    left: -58px;
+    content: "copied!";
+
+    width: fit-content;
+    height: fit-content;
+    padding: 4px;
+    border-radius: 2px;
+    color: var(--card-fg);
+    background-color: var(--card-bg);
+    outline: 1px solid var(--supported-fg);
+  }
+
+  @media all and (max-width: 400px) { 
+    &::before {
+      left: -50px;
+      font-size: 0.7rem;
+      padding: 3px;
+    }
+  }
+}
+
+pre:has(code) button.failed {
+  outline-color: var(--eol-fg);
+
+  &::after { 
+    background-color: var(--eol-fg);
+  }
+  
+  &::before {
+    font-size: 0.85rem;
+    position: absolute;
+    left: -58px;
+    content: "failed!";
+
+    width: fit-content;
+    height: fit-content;
+    padding: 4px;
+    border-radius: 2px;
+    color: var(--card-fg);
+    background-color: var(--card-bg);
+    outline: 1px solid var(--eol-fg);
+  }
+
+  @media all and (max-width: 400px) { 
+    &::before {
+      left: -50px;
+      font-size: 0.7rem;
+      padding: 3px;
+    }
+  }
 }
 
 /* top button */
