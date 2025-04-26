@@ -31,7 +31,9 @@ function setButtonAttributes(button, attributes) {
 
 async function copyCode(block, button) {
   const code = block.querySelector("code");
-  const text = code.innerText;
+  let text = code.innerText;
+  // remove "$" and space if exists at the beginning of the code
+  text = text.replace(/^\$\s?/,"");
 
   try {
     await navigator.clipboard.writeText(text);

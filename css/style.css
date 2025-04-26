@@ -143,12 +143,17 @@ main.home {
   column-gap: 8px
 }
 
-#install-command {
+.install-command {
   font-family: Consolas, Monaco, "Andale Mono", monospace;
-  padding: 5px 10px;
+  padding: 10px;
   border: 1px solid var(--border);
   border-radius: 3px;
   max-width: 375px;
+  background-color: inherit;
+
+  code {
+    background-color: inherit;
+  }
 }
 
 .content {
@@ -1147,7 +1152,7 @@ h2 a {
     flex-direction: column;
   }
 
-  #install-command {
+  .install-command {
     display: none;
   }
 
@@ -1217,11 +1222,6 @@ h2 a {
     font-size: 3em;
     line-height: .9em;
     font-weight: 200;
-  }
-
-  #install-command {
-    width: 100%;
-    margin-right: 5%;
   }
 
   .logo-container {
