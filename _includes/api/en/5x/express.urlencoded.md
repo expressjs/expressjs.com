@@ -9,7 +9,7 @@ parser accepts only UTF-8 encoding of the body and supports automatic
 inflation of `gzip` and `deflate` encodings.
 
 A new `body` object containing the parsed data is populated on the `request`
-object after the middleware (i.e. `req.body`), or an empty object (`{}`) if
+object after the middleware (i.e. `req.body`), or `undefined` if
 there was no body to parse, the `Content-Type` was not matched, or an error
 occurred. This object will contain key-value pairs, where the value can be
 a string or array (when `extended` is `false`), or any type (when `extended`

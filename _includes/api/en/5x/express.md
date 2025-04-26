@@ -14,11 +14,19 @@ const app = express()
 </section>
 
 <section markdown="1">
-  {% include api/en/5x/express.static.md %}
+  {% include api/en/5x/express.raw.md %}
 </section>
 
 <section markdown="1">
   {% include api/en/5x/express.router.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/express.static.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/express.text.md %}
 </section>
 
 <section markdown="1">
