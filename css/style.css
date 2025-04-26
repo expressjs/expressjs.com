@@ -255,6 +255,13 @@ a {
 /* logo */
 .logo-container a {
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items : center;
+}
+
+.express-logo {
+  fill : var(--card-fg);
 }
 
 #description .express {
