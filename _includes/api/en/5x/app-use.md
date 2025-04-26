@@ -97,7 +97,7 @@ app.use('/abcd', (req, res, next) => {
 This will match paths starting with `/abcd` and `/abd`:
 
 ```js
-app.use('/ab(c?)d', (req, res, next) => {
+app.use('/ab{c}d', (req, res, next) => {
   next()
 })
 ```

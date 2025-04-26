@@ -7,8 +7,6 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
   providing a robust set of features for web and mobile applications.
 ---
 <section id="home-content">
-  {% include header.html %}
-  <div id="overlay"></div>
   <div id="homepage-leftpane" class="pane">
     <section id="description">
         <div class="express"><a href="/">Express</a><a href="changelog/4x.html#{{ site.data.express.current_version }}" id="express-version">{{ site.data.express.current_version }}</a></div>
