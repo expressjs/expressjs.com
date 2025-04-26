@@ -669,14 +669,14 @@ a.edit-github-btn{
   padding: 0.5rem;
   border-radius: 0.3rem;
 
-  span {
-    height: 20px;
-  }
-
   &:is(:hover, :active, :focus) {
     color: var(--fg);
     background-color: var(--hover-bg);
     outline: 1px solid var(--card-fg);
+  }
+
+  > svg {
+    fill : var(--card-fg)
   }
 }
 

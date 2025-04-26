@@ -11,19 +11,12 @@
       <nav aria-labelledby="sidebar-heading">
         <div class="toc-container">
           <h3 id="sidebar-heading" class="toc-heading"><em>On this page</em></h3>
-          {% include api/en/5x/menu.md %}
+          {% include api/en/{{page.version}}/menu.md %}
         </div>
       </nav>
       <main>
         {{ content }}
-        <a role="button" class="edit-github-btn" href="{{ site.github.repository_url }}/tree/gh-pages/_includes/{{page.menu}}/en/5x" aria-label="GitHub button">
-          <span class="hidden-dark">
-            {% include icons/github-light.svg %}
-          </span>
-          <span class="hidden-light">
-            {% include icons/github-dark.svg %}
-          </span>
-          Edit this page</a>
+        {% include github-edit-btn.html %}
       </main>
     </div>
 

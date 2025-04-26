@@ -1,7 +1,7 @@
 ---
-layout: 4x-api
+layout: api
+version: 4x
 title: Express 4.x - API Reference
-menu: api
 lang: uz
 description: Access the API reference for Express.js 4.x, detailing all modules, methods,
   and properties for building web applications with this version.
