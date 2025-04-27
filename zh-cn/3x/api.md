@@ -1,7 +1,7 @@
 ---
-layout: 3x-api
+layout: api
+version: 3x
 title: Express 3.x - API 参考
-menu: api
 lang: zh-cn
 description: Access the API reference for Express.js version 3.x, noting that this
   version is end-of-life and no longer maintained - includes details on modules and

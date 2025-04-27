@@ -1,7 +1,7 @@
 ---
-layout: 3x-api
+layout: api
+version: 3x
 title: Express 3.x - API 참조
-menu: api
 lang: ko
 description: Access the API reference for Express.js version 3.x, noting that this
   version is end-of-life and no longer maintained - includes details on modules and

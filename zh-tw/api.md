@@ -1,5 +1,6 @@
 ---
-layout: 4x-api
+layout: api
+version: 4x
 title: Express 4.x - API 參照
 lang: zh-tw
 description: Access the API reference for Express.js detailing all modules, methods,

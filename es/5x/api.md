@@ -1,7 +1,7 @@
 ---
-layout: 5x-api
+layout: api
+version: 5x
 title: Express 5.x - Referencia de API
-menu: api
 lang: es
 description: Access the API reference for Express.js 5.x, detailing all modules, methods,
   and properties for building web applications with this latest version.

@@ -1,7 +1,7 @@
 ---
-layout: 5x-api
+layout: api
+version: 5x
 title: Express 5.x - API 參照
-menu: api
 lang: zh-tw
 description: Access the API reference for Express.js 5.x, detailing all modules, methods,
   and properties for building web applications with this latest version.

@@ -1,5 +1,6 @@
 ---
-layout: 4x-api
+layout: api
+version: 5x
 title: Express 4.x - Riferimento API
 lang: it
 description: Access the API reference for Express.js detailing all modules, methods,
