@@ -1568,7 +1568,7 @@ strong.eol {
 }
 
 .hidden-dark {
-  display: flex;
+  display: block;
 }
 
 .hidden-light {
