@@ -3,6 +3,14 @@
 The `app.locals` object has properties that are local variables within the application,
 and will be available in templates rendered with [res.render](#res.render).
 
+<div class="doc-box doc-warn" markdown="1">
+The `locals` object is used by view engines to render a response. The object
+keys may be particularly sensitive and should not contain user-controlled
+input, as it may affect the operation of the view engine or provide a path to
+cross-site scripting. Consult the documentation for the used view engine for
+additional considerations.
+</div>
+
 ```js
 console.dir(app.locals.title)
 // => 'My App'
