@@ -334,7 +334,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding-inline: 25px;
-  z-index: 100;
+  z-index: 200;
   border-bottom: 1px solid var(--hover-fg);
 }
 
