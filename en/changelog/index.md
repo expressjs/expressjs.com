@@ -565,7 +565,12 @@ The 4.14.0 minor release includes bug fixes, security update, performance improv
   <li markdown="1" class="changelog-item">
   The [jshttp/cookie module](https://www.npmjs.com/package/cookie) (in addition to a number of other improvements) has been updated and now the [`res.cookie()` method](/{{ page.lang }}/4x/api.html#res.cookie) supports the `sameSite` option to let you specify the [SameSite cookie attribute](https://tools.ietf.org/html/draft-west-first-party-cookies-07).  
   
-  {% include admonitions/note.html content="This attribute has not yet been fully standardized, may change in the future, and many clients may ignore it." %}
+  {% capture note-4-14-0 %}
+
+    This attribute has not yet been fully standardized, may change in the future, and many clients may ignore it.
+
+  {% endcapture %}
+  {% include admonitions/note.html content=note-4-14-0 %}
 
   The possible value for the `sameSite` option are:
 

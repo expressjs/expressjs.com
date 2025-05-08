@@ -79,12 +79,20 @@ Route paths, in combination with a request method, define the endpoints at which
 {% include admonitions/caution.html content=note-dollar-character %}
 
 {% capture note-path-to-regexp %}
-  Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths; see the path-to-regexp documentation for all the possibilities in defining route paths. [Express Playground Router](https://bjohansebas.github.io/playground-router/) is a handy tool for testing basic Express routes, although it does not support pattern matching.
+
+Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths; see the path-to-regexp documentation for all the possibilities in defining route paths. [Express Playground Router](https://bjohansebas.github.io/playground-router/) is a handy tool for testing basic Express routes, although it does not support pattern matching.
+
 {% endcapture %}
 
 {% include admonitions/note.html content=note-path-to-regexp %}
 
-{% include admonitions/warning.html content="Query strings are not part of the route path." %}
+{% capture query-string-note %}
+
+Query strings are not part of the route path.
+
+{% endcapture %}
+
+{% include admonitions/warning.html content=query-string-note %}
 
 ### Route paths based on strings
 
@@ -217,10 +225,19 @@ Request URL: http://localhost:3000/user/42
 req.params: {"userId": "42"}
 ```
 
-{% include admonitions/warning.html content="Because the regular expression is usually part of a literal string, be sure to escape any `\` characters with an additional backslash, for example `\\d+`." %}
+{% capture escape-advisory %}
+
+Because the regular expression is usually part of a literal string, be sure to escape any `\` characters with an additional backslash, for example `\\d+`.
+
+{% endcapture %}
+
+
+{% include admonitions/warning.html content=escape-advisory %}
 
 {% capture warning-version %}
+
 In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `*` character in regular expressions is not interpreted in the usual way</a>. As a workaround, use `{0,}` instead of `*`. This will likely be fixed in Express 5.
+
 {% endcapture %}
 
 {% include admonitions/warning.html content=warning-version %}
