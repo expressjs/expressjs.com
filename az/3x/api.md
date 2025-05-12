@@ -1,20 +1,19 @@
 ---
 layout: api
 version: 3x
-title: Express 3.x - API Kaynak
-lang: tr
-description: Access the API reference for Express.js version 3.x, noting that this
-  version is end-of-life and no longer maintained - includes details on modules and
-  methods.
+title: Express 3.x - API Mənbə
+lang: az
+description: Express.js versiya 3.x üçün API istinadına daxil olun, bu versiyanın
+  artıq dəstəklənmədiyini və baxımda olmadığını qeyd edərək - modullar və metodlar haqqında ətraflı məlumat daxildir.
 ---
 <div id="api-doc" markdown="1">
 
   <div class="doc-box doc-warn" markdown="1">
-  **Express 3.x IS END-OF-LIFE AND NO LONGER MAINTAINED**
+  **Express 3.x DƏSTƏKLƏNMİR VƏ ARTIQ BAXIMDA DEYİL**
 
-  Known and unknown security and performance issues in 3.x have not been addressed since the last update (1 August, 2015). It is highly recommended to use the latest version of Express.
+  3.x-də məlum və naməlum təhlükəsizlik və performans problemləri son yeniləmədən (1 Avqust, 2015) bəri həll edilməyib. Express-in ən son versiyasından istifadə etmək tövsiyə olunur.
 
-  If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/{{ page.lang }}/support#commercial-support-options).
+  Əgər 3.x-dən yuxarı versiyaya keçə bilmirsinizsə, [Kommersiya Dəstək Seçimlərini](/{{ page.lang }}/support#commercial-support-options) nəzərdən keçirin.
   </div>
 
   <h1>3.x API</h1>

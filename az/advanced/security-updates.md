@@ -1,62 +1,62 @@
 ---
 layout: page
-title: Express Güvenlik Güncellemeleri
+title: Express Təhlükəsizlik Yeniləmələri
 menu: advanced
-lang: tr
+lang: az
 description: Review the latest security updates and patches for Express.js, including
   detailed vulnerability lists for different versions to help maintain a secure application.
 ---
 <div id="page-doc" markdown="1">
 
-# Security updates
+# Təhlükəsizlik yeniləmələri
 
 <div class="doc-box doc-notice" markdown="1">
-Node.js vulnerabilities directly affect Express. Therefore [keep a watch on Node.js vulnerabilities](https://nodejs.org
-/en/blog/vulnerability/) and make sure you are using the latest stable version of Node.js.
+Node.js zəiflikləri birbaşa Express-ə təsir edir. Buna görə də [Node.js zəifliklərini izləyin](https://nodejs.org
+/en/blog/vulnerability/) və ən son sabit Node.js versiyasından istifadə etdiyinizə əmin olun.
 </div>
 
-The list below enumerates the Express vulnerabilities that were fixed in the specified version update.
+Aşağıdakı siyahıda göstərilən versiya yeniləmələrində düzəldilmiş Express zəiflikləri sadalanır.
 
-**NOTE**: If you believe you have discovered a security vulnerability in Express, please see
-[Security Policies and Procedures](https://github.com/expressjs/express/blob/master/Security.md).
+**QEYD**: Əgər Express-də təhlükəsizlik zəifliyi aşkar etdiyinizi düşünürsünüzsə, zəhmət olmasa
+[Təhlükəsizlik Siyasəti və Prosedurlarına](https://github.com/expressjs/express/blob/master/Security.md) baxın.
 
 ## 4.x
 
   * 4.15.2
-    * The dependency `qs` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:qs:20170213), but this issue does not impact Express. Updating to 4.15.2 is a good practice, but not required to address the vulnerability.
+    * `qs` asılılığı [zəifliyi](https://snyk.io/vuln/npm:qs:20170213) aradan qaldırmaq üçün yenilənib, lakin bu məsələ Express-ə təsir etmir. 4.15.2-yə yenilənmək yaxşı təcrübədir, lakin zəifliyi aradan qaldırmaq üçün zəruri deyil.
   * 4.11.1
-    * Fixed root path disclosure vulnerability in `express.static`, `res.sendfile`, and `res.sendFile`
+    * `express.static`, `res.sendfile` və `res.sendFile` funksiyalarında kök yolunun açıqlanması zəifliyi düzəldildi
   * 4.10.7
-    * Fixed open redirect vulnerability in `express.static` ([advisory](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * `express.static` funksiyasında açıq yönləndirmə zəifliyi düzəldildi ([məsləhət](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 4.8.8
-    * Fixed directory traversal vulnerabilities in `express.static` ([advisory](http://npmjs.com/advisories/32) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
+    * `express.static` funksiyasında kataloq səviyyəsində keçid zəiflikləri düzəldildi ([məsləhət](http://npmjs.com/advisories/32) , [CVE-2014-6394](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6394)).
   * 4.8.4
-    * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually lead to `EMFILE` errors and server unresponsiveness.
+    * Node.js 0.10 bəzi hallarda `fd` sızıntısına səbəb ola bilər ki, bu da `express.static` və `res.sendfile` funksiyalarına təsir edir. Zərərli sorğular `fd` sızıntısına və nəticədə `EMFILE` xətası və serverin cavab verməməsinə səbəb ola bilər.
   * 4.8.0
-    * Sparse arrays that have extremely high indexes in the query string could cause the process to run out of memory and crash the server.
-    * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
+    * Sorğu sətrində çox yüksək indeksli seyrək massivlər prosesin yaddaşının tükənməsinə və serverin çökməsinə səbəb ola bilər.
+    * Çox dərin yerləşdirilmiş sorğu sətir obyektləri prosesin bloklanmasına və serverin müvəqqəti cavabsız qalmasına səbəb ola bilər.
 
 ## 3.x
 
   <div class="doc-box doc-warn" markdown="1">
-  **Express 3.x IS END-OF-LIFE AND NO LONGER MAINTAINED**
+  **Express 3.x DƏSTƏK MÜDDƏTİNİN SONUNA ÇATMIŞDIR VƏ ARTIQ SAXLANILMIR**
 
-  Known and unknown security and performance issues in 3.x have not been addressed since the last update (1 August, 2015). It is highly recommended to use the latest version of Express.
+  3.x versiyasında məlum və məlum olmayan təhlükəsizlik və performans problemləri son yeniləmədən (1 Avqust 2015) bəri həll olunmayıb. Son Express versiyasından istifadə etmək şiddətlə tövsiyə olunur.
 
-  If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/{{ page.lang }}/support#commercial-support-options).
+  Əgər 3.x-dən daha yeni versiyaya keçmək mümkün deyilsə, zəhmət olmasa [Kommersiya Dəstək Seçimlərinə](/{{ page.lang }}/support#commercial-support-options) baxın.
   </div>
 
   * 3.19.1
-    * Fixed root path disclosure vulnerability in `express.static`, `res.sendfile`, and `res.sendFile`
+    * `express.static`, `res.sendfile` və `res.sendFile` funksiyalarında kök yolunun açıqlanması zəifliyi düzəldildi
   * 3.19.0
-    * Fixed open redirect vulnerability in `express.static` ([advisory](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
+    * `express.static` funksiyasında açıq yönləndirmə zəifliyi düzəldildi ([məsləhət](https://npmjs.com/advisories/35), [CVE-2015-1164](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1164)).
   * 3.16.10
-    * Fixed directory traversal vulnerabilities in `express.static`.
+    * `express.static` funksiyasında kataloq səviyyəsində keçid zəiflikləri düzəldildi.
   * 3.16.6
-    * Node.js 0.10 can leak `fd`s in certain situations that affect `express.static` and `res.sendfile`. Malicious requests could cause `fd`s to leak and eventually lead to `EMFILE` errors and server unresponsiveness.
+    * Node.js 0.10 bəzi hallarda `fd` sızıntısına səbəb ola bilər ki, bu da `express.static` və `res.sendfile` funksiyalarına təsir edir. Zərərli sorğular `fd` sızıntısına və nəticədə `EMFILE` xətası və serverin cavab verməməsinə səbəb ola bilər.
   * 3.16.0
-    * Sparse arrays that have extremely high indexes in query string could cause the process to run out of memory and crash the server.
-    * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
+    * Sorğu sətrində çox yüksək indeksli seyrək massivlər prosesin yaddaşının tükənməsinə və serverin çökməsinə səbəb ola bilər.
+    * Çox dərin yerləşdirilmiş sorğu sətir obyektləri prosesin bloklanmasına və serverin müvəqqəti cavabsız qalmasına səbəb ola bilər.
   * 3.3.0
-    * The 404 response of an unsupported method override attempt was susceptible to cross-site scripting attacks.
+    * Dəstəklənməyən metod dəyişdirmə cəhdində 404 cavabı cross-site scripting hücumlarına qarşı həssas idi.
 </div>

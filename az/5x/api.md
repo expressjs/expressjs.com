@@ -1,8 +1,8 @@
 ---
 layout: api
 version: 5x
-title: Express 5.x - API Kaynak
-lang: tr
+title: Express 5.x - API Mənbə
+lang: az
 description: Access the API reference for Express.js 5.x, detailing all modules, methods,
   and properties for building web applications with this latest version.
 ---

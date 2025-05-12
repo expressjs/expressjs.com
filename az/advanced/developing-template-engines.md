@@ -1,45 +1,48 @@
 ---
 layout: page
-title: Express için şablon motoru geliştirme
+title: Express üçün şablon görüntü mühərriki hazırlanması
 menu: advanced
 lang: tr
 description: Learn how to develop custom template engines for Express.js using app.engine(),
   with examples on creating and integrating your own template rendering logic.
 ---
+
 <div id="page-doc" markdown="1">
-# Developing template engines for Express
+# Express üçün şablon mühərriklərinin hazırlanması
 
-Use the `app.engine(ext, callback)` method to create your own template engine. `ext` refers to the file extension, and `callback` is the template engine function, which accepts the following items as parameters: the location of the file, the options object, and the callback function.
+Öz şablon mühərrikinizi yaratmaq üçün `app.engine(ext, callback)` metodundan istifadə edin. `ext` fayl uzantısını, `callback` isə şablon mühərriki funksiyasını ifadə edir. Bu funksiya aşağıdakı parametrləri qəbul edir: faylın yeri, seçimlər obyekti və callback funksiyası.
 
-The following code is an example of implementing a very simple template engine for rendering `.ntl` files.
+Aşağıdakı kod `.ntl` fayllarını göstərmək üçün çox sadə bir şablon mühərrikinin nümunəsidir.
 
 ```js
-const fs = require('fs') // this engine requires the fs module
-app.engine('ntl', (filePath, options, callback) => { // define the template engine
+const fs = require('fs')
+app.engine('ntl', (filePath, options, callback) => {
   fs.readFile(filePath, (err, content) => {
     if (err) return callback(err)
-    // this is an extremely simple template engine
     const rendered = content.toString().replace('#title#', `<title>${options.title}</title>`)
       .replace('#message#', `<h1>${options.message}</h1>`)
     return callback(null, rendered)
   })
 })
-app.set('views', './views') // specify the views directory
-app.set('view engine', 'ntl') // register the template engine
-```
+app.set('views', './views')
+app.set('view engine', 'ntl')
+````
 
-Your app will now be able to render `.ntl` files. Create a file named `index.ntl` in the `views` directory with the following content.
+Tətbiqiniz indi `.ntl` fayllarını göstərə biləcək. `views` qovluğunda aşağıdakı məzmuna malik `index.ntl` adlı fayl yaradın.
 
 ```pug
 #title#
 #message#
 ```
-Then, create the following route in your app.
+
+Sonra tətbiqinizdə aşağıdakı marşrutu (route) yaradın.
 
 ```js
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Hey', message: 'Hello there!' })
+  res.render('index', { title: 'Hey', message: 'Salam!' })
 })
 ```
-When you make a request to the home page, `index.ntl` will be rendered as HTML.
+
+Ana səhifəyə sorğu göndərdiyiniz zaman `index.ntl` HTML kimi göstəriləcək.
+
 </div>

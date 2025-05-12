@@ -1,8 +1,8 @@
 ---
 layout: api
 version: 4x
-title: Express 4.x - API Kaynak
-lang: tr
+title: Express 4.x - API Mənbə
+lang: az
 description: Access the API reference for Express.js 4.x, detailing all modules, methods,
   and properties for building web applications with this version.
 ---
