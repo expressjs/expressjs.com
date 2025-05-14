@@ -317,40 +317,38 @@ app.get('/user', (req, res) => {
   res.sendStatus(200)
 })
 ```
-
-<h4 id="res.sendfile">res.sendfile()</h4>
-
-The `res.sendfile()` function has been replaced by a camel-cased version `res.sendFile()` in Express 5.
-
-{% include admonitions/note.html content=codemod-deprecated-signatures %}
-
-```js
-// v4
-app.get('/user', (req, res) => {
-  res.sendfile('/path/to/file')
-})
-
-// v5
-app.get('/user', (req, res) => {
-  res.sendFile('/path/to/file')
-})
+<h4 id="res.sendfile">res.sendfile()</h4>  
+  
+The `res.sendfile()` function has been replaced by a camel-cased version `res.sendFile()` in Express 5.  
+  
+**Note:** In Express 5, `res.sendFile()` uses the `mime-types` package for MIME type detection, which may return different Content-Type values than Express 4 did. For example, JavaScript files (.js) will now be served with "text/javascript" instead of "application/javascript". If your application depends on specific MIME types, you should test thoroughly after upgrading.  
+  
+{% include admonitions/note.html content=codemod-deprecated-signatures %}  
+  
+```js  
+// v4  
+app.get('/user', (req, res) => {  
+  res.sendfile('/path/to/file')  
+})  
+  
+// v5  
+app.get('/user', (req, res) => {  
+  res.sendFile('/path/to/file')  
+})  
 ```
-
-<h4 id="router.param">router.param(fn)</h4>
-
-The `router.param(fn)` signature was used for modifying the behavior of the `router.param(name, fn)` function. It has been deprecated since v4.11.0, and Express 5 no longer supports it at all.
-
-<h4 id="express.static.mime">express.static.mime</h4>
-
-In Express 5, `mime` is no longer an exported property of the `static` field.
-Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work with MIME type values.
-
-```js
-// v4
-express.static.mime.lookup('json')
-
-// v5
-const mime = require('mime-types')
+<h4 id="express.static.mime">express.static.mime</h4>  
+  
+In Express 5, `mime` is no longer an exported property of the `static` field.  
+Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work with MIME type values.  
+  
+**Important:** This change affects not only direct usage of `express.static.mime` but also other Express methods that rely on MIME type detection, such as `res.sendFile()`. For example, JavaScript files (.js) will now be served with the MIME type "text/javascript" instead of "application/javascript" as in Express 4. Other file types may also have different MIME types than before. If your application depends on specific MIME types, you should test thoroughly after upgrading.  
+  
+```js  
+// v4  
+express.static.mime.lookup('json')  
+  
+// v5  
+const mime = require('mime-types')  
 mime.lookup('json')
 ```
 
