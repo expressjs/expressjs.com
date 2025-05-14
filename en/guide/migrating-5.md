@@ -51,7 +51,7 @@ You can find the list of available codemods [here](https://github.com/expressjs/
   <li><a href="#req.param">req.param(name)</a></li>
   <li><a href="#res.json">res.json(obj, status)</a></li>
   <li><a href="#res.jsonp">res.jsonp(obj, status)</a></li>
-  <li><a href="#magic-redirect">res.redirect('back') and res.location('back')</a></li>  
+  <li><a href="#magic-redirect">res.redirect('back') and res.location('back')</a></li>
   <li><a href="#res.redirect">res.redirect(url, status)</a></li>
   <li><a href="#res.send.body">res.send(body, status)</a></li>
   <li><a href="#res.send.status">res.send(status)</a></li>
@@ -317,38 +317,38 @@ app.get('/user', (req, res) => {
   res.sendStatus(200)
 })
 ```
-<h4 id="res.sendfile">res.sendfile()</h4>  
-  
-The `res.sendfile()` function has been replaced by a camel-cased version `res.sendFile()` in Express 5.  
-  
-**Note:** In Express 5, `res.sendFile()` uses the `mime-types` package for MIME type detection, which may return different Content-Type values than Express 4 did. For example, JavaScript files (.js) will now be served with "text/javascript" instead of "application/javascript". If your application depends on specific MIME types, you should test thoroughly after upgrading.  
-  
-{% include admonitions/note.html content=codemod-deprecated-signatures %}  
-  
-```js  
-// v4  
-app.get('/user', (req, res) => {  
-  res.sendfile('/path/to/file')  
-})  
-  
-// v5  
-app.get('/user', (req, res) => {  
-  res.sendFile('/path/to/file')  
-})  
+<h4 id="res.sendfile">res.sendfile()</h4>
+
+The `res.sendfile()` function has been replaced by a camel-cased version `res.sendFile()` in Express 5.
+
+**Note:** In Express 5, `res.sendFile()` uses the `mime-types` package for MIME type detection, which may return different Content-Type values than Express 4 did. For example, JavaScript files (.js) will now be served with "text/javascript" instead of "application/javascript". If your application depends on specific MIME types, you should test thoroughly after upgrading.
+
+{% include admonitions/note.html content=codemod-deprecated-signatures %}
+
+```js
+// v4
+app.get('/user', (req, res) => {
+  res.sendfile('/path/to/file')
+})
+
+// v5
+app.get('/user', (req, res) => {
+  res.sendFile('/path/to/file')
+})
 ```
-<h4 id="express.static.mime">express.static.mime</h4>  
-  
-In Express 5, `mime` is no longer an exported property of the `static` field.  
-Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work with MIME type values.  
-  
-**Important:** This change affects not only direct usage of `express.static.mime` but also other Express methods that rely on MIME type detection, such as `res.sendFile()`. For example, JavaScript files (.js) will now be served with the MIME type "text/javascript" instead of "application/javascript" as in Express 4. Other file types may also have different MIME types than before. If your application depends on specific MIME types, you should test thoroughly after upgrading.  
-  
-```js  
-// v4  
-express.static.mime.lookup('json')  
-  
-// v5  
-const mime = require('mime-types')  
+<h4 id="express.static.mime">express.static.mime</h4>
+
+In Express 5, `mime` is no longer an exported property of the `static` field.
+Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work with MIME type values.
+
+**Important:** This change affects not only direct usage of `express.static.mime` but also other Express methods that rely on MIME type detection, such as `res.sendFile()`. For example, JavaScript files (.js) will now be served with the MIME type "text/javascript" instead of "application/javascript" as in Express 4. Other file types may also have different MIME types than before. If your application depends on specific MIME types, you should test thoroughly after upgrading.
+
+```js
+// v4
+express.static.mime.lookup('json')
+
+// v5
+const mime = require('mime-types')
 mime.lookup('json')
 ```
 
@@ -392,7 +392,7 @@ app.get('/*splat', async (req, res) => {
 ```
 
 {% capture note_wildcard %}
-`*splat` matches any path without the root path. If you need to match the root path as well `/`, you can use `/{*splat}`, wrapping the wildcard in braces. 
+`*splat` matches any path without the root path. If you need to match the root path as well `/`, you can use `/{*splat}`, wrapping the wildcard in braces.
 
 ```js
 // v5
@@ -422,7 +422,7 @@ app.get('/:file{.:ext}', async (req, res) => {
 app.get('/[discussion|page]/:slug', async (req, res) => {
   res.status(200).send('ok')
 })
-``` 
+```
 should be changed to:
 ```js
 app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
@@ -430,7 +430,7 @@ app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
 })
 ```
 
-- Some characters have been reserved to avoid confusion during upgrade (`()[]?+!`), use `\` to escape them. 
+- Some characters have been reserved to avoid confusion during upgrade (`()[]?+!`), use `\` to escape them.
 - Parameter names now support valid JavaScript identifiers, or quoted like `:"this"`.
 
 <h4 id="rejected-promises">Rejected promises handled from middleware and handlers</h4>
@@ -461,7 +461,7 @@ const server = app.listen(8080, '0.0.0.0', (error) => {
 
 The `app.router` object, which was removed in Express 4, has made a comeback in Express 5. In the new version, this object is a just a reference to the base Express router, unlike in Express 3, where an app had to explicitly load it.
 
-<h4 id="req.body">req.body</h4> 
+<h4 id="req.body">req.body</h4>
 
 The `req.body` property returns `undefined` when the body has not been parsed. In Express 4, it returns `{}` by default.
 
