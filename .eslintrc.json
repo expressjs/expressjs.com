@@ -1,0 +1,43 @@
+{
+    "extends": [
+      "standard",
+      "plugin:markdown/recommended"
+    ],
+    "plugins": [
+      "markdown"
+    ],
+    "env": {
+      "browser": true,
+      "jquery": true
+    },
+    "overrides": [
+      {
+        "files": "**/*.md",
+        "processor": "markdown/markdown"
+      },
+      {
+        "files": "**/*.md/*.js",
+        "rules": {
+          "array-callback-return": "off",
+          "no-var": "error",
+          "n/handle-callback-err": "off",
+          "object-shorthand": "error",
+          "prefer-arrow-callback": "error",
+          "prefer-template": "error"
+        }
+      },
+      {
+        "files": [
+          "**/3x/*.md/*.js",
+          "**/4x/*.md/*.js",
+          "**/guide/migrating-4.md/*.js"
+        ],
+        "rules": {
+          "no-var": "off",
+          "object-shorthand": "off",
+          "prefer-arrow-callback": "off",
+          "prefer-template": "off"
+        }
+      }
+    ]
+  }
