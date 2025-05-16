@@ -27,15 +27,14 @@ description: Express is a fast, unopinionated, minimalist web framework for Node
 <section id="intro">
   <div id="boxes" class="clearfix">
       <div id="web-applications">
-          <h2>Web 應用程式</h2> Express 是最小又靈活的 Node.js Web 應用程式架構，為 Web 與行動式應用程式提供一組健全的特性。</div>
-
+          <h2>Web 應用程式</h2> Express 是最小又靈活的 Node.js Web 應用程式架構，為 Web 與行動式應用程式提供一組健全的特性。
+      </div>
       <div id="apis">
-          <h2>API</h2> 大量的 HTTP 公用程式方法與中介軟體供您支配，能夠快速又輕鬆的建立完整的 API。</div>
-
+          <h2>API</h2> 大量的 HTTP 公用程式方法與中介軟體供您支配，能夠快速又輕鬆的建立完整的 API。
+      </div>
       <div id="performance">
           <h2>效能</h2> Express 既提供精簡的基礎 Web 應用程式特性，又不使您所認識及喜好的 Node.js 失色。
       </div>
-
       <div id="sponsorship">
           <h2><a href="http://loopback.io/">LoopBack</a></h2><a href="http://loopback.io/"> 使用基於 Express 的架構來開發模型驅動的應用程式。<br/>在 loopback.io 取得更多資訊。</a>
       </div>

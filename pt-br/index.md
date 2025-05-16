@@ -39,15 +39,12 @@ app.listen(port, () => {
       <div id="web-applications">
           <h2>Aplicativos da Web</h2> O Express é um framework para aplicativo da web do Node.js mínimo e flexível que fornece um conjunto robusto de recursos para aplicativos web e móveis.
       </div>
-
       <div id="apis">
           <h2>APIs</h2> Com uma infinidade de métodos utilitários HTTP e middleware à sua disposição, criar uma API robusta é rápido e fácil.
       </div>
-
       <div id="performance">
           <h2>Desempenho</h2> O Express fornece uma camada fina de recursos fundamentais para aplicativos da web, sem obscurecer os recursos do Node.js que você conhece e ama.
       </div>
-
     <div id="middleware">
       <h2>Middleware</h2>
       Express é uma estrutura de roteamento leve e flexível com recursos básicos e mínimos que devem ser 
