@@ -1,28 +1,27 @@
 ---
 layout: page
 title: Preguntas más frecuentes sobre Express
+description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
-lang: es
-description: Find answers to frequently asked questions about Express.js, including
-  topics on application structure, models, authentication, template engines, error
-  handling, and more.
+lang: en
+redirect_from: "  "
 ---
 
 # Preguntas más frecuentes
 
-## ¿Cómo debo estructurar mi aplicación?
+## How should I structure my application?
 
-No hay una respuesta definitiva a esta pregunta. La respuesta depende de la escala de la aplicación y del equipo implicado. Para ser lo más flexible posible, Express no realiza suposiciones en cuanto a la estructura.
+There is no definitive answer to this question. La respuesta depende de la escala de la aplicación y del equipo implicado. Para ser lo más flexible posible, Express no realiza suposiciones en cuanto a la estructura.
 
 Las rutas y otra lógica específica de la aplicación puede residir en tantos archivos como desee, con la estructura de directorios que prefiera. Vea los siguientes ejemplos como inspiración:
 
-* [Listas de rutas](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Correlación de rutas](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [Controladores de estilo MVC](https://github.com/expressjs/express/tree/master/examples/mvc)
+- [Listas de rutas](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+- [Correlación de rutas](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+- [Controladores de estilo MVC](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Asimismo, hay extensiones de terceros para Express, que simplifican algunos de estos patrones:
 
-* [express-resource](https://github.com/expressjs/express-resource)
+- [express-resource](https://github.com/expressjs/express-resource)
 
 ## ¿Cómo debo definir los modelos?
 
@@ -32,24 +31,28 @@ Consulte [LoopBack](http://loopback.io) para ver una infraestructura basada en E
 
 ## ¿Cómo puedo autenticar los usuarios?
 
-La autenticación es otra área rígida en la que no entra Express.  Puede utilizar el esquema de autenticación que desee.
+La autenticación es otra área rígida en la que no entra Express. Puede utilizar el esquema de autenticación que desee.
 Para ver un esquema simple de nombre de usuario/contraseña, consulte [este ejemplo](https://github.com/expressjs/express/tree/master/examples/auth).
-
 
 ## ¿A qué motor de plantilla da soporte Express?
 
 Express da soporte a cualquier motor de plantilla que cumpla la firma `(path, locals, callback)`.
 Para normalizar las interfaces de motor de plantilla y el almacenamiento en memoria caché, consulte el proyecto [consolidate.js](https://github.com/visionmedia/consolidate.js) para ver el soporte. Otros motores de plantilla que no aparezcan en la lista también pueden dar soporte a la firma de Express.
 
-## ¿Cómo puedo manejar las respuestas 404?
+For more information, see [Using template engines with Express](/{{page.lang}}/guide/using-template-engines.html).
+
+## How do I handle 404 responses?
 
 En Express, las respuestas 404 no son el resultado de un error, por lo que el middleware de manejador de errores no las capturará. Este comportamiento se debe a que una respuesta 404 simplemente indica la ausencia de trabajo adicional pendiente; es decir, Express ha ejecutado todas las rutas y funciones de middleware, y ha comprobado que ninguna de ellas responde. Lo único que debe hacer es añadir una función de middleware al final de la pila (debajo de las demás funciones) para manejar una respuesta 404:
 
 ```js
 app.use((req, res, next) => {
-  res.status(404).send('Sorry cant find that!')
+  res.status(404).send("Sorry can't find that!")
 })
 ```
+
+Add routes dynamically at runtime on an instance of `express.Router()`
+so the routes are not superseded by a middleware function.
 
 ## ¿Cómo configuro un manejador de errores?
 
@@ -69,3 +72,10 @@ Para obtener más información, consulte [Manejo de errores](/{{ page.lang }}/gu
 De ninguna manera. No es necesario "representar" HTML con la función `res.render()`.
 Si tiene un archivo específico, utilice la función `res.sendFile()`.
 Para el servicio de muchos activos desde un directorio, utilice la función de middleware `express.static()`.
+
+## What version of Node.js does Express require?
+
+- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
+- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
+
+### [Previous: More examples ](/{{ page.lang }}/starter/examples.html)

@@ -1,41 +1,40 @@
 ---
 layout: page
 title: Express でのデータベースの統合
+description: Discover how to integrate various databases with Express.js applications, including setup examples for MongoDB, MySQL, PostgreSQL, and more.
 menu: guide
 lang: ja
-description: Discover how to integrate various databases with Express.js applications,
-  including setup examples for MongoDB, MySQL, PostgreSQL, and more.
+redirect_from: "  "
 ---
 
 # データベースの統合
 
-データベースを Express アプリケーションに接続できるようにするには、単にデータベースに適切な Node.js ドライバーをアプリケーションにロードするだけですみます。本書では、データベース・システム用の最も一般的な Node.js モジュールを Express アプリケーションに追加して使用する方法について簡単に説明します。
+Adding the capability to connect databases to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node.js modules for database systems in your Express app:
 
-* [Cassandra](#cassandra)
-* [Couchbase](#couchbase)
-* [CouchDB](#couchdb)
-* [LevelDB](#leveldb)
-* [MySQL](#mysql)
-* [MongoDB](#mongodb)
-* [Neo4j](#neo4j)
-* [Oracle](#oracle)
-* [PostgreSQL](#postgresql)
-* [Redis](#redis)
-* [SQL Server](#sql-server)
-* [SQLite](#sqlite)
-* [ElasticSearch](#elasticsearch)
+- [Cassandra](#cassandra)
+- [Couchbase](#couchbase)
+- [CouchDB](#couchdb)
+- [LevelDB](#leveldb)
+- [MySQL](#mysql)
+- [MongoDB](#mongodb)
+- [Neo4j](#neo4j)
+- [Oracle](#oracle)
+- [PostgreSQL](#postgresql)
+- [Redis](#redis)
+- [SQL Server](#sql-server)
+- [SQLite](#sqlite)
+- [ElasticSearch](#elasticsearch)
 
 <div class="doc-box doc-notice" markdown="1">
-
-上記は、使用可能な多数のデータベース・ドライバーの一部です。その他のオプションについては、[npm](https://www.npmjs.com/) サイトで検索してください。
-
+These database drivers are among many that are available. For other options,
+search on the [npm](https://www.npmjs.com/) site.
 </div>
 
 ## Cassandra
 
 **モジュール**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 
-**インストール**
+### **インストール**
 
 ```bash
 $ npm install cassandra-driver
@@ -57,7 +56,7 @@ client.execute('select key from system.local', (err, result) => {
 
 **Module**: [couchnode](https://github.com/couchbase/couchnode)
 
-### インストール
+### **インストール**
 
 ```bash
 $ npm install couchbase
@@ -94,7 +93,7 @@ bucket.query(query, [13], (err, result) => {
 
 **モジュール**: [nano](https://github.com/dscape/nano)
 
-**インストール**
+### **インストール**
 
 ```bash
 $ npm install nano
@@ -130,7 +129,7 @@ books.list((err, body) => {
 
 **モジュール**: [levelup](https://github.com/rvagg/node-levelup)
 
-### インストール
+### **インストール**
 
 ```bash
 $ npm install level levelup leveldown
@@ -157,7 +156,7 @@ db.put('name', 'LevelUP', (err) => {
 
 **モジュール**: [mysql](https://github.com/felixge/node-mysql/)
 
-### インストール
+### **インストール**
 
 ```bash
 $ npm install mysql
@@ -189,13 +188,13 @@ connection.end()
 
 **モジュール**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 
-**インストール**
+### **インストール**
 
 ```bash
 $ npm install mongodb
 ```
 
-### 例 (v2.*)
+### 例 (v3.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient
@@ -211,7 +210,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
 })
 ```
 
-### 例 (v3.*)
+### 例 (v2.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient
@@ -233,36 +232,40 @@ MongoDB 用のオブジェクト・モデル・ドライバーが必要な場合
 
 ## Neo4j
 
-**モジュール**: [apoc](https://github.com/hacksparrow/apoc)
+データベースを Express アプリケーションに接続できるようにするには、単にデータベースに適切な Node.js ドライバーをアプリケーションにロードするだけですみます。本書では、データベース・システム用の最も一般的な Node.js モジュールを Express アプリケーションに追加して使用する方法について簡単に説明します。
 
-### インストール
+### **インストール**
 
 ```bash
-$ npm install apoc
+$ npm install neo4j-driver
 ```
 
 ### 例
 
 ```js
-const apoc = require('apoc')
+const neo4j = require('neo4j-driver')
+const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.basic('neo4j', 'letmein'))
 
-apoc.query('match (n) return n').exec().then(
-  (response) => {
-    console.log(response)
-  },
-  (fail) => {
-    console.log(fail)
-  }
-)
+const session = driver.session()
+
+session.readTransaction((tx) => {
+  return tx.run('MATCH (n) RETURN count(n) AS count')
+    .then((res) => {
+      console.log(res.records[0].get('count'))
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+})
 ```
 
 ## Oracle
 
 **モジュール**: [oracledb](https://github.com/oracle/node-oracledb)
 
-### インストール
+### **インストール**
 
- NOTE: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
+NOTE: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
 
 ```bash
 $ npm install oracledb
@@ -306,7 +309,7 @@ getEmployee(101)
 
 **モジュール**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 
-### インストール
+### **インストール**
 
 ```bash
 $ npm install pg-promise
@@ -331,7 +334,7 @@ db.one('SELECT $1 AS value', 123)
 
 **モジュール**: [redis](https://github.com/mranney/node_redis)
 
-### インストール
+### **インストール**
 
 ```bash
 $ npm install redis
@@ -366,7 +369,7 @@ client.hkeys('hash key', (err, replies) => {
 
 **モジュール**: [tedious](https://github.com/tediousjs/tedious)
 
-### インストール
+### **インストール**
 
 ```bash
 $ npm install tedious
@@ -379,9 +382,14 @@ const Connection = require('tedious').Connection
 const Request = require('tedious').Request
 
 const config = {
-  userName: 'your_username', // update me
-  password: 'your_password', // update me
-  server: 'localhost'
+  server: 'localhost',
+  authentication: {
+    type: 'default',
+    options: {
+      userName: 'your_username', // update me
+      password: 'your_password' // update me
+    }
+  }
 }
 
 const connection = new Connection(config)
@@ -422,7 +430,7 @@ function executeStatement () {
 
 **モジュール**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 
-### インストール
+### **インストール**
 
 ```bash
 $ npm install sqlite3
@@ -456,7 +464,7 @@ db.close()
 
 **モジュール**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 
-### インストール
+### **インストール**
 
 ```bash
 $ npm install elasticsearch
