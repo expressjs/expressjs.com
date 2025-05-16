@@ -7,7 +7,7 @@ description: As part of a broader effort to modernize and streamline Express.js,
 
 As Express.js continues to power web applications across the world, it's important that we maintain a clean, reliable, and modern codebase. In that spirit, we've done a bit of spring cleaning.
 
-Over the past few weeks, we've evaluated legacy packages within the Express.js ecosystem—some of which have become outdated, unmaintained, or misaligned with modern best practices. As a result, we’ve officially deprecated several of them.
+Over the past few weeks, we've evaluated legacy packages within the Express.js ecosystem — some of which have become outdated, unmaintained, or misaligned with modern best practices. As a result, we’ve officially deprecated several of them.
 
 ## 🚨 Packages Deprecated
 
