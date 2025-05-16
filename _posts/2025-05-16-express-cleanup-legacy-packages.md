@@ -31,7 +31,7 @@ Maintaining deprecated or inactive dependencies introduces technical debt and se
 
 If your application depends on any of these packages, now is a great time to look for alternatives. For instance:
 
-- Consider modern CSRF protection strategies tied to your specific backend or framework.
+- Consider finding a modern CSRF protection strategy on [npm](https://www.npmjs.com/search?q=csurf) that aligns with your specific needs.
 - Use up-to-date multipart parsers like [`multer`](https://www.npmjs.com/package/multer).
 - Replace path-match logic with standard [`path-to-regexp`](https://www.npmjs.com/package/path-to-regexp).
 
