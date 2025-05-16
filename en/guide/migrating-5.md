@@ -336,6 +336,10 @@ app.get('/user', (req, res) => {
   res.sendFile('/path/to/file')
 })
 ```
+<h4 id="router.param">router.param(fn)</h4>
+
+The `router.param(fn)` signature was used for modifying the behavior of the `router.param(name, fn)` function. It has been deprecated since v4.11.0, and Express 5 no longer supports it at all.
+
 <h4 id="express.static.mime">express.static.mime</h4>
 
 In Express 5, `mime` is no longer an exported property of the `static` field.
