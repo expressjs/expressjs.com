@@ -70,6 +70,8 @@
     </li>
     <li id="req-api"><a href="#req">Request</a>
         <ul id="req-menu">
+            <li><a href="#req">req</a>
+            </li>
             <li><em>Properties</em>
             </li>
             <li><a href="#req.app">req.app</a>
@@ -136,6 +138,7 @@
     </li>
     <li id="res-api"><a href="#res">Response</a>
         <ul id="res-menu">
+            <li><a href="#res">res</a>
             <li><em>Properties</em>
             </li>
             <li><a href="#res.app">res.app      </a>
