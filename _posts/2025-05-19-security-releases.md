@@ -8,7 +8,7 @@ author: Ulises Gascón
 The Express team has released a new major version of [Multer](https://www.npmjs.com/package/multer) addressing two high-severity security vulnerabilities. This update improves the reliability and security of handling file uploads in Express applications.
 
 {% include admonitions/warning.html 
-content="We strongly recommend that you upgrade to Multer v3.0.0 or later as soon as possible."
+content="We strongly recommend that you upgrade to Multer v2.0.0 or later as soon as possible."
 %}
 
 The following vulnerabilities have been addressed:
