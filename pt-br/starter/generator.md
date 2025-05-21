@@ -1,117 +1,107 @@
----
-layout: page
-title: Gerador de aplicativos do Express
-menu: starter
-lang: pt-br
-description: Learn how to use the Express application generator tool to quickly create
-  a skeleton for your Express.js applications, streamlining setup and configuration.
----
+/GERIESCOLA
+├── backend
+│   ├── controllers
+│   ├── models
+│   ├── routes
+│   ├── utils
+│   └── server.js
+├── frontend
+│   ├── public
+│   ├── src
+│   │   ├── components
+│   │   ├── pages
+│   │   ├── services
+│   │   └── App.js
+├── .env
+└── README.md
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
 
-# Gerador de aplicativos do Express
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-Use a ferramenta geradora de aplicativos, `express`,
-para rapidamente criar uma estrutura básica de aplicativo.
+// Rotas
+const studentRoutes = require('./routes/studentRoutes');
+app.use('/api/students', studentRoutes);
 
-Instale o `express` com o comando a seguir:
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => app.listen(5000, () => console.log('Servidor rodando na porta 5000')))
+  .catch(err => console.error(err));
+const mongoose = require('mongoose');
 
-```bash
-$ npm install express-generator -g
-```
+const studentSchema = new mongoose.Schema({
+  nome: String,
+  dataNascimento: Date,
+  foto: String,
+  contacto: String,
+  turma: String,
+  historicoEscolar: Array,
+  status: { type: String, default: 'matriculado' } // ou 'transferido'
+});
 
-Exiba as opções de comando com a opção `-h`:
+module.exports = mongoose.model('Student', studentSchema);
+const Student = require('../models/Student');
 
-```bash
-$ express -h
+exports.createStudent = async (req, res) => {
+  try {
+    const student = new Student(req.body);
+    await student.save();
+    res.status(201).json(student);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao cadastrar aluno.' });
+  }
+};
 
-  Usage: express [options][dir]
+exports.getStudents = async (req, res) => {
+  const students = await Student.find();
+  res.json(students);
+};
+const express = require('express');
+const router = express.Router();
+const studentController = require('../controllers/studentController');
 
-  Options:
+router.post('/', studentController.createStudent);
+router.get('/', studentController.getStudents);
 
-    -h, --help          output usage information
-        --version       output the version number
-    -e, --ejs           add ejs engine support
-        --hbs           add handlebars engine support
-        --pug           add pug engine support
-    -H, --hogan         add hogan.js engine support
-        --no-view       generate without view engine
-    -v, --view &lt;engine&gt; add view &lt;engine&gt; support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
-    -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
-        --git           add .gitignore
-    -f, --force         force on non-empty directory
-```
+module.exports = router;
+import React from 'react';
+import StudentList from './components/StudentList';
 
-Por exemplo, o seguinte cria um aplicativo do Express chamado _myapp_
-no diretório atualmente em funcionamento:
+function App() {
+  return (
+    <div>
+      <h1>GERIESCOLA - Gestão Escolar</h1>
+      <StudentList />
+    </div>
+  );
+}
 
-```bash
-$ express --view=pug myapp
+export default App;
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-   create : myapp
-   create : myapp/package.json
-   create : myapp/app.js
-   create : myapp/public
-   create : myapp/public/javascripts
-   create : myapp/public/images
-   create : myapp/routes
-   create : myapp/routes/index.js
-   create : myapp/routes/users.js
-   create : myapp/public/stylesheets
-   create : myapp/public/stylesheets/style.css
-   create : myapp/views
-   create : myapp/views/index.pug
-   create : myapp/views/layout.pug
-   create : myapp/views/error.pug
-   create : myapp/bin
-   create : myapp/bin/www
-```
+function StudentList() {
+  const [students, setStudents] = useState([]);
 
-Em seguida instale as dependências:
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/students')
+      .then(res => setStudents(res.data))
+      .catch(err => console.error(err));
+  }, []);
 
-```bash
-$ cd myapp
-$ npm install
-```
+  return (
+    <div>
+      <h2>Lista de Alunos</h2>
+      <ul>
+        {students.map(student => (
+          <li key={student._id}>{student.nome} - {student.turma}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
-No MacOS ou Linux, execute o aplicativo com este comando:
-
-```bash
-$ DEBUG=myapp:* npm start
-```
-
-No Windows, use este comando:
-
-```bash
-> set DEBUG=myapp:* & npm start
-```
-
-Em seguida carregue `http://localhost:3000/` no seu navegador para acessar o aplicativo.
-
-
-O aplicativo gerado possui a seguinte estrutura de diretórios:
-
-```bash
-.
-├── app.js
-├── bin
-│   └── www
-├── package.json
-├── public
-│   ├── images
-│   ├── javascripts
-│   └── stylesheets
-│       └── style.css
-├── routes
-│   ├── index.js
-│   └── users.js
-└── views
-    ├── error.pug
-    ├── index.pug
-    └── layout.pug
-
-7 directories, 9 files
-```
-
-<div class="doc-box doc-info" markdown="1">
-A estrutura de aplicativo criada pelo gerador é apenas uma das várias maneiras de estruturar aplicativos do Express.
-É possível utilizar esta estrutura ou modificá-la para melhor se adequar às suas necessidades.
-</div>
+export default StudentList;
