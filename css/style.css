@@ -1,5 +1,4 @@
-
-@import url("fonts/fonts.css");
+@import url("../fonts/open-sans/fonts.css");
 
 * {
   box-sizing: border-box;
