@@ -51,8 +51,5 @@
         }
       }
     ]
-  },
-  "dependencies": {
-    "@fontsource/open-sans": "^5.2.5"
   }
 }
