@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Open Sans VF";
   font-style: normal;
-  font-weight: 200 900;
+  font-weight: 100 700;
   font-display: swap;
   src: local("Open Sans VF"),
        url("./woff2/OpenSans-VariableFont_wdth,wght.woff2") format("woff2-variations"),
@@ -12,7 +12,7 @@
 @font-face {
   font-family: "Open Sans VF";
   font-style: italic;
-  font-weight: 200 900;
+  font-weight: 100 700;
   font-display: swap;
   src: local("Open Sans VF Italic"),
        url("./woff2/OpenSans-Italic-VariableFont_wdth,wght.woff2") format("woff2-variations"),
