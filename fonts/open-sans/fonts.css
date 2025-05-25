@@ -15,5 +15,5 @@
   font-display: swap;
   src: local("Open Sans"),
        url("./woff2/OpenSans-Italic.woff2") format("woff2"),
-       url("./woff/OpenSans.woff")   format("woff"),
+       url("./woff/OpenSans-Italic.woff")   format("woff"),
 }
