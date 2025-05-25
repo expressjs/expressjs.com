@@ -1,21 +1,19 @@
 @font-face {
-  font-family: "Open Sans VF";
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 100 700;
   font-display: swap;
-  src: local("Open Sans VF"),
-       url("./woff2/OpenSans-VariableFont_wdth,wght.woff2") format("woff2-variations"),
-       url("./woff/OpenSans-VariableFont_wdth,wght.woff")   format("woff-variations"),
-       url("./ttf/OpenSans-VariableFont_wdth,wght.ttf")    format("truetype-variations");
+  src: local("Open Sans"),
+        url("./woff2/OpenSans.woff2") format("woff2"),
+        url("./woff/OpenSans.woff")   format("woff"),
 }
 
 @font-face {
-  font-family: "Open Sans VF";
+  font-family: "Open Sans";
   font-style: italic;
   font-weight: 100 700;
   font-display: swap;
-  src: local("Open Sans VF Italic"),
-       url("./woff2/OpenSans-Italic-VariableFont_wdth,wght.woff2") format("woff2-variations"),
-       url("./woff/OpenSans-Italic-VariableFont_wdth,wght.woff")   format("woff-variations"),
-       url("./ttf/OpenSans-Italic-VariableFont_wdth,wght.ttf")    format("truetype-variations");
+  src: local("Open Sans"),
+       url("./woff2/OpenSans-Italic.woff2") format("woff2"),
+       url("./woff/OpenSans.woff")   format("woff"),
 }
