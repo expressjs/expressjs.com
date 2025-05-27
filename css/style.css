@@ -1490,6 +1490,9 @@ h2 a {
 .blog-authors {
   font-style: italic;
 }
+.blog-authors a {
+  color: inherit;
+}
 .blog-date {
   font-weight: bold;
   font-size: 85%;

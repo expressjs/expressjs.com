@@ -4,6 +4,7 @@ description: Security releases for Express, body-parser, send, serve-static, and
 tags: security vulnerabilities
 authors:
   - name: Ulises Gascón
+    github: UlisesGascon
 ---
 
 Recently, the Express team has been made aware of a number of security vulnerabilities in the Express project.  We have released a number of patches to address these vulnerabilities.  

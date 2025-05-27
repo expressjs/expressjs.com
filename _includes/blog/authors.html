@@ -3,7 +3,17 @@
   <div class="blog-authors">
     By
     {% for author in authors %}
-      {{author.name}}{% unless forloop.last %}, {% endunless %}
+
+      {%- assign label = author.github | prepend: '@' -%}
+      {%- if author.name -%}
+        {%- assign label = author.name -%}
+      {%- endif -%}
+
+      {% if label and author.github %}
+        <a href="https://github.com/{{author.github}}" rel="author">{{label}}</a>{% unless forloop.last %}, {% endunless %}
+      {% elsif label %}
+        {{label}}{% unless forloop.last %}, {% endunless %}
+      {% endif %}
     {% endfor %}
   </div>
 {% endif %}

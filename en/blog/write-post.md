@@ -35,8 +35,12 @@ Create a new file in the `_posts` directory named using following the format: `Y
     tags: <white-space-separated-topics>
     authors:
       - name: <your-name>
+        github: <github-username>
     ---
     ```
+
+    The `github` property of an author is optional. Including your username only (not your full profile URL) will ensure that your blog post links out to it.
+
 2. ### Add your content
     Finally, start writing your content below the front matter.  Use standard markdown formatting.
 

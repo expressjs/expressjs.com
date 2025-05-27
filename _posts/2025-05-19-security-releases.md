@@ -4,6 +4,7 @@ description: Security release for Multer has been published. We recommend that a
 tags: security vulnerabilities
 authors:
   - name: Ulises Gascón
+    github: UlisesGascon
 ---
 
 The Express team has released a new major version of [Multer](https://www.npmjs.com/package/multer) addressing two high-severity security vulnerabilities. This update improves the reliability and security of handling file uploads in Express applications.
