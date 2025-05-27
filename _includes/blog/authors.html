@@ -10,7 +10,9 @@
       {%- endif -%}
 
       {% if label and author.github %}
-        <a href="https://github.com/{{author.github}}" rel="author">{{label}}</a>{% unless forloop.last %}, {% endunless %}
+        <a href="https://github.com/{{author.github}}" rel="author" class="blog-author-link">
+          <img src="https://github.com/{{author.github}}.png?size=64" alt="" class="blog-author-avatar" />
+          <span class="blog-author-link-label">{{label}}</span></a>{% unless forloop.last %}, {% endunless %}
       {% elsif label %}
         {{label}}{% unless forloop.last %}, {% endunless %}
       {% endif %}

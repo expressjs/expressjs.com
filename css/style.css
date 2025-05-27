@@ -1490,8 +1490,18 @@ h2 a {
 .blog-authors {
   font-style: italic;
 }
-.blog-authors a {
+.blog-author-link {
   color: inherit;
+  text-decoration: none;
+}
+.blog-author-link-label {
+  text-decoration: underline;
+}
+.blog-author-avatar {
+  border-radius: 50%;
+  display: inline;
+  vertical-align: middle;
+  width: 1.5em;
 }
 .blog-date {
   font-weight: bold;
