@@ -17,7 +17,7 @@ Want to write a post? See the submission [guidelines.](/en/blog/write-post.html)
         <a href="{{ post.url }}"> {{ post.title }}</a>
       </div>
       <div class="blog-details">
-        <div>By {{ post.author }}</div> 
+        {% include blog/authors.html authors=post.authors %}
         <div >{{ post.date | date:"%b %d, %Y" }}</div> 
       </div>   
       <div class="blog-excerpt"> {{post.excerpt | truncate: 240 | markdownify }} </div>

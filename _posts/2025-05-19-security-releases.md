@@ -2,7 +2,8 @@
 title: May 2025 Security Releases
 description: Security release for Multer has been published. We recommend that all users upgrade as soon as possible.
 tags: security vulnerabilities
-author: Ulises Gascón
+authors:
+  - name: Ulises Gascón
 ---
 
 The Express team has released a new major version of [Multer](https://www.npmjs.com/package/multer) addressing two high-severity security vulnerabilities. This update improves the reliability and security of handling file uploads in Express applications.

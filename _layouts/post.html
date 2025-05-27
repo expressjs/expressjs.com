@@ -21,9 +21,7 @@
           <h2>{{page.sub_title}}</h2>
           {% endif %}
           <div class="blog-details">
-            {% if page.author %}
-            <div class="blog-author">By {{page.author}}</div>
-            {% endif %}
+            {% include blog/authors.html authors=page.authors %}
             <div class="blog-date">{{page.date| date: "%d %b %Y" }}</div>
           </div>
         {{ content }}

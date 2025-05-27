@@ -1,7 +1,8 @@
 ---
 title: "A New Chapter for Express.js: Triumphs of 2024 and an ambitious 2025"
 tags: news rewind 2024
-author: Express Technical Committee
+authors:
+  - name: Express Technical Committee
 description: Explore the transformative journey of Express.js in 2024, marked by governance improvements, the long-awaited release of Express 5.0, and heightened security measures. Look into the ambitious plans for 2025, including performance optimizations, scoped packages, and a bold roadmap for sustained growth in the Node.js ecosystem.
 ---
 

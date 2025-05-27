@@ -1,0 +1,9 @@
+{%- assign authors = include.authors -%}
+{% if authors %}
+  <div class="blog-authors">
+    By
+    {% for author in authors %}
+      {{author.name}}{% unless forloop.last %}, {% endunless %}
+    {% endfor %}
+  </div>
+{% endif %}
