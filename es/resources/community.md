@@ -1,15 +1,15 @@
 ---
 layout: page
 title: Comunidad de Express
+description: Connect with the Express.js community, learn about the technical committee, find resources, explore community-contributed modules, and get involved in discussions.
 menu: resources
-lang: es
-description: Connect with the Express.js community, learn about the technical committee,
-  find resources, explore community-contributed modules, and get involved in discussions.
+lang: en
+redirect_from: "  "
 ---
 
 # Comunidad
 
-## Comité Técnico
+## Technical committee
 
 El comité técnico de Express se reúne en línea cada dos semanas (según sea necesario) para discutir el desarrollo y el mantenimiento de Express, entre otros problemas relevantes para el proyecto Express. Cada reunión se anuncia normalmente en un [problema de expressjs/discussions](https://github.com/expressjs/discussions/issues) con un enlace para unirse o ver la reunión, que está abierta a todos los observadores.
 
@@ -36,7 +36,7 @@ Los miembros del comité técnico de Express son:
 - [@niftylettuce](https://github.com/niftylettuce) - niftylettuce
 - [@troygoode](https://github.com/troygoode) - Troy Goode
 
-## Express está hecho de muchos módulos
+## Express is made of many modules
 
 Nuestra vibrante comunidad ha creado una larga variedad de extensiones, [módulos intermedios](/{{ page.lang }}/resources/middleware.html) y frameworks de nivel superior.
 
@@ -47,11 +47,11 @@ Además, la comunidad de Express mantiene módulos en estas dos organizaciones d
 
 Para mantenerse al tanto de lo que está sucediendo en toda la comunidad, consulte [ExpressJS StatusBoard](https://expressjs.github.io/statusboard/).
 
-## Problemas
+## Issues
 
 Si ha encontrado lo que cree que es un error, o simplemente quiere hacer una solicitud de función, abre un ticket en la [cola de problemas](https://github.com/expressjs/express/issues).
 
-## Ejemplos
+## Examples
 
 Mire docenas de [ejemplos](https://github.com/expressjs/express/tree/master/examples) de aplicaciones Express en el repositorio que cubren todo, desde el diseño y la autenticación de API hasta la integración del motor de plantillas.
 
@@ -59,17 +59,15 @@ Mire docenas de [ejemplos](https://github.com/expressjs/express/tree/master/exam
 
 La sección de [Discusiones de GitHub](https://github.com/expressjs/discussions) es un excelente espacio para participar en conversaciones sobre el desarrollo y mantenimiento de Express, así como para compartir ideas y debatir temas relacionados con su uso.
 
-
-# Marca de Express.js
+# Branding of Express.js
 
 ## Logo de Express.js
 
-Express es un proyecto de la Fundación OpenJS. Por favor, revise la [política de marcas registradas](https://trademark-policy.openjsf.org/) para obtener información sobre el uso permitido de los logotipos y marcas de Express.js.
+Express is a project of the OpenJS Foundation. Por favor, revise la [política de marcas registradas](https://trademark-policy.openjsf.org/) para obtener información sobre el uso permitido de los logotipos y marcas de Express.js.
 
 <div class="logo-table">
     <div>
-        <h3>Logotipo</h3>
-        <a href="/images/brand/logotype-light.svg" class="hidden-dark">
+        <h3>Logotype</h3><a href="/images/brand/logotype-light.svg" class="hidden-dark">
             <img src="/images/brand/logotype-light.svg" alt="Express.js logo" width="250" height="56"/>
         </a>
         <a href="/images/brand/logotype-dark.svg" class="hidden-light">
@@ -77,13 +75,12 @@ Express es un proyecto de la Fundación OpenJS. Por favor, revise la [política 
         </a>
     </div>
     <div>
-        <h3>Logo de Marca</h3>
-        <a href="/images/brand/logo-light.svg" class="hidden-dark">
+        <h3>Logo de Marca</h3><a href="/images/brand/logo-light.svg" class="hidden-dark">
             <img src="/images/brand/logo-light.svg" alt="Express.js mark" width="96.5" height="56"/>
         </a>
         <a href="/images/brand/logo-dark.svg" class="hidden-light">
-            <img src="/images/brand/logo-dark.svg" alt="Express.js mark" width="96.5" height="56"/>
+            <img src="/images/brand/logo-dark.svg"  alt="Express.js mark" width="96.5" height="56"/>
         </a>
     </div>
 <div>
-
+</div>

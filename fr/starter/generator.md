@@ -1,20 +1,27 @@
 ---
 layout: page
 title: Générateur d'applications Express
+description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
 menu: starter
 lang: fr
-description: Learn how to use the Express application generator tool to quickly create
-  a skeleton for your Express.js applications, streamlining setup and configuration.
+redirect_from: "  "
 ---
 
 # Générateur d'applications Express
 
 Utilisez l'outil de générateur d'applications, `express`, pour créer rapidement un squelette d'application.
 
-Installez `express` à l'aide de la commande suivante :
+You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
 ```bash
-$ npm install express-generator -g
+$ npx express-generator
+```
+
+For earlier Node versions, install the application generator as a global npm package and then launch it:
+
+```bash
+$ npm install -g express-generator
+$ express
 ```
 
 Affichez les options de commande à l'aide de l'option `-h` :
@@ -22,7 +29,7 @@ Affichez les options de commande à l'aide de l'option `-h` :
 ```bash
 $ express -h
 
-  Usage: express [options][dir]
+  Usage: express [options] [dir]
 
   Options:
 
@@ -33,8 +40,8 @@ $ express -h
         --pug           add pug engine support
     -H, --hogan         add hogan.js engine support
         --no-view       generate without view engine
-    -v, --view &lt;engine&gt; add view &lt;engine&gt; support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
-    -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
+    -v, --view <engine> add view <engine> support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
 ```
@@ -82,6 +89,12 @@ Sous Windows, utilisez la commande suivante :
 > set DEBUG=myapp:* & npm start
 ```
 
+Installez `express` à l'aide de la commande suivante :
+
+```bash
+PS> $env:DEBUG='myapp:*'; npm start
+```
+
 Ensuite, chargez 'http://hôte_local:3000/' dans votre navigateur pour accéder à l'application.
 
 L'application générée possède la structure de répertoire suivante :
@@ -111,3 +124,5 @@ L'application générée possède la structure de répertoire suivante :
 <div class="doc-box doc-info" markdown="1">
 La structure d'application créée par le générateur est l'une des nombreuses manières possibles de structurer les applications Express. Vous avez toute latitude pour l'utiliser ou la modifier en fonction de vos besoins.
 </div>
+
+### [Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)

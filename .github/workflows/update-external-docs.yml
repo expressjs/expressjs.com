@@ -1,4 +1,5 @@
 name: Update External Docs
+
 on:
     workflow_dispatch:
     schedule:
@@ -36,3 +37,28 @@ jobs:
                 labels: doc
                 team_reviewers: expressjs/docs-captains
                 branch: external-docs-${{ github.sha }}
+
+    synchronize-with-crowdin:
+        runs-on: ubuntu-latest
+        if: github.repository_owner == 'expressjs'
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              # see all the options at https://github.com/crowdin/github-action
+            - name: Crowdin PR
+              uses: crowdin/github-action@b8012bd5491b8aa8578b73ab5b5f5e7c94aaa6e2 # https://github.com/crowdin/github-action/releases/tag/v2.7.0
+              with:
+                upload_sources: false
+                upload_translations: false
+                download_translations: true
+                localization_branch_name: crowdin/translations
+                create_pull_request: true
+                pull_request_title: 'i18n: new crowdin translations'
+                pull_request_body: > 
+                  New Crowdin translations from the [express.js crowdin project](https://express.crowdin.com/u/projects/1). cc: @expressjs/docs-wg
+                pull_request_base_branch_name: 'gh-pages'
+                base_url: 'https://express.api.crowdin.com'
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+                CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}

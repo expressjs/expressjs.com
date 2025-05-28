@@ -1,39 +1,39 @@
 ---
 layout: page
 title: 撰寫中介軟體以用於 Express 應用程式中
+description: Learn how to write custom middleware functions for Express.js applications, including examples and best practices for enhancing request and response handling.
 menu: guide
 lang: zh-tw
-description: Learn how to write custom middleware functions for Express.js applications,
-  including examples and best practices for enhancing request and response handling.
+redirect_from: "  "
 ---
 
 # 撰寫中介軟體以用於 Express 應用程式中
 
 <h2>概觀</h2>
 
-*中介軟體*函數是一些有權存取[要求物件](/{{ page.lang }}/4x/api.html#req) (`req`)、[回應物件](/{{ page.lang }}/4x/api.html#res) (`res`) 和應用程式要求/回應循環中之下一個中介軟體函數的函數。下一個中介軟體函數通常以名為 `next` 的變數表示。
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/4x/api.html#req) (`req`), the [response object](/{{ page.lang }}/4x/api.html#res) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
 
-中介軟體函數可以執行下列作業：
+Middleware functions can perform the following tasks:
 
-* 執行任何程式碼。
-* 對要求和回應物件進行變更。
-* 結束要求/回應循環。
-* 呼叫堆疊中的下一個中介軟體。
+- 執行任何程式碼。
+- Make changes to the request and the response objects.
+- End the request-response cycle.
+- Call the next middleware in the stack.
 
-如果現行中介軟體函數不會結束要求/回應循環，它必須呼叫 `next()`，以便將控制權傳遞給下一個中介軟體函數。否則，要求將會停擺。
+If the current middleware function does not end the request-response cycle, it must call `next()` to pass control to the next middleware function. Otherwise, the request will be left hanging.
 
-下列範例顯示中介軟體函數呼叫中的元素：
+The following figure shows the elements of a middleware function call:
 
 <table id="mw-fig">
-<tr><td id="mw-fig-imgcell">
+<tbody><tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
 </td>
 <td class="mw-fig-callouts">
-<div class="callout" id="callout1">要套用中介軟體函數的 HTTP 方法。</div>
+<div class="callout" id="callout1">HTTP method for which the middleware function applies.</div></tbody>
 
-<div class="callout" id="callout2">要套用中介軟體函數的路徑（路由）。</div>
+<div class="callout" id="callout2">Path (route) for which the middleware function applies.</div>
 
-<div class="callout" id="callout3">中介軟體函數。</div>
+<div class="callout" id="callout3">The middleware function.</div>
 
 <div class="callout" id="callout4">中介軟體函數的回呼引數，依慣例，稱為 "next"。</div>
 
@@ -43,7 +43,14 @@ description: Learn how to write custom middleware functions for Express.js appli
 </td></tr>
 </table>
 
+Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
+
+<h2>範例</h2>
+
 下列範例顯示簡單的 "Hello World" Express 應用程式，您將為這個應用程式定義兩個中介軟體函數：
+The remainder of this article will define and add three middleware functions to the application:
+one called `myLogger` that prints a simple log message, one called `requestTime` that
+displays the timestamp of the HTTP request, and one called `validateCookies` that validates incoming cookies.
 
 ```js
 const express = require('express')
@@ -56,9 +63,8 @@ app.get('/', (req, res) => {
 app.listen(3000)
 ```
 
-<h2>開發</h2>
-
-以下的簡單範例顯示一個稱為 "myLogger" 的中介軟體函數。當透過這個函數將要求傳遞給應用程式時，此函數只會列印 "LOGGED"。中介軟體函數會指派給名為 `myLogger` 的變數。
+<h3>Middleware function myLogger</h3>
+Here is a simple example of a middleware function called "myLogger". This function just prints "LOGGED" when a request to the app passes through it. The middleware function is assigned to a variable named `myLogger`.
 
 ```js
 const myLogger = function (req, res, next) {
@@ -68,10 +74,13 @@ const myLogger = function (req, res, next) {
 ```
 
 <div class="doc-box doc-notice" markdown="1">
-請注意上述對 `next()` 的呼叫。呼叫這個函數時，會呼叫應用程式中的下一個中介軟體函數。`next()` 函數並非 Node.js 或 Express API 的一部分，而是傳遞給中介軟體函數的第三個引數。`next()` 函數雖沒有命名限制，但依慣例，都是稱為 "next"。為避免混淆，請一律採用此慣例。
+Notice the call above to `next()`. Calling this function invokes the next middleware function in the app.
+The `next()` function is not a part of the Node.js or Express API, but is the third argument that is passed to the middleware function. The `next()` function could be named anything, but by convention it is always named "next".
+To avoid confusion, always use this convention.
 </div>
 
-若要載入中介軟體函數，請呼叫 `app.use()`，以指定中介軟體函數。舉例來說，下列程式碼會在根路徑 (/) 路由之前先載入 `myLogger` 中介軟體函數。
+To load the middleware function, call `app.use()`, specifying the middleware function.
+For example, the following code loads the `myLogger` middleware function before the route to the root path (/).
 
 ```js
 const express = require('express')
@@ -93,13 +102,16 @@ app.listen(3000)
 
 每當應用程式收到要求時，它會將 "LOGGED" 訊息列印至終端機。
 
-中介軟體的載入順序很重要：先載入的中介軟體函數也會先執行。
+The order of middleware loading is important: middleware functions that are loaded first are also executed first.
 
 如果 `myLogger` 是在根路徑路由之後才載入，要求永不會抵達該函數，應用程式也不會列印 "LOGGED"，因為根路徑的路由處理程式會終止要求/回應循環。
 
-中介軟體函數 `myLogger` 只會列印訊息，然後呼叫 `next()` 函數，將要求傳遞給堆疊中的下一個中介軟體函數。
+The middleware function `myLogger` simply prints a message, then passes on the request to the next middleware function in the stack by calling the `next()` function.
 
-下一個範例是在要求物件中新增一個稱為 `requestTime` 的內容。我們將這個中介軟體函數命名為 "requestTime"。
+<h3>Middleware function requestTime</h3>
+
+Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
+to the request object.
 
 ```js
 const requestTime = function (req, res, next) {
@@ -108,7 +120,7 @@ const requestTime = function (req, res, next) {
 }
 ```
 
-現在，應用程式會使用 `requestTime` 中介軟體函數。此外，根路徑路由的回呼函數會使用中介軟體函數新增至 `req`（要求物件）的內容。
+The app now uses the `requestTime` middleware function. Also, the callback function of the root path route uses the property that the middleware function adds to `req` (the request object).
 
 ```js
 const express = require('express')
@@ -129,8 +141,80 @@ app.get('/', (req, res) => {
 
 app.listen(3000)
 ```
-當您對應用程式根位置發出要求時，應用程式現在會在瀏覽器中顯示該要求的時間戳記。
 
-由於您有權存取要求物件、回應物件、堆疊中的下一個中介軟體函數，以及整個 Node.js API，因此，中介軟體函數的可能性無止盡。
+When you make a request to the root of the app, the app now displays the timestamp of your request in the browser.
 
-如需 Express 中介軟體的相關資訊，請參閱：[使用 Express 中介軟體](/{{ page.lang }}/guide/using-middleware.html)。
+<h3>Middleware function validateCookies</h3>
+
+Finally, we'll create a middleware function that validates incoming cookies and sends a 400 response if cookies are invalid.
+
+Here's an example function that validates cookies with an external async service.
+
+```js
+async function cookieValidator (cookies) {
+  try {
+    await externallyValidateCookie(cookies.testCookie)
+  } catch {
+    throw new Error('Invalid cookies')
+  }
+}
+```
+
+Here, we use the [`cookie-parser`](/resources/middleware/cookie-parser.html) middleware to parse incoming cookies off the `req` object and pass them to our `cookieValidator` function. The `validateCookies` middleware returns a Promise that upon rejection will automatically trigger our error handler.
+
+```js
+const express = require('express')
+const cookieParser = require('cookie-parser')
+const cookieValidator = require('./cookieValidator')
+
+const app = express()
+
+async function validateCookies (req, res, next) {
+  await cookieValidator(req.cookies)
+  next()
+}
+
+app.use(cookieParser())
+
+app.use(validateCookies)
+
+// error handler
+app.use((err, req, res, next) => {
+  res.status(400).send(err.message)
+})
+
+app.listen(3000)
+```
+
+<div class="doc-box doc-notice" markdown="1">
+Note how `next()` is called after `await cookieValidator(req.cookies)`. This ensures that if `cookieValidator` resolves, the next middleware in the stack will get called. If you pass anything to the `next()` function (except the string `'route'` or `'router'`), Express regards the current request as being an error and will skip any remaining non-error handling routing and middleware functions.
+</div>
+
+Because you have access to the request object, the response object, the next middleware function in the stack, and the whole Node.js API, the possibilities with middleware functions are endless.
+
+For more information about Express middleware, see: [Using Express middleware](/{{ page.lang }}/guide/using-middleware.html).
+
+<h2>Configurable middleware</h2>
+
+If you need your middleware to be configurable, export a function which accepts an options object or other parameters, which, then returns the middleware implementation based on the input parameters.
+
+File: `my-middleware.js`
+
+```js
+module.exports = function (options) {
+  return function (req, res, next) {
+    // Implement the middleware function based on the options object
+    next()
+  }
+}
+```
+
+The middleware can now be used as shown below.
+
+```js
+const mw = require('./my-middleware.js')
+
+app.use(mw({ option1: '1', option2: '2' }))
+```
+
+Refer to [cookie-session](https://github.com/expressjs/cookie-session) and [compression](https://github.com/expressjs/compression) for examples of configurable middleware.
