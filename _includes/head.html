@@ -9,26 +9,55 @@
     <link rel="stylesheet" href="/css/style.css?_={{ site.time | date: '%s' }}">
     <link rel="stylesheet" href="/css/sintax.css?_={{ site.time | date: '%s' }}">
 
+    <link 
+        rel="preload" 
+        href="/fonts/open-sans/OpenSans.woff2" 
+        as="font" 
+        type="font/woff2" 
+        crossorigin 
+    />
+    <link 
+        rel="preload" 
+        href="/fonts/open-sans/OpenSans-Italic.woff2" 
+        as="font" 
+        type="font/woff2" 
+        crossorigin 
+    />
+    <link
+        href="/fonts/open-sans/OpenSans.woff"
+        as="font"
+        type="font/woff"
+        crossorigin
+    />
+    <link
+        href="/fonts/open-sans/woff/OpenSans-Italic.woff"
+        as="font"
+        type="font/woff"
+        crossorigin
+    />
+    
+    <link rel="stylesheet" href="/fonts/open-sans/fonts.css" />
+
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/langs/{{ page.lang }}.css">
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="description" content="{{page.description}}">
     <meta property="og:url" content="https://expressjs.com{{page.url}}">
-    
+
     {% if page.author %}
-    <meta property="og:type" content="article" >
+    <meta property="og:type" content="article">
     <meta property="og:article:author" content="{{page.author}}">
     {% else %}
-    <meta property="og:type" content="website" >
+    <meta property="og:type" content="website">
     {% endif %}
-    
+
     <meta name="title" property="og:title" content="{{page.title}}">
     <meta property="og:description" content="{{page.description}}">
     {% if page.image %}
-    <meta property="og:image" content="{{page.image}}" > 
+    <meta property="og:image" content="{{page.image}}">
     {% else %}
-    <meta property="og:image" content="https://expressjs.com/images/og.png" >    
+    <meta property="og:image" content="https://expressjs.com/images/og.png">
     {% endif %}
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="expressjs.com">
@@ -36,9 +65,9 @@
     <meta name="twitter:title" content="{{page.title}}">
     <meta name="twitter:description" content="{{page.description}}">
     {% if page contains "image" %}
-    <meta property="twitter:image" content="{{ page.image }}" > 
+    <meta property="twitter:image" content="{{ page.image }}">
     {% else %}
-    <meta property="twitter:image" content="https://expressjs.com/images/og.png" >    
+    <meta property="twitter:image" content="https://expressjs.com/images/og.png">
     {% endif %}
 
     <script data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
