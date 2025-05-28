@@ -15,28 +15,30 @@ jobs:
         if: github.repository_owner == 'expressjs'
         steps:
             - uses: actions/checkout@v4
+
             - name: Set up Node.js
               uses: actions/setup-node@v4
-              with:
-                node-version: 20
+
             - name: Run scripts
               working-directory: .github/scripts
               run: |
                 bash ./get-contributing.sh
                 bash ./get-readmes.sh
                 node ./get-express-version.mjs  
+
             - name: Create Pull Request
               uses: gr2m/create-or-update-pull-request-action@v1
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with: 
-                commit-message: update external docs
-                title: 'Update external docs'
+                commit-message: 'docs: update external docs'
+                title: 'docs: update external docs'
                 body: >
-                  This auto-generated PR updates external documentation to the expressjs.com repository.
-                labels: doc
-                team_reviewers: expressjs/docs-captains
-                branch: external-docs-${{ github.sha }}
+                  This auto-generated PR updates external documentation to the expressjs.com repository. 
+                  
+                  cc: @expressjs/docs-wg
+                labels: docs
+                branch: external-docs
 
     synchronize-with-crowdin:
         runs-on: ubuntu-latest
