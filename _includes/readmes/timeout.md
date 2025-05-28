@@ -4,7 +4,6 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
-[![Gratipay][gratipay-image]][gratipay-url]
 
 Times out a request in the Connect/Express application framework.
 
@@ -164,5 +163,3 @@ app.listen(3000)
 [coveralls-url]: https://coveralls.io/r/expressjs/timeout?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/connect-timeout.svg
 [downloads-url]: https://npmjs.org/package/connect-timeout
-[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
-[gratipay-url]: https://www.gratipay.com/dougwilson/

@@ -4,32 +4,34 @@ title: Express-Middleware verwenden
 description: Learn how to use middleware in Express.js applications, including application-level and router-level middleware, error handling, and integrating third-party middleware.
 menu: guide
 lang: de
+redirect_from: "  "
 ---
 
 # Middleware verwenden
 
 Express ist ein Weiterleitungs- und Middleware-Web-Framework, das selbst nur minimale Funktionalität aufweist: Eine Express-Anwendung besteht im Wesentlichen aus einer Reihe von Middlewarefunktionsaufrufen.
 
-*Middlewarefunktionen* sind Funktionen, die Zugriff auf das [Anforderungsobjekt](/{{ page.lang }}/4x/api.html#req) (`req`), das [Antwortobjekt](/{{ page.lang }}/4x/api.html#res) (`res`) und die nächste Middlewarefunktion im Anforderung/Antwort-Zyklus der Anwendung haben. Die nächste Middlewarefunktion wird im Allgemeinen durch die Variable `next` bezeichnet.
+_Middlewarefunktionen_ sind Funktionen, die Zugriff auf das [Anforderungsobjekt](/{{ page.lang }}/4x/api.html#req) (`req`), das [Antwortobjekt](/{{ page.lang }}/4x/api.html#res) (`res`) und die nächste Middlewarefunktion im Anforderung/Antwort-Zyklus der Anwendung haben. Die nächste Middlewarefunktion wird im Allgemeinen durch die Variable `next` bezeichnet.
 
 Über Middlewarefunktionen lassen sich die folgenden Tasks ausführen:
 
-* Ausführen von Code
-* Vornehmen von Änderungen an der Anforderung und an Antwortobjekten
-* Beenden des Anforderung/Antwort-Zyklus
-* Aufrufen der nächsten Middlewarefunktion im Stack
+- Ausführen von Code
+- Vornehmen von Änderungen an der Anforderung und an Antwortobjekten
+- End the request-response cycle.
+- Aufrufen der nächsten Middlewarefunktion im Stack
 
 Wenn über die aktuelle Middlewarefunktion der Anforderung/Antwort-Zyklus nicht beendet werden kann, muss `next()` aufgerufen werden, um die Steuerung an die nächste Middlewarefunktion zu übergeben. Andernfalls geht die Anforderung in den Status "Blockiert" über.
 
 Eine Express-Anwendung kann die folgenden Middlewaretypen verwenden:
 
- - [Middleware auf Anwendungsebene](#middleware.application)
- - [Middleware auf Routerebene](#middleware.router)
- - [Middleware für die Fehlerbehandlung](#middleware.error-handling)
- - [Integrierte Middleware](#middleware.built-in)
- - [Middleware anderer Anbieter](#middleware.third-party)
+- [Middleware auf Anwendungsebene](#middleware.application)
+- [Middleware auf Routerebene](#middleware.router)
+- [Middleware für die Fehlerbehandlung](#middleware.error-handling)
+- [Integrierte Middleware](#middleware.built-in)
+- [Middleware anderer Anbieter](#middleware.third-party)
 
-Sie können Middleware auf Anwendungsebene und Routerebene mit einem optionalen Mountpfad laden. Sie können auch eine Reihe von Middlewarefunktionen zusammen laden. Dadurch wird ein Sub-Stack des Middlewaresystems am Mountpunkt erstellt.
+Sie können Middleware auf Anwendungsebene und Routerebene mit einem optionalen Mountpfad laden.
+Sie können auch eine Reihe von Middlewarefunktionen zusammen laden. Dadurch wird ein Sub-Stack des Middlewaresystems am Mountpunkt erstellt.
 
 <h2 id='middleware.application'>Middleware auf Anwendungsebene</h2>
 
@@ -38,6 +40,7 @@ Binden Sie Middleware auf Anwendungsebene zu einer Instanz des [Anwendungsobjekt
 Dieses Beispiel zeigt eine Middlewarefunktion ohne Mountpfad. Die Funktion wird immer dann ausgeführt, wenn die Anwendung eine Anforderung erhält.
 
 ```js
+const express = require('express')
 const app = express()
 
 app.use((req, res, next) => {
@@ -63,7 +66,8 @@ app.get('/user/:id', (req, res, next) => {
 })
 ```
 
-Dies ist ein Beispiel zum Laden einer Reihe von Middlewarefunktionen an einem Mountpunkt mit einem Mountpfad. Das Beispiel veranschaulicht einen Middleware-Stack, über den Anforderungsinformationen  zu einer HTTP-Anforderung zum Pfad `/user/:id` ausgegeben werden.
+Dies ist ein Beispiel zum Laden einer Reihe von Middlewarefunktionen an einem Mountpunkt mit einem Mountpfad.
+Das Beispiel veranschaulicht einen Middleware-Stack, über den Anforderungsinformationen  zu einer HTTP-Anforderung zum Pfad `/user/:id` ausgegeben werden.
 
 ```js
 app.use('/user/:id', (req, res, next) => {
@@ -89,11 +93,19 @@ app.get('/user/:id', (req, res, next) => {
 
 // handler for the /user/:id path, which prints the user ID
 app.get('/user/:id', (req, res, next) => {
-  res.end(req.params.id)
+  res.send(req.params.id)
 })
 ```
 
-Wenn Sie den Rest der Middlewarefunktionen eines Weiterleitungs-Middleware-Stack überspringen wollen, rufen Sie `next('route')` auf, um die Steuerung an die nächste Weiterleitung zu übergeben. **HINWEIS**: `next('route')` funktioniert nur in Middlewarefunktionen, die über die Funktionen `app.METHOD()` oder `router.METHOD()` geladen wurden.
+Wenn Sie den Rest der Middlewarefunktionen eines Weiterleitungs-Middleware-Stack überspringen wollen, rufen Sie `next('route')` auf, um die Steuerung an die nächste Weiterleitung zu übergeben.
+
+{% capture next-function %}
+
+`next('route')` will work only in middleware functions that were loaded by using the `app.METHOD()` or `router.METHOD()` functions.
+
+{% endcapture %}
+
+{% include admonitions/note.html content=next-function %}
 
 Dieses Beispiel zeigt einen Middleware-Sub-Stack, über den GET-Anforderungen zum Pfad `/user/:id` verarbeitet werden.
 
@@ -102,15 +114,36 @@ app.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next route
   if (req.params.id === '0') next('route')
   // otherwise pass the control to the next middleware function in this stack
-  else next() //
+  else next()
 }, (req, res, next) => {
-  // render a regular page
-  res.render('regular')
+  // send a regular response
+  res.send('regular')
 })
 
-// handler for the /user/:id path, which renders a special page
+// handler for the /user/:id path, which sends a special response
 app.get('/user/:id', (req, res, next) => {
-  res.render('special')
+  res.send('special')
+})
+```
+
+Middleware can also be declared in an array for reusability.
+
+Dies ist ein Beispiel zur Verwendung der Middlewarefunktion `express.static` mit einem ausführlich dargestellten Optionsobjekt:
+
+```js
+function logOriginalUrl (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}
+
+function logMethod (req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+}
+
+const logStuff = [logOriginalUrl, logMethod]
+app.get('/user/:id', logStuff, (req, res, next) => {
+  res.send('User Info')
 })
 ```
 
@@ -121,10 +154,13 @@ Middleware auf Routerebene funktioniert in der gleichen Weise wie Middleware auf
 ```js
 const router = express.Router()
 ```
+
 Laden Sie Middleware auf Routerebene über die Funktionen `router.use()` und `router.METHOD()`.
+
 Der folgende Beispielcode repliziert das Middlewaresystem, das oben für die Middleware auf Anwendungsebene gezeigt wird, durch Verwendung von Middleware auf Routerebene.
 
 ```js
+const express = require('express')
 const app = express()
 const router = express.Router()
 
@@ -148,7 +184,7 @@ router.get('/user/:id', (req, res, next) => {
   // if the user ID is 0, skip to the next router
   if (req.params.id === '0') next('route')
   // otherwise pass control to the next middleware function in this stack
-  else next() //
+  else next()
 }, (req, res, next) => {
   // render a regular page
   res.render('regular')
@@ -163,6 +199,33 @@ router.get('/user/:id', (req, res, next) => {
 // mount the router on the app
 app.use('/', router)
 ```
+
+To skip the rest of the router's middleware functions, call `next('router')`
+to pass control back out of the router instance.
+
+Dieses Beispiel zeigt einen Middleware-Sub-Stack, über den GET-Anforderungen zum Pfad `/user/:id` verarbeitet werden.
+
+```js
+const express = require('express')
+const app = express()
+const router = express.Router()
+
+// predicate the router with a check and bail out when needed
+router.use((req, res, next) => {
+  if (!req.headers['x-auth']) return next('router')
+  next()
+})
+
+router.get('/user/:id', (req, res) => {
+  res.send('hello, user!')
+})
+
+// use the router and 401 anything falling through
+app.use('/admin', router, (req, res) => {
+  res.sendStatus(401)
+})
+```
+
 <h2 id='middleware.error-handling'>Middleware für die Fehlerbehandlung</h2>
 
 <div class="doc-box doc-notice" markdown="1">
@@ -184,52 +247,11 @@ Details zu Middleware für die Fehlerbehandlung siehe [Fehlerbehandlung](/{{ pag
 
 Seit Version 4.x bestehen bei Express keine Abhängigkeiten zu [Connect](https://github.com/senchalabs/connect) mehr. Mit Ausnahme von `express.static` befinden sich nun alle Middlewarefunktionen, die bisher in Express enthalten waren, in separaten Modulen. Sehen Sie sich hierzu auch die [Liste der Middlewarefunktionen](https://github.com/senchalabs/connect#middleware) an.
 
-<h4 id='express.static'>express.static(root, [options])</h4>
+Die einzige integrierte Middlewarefunktion in Express ist `express.static`.
 
-Die einzige integrierte Middlewarefunktion in Express ist `express.static`. Diese Funktion basiert auf [serve-static](https://github.com/expressjs/serve-static) und ist zuständig für die statischen Assets einer Express-Anwendung.
-
-Das Argument `root` gibt das Stammverzeichnis an, von dem aus statische Assets bedient werden.
-
-Das optionale Objekt `options` kann folgende Eigenschaften aufweisen:
-
-| Eigenschaft      | Beschreibung                                                           |   Typ      | Standard         |
-|---------------|-----------------------------------------------------------------------|-------------|-----------------|
-| `dotfiles`    | Option für Dateien mit Punkterweiterung (dotfiles). Mögliche Werte sind "allow", "deny" und "ignore" | Zeichenfolge | "ignore" |
-| `etag`        | Aktiviert oder inaktiviert die etag-Generierung.  | Boolesch | `true` |
-| `extensions`  | Legt Dateierweiterungs-Fallbacks fest. | Bereich | `[]` |
-| `index`       | Sendet die verzeichnissspezifische indexierte Datei. Bei `false` wird die Verzeichnisindexierung inaktiviert.  | Gemischt | "index.html" |
- `lastModified` | Legt den Header `Last-Modified` auf das Datum der letzten Änderung der Datei im Betriebssystem fest. Mögliche Werte sind`true` und `false`. | Boolesch | `true` |
-| `maxAge`      | Legt die Eigenschaft "max-age" des Headers "Cache-Control" in Millisekunden oder als Zeichenfolge im [ms-Format](https://www.npmjs.org/package/ms) fest. | Zahl | 0 |
-| `redirect`    | Umleitung zu einem abschließenden "/", wenn der Pfadname ein Verzeichnis ist. | Boolesch | `true` |
-| `setHeaders`  | Funktion zum Festlegen von HTTP-Headern für die Datei.  | Funktion |  |
-
-Dies ist ein Beispiel zur Verwendung der Middlewarefunktion `express.static` mit einem ausführlich dargestellten Optionsobjekt:
-
-```js
-const options = {
-  dotfiles: 'ignore',
-  etag: false,
-  extensions: ['htm', 'html'],
-  index: false,
-  maxAge: '1d',
-  redirect: false,
-  setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now())
-  }
-}
-
-app.use(express.static('public', options))
-```
-
-Es sind mehrere statische Verzeichnisse pro Anwendung möglich:
-
-```js
-app.use(express.static('public'))
-app.use(express.static('uploads'))
-app.use(express.static('files'))
-```
-
-Details zur Funktion `serve-static` und deren Optionen finden Sie in der Dokumentation zu [serve-static](https://github.com/expressjs/serve-static).
+- [express.static](/en/4x/api.html#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/4x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/4x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
 
 <h2 id='middleware.third-party'>Middleware anderer Anbieter</h2>
 

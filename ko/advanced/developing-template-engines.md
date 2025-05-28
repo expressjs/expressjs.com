@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Express용 템플릿 엔진 개발
+description: Learn how to develop custom template engines for Express.js using app.engine(), with examples on creating and integrating your own template rendering logic.
 menu: advanced
 lang: ko
-description: Learn how to develop custom template engines for Express.js using app.engine(),
-  with examples on creating and integrating your own template rendering logic.
+redirect_from: "  "
 ---
 
 # Express용 템플릿 엔진 개발
@@ -19,7 +19,8 @@ app.engine('ntl', (filePath, options, callback) => { // define the template engi
   fs.readFile(filePath, (err, content) => {
     if (err) return callback(err)
     // this is an extremely simple template engine
-    const rendered = content.toString().replace('#title#', `<title>${options.title}</title>`)
+    const rendered = content.toString()
+      .replace('#title#', `<title>${options.title}</title>`)
       .replace('#message#', `<h1>${options.message}</h1>`)
     return callback(null, rendered)
   })
@@ -34,6 +35,7 @@ app.set('view engine', 'ntl') // register the template engine
 #title#
 #message#
 ```
+
 이후 앱에 다음과 같은 라우트를 작성하십시오.
 
 ```js
@@ -41,4 +43,5 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Hey', message: 'Hello there!' })
 })
 ```
+
 홈 페이지에 대한 요청을 실행할 때 `index.ntl`은 HTML로 렌더링됩니다.
