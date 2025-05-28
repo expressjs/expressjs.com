@@ -1,6 +1,5 @@
 - [body-parser](/resources/middleware/body-parser.html)
 - [compression](/resources/middleware/compression.html)
-- [connect-rid](/resources/middleware/connect-rid.html)
 - [cookie-parser](/resources/middleware/cookie-parser.html)
 - [cookie-session](/resources/middleware/cookie-session.html)
 - [cors](/resources/middleware/cors.html)

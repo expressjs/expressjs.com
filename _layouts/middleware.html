@@ -28,7 +28,7 @@ layout: page
 
       {% include admonitions/note.html content=note-middleware %}
 
-      {% capture included-readme %}{% include readmes/{{page.module}}.md %}{% endcapture %}
+      {% capture included-readme %}{% include readmes/{{page.lang}}/{{page.module}}.md %}{% endcapture %}
       
       {{ included-readme | markdownify }}
 
