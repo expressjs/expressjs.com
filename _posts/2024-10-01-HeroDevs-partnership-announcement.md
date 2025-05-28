@@ -4,6 +4,7 @@ description: The Express.js team is pleased to announce a partnership with HeroD
 tags: partnerships announcements
 authors:
   - name: Express Technical Committee
+    github: expressjs
 ---
 
 The Express.js team is pleased to announce a partnership with HeroDevs to launch [Express Never-Ending Support (NES)](https://www.herodevs.com/support/express-nes), providing long-term support for applications built with legacy Express. This collaboration ensures that developers relying on older versions of the framework will continue to receive critical security and compatibility updates, allowing them to maintain and scale their applications securely, even after the framework's official end-of-life.
