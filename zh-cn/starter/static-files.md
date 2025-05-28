@@ -18,7 +18,7 @@ express.static(root, [options])
 ```
 
 The `root` argument specifies the root directory from which to serve static assets.
-For more information on the `options` argument, see [express.static](/{{page.lang}}/4x/api.html#express.static).
+For more information on the `options` argument, see [express.static](/{{page.lang}}/5x/api.html#express.static).
 
 For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
 
@@ -54,7 +54,7 @@ For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-pe
 {% endcapture %}
 {% include admonitions/note.html content=alert_content %}
 
-要为 `express.static` 函数提供的文件创建虚拟路径前缀（路径并不实际存在于文件系统中），请为静态目录[指定安装路径](/{{ page.lang }}/4x/api.html#app.use)，如下所示：
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/{{ page.lang }}/5x/api.html#app.use) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'))
