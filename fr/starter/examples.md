@@ -7,7 +7,7 @@ lang: fr
 redirect_from: "  "
 ---
 
-{% capture examples %}{% include readmes/express-master/examples.md %}{% endcapture %}
+{% capture examples %}{% include readmes/en/express-master/examples.md %}{% endcapture %}
 {{ examples | replace: "](.", "](https://github.com/expressjs/express/tree/master/examples" }}
 
 ## Additional examples
