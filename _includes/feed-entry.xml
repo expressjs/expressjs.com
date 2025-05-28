@@ -4,10 +4,16 @@
   <link href="{{ site.url }}{{ entry.url }}" rel="alternate" type="text/html" />
   <title type="text">{{ entry.title }}</title>
   {%- for author in entry.authors %}
-  <author>
-    {% if author.name %}<name>{{ author.name }}</name>{% elsif author.github %}<name>@{{ author.github }}</name>{% endif %}
-    {% if author.github %}<uri>https://github.com/{{ author.github }}</uri>{% endif %}
-  </author>
+    <author>
+        {% if author.name %}
+          <name>{{ author.name }}</name>
+        {% elsif author.github %}
+          <name>@{{ author.github }}</name>
+        {% endif %}
+        {% if author.github %}
+          <uri>https://github.com/{{ author.github }}</uri>
+        {% endif %}
+    </author>
   {%- endfor %}
   <published>{{ entry.date | date_to_xmlschema }}</published>
   <updated>{{ entry.last_modified_at | default: post.date | date_to_xmlschema }}</updated>
