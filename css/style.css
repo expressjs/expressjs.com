@@ -1500,9 +1500,10 @@ h2 a {
 }
 .blog-author-avatar {
   border-radius: 50%;
-  display: inline;
+  display: inline-block;
   vertical-align: middle;
   width: 1.5em;
+  height: 1.5em;
 }
 .blog-date {
   font-weight: bold;
