@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Express のデバッグ
+description: Learn how to enable and use debugging logs in Express.js applications by setting the DEBUG environment variable for enhanced troubleshooting.
 menu: guide
 lang: ja
-description: Learn how to enable and use debugging logs in Express.js applications
-  by setting the DEBUG environment variable for enhanced troubleshooting.
+redirect_from: "  "
 ---
 
 # Express のデバッグ
@@ -18,7 +18,7 @@ $ DEBUG=express:* node index.js
 Windows では、対応するコマンドを使用します。
 
 ```bash
-> set DEBUG=express:* & node index.js
+> $env:DEBUG = "express:*"; node index.js
 ```
 
 [express ジェネレーター](/{{ page.lang }}/starter/generator.html) で生成されるデフォルトのアプリケーションでこのコマンドを実行すると、以下の出力が表示されます。
@@ -59,11 +59,11 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +1ms
   express:router use /users router +0ms
   express:router:layer new /users +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
 ```
 
@@ -87,7 +87,7 @@ $ DEBUG=express:* node ./bin/www
   express:view render "/projects/example/views/index.pug" +1ms
 ```
 
-ルーター実装からのログのみを表示するには、`DEBUG` の値を `express:router` に設定します。同様に、アプリケーション実装からのログのみを表示するには、`DEBUG` を `express:application` に設定します。その他についても同様に設定します。
+ルーター実装からのログのみを表示するには、`DEBUG` の値を `express:router` に設定します。同様に、アプリケーション実装からのログのみを表示するには、`DEBUG` を `express:application` に設定します。その他についても同様に設定します。 Likewise, to see logs only from the application implementation, set the value of `DEBUG` to `express:application`, and so on.
 
 ## `express` によって生成されるアプリケーション
 
@@ -104,3 +104,27 @@ $ DEBUG=sample-app:* node ./bin/www
 ```bash
 $ DEBUG=http,mail,express:* node index.js
 ```
+
+## Advanced options
+
+When running through Node.js, you can set a few environment variables that will change the behavior of the debug logging:
+
+| Name                | Purpose                                                           |
+| ------------------- | ----------------------------------------------------------------- |
+| `DEBUG`             | Enables/disables specific debugging namespaces.   |
+| `DEBUG_COLORS`      | Whether or not to use colors in the debug output. |
+| `DEBUG_DEPTH`       | Object inspection depth.                          |
+| `DEBUG_FD`          | File descriptor to write debug output to.         |
+| `DEBUG_SHOW_HIDDEN` | Shows hidden properties on inspected objects.     |
+
+{% capture debug-text %}
+
+The environment variables beginning with `DEBUG_` end up being
+converted into an Options object that gets used with `%o`/`%O` formatters.
+See the Node.js documentation for
+[`util.inspect()`](https://nodejs.org/api/util.html#util_util_inspect_object_options)
+for the complete list.
+
+{% endcapture %}
+
+{% include admonitions/note.html content=debug-text %}

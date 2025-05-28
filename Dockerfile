@@ -1,5 +1,5 @@
 # Use the official Ruby image as the base
-FROM ruby:3.3.3
+FROM ruby:3.3.3@sha256:3acb1a3f2351748d7ffd4408b179adb96682a93a4a76f30abcb9eb001d95443f
 
 # Install Jekyll and Bundler
 RUN gem install jekyll bundler

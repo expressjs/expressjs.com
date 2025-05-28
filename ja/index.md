@@ -1,49 +1,64 @@
 ---
 layout: home
-title: Express - Node.js Web アプリケーション・フレームワーク
+title: Express - Node.js web application framework
+description: Express is a fast, unopinionated, minimalist web framework for Node.js, providing a robust set of features for web and mobile applications.
 menu: home
 lang: ja
-description: Express is a fast, unopinionated, minimalist web framework for Node.js,
-  providing a robust set of features for web and mobile applications.
+redirect_from: "  "
 ---
 
 <section id="home-content">
   <div id="homepage-leftpane" class="pane">
     <section id="description">
-        <div class="express"><a href="/">Express</a></div>
-        <h1 class="description"><a href='https://nodejs.org/ja/'>Node.js</a> のための高速で、革新的な、最小限のWebフレームワーク</h1>
+        <div class="express"><a href="/">Express</a><a href="{{ page.lang }}/changelog/4x.html#{{ site.data.express.current_version }}" id="express-version">{{ site.data.express.current_version }}</a></div>
+        <h1 class="description">Fast, unopinionated, minimalist web framework for <a href='https://nodejs.org/en/'>Node.js</a></h1>
     </section>
-    <div id="install-command">$ npm install express --save</div>
+    <pre class="install-command"><code>$ npm install express --save</code></pre>
   </div>
-  <div id="homepage-rightpane" class="pane">
-    <iframe title="KEYNOTE: Express, State of the Union by Doug Wilson, Express - YouTube" src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
+
+  <div id="homepage-rightpane" class="pane" markdown="1">
+
+```javascript
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+```
+
   </div>
 </section>
 
-<section id="doc-langs" markdown="1">
+{% if site.announcement %}
 
-  Express の資料は、他の言語 ([スペイン語](/es)、[日本語](/ja)、[ロシア語](/ru)、[中国語](/zh-cn)、[韓国語](/ko)、[ポルトガル語](/pt-br)) でも提供されています。
-
+<section id="announcements">
+  {% include announcement.html %}
 </section>
+{% endif %}
 
 <section id="intro">
 
   <div id="boxes" class="clearfix">
-      <div id="web-applications">
-          <h2>Web アプリケーション</h2> Express は、Web アプリケーションとモバイル・アプリケーション向けの一連の堅固な機能を提供する最小限で柔軟な Node.js Web アプリケーション・フレームワークです。
-      </div>
-
-      <div id="apis">
-          <h2>API</h2> 無数の HTTP ユーティリティー・メソッドとミドルウェアを自由に使用できるため、堅固な API を迅速かつ容易に作成できます。
-      </div>
-
-      <div id="performance">
-          <h2>パフォーマンス</h2> Express は、ユーザーが使い慣れている Node.js の機能をわかりやすくし、基礎的な Web アプリケーション機能をシンプルな階層で提供します。
-      </div>
-
-      <div id="sponsorship">
-          <h2><a href="http://loopback.io/">LoopBack</a></h2> <a href="http://loopback.io/">Express ベースのフレームワークを使用して、モデル駆動型アプリケーションを開発します。<br/>詳細については、loopback.io を参照してください。</a>
-      </div>
+    <div id="web-applications">
+      <h2>Web Applications</h2> Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+    </div>
+    <div id="apis">
+      <h2>APIs</h2> With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is     quick and easy.
+    </div>
+    <div id="performance">
+      <h2>Performance</h2> Express provides a thin layer of fundamental web application features, without obscuring     Node.js features that you know and love.
+    </div>
+    <div id="middleware">
+      <h2>Middleware</h2> 
+      Express is a lightweight and flexible routing framework with minimal core features 
+      meant to be augmented through the use of Express <a href="{{ page.lang }}/resources/middleware.html">middleware</a> modules.
+    </div>
   </div>
 
 </section>

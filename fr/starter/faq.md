@@ -1,11 +1,10 @@
 ---
 layout: page
 title: FAQ Express
+description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
 lang: fr
-description: Find answers to frequently asked questions about Express.js, including
-  topics on application structure, models, authentication, template engines, error
-  handling, and more.
+redirect_from: "  "
 ---
 
 # FAQ
@@ -20,13 +19,13 @@ Les routes et la logique propre à l'application peuvent être opérationnelles 
 que vous le souhaitez, et dans les structures de répertoire que vous préférez. Pour plus d'inspiration,
 consultez les exemples suivants :
 
-* [Listes de routes](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Feuille de route](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [Contrôleurs de style MVC](https://github.com/expressjs/express/tree/master/examples/mvc)
+- [Listes de routes](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
+- [Feuille de route](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+- [Contrôleurs de style MVC](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Il existe aussi des extensions tiers pour Express, permettant de simplifier certains de ces modèles :
 
-* [Routage ingénieux](https://github.com/expressjs/express-resource)
+- [Routage ingénieux](https://github.com/expressjs/express-resource)
 
 ## Comment puis-je définir des modèles ?
 
@@ -42,7 +41,6 @@ L'authentification est une autre partie complexe dans laquelle Express
 ne s'aventure pas. Vous pouvez utiliser tous les schémas d'authentification que vous voulez.
 Pour un schéma simple de type nom d'utilisateur/mot de passe, voir [cet exemple](https://github.com/expressjs/express/tree/master/examples/auth).
 
-
 ## Quels moteurs de modèles Express prend-il en charge ?
 
 Express prend en charge tous les moteurs de modèles conformes à la signature `(path, locals, callback)`.
@@ -50,21 +48,25 @@ Pour normaliser les interfaces de moteur de modèles et la mise en cache, voir l
 projet [consolidate.js](https://github.com/visionmedia/consolidate.js)
 pour la prise en charge. Des moteurs de modèles non répertoriés peuvent encore prendre en charge la signature Express.
 
+For more information, see [Using template engines with Express](/{{page.lang}}/guide/using-template-engines.html).
+
 ## Comment puis-je gérer des réponses 404 ?
 
 Dans Express, étant donné que les réponses 404 ne sont pas le résultat d'une erreur,
 le middleware de traitement d'erreurs ne les traite pas. Ce comportement est
-dû au fait qu'une réponse 404 indique simplement l'absence d'un travail supplémentaire à effectuer.
-En d'autres termes, Express a exécuté toutes les routes et fonctions middleware,
+dû au fait qu'une réponse 404 indique simplement l'absence d'un travail supplémentaire à effectuer. En d'autres termes, Express a exécuté toutes les routes et fonctions middleware,
 et aucune n'a répondu. Tout ce que vous avez à faire est
 d'ajouter une fonction middleware à la toute fin de la pile (en-dessous de toutes les autres fonctions)
 pour gérer une réponse 404 :
 
 ```js
 app.use((req, res, next) => {
-  res.status(404).send('Sorry cant find that!')
+  res.status(404).send("Sorry can't find that!")
 })
 ```
+
+Add routes dynamically at runtime on an instance of `express.Router()`
+so the routes are not superseded by a middleware function.
 
 ## Comment puis-je configurer un gestionnaire d'erreurs ?
 
@@ -85,3 +87,10 @@ Pour plus d'informations, voir [Traitement d'erreurs](/{{ page.lang }}/guide/err
 Vous ne pouvez pas ! Il n'est pas nécessaire de "générer" un fichier HTML avec la fonction `res.render()`.
 Si vous avez un fichier spécifique, utilisez la fonction `res.sendFile()`.
 Si vous utilisez plusieurs actifs d'un répertoire, utilisez la fonction middleware `express.static()`.
+
+## What version of Node.js does Express require?
+
+- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
+- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
+
+### [Previous: More examples ](/{{ page.lang }}/starter/examples.html)
