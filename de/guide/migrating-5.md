@@ -84,11 +84,11 @@ You can find the list of available codemods [here](https://github.com/expressjs/
   <li><a href="#brotli-support">Brotli encoding support</a></li>
 </ul>
 
-### Entfernte Methoden und Eigenschaften
+## Entfernte Methoden und Eigenschaften
 
 Wenn Sie eine dieser Methoden oder Eigenschaften in Ihrer Anwendung verwenden, stürzt die Anwendung ab. Sie müssen also Ihre Anwendung ändern, wenn Sie auf Version 5 umgestellt haben.
 
-<h4 id="app.del">app.del()</h4>
+<h3 id="app.del">app.del()</h3>
 
 Express 5 unterstützt die Funktion `app.del()` nicht mehr. Wenn Sie diese Funktion verwenden, wird ein Fehler ausgelöst. Für die Registrierung von HTTP DELETE-Weiterleitungen verwenden Sie stattdessen die Funktion `app.delete()`.
 
@@ -117,11 +117,11 @@ app.delete('/user/:id', (req, res) => {
 })
 ```
 
-<h4 id="app.param">app.param(fn)</h4>
+<h3 id="app.param">app.param(fn)</h3>
 
 Die Signatur `app.param(fn)` wurde für die Änderung der Verhaltensweise der Funktion `app.param(name, fn)` verwendet. Seit v4.11.0 wurde sie nicht mehr verwendet. In Express 5 wird sie überhaupt nicht mehr unterstützt.
 
-<h4 id="plural">Pluralisierte Methodennamen</h4>
+<h3 id="plural">Pluralisierte Methodennamen</h3>
 
 Die folgenden Methodennamen wurden pluralisiert. In Express 4 wurde bei Verwendung der alten Methoden eine Warnung zur Einstellung der Unterstützung ausgegeben. Express 5 unterstützt diese Methoden nicht mehr.
 
@@ -162,13 +162,13 @@ app.all('/', (req, res) => {
 })
 ```
 
-<h4 id="leading">Führender Doppelpunkt (:) im Namen für app.param(name, fn)</h4>
+<h3 id="leading">Führender Doppelpunkt (:) im Namen für app.param(name, fn)</h3>
 
 Ein führendes Doppelpunktzeichen (:) im Namen für die Funktion `app.param(name, fn)` ist ein Überbleibsel aus Express 3. Aus Gründen der Abwärtskompatibilität wurde dieser Name in Express 4 mit einem Hinweis zu veralteten Versionen weiter unterstützt. In Express 5 wird dieser Name stillschwiegend ignoriert und der Namensparameter ohne einen vorangestellten Doppelpunkt verwendet.
 
 Dies dürfte keine Auswirkungen auf Ihren Code haben, wenn Sie die Express 4-Dokumentation zu [app.param](/{{ page.lang }}/4x/api.html#app.param) befolgen, da dort der führende Doppelpunkt nicht erwähnt wird.
 
-<h4 id="req.param">req.param(name)</h4>
+<h3 id="req.param">req.param(name)</h3>
 
 Dieses potenziell verwirrende und durchaus riskante Verfahren des Abrufens von Formulardaten wurde entfernt. Sie müssen nun ganz speziell nach dem übergebenen Parameternamen im Objekt `req.params`, `req.body` oder `req.query` suchen.
 
@@ -203,7 +203,7 @@ app.post('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.json">res.json(obj, status)</h4>
+<h3 id="res.json">res.json(obj, status)</h3>
 
 Express 5 unterstützt die Signatur `res.json(obj, status)` nicht mehr. Stattdessen müssen Sie den Status festlegen und diesen dann mit `res.json()`-Methoden wie  dieser verketten: `res.status(status).json(obj)`.
 
@@ -221,7 +221,7 @@ app.post('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.jsonp">res.jsonp(obj, status)</h4>
+<h3 id="res.jsonp">res.jsonp(obj, status)</h3>
 
 Express 5 unterstützt die Signatur `res.jsonp(obj, status)` nicht mehr. Stattdessen müssen Sie den Status festlegen und diesen dann mit `res.jsonp()`-Methoden wie  dieser verketten: `res.status(status).jsonp(obj)`.
 
@@ -239,7 +239,7 @@ app.post('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.redirect">res.redirect(url, status)</h4>
+<h3 id="res.redirect">res.redirect(url, status)</h3>
 
 Express 5 unterstützt die Signatur `res.send(obj, status)` nicht mehr. Stattdessen müssen Sie den Status festlegen und diesen dann mit `res.send()`-Methoden wie  dieser verketten: `res.status(status).send(obj)`.
 
@@ -257,7 +257,7 @@ app.get('/user', (req, res) => {
 })
 ```
 
-<h4 id="magic-redirect">res.redirect('back') and res.location('back')</h4>
+<h3 id="magic-redirect">res.redirect('back') and res.location('back')</h3>
 
 Express 5 no longer supports the magic string `back` in the `res.redirect()` and `res.location()` methods. Instead, use the `req.get('Referrer') || '/'` value to redirect back to the previous page. In Express 4, the res.`redirect('back')` and `res.location('back')` methods were deprecated.
 
@@ -284,7 +284,7 @@ app.get('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.send.body">res.send(body, status)</h4>
+<h3 id="res.send.body">res.send(body, status)</h3>
 
 Express 5 no longer supports the signature `res.send(obj, status)`. Instead, set the status and then chain it to the `res.send()` method like this: `res.status(status).send(obj)`.
 
@@ -302,7 +302,7 @@ app.get('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.send.status">res.send(status)</h4>
+<h3 id="res.send.status">res.send(status)</h3>
 
 Express 5 unterstützt die Signatur <code>res.send(<em>status</em>)</code>, nicht mehr, wobei _`status`_ für eine Zahl steht. Verwenden Sie stattdessen die Funktion `res.sendStatus(statusCode)`, mit der der Statuscode für den HTTP-Antwort-Header festgelegt und die Textversion des Codes gesendet wird: "Not Found" (Nicht gefunden), "Internal Server Error" (Interner Serverfehler) usw.
 Wenn Sie eine Zahl senden und hierfür die Funktion `res.send()` verwenden müssen, müssen Sie die Zahl in Anführungszeichen setzen, um diese in eine Zeichenfolge zu konvertieren. Dadurch interpretiert Express diese Zahl nicht als Versuch, die nicht mehr unterstützte alte Signatur zu verwenden.
@@ -321,7 +321,7 @@ app.get('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.sendfile">res.sendfile()</h4>
+<h3 id="res.sendfile">res.sendfile()</h3>
 
 Die Funktion `res.sendfile()` wurde durch eine Version in Camel-Schreibweise von `res.sendFile()` in Express 5 ersetzt.
 
@@ -339,11 +339,11 @@ app.get('/user', (req, res) => {
 })
 ```
 
-<h4 id="router.param">router.param(fn)</h4>
+<h3 id="router.param">router.param(fn)</h3>
 
 The `router.param(fn)` signature was used for modifying the behavior of the `router.param(name, fn)` function. Seit v4.11.0 wurde sie nicht mehr verwendet. In Express 5 wird sie überhaupt nicht mehr unterstützt.
 
-<h4 id="express.static.mime">express.static.mime</h4>
+<h3 id="express.static.mime">express.static.mime</h3>
 
 In Express 5, `mime` is no longer an exported property of the `static` field.
 Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work with MIME type values.
@@ -357,7 +357,7 @@ const mime = require('mime-types')
 mime.lookup('json')
 ```
 
-<h4 id="express:router-debug-logs">express:router debug logs</h4>
+<h3 id="express:router-debug-logs">express:router debug logs</h3>
 
 In Express 5, router handling logic is performed by a dependency. Therefore, the
 debug logs for the router are no longer available under the `express:` namespace.
@@ -376,9 +376,9 @@ DEBUG=express:* node index.js
 DEBUG=express:*,router,router:* node index.js
 ```
 
-<h3>Geändert</h3>
+## Geändert
 
-<h4 id="path-syntax">Path route matching syntax</h4>
+<h3 id="path-syntax">Path route matching syntax</h3>
 
 Path route matching syntax is when a string is supplied as the first parameter to the `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, and `router.use()` APIs. The following changes have been made to how the path string is matched to an incoming request:
 
@@ -442,17 +442,17 @@ app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
 - Some characters have been reserved to avoid confusion during upgrade (`()[]?+!`), use `\` to escape them.
 - Parameter names now support valid JavaScript identifiers, or quoted like `:"this"`.
 
-<h4 id="rejected-promises">Rejected promises handled from middleware and handlers</h4>
+<h3 id="rejected-promises">Rejected promises handled from middleware and handlers</h3>
 
 Request middleware and handlers that return rejected promises are now handled by forwarding the rejected value as an `Error` to the error handling middleware. This means that using `async` functions as middleware and handlers are easier than ever. When an error is thrown in an `async` function or a rejected promise is `await`ed inside an async function, those errors will be passed to the error handler as if calling `next(err)`.
 
 Details of how Express handles errors is covered in the [error handling documentation](/en/guide/error-handling.html).
 
-<h4 id="express.urlencoded">express.urlencoded</h4>
+<h3 id="express.urlencoded">express.urlencoded</h3>
 
 The `express.urlencoded` method makes the `extended` option `false` by default.
 
-<h4 id="app.listen">app.listen</h4>
+<h3 id="app.listen">app.listen</h3>
 
 In Express 5, the `app.listen` method will invoke the user-provided callback function (if provided) when the server receives an error event. In Express 4, such errors would be thrown. This change shifts error-handling responsibility to the callback function in Express 5. If there is an error, it will be passed to the callback as an argument.
 Beispiel:
@@ -466,40 +466,40 @@ const server = app.listen(8080, '0.0.0.0', (error) => {
 })
 ```
 
-<h4 id="app.router">app.router</h4>
+<h3 id="app.router">app.router</h3>
 
 Das Objekt `app.router`, das in Express 4 entfernt wurde, ist in Express 5 wieder verfügbar. In der neuen Version fungiert dieses Objekt nur als Referenz zum Express-Basisrouter – im Gegensatz zu Express 3, wo die Anwendung dieses Objekt explizit laden musste.
 
-<h4 id="req.body">req.body</h4> 
+<h3 id="req.body">req.body</h3> 
 
 The `req.body` property returns `undefined` when the body has not been parsed. In Express 4, it returns `{}` by default.
 
-<h4 id="req.host">req.host</h4>
+<h3 id="req.host">req.host</h3>
 
 In Express 4 übergab die Funktion `req.host` nicht ordnungsgemäß eine eventuell vorhandene Portnummer. In Express 5 wird die Portnummer beibehalten.
 
-<h4 id="req.query">req.query</h4>
+<h3 id="req.query">req.query</h3>
 
 The `req.query` property is no longer a writable property and is instead a getter. The default query parser has been changed from "extended" to "simple".
 
-<h4 id="res.clearCookie">res.clearCookie</h4>
+<h3 id="res.clearCookie">res.clearCookie</h3>
 
 The `res.clearCookie` method ignores the `maxAge` and `expires` options provided by the user.
 
-<h4 id="res.status">res.status</h4>
+<h3 id="res.status">res.status</h3>
 
 The `res.status` method only accepts integers in the range of `100` to `999`, following the behavior defined by Node.js, and it returns an error when the status code is not an integer.
 
-<h4 id="res.query">res.vary</h4>
+<h3 id="res.query">res.vary</h3>
 
 The `res.vary` throws an error when the `field` argument is missing. In Express 4, if the argument was omitted, it gave a warning in the console
 
-### Verbesserungen
+## Verbesserungen
 
-<h4 id="res.render">res.render()</h4>
+<h3 id="res.render">res.render()</h3>
 
 Diese Methode erzwingt nun asynchrones Verhalten für alle View-Engines, sodass durch View-Engines mit synchroner Implementierung verursachte Fehler vermieden werden, durch die die empfohlene Schnittstelle nicht verwendet werden konnte.
 
-<h4 id="brotli-support">Brotli encoding support</h4>
+<h3 id="brotli-support">Brotli encoding support</h3>
 
 Express 5 supports Brotli encoding for requests received from clients that support it.

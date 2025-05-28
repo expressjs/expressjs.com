@@ -43,7 +43,6 @@ app.listen(port, () => {
 {% endif %}
 
 <section id="intro">
-
   <div id="boxes" class="clearfix">
     <div id="web-applications">
       <h2>Web Applications</h2> Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
@@ -52,13 +51,12 @@ app.listen(port, () => {
       <h2>APIs</h2> With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy.
     </div>
     <div id="performance">
-      <h2>Performance</h2> Express provides a thin layer of fundamental web application features, without obscuring     Node.js features that you know and love.
+      <h2>Performance</h2> Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love.
     </div>
     <div id="middleware">
       <h2>Middleware</h2> 
       Express is a lightweight and flexible routing framework with minimal core features 
-      meant to be augmented through the use of Express <a href="{{ page.lang }}/resources/middleware.   html">middleware</a> modules.
+      meant to be augmented through the use of Express <a href="{{ page.lang }}/resources/middleware.html">middleware</a> modules.
     </div>
   </div>
-
 </section>
