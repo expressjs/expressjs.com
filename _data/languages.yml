@@ -10,8 +10,6 @@
   name: Italiano
 - code: ja
   name: 日本語
-- code: ru
-  name: Русский
 - code: zh-cn
   name: 中文 (简体)
 - code: zh-tw
@@ -20,15 +18,3 @@
   name: 한국어
 - code: pt-br
   name: Português
-- code: sk
-  name: Slovenčina
-- code: uk
-  name: Українська
-- code: uz
-  name: Oʻzbekcha
-- code: tr
-  name: Türkçe
-- code: th
-  name: ภาษาไทย
-- code: id
-  name: Indonesia

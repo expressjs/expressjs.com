@@ -1,65 +1,44 @@
 ---
-layout: page
+layout: middleware
 title: Middleware Express
+description: Explore a list of Express.js middleware modules maintained by the Express team and the community, including built-in middleware and popular third-party modules.
 menu: resources
 lang: fr
-description: Explore a list of Express.js middleware modules maintained by the Express
-  team and the community, including built-in middleware and popular third-party modules.
+redirect_from: "  "
+module: mw-home
 ---
 
-# Middleware tiers
+## Middleware Express
 
 Voici quelques modules de middleware Express :
 
-  - [body-parser](https://github.com/expressjs/body-parser) : précédemment `express.bodyParser`, `json` et `urlencoded`.
-  Voir aussi :
-    - [body](https://github.com/raynos/body)
-    - [co-body](https://github.com/visionmedia/co-body)
-    - [raw-body](https://github.com/stream-utils/raw-body)
-  - [compression](https://github.com/expressjs/compression) : précédemment `express.compress`
-  - [connect-image-optimus](https://github.com/msemenistyi/connect-image-optimus) : modules de middleware Connect/Express pour une utilisation des images optimale. Bascule les images en `.webp` ou `.jxr`, dans la mesure du possible.
-  - [connect-timeout](https://github.com/expressjs/timeout) : précédemment `express.timeout`
-  - [cookie-parser](https://github.com/expressjs/cookie-parser) : précédemment `express.cookieParser`
-  - [cookie-session](https://github.com/expressjs/cookie-session) : précédemment `express.cookieSession`
-  - [errorhandler](https://github.com/expressjs/errorhandler) : précédemment `express.errorHandler`
-  - [express-debug](https://github.com/devoidfury/express-debug) : outil de développement discret qui ajoute un onglet avec des informations sur les variables de canevas (environnements locaux), les sessions en cours, les données de demandes utiles et bien plus, à votre application.
-  - [express-partial-response](https://github.com/nemtsov/express-partial-response) : module Express Middleware permettant de filtrer des éléments de réponses JSON en fonction de la chaîne de requête `zones` ; en utilisant la réponse partielle de l'API Google.
-  - [express-session](https://github.com/expressjs/session) : précédemment `express.session`
-  - [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn) : module Express Middleware permettant d'utiliser un CDN pour les actifs statiques, avec la prise en charge de plusieurs hôtes (Par exemple : cdn1.host.com, cdn2.host.com).
-  - [express-slash](https://github.com/ericf/express-slash) : module Express Middleware destiné aux personnes qui sont strictes sur le respect des barres obliques.
-  - [express-stormpath](https://github.com/stormpath/stormpath-express) : module Express Middleware destiné au stockage utilisateur, à l'authentification, à l'autorisation, à la connexion unique et à la sécurité des données.
-  - [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize) : module middleware destiné à la redirection des demandes HTTP contenant des majuscules en format canonique en minuscules.
-  - [helmet](https://github.com/helmetjs/helmet) : module qui aide à sécuriser vos applications en définissant divers en-têtes HTTP.
-  - [join-io](https://github.com/coderaiser/join-io "join-io") : module permettant de joindre des fichiers à la volée pour réduire le nombre de demandes.
-  - [method-override](https://github.com/expressjs/method-override) : précédemment `express.methodOverride`
-  - [morgan](https://github.com/expressjs/morgan) : précédemment `logger`
-  - [passport](https://github.com/jaredhanson/passport) : module de middleware Express dédié à l'authentification.
-  - [response-time](https://github.com/expressjs/response-time) : précédemment `express.responseTime`
-  - [serve-favicon](https://github.com/expressjs/serve-favicon) : précédemment `express.favicon`
-  - [serve-index](https://github.com/expressjs/serve-index) : précédemment `express.directory`
-  - [serve-static](https://github.com/expressjs/serve-static) : module d'utilisation du contenu statique.
-  - [static-expiry](https://github.com/paulwalker/connect-static-expiry) : URL à empreinte digitale ou en-têtes de mise en cache pour les actifs statiques, y compris la prise en charge d'un ou plusieurs domaines externes.
-  - [vhost](https://github.com/expressjs/vhost) : précédemment `express.vhost`
-  - [view-helpers](https://github.com/madhums/node-view-helpers) : module Express Middleware qui offre des méthodes d'auxiliaires courantes destinées aux vues.
-  - [sriracha-admin](https://github.com/hdngr/siracha) : module Express Middleware qui génère de façon dynamique un site administrateur pour Mongoose.
+| [express-slash](https://github.com/ericf/express-slash) : module Express Middleware destiné aux personnes qui sont strictes sur le respect des barres obliques. | Description                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| [body-parser](/{{page.lang}}/resources/middleware/body-parser.html)                                                                                                                             | Parse HTTP request body.                                                                                            |
+| [compression](/{{page.lang}}/resources/middleware/compression.html)                                                                                                                             | Compress HTTP responses.                                                                                            |
+| [connect-rid](/{{page.lang}}/resources/middleware/connect-rid.html)                                                                                                                             | Generate unique request ID.                                                                                         |
+| [cookie-parser](/{{page.lang}}/resources/middleware/cookie-parser.html)                                                                                                                         | Parse cookie header and populate `req.cookies`. See also [cookies](https://github.com/jed/cookies). |
+| [cookie-session](/{{page.lang}}/resources/middleware/cookie-session.html)                                                                                                                       | Establish cookie-based sessions.                                                                                    |
+| [cors](/{{page.lang}}/resources/middleware/cors.html)                                                                                                                                           | Enable cross-origin resource sharing (CORS) with various options.                                |
+| [errorhandler](/{{page.lang}}/resources/middleware/errorhandler.html)                                                                                                                           | Development error-handling/debugging.                                                                               |
+| [method-override](/{{page.lang}}/resources/middleware/method-override.html)                                                                                                                     | Override HTTP methods using header.                                                                                 |
+| [morgan](/{{page.lang}}/resources/middleware/morgan.html)                                                                                                                                       | HTTP request logger.                                                                                                |
+| [multer](/{{page.lang}}/resources/middleware/multer.html)                                                                                                                                       | Handle multi-part form data.                                                                                        |
+| [response-time](/{{page.lang}}/resources/middleware/response-time.html)                                                                                                                         | Record HTTP response time.                                                                                          |
+| [serve-favicon](/{{page.lang}}/resources/middleware/serve-favicon.html)                                                                                                                         | Serve a favicon.                                                                                                    |
+| [serve-index](/{{page.lang}}/resources/middleware/serve-index.html)                                                                                                                             | Serve directory listing for a given path.                                                                           |
+| [serve-static](/{{page.lang}}/resources/middleware/serve-static.html)                                                                                                                           | Serve static files.                                                                                                 |
+| [session](/{{page.lang}}/resources/middleware/session.html)                                                                                                                                     | Establish server-based sessions (development only).                                              |
+| [timeout](/{{page.lang}}/resources/middleware/timeout.html)                                                                                                                                     | Set a timeout perioHTTP request processing.                                                                         |
+| [vhost](/{{page.lang}}/resources/middleware/vhost.html)                                                                                                                                         | Create virtual domains.                                                                                             |
 
-Certains modules middleware précédemment inclus avec Connect ne sont plus pris en charge par l'équipe Connect/Express. Ils sont remplacés par un module alternatif ou devraient être remplacés par un module supérieur. Utilisez l'une des alternatives suivantes :
+## Pour découvrir plus de modules de middleware, voir :
 
-  - express.cookieParser
-    - [cookies](https://github.com/jed/cookies) et [keygrip](https://github.com/jed/keygrip)
-  - express.limit
-    - [raw-body](https://github.com/stream-utils/raw-body)
-  - express.multipart
-    - [connect-busboy](https://github.com/mscdex/connect-busboy)
-    - [multer](https://github.com/expressjs/multer)
-    - [connect-multiparty](https://github.com/superjoe30/connect-multiparty)
-  - express.query
-    - [qs](https://github.com/visionmedia/node-querystring)
-  - express.staticCache
-    - [st](https://github.com/isaacs/st)
-    - [connect-static](https://github.com/andrewrk/connect-static)
+[view-helpers](https://github.com/madhums/node-view-helpers) : module Express Middleware qui offre des méthodes d'auxiliaires courantes destinées aux vues.
 
-Pour découvrir plus de modules de middleware, voir :
+{% include community-caveat.html %}
 
- - [http-framework](https://github.com/Raynos/http-framework/wiki/Modules)
- - [expressjs](https://github.com/expressjs)
+| [express-slash](https://github.com/ericf/express-slash) : module Express Middleware destiné aux personnes qui sont strictes sur le respect des barres obliques. | Description                                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [helmet](https://github.com/helmetjs/helmet) : module qui aide à sécuriser vos applications en définissant divers en-têtes HTTP.                                | Helps secure your apps by setting various HTTP headers.                                                                                                                       |
+| [passport](https://github.com/jaredhanson/passport) : module de middleware Express dédié à l'authentification.                                                  | Authentication using "strategies" such as OAuth, OpenID and many others.  See [passportjs.org](https://passportjs.org/) for more information. |

@@ -1,35 +1,35 @@
 ---
 layout: page
 title: Express アプリケーションで使用するミドルウェアの作成
+description: Learn how to write custom middleware functions for Express.js applications, including examples and best practices for enhancing request and response handling.
 menu: guide
 lang: ja
-description: Learn how to write custom middleware functions for Express.js applications,
-  including examples and best practices for enhancing request and response handling.
+redirect_from: "  "
 ---
 
 # Express アプリケーションで使用するミドルウェアの作成
 
 <h2>概説</h2>
 
-*ミドルウェア* 関数は、[リクエストオブジェクト](/{{ page.lang }}/4x/api.html#req) (`req`)、[レスポンスオブジェクト](/{{ page.lang }}/4x/api.html#res) (`res`)、およびアプリケーションのリクエストレスポンスサイクルにおける次のミドルウェア関数に対するアクセス権限を持つ関数です。次のミドルウェア関数は一般的に、`next` という変数で表されます。
+_ミドルウェア_ 関数は、[リクエストオブジェクト](/{{ page.lang }}/4x/api.html#req) (`req`)、[レスポンスオブジェクト](/{{ page.lang }}/4x/api.html#res) (`res`)、およびアプリケーションのリクエストレスポンスサイクルにおける次のミドルウェア関数に対するアクセス権限を持つ関数です。次のミドルウェア関数は一般的に、`next` という変数で表されます。 The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
 
 ミドルウェア関数は以下のタスクを実行できます。
 
-* 任意のコードを実行する。
-* リクエストオブジェクトとレスポンスオブジェクトを変更する。
-* リクエストレスポンスサイクルを終了する。
-* スタック内の次のミドルウェアを呼び出す。
+- 任意のコードを実行する。
+- リクエストオブジェクトとレスポンスオブジェクトを変更する。
+- リクエストレスポンスサイクルを終了する。
+- スタック内の次のミドルウェアを呼び出す。
 
-現在のミドルウェア関数がリクエストレスポンスサイクルを終了しない場合は、`next()` を呼び出して、次のミドルウェア関数に制御を渡す必要があります。そうしないと、リクエストはハングしたままになります。
+現在のミドルウェア関数がリクエストレスポンスサイクルを終了しない場合は、`next()` を呼び出して、次のミドルウェア関数に制御を渡す必要があります。そうしないと、リクエストはハングしたままになります。 Otherwise, the request will be left hanging.
 
 次の例は、ミドルウェア関数呼び出しの要素を示しています。
 
 <table id="mw-fig">
-<tr><td id="mw-fig-imgcell">
+<tbody><tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
 </td>
 <td class="mw-fig-callouts">
-<div class="callout" id="callout1">ミドルウェア関数が適用される HTTP メソッド。</div>
+<div class="callout" id="callout1">ミドルウェア関数が適用される HTTP メソッド。</div></tbody>
 
 <div class="callout" id="callout2"> ミドルウェア関数が適用されるパス (ルート)。</div>
 
@@ -43,9 +43,14 @@ description: Learn how to write custom middleware functions for Express.js appli
 </td></tr>
 </table>
 
+Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
+
 <h2>例</h2>
 
-次に、簡単な「Hello World」Expressアプリケーションの例を示します。 この記事の残りの部分では、アプリケーションに2つのミドルウェア関数、つまり単純なログメッセージを出力する`myLogger`と、HTTP要求のタイムスタンプを表示する`requestTime`という2つのミドルウェア関数を定義して追加します。
+Here is an example of a simple "Hello World" Express application.
+The remainder of this article will define and add three middleware functions to the application:
+one called `myLogger` that prints a simple log message, one called `requestTime` that
+displays the timestamp of the HTTP request, and one called `validateCookies` that validates incoming cookies.
 
 ```js
 const express = require('express')
@@ -59,8 +64,7 @@ app.listen(3000)
 ```
 
 <h3>ミドルウェア関数 myLogger</h3>
-
-次に、"myLogger"というミドルウェア関数の簡単な例を示します。この関数は、アプリケーションへのリクエストがそれを通過するときに、単に "LOGGED"を出力します。ミドルウェア関数は、`myLogger`という名前の変数に割り当てられます。
+Here is a simple example of a middleware function called "myLogger". This function just prints "LOGGED" when a request to the app passes through it. 次に、"myLogger"というミドルウェア関数の簡単な例を示します。この関数は、アプリケーションへのリクエストがそれを通過するときに、単に "LOGGED"を出力します。ミドルウェア関数は、`myLogger`という名前の変数に割り当てられます。
 
 ```js
 const myLogger = function (req, res, next) {
@@ -70,11 +74,12 @@ const myLogger = function (req, res, next) {
 ```
 
 <div class="doc-box doc-notice" markdown="1">
-
-上記の `next()` の呼び出しに注意してください。この関数を呼び出すと、アプリケーション内の次のミドルウェア関数が呼び出されます。
-`next()` 関数は、Node.js または Express API の一部ではありませんが、ミドルウェア関数に渡される 3 番目の引数です。`next()` 関数に任意の名前を付けることは可能ですが、慣習的に常に「next」と呼ばれます。混乱を避けるために、常にこの規則に従ってください。
+Notice the call above to `next()`. Calling this function invokes the next middleware function in the app.
+The `next()` function is not a part of the Node.js or Express API, but is the third argument that is passed to the middleware function. The `next()` function could be named anything, but by convention it is always named "next".
+To avoid confusion, always use this convention.
 </div>
 
+To load the middleware function, call `app.use()`, specifying the middleware function.
 ミドルウェア関数をロードするには、ミドルウェア関数を指定して `app.use()` を呼び出します。
 例えば、次のコードは、ルート・パス (/) へのルートの前に `myLogger` ミドルウェア関数をロードします。
 
@@ -115,7 +120,7 @@ const requestTime = function (req, res, next) {
 }
 ```
 
-これで、アプリケーションが `requestTime` ミドルウェア関数を使用するようになります。また、ルート・パス・ルートのコールバック関数は、ミドルウェア関数が `req` (リクエストオブジェクト) に追加するプロパティーを使用します。
+The app now uses the `requestTime` middleware function. これで、アプリケーションが `requestTime` ミドルウェア関数を使用するようになります。また、ルート・パス・ルートのコールバック関数は、ミドルウェア関数が `req` (リクエストオブジェクト) に追加するプロパティーを使用します。
 
 ```js
 const express = require('express')
@@ -138,6 +143,52 @@ app.listen(3000)
 ```
 
 アプリケーションのルートにリクエストすると、アプリケーションは、リクエストのタイムスタンプをブラウザーに表示します。
+
+<h3>Middleware function validateCookies</h3>
+
+Finally, we'll create a middleware function that validates incoming cookies and sends a 400 response if cookies are invalid.
+
+Here's an example function that validates cookies with an external async service.
+
+```js
+async function cookieValidator (cookies) {
+  try {
+    await externallyValidateCookie(cookies.testCookie)
+  } catch {
+    throw new Error('Invalid cookies')
+  }
+}
+```
+
+Here, we use the [`cookie-parser`](/resources/middleware/cookie-parser.html) middleware to parse incoming cookies off the `req` object and pass them to our `cookieValidator` function. The `validateCookies` middleware returns a Promise that upon rejection will automatically trigger our error handler.
+
+```js
+const express = require('express')
+const cookieParser = require('cookie-parser')
+const cookieValidator = require('./cookieValidator')
+
+const app = express()
+
+async function validateCookies (req, res, next) {
+  await cookieValidator(req.cookies)
+  next()
+}
+
+app.use(cookieParser())
+
+app.use(validateCookies)
+
+// error handler
+app.use((err, req, res, next) => {
+  res.status(400).send(err.message)
+})
+
+app.listen(3000)
+```
+
+<div class="doc-box doc-notice" markdown="1">
+Note how `next()` is called after `await cookieValidator(req.cookies)`. This ensures that if `cookieValidator` resolves, the next middleware in the stack will get called. If you pass anything to the `next()` function (except the string `'route'` or `'router'`), Express regards the current request as being an error and will skip any remaining non-error handling routing and middleware functions.
+</div>
 
 リクエストオブジェクト、レスポンスオブジェクト、スタック内の次のミドルウェア関数、および Node.js API を利用できるため、ミドルウェア関数が持つ可能性は無限です。
 
