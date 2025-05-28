@@ -1492,6 +1492,7 @@ h2 a {
 }
 .blog-author-link {
   color: inherit;
+  margin-left: 0.5ch;
   text-decoration: none;
 }
 .blog-author-link-label {
