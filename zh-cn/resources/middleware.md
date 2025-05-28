@@ -1,64 +1,45 @@
 ---
-layout: page
+layout: middleware
 title: Express 中间件
+description: Explore a list of Express.js middleware modules maintained by the Express team and the community, including built-in middleware and popular third-party modules.
 menu: resources
-lang: zh-cn
-description: Explore a list of Express.js middleware modules maintained by the Express
-  team and the community, including built-in middleware and popular third-party modules.
+lang: en
+redirect_from: "  "
+module: mw-home
 ---
 
-# 第三方中间件
+## Express 中间件
 
-以下是一些 Express 中间件模块：
+The Express middleware modules listed here are maintained by the
+[Expressjs team](https://github.com/orgs/expressjs/people).
 
-  - [body-parser](https://github.com/expressjs/body-parser)：先前为 `express.bodyParser`、`json` 和 `urlencoded`。另请参阅：
-    - [body](https://github.com/raynos/body)
-    - [co-body](https://github.com/visionmedia/co-body)
-    - [raw-body](https://github.com/stream-utils/raw-body)
-  - [compression](https://github.com/expressjs/compression)：先前为 `express.compress`。
-  - [connect-image-optimus](https://github.com/msemenistyi/connect-image-optimus)：用于提供最优映像的 Connect/Express 中间件模块。如有可能，可将映像切换为 `.webp` 或 `.jxr`。
-  - [connect-timeout](https://github.com/expressjs/timeout)：先前为 `express.timeout`。
-  - [cookie-parser](https://github.com/expressjs/cookie-parser)：先前为 `express.cookieParser`。
-  - [cookie-session](https://github.com/expressjs/cookie-session)：先前为 `express.cookieSession`。
-  - [errorhandler](https://github.com/expressjs/errorhandler)：先前为 `express.errorHandler`。
-  - [express-debug](https://github.com/devoidfury/express-debug)：不引人注目的开发工具，用于向应用程序添加一个选项卡，其中包含有关模板变量（本地）、当前会话、有用请求数据等方面的信息。
-  - [express-partial-response](https://github.com/nemtsov/express-partial-response)：Express 中间件模块，使用 Google API 的 Partial Response，根据 `fields` 查询字符串过滤掉 JSON 响应的各个部分。
-  - [express-session](https://github.com/expressjs/session)：先前为 `express.session`。
-  - [express-simple-cdn](https://github.com/jamiesteven/express-simple-cdn)：Express 中间件模块，将 CDN 用于静态资产，具有多主机支持（例如：cdn1.host.com、cdn2.host.com）。
-  - [express-slash](https://github.com/ericf/express-slash)：Express 中间件模块，适用于对末尾斜杠有很严格要求的人员。
-  - [express-stormpath](https://github.com/stormpath/stormpath-express)：实现用户存储、认证、授权、SSO 和数据安全性的 Express 中间件模块。
-  - [express-uncapitalize](https://github.com/jamiesteven/express-uncapitalize)：中间件模块，用于将包含大写字母的 HTTP 请求转换为标准的小写形式。
-  - [helmet](https://github.com/helmetjs/helmet)：一个模块，用于通过设置各种 HTTP 头来帮助保护应用程序。
-  - [join-io](https://github.com/coderaiser/join-io "join-io")：一个模块，用于实时联接文件以减少请求数目。
-  - [method-override](https://github.com/expressjs/method-override)：先前为 `express.methodOverride`。
-  - [morgan](https://github.com/expressjs/morgan)：先前为 `logger`。
-  - [passport](https://github.com/jaredhanson/passport)：用于认证的 Express 中间件模块。
-  - [response-time](https://github.com/expressjs/response-time)：先前为 `express.responseTime`。
-  - [serve-favicon](https://github.com/expressjs/serve-favicon)：先前为 `express.favicon`。
-  - [serve-index](https://github.com/expressjs/serve-index)：先前为 `express.directory`。
-  - [serve-static](https://github.com/expressjs/serve-static)：用于提供静态内容的模块。
-  - [static-expiry](https://github.com/paulwalker/connect-static-expiry)：静态资产的指纹式 URL 或高速缓存头，包含对一个或多个外部域的支持。
-  - [vhost](https://github.com/expressjs/vhost)：先前为 `express.vhost`。
-  - [view-helpers](https://github.com/madhums/node-view-helpers)：Express 中间件模块，用于向视图提供常见助手方法。
-  - [sriracha-admin](https://github.com/hdngr/siracha)：Express 中间件模块，为 Mongoose 动态生成管理站点。
+| Middleware module                                                           | 描述                                                                                                                                  |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| [body-parser](/{{page.lang}}/resources/middleware/body-parser.html)         | Parse HTTP request body.                                                                                            |
+| [compression](/{{page.lang}}/resources/middleware/compression.html)         | Compress HTTP responses.                                                                                            |
+| [connect-rid](/{{page.lang}}/resources/middleware/connect-rid.html)         | Generate unique request ID.                                                                                         |
+| [cookie-parser](/{{page.lang}}/resources/middleware/cookie-parser.html)     | Parse cookie header and populate `req.cookies`. See also [cookies](https://github.com/jed/cookies). |
+| [cookie-session](/{{page.lang}}/resources/middleware/cookie-session.html)   | Establish cookie-based sessions.                                                                                    |
+| [cors](/{{page.lang}}/resources/middleware/cors.html)                       | Enable cross-origin resource sharing (CORS) with various options.                                |
+| [errorhandler](/{{page.lang}}/resources/middleware/errorhandler.html)       | Development error-handling/debugging.                                                                               |
+| [method-override](/{{page.lang}}/resources/middleware/method-override.html) | Override HTTP methods using header.                                                                                 |
+| [morgan](/{{page.lang}}/resources/middleware/morgan.html)                   | HTTP request logger.                                                                                                |
+| [multer](/{{page.lang}}/resources/middleware/multer.html)                   | Handle multi-part form data.                                                                                        |
+| [response-time](/{{page.lang}}/resources/middleware/response-time.html)     | Record HTTP response time.                                                                                          |
+| [serve-favicon](/{{page.lang}}/resources/middleware/serve-favicon.html)     | Serve a favicon.                                                                                                    |
+| [serve-index](/{{page.lang}}/resources/middleware/serve-index.html)         | Serve directory listing for a given path.                                                                           |
+| [serve-static](/{{page.lang}}/resources/middleware/serve-static.html)       | Serve static files.                                                                                                 |
+| [session](/{{page.lang}}/resources/middleware/session.html)                 | Establish server-based sessions (development only).                                              |
+| [timeout](/{{page.lang}}/resources/middleware/timeout.html)                 | Set a timeout perioHTTP request processing.                                                                         |
+| [vhost](/{{page.lang}}/resources/middleware/vhost.html)                     | Create virtual domains.                                                                                             |
 
-Connect 先前随附的一些中间件模块不再受到 Connect/Express 团队的支持。这些模块由替代模块所取代，或者应该被更好的模块取代。请使用以下替代模块之一：
+## Additional middleware modules
 
-  - express.cookieParser
-    - [cookies](https://github.com/jed/cookies) 和 [keygrip](https://github.com/jed/keygrip)
-  - express.limit
-    - [raw-body](https://github.com/stream-utils/raw-body)
-  - express.multipart
-    - [connect-busboy](https://github.com/mscdex/connect-busboy)
-    - [multer](https://github.com/expressjs/multer)
-    - [connect-multiparty](https://github.com/superjoe30/connect-multiparty)
-  - express.query
-    - [qs](https://github.com/visionmedia/node-querystring)
-  - express.staticCache
-    - [st](https://github.com/isaacs/st)
-    - [connect-static](https://github.com/andrewrk/connect-static)
+These are some additional popular middleware modules.
 
-有关更多中间件模块，请参阅：
+{% include community-caveat.html %}
 
- - [http-framework](https://github.com/Raynos/http-framework/wiki/Modules)
- - [expressjs](https://github.com/expressjs)
+| Middleware module                                                           | 描述                                                                                                                                                                                            |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [helmet](https://github.com/helmetjs/helmet)：一个模块，用于通过设置各种 HTTP 头来帮助保护应用程序。 | Helps secure your apps by setting various HTTP headers.                                                                                                                       |
+| [passport](https://github.com/jaredhanson/passport)：用于认证的 Express 中间件模块。    | Authentication using "strategies" such as OAuth, OpenID and many others.  See [passportjs.org](https://passportjs.org/) for more information. |

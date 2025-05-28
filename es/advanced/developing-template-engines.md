@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Desarrollo de motores de plantilla para Express
+description: Learn how to develop custom template engines for Express.js using app.engine(), with examples on creating and integrating your own template rendering logic.
 menu: advanced
-lang: es
-description: Learn how to develop custom template engines for Express.js using app.engine(),
-  with examples on creating and integrating your own template rendering logic.
+lang: en
+redirect_from: "  "
 ---
 
 # Desarrollo de motores de plantilla para Express
@@ -17,9 +17,10 @@ El siguiente código es un ejemplo de implementación de un motor de plantilla m
 const fs = require('fs') // this engine requires the fs module
 app.engine('ntl', (filePath, options, callback) => { // define the template engine
   fs.readFile(filePath, (err, content) => {
-    if (err) return callback(new Error(err))
+    if (err) return callback(err)
     // this is an extremely simple template engine
-    const rendered = content.toString().replace('#title#', `<title>${options.title}</title>`)
+    const rendered = content.toString()
+      .replace('#title#', `<title>${options.title}</title>`)
       .replace('#message#', `<h1>${options.message}</h1>`)
     return callback(null, rendered)
   })
@@ -34,6 +35,7 @@ La aplicación ahora podrá representar archivos `.ntl`. Cree un archivo denomin
 #title#
 #message#
 ```
+
 A continuación, cree la ruta siguiente en la aplicación.
 
 ```js
@@ -41,4 +43,5 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Hey', message: 'Hello there!' })
 })
 ```
+
 Cuando realice una solicitud a la página de inicio, `index.ntl` se representará como HTML.
