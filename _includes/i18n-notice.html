@@ -1,7 +1,10 @@
 {% assign notice = site.data[page.lang].general.i18n_notice %}
+{% assign lang_path = '/' | append: page.lang | append: '/' %}
 {% if notice %}
-  <p>{{ notice }}</p>
+  {% assign notice_link_text = site.data[page.lang].general.i18n_notice_link_text %}
 {% else %}
-  <p>{{ site.data.en.general.i18n_notice }}</p>
+  {% assign notice = site.data.en.general.i18n_notice %}
+  {% assign notice_link_text = site.data.en.general.i18n_notice_link_text %}
 {% endif %}
+<p>{{ notice }} <a href="{{ page.url | replace: lang_path, '/en/' }}">{{ notice_link_text}}</a>.</p>
 <div id="close-i18n-notice-box" title="Close">✖</div>

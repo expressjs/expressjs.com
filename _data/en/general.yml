@@ -7,8 +7,6 @@ warning: 'Warning'
 note: 'Note'
 caution: 'Caution'
 
-i18n_notice: >
-  This document might be outdated relative to the documentation in English.
-  For the latest updates, please refer to the
-  <a href="{{ page.url | replace: '/en/', '/en/' }}">documentation in English</a>.
+i18n_notice: "This document might be outdated relative to the documentation in English. For the latest updates, please refer to the"
+i18n_notice_link_text: "documentation in english"
   
