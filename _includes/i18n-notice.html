@@ -1,2 +1,7 @@
-<p>{{ site.data[page.lang].general.i18n_notice}}</p>
+{% assign notice = site.data[page.lang].general.i18n_notice %}
+{% if notice %}
+  <p>{{ notice }}</p>
+{% else %}
+  <p>{{ site.data.en.general.i18n_notice }}</p>
+{% endif %}
 <div id="close-i18n-notice-box" title="Close">✖</div>
