@@ -2,7 +2,11 @@
 title: Welcome to The Express Blog!
 description: Introducing the new Express blog — a primary platform for announcements, updates, and communication from the Express technical committee.
 tags: site-admin
-author: Rand McKinney and Chris Del
+authors:
+  - name: Rand McKinney
+    github: crandmck
+  - name: Chris Del
+    github: chrisdel101
 ---
 
 Welcome to the new Express blog!  The blog is meant to be a primary means of communication for the Express technical committee (TC).  While we currently have other channels such as X, LinkedIn, and of course GitHub, there's no authoritative "soapbox" for announcements and general communication.

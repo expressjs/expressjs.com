@@ -1487,8 +1487,23 @@ h2 a {
   max-width: 100%;
   margin: auto;
 }
-.blog-author {
+.blog-authors {
   font-style: italic;
+}
+.blog-author-link {
+  color: inherit;
+  margin-left: 0.5ch;
+  text-decoration: none;
+}
+.blog-author-link-label {
+  text-decoration: underline;
+}
+.blog-author-avatar {
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.5em;
+  height: 1.5em;
 }
 .blog-date {
   font-weight: bold;
