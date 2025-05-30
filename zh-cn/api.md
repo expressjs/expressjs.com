@@ -3,7 +3,7 @@ layout: api
 version: 5x
 title: Express 5.x - API 参考
 description: Access the API reference for Express.js detailing all modules, methods, and properties for building web applications with this version.
-lang: en
+lang: zh-cn
 redirect_from: "  "
 ---
 

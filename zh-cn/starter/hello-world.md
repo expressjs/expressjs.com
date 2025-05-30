@@ -3,7 +3,7 @@ layout: page
 title: Express“Hello World”示例
 description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
 menu: starter
-lang: en
+lang: zh-cn
 redirect_from: "  "
 ---
 

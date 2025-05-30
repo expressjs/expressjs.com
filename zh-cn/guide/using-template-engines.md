@@ -3,7 +3,7 @@ layout: page
 title: 将模板引擎用于 Express
 description: Discover how to integrate and use template engines like Pug, Handlebars, and EJS with Express.js to render dynamic HTML pages efficiently.
 menu: guide
-lang: en
+lang: zh-cn
 redirect_from: "  "
 ---
 

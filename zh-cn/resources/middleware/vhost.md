@@ -2,7 +2,7 @@
 layout: middleware
 title: Express vhost middleware
 menu: resources
-lang: en
+lang: zh-cn
 redirect_from: "  "
 module: vhost
 ---

@@ -3,7 +3,7 @@ layout: page
 title: 在 Express 中提供静态文件
 description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
 menu: starter
-lang: en
+lang: zh-cn
 redirect_from: "  "
 ---
 

@@ -2,7 +2,7 @@
 layout: middleware
 title: Express session middleware
 menu: resources
-lang: en
+lang: zh-cn
 redirect_from: "  "
 module: session
 ---

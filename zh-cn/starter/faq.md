@@ -3,7 +3,7 @@ layout: page
 title: Express 常见问题及解答
 description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
-lang: en
+lang: zh-cn
 redirect_from: "  "
 ---
 
