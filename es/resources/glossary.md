@@ -3,7 +3,7 @@ layout: page
 title: Glosario de Express
 description: A comprehensive glossary of terms related to Express.js, Node.js, middleware, routing, and other key concepts to help you understand and use Express effectively.
 menu: resources
-lang: en
+lang: es
 redirect_from: "  "
 ---
 

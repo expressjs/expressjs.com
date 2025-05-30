@@ -2,7 +2,7 @@
 layout: middleware
 title: Express compression middleware
 menu: resources
-lang: en
+lang: es
 redirect_from: "  "
 module: compression
 ---
