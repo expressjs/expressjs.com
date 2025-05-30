@@ -3,12 +3,14 @@
 {% assign url_remainder = url_parts | slice: 2, url_parts.size | join: '/' %}
 {% assign current_lang = page.lang %}
 <button class="lang-btn" type="button" aria-haspopup="menu" aria-label="Change language">
+  {% include icons/flags/{{ current_lang }}.svg %}
   <span id="current-lang"></span>
 </button>
 <ul class="lang-list submenu-content" aria-labelledby="current-lang" >
   {% for lang in site.data.languages %}
   <li>
     <a href="/{{ lang.code }}/{{ url_remainder }}">
+      {% include icons/flags/{{ lang.code }}.svg %}
       {% if lang.code == current_lang %}
         <strong>{{ lang.name }}</strong>
       {% else %}

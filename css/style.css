@@ -767,7 +767,7 @@ button.lang-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 
   &::after {
     content: "";
@@ -812,10 +812,11 @@ div.desktop-lang-switcher {
       visibility: visible;
     }
     li  a {
-      display: block;
-      padding: 5px 20px 5px 20px;
+      display: flex;
+      padding: 5px 10px 5px 10px;
       text-decoration: none;
       color: var(--card-fg);
+      gap: 0.3rem;
       &:is(:hover, :focus) {
         background: var(--hover-bg);
       }
