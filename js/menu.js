@@ -1,22 +1,22 @@
 // It uses `window.matchMedia` instead of `window.addEventListener('resize')` because `matchMedia` performs better by not changing its value with every screen resize.
-const mobileScreen = window.matchMedia('(max-width: 1110px)')
-let isSmallScreen = mobileScreen?.matches
-const tocScreen = window.matchMedia('(max-width: 800px)')
-let isTocScreen = tocScreen.matches
+const mobileScreen = window.matchMedia('(max-width: 1110px)');
+let isSmallScreen = mobileScreen?.matches;
+const tocScreen = window.matchMedia('(max-width: 800px)');
+let isTocScreen = tocScreen.matches;
 
 mobileScreen?.addEventListener('change', (event) => {
-  isSmallScreen = event.matches
+  isSmallScreen = event.matches;
 
   if (!isSmallScreen) {
-    document.body.classList.remove('no-scroll')
+    document.body.classList.remove('no-scroll');
   }
-})
+});
 
 // Desktop Menu
 
-const itemsMenu = document.querySelectorAll('.submenu')
-const navDrawers = document.querySelectorAll('#navmenu > li')
-let activeDrawer // active dropdown nav link
+const itemsMenu = document.querySelectorAll('.submenu');
+const navDrawers = document.querySelectorAll('#navmenu > li');
+let activeDrawer; // active dropdown nav link
 
 for (const el of itemsMenu) {
   el.addEventListener('click', () => {
@@ -25,179 +25,179 @@ for (const el of itemsMenu) {
       // if no activeDrawer set then page was set in md logic
       if (!activeDrawer) {
         // remove default active link
-        removeActiveFromDrawers(navDrawers)
+        removeActiveFromDrawers(navDrawers);
         // set new active drawer to clicked
-        activeDrawer = el
+        activeDrawer = el;
         // add active class
-        addActiveToDrawer(el)
+        addActiveToDrawer(el);
         // remove prev activeDrawer and set current to active
       } else if (activeDrawer.id !== el.id) {
-        activeDrawer.querySelector('a').classList.remove('active')
-        addActiveToDrawer(el)
-        activeDrawer = el
+        activeDrawer.querySelector('a').classList.remove('active');
+        addActiveToDrawer(el);
+        activeDrawer = el;
       }
 
       for (const item of itemsMenu) {
         // close any open drawers on click next drawer
         if (item.id !== el.id) {
-          item.classList.remove('open')
+          item.classList.remove('open');
         }
       }
-      el.classList.toggle('open')
+      el.classList.toggle('open');
     }
-  })
+  });
 
   el.addEventListener('mouseenter', () => {
     if (!isSmallScreen) {
-      el.classList.add('open')
+      el.classList.add('open');
     }
-  })
+  });
 
   el.addEventListener('mouseleave', () => {
     if (!isSmallScreen) {
-      el.classList.remove('open')
+      el.classList.remove('open');
     }
-  })
+  });
 }
 
 // Mobile Menu and Language Picker
 
-const linkItemsMenu = document.querySelectorAll('.submenu > a')
-const languageItems = document.querySelectorAll('#language-picker-menu > #navbar > #navmenu > .submenu > a')
-const languagePickerMenu = document.querySelector('#language-picker-menu > #navbar > #navmenu')
-const menu = document.querySelector('#navmenu')
-const overlay = document.querySelector('#overlay')
-const navButton = document.querySelector('#nav-button')
-const languagePickerButton = document.querySelector('#language-picker-button')
+const linkItemsMenu = document.querySelectorAll('.submenu > a');
+const languageItems = document.querySelectorAll('#language-picker-menu > #navbar > #navmenu > .submenu > a');
+const languagePickerMenu = document.querySelector('#language-picker-menu > #navbar > #navmenu');
+const menu = document.querySelector('#navmenu');
+const overlay = document.querySelector('#overlay');
+const navButton = document.querySelector('#nav-button');
+const languagePickerButton = document.querySelector('#language-picker-button');
 
 for (const el of linkItemsMenu) {
   el.addEventListener('click', (e) => {
     if (el.classList.contains('open')) {
-      el.classList.remove('open')
+      el.classList.remove('open');
     }
 
     if (isSmallScreen || 'ontouchstart' in document.documentElement) {
-      e.preventDefault()
+      e.preventDefault();
     }
-  })
+  });
 }
 
 for (const el of languageItems) {
   el.addEventListener('click', (e) => {
-    const href = el.getAttribute('href')
+    const href = el.getAttribute('href');
 
     if (href && href !== '#') {
-      languagePickerMenu?.classList.remove('opens')
-      overlay?.classList.remove('blurs')
-      document.body.classList.remove('no-scroll')
+      languagePickerMenu?.classList.remove('opens');
+      overlay?.classList.remove('blurs');
+      document.body.classList.remove('no-scroll');
 
-      window.location.href = href
+      window.location.href = href;
     }
-  })
+  });
 }
 
 navButton?.addEventListener('click', () => {
-  const isLanguageMenuOpen = languagePickerMenu?.classList.contains('opens')
+  const isLanguageMenuOpen = languagePickerMenu?.classList.contains('opens');
   if (isLanguageMenuOpen) {
-    languagePickerMenu?.classList.remove('opens')
-    menu?.classList.toggle('opens')
+    languagePickerMenu?.classList.remove('opens');
+    menu?.classList.toggle('opens');
   } else {
-    menu?.classList.toggle('opens')
-    overlay?.classList.toggle('blurs')
-    document.body.classList.toggle('no-scroll')
+    menu?.classList.toggle('opens');
+    overlay?.classList.toggle('blurs');
+    document.body.classList.toggle('no-scroll');
   }
-})
+});
 
 languagePickerButton?.addEventListener('click', () => {
-  const isMenuOpen = menu?.classList.contains('opens')
+  const isMenuOpen = menu?.classList.contains('opens');
   if (isMenuOpen) {
-    menu?.classList.remove('opens')
-    languagePickerMenu?.classList.toggle('opens')
+    menu?.classList.remove('opens');
+    languagePickerMenu?.classList.toggle('opens');
   } else {
-    languagePickerMenu?.classList.toggle('opens')
-    overlay?.classList.toggle('blurs')
-    document.body.classList.toggle('no-scroll')
+    languagePickerMenu?.classList.toggle('opens');
+    overlay?.classList.toggle('blurs');
+    document.body.classList.toggle('no-scroll');
   }
-})
+});
 
 overlay?.addEventListener('click', () => {
   if (menu?.classList.contains('opens')) {
-    menu.classList.remove('opens')
+    menu.classList.remove('opens');
   }
   if (languagePickerMenu?.classList.contains('opens')) {
-    languagePickerMenu.classList.remove('opens')
+    languagePickerMenu.classList.remove('opens');
   }
-  overlay.classList.remove('blurs')
-  document.body.classList.remove('no-scroll')
-})
+  overlay.classList.remove('blurs');
+  document.body.classList.remove('no-scroll');
+});
 
 document
   .querySelector('.submenu-content a[href="{document.location.pathname}"]')
-  ?.classList.add('current')
+  ?.classList.add('current');
 
 // when active is unknown, loop over and remove any active link
 function removeActiveFromDrawers (navDrawers) {
   for (const item of navDrawers) {
-    item.querySelector('a').classList.remove('active')
+    item.querySelector('a').classList.remove('active');
   }
 }
 // add active to known link
 function addActiveToDrawer (drawer) {
-  drawer.querySelector('a').classList.add('active')
+  drawer.querySelector('a').classList.add('active');
 }
 
 // TOC
-const toggleBtn = document.getElementById('menu-toggle')
-const tocList = document.getElementById('menu')
+const toggleBtn = document.getElementById('menu-toggle');
+const tocList = document.getElementById('menu');
 
 function updateTocVisibility () {
   if (isTocScreen) {
-    toggleBtn?.classList.add('show')
+    toggleBtn?.classList.add('show');
   } else {
-    toggleBtn?.classList.remove('show')
+    toggleBtn?.classList.remove('show');
   }
 }
 
 // toc button on page load
-updateTocVisibility()
+updateTocVisibility();
 
 // Listen for changes in screen size
 tocScreen.addEventListener('change', (event) => {
-  isTocScreen = event.matches
-  updateTocVisibility()
-})
+  isTocScreen = event.matches;
+  updateTocVisibility();
+});
 
 // Toggle toc menu on button click
 toggleBtn?.addEventListener('click', (e) => {
   if (tocList?.classList.contains('open')) {
-    toggleBtn.children[0].innerHTML = '&#x25BA;'
-    tocList.classList.remove('open')
+    toggleBtn.children[0].innerHTML = '&#x25BA;';
+    tocList.classList.remove('open');
   } else {
-    toggleBtn.children[0].innerHTML = '&#x25BC;'
-    tocList.classList.add('open')
+    toggleBtn.children[0].innerHTML = '&#x25BC;';
+    tocList.classList.add('open');
   }
-})
+});
 
 // Open/Close sub TOC content on click
 document.querySelectorAll('#menu > li > a').forEach((link) => {
   link.addEventListener('click', function (event) {
-    event.preventDefault() // stop navigation to submenu
+    event.preventDefault(); // stop navigation to submenu
 
     // Find the closest parent <li>
-    const closestLiParent = link.closest('li')
-    const childUlSubMenu = closestLiParent.children[1]
+    const closestLiParent = link.closest('li');
+    const childUlSubMenu = closestLiParent.children[1];
 
     // If submenu is already active, remove "active" class (toggle behavior)
     if (childUlSubMenu?.classList.contains('active')) {
-      childUlSubMenu.classList.remove('active')
+      childUlSubMenu.classList.remove('active');
     } else {
       // Remove "active" from all other submenus
       document.querySelectorAll('#menu > li > ul').forEach((subMenu) => {
-        subMenu.classList.remove('active')
-      })
+        subMenu.classList.remove('active');
+      });
 
       // Add "active" to the clicked submenu
-      childUlSubMenu?.classList.add('active')
+      childUlSubMenu?.classList.add('active');
     }
-  })
-})
+  });
+});

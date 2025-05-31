@@ -10,6 +10,9 @@
       "browser": true,
       "jquery": true
     },
+    "rules": {
+      "semi": ["error", "always"]
+    },
     "overrides": [
       {
         "files": "**/*.md",
@@ -18,6 +21,7 @@
       {
         "files": "**/*.md/*.js",
         "rules": {
+          "semi": ["error", "never"],
           "array-callback-return": "off",
           "no-var": "error",
           "n/handle-callback-err": "off",
@@ -33,6 +37,7 @@
           "**/guide/migrating-4.md/*.js"
         ],
         "rules": {
+          "semi": ["error", "never"],
           "no-var": "off",
           "object-shorthand": "off",
           "prefer-arrow-callback": "off",
