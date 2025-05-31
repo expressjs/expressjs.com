@@ -64,8 +64,8 @@ for (const el of itemsMenu) {
 // Mobile Menu and Language Picker
 
 const linkItemsMenu = document.querySelectorAll(".submenu > a");
-const languageItems = document.querySelectorAll("#language-picker-menu > #navbar > #navmenu > .submenu > a");
-const languagePickerMenu = document.querySelector("#language-picker-menu > #navbar > #navmenu");
+const languageItems = document.querySelectorAll("#language-picker-menu > #langbar > #langmenu > .submenu > a");
+const languagePickerMenu = document.querySelector("#language-picker-menu > #langbar > #langmenu");
 const menu = document.querySelector("#navmenu");
 const overlay = document.querySelector("#overlay");
 const navButton = document.querySelector("#nav-button");
@@ -100,6 +100,7 @@ for (const el of languageItems) {
 }
 
 navButton?.addEventListener("click", () => {
+	console.log("Nav button clicked");
 	const isLanguageMenuOpen = languagePickerMenu?.classList.contains("opens");
 	if (isLanguageMenuOpen) {
 		languagePickerMenu?.classList.remove("opens");
@@ -112,6 +113,7 @@ navButton?.addEventListener("click", () => {
 });
 
 languagePickerButton?.addEventListener("click", () => {
+	console.log("Language picker button clicked");
 	const isMenuOpen = menu?.classList.contains("opens");
 	if (isMenuOpen) {
 		menu?.classList.remove("opens");

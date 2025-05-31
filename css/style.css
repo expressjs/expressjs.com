@@ -830,26 +830,32 @@ div.desktop-lang-switcher {
 }
 
 /* navigation */
-#navbar {
+#navbar,
+
+#langbar {
   line-height: 30px;
   display: flex;
   align-items: center;
 }
 
-#navbar a {
+#navbar a,
+#langbar a {
   color: var(--card-fg);
   text-decoration: none;
 }
 
-#navbar a.active {
+#navbar a.active,
+#langbar a.active {
   font-weight: bold;
 }
 
-#navbar ul {
+#navbar ul,
+#langbar ul {
   list-style: none;
 }
 
-#navmenu {
+#navmenu,
+#langmenu {
   display: flex;
   gap: 20px;
 }
@@ -897,7 +903,8 @@ div.desktop-lang-switcher {
   display: initial;
 }
 
-#navmenu {
+#navmenu,
+#langmenu {
   padding: 0;
   margin: 0;
   right: 0px;
@@ -1265,11 +1272,11 @@ h2 a {
     margin-right: -10px;
   }
 
-  #language-picker-menu #navmenu>li:first-child {
+  #language-picker-menu #langmenu>li:first-child {
     display: flex;
   }
 
-  #language-picker-menu #navmenu {
+  #language-picker-menu #langmenu {
     max-height: 70vh;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -1357,12 +1364,6 @@ h2 a {
   }
 }
 
-
-@media all and (max-width: 540px) {
-  #boxes {
-    grid-template-columns: 1fr;
-  }
-}
 
 @media all and (max-width: 420px) {
   #app-settings-property {
@@ -1617,17 +1618,15 @@ blockquote {
     display: none !important;
   }
 
-  #navbar {
+  #navbar,
+  #langbar {
     padding: 0;
     top: 1px;
     position: static;
   }
 
-  #navmenu>li:first-child {
-    display: none;
-  }
-
-  #navmenu>li {
+  #navmenu>li,
+  #langmenu>li {
     border-bottom: 1px solid var(--border);
     margin: 0;
     min-height: 47px;
@@ -1637,17 +1636,24 @@ blockquote {
     align-items: center;
   }
 
-  #navmenu>li.open:hover {
+   #langmenu>li {
+    padding-inline: 40%;
+   }
+
+  #navmenu>li.open:hover,
+  #langmenu>li.open:hover {
     background: var(--card-bg);
   }
-  #navmenu>li:hover {
+  #navmenu>li:hover,
+  #langmenu>li:hover {
     background: var(--hover-bg);
     & ul {
       background-color: var(--card-bg);
     }
   }
 
-  #navmenu {
+  #navmenu,
+  #langmenu {
     left: 0;
     padding: 0;
     top: 57px;
@@ -1656,7 +1662,8 @@ blockquote {
     display: none;
   }
 
-  #navmenu.opens {
+  #navmenu.opens,
+  #langmenu.opens {
     display: block;
   }
 
@@ -1669,10 +1676,14 @@ blockquote {
   }
 
   #langbar a {
-    
+    display:flex;
+    gap:0.5rem;
+    align-items:center;
+    justify-content:center;
   }
 
-  #navbar .submenu.open {
+  #navbar .submenu.open,
+  #langbar .submenu.open {
     flex-direction: column;
     align-items: initial;
     > a {
@@ -1732,5 +1743,15 @@ blockquote {
 
   .submenu-content li {
     border-bottom: 1px solid var(--border);
+  }
+}
+
+@media all and (max-width: 540px) {
+  #boxes {
+    grid-template-columns: 1fr;
+  }
+
+  #langmenu>li {
+    padding-inline: 35%;
   }
 }

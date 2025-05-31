@@ -6,15 +6,15 @@
   </div>
 </div>
 <div id="language-picker-menu">
-  <div id="navbar">
-    <ul id="navmenu">
+  <div id="langbar">
+    <ul id="langmenu">
       {% assign url_parts = page.url | split: '/' %}
 
       {% assign url_remainder = url_parts | slice: 2, url_parts.size | join: '/' %}
 
       {% for lang in site.data.languages %}
       <li class="submenu">
-        <a class="remove" href="/{{ lang.code }}/{{ url_remainder }}">{% include icons/flags/{{ lang.code }}.svg %}{{ lang.name }}</a>
+        <a href="/{{ lang.code }}/{{ url_remainder }}">{% include icons/flags/{{ lang.code }}.svg %}{{ lang.name }}</a>
       </li>
       {% endfor %}
     </ul>
