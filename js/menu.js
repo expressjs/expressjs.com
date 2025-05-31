@@ -172,11 +172,10 @@ tocScreen.addEventListener("change", (event) => {
 
 // Toggle toc menu on button click
 toggleBtn?.addEventListener("click", (e) => {
+	toggleBtn.classList.toggle("rotate");
   if(tocList?.classList.contains("open")) {
-	toggleBtn.children[0].innerHTML = "&#x25BA;";
 	tocList.classList.remove("open");
   } else {
-	toggleBtn.children[0].innerHTML = "&#x25BC;";
 	tocList.classList.add("open");
   }
 });
