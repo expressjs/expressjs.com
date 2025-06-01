@@ -100,7 +100,6 @@ for (const el of languageItems) {
 }
 
 navButton?.addEventListener("click", () => {
-	console.log("Nav button clicked");
 	const isLanguageMenuOpen = languagePickerMenu?.classList.contains("opens");
 	if (isLanguageMenuOpen) {
 		languagePickerMenu?.classList.remove("opens");
@@ -113,7 +112,6 @@ navButton?.addEventListener("click", () => {
 });
 
 languagePickerButton?.addEventListener("click", () => {
-	console.log("Language picker button clicked");
 	const isMenuOpen = menu?.classList.contains("opens");
 	if (isMenuOpen) {
 		menu?.classList.remove("opens");

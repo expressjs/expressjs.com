@@ -50,11 +50,3 @@
   --supported-fg:#299009;
   --eol-fg: #ff1a1a;
 }
-
-/* TODO: remove following after removing duplicate id styles */
-.remove {
-  display:flex;
-  gap:0.5rem;
-  align-items:center;
-  justify-content:center;
-}
