@@ -9,14 +9,17 @@
   <div id="langbar">
     <ul id="langmenu">
       {% assign url_parts = page.url | split: '/' %}
-
       {% assign url_remainder = url_parts | slice: 2, url_parts.size | join: '/' %}
-
+      {% assign current_lang = page.lang %}
       {% for lang in site.data.languages %}
       <li class="submenu">
         <a href="/{{ lang.code }}/{{ url_remainder }}">
           {% include icons/flags/{{ lang.code }}.svg %}
-          {{ lang.name }}
+          {% if lang.code == current_lang %}
+            <strong>{{ lang.name }}</strong>
+          {% else %}
+            {{ lang.name }}
+          {% endif %}
         </a>
       </li>
       {% endfor %}

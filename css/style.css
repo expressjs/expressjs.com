@@ -1636,7 +1636,7 @@ blockquote {
   }
 
    #langmenu>li {
-    padding-inline: 40%;
+    padding-inline: 45vw;
    }
 
   #navmenu>li.open:hover,
@@ -1675,10 +1675,11 @@ blockquote {
   }
 
   #langbar a {
-    display:flex;
-    gap:0.5rem;
-    align-items:center;
-    justify-content:center;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    text-wrap: nowrap;
   }
 
   #navbar .submenu.open,
@@ -1749,8 +1750,7 @@ blockquote {
   #boxes {
     grid-template-columns: 1fr;
   }
-
-  #langmenu>li {
-    padding-inline: 35%;
+  #langmenu > li {
+    padding-inline: 40vw;
   }
 }
