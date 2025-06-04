@@ -1271,10 +1271,6 @@ h2 a {
     margin-right: -10px;
   }
 
-  #language-picker-menu #langmenu>li:first-child {
-    display: flex;
-  }
-
   #language-picker-menu #langmenu {
     max-height: 70vh;
     overflow-y: auto;
@@ -1635,10 +1631,6 @@ blockquote {
     align-items: center;
   }
 
-   #langmenu>li {
-    padding-inline: 45vw;
-   }
-
   #navmenu>li.open:hover,
   #langmenu>li.open:hover {
     background: var(--card-bg);
@@ -1678,8 +1670,10 @@ blockquote {
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    justify-content: center;
     text-wrap: nowrap;
+    min-width: 100vw;
+    min-height: inherit;
+    padding-left: 43.5vw;
   }
 
   #navbar .submenu.open,
@@ -1750,7 +1744,8 @@ blockquote {
   #boxes {
     grid-template-columns: 1fr;
   }
-  #langmenu > li {
-    padding-inline: 40vw;
+  
+  #langbar a {
+    padding-left: 39vw;
   }
 }
