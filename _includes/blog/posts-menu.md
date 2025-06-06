@@ -1,4 +1,4 @@
-<button id="menu-toggle" title="show blogs list">All Blogs <span>&#x25BA;</span></button>
+<button id="menu-toggle" title="show blogs list">All Blogs</button>
 <ul id="menu" class="blog-side-menu">
   <li>
     <ul id="side-menu" class="active">
