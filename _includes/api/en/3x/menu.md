@@ -1,4 +1,4 @@
-<button id="menu-toggle" title="show table of content">On this page <span>&#x25BA;</span></button>
+<button id="menu-toggle" title="show table of content">On this page</button>
 <ul id="menu">
     <li><a href="#express">express()</a></li>
     <li id="app-api"> <a href="#application">Application</a>
