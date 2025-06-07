@@ -85,7 +85,7 @@ follow the specific instructions for [How to write a blog post.](https://express
 **CSS or Javascript**
 - All css and js files are kept in `css` and `js` folders on the project root.
 
-The Express JS website is build using [Jekyll](https://jekyllrb.com/) and is hosted on [Github Pages](https://pages.github.com/).
+The Express JS website is built using [Jekyll](https://jekyllrb.com/) and is hosted on [Github Pages](https://pages.github.com/).
 
 #### Step 3: Running the Application
 
