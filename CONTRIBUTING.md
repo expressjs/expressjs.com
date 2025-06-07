@@ -121,6 +121,6 @@ The documentation is translated into these languages:
 
 ### How to translate
 
-1. Request to join the Express.js Website project on [Crowdin](https://express.crowdin.com/u/projects/1)
+1. Request to join the Express.js Website project on [Crowdin](https://express.crowdin.com/website)
 2. [Select the language you want to translate](https://support.crowdin.com/joining-translation-project/#starting-translation)
 3. [Start translating](https://support.crowdin.com/online-editor/)
