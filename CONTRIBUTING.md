@@ -117,7 +117,7 @@ The documentation is translated into these languages:
 - Japanese (`ja`)
 - Korean (`ko`)
 - Brazilian Portuguese (`pt-br`)
-- Spanish (`es`). 
+- Spanish (`es`)
 
 ### How to translate
 
