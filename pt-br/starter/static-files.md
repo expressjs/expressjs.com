@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Entregando arquivos estáticos no Express
+description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
 menu: starter
 lang: pt-br
-description: Understand how to serve static files like images, CSS, and JavaScript
-  in Express.js applications using the built-in 'static' middleware.
+redirect_from: "  "
 ---
 
 # Entregando arquivos estáticos no Express
@@ -13,9 +13,16 @@ Para entregar arquivos estáticos como imagens, arquivos CSS, e
 arquivos JavaScript, use a função de middleware `express.static`
 integrada no Express.
 
-Passe o nome do diretório que contém os ativos estáticos para a
-função de middleware `express.static` para iniciar a
-entregar os arquivos diretamente. Por exemplo, use o código a seguir
+The function signature is:
+
+```js
+express.static(root, [options])
+```
+
+The `root` argument specifies the root directory from which to serve static assets.
+For more information on the `options` argument, see [express.static](/{{page.lang}}/5x/api.html#express.static).
+
+Por exemplo, use o código a seguir
 para entregar imagens, arquivos CSS, e arquivos JavaScript em um
 diretório chamado `public`:
 
@@ -50,11 +57,12 @@ O Express consulta os arquivos na ordem em que você configurar
 os diretórios estáticos com a função de middleware
 `express.static`.
 
-Para criar um prefixo de caminho virtual (onde o caminho não
-existe realmente no sistema de arquivos) para arquivos que são
-entregues pela função `express.static`,
-[especifique um caminho de montagem](/{{ page.lang }}/4x/api.html#app.use) para o
-diretório estático, como mostrado abaixo:
+{% capture alert_content %}
+For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+{% endcapture %}
+{% include admonitions/note.html content=alert_content %}
+
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/{{ page.lang }}/5x/api.html#app.use) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'))
@@ -82,3 +90,7 @@ entregar.
 const path = require('path')
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
+
+For more details about the `serve-static` function and its options, see  [serve-static](/resources/middleware/serve-static.html).
+
+### [Previous: Basic Routing ](/{{ page.lang }}/starter/basic-routing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: More examples ](/{{ page.lang }}/starter/examples.html)

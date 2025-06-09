@@ -1,17 +1,26 @@
 ---
 layout: page
 title: Servicio de archivos estáticos en Express
+description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
 menu: starter
-lang: es
-description: Understand how to serve static files like images, CSS, and JavaScript
-  in Express.js applications using the built-in 'static' middleware.
+lang: en
+redirect_from: "  "
 ---
 
 # Servicio de archivos estáticos en Express
 
 Para el servicio de archivos estáticos como, por ejemplo, imágenes, archivos CSS y archivos JavaScript, utilice la función de middleware incorporado `express.static` de Express.
 
-Pase el nombre del directorio que contiene los activos estáticos a la función de middleware `express.static` para empezar directamente el servicio de los archivos. Por ejemplo, utilice el siguiente código para el servicio de imágenes, archivos CSS y archivos JavaScript en un directorio denominado `public`:
+The function signature is:
+
+```js
+express.static(root, [options])
+```
+
+The `root` argument specifies the root directory from which to serve static assets.
+For more information on the `options` argument, see [express.static](/{{page.lang}}/5x/api.html#express.static).
+
+Por ejemplo, utilice el siguiente código para el servicio de imágenes, archivos CSS y archivos JavaScript en un directorio denominado `public`:
 
 ```js
 app.use(express.static('public'))
@@ -40,7 +49,12 @@ app.use(express.static('files'))
 
 Express busca los archivos en el orden en el que se definen los directorios estáticos con la función de middleware `express.static`.
 
-Para crear un prefijo de vía de acceso virtual (donde la vía de acceso no existe realmente en el sistema de archivos) para los archivos a los que da servicio la función `express.static`, [especifique una vía de acceso de montaje](/{{ page.lang }}/4x/api.html#app.use) para el directorio estático, como se muestra a continuación:
+{% capture alert_content %}
+For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+{% endcapture %}
+{% include admonitions/note.html content=alert_content %}
+
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/{{ page.lang }}/5x/api.html#app.use) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'))
@@ -62,3 +76,7 @@ No obstante, la vía de acceso que proporciona a la función `express.static` es
 const path = require('path')
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
+
+For more details about the `serve-static` function and its options, see  [serve-static](/resources/middleware/serve-static.html).
+
+### [Previous: Basic Routing ](/{{ page.lang }}/starter/basic-routing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: More examples ](/{{ page.lang }}/starter/examples.html)
