@@ -67,9 +67,9 @@ typically be used in conjunction with `XMLHttpRequest` on implementations
 that do not support the method you are trying to use.
 
 ```js
-var express = require('express')
-var methodOverride = require('method-override')
-var app = express()
+const express = require('express')
+const methodOverride = require('method-override')
+const app = express()
 
 // override with the X-HTTP-Method-Override header in the request
 app.use(methodOverride('X-HTTP-Method-Override'))
@@ -80,7 +80,7 @@ Example call with header override using `XMLHttpRequest`:
 <!-- eslint-env browser -->
 
 ```js
-var xhr = new XMLHttpRequest()
+const xhr = new XMLHttpRequest()
 xhr.onload = onload
 xhr.open('post', '/resource', true)
 xhr.setRequestHeader('X-HTTP-Method-Override', 'DELETE')
@@ -102,9 +102,9 @@ query value would typically be used in conjunction with plain HTML
 newer methods.
 
 ```js
-var express = require('express')
-var methodOverride = require('method-override')
-var app = express()
+const express = require('express')
+const methodOverride = require('method-override')
+const app = express()
 
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'))
@@ -121,9 +121,9 @@ Example call with query override using HTML `<form>`:
 ### multiple format support
 
 ```js
-var express = require('express')
-var methodOverride = require('method-override')
-var app = express()
+const express = require('express')
+const methodOverride = require('method-override')
+const app = express()
 
 // override with different headers; last one takes precedence
 app.use(methodOverride('X-HTTP-Method')) //          Microsoft
@@ -137,10 +137,10 @@ You can implement any kind of custom logic with a function for the `getter`. The
 implements the logic for looking in `req.body` that was in `method-override@1`:
 
 ```js
-var bodyParser = require('body-parser')
-var express = require('express')
-var methodOverride = require('method-override')
-var app = express()
+const bodyParser = require('body-parser')
+const express = require('express')
+const methodOverride = require('method-override')
+const app = express()
 
 // NOTE: when using req.body, you must fully parse the request body
 //       before you call methodOverride() in your middleware stack,
@@ -149,7 +149,7 @@ app.use(bodyParser.urlencoded())
 app.use(methodOverride(function (req, res) {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
     // look in urlencoded POST bodies and delete it
-    var method = req.body._method
+    const method = req.body._method
     delete req.body._method
     return method
   }
