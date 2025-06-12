@@ -1,9 +1,12 @@
 <div class="desktop-lang-switcher">
 {% assign url_parts = page.url | split: '/' %}
 {% assign url_remainder = url_parts | slice: 2, url_parts.size | join: '/' %}
-{% assign current_lang = page.lang %}
+{% assign current_lang = url_parts[1] %}
+{% if current_lang == nil or page.layout == 'post' or page.layout == 404 %}
+  {% assign current_lang = 'en' %}
+{% endif %}
 <button class="lang-btn" type="button" aria-haspopup="menu" aria-label="Change language">
-  {% include icons/flags/{{ current_lang }}.svg %}
+  {% include icons/flags/{{current_lang}}.svg %}
   <span id="current-lang"></span>
 </button>
 <ul class="lang-list submenu-content" aria-labelledby="current-lang" >

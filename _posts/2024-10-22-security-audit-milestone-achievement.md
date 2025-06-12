@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Express.js Security Audit: A Milestone Achievement"
 tags: security audit releases
 authors:

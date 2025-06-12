@@ -1,4 +1,5 @@
 ---
+layout: post
 title: September 2024 Security Releases
 description: Security releases for Express, body-parser, send, serve-static, and path-to-regexp have been published. We recommend that all users upgrade as soon as possible.
 tags: security vulnerabilities

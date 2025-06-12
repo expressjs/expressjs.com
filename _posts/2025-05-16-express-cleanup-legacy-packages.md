@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Spring Cleaning in Express.js: Deprecations and the Path Ahead"
 tags: news
 authors:

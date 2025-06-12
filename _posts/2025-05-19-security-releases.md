@@ -1,4 +1,5 @@
 ---
+layout: post
 title: May 2025 Security Releases
 description: Security release for Multer has been published. We recommend that all users upgrade as soon as possible.
 tags: security vulnerabilities

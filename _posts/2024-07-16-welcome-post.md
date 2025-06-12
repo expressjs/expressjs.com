@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Welcome to The Express Blog!
 description: Introducing the new Express blog — a primary platform for announcements, updates, and communication from the Express technical committee.
 tags: site-admin
