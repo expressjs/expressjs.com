@@ -1349,8 +1349,11 @@ h2 a {
   #api-doc,
   #blog-doc,
   #page-doc {
-    padding-inline: 1rem;
     width: 100%;
+  }
+
+  #api-doc section {
+    padding-left: 0;
   }
 
   .toc-container {
