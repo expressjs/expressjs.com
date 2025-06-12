@@ -9,6 +9,23 @@ body {
   margin: 0;
   padding: 0;
   color: var(--fg);
+  display: grid;
+  grid-template-areas:
+  'header'
+  'content'
+  'footer'
+}
+
+header {
+  grid-area: header;
+}
+
+.content {
+  grid-area: content;
+}
+
+footer {
+  grid-area: footer;
 }
 
 body.no-scroll{
@@ -73,10 +90,6 @@ main.home {
 
 #home-content {
   display: flex;
-}
-
-.en-doc #home-content {
-  margin-top: 150px;
 }
 
 .non-en-doc:has(#i18n-notice-box.hidden) #home-content {
@@ -157,13 +170,13 @@ main.home {
 }
 
 .content {
-  margin: 153px 0 7%;
   display: flex;
   flex-direction: row-reverse;
+  padding-inline-start: 1rem;
+  margin-block-start: 3.5rem;
 }
 
 .content main {
-  padding-inline: 16px;
   max-width: 900px;
   margin-inline: auto;
 }
@@ -324,17 +337,12 @@ a {
 }
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
   background: var(--card-bg);
-  width: 100%;
   height: 57px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 25px;
-  z-index: 200;
+  padding-inline: 1.5rem;
   border-bottom: 1px solid var(--hover-fg);
 }
 
@@ -559,36 +567,39 @@ html[xmlns] .clearfix {
   list-style: none;
 }
 
-/* doc specific */
+/* tables specific */
 
-.doctable, table {
+table {
   margin: 1em 0;
   border: 1px solid var(--border);
   border-collapse: collapse;
   width: 100%;
+  @media screen and (max-width:600px) {
+    font-size: smaller;
+  }
 }
 
-.doctable td, .doctable th, table td, table th {
+table td, table th {
   padding: 7px;
   line-height: 120%;
   vertical-align: top;
   border: 1px solid var(--border);
 }
 
-.doctable tr th, table tr th {
+table tr th {
   background: var(--card-bg);
   font-size: 110%;
 }
 
-.doctable td p:first-child {
+table td p:first-child {
   margin-top: 0;
 }
 
-.doctable td p, li p {
+table td p, li p {
   width: 100% !important;
 }
 
-.doctable ul {
+table ul {
   margin: 20px 0
 }
 
@@ -701,12 +712,15 @@ pre, code {
   white-space: pre-wrap !important;
 }
 
+/* footer */
+
 footer {
   font-size: 12px;
-  margin: 60px 5% 30px;
   display: flex;
   gap: 24px;
   flex-direction: column;
+  padding-block: 2rem;
+  padding-inline: 3rem;
 }
 
 #footer-content {
@@ -731,7 +745,7 @@ footer {
   max-width: 125px;
 }
 
-#footer-policy{
+#footer-policy {
   display: flex;
   flex-wrap: wrap;
   column-gap: 20px;
@@ -740,15 +754,21 @@ footer {
   font-size: 15px;
 }
 
-#footer-links{
+#footer-links {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .footer-social {
   display: flex;
   gap: 20px;
   font-size: 20px;
+  @media screen and (max-width: 340px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2.5rem;
+  }
 }
 
 /* theme and lang btn */
@@ -1148,6 +1168,19 @@ h2 a {
   }
 }
 
+/* routing methods columns */
+.methods-columns {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 460px) {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
+
 /* responsive */
 
 @media all and (max-width: 1440px) {
@@ -1301,9 +1334,16 @@ h2 a {
 /* TOC responsive */
 @media all and (max-width: 800px) {
   .content {
-    margin-inline: 0.5rem;
-    margin-block-start: 100px;
     flex-direction: column;
+    padding-inline-start : 0;
+    margin-block-start: 1rem;
+  }
+
+  .content main {
+    padding-inline: 1rem;
+    width: 100vw;
+    margin-top: 0;
+    margin-inline: 0;
   }
   
   #api-doc,
@@ -1618,11 +1658,6 @@ blockquote {
 }
 
 @media all and (max-width: 1110px) {
-  header {
-    column-gap: 12px;
-    padding-inline: 32px;
-  }
-
   .desktop-lang-switcher {
     display: none;
   }
