@@ -16,6 +16,8 @@ to move on to the next middleware, allowing for stacking and fall-backs.
 The following table describes the properties of the `options` object.
 See also the [example below](#example.of.express.static).
 
+<div class="table-scroller" markdown="1">
+
 | Property      | Description                                                           |   Type      | Default         |
 |---------------|-----------------------------------------------------------------------|-------------|-----------------|
 | `dotfiles`    | Determines how dotfiles (files or directories that begin with a dot ".") are treated.  <br/><br/>See [dotfiles](#dotfiles) below. | String | `undefined` |
@@ -28,6 +30,8 @@ See also the [example below](#example.of.express.static).
 | `maxAge`      | Set the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms). | Number | 0 |
 | `redirect`    | Redirect to trailing "/" when the pathname is a directory. | Boolean | `true` |
 | `setHeaders`  | Function for setting HTTP headers to serve with the file. <br/><br/>See [setHeaders](#setHeaders) below. | Function |  |
+
+</div>
 
 For more information, see [Serving static files in Express](/starter/static-files.html).
 and [Using middleware - Built-in middleware](/{{page.lang}}/guide/using-middleware.html#middleware.built-in).
