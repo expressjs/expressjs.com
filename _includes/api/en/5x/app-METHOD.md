@@ -10,39 +10,37 @@ PUT, POST, and so on, in lowercase. Thus, the actual methods are `app.get()`,
 
 Express supports the following routing methods corresponding to the HTTP methods of the same names:
 
-<table style="border: 0px; background: none">
-<tr>
-<td style="background: none; border: 0px;" markdown="1">
-* `checkout`
-* `copy`
-* `delete`
-* `get`
-* `head`
-* `lock`
-* `merge`
-* `mkactivity`
-</td>
-<td style="background: none; border: 0px;" markdown="1">
-* `mkcol`
-* `move`
-* `m-search`
-* `notify`
-* `options`
-* `patch`
-* `post`
-</td>
-<td style="background: none; border: 0px;" markdown="1">
-* `purge`
-* `put`
-* `report`
-* `search`
-* `subscribe`
-* `trace`
-* `unlock`
-* `unsubscribe`
-</td>
-</tr>
-</table>
+<div class="methods-columns">
+  <ul>
+    <li><code>checkout</code></li>
+    <li><code>copy</code></li>
+    <li><code>delete</code></li>
+    <li><code>get</code></li>
+    <li><code>head</code></li>
+    <li><code>lock</code></li>
+    <li><code>merge</code></li>
+    <li><code>mkactivity</code></li>
+  </ul>
+  <ul>
+    <li><code>mkcol</code></li>
+    <li><code>move</code></li>
+    <li><code>m-search</code></li>
+    <li><code>notify</code></li>
+    <li><code>options</code></li>
+    <li><code>patch</code></li>
+    <li><code>post</code></li>
+  </ul>
+  <ul>
+    <li><code>purge</code></li>
+    <li><code>put</code></li>
+    <li><code>report</code></li>
+    <li><code>search</code></li>
+    <li><code>subscribe</code></li>
+    <li><code>trace</code></li>
+    <li><code>unlock</code></li>
+    <li><code>unsubscribe</code></li>
+  </ul>
+</div>
 
 The API documentation has explicit entries only for the most popular HTTP methods `app.get()`,
 `app.post()`, `app.put()`, and `app.delete()`.

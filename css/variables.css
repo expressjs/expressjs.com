@@ -50,3 +50,12 @@
   --supported-fg:#299009;
   --eol-fg: #ff1a1a;
 }
+
+
+/* new css */
+.methods-columns {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
