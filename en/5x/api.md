@@ -10,13 +10,7 @@ redirect_from: "/5x/api.html"
 
   <h1>5.x API</h1>
 
-  {% capture node-version %}
-
-    Express 5.0 requires Node.js 18 or higher.
-
-  {% endcapture %}
-
-  {% include admonitions/note.html content=node-version %}
+  {% include admonitions/note.html content= "Express 5.0 requires Node.js 18 or higher." %}
 
   {% include api/en/5x/express.md %}
   {% include api/en/5x/app.md %}
