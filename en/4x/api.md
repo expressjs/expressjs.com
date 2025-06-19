@@ -10,8 +10,14 @@ redirect_from: "/4x/api.html"
 
   <h1>4.x API</h1>
 
-  {% include admonitions/note.html content="Express 4.0 requires Node.js 0.10 or higher." %}
+  {% capture node-version %}
 
+  Express 4.0 requires Node.js 0.10 or higher.
+
+  {% endcapture %}
+  
+  {% include admonitions/note.html content=node-version %}
+  
   {% include api/en/4x/express.md %}
   {% include api/en/4x/app.md %}
   {% include api/en/4x/req.md %}
