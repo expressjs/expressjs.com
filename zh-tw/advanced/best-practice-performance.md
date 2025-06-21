@@ -144,9 +144,7 @@ One thing you should _not_ do is to listen for the `uncaughtException` event, em
 
 我們也不建議使用 [domains](https://nodejs.org/api/domain.html)。它通常不能解決問題，並且是個已淘汰的模組。 It generally doesn't solve the problem and is a deprecated module.
 
-## Things to do in your environment / setup
-
-{#in-environment}
+## 在環境 / 設定中的作法
 
 以下是您可以在系統環境中執行的一些作法，藉以改良您應用程式的效能：
 

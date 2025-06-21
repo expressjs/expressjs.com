@@ -144,9 +144,7 @@ _请勿_侦听 `uncaughtException` 事件，当异常像气泡一样在事件循
 
 我们也不建议使用[域](https://nodejs.org/api/domain.html)。它一般并不能解决问题，是一种不推荐使用的模块。 It generally doesn't solve the problem and is a deprecated module.
 
-## Things to do in your environment / setup
-
-{#in-environment}
+## 环境/设置中的注意事项
 
 以下是为改进应用程序性能而在系统环境中要注意的事项：
 

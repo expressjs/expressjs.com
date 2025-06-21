@@ -184,9 +184,7 @@ forma mais confiável de se recuperar de um erro.
 Também não recomendamos o uso de [domínios](https://nodejs.org/api/domain.html). Ele
 geralmente não resolve o problema e é um módulo descontinuado.
 
-## Things to do in your environment / setup
-
-{#in-environment}
+## Coisa a se fazer no seu ambiente / configuração
 
 A seguir serão apresentados alguns itens que podem ser feitos no seu ambiente de sistema para melhorar o desempenho dos seus aplicativos:
 

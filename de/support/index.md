@@ -1,28 +1,28 @@
 ---
 layout: page
-title: Version Support
-description: Find information about the support schedule for different Express.js versions, including which versions are currently maintained and end-of-life policies.
+title: Version-Support
+description: Finden Sie Informationen über den Support-Zeitplan für verschiedene Express.js Versionen, einschließlich der aktuellen Versionen und der End-of-Life-Richtlinien.
 menu: support
 lang: de
 ---
 
-# Version Support
+# Version-Support
 
-Only the latest version of any given major release line is supported.
+Es wird nur die neueste Version einer bestimmten Hauptversionslinie unterstützt.
 
-Versions that are EOL (end-of-life) _may_ receive updates for critical security vulnerabilities, but the Express team offers no guarantee and does not plan to address or release fixes for any issues found.
+Versionen, die EOL (End-of-Life) sind, _können_ Updates für kritische Sicherheitslücken erhalten, aber das Express-Team bietet keine Garantie und plant nicht, Fixes für gefundene Fehler zu entwickeln oder zu veröffentlichen.
 
-| Major Version                                                                                                                                              | Minimum Node.js Version | Support Start Date | Support End Date                                           |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- | ------------------ | ---------------------------------------------------------- |
-| [**v5.x**{: .supported }](/{{page.lang}}/5x/api.html){: .ignore-underline} | 18                                      | September 2024     | **ongoing**{: .supported } |
-| [**v4.x**{: .supported }](/{{page.lang}}/4x/api.html){: .ignore-underline} | 0.10.0  | April 2014         | **ongoing**{: .supported } |
-| [**v3.x**{: .eol }](/{{page.lang}}/3x/api.html){: .ignore-underline}       | 0.8.0   | October 2012       | July 2015                                                  |
-| [**v2.x**{: .eol }](/2x/){: .ignore-underline}                             | 0.4.1   | March 2011         | July 2012                                                  |
-| **v1.x**{: .eol }                                                                                          | 0.2.0   | December 2010      | March 2011                                                 |
-| **v0.14.x**{: .eol }                                                                       | 0.1.98  | December 2010      | December 2010                                              |
+| Major Version                                                                                                                                              | Minimale Node.js Version | Support Startdatum | Support-Enddatum                                                 |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | ------------------ | ---------------------------------------------------------------- |
+| [**v5.x**{: .supported }](/{{page.lang}}/5x/api.html){: .ignore-underline} | 18                                       | September 2024     | **läuft derzeit**{: .supported } |
+| [**v4.x**{: .supported }](/{{page.lang}}/4x/api.html){: .ignore-underline} | 0.10.0   | April 2014         | **läuft derzeit**{: .supported } |
+| [**v3.x**{: .eol }](/{{page.lang}}/3x/api.html){: .ignore-underline}       | 0.8.0    | Oktober 2012       | Juli 2015                                                        |
+| [**v2.x**{: .eol }](/2x/){: .ignore-underline}                             | 0.4.1    | März 2011          | Juli 2012                                                        |
+| **v1.x**{: .eol }                                                                                          | 0.2.0    | Dezember 2010      | März 2011                                                        |
+| **v0.14.x**{: .eol }                                                                       | 0.1.98   | Dezember 2010      | Dezember 2010                                                    |
 
-## Commercial Support Options
+## Kommerzielle Support Optionen
 
-If you are unable to update to a supported version of Express, please contact one of our partners to receive security updates:
+Wenn Sie nicht auf eine unterstützte Version von Express aktualisieren können, wenden Sie sich bitte an einen unserer Partner, um Sicherheitsaktualisierungen zu erhalten:
 
 - [HeroDevs Never-Ending Support](http://www.herodevs.com/support/express-nes?utm_source=expressjs&utm_medium=link&utm_campaign=express_eol_page)
