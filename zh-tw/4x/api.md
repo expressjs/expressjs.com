@@ -13,9 +13,7 @@ redirect_from: "  "
 
 {% capture node-version %}
 
-```
 Express 4.0 requires Node.js 0.10 or higher.
-```
 
 {% endcapture %}
 
