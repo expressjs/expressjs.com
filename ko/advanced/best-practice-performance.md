@@ -144,9 +144,7 @@ Best practice is to handle errors as close to the site as possible. So while thi
 
 [도메인](https://nodejs.org/api/domain.html)의 사용 또한 권장하지 않습니다. 일반적으로 도메인은 문제를 해결하지 못하며, 더 이상 사용되지 않는 모듈입니다.
 
-## Things to do in your environment / setup
-
-{#in-environment}
+## 환경/설정에서 수행할 항목
 
 앱의 성능을 향상시키기 위해서 시스템 환경에서 할 수 있는 몇 가지는 다음과 같습니다.
 

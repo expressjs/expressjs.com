@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Express installieren
-description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
+description: Erfahren Sie, wie Sie Express.js in Ihrer Node.js-Umgebung installieren, wie Sie Ihr Projektverzeichnis aufsetzen und Abhängigkeiten mit npm verwalten.
 menu: starter
 lang: de
 redirect_from: "  "
