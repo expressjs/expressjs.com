@@ -144,9 +144,7 @@ One thing you should _not_ do is to listen for the `uncaughtException` event, em
 
 また、[domain](https://nodejs.org/api/domain.html) の使用もお勧めしません。このモジュールは概して問題を解決しないため、推奨されていません。 It generally doesn't solve the problem and is a deprecated module.
 
-## Things to do in your environment / setup
-
-{#in-environment}
+## 環境/セットアップで実行する処理
 
 以下に、アプリケーションのパフォーマンスを向上させるためにシステム環境で実行できる処理をいくつか挙げます。
 

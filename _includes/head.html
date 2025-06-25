@@ -40,9 +40,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="description" content="{{page.description}}">
     <meta property="og:url" content="https://expressjs.com{{page.url}}">
-    {% if page.author %}
-    <meta property="og:type" content="article">
-    <meta property="og:article:author" content="{{page.author}}">
+    {% if page.authors %}
+        <meta property="og:type" content="article">
+        {%- for author in page.authors %}
+            <meta property="og:article:author" content="{{author.name}}">
+        {%- endfor %}
     {% else %}
     <meta property="og:type" content="website">
     {% endif %}

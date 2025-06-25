@@ -88,7 +88,7 @@ compromise among committers be the default resolution mechanism.
 ### Becoming a Triager
 
 Anyone can become a triager! Read more about the process of being a triager in
-[the triage process document](https://github.com/expressjs/express/blob/master/Triager-Guide.md).
+[the triage process document](https://github.com/expressjs/discussions/blob/master/Triager-Guide.md).
 
 Currently, any existing [organization member](https://github.com/orgs/expressjs/people) can nominate
 a new triager. If you are interested in becoming a triager, our best advice is to actively participate
@@ -162,86 +162,26 @@ project for at least 6 months as a committer prior to the request. They should h
 helped with code contributions as well as triaging issues. They are also required to
 have 2FA enabled on both their GitHub and npm accounts.
 
-Any TC member or an existing captain on the **same** repo can nominate another committer 
-to the captain role. To do so, they should submit a PR to this document, updating the 
-**Active Project Captains** section (while maintaining the sort order) with the project 
+Any TC member or an existing captain on the **same** repo can nominate another committer
+to the captain role. To do so, they should submit a PR to this document, updating the
+**Active Project Captains** section (while maintaining the sort order) with the project
 name, the nominee's GitHub handle, and their npm username (if different).
-- Repos can have as many captains as make sense for the scope of work.
-- A TC member or an existing repo captain **on the same project** can nominate a new captain. 
+
+* Repos can have as many captains as make sense for the scope of work.
+* A TC member or an existing repo captain **on the same project** can nominate a new captain.
   Repo captains from other projects should not nominate captains for a different project.
 
-The PR will require at least 2 approvals from TC members and 2 weeks hold time to allow 
-for comment and/or dissent.  When the PR is merged, a TC member will add them to the 
+The PR will require at least 2 approvals from TC members and 2 weeks hold time to allow
+for comment and/or dissent.  When the PR is merged, a TC member will add them to the
 proper GitHub/npm groups.
 
 #### Active Projects and Captains
 
-- [`expressjs/badgeboard`](https://github.com/expressjs/badgeboard): @wesleytodd
-- [`expressjs/basic-auth-connect`](https://github.com/expressjs/basic-auth-connect): @ulisesGascon
-- [`expressjs/body-parser`](https://github.com/expressjs/body-parser): @wesleytodd, @jonchurch, @ulisesGascon
-- [`expressjs/compression`](https://github.com/expressjs/compression): @ulisesGascon
-- [`expressjs/connect-multiparty`](https://github.com/expressjs/connect-multiparty): @ulisesGascon
-- [`expressjs/cookie-parser`](https://github.com/expressjs/cookie-parser): @wesleytodd, @UlisesGascon
-- [`expressjs/cookie-session`](https://github.com/expressjs/cookie-session): @ulisesGascon
-- [`expressjs/cors`](https://github.com/expressjs/cors): @jonchurch, @ulisesGascon
-- [`expressjs/discussions`](https://github.com/expressjs/discussions): @wesleytodd
-- [`expressjs/errorhandler`](https://github.com/expressjs/errorhandler): @ulisesGascon
-- [`expressjs/express-paginate`](https://github.com/expressjs/express-paginate): @ulisesGascon
-- [`expressjs/express`](https://github.com/expressjs/express): @wesleytodd, @ulisesGascon
-- [`expressjs/expressjs.com`](https://github.com/expressjs/expressjs.com): @crandmck, @jonchurch, @bjohansebas
-- [`expressjs/flash`](https://github.com/expressjs/flash): @ulisesGascon
-- [`expressjs/generator`](https://github.com/expressjs/generator): @wesleytodd
-- [`expressjs/method-override`](https://github.com/expressjs/method-override): @ulisesGascon
-- [`expressjs/morgan`](https://github.com/expressjs/morgan): @jonchurch, @ulisesGascon
-- [`expressjs/multer`](https://github.com/expressjs/multer): @LinusU, @ulisesGascon
-- [`expressjs/response-time`](https://github.com/expressjs/response-time): @UlisesGascon
-- [`expressjs/serve-favicon`](https://github.com/expressjs/serve-favicon): @ulisesGascon
-- [`expressjs/serve-index`](https://github.com/expressjs/serve-index): @ulisesGascon
-- [`expressjs/serve-static`](https://github.com/expressjs/serve-static): @ulisesGascon
-- [`expressjs/session`](https://github.com/expressjs/session): @ulisesGascon
-- [`expressjs/statusboard`](https://github.com/expressjs/statusboard): @wesleytodd
-- [`expressjs/timeout`](https://github.com/expressjs/timeout): @ulisesGascon
-- [`expressjs/vhost`](https://github.com/expressjs/vhost): @ulisesGascon
-- [`jshttp/accepts`](https://github.com/jshttp/accepts): @blakeembrey
-- [`jshttp/basic-auth`](https://github.com/jshttp/basic-auth): @blakeembrey
-- [`jshttp/compressible`](https://github.com/jshttp/compressible): @blakeembrey
-- [`jshttp/content-disposition`](https://github.com/jshttp/content-disposition): @blakeembrey
-- [`jshttp/content-type`](https://github.com/jshttp/content-type): @blakeembrey
-- [`jshttp/cookie`](https://github.com/jshttp/cookie): @blakeembrey
-- [`jshttp/etag`](https://github.com/jshttp/etag): @blakeembrey
-- [`jshttp/forwarded`](https://github.com/jshttp/forwarded): @blakeembrey
-- [`jshttp/fresh`](https://github.com/jshttp/fresh): @blakeembrey
-- [`jshttp/http-assert`](https://github.com/jshttp/http-assert): @wesleytodd, @jonchurch, @ulisesGascon
-- [`jshttp/http-errors`](https://github.com/jshttp/http-errors): @wesleytodd, @jonchurch, @ulisesGascon
-- [`jshttp/media-typer`](https://github.com/jshttp/media-typer): @blakeembrey
-- [`jshttp/methods`](https://github.com/jshttp/methods): @blakeembrey
-- [`jshttp/mime-db`](https://github.com/jshttp/mime-db): @blakeembrey, @UlisesGascon
-- [`jshttp/mime-types`](https://github.com/jshttp/mime-types): @blakeembrey, @UlisesGascon
-- [`jshttp/negotiator`](https://github.com/jshttp/negotiator): @blakeembrey
-- [`jshttp/on-finished`](https://github.com/jshttp/on-finished): @wesleytodd, @ulisesGascon
-- [`jshttp/on-headers`](https://github.com/jshttp/on-headers): @blakeembrey
-- [`jshttp/proxy-addr`](https://github.com/jshttp/proxy-addr): @wesleytodd, @ulisesGascon
-- [`jshttp/range-parser`](https://github.com/jshttp/range-parser): @blakeembrey
-- [`jshttp/statuses`](https://github.com/jshttp/statuses): @blakeembrey
-- [`jshttp/type-is`](https://github.com/jshttp/type-is): @blakeembrey
-- [`jshttp/vary`](https://github.com/jshttp/vary): @blakeembrey
-- [`pillarjs/cookies`](https://github.com/pillarjs/cookies): @blakeembrey
-- [`pillarjs/csrf`](https://github.com/pillarjs/csrf): @ulisesGascon
-- [`pillarjs/encodeurl`](https://github.com/pillarjs/encodeurl): @blakeembrey
-- [`pillarjs/finalhandler`](https://github.com/pillarjs/finalhandler): @wesleytodd, @ulisesGascon
-- [`pillarjs/hbs`](https://github.com/pillarjs/hbs): @ulisesGascon
-- [`pillarjs/multiparty`](https://github.com/pillarjs/multiparty): @blakeembrey
-- [`pillarjs/parseurl`](https://github.com/pillarjs/parseurl): @blakeembrey
-- [`pillarjs/path-to-regexp`](https://github.com/pillarjs/path-to-regexp): @blakeembrey
-- [`pillarjs/request`](https://github.com/pillarjs/request): @wesleytodd
-- [`pillarjs/resolve-path`](https://github.com/pillarjs/resolve-path): @blakeembrey
-- [`pillarjs/router`](https://github.com/pillarjs/router): @wesleytodd, @ulisesGascon
-- [`pillarjs/send`](https://github.com/pillarjs/send): @blakeembrey
-- [`pillarjs/understanding-csrf`](https://github.com/pillarjs/understanding-csrf): @ulisesGascon
+The list can be found at [https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#active-projects-and-members](https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#active-projects-and-members)
 
 #### Current Initiative Captains
 
-- Triage team [ref](https://github.com/expressjs/discussions/issues/227): @UlisesGascon
+The list can be found at [https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#current-initiative-captains](https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#current-initiative-captains)
 
 ### Developer's Certificate of Origin 1.1
 
@@ -279,6 +219,8 @@ By making a contribution to this project, I certify that:
 
 Open issues for the expressjs.com website in https://github.com/expressjs/expressjs.com.
 
+For issues in other Express managed repos (everything in `expressjs`, `pillarjs` or `jshttp` other than `expressjs/express`), be sure to check their contributing guide and open issues and PRs in the appropriate repository.
+
 ### PRs and Code contributions
 
 * Tests must pass.
@@ -290,14 +232,14 @@ Open issues for the expressjs.com website in https://github.com/expressjs/expres
 Use the `master` branch for bug fixes or minor work that is intended for the
 current release stream.
 
-Use the correspondingly named branch, e.g. `5.0`, for anything intended for
+Use the correspondingly named branch, e.g. `6.x`, for anything intended for
 a future release of Express.
 
 ### Steps for contributing
 
-1. [Create an issue](https://github.com/expressjs/express/issues/new) for the
+1. Create an issue for the
    bug you want to fix or the feature that you want to add.
-2. Create your own [fork](https://github.com/expressjs/express) on GitHub, then
+2. Create your own fork on GitHub, then
    checkout your fork.
 3. Write your code in your local copy. It's good practice to create a branch for
    each new issue you work on, although not compulsory.
@@ -325,9 +267,16 @@ Things that will help get your question issue looked at:
 If you post a question and do not outline the above items or make it easy for
 us to understand and reproduce your issue, it will be closed.
 
+If your question meets all of the above requirements but you do not believe it needs to be looked at
+by the maintainers
+(for example, if you are just looking for community input) please open it as a discussion topic instead
+of an issue. If you
+are unsure and open an issue, we may move it to discussions if we triage them and decide they do
+not need high
+visibility or maintainer input. 
 ## Security Policies and Procedures
 
-<!-- SRC: expressjs/express Security.md -->
+<!-- SRC: expressjs/express SECURITY.md -->
 
 This document outlines security procedures and general policies for the Express
 project.
@@ -390,15 +339,13 @@ pull request.
 <!-- LOCAL: expressjs/expressjs.com ../../CONTRIBUTING.md -->
 ### The Official Documentation of the Express JS Framework
 
-This is the contribution documentation for the [Expressjs.com](https://github.com/expressjs/expressjs.com) website.
+This is the contribution documentation for the [expressjs.com](https://github.com/expressjs/expressjs.com) website.
 
 
 
 #### Need some ideas? These are some typical issues.
 
-1.  **Website issues**: 
-If you see anything on the site that could use a tune-up, think about how to fix it.
-
+1. **Website issues**: If you see anything on the site that could use a tune-up, think about how to fix it.
     - Display or screen sizing problems
     - Mobile responsiveness issues
     - Missing or broken accessibility features 
@@ -406,22 +353,15 @@ If you see anything on the site that could use a tune-up, think about how to fix
     - Broken links
     - Page structure or user interface enhancements
 
-
-2. **Content Issues**: 
-Fix anything related to site content or typos.
+2. **Content Issues**: Fix anything related to site content or typos.
     - Spelling errors
     - Incorrect/outdated Express JS documentation
     - Missing content
 
-
 3. **Translation Issues**: Fix any translation errors or contribute new content.
     - Fix spelling errors 
     - Fix incorrect/poorly translated words
-    - Translate new content
-> **IMPORTANT:** 
-> All translation submissions are currently paused. See this [notice](#notice-we-have-paused-all-translation-contributions) for more information.
-
-   - Check out the [Contributing translations](#contributing-translations) section below for a contributing guide.
+    - Check out the [Contributing translations](#contributing-translations) section below for a contributing guide.
 
 #### Want to work on a backlog issue?
 
@@ -431,6 +371,7 @@ We often have bugs or enhancements that need work. You can find these under our 
 
 If you've found a bug or a typo, or if you have an idea for an enhancement, you can:
 - Submit a [new issue](https://github.com/expressjs/expressjs.com/issues/new/choose) on our repo. Do this for larger proposals, or if you'd like to discuss or get feedback first. 
+
 - Make a [Github pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request). If you have already done work and it's ready to go, feel free to send it our way.
 
 ## Getting Started
@@ -451,7 +392,9 @@ So you've found a problem that you want to fix, or have a site enhancement you w
 
 Clone the repo and get the code:
 
-    git clone https://github.com/expressjs/expressjs.com.git
+```sh
+git clone https://github.com/expressjs/expressjs.com.git
+```
 
 After you've got the code you're ready to start making your changes! 
 
@@ -477,14 +420,16 @@ follow the specific instructions for [How to write a blog post.](https://express
 **CSS or Javascript**
 - All css and js files are kept in `css` and `js` folders on the project root.
 
-The Express JS website is build using [Jeykyll](https://jekyllrb.com/) and is hosted on [Github Pages](https://pages.github.com/).
+The Express JS website is built using [Jekyll](https://jekyllrb.com/) and is hosted on [Github Pages](https://pages.github.com/).
 
 #### Step 3: Running the Application
 
-
 Now you'll need a way to see your changes, which means you'll need a running version of the application. You have two options. 
-1. __Run Locally__: This gets the local version of the application up and running on your machine. Follow our [Local Setup Guide](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#local-setup) to use this option.  
+
+
+1. __Run Locally__: This gets the local version of the application up and running on your machine. Follow our [Local Setup Guide](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#build-the-website-locally) to use this option.  
     - This is the recommended option for moderate to complex work. 
+
 2. __Run using Deploy Preview__: Use this option if you don't want to bother with a local installation. Part of our continuous integration pipeline includes [Netlify Deploy Preview](https://docs.netlify.com/site-deploys/deploy-previews/). 
     1. To use this you'll need to get your changes online - after you've made your first commit on your feature branch, make a *draft* pull request. 
     2. After the build steps are complete, you'll have access to a __Deploy Preview__ tab that will run your changes on the web, rebuilding after each commit is pushed. 
@@ -492,49 +437,24 @@ Now you'll need a way to see your changes, which means you'll need a running ver
   
 ## Contributing translations
 
-#### Notice: We have paused all translation contributions. 
-> **IMPORTANT:** 
-> We are currently working toward a more streamlined translations workflow. As long as this notice is posted, we will _not_ be accepting any translation submissions. 
-
-We highly encourage community translations! We no longer have professional translations, and we believe in the power of our community to provide accurate and helpful translations.
+We use Crowdin to manage our translations in multiple languages and achieve automatic translation with artificial intelligence. Since these translations can be inefficient in some cases, we need help from the community to provide accurate and helpful translations.
 
 The documentation is translated into these languages:
+
+- Chinese Simplified (`zh-cn`)
+- Chinese Traditional (`zh-tw`)
 - English (`en`)
-- Spanish (`es`)
 - French (`fr`)
+- German (`de`)
 - Italian (`it`)
-- Indonesian (`id`)
 - Japanese (`ja`)
 - Korean (`ko`)
 - Brazilian Portuguese (`pt-br`)
-- Russian (`ru`)
-- Slovak (`sk`)
-- Thai (`th`)
-- Turkish (`tr`)
-- Ukrainian (`uk`)
-- Uzbek (`uz`)
-- Simplified Chinese (`zh-cn`)
-- Traditional Chinese (`zh-tw`)
+- Spanish (`es`)
 
-### Adding New Full Site Translations
+### How to translate
 
-If you find a translation is missing from the list you can create a new one.
+1. Request to join the Express.js Website project on [Crowdin](https://express.crowdin.com/website)
+2. [Select the language you want to translate](https://support.crowdin.com/joining-translation-project/#starting-translation)
+3. [Start translating](https://support.crowdin.com/online-editor/)
 
-To translate Expressjs.com into a new language, follow these steps:
-
-1. Clone the [`expressjs.com`](https://github.com/expressjs/expressjs.com) repository.
-2. Create a directory for the language of your choice using its [ISO 639-1 code](https://www.loc.gov/standards/iso639-2/php/code_list.php) as its name.
-3. Copy `index.md`, `api.md`, `starter/`, `guide/`, `advanced/`, `resources/`, `4x/`, and `3x/`, to the language directory.
-4. Remove the link to 2.x docs from the "API Reference" menu.
-5. Update the `lang` variable in the copied markdown files.
-6. Update the `title` variable in the copied markdown files.
-7. Create the header, footer, notice, and announcement file for the language in the `_includes/` directory, in the respective directories, and make necessary edits to the contents.
-8. Create the announcement file for the language in the `_includes/` directory.
-9. Make sure to append `/{{ page.lang }}` to all the links within the site.
-10. Update the [CONTRIBUTING.md](https://github.com/expressjs/expressjs.com/blob/gh-pages/CONTRIBUTING.md#contributing-translations)  and the `.github/workflows/translation.yml` files with the new language. 
-
-### Adding Page and Section Translations
-
-Many site translations are still missing pages. To find which ones we need help with, you can [filter for merged PRs](https://github.com/expressjs/expressjs.com/pulls?q=is%3Apr+is%3Aclosed+label%3Arequires-translation-es) that include the tag for your language, such as `requires-translation-es` for requires Spanish translation.   
-
-If you contribute a page or section translation, please reference the original PR. This helps the person merging your translation to remove the tag from the original PR.
