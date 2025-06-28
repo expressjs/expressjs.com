@@ -3,6 +3,6 @@ layout: middleware
 title: Express errorhandler middleware
 menu: resources
 lang: ja
-redirect_from: "  "
+redirect_from: '  '
 module: errorhandler
 ---

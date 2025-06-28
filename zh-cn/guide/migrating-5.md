@@ -84,11 +84,11 @@ You can find the list of available codemods [here](https://github.com/expressjs/
   <li><a href="#brotli-support">Brotli encoding support</a></li>
 </ul>
 
-### 已移除的方法和属性
+## 已移除的方法和属性
 
 If you use any of these methods or properties in your app, it will crash. So, you'll need to change your app after you update to version 5.
 
-<h4 id="app.del">app.del()</h4>
+<h3 id="app.del">app.del()</h3>
 
 Express 5 不再支持 `app.del()` 函数。如果使用此函数，将抛出错误。要注册 HTTP DELETE 路由，请使用 `app.delete()` 函数。 If you use this function, an error is thrown. For registering HTTP DELETE routes, use the `app.delete()` function instead.
 
@@ -117,11 +117,11 @@ app.delete('/user/:id', (req, res) => {
 })
 ```
 
-<h4 id="app.param">app.param(fn)</h4>
+<h3 id="app.param">app.param(fn)</h3>
 
 `app.param(fn)` 特征符用于修改 `app.param(name, fn)` 函数的行为。自 V4.11.0 起不推荐使用该特征符，而 Express 5 完全不再提供支持。 It has been deprecated since v4.11.0, and Express 5 no longer supports it at all.
 
-<h4 id="plural">复数的方法名称</h4>
+<h3 id="plural">复数的方法名称</h3>
 
 The following method names have been pluralized. In Express 4, using the old methods resulted in a deprecation warning. Express 5 no longer supports them at all:
 
@@ -162,13 +162,13 @@ app.all('/', (req, res) => {
 })
 ```
 
-<h4 id="leading">app.param(name, fn) 的名称中的前置冒号 (:)</h4>
+<h3 id="leading">app.param(name, fn) 的名称中的前置冒号 (:)</h3>
 
 `app.param(name, fn)` 函数名称中的前置冒号字符 (:) 是 Express 3 的遗留问题，为了向后兼容性，Express 4 提供支持但会显示不推荐使用的提醒。而 Express 5 则静默忽略它，使用不带前置冒号的名称参数。 Express 5 will silently ignore it and use the name parameter without prefixing it with a colon.
 
 如果您遵循 [app.param](/{{ page.lang }}/4x/api.html#app.param) 的 Express 4 文档进行开发，那么不会影响代码，因为文档中没有提及前置冒号。
 
-<h4 id="req.param">req.param(name)</h4>
+<h3 id="req.param">req.param(name)</h3>
 
 This potentially confusing and dangerous method of retrieving form data has been removed. 已移除用于检索表单数据的方法，因为这可能引起混淆，而且很危险。现在，您需要在 `req.params`、`req.body` 或 `req.query` 对象中专门寻找提交的参数名称。
 
@@ -203,7 +203,7 @@ app.post('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.json">res.json(obj, status)</h4>
+<h3 id="res.json">res.json(obj, status)</h3>
 
 Express 5 不再支持特征符 `res.json(obj, status)`。而是设置状态，然后将其链接到 `res.json()` 方法，如下所示：`res.status(status).json(obj)`。 Instead, set the status and then chain it to the `res.json()` method like this: `res.status(status).json(obj)`.
 
@@ -221,7 +221,7 @@ app.post('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.jsonp">res.jsonp(obj, status)</h4>
+<h3 id="res.jsonp">res.jsonp(obj, status)</h3>
 
 Express 5 不再支持特征符 `res.jsonp(obj, status)`。而是设置状态，然后将其链接到 `res.jsonp()` 方法，如下所示：`res.status(status).jsonp(obj)`。 Instead, set the status and then chain it to the `res.jsonp()` method like this: `res.status(status).jsonp(obj)`.
 
@@ -239,7 +239,7 @@ app.post('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.redirect">res.redirect(url, status)</h4>
+<h3 id="res.redirect">res.redirect(url, status)</h3>
 
 Express 5 no longer supports the signature `res.redirect(url, status)`. Instead, use the following signature: `res.redirect(status, url)`.
 
@@ -257,7 +257,7 @@ app.get('/user', (req, res) => {
 })
 ```
 
-<h4 id="magic-redirect">res.redirect('back') and res.location('back')</h4>
+<h3 id="magic-redirect">res.redirect('back') and res.location('back')</h3>
 
 Express 5 no longer supports the magic string `back` in the `res.redirect()` and `res.location()` methods. Instead, use the `req.get('Referrer') || '/'` value to redirect back to the previous page. In Express 4, the res.`redirect('back')` and `res.location('back')` methods were deprecated.
 
@@ -284,7 +284,7 @@ app.get('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.send.body">res.send(body, status)</h4>
+<h3 id="res.send.body">res.send(body, status)</h3>
 
 Express 5 不再支持特征符 `res.send(obj, status)`。而是设置状态，然后将其链接到 `res.send()` 方法，如下所示：`res.status(status).send(obj)`。 Instead, set the status and then chain it to the `res.send()` method like this: `res.status(status).send(obj)`.
 
@@ -302,7 +302,7 @@ app.get('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.send.status">res.send(status)</h4>
+<h3 id="res.send.status">res.send(status)</h3>
 
 Express 5 no longer supports the signature `res.send(status)`, where `status` is a number. Instead, use the `res.sendStatus(statusCode)` function, which sets the HTTP response header status code and sends the text version of the code: "Not Found", "Internal Server Error", and so on.
 If you need to send a number by using the `res.send()` function, quote the number to convert it to a string, so that Express does not interpret it as an attempt to use the unsupported old signature.
@@ -321,7 +321,7 @@ app.get('/user', (req, res) => {
 })
 ```
 
-<h4 id="res.sendfile">res.sendfile()</h4>
+<h3 id="res.sendfile">res.sendfile()</h3>
 
 在 Express 5 中，`res.sendfile()` 函数已由驼峰式大小写版本 `res.sendFile()` 替换。
 
@@ -339,11 +339,11 @@ app.get('/user', (req, res) => {
 })
 ```
 
-<h4 id="router.param">router.param(fn)</h4>
+<h3 id="router.param">router.param(fn)</h3>
 
 The `router.param(fn)` signature was used for modifying the behavior of the `router.param(name, fn)` function. It has been deprecated since v4.11.0, and Express 5 no longer supports it at all.
 
-<h4 id="express.static.mime">express.static.mime</h4>
+<h3 id="express.static.mime">express.static.mime</h3>
 
 In Express 5, `mime` is no longer an exported property of the `static` field.
 Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work with MIME type values.
@@ -357,7 +357,7 @@ const mime = require('mime-types')
 mime.lookup('json')
 ```
 
-<h4 id="express:router-debug-logs">express:router debug logs</h4>
+<h3 id="express:router-debug-logs">express:router debug logs</h3>
 
 In Express 5, router handling logic is performed by a dependency. Therefore, the
 debug logs for the router are no longer available under the `express:` namespace.
@@ -376,9 +376,9 @@ DEBUG=express:* node index.js
 DEBUG=express:*,router,router:* node index.js
 ```
 
-<h3>已更改</h3>
+## 已更改
 
-<h4 id="path-syntax">Path route matching syntax</h4>
+<h3 id="path-syntax">Path route matching syntax</h3>
 
 Path route matching syntax is when a string is supplied as the first parameter to the `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, and `router.use()` APIs. The following changes have been made to how the path string is matched to an incoming request:
 
@@ -442,17 +442,17 @@ app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
 - Some characters have been reserved to avoid confusion during upgrade (`()[]?+!`), use `\` to escape them.
 - Parameter names now support valid JavaScript identifiers, or quoted like `:"this"`.
 
-<h4 id="rejected-promises">Rejected promises handled from middleware and handlers</h4>
+<h3 id="rejected-promises">Rejected promises handled from middleware and handlers</h3>
 
 Request middleware and handlers that return rejected promises are now handled by forwarding the rejected value as an `Error` to the error handling middleware. This means that using `async` functions as middleware and handlers are easier than ever. When an error is thrown in an `async` function or a rejected promise is `await`ed inside an async function, those errors will be passed to the error handler as if calling `next(err)`.
 
 Details of how Express handles errors is covered in the [error handling documentation](/en/guide/error-handling.html).
 
-<h4 id="express.urlencoded">express.urlencoded</h4>
+<h3 id="express.urlencoded">express.urlencoded</h3>
 
 The `express.urlencoded` method makes the `extended` option `false` by default.
 
-<h4 id="app.listen">app.listen</h4>
+<h3 id="app.listen">app.listen</h3>
 
 In Express 5, the `app.listen` method will invoke the user-provided callback function (if provided) when the server receives an error event. In Express 4, such errors would be thrown. This change shifts error-handling responsibility to the callback function in Express 5. If there is an error, it will be passed to the callback as an argument.
 For example:
@@ -466,40 +466,40 @@ const server = app.listen(8080, '0.0.0.0', (error) => {
 })
 ```
 
-<h4 id="app.router">app.router</h4>
+<h3 id="app.router">app.router</h3>
 
 在 Express 4 中已移除的 `app.router` 对象在 Express 5 中已恢复。在新版本中，此对象只是对 Express 基本路由器的引用，不像在 Express 3 中应用程序必须显式将该路由器装入。 In the new version, this object is a just a reference to the base Express router, unlike in Express 3, where an app had to explicitly load it.
 
-<h4 id="req.body">req.body</h4> 
+<h3 id="req.body">req.body</h3> 
 
 The `req.body` property returns `undefined` when the body has not been parsed. In Express 4, it returns `{}` by default.
 
-<h4 id="req.host">req.host</h4>
+<h3 id="req.host">req.host</h3>
 
 在 Express 4 中，如果存在端口号，`req.host` 函数会错误地将其剥离。在 Express 5 中，则会保留端口号。 In Express 5, the port number is maintained.
 
-<h4 id="req.query">req.query</h4>
+<h3 id="req.query">req.query</h3>
 
 The `req.query` property is no longer a writable property and is instead a getter. The default query parser has been changed from "extended" to "simple".
 
-<h4 id="res.clearCookie">res.clearCookie</h4>
+<h3 id="res.clearCookie">res.clearCookie</h3>
 
 The `res.clearCookie` method ignores the `maxAge` and `expires` options provided by the user.
 
-<h4 id="res.status">res.status</h4>
+<h3 id="res.status">res.status</h3>
 
 The `res.status` method only accepts integers in the range of `100` to `999`, following the behavior defined by Node.js, and it returns an error when the status code is not an integer.
 
-<h4 id="res.query">res.vary</h4>
+<h3 id="res.query">res.vary</h3>
 
 The `res.vary` throws an error when the `field` argument is missing. In Express 4, if the argument was omitted, it gave a warning in the console
 
-### 改进
+## 改进
 
-<h4 id="res.render">res.render()</h4>
+<h3 id="res.render">res.render()</h3>
 
 现在，此方法为所有查看引擎强制执行异步行为，避免具有同步实现以及违反建议接口的查看引擎所导致的错误。
 
-<h4 id="brotli-support">Brotli encoding support</h4>
+<h3 id="brotli-support">Brotli encoding support</h3>
 
 Express 5 supports Brotli encoding for requests received from clients that support it.

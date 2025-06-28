@@ -1,5 +1,5 @@
 # Home
-home: Home
+home: Startseite
 # Getting started
 getting_started: Einführung
 installing: Installation
@@ -7,7 +7,7 @@ hello_world: Hello world
 generator: Express generator
 basic_routing: Basisrouting
 static_files: Statische Dateien
-examples: More examples
+examples: Weitere Beispiele
 faq: Häufig gestellte Fragen
 # Guide
 guide: Leitfaden

@@ -1121,6 +1121,19 @@ h2 a {
   color: #000;
   background-color: #fff;
 
+   &::after {
+    content: "";
+    display: block;
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--card-bg);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    cursor: pointer;
+    pointer-events: none;
+    transition: transform 0.2s ease-in-out;
+    transform: rotate(-90deg);
+  }
+
   &:is(:hover, :active, :focus) {
     background-color: #ebf2f5;
   }
@@ -1318,8 +1331,14 @@ h2 a {
   }
 
   #menu-toggle.show {
-    display: block;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
     opacity: 1;
+  }
+
+  #menu-toggle.show.rotate::after {
+    transform: rotate(0deg);
   }
 
   #menu > li > a,
@@ -1474,8 +1493,23 @@ h2 a {
   max-width: 100%;
   margin: auto;
 }
-.blog-author {
+.blog-authors {
   font-style: italic;
+}
+.blog-author-link {
+  color: inherit;
+  margin-left: 0.5ch;
+  text-decoration: none;
+}
+.blog-author-link-label {
+  text-decoration: underline;
+}
+.blog-author-avatar {
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.5em;
+  height: 1.5em;
 }
 .blog-date {
   font-weight: bold;

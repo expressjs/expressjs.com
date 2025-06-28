@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
     - gh-pages
+  pull_request_review:
+      types: [submitted]
   push:
     branches:
     - gh-pages
@@ -14,19 +16,19 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.draft != true &&
+      (github.event_name == 'pull_request_review' && github.event.review.state == 'approved') ||
+      github.event_name != 'pull_request_review'
 
     steps:
     - uses: actions/checkout@v4
-
-    - name: Setup Ruby    
-      uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4 # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
       with:
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        persist-credentials: false
+ 
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
-      with:
-        node-version: 20
 
     - name: Install Node.js dependencies
       run: npm install
@@ -34,12 +36,30 @@ jobs:
     - name: Run tests
       shell: bash
       run: npm test
-    
-    - name: Jekyll Build
-      run: bundle exec jekyll build
 
-    - name: Check Docker support
-      shell: bash
-      run: |
-        docker --version
-        make build
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.draft != true &&
+      (github.event_name == 'pull_request_review' && github.event.review.state == 'approved') ||
+      github.event_name != 'pull_request_review'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Ruby    
+        uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4 # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
+        with:
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Jekyll Build
+        run: bundle exec jekyll build
+
+      - name: Check Docker support
+        shell: bash
+        run: |
+          docker --version
+          make build

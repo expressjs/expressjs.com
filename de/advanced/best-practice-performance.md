@@ -144,9 +144,7 @@ Außerdem wird die Verwendung von `uncaughtException` offiziell als [grobes Vorg
 
 Zudem empfehlen wir, [domains](https://nodejs.org/api/domain.html) nicht zu verwenden. Mit diesem Modul, das zudem veraltet ist, lässt sich das Problem in der Regel nicht lösen.
 
-## Things to do in your environment / setup
-
-{#in-environment}
+## Things to do in your environment / setup {#in-environment}
 
 Dies sind einige Beispiele für Maßnahmen, die Sie an Ihrer Systemumgebung vornehmen können, um die Anwendungsleistung zu verbessern:
 
