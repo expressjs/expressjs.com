@@ -144,9 +144,7 @@ Asimismo, el uso de `uncaughtException` se reconoce oficialmente como un mecanis
 
 Tampoco se recomienda el uso de [dominios](https://nodejs.org/api/domain.html). Generalmente no soluciona el problema y es un módulo en desuso.
 
-## Things to do in your environment / setup
-
-{#in-environment}
+## Cosas que hacer en el entorno / configuración
 
 Estas son algunas de las cosas que puede hacer en el entorno del sistema para mejorar el rendimiento de la aplicación:
 

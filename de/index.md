@@ -1,7 +1,7 @@
 ---
 layout: home
-title: Express - Node.js web application framework
-description: Express is a fast, unopinionated, minimalist web framework for Node.js, providing a robust set of features for web and mobile applications.
+title: Express - Node.js Web Application Framework
+description: "Express is a fast, unopinionated, minimalist web framework for Node.js, providing a robust set of features for web and mobile applications."
 menu: home
 lang: de
 redirect_from: "  "
@@ -45,7 +45,7 @@ app.listen(port, () => {
 <section id="intro">
   <div id="boxes" class="clearfix">
     <div id="web-applications">
-      <h2>Web Applications</h2> Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+      <h2>Web Applications</h2> Express ist ein minimalistisches und flexibles Node.js Web Application Framework, das eine robustes Reihe an Funktionen für Web- und mobile Anwendungen bereitstellt.
     </div>
     <div id="apis">
       <h2>APIs</h2> With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy.

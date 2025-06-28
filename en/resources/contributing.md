@@ -276,7 +276,7 @@ not need high
 visibility or maintainer input. 
 ## Security Policies and Procedures
 
-<!-- SRC: expressjs/express Security.md -->
+<!-- SRC: expressjs/express SECURITY.md -->
 
 This document outlines security procedures and general policies for the Express
 project.
@@ -339,15 +339,13 @@ pull request.
 <!-- LOCAL: expressjs/expressjs.com ../../CONTRIBUTING.md -->
 ### The Official Documentation of the Express JS Framework
 
-This is the contribution documentation for the [Expressjs.com](https://github.com/expressjs/expressjs.com) website.
+This is the contribution documentation for the [expressjs.com](https://github.com/expressjs/expressjs.com) website.
 
 
 
 #### Need some ideas? These are some typical issues.
 
-1.  **Website issues**: 
-If you see anything on the site that could use a tune-up, think about how to fix it.
-
+1. **Website issues**: If you see anything on the site that could use a tune-up, think about how to fix it.
     - Display or screen sizing problems
     - Mobile responsiveness issues
     - Missing or broken accessibility features 
@@ -355,22 +353,15 @@ If you see anything on the site that could use a tune-up, think about how to fix
     - Broken links
     - Page structure or user interface enhancements
 
-
-2. **Content Issues**: 
-Fix anything related to site content or typos.
+2. **Content Issues**: Fix anything related to site content or typos.
     - Spelling errors
     - Incorrect/outdated Express JS documentation
     - Missing content
 
-
 3. **Translation Issues**: Fix any translation errors or contribute new content.
     - Fix spelling errors 
     - Fix incorrect/poorly translated words
-    - Translate new content
-> **IMPORTANT:** 
-> All translation submissions are currently paused. See this [notice](#notice-we-have-paused-all-translation-contributions) for more information.
-
-   - Check out the [Contributing translations](#contributing-translations) section below for a contributing guide.
+    - Check out the [Contributing translations](#contributing-translations) section below for a contributing guide.
 
 #### Want to work on a backlog issue?
 
@@ -380,6 +371,7 @@ We often have bugs or enhancements that need work. You can find these under our 
 
 If you've found a bug or a typo, or if you have an idea for an enhancement, you can:
 - Submit a [new issue](https://github.com/expressjs/expressjs.com/issues/new/choose) on our repo. Do this for larger proposals, or if you'd like to discuss or get feedback first. 
+
 - Make a [Github pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request). If you have already done work and it's ready to go, feel free to send it our way.
 
 ## Getting Started
@@ -400,7 +392,9 @@ So you've found a problem that you want to fix, or have a site enhancement you w
 
 Clone the repo and get the code:
 
-    git clone https://github.com/expressjs/expressjs.com.git
+```sh
+git clone https://github.com/expressjs/expressjs.com.git
+```
 
 After you've got the code you're ready to start making your changes! 
 
@@ -426,14 +420,16 @@ follow the specific instructions for [How to write a blog post.](https://express
 **CSS or Javascript**
 - All css and js files are kept in `css` and `js` folders on the project root.
 
-The Express JS website is build using [Jeykyll](https://jekyllrb.com/) and is hosted on [Github Pages](https://pages.github.com/).
+The Express JS website is built using [Jekyll](https://jekyllrb.com/) and is hosted on [Github Pages](https://pages.github.com/).
 
 #### Step 3: Running the Application
 
-
 Now you'll need a way to see your changes, which means you'll need a running version of the application. You have two options. 
-1. __Run Locally__: This gets the local version of the application up and running on your machine. Follow our [Local Setup Guide](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#local-setup) to use this option.  
+
+
+1. __Run Locally__: This gets the local version of the application up and running on your machine. Follow our [Local Setup Guide](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#build-the-website-locally) to use this option.  
     - This is the recommended option for moderate to complex work. 
+
 2. __Run using Deploy Preview__: Use this option if you don't want to bother with a local installation. Part of our continuous integration pipeline includes [Netlify Deploy Preview](https://docs.netlify.com/site-deploys/deploy-previews/). 
     1. To use this you'll need to get your changes online - after you've made your first commit on your feature branch, make a *draft* pull request. 
     2. After the build steps are complete, you'll have access to a __Deploy Preview__ tab that will run your changes on the web, rebuilding after each commit is pushed. 
@@ -441,49 +437,24 @@ Now you'll need a way to see your changes, which means you'll need a running ver
   
 ## Contributing translations
 
-#### Notice: We have paused all translation contributions. 
-> **IMPORTANT:** 
-> We are currently working toward a more streamlined translations workflow. As long as this notice is posted, we will _not_ be accepting any translation submissions. 
-
-We highly encourage community translations! We no longer have professional translations, and we believe in the power of our community to provide accurate and helpful translations.
+We use Crowdin to manage our translations in multiple languages and achieve automatic translation with artificial intelligence. Since these translations can be inefficient in some cases, we need help from the community to provide accurate and helpful translations.
 
 The documentation is translated into these languages:
+
+- Chinese Simplified (`zh-cn`)
+- Chinese Traditional (`zh-tw`)
 - English (`en`)
-- Spanish (`es`)
 - French (`fr`)
+- German (`de`)
 - Italian (`it`)
-- Indonesian (`id`)
 - Japanese (`ja`)
 - Korean (`ko`)
 - Brazilian Portuguese (`pt-br`)
-- Russian (`ru`)
-- Slovak (`sk`)
-- Thai (`th`)
-- Turkish (`tr`)
-- Ukrainian (`uk`)
-- Uzbek (`uz`)
-- Simplified Chinese (`zh-cn`)
-- Traditional Chinese (`zh-tw`)
+- Spanish (`es`)
 
-### Adding New Full Site Translations
+### How to translate
 
-If you find a translation is missing from the list you can create a new one.
+1. Request to join the Express.js Website project on [Crowdin](https://express.crowdin.com/website)
+2. [Select the language you want to translate](https://support.crowdin.com/joining-translation-project/#starting-translation)
+3. [Start translating](https://support.crowdin.com/online-editor/)
 
-To translate Expressjs.com into a new language, follow these steps:
-
-1. Clone the [`expressjs.com`](https://github.com/expressjs/expressjs.com) repository.
-2. Create a directory for the language of your choice using its [ISO 639-1 code](https://www.loc.gov/standards/iso639-2/php/code_list.php) as its name.
-3. Copy `index.md`, `api.md`, `starter/`, `guide/`, `advanced/`, `resources/`, `4x/`, and `3x/`, to the language directory.
-4. Remove the link to 2.x docs from the "API Reference" menu.
-5. Update the `lang` variable in the copied markdown files.
-6. Update the `title` variable in the copied markdown files.
-7. Create the header, footer, notice, and announcement file for the language in the `_includes/` directory, in the respective directories, and make necessary edits to the contents.
-8. Create the announcement file for the language in the `_includes/` directory.
-9. Make sure to append `/{{ page.lang }}` to all the links within the site.
-10. Update the [CONTRIBUTING.md](https://github.com/expressjs/expressjs.com/blob/gh-pages/CONTRIBUTING.md#contributing-translations)  and the `.github/workflows/translation.yml` files with the new language. 
-
-### Adding Page and Section Translations
-
-Many site translations are still missing pages. To find which ones we need help with, you can [filter for merged PRs](https://github.com/expressjs/expressjs.com/pulls?q=is%3Apr+is%3Aclosed+label%3Arequires-translation-es) that include the tag for your language, such as `requires-translation-es` for requires Spanish translation.   
-
-If you contribute a page or section translation, please reference the original PR. This helps the person merging your translation to remove the tag from the original PR.

@@ -7,7 +7,7 @@ lang: ja
 redirect_from: "  "
 ---
 
-# FAQ
+# よくある質問
 
 ## どのようにしてアプリケーションを構成するのですか?
 
@@ -93,7 +93,7 @@ middleware function.
 
 ## What version of Node.js does Express require?
 
-- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
-- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
+- [Express 4.x](/{{ page.lang }}/4x/api.html) には Node.js 0.10 以上が必要です。
+- [Express 5.x](/{{ page.lang }}/5x/api.html) には Node.js 18 以上が必要です。
 
 ### [Previous: More examples ](/{{ page.lang }}/starter/examples.html)

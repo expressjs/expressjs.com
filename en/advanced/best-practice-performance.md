@@ -143,8 +143,7 @@ Additionally, using `uncaughtException` is officially recognized as [crude](http
 
 We also don't recommend using [domains](https://nodejs.org/api/domain.html). It generally doesn't solve the problem and is a deprecated module.
 
-## Things to do in your environment / setup
-{#in-environment}
+## Things to do in your environment / setup {#in-environment}
 
 Here are some things you can do in your system environment to improve your app's performance:
 

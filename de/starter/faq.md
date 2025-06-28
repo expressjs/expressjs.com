@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Häufig gestellte Fragen zu Express
-description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
+description: Finden Sie Antworten auf häufig gestellte Fragen zu Express.js, darunter Themen wie Anwendungsstruktur, Models, Authentifizierung, Template-Engines, Fehlerbehandlung und mehr.
 menu: starter
 lang: de
 redirect_from: "  "
@@ -73,7 +73,7 @@ Das ist nicht Ihre Aufgabe! Sie müssen kein HTML-Format mit der Funktion `res.r
 Verwenden Sie die Funktion `res.sendFile()`, wenn Sie es mit einer bestimmten Datei zu tun haben.
 Wenn Sie viele Assets aus einem Verzeichnis bedienen müssen, verwenden Sie die Middlewarefunktion `express.static()`.
 
-## What version of Node.js does Express require?
+## Welche Version von Node.js benötigt Express?
 
 - [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
 - [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
