@@ -321,15 +321,6 @@ a {
   text-underline-offset: 3px;
 }
 
-#doc-langs {
-  text-align: center;
-  font-size: 12px;
-}
-
-#doc-langs p {
-  margin: 3px 0;
-}
-
 .header-right {
   display: flex;
   align-items: center;
@@ -1297,10 +1288,6 @@ h2 a {
     width: 100%;
     display: flex;
     justify-content: center;
-  }
-
-  #doc-langs {
-    font-size: 11px;
   }
 
   .header-right {
