@@ -29,7 +29,7 @@ app.listen(port, () => {
 
 La aplicación inicia un servidor y escucha las conexiones en el puerto 3000. La aplicación responde con "Hello World!" para las solicitudes al URL raíz (`/`) o a la _ruta_ raíz. Para cada vía de acceso diferente, responderá con un error **404 Not Found**.
 
-### Running Locally
+### Ejecutando localmente
 
 En primer lugar, cree un directorio denominado `myapp`, cámbielo y ejecute `npm init`. A continuación, instale `express` como una dependencia, según se describe en la [guía de instalación](/{{ page.lang }}/starter/installing.html).
 

@@ -144,9 +144,7 @@ Inoltre, l'utilizzo di `uncaughtException` è ufficialmente riconosciuto come [n
 
 Inoltre, non si consiglia di utilizzare l'opzione [domini](https://nodejs.org/api/domain.html). Solitamente non risolve il problema ed è considerato un modulo obsoleto.
 
-## Things to do in your environment / setup
-
-{#in-environment}
+## Operazioni da effettuare nell'ambiente / configurazione
 
 Di seguito sono elencate alcune operazioni che è possibile effettuare nell'ambiente del sistema per migliorare le prestazioni dell'applicazione:
 

@@ -276,7 +276,7 @@ not need high
 visibility or maintainer input. 
 ## Security Policies and Procedures
 
-<!-- SRC: expressjs/express Security.md -->
+<!-- SRC: expressjs/express SECURITY.md -->
 
 This document outlines security procedures and general policies for the Express
 project.

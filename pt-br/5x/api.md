@@ -13,9 +13,7 @@ redirect_from: "  "
 
 {% capture node-version %}
 
-```
 Express 5.0 requires Node.js 18 or higher.
-```
 
 {% endcapture %}
 
