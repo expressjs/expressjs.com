@@ -9,8 +9,15 @@ Exceptions: Sub-apps will inherit the value of `trust proxy` even though it has 
 Sub-apps will not inherit the value of `view cache` in production (when `NODE_ENV` is "production").
 
 <div class="table-scroller">
-  <table class="doctable" border="1">
-    <thead><tr><th id="app-settings-property">Property</th><th>Type</th><th>Description</th><th>Default</th></tr></thead>
+  <table>
+    <thead>
+      <tr>
+        <th id="app-settings-property">Property</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
     <tbody>
     <tr>
   <td markdown="1">
@@ -193,6 +200,7 @@ A custom query string parsing function will receive the complete query string, a
     </tr>
     </tbody>
   </table>
+  </div>
 
   <h5 id="trust.proxy.options.table">Options for `trust proxy` setting</h5>
 
@@ -201,7 +209,8 @@ A custom query string parsing function will receive the complete query string, a
   information.
   </p>
 
-  <table class="doctable" border="1">
+<div class="table-scroller">
+  <table>
     <thead><tr><th>Type</th><th>Value</th></tr></thead>
     <tbody>
       <tr>
@@ -271,6 +280,7 @@ app.set('trust proxy', function (ip) {
       </tr>
     </tbody>
   </table>
+</div>
 
   <h5 id="etag.options.table">Options for `etag` setting</h5>
 
@@ -285,7 +295,8 @@ The [express.static](#express.static) middleware ignores these settings.
   For more information, see its documentation.
   </p>
 
-  <table class="doctable" border="1">
+<div class="table-scroller">
+  <table>
     <thead><tr><th>Type</th><th>Value</th></tr></thead>
     <tbody>
       <tr>

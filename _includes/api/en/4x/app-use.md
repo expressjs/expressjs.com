@@ -66,7 +66,7 @@ The following table provides some simple examples of valid `path` values for
 mounting middleware.
 
 <div class="table-scroller">
-<table class="doctable" border="1">
+<table>
 
 <thead>
 <tr>
@@ -166,7 +166,7 @@ app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
 The following table provides some simple examples of middleware functions that
 can be used as the `callback` argument to `app.use()`, `app.METHOD()`, and `app.all()`.
 
-<table class="doctable" border="1">
+<table>
 
 <thead>
 <tr>
@@ -282,6 +282,7 @@ app.use(mw1, [mw2, r1, r2], subApp)
 </tbody>
 
 </table>
+</div>
 
 Following are some examples of using the [express.static](/{{page.lang}}/guide/using-middleware.html#middleware.built-in)
 middleware in an Express app.
