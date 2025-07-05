@@ -8,11 +8,11 @@ html.dark-mode {
     height: 27px;
   }
 
-  .hidden-light {
+  .openjs-light {
     display: block;
   }
 
-  .hidden-dark {
+  .openjs-dark {
     display: none;
   }
 
