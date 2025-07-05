@@ -749,12 +749,13 @@ footer {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer-social {
   display: flex;
   gap: 20px;
-  font-size: 20px;
 }
 
 /* icons */
