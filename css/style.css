@@ -396,7 +396,7 @@ pre:has(code) button {
   &::after {
   content: "";
   background-color: var(--card-fg);
-  mask-image: url("../images/copy-btn.svg");
+  mask-image: url("/images/copy-btn.svg");
   mask-size: 1.5rem;
   mask-repeat: no-repeat;
   width: 1.5rem;
@@ -774,7 +774,7 @@ svg.X-icon {
 
 /* theme and lang btn */
 button.theme-btn {
-  background-image: url(../images/moon.svg);
+  background-image: url(/images/moon.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
