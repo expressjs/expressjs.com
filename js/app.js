@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // display current language in language picker component
+  const languageElement = document.getElementById('languageData');
+  const languagesData = languageElement ? JSON.parse(languageElement.dataset.languages) : [];
+
+  const langDisplay = document.getElementById('current-lang');
+
+  if (langDisplay) {
+    const currentLanguage = window.location.pathname.split('/')[1];
+    const matchedLang = languagesData.find(lang => lang.code === currentLanguage);
+    langDisplay.textContent = matchedLang ? matchedLang.name : 'English';
+  }
 
   // scroll to top of the page
   document.getElementById("top")?.addEventListener("click", function (e) {
@@ -70,18 +81,18 @@ $(function(){
   var parentMenuSelector;
   var lastApiPrefix;
 
-  if (document.readyState !== 'loading') {
-    const languageElement = document.getElementById('languageData');
-    const languagesData = languageElement ? JSON.parse(languageElement.dataset.languages) : [];
+  // if (document.readyState !== 'loading') {
+  //   const languageElement = document.getElementById('languageData');
+  //   const languagesData = languageElement ? JSON.parse(languageElement.dataset.languages) : [];
 
-    const langDisplay = document.getElementById('current-lang');
+  //   const langDisplay = document.getElementById('current-lang');
 
-    if (langDisplay) {
-      const currentLanguage = window.location.pathname.split('/')[1];
-      const matchedLang = languagesData.find(lang => lang.code === currentLanguage);
-      langDisplay.textContent = matchedLang ? matchedLang.name : 'English';
-    }  
-  }
+  //   if (langDisplay) {
+  //     const currentLanguage = window.location.pathname.split('/')[1];
+  //     const matchedLang = languagesData.find(lang => lang.code === currentLanguage);
+  //     langDisplay.textContent = matchedLang ? matchedLang.name : 'English';
+  //   }  
+  // }
 
   $(document).scroll(function() {
     var h = closest();
