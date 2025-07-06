@@ -760,7 +760,8 @@ footer {
 
 /* icons */
 svg.github-icon,
-svg.X-icon {
+svg.X-icon,
+svg.moon-icon {
     fill : var(--card-fg)
 }
 
