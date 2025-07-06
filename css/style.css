@@ -728,14 +728,6 @@ footer {
   gap: 20px;
 }
 
-#footer-copyright a {
-  width: fit-content;
-}
-
-#footer-copyright img {
-  max-width: 125px;
-}
-
 #footer-policy {
   display: flex;
   flex-wrap: wrap;
@@ -768,6 +760,7 @@ a.openjs-logo {
   display: inline-block;
   width: 125px;
   height: 39px;
+  cursor: pointer;
 }
 
 span.openjs-img {
@@ -777,7 +770,6 @@ span.openjs-img {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-
   background-image: url("https://raw.githubusercontent.com/openjs-foundation/artwork/main/openjs_foundation/openjs_foundation-logo-horizontal-color.svg");
 }
 
@@ -792,17 +784,14 @@ button.theme-btn {
   height: 32px;
   border: none;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
-button.theme-btn,
 button.lang-btn {
-  cursor: pointer;
   appearance: none;
   background-color: inherit;
   border: 0;
-}
-
-button.lang-btn {
+  cursor: pointer;
   color: var(--card-fg);
   padding: 0.2rem;
   font-size: inherit;
