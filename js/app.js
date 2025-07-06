@@ -1,24 +1,51 @@
+document.addEventListener("DOMContentLoaded", function () {
+
+  // scroll to top of the page
+  document.getElementById("top")?.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  });
+
+  // add/remove class 'scroll' on verticle scroll by 5px
+  let added = false;
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 5) {
+      if (added) return;
+      added = true;
+      document.body.classList.add('scroll');
+    } else {
+      document.body.classList.remove('scroll');
+      added = false;
+    }
+  });
+});
+
+
+
 $(function(){
   var doc = $(document);
 
   // top link
-  $('#top').click(function(e){
-    $('html, body').animate({scrollTop : 0}, 500);
-    return false;
-  });
+  // $('#top').click(function(e){
+  //   $('html, body').animate({scrollTop : 0}, 500);
+  //   return false;
+  // });
 
   // scrolling links
-  var added;
-  doc.scroll(function(e){
-    if (doc.scrollTop() > 5) {
-      if (added) return;
-      added = true;
-      $('body').addClass('scroll');
-    } else {
-      $('body').removeClass('scroll');
-      added = false;
-    }
-  })
+  // var added;
+  // doc.scroll(function(e){
+  //   if (doc.scrollTop() > 5) {
+  //     if (added) return;
+  //     added = true;
+  //     $('body').addClass('scroll');
+  //   } else {
+  //     $('body').removeClass('scroll');
+  //     added = false;
+  //   }
+  // })
 
   // menu bar
 
@@ -117,6 +144,11 @@ function readCookie(name) {
   return null;
 }
 
+/*
+
+Investigate following function
+
 function eraseCookie(name) {
   createCookie(name, "", -1);
 }
+*/

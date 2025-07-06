@@ -481,14 +481,14 @@ pre:has(code) button.failed {
   }
 }
 
-/* top button */
+/* scroll to top button */
 
-.scroll #top {
+body.scroll #top {
   opacity: .5;
   display: initial
 }
 
-.scroll #top:hover {
+body.scroll #top:hover {
   opacity: 1;
 }
 
