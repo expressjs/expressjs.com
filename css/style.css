@@ -764,23 +764,34 @@ svg.X-icon {
     fill : var(--box-fg)
 }
 
-.openjs-dark {
-  display: block;
+a.openjs-logo {
+  display: inline-block;
+  width: 125px;
+  height: 39px;
 }
 
-.openjs-light {
-  display: none;
+span.openjs-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  background-image: url("https://raw.githubusercontent.com/openjs-foundation/artwork/main/openjs_foundation/openjs_foundation-logo-horizontal-color.svg");
 }
 
 /* theme and lang btn */
 button.theme-btn {
-  background-image: url(/images/moon.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  background-color: var(--box-fg);         
+  mask-image: url("/images/moon.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
   width: 32px;
   height: 32px;
-  color: var(--box-fg);
+  border: none;
+  background-repeat: no-repeat;
 }
 
 button.theme-btn,

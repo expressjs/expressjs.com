@@ -1,15 +1,11 @@
 html.dark-mode {
 
   button.theme-btn {
-    background-image: url(/images/sun.svg);
+    mask-image: url(/images/sun.svg);
   }
 
-  .openjs-light {
-    display: block;
-  }
-
-  .openjs-dark {
-    display: none;
+  span.openjs-img {
+    background-image: url("https://raw.githubusercontent.com/openjs-foundation/artwork/main/openjs_foundation/openjs_foundation-logo-horizontal-white.svg");
   }
 
   .submenu-content {
