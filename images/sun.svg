@@ -1,0 +1,23 @@
+<!--
+  Made by ShubhamOulkar: https://github.com/ShubhamOulkar/svg-icons
+  License: MIT
+-->
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(4 4)" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+<!--Central circle with radius 8-->
+    <circle cx="12" cy="12" r="7.5"/>
+<!--12 outward lines starting from y = -2 to y = 1-->
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(0 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(30 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(60 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(90 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(120 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(150 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(180 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(210 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(240 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(270 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(300 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(330 12 12)"/>
+  </g>
+</svg>

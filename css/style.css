@@ -667,7 +667,7 @@ table ul {
   width: 200px;
 }
 
-.button {
+div.header-btn {
   display: block;
   padding: 3px 5px;
   border-radius: 3px;
@@ -760,9 +760,8 @@ footer {
 
 /* icons */
 svg.github-icon,
-svg.X-icon,
-svg.moon-icon {
-    fill : var(--card-fg)
+svg.X-icon {
+    fill : var(--box-fg)
 }
 
 .openjs-dark {
@@ -774,6 +773,16 @@ svg.moon-icon {
 }
 
 /* theme and lang btn */
+button.theme-btn {
+  background-image: url(../images/moon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 32px;
+  height: 32px;
+  color: var(--box-fg);
+}
+
 button.theme-btn,
 button.lang-btn {
   cursor: pointer;

@@ -1,11 +1,7 @@
 html.dark-mode {
 
-  .sun-icon {
-    background-image: url(/images/sun-icon.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    width: 27px;
-    height: 27px;
+  button.theme-btn {
+    background-image: url(../images/sun.svg);
   }
 
   .openjs-light {
