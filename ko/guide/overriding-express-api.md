@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Overriding the Express API
-description: Discover how to customize and extend the Express.js API by overriding methods and properties on the request and response objects using prototypes.
+description: 프로토타입을 사용해 request와 response 객체의 메서드와 속성을 오버라이드하여 Express.js API를 커스터마이즈하고 확장하는 방법을 알아보세요.
 menu: guide
 lang: ko
 ---

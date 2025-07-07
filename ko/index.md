@@ -1,7 +1,7 @@
 ---
 layout: home
 title: Express - Node.js web application framework
-description: "Express is a fast, unopinionated, minimalist web framework for Node.js, providing a robust set of features for web and mobile applications."
+description: "Express는 빠르고, 특정 방식에 얽매이지 않으며, 최소한의 구조를 지닌 Node.js용 웹 프레임워크로, 웹 및 모바일 애플리케이션을 위한 강력한 기능들을 제공합니다."
 menu: home
 lang: ko
 redirect_from: "  "
