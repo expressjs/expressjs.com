@@ -1,10 +1,54 @@
 $(function(){
   var doc = $(document);
 
+  // Configuration for smooth scrolling
+  var scrollDuration = 500;
+  var headerOffset = 120;
+
+  // Smooth scroll function
+  function smoothScrollToElement(target) {
+    var $target = $(target);
+    
+    // Handle IDs with dots (like express.urlencoded)
+    if (!$target.length && typeof target === 'string' && target.indexOf('.') > -1) {
+      var targetId = target.replace('#', '');
+      $target = $('[id="' + targetId + '"]');
+    }
+    
+    if ($target.length) {
+      $('html, body').animate({
+        scrollTop: $target.offset().top - headerOffset
+      }, scrollDuration);
+      return true;
+    }
+    return false;
+  }
+
   // top link
   $('#top').click(function(e){
     $('html, body').animate({scrollTop : 0}, 500);
     return false;
+  });
+
+  // Smooth scrolling for all anchor links
+  $(document).on('click', 'a[href^="#"]:not([href="#"]):not([href="#top"])', function(e) {
+    var href = $(this).attr('href');
+    if (smoothScrollToElement(href)) {
+      e.preventDefault();
+      // Update URL after scroll
+      if (history.pushState) {
+        history.pushState(null, null, href);
+      }
+    }
+  });
+
+  // Handle direct hash navigation on page load
+  $(window).on('load', function() {
+    if (window.location.hash) {
+      setTimeout(function() {
+        smoothScrollToElement(window.location.hash);
+      }, 300);
+    }
   });
 
   // scrolling links
