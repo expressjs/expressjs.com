@@ -1438,12 +1438,17 @@ h2 a {
 
 .callout {position: relative;}
 
+.mw-fig-scroll {
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
 #mw-fig { 
   border-collapse: separate; 
   padding: 0; 
   border: 0; 
   width: 960px; 
-  margin-bottom: 20px;}
+  margin-bottom: 20px;
+}
 #mw-fig-imgcell {
   margin: 0;
   padding: 0px;
@@ -1462,6 +1467,12 @@ h2 a {
   padding: 0 0 0 5px;
   border: 0;
   width: 550px;
+}
+
+@media all and (max-width: 800px) {
+  .mw-fig-scroll {
+    overflow-x: auto;
+  }
 }
 
 /* Blog page styles*/
