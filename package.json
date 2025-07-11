@@ -11,7 +11,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-markdown": "^2.2.1",
     "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0"
+    "eslint-plugin-promise": "^6.6.0"
   },
   "eslintConfig": {
     "extends": [
