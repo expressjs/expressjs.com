@@ -2,7 +2,7 @@
 layout: middleware
 title: Express morgan middleware
 menu: resources
-lang: en
+lang: es
 redirect_from: '  '
 module: morgan
 ---

@@ -3,7 +3,7 @@ layout: page
 title: Desarrollo de motores de plantilla para Express
 description: Learn how to develop custom template engines for Express.js using app.engine(), with examples on creating and integrating your own template rendering logic.
 menu: advanced
-lang: en
+lang: es
 redirect_from: "  "
 ---
 
