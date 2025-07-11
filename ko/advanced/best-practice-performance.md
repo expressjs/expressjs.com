@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 프로덕션 환경에서의 Express 사용을 위한 성능 우수 사례
-description: Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.
+description: Express 애플리케이션의 프로덕션 환경에서 성능과 안정성을 최적화하기 위한 모범 사례를 알아봅니다. 여기에는 코드 최적화와 최적의 성능을 위한 환경 설정이 포함됩니다.
 menu: advanced
 lang: ko
 redirect_from: "  "
@@ -55,11 +55,11 @@ app.use(compression())
 
 Node 및 다수의 모듈은 동기식 및 비동기식 버전의 함수를 제공하지만, 프로덕션 환경에서는 항상 비동기식 버전을 사용하십시오. 동기식 함수의 사용이 정당화되는 유일한 경우는 초기 시작 시에 사용되는 경우입니다.
 
-You can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. 물론, 프로덕션 환경에서 이러한 플래그를 실제로 사용해서는 안 되며, 이는 코드가 프로덕션 환경에서 사용될 준비가 되었다는 것을 보장하기 위한 것입니다. 자세한 정보는 [node 커맨드라인 옵션 문서](https://nodejs.org/api/cli.html#cli_trace_sync_io)를 참조하십시오.
+애플리케이션이 동기 API를 사용할 때마다 경고 메시지와 스택 트레이스를 출력하려면 --trace-sync-io 명령줄 플래그를 사용할 수 있습니다. 물론, 프로덕션 환경에서 이러한 플래그를 실제로 사용해서는 안 되며, 이는 코드가 프로덕션 환경에서 사용될 준비가 되었다는 것을 보장하기 위한 것입니다. 자세한 정보는 [node 커맨드라인 옵션 문서](https://nodejs.org/api/cli.html#cli_trace_sync_io)를 참조하십시오.
 
 ### Do logging correctly
 
-일반적으로 앱은 디버깅 그리고 앱 활동 로깅(사실상 디버깅 이외의 모든 것)이라는 두 가지 이유로 인해 로깅을 실행합니다. `console.log()` 또는 `console.err()`을 사용하여 터미널에 로그 메시지를 출력하는 것이 일반적인 개발 작업 방식입니다. But [these functions are synchronous](https://nodejs.org/api/console.html#console) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
+일반적으로 앱은 디버깅 그리고 앱 활동 로깅(사실상 디버깅 이외의 모든 것)이라는 두 가지 이유로 인해 로깅을 실행합니다. `console.log()` 또는 `console.err()`을 사용하여 터미널에 로그 메시지를 출력하는 것이 일반적인 개발 작업 방식입니다. 단, [이 함수들은](https://nodejs.org/api/console.html#console) 출력 대상이 터미널이나 파일일 경우 동기적으로 동작하므로, 출력 결과를 다른 프로그램으로 파이프하지 않는 이상 프로덕션 환경에서는 적합하지 않습니다.
 
 #### For debugging
 
