@@ -1251,10 +1251,6 @@ h2 a {
     margin-bottom: 35px;
   }
 
-  #description .express {
-    display: none;
-  }
-
   #description .description {
     font-size: 3em;
     line-height: .9em;
@@ -1415,10 +1411,6 @@ h2 a {
 @media all and (max-width: 420px) {
   #app-settings-property {
     width: auto;
-  }
-
-  #description .express {
-    display: none;
   }
 }
 
