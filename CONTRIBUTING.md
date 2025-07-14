@@ -73,7 +73,7 @@ But just in case you need a little extra explanation, this section below outline
 **Includes Partials and Layout Templates**
 - `_includes` are partials that are imported and reused across multiple pages.
   - These are used to import text content for reuse across pages, such as the API documentation, e.g., `_includes > api > en > 5x`, which is included in every language.
-  - These are used to include the page components that make up site-wide user interface and periphery structure, e.g., Header, Footer, svg icons, etc.
+  - These are used to include the page components that make up site-wide user interface and periphery structure, e.g., Header, Footer, etc.
 - `_layouts` are the templates used to wrap the site's individual pages. 
   - These are used to display the structure of the site's periphery, such as the header and footer, and for injecting and displaying individual markdown pages inside the `content` tag.
 
@@ -84,9 +84,6 @@ follow the specific instructions for [How to write a blog post.](https://express
 
 **CSS or Javascript**
 - All css and js files are kept in `css` and `js` folders on the project root.
-
-**SVG Flag Icons**
-- The SVG flag icons used in this project were sourced from [Nucleo SVG Flag Icons.](https://nucleoapp.com/svg-flag-icons)
 
 The Express JS website is build using [Jeykyll](https://jekyllrb.com/) and is hosted on [Github Pages](https://pages.github.com/).
 
