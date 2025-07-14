@@ -14,7 +14,6 @@
       {% for lang in site.data.languages %}
       <li class="submenu">
         <a href="/{{ lang.code }}/{{ url_remainder }}">
-          {% include icons/flags/{{ lang.code }}.svg %}
           {% if lang.code == current_lang %}
             <strong>{{ lang.name }}</strong>
           {% else %}
