@@ -6,9 +6,13 @@ The `size` parameter is the maximum size of the resource.
 
 The `options` parameter is an object that can have the following properties.
 
+<div class="table-scroller" markdown="1">
+
 | Property    | Type |  Description                                                     |
 |-------------|-------------------------------------------------------------------------|
-| `combine`   | Boolean | Specify if overlapping & adjacent ranges should be combined, defaults to `false`. When `true`, ranges will be combined and returned as if they were specified that way in the header.
+| `combine`   | Boolean | Specify if overlapping & adjacent ranges should be combined, defaults to `false`. When `true`, ranges will be combined and returned as if they were specified that way in the header.|
+
+</div>
 
 An array of ranges will be returned or negative numbers indicating an error parsing.
 
