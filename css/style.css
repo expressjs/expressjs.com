@@ -1788,8 +1788,4 @@ blockquote {
   #boxes {
     grid-template-columns: 1fr;
   }
-  
-  #langbar a {
-    padding-left: 39vw;
-  }
 }
