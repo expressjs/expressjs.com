@@ -24,7 +24,7 @@ If the current middleware function does not end the request-response cycle, it m
 
 The following figure shows the elements of a middleware function call:
 
-<div class="mw-fig-scroll">
+<div class="table-scroller">
 <table id="mw-fig">
 <tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
