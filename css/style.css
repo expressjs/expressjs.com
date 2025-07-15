@@ -7,7 +7,7 @@
 /* handle header offset with scroll-margin */
 h1, h2, h3, h4, h5, h6,
 [id] {
-  scroll-margin-top: 120px;
+  scroll-margin-top: 60px;
 }
 
 /* Respect user motion preferences for access */
