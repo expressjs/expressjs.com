@@ -3,7 +3,6 @@ layout: page
 title: Express に関する FAQ
 description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
-lang: ja
 redirect_from: "  "
 ---
 

@@ -3,7 +3,6 @@ layout: page
 title: Express 5로의 마이그레이션
 description: A comprehensive guide to migrating your Express.js applications from version 4 to 5, detailing breaking changes, deprecated methods, and new improvements.
 menu: guide
-lang: ko
 redirect_from: "  "
 ---
 

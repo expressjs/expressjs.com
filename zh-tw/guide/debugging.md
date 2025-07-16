@@ -3,7 +3,6 @@ layout: page
 title: 對 Express 除錯
 description: Learn how to enable and use debugging logs in Express.js applications by setting the DEBUG environment variable for enhanced troubleshooting.
 menu: guide
-lang: zh-tw
 redirect_from: "  "
 ---
 
