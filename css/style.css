@@ -9,23 +9,8 @@ body {
   margin: 0;
   padding: 0;
   color: var(--fg);
-  display: grid;
-  grid-template-areas:
-  'header'
-  'content'
-  'footer'
-}
-
-header {
-  grid-area: header;
-}
-
-.content {
-  grid-area: content;
-}
-
-footer {
-  grid-area: footer;
+  display: flex;
+  flex-direction: column;
 }
 
 body.no-scroll{
