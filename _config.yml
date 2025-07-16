@@ -14,6 +14,61 @@ defaults:
       layout: "post"
       menu: blog
       lang: en
+  -
+    scope:
+      path: "en"
+    values:
+      lang: en
+  - 
+    scope:
+      path: "index.md"
+    values:
+      lang: en
+  -
+    scope:
+      path: "de"
+    values:
+      lang: de
+  -
+    scope:
+      path: "es"
+    values:
+      lang: es
+  -
+    scope:
+      path: "fr"
+    values:
+      lang: fr
+  -
+    scope:
+      path: "it"
+    values:
+      lang: it
+  -
+    scope:
+      path: "ja"
+    values:
+      lang: ja
+  -
+    scope:
+      path: "ko"
+    values:
+      lang: ko
+  -
+    scope:
+      path: "pt-br"
+    values: 
+      lang: "pt-br"  
+  -
+    scope:
+      path: "zh-ch"
+    values: 
+      lang: "zh-ch"
+  -
+    scope:
+      path: "zh-tw"
+    values:
+      lang: "zh-tw"
 
 announcement: true # Enable or disable the announcements.
 
