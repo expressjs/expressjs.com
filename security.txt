@@ -1,0 +1,2 @@
+Contact: express-security@lists.openjsf.org
+Policy: https://github.com/expressjs/express/security/policy
