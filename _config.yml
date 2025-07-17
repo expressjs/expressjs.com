@@ -61,9 +61,9 @@ defaults:
       lang: "pt-br"  
   -
     scope:
-      path: "zh-ch"
+      path: "zh-cn"
     values: 
-      lang: "zh-ch"
+      lang: "zh-cn"
   -
     scope:
       path: "zh-tw"
