@@ -779,18 +779,6 @@ button.lang-btn {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-
-  &::after {
-    content: "";
-    display: block;
-    width: 0.8em;
-    height: 0.5em;
-    background-color: var(--card-fg);
-    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-    cursor: pointer;
-    pointer-events: none;
-    transition: transform 0.2s ease-in-out;
-  }
 }
 
 div.desktop-lang-switcher {
@@ -832,11 +820,6 @@ div.desktop-lang-switcher {
         background: var(--hover-bg);
       }
     }
-  }
-
-  /* rotate arrow */
-  &:is(:hover,:focus-within) button.lang-btn::after {
-    transform: rotate(180deg);
   }
 }
 
