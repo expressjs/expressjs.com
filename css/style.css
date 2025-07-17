@@ -9,25 +9,9 @@ body {
   margin: 0;
   padding: 0;
   color: var(--fg);
-  display: grid;
-  grid-template-areas:
-  'header'
-  'content'
-  'footer'
+  display: flex;
+  flex-direction: column;
 }
-
-header {
-  grid-area: header;
-}
-
-.content {
-  grid-area: content;
-}
-
-footer {
-  grid-area: footer;
-}
-
 
 body.no-scroll{
   overflow: hidden;
