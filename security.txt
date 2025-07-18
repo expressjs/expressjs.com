@@ -1,3 +1,4 @@
+# Our security contact
 Contact: express-security@lists.openjsf.org
 # Our security policy
 Policy: https://github.com/expressjs/express/security/policy
