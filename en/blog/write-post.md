@@ -3,7 +3,6 @@ layout: post
 title: How to write a blog post
 description: Learn how to propose and write a blog post for the Express.js blog, including submission guidelines and steps to contribute your content.
 menu: blog
-lang: en
 redirect_from: "/blog/write.html"
 ---
 

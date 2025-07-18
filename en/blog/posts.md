@@ -3,7 +3,6 @@ layout: post
 title: Express Blog Posts
 description: Explore the latest articles, announcements, and updates from the Express.js team and community on the Express blog.
 menu: blog
-lang: en
 redirect_from: "/blog/posts.html"
 ---
  
