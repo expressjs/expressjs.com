@@ -31,6 +31,7 @@ contrário, a solicitação ficará suspensa.
 
 O exemplo a seguir mostra os elementos de uma chamada de função de middleware:
 
+<div class="table-scroller">
 <table id="mw-fig">
 <tbody><tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
@@ -49,6 +50,7 @@ O exemplo a seguir mostra os elementos de uma chamada de função de middleware:
 <div class="callout" id="callout6">Argumento de <a href="../4x/api.html#req">solicitação</a> HTTP para a função de middleware, chamado de "req" por convenção.</div>
 </td></tr>
 </table>
+</div>
 
 Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
 

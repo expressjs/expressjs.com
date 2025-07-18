@@ -23,6 +23,7 @@ _ミドルウェア_ 関数は、[リクエストオブジェクト](/{{ page.la
 
 次の例は、ミドルウェア関数呼び出しの要素を示しています。
 
+<div class="table-scroller">
 <table id="mw-fig">
 <tbody><tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
@@ -41,6 +42,7 @@ _ミドルウェア_ 関数は、[リクエストオブジェクト](/{{ page.la
 <div class="callout" id="callout6">ミドルウェア関数への HTTP <a href="../4x/api.html#req">リクエスト</a>引数 (慣習的に「req」と呼ばれます)。</div>
 </td></tr>
 </table>
+</div>
 
 Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
 

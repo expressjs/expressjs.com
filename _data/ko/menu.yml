@@ -7,14 +7,14 @@ hello_world: Hello world
 generator: Express 생성기
 basic_routing: 기본 라우팅
 static_files: 정적 파일
-examples: More examples
+examples: 더 많은 예시
 faq: 자주 묻는 질문(FAQ)
 # Guide
 guide: Gu안내서ide
 routing: 라우팅
 writing_middleware: 미들웨어 작성
 using_middleware: 미들웨어 사용
-overriding_express_api: Overriding the Express API
+overriding_express_api: Express API 오버라이딩
 using_template_engines: 템플리트 엔진 사용
 error_handling: 오류 처리
 debugging: 디버깅
@@ -40,13 +40,13 @@ resources: 자원
 glossary: 용어집
 middleware: 미들웨어
 community: 커뮤니티
-utils: Utility modules
-contributing: Contributing to Express
-changelog: Release Change Log
+utils: 유틸리티 모듈
+contributing: Express에 기여하기
+changelog: 릴리즈 변경 로그
 # Support
-support: Support
+support: 지원
 # Blog
 blog: Blog
-latest_post: Latest post
-all_posts: All posts
-write_post: Write a Post
+latest_post: 최신 게시물
+all_posts: 모든 게시물
+write_post: 게시물 작성
