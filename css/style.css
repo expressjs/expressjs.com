@@ -1211,6 +1211,7 @@ h2 a {
   .table-scroller {
     width: 100%;
     overflow: scroll;
+    scrollbar-width: thin;
   }
 
   code {
@@ -1436,7 +1437,8 @@ h2 a {
   padding: 0; 
   border: 0; 
   width: 960px; 
-  margin-bottom: 20px;}
+  margin-bottom: 20px;
+}
 #mw-fig-imgcell {
   margin: 0;
   padding: 0px;
