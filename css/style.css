@@ -762,16 +762,6 @@ a.openjs-logo {
   cursor: pointer;
 }
 
-span.openjs-img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  background-image: url("https://raw.githubusercontent.com/openjs-foundation/artwork/main/openjs_foundation/openjs_foundation-logo-horizontal-color.svg");
-}
-
 /* theme and lang btn */
 button.theme-btn {
   background-color: var(--box-fg);         
