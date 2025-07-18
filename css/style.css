@@ -750,6 +750,10 @@ footer {
   gap: 20px;
 }
 
+.footer-social a {
+  color: inherit;
+}
+
 /* icons */
 a.openjs-logo {
   display: inline-block;
