@@ -3,7 +3,6 @@ layout: page
 title: Installation d'Express
 description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
 menu: starter
-lang: fr
 redirect_from: "  "
 ---
 

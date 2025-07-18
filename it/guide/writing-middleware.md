@@ -3,7 +3,6 @@ layout: page
 title: Compilazione del middleware per l'utilizzo nelle applicazioni Express
 description: Learn how to write custom middleware functions for Express.js applications, including examples and best practices for enhancing request and response handling.
 menu: guide
-lang: it
 redirect_from: "  "
 ---
 

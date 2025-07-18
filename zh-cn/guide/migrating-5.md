@@ -3,7 +3,6 @@ layout: page
 title: 迁移到 Express 5
 description: A comprehensive guide to migrating your Express.js applications from version 4 to 5, detailing breaking changes, deprecated methods, and new improvements.
 menu: guide
-lang: en
 redirect_from: "  "
 ---
 
@@ -51,7 +50,7 @@ You can find the list of available codemods [here](https://github.com/expressjs/
   <li><a href="#req.param">req.param(name)</a></li>
   <li><a href="#res.json">res.json(obj, status)</a></li>
   <li><a href="#res.jsonp">res.jsonp(obj, status)</a></li>
-  <li><a href="#magic-redirect">res.redirect('back') and res.location('back')</a></li>  
+  <li><a href="#magic-redirect">res.redirect('back') and res.location('back')</a></li>
   <li><a href="#res.redirect">res.redirect(url, status)</a></li>
   <li><a href="#res.send.body">res.send(body, status)</a></li>
   <li><a href="#res.send.status">res.send(status)</a></li>
@@ -325,6 +324,15 @@ app.get('/user', (req, res) => {
 
 在 Express 5 中，`res.sendfile()` 函数已由驼峰式大小写版本 `res.sendFile()` 替换。
 
+**Note:** In Express 5, `res.sendFile()` uses the `mime-types` package for MIME type detection, which returns different Content-Type values than Express 4 for several common file types:
+
+- JavaScript files (.js): now "text/javascript" instead of "application/javascript"
+- JSON files (.json): now "application/json" instead of "text/json"
+- CSS files (.css): now "text/css" instead of "text/plain"
+- XML files (.xml): now "application/xml" instead of "text/xml"
+- Font files (.woff): now "font/woff" instead of "application/font-woff"
+- SVG files (.svg): now "image/svg+xml" instead of "application/svg+xml"
+
 {% include admonitions/note.html content=codemod-deprecated-signatures %}
 
 ```js
@@ -347,6 +355,15 @@ The `router.param(fn)` signature was used for modifying the behavior of the `rou
 
 In Express 5, `mime` is no longer an exported property of the `static` field.
 Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work with MIME type values.
+
+**Important:** This change affects not only direct usage of `express.static.mime` but also other Express methods that rely on MIME type detection, such as `res.sendFile()`. The following MIME types have changed from Express 4:
+
+- JavaScript files (.js): now served as "text/javascript" instead of "application/javascript"
+- JSON files (.json): now served as "application/json" instead of "text/json"
+- CSS files (.css): now served as "text/css" instead of "text/plain"
+- HTML files (.html): now served as "text/html; charset=utf-8" instead of just "text/html"
+- XML files (.xml): now served as "application/xml" instead of "text/xml"
+- Font files (.woff): now served as "font/woff" instead of "application/font-woff"
 
 ```js
 // v4

@@ -1,9 +1,8 @@
 ---
 layout: home
-title: Express - Node.js web application framework
-description: "Express is a fast, unopinionated, minimalist web framework for Node.js, providing a robust set of features for web and mobile applications."
+title: Express - Node.js web 应用框架
+description: "Express 是 Node.js 的一个快速、灵活、极简的Web框架，为网页和移动应用提供了一套强大的功能特性。"
 menu: home
-lang: en
 redirect_from: "  "
 ---
 
@@ -11,7 +10,7 @@ redirect_from: "  "
   <div id="homepage-leftpane" class="pane">
     <section id="description">
         <div class="express"><a href="/">Express</a><a href="{{ page.lang }}/changelog/4x.html#{{ site.data.express.current_version }}" id="express-version">{{ site.data.express.current_version }}</a></div>
-        <h1 class="description">Fast, unopinionated, minimalist web framework for <a href='https://nodejs.org/en/'>Node.js</a></h1>
+        <h1 class="description">快速、灵活、极简的 <a href='https://nodejs.org/en/'>Node.js</a> Web 框架</h1>
     </section>
     <pre class="install-command"><code>$ npm install express --save</code></pre>
   </div>
@@ -45,18 +44,18 @@ app.listen(port, () => {
 <section id="intro">
   <div id="boxes" class="clearfix">
     <div id="web-applications">
-      <h2>Web Applications</h2> Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+      <h2>Web 应用开发</h2> Express 是一个简洁灵活的 Node.js Web 应用框架，为网页和移动应用提供了一套强大的功能特性。
     </div>
     <div id="apis">
-      <h2>APIs</h2> With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy.
+      <h2>API 开发</h2> 借助丰富的 HTTP 工具方法和中间件支持，快速构建健壮的 API 接口易如反掌。
     </div>
     <div id="performance">
-      <h2>Performance</h2> Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love.
+      <h2>性能表现</h2> Express 提供基础的 Web 应用功能薄层封装，绝不遮蔽您熟悉且喜爱的原生 Node.js 特性。
     </div>
     <div id="middleware">
       <h2>中间件</h2> 
-      Express is a lightweight and flexible routing framework with minimal core features 
-      meant to be augmented through the use of Express <a href="{{ page.lang }}/resources/middleware.html">middleware</a> modules.
+      Express是一个轻量和灵活的路由框架，核心功能最小， 
+      将通过使用Express <a href="{{ page.lang }}/resources/middleware.html">中间件</a> 模块来增加。
     </div>
   </div>
 </section>

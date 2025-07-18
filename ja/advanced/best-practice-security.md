@@ -3,7 +3,6 @@ layout: page
 title: 実稼働環境における Express のセキュリティーに関するベスト・プラクティス
 description: Discover crucial security best practices for Express apps in production, including using TLS, input validation, secure cookies, and preventing vulnerabilities.
 menu: advanced
-lang: ja
 redirect_from: "  "
 ---
 

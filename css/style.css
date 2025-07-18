@@ -12,6 +12,7 @@ body {
   display: grid;
   grid-template-areas:
   'header'
+  'i18n'
   'content'
   'footer'
 }
@@ -86,18 +87,11 @@ main.home {
   max-width: 75rem;
   margin: 40px auto 2%;
   padding-inline: 5%;
+  grid-area: content;
 }
 
 #home-content {
   display: flex;
-}
-
-.non-en-doc:has(#i18n-notice-box.hidden) #home-content {
-  margin-top: 150px;
-}
-
-.non-en-doc:has(#i18n-notice-box:not(.hidden)) .content {
-  margin-top: 50px;
 }
 
 #homepage-leftpane {
@@ -619,6 +613,10 @@ table ul {
 }
 
 .doc-notice {
+  padding-block: 1rem;
+  padding-inline: 2.5rem;
+  color: var(--box-fg);
+  border-radius: 0 6px 6px 0;
   background: var(--notice-bg);
   border-left: 3px solid var(--notice-accent);
 }
@@ -649,14 +647,16 @@ table ul {
 }
 
 #i18n-notice-box {
-  margin: 100px 3% 20px 3%;
+  margin-inline: auto;
+  margin-block-start: 2rem;
   position: relative;
+  grid-area: i18n;
 }
 
 #close-i18n-notice-box {
   position: absolute;
   top: 3px;
-  right: 4px;
+  right: 9px;
   color: var(--notice-accent);
   cursor: pointer;
 }
@@ -1120,6 +1120,7 @@ h2 a {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  grid-area: content;
 }
 
 .content-404 p {
@@ -1270,10 +1271,6 @@ h2 a {
 
   #description {
     margin-bottom: 35px;
-  }
-
-  #description .express {
-    display: none;
   }
 
   #description .description {
@@ -1437,10 +1434,6 @@ h2 a {
   #app-settings-property {
     width: auto;
   }
-
-  #description .express {
-    display: none;
-  }
 }
 
 
@@ -1464,7 +1457,8 @@ h2 a {
   padding: 0; 
   border: 0; 
   width: 960px; 
-  margin-bottom: 20px;}
+  margin-bottom: 20px;
+}
 #mw-fig-imgcell {
   margin: 0;
   padding: 0px;

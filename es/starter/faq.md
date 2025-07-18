@@ -3,7 +3,6 @@ layout: page
 title: Preguntas más frecuentes sobre Express
 description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
-lang: en
 redirect_from: "  "
 ---
 
