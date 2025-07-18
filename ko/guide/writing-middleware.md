@@ -23,6 +23,7 @@ _미들웨어_ 함수는 [요청 오브젝트](/{{ page.lang }}/4x/api.html#req)
 
 다음 예시에 미들웨어 함수 호출의 요소가 표시되어 있습니다.
 
+<div class="table-scroller">
 <table id="mw-fig">
 <tbody><tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
@@ -41,6 +42,7 @@ _미들웨어_ 함수는 [요청 오브젝트](/{{ page.lang }}/4x/api.html#req)
 <div class="callout" id="callout6">미들웨어 함수에 대한 HTTP <a href="../4x/api.html#req">요청</a> 인수(일반적으로 "req"라 불림).</div>
 </td></tr>
 </table>
+</div>
 
 Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
 
