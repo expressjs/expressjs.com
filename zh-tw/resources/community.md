@@ -3,7 +3,6 @@ layout: page
 title: Express 社群
 description: Connect with the Express.js community, learn about the technical committee, find resources, explore community-contributed modules, and get involved in discussions.
 menu: resources
-lang: zh-tw
 redirect_from: "  "
 ---
 

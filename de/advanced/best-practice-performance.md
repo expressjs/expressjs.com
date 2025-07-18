@@ -3,7 +3,6 @@ layout: page
 title: Leistungsspezifische Best Practices für Express-Anwendungen in Produktionsumgebungen
 description: Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.
 menu: advanced
-lang: de
 redirect_from: "  "
 ---
 
