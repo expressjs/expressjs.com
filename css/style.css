@@ -769,9 +769,10 @@ button.theme-btn {
   border: none;
   cursor: pointer;
   color: var(--fg);
-  background-color: var(--bg);
+  background-color: inherit;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 button.lang-btn {
