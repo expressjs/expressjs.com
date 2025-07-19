@@ -8,25 +8,35 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
       setTheme(colorScheme);
     })
   } else {
-    const localTheme = localStorage.getItem('expressjs-theme');
+    // user's PS system theme settings
+    const systemTheme = localStorage.getItem('system-theme')
+    // setting stored in local storage    
+    const localTheme = localStorage.getItem('local-theme')
+    // if no local theme set - system is default
     if (localTheme === null) {
-      localStorage.setItem('expressjs-theme', colorScheme); // store system theme as local theme
-      setTheme(colorScheme); // use system theme
+      setTheme(colorScheme)
+      localStorage.setItem('system-theme', colorScheme)
+    // page load - load any stored themes or set theme
     } else {
-      setTheme(localTheme); // use previous theme
-    };
-
-    document.addEventListener("DOMContentLoaded", ()=>{
-      const themeBtn = document.querySelector('#theme-toggle');
-      // add click event on theme loggle btn
-      themeBtn.addEventListener('click', toggleLocalStorageTheme);
-      // set accessibility on page load
-      themeBtn.setAttribute('aria-label', colorScheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-    });
+      // listen for system changes, update if any 
+      if (colorScheme != systemTheme) {
+        setTheme(colorScheme)
+        localStorage.setItem('system-theme', colorScheme)
+      } else {
+        // else load local theme
+        setTheme(localTheme);
+      }
+    }
+    // wait for load then and add listener on button
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document?.querySelector('#theme-toggle');
+      themeToggle.addEventListener('click', toggleLocalStorageTheme);
+      // set area-label for screen readers
+      themeToggle.setAttribute('aria-label', colorScheme ? 'Switch to light mode' : 'Switch to dark mode');
+    })
   }
-});
-
-// apply given theme
+})
+// apply current theme
 function setTheme(theme) {
   if (theme === 'dark') {
     darkModeOn()
@@ -34,34 +44,26 @@ function setTheme(theme) {
     lightModeOn()
   }
 }
-// toggle theme btn or set a theme if none set
+// toggle btn themes
 function toggleLocalStorageTheme() {
-  let nextTheme;
-  const localTheme = localStorage.getItem('expressjs-theme');
-
+  const localTheme = localStorage.getItem('local-theme');
   if (localTheme === 'light') {
-    nextTheme = 'dark';
-  } else if (localTheme === 'dark') {
-    nextTheme = 'light';
+    setTheme('dark');
   } else {
-    nextTheme = darkModeState() ? 'light' : 'dark'; // fallback
-  };
-
-  localStorage.setItem('local-theme', nextTheme);
-  setTheme(nextTheme);
+    setTheme('light');
+  }
 }
 function darkModeOn() {
   document?.documentElement?.classList.remove('light-mode')
   document?.documentElement?.classList.add('dark-mode')
   updateThemeIcon('dark');
+  localStorage.setItem('local-theme', 'dark');
 }
 function lightModeOn() {
   document?.documentElement?.classList.remove('dark-mode')
   document?.documentElement?.classList.add('light-mode')
   updateThemeIcon('light');
-}
-function darkModeState() {
-  return document?.documentElement?.classList.contains('dark-mode')
+  localStorage.setItem('local-theme', 'light');
 }
 function hasLocalStorage() {
   return typeof Storage !== 'undefined'
@@ -81,20 +83,14 @@ function watchColorSchemeChange(callback) {
   return () => darkMediaQuery.removeEventListener('change', handleChange)
 }
 
-function updateThemeIcon(theme) {
-  const sun = document.getElementById('icon-sun');
-  const moon = document.getElementById('icon-moon');
-  const themeBtn = document.querySelector('#theme-toggle');
-  if (!sun || !moon) return;
-
+function updateThemeIcon (theme) {
+  const sun = document?.getElementById('icon-sun');
+  const moon = document?.getElementById('icon-moon');
+  const themeToggle = document?.getElementById('theme-toggle');
+  if (!sun || !moon || !themeToggle) return;
   const isDark = theme === 'dark';
-
-  // hide or show icon 
-  sun.hidden = !isDark;
-  moon.hidden = isDark;
   // improve accessibility for screen readers 
   sun.setAttribute('aria-hidden', isDark ? 'false' : 'true');
   moon.setAttribute('aria-hidden', isDark ? 'true' : 'false');
-  // change label on btn click
-  themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
 };
