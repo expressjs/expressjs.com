@@ -775,6 +775,11 @@ button.theme-btn {
   align-items: center;
 }
 
+#icon-moon[hidden],
+#icon-sun[hidden] {
+  display: none;
+}
+
 button.lang-btn {
   appearance: none;
   background-color: inherit;
