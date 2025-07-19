@@ -760,6 +760,19 @@ a.openjs-logo {
   width: 125px;
   height: 39px;
   cursor: pointer;
+  background-color: inherit;
+  color: var(--fg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#icon-moon,
+#icon-sun { 
+  display: none; 
+}
+html.light-mode #icon-moon { 
+  display: inline; 
 }
 
 /* theme and lang btn */

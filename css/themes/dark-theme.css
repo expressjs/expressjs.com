@@ -1,5 +1,9 @@
 html.dark-mode {
 
+  #icon-sun { 
+    display: inline; 
+  }
+  
   .submenu-content {
     box-shadow: 1px 2px var(--hover-bg);
     background-color: var(--card-bg);
