@@ -3,7 +3,6 @@ layout: page
 title: Express での静的ファイルの提供
 description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
 menu: starter
-lang: ja
 redirect_from: "  "
 ---
 

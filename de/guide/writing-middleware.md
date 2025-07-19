@@ -3,7 +3,6 @@ layout: page
 title: Middleware für die Verwendung in Express-Anwendungen schreiben
 description: Learn how to write custom middleware functions for Express.js applications, including examples and best practices for enhancing request and response handling.
 menu: guide
-lang: de
 redirect_from: "  "
 ---
 
@@ -24,6 +23,7 @@ Wenn über die aktuelle Middlewarefunktion der Anforderung/Antwort-Zyklus nicht 
 
 Das folgende Beispiel zeigt die Elemente eines Middlewarefunktionsaufrufs:
 
+<div class="table-scroller">
 <table id="mw-fig">
 <tbody><tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
@@ -42,6 +42,7 @@ Das folgende Beispiel zeigt die Elemente eines Middlewarefunktionsaufrufs:
 <div class="callout" id="callout6">HTTP-<a href="../4x/api.html#req">Anforderungs</a>argument zur Middlewarefunktion, die nach der geltenden Konvention als "req" bezeichnet wird.</div>
 </td></tr>
 </table>
+</div>
 
 Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
 

@@ -3,7 +3,6 @@ layout: page
 title: Best Practice sulle prestazioni utilizzando Express in fase di produzione
 description: Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.
 menu: advanced
-lang: it
 redirect_from: "  "
 ---
 

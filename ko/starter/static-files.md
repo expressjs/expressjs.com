@@ -3,7 +3,6 @@ layout: page
 title: Express에서 정적 파일 제공
 description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
 menu: starter
-lang: ko
 redirect_from: "  "
 ---
 
