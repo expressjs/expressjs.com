@@ -768,6 +768,10 @@ button.theme-btn {
   height: 2rem;
   border: none;
   cursor: pointer;
+  color: var(--fg);
+  background-color: var(--bg);
+  display: flex;
+  justify-content: center;
 }
 
 button.lang-btn {
