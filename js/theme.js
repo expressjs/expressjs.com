@@ -73,10 +73,12 @@ function toggleLocalStorageTheme(e) {
 function darkModeOn() {
   document?.documentElement?.classList?.remove('light-mode')
   document?.documentElement?.classList?.add('dark-mode')
+  updateThemeIcon('dark');
 }
 function lightModeOn() {
   document?.documentElement?.classList.remove('dark-mode')
   document?.documentElement?.classList?.add('light-mode')
+  updateThemeIcon('light');
 }
 function darkModeState() {
   return document?.documentElement?.classList.contains('dark-mode')
@@ -98,3 +100,18 @@ function watchColorSchemeChange(callback) {
   // Return a function to remove the event listener
   return () => darkMediaQuery.removeEventListener('change', handleChange)
 }
+
+function updateThemeIcon (theme) {
+  const sun = document.getElementById('icon-sun');
+  const moon = document.getElementById('icon-moon');
+  if (!sun || !moon) return;
+  
+  const isDark = theme === 'dark';
+
+  // Show the icon representing the *next* theme
+  sun.style.display = isDark ? 'block' : 'none'; // Show sun in dark mode
+  moon.style.display = isDark ? 'none' : 'block'; // Show moon in light mode
+  // improve accessibility for screen readers 
+  sun.setAttribute('aria-hidden', isDark ? 'false' : 'true');
+  moon.setAttribute('aria-hidden', isDark ? 'true' : 'false');
+};

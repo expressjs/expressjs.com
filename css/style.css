@@ -764,15 +764,9 @@ a.openjs-logo {
 
 /* theme and lang btn */
 button.theme-btn {
-  background-color: var(--box-fg);         
-  mask-image: url("/images/moon.svg");
-  mask-repeat: no-repeat;
-  mask-position: center;
-  mask-size: contain;
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
   border: none;
-  background-repeat: no-repeat;
   cursor: pointer;
 }
 
