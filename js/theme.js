@@ -89,8 +89,6 @@ function updateThemeIcon (theme) {
   if (!sun || !moon || !themeToggle) return;
   const isDark = theme === 'dark';
   // improve accessibility for screen readers 
-  sun.hidden = !isDark;
-  moon.hidden = isDark;
   sun.setAttribute('aria-hidden', isDark ? 'false' : 'true');
   moon.setAttribute('aria-hidden', isDark ? 'true' : 'false');
   themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
