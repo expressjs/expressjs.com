@@ -612,6 +612,7 @@ table ul {
   font-weight: 600;
 }
 
+/* i18n box */
 .doc-notice {
   padding-block: 1rem;
   padding-inline: 2.5rem;
@@ -619,11 +620,19 @@ table ul {
   border-radius: 0 6px 6px 0;
   background: var(--notice-bg);
   border-left: 3px solid var(--notice-accent);
+  margin-inline: auto;
+  margin-block-start: 2rem;
+  position: relative;
+  grid-area: i18n;
 }
 
 .doc-notice a{
   color: var(--notice-accent);
   text-decoration: underline;
+}
+
+.doc-notice[hidden] {
+  display: none;
 }
 
 .doc-info {
@@ -644,13 +653,6 @@ table ul {
 .doc-warn a {
   color: var(--warn-accent);
   text-decoration: underline;
-}
-
-#i18n-notice-box {
-  margin-inline: auto;
-  margin-block-start: 2rem;
-  position: relative;
-  grid-area: i18n;
 }
 
 #close-i18n-notice-box {

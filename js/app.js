@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // i18n message box
-  if(readCookie('i18nClose')){
+  if(i18nMsgBox && readCookie('i18nClose')){
     i18nMsgBox.hidden = true;
   } else {
     const closeI18nBtn = document.getElementById("close-i18n-notice-box");
