@@ -47,7 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const menuLinks = document.querySelectorAll("#menu li a");
 
   const observerOptions = {
-    rootMargin: "-200px 0px 0px 0px",
+    root: null,
+    rootMargin: "-25% 0px -50px 0px",
+    threshold: 1,
   };
 
   const menuObserver = new IntersectionObserver((entries) => {
