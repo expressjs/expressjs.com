@@ -3,7 +3,6 @@ layout: page
 title: 使用 Express 中介軟體
 description: Learn how to use middleware in Express.js applications, including application-level and router-level middleware, error handling, and integrating third-party middleware.
 menu: guide
-lang: zh-tw
 redirect_from: "  "
 ---
 

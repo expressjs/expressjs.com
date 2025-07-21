@@ -3,7 +3,6 @@ layout: home
 title: Express - Node.js Web Application Framework
 description: "Express is a fast, unopinionated, minimalist web framework for Node.js, providing a robust set of features for web and mobile applications."
 menu: home
-lang: de
 redirect_from: "  "
 ---
 

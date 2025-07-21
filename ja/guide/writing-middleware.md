@@ -3,7 +3,6 @@ layout: page
 title: Express アプリケーションで使用するミドルウェアの作成
 description: Learn how to write custom middleware functions for Express.js applications, including examples and best practices for enhancing request and response handling.
 menu: guide
-lang: ja
 redirect_from: "  "
 ---
 

@@ -3,7 +3,6 @@ layout: page
 title: 프록시 환경에서 Express 사용
 description: Learn how to configure Express.js applications to work correctly behind reverse proxies, including using the trust proxy setting to handle client IP addresses.
 menu: guide
-lang: ko
 redirect_from: "  "
 ---
 

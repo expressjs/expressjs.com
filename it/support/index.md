@@ -3,7 +3,6 @@ layout: page
 title: Version Support
 description: Find information about the support schedule for different Express.js versions, including which versions are currently maintained and end-of-life policies.
 menu: support
-lang: it
 ---
 
 # Version Support
