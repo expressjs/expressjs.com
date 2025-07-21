@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // display current language in language picker component
   const languageElement = document.getElementById('languageData');
   const languagesData = languageElement ? JSON.parse(languageElement.dataset.languages) : [];
-
   const langDisplay = document.getElementById('current-lang');
+  const i18nMsgBox = document.getElementById("i18n-notice-box");
+  const scrollToTopBtn = document.getElementById("top");
 
+  // display current language in language picker component
   if (langDisplay) {
     const currentLanguage = window.location.pathname.split('/')[1];
     const matchedLang = languagesData.find(lang => lang.code === currentLanguage);
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // scroll to top of the page
-  document.getElementById("top")?.addEventListener("click", function (e) {
+  scrollToTopBtn.addEventListener("click", function (e) {
     e.preventDefault();
     window.scrollTo({
       top: 0,
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   });
 
-  // add/remove class 'scroll' on verticle scroll by 5px
+  // add/remove class 'scroll' on scroll by 5px
   let added = false;
   window.addEventListener('scroll', function () {
     if (window.scrollY > 5) {
@@ -32,6 +33,17 @@ document.addEventListener("DOMContentLoaded", function () {
       added = false;
     }
   });
+
+  // i18n message box
+  if(readCookie('i18nClose')){
+    i18nMsgBox.hidden = true;
+  } else {
+    const closeI18nBtn = document.getElementById("close-i18n-notice-box");
+    closeI18nBtn.addEventListener("click", ()=>{
+      i18nMsgBox.hidden = true;
+      createCookie('i18nClose', 1);
+    });
+  }
 });
 
 
@@ -116,17 +128,17 @@ $(function(){
   })
 
   // i18n notice
-  if (readCookie('i18nClose')) {
-    $('#i18n-notice-box').hide();
-    $("#i18n-notice-box").addClass("hidden");
-  }
-  else {
-    $('#close-i18n-notice-box').on('click', function () {
-      $('#i18n-notice-box').hide();
-      $("#i18n-notice-box").addClass("hidden");
-      createCookie('i18nClose', 1);
-    })
-  }
+  // if (readCookie('i18nClose')) {
+  //   $('#i18n-notice-box').hide();
+  //   $("#i18n-notice-box").addClass("hidden");
+  // }
+  // else {
+  //   $('#close-i18n-notice-box').on('click', function () {
+  //     $('#i18n-notice-box').hide();
+  //     $("#i18n-notice-box").addClass("hidden");
+  //     createCookie('i18nClose', 1);
+  //   })
+  // }
 })
 
 
