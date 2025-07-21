@@ -34,41 +34,34 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // i18n message box
-  if(i18nMsgBox && readCookie('i18nClose')){
-    i18nMsgBox.hidden = true;
-  } else {
+  // i18n message box : this box appears hidden for all page.lang != 'en'
+  const isI18nCookie = readCookie('i18nClose');
+  if(i18nMsgBox && !isI18nCookie) {
     const closeI18nBtn = document.getElementById("close-i18n-notice-box");
-    closeI18nBtn.addEventListener("click", ()=>{
-      i18nMsgBox.hidden = true;
-      createCookie('i18nClose', 1);
-    });
-  }
+    // show notice box
+    i18nMsgBox.hidden = false;
+    // close notice box
+    if (closeI18nBtn) {
+      closeI18nBtn.addEventListener("click", ()=>{
+        // hide notice
+        i18nMsgBox.hidden = true;
+        // set session cookie
+        createCookie('i18nClose', 1);
+        });
+      // improve keyboard a11y for
+      closeI18nBtn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          closeI18nBtn.click();
+        }
+      });
+    }};
 });
 
 
 
 $(function(){
   var doc = $(document);
-
-  // top link
-  // $('#top').click(function(e){
-  //   $('html, body').animate({scrollTop : 0}, 500);
-  //   return false;
-  // });
-
-  // scrolling links
-  // var added;
-  // doc.scroll(function(e){
-  //   if (doc.scrollTop() > 5) {
-  //     if (added) return;
-  //     added = true;
-  //     $('body').addClass('scroll');
-  //   } else {
-  //     $('body').removeClass('scroll');
-  //     added = false;
-  //   }
-  // })
 
   // menu bar
 
@@ -93,19 +86,6 @@ $(function(){
   var parentMenuSelector;
   var lastApiPrefix;
 
-  // if (document.readyState !== 'loading') {
-  //   const languageElement = document.getElementById('languageData');
-  //   const languagesData = languageElement ? JSON.parse(languageElement.dataset.languages) : [];
-
-  //   const langDisplay = document.getElementById('current-lang');
-
-  //   if (langDisplay) {
-  //     const currentLanguage = window.location.pathname.split('/')[1];
-  //     const matchedLang = languagesData.find(lang => lang.code === currentLanguage);
-  //     langDisplay.textContent = matchedLang ? matchedLang.name : 'English';
-  //   }  
-  // }
-
   $(document).scroll(function() {
     var h = closest();
     if (!h) return;
@@ -126,35 +106,19 @@ $(function(){
 
     lastApiPrefix = currentApiPrefix.split('.')[0];
   })
-
-  // i18n notice
-  // if (readCookie('i18nClose')) {
-  //   $('#i18n-notice-box').hide();
-  //   $("#i18n-notice-box").addClass("hidden");
-  // }
-  // else {
-  //   $('#close-i18n-notice-box').on('click', function () {
-  //     $('#i18n-notice-box').hide();
-  //     $("#i18n-notice-box").addClass("hidden");
-  //     createCookie('i18nClose', 1);
-  //   })
-  // }
 })
 
-
-
 function createCookie(name, value, days) {
-  var expires;
-
+  let expires = "";
   if (days) {
-    var date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    expires = "; expires=" + date.toGMTString();
-  } else {
-   expires = "";
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 864e5));
+    expires = "; expires=" + date.toUTCString();
   }
-  document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+  const secureFlag = location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}${expires}; path=/; SameSite=Lax${secureFlag}`;
 }
+
 
 function readCookie(name) {
   var nameEQ = encodeURIComponent(name) + "=";
@@ -166,12 +130,3 @@ function readCookie(name) {
   }
   return null;
 }
-
-/*
-
-Investigate following function
-
-function eraseCookie(name) {
-  createCookie(name, "", -1);
-}
-*/

@@ -477,12 +477,12 @@ pre:has(code) button.failed {
 
 /* scroll to top button */
 
-body.scroll #top {
+.scroll #top {
   opacity: .5;
   display: initial
 }
 
-body.scroll #top:hover {
+.scroll #top:hover {
   opacity: 1;
 }
 
@@ -624,6 +624,7 @@ table ul {
   margin-block-start: 2rem;
   position: relative;
   grid-area: i18n;
+  display: block;
 }
 
 .doc-notice a{
