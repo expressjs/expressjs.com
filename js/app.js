@@ -13,120 +13,113 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // scroll to top of the page
-  scrollToTopBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    })
-  });
+  if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
+    });
+  }
 
   // add/remove class 'scroll' on scroll by 5px
-  let added = false;
-  window.addEventListener('scroll', function () {
-    if (window.scrollY > 5) {
-      if (added) return;
-      added = true;
-      document.body.classList.add('scroll');
-    } else {
-      document.body.classList.remove('scroll');
-      added = false;
+  const scrollTarget = document.querySelector('.logo-container');
+  const scrollObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting) {
+        document.body.classList.add('scroll');
+      } else {
+        document.body.classList.remove('scroll');
+      }
+    },
+    {
+      root: null,
+      threshold: 0,
+      rootMargin: '0px 0px 0px 0px'
     }
-  });
+  );
+
+  if (scrollTarget) scrollObserver.observe(scrollTarget);
+
+  // heighlight current Menu on scroll
+  const headings = Array.from(document.querySelectorAll("h2, h3"));
+  const menuLinks = document.querySelectorAll("#menu li a");
+
+  const observerOptions = {
+    rootMargin: "-200px 0px 0px 0px",
+  };
+
+  const menuObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const currentApiPrefix = entry.target.id.split(".")[0];
+        const parentMenuSelector = `#${currentApiPrefix}-menu`;
+        const parentMenuEl = document.querySelector(parentMenuSelector);
+
+        // open submenu on scroll
+        if (parentMenuEl) parentMenuEl.classList.add("active");
+
+        // Remove active class from last menu item
+        const lastActiveMenu = document.querySelector(".active[id$='-menu']");
+        if (lastActiveMenu && lastActiveMenu.id !== parentMenuEl.id) {
+          lastActiveMenu.classList.remove("active");
+        }
+
+        // Update active link
+        menuLinks.forEach((link) => link.classList.remove("active"));
+        const activeLink = document.querySelector(`a[href="#${entry.target.id}"]`);
+        if (activeLink) activeLink.classList.add("active");
+      }
+    });
+  }, observerOptions);
+
+  headings.forEach((heading) => menuObserver.observe(heading));
 
   // i18n message box : this box appears hidden for all page.lang != 'en'
   const isI18nCookie = readCookie('i18nClose');
-  if(i18nMsgBox && !isI18nCookie) {
+  if (i18nMsgBox && !isI18nCookie) {
     const closeI18nBtn = document.getElementById("close-i18n-notice-box");
     // show notice box
     i18nMsgBox.hidden = false;
     // close notice box
     if (closeI18nBtn) {
-      closeI18nBtn.addEventListener("click", ()=>{
+      closeI18nBtn.addEventListener("click", () => {
         // hide notice
         i18nMsgBox.hidden = true;
         // set session cookie
         createCookie('i18nClose', 1);
-        });
-      // improve keyboard a11y for
+      });
+
+      // keyboard a11y
       closeI18nBtn.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           closeI18nBtn.click();
         }
       });
-    }};
+    }
+  };
+
+  function createCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 864e5));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}${expires}; path=/; SameSite=Lax; Secure`;
+  }
+
+  function readCookie(name) {
+    const nameEQ = encodeURIComponent(name) + "=";
+    const ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+    }
+    return null;
+  }
+
 });
-
-
-
-$(function(){
-  var doc = $(document);
-
-  // menu bar
-
-  var headings = $('h2, h3').map(function(i, el){
-    return {
-      top: $(el).offset().top - 200,
-      id: el.id
-    }
-  });
-
-  function closest() {
-    var h;
-    var top = $(window).scrollTop();
-    var i = headings.length;
-    while (i--) {
-      h = headings[i];
-      if (top >= h.top) return h;
-    }
-  }
-
-  var currentApiPrefix;
-  var parentMenuSelector;
-  var lastApiPrefix;
-
-  $(document).scroll(function() {
-    var h = closest();
-    if (!h) return;
-
-    currentApiPrefix = h.id.split('.')[0];
-    parentMenuSelector = '#'+ currentApiPrefix + '-menu';
-
-    $(parentMenuSelector).addClass('active');
-
-    if (lastApiPrefix && (lastApiPrefix != currentApiPrefix)) {
-      $('#'+ lastApiPrefix + '-menu').removeClass('active');
-    }
-
-    $('#menu li a').removeClass('active');
-
-    var a = $('a[href="#' + h.id + '"]');
-    a.addClass('active');
-
-    lastApiPrefix = currentApiPrefix.split('.')[0];
-  })
-})
-
-function createCookie(name, value, days) {
-  let expires = "";
-  if (days) {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 864e5));
-    expires = "; expires=" + date.toUTCString();
-  }
-  const secureFlag = location.protocol === "https:" ? "; Secure" : "";
-  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}${expires}; path=/; SameSite=Lax${secureFlag}`;
-}
-
-
-function readCookie(name) {
-  var nameEQ = encodeURIComponent(name) + "=";
-  var ca = document.cookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
-  }
-  return null;
-}
