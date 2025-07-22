@@ -327,7 +327,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 1.5rem;
+  padding-inline: 1rem;
   border-bottom: 1px solid var(--hover-fg);
 }
 
@@ -668,8 +668,8 @@ table ul {
 }
 
 div.header-btn {
-  display: block;
-  padding: 3px 5px;
+  display: flex;
+  padding: 3px;
   border-radius: 3px;
   cursor: pointer;
   color: var(--box-fg);
@@ -710,7 +710,7 @@ footer {
   padding-inline: 3rem;
 
   @media screen and (max-width : 360px) {
-    padding: 0.75rem;
+    padding: 1rem;
   }
 }
 
@@ -777,7 +777,8 @@ button.theme-btn {
 
 #icon-moon,
 #icon-sun { 
-  display: none; 
+  display: none;
+  align-self: center;
 }
 html.light-mode #icon-moon { 
   display: inline; 
@@ -1306,9 +1307,7 @@ h2 a {
 
   .header-right {
     display: flex;
-    align-items: center;
     gap: 8px;
-    margin-right: -10px;
   }
 
   #language-picker-menu #navmenu>li:first-child {
