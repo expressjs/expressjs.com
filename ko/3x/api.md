@@ -3,6 +3,7 @@ layout: api
 version: 3x
 title: Express 3.x - API 참조
 description: Express.js 3.x 버전의 API 참조에 접근할 수 있습니다. 이 버전은 지원이 종료되었으며 더 이상 유지보수되지 않습니다. 모듈과 메소드에 대한 상세한 정보가 포함되어 있습니다.
+menu: api
 redirect_from: "  "
 ---
 
