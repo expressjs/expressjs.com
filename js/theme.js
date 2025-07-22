@@ -1,7 +1,9 @@
+let themeBtn;
 const themeWatcher = watchColorSchemeChange((colorScheme) => {
   if (!hasLocalStorage()) {
+    // If localStorage is not supported, use system preference
     document?.addEventListener('DOMContentLoaded', () => {
-      // remove icon - toggle not supported
+      // remove icon
       document.querySelector('#theme-toggle').remove()
       setTheme(colorScheme);
     })
@@ -10,82 +12,64 @@ const themeWatcher = watchColorSchemeChange((colorScheme) => {
     const systemTheme = localStorage.getItem('system-theme')
     // setting stored in local storage    
     const localTheme = localStorage.getItem('local-theme')
-    // // if no local theme set - system is default
+    // if no local theme set - system is default
     if (localTheme === null) {
       setTheme(colorScheme)
-      localStorage.setItem('system-theme', colorScheme || 'light')
+      localStorage.setItem('system-theme', colorScheme)
     // page load - load any stored themes or set theme
     } else {
       // listen for system changes, update if any 
       if (colorScheme != systemTheme) {
         setTheme(colorScheme)
-        localStorage.setItem('system-theme', colorScheme || 'light')
-        // override local theme 
-        localStorage.removeItem('local-theme')
+        localStorage.setItem('system-theme', colorScheme)
       } else {
         // else load local theme
-        if (localTheme === 'light') {
-          lightModeOn()
-        } else if (localTheme === 'dark') {
-          darkModeOn()
-        }
+        setTheme(localTheme);
       }
     }
-    // wait for load then and add listner on button
+    // wait for load then and add listener on button
     document.addEventListener('DOMContentLoaded', () => {
-
-      document
-        .querySelector('#theme-toggle')
-        .addEventListener('click', toggleLocalStorageTheme)
+      const themeToggle = document?.querySelector('#theme-toggle');
+      themeToggle.addEventListener('click', toggleLocalStorageTheme);
+      // set area-label for screen readers
+      themeToggle.setAttribute('aria-label', colorScheme ? 'Switch to light mode' : 'Switch to dark mode');
     })
   }
 })
-// set the theme to given value
+// apply current theme
 function setTheme(theme) {
-  //  only support dark else any other defaults to light 
   if (theme === 'dark') {
     darkModeOn()
   } else {
     lightModeOn()
   }
 }
-// toggle btwn themes or set a theme if none set
-function toggleLocalStorageTheme(e) {
-  const localTheme = localStorage.getItem('local-theme')
+// toggle btn themes
+function toggleLocalStorageTheme() {
+  const localTheme = localStorage.getItem('local-theme');
   if (localTheme === 'light') {
-    localStorage.setItem('local-theme', 'dark')
-    darkModeOn()
-  } else if (localTheme === 'dark') {
-    localStorage.setItem('local-theme', 'light')
-    lightModeOn()
-    // localTheme still null
+    setTheme('dark');
   } else {
-    // need to check page state then set
-    if (darkModeState()) {
-      localStorage.setItem('local-theme', 'light')
-      lightModeOn()
-    } else {
-      localStorage.setItem('local-theme', 'dark')
-      darkModeOn()
-    }
+    setTheme('light');
   }
 }
 function darkModeOn() {
-  document?.documentElement?.classList?.remove('light-mode')
-  document?.documentElement?.classList?.add('dark-mode')
+  document?.documentElement?.classList.remove('light-mode')
+  document?.documentElement?.classList.add('dark-mode')
+  updateThemeIcon('dark');
+  localStorage.setItem('local-theme', 'dark');
 }
 function lightModeOn() {
   document?.documentElement?.classList.remove('dark-mode')
-  document?.documentElement?.classList?.add('light-mode')
-}
-function darkModeState() {
-  return document?.documentElement?.classList.contains('dark-mode')
+  document?.documentElement?.classList.add('light-mode')
+  updateThemeIcon('light');
+  localStorage.setItem('local-theme', 'light');
 }
 function hasLocalStorage() {
   return typeof Storage !== 'undefined'
 }
 function watchColorSchemeChange(callback) {
-  // query user's machine for system setting & use that
+  // get system theme preference
   const darkMediaQuery = window?.matchMedia('(prefers-color-scheme: dark)')
 
   const handleChange = (event) => {
@@ -93,8 +77,20 @@ function watchColorSchemeChange(callback) {
     callback(newColorScheme)
   }
   darkMediaQuery.addEventListener('change', handleChange)
-  // handle init load value
-  callback(darkMediaQuery.matches ? 'dark': 'light')
-  // Return a function to remove the event listener
+  // initial call : if system theme is not dark then light mode is choosen
+  callback(darkMediaQuery.matches ? 'dark' : 'light')
+  // remove event from window
   return () => darkMediaQuery.removeEventListener('change', handleChange)
 }
+
+function updateThemeIcon (theme) {
+  const sun = document?.getElementById('icon-sun');
+  const moon = document?.getElementById('icon-moon');
+  const themeToggle = document?.getElementById('theme-toggle');
+  if (!sun || !moon || !themeToggle) return;
+  const isDark = theme === 'dark';
+  // improve accessibility for screen readers 
+  sun.setAttribute('aria-hidden', isDark ? 'false' : 'true');
+  moon.setAttribute('aria-hidden', isDark ? 'true' : 'false');
+  themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+};
