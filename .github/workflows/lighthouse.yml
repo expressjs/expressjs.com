@@ -1,4 +1,4 @@
-name: Lighthouse Report
+name: Lighthouse
 
 on:
   pull_request:
@@ -48,39 +48,56 @@ jobs:
             "$PREVIEW_URL/en/blog/posts.html"
             "$PREVIEW_URL/en/5x/api.html"
           )
-          echo "## 🚦 Lighthouse Results" > lighthouse-report.md
-          echo "| URL | Perf | A11y | Best Practices | SEO |" >> lighthouse-report.md
-          echo "| --- | ---- | ---- | -------------- | --- |" >> lighthouse-report.md
+
+          echo "## 🚦 Lighthouse Results (Mobile & Desktop)" > lighthouse-report.md
+          echo "| URL | Device | Perf | A11y | Best Practices | SEO |" >> lighthouse-report.md
+          echo "| --- | ------ | ---- | ---- | -------------- | --- |" >> lighthouse-report.md
+
           for url in "${URLS[@]}"; do
-            npx lighthouse "$url" \
-              --output json \
-              --output-path="lighthouse-report.json" \
-              --chrome-flags="--headless"
-            perf=$(jq '.categories | .performance.score * 100' lighthouse-report.json)
-            a11y=$(jq '.categories | .accessibility.score * 100' lighthouse-report.json)
-            bp=$(jq '.categories | .["best-practices"].score * 100' lighthouse-report.json)
-            seo=$(jq '.categories | .seo.score * 100' lighthouse-report.json)
-            stoplight() {
-              if (( $(echo "$1 >= 90" | bc -l) )); then echo "🟢"; 
-              elif (( $(echo "$1 >= 75" | bc -l) )); then echo "🟠"; 
-              else echo "🔴"; fi
-            }
-            perf_stoplight=$(stoplight $perf)
-            a11y_stoplight=$(stoplight $a11y)
-            bp_stoplight=$(stoplight $bp)
-            seo_stoplight=$(stoplight $seo)
-            path=$(echo "$url" | sed "s|$PREVIEW_URL||")
-            if [ -z "$path" ]; then path="/"; fi
-            echo "| $path | $perf_stoplight $(printf "%.0f" $perf) | $a11y_stoplight $(printf "%.0f" $a11y) | $bp_stoplight $(printf "%.0f" $bp) | $seo_stoplight $(printf "%.0f" $seo) |" >> lighthouse-report.md
+            for device in mobile desktop; do
+              if [ "$device" = "desktop" ]; then
+                lighthouse_args="--preset=desktop"
+              else
+                lighthouse_args="--form-factor=mobile"
+              fi
+
+              npx lighthouse "$url" \
+                $lighthouse_args \
+                --output json \
+                --output-path="lighthouse-report-${device}.json" \
+                --chrome-flags="--headless"
+
+              report="lighthouse-report-${device}.json"
+              perf=$(jq '.categories | .performance.score * 100' $report)
+              a11y=$(jq '.categories | .accessibility.score * 100' $report)
+              bp=$(jq '.categories | .["best-practices"].score * 100' $report)
+              seo=$(jq '.categories | .seo.score * 100' $report)
+
+              stoplight() {
+                if (( $(echo "$1 >= 90" | bc -l) )); then echo "🟢"; 
+                elif (( $(echo "$1 >= 75" | bc -l) )); then echo "🟠"; 
+                else echo "🔴"; fi
+              }
+
+              perf_stoplight=$(stoplight $perf)
+              a11y_stoplight=$(stoplight $a11y)
+              bp_stoplight=$(stoplight $bp)
+              seo_stoplight=$(stoplight $seo)
+
+              path=$(echo "$url" | sed "s|$PREVIEW_URL||")
+              if [ -z "$path" ]; then path="/"; fi
+
+              echo "| $path | $device | $perf_stoplight $(printf "%.0f" $perf) | $a11y_stoplight $(printf "%.0f" $a11y) | $bp_stoplight $(printf "%.0f" $bp) | $seo_stoplight $(printf "%.0f" $seo) |" >> lighthouse-report.md
+            done
           done
-          cat lighthouse-report.md
 
       - name: Log Lighthouse report
         run: |
           cat lighthouse-report.md
 
-      - name: Upload Lighthouse report
+      - name: Upload Lighthouse reports as artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: lighthouse-report
-          path: lighthouse-report.md
+          name: lighthouse-reports
+          path: |
+            lighthouse-report.md
