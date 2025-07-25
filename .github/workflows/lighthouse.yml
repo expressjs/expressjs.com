@@ -1,9 +1,7 @@
 name: Lighthouse Audit
 
 on:
-  pull_request_target:
-    branches:
-    - gh-pages
+  pull_request:
 
 permissions:
   contents: read
