@@ -2,7 +2,8 @@ name: Lighthouse Audit
 
 on:
   pull_request_target:
-    types: [opened, synchronize]
+    branches:
+    - gh-pages
 
 permissions:
   contents: read
