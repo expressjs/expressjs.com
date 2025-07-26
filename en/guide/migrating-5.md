@@ -472,7 +472,7 @@ Example of breaking code:
 
 ```js
 // v4
-app.use(express.static("public"));
+app.use(express.static('public'))
 ```
 
 After migrating to Express 5, a request to `/.well-known/assetlinks.json` will result in a **404 Not Found**.
@@ -481,8 +481,8 @@ To fix this, serve specific dot-directories explicitly using the `dotfiles: "all
 
 ```js
 // v5
-app.use("/.well-known", express.static("public/.well-known", { dotfiles: "allow" }));
-app.use(express.static("public"));
+app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }))
+app.use(express.static('public'))
 ```
 
 This approach allows you to safely serve only the intended dot-directories while keeping the default secure behavior for other dotfiles, which remain inaccessible.
