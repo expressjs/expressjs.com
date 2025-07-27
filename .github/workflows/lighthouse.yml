@@ -1,4 +1,4 @@
-name: Lighthouse
+name: Lighthouse report
 
 on:
   pull_request:
@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   lighthouse:
@@ -53,8 +54,8 @@ jobs:
           echo "| URL | Device | Perf | A11y | Best Practices | SEO |" >> lighthouse-report.md
           echo "| --- | ------ | ---- | ---- | -------------- | --- |" >> lighthouse-report.md
 
-          for url in "${URLS[@]}"; do
-            for device in mobile desktop; do
+          for device in mobile desktop; do
+            for url in "${URLS[@]}"; do  
               if [ "$device" = "desktop" ]; then
                 lighthouse_args="--preset=desktop"
               else
@@ -101,3 +102,14 @@ jobs:
           name: lighthouse-reports
           path: |
             lighthouse-report.md
+
+      - name: 💬 Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${{ steps.format.outputs.comment }}`
+            });
