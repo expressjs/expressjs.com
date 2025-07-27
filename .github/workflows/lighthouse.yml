@@ -43,4 +43,4 @@ jobs:
           done
 
       - name: Unlighthouse assertions and client
-        run: unlighthouse-ci --site "$PREVIEW_URL" --build-static --disable-i18n-pages --disable-robots-txt --disable-sitemap --disable-dynamic-sampling
+        run: npx unlighthouse-ci --site "$PREVIEW_URL" --build-static --disable-i18n-pages --disable-robots-txt --disable-sitemap --disable-dynamic-sampling
