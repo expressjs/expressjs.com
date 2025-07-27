@@ -1,4 +1,4 @@
-name: Lighthouse Audit
+name: Lighthouse report
 
 on:
   pull_request:
@@ -14,99 +14,94 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Checkout PR code
+      - name: Checkout PR code
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
 
-      - name: ⏳ Wait for Netlify preview to be live
+      - name: Setup Node.js with npm cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install lighthouse
+
+      - name: Wait for Netlify preview to be live
         run: |
           PREVIEW_URL="https://deploy-preview-${{ github.event.pull_request.number }}--expressjscom-preview.netlify.app"
           echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
-          for i in {1..3}; do
+          for i in {1..2}; do
             if curl -s --head "$PREVIEW_URL" | grep "200 OK" > /dev/null; then
               echo "Preview is live!"
               break
             fi
-            echo "Waiting for Netlify to deploy... ($i/3)"
+            echo "Waiting for Netlify to deploy... ($i/2)"
             sleep 10
           done
 
-      - name: ⚙️ Install Lighthouse
-        run: npm install -g lighthouse
-
-      - name: 📊 Run Lighthouse audits
+      - name: Run Lighthouse audits
         run: |
-          mkdir -p lighthouse-report
           URLS=(
             "$PREVIEW_URL"
             "$PREVIEW_URL/en/blog/posts.html"
-            "$PREVIEW_URL/en/support/"
-            "$PREVIEW_URL/en/resources/glossary.html"
             "$PREVIEW_URL/en/5x/api.html"
           )
-          echo "[" > lighthouse-report/manifest.json
-          for url in "${URLS[@]}"; do
-            name=$(echo "$url" | sed 's|https://||;s|[/.]|_|g')
-            path="./lighthouse-report/$name.report.json"
-            lighthouse "$url" \
-              --output json \
-              --output-path="$path" \
-              --chrome-flags="--headless"
-              
-            jq -n --arg url "$url" \
-              --argjson summary "$(jq '.categories | {
-                performance: .performance.score,
-                accessibility: .accessibility.score,
-                "best-practices": .["best-practices"].score,
-                seo: .seo.score
-              }' "$path")" \
-              '{url: $url, summary: $summary}' >> lighthouse-report/manifest.json
-            echo "," >> lighthouse-report/manifest.json
+
+          echo "## 🚦 Lighthouse Results (Mobile & Desktop)" > lighthouse-report.md
+          echo "| URL | Device | Perf | A11y | Best Practices | SEO |" >> lighthouse-report.md
+          echo "| --- | ------ | ---- | ---- | -------------- | --- |" >> lighthouse-report.md
+
+          for device in mobile desktop; do
+            for url in "${URLS[@]}"; do  
+              if [ "$device" = "desktop" ]; then
+                lighthouse_args="--preset=desktop"
+              else
+                lighthouse_args="--form-factor=mobile"
+              fi
+
+              npx lighthouse "$url" \
+                $lighthouse_args \
+                --output json \
+                --output-path="lighthouse-report-${device}.json" \
+                --chrome-flags="--headless"
+
+              report="lighthouse-report-${device}.json"
+              perf=$(jq '.categories | .performance.score * 100' $report)
+              a11y=$(jq '.categories | .accessibility.score * 100' $report)
+              bp=$(jq '.categories | .["best-practices"].score * 100' $report)
+              seo=$(jq '.categories | .seo.score * 100' $report)
+
+              stoplight() {
+                if (( $(echo "$1 >= 90" | bc -l) )); then echo "🟢"; 
+                elif (( $(echo "$1 >= 75" | bc -l) )); then echo "🟠"; 
+                else echo "🔴"; fi
+              }
+
+              perf_stoplight=$(stoplight $perf)
+              a11y_stoplight=$(stoplight $a11y)
+              bp_stoplight=$(stoplight $bp)
+              seo_stoplight=$(stoplight $seo)
+
+              path=$(echo "$url" | sed "s|$PREVIEW_URL||")
+              if [ -z "$path" ]; then path="/"; fi
+
+              echo "| $path | $device | $perf_stoplight $(printf "%.0f" $perf) | $a11y_stoplight $(printf "%.0f" $a11y) | $bp_stoplight $(printf "%.0f" $bp) | $seo_stoplight $(printf "%.0f" $seo) |" >> lighthouse-report.md
+            done
           done
-          sed -i '$ s/,$//' lighthouse-report/manifest.json
-          echo "]" >> lighthouse-report/manifest.json
 
-          # create dummy links file
-          jq -n '{ 
-            '"$(for url in "${URLS[@]}"; do echo "\"$url\": \"$url\","; done | sed '$ s/,$//')"'
-          }' > lighthouse-report/links.json
+      - name: Log Lighthouse report
+        run: |
+          cat lighthouse-report.md
 
-      - name: 📝 Format comment
-        id: format
-        uses: actions/github-script@v7
+      - name: Upload Lighthouse reports as artifacts
+        uses: actions/upload-artifact@v4
         with:
-          script: |
-            const fs = require('fs');
-
-            const stoplight = res => (res >= 90 ? '🟢' : res >= 75 ? '🟠' : '🔴');
-            const normalizeScore = res => Math.round(res * 100);
-            const formatScore = res => {
-              const s = normalizeScore(res);
-              return `${stoplight(s)} ${s}`;
-            };
-
-            const results = JSON.parse(fs.readFileSync('./lighthouse-report/manifest.json', 'utf8'));
-            const links = JSON.parse(fs.readFileSync('./lighthouse-report/links.json', 'utf8'));
-
-            const header = [
-              '## 🚦 Lighthouse Results',
-              '| URL | Perf | A11y | Best Practices | SEO | Report |',
-              '| --- | ---- | ---- | -------------- | --- | ------ |',
-            ];
-
-            const rows = results.map(({ url, summary }) => {
-              const short = `[${new URL(url).pathname}](${url})`;
-              const perf = formatScore(summary.performance);
-              const a11y = formatScore(summary.accessibility);
-              const bp = formatScore(summary['best-practices']);
-              const seo = formatScore(summary.seo);
-              return `${short} | ${perf} | ${a11y} | ${bp} | ${seo} | [🔗](${links[url]})`;
-            });
-
-            const comment = [...header, ...rows].join('\n');
-            core.setOutput('comment', comment);
+          name: lighthouse-reports
+          path: |
+            lighthouse-report.md
 
       - name: 💬 Comment on PR
         uses: actions/github-script@v7
