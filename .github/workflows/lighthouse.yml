@@ -47,7 +47,7 @@ jobs:
           echo "## 🚦 Lighthouse Results (Mobile & Desktop)" > lighthouse-report.md
           echo "| URL | Device | Perf | A11y | Best Practices | SEO |" >> lighthouse-report.md
           echo "| --- | ------ | ---- | ---- | -------------- | --- |" >> lighthouse-report.md
-           npx unlighthouse-ci --site "$PREVIEW_URL" --"$device" --output-path="lighthouse-report.json" --disable-i18n-pages
+           npx unlighthouse-ci --site "$PREVIEW_URL" --url "/" --mobile --disable-dynamic-sampling --output-path="lighthouse-report.json"
 
            report="lighthouse-report.json"
            perf=$(jq '.categories | .performance.score * 100' $report)
