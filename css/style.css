@@ -283,9 +283,8 @@ a {
   margin-bottom: .25em;
 }
 
-#description .express > a {
+#description .express > span {
   color: var(--card-fg);
-  text-decoration: none;
 }
 
 #description .express a#express-version {
