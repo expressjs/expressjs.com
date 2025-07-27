@@ -53,7 +53,7 @@ jobs:
             lighthouse "$url" \
               --output json \
               --output-path="$path" \
-              --chrome-flags="--headless --no-sandbox"
+              --chrome-flags="--headless"
               
             jq -n --arg url "$url" \
               --argjson summary "$(jq '.categories | {
