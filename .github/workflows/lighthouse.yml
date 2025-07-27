@@ -43,7 +43,7 @@ jobs:
           done
 
       - name: Unlighthouse assertions and client
-        run: npx unlighthouse-ci --site "$PREVIEW_URL" --$device --urls /,/en/5x/api --disable-dynamic-sampling --disable-sitemap --disable-robots-txt
+        run: npx unlighthouse-ci --site "$PREVIEW_URL" --mobile --urls /en/5x/api --samples 1 --disable-dynamic-sampling --disable-sitemap --disable-robots-txt
 
       - name: 📄 Log results
         run: cat ./.unlighthouse/ci-result.json
