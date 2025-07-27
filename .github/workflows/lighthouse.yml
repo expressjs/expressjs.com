@@ -2,6 +2,7 @@ name: Lighthouse Audit
 
 on:
   pull_request:
+    types: [opened, synchronize]
 
 permissions:
   contents: read
@@ -9,6 +10,7 @@ permissions:
 
 jobs:
   lighthouse:
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
 
     steps:
@@ -51,7 +53,8 @@ jobs:
             lighthouse "$url" \
               --output json \
               --output-path="$path" \
-              --chrome-flags="--headless"
+              --chrome-flags="--headless --no-sandbox"
+              
             jq -n --arg url "$url" \
               --argjson summary "$(jq '.categories | {
                 performance: .performance.score,
