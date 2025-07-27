@@ -44,44 +44,33 @@ jobs:
 
       - name: Run Lighthouse audits
         run: |
-          URLS=(
-            "$PREVIEW_URL"
-            "$PREVIEW_URL/en/blog/posts.html"
-            "$PREVIEW_URL/en/5x/api.html"
-          )
-
           echo "## 🚦 Lighthouse Results (Mobile & Desktop)" > lighthouse-report.md
           echo "| URL | Device | Perf | A11y | Best Practices | SEO |" >> lighthouse-report.md
           echo "| --- | ------ | ---- | ---- | -------------- | --- |" >> lighthouse-report.md
+           npx unlighthouse-ci --site "$PREVIEW_URL" --"$device" --output-path="lighthouse-report.json" --disable-i18n-pages
 
-          for device in mobile desktop; do
-            for url in "${URLS[@]}"; do  
-              npx unlighthouse-ci --site "$url" --"$device" --output-path="lighthouse-report-${device}.json"
-
-              report="lighthouse-report-${device}.json"
-              perf=$(jq '.categories | .performance.score * 100' $report)
+           report="lighthouse-report.json"
+           perf=$(jq '.categories | .performance.score * 100' $report)
               a11y=$(jq '.categories | .accessibility.score * 100' $report)
               bp=$(jq '.categories | .["best-practices"].score * 100' $report)
               seo=$(jq '.categories | .seo.score * 100' $report)
 
-              stoplight() {
+           stoplight() {
                 if (( $(echo "$1 >= 90" | bc -l) )); then echo "🟢"; 
                 elif (( $(echo "$1 >= 75" | bc -l) )); then echo "🟠"; 
                 else echo "🔴"; fi
-              }
+            }
 
-              perf_stoplight=$(stoplight $perf)
-              a11y_stoplight=$(stoplight $a11y)
-              bp_stoplight=$(stoplight $bp)
-              seo_stoplight=$(stoplight $seo)
+           perf_stoplight=$(stoplight $perf)
+           a11y_stoplight=$(stoplight $a11y)
+           bp_stoplight=$(stoplight $bp)
+           seo_stoplight=$(stoplight $seo)
 
-              path=$(echo "$url" | sed "s|$PREVIEW_URL||")
-              if [ -z "$path" ]; then path="/"; fi
+           path=$(echo "$url" | sed "s|$PREVIEW_URL||")
+           if [ -z "$path" ]; then path="/"; fi
 
-              echo "| $path | $device | $perf_stoplight $(printf "%.0f" $perf) | $a11y_stoplight $(printf "%.0f" $a11y) | $bp_stoplight $(printf "%.0f" $bp) | $seo_stoplight $(printf "%.0f" $seo) |" >> lighthouse-report.md
-            done
-          done
-
+           echo "| $path | $device | $perf_stoplight $(printf "%.0f" $perf) | $a11y_stoplight $(printf "%.0f" $a11y) | $bp_stoplight $(printf "%.0f" $bp) | $seo_stoplight $(printf "%.0f" $seo) |" >> lighthouse-report.md
+          
       - name: Log Lighthouse report
         run: |
           cat lighthouse-report.md
