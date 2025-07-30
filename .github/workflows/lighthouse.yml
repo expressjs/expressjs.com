@@ -51,7 +51,7 @@ jobs:
           )
 
           echo "## 🚦 Lighthouse Results (Mobile & Desktop)" > lighthouse-report.md
-          echo "| URL | Device | Perf | A11y | Best Practices | SEO |" >> lighthouse-report.md
+          echo "| URL | Device | Perf | A11y | Best Practices | ⚠️ SEO score unreliable |" >> lighthouse-report.md
           echo "| --- | ------ | ---- | ---- | -------------- | --- |" >> lighthouse-report.md
 
           for device in mobile desktop; do
