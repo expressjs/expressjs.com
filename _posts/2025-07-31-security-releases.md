@@ -37,7 +37,7 @@ For more details, see [GHSA-fjgf-rc76-4x9p](https://github.com/expressjs/multer/
 A bug in on-headers versions `<1.1.0` may result in response headers being inadvertently modified when an array is passed to `response.writeHead()`
 
 **Affected versions**: `<1.1.0`  
-**Patched version**: `>=1.1.0`
+**Patched version**: `1.1.0`
 
 For more details, see [GHSA-76c9-3jph-rj3q](https://github.com/jshttp/on-headers/security/advisories/GHSA-76c9-3jph-rj3q).
 
