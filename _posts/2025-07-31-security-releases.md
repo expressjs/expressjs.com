@@ -26,7 +26,7 @@ The following vulnerabilities have been addressed:
 This request causes an unhandled exception, leading to a crash of the process.
 
 **Affected versions**: `>=1.4.4-lts.1, <2.0.2`  
-**Patched version**: `>=2.0.2`
+**Patched version**: `2.0.2`
 
 For more details, see [GHSA-fjgf-rc76-4x9p](https://github.com/expressjs/multer/security/advisories/GHSA-fjgf-rc76-4x9p).
 
