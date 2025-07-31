@@ -7,7 +7,7 @@ authors:
     github: UlisesGascon
 ---
 
-The Express team has released a new path version of [Multer](https://www.npmjs.com/package/multer) addressing a high-severity security vulnerability. Also a new minor version of [on-headers](https://www.npmjs.com/package/on-headers) addressing a low-severity security vulnerability
+The Express team has released a new patch version of [Multer](https://www.npmjs.com/package/multer) addressing a high-severity security vulnerability. Also a new minor version of [on-headers](https://www.npmjs.com/package/on-headers) addressing a low-severity security vulnerability
 
 
 {% include admonitions/warning.html 
