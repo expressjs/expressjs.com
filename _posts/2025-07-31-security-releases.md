@@ -21,7 +21,7 @@ The following vulnerabilities have been addressed:
 
 ## High severity vulnerability CVE-2025-7338 in Multer middleware
 
-**[Multer](https://www.npmjs.com/package/multer) versions `>=1.4.4-lts.1` and `<2.0.2` are vulnerable to denial of service ia unhandled exception from malformed request.**
+**[Multer](https://www.npmjs.com/package/multer) versions `>=1.4.4-lts.1` and `<2.0.2` are vulnerable to denial of service via unhandled exception from malformed request.**
 
 This request causes an unhandled exception, leading to a crash of the process.
 
