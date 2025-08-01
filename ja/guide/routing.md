@@ -3,7 +3,6 @@ layout: page
 title: Express でのルーティング
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
 menu: guide
-lang: ja
 redirect_from: "  "
 ---
 

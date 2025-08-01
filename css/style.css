@@ -12,6 +12,7 @@ body {
   display: grid;
   grid-template-areas:
   'header'
+  'i18n'
   'content'
   'footer'
 }
@@ -86,18 +87,11 @@ main.home {
   max-width: 75rem;
   margin: 40px auto 2%;
   padding-inline: 5%;
+  grid-area: content;
 }
 
 #home-content {
   display: flex;
-}
-
-.non-en-doc:has(#i18n-notice-box.hidden) #home-content {
-  margin-top: 150px;
-}
-
-.non-en-doc:has(#i18n-notice-box:not(.hidden)) .content {
-  margin-top: 50px;
 }
 
 #homepage-leftpane {
@@ -289,9 +283,8 @@ a {
   margin-bottom: .25em;
 }
 
-#description .express > a {
+#description .express > span {
   color: var(--card-fg);
-  text-decoration: none;
 }
 
 #description .express a#express-version {
@@ -333,7 +326,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 1.5rem;
+  padding-inline: 1rem;
   border-bottom: 1px solid var(--hover-fg);
 }
 
@@ -396,7 +389,7 @@ pre:has(code) button {
   &::after {
   content: "";
   background-color: var(--card-fg);
-  mask-image: url("../images/copy-btn.svg");
+  mask-image: url("/images/copy-btn.svg");
   mask-size: 1.5rem;
   mask-repeat: no-repeat;
   width: 1.5rem;
@@ -619,6 +612,10 @@ table ul {
 }
 
 .doc-notice {
+  padding-block: 1rem;
+  padding-inline: 2.5rem;
+  color: var(--box-fg);
+  border-radius: 0 6px 6px 0;
   background: var(--notice-bg);
   border-left: 3px solid var(--notice-accent);
 }
@@ -649,14 +646,16 @@ table ul {
 }
 
 #i18n-notice-box {
-  margin: 100px 3% 20px 3%;
+  margin-inline: auto;
+  margin-block-start: 2rem;
   position: relative;
+  grid-area: i18n;
 }
 
 #close-i18n-notice-box {
   position: absolute;
   top: 3px;
-  right: 4px;
+  right: 9px;
   color: var(--notice-accent);
   cursor: pointer;
 }
@@ -667,9 +666,9 @@ table ul {
   width: 200px;
 }
 
-.button {
-  display: block;
-  padding: 3px 5px;
+div.header-btn {
+  display: flex;
+  padding: 3px;
   border-radius: 3px;
   cursor: pointer;
   color: var(--box-fg);
@@ -687,10 +686,6 @@ a.edit-github-btn{
     color: var(--fg);
     background-color: var(--hover-bg);
     outline: 1px solid var(--card-fg);
-  }
-
-  > svg {
-    fill : var(--card-fg)
   }
 }
 
@@ -712,6 +707,10 @@ footer {
   flex-direction: column;
   padding-block: 2rem;
   padding-inline: 3rem;
+
+  @media screen and (max-width : 360px) {
+    padding: 1rem;
+  }
 }
 
 #footer-content {
@@ -728,14 +727,6 @@ footer {
   gap: 20px;
 }
 
-#footer-copyright a {
-  width: fit-content;
-}
-
-#footer-copyright img {
-  max-width: 125px;
-}
-
 #footer-policy {
   display: flex;
   flex-wrap: wrap;
@@ -749,29 +740,54 @@ footer {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer-social {
   display: flex;
   gap: 20px;
-  font-size: 20px;
-  @media screen and (max-width: 340px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2.5rem;
-  }
+}
+
+.footer-social a {
+  color: inherit;
+}
+
+/* icons */
+a.openjs-logo {
+  display: inline-block;
+  width: 125px;
+  height: 39px;
+  cursor: pointer;
 }
 
 /* theme and lang btn */
-button.theme-btn,
-button.lang-btn {
+button.theme-btn {
+  width: 2rem;
+  height: 2rem;
+  border: none;
   cursor: pointer;
-  appearance: none;
+  color: var(--fg);
   background-color: inherit;
-  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#icon-moon,
+#icon-sun { 
+  display: none;
+  align-self: center;
+}
+html.light-mode #icon-moon { 
+  display: inline; 
 }
 
 button.lang-btn {
+  appearance: none;
+  background-color: inherit;
+  border: 0;
+  cursor: pointer;
   color: var(--card-fg);
   padding: 0.2rem;
   font-size: inherit;
@@ -1100,6 +1116,7 @@ h2 a {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  grid-area: content;
 }
 
 .content-404 p {
@@ -1210,6 +1227,7 @@ h2 a {
   .table-scroller {
     width: 100%;
     overflow: scroll;
+    scrollbar-width: thin;
   }
 
   code {
@@ -1251,10 +1269,6 @@ h2 a {
     margin-bottom: 35px;
   }
 
-  #description .express {
-    display: none;
-  }
-
   #description .description {
     font-size: 3em;
     line-height: .9em;
@@ -1292,9 +1306,7 @@ h2 a {
 
   .header-right {
     display: flex;
-    align-items: center;
     gap: 8px;
-    margin-right: -10px;
   }
 
   #language-picker-menu #navmenu>li:first-child {
@@ -1416,10 +1428,6 @@ h2 a {
   #app-settings-property {
     width: auto;
   }
-
-  #description .express {
-    display: none;
-  }
 }
 
 
@@ -1443,7 +1451,8 @@ h2 a {
   padding: 0; 
   border: 0; 
   width: 960px; 
-  margin-bottom: 20px;}
+  margin-bottom: 20px;
+}
 #mw-fig-imgcell {
   margin: 0;
   padding: 0px;
@@ -1629,14 +1638,6 @@ strong.eol {
 
 .logo-table h3{
   margin-bottom: 12px;
-}
-
-.hidden-dark {
-  display: block;
-}
-
-.hidden-light {
-  display: none;
 }
 
 blockquote {

@@ -3,7 +3,6 @@ layout: page
 title: Exemplo "Hello World" do Express
 description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
 menu: starter
-lang: pt-br
 redirect_from: "  "
 ---
 

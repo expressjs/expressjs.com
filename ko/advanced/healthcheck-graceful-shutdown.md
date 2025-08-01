@@ -1,9 +1,8 @@
 ---
 layout: page
 title: 상태 검사와 우아한 종료
-description: Learn how to implement health checks and graceful shutdown in Express apps to enhance reliability, manage deployments, and integrate with load balancers like Kubernetes.
+description: Express 애플리케이션에서 헬스 체크와 그레이스풀 셧다운(Graceful Shutdown)을 구현하는 방법을 학습합니다. 이 기능은 애플리케이션의 신뢰성을 향상시키고, 배포를 원활하게 관리하며, Kubernetes와 같은 로드 밸런서와의 통합을 지원합니다.
 menu: advanced
-lang: ko
 redirect_from: "  "
 ---
 
@@ -28,7 +27,7 @@ process.on('SIGTERM', () => {
 
 ## Health checks
 
-A load balancer uses health checks to determine if an application instance is healthy and can accept requests. For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
+로드 밸런서는 헬스 체크를 통해 애플리케이션 인스턴스가 정상적으로 작동 중이며 요청을 수락할 수 있는지 판단합니다. For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
 로드 밸런서는 상태 확인을 애플리케이션이 장상 작동하고 요청을 받을 수 있는지 판단하는데 사용합니다.
 
 - `liveness`: 언제 컨테이너를 재시작할지 결정합니다.

@@ -3,14 +3,13 @@ layout: home
 title: Express - Node.js web 应用框架
 description: "Express 是 Node.js 的一个快速、灵活、极简的Web框架，为网页和移动应用提供了一套强大的功能特性。"
 menu: home
-lang: en
 redirect_from: "  "
 ---
 
 <section id="home-content">
   <div id="homepage-leftpane" class="pane">
     <section id="description">
-        <div class="express"><a href="/">Express</a><a href="{{ page.lang }}/changelog/4x.html#{{ site.data.express.current_version }}" id="express-version">{{ site.data.express.current_version }}</a></div>
+        <div class="express"><span>Express</span><a href="{{ page.lang }}/changelog/#{{ site.data.express.current_version }}" id="express-version">{{ site.data.express.current_version }}</a></div>
         <h1 class="description">快速、灵活、极简的 <a href='https://nodejs.org/en/'>Node.js</a> Web 框架</h1>
     </section>
     <pre class="install-command"><code>$ npm install express --save</code></pre>

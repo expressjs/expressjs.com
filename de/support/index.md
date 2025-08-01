@@ -3,7 +3,6 @@ layout: page
 title: Version-Support
 description: Finden Sie Informationen über den Support-Zeitplan für verschiedene Express.js Versionen, einschließlich der aktuellen Versionen und der End-of-Life-Richtlinien.
 menu: support
-lang: de
 ---
 
 # Version-Support

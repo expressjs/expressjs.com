@@ -3,7 +3,6 @@ layout: page
 title: Express 資料庫整合
 description: Discover how to integrate various databases with Express.js applications, including setup examples for MongoDB, MySQL, PostgreSQL, and more.
 menu: guide
-lang: zh-tw
 redirect_from: "  "
 ---
 
