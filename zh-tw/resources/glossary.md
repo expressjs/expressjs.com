@@ -3,7 +3,6 @@ layout: page
 title: Express 名詞解釋
 description: A comprehensive glossary of terms related to Express.js, Node.js, middleware, routing, and other key concepts to help you understand and use Express effectively.
 menu: resources
-lang: zh-tw
 redirect_from: "  "
 ---
 

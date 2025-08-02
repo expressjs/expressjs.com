@@ -3,7 +3,6 @@ layout: page
 title: Exemplos do Express
 description: Explore uma coleção de exemplos de aplicações em Express.js cobrindo diversos casos de uso, integrações e configurações avançadas para te ajudar a aprender e construir seus projetos.
 menu: starter
-lang: pt-br
 redirect_from: "  "
 ---
 

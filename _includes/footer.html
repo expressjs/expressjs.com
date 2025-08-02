@@ -3,13 +3,8 @@
 <footer>
   <section id="footer-content">
     <div id="footer-copyright">
-      <a href="https://openjsf.org/">
-        <img
-          src="https://raw.githubusercontent.com/openjs-foundation/artwork/main/openjs_foundation/openjs_foundation-logo-horizontal-color.svg"
-          alt="OpenJS Foundation" width="125" height="39" class="hidden-dark" />
-        <img
-          src="https://raw.githubusercontent.com/openjs-foundation/artwork/main/openjs_foundation/openjs_foundation-logo-horizontal-white.svg"
-          alt="OpenJS Foundation" width="125" height="39" class="hidden-light" />
+      <a href="https://openjsf.org/" class="openjs-logo" title="OpenJS Foundation">
+         {% include icons/openjs_foundation-logo-horizontal-white.svg %}
       </a>
       <div id="footer-policy">
         <a href="https://terms-of-use.openjsf.org">
@@ -33,44 +28,36 @@
       <div class="footer-social">
         <div>
           <a href="https://github.com/expressjs/express" aria-label="Go to the repository on GitHub">
-            <span class="hidden-dark">
-              {% include icons/github-light.svg %}
-            </span>
-            <span class="hidden-light">
-              {% include icons/github-dark.svg %}
-            </span>
+            {% include icons/github.svg %}
           </a>
         </div>
         <div>
           <a href="https://www.youtube.com/channel/UCYjxjAeH6TRik9Iwy5nXw7g"
-            aria-label="Go to the repository on Youtube">{% include icons/youtube.svg %}</a>
+            aria-label="Go to the repository on Youtube">
+            {% include icons/youtube.svg %}</a>
         </div>
         <div>
-          <a href="https://x.com/UseExpressJS" aria-label="Go to the repository on X">
-            <span class="hidden-dark">
-              {% include icons/x-light.svg %}
-            </span>
-            <span class="hidden-light">
-              {% include icons/x-dark.svg %}
-            </span>
+          <a href="https://x.com/UseExpressJS" aria-label="Go to the X account">
+              {% include icons/X.svg %}
           </a>
         </div>
         <div>
           <a href="https://openjs-foundation.slack.com/archives/C02QB1731FH"
-            aria-label="Go to the repository on Slack">{% include icons/slack.svg %}</a>
+            aria-label="Join Slack group">
+            {% include icons/slack.svg %}</a>
         </div>
         <div>
-          <a href="https://opencollective.com/express" aria-label="Go to the repository on Open Collective">{% include
+          <a href="https://opencollective.com/express" aria-label="Go to Open Collective">{% include
             icons/opencollective.svg %}</a>
         </div>
         <div>
-          <a href="https://bsky.app/profile/expressjs.bsky.social" aria-label="Go to the repository on Bluesky">{%
+          <a href="https://bsky.app/profile/expressjs.bsky.social" aria-label="Go to the Bluesky">{%
             include icons/bluesky.svg %}</a>
         </div>
       </div>
       <a href="https://www.netlify.com">
-        <img src="https://www.netlify.com/v3/img/components/netlify-color-accent.svg" alt="Preview Deploys by Netlify"
-          width="80" />
+          <img src="https://www.netlify.com/v3/img/components/netlify-color-accent.svg" alt="Preview Deploys by Netlify"
+            width="80" />
       </a>
     </div>
   </section>

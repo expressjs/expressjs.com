@@ -3,7 +3,6 @@ layout: page
 title: Communauté Express
 description: Connect with the Express.js community, learn about the technical committee, find resources, explore community-contributed modules, and get involved in discussions.
 menu: resources
-lang: fr
 redirect_from: "  "
 ---
 

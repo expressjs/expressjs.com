@@ -1,8 +1,7 @@
 ---
 layout: page
 title: Express changelog
-description: Stay updated with the release changelog for Express.js, detailing new features, bug fixes, and important changes across versions.
-lang: ko
+description: Express.js의 릴리스 변경 로그를 통해 새로운 기능, 버그 수정 사항, 그리고 각 버전별 주요 변경 사항을 최신 상태로 확인하세요.
 sitemap: false
 redirect_from:
   - "  "
@@ -11,12 +10,8 @@ redirect_from:
 
 <nav aria-label="sidebar-heading">
   <div class="toc-container">
-    <h3 id="sidebar-heading" class="toc-heading"><em>Versions</em></h3><button id="menu-toggle" title="show express versions">Versions <span>►</span></button>
-    <ul id="menu">
-      {% capture readme %}{% include changelog/menu.md %}{% endcapture %}
-      <li>
-        {{ readme | markdownify }}
-      </li>
+    <h3 id="sidebar-heading" class="toc-heading"><button id="menu-toggle" title="show express versions">버전</button></h3><0>버전<1>►</1></0>    <ul id="menu">
+ {% capture readme %}{% include changelog/menu.md %}{% endcapture %}<li> {{ readme | markdownify }}</li>
     </ul>
   </div>
 </nav>
@@ -31,18 +26,18 @@ All the latest updates, improvements, and fixes to Express
 
 {: id="5.x"}
 
-### 5.1.0 - Release date: 2025-03-31
+### 5.1.0 - 릴리즈 날짜: 2025-03-31
 
 {: id="5.0.1"}
 
-The 5.1.0 minor release includes some new features and improvements:
+5.1.0 마이너 릴리즈에는 다음과 같은 새로운 기능과 개선 사항이 포함되어 있습니다:
 
-- Support for sending responses as Uint8Array
-- Added support for ETag option in `res.sendFile()`
-- Added support for adding multiple links with the same rel with `res.links()`
-- Performance: Use loop for acceptParams
+- 응답을 `Uint8Array` 형식으로 전송하는 기능 지원
+- `res.sendFile()`에서 ETag 옵션 지원 추가
+- `res.links()`에서 동일한 `rel` 값을 갖는 여러 링크 추가 지원
+- 성능 향상: `acceptParams`에 루프 사용
 - [body-parser@2.2.0](https://github.com/expressjs/body-parser/releases/tag/v2.2.0)
-  - Remove legacy node.js support checks for Brotli & `AsyncLocalStorage`
+  - Brotli 및 `AsyncLocalStorage`에 대한 레거시 Node.js 지원 검사 제거
   - Remove `unpipe` & `destroy`
 - [router@2.2.0](https://github.com/pillarjs/router/releases/tag/v2.2.0)
   - Restore `debug`. Now with the `router` scope instead of `express`.
@@ -56,7 +51,7 @@ The 5.1.0 minor release includes some new features and improvements:
 - Add package.json funding field to highlight our OpenCollective
 - See [Changelog v5.1.0](https://github.com/expressjs/express/releases/tag/v5.1.0)
 
-### 5.0.1 - Release date: 2024-10-08
+### 5.0.1 - 릴리즈 날짜: 2024-10-08
 
 {: id="5.0.1"}
 
@@ -64,7 +59,7 @@ The 5.0.1 patch release includes one security fix:
 
 - Update [jshttps/cookie](https://www.npmjs.com/package/cookie) to address a [vulnerability](https://github.com/advisories/GHSA-pxg6-pf52-xh8x).
 
-### 5.0.0 - Release date: 2024-09-09
+### 5.0.0 - 릴리즈 날짜: 2024-09-09
 
 {: id="5.0.0"}
 
@@ -74,7 +69,7 @@ Check the [migration guide](/{{page.lang}}/guide/migrating-5.html) with all the 
 
 {: id="4.x"}
 
-### 4.21.2 - Release date: 2024-11-06
+### 4.21.2 - 릴리즈 날짜: 2024-11-06
 
 {: id="4.21.2"}
 
@@ -82,7 +77,7 @@ The 4.21.2 patch release includes one security fix:
 
 - Update [pillajs/path-to-regexp](https://www.npmjs.com/package/path-to-regexp) to address a [vulnerability](https://github.com/advisories/GHSA-rhx6-c78j-4q9w).
 
-### 4.21.1 - Release date: 2024-10-08
+### 4.21.1 - 릴리즈 날짜: 2024-10-08
 
 {: id="4.21.1"}
 
@@ -90,7 +85,7 @@ The 4.21.1 patch release includes one security fix:
 
 - Update [jshttps/cookie](https://www.npmjs.com/package/cookie) to address a [vulnerability](https://github.com/advisories/GHSA-pxg6-pf52-xh8x).
 
-### 4.21.0 - Release date: 2024-09-11
+### 4.21.0 - 릴리즈 날짜: 2024-09-11
 
 {: id="4.21.0"}
 

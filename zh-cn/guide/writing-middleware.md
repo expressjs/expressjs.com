@@ -3,7 +3,6 @@ layout: page
 title: 编写中间件以用于 Express 应用程序
 description: Learn how to write custom middleware functions for Express.js applications, including examples and best practices for enhancing request and response handling.
 menu: guide
-lang: en
 redirect_from: "  "
 ---
 
@@ -24,6 +23,7 @@ _中间件_函数能够访问[请求对象](/{{ page.lang }}/4x/api.html#req) (`
 
 以下示例显示中间件函数调用的元素：
 
+<div class="table-scroller">
 <table id="mw-fig">
 <tbody><tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
@@ -42,6 +42,7 @@ _中间件_函数能够访问[请求对象](/{{ page.lang }}/4x/api.html#req) (`
 <div class="callout" id="callout6">中间件函数的 HTTP <a href="../4x/api.html#req">请求</a>自变量，按约定称为“req”。</div>
 </td></tr>
 </table>
+</div>
 
 Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
 

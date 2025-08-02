@@ -3,7 +3,6 @@ layout: page
 title: Express 디버깅
 description: Learn how to enable and use debugging logs in Express.js applications by setting the DEBUG environment variable for enhanced troubleshooting.
 menu: guide
-lang: ko
 redirect_from: "  "
 ---
 

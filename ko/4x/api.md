@@ -2,8 +2,8 @@
 layout: api
 version: 4x
 title: Express 4.x - API 참조
-description: Access the API reference for Express.js 4.x, detailing all modules, methods, and properties for building web applications with this version.
-lang: ko
+description: Express.js 4.x의 API 레퍼런스를 확인하여, 이 버전으로 웹 애플리케이션을 구축할 때 사용할 수 있는 모든 모듈, 메서드, 속성에 대해 자세히 알아봅니다.
+menu: api
 redirect_from: "  "
 ---
 
@@ -13,7 +13,7 @@ redirect_from: "  "
 
 {% capture node-version %}
 
-Express 4.0 requires Node.js 0.10 or higher.
+Express 4.0에는  Node.js 0.10 이상이 필요합니다.
 
 {% endcapture %}
 

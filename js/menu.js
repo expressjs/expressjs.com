@@ -20,7 +20,10 @@ let activeDrawer // active dropdown nav link
 
 
 for (const el of itemsMenu) {
-	el.addEventListener("click", () => {
+	el.addEventListener("click", (e) => {
+		if (e.target.parentNode === el && e.pointerType === "touch" && el.querySelector("a.active")) {
+			e.preventDefault(); // Tapping active menu on touchscreen tablet should open menu, not click
+		}
 		if (isSmallScreen || 'ontouchstart' in document.documentElement) {
 		// HANDLE ACTIVE LINKS IN DROPDOWN NAV	
 		// if no activeDrawer set then page was set in md logic

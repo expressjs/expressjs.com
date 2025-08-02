@@ -3,7 +3,6 @@ layout: page
 title: Servicio de archivos estáticos en Express
 description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
 menu: starter
-lang: en
 redirect_from: "  "
 ---
 

@@ -3,7 +3,6 @@ layout: page
 title: Express basic routing
 description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
-lang: en
 redirect_from: "/starter/basic-routing.html"
 ---
 
@@ -40,7 +39,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-Respond to POST request on the root route (`/`), the application's home page:
+Respond to a POST request on the root route (`/`), the application's home page:
 
 ```js
 app.post('/', (req, res) => {

@@ -3,7 +3,6 @@ layout: page
 title: Compilazione del middleware per l'utilizzo nelle applicazioni Express
 description: Learn how to write custom middleware functions for Express.js applications, including examples and best practices for enhancing request and response handling.
 menu: guide
-lang: it
 redirect_from: "  "
 ---
 
@@ -24,6 +23,7 @@ Se la funzione middleware corrente non termina il ciclo richiesta-risposta, deve
 
 I seguenti esempi mostrano gli elementi di una chiamata alla funzione middleware:
 
+<div class="table-scroller">
 <table id="mw-fig">
 <tbody><tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
@@ -42,6 +42,7 @@ I seguenti esempi mostrano gli elementi di una chiamata alla funzione middleware
 <div class="callout" id="callout6">Argomento <a href="../4x/api.html#req">richiesta</a> HTTP nella funzione middleware, denominato "req" per convenzione.</div>
 </td></tr>
 </table>
+</div>
 
 Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
 

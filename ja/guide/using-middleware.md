@@ -3,7 +3,6 @@ layout: page
 title: Express ミドルウェアの使用
 description: Learn how to use middleware in Express.js applications, including application-level and router-level middleware, error handling, and integrating third-party middleware.
 menu: guide
-lang: ja
 redirect_from: "  "
 ---
 
