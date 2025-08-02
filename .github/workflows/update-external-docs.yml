@@ -59,7 +59,6 @@ jobs:
                 pull_request_body: > 
                   New Crowdin translations from the [express.js crowdin project](https://express.crowdin.com/u/projects/1). cc: @expressjs/docs-wg
                 pull_request_base_branch_name: 'gh-pages'
-                base_url: 'https://express.api.crowdin.com'
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
