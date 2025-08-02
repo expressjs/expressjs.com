@@ -48,7 +48,7 @@ jobs:
               uses: actions/checkout@v4
               # see all the options at https://github.com/crowdin/github-action
             - name: Crowdin PR
-              uses: crowdin/github-action@297234bae049541aa48ed268e5de00dee4efa4b4 # https://github.com/crowdin/github-action/releases/tag/v2.8.0
+              uses: crowdin/github-action@590c05e09a29f392b203faf4d6aa8e0cd32c7835 # https://github.com/crowdin/github-action/releases/tag/v2.9.1
               with:
                 upload_sources: false
                 upload_translations: false

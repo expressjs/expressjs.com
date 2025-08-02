@@ -7,4 +7,4 @@
   {% assign notice_link_text = site.data.en.general.i18n_notice_link_text %}
 {% endif %}
 <p>{{ notice }} <a href="{{ page.url | replace: lang_path, '/en/' }}">{{ notice_link_text}}</a>.</p>
-<div id="close-i18n-notice-box" title="Close">✖</div>
+<div id="close-i18n-notice-box" title="Close" role="button" aria-label="Close notice" tabindex="0">✖</div>
