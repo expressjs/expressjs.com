@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Express용 템플릿 엔진 개발
-description: Learn how to develop custom template engines for Express.js using app.engine(), with examples on creating and integrating your own template rendering logic.
+description: App.engine()을 사용하여 Express.js에서 사용자 정의 템플릿 엔진을 개발하는 방법을 학습합니다. 직접 템플릿 렌더링 로직을 생성하고 통합하는 예제를 함께 제공합니다.
 menu: advanced
 redirect_from: "  "
 ---

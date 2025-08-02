@@ -23,6 +23,7 @@ If the current middleware function does not end the request-response cycle, it m
 
 The following figure shows the elements of a middleware function call:
 
+<div class="table-scroller">
 <table id="mw-fig">
 <tbody><tr><td id="mw-fig-imgcell">
 <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
@@ -41,6 +42,7 @@ The following figure shows the elements of a middleware function call:
 <div class="callout" id="callout6">中介軟體函數的 HTTP <a href="../4x/api.html#req">request</a> 引數，依慣例，稱為 "req"。</div>
 </td></tr>
 </table>
+</div>
 
 Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
 
