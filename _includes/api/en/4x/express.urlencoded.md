@@ -42,3 +42,7 @@ The following table describes the properties of the optional `options` object.
 | `depth`          | Configure the maximum depth of the `qs` library when `extended` is `true`. This allows you to limit the amount of keys that are parsed and can be useful to prevent certain types of abuse. Defaults to `32`. It is recommended to keep this value as low as possible. | Number | `32` |
 
 </div>
+
+<div class="doc-box doc-notice" markdown="1">
+The `depth` option was added in Express v4.20.0. If you are using an earlier version, this option will not be available.
+</div>  
