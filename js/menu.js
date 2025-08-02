@@ -186,8 +186,8 @@ toggleBtn?.addEventListener("click", (e) => {
 // Open/Close sub TOC content on click
 document.querySelectorAll("#menu > li > a").forEach((link) => {
 	link.addEventListener("click", function (event) {
-	  event.preventDefault(); // stop navigation to submenu
-  
+      event.preventDefault(); // stop navigation to submenu
+
 	  // Find the closest parent <li>
 	  const closestLiParent = link.closest("li");
 	  const childUlSubMenu = closestLiParent.children[1];
