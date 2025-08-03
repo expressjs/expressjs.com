@@ -11,17 +11,6 @@ if (langDisplay) {
   langDisplay.textContent = matchedLang ? matchedLang.name : 'English';
 }
 
-// scroll to top of the page
-if (scrollToTopBtn) {
-  scrollToTopBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    })
-  })
-}
-
 // add/remove class 'scroll' on scroll by 5px
 const scrollTarget = document.querySelector('.logo-container');
 const scrollObserver = new IntersectionObserver(
