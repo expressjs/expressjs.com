@@ -51,8 +51,8 @@ jobs:
           )
 
           echo "## 🚦 Lighthouse Results (Mobile & Desktop)" > lighthouse-report.md
-          echo "| URL | Device | Perf | A11y | Best Practices | ⚠️ SEO score unreliable |" >> lighthouse-report.md
-          echo "| --- | ------ | ---- | ---- | -------------- | --- |" >> lighthouse-report.md
+          echo "| URL | Device | Perf | A11y | Best Practices |" >> lighthouse-report.md
+          echo "| --- | ------ | ---- | ---- | -------------- |" >> lighthouse-report.md
 
           for device in mobile desktop; do
             for url in "${URLS[@]}"; do  
@@ -72,7 +72,6 @@ jobs:
               perf=$(jq '.categories | .performance.score * 100' $report)
               a11y=$(jq '.categories | .accessibility.score * 100' $report)
               bp=$(jq '.categories | .["best-practices"].score * 100' $report)
-              seo=$(jq '.categories | .seo.score * 100' $report)
 
               stoplight() {
                 if (( $(echo "$1 >= 90" | bc -l) )); then echo "🟢"; 
@@ -83,12 +82,11 @@ jobs:
               perf_stoplight=$(stoplight $perf)
               a11y_stoplight=$(stoplight $a11y)
               bp_stoplight=$(stoplight $bp)
-              seo_stoplight=$(stoplight $seo)
 
               path=$(echo "$url" | sed "s|$PREVIEW_URL||")
               if [ -z "$path" ]; then path="/"; fi
 
-              echo "| $path | $device | $perf_stoplight $(printf "%.0f" $perf) | $a11y_stoplight $(printf "%.0f" $a11y) | $bp_stoplight $(printf "%.0f" $bp) | $seo_stoplight $(printf "%.0f" $seo) |" >> lighthouse-report.md
+              echo "| $path | $device | $perf_stoplight $(printf "%.0f" $perf) | $a11y_stoplight $(printf "%.0f" $a11y) | $bp_stoplight $(printf "%.0f" $bp) |" >> lighthouse-report.md
             done
           done
 
