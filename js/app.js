@@ -2,7 +2,6 @@ const languageElement = document.getElementById('languageData');
 const languagesData = languageElement ? JSON.parse(languageElement.dataset.languages) : [];
 const langDisplay = document.getElementById('current-lang');
 const i18nMsgBox = document.getElementById("i18n-notice-box");
-const scrollToTopBtn = document.getElementById("top");
 
 // display current language in language picker component
 if (langDisplay) {

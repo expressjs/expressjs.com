@@ -33,12 +33,12 @@ jobs:
         run: |
           PREVIEW_URL="https://deploy-preview-${{ github.event.pull_request.number }}--expressjscom-preview.netlify.app"
           echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
-          for i in {1..2}; do
+          for i in {1..4}; do
             if curl -s --head "$PREVIEW_URL" | grep "200 OK" > /dev/null; then
               echo "Preview is live!"
               break
             fi
-            echo "Waiting for Netlify to deploy... ($i/2)"
+            echo "Waiting for Netlify to deploy... ($i/4)"
             sleep 10
           done
 
@@ -110,31 +110,32 @@ jobs:
           script: |
             const fs = require('fs');
             const report = fs.readFileSync('lighthouse-report.md', 'utf8');
-      
+
             const { data: comments } = await github.rest.issues.listComments({
               issue_number: context.payload.pull_request.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
-      
+
             const botComment = comments.find(comment =>
-              comment.user.type === 'Bot' &&
-              comment.body.includes('🚦Lighthouse Results (Mobile & Desktop)')
+              comment.user.type === "Bot" &&
+              comment.body.includes("🚦 Lighthouse Results")
             );
-      
+
             if (botComment) {
               await github.rest.issues.updateComment({
                 comment_id: botComment.id,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: report
+                body: report,
               });
+              console.log("Updated existing Lighthouse comment.");
             } else {
               await github.rest.issues.createComment({
                 issue_number: context.payload.pull_request.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: report
+                body: report,
               });
+              console.log("Created new Lighthouse comment.");
             }
-
