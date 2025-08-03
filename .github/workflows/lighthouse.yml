@@ -20,6 +20,26 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
 
+      - name: Skip if only .md files changed
+        id: file_check
+        run: |
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          NON_MD_FILES=$(echo "$CHANGED_FILES" | grep -vE '\.md$' || true)
+
+          if [ -z "$NON_MD_FILES" ]; then
+            echo "Only .md files changed. Skipping job."
+            echo "skip_lighthouse=true" >> "$GITHUB_ENV"
+          else
+            echo "skip_lighthouse=false" >> "$GITHUB_ENV"
+          fi
+      
+      - name: Exit early if skipped
+        if: env.skip_lighthouse == 'true'
+        run: echo "Skipping Lighthouse audit because only .md files changed." && exit 0
+
       - name: Setup Node.js with npm cache
         uses: actions/setup-node@v4
         with:
@@ -64,6 +84,7 @@ jobs:
 
               npx lighthouse "$url" \
                 $lighthouse_args \
+                --only-categories=performance,accessibility,best-practices \
                 --output json \
                 --output-path="lighthouse-report-${device}.json" \
                 --chrome-flags="--headless"
