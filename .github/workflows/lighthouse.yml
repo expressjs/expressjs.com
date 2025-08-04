@@ -15,9 +15,6 @@ jobs:
     steps:
       - name: Checkout PR code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Setup Node.js with npm cache
         uses: actions/setup-node@v4

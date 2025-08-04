@@ -1,6 +1,20 @@
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+/* handle header offset with scroll-margin */
+h1, h2, h3, h4, h5, h6,
+[id] {
+  scroll-margin-top: 60px;
+}
+
+/* Respect user motion preferences for access */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -258,11 +272,6 @@ a {
   padding-top: 40px;
 }
 
-#api-doc *:target, #page-doc *:target {
- margin-top: -120px;
- padding-top: 120px;
- z-index: -1;
-}
 
 /* logo */
 .logo-container a {
