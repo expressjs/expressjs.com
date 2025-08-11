@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-在根路由 (`/`) 上（应用程序的主页）对 POST 请求进行响应：
+Respond to a POST request on the root route (`/`), the application's home page:
 
 ```js
 app.post('/', (req, res) => {

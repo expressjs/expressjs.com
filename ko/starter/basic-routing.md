@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-애플리케이션의 홈 페이지인 루트 라우트(`/`)에서 POST 요청에 응답:
+Respond to a POST request on the root route (`/`), the application's home page:
 
 ```js
 app.post('/', (req, res) => {
