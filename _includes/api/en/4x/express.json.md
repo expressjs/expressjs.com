@@ -45,7 +45,7 @@ The following table describes the properties of the optional `options` object.
 
 ```js
 // Limit 5MB for /upload
-app.use('/upload', express.json({ limit: '5mb' }));
+app.use('/upload', express.json({ limit: '5mb' }))
 
 // Default limit for other routes
-app.use(express.json());
+app.use(express.json())
