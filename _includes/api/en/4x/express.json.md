@@ -40,3 +40,12 @@ The following table describes the properties of the optional `options` object.
 | `verify`      | This option, if supplied, is called as `verify(req, res, buf, encoding)`, where `buf` is a `Buffer` of the raw request body and `encoding` is the encoding of the request. The parsing can be aborted by throwing an error. | Function | `undefined` |
 
 </div>
+
+#### Example: Different limits for specific routes
+
+```js
+// Limit 5MB for /upload
+app.use('/upload', express.json({ limit: '5mb' }));
+
+// Default limit for other routes
+app.use(express.json());
