@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-アプリケーションのホーム・ページであるルートのルート (`/`) で POST 要求に応答します。
+Respond to a POST request on the root route (`/`), the application's home page:
 
 ```js
 app.post('/', (req, res) => {
