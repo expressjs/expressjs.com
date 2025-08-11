@@ -80,7 +80,8 @@ mounting middleware.
 <tr>
 <td>Path</td>
 <td markdown="1">
-This will match paths starting with `/abcd`:
+This will match the exact path `/abcd` and any paths beginning with `/abcd/` (including subdirectories), but will not match paths like `/abcde` :
+
 
 ```js
 app.use('/abcd', (req, res, next) => {
