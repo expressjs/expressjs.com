@@ -66,6 +66,7 @@ You can find the list of available codemods [here](https://github.com/expressjs/
   <li><a href="#path-syntax">Path route matching syntax</a></li>
   <li><a href="#rejected-promises">Rejected promises handled from middleware and handlers</a></li>
   <li><a href="#express.urlencoded">express.urlencoded</a></li>
+  <li><a href="#express.static.dotfiles">express.static dotfiles</a></li>
   <li><a href="#app.listen">app.listen</a></li>
   <li><a href="#app.router">app.router</a></li>
   <li><a href="#req.body">req.body</a></li>
@@ -468,6 +469,29 @@ Details of how Express handles errors is covered in the [error handling document
 <h3 id="express.urlencoded">express.urlencoded</h3>
 
 The `express.urlencoded` method makes the `extended` option `false` by default.
+
+<h3 id="express.static.dotfiles">express.static dotfiles</h3>
+
+In Express 5, the `express.static` middleware's `dotfiles` option now defaults to `"ignore"`. This is a change from Express 4, where dotfiles were served by default. As a result, files inside a directory that starts with a dot (`.`), such as `.well-known`, will no longer be accessible and will return a **404 Not Found** error. This can break functionality that depends on serving dot-directories, such as Android App Links, and Apple Universal Links.
+
+Example of breaking code:
+
+```js
+// v4
+app.use(express.static('public'))
+```
+
+After migrating to Express 5, a request to `/.well-known/assetlinks.json` will result in a **404 Not Found**.
+
+To fix this, serve specific dot-directories explicitly using the `dotfiles: "allow"` option:
+
+```js
+// v5
+app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }))
+app.use(express.static('public'))
+```
+
+This approach allows you to safely serve only the intended dot-directories while keeping the default secure behavior for other dotfiles, which remain inaccessible.
 
 <h3 id="app.listen">app.listen</h3>
 
