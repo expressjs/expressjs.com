@@ -245,8 +245,6 @@ In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `
 
 You can provide multiple callback functions that behave like [middleware](/{{ page.lang }}/guide/using-middleware.html) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
 
-You can use `next('route')` to skip the rest of a route's callbacks and pass control to the next route. For example:
-
 ```js
 app.get('/user/:id', (req, res, next) => {
   if (req.params.id === '0') {
