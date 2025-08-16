@@ -79,7 +79,7 @@ mounting middleware.
 <tr>
 <td>Path</td>
 <td markdown="1">
-This will match the exact path `/abcd` and any paths beginning with `/abcd/` (including subdirectories), but will not match paths like `/abcde` :
+Matches the exact path `/abcd` and any sub-paths starting with `/abcd/` (for example, `/abcd/foo`):
 
 
 ```js
