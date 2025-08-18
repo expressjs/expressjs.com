@@ -24,7 +24,7 @@ req.is('application/*')
 // Using arrays
 // When Content-Type is application/json
 req.is(['json', 'html'])
-// => 'json' 
+// => 'json'
 
 // Using multiple arguments
 // When Content-Type is application/json
