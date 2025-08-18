@@ -93,3 +93,13 @@ var options = {
 
 app.use(express.static('public', options))
 ```
+<h4 id='example.of.express.json'>Example of express.json</h4>
+
+Here is an example of using the `express.json` middleware function with a custom limit:
+
+```js
+// Apply a 5MB limit for /upload requests
+app.use('/upload', express.json({ limit: '5mb' }))
+
+// Use default limit for all other routes
+app.use(express.json())
