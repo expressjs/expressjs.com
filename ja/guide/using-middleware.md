@@ -10,7 +10,7 @@ redirect_from: "  "
 
 Express は、それ自体では最小限の機能を備えたルーティングとミドルウェアの Web フレームワークです。Express アプリケーションは基本的に一連のミドルウェア関数呼び出しです。
 
-_ミドルウェア_ 関数は、[requestオブジェクト](/{{ page.lang }}/4x/api.html#req) (`req`)、[responseオブジェクト](/{{ page.lang }}/4x/api.html#res) (`res`)、およびアプリケーションのリクエストレスポンスサイクルにおける次のミドルウェア関数に対するアクセス権限を持つ関数です。次のミドルウェア関数は一般的に、`next` という変数で表されます。 The next middleware function is commonly denoted by a variable named `next`.
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/5x/api.html#req)  (`req`), the [response object](/{{ page.lang }}/5x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
 
 ミドルウェア関数は以下のタスクを実行できます。
 
@@ -35,7 +35,7 @@ You can also load a series of middleware functions together, which creates a sub
 
 <h2 id='middleware.application'>アプリケーション・レベルのミドルウェア</h2>
 
-`app.use()` 関数と `app.METHOD()` 関数を使用して、アプリケーション・レベルのミドルウェアを [appオブジェクト](/{{ page.lang }}/4x/api.html#app) のインスタンスにバインドします。ここで、`METHOD` は、ミドルウェア関数が小文字で処理するリクエスト (GET、PUT、POST など) の HTTP メソッドです。
+Bind application-level middleware to an instance of the [app object](/{{ page.lang }}/5x/api.html#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
 
 This example shows a middleware function with no mount path. The function is executed every time the app receives a request.
 
@@ -249,9 +249,9 @@ Starting with version 4.x, Express no longer depends on [Connect](https://github
 
 Expressには、次のミドルウェア機能が組み込まれています。
 
-- [express.static](/en/4x/api.html#express.static) は、HTMLファイルや画像などの静的リソースを提供します
-- [express.json](/en/4x/api.html#express.json) はJSONペイロードで受信したリクエストを解析します。**注：Express 4.16.0以降で利用可能** **NOTE: Available with Express 4.16.0+**
-- [express.urlencoded](/en/4x/api.html#express.urlencoded) は、URLエンコードされたペイロードで受信したリクエストを解析します。**注：Express 4.16.0以降で利用可能**  **NOTE: Available with Express 4.16.0+**
+- [express.static](/en/5x/api.html#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/5x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/5x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
 
 <h2 id='middleware.third-party'>Third-party middleware</h2>
 
