@@ -139,6 +139,22 @@ app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], (req, res, next) => {
 </table>
 </div>
 
+> **Note:** The above path examples describe how `app.use()` matches paths.  
+> When using route methods (such as `app.get()`, `app.post()`, etc.), the path must match exactly.  
+> For example:
+> 
+> ```js
+> app.use('/api', (req, res, next) => {
+>   // Matches /api, /api/users, /api/orders/123
+>   next()
+> })
+> 
+> app.get('/api', (req, res) => {
+>   // Only matches /api
+>   res.send('Hello API')
+> })
+> ```
+
 #### Middleware callback function examples
 
 The following table provides some simple examples of middleware functions that
