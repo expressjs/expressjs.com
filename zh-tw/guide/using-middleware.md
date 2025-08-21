@@ -55,6 +55,7 @@ app.use('/upload', express.json({ limit: '5mb' }))
 
 // Use default limit for all other routes
 app.use(express.json())
+```
 
 
 To skip the rest of the middleware functions from a router middleware stack, call `next('route')` to pass control to the next route.
