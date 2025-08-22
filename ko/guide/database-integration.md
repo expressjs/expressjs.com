@@ -34,7 +34,7 @@ redirect_from: "  "
 **모듈**: [cassandra-driver](https://github.com/datastax/nodejs-driver)
 **설치**
 
-### Installation
+### 설치
 
 ```bash
 $ npm install cassandra-driver
@@ -54,9 +54,9 @@ client.execute('select key from system.local', (err, result) => {
 
 ## Couchbase
 
-**Module**: [couchnode](https://github.com/couchbase/couchnode)
+**모듈**: [couchnode](https://github.com/couchbase/couchnode)
 
-### Installation
+### 설치
 
 ```bash
 $ npm install couchbase
@@ -94,7 +94,7 @@ bucket.query(query, [13], (err, result) => {
 **모듈**: [nano](https://github.com/dscape/nano)
 **설치**
 
-### Installation
+### 설치
 
 ```bash
 $ npm install nano
@@ -131,7 +131,7 @@ books.list((err, body) => {
 **모듈**: [levelup](https://github.com/rvagg/node-levelup)
 **설치**
 
-### Installation
+### 설치
 
 ```bash
 $ npm install level levelup leveldown
@@ -159,7 +159,7 @@ db.put('name', 'LevelUP', (err) => {
 **모듈**: [mysql](https://github.com/felixge/node-mysql/)
 **설치**
 
-### Installation
+### 설치
 
 ```bash
 $ npm install mysql
@@ -192,7 +192,7 @@ connection.end()
 **모듈**: [mongodb](https://github.com/mongodb/node-mongodb-native)
 **설치**
 
-### Installation
+### 설치
 
 ```bash
 $ npm install mongodb
@@ -236,9 +236,9 @@ MongoDB용 오브젝트 모델 드라이버가 필요한 경우에는 [Mongoose]
 
 ## Neo4j
 
-**Module**: [neo4j-driver](https://github.com/neo4j/neo4j-javascript-driver)
+**모듈**: [neo4j-driver](https://github.com/neo4j/neo4j-javascript-driver)
 
-### Installation
+### 설치
 
 ```bash
 $ npm install neo4j-driver
@@ -265,11 +265,11 @@ session.readTransaction((tx) => {
 
 ## Oracle
 
-**Module**: [oracledb](https://github.com/oracle/node-oracledb)
+**모듈**: [oracledb](https://github.com/oracle/node-oracledb)
 
-### Installation
+### 설치
 
-NOTE: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
+참고: [설치 전제 조건 참조](https://github.com/oracle/node-oracledb#-installation).
 
 ```bash
 $ npm install oracledb
@@ -314,7 +314,7 @@ getEmployee(101)
 **모듈**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 **설치**
 
-### Installation
+### 설치
 
 ```bash
 $ npm install pg-promise
@@ -340,7 +340,7 @@ db.one('SELECT $1 AS value', 123)
 **모듈**: [redis](https://github.com/mranney/node_redis)
 **설치**
 
-### Installation
+### 설치
 
 ```bash
 $ npm install redis
@@ -371,11 +371,11 @@ client.hkeys('hash key', (err, replies) => {
 })
 ```
 
-## SQL Server
+## SQL 서버
 
-**Module**: [tedious](https://github.com/tediousjs/tedious)
+**모듈**: [tedious](https://github.com/tediousjs/tedious)
 
-### Installation
+### 설치
 
 ```bash
 $ npm install tedious
@@ -437,7 +437,7 @@ function executeStatement () {
 **모듈**: [sqlite3](https://github.com/mapbox/node-sqlite3)
 **설치**
 
-### Installation
+### 설치
 
 ```bash
 $ npm install sqlite3
@@ -472,7 +472,7 @@ db.close()
 **모듈**: [elasticsearch](https://github.com/elastic/elasticsearch-js)
 **설치**
 
-### Installation
+### 설치
 
 ```bash
 $ npm install elasticsearch

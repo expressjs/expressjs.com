@@ -10,7 +10,7 @@ redirect_from: "  "
 
 Express est une infrastructure web middleware et de routage, qui a des fonctions propres minimes : une application Express n'est ni plus ni moins qu'une succession d'appels de fonctions middleware.
 
-Les fonctions de _middleware_ sont des fonctions qui peuvent accéder à l'[objet Request](/{{ page.lang }}/4x/api.html#req)  (`req`), l'[objet response](/{{ page.lang }}/4x/api.html#res) (`res`) et à la fonction middleware suivant dans le cycle demande-réponse de l'application. La fonction middleware suivant est couramment désignée par une variable nommée `next`.
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/5x/api.html#req)  (`req`), the [response object](/{{ page.lang }}/5x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. La fonction middleware suivant est couramment désignée par une variable nommée `next`.
 
 Les fonctions middleware effectuent les tâches suivantes :
 
@@ -34,7 +34,7 @@ Vous pouvez également charger une série de fonctions middleware ensemble, ce q
 
 <h2 id='middleware.application'>Middleware niveau application</h2>
 
-Liez le middleware niveau application à une instance de l'objet [app object](/{{ page.lang }}/4x/api.html#app) en utilisant les fonctions `app.use()` et `app.METHOD()`, où `METHOD` est la méthode HTTP de la demande que gère la fonction middleware (par exemple GET, PUT ou POST) en minuscules.
+Bind application-level middleware to an instance of the [app object](/{{ page.lang }}/5x/api.html#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
 
 Cet exemple illustre une fonction middleware sans chemin de montage. La fonction est exécutée à chaque fois que l'application reçoit une demande.
 
@@ -249,9 +249,9 @@ précédemment incluses à Express' font désormais partie de modules distincts.
 
 La seule fonction middleware intégrée dans Express est `express.static`.
 
-- [express.static](/en/4x/api.html#express.static) serves static assets such as HTML files, images, and so on.
-- [express.json](/en/4x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
-- [express.urlencoded](/en/4x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
+- [express.static](/en/5x/api.html#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/5x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/5x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
 
 <h2 id='middleware.third-party'>Middleware tiers</h2>
 

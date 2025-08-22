@@ -12,11 +12,7 @@ O Express é uma estrutura web de roteamento e middlewares que
 tem uma funcionalidade mínima por si só: Um aplicativo do Express é
 essencialmente uma série de chamadas de funções de middleware.
 
-Funções de _Middleware_ são funções que tem acesso
-ao [objeto de solicitação](/{{ page.lang }}/4x/api.html#req)
-(`req`), o [objeto de resposta](/{{ page.lang }}/4x/api.html#res)
-(`res`), e a próxima função de middleware no ciclo
-solicitação-resposta do aplicativo. A próxima função middleware é
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/5x/api.html#req)  (`req`), the [response object](/{{ page.lang }}/5x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. A próxima função middleware é
 comumente denotada por uma variável chamada `next`.
 
 Funções de middleware podem executar as seguintes tarefas:
@@ -44,11 +40,7 @@ Um aplicativo Express pode usar os seguintes tipos de middleware:
 
 <h2 id='middleware.application'>Middleware de nível do aplicativo</h2>
 
-Vincule middlewares de nível do aplicativo a uma instância do
-[objeto app](/{{ page.lang }}/4x/api.html#app) usando as funções
-`app.use()` e `app.METHOD()`, onde
-`METHOD` é o método HTTP da solicitação que a função
-de middleware manipula (como GET, PUT, ou POST) em letras minúsculas.
+Bind application-level middleware to an instance of the [app object](/{{ page.lang }}/5x/api.html#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
 
 Este exemplo mostra uma função de middleware sem um caminho de
 montagem. A função é executada sempre que o aplicativo receber uma
@@ -294,9 +286,9 @@ de funções de middleware.
 
 Aqui está um exemplo de uso da função de middleware `express.static` com um objeto options elaborado:
 
-- [express.static](/en/4x/api.html#express.static) serves static assets such as HTML files, images, and so on.
-- [express.json](/en/4x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
-- [express.urlencoded](/en/4x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
+- [express.static](/en/5x/api.html#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/5x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/5x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
 
 <h2 id='middleware.third-party'>Middleware de Terceiros</h2>
 
