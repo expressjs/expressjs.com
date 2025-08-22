@@ -251,8 +251,20 @@ Express has the following built-in middleware functions:
 
 - [express.static](/en/4x/api.html#express.static) serves static assets such as HTML files, images, and so on.
 - [express.json](/en/4x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
-- [express.urlencoded](/en/4x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/4x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads. **NOTE: Available with Express 4.16.0+**
 
+Here is an example of using the `express.json` middleware with a custom limit:
+
+```js
+const express = require('express')
+const app = express()
+
+// Apply a 5MB limit for /upload requests
+app.use('/upload', express.json({ limit: '5mb' }))
+
+// Use default limit for all other routes
+app.use(express.json())
+```
 <h2 id='middleware.third-party'>Third-party middleware</h2>
 
 Use third-party middleware to add functionality to Express apps.

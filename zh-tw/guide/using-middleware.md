@@ -36,28 +36,6 @@ You can also load a series of middleware functions together, which creates a sub
 
 使用 `app.use()` 和 `app.METHOD()` 函數，將應用程式層次的中介軟體連結至 [app object](/{{ page.lang }}/4x/api.html#app) 實例，其中 `METHOD` 是中介軟體函數要處理的 HTTP 要求方法（例如 GET、PUT 或 POST），並採小寫。
 
-<h2 id='middleware.built-in'>內建中介軟體</h2>
-
-Express has the following built-in middleware functions:
-
-- express.json()
-- express.urlencoded()
-- express.static()
-
-Here is an example of using the `express.json` middleware with a custom limit:
-
-```js
-const express = require('express')
-const app = express()
-
-// Apply a 5MB limit for /upload requests
-app.use('/upload', express.json({ limit: '5mb' }))
-
-// Use default limit for all other routes
-app.use(express.json())
-```
-
-
 To skip the rest of the middleware functions from a router middleware stack, call `next('route')` to pass control to the next route.
 
 {% capture next-function %}
