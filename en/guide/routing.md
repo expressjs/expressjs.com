@@ -11,6 +11,8 @@ redirect_from: "/guide/routing.html"
 _Routing_ refers to how an application's endpoints (URIs) respond to client requests.
 For an introduction to routing, see [Basic routing](/{{ page.lang }}/starter/basic-routing.html).
 
+You dont have need to install npm for routing e.g npm i route 
+
 You define routing using methods of the Express `app` object that correspond to HTTP methods;
 for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
 see [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD). You can also use [app.all()](/{{ page.lang }}/5x/api.html#app.all) to handle all HTTP methods and [app.use()](/{{ page.lang }}/5x/api.html#app.use) to
