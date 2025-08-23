@@ -22,6 +22,8 @@ In fact, the routing methods can have more than one callback function as argumen
 With multiple callback functions, it is important to provide `next` as an argument to the callback function and then call `next()` within the body of the function to hand off control
 to the next callback.  
 
+You do not need to install any additional npm package (such as `route`) for routing in Express.
+
 The following code is an example of a very basic route.
 
 ```js
