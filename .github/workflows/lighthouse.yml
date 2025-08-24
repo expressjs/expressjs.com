@@ -26,19 +26,29 @@ jobs:
         run: npm install lighthouse
 
       - name: Wait for Netlify preview to be live
+        id: wait_preview
+        continue-on-error: true
         run: |
           PREVIEW_URL="https://deploy-preview-${{ github.event.pull_request.number }}--expressjscom-preview.netlify.app"
           echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
-          for i in {1..4}; do
+          MAX_RETRIES=12
+          DELAY=10
+
+          echo "Checking Netlify preview: $PREVIEW_URL"
+          for i in $(seq 1 $MAX_RETRIES); do
             if curl -s --head "$PREVIEW_URL" | grep "200 OK" > /dev/null; then
-              echo "Preview is live!"
-              break
+              echo "✅ Preview is live!"
+              exit 0
             fi
-            echo "Waiting for Netlify to deploy... ($i/4)"
-            sleep 10
+            echo "⏳ Waiting for Netlify to deploy... ($i/$MAX_RETRIES)"
+            sleep $DELAY
           done
 
+          echo "❌ Preview not live after $((MAX_RETRIES*DELAY)) seconds."
+          exit 1
+
       - name: Run Lighthouse audits
+        if: steps.wait_preview.outcome == 'success'
         run: |
           URLS=(
             "$PREVIEW_URL"
@@ -88,10 +98,12 @@ jobs:
           done
 
       - name: Log Lighthouse report
+        if: steps.wait_preview.outcome == 'success'
         run: |
           cat lighthouse-report.md
 
       - name: Upload Lighthouse reports as artifacts
+        if: steps.wait_preview.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-reports
@@ -99,6 +111,7 @@ jobs:
             lighthouse-report.md
 
       - name: Comment on PR with Lighthouse results
+        if: steps.wait_preview.outcome == 'success'
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
