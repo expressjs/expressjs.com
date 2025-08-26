@@ -816,19 +816,13 @@ div.desktop-lang-switcher {
       }
     }
 
-  /* enable lang list tabbing on keyboard focus */
-  &:focus-within .lang-list {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-  }
-
   > ul.lang-list {
     display: none;
     opacity: 0;
     position: absolute;
     list-style: none;
     visibility: hidden;
+    left: -100px;
     
     li  a {
       display: block;
