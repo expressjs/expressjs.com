@@ -119,6 +119,9 @@ overlay?.addEventListener("click", () => {
 	}
 	overlay.classList.remove("blurs");
 	document.body.classList.remove("no-scroll");
+	// TODO : write helper function 
+	const isOpen = langList.classList.toggle("open");
+	langBtn.setAttribute("aria-expanded", isOpen);
 });
 
 document
