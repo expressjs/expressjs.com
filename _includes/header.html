@@ -12,6 +12,11 @@
   <nav id="navbar" aria-label="primary">
     <input id="q" placeholder="🔎 search">
     <ul id="navmenu">
+      <li>
+        <a href="/" id="home-menu" {% if page.menu=='home' %} class="active" {% endif %}>
+          {{ site.data[page.lang].menu.home }}
+        </a>
+      </li>
       <li id="getting-started-menu" class="submenu">
         <a href="/{{ page.lang }}/starter/installing.html" {% if page.menu=='starter' %} class="active" {% endif%}>
           {{ site.data[page.lang].menu.getting_started }}

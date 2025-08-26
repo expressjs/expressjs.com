@@ -808,15 +808,14 @@ button.lang-btn {
 
 div.desktop-lang-switcher {
   position: relative;
-  > button.lang-btn {
-    &:is(:focus, :hover) {
+  > button.lang-btn.open {
       & + ul {
         display: block;
         opacity: 1;
         visibility: visible;
       }
     }
-  }
+
   /* enable lang list tabbing on keyboard focus */
   &:focus-within .lang-list {
     display: block;
@@ -830,11 +829,7 @@ div.desktop-lang-switcher {
     position: absolute;
     list-style: none;
     visibility: hidden;
-    &:is(:hover, :focus) {
-      display: block;
-      opacity: 1;
-      visibility: visible;
-    }
+    
     li  a {
       display: block;
       padding: 5px 20px 5px 20px;
