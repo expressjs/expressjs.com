@@ -72,11 +72,27 @@ const menu = document.querySelector("#navmenu");
 const overlay = document.querySelector("#overlay");
 const navButton = document.querySelector("#nav-button");
 
-// open / close lang list
-langBtn.addEventListener("click", () => {
-	// TODO : write helper function 
-	const isOpen = langList.classList.toggle("open");
-	langBtn.setAttribute("aria-expanded", isOpen);
+function closeLangList() {
+  langList.classList.remove("open");
+  langBtn.setAttribute("aria-expanded", false);
+}
+
+function toggleLangList() {
+  const isOpen = langList.classList.toggle("open");
+  langBtn.setAttribute("aria-expanded", isOpen);
+}
+
+// toggle on button click
+langBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleLangList();
+});
+
+// close on outside click except for lang btn
+document.body.addEventListener("click", (e) => {
+  if (!langList.contains(e.target)) {
+    closeLangList();
+  }
 });
 
 for (const el of linkItemsMenu) {
@@ -92,9 +108,6 @@ for (const el of linkItemsMenu) {
 }
 
 navButton?.addEventListener("click", () => {
-	// TODO : write helper function
-	const isOpen = langList.classList.toggle("open");
-  	langBtn.setAttribute("aria-expanded", isOpen);
 	menu?.classList.toggle("opens");
 	overlay?.classList.toggle("blurs");
 	document.body.classList.toggle("no-scroll");
