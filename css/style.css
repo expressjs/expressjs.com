@@ -832,19 +832,15 @@ div.desktop-lang-switcher {
       }
     }
 
-   &:first-child {
-    a {
+   > li:first-child > a {
       border-start-start-radius: 10px;
       border-start-end-radius: 10px;
     }
-   }
 
-   &:last-child {
-    a {
+   > li:last-child > a {
       border-end-start-radius: 10px;
       border-end-end-radius: 10px;
     }
-   }
   }
 
   > ul.lang-list.open {
@@ -1693,7 +1689,6 @@ blockquote {
 
   .submenu-content {
     width: 100%;
-    left: -200%;
     position: static;
     display: none;
     margin-top: 7px;
@@ -1703,6 +1698,9 @@ blockquote {
     border: none;
     border-radius: 0;
     box-shadow: none;
+    max-height: 190px;
+    overflow-y: auto;
+    overflow-x: hidden;
     transform: none;
     cursor: pointer;
   }

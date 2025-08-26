@@ -1,12 +1,4 @@
-const langBtn = document.getElementById("langBtn");
-const langList = document.getElementById("langList");
 const i18nMsgBox = document.getElementById("i18n-notice-box");
-
-// open / close lang list
-langBtn.addEventListener("click", () => { 
-  langList.classList.toggle('open')
-  langList.ariaExpanded = langList.ariaExpanded === 'false' ? true : false;
-})
 
 // add/remove class 'scroll' on scroll by 5px
 const scrollTarget = document.querySelector('.logo-container');

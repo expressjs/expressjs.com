@@ -1,8 +1,8 @@
 <div class="desktop-lang-switcher">
-  <button id="langBtn" class="lang-btn" type="button" aria-haspopup="menu" aria-label="Change language">
+  <button id="langBtn" class="lang-btn" type="button" aria-expanded="false" aria-haspopup="listbox" aria-label="Change language">
     {% include icons/i18n.svg %}
   </button>
-  <ul id="langList" class="lang-list" aria-expanded="false">
+  <ul id="langList" class="lang-list" role="listbox">
     {% for lang in site.data.languages %}
     <li>
       <a href="/{{ lang.code }}/{{ url_remainder }}">

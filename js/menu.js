@@ -65,11 +65,19 @@ for (const el of itemsMenu) {
 }
 
 // Mobile Menu and Language Picker
-
+const langBtn = document.getElementById("langBtn");
+const langList = document.getElementById("langList");
 const linkItemsMenu = document.querySelectorAll(".submenu > a");
 const menu = document.querySelector("#navmenu");
 const overlay = document.querySelector("#overlay");
 const navButton = document.querySelector("#nav-button");
+
+// open / close lang list
+langBtn.addEventListener("click", () => {
+	// TODO : write helper function 
+	const isOpen = langList.classList.toggle("open");
+	langBtn.setAttribute("aria-expanded", isOpen);
+});
 
 for (const el of linkItemsMenu) {
 	el.addEventListener("click", (e) => {
@@ -84,6 +92,9 @@ for (const el of linkItemsMenu) {
 }
 
 navButton?.addEventListener("click", () => {
+	// TODO : write helper function
+	const isOpen = langList.classList.toggle("open");
+  	langBtn.setAttribute("aria-expanded", isOpen);
 	menu?.classList.toggle("opens");
 	overlay?.classList.toggle("blurs");
 	document.body.classList.toggle("no-scroll");
