@@ -67,13 +67,9 @@ for (const el of itemsMenu) {
 // Mobile Menu and Language Picker
 
 const linkItemsMenu = document.querySelectorAll(".submenu > a");
-const languageItems = document.querySelectorAll("#language-picker-menu > #navbar > #navmenu > .submenu > a");
-const languagePickerMenu = document.querySelector("#language-picker-menu > #navbar > #navmenu");
 const menu = document.querySelector("#navmenu");
 const overlay = document.querySelector("#overlay");
 const navButton = document.querySelector("#nav-button");
-const languagePickerButton = document.querySelector("#language-picker-button");
-
 
 for (const el of linkItemsMenu) {
 	el.addEventListener("click", (e) => {
@@ -85,53 +81,17 @@ for (const el of linkItemsMenu) {
 			e.preventDefault();
 		}
 	});
-
-}
-
-for (const el of languageItems) {
-	el.addEventListener("click", (e) => {
-		const href = el.getAttribute("href");
-
-		if (href && href !== "#") {
-			languagePickerMenu?.classList.remove("opens");
-			overlay?.classList.remove("blurs");
-			document.body.classList.remove("no-scroll");
-
-			window.location.href = href;
-		}
-	});
 }
 
 navButton?.addEventListener("click", () => {
-	const isLanguageMenuOpen = languagePickerMenu?.classList.contains("opens");
-	if (isLanguageMenuOpen) {
-		languagePickerMenu?.classList.remove("opens");
-		menu?.classList.toggle("opens");
-	} else {
-		menu?.classList.toggle("opens");
-		overlay?.classList.toggle("blurs");
-		document.body.classList.toggle("no-scroll");
-	}
-});
-
-languagePickerButton?.addEventListener("click", () => {
-	const isMenuOpen = menu?.classList.contains("opens");
-	if (isMenuOpen) {
-		menu?.classList.remove("opens");
-		languagePickerMenu?.classList.toggle("opens");
-	} else {
-		languagePickerMenu?.classList.toggle("opens");
-		overlay?.classList.toggle("blurs");
-		document.body.classList.toggle("no-scroll");
-	}
+	menu?.classList.toggle("opens");
+	overlay?.classList.toggle("blurs");
+	document.body.classList.toggle("no-scroll");
 });
 
 overlay?.addEventListener("click", () => {
 	if (menu?.classList.contains("opens")) {
 		menu.classList.remove("opens");
-	}
-	if (languagePickerMenu?.classList.contains("opens")) {
-		languagePickerMenu.classList.remove("opens");
 	}
 	overlay.classList.remove("blurs");
 	document.body.classList.remove("no-scroll");

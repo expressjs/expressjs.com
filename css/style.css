@@ -802,23 +802,8 @@ button.lang-btn {
   cursor: pointer;
   color: var(--card-fg);
   padding: 0.2rem;
-  font-size: inherit;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-
-  &::after {
-    content: "";
-    display: block;
-    width: 0.8em;
-    height: 0.5em;
-    background-color: var(--card-fg);
-    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-    cursor: pointer;
-    pointer-events: none;
-    transition: transform 0.2s ease-in-out;
-  }
+  width: fit-content;
+  aspect-ratio: 1;
 }
 
 div.desktop-lang-switcher {
@@ -859,11 +844,6 @@ div.desktop-lang-switcher {
         background: var(--hover-bg);
       }
     }
-  }
-
-  /* rotate arrow */
-  &:is(:hover,:focus-within) button.lang-btn::after {
-    transform: rotate(180deg);
   }
 }
 
@@ -909,7 +889,7 @@ div.desktop-lang-switcher {
 .submenu-content {
   position: absolute;
   top: 100%;
-  left: 50%;
+  left: -100%;
   transform: translate(-50%);
   margin: auto;
   box-shadow: 1px 2px var(--hover-fg);
@@ -953,9 +933,6 @@ div.desktop-lang-switcher {
   text-decoration: none;
 }
 
-#language-picker-menu {
-  display: none;
-}
 
 /* TOC side menu */
 
@@ -1320,26 +1297,6 @@ h2 a {
     display: flex;
     gap: 8px;
   }
-
-  #language-picker-menu #navmenu>li:first-child {
-    display: flex;
-  }
-
-  #language-picker-menu #navmenu {
-    max-height: 70vh;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    text-align: center;
-  }
-
-  #language-picker-menu {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    z-index: 1000;
-  }
 }
 
 /* TOC responsive */
@@ -1447,10 +1404,6 @@ h2 a {
 
   header {
     position: absolute;
-  }
-
-  #mobile-menu {
-    display:none;
   }
 }
 
@@ -1589,9 +1542,6 @@ h2 a {
     margin-right: 0;
     padding-right: 10px;
   }
-
-
-
   #blog-doc .blog-details + p > img {
     margin-bottom: 15px;
   }
@@ -1661,14 +1611,6 @@ blockquote {
 }
 
 @media all and (max-width: 1110px) {
-  .desktop-lang-switcher {
-    display: none;
-  }
-
-  #mobile-menu {
-    display: block;
-  }
-
   .algolia-autocomplete {
     display: none !important;
   }
@@ -1740,6 +1682,7 @@ blockquote {
 
   .submenu-content {
     width: 100%;
+    left: -200%;
     position: static;
     display: none;
     margin-top: 7px;
@@ -1749,9 +1692,6 @@ blockquote {
     border: none;
     border-radius: 0;
     box-shadow: none;
-    max-height: 190px;
-    overflow-y: auto;
-    overflow-x: hidden;
     transform: none;
     cursor: pointer;
   }
