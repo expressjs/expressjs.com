@@ -808,13 +808,6 @@ button.lang-btn {
 
 div.desktop-lang-switcher {
   position: relative;
-  > button.lang-btn.open {
-      & + ul {
-        display: block;
-        opacity: 1;
-        visibility: visible;
-      }
-    }
 
   > ul.lang-list {
     display: none;
@@ -822,7 +815,12 @@ div.desktop-lang-switcher {
     position: absolute;
     list-style: none;
     visibility: hidden;
-    left: -100px;
+    left: -75px;
+    z-index: 100;
+    background-color: var(--card-bg);
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 1px;
     
     li  a {
       display: block;
@@ -833,6 +831,26 @@ div.desktop-lang-switcher {
         background: var(--hover-bg);
       }
     }
+
+   &:first-child {
+    a {
+      border-start-start-radius: 10px;
+      border-start-end-radius: 10px;
+    }
+   }
+
+   &:last-child {
+    a {
+      border-end-start-radius: 10px;
+      border-end-end-radius: 10px;
+    }
+   }
+  }
+
+  > ul.lang-list.open {
+    display: block;
+    opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -878,7 +896,7 @@ div.desktop-lang-switcher {
 .submenu-content {
   position: absolute;
   top: 100%;
-  left: -100%;
+  left: 50%;
   transform: translate(-50%);
   margin: auto;
   box-shadow: 1px 2px var(--hover-fg);
@@ -1602,6 +1620,10 @@ blockquote {
 @media all and (max-width: 1110px) {
   .algolia-autocomplete {
     display: none !important;
+  }
+
+  #mobile-menu {
+    display: block;
   }
 
   #navbar {
