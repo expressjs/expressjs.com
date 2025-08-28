@@ -38,7 +38,8 @@ These are some additional popular middleware modules.
 
 {% include community-caveat.html %}
 
-| Middleware module                                   | Description                                                                                                                                   |
-| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| [helmet](https://github.com/helmetjs/helmet)        | Helps secure your apps by setting various HTTP headers.                                                                                       |
-| [passport](https://github.com/jaredhanson/passport) | Authentication using "strategies" such as OAuth, OpenID and many others.  See [passportjs.org](https://passportjs.org/) for more information. |
+| Middleware module                                                     | Description                                                                                                                                   |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [helmet](https://github.com/helmetjs/helmet)                          | Helps secure your apps by setting various HTTP headers.                                                                                       |
+| [passport](https://github.com/jaredhanson/passport)                   | Authentication using "strategies" such as OAuth, OpenID and many others.  See [passportjs.org](https://passportjs.org/) for more information. |
+| [express-healthcheck](https://github.com/OroTeam/express-healthcheck) | A Healthcheck endpoint for you app with many metrics and features                                                                             |
