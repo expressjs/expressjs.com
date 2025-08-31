@@ -29,39 +29,30 @@ Where:
 This tutorial assumes that an instance of `express` named `app` is created and the server is running. If you are not familiar with creating an app and starting it, see the [Hello world example](/{{ page.lang }}/starter/hello-world.html).
 </div>
 
-The following examples illustrate defining simple routes.
-
-Respond with `Hello World!` on the homepage:
-
-```js
+// GET request to the homepage
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.status(200).json({ message: 'Hello World!' })
 })
-```
 
-Respond to a POST request on the root route (`/`), the application's home page:
-
-```js
+// POST request to the homepage
 app.post('/', (req, res) => {
-  res.send('Got a POST request')
+  res.status(201).json({ message: 'Got a POST request' })
 })
-```
 
-Respond to a PUT request to the `/user` route:
-
-```js
+// PUT request to /user
 app.put('/user', (req, res) => {
-  res.send('Got a PUT request at /user')
+  res.status(200).json({ message: 'Got a PUT request at /user' })
 })
-```
 
-Respond to a DELETE request to the `/user` route:
+// PATCH request to /user (partial update)
+app.patch('/user', (req, res) => {
+  res.status(200).json({ message: 'Got a PATCH request at /user' })
+})
 
-```js
+// DELETE request to /user
 app.delete('/user', (req, res) => {
-  res.send('Got a DELETE request at /user')
+  res.status(200).json({ message: 'Got a DELETE request at /user' })
 })
-```
 
 For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).
 
