@@ -29,12 +29,12 @@ jobs:
         run: |
           PREVIEW_URL="https://deploy-preview-${{ github.event.pull_request.number }}--expressjscom-preview.netlify.app"
           echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
-          MAX_RETRIES=12
+          MAX_RETRIES=10
           DELAY=10
 
           echo "Checking Netlify preview: $PREVIEW_URL"
           for i in $(seq 1 $MAX_RETRIES); do
-            if curl -s --head --max-time 5 "$PREVIEW_URL" | grep "200 OK" > /dev/null; then
+            if curl -s -I "$PREVIEW_URL" | grep "HTTP/.* 200" > /dev/null; then
               echo "✅ Preview is live!"
               echo "skip_lighthouse=false" >> "$GITHUB_ENV"
               exit 0
