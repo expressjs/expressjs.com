@@ -10,7 +10,7 @@ redirect_from: "  "
 
 Express 是一个路由和中间件 Web 框架，其自身只具有最低程度的功能：Express 应用程序基本上是一系列中间件函数调用。
 
-_中间件_函数能够访问[请求对象](/{{ page.lang }}/4x/api.html#req) (`req`)、[响应对象](/{{ page.lang }}/4x/api.html#res) (`res`) 以及应用程序的请求/响应循环中的下一个中间件函数。下一个中间件函数通常由名为 `next` 的变量来表示。 The next middleware function is commonly denoted by a variable named `next`.
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/5x/api.html#req)  (`req`), the [response object](/{{ page.lang }}/5x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
 
 中间件函数可以执行以下任务：
 
@@ -34,7 +34,7 @@ You can also load a series of middleware functions together, which creates a sub
 
 <h2 id='middleware.application'>应用层中间件</h2>
 
-使用 `app.use()` 和 `app.METHOD()` 函数将应用层中间件绑定到[应用程序对象](/{{ page.lang }}/4x/api.html#app)的实例，其中 `METHOD` 是中间件函数处理的请求的小写 HTTP 方法（例如 GET、PUT 或 POST）。
+Bind application-level middleware to an instance of the [app object](/{{ page.lang }}/5x/api.html#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
 
 This example shows a middleware function with no mount path. The function is executed every time the app receives a request.
 
@@ -252,9 +252,9 @@ Starting with version 4.x, Express no longer depends on [Connect](https://github
 
 Express has the following built-in middleware functions:
 
-- [express.static](/en/4x/api.html#express.static) serves static assets such as HTML files, images, and so on.
-- [express.json](/en/4x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
-- [express.urlencoded](/en/4x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
+- [express.static](/en/5x/api.html#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/5x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/5x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
 
 <h2 id='middleware.third-party'>第三方中间件</h2>
 
