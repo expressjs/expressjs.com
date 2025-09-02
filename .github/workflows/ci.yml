@@ -22,7 +22,7 @@ jobs:
       github.event_name != 'pull_request_review'
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         persist-credentials: false
  
@@ -46,7 +46,7 @@ jobs:
       github.event_name != 'pull_request_review'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
 
