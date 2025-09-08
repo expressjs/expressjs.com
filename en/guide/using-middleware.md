@@ -252,7 +252,6 @@ Express has the following built-in middleware functions:
 - [express.static](/en/5x/api.html#express.static) serves static assets such as HTML files, images, and so on.
 - [express.json](/en/5x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
 - [express.urlencoded](/en/5x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
- gh-pages
 
 Here is an example of using the `express.json` middleware with a custom limit:
 
