@@ -1141,6 +1141,8 @@ h2 a {
 }
 
 .heading-link {
+  margin-left: 0.3em;
+  font-size: 1rem;
   text-decoration: none;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
