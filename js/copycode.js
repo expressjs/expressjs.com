@@ -1,5 +1,5 @@
 const codeBlocks = document.querySelectorAll("pre:has(code)");
-const headings = document.querySelectorAll('h2[id],h3[id]');
+const headers = document.querySelectorAll('h2[id],h3[id]');
 
 codeBlocks.forEach((block) => {
   // Only add button if browser supports Clipboard API
@@ -15,7 +15,7 @@ codeBlocks.forEach((block) => {
 });
 
 // add heading links
-for (const heading of headings) {
+for (const heading of headers) {
     const linkIcon = document.createElement('a');
     linkIcon.setAttribute('href', `#${heading.id}`);
     linkIcon.classList.add('heading-link');
