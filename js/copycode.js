@@ -1,4 +1,5 @@
 const codeBlocks = document.querySelectorAll("pre:has(code)");
+const headings = document.querySelectorAll('h2[id],h3[id]');
 
 codeBlocks.forEach((block) => {
   // Only add button if browser supports Clipboard API
@@ -12,6 +13,15 @@ codeBlocks.forEach((block) => {
     await copyCode(block, button);
   });
 });
+
+// add heading links
+for (const heading of headings) {
+    const linkIcon = document.createElement('a');
+    linkIcon.setAttribute('href', `#${heading.id}`);
+    linkIcon.classList.add('heading-link');
+    linkIcon.setAttribute("aria-label", `Link to section ${heading.id}`);
+    heading.appendChild(linkIcon);
+}
 
 function createCopyButton() {
   const button = document.createElement("button");

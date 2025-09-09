@@ -1135,6 +1135,25 @@ h2 a {
   font-size: 16px;
 }
 
+/* h2 -> h3 header links */
+.heading-link::after {
+  content: '🔗';
+  margin-left: 0.5em;
+  color: var(--card-fg);
+}
+
+.heading-link {
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  padding: 0.25em;
+}
+
+.heading-link:is(:hover, :focus, :focus-visible) {
+  opacity: 1;
+  outline: 1px solid var(--card-fg);
+}
+
 /* search-bar desktop re-sizing */
 @media all and (min-width: 950px) {
   .algolia-autocomplete {
