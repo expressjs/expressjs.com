@@ -125,4 +125,6 @@ The generated app has the following directory structure:
 The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
 </div>
 
-###  [Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)
+<div class="page-navigation">
+[Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html) [Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)
+</div>

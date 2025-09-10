@@ -44,4 +44,6 @@ $ node app.js
 
 Laden Sie dann [http://localhost:3000/](http://localhost:3000/) in einen Browser, um die Ausgabe zu sehen.
 
-### [Previous: Installing ](/{{ page.lang }}/starter/installing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Express Generator ](/{{ page.lang }}/starter/generator.html)
+<div class="page-navigation">
+[Previous: Installing ](/{{ page.lang }}/starter/installing.html) [Next: Express Generator ](/{{ page.lang }}/starter/generator.html)
+</div>

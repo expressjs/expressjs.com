@@ -50,4 +50,6 @@ $ npm install express --no-save
 By default with version npm 5.0+, `npm install` adds the module to the `dependencies` list in the `package.json` file; with earlier versions of npm, you must specify the `--save` option explicitly. Then, afterwards, running `npm install` in the app directory will automatically install modules in the dependencies list.
 </div>
 
-###  [Next: Hello World ](/{{ page.lang }}/starter/hello-world.html)
+<div class="page-navigation">
+[Next: Hello World ](/{{ page.lang }}/starter/hello-world.html)
+</div>

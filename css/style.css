@@ -867,6 +867,32 @@ div.desktop-lang-switcher {
   }
 }
 
+/* page navigation */
+.page-navigation {
+  margin-top: 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-navigation a {
+  color: var(--link);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.page-navigation a:hover {
+  background-color: var(--hover-bg);
+  border-color: var(--hover-border);
+}
+
 /* navigation */
 #navbar {
   line-height: 30px;
