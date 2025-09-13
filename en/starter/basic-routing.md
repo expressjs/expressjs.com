@@ -65,6 +65,6 @@ app.delete('/user', (req, res) => {
 
 For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).
 
-<div class="page-navigation">
+<nav aria-label="breadcrumb" class="page-navigation" markdown="1">
 [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html) [Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)
-</div>
+</nav>

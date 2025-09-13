@@ -18,6 +18,6 @@ These are some additional examples with more extensive integrations.
 - [prisma-fullstack](https://github.com/prisma/prisma-examples/tree/latest/pulse/fullstack-simple-chat) - Fullstack app with Express and Next.js using [Prisma](https://www.npmjs.com/package/prisma) as an ORM
 - [prisma-rest-api-ts](https://github.com/prisma/prisma-examples/tree/latest/orm/express) - REST API with Express in TypeScript using [Prisma](https://www.npmjs.com/package/prisma) as an ORM
 
-<div class="page-navigation">
+<nav aria-label="breadcrumb" class="page-navigation" markdown="1">
 [Previous: Static Files ](/{{ page.lang }}/starter/static-files.html) [Next: FAQ ](/{{ page.lang }}/starter/faq.html)
-</div>
+</nav>

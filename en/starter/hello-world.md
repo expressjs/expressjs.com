@@ -48,6 +48,6 @@ $ node app.js
 
 Then, load `http://localhost:3000/` in a browser to see the output.
 
-<div class="page-navigation">
+<nav aria-label="breadcrumb" class="page-navigation" markdown="1">
 [Previous: Installing ](/{{ page.lang }}/starter/installing.html) [Next: Express Generator ](/{{ page.lang }}/starter/generator.html)
-</div>
+</nav>

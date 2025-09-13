@@ -871,7 +871,6 @@ div.desktop-lang-switcher {
 .page-navigation {
   margin-top: 2rem;
   padding: 1rem 0;
-  border-top: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;

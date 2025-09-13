@@ -78,6 +78,6 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 
 For more details about the `serve-static` function and its options, see  [serve-static](/resources/middleware/serve-static.html).
 
-<div class="page-navigation">
+<nav aria-label="breadcrumb" class="page-navigation" markdown="1">
 [Previous: Basic Routing ](/{{ page.lang }}/starter/basic-routing.html) [Next: More examples ](/{{ page.lang }}/starter/examples.html)
-</div>
+</nav>
