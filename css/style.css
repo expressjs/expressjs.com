@@ -1137,7 +1137,7 @@ h2 a {
 
 /* h2 -> h3 header links */
 .heading-link::after {
-  content: '🔗';
+  content: '#';
 }
 
 .heading-link {
