@@ -802,42 +802,12 @@ button.lang-btn {
   cursor: pointer;
   color: var(--card-fg);
   padding: 0.2rem;
-  font-size: inherit;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-
-  &::after {
-    content: "";
-    display: block;
-    width: 0.8em;
-    height: 0.5em;
-    background-color: var(--card-fg);
-    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-    cursor: pointer;
-    pointer-events: none;
-    transition: transform 0.2s ease-in-out;
-  }
+  width: fit-content;
+  aspect-ratio: 1;
 }
 
 div.desktop-lang-switcher {
   position: relative;
-  > button.lang-btn {
-    &:is(:focus, :hover) {
-      & + ul {
-        display: block;
-        opacity: 1;
-        visibility: visible;
-      }
-    }
-  }
-  /* enable lang list tabbing on keyboard focus */
-  &:focus-within .lang-list {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-  }
 
   > ul.lang-list {
     display: none;
@@ -845,11 +815,14 @@ div.desktop-lang-switcher {
     position: absolute;
     list-style: none;
     visibility: hidden;
-    &:is(:hover, :focus) {
-      display: block;
-      opacity: 1;
-      visibility: visible;
-    }
+    left: -75px;
+    z-index: 100;
+    background-color: var(--card-bg);
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 0px;
+    min-width: max-content;
+    
     li  a {
       display: block;
       padding: 5px 20px 5px 20px;
@@ -859,11 +832,22 @@ div.desktop-lang-switcher {
         background: var(--hover-bg);
       }
     }
+
+   > li:first-child > a {
+      border-start-start-radius: 10px;
+      border-start-end-radius: 10px;
+    }
+
+   > li:last-child > a {
+      border-end-start-radius: 10px;
+      border-end-end-radius: 10px;
+    }
   }
 
-  /* rotate arrow */
-  &:is(:hover,:focus-within) button.lang-btn::after {
-    transform: rotate(180deg);
+  > ul.lang-list.open {
+    display: block;
+    opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -953,9 +937,6 @@ div.desktop-lang-switcher {
   text-decoration: none;
 }
 
-#language-picker-menu {
-  display: none;
-}
 
 /* TOC side menu */
 
@@ -1320,26 +1301,6 @@ h2 a {
     display: flex;
     gap: 8px;
   }
-
-  #language-picker-menu #navmenu>li:first-child {
-    display: flex;
-  }
-
-  #language-picker-menu #navmenu {
-    max-height: 70vh;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    text-align: center;
-  }
-
-  #language-picker-menu {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    z-index: 1000;
-  }
 }
 
 /* TOC responsive */
@@ -1447,10 +1408,6 @@ h2 a {
 
   header {
     position: absolute;
-  }
-
-  #mobile-menu {
-    display:none;
   }
 }
 
@@ -1589,9 +1546,6 @@ h2 a {
     margin-right: 0;
     padding-right: 10px;
   }
-
-
-
   #blog-doc .blog-details + p > img {
     margin-bottom: 15px;
   }
@@ -1661,16 +1615,12 @@ blockquote {
 }
 
 @media all and (max-width: 1110px) {
-  .desktop-lang-switcher {
-    display: none;
+  .algolia-autocomplete {
+    display: none !important;
   }
 
   #mobile-menu {
     display: block;
-  }
-
-  .algolia-autocomplete {
-    display: none !important;
   }
 
   #navbar {
