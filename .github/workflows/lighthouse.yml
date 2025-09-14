@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout PR code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js with npm cache
         uses: actions/setup-node@v4
@@ -29,16 +29,26 @@ jobs:
         run: |
           PREVIEW_URL="https://deploy-preview-${{ github.event.pull_request.number }}--expressjscom-preview.netlify.app"
           echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
-          for i in {1..4}; do
-            if curl -s --head "$PREVIEW_URL" | grep "200 OK" > /dev/null; then
-              echo "Preview is live!"
-              break
+          MAX_RETRIES=10
+          DELAY=10
+
+          echo "Checking Netlify preview: $PREVIEW_URL"
+          for i in $(seq 1 $MAX_RETRIES); do
+            if curl -s -I "$PREVIEW_URL" | grep "HTTP/.* 200" > /dev/null; then
+              echo "✅ Preview is live!"
+              echo "skip_lighthouse=false" >> "$GITHUB_ENV"
+              exit 0
             fi
-            echo "Waiting for Netlify to deploy... ($i/4)"
-            sleep 10
+            echo "⏳ Waiting for Netlify to deploy... ($i/$MAX_RETRIES)"
+            sleep $DELAY
           done
 
+          echo "❌ Preview not live after $((MAX_RETRIES*DELAY)) seconds."
+          echo "skip_lighthouse=true" >> "$GITHUB_ENV"
+          exit 0
+
       - name: Run Lighthouse audits
+        if: env.skip_lighthouse == 'false'
         run: |
           URLS=(
             "$PREVIEW_URL"
@@ -88,10 +98,12 @@ jobs:
           done
 
       - name: Log Lighthouse report
+        if: env.skip_lighthouse == 'false'
         run: |
           cat lighthouse-report.md
 
       - name: Upload Lighthouse reports as artifacts
+        if: env.skip_lighthouse == 'false'
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-reports
@@ -99,6 +111,7 @@ jobs:
             lighthouse-report.md
 
       - name: Comment on PR with Lighthouse results
+        if: env.skip_lighthouse == 'false'
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
