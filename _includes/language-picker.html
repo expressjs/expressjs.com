@@ -1,3 +1,6 @@
+{% assign url_parts = page.url | split: '/' %}
+{% assign url_remainder = url_parts | slice: 2, url_parts.size | join: '/' %}
+{% assign current_lang = page.lang %}
 <div class="desktop-lang-switcher">
   <button id="langBtn" class="lang-btn" type="button" aria-expanded="false" aria-haspopup="listbox" aria-label="Change language">
     {% include icons/i18n.svg %}
