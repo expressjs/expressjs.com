@@ -1138,6 +1138,7 @@ h2 a {
 /* h2 -> h3 header links */
 .heading-link::after {
   content: '#';
+  color: var(--card-fg);
 }
 
 .heading-link {
@@ -1152,7 +1153,6 @@ h2:hover .heading-link,
 h3:hover .heading-link,
 .heading-link:is(:hover, :focus, :focus-visible) {
   opacity: 1;
-  outline: 2px solid var(--card-fg);
 }
 
 /* search-bar desktop re-sizing */
