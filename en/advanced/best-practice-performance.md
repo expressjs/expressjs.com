@@ -163,7 +163,7 @@ Setting NODE_ENV to "production" makes Express:
 * Cache CSS files generated from CSS extensions.
 * Generate less verbose error messages.
 
-[Tests indicate](https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) that just doing this can improve app performance by a factor of three!
+[Tests indicate](https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) that just doing this can [improve app performance](https://middleware.io/product/apm/) by a factor of three!
 
 If you need to write environment-specific code, you can check the value of NODE_ENV with `process.env.NODE_ENV`. Be aware that checking the value of any environment variable incurs a performance penalty, and so should be done sparingly.
 
