@@ -6,7 +6,7 @@ menu: blog
 redirect_from: "/blog/write.html"
 ---
 
-![Blogger]({{site.url}}/images/blogger.jpg)
+![Blogger]({{site.url}}/assets/images/blogger.jpg)
 
 If you have an idea for a blog post, follow these steps to propose it and potentially get it published!
 

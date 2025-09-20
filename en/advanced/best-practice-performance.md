@@ -250,7 +250,7 @@ For more information on systemd, see the [systemd reference (man page)](http://w
 
 In a multi-core system, you can increase the performance of a Node app by many times by launching a cluster of processes. A cluster runs multiple instances of the app, ideally one instance on each CPU core, thereby distributing the load and tasks among the instances.
 
-![Balancing between application instances using the cluster API](/images/clustering.png)
+![Balancing between application instances using the cluster API](/assets/images/clustering.png)
 
 IMPORTANT: Since the app instances run as separate processes, they do not share the same memory space. That is, objects are local to each instance of the app. Therefore, you cannot maintain state in the application code. However, you can use an in-memory datastore like [Redis](http://redis.io/) to store session-related data and state. This caveat applies to essentially all forms of horizontal scaling, whether clustering with multiple processes or multiple physical servers.
 
