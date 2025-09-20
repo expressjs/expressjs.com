@@ -19,42 +19,6 @@ const scrollObserver = new IntersectionObserver(
 
 if (scrollTarget) scrollObserver.observe(scrollTarget);
 
-// heighlight current Menu on scroll
-const headings = Array.from(document.querySelectorAll("h2, h3"));
-const menuLinks = document.querySelectorAll("#menu li a");
-
-const observerOptions = {
-  root: null,
-  rootMargin: "-10% 0px -65% 0px",
-  threshold: 1,
-};
-
-const menuObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      const currentApiPrefix = entry.target.id.split(".")[0];
-      const parentMenuSelector = `#${currentApiPrefix}-menu`;
-      const parentMenuEl = document.querySelector(parentMenuSelector);
-
-      // open submenu on scroll
-      if (parentMenuEl) parentMenuEl.classList.add("active");
-
-      // Remove active class from last menu item
-      const lastActiveMenu = document.querySelector(".active[id$='-menu']");
-      if (lastActiveMenu && lastActiveMenu.id !== parentMenuEl.id) {
-        lastActiveMenu.classList.remove("active");
-      }
-
-      // Update active link
-      menuLinks.forEach((link) => link.classList.remove("active"));
-      const activeLink = document.querySelector(`a[href="#${entry.target.id}"]`);
-      if (activeLink && !activeLink.classList.contains("active")) activeLink.classList.add("active");
-    }
-  });
-}, observerOptions);
-
-headings.forEach((heading) => menuObserver.observe(heading));
-
 // i18n message box : this box appears hidden for all page.lang != 'en'
 const isI18nCookie = readCookie('i18nClose');
 if (i18nMsgBox && !isI18nCookie) {

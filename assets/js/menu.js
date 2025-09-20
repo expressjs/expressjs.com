@@ -64,7 +64,6 @@ for (const el of itemsMenu) {
 	});
 }
 
-// Mobile Menu and Language Picker
 const langBtn = document.getElementById("langBtn");
 const langList = document.getElementById("langList");
 const linkItemsMenu = document.querySelectorAll(".submenu > a");
@@ -138,58 +137,3 @@ function removeActiveFromDrawers(navDrawers) {
 function addActiveToDrawer(drawer) {
 	drawer.querySelector('a').classList.add('active')
 }
-
-// TOC 
-const toggleBtn = document.getElementById("menu-toggle");
-const tocList = document.getElementById("menu");
-
-function updateTocVisibility() {
-	if (isTocScreen) {
-	  toggleBtn?.classList.add("show");
-	} else {
-	  toggleBtn?.classList.remove("show");
-	}
-  }
-
-// toc button on page load
-updateTocVisibility();
-
-// Listen for changes in screen size
-tocScreen.addEventListener("change", (event) => {
-  isTocScreen = event.matches;
-  updateTocVisibility();
-});
-
-// Toggle toc menu on button click
-toggleBtn?.addEventListener("click", (e) => {
-	toggleBtn.classList.toggle("rotate");
-  if(tocList?.classList.contains("open")) {
-	tocList.classList.remove("open");
-  } else {
-	tocList.classList.add("open");
-  }
-});
-  
-// Open/Close sub TOC content on click
-document.querySelectorAll("#menu > li > a").forEach((link) => {
-	link.addEventListener("click", function (event) {
-      event.preventDefault(); // stop navigation to submenu
-
-	  // Find the closest parent <li>
-	  const closestLiParent = link.closest("li");
-	  const childUlSubMenu = closestLiParent.children[1];
-  
-	  // If submenu is already active, remove "active" class (toggle behavior)
-	  if (childUlSubMenu?.classList.contains("active")) {
-		childUlSubMenu.classList.remove("active");
-	  } else {
-		// Remove "active" from all other submenus
-		document.querySelectorAll("#menu > li > ul").forEach((subMenu) => {
-		  subMenu.classList.remove("active");
-		});
-  
-		// Add "active" to the clicked submenu
-		childUlSubMenu?.classList.add("active");
-	  }
-	});
-  });
