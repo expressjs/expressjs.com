@@ -50,3 +50,25 @@
   --supported-fg:#299009;
   --eol-fg: #ff1a1a;
 }
+
+html.dark-mode {
+
+  #icon-sun { 
+    display: inline; 
+  }
+  
+  .submenu-content {
+    box-shadow: 1px 2px var(--hover-bg);
+    background-color: var(--card-bg);
+  }
+
+  #navmenu>li:hover {
+    ul {
+      background-color: var(--card-bg);
+    }
+  }
+  
+  .blog-excerpt {
+    color: var(--notice-accent);
+  }
+}
