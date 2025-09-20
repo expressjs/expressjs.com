@@ -10,16 +10,9 @@
     <link rel="preload" href="/fonts/open-sans/woff/OpenSans-Italic.woff" as="font" type="font/woff" crossorigin>
     <link rel="stylesheet" href="/assets/fonts/open-sans/fonts.css">
 
-    <!-- CSS Preconnect & Preload -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preload" href="/assets/css/variables.css?_={{ site.time | date: '%s' }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="/assets/css/style.css?_={{ site.time | date: '%s' }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="/assets/css/variables.css?_={{ site.time | date: '%s' }}">
-        <link rel="stylesheet" href="/assets/css/style.css?_={{ site.time | date: '%s' }}">
-    </noscript>
-
     <!-- Non-critical CSS -->
+    <link rel="stylesheet" href="/assets/css/variables.css?_={{ site.time | date: '%s' }}">
+    <link rel="stylesheet" href="/assets/css/style.css?_={{ site.time | date: '%s' }}">
     <link rel="stylesheet" href="/assets/css/sintax.css?_={{ site.time | date: '%s' }}">
     <link rel="stylesheet" href="/assets/css/langs/{{ page.lang }}.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css">
