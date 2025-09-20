@@ -10,6 +10,11 @@
     <link rel="preload" href="/fonts/open-sans/woff/OpenSans-Italic.woff" as="font" type="font/woff" crossorigin>
     <link rel="stylesheet" href="/assets/fonts/open-sans/fonts.css">
 
+    <!-- preload js -->
+    <link rel="preload" href="/assets/js/theme.js" as="script">
+    <link rel="preload" href="/assets/js/menu.js" as="script">
+    <link rel="preload" href="/assets/js/app.js" as="script">
+
     <!-- CSS Preconnect & Preload -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preload" href="/assets/css/variables.css?_={{ site.time | date: '%s' }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -33,7 +38,7 @@
     <script data-cfasync="false" defer src="/assets/js/menu.js"></script>
     <script data-cfasync="false" async src="/assets/js/copycode.js"></script>
     {% if page.layout == 'api' %}
-    <script type="module" src="/assets/js/api.js"></script>
+    <script data-cfasync="false" defer src="/assets/js/api.js"></script>
     {% endif %}
 
     <!-- SEO -->
