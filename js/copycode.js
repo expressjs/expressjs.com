@@ -19,7 +19,7 @@ for (const heading of headers) {
     const linkIcon = document.createElement('a');
     linkIcon.setAttribute('href', `#${heading.id}`);
     linkIcon.classList.add('heading-link');
-    linkIcon.setAttribute("aria-label", `Link to section ${heading.id}`);
+    linkIcon.setAttribute("aria-label", `to section ${heading.textContent.trim()}`);
     heading.appendChild(linkIcon);
 }
 
@@ -67,3 +67,4 @@ function updateButtonState(button, statusClass, ariaLabel) {
 
   button.dataset.timerId = timer;
 }
+
