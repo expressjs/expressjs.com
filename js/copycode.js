@@ -1,5 +1,5 @@
 const codeBlocks = document.querySelectorAll("pre:has(code)");
-const headers = document.querySelectorAll('h2[id],h3[id]');
+const headers = document.querySelectorAll('main :is(h2,h3)[id]');
 
 codeBlocks.forEach((block) => {
   // Only add button if browser supports Clipboard API
