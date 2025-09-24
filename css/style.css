@@ -1132,6 +1132,7 @@ h2 a {
 
 h2:hover .heading-link,
 h3:hover .heading-link,
+:target .heading-link,
 .heading-link:is(:hover, :focus, :focus-visible) {
   opacity: 1;
 }
