@@ -1122,7 +1122,7 @@ h2 a {
 }
 
 .heading-link {
-  margin-left: 0.3em;
+  padding-inline: 0.3em;
   font-size: inherit;
   text-decoration: none;
   color: inherit;
