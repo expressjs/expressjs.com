@@ -1119,13 +1119,13 @@ h2 a {
 /* h2 -> h3 header links */
 .heading-link::after {
   content: '#';
-  color: var(--card-fg);
 }
 
 .heading-link {
   margin-left: 0.3em;
-  font-size: 1rem;
+  font-size: inherit;
   text-decoration: none;
+  color: inherit;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
 }
@@ -1757,3 +1757,4 @@ blockquote {
     border-bottom: 1px solid var(--border);
   }
 }
+
