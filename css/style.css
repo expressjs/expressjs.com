@@ -17,7 +17,20 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 
+html {
+  /*
+    html & body need to take the whole
+    visible area in order for the footer
+    to be pushed all the way down or else
+    on really big screens or when the user
+    is zoomed out, the footer is not all
+    the way at the bottom of the screen
+  */
+  height: 100%;
+}
+
 body {
+  height: 100%;
   font: 400 14px/1.6 "Open Sans", sans-serif;
   background: var(--bg);
   margin: 0;
@@ -40,6 +53,7 @@ header {
 }
 
 footer {
+  margin-top: auto;
   grid-area: footer;
 }
 
