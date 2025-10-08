@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Path to your posts folder
-const postsDir = path.resolve("_posts");
+const postsDir = path.resolve("./_posts");
 
 // Output folder for OG images
 const outputDir = path.resolve("_site/images/og-images");

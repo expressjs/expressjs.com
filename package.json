@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "generate:og": "node .github/scripts/generateOgForPosts.js",
     "test": "eslint --ignore-path .gitignore --ignore-pattern _includes/readmes/ \"**/*.md\""
   },
   "devDependencies": {
