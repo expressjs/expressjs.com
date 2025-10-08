@@ -1,0 +1,9 @@
+[build]
+  command = "jekyll build" 
+  publish = "_site"
+
+[context.branch-deploy]
+  command = "jekyll build --url $URL" 
+
+[context.deploy-preview]
+  command = "jekyll build --url $URL"
