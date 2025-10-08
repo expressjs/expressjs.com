@@ -12,10 +12,10 @@ const __dirname = path.dirname(__filename);
 const postsDir = path.resolve("_posts");
 
 // Output folder for OG images
-const outputDir = path.resolve("images/og-images");
+const outputDir = path.resolve("_site/images/og-images");
 
 // font
-const FONT_FILE_PATH = path.join(__dirname, '../fonts/noto-sans-latin-700-normal.woff');
+const FONT_FILE_PATH = path.join(__dirname, '../../fonts/noto-sans-latin-700-normal.woff');
 
 let font = await fs.readFile(FONT_FILE_PATH);
 
