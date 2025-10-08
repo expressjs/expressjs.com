@@ -2,7 +2,9 @@
   "name": "expressjs.com",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
+    "build:og": "node script/generateOgForPosts.js",
     "test": "eslint --ignore-path .gitignore --ignore-pattern _includes/readmes/ \"**/*.md\""
   },
   "devDependencies": {
@@ -11,7 +13,10 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-markdown": "^2.2.1",
     "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.6.0"
+    "eslint-plugin-promise": "^6.6.0",
+    "gray-matter": "^4.0.3",
+    "satori": "^0.18.3",
+    "sharp": "^0.34.4"
   },
   "eslintConfig": {
     "extends": [

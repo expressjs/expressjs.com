@@ -10,3 +10,6 @@ _site
 .jekyll-metadata
 vendor
 .bundle
+
+# og images
+images/og-images
