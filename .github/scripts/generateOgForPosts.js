@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 const postsDir = path.join(__dirname, '../../_posts');
 
 // Output folder for OG images
-const outputDir = path.join(__dirname, '../../_site/images/og-images');
+const outputDir = path.resolve('../../_site/images/og-images');
 
 // font
 const FONT_FILE_PATH = path.join(__dirname, '../../fonts/noto-sans-latin-700-normal.woff');
