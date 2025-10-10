@@ -216,31 +216,6 @@ In express 5, Regexp characters are not supported in route paths, for more infor
 
 {% include admonitions/caution.html content=warning-regexp %}
 
-To have more control over the exact string that can be matched by a route parameter, you can append a regular expression in parentheses (`()`):
-
-```
-Route path: /user/:userId(\d+)
-Request URL: http://localhost:3000/user/42
-req.params: {"userId": "42"}
-```
-
-{% capture escape-advisory %}
-
-Because the regular expression is usually part of a literal string, be sure to escape any `\` characters with an additional backslash, for example `\\d+`.
-
-{% endcapture %}
-
-
-{% include admonitions/warning.html content=escape-advisory %}
-
-{% capture warning-version %}
-
-In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `*` character in regular expressions is not interpreted in the usual way</a>. As a workaround, use `{0,}` instead of `*`. This will likely be fixed in Express 5.
-
-{% endcapture %}
-
-{% include admonitions/warning.html content=warning-version %}
-
 <h2 id="route-handlers">Route handlers</h2>
 
 You can provide multiple callback functions that behave like [middleware](/{{ page.lang }}/guide/using-middleware.html) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
