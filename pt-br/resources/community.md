@@ -45,7 +45,7 @@ Nossa vibrante comunidade criou uma grande variedade de extensões,
 
 Além disso, a comunidade Express mantém módulos nestes duas organizações no GitHub:
 
-- [jshttp](https://jshttp.github.io/) módulos que fornecem função utilitária útil; ver [Módulos utilitários](/{{ page.lang }}/resources/utils.html).
+- [jshttp](https://github.com/jshttp) módulos que fornecem função utilitária útil; ver [Módulos utilitários](/{{ page.lang }}/resources/utils.html).
 - [pillarjs](https://pillarjs.github.io/): módulos de baixo nível que o Express usa internamente.
 
 Para acompanhar o que está acontecendo em toda a comunidade, Confira a [ExpressJS StatusBoard](https://expressjs.github.io/statusboard/).

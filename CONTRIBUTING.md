@@ -5,7 +5,7 @@
 This is the contribution documentation for the [expressjs.com](https://github.com/expressjs/expressjs.com) website.
 
 >[!NOTE]
-> This is not the repo for Express JS framework. To contribute to the _[Express JS framework](https://github.com/expressjs/express_)_, check out the [Github repo contributing page](https://github.com/expressjs/.github/blob/master/CONTRIBUTING.md) or the website's [Contributing to Express](https://expressjs.com/en/resources/contributing.html) page.
+> This is not the repo for Express JS framework. To contribute to the _[Express JS framework](https://github.com/expressjs/express_)_, check out the [Github repo contributing page](https://github.com/expressjs/express/blob/master/Contributing.md) or the website's [Contributing to Express](https://expressjs.com/en/resources/contributing.html) page.
 
 
 #### Need some ideas? These are some typical issues.
