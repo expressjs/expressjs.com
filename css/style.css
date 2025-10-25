@@ -686,13 +686,16 @@ div.header-btn {
   color: var(--box-fg);
 }
 
-a.edit-github-btn{
+a.edit-github-btn,
+a.bottom-nav-prev,
+a.bottom-nav-next {
   display: flex;
   gap: 0.5rem;
   align-items: center;
   width: fit-content;
   padding: 0.5rem;
   border-radius: 0.3rem;
+  text-decoration: none;
 
   &:is(:hover, :active, :focus) {
     color: var(--fg);
@@ -1174,8 +1177,9 @@ h2 a {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 1.5rem;
+  margin: 1rem;
   font-weight: 500;
+  font-size: 1.2rem;
 }
 
 .bottom-nav-prev {
@@ -1183,7 +1187,6 @@ h2 a {
 }
 
 .bottom-nav-next {
-  margin-left: auto;
   text-align: right;
 }
 
