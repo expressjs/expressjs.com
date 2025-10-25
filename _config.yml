@@ -76,6 +76,9 @@ collections:
   starter:
     output: true
     sort_by: order
+  guide:
+    output: true
+    sort_by: order
 
 # Build settings
 
@@ -84,7 +87,7 @@ plugins:
   - jekyll-github-metadata
 
 highlighter: rouge
-# library used for syntax highlighting
+# library used for syntax hilighting
 
 markdown: kramdown
 kramdown:
@@ -93,7 +96,7 @@ kramdown:
  hard_wrap: false
  syntax_highlighter: rouge
 
-exclude: 
+exclude: gh
   - [uk/CHANGELOG.md]
   - vendor/bundle
   - node_modules/
