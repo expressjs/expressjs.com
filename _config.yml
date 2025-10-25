@@ -87,7 +87,7 @@ plugins:
   - jekyll-github-metadata
 
 highlighter: rouge
-# library used for syntax hilighting
+# library used for syntax highlighting
 
 markdown: kramdown
 kramdown:
@@ -96,7 +96,7 @@ kramdown:
  hard_wrap: false
  syntax_highlighter: rouge
 
-exclude: gh
+exclude:
   - [uk/CHANGELOG.md]
   - vendor/bundle
   - node_modules/
