@@ -72,6 +72,11 @@ defaults:
 
 announcement: true # Enable or disable the announcements.
 
+collections:
+  starter:
+    output: true
+    sort_by: order
+
 # Build settings
 
 plugins:

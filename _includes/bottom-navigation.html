@@ -1,0 +1,52 @@
+{% comment %}
+  This component finds the current page within its collection
+  (based on `page.menu`) and generates 'Previous' and 'Next' links.
+{% endcomment %}
+
+{% assign collection_name = page.menu %}
+
+{% if collection_name %}
+  {% assign collection = site[collection_name] %}
+
+  {% if collection %}
+    {% comment %} Find the current page's index in the sorted collection {% endcomment %}
+    {% for doc in collection %}
+      {% if doc.url == page.url %}
+        {% assign current_index = forloop.index0 %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% comment %} Assign 'prev_page' and 'next_page' based on the index {% endcomment %}
+    {% if current_index %}
+      {% assign prev_index = current_index | minus: 1 %}
+      {% if prev_index >= 0 %}
+        {% assign prev_page = collection[prev_index] %}
+      {% endif %}
+
+      {% assign next_index = current_index | plus: 1 %}
+      {% if next_index < collection.size %}
+        {% assign next_page = collection[next_index] %}
+      {% endif %}
+    {% endif %}
+
+    {% comment %} Render the navigation links if either page exists {% endcomment %}
+    {% if prev_page or next_page %}
+      <hr>
+      <nav class="bottom-navigation" aria-label="Pagination">
+        {% if prev_page %}
+          <a href="{{ prev_page.url | relative_url }}" class="bottom-nav-prev">
+            &laquo; Previous: {{ prev_page.title }}
+          </a>
+        {% endif %}
+
+        {% if next_page %}
+          <a href="{{ next_page.url | relative_url }}" class="bottom-nav-next">
+            Next: {{ next_page.title }} &raquo;
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
+
+  {% endif %}
+{% endif %}

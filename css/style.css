@@ -1169,6 +1169,24 @@ h2 a {
   }
 }
 
+/* 'Prev' left and 'Next' right btn */
+.bottom-navigation {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  font-weight: 500;
+}
+
+.bottom-nav-prev {
+  text-align: left;
+}
+
+.bottom-nav-next {
+  margin-left: auto;
+  text-align: right;
+}
+
 /* routing methods columns */
 .methods-columns {
   display: flex;

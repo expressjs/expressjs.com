@@ -3,6 +3,7 @@ layout: page
 title: Express basic routing
 description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
+order: 4
 redirect_from: "/starter/basic-routing.html"
 ---
 
@@ -65,4 +66,3 @@ app.delete('/user', (req, res) => {
 
 For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).
 
-###  [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)
