@@ -1177,7 +1177,7 @@ h2 a {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 1rem;
+  margin-block: 1rem;
   font-weight: 500;
   font-size: 1.2rem;
 }

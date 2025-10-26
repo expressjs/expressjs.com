@@ -79,6 +79,12 @@ collections:
   guide:
     output: true
     sort_by: order
+  advanced:
+    output: true
+    sort_by: order
+  resources:
+    output: true
+    sort_by: order
 
 # Build settings
 
