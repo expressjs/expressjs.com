@@ -18,6 +18,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 body {
+  height: 100vh;
   font: 400 14px/1.6 "Open Sans", sans-serif;
   background: var(--bg);
   margin: 0;
@@ -40,6 +41,7 @@ header {
 }
 
 footer {
+  margin-top: auto;
   grid-area: footer;
 }
 
@@ -1757,3 +1759,4 @@ blockquote {
     border-bottom: 1px solid var(--border);
   }
 }
+
