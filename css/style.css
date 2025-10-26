@@ -1186,10 +1186,12 @@ h2 a {
 
 .bottom-nav-prev {
   text-align: left;
+  max-width: 50%;
 }
 
 .bottom-nav-next {
   text-align: right;
+  max-width: 50%;
 }
 
 /* routing methods columns */
@@ -1759,4 +1761,5 @@ blockquote {
     border-bottom: 1px solid var(--border);
   }
 }
+
 
