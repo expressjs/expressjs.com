@@ -22,7 +22,7 @@ Use the `npm init` command to create a `package.json` file for your application.
 For more information on how `package.json` works, see [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
 
 ```bash
-$ npm init
+$ npm init -y
 ```
 
 This command prompts you for a number of things, such as the name and version of your application.
