@@ -104,7 +104,7 @@ jobs:
 
       - name: Upload Lighthouse reports as artifacts
         if: env.skip_lighthouse == 'false'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: lighthouse-reports
           path: |
