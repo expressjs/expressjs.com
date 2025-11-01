@@ -258,7 +258,7 @@ app.get('/user', (req, res) => {
 
 <h3 id="magic-redirect">res.redirect('back') and res.location('back')</h3>
 
-Express 5 no longer supports the magic string `back` in the `res.redirect()` and `res.location()` methods. Instead, use the `req.get('Referrer') || '/'` value to redirect back to the previous page. In Express 4, the res.`redirect('back')` and `res.location('back')` methods were deprecated.
+Express 5 no longer supports the magic string `back` in the `res.redirect()` and `res.location()` methods. Instead, use the `req.get('Referrer') || '/'` value to redirect back to the previous page. In Express 4, the `res.redirect('back')` and `res.location('back')` methods were deprecated.
 
 {% capture codemod-magic-redirect %}
 You can replace the deprecated signatures with the following command:
