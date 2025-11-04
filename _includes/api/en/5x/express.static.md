@@ -28,8 +28,8 @@ See also the [example below](#example.of.express.static).
 | `maxAge`      | Set the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms). | Number | 0 |
 | `redirect`    | Redirect to trailing "/" when the pathname is a directory. | Boolean | `true` |
 | `setHeaders`  | Function for setting HTTP headers to serve with the file. <br/><br/>See [setHeaders](#setHeaders) below. | Function |  |
-| `acceptRanges`    | Enable or disable accepting ranged requests. Disabling this will not send the Accept-Ranges header and will ignore the contents of the Range request header.  <br/><br/>See [acceptRanges](#acceptRanges) below. | Boolean | true |
-| `cacheControl`    | Enable or disable setting the Cache-Control response header. Disabling this will ignore the immutable and maxAge options.  <br/><br/>See [cacheControl](#cacheControl) below. | Boolean | true |
+| `acceptRanges`    | Enable or disable accepting ranged requests. Disabling this will not send the Accept-Ranges header and will ignore the contents of the Range request header.| Boolean | true |
+| `cacheControl`    | Enable or disable setting the Cache-Control response header. Disabling this will ignore the immutable and maxAge options. | Boolean | true |
 
 </div>
 
@@ -56,17 +56,6 @@ to the same web address or for routes to fill in non-existent files.
 Use `false` if you have mounted this middleware at a path designed
 to be strictly a single file system directory, which allows for short-circuiting 404s
 for less overhead. This middleware will also reply to all methods.
-
-<h5 id='acceptRanges'>acceptRanges</h5>
-
-Enable or disable accepting ranged requests, defaults to true.
-Disabling this will not send `Accept-Ranges` and ignore the contents
-of the `Range` request header.
-
-<h5 id='cacheControl'>cacheControl</h5>
-
-Enable or disable setting `Cache-Control` response header, defaults to
-true. Disabling this will ignore the `immutable` and `maxAge` options.
 
 <h5 id='setHeaders'>setHeaders</h5>
 
