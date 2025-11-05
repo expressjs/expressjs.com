@@ -267,7 +267,7 @@ GEM
     uri (0.13.2)
     webrick (1.9.1)
 
-PLATFORMS  
+PLATFORMS
   x64-mingw-ucrt
   x86_64-linux
 
