@@ -17,6 +17,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+//app.get() is a method used to define a route that responds to HTTP GET requests.
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
