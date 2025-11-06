@@ -74,6 +74,20 @@ Then install dependencies:
 ```bash
 $ cd myapp
 $ npm install
+
+## Using Nodemon for Live Server Restarting
+Nodemon automatically restarts your Node.js server whenever you make changes to your files — perfect for development.
+ Installation
+npm install --save-dev nodemon
+Add to Scripts
+In your package.json:
+"scripts": {
+  "start": "nodemon server.js"
+}
+Run the Server
+npm start
+or
+npx nodemon server.js
 ```
 
 On MacOS or Linux, run the app with this command:
