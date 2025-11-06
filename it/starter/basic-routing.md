@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-Rispondere alla richiesta POST sulla route principale (`/`), la home page dell'applicazione:
+Respond to a POST request on the root route (`/`), the application's home page:
 
 ```js
 app.post('/', (req, res) => {

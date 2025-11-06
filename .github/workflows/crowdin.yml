@@ -14,12 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
       - name: crowdin action
-        uses: crowdin/github-action@590c05e09a29f392b203faf4d6aa8e0cd32c7835 # https://github.com/crowdin/github-action/releases/tag/v2.9.1
+        uses: crowdin/github-action@0749939f635900a2521aa6aac7a3766642b2dc71 # https://github.com/crowdin/github-action/releases/tag/v2.11.0
         with:
           upload_sources: true
           upload_translations: false
