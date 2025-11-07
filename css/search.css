@@ -12,7 +12,7 @@
 }
 
 .algolia-autocomplete #q {
-  display: initial
+  display: initial;
 }
 
 @media all and (max-width: 899px) {
