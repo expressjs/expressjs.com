@@ -163,7 +163,7 @@ main.home {
   margin-bottom: 11px;
   display: flex;
   align-items: center;
-  column-gap: 8px
+  column-gap: 8px;
 }
 
 .install-command {
@@ -213,7 +213,7 @@ span.block-section {
   padding-bottom: 5px;
   font-weight: bold;
   font-size: 24px;
-  color: var(--menu-grey)
+  color: var(--menu-grey);
 }
 
 #api-doc h2 {
@@ -237,7 +237,7 @@ span.block-section {
 #api-doc h5 {
   font-size: 14px;
   font-weight: bold;
-  color: var(--menu-grey)
+  color: var(--menu-grey);
 }
 
 /* scroll */
@@ -317,7 +317,7 @@ a {
   font: 100 4.1em "Helvetica Neue", "Open Sans", sans-serif;
   color: var(--menu-grey);
   line-height: .87;
-  margin: unset
+  margin: unset;
 }
 
 #description .description a {
@@ -489,7 +489,7 @@ pre:has(code) button.failed {
 
 .scroll #top {
   opacity: .5;
-  display: initial
+  display: initial;
 }
 
 .scroll #top:hover {
@@ -595,7 +595,7 @@ table td p, li p {
 }
 
 table ul {
-  margin: 20px 0
+  margin: 20px 0;
 }
 
 /* doc boxes */
@@ -945,7 +945,7 @@ div.desktop-lang-switcher {
 .toc-container {
   position: sticky;
   top: 100px;
-  width: 270px
+  width: 270px;
 }
 
 #menu {
@@ -1738,4 +1738,5 @@ blockquote {
     border-bottom: 1px solid var(--border);
   }
 }
+
 
