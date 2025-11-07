@@ -4,7 +4,7 @@ version: 5x
 title: Express 5.x - API 參照
 description: Access the API reference for Express.js detailing all modules, methods, and properties for building web applications with this version.
 menu: api
-redirect_from: "  "
+redirect_from: 
 ---
 
 <div id="api-doc" markdown="1">
