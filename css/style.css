@@ -688,13 +688,16 @@ div.header-btn {
   color: var(--box-fg);
 }
 
-a.edit-github-btn{
+a.edit-github-btn,
+a.bottom-nav-prev,
+a.bottom-nav-next {
   display: flex;
   gap: 0.5rem;
   align-items: center;
   width: fit-content;
   padding: 0.5rem;
   border-radius: 0.3rem;
+  text-decoration: none;
 
   &:is(:hover, :active, :focus) {
     color: var(--fg);
@@ -1169,6 +1172,26 @@ h2 a {
   &:is(:hover, :active, :focus) {
     background-color: #ebf2f5;
   }
+}
+
+/* 'Prev' left and 'Next' right btn */
+.bottom-navigation {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-block: 1rem;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.bottom-nav-prev {
+  text-align: left;
+  max-width: 50%;
+}
+
+.bottom-nav-next {
+  text-align: right;
+  max-width: 50%;
 }
 
 /* routing methods columns */
@@ -1738,4 +1761,5 @@ blockquote {
     border-bottom: 1px solid var(--border);
   }
 }
+
 
