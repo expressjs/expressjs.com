@@ -16,6 +16,7 @@ codeBlocks.forEach((block) => {
 
 // add heading links
 for (const heading of headers) {
+    if (heading.querySelector('.heading-link')) continue;
     const linkIcon = document.createElement('a');
     linkIcon.setAttribute('href', `#${heading.id}`);
     linkIcon.classList.add('heading-link');
