@@ -3,6 +3,7 @@ layout: page
 title: Contributing to Express
 description: Find out how to contribute to Express.js, including guidelines for reporting issues, submitting pull requests, becoming a collaborator, and understanding security policies.
 menu: resources
+order: 5
 redirect_from: "/resources/community.html"
 ---
 
@@ -87,7 +88,7 @@ compromise among committers be the default resolution mechanism.
 ### Becoming a Triager
 
 Anyone can become a triager! Read more about the process of being a triager in
-[the triage process document](https://github.com/expressjs/discussions/blob/master/docs/contributing/triager-guide.md).
+[the triage process document](https://github.com/expressjs/discussions/blob/master/Triager-Guide.md).
 
 Currently, any existing [organization member](https://github.com/orgs/expressjs/people) can nominate
 a new triager. If you are interested in becoming a triager, our best advice is to actively participate

@@ -18,6 +18,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 body {
+  height: 100vh;
   font: 400 14px/1.6 "Open Sans", sans-serif;
   background: var(--bg);
   margin: 0;
@@ -40,6 +41,7 @@ header {
 }
 
 footer {
+  margin-top: auto;
   grid-area: footer;
 }
 
@@ -686,13 +688,16 @@ div.header-btn {
   color: var(--box-fg);
 }
 
-a.edit-github-btn{
+a.edit-github-btn,
+a.bottom-nav-prev,
+a.bottom-nav-next {
   display: flex;
   gap: 0.5rem;
   align-items: center;
   width: fit-content;
   padding: 0.5rem;
   border-radius: 0.3rem;
+  text-decoration: none;
 
   &:is(:hover, :active, :focus) {
     color: var(--fg);
@@ -1188,6 +1193,26 @@ h3:hover .heading-link,
   &:is(:hover, :active, :focus) {
     background-color: #ebf2f5;
   }
+}
+
+/* 'Prev' left and 'Next' right btn */
+.bottom-navigation {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-block: 1rem;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.bottom-nav-prev {
+  text-align: left;
+  max-width: 50%;
+}
+
+.bottom-nav-next {
+  text-align: right;
+  max-width: 50%;
 }
 
 /* routing methods columns */

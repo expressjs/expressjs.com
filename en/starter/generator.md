@@ -3,6 +3,7 @@ layout: page
 title: Express application generator
 description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
 menu: starter
+order: 3
 redirect_from: "/starter/generator.html"
 ---
 
@@ -124,5 +125,3 @@ The generated app has the following directory structure:
 <div class="doc-box doc-info" markdown="1">
 The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
 </div>
-
-###  [Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)

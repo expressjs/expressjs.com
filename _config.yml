@@ -72,6 +72,20 @@ defaults:
 
 announcement: true # Enable or disable the announcements.
 
+collections:
+  starter:
+    output: true
+    sort_by: order
+  guide:
+    output: true
+    sort_by: order
+  advanced:
+    output: true
+    sort_by: order
+  resources:
+    output: true
+    sort_by: order
+
 # Build settings
 
 plugins:
@@ -88,7 +102,7 @@ kramdown:
  hard_wrap: false
  syntax_highlighter: rouge
 
-exclude: 
+exclude:
   - [uk/CHANGELOG.md]
   - vendor/bundle
   - node_modules/

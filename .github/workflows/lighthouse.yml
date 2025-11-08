@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Setup Node.js with npm cache
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: '22.x'
           cache: 'npm'
@@ -104,7 +104,7 @@ jobs:
 
       - name: Upload Lighthouse reports as artifacts
         if: env.skip_lighthouse == 'false'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: lighthouse-reports
           path: |
