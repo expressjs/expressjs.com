@@ -312,6 +312,56 @@ Functionality is now limited to setting the basic cookie value. Use
 
 <h2 id="example-migration">Example app migration</h2>
 
+<h3 id="send-mime">`send.mime`</h3>
+
+Some older applications relied on the `send` module's internal MIME helpers
+via `send.mime` for looking up or defining MIME types. That internal API is
+no longer exposed in newer versions. If your code uses `send.mime`, replace
+those calls with a standalone MIME library such as `mime-types` or `mime`.
+
+Important: the default MIME type fallback (`send.mime`) was removed in
+`send@0.18.0`. If your app relies on default MIME type detection, you must
+now configure this behavior manually. See the release notes for details:
+https://github.com/pillarjs/send/releases/tag/0.18.0-beta.1
+
+- Install a replacement package:
+
+```bash
+npm install mime-types --save
+# or
+npm install mime --save
+```
+
+- Lookup MIME type with `mime-types`:
+
+```js
+const mime = require('mime-types');
+
+mime.lookup('file.html'); // 'text/html'
+mime.contentType('file.html'); // 'text/html; charset=utf-8'
+```
+
+- Lookup MIME type with `mime`:
+
+```js
+const mime = require('mime');
+
+mime.getType('file.html'); // 'text/html'
+```
+
+- Define custom types (when using `mime`):
+
+```js
+const mime = require('mime');
+
+mime.define({ 'application/x-myapp': ['myext'] }, true);
+```
+
+Note: in many cases `express.static`, `res.type()`, and `res.sendFile()` will
+set the Content-Type header automatically, so prefer those helpers rather
+than manual MIME lookups when possible.
+
+
 Here is an example of migrating an Express 3 application to Express 4.
 The files of interest are `app.js` and `package.json`.
 
