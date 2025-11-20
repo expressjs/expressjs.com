@@ -61,4 +61,4 @@ To preview the website locally, we have two options: using Docker or using Bundl
 
 ## License
 
-Content submitted to [expressjs.com](expressjs.com) is Creative Commons Attribution 4.0 International licensed, as found in the [LICENSE.md](LICENSE.md) file.
+Content submitted to [expressjs.com](https://expressjs.com/) is Creative Commons Attribution 4.0 International licensed, as found in the [LICENSE.md](LICENSE.md) file.
