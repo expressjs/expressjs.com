@@ -281,10 +281,10 @@ move to an [alternative session strategy](https://github.com/expressjs/session#c
 
 [MIT](LICENSE)
 
-[ci-image]: https://badgen.net/github/checks/expressjs/cookie-session/master?label=ci
+[ci-image]: https://img.shields.io/github/actions/workflow/status/expressjs/cookie-session/ci.yml
 [ci-url]: https://github.com/expressjs/cookie-session/actions?query=workflow%3Aci
-[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/cookie-session/master
+[coveralls-image]: https://img.shields.io/coverallsCoverage/github/expressjs/cookie-session?branch=master
 [coveralls-url]: https://coveralls.io/r/expressjs/cookie-session?branch=master
-[npm-downloads-image]: https://badgen.net/npm/dm/cookie-session
+[npm-downloads-image]: https://img.shields.io/npm/dw/cookie-session
 [npm-url]: https://npmjs.org/package/cookie-session
-[npm-version-image]: https://badgen.net/npm/v/cookie-session
+[npm-version-image]:https://img.shields.io/npm/v/cookie-session
