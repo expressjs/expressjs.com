@@ -11,7 +11,7 @@ The Express team has released a new patch version of [body-parser](https://www.n
 
 
 {% include admonitions/warning.html 
-content="We recommend upgrading to the latest version of body-parser immediately to secure your applications."
+content="We recommend upgrading to the latest version of body-parser to secure your applications."
 %}
 
 The following vulnerabilities have been addressed:
