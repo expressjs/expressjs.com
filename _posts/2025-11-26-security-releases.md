@@ -16,9 +16,9 @@ content="We recommend upgrading to the latest version of body-parser to secure y
 
 The following vulnerabilities have been addressed:
 
-- [Moderate severity vulnerability CVE-2025-13466 in body-parser middleware](#moderate-severity-vulnerability-cve-2025-13466-in-body-parser-middleware)
+- [CVE-2025-13466 in body-parser middleware (Moderate)](#cve-2025-13466-in-body-parser-middleware-moderate)
 
-## Moderate severity vulnerability CVE-2025-13466 in Body-parser middleware
+## CVE-2025-13466 in Body-parser middleware (Moderate)
 
 **[body-parser](https://www.npmjs.com/package/body-parser) version `2.2.0` is vulnerable to denial of service when url encoding is used**
 
