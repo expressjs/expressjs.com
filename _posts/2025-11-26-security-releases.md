@@ -31,4 +31,4 @@ For more details, see [GHSA-wqch-xfxh-vrr4](https://github.com/expressjs/body-pa
 
 ---
 
-We recommend upgrading to the latest version of body-parser immediately to secure your applications.
+We recommend upgrading to the latest version of body-parser to secure your applications.
