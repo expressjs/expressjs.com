@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout PR code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Node.js with npm cache
         uses: actions/setup-node@v6
