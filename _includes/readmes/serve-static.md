@@ -18,7 +18,7 @@ $ npm install serve-static
 ## API
 
 ```js
-var serveStatic = require('serve-static')
+const serveStatic = require('serve-static')
 ```
 
 ### serveStatic(root, options)
@@ -132,15 +132,15 @@ the arguments are:
 ### Serve files with vanilla node.js http server
 
 ```js
-var finalhandler = require('finalhandler')
-var http = require('http')
-var serveStatic = require('serve-static')
+const finalhandler = require('finalhandler')
+const http = require('http')
+const serveStatic = require('serve-static')
 
 // Serve up public/ftp folder
-var serve = serveStatic('public/ftp', { index: ['index.html', 'index.htm'] })
+const serve = serveStatic('public/ftp', { index: ['index.html', 'index.htm'] })
 
 // Create server
-var server = http.createServer(function onRequest (req, res) {
+const server = http.createServer((req, res) => {
   serve(req, res, finalhandler(req, res))
 })
 
@@ -151,13 +151,13 @@ server.listen(3000)
 ### Serve all files as downloads
 
 ```js
-var contentDisposition = require('content-disposition')
-var finalhandler = require('finalhandler')
-var http = require('http')
-var serveStatic = require('serve-static')
+const contentDisposition = require('content-disposition')
+const finalhandler = require('finalhandler')
+const http = require('http')
+const serveStatic = require('serve-static')
 
 // Serve up public/ftp folder
-var serve = serveStatic('public/ftp', {
+const serve = serveStatic('public/ftp', {
   index: false,
   setHeaders: setHeaders
 })
@@ -168,7 +168,7 @@ function setHeaders (res, path) {
 }
 
 // Create server
-var server = http.createServer(function onRequest (req, res) {
+const server = http.createServer((req, res) => {
   serve(req, res, finalhandler(req, res))
 })
 
@@ -183,10 +183,10 @@ server.listen(3000)
 This is a simple example of using Express.
 
 ```js
-var express = require('express')
-var serveStatic = require('serve-static')
+const express = require('express')
+const serveStatic = require('serve-static')
 
-var app = express()
+const app = express()
 
 app.use(serveStatic('public/ftp', { index: ['default.html', 'default.htm'] }))
 app.listen(3000)
@@ -199,11 +199,11 @@ Files are searched for in `public-optimized/` first, then `public/` second
 as a fallback.
 
 ```js
-var express = require('express')
-var path = require('path')
-var serveStatic = require('serve-static')
+const express = require('express')
+const path = require('path')
+const serveStatic = require('serve-static')
 
-var app = express()
+const app = express()
 
 app.use(serveStatic(path.join(__dirname, 'public-optimized')))
 app.use(serveStatic(path.join(__dirname, 'public')))
@@ -217,11 +217,11 @@ file. In this example, HTML files are not cached, while everything else
 is for 1 day.
 
 ```js
-var express = require('express')
-var path = require('path')
-var serveStatic = require('serve-static')
+const express = require('express')
+const path = require('path')
+const serveStatic = require('serve-static')
 
-var app = express()
+const app = express()
 
 app.use(serveStatic(path.join(__dirname, 'public'), {
   maxAge: '1d',
