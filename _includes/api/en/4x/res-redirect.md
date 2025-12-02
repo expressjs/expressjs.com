@@ -45,14 +45,5 @@ Path-relative redirects are also possible. If you were on
 res.redirect('..')
 ```
 
-A `back` redirection redirects the request back to the [referer](http://en.wikipedia.org/wiki/HTTP_referer),
-defaulting to `/` when the referer is missing.
-
-```js
-res.redirect('back')
-```
-
-{% include admonitions/note.html content="`back` redirect was deprecated in 4.21.0, use `req.get('Referrer') || '/'` as an argument instead." %}
-
 See also [Security best practices: Prevent open redirect 
 vulnerabilities](http://expressjs.com/en/advanced/best-practice-security.html#prevent-open-redirects). 

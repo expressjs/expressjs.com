@@ -43,9 +43,3 @@ would land you at `http//example.com/admin/post`:
 res.redirect('..')
 ```
 
-The final special-case is a `back` redirect, redirecting back to
-the Referer (or Referrer), defaulting to `/` when missing.
-
-```js
-res.redirect('back')
-```
