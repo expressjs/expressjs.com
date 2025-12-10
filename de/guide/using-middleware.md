@@ -273,4 +273,4 @@ const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 ```
 
-Eine nicht vollständige Liste zu den Middlewarefunktionen anderer Anbieter, die im Allgemeinen mit Express verwendet werden, finden Sie unter [Middleware anderer Anbieter](../resources/middleware.html).
+Eine nicht vollständige Liste zu den Middlewarefunktionen anderer Anbieter, die im Allgemeinen mit Express verwendet werden, finden Sie unter [Middleware anderer Anbieter](/de/resources/middleware.html).
