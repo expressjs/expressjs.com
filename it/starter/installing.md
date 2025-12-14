@@ -3,6 +3,7 @@ layout: page
 title: Installazione di Express
 description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
 menu: starter
+order: 1
 redirect_from: "  "
 ---
 
@@ -49,5 +50,3 @@ $ npm install express --no-save
 <div class="doc-box doc-info" markdown="1">
 I moduli Node installati con l'opzione `--save` vengono aggiunti all'elenco `dependencies` nel file `package.json`. Successivamente, l'esecuzione di `npm install` nella directory `app` installerà automaticamente i moduli nell'elenco di dipendenze.
 </div>
-
-### [Next: Hello World ](/{{ page.lang }}/starter/hello-world.html)

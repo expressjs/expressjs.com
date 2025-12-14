@@ -3,6 +3,7 @@ layout: page
 title: Express 애플리케이션 생성기
 description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
 menu: starter
+order: 3
 redirect_from: "  "
 ---
 
@@ -123,5 +124,3 @@ PS> $env:DEBUG='myapp:*'; npm start
 <div class="doc-box doc-info" markdown="1">
 생성기에 의해 작성된 앱 구조는 Express 앱을 구조화하는 여러 방법 중 하나에 불과합니다. 이러한 구조를 사용하거나 사용자의 요구사항에 가장 적합하도록 구조를 수정하십시오.
 </div>
-
-### [Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)

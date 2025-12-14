@@ -3,6 +3,7 @@ layout: page
 title: Comunidade do Express
 description: Connect with the Express.js community, learn about the technical committee, find resources, explore community-contributed modules, and get involved in discussions.
 menu: resources
+order: 1
 redirect_from: "  "
 ---
 
@@ -45,12 +46,12 @@ Nossa vibrante comunidade criou uma grande variedade de extensões,
 
 Além disso, a comunidade Express mantém módulos nestes duas organizações no GitHub:
 
-- [jshttp](https://jshttp.github.io/) módulos que fornecem função utilitária útil; ver [Módulos utilitários](/{{ page.lang }}/resources/utils.html).
-- [pillarjs](https://pillarjs.github.io/): módulos de baixo nível que o Express usa internamente.
+- [jshttp](https://github.com/jshttp) modules providing useful utility functions; see [Utility modules](/{{ page.lang }}/resources/utils.html).
+- [pillarjs](https://github.com/pillarjs): low-level modules that Express uses internally.
 
 Para acompanhar o que está acontecendo em toda a comunidade, Confira a [ExpressJS StatusBoard](https://expressjs.github.io/statusboard/).
 
-## Issues
+## Questões
 
 Se você se deparou com o que acha que é um bug ou apenas deseja fazer
 uma solicitação de recurso abre um ticket no [issue queue](https://github.com/expressjs/express/issues).
@@ -60,19 +61,19 @@ uma solicitação de recurso abre um ticket no [issue queue](https://github.com/
 Veja dezenas de aplicativos Express [exemplos](https://github.com/expressjs/express/tree/master/examples)
 no repositório temos de tudo, desde design de API e autenticação até integração de mecanismo de template.
 
-## Github Discussions
+## Discussões no GitHub
 
 The [GitHub Discussions](https://github.com/expressjs/discussions) section is an excellent space to engage in conversations about the development and maintenance of Express, as well as to share ideas and discuss topics related to its usage.
 
-# Branding of Express.js
+# Marca do Expres.js
 
-## Express.js Logo
+## Logo Express.js
 
 Express is a project of the OpenJS Foundation. Please review the [trademark policy](https://trademark-policy.openjsf.org/) for information about permissible use of Express.js logos and marks.
 
 <div class="logo-table">
     <div>
-        <h3>Logotype</h3><a href="/images/brand/logotype-light.svg" class="hidden-dark">
+        <h3>Logotipo</h3><a href="/images/brand/logotype-light.svg" class="hidden-dark">
             <img src="/images/brand/logotype-light.svg" alt="Express.js logo" width="250" height="56"/>
         </a>
         <a href="/images/brand/logotype-dark.svg" class="hidden-light">
@@ -80,7 +81,7 @@ Express is a project of the OpenJS Foundation. Please review the [trademark poli
         </a>
     </div>
     <div>
-        <h3>Logomark</h3><a href="/images/brand/logo-light.svg" class="hidden-dark">
+        <h3>Logomarca</h3><a href="/images/brand/logo-light.svg" class="hidden-dark">
             <img src="/images/brand/logo-light.svg" alt="Express.js mark" width="96.5" height="56"/>
         </a>
         <a href="/images/brand/logo-dark.svg" class="hidden-light">

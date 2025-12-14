@@ -2,7 +2,7 @@
 layout: api
 version: 4x
 title: Express 4.x - Referência de API
-description: Access the API reference for Express.js 4.x, detailing all modules, methods, and properties for building web applications with this version.
+description: Acesse a referência da API para Express.js 4.x, detalhando todos os módulos, métodos e propriedades para construir aplicações web com esta versão.
 menu: api
 redirect_from: "  "
 ---
@@ -13,7 +13,7 @@ redirect_from: "  "
 
 {% capture node-version %}
 
-Express 4.0 requires Node.js 0.10 or higher.
+Express 4.0 requer Node.js 0.10 ou superior.
 
 {% endcapture %}
 

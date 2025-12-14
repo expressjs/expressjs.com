@@ -3,6 +3,7 @@ layout: page
 title: Atualizações de segurança do Express
 description: Review the latest security updates and patches for Express.js, including detailed vulnerability lists for different versions to help maintain a secure application.
 menu: advanced
+order: 2
 redirect_from: "  "
 ---
 
@@ -78,7 +79,7 @@ If you believe you have discovered a security vulnerability in Express, please s
 
 This series will continue to receive only security updates and bug fixes until July 2015. It is highly recommended to upgrade to Express 4.x.
 
-If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/{{ page.lang }}/support#commercial-support-options).
+Se você não puder atualizar as últimas 3.x, por favor considere as [Opções de Suporte Comercial](/{{ page.lang }}/support#comercial-support-options).
 
   </div>
 

@@ -3,6 +3,7 @@ layout: page
 title: Express 社区
 description: Connect with the Express.js community, learn about the technical committee, find resources, explore community-contributed modules, and get involved in discussions.
 menu: resources
+order: 1
 redirect_from: "  "
 ---
 
@@ -44,8 +45,8 @@ Members of the Express technical committee are:
 
 Additionally, the Express community maintains modules in these two GitHub orgs:
 
-- [jshttp](https://jshttp.github.io/) modules providing useful utility functions; see [Utility modules](/{{ page.lang }}/resources/utils.html).
-- [pillarjs](https://pillarjs.github.io/): low-level modules that Express uses internally.
+- [jshttp](https://github.com/jshttp) modules providing useful utility functions; see [Utility modules](/{{ page.lang }}/resources/utils.html).
+- [pillarjs](https://github.com/pillarjs): low-level modules that Express uses internally.
 
 To keep up with what is going on in the whole community, check out the [ExpressJS StatusBoard](https://expressjs.github.io/statusboard/).
 

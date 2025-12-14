@@ -3,6 +3,7 @@ layout: page
 title: Routing di base Express
 description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
+order: 4
 redirect_from: "  "
 ---
 
@@ -21,7 +22,7 @@ app.METHOD(PATH, HANDLER)
 Dove:
 
 - `app` è un'istanza di `express`.
-- `METHOD` è un [metodo di richiesta HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol).
+- `METHOD` is an [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in lowercase.
 - `PATH` è un percorso sul server.
 - `HANDLER` è la funzione eseguita quando si trova una corrispondenza per la route.
 
@@ -65,4 +66,3 @@ app.delete('/user', (req, res) => {
 
 Per ulteriori dettagli sul routing, consultare il [Manuale routing](/{{ page.lang }}/guide/routing.html).
 
-### [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)

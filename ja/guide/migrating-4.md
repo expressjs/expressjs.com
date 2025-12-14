@@ -3,6 +3,7 @@ layout: page
 title: Express 4 への移行
 description: A guide to migrating your Express.js applications from version 3 to 4, covering changes in middleware, routing, and how to update your codebase effectively.
 menu: guide
+order: 9
 redirect_from: "  "
 ---
 
@@ -380,10 +381,10 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
 `app.js` に以下の変更を加えます。
 
 1. 標準装備の Express ミドルウェア関数 `express.favicon`、`express.logger`、`express.methodOverride`、`express.session`、`express.bodyParser`、および `express.errorHandler` は `express` オブジェクトで使用できなくなりました。代わりの関数を手動でインストールして、アプリケーションにロードする必要があります。 You must install their alternatives
-  manually and load them in the app.
+   manually and load them in the app.
 
 2. You no longer need to load the `app.router` function.
-  `app.router` 関数をロードする必要がなくなりました。この関数は有効な Express 4 アプリケーション・オブジェクトではないため、`app.use(app.router);` コードを削除してください。
+   `app.router` 関数をロードする必要がなくなりました。この関数は有効な Express 4 アプリケーション・オブジェクトではないため、`app.use(app.router);` コードを削除してください。
 
 3. ミドルウェア関数が正しい順序でロードされていることを確認してください。つまり、アプリケーション・ルートをロードした後で `errorHandler` をロードしてください。
 

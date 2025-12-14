@@ -3,6 +3,7 @@ layout: page
 title: Express "Hello World" example
 description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
 menu: starter
+order: 2
 redirect_from: "/starter/hello-world.html"
 ---
 
@@ -47,5 +48,3 @@ $ node app.js
 ```
 
 Then, load `http://localhost:3000/` in a browser to see the output.
-
-###  [Previous: Installing ](/{{ page.lang }}/starter/installing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Express Generator ](/{{ page.lang }}/starter/generator.html)

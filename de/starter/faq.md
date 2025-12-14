@@ -3,6 +3,7 @@ layout: page
 title: Häufig gestellte Fragen zu Express
 description: Finden Sie Antworten auf häufig gestellte Fragen zu Express.js, darunter Themen wie Anwendungsstruktur, Models, Authentifizierung, Template-Engines, Fehlerbehandlung und mehr.
 menu: starter
+order: 7
 redirect_from: "  "
 ---
 
@@ -76,5 +77,3 @@ Wenn Sie viele Assets aus einem Verzeichnis bedienen müssen, verwenden Sie die 
 
 - [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
 - [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
-
-### [Previous: More examples ](/{{ page.lang }}/starter/examples.html)

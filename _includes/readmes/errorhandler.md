@@ -2,7 +2,7 @@
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
+<a href="https://github.com/expressjs/errorhandler/actions/workflows/ci.yml"><img src="https://github.com/expressjs/errorhandler/actions/workflows/ci.yml/badge.svg"></a>
 [![Test Coverage][coveralls-image]][coveralls-url]
 
 Development-only error handler middleware.
@@ -126,5 +126,3 @@ function errorNotification (err, str, req) {
 [npm-downloads-image]: https://badgen.net/npm/dm/errorhandler
 [npm-url]: https://npmjs.org/package/errorhandler
 [npm-version-image]: https://badgen.net/npm/v/errorhandler
-[travis-image]: https://badgen.net/travis/expressjs/errorhandler/master
-[travis-url]: https://travis-ci.org/expressjs/errorhandler

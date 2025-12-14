@@ -3,6 +3,7 @@ layout: page
 title: Express 基本路由
 description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
+order: 4
 redirect_from: "  "
 ---
 
@@ -21,7 +22,7 @@ app.METHOD(PATH, HANDLER)
 Where:
 
 - `app` 是 `express` 的實例。
-- `METHOD` 是 [HTTP 要求方法](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)。
+- `METHOD` is an [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in lowercase.
 - `PATH` 是伺服器上的路徑。
 - `HANDLER` 是當路由相符時要執行的函數。
 
@@ -67,4 +68,3 @@ app.delete('/user', (req, res) => {
 
 如需路由的詳細資料，請參閱[路由手冊](/{{ page.lang }}/guide/routing.html)。
 
-### [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)

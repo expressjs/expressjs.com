@@ -3,6 +3,7 @@ layout: page
 title: Routage Express
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
 menu: guide
+order: 1
 redirect_from: "  "
 ---
 
@@ -11,12 +12,11 @@ redirect_from: "  "
 _Routage_ fait référence à la définition de points finaux d'application (URI) et à la façon dont ils répondent aux demandes client.
 Pour une introduction au routage, voir [Basic routing](/{{ page.lang }}/starter/basic-routing.html).
 
-You define routing using methods of the Express `app` object that correspond to HTTP methods;
-for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
-see [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD). You can also use [app.all()](/{{ page.lang }}/5x/api.html#app.all) to handle all HTTP methods and [app.use()](/{{ page.lang }}/5x/api.html#app.use) to
-specify middleware as the callback function (See [Using middleware](/{{ page.lang }}/guide/using-middleware.html) for details).
+Vous définissez le routage à l’aide des méthodes de l’objet app d’Express correspondant aux méthodes HTTP :
+par exemple, `app.get()` pour les requêtes GET et \`app.post pour les requêtes POST. Pour la liste complète,
+voir [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD). Vous pouvez également utiliser [app.all()](/{{ page.lang }}/5x/api.html#app.all) pour gérer toutes les méthodes HTTP et [app.use()](/{{ page.lang }}/5x/api.html#app.use) spécifier le middleware comme fonction de rappel (Voir [Utilisation du middleware](/{{ page.lang }}/guide/using-middleware.html) pour plus de détails).
 
-These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
+Ces méthodes de routage spécifient une fonction de rappel (parfois "appelée fonction de gestion") qui est appelée lorsque l'application reçoit une requête correspondant à la route (point de terminaison) et à la méthode HTTP spécifiées. Autrement dit, l'application "écoute" les requêtes qui correspondent à la ou aux routes et à la ou aux méthodes spécifiées, et lorsqu'une correspondance est détectée, elle appelle la fonction de rappel définie.
 
 In fact, the routing methods can have more than one callback function as arguments.
 With multiple callback functions, it is important to provide `next` as an argument to the callback function and then call `next()` within the body of the function to hand off control
@@ -228,7 +228,7 @@ req.params: {"userId": "42"}
 
 {% capture escape-advisory %}
 
-Because the regular expression is usually part of a literal string, be sure to escape any `\` characters with an additional backslash, for example `\\d+`.
+Comme l'expression régulière fait généralement partie d'une chaîne littérale, veillez à échapper tout caractère `\` avec un antislash supplémentaire, par exemple `\\d+`.
 
 {% endcapture %}
 

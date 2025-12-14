@@ -3,6 +3,7 @@ layout: page
 title: Statische Dateien in Express bereitstellen
 description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
 menu: starter
+order: 5
 redirect_from: "  "
 ---
 
@@ -75,5 +76,3 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
 
 For more details about the `serve-static` function and its options, see  [serve-static](/resources/middleware/serve-static.html).
-
-### [Previous: Basic Routing ](/{{ page.lang }}/starter/basic-routing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: More examples ](/{{ page.lang }}/starter/examples.html)

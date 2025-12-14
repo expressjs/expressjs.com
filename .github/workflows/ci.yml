@@ -22,13 +22,13 @@ jobs:
       github.event_name != 'pull_request_review'
 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
       with:
         persist-credentials: false
  
 
     - name: Set up Node.js
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@v6
 
     - name: Install Node.js dependencies
       run: npm install
@@ -46,12 +46,12 @@ jobs:
       github.event_name != 'pull_request_review'
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Setup Ruby    
-        uses: ruby/setup-ruby@44511735964dcb71245e7e55f72539531f7bc0eb # https://github.com/ruby/setup-ruby/releases/tag/v1.257.0
+        uses: ruby/setup-ruby@ac793fdd38cc468a4dd57246fa9d0e868aba9085 # https://github.com/ruby/setup-ruby/releases/tag/v1.270.0
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 

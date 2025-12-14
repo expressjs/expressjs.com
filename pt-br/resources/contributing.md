@@ -3,6 +3,7 @@ layout: page
 title: Contributing to Express
 description: Find out how to contribute to Express.js, including guidelines for reporting issues, submitting pull requests, becoming a collaborator, and understanding security policies.
 menu: resources
+order: 5
 redirect_from: "  "
 ---
 
@@ -182,6 +183,26 @@ The list can be found at [https://github.com/expressjs/discussions/blob/HEAD/doc
 
 The list can be found at [https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#current-initiative-captains](https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#current-initiative-captains)
 
+### Inactivity and Emeritus Policy for Any Role
+
+To support the health and continuity of the project, all individuals holding a role within the community (such as Triager, Committer, WG member, Project Captain, or TC member) are encouraged to maintain active participation.
+
+Inactivity is defined as the absence of meaningful involvement in the project—such as contributions, code reviews, triage, meeting attendance, or discussion participation—for a continuous period of 6 months.
+
+#### Exceptions
+
+Anyone may request a temporary leave from active participation due to personal or professional reasons. In such cases, the individual should inform the relevant team or the Technical Committee (TC). During this time, the inactivity policy is paused, and the individual will not be flagged as inactive.
+
+#### Inactivity Process
+
+- If someone is deemed inactive, the individual may be transitioned to an emeritus role that reflects their past contributions. A best effort will be made to inform them that this has occurred. They may request to be reinstated when they are ready to be active again.
+- The emeritus status helps preserve a clear record of contributors who have meaningfully shaped the project over time.
+
+#### Accountability
+
+- The Technical Committee (TC) and the respective captains of each package/team are responsible for assessing activity levels and enacting this policy fairly and transparently, in coordination with other relevant teams.
+- In case of disagreement, the situation can be discussed and resolved by consensus within the TC or appropriate team.
+
 ### Developer's Certificate of Origin 1.1
 
 ```text
@@ -237,18 +258,18 @@ a future release of Express.
 ### Steps for contributing
 
 1. Create an issue for the
-  bug you want to fix or the feature that you want to add.
+   bug you want to fix or the feature that you want to add.
 2. Create your own fork on GitHub, then
-  checkout your fork.
+   checkout your fork.
 3. Write your code in your local copy. It's good practice to create a branch for
-  each new issue you work on, although not compulsory.
+   each new issue you work on, although not compulsory.
 4. To run the test suite, first install the dependencies by running `npm install`,
-  then run `npm test`.
+   then run `npm test`.
 5. Ensure your code is linted by running `npm run lint` -- fix any issue you
-  see listed.
+   see listed.
 6. If the tests pass, you can commit your changes to your fork and then create
-  a pull request from there. Make sure to reference your issue from the pull
-  request comments by including the issue number e.g. `#123`.
+   a pull request from there. Make sure to reference your issue from the pull
+   request comments by including the issue number e.g. `#123`.
 
 ### Issues which are questions
 
@@ -346,22 +367,22 @@ This is the contribution documentation for the [expressjs.com](https://github.co
 #### Need some ideas? These are some typical issues.
 
 1. **Website issues**: If you see anything on the site that could use a tune-up, think about how to fix it.
-  - Display or screen sizing problems
-  - Mobile responsiveness issues
-  - Missing or broken accessibility features
-  - Website outages
-  - Broken links
-  - Page structure or user interface enhancements
+   - Display or screen sizing problems
+   - Mobile responsiveness issues
+   - Missing or broken accessibility features
+   - Website outages
+   - Broken links
+   - Page structure or user interface enhancements
 
 2. **Content Issues**: Fix anything related to site content or typos.
-  - Spelling errors
-  - Incorrect/outdated Express JS documentation
-  - Missing content
+   - Spelling errors
+   - Incorrect/outdated Express JS documentation
+   - Missing content
 
 3. **Translation Issues**: Fix any translation errors or contribute new content.
-  - Fix spelling errors
-  - Fix incorrect/poorly translated words
-  - Check out the [Contributing translations](#contributing-translations) section below for a contributing guide.
+   - Fix spelling errors
+   - Fix incorrect/poorly translated words
+   - Check out the [Contributing translations](#contributing-translations) section below for a contributing guide.
 
 #### Want to work on a backlog issue?
 
@@ -384,12 +405,12 @@ The steps below will guide you through the Expressjs.com contribution process.
 So you've found a problem that you want to fix, or have a site enhancement you want to make.
 
 1. If you want to get feedback or discuss, open a discussion [issue](https://github.com/expressjs/expressjs.com/issues/new/choose) prior to starting work. This is not required, but encouraged for larger proposals.
-  - While we highly encourage this step, it is only for submissions proposing significant change. It  helps us to clarify and focus the work, and ensure it aligns with overall project priorities.
-  - For submissions proposing minor improvements or corrections, this is not needed. You can skip this step.
-  - When opening an issue please give it a title and fill in the description section. The more details you provide, the more feedback we can give.
+   - While we highly encourage this step, it is only for submissions proposing significant change. It  helps us to clarify and focus the work, and ensure it aligns with overall project priorities.
+   - For submissions proposing minor improvements or corrections, this is not needed. You can skip this step.
+   - When opening an issue please give it a title and fill in the description section. The more details you provide, the more feedback we can give.
 
 2. After receiving your issue the Express JS documentation team will respond with feedback. We read every submission and always try to respond quickly with feedback.
-  - For submissions proposing significant change, we encourage you to follow the review process before starting work.
+   - For submissions proposing significant change, we encourage you to follow the review process before starting work.
 
 #### Step 2: Get the Application Code Base
 
@@ -434,12 +455,12 @@ The Express JS website is built using [Jekyll](https://jekyllrb.com/) and is hos
 Now you'll need a way to see your changes, which means you'll need a running version of the application. You have two options.
 
 1. **Run Locally**: This gets the local version of the application up and running on your machine. Follow our [Local Setup Guide](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#build-the-website-locally) to use this option.
-  - This is the recommended option for moderate to complex work.
+   - This is the recommended option for moderate to complex work.
 
 2. **Run using Deploy Preview**: Use this option if you don't want to bother with a local installation. Part of our continuous integration pipeline includes [Netlify Deploy Preview](https://docs.netlify.com/site-deploys/deploy-previews/).
-  1. To use this you'll need to get your changes online - after you've made your first commit on your feature branch, make a _draft_ pull request.
-  2. After the build steps are complete, you'll have access to a **Deploy Preview** tab that will run your changes on the web, rebuilding after each commit is pushed.
-  3. After you are completely done your work and it's ready for review, remove the draft status on your pull request and submit your work.
+   1. To use this you'll need to get your changes online - after you've made your first commit on your feature branch, make a _draft_ pull request.
+   2. After the build steps are complete, you'll have access to a **Deploy Preview** tab that will run your changes on the web, rebuilding after each commit is pushed.
+   3. After you are completely done your work and it's ready for review, remove the draft status on your pull request and submit your work.
 
 ## Contributing translations
 

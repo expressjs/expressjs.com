@@ -3,6 +3,7 @@ layout: page
 title: Express 자주 묻는 질문(FAQ)
 description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
+order: 7
 redirect_from: "  "
 ---
 
@@ -93,5 +94,3 @@ app.use((err, req, res, next) => {
 
 - [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
 - [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
-
-### [Previous: More examples ](/{{ page.lang }}/starter/examples.html)

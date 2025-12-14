@@ -28,6 +28,8 @@ See also the [example below](#example.of.express.static).
 | `maxAge`      | Set the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms). | Number | 0 |
 | `redirect`    | Redirect to trailing "/" when the pathname is a directory. | Boolean | `true` |
 | `setHeaders`  | Function for setting HTTP headers to serve with the file. <br/><br/>See [setHeaders](#setHeaders) below. | Function |  |
+| `acceptRanges`    | Enable or disable accepting ranged requests. Disabling this will not send the Accept-Ranges header and will ignore the contents of the Range request header.| Boolean | true |
+| `cacheControl`    | Enable or disable setting the Cache-Control response header. Disabling this will ignore the immutable and maxAge options. | Boolean | true |
 
 </div>
 

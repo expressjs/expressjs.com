@@ -3,6 +3,7 @@ layout: page
 title: Integração de banco de dados do Express
 description: Discover how to integrate various databases with Express.js applications, including setup examples for MongoDB, MySQL, PostgreSQL, and more.
 menu: guide
+order: 11
 redirect_from: "  "
 ---
 
@@ -200,7 +201,7 @@ connection.end()
 $ npm install mongodb
 ```
 
-### Example (v2.\*)
+### Exemplos.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient
@@ -216,7 +217,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
 })
 ```
 
-### Example (v3.\*)
+### Exemplos (v3.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient
@@ -274,7 +275,7 @@ session.readTransaction((tx) => {
 
 ### Installation
 
-NOTE: [See installation prerequisites](https://github.com/oracle/node-oracledb#-installation).
+NOTA: [Ver pré-requisitos de instalação](https://github.com/oracle/node-oracledb#-installation).
 
 ```bash
 $ npm install oracledb
@@ -316,7 +317,7 @@ getEmployee(101)
 
 ## PostgreSQL
 
-**Module**: [pg-promise](https://github.com/vitaly-t/pg-promise)
+**Módulo**: [pg-promise](https://github.com/vitaly-t/pg-promise)
 
 ### Installation
 
@@ -377,7 +378,8 @@ client.hkeys('hash key', (err, replies) => {
 
 ## SQL Server
 
-**Module**: [tedious](https://github.com/tediousjs/tedious)
+**Módulo**: [redis](https://github.com/tediousjs/tedious)
+**Instalação**
 
 ### Installation
 

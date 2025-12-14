@@ -1,8 +1,8 @@
-title_announcement: "Express@5.1.0: Now the Default on npm with LTS Timeline"
-body_announcement: "Express 5.1.0 is now the default on npm, and we're introducing an official LTS schedule for the v4 and v5 release lines. <a href='https://expressjs.com/2025/03/31/v5-1-latest-release.html'>Check out our latest blog for more information.</a>"
-community-caveat-alert: "This information refers to third-party sites, products, or modules that are not maintained by the Expressjs team. Listing here does not constitute an endorsement or recommendation from the Expressjs project team."
-warning: 'Warning'
-note: 'Note'
-caution: 'Caution'
-i18n_notice: "This document might be outdated relative to the documentation in English. For the latest updates, please refer to the"
-i18n_notice_link_text: "documentation in english"
+title_announcement: "Express@5.1.0: Agora o Padrão no npm com LTS Timeline"
+body_announcement: "Expresse 5.1.0 agora é o padrão do npm, e estamos introduzindo um cronograma oficial de LTS para as linhas de lançamento v4 e v5. <a href='https://expressjs.com/2025/03/31/v5-1-latest-release.html'>Confira nosso último blog para obter mais informações.</a>"
+community-caveat-alert: "Esta informação refere-se a sites de terceiros, produtos ou módulos que não são mantidos pela equipe do Expressjs. A listagem aqui não constitui um endosso ou recomendação da equipe de projeto Expressjs."
+warning: 'Atenção'
+note: 'Observação'
+caution: 'Atenção'
+i18n_notice: "Este documento pode estar desatualizado em relação à documentação em inglês. Para as últimas atualizações, por favor consulte o"
+i18n_notice_link_text: "documentação em inglês"

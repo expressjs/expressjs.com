@@ -17,18 +17,18 @@ before trusting. For example, `req.body.foo.toString()` may fail in multiple
 ways, for example the `foo` property may not be there or may not be a string,
 and `toString` may not be a function and instead a string or other user input.
 
-[Learn about the anatomy of an HTTP transaction in Node.js](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/).
+[Learn about the anatomy of an HTTP transaction in Node.js](https://nodejs.org/en/learn/http/anatomy-of-an-http-transaction).
 
 _This does not handle multipart bodies_, due to their complex and typically
 large nature. For multipart bodies, you may be interested in the following
 modules:
 
-  * [busboy](https://www.npmjs.org/package/busboy#readme) and
-    [connect-busboy](https://www.npmjs.org/package/connect-busboy#readme)
-  * [multiparty](https://www.npmjs.org/package/multiparty#readme) and
-    [connect-multiparty](https://www.npmjs.org/package/connect-multiparty#readme)
-  * [formidable](https://www.npmjs.org/package/formidable#readme)
-  * [multer](https://www.npmjs.org/package/multer#readme)
+  * [busboy](https://www.npmjs.com/package/busboy#readme) and
+    [connect-busboy](https://www.npmjs.com/package/connect-busboy#readme)
+  * [multiparty](https://www.npmjs.com/package/multiparty#readme) and
+    [connect-multiparty](https://www.npmjs.com/package/connect-multiparty#readme)
+  * [formidable](https://www.npmjs.com/package/formidable#readme)
+  * [multer](https://www.npmjs.com/package/multer#readme)
 
 This module provides the following parsers:
 
@@ -39,8 +39,8 @@ This module provides the following parsers:
 
 Other body parsers you might be interested in:
 
-- [body](https://www.npmjs.org/package/body#readme)
-- [co-body](https://www.npmjs.org/package/co-body#readme)
+- [body](https://www.npmjs.com/package/body#readme)
+- [co-body](https://www.npmjs.com/package/co-body#readme)
 
 ## Installation
 
@@ -76,6 +76,11 @@ object after the middleware (i.e. `req.body`).
 The `json` function takes an optional `options` object that may contain any of
 the following keys:
 
+##### defaultCharset
+
+Specify the default character set for the json content if the charset is not
+specified in the `Content-Type` header of the request. Defaults to `utf-8`.
+
 ##### inflate
 
 When set to `true`, then deflated (compressed) bodies will be inflated; when
@@ -104,7 +109,7 @@ accept anything `JSON.parse` accepts. Defaults to `true`.
 The `type` option is used to determine what media type the middleware will
 parse. This option can be a string, array of strings, or a function. If not a
 function, `type` option is passed directly to the
-[type-is](https://www.npmjs.org/package/type-is#readme) library and this can
+[type-is](https://www.npmjs.com/package/type-is#readme) library and this can
 be an extension name (like `json`), a mime type (like `application/json`), or
 a mime type with a wildcard (like `*/*` or `*/json`). If a function, the `type`
 option is called as `fn(req)` and the request is parsed if it returns a truthy
@@ -149,7 +154,7 @@ to `'100kb'`.
 The `type` option is used to determine what media type the middleware will
 parse. This option can be a string, array of strings, or a function.
 If not a function, `type` option is passed directly to the
-[type-is](https://www.npmjs.org/package/type-is#readme) library and this
+[type-is](https://www.npmjs.com/package/type-is#readme) library and this
 can be an extension name (like `bin`), a mime type (like
 `application/octet-stream`), or a mime type with a wildcard (like `*/*` or
 `application/*`). If a function, the `type` option is called as `fn(req)`
@@ -200,7 +205,7 @@ to `'100kb'`.
 The `type` option is used to determine what media type the middleware will
 parse. This option can be a string, array of strings, or a function. If not
 a function, `type` option is passed directly to the
-[type-is](https://www.npmjs.org/package/type-is#readme) library and this can
+[type-is](https://www.npmjs.com/package/type-is#readme) library and this can
 be an extension name (like `txt`), a mime type (like `text/plain`), or a mime
 type with a wildcard (like `*/*` or `text/*`). If a function, the `type`
 option is called as `fn(req)` and the request is parsed if it returns a
@@ -234,7 +239,7 @@ any of the following keys:
 The "extended" syntax allows for rich objects and arrays to be encoded into the
 URL-encoded format, allowing for a JSON-like experience with URL-encoded. For
 more information, please [see the qs
-library](https://www.npmjs.org/package/qs#readme).
+library](https://www.npmjs.com/package/qs#readme).
 
 Defaults to `false`.
 
@@ -261,7 +266,7 @@ than this value, a 413 will be returned to the client. Defaults to `1000`.
 The `type` option is used to determine what media type the middleware will
 parse. This option can be a string, array of strings, or a function. If not
 a function, `type` option is passed directly to the
-[type-is](https://www.npmjs.org/package/type-is#readme) library and this can
+[type-is](https://www.npmjs.com/package/type-is#readme) library and this can
 be an extension name (like `urlencoded`), a mime type (like
 `application/x-www-form-urlencoded`), or a mime type with a wildcard (like
 `*/x-www-form-urlencoded`). If a function, the `type` option is called as
@@ -291,7 +296,7 @@ Whether to decode numeric entities such as `&#9786;` when parsing an iso-8859-1
 form. Defaults to `false`.
 
 
-#### depth
+##### depth
 
 The `depth` option is used to configure the maximum depth of the `qs` library when `extended` is `true`. This allows you to limit the amount of keys that are parsed and can be useful to prevent certain types of abuse. Defaults to `32`. It is recommended to keep this value as low as possible.
 
@@ -478,14 +483,12 @@ app.use(bodyParser.text({ type: 'text/html' }))
 
 [MIT](LICENSE)
 
-[ci-image]: https://badgen.net/github/checks/expressjs/body-parser/master?label=ci
+[ci-image]: https://img.shields.io/github/actions/workflow/status/expressjs/body-parser/ci.yml?branch=master&label=ci
 [ci-url]: https://github.com/expressjs/body-parser/actions/workflows/ci.yml
-[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/body-parser/master
+[coveralls-image]: https://img.shields.io/coverallsCoverage/github/expressjs/body-parser?branch=master
 [coveralls-url]: https://coveralls.io/r/expressjs/body-parser?branch=master
-[node-version-image]: https://badgen.net/npm/node/body-parser
-[node-version-url]: https://nodejs.org/en/download
-[npm-downloads-image]: https://badgen.net/npm/dm/body-parser
-[npm-url]: https://npmjs.org/package/body-parser
-[npm-version-image]: https://badgen.net/npm/v/body-parser
+[npm-downloads-image]: https://img.shields.io/npm/dm/body-parser
+[npm-url]: https://npmjs.com/package/body-parser
+[npm-version-image]: https://img.shields.io/npm/v/body-parser
 [ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/body-parser/badge
 [ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/body-parser

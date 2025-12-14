@@ -3,6 +3,7 @@ layout: page
 title: Migrando para o Express 5
 description: A comprehensive guide to migrating your Express.js applications from version 4 to 5, detailing breaking changes, deprecated methods, and new improvements.
 menu: guide
+order: 10
 redirect_from: "  "
 ---
 
@@ -72,7 +73,7 @@ You can find the list of available codemods [here](https://github.com/expressjs/
 **Melhorias**
 
 <ul class="doclist">
-  <li><a href="#path-syntax">Path route matching syntax</a></li>
+  <li><a href="#path-syntax">Rota correspondente à sintaxe</a></li>
   <li><a href="#rejected-promises">Rejected promises handled from middleware and handlers</a></li>
   <li><a href="#express.urlencoded">express.urlencoded</a></li>
   <li><a href="#express.static.dotfiles">express.static dotfiles</a></li>
@@ -111,7 +112,7 @@ palavra-chave reservada no JavaScript. Entretanto, a partir do ECMAScript 6,
 legalmente ser usadas como nomes de propriedades.
 
 {% capture codemod-deprecated-signatures %}
-You can replace the deprecated signatures with the following command:
+Você pode substituir as assinaturas obsoletas pelo seguinte comando:
 
 ```plain-text
 npx @expressjs/codemod v4-deprecated-signatures
@@ -291,7 +292,7 @@ app.get('/user', (req, res) => {
 
 <h3 id="magic-redirect">res.redirect('back') and res.location('back')</h3>
 
-Express 5 no longer supports the magic string `back` in the `res.redirect()` and `res.location()` methods. Instead, use the `req.get('Referrer') || '/'` value to redirect back to the previous page. In Express 4, the res.`redirect('back')` and `res.location('back')` methods were deprecated.
+Express 5 no longer supports the magic string `back` in the `res.redirect()` and `res.location()` methods. Instead, use the `req.get('Referrer') || '/'` value to redirect back to the previous page. In Express 4, the `res.redirect('back')` and `res.location('back')` methods were deprecated.
 
 {% capture codemod-magic-redirect %}
 You can replace the deprecated signatures with the following command:

@@ -3,6 +3,7 @@ layout: page
 title: 프록시 환경에서 Express 사용
 description: Express.js 애플리케이션을 리버스 프록시 뒤에서 올바르게 작동하도록 설정하는 방법을 알아보십시오. 클라이언트 IP 주소를 처리하기 위해 `trust proxy` 설정을 사용하는 것을 포함합니다.
 menu: guide
+order: 8
 redirect_from: "  "
 ---
 

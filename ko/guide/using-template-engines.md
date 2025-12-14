@@ -3,6 +3,7 @@ layout: page
 title: Express와 함께 템플리트 엔진 사용
 description: Discover how to integrate and use template engines like Pug, Handlebars, and EJS with Express.js to render dynamic HTML pages efficiently.
 menu: guide
+order: 5
 redirect_from: "  "
 ---
 
