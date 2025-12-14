@@ -106,3 +106,5 @@ exclude:
   - [uk/CHANGELOG.md]
   - vendor/bundle
   - node_modules/
+
+include: [".well-known"]
