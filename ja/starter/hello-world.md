@@ -3,6 +3,7 @@ layout: page
 title: Express の「Hello World」の例
 description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
 menu: starter
+order: 2
 redirect_from: "  "
 ---
 
@@ -45,5 +46,3 @@ $ node app.js
 ```
 
 次に、ブラウザーに [http://localhost:3000/](http://localhost:3000/) をロードして、出力を確認します。
-
-### ここで紹介するのは基本的に、作成できる最も単純な Express アプリケーションです。このアプリケーションは単一ファイル・アプリケーションであり、[Express ジェネレーター](/{{ page.lang }}/starter/generator.html) を使用して得られるものでは _ありません_ 。このジェネレーターは、さまざまな目的で多数の JavaScript ファイル、Jade テンプレート、サブディレクトリーを使用する完全なアプリケーション用のスキャフォールディングを作成します。

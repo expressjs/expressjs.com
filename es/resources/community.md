@@ -3,6 +3,7 @@ layout: page
 title: Comunidad de Express
 description: Connect with the Express.js community, learn about the technical committee, find resources, explore community-contributed modules, and get involved in discussions.
 menu: resources
+order: 1
 redirect_from: "  "
 ---
 
@@ -41,8 +42,8 @@ Nuestra vibrante comunidad ha creado una larga variedad de extensiones, [módulo
 
 Además, la comunidad de Express mantiene módulos en estas dos organizaciones de GitHub:
 
-- [jshttp](https://github.com/jshttp): módulos que proporcionan funciones utilitarias útiles; consulte [Módulos de utilidad](/{{ page.lang }}/resources/utils.html).
-- [pillarjs](https://github.com/pillarjs): módulos de bajo nivel que Express utiliza internamente.
+- [jshttp](https://github.com/jshttp) modules providing useful utility functions; see [Utility modules](/{{ page.lang }}/resources/utils.html).
+- [pillarjs](https://github.com/pillarjs): low-level modules that Express uses internally.
 
 Para mantenerse al tanto de lo que está sucediendo en toda la comunidad, consulte [ExpressJS StatusBoard](https://expressjs.github.io/statusboard/).
 

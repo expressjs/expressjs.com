@@ -3,6 +3,7 @@ layout: page
 title: Express 路由
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
 menu: guide
+order: 1
 redirect_from: "  "
 ---
 
@@ -95,7 +96,7 @@ Query strings are not part of the route path.
 
 ### 以下是基于字符串的路由路径的一些示例。
 
-此路由路径将请求与 `/` 匹配。
+此路由路径将请求与 `/random.text` 匹配。
 
 ```js
 app.get('/', (req, res) => {
@@ -111,7 +112,7 @@ app.get('/about', (req, res) => {
 })
 ```
 
-此路由路径将请求与 `/random.text` 匹配。
+此路由路径将请求与根路由 `/` 匹配。
 
 ```js
 app.get('/random.text', (req, res) => {

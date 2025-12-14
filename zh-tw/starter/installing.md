@@ -3,6 +3,7 @@ layout: page
 title: 安裝 Express
 description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
 menu: starter
+order: 1
 redirect_from: "  "
 ---
 
@@ -51,5 +52,3 @@ $ npm install express --no-save
 安裝 Node 模組時，如果指定了 `--save` 選項，則會將這些模組新增至 `package.json` 檔中的 `dependencies` 清單。之後，當您在 `app` 目錄中執行 `npm install` 時，就會自動安裝相依關係清單中的模組。
  Then, afterwards, running `npm install` in the app directory will automatically install modules in the dependencies list.
 </div>
-
-### [Next: Hello World ](/{{ page.lang }}/starter/hello-world.html)

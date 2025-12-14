@@ -3,6 +3,7 @@ layout: page
 title: Glossário do Express
 description: A comprehensive glossary of terms related to Express.js, Node.js, middleware, routing, and other key concepts to help you understand and use Express effectively.
 menu: resources
+order: 2
 redirect_from: "  "
 ---
 
@@ -53,7 +54,7 @@ linguagem de script, e alcança rendimentos altos através de E/S não
 bloqueante e um loop de eventos de thread única. Consulte [nodejs.org](http://nodejs.org/). **Nota
 de uso**: Inicialmente, "Node.js," posteriormente "Node".
 
-### open-source, open source
+### código aberto, código aberto
 
 Quando usado como adjetivo, colocar o hífen; por exemplo "Este
 é um software open-source". Consulte

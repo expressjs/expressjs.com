@@ -3,6 +3,7 @@ layout: page
 title: Express に関する FAQ
 description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
+order: 7
 redirect_from: "  "
 ---
 
@@ -94,5 +95,3 @@ middleware function.
 
 - [Express 4.x](/{{ page.lang }}/4x/api.html) には Node.js 0.10 以上が必要です。
 - [Express 5.x](/{{ page.lang }}/5x/api.html) には Node.js 18 以上が必要です。
-
-### [Previous: More examples ](/{{ page.lang }}/starter/examples.html)

@@ -3,6 +3,7 @@ layout: page
 title: Utilizzo di motori di template con Express
 description: Discover how to integrate and use template engines like Pug, Handlebars, and EJS with Express.js to render dynamic HTML pages efficiently.
 menu: guide
+order: 5
 redirect_from: "  "
 ---
 

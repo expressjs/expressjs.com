@@ -3,6 +3,7 @@ layout: page
 title: Instalando o Express
 description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
 menu: starter
+order: 1
 redirect_from: "  "
 ---
 
@@ -60,5 +61,3 @@ são incluídas na lista `dependencies` no arquivo
 `app` irá automaticamente instalar os módulos na
 lista de dependências.
 </div>
-
-### [Next: Hello World ](/{{ page.lang }}/starter/hello-world.html)

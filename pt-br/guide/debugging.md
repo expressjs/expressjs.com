@@ -3,6 +3,7 @@ layout: page
 title: Depurando o Express
 description: Learn how to enable and use debugging logs in Express.js applications by setting the DEBUG environment variable for enhanced troubleshooting.
 menu: guide
+order: 7
 redirect_from: "  "
 ---
 
@@ -122,7 +123,7 @@ $ DEBUG=http,mail,express:* node index.js
 
 When running through Node.js, you can set a few environment variables that will change the behavior of the debug logging:
 
-| Name                | Purpose                                                           |
+| Nome                | Objetivo                                                          |
 | ------------------- | ----------------------------------------------------------------- |
 | `DEBUG`             | Enables/disables specific debugging namespaces.   |
 | `DEBUG_COLORS`      | Whether or not to use colors in the debug output. |

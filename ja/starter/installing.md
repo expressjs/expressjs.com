@@ -3,6 +3,7 @@ layout: page
 title: Express のインストール
 description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
 menu: starter
+order: 1
 redirect_from: "  "
 ---
 
@@ -52,5 +53,3 @@ $ npm install express --no-save
 npm 5.0 以降のデフォルトでは、npm install はモジュールを `package.json` ファイルの `dependencies` リストに追加します。以前のバージョンの npm では、`--save` オプションを明示的に指定しなければなりません。その後、app ディレクトリで `npm install` を実行すると、依存関係リストにモジュールが自動的にインストールされます。
  Then, afterwards, running `npm install` in the app directory will automatically install modules in the dependencies list.
 </div>
-
-### [Next: Hello World ](/{{ page.lang }}/starter/hello-world.html)

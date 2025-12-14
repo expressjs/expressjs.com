@@ -3,6 +3,7 @@ layout: page
 title: Express 기본 라우팅
 description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
+order: 4
 redirect_from: "  "
 ---
 
@@ -21,7 +22,7 @@ app.METHOD(PATH, HANDLER)
 여기서,
 
 - `app`은 `express`의 인스턴스입니다.
-- `METHOD`는 [HTTP 요청 메소드](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)입니다.
+- `METHOD` is an [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in lowercase.
 - `PATH`는 서버에서의 경로입니다.
 - `HANDLER`는 라우트가 일치할 때 실행되는 함수입니다.
 
@@ -65,4 +66,3 @@ app.delete('/user', (req, res) => {
 
 라우팅에 대한 자세한 내용을 확인하려면 [라우팅 안내서](/{{ page.lang }}/guide/routing.html)를 참조하십시오.
 
-### [Previous: Express application generator ](/{{ page.lang }}/starter/generator.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Serving static files in Express ](/{{ page.lang }}/starter/static-files.html)

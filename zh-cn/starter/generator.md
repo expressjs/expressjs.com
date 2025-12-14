@@ -3,6 +3,7 @@ layout: page
 title: Express 应用程序生成器
 description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
 menu: starter
+order: 3
 redirect_from: "  "
 ---
 
@@ -125,5 +126,3 @@ PS> $env:DEBUG='myapp:*'; npm start
 生成器创建的应用程序结构只是构造 Express 应用程序的众多方法之一。请随意使用此结构或者对其进行修改以最大程度满足自己的需求。
  Feel free to use this structure or modify it to best suit your needs.
 </div>
-
-### [Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)

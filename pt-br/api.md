@@ -2,7 +2,7 @@
 layout: api
 version: 5x
 title: Express 5.x - Referência da API
-description: Access the API reference for Express.js detailing all modules, methods, and properties for building web applications with this version.
+description: Acesse a referência da API para Express.js , detalhando todos os módulos, métodos e propriedades para construir aplicações web com esta versão.
 menu: api
 redirect_from: "  "
 ---
