@@ -3,6 +3,7 @@ layout: middleware
 title: Express のミドルウェア
 description: Explore a list of Express.js middleware modules maintained by the Express team and the community, including built-in middleware and popular third-party modules.
 menu: resources
+order: 3
 redirect_from: "  "
 module: mw-home
 ---

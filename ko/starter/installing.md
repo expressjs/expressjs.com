@@ -3,6 +3,7 @@ layout: page
 title: Express 설치
 description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
 menu: starter
+order: 1
 redirect_from: "  "
 ---
 
@@ -49,5 +50,3 @@ $ npm install express --no-save
 <div class="doc-box doc-info" markdown="1">
 `--save` 옵션을 통해 설치된 Node 모듈은 `package.json` 파일 내의 `dependencies` 목록에 추가됩니다. 이후 `app` 디렉토리에서 `npm install`을 실행하면 종속 항목 목록 내의 모듈이 자동으로 설치됩니다.
 </div>
-
-### [Next: Hello World ](/{{ page.lang }}/starter/hello-world.html)

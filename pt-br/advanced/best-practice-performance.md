@@ -1,8 +1,9 @@
 ---
 layout: page
 title: Melhores Práticas de Desempenho Usando o Express em Produção
-description: Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.
+description: Descubra desempenho e confiabilidade melhores práticas para aplicativos Express na produção, cobrindo otimizações de código e configurações de ambiente para um desempenho ideal.
 menu: advanced
+order: 4
 redirect_from: "  "
 ---
 
@@ -17,7 +18,7 @@ Este tópico se enquadra claramente no mundo de "devops", abordando o desenvolvi
   - Use a compactação gzip
   - Não use funções síncronas
   - Faça o registro de logs corretamente
-  - [Handle exceptions properly](#handle-exceptions-properly)
+  - [Tratar exceções corretamente](#handle-exceptions-properly)
 - [Itens a fazer no seu ambiente / configuração](#env) (a parte de ops).
   - Configure o NODE_ENV para "produção"
   - Executar o seu aplicativo (e Node) diretamente com o sistema
@@ -36,7 +37,7 @@ para melhorar o desempenho dos aplicativos:
 - Use a compactação gzip
 - Não use funções síncronas
 - Faça o registro de logs corretamente
-- [Handle exceptions properly](#handle-exceptions-properly)
+- [Tratar exceções corretamente](#handle-exceptions-properly)
 
 ### Use a compactação gzip
 
@@ -63,16 +64,18 @@ aplicativo. Evite o uso delas na produção.
 
 Apesar de o Node e muitos módulos fornecerem versões síncronas e assíncronas de suas funções, sempre use as versões assíncronas na produção. O único momento em que o uso de uma função síncrona pode ser justificado é na primeira inicialização.
 
-You can use the `--trace-sync-io` command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Obviamente, não seria desejado usar isto na produção, mas sim antes, para garantir que seu código está pronto para produção. Consulte a Atualização
+Se estiver usando o Node.js + ou o  .+, é possível usar a sinalização `--trace-sync-io` da linha de comandos para imprimir um aviso e um rastreio de pilha sempre que o seu aplicativo usar uma API síncrona. Obviamente, não seria desejado usar isto na produção, mas sim antes, para garantir que seu código está pronto para produção. Consulte a Atualização
 semanal para o io.js 2.1.0 para obter mais informações.
 
 ### Lide com exceções adequadamente
 
 Em geral, existem duas razões para registrar logs em seu aplicativo: Para depuração e para registro de logs de atividade do aplicativo (essencialmente, todo o resto). Usar
 o `console.log()` ou o `console.err()` para imprimir mensagens de log no
-terminal é uma prática comum em desenvolvimento. But [these functions are synchronous](https://nodejs.org/api/console.html#console) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
+terminal é uma prática comum em desenvolvimento. Mas essas
+funções são síncronas quando o destino é um terminal ou um arquivo, portanto elas não são adequadas para produção, a não ser que
+a saída seja canalizada para outro programa.
 
-#### For debugging
+#### Para depuração
 
 Se estiver registrando logs com o propósito de depuração, então ao invés de usar o `console.log()`, use um módulo
 especial para depuração como o [debug](https://www.npmjs.com/package/debug). Este
@@ -82,7 +85,10 @@ módulo permite que seja usada a variável de ambiente DEBUG para controlar quai
 
 #### Para atividade do aplicativo
 
-If you're logging app activity (for example, tracking traffic or API calls), instead of using `console.log()`, use a logging library like [Pino](https://www.npmjs.com/package/pino), which is the fastest and most efficient option available.
+Se estiver registrando logs de atividade do aplicativo (por
+exemplo, rastreamento de tráfico ou chamadas de API), ao invés de
+usar o `console.log()`, use uma biblioteca de
+registro de logs como [Winston](https://www.npmjs.com/package/pino) ou Bunyan.
 
 ### Lide com exceções adequadamente
 
@@ -110,7 +116,7 @@ Para obter mais informações sobre os fundamentos de manipulação de erros, co
 
 - [Manipulação de Erros no Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
 
-#### Use try-catch
+#### Usar try-catch
 
 Try-catch é uma construção da linguagem JavaScript que pode ser usada para capturar exceções em um código síncrono. Use try-catch, por exemplo, para tratar erros de análise sintática de JSON como mostrado abaixo.
 
@@ -139,7 +145,7 @@ exceções.
 
 #### Use promessas
 
-When an error is thrown in an `async` function or a rejected promise is awaited inside an `async` function, those errors will be passed to the error handler as if calling `next(err)`
+Quando um erro é lançado em uma função `async` ou uma promessa rejeitada é aguardada dentro de uma função `async`, esses erros serão passados para o manipulador de erros como se chamando `next(err)`
 
 ```js
 app.get('/', async (req, res, next) => {
@@ -153,7 +159,7 @@ app.use((err, req, res, next) => {
 })
 ```
 
-Also, you can use asynchronous functions for your middleware, and the router will handle errors if the promise fails, for example:
+Além disso, você pode usar funções assíncronas para o seu middleware, e o roteador irá lidar com erros se a promessa falhar, por exemplo:
 
 ```js
 app.use(async (req, res, next) => {
@@ -163,7 +169,7 @@ app.use(async (req, res, next) => {
 })
 ```
 
-Best practice is to handle errors as close to the site as possible. So while this is now handled in the router, it’s best to catch the error in the middleware and handle it without relying on separate error-handling middleware.
+A melhor prática é lidar com os erros o mais próximo possível do site. Então enquanto isso é manipulado no roteador, É melhor encontrar o erro no middleware e lidar com ele sem depender de um middleware separado para manipular erros.
 
 #### O que não fazer
 
@@ -345,7 +351,7 @@ Clustering is made possible with Node's [cluster module](https://nodejs.org/api/
 spawn de processos de trabalho e distribua conexões recebidas entre
 os trabalhadores.
 
-#### Using PM2
+#### Usando PM2
 
 If you deploy your application with PM2, then you can take advantage of clustering _without_ modifying your application code. You should ensure your [application is stateless](https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) first, meaning no local data is stored in the process (such as sessions, websocket connections and the like).
 

@@ -3,6 +3,7 @@ layout: page
 title: 迁移到 Express 4
 description: A guide to migrating your Express.js applications from version 3 to 4, covering changes in middleware, routing, and how to update your codebase effectively.
 menu: guide
+order: 9
 redirect_from: "  "
 ---
 
@@ -381,10 +382,10 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
 对 `app.js` 进行以下更改：
 
 1. Express 内置中间件函数 `express.favicon`、`express.logger`、`express.methodOverride`、`express.session`、`express.bodyParser` 和 `express.errorHandler` 不再可用于 `express` 对象。您必须手动安装其替代项，然后在应用程序中装入。 You must install their alternatives
-  manually and load them in the app.
+   manually and load them in the app.
 
 2. You no longer need to load the `app.router` function.
-  不再需要装入 `app.router` 函数。它不是有效的 Express 4 应用程序对象，所以移除了 `app.use(app.router);` 代码。
+   不再需要装入 `app.router` 函数。它不是有效的 Express 4 应用程序对象，所以移除了 `app.use(app.router);` 代码。
 
 3. 确保以正确顺序装入中间件函数 - 在装入应用程序路由之后装入 `errorHandler`。
 

@@ -1,8 +1,8 @@
 ---
 layout: api
 version: 3x
-title: Express 3.x - API Reference
-description: Access the API reference for Express.js version 3.x, noting that this version is end-of-life and no longer maintained - includes details on modules and methods.
+title: Express 3.x - Referência de API
+description: Acesso à referência da API do Express.js versão 3.x, observando que esta versão é final de vida e não mais mantida - inclui detalhes sobre módulos e métodos.
 menu: api
 redirect_from: "  "
 ---
@@ -14,7 +14,7 @@ redirect_from: "  "
 
 This series will continue to receive only security updates and bug fixes until July 2015. It is highly recommended to upgrade to Express 4.x.
 
-If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/{{ page.lang }}/support#commercial-support-options).
+Se você não puder atualizar as últimas 3.x, por favor considere as [Opções de Suporte Comercial](/{{ page.lang }}/support#comercial-support-options).
 
   </div>
 
