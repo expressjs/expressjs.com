@@ -268,6 +268,24 @@ este mecanismo para impor pré-condições em uma rota, e em seguida
 passar o controle para rotas subsequentes se não houveram razões para
 continuar com a rota atual.
 
+```js
+app.get('/user/:id', (req, res, next) => {
+  if (req.params.id === '0') {
+    return next('route')
+  }
+  res.send(`User ${req.params.id}`)
+})
+
+app.get('/user/:id', (req, res) => {
+  res.send('Special handler for user ID 0')
+})
+```
+
+In this example:
+
+- `GET /user/5` → handled by first route → sends "User 5"
+- `GET /user/0` → first route calls `next('route')`, skipping to the next matching `/user/:id` route
+
 Manipuladores de rota podem estar na forma de uma função, uma
 matriz de funções, ou combinações de ambas, como mostrado nos
 seguintes exemplos.

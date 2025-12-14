@@ -247,6 +247,24 @@ In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `
 
 [미들웨어](/{{ page.lang }}/guide/using-middleware.html)와 비슷하게 작동하는 여러 콜백 함수를 제공하여 요청을 처리할 수 있습니다. 유일한 차이점은 이러한 콜백은 `next('route')`를 호출하여 나머지 라우트 콜백을 우회할 수도 있다는 점입니다. 이러한 메커니즘을 이용하면 라우트에 대한 사전 조건을 지정한 후, 현재의 라우트를 계속할 이유가 없는 경우에는 제어를 후속 라우트에 전달할 수 있습니다.
 
+```js
+app.get('/user/:id', (req, res, next) => {
+  if (req.params.id === '0') {
+    return next('route')
+  }
+  res.send(`User ${req.params.id}`)
+})
+
+app.get('/user/:id', (req, res) => {
+  res.send('Special handler for user ID 0')
+})
+```
+
+In this example:
+
+- `GET /user/5` → handled by first route → sends "User 5"
+- `GET /user/0` → first route calls `next('route')`, skipping to the next matching `/user/:id` route
+
 다음 예에 나타난 것과 같이, 라우트 핸들러는 함수나 함수 배열의 형태 또는 둘을 조합한 형태일 수 있습니다.
 
 하나의 콜백 함수는 하나의 라우트를 처리할 수 있습니다. 예를 들면 다음과 같습니다.
