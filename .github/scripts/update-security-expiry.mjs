@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
@@ -28,7 +26,7 @@ for (let i = 0; i < lines.length; i++) {
   if (m) {
     found = true;
     const raw = m[1].trim();
-    const normalized = raw.replace(/z$/, "Z").replace(/Z$/, "Z");
+    const normalized = raw.replace(/z$/, "Z");
     const parsed = Date.parse(normalized);
     if (isNaN(parsed)) {
       console.warn(
