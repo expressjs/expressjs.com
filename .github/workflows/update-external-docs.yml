@@ -10,6 +10,34 @@ permissions:
     contents: write
 
 jobs:
+    update-security:
+        runs-on: ubuntu-latest
+        if: github.repository_owner == 'expressjs'
+        steps:
+            - uses: actions/checkout@v6
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v6
+
+            - name: Update Security Expiry Docs
+              working-directory: .github/scripts
+              run: |
+                node ./update-security-expiry.mjs
+
+            - name: Create Pull Request
+              uses: gr2m/create-or-update-pull-request-action@v1
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with: 
+                commit-message: 'docs: update security expiry docs'
+                title: 'docs: update security expiry docs'
+                body: >
+                  This auto-generated PR updates the security expiry docs in the expressjs.com repository. 
+                  
+                  cc: @expressjs/security-wg
+                labels: docs
+                branch: bot/security-expiry
+
     update-docs:
         runs-on: ubuntu-latest
         if: github.repository_owner == 'expressjs'
@@ -38,7 +66,7 @@ jobs:
                   
                   cc: @expressjs/docs-wg
                 labels: docs
-                branch: external-docs
+                branch: bot/update-external-docs
 
     synchronize-with-crowdin:
         runs-on: ubuntu-latest
