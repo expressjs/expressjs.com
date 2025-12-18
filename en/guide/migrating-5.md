@@ -529,6 +529,22 @@ app.get('/*splat', (req, res) => {
 
 Optional parameters that are not matched do not have a key in `req.params`. In 4.x an unmatched wildcard would be an empty string and a `:` parameter made optional by `?` had a key with value `undefined`.
 
+```js
+// v4
+app.get('/:file.:ext?', (req, res) => {
+  // GET /image
+  console.dir(req.params)
+  // => { file: 'image', ext: undefined }
+})
+
+// v5
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image
+  console.dir(req.params)
+  // => [Object: null prototype] { file: 'image' }
+})
+```
+
 The object has null prototype.
 
 <h3 id="req.query">req.query</h3>
