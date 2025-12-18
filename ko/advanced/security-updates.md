@@ -5,6 +5,7 @@ description: |-
   Express.js의 최신 보안 업데이트와 패치 사항을 확인합니다. 
   각 버전에 대한 상세한 취약점 목록을 포함하여, 애플리케이션의 보안을 유지하는 데 도움이 됩니다.
 menu: advanced
+order: 2
 redirect_from: "  "
 ---
 

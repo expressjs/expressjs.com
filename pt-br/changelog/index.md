@@ -10,7 +10,7 @@ redirect_from:
 
 <nav aria-label="sidebar-heading">
   <div class="toc-container">
-    <h3 id="sidebar-heading" class="toc-heading"><em>Versions</em></h3><button id="menu-toggle" title="show express versions">Versions <span>►</span></button>
+    <h3 id="sidebar-heading" class="toc-heading"><em>Versões</em></h3><button id="menu-toggle" title="show express versions">Versões <span>►</span></button>
     <ul id="menu">
       {% capture readme %}{% include changelog/menu.md %}{% endcapture %}
       <li>
@@ -30,7 +30,7 @@ All the latest updates, improvements, and fixes to Express
 
 {: id="5.x"}
 
-### 5.1.0 - Release date: 2025-03-31
+### 5.1.0 - Data de lançamento: 2025-03-31
 
 {: id="5.0.1"}
 

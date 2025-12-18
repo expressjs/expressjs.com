@@ -3,6 +3,7 @@ layout: page
 title: Express 路由
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
 menu: guide
+order: 1
 redirect_from: "  "
 ---
 
@@ -95,7 +96,7 @@ Query strings are not part of the route path.
 
 ### 以下是基于字符串的路由路径的一些示例。
 
-此路由路径将请求与 `/` 匹配。
+此路由路径将请求与 `/random.text` 匹配。
 
 ```js
 app.get('/', (req, res) => {
@@ -111,7 +112,7 @@ app.get('/about', (req, res) => {
 })
 ```
 
-此路由路径将请求与 `/random.text` 匹配。
+此路由路径将请求与根路由 `/` 匹配。
 
 ```js
 app.get('/random.text', (req, res) => {
@@ -243,6 +244,24 @@ In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `
 <h2 id="route-handlers">Route handlers</h2>
 
 您可以提供多个回调函数，以类似于[中间件](/{{ page.lang }}/guide/using-middleware.html)的行为方式来处理请求。唯一例外是这些回调函数可能调用 `next('route')` 来绕过剩余的路由回调。您可以使用此机制对路由施加先决条件，在没有理由继续执行当前路由的情况下，可将控制权传递给后续路由。 The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+
+```js
+app.get('/user/:id', (req, res, next) => {
+  if (req.params.id === '0') {
+    return next('route')
+  }
+  res.send(`User ${req.params.id}`)
+})
+
+app.get('/user/:id', (req, res) => {
+  res.send('Special handler for user ID 0')
+})
+```
+
+In this example:
+
+- `GET /user/5` → handled by first route → sends "User 5"
+- `GET /user/0` → first route calls `next('route')`, skipping to the next matching `/user/:id` route
 
 Route handlers can be in the form of a function, an array of functions, or combinations of both, as shown in the following examples.
 

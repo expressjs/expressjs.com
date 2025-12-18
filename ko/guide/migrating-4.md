@@ -3,6 +3,7 @@ layout: page
 title: Express 4로의 마이그레이션
 description: A guide to migrating your Express.js applications from version 3 to 4, covering changes in middleware, routing, and how to update your codebase effectively.
 menu: guide
+order: 9
 redirect_from: "  "
 ---
 
@@ -393,15 +394,15 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
 `app.js`를 다음과 같이 변경하십시오.
 
 1. 기본 제공 Express 미들웨어 함수인 `express.favicon`,
-  `express.logger`, `express.methodOverride`,
-  `express.session`, `express.bodyParser` 및
-  `express.errorHandler`는 더 이상 `express`
-  오브젝트에 사용할 수 없습니다. 이들 함수의 대체 함수를 수동으로
-  설치한 후 앱에서 로드해야 합니다.
+   `express.logger`, `express.methodOverride`,
+   `express.session`, `express.bodyParser` 및
+   `express.errorHandler`는 더 이상 `express`
+   오브젝트에 사용할 수 없습니다. 이들 함수의 대체 함수를 수동으로
+   설치한 후 앱에서 로드해야 합니다.
 
 2. `app.router` 함수는 이제 로드할 필요가 없습니다.
-  이 함수는 유효한 Express 4 앱 오브젝트가 아니므로
-  `app.use(app.router);` 코드를 제거하십시오.
+   이 함수는 유효한 Express 4 앱 오브젝트가 아니므로
+   `app.use(app.router);` 코드를 제거하십시오.
 
 3. 미들웨어 함수들이 올바른 순서로 로드되는지 확인하십시오(앱 라우트를 로드한 후 `errorHandler`를 로드).
 

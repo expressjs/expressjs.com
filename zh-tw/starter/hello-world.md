@@ -3,6 +3,7 @@ layout: page
 title: Express "Hello World" 範例
 description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
 menu: starter
+order: 2
 redirect_from: "  "
 ---
 
@@ -47,5 +48,3 @@ $ node app.js
 ```
 
 然後在瀏覽器中載入 [http://localhost:3000/](http://localhost:3000/)，以查看輸出。
-
-### [Previous: Installing ](/{{ page.lang }}/starter/installing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Express Generator ](/{{ page.lang }}/starter/generator.html)

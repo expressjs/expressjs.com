@@ -3,6 +3,7 @@ layout: page
 title: 상태 검사와 우아한 종료
 description: Express 애플리케이션에서 헬스 체크와 그레이스풀 셧다운(Graceful Shutdown)을 구현하는 방법을 학습합니다. 이 기능은 애플리케이션의 신뢰성을 향상시키고, 배포를 원활하게 관리하며, Kubernetes와 같은 로드 밸런서와의 통합을 지원합니다.
 menu: advanced
+order: 5
 redirect_from: "  "
 ---
 

@@ -3,6 +3,7 @@ layout: page
 title: Community di Express
 description: Connect with the Express.js community, learn about the technical committee, find resources, explore community-contributed modules, and get involved in discussions.
 menu: resources
+order: 1
 redirect_from: "  "
 ---
 

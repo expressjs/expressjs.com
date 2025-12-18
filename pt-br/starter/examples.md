@@ -3,6 +3,7 @@ layout: page
 title: Exemplos do Express
 description: Explore uma coleção de exemplos de aplicações em Express.js cobrindo diversos casos de uso, integrações e configurações avançadas para te ajudar a aprender e construir seus projetos.
 menu: starter
+order: 6
 redirect_from: "  "
 ---
 
@@ -17,5 +18,3 @@ Estes são alguns exemplos adicionais com integrações mais extensas.
 
 - [prisma-fullstack](https://github.com/prisma/prisma-examples/tree/latest/pulse/fullstack-simple-chat) - Aplicativo Fullstack com Express e Next.js utilizando [Prisma](https://www.npmjs.com/package/prisma) como ORM
 - [prisma-rest-api-ts](https://github.com/prisma/prisma-examples/tree/latest/orm/express) - API REST com Express em TypeScript utilizando [Prisma](https://www.npmjs.com/package/prisma) como ORM
-
-### [Anterior: Arquivos Estáticos ](/{{ page.lang }}/starter/static-files.html)&nbsp;&nbsp;&nbsp;&nbsp;[Próximo: Perguntas mais frequentes ](/{{ page.lang }}/starter/faq.html)

@@ -3,6 +3,7 @@ layout: page
 title: Migration auf Express 4
 description: A guide to migrating your Express.js applications from version 3 to 4, covering changes in middleware, routing, and how to update your codebase effectively.
 menu: guide
+order: 9
 redirect_from: "  "
 ---
 
@@ -366,12 +367,12 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
 Nehmen Sie an `app.js` die folgenden Änderungen vor:
 
 1. Die integrierten Express-Middlewarefunktionen `express.favicon`,
-  `express.logger`, `express.methodOverride`,
-  `express.session`, `express.bodyParser` und
-  `express.errorHandler` sind im Objekt `express` nicht mehr verfügbar. Sie müssen deren Alternativen manuell installieren und in die Anwendung laden.
+   `express.logger`, `express.methodOverride`,
+   `express.session`, `express.bodyParser` und
+   `express.errorHandler` sind im Objekt `express` nicht mehr verfügbar. Sie müssen deren Alternativen manuell installieren und in die Anwendung laden.
 
 2. Sie müssen die Funktion `app.router` nicht mehr laden.
-  Sie ist kein gültiges Express 4-Anwendungsobjekt. Entfernen Sie also den Code `app.use(app.router);`.
+   Sie ist kein gültiges Express 4-Anwendungsobjekt. Entfernen Sie also den Code `app.use(app.router);`.
 
 3. Stellen Sie sicher, dass die Middlewarefunktionen in der richtigen Reihenfolge geladen werden – laden Sie `errorHandler` nach dem Laden der Anwendungsweiterleitungen.
 

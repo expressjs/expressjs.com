@@ -3,6 +3,7 @@ layout: page
 title: Routing Express
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
 menu: guide
+order: 1
 redirect_from: "  "
 ---
 
@@ -245,6 +246,24 @@ In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `
 <h2 id="route-handlers">Handler di route</h2>
 
 È possibile fornire molteplici funzioni di callback che si comportino come [middleware](/{{ page.lang }}/guide/using-middleware.html) per gestire una richiesta. La sola eccezione è rappresentata dal fatto che queste callback potrebbero richiamare `next('route')` per ignorare le callback di route restanti. È possibile utilizzare questo meccanismo per imporre pre-condizioni su una route, quindi, passare il controllo a route successive, nel caso non ci siano motivi per proseguire con la route corrente.
+
+```js
+app.get('/user/:id', (req, res, next) => {
+  if (req.params.id === '0') {
+    return next('route')
+  }
+  res.send(`User ${req.params.id}`)
+})
+
+app.get('/user/:id', (req, res) => {
+  res.send('Special handler for user ID 0')
+})
+```
+
+In this example:
+
+- `GET /user/5` → handled by first route → sends "User 5"
+- `GET /user/0` → first route calls `next('route')`, skipping to the next matching `/user/:id` route
 
 Gli handler di route possono avere il formato di una funzione, di un array di funzioni o di combinazioni di entrambi, come illustrato nei seguenti esempi.
 

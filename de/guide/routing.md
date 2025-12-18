@@ -3,6 +3,7 @@ layout: page
 title: Weiterleitung in Express
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
 menu: guide
+order: 1
 redirect_from: "  "
 ---
 
@@ -243,6 +244,24 @@ In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `
 <h2 id="route-handlers">Routenhandler (Weiterleitungsroutinen)</h2>
 
 Sie können mehrere Callback-Funktionen angeben, die sich wie [Middleware](/{{ page.lang }}/guide/using-middleware.html) verhalten, um eine Anforderung zu verarbeiten. Die einzige Ausnahme hierbei ist, dass diese Callbacks möglicherweise `next('route')` aufrufen, um die verbleibenden Weiterleitungs-Callbacks zu umgehen. Mit diesem Verfahren können Sie Vorabbedingungen für eine Weiterleitung festlegen und dann die Steuerung an nachfolgende Weiterleitungen übergeben, wenn kein Grund vorliegt, mit der aktuellen Weiterleitung fortzufahren.
+
+```js
+app.get('/user/:id', (req, res, next) => {
+  if (req.params.id === '0') {
+    return next('route')
+  }
+  res.send(`User ${req.params.id}`)
+})
+
+app.get('/user/:id', (req, res) => {
+  res.send('Special handler for user ID 0')
+})
+```
+
+In this example:
+
+- `GET /user/5` → handled by first route → sends "User 5"
+- `GET /user/0` → first route calls `next('route')`, skipping to the next matching `/user/:id` route
 
 Routenhandler können eine Funktion und/oder ein Funktionsarray sein, wie in den folgenden Beispielen zu sehen ist.
 

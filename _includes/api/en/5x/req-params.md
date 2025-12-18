@@ -20,7 +20,7 @@ app.get('/files/*file', (req, res) => {
 })
 ```
 
-When you use a regular expression for the route definition, capture groups are provided in the array using `req.params[n]`, where `n` is the n<sup>th</sup> capture group.
+When you use a regular expression for the route definition, capture groups are provided as integer keys using `req.params[n]`, where `n` is the n<sup>th</sup> capture group.
 
 ```js
 app.use(/^\/file\/(.*)$/, (req, res) => {
@@ -29,6 +29,8 @@ app.use(/^\/file\/(.*)$/, (req, res) => {
   // => "javascripts/jquery.js"
 })
 ```
+
+Named capturing groups in regular expressions behave like named route parameters. For example the group from `/^\/file\/(?<path>.*)$/` expression is available as `req.params.path`.
 
 If you need to make changes to a key in `req.params`, use the [app.param](/{{ page.lang }}/5x/api.html#app.param) handler. Changes are applicable only to [parameters](/{{ page.lang }}/guide/routing.html#route-parameters) already defined in the route path.
 
