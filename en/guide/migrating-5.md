@@ -518,7 +518,7 @@ In Express 4, the `req.host` function incorrectly stripped off the port number i
 
 <h3 id="req.params">req.params</h3>
 
-The `req.params` object now has a **null prototype**. Additionally, there are two important behavioral changes:
+The `req.params` object now has a **null prototype** when using string paths. However, if the path is defined with a regular expression, `req.params` remains a standard object with a normal prototype. Additionally, there are two important behavioral changes:
 
 **Wildcard parameters are now arrays:**
 
