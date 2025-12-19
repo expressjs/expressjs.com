@@ -518,7 +518,11 @@ In Express 4, the `req.host` function incorrectly stripped off the port number i
 
 <h3 id="req.params">req.params</h3>
 
-Parameters specified as wildcards are represented as arrays of segments:
+The `req.params` object now has a **null prototype**. Additionally, there are two important behavioral changes:
+
+**Wildcard parameters are now arrays:**
+
+Wildcards (e.g., `/*splat`) capture path segments as an array instead of a single string.
 
 ```js
 app.get('/*splat', (req, res) => {
@@ -528,25 +532,32 @@ app.get('/*splat', (req, res) => {
 })
 ```
 
-Optional parameters that are not matched do not have a key in `req.params`. In 4.x an unmatched wildcard would be an empty string and a `:` parameter made optional by `?` had a key with value `undefined`.
+**Unmatched parameters are omitted:**
+
+In Express 4, unmatched wildcards were empty strings (`''`) and optional `:` parameters (using `?`) had a key with value `undefined`. In Express 5, unmatched parameters are completely omitted from `req.params`.
 
 ```js
-// v4
+// v4: unmatched wildcard is empty string
+app.get('/*', (req, res) => {
+  // GET /
+  console.dir(req.params)
+  // => { '0': '' }
+})
+
+// v4: unmatched optional param is undefined
 app.get('/:file.:ext?', (req, res) => {
   // GET /image
   console.dir(req.params)
   // => { file: 'image', ext: undefined }
 })
 
-// v5
+// v5: unmatched optional param is omitted
 app.get('/:file{.:ext}', (req, res) => {
   // GET /image
   console.dir(req.params)
   // => [Object: null prototype] { file: 'image' }
 })
 ```
-
-The object has null prototype.
 
 <h3 id="req.query">req.query</h3>
 
