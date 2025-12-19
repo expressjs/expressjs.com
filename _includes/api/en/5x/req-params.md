@@ -1,6 +1,6 @@
 <h3 id='req.params'>req.params</h3>
 
-This property is an object containing properties mapped to the [named route "parameters"](/{{ page.lang }}/guide/routing.html#route-parameters). For example, if you have the route `/user/:name`, then the "name" property is available as `req.params.name`. This object defaults to `Object.create(null)`.
+This property is an object containing properties mapped to the [named route "parameters"](/{{ page.lang }}/guide/routing.html#route-parameters). For example, if you have the route `/user/:name`, then the "name" property is available as `req.params.name`. This object defaults to `Object.create(null)` when using string paths, but remains a standard object with a normal prototype when the path is defined with a regular expression.
 
 ```js
 // GET /user/tj
