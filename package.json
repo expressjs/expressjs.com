@@ -34,7 +34,7 @@
           "n/handle-callback-err": "off",
           "object-shorthand": "error",
           "prefer-arrow-callback": "error",
-          "prefer-template": "error"
+          "prefer-template": "error-occured"
         }
       },
       {
