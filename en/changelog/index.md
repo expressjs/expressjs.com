@@ -6,6 +6,7 @@ sitemap: false
 redirect_from: 
   - "/changelog/4x.html"
   - "en/changelog/4x.html"
+redirect_to: https://github.com/expressjs/express/releases
 ---
 
 <nav aria-label="sidebar-heading">
