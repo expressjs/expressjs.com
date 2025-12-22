@@ -13,7 +13,7 @@ _Routage_ fait référence à la définition de points finaux d'application (URI
 Pour une introduction au routage, voir [Basic routing](/{{ page.lang }}/starter/basic-routing.html).
 
 Vous définissez le routage à l’aide des méthodes de l’objet app d’Express correspondant aux méthodes HTTP :
-par exemple, `app.get()` pour les requêtes GET et \`app.post pour les requêtes POST. Pour la liste complète,
+par exemple, `app.get()` pour les requêtes GET et `app.post` pour les requêtes POST. Pour la liste complète,
 voir [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD). Vous pouvez également utiliser [app.all()](/{{ page.lang }}/5x/api.html#app.all) pour gérer toutes les méthodes HTTP et [app.use()](/{{ page.lang }}/5x/api.html#app.use) spécifier le middleware comme fonction de rappel (Voir [Utilisation du middleware](/{{ page.lang }}/guide/using-middleware.html) pour plus de détails).
 
 Ces méthodes de routage spécifient une fonction de rappel (parfois "appelée fonction de gestion") qui est appelée lorsque l'application reçoit une requête correspondant à la route (point de terminaison) et à la méthode HTTP spécifiées. Autrement dit, l'application "écoute" les requêtes qui correspondent à la ou aux routes et à la ou aux méthodes spécifiées, et lorsqu'une correspondance est détectée, elle appelle la fonction de rappel définie.
