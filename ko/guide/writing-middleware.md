@@ -11,7 +11,7 @@ redirect_from: "  "
 
 <h2>개요</h2>
 
-_미들웨어_ 함수는 [요청 오브젝트](/{{ page.lang }}/4x/api.html#req)(`req`), [응답 오브젝트](/{{ page.lang }}/4x/api.html#res) (`res`), 그리고 애플리케이션의 요청-응답 주기 중 그 다음의 미들웨어 함수 대한 액세스 권한을 갖는 함수입니다. 그 다음의 미들웨어 함수는 일반적으로 `next`라는 이름의 변수로 표시됩니다.
+_미들웨어_ 함수는 [요청 오브젝트](/{{ page.lang }}/5x/api.html#req)(`req`), [응답 오브젝트](/{{ page.lang }}/5x/api.html#res) (`res`), 그리고 애플리케이션의 요청-응답 주기 중 그 다음의 미들웨어 함수 대한 액세스 권한을 갖는 함수입니다. 그 다음의 미들웨어 함수는 일반적으로 `next`라는 이름의 변수로 표시됩니다.
 
 미들웨어 함수는 다음과 같은 태스크를 수행할 수 있습니다.
 
@@ -38,9 +38,9 @@ _미들웨어_ 함수는 [요청 오브젝트](/{{ page.lang }}/4x/api.html#req)
 
 <div class="callout" id="callout4">미들웨어 함수에 대한 콜백 인수(일반적으로 "next"라 불림).</div>
 
-<div class="callout" id="callout5">미들웨어 함수에 대한 HTTP <a href="../4x/api.html#res">응답</a> 인수(일반적으로 "res"라 불림).</div>
+<div class="callout" id="callout5">미들웨어 함수에 대한 HTTP <a href="../5x/api.html#res">응답</a> 인수(일반적으로 "res"라 불림).</div>
 
-<div class="callout" id="callout6">미들웨어 함수에 대한 HTTP <a href="../4x/api.html#req">요청</a> 인수(일반적으로 "req"라 불림).</div>
+<div class="callout" id="callout6">미들웨어 함수에 대한 HTTP <a href="../5x/api.html#req">요청</a> 인수(일반적으로 "req"라 불림).</div>
 </td></tr>
 </table>
 </div>

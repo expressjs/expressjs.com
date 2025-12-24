@@ -11,7 +11,7 @@ redirect_from: "  "
 
 <h2>概述</h2>
 
-_中间件_函数能够访问[请求对象](/{{ page.lang }}/4x/api.html#req) (`req`)、[响应对象](/{{ page.lang }}/4x/api.html#res) (`res`) 以及应用程序的请求/响应循环中的下一个中间件函数。下一个中间件函数通常由名为 `next` 的变量来表示。 The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
+_中间件_函数能够访问[请求对象](/{{ page.lang }}/5x/api.html#req) (`req`)、[响应对象](/{{ page.lang }}/5x/api.html#res) (`res`) 以及应用程序的请求/响应循环中的下一个中间件函数。下一个中间件函数通常由名为 `next` 的变量来表示。 The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
 
 中间件函数可以执行以下任务：
 
@@ -38,9 +38,9 @@ _中间件_函数能够访问[请求对象](/{{ page.lang }}/4x/api.html#req) (`
 
 <div class="callout" id="callout4">中间件函数的回调自变量，按约定称为“next”。</div>
 
-<div class="callout" id="callout5">中间件函数的 HTTP <a href="../4x/api.html#res">响应</a>自变量，按约定称为“res”。</div>
+<div class="callout" id="callout5">中间件函数的 HTTP <a href="../5x/api.html#res">响应</a>自变量，按约定称为“res”。</div>
 
-<div class="callout" id="callout6">中间件函数的 HTTP <a href="../4x/api.html#req">请求</a>自变量，按约定称为“req”。</div>
+<div class="callout" id="callout6">中间件函数的 HTTP <a href="../5x/api.html#req">请求</a>自变量，按约定称为“req”。</div>
 </td></tr>
 </table>
 </div>
