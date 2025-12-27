@@ -72,6 +72,7 @@ You can find the list of available codemods [here](https://github.com/expressjs/
   <li><a href="#app.router">app.router</a></li>
   <li><a href="#req.body">req.body</a></li>
   <li><a href="#req.host">req.host</a></li>
+  <li><a href="#req.params">req.params</a></li>
   <li><a href="#req.query">req.query</a></li>
   <li><a href="#res.clearCookie">res.clearCookie</a></li>
   <li><a href="#res.status">res.status</a></li>
@@ -512,13 +513,56 @@ const server = app.listen(8080, '0.0.0.0', (error) => {
 
 Express 4에서 제거되었던 `app.router` 오브젝트가 Express 5에 되돌아왔습니다. Express 3에서는 앱이 이 오브젝트를 명시적으로 로드해야 했던 것과 달리, 새 버전에서 이 오브젝트는 단순히 기본 Express 라우터에 대한 참조의 역할을 합니다.
 
-<h3 id="req.body">req.body</h3> 
+<h3 id="req.body">req.body</h3>
 
 The `req.body` property returns `undefined` when the body has not been parsed. In Express 4, it returns `{}` by default.
 
 <h3 id="req.host">req.host</h3>
 
 Express 4에서, 포트 번호가 존재하는 경우 `req.host` 함수는 포트 번호를 올바르지 않게 제거했습니다. Express 5에서는 포트 번호가 유지됩니다.
+
+<h3 id="req.params">req.params</h3>
+
+The `req.params` object now has a **null prototype** when using string paths. However, if the path is defined with a regular expression, `req.params` remains a standard object with a normal prototype. Additionally, there are two important behavioral changes:
+
+**Wildcard parameters are now arrays:**
+
+Wildcards (e.g., `/*splat`) capture path segments as an array instead of a single string.
+
+```js
+app.get('/*splat', (req, res) => {
+  // GET /foo/bar
+  console.dir(req.params)
+  // => [Object: null prototype] { splat: [ 'foo', 'bar' ] }
+})
+```
+
+**Unmatched parameters are omitted:**
+
+In Express 4, unmatched wildcards were empty strings (`''`) and optional `:` parameters (using `?`) had a key with value `undefined`. In Express 5, unmatched parameters are completely omitted from `req.params`.
+
+```js
+// v4: unmatched wildcard is empty string
+app.get('/*', (req, res) => {
+  // GET /
+  console.dir(req.params)
+  // => { '0': '' }
+})
+
+// v4: unmatched optional param is undefined
+app.get('/:file.:ext?', (req, res) => {
+  // GET /image
+  console.dir(req.params)
+  // => { file: 'image', ext: undefined }
+})
+
+// v5: unmatched optional param is omitted
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image
+  console.dir(req.params)
+  // => [Object: null prototype] { file: 'image' }
+})
+```
 
 <h3 id="req.query">req.query</h3>
 
