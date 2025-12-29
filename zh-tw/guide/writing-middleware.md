@@ -38,9 +38,9 @@ The following figure shows the elements of a middleware function call:
 
 <div class="callout" id="callout4">中介軟體函數的回呼引數，依慣例，稱為 "next"。</div>
 
-<div class="callout" id="callout5">中介軟體函數的 HTTP <a href="../5x/api.html#res">response</a> 引數，依慣例，稱為 "res"。</div>
+<div class="callout" id="callout5">HTTP <a href="/{{ page.lang }}/5x/api.html#res">response</a> argument to the middleware function, called "res" by convention.</div>
 
-<div class="callout" id="callout6">中介軟體函數的 HTTP <a href="../5x/api.html#req">request</a> 引數，依慣例，稱為 "req"。</div>
+<div class="callout" id="callout6">HTTP <a href="/{{ page.lang }}/5x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
 </td></tr>
 </table>
 </div>
