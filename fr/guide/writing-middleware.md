@@ -11,7 +11,7 @@ redirect_from: "  "
 
 <h2>Présentation</h2>
 
-Les fonctions de _middleware_ sont des fonctions qui peuvent accéder à l'[objet Request](/{{ page.lang }}/4x/api.html#req)  (`req`), l'[objet response](/{{ page.lang }}/4x/api.html#res) (`res`) et à la fonction middleware suivant dans le cycle demande-réponse de l'application. La fonction middleware suivant est couramment désignée par une variable nommée `next`.
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/5x/api.html#req) (`req`), the [response object](/{{ page.lang }}/5x/api.html#res) (`res`), and the `next` function in the application's request-response cycle. La fonction middleware suivant est couramment désignée par une variable nommée `next`.
 
 Les fonctions middleware effectuent les tâches suivantes :
 
@@ -38,9 +38,9 @@ L'exemple suivant montre les éléments d'un appel de fonction middleware:
 
 <div class="callout" id="callout4">Argument de rappel à la fonction middleware, appelée "next" par convention.</div>
 
-<div class="callout" id="callout5">Argument de <a href="../4x/api.html#res">réponse</a> HTTP à la fonction middleware, appelé "res" par convention.</div>
+<div class="callout" id="callout5">HTTP <a href="/{{ page.lang }}/5x/api.html#res">response</a> argument to the middleware function, called "res" by convention.</div>
 
-<div class="callout" id="callout6">Argument de <a href="../4x/api.html#req">demande</a> HTTP à la fonction middleware, appelé "req" par convention.</div>
+<div class="callout" id="callout6">HTTP <a href="/{{ page.lang }}/5x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
 </td></tr>
 </table>
 </div>
