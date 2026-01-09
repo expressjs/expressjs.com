@@ -31,9 +31,16 @@ jobs:
               with: 
                 commit-message: 'docs: update security expiry docs'
                 title: 'docs: update security expiry docs'
-                body: >
-                  This auto-generated PR updates the security expiry docs in the expressjs.com repository. 
-                  
+                 body: >
+                  This PR extends the `Expires` date in `.well-known/security.txt`.
+
+                  Before merging, please explicitly confirm that:
+                  - The security contact listed is still correct and actively monitored
+                  - The linked security policy is still accurate
+                  - The project’s preferred vulnerability disclosure path has not changed
+
+                  Only merge if the above information is still valid; otherwise, update it before extending the expiration.
+
                   cc: @expressjs/security-wg
                 labels: docs
                 branch: bot/security-expiry
