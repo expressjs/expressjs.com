@@ -16,28 +16,34 @@ jobs:
         steps:
             - uses: actions/checkout@v6
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v6
-
-            - name: Update Security Expiry Docs
-              working-directory: .github/scripts
+            - name: Check security.txt expiry
+              id: expiry
               run: |
-                node ./update-security-expiry.mjs
+                set -eo pipefail
+                expires=$(grep -i '^Expires:' .well-known/security.txt | sed 's/.*: //')
+                if [ "$(date -d "$expires" +%s)" -le "$(date -d '+30 days' +%s)" ]; then
+                  echo "bump=true" >> "$GITHUB_OUTPUT"
+                fi
+
+            - name: Bump Expires
+              if: steps.expiry.outputs.bump == 'true'
+              run: sed -i "s/^Expires:.*/Expires: $(date -u -d '+180 days' +%Y-%m-%dT%H:%M:%SZ)/I" .well-known/security.txt
 
             - name: Create Pull Request
+              if: steps.expiry.outputs.bump == 'true'
               uses: gr2m/create-or-update-pull-request-action@v1
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with: 
-                commit-message: 'docs: update security expiry docs'
-                title: 'docs: update security expiry docs'
-                 body: >
+              with:
+                commit-message: 'docs: update security.txt expiry'
+                title: 'docs: update security.txt expiry'
+                body: |
                   This PR extends the `Expires` date in `.well-known/security.txt`.
 
                   Before merging, please explicitly confirm that:
                   - The security contact listed is still correct and actively monitored
                   - The linked security policy is still accurate
-                  - The project’s preferred vulnerability disclosure path has not changed
+                  - The project's preferred vulnerability disclosure path has not changed
 
                   Only merge if the above information is still valid; otherwise, update it before extending the expiration.
 
