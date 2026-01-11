@@ -27,7 +27,7 @@ jobs:
 
             - name: Bump Expires
               if: steps.expiry.outputs.bump == 'true'
-              run: sed -i "s/^Expires:.*/Expires: $(date -u -d '+180 days' +%Y-%m-%dT%H:%M:%SZ)/I" .well-known/security.txt
+              run: sed -i "s/^Expires:.*/Expires: $(date -u -d '+180 days' +%Y-%m-%dT00:00:00Z)/I" .well-known/security.txt
 
             - name: Create Pull Request
               if: steps.expiry.outputs.bump == 'true'
