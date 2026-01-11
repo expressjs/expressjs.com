@@ -1,11 +1,11 @@
 # Contributing to Expressjs.com
 
-### The Official Documentation of the Express JS Framework
+### The Official Documentation of the Express.js Framework
 
 This is the contribution documentation for the [expressjs.com](https://github.com/expressjs/expressjs.com) website.
 
 >[!NOTE]
-> This is not the repo for Express JS framework. To contribute to the _[Express JS framework](https://github.com/expressjs/express_)_, check out the [Github repo contributing page](https://github.com/expressjs/express/blob/master/Contributing.md) or the website's [Contributing to Express](https://expressjs.com/en/resources/contributing.html) page.
+> This is not the repo for Express.js framework. To contribute to the _[Express.js framework](https://github.com/expressjs/express)_, check out the [GitHub repo contributing page](https://github.com/expressjs/express?tab=contributing-ov-file) or the website's [Contributing to Express](https://expressjs.com/en/resources/contributing.html) page.
 
 
 #### Need some ideas? These are some typical issues.
@@ -20,7 +20,7 @@ This is the contribution documentation for the [expressjs.com](https://github.co
 
 2. **Content Issues**: Fix anything related to site content or typos.
     - Spelling errors
-    - Incorrect/outdated Express JS documentation
+    - Incorrect/outdated Express.js documentation
     - Missing content
 
 3. **Translation Issues**: Fix any translation errors or contribute new content.
@@ -37,7 +37,7 @@ We often have bugs or enhancements that need work. You can find these under our 
 If you've found a bug or a typo, or if you have an idea for an enhancement, you can:
 - Submit a [new issue](https://github.com/expressjs/expressjs.com/issues/new/choose) on our repo. Do this for larger proposals, or if you'd like to discuss or get feedback first. 
 
-- Make a [Github pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request). If you have already done work and it's ready to go, feel free to send it our way.
+- Make a [GitHub pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request). If you have already done work, and it's ready to go, feel free to send it our way.
 
 ## Getting Started
 
@@ -50,7 +50,7 @@ So you've found a problem that you want to fix, or have a site enhancement you w
     - For submissions proposing minor improvements or corrections, this is not needed. You can skip this step.
     - When opening an issue please give it a title and fill in the description section. The more details you provide, the more feedback we can give.
 
-2. After receiving your issue the Express JS documentation team will respond with feedback. We read every submission and always try to respond quickly with feedback. 
+2. After receiving your issue the Express.js documentation team will respond with feedback. We read every submission and always try to respond quickly with feedback. 
     - For submissions proposing significant change, we encourage you to follow the review process before starting work. 
 
 #### Step 2: Get the Application Code Base
@@ -85,7 +85,7 @@ follow the specific instructions for [How to write a blog post.](https://express
 **CSS or Javascript**
 - All css and js files are kept in `css` and `js` folders on the project root.
 
-The Express JS website is built using [Jekyll](https://jekyllrb.com/) and is hosted on [Github Pages](https://pages.github.com/).
+The Express.js website is built using [Jekyll](https://jekyllrb.com/) and is hosted on [GitHub Pages](https://pages.github.com/).
 
 #### Step 3: Running the Application
 
@@ -97,10 +97,10 @@ Now you'll need a way to see your changes, which means you'll need a running ver
 1. __Run Locally__: This gets the local version of the application up and running on your machine. Follow our [Local Setup Guide](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#build-the-website-locally) to use this option.  
     - This is the recommended option for moderate to complex work. 
 
-2. __Run using Deploy Preview__: Use this option if you don't want to bother with a local installation. Part of our continuous integration pipeline includes [Netlify Deploy Preview](https://docs.netlify.com/site-deploys/deploy-previews/). 
+2. __Run using Deploy Preview__: Use this option if you don't want to bother with a local installation. Part of our continuous integration pipeline includes [Netlify Deploy Preview](https://docs.netlify.com/deploy/deploy-types/deploy-previews/). 
     1. To use this you'll need to get your changes online - after you've made your first commit on your feature branch, make a *draft* pull request. 
     2. After the build steps are complete, you'll have access to a __Deploy Preview__ tab that will run your changes on the web, rebuilding after each commit is pushed. 
-    3. After you are completely done your work and it's ready for review, remove the draft status on your pull request and submit your work.
+    3. After you are completely done your work, and it's ready for review, remove the draft status on your pull request and submit your work.
   
 ## Contributing translations
 
@@ -122,5 +122,5 @@ The documentation is translated into these languages:
 ### How to translate
 
 1. Request to join the Express.js Website project on [Crowdin](https://express.crowdin.com/website)
-2. [Select the language you want to translate](https://support.crowdin.com/joining-translation-project/#starting-translation)
+2. [Select the language you want to translate](https://support.crowdin.com/for-translators/#starting-translation)
 3. [Start translating](https://support.crowdin.com/online-editor/)

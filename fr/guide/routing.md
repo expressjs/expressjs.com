@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Routage Express
-description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
+description: Apprenez à définir et à utiliser des routes dans les applications Express.js, y compris les méthodes de routes, les chemins de routes, les paramètres et l’utilisation de Router pour un routage modulaire.
 menu: guide
 order: 1
 redirect_from: "  "
@@ -13,14 +13,13 @@ _Routage_ fait référence à la définition de points finaux d'application (URI
 Pour une introduction au routage, voir [Basic routing](/{{ page.lang }}/starter/basic-routing.html).
 
 Vous définissez le routage à l’aide des méthodes de l’objet app d’Express correspondant aux méthodes HTTP :
-par exemple, `app.get()` pour les requêtes GET et \`app.post pour les requêtes POST. Pour la liste complète,
+par exemple, `app.get()` pour les requêtes GET et `app.post` pour les requêtes POST. Pour la liste complète,
 voir [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD). Vous pouvez également utiliser [app.all()](/{{ page.lang }}/5x/api.html#app.all) pour gérer toutes les méthodes HTTP et [app.use()](/{{ page.lang }}/5x/api.html#app.use) spécifier le middleware comme fonction de rappel (Voir [Utilisation du middleware](/{{ page.lang }}/guide/using-middleware.html) pour plus de détails).
 
 Ces méthodes de routage spécifient une fonction de rappel (parfois "appelée fonction de gestion") qui est appelée lorsque l'application reçoit une requête correspondant à la route (point de terminaison) et à la méthode HTTP spécifiées. Autrement dit, l'application "écoute" les requêtes qui correspondent à la ou aux routes et à la ou aux méthodes spécifiées, et lorsqu'une correspondance est détectée, elle appelle la fonction de rappel définie.
 
-In fact, the routing methods can have more than one callback function as arguments.
-With multiple callback functions, it is important to provide `next` as an argument to the callback function and then call `next()` within the body of the function to hand off control
-to the next callback.
+En réalité, les méthodes de routage peuvent accepter plusieurs fonctions de rappel comme arguments.
+Lorsqu'il y a plusieurs fonctions de rappel, il est important de fournier `next` comme argument à la fonction de rappel, puis d'appeler `next()` dans le corps de la fonction afin de passer le contrôle à la fonction de rappel suivante.
 
 Le code suivant est un exemple de routage très basique.
 
@@ -52,8 +51,8 @@ app.post('/', (req, res) => {
 })
 ```
 
-Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
-For a full list, see [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD).
+Express prend en charge des méthodes correspondant à toutes les méthodes de requête HTTP : `get`, `post`, etc. Pour la liste complète, voir [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD).
+Pour la liste complète, voir [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD).
 
 Il existe une méthode de routage spéciale, `app.all()`, qui n'est pas dérivée d'une méthode HTTP. Cette méthode est utilisée pour charger des fonctions middleware à un chemin d'accès pour toutes les méthodes de demande.
 
@@ -68,18 +67,18 @@ app.all('/secret', (req, res, next) => {
 
 Les chemins de routage, combinés à une méthode de demande, définissent les noeuds finaux sur lesquels peuvent être effectuées les demandes. Les chemins de routage peuvent être des chaînes, des masques de chaîne ou des expressions régulières.
 
-{% capture caution-character %} In express 5, the characters `?`, `+`, `*`, `[]`, and `()` are handled differently than in version 4, please review the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax) for more information.{% endcapture %}
+{% capture caution-character %} Dans Express 5, les caractères `?`, `+`, `*`, `[]`, et `()` sont traités différemment par rapport à la version 4. Veuillez consulter le [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax) pour plus d'informations.{% endcapture %}
 
 {% include admonitions/caution.html content=caution-character %}
 
-{% capture note-dollar-character %}In express 4, regular expression characters such as `$` need to be escaped with a `\`.
+{% capture note-dollar-character %}Dans Express 4, les caractères d'expression régulière tels que `$` doivent être échappés avec un `\`.
 {% endcapture %}
 
 {% include admonitions/caution.html content=note-dollar-character %}
 
 {% capture note-path-to-regexp %}
 
-Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths; see the path-to-regexp documentation for all the possibilities in defining route paths. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) est un outil pratique permettant de tester des routes Express de base, bien qu'il ne prenne pas en charge le filtrage par motif.
+Express utilise [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) pour faire correspondre les chemins de routes ; consultez la documentation de path-to-regexp pour connaître toutes les possibilités de définition des chemins de routes. [Express Route Tester](http://forbeslindesay.github.io/express-route-tester/) est un outil pratique permettant de tester des routes Express de base, bien qu'il ne prenne pas en charge le filtrage par motif.
 
 {% endcapture %}
 
@@ -87,7 +86,7 @@ Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for 
 
 {% capture query-string-note %}
 
-Query strings are not part of the route path.
+Les chaînes de requête (query strings) ne font pas partie du chemin de la route.
 
 {% endcapture %}
 
@@ -121,7 +120,7 @@ app.get('/random.text', (req, res) => {
 
 ### Il s'agit d'exemples de chemins de routage basés sur des masques de chaîne.
 
-{% capture caution-string-patterns %} The string patterns in Express 5 no longer work. Please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax) for more information.{% endcapture %}
+{% capture caution-string-patterns %} Les motifs de chaînes (string patterns) ne fonctionnent plus dans Express 5. Veuillez consulter [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax) pour plus d'informations.{% endcapture %}
 
 {% include admonitions/caution.html content=caution-string-patterns %}
 
@@ -179,7 +178,7 @@ app.get(/.*fly$/, (req, res) => {
 Les chaînes de requête ne font pas partie du chemin de routage.
 </h2>
 
-Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
+Les paramètres de route sont des segments nommés de l'URL utilisés pour capturer les valeurs spécifiées à leur position dans l'URL. Les valeurs capturées sont placées dans l'objet `req.params`, avec le nom du paramètre de route spécifié dans le chemin comme clé correspondante.
 
 ```
 Route path: /users/:userId/books/:bookId
@@ -187,7 +186,7 @@ Request URL: http://localhost:3000/users/34/books/8989
 req.params: { "userId": "34", "bookId": "8989" }
 ```
 
-To define routes with route parameters, simply specify the route parameters in the path of the route as shown below.
+Pour définir des routes avec des paramètres de route, il suffit de spécifier les paramètres dans le chemin de la route comme indiqué ci-dessous.
 
 ```js
 app.get('/users/:userId/books/:bookId', (req, res) => {
@@ -196,10 +195,9 @@ app.get('/users/:userId/books/:bookId', (req, res) => {
 ```
 
 <div class="doc-box doc-notice" markdown="1">
-The name of route parameters must be made up of "word characters" ([A-Za-z0-9_]).
-</div>
+Le nom des paramètres de route doit être composé de "caractères alphanumériques" ([A-Za-z0-9_]).</div>
 
-Since the hyphen (`-`) and the dot (`.`) are interpreted literally, they can be used along with route parameters for useful purposes.
+Comme le tiret (`-`) et le point (`.`) sont interprétés littéralement, ils peuvent être utilisés avec les paramètres de route à des fins pratiques.
 
 ```
 Route path: /flights/:from-:to
@@ -214,11 +212,11 @@ req.params: { "genus": "Prunus", "species": "persica" }
 ```
 
 {% capture warning-regexp %}
-In express 5, Regexp characters are not supported in route paths, for more information please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax).{% endcapture %}
+Dans Express 5, les caractères Regexp ne sont pas pris en chage dans les chemins de route. Pour plus d'informations, veuillez consulter le [guide de migration](/{{ page.lang }}/guide/migrating-5.html#path-syntax).{% endcapture %}
 
 {% include admonitions/caution.html content=warning-regexp %}
 
-To have more control over the exact string that can be matched by a route parameter, you can append a regular expression in parentheses (`()`):
+Pour mieux contrôler la chaîne exacte pouvant être capturée par un paramètre de route, vous pouvez ajouter une expression régulière entre parenthèses (`()`):
 
 ```
 Route path: /user/:userId(\d+)
@@ -236,7 +234,7 @@ Comme l'expression régulière fait généralement partie d'une chaîne littéra
 
 {% capture warning-version %}
 
-In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `*` character in regular expressions is not interpreted in the usual way</a>. As a workaround, use `{0,}` instead of `*`. This will likely be fixed in Express 5.
+Dans Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">le caractère `*` dans une expression régulière n'est pas interprété de manière habituelle</a>. Comme solution de contournement, utilisez `{0,}` au lieu de `*`. Cela sera probablement corrigé dans Express 5.
 
 {% endcapture %}
 
@@ -259,10 +257,10 @@ app.get('/user/:id', (req, res) => {
 })
 ```
 
-In this example:
+Dans cet exemple :
 
-- `GET /user/5` → handled by first route → sends "User 5"
-- `GET /user/0` → first route calls `next('route')`, skipping to the next matching `/user/:id` route
+- `GET /user/5` → géré par la première route → envoie "User 5"
+- `GET /user/0` → la première route appelle `next('route')`, en passant à la prochaine route correspondant à `/user/:id`
 
 Les gestionnaires de route se trouvent sous la forme d'une fonction, d'un tableau de fonctions ou d'une combinaison des deux, tel qu'indiqué dans les exemples suivants.
 
@@ -339,7 +337,7 @@ Les méthodes de l'objet de réponse (`res`) décrites dans le tableau suivant p
 | [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)     | Redirige une demande.                                                                                         |
 | [res.render()](/{{ page.lang }}/4x/api.html#res.render)         | Génère un modèle de vue.                                                                                      |
 | [res.send()](/{{ page.lang }}/4x/api.html#res.send)             | Envoie une réponse de divers types.                                                                           |
-| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | Send a file as an octet stream.                                                                               |
+| [res.sendFile()](/{{ page.lang }}/4x/api.html#res.sendFile)     | Envoyer un fichier sous forme de flux octet.                                                                  |
 | [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Définit le code de statut de réponse et envoie sa représentation sous forme de chaîne comme corps de réponse. |
 
 <h2 id="app-route">app.route()</h2>
@@ -405,7 +403,7 @@ app.use('/birds', birds)
 
 L'application pourra dorénavant gérer des demandes dans `/birds` et `/birds/about`, et appeler la fonction middleware `timeLog` spécifique à la route.
 
-But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/{{ page.lang }}/5x/api.html#app.use).
+Mais si la route parente `/birds` possède des paramètres de chemin, ils ne seront pas accessibles par défaut depuis les sous-routes. Pour qu'ils soient accessibles, vous devez passer l'option `mergeParams` au constructeur de Router [reference](/{{ page.lang }}/5x/api.html#app.use).
 
 ```js
 const router = express.Router({ mergeParams: true })

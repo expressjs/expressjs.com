@@ -11,7 +11,7 @@ redirect_from: "  "
 
 <h2>概説</h2>
 
-_ミドルウェア_ 関数は、[リクエストオブジェクト](/{{ page.lang }}/4x/api.html#req) (`req`)、[レスポンスオブジェクト](/{{ page.lang }}/4x/api.html#res) (`res`)、およびアプリケーションのリクエストレスポンスサイクルにおける次のミドルウェア関数に対するアクセス権限を持つ関数です。次のミドルウェア関数は一般的に、`next` という変数で表されます。 The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/5x/api.html#req) (`req`), the [response object](/{{ page.lang }}/5x/api.html#res) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
 
 ミドルウェア関数は以下のタスクを実行できます。
 
@@ -38,9 +38,9 @@ _ミドルウェア_ 関数は、[リクエストオブジェクト](/{{ page.la
 
 <div class="callout" id="callout4">ミドルウェア関数へのコールバック引数 (慣習的に「next」と呼ばれます)。</div>
 
-<div class="callout" id="callout5">ミドルウェア関数への HTTP <a href="../4x/api.html#res">レスポンス</a>引数 (慣習的に「res」と呼ばれます)。</div>
+<div class="callout" id="callout5">HTTP <a href="/{{ page.lang }}/5x/api.html#res">response</a> argument to the middleware function, called "res" by convention.</div>
 
-<div class="callout" id="callout6">ミドルウェア関数への HTTP <a href="../4x/api.html#req">リクエスト</a>引数 (慣習的に「req」と呼ばれます)。</div>
+<div class="callout" id="callout6">HTTP <a href="/{{ page.lang }}/5x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
 </td></tr>
 </table>
 </div>
