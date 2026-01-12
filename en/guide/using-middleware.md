@@ -33,6 +33,26 @@ An Express application can use the following types of middleware:
 You can load application-level and router-level middleware with an optional mount path.
 You can also load a series of middleware functions together, which creates a sub-stack of the middleware system at a mount point.
 
+<h2 id="middleware.order">Middleware execution order (Important)</h2>
+
+Middleware functions in Express are executed **in the order they are defined**.
+
+This means the position of `app.use()` and route handlers in your code
+directly affects how requests are processed.
+
+Consider the following example:
+
+```js
+const express = require('express')
+const app = express()
+
+app.use(express.json())
+
+app.get('/user', (req, res) => {
+  res.send(req.body)
+})
+
+
 <h2 id='middleware.application'>Application-level middleware</h2>
 
 Bind application-level middleware to an instance of the [app object](/{{ page.lang }}/5x/api.html#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
