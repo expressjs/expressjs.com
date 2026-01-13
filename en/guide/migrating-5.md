@@ -28,7 +28,7 @@ To help you migrate your express server, we have created a set of codemods that 
 Run the following command for run all the codemods available:
 
 ```sh
-npx codemod@latest @expressjs/v5/migration-recipe 
+npx codemod@latest @expressjs/v5-migration-recipe
 ```
 
 If you want to run a specific codemod, you can run the following command:
