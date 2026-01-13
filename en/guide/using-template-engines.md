@@ -31,9 +31,9 @@ For example, to use Handlebars manually:
 2. Configure it in your `app.js`:
 
 ```js
-const { engine } = require('express-handlebars');
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
+const { engine } = require('express-handlebars')
+app.engine('handlebars', engine())
+app.set('view engine', 'handlebars')
 ```
 Then install the corresponding template engine npm package; for example to install Pug:
 
