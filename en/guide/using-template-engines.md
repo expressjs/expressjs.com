@@ -20,7 +20,6 @@ To render template files, set the following [application setting properties](/{{
 * `views`, the directory where the template files are located. Eg: `app.set('views', './views')`.
 This defaults to the `views` directory in the application root directory.
 * `view engine`, the template engine to use. For example, to use the Pug template engine: `app.set('view engine', 'pug')`.
-
 ### Manual Setup (Without Generator)
 +
 + If you are not using the Express generator, you must manually configure the engine to ensure Express can interface with it properly. While engines like Pug work out of the box, others (like Handlebars) require a specific wrapper package.
@@ -34,7 +33,6 @@ This defaults to the `views` directory in the application root directory.
 + app.engine('handlebars', engine());
 + app.set('view engine', 'handlebars');
 + ```
-
 Then install the corresponding template engine npm package; for example to install Pug:
 
 ```bash
