@@ -177,7 +177,7 @@ This potentially confusing and dangerous method of retrieving form data has been
 You can replace the deprecated signatures with the following command:
 
 ```plain-text
-npx codemod@latest @expressjs/req-param
+npx codemod@latest @expressjs/explicit-request-params
 ```
 {% endcapture %}
 
