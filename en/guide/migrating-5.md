@@ -37,7 +37,7 @@ If you want to run a specific codemod, you can run the following command:
 npx codemod@latest @expressjs/name-of-the-codemod
 ```
 
-You can find the list of available codemods [here](https://github.com/expressjs/codemod?tab=readme-ov-file#available-codemods).
+You can find the list of available codemods [here](https://codemod.link/express).
 
 <h2 id="changes">Changes in Express 5</h2>
 
