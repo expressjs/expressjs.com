@@ -22,7 +22,6 @@ This defaults to the `views` directory in the application root directory.
 * `view engine`, the template engine to use. For example, to use the Pug template engine: `app.set('view engine', 'pug')`.
 
 ### Manual Setup (Without Generator)
-
 If you are not using the Express generator, you must manually configure the engine to ensure Express can interface with it properly. While engines like Pug work out of the box, others (like Handlebars) require a specific wrapper package.
 
 For example, to use Handlebars manually:
