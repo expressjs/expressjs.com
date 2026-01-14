@@ -1,11 +1,11 @@
 # Getting started
-getting_started: Introdução
+getting_started: Primeiros passos
 installing: Instalação
 hello_world: Olá mundo
 generator: Gerador do Express
 basic_routing: Roteamento Básico
 static_files: Arquivos Estáticos
-examples: Perguntas mais frequentes
+examples: Mais exemplos
 faq: Perguntas mais frequentes
 # Guide
 guide: Guia
@@ -13,13 +13,13 @@ routing: Roteamento
 writing_middleware: Escrevendo o middleware
 using_middleware: Usando o middleware
 overriding_express_api: Sobrescrevendo a API Express
-using_template_engines: Usando o mecanismo de modelo
+using_template_engines: Usando template engines
 error_handling: Manipulação de erros
 debugging: Depuração
-behind_proxies: Express atrás de proxies
+behind_proxies: Express por trás dos proxies
 migrating_4: Migrando para o Express 4
 migrating_5: Migrando para o Express 5
-database_integration: Integração de Banco de dados
+database_integration: Integração com base de dados
 # API reference
 api: Referência da API
 5x: 5.x
@@ -28,7 +28,7 @@ api: Referência da API
 2x: 2.x (descontinuada)
 # Advanced topics
 advanced: Tópicos Avançados
-developing_template_engines: Mecanismos de modelo
+developing_template_engines: Criando template engines
 security_updates: Atualizações de segurança
 best_practice_security: Melhores práticas de segurança
 best_practice_performance: Melhores práticas de desempenho

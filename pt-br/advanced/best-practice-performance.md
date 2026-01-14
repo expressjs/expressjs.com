@@ -205,7 +205,8 @@ A seguir serão apresentados alguns itens que podem ser feitos no seu ambiente d
 ### Configure o NODE_ENV para "produção"
 
 A variável de ambiente NODE_ENV especifica o ambiente no qual um aplicativo está executando (geralmente, desenvolvimento ou
-produção). One of the simplest things you can do to improve performance is to set NODE_ENV to `production`.
+produção). Uma das coisas mais simples que podem ser feitas para
+melhorar o desempenho é configurar NODE_ENV para "production".
 
 Configurando NODE_ENV para "produção" faz com que o Express:
 
@@ -213,13 +214,16 @@ Configurando NODE_ENV para "produção" faz com que o Express:
 - Armazene em Cache arquivos CSS gerados a partir de extensões CSS.
 - Gere menos mensagens de erro detalhadas
 
-[Tests indicate](https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) that just doing this can improve app performance by a factor of three!
+Testes
+indicam que apenas fazendo isso pode melhorar o desempenho por um fator de três!
 
 Se precisar escrever código específico por ambiente, é possível verificar o valor de NODE_ENV com `process.env.NODE_ENV`. Esteja
 ciente de que verificar o valor de qualquer variável de ambiente incorre em perda de desempenho, e por isso deve ser feito raramente.
 
 Em desenvolvimento, você tipicamente configura variáveis de ambiente no seu shell interativo, por exemplo, usando o
-`export` ou o seu arquivo `.bash_profile`. But in general, you shouldn't do that on a production server; instead, use your OS's init system (systemd). A próxima seção fornece mais detalhes sobre a utilização do seu sistema de inicialização em geral,
+`export` ou o seu arquivo `.bash_profile`. Mas
+em geral você não deveria fazer isto em um servidor de produção; ao invés disso, use o sistema de inicialização do seu sistema
+operacional (systemd). A próxima seção fornece mais detalhes sobre a utilização do seu sistema de inicialização em geral,
 mas configurando NODE_ENV é tão importante para o desempenho (e fácil de fazer), que está destacado aqui.
 
 Com o systemd, use a diretiva `Environment` no seu arquivo de unidade. Por exemplo:
@@ -229,7 +233,8 @@ Com o systemd, use a diretiva `Environment` no seu arquivo de unidade. Por exemp
 Environment=NODE_ENV=production
 ```
 
-For more information, see [Using Environment Variables In systemd Units](https://www.flatcar.org/docs/latest/setup/systemd/environment-variables/).
+Para obter mais informações, consulte Usando
+Variáveis de Ambiente em Unidades systemd.
 
 ### Assegure que o seu aplicativo reinicie automaticamente
 
@@ -264,9 +269,9 @@ gerenciador de processos pode permitir que você:
 
 - Ganhe insights sobre o desempenho em tempo de execução e o consumo de recursos.
 - Modifique configurações dinamicamente para melhorar o desempenho.
-- Control clustering (pm2).
+- Controle de agrupamento (pm2).
 
-Historically, it was popular to use a Node.js process manager like [PM2](https://github.com/Unitech/pm2). See their documentation if you wish to do this. However, we recommend using your init system for process management.
+Historicamente, foi popular usar um gerente de processo Node.js, como [PM2](https://github.com/Unitech/pm2). Veja a documentação deles, se você quiser fazer isso. No entanto, recomendamos a utilização de seu sistema de inicio para gerenciamento de processos.
 
 #### Use um sistema de inicialização
 
@@ -274,14 +279,14 @@ A próxima camada de confiabilidade é para assegurar que o seu
 aplicativo reinicie quando o servidor reiniciar. Os sistemas podem
 ainda assim cair por uma variedade de razões. Para assegurar que o
 seu aplicativo reinicie se o servidor cair, use o sistema de
-inicialização integrado no seu sistema operacional. The main init system in use today is [systemd](https://wiki.debian.org/systemd).
+inicialização integrado no seu sistema operacional. O sistema principal de iniciação em uso hoje é [systemd](https://wiki.debian.org/systemd).
 
 Existem duas formas de usar sistemas de inicialização com o seu aplicativo Express:
 
 - Executar o seu aplicativo em um gerenciador de processos, e instalar o gerenciador de processos com o sistema de inicialização. O gerenciador de processos irá reiniciar seu aplicativo quando o
   aplicativo cair, e o sistema de inicialização irá reiniciar o
   gerenciador de processos quando o sistema operacional reiniciar. Esta é a abordagem recomendada.
-- Run your app (and Node) directly with the init system. This is somewhat simpler, but you don't get the additional advantages of using a process manager.
+- Execute seu aplicativo (e Node) diretamente com o sistema iniciação. Isto é um pouco mais simples, mas você não obtém as vantagens adicionais de usar um gerente de processo.
 
 ##### Systemd
 
@@ -293,7 +298,7 @@ Um arquivo de configuração de serviço do systemd é chamado
 de _arquivo de unidade_, com um nome de arquivo
 terminando em .service. Aqui está um exemplo de arquivo de unidade
 para gerenciar um aplicativo Node diretamente (substitua o texto em
-negrito com valores para o seu sistema e aplicativo): Replace the values enclosed in `<angle brackets>` for your system and app:
+negrito com valores para o seu sistema e aplicativo): Substitua os valores colocados em `<angle brackets>` do seu sistema e aplicativo:
 
 ```sh
 [Unit]
@@ -337,7 +342,7 @@ de processos. Um cluster executa múltiplas instâncias do aplicativo,
 idealmente uma instância em cada núcleo da CPU, assim distribuindo a carga e as
 tarefas entre as instâncias.
 
-![Balancing between application instances using the cluster API](/images/clustering.png)
+![Balanceamento entre instâncias de aplicação usando a API de cluster](/images/clustering.png)
 
 IMPORTANTE: Como as instâncias do aplicativo são executadas em processos separados, elas não compartilham o mesmo espaço de memória. Isto é, os objetos são locais para cada instância do aplicativo. Portanto, não é possível manter o estado no código do aplicativo. Entretanto, é possível usar um armazenamento de dados em memória como o [Redis](http://redis.io/) para armazenar dados
 relativos à sessão e ao estado. Este alerta aplica-se a essencialmente todas as formas de escalonamento horizontal, seja a
@@ -347,17 +352,17 @@ Em aplicativos clusterizados, processos de trabalho podem cair individualmente s
 
 #### Usando o módulo de cluster do Node
 
-Clustering is made possible with Node's [cluster module](https://nodejs.org/api/cluster.html). Isto permite que um processo principal faça o
+É possível agrupar com o [módulo cluster do Node](https://nodejs.org/api/cluster.html). Isto permite que um processo principal faça o
 spawn de processos de trabalho e distribua conexões recebidas entre
 os trabalhadores.
 
 #### Usando PM2
 
-If you deploy your application with PM2, then you can take advantage of clustering _without_ modifying your application code. You should ensure your [application is stateless](https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) first, meaning no local data is stored in the process (such as sessions, websocket connections and the like).
+Se você publicar sua aplicação com PM2, então você pode aproveitar o clustering _without_ para modificar o código da sua aplicação. Você deve garantir sua [application is stateless](https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) primeiro, significando que nenhum dado local é armazenado no processo (como sessões, conexões de websocket e coisas parecidas).
 
-When running an application with PM2, you can enable **cluster mode** to run it in a cluster with a number of instances of your choosing, such as the matching the number of available CPUs on the machine. You can manually change the number of processes in the cluster using the `pm2` command line tool without stopping the app.
+Ao executar um aplicativo com PM2, você pode habilitar o **cluster mode** para executá-lo em um cluster com várias instâncias de sua escolha, como o número de CPUs disponíveis na máquina. Você pode alterar manualmente o número de processos no cluster usando a ferramenta de linha de comando `pm2` sem parar o aplicativo.
 
-To enable cluster mode, start your application like so:
+Para ativar o modo de agrupamento, inicie seu aplicativo assim:
 
 ```bash
 # Start 4 worker processes
@@ -366,9 +371,9 @@ $ pm2 start npm --name my-app -i 4 -- start
 $ pm2 start npm --name my-app -i max -- start
 ```
 
-This can also be configured within a PM2 process file (`ecosystem.config.js` or similar) by setting `exec_mode` to `cluster` and `instances` to the number of workers to start.
+Isto também pode ser configurado dentro de um arquivo de processo PM2 (`ecosystem.config.js` ou similar) configurando `exec_mode` para `cluster` e `instances` para o número de workers para começar.
 
-Once running, the application can be scaled like so:
+Quando em execução, o aplicativo pode ser alterado assim:
 
 ```bash
 # Add 3 more workers
@@ -377,7 +382,7 @@ $ pm2 scale my-app +3
 $ pm2 scale my-app 2
 ```
 
-For more information on clustering with PM2, see [Cluster Mode](https://pm2.keymetrics.io/docs/usage/cluster-mode/) in the PM2 documentation.
+Para obter mais informações sobre clustering com PM2, consulte [Cluster Mode](https://pm2.keymetrics.io/docs/usage/cluster-mode/) na documentação PM2.
 
 ### Armazene em cache os resultados das solicitações
 
@@ -386,7 +391,7 @@ armazenar em cache o resultado de solicitações, para que o seu
 aplicativo não repita a operação para entregar a mesma solicitação
 repetidamente.
 
-Use a caching server like [Varnish](https://www.varnish-cache.org/) or [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (see also [Nginx Caching](https://serversforhackers.com/nginx-caching/)) to greatly improve the speed and performance of your app.
+Use um servidor de cache como [Varnish](https://www.varnish-cache.org/) ou [Nginx](https://blog.nginx.org/blog/nginx-caching-guide) (veja também [Nginx Caching](https://serversforhackers.com/nginx-caching/)) para melhorar muito a velocidade e o desempenho de sua aplicação.
 
 ### Use um balanceador de carga
 
@@ -400,7 +405,7 @@ que é possível com uma instância única.
 
 Um balanceador de carga é geralmente um proxy reverso que
 orquestra o tráfego para e de múltiplas instâncias de aplicativo e
-servidores. You can easily set up a load balancer for your app by using [Nginx](https://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+servidores. Você pode facilmente configurar um balanceador de carga 'load balancer' para o seu aplicativo usando [Nginx](https://nginx.org/en/docs/http/load_balancing.html) ou [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
 Com o balanceamento de carga, você pode ter que garantir que
 solicitações que estão associadas com um ID de sessão em particular
@@ -421,4 +426,4 @@ balanceamento de carga entre outras coisas.
 
 Entregar tarefas que não requerem conhecimento do estado do
 aplicativo para um proxy reverso libera o Express para executar
-tarefas especializadas de aplicativos. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.org/) or [HAProxy](https://www.haproxy.org/) in production.
+tarefas especializadas de aplicativos. Por este motivo, é recomendado executar Express atrás de um proxy reverso como [Nginx](https://www.nginx.org/) ou [HAProxy](https://www.haproxy.org/) em produção.

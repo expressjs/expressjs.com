@@ -39,7 +39,7 @@ de um aplicativo, consulte o [exemplo Hello world](/{{ page.lang }}/starter/hell
 
 Os seguintes exemplos ilustram a definição de rotas simples.
 
-Responder com `Hello World!` na página inicial:
+Responda com `Hello World!` na página inicial:
 
 ```js
 app.get('/', (req, res) => {
@@ -71,5 +71,5 @@ app.delete('/user', (req, res) => {
 })
 ```
 
-Para obter mais detalhes  sobre roteamento, consulte o [guia de roteamento](/{{ page.lang }}/guide/routing.html).
+Para obter mais detalhes sobre roteamento, consulte o [guia de roteamento](/{{ page.lang }}/guide/routing.html).
 

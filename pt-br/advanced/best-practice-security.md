@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Melhores Práticas de Segurança para o Express em Produção
-description: Discover crucial security best practices for Express apps in production, including using TLS, input validation, secure cookies, and preventing vulnerabilities.
+description: Descubra as melhores práticas de segurança cruciais para aplicativos Express em produção, incluindo o uso de TLS, validação de entrada, cookies seguros e prevenção de vulnerabilidades.
 menu: advanced
 order: 3
 redirect_from: "  "
@@ -27,8 +27,8 @@ enquanto estas preocupações se tornam críticas na produção.
 
 {% capture security-note %}
 
-If you believe you have discovered a security vulnerability in Express, please see
-[Security Policies and Procedures](/en/resources/contributing.html#security-policies-and-procedures).
+Se acredita que descobriu uma vulnerabilidade de segurança em Express, consulte
+[Políticas de Segurança e Procedimentos](/en/resources/contributing.html#security-policies-and-procedures).
 
 {% endcapture %}
 
@@ -37,14 +37,14 @@ If you believe you have discovered a security vulnerability in Express, please s
 Este artigo discute algumas melhores práticas de segurança para
 aplicativos do Express implementadas na produção.
 
-- [Production Best Practices: Security](#production-best-practices-security)
+- [Práticas recomendadas: Segurança](#production-best-practices-security)
   - [Overview](#overview)
-  - [Don't use deprecated or vulnerable versions of Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
+  - [Não usar versões descontinuadas ou vulneráveis do Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
   - [Use TLS](#use-tls)
-  - [Do not trust user input](#do-not-trust-user-input)
-    - [Prevent open redirects](#prevent-open-redirects)
+  - [Não confie na entrada do usuário](#do-not-trust-user-input)
+    - [Impedir redirecionamentos abertos](#prevent-open-redirects)
   - [Use Helmet](#use-helmet)
-  - [Reduce fingerprinting](#reduce-fingerprinting)
+  - [Reduzir impressão digital](#reduce-fingerprinting)
   - A [hsts](https://github.com/helmetjs/hsts) configura o cabeçalho `Strict-Transport-Security`
     que impinge conexões seguras (HTTP sobre SSL/TLS) com o servidor.
     - A principal diferença entre esses dois módulos é como eles salvam os dados de cookies de sessão.  O middleware [express-session](https://www.npmjs.com/package/express-session)
@@ -55,10 +55,10 @@ aplicativos do Express implementadas na produção.
       sessão escalável; consulte a lista de armazenamentos
       de sessão compatíveis.
     - A [ieNoOpen](https://github.com/helmetjs/ienoopen) configura o `X-Download-Options` para o IE8+.
-  - [Prevent brute-force attacks against authorization](#prevent-brute-force-attacks-against-authorization)
-  - [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
+  - [Impedir ataques brute-force contra a autorização](#prevent-brute-force-attacks-against-authorization)
+  - [Garanta que suas dependências sejam seguras](#ensure-your-dependencies-are-secure)
     - A [hidePoweredBy](https://github.com/helmetjs/hide-powered-by) remove o cabeçalho `X-Powered-By`.
-  - [Additional considerations](#additional-considerations)
+  - [Considerações adicionais](#additional-considerations)
 
 ## Não use versões descontinuadas ou vulneráveis do Express
 
@@ -97,19 +97,19 @@ automatizada, e aberta fornecida pelo
 Grupo de Pesquisas de
 Segurança da Internet (ISRG).
 
-## Do not trust user input
+## Não confiar em entrada do usuário
 
-For web applications, one of the most critical security requirements is proper user input validation and handling. This comes in many forms and we will not cover all of them here.
-Ultimately, the responsibility for validating and correctly handling the types of user input your application accepts is yours.
+Para aplicativos web, um dos requisitos de segurança mais críticos é a validação e tratamento adequado dos dados de entrada do usuário. Isto tem muitas formas e não as cobriremos todas aqui.
+Em última análise, a responsabilidade de validar e manipular corretamente os tipos de entrada de usuário que seu aplicativo aceita é sua.
 
-### Prevent open redirects
+### Impedir redirecionamentos abertos
 
-An example of potentially dangerous user input is an _open redirect_, where an application accepts a URL as user input (often in the URL query, for example `?url=https://example.com`) and uses `res.redirect` to set the `location` header and
-return a 3xx status.
+Um exemplo de entrada de usuário potencialmente perigosa é um _open redirect_, onde um aplicativo aceita uma URL como entrada de usuário (muitas vezes na consulta de URL, por exemplo `? rl=https://exemplo.com`) e usa `res.redirect` para definir o cabeçalho `location` e
+return um status de 3xx.
 
-An application must validate that it supports redirecting to the incoming URL to avoid sending users to malicious links such as phishing websites, among other risks.
+Uma aplicação deve validar que suporta redirecionamento para a URL de entrada, para evitar enviar usuários para links maliciosos, como sites de phishing, entre outros riscos.
 
-Here is an example of checking URLs before using `res.redirect` or `res.location`:
+Aqui está um exemplo de verificar URLs antes de usar `res.redirect` ou `res.location`:
 
 ```js
 app.use((req, res) => {
@@ -130,23 +130,23 @@ O [Helmet](https://www.npmjs.com/package/helmet) pode
 ajudar a proteger o seu aplicativo de algumas vulnerabilidades da web
 bastante conhecidas configurando os cabeçalhos HTTP adequadamente.
 
-Helmet is a middleware function that sets security-related HTTP response headers. Helmet sets the following headers by default:
+Helmet é uma função middleware que define cabeçalhos de resposta HTTP relacionados à segurança. Helmet define os seguintes cabeçalhos por padrão:
 
-- `Content-Security-Policy`: A powerful allow-list of what can happen on your page which mitigates many attacks
-- `Cross-Origin-Opener-Policy`: Helps process-isolate your page
-- `Cross-Origin-Resource-Policy`: Blocks others from loading your resources cross-origin
-- `Origin-Agent-Cluster`: Changes process isolation to be origin-based
-- `Referrer-Policy`: Controls the [`Referer`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer) header
-- `Strict-Transport-Security`: Tells browsers to prefer HTTPS
+- `Content-Security-Policy`: Uma poderosa lista de permissões do que pode acontecer na sua página, que mitiga muitos ataques
+- `Cross-Origin-Opener-Policy`: Ajuda a isolar sua página
+- `Cross-Origin-Resource-Policy`: Bloqueia outros de carregar seus recursos entre origens
+- `Origin-Agent-Cluster`: Altera o isolamento do processo para ser baseado na origem
+- `Referrer-Policy`: controla o cabeçalho [`Referer`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer)
+- `Strict-Transport-Security`: Diz aos navegadores para preferir HTTPS
 - `X-Content-Type-Options`: Avoids [MIME sniffing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#mime_sniffing)
-- `X-DNS-Prefetch-Control`: Controls DNS prefetching
-- `X-Download-Options`: Forces downloads to be saved (Internet Explorer only)
-- `X-Frame-Options`: Legacy header that mitigates [Clickjacking](https://en.wikipedia.org/wiki/Clickjacking) attacks
-- `X-Permitted-Cross-Domain-Policies`: Controls cross-domain behavior for Adobe products, like Acrobat
-- `X-Powered-By`: Info about the web server. Removed because it could be used in simple attacks
-- `X-XSS-Protection`: Legacy header that tries to mitigate [XSS attacks](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting), but makes things worse, so Helmet disables it
+- `X-DNS-Prefetch-Control`: Controla o pré-carregamento de DNS
+- `X-Download-Options`: Força os downloads a serem salvos (apenas no Internet Explore)
+- `X-Frame-Options`: Cabeçalho de legado que mitiga ataques [Clickjacking](https://en.wikipedia.org/wiki/Clickjacking)
+- `X-Perting-Cross-Domain-Policies`: Controla o comportamento entre domínios para produtos Adobe, como a Acrobat
+- `X-Powered-By`: Informações sobre o servidor web. Removido porque poderia ser utilizado em ataques simples
+- `X-XSS-Protection`: Cabeçalho de legado que tenta mitigar [ataques XSS](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting), mas piora as coisas, então o Helmet desabilita isso
 
-Each header can be configured or disabled. To read more about it please go to [its documentation website][helmet].
+Cada cabeçalho pode ser configurado ou desativado. Para ler mais sobre isso, por favor, vá para [a documentação do site][helmet].
 
 Instale o Helmet como qualquer outro módulo:
 
@@ -165,16 +165,16 @@ app.use(helmet())
 // ...
 ```
 
-## Reduce fingerprinting
+## Reduzir impressão digital
 
-It can help to provide an extra layer of security to reduce the ability of attackers to determine
-the software that a server uses, known as "fingerprinting." Though not a security issue itself,
-reducing the ability to fingerprint an application improves its overall security posture.
-Server software can be fingerprinted by quirks in how it responds to specific requests, for example in
-the HTTP response headers.
+Ele pode ajudar a fornecer uma camada extra de segurança para reduzir a capacidade dos invasores de determinar
+o software que um servidor usa, conhecido como "impressão digital." Embora não seja um problema de segurança em si,
+reduzir a capacidade de imprimir impressão digital a um aplicativo melhora sua posição geral de segurança.
+O software do servidor pode ser impresso por peculiares em como ele responde a solicitações específicas, por exemplo em
+os cabeçalhos de resposta HTTP.
 
-By default, Express sends the `X-Powered-By` response header that you can
-disable using the `app.disable()` method:
+Por padrão, o Express envia o cabeçalho de resposta `X-Powered-By` que você pode
+desabilitar usando o método `app.disable()`:
 
 ```js
 app.disable('x-powered-by')
@@ -182,20 +182,18 @@ app.disable('x-powered-by')
 
 {% capture powered-advisory %}
 
-Disabling the `X-Powered-By header` does not prevent
-a sophisticated attacker from determining that an app is running Express. It may
-discourage a casual exploit, but there are other ways to determine an app is running
-Express.
+Desativar o cabeçalho `X-Powered-By` não impede que um atacante sofisticado determine que um aplicativo está executando o Express. Isso pode
+desencorajar uma exploração casual, mas existem outras maneiras de determinar se um aplicativo está executando Express.
 
 {% endcapture %}
 
 {% include admonitions/note.html content=powered-advisory %}
 
-Express also sends its own formatted "404 Not Found" messages and formatter error
-response messages. These can be changed by
-[adding your own not found handler](/en/starter/faq.html#how-do-i-handle-404-responses)
-and
-[writing your own error handler](/en/guide/error-handling.html#writing-error-handlers):
+Express também envia suas próprias mensagens formatadas "404 Not Found" e erro de formatação
+mensagens de resposta. Elas podem ser alteradas por
+[adicionando seu próprio manipulador para 404](/en/starter/faq.html#how-do-i-handle-404-responses)
+e
+[escrevendo seu próprio manipulador de erro](/en/guide/error-handling.html#writing-error-handlers):
 
 ```js
 // last app.use calls right before app.listen():
@@ -227,7 +225,7 @@ cookies:
 - [cookie-session](https://www.npmjs.com/package/cookie-session)
   que substitui o middleware `express.cookieSession` integrado no Express 3.x.
 
-The main difference between these two modules is how they save cookie session data. The [express-session](https://www.npmjs.com/package/express-session) middleware stores session data on the server; it only saves the session ID in the cookie itself, not session data. By default, it uses in-memory storage and is not designed for a production environment. In production, you'll need to set up a scalable session-store; see the list of [compatible session stores](https://github.com/expressjs/session#compatible-session-stores).
+A principal diferença entre estes dois módulos é como eles salvam os dados da sessão de cookie. The [express-session](https://www.npmjs.com/package/express-session) middleware stores session data on the server; it only saves the session ID in the cookie itself, not session data. By default, it uses in-memory storage and is not designed for a production environment. In production, you'll need to set up a scalable session-store; see the list of [compatible session stores](https://github.com/expressjs/session#compatible-session-stores).
 
 Em contrapartida, o middleware [cookie-session](https://www.npmjs.com/package/cookie-session)
 implementa um armazenamento apoiado em cookies: ele serializa a sessão inteira para o cookie, ao invés de apenas a chave da sessão.  Use apenas quando os dados da sessão são relativamente pequenos e facilmente codificados como números primitivos(ao invés de objetos). Only use it when session data is relatively small and easily encoded as primitive values (rather than objects). Apesar de navegadores supostamente suportarem pelo menos 4096 bytes por cookie, para assegurar que você não exceda o limite, não exceda

@@ -21,7 +21,7 @@ app.METHOD(PATH, HANDLER)
 
 Where:
 
-- `app` is an instance of `express`.
+- `app` es una instancia de `express`.
 - `METHOD` is an [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in lowercase.
 - `PATH` es una vía de acceso en el servidor.
 - `HANDLER` es la función que se ejecuta cuando se correlaciona la ruta.

@@ -1,15 +1,15 @@
 ---
 layout: page
 title: Suporte à Versão
-description: Find information about the support schedule for different Express.js versions, including which versions are currently maintained and end-of-life policies.
+description: Encontre informações sobre o cronograma de suporte para diferentes versões do Express.js, incluindo quais versões são atualmente mantidas e antigas políticas.
 menu: support
 ---
 
 # Suporte à Versão
 
-Only the latest version of any given major release line is supported.
+Somente a última versão de qualquer linha de lançamento é suportada.
 
-Versions that are EOL (end-of-life) _may_ receive updates for critical security vulnerabilities, but the Express team offers no guarantee and does not plan to address or release fixes for any issues found.
+Versões que são EOL (fim de vida) podem receber atualizações de vulnerabilidades de segurança críticas, mas a equipe Express não oferece garantia e não planeja endereçar ou liberar correções para quaisquer problemas encontrados.
 
 | Versão Principal                                                                                                                                           | Versão mínima do Node.js | Início Suporte   | Término Suporte                                            |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | ---------------- | ---------------------------------------------------------- |

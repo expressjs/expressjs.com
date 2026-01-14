@@ -12,25 +12,25 @@ module: mw-home
 
 Aqui estão alguns módulos middleware do Express:
 
-| Módulo de Middleware                                                        | Descrição                                                                                                                                   |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [body-parser](/{{page.lang}}/resources/middleware/body-parser.html)         | Analisar corpo da requisição HTTP.                                                                                          |
-| [compression](/{{page.lang}}/resources/middleware/compression.html)         | Comprimir respostas HTTP.                                                                                                   |
-| [connect-rid](/{{page.lang}}/resources/middleware/connect-rid.html)         | Gerar ID único de requisição.                                                                                               |
-| [cookie-parser](/{{page.lang}}/resources/middleware/cookie-parser.html)     | Analisar cabeçalho de cookie e preencher `req.cookies`. See also [cookies](https://github.com/jed/cookies). |
-| [cookie-session](/{{page.lang}}/resources/middleware/cookie-session.html)   | Estabelecer sessões baseadas em cookies.                                                                                    |
-| [cors](/{{page.lang}}/resources/middleware/cors.html)                       | Ativa o compartilhamento de recursos entre origens (CORS) com várias opções.                             |
-| [errorhandler](/{{page.lang}}/resources/middleware/errorhandler.html)       | Processamento/depuração do desenvolvimento.                                                                                 |
-| [method-override](/{{page.lang}}/resources/middleware/method-override.html) | Substituir métodos HTTP utilizando header.                                                                                  |
-| [morgan](/{{page.lang}}/resources/middleware/morgan.html)                   | Log de requisições HTTP.                                                                                                    |
-| [multer](/{{page.lang}}/resources/middleware/multer.html)                   | Manipule dados de formulários multi-part.                                                                                   |
-| [response-time](/{{page.lang}}/resources/middleware/response-time.html)     | Record HTTP response time.                                                                                                  |
-| [serve-favicon](/{{page.lang}}/resources/middleware/serve-favicon.html)     | Sirva um favicon.                                                                                                           |
-| [serve-index](/{{page.lang}}/resources/middleware/serve-index.html)         | Serve directory listing for a given path.                                                                                   |
-| [serve-static](/{{page.lang}}/resources/middleware/serve-static.html)       | Servir arquivos estáticos.                                                                                                  |
-| [session](/{{page.lang}}/resources/middleware/session.html)                 | Establish server-based sessions (development only).                                                      |
-| [timeout](/{{page.lang}}/resources/middleware/timeout.html)                 | Set a timeout perioHTTP request processing.                                                                                 |
-| [vhost](/{{page.lang}}/resources/middleware/vhost.html)                     | Criar domínios virtuais.                                                                                                    |
+| Módulo de Middleware                                                        | Descrição                                                                                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [body-parser](/{{page.lang}}/resources/middleware/body-parser.html)         | Analisar corpo da requisição HTTP.                                                                                            |
+| [compression](/{{page.lang}}/resources/middleware/compression.html)         | Comprimir respostas HTTP.                                                                                                     |
+| [connect-rid](/{{page.lang}}/resources/middleware/connect-rid.html)         | Gerar ID único de requisição.                                                                                                 |
+| [cookie-parser](/{{page.lang}}/resources/middleware/cookie-parser.html)     | Analisar cabeçalho de cookie e preencher `req.cookies`. Ver também [cookies](https://github.com/jed/cookies). |
+| [cookie-session](/{{page.lang}}/resources/middleware/cookie-session.html)   | Estabelecer sessões baseadas em cookies.                                                                                      |
+| [cors](/{{page.lang}}/resources/middleware/cors.html)                       | Ativa o compartilhamento de recursos entre origens (CORS) com várias opções.                               |
+| [errorhandler](/{{page.lang}}/resources/middleware/errorhandler.html)       | Processamento/depuração do desenvolvimento.                                                                                   |
+| [method-override](/{{page.lang}}/resources/middleware/method-override.html) | Substituir métodos HTTP utilizando header.                                                                                    |
+| [morgan](/{{page.lang}}/resources/middleware/morgan.html)                   | Log de requisições HTTP.                                                                                                      |
+| [multer](/{{page.lang}}/resources/middleware/multer.html)                   | Manipule dados de formulários multi-part.                                                                                     |
+| [response-time](/{{page.lang}}/resources/middleware/response-time.html)     | Record HTTP response time.                                                                                                    |
+| [serve-favicon](/{{page.lang}}/resources/middleware/serve-favicon.html)     | Sirva um favicon.                                                                                                             |
+| [serve-index](/{{page.lang}}/resources/middleware/serve-index.html)         | Serve directory listing for a given path.                                                                                     |
+| [serve-static](/{{page.lang}}/resources/middleware/serve-static.html)       | Servir arquivos estáticos.                                                                                                    |
+| [session](/{{page.lang}}/resources/middleware/session.html)                 | Establish server-based sessions (development only).                                                        |
+| [timeout](/{{page.lang}}/resources/middleware/timeout.html)                 | Set a timeout perioHTTP request processing.                                                                                   |
+| [vhost](/{{page.lang}}/resources/middleware/vhost.html)                     | Criar domínios virtuais.                                                                                                      |
 
 ## Para obter mais módulos middleware, consulte:
 

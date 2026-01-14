@@ -9,7 +9,7 @@ redirect_from: "  "
 <section id="home-content">
   <div id="homepage-leftpane" class="pane">
     <section id="description">
-        <div class="express"><span>Express</span><a href="{{ page.lang }}/changelog/#{{ site.data.express.current_version }}" id="express-version">{{ site.data.express.current_version }}</a></div>
+        <div class="express"><span>Express</span><a href="https://github.com/expressjs/express/releases" id="express-version">{{ site.data.express.current_version }}</a></div>
         <h1 class="description">快速、灵活、极简的 <a href='https://nodejs.org/en/'>Node.js</a> Web 框架</h1>
     </section>
     <pre class="install-command"><code>$ npm install express --save</code></pre>
