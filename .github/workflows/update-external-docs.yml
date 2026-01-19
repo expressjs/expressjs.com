@@ -10,6 +10,47 @@ permissions:
     contents: write
 
 jobs:
+    update-security:
+        runs-on: ubuntu-latest
+        if: github.repository_owner == 'expressjs'
+        steps:
+            - uses: actions/checkout@v6
+
+            - name: Check security.txt expiry
+              id: expiry
+              run: |
+                set -eo pipefail
+                expires=$(grep -i '^Expires:' .well-known/security.txt | sed 's/.*: //')
+                if [ "$(date -d "$expires" +%s)" -le "$(date -d '+30 days' +%s)" ]; then
+                  echo "bump=true" >> "$GITHUB_OUTPUT"
+                fi
+
+            - name: Bump Expires
+              if: steps.expiry.outputs.bump == 'true'
+              run: sed -i "s/^Expires:.*/Expires: $(date -u -d '+180 days' +%Y-%m-%dT00:00:00Z)/I" .well-known/security.txt
+
+            - name: Create Pull Request
+              if: steps.expiry.outputs.bump == 'true'
+              uses: gr2m/create-or-update-pull-request-action@v1
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                commit-message: 'docs: update security.txt expiry'
+                title: 'docs: update security.txt expiry'
+                body: |
+                  This PR extends the `Expires` date in `.well-known/security.txt`.
+
+                  Before merging, please explicitly confirm that:
+                  - The security contact listed is still correct and actively monitored
+                  - The linked security policy is still accurate
+                  - The project's preferred vulnerability disclosure path has not changed
+
+                  Only merge if the above information is still valid; otherwise, update it before extending the expiration.
+
+                  cc: @expressjs/security-wg
+                labels: docs
+                branch: bot/security-expiry
+
     update-docs:
         runs-on: ubuntu-latest
         if: github.repository_owner == 'expressjs'
@@ -38,7 +79,7 @@ jobs:
                   
                   cc: @expressjs/docs-wg
                 labels: docs
-                branch: external-docs
+                branch: bot/update-external-docs
 
     synchronize-with-crowdin:
         runs-on: ubuntu-latest
