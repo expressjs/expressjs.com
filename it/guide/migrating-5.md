@@ -28,16 +28,16 @@ To help you migrate your express server, we have created a set of codemods that 
 Run the following command for run all the codemods available:
 
 ```sh
-npx @expressjs/codemod upgrade
+npx codemod@latest @expressjs/v5-migration-recipe
 ```
 
 If you want to run a specific codemod, you can run the following command:
 
 ```sh
-npx @expressjs/codemod name-of-the-codemod
+npx codemod@latest @expressjs/name-of-the-codemod
 ```
 
-You can find the list of available codemods [here](https://github.com/expressjs/codemod?tab=readme-ov-file#available-codemods).
+You can find the list of available codemods [here](https://codemod.link/express).
 
 <h2 id="changes">Modifiche in Express 5</h2>
 
@@ -96,16 +96,16 @@ Express 5 non supporta più la funzione `app.del()`. Se si utilizza questa funzi
 
 Inizialmente era stato utilizzato il comando `del` al posto di `delete`, perché `delete` è una parola chiave riservata in JavaScript. Tuttavia, a partire da ECMAScript 6, `delete` e altre parole chiave riservate possono essere utilizzate liberamente come nomi di proprietà.
 
-{% capture codemod-deprecated-signatures %}
+{% capture codemod-route-del-to-delete %}
 You can replace the deprecated signatures with the following command:
 
 ```plain-text
-npx @expressjs/codemod v4-deprecated-signatures
+npx codemod@latest @expressjs/route-del-to-delete
 ```
 
 {% endcapture %}
 
-{% include admonitions/note.html content=codemod-deprecated-signatures %}
+{% include admonitions/note.html content=codemod-route-del-to-delete %}
 
 ```js
 // v4
@@ -137,7 +137,7 @@ I seguenti nomi di metodi sono stati messi al plurale. In Express 4, l'utilizzo 
 You can replace the deprecated signatures with the following command:
 
 ```plain-text
-npx @expressjs/codemod pluralized-methods
+npx codemod@latest @expressjs/pluralize-method-names
 ```
 
 {% endcapture %}
@@ -178,7 +178,7 @@ Questo metodo poco chiaro e molto pericoloso che si utilizzava per richiamare i 
 You can replace the deprecated signatures with the following command:
 
 ```plain-text
-npx @expressjs/codemod req-param
+npx codemod@latest @expressjs/explicit-request-params
 ```
 
 {% endcapture %}
@@ -209,7 +209,16 @@ app.post('/user', (req, res) => {
 
 Express 5 non supporta più la firma `res.json(obj, status)`. Al contrario, impostare lo stato e successivamente associarlo al metodo `res.json()` come segue: `res.status(status).json(obj)`.
 
-{% include admonitions/note.html content=codemod-deprecated-signatures %}
+{% capture codemod-status-send-order %}
+You can replace the deprecated signatures with the following command:
+
+```plain-text
+npx codemod@latest @expressjs/status-send-order
+```
+
+{% endcapture %}
+
+{% include admonitions/note.html content=codemod-status-send-order %}
 
 ```js
 // v4
@@ -227,7 +236,7 @@ app.post('/user', (req, res) => {
 
 Express 5 non supporta più la firma `res.jsonp(obj, status)`. Al contrario, impostare lo stato e successivamente associarlo al metodo `res.jsonp()` come segue: `res.status(status).jsonp(obj)`.
 
-{% include admonitions/note.html content=codemod-deprecated-signatures %}
+{% include admonitions/note.html content=codemod-status-send-order %}
 
 ```js
 // v4
@@ -245,7 +254,16 @@ app.post('/user', (req, res) => {
 
 Express 5 non supporta più la firma `res.send(obj, status)`. Al contrario, impostare lo stato e successivamente associarlo al metodo `res.send()` come segue: `res.status(status).send(obj)`.
 
-{% include admonitions/note.html content=codemod-deprecated-signatures %}
+{% capture codemod-redirect-arg-order %}
+You can replace the deprecated signatures with the following command:
+
+```plain-text
+npx codemod@latest @expressjs/redirect-arg-order
+```
+
+{% endcapture %}
+
+{% include admonitions/note.html content=codemod-redirect-arg-order %}
 
 ```js
 // v4
@@ -263,16 +281,16 @@ app.get('/user', (req, res) => {
 
 Express 5 no longer supports the magic string `back` in the `res.redirect()` and `res.location()` methods. Instead, use the `req.get('Referrer') || '/'` value to redirect back to the previous page. In Express 4, the `res.redirect('back')` and `res.location('back')` methods were deprecated.
 
-{% capture codemod-magic-redirect %}
+{% capture codemod-back-redirect-deprecated %}
 You can replace the deprecated signatures with the following command:
 
 ```plain-text
-npx @expressjs/codemod magic-redirect
+npx codemod@latest @expressjs/back-redirect-deprecated
 ```
 
 {% endcapture %}
 
-{% include admonitions/note.html content=codemod-magic-redirect %}
+{% include admonitions/note.html content=codemod-back-redirect-deprecated %}
 
 ```js
 // v4
@@ -290,7 +308,7 @@ app.get('/user', (req, res) => {
 
 Express 5 no longer supports the signature `res.send(obj, status)`. Instead, set the status and then chain it to the `res.send()` method like this: `res.status(status).send(obj)`.
 
-{% include admonitions/note.html content=codemod-deprecated-signatures %}
+{% include admonitions/note.html content=codemod-status-send-order %}
 
 ```js
 // v4
@@ -309,7 +327,7 @@ app.get('/user', (req, res) => {
 Express 5 non supporta più la firma <code>res.send(<em>status</em>)</code>, dove _`status`_ è un numero. Al contrario, utilizzare la funzione `res.sendStatus(statusCode)`, la quale imposta il codice di stato dell'intestazione della risposta HTTP e invia la versione di testo del codice: "Non trovato", "Errore interno del server" e così via.
 Se è necessario inviare un numero utilizzando la funzione `res.send()`, citare il numero per convertirlo in una stringa, in modo tale che Express non lo interpreti come un tentativo di utilizzo di una firma vecchia non supportata.
 
-{% include admonitions/note.html content=codemod-deprecated-signatures %}
+{% include admonitions/note.html content=codemod-status-send-order %}
 
 ```js
 // v4
@@ -336,7 +354,16 @@ La funzione `res.sendfile()` è stata sostituita da una versione in cui ogni fra
 - Font files (.woff): now "font/woff" instead of "application/font-woff"
 - SVG files (.svg): now "image/svg+xml" instead of "application/svg+xml"
 
-{% include admonitions/note.html content=codemod-deprecated-signatures %}
+{% capture codemod-camelcase-sendfile %}
+You can replace the deprecated signatures with the following command:
+
+```plain-text
+npx codemod@latest @expressjs/camelcase-sendfile
+```
+
+{% endcapture %}
+
+{% include admonitions/note.html content=codemod-camelcase-sendfile %}
 
 ```js
 // v4
