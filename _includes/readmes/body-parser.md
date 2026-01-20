@@ -51,7 +51,14 @@ $ npm install body-parser
 ## API
 
 ```js
+// Import all parsers
 const bodyParser = require('body-parser')
+
+// Or import individual parsers directly
+const json = require('body-parser/json')
+const urlencoded = require('body-parser/urlencoded')
+const raw = require('body-parser/raw')
+const text = require('body-parser/text')
 ```
 
 The `bodyParser` object exposes various factories to create middlewares. All
@@ -221,8 +228,8 @@ encoding of the request. The parsing can be aborted by throwing an error.
 
 Returns middleware that only parses `urlencoded` bodies and only looks at
 requests where the `Content-Type` header matches the `type` option. This
-parser accepts only UTF-8 encoding of the body and supports automatic
-inflation of `gzip`, `br` (brotli) and `deflate` encodings.
+parser accepts only UTF-8 and ISO-8859-1 encodings of the body and supports 
+automatic inflation of `gzip`, `br` (brotli) and `deflate` encodings.
 
 A new `body` object containing the parsed data is populated on the `request`
 object after the middleware (i.e. `req.body`). This object will contain
