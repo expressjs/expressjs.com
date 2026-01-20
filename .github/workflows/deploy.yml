@@ -33,9 +33,11 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
-      - name: Upload artifact
-        # Automatically uploads an artifact from the './_site' directory by default
+      - name: Upload gh-pages artifact
         uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+          include-hidden-files: true # required for /.well-known/security.txt
 
   deploy:
     environment:
