@@ -1,0 +1,30 @@
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import eslintAstroPlugin from 'eslint-plugin-astro';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+
+export default [
+  // Global ignores
+  {
+    ignores: ['dist/', '.astro/', 'node_modules/', 'package-lock.json'],
+  },
+
+  // Base ESLint recommended rules
+  eslint.configs.recommended,
+
+  // TypeScript ESLint recommended rules
+  ...tseslint.configs.recommended,
+
+  // Astro files
+  ...eslintAstroPlugin.configs.recommended,
+  ...eslintAstroPlugin.configs['jsx-a11y-recommended'],
+
+  // JSX Accessibility for non-Astro files
+  {
+    files: ['**/*.{jsx,tsx}'],
+    plugins: {
+      'jsx-a11y': jsxA11y,
+    },
+    rules: jsxA11y.configs.recommended.rules,
+  },
+];
