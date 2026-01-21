@@ -1,8 +1,9 @@
 {
-  "name": "",
+  "name": "astro-project",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "preinstall": "npx only-allow npm",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -10,5 +11,9 @@
   },
   "dependencies": {
     "astro": "^5.16.11"
+  },
+  "engines": {
+    "node": ">=24.13.0",
+    "npm": ">=11.0.0"
   }
 }
