@@ -18,14 +18,14 @@ import Button from '@primitives/Button/Button.astro';
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `'primary' \| 'secondary' \| 'outline' \| 'ghost' \| 'destructive'` | `'primary'` | Visual style |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button size |
-| `href` | `string` | - | Renders as `<a>` link |
-| `disabled` | `boolean` | `false` | Disabled state |
-| `fullWidth` | `boolean` | `false` | Full width button |
-| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Button type (when not a link) |
+| Prop        | Type                                                                | Default     | Description                   |
+| ----------- | ------------------------------------------------------------------- | ----------- | ----------------------------- |
+| `variant`   | `'primary' \| 'secondary' \| 'outline' \| 'ghost' \| 'destructive'` | `'primary'` | Visual style                  |
+| `size`      | `'sm' \| 'md' \| 'lg'`                                              | `'md'`      | Button size                   |
+| `href`      | `string`                                                            | -           | Renders as `<a>` link         |
+| `disabled`  | `boolean`                                                           | `false`     | Disabled state                |
+| `fullWidth` | `boolean`                                                           | `false`     | Full width button             |
+| `type`      | `'button' \| 'submit' \| 'reset'`                                   | `'button'`  | Button type (when not a link) |
 
 ## Examples
 
@@ -54,6 +54,7 @@ import Button from '@primitives/Button/Button.astro';
 Styles are in `Button.css` using `@layer components` for proper cascade ordering.
 
 Classes follow BEM-like naming:
+
 - `.btn` - Base class
 - `.btn--primary` - Variant modifier
 - `.btn--sm` - Size modifier

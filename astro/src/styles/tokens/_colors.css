@@ -1,132 +1,139 @@
-/**
- * Color Tokens (OKLCH)
- */
-
 :root {
   /* ============================================
-     PRIMITIVE COLORS
-     Base white and black
+     PRIMITIVE TOKENS
      ============================================ */
 
   --white: oklch(100% 0 0);
   --black: oklch(0% 0 0);
 
-  /* ============================================
-     NEUTRAL SCALE
-     Low-chroma grays with subtle warmth
-     ============================================ */
+  --gray-50: oklch(98% 0 0);
+  --gray-100: oklch(96% 0 0);
+  --gray-200: oklch(92% 0 0);
+  --gray-300: oklch(87% 0 0);
+  --gray-400: oklch(70% 0 0);
+  --gray-500: oklch(55% 0 0);
+  --gray-600: oklch(45% 0 0);
+  --gray-700: oklch(35% 0 0);
+  --gray-800: oklch(25% 0 0);
+  --gray-900: oklch(18% 0 0);
+  --gray-950: oklch(13% 0 0);
 
-  --color-neutral-0: var(--white);
-  --color-neutral-50: oklch(98.5% 0.002 260);
-  --color-neutral-100: oklch(96.5% 0.003 260);
-  --color-neutral-200: oklch(92% 0.005 260);
-  --color-neutral-300: oklch(86% 0.007 260);
-  --color-neutral-400: oklch(70% 0.008 260);
-  --color-neutral-500: oklch(60% 0.009 260);
-  --color-neutral-600: oklch(48% 0.008 260);
-  --color-neutral-700: oklch(38% 0.007 260);
-  --color-neutral-800: oklch(28% 0.006 260);
-  --color-neutral-900: oklch(20% 0.005 260);
-  --color-neutral-950: oklch(12% 0.004 260);
+  --green-50: oklch(96% 0.035 145);
+  --green-500: oklch(65% 0.19 145);
+  --green-700: oklch(48% 0.2 145);
 
-  /* ============================================
-     SUCCESS SCALE (Green)
-     Positive states and confirmations
-     ============================================ */
+  --orange-50: oklch(97% 0.025 65);
+  --orange-500: oklch(70% 0.16 65);
+  --orange-700: oklch(52% 0.18 65);
 
-  --color-success-50: oklch(96% 0.035 145);
-  --color-success-500: oklch(65% 0.19 145);
-  --color-success-700: oklch(48% 0.2 145);
+  --red-50: oklch(96% 0.03 25);
+  --red-500: oklch(62% 0.22 25);
+  --red-700: oklch(45% 0.24 25);
 
   /* ============================================
-     WARNING SCALE (Orange)
-     Caution and attention states
-     ============================================ */
-
-  --color-warning-50: oklch(97% 0.025 65);
-  --color-warning-500: oklch(70% 0.16 65);
-  --color-warning-700: oklch(52% 0.18 65);
-
-  /* ============================================
-     ERROR SCALE (Red)
-     Error and destructive states
-     ============================================ */
-
-  --color-error-50: oklch(96% 0.03 25);
-  --color-error-500: oklch(62% 0.22 25);
-  --color-error-700: oklch(45% 0.24 25);
-
-  /* ============================================
-     SEMANTIC ALIASES
+     SEMANTIC TOKENS - LIGHT MODE (Default)
      Theme-aware color assignments for common UI patterns
      ============================================ */
 
   /* Backgrounds */
-  --color-background: var(--color-neutral-0);
-  --color-background-subtle: var(--color-neutral-50);
-  --color-background-muted: var(--color-neutral-100);
-
-  /* Foregrounds */
-  --color-foreground: var(--color-neutral-900);
-  --color-foreground-muted: var(--color-neutral-600);
-  --color-foreground-subtle: var(--color-neutral-400);
+  --color-bg-primary: var(--white);
+  --color-bg-secondary: var(--gray-50);
+  --color-bg-tertiary: var(--gray-100);
 
   /* Borders */
-  --color-border: var(--color-neutral-200);
-  --color-border-strong: var(--color-neutral-300);
+  --color-border-primary: var(--gray-300);
+  --color-border-secondary: var(--gray-200);
 
-  /* Accents - using color-mix for interactive states */
-  --color-accent: var(--color-primary-500);
-  --color-accent-hover: color-mix(in oklch, var(--color-primary-500), black 12%);
-  --color-accent-active: color-mix(in oklch, var(--color-primary-500), black 20%);
-  --color-accent-subtle: var(--color-primary-50);
-  --color-accent-foreground: var(--white);
+  /* Text */
+  --color-text-primary: var(--gray-900);
+  --color-text-secondary: var(--gray-600);
+  --color-text-tertiary: var(--gray-500);
+
+  /* Icons */
+  --color-icon-primary: var(--gray-900);
+  --color-icon-secondary: var(--gray-500);
 
   /* ============================================
-     COMPONENT TOKENS
+     COMPONENT TOKENS - LIGHT MODE
      Component-specific color assignments
      ============================================ */
 
-  /* Links */
-  --color-link: var(--color-accent);
-  --color-link-hover: var(--color-accent-hover);
-  --color-link-visited: color-mix(in oklch, var(--color-primary-500), var(--color-neutral-700) 30%);
+  /* Buttons */
+  --color-button-primary-bg: var(--gray-900);
+  --color-button-primary-text: var(--white);
+  --color-button-primary-bg-hover: var(--gray-800);
 
-  /* Code blocks */
-  --color-code-bg: var(--color-neutral-100);
-  --color-code-text: var(--color-neutral-900);
-  --color-pre-bg: var(--color-neutral-900);
-  --color-pre-text: var(--color-neutral-50);
+  /* Focus */
+  --color-focus-ring: var(--gray-900);
+
+  /* Status */
+  --color-success: var(--green-500);
+  --color-warning: var(--orange-500);
+  --color-error: var(--red-500);
 }
 
 /* ============================================
    DARK MODE
-   Automatic theme switching via prefers-color-scheme
+   Activated via:
+   1. [data-theme="dark"] attribute on <html>
+   2. System preference (when no explicit theme set)
    ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Backgrounds */
-    --color-background: var(--color-neutral-950);
-    --color-background-subtle: var(--color-neutral-900);
-    --color-background-muted: var(--color-neutral-800);
+[data-theme='dark'] {
+  /* Backgrounds */
+  --color-bg-primary: var(--black);
+  --color-bg-secondary: var(--gray-950);
+  --color-bg-tertiary: var(--gray-900);
 
-    /* Foregrounds */
-    --color-foreground: var(--color-neutral-50);
-    --color-foreground-muted: var(--color-neutral-400);
-    --color-foreground-subtle: var(--color-neutral-500);
+  /* Borders */
+  --color-border-primary: var(--gray-500);
+  --color-border-secondary: var(--gray-800);
+
+  /* Text */
+  --color-text-primary: var(--gray-50);
+  --color-text-secondary: var(--gray-400);
+  --color-text-tertiary: var(--gray-500);
+
+  /* Icons */
+  --color-icon-primary: var(--gray-50);
+  --color-icon-secondary: var(--gray-400);
+
+  /* Buttons */
+  --color-button-primary-bg: var(--white);
+  --color-button-primary-text: var(--black);
+  --color-button-primary-bg-hover: var(--gray-200);
+
+  /* Focus */
+  --color-focus-ring: var(--white);
+}
+
+/* System preference fallback (when no explicit theme is set) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    /* Backgrounds */
+    --color-bg-primary: var(--black);
+    --color-bg-secondary: var(--gray-950);
+    --color-bg-tertiary: var(--gray-900);
 
     /* Borders */
-    --color-border: var(--color-neutral-800);
-    --color-border-strong: var(--color-neutral-700);
+    --color-border-primary: var(--gray-500);
+    --color-border-secondary: var(--gray-800);
 
-    /* Accents - lighter for dark backgrounds */
-    --color-accent-hover: color-mix(in oklch, var(--color-primary-500), white 15%);
-    --color-accent-active: color-mix(in oklch, var(--color-primary-500), white 25%);
+    /* Text */
+    --color-text-primary: var(--gray-50);
+    --color-text-secondary: var(--gray-400);
+    --color-text-tertiary: var(--gray-500);
 
-    /* Component tokens adjustments */
-    --color-link-visited: color-mix(in oklch, var(--color-primary-400), var(--color-neutral-300) 30%);
-    --color-code-bg: var(--color-neutral-800);
-    --color-code-text: var(--color-neutral-100);
+    /* Icons */
+    --color-icon-primary: var(--gray-50);
+    --color-icon-secondary: var(--gray-400);
+
+    /* Buttons */
+    --color-button-primary-bg: var(--white);
+    --color-button-primary-text: var(--black);
+    --color-button-primary-bg-hover: var(--gray-200);
+
+    /* Focus */
+    --color-focus-ring: var(--white);
   }
 }

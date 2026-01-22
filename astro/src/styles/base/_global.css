@@ -21,7 +21,12 @@ body {
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--text-heading-font);
   font-weight: var(--text-heading-weight);
   line-height: var(--text-heading-line-height);
@@ -86,14 +91,14 @@ pre {
 code {
   padding: var(--space-0-5) var(--space-1);
   background-color: var(--color-code-bg);
-  color: var(--color-code-text);
+  color: var(--color-code-fg);
   border-radius: var(--radius-sm);
 }
 
 pre {
   padding: var(--space-4);
   background-color: var(--color-pre-bg);
-  color: var(--color-pre-text);
+  color: var(--color-pre-fg);
   border-radius: var(--radius-lg);
   overflow-x: auto;
 }
@@ -139,13 +144,13 @@ th {
 
 /* Selection */
 ::selection {
-  background-color: var(--color-primary-200);
-  color: var(--color-primary-900);
+  background-color: var(--sky-200);
+  color: var(--sky-900);
 }
 
 @media (prefers-color-scheme: dark) {
   ::selection {
-    background-color: var(--color-primary-800);
-    color: var(--color-primary-100);
+    background-color: var(--sky-800);
+    color: var(--sky-100);
   }
 }

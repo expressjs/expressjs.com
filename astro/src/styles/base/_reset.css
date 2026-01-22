@@ -31,12 +31,19 @@ ol[role='list'] {
 }
 
 /* Set shorter line heights on interactive elements */
-button, input, label {
+button,
+input,
+label {
   line-height: 1.1;
 }
 
 /* Balance text wrapping on headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
