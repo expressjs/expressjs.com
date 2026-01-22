@@ -1,0 +1,132 @@
+/**
+ * Color Tokens (OKLCH)
+ */
+
+:root {
+  /* ============================================
+     PRIMITIVE COLORS
+     Base white and black
+     ============================================ */
+
+  --white: oklch(100% 0 0);
+  --black: oklch(0% 0 0);
+
+  /* ============================================
+     NEUTRAL SCALE
+     Low-chroma grays with subtle warmth
+     ============================================ */
+
+  --color-neutral-0: var(--white);
+  --color-neutral-50: oklch(98.5% 0.002 260);
+  --color-neutral-100: oklch(96.5% 0.003 260);
+  --color-neutral-200: oklch(92% 0.005 260);
+  --color-neutral-300: oklch(86% 0.007 260);
+  --color-neutral-400: oklch(70% 0.008 260);
+  --color-neutral-500: oklch(60% 0.009 260);
+  --color-neutral-600: oklch(48% 0.008 260);
+  --color-neutral-700: oklch(38% 0.007 260);
+  --color-neutral-800: oklch(28% 0.006 260);
+  --color-neutral-900: oklch(20% 0.005 260);
+  --color-neutral-950: oklch(12% 0.004 260);
+
+  /* ============================================
+     SUCCESS SCALE (Green)
+     Positive states and confirmations
+     ============================================ */
+
+  --color-success-50: oklch(96% 0.035 145);
+  --color-success-500: oklch(65% 0.19 145);
+  --color-success-700: oklch(48% 0.2 145);
+
+  /* ============================================
+     WARNING SCALE (Orange)
+     Caution and attention states
+     ============================================ */
+
+  --color-warning-50: oklch(97% 0.025 65);
+  --color-warning-500: oklch(70% 0.16 65);
+  --color-warning-700: oklch(52% 0.18 65);
+
+  /* ============================================
+     ERROR SCALE (Red)
+     Error and destructive states
+     ============================================ */
+
+  --color-error-50: oklch(96% 0.03 25);
+  --color-error-500: oklch(62% 0.22 25);
+  --color-error-700: oklch(45% 0.24 25);
+
+  /* ============================================
+     SEMANTIC ALIASES
+     Theme-aware color assignments for common UI patterns
+     ============================================ */
+
+  /* Backgrounds */
+  --color-background: var(--color-neutral-0);
+  --color-background-subtle: var(--color-neutral-50);
+  --color-background-muted: var(--color-neutral-100);
+
+  /* Foregrounds */
+  --color-foreground: var(--color-neutral-900);
+  --color-foreground-muted: var(--color-neutral-600);
+  --color-foreground-subtle: var(--color-neutral-400);
+
+  /* Borders */
+  --color-border: var(--color-neutral-200);
+  --color-border-strong: var(--color-neutral-300);
+
+  /* Accents - using color-mix for interactive states */
+  --color-accent: var(--color-primary-500);
+  --color-accent-hover: color-mix(in oklch, var(--color-primary-500), black 12%);
+  --color-accent-active: color-mix(in oklch, var(--color-primary-500), black 20%);
+  --color-accent-subtle: var(--color-primary-50);
+  --color-accent-foreground: var(--white);
+
+  /* ============================================
+     COMPONENT TOKENS
+     Component-specific color assignments
+     ============================================ */
+
+  /* Links */
+  --color-link: var(--color-accent);
+  --color-link-hover: var(--color-accent-hover);
+  --color-link-visited: color-mix(in oklch, var(--color-primary-500), var(--color-neutral-700) 30%);
+
+  /* Code blocks */
+  --color-code-bg: var(--color-neutral-100);
+  --color-code-text: var(--color-neutral-900);
+  --color-pre-bg: var(--color-neutral-900);
+  --color-pre-text: var(--color-neutral-50);
+}
+
+/* ============================================
+   DARK MODE
+   Automatic theme switching via prefers-color-scheme
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Backgrounds */
+    --color-background: var(--color-neutral-950);
+    --color-background-subtle: var(--color-neutral-900);
+    --color-background-muted: var(--color-neutral-800);
+
+    /* Foregrounds */
+    --color-foreground: var(--color-neutral-50);
+    --color-foreground-muted: var(--color-neutral-400);
+    --color-foreground-subtle: var(--color-neutral-500);
+
+    /* Borders */
+    --color-border: var(--color-neutral-800);
+    --color-border-strong: var(--color-neutral-700);
+
+    /* Accents - lighter for dark backgrounds */
+    --color-accent-hover: color-mix(in oklch, var(--color-primary-500), white 15%);
+    --color-accent-active: color-mix(in oklch, var(--color-primary-500), white 25%);
+
+    /* Component tokens adjustments */
+    --color-link-visited: color-mix(in oklch, var(--color-primary-400), var(--color-neutral-300) 30%);
+    --color-code-bg: var(--color-neutral-800);
+    --color-code-text: var(--color-neutral-100);
+  }
+}

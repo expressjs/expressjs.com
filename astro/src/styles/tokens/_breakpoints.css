@@ -1,0 +1,34 @@
+/**
+ * Breakpoint Tokens
+ * 
+ * Note: CSS custom properties can't be used in media queries directly.
+ * These are documented here for reference and used via @custom-media (future CSS)
+ * or referenced in JavaScript/build tools.
+ * 
+ * Mobile-first approach:
+ * - sm: 640px   - Small devices (landscape phones)
+ * - md: 768px   - Medium devices (tablets)
+ * - lg: 1024px  - Large devices (desktops)
+ * - xl: 1280px  - Extra large devices (large desktops)
+ * - 2xl: 1536px - 2X large devices (larger desktops)
+ */
+
+:root {
+  /* For JS access */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* Container max widths */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1400px;
+
+  /* Content width */
+  --content-width: 65ch;
+  --content-width-wide: 80ch;
+}

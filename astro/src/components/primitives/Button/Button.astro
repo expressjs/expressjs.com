@@ -1,0 +1,44 @@
+---
+/**
+ * Button Component
+ *
+ * A versatile button component with multiple variants and sizes.
+ * Can render as a button or anchor element.
+ */
+
+import './Button.css';
+
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  class?: string;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  disabled = false,
+  fullWidth = false,
+  class: className,
+  type = 'button',
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  class:list={['btn', `btn--${variant}`, `btn--${size}`, { 'btn--full': fullWidth }, className]}
+  href={href}
+  type={!href ? type : undefined}
+  disabled={disabled || undefined}
+  aria-disabled={disabled || undefined}
+  {...rest}
+>
+  <slot />
+</Tag>

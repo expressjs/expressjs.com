@@ -1,0 +1,60 @@
+/**
+ * Typography Tokens
+ * 
+ * Font families, sizes, weights, line heights, letter spacing
+ */
+
+:root {
+  /* Font Families */
+  --font-family-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-family-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
+    'DejaVu Sans Mono', monospace;
+  --font-family-serif: Georgia, Cambria, 'Times New Roman', Times, serif;
+
+  /* Font Sizes - using a modular scale (1.25 ratio) */
+  --font-size-xs: 0.75rem;     /* 12px */
+  --font-size-sm: 0.875rem;    /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-lg: 1.125rem;    /* 18px */
+  --font-size-xl: 1.25rem;     /* 20px */
+  --font-size-2xl: 1.5rem;     /* 24px */
+  --font-size-3xl: 1.875rem;   /* 30px */
+  --font-size-4xl: 2.25rem;    /* 36px */
+  --font-size-5xl: 3rem;       /* 48px */
+  --font-size-6xl: 3.75rem;    /* 60px */
+
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+  /* Letter Spacing */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+
+  /* Semantic text styles */
+  --text-body-font: var(--font-family-sans);
+  --text-body-size: var(--font-size-base);
+  --text-body-line-height: var(--line-height-normal);
+
+  --text-heading-font: var(--font-family-sans);
+  --text-heading-weight: var(--font-weight-bold);
+  --text-heading-line-height: var(--line-height-tight);
+
+  --text-code-font: var(--font-family-mono);
+  --text-code-size: 0.9em;
+}
