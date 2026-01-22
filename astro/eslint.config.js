@@ -2,6 +2,7 @@ import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import eslintAstroPlugin from 'eslint-plugin-astro';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default [
   // Global ignores
@@ -27,4 +28,7 @@ export default [
     },
     rules: jsxA11y.configs.recommended.rules,
   },
+
+  // Prettier - keep as last to override conflicting rules
+  eslintConfigPrettier,
 ];
