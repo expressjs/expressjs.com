@@ -5,7 +5,7 @@
  */
 
 html {
-  font-family: var(--text-body-font);
+  font-family: var(--font-family-body);
   font-size: 62.5%;
   color: var(--color-text-primary);
   background-color: var(--color-bg-primary);
@@ -23,9 +23,9 @@ html {
 }
 
 body {
-  font-family: var(--text-body-font);
-  font-size: var(--text-body-size);
-  line-height: var(--text-body-line-height);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
   background-color: var(--color-bg-primary);
   text-rendering: optimizeLegibility;
 }

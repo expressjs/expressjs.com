@@ -7,19 +7,16 @@
  * Layer order (lowest to highest priority):
  * 1. reset     - CSS reset/normalize
  * 2. base      - Element defaults (html, body, a, etc.)
- * 3. components - Reusable UI components
  * 4. utilities  - One-off overrides
  */
+
+@layer reset, base, utilities;
 
 /* Design Tokens - outside layers (global foundation) */
 @import './tokens/index.css';
 
-
 /* Import layered styles */
-@import './base/_fonts.css' layer(base);
 @import './base/_reset.css' layer(reset);
+@import './base/_fonts.css' layer(base);
 @import './base/_global.css' layer(base);
 @import './utilities/_utilities.css' layer(utilities);
-
-/* Declare layer order */
-@layer reset, base, components, utilities;

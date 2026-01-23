@@ -1,160 +1,159 @@
 /**
  * Typography Component Styles
  */
+.typography {
+  margin: 0;
+}
 
-@layer components {
-  .typography {
-    margin: 0;
-  }
-
-  /* ============================================
+/* ============================================
      VARIANTS
-     ============================================ */
+  ============================================ */
 
-  /* Heading 1 */
-  .typography--h1 {
-    font-size: var(--font-size-5xl);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-  }
+/* Heading 1 */
+.typography--h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: var(--space-h1) 0;
+}
 
-  /* Heading 2 */
-  .typography--h2 {
-    font-size: var(--font-size-4xl);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-tight);
-  }
+/* Heading 2 */
+.typography--h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
 
-  /* Heading 3 */
-  .typography--h3 {
-    font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--line-height-snug);
-  }
+/* Heading 3 */
+.typography--h3 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+}
 
-  /* Heading 4 */
-  .typography--h4 {
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--line-height-snug);
-  }
+/* Heading 4 */
+.typography--h4 {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+}
 
-  /* Body - Default paragraph text */
-  .typography--body {
-    font-family: var(--text-body-font);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    line-height: var(--line-height-normal);
-  }
+/* Body - Default paragraph text */
+.typography--body {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+}
 
-  /* Body Large */
-  .typography--body-lg {
-    font-family: var(--text-body-font);
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-normal);
-    line-height: var(--line-height-relaxed);
-  }
+/* Body Large */
+.typography--body-lg {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-relaxed);
+}
 
-  /* Body Small */
-  .typography--body-sm {
-    font-family: var(--text-body-font);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
-    line-height: var(--line-height-normal);
-  }
+/* Body Small */
+.typography--body-sm {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
 
-  /* Caption - Small helper text */
-  .typography--caption {
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-normal);
-    line-height: var(--line-height-normal);
-  }
+/* Caption - Small helper text */
+.typography--caption {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
 
-  /* Code - Monospace text */
-  .typography--code {
-    font-family: var(--text-code-font);
-    font-size: var(--text-code-size);
-    font-weight: var(--font-weight-normal);
-    line-height: var(--line-height-normal);
-  }
+/* Code - Monospace text */
+.typography--code {
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-code);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
 
-  /* ============================================
+/* ============================================
      COLORS
      ============================================ */
 
-  .typography--color-primary {
-    color: var(--color-text-primary);
-  }
+.typography--color-primary {
+  color: var(--color-text-primary);
+}
 
-  .typography--color-secondary {
-    color: var(--color-text-secondary);
-  }
+.typography--color-secondary {
+  color: var(--color-text-secondary);
+}
 
-  .typography--color-tertiary {
-    color: var(--color-text-tertiary);
-  }
+.typography--color-tertiary {
+  color: var(--color-text-tertiary);
+}
 
-  .typography--color-inverse {
-    color: var(--color-text-inverse);
-  }
+.typography--color-inverse {
+  color: var(--color-text-inverse);
+}
 
-  .typography--color-inactive {
-    color: var(--color-text-inactive);
-  }
+.typography--color-inactive {
+  color: var(--color-text-inactive);
+}
 
-  .typography--color-success {
-    color: var(--color-text-success);
-  }
+.typography--color-success {
+  color: var(--color-text-success);
+}
 
-  .typography--color-warning {
-    color: var(--color-text-warning);
-  }
+.typography--color-warning {
+  color: var(--color-text-warning);
+}
 
-  .typography--color-error {
-    color: var(--color-text-error);
-  }
+.typography--color-error {
+  color: var(--color-text-error);
+}
 
-  .typography--color-inherit {
-    color: inherit;
-  }
+.typography--color-inherit {
+  color: inherit;
+}
 
-  /* ============================================
+/* ============================================
      WEIGHTS (Overrides)
      ============================================ */
-  .typography--weight-light {
-    font-weight: var(--font-weight-light);
-  }
+.typography--weight-light {
+  font-weight: var(--font-weight-light);
+}
 
-  .typography--weight-normal {
-    font-weight: var(--font-weight-normal);
-  }
+.typography--weight-normal {
+  font-weight: var(--font-weight-normal);
+}
 
-  .typography--weight-medium {
-    font-weight: var(--font-weight-medium);
-  }
+.typography--weight-medium {
+  font-weight: var(--font-weight-medium);
+}
 
-  .typography--weight-semibold {
-    font-weight: var(--font-weight-semibold);
-  }
+.typography--weight-semibold {
+  font-weight: var(--font-weight-semibold);
+}
 
-  .typography--weight-bold {
-    font-weight: var(--font-weight-bold);
-  }
+.typography--weight-bold {
+  font-weight: var(--font-weight-bold);
+}
 
-  /* ============================================
+/* ============================================
      ALIGNMENT
      ============================================ */
 
-  .typography--center {
-    text-align: center;
-  }
+.typography--center {
+  text-align: center;
+}
 
-  .typography--right {
-    text-align: right;
-  }
+.typography--right {
+  text-align: right;
+}
 
-  .typography--left {
-    text-align: left;
-  }
+.typography--left {
+  text-align: left;
 }
