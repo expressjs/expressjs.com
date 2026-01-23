@@ -4,4 +4,17 @@
  * Re-export all primitive components for easy importing
  */
 
-export { default as Button } from './Button/Button.astro';
+// Typography
+export {
+  Typography,
+  Display,
+  H1,
+  H2,
+  H3,
+  H4,
+  Body,
+  BodyLg,
+  BodySm,
+  Caption,
+  Code,
+} from './Typography';

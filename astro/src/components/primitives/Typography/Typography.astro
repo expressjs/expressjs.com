@@ -1,0 +1,97 @@
+---
+/**
+ * Typography Primitive Component (Base)
+ *
+ * Low-level polymorphic text component. This is the foundation for all
+ * typography shorthand components (H1, H2, Body, etc.).
+ *
+ * PREFER SHORTHAND COMPONENTS for better DX:
+ * - <H1>Page Title</H1>
+ * - <H1 as="h2">Styled as H1, rendered as h2</H1>
+ * - <Body color="secondary">Subdued text</Body>
+ * - <Code>npm install express</Code>
+ *
+ * Use this base component only when you need full control over variant + element.
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import './Typography.css';
+
+export type TypographyVariant =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'body-lg'
+  | 'body'
+  | 'body-md'
+  | 'body-sm'
+  | 'body-xs'
+  | 'code';
+
+export type TypographyColor = 'primary' | 'secondary' | 'tertiary' | 'inverse' | 'inactive' | 'error' | 'success' | 'warning';
+
+export type TypographyWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
+
+export type TypographyHTMLTag =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'p'
+  | 'span'
+  | 'small'
+  | 'label'
+  | 'code'
+  | 'pre';
+
+export interface TypographyBaseProps {
+  /** HTML element to render */
+  as?: TypographyHTMLTag;
+  /** Typography style variant */
+  variant?: TypographyVariant;
+  /** Text color */
+  color?: TypographyColor;
+  /** Font weight override */
+  weight?: TypographyWeight;
+  /** Center text alignment */
+  center?: boolean;
+  /** Left text alignment */
+  left?: boolean;
+  /** Right text alignment */
+  right?: boolean;
+}
+
+type Props = TypographyBaseProps & HTMLAttributes<'p'>;
+
+const {
+  as: Tag = 'p',
+  variant = 'body',
+  color = 'primary',
+  center,
+  left,
+  right,
+  weight,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const classes = [
+  'typography',
+  `typography--${variant}`,
+  `typography--color-${color}`,
+  weight && `typography--weight-${weight}`,
+  center && 'typography--center',
+  left && 'typography--left',
+  right && 'typography--right',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<Tag class={classes} {...rest}>
+  <slot />
+</Tag>

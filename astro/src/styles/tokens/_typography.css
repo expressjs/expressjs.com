@@ -1,31 +1,32 @@
 /**
  * Typography Tokens
- * 
- * Font families, sizes, weights, line heights, letter spacing
+ *
+ * Primary font: Helvetica Neue
+ * Code font: JetBrains Mono
  */
 
 :root {
   /* Font Families */
   --font-family-sans:
-    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-    sans-serif;
+    'Helvetica Neue', Helvetica, Arial, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-family-mono:
-    ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
-  --font-family-serif: Georgia, Cambria, 'Times New Roman', Times, serif;
+    'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
 
   /* Font Sizes - using a modular scale (1.25 ratio) */
-  --font-size-xs: 0.75rem; /* 12px */
-  --font-size-sm: 0.875rem; /* 14px */
-  --font-size-base: 1rem; /* 16px */
-  --font-size-lg: 1.125rem; /* 18px */
-  --font-size-xl: 1.25rem; /* 20px */
-  --font-size-2xl: 1.5rem; /* 24px */
-  --font-size-3xl: 1.875rem; /* 30px */
-  --font-size-4xl: 2.25rem; /* 36px */
-  --font-size-5xl: 3rem; /* 48px */
-  --font-size-6xl: 3.75rem; /* 60px */
+  --font-size-xxs: 1rem; /* 10px */
+  --font-size-xs: 1.2rem; /* 12px */
+  --font-size-sm: 1.4rem; /* 14px */
+  --font-size-base: 1.6rem; /* 16px */
+  --font-size-lg: 1.8rem; /* 18px */
+  --font-size-xl: 2rem; /* 20px */
+  --font-size-2xl: 2.4rem; /* 24px */
+  --font-size-3xl: 3rem; /* 30px */
+  --font-size-4xl: 3.6rem; /* 36px */
+  --font-size-5xl: 4.8rem; /* 48px */
+  --font-size-6xl: 6rem; /* 60px */
 
   /* Font Weights */
+  --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;

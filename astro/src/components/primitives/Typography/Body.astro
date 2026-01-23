@@ -1,0 +1,30 @@
+---
+/**
+ * Body - Default paragraph text
+ *
+ * @example
+ * <Body>Regular paragraph text.</Body>
+ * <Body as="span">Inline body text</Body>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import Typography from './Typography.astro';
+import type { TypographyColor, TypographyWeight } from './Typography.astro';
+
+type BaseProps = {
+  color?: TypographyColor;
+  weight?: TypographyWeight;
+};
+
+type Props =
+  | ({ as?: 'p' } & BaseProps & HTMLAttributes<'p'>)
+  | ({ as: 'span' } & BaseProps & HTMLAttributes<'span'>)
+  | ({ as: 'small' } & BaseProps & HTMLAttributes<'small'>)
+  | ({ as: 'label' } & BaseProps & HTMLAttributes<'label'>);
+
+const { as = 'p', ...rest } = Astro.props;
+---
+
+<Typography as={as} variant="body" {...rest}>
+  <slot />
+</Typography>

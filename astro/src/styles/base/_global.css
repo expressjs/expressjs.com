@@ -5,19 +5,29 @@
  */
 
 html {
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-base);
-  color: var(--color-foreground);
-  background-color: var(--color-background);
+  font-family: var(--text-body-font);
+  font-size: 62.5%;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  scroll-behavior: smooth;
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
+  box-sizing: border-box;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
 }
 
 body {
   font-family: var(--text-body-font);
   font-size: var(--text-body-size);
   line-height: var(--text-body-line-height);
+  background-color: var(--color-bg-primary);
+  text-rendering: optimizeLegibility;
 }
 
 /* Headings */
@@ -27,10 +37,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--text-heading-font);
   font-weight: var(--text-heading-weight);
   line-height: var(--text-heading-line-height);
-  color: var(--color-foreground);
 }
 
 h1 {
@@ -73,12 +81,6 @@ a:visited {
   color: var(--color-link-visited);
 }
 
-/* Focus visible - accessible focus styles */
-:focus-visible {
-  outline: none;
-  box-shadow: var(--shadow-ring);
-}
-
 /* Code */
 code,
 kbd,
@@ -112,15 +114,14 @@ pre code {
 /* Blockquote */
 blockquote {
   padding-left: var(--space-4);
-  border-left: var(--border-width-4) solid var(--color-border-strong);
-  color: var(--color-foreground-muted);
+  border-left: var(--border-width-4) solid var(--color-border-primary);
   font-style: italic;
 }
 
 /* Horizontal rule */
 hr {
   border: none;
-  border-top: var(--border-width-1) solid var(--color-border);
+  border-top: var(--border-width-1) solid var(--color-border-primary);
   margin: var(--space-8) 0;
 }
 
@@ -134,23 +135,22 @@ th,
 td {
   padding: var(--space-3) var(--space-4);
   text-align: left;
-  border-bottom: var(--border-width-1) solid var(--color-border);
+  border-bottom: var(--border-width-1) solid var(--color-border-primary);
 }
 
 th {
   font-weight: var(--font-weight-semibold);
-  color: var(--color-foreground);
 }
 
 /* Selection */
 ::selection {
-  background-color: var(--sky-200);
-  color: var(--sky-900);
+  background-color: var(--sky-50);
+  color: var(--sky-800);
 }
 
 @media (prefers-color-scheme: dark) {
   ::selection {
     background-color: var(--sky-800);
-    color: var(--sky-100);
+    color: var(--sky-50);
   }
 }

@@ -1,0 +1,30 @@
+---
+/**
+ * BodySm - Smaller body text / fine print
+ *
+ * @example
+ * <BodySm>Fine print or secondary content.</BodySm>
+ * <BodySm color="secondary">Subdued helper text</BodySm>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import Typography from './Typography.astro';
+import type { TypographyColor, TypographyWeight } from './Typography.astro';
+
+type BaseProps = {
+  color?: TypographyColor;
+  weight?: TypographyWeight;
+};
+
+type Props =
+  | ({ as?: 'small' } & BaseProps & HTMLAttributes<'small'>)
+  | ({ as: 'p' } & BaseProps & HTMLAttributes<'p'>)
+  | ({ as: 'span' } & BaseProps & HTMLAttributes<'span'>)
+  | ({ as: 'label' } & BaseProps & HTMLAttributes<'label'>);
+
+const { as = 'small', ...rest } = Astro.props;
+---
+
+<Typography as={as} variant="body-sm" {...rest}>
+  <slot />
+</Typography>

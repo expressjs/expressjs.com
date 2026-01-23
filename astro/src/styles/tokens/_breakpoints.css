@@ -1,29 +1,47 @@
 /**
  * Breakpoint Tokens
  *
- * Note: CSS custom properties can't be used in media queries directly.
- * These are documented here for reference and used via @custom-media (future CSS)
- * or referenced in JavaScript/build tools.
+ * Design breakpoints:
+ * - Mobile:  < 768px
+ * - Tablet:  768px - 1439px
+ * - Desktop: >= 1440px
  *
- * Mobile-first approach:
- * - sm: 640px   - Small devices (landscape phones)
- * - md: 768px   - Medium devices (tablets)
- * - lg: 1024px  - Large devices (desktops)
- * - xl: 1280px  - Extra large devices (large desktops)
- * - 2xl: 1536px - 2X large devices (larger desktops)
+ * Usage:
+ * @media (--xs)  { ... }  - Mobile only
+ * @media (--md)  { ... }  - Tablet only
+ * @media (--lg) { ... }  - Desktop only
+ * @media (--md-up) { ... } - Tablet and above
+ * @media (--md-down) { ... } - Tablet and below
  */
 
-:root {
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
+/* ============================================
+   CUSTOM MEDIA QUERIES
+   ============================================ */
 
-  /* Container max widths */
-  --container-sm: 640px;
-  --container-md: 768px;
-  --container-lg: 1024px;
-  --container-xl: 1280px;
-  --container-2xl: 1400px;
+/* Device-specific (exclusive) */
+@custom-media --xs (width < 768px);
+@custom-media --md (768px <= width < 1440px);
+@custom-media --lg (width >= 1440px);
+
+/* Range queries (inclusive) */
+@custom-media --md-up (width >= 768px);
+@custom-media --md-down (width < 1440px);
+@custom-media --lg-up (width >= 1440px);
+
+/* ============================================
+   BREAKPOINT VALUES (for JavaScript)
+
+   Note: CSS custom properties cannot be used in
+   @media or @custom-media queries. These are exposed
+   for documentation (to have a human-readable reference) and
+   for JavaScript access via getComputedStyle().
+
+   Example:
+   const bp = getComputedStyle(document.documentElement)
+     .getPropertyValue('--breakpoint-md');
+   ============================================ */
+
+:root {
+  --breakpoint-xs: 768px;
+  --breakpoint-md: 1440px;
 }
