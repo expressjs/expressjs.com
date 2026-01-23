@@ -47,6 +47,9 @@
 
   /* Component specific */
   --space-h1: var(--space-12);
+  --space-h2: var(--space-8);
+  --space-h3: var(--space-6);
+  --space-h4: var(--space-6);
   --space-body: var(--space-5);
 
   @media (--lg) {

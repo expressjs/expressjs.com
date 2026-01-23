@@ -21,22 +21,28 @@
 /* Heading 2 */
 .typography--h2 {
   font-size: var(--font-size-h2);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: var(--space-h2) 0;
 }
 
 /* Heading 3 */
 .typography--h3 {
   font-size: var(--font-size-h3);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: var(--space-h3) 0;
 }
 
 /* Heading 4 */
 .typography--h4 {
   font-size: var(--font-size-h4);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: var(--space-h4) 0;
 }
 
 /* Body - Default paragraph text */
@@ -46,6 +52,7 @@
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-body);
   letter-spacing: var(--letter-spacing-body);
+  margin: var(--space-body) 0;
 }
 
 /* Body Large */
@@ -54,21 +61,34 @@
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-relaxed);
+  margin: var(--space-body) 0;
+}
+
+/* Body Medium */
+.typography--body-md {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  margin: var(--space-body) 0;
 }
 
 /* Body Small */
 .typography--body-sm {
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-normal);
-  line-height: var(--line-height-normal);
-}
-
-/* Caption - Small helper text */
-.typography--caption {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
+  margin: var(--space-body) 0;
+}
+
+/* Body Extra Small */
+.typography--body-xs {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xxs);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  margin: var(--space-body) 0;
 }
 
 /* Code - Monospace text */
