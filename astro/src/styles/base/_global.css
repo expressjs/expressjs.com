@@ -141,16 +141,3 @@ td {
 th {
   font-weight: var(--font-weight-semibold);
 }
-
-/* Selection */
-::selection {
-  background-color: var(--sky-50);
-  color: var(--sky-800);
-}
-
-@media (prefers-color-scheme: dark) {
-  ::selection {
-    background-color: var(--sky-800);
-    color: var(--sky-50);
-  }
-}

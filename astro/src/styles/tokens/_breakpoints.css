@@ -26,7 +26,6 @@
 /* Range queries (inclusive) */
 @custom-media --md-up (width >= 768px);
 @custom-media --md-down (width < 1440px);
-@custom-media --lg-up (width >= 1440px);
 
 /* ============================================
    BREAKPOINT VALUES (for JavaScript)

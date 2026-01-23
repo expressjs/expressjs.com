@@ -58,21 +58,20 @@ const {
   class: className,
   ...rest
 } = Astro.props;
-
-const classes = [
-  'typography',
-  `typography--${variant}`,
-  `typography--color-${color}`,
-  weight && `typography--weight-${weight}`,
-  center && 'typography--center',
-  left && 'typography--left',
-  right && 'typography--right',
-  className,
-]
-  .filter(Boolean)
-  .join(' ');
 ---
 
-<Tag class={classes} {...rest}>
+<Tag
+  class:list={[
+    'typography',
+    `typography--${variant}`,
+    `typography--color-${color}`,
+    weight && `typography--weight-${weight}`,
+    center && 'typography--center',
+    left && 'typography--left',
+    right && 'typography--right',
+    className,
+  ]}
+  {...rest}
+>
   <slot />
 </Tag>

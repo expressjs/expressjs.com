@@ -1,0 +1,13 @@
+/**
+ * Container Component Styles
+ */
+
+.container {
+  width: 90%;
+  max-width: 1440px;
+  margin-inline: auto;
+
+  @media (--lg) {
+    width: 95%;
+  }
+}

@@ -1,0 +1,28 @@
+---
+/**
+ * Container Layout Primitive
+ *
+ * Centers content with a max-width constraint.
+ * Use for page-level content wrapping.
+ *
+ * @example
+ * <Container>
+ *   <H1>Page Title</H1>
+ *   <Body>Content goes here</Body>
+ * </Container>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import './Container.css';
+
+interface Props extends HTMLAttributes<'div'> {
+  /** HTML element to render */
+  as?: 'div' | 'section' | 'article' | 'main' | 'header' | 'footer' | 'aside' | 'nav';
+}
+
+const { as: Tag = 'div', class: className, ...rest } = Astro.props;
+---
+
+<Tag class:list={['container', className]} {...rest}>
+  <slot />
+</Tag>

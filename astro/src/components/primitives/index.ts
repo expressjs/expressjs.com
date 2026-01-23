@@ -7,7 +7,6 @@
 // Typography
 export {
   Typography,
-  Display,
   H1,
   H2,
   H3,
@@ -15,6 +14,10 @@ export {
   Body,
   BodyLg,
   BodySm,
-  Caption,
+  BodyMd,
+  BodyXs,
   Code,
 } from './Typography';
+export {
+  Container
+} from './Container';

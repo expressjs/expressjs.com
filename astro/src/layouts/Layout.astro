@@ -1,4 +1,5 @@
 ---
+import { Container } from '@components/primitives';
 import '@styles/main.css';
 
 interface Props {
@@ -24,6 +25,8 @@ const {
     <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <Container>
+      <slot />
+    </Container>
   </body>
 </html>

@@ -10,13 +10,9 @@
  * 4. utilities  - One-off overrides
  */
 
-@layer reset, base, utilities;
-
 /* Design Tokens - outside layers (global foundation) */
 @import './tokens/index.css';
-
-/* Import layered styles */
-@import './base/_reset.css' layer(reset);
-@import './base/_fonts.css' layer(base);
-@import './base/_global.css' layer(base);
-@import './utilities/_utilities.css' layer(utilities);
+@import './base/_reset.css';
+@import './base/_fonts.css';
+@import './base/_global.css';
+@import './utilities/_utilities.css';
