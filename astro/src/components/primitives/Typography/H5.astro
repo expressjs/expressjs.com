@@ -1,9 +1,9 @@
 ---
 /**
- * BodyLg - Lead/intro paragraph text
+ * H5 - Lead/intro paragraph text
  *
  * @example
- * <BodyLg>Introduction paragraph with larger text.</BodyLg>
+ * <H5>Introduction paragraph with larger text.</H5>
  */
 
 import type { HTMLAttributes } from 'astro/types';
@@ -16,7 +16,8 @@ type BaseProps = {
 };
 
 type Props =
-  | ({ as?: 'p' } & BaseProps & HTMLAttributes<'p'>)
+  | ({ as?: 'h5' } & BaseProps & HTMLAttributes<'h5'>)
+  | ({ as: 'p' } & BaseProps & HTMLAttributes<'p'>)
   | ({ as: 'span' } & BaseProps & HTMLAttributes<'span'>)
   | ({ as: 'small' } & BaseProps & HTMLAttributes<'small'>)
   | ({ as: 'label' } & BaseProps & HTMLAttributes<'label'>);
@@ -24,6 +25,6 @@ type Props =
 const { as = 'p', ...rest } = Astro.props;
 ---
 
-<Typography as={as} variant="body-lg" {...rest}>
+<Typography as={as} variant="h5" {...rest}>
   <slot />
 </Typography>

@@ -20,12 +20,12 @@
 
 /* Device-specific (exclusive) */
 @custom-media --xs (width < 768px);
+@custom-media --md-up (width >= 768px);
 @custom-media --md (768px <= width < 1440px);
 @custom-media --lg (width >= 1440px);
+@custom-media --lg-down (width < 1440px);
 
 /* Range queries (inclusive) */
-@custom-media --md-up (width >= 768px);
-@custom-media --md-down (width < 1440px);
 
 /* ============================================
    BREAKPOINT VALUES (for JavaScript)

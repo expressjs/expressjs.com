@@ -17,16 +17,13 @@
 import type { HTMLAttributes } from 'astro/types';
 import './Typography.css';
 
-export type TypographyVariant =
-  'h1' | 'h2' | 'h3' | 'h4' | 'body-lg' | 'body' | 'body-md' | 'body-sm' | 'body-xs' | 'code';
+export type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'body-lg' | 'body' | 'body-md' | 'body-sm' | 'body-xs' | 'code';
 
-export type TypographyColor =
-  'primary' | 'secondary' | 'tertiary' | 'inverse' | 'inactive' | 'error' | 'success' | 'warning';
+export type TypographyColor = 'primary' | 'secondary' | 'tertiary' | 'inverse' | 'inactive' | 'error' | 'success' | 'warning';
 
 export type TypographyWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
 
-export type TypographyHTMLTag =
-  'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'small' | 'label' | 'code' | 'pre';
+export type TypographyHTMLTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'small' | 'label' | 'code' | 'pre';
 
 export interface TypographyBaseProps {
   /** HTML element to render */
@@ -62,13 +59,13 @@ const {
 
 <Tag
   class:list={[
-    'typography',
-    `typography--${variant}`,
-    `typography--color-${color}`,
-    weight && `typography--weight-${weight}`,
-    center && 'typography--center',
-    left && 'typography--left',
-    right && 'typography--right',
+    'text',
+    `${variant}`,
+    `text--color-${color}`,
+    weight && `text--weight-${weight}`,
+    center && 'text-center',
+    left && 'text-left',
+    right && 'text-right',
     className,
   ]}
   {...rest}

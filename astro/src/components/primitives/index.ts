@@ -5,19 +5,8 @@
  */
 
 // Typography
-export {
-  Typography,
-  H1,
-  H2,
-  H3,
-  H4,
-  Body,
-  BodyLg,
-  BodySm,
-  BodyMd,
-  BodyXs,
-  Code,
-} from './Typography';
-export {
-  Container
-} from './Container';
+export { Typography, H1, H2, H3, H4, H5, Body, BodySm, BodyMd, BodyXs, Code } from './Typography';
+
+// Layout
+export { Container } from './Container';
+export { Grid, Col, Flex } from './Grid';
