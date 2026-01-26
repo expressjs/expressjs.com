@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Roteamento básico no Express
-description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
+description: Aprenda os fundamentos do roteamento em aplicações Express.js, incluindo como definir rotas, lidar com métodos HTTP e criar manipuladores de rotas para seu servidor web.
 menu: starter
 order: 4
 redirect_from: "  "
@@ -26,7 +26,7 @@ app.METHOD(PATH, HANDLER)
 Onde:
 
 - `app` é uma instância do `express`.
-- `METHOD` is an [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in lowercase.
+- `METHOD` é um [método de solicitação HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), em minúsculas.
 - `PATH` é um caminho no servidor.
 - `HANDLER` é a função executada quando a rota é correspondida.
 
@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-Respond to a POST request on the root route (`/`), the application's home page:
+Responder a uma solicitação POST na rota raiz (`/`) com a página inicial do aplicativo:
 
 ```js
 app.post('/', (req, res) => {
