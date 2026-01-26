@@ -141,10 +141,6 @@ a:hover {
   color: var(--color-link-hover);
 }
 
-a:visited {
-  color: var(--color-link-visited);
-}
-
 /* Code */
 code,
 kbd,
