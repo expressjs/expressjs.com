@@ -96,7 +96,11 @@
   font-family: var(--font-family-code);
   font-size: var(--font-size-code);
   font-weight: var(--font-weight-normal);
-  line-height: var(--line-height-normal);
+  line-height: var(--line-height-snug);
+  background-color: var(--color-bg-tertiary);
+  padding: var(--space-0-5) var(--space-1);
+  border-radius: var(--radius-base);
+  letter-spacing: var(--letter-spacing-normal);
 }
 
 /* ============================================

@@ -14,13 +14,13 @@
 
   /* Border Radius */
   --radius-none: 0;
-  --radius-sm: 0.125rem; /* 2px */
-  --radius-base: 0.25rem; /* 4px */
-  --radius-md: 0.375rem; /* 6px */
-  --radius-lg: 0.5rem; /* 8px */
-  --radius-xl: 0.75rem; /* 12px */
-  --radius-2xl: 1rem; /* 16px */
-  --radius-3xl: 1.5rem; /* 24px */
+  --radius-sm: 0.2rem; /* 2px */
+  --radius-base: 0.4rem; /* 4px */
+  --radius-md: 0.6rem; /* 6px */
+  --radius-lg: 0.8rem; /* 8px */
+  --radius-xl: 1.2rem; /* 12px */
+  --radius-2xl: 1.6rem; /* 16px */
+  --radius-3xl: 2.4rem; /* 24px */
   --radius-full: 9999px;
 
   /* Semantic */
