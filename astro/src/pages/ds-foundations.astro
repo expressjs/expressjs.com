@@ -22,6 +22,7 @@ import {
   BodyXs,
   Code,
 } from '@components/primitives';
+import { ThemeSwitcher } from '@components/patterns';
 ---
 
 <Layout title="Design System Foundations">
@@ -40,6 +41,7 @@ import {
         <li><a href="#spacing" class="ds-nav__link">Spacing</a></li>
         <li><a href="#grid" class="ds-nav__link">Grid</a></li>
         <li><a href="#breakpoints" class="ds-nav__link">Breakpoints</a></li>
+        <li><ThemeSwitcher /></li>
       </ul>
     </nav>
 
@@ -338,13 +340,13 @@ import {
           </div>
           <div class="ds-color-grid ds-color-grid--large">
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-primary);">
-              <span style="color: white;">text-primary</span>
+              <span>text-primary</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-secondary);">
-              <span style="color: white;">text-secondary</span>
+              <span>text-secondary</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-tertiary);">
-              <span style="color: white;">text-tertiary</span>
+              <span>text-tertiary</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-inverse);">
               <span>text-inverse</span>
@@ -353,40 +355,40 @@ import {
               <span>text-inactive</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-success);">
-              <span style="color: white;">text-success</span>
+              <span>text-success</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-warning);">
-              <span style="color: white;">text-warning</span>
+              <span>text-warning</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-error);">
-              <span style="color: white;">text-error</span>
+              <span>text-error</span>
             </div>
           </div>
           <!-- add section for border color tokens -->
           <div class="ds-color-grid ds-color-grid--large">
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-primary);">
-              <span style="color: white;">border-primary</span>
+              <span>border-primary</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-secondary);">
-              <span style="color: white;">border-secondary</span>
+              <span>border-secondary</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-tertiary);">
-              <span style="color: white;">border-tertiary</span>
+              <span>border-tertiary</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-inverse);">
               <span>border-inverse</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-inactive);">
-              <span style="color: white;">border-inactive</span>
+              <span>border-inactive</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-success);">
-              <span style="color: white;">border-success</span>
+              <span>border-success</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-warning);">
-              <span style="color: white;">border-warning</span>
+              <span>border-warning</span>
             </div>
             <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-error);">
-              <span style="color: white;">border-error</span>
+              <span>border-error</span>
             </div>
           </div>
         </div>
@@ -514,14 +516,14 @@ import {
       <div class="ds-subsection">
         <H3>Utility Classes</H3>
         <div class="ds-demo ds-demo--col">
-          <Code>.u-grid - Display grid</Code>
-          <Code>.u-grid-cols-{'{1,2,3,4,6,12}'} - Grid template columns</Code>
-          <Code>.u-col-span-{'{1,2,3,4,6,12,full}'} - Column span</Code>
-          <Code>.u-flex - Display flex</Code>
-          <Code>.u-flex-{'{row,col}'} - Flex direction</Code>
-          <Code>.u-items-{'{start,center,end}'} - Align items</Code>
-          <Code>.u-justify-{'{start,center,end,between}'} - Justify content</Code>
-          <Code>.u-gap-{'{1,2,3,4,6,8}'} - Gap spacing</Code>
+          <Code>.grid - Display grid</Code>
+          <Code>.grid-cols-{'{1,2,3,4,6,12}'} - Grid template columns</Code>
+          <Code>.col-span-{'{1,2,3,4,6,12,full}'} - Column span</Code>
+          <Code>.flex - Display flex</Code>
+          <Code>.flex-{'{row,col}'} - Flex direction</Code>
+          <Code>.items-{'{start,center,end}'} - Align items</Code>
+          <Code>.justify-{'{start,center,end,between}'} - Justify content</Code>
+          <Code>.gap-{'{1,2,3,4,6,8}'} - Gap spacing</Code>
         </div>
       </div>
     </section>
@@ -568,6 +570,7 @@ import {
       margin: 0;
       padding: 0;
       display: flex;
+      align-items: center;
       gap: var(--space-1);
       overflow-x: auto;
       max-width: 1440px;

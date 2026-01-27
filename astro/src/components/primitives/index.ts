@@ -1,5 +1,5 @@
 /**
- * Primitives Index
+ * Primitives Components
  *
  * Re-export all primitive components for easy importing
  */
