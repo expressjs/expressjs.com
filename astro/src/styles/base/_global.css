@@ -146,8 +146,14 @@ code,
 kbd,
 samp,
 pre {
-  font-family: var(--text-code-font);
-  font-size: var(--text-code-size);
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-code);
+
+  *,
+  *:before,
+  *:after {
+    font-family: inherit;
+  }
 }
 
 code,
@@ -205,4 +211,11 @@ td {
 
 th {
   font-weight: var(--font-weight-semibold);
+}
+
+/* Lists */
+ul,
+ol {
+  margin: var(--space-body) 0;
+  padding-left: var(--space-6);
 }

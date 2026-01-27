@@ -1,0 +1,43 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { menuSections, type MenuSection } from '@config/menu';
+import { getDocsBySection } from '@utils/content';
+
+const sections = Object.entries(menuSections);
+---
+
+<Layout title="Express Documentation">
+  <div>
+    <h1>Express Documentation</h1>
+
+    <div>
+      {
+        sections.map(async ([key, label]) => {
+          const docs = await getDocsBySection(key as MenuSection, 'en');
+          const firstDocs = docs.slice(0, 5);
+
+          return (
+            <section>
+              <h2>{label}</h2>
+              <ul>
+                {firstDocs.map((doc) => {
+                  const slug = doc.id.replace(`en/${key}/`, '').replace(/\.mdx?$/, '');
+                  return (
+                    <li>
+                      <a href={`/en/${key}/${slug}`}>{doc.data.title}</a>
+                    </li>
+                  );
+                })}
+                {docs.length > 5 && (
+                  <li class="view-all">
+                    <a href={`/en/${key}`}>View all →</a>
+                  </li>
+                )}
+              </ul>
+            </section>
+          );
+        })
+      }
+    </div>
+  </div>
+</Layout>

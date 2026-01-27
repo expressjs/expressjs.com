@@ -90,7 +90,7 @@
   /* Backgrounds */
   --color-bg-primary: light-dark(var(--white), var(--black));
   --color-bg-secondary: light-dark(var(--gray-50), var(--gray-950));
-  --color-bg-tertiary: light-dark(var(--gray-100), var(--gray-900));
+  --color-bg-tertiary: light-dark(var(--gray-100), var(--gray-800));
   --color-bg-inverse: light-dark(var(--gray-900), var(--gray-100));
   --color-bg-inactive: light-dark(var(--gray-200), var(--gray-800));
   --color-bg-info: light-dark(var(--blue-50), var(--blue-950));

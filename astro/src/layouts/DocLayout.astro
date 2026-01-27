@@ -1,0 +1,35 @@
+---
+import { Body, Container, Flex } from '@components/primitives';
+import Layout from './Layout.astro';
+import { menuSections } from '@config/menu';
+import type { MenuSection } from '@config/menu';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string;
+  description?: string;
+  section: MenuSection;
+}
+
+const { title, description, section } = Astro.props;
+
+const sectionTitle = menuSections[section] || section;
+---
+
+<Layout title={`${title} - Express`} description={description}>
+  <Container>
+    <main>
+      <header>
+        <Flex gap="1" align="center">
+          <Body as="span">Docs</Body>
+          <Icon name="ph:caret-right" />
+          <Body as="span">{sectionTitle}</Body>
+        </Flex>
+      </header>
+
+      <article>
+        <slot />
+      </article>
+    </main>
+  </Container>
+</Layout>
