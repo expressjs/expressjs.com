@@ -23,6 +23,16 @@ import {
   Code,
 } from '@components/primitives';
 import { ThemeSwitcher } from '@components/patterns';
+import { getLangFromUrl } from '@i18n/utils';
+import { languages } from '@i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <Layout title="Design System Foundations">
@@ -34,7 +44,7 @@ import { ThemeSwitcher } from '@components/patterns';
 
     <nav class="ds-nav">
       <ul class="ds-nav__list">
-        <li><a href="/" class="ds-nav__link">← Home</a></li>
+        <li><a href={`/${lang}`} class="ds-nav__link">← Home</a></li>
         <li><a href="#typography" class="ds-nav__link">Typography</a></li>
         <li><a href="#iconography" class="ds-nav__link">Iconography</a></li>
         <li><a href="#colors" class="ds-nav__link">Colors</a></li>

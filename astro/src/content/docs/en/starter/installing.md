@@ -10,8 +10,8 @@ order: 1
 
 Assuming you've already installed [Node.js](https://nodejs.org/), create a directory to hold your application, and make that your working directory.
 
-- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
-- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
+- [Express 4.x](/en/4x/api) requires Node.js 0.10 or higher.
+- [Express 5.x](/en/5x/api) requires Node.js 18 or higher.
 
 ```bash
 $ mkdir myapp

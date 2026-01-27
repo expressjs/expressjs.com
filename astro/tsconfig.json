@@ -11,6 +11,7 @@
       "@assets/*": ["src/assets/*"],
       "@styles/*": ["src/styles/*"],
       "@config/*": ["src/config/*"],
+      "@i18n/*": ["src/i18n/*"],
       "@utils/*": ["src/utils/*"]
     }
   }

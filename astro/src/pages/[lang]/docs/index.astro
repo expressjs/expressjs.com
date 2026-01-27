@@ -5,6 +5,17 @@ import { getDocsBySection } from '@utils/content';
 import { Container } from '@components/primitives';
 
 const sections = Object.entries(menuSections);
+
+import { getLangFromUrl } from '@i18n/utils';
+import { languages } from '@i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <Layout title="Express Documentation">
@@ -14,7 +25,7 @@ const sections = Object.entries(menuSections);
     <div>
       {
         sections.map(async ([key, label]) => {
-          const docs = await getDocsBySection(key as MenuSection, 'en');
+          const docs = await getDocsBySection(key as MenuSection, lang);
           const firstDocs = docs.slice(0, 5);
 
           return (
@@ -22,16 +33,16 @@ const sections = Object.entries(menuSections);
               <h2>{label}</h2>
               <ul>
                 {firstDocs.map((doc) => {
-                  const slug = doc.id.replace(`en/${key}/`, '').replace(/\.mdx?$/, '');
+                  const slug = doc.id.replace(`${lang}/${key}/`, '').replace(/\.mdx?$/, '');
                   return (
                     <li>
-                      <a href={`/en/${key}/${slug}`}>{doc.data.title}</a>
+                      <a href={`/${lang}/${key}/${slug}`}>{doc.data.title}</a>
                     </li>
                   );
                 })}
                 {docs.length > 5 && (
                   <li class="view-all">
-                    <a href={`/en/${key}`}>View all →</a>
+                    <a href={`/${lang}/${key}`}>View all →</a>
                   </li>
                 )}
               </ul>
