@@ -13,10 +13,12 @@ interface Props {
 
 const { title, description, section } = Astro.props;
 
+console.log('Astro props', Astro.props);
+
 const sectionTitle = menuSections[section] || section;
 ---
 
-<Layout title={`${title} - Express`} description={description}>
+<Layout title={title} description={description}>
   <Container>
     <main>
       <header>

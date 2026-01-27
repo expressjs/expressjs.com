@@ -2,12 +2,13 @@
 import Layout from '@layouts/Layout.astro';
 import { menuSections, type MenuSection } from '@config/menu';
 import { getDocsBySection } from '@utils/content';
+import { Container } from '@components/primitives';
 
 const sections = Object.entries(menuSections);
 ---
 
 <Layout title="Express Documentation">
-  <div>
+  <Container>
     <h1>Express Documentation</h1>
 
     <div>
@@ -39,5 +40,5 @@ const sections = Object.entries(menuSections);
         })
       }
     </div>
-  </div>
+  </Container>
 </Layout>
