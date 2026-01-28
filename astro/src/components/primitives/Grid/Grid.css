@@ -323,6 +323,66 @@
 }
 
 /* ============================================
+   FLEX ITEM COMPONENT
+   ============================================ */
+
+/* Flex Grow */
+.flex-item--grow-0 {
+  flex-grow: 0;
+}
+.flex-item--grow-1 {
+  flex-grow: 1;
+}
+
+/* Flex Shrink */
+.flex-item--shrink-0 {
+  flex-shrink: 0;
+}
+.flex-item--shrink-1 {
+  flex-shrink: 1;
+}
+
+/* Flex Basis */
+.flex-item--basis-0 {
+  flex-basis: 0;
+}
+.flex-item--basis-auto {
+  flex-basis: auto;
+}
+.flex-item--basis-full {
+  flex-basis: 100%;
+}
+.flex-item--basis-1\/2 {
+  flex-basis: 50%;
+}
+.flex-item--basis-1\/3 {
+  flex-basis: 33.333333%;
+}
+.flex-item--basis-2\/3 {
+  flex-basis: 66.666667%;
+}
+.flex-item--basis-1\/4 {
+  flex-basis: 25%;
+}
+.flex-item--basis-3\/4 {
+  flex-basis: 75%;
+}
+
+/* Flex Shorthand */
+.flex-item--flex-1 {
+  flex: 1 1 0%;
+}
+.flex-item--flex-auto {
+  flex: 1 1 auto;
+}
+.flex-item--flex-initial {
+  flex: 0 1 auto;
+}
+.flex-item--flex-none {
+  flex: none;
+}
+
+/* ============================================
    UTILITY CLASSES
    ============================================ */
 

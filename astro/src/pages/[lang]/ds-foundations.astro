@@ -12,6 +12,7 @@ import {
   Grid,
   Col,
   Flex,
+  FlexItem,
   H1,
   H2,
   H3,
@@ -21,9 +22,10 @@ import {
   BodyMd,
   BodySm,
   BodyXs,
-  Code,
   Button,
+  Code,
 } from '@components/primitives';
+import { Code as CodeBlock } from 'astro:components';
 import { getLangFromUrl } from '@i18n/utils';
 import { languages } from '@i18n/ui';
 
@@ -89,7 +91,7 @@ const lang = getLangFromUrl(Astro.url);
     </div>
 
     <div class="ds-subsection">
-      <H3>Code</H3>
+      <H3>Inline Code</H3>
       <div class="ds-demo">
         <Code>const express = require('express');</Code>
         <Body>Inline code: Use <Code as="code">npm install express</Code> to install.</Body>
@@ -98,7 +100,7 @@ const lang = getLangFromUrl(Astro.url);
 
     <div class="ds-subsection">
       <H3>Weights</H3>
-      <Flex direction="row" gap="4" justify="center">
+      <Flex direction="row" gap="4">
         <Body weight="light">Light 300</Body>
         <Body weight="normal">Normal 400</Body>
         <Body weight="medium">Medium 500</Body>
@@ -161,6 +163,19 @@ const lang = getLangFromUrl(Astro.url);
         </div>
       </div>
     </div>
+    <H3>Usage</H3>
+
+    <CodeBlock
+      lang="js"
+      wrap
+      code={`
+import { H1, Body, Code } from '@components/primitives';
+
+<H1 as="h2">h2 styled as H1</H1>
+<Body>This is body text. It renders a paragraph by default.</Body>
+<Code>const express = require('express');</Code>
+      `}
+    />
   </section>
 
   <!-- ICONS -->
@@ -186,11 +201,16 @@ const lang = getLangFromUrl(Astro.url);
 
     <div class="ds-subsection">
       <H3>Usage</H3>
-      <div class="ds-demo ds-demo--col">
-        <Code>{'import { Icon } from "astro-icon/components";'}</Code>
-        <Code>{'<Icon name="ph:airplane" size="24" />'}</Code>
-        <Code>{'<Icon name="ph:check" color="var(--color-icon-primary)" />'}</Code>
-      </div>
+      <CodeBlock
+        lang="js"
+        wrap
+        code={`
+import { Icon } from "astro-icon/components";
+
+<Icon name="ph:airplane" size="24" />
+<Icon name="ph:check" color="var(--color-icon-primary)" />
+          `}
+      />
       <BodySm color="secondary" style="margin-top: var(--space-3);">
         Browse available icons at <a href="https://icon-sets.iconify.design/ph/" target="_blank" rel="noopener"
           >Phosphor Icons</a
@@ -403,6 +423,19 @@ const lang = getLangFromUrl(Astro.url);
         </div>
       </div>
     </div>
+
+    <H3>Usage</H3>
+    <CodeBlock
+      lang="css"
+      wrap
+      code={`
+.element {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-primary);
+}
+          `}
+    />
   </section>
 
   <!-- SPACING -->
@@ -450,6 +483,18 @@ const lang = getLangFromUrl(Astro.url);
         </div>
       </div>
     </div>
+
+    <H3>Usage</H3>
+    <CodeBlock
+      lang="css"
+      wrap
+      code={`
+.element {
+  margin: var(--space-4);
+  padding: var(--space-2);
+}
+          `}
+    />
   </section>
 
   <!-- BUTTONS -->
@@ -529,12 +574,17 @@ const lang = getLangFromUrl(Astro.url);
 
     <div class="ds-subsection">
       <H3>Usage</H3>
-      <div class="ds-demo ds-demo--col">
-        <Code>{'import { Button } from "@components/primitives";'}</Code>
-        <Code>{'<Button variant="primary">Click me</Button>'}</Code>
-        <Code>{'<Button variant="secondary" size="sm" ghost>Ghost</Button>'}</Code>
-        <Code>{'<Button as="a" href="/docs">Link Button</Button>'}</Code>
-      </div>
+      <CodeBlock
+        lang="js"
+        wrap
+        code={`
+import { Button } from "@components/primitives";
+
+<Button variant="primary">Click me</Button>
+<Button variant="secondary" size="sm" ghost>Ghost</Button>
+<Button as="a" href="/docs">Link Button</Button>
+          `}
+      />
     </div>
   </section>
 
@@ -565,12 +615,20 @@ const lang = getLangFromUrl(Astro.url);
           </Col>
         </Grid>
       </div>
-      <div class="ds-demo ds-demo--col" style="margin-top: var(--space-4);">
-        <Code>{'<Grid gap="4">'}</Code>
-        <Code>{'  <Col xs={12} md={6} lg={4}>Content</Col>'}</Code>
-        <Code>{'  <Col xs={12} md={6} lg={4}>Content</Col>'}</Code>
-        <Code>{'</Grid>'}</Code>
-      </div>
+      <H3>Usage</H3>
+      <CodeBlock
+        lang="js"
+        wrap
+        code={`
+import { Grid, Col } from "@components/primitives";
+
+<Grid gap="4">
+  <Col xs={12} md={6} lg={4}>Content</Col>
+  <Col xs={12} md={6} lg={4}>Content</Col>
+  <Col xs={12} md={12} lg={4}>Content</Col>
+</Grid>
+          `}
+      />
     </div>
 
     <div class="ds-subsection">
@@ -589,12 +647,70 @@ const lang = getLangFromUrl(Astro.url);
           </div>
         </Flex>
       </div>
-      <div class="ds-demo ds-demo--col" style="margin-top: var(--space-4);">
-        <Code>{'<Flex direction="row" gap="4" justify="between">'}</Code>
-        <Code>{'  <div>Item 1</div>'}</Code>
-        <Code>{'  <div>Item 2</div>'}</Code>
-        <Code>{'</Flex>'}</Code>
+      <H3>Usage</H3>
+      <CodeBlock
+        lang="js"
+        wrap
+        code={`
+import { Flex } from "@components/primitives";
+
+<Flex direction="row" gap="4" justify="between">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</Flex>
+          `}
+      />
+    </div>
+
+    <div class="ds-subsection">
+      <H3>FlexItem Component</H3>
+      <BodyMd color="secondary">Control flex-grow, flex-shrink, and flex-basis for individual flex children.</BodyMd>
+
+      <H4 style="margin-top: var(--space-6);">Equal Columns</H4>
+      <div class="ds-demo" style="margin-top: var(--space-3);">
+        <Flex gap="4">
+          <FlexItem flex="1">
+            <div class="ds-box"><BodySm>flex="1"</BodySm></div>
+          </FlexItem>
+          <FlexItem flex="1">
+            <div class="ds-box"><BodySm>flex="1"</BodySm></div>
+          </FlexItem>
+          <FlexItem flex="1">
+            <div class="ds-box"><BodySm>flex="1"</BodySm></div>
+          </FlexItem>
+        </Flex>
       </div>
+
+      <H4 style="margin-top: var(--space-6);">Different Basis & Grow</H4>
+      <div class="ds-demo" style="margin-top: var(--space-3);">
+        <Flex gap="4">
+          <FlexItem basis="1/4">
+            <div class="ds-box" style="background: var(--sky-100);">
+              <BodySm>FlexItem basis="1/4"</BodySm>
+            </div>
+          </FlexItem>
+          <FlexItem grow>
+            <div class="ds-box">
+              <BodySm>FlexItem (grow="1")</BodySm>
+            </div>
+          </FlexItem>
+        </Flex>
+      </div>
+
+      <H3>Usage</H3>
+      <CodeBlock
+        lang="js"
+        wrap
+        code={`
+import { Flex, FlexItem } from "@components/primitives";
+
+<Flex gap="4">
+  <FlexItem flex="1">Equal column</FlexItem>
+  <FlexItem basis="1/4">Sidebar</FlexItem>
+  <FlexItem grow="1">Flexible content</FlexItem>
+</Flex>
+          `}
+      />
     </div>
 
     <div class="ds-subsection">
@@ -608,20 +724,18 @@ const lang = getLangFromUrl(Astro.url);
         </Container>
       </div>
     </div>
+    <H3>Usage</H3>
+    <CodeBlock
+      lang="js"
+      wrap
+      code={`
+import { Container } from "@components/primitives";
 
-    <div class="ds-subsection">
-      <H3>Utility Classes</H3>
-      <div class="ds-demo ds-demo--col">
-        <Code>.grid - Display grid</Code>
-        <Code>.grid-cols-{'{1,2,3,4,6,12}'} - Grid template columns</Code>
-        <Code>.col-span-{'{1,2,3,4,6,12,full}'} - Column span</Code>
-        <Code>.flex - Display flex</Code>
-        <Code>.flex-{'{row,col}'} - Flex direction</Code>
-        <Code>.items-{'{start,center,end}'} - Align items</Code>
-        <Code>.justify-{'{start,center,end,between}'} - Justify content</Code>
-        <Code>.gap-{'{1,2,3,4,6,8}'} - Gap spacing</Code>
-      </div>
-    </div>
+<Container>
+  <div>Your content here</div>
+</Container>
+          `}
+    />
   </section>
 
   <!-- BREAKPOINTS -->
@@ -638,13 +752,28 @@ const lang = getLangFromUrl(Astro.url);
 
     <div class="ds-subsection">
       <H3>Usage</H3>
-      <div class="ds-demo ds-demo--col">
-        <Code>@media (--xs) {'{ /* mobile only */ }'}</Code>
-        <Code>@media (--md) {'{ /* tablet only */ }'}</Code>
-        <Code>@media (--md-up) {'{ /* tablet and above */ }'}</Code>
-        <Code>@media (--lg) {'{ /* desktop only */ }'}</Code>
-        <Code>@media (--lg-down) {'{ /* desktop and below */ }'}</Code>
-      </div>
+      <CodeBlock
+        lang="css"
+        wrap
+        code={`
+/* Example media queries using design system breakpoints */
+@media (--xs) {
+  /* mobile only */
+}
+@media (--md) {
+  /* tablet only */
+}
+@media (--md-up) {
+  /* tablet and above */
+}
+@media (--lg) {
+  /* desktop only */
+}
+@media (--lg-down) {
+  /* desktop and below */
+}
+          `}
+      />
     </div>
   </section>
 
