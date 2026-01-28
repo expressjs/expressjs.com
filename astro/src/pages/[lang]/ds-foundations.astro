@@ -22,6 +22,7 @@ import {
   BodySm,
   BodyXs,
   Code,
+  Button,
 } from '@components/primitives';
 import { getLangFromUrl } from '@i18n/utils';
 import { languages } from '@i18n/ui';
@@ -48,6 +49,7 @@ const lang = getLangFromUrl(Astro.url);
       <li><a href="#iconography" class="ds-nav__link">Iconography</a></li>
       <li><a href="#colors" class="ds-nav__link">Colors</a></li>
       <li><a href="#spacing" class="ds-nav__link">Spacing</a></li>
+      <li><a href="#buttons" class="ds-nav__link">Buttons</a></li>
       <li><a href="#grid" class="ds-nav__link">Grid</a></li>
       <li><a href="#breakpoints" class="ds-nav__link">Breakpoints</a></li>
     </ul>
@@ -96,13 +98,13 @@ const lang = getLangFromUrl(Astro.url);
 
     <div class="ds-subsection">
       <H3>Weights</H3>
-      <div class="ds-demo ds-demo--row">
+      <Flex direction="row" gap="4" justify="center">
         <Body weight="light">Light 300</Body>
         <Body weight="normal">Normal 400</Body>
         <Body weight="medium">Medium 500</Body>
         <Body weight="semibold">Semibold 600</Body>
         <Body weight="bold">Bold 700</Body>
-      </div>
+      </Flex>
     </div>
 
     <div class="ds-subsection">
@@ -173,13 +175,13 @@ const lang = getLangFromUrl(Astro.url);
 
     <div class="ds-subsection">
       <H3>Examples</H3>
-      <div class="ds-demo ds-demo--row">
+      <Flex direction="row" gap="4" align="center">
         <Icon name="ph:airplane" size="24" color="var(--color-icon-primary)" />
         <Icon name="ph:anchor" size="24" color="var(--color-icon-primary)" />
         <Icon name="ph:check-circle" size="24" color="var(--color-icon-primary)" />
         <Icon name="ph:warning" size="24" color="var(--color-icon-primary)" />
         <Icon name="ph:info" size="24" color="var(--color-icon-primary)" />
-      </div>
+      </Flex>
     </div>
 
     <div class="ds-subsection">
@@ -333,8 +335,8 @@ const lang = getLangFromUrl(Astro.url);
           <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-inverse);">
             <span>bg-inverse</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-inactive);">
-            <span>bg-inactive</span>
+          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-mute);">
+            <span>bg-mute</span>
           </div>
           <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-success);">
             <span>bg-success</span>
@@ -359,8 +361,8 @@ const lang = getLangFromUrl(Astro.url);
           <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-inverse);">
             <span>text-inverse</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-inactive);">
-            <span>text-inactive</span>
+          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-mute);">
+            <span>text-mute</span>
           </div>
           <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-success);">
             <span>text-success</span>
@@ -386,8 +388,8 @@ const lang = getLangFromUrl(Astro.url);
           <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-inverse);">
             <span>border-inverse</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-inactive);">
-            <span>border-inactive</span>
+          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-mute);">
+            <span>border-mute</span>
           </div>
           <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-success);">
             <span>border-success</span>
@@ -446,6 +448,92 @@ const lang = getLangFromUrl(Astro.url);
           <div class="ds-spacing-box" style="width: var(--space-16); height: var(--space-16);"></div>
           <BodyXs>16 (64px)</BodyXs>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section id="buttons" class="ds-section">
+    <H2>Buttons</H2>
+    <BodyMd color="secondary">
+      Interactive button component with support for variants, sizes, and polymorphic rendering.
+    </BodyMd>
+
+    <div class="ds-subsection">
+      <H3>Variants</H3>
+      <Flex direction="row" gap="4" align="center">
+        <Button variant="primary">Primary Button</Button>
+        <Button variant="secondary">Secondary Button</Button>
+      </Flex>
+    </div>
+
+    <div class="ds-subsection">
+      <H3>Sizes</H3>
+      <Flex direction="row" gap="4" align="center">
+        <Button size="md">Medium (default)</Button>
+        <Button size="sm">Small</Button>
+        <Button size="xs">Extra Small</Button>
+      </Flex>
+    </div>
+
+    <div class="ds-subsection">
+      <H3>Ghost Style</H3>
+      <Flex direction="row" gap="4" align="center" class="p-4 m-2" style="background: var(--color-bg-inverse);">
+        <Button variant="primary" ghost>Ghost Primary - Hover me</Button>
+        <BodySm color="inverse">Can be used on light backgrounds</BodySm>
+      </Flex>
+      <Flex
+        direction="row"
+        gap="4"
+        align="center"
+        class="p-4 m-2"
+        style="border: 1px solid var(--color-border-primary);"
+      >
+        <Button variant="secondary" ghost>Ghost Secondary - Hover me</Button>
+        <BodySm>Can be used on dark backgrounds</BodySm>
+      </Flex>
+    </div>
+
+    <div class="ds-subsection">
+      <H3>With Icons</H3>
+      <Flex direction="row" gap="4" align="center">
+        <Button variant="primary">
+          <Icon name="ph:arrow-left" size="16" />
+          Back
+        </Button>
+        <Button variant="primary">
+          Continue
+          <Icon name="ph:arrow-right" size="16" />
+        </Button>
+      </Flex>
+    </div>
+
+    <div class="ds-subsection">
+      <H3>Disabled State</H3>
+      <Flex direction="row" gap="4" align="center">
+        <Button variant="primary" disabled>Disabled Primary</Button>
+        <Button variant="secondary" disabled>Disabled Secondary</Button>
+      </Flex>
+    </div>
+
+    <div class="ds-subsection">
+      <H3>As Link</H3>
+      <Flex direction="row" gap="4" align="center">
+        <Button as="a" href="#buttons" variant="primary">Link Button</Button>
+        <Button as="a" href="#buttons" variant="secondary">
+          External
+          <Icon name="ph:arrow-square-out" size="16" />
+        </Button>
+      </Flex>
+    </div>
+
+    <div class="ds-subsection">
+      <H3>Usage</H3>
+      <div class="ds-demo ds-demo--col">
+        <Code>{'import { Button } from "@components/primitives";'}</Code>
+        <Code>{'<Button variant="primary">Click me</Button>'}</Code>
+        <Code>{'<Button variant="secondary" size="sm" ghost>Ghost</Button>'}</Code>
+        <Code>{'<Button as="a" href="/docs">Link Button</Button>'}</Code>
       </div>
     </div>
   </section>
@@ -559,219 +647,219 @@ const lang = getLangFromUrl(Astro.url);
       </div>
     </div>
   </section>
-</Layout>
 
-<style>
-  /* Navigation */
-  .ds-nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--color-bg-primary);
-    border-bottom: 1px solid var(--color-border-secondary);
-    padding: var(--space-3) var(--space-4);
-    margin-bottom: var(--space-8);
-  }
+  <style>
+    /* Navigation */
+    .ds-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-bg-primary);
+      border-bottom: 1px solid var(--color-border-secondary);
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-8);
+    }
 
-  .ds-nav__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
-    overflow-x: auto;
-    max-width: 1440px;
-    margin-inline: auto;
-  }
+    .ds-nav__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      overflow-x: auto;
+      max-width: 1440px;
+      margin-inline: auto;
+    }
 
-  .ds-nav__link {
-    display: block;
-    padding: var(--space-2) var(--space-3);
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-    text-decoration: none;
-    border-radius: 6px;
-    white-space: nowrap;
-    transition:
-      background-color 0.15s ease,
-      color 0.15s ease;
-  }
+    .ds-nav__link {
+      display: block;
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+    }
 
-  .ds-nav__link:hover {
-    color: var(--color-text-primary);
-    background: var(--color-bg-secondary);
-  }
+    .ds-nav__link:hover {
+      color: var(--color-text-primary);
+      background: var(--color-bg-secondary);
+    }
 
-  /* Scroll offset for sticky nav */
-  .ds-section {
-    scroll-margin-top: var(--space-16);
-  }
+    /* Scroll offset for sticky nav */
+    .ds-section {
+      scroll-margin-top: var(--space-16);
+    }
 
-  .ds-header {
-    padding: var(--space-12) 0;
-  }
+    .ds-header {
+      padding: var(--space-12) 0;
+    }
 
-  .ds-section {
-    margin-bottom: var(--space-16);
-  }
+    .ds-section {
+      margin-bottom: var(--space-16);
+    }
 
-  .ds-subsection {
-    margin-top: var(--space-8);
-  }
+    .ds-subsection {
+      margin-top: var(--space-8);
+    }
 
-  .ds-demo {
-    padding: var(--space-6);
-    background: var(--color-bg-secondary);
-    border-radius: 8px;
-    margin-top: var(--space-4);
-  }
+    .ds-demo {
+      padding: var(--space-6);
+      background: var(--color-bg-secondary);
+      border-radius: 8px;
+      margin-top: var(--space-4);
+    }
 
-  .ds-demo--col {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
+    .ds-demo--col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
 
-  .ds-demo--row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: var(--space-4);
-  }
+    .ds-demo--row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
 
-  .ds-demo-container {
-    background: var(--color-bg-tertiary);
-    padding: var(--space-4);
-    margin-top: var(--space-4);
-    border-radius: 8px;
-  }
+    .ds-demo-container {
+      background: var(--color-bg-tertiary);
+      padding: var(--space-4);
+      margin-top: var(--space-4);
+      border-radius: 8px;
+    }
 
-  .ds-box {
-    background: var(--color-bg-secondary);
-    padding: var(--space-4);
-    border-radius: 8px;
-    border: 1px dashed var(--color-border-primary);
-  }
+    .ds-box {
+      background: var(--color-bg-secondary);
+      padding: var(--space-4);
+      border-radius: 8px;
+      border: 1px dashed var(--color-border-primary);
+    }
 
-  /* Color Grid */
-  .ds-color-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-top: var(--space-4);
-  }
+    /* Color Grid */
+    .ds-color-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
 
-  .ds-color-grid--large {
-    gap: var(--space-4);
-  }
+    .ds-color-grid--large {
+      gap: var(--space-4);
+    }
 
-  .ds-color-swatch {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
-    border: 1px solid var(--color-border-secondary);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: var(--space-1);
-  }
+    .ds-color-swatch {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border-secondary);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: var(--space-1);
+    }
 
-  .ds-color-swatch span {
-    font-size: var(--font-size-xxs);
-    font-family: var(--font-family-mono);
-    background: var(--color-bg-primary);
-    padding: 0.1em 0.3em;
-    border-radius: 3px;
-  }
+    .ds-color-swatch span {
+      font-size: var(--font-size-xxs);
+      font-family: var(--font-family-mono);
+      background: var(--color-bg-primary);
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
 
-  .ds-color-swatch--large {
-    width: 120px;
-    height: 80px;
-  }
+    .ds-color-swatch--large {
+      width: 120px;
+      height: 80px;
+    }
 
-  /* Spacing Grid */
-  .ds-spacing-grid {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: var(--space-6);
-    margin-top: var(--space-4);
-  }
+    /* Spacing Grid */
+    .ds-spacing-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: var(--space-6);
+      margin-top: var(--space-4);
+    }
 
-  .ds-spacing-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-2);
-  }
+    .ds-spacing-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+    }
 
-  .ds-spacing-box {
-    background: var(--sky-500);
-    border-radius: 2px;
-  }
+    .ds-spacing-box {
+      background: var(--sky-500);
+      border-radius: 2px;
+    }
 
-  /* Type Scale */
-  .ds-type-scale {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: var(--space-8);
-    margin-top: var(--space-4);
-  }
+    /* Type Scale */
+    .ds-type-scale {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: var(--space-8);
+      margin-top: var(--space-4);
+    }
 
-  .ds-type-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-2);
-  }
+    .ds-type-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+    }
 
-  /* Breakpoint Indicator */
-  .ds-breakpoint-indicator {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
+    /* Breakpoint Indicator */
+    .ds-breakpoint-indicator {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
 
-  .ds-breakpoint {
-    padding: var(--space-3) var(--space-4);
-    border-radius: 6px;
-    font-family: var(--font-family-mono);
-    font-size: var(--font-size-sm);
-    display: none;
-  }
+    .ds-breakpoint {
+      padding: var(--space-3) var(--space-4);
+      border-radius: 6px;
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-sm);
+      display: none;
+    }
 
-  .ds-breakpoint--xs {
-    background: var(--orange-50);
-    color: var(--orange-700);
-  }
-
-  .ds-breakpoint--md {
-    background: var(--sky-50);
-    color: var(--sky-700);
-  }
-
-  .ds-breakpoint--lg {
-    background: var(--green-50);
-    color: var(--green-700);
-  }
-
-  @media (--xs) {
     .ds-breakpoint--xs {
-      display: block;
+      background: var(--orange-50);
+      color: var(--orange-700);
     }
-  }
 
-  @media (--md) {
     .ds-breakpoint--md {
-      display: block;
+      background: var(--sky-50);
+      color: var(--sky-700);
     }
-  }
 
-  @media (--lg) {
     .ds-breakpoint--lg {
-      display: block;
+      background: var(--green-50);
+      color: var(--green-700);
     }
-  }
-</style>
+
+    @media (--xs) {
+      .ds-breakpoint--xs {
+        display: block;
+      }
+    }
+
+    @media (--md) {
+      .ds-breakpoint--md {
+        display: block;
+      }
+    }
+
+    @media (--lg) {
+      .ds-breakpoint--lg {
+        display: block;
+      }
+    }
+  </style>
+</Layout>

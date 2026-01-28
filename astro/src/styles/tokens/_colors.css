@@ -89,10 +89,11 @@
 
   /* Backgrounds */
   --color-bg-primary: light-dark(var(--white), var(--black));
-  --color-bg-secondary: light-dark(var(--gray-50), var(--gray-950));
+  --color-bg-secondary: light-dark(var(--gray-50), var(--gray-900));
   --color-bg-tertiary: light-dark(var(--gray-100), var(--gray-800));
   --color-bg-inverse: light-dark(var(--gray-900), var(--gray-100));
-  --color-bg-inactive: light-dark(var(--gray-200), var(--gray-800));
+  --color-bg-inverse-secondary: light-dark(var(--gray-800), var(--gray-200));
+  --color-bg-mute: light-dark(var(--gray-200), var(--gray-800));
   --color-bg-info: light-dark(var(--blue-50), var(--blue-950));
   --color-bg-success: light-dark(var(--green-50), var(--green-950));
   --color-bg-warning: light-dark(var(--amber-50), var(--amber-950));
@@ -102,7 +103,7 @@
   --color-border-primary: light-dark(var(--gray-300), var(--gray-500));
   --color-border-secondary: light-dark(var(--gray-200), var(--gray-800));
   --color-border-tertiary: light-dark(var(--gray-400), var(--gray-400));
-  --color-border-inactive: light-dark(var(--gray-400), var(--gray-600));
+  --color-border-mute: light-dark(var(--gray-400), var(--gray-600));
   --color-border-inverse: light-dark(var(--gray-700), var(--gray-200));
   --color-border-info: light-dark(var(--blue-200), var(--blue-800));
   --color-border-success: light-dark(var(--green-200), var(--green-800));
@@ -114,7 +115,7 @@
   --color-text-secondary: light-dark(var(--gray-600), var(--gray-150));
   --color-text-tertiary: var(--gray-500, var(--gray-550));
   --color-text-inverse: light-dark(var(--gray-100), var(--gray-900));
-  --color-text-inactive: var(--gray-500, var(--gray-550));
+  --color-text-mute: var(--gray-500, var(--gray-550));
   --color-text-info: light-dark(var(--blue-700), var(--blue-400));
   --color-text-success: light-dark(var(--green-700), var(--green-400));
   --color-text-warning: light-dark(var(--amber-700), var(--amber-400));

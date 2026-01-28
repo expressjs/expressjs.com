@@ -22,8 +22,8 @@
   color: var(--color-text-inverse);
 }
 
-.text--color-inactive {
-  color: var(--color-text-inactive);
+.text--color-mute {
+  color: var(--color-text-mute);
 }
 
 .text--color-success {

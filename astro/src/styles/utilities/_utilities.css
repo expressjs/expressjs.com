@@ -113,6 +113,9 @@
 .p-0 {
   padding: var(--space-0);
 }
+.p-2 {
+  padding: var(--space-2);
+}
 .p-4 {
   padding: var(--space-4);
 }
@@ -126,6 +129,9 @@
 /* Margin shortcuts */
 .m-0 {
   margin: var(--space-0);
+}
+.m-2 {
+  margin: var(--space-2);
 }
 .m-4 {
   margin: var(--space-4);
