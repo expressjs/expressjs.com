@@ -122,3 +122,17 @@
 .p-8 {
   padding: var(--space-8);
 }
+
+/* Margin shortcuts */
+.m-0 {
+  margin: var(--space-0);
+}
+.m-4 {
+  margin: var(--space-4);
+}
+.m-6 {
+  margin: var(--space-6);
+}
+.m-8 {
+  margin: var(--space-8);
+}

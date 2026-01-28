@@ -1,10 +1,8 @@
 ---
-layout: page
 title: Express "Hello World" example
 description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
 menu: starter
 order: 2
-redirect_from: "/starter/hello-world.html"
 ---
 
 # Hello world example

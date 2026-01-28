@@ -1,0 +1,35 @@
+---
+/**
+ * Breadcrumbs Component
+ * Renders a breadcrumb navigation based on provided items
+ * TODO: wip - Improve styling and accessibility in future iterations
+ */
+import { Body } from '@components/primitives';
+import { Icon } from 'astro-icon/components';
+import type { BreadcrumbItem } from '@utils/breadcrumb';
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb">
+  <ol class="flex gap-3 items-center p-0">
+    {
+      items.map((item, index) => (
+        <li class="flex items-center gap-3">
+          {item.href ? (
+            <Body as="a" href={item.href} class="m-0">
+              {item.label}
+            </Body>
+          ) : (
+            <Body class="m-0">{item.label}</Body>
+          )}
+          {index < items.length - 1 && <Icon name="ph:caret-right" aria-hidden="true" />}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

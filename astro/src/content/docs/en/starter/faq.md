@@ -1,10 +1,8 @@
 ---
-layout: page
 title: Express FAQ
 description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
 order: 7
-redirect_from: "/starter/faq.html"
 ---
 
 # FAQ

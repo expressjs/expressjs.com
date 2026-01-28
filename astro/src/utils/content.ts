@@ -1,7 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { MenuSection } from '@config/menu';
-
-export type DocEntry = CollectionEntry<'docs'>;
+import type { collections } from '@/content.config';
 
 /**
  * Get all documents for a specific language
@@ -16,58 +15,65 @@ export async function getDocsByLang(lang: string = 'en') {
  */
 export async function getDocsBySection(section: MenuSection, lang: string = 'en') {
   const allDocs = await getDocsByLang(lang);
-  return allDocs
-    .filter((doc) => doc.data.menu === section)
-    .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+  return allDocs.filter((doc) => doc.data.menu === section).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 }
 
 /**
- * Get a single document by path
+ * Checks if there is content at the specified path
+ * @param checkPath - The path to check (e.g., 'en/resources/middleware')
+ * @param pages - The collection of pages to search within
+ * @returns True if content exists at the specified path, false otherwise
  */
-export async function getDocByPath(path: string) {
-  const allDocs = await getCollection('docs');
-  return allDocs.find((doc) => doc.id === path);
+
+export function hasContentAt(checkPath: string, pages: CollectionEntry<keyof typeof collections>[]): boolean {
+  return pages.some((page) => page.id === checkPath);
+}
+
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
 }
 
 /**
- * Generate breadcrumb from doc path
+ * Builds breadcrumb items for a documentation page
+ * @param lang - The language code (e.g., 'en')
+ * @param slug - The page slug (e.g., 'resources/middleware/compression')
+ * @param collection - The collection name to check for existing content
+ * @returns Array of breadcrumb items with labels and optional hrefs
  */
-export function generateBreadcrumb(id: string) {
-  const parts = id.split('/');
-  const breadcrumb: { label: string; href?: string }[] = [];
+export async function buildBreadcrumbs(
+  lang: string,
+  slug: string,
+  collection: keyof typeof collections
+): Promise<BreadcrumbItem[]> {
+  const pages = await getCollection(collection);
 
-  let currentPath = '';
-  parts.forEach((part, index) => {
-    if (index === parts.length - 1) {
-      // Last part (filename without extension)
-      const slug = part.replace(/\.mdx?$/, '');
-      breadcrumb.push({ label: slug });
-    } else {
-      // Path segments
-      currentPath += (currentPath ? '/' : '') + part;
-      breadcrumb.push({
-        label: part,
-        href: `/${currentPath}`
+  const breadcrumbs: BreadcrumbItem[] = [];
+
+  breadcrumbs.push({
+    label: 'Docs',
+    href: undefined,
+  });
+
+  const slugParts = slug.split('/');
+
+  slugParts.forEach((part, index) => {
+    const isLast = index === slugParts.length - 1;
+
+    const pathToSegment = `${lang}/${slugParts.slice(0, index + 1).join('/')}`;
+
+    const label = part
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+
+    if (!isLast) {
+      breadcrumbs.push({
+        label,
+        href: hasContentAt(pathToSegment, pages) ? `/${pathToSegment}` : undefined,
       });
     }
   });
 
-  return breadcrumb;
-}
-
-/**
- * Get navigation items for a section
- */
-export async function getSectionNav(section: MenuSection, lang: string = 'en') {
-  const docs = await getDocsBySection(section, lang);
-
-  return docs.map((doc) => {
-    const slug = doc.id.replace(`${lang}/${section}/`, '').replace(/\.mdx?$/, '');
-    return {
-      title: doc.data.title,
-      slug,
-      href: `/${lang}/${section}/${slug}`,
-      order: doc.data.order ?? 0,
-    };
-  });
+  return breadcrumbs;
 }

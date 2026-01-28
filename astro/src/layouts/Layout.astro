@@ -1,6 +1,7 @@
 ---
 import '@styles/main.css';
 import { Container } from '@components/primitives';
+import { ThemeSwitcher } from '@/components/patterns';
 
 interface Props {
   title?: string;
@@ -29,6 +30,8 @@ const {
   </head>
   <body>
     <Container>
+      <!-- TODO: placed here temporarily for theme switching testing -->
+      <ThemeSwitcher />
       <slot />
     </Container>
   </body>

@@ -1,8 +1,12 @@
 ---
+/**
+ * Express Documentation Index Page
+ *
+ * TODO: This is a temporary index page for the Express documentation that lists sections and recent docs. This will be replaced with a proper sidebar navigation layout in the future.
+ */
 import Layout from '@layouts/Layout.astro';
 import { menuSections, type MenuSection } from '@config/menu';
 import { getDocsBySection } from '@utils/content';
-import { Container } from '@components/primitives';
 
 const sections = Object.entries(menuSections);
 
@@ -19,37 +23,31 @@ const lang = getLangFromUrl(Astro.url);
 ---
 
 <Layout title="Express Documentation">
-  <Container>
-    <h1>Express Documentation</h1>
+  <h1>Express Documentation</h1>
+  <p>
+    This is a temporary entry point page for the Express documentation. Below are some of the sections and recent docs.
+  </p>
+  <p>This page will be replaced with a proper sidebar navigation layout soon.</p>
+  {
+    sections.map(async ([key, label]) => {
+      const docs = await getDocsBySection(key as MenuSection, lang);
+      const firstDocs = docs.slice(0, 5);
 
-    <div>
-      {
-        sections.map(async ([key, label]) => {
-          const docs = await getDocsBySection(key as MenuSection, lang);
-          const firstDocs = docs.slice(0, 5);
-
-          return (
-            <section>
-              <h2>{label}</h2>
-              <ul>
-                {firstDocs.map((doc) => {
-                  const slug = doc.id.replace(`${lang}/${key}/`, '').replace(/\.mdx?$/, '');
-                  return (
-                    <li>
-                      <a href={`/${lang}/${key}/${slug}`}>{doc.data.title}</a>
-                    </li>
-                  );
-                })}
-                {docs.length > 5 && (
-                  <li class="view-all">
-                    <a href={`/${lang}/${key}`}>View all →</a>
-                  </li>
-                )}
-              </ul>
-            </section>
-          );
-        })
-      }
-    </div>
-  </Container>
+      return (
+        <section>
+          <h2>{label}</h2>
+          <ul>
+            {firstDocs.map((doc) => {
+              const slug = doc.id.replace(`${lang}/${key}/`, '').replace(/\.mdx?$/, '');
+              return (
+                <li>
+                  <a href={`/${lang}/${key}/${slug}`}>{doc.data.title}</a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      );
+    })
+  }
 </Layout>

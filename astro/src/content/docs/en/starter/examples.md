@@ -1,10 +1,8 @@
 ---
-layout: page
 title: Express examples
 description: Explore a collection of Express.js application examples covering various use cases, integrations, and advanced configurations to help you learn and build your projects.
 menu: starter
 order: 6
-redirect_from: "/starter/examples.html"
 ---
 
 {% capture examples %}{% include readmes/express-master/examples.md %}{% endcapture %}

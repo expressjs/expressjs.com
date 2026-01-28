@@ -1,10 +1,8 @@
 ---
-layout: page
 title: Health Checks and Graceful Shutdown
 description: Learn how to implement health checks and graceful shutdown in Express apps to enhance reliability, manage deployments, and integrate with load balancers like Kubernetes.
 menu: advanced
 order: 5
-redirect_from: "/advanced/healthcheck-graceful-shutdown.html"
 ---
 
 # Health Checks and Graceful Shutdown

@@ -1,35 +1,25 @@
 ---
-import { Body, Container, Flex } from '@components/primitives';
 import Layout from './Layout.astro';
-import { menuSections } from '@config/menu';
 import type { MenuSection } from '@config/menu';
-import { Icon } from 'astro-icon/components';
+import type { BreadcrumbItem } from '@utils/breadcrumb';
+import { Breadcrumbs } from '@components/patterns';
 
 interface Props {
   title: string;
   description?: string;
   section: MenuSection;
+  breadcrumbs: BreadcrumbItem[];
 }
 
-const { title, description, section } = Astro.props;
-
-const sectionTitle = menuSections[section] || section;
+const { title, description, breadcrumbs } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
-  <Container>
-    <main>
-      <header>
-        <Flex gap="1" align="center">
-          <Body as="span">Docs</Body>
-          <Icon name="ph:caret-right" />
-          <Body as="span">{sectionTitle}</Body>
-        </Flex>
-      </header>
+  <main>
+    <Breadcrumbs items={breadcrumbs} />
 
-      <article>
-        <slot />
-      </article>
-    </main>
-  </Container>
+    <article>
+      <slot />
+    </article>
+  </main>
 </Layout>
