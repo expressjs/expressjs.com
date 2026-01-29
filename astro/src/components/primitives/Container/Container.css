@@ -7,7 +7,7 @@
   max-width: 1440px;
   margin-inline: auto;
 
-  @media (--lg) {
+  @media (--lg-up) {
     width: 95%;
   }
 }

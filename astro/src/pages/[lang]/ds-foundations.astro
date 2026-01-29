@@ -757,17 +757,17 @@ import { Container } from "@components/primitives";
         wrap
         code={`
 /* Example media queries using design system breakpoints */
-@media (--xs) {
+@media (--xs-only) {
   /* mobile only */
 }
-@media (--md) {
+@media (--md-only) {
   /* tablet only */
 }
 @media (--md-up) {
   /* tablet and above */
 }
-@media (--lg) {
-  /* desktop only */
+@media (--lg-up) {
+  /* desktop and above */
 }
 @media (--lg-down) {
   /* desktop and below */
@@ -973,19 +973,19 @@ import { Container } from "@components/primitives";
       color: var(--green-700);
     }
 
-    @media (--xs) {
+    @media (--xs-only) {
       .ds-breakpoint--xs {
         display: block;
       }
     }
 
-    @media (--md) {
+    @media (--md-up) {
       .ds-breakpoint--md {
         display: block;
       }
     }
 
-    @media (--lg) {
+    @media (--lg-up) {
       .ds-breakpoint--lg {
         display: block;
       }

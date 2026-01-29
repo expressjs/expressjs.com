@@ -144,7 +144,7 @@
 }
 
 /* Tablet (md) breakpoint */
-@media (--md) {
+@media (--md-only) {
   .col-md-1 {
     grid-column: span 1;
   }
@@ -184,7 +184,7 @@
 }
 
 /* Desktop (lg) breakpoint */
-@media (--lg) {
+@media (--lg-up) {
   .col-lg-1 {
     grid-column: span 1;
   }
@@ -411,7 +411,7 @@
 }
 
 /* Responsive Grid Utilities */
-@media (--md) {
+@media (--md-only) {
   .md-grid-cols-1 {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -432,7 +432,7 @@
   }
 }
 
-@media (--lg) {
+@media (--lg-up) {
   .lg-grid-cols-1 {
     grid-template-columns: repeat(1, 1fr);
   }

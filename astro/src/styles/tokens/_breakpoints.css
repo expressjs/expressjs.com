@@ -7,11 +7,11 @@
  * - Desktop: >= 1440px
  *
  * Usage:
- * @media (--xs)  { ... }  - Mobile only
- * @media (--md)  { ... }  - Tablet only
- * @media (--lg) { ... }  - Desktop only
- * @media (--md-up) { ... } - Tablet and above
- * @media (--md-down) { ... } - Tablet and below
+ * @media (--xs-only)  { ... }  - Mobile only
+ * @media (--md-only)  { ... }  - Tablet only
+ * @media (--md-up) { ... } - Above Tablet
+ * @media (--lg-up) { ... } - Above Desktop
+ * @media (--lg-down) { ... } - Below Desktop
  */
 
 /* ============================================
@@ -19,10 +19,10 @@
    ============================================ */
 
 /* Device-specific (exclusive) */
-@custom-media --xs (width < 768px);
+@custom-media --xs-only (width < 768px);
 @custom-media --md-up (width >= 768px);
-@custom-media --md (768px <= width < 1440px);
-@custom-media --lg (width >= 1440px);
+@custom-media --md-only (768px <= width < 1440px);
+@custom-media --lg-up (width >= 1440px);
 @custom-media --lg-down (width < 1440px);
 
 /* Range queries (inclusive) */
