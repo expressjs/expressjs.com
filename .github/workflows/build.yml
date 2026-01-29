@@ -1,0 +1,69 @@
+name: ci
+
+on:
+  pull_request:
+    branches:
+      - redesign
+  pull_request_review:
+    types: [submitted]
+  push:
+    branches:
+      - redesign
+
+# Cancel in progress workflows
+# in the scenario where we already had a run going for that PR/branch/tag but then triggered a new run
+concurrency:
+  group: "${{ github.workflow }} ✨ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.draft != true &&
+      (github.event_name == 'pull_request_review' && github.event.review.state == 'approved') ||
+      github.event_name != 'pull_request_review'
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+
+      - name: Install Node.js dependencies
+        working-directory: astro
+        run: npm ci
+
+      - name: Run tests
+        working-directory: astro
+        shell: bash
+        run: npm run check
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.draft != true &&
+      (github.event_name == 'pull_request_review' && github.event.review.state == 'approved') ||
+      github.event_name != 'pull_request_review'
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+
+      - name: Install Node.js dependencies
+        working-directory: astro
+        run: npm ci
+
+      - name: Build Astro site
+        working-directory: astro
+        run: npm run build
