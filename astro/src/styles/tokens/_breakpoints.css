@@ -41,6 +41,6 @@
    ============================================ */
 
 :root {
-  --breakpoint-xs: 768px;
-  --breakpoint-md: 1440px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1440px;
 }

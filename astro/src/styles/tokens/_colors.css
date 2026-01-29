@@ -140,11 +140,6 @@
   --color-link-visited: light-dark(var(--sky-700), var(--sky-700));
   /* Focus */
   --color-focus-ring: light-dark(var(--gray-900), var(--white));
-
-  /* Status */
-  --color-success: var(--green-500);
-  --color-warning: var(--amber-500);
-  --color-error: var(--red-500);
 }
 
 /* ============================================

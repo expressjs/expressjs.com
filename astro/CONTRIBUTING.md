@@ -107,10 +107,23 @@ So you've found a problem that you want to fix, or have a site enhancement you w
 ```
 astro/
 ├── src/
-│   ├── components/    # Reusable UI components
-│   ├── layouts/       # Page layouts
-│   ├── pages/         # Route pages
-│   └── styles/        # Global styles
-├── public/            # Static assets
-└── astro.config.mjs   # Astro configuration
+│   ├── assets/              # Static assets (images, icons, etc.)
+│   ├── components/          # Reusable UI components
+│   │   ├── patterns/        # Complex UI patterns
+│   │   └── primitives/      # Base UI primitives
+│   ├── config/              # Configuration files
+│   ├── content/             # Content collections
+│   │   └── docs/            # Documentation content
+│   ├── i18n/                # Internationalization
+│   ├── layouts/             # Page layouts
+│   ├── pages/               # Route pages
+│   │   └── [lang]/          # Localized pages
+│   ├── styles/              # Global styles
+│   │   ├── base/            # Base styles
+│   │   ├── tokens/          # Design tokens
+│   │   └── utilities/       # Utility classes
+│   └── utils/               # Utility functions
+├── public/                  # Static assets
+│   └── fonts/               # Font files
+└── astro.config.mjs         # Astro configuration
 ```

@@ -39,12 +39,6 @@
   --space-60: 24rem; /* 240px */
   --space-64: 25.6rem; /* 256px */
 
-  /* Semantic spacing */
-  --space-section: var(--space-16);
-  --space-component: var(--space-6);
-  --space-element: var(--space-4);
-  --space-inline: var(--space-2);
-
   /* Component specific */
   --space-h1: var(--space-12);
   --space-h2: var(--space-6);
