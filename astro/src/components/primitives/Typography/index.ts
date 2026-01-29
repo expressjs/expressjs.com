@@ -19,4 +19,10 @@ export { default as BodySm } from './BodySm.astro';
 export { default as BodyXs } from './BodyXs.astro';
 export { default as Code } from './Code.astro';
 
-export type { TypographyVariant, TypographyColor, TypographyWeight } from './Typography.astro';
+export type {
+  TypographyVariant,
+  TypographyColor,
+  TypographyWeight,
+  TypographyHTMLTag,
+  TypographyBaseProps,
+} from './types';

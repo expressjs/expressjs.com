@@ -41,7 +41,9 @@ const lang = getLangFromUrl(Astro.url);
 <Layout title="Design System Foundations">
   <header class="ds-header">
     <H1>Design System Foundations</H1>
-    <H5 color="secondary"> A living reference of all primitive components, tokens, and patterns. </H5>
+    <H5 color="secondary">
+      A living reference of all primitive components, tokens, and patterns.
+    </H5>
   </header>
 
   <nav class="ds-nav">
@@ -76,14 +78,16 @@ const lang = getLangFromUrl(Astro.url);
       <H3>Body Text</H3>
       <div class="ds-demo">
         <Body
-          ><b>Body</b> — Default paragraph text. This is the standard size for documentation content and general reading.</Body
+          ><b>Body</b> — Default paragraph text. This is the standard size for documentation content and
+          general reading.</Body
         >
         <BodyMd
           ><b>Body Medium</b> — Slightly smaller than default body. Good for sidebars and secondary content.</BodyMd
         >
         <p>
           <BodySm
-            ><b>Body Small</b> — Secondary text, captions, and helper text. Used for metadata and less prominent content.</BodySm
+            ><b>Body Small</b> — Secondary text, captions, and helper text. Used for metadata and less
+            prominent content.</BodySm
           >
         </p>
         <p><BodyXs><b>Body Extra Small</b> — Fine print, legal text, and timestamps.</BodyXs></p>
@@ -182,10 +186,9 @@ import { H1, Body, Code } from '@components/primitives';
   <section id="iconography" class="ds-section">
     <H2>Iconography</H2>
     <BodyMd color="secondary">
-      Icons are provided by <Code as="code">astro-icon</Code>, a well-supported and officially recommended package for
-      Astro that gives access to 200,000+ icons from various icon sets. We primarily use Phosphor Icons (prefix <Code
-        as="code">ph:</Code
-      >).
+      Icons are provided by <Code as="code">astro-icon</Code>, a well-supported and officially
+      recommended package for Astro that gives access to 200,000+ icons from various icon sets. We
+      primarily use Phosphor Icons (prefix <Code as="code">ph:</Code>).
     </BodyMd>
 
     <div class="ds-subsection">
@@ -212,10 +215,14 @@ import { Icon } from "astro-icon/components";
           `}
       />
       <BodySm color="secondary" style="margin-top: var(--space-3);">
-        Browse available icons at <a href="https://icon-sets.iconify.design/ph/" target="_blank" rel="noopener"
-          >Phosphor Icons</a
-        > or explore other icon sets at <a href="https://icon-sets.iconify.design/" target="_blank" rel="noopener"
-          >Iconify</a
+        Browse available icons at <a
+          href="https://icon-sets.iconify.design/ph/"
+          target="_blank"
+          rel="noopener">Phosphor Icons</a
+        > or explore other icon sets at <a
+          href="https://icon-sets.iconify.design/"
+          target="_blank"
+          rel="noopener">Iconify</a
         >.
       </BodySm>
     </div>
@@ -343,81 +350,153 @@ import { Icon } from "astro-icon/components";
       <div class="ds-subsection">
         <H3>Semantic tokens</H3>
         <div class="ds-color-grid ds-color-grid--large">
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-primary);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-bg-primary);"
+          >
             <span>bg-primary</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-secondary);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-bg-secondary);"
+          >
             <span>bg-secondary</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-tertiary);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-bg-tertiary);"
+          >
             <span>bg-tertiary</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-inverse);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-bg-inverse);"
+          >
             <span>bg-inverse</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-mute);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-bg-mute);"
+          >
             <span>bg-mute</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-success);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-bg-success);"
+          >
             <span>bg-success</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-warning);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-bg-warning);"
+          >
             <span>bg-warning</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-bg-error);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-bg-error);"
+          >
             <span>bg-error</span>
           </div>
         </div>
         <div class="ds-color-grid ds-color-grid--large">
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-primary);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-text-primary);"
+          >
             <span>text-primary</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-secondary);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-text-secondary);"
+          >
             <span>text-secondary</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-tertiary);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-text-tertiary);"
+          >
             <span>text-tertiary</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-inverse);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-text-inverse);"
+          >
             <span>text-inverse</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-mute);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-text-mute);"
+          >
             <span>text-mute</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-success);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-text-success);"
+          >
             <span>text-success</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-warning);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-text-warning);"
+          >
             <span>text-warning</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-text-error);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-text-error);"
+          >
             <span>text-error</span>
           </div>
         </div>
         <!-- add section for border color tokens -->
         <div class="ds-color-grid ds-color-grid--large">
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-primary);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-border-primary);"
+          >
             <span>border-primary</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-secondary);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-border-secondary);"
+          >
             <span>border-secondary</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-tertiary);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-border-tertiary);"
+          >
             <span>border-tertiary</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-inverse);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-border-inverse);"
+          >
             <span>border-inverse</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-mute);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-border-mute);"
+          >
             <span>border-mute</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-success);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-border-success);"
+          >
             <span>border-success</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-warning);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-border-warning);"
+          >
             <span>border-warning</span>
           </div>
-          <div class="ds-color-swatch ds-color-swatch--large" style="background: var(--color-border-error);">
+          <div
+            class="ds-color-swatch ds-color-swatch--large"
+            style="background: var(--color-border-error);"
+          >
             <span>border-error</span>
           </div>
         </div>
@@ -446,7 +525,8 @@ import { Icon } from "astro-icon/components";
       <H3>Scale</H3>
       <div class="ds-spacing-grid">
         <div class="ds-spacing-item">
-          <div class="ds-spacing-box" style="width: var(--space-0.5); height: var(--space-0.5);"></div>
+          <div class="ds-spacing-box" style="width: var(--space-0.5); height: var(--space-0.5);">
+          </div>
           <BodyXs>0.5 (2px)</BodyXs>
         </div>
         <div class="ds-spacing-item">
@@ -474,11 +554,13 @@ import { Icon } from "astro-icon/components";
           <BodyXs>8 (32px)</BodyXs>
         </div>
         <div class="ds-spacing-item">
-          <div class="ds-spacing-box" style="width: var(--space-12); height: var(--space-12);"></div>
+          <div class="ds-spacing-box" style="width: var(--space-12); height: var(--space-12);">
+          </div>
           <BodyXs>12 (48px)</BodyXs>
         </div>
         <div class="ds-spacing-item">
-          <div class="ds-spacing-box" style="width: var(--space-16); height: var(--space-16);"></div>
+          <div class="ds-spacing-box" style="width: var(--space-16); height: var(--space-16);">
+          </div>
           <BodyXs>16 (64px)</BodyXs>
         </div>
       </div>
@@ -523,7 +605,13 @@ import { Icon } from "astro-icon/components";
 
     <div class="ds-subsection">
       <H3>Ghost Style</H3>
-      <Flex direction="row" gap="4" align="center" class="p-4 m-2" style="background: var(--color-bg-inverse);">
+      <Flex
+        direction="row"
+        gap="4"
+        align="center"
+        class="p-4 m-2"
+        style="background: var(--color-bg-inverse);"
+      >
         <Button variant="primary" ghost>Ghost Primary - Hover me</Button>
         <BodySm color="inverse">Can be used on light backgrounds</BodySm>
       </Flex>
@@ -591,11 +679,15 @@ import { Button } from "@components/primitives";
   <!-- GRID -->
   <section id="grid" class="ds-section">
     <H2>Grid & Layout</H2>
-    <BodyMd color="secondary"> 12-column responsive grid system with Grid, Col, and Flex components. </BodyMd>
+    <BodyMd color="secondary">
+      12-column responsive grid system with Grid, Col, and Flex components.
+    </BodyMd>
 
     <div class="ds-subsection">
       <H3>Grid Component</H3>
-      <BodyMd color="secondary"> Responsive 12-column grid. Columns cascade from xs → md → lg. </BodyMd>
+      <BodyMd color="secondary">
+        Responsive 12-column grid. Columns cascade from xs → md → lg.
+      </BodyMd>
       <div class="ds-demo" style="margin-top: var(--space-4);">
         <Grid gap="4">
           <Col xs={12} md={6} lg={4}>
@@ -664,7 +756,9 @@ import { Flex } from "@components/primitives";
 
     <div class="ds-subsection">
       <H3>FlexItem Component</H3>
-      <BodyMd color="secondary">Control flex-grow, flex-shrink, and flex-basis for individual flex children.</BodyMd>
+      <BodyMd color="secondary"
+        >Control flex-grow, flex-shrink, and flex-basis for individual flex children.</BodyMd
+      >
 
       <H4 style="margin-top: var(--space-6);">Equal Columns</H4>
       <div class="ds-demo" style="margin-top: var(--space-3);">
@@ -715,7 +809,9 @@ import { Flex, FlexItem } from "@components/primitives";
 
     <div class="ds-subsection">
       <H3>Container</H3>
-      <BodyMd color="secondary"> Centered, responsive content wrapper with max-width and padding. </BodyMd>
+      <BodyMd color="secondary">
+        Centered, responsive content wrapper with max-width and padding.
+      </BodyMd>
       <div class="ds-demo-container" style="margin-top: var(--space-4);">
         <Container>
           <div class="ds-box">
@@ -764,13 +860,13 @@ import { Container } from "@components/primitives";
   /* tablet only */
 }
 @media (--md-up) {
-  /* tablet and above */
+  /* above tablet */
 }
 @media (--lg-up) {
-  /* desktop and above */
+  /* above desktop */
 }
 @media (--lg-down) {
-  /* desktop and below */
+  /* below desktop */
 }
           `}
       />

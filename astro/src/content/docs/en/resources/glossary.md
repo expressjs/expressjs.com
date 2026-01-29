@@ -9,7 +9,7 @@ order: 2
 
 ### application
 
-In general, one or more programs that are designed to carry out operations for a specific purpose.  In the context of Express, a program that uses the Express API running on the Node.js platform.  Might also refer to an [app object](/{{ page.lang }}/api.html#express).
+In general, one or more programs that are designed to carry out operations for a specific purpose. In the context of Express, a program that uses the Express API running on the Node.js platform. Might also refer to an [app object](/{{ page.lang }}/api.html#express).
 
 ### API
 
@@ -23,13 +23,13 @@ A fast, un-opinionated, minimalist web framework for Node.js applications. In ge
 
 A multi-platform support library which focuses on asynchronous I/O, primarily developed for use by Node.js.
 
-### middleware 
+### middleware
 
 A function that is invoked by the Express routing layer before the final request handler, and thus sits in the middle between a raw request and the final intended route. A few fine points of terminology around middleware:
 
-  * `var foo = require('middleware')` is called _requiring_ or _using_ a Node.js module. Then the statement `var mw = foo()` typically returns the middleware.
-  * `app.use(mw)` is called _adding the middleware to the global processing stack_.
-  * `app.get('/foo', mw, function (req, res) { ... })` is called _adding the middleware to the "GET /foo" processing stack_.
+- `var foo = require('middleware')` is called _requiring_ or _using_ a Node.js module. Then the statement `var mw = foo()` typically returns the middleware.
+- `app.use(mw)` is called _adding the middleware to the global processing stack_.
+- `app.get('/foo', mw, function (req, res) { ... })` is called _adding the middleware to the "GET /foo" processing stack_.
 
 ### Node.js
 
@@ -37,7 +37,7 @@ A software platform that is used to build scalable network applications. Node.js
 
 ### open-source, open source
 
-When used as an adjective, hyphenate; for example: "This is open-source software." See [Open-source software on Wikipedia](http://en.wikipedia.org/wiki/Open-source_software). 
+When used as an adjective, hyphenate; for example: "This is open-source software." See [Open-source software on Wikipedia](http://en.wikipedia.org/wiki/Open-source_software).
 
 {% capture english-rules %}
 
@@ -49,7 +49,7 @@ Although it is common not to hyphenate this term, we are using the standard Engl
 
 ### request
 
-An HTTP request. A client submits an HTTP request message to a server, which returns a response.  The request must use one of several [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) such as GET, POST, and so on.
+An HTTP request. A client submits an HTTP request message to a server, which returns a response. The request must use one of several [request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) such as GET, POST, and so on.
 
 ### response
 

@@ -23,10 +23,8 @@ Following is an example of overriding the behavior of [res.sendStatus](/4x/api.h
 ```js
 app.response.sendStatus = function (statusCode, type, message) {
   // code is intentionally kept simple for demonstration purpose
-  return this.contentType(type)
-    .status(statusCode)
-    .send(message)
-}
+  return this.contentType(type).status(statusCode).send(message);
+};
 ```
 
 The above implementation completely changes the original signature of `res.sendStatus`. It now accepts a status code, encoding type, and the message to be sent to the client.
@@ -34,7 +32,7 @@ The above implementation completely changes the original signature of `res.sendS
 The overridden method may now be used this way:
 
 ```js
-res.sendStatus(404, 'application/json', '{"error":"resource not found"}')
+res.sendStatus(404, 'application/json', '{"error":"resource not found"}');
 ```
 
 ## Properties
@@ -54,8 +52,10 @@ The following code rewrites how the value of `req.ip` is to be derived. Now, it 
 Object.defineProperty(app.request, 'ip', {
   configurable: true,
   enumerable: true,
-  get () { return this.get('Client-IP') }
-})
+  get() {
+    return this.get('Client-IP');
+  },
+});
 ```
 
 ## Prototype
@@ -67,6 +67,6 @@ Unless necessary, it is recommended that this be done only at the application le
 ```js
 // Use FakeRequest and FakeResponse in place of http.IncomingRequest and http.ServerResponse
 // for the given app reference
-Object.setPrototypeOf(Object.getPrototypeOf(app.request), FakeRequest.prototype)
-Object.setPrototypeOf(Object.getPrototypeOf(app.response), FakeResponse.prototype)
+Object.setPrototypeOf(Object.getPrototypeOf(app.request), FakeRequest.prototype);
+Object.setPrototypeOf(Object.getPrototypeOf(app.response), FakeResponse.prototype);
 ```

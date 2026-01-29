@@ -63,7 +63,6 @@ in the repository covering everything from API design and authentication to temp
 
 The [GitHub Discussions](https://github.com/expressjs/discussions) section is an excellent space to engage in conversations about the development and maintenance of Express, as well as to share ideas and discuss topics related to its usage.
 
-
 # Branding of Express.js
 
 ## Express.js Logo

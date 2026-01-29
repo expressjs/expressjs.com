@@ -13,26 +13,8 @@
  */
 
 import type { HTMLAttributes } from 'astro/types';
+import type { FlexProps } from './types';
 import './Grid.css';
-
-type FlexDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse';
-type FlexAlign = 'start' | 'center' | 'end' | 'stretch' | 'baseline';
-type FlexJustify = 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
-type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';
-type GapSize = '0' | '1' | '2' | '3' | '4' | '6' | '8' | '12' | '16';
-
-export interface FlexProps {
-  /** Flex direction */
-  direction?: FlexDirection;
-  /** Align items on cross axis */
-  align?: FlexAlign;
-  /** Justify content on main axis */
-  justify?: FlexJustify;
-  /** Flex wrap behavior */
-  wrap?: FlexWrap;
-  /** Gap between flex items */
-  gap?: GapSize;
-}
 
 type Props = FlexProps & HTMLAttributes<'div'>;
 

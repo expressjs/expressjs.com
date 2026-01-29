@@ -77,7 +77,6 @@ You can find the list of available codemods [here](https://codemod.link/express)
   <li><a href="#res.vary">res.vary</a></li>
 </ul>
 
-
 **Improvements**
 
 <ul class="doclist">
@@ -101,6 +100,7 @@ You can replace the deprecated signatures with the following command:
 ```plain-text
 npx codemod@latest @expressjs/route-del-to-delete
 ```
+
 {% endcapture %}
 
 {% include admonitions/note.html content=codemod-route-del-to-delete %}
@@ -108,13 +108,13 @@ npx codemod@latest @expressjs/route-del-to-delete
 ```js
 // v4
 app.del('/user/:id', (req, res) => {
-  res.send(`DELETE /user/${req.params.id}`)
-})
+  res.send(`DELETE /user/${req.params.id}`);
+});
 
 // v5
 app.delete('/user/:id', (req, res) => {
-  res.send(`DELETE /user/${req.params.id}`)
-})
+  res.send(`DELETE /user/${req.params.id}`);
+});
 ```
 
 <h3 id="app.param">app.param(fn)</h3>
@@ -137,6 +137,7 @@ You can replace the deprecated signatures with the following command:
 ```plain-text
 npx codemod@latest @expressjs/pluralize-method-names
 ```
+
 {% endcapture %}
 
 {% include admonitions/note.html content=codemod-pluralized-methods %}
@@ -144,21 +145,21 @@ npx codemod@latest @expressjs/pluralize-method-names
 ```js
 // v4
 app.all('/', (req, res) => {
-  req.acceptsCharset('utf-8')
-  req.acceptsEncoding('br')
-  req.acceptsLanguage('en')
+  req.acceptsCharset('utf-8');
+  req.acceptsEncoding('br');
+  req.acceptsLanguage('en');
 
   // ...
-})
+});
 
 // v5
 app.all('/', (req, res) => {
-  req.acceptsCharsets('utf-8')
-  req.acceptsEncodings('br')
-  req.acceptsLanguages('en')
+  req.acceptsCharsets('utf-8');
+  req.acceptsEncodings('br');
+  req.acceptsLanguages('en');
 
   // ...
-})
+});
 ```
 
 <h3 id="leading">Leading colon (:) in the name for app.param(name, fn)</h3>
@@ -177,6 +178,7 @@ You can replace the deprecated signatures with the following command:
 ```plain-text
 npx codemod@latest @expressjs/explicit-request-params
 ```
+
 {% endcapture %}
 
 {% include admonitions/note.html content=codemod-req-param %}
@@ -184,21 +186,21 @@ npx codemod@latest @expressjs/explicit-request-params
 ```js
 // v4
 app.post('/user', (req, res) => {
-  const id = req.param('id')
-  const body = req.param('body')
-  const query = req.param('query')
+  const id = req.param('id');
+  const body = req.param('body');
+  const query = req.param('query');
 
   // ...
-})
+});
 
 // v5
 app.post('/user', (req, res) => {
-  const id = req.params.id
-  const body = req.body
-  const query = req.query
+  const id = req.params.id;
+  const body = req.body;
+  const query = req.query;
 
   // ...
-})
+});
 ```
 
 <h3 id="res.json">res.json(obj, status)</h3>
@@ -211,6 +213,7 @@ You can replace the deprecated signatures with the following command:
 ```plain-text
 npx codemod@latest @expressjs/status-send-order
 ```
+
 {% endcapture %}
 
 {% include admonitions/note.html content=codemod-status-send-order %}
@@ -218,13 +221,13 @@ npx codemod@latest @expressjs/status-send-order
 ```js
 // v4
 app.post('/user', (req, res) => {
-  res.json({ name: 'Ruben' }, 201)
-})
+  res.json({ name: 'Ruben' }, 201);
+});
 
 // v5
 app.post('/user', (req, res) => {
-  res.status(201).json({ name: 'Ruben' })
-})
+  res.status(201).json({ name: 'Ruben' });
+});
 ```
 
 <h3 id="res.jsonp">res.jsonp(obj, status)</h3>
@@ -233,17 +236,16 @@ Express 5 no longer supports the signature `res.jsonp(obj, status)`. Instead, se
 
 {% include admonitions/note.html content=codemod-status-send-order %}
 
-
 ```js
 // v4
 app.post('/user', (req, res) => {
-  res.jsonp({ name: 'Ruben' }, 201)
-})
+  res.jsonp({ name: 'Ruben' }, 201);
+});
 
 // v5
 app.post('/user', (req, res) => {
-  res.status(201).jsonp({ name: 'Ruben' })
-})
+  res.status(201).jsonp({ name: 'Ruben' });
+});
 ```
 
 <h3 id="res.redirect">res.redirect(url, status)</h3>
@@ -256,6 +258,7 @@ You can replace the deprecated signatures with the following command:
 ```plain-text
 npx codemod@latest @expressjs/redirect-arg-order
 ```
+
 {% endcapture %}
 
 {% include admonitions/note.html content=codemod-redirect-arg-order %}
@@ -263,15 +266,14 @@ npx codemod@latest @expressjs/redirect-arg-order
 ```js
 // v4
 app.get('/user', (req, res) => {
-  res.redirect('/users', 301)
-})
+  res.redirect('/users', 301);
+});
 
 // v5
 app.get('/user', (req, res) => {
-  res.redirect(301, '/users')
-})
+  res.redirect(301, '/users');
+});
 ```
-
 
 <h3 id="magic-redirect">res.redirect('back') and res.location('back')</h3>
 
@@ -283,6 +285,7 @@ You can replace the deprecated signatures with the following command:
 ```plain-text
 npx codemod@latest @expressjs/back-redirect-deprecated
 ```
+
 {% endcapture %}
 
 {% include admonitions/note.html content=codemod-back-redirect-deprecated %}
@@ -290,13 +293,13 @@ npx codemod@latest @expressjs/back-redirect-deprecated
 ```js
 // v4
 app.get('/user', (req, res) => {
-  res.redirect('back')
-})
+  res.redirect('back');
+});
 
 // v5
 app.get('/user', (req, res) => {
-  res.redirect(req.get('Referrer') || '/')
-})
+  res.redirect(req.get('Referrer') || '/');
+});
 ```
 
 <h3 id="res.send.body">res.send(body, status)</h3>
@@ -305,17 +308,16 @@ Express 5 no longer supports the signature `res.send(obj, status)`. Instead, set
 
 {% include admonitions/note.html content=codemod-status-send-order %}
 
-
 ```js
 // v4
 app.get('/user', (req, res) => {
-  res.send({ name: 'Ruben' }, 200)
-})
+  res.send({ name: 'Ruben' }, 200);
+});
 
 // v5
 app.get('/user', (req, res) => {
-  res.status(200).send({ name: 'Ruben' })
-})
+  res.status(200).send({ name: 'Ruben' });
+});
 ```
 
 <h3 id="res.send.status">res.send(status)</h3>
@@ -325,17 +327,16 @@ If you need to send a number by using the `res.send()` function, quote the numbe
 
 {% include admonitions/note.html content=codemod-status-send-order %}
 
-
 ```js
 // v4
 app.get('/user', (req, res) => {
-  res.send(200)
-})
+  res.send(200);
+});
 
 // v5
 app.get('/user', (req, res) => {
-  res.sendStatus(200)
-})
+  res.sendStatus(200);
+});
 ```
 
 <h3 id="res.sendfile">res.sendfile()</h3>
@@ -357,6 +358,7 @@ You can replace the deprecated signatures with the following command:
 ```plain-text
 npx codemod@latest @expressjs/camelcase-sendfile
 ```
+
 {% endcapture %}
 
 {% include admonitions/note.html content=codemod-camelcase-sendfile %}
@@ -364,13 +366,13 @@ npx codemod@latest @expressjs/camelcase-sendfile
 ```js
 // v4
 app.get('/user', (req, res) => {
-  res.sendfile('/path/to/file')
-})
+  res.sendfile('/path/to/file');
+});
 
 // v5
 app.get('/user', (req, res) => {
-  res.sendFile('/path/to/file')
-})
+  res.sendFile('/path/to/file');
+});
 ```
 
 <h3 id="router.param">router.param(fn)</h3>
@@ -393,11 +395,11 @@ Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work wit
 
 ```js
 // v4
-express.static.mime.lookup('json')
+express.static.mime.lookup('json');
 
 // v5
-const mime = require('mime-types')
-mime.lookup('json')
+const mime = require('mime-types');
+mime.lookup('json');
 ```
 
 <h3 id="express:router-debug-logs">express:router debug logs</h3>
@@ -430,13 +432,13 @@ Path route matching syntax is when a string is supplied as the first parameter t
 ```js
 // v4
 app.get('/*', async (req, res) => {
-  res.send('ok')
-})
+  res.send('ok');
+});
 
 // v5
 app.get('/*splat', async (req, res) => {
-  res.send('ok')
-})
+  res.send('ok');
+});
 ```
 
 {% capture note_wildcard %}
@@ -445,9 +447,10 @@ app.get('/*splat', async (req, res) => {
 ```js
 // v5
 app.get('/{*splat}', async (req, res) => {
-  res.send('ok')
-})
+  res.send('ok');
+});
 ```
+
 {% endcapture %}
 {% include admonitions/note.html content=note_wildcard %}
 
@@ -456,26 +459,29 @@ app.get('/{*splat}', async (req, res) => {
 ```js
 // v4
 app.get('/:file.:ext?', async (req, res) => {
-  res.send('ok')
-})
+  res.send('ok');
+});
 
 // v5
 app.get('/:file{.:ext}', async (req, res) => {
-  res.send('ok')
-})
+  res.send('ok');
+});
 ```
 
 - Regexp characters are not supported. For example:
+
 ```js
 app.get('/[discussion|page]/:slug', async (req, res) => {
-  res.status(200).send('ok')
-})
+  res.status(200).send('ok');
+});
 ```
+
 should be changed to:
+
 ```js
 app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
-  res.status(200).send('ok')
-})
+  res.status(200).send('ok');
+});
 ```
 
 - Some characters have been reserved to avoid confusion during upgrade (`()[]?+!`), use `\` to escape them.
@@ -499,7 +505,7 @@ Example of breaking code:
 
 ```js
 // v4
-app.use(express.static('public'))
+app.use(express.static('public'));
 ```
 
 After migrating to Express 5, a request to `/.well-known/assetlinks.json` will result in a **404 Not Found**.
@@ -508,12 +514,11 @@ To fix this, serve specific dot-directories explicitly using the `dotfiles: "all
 
 ```js
 // v5
-app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }))
-app.use(express.static('public'))
+app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }));
+app.use(express.static('public'));
 ```
 
 This approach allows you to safely serve only the intended dot-directories while keeping the default secure behavior for other dotfiles, which remain inaccessible.
-
 
 <h3 id="app.listen">app.listen</h3>
 
@@ -523,10 +528,10 @@ For example:
 ```js
 const server = app.listen(8080, '0.0.0.0', (error) => {
   if (error) {
-    throw error // e.g. EADDRINUSE
+    throw error; // e.g. EADDRINUSE
   }
-  console.log(`Listening on ${JSON.stringify(server.address())}`)
-})
+  console.log(`Listening on ${JSON.stringify(server.address())}`);
+});
 ```
 
 <h3 id="app.router">app.router</h3>
@@ -552,9 +557,9 @@ Wildcards (e.g., `/*splat`) capture path segments as an array instead of a singl
 ```js
 app.get('/*splat', (req, res) => {
   // GET /foo/bar
-  console.dir(req.params)
+  console.dir(req.params);
   // => [Object: null prototype] { splat: [ 'foo', 'bar' ] }
-})
+});
 ```
 
 **Unmatched parameters are omitted:**
@@ -565,23 +570,23 @@ In Express 4, unmatched wildcards were empty strings (`''`) and optional `:` par
 // v4: unmatched wildcard is empty string
 app.get('/*', (req, res) => {
   // GET /
-  console.dir(req.params)
+  console.dir(req.params);
   // => { '0': '' }
-})
+});
 
 // v4: unmatched optional param is undefined
 app.get('/:file.:ext?', (req, res) => {
   // GET /image
-  console.dir(req.params)
+  console.dir(req.params);
   // => { file: 'image', ext: undefined }
-})
+});
 
 // v5: unmatched optional param is omitted
 app.get('/:file{.:ext}', (req, res) => {
   // GET /image
-  console.dir(req.params)
+  console.dir(req.params);
   // => [Object: null prototype] { file: 'image' }
-})
+});
 ```
 
 <h3 id="req.query">req.query</h3>

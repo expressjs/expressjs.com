@@ -5,20 +5,5 @@
   "useTabs": false,
   "trailingComma": "es5",
   "printWidth": 100,
-  "plugins": ["prettier-plugin-astro"],
-  "overrides": [
-    {
-      "files": "*.astro",
-      "options": {
-        "parser": "astro",
-        "printWidth": 120
-      }
-    },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "options": {
-        "printWidth": 120
-      }
-    }
-  ]
+  "plugins": ["prettier-plugin-astro"]
 }

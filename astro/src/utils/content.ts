@@ -15,7 +15,9 @@ export async function getDocsByLang(lang: string = 'en') {
  */
 export async function getDocsBySection(section: MenuSection, lang: string = 'en') {
   const allDocs = await getDocsByLang(lang);
-  return allDocs.filter((doc) => doc.data.menu === section).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+  return allDocs
+    .filter((doc) => doc.data.menu === section)
+    .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 }
 
 /**
@@ -25,7 +27,10 @@ export async function getDocsBySection(section: MenuSection, lang: string = 'en'
  * @returns True if content exists at the specified path, false otherwise
  */
 
-export function hasContentAt(checkPath: string, pages: CollectionEntry<keyof typeof collections>[]): boolean {
+export function hasContentAt(
+  checkPath: string,
+  pages: CollectionEntry<keyof typeof collections>[]
+): boolean {
   return pages.some((page) => page.id === checkPath);
 }
 

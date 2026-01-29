@@ -11,24 +11,17 @@
  */
 
 import type { HTMLAttributes } from 'astro/types';
+import type { ColProps } from './types';
 import './Grid.css';
-
-type ColSpan = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-
-export interface ColProps {
-  /** Column span for mobile (xs) breakpoint */
-  xs?: ColSpan;
-  /** Column span for tablet (md) breakpoint */
-  md?: ColSpan;
-  /** Column span for desktop (lg) breakpoint */
-  lg?: ColSpan;
-}
 
 type Props = ColProps & HTMLAttributes<'div'>;
 
 const { xs, md, lg, class: className, ...rest } = Astro.props;
 ---
 
-<div class:list={['col', xs && `col-xs-${xs}`, md && `col-md-${md}`, lg && `col-lg-${lg}`, className]} {...rest}>
+<div
+  class:list={['col', xs && `col-xs-${xs}`, md && `col-md-${md}`, lg && `col-lg-${lg}`, className]}
+  {...rest}
+>
   <slot />
 </div>

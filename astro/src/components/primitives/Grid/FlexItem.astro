@@ -13,23 +13,8 @@
  */
 
 import type { HTMLAttributes } from 'astro/types';
+import type { FlexItemProps } from './types';
 import './Grid.css';
-
-type FlexGrow = boolean;
-type FlexShrink = boolean;
-type FlexBasis = '0' | 'auto' | 'full' | '1/2' | '1/3' | '2/3' | '1/4' | '3/4';
-type FlexShorthand = '1' | 'auto' | 'initial' | 'none';
-
-export interface FlexItemProps {
-  /** Flex grow factor (ability to grow) */
-  grow?: FlexGrow;
-  /** Flex shrink factor (ability to shrink) */
-  shrink?: FlexShrink;
-  /** Flex basis (initial size) */
-  basis?: FlexBasis;
-  /** Flex shorthand (overrides grow/shrink/basis) */
-  flex?: FlexShorthand;
-}
 
 type Props = FlexItemProps & HTMLAttributes<'div'>;
 

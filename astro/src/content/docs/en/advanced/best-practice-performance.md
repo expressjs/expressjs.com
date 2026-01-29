@@ -4,44 +4,45 @@ description: Discover performance and reliability best practices for Express app
 menu: advanced
 order: 4
 ---
+
 # Production best practices: performance and reliability
 
 This article discusses performance and reliability best practices for Express applications deployed to production.
 
 This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts:
 
-* Things to do in your code (the dev part):
-  * [Use gzip compression](#use-gzip-compression)
-  * [Don't use synchronous functions](#dont-use-synchronous-functions)
-  * [Do logging correctly](#do-logging-correctly)
-  * [Handle exceptions properly](#handle-exceptions-properly)
-* Things to do in your environment / setup (the ops part):
-  * [Set NODE_ENV to "production"](#set-node_env-to-production)
-  * [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
-  * [Run your app in a cluster](#run-your-app-in-a-cluster)
-  * [Cache request results](#cache-request-results)
-  * [Use a load balancer](#use-a-load-balancer)
-  * [Use a reverse proxy](#use-a-reverse-proxy)
+- Things to do in your code (the dev part):
+  - [Use gzip compression](#use-gzip-compression)
+  - [Don't use synchronous functions](#dont-use-synchronous-functions)
+  - [Do logging correctly](#do-logging-correctly)
+  - [Handle exceptions properly](#handle-exceptions-properly)
+- Things to do in your environment / setup (the ops part):
+  - [Set NODE_ENV to "production"](#set-node_env-to-production)
+  - [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
+  - [Run your app in a cluster](#run-your-app-in-a-cluster)
+  - [Cache request results](#cache-request-results)
+  - [Use a load balancer](#use-a-load-balancer)
+  - [Use a reverse proxy](#use-a-reverse-proxy)
 
 ## Things to do in your code {#in-code}
 
 Here are some things you can do in your code to improve your application's performance:
 
-* [Use gzip compression](#use-gzip-compression)
-* [Don't use synchronous functions](#dont-use-synchronous-functions)
-* [Do logging correctly](#do-logging-correctly)
-* [Handle exceptions properly](#handle-exceptions-properly)
+- [Use gzip compression](#use-gzip-compression)
+- [Don't use synchronous functions](#dont-use-synchronous-functions)
+- [Do logging correctly](#do-logging-correctly)
+- [Handle exceptions properly](#handle-exceptions-properly)
 
 ### Use gzip compression
 
 Gzip compressing can greatly decrease the size of the response body and hence increase the speed of a web app. Use the [compression](https://www.npmjs.com/package/compression) middleware for gzip compression in your Express app. For example:
 
 ```js
-const compression = require('compression')
-const express = require('express')
-const app = express()
+const compression = require('compression');
+const express = require('express');
+const app = express();
 
-app.use(compression())
+app.use(compression());
 ```
 
 For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#use-a-reverse-proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
@@ -72,14 +73,14 @@ Node apps crash when they encounter an uncaught exception. Not handling exceptio
 
 To ensure you handle all exceptions, use the following techniques:
 
-* [Use try-catch](#use-try-catch)
-* [Use promises](#use-promises)
+- [Use try-catch](#use-try-catch)
+- [Use promises](#use-promises)
 
 Before diving into these topics, you should have a basic understanding of Node/Express error handling: using error-first callbacks, and propagating errors in middleware. Node uses an "error-first callback" convention for returning errors from asynchronous functions, where the first parameter to the callback function is the error object, followed by result data in succeeding parameters. To indicate no error, pass null as the first parameter. The callback function must correspondingly follow the error-first callback convention to meaningfully handle the error. And in Express, the best practice is to use the next() function to propagate errors through the middleware chain.
 
 For more on the fundamentals of error handling, see:
 
-* [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
+- [Error Handling in Node.js](https://www.tritondatacenter.com/node-js/production/design/errors)
 
 #### Use try-catch
 
@@ -92,15 +93,15 @@ This middleware function accepts a query field parameter named "params" that is 
 app.get('/search', (req, res) => {
   // Simulating async operation
   setImmediate(() => {
-    const jsonStr = req.query.params
+    const jsonStr = req.query.params;
     try {
-      const jsonObj = JSON.parse(jsonStr)
-      res.send('Success')
+      const jsonObj = JSON.parse(jsonStr);
+      res.send('Success');
     } catch (e) {
-      res.status(400).send('Invalid JSON string')
+      res.status(400).send('Invalid JSON string');
     }
-  })
-})
+  });
+});
 ```
 
 However, try-catch works only for synchronous code. Because the Node platform is primarily asynchronous (particularly in a production environment), try-catch won't catch a lot of exceptions.
@@ -111,24 +112,24 @@ When an error is thrown in an `async` function or a rejected promise is awaited 
 
 ```js
 app.get('/', async (req, res, next) => {
-  const data = await userData() // If this promise fails, it will automatically call `next(err)` to handle the error.
+  const data = await userData(); // If this promise fails, it will automatically call `next(err)` to handle the error.
 
-  res.send(data)
-})
+  res.send(data);
+});
 
 app.use((err, req, res, next) => {
-  res.status(err.status ?? 500).send({ error: err.message })
-})
+  res.status(err.status ?? 500).send({ error: err.message });
+});
 ```
 
 Also, you can use asynchronous functions for your middleware, and the router will handle errors if the promise fails, for example:
 
 ```js
 app.use(async (req, res, next) => {
-  req.locals.user = await getUser(req)
+  req.locals.user = await getUser(req);
 
-  next() // This will be called if the promise does not throw an error.
-})
+  next(); // This will be called if the promise does not throw an error.
+});
 ```
 
 Best practice is to handle errors as close to the site as possible. So while this is now handled in the router, it’s best to catch the error in the middleware and handle it without relying on separate error-handling middleware.
@@ -145,12 +146,12 @@ We also don't recommend using [domains](https://nodejs.org/api/domain.html). It 
 
 Here are some things you can do in your system environment to improve your app's performance:
 
-* [Set NODE_ENV to "production"](#set-node_env-to-production)
-* [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
-* [Run your app in a cluster](#run-your-app-in-a-cluster)
-* [Cache request results](#cache-request-results)
-* [Use a load balancer](#use-a-load-balancer)
-* [Use a reverse proxy](#use-a-reverse-proxy)
+- [Set NODE_ENV to "production"](#set-node_env-to-production)
+- [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
+- [Run your app in a cluster](#run-your-app-in-a-cluster)
+- [Cache request results](#cache-request-results)
+- [Use a load balancer](#use-a-load-balancer)
+- [Use a reverse proxy](#use-a-reverse-proxy)
 
 ### Set NODE_ENV to "production"
 
@@ -158,9 +159,9 @@ The NODE_ENV environment variable specifies the environment in which an applicat
 
 Setting NODE_ENV to "production" makes Express:
 
-* Cache view templates.
-* Cache CSS files generated from CSS extensions.
-* Generate less verbose error messages.
+- Cache view templates.
+- Cache CSS files generated from CSS extensions.
+- Generate less verbose error messages.
 
 [Tests indicate](https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/) that just doing this can improve app performance by a factor of three!
 
@@ -181,8 +182,8 @@ For more information, see [Using Environment Variables In systemd Units](https:/
 
 In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server itself crashes. Although you hope that neither of those events occurs, realistically you must account for both eventualities by:
 
-* Using a process manager to restart the app (and Node) when it crashes.
-* Using the init system provided by your OS to restart the process manager when the OS crashes. It's also possible to use the init system without a process manager.
+- Using a process manager to restart the app (and Node) when it crashes.
+- Using the init system provided by your OS to restart the process manager when the OS crashes. It's also possible to use the init system without a process manager.
 
 Node applications crash if they encounter an uncaught exception. The foremost thing you need to do is to ensure your app is well-tested and handles all exceptions (see [handle exceptions properly](#handle-exceptions-properly) for details). But as a fail-safe, put a mechanism in place to ensure that if and when your app crashes, it will automatically restart.
 
@@ -192,9 +193,9 @@ In development, you started your app simply from the command line with `node ser
 
 In addition to restarting your app when it crashes, a process manager can enable you to:
 
-* Gain insights into runtime performance and resource consumption.
-* Modify settings dynamically to improve performance.
-* Control clustering (pm2).
+- Gain insights into runtime performance and resource consumption.
+- Modify settings dynamically to improve performance.
+- Control clustering (pm2).
 
 Historically, it was popular to use a Node.js process manager like [PM2](https://github.com/Unitech/pm2). See their documentation if you wish to do this. However, we recommend using your init system for process management.
 
@@ -204,8 +205,8 @@ The next layer of reliability is to ensure that your app restarts when the serve
 
 There are two ways to use init systems with your Express app:
 
-* Run your app in a process manager, and install the process manager as a service with the init system. The process manager will restart your app when the app crashes, and the init system will restart the process manager when the OS restarts. This is the recommended approach.
-* Run your app (and Node) directly with the init system. This is somewhat simpler, but you don't get the additional advantages of using a process manager.
+- Run your app in a process manager, and install the process manager as a service with the init system. The process manager will restart your app when the app crashes, and the init system will restart the process manager when the OS restarts. This is the recommended approach.
+- Run your app (and Node) directly with the init system. This is somewhat simpler, but you don't get the additional advantages of using a process manager.
 
 ##### Systemd
 

@@ -12,10 +12,10 @@ order: 5
 Express and the other projects in the [expressjs organization on GitHub](https://github.com/expressjs) are projects of the [OpenJs Foundation](https://openjsf.org/).
 These projects are governed under the general policies and guidelines of the Node.js Foundation along with the additional guidelines below.
 
-* [Technical committee](#technical-committee)
-* [Community contributing guide](#community-contributing-guide)
-* [Collaborator's guide](#collaborators-guide)
-* [Security policies and procedures](#security-policies-and-procedures)
+- [Technical committee](#technical-committee)
+- [Community contributing guide](#community-contributing-guide)
+- [Collaborator's guide](#collaborators-guide)
+- [Security policies and procedures](#security-policies-and-procedures)
 
 ## Technical committee
 
@@ -27,20 +27,20 @@ The Express technical committee consists of active project members, and guides d
 
 The goal of this document is to create a contribution process that:
 
-* Encourages new contributions.
-* Encourages contributors to remain involved.
-* Avoids unnecessary processes and bureaucracy whenever possible.
-* Creates a transparent decision making process that makes it clear how
-contributors can be involved in decision making.
+- Encourages new contributions.
+- Encourages contributors to remain involved.
+- Avoids unnecessary processes and bureaucracy whenever possible.
+- Creates a transparent decision making process that makes it clear how
+  contributors can be involved in decision making.
 
 ### Vocabulary
 
-* A **Contributor** is any individual creating or commenting on an issue or pull request.
-* A **Committer** is a subset of contributors who have been given write access to the repository.
-* A **Project Captain** is the lead maintainer of a repository.
-* A **TC (Technical Committee)** is a group of committers representing the required technical
-expertise to resolve rare disputes.
-* A **Triager** is a subset of contributors who have been given triage access to the repository.
+- A **Contributor** is any individual creating or commenting on an issue or pull request.
+- A **Committer** is a subset of contributors who have been given write access to the repository.
+- A **Project Captain** is the lead maintainer of a repository.
+- A **TC (Technical Committee)** is a group of committers representing the required technical
+  expertise to resolve rare disputes.
+- A **Triager** is a subset of contributors who have been given triage access to the repository.
 
 ### Logging Issues
 
@@ -165,12 +165,12 @@ to the captain role. To do so, they should submit a PR to this document, updatin
 **Active Project Captains** section (while maintaining the sort order) with the project
 name, the nominee's GitHub handle, and their npm username (if different).
 
-* Repos can have as many captains as make sense for the scope of work.
-* A TC member or an existing repo captain **on the same project** can nominate a new captain.
+- Repos can have as many captains as make sense for the scope of work.
+- A TC member or an existing repo captain **on the same project** can nominate a new captain.
   Repo captains from other projects should not nominate captains for a different project.
 
 The PR will require at least 2 approvals from TC members and 2 weeks hold time to allow
-for comment and/or dissent.  When the PR is merged, a TC member will add them to the
+for comment and/or dissent. When the PR is merged, a TC member will add them to the
 proper GitHub/npm groups.
 
 #### Active Projects and Captains
@@ -193,13 +193,13 @@ Anyone may request a temporary leave from active participation due to personal o
 
 #### Inactivity Process
 
-* If someone is deemed inactive, the individual may be transitioned to an emeritus role that reflects their past contributions. A best effort will be made to inform them that this has occurred. They may request to be reinstated when they are ready to be active again.
-* The emeritus status helps preserve a clear record of contributors who have meaningfully shaped the project over time.
+- If someone is deemed inactive, the individual may be transitioned to an emeritus role that reflects their past contributions. A best effort will be made to inform them that this has occurred. They may request to be reinstated when they are ready to be active again.
+- The emeritus status helps preserve a clear record of contributors who have meaningfully shaped the project over time.
 
 #### Accountability
 
-* The Technical Committee (TC) and the respective captains of each package/team are responsible for assessing activity levels and enacting this policy fairly and transparently, in coordination with other relevant teams.
-* In case of disagreement, the situation can be discussed and resolved by consensus within the TC or appropriate team.
+- The Technical Committee (TC) and the respective captains of each package/team are responsible for assessing activity levels and enacting this policy fairly and transparently, in coordination with other relevant teams.
+- In case of disagreement, the situation can be discussed and resolved by consensus within the TC or appropriate team.
 
 ### Developer's Certificate of Origin 1.1
 
@@ -241,9 +241,9 @@ For issues in other Express managed repos (everything in `expressjs`, `pillarjs`
 
 ### PRs and Code contributions
 
-* Tests must pass.
-* Follow the [JavaScript Standard Style](https://standardjs.com/) and `npm run lint`.
-* If you fix a bug, add a test.
+- Tests must pass.
+- Follow the [JavaScript Standard Style](https://standardjs.com/) and `npm run lint`.
+- If you fix a bug, add a test.
 
 ### Branches
 
@@ -277,10 +277,10 @@ being trigger happy with posting a question issue.
 
 Things that will help get your question issue looked at:
 
-* Full and runnable JS code.
-* Clear description of the problem or unexpected behavior.
-* Clear description of the expected result.
-* Steps you have taken to debug it yourself.
+- Full and runnable JS code.
+- Clear description of the problem or unexpected behavior.
+- Clear description of the expected result.
+- Steps you have taken to debug it yourself.
 
 If you post a question and do not outline the above items or make it easy for
 us to understand and reproduce your issue, it will be closed.
@@ -291,7 +291,8 @@ by the maintainers
 of an issue. If you
 are unsure and open an issue, we may move it to discussions if we triage them and decide they do
 not need high
-visibility or maintainer input. 
+visibility or maintainer input.
+
 ## Security Policies and Procedures
 
 <!-- SRC: expressjs/express SECURITY.md -->
@@ -299,9 +300,9 @@ visibility or maintainer input.
 This document outlines security procedures and general policies for the Express
 project.
 
-  * [Reporting a Bug](#reporting-a-bug)
-  * [Disclosure Policy](#disclosure-policy)
-  * [Comments on this Policy](#comments-on-this-policy)
+- [Reporting a Bug](#reporting-a-bug)
+- [Disclosure Policy](#disclosure-policy)
+- [Comments on this Policy](#comments-on-this-policy)
 
 ### Reporting a Bug
 
@@ -337,10 +338,10 @@ When the security team receives a security bug report, they will assign it to a
 primary handler. This person will coordinate the fix and release process,
 involving the following steps:
 
-  * Confirm the problem and determine the affected versions.
-  * Audit code to find any potential similar problems.
-  * Prepare fixes for all releases still under maintenance. These fixes will be
-    released as fast as possible to npm.
+- Confirm the problem and determine the affected versions.
+- Audit code to find any potential similar problems.
+- Prepare fixes for all releases still under maintenance. These fixes will be
+  released as fast as possible to npm.
 
 ### The Express Threat Model
 
@@ -351,35 +352,35 @@ We are currently working on a new version of the security model, the most update
 If you have suggestions on how this process could be improved please submit a
 pull request.
 
-----
+---
+
 # Contributing to Expressjs.com {#expressjs-website-contributing}
 
 <!-- LOCAL: expressjs/expressjs.com ../../CONTRIBUTING.md -->
+
 ### The Official Documentation of the Express.js Framework
 
 This is the contribution documentation for the [expressjs.com](https://github.com/expressjs/expressjs.com) website.
 
-
-
 #### Need some ideas? These are some typical issues.
 
 1. **Website issues**: If you see anything on the site that could use a tune-up, think about how to fix it.
-    - Display or screen sizing problems
-    - Mobile responsiveness issues
-    - Missing or broken accessibility features 
-    - Website outages
-    - Broken links
-    - Page structure or user interface enhancements
+   - Display or screen sizing problems
+   - Mobile responsiveness issues
+   - Missing or broken accessibility features
+   - Website outages
+   - Broken links
+   - Page structure or user interface enhancements
 
 2. **Content Issues**: Fix anything related to site content or typos.
-    - Spelling errors
-    - Incorrect/outdated Express.js documentation
-    - Missing content
+   - Spelling errors
+   - Incorrect/outdated Express.js documentation
+   - Missing content
 
 3. **Translation Issues**: Fix any translation errors or contribute new content.
-    - Fix spelling errors 
-    - Fix incorrect/poorly translated words
-    - Check out the [Contributing translations](#contributing-translations) section below for a contributing guide.
+   - Fix spelling errors
+   - Fix incorrect/poorly translated words
+   - Check out the [Contributing translations](#contributing-translations) section below for a contributing guide.
 
 #### Want to work on a backlog issue?
 
@@ -388,7 +389,8 @@ We often have bugs or enhancements that need work. You can find these under our 
 #### Have an idea? Found a bug?
 
 If you've found a bug or a typo, or if you have an idea for an enhancement, you can:
-- Submit a [new issue](https://github.com/expressjs/expressjs.com/issues/new/choose) on our repo. Do this for larger proposals, or if you'd like to discuss or get feedback first. 
+
+- Submit a [new issue](https://github.com/expressjs/expressjs.com/issues/new/choose) on our repo. Do this for larger proposals, or if you'd like to discuss or get feedback first.
 
 - Make a [GitHub pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request). If you have already done work, and it's ready to go, feel free to send it our way.
 
@@ -397,14 +399,16 @@ If you've found a bug or a typo, or if you have an idea for an enhancement, you 
 The steps below will guide you through the Expressjs.com contribution process.
 
 #### Step 1: (OPTIONAL) Open a New Issue
-So you've found a problem that you want to fix, or have a site enhancement you want to make. 
-1. If you want to get feedback or discuss, open a discussion [issue](https://github.com/expressjs/expressjs.com/issues/new/choose) prior to starting work. This is not required, but encouraged for larger proposals. 
-    - While we highly encourage this step, it is only for submissions proposing significant change. It  helps us to clarify and focus the work, and ensure it aligns with overall project priorities.
-    - For submissions proposing minor improvements or corrections, this is not needed. You can skip this step.
-    - When opening an issue please give it a title and fill in the description section. The more details you provide, the more feedback we can give.
 
-2. After receiving your issue the Express.js documentation team will respond with feedback. We read every submission and always try to respond quickly with feedback. 
-    - For submissions proposing significant change, we encourage you to follow the review process before starting work. 
+So you've found a problem that you want to fix, or have a site enhancement you want to make.
+
+1. If you want to get feedback or discuss, open a discussion [issue](https://github.com/expressjs/expressjs.com/issues/new/choose) prior to starting work. This is not required, but encouraged for larger proposals.
+   - While we highly encourage this step, it is only for submissions proposing significant change. It helps us to clarify and focus the work, and ensure it aligns with overall project priorities.
+   - For submissions proposing minor improvements or corrections, this is not needed. You can skip this step.
+   - When opening an issue please give it a title and fill in the description section. The more details you provide, the more feedback we can give.
+
+2. After receiving your issue the Express.js documentation team will respond with feedback. We read every submission and always try to respond quickly with feedback.
+   - For submissions proposing significant change, we encourage you to follow the review process before starting work.
 
 #### Step 2: Get the Application Code Base
 
@@ -414,45 +418,48 @@ Clone the repo and get the code:
 git clone https://github.com/expressjs/expressjs.com.git
 ```
 
-After you've got the code you're ready to start making your changes! 
+After you've got the code you're ready to start making your changes!
 
-But just in case you need a little extra explanation, this section below outlines the main sections of the code base, where most changes are likely to be made.  
+But just in case you need a little extra explanation, this section below outlines the main sections of the code base, where most changes are likely to be made.
 
-**Markdown Page Files**: 
+**Markdown Page Files**:
+
 - These files render to html and make up the individual pages of the site. Most of the site's documentation text content is written in `md` files.
-- Change these to make changes to individual pages' content/text or markup. 
-- Each language has its own complete set of pages, located under their respective language directories - all the Spanish markdown content is found in the `es` directory, for example. 
+- Change these to make changes to individual pages' content/text or markup.
+- Each language has its own complete set of pages, located under their respective language directories - all the Spanish markdown content is found in the `es` directory, for example.
 
 **Includes Partials and Layout Templates**
+
 - `_includes` are partials that are imported and reused across multiple pages.
   - These are used to import text content for reuse across pages, such as the API documentation, e.g., `_includes > api > en > 5x`, which is included in every language.
   - These are used to include the page components that make up site-wide user interface and periphery structure, e.g., Header, Footer, etc.
-- `_layouts` are the templates used to wrap the site's individual pages. 
+- `_layouts` are the templates used to wrap the site's individual pages.
   - These are used to display the structure of the site's periphery, such as the header and footer, and for injecting and displaying individual markdown pages inside the `content` tag.
 
 **Blog Markdown Files**
+
 - These files make up the individual blog posts. If you want to contribute a blog post please
-follow the specific instructions for [How to write a blog post.](https://expressjs.com/en/blog/write-post.html)
-- Located under the `_posts` directory. 
+  follow the specific instructions for [How to write a blog post.](https://expressjs.com/en/blog/write-post.html)
+- Located under the `_posts` directory.
 
 **CSS or Javascript**
+
 - All css and js files are kept in `css` and `js` folders on the project root.
 
 The Express.js website is built using [Jekyll](https://jekyllrb.com/) and is hosted on [GitHub Pages](https://pages.github.com/).
 
 #### Step 3: Running the Application
 
-Now you'll need a way to see your changes, which means you'll need a running version of the application. You have two options. 
+Now you'll need a way to see your changes, which means you'll need a running version of the application. You have two options.
 
+1. **Run Locally**: This gets the local version of the application up and running on your machine. Follow our [Local Setup Guide](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#build-the-website-locally) to use this option.
+   - This is the recommended option for moderate to complex work.
 
-1. __Run Locally__: This gets the local version of the application up and running on your machine. Follow our [Local Setup Guide](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#build-the-website-locally) to use this option.  
-    - This is the recommended option for moderate to complex work. 
+2. **Run using Deploy Preview**: Use this option if you don't want to bother with a local installation. Part of our continuous integration pipeline includes [Netlify Deploy Preview](https://docs.netlify.com/deploy/deploy-types/deploy-previews/).
+   1. To use this you'll need to get your changes online - after you've made your first commit on your feature branch, make a _draft_ pull request.
+   2. After the build steps are complete, you'll have access to a **Deploy Preview** tab that will run your changes on the web, rebuilding after each commit is pushed.
+   3. After you are completely done your work, and it's ready for review, remove the draft status on your pull request and submit your work.
 
-2. __Run using Deploy Preview__: Use this option if you don't want to bother with a local installation. Part of our continuous integration pipeline includes [Netlify Deploy Preview](https://docs.netlify.com/deploy/deploy-types/deploy-previews/). 
-    1. To use this you'll need to get your changes online - after you've made your first commit on your feature branch, make a *draft* pull request. 
-    2. After the build steps are complete, you'll have access to a __Deploy Preview__ tab that will run your changes on the web, rebuilding after each commit is pushed. 
-    3. After you are completely done your work, and it's ready for review, remove the draft status on your pull request and submit your work.
-  
 ## Contributing translations
 
 We use Crowdin to manage our translations in multiple languages and achieve automatic translation with artificial intelligence. Since these translations can be inefficient in some cases, we need help from the community to provide accurate and helpful translations.
@@ -475,4 +482,3 @@ The documentation is translated into these languages:
 1. Request to join the Express.js Website project on [Crowdin](https://express.crowdin.com/website)
 2. [Select the language you want to translate](https://support.crowdin.com/for-translators/#starting-translation)
 3. [Start translating](https://support.crowdin.com/online-editor/)
-

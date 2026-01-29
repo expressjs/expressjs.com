@@ -27,6 +27,11 @@ const breadcrumbs = await buildBreadcrumbs(lang, slug, 'docs');
 const { title, description, menu } = page.data;
 ---
 
-<DocLayout title={title} description={description} section={menu as MenuSection} breadcrumbs={breadcrumbs}>
+<DocLayout
+  title={title}
+  description={description}
+  section={menu as MenuSection}
+  breadcrumbs={breadcrumbs}
+>
   <Content />
 </DocLayout>

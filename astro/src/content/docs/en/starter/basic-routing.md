@@ -14,7 +14,7 @@ Each route can have one or more handler functions, which are executed when the r
 Route definition takes the following structure:
 
 ```js
-app.METHOD(PATH, HANDLER)
+app.METHOD(PATH, HANDLER);
 ```
 
 Where:
@@ -34,33 +34,32 @@ Respond with `Hello World!` on the homepage:
 
 ```js
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.send('Hello World!');
+});
 ```
 
 Respond to a POST request on the root route (`/`), the application's home page:
 
 ```js
 app.post('/', (req, res) => {
-  res.send('Got a POST request')
-})
+  res.send('Got a POST request');
+});
 ```
 
 Respond to a PUT request to the `/user` route:
 
 ```js
 app.put('/user', (req, res) => {
-  res.send('Got a PUT request at /user')
-})
+  res.send('Got a PUT request at /user');
+});
 ```
 
 Respond to a DELETE request to the `/user` route:
 
 ```js
 app.delete('/user', (req, res) => {
-  res.send('Got a DELETE request at /user')
-})
+  res.send('Got a DELETE request at /user');
+});
 ```
 
 For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).
-

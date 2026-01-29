@@ -17,13 +17,13 @@ Routes and other application-specific logic can live in as many files
 as you wish, in any directory structure you prefer. View the following
 examples for inspiration:
 
-* [Route listings](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-L47)
-* [Route map](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
+- [Route listings](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-L47)
+- [Route map](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+- [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Also, there are third-party extensions for Express, which simplify some of these patterns:
 
-* [Resourceful routing](https://github.com/expressjs/express-resource)
+- [Resourceful routing](https://github.com/expressjs/express-resource)
 
 ## How do I define models?
 
@@ -38,7 +38,6 @@ See [LoopBack](http://loopback.io) for an Express-based framework that is center
 Authentication is another opinionated area that Express does not
 venture into. You may use any authentication scheme you wish.
 For a simple username / password scheme, see [this example](https://github.com/expressjs/express/tree/master/examples/auth).
-
 
 ## Which template engines does Express support?
 
@@ -61,8 +60,8 @@ to handle a 404 response:
 
 ```js
 app.use((req, res, next) => {
-  res.status(404).send("Sorry can't find that!")
-})
+  res.status(404).send("Sorry can't find that!");
+});
 ```
 
 Add routes dynamically at runtime on an instance of `express.Router()`
@@ -75,9 +74,9 @@ except with four arguments instead of three; specifically with the signature `(e
 
 ```js
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
-})
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 ```
 
 For more information, see [Error handling](/{{ page.lang }}/guide/error-handling.html).
@@ -91,5 +90,5 @@ middleware function.
 
 ## What version of Node.js does Express require?
 
-* [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
-* [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
+- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
+- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
