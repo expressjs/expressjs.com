@@ -1,0 +1,48 @@
+---
+/**
+ * Button Primitive Component
+ *
+ * Interactive button with support for icon slots and variants.
+ * Can render as button, anchor, or any interactive element.
+ *
+ * @example
+ * <Button variant="primary" size="md">Click me</Button>
+ * <Button variant="inverse" ghost>Ghost button</Button>
+ * <Button as="a" href="/docs">
+ *   <Icon slot="left" name="arrow" />
+ *   Go to docs
+ * </Button>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import type { ButtonSize, ButtonVariant, ButtonHTMLTag, ButtonBaseProps } from './types';
+import './Button.css';
+
+type Props =
+  | ({ as?: 'a' } & ButtonBaseProps & HTMLAttributes<'a'>)
+  | ({ as?: 'button' } & ButtonBaseProps & HTMLAttributes<'button'>);
+
+const {
+  as: Tag = 'button',
+  size = 'md',
+  variant = 'primary',
+  ghost = false,
+  type = 'button',
+  class: className,
+  ...rest
+} = Astro.props;
+---
+
+<Tag
+  class:list={[
+    'btn',
+    `btn--size-${size}`,
+    `btn--variant-${variant}`,
+    ghost && 'btn--ghost',
+    className,
+  ]}
+  type={Tag === 'button' ? type : undefined}
+  {...rest}
+>
+  <slot />
+</Tag>

@@ -1,0 +1,532 @@
+/**
+ * Grid System Styles
+ *
+ * 12-column responsive grid with breakpoint support
+ * Includes both component classes and utility classes
+ */
+
+/* ============================================
+   GRID COMPONENT
+   ============================================ */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+/* Grid Gaps */
+.grid--gap-0 {
+  gap: 0;
+}
+.grid--gap-1 {
+  gap: var(--space-1);
+}
+.grid--gap-2 {
+  gap: var(--space-2);
+}
+.grid--gap-3 {
+  gap: var(--space-3);
+}
+.grid--gap-4 {
+  gap: var(--space-4);
+}
+.grid--gap-6 {
+  gap: var(--space-6);
+}
+.grid--gap-8 {
+  gap: var(--space-8);
+}
+.grid--gap-12 {
+  gap: var(--space-12);
+}
+.grid--gap-16 {
+  gap: var(--space-16);
+}
+
+/* Row Gaps */
+.grid--row-gap-0 {
+  row-gap: 0;
+}
+.grid--row-gap-1 {
+  row-gap: var(--space-1);
+}
+.grid--row-gap-2 {
+  row-gap: var(--space-2);
+}
+.grid--row-gap-3 {
+  row-gap: var(--space-3);
+}
+.grid--row-gap-4 {
+  row-gap: var(--space-4);
+}
+.grid--row-gap-6 {
+  row-gap: var(--space-6);
+}
+.grid--row-gap-8 {
+  row-gap: var(--space-8);
+}
+.grid--row-gap-12 {
+  row-gap: var(--space-12);
+}
+.grid--row-gap-16 {
+  row-gap: var(--space-16);
+}
+
+/* Column Gaps */
+.grid--col-gap-0 {
+  column-gap: 0;
+}
+.grid--col-gap-1 {
+  column-gap: var(--space-1);
+}
+.grid--col-gap-2 {
+  column-gap: var(--space-2);
+}
+.grid--col-gap-3 {
+  column-gap: var(--space-3);
+}
+.grid--col-gap-4 {
+  column-gap: var(--space-4);
+}
+.grid--col-gap-6 {
+  column-gap: var(--space-6);
+}
+.grid--col-gap-8 {
+  column-gap: var(--space-8);
+}
+.grid--col-gap-12 {
+  column-gap: var(--space-12);
+}
+.grid--col-gap-16 {
+  column-gap: var(--space-16);
+}
+
+/* ============================================
+   COL COMPONENT (Responsive Column Spans)
+   ============================================ */
+
+/* Mobile (xs) - Base spans */
+.col-xs-1 {
+  grid-column: span 1;
+}
+.col-xs-2 {
+  grid-column: span 2;
+}
+.col-xs-3 {
+  grid-column: span 3;
+}
+.col-xs-4 {
+  grid-column: span 4;
+}
+.col-xs-5 {
+  grid-column: span 5;
+}
+.col-xs-6 {
+  grid-column: span 6;
+}
+.col-xs-7 {
+  grid-column: span 7;
+}
+.col-xs-8 {
+  grid-column: span 8;
+}
+.col-xs-9 {
+  grid-column: span 9;
+}
+.col-xs-10 {
+  grid-column: span 10;
+}
+.col-xs-11 {
+  grid-column: span 11;
+}
+.col-xs-12 {
+  grid-column: span 12;
+}
+
+/* Tablet (md) breakpoint */
+@media (--md-only) {
+  .col-md-1 {
+    grid-column: span 1;
+  }
+  .col-md-2 {
+    grid-column: span 2;
+  }
+  .col-md-3 {
+    grid-column: span 3;
+  }
+  .col-md-4 {
+    grid-column: span 4;
+  }
+  .col-md-5 {
+    grid-column: span 5;
+  }
+  .col-md-6 {
+    grid-column: span 6;
+  }
+  .col-md-7 {
+    grid-column: span 7;
+  }
+  .col-md-8 {
+    grid-column: span 8;
+  }
+  .col-md-9 {
+    grid-column: span 9;
+  }
+  .col-md-10 {
+    grid-column: span 10;
+  }
+  .col-md-11 {
+    grid-column: span 11;
+  }
+  .col-md-12 {
+    grid-column: span 12;
+  }
+}
+
+/* Desktop (lg) breakpoint */
+@media (--lg-up) {
+  .col-lg-1 {
+    grid-column: span 1;
+  }
+  .col-lg-2 {
+    grid-column: span 2;
+  }
+  .col-lg-3 {
+    grid-column: span 3;
+  }
+  .col-lg-4 {
+    grid-column: span 4;
+  }
+  .col-lg-5 {
+    grid-column: span 5;
+  }
+  .col-lg-6 {
+    grid-column: span 6;
+  }
+  .col-lg-7 {
+    grid-column: span 7;
+  }
+  .col-lg-8 {
+    grid-column: span 8;
+  }
+  .col-lg-9 {
+    grid-column: span 9;
+  }
+  .col-lg-10 {
+    grid-column: span 10;
+  }
+  .col-lg-11 {
+    grid-column: span 11;
+  }
+  .col-lg-12 {
+    grid-column: span 12;
+  }
+}
+
+/* ============================================
+   FLEX COMPONENT
+   ============================================ */
+
+.flex {
+  display: flex;
+}
+
+/* Direction */
+.flex--row {
+  flex-direction: row;
+}
+.flex--column {
+  flex-direction: column;
+}
+.flex--row-reverse {
+  flex-direction: row-reverse;
+}
+.flex--column-reverse {
+  flex-direction: column-reverse;
+}
+
+/* Align Items */
+.flex--align-start {
+  align-items: flex-start;
+}
+.flex--align-center {
+  align-items: center;
+}
+.flex--align-end {
+  align-items: flex-end;
+}
+.flex--align-stretch {
+  align-items: stretch;
+}
+.flex--align-baseline {
+  align-items: baseline;
+}
+
+/* Justify Content */
+.flex--justify-start {
+  justify-content: flex-start;
+}
+.flex--justify-center {
+  justify-content: center;
+}
+.flex--justify-end {
+  justify-content: flex-end;
+}
+.flex--justify-between {
+  justify-content: space-between;
+}
+.flex--justify-around {
+  justify-content: space-around;
+}
+.flex--justify-evenly {
+  justify-content: space-evenly;
+}
+
+/* Wrap */
+.flex--nowrap {
+  flex-wrap: nowrap;
+}
+.flex--wrap {
+  flex-wrap: wrap;
+}
+.flex--wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+/* Flex Gaps */
+.flex--gap-0 {
+  gap: 0;
+}
+.flex--gap-1 {
+  gap: var(--space-1);
+}
+.flex--gap-2 {
+  gap: var(--space-2);
+}
+.flex--gap-3 {
+  gap: var(--space-3);
+}
+.flex--gap-4 {
+  gap: var(--space-4);
+}
+.flex--gap-6 {
+  gap: var(--space-6);
+}
+.flex--gap-8 {
+  gap: var(--space-8);
+}
+.flex--gap-12 {
+  gap: var(--space-12);
+}
+.flex--gap-16 {
+  gap: var(--space-16);
+}
+
+/* ============================================
+   FLEX ITEM COMPONENT
+   ============================================ */
+
+/* Flex Grow */
+.flex-item--grow-0 {
+  flex-grow: 0;
+}
+.flex-item--grow-1 {
+  flex-grow: 1;
+}
+
+/* Flex Shrink */
+.flex-item--shrink-0 {
+  flex-shrink: 0;
+}
+.flex-item--shrink-1 {
+  flex-shrink: 1;
+}
+
+/* Flex Basis */
+.flex-item--basis-0 {
+  flex-basis: 0;
+}
+.flex-item--basis-auto {
+  flex-basis: auto;
+}
+.flex-item--basis-full {
+  flex-basis: 100%;
+}
+.flex-item--basis-1\/2 {
+  flex-basis: 50%;
+}
+.flex-item--basis-1\/3 {
+  flex-basis: 33.333333%;
+}
+.flex-item--basis-2\/3 {
+  flex-basis: 66.666667%;
+}
+.flex-item--basis-1\/4 {
+  flex-basis: 25%;
+}
+.flex-item--basis-3\/4 {
+  flex-basis: 75%;
+}
+
+/* Flex Shorthand */
+.flex-item--flex-1 {
+  flex: 1 1 0%;
+}
+.flex-item--flex-auto {
+  flex: 1 1 auto;
+}
+.flex-item--flex-initial {
+  flex: 0 1 auto;
+}
+.flex-item--flex-none {
+  flex: none;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Grid Utilities */
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.grid-cols-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+.grid-cols-12 {
+  grid-template-columns: repeat(12, 1fr);
+}
+
+/* Responsive Grid Utilities */
+@media (--md-only) {
+  .md-grid-cols-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .md-grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .md-grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .md-grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .md-grid-cols-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .md-grid-cols-12 {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+@media (--lg-up) {
+  .lg-grid-cols-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .lg-grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .lg-grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .lg-grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .lg-grid-cols-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .lg-grid-cols-12 {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+/* Column Span Utilities */
+.col-span-full {
+  grid-column: 1 / -1;
+}
+.col-span-1 {
+  grid-column: span 1;
+}
+.col-span-2 {
+  grid-column: span 2;
+}
+.col-span-3 {
+  grid-column: span 3;
+}
+.col-span-4 {
+  grid-column: span 4;
+}
+.col-span-6 {
+  grid-column: span 6;
+}
+.col-span-12 {
+  grid-column: span 12;
+}
+
+/* Flex Utilities */
+.flex {
+  display: flex;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-center {
+  align-items: center;
+}
+.items-end {
+  align-items: flex-end;
+}
+.justify-start {
+  justify-content: flex-start;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* Gap Utilities */
+.gap-1 {
+  gap: var(--space-1);
+}
+.gap-2 {
+  gap: var(--space-2);
+}
+.gap-3 {
+  gap: var(--space-3);
+}
+.gap-4 {
+  gap: var(--space-4);
+}
+.gap-6 {
+  gap: var(--space-6);
+}
+.gap-8 {
+  gap: var(--space-8);
+}

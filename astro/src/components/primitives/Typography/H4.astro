@@ -1,0 +1,27 @@
+---
+/**
+ * H4 - Card/smaller section heading
+ *
+ * @example
+ * <H4>Card Title</H4>
+ * <H4 as="h5">Styled as h4, rendered as h5</H4>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import Typography from './Typography.astro';
+import type { TypographyColor, TypographyWeight } from './Typography.astro';
+
+type HTMLTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+interface Props extends HTMLAttributes<'h4'> {
+  as?: HTMLTag;
+  color?: TypographyColor;
+  weight?: TypographyWeight;
+}
+
+const { as = 'h4', ...rest } = Astro.props;
+---
+
+<Typography as={as} variant="h4" {...rest}>
+  <slot />
+</Typography>

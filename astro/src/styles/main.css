@@ -1,0 +1,18 @@
+/**
+ * Main Stylesheet
+ *
+ * Entry point for all styles
+ * Import this file in your layout
+ *
+ * Layer order (lowest to highest priority):
+ * 1. reset     - CSS reset/normalize
+ * 2. base      - Element defaults (html, body, a, etc.)
+ * 4. utilities  - One-off overrides
+ */
+
+/* Design Tokens - outside layers (global foundation) */
+@import './tokens/index.css';
+@import './base/_reset.css';
+@import './base/_fonts.css';
+@import './base/_global.css';
+@import './utilities/_utilities.css';

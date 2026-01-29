@@ -1,0 +1,25 @@
+---
+import Layout from './Layout.astro';
+import type { MenuSection } from '@config/menu';
+import type { BreadcrumbItem } from '@utils/breadcrumb';
+import { Breadcrumbs } from '@components/patterns';
+
+interface Props {
+  title: string;
+  description?: string;
+  section: MenuSection;
+  breadcrumbs: BreadcrumbItem[];
+}
+
+const { title, description, breadcrumbs } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <main>
+    <Breadcrumbs items={breadcrumbs} />
+
+    <article>
+      <slot />
+    </article>
+  </main>
+</Layout>

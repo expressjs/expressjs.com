@@ -1,0 +1,56 @@
+---
+/**
+ * Typography Primitive Component (Base)
+ *
+ * Low-level polymorphic text component. This is the foundation for all
+ * typography shorthand components (H1, H2, Body, etc.).
+ *
+ * PREFER SHORTHAND COMPONENTS for better DX:
+ * - <H1>Page Title</H1>
+ * - <H1 as="h2">Styled as H1, rendered as h2</H1>
+ * - <Body color="secondary">Subdued text</Body>
+ * - <Code>npm install express</Code>
+ *
+ * Use this base component only when you need full control over variant + element.
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import type {
+  TypographyVariant,
+  TypographyHTMLTag,
+  TypographyColor,
+  TypographyWeight,
+  TypographyBaseProps,
+} from './types';
+import './Typography.css';
+
+type Props = TypographyBaseProps & HTMLAttributes<'p'>;
+
+const {
+  as: Tag = 'p',
+  variant = 'body',
+  color = 'primary',
+  center,
+  left,
+  right,
+  weight,
+  class: className,
+  ...rest
+} = Astro.props;
+---
+
+<Tag
+  class:list={[
+    'text',
+    `${variant}`,
+    `text--color-${color}`,
+    weight && `text--weight-${weight}`,
+    center && 'text-center',
+    left && 'text-left',
+    right && 'text-right',
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</Tag>

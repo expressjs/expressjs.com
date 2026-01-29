@@ -1,0 +1,30 @@
+---
+/**
+ * H5 - Lead/intro paragraph text
+ *
+ * @example
+ * <H5>Introduction paragraph with larger text.</H5>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import Typography from './Typography.astro';
+import type { TypographyColor, TypographyWeight } from './Typography.astro';
+
+type BaseProps = {
+  color?: TypographyColor;
+  weight?: TypographyWeight;
+};
+
+type Props =
+  | ({ as?: 'h5' } & BaseProps & HTMLAttributes<'h5'>)
+  | ({ as: 'p' } & BaseProps & HTMLAttributes<'p'>)
+  | ({ as: 'span' } & BaseProps & HTMLAttributes<'span'>)
+  | ({ as: 'small' } & BaseProps & HTMLAttributes<'small'>)
+  | ({ as: 'label' } & BaseProps & HTMLAttributes<'label'>);
+
+const { as = 'p', ...rest } = Astro.props;
+---
+
+<Typography as={as} variant="h5" {...rest}>
+  <slot />
+</Typography>

@@ -1,0 +1,27 @@
+---
+/**
+ * H1 - Page title heading
+ *
+ * @example
+ * <H1>Page Title</H1>
+ * <H1 as="h2">Styled as h1, rendered as h2</H1>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import Typography from './Typography.astro';
+import type { TypographyColor, TypographyWeight } from './Typography.astro';
+
+type HTMLTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+interface Props extends HTMLAttributes<'h1'> {
+  as?: HTMLTag;
+  color?: TypographyColor;
+  weight?: TypographyWeight;
+}
+
+const { as = 'h1', ...rest } = Astro.props;
+---
+
+<Typography as={as} variant="h1" {...rest}>
+  <slot />
+</Typography>

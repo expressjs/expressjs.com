@@ -1,0 +1,37 @@
+---
+/**
+ * Flex Component
+ *
+ * Flexbox container for 1D layouts.
+ * Use for simple directional layouts, navbars, stacks.
+ *
+ * @example
+ * <Flex direction="column" gap="4" align="center">
+ *   <div>Item 1</div>
+ *   <div>Item 2</div>
+ * </Flex>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import type { FlexProps } from './types';
+import './Grid.css';
+
+type Props = FlexProps & HTMLAttributes<'div'>;
+
+const { direction = 'row', align, justify, wrap, gap, class: className, ...rest } = Astro.props;
+---
+
+<div
+  class:list={[
+    'flex',
+    direction && `flex--${direction}`,
+    align && `flex--align-${align}`,
+    justify && `flex--justify-${justify}`,
+    wrap && `flex--${wrap}`,
+    gap && `flex--gap-${gap}`,
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</div>

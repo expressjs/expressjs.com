@@ -1,0 +1,35 @@
+---
+/**
+ * FlexItem Component
+ *
+ * Wrapper for flex items with control over grow, shrink, and basis.
+ * Use inside a Flex component to control individual item behavior.
+ *
+ * @example
+ * <Flex>
+ *   <FlexItem grow="1" shrink="0">Flexible item</FlexItem>
+ *   <FlexItem basis="auto">Auto-sized item</FlexItem>
+ * </Flex>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import type { FlexItemProps } from './types';
+import './Grid.css';
+
+type Props = FlexItemProps & HTMLAttributes<'div'>;
+
+const { grow, shrink, basis, flex, class: className, ...rest } = Astro.props;
+---
+
+<div
+  class:list={[
+    flex && `flex-item--flex-${flex}`,
+    !flex && grow && `flex-item--grow-${grow ? '1' : '0'}`,
+    !flex && shrink && `flex-item--shrink-${shrink ? '1' : '0'}`,
+    !flex && basis && `flex-item--basis-${basis}`,
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</div>

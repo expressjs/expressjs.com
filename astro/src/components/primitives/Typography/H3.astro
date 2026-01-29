@@ -1,0 +1,27 @@
+---
+/**
+ * H3 - Subsection heading
+ *
+ * @example
+ * <H3>Subsection Title</H3>
+ * <H3 as="h4">Styled as h3, rendered as h4</H3>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import Typography from './Typography.astro';
+import type { TypographyColor, TypographyWeight } from './Typography.astro';
+
+type HTMLTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+interface Props extends HTMLAttributes<'h3'> {
+  as?: HTMLTag;
+  color?: TypographyColor;
+  weight?: TypographyWeight;
+}
+
+const { as = 'h3', ...rest } = Astro.props;
+---
+
+<Typography as={as} variant="h3" {...rest}>
+  <slot />
+</Typography>

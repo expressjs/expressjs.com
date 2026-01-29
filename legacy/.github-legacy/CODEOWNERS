@@ -4,5 +4,5 @@
 # Codeowners
 .github/CODEOWNERS @expressjs/docs-captains
 
-# Blog - TODO: Add once Astro blog structure is set up
-# _posts @expressjs/express-tc
+# Blog
+_posts @expressjs/express-tc

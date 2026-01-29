@@ -1,0 +1,34 @@
+---
+/**
+ * Grid Component
+ *
+ * 12-column responsive grid container.
+ * Use with <Col> children for responsive column layouts.
+ *
+ * @example
+ * <Grid gap="4">
+ *   <Col xs={12} md={6} lg={4}>Content</Col>
+ * </Grid>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import type { GridProps } from './types';
+import './Grid.css';
+
+type Props = GridProps & HTMLAttributes<'div'>;
+
+const { gap, rowGap, columnGap, class: className, ...rest } = Astro.props;
+---
+
+<div
+  class:list={[
+    'grid',
+    gap && `grid--gap-${gap}`,
+    rowGap && `grid--row-gap-${rowGap}`,
+    columnGap && `grid--col-gap-${columnGap}`,
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</div>

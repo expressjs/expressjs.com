@@ -1,0 +1,38 @@
+---
+import '@styles/main.css';
+import { Container } from '@components/primitives';
+import { ThemeSwitcher } from '@/components/patterns';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Express - Node.js web application framework',
+  description = 'Fast, unopinionated, minimalist web framework for Node.js',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <Container>
+      <!-- TODO: placed here temporarily for theme switching testing -->
+      <ThemeSwitcher />
+      <slot />
+    </Container>
+  </body>
+</html>

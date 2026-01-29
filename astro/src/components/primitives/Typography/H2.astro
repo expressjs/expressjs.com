@@ -1,0 +1,27 @@
+---
+/**
+ * H2 - Section heading
+ *
+ * @example
+ * <H2>Section Title</H2>
+ * <H2 as="h3">Styled as h2, rendered as h3</H2>
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import Typography from './Typography.astro';
+import type { TypographyColor, TypographyWeight } from './Typography.astro';
+
+type HTMLTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+interface Props extends HTMLAttributes<'h2'> {
+  as?: HTMLTag;
+  color?: TypographyColor;
+  weight?: TypographyWeight;
+}
+
+const { as = 'h2', ...rest } = Astro.props;
+---
+
+<Typography as={as} variant="h2" {...rest}>
+  <slot />
+</Typography>

@@ -10,3 +10,13 @@ _site
 .jekyll-metadata
 vendor
 .bundle
+
+pnpm-lock.yaml
+yarn.lock
+bun.lockb
+
+.astro/
+dist/
+
+.env
+.env.*
