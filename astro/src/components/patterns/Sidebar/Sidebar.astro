@@ -13,15 +13,26 @@ import './Sidebar.css';
 import type { HTMLAttributes } from 'astro/types';
 import { BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
+import { getLangFromUrl } from '@/i18n/utils';
 
 type Props = HTMLAttributes<'div'>;
 
 const { class: className, ...rest } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 
 const navItems = [
-  { href: '/en/starter/installing.html', label: 'Docs', ariaLabel: 'Documentation', icon: 'files' },
-  { href: '/en/5x/api.html', label: 'API Reference', ariaLabel: 'API Reference', icon: 'code' },
-  { href: '/en/blog/', label: 'Blog', ariaLabel: 'Blog', icon: 'newspaper' },
+  {
+    label: 'Docs',
+    ariaLabel: 'Documentation',
+    icon: 'files',
+  },
+  {
+    href: `/${lang}/5x/api.html`,
+    label: 'API Reference',
+    ariaLabel: 'API Reference',
+    icon: 'code',
+  },
+  { href: `/${lang}/blog/`, label: 'Blog', ariaLabel: 'Blog', icon: 'newspaper' },
 ];
 ---
 
@@ -44,15 +55,32 @@ const navItems = [
       {
         navItems.map((item) => (
           <li>
-            <a href={item.href} class="sidebar-nav-link" aria-label={item.ariaLabel}>
-              <Icon
-                name={`ph:${item.icon}`}
-                size="24"
-                color="var(--color-icon-primary)"
-                class="sidebar-nav-icon"
-              />
-              <BodyMd vMargin={false}>{item.label}</BodyMd>
-            </a>
+            {item.href && (
+              <a href={item.href} class="sidebar-nav-item" aria-label={item.ariaLabel}>
+                <div class="sidebar-nav-icon">
+                  <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+                </div>
+                <BodyMd vMargin={false} class="sidebar-nav-label">
+                  {item.label}
+                </BodyMd>
+              </a>
+            )}
+            {!item.href && (
+              <button class="sidebar-nav-item" aria-label={item.ariaLabel} type="button">
+                <div class="sidebar-nav-icon">
+                  <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+                </div>
+                <BodyMd vMargin={false} class="sidebar-nav-label">
+                  {item.label}
+                </BodyMd>
+                <Icon
+                  name="ph:arrow-right"
+                  size="16"
+                  color="var(--color-icon-secondary)"
+                  class="sidebar-nav-arrow"
+                />
+              </button>
+            )}
           </li>
         ))
       }
