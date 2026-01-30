@@ -20,24 +20,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@8d27f39a5e7ad39aebbcbd1324f7af020229645c $ v1.287.0
         with:
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-          cache-version: 0 # Increment this number if you need to re-download cached gems
+          bundler-cache: true
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+
       - name: Build with Jekyll
-        # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
-      - name: Upload gh-pages artifact
-        uses: actions/upload-pages-artifact@v4
+
+      # doing this ourselves to get .well-known included
+      # https://github.com/actions/upload-pages-artifact/issues/129
+      - name: Create pages artifact
+        run: tar -cf "$RUNNER_TEMP/github-pages.tar" -C _site .
+
+      - name: Upload pages artifact
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
-          path: _site
-          include-hidden-files: true # required for /.well-known/security.txt
+          name: github-pages
+          path: ${{ runner.temp }}/github-pages.tar
 
   deploy:
     environment:
