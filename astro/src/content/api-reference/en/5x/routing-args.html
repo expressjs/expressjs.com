@@ -1,0 +1,58 @@
+<h4>Arguments</h4>
+
+<div class="table-scroller">
+    <table>
+        <thead>
+            <tr>
+            <th>Argument</th>
+            <th>Description</th>
+            <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td><code>path</code></td>
+            <td>
+                The path for which the middleware function is invoked. It can be any of the following:
+                <ul>
+                <li>A string representing a path.</li>
+                <li>A path pattern.</li>
+                <li>A regular expression pattern to match paths.</li>
+                <li>An array containing any combination of the above.</li>
+                </ul>
+                For examples, see <a href="#path-examples">Path examples</a>.
+            </td>
+            <td><code>'/'</code> (root path)</td>
+            </tr>
+
+            <tr>
+            <td><code>callback</code></td>
+            <td>
+                One or more callback functions. Accepted formats:
+                <ul>
+                <li>A single middleware function.</li>
+                <li>Multiple middleware functions separated by commas.</li>
+                <li>An array of middleware functions.</li>
+                <li>A combination of the above.</li>
+                </ul>
+                <p>
+                You may provide multiple callbacks that behave like middleware. These can call
+                <code>next('route')</code> to skip remaining callbacks for the current route.
+                This is useful for conditional routing logic.
+                </p>
+                <p>
+                If a callback throws an error or returns a rejected promise, <code>next(err)</code> is invoked automatically.
+                </p>
+                <p>
+                Since both <a href="#router">router</a> and <a href="#application">app</a> implement the middleware interface,
+                they can also be used as callback middleware.
+                </p>
+                <p>
+                For examples, see <a href="#middleware-callback-function-examples">Middleware callback function examples</a>.
+                </p>
+            </td>
+            <td><em>None</em></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,130 @@
+<h2 id="res">Response</h2>
+
+The `res` object represents the HTTP response that an Express app sends when it gets an HTTP request.
+
+In this documentation and by convention,
+the object is always referred to as `res` (and the HTTP request is `req`) but its actual name is determined
+by the parameters to the callback function in which you're working.
+
+For example:
+
+```js
+app.get('/user/:id', (req, res) => {
+  res.send(`user ${req.params.id}`)
+})
+```
+
+But you could just as well have:
+
+```js
+app.get('/user/:id', (request, response) => {
+  response.send(`user ${request.params.id}`)
+})
+```
+
+The `res` object is an enhanced version of Node's own response object
+and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_serverresponse).
+
+<h3 id='res.properties'>Properties</h3>
+
+<section markdown="1">
+  {% include api/en/5x/res-app.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-headersSent.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-locals.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-req.md %}
+</section>
+
+<h3 id='res.methods'>Methods</h3>
+
+<section markdown="1">
+  {% include api/en/5x/res-append.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-attachment.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-cookie.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-clearCookie.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-download.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-end.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-format.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-get.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-json.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-jsonp.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-links.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-location.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-redirect.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-render.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-send.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-sendFile.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-sendStatus.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-set.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-status.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-type.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/5x/res-vary.md %}
+</section>
