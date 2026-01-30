@@ -2,6 +2,7 @@
 import '@styles/main.css';
 import { Container } from '@components/primitives';
 import { ThemeSwitcher } from '@/components/patterns';
+import { Header } from '@/components/patterns';
 
 interface Props {
   title?: string;
@@ -29,6 +30,7 @@ const {
     <title>{title}</title>
   </head>
   <body>
+    <Header />
     <Container>
       <!-- TODO: placed here temporarily for theme switching testing -->
       <ThemeSwitcher />

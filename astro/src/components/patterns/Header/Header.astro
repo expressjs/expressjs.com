@@ -1,0 +1,47 @@
+---
+/**
+ * Header Component
+ *
+ * Main site header with logo and navigation menu
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+import { Flex } from '@/components/primitives';
+import './Header.css';
+
+type Props = HTMLAttributes<'header'>;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<header class:list={['header', className]} {...rest}>
+  <Flex align="center" justify="between" gap="3">
+    <Flex align="center" justify="between" gap="4">
+      <button id="menuToggle" class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <a href="/" class="logo-link" aria-label="Express home">
+        <img src="/logo-dark.svg" alt="" class="logo logo-dark" />
+        <img src="/logo-white.svg" alt="" class="logo logo-light" />
+      </a>
+    </Flex>
+    <div>
+      <!-- TODO: Search toggle will be included here -->
+    </div>
+  </Flex>
+</header>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!isExpanded));
+      menuToggle.classList.toggle('active');
+    });
+  }
+</script>
