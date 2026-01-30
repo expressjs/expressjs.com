@@ -1,0 +1,125 @@
+/**
+ * Sidebar Styles
+ *
+ * Mobile navigation sidebar that slides in from the left
+ */
+
+@layer patterns {
+  /* Backdrop overlay */
+  .sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* TODO: use token for light/dark mode backdrop color */
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--duration-300) var(--ease-in-out),
+      visibility var(--duration-300) var(--ease-in-out);
+    z-index: var(--z-index-sidebar-backdrop);
+  }
+
+  .sidebar-backdrop--visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 80%;
+    max-width: var(--size-80);
+    background-color: var(--color-bg-secondary);
+    transform: translateX(-100%);
+    transition: transform var(--duration-300) var(--ease-in-out);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    z-index: var(--z-index-sidebar);
+    padding: var(--space-4);
+    padding-top: var(--space-20);
+  }
+
+  .sidebar--open {
+    transform: translateX(0);
+  }
+
+  /* Navigation */
+  .sidebar-nav {
+    flex: 1;
+  }
+
+  .sidebar-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidebar-nav-list li {
+    margin: 0;
+  }
+
+  .sidebar-nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    text-decoration: none;
+  }
+
+  .sidebar-nav-link:hover {
+    background-color: var(--color-bg-secondary);
+  }
+
+  .sidebar-nav-link:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: -2px;
+    background-color: var(--color-bg-secondary);
+  }
+
+  .sidebar-nav-link:active {
+    background-color: var(--color-bg-tertiary);
+  }
+
+  /* Active state (optional - can be added via JS) */
+  .sidebar-nav-link[aria-current='page'] {
+    color: var(--color-primary);
+    background-color: var(--color-bg-secondary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .sidebar-nav-link[aria-current='page']::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: var(--color-primary);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .sidebar,
+    .sidebar-backdrop,
+    .sidebar-close,
+    .sidebar-nav-link {
+      transition: none;
+    }
+  }
+
+  /* Ensure sidebar is hidden by default */
+  .sidebar[aria-hidden='true'] {
+    visibility: hidden;
+  }
+
+  .sidebar[aria-hidden='false'] {
+    visibility: visible;
+  }
+}

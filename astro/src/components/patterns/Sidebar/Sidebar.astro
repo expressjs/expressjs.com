@@ -1,0 +1,212 @@
+---
+/**
+ * Sidebar Component
+ *
+ * Mobile navigation sidebar with accessibility features
+ * - Slides in from the left
+ * - Focus trap when open
+ * - Keyboard navigation support
+ * - Screen reader friendly
+ */
+
+import './Sidebar.css';
+import type { HTMLAttributes } from 'astro/types';
+import { BodyMd } from '@/components/primitives';
+import { Icon } from 'astro-icon/components';
+
+type Props = HTMLAttributes<'div'>;
+
+const { class: className, ...rest } = Astro.props;
+
+const navItems = [
+  { href: '/en/starter/installing.html', label: 'Docs', ariaLabel: 'Documentation', icon: 'files' },
+  { href: '/en/5x/api.html', label: 'API Reference', ariaLabel: 'API Reference', icon: 'code' },
+  { href: '/en/blog/', label: 'Blog', ariaLabel: 'Blog', icon: 'newspaper' },
+];
+---
+
+<div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true" data-sidebar-backdrop></div>
+
+<aside
+  id="sidebar"
+  class:list={['sidebar', className]}
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="sidebar-title"
+  aria-hidden="true"
+  data-sidebar
+  {...rest}
+>
+  <h2 id="sidebar-title" class="sr-only">Main menu</h2>
+
+  <nav class="sidebar-nav" aria-label="Main navigation">
+    <ul class="sidebar-nav-list">
+      {
+        navItems.map((item) => (
+          <li>
+            <a href={item.href} class="sidebar-nav-link" aria-label={item.ariaLabel}>
+              <Icon
+                name={`ph:${item.icon}`}
+                size="24"
+                color="var(--color-icon-primary)"
+                class="sidebar-nav-icon"
+              />
+              <BodyMd vMargin={false}>{item.label}</BodyMd>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <script>
+    // Sidebar state management and accessibility
+    class SidebarController {
+      private sidebar: HTMLElement | null;
+      private backdrop: HTMLElement | null;
+      private menuToggle: HTMLElement | null;
+      private isOpen = false;
+      private focusableElements: HTMLElement[] = [];
+      private lastFocusedElement: HTMLElement | null = null;
+
+      constructor() {
+        this.sidebar = document.querySelector('[data-sidebar]');
+        this.backdrop = document.querySelector('[data-sidebar-backdrop]');
+        this.menuToggle = document.getElementById('menuToggle');
+
+        if (this.sidebar && this.backdrop) {
+          this.init();
+        }
+      }
+
+      private init() {
+        // Backdrop click
+        this.backdrop?.addEventListener('click', () => this.close());
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => this.handleKeyDown(e));
+
+        // Listen for menu toggle from Header
+        document.addEventListener('sidebar:toggle', () => this.toggle());
+      }
+
+      private getFocusableElements(): HTMLElement[] {
+        if (!this.sidebar) return [];
+
+        const selectors = [
+          'a[href]',
+          'button:not([disabled])',
+          'textarea:not([disabled])',
+          'input:not([disabled])',
+          'select:not([disabled])',
+          '[tabindex]:not([tabindex="-1"])',
+        ];
+
+        return Array.from(this.sidebar.querySelectorAll(selectors.join(','))) as HTMLElement[];
+      }
+
+      private trapFocus(e: KeyboardEvent) {
+        if (!this.isOpen) return;
+
+        this.focusableElements = this.getFocusableElements();
+        const firstElement = this.focusableElements[0];
+        const lastElement = this.focusableElements[this.focusableElements.length - 1];
+
+        if (e.key === 'Tab') {
+          if (e.shiftKey) {
+            // Shift + Tab
+            if (document.activeElement === firstElement) {
+              e.preventDefault();
+              lastElement?.focus();
+            }
+          } else {
+            // Tab
+            if (document.activeElement === lastElement) {
+              e.preventDefault();
+              firstElement?.focus();
+            }
+          }
+        }
+      }
+
+      private handleKeyDown(e: KeyboardEvent) {
+        if (e.key === 'Escape' && this.isOpen) {
+          this.close();
+        }
+
+        this.trapFocus(e);
+      }
+
+      private lockBodyScroll() {
+        document.body.style.overflow = 'hidden';
+      }
+
+      private unlockBodyScroll() {
+        document.body.style.overflow = '';
+      }
+
+      public open() {
+        if (this.isOpen || !this.sidebar || !this.backdrop) return;
+
+        // Store currently focused element
+        this.lastFocusedElement = document.activeElement as HTMLElement;
+
+        // Update state
+        this.isOpen = true;
+        this.sidebar.setAttribute('aria-hidden', 'false');
+        this.backdrop.setAttribute('aria-hidden', 'false');
+
+        // Add open classes
+        this.sidebar.classList.add('sidebar--open');
+        this.backdrop.classList.add('sidebar-backdrop--visible');
+
+        // Lock body scroll
+        this.lockBodyScroll();
+
+        // Focus first focusable element after animation
+        setTimeout(() => {
+          this.focusableElements = this.getFocusableElements();
+          this.focusableElements[0]?.focus();
+        }, 300);
+      }
+
+      public close() {
+        if (!this.isOpen || !this.sidebar || !this.backdrop) return;
+
+        document.dispatchEvent(new CustomEvent('sidebar:closed'));
+
+        // Update state
+        this.isOpen = false;
+        this.sidebar.setAttribute('aria-hidden', 'true');
+        this.backdrop.setAttribute('aria-hidden', 'true');
+
+        // Remove open classes
+        this.sidebar.classList.remove('sidebar--open');
+        this.backdrop.classList.remove('sidebar-backdrop--visible');
+
+        // Unlock body scroll
+        this.unlockBodyScroll();
+
+        // Return focus to menu toggle
+        if (this.lastFocusedElement) {
+          this.lastFocusedElement.focus();
+          this.lastFocusedElement = null;
+        }
+      }
+
+      public toggle() {
+        if (this.isOpen) {
+          this.close();
+        } else {
+          this.open();
+        }
+      }
+    }
+
+    // Initialize sidebar controller
+    const sidebarController = new SidebarController();
+
+    // Make it available globally for the header component
+    (window as any).sidebarController = sidebarController;
+  </script>
+</aside>

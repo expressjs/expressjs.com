@@ -14,9 +14,9 @@
  * </Button>
  */
 
-import type { HTMLAttributes } from 'astro/types';
-import type { ButtonSize, ButtonVariant, ButtonHTMLTag, ButtonBaseProps } from './types';
 import './Button.css';
+import type { HTMLAttributes } from 'astro/types';
+import type { ButtonBaseProps } from './types';
 
 type Props =
   | ({ as?: 'a' } & ButtonBaseProps & HTMLAttributes<'a'>)

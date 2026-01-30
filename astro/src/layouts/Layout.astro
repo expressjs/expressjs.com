@@ -28,6 +28,10 @@ const {
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
+
+    <style is:inline>
+      @layer base, primitives, patterns;
+    </style>
   </head>
   <body>
     <Header />

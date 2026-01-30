@@ -4,20 +4,23 @@
  *
  * Main site header with logo and navigation menu
  */
-
-import type { HTMLAttributes } from 'astro/types';
-import { Flex } from '@/components/primitives';
 import './Header.css';
-
-type Props = HTMLAttributes<'header'>;
-
-const { class: className, ...rest } = Astro.props;
+import { Flex } from '@/components/primitives';
+import Sidebar from '../Sidebar/Sidebar.astro';
 ---
 
-<header class:list={['header', className]} {...rest}>
+<Sidebar />
+
+<header class="header">
   <Flex align="center" justify="between" gap="3">
     <Flex align="center" justify="between" gap="4">
-      <button id="menuToggle" class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <button
+        id="menuToggle"
+        class="hamburger"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
@@ -40,8 +43,17 @@ const { class: className, ...rest } = Astro.props;
   if (menuToggle) {
     menuToggle.addEventListener('click', () => {
       const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', String(!isExpanded));
+      const newExpandedState = !isExpanded;
+
+      menuToggle.setAttribute('aria-expanded', String(newExpandedState));
       menuToggle.classList.toggle('active');
+
+      document.dispatchEvent(new CustomEvent('sidebar:toggle'));
+    });
+
+    document.addEventListener('sidebar:closed', () => {
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.classList.remove('active');
     });
   }
 </script>
