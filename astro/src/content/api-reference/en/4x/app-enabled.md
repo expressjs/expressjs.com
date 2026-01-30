@@ -1,3 +1,9 @@
+---
+title: app.enabled
+description: Returns `true` if the setting `name` is enabled (`true`), where `name` is one of the
+menuTitle: app.enabled
+---
+
 <h3 id='app.enabled'>app.enabled(name)</h3>
 
 Returns `true` if the setting `name` is enabled (`true`), where `name` is one of the

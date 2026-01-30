@@ -1,3 +1,9 @@
+---
+title: app.enabled
+description: Check if setting `name` is enabled.
+menuTitle: app.enabled
+---
+
 <h3 id='app.enabled'>app.enabled(name)</h3>
 
 Check if setting `name` is enabled.

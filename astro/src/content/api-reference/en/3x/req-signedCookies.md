@@ -1,3 +1,9 @@
+---
+title: req.signedCookies
+description: This object requires the `cookieParser(secret)` middleware for use.
+menuTitle: req.signedCookies
+---
+
 <h3 id='req.signedCookies'>req.signedCookies</h3>
 
 This object requires the `cookieParser(secret)` middleware for use.

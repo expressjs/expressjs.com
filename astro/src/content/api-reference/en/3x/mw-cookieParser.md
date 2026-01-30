@@ -1,3 +1,9 @@
+---
+title: cookieParser
+description: Parses the Cookie header field and populates `req.cookies`
+menuTitle: cookieParser
+---
+
 <h3 id='cookieParser'>cookieParser()</h3>
 
 Parses the Cookie header field and populates `req.cookies`

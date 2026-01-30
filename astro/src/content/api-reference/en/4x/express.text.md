@@ -1,3 +1,9 @@
+---
+title: express.text
+description: This middleware is available in Express v4.17.0 onwards.
+menuTitle: express.text
+---
+
 <h3 id='express.text' class='h2'>express.text([options])</h3>
 
 <div class="doc-box doc-info" markdown="1">

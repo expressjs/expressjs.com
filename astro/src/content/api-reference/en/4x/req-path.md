@@ -1,3 +1,9 @@
+---
+title: req.path
+description: Contains the path part of the request URL.
+menuTitle: req.path
+---
+
 <h3 id='req.path'>req.path</h3>
 
 Contains the path part of the request URL.

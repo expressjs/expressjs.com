@@ -1,3 +1,9 @@
+---
+title: req.is
+description: Check if the incoming request contains the "Content-Type"
+menuTitle: req.is
+---
+
 <h3 id='req.is'>req.is(type)</h3>
 
 Check if the incoming request contains the "Content-Type"

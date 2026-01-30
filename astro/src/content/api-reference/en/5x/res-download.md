@@ -1,3 +1,9 @@
+---
+title: res.download
+description: The optional `options` argument is supported by Express v4.16.0 onwards.
+menuTitle: res.download
+---
+
 <h3 id='res.download'>res.download(path [, filename] [, options] [, fn])</h3>
 
 <div class="doc-box doc-info" markdown="1">

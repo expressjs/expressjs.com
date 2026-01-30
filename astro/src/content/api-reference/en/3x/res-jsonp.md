@@ -1,3 +1,9 @@
+---
+title: res.jsonp
+description: Send a JSON response with JSONP support. This method is identical
+menuTitle: res.jsonp
+---
+
 <h3 id='res.jsonp'>res.jsonp([status|body], [body])</h3>
 
 Send a JSON response with JSONP support. This method is identical

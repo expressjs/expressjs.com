@@ -1,3 +1,9 @@
+---
+title: res.status
+description: Chainable alias of node's `res.statusCode=`.
+menuTitle: res.status
+---
+
 <h3 id='res.status'>res.status(code)</h3>
 
 Chainable alias of node's `res.statusCode=`.

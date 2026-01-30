@@ -1,3 +1,9 @@
+---
+title: res.locals
+description: Response local variables are scoped to the request, thus only
+menuTitle: res.locals
+---
+
 <h3 id='res.locals'>res.locals</h3>
 
 Response local variables are scoped to the request, thus only

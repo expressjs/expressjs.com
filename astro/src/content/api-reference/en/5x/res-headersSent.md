@@ -1,3 +1,9 @@
+---
+title: res.headersSent
+description: Boolean property that indicates if the app sent HTTP headers for the response.
+menuTitle: res.headersSent
+---
+
 <h3 id='res.headersSent'>res.headersSent</h3>
 
 Boolean property that indicates if the app sent HTTP headers for the response.

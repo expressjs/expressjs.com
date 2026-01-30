@@ -1,3 +1,9 @@
+---
+title: res.append
+description: {% include admonitions/note.html content="`res.append()` is supported by Express v4.11.0+" %}
+menuTitle: res.append
+---
+
 <h3 id='res.append'>res.append(field [, value])</h3>
 
 {% include admonitions/note.html content="`res.append()` is supported by Express v4.11.0+" %}

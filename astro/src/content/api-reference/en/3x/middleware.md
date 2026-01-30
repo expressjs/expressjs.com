@@ -1,3 +1,9 @@
+---
+title: Middleware
+description: h2 id="middleware">Middleware
+menuTitle: Middleware
+---
+
 <h2 id="middleware">Middleware</h2>
 
 <section markdown="1">

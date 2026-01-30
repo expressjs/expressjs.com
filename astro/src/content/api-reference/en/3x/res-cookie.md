@@ -1,3 +1,9 @@
+---
+title: res.cookie
+description: Set cookie `name` to `value`, which may be a string or object converted to JSON. The `path`
+menuTitle: res.cookie
+---
+
 <h3 id='res.cookie'>res.cookie(name, value, [options])</h3>
 
 Set cookie `name` to `value`, which may be a string or object converted to JSON. The `path`

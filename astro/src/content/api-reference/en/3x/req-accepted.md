@@ -1,3 +1,9 @@
+---
+title: req.accepted
+description: Return an array of Accepted media types ordered from highest quality to lowest.
+menuTitle: req.accepted
+---
+
 <h3 id='req.accepted'>req.accepted</h3>
 
 Return an array of Accepted media types ordered from highest quality to lowest.

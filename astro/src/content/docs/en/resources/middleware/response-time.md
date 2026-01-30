@@ -1,6 +1,6 @@
 ---
 title: Express response-time middleware
-menu: resources
+menuTitle: response-time
 module: response-time
 ---
 

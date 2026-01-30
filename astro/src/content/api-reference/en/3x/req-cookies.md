@@ -1,3 +1,9 @@
+---
+title: req.cookies
+description: This object requires the `cookieParser()` middleware for use.
+menuTitle: req.cookies
+---
+
 <h3 id='req.cookies'>req.cookies</h3>
 
 This object requires the `cookieParser()` middleware for use.

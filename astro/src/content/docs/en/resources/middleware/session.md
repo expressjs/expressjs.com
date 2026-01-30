@@ -1,6 +1,6 @@
 ---
 title: Express session middleware
-menu: resources
+menuTitle: session
 module: session
 ---
 

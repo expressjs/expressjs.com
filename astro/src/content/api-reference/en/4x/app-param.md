@@ -1,3 +1,9 @@
+---
+title: app.param
+description: Add callback triggers to [route parameters](/{{ page.lang }}/guide/routing.html#route-parameters), where `name` is the name of the parameter or an ...
+menuTitle: app.param
+---
+
 <h3 id='app.param'>app.param([name], callback)</h3>
 
 Add callback triggers to [route parameters](/{{ page.lang }}/guide/routing.html#route-parameters), where `name` is the name of the parameter or an array of them, and `callback` is the callback function. The parameters of the callback function are the request object, the response object, the next middleware, the value of the parameter and the name of the parameter, in that order.

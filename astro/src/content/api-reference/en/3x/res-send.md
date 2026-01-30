@@ -1,3 +1,9 @@
+---
+title: res.send
+description: Send a response.
+menuTitle: res.send
+---
+
 <h3 id='res.send'>res.send([body|status], [body])</h3>
 
 Send a response.

@@ -6,9 +6,9 @@
  */
 import Layout from '@layouts/Layout.astro';
 import { menuSections, type MenuSection } from '@config/menu';
-import { getDocsBySection } from '@utils/content';
+import { getPagesBySection } from '@utils/content';
 
-const sections = Object.entries(menuSections);
+const sections = Object.entries(menuSections.docs);
 
 import { getLangFromUrl } from '@i18n/utils';
 import { languages } from '@i18n/ui';
@@ -31,7 +31,7 @@ const lang = getLangFromUrl(Astro.url);
   <p>This page will be replaced with a proper sidebar navigation layout soon.</p>
   {
     sections.map(async ([key, label]) => {
-      const docs = await getDocsBySection(key as MenuSection, lang);
+      const docs = await getPagesBySection(key as MenuSection, lang, 'docs');
       const firstDocs = docs.slice(0, 5);
 
       return (

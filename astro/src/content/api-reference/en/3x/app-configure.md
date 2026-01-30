@@ -1,3 +1,9 @@
+---
+title: app.configure
+description: Conditionally invoke `callback` when `env` matches `app.get('env')`,
+menuTitle: app.configure
+---
+
 <h3 id='app.configure'>app.configure([env], callback)</h3>
 
 Conditionally invoke `callback` when `env` matches `app.get('env')`,

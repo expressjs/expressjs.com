@@ -1,3 +1,9 @@
+---
+title: res.attachment
+description: Sets the Content-Disposition header field to "attachment". If
+menuTitle: res.attachment
+---
+
 <h3 id='res.attachment'>res.attachment([filename])</h3>
 
 Sets the Content-Disposition header field to "attachment". If

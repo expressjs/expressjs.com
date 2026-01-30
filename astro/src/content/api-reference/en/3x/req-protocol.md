@@ -1,3 +1,9 @@
+---
+title: req.protocol
+description: Return the protocol string "http" or "https"
+menuTitle: req.protocol
+---
+
 <h3 id='req.protocol'>req.protocol</h3>
 
 Return the protocol string "http" or "https"

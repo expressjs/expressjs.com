@@ -1,3 +1,9 @@
+---
+title: router.use
+description: Uses the specified middleware function or functions, with optional mount path `path`, that defaults to "/".
+menuTitle: router.use
+---
+
 <h3 id='router.use'>router.use([path], [function, ...] function)</h3>
 
 Uses the specified middleware function or functions, with optional mount path `path`, that defaults to "/".

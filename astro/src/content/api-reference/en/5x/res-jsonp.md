@@ -1,3 +1,9 @@
+---
+title: res.jsonp
+description: Sends a JSON response with JSONP support. This method is identical to `res.json()`,
+menuTitle: res.jsonp
+---
+
 <h3 id='res.jsonp'>res.jsonp([body])</h3>
 
 Sends a JSON response with JSONP support. This method is identical to `res.json()`,

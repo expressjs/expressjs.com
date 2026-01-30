@@ -1,3 +1,9 @@
+---
+title: req.originalUrl
+description: `req.url` is not a native Express property, it is inherited from Node's [http module](https://nodejs.org/api/http.html#http_message_url).
+menuTitle: req.originalUrl
+---
+
 <h3 id='req.originalUrl'>req.originalUrl</h3>
 
 <div class="doc-box doc-notice" markdown="1">

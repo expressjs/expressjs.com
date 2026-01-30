@@ -1,3 +1,9 @@
+---
+title: express.Router
+description: Creates a new [router](#router) object.
+menuTitle: express.Router
+---
+
 <h3 id='express.router' class='h2'>express.Router([options])</h3>
 
 Creates a new [router](#router) object.

@@ -1,7 +1,7 @@
 ---
 title: Contributing to Express
 description: Find out how to contribute to Express.js, including guidelines for reporting issues, submitting pull requests, becoming a collaborator, and understanding security policies.
-menu: resources
+menuTitle: Contributing to Express
 order: 5
 ---
 

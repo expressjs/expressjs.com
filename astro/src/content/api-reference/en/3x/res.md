@@ -1,3 +1,9 @@
+---
+title: Res
+description: h2 id="response">Response
+menuTitle: Res
+---
+
 <h2 id="response">Response</h2>
 
 The `res` object is an enhanced version of Node's own response object

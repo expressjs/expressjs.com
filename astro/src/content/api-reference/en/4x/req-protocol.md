@@ -1,3 +1,9 @@
+---
+title: req.protocol
+description: Contains the request protocol string: either `http` or (for TLS requests) `https`.
+menuTitle: req.protocol
+---
+
 <h3 id='req.protocol'>req.protocol</h3>
 
 Contains the request protocol string: either `http` or (for TLS requests) `https`.

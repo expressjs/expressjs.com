@@ -1,3 +1,9 @@
+---
+title: Properties
+description: section markdown="1">
+menuTitle: Properties
+---
+
 <h2 id="res">Response</h2>
 
 The `res` object represents the HTTP response that an Express app sends when it gets an HTTP request.

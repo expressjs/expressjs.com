@@ -1,3 +1,9 @@
+---
+title: req.xhr
+description: A Boolean property that is `true` if the request's `X-Requested-With` header field is
+menuTitle: req.xhr
+---
+
 <h3 id='req.xhr'>req.xhr</h3>
 
 A Boolean property that is `true` if the request's `X-Requested-With` header field is

@@ -1,22 +1,31 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import type { MenuSection } from '@config/menu';
+import { menuSections, navItems, type MenuSection } from '@config/menu';
 import type { collections } from '@/content.config';
 
 /**
  * Get all documents for a specific language
  */
-export async function getDocsByLang(lang: string = 'en') {
-  const allDocs = await getCollection('docs');
+export async function getPagesByLang(lang: string = 'en', collection: keyof typeof collections) {
+  const allDocs = await getCollection(collection);
   return allDocs.filter((doc) => doc.id.startsWith(`${lang}/`));
 }
 
 /**
  * Get all documents for a specific section and language
+ * Section is derived from the folder structure (e.g., "en/starter/page.md" -> section is "starter")
  */
-export async function getDocsBySection(section: MenuSection, lang: string = 'en') {
-  const allDocs = await getDocsByLang(lang);
-  return allDocs
-    .filter((doc) => doc.data.menu === section)
+export async function getPagesBySection(
+  section: MenuSection,
+  lang: string = 'en',
+  collection: keyof typeof collections
+) {
+  const allPages = await getPagesByLang(lang, collection);
+  return allPages
+    .filter((page) => {
+      const pathWithoutLang = page.id.replace(`${lang}/`, '');
+      const pathParts = pathWithoutLang.split('/');
+      return pathParts[0] === section;
+    })
     .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 }
 
@@ -55,10 +64,14 @@ export async function buildBreadcrumbs(
 
   const breadcrumbs: BreadcrumbItem[] = [];
 
-  breadcrumbs.push({
-    label: 'Docs',
+  const collectionLabel = navItems.find((item) => item.key === collection)?.label || 'Docs';
+
+  const firstItem = {
+    label: collectionLabel,
     href: undefined,
-  });
+  };
+
+  breadcrumbs.push(firstItem);
 
   const slugParts = slug.split('/');
 
@@ -67,10 +80,14 @@ export async function buildBreadcrumbs(
 
     const pathToSegment = `${lang}/${slugParts.slice(0, index + 1).join('/')}`;
 
-    const label = part
+    const menuSection = part
       .split('-')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .map((word) => word.charAt(0) + word.slice(1))
       .join(' ');
+
+    const label =
+      menuSections[collection][part as keyof (typeof menuSections)[typeof collection]] ||
+      menuSection;
 
     if (!isLast) {
       breadcrumbs.push({

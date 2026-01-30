@@ -1,3 +1,9 @@
+---
+title: res.download
+description: Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.
+menuTitle: res.download
+---
+
 <h3 id='res.download'>res.download(path [, filename] [, options] [, fn])</h3>
 
 Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.

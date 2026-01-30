@@ -1,3 +1,9 @@
+---
+title: req.files
+description: This property is an object of the files uploaded. This feature
+menuTitle: req.files
+---
+
 <h3 id='req.files'>req.files</h3>
 
 This property is an object of the files uploaded. This feature

@@ -1,3 +1,9 @@
+---
+title: express.raw
+description: This is a built-in middleware function in Express. It parses incoming request
+menuTitle: express.raw
+---
+
 <h3 id='express.raw' class='h2'>express.raw([options])</h3>
 
 This is a built-in middleware function in Express. It parses incoming request

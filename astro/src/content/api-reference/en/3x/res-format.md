@@ -1,3 +1,9 @@
+---
+title: res.format
+description: Performs content-negotiation on the request Accept header
+menuTitle: res.format
+---
+
 <h3 id='res.format'>res.format(object)</h3>
 
 Performs content-negotiation on the request Accept header

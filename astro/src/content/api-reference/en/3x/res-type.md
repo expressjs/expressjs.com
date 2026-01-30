@@ -1,3 +1,9 @@
+---
+title: res.type
+description: Sets the Content-Type to the mime lookup of `type`,
+menuTitle: res.type
+---
+
 <h3 id='res.type'>res.type(type)</h3>
 
 Sets the Content-Type to the mime lookup of `type`,

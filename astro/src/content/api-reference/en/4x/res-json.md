@@ -1,3 +1,9 @@
+---
+title: res.json
+description: Sends a JSON response. This method sends a response (with the correct content-type) that is the parameter converted to a
+menuTitle: res.json
+---
+
 <h3 id='res.json'>res.json([body])</h3>
 
 Sends a JSON response. This method sends a response (with the correct content-type) that is the parameter converted to a 

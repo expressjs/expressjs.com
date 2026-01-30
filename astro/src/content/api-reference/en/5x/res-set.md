@@ -1,3 +1,9 @@
+---
+title: res.set
+description: Sets the response's HTTP header `field` to `value`.
+menuTitle: res.set
+---
+
 <h3 id='res.set'>res.set(field [, value])</h3>
 
 Sets the response's HTTP header `field` to `value`.

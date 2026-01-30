@@ -1,3 +1,9 @@
+---
+title: directory
+description: Directory serving middleware, serves the given `path`.
+menuTitle: directory
+---
+
 <h3 id='directory'>directory()</h3>
 
 Directory serving middleware, serves the given `path`.

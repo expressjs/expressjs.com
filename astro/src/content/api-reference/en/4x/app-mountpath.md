@@ -1,3 +1,9 @@
+---
+title: app.mountpath
+description: The `app.mountpath` property contains one or more path patterns on which a sub-app was mounted.
+menuTitle: app.mountpath
+---
+
 <h3 id='app.mountpath'>app.mountpath</h3>
 
 The `app.mountpath` property contains one or more path patterns on which a sub-app was mounted.

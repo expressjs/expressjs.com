@@ -1,3 +1,9 @@
+---
+title: res.attachment
+description: Sets the HTTP response `Content-Disposition` header field to "attachment". If a `filename` is given,
+menuTitle: res.attachment
+---
+
 <h3 id='res.attachment'>res.attachment([filename])</h3>
 
 Sets the HTTP response `Content-Disposition` header field to "attachment". If a `filename` is given,

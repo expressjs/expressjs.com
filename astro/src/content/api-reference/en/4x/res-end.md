@@ -1,3 +1,9 @@
+---
+title: res.end
+description: Ends the response process. This method actually comes from Node core, specifically the [response.end() method of http.ServerResponse](https://nodej...
+menuTitle: res.end
+---
+
 <h3 id='res.end'>res.end([data[, encoding]][, callback])</h3>
 
 Ends the response process. This method actually comes from Node core, specifically the [response.end() method of http.ServerResponse](https://nodejs.org/api/http.html#responseenddata-encoding-callback).

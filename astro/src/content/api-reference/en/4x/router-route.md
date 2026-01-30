@@ -1,3 +1,9 @@
+---
+title: router.route
+description: Returns an instance of a single route which you can then use to handle HTTP verbs
+menuTitle: router.route
+---
+
 <h3 id='router.route'>router.route(path)</h3>
 
 Returns an instance of a single route which you can then use to handle HTTP verbs

@@ -1,3 +1,9 @@
+---
+title: req.subdomains
+description: An array of subdomains in the domain name of the request.
+menuTitle: req.subdomains
+---
+
 <h3 id='req.subdomains'>req.subdomains</h3>
 
 An array of subdomains in the domain name of the request.

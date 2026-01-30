@@ -1,7 +1,7 @@
 ---
 title: Overriding the Express API
 description: Discover how to customize and extend the Express.js API by overriding methods and properties on the request and response objects using prototypes.
-menu: guide
+menuTitle: Overriding the Express API
 order: 4
 ---
 

@@ -1,3 +1,9 @@
+---
+title: req.params
+description: This property is an array containing properties mapped to the named route "parameters".
+menuTitle: req.params
+---
+
 <h3 id='req.params'>req.params</h3>
 
 This property is an array containing properties mapped to the named route "parameters".

@@ -1,6 +1,6 @@
 ---
 title: Express errorhandler middleware
-menu: resources
+menuTitle: errorhandler
 module: errorhandler
 ---
 

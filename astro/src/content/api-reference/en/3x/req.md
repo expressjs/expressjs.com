@@ -1,3 +1,9 @@
+---
+title: Req
+description: h2 id="request">Request
+menuTitle: Req
+---
+
 <h2 id="request">Request</h2>
 
 The `req` object is an enhanced version of Node's own request object

@@ -1,3 +1,9 @@
+---
+title: basicAuth
+description: Basic Authentication middleware, populating `req.user`
+menuTitle: basicAuth
+---
+
 <h3 id='basicAuth'>basicAuth()</h3>
 
 Basic Authentication middleware, populating `req.user`

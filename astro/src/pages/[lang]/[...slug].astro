@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import DocLayout from '@layouts/DocLayout.astro';
-import type { MenuSection } from '@config/menu';
 import { render } from 'astro:content';
 import { buildBreadcrumbs } from '@utils/content';
 
@@ -24,14 +23,9 @@ const { page } = Astro.props;
 const { lang, slug } = Astro.params;
 const { Content } = await render(page);
 const breadcrumbs = await buildBreadcrumbs(lang, slug, 'docs');
-const { title, description, menu } = page.data;
+const { title, description } = page.data;
 ---
 
-<DocLayout
-  title={title}
-  description={description}
-  section={menu as MenuSection}
-  breadcrumbs={breadcrumbs}
->
+<DocLayout title={title} description={description} breadcrumbs={breadcrumbs}>
   <Content />
 </DocLayout>

@@ -1,3 +1,9 @@
+---
+title: express.static
+description: This is a built-in middleware function in Express.
+menuTitle: express.static
+---
+
 <h3 id='express.static' class='h2'>express.static(root, [options])</h3>
 
 This is a built-in middleware function in Express.

@@ -1,3 +1,9 @@
+---
+title: Properties
+description: In Express 4, `req.files` is no longer available on the `req` object by default. To access uploaded files
+menuTitle: Properties
+---
+
 <h2 id="req">Request</h2>
 
 The `req` object represents the HTTP request and has properties for the

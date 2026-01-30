@@ -1,3 +1,9 @@
+---
+title: req.app
+description: This property holds a reference to the instance of the Express application that is using the middleware.
+menuTitle: req.app
+---
+
 <h3 id='req.app'>req.app</h3>
 
 This property holds a reference to the instance of the Express application that is using the middleware.

@@ -1,3 +1,9 @@
+---
+title: settings
+description: The following settings are provided to alter how Express will behave:
+menuTitle: settings
+---
+
 <h3 id='app-settings'>settings</h3>
 
 The following settings are provided to alter how Express will behave:

@@ -1,3 +1,9 @@
+---
+title: app.router
+description: The application's in-built instance of router. This is created lazily, on first access.
+menuTitle: app.router
+---
+
 <h3 id='app.router'>app.router</h3>
 
 The application's in-built instance of router. This is created lazily, on first access.

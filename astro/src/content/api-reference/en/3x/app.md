@@ -1,3 +1,9 @@
+---
+title: App
+description: h2 id="application">Application
+menuTitle: App
+---
+
 <h2 id="application">Application</h2>
 
 <section markdown="1">

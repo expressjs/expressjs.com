@@ -1,3 +1,9 @@
+---
+title: res.sendFile
+description: `res.sendFile()` is supported by Express v4.8.0 onwards.
+menuTitle: res.sendFile
+---
+
 <h3 id='res.sendFile'>res.sendFile(path [, options] [, fn])</h3>
 
 <div class="doc-box doc-info" markdown="1">

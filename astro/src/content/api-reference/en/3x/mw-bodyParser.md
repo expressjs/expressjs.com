@@ -1,3 +1,9 @@
+---
+title: bodyParser
+description: Request body parsing middleware supporting JSON, urlencoded,
+menuTitle: bodyParser
+---
+
 <h3 id='bodyParser'>bodyParser()</h3>
 
 Request body parsing middleware supporting JSON, urlencoded,

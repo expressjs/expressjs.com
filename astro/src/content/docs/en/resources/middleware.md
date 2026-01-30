@@ -1,7 +1,7 @@
 ---
 title: Express middleware
 description: Explore a list of Express.js middleware modules maintained by the Express team and the community, including built-in middleware and popular third-party modules.
-menu: resources
+menuTitle: Middleware
 order: 3
 module: mw-home
 ---

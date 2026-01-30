@@ -1,3 +1,9 @@
+---
+title: Methods
+description: section markdown="1">
+menuTitle: Methods
+---
+
 <h2 id="express">express()</h2>
 
 Creates an Express application. The `express()` function is a top-level function exported by the `express` module.

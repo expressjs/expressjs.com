@@ -1,3 +1,9 @@
+---
+title: Menu
+description: button id="menu-toggle" title="show table of content">On this page
+menuTitle: Menu
+---
+
 <button id="menu-toggle" title="show table of content">On this page</button>
 <ul id="menu">
     <li id="express-api"><a href="#express">express()</a>

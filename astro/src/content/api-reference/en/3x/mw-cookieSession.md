@@ -1,3 +1,9 @@
+---
+title: cookieSession
+description: Provides cookie-based sessions, and populates `req.session`.
+menuTitle: cookieSession
+---
+
 <h3 id='cookieSession'>cookieSession()</h3>
 
 Provides cookie-based sessions, and populates `req.session`.

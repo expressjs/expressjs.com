@@ -1,3 +1,9 @@
+---
+title: res.links
+description: Joins the `links` provided as properties of the parameter to populate the response's
+menuTitle: res.links
+---
+
 <h3 id='res.links'>res.links(links)</h3>
 
 Joins the `links` provided as properties of the parameter to populate the response's

@@ -1,3 +1,9 @@
+---
+title: app.get
+description: Routes HTTP GET requests to the specified path with the specified callback functions.
+menuTitle: app.get
+---
+
 <h3 id='app.get.method'>app.get(path, callback [, callback ...])</h3>
 
 Routes HTTP GET requests to the specified path with the specified callback functions.

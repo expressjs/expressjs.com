@@ -1,3 +1,9 @@
+---
+title: app.enable
+description: Set setting `name` to `true`.
+menuTitle: app.enable
+---
+
 <h3 id='app.enable'>app.enable(name)</h3>
 
 Set setting `name` to `true`.

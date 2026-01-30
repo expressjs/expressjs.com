@@ -1,6 +1,6 @@
 ---
 title: Express serve-favicon middleware
-menu: resources
+menuTitle: serve-favicon
 module: serve-favicon
 ---
 

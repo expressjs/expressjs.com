@@ -1,3 +1,9 @@
+---
+title: app.all
+description: This method functions just like the `app.VERB()` methods,
+menuTitle: app.all
+---
+
 <h3 id='app.all'>app.all(path, [callback...], callback)</h3>
 
 This method functions just like the `app.VERB()` methods,
@@ -13,14 +19,14 @@ can perform a task, then `next()` to continue matching subsequent
 routes.
 
 ```js
-app.all('*', requireAuthentication, loadUser)
+app.all('*', requireAuthentication, loadUser);
 ```
 
 Or the equivalent:
 
 ```js
-app.all('*', requireAuthentication)
-app.all('*', loadUser)
+app.all('*', requireAuthentication);
+app.all('*', loadUser);
 ```
 
 Another great example of this is white-listed "global" functionality. Here
@@ -28,5 +34,5 @@ the example is much like before, however only restricting paths prefixed with
 "/api":
 
 ```js
-app.all('/api/*', requireAuthentication)
+app.all('/api/*', requireAuthentication);
 ```

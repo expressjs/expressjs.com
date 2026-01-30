@@ -1,7 +1,7 @@
 ---
 title: Performance Best Practices Using Express in Production
 description: Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.
-menu: advanced
+menuTitle: Performance best practices
 order: 4
 ---
 

@@ -1,3 +1,9 @@
+---
+title: res.redirect
+description: Redirects to the URL derived from the specified `path`, with specified `status`, a positive integer
+menuTitle: res.redirect
+---
+
 <h3 id='res.redirect'>res.redirect([status,] path)</h3>
 
 Redirects to the URL derived from the specified `path`, with specified `status`, a positive integer

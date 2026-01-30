@@ -1,7 +1,7 @@
 ---
 title: Express utilities
 description: Discover utility modules related to Express.js and Node.js, including tools for cookies, CSRF protection, URL parsing, routing, and more to enhance your applications.
-menu: resources
+menuTitle: Utility modules
 order: 4
 ---
 

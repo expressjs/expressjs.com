@@ -1,3 +1,9 @@
+---
+title: Properties
+description: section markdown="1">
+menuTitle: Properties
+---
+
 <h2 id="app">Application</h2>
 
 The `app` object conventionally denotes the Express application.

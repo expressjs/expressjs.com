@@ -1,3 +1,9 @@
+---
+title: req.body
+description: Contains key-value pairs of data submitted in the request body.
+menuTitle: req.body
+---
+
 <h3 id='req.body'>req.body</h3>
 
 Contains key-value pairs of data submitted in the request body.

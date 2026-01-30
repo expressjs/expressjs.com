@@ -1,3 +1,9 @@
+---
+title: express.text
+description: This is a built-in middleware function in Express. It parses incoming request
+menuTitle: express.text
+---
+
 <h3 id='express.text' class='h2'>express.text([options])</h3>
 
 This is a built-in middleware function in Express. It parses incoming request

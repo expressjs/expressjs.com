@@ -1,3 +1,9 @@
+---
+title: req.get
+description: Get the case-insensitive request header `field`. The "Referrer" and "Referer" fields are interchangeable.
+menuTitle: req.get
+---
+
 <h3 id='req.get'>req.get(field)</h3>
 
 Get the case-insensitive request header `field`. The "Referrer" and "Referer" fields are interchangeable.

@@ -1,3 +1,9 @@
+---
+title: app.delete
+description: Routes HTTP DELETE requests to the specified path with the specified callback functions.
+menuTitle: app.delete
+---
+
 <h3 id='app.delete.method'>app.delete(path, callback [, callback ...])</h3>
 
 Routes HTTP DELETE requests to the specified path with the specified callback functions.

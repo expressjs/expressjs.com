@@ -1,3 +1,9 @@
+---
+title: compress
+description: Compress response data with gzip / deflate. This middleware
+menuTitle: compress
+---
+
 <h3 id='compress'>compress()</h3>
 
 Compress response data with gzip / deflate. This middleware

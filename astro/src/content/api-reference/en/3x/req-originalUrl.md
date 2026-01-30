@@ -1,3 +1,9 @@
+---
+title: req.originalUrl
+description: This property is much like `req.url`, however it retains
+menuTitle: req.originalUrl
+---
+
 <h3 id='req.originalUrl'>req.originalUrl</h3>
 
 This property is much like `req.url`, however it retains

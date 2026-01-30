@@ -1,3 +1,9 @@
+---
+title: res.location
+description: Sets the response `Location` HTTP header to the specified `path` parameter.
+menuTitle: res.location
+---
+
 <h3 id='res.location'>res.location(path)</h3>
 
 Sets the response `Location` HTTP header to the specified `path` parameter.

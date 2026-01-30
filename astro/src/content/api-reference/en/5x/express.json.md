@@ -1,3 +1,9 @@
+---
+title: express.json
+description: This is a built-in middleware function in Express. It parses incoming requests
+menuTitle: express.json
+---
+
 <h3 id='express.json' class='h2'>express.json([options])</h3>
 
 This is a built-in middleware function in Express. It parses incoming requests

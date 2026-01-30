@@ -1,3 +1,9 @@
+---
+title: app.enable
+description: Sets the Boolean setting `name` to `true`, where `name` is one of the properties from the [app settings table](#app.settings.table).
+menuTitle: app.enable
+---
+
 <h3 id='app.enable'>app.enable(name)</h3>
 
 Sets the Boolean setting `name` to `true`, where `name` is one of the properties from the [app settings table](#app.settings.table).

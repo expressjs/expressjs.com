@@ -1,6 +1,6 @@
 ---
 title: Express serve-index middleware
-menu: resources
+menuTitle: serve-index
 module: serve-index
 ---
 

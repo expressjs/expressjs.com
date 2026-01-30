@@ -1,3 +1,9 @@
+---
+title: app.routes
+description: The `app.routes` object houses all of the routes defined mapped
+menuTitle: app.routes
+---
+
 <h3 id='app.routes'>app.routes</h3>
 
 The `app.routes` object houses all of the routes defined mapped

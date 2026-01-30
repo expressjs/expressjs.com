@@ -1,13 +1,11 @@
 ---
 import Layout from './Layout.astro';
-import type { MenuSection } from '@config/menu';
-import type { BreadcrumbItem } from '@utils/breadcrumb';
+import type { BreadcrumbItem } from '@utils/content';
 import { Breadcrumbs } from '@components/patterns';
 
 interface Props {
   title: string;
   description?: string;
-  section: MenuSection;
   breadcrumbs: BreadcrumbItem[];
 }
 

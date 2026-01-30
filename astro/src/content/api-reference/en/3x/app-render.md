@@ -1,3 +1,9 @@
+---
+title: app.render
+description: Render a `view` with a callback responding with
+menuTitle: app.render
+---
+
 <h3 id='app.render'>app.render(view, [options], callback)</h3>
 
 Render a `view` with a callback responding with

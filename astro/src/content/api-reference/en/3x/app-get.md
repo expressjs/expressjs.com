@@ -1,3 +1,9 @@
+---
+title: app.get
+description: Get setting `name` value.
+menuTitle: app.get
+---
+
 <h3 id='app.get'>app.get(name)</h3>
 
 Get setting `name` value.

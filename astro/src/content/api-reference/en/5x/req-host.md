@@ -1,3 +1,9 @@
+---
+title: req.host
+description: Contains the host derived from the `Host` HTTP header.
+menuTitle: req.host
+---
+
 <h3 id='req.host'>req.host</h3>
 
 Contains the host derived from the `Host` HTTP header.

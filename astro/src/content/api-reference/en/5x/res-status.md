@@ -1,3 +1,9 @@
+---
+title: res.status
+description: Sets the HTTP status for the response.
+menuTitle: res.status
+---
+
 <h3 id='res.status'>res.status(code)</h3>
 
 Sets the HTTP status for the response.

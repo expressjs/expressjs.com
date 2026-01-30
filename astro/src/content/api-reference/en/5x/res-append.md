@@ -1,3 +1,9 @@
+---
+title: res.append
+description: `res.append()` is supported by Express v4.11.0+
+menuTitle: res.append
+---
+
 <h3 id='res.append'>res.append(field [, value])</h3>
 
 <div class="doc-box doc-info" markdown="1">

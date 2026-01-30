@@ -1,3 +1,9 @@
+---
+title: req.ip
+description: Return the remote address, or when "trust proxy"
+menuTitle: req.ip
+---
+
 <h3 id='req.ip'>req.ip</h3>
 
 Return the remote address, or when "trust proxy"

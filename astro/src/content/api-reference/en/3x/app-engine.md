@@ -1,3 +1,9 @@
+---
+title: app.engine
+description: Register the given template engine `callback` as `ext`
+menuTitle: app.engine
+---
+
 <h3 id='app.engine'>app.engine(ext, callback)</h3>
 
 Register the given template engine `callback` as `ext`

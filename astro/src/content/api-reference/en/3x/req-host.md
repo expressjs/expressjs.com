@@ -1,3 +1,9 @@
+---
+title: req.host
+description: Returns the hostname from the "Host" header field (void of portno).
+menuTitle: req.host
+---
+
 <h3 id='req.host'>req.host</h3>
 
 Returns the hostname from the "Host" header field (void of portno).

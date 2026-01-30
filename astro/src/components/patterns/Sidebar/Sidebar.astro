@@ -14,26 +14,66 @@ import type { HTMLAttributes } from 'astro/types';
 import { BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { getLangFromUrl } from '@/i18n/utils';
+import { navItems, type MenuSection } from '@/config/menu';
+import { getPagesBySection } from '@utils/content';
+import type { collections } from '@/content.config';
 
 type Props = HTMLAttributes<'div'>;
+
+interface PageInfo {
+  title: string;
+  slug: string;
+  href: string;
+}
+
+interface SectionWithPages {
+  label: string;
+  pages: PageInfo[];
+}
+
+type NavigationData = Record<string, Record<string, SectionWithPages>>;
 
 const { class: className, ...rest } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
-const navItems = [
-  {
-    label: 'Docs',
-    ariaLabel: 'Documentation',
-    icon: 'files',
-  },
-  {
-    href: `/${lang}/5x/api.html`,
-    label: 'API Reference',
-    ariaLabel: 'API Reference',
-    icon: 'code',
-  },
-  { href: `/${lang}/blog/`, label: 'Blog', ariaLabel: 'Blog', icon: 'newspaper' },
-];
+// Fetch all pages for navigation items with sections
+const navigationData: NavigationData = {};
+
+for (const item of navItems) {
+  if (item.sections) {
+    const sectionsWithPages: Record<string, SectionWithPages> = {};
+
+    for (const [sectionKey, sectionLabel] of Object.entries(item.sections)) {
+      const collection = item.key as keyof typeof collections;
+
+      try {
+        const pages = await getPagesBySection(sectionKey as MenuSection, lang, collection);
+        sectionsWithPages[sectionKey] = {
+          label: sectionLabel,
+          pages: pages
+            .filter((page) => page.data.title)
+            .map((page) => {
+              const collection = page.collection;
+              const slug = page.id.replace(`${lang}/`, '').replace(/\.mdx?$/, '');
+              return {
+                title: page.data.menuTitle! || 'Untitled',
+                slug: slug,
+                href: `/${lang}/${collection === 'docs' ? '' : 'api-reference/'}${slug}`,
+              };
+            }),
+        };
+      } catch (error) {
+        console.error(`Failed to fetch pages for section ${sectionKey}:`, error);
+        sectionsWithPages[sectionKey] = {
+          label: sectionLabel,
+          pages: [],
+        };
+      }
+    }
+
+    navigationData[item.key] = sectionsWithPages;
+  }
+}
 ---
 
 <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true" data-sidebar-backdrop></div>
@@ -46,17 +86,23 @@ const navItems = [
   aria-labelledby="sidebar-title"
   aria-hidden="true"
   data-sidebar
+  data-navigation={JSON.stringify(navigationData)}
   {...rest}
 >
   <h2 id="sidebar-title" class="sr-only">Main menu</h2>
 
-  <nav class="sidebar-nav" aria-label="Main navigation">
+  <!-- First level navigation -->
+  <nav
+    class="sidebar-nav sidebar-nav--first-level"
+    aria-label="Main navigation"
+    data-nav-level="first"
+  >
     <ul class="sidebar-nav-list">
       {
         navItems.map((item) => (
           <li>
             {item.href && (
-              <a href={item.href} class="sidebar-nav-item" aria-label={item.ariaLabel}>
+              <a href={`/${lang}${item.href}`} class="sidebar-nav-item" aria-label={item.ariaLabel}>
                 <div class="sidebar-nav-icon">
                   <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
                 </div>
@@ -65,8 +111,15 @@ const navItems = [
                 </BodyMd>
               </a>
             )}
-            {!item.href && (
-              <button class="sidebar-nav-item" aria-label={item.ariaLabel} type="button">
+            {!item.href && item.sections && (
+              <button
+                class="sidebar-nav-item"
+                aria-label={item.ariaLabel}
+                type="button"
+                data-nav-key={item.key}
+                data-nav-label={item.label}
+                data-sections={JSON.stringify(item.sections)}
+              >
                 <div class="sidebar-nav-icon">
                   <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
                 </div>
@@ -87,20 +140,70 @@ const navItems = [
     </ul>
   </nav>
 
+  <!-- Second level navigation -->
+  <nav
+    class="sidebar-nav sidebar-nav--second-level"
+    aria-label="Section navigation"
+    data-nav-level="second"
+    aria-hidden="true"
+  >
+    <div class="sidebar-nav-header">
+      <button class="sidebar-nav-back" type="button" aria-label="Go back to main navigation">
+        <Icon name="ph:arrow-left" size="20" color="var(--color-icon-primary)" />
+        <h3 class="sidebar-nav-title" data-nav-title>Navigation</h3>
+      </button>
+    </div>
+    <div class="sidebar-nav-content" data-second-level-list>
+      <!-- Dynamically populated with sections and pages -->
+    </div>
+  </nav>
+
   <script>
+    interface PageInfo {
+      title: string;
+      slug: string;
+      href: string;
+    }
+
+    interface SectionWithPages {
+      label: string;
+      pages: PageInfo[];
+    }
+
+    type NavigationData = Record<string, Record<string, SectionWithPages>>;
+
     // Sidebar state management and accessibility
     class SidebarController {
       private sidebar: HTMLElement | null;
       private backdrop: HTMLElement | null;
-      private menuToggle: HTMLElement | null;
       private isOpen = false;
       private focusableElements: HTMLElement[] = [];
       private lastFocusedElement: HTMLElement | null = null;
+      private firstLevelNav: HTMLElement | null;
+      private secondLevelNav: HTMLElement | null;
+      private secondLevelList: HTMLElement | null;
+      private navTitle: HTMLElement | null;
+      private backButton: HTMLElement | null;
+      private isSecondLevelActive = false;
+      private navigationData: NavigationData = {};
 
       constructor() {
         this.sidebar = document.querySelector('[data-sidebar]');
         this.backdrop = document.querySelector('[data-sidebar-backdrop]');
-        this.menuToggle = document.getElementById('menuToggle');
+        this.firstLevelNav = document.querySelector('[data-nav-level="first"]');
+        this.secondLevelNav = document.querySelector('[data-nav-level="second"]');
+        this.secondLevelList = document.querySelector('[data-second-level-list]');
+        this.navTitle = document.querySelector('[data-nav-title]');
+        this.backButton = document.querySelector('.sidebar-nav-back');
+
+        // Load navigation data from data attribute
+        if (this.sidebar?.dataset.navigation) {
+          try {
+            this.navigationData = JSON.parse(this.sidebar.dataset.navigation);
+          } catch (error) {
+            console.error('Failed to parse navigation data:', error);
+          }
+        }
 
         if (this.sidebar && this.backdrop) {
           this.init();
@@ -108,14 +211,128 @@ const navItems = [
       }
 
       private init() {
-        // Backdrop click
         this.backdrop?.addEventListener('click', () => this.close());
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => this.handleKeyDown(e));
 
-        // Listen for menu toggle from Header
         document.addEventListener('sidebar:toggle', () => this.toggle());
+
+        this.initNavigationHandlers();
+      }
+
+      private initNavigationHandlers() {
+        const navButtons = this.firstLevelNav?.querySelectorAll('button[data-nav-key]');
+        navButtons?.forEach((button) => {
+          button.addEventListener('click', (e) => this.handleNavItemClick(e));
+        });
+
+        this.backButton?.addEventListener('click', () => this.navigateToFirstLevel());
+      }
+
+      private handleNavItemClick(e: Event) {
+        const button = e.currentTarget as HTMLButtonElement;
+        const navLabel = button.dataset.navLabel;
+        const navKey = button.dataset.navKey;
+        const sectionsData = button.dataset.sections;
+
+        if (!sectionsData || !navLabel) return;
+
+        try {
+          const sections = JSON.parse(sectionsData);
+          this.navigateToSecondLevel(navLabel, sections, navKey);
+        } catch (error) {
+          console.error('Failed to parse sections data:', error);
+        }
+      }
+
+      private navigateToSecondLevel(
+        title: string,
+        sections: Record<string, string>,
+        navKey: string | undefined
+      ) {
+        if (
+          !this.firstLevelNav ||
+          !this.secondLevelNav ||
+          !this.secondLevelList ||
+          !this.navTitle ||
+          !navKey
+        ) {
+          return;
+        }
+
+        // Update title
+        this.navTitle.textContent = title;
+
+        // Populate second level list with sections and their pages
+        this.secondLevelList.innerHTML = '';
+
+        const navData = this.navigationData[navKey];
+        if (!navData) {
+          console.warn(`No navigation data found for ${navKey}`);
+          return;
+        }
+
+        Object.entries(sections).forEach(([sectionKey, sectionLabel]) => {
+          const sectionData = navData[sectionKey];
+
+          if (!sectionData || !sectionData.pages.length) {
+            return;
+          }
+
+          // Create section container
+          const sectionDiv = document.createElement('div');
+          sectionDiv.className = 'sidebar-nav-section';
+
+          // Create section heading
+          const sectionHeading = document.createElement('h4');
+          sectionHeading.className = 'sidebar-nav-section-title';
+          sectionHeading.textContent = sectionLabel;
+          sectionDiv.appendChild(sectionHeading);
+
+          // Create pages list
+          const pagesList = document.createElement('ul');
+          pagesList.className = 'sidebar-nav-section-list';
+
+          sectionData.pages.forEach((page) => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = page.href;
+            a.className = 'sidebar-nav-item sidebar-nav-item--second-level';
+            a.textContent = page.title;
+            li.appendChild(a);
+            pagesList.appendChild(li);
+          });
+
+          sectionDiv.appendChild(pagesList);
+          this.secondLevelList?.appendChild(sectionDiv);
+        });
+
+        // Trigger slide animation
+        this.firstLevelNav.classList.add('sidebar-nav--slide-out');
+        this.secondLevelNav.classList.add('sidebar-nav--slide-in');
+        this.secondLevelNav.setAttribute('aria-hidden', 'false');
+        this.isSecondLevelActive = true;
+
+        // Focus the back button after animation
+        setTimeout(() => {
+          this.backButton?.focus();
+        }, 300);
+      }
+
+      private navigateToFirstLevel() {
+        if (!this.firstLevelNav || !this.secondLevelNav) return;
+
+        // Trigger reverse slide animation
+        this.firstLevelNav.classList.remove('sidebar-nav--slide-out');
+        this.secondLevelNav.classList.remove('sidebar-nav--slide-in');
+        this.secondLevelNav.setAttribute('aria-hidden', 'true');
+        this.isSecondLevelActive = false;
+
+        // Focus the first nav button after animation
+        setTimeout(() => {
+          const firstButton = this.firstLevelNav?.querySelector('button');
+          firstButton?.focus();
+        }, 300);
       }
 
       private getFocusableElements(): HTMLElement[] {
@@ -159,7 +376,12 @@ const navItems = [
 
       private handleKeyDown(e: KeyboardEvent) {
         if (e.key === 'Escape' && this.isOpen) {
-          this.close();
+          // If on second level, go back to first level instead of closing
+          if (this.isSecondLevelActive) {
+            this.navigateToFirstLevel();
+          } else {
+            this.close();
+          }
         }
 
         this.trapFocus(e);
@@ -211,6 +433,11 @@ const navItems = [
         // Remove open classes
         this.sidebar.classList.remove('sidebar--open');
         this.backdrop.classList.remove('sidebar-backdrop--visible');
+
+        // Reset to first level if on second level
+        if (this.isSecondLevelActive) {
+          this.navigateToFirstLevel();
+        }
 
         // Unlock body scroll
         this.unlockBodyScroll();

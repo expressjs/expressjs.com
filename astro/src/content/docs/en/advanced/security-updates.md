@@ -1,7 +1,7 @@
 ---
 title: Express security updates
 description: Review the latest security updates and patches for Express.js, including detailed vulnerability lists for different versions to help maintain a secure application.
-menu: advanced
+menuTitle: Security updates
 order: 2
 ---
 

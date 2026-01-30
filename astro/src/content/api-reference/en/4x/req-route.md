@@ -1,3 +1,9 @@
+---
+title: req.route
+description: Contains the currently-matched route, a string.  For example:
+menuTitle: req.route
+---
+
 <h3 id='req.route'>req.route</h3>
 
 Contains the currently-matched route, a string.  For example:

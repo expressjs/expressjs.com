@@ -1,3 +1,9 @@
+---
+title: app.METHOD
+description: Routes an HTTP request, where METHOD is the HTTP method of the request, such as GET,
+menuTitle: app.METHOD
+---
+
 <h3 id='app.METHOD'>app.METHOD(path, callback [, callback ...])</h3>
 
 Routes an HTTP request, where METHOD is the HTTP method of the request, such as GET,

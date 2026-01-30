@@ -1,7 +1,7 @@
 ---
 title: Express routing
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
-menu: guide
+menuTitle: Routing
 order: 1
 ---
 

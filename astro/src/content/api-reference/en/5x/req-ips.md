@@ -1,3 +1,9 @@
+---
+title: req.ips
+description: When the [`trust proxy` setting](/5x/api.html#trust.proxy.options.table) does not evaluate to `false`,
+menuTitle: req.ips
+---
+
 <h3 id='req.ips'>req.ips</h3>
 
 When the [`trust proxy` setting](/5x/api.html#trust.proxy.options.table) does not evaluate to `false`,
