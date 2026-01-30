@@ -173,7 +173,7 @@ response:
 
 - The `res.statusCode` is set from `err.status` (or `err.statusCode`). If
   this value is outside the 4xx or 5xx range, it will be set to 500.
-- The `res.statusMessage` is set according to the status code.
+- A 'res.statusMessage' é definida de acordo com o código de status.
 - The body will be the HTML of the status code message when in production
   environment, otherwise will be `err.stack`.
 - Any headers specified in an `err.headers` object.

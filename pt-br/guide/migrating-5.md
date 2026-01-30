@@ -17,7 +17,7 @@ a API básica permanecer a mesma, ainda existem mudanças disruptivas;
 em outras palavras um programa do Express 4 existente pode não
 funcionar se você atualizá-lo para usar o Express 5.
 
-To install this version, you need to have a Node.js version 18 or higher. Then, execute the following command in your application directory:
+Para instalar esta versão, você precisa ter uma versão 18 ou superior de Node.js. Then, execute the following command in your application directory:
 
 ```sh
 npm install "express@5"
@@ -145,7 +145,7 @@ foi descontinuada desde a v4.11.0, e o Express 5 não a suporta mais de nenhuma 
 
 Os seguintes nomes de métodos podem ser pluralizados. No
 Express 4, o uso dos métodos antigos resultava em um aviso de
-descontinuação.  O Express 5 não os suporta mais de forma nenhuma: Express 5 no longer supports them at all:
+descontinuação.  O Express 5 não os suporta mais de forma nenhuma: Express 5 não os suporta mais:
 
 `req.acceptsLanguage()` é substituído por `req.acceptsLanguages()`.
 
