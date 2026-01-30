@@ -12,8 +12,8 @@ redirect_from: "  "
 Assumindo que já tenha instalado o [Node.js](https://nodejs.org/), crie um diretório
 para conter o seu aplicativo, e torne-o seu diretório ativo.
 
-- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
-- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
+- [Express 4.x](/{{ page.lang }}/4x/api.html) requer Node.js 0.10 ou superior.
+- [Express 5.x](/{{ page.lang }}/5x/api.html) requer Node.js 18 ou superior.
 
 ```bash
 $ mkdir myapp

@@ -12,7 +12,7 @@ redirect_from: "  "
 The [pillarjs](https://github.com/pillarjs) GitHub organization contains a number of modules
 for utility functions that may be generally useful.
 
-| Utility modules                                                | Descrição                                                                                                                                                                                                                  |
+| Módulos utilitários                                            | Descrição                                                                                                                                                                                                                  |
 | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [cookies](https://www.npmjs.com/package/cookies)               | Get and set HTTP(S) cookies that can be signed to prevent tampering, using Keygrip. Can be used with the Node.js HTTP library or as Express middleware. |
 | [csrf](https://www.npmjs.com/package/csrf)                     | Contains the logic behind CSRF token creation and verification.  Use this module to create custom CSRF middleware.                                                                         |
