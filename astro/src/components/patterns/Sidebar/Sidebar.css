@@ -58,7 +58,8 @@
 
   /* First and second level navigation positioning */
   .sidebar-nav--first-level,
-  .sidebar-nav--second-level {
+  .sidebar-nav--second-level,
+  .sidebar-nav--third-level {
     position: absolute;
     top: 0;
     left: 0;
@@ -79,12 +80,26 @@
     background-color: var(--color-bg-tertiary);
   }
 
+  .sidebar-nav--third-level {
+    transform: translateX(100%);
+    background-color: var(--color-bg-tertiary);
+  }
+
   /* Sliding animations */
   .sidebar-nav--first-level.sidebar-nav--slide-out {
     transform: translateX(-100%);
   }
 
   .sidebar-nav--second-level.sidebar-nav--slide-in {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .sidebar-nav--second-level.sidebar-nav--slide-out {
+    transform: translateX(-100%);
+  }
+
+  .sidebar-nav--third-level.sidebar-nav--slide-in {
     transform: translateX(0);
     opacity: 1;
   }
@@ -231,19 +246,66 @@
     color: var(--color-text-secondary);
   }
 
-  /* Reduced motion support */
+  /* Subfolder button styling */
+  .sidebar-nav-item--subfolder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .sidebar-nav-item--subfolder:hover {
+    background-color: var(--color-bg-secondary);
+  }
+
+  .sidebar-nav-subfolder-label {
+    flex: 1;
+    margin: 0;
+  }
+
+  .sidebar-nav-subfolder-arrow {
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: opacity var(--duration-200) var(--ease-in-out);
+  }
+
+  .sidebar-nav-item--subfolder:hover .sidebar-nav-subfolder-arrow {
+    opacity: 1;
+  }
+
+  .sidebar-nav-item--third-level {
+    padding: var(--space-3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    display: block;
+  }
+
+  .sidebar-nav-item--third-level:hover {
+    background-color: var(--color-bg-secondary);
+  }
+
+  .sidebar-nav-section-list--third-level {
+    margin-top: 0;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .sidebar,
     .sidebar-backdrop,
     .sidebar-close,
     .sidebar-nav-item,
     .sidebar-nav--first-level,
-    .sidebar-nav--second-level {
+    .sidebar-nav--second-level,
+    .sidebar-nav--third-level {
       transition: none;
     }
   }
 
-  /* Ensure sidebar is hidden by default */
   .sidebar[aria-hidden='true'] {
     visibility: hidden;
   }

@@ -13,6 +13,7 @@ export async function getPagesByLang(lang: string = 'en', collection: keyof type
 /**
  * Get all documents for a specific section and language
  * Section is derived from the folder structure (e.g., "en/starter/page.md" -> section is "starter")
+ * Excludes pages that are nested in subfolders (e.g., "en/resources/middleware/compression.md")
  */
 export async function getPagesBySection(
   section: MenuSection,
@@ -24,7 +25,55 @@ export async function getPagesBySection(
     .filter((page) => {
       const pathWithoutLang = page.id.replace(`${lang}/`, '');
       const pathParts = pathWithoutLang.split('/');
-      return pathParts[0] === section;
+      // Match section and ensure it's not in a subfolder (only 2 parts: section/file.md)
+      return pathParts[0] === section && pathParts.length === 2;
+    })
+    .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+}
+
+/**
+ * Get all subfolders within a section
+ * Returns an object mapping subfolder names to their display labels
+ */
+export async function getSubfoldersInSection(
+  section: MenuSection,
+  lang: string = 'en',
+  collection: keyof typeof collections
+): Promise<Record<string, string>> {
+  const allPages = await getPagesByLang(lang, collection);
+  const subfolders: Record<string, string> = {};
+
+  allPages.forEach((page) => {
+    const pathWithoutLang = page.id.replace(`${lang}/`, '');
+    const pathParts = pathWithoutLang.split('/');
+    // Check if page is in a subfolder (more than 2 parts: section/subfolder/file.md)
+    if (pathParts[0] === section && pathParts.length > 2) {
+      const subfolder = pathParts[1];
+      if (!subfolders[subfolder]) {
+        // Capitalize subfolder name for display
+        subfolders[subfolder] = subfolder.charAt(0).toUpperCase() + subfolder.slice(1);
+      }
+    }
+  });
+
+  return subfolders;
+}
+
+/**
+ * Get all pages within a specific subfolder of a section
+ */
+export async function getPagesBySubfolder(
+  section: MenuSection,
+  subfolder: string,
+  lang: string = 'en',
+  collection: keyof typeof collections
+) {
+  const allPages = await getPagesByLang(lang, collection);
+  return allPages
+    .filter((page) => {
+      const pathWithoutLang = page.id.replace(`${lang}/`, '');
+      const pathParts = pathWithoutLang.split('/');
+      return pathParts[0] === section && pathParts[1] === subfolder && pathParts.length === 3;
     })
     .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 }
