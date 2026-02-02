@@ -37,7 +37,7 @@
     transition: transform var(--duration-300) var(--ease-in-out);
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow-x: hidden;
     overscroll-behavior: contain;
     z-index: var(--z-index-sidebar);
     padding: var(--space-4);
@@ -86,6 +86,7 @@
 
   .sidebar-nav--second-level.sidebar-nav--slide-in {
     transform: translateX(0);
+    opacity: 1;
   }
 
   .sidebar-nav-list {

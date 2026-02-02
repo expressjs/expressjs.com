@@ -237,16 +237,47 @@ for (const item of navItems) {
 
         try {
           const sections = JSON.parse(sectionsData);
-          this.navigateToSecondLevel(navLabel, sections, navKey);
+          this.navigateToSecondLevel(navLabel, sections, navKey, undefined);
         } catch (error) {
           console.error('Failed to parse sections data:', error);
         }
       }
 
+      private detectCurrentPage() {
+        const currentPath = window.location.pathname;
+
+        // Search through all navigation data to find the current page
+        for (const [navKey, navData] of Object.entries(this.navigationData)) {
+          for (const sectionData of Object.values(navData)) {
+            const currentPage = sectionData.pages.find((page) => page.href === currentPath);
+            if (currentPage) {
+              // Find the nav item button to get its sections and label
+              const navButton = this.firstLevelNav?.querySelector(
+                `button[data-nav-key="${navKey}"]`
+              ) as HTMLButtonElement;
+
+              if (navButton) {
+                return {
+                  navKey,
+                  navLabel: navButton.dataset.navLabel || '',
+                  sections: navButton.dataset.sections
+                    ? JSON.parse(navButton.dataset.sections)
+                    : {},
+                  currentHref: currentPath,
+                };
+              }
+            }
+          }
+        }
+
+        return null;
+      }
+
       private navigateToSecondLevel(
         title: string,
         sections: Record<string, string>,
-        navKey: string | undefined
+        navKey: string | undefined,
+        currentHref?: string
       ) {
         if (
           !this.firstLevelNav ||
@@ -297,6 +328,13 @@ for (const item of navItems) {
             a.href = page.href;
             a.className = 'sidebar-nav-item sidebar-nav-item--second-level';
             a.textContent = page.title;
+
+            // Mark current page as active
+            if (currentHref && page.href === currentHref) {
+              a.setAttribute('aria-current', 'page');
+              a.dataset.currentPage = 'true';
+            }
+
             li.appendChild(a);
             pagesList.appendChild(li);
           });
@@ -311,9 +349,22 @@ for (const item of navItems) {
         this.secondLevelNav.setAttribute('aria-hidden', 'false');
         this.isSecondLevelActive = true;
 
-        // Focus the back button after animation
+        // Focus the back button after animation, and scroll to current page if exists
         setTimeout(() => {
           this.backButton?.focus();
+
+          // Scroll to current page if it exists
+          if (currentHref) {
+            const currentPageLink = this.secondLevelList?.querySelector(
+              '[data-current-page="true"]'
+            ) as HTMLElement;
+            if (currentPageLink) {
+              currentPageLink.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+              });
+            }
+          }
         }, 300);
       }
 
@@ -411,11 +462,24 @@ for (const item of navItems) {
         // Lock body scroll
         this.lockBodyScroll();
 
-        // Focus first focusable element after animation
-        setTimeout(() => {
-          this.focusableElements = this.getFocusableElements();
-          this.focusableElements[0]?.focus();
-        }, 300);
+        // Check if current page is in secondary navigation
+        const currentPageInfo = this.detectCurrentPage();
+
+        if (currentPageInfo) {
+          // If current page is in secondary nav, open directly to that section
+          this.navigateToSecondLevel(
+            currentPageInfo.navLabel,
+            currentPageInfo.sections,
+            currentPageInfo.navKey,
+            currentPageInfo.currentHref
+          );
+        } else {
+          // Focus first focusable element after animation
+          setTimeout(() => {
+            this.focusableElements = this.getFocusableElements();
+            this.focusableElements[0]?.focus();
+          }, 300);
+        }
       }
 
       public close() {
