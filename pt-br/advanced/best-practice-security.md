@@ -225,10 +225,10 @@ cookies:
 - [cookie-session](https://www.npmjs.com/package/cookie-session)
   que substitui o middleware `express.cookieSession` integrado no Express 3.x.
 
-A principal diferença entre estes dois módulos é como eles salvam os dados da sessão de cookie. The [express-session](https://www.npmjs.com/package/express-session) middleware stores session data on the server; it only saves the session ID in the cookie itself, not session data. By default, it uses in-memory storage and is not designed for a production environment. In production, you'll need to set up a scalable session-store; see the list of [compatible session stores](https://github.com/expressjs/session#compatible-session-stores).
+A principal diferença entre estes dois módulos é como eles salvam os dados da sessão de cookie. O [express-session](https://www.npmjs.com/package/express-session) middleware armazena os dados de sessão no servidor; apenas salva o ID da sessão no próprio cookie, não nos dados da sessão. Por padrão, ele usa armazenamento de memória e não é projetado para um ambiente de produção. Na produção, você precisará configurar uma loja de sessão escalável; ver a lista de [lojas de sessões compatíveis](https://github.com/expressjs/session#compatible-session-stores).
 
 Em contrapartida, o middleware [cookie-session](https://www.npmjs.com/package/cookie-session)
-implementa um armazenamento apoiado em cookies: ele serializa a sessão inteira para o cookie, ao invés de apenas a chave da sessão.  Use apenas quando os dados da sessão são relativamente pequenos e facilmente codificados como números primitivos(ao invés de objetos). Only use it when session data is relatively small and easily encoded as primitive values (rather than objects). Apesar de navegadores supostamente suportarem pelo menos 4096 bytes por cookie, para assegurar que você não exceda o limite, não exceda
+implementa um armazenamento apoiado em cookies: ele serializa a sessão inteira para o cookie, ao invés de apenas a chave da sessão.  Use apenas quando os dados da sessão são relativamente pequenos e facilmente codificados como números primitivos(ao invés de objetos). Use isso apenas quando os dados da sessão são relativamente pequenos e facilmente codificados como valores primitivos (em vez de objetos). Apesar de navegadores supostamente suportarem pelo menos 4096 bytes por cookie, para assegurar que você não exceda o limite, não exceda
 um tamanho de  4093 bytes por domínio. Além disso, esteja ciente de que os dados do cookie serão visíveis para o cliente, portanto se
 houver razão para mantê-los seguros ou obscuros, então o express-session pode ser uma escolha melhor.
 
@@ -287,37 +287,37 @@ app.use(session({
 }))
 ```
 
-## Prevent brute-force attacks against authorization
+## Evite ataques brutos contra autorização
 
-Make sure login endpoints are protected to make private data more secure.
+Certifique-se de que os endpoints de login estejam protegidos para tornar os dados privados mais seguros.
 
-A simple and powerful technique is to block authorization attempts using two metrics:
+Uma técnica simples e poderosa é bloquear tentativas de autorização usando duas métricas:
 
-1. The number of consecutive failed attempts by the same user name and IP address.
-2. The number of failed attempts from an IP address over some long period of time. For example, block an IP address if it makes 100 failed attempts in one day.
+1. O número de tentativas consecutivas com o mesmo nome de usuário e endereço IP.
+2. O número de tentativas falhadas de um endereço IP por um longo período de tempo. Por exemplo, bloqueie um endereço IP se fizer 100 tentativas falhadas em um dia.
 
-[rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) package provides tools to make this technique easy and fast. You can find [an example of brute-force protection in the documentation](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection)
+[rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) pacote fornece ferramentas para tornar essa técnica fácil e rápida. Você pode encontrar [um exemplo de proteção brute-force na documentação](https://github.com/animir/node-rate-limiter-flexible/wiki/Overall-example#login-endpoint-protection)
 
-## Ensure your dependencies are secure
+## Certifique-se de que suas dependências estejam seguras
 
-Using npm to manage your application's dependencies is powerful and convenient. But the packages that you use may contain critical security vulnerabilities that could also affect your application. The security of your app is only as strong as the "weakest link" in your dependencies.
+Usar o npm para gerenciar as dependências do seu aplicativo é poderoso e conveniente. Mas os pacotes que você usa podem conter vulnerabilidades de segurança críticas que também podem afetar sua aplicação. A segurança do seu aplicativo só é forte como o link "mais fraco" em suas dependências.
 
-Since npm@6, npm automatically reviews every install request. Also, you can use `npm audit` to analyze your dependency tree.
+Desde npm@6, npm revisa automaticamente toda requisição de instalação. Além disso, você pode usar o `npm audit` para analisar sua árvore de dependências.
 
 ```bash
 $ npm audit
 ```
 
-If you want to stay more secure, consider [Snyk](https://snyk.io/).
+Se você deseja ficar mais seguro, considere [Snyk](https://snyk.io/).
 
-Snyk offers both a [command-line tool](https://www.npmjs.com/package/snyk) and a [Github integration](https://snyk.io/docs/github) that checks your application against [Snyk's open source vulnerability database](https://snyk.io/vuln/) for any known vulnerabilities in your dependencies. Install the CLI as follows:
+Snyk oferece tanto uma [ferramenta de linha de comando](https://www.npmjs.com/package/snyk) quanto uma [integração com um Github](https://snyk.io/docs/github) que verifica a sua aplicação no [banco de dados de vulnerabilidades de fonte aberta do Snyk](https://snyk.io/vuln/) para quaisquer vulnerabilidades conhecidas em suas dependências. Instalar CLI da seguinte forma:
 
 ```bash
 $ npm install -g snyk
 $ cd your-app
 ```
 
-Use this command to test your application for vulnerabilities:
+Use este comando para testar suas vulnerabilidades:
 
 ```bash
 $ snyk test

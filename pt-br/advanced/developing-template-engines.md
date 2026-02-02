@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Desenvolvendo mecanismos de modelo para o Express
-description: Learn how to develop custom template engines for Express.js using app.engine(), with examples on creating and integrating your own template rendering logic.
+description: Aprenda a desenvolver motores de modelos personalizados para Express.js usando app.engine(), com exemplos sobre como criar e integrar sua própria lógica de renderização de templates.
 menu: advanced
 order: 1
 redirect_from: "  "

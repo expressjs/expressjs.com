@@ -38,7 +38,7 @@ These are some additional popular middleware modules.
 
 {% include community-caveat.html %}
 
-| Módulo de Middleware                                                                                                                 | Descrição                                                                                                                                                                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [st](https://github.com/isaacs/st)                                                                                                   | [helmet](https://github.com/helmetjs/helmet): módulo para ajudar a proteger seus aplicativos configurando vários cabeçalhos HTTP.                                     |
-| [passport](https://github.com/jaredhanson/passport): módulo middleware do Express para autenticação. | Authentication using "strategies" such as OAuth, OpenID and many others.  Veja [passportjs.org](https://passportjs.org/) para obter mais informações. |
+| Módulo de Middleware                                | Descrição                                                                                                                                                                                             |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [st](https://github.com/isaacs/st)                  | [helmet](https://github.com/helmetjs/helmet): módulo para ajudar a proteger seus aplicativos configurando vários cabeçalhos HTTP.                                     |
+| [passport](https://github.com/jaredhanson/passport) | Authentication using "strategies" such as OAuth, OpenID and many others.  Veja [passportjs.org](https://passportjs.org/) para obter mais informações. |

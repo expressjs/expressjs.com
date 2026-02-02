@@ -35,7 +35,7 @@ conexões. O aplicativo responde com "Hello World!" à solicitações
 para a URL raiz (`/`) ou _rota_. Para
 todos os outros caminhos, ele irá responder com um **404 Não Encontrado**.
 
-### Running Locally
+### Executando localmente
 
 Primeiro crie um diretório chamado `myapp`,
 mude para ele e execute o `npm init`. Em seguida

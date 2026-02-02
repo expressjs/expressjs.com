@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Manipulação de erros do Express
-description: Understand how Express.js handles errors in synchronous and asynchronous code, and learn to implement custom error handling middleware for your applications.
+description: Entenda como o Express.js lida com erros em código síncrono e assíncrono e aprenda a implementar erro personalizado de manipulação de intermediários para seus aplicativos.
 menu: guide
 order: 6
 redirect_from: "  "
@@ -9,18 +9,18 @@ redirect_from: "  "
 
 # Manipulação de erros
 
-_Error Handling_ refers to how Express catches and processes errors that
-occur both synchronously and asynchronously. Express comes with a default error
-handler so you don't need to write your own to get started.
+_Manipulação de erros_ refere-se a como as capturas Expressas e processa erros que
+ocorrem de forma sincronizada e assíncrona. Express vem com um manipulador de erro padrão
+para que você não precise escrever o seu próprio para começar.
 
-## Catching Errors
+## Captura de Erros
 
-It's important to ensure that Express catches all errors that occur while
-running route handlers and middleware.
+É importante garantir que Express capture os erros que ocorrem enquanto
+está rodando manipuladores de rotas e intermediários.
 
-Errors that occur in synchronous code inside route handlers and middleware
-require no extra work. If synchronous code throws an error, then Express will
-catch and process it. Por exemplo:
+Erros que ocorrem no código síncrono dentro dos manipuladores de rota e middleware
+não exigem trabalho extra. Se o código síncrono lançar um erro, então o Express irá
+capturá-lo e processá-lo. Por exemplo:
 
 ```js
 app.get('/', (req, res) => {
@@ -28,10 +28,9 @@ app.get('/', (req, res) => {
 })
 ```
 
-Defina funções de middleware de manipulação de erros da mesma
-forma que outras funções de middleware, exceto que funções de
-manipulação de erros possuem quatro argumentos ao invés de três:
-`(err, req, res, next)`.  Por exemplo:
+Para erros retornados de funções assíncronas, invocados pelos manipuladores de rota
+e intermediário, você deve passá-los para a função `next()`, onde o Express irá capturá-los a
+e processá-los.  Por exemplo:
 
 ```js
 app.get('/', (req, res, next) => {
@@ -57,8 +56,8 @@ app.get('/user/:id', async (req, res, next) => {
 })
 ```
 
-If `getUserById` throws an error or rejects, `next` will be called with either
-the thrown error or the rejected value. If no rejected value is provided, `next`
+Se `getUserById` lança um erro ou rejeita, `next` será chamado com
+o erro lançado ou o valor rejeitado. If no rejected value is provided, `next`
 will be called with a default Error object provided by the Express router.
 
 Se passar qualquer coisa para a função `next()`

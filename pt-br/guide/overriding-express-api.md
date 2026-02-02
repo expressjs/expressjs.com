@@ -1,25 +1,25 @@
 ---
 layout: page
-title: Overriding the Express API
-description: Discover how to customize and extend the Express.js API by overriding methods and properties on the request and response objects using prototypes.
+title: Sobrescrevendo a API Express
+description: Descubra como personalizar e estender a API do Express.js substituindo métodos e propriedades nos objetos de solicitação e resposta usando protótipos.
 menu: guide
 order: 4
 ---
 
-# Overriding the Express API
+# Sobrescrevendo a API Express
 
-The Express API consists of various methods and properties on the request and response objects. These are inherited by prototype. There are two extension points for the Express API:
+A API do Express consiste de vários métodos e propriedades nos objetos de solicitação e resposta. Estas são herdadas pelo protótipo. Há dois pontos de extensão para a API Express:
 
-1. The global prototypes at `express.request` and `express.response`.
+1. Os protótipos globais em `express.request` e `express.response`.
 2. App-specific prototypes at `app.request` and `app.response`.
 
 Altering the global prototypes will affect all loaded Express apps in the same process. If desired, alterations can be made app-specific by only altering the app-specific prototypes after creating a new app.
 
-## Methods
+## Métodos
 
 You can override the signature and behavior of existing methods with your own, by assigning a custom function.
 
-Following is an example of overriding the behavior of [res.sendStatus](/4x/api.html#res.sendStatus).
+A seguir é um exemplo de substituição do comportamento de [res.sendStatus](/4x/api.html#res.sendStatus).
 
 ```js
 app.response.sendStatus = function (statusCode, type, message) {
@@ -32,18 +32,18 @@ app.response.sendStatus = function (statusCode, type, message) {
 
 The above implementation completely changes the original signature of `res.sendStatus`. It now accepts a status code, encoding type, and the message to be sent to the client.
 
-The overridden method may now be used this way:
+O método sobrescrito agora pode ser usado dessa maneira:
 
 ```js
 res.sendStatus(404, 'application/json', '{"error":"resource not found"}')
 ```
 
-## Properties
+## Propriedades
 
-Properties in the Express API are either:
+As propriedades da API Express também são:
 
-1. Assigned properties (ex: `req.baseUrl`, `req.originalUrl`)
-2. Defined as getters (ex: `req.secure`, `req.ip`)
+1. Propriedades atribuídas (ex: `req.baseUrl`, `req.originalUrl`)
+2. Definido como getters (ex: `req.secure`, `req.ip`)
 
 Since properties under category 1 are dynamically assigned on the `request` and `response` objects in the context of the current request-response cycle, their behavior cannot be overridden.
 

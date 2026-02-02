@@ -27,7 +27,7 @@ preferir. Visualize os seguintes exemplos para obter inspiração:
 Além disso, existem extensões de terceiros para o Express, que
 simplificam alguns desses padrões:
 
-- [Resourceful routing](https://github.com/expressjs/express-resource)
+- [Roteamento de recursos](https://github.com/expressjs/express-resource)
 
 ## Como eu defino modelos?
 
