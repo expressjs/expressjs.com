@@ -53,6 +53,7 @@
     flex: 1;
     position: relative;
     overflow: hidden;
+    padding: var(--space-4);
   }
 
   /* First and second level navigation positioning */
@@ -75,6 +76,7 @@
 
   .sidebar-nav--second-level {
     transform: translateX(100%);
+    background-color: var(--color-bg-tertiary);
   }
 
   /* Sliding animations */
@@ -131,6 +133,7 @@
 
   .sidebar-nav-item:hover {
     background-color: var(--color-bg-secondary);
+    border-radius: 0 var(--radius-base) var(--radius-base) 0;
 
     .sidebar-nav-icon {
       background-color: var(--color-bg-mute);
@@ -159,26 +162,19 @@
     background-color: var(--color-primary);
   }
 
-  /* Second level navigation header */
-  .sidebar-nav-header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    padding-bottom: var(--space-4);
-    border-bottom: 1px solid var(--color-border-primary);
-    margin-bottom: var(--space-4);
-  }
-
   .sidebar-nav-back {
     display: flex;
     align-items: center;
     gap: var(--space-2);
     padding: var(--space-2) 0;
+    padding-bottom: var(--space-4);
+    margin-bottom: var(--space-6);
     background: none;
     border: none;
     cursor: pointer;
     color: var(--color-text-primary);
     transition: color var(--duration-200) var(--ease-in-out);
+    border-bottom: 1px solid var(--color-border-mute);
   }
 
   .sidebar-nav-back:hover {
@@ -210,15 +206,16 @@
     margin: 0 0 var(--space-2) 0;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
 
   .sidebar-nav-section-list {
     list-style: none;
     margin: 0;
     padding: 0;
+    margin: var(--space-4) 0 0 var(--space-3);
+    border-left: 1px solid var(--color-border-mute);
   }
 
   .sidebar-nav-section-list li {
@@ -227,8 +224,10 @@
 
   /* Second level nav items */
   .sidebar-nav-item--second-level {
-    padding: var(--space-2) var(--space-2);
-    font-size: var(--font-size-base);
+    padding: var(--space-3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-secondary);
   }
 
   /* Reduced motion support */

@@ -103,7 +103,7 @@
   --color-border-primary: light-dark(var(--gray-300), var(--gray-500));
   --color-border-secondary: light-dark(var(--gray-200), var(--gray-800));
   --color-border-tertiary: light-dark(var(--gray-400), var(--gray-400));
-  --color-border-mute: light-dark(var(--gray-400), var(--gray-600));
+  --color-border-mute: light-dark(var(--gray-400), var(--gray-700));
   --color-border-inverse: light-dark(var(--gray-700), var(--gray-200));
   --color-border-info: light-dark(var(--blue-200), var(--blue-800));
   --color-border-success: light-dark(var(--green-200), var(--green-800));

@@ -11,7 +11,7 @@
 
 import './Sidebar.css';
 import type { HTMLAttributes } from 'astro/types';
-import { BodyMd } from '@/components/primitives';
+import { Body, BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { getLangFromUrl } from '@/i18n/utils';
 import { navItems, type MenuSection } from '@/config/menu';
@@ -147,12 +147,10 @@ for (const item of navItems) {
     data-nav-level="second"
     aria-hidden="true"
   >
-    <div class="sidebar-nav-header">
-      <button class="sidebar-nav-back" type="button" aria-label="Go back to main navigation">
-        <Icon name="ph:arrow-left" size="20" color="var(--color-icon-primary)" />
-        <h3 class="sidebar-nav-title" data-nav-title>Navigation</h3>
-      </button>
-    </div>
+    <button class="sidebar-nav-back" type="button" aria-label="Go back to main navigation">
+      <Icon name="ph:arrow-line-left" size="16" color="var(--color-icon-primary)" />
+      <Body as="h3" weight="bold" data-nav-title vMargin={false}>Navigation</Body>
+    </button>
     <div class="sidebar-nav-content" data-second-level-list>
       <!-- Dynamically populated with sections and pages -->
     </div>
