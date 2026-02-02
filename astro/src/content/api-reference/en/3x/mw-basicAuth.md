@@ -1,6 +1,6 @@
 ---
 title: basicAuth
-description: Basic Authentication middleware, populating `req.user`
+description: Basic Authentication middleware, populating req.user
 menuTitle: basicAuth
 ---
 

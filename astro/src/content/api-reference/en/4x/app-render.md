@@ -1,6 +1,6 @@
 ---
 title: app.render
-description: Returns the rendered HTML of a view via the `callback` function. It accepts an optional parameter
+description: Returns the rendered HTML of a view via the callback function. It accepts an optional parameter
 menuTitle: app.render
 ---
 

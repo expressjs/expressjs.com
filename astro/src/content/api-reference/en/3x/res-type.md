@@ -1,6 +1,6 @@
 ---
 title: res.type
-description: Sets the Content-Type to the mime lookup of `type`,
+description: Sets the Content-Type to the mime lookup of type,
 menuTitle: res.type
 ---
 

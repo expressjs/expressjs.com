@@ -1,6 +1,6 @@
 ---
 title: res.download
-description: Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.
+description: Transfers the file at path as an attachment. Typically, browsers will prompt the user for download.
 menuTitle: res.download
 ---
 

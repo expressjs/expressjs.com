@@ -1,6 +1,6 @@
 ---
 title: res.clearCookie
-description: Clear cookie `name`. The `path` option defaults to "/".
+description: Clear cookie name. The path option defaults to slash.
 menuTitle: res.clearCookie
 ---
 

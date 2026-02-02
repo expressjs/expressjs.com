@@ -1,6 +1,6 @@
 ---
 title: res.attachment
-description: Sets the HTTP response `Content-Disposition` header field to "attachment". If a `filename` is given,
+description: Sets the HTTP response Content-Disposition header field to attachment
 menuTitle: res.attachment
 ---
 

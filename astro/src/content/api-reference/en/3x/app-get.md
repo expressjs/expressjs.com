@@ -1,6 +1,6 @@
 ---
 title: app.get
-description: Get setting `name` value.
+description: Get setting name value.
 menuTitle: app.get
 ---
 

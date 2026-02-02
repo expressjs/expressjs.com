@@ -1,6 +1,6 @@
 ---
 title: req.acceptsLanguage
-description: Check if the given `lang` are acceptable.
+description: Check if the given lang are acceptable.
 menuTitle: req.acceptsLanguage
 ---
 

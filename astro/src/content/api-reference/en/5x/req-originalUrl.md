@@ -1,6 +1,6 @@
 ---
 title: req.originalUrl
-description: `req.url` is not a native Express property, it is inherited from Node's [http module](https://nodejs.org/api/http.html#http_message_url).
+description: req.url is not a native Express property, it is inherited from Node http module
 menuTitle: req.originalUrl
 ---
 
@@ -16,7 +16,7 @@ the "mounting" feature of [app.use()](#app.use) will rewrite `req.url` to strip 
 
 ```js
 // GET /search?q=something
-console.dir(req.originalUrl)
+console.dir(req.originalUrl);
 // => "/search?q=something"
 ```
 
@@ -26,9 +26,9 @@ combination of `req.baseUrl` and `req.url`. Consider following example:
 ```js
 // GET 'http://www.example.com/admin/new?sort=desc'
 app.use('/admin', (req, res, next) => {
-  console.dir(req.originalUrl) // '/admin/new?sort=desc'
-  console.dir(req.baseUrl) // '/admin'
-  console.dir(req.path) // '/new'
-  next()
-})
+  console.dir(req.originalUrl); // '/admin/new?sort=desc'
+  console.dir(req.baseUrl); // '/admin'
+  console.dir(req.path); // '/new'
+  next();
+});
 ```

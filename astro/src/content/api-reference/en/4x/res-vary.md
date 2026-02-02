@@ -1,6 +1,6 @@
 ---
 title: res.vary
-description: Adds the field to the `Vary` response header, if it is not there already.
+description: Adds the field to the Vary response header, if it is not there already.
 menuTitle: res.vary
 ---
 

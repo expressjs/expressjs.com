@@ -1,6 +1,6 @@
 ---
 title: res.append
-description: `res.append()` is supported by Express v4.11.0+
+description: res.append appends the specified value to the HTTP response header field
 menuTitle: res.append
 ---
 

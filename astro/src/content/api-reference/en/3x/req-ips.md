@@ -1,6 +1,6 @@
 ---
 title: req.ips
-description: When "trust proxy" is `true`, parse
+description: When trust proxy is true, parse
 menuTitle: req.ips
 ---
 

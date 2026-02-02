@@ -1,6 +1,6 @@
 ---
 title: res.redirect
-description: Redirect to the given `url` with optional `status` code
+description: Redirect to the given url with optional status code
 menuTitle: res.redirect
 ---
 

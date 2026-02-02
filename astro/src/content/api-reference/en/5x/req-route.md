@@ -1,6 +1,6 @@
 ---
 title: req.route
-description: Contains the currently-matched route, a string. For example:
+description: Contains the currently-matched route, a string
 menuTitle: req.route
 ---
 
@@ -10,9 +10,9 @@ Contains the currently-matched route, a string. For example:
 
 ```js
 app.get('/user/{:id}', (req, res) => {
-  console.dir(req.route, { depth: null })
-  res.send('GET')
-})
+  console.dir(req.route, { depth: null });
+  res.send('GET');
+});
 ```
 
 Example output from the previous snippet:

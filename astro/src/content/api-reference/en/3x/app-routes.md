@@ -1,6 +1,6 @@
 ---
 title: app.routes
-description: The `app.routes` object houses all of the routes defined mapped
+description: The app.routes object houses all of the routes defined mapped
 menuTitle: app.routes
 ---
 

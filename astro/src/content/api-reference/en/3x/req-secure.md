@@ -1,6 +1,6 @@
 ---
 title: req.secure
-description: Check if a TLS connection is established. This is a short-hand for:
+description: Check if a TLS connection is established. This is a short-hand for
 menuTitle: req.secure
 ---
 
@@ -9,6 +9,6 @@ menuTitle: req.secure
 Check if a TLS connection is established. This is a short-hand for:
 
 ```js
-console.dir(req.protocol === 'https')
+console.dir(req.protocol === 'https');
 // => true
 ```

@@ -1,6 +1,6 @@
 ---
 title: app.all
-description: This method functions just like the `app.VERB()` methods,
+description: This method functions just like the app.VERB methods,
 menuTitle: app.all
 ---
 

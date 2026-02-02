@@ -1,6 +1,6 @@
 ---
 title: app.get
-description: Returns the value of `name` app setting, where `name` is one of the strings in the
+description: Returns the value of name app setting, where name is one of the strings in the app settings table
 menuTitle: app.get
 ---
 

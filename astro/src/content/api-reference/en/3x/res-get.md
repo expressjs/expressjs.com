@@ -1,6 +1,6 @@
 ---
 title: res.get
-description: Get the case-insensitive response header `field`.
+description: Get the case-insensitive response header field.
 menuTitle: res.get
 ---
 

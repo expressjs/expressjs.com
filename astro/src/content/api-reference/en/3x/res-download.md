@@ -1,6 +1,6 @@
 ---
 title: res.download
-description: Transfer the file at `path` as an "attachment",
+description: Transfer the file at path as an attachment,
 menuTitle: res.download
 ---
 

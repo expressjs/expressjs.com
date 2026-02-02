@@ -1,6 +1,6 @@
 ---
 title: app.engine
-description: Register the given template engine `callback` as `ext`
+description: Register the given template engine callback as ext
 menuTitle: app.engine
 ---
 

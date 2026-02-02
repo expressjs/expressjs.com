@@ -1,6 +1,6 @@
 ---
 title: app.set
-description: Assigns setting `name` to `value`.
+description: Assigns setting name to value.
 menuTitle: app.set
 ---
 

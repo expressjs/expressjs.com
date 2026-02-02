@@ -1,6 +1,6 @@
 ---
 title: app.enable
-description: Sets the Boolean setting `name` to `true`, where `name` is one of the properties from the [app settings table](#app.settings.table).
+description: Sets the Boolean setting name to true, where name is one of the properties from the app settings table.
 menuTitle: app.enable
 ---
 

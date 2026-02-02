@@ -1,6 +1,6 @@
 ---
 title: req.acceptsCharset
-description: Check if the given `charset` are acceptable.
+description: Check if the given charset are acceptable.
 menuTitle: req.acceptsCharset
 ---
 

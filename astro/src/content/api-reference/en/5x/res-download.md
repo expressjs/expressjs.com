@@ -1,6 +1,6 @@
 ---
 title: res.download
-description: The optional `options` argument is supported by Express v4.16.0 onwards.
+description: res.download provides access to data on the running file system
 menuTitle: res.download
 ---
 

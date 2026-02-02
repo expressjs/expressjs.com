@@ -1,6 +1,6 @@
 ---
 title: req.get
-description: Get the case-insensitive request header `field`. The "Referrer" and "Referer" fields are interchangeable.
+description: Get the case-insensitive request header field. The Referrer and Referer fields are interchangeable.
 menuTitle: req.get
 ---
 

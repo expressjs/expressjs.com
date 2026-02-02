@@ -1,6 +1,6 @@
 ---
 title: res.sendfile
-description: Transfer the file at the given `path`.
+description: Transfer the file at the given path.
 menuTitle: res.sendfile
 ---
 

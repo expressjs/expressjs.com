@@ -1,6 +1,6 @@
 ---
 title: req.ips
-description: When the [`trust proxy` setting](/5x/api.html#trust.proxy.options.table) does not evaluate to `false`,
+description: When the trust proxy setting does not evaluate to false, this property contains an array of IP addresses specified in the X-Forwarded-For request header
 menuTitle: req.ips
 ---
 

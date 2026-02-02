@@ -1,6 +1,6 @@
 ---
 title: router.all
-description: This method is just like the `router.METHOD()` methods, except that it matches all HTTP methods (verbs).
+description: This method is just like the router.METHOD methods, except that it matches all HTTP methods (verbs).
 menuTitle: router.all
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: req.route
-description: The currently matched `Route` containing
+description: The currently matched Route containing
 menuTitle: req.route
 ---
 

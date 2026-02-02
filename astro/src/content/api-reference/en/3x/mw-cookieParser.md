@@ -1,6 +1,6 @@
 ---
 title: cookieParser
-description: Parses the Cookie header field and populates `req.cookies`
+description: Parses the Cookie header field and populates req.cookies
 menuTitle: cookieParser
 ---
 

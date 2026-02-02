@@ -97,7 +97,7 @@ Initially, `del` was used instead of `delete`, because `delete` is a reserved ke
 {% capture codemod-route-del-to-delete %}
 You can replace the deprecated signatures with the following command:
 
-```plain-text
+```plaintext
 npx codemod@latest @expressjs/route-del-to-delete
 ```
 
@@ -134,7 +134,7 @@ The following method names have been pluralized. In Express 4, using the old met
 {% capture codemod-pluralized-methods %}
 You can replace the deprecated signatures with the following command:
 
-```plain-text
+```plaintext
 npx codemod@latest @expressjs/pluralize-method-names
 ```
 
@@ -175,7 +175,7 @@ This potentially confusing and dangerous method of retrieving form data has been
 {% capture codemod-req-param %}
 You can replace the deprecated signatures with the following command:
 
-```plain-text
+```plaintext
 npx codemod@latest @expressjs/explicit-request-params
 ```
 
@@ -210,7 +210,7 @@ Express 5 no longer supports the signature `res.json(obj, status)`. Instead, set
 {% capture codemod-status-send-order %}
 You can replace the deprecated signatures with the following command:
 
-```plain-text
+```plaintext
 npx codemod@latest @expressjs/status-send-order
 ```
 
@@ -255,7 +255,7 @@ Express 5 no longer supports the signature `res.redirect(url, status)`. Instead,
 {% capture codemod-redirect-arg-order %}
 You can replace the deprecated signatures with the following command:
 
-```plain-text
+```plaintext
 npx codemod@latest @expressjs/redirect-arg-order
 ```
 
@@ -282,7 +282,7 @@ Express 5 no longer supports the magic string `back` in the `res.redirect()` and
 {% capture codemod-back-redirect-deprecated %}
 You can replace the deprecated signatures with the following command:
 
-```plain-text
+```plaintext
 npx codemod@latest @expressjs/back-redirect-deprecated
 ```
 
@@ -355,7 +355,7 @@ The `res.sendfile()` function has been replaced by a camel-cased version `res.se
 {% capture codemod-camelcase-sendfile %}
 You can replace the deprecated signatures with the following command:
 
-```plain-text
+```plaintext
 npx codemod@latest @expressjs/camelcase-sendfile
 ```
 

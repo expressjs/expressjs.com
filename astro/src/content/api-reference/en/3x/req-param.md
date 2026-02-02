@@ -1,6 +1,6 @@
 ---
 title: req.param
-description: Return the value of param `name` when present.
+description: Return the value of param name when present.
 menuTitle: req.param
 ---
 

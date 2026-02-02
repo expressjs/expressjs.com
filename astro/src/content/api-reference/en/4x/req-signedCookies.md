@@ -1,6 +1,6 @@
 ---
 title: req.signedCookies
-description: When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this property
+description: When using cookie-parser middleware, this property
 menuTitle: req.signedCookies
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: req.cookies
-description: This object requires the `cookieParser()` middleware for use.
+description: This object requires the cookieParser middleware for use.
 menuTitle: req.cookies
 ---
 

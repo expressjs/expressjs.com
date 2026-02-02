@@ -1,6 +1,6 @@
 ---
 title: req.signedCookies
-description: This object requires the `cookieParser(secret)` middleware for use.
+description: This object requires the cookieParser secret middleware for use.
 menuTitle: req.signedCookies
 ---
 

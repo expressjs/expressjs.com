@@ -1,6 +1,6 @@
 ---
 title: app.enabled
-description: Check if setting `name` is enabled.
+description: Check if setting name is enabled.
 menuTitle: app.enabled
 ---
 

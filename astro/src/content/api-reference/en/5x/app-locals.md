@@ -1,6 +1,6 @@
 ---
 title: app.locals
-description: The `app.locals` object has properties that are local variables within the application,
+description: The app.locals object has properties that are local variables within the application,
 menuTitle: app.locals
 ---
 

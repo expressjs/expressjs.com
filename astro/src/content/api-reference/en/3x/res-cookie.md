@@ -1,6 +1,6 @@
 ---
 title: res.cookie
-description: Set cookie `name` to `value`, which may be a string or object converted to JSON. The `path`
+description: Set cookie name to value, which may be a string or object converted to JSON. The path
 menuTitle: res.cookie
 ---
 

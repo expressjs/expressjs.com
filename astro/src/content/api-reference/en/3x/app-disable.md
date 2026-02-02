@@ -1,6 +1,6 @@
 ---
 title: app.disable
-description: Set setting `name` to `false`.
+description: Set setting name to false.
 menuTitle: app.disable
 ---
 

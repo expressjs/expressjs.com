@@ -99,7 +99,7 @@ Express 5 no longer supports the `app.del()` function. If you use this function,
 {% capture codemod-deprecated-signatures %}
 You can replace the deprecated signatures with the following command:
 
-```plain-text
+```plaintext
 npx @expressjs/codemod v4-deprecated-signatures
 ```
 
@@ -109,14 +109,14 @@ npx @expressjs/codemod v4-deprecated-signatures
 
 ```js
 // v4
-app.del('/user/:id', (req, res) => {
-  res.send(`DELETE /user/${req.params.id}`)
-})
+app.del("/user/:id", (req, res) => {
+  res.send(`DELETE /user/${req.params.id}`);
+});
 
 // v5
-app.delete('/user/:id', (req, res) => {
-  res.send(`DELETE /user/${req.params.id}`)
-})
+app.delete("/user/:id", (req, res) => {
+  res.send(`DELETE /user/${req.params.id}`);
+});
 ```
 
 <h3 id="app.param">app.param(fn)</h3>
@@ -136,7 +136,7 @@ The following method names have been pluralized. In Express 4, using the old met
 {% capture codemod-pluralized-methods %}
 You can replace the deprecated signatures with the following command:
 
-```plain-text
+```plaintext
 npx @expressjs/codemod pluralized-methods
 ```
 
@@ -146,22 +146,22 @@ npx @expressjs/codemod pluralized-methods
 
 ```js
 // v4
-app.all('/', (req, res) => {
-  req.acceptsCharset('utf-8')
-  req.acceptsEncoding('br')
-  req.acceptsLanguage('en')
+app.all("/", (req, res) => {
+  req.acceptsCharset("utf-8");
+  req.acceptsEncoding("br");
+  req.acceptsLanguage("en");
 
   // ...
-})
+});
 
 // v5
-app.all('/', (req, res) => {
-  req.acceptsCharsets('utf-8')
-  req.acceptsEncodings('br')
-  req.acceptsLanguages('en')
+app.all("/", (req, res) => {
+  req.acceptsCharsets("utf-8");
+  req.acceptsEncodings("br");
+  req.acceptsLanguages("en");
 
   // ...
-})
+});
 ```
 
 <h3 id="leading">app.param(name, fn) 名稱中的前導冒號 (:)</h3>
@@ -177,7 +177,7 @@ This potentially confusing and dangerous method of retrieving form data has been
 {% capture codemod-req-param %}
 You can replace the deprecated signatures with the following command:
 
-```plain-text
+```plaintext
 npx @expressjs/codemod req-param
 ```
 
@@ -187,22 +187,22 @@ npx @expressjs/codemod req-param
 
 ```js
 // v4
-app.post('/user', (req, res) => {
-  const id = req.param('id')
-  const body = req.param('body')
-  const query = req.param('query')
+app.post("/user", (req, res) => {
+  const id = req.param("id");
+  const body = req.param("body");
+  const query = req.param("query");
 
   // ...
-})
+});
 
 // v5
-app.post('/user', (req, res) => {
-  const id = req.params.id
-  const body = req.body
-  const query = req.query
+app.post("/user", (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+  const query = req.query;
 
   // ...
-})
+});
 ```
 
 <h3 id="res.json">res.json(obj, status)</h3>
@@ -213,14 +213,14 @@ Express 5 不再支援 `res.json(obj, status)` 簽章。請改以設定狀態，
 
 ```js
 // v4
-app.post('/user', (req, res) => {
-  res.json({ name: 'Ruben' }, 201)
-})
+app.post("/user", (req, res) => {
+  res.json({ name: "Ruben" }, 201);
+});
 
 // v5
-app.post('/user', (req, res) => {
-  res.status(201).json({ name: 'Ruben' })
-})
+app.post("/user", (req, res) => {
+  res.status(201).json({ name: "Ruben" });
+});
 ```
 
 <h3 id="res.jsonp">res.jsonp(obj, status)</h3>
@@ -231,14 +231,14 @@ Express 5 不再支援 `res.jsonp(obj, status)` 簽章。請改以設定狀態�
 
 ```js
 // v4
-app.post('/user', (req, res) => {
-  res.jsonp({ name: 'Ruben' }, 201)
-})
+app.post("/user", (req, res) => {
+  res.jsonp({ name: "Ruben" }, 201);
+});
 
 // v5
-app.post('/user', (req, res) => {
-  res.status(201).jsonp({ name: 'Ruben' })
-})
+app.post("/user", (req, res) => {
+  res.status(201).jsonp({ name: "Ruben" });
+});
 ```
 
 <h3 id="res.redirect">res.redirect(url, status)</h3>
@@ -249,14 +249,14 @@ Express 5 no longer supports the signature `res.redirect(url, status)`. Instead,
 
 ```js
 // v4
-app.get('/user', (req, res) => {
-  res.redirect('/users', 301)
-})
+app.get("/user", (req, res) => {
+  res.redirect("/users", 301);
+});
 
 // v5
-app.get('/user', (req, res) => {
-  res.redirect(301, '/users')
-})
+app.get("/user", (req, res) => {
+  res.redirect(301, "/users");
+});
 ```
 
 <h3 id="magic-redirect">res.redirect('back') and res.location('back')</h3>
@@ -266,7 +266,7 @@ Express 5 no longer supports the magic string `back` in the `res.redirect()` and
 {% capture codemod-magic-redirect %}
 You can replace the deprecated signatures with the following command:
 
-```plain-text
+```plaintext
 npx @expressjs/codemod magic-redirect
 ```
 
@@ -276,14 +276,14 @@ npx @expressjs/codemod magic-redirect
 
 ```js
 // v4
-app.get('/user', (req, res) => {
-  res.redirect('back')
-})
+app.get("/user", (req, res) => {
+  res.redirect("back");
+});
 
 // v5
-app.get('/user', (req, res) => {
-  res.redirect(req.get('Referrer') || '/')
-})
+app.get("/user", (req, res) => {
+  res.redirect(req.get("Referrer") || "/");
+});
 ```
 
 <h3 id="res.send.body">res.send(body, status)</h3>
@@ -294,14 +294,14 @@ Express 5 不再支援 `res.send(obj, status)` 簽章。請改以設定狀態，
 
 ```js
 // v4
-app.get('/user', (req, res) => {
-  res.send({ name: 'Ruben' }, 200)
-})
+app.get("/user", (req, res) => {
+  res.send({ name: "Ruben" }, 200);
+});
 
 // v5
-app.get('/user', (req, res) => {
-  res.status(200).send({ name: 'Ruben' })
-})
+app.get("/user", (req, res) => {
+  res.status(200).send({ name: "Ruben" });
+});
 ```
 
 <h3 id="res.send.status">res.send(status)</h3>
@@ -314,14 +314,14 @@ If you need to send a number by using the `res.send()` function, quote the numbe
 
 ```js
 // v4
-app.get('/user', (req, res) => {
-  res.send(200)
-})
+app.get("/user", (req, res) => {
+  res.send(200);
+});
 
 // v5
-app.get('/user', (req, res) => {
-  res.sendStatus(200)
-})
+app.get("/user", (req, res) => {
+  res.sendStatus(200);
+});
 ```
 
 <h3 id="res.sendfile">res.sendfile()</h3>
@@ -341,14 +341,14 @@ app.get('/user', (req, res) => {
 
 ```js
 // v4
-app.get('/user', (req, res) => {
-  res.sendfile('/path/to/file')
-})
+app.get("/user", (req, res) => {
+  res.sendfile("/path/to/file");
+});
 
 // v5
-app.get('/user', (req, res) => {
-  res.sendFile('/path/to/file')
-})
+app.get("/user", (req, res) => {
+  res.sendFile("/path/to/file");
+});
 ```
 
 <h3 id="router.param">router.param(fn)</h3>
@@ -371,11 +371,11 @@ Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work wit
 
 ```js
 // v4
-express.static.mime.lookup('json')
+express.static.mime.lookup("json");
 
 // v5
-const mime = require('mime-types')
-mime.lookup('json')
+const mime = require("mime-types");
+mime.lookup("json");
 ```
 
 <h3 id="express:router-debug-logs">express:router debug logs</h3>
@@ -407,14 +407,14 @@ Path route matching syntax is when a string is supplied as the first parameter t
 
 ```js
 // v4
-app.get('/*', async (req, res) => {
-  res.send('ok')
-})
+app.get("/*", async (req, res) => {
+  res.send("ok");
+});
 
 // v5
-app.get('/*splat', async (req, res) => {
-  res.send('ok')
-})
+app.get("/*splat", async (req, res) => {
+  res.send("ok");
+});
 ```
 
 {% capture note_wildcard %}
@@ -422,9 +422,9 @@ app.get('/*splat', async (req, res) => {
 
 ```js
 // v5
-app.get('/{*splat}', async (req, res) => {
-  res.send('ok')
-})
+app.get("/{*splat}", async (req, res) => {
+  res.send("ok");
+});
 ```
 
 {% endcapture %}
@@ -434,30 +434,30 @@ app.get('/{*splat}', async (req, res) => {
 
 ```js
 // v4
-app.get('/:file.:ext?', async (req, res) => {
-  res.send('ok')
-})
+app.get("/:file.:ext?", async (req, res) => {
+  res.send("ok");
+});
 
 // v5
-app.get('/:file{.:ext}', async (req, res) => {
-  res.send('ok')
-})
+app.get("/:file{.:ext}", async (req, res) => {
+  res.send("ok");
+});
 ```
 
 - Regexp characters are not supported. For example:
 
 ```js
-app.get('/[discussion|page]/:slug', async (req, res) => {
-  res.status(200).send('ok')
-})
+app.get("/[discussion|page]/:slug", async (req, res) => {
+  res.status(200).send("ok");
+});
 ```
 
 should be changed to:
 
 ```js
-app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
-  res.status(200).send('ok')
-})
+app.get(["/discussion/:slug", "/page/:slug"], async (req, res) => {
+  res.status(200).send("ok");
+});
 ```
 
 - Some characters have been reserved to avoid confusion during upgrade (`()[]?+!`), use `\` to escape them.
@@ -481,7 +481,7 @@ Example of breaking code:
 
 ```js
 // v4
-app.use(express.static('public'))
+app.use(express.static("public"));
 ```
 
 After migrating to Express 5, a request to `/.well-known/assetlinks.json` will result in a **404 Not Found**.
@@ -490,8 +490,11 @@ To fix this, serve specific dot-directories explicitly using the `dotfiles: "all
 
 ```js
 // v5
-app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }))
-app.use(express.static('public'))
+app.use(
+  "/.well-known",
+  express.static("public/.well-known", { dotfiles: "allow" }),
+);
+app.use(express.static("public"));
 ```
 
 This approach allows you to safely serve only the intended dot-directories while keeping the default secure behavior for other dotfiles, which remain inaccessible.
@@ -502,12 +505,12 @@ In Express 5, the `app.listen` method will invoke the user-provided callback fun
 For example:
 
 ```js
-const server = app.listen(8080, '0.0.0.0', (error) => {
+const server = app.listen(8080, "0.0.0.0", (error) => {
   if (error) {
-    throw error // e.g. EADDRINUSE
+    throw error; // e.g. EADDRINUSE
   }
-  console.log(`Listening on ${JSON.stringify(server.address())}`)
-})
+  console.log(`Listening on ${JSON.stringify(server.address())}`);
+});
 ```
 
 <h3 id="app.router">app.router</h3>
@@ -532,11 +535,11 @@ The `req.params` object now has a **null prototype** when using string paths. Ho
 Wildcards (e.g., `/*splat`) capture path segments as an array instead of a single string.
 
 ```js
-app.get('/*splat', (req, res) => {
+app.get("/*splat", (req, res) => {
   // GET /foo/bar
-  console.dir(req.params)
+  console.dir(req.params);
   // => [Object: null prototype] { splat: [ 'foo', 'bar' ] }
-})
+});
 ```
 
 **Unmatched parameters are omitted:**
@@ -545,25 +548,25 @@ In Express 4, unmatched wildcards were empty strings (`''`) and optional `:` par
 
 ```js
 // v4: unmatched wildcard is empty string
-app.get('/*', (req, res) => {
+app.get("/*", (req, res) => {
   // GET /
-  console.dir(req.params)
+  console.dir(req.params);
   // => { '0': '' }
-})
+});
 
 // v4: unmatched optional param is undefined
-app.get('/:file.:ext?', (req, res) => {
+app.get("/:file.:ext?", (req, res) => {
   // GET /image
-  console.dir(req.params)
+  console.dir(req.params);
   // => { file: 'image', ext: undefined }
-})
+});
 
 // v5: unmatched optional param is omitted
-app.get('/:file{.:ext}', (req, res) => {
+app.get("/:file{.:ext}", (req, res) => {
   // GET /image
-  console.dir(req.params)
+  console.dir(req.params);
   // => [Object: null prototype] { file: 'image' }
-})
+});
 ```
 
 <h3 id="req.query">req.query</h3>

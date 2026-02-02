@@ -1,6 +1,6 @@
 ---
 title: app.param
-description: Map logic to route parameters. For example when `:user`
+description: Map logic to route parameters. For example when user
 menuTitle: app.param
 ---
 

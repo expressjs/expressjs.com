@@ -1,6 +1,6 @@
 ---
 title: res.end
-description: Ends the response process. This method actually comes from Node core, specifically the [response.end() method of http.ServerResponse](https://nodej...
+description: Ends the response process. This method actually comes from Node core, specifically the response.end method of http.ServerResponse.
 menuTitle: res.end
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: res.get
-description: Returns the HTTP response header specified by `field`.
+description: Returns the HTTP response header specified by field.
 menuTitle: res.get
 ---
 

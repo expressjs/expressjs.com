@@ -1,6 +1,6 @@
 ---
 title: req.cookies
-description: When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this property is an object that
+description: When using cookie-parser middleware, this property is an object that contains cookies sent by the request
 menuTitle: req.cookies
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: router.param
-description: Adds callback triggers to route parameters, where `name` is the name of the parameter and `callback` is the callback function. Although `name` is t...
+description: Adds callback triggers to route parameters, where name is the name of the parameter and callback is the callback function. Although name is technically optional, it is required.
 menuTitle: router.param
 ---
 

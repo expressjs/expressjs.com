@@ -1,6 +1,6 @@
 ---
 title: res.jsonp
-description: Sends a JSON response with JSONP support. This method is identical to `res.json()`,
+description: Sends a JSON response with JSONP support. This method is identical to res.json,
 menuTitle: res.jsonp
 ---
 

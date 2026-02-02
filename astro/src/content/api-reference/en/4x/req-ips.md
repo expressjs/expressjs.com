@@ -1,6 +1,6 @@
 ---
 title: req.ips
-description: When the [`trust proxy` setting](/4x/api.html#trust.proxy.options.table) does not evaluate to `false`,
+description: When the trust proxy setting does not evaluate to false,
 menuTitle: req.ips
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: res.sendFile
-description: `res.sendFile()` is supported by Express v4.8.0 onwards.
+description: res.sendFile transfers the file at the given path. Sets the Content-Type response HTTP header field based on the filename extension
 menuTitle: res.sendFile
 ---
 

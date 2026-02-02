@@ -1,6 +1,6 @@
 ---
 title: res.sendFile
-description: `res.sendFile()` is supported by Express v4.8.0 onwards.
+description: Transfers the file at the given path. Sets the Content-Type response HTTP header field based on the filename extension
 menuTitle: res.sendFile
 ---
 
@@ -22,22 +22,23 @@ input or (b) set the `root` option to the absolute path of a directory to contai
 When the `root` option is provided, the `path` argument is allowed to be a relative path,
 including containing `..`. Express will validate that the relative path provided as `path` will
 resolve within the given `root` option.
+
 </div>
 
 The following table provides details on the `options` parameter.
 
 <div class="table-scroller" markdown="1">
 
-| Property        | Description                                     | Default     | Availability |
-|-----------------|-------------------------------------------------|-------------|--------------|
-|`maxAge`         | Sets the max-age property of the `Cache-Control` header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)| 0 |  |
-| `root`          | Root directory for relative filenames.|  |  |
-| `lastModified`  | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.| Enabled | 4.9.0+ |
-| `headers`       | Object containing HTTP headers to serve with the file.|  |  |
-| `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" | &nbsp; |
-| `acceptRanges`  | Enable or disable accepting ranged requests. | `true` | 4.14+ |
-| `cacheControl`  | Enable or disable setting `Cache-Control` response header.| `true` | 4.14+ |
-| `immutable`   | Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching. The `immutable` directive will prevent supported clients from making conditional requests during the life of the `maxAge` option to check if the file has changed. | `false` | 4.16+ |
+| Property       | Description                                                                                                                                                                                                                                                                                                                        | Default  | Availability |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------ |
+| `maxAge`       | Sets the max-age property of the `Cache-Control` header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)                                                                                                                                                                                               | 0        |              |
+| `root`         | Root directory for relative filenames.                                                                                                                                                                                                                                                                                             |          |              |
+| `lastModified` | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.                                                                                                                                                                                                                        | Enabled  | 4.9.0+       |
+| `headers`      | Object containing HTTP headers to serve with the file.                                                                                                                                                                                                                                                                             |          |              |
+| `dotfiles`     | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".                                                                                                                                                                                                                                                        | "ignore" | &nbsp;       |
+| `acceptRanges` | Enable or disable accepting ranged requests.                                                                                                                                                                                                                                                                                       | `true`   | 4.14+        |
+| `cacheControl` | Enable or disable setting `Cache-Control` response header.                                                                                                                                                                                                                                                                         | `true`   | 4.14+        |
+| `immutable`    | Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching. The `immutable` directive will prevent supported clients from making conditional requests during the life of the `maxAge` option to check if the file has changed. | `false`  | 4.16+        |
 
 </div>
 
@@ -55,19 +56,19 @@ app.get('/file/:name', function (req, res, next) {
     dotfiles: 'deny',
     headers: {
       'x-timestamp': Date.now(),
-      'x-sent': true
-    }
-  }
+      'x-sent': true,
+    },
+  };
 
-  var fileName = req.params.name
+  var fileName = req.params.name;
   res.sendFile(fileName, options, function (err) {
     if (err) {
-      next(err)
+      next(err);
     } else {
-      console.log('Sent:', fileName)
+      console.log('Sent:', fileName);
     }
-  })
-})
+  });
+});
 ```
 
 The following example illustrates using
@@ -75,16 +76,17 @@ The following example illustrates using
 
 ```js
 app.get('/user/:uid/photos/:file', function (req, res) {
-  var uid = req.params.uid
-  var file = req.params.file
+  var uid = req.params.uid;
+  var file = req.params.file;
 
   req.user.mayViewFilesFrom(uid, function (yes) {
     if (yes) {
-      res.sendFile('/uploads/' + uid + '/' + file)
+      res.sendFile('/uploads/' + uid + '/' + file);
     } else {
-      res.status(403).send("Sorry! You can't see that.")
+      res.status(403).send("Sorry! You can't see that.");
     }
-  })
-})
+  });
+});
 ```
+
 For more information, or if you have issues or concerns, see [send](https://github.com/pillarjs/send).

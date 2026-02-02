@@ -1,6 +1,6 @@
 ---
 title: req.hostname
-description: Contains the hostname derived from the `Host` HTTP header.
+description: Contains the hostname derived from the Host HTTP header.
 menuTitle: req.hostname
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: app.enable
-description: Set setting `name` to `true`.
+description: Set setting name to true.
 menuTitle: app.enable
 ---
 

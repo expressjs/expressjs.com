@@ -1,6 +1,6 @@
 ---
 title: app.use
-description: Use the given middleware `function`, with optional mount `path`,
+description: Use the given middleware function, with optional mount path,
 menuTitle: app.use
 ---
 

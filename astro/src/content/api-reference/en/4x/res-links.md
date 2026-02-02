@@ -1,6 +1,6 @@
 ---
 title: res.links
-description: Joins the `links` provided as properties of the parameter to populate the response's
+description: Joins the links provided as properties of the parameter to populate the response Link HTTP header field.
 menuTitle: res.links
 ---
 

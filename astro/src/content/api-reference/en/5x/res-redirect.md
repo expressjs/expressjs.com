@@ -1,6 +1,6 @@
 ---
 title: res.redirect
-description: Redirects to the URL derived from the specified `path`, with specified `status`, a positive integer
+description: Redirects to the URL derived from the specified path, with specified status, a positive integer
 menuTitle: res.redirect
 ---
 

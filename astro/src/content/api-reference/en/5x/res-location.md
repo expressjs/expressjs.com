@@ -1,6 +1,6 @@
 ---
 title: res.location
-description: Sets the response `Location` HTTP header to the specified `path` parameter.
+description: Sets the response Location HTTP header to the specified path parameter.
 menuTitle: res.location
 ---
 

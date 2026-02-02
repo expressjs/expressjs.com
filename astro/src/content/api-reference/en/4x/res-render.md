@@ -1,6 +1,6 @@
 ---
 title: res.render
-description: Renders a `view` and sends the rendered HTML string to the client.
+description: Renders a view and sends the rendered HTML string to the client.
 menuTitle: res.render
 ---
 

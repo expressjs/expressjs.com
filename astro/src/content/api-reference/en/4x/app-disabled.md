@@ -1,6 +1,6 @@
 ---
 title: app.disabled
-description: Returns `true` if the Boolean setting `name` is disabled (`false`), where `name` is one of the properties from
+description: Returns true if the Boolean setting name is disabled (false), where name is one of the properties from
 menuTitle: app.disabled
 ---
 

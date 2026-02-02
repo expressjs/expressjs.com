@@ -1,6 +1,6 @@
 ---
 title: req.xhr
-description: A Boolean property that is `true` if the request's `X-Requested-With` header field is
+description: A Boolean property that is true if the request X-Requested-With header field is "XMLHttpRequest"
 menuTitle: req.xhr
 ---
 

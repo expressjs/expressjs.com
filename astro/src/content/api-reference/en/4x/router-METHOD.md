@@ -1,6 +1,6 @@
 ---
 title: router.METHOD
-description: The `router.METHOD()` methods provide the routing functionality in Express,
+description: The router.METHOD methods provide the routing functionality in Express,
 menuTitle: router.METHOD
 ---
 

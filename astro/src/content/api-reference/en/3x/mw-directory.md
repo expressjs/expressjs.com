@@ -1,6 +1,6 @@
 ---
 title: directory
-description: Directory serving middleware, serves the given `path`.
+description: Directory serving middleware, serves the given path.
 menuTitle: directory
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: router.use
-description: Uses the specified middleware function or functions, with optional mount path `path`, that defaults to "/".
+description: Uses the specified middleware function or functions, with optional mount path that defaults to slash.
 menuTitle: router.use
 ---
 

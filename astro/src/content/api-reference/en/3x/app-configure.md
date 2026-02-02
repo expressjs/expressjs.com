@@ -1,6 +1,6 @@
 ---
 title: app.configure
-description: Conditionally invoke `callback` when `env` matches `app.get('env')`,
+description: Conditionally invoke callback when env matches app.get env,
 menuTitle: app.configure
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: res.format
-description: Performs content-negotiation on the `Accept` HTTP header on the request object, when present.
+description: Performs content-negotiation on the Accept HTTP header on the request object, when present.
 menuTitle: res.format
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: cookieSession
-description: Provides cookie-based sessions, and populates `req.session`.
+description: Provides cookie-based sessions, and populates req.session.
 menuTitle: cookieSession
 ---
 

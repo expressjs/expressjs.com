@@ -1,6 +1,6 @@
 ---
 title: req.protocol
-description: Contains the request protocol string: either `http` or (for TLS requests) `https`.
+description: Contains the request protocol string either http or (for TLS requests) https.
 menuTitle: req.protocol
 ---
 
@@ -13,6 +13,6 @@ this property will use the value of the `X-Forwarded-Proto` header field if pres
 This header can be set by the client or by the proxy.
 
 ```js
-console.dir(req.protocol)
+console.dir(req.protocol);
 // => 'http'
 ```

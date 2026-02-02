@@ -1,6 +1,6 @@
 ---
 title: req.secure
-description: A Boolean property that is true if a TLS connection is established. Equivalent to the following:
+description: A Boolean property that is true if a TLS connection is established. Equivalent to the following code.
 menuTitle: req.secure
 ---
 

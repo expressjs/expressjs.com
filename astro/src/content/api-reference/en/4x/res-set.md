@@ -1,6 +1,6 @@
 ---
 title: res.set
-description: Sets the response's HTTP header `field` to `value`.
+description: Sets the response HTTP header field to value.
 menuTitle: res.set
 ---
 

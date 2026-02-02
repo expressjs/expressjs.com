@@ -1,6 +1,6 @@
 ---
 title: res.links
-description: Join the given `links` to populate the "Link" response header field.
+description: Join the given links to populate the Link response header field.
 menuTitle: res.links
 ---
 

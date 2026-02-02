@@ -1,6 +1,6 @@
 ---
 title: req.accepts
-description: Check if the given `types` are acceptable, returning
+description: Check if the given types are acceptable, returning
 menuTitle: req.accepts
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: app.param
-description: Add callback triggers to [route parameters](/{{ page.lang }}/guide/routing.html#route-parameters), where `name` is the name of the parameter or an ...
+description: Add callback triggers to route parameters, where name is the name of the parameter or an array of parameter names, and callback is the callback function.
 menuTitle: app.param
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: res.set
-description: Set header `field` to `value`, or pass an object to set multiple fields at once.
+description: Set header field to value, or pass an object to set multiple fields at once.
 menuTitle: res.set
 ---
 
