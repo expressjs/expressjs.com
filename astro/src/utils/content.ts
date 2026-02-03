@@ -1,6 +1,11 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { menuSections, navItems, type MenuSection } from '@config/menu';
 import type { collections } from '@/content.config';
+import type {
+  NavigationData,
+  SectionWithPages,
+  SubfolderInfo,
+} from '@/components/patterns/Sidebar/types';
 
 /**
  * Get all documents for a specific language
@@ -147,4 +152,95 @@ export async function buildBreadcrumbs(
   });
 
   return breadcrumbs;
+}
+
+/**
+ * Build complete navigation data for sidebar
+ * Fetches all pages organized by nav items, sections, and subfolders
+ */
+export async function buildNavigationData(lang: string): Promise<NavigationData> {
+  const navigationData: NavigationData = {};
+
+  for (const item of navItems) {
+    if (!item.sections) continue;
+
+    const sectionsWithPages: Record<string, SectionWithPages> = {};
+    const collection = item.key as keyof typeof collections;
+
+    for (const [sectionKey, sectionLabel] of Object.entries(item.sections)) {
+      try {
+        const [pages, subfolderNames] = await Promise.all([
+          getPagesBySection(sectionKey as MenuSection, lang, collection),
+          getSubfoldersInSection(sectionKey as MenuSection, lang, collection),
+        ]);
+
+        // Fetch all subfolder pages in parallel
+        const subfolderEntries = Object.entries(subfolderNames);
+        const subfolderPagesResults = await Promise.all(
+          subfolderEntries.map(([subfolderKey]) =>
+            getPagesBySubfolder(sectionKey as MenuSection, subfolderKey, lang, collection)
+          )
+        );
+
+        const subfolders: Record<string, SubfolderInfo> = {};
+        subfolderEntries.forEach(([subfolderKey, subfolderLabel], index) => {
+          const subfolderPages = subfolderPagesResults[index];
+          const overviewPage = subfolderPages.find((page) => {
+            const filename = page.id
+              .replace(`${lang}/`, '')
+              .replace(/\.mdx?$/, '')
+              .split('/')
+              .pop();
+            return filename === subfolderKey;
+          });
+
+          const mappedPages = subfolderPages
+            .filter((page) => page.data.title)
+            .map((page) => {
+              const slug = page.id.replace(`${lang}/`, '').replace(/\.mdx?$/, '');
+              const filename = slug.split('/').pop() || '';
+              const isOverviewPage = filename === subfolderKey;
+              return {
+                title: isOverviewPage ? 'Overview' : page.data.menuTitle || 'Untitled',
+                slug,
+                href: `/${lang}/${collection === 'docs' ? '' : 'api-reference/'}${slug}`,
+                order: page.data.order ?? 999,
+                isOverview: isOverviewPage,
+              };
+            })
+            .sort((a, b) => {
+              if (a.isOverview) return -1;
+              if (b.isOverview) return 1;
+              return a.order - b.order;
+            });
+
+          subfolders[subfolderKey] = {
+            label: subfolderLabel,
+            pages: mappedPages,
+            order: overviewPage?.data.order ?? 999,
+          };
+        });
+
+        sectionsWithPages[sectionKey] = {
+          label: sectionLabel,
+          pages: pages
+            .filter((page) => page.data.title)
+            .map((page) => ({
+              title: page.data.menuTitle || 'Untitled',
+              slug: page.id.replace(`${lang}/`, '').replace(/\.mdx?$/, ''),
+              href: `/${lang}/${collection === 'docs' ? '' : 'api-reference/'}${page.id.replace(`${lang}/`, '').replace(/\.mdx?$/, '')}`,
+              order: page.data.order ?? 999,
+            })),
+          subfolders,
+        };
+      } catch (error) {
+        console.error(`Failed to fetch pages for section ${sectionKey}:`, error);
+        sectionsWithPages[sectionKey] = { label: sectionLabel, pages: [], subfolders: {} };
+      }
+    }
+
+    navigationData[item.key] = sectionsWithPages;
+  }
+
+  return navigationData;
 }

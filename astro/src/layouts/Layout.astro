@@ -1,7 +1,7 @@
 ---
 import '@styles/main.css';
 import { Container } from '@components/primitives';
-import { ThemeSwitcher } from '@/components/patterns';
+import { Sidebar, ThemeSwitcher } from '@/components/patterns';
 import { Header } from '@/components/patterns';
 
 interface Props {
@@ -34,6 +34,7 @@ const {
     </style>
   </head>
   <body>
+    <Sidebar />
     <Header />
     <Container>
       <!-- TODO: placed here temporarily for theme switching testing -->

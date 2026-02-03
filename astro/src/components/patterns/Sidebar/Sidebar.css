@@ -147,7 +147,8 @@
     cursor: pointer;
   }
 
-  .sidebar-nav-item:hover {
+  .sidebar-nav-item:hover,
+  .sidebar-nav-item--active {
     background-color: var(--color-bg-secondary);
     border-radius: 0 var(--radius-base) var(--radius-base) 0;
 
@@ -166,6 +167,7 @@
     color: var(--color-primary);
     background-color: var(--color-bg-secondary);
     font-weight: var(--font-weight-semibold);
+    position: relative;
   }
 
   .sidebar-nav-item[aria-current='page']::before {
@@ -174,8 +176,8 @@
     left: 0;
     top: 0;
     bottom: 0;
-    width: 3px;
-    background-color: var(--color-primary);
+    width: var(--size-0-5);
+    background-color: var(--color-bg-inverse);
   }
 
   .sidebar-nav-back {
@@ -200,13 +202,6 @@
   .sidebar-nav-back:focus-visible {
     outline: 2px solid var(--color-focus-ring);
     outline-offset: 2px;
-  }
-
-  .sidebar-nav-title {
-    margin: 0;
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-text-primary);
   }
 
   /* Second level sections */
@@ -297,7 +292,6 @@
   @media (prefers-reduced-motion: reduce) {
     .sidebar,
     .sidebar-backdrop,
-    .sidebar-close,
     .sidebar-nav-item,
     .sidebar-nav--first-level,
     .sidebar-nav--second-level,

@@ -2,11 +2,11 @@
 /**
  * Sidebar Component
  *
- * Mobile navigation sidebar with accessibility features
- * - Slides in from the left
+ * Mobile navigation sidebar with accessibility features:
+ * - Slides in from the left with multi-level navigation
  * - Focus trap when open
- * - Keyboard navigation support
- * - Screen reader friendly
+ * - Keyboard navigation (Escape to go back/close)
+ * - Screen reader friendly with ARIA attributes
  */
 
 import './Sidebar.css';
@@ -14,132 +14,17 @@ import type { HTMLAttributes } from 'astro/types';
 import { Body, BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { getLangFromUrl } from '@/i18n/utils';
-import { navItems, type MenuSection } from '@/config/menu';
-import { getPagesBySection, getSubfoldersInSection, getPagesBySubfolder } from '@utils/content';
-import type { collections } from '@/content.config';
+import { navItems } from '@/config/menu';
+import { buildNavigationData } from '@utils/content';
+import type { NavigationData } from './types';
 
 type Props = HTMLAttributes<'div'>;
 
-interface PageInfo {
-  title: string;
-  slug: string;
-  href: string;
-  order: number;
-}
-
-interface SubfolderInfo {
-  label: string;
-  pages: PageInfo[];
-  order: number;
-}
-
-interface SectionWithPages {
-  label: string;
-  pages: PageInfo[];
-  subfolders: Record<string, SubfolderInfo>;
-}
-
-type NavigationData = Record<string, Record<string, SectionWithPages>>;
-
 const { class: className, ...rest } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
 
-// Fetch all pages for navigation items with sections
-const navigationData: NavigationData = {};
-
-for (const item of navItems) {
-  if (item.sections) {
-    const sectionsWithPages: Record<string, SectionWithPages> = {};
-
-    for (const [sectionKey, sectionLabel] of Object.entries(item.sections)) {
-      const collection = item.key as keyof typeof collections;
-
-      try {
-        const pages = await getPagesBySection(sectionKey as MenuSection, lang, collection);
-
-        const subfolderNames = await getSubfoldersInSection(
-          sectionKey as MenuSection,
-          lang,
-          collection
-        );
-
-        const subfolders: Record<string, SubfolderInfo> = {};
-        for (const [subfolderKey, subfolderLabel] of Object.entries(subfolderNames)) {
-          const subfolderPages = await getPagesBySubfolder(
-            sectionKey as MenuSection,
-            subfolderKey,
-            lang,
-            collection
-          );
-
-          // Find the overview page (same name as subfolder) to get its order
-          const overviewPage = subfolderPages.find((page) => {
-            const filename = page.id
-              .replace(`${lang}/`, '')
-              .replace(/\.mdx?$/, '')
-              .split('/')
-              .pop();
-            return filename === subfolderKey;
-          });
-          const subfolderOrder = overviewPage?.data.order ?? 999;
-
-          const mappedPages = subfolderPages
-            .filter((page) => page.data.title)
-            .map((page) => {
-              const slug = page.id.replace(`${lang}/`, '').replace(/\.mdx?$/, '');
-              const filename = slug.split('/').pop() || '';
-              const isOverviewPage = filename === subfolderKey;
-              return {
-                title: isOverviewPage ? 'Overview' : page.data.menuTitle! || 'Untitled',
-                slug: slug,
-                href: `/${lang}/${collection === 'docs' ? '' : 'api-reference/'}${slug}`,
-                isOverview: isOverviewPage,
-                order: page.data.order ?? 999,
-              };
-            })
-
-            .sort((a, b) => {
-              if (a.isOverview) return -1;
-              if (b.isOverview) return 1;
-              return a.order - b.order;
-            });
-
-          subfolders[subfolderKey] = {
-            label: subfolderLabel,
-            pages: mappedPages,
-            order: subfolderOrder,
-          };
-        }
-
-        sectionsWithPages[sectionKey] = {
-          label: sectionLabel,
-          pages: pages
-            .filter((page) => page.data.title)
-            .map((page) => {
-              const collection = page.collection;
-              const slug = page.id.replace(`${lang}/`, '').replace(/\.mdx?$/, '');
-              return {
-                title: page.data.menuTitle! || 'Untitled',
-                slug: slug,
-                href: `/${lang}/${collection === 'docs' ? '' : 'api-reference/'}${slug}`,
-                order: page.data.order ?? 999,
-              };
-            }),
-          subfolders,
-        };
-      } catch (error) {
-        console.error(`Failed to fetch pages for section ${sectionKey}:`, error);
-        sectionsWithPages[sectionKey] = {
-          label: sectionLabel,
-          pages: [],
-          subfolders: {},
-        };
-      }
-    }
-
-    navigationData[item.key] = sectionsWithPages;
-  }
-}
+const navigationData: NavigationData = await buildNavigationData(lang);
 ---
 
 <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true" data-sidebar-backdrop></div>
@@ -165,43 +50,53 @@ for (const item of navItems) {
   >
     <ul class="sidebar-nav-list">
       {
-        navItems.map((item) => (
-          <li>
-            {item.href && (
-              <a href={`/${lang}${item.href}`} class="sidebar-nav-item" aria-label={item.ariaLabel}>
-                <div class="sidebar-nav-icon">
-                  <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
-                </div>
-                <BodyMd vMargin={false} class="sidebar-nav-label">
-                  {item.label}
-                </BodyMd>
-              </a>
-            )}
-            {!item.href && item.sections && (
-              <button
-                class="sidebar-nav-item"
-                aria-label={item.ariaLabel}
-                type="button"
-                data-nav-key={item.key}
-                data-nav-label={item.label}
-                data-sections={JSON.stringify(item.sections)}
-              >
-                <div class="sidebar-nav-icon">
-                  <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
-                </div>
-                <BodyMd vMargin={false} class="sidebar-nav-label">
-                  {item.label}
-                </BodyMd>
-                <Icon
-                  name="ph:arrow-right"
-                  size="16"
-                  color="var(--color-icon-secondary)"
-                  class="sidebar-nav-arrow"
-                />
-              </button>
-            )}
-          </li>
-        ))
+        navItems.map((item) => {
+          const itemHref = item.href ? `/${lang}${item.href}` : null;
+          const isActive = itemHref && currentPath === itemHref;
+          return (
+            <li>
+              {item.href ? (
+                <a
+                  href={itemHref}
+                  class:list={['sidebar-nav-item', isActive && 'sidebar-nav-item--active']}
+                  aria-label={item.ariaLabel}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <div class="sidebar-nav-icon">
+                    <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+                  </div>
+                  <BodyMd vMargin={false} class="sidebar-nav-label">
+                    {item.label}
+                  </BodyMd>
+                </a>
+              ) : (
+                <button
+                  class="sidebar-nav-item"
+                  aria-label={item.ariaLabel}
+                  aria-expanded="false"
+                  type="button"
+                  data-nav-key={item.key}
+                  data-nav-label={item.label}
+                  data-sections={JSON.stringify(item.sections)}
+                >
+                  <div class="sidebar-nav-icon">
+                    <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+                  </div>
+                  <BodyMd vMargin={false} class="sidebar-nav-label">
+                    {item.label}
+                  </BodyMd>
+                  <Icon
+                    name="ph:arrow-right"
+                    size="16"
+                    color="var(--color-icon-secondary)"
+                    class="sidebar-nav-arrow"
+                    aria-hidden="true"
+                  />
+                </button>
+              )}
+            </li>
+          );
+        })
       }
     </ul>
   </nav>
@@ -219,7 +114,12 @@ for (const item of navItems) {
       aria-label="Go back to main navigation"
       data-back-to-first
     >
-      <Icon name="ph:arrow-line-left" size="16" color="var(--color-icon-primary)" />
+      <Icon
+        name="ph:arrow-line-left"
+        size="16"
+        color="var(--color-icon-primary)"
+        aria-hidden="true"
+      />
       <Body as="h3" weight="bold" data-nav-title vMargin={false}>Navigation</Body>
     </button>
     <div class="sidebar-nav-content" data-second-level-list>
@@ -240,7 +140,12 @@ for (const item of navItems) {
       aria-label="Go back to section navigation"
       data-back-to-second
     >
-      <Icon name="ph:arrow-line-left" size="16" color="var(--color-icon-primary)" />
+      <Icon
+        name="ph:arrow-line-left"
+        size="16"
+        color="var(--color-icon-primary)"
+        aria-hidden="true"
+      />
       <Body as="h3" weight="bold" data-nav-subfolder-title vMargin={false}>Subfolder</Body>
     </button>
     <div class="sidebar-nav-content" data-third-level-list>
@@ -255,611 +160,11 @@ for (const item of navItems) {
       size="16"
       color="var(--color-icon-secondary)"
       class="sidebar-nav-subfolder-arrow"
+      aria-hidden="true"
     />
   </template>
 
   <script>
-    interface PageInfo {
-      title: string;
-      slug: string;
-      href: string;
-      order: number;
-    }
-
-    interface SubfolderInfo {
-      label: string;
-      pages: PageInfo[];
-      order: number;
-    }
-
-    interface SectionWithPages {
-      label: string;
-      pages: PageInfo[];
-      subfolders: Record<string, SubfolderInfo>;
-    }
-
-    type NavigationData = Record<string, Record<string, SectionWithPages>>;
-
-    // Union type for combined nav items
-    type NavItem =
-      | { type: 'page'; data: PageInfo }
-      | { type: 'subfolder'; key: string; data: SubfolderInfo };
-
-    // Sidebar state management and accessibility
-    class SidebarController {
-      private sidebar: HTMLElement | null;
-      private backdrop: HTMLElement | null;
-      private isOpen = false;
-      private focusableElements: HTMLElement[] = [];
-      private lastFocusedElement: HTMLElement | null = null;
-      private firstLevelNav: HTMLElement | null;
-      private secondLevelNav: HTMLElement | null;
-      private thirdLevelNav: HTMLElement | null;
-      private secondLevelList: HTMLElement | null;
-      private thirdLevelList: HTMLElement | null;
-      private navTitle: HTMLElement | null;
-      private subfolderTitle: HTMLElement | null;
-      private backToFirstButton: HTMLElement | null;
-      private backToSecondButton: HTMLElement | null;
-      private isSecondLevelActive = false;
-      private isThirdLevelActive = false;
-      private currentNavKey: string | undefined;
-      private navigationData: NavigationData = {};
-      private currentSections: Record<string, string> = {};
-      private currentNavLabel: string = '';
-
-      constructor() {
-        this.sidebar = document.querySelector('[data-sidebar]');
-        this.backdrop = document.querySelector('[data-sidebar-backdrop]');
-        this.firstLevelNav = document.querySelector('[data-nav-level="first"]');
-        this.secondLevelNav = document.querySelector('[data-nav-level="second"]');
-        this.thirdLevelNav = document.querySelector('[data-nav-level="third"]');
-        this.secondLevelList = document.querySelector('[data-second-level-list]');
-        this.thirdLevelList = document.querySelector('[data-third-level-list]');
-        this.navTitle = document.querySelector('[data-nav-title]');
-        this.subfolderTitle = document.querySelector('[data-nav-subfolder-title]');
-        this.backToFirstButton = document.querySelector('[data-back-to-first]');
-        this.backToSecondButton = document.querySelector('[data-back-to-second]');
-
-        // Load navigation data from data attribute
-        if (this.sidebar?.dataset.navigation) {
-          try {
-            this.navigationData = JSON.parse(this.sidebar.dataset.navigation);
-          } catch (error) {
-            console.error('Failed to parse navigation data:', error);
-          }
-        }
-
-        if (this.sidebar && this.backdrop) {
-          this.init();
-        }
-      }
-
-      private init() {
-        this.backdrop?.addEventListener('click', () => this.close());
-
-        document.addEventListener('keydown', (e) => this.handleKeyDown(e));
-
-        document.addEventListener('sidebar:toggle', () => this.toggle());
-
-        this.initNavigationHandlers();
-      }
-
-      private initNavigationHandlers() {
-        const navButtons = this.firstLevelNav?.querySelectorAll('button[data-nav-key]');
-        navButtons?.forEach((button) => {
-          button.addEventListener('click', (e) => this.handleNavItemClick(e));
-        });
-
-        this.backToFirstButton?.addEventListener('click', () => this.navigateToFirstLevel());
-        this.backToSecondButton?.addEventListener('click', () =>
-          this.navigateToSecondLevelFromThird()
-        );
-      }
-
-      private handleNavItemClick(e: Event) {
-        const button = e.currentTarget as HTMLButtonElement;
-        const navLabel = button.dataset.navLabel;
-        const navKey = button.dataset.navKey;
-        const sectionsData = button.dataset.sections;
-
-        if (!sectionsData || !navLabel) return;
-
-        try {
-          const sections = JSON.parse(sectionsData);
-          this.navigateToSecondLevel(navLabel, sections, navKey, undefined);
-        } catch (error) {
-          console.error('Failed to parse sections data:', error);
-        }
-      }
-
-      private detectCurrentPage() {
-        const currentPath = window.location.pathname;
-
-        // Search through all navigation data to find the current page
-        for (const [navKey, navData] of Object.entries(this.navigationData)) {
-          for (const sectionData of Object.values(navData)) {
-            // Check in direct pages
-            const currentPage = sectionData.pages.find((page) => page.href === currentPath);
-            if (currentPage) {
-              // Find the nav item button to get its sections and label
-              const navButton = this.firstLevelNav?.querySelector(
-                `button[data-nav-key="${navKey}"]`
-              ) as HTMLButtonElement;
-
-              if (navButton) {
-                return {
-                  navKey,
-                  navLabel: navButton.dataset.navLabel || '',
-                  sections: navButton.dataset.sections
-                    ? JSON.parse(navButton.dataset.sections)
-                    : {},
-                  currentHref: currentPath,
-                  inSubfolder: false,
-                  subfolderKey: undefined,
-                  subfolderLabel: undefined,
-                };
-              }
-            }
-
-            // Check in subfolders
-            if (sectionData.subfolders) {
-              for (const [subfolderKey, subfolderData] of Object.entries(sectionData.subfolders)) {
-                const subfolderPage = subfolderData.pages.find((page) => page.href === currentPath);
-                if (subfolderPage) {
-                  const navButton = this.firstLevelNav?.querySelector(
-                    `button[data-nav-key="${navKey}"]`
-                  ) as HTMLButtonElement;
-
-                  if (navButton) {
-                    return {
-                      navKey,
-                      navLabel: navButton.dataset.navLabel || '',
-                      sections: navButton.dataset.sections
-                        ? JSON.parse(navButton.dataset.sections)
-                        : {},
-                      currentHref: currentPath,
-                      inSubfolder: true,
-                      subfolderKey,
-                      subfolderLabel: subfolderData.label,
-                    };
-                  }
-                }
-              }
-            }
-          }
-        }
-
-        return null;
-      }
-
-      private navigateToSecondLevel(
-        title: string,
-        sections: Record<string, string>,
-        navKey: string | undefined,
-        currentHref?: string
-      ) {
-        if (
-          !this.firstLevelNav ||
-          !this.secondLevelNav ||
-          !this.secondLevelList ||
-          !this.navTitle ||
-          !navKey
-        ) {
-          return;
-        }
-
-        // Store current context for returning from third level
-        this.currentNavKey = navKey;
-        this.currentSections = sections;
-        this.currentNavLabel = title;
-
-        // Update title
-        this.navTitle.textContent = title;
-
-        // Populate second level list with sections and their pages
-        this.secondLevelList.innerHTML = '';
-
-        const navData = this.navigationData[navKey];
-        if (!navData) {
-          console.warn(`No navigation data found for ${navKey}`);
-          return;
-        }
-
-        Object.entries(sections).forEach(([sectionKey, sectionLabel]) => {
-          const sectionData = navData[sectionKey];
-
-          if (!sectionData) {
-            return;
-          }
-
-          const hasPages = sectionData.pages.length > 0;
-          const hasSubfolders =
-            sectionData.subfolders && Object.keys(sectionData.subfolders).length > 0;
-
-          if (!hasPages && !hasSubfolders) {
-            return;
-          }
-
-          // Create section container
-          const sectionDiv = document.createElement('div');
-          sectionDiv.className = 'sidebar-nav-section';
-
-          // Create section heading
-          const sectionHeading = document.createElement('h4');
-          sectionHeading.className = 'sidebar-nav-section-title';
-          sectionHeading.textContent = sectionLabel;
-          sectionDiv.appendChild(sectionHeading);
-
-          // Create pages list
-          const pagesList = document.createElement('ul');
-          pagesList.className = 'sidebar-nav-section-list';
-
-          // Combine pages and subfolders into a single sorted list
-          const navItems: NavItem[] = [];
-
-          // Add pages
-          sectionData.pages.forEach((page) => {
-            navItems.push({ type: 'page', data: page });
-          });
-
-          // Add subfolders
-          if (sectionData.subfolders) {
-            Object.entries(sectionData.subfolders).forEach(([subfolderKey, subfolderData]) => {
-              if (subfolderData.pages.length > 0) {
-                navItems.push({ type: 'subfolder', key: subfolderKey, data: subfolderData });
-              }
-            });
-          }
-
-          // Sort by order
-          navItems.sort((a, b) => {
-            const orderA = a.type === 'page' ? a.data.order : a.data.order;
-            const orderB = b.type === 'page' ? b.data.order : b.data.order;
-            return orderA - orderB;
-          });
-
-          // Render sorted items
-          navItems.forEach((item) => {
-            if (item.type === 'page') {
-              const page = item.data;
-              const li = document.createElement('li');
-              const a = document.createElement('a');
-              a.href = page.href;
-              a.className = 'sidebar-nav-item sidebar-nav-item--second-level';
-              a.textContent = page.title;
-
-              // Mark current page as active
-              if (currentHref && page.href === currentHref) {
-                a.setAttribute('aria-current', 'page');
-                a.dataset.currentPage = 'true';
-              }
-
-              li.appendChild(a);
-              pagesList.appendChild(li);
-            } else {
-              const subfolderKey = item.key;
-              const subfolderData = item.data;
-
-              const li = document.createElement('li');
-              const button = document.createElement('button');
-              button.type = 'button';
-              button.className =
-                'sidebar-nav-item sidebar-nav-item--second-level sidebar-nav-item--subfolder';
-              button.dataset.subfolderKey = subfolderKey;
-              button.dataset.sectionKey = sectionKey;
-              const labelSpan = document.createElement('span');
-              labelSpan.className = 'sidebar-nav-subfolder-label';
-              labelSpan.textContent = subfolderData.label;
-              button.appendChild(labelSpan);
-
-              // Clone the arrow icon from the template
-              const arrowTemplate = document.getElementById(
-                'subfolder-arrow-template'
-              ) as HTMLTemplateElement;
-              if (arrowTemplate) {
-                const arrowIcon = arrowTemplate.content.cloneNode(true);
-                button.appendChild(arrowIcon);
-              }
-
-              button.addEventListener('click', () => {
-                this.navigateToThirdLevel(
-                  subfolderKey,
-                  subfolderData.label,
-                  sectionKey,
-                  currentHref
-                );
-              });
-
-              li.appendChild(button);
-              pagesList.appendChild(li);
-            }
-          });
-
-          sectionDiv.appendChild(pagesList);
-          this.secondLevelList?.appendChild(sectionDiv);
-        });
-
-        // Trigger slide animation
-        this.firstLevelNav.classList.add('sidebar-nav--slide-out');
-        this.secondLevelNav.classList.add('sidebar-nav--slide-in');
-        this.secondLevelNav.setAttribute('aria-hidden', 'false');
-        this.isSecondLevelActive = true;
-      }
-
-      private navigateToThirdLevel(
-        subfolderKey: string,
-        subfolderLabel: string,
-        sectionKey: string,
-        currentHref?: string
-      ) {
-        if (
-          !this.secondLevelNav ||
-          !this.thirdLevelNav ||
-          !this.thirdLevelList ||
-          !this.subfolderTitle ||
-          !this.currentNavKey
-        ) {
-          return;
-        }
-
-        // Update title
-        this.subfolderTitle.textContent = subfolderLabel;
-
-        // Populate third level list with subfolder pages
-        this.thirdLevelList.innerHTML = '';
-
-        const navData = this.navigationData[this.currentNavKey];
-        const sectionData = navData?.[sectionKey];
-        const subfolderData = sectionData?.subfolders?.[subfolderKey];
-
-        if (!subfolderData) {
-          console.warn(`No subfolder data found for ${subfolderKey}`);
-          return;
-        }
-
-        // Create pages list
-        const pagesList = document.createElement('ul');
-        pagesList.className = 'sidebar-nav-section-list sidebar-nav-section-list--third-level';
-
-        subfolderData.pages.forEach((page) => {
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = page.href;
-          a.className = 'sidebar-nav-item sidebar-nav-item--third-level';
-          a.textContent = page.title;
-
-          // Mark current page as active
-          if (currentHref && page.href === currentHref) {
-            a.setAttribute('aria-current', 'page');
-            a.dataset.currentPage = 'true';
-          }
-
-          li.appendChild(a);
-          pagesList.appendChild(li);
-        });
-
-        this.thirdLevelList.appendChild(pagesList);
-
-        // Trigger slide animation
-        this.secondLevelNav.classList.add('sidebar-nav--slide-out');
-        this.thirdLevelNav.classList.add('sidebar-nav--slide-in');
-        this.thirdLevelNav.setAttribute('aria-hidden', 'false');
-        this.isThirdLevelActive = true;
-      }
-
-      private navigateToSecondLevelFromThird() {
-        if (!this.secondLevelNav || !this.thirdLevelNav) return;
-
-        // Trigger reverse slide animation
-        this.secondLevelNav.classList.remove('sidebar-nav--slide-out');
-        this.thirdLevelNav.classList.remove('sidebar-nav--slide-in');
-        this.thirdLevelNav.setAttribute('aria-hidden', 'true');
-        this.isThirdLevelActive = false;
-
-        // Focus the back button after animation
-        setTimeout(() => {
-          this.backToFirstButton?.focus();
-        }, 300);
-      }
-
-      private navigateToFirstLevel() {
-        if (!this.firstLevelNav || !this.secondLevelNav) return;
-
-        // If on third level, also reset that
-        if (this.isThirdLevelActive && this.thirdLevelNav) {
-          this.thirdLevelNav.classList.remove('sidebar-nav--slide-in');
-          this.thirdLevelNav.setAttribute('aria-hidden', 'true');
-          this.secondLevelNav.classList.remove('sidebar-nav--slide-out');
-          this.isThirdLevelActive = false;
-        }
-
-        // Trigger reverse slide animation
-        this.firstLevelNav.classList.remove('sidebar-nav--slide-out');
-        this.secondLevelNav.classList.remove('sidebar-nav--slide-in');
-        this.secondLevelNav.setAttribute('aria-hidden', 'true');
-        this.isSecondLevelActive = false;
-
-        // Clear stored context
-        this.currentNavKey = undefined;
-        this.currentSections = {};
-        this.currentNavLabel = '';
-
-        // Focus the first nav button after animation
-        setTimeout(() => {
-          const firstButton = this.firstLevelNav?.querySelector('button');
-          firstButton?.focus();
-        }, 300);
-      }
-
-      private getFocusableElements(): HTMLElement[] {
-        if (!this.sidebar) return [];
-
-        const selectors = [
-          'a[href]',
-          'button:not([disabled])',
-          'textarea:not([disabled])',
-          'input:not([disabled])',
-          'select:not([disabled])',
-          '[tabindex]:not([tabindex="-1"])',
-        ];
-
-        return Array.from(this.sidebar.querySelectorAll(selectors.join(','))) as HTMLElement[];
-      }
-
-      private trapFocus(e: KeyboardEvent) {
-        if (!this.isOpen) return;
-
-        this.focusableElements = this.getFocusableElements();
-        const firstElement = this.focusableElements[0];
-        const lastElement = this.focusableElements[this.focusableElements.length - 1];
-
-        if (e.key === 'Tab') {
-          if (e.shiftKey) {
-            // Shift + Tab
-            if (document.activeElement === firstElement) {
-              e.preventDefault();
-              lastElement?.focus();
-            }
-          } else {
-            // Tab
-            if (document.activeElement === lastElement) {
-              e.preventDefault();
-              firstElement?.focus();
-            }
-          }
-        }
-      }
-
-      private handleKeyDown(e: KeyboardEvent) {
-        if (e.key === 'Escape' && this.isOpen) {
-          // If on third level, go back to second level instead of closing
-          if (this.isThirdLevelActive) {
-            this.navigateToSecondLevelFromThird();
-          } else if (this.isSecondLevelActive) {
-            // If on second level, go back to first level instead of closing
-            this.navigateToFirstLevel();
-          } else {
-            this.close();
-          }
-        }
-
-        this.trapFocus(e);
-      }
-
-      private lockBodyScroll() {
-        document.body.style.overflow = 'hidden';
-      }
-
-      private unlockBodyScroll() {
-        document.body.style.overflow = '';
-      }
-
-      public open() {
-        if (this.isOpen || !this.sidebar || !this.backdrop) return;
-
-        // Store currently focused element
-        this.lastFocusedElement = document.activeElement as HTMLElement;
-
-        // Update state
-        this.isOpen = true;
-        this.sidebar.setAttribute('aria-hidden', 'false');
-        this.backdrop.setAttribute('aria-hidden', 'false');
-
-        // Add open classes
-        this.sidebar.classList.add('sidebar--open');
-        this.backdrop.classList.add('sidebar-backdrop--visible');
-
-        // Lock body scroll
-        this.lockBodyScroll();
-
-        // Check if current page is in secondary navigation
-        const currentPageInfo = this.detectCurrentPage();
-
-        if (currentPageInfo) {
-          // First navigate to second level
-          this.navigateToSecondLevel(
-            currentPageInfo.navLabel,
-            currentPageInfo.sections,
-            currentPageInfo.navKey,
-            currentPageInfo.currentHref
-          );
-
-          // If current page is in a subfolder, also navigate to third level
-          if (
-            currentPageInfo.inSubfolder &&
-            currentPageInfo.subfolderKey &&
-            currentPageInfo.subfolderLabel
-          ) {
-            // Find the section key that contains this subfolder
-            const navData = this.navigationData[currentPageInfo.navKey];
-            if (navData) {
-              for (const [sectionKey, sectionData] of Object.entries(navData)) {
-                if (sectionData.subfolders?.[currentPageInfo.subfolderKey]) {
-                  // Small delay to allow second level to render first
-                  setTimeout(() => {
-                    this.navigateToThirdLevel(
-                      currentPageInfo.subfolderKey!,
-                      currentPageInfo.subfolderLabel!,
-                      sectionKey,
-                      currentPageInfo.currentHref
-                    );
-                  }, 50);
-                  break;
-                }
-              }
-            }
-          }
-        } else {
-          // Focus first focusable element after animation
-          setTimeout(() => {
-            this.focusableElements = this.getFocusableElements();
-            this.focusableElements[0]?.focus();
-          }, 300);
-        }
-      }
-
-      public close() {
-        if (!this.isOpen || !this.sidebar || !this.backdrop) return;
-
-        document.dispatchEvent(new CustomEvent('sidebar:closed'));
-
-        // Update state
-        this.isOpen = false;
-        this.sidebar.setAttribute('aria-hidden', 'true');
-        this.backdrop.setAttribute('aria-hidden', 'true');
-
-        // Remove open classes
-        this.sidebar.classList.remove('sidebar--open');
-        this.backdrop.classList.remove('sidebar-backdrop--visible');
-
-        // Reset to first level if on any sub-level
-        if (this.isThirdLevelActive || this.isSecondLevelActive) {
-          this.navigateToFirstLevel();
-        }
-
-        // Unlock body scroll
-        this.unlockBodyScroll();
-
-        // Return focus to menu toggle
-        if (this.lastFocusedElement) {
-          this.lastFocusedElement.focus();
-          this.lastFocusedElement = null;
-        }
-      }
-
-      public toggle() {
-        if (this.isOpen) {
-          this.close();
-        } else {
-          this.open();
-        }
-      }
-    }
-
-    const sidebarController = new SidebarController();
-
-    (window as Window & { sidebarController?: SidebarController }).sidebarController =
-      sidebarController;
+    import './SidebarController';
   </script>
 </aside>
