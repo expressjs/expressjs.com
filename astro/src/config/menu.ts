@@ -28,6 +28,7 @@ export const navItems = [
     sections: menuSections['api-reference'],
   },
   { href: `/blog/`, label: 'Blog', ariaLabel: 'Blog', icon: 'newspaper' },
+  { href: `/support/`, label: 'Support', ariaLabel: 'Support', icon: 'info' },
 ];
 
 export type NavItem = (typeof navItems)[number];

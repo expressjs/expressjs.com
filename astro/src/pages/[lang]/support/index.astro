@@ -1,0 +1,21 @@
+---
+/**
+ * Express Documentation Index Page
+ *
+ * TODO: This is a temporary index page for support page. This will be replaced with a proper support layout in the future.
+ */
+import Layout from '@layouts/Layout.astro';
+import { languages } from '@i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+---
+
+<Layout title="Express Support">
+  <h1>Express Version Support</h1>
+  <p>This is a temporary entry point page for the Express support.</p>
+  <p>This page will be replaced with a proper support layout soon.</p>
+</Layout>

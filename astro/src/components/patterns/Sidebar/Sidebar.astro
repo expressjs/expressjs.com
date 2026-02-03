@@ -102,9 +102,7 @@ for (const item of navItems) {
               if (a.isOverview) return -1;
               if (b.isOverview) return 1;
               return a.order - b.order;
-            })
-            // Remove the isOverview property
-            .map(({ isOverview: _isOverview, ...rest }) => rest);
+            });
 
           subfolders[subfolderKey] = {
             label: subfolderLabel,
@@ -306,9 +304,9 @@ for (const item of navItems) {
       private isSecondLevelActive = false;
       private isThirdLevelActive = false;
       private currentNavKey: string | undefined;
+      private navigationData: NavigationData = {};
       private currentSections: Record<string, string> = {};
       private currentNavLabel: string = '';
-      private navigationData: NavigationData = {};
 
       constructor() {
         this.sidebar = document.querySelector('[data-sidebar]');
@@ -859,10 +857,9 @@ for (const item of navItems) {
       }
     }
 
-    // Initialize sidebar controller
     const sidebarController = new SidebarController();
 
-    // Make it available globally for the header component
-    (window as any).sidebarController = sidebarController;
+    (window as Window & { sidebarController?: SidebarController }).sidebarController =
+      sidebarController;
   </script>
 </aside>
