@@ -735,12 +735,21 @@ footer {
   justify-content: space-between;
   gap: 32px;
   display: flex;
+  flex-direction: column;
+}
+
+#footer-trademark-legal {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 8px;
+  text-align: center;
 }
 
 #footer-copyright {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 20px;
 }
 
