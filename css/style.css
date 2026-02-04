@@ -743,6 +743,7 @@ footer {
   opacity: 0.8;
   margin-top: 8px;
   text-align: center;
+  max-width: 35rem;
 }
 
 #footer-copyright {
