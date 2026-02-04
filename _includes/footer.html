@@ -6,6 +6,9 @@
       <a href="https://openjsf.org/" class="openjs-logo" title="OpenJS Foundation">
          {% include icons/openjs_foundation-logo-horizontal-white.svg %}
       </a>
+      <p id="footer-trademark-legal">
+        {{ site.data[page.lang].footer.trademark_legal | default: site.data.en.footer.trademark_legal }}
+      </p>
       <div id="footer-policy">
         <a href="https://terms-of-use.openjsf.org">
           {{ site.data[page.lang].footer.terms_of_use }}
