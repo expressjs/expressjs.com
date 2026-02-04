@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import DocLayout from '@layouts/DocLayout.astro';
+import { render } from 'astro:content';
+import { buildBreadcrumbs } from '@utils/content';
+
+export async function getStaticPaths() {
+  const DEFAULT_VERSION = 'v5';
+  const VERSION_PREFIXES = ['v5', 'v4', 'v3'];
+
+  const pages = await getCollection('docs');
+
+  const paths: Array<{
+    params: { lang: string; slug: string };
+    props: { page: (typeof pages)[0]; version: string; isVersionedPath: boolean };
+  }> = [];
+
+  pages.forEach((page) => {
+    const [lang, ...slugParts] = page.id.split('/');
+    const fullSlug = slugParts.join('/');
+
+    const isVersioned = VERSION_PREFIXES.some((v) => fullSlug.startsWith(`${v}/`));
+
+    paths.push({
+      params: { lang, slug: fullSlug },
+      props: { page, version: isVersioned ? slugParts[0] : DEFAULT_VERSION, isVersionedPath: true },
+    });
+  });
+
+  // Also create non-versioned paths that serve default version content
+  // Find pages in the default version folder and create alias paths
+  const defaultVersionPages = pages.filter((page) => {
+    const [, ...slugParts] = page.id.split('/');
+    return slugParts[0] === DEFAULT_VERSION;
+  });
+
+  defaultVersionPages.forEach((page) => {
+    const [lang, , ...restSlugParts] = page.id.split('/'); // Skip lang and version
+    const nonVersionedSlug = restSlugParts.join('/');
+
+    // Only add if this path doesn't already exist
+    const exists = paths.some((p) => p.params.lang === lang && p.params.slug === nonVersionedSlug);
+
+    if (!exists && nonVersionedSlug) {
+      paths.push({
+        params: { lang, slug: nonVersionedSlug },
+        props: { page, version: DEFAULT_VERSION, isVersionedPath: false },
+      });
+    }
+  });
+
+  return paths;
+}
+
+const { page, version, isVersionedPath } = Astro.props;
+const { lang, slug } = Astro.params;
+const { Content } = await render(page);
+const breadcrumbs = await buildBreadcrumbs(lang, slug, 'docs');
+const { title, description } = page.data;
+---
+
+<DocLayout
+  title={title}
+  description={description}
+  breadcrumbs={breadcrumbs}
+  data-version={version}
+  data-is-versioned-path={isVersionedPath}
+>
+  <Content />
+</DocLayout>

@@ -1,0 +1,319 @@
+---
+/**
+ * SidebarV2 Component
+ *
+ * Enhanced mobile navigation sidebar with:
+ * - Unlimited navigation levels
+ * - Sections with optional titles at any level
+ * - Items can be links or buttons opening submenus
+ * - Version switcher for versioned content
+ * - Full accessibility support (focus trap, keyboard navigation, ARIA)
+ */
+
+import './SidebarV2.css';
+import type { HTMLAttributes } from 'astro/types';
+import { Body, BodyMd } from '@/components/primitives';
+import { Icon } from 'astro-icon/components';
+import { getLangFromUrl } from '@/i18n/utils';
+import { mainMenu } from '@/config/main-menu';
+import type { MenuConfig, VersionConfig } from './types';
+
+type Props = HTMLAttributes<'div'> & {
+  /** Menu configuration (defaults to mainMenu) */
+  menu?: MenuConfig;
+  /** Available versions for the version switcher */
+  versions?: VersionConfig[];
+  /** Default version */
+  defaultVersion?: string;
+};
+
+const {
+  class: className,
+  menu = mainMenu as MenuConfig,
+  versions = [
+    { id: 'v5', label: 'v5.x', isDefault: true },
+    { id: 'v4', label: 'v4.x' },
+    { id: 'v3', label: 'v3.x', isDeprecated: true },
+  ],
+  defaultVersion = 'v5',
+  ...rest
+} = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+
+// Helper function to check if item is a link
+function isLink(item: { href?: string; submenu?: unknown }): boolean {
+  return 'href' in item && item.href !== undefined;
+}
+---
+
+<div id="sidebarV2Backdrop" class="sidebar-v2-backdrop" aria-hidden="true" data-sidebar-v2-backdrop>
+</div>
+
+<aside
+  id="sidebarV2"
+  class:list={['sidebar-v2', className]}
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="sidebar-v2-title"
+  aria-hidden="true"
+  data-sidebar-v2
+  data-lang={lang}
+  data-current-path={currentPath}
+  data-menu={JSON.stringify(menu)}
+  data-versions={JSON.stringify(versions)}
+  data-default-version={defaultVersion}
+  {...rest}
+>
+  <h2 id="sidebar-v2-title" class="sr-only">Main menu</h2>
+
+  <!-- Navigation Container (holds all levels) -->
+  <div class="sidebar-v2-nav-container" data-nav-container>
+    <!-- Root Navigation Level (Level 0) -->
+    <nav
+      class="sidebar-v2-nav sidebar-v2-nav--active"
+      aria-label="Main navigation"
+      data-nav-level="0"
+    >
+      <ul class="sidebar-v2-nav-list">
+        {
+          menu.sections?.map((section, sectionIndex) => (
+            <li class="sidebar-v2-section" data-section-index={sectionIndex}>
+              {section.title && <h3 class="sidebar-v2-section-title">{section.title}</h3>}
+              <ul class="sidebar-v2-section-list">
+                {section.items.map((item, itemIndex) => (
+                  <li>
+                    {isLink(item) ? (
+                      <a
+                        href={`/${lang}${item.href}`}
+                        class:list={[
+                          'sidebar-v2-nav-item',
+                          currentPath === `/${lang}${item.href}` && 'sidebar-v2-nav-item--active',
+                        ]}
+                        aria-label={item.ariaLabel}
+                        aria-current={currentPath === `/${lang}${item.href}` ? 'page' : undefined}
+                      >
+                        {item.icon && (
+                          <div class="sidebar-v2-nav-icon">
+                            <Icon
+                              name={`ph:${item.icon}`}
+                              size="24"
+                              color="var(--color-icon-primary)"
+                            />
+                          </div>
+                        )}
+                        <BodyMd vMargin={false} class="sidebar-v2-nav-label">
+                          {item.label}
+                        </BodyMd>
+                      </a>
+                    ) : (
+                      <button
+                        class="sidebar-v2-nav-item"
+                        aria-label={item.ariaLabel}
+                        aria-expanded="false"
+                        type="button"
+                        data-submenu-trigger
+                        data-item-path={`sections.${sectionIndex}.items.${itemIndex}`}
+                        data-item-label={item.label}
+                      >
+                        {item.icon && (
+                          <div class="sidebar-v2-nav-icon">
+                            <Icon
+                              name={`ph:${item.icon}`}
+                              size="24"
+                              color="var(--color-icon-primary)"
+                            />
+                          </div>
+                        )}
+                        <BodyMd vMargin={false} class="sidebar-v2-nav-label">
+                          {item.label}
+                        </BodyMd>
+                        <Icon
+                          name="ph:arrow-right"
+                          size="16"
+                          color="var(--color-icon-secondary)"
+                          class="sidebar-v2-nav-arrow"
+                          aria-hidden="true"
+                        />
+                      </button>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+        {
+          menu.items?.map((item, itemIndex) => (
+            <li>
+              {isLink(item) ? (
+                <a
+                  href={`/${lang}${item.href}`}
+                  class:list={[
+                    'sidebar-v2-nav-item',
+                    currentPath === `/${lang}${item.href}` && 'sidebar-v2-nav-item--active',
+                  ]}
+                  aria-label={item.ariaLabel}
+                  aria-current={currentPath === `/${lang}${item.href}` ? 'page' : undefined}
+                >
+                  {item.icon && (
+                    <div class="sidebar-v2-nav-icon">
+                      <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+                    </div>
+                  )}
+                  <BodyMd vMargin={false} class="sidebar-v2-nav-label">
+                    {item.label}
+                  </BodyMd>
+                </a>
+              ) : (
+                <button
+                  class="sidebar-v2-nav-item"
+                  aria-label={item.ariaLabel}
+                  aria-expanded="false"
+                  type="button"
+                  data-submenu-trigger
+                  data-item-path={`items.${itemIndex}`}
+                  data-item-label={item.label}
+                >
+                  {item.icon && (
+                    <div class="sidebar-v2-nav-icon">
+                      <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+                    </div>
+                  )}
+                  <BodyMd vMargin={false} class="sidebar-v2-nav-label">
+                    {item.label}
+                  </BodyMd>
+                  <Icon
+                    name="ph:arrow-right"
+                    size="16"
+                    color="var(--color-icon-secondary)"
+                    class="sidebar-v2-nav-arrow"
+                    aria-hidden="true"
+                  />
+                </button>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Dynamic Navigation Levels Container (populated via JS) -->
+    <div class="sidebar-v2-dynamic-levels" data-dynamic-levels>
+      <!-- Version Switcher (hidden by default, shown in deeper levels) -->
+      <div
+        class="sidebar-v2-version-switcher sidebar-v2-version-switcher--hidden"
+        data-version-switcher
+      >
+        <label class="sidebar-v2-version-label" for="version-select">
+          <Icon
+            name="ph:git-branch"
+            size="16"
+            color="var(--color-icon-secondary)"
+            aria-hidden="true"
+          />
+          <span class="sr-only">API Version</span>
+        </label>
+        <select
+          id="version-select"
+          class="sidebar-v2-version-select"
+          data-version-select
+          aria-label="Select API version"
+        >
+          {
+            versions.map((version) => (
+              <option
+                value={version.id}
+                selected={version.id === defaultVersion}
+                disabled={version.isDeprecated}
+              >
+                {version.label} {version.isDeprecated ? '(deprecated)' : ''}
+              </option>
+            ))
+          }
+        </select>
+      </div>
+      <!-- Dynamic navigation levels will be inserted here -->
+    </div>
+  </div>
+
+  <!-- Hidden template for navigation level -->
+  <template id="sidebar-v2-nav-template">
+    <nav class="sidebar-v2-nav" aria-label="Submenu navigation" data-nav-level>
+      <button class="sidebar-v2-nav-back" type="button" aria-label="Go back" data-back-button>
+        <Icon
+          name="ph:arrow-line-left"
+          size="16"
+          color="var(--color-icon-primary)"
+          aria-hidden="true"
+        />
+        <Body
+          as="h3"
+          weight="bold"
+          class="sidebar-v2-nav-back-title"
+          data-nav-title
+          vMargin={false}
+        >
+          Navigation
+        </Body>
+      </button>
+      <div class="sidebar-v2-nav-content" data-nav-content>
+        <!-- Content will be populated dynamically -->
+      </div>
+    </nav>
+  </template>
+
+  <!-- Hidden template for section (content populated dynamically) -->
+  <!-- eslint-disable-next-line jsx-a11y/heading-has-content -->
+  <template id="sidebar-v2-section-template">
+    <div class="sidebar-v2-section" data-section>
+      <h4 class="sidebar-v2-section-title" data-section-title aria-hidden="true">Section</h4>
+      <ul class="sidebar-v2-section-list" data-section-list></ul>
+    </div>
+  </template>
+
+  <!-- Hidden template for link item (href populated dynamically via JS) -->
+  <template id="sidebar-v2-link-template">
+    <li>
+      <a class="sidebar-v2-nav-item sidebar-v2-nav-item--inner" href="/placeholder" data-link-item>
+        <span class="sidebar-v2-nav-label" data-link-label></span>
+      </a>
+    </li>
+  </template>
+
+  <!-- Hidden template for button item -->
+  <template id="sidebar-v2-button-template">
+    <li>
+      <button
+        class="sidebar-v2-nav-item sidebar-v2-nav-item--inner sidebar-v2-nav-item--submenu"
+        type="button"
+        data-submenu-trigger
+      >
+        <span class="sidebar-v2-nav-label" data-button-label></span>
+        <Icon
+          name="ph:arrow-right"
+          size="16"
+          color="var(--color-icon-secondary)"
+          class="sidebar-v2-nav-arrow"
+          aria-hidden="true"
+        />
+      </button>
+    </li>
+  </template>
+
+  <!-- Hidden template for arrow icon -->
+  <template id="sidebar-v2-arrow-template">
+    <Icon
+      name="ph:arrow-right"
+      size="16"
+      color="var(--color-icon-secondary)"
+      class="sidebar-v2-nav-arrow"
+      aria-hidden="true"
+    />
+  </template>
+
+  <script>
+    import './SidebarV2Controller';
+  </script>
+</aside>

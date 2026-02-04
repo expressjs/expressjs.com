@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { menuSections, navItems, type MenuSection } from '@config/menu';
+import { navItems, type MenuSection } from '@config/menu';
 import type { collections } from '@/content.config';
 import type {
   NavigationData,
@@ -140,8 +140,9 @@ export async function buildBreadcrumbs(
       .join(' ');
 
     const label =
-      menuSections[collection][part as keyof (typeof menuSections)[typeof collection]] ||
-      menuSection;
+      navItems.find((item) => item.key === collection)?.sections?.[
+        part as keyof (typeof navItems)[number]['sections']
+      ] || menuSection;
 
     if (!isLast) {
       breadcrumbs.push({
