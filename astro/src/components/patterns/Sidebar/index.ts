@@ -1,5 +1,5 @@
 /**
- * SidebarV2 Component Exports
+ * Sidebar Component Exports
  *
  * Enhanced sidebar with unlimited navigation levels and version switching.
  */

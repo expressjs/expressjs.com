@@ -1,7 +1,7 @@
 import type { MenuConfig, MenuLevel, MenuItem, VersionConfig, NavigationLevel } from './types';
 
 /**
- * SidebarV2Controller
+ * SidebarController
  *
  * Enhanced sidebar controller supporting:
  * - Unlimited navigation levels (dynamic stack-based navigation)
@@ -9,13 +9,10 @@ import type { MenuConfig, MenuLevel, MenuItem, VersionConfig, NavigationLevel } 
  * - Focus trap and keyboard navigation
  * - Current page detection and auto-navigation
  */
-export class SidebarV2Controller {
+export class SidebarController {
   private sidebar: HTMLElement | null;
   private backdrop: HTMLElement | null;
   private navContainer: HTMLElement | null;
-  private dynamicLevels: HTMLElement | null;
-  private versionSelect: HTMLSelectElement | null;
-  private versionSwitcher: HTMLElement | null;
 
   private isOpen = false;
   private focusableElements: HTMLElement[] = [];
@@ -28,7 +25,7 @@ export class SidebarV2Controller {
   private lang: string = 'en';
   private currentPath: string = '';
   private navigationStack: NavigationLevel[] = [];
-  private activeLevel = 0;
+  private activeColumn = 0;
   private currentBasePath: string = '';
   private isVersionedContent: boolean = false;
 
@@ -40,25 +37,18 @@ export class SidebarV2Controller {
   private arrowTemplate: HTMLTemplateElement | null = null;
 
   constructor() {
-    this.sidebar = document.querySelector('[data-sidebar-v2]');
-    this.backdrop = document.querySelector('[data-sidebar-v2-backdrop]');
+    this.sidebar = document.querySelector('[data-sidebar]');
+    this.backdrop = document.querySelector('[data-sidebar-backdrop]');
     this.navContainer = document.querySelector('[data-nav-container]');
-    this.dynamicLevels = document.querySelector('[data-dynamic-levels]');
-    this.versionSelect = document.querySelector('[data-version-select]');
-    this.versionSwitcher = document.querySelector('[data-version-switcher]');
 
     // Get templates
-    this.navTemplate = document.getElementById('sidebar-v2-nav-template') as HTMLTemplateElement;
+    this.navTemplate = document.getElementById('sidebar-nav-template') as HTMLTemplateElement;
     this.sectionTemplate = document.getElementById(
-      'sidebar-v2-section-template'
+      'sidebar-section-template'
     ) as HTMLTemplateElement;
-    this.linkTemplate = document.getElementById('sidebar-v2-link-template') as HTMLTemplateElement;
-    this.buttonTemplate = document.getElementById(
-      'sidebar-v2-button-template'
-    ) as HTMLTemplateElement;
-    this.arrowTemplate = document.getElementById(
-      'sidebar-v2-arrow-template'
-    ) as HTMLTemplateElement;
+    this.linkTemplate = document.getElementById('sidebar-link-template') as HTMLTemplateElement;
+    this.buttonTemplate = document.getElementById('sidebar-button-template') as HTMLTemplateElement;
+    this.arrowTemplate = document.getElementById('sidebar-arrow-template') as HTMLTemplateElement;
 
     this.loadConfiguration();
     if (this.sidebar && this.backdrop) this.init();
@@ -85,9 +75,11 @@ export class SidebarV2Controller {
       }
     }
 
-    this.currentVersion = defaultVersion || 'v5';
     this.lang = lang || 'en';
     this.currentPath = currentPath || '';
+
+    // Detect version from URL or use default
+    this.currentVersion = this.detectVersionFromUrl() || defaultVersion || 'v5';
 
     // Initialize root level in navigation stack
     if (this.menu) {
@@ -100,23 +92,26 @@ export class SidebarV2Controller {
     }
   }
 
+  /**
+   * Detect version from current URL path
+   * Looks for patterns like /v5/, /v4/, /v3/
+   */
+  private detectVersionFromUrl(): string | null {
+    for (const version of this.versions) {
+      if (this.currentPath.includes(`/${version.id}/`)) {
+        return version.id;
+      }
+    }
+    return null;
+  }
+
   private init(): void {
-    // Backdrop click closes sidebar
     this.backdrop?.addEventListener('click', () => this.close());
 
-    // Keyboard navigation
     document.addEventListener('keydown', (e) => this.handleKeyDown(e));
-
-    // Custom toggle event
     document.addEventListener('sidebar:toggle', () => this.toggle());
 
-    // Initialize root level navigation handlers
     this.initRootLevelHandlers();
-
-    // Version switcher handler
-    this.versionSelect?.addEventListener('change', (e) => {
-      this.handleVersionChange((e.target as HTMLSelectElement).value);
-    });
   }
 
   private initRootLevelHandlers(): void {
@@ -212,7 +207,7 @@ export class SidebarV2Controller {
     // Create and show the new level UI
     this.createNavLevel(content, title, levelIndex);
     this.slideToLevel(levelIndex);
-    this.activeLevel = levelIndex;
+    this.activeColumn = levelIndex;
 
     // Show/hide version switcher based on versioned content
     this.updateVersionSwitcherVisibility();
@@ -220,31 +215,37 @@ export class SidebarV2Controller {
 
   /**
    * Update version switcher visibility based on current navigation state
+   * Updates all version switchers in dynamically created columns
    */
   private updateVersionSwitcherVisibility(): void {
-    if (!this.versionSwitcher) return;
+    if (!this.navContainer) return;
 
-    if (this.isVersionedContent && this.activeLevel > 0) {
-      this.versionSwitcher.classList.remove('sidebar-v2-version-switcher--hidden');
-    } else {
-      this.versionSwitcher.classList.add('sidebar-v2-version-switcher--hidden');
-    }
+    // Find all version switchers in dynamic columns
+    const versionSwitchers = this.navContainer.querySelectorAll('[data-version-switcher]');
+
+    versionSwitchers.forEach((switcher) => {
+      if (this.isVersionedContent && this.activeColumn > 0) {
+        switcher.classList.remove('sidebar-version-switcher--hidden');
+      } else {
+        switcher.classList.add('sidebar-version-switcher--hidden');
+      }
+    });
   }
 
   /**
    * Go back one navigation level
    */
   private popLevel(): void {
-    if (this.activeLevel <= 0) return;
+    if (this.activeColumn <= 0) return;
 
-    const previousLevel = this.activeLevel - 1;
+    const previousLevel = this.activeColumn - 1;
     this.slideToLevel(previousLevel);
 
     // Remove the popped level after animation
     setTimeout(() => {
       this.navigationStack.pop();
-      this.removeNavLevel(this.activeLevel);
-      this.activeLevel = previousLevel;
+      this.removeNavLevel(this.activeColumn);
+      this.activeColumn = previousLevel;
 
       // Restore basePath and versioned state from previous level
       const prevLevelState = this.navigationStack[previousLevel];
@@ -265,10 +266,10 @@ export class SidebarV2Controller {
    * Create a navigation level element
    */
   private createNavLevel(content: MenuLevel, title: string, levelIndex: number): void {
-    if (!this.navTemplate || !this.dynamicLevels) return;
+    if (!this.navTemplate || !this.navContainer) return;
 
     const navClone = this.navTemplate.content.cloneNode(true) as DocumentFragment;
-    const nav = navClone.querySelector('.sidebar-v2-nav') as HTMLElement;
+    const nav = navClone.querySelector('.sidebar-column') as HTMLElement;
 
     if (!nav) return;
 
@@ -283,13 +284,22 @@ export class SidebarV2Controller {
     const backButton = nav.querySelector('[data-back-button]');
     backButton?.addEventListener('click', () => this.popLevel());
 
+    // Setup version select in this column
+    const versionSelect = nav.querySelector('[data-version-select]') as HTMLSelectElement | null;
+    if (versionSelect) {
+      versionSelect.value = this.currentVersion;
+      versionSelect.addEventListener('change', (e) => {
+        this.handleVersionChange((e.target as HTMLSelectElement).value);
+      });
+    }
+
     // Populate content
     const contentContainer = nav.querySelector('[data-nav-content]');
     if (contentContainer) {
       this.populateNavContent(contentContainer as HTMLElement, content, levelIndex);
     }
 
-    this.dynamicLevels.appendChild(nav);
+    this.navContainer.appendChild(nav);
   }
 
   /**
@@ -314,7 +324,7 @@ export class SidebarV2Controller {
     // Render standalone items (not in a section)
     if (content.items && content.items.length > 0) {
       const list = document.createElement('ul');
-      list.className = 'sidebar-v2-section-list sidebar-v2-section-list--no-title';
+      list.className = 'sidebar-section-list sidebar-section-list--no-title';
 
       content.items.forEach((item, itemIndex) => {
         const li = this.createItemElement(item, levelIndex, `items.${itemIndex}`);
@@ -335,17 +345,17 @@ export class SidebarV2Controller {
     basePath: string
   ): HTMLElement {
     const section = document.createElement('div');
-    section.className = 'sidebar-v2-section';
+    section.className = 'sidebar-section';
 
     if (title) {
       const titleEl = document.createElement('h4');
-      titleEl.className = 'sidebar-v2-section-title';
+      titleEl.className = 'sidebar-section-title';
       titleEl.textContent = title;
       section.appendChild(titleEl);
     }
 
     const list = document.createElement('ul');
-    list.className = 'sidebar-v2-section-list';
+    list.className = 'sidebar-section-list';
 
     items.forEach((item, itemIndex) => {
       const li = this.createItemElement(item, levelIndex, `${basePath}.${itemIndex}`);
@@ -366,13 +376,13 @@ export class SidebarV2Controller {
       // It's a link
       const href = this.resolveHref(item.href, item.version);
       const a = document.createElement('a');
-      a.className = 'sidebar-v2-nav-item sidebar-v2-nav-item--inner';
+      a.className = 'sidebar-nav-item sidebar-nav-item--inner';
       a.href = href;
       a.textContent = item.label;
 
       if (this.currentPath === href) {
         a.setAttribute('aria-current', 'page');
-        a.classList.add('sidebar-v2-nav-item--active');
+        a.classList.add('sidebar-nav-item--active');
       }
 
       li.appendChild(a);
@@ -380,15 +390,14 @@ export class SidebarV2Controller {
       // It's a button with submenu
       const button = document.createElement('button');
       button.type = 'button';
-      button.className =
-        'sidebar-v2-nav-item sidebar-v2-nav-item--inner sidebar-v2-nav-item--submenu';
+      button.className = 'sidebar-nav-item sidebar-nav-item--inner sidebar-nav-item--submenu';
       button.dataset.submenuTrigger = '';
       button.dataset.itemPath = itemPath;
       button.dataset.itemLabel = item.label;
       button.setAttribute('aria-expanded', 'false');
 
       const labelSpan = document.createElement('span');
-      labelSpan.className = 'sidebar-v2-nav-label';
+      labelSpan.className = 'sidebar-nav-label';
       labelSpan.textContent = item.label;
       button.appendChild(labelSpan);
 
@@ -397,7 +406,7 @@ export class SidebarV2Controller {
         button.appendChild(this.arrowTemplate.content.cloneNode(true));
       } else {
         const arrow = document.createElement('span');
-        arrow.className = 'sidebar-v2-nav-arrow';
+        arrow.className = 'sidebar-nav-arrow';
         arrow.innerHTML = '→';
         button.appendChild(arrow);
       }
@@ -462,7 +471,7 @@ export class SidebarV2Controller {
    * Remove a navigation level element
    */
   private removeNavLevel(levelIndex: number): void {
-    const nav = this.dynamicLevels?.querySelector(`[data-nav-level="${levelIndex}"]`);
+    const nav = this.navContainer?.querySelector(`[data-nav-level="${levelIndex}"]`);
     nav?.remove();
   }
 
@@ -473,28 +482,24 @@ export class SidebarV2Controller {
     if (!this.navContainer) return;
 
     // Update all nav levels
-    const allNavs = this.navContainer.querySelectorAll('.sidebar-v2-nav');
+    const allNavColumns = this.navContainer.querySelectorAll('.sidebar-column');
 
-    allNavs.forEach((nav) => {
+    allNavColumns.forEach((nav) => {
       const navLevel = parseInt((nav as HTMLElement).dataset.navLevel || '0', 10);
 
-      nav.classList.remove(
-        'sidebar-v2-nav--active',
-        'sidebar-v2-nav--slide-out',
-        'sidebar-v2-nav--slide-in'
-      );
+      nav.classList.remove('sidebar-column--active');
 
       if (navLevel < levelIndex) {
-        nav.classList.add('sidebar-v2-nav--slide-out');
         nav.setAttribute('aria-hidden', 'true');
       } else if (navLevel === levelIndex) {
-        nav.classList.add('sidebar-v2-nav--active');
+        nav.classList.add('sidebar-column--active');
         nav.setAttribute('aria-hidden', 'false');
       } else {
-        // Levels after active should be hidden to the right
         nav.setAttribute('aria-hidden', 'true');
       }
     });
+
+    this.navContainer.style.transform = `translateX(-${levelIndex * 100}%)`;
   }
 
   /**
@@ -552,7 +557,7 @@ export class SidebarV2Controller {
    */
   private handleKeyDown(e: KeyboardEvent): void {
     if (e.key === 'Escape' && this.isOpen) {
-      if (this.activeLevel > 0) {
+      if (this.activeColumn > 0) {
         this.popLevel();
       } else {
         this.close();
@@ -572,8 +577,8 @@ export class SidebarV2Controller {
 
     this.sidebar.setAttribute('aria-hidden', 'false');
     this.backdrop.setAttribute('aria-hidden', 'false');
-    this.sidebar.classList.add('sidebar-v2--open');
-    this.backdrop.classList.add('sidebar-v2-backdrop--visible');
+    this.sidebar.classList.add('sidebar--open');
+    this.backdrop.classList.add('sidebar-backdrop--visible');
     document.body.style.overflow = 'hidden';
 
     // Auto-navigate to current page if found
@@ -607,8 +612,8 @@ export class SidebarV2Controller {
 
     this.sidebar.setAttribute('aria-hidden', 'true');
     this.backdrop.setAttribute('aria-hidden', 'true');
-    this.sidebar.classList.remove('sidebar-v2--open');
-    this.backdrop.classList.remove('sidebar-v2-backdrop--visible');
+    this.sidebar.classList.remove('sidebar--open');
+    this.backdrop.classList.remove('sidebar-backdrop--visible');
 
     // Reset to root level after close animation
     setTimeout(() => {
@@ -624,9 +629,10 @@ export class SidebarV2Controller {
    * Reset navigation to root level
    */
   private resetToRootLevel(): void {
-    // Remove all dynamic levels
-    if (this.dynamicLevels) {
-      this.dynamicLevels.innerHTML = '';
+    // Remove all dynamic levels (levels > 0)
+    if (this.navContainer) {
+      const dynamicColumns = this.navContainer.querySelectorAll('.sidebar-dynamic-column');
+      dynamicColumns.forEach((col) => col.remove());
     }
 
     // Reset navigation stack
@@ -643,7 +649,7 @@ export class SidebarV2Controller {
     this.currentBasePath = '';
     this.isVersionedContent = false;
 
-    this.activeLevel = 0;
+    this.activeColumn = 0;
     this.slideToLevel(0);
 
     // Hide version switcher
@@ -672,14 +678,19 @@ export class SidebarV2Controller {
    * Set version programmatically
    */
   public setVersion(version: string): void {
-    if (this.versionSelect) {
-      this.versionSelect.value = version;
+    // Update all version selects in the nav container
+    if (this.navContainer) {
+      const versionSelects =
+        this.navContainer.querySelectorAll<HTMLSelectElement>('[data-version-select]');
+      versionSelects.forEach((select) => {
+        select.value = version;
+      });
     }
     this.handleVersionChange(version);
   }
 }
 
 // Initialize and expose globally
-const sidebarV2Controller = new SidebarV2Controller();
-(window as Window & { sidebarV2Controller?: SidebarV2Controller }).sidebarV2Controller =
-  sidebarV2Controller;
+const sidebarController = new SidebarController();
+(window as Window & { sidebarController?: SidebarController }).sidebarController =
+  sidebarController;

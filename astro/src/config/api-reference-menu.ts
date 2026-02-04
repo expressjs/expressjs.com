@@ -3,16 +3,16 @@ export const apiReferenceMenu = {
     {
       title: 'Application',
       items: [
-        { href: `/application/application`, label: 'Overview' },
+        { href: `/application/overview`, label: 'Overview' },
         { href: `/application/app-all`, label: 'app.all' },
-        { href: `/application/app-delete`, label: 'app.delete' },
+        { href: `/application/app-delete-method`, label: 'app.delete' },
       ],
     },
     {
       title: 'Request',
       items: [
-        { href: `/request/request`, label: 'Overview' },
-        { href: `/request/req-accept`, label: 'req.accepts' },
+        { href: `/request/overview`, label: 'Overview' },
+        { href: `/request/req-accepts`, label: 'req.accepts' },
       ],
     },
   ],

@@ -13,3 +13,7 @@ export { Grid, Col, Flex, FlexItem } from './Grid';
 
 // Button
 export { Button } from './Button';
+
+// Select
+export { Select } from './Select';
+export type { SelectOption, SelectSize, SelectVariant } from './Select';

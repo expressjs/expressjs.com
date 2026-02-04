@@ -1,0 +1,103 @@
+/**
+ * Select Primitive Styles
+ */
+
+@layer primitives {
+  .select-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .select-wrapper--full-width {
+    width: 100%;
+  }
+
+  .select-caret {
+    position: absolute;
+    right: var(--space-2);
+    pointer-events: none;
+    color: var(--color-icon-secondary);
+    width: 16px;
+    height: 16px;
+  }
+
+  .select {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-mute);
+    border-radius: var(--radius-base);
+    cursor: pointer;
+    appearance: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  /* Sizes */
+  .select--size-sm {
+    padding: var(--space-1) var(--space-6) var(--space-1) var(--space-2);
+    font-size: var(--font-size-xs);
+  }
+
+  .select--size-md {
+    padding: var(--space-2) var(--space-6) var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .select--size-lg {
+    padding: var(--space-3) var(--space-8) var(--space-3) var(--space-4);
+    font-size: var(--font-size-base);
+  }
+
+  /* Variants */
+  .select--variant-default {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border-mute);
+  }
+
+  .select--variant-ghost {
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  .select--variant-ghost:hover {
+    background-color: var(--color-bg-hover);
+  }
+
+  .select--variant-minimal {
+    background-color: transparent;
+    border: none;
+    padding-left: 0;
+  }
+
+  /* Full width */
+  .select--full-width {
+    width: 100%;
+  }
+
+  /* States */
+  .select:hover {
+    border-color: var(--color-border-primary);
+  }
+
+  .select:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+    border-color: var(--color-border-secondary);
+  }
+
+  .select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Disabled options */
+  .select option:disabled {
+    color: var(--color-text-mute);
+  }
+}

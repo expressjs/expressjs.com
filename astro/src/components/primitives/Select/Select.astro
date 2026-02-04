@@ -1,0 +1,77 @@
+---
+/**
+ * Select Primitive Component
+ *
+ * A styled select dropdown with size and variant options.
+ *
+ * @example
+ * <Select
+ *   options={[
+ *     { value: 'v5', label: 'v5.x', selected: true },
+ *     { value: 'v4', label: 'v4.x' },
+ *   ]}
+ *   size="md"
+ *   variant="default"
+ *   aria-label="Select version"
+ * />
+ */
+
+import './Select.css';
+import type { HTMLAttributes } from 'astro/types';
+import type { SelectBaseProps, SelectOption } from './types';
+import { Icon } from 'astro-icon/components';
+
+type Props = SelectBaseProps & HTMLAttributes<'select'>;
+
+const {
+  size = 'md',
+  variant = 'default',
+  options = [],
+  value,
+  placeholder,
+  fullWidth = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+function isSelected(option: SelectOption, currentValue?: string): boolean {
+  if (currentValue !== undefined) {
+    return option.value === currentValue;
+  }
+  return option.selected ?? false;
+}
+---
+
+<div class:list={['select-wrapper', fullWidth && 'select-wrapper--full-width']}>
+  <select
+    class:list={[
+      'select',
+      `select--size-${size}`,
+      `select--variant-${variant}`,
+      fullWidth && 'select--full-width',
+      className,
+    ]}
+    {...rest}
+  >
+    {
+      placeholder && (
+        <option value="" disabled selected={!value}>
+          {placeholder}
+        </option>
+      )
+    }
+    {
+      options.map((option) => (
+        <option
+          value={option.value}
+          selected={isSelected(option, value)}
+          disabled={option.disabled}
+        >
+          {option.label}
+        </option>
+      ))
+    }
+    <slot />
+  </select>
+  <Icon name="ph:caret-down" class="select-caret" aria-hidden="true" />
+</div>
