@@ -274,8 +274,74 @@ export class SidebarController {
     const currentPath = this.sidebar?.dataset.currentPath || '';
     if (currentPath.includes(`/${previousVersion}/`)) {
       const newPath = currentPath.replace(`/${previousVersion}/`, `/${newVersion}/`);
+
+      // Check if the current page is omitted in the target version
+      if (this.isPathOmittedForVersion(currentPath, newVersion)) {
+        // Find the first available link in the current nav-level for the target version
+        const fallbackPath = this.getFirstAvailableLinkForVersion(newVersion, previousVersion);
+        if (fallbackPath) {
+          window.location.href = fallbackPath;
+          return;
+        }
+      }
+
       window.location.href = newPath;
     }
+  }
+
+  /**
+   * Check if the current path corresponds to a menu item that is omitted for the target version
+   */
+  private isPathOmittedForVersion(currentPath: string, targetVersion: string): boolean {
+    // Find the active link in the sidebar
+    const activeLink = this.sidebar?.querySelector(
+      'a.sidebar-nav-item--active[data-omit-from]'
+    ) as HTMLAnchorElement;
+
+    if (!activeLink) {
+      return false;
+    }
+
+    const omitFrom = activeLink.dataset.omitFrom?.split(',') || [];
+    return omitFrom.includes(targetVersion);
+  }
+
+  /**
+   * Get the first available link in the current navigation level for the target version
+   */
+  private getFirstAvailableLinkForVersion(
+    targetVersion: string,
+    previousVersion: string
+  ): string | null {
+    // Get the current active panel/column
+    const activeSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
+    const activePanel = this.sidebar?.querySelector(
+      `[data-parent-id="${activeSubmenuId}"]`
+    ) as HTMLElement;
+
+    if (!activePanel) {
+      return null;
+    }
+
+    // Find all links in the active panel
+    const links = activePanel.querySelectorAll(
+      'a.sidebar-nav-item[href]'
+    ) as NodeListOf<HTMLAnchorElement>;
+
+    for (const link of links) {
+      const omitFrom = link.dataset.omitFrom?.split(',') || [];
+      // If this link is NOT omitted for the target version, use it
+      if (!omitFrom.includes(targetVersion)) {
+        // Convert the href to the target version
+        const href = link.getAttribute('href') || '';
+        if (href.includes(`/${previousVersion}/`)) {
+          return href.replace(`/${previousVersion}/`, `/${targetVersion}/`);
+        }
+        return href;
+      }
+    }
+
+    return null;
   }
 
   /**

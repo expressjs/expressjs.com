@@ -5,9 +5,9 @@
  * Recursively renders menu levels statically at build time.
  */
 
-import type { Menu, MenuItem } from '@/config/types';
+import type { Menu, MenuItem, VersionPrefix } from '@/config/types';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
-import { Body, BodyMd, BodySm } from '@/components/primitives';
+import { Body, BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
 
@@ -70,6 +70,27 @@ function hasSubmenu(item: MenuItem): item is MenuItem & { submenu: Menu } {
 }
 
 /**
+ * Check if an item should be omitted for the current version
+ */
+function shouldOmitItem(item: MenuItem): boolean {
+  return item.omitFrom?.includes(version as VersionPrefix) ?? false;
+}
+
+/**
+ * Check if a section should be omitted for the current version
+ */
+function shouldOmitSection(section: { omitFrom?: VersionPrefix[] }): boolean {
+  return section.omitFrom?.includes(version as VersionPrefix) ?? false;
+}
+
+/**
+ * Filter items based on the current version
+ */
+function filterItems(items: MenuItem[]): MenuItem[] {
+  return items.filter((item) => !shouldOmitItem(item));
+}
+
+/**
  * Generate unique ID for a menu item
  */
 function getItemId(sectionIndex: number | null, itemIndex: number): string {
@@ -102,7 +123,8 @@ function collectAllSubmenus(
   currentVersioned: boolean
 ) {
   const collectFromItems = (items: MenuItem[], sectionIndex: number | null) => {
-    items.forEach((item, itemIndex) => {
+    const filteredItems = filterItems(items);
+    filteredItems.forEach((item, itemIndex) => {
       if (hasSubmenu(item)) {
         const itemId =
           sectionIndex !== null
@@ -133,14 +155,16 @@ function collectAllSubmenus(
     });
   };
 
-  // Collect from sections
-  menuToScan.sections?.forEach((section, sectionIndex) => {
-    collectFromItems(section.items, sectionIndex);
-  });
+  // Collect from sections (filtering out omitted sections)
+  menuToScan.sections
+    ?.filter((section) => !shouldOmitSection(section))
+    .forEach((section, sectionIndex) => {
+      collectFromItems(section.items, sectionIndex);
+    });
 
   // Collect from standalone items
   if (menuToScan.items) {
-    collectFromItems(menuToScan.items, null);
+    collectFromItems(filterItems(menuToScan.items), null);
   }
 }
 
@@ -208,7 +232,9 @@ function submenuContainsCurrentPath(
   const normalizedCurrentPath = normalizePath(currentPath);
 
   const checkItems = (items: MenuItem[]): boolean => {
-    for (const item of items) {
+    // Filter items based on current version before checking
+    const filteredItems = filterItems(items);
+    for (const item of filteredItems) {
       if (isLink(item)) {
         const href = resolveSubmenuHref(item.href, submenuBasePath, submenuVersioned);
         if (normalizedCurrentPath === normalizePath(href)) {
@@ -227,8 +253,8 @@ function submenuContainsCurrentPath(
     return false;
   };
 
-  // Check sections
-  for (const section of submenuMenu.sections || []) {
+  // Check sections (filtering out omitted sections)
+  for (const section of submenuMenu.sections?.filter((s) => !shouldOmitSection(s)) || []) {
     if (checkItems(section.items)) {
       return true;
     }
@@ -276,84 +302,90 @@ const initialActiveLevel = level === 0 ? calculateInitialActiveLevel() : 0;
     >
       <nav class="sidebar-nav" aria-label="Main navigation">
         <ul class="sidebar-nav-list">
-          {menu.sections?.map((section, sectionIndex) => (
-            <li class="sidebar-section" data-section-index={sectionIndex}>
-              {section.title && <Body as="h3">{section.title}</Body>}
-              <ul class="sidebar-section-list">
-                {section.items.map((item, itemIndex) => {
-                  const itemId = getItemId(sectionIndex, itemIndex);
+          {menu.sections
+            ?.filter((section) => !shouldOmitSection(section))
+            .map((section, sectionIndex) => (
+              <li class="sidebar-section" data-section-index={sectionIndex}>
+                {section.title && <Body as="h3">{section.title}</Body>}
+                <ul class="sidebar-section-list">
+                  {filterItems(section.items).map((item, itemIndex) => {
+                    const itemId = getItemId(sectionIndex, itemIndex);
 
-                  if (isLink(item)) {
-                    const href = resolveHref(item.href);
-                    const isActive = currentPath === href;
+                    if (isLink(item)) {
+                      const href = resolveHref(item.href);
+                      const isActive = currentPath === href;
 
-                    return (
-                      <li>
-                        <a
-                          href={href}
-                          class:list={['sidebar-nav-item', isActive && 'sidebar-nav-item--active']}
-                          aria-label={item.ariaLabel}
-                          aria-current={isActive ? 'page' : undefined}
-                        >
-                          {item.icon && (
-                            <div class="sidebar-nav-icon">
-                              <Icon
-                                name={`ph:${item.icon}`}
-                                size="24"
-                                color="var(--color-icon-primary)"
-                              />
-                            </div>
-                          )}
-                          <BodyMd vMargin={false} class="sidebar-nav-label">
-                            {item.label}
-                          </BodyMd>
-                        </a>
-                      </li>
-                    );
-                  } else if (hasSubmenu(item)) {
-                    const submenuId = `submenu-${itemId}`;
+                      return (
+                        <li>
+                          <a
+                            href={href}
+                            class:list={[
+                              'sidebar-nav-item',
+                              isActive && 'sidebar-nav-item--active',
+                            ]}
+                            aria-label={item.ariaLabel}
+                            aria-current={isActive ? 'page' : undefined}
+                            data-omit-from={item.omitFrom?.join(',') || undefined}
+                          >
+                            {item.icon && (
+                              <div class="sidebar-nav-icon">
+                                <Icon
+                                  name={`ph:${item.icon}`}
+                                  size="24"
+                                  color="var(--color-icon-primary)"
+                                />
+                              </div>
+                            )}
+                            <BodyMd vMargin={false} class="sidebar-nav-label">
+                              {item.label}
+                            </BodyMd>
+                          </a>
+                        </li>
+                      );
+                    } else if (hasSubmenu(item)) {
+                      const submenuId = `submenu-${itemId}`;
 
-                    return (
-                      <li>
-                        <button
-                          class="sidebar-nav-item"
-                          aria-label={item.ariaLabel}
-                          aria-expanded="false"
-                          aria-controls={submenuId}
-                          type="button"
-                          data-submenu-trigger
-                          data-target-id={submenuId}
-                          data-target-level={level + 1}
-                        >
-                          {item.icon && (
-                            <div class="sidebar-nav-icon">
-                              <Icon
-                                name={`ph:${item.icon}`}
-                                size="24"
-                                color="var(--color-icon-primary)"
-                              />
-                            </div>
-                          )}
-                          <BodyMd vMargin={false} class="sidebar-nav-label">
-                            {item.label}
-                          </BodyMd>
-                          <Icon
-                            name="ph:arrow-right"
-                            size="16"
-                            color="var(--color-icon-secondary)"
-                            class="sidebar-nav-arrow"
-                            aria-hidden="true"
-                          />
-                        </button>
-                      </li>
-                    );
-                  }
-                  return null;
-                })}
-              </ul>
-            </li>
-          ))}
-          {menu.items?.map((item, itemIndex) => {
+                      return (
+                        <li>
+                          <button
+                            class="sidebar-nav-item"
+                            aria-label={item.ariaLabel}
+                            aria-expanded="false"
+                            aria-controls={submenuId}
+                            type="button"
+                            data-submenu-trigger
+                            data-target-id={submenuId}
+                            data-target-level={level + 1}
+                          >
+                            {item.icon && (
+                              <div class="sidebar-nav-icon">
+                                <Icon
+                                  name={`ph:${item.icon}`}
+                                  size="24"
+                                  color="var(--color-icon-primary)"
+                                />
+                              </div>
+                            )}
+                            <BodyMd vMargin={false} class="sidebar-nav-label">
+                              {item.label}
+                            </BodyMd>
+                            <Icon
+                              name="ph:arrow-right"
+                              size="16"
+                              color="var(--color-icon-secondary)"
+                              class="sidebar-nav-arrow"
+                              aria-hidden="true"
+                            />
+                          </button>
+                        </li>
+                      );
+                    }
+                    return null;
+                  })}
+                </ul>
+              </li>
+            ))}
+          {filterItems(menu.items ?? []).map((item, itemIndex) => {
             const itemId = getItemId(null, itemIndex);
 
             if (isLink(item)) {
@@ -371,6 +403,7 @@ const initialActiveLevel = level === 0 ? calculateInitialActiveLevel() : 0;
                     ]}
                     aria-label={item.ariaLabel}
                     aria-current={isActive ? 'page' : undefined}
+                    data-omit-from={item.omitFrom?.join(',') || undefined}
                   >
                     {item.icon && (
                       <div class="sidebar-nav-icon">
@@ -488,74 +521,77 @@ const initialActiveLevel = level === 0 ? calculateInitialActiveLevel() : 0;
                     </Body>
                   </button>
                   <div class="sidebar-nav-content">
-                    {submenu.menu.sections?.map((section, sectionIndex) => (
-                      <div class="sidebar-section" data-section-index={sectionIndex}>
-                        {section.title && (
-                          <Body as="h3" weight="bold">
-                            {section.title}
-                          </Body>
-                        )}
-                        <ul class="sidebar-section-list">
-                          {section.items.map((item, itemIndex) => {
-                            const itemId = getSubmenuItemId(submenu.id, sectionIndex, itemIndex);
+                    {submenu.menu.sections
+                      ?.filter((section) => !shouldOmitSection(section))
+                      .map((section, sectionIndex) => (
+                        <div class="sidebar-section" data-section-index={sectionIndex}>
+                          {section.title && (
+                            <Body as="h3" weight="bold">
+                              {section.title}
+                            </Body>
+                          )}
+                          <ul class="sidebar-section-list">
+                            {filterItems(section.items).map((item, itemIndex) => {
+                              const itemId = getSubmenuItemId(submenu.id, sectionIndex, itemIndex);
 
-                            if (isLink(item)) {
-                              const href = resolveSubmenuHref(
-                                item.href,
-                                submenu.basePath,
-                                submenu.versioned
-                              );
-                              const isActive = currentPath === href;
+                              if (isLink(item)) {
+                                const href = resolveSubmenuHref(
+                                  item.href,
+                                  submenu.basePath,
+                                  submenu.versioned
+                                );
+                                const isActive = currentPath === href;
 
-                              return (
-                                <li>
-                                  <a
-                                    href={href}
-                                    class:list={[
-                                      'sidebar-nav-item',
-                                      'sidebar-nav-item--nested',
-                                      isActive && 'sidebar-nav-item--active',
-                                    ]}
-                                    aria-current={isActive ? 'page' : undefined}
-                                  >
-                                    <BodyMd vMargin={false}>{item.label}</BodyMd>
-                                  </a>
-                                </li>
-                              );
-                            } else if (hasSubmenu(item)) {
-                              const submenuId = `submenu-${itemId}`;
+                                return (
+                                  <li>
+                                    <a
+                                      href={href}
+                                      class:list={[
+                                        'sidebar-nav-item',
+                                        'sidebar-nav-item--nested',
+                                        isActive && 'sidebar-nav-item--active',
+                                      ]}
+                                      aria-current={isActive ? 'page' : undefined}
+                                      data-omit-from={item.omitFrom?.join(',') || undefined}
+                                    >
+                                      <BodyMd vMargin={false}>{item.label}</BodyMd>
+                                    </a>
+                                  </li>
+                                );
+                              } else if (hasSubmenu(item)) {
+                                const submenuId = `submenu-${itemId}`;
 
-                              return (
-                                <li>
-                                  <button
-                                    class="sidebar-nav-item sidebar-nav-item--nested sidebar-nav-item--submenu"
-                                    aria-expanded="false"
-                                    aria-controls={submenuId}
-                                    type="button"
-                                    data-submenu-trigger
-                                    data-target-id={submenuId}
-                                    data-target-level={navLevel + 1}
-                                  >
-                                    <BodyMd vMargin={false}>{item.label}</BodyMd>
-                                    <Icon
-                                      name="ph:arrow-right"
-                                      size="16"
-                                      color="var(--color-icon-secondary)"
-                                      class="sidebar-nav-arrow"
-                                      aria-hidden="true"
-                                    />
-                                  </button>
-                                </li>
-                              );
-                            }
-                            return null;
-                          })}
-                        </ul>
-                      </div>
-                    ))}
-                    {submenu.menu.items && submenu.menu.items.length > 0 && (
+                                return (
+                                  <li>
+                                    <button
+                                      class="sidebar-nav-item sidebar-nav-item--nested sidebar-nav-item--submenu"
+                                      aria-expanded="false"
+                                      aria-controls={submenuId}
+                                      type="button"
+                                      data-submenu-trigger
+                                      data-target-id={submenuId}
+                                      data-target-level={navLevel + 1}
+                                    >
+                                      <BodyMd vMargin={false}>{item.label}</BodyMd>
+                                      <Icon
+                                        name="ph:arrow-right"
+                                        size="16"
+                                        color="var(--color-icon-secondary)"
+                                        class="sidebar-nav-arrow"
+                                        aria-hidden="true"
+                                      />
+                                    </button>
+                                  </li>
+                                );
+                              }
+                              return null;
+                            })}
+                          </ul>
+                        </div>
+                      ))}
+                    {submenu.menu.items && filterItems(submenu.menu.items).length > 0 && (
                       <ul class="sidebar-section-list">
-                        {submenu.menu.items.map((item, itemIndex) => {
+                        {filterItems(submenu.menu.items).map((item, itemIndex) => {
                           const itemId = getSubmenuItemId(submenu.id, null, itemIndex);
 
                           if (isLink(item)) {
@@ -576,6 +612,7 @@ const initialActiveLevel = level === 0 ? calculateInitialActiveLevel() : 0;
                                     isActive && 'sidebar-nav-item--active',
                                   ]}
                                   aria-current={isActive ? 'page' : undefined}
+                                  data-omit-from={item.omitFrom?.join(',') || undefined}
                                 >
                                   <span class="sidebar-nav-label">{item.label}</span>
                                 </a>
