@@ -1,0 +1,475 @@
+---
+/**
+ * SidebarMenu Component
+ *
+ * Recursively renders menu levels statically at build time.
+ * All menu content is available in the initial HTML for:
+ * - Better SEO (all links crawlable)
+ * - Better accessibility (works without JS)
+ * - Better performance (no JS needed for menu content)
+ */
+
+import type { Menu, MenuItem } from '@/config/types';
+import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
+import { Body, BodyMd } from '@/components/primitives';
+import { Icon } from 'astro-icon/components';
+import { VersionSwitcher } from '@/components/patterns';
+
+interface Props {
+  menu: Menu;
+  level: number;
+  title?: string;
+  lang: string;
+  currentPath: string;
+  basePath?: string;
+  versioned?: boolean;
+  version?: string;
+  versions?: VersionConfig[];
+  defaultVersion?: string;
+  parentId?: string;
+}
+
+const {
+  menu,
+  level,
+  title = 'Navigation',
+  lang,
+  currentPath,
+  basePath = '',
+  versioned = false,
+  version = 'v5',
+  versions = [],
+  defaultVersion = 'v5',
+  parentId = 'root',
+} = Astro.props;
+
+/**
+ * Resolve href with basePath and version
+ */
+function resolveHref(href: string): string {
+  let fullPath = '';
+
+  if (versioned && basePath) {
+    fullPath = `/${lang}${basePath}/${version}${href}`;
+  } else if (basePath) {
+    fullPath = `/${lang}${basePath}${href}`;
+  } else {
+    fullPath = `/${lang}${href}`;
+  }
+
+  return fullPath;
+}
+
+/**
+ * Check if item is a link (has href)
+ */
+function isLink(item: MenuItem): item is MenuItem & { href: string } {
+  return 'href' in item && item.href !== undefined;
+}
+
+/**
+ * Check if item has a submenu
+ */
+function hasSubmenu(item: MenuItem): item is MenuItem & { submenu: Menu } {
+  return 'submenu' in item && item.submenu !== undefined;
+}
+
+/**
+ * Generate unique ID for a menu item
+ */
+function getItemId(sectionIndex: number | null, itemIndex: number): string {
+  if (sectionIndex !== null) {
+    return `${parentId}-s${sectionIndex}-i${itemIndex}`;
+  }
+  return `${parentId}-i${itemIndex}`;
+}
+
+// Collect all submenus for recursive rendering
+type SubmenuData = {
+  menu: Menu;
+  title: string;
+  id: string;
+  basePath: string;
+  versioned: boolean;
+};
+
+const submenus: SubmenuData[] = [];
+
+// Helper to collect submenu data from sections
+menu.sections?.forEach((section, sectionIndex) => {
+  section.items.forEach((item, itemIndex) => {
+    if (hasSubmenu(item)) {
+      const itemId = getItemId(sectionIndex, itemIndex);
+      const submenuId = `submenu-${itemId}`;
+      submenus.push({
+        menu: item.submenu,
+        title: item.label,
+        id: submenuId,
+        basePath: item.submenu.basePath || basePath,
+        versioned: item.submenu.versioned ?? versioned,
+      });
+    }
+  });
+});
+
+// Helper to collect submenu data from standalone items
+menu.items?.forEach((item, itemIndex) => {
+  if (hasSubmenu(item)) {
+    const itemId = getItemId(null, itemIndex);
+    const submenuId = `submenu-${itemId}`;
+    submenus.push({
+      menu: item.submenu,
+      title: item.label,
+      id: submenuId,
+      basePath: item.submenu.basePath || basePath,
+      versioned: item.submenu.versioned ?? versioned,
+    });
+  }
+});
+---
+
+{/* Root Level (level 0) */}
+{
+  level === 0 && (
+    <div
+      class="sidebar-column sidebar-column--root sidebar-column--active"
+      data-nav-level={level}
+      data-parent-id={parentId}
+      aria-hidden="false"
+    >
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <ul class="sidebar-nav-list">
+          {menu.sections?.map((section, sectionIndex) => (
+            <li class="sidebar-section" data-section-index={sectionIndex}>
+              {section.title && <h3 class="sidebar-section-title">{section.title}</h3>}
+              <ul class="sidebar-section-list">
+                {section.items.map((item, itemIndex) => {
+                  const itemId = getItemId(sectionIndex, itemIndex);
+
+                  if (isLink(item)) {
+                    const href = resolveHref(item.href);
+                    const isActive = currentPath === href;
+
+                    return (
+                      <li>
+                        <a
+                          href={href}
+                          class:list={[
+                            'sidebar-nav-item',
+                            'sidebar-nav-item--outer',
+                            isActive && 'sidebar-nav-item--active',
+                          ]}
+                          aria-label={item.ariaLabel}
+                          aria-current={isActive ? 'page' : undefined}
+                        >
+                          {item.icon && (
+                            <div class="sidebar-nav-icon">
+                              <Icon
+                                name={`ph:${item.icon}`}
+                                size="24"
+                                color="var(--color-icon-primary)"
+                              />
+                            </div>
+                          )}
+                          <BodyMd vMargin={false} class="sidebar-nav-label">
+                            {item.label}
+                          </BodyMd>
+                        </a>
+                      </li>
+                    );
+                  } else if (hasSubmenu(item)) {
+                    const submenuId = `submenu-${itemId}`;
+
+                    return (
+                      <li>
+                        <button
+                          class="sidebar-nav-item sidebar-nav-item--outer"
+                          aria-label={item.ariaLabel}
+                          aria-expanded="false"
+                          aria-controls={submenuId}
+                          type="button"
+                          data-submenu-trigger
+                          data-target-id={submenuId}
+                          data-target-level={level + 1}
+                        >
+                          {item.icon && (
+                            <div class="sidebar-nav-icon">
+                              <Icon
+                                name={`ph:${item.icon}`}
+                                size="24"
+                                color="var(--color-icon-primary)"
+                              />
+                            </div>
+                          )}
+                          <BodyMd vMargin={false} class="sidebar-nav-label">
+                            {item.label}
+                          </BodyMd>
+                          <Icon
+                            name="ph:arrow-right"
+                            size="16"
+                            color="var(--color-icon-secondary)"
+                            class="sidebar-nav-arrow"
+                            aria-hidden="true"
+                          />
+                        </button>
+                      </li>
+                    );
+                  }
+                  return null;
+                })}
+              </ul>
+            </li>
+          ))}
+          {menu.items?.map((item, itemIndex) => {
+            const itemId = getItemId(null, itemIndex);
+
+            if (isLink(item)) {
+              const href = resolveHref(item.href);
+              const isActive = currentPath === href;
+
+              return (
+                <li>
+                  <a
+                    href={href}
+                    class:list={[
+                      'sidebar-nav-item',
+                      'sidebar-nav-item--outer',
+                      isActive && 'sidebar-nav-item--active',
+                    ]}
+                    aria-label={item.ariaLabel}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {item.icon && (
+                      <div class="sidebar-nav-icon">
+                        <Icon
+                          name={`ph:${item.icon}`}
+                          size="24"
+                          color="var(--color-icon-primary)"
+                        />
+                      </div>
+                    )}
+                    <BodyMd vMargin={false} class="sidebar-nav-label">
+                      {item.label}
+                    </BodyMd>
+                  </a>
+                </li>
+              );
+            } else if (hasSubmenu(item)) {
+              const submenuId = `submenu-${itemId}`;
+
+              return (
+                <li>
+                  <button
+                    class="sidebar-nav-item sidebar-nav-item--outer"
+                    aria-label={item.ariaLabel}
+                    aria-expanded="false"
+                    aria-controls={submenuId}
+                    type="button"
+                    data-submenu-trigger
+                    data-target-id={submenuId}
+                    data-target-level={level + 1}
+                  >
+                    {item.icon && (
+                      <div class="sidebar-nav-icon">
+                        <Icon
+                          name={`ph:${item.icon}`}
+                          size="24"
+                          color="var(--color-icon-primary)"
+                        />
+                      </div>
+                    )}
+                    <BodyMd vMargin={false} class="sidebar-nav-label">
+                      {item.label}
+                    </BodyMd>
+                    <Icon
+                      name="ph:arrow-right"
+                      size="16"
+                      color="var(--color-icon-secondary)"
+                      class="sidebar-nav-arrow"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </li>
+              );
+            }
+            return null;
+          })}
+        </ul>
+      </nav>
+    </div>
+  )
+}
+
+{/* Nested Levels (level > 0) */}
+{
+  level > 0 && (
+    <div
+      class="sidebar-column sidebar-column--nested"
+      data-nav-level={level}
+      data-parent-id={parentId}
+      aria-hidden="true"
+    >
+      {versioned && versions.length > 0 && (
+        <VersionSwitcher
+          class="sidebar-version-switcher"
+          versions={versions}
+          defaultVersion={defaultVersion}
+          currentPath={currentPath}
+          aria-label="Select documentation version"
+          data-version-switcher
+        />
+      )}
+      <nav class="sidebar-nav" aria-label={`${title} navigation`}>
+        <button
+          class="sidebar-nav-back"
+          type="button"
+          aria-label={`Go back from ${title}`}
+          data-back-button
+          data-target-level={level - 1}
+        >
+          <Icon
+            name="ph:arrow-line-left"
+            size="16"
+            color="var(--color-icon-primary)"
+            aria-hidden="true"
+          />
+          <Body as="h3" weight="bold" class="sidebar-nav-back-title" vMargin={false}>
+            {title}
+          </Body>
+        </button>
+        <div class="sidebar-nav-content">
+          {menu.sections?.map((section, sectionIndex) => (
+            <div class="sidebar-section" data-section-index={sectionIndex}>
+              {section.title && <h4 class="sidebar-section-title">{section.title}</h4>}
+              <ul class="sidebar-section-list">
+                {section.items.map((item, itemIndex) => {
+                  const itemId = getItemId(sectionIndex, itemIndex);
+
+                  if (isLink(item)) {
+                    const href = resolveHref(item.href);
+                    const isActive = currentPath === href;
+
+                    return (
+                      <li>
+                        <a
+                          href={href}
+                          class:list={[
+                            'sidebar-nav-item',
+                            'sidebar-nav-item--inner',
+                            isActive && 'sidebar-nav-item--active',
+                          ]}
+                          aria-current={isActive ? 'page' : undefined}
+                        >
+                          <span class="sidebar-nav-label">{item.label}</span>
+                        </a>
+                      </li>
+                    );
+                  } else if (hasSubmenu(item)) {
+                    const submenuId = `submenu-${itemId}`;
+
+                    return (
+                      <li>
+                        <button
+                          class="sidebar-nav-item sidebar-nav-item--inner sidebar-nav-item--submenu"
+                          aria-expanded="false"
+                          aria-controls={submenuId}
+                          type="button"
+                          data-submenu-trigger
+                          data-target-id={submenuId}
+                          data-target-level={level + 1}
+                        >
+                          <span class="sidebar-nav-label">{item.label}</span>
+                          <Icon
+                            name="ph:arrow-right"
+                            size="16"
+                            color="var(--color-icon-secondary)"
+                            class="sidebar-nav-arrow"
+                            aria-hidden="true"
+                          />
+                        </button>
+                      </li>
+                    );
+                  }
+                  return null;
+                })}
+              </ul>
+            </div>
+          ))}
+          {menu.items && menu.items.length > 0 && (
+            <ul class="sidebar-section-list sidebar-section-list--no-title">
+              {menu.items.map((item, itemIndex) => {
+                const itemId = getItemId(null, itemIndex);
+
+                if (isLink(item)) {
+                  const href = resolveHref(item.href);
+                  const isActive = currentPath === href;
+
+                  return (
+                    <li>
+                      <a
+                        href={href}
+                        class:list={[
+                          'sidebar-nav-item',
+                          'sidebar-nav-item--inner',
+                          isActive && 'sidebar-nav-item--active',
+                        ]}
+                        aria-current={isActive ? 'page' : undefined}
+                      >
+                        <span class="sidebar-nav-label">{item.label}</span>
+                      </a>
+                    </li>
+                  );
+                } else if (hasSubmenu(item)) {
+                  const submenuId = `submenu-${itemId}`;
+
+                  return (
+                    <li>
+                      <button
+                        class="sidebar-nav-item sidebar-nav-item--inner sidebar-nav-item--submenu"
+                        aria-expanded="false"
+                        aria-controls={submenuId}
+                        type="button"
+                        data-submenu-trigger
+                        data-target-id={submenuId}
+                        data-target-level={level + 1}
+                      >
+                        <span class="sidebar-nav-label">{item.label}</span>
+                        <Icon
+                          name="ph:arrow-right"
+                          size="16"
+                          color="var(--color-icon-secondary)"
+                          class="sidebar-nav-arrow"
+                          aria-hidden="true"
+                        />
+                      </button>
+                    </li>
+                  );
+                }
+                return null;
+              })}
+            </ul>
+          )}
+        </div>
+      </nav>
+    </div>
+  )
+}
+
+{/* Render all collected submenus recursively */}
+{
+  submenus.map((submenu) => (
+    <Astro.self
+      menu={submenu.menu}
+      level={level + 1}
+      title={submenu.title}
+      lang={lang}
+      currentPath={currentPath}
+      basePath={submenu.basePath}
+      versioned={submenu.versioned}
+      version={version}
+      versions={versions}
+      defaultVersion={defaultVersion}
+      parentId={submenu.id}
+    />
+  ))
+}

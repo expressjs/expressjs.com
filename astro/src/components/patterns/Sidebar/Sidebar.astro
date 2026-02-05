@@ -3,35 +3,33 @@
  * Sidebar Component
  *
  * Navigation sidebar with:
- * - Unlimited navigation levels
+ * - All menu levels pre-rendered at build time
  * - Sections with optional titles at any level
- * - Items can be links or buttons opening submenus
  * - Version switcher for versioned content
  * - Full accessibility support (focus trap, keyboard navigation, ARIA)
+ * - Minimal JS for open/close and navigation animations only
  */
 
 import './Sidebar.css';
 import type { HTMLAttributes } from 'astro/types';
-import { Body, BodyMd } from '@/components/primitives';
-import { Icon } from 'astro-icon/components';
 import { getLangFromUrl } from '@/i18n/utils';
 import { mainMenu } from '@/config/main-menu';
-import { VersionSwitcher } from '@/components/patterns';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
-import type { MenuConfig } from './types';
+import type { Menu } from '@/config/types';
+import SidebarMenu from './SidebarMenu.astro';
 
 type Props = HTMLAttributes<'div'> & {
-  menu?: MenuConfig;
+  menu?: Menu;
   versions?: VersionConfig[];
   defaultVersion?: string;
 };
 
 const {
-  menu = mainMenu as MenuConfig,
+  menu = mainMenu,
   versions = [
     { id: 'v5', label: 'v5.x', isDefault: true },
     { id: 'v4', label: 'v4.x' },
-    { id: 'v3', label: 'v3.x', isDeprecated: true },
+    { id: 'v3', label: 'v3.x (deprecated)' },
   ],
   defaultVersion = 'v5',
   ...rest
@@ -40,9 +38,16 @@ const {
 const lang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
 
-function isLink(item: { href?: string; submenu?: unknown }): boolean {
-  return 'href' in item && item.href !== undefined;
+function detectVersionFromUrl(): string {
+  for (const version of versions) {
+    if (currentPath.includes(`/${version.id}/`)) {
+      return version.id;
+    }
+  }
+  return defaultVersion;
 }
+
+const currentVersion = detectVersionFromUrl();
 ---
 
 <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true" data-sidebar-backdrop></div>
@@ -57,230 +62,23 @@ function isLink(item: { href?: string; submenu?: unknown }): boolean {
   data-sidebar
   data-lang={lang}
   data-current-path={currentPath}
-  data-menu={JSON.stringify(menu)}
-  data-versions={JSON.stringify(versions)}
-  data-default-version={defaultVersion}
+  data-current-version={currentVersion}
   {...rest}
 >
   <h2 id="sidebar-title" class="sr-only">Main menu</h2>
 
   <div class="sidebar-container" data-nav-container>
-    <!-- Root Navigation Level (Level 0) -->
-    <div class="sidebar-column sidebar-column--active" data-nav-level="0">
-      <nav class="sidebar-nav" aria-label="Main navigation">
-        <ul class="sidebar-nav-list">
-          {
-            menu.sections?.map((section, sectionIndex) => (
-              <li class="sidebar-section" data-section-index={sectionIndex}>
-                {section.title && <h3 class="sidebar-section-title">{section.title}</h3>}
-                <ul class="sidebar-section-list">
-                  {section.items.map((item, itemIndex) => (
-                    <li>
-                      {isLink(item) ? (
-                        <a
-                          href={`/${lang}${item.href}`}
-                          class:list={[
-                            'sidebar-nav-item',
-                            'sidebar-nav-item--outer',
-                            currentPath === `/${lang}${item.href}` && 'sidebar-nav-item--active',
-                          ]}
-                          aria-label={item.ariaLabel}
-                          aria-current={currentPath === `/${lang}${item.href}` ? 'page' : undefined}
-                        >
-                          {item.icon && (
-                            <div class="sidebar-nav-icon">
-                              <Icon
-                                name={`ph:${item.icon}`}
-                                size="24"
-                                color="var(--color-icon-primary)"
-                              />
-                            </div>
-                          )}
-                          <BodyMd vMargin={false} class="sidebar-nav-label">
-                            {item.label}
-                          </BodyMd>
-                        </a>
-                      ) : (
-                        <button
-                          class="sidebar-nav-item sidebar-nav-item--outer"
-                          aria-label={item.ariaLabel}
-                          aria-expanded="false"
-                          type="button"
-                          data-submenu-trigger
-                          data-item-path={`sections.${sectionIndex}.items.${itemIndex}`}
-                          data-item-label={item.label}
-                        >
-                          {item.icon && (
-                            <div class="sidebar-nav-icon">
-                              <Icon
-                                name={`ph:${item.icon}`}
-                                size="24"
-                                color="var(--color-icon-primary)"
-                              />
-                            </div>
-                          )}
-                          <BodyMd vMargin={false} class="sidebar-nav-label">
-                            {item.label}
-                          </BodyMd>
-                          <Icon
-                            name="ph:arrow-right"
-                            size="16"
-                            color="var(--color-icon-secondary)"
-                            class="sidebar-nav-arrow"
-                            aria-hidden="true"
-                          />
-                        </button>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))
-          }
-          {
-            menu.items?.map((item, itemIndex) => (
-              <li>
-                {isLink(item) ? (
-                  <a
-                    href={`/${lang}${item.href}`}
-                    class:list={[
-                      'sidebar-nav-item',
-                      currentPath === `/${lang}${item.href}` && 'sidebar-nav-item--active',
-                    ]}
-                    aria-label={item.ariaLabel}
-                    aria-current={currentPath === `/${lang}${item.href}` ? 'page' : undefined}
-                  >
-                    {item.icon && (
-                      <div class="sidebar-nav-icon">
-                        <Icon
-                          name={`ph:${item.icon}`}
-                          size="24"
-                          color="var(--color-icon-primary)"
-                        />
-                      </div>
-                    )}
-                    <BodyMd vMargin={false} class="sidebar-nav-label">
-                      {item.label}
-                    </BodyMd>
-                  </a>
-                ) : (
-                  <button
-                    class="sidebar-nav-item"
-                    aria-label={item.ariaLabel}
-                    aria-expanded="false"
-                    type="button"
-                    data-submenu-trigger
-                    data-item-path={`items.${itemIndex}`}
-                    data-item-label={item.label}
-                  >
-                    {item.icon && (
-                      <div class="sidebar-nav-icon">
-                        <Icon
-                          name={`ph:${item.icon}`}
-                          size="24"
-                          color="var(--color-icon-primary)"
-                        />
-                      </div>
-                    )}
-                    <BodyMd vMargin={false} class="sidebar-nav-label">
-                      {item.label}
-                    </BodyMd>
-                    <Icon
-                      name="ph:arrow-right"
-                      size="16"
-                      color="var(--color-icon-secondary)"
-                      class="sidebar-nav-arrow"
-                      aria-hidden="true"
-                    />
-                  </button>
-                )}
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-    </div>
-  </div>
-
-  <!-- Hidden template for navigation level -->
-  <template id="sidebar-nav-template">
-    <div class="sidebar-column sidebar-dynamic-column" data-dynamic-column data-nav-level>
-      <VersionSwitcher
-        class="sidebar-version-switcher"
-        versions={versions}
-        defaultVersion={defaultVersion}
-        currentPath={currentPath}
-        hidden={false}
-        aria-label="Select documentation version"
-        data-version-switcher
-      />
-      <nav class="sidebar-nav" aria-label="Submenu navigation">
-        <button class="sidebar-nav-back" type="button" aria-label="Go back" data-back-button>
-          <Icon
-            name="ph:arrow-line-left"
-            size="16"
-            color="var(--color-icon-primary)"
-            aria-hidden="true"
-          />
-          <Body as="h3" weight="bold" class="sidebar-nav-back-title" data-nav-title vMargin={false}>
-            Navigation
-          </Body>
-        </button>
-        <div class="sidebar-nav-content" data-nav-content>
-          <!-- Content will be populated dynamically -->
-        </div>
-      </nav>
-    </div>
-  </template>
-
-  <!-- Hidden template for section (content populated dynamically) -->
-  <!-- eslint-disable-next-line jsx-a11y/heading-has-content -->
-  <template id="sidebar-section-template">
-    <div class="sidebar-section" data-section>
-      <h4 class="sidebar-section-title" data-section-title aria-hidden="true">Section</h4>
-      <ul class="sidebar-section-list" data-section-list></ul>
-    </div>
-  </template>
-
-  <!-- Hidden template for link item (href populated dynamically via JS) -->
-  <template id="sidebar-link-template">
-    <li>
-      <a class="sidebar-nav-item sidebar-nav-item--inner" href="/placeholder" data-link-item>
-        <span class="sidebar-nav-label" data-link-label></span>
-      </a>
-    </li>
-  </template>
-
-  <!-- Hidden template for button item -->
-  <template id="sidebar-button-template">
-    <li>
-      <button
-        class="sidebar-nav-item sidebar-nav-item--inner sidebar-nav-item--submenu"
-        type="button"
-        data-submenu-trigger
-      >
-        <BodyMd class="sidebar-nav-label" vMargin={false} data-button-label />
-        <Icon
-          name="ph:arrow-right"
-          size="16"
-          color="var(--color-icon-secondary)"
-          class="sidebar-nav-arrow"
-          aria-hidden="true"
-        />
-      </button>
-    </li>
-  </template>
-
-  <!-- Hidden template for arrow icon -->
-  <template id="sidebar-arrow-template">
-    <Icon
-      name="ph:arrow-right"
-      size="16"
-      color="var(--color-icon-secondary)"
-      class="sidebar-nav-arrow"
-      aria-hidden="true"
+    <SidebarMenu
+      menu={menu}
+      level={0}
+      title="Main Menu"
+      lang={lang}
+      currentPath={currentPath}
+      version={currentVersion}
+      versions={versions}
+      defaultVersion={defaultVersion}
     />
-  </template>
+  </div>
 
   <script>
     import './SidebarController';

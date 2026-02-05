@@ -69,10 +69,31 @@
     background-color: var(--color-bg-secondary);
     padding: var(--space-4);
     transition: transform var(--duration-300) var(--ease-in-out);
+    overflow: auto;
   }
 
-  .sidebar-dynamic-column {
+  /* Root level column */
+  .sidebar-column--root {
+    background-color: var(--color-bg-secondary);
+  }
+
+  /* Nested columns (submenus) - positioned absolutely to stack */
+  .sidebar-column--nested {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
     background-color: var(--color-bg-tertiary);
+    transition: opacity var(--duration-300) var(--ease-in-out) var(--duration-300);
+    opacity: 0;
+    z-index: 0;
+  }
+
+  /* Active column indicator */
+  .sidebar-column--active {
+    opacity: 1;
+    z-index: 10;
+    transition: none;
   }
 
   .sidebar-nav {
@@ -95,7 +116,7 @@
     margin: 0;
   }
 
-  /* Navigation Content (for dynamic levels) */
+  /* Navigation Content (for nested levels) */
   .sidebar-nav-content {
     flex: 1;
     overflow-y: auto;

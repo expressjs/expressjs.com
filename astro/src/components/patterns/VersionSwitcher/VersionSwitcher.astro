@@ -3,7 +3,7 @@
  * VersionSwitcher Component
  *
  * A dropdown to switch between different versions of documentation.
- * Detects the current version from the URL or falls back to the default version.
+ * Detects the current version from the URL or fallback to the default version.
  *
  * @example
  * <VersionSwitcher
@@ -24,14 +24,7 @@ import type { VersionConfig, VersionSwitcherProps } from './types';
 
 type Props = VersionSwitcherProps;
 
-const {
-  versions,
-  defaultVersion,
-  currentPath = '',
-  hidden = true,
-  class: className,
-  ...rest
-} = Astro.props;
+const { versions, defaultVersion, currentPath = '', class: className, ...rest } = Astro.props;
 
 function getVersionFromPath(path: string, availableVersions: VersionConfig[]): string | null {
   for (const version of availableVersions) {
@@ -47,9 +40,8 @@ const selectedVersion = urlVersion || defaultVersion;
 
 const selectOptions: SelectOption[] = versions.map((version) => ({
   value: version.id,
-  label: version.isDeprecated ? `${version.label} (deprecated)` : version.label,
+  label: version.label,
   selected: version.id === selectedVersion,
-  disabled: version.isDeprecated,
 }));
 ---
 
@@ -57,13 +49,13 @@ const selectOptions: SelectOption[] = versions.map((version) => ({
   align="center"
   justify="center"
   gap="2"
-  class:list={['version-switcher', hidden && 'version-switcher--hidden', className]}
+  class:list={['version-switcher', className]}
   data-version-switcher
   {...rest}
 >
   <label class="version-switcher__label" for="version-select">
     <Icon name="ph:tag" size="16" color="var(--color-icon-secondary)" aria-hidden="true" />
-    <span class="sr-only">API Version</span>
+    <span class="sr-only">API version</span>
   </label>
   <Select
     id="version-select"
