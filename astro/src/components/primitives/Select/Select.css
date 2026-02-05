@@ -86,7 +86,7 @@
   }
 
   .select:focus-visible {
-    outline: 0;
+    outline-offset: -1px;
     border-color: var(--color-border-primary);
   }
 

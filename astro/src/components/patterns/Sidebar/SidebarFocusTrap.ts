@@ -19,8 +19,16 @@ export class SidebarFocusTrap {
   }
 
   trap(e: KeyboardEvent, isOpen: boolean): void {
-    if (!isOpen || e.key !== 'Tab') return;
+    if (!isOpen) return;
 
+    if (e.key === 'Tab') {
+      this.handleTabNavigation(e);
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      this.handleArrowNavigation(e);
+    }
+  }
+
+  private handleTabNavigation(e: KeyboardEvent): void {
     const focusableElements = this.getFocusableElements();
     if (focusableElements.length === 0) return;
 
@@ -34,6 +42,25 @@ export class SidebarFocusTrap {
       e.preventDefault();
       first?.focus();
     }
+  }
+
+  private handleArrowNavigation(e: KeyboardEvent): void {
+    const focusableElements = this.getFocusableElements();
+    if (focusableElements.length === 0) return;
+
+    const currentIndex = focusableElements.indexOf(document.activeElement as HTMLElement);
+    if (currentIndex === -1) return;
+
+    e.preventDefault();
+
+    let nextIndex: number;
+    if (e.key === 'ArrowDown') {
+      nextIndex = currentIndex + 1 >= focusableElements.length ? 0 : currentIndex + 1;
+    } else {
+      nextIndex = currentIndex - 1 < 0 ? focusableElements.length - 1 : currentIndex - 1;
+    }
+
+    focusableElements[nextIndex]?.focus();
   }
 
   focusFirst(): void {

@@ -19,11 +19,6 @@
     display: flex;
     align-items: center;
     text-decoration: none;
-  }
-
-  .logo-link:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: 4px;
     border-radius: var(--radius-sm);
   }
 
@@ -48,11 +43,6 @@
     border: none;
     cursor: pointer;
     position: relative;
-  }
-
-  .hamburger:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: 2px;
   }
 
   .hamburger-line {

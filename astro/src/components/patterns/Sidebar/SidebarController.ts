@@ -133,9 +133,14 @@ export class SidebarController {
     if (this.activeSubmenuPath.length <= 1) return;
 
     const currentSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
+    let triggerToFocus: HTMLElement | null = null;
+
     if (currentSubmenuId) {
-      const trigger = this.sidebar?.querySelector(`[data-target-id="${currentSubmenuId}"]`);
+      const trigger = this.sidebar?.querySelector(
+        `[data-target-id="${currentSubmenuId}"]`
+      ) as HTMLElement;
       trigger?.setAttribute('aria-expanded', 'false');
+      triggerToFocus = trigger;
     }
 
     this.activeSubmenuPath.pop();
@@ -147,6 +152,11 @@ export class SidebarController {
     if (this.navContainer) {
       this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
     }
+
+    // Restore focus to the trigger button after the transition
+    setTimeout(() => {
+      triggerToFocus?.focus();
+    }, TRANSITION_DURATION);
   }
 
   private updateActiveColumns(): void {

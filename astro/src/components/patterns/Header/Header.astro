@@ -4,6 +4,7 @@
  *
  * Main site header with logo and navigation menu
  */
+import { Icon } from 'astro-icon/components';
 import './Header.css';
 import { Flex } from '@/components/primitives';
 ---
@@ -29,7 +30,13 @@ import { Flex } from '@/components/primitives';
       </a>
     </Flex>
     <div>
-      <!-- TODO: Search toggle will be included here -->
+      <!-- TODO: Search toggle will be included here, this is just a placeholder -->
+      <Icon
+        name="fluent:search-sparkle-20-regular"
+        size="24"
+        color="var(--color-icon-primary)"
+        aria-hidden="true"
+      />
     </div>
   </Flex>
 </header>

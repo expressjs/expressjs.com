@@ -9,5 +9,6 @@
 @import './_typography.css';
 @import './_spacing.css';
 @import './_sizing.css';
+@import './_zindex.css';
 @import './_borders.css';
 @import './_transitions.css';

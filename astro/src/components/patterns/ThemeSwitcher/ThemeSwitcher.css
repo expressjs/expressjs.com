@@ -12,8 +12,7 @@
     width: 100%;
   }
 
-  .toggle:hover,
-  .toggle:focus-visible {
+  .toggle:hover {
     .toggle-icon {
       background-color: var(--color-bg-mute);
     }
