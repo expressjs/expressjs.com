@@ -1,9 +1,9 @@
 ---
 import type { Menu } from '@/config/types';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
-import { Body } from '@/components/primitives';
+import { Body, BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
-import { VersionSwitcher } from '@/components/patterns';
+import { ThemeSwitcher, VersionSwitcher } from '@/components/patterns';
 import SidebarItemsList from './SidebarItemsList.astro';
 import {
   shouldOmitSection,
@@ -99,6 +99,23 @@ const initialActiveLevel =
             targetLevel={level + 1}
           />
         </ul>
+
+        <menu class="sidebar-nav-menu">
+          {/* TODO: placeholder for language selector */}
+          <li>
+            <button class="sidebar-nav-item" aria-label="Select language">
+              <div class="sidebar-nav-icon">
+                <Icon name="ph:translate" size="24" color="var(--color-icon-primary)" />
+              </div>
+              <BodyMd as="span" vMargin={false}>
+                Select language
+              </BodyMd>
+            </button>
+          </li>
+          <li>
+            <ThemeSwitcher />
+          </li>
+        </menu>
       </nav>
     </div>
   )

@@ -87,11 +87,12 @@
 
   .sidebar-nav {
     overflow-y: auto;
-    padding-bottom: var(--space-4);
     scrollbar-width: thin;
     scrollbar-color: var(--color-border-primary) transparent;
     scrollbar-gutter: stable;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .sidebar-nav-list {
@@ -251,7 +252,7 @@
     width: 100%;
     z-index: 0;
     opacity: 0;
-    padding: var(--space-4);
+    padding: var(--space-4) var(--space-4) var(--space-8) var(--space-4);
 
     &:not(.sidebar-nav-panel--active) {
       width: 1px;

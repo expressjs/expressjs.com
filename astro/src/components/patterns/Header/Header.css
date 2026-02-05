@@ -9,6 +9,10 @@
     top: 0;
     padding: var(--space-3) var(--space-4);
     z-index: var(--z-index-header);
+
+    @media (--xs-only) {
+      border-bottom: 1px solid var(--color-border-secondary);
+    }
   }
 
   .logo-link {
