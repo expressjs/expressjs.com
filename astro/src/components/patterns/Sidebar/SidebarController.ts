@@ -1,6 +1,9 @@
 import { SidebarVersionManager } from './SidebarVersionManager';
 import { SidebarFocusTrap } from './SidebarFocusTrap';
 
+// CSS transition duration in milliseconds (must match Sidebar.css --duration-300)
+const TRANSITION_DURATION = 300;
+
 export class SidebarController {
   private sidebar: HTMLElement | null;
   private backdrop: HTMLElement | null;
@@ -123,7 +126,7 @@ export class SidebarController {
     setTimeout(() => {
       const firstFocusable = submenuColumn.querySelector('button, a') as HTMLElement;
       firstFocusable?.focus();
-    }, 300);
+    }, TRANSITION_DURATION);
   }
 
   private navigateBack(): void {
@@ -181,7 +184,7 @@ export class SidebarController {
     this.backdrop.classList.add('sidebar-backdrop--visible');
     document.body.style.overflow = 'hidden';
 
-    setTimeout(() => this.focusTrap?.focusFirst(), 300);
+    setTimeout(() => this.focusTrap?.focusFirst(), TRANSITION_DURATION);
   }
 
   public close(): void {
@@ -195,7 +198,7 @@ export class SidebarController {
     this.sidebar.classList.remove('sidebar--open');
     this.backdrop.classList.remove('sidebar-backdrop--visible');
 
-    setTimeout(() => this.resetToInitialState(), 300);
+    setTimeout(() => this.resetToInitialState(), TRANSITION_DURATION);
 
     document.body.style.overflow = '';
     this.lastFocusedElement?.focus();

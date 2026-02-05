@@ -178,14 +178,13 @@
     border-radius: var(--radius-base);
   }
 
-  .sidebar-nav-item--nested:hover {
-    background-color: var(--color-bg-secondary);
-    color: var(--color-text-primary);
-  }
-
   .sidebar-nav-item--nested:hover,
   .sidebar-nav-item--nested.sidebar-nav-item--active {
     background-color: var(--color-bg-secondary);
+  }
+
+  .sidebar-nav-item--nested:hover {
+    color: var(--color-text-primary);
   }
 
   .sidebar-nav-item--nested:focus-visible {

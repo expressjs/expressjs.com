@@ -4,14 +4,9 @@ import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types'
 import { Body } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
-import SidebarNavItem from './SidebarNavItem.astro';
+import SidebarItemsList from './SidebarItemsList.astro';
 import {
-  resolveHref,
-  isLink,
-  hasSubmenu,
   shouldOmitSection,
-  filterItems,
-  getItemId,
   collectAllSubmenus,
   submenuContainsCurrentPath,
   calculateInitialActiveLevel,
@@ -55,10 +50,6 @@ const submenusByLevel = groupSubmenusByLevel(submenus);
 const sortedLevels = Array.from(submenusByLevel.keys()).sort((a, b) => a - b);
 const initialActiveLevel =
   level === 0 ? calculateInitialActiveLevel(submenus, currentPath, lang, version) : 0;
-
-function getHref(href: string, itemBasePath = basePath, itemVersioned = versioned): string {
-  return resolveHref(href, lang, itemBasePath, itemVersioned, version);
-}
 ---
 
 {
@@ -78,63 +69,35 @@ function getHref(href: string, itemBasePath = basePath, itemVersioned = versione
               <li class="sidebar-section" data-section-index={sectionIndex}>
                 {section.title && <Body as="h3">{section.title}</Body>}
                 <ul class="sidebar-section-list">
-                  {filterItems(section.items, version).map((item, itemIndex) => {
-                    const itemId = getItemId(parentId, sectionIndex, itemIndex);
-                    const href = isLink(item) ? getHref(item.href) : '';
-                    const isActive = currentPath === href;
-
-                    return isLink(item) ? (
-                      <SidebarNavItem
-                        item={item}
-                        href={href}
-                        isActive={isActive}
-                        variant="root"
-                        type="link"
-                        showIcon={true}
-                      />
-                    ) : hasSubmenu(item) ? (
-                      <SidebarNavItem
-                        item={item}
-                        href=""
-                        isActive={false}
-                        variant="root"
-                        type="submenu"
-                        submenuId={`submenu-${itemId}`}
-                        targetLevel={level + 1}
-                        showIcon={true}
-                      />
-                    ) : null;
-                  })}
+                  <SidebarItemsList
+                    items={section.items}
+                    parentId={parentId}
+                    sectionIndex={sectionIndex}
+                    currentPath={currentPath}
+                    lang={lang}
+                    basePath={basePath}
+                    versioned={versioned}
+                    version={version}
+                    variant="root"
+                    showIcon={true}
+                    targetLevel={level + 1}
+                  />
                 </ul>
               </li>
             ))}
-          {filterItems(menu.items ?? [], version).map((item, itemIndex) => {
-            const itemId = getItemId(parentId, null, itemIndex);
-            const href = isLink(item) ? getHref(item.href) : '';
-            const isActive = currentPath === href;
-
-            return isLink(item) ? (
-              <SidebarNavItem
-                item={item}
-                href={href}
-                isActive={isActive}
-                variant="root"
-                type="link"
-                showIcon={true}
-              />
-            ) : hasSubmenu(item) ? (
-              <SidebarNavItem
-                item={item}
-                href=""
-                isActive={false}
-                variant="root"
-                type="submenu"
-                submenuId={`submenu-${itemId}`}
-                targetLevel={level + 1}
-                showIcon={true}
-              />
-            ) : null;
-          })}
+          <SidebarItemsList
+            items={menu.items ?? []}
+            parentId={parentId}
+            sectionIndex={null}
+            currentPath={currentPath}
+            lang={lang}
+            basePath={basePath}
+            versioned={versioned}
+            version={version}
+            variant="root"
+            showIcon={true}
+            targetLevel={level + 1}
+          />
         </ul>
       </nav>
     </div>
@@ -207,65 +170,37 @@ function getHref(href: string, itemBasePath = basePath, itemVersioned = versione
                             </Body>
                           )}
                           <ul class="sidebar-section-list">
-                            {filterItems(section.items, version).map((item, itemIndex) => {
-                              const itemId = getItemId(submenu.id, sectionIndex, itemIndex);
-                              const href = isLink(item)
-                                ? getHref(item.href, submenu.basePath, submenu.versioned)
-                                : '';
-                              const isActive = currentPath === href;
-
-                              return isLink(item) ? (
-                                <SidebarNavItem
-                                  item={item}
-                                  href={href}
-                                  isActive={isActive}
-                                  variant="nested"
-                                  type="link"
-                                />
-                              ) : hasSubmenu(item) ? (
-                                <SidebarNavItem
-                                  item={item}
-                                  href=""
-                                  isActive={false}
-                                  variant="nested"
-                                  type="submenu"
-                                  submenuId={`submenu-${itemId}`}
-                                  targetLevel={navLevel + 1}
-                                />
-                              ) : null;
-                            })}
+                            <SidebarItemsList
+                              items={section.items}
+                              parentId={submenu.id}
+                              sectionIndex={sectionIndex}
+                              currentPath={currentPath}
+                              lang={lang}
+                              basePath={submenu.basePath}
+                              versioned={submenu.versioned}
+                              version={version}
+                              variant="nested"
+                              showIcon={false}
+                              targetLevel={navLevel + 1}
+                            />
                           </ul>
                         </div>
                       ))}
-                    {submenu.menu.items && filterItems(submenu.menu.items, version).length > 0 && (
+                    {submenu.menu.items && submenu.menu.items.length > 0 && (
                       <ul class="sidebar-section-list">
-                        {filterItems(submenu.menu.items, version).map((item, itemIndex) => {
-                          const itemId = getItemId(submenu.id, null, itemIndex);
-                          const href = isLink(item)
-                            ? getHref(item.href, submenu.basePath, submenu.versioned)
-                            : '';
-                          const isActive = currentPath === href;
-
-                          return isLink(item) ? (
-                            <SidebarNavItem
-                              item={item}
-                              href={href}
-                              isActive={isActive}
-                              variant="nested"
-                              type="link"
-                            />
-                          ) : hasSubmenu(item) ? (
-                            <SidebarNavItem
-                              item={item}
-                              href=""
-                              isActive={false}
-                              variant="nested"
-                              type="submenu"
-                              submenuId={`submenu-${itemId}`}
-                              targetLevel={navLevel + 1}
-                            />
-                          ) : null;
-                        })}
+                        <SidebarItemsList
+                          items={submenu.menu.items}
+                          parentId={submenu.id}
+                          sectionIndex={null}
+                          currentPath={currentPath}
+                          lang={lang}
+                          basePath={submenu.basePath}
+                          versioned={submenu.versioned}
+                          version={version}
+                          variant="nested"
+                          showIcon={false}
+                          targetLevel={navLevel + 1}
+                        />
                       </ul>
                     )}
                   </div>

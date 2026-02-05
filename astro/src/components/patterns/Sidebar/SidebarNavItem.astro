@@ -24,12 +24,6 @@ const {
   targetLevel,
   showIcon = false,
 } = Astro.props;
-
-const isNested = variant === 'nested';
-const baseClass = 'sidebar-nav-item';
-const variantClass = isNested ? 'sidebar-nav-item--nested' : '';
-const submenuClass = type === 'submenu' && isNested ? 'sidebar-nav-item--submenu' : '';
-const activeClass = isActive ? 'sidebar-nav-item--active' : '';
 ---
 
 {
@@ -37,7 +31,11 @@ const activeClass = isActive ? 'sidebar-nav-item--active' : '';
     <li>
       <a
         href={href}
-        class:list={[baseClass, variantClass, activeClass]}
+        class:list={[
+          'sidebar-nav-item',
+          variant === 'nested' && 'sidebar-nav-item--nested',
+          isActive && 'sidebar-nav-item--active',
+        ]}
         aria-label={item.ariaLabel}
         aria-current={isActive ? 'page' : undefined}
         data-omit-from={item.omitFrom?.join(',') || undefined}
@@ -55,7 +53,11 @@ const activeClass = isActive ? 'sidebar-nav-item--active' : '';
   ) : (
     <li>
       <button
-        class:list={[baseClass, variantClass, submenuClass]}
+        class:list={[
+          'sidebar-nav-item',
+          variant === 'nested' && 'sidebar-nav-item--nested',
+          type === 'submenu' && variant === 'nested' && 'sidebar-nav-item--submenu',
+        ]}
         aria-label={item.ariaLabel}
         aria-expanded="false"
         aria-controls={submenuId}

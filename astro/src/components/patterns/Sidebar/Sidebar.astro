@@ -6,6 +6,7 @@ import { mainMenu } from '@/config/main-menu';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
 import type { Menu } from '@/config/types';
 import SidebarMenu from './SidebarMenu.astro';
+import { detectVersionFromUrl } from './utils';
 
 type Props = HTMLAttributes<'div'> & {
   menu?: Menu;
@@ -26,17 +27,7 @@ const {
 
 const lang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
-
-function detectVersionFromUrl(): string {
-  for (const version of versions) {
-    if (currentPath.includes(`/${version.id}/`)) {
-      return version.id;
-    }
-  }
-  return defaultVersion;
-}
-
-const currentVersion = detectVersionFromUrl();
+const currentVersion = detectVersionFromUrl(currentPath, versions, defaultVersion);
 ---
 
 <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true" data-sidebar-backdrop></div>

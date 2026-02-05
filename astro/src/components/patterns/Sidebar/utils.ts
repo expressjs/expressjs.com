@@ -1,4 +1,5 @@
 import type { Menu, MenuItem, VersionPrefix } from '@/config/types';
+import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
 
 export type SubmenuData = {
   menu: Menu;
@@ -109,6 +110,44 @@ export function collectAllSubmenus(
   }
 }
 
+function checkItemsForPath(
+  items: MenuItem[],
+  normalizedCurrentPath: string,
+  basePath: string,
+  versioned: boolean,
+  currentPath: string,
+  lang: string,
+  version: string
+): boolean {
+  const filteredItems = filterItems(items, version);
+  for (const item of filteredItems) {
+    if (isLink(item)) {
+      const href = resolveHref(item.href, lang, basePath, versioned, version);
+      const normalizePath = (path: string) => path.replace(/\/$/, '');
+      if (normalizedCurrentPath === normalizePath(href)) {
+        return true;
+      }
+    }
+    if (hasSubmenu(item)) {
+      const nestedBasePath = item.submenu.basePath || basePath;
+      const nestedVersioned = item.submenu.versioned ?? versioned;
+      if (
+        submenuContainsCurrentPath(
+          item.submenu,
+          nestedBasePath,
+          nestedVersioned,
+          currentPath,
+          lang,
+          version
+        )
+      ) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 export function submenuContainsCurrentPath(
   submenuMenu: Menu,
   submenuBasePath: string,
@@ -120,42 +159,34 @@ export function submenuContainsCurrentPath(
   const normalizePath = (path: string) => path.replace(/\/$/, '');
   const normalizedCurrentPath = normalizePath(currentPath);
 
-  const checkItems = (items: MenuItem[]): boolean => {
-    const filteredItems = filterItems(items, version);
-    for (const item of filteredItems) {
-      if (isLink(item)) {
-        const href = resolveHref(item.href, lang, submenuBasePath, submenuVersioned, version);
-        if (normalizedCurrentPath === normalizePath(href)) {
-          return true;
-        }
-      }
-      if (hasSubmenu(item)) {
-        const nestedBasePath = item.submenu.basePath || submenuBasePath;
-        const nestedVersioned = item.submenu.versioned ?? submenuVersioned;
-        if (
-          submenuContainsCurrentPath(
-            item.submenu,
-            nestedBasePath,
-            nestedVersioned,
-            currentPath,
-            lang,
-            version
-          )
-        ) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-
   for (const section of submenuMenu.sections?.filter((s) => !shouldOmitSection(s, version)) || []) {
-    if (checkItems(section.items)) {
+    if (
+      checkItemsForPath(
+        section.items,
+        normalizedCurrentPath,
+        submenuBasePath,
+        submenuVersioned,
+        currentPath,
+        lang,
+        version
+      )
+    ) {
       return true;
     }
   }
 
-  if (submenuMenu.items && checkItems(submenuMenu.items)) {
+  if (
+    submenuMenu.items &&
+    checkItemsForPath(
+      submenuMenu.items,
+      normalizedCurrentPath,
+      submenuBasePath,
+      submenuVersioned,
+      currentPath,
+      lang,
+      version
+    )
+  ) {
     return true;
   }
 
@@ -198,4 +229,17 @@ export function groupSubmenusByLevel(submenus: SubmenuData[]): Map<number, Subme
     submenusByLevel.set(submenu.level, levelSubmenus);
   });
   return submenusByLevel;
+}
+
+export function detectVersionFromUrl(
+  currentPath: string,
+  versions: VersionConfig[],
+  defaultVersion: string
+): string {
+  for (const version of versions) {
+    if (currentPath.includes(`/${version.id}/`)) {
+      return version.id;
+    }
+  }
+  return defaultVersion;
 }
