@@ -1,31 +1,18 @@
-/**
- * SidebarController (Simplified)
- *
- * Minimal JS controller for statically-rendered sidebar:
- * - Open/close sidebar
- * - Navigate between pre-rendered menu levels (slide animations)
- * - Focus trap and keyboard navigation
- * - Version switching
- *
- * All menu content is pre-rendered at build time by Astro.
- * This controller only handles UI interactions.
- */
+import { SidebarVersionManager } from './SidebarVersionManager';
+import { SidebarFocusTrap } from './SidebarFocusTrap';
 
 export class SidebarController {
   private sidebar: HTMLElement | null;
   private backdrop: HTMLElement | null;
   private navContainer: HTMLElement | null;
+  private versionManager: SidebarVersionManager | null = null;
+  private focusTrap: SidebarFocusTrap | null = null;
 
   private isOpen = false;
-  private focusableElements: HTMLElement[] = [];
   private lastFocusedElement: HTMLElement | null = null;
-
-  // Navigation state - track the path of active submenu IDs
   private activeLevel = 0;
-  private activeSubmenuPath: string[] = ['root']; // Stack of active submenu IDs
-  private currentVersion: string;
+  private activeSubmenuPath: string[] = ['root'];
 
-  // Store initial active state for restoration on close
   private initialActiveLevel = 0;
   private initialActiveSubmenuPath: string[] = ['root'];
 
@@ -33,86 +20,62 @@ export class SidebarController {
     this.sidebar = document.querySelector('[data-sidebar]');
     this.backdrop = document.querySelector('[data-sidebar-backdrop]');
     this.navContainer = document.querySelector('[data-nav-container]');
-    this.currentVersion = this.sidebar?.dataset.currentVersion || 'v5';
 
     if (this.sidebar && this.backdrop) {
+      const currentVersion = this.sidebar.dataset.currentVersion || 'v5';
+      this.versionManager = new SidebarVersionManager(
+        this.sidebar,
+        currentVersion,
+        this.activeSubmenuPath
+      );
+      this.focusTrap = new SidebarFocusTrap(this.sidebar, () => this.activeSubmenuPath);
       this.init();
     }
   }
 
   private init(): void {
-    // Backdrop click to close
     this.backdrop?.addEventListener('click', () => this.close());
-
-    // Keyboard events
     document.addEventListener('keydown', (e) => this.handleKeyDown(e));
-
-    // Custom event to toggle sidebar
     document.addEventListener('sidebar:toggle', () => this.toggle());
 
-    // Setup submenu triggers (buttons that navigate to deeper levels)
     this.setupSubmenuTriggers();
-
-    // Setup back buttons
     this.setupBackButtons();
-
-    // Setup version switchers
-    this.setupVersionSwitchers();
-
-    // Initialize active state from pre-rendered data
+    this.versionManager?.setup();
     this.initializeFromActiveState();
-
-    // Set initial active state
     this.updateActiveColumns();
   }
 
-  /**
-   * Initialize navigation state from pre-rendered active classes
-   */
   private initializeFromActiveState(): void {
-    // Read initial active level from data attribute
     const rootColumn = this.sidebar?.querySelector('[data-initial-active-level]') as HTMLElement;
     const initialActiveLevel = parseInt(rootColumn?.dataset.initialActiveLevel || '0', 10);
 
     if (initialActiveLevel > 0) {
-      // Build the active submenu path by finding active panels at each level
       this.activeSubmenuPath = ['root'];
 
       for (let level = 1; level <= initialActiveLevel; level++) {
-        // Find the active panel at this level by checking panels within the level's column
         const levelColumn = this.sidebar?.querySelector(`[data-nav-level="${level}"]`);
         const activePanelInLevel = levelColumn?.querySelector(
           '.sidebar-nav-panel.sidebar-nav-panel--active'
         ) as HTMLElement;
 
-        if (activePanelInLevel) {
-          const parentId = activePanelInLevel.dataset.parentId;
-          if (parentId) {
-            this.activeSubmenuPath.push(parentId);
-          }
+        if (activePanelInLevel?.dataset.parentId) {
+          this.activeSubmenuPath.push(activePanelInLevel.dataset.parentId);
         }
       }
 
       this.activeLevel = initialActiveLevel;
-
-      // Store initial state for restoration on close
       this.initialActiveLevel = initialActiveLevel;
       this.initialActiveSubmenuPath = [...this.activeSubmenuPath];
+      this.versionManager?.updatePath(this.activeSubmenuPath);
 
-      // Set the initial nav level on the container for CSS transforms
       if (this.navContainer) {
         this.navContainer.dataset.currentNavLevel = String(initialActiveLevel);
       }
     }
   }
 
-  /**
-   * Setup all submenu trigger buttons
-   */
   private setupSubmenuTriggers(): void {
-    const triggers = this.sidebar?.querySelectorAll('[data-submenu-trigger]');
-
-    triggers?.forEach((trigger) => {
+    this.sidebar?.querySelectorAll('[data-submenu-trigger]').forEach((trigger) => {
       trigger.addEventListener('click', (e) => {
         e.preventDefault();
         const button = e.currentTarget as HTMLButtonElement;
@@ -127,13 +90,8 @@ export class SidebarController {
     });
   }
 
-  /**
-   * Setup all back buttons
-   */
   private setupBackButtons(): void {
-    const backButtons = this.sidebar?.querySelectorAll('[data-back-button]');
-
-    backButtons?.forEach((button) => {
+    this.sidebar?.querySelectorAll('[data-back-button]').forEach((button) => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
         this.navigateBack();
@@ -141,25 +99,6 @@ export class SidebarController {
     });
   }
 
-  /**
-   * Setup version switchers
-   */
-  private setupVersionSwitchers(): void {
-    const versionSwitchers = this.sidebar?.querySelectorAll(
-      '[data-version-switcher] select, [data-version-select]'
-    );
-
-    versionSwitchers?.forEach((switcher) => {
-      switcher.addEventListener('change', (e) => {
-        const select = e.target as HTMLSelectElement;
-        this.handleVersionChange(select.value);
-      });
-    });
-  }
-
-  /**
-   * Navigate to a submenu by its ID
-   */
   private navigateToSubmenu(submenuId: string, level: number): void {
     const submenuColumn = this.sidebar?.querySelector(
       `[data-parent-id="${submenuId}"]`
@@ -170,61 +109,45 @@ export class SidebarController {
       return;
     }
 
-    // Truncate path to current level and add new submenu
     this.activeSubmenuPath = this.activeSubmenuPath.slice(0, level);
     this.activeSubmenuPath.push(submenuId);
     this.activeLevel = level;
+    this.versionManager?.updatePath(this.activeSubmenuPath);
 
-    // Update which columns are visible
     this.updateActiveColumns();
 
-    // Update current navigation level attribute for CSS-driven transforms
     if (this.navContainer) {
       this.navContainer.dataset.currentNavLevel = String(level);
     }
 
-    // Focus first focusable element in the new level
     setTimeout(() => {
       const firstFocusable = submenuColumn.querySelector('button, a') as HTMLElement;
       firstFocusable?.focus();
     }, 300);
   }
 
-  /**
-   * Navigate back to previous level
-   */
   private navigateBack(): void {
     if (this.activeSubmenuPath.length <= 1) return;
 
-    // Get the current submenu ID before popping
     const currentSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
-
-    // Collapse aria-expanded on the trigger that opened this level
     if (currentSubmenuId) {
       const trigger = this.sidebar?.querySelector(`[data-target-id="${currentSubmenuId}"]`);
       trigger?.setAttribute('aria-expanded', 'false');
     }
 
-    // Remove current submenu from path
     this.activeSubmenuPath.pop();
     this.activeLevel = this.activeSubmenuPath.length - 1;
+    this.versionManager?.updatePath(this.activeSubmenuPath);
 
-    // Update which columns are visible
     this.updateActiveColumns();
 
-    // Update current navigation level attribute for CSS-driven transforms
     if (this.navContainer) {
       this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
     }
   }
 
-  /**
-   * Update which columns are active/visible based on activeSubmenuPath
-   */
   private updateActiveColumns(): void {
-    const allColumns = this.sidebar?.querySelectorAll('[data-parent-id]');
-
-    allColumns?.forEach((column) => {
+    this.sidebar?.querySelectorAll('[data-parent-id]').forEach((column) => {
       const parentId = (column as HTMLElement).dataset.parentId || '';
       const isInActivePath = this.activeSubmenuPath.includes(parentId);
 
@@ -232,158 +155,9 @@ export class SidebarController {
       column.classList.toggle('sidebar-nav-panel--active', isInActivePath);
     });
 
-    // Update version switcher visibility
-    this.updateVersionSwitcherVisibility();
+    this.versionManager?.updateVisibility(this.activeLevel);
   }
 
-  /**
-   * Update version switcher visibility based on current level
-   */
-  private updateVersionSwitcherVisibility(): void {
-    const versionSwitchers = this.sidebar?.querySelectorAll('[data-version-switcher]');
-
-    versionSwitchers?.forEach((switcher) => {
-      // Only show version switcher in the currently active nested column
-      const column = switcher.closest('[data-parent-id]') as HTMLElement;
-      const parentId = column?.dataset.parentId || '';
-      const isActiveColumn = parentId === this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
-
-      if (this.activeLevel > 0 && isActiveColumn) {
-        switcher.classList.remove('sidebar-version-switcher--hidden');
-      } else {
-        switcher.classList.add('sidebar-version-switcher--hidden');
-      }
-    });
-  }
-
-  /**
-   * Handle version change
-   */
-  private handleVersionChange(newVersion: string): void {
-    const previousVersion = this.currentVersion;
-    this.currentVersion = newVersion;
-
-    // Dispatch custom event
-    document.dispatchEvent(
-      new CustomEvent('sidebar:versionChange', {
-        detail: { previousVersion, newVersion },
-      })
-    );
-
-    // Navigate to equivalent page in new version
-    const currentPath = this.sidebar?.dataset.currentPath || '';
-    if (currentPath.includes(`/${previousVersion}/`)) {
-      const newPath = currentPath.replace(`/${previousVersion}/`, `/${newVersion}/`);
-
-      // Check if the current page is omitted in the target version
-      if (this.isPathOmittedForVersion(currentPath, newVersion)) {
-        // Find the first available link in the current nav-level for the target version
-        const fallbackPath = this.getFirstAvailableLinkForVersion(newVersion, previousVersion);
-        if (fallbackPath) {
-          window.location.href = fallbackPath;
-          return;
-        }
-      }
-
-      window.location.href = newPath;
-    }
-  }
-
-  /**
-   * Check if the current path corresponds to a menu item that is omitted for the target version
-   */
-  private isPathOmittedForVersion(currentPath: string, targetVersion: string): boolean {
-    // Find the active link in the sidebar
-    const activeLink = this.sidebar?.querySelector(
-      'a.sidebar-nav-item--active[data-omit-from]'
-    ) as HTMLAnchorElement;
-
-    if (!activeLink) {
-      return false;
-    }
-
-    const omitFrom = activeLink.dataset.omitFrom?.split(',') || [];
-    return omitFrom.includes(targetVersion);
-  }
-
-  /**
-   * Get the first available link in the current navigation level for the target version
-   */
-  private getFirstAvailableLinkForVersion(
-    targetVersion: string,
-    previousVersion: string
-  ): string | null {
-    // Get the current active panel/column
-    const activeSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
-    const activePanel = this.sidebar?.querySelector(
-      `[data-parent-id="${activeSubmenuId}"]`
-    ) as HTMLElement;
-
-    if (!activePanel) {
-      return null;
-    }
-
-    // Find all links in the active panel
-    const links = activePanel.querySelectorAll(
-      'a.sidebar-nav-item[href]'
-    ) as NodeListOf<HTMLAnchorElement>;
-
-    for (const link of links) {
-      const omitFrom = link.dataset.omitFrom?.split(',') || [];
-      // If this link is NOT omitted for the target version, use it
-      if (!omitFrom.includes(targetVersion)) {
-        // Convert the href to the target version
-        const href = link.getAttribute('href') || '';
-        if (href.includes(`/${previousVersion}/`)) {
-          return href.replace(`/${previousVersion}/`, `/${targetVersion}/`);
-        }
-        return href;
-      }
-    }
-
-    return null;
-  }
-
-  /**
-   * Get focusable elements within the currently active column
-   */
-  private getFocusableElements(): HTMLElement[] {
-    if (!this.sidebar) return [];
-
-    // Get the currently active column by its parent ID
-    const activeSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
-    const activeColumn = this.sidebar.querySelector(`[data-parent-id="${activeSubmenuId}"]`);
-    if (!activeColumn) return [];
-
-    const selectors =
-      'a[href], button:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
-    return Array.from(activeColumn.querySelectorAll(selectors));
-  }
-
-  /**
-   * Trap focus within the sidebar
-   */
-  private trapFocus(e: KeyboardEvent): void {
-    if (!this.isOpen || e.key !== 'Tab') return;
-
-    this.focusableElements = this.getFocusableElements();
-    if (this.focusableElements.length === 0) return;
-
-    const first = this.focusableElements[0];
-    const last = this.focusableElements[this.focusableElements.length - 1];
-
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last?.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first?.focus();
-    }
-  }
-
-  /**
-   * Handle keyboard events
-   */
   private handleKeyDown(e: KeyboardEvent): void {
     if (e.key === 'Escape' && this.isOpen) {
       if (this.activeLevel > 0) {
@@ -392,12 +166,9 @@ export class SidebarController {
         this.close();
       }
     }
-    this.trapFocus(e);
+    this.focusTrap?.trap(e, this.isOpen);
   }
 
-  /**
-   * Open the sidebar
-   */
   public open(): void {
     if (this.isOpen || !this.sidebar || !this.backdrop) return;
 
@@ -410,16 +181,9 @@ export class SidebarController {
     this.backdrop.classList.add('sidebar-backdrop--visible');
     document.body.style.overflow = 'hidden';
 
-    // Focus first focusable element after animation
-    setTimeout(() => {
-      this.focusableElements = this.getFocusableElements();
-      this.focusableElements[0]?.focus();
-    }, 300);
+    setTimeout(() => this.focusTrap?.focusFirst(), 300);
   }
 
-  /**
-   * Close the sidebar
-   */
   public close(): void {
     if (!this.isOpen || !this.sidebar || !this.backdrop) return;
 
@@ -431,42 +195,29 @@ export class SidebarController {
     this.sidebar.classList.remove('sidebar--open');
     this.backdrop.classList.remove('sidebar-backdrop--visible');
 
-    // Reset to initial active state after close animation
-    setTimeout(() => {
-      this.resetToInitialState();
-    }, 300);
+    setTimeout(() => this.resetToInitialState(), 300);
 
     document.body.style.overflow = '';
     this.lastFocusedElement?.focus();
     this.lastFocusedElement = null;
   }
 
-  /**
-   * Reset navigation to initial active state (panel containing current URL)
-   */
   private resetToInitialState(): void {
-    // Reset aria-expanded on all triggers
-    const triggers = this.sidebar?.querySelectorAll('[data-submenu-trigger]');
-    triggers?.forEach((trigger) => {
+    this.sidebar?.querySelectorAll('[data-submenu-trigger]').forEach((trigger) => {
       trigger.setAttribute('aria-expanded', 'false');
     });
 
-    // Restore to initial active state (based on current URL)
     this.activeSubmenuPath = [...this.initialActiveSubmenuPath];
     this.activeLevel = this.initialActiveLevel;
+    this.versionManager?.updatePath(this.activeSubmenuPath);
 
-    // Update columns visibility
     this.updateActiveColumns();
 
-    // Update container transform for CSS-driven transforms
     if (this.navContainer) {
       this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
     }
   }
 
-  /**
-   * Toggle the sidebar open/closed
-   */
   public toggle(): void {
     if (this.isOpen) {
       this.close();
@@ -475,28 +226,15 @@ export class SidebarController {
     }
   }
 
-  /**
-   * Get current version
-   */
   public getVersion(): string {
-    return this.currentVersion;
+    return this.versionManager?.getVersion() || 'v5';
   }
 
-  /**
-   * Set version programmatically
-   */
   public setVersion(version: string): void {
-    // Update all version selects
-    const versionSelects =
-      this.sidebar?.querySelectorAll<HTMLSelectElement>('[data-version-select]');
-    versionSelects?.forEach((select) => {
-      select.value = version;
-    });
-    this.handleVersionChange(version);
+    this.versionManager?.setVersion(version);
   }
 }
 
-// Initialize and expose globally
 const sidebarController = new SidebarController();
 (window as Window & { sidebarController?: SidebarController }).sidebarController =
   sidebarController;

@@ -1,0 +1,85 @@
+---
+import type { MenuItem } from '@/config/types';
+import { BodyMd } from '@/components/primitives';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  item: MenuItem & { href?: string };
+  href: string;
+  isActive: boolean;
+  variant: 'root' | 'nested';
+  type: 'link' | 'submenu';
+  submenuId?: string;
+  targetLevel?: number;
+  showIcon?: boolean;
+}
+
+const {
+  item,
+  href,
+  isActive,
+  variant,
+  type,
+  submenuId,
+  targetLevel,
+  showIcon = false,
+} = Astro.props;
+
+const isNested = variant === 'nested';
+const baseClass = 'sidebar-nav-item';
+const variantClass = isNested ? 'sidebar-nav-item--nested' : '';
+const submenuClass = type === 'submenu' && isNested ? 'sidebar-nav-item--submenu' : '';
+const activeClass = isActive ? 'sidebar-nav-item--active' : '';
+---
+
+{
+  type === 'link' ? (
+    <li>
+      <a
+        href={href}
+        class:list={[baseClass, variantClass, activeClass]}
+        aria-label={item.ariaLabel}
+        aria-current={isActive ? 'page' : undefined}
+        data-omit-from={item.omitFrom?.join(',') || undefined}
+      >
+        {showIcon && item.icon && (
+          <div class="sidebar-nav-icon">
+            <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+          </div>
+        )}
+        <BodyMd vMargin={false} class="sidebar-nav-label">
+          {item.label}
+        </BodyMd>
+      </a>
+    </li>
+  ) : (
+    <li>
+      <button
+        class:list={[baseClass, variantClass, submenuClass]}
+        aria-label={item.ariaLabel}
+        aria-expanded="false"
+        aria-controls={submenuId}
+        type="button"
+        data-submenu-trigger
+        data-target-id={submenuId}
+        data-target-level={targetLevel}
+      >
+        {showIcon && item.icon && (
+          <div class="sidebar-nav-icon">
+            <Icon name={`ph:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+          </div>
+        )}
+        <BodyMd vMargin={false} class="sidebar-nav-label">
+          {item.label}
+        </BodyMd>
+        <Icon
+          name="ph:arrow-right"
+          size="16"
+          color="var(--color-icon-secondary)"
+          class="sidebar-nav-arrow"
+          aria-hidden="true"
+        />
+      </button>
+    </li>
+  )
+}

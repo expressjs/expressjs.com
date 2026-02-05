@@ -8,7 +8,7 @@ export const docsMenu: Menu = {
       items: [
         { href: `/starter/installing`, label: 'Installing' },
         { href: `/starter/hello-world`, label: 'Hello world' },
-        { href: `/starter/generator`, label: 'Express generator', omitFrom: ['v4'] },
+        { href: `/starter/generator`, label: 'Express generator' },
       ],
     },
     {
