@@ -2,7 +2,7 @@
  * Sidebar Styles
  *
  * Navigation sidebar with:
- * - Unlimited navigation levels (stack-based sliding)
+ * - Up to 5 navigation levels (stack-based sliding)
  * - Version switcher
  * - Full accessibility support
  */
@@ -24,10 +24,8 @@
   }
 
   .sidebar-backdrop--visible {
-    @media (--xs-only) {
-      opacity: 1;
-      visibility: visible;
-    }
+    opacity: 1;
+    visibility: visible;
   }
 
   .sidebar {
@@ -51,7 +49,6 @@
     visibility: visible;
   }
 
-  /* Navigation Inner Container */
   .sidebar-container {
     display: flex;
     flex-direction: row;
@@ -59,41 +56,42 @@
     height: 100%;
     transform: translateX(0);
     transition: transform var(--duration-300) var(--ease-in-out);
+
+    &:not([data-current-nav-level='0']) {
+      transform: translateX(-100%);
+    }
+
+    &[data-current-nav-level='2'] .sidebar-nested {
+      transform: translateX(-100%);
+    }
+
+    &[data-current-nav-level='3'] .sidebar-nested {
+      transform: translateX(-200%);
+    }
+
+    &[data-current-nav-level='4'] .sidebar-nested {
+      transform: translateX(-300%);
+    }
+
+    &[data-current-nav-level='5'] .sidebar-nested {
+      transform: translateX(-400%);
+    }
+  }
+
+  .sidebar-nested {
+    display: flex;
+    flex: 1 0 100%;
+    transition: transform var(--duration-300) var(--ease-in-out);
   }
 
   .sidebar-column {
     display: flex;
     flex-direction: column;
-    height: 100%;
     flex: 1 0 100%;
     background-color: var(--color-bg-secondary);
     padding: var(--space-4);
     transition: transform var(--duration-300) var(--ease-in-out);
     overflow: auto;
-  }
-
-  /* Root level column */
-  .sidebar-column--root {
-    background-color: var(--color-bg-secondary);
-  }
-
-  /* Nested columns (submenus) - positioned absolutely to stack */
-  .sidebar-column--nested {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    width: 100%;
-    background-color: var(--color-bg-tertiary);
-    transition: opacity var(--duration-300) var(--ease-in-out) var(--duration-300);
-    opacity: 0;
-    z-index: 0;
-  }
-
-  /* Active column indicator */
-  .sidebar-column--active {
-    opacity: 1;
-    z-index: 10;
-    transition: none;
   }
 
   .sidebar-nav {
@@ -102,35 +100,32 @@
     scrollbar-width: thin;
     scrollbar-color: var(--color-border-primary) transparent;
     scrollbar-gutter: stable;
+    flex-grow: 1;
   }
 
-  /* Navigation List */
   .sidebar-nav-list {
     list-style: none;
     margin: 0;
     padding: 0;
     flex: 1;
+
+    & li {
+      margin: 0;
+    }
   }
 
-  .sidebar-nav-list li {
-    margin: 0;
-  }
-
-  /* Navigation Content (for nested levels) */
   .sidebar-nav-content {
-    flex: 1;
     overflow-y: auto;
     padding-right: var(--space-2);
   }
 
-  /* Back Button */
   .sidebar-nav-back {
     display: flex;
     align-items: center;
     gap: var(--space-2);
     padding: var(--space-2) 0;
     padding-bottom: var(--space-4);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-2);
     background: none;
     border: none;
     border-bottom: 1px solid var(--color-border-mute);
@@ -141,58 +136,29 @@
     text-align: left;
   }
 
-  .sidebar-nav-back:hover {
-    color: var(--color-primary);
-  }
-
-  .sidebar-nav-back:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: 2px;
-  }
-
-  .sidebar-nav-back-title {
-    flex: 1;
-  }
-
-  /* Sections */
   .sidebar-section {
     margin-bottom: var(--space-6);
-  }
 
-  .sidebar-section:last-child {
-    margin-bottom: 0;
-  }
-
-  .sidebar-section-title {
-    margin-bottom: var(--space-4);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-text-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   .sidebar-section-list {
     list-style: none;
     margin: 0;
     padding: 0;
+
+    li {
+      margin: 0;
+    }
+
+    .sidebar-nav-content & {
+      margin-left: var(--space-3);
+      border-left: 1px solid var(--color-border-mute);
+    }
   }
 
-  .sidebar-section-list--no-title {
-    margin-top: 0;
-  }
-
-  /* Add left border for nested sections */
-  .sidebar-nav-content .sidebar-section-list {
-    margin-left: var(--space-3);
-    border-left: 1px solid var(--color-border-mute);
-  }
-
-  .sidebar-section-list li {
-    margin: 0;
-  }
-
-  /* Navigation Items (Root Level) */
   .sidebar-nav-item {
     display: flex;
     align-items: center;
@@ -200,33 +166,49 @@
     width: 100%;
     padding: var(--space-3) 0;
     text-decoration: none;
-    background-color: transparent;
     border: 0;
     cursor: pointer;
-    color: var(--color-text-primary);
     position: relative;
     transition: background-color var(--duration-200) var(--ease-in-out);
-  }
-
-  .sidebar-nav-item--inner:hover,
-  .sidebar-nav-item--inner.sidebar-nav-item--active {
-    background-color: var(--color-bg-secondary);
+    background-color: transparent;
     border-radius: 0 var(--radius-base) var(--radius-base) 0;
   }
 
-  .sidebar-nav-item.sidebar-nav-item--inner:focus-visible {
+  .sidebar-nav-label {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .sidebar-nav-item--nested {
+    padding: var(--space-3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-base);
+  }
+
+  .sidebar-nav-item--nested:hover {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+  }
+
+  .sidebar-nav-item--nested:hover,
+  .sidebar-nav-item--nested.sidebar-nav-item--active {
+    background-color: var(--color-bg-secondary);
+  }
+
+  .sidebar-nav-item--nested:focus-visible {
     outline: 2px solid var(--color-focus-ring);
     outline-offset: -2px;
     background-color: var(--color-bg-secondary);
   }
 
-  /* Active/Current page styling */
-  .sidebar-nav-item--inner.sidebar-nav-item--active {
+  .sidebar-nav-item--nested.sidebar-nav-item--active {
     font-weight: var(--font-weight-semibold);
     position: relative;
   }
 
-  .sidebar-nav-item--inner.sidebar-nav-item--active::before {
+  .sidebar-nav-item--nested.sidebar-nav-item--active::before {
     content: '';
     position: absolute;
     left: 0;
@@ -236,7 +218,6 @@
     background-color: var(--color-bg-inverse);
   }
 
-  /* Navigation Icon */
   .sidebar-nav-icon {
     padding: var(--space-2);
     border-radius: var(--radius-base);
@@ -250,40 +231,17 @@
     background-color: var(--color-bg-mute);
   }
 
-  /* Navigation Label */
-  .sidebar-nav-label {
-    flex-grow: 1;
-    text-align: left;
-    margin: 0;
-  }
-
-  /* Navigation Arrow */
   .sidebar-nav-arrow {
     flex-shrink: 0;
     opacity: 0.6;
     transform: translateX(0);
     transition: opacity var(--duration-200) var(--ease-in-out);
+
+    .sidebar-nav-item:hover & {
+      opacity: 1;
+    }
   }
 
-  .sidebar-nav-item:hover .sidebar-nav-arrow {
-    opacity: 1;
-  }
-
-  /* Inner Level Navigation Items */
-  .sidebar-nav-item--inner {
-    padding: var(--space-3);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
-    color: var(--color-text-secondary);
-    border-radius: var(--radius-base);
-  }
-
-  .sidebar-nav-item--inner:hover {
-    background-color: var(--color-bg-secondary);
-    color: var(--color-text-primary);
-  }
-
-  /* Submenu Button */
   .sidebar-nav-item--submenu {
     display: flex;
     align-items: center;
@@ -291,7 +249,40 @@
     text-align: left;
   }
 
-  /* Reduced motion */
+  .sidebar-nested-column {
+    background-color: var(--color-bg-tertiary);
+    position: relative;
+  }
+
+  .sidebar-nav-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    opacity: 0;
+    padding: var(--space-4);
+
+    &:not(.sidebar-nav-panel--active) {
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      border: 0;
+      white-space: nowrap;
+    }
+
+    &--active {
+      z-index: 10;
+      opacity: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .sidebar,
     .sidebar-backdrop,

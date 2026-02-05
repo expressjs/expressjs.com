@@ -3,15 +3,11 @@
  * SidebarMenu Component
  *
  * Recursively renders menu levels statically at build time.
- * All menu content is available in the initial HTML for:
- * - Better SEO (all links crawlable)
- * - Better accessibility (works without JS)
- * - Better performance (no JS needed for menu content)
  */
 
 import type { Menu, MenuItem } from '@/config/types';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
-import { Body, BodyMd } from '@/components/primitives';
+import { Body, BodyMd, BodySm } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
 
@@ -32,7 +28,6 @@ interface Props {
 const {
   menu,
   level,
-  title = 'Navigation',
   lang,
   currentPath,
   basePath = '',
@@ -91,57 +86,199 @@ type SubmenuData = {
   id: string;
   basePath: string;
   versioned: boolean;
+  level: number;
 };
 
 const submenus: SubmenuData[] = [];
 
-// Helper to collect submenu data from sections
-menu.sections?.forEach((section, sectionIndex) => {
-  section.items.forEach((item, itemIndex) => {
-    if (hasSubmenu(item)) {
-      const itemId = getItemId(sectionIndex, itemIndex);
-      const submenuId = `submenu-${itemId}`;
-      submenus.push({
-        menu: item.submenu,
-        title: item.label,
-        id: submenuId,
-        basePath: item.submenu.basePath || basePath,
-        versioned: item.submenu.versioned ?? versioned,
-      });
-    }
+/**
+ * Recursively collect all submenus from a menu, tracking their level
+ */
+function collectAllSubmenus(
+  menuToScan: Menu,
+  currentLevel: number,
+  currentParentId: string,
+  currentBasePath: string,
+  currentVersioned: boolean
+) {
+  const collectFromItems = (items: MenuItem[], sectionIndex: number | null) => {
+    items.forEach((item, itemIndex) => {
+      if (hasSubmenu(item)) {
+        const itemId =
+          sectionIndex !== null
+            ? `${currentParentId}-s${sectionIndex}-i${itemIndex}`
+            : `${currentParentId}-i${itemIndex}`;
+        const submenuId = `submenu-${itemId}`;
+        const submenuBasePath = item.submenu.basePath || currentBasePath;
+        const submenuVersioned = item.submenu.versioned ?? currentVersioned;
+
+        submenus.push({
+          menu: item.submenu,
+          title: item.label,
+          id: submenuId,
+          basePath: submenuBasePath,
+          versioned: submenuVersioned,
+          level: currentLevel + 1,
+        });
+
+        // Recursively collect nested submenus
+        collectAllSubmenus(
+          item.submenu,
+          currentLevel + 1,
+          submenuId,
+          submenuBasePath,
+          submenuVersioned
+        );
+      }
+    });
+  };
+
+  // Collect from sections
+  menuToScan.sections?.forEach((section, sectionIndex) => {
+    collectFromItems(section.items, sectionIndex);
   });
+
+  // Collect from standalone items
+  if (menuToScan.items) {
+    collectFromItems(menuToScan.items, null);
+  }
+}
+
+// Only collect all submenus at level 0
+if (level === 0) {
+  collectAllSubmenus(menu, level, parentId, basePath, versioned);
+}
+
+// Group submenus by level for rendering
+const submenusByLevel = new Map<number, SubmenuData[]>();
+submenus.forEach((submenu) => {
+  const levelSubmenus = submenusByLevel.get(submenu.level) || [];
+  levelSubmenus.push(submenu);
+  submenusByLevel.set(submenu.level, levelSubmenus);
 });
 
-// Helper to collect submenu data from standalone items
-menu.items?.forEach((item, itemIndex) => {
-  if (hasSubmenu(item)) {
-    const itemId = getItemId(null, itemIndex);
-    const submenuId = `submenu-${itemId}`;
-    submenus.push({
-      menu: item.submenu,
-      title: item.label,
-      id: submenuId,
-      basePath: item.submenu.basePath || basePath,
-      versioned: item.submenu.versioned ?? versioned,
-    });
+// Get sorted level numbers
+const sortedLevels = Array.from(submenusByLevel.keys()).sort((a, b) => a - b);
+
+/**
+ * Resolve href for a submenu item (used in nested panel rendering)
+ */
+function resolveSubmenuHref(
+  href: string,
+  submenuBasePath: string,
+  submenuVersioned: boolean
+): string {
+  let fullPath = '';
+
+  if (submenuVersioned && submenuBasePath) {
+    fullPath = `/${lang}${submenuBasePath}/${version}${href}`;
+  } else if (submenuBasePath) {
+    fullPath = `/${lang}${submenuBasePath}${href}`;
+  } else {
+    fullPath = `/${lang}${href}`;
   }
-});
+
+  return fullPath;
+}
+
+/**
+ * Generate item ID for submenu items
+ */
+function getSubmenuItemId(
+  submenuParentId: string,
+  sectionIndex: number | null,
+  itemIndex: number
+): string {
+  if (sectionIndex !== null) {
+    return `${submenuParentId}-s${sectionIndex}-i${itemIndex}`;
+  }
+  return `${submenuParentId}-i${itemIndex}`;
+}
+
+/**
+ * Check if a submenu contains a link matching the current path
+ */
+function submenuContainsCurrentPath(
+  submenuMenu: Menu,
+  submenuBasePath: string,
+  submenuVersioned: boolean
+): boolean {
+  // Normalize path by removing trailing slash for comparison
+  const normalizePath = (path: string) => path.replace(/\/$/, '');
+  const normalizedCurrentPath = normalizePath(currentPath);
+
+  const checkItems = (items: MenuItem[]): boolean => {
+    for (const item of items) {
+      if (isLink(item)) {
+        const href = resolveSubmenuHref(item.href, submenuBasePath, submenuVersioned);
+        if (normalizedCurrentPath === normalizePath(href)) {
+          return true;
+        }
+      }
+      // Also check nested submenus recursively
+      if (hasSubmenu(item)) {
+        const nestedBasePath = item.submenu.basePath || submenuBasePath;
+        const nestedVersioned = item.submenu.versioned ?? submenuVersioned;
+        if (submenuContainsCurrentPath(item.submenu, nestedBasePath, nestedVersioned)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
+  // Check sections
+  for (const section of submenuMenu.sections || []) {
+    if (checkItems(section.items)) {
+      return true;
+    }
+  }
+
+  // Check standalone items
+  if (submenuMenu.items && checkItems(submenuMenu.items)) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
+ * Calculate the initial active level based on current path
+ * Returns the level of the deepest submenu that contains the current path
+ */
+function calculateInitialActiveLevel(): number {
+  let activeLevel = 0;
+
+  for (const submenu of submenus) {
+    if (submenuContainsCurrentPath(submenu.menu, submenu.basePath, submenu.versioned)) {
+      if (submenu.level > activeLevel) {
+        activeLevel = submenu.level;
+      }
+    }
+  }
+
+  return activeLevel;
+}
+
+// Calculate initial active level at build time (only for level 0)
+const initialActiveLevel = level === 0 ? calculateInitialActiveLevel() : 0;
 ---
 
 {/* Root Level (level 0) */}
 {
   level === 0 && (
     <div
-      class="sidebar-column sidebar-column--root sidebar-column--active"
+      class="sidebar-column sidebar-root-column"
       data-nav-level={level}
       data-parent-id={parentId}
+      data-initial-active-level={initialActiveLevel}
       aria-hidden="false"
     >
       <nav class="sidebar-nav" aria-label="Main navigation">
         <ul class="sidebar-nav-list">
           {menu.sections?.map((section, sectionIndex) => (
             <li class="sidebar-section" data-section-index={sectionIndex}>
-              {section.title && <h3 class="sidebar-section-title">{section.title}</h3>}
+              {section.title && <Body as="h3">{section.title}</Body>}
               <ul class="sidebar-section-list">
                 {section.items.map((item, itemIndex) => {
                   const itemId = getItemId(sectionIndex, itemIndex);
@@ -154,11 +291,7 @@ menu.items?.forEach((item, itemIndex) => {
                       <li>
                         <a
                           href={href}
-                          class:list={[
-                            'sidebar-nav-item',
-                            'sidebar-nav-item--outer',
-                            isActive && 'sidebar-nav-item--active',
-                          ]}
+                          class:list={['sidebar-nav-item', isActive && 'sidebar-nav-item--active']}
                           aria-label={item.ariaLabel}
                           aria-current={isActive ? 'page' : undefined}
                         >
@@ -183,7 +316,7 @@ menu.items?.forEach((item, itemIndex) => {
                     return (
                       <li>
                         <button
-                          class="sidebar-nav-item sidebar-nav-item--outer"
+                          class="sidebar-nav-item"
                           aria-label={item.ariaLabel}
                           aria-expanded="false"
                           aria-controls={submenuId}
@@ -300,176 +433,191 @@ menu.items?.forEach((item, itemIndex) => {
   )
 }
 
-{/* Nested Levels (level > 0) */}
+{/* Nested Levels - rendered only at level 0 */}
+{/* Each level gets its own sidebar-column containing all nav panels for that level */}
 {
-  level > 0 && (
-    <div
-      class="sidebar-column sidebar-column--nested"
-      data-nav-level={level}
-      data-parent-id={parentId}
-      aria-hidden="true"
-    >
-      {versioned && versions.length > 0 && (
-        <VersionSwitcher
-          class="sidebar-version-switcher"
-          versions={versions}
-          defaultVersion={defaultVersion}
-          currentPath={currentPath}
-          aria-label="Select documentation version"
-          data-version-switcher
-        />
-      )}
-      <nav class="sidebar-nav" aria-label={`${title} navigation`}>
-        <button
-          class="sidebar-nav-back"
-          type="button"
-          aria-label={`Go back from ${title}`}
-          data-back-button
-          data-target-level={level - 1}
+  level === 0 && sortedLevels.length > 0 && (
+    <div class="sidebar-nested" data-nested-levels-container>
+      {sortedLevels.map((navLevel) => (
+        <div
+          class="sidebar-column sidebar-nested-column"
+          data-nav-level={navLevel}
+          aria-hidden="true"
         >
-          <Icon
-            name="ph:arrow-line-left"
-            size="16"
-            color="var(--color-icon-primary)"
-            aria-hidden="true"
-          />
-          <Body as="h3" weight="bold" class="sidebar-nav-back-title" vMargin={false}>
-            {title}
-          </Body>
-        </button>
-        <div class="sidebar-nav-content">
-          {menu.sections?.map((section, sectionIndex) => (
-            <div class="sidebar-section" data-section-index={sectionIndex}>
-              {section.title && <h4 class="sidebar-section-title">{section.title}</h4>}
-              <ul class="sidebar-section-list">
-                {section.items.map((item, itemIndex) => {
-                  const itemId = getItemId(sectionIndex, itemIndex);
+          {submenusByLevel.get(navLevel)?.map((submenu) => {
+            const panelHasActiveItem = submenuContainsCurrentPath(
+              submenu.menu,
+              submenu.basePath,
+              submenu.versioned
+            );
+            return (
+              <div
+                class:list={[
+                  'sidebar-nav-panel',
+                  panelHasActiveItem && 'sidebar-nav-panel--active',
+                ]}
+                data-parent-id={submenu.id}
+                aria-hidden="true"
+              >
+                {submenu.versioned && versions.length > 0 && (
+                  <VersionSwitcher
+                    class="sidebar-version-switcher"
+                    versions={versions}
+                    defaultVersion={defaultVersion}
+                    currentPath={currentPath}
+                    aria-label="Select documentation version"
+                    data-version-switcher
+                  />
+                )}
+                <nav class="sidebar-nav" aria-label={`${submenu.title} navigation`}>
+                  <button
+                    class="sidebar-nav-back"
+                    type="button"
+                    aria-label={`Go back from ${submenu.title}`}
+                    data-back-button
+                    data-target-level={navLevel - 1}
+                  >
+                    <Icon
+                      name="ph:arrow-line-left"
+                      size="16"
+                      color="var(--color-icon-primary)"
+                      aria-hidden="true"
+                    />
+                    <Body as="h3" weight="bold" vMargin={false}>
+                      {submenu.title}
+                    </Body>
+                  </button>
+                  <div class="sidebar-nav-content">
+                    {submenu.menu.sections?.map((section, sectionIndex) => (
+                      <div class="sidebar-section" data-section-index={sectionIndex}>
+                        {section.title && (
+                          <Body as="h3" weight="bold">
+                            {section.title}
+                          </Body>
+                        )}
+                        <ul class="sidebar-section-list">
+                          {section.items.map((item, itemIndex) => {
+                            const itemId = getSubmenuItemId(submenu.id, sectionIndex, itemIndex);
 
-                  if (isLink(item)) {
-                    const href = resolveHref(item.href);
-                    const isActive = currentPath === href;
+                            if (isLink(item)) {
+                              const href = resolveSubmenuHref(
+                                item.href,
+                                submenu.basePath,
+                                submenu.versioned
+                              );
+                              const isActive = currentPath === href;
 
-                    return (
-                      <li>
-                        <a
-                          href={href}
-                          class:list={[
-                            'sidebar-nav-item',
-                            'sidebar-nav-item--inner',
-                            isActive && 'sidebar-nav-item--active',
-                          ]}
-                          aria-current={isActive ? 'page' : undefined}
-                        >
-                          <span class="sidebar-nav-label">{item.label}</span>
-                        </a>
-                      </li>
-                    );
-                  } else if (hasSubmenu(item)) {
-                    const submenuId = `submenu-${itemId}`;
+                              return (
+                                <li>
+                                  <a
+                                    href={href}
+                                    class:list={[
+                                      'sidebar-nav-item',
+                                      'sidebar-nav-item--nested',
+                                      isActive && 'sidebar-nav-item--active',
+                                    ]}
+                                    aria-current={isActive ? 'page' : undefined}
+                                  >
+                                    <BodyMd vMargin={false}>{item.label}</BodyMd>
+                                  </a>
+                                </li>
+                              );
+                            } else if (hasSubmenu(item)) {
+                              const submenuId = `submenu-${itemId}`;
 
-                    return (
-                      <li>
-                        <button
-                          class="sidebar-nav-item sidebar-nav-item--inner sidebar-nav-item--submenu"
-                          aria-expanded="false"
-                          aria-controls={submenuId}
-                          type="button"
-                          data-submenu-trigger
-                          data-target-id={submenuId}
-                          data-target-level={level + 1}
-                        >
-                          <span class="sidebar-nav-label">{item.label}</span>
-                          <Icon
-                            name="ph:arrow-right"
-                            size="16"
-                            color="var(--color-icon-secondary)"
-                            class="sidebar-nav-arrow"
-                            aria-hidden="true"
-                          />
-                        </button>
-                      </li>
-                    );
-                  }
-                  return null;
-                })}
-              </ul>
-            </div>
-          ))}
-          {menu.items && menu.items.length > 0 && (
-            <ul class="sidebar-section-list sidebar-section-list--no-title">
-              {menu.items.map((item, itemIndex) => {
-                const itemId = getItemId(null, itemIndex);
+                              return (
+                                <li>
+                                  <button
+                                    class="sidebar-nav-item sidebar-nav-item--nested sidebar-nav-item--submenu"
+                                    aria-expanded="false"
+                                    aria-controls={submenuId}
+                                    type="button"
+                                    data-submenu-trigger
+                                    data-target-id={submenuId}
+                                    data-target-level={navLevel + 1}
+                                  >
+                                    <BodyMd vMargin={false}>{item.label}</BodyMd>
+                                    <Icon
+                                      name="ph:arrow-right"
+                                      size="16"
+                                      color="var(--color-icon-secondary)"
+                                      class="sidebar-nav-arrow"
+                                      aria-hidden="true"
+                                    />
+                                  </button>
+                                </li>
+                              );
+                            }
+                            return null;
+                          })}
+                        </ul>
+                      </div>
+                    ))}
+                    {submenu.menu.items && submenu.menu.items.length > 0 && (
+                      <ul class="sidebar-section-list">
+                        {submenu.menu.items.map((item, itemIndex) => {
+                          const itemId = getSubmenuItemId(submenu.id, null, itemIndex);
 
-                if (isLink(item)) {
-                  const href = resolveHref(item.href);
-                  const isActive = currentPath === href;
+                          if (isLink(item)) {
+                            const href = resolveSubmenuHref(
+                              item.href,
+                              submenu.basePath,
+                              submenu.versioned
+                            );
+                            const isActive = currentPath === href;
 
-                  return (
-                    <li>
-                      <a
-                        href={href}
-                        class:list={[
-                          'sidebar-nav-item',
-                          'sidebar-nav-item--inner',
-                          isActive && 'sidebar-nav-item--active',
-                        ]}
-                        aria-current={isActive ? 'page' : undefined}
-                      >
-                        <span class="sidebar-nav-label">{item.label}</span>
-                      </a>
-                    </li>
-                  );
-                } else if (hasSubmenu(item)) {
-                  const submenuId = `submenu-${itemId}`;
+                            return (
+                              <li>
+                                <a
+                                  href={href}
+                                  class:list={[
+                                    'sidebar-nav-item',
+                                    'sidebar-nav-item--nested',
+                                    isActive && 'sidebar-nav-item--active',
+                                  ]}
+                                  aria-current={isActive ? 'page' : undefined}
+                                >
+                                  <span class="sidebar-nav-label">{item.label}</span>
+                                </a>
+                              </li>
+                            );
+                          } else if (hasSubmenu(item)) {
+                            const submenuId = `submenu-${itemId}`;
 
-                  return (
-                    <li>
-                      <button
-                        class="sidebar-nav-item sidebar-nav-item--inner sidebar-nav-item--submenu"
-                        aria-expanded="false"
-                        aria-controls={submenuId}
-                        type="button"
-                        data-submenu-trigger
-                        data-target-id={submenuId}
-                        data-target-level={level + 1}
-                      >
-                        <span class="sidebar-nav-label">{item.label}</span>
-                        <Icon
-                          name="ph:arrow-right"
-                          size="16"
-                          color="var(--color-icon-secondary)"
-                          class="sidebar-nav-arrow"
-                          aria-hidden="true"
-                        />
-                      </button>
-                    </li>
-                  );
-                }
-                return null;
-              })}
-            </ul>
-          )}
+                            return (
+                              <li>
+                                <button
+                                  class="sidebar-nav-item sidebar-nav-item--nested sidebar-nav-item--submenu"
+                                  aria-expanded="false"
+                                  aria-controls={submenuId}
+                                  type="button"
+                                  data-submenu-trigger
+                                  data-target-id={submenuId}
+                                  data-target-level={navLevel + 1}
+                                >
+                                  <span class="sidebar-nav-label">{item.label}</span>
+                                  <Icon
+                                    name="ph:arrow-right"
+                                    size="16"
+                                    color="var(--color-icon-secondary)"
+                                    class="sidebar-nav-arrow"
+                                    aria-hidden="true"
+                                  />
+                                </button>
+                              </li>
+                            );
+                          }
+                          return null;
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                </nav>
+              </div>
+            );
+          })}
         </div>
-      </nav>
+      ))}
     </div>
   )
-}
-
-{/* Render all collected submenus recursively */}
-{
-  submenus.map((submenu) => (
-    <Astro.self
-      menu={submenu.menu}
-      level={level + 1}
-      title={submenu.title}
-      lang={lang}
-      currentPath={currentPath}
-      basePath={submenu.basePath}
-      versioned={submenu.versioned}
-      version={version}
-      versions={versions}
-      defaultVersion={defaultVersion}
-      parentId={submenu.id}
-    />
-  ))
 }

@@ -25,6 +25,10 @@ export class SidebarController {
   private activeSubmenuPath: string[] = ['root']; // Stack of active submenu IDs
   private currentVersion: string;
 
+  // Store initial active state for restoration on close
+  private initialActiveLevel = 0;
+  private initialActiveSubmenuPath: string[] = ['root'];
+
   constructor() {
     this.sidebar = document.querySelector('[data-sidebar]');
     this.backdrop = document.querySelector('[data-sidebar-backdrop]');
@@ -55,8 +59,51 @@ export class SidebarController {
     // Setup version switchers
     this.setupVersionSwitchers();
 
+    // Initialize active state from pre-rendered data
+    this.initializeFromActiveState();
+
     // Set initial active state
     this.updateActiveColumns();
+  }
+
+  /**
+   * Initialize navigation state from pre-rendered active classes
+   */
+  private initializeFromActiveState(): void {
+    // Read initial active level from data attribute
+    const rootColumn = this.sidebar?.querySelector('[data-initial-active-level]') as HTMLElement;
+    const initialActiveLevel = parseInt(rootColumn?.dataset.initialActiveLevel || '0', 10);
+
+    if (initialActiveLevel > 0) {
+      // Build the active submenu path by finding active panels at each level
+      this.activeSubmenuPath = ['root'];
+
+      for (let level = 1; level <= initialActiveLevel; level++) {
+        // Find the active panel at this level by checking panels within the level's column
+        const levelColumn = this.sidebar?.querySelector(`[data-nav-level="${level}"]`);
+        const activePanelInLevel = levelColumn?.querySelector(
+          '.sidebar-nav-panel.sidebar-nav-panel--active'
+        ) as HTMLElement;
+
+        if (activePanelInLevel) {
+          const parentId = activePanelInLevel.dataset.parentId;
+          if (parentId) {
+            this.activeSubmenuPath.push(parentId);
+          }
+        }
+      }
+
+      this.activeLevel = initialActiveLevel;
+
+      // Store initial state for restoration on close
+      this.initialActiveLevel = initialActiveLevel;
+      this.initialActiveSubmenuPath = [...this.activeSubmenuPath];
+
+      // Set the initial nav level on the container for CSS transforms
+      if (this.navContainer) {
+        this.navContainer.dataset.currentNavLevel = String(initialActiveLevel);
+      }
+    }
   }
 
   /**
@@ -131,9 +178,9 @@ export class SidebarController {
     // Update which columns are visible
     this.updateActiveColumns();
 
-    // Update container transform for slide effect
+    // Update current navigation level attribute for CSS-driven transforms
     if (this.navContainer) {
-      this.navContainer.style.transform = `translateX(-${level * 100}%)`;
+      this.navContainer.dataset.currentNavLevel = String(level);
     }
 
     // Focus first focusable element in the new level
@@ -165,9 +212,9 @@ export class SidebarController {
     // Update which columns are visible
     this.updateActiveColumns();
 
-    // Update container transform for slide effect
+    // Update current navigation level attribute for CSS-driven transforms
     if (this.navContainer) {
-      this.navContainer.style.transform = `translateX(-${this.activeLevel * 100}%)`;
+      this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
     }
   }
 
@@ -182,7 +229,7 @@ export class SidebarController {
       const isInActivePath = this.activeSubmenuPath.includes(parentId);
 
       column.setAttribute('aria-hidden', isInActivePath ? 'false' : 'true');
-      column.classList.toggle('sidebar-column--active', isInActivePath);
+      column.classList.toggle('sidebar-nav-panel--active', isInActivePath);
     });
 
     // Update version switcher visibility
@@ -318,9 +365,9 @@ export class SidebarController {
     this.sidebar.classList.remove('sidebar--open');
     this.backdrop.classList.remove('sidebar-backdrop--visible');
 
-    // Reset to root level after close animation
+    // Reset to initial active state after close animation
     setTimeout(() => {
-      this.resetToRootLevel();
+      this.resetToInitialState();
     }, 300);
 
     document.body.style.overflow = '';
@@ -329,23 +376,25 @@ export class SidebarController {
   }
 
   /**
-   * Reset navigation to root level
+   * Reset navigation to initial active state (panel containing current URL)
    */
-  private resetToRootLevel(): void {
+  private resetToInitialState(): void {
     // Reset aria-expanded on all triggers
     const triggers = this.sidebar?.querySelectorAll('[data-submenu-trigger]');
     triggers?.forEach((trigger) => {
       trigger.setAttribute('aria-expanded', 'false');
     });
 
-    // Reset navigation state
-    this.activeSubmenuPath = ['root'];
-    this.activeLevel = 0;
+    // Restore to initial active state (based on current URL)
+    this.activeSubmenuPath = [...this.initialActiveSubmenuPath];
+    this.activeLevel = this.initialActiveLevel;
 
-    // Update columns and slide back
+    // Update columns visibility
     this.updateActiveColumns();
+
+    // Update container transform for CSS-driven transforms
     if (this.navContainer) {
-      this.navContainer.style.transform = 'translateX(0)';
+      this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
     }
   }
 
