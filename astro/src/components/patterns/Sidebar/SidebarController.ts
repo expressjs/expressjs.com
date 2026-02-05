@@ -1,4 +1,6 @@
-import type { MenuConfig, MenuLevel, MenuItem, VersionConfig, NavigationLevel } from './types';
+import type { MenuConfig, NavigationColumn } from './types';
+import type { Menu, MenuItem } from '@/config/types';
+import type { VersionConfig } from '@components/patterns/VersionSwitcher/types';
 
 /**
  * SidebarController
@@ -24,7 +26,7 @@ export class SidebarController {
   private currentVersion: string = 'v5';
   private lang: string = 'en';
   private currentPath: string = '';
-  private navigationStack: NavigationLevel[] = [];
+  private navigationStack: NavigationColumn[] = [];
   private activeColumn = 0;
   private currentBasePath: string = '';
   private isVersionedContent: boolean = false;
@@ -149,7 +151,7 @@ export class SidebarController {
     if (!this.menu) return null;
 
     const parts = path.split('.');
-    let current: MenuLevel | MenuItem[] | MenuItem | undefined = this.menu;
+    let current: Menu | MenuItem[] | MenuItem | undefined = this.menu;
 
     for (let i = 0; i < parts.length; i++) {
       const key = parts[i];
@@ -176,7 +178,7 @@ export class SidebarController {
    */
   private pushLevel(
     title: string,
-    content: MenuLevel,
+    content: Menu,
     levelIndex: number,
     basePath?: string,
     versioned?: boolean
@@ -265,7 +267,7 @@ export class SidebarController {
   /**
    * Create a navigation level element
    */
-  private createNavLevel(content: MenuLevel, title: string, levelIndex: number): void {
+  private createNavLevel(content: Menu, title: string, levelIndex: number): void {
     if (!this.navTemplate || !this.navContainer) return;
 
     const navClone = this.navTemplate.content.cloneNode(true) as DocumentFragment;
@@ -303,17 +305,31 @@ export class SidebarController {
   }
 
   /**
+   * Check if an item or section should be omitted for the current version
+   */
+  private shouldOmitForVersion(item: { omitFrom?: string[] }): boolean {
+    return item.omitFrom?.includes(this.currentVersion) ?? false;
+  }
+
+  /**
    * Populate navigation content with sections and items
    */
-  private populateNavContent(container: HTMLElement, content: MenuLevel, levelIndex: number): void {
+  private populateNavContent(container: HTMLElement, content: Menu, levelIndex: number): void {
     container.innerHTML = '';
 
-    // Render sections
+    // Render sections (filtered by version)
     if (content.sections) {
       content.sections.forEach((section, sectionIndex) => {
+        // Skip sections omitted for this version
+        if (this.shouldOmitForVersion(section)) return;
+
+        // Filter items within the section
+        const filteredItems = section.items.filter((item) => !this.shouldOmitForVersion(item));
+        if (filteredItems.length === 0) return;
+
         const sectionEl = this.createSectionElement(
           section.title || '',
-          section.items,
+          filteredItems,
           levelIndex,
           `sections.${sectionIndex}.items`
         );
@@ -321,12 +337,15 @@ export class SidebarController {
       });
     }
 
-    // Render standalone items (not in a section)
+    // Render standalone items (not in a section), filtered by version
     if (content.items && content.items.length > 0) {
+      const filteredItems = content.items.filter((item) => !this.shouldOmitForVersion(item));
+      if (filteredItems.length === 0) return;
+
       const list = document.createElement('ul');
       list.className = 'sidebar-section-list sidebar-section-list--no-title';
 
-      content.items.forEach((item, itemIndex) => {
+      filteredItems.forEach((item, itemIndex) => {
         const li = this.createItemElement(item, levelIndex, `items.${itemIndex}`);
         list.appendChild(li);
       });
@@ -374,7 +393,7 @@ export class SidebarController {
 
     if ('href' in item && item.href) {
       // It's a link
-      const href = this.resolveHref(item.href, item.version);
+      const href = this.resolveHref(item.href);
       const a = document.createElement('a');
       a.className = 'sidebar-nav-item sidebar-nav-item--inner';
       a.href = href;
@@ -426,7 +445,7 @@ export class SidebarController {
    */
   private handleDynamicSubmenuClick(
     e: Event,
-    submenu: MenuLevel,
+    submenu: Menu,
     label: string,
     currentLevel: number
   ): void {
@@ -441,8 +460,8 @@ export class SidebarController {
    * Resolve href with basePath and version
    * Builds full paths like: /en/docs/v5/starter/installing
    */
-  private resolveHref(href: string, itemVersion?: string): string {
-    const version = itemVersion || this.currentVersion;
+  private resolveHref(href: string): string {
+    const version = this.currentVersion;
 
     // If href contains {version} placeholder, replace it
     if (href.includes('{version}')) {

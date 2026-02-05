@@ -7,19 +7,8 @@
 // Export types
 export type {
   MenuConfig,
-  MenuLevel,
-  MenuItem,
-  MenuLink,
-  MenuButton,
-  MenuSection,
-  VersionConfig,
-  NavigationLevel,
-  NavigationStack,
+  NavigationColumn,
   PageInfo,
   SubfolderInfo,
   SectionWithPages,
-  NavigationData,
 } from './types';
-
-// Export type guards
-export { isMenuLink, isMenuButton } from './types';
