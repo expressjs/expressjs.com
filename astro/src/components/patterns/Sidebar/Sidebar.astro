@@ -80,6 +80,7 @@ function isLink(item: { href?: string; submenu?: unknown }): boolean {
                           href={`/${lang}${item.href}`}
                           class:list={[
                             'sidebar-nav-item',
+                            'sidebar-nav-item--outer',
                             currentPath === `/${lang}${item.href}` && 'sidebar-nav-item--active',
                           ]}
                           aria-label={item.ariaLabel}
@@ -100,7 +101,7 @@ function isLink(item: { href?: string; submenu?: unknown }): boolean {
                         </a>
                       ) : (
                         <button
-                          class="sidebar-nav-item"
+                          class="sidebar-nav-item sidebar-nav-item--outer"
                           aria-label={item.ariaLabel}
                           aria-expanded="false"
                           type="button"
