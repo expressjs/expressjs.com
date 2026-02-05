@@ -33,6 +33,7 @@ export class SidebarVersionManager {
     );
 
     const currentPath = this.sidebar.dataset.currentPath || '';
+
     if (currentPath.includes(`/${previousVersion}/`)) {
       if (this.isPathOmittedForVersion(currentPath, newVersion)) {
         const fallbackPath = this.getFirstAvailableLinkForVersion(newVersion, previousVersion);
@@ -43,7 +44,30 @@ export class SidebarVersionManager {
       }
 
       window.location.href = currentPath.replace(`/${previousVersion}/`, `/${newVersion}/`);
+      return;
     }
+
+    if (this.isInVersionedSubmenu()) {
+      const fallbackPath = this.getFirstAvailableLinkForVersion(newVersion, previousVersion);
+      if (fallbackPath) {
+        window.location.href = fallbackPath;
+      }
+    }
+  }
+
+  private isInVersionedSubmenu(): boolean {
+    const activeSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
+    if (activeSubmenuId === 'root') return false;
+
+    const activePanel = this.sidebar.querySelector(
+      `[data-parent-id="${activeSubmenuId}"]`
+    ) as HTMLElement;
+
+    if (!activePanel) return false;
+
+    // Check if the active panel contains versioned links
+    const versionedLink = activePanel.querySelector('a[href*="/v4/"], a[href*="/v5/"]');
+    return versionedLink !== null;
   }
 
   private isPathOmittedForVersion(currentPath: string, targetVersion: string): boolean {
