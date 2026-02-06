@@ -7,6 +7,9 @@ import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types'
 import type { Menu } from '@/config/types';
 import SidebarMenu from './SidebarMenu.astro';
 import { detectVersionFromUrl } from './utils';
+import { Icon } from 'astro-icon/components';
+import { BodyMd, Flex } from '@/components/primitives';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.astro';
 
 type Props = HTMLAttributes<'div'> & {
   menu?: Menu;
@@ -47,18 +50,35 @@ const currentVersion = detectVersionFromUrl(currentPath, versions, defaultVersio
 >
   <h2 id="sidebar-title" class="sr-only">Main menu</h2>
 
-  <div class="sidebar-container" data-nav-container data-current-nav-level="0">
-    <SidebarMenu
-      menu={menu}
-      level={0}
-      title="Main Menu"
-      lang={lang}
-      currentPath={currentPath}
-      version={currentVersion}
-      versions={versions}
-      defaultVersion={defaultVersion}
-    />
-  </div>
+  <Flex direction="column" justify="between" class="h-full">
+    <div class="sidebar-container" data-nav-container data-current-nav-level="0">
+      <SidebarMenu
+        menu={menu}
+        level={0}
+        title="Main Menu"
+        lang={lang}
+        currentPath={currentPath}
+        version={currentVersion}
+        versions={versions}
+        defaultVersion={defaultVersion}
+      />
+    </div>
+
+    <menu class="sidebar-nav-menu">
+      {/* TODO: placeholder for language selector */}
+      <li>
+        <button class="sidebar-nav-item" aria-label="Select language">
+          <div class="sidebar-nav-icon">
+            <Icon name="fluent:translate-20-regular" size="24" color="var(--color-icon-primary)" />
+          </div>
+          <BodyMd as="span" vMargin={false}> Select language </BodyMd>
+        </button>
+      </li>
+      <li>
+        <ThemeSwitcher />
+      </li>
+    </menu>
+  </Flex>
 
   <script>
     import './SidebarController';

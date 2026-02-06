@@ -99,27 +99,6 @@ const initialActiveLevel =
             targetLevel={level + 1}
           />
         </ul>
-
-        <menu class="sidebar-nav-menu">
-          {/* TODO: placeholder for language selector */}
-          <li>
-            <button class="sidebar-nav-item" aria-label="Select language">
-              <div class="sidebar-nav-icon">
-                <Icon
-                  name="fluent:translate-20-regular"
-                  size="24"
-                  color="var(--color-icon-primary)"
-                />
-              </div>
-              <BodyMd as="span" vMargin={false}>
-                Select language
-              </BodyMd>
-            </button>
-          </li>
-          <li>
-            <ThemeSwitcher />
-          </li>
-        </menu>
       </nav>
     </div>
   )

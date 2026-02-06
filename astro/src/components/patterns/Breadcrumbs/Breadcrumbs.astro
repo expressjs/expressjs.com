@@ -27,7 +27,9 @@ const { items } = Astro.props;
           ) : (
             <Body class="m-0">{item.label}</Body>
           )}
-          {index < items.length - 1 && <Icon name="ph:caret-right" aria-hidden="true" />}
+          {index < items.length - 1 && (
+            <Icon name="fluent:chevron-right-28-regular" aria-hidden="true" />
+          )}
         </li>
       ))
     }

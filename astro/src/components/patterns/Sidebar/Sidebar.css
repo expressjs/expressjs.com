@@ -44,7 +44,7 @@
     display: flex;
     flex-direction: row;
     position: relative;
-    height: 100%;
+    flex-grow: 1;
     transform: translateX(0);
     transition: transform var(--duration-300) var(--ease-in-out);
 
@@ -67,6 +67,11 @@
     &[data-current-nav-level='5'] .sidebar-nested {
       transform: translateX(-400%);
     }
+  }
+
+  .sidebar-actions {
+    padding: var(--space-4);
+    border-top: 1px solid var(--color-border-mute);
   }
 
   .sidebar-nested {
@@ -149,6 +154,13 @@
       margin-left: var(--space-3);
       border-left: 1px solid var(--color-border-mute);
     }
+  }
+
+  .sidebar-nav-menu {
+    padding: var(--space-4);
+    list-style: none;
+    margin: 0;
+    border-top: 1px solid var(--color-border-mute);
   }
 
   .sidebar-nav-item {
