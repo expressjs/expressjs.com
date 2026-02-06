@@ -22,7 +22,7 @@
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": ">=24.13.0",
+      "version": "24.x",
       "onFail": "error"
     },
     "packageManager": {
@@ -32,7 +32,7 @@
     }
   },
   "engines": {
-    "node": ">=24.13.0",
+    "node": "24.x",
     "npm": ">=11.0.0"
   },
   "devDependencies": {
