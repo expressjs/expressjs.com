@@ -1,4 +1,6 @@
-export const apiReferenceMenu = {
+import type { Menu } from './types';
+
+export const apiReferenceMenu: Menu = {
   sections: [
     {
       title: 'Application',

@@ -188,17 +188,17 @@ import { H1, Body, Code } from '@components/primitives';
     <BodyMd color="secondary">
       Icons are provided by <Code as="code">astro-icon</Code>, a well-supported and officially
       recommended package for Astro that gives access to 200,000+ icons from various icon sets. We
-      primarily use Phosphor Icons (prefix <Code as="code">ph:</Code>).
+      primarily use Fluent Icons (prefix <Code as="code">fluent:</Code>).
     </BodyMd>
 
     <div class="ds-subsection">
       <H3>Examples</H3>
       <Flex direction="row" gap="4" align="center">
-        <Icon name="ph:airplane" size="24" color="var(--color-icon-primary)" />
-        <Icon name="ph:anchor" size="24" color="var(--color-icon-primary)" />
-        <Icon name="ph:check-circle" size="24" color="var(--color-icon-primary)" />
-        <Icon name="ph:warning" size="24" color="var(--color-icon-primary)" />
-        <Icon name="ph:info" size="24" color="var(--color-icon-primary)" />
+        <Icon name="fluent:airplane-24-regular" size="24" color="var(--color-icon-primary)" />
+        <Icon name="fluent:anchor-24-regular" size="24" color="var(--color-icon-primary)" />
+        <Icon name="fluent:check-circle-24-regular" size="24" color="var(--color-icon-primary)" />
+        <Icon name="fluent:warning-24-regular" size="24" color="var(--color-icon-primary)" />
+        <Icon name="fluent:info-24-regular" size="24" color="var(--color-icon-primary)" />
       </Flex>
     </div>
 
@@ -210,8 +210,8 @@ import { H1, Body, Code } from '@components/primitives';
         code={`
 import { Icon } from "astro-icon/components";
 
-<Icon name="ph:airplane" size="24" />
-<Icon name="ph:check" color="var(--color-icon-primary)" />
+<Icon name="fluent:airplane-24-regular" size="24" />
+<Icon name="fluent:check-24-regular" color="var(--color-icon-primary)" />
           `}
       />
       <BodySm color="secondary" style="margin-top: var(--space-3);">
@@ -631,12 +631,12 @@ import { Icon } from "astro-icon/components";
       <H3>With Icons</H3>
       <Flex direction="row" gap="4" align="center">
         <Button variant="primary">
-          <Icon name="ph:arrow-left" size="16" />
+          <Icon name="fluent:arrow-left-24-regular" size="16" />
           Back
         </Button>
         <Button variant="primary">
           Continue
-          <Icon name="ph:arrow-right" size="16" />
+          <Icon name="fluent:arrow-right-24-regular" size="16" />
         </Button>
       </Flex>
     </div>
@@ -655,7 +655,7 @@ import { Icon } from "astro-icon/components";
         <Button as="a" href="#buttons" variant="primary">Link Button</Button>
         <Button as="a" href="#buttons" variant="secondary">
           External
-          <Icon name="ph:arrow-square-out" size="16" />
+          <Icon name="fluent:arrow-square-out-24-regular" size="16" />
         </Button>
       </Flex>
     </div>

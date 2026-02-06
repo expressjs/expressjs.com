@@ -11,8 +11,18 @@ import { Icon } from 'astro-icon/components';
 
 <button id="themeToggle" class="toggle" aria-label="Toggle theme">
   <div class="toggle-icon">
-    <Icon name="ph:moon" class="moon" size="18" color="var(--color-icon-primary)" />
-    <Icon name="ph:sun" class="sun" size="18" color="var(--color-icon-primary)" />
+    <Icon
+      name="fluent:weather-moon-28-regular"
+      class="moon"
+      size="18"
+      color="var(--color-icon-primary)"
+    />
+    <Icon
+      name="fluent:weather-sunny-20-regular"
+      class="sun"
+      size="18"
+      color="var(--color-icon-primary)"
+    />
   </div>
   <BodyMd vMargin={false} class="label-dark">Switch to light mode</BodyMd>
   <BodyMd vMargin={false} class="label-light">Switch to dark mode</BodyMd>

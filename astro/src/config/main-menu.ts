@@ -9,7 +9,7 @@ export const mainMenu: Menu = {
         {
           label: 'Docs',
           ariaLabel: 'Documentation',
-          icon: 'files',
+          icon: 'document-bullet-list-multiple-20-regular',
           submenu: {
             basePath: '/docs',
             versioned: true,
@@ -19,15 +19,15 @@ export const mainMenu: Menu = {
         {
           label: 'API Reference',
           ariaLabel: 'API Reference',
-          icon: 'code',
+          icon: 'code-20-regular',
           submenu: {
             basePath: '/api-reference',
             versioned: true,
             sections: apiReferenceMenu.sections,
           },
         },
-        { href: `/blog`, label: 'Blog', icon: 'newspaper' },
-        { href: `/support`, label: 'Support', icon: 'info' },
+        { href: `/blog`, label: 'Blog', icon: 'news-20-regular' },
+        { href: `/support`, label: 'Support', icon: 'info-20-regular' },
       ],
     },
   ],
