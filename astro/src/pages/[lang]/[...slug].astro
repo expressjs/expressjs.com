@@ -27,18 +27,15 @@ export async function getStaticPaths() {
     });
   });
 
-  // Also create non-versioned paths that serve default version content
-  // Find pages in the default version folder and create alias paths
   const defaultVersionPages = pages.filter((page) => {
     const [, ...slugParts] = page.id.split('/');
     return slugParts[0] === DEFAULT_VERSION;
   });
 
   defaultVersionPages.forEach((page) => {
-    const [lang, , ...restSlugParts] = page.id.split('/'); // Skip lang and version
+    const [lang, , ...restSlugParts] = page.id.split('/');
     const nonVersionedSlug = restSlugParts.join('/');
 
-    // Only add if this path doesn't already exist
     const exists = paths.some((p) => p.params.lang === lang && p.params.slug === nonVersionedSlug);
 
     if (!exists && nonVersionedSlug) {
@@ -55,7 +52,7 @@ export async function getStaticPaths() {
 const { page, version, isVersionedPath } = Astro.props;
 const { lang, slug } = Astro.params;
 const { Content } = await render(page);
-const breadcrumbs = await buildBreadcrumbs(lang, slug, 'docs');
+const breadcrumbs = await buildBreadcrumbs(lang, slug, 'docs', version);
 const { title, description } = page.data;
 ---
 

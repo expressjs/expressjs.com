@@ -50,28 +50,40 @@ function formatLabel(segment: string): string {
  * @param lang - The language code (e.g., 'en')
  * @param slug - The page slug (e.g., 'resources/middleware/compression')
  * @param collection - The collection name to check for existing content
+ * @param version - The version to display in breadcrumbs (e.g., 'v5')
  * @returns Array of breadcrumb items with labels and optional hrefs
  */
 export async function buildBreadcrumbs(
   lang: string,
   slug: string,
-  collection: keyof typeof collections
+  collection: keyof typeof collections,
+  version?: string
 ): Promise<BreadcrumbItem[]> {
   const pages = await getCollection(collection);
 
   const breadcrumbs: BreadcrumbItem[] = [];
 
-  // Add collection as first breadcrumb
   breadcrumbs.push({
     label: getCollectionLabel(collection),
     href: undefined,
   });
 
+  // Add version to breadcrumbs if provided
+  if (version) {
+    breadcrumbs.push({
+      label: version,
+      href: undefined,
+    });
+  }
+
   const slugParts = slug.split('/');
 
-  slugParts.forEach((part, index) => {
-    const isLast = index === slugParts.length - 1;
-    const pathToSegment = `${lang}/${slugParts.slice(0, index + 1).join('/')}`;
+  // Skip version prefix in slug if it matches the version parameter
+  const startIndex = slugParts[0] === version ? 1 : 0;
+
+  slugParts.slice(startIndex).forEach((part, index) => {
+    const isLast = index === slugParts.slice(startIndex).length - 1;
+    const pathToSegment = `${lang}/${slugParts.slice(0, startIndex + index + 1).join('/')}`;
 
     if (!isLast) {
       breadcrumbs.push({

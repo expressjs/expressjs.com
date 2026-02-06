@@ -11,7 +11,6 @@ export const mainMenu: Menu = {
           ariaLabel: 'Documentation',
           icon: 'document-bullet-list-multiple-20-regular',
           submenu: {
-            basePath: '/docs',
             versioned: true,
             sections: docsMenu.sections,
           },

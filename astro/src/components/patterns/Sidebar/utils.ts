@@ -23,6 +23,8 @@ export function resolveHref(
 ): string {
   if (versioned && basePath) {
     return `/${lang}${basePath}/${version}${href}`;
+  } else if (versioned) {
+    return `/${lang}/${version}${href}`;
   } else if (basePath) {
     return `/${lang}${basePath}${href}`;
   }
