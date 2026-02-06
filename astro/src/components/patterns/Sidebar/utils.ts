@@ -10,6 +10,10 @@ export type SubmenuData = {
   level: number;
 };
 
+export function normalizePath(path: string): string {
+  return path.replace(/\/$/, '');
+}
+
 export function resolveHref(
   href: string,
   lang: string,
@@ -123,7 +127,6 @@ function checkItemsForPath(
   for (const item of filteredItems) {
     if (isLink(item)) {
       const href = resolveHref(item.href, lang, basePath, versioned, version);
-      const normalizePath = (path: string) => path.replace(/\/$/, '');
       if (normalizedCurrentPath === normalizePath(href)) {
         return true;
       }
@@ -156,7 +159,6 @@ export function submenuContainsCurrentPath(
   lang: string,
   version: string
 ): boolean {
-  const normalizePath = (path: string) => path.replace(/\/$/, '');
   const normalizedCurrentPath = normalizePath(currentPath);
 
   for (const section of submenuMenu.sections?.filter((s) => !shouldOmitSection(s, version)) || []) {

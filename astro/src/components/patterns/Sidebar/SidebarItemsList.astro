@@ -1,7 +1,7 @@
 ---
 import type { MenuItem } from '@/config/types';
 import SidebarNavItem from './SidebarNavItem.astro';
-import { isLink, hasSubmenu, filterItems, getItemId, resolveHref } from './utils';
+import { isLink, hasSubmenu, filterItems, getItemId, resolveHref, normalizePath } from './utils';
 
 interface Props {
   items: MenuItem[];
@@ -38,7 +38,7 @@ const filteredItems = filterItems(items, version);
   filteredItems.map((item, itemIndex) => {
     const itemId = getItemId(parentId, sectionIndex, itemIndex);
     const href = isLink(item) ? resolveHref(item.href, lang, basePath, versioned, version) : '';
-    const isActive = currentPath === href;
+    const isActive = normalizePath(currentPath) === normalizePath(href);
 
     return isLink(item) ? (
       <SidebarNavItem
