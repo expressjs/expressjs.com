@@ -1,7 +1,6 @@
 ---
 title: req.ips
 description: When trust proxy is true, parse
-menuTitle: req.ips
 ---
 
 <h3 id='req.ips'>req.ips</h3>

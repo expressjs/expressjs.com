@@ -1,7 +1,6 @@
 ---
 title: req.acceptsCharsets
 description: Returns the first accepted charset of the specified character sets,
-menuTitle: req.acceptsCharsets
 ---
 
 <h3 id='req.acceptsCharsets'>req.acceptsCharsets(charset [, ...])</h3>

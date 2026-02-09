@@ -1,7 +1,6 @@
 ---
 title: req.body
 description: This property is an object containing the parsed request body. This feature
-menuTitle: req.body
 ---
 
 <h3 id='req.body'>req.body</h3>

@@ -1,7 +1,6 @@
 ---
 title: app.path
 description: Returns the canonical path of the app, a string.
-menuTitle: app.path
 ---
 
 <h3 id='app.path'>app.path()</h3>

@@ -1,7 +1,6 @@
 ---
 title: res.end
 description: Ends the response process. This method actually comes from Node core, specifically the response.end method of http.ServerResponse.
-menuTitle: res.end
 ---
 
 <h3 id='res.end'>res.end([data[, encoding]][, callback])</h3>

@@ -1,7 +1,6 @@
 ---
 title: app.all
 description: This method functions just like the app.VERB methods,
-menuTitle: app.all
 ---
 
 <h3 id='app.all'>app.all(path, [callback...], callback)</h3>

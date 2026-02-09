@@ -1,7 +1,6 @@
 ---
 title: req.secure
 description: A Boolean property that is true if a TLS connection is established
-menuTitle: req.secure
 ---
 
 <h3 id='req.secure'>req.secure</h3>

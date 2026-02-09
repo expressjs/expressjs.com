@@ -1,6 +1,5 @@
 ---
 title: Express serve-static middleware
-menuTitle: serve-static
 module: serve-static
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: req.is
 description: Returns the matching content type if the incoming request's "Content-Type" HTTP header field
-menuTitle: req.is
 ---
 
 <h3 id='req.is'>req.is(type)</h3>

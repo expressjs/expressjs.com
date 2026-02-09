@@ -1,7 +1,6 @@
 ---
 title: Express
 description: h2 id="express">express()
-menuTitle: Express
 ---
 
 <h2 id="express">express()</h2>

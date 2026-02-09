@@ -1,7 +1,6 @@
 ---
 title: req.originalUrl
 description: req.url is not a native Express property, it is inherited from Node http module
-menuTitle: req.originalUrl
 ---
 
 <h3 id='req.originalUrl'>req.originalUrl</h3>

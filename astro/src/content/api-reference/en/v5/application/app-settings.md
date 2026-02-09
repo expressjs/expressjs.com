@@ -1,7 +1,6 @@
 ---
 title: App.Settings
 description: The following table lists application settings.
-menuTitle: App.Settings
 ---
 
 The following table lists application settings.

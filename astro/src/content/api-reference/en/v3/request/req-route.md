@@ -1,7 +1,6 @@
 ---
 title: req.route
 description: The currently matched Route containing
-menuTitle: req.route
 ---
 
 <h3 id='req.route'>req.route</h3>

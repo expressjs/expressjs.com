@@ -1,7 +1,6 @@
 ---
 title: res.download
 description: res.download provides access to data on the running file system
-menuTitle: res.download
 ---
 
 <h3 id='res.download'>res.download(path [, filename] [, options] [, fn])</h3>

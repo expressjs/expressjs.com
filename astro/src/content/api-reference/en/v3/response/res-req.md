@@ -1,7 +1,6 @@
 ---
 title: res.req
 description: This property holds a reference to the
-menuTitle: res.req
 ---
 
 <h3 id='res.req'>res.req</h3>

@@ -1,7 +1,6 @@
 ---
 title: res.links
 description: Join the given links to populate the Link response header field.
-menuTitle: res.links
 ---
 
 <h3 id='res.links'>res.links(links)</h3>

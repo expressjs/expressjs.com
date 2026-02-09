@@ -1,7 +1,6 @@
 ---
 title: req.cookies
 description: When using cookie-parser middleware, this property is an object that contains cookies sent by the request
-menuTitle: req.cookies
 ---
 
 <h3 id='req.cookies'>req.cookies</h3>

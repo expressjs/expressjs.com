@@ -1,7 +1,6 @@
 ---
 title: req.hostname
 description: Contains the hostname derived from the Host HTTP header.
-menuTitle: req.hostname
 ---
 
 <h3 id='req.hostname'>req.hostname</h3>

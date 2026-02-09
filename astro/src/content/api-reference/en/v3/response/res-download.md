@@ -1,7 +1,6 @@
 ---
 title: res.download
 description: Transfer the file at path as an attachment,
-menuTitle: res.download
 ---
 
 <h3 id='res.download'>res.download(path, [filename], [fn])</h3>

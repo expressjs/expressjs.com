@@ -1,6 +1,5 @@
 ---
 title: Express vhost middleware
-menuTitle: vhost
 module: vhost
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: app.locals
 description: Application local variables are provided to all templates
-menuTitle: app.locals
 ---
 
 <h3 id='app.locals'>app.locals</h3>

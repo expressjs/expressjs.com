@@ -1,7 +1,6 @@
 ---
 title: req.acceptedLanguages
 description: Return an array of Accepted languages ordered from highest quality to lowest.
-menuTitle: req.acceptedLanguages
 ---
 
 <h3 id='req.acceptedLanguages'>req.acceptedLanguages</h3>

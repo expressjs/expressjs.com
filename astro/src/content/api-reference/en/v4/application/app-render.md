@@ -1,7 +1,6 @@
 ---
 title: app.render
 description: Returns the rendered HTML of a view via the callback function. It accepts an optional parameter
-menuTitle: app.render
 ---
 
 <h3 id='app.render'>app.render(view, [locals], callback)</h3>

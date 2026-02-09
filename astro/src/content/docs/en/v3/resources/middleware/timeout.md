@@ -1,6 +1,5 @@
 ---
 title: Express timeout middleware
-menuTitle: timeout
 module: timeout
 ---
 

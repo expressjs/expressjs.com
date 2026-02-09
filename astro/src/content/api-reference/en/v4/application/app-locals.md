@@ -1,7 +1,6 @@
 ---
 title: app.locals
 description: The app.locals object has properties that are local variables within the application,
-menuTitle: app.locals
 ---
 
 <h3 id='app.locals'>app.locals</h3>

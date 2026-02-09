@@ -1,7 +1,6 @@
 ---
 title: Express application generator
 description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
-menuTitle: Express generator
 order: 3
 ---
 

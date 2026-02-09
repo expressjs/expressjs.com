@@ -1,7 +1,6 @@
 ---
 title: csrf
 description: CSRF protection middleware.
-menuTitle: csrf
 ---
 
 <h3 id='csrf'>csrf()</h3>

@@ -1,7 +1,6 @@
 ---
 title: req.ip
 description: Contains the remote IP address of the request.
-menuTitle: req.ip
 ---
 
 <h3 id='req.ip'>req.ip</h3>

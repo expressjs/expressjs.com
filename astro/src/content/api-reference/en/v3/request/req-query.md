@@ -1,7 +1,6 @@
 ---
 title: req.query
 description: This property is an object containing the parsed query-string,
-menuTitle: req.query
 ---
 
 <h3 id='req.query'>req.query</h3>

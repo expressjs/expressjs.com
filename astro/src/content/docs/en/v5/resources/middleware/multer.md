@@ -1,6 +1,5 @@
 ---
 title: Express multer middleware
-menuTitle: multer
 module: multer
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: app.enabled
 description: Returns true if the setting name is enabled (true), where name is one of the properties from the app settings table
-menuTitle: app.enabled
 ---
 
 <h3 id='app.enabled'>app.enabled(name)</h3>

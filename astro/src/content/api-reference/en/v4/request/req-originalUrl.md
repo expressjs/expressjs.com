@@ -1,7 +1,6 @@
 ---
 title: req.originalUrl
 description: req.url retains the original request URL, allowing you to rewrite req.url freely for internal routing purposes
-menuTitle: req.originalUrl
 ---
 
 <h3 id='req.originalUrl'>req.originalUrl</h3>

@@ -1,7 +1,6 @@
 ---
 title: res.attachment
 description: Sets the HTTP response Content-Disposition header field to attachment
-menuTitle: res.attachment
 ---
 
 <h3 id='res.attachment'>res.attachment([filename])</h3>

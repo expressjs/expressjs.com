@@ -1,7 +1,6 @@
 ---
 title: res.render
 description: Render a view with a callback responding with
-menuTitle: res.render
 ---
 
 <h3 id='res.render'>res.render(view, [locals], callback)</h3>

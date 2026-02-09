@@ -1,7 +1,6 @@
 ---
 title: req.path
 description: Returns the request URL pathname.
-menuTitle: req.path
 ---
 
 <h3 id='req.path'>req.path</h3>

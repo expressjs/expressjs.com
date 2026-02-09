@@ -1,6 +1,5 @@
 ---
 title: Express compression middleware
-menuTitle: compression
 module: compression
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: res.type
 description: Sets the Content-Type HTTP header to the MIME type as determined by the specified type. If type contains the slash character, then it sets the Content-Type to the exact value.
-menuTitle: res.type
 ---
 
 <h3 id='res.type'>res.type(type)</h3>

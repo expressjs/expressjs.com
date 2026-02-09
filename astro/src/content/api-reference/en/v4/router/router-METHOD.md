@@ -1,7 +1,6 @@
 ---
 title: router.METHOD
 description: The router.METHOD methods provide the routing functionality in Express,
-menuTitle: router.METHOD
 ---
 
 <h3 id='router.METHOD'>router.METHOD(path, [callback, ...] callback)</h3>

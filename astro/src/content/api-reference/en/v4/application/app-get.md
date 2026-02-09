@@ -1,7 +1,6 @@
 ---
 title: app.get
 description: Returns the value of name app setting, where name is one of the strings in the
-menuTitle: app.get
 ---
 
 <h3 id='app.get'>app.get(name)</h3>

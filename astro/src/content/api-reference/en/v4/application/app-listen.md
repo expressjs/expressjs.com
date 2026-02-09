@@ -1,7 +1,6 @@
 ---
 title: app.listen
 description: Starts a UNIX socket and listens for connections on the given path.
-menuTitle: app.listen
 ---
 
 <h3 id='app.listen_path_callback'>app.listen(path, [callback])</h3>

@@ -1,7 +1,6 @@
 ---
 title: res.get
 description: Returns the HTTP response header specified by field.
-menuTitle: res.get
 ---
 
 <h3 id='res.get'>res.get(field)</h3>

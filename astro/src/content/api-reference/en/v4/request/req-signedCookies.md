@@ -1,7 +1,6 @@
 ---
 title: req.signedCookies
 description: When using cookie-parser middleware, this property
-menuTitle: req.signedCookies
 ---
 
 <h3 id='req.signedCookies'>req.signedCookies</h3>

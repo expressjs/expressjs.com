@@ -1,6 +1,5 @@
 ---
 title: Express cookie-parser middleware
-menuTitle: cookie-parser
 module: cookie-parser
 ---
 

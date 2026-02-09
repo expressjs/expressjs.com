@@ -1,7 +1,6 @@
 ---
 title: req.param
 description: Return the value of param name when present.
-menuTitle: req.param
 ---
 
 <h3 id='req.param'>req.param(name)</h3>

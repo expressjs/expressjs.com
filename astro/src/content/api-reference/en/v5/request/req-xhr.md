@@ -1,7 +1,6 @@
 ---
 title: req.xhr
 description: A Boolean property that is true if the request X-Requested-With header field is "XMLHttpRequest"
-menuTitle: req.xhr
 ---
 
 <h3 id='req.xhr'>req.xhr</h3>

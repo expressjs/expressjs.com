@@ -1,6 +1,5 @@
 ---
 title: Express morgan middleware
-menuTitle: morgan
 module: morgan
 ---
 

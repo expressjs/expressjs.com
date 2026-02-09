@@ -1,7 +1,6 @@
 ---
 title: res.status
 description: Chainable alias of node res.statusCode property.
-menuTitle: res.status
 ---
 
 <h3 id='res.status'>res.status(code)</h3>

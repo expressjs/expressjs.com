@@ -1,7 +1,6 @@
 ---
 title: req.query
 description: This property is an object containing a property for each query string parameter in the route.
-menuTitle: req.query
 ---
 
 <h3 id='req.query'>req.query</h3>

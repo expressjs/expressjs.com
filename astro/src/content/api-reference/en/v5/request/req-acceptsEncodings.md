@@ -1,7 +1,6 @@
 ---
 title: req.acceptsEncodings
 description: Returns the first accepted encoding of the specified encodings,
-menuTitle: req.acceptsEncodings
 ---
 
 <h3 id='req.acceptsEncodings'>req.acceptsEncodings(encoding [, ...])</h3>

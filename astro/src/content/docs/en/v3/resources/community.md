@@ -1,7 +1,6 @@
 ---
 title: Express community
 description: Connect with the Express.js community, learn about the technical committee, find resources, explore community-contributed modules, and get involved in discussions.
-menuTitle: Community
 order: 1
 ---
 

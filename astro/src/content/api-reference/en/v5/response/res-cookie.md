@@ -1,7 +1,6 @@
 ---
 title: res.cookie
 description: Sets cookie name to value. The value parameter may be a string or object converted to JSON.
-menuTitle: res.cookie
 ---
 
 <h3 id='res.cookie'>res.cookie(name, value [, options])</h3>

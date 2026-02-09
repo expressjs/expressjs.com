@@ -1,7 +1,6 @@
 ---
 title: Express examples
 description: Explore a collection of Express.js application examples covering various use cases, integrations, and advanced configurations to help you learn and build your projects.
-menuTitle: More examples
 order: 6
 ---
 

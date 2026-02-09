@@ -1,7 +1,6 @@
 ---
 title: res.location
 description: Set the location header.
-menuTitle: res.location
 ---
 
 <h3 id='res.location'>res.location</h3>

@@ -1,7 +1,6 @@
 ---
 title: res.sendFile
 description: res.sendFile transfers the file at the given path. Sets the Content-Type response HTTP header field based on the filename extension
-menuTitle: res.sendFile
 ---
 
 <h3 id='res.sendFile'>res.sendFile(path [, options] [, fn])</h3>

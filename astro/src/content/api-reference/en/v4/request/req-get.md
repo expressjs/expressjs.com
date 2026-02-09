@@ -1,7 +1,6 @@
 ---
 title: req.get
 description: Returns the specified HTTP request header field (case-insensitive match).
-menuTitle: req.get
 ---
 
 <h3 id='req.get'>req.get(field)</h3>

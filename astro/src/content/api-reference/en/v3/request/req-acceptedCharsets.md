@@ -1,7 +1,6 @@
 ---
 title: req.acceptedCharsets
 description: Return an array of Accepted charsets ordered from highest quality to lowest.
-menuTitle: req.acceptedCharsets
 ---
 
 <h3 id='req.acceptedCharsets'>req.acceptedCharsets</h3>

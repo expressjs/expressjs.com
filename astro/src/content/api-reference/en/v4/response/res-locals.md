@@ -1,7 +1,6 @@
 ---
 title: res.locals
 description: Use this property to set variables accessible in templates rendered with [res.render](#res.render).
-menuTitle: res.locals
 ---
 
 <h3 id='res.locals'>res.locals</h3>

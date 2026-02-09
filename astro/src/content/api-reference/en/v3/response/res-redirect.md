@@ -1,7 +1,6 @@
 ---
 title: res.redirect
 description: Redirect to the given url with optional status code
-menuTitle: res.redirect
 ---
 
 <h3 id='res.redirect'>res.redirect([status], url)</h3>

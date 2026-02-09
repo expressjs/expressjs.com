@@ -1,7 +1,6 @@
 ---
 title: app.disabled
 description: Check if setting name is disabled.
-menuTitle: app.disabled
 ---
 
 <h3 id='app.disabled'>app.disabled(name)</h3>

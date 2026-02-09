@@ -1,7 +1,6 @@
 ---
 title: router.all
 description: This method is just like the router.METHOD methods, except that it matches all HTTP methods (verbs).
-menuTitle: router.all
 ---
 
 <h3 id='router.all'>router.all(path, [callback, ...] callback)</h3>

@@ -1,6 +1,5 @@
 ---
 title: Express body-parser middleware
-menuTitle: body-parser
 module: body-parser
 ---
 

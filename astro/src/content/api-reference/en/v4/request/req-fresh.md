@@ -1,7 +1,6 @@
 ---
 title: req.fresh
 description: When the response is still fresh in the client cache true is returned, otherwise false is returned to indicate that the client cache is now stale.
-menuTitle: req.fresh
 ---
 
 <h3 id='req.fresh'>req.fresh</h3>

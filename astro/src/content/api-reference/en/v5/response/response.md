@@ -1,7 +1,6 @@
 ---
 title: Properties
 description: section markdown="1">
-menuTitle: Properties
 ---
 
 <h2 id="res">Response</h2>

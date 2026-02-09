@@ -1,7 +1,6 @@
 ---
 title: req.fresh
 description: Check if the request is fresh - aka Last-Modified and/or the ETag still match,
-menuTitle: req.fresh
 ---
 
 <h3 id='req.fresh'>req.fresh</h3>

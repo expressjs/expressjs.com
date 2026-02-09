@@ -1,7 +1,6 @@
 ---
 title: res.charset
 description: Assign the charset. Defaults to "utf-8".
-menuTitle: res.charset
 ---
 
 <h3 id='res.charset'>res.charset</h3>

@@ -1,7 +1,6 @@
 ---
 title: req.baseUrl
 description: The URL path on which a router instance was mounted.
-menuTitle: req.baseUrl
 ---
 
 <h3 id='req.baseUrl'>req.baseUrl</h3>

@@ -1,7 +1,6 @@
 ---
 title: res.send
 description: Sends the HTTP response.
-menuTitle: res.send
 ---
 
 <h3 id='res.send'>res.send([body])</h3>

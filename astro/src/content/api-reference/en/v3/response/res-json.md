@@ -1,7 +1,6 @@
 ---
 title: res.json
 description: Send a JSON response. This method is identical
-menuTitle: res.json
 ---
 
 <h3 id='res.json'>res.json([status|body], [body])</h3>

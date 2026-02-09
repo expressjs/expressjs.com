@@ -1,7 +1,6 @@
 ---
 title: req.stale
 description: Check if the request is stale - aka Last-Modified and/or the ETag do not match,
-menuTitle: req.stale
 ---
 
 <h3 id='req.stale'>req.stale</h3>

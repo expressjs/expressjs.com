@@ -1,7 +1,6 @@
 ---
 title: req.param
 description: Deprecated. Use either req.params, req.body or req.query, as applicable.
-menuTitle: req.param
 ---
 
 <h3 id='req.param'>req.param(name [, defaultValue])</h3>

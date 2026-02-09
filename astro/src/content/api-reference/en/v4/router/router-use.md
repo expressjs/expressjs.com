@@ -1,7 +1,6 @@
 ---
 title: router.use
 description: Uses the specified middleware function or functions, with optional mount path that defaults to slash.
-menuTitle: router.use
 ---
 
 <h3 id='router.use'>router.use([path], [function, ...] function)</h3>

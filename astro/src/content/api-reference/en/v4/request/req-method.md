@@ -1,7 +1,6 @@
 ---
 title: req.method
 description: Contains a string corresponding to the HTTP method of the request
-menuTitle: req.method
 ---
 
 <h3 id='req.method'>req.method</h3>

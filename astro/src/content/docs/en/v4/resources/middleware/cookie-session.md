@@ -1,6 +1,5 @@
 ---
 title: Express cookie-session middleware
-menuTitle: cookie-session
 module: cookie-session
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: req.ips
 description: When the trust proxy setting does not evaluate to false,
-menuTitle: req.ips
 ---
 
 <h3 id='req.ips'>req.ips</h3>

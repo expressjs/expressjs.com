@@ -1,7 +1,6 @@
 ---
 title: res.clearCookie
 description: Clear cookie name. The path option defaults to slash.
-menuTitle: res.clearCookie
 ---
 
 <h3 id='res.clearCookie'>res.clearCookie(name, [options])</h3>

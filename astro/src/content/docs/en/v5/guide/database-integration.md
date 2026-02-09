@@ -1,7 +1,6 @@
 ---
 title: Express database integration
 description: Discover how to integrate various databases with Express.js applications, including setup examples for MongoDB, MySQL, PostgreSQL, and more.
-menuTitle: Database integration
 order: 11
 ---
 

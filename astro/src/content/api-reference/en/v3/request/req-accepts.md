@@ -1,7 +1,6 @@
 ---
 title: req.accepts
 description: Check if the given types are acceptable, returning
-menuTitle: req.accepts
 ---
 
 <h3 id='req.accepts'>req.accepts(types)</h3>

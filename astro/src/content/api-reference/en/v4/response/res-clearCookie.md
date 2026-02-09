@@ -1,7 +1,6 @@
 ---
 title: res.clearCookie
 description: Clears the cookie with the specified name by sending a Set-Cookie header that sets its expiration date in the past.
-menuTitle: res.clearCookie
 ---
 
 <h3 id='res.clearCookie'>res.clearCookie(name [, options])</h3>

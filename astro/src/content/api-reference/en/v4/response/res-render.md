@@ -1,7 +1,6 @@
 ---
 title: res.render
 description: Renders a view and sends the rendered HTML string to the client.
-menuTitle: res.render
 ---
 
 <h3 id='res.render'>res.render(view [, locals] [, callback])</h3>

@@ -1,7 +1,6 @@
 ---
 title: app.post
 description: Routes HTTP POST requests to the specified path with the specified callback functions.
-menuTitle: app.post
 ---
 
 <h3 id='app.post.method'>app.post(path, callback [, callback ...])</h3>

@@ -1,7 +1,6 @@
 ---
 title: res.sendfile
 description: Transfer the file at the given path.
-menuTitle: res.sendfile
 ---
 
 <h3 id='res.sendfile'>res.sendfile(path, [options], [fn]])</h3>

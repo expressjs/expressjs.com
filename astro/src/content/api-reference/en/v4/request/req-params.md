@@ -1,7 +1,6 @@
 ---
 title: req.params
 description: This property is an object containing properties mapped to the [named route "parameters"](/{{ page.lang }}/guide/routing.html#route-parameters). Fo...
-menuTitle: req.params
 ---
 
 <h3 id='req.params'>req.params</h3>

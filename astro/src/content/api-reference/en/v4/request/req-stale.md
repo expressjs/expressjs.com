@@ -1,7 +1,6 @@
 ---
 title: req.stale
 description: Indicates whether the request is stale, and is the opposite of req.fresh.
-menuTitle: req.stale
 ---
 
 <h3 id='req.stale'>req.stale</h3>

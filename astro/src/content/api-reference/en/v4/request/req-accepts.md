@@ -1,7 +1,6 @@
 ---
 title: req.accepts
 description: Checks if the specified content types are acceptable, based on the request Accept HTTP header field.
-menuTitle: req.accepts
 ---
 
 <h3 id='req.accepts'>req.accepts(types)</h3>

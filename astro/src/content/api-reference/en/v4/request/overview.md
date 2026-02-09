@@ -1,7 +1,6 @@
 ---
 title: Properties
 description: The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
-menuTitle: Properties
 ---
 
 <h2 id="req">Request</h2>

@@ -1,7 +1,6 @@
 ---
 title: app.VERB
 description: The app.VERB methods provide the routing functionality
-menuTitle: app.VERB
 ---
 
 <h3 id='app.VERB'>app.VERB(path, [callback...], callback)</h3>

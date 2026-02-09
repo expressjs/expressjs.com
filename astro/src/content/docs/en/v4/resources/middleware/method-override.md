@@ -1,6 +1,5 @@
 ---
 title: Express method-override middleware
-menuTitle: method-override
 module: method-override
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Express cors middleware
-menuTitle: cors
 module: cors
 ---
 

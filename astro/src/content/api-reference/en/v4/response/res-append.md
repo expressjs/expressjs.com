@@ -1,7 +1,6 @@
 ---
 title: res.append
 description: Appends the specified value to the HTTP response header field
-menuTitle: res.append
 ---
 
 <h3 id='res.append'>res.append(field [, value])</h3>

@@ -1,7 +1,6 @@
 ---
 title: Methods
 description: section markdown="1">
-menuTitle: Methods
 ---
 
 <h2 id="router">Router</h2>

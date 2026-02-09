@@ -1,7 +1,6 @@
 ---
 title: app.put
 description: Routes HTTP PUT requests to the specified path with the specified callback functions.
-menuTitle: app.put
 ---
 
 <h3 id='app.put.method'>app.put(path, callback [, callback ...])</h3>

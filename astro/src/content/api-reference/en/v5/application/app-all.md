@@ -1,7 +1,6 @@
 ---
 title: app.all
 description: This method is like the standard [app.METHOD()](#app.METHOD) methods,
-menuTitle: app.all
 ---
 
 <h3 id='app.all'>app.all(path, callback [, callback ...])</h3>

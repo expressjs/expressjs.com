@@ -1,7 +1,6 @@
 ---
 title: req.range
 description: Range header parser
-menuTitle: req.range
 ---
 
 <h3 id='req.range'>req.range(size[, options])</h3>

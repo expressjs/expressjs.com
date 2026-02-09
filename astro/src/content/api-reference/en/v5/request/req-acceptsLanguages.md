@@ -1,7 +1,6 @@
 ---
 title: req.acceptsLanguages
 description: Returns the first accepted language of the specified languages,
-menuTitle: req.acceptsLanguages
 ---
 
 <h3 id='req.acceptsLanguages'>req.acceptsLanguages([lang, ...])</h3>

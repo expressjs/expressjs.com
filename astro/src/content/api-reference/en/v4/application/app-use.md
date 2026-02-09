@@ -1,7 +1,6 @@
 ---
 title: app.use
 description: Mounts the specified [middleware](/{{page.lang}}/guide/using-middleware.html) function or functions
-menuTitle: app.use
 ---
 
 <h3 id='app.use'>app.use([path,] callback [, callback...])</h3>

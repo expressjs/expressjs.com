@@ -1,7 +1,6 @@
 ---
 title: app.disable
 description: Sets the Boolean setting name to false, where name is one of the properties from the app settings table.
-menuTitle: app.disable
 ---
 
 <h3 id='app.disable'>app.disable(name)</h3>

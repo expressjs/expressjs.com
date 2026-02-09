@@ -1,7 +1,6 @@
 ---
 title: express.json
 description: This middleware is available in Express v4.16.0 onwards.
-menuTitle: express.json
 ---
 
 <h3 id='express.json' class='h2'>express.json([options])</h3>

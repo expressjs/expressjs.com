@@ -1,6 +1,5 @@
 ---
 title: Express connect-rid middleware
-menuTitle: connect-rid
 module: connect-rid
 ---
 

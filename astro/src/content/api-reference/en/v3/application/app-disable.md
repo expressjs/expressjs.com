@@ -1,7 +1,6 @@
 ---
 title: app.disable
 description: Set setting name to false.
-menuTitle: app.disable
 ---
 
 <h3 id='app.disable'>app.disable(name)</h3>

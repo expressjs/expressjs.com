@@ -1,7 +1,6 @@
 ---
 title: app.route
 description: Returns an instance of a single route, which you can then use to handle HTTP verbs with optional middleware.
-menuTitle: app.route
 ---
 
 <h3 id='app.route'>app.route(path)</h3>
