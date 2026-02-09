@@ -1,15 +1,15 @@
 ---
 layout: page
-title: Health Checks and Graceful Shutdown
-description: Learn how to implement health checks and graceful shutdown in Express apps to enhance reliability, manage deployments, and integrate with load balancers like Kubernetes.
+title: Verificação de integridade e Desligamento Gracioso
+description: Aprenda como implementar verificações de integridade e encerramentos graciosos em aplicativos Express, para melhorar a confiabilidade, gerenciar implantações e integrar com balanceadores de carga como Kubernetes.
 menu: advanced
 order: 5
 redirect_from: "  "
 ---
 
-# Health Checks and Graceful Shutdown
+# Verificação de integridade e Desligamento Gracioso
 
-## Graceful shutdown
+## Desligamento Gracioso
 
 When you deploy a new version of your application, you must replace the previous version. The process manager you're using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it should stop accepting new requests, finish all the ongoing requests, clean up the resources it used,  including database connections and file locks then exit.
 
@@ -26,7 +26,7 @@ process.on('SIGTERM', () => {
 })
 ```
 
-## Health checks
+## Verificações de integridade
 
 A load balancer uses health checks to determine if an application instance is healthy and can accept requests. For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
 

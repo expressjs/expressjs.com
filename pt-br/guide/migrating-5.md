@@ -390,15 +390,15 @@ Express 5.
 
 **Note:** In Express 5, `res.sendFile()` uses the `mime-types` package for MIME type detection, which returns different Content-Type values than Express 4 for several common file types:
 
-- JavaScript files (.js): now "text/javascript" instead of "application/javascript"
-- JSON files (.json): now "application/json" instead of "text/json"
-- CSS files (.css): now "text/css" instead of "text/plain"
-- XML files (.xml): now "application/xml" instead of "text/xml"
-- Font files (.woff): now "font/woff" instead of "application/font-woff"
-- SVG files (.svg): now "image/svg+xml" instead of "application/svg+xml"
+- Arquivos JavaScript (.js): agora "text/javascript" ao invés de "application/javascript"
+- Arquivos JSON (.json): agora "application/json" em vez de "text/json"
+- Arquivos CSS (.css): agora "text/css" em vez de "text/plain"
+- Arquivos XML (.xml): agora "application/xml" em vez de "text/xml"
+- Arquivos de fonte (.woff): agora "font/woff" em vez de "application/font-woff"
+- Arquivos SVG (.svg): agora "image/svg+xml" em vez de "application/svg+xml"
 
 {% capture codemod-camelcase-sendfile %}
-You can replace the deprecated signatures with the following command:
+Você pode substituir as assinaturas obsoletas pelo seguinte comando:
 
 ```plain-text
 npx codemod@latest @expressjs/camelcase-sendfile

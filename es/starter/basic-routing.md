@@ -19,7 +19,7 @@ Route definition takes the following structure:
 app.METHOD(PATH, HANDLER)
 ```
 
-Where:
+Donde:
 
 - `app` es una instancia de `express`.
 - `METHOD` is an [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in lowercase.

@@ -1,13 +1,13 @@
 ---
 layout: page
-title: Express utilities
+title: Express utilidades
 description: Discover utility modules related to Express.js and Node.js, including tools for cookies, CSRF protection, URL parsing, routing, and more to enhance your applications.
 menu: resources
 order: 4
 redirect_from: "  "
 ---
 
-## Express utility functions
+## Express funções utilitárias
 
 The [pillarjs](https://github.com/pillarjs) GitHub organization contains a number of modules
 for utility functions that may be generally useful.
