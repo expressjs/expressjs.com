@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { mainMenu } from '@config/main-menu';
+import { mainMenu } from '@/config/menu/main';
 import type { collections } from '@/content.config';
 
 /**

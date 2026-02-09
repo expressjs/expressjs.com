@@ -1,6 +1,6 @@
-import { docsMenu } from './docs-menu';
-import { apiReferenceMenu } from './api-reference-menu';
-import type { Menu } from './types';
+import { docsMenu } from './docs';
+import { apiReferenceMenu } from './api-reference';
+import type { Menu } from '../types';
 
 export const mainMenu: Menu = {
   sections: [

@@ -1,5 +1,5 @@
-import type { Menu } from './types';
-import { middlewareMenu } from './middleware-menu';
+import type { Menu } from '../types';
+import { middlewareMenu } from './middleware';
 
 export const docsMenu: Menu = {
   sections: [

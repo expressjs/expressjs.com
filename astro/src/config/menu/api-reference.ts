@@ -1,4 +1,4 @@
-import type { Menu } from './types';
+import type { Menu } from '../types';
 
 export const apiReferenceMenu: Menu = {
   sections: [
