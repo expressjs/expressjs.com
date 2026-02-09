@@ -31,8 +31,6 @@ const {
 const lang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
 const currentVersion = detectVersionFromUrl(currentPath, versions, defaultVersion);
-
-console.log('Astro pathname', currentPath);
 ---
 
 <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true" data-sidebar-backdrop></div>
