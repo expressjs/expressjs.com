@@ -21,7 +21,7 @@ export type MenuItem =
 export type MenuSection = {
   title?: string;
   basePath?: string;
-  versioned?: boolean;
+  versioned?: VersionPrefix[];
   items: MenuItem[];
   omitFrom?: VersionPrefix[];
 };
@@ -30,5 +30,5 @@ export type Menu = {
   sections?: MenuSection[];
   items?: MenuItem[];
   basePath?: string;
-  versioned?: boolean;
+  versioned?: VersionPrefix[];
 };

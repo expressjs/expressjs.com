@@ -6,7 +6,7 @@ export type SubmenuData = {
   title: string;
   id: string;
   basePath: string;
-  versioned: boolean;
+  versioned: VersionPrefix[];
   level: number;
 };
 
@@ -14,16 +14,25 @@ export function normalizePath(path: string): string {
   return path.replace(/\/$/, '');
 }
 
+/**
+ * Checks if versioning is enabled for the given version.
+ * Returns true if versioned array includes the current version.
+ */
+export function isVersioned(versioned: VersionPrefix[] | undefined, version: string): boolean {
+  return versioned?.includes(version as VersionPrefix) ?? false;
+}
+
 export function resolveHref(
   href: string,
   lang: string,
   basePath: string,
-  versioned: boolean,
+  versioned: VersionPrefix[] | undefined,
   version: string
 ): string {
-  if (versioned && basePath) {
+  const useVersion = isVersioned(versioned, version);
+  if (useVersion && basePath) {
     return `/${lang}${basePath}/${version}${href}`;
-  } else if (versioned) {
+  } else if (useVersion) {
     return `/${lang}/${version}${href}`;
   } else if (basePath) {
     return `/${lang}${basePath}${href}`;
@@ -70,7 +79,7 @@ export function collectAllSubmenus(
   currentLevel: number,
   currentParentId: string,
   currentBasePath: string,
-  currentVersioned: boolean,
+  currentVersioned: VersionPrefix[] | undefined,
   version: string,
   submenus: SubmenuData[]
 ): void {
@@ -88,7 +97,7 @@ export function collectAllSubmenus(
           title: item.label,
           id: submenuId,
           basePath: submenuBasePath,
-          versioned: submenuVersioned,
+          versioned: submenuVersioned ?? [],
           level: currentLevel + 1,
         });
 
@@ -120,7 +129,7 @@ function checkItemsForPath(
   items: MenuItem[],
   normalizedCurrentPath: string,
   basePath: string,
-  versioned: boolean,
+  versioned: VersionPrefix[] | undefined,
   currentPath: string,
   lang: string,
   version: string
@@ -156,7 +165,7 @@ function checkItemsForPath(
 export function submenuContainsCurrentPath(
   submenuMenu: Menu,
   submenuBasePath: string,
-  submenuVersioned: boolean,
+  submenuVersioned: VersionPrefix[] | undefined,
   currentPath: string,
   lang: string,
   version: string

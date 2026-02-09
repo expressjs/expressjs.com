@@ -1,6 +1,7 @@
 import { docsMenu } from './docs';
-import { apiReferenceMenu } from './api-reference';
+import { apiMenu } from './api';
 import type { Menu } from '../types';
+import { resourcesMenu } from './resources';
 
 export const mainMenu: Menu = {
   sections: [
@@ -11,7 +12,7 @@ export const mainMenu: Menu = {
           ariaLabel: 'Documentation',
           icon: 'document-bullet-list-multiple-20-regular',
           submenu: {
-            versioned: true,
+            versioned: ['5x', '4x'],
             sections: docsMenu.sections,
           },
         },
@@ -20,9 +21,18 @@ export const mainMenu: Menu = {
           ariaLabel: 'API Reference',
           icon: 'code-20-regular',
           submenu: {
-            basePath: '/api-reference',
-            versioned: true,
-            sections: apiReferenceMenu.sections,
+            basePath: '/api',
+            versioned: ['5x', '4x', '3x'],
+            sections: apiMenu.sections,
+          },
+        },
+        {
+          label: 'Resources',
+          ariaLabel: 'Resources',
+          icon: 'folder-20-regular',
+          submenu: {
+            basePath: '/resources',
+            items: resourcesMenu.items,
           },
         },
         { href: `/blog`, label: 'Blog', icon: 'news-20-regular', ariaLabel: 'Blog' },

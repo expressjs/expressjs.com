@@ -68,7 +68,6 @@ export async function buildBreadcrumbs(
     href: undefined,
   });
 
-  // Add version to breadcrumbs if provided
   if (version) {
     breadcrumbs.push({
       label: version,
@@ -78,7 +77,6 @@ export async function buildBreadcrumbs(
 
   const slugParts = slug.split('/');
 
-  // Skip version prefix in slug if it matches the version parameter
   const startIndex = slugParts[0] === version ? 1 : 0;
 
   slugParts.slice(startIndex).forEach((part, index) => {

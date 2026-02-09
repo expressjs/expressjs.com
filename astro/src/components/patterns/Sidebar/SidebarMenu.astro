@@ -1,5 +1,5 @@
 ---
-import type { Menu } from '@/config/types';
+import type { Menu, VersionPrefix } from '@/config/types';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
 import { Body } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
@@ -21,7 +21,7 @@ interface Props {
   lang: string;
   currentPath: string;
   basePath?: string;
-  versioned?: boolean;
+  versioned?: VersionPrefix[];
   version?: string;
   versions?: VersionConfig[];
   defaultVersion?: string;
@@ -34,7 +34,7 @@ const {
   lang,
   currentPath,
   basePath = '',
-  versioned = false,
+  versioned = [],
   version = '5x',
   versions = [],
   defaultVersion = '5x',
@@ -122,6 +122,10 @@ const initialActiveLevel =
               lang,
               version
             );
+            const availableVersions =
+              submenu.versioned.length > 0
+                ? versions.filter((v) => submenu.versioned.includes(v.id as VersionPrefix))
+                : [];
             return (
               <div
                 class:list={[
@@ -131,10 +135,10 @@ const initialActiveLevel =
                 data-parent-id={submenu.id}
                 aria-hidden="true"
               >
-                {submenu.versioned && versions.length > 0 && (
+                {availableVersions.length > 0 && (
                   <VersionSwitcher
                     class="sidebar-version-switcher"
-                    versions={versions}
+                    versions={availableVersions}
                     defaultVersion={defaultVersion}
                     currentPath={currentPath}
                     aria-label="Select documentation version"

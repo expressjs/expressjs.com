@@ -10,8 +10,8 @@ const docsCollection = defineCollection({
   }),
 });
 
-const apiReferenceCollection = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/api-reference' }),
+const apiCollection = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/api' }),
   // TODO: temp schema, to be updated later
   schema: z.object({
     title: z.string(),
@@ -20,7 +20,16 @@ const apiReferenceCollection = defineCollection({
   }),
 });
 
+const resourcesCollection = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/resources' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+  }),
+});
+
 export const collections = {
   docs: docsCollection,
-  'api-reference': apiReferenceCollection,
+  api: apiCollection,
+  resources: resourcesCollection,
 };

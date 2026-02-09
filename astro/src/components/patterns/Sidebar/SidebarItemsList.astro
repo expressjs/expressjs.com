@@ -1,5 +1,5 @@
 ---
-import type { MenuItem } from '@/config/types';
+import type { MenuItem, VersionPrefix } from '@/config/types';
 import SidebarNavItem from './SidebarNavItem.astro';
 import { isLink, hasSubmenu, filterItems, getItemId, resolveHref, normalizePath } from './utils';
 
@@ -10,7 +10,7 @@ interface Props {
   currentPath: string;
   lang: string;
   basePath: string;
-  versioned: boolean;
+  versioned: VersionPrefix[];
   version: string;
   variant: 'root' | 'nested';
   showIcon?: boolean;

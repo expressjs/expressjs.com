@@ -1,5 +1,4 @@
 import type { Menu } from '../types';
-import { middlewareMenu } from './middleware';
 
 export const docsMenu: Menu = {
   sections: [
@@ -34,20 +33,6 @@ export const docsMenu: Menu = {
           href: `/advanced/developing-template-engines`,
           label: 'Building template engines',
           ariaLabel: 'Building template engines guide',
-        },
-      ],
-    },
-    {
-      title: 'Resources',
-      items: [
-        { href: `/resources/community`, label: 'Community', ariaLabel: 'Community resources' },
-        { href: `/resources/glossary`, label: 'Glossary', ariaLabel: 'Glossary of terms' },
-        {
-          label: 'Middleware',
-          ariaLabel: 'Middleware resources',
-          submenu: {
-            sections: middlewareMenu.sections,
-          },
         },
       ],
     },

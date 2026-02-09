@@ -5,7 +5,7 @@ import { render } from 'astro:content';
 import { buildBreadcrumbs } from '@utils/content';
 
 export async function getStaticPaths() {
-  const pages = await getCollection('api-reference');
+  const pages = await getCollection('resources');
   return pages.map((page) => {
     const [lang, ...slugParts] = page.id.split('/');
 
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 const { lang, slug } = Astro.params;
 const { Content } = await render(page);
-const breadcrumbs = await buildBreadcrumbs(lang, slug, 'api-reference');
+const breadcrumbs = await buildBreadcrumbs(lang, slug, 'resources');
 const { title, description } = page.data;
 ---
 
