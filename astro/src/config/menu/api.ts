@@ -3,6 +3,28 @@ import type { Menu } from '../types';
 export const apiMenu: Menu = {
   sections: [
     {
+      items: [
+        {
+          href: '',
+          label: 'Overview',
+          ariaLabel: 'Overview',
+          omitFrom: ['4x', '3x'],
+        },
+        {
+          href: '',
+          label: 'Overview',
+          ariaLabel: 'Overview',
+          omitFrom: ['5x', '3x'],
+        },
+        {
+          href: '',
+          label: 'Overview',
+          ariaLabel: 'Overview',
+          omitFrom: ['5x', '4x'],
+        },
+      ],
+    },
+    {
       title: 'Application',
       items: [
         { href: `/application/overview`, label: 'Overview', ariaLabel: 'Application overview' },
