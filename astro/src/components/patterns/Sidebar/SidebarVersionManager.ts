@@ -66,7 +66,7 @@ export class SidebarVersionManager {
     if (!activePanel) return false;
 
     // Check if the active panel contains versioned links
-    const versionedLink = activePanel.querySelector('a[href*="/v4/"], a[href*="/v5/"]');
+    const versionedLink = activePanel.querySelector('a[href*="/4x/"], a[href*="/5x/"]');
     return versionedLink !== null;
   }
 

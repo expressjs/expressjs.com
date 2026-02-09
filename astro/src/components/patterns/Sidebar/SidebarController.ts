@@ -25,7 +25,7 @@ export class SidebarController {
     this.navContainer = document.querySelector('[data-nav-container]');
 
     if (this.sidebar && this.backdrop) {
-      const currentVersion = this.sidebar.dataset.currentVersion || 'v5';
+      const currentVersion = this.sidebar.dataset.currentVersion || '5x';
       this.versionManager = new SidebarVersionManager(
         this.sidebar,
         currentVersion,
@@ -240,7 +240,7 @@ export class SidebarController {
   }
 
   public getVersion(): string {
-    return this.versionManager?.getVersion() || 'v5';
+    return this.versionManager?.getVersion() || '5x';
   }
 
   public setVersion(version: string): void {

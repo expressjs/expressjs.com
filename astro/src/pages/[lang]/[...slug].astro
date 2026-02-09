@@ -5,8 +5,8 @@ import { render } from 'astro:content';
 import { buildBreadcrumbs } from '@utils/content';
 
 export async function getStaticPaths() {
-  const DEFAULT_VERSION = 'v5';
-  const VERSION_PREFIXES = ['v5', 'v4', 'v3'];
+  const DEFAULT_VERSION = '5x';
+  const VERSION_PREFIXES = ['5x', '4x', '3x'];
 
   const pages = await getCollection('docs');
 

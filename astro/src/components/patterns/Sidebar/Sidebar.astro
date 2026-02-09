@@ -20,11 +20,11 @@ type Props = HTMLAttributes<'div'> & {
 const {
   menu = mainMenu,
   versions = [
-    { id: 'v5', label: 'v5.x', isDefault: true },
-    { id: 'v4', label: 'v4.x' },
-    { id: 'v3', label: 'v3.x (deprecated)' },
+    { id: '5x', label: 'v5.x', isDefault: true },
+    { id: '4x', label: 'v4.x' },
+    { id: '3x', label: 'v3.x (deprecated)' },
   ],
-  defaultVersion = 'v5',
+  defaultVersion = '5x',
   ...rest
 } = Astro.props;
 

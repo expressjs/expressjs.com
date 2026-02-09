@@ -50,7 +50,7 @@ function formatLabel(segment: string): string {
  * @param lang - The language code (e.g., 'en')
  * @param slug - The page slug (e.g., 'resources/middleware/compression')
  * @param collection - The collection name to check for existing content
- * @param version - The version to display in breadcrumbs (e.g., 'v5')
+ * @param version - The version to display in breadcrumbs (e.g., '5x')
  * @returns Array of breadcrumb items with labels and optional hrefs
  */
 export async function buildBreadcrumbs(

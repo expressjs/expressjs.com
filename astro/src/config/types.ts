@@ -1,5 +1,5 @@
 /** Valid version prefixes for versioned content */
-export type VersionPrefix = 'v5' | 'v4' | 'v3';
+export type VersionPrefix = '5x' | '4x' | '3x';
 
 export type MenuItemBaseProps = {
   label: string;
