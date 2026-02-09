@@ -53,15 +53,12 @@ const selectOptions: SelectOption[] = versions.map((version) => ({
   data-version-switcher
   {...rest}
 >
-  <label class="version-switcher__label" for="version-select">
-    <Icon
-      name="fluent:tag-28-regular"
-      size="16"
-      color="var(--color-icon-secondary)"
-      aria-hidden="true"
-    />
-    <span class="sr-only">API version</span>
-  </label>
+  <Icon
+    name="fluent:tag-28-regular"
+    size="16"
+    color="var(--color-icon-secondary)"
+    aria-hidden="true"
+  />
   <Select
     id="version-select"
     options={selectOptions}

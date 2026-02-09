@@ -155,7 +155,7 @@ const initialActiveLevel =
                       color="var(--color-icon-primary)"
                       aria-hidden="true"
                     />
-                    <Body as="h3" weight="bold" vMargin={false}>
+                    <Body as="span" weight="bold" vMargin={false}>
                       {submenu.title}
                     </Body>
                   </button>
@@ -165,7 +165,7 @@ const initialActiveLevel =
                       .map((section, sectionIndex) => (
                         <div class="sidebar-section" data-section-index={sectionIndex}>
                           {section.title && (
-                            <Body as="h3" weight="bold">
+                            <Body as="h3" weight="bold" aria-label={`Section: ${section.title}`}>
                               {section.title}
                             </Body>
                           )}

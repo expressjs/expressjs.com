@@ -13,10 +13,4 @@
   .version-switcher--hidden {
     display: none;
   }
-
-  .version-switcher__label {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
 }

@@ -48,7 +48,7 @@ const currentVersion = detectVersionFromUrl(currentPath, versions, defaultVersio
   data-current-version={currentVersion}
   {...rest}
 >
-  <h2 id="sidebar-title" class="sr-only">Main menu</h2>
+  <h2 id="sidebar-title" class="sr-only" aria-label="Main menu">Main menu</h2>
 
   <Flex direction="column" justify="between" class="h-full">
     <div class="sidebar-container" data-nav-container data-current-nav-level="0">
@@ -71,7 +71,7 @@ const currentVersion = detectVersionFromUrl(currentPath, versions, defaultVersio
           <div class="sidebar-nav-icon">
             <Icon name="fluent:translate-20-regular" size="24" color="var(--color-icon-primary)" />
           </div>
-          <BodyMd as="span" vMargin={false}> Select language </BodyMd>
+          <BodyMd as="span" vMargin={false}>Select language</BodyMd>
         </button>
       </li>
       <li>
