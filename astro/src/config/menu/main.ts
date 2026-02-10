@@ -21,7 +21,6 @@ export const mainMenu: Menu = {
           ariaLabel: 'API Reference',
           icon: 'code-20-regular',
           submenu: {
-            basePath: '/api',
             versioned: ['5x', '4x', '3x'],
             sections: apiMenu.sections,
           },
