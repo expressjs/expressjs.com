@@ -31,7 +31,7 @@ export const mainMenu: Menu = {
           label: 'Resources',
           ariaLabel: 'Resources',
           icon: 'folder-20-regular',
-          href: '/resources/community',
+          href: '/community',
           submenu: {
             basePath: '/resources',
             items: resourcesMenu.items,

@@ -6,6 +6,7 @@
  */
 import Layout from '@layouts/Layout.astro';
 import { languages } from '@i18n/ui';
+import { Container } from '@/components/primitives';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({
@@ -15,7 +16,9 @@ export function getStaticPaths() {
 ---
 
 <Layout title="Express Blog">
-  <h1>Express Blog</h1>
-  <p>This is a temporary entry point page for the Express blog.</p>
-  <p>This page will be replaced with a proper blog layout soon.</p>
+  <Container>
+    <h1>Express Blog</h1>
+    <p>This is a temporary entry point page for the Express blog.</p>
+    <p>This page will be replaced with a proper blog layout soon.</p>
+  </Container>
 </Layout>

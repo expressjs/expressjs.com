@@ -1,6 +1,6 @@
 ---
 import '@styles/main.css';
-import { Container, Flex } from '@components/primitives';
+import { Flex, FlexItem } from '@components/primitives';
 import { Sidebar } from '@/components/patterns';
 import { Header } from '@/components/patterns';
 
@@ -35,11 +35,13 @@ const {
   </head>
   <body>
     <Header />
-    <Flex gap="4">
+    <Flex gap="8">
       <Sidebar />
-      <Container>
-        <slot />
-      </Container>
+      <FlexItem grow>
+        <main>
+          <slot />
+        </main>
+      </FlexItem>
     </Flex>
   </body>
 </html>

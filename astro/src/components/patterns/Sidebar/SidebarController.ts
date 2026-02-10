@@ -112,6 +112,8 @@ export class SidebarController {
       return;
     }
 
+    this.enableTransitions();
+
     this.activeSubmenuPath = this.activeSubmenuPath.slice(0, level);
     this.activeSubmenuPath.push(submenuId);
     this.activeLevel = level;
@@ -131,6 +133,8 @@ export class SidebarController {
 
   private navigateBack(): void {
     if (this.activeSubmenuPath.length <= 1) return;
+
+    this.enableTransitions();
 
     const currentSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
     let triggerToFocus: HTMLElement | null = null;
@@ -169,6 +173,10 @@ export class SidebarController {
     });
 
     this.versionManager?.updateVisibility(this.activeLevel);
+  }
+
+  private enableTransitions(): void {
+    this.navContainer?.classList.add('sidebar-container--interactive');
   }
 
   private handleKeyDown(e: KeyboardEvent): void {

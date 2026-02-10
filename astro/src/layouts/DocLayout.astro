@@ -2,6 +2,7 @@
 import Layout from './Layout.astro';
 import type { BreadcrumbItem } from '@utils/content';
 import { Breadcrumbs } from '@components/patterns';
+import { Container } from '@/components/primitives';
 
 interface Props {
   title: string;
@@ -13,11 +14,11 @@ const { title, description, breadcrumbs } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
-  <main>
+  <Container>
     <Breadcrumbs items={breadcrumbs} />
 
     <article>
       <slot />
     </article>
-  </main>
+  </Container>
 </Layout>
