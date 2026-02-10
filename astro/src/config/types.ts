@@ -21,7 +21,6 @@ export type MenuItem =
 export type MenuSection = {
   title?: string;
   basePath?: string;
-  versioned?: VersionPrefix[];
   items: MenuItem[];
   omitFrom?: VersionPrefix[];
 };
