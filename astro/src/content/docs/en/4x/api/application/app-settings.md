@@ -7,8 +7,8 @@ The following table lists application settings.
 
 Note that sub-apps will:
 
-* Not inherit the value of settings that have a default value.  You must set the value in the sub-app.
-* Inherit the value of settings with no default value; these are explicitly noted in the table below.
+- Not inherit the value of settings that have a default value. You must set the value in the sub-app.
+- Inherit the value of settings with no default value; these are explicitly noted in the table below.
 
 Exceptions: Sub-apps will inherit the value of `trust proxy` even though it has a default value (for backward-compatibility);
 Sub-apps will not inherit the value of `view cache` in production (when `NODE_ENV` is "production").
@@ -57,7 +57,8 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   <td markdown="1">
   Set the ETag response header. For possible values, see the [`etag` options table](#etag.options.table).
 
-  [More about the HTTP ETag header](http://en.wikipedia.org/wiki/HTTP_ETag).
+[More about the HTTP ETag header](http://en.wikipedia.org/wiki/HTTP_ETag).
+
   </td>
   <td markdown="1">
   `weak`
@@ -119,6 +120,7 @@ The simple query parser is based on Node's native query parser, [querystring](ht
 The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
 
 A custom query string parsing function will receive the complete query string, and must return an object of query keys and their values.
+
   </td>
       <td>"extended"</td>
     </tr>
@@ -223,7 +225,8 @@ A custom query string parsing function will receive the complete query string, a
   <td markdown="1">
   If `true`, the client's IP address is understood as the left-most entry in the `X-Forwarded-*` header.
 
-  If `false`, the app is understood as directly facing the Internet and the client's IP address is derived from `req.connection.remoteAddress`. This is the default setting.
+If `false`, the app is understood as directly facing the Internet and the client's IP address is derived from `req.connection.remoteAddress`. This is the default setting.
+
   </td>
       </tr>
       <tr>
@@ -231,37 +234,38 @@ A custom query string parsing function will receive the complete query string, a
   <td markdown="1">
   An IP address, subnet, or an array of IP addresses, and subnets to trust. Pre-configured subnet names are:
 
-  * loopback - `127.0.0.1/8`, `::1/128`
-  * linklocal - `169.254.0.0/16`, `fe80::/10`
-  * uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
+- loopback - `127.0.0.1/8`, `::1/128`
+- linklocal - `169.254.0.0/16`, `fe80::/10`
+- uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
 
-  Set IP addresses in any of the following ways:
+Set IP addresses in any of the following ways:
 
 Specify a single subnet:
 
 ```js
-app.set('trust proxy', 'loopback')
+app.set('trust proxy', 'loopback');
 ```
 
 Specify a subnet and an address:
 
 ```js
-app.set('trust proxy', 'loopback, 123.123.123.123')
+app.set('trust proxy', 'loopback, 123.123.123.123');
 ```
 
 Specify multiple subnets as CSV:
 
 ```js
-app.set('trust proxy', 'loopback, linklocal, uniquelocal')
+app.set('trust proxy', 'loopback, linklocal, uniquelocal');
 ```
 
 Specify multiple subnets as an array:
 
 ```js
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
 ```
 
-  When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client's IP address.
+When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client's IP address.
+
   </td>
       </tr>
       <tr>
@@ -277,10 +281,12 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
 
 ```js
 app.set('trust proxy', function (ip) {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
-  else return false
-})
+  if (ip === '127.0.0.1' || ip === '123.123.123.123')
+    return true; // trusted IPs
+  else return false;
+});
 ```
+
   </td>
       </tr>
     </tbody>
@@ -324,9 +330,10 @@ The [express.static](#express.static) middleware ignores these settings.
 
 ```js
 app.set('etag', function (body, encoding) {
-  return generateHash(body, encoding) // consider the function is defined
-})
+  return generateHash(body, encoding); // consider the function is defined
+});
 ```
+
   </td>
       </tr>
     </tbody>

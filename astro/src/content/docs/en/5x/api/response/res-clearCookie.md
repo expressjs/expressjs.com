@@ -19,6 +19,6 @@ Web browsers and other compliant clients will only clear the cookie if the given
 </div>
 
 ```js
-res.cookie('name', 'tobi', { path: '/admin' })
-res.clearCookie('name', { path: '/admin' })
+res.cookie('name', 'tobi', { path: '/admin' });
+res.clearCookie('name', { path: '/admin' });
 ```

@@ -17,14 +17,14 @@ can perform a task, then call `next()` to continue matching subsequent
 routes.
 
 ```js
-router.all('{*splat}', requireAuthentication, loadUser)
+router.all('{*splat}', requireAuthentication, loadUser);
 ```
 
 Or the equivalent:
 
 ```js
-router.all('{*splat}', requireAuthentication)
-router.all('{*splat}', loadUser)
+router.all('{*splat}', requireAuthentication);
+router.all('{*splat}', loadUser);
 ```
 
 Another example of this is white-listed "global" functionality. Here,
@@ -32,5 +32,5 @@ the example is much like before, but it only restricts paths prefixed with
 "/api":
 
 ```js
-router.all('/api/{*splat}', requireAuthentication)
+router.all('/api/{*splat}', requireAuthentication);
 ```

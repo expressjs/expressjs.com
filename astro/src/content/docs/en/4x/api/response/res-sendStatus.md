@@ -8,7 +8,7 @@ description: Sets the response HTTP status code to statusCode and sends the regi
 Sets the response HTTP status code to `statusCode` and sends the registered status message as the text response body. If an unknown status code is specified, the response body will just be the code number.
 
 ```js
-res.sendStatus(404)
+res.sendStatus(404);
 ```
 
 <div class="doc-box doc-notice" markdown="1">

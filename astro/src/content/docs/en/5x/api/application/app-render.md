@@ -36,9 +36,9 @@ cache view during development; view caching is enabled in production by default.
 ```js
 app.render('email', (err, html) => {
   // ...
-})
+});
 
 app.render('email', { name: 'Tobi' }, (err, html) => {
   // ...
-})
+});
 ```

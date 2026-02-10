@@ -13,8 +13,8 @@ For example, the following call:
 ```js
 res.links({
   next: 'http://api.example.com/users?page=2',
-  last: 'http://api.example.com/users?page=5'
-})
+  last: 'http://api.example.com/users?page=5',
+});
 ```
 
 Yields the following results:

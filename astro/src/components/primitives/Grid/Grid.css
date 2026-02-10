@@ -13,8 +13,8 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    }
-  
+  }
+
   /* Grid Gaps */
   .grid--gap-0 {
     gap: 0;
@@ -43,7 +43,7 @@
   .grid--gap-16 {
     gap: var(--space-16);
   }
-  
+
   /* Row Gaps */
   .grid--row-gap-0 {
     row-gap: 0;
@@ -72,7 +72,7 @@
   .grid--row-gap-16 {
     row-gap: var(--space-16);
   }
-  
+
   /* Column Gaps */
   .grid--col-gap-0 {
     column-gap: 0;
@@ -101,11 +101,11 @@
   .grid--col-gap-16 {
     column-gap: var(--space-16);
   }
-  
+
   /* ============================================
      COL COMPONENT (Responsive Column Spans)
      ============================================ */
-  
+
   /* Mobile (xs) - Base spans */
   .col-xs-1 {
     grid-column: span 1;
@@ -143,7 +143,7 @@
   .col-xs-12 {
     grid-column: span 12;
   }
-  
+
   /* Tablet (md) breakpoint */
   @media (--md-only) {
     .col-md-1 {
@@ -183,7 +183,7 @@
       grid-column: span 12;
     }
   }
-  
+
   /* Desktop (lg) breakpoint */
   @media (--lg-up) {
     .col-lg-1 {
@@ -223,15 +223,15 @@
       grid-column: span 12;
     }
   }
-  
+
   /* ============================================
      FLEX COMPONENT
      ============================================ */
-  
+
   .flex {
     display: flex;
   }
-  
+
   /* Direction */
   .flex--row {
     flex-direction: row;
@@ -245,7 +245,7 @@
   .flex--column-reverse {
     flex-direction: column-reverse;
   }
-  
+
   /* Align Items */
   .flex--align-start {
     align-items: flex-start;
@@ -262,7 +262,7 @@
   .flex--align-baseline {
     align-items: baseline;
   }
-  
+
   /* Justify Content */
   .flex--justify-start {
     justify-content: flex-start;
@@ -282,7 +282,7 @@
   .flex--justify-evenly {
     justify-content: space-evenly;
   }
-  
+
   /* Wrap */
   .flex--nowrap {
     flex-wrap: nowrap;
@@ -293,7 +293,7 @@
   .flex--wrap-reverse {
     flex-wrap: wrap-reverse;
   }
-  
+
   /* Flex Gaps */
   .flex--gap-0 {
     gap: 0;
@@ -322,11 +322,11 @@
   .flex--gap-16 {
     gap: var(--space-16);
   }
-  
+
   /* ============================================
      FLEX ITEM COMPONENT
      ============================================ */
-  
+
   /* Flex Grow */
   .flex-item--grow-0 {
     flex-grow: 0;
@@ -334,7 +334,7 @@
   .flex-item--grow-1 {
     flex-grow: 1;
   }
-  
+
   /* Flex Shrink */
   .flex-item--shrink-0 {
     flex-shrink: 0;
@@ -342,7 +342,7 @@
   .flex-item--shrink-1 {
     flex-shrink: 1;
   }
-  
+
   /* Flex Basis */
   .flex-item--basis-0 {
     flex-basis: 0;
@@ -368,7 +368,7 @@
   .flex-item--basis-3\/4 {
     flex-basis: 75%;
   }
-  
+
   /* Flex Shorthand */
   .flex-item--flex-1 {
     flex: 1 1 0%;
@@ -382,16 +382,16 @@
   .flex-item--flex-none {
     flex: none;
   }
-  
+
   /* ============================================
      UTILITY CLASSES
      ============================================ */
-  
+
   /* Grid Utilities */
   .grid {
     display: grid;
   }
-  
+
   .grid-cols-1 {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -410,7 +410,7 @@
   .grid-cols-12 {
     grid-template-columns: repeat(12, 1fr);
   }
-  
+
   /* Responsive Grid Utilities */
   @media (--md-only) {
     .md-grid-cols-1 {
@@ -432,7 +432,7 @@
       grid-template-columns: repeat(12, 1fr);
     }
   }
-  
+
   @media (--lg-up) {
     .lg-grid-cols-1 {
       grid-template-columns: repeat(1, 1fr);
@@ -453,7 +453,7 @@
       grid-template-columns: repeat(12, 1fr);
     }
   }
-  
+
   /* Column Span Utilities */
   .col-span-full {
     grid-column: 1 / -1;
@@ -476,7 +476,7 @@
   .col-span-12 {
     grid-column: span 12;
   }
-  
+
   /* Flex Utilities */
   .flex {
     display: flex;
@@ -511,7 +511,7 @@
   .flex-wrap {
     flex-wrap: wrap;
   }
-  
+
   /* Gap Utilities */
   .gap-1 {
     gap: var(--space-1);

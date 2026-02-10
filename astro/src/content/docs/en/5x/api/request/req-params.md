@@ -9,7 +9,7 @@ This property is an object containing properties mapped to the [named route "par
 
 ```js
 // GET /user/tj
-console.dir(req.params.name)
+console.dir(req.params.name);
 // => "tj"
 ```
 
@@ -17,12 +17,12 @@ Properties corresponding to wildcard parameters are arrays containing separate p
 
 ```js
 app.get('/files/*file', (req, res) => {
-  console.dir(req.params.file)
+  console.dir(req.params.file);
   // GET /files/note.txt
   // => [ 'note.txt' ]
   // GET /files/images/image.png
   // => [ 'images', 'image.png' ]
-})
+});
 ```
 
 When you use a regular expression for the route definition, capture groups are provided as integer keys using `req.params[n]`, where `n` is the n<sup>th</sup> capture group.
@@ -30,9 +30,9 @@ When you use a regular expression for the route definition, capture groups are p
 ```js
 app.use(/^\/file\/(.*)$/, (req, res) => {
   // GET /file/javascripts/jquery.js
-  console.dir(req.params[0])
+  console.dir(req.params[0]);
   // => "javascripts/jquery.js"
-})
+});
 ```
 
 Named capturing groups in regular expressions behave like named route parameters. For example the group from `/^\/file\/(?<path>.*)$/` expression is available as `req.params.path`.

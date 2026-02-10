@@ -19,22 +19,22 @@ to "application/json" or "\*/json" (however if it is "\*/\*", then the response 
 ```js
 res.format({
   'text/plain': function () {
-    res.send('hey')
+    res.send('hey');
   },
 
   'text/html': function () {
-    res.send('<p>hey</p>')
+    res.send('<p>hey</p>');
   },
 
   'application/json': function () {
-    res.send({ message: 'hey' })
+    res.send({ message: 'hey' });
   },
 
   default: function () {
     // log the request and respond with 406
-    res.status(406).send('Not Acceptable')
-  }
-})
+    res.status(406).send('Not Acceptable');
+  },
+});
 ```
 
 In addition to canonicalized MIME types, you may also use extension names mapped
@@ -43,15 +43,15 @@ to these types for a slightly less verbose implementation:
 ```js
 res.format({
   text: function () {
-    res.send('hey')
+    res.send('hey');
   },
 
   html: function () {
-    res.send('<p>hey</p>')
+    res.send('<p>hey</p>');
   },
 
   json: function () {
-    res.send({ message: 'hey' })
-  }
-})
+    res.send({ message: 'hey' });
+  },
+});
 ```

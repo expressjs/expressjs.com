@@ -15,6 +15,6 @@ For more information, see the [routing guide](/{{page.lang}}/guide/routing.html)
 
 ```js
 app.get('/', (req, res) => {
-  res.send('GET request to homepage')
-})
+  res.send('GET request to homepage');
+});
 ```

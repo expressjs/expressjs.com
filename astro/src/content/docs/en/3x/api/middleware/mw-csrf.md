@@ -7,7 +7,7 @@ description: CSRF protection middleware.
 
 CSRF protection middleware.
 
-By default this middleware generates a token named "_csrf"
+By default this middleware generates a token named "\_csrf"
 which should be added to requests which mutate
 state, within a hidden form field, query-string etc. This
 token is validated against `req.csrfToken()`.

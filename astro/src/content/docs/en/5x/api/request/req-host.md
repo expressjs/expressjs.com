@@ -18,10 +18,10 @@ comma-separated values, in which the first value is used.
 
 ```js
 // Host: "example.com:3000"
-console.dir(req.host)
+console.dir(req.host);
 // => 'example.com:3000'
 
 // Host: "[::1]:3000"
-console.dir(req.host)
+console.dir(req.host);
 // => '[::1]:3000'
 ```

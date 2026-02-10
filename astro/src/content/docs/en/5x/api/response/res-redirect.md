@@ -10,22 +10,24 @@ that corresponds to an [HTTP status code](https://www.rfc-editor.org/rfc/rfc9110
 If not specified, `status` defaults to `302 "Found"`.
 
 ```js
-res.redirect('/foo/bar')
-res.redirect('http://example.com')
-res.redirect(301, 'http://example.com')
-res.redirect('../login')
+res.redirect('/foo/bar');
+res.redirect('http://example.com');
+res.redirect(301, 'http://example.com');
+res.redirect('../login');
 ```
+
 Redirects can be a fully-qualified URL for redirecting to a different site:
 
 ```js
-res.redirect('http://google.com')
+res.redirect('http://google.com');
 ```
+
 Redirects can be relative to the root of the host name. For example, if the
 application is on `http://example.com/admin/post/new`, the following
 would redirect to the URL `http://example.com/admin`:
 
 ```js
-res.redirect('/admin')
+res.redirect('/admin');
 ```
 
 Redirects can be relative to the current URL. For example,
@@ -33,7 +35,7 @@ from `http://example.com/blog/admin/` (notice the trailing slash), the following
 would redirect to the URL `http://example.com/blog/admin/post/new`.
 
 ```js
-res.redirect('post/new')
+res.redirect('post/new');
 ```
 
 Redirecting to `post/new` from `http://example.com/blog/admin` (no trailing slash),
@@ -47,8 +49,8 @@ Path-relative redirects are also possible. If you were on
 `http://example.com/admin/post`:
 
 ```js
-res.redirect('..')
+res.redirect('..');
 ```
 
-See also [Security best practices: Prevent open redirect 
-vulnerabilities](http://expressjs.com/en/advanced/best-practice-security.html#prevent-open-redirects). 
+See also [Security best practices: Prevent open redirect
+vulnerabilities](http://expressjs.com/en/advanced/best-practice-security.html#prevent-open-redirects).

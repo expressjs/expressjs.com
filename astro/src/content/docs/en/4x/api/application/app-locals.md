@@ -17,10 +17,10 @@ additional considerations.
 </div>
 
 ```js
-console.dir(app.locals.title)
+console.dir(app.locals.title);
 // => 'My App'
 
-console.dir(app.locals.email)
+console.dir(app.locals.email);
 // => 'me@myapp.com'
 ```
 
@@ -33,7 +33,7 @@ This is useful for providing helper functions to templates, as well as applicati
 Local variables are available in middleware via `req.app.locals` (see [req.app](#req.app))
 
 ```js
-app.locals.title = 'My App'
-app.locals.strftime = require('strftime')
-app.locals.email = 'me@myapp.com'
+app.locals.title = 'My App';
+app.locals.strftime = require('strftime');
+app.locals.email = 'me@myapp.com';
 ```

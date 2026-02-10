@@ -10,7 +10,7 @@ contains cookies sent by the request. If the request contains no cookies, it def
 
 ```js
 // Cookie: name=tj
-console.dir(req.cookies.name)
+console.dir(req.cookies.name);
 // => "tj"
 ```
 

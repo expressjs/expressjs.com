@@ -8,18 +8,18 @@ description: Creates a new [router](#router) object.
 Creates a new [router](#router) object.
 
 ```js
-const router = express.Router([options])
+const router = express.Router([options]);
 ```
 
 The optional `options` parameter specifies the behavior of the router.
 
 <div class="table-scroller" markdown="1">
 
-| Property        | Description                                     | Default     | Availability  |
-|-----------------|-------------------------------------------------|-------------|---------------|
-| `caseSensitive` | Enable case sensitivity. | Disabled by default, treating "/Foo" and "/foo" as the same.|  |
-| `mergeParams`   | Preserve the `req.params` values from the parent router. If the parent and the child have conflicting param names, the child's value take precedence.| `false` | 4.5.0+ |
-| `strict`        | Enable strict routing. | Disabled by default, "/foo" and "/foo/" are treated the same by the router.| &nbsp; |
+| Property        | Description                                                                                                                                           | Default                                                                     | Availability |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------ |
+| `caseSensitive` | Enable case sensitivity.                                                                                                                              | Disabled by default, treating "/Foo" and "/foo" as the same.                |              |
+| `mergeParams`   | Preserve the `req.params` values from the parent router. If the parent and the child have conflicting param names, the child's value take precedence. | `false`                                                                     | 4.5.0+       |
+| `strict`        | Enable strict routing.                                                                                                                                | Disabled by default, "/foo" and "/foo/" are treated the same by the router. | &nbsp;       |
 
 </div>
 

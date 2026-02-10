@@ -12,17 +12,17 @@ The `app.mountpath` property contains one or more path patterns on which a sub-a
 </div>
 
 ```js
-const express = require('express')
+const express = require('express');
 
-const app = express() // the main app
-const admin = express() // the sub app
+const app = express(); // the main app
+const admin = express(); // the sub app
 
 admin.get('/', (req, res) => {
-  console.log(admin.mountpath) // /admin
-  res.send('Admin Homepage')
-})
+  console.log(admin.mountpath); // /admin
+  res.send('Admin Homepage');
+});
 
-app.use('/admin', admin) // mount the sub app
+app.use('/admin', admin); // mount the sub app
 ```
 
 It is similar to the [baseUrl](#req.baseUrl) property of the `req` object, except `req.baseUrl`
@@ -32,19 +32,19 @@ If a sub-app is mounted on multiple path patterns, `app.mountpath` returns the l
 patterns it is mounted on, as shown in the following example.
 
 ```js
-const admin = express()
+const admin = express();
 
 admin.get('/', (req, res) => {
-  console.log(admin.mountpath) // [ '/adm{*splat}n', '/manager' ]
-  res.send('Admin Homepage')
-})
+  console.log(admin.mountpath); // [ '/adm{*splat}n', '/manager' ]
+  res.send('Admin Homepage');
+});
 
-const secret = express()
+const secret = express();
 secret.get('/', (req, res) => {
-  console.log(secret.mountpath) // /secr{*splat}t
-  res.send('Admin Secret')
-})
+  console.log(secret.mountpath); // /secr{*splat}t
+  res.send('Admin Secret');
+});
 
-admin.use('/secr{*splat}t', secret) // load the 'secret' router on '/secr{*splat}t', on the 'admin' sub app
-app.use(['/adm{*splat}n', '/manager'], admin) // load the 'admin' router on '/adm{*splat}n' and '/manager', on the parent app
+admin.use('/secr{*splat}t', secret); // load the 'secret' router on '/secr{*splat}t', on the 'admin' sub app
+app.use(['/adm{*splat}n', '/manager'], admin); // load the 'admin' router on '/adm{*splat}n' and '/manager', on the parent app
 ```

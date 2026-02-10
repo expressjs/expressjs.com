@@ -7,7 +7,7 @@ description: The router.METHOD methods provide the routing functionality in Expr
 
 The `router.METHOD()` methods provide the routing functionality in Express,
 where METHOD is one of the HTTP methods, such as GET, PUT, POST, and so on,
-in lowercase.  Thus, the actual methods are `router.get()`, `router.post()`,
+in lowercase. Thus, the actual methods are `router.get()`, `router.post()`,
 `router.put()`, and so on.
 
 <div class="doc-box doc-info" markdown="1">
@@ -18,7 +18,7 @@ in lowercase.  Thus, the actual methods are `router.get()`, `router.post()`,
 
 You can provide multiple callbacks, and all are treated equally, and behave just
 like middleware, except that these callbacks may invoke `next('route')`
-to bypass the remaining route callback(s).  You can use this mechanism to perform
+to bypass the remaining route callback(s). You can use this mechanism to perform
 pre-conditions on a route then pass control to subsequent routes when there is no
 reason to proceed with the route matched.
 
@@ -30,8 +30,8 @@ these matches, for example "GET /" would match the following route, as would
 
 ```js
 router.get('/', function (req, res) {
-  res.send('hello world')
-})
+  res.send('hello world');
+});
 ```
 
 You can also use regular expressions&mdash;useful if you have very specific
@@ -40,8 +40,8 @@ as "GET /commits/71dbb9c..4c084f9".
 
 ```js
 router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function (req, res) {
-  var from = req.params[0]
-  var to = req.params[1] || 'HEAD'
-  res.send('commit range ' + from + '..' + to)
-})
+  var from = req.params[0];
+  var to = req.params[1] || 'HEAD';
+  res.send('commit range ' + from + '..' + to);
+});
 ```

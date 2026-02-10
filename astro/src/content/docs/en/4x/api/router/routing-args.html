@@ -36,16 +36,19 @@
           </ul>
           <p>
             You can provide multiple callback functions that behave just like middleware, except
-            that these callbacks can invoke <code>next('route')</code> to bypass
-            the remaining route callback(s). You can use this mechanism to impose pre-conditions
-            on a route, then pass control to subsequent routes if there is no reason to proceed with the current route.
+            that these callbacks can invoke <code>next('route')</code> to bypass the remaining route
+            callback(s). You can use this mechanism to impose pre-conditions on a route, then pass
+            control to subsequent routes if there is no reason to proceed with the current route.
           </p>
           <p>
-            Since <a href="#router">router</a> and <a href="#application">app</a> implement the middleware interface,
-            you can use them as you would any other middleware function.
+            Since <a href="#router">router</a> and <a href="#application">app</a> implement the
+            middleware interface, you can use them as you would any other middleware function.
           </p>
           <p>
-            For examples, see <a href="#middleware-callback-function-examples">Middleware callback function examples</a>.
+            For examples, see
+            <a href="#middleware-callback-function-examples"
+              >Middleware callback function examples</a
+            >.
           </p>
         </td>
         <td>None</td>

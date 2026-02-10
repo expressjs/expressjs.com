@@ -14,16 +14,16 @@ For example:
 
 ```js
 app.get('/user/:id', (req, res) => {
-  res.send(`user ${req.params.id}`)
-})
+  res.send(`user ${req.params.id}`);
+});
 ```
 
 But you could just as well have:
 
 ```js
 app.get('/user/:id', (request, response) => {
-  response.send(`user ${request.params.id}`)
-})
+  response.send(`user ${request.params.id}`);
+});
 ```
 
 The `req` object is an enhanced version of Node's own request object
@@ -158,4 +158,3 @@ or [pez](https://www.npmjs.com/package/pez).
 <section markdown="1">
   {% include api/en/5x/req-range.md %}
 </section>
-

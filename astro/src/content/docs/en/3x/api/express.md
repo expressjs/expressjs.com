@@ -8,12 +8,12 @@ description: h2 id="express">express()
 Creates an Express application. The `express()` function is a top-level function exported by the _express_ module.
 
 ```js
-var express = require('express')
-var app = express()
+var express = require('express');
+var app = express();
 
 app.get('/', function (req, res) {
-  res.send('hello world')
-})
+  res.send('hello world');
+});
 
-app.listen(3000)
+app.listen(3000);
 ```

@@ -9,6 +9,6 @@ A Boolean property that is `true` if the request's `X-Requested-With` header fie
 "XMLHttpRequest", indicating that the request was issued by a client library such as jQuery.
 
 ```js
-console.dir(req.xhr)
+console.dir(req.xhr);
 // => true
 ```

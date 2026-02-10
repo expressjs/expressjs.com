@@ -21,8 +21,8 @@ would match the following route, as would "GET /?name=tobi".
 
 ```js
 app.get('/', function (req, res) {
-  res.send('hello world')
-})
+  res.send('hello world');
+});
 ```
 
 Regular expressions may also be used, and can be useful
@@ -31,10 +31,10 @@ would match "GET /commits/71dbb9c" as well as "GET /commits/71dbb9c..4c084f9".
 
 ```js
 app.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function (req, res) {
-  var from = req.params[0]
-  var to = req.params[1] || 'HEAD'
-  res.send('commit range ' + from + '..' + to)
-})
+  var from = req.params[0];
+  var to = req.params[1] || 'HEAD';
+  res.send('commit range ' + from + '..' + to);
+});
 ```
 
 Several callbacks may also be passed, useful for re-using middleware
@@ -43,20 +43,20 @@ that load resources, perform validations, etc.
 ```js
 app.get('/user/:id', user.load, function () {
   // ...
-})
+});
 ```
 
 These callbacks may be passed within arrays as well, these arrays are
 simply flattened when passed:
 
 ```js
-var middleware = [loadForum, loadThread]
+var middleware = [loadForum, loadThread];
 
 app.get('/forum/:fid/thread/:tid', middleware, function () {
   // ...
-})
+});
 
 app.post('/forum/:fid/thread/:tid', middleware, function () {
   // ...
-})
+});
 ```

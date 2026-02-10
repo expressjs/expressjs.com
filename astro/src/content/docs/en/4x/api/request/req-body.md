@@ -16,15 +16,15 @@ As `req.body`'s shape is based on user-controlled input, all properties and valu
 The following example shows how to use body-parsing middleware to populate `req.body`.
 
 ```js
-var express = require('express')
+var express = require('express');
 
-var app = express()
+var app = express();
 
-app.use(express.json()) // for parsing application/json
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.post('/profile', function (req, res, next) {
-  console.log(req.body)
-  res.json(req.body)
-})
+  console.log(req.body);
+  res.json(req.body);
+});
 ```

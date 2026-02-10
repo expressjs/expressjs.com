@@ -10,12 +10,12 @@ This middleware may be paired with `static()` to serve
 files, providing a full-featured file browser.
 
 ```js
-app.use(express.directory('public'))
-app.use(express.static('public'))
+app.use(express.directory('public'));
+app.use(express.static('public'));
 ```
 
 This middleware accepts the following options:
 
-* `hidden` display hidden (dot) files. Defaults to false.
-* `icons`  display icons. Defaults to false.
-* `filter` Apply this filter function to files. Defaults to false.
+- `hidden` display hidden (dot) files. Defaults to false.
+- `icons` display icons. Defaults to false.
+- `filter` Apply this filter function to files. Defaults to false.

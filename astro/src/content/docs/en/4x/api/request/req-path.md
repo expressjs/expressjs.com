@@ -9,7 +9,7 @@ Contains the path part of the request URL.
 
 ```js
 // example.com/users?sort=desc
-console.dir(req.path)
+console.dir(req.path);
 // => '/users'
 ```
 

@@ -11,36 +11,36 @@ Returns `false` otherwise.
 
 ```js
 // With Content-Type: text/html; charset=utf-8
-req.is('html')
+req.is('html');
 // => 'html'
-req.is('text/html')
+req.is('text/html');
 // => 'text/html'
-req.is('text/*')
+req.is('text/*');
 // => 'text/*'
 
 // When Content-Type is application/json
-req.is('json')
+req.is('json');
 // => 'json'
-req.is('application/json')
+req.is('application/json');
 // => 'application/json'
-req.is('application/*')
+req.is('application/*');
 // => 'application/*'
 
 // Using arrays
 // When Content-Type is application/json
-req.is(['json', 'html'])
+req.is(['json', 'html']);
 // => 'json'
 
 // Using multiple arguments
 // When Content-Type is application/json
-req.is('json', 'html')
+req.is('json', 'html');
 // => 'json'
 
-req.is('html')
+req.is('html');
 // => false
-req.is(['xml', 'yaml'])
+req.is(['xml', 'yaml']);
 // => false
-req.is('xml', 'yaml')
+req.is('xml', 'yaml');
 // => false
 ```
 

@@ -11,12 +11,12 @@ for the `json()`, `urlencoded()`, and
 `multipart()` middleware.
 
 ```js
-app.use(express.bodyParser())
+app.use(express.bodyParser());
 
 // is equivalent to:
-app.use(express.json())
-app.use(express.urlencoded())
-app.use(express.multipart())
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(express.multipart());
 ```
 
 For security sake, it's better to disable file upload if your application
@@ -24,8 +24,8 @@ doesn't need it. To do this, use only the needed middleware, i.e. don't use
 the `bodyParser` and `multipart()` middleware:
 
 ```js
-app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.json());
+app.use(express.urlencoded());
 ```
 
 If your application needs file upload you should set up

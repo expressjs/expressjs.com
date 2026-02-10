@@ -11,7 +11,7 @@ is available to you as `req.params.name`. This object defaults to `{}`.
 
 ```js
 // GET /user/tj
-console.dir(req.params.name)
+console.dir(req.params.name);
 // => 'tj'
 ```
 
@@ -22,6 +22,6 @@ with string routes such as `/file/*`:
 
 ```js
 // GET /file/javascripts/jquery.js
-console.dir(req.params[0])
+console.dir(req.params[0]);
 // => 'javascripts/jquery.js'
 ```

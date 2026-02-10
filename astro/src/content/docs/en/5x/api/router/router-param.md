@@ -26,15 +26,15 @@ router.param('user', (req, res, next, id) => {
   // try to get the user details from the User model and attach it to the request object
   User.find(id, (err, user) => {
     if (err) {
-      next(err)
+      next(err);
     } else if (user) {
-      req.user = user
-      next()
+      req.user = user;
+      next();
     } else {
-      next(new Error('failed to load user'))
+      next(new Error('failed to load user'));
     }
-  })
-})
+  });
+});
 ```
 
 Param callback functions are local to the router on which they are defined. They are not inherited by mounted apps or routers, nor are they triggered for route parameters inherited from parent routers. Hence, param callbacks defined on `router` will be triggered only by route parameters defined on `router` routes.
@@ -43,19 +43,19 @@ A param callback will be called only once in a request-response cycle, even if t
 
 ```js
 router.param('id', (req, res, next, id) => {
-  console.log('CALLED ONLY ONCE')
-  next()
-})
+  console.log('CALLED ONLY ONCE');
+  next();
+});
 
 router.get('/user/:id', (req, res, next) => {
-  console.log('although this matches')
-  next()
-})
+  console.log('although this matches');
+  next();
+});
 
 router.get('/user/:id', (req, res) => {
-  console.log('and this matches too')
-  res.end()
-})
+  console.log('and this matches too');
+  res.end();
+});
 ```
 
 On `GET /user/42`, the following is printed:

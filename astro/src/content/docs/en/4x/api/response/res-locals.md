@@ -26,8 +26,8 @@ authenticated user, user settings, and so on to templates rendered within the ap
 ```js
 app.use(function (req, res, next) {
   // Make `user` and `authenticated` available in templates
-  res.locals.user = req.user
-  res.locals.authenticated = !req.user.anonymous
-  next()
-})
+  res.locals.user = req.user;
+  res.locals.authenticated = !req.user.anonymous;
+  next();
+});
 ```

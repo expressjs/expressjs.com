@@ -8,10 +8,10 @@ description: Check if setting name is disabled.
 Check if setting `name` is disabled.
 
 ```js
-app.disabled('trust proxy')
+app.disabled('trust proxy');
 // => true
 
-app.enable('trust proxy')
-app.disabled('trust proxy')
+app.enable('trust proxy');
+app.disabled('trust proxy');
 // => false
 ```

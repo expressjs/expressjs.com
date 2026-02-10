@@ -14,31 +14,31 @@ Middleware is like a plumbing pipe: requests start at the first middleware funct
 and work their way "down" the middleware stack processing for each path they match.
 
 ```js
-const express = require('express')
-const app = express()
-const router = express.Router()
+const express = require('express');
+const app = express();
+const router = express.Router();
 
 // simple logger for this router's requests
 // all requests to this router will first hit this middleware
 router.use((req, res, next) => {
-  console.log('%s %s %s', req.method, req.url, req.path)
-  next()
-})
+  console.log('%s %s %s', req.method, req.url, req.path);
+  next();
+});
 
 // this will only be invoked if the path starts with /bar from the mount point
 router.use('/bar', (req, res, next) => {
   // ... maybe some additional /bar logging ...
-  next()
-})
+  next();
+});
 
 // always invoked
 router.use((req, res, next) => {
-  res.send('Hello World')
-})
+  res.send('Hello World');
+});
 
-app.use('/foo', router)
+app.use('/foo', router);
 
-app.listen(3000)
+app.listen(3000);
 ```
 
 The "mount" path is stripped and is _not_ visible to the middleware function.
@@ -50,62 +50,62 @@ They are invoked sequentially, thus the order defines middleware precedence. For
 usually a logger is the very first middleware you would use, so that every request gets logged.
 
 ```js
-const logger = require('morgan')
+const logger = require('morgan');
 
-router.use(logger())
-router.use(express.static(path.join(__dirname, 'public')))
+router.use(logger());
+router.use(express.static(path.join(__dirname, 'public')));
 router.use((req, res) => {
-  res.send('Hello')
-})
+  res.send('Hello');
+});
 ```
 
 Now suppose you wanted to ignore logging requests for static files, but to continue
-logging routes and middleware defined after `logger()`.  You would simply move the call to `express.static()` to the top,
+logging routes and middleware defined after `logger()`. You would simply move the call to `express.static()` to the top,
 before adding the logger middleware:
 
 ```js
-router.use(express.static(path.join(__dirname, 'public')))
-router.use(logger())
+router.use(express.static(path.join(__dirname, 'public')));
+router.use(logger());
 router.use((req, res) => {
-  res.send('Hello')
-})
+  res.send('Hello');
+});
 ```
 
 Another example is serving files from multiple directories,
 giving precedence to "./public" over the others:
 
 ```js
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, 'files')))
-app.use(express.static(path.join(__dirname, 'uploads')))
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'files')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 ```
 
 The `router.use()` method also supports named parameters so that your mount points
 for other routers can benefit from preloading using named parameters.
 
-__NOTE__: Although these middleware functions are added via a particular router, _when_
+**NOTE**: Although these middleware functions are added via a particular router, _when_
 they run is defined by the path they are attached to (not the router). Therefore,
 middleware added via one router may run for other routers if its routes
 match. For example, this code shows two different routers mounted on the same path:
 
 ```js
-const authRouter = express.Router()
-const openRouter = express.Router()
+const authRouter = express.Router();
+const openRouter = express.Router();
 
-authRouter.use(require('./authenticate').basic(usersdb))
+authRouter.use(require('./authenticate').basic(usersdb));
 
 authRouter.get('/:user_id/edit', (req, res, next) => {
   // ... Edit user UI ...
-})
+});
 openRouter.get('/', (req, res, next) => {
   // ... List users ...
-})
+});
 openRouter.get('/:user_id', (req, res, next) => {
   // ... View user ...
-})
+});
 
-app.use('/users', authRouter)
-app.use('/users', openRouter)
+app.use('/users', authRouter);
+app.use('/users', openRouter);
 ```
 
 Even though the authentication middleware was added via the `authRouter` it will run on the routes defined by the `openRouter` as well since both routers were mounted on `/users`. To avoid this behavior, use different paths for each router.

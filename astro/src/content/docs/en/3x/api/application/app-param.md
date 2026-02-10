@@ -20,15 +20,15 @@ otherwise passing an error to `next(err)`.
 app.param('user', function (req, res, next, id) {
   User.find(id, function (err, user) {
     if (err) {
-      next(err)
+      next(err);
     } else if (user) {
-      req.user = user
-      next()
+      req.user = user;
+      next();
     } else {
-      next(new Error('failed to load user'))
+      next(new Error('failed to load user'));
     }
-  })
-})
+  });
+});
 ```
 
 Alternatively you may pass only a `callback`, in which
@@ -44,32 +44,32 @@ expression, returning the callback which acts much like the "user" param example
 app.param(function (name, fn) {
   if (fn instanceof RegExp) {
     return function (req, res, next, val) {
-      var captures
+      var captures;
       if ((captures = fn.exec(String(val)))) {
-        req.params[name] = captures
-        next()
+        req.params[name] = captures;
+        next();
       } else {
-        next('route')
+        next('route');
       }
-    }
+    };
   }
-})
+});
 ```
 
 The method could now be used to effectively validate parameters, or also
 parse them to provide capture groups:
 
 ```js
-app.param('id', /^\d+$/)
+app.param('id', /^\d+$/);
 
 app.get('/user/:id', function (req, res) {
-  res.send('user ' + req.params.id)
-})
+  res.send('user ' + req.params.id);
+});
 
-app.param('range', /^(\w+)\.\.(\w+)?$/)
+app.param('range', /^(\w+)\.\.(\w+)?$/);
 
 app.get('/range/:range', function (req, res) {
-  var range = req.params.range
-  res.send('from ' + range[1] + ' to ' + range[2])
-})
+  var range = req.params.range;
+  res.send('from ' + range[1] + ' to ' + range[2]);
+});
 ```

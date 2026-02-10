@@ -15,9 +15,12 @@ As `req.query`'s shape is based on user-controlled input, all properties and val
 The value of this property can be configured with the [query parser application setting](#app.settings.table) to work how your application needs it. A very popular query string parser is the [`qs` module](https://www.npmjs.org/package/qs), and this is used by default. The `qs` module is very configurable with many settings, and it may be desirable to use different settings than the default to populate `req.query`:
 
 ```js
-const qs = require('qs')
-app.set('query parser',
-  (str) => qs.parse(str, { /* custom options */ }))
+const qs = require('qs');
+app.set('query parser', (str) =>
+  qs.parse(str, {
+    /* custom options */
+  })
+);
 ```
 
 Check out the [query parser application setting](#app.settings.table) documentation for other customization options.

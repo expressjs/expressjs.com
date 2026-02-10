@@ -6,7 +6,7 @@ description: This is a built-in middleware function in Express.
 <h3 id='express.static' class='h2'>express.static(root, [options])</h3>
 
 This is a built-in middleware function in Express.
-It serves static files and is based on  [serve-static](/resources/middleware/serve-static.html).
+It serves static files and is based on [serve-static](/resources/middleware/serve-static.html).
 
 {% capture alert_content %}
 For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
@@ -23,20 +23,20 @@ See also the [example below](#example.of.express.static).
 
 <div class="table-scroller" markdown="1">
 
-| Property      | Description                                                           |   Type      | Default         |
-|---------------|-----------------------------------------------------------------------|-------------|-----------------|
-| `dotfiles`    | Determines how dotfiles (files or directories that begin with a dot ".") are treated.  <br/><br/>See [dotfiles](#dotfiles) below. | String | `undefined` |
-| `etag`        | Enable or disable etag generation <br/><br/>NOTE: `express.static` always sends weak ETags. | Boolean | `true` |
-| `extensions`  | Sets file extension fallbacks: If a file is not found, search for files with the specified extensions and serve the first one found. Example: `['html', 'htm']`.| Mixed | `false` |
-| `fallthrough`  | Let client errors fall-through as unhandled requests, otherwise forward a client error. <br/><br/>See [fallthrough](#fallthrough) below.| Boolean | `true` |
-| `immutable`   | Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching. The `immutable` directive will prevent supported clients from making conditional requests during the life of the `maxAge` option to check if the file has changed. | Boolean | `false` |
-| `index`       | Sends the specified directory index file. Set to `false` to disable directory indexing. | Mixed | "index.html" |
-| `lastModified` | Set the `Last-Modified` header to the last modified date of the file on the OS. | Boolean | `true` |
-| `maxAge`      | Set the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms). | Number | 0 |
-| `redirect`    | Redirect to trailing "/" when the pathname is a directory. | Boolean | `true` |
-| `setHeaders`  | Function for setting HTTP headers to serve with the file. <br/><br/>See [setHeaders](#setHeaders) below. | Function |  |
-| `acceptRanges`    | Enable or disable accepting ranged requests. Disabling this will not send the `Accept-Ranges` header and will ignore the contents of the Range request header.| Boolean | true |
-| `cacheControl`    | Enable or disable setting the `Cache-Control` response header. Disabling this will ignore the immutable and maxAge options. | Boolean | true |
+| Property       | Description                                                                                                                                                                                                                                                                                                                        | Type     | Default      |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------ |
+| `dotfiles`     | Determines how dotfiles (files or directories that begin with a dot ".") are treated. <br/><br/>See [dotfiles](#dotfiles) below.                                                                                                                                                                                                   | String   | `undefined`  |
+| `etag`         | Enable or disable etag generation <br/><br/>NOTE: `express.static` always sends weak ETags.                                                                                                                                                                                                                                        | Boolean  | `true`       |
+| `extensions`   | Sets file extension fallbacks: If a file is not found, search for files with the specified extensions and serve the first one found. Example: `['html', 'htm']`.                                                                                                                                                                   | Mixed    | `false`      |
+| `fallthrough`  | Let client errors fall-through as unhandled requests, otherwise forward a client error. <br/><br/>See [fallthrough](#fallthrough) below.                                                                                                                                                                                           | Boolean  | `true`       |
+| `immutable`    | Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching. The `immutable` directive will prevent supported clients from making conditional requests during the life of the `maxAge` option to check if the file has changed. | Boolean  | `false`      |
+| `index`        | Sends the specified directory index file. Set to `false` to disable directory indexing.                                                                                                                                                                                                                                            | Mixed    | "index.html" |
+| `lastModified` | Set the `Last-Modified` header to the last modified date of the file on the OS.                                                                                                                                                                                                                                                    | Boolean  | `true`       |
+| `maxAge`       | Set the max-age property of the Cache-Control header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms).                                                                                                                                                                                                 | Number   | 0            |
+| `redirect`     | Redirect to trailing "/" when the pathname is a directory.                                                                                                                                                                                                                                                                         | Boolean  | `true`       |
+| `setHeaders`   | Function for setting HTTP headers to serve with the file. <br/><br/>See [setHeaders](#setHeaders) below.                                                                                                                                                                                                                           | Function |              |
+| `acceptRanges` | Enable or disable accepting ranged requests. Disabling this will not send the `Accept-Ranges` header and will ignore the contents of the Range request header.                                                                                                                                                                     | Boolean  | true         |
+| `cacheControl` | Enable or disable setting the `Cache-Control` response header. Disabling this will ignore the immutable and maxAge options.                                                                                                                                                                                                        | Boolean  | true         |
 
 </div>
 
@@ -72,7 +72,7 @@ For this option, specify a function to set custom response headers. Alterations 
 The signature of the function is:
 
 ```js
-fn(res, path, stat)
+fn(res, path, stat);
 ```
 
 Arguments:
@@ -94,9 +94,9 @@ var options = {
   maxAge: '1d',
   redirect: false,
   setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now())
-  }
-}
+    res.set('x-timestamp', Date.now());
+  },
+};
 
-app.use(express.static('public', options))
+app.use(express.static('public', options));
 ```

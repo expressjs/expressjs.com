@@ -12,23 +12,24 @@ The `mount` event is fired on a sub-app, when it is mounted on a parent app. The
 
 Sub-apps will:
 
-* Not inherit the value of settings that have a default value. You must set the value in the sub-app.
-* Inherit the value of settings with no default value.
+- Not inherit the value of settings that have a default value. You must set the value in the sub-app.
+- Inherit the value of settings with no default value.
 
 For details, see [Application settings](/en/5x/api.html#app.settings.table).
+
 </div>
 
 ```js
-const admin = express()
+const admin = express();
 
 admin.on('mount', (parent) => {
-  console.log('Admin Mounted')
-  console.log(parent) // refers to the parent app
-})
+  console.log('Admin Mounted');
+  console.log(parent); // refers to the parent app
+});
 
 admin.get('/', (req, res) => {
-  res.send('Admin Homepage')
-})
+  res.send('Admin Homepage');
+});
 
-app.use('/admin', admin)
+app.use('/admin', admin);
 ```

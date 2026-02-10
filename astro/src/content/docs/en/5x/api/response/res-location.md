@@ -8,8 +8,8 @@ description: Sets the response Location HTTP header to the specified path parame
 Sets the response `Location` HTTP header to the specified `path` parameter.
 
 ```js
-res.location('/foo/bar')
-res.location('http://example.com')
+res.location('/foo/bar');
+res.location('http://example.com');
 ```
 
 <div class='doc-box doc-warn' markdown="1">
@@ -18,4 +18,5 @@ without any validation.
 
 Browsers take the responsibility of deriving the intended URL from the current URL
 or the referring URL, and the URL specified in the `Location` header; and redirect the user accordingly.
+
 </div>

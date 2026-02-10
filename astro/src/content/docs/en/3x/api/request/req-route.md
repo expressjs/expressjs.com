@@ -11,8 +11,8 @@ string, the regexp generated, and so on.
 
 ```js
 app.get('/user/:id?', function (req, res) {
-  console.dir(req.route)
-})
+  console.dir(req.route);
+});
 ```
 
 Example output from the previous snippet:

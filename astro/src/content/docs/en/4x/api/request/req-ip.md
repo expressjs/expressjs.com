@@ -12,6 +12,6 @@ the value of this property is derived from the left-most entry in the
 `X-Forwarded-For` header. This header can be set by the client or by the proxy.
 
 ```js
-console.dir(req.ip)
+console.dir(req.ip);
 // => '127.0.0.1'
 ```

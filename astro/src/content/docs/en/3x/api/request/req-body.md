@@ -12,13 +12,13 @@ defaults to `{}` when `bodyParser()` is used.
 
 ```js
 // POST user[name]=tobi&user[email]=tobi@learnboost.com
-console.log(req.body.user.name)
+console.log(req.body.user.name);
 // => "tobi"
 
-console.log(req.body.user.email)
+console.log(req.body.user.email);
 // => "tobi@learnboost.com"
 
 // POST { "name": "tobi" }
-console.log(req.body.name)
+console.log(req.body.name);
 // => "tobi"
 ```

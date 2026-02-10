@@ -17,6 +17,7 @@ option to the absolute path of a directory to contain access within.
 
 When the `root` option is provided, Express will validate that the relative path provided as
 `path` will resolve within the given `root` option.
+
 </div>
 
 The following table provides details on the `options` parameter.
@@ -27,16 +28,16 @@ The optional `options` argument is supported by Express v4.16.0 onwards.
 
 <div class="table-scroller" markdown="1">
 
-| Property        | Description                                     | Default     | Availability |
-|-----------------|-------------------------------------------------|-------------|--------------|
-| `maxAge`        | Sets the max-age property of the `Cache-Control` header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)| 0 | 4.16+ |
-| `root`          | Root directory for relative filenames.|  | 4.18+ |
-| `lastModified`  | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.| Enabled | 4.16+ |
-| `headers`       | Object containing HTTP headers to serve with the file. The header `Content-Disposition` will be overridden by the `filename` argument.|  | 4.16+ |
-| `dotfiles`      | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".| "ignore" | 4.16+ |
-| `acceptRanges`  | Enable or disable accepting ranged requests. | `true` | 4.16+ |
-| `cacheControl`  | Enable or disable setting `Cache-Control` response header.| `true` | 4.16+ |
-| `immutable`   | Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching. The `immutable` directive will prevent supported clients from making conditional requests during the life of the `maxAge` option to check if the file has changed. | `false` | 4.16+ |
+| Property       | Description                                                                                                                                                                                                                                                                                                                        | Default  | Availability |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------ |
+| `maxAge`       | Sets the max-age property of the `Cache-Control` header in milliseconds or a string in [ms format](https://www.npmjs.org/package/ms)                                                                                                                                                                                               | 0        | 4.16+        |
+| `root`         | Root directory for relative filenames.                                                                                                                                                                                                                                                                                             |          | 4.18+        |
+| `lastModified` | Sets the `Last-Modified` header to the last modified date of the file on the OS. Set `false` to disable it.                                                                                                                                                                                                                        | Enabled  | 4.16+        |
+| `headers`      | Object containing HTTP headers to serve with the file. The header `Content-Disposition` will be overridden by the `filename` argument.                                                                                                                                                                                             |          | 4.16+        |
+| `dotfiles`     | Option for serving dotfiles. Possible values are "allow", "deny", "ignore".                                                                                                                                                                                                                                                        | "ignore" | 4.16+        |
+| `acceptRanges` | Enable or disable accepting ranged requests.                                                                                                                                                                                                                                                                                       | `true`   | 4.16+        |
+| `cacheControl` | Enable or disable setting `Cache-Control` response header.                                                                                                                                                                                                                                                                         | `true`   | 4.16+        |
+| `immutable`    | Enable or disable the `immutable` directive in the `Cache-Control` response header. If enabled, the `maxAge` option should also be specified to enable caching. The `immutable` directive will prevent supported clients from making conditional requests during the life of the `maxAge` option to check if the file has changed. | `false`  | 4.16+        |
 
 </div>
 
@@ -46,9 +47,9 @@ the callback function must explicitly handle the response process either by
 ending the request-response cycle, or by passing control to the next route.
 
 ```js
-res.download('/report-12345.pdf')
+res.download('/report-12345.pdf');
 
-res.download('/report-12345.pdf', 'report.pdf')
+res.download('/report-12345.pdf', 'report.pdf');
 
 res.download('/report-12345.pdf', 'report.pdf', function (err) {
   if (err) {
@@ -57,5 +58,5 @@ res.download('/report-12345.pdf', 'report.pdf', function (err) {
   } else {
     // decrement a download credit, etc.
   }
-})
+});
 ```

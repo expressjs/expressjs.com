@@ -17,23 +17,23 @@ however you may alter this within the callback using `res.set()`
 or `res.type()` etcetera.
 
 The following example would respond with `{ "message": "hey" }`
-when the Accept header field is set to "application/json" or "*/json",
-however if "*/*" is given then "hey" will be the response.
+when the Accept header field is set to "application/json" or "_/json",
+however if "_/\*" is given then "hey" will be the response.
 
 ```js
 res.format({
   'text/plain': function () {
-    res.send('hey')
+    res.send('hey');
   },
 
   'text/html': function () {
-    res.send('<p>hey</p>')
+    res.send('<p>hey</p>');
   },
 
   'application/json': function () {
-    res.send({ message: 'hey' })
-  }
-})
+    res.send({ message: 'hey' });
+  },
+});
 ```
 
 In addition to canonicalized MIME types you may also
@@ -43,15 +43,15 @@ less verbose implementation:
 ```js
 res.format({
   text: function () {
-    res.send('hey')
+    res.send('hey');
   },
 
   html: function () {
-    res.send('<p>hey</p>')
+    res.send('<p>hey</p>');
   },
 
   json: function () {
-    res.send({ message: 'hey' })
-  }
-})
+    res.send({ message: 'hey' });
+  },
+});
 ```

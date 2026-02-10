@@ -13,6 +13,6 @@ Further details for how cache validation works can be found in the
 [HTTP/1.1 Caching Specification](https://tools.ietf.org/html/rfc7234).
 
 ```js
-console.dir(req.fresh)
+console.dir(req.fresh);
 // => true
 ```

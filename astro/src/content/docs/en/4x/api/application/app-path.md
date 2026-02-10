@@ -8,16 +8,16 @@ description: Returns the canonical path of the app, a string.
 Returns the canonical path of the app, a string.
 
 ```js
-var app = express()
-var blog = express()
-var blogAdmin = express()
+var app = express();
+var blog = express();
+var blogAdmin = express();
 
-app.use('/blog', blog)
-blog.use('/admin', blogAdmin)
+app.use('/blog', blog);
+blog.use('/admin', blogAdmin);
 
-console.dir(app.path()) // ''
-console.dir(blog.path()) // '/blog'
-console.dir(blogAdmin.path()) // '/blog/admin'
+console.dir(app.path()); // ''
+console.dir(blog.path()); // '/blog'
+console.dir(blogAdmin.path()); // '/blog/admin'
 ```
 
 The behavior of this method can become very complicated in complex cases of mounted apps:

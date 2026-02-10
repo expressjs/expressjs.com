@@ -13,6 +13,6 @@ a reverse proxy that supplies https for you this
 may be enabled.
 
 ```js
-console.dir(req.protocol)
+console.dir(req.protocol);
 // => 'http'
 ```

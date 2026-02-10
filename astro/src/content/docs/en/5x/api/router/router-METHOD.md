@@ -30,8 +30,8 @@ these matches, for example "GET /" would match the following route, as would
 
 ```js
 router.get('/', (req, res) => {
-  res.send('hello world')
-})
+  res.send('hello world');
+});
 ```
 
 You can also use regular expressions&mdash;useful if you have very specific
@@ -40,10 +40,10 @@ as "GET /commits/71dbb9c..4c084f9".
 
 ```js
 router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, (req, res) => {
-  const from = req.params[0]
-  const to = req.params[1] || 'HEAD'
-  res.send(`commit range ${from}..${to}`)
-})
+  const from = req.params[0];
+  const to = req.params[1] || 'HEAD';
+  res.send(`commit range ${from}..${to}`);
+});
 ```
 
 You can use `next` primitive to implement a flow control between different
@@ -54,18 +54,18 @@ to be bypassed.
 The following example illustrates `next('router')` usage.
 
 ```js
-function fn (req, res, next) {
-  console.log('I come here')
-  next('router')
+function fn(req, res, next) {
+  console.log('I come here');
+  next('router');
 }
 router.get('/foo', fn, (req, res, next) => {
-  console.log('I dont come here')
-})
+  console.log('I dont come here');
+});
 router.get('/foo', (req, res, next) => {
-  console.log('I dont come here')
-})
+  console.log('I dont come here');
+});
 app.get('/foo', (req, res) => {
-  console.log(' I come here too')
-  res.end('good')
-})
+  console.log(' I come here too');
+  res.end('good');
+});
 ```
