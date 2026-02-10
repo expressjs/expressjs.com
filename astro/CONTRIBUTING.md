@@ -126,7 +126,6 @@ astro/
 ├── public/                  # Static assets
 │   └── fonts/               # Font files
 ├── astro.config.mjs         # Astro configuration
-└── src/content.config.ts    # Content collections configuration
 ```
 
 ## Content Configuration
