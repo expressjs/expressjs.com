@@ -24,6 +24,9 @@ const {
   targetLevel,
   showIcon = false,
 } = Astro.props;
+
+// Root submenu items with href should render as links on tablet/desktop
+const isRootSubmenuWithHref = type === 'submenu' && variant === 'root' && href;
 ---
 
 {
@@ -49,6 +52,56 @@ const {
           {item.label}
         </BodyMd>
       </a>
+    </li>
+  ) : isRootSubmenuWithHref ? (
+    <li>
+      {/* Link for tablet/desktop - hidden on mobile */}
+      <a
+        href={href}
+        class:list={[
+          'sidebar-nav-item',
+          'sidebar-nav-item--root-link',
+          isActive && 'sidebar-nav-item--active',
+        ]}
+        aria-label={item.ariaLabel}
+        aria-current={isActive ? 'page' : undefined}
+      >
+        {showIcon && item.icon && (
+          <div class="sidebar-nav-icon">
+            <Icon name={`fluent:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+          </div>
+        )}
+        <BodyMd vMargin={false} class="sidebar-nav-label">
+          {item.label}
+        </BodyMd>
+      </a>
+      {/* Button for mobile - hidden on tablet/desktop */}
+      <button
+        class:list={['sidebar-nav-item', 'sidebar-nav-item--root-submenu']}
+        aria-label={item.ariaLabel}
+        aria-expanded="false"
+        aria-controls={submenuId}
+        type="button"
+        data-submenu-trigger
+        data-target-id={submenuId}
+        data-target-level={targetLevel}
+      >
+        {showIcon && item.icon && (
+          <div class="sidebar-nav-icon">
+            <Icon name={`fluent:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+          </div>
+        )}
+        <BodyMd vMargin={false} class="sidebar-nav-label">
+          {item.label}
+        </BodyMd>
+        <Icon
+          name="fluent:arrow-right-20-regular"
+          size="16"
+          color="var(--color-icon-secondary)"
+          class="sidebar-nav-arrow"
+          aria-hidden="true"
+        />
+      </button>
     </li>
   ) : (
     <li>

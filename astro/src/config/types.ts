@@ -15,7 +15,7 @@ export type MenuItem =
     })
   | (MenuItemBaseProps & {
       submenu: Menu;
-      href?: never;
+      href?: string;
     });
 
 export type MenuSection = {

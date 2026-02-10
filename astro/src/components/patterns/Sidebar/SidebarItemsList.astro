@@ -37,10 +37,11 @@ const filteredItems = filterItems(items, version);
 {
   filteredItems.map((item, itemIndex) => {
     const itemId = getItemId(parentId, sectionIndex, itemIndex);
-    const href = isLink(item) ? resolveHref(item.href, lang, basePath, versioned, version) : '';
-    const isActive = normalizePath(currentPath) === normalizePath(href);
+    const itemHref = item.href;
+    const href = itemHref ? resolveHref(itemHref, lang, basePath, versioned, version) : '';
+    const isActive = href ? normalizePath(currentPath) === normalizePath(href) : false;
 
-    return isLink(item) ? (
+    return isLink(item) && !hasSubmenu(item) ? (
       <SidebarNavItem
         item={item}
         href={href}
@@ -52,8 +53,8 @@ const filteredItems = filterItems(items, version);
     ) : hasSubmenu(item) ? (
       <SidebarNavItem
         item={item}
-        href=""
-        isActive={false}
+        href={href}
+        isActive={isActive}
         variant={variant}
         type="submenu"
         submenuId={`submenu-${itemId}`}

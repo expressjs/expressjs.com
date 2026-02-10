@@ -1,6 +1,6 @@
 ---
 import '@styles/main.css';
-import { Container } from '@components/primitives';
+import { Container, Flex } from '@components/primitives';
 import { Sidebar } from '@/components/patterns';
 import { Header } from '@/components/patterns';
 
@@ -34,10 +34,12 @@ const {
     </style>
   </head>
   <body>
-    <Sidebar />
     <Header />
-    <Container>
-      <slot />
-    </Container>
+    <Flex gap="4">
+      <Sidebar />
+      <Container>
+        <slot />
+      </Container>
+    </Flex>
   </body>
 </html>

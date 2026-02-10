@@ -20,6 +20,10 @@
     align-items: center;
     text-decoration: none;
     border-radius: var(--radius-sm);
+
+    @media (--md-up) {
+      display: none;
+    }
   }
 
   .logo {
@@ -43,6 +47,10 @@
     border: none;
     cursor: pointer;
     position: relative;
+
+    @media (--md-up) {
+      display: none;
+    }
   }
 
   .hamburger-line {
