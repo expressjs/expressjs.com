@@ -71,7 +71,7 @@ export const apiMenu: Menu = {
                 omitFrom: ['3x'],
               },
               {
-                href: `/api/request/req-baseUrl`,
+                href: `/api/request/req-base-url`,
                 label: 'req.baseUrl',
                 ariaLabel: 'req.baseUrl property',
                 omitFrom: ['3x'],
