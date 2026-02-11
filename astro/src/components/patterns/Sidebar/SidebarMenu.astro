@@ -66,7 +66,7 @@ const initialActiveLevel =
           {menu.sections
             ?.filter((section) => !shouldOmitSection(section, version))
             .map((section, sectionIndex) => (
-              <li class="sidebar-section" data-section-index={sectionIndex}>
+              <li class="sidebar-section">
                 {section.title && <Body as="h3">{section.title}</Body>}
                 <ul class="sidebar-section-list">
                   <SidebarItemsList
@@ -106,7 +106,7 @@ const initialActiveLevel =
 
 {
   level === 0 && sortedLevels.length > 0 && (
-    <div class="sidebar-nested" data-nested-levels-container>
+    <div class="sidebar-nested">
       {sortedLevels.map((navLevel) => (
         <div
           class="sidebar-column sidebar-nested-column"
@@ -167,7 +167,7 @@ const initialActiveLevel =
                     {submenu.menu.sections
                       ?.filter((section) => !shouldOmitSection(section, version))
                       .map((section, sectionIndex) => (
-                        <div class="sidebar-section" data-section-index={sectionIndex}>
+                        <div class="sidebar-section">
                           {section.title && (
                             <Body as="h3" weight="bold" aria-label={`Section: ${section.title}`}>
                               {section.title}
