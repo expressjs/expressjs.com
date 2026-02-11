@@ -2,7 +2,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import { mainMenu } from '@/config/menu/main';
 import { apiMenu } from '@/config/menu/api';
 import type { collections } from '@/content.config';
-import type { Menu, MenuItem } from '@/config/types';
+import type { Menu } from '@/config/types';
 
 /**
  * Checks if there is content at the specified path

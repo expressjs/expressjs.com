@@ -31,7 +31,7 @@
     overflow: hidden;
     overscroll-behavior: contain;
     z-index: var(--z-index-sidebar);
-    top: var(--space-14);
+    top: var(--space-16);
     visibility: hidden;
   }
 
