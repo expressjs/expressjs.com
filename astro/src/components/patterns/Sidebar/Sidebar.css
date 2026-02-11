@@ -69,11 +69,6 @@
     }
   }
 
-  .sidebar-actions {
-    padding: var(--space-4);
-    border-top: 1px solid var(--color-border-mute);
-  }
-
   .sidebar-nested {
     display: flex;
     flex: 1 0 100%;

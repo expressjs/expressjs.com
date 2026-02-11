@@ -48,7 +48,7 @@ export const apiMenu: Menu = {
                 href: `/api/application/app-delete-method`,
                 label: 'app.delete()',
                 ariaLabel: 'app.delete method',
-                omitFrom: ['5x', '4x'],
+                omitFrom: ['3x'],
               },
             ],
           },
@@ -96,6 +96,11 @@ export const apiMenu: Menu = {
           ariaLabel: 'Response properties',
           submenu: {
             items: [
+              {
+                href: `/api/response/res-set`,
+                label: 'res.set',
+                ariaLabel: 'res.app property',
+              },
               {
                 href: `/api/response/res-app`,
                 label: 'res.app',
