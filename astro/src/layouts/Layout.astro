@@ -18,6 +18,25 @@ const {
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Theme initialization: run first to prevent FOUC -->
+    <script is:inline>
+      (function () {
+        const theme = (() => {
+          if (typeof localStorage !== 'undefined') {
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme === 'dark' || storedTheme === 'light') {
+              return storedTheme;
+            }
+          }
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark';
+          }
+          return 'light';
+        })();
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

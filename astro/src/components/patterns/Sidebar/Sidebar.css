@@ -45,7 +45,8 @@
     @media (--md-up) {
       position: sticky;
       align-self: flex-start;
-      height: calc(100vh - var(--space-14));
+      height: 100vh;
+      top: 0;
       flex: 0 0 auto;
     }
   }
@@ -152,6 +153,7 @@
   .sidebar-root-column {
     @media (--md-up) {
       flex: 0 0 auto;
+      padding-top: var(--space-5);
 
       .sidebar-nav-arrow {
         display: none;
@@ -361,6 +363,10 @@
     z-index: 0;
     opacity: 0;
     padding: var(--space-4) var(--space-4) var(--space-8) var(--space-4);
+
+    @media (--md-up) {
+      padding-top: var(--space-3);
+    }
 
     &:not(.sidebar-nav-panel--active) {
       width: 1px;

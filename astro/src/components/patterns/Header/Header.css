@@ -9,9 +9,14 @@
     top: 0;
     padding: 0 var(--space-4);
     z-index: var(--z-index-header);
+    border-bottom: 1px solid var(--color-border-secondary);
 
-    @media (--xs-only) {
-      border-bottom: 1px solid var(--color-border-secondary);
+    @media (--md-up) {
+      background-color: var(--color-bg-primary);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
     }
   }
 
@@ -22,13 +27,19 @@
     border-radius: var(--radius-sm);
 
     @media (--md-up) {
-      display: none;
+      & .header {
+        display: none;
+      }
     }
   }
 
   .logo {
     height: var(--size-5);
     width: auto;
+
+    @media (--md-up) {
+      height: var(--size-6);
+    }
   }
 
   :root[data-theme='light'] .logo-light,
