@@ -40,6 +40,10 @@
       bottom: 0;
       width: 80%;
       max-width: var(--size-80);
+
+      .sidebar-logo-item {
+        display: none;
+      }
     }
 
     @media (--md-up) {
