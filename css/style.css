@@ -782,7 +782,7 @@ footer {
 
 /* icons */
 a.openjs-logo {
-  display: inline-block;
+  display: flex;
   width: 125px;
   height: 39px;
   cursor: pointer;
