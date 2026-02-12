@@ -4,10 +4,11 @@
  *
  * Main site header with logo and navigation menu
  */
-import { Icon } from 'astro-icon/components';
 import './Header.css';
+import { Icon } from 'astro-icon/components';
 import { BodyMd, Flex } from '@/components/primitives';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.astro';
+import SearchTrigger from '../SearchTrigger/SearchTrigger.astro';
 ---
 
 <header class="header">
@@ -31,17 +32,8 @@ import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.astro';
     </Flex>
     <!-- TODO: These are just placeholder to show how actions look like in the header. They will be reviewed later -->
     <Flex align="center" justify="center" gap="2">
-      <a href="#main-content" class="skip-link sr-only">Skip to main content</a>
-      <button class="header-action" aria-label="Search">
-        <div class="header-action-icon">
-          <Icon
-            name="fluent:search-sparkle-16-regular"
-            size="20"
-            color="var(--color-icon-primary)"
-            aria-hidden="true"
-          />
-        </div>
-      </button>
+      <a href="#main-content" class="skip-link sr-only">Skip to content</a>
+      <SearchTrigger />
       <ThemeSwitcher showLabels={false} />
       <button class="header-action" aria-label="Select language">
         <div class="header-action-icon">
