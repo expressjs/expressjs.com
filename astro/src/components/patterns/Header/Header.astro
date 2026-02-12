@@ -6,7 +6,8 @@
  */
 import { Icon } from 'astro-icon/components';
 import './Header.css';
-import { Flex } from '@/components/primitives';
+import { BodyMd, Flex } from '@/components/primitives';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.astro';
 ---
 
 <header class="header">
@@ -29,15 +30,26 @@ import { Flex } from '@/components/primitives';
         <img src="/logo-white.svg" alt="" class="logo logo-light" />
       </a>
     </Flex>
-    <div>
-      <!-- TODO: Search toggle will be included here, this is just a placeholder -->
-      <Icon
-        name="fluent:search-sparkle-20-regular"
-        size="24"
-        color="var(--color-icon-primary)"
-        aria-hidden="true"
-      />
-    </div>
+    <!-- TODO: These are just placeholder to show how actions look like in the header. They will be reviewed later -->
+    <Flex align="center" gap="2">
+      <button class="header-action" aria-label="Search">
+        <div class="header-action-icon">
+          <Icon
+            name="fluent:search-sparkle-16-regular"
+            size="20"
+            color="var(--color-icon-primary)"
+            aria-hidden="true"
+          />
+        </div>
+      </button>
+      <ThemeSwitcher showLabels={false} />
+      <button class="header-action" aria-label="Select language">
+        <div class="header-action-icon">
+          <Icon name="fluent:translate-16-regular" size="20" color="var(--color-icon-primary)" />
+        </div>
+        <BodyMd as="span" vMargin={false} className="sr-only">Select language</BodyMd>
+      </button>
+    </Flex>
   </Flex>
 </header>
 

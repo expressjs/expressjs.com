@@ -48,7 +48,7 @@ export function hasSubmenu(item: MenuItem): item is MenuItem & { submenu: Menu }
   return 'submenu' in item && item.submenu !== undefined;
 }
 
-export function shouldOmitItem(item: MenuItem, version: string): boolean {
+function shouldOmitItem(item: MenuItem, version: string): boolean {
   return item.omitFrom?.includes(version as VersionPrefix) ?? false;
 }
 

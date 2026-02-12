@@ -7,25 +7,39 @@
 import './ThemeSwitcher.css';
 import { BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
+
+interface Props {
+  showLabels?: boolean;
+}
+
+const { showLabels = true } = Astro.props;
 ---
 
-<button id="themeToggle" class="toggle" aria-label="Toggle theme">
+<button data-theme-toggle class="toggle" aria-label="Toggle theme">
   <div class="toggle-icon">
     <Icon
-      name="fluent:weather-moon-28-regular"
+      name="fluent:weather-moon-16-regular"
       class="moon"
-      size="18"
+      size="20"
       color="var(--color-icon-primary)"
     />
     <Icon
-      name="fluent:weather-sunny-20-regular"
+      name="fluent:weather-sunny-16-regular"
       class="sun"
-      size="18"
+      size="20"
       color="var(--color-icon-primary)"
     />
   </div>
-  <BodyMd vMargin={false} class="label-dark">Switch to light mode</BodyMd>
-  <BodyMd vMargin={false} class="label-light">Switch to dark mode</BodyMd>
+  <BodyMd
+    vMargin={false}
+    class={`label-dark ${!showLabels ? 'sr-only' : ''}`}
+    aria-label="Switch to light mode">Switch to light mode</BodyMd
+  >
+  <BodyMd
+    vMargin={false}
+    class={`label-light ${!showLabels ? 'sr-only' : ''}`}
+    aria-label="Switch to dark mode">Switch to dark mode</BodyMd
+  >
 </button>
 
 <script is:inline>
@@ -51,15 +65,17 @@ import { Icon } from 'astro-icon/components';
   }
 
   window.localStorage.setItem('theme', theme);
+</script>
 
+<script>
   const handleToggleClick = () => {
     const element = document.documentElement;
-    console.log('element', element);
-
     const currentTheme = element.getAttribute('data-theme');
     localStorage.setItem('theme', currentTheme === 'dark' ? 'light' : 'dark');
     document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
   };
 
-  document.getElementById('themeToggle')?.addEventListener('click', handleToggleClick);
+  document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+    button.addEventListener('click', handleToggleClick);
+  });
 </script>

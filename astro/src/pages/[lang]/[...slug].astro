@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
   const paths: Array<{
     params: { lang: string; slug: string };
-    props: { page: (typeof pages)[0]; version: string; isVersionedPath: boolean };
+    props: { page: (typeof pages)[0]; version: string };
   }> = [];
 
   pages.forEach((page) => {
@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 
     paths.push({
       params: { lang, slug: fullSlug },
-      props: { page, version: isVersioned ? slugParts[0] : DEFAULT_VERSION, isVersionedPath: true },
+      props: { page, version: isVersioned ? slugParts[0] : DEFAULT_VERSION },
     });
   });
 
@@ -41,7 +41,7 @@ export async function getStaticPaths() {
     if (!exists && nonVersionedSlug) {
       paths.push({
         params: { lang, slug: nonVersionedSlug },
-        props: { page, version: DEFAULT_VERSION, isVersionedPath: false },
+        props: { page, version: DEFAULT_VERSION },
       });
     }
   });
@@ -49,19 +49,13 @@ export async function getStaticPaths() {
   return paths;
 }
 
-const { page, version, isVersionedPath } = Astro.props;
+const { page, version } = Astro.props;
 const { lang, slug } = Astro.params;
 const { Content } = await render(page);
 const breadcrumbs = await buildBreadcrumbs(lang, slug, 'docs', version);
 const { title, description } = page.data;
 ---
 
-<DocLayout
-  title={title}
-  description={description}
-  breadcrumbs={breadcrumbs}
-  data-version={version}
-  data-is-versioned-path={isVersionedPath}
->
+<DocLayout title={title} description={description} breadcrumbs={breadcrumbs}>
   <Content />
 </DocLayout>

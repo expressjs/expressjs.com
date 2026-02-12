@@ -66,7 +66,7 @@ const initialActiveLevel =
           {menu.sections
             ?.filter((section) => !shouldOmitSection(section, version))
             .map((section, sectionIndex) => (
-              <li class="sidebar-section" data-section-index={sectionIndex}>
+              <li class="sidebar-section">
                 {section.title && <Body as="h3">{section.title}</Body>}
                 <ul class="sidebar-section-list">
                   <SidebarItemsList

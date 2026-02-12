@@ -6,15 +6,7 @@ import { mainMenu } from '@/config/menu/main';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
 import type { Menu } from '@/config/types';
 import SidebarMenu from './SidebarMenu.astro';
-import {
-  detectVersionFromUrl,
-  collectAllSubmenus,
-  calculateInitialActiveLevel,
-  type SubmenuData,
-} from './utils';
-import { Icon } from 'astro-icon/components';
-import { BodyMd, Flex } from '@/components/primitives';
-import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.astro';
+import { detectVersionFromUrl, collectAllSubmenus, type SubmenuData } from './utils';
 
 type Props = HTMLAttributes<'div'> & {
   menu?: Menu;
@@ -37,10 +29,8 @@ const lang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
 const currentVersion = detectVersionFromUrl(currentPath, versions, defaultVersion);
 
-// Calculate initial active level for server-side rendering
 const submenus: SubmenuData[] = [];
 collectAllSubmenus(menu, 0, 'root', '', [], currentVersion, submenus);
-const initialActiveLevel = calculateInitialActiveLevel(submenus, currentPath, lang, currentVersion);
 ---
 
 <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true" data-sidebar-backdrop></div>
@@ -53,42 +43,24 @@ const initialActiveLevel = calculateInitialActiveLevel(submenus, currentPath, la
   aria-labelledby="sidebar-title"
   aria-hidden="true"
   data-sidebar
-  data-lang={lang}
   data-current-path={currentPath}
   data-current-version={currentVersion}
   {...rest}
 >
   <h2 id="sidebar-title" class="sr-only" aria-label="Main menu">Main menu</h2>
 
-  <Flex direction="column" justify="between" class="h-full">
-    <div class="sidebar-container" data-nav-container data-current-nav-level={initialActiveLevel}>
-      <SidebarMenu
-        menu={menu}
-        level={0}
-        title="Main Menu"
-        lang={lang}
-        currentPath={currentPath}
-        version={currentVersion}
-        versions={versions}
-        defaultVersion={defaultVersion}
-      />
-    </div>
-
-    <menu class="sidebar-nav-menu">
-      {/* TODO: placeholder for language selector */}
-      <li>
-        <button class="sidebar-nav-item" aria-label="Select language">
-          <div class="sidebar-nav-icon">
-            <Icon name="fluent:translate-20-regular" size="24" color="var(--color-icon-primary)" />
-          </div>
-          <BodyMd as="span" vMargin={false}>Select language</BodyMd>
-        </button>
-      </li>
-      <li>
-        <ThemeSwitcher />
-      </li>
-    </menu>
-  </Flex>
+  <div class="sidebar-container" data-nav-container data-current-nav-level="0">
+    <SidebarMenu
+      menu={menu}
+      level={0}
+      title="Main Menu"
+      lang={lang}
+      currentPath={currentPath}
+      version={currentVersion}
+      versions={versions}
+      defaultVersion={defaultVersion}
+    />
+  </div>
 
   <script>
     import './SidebarController';
