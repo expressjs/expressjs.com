@@ -18,7 +18,7 @@ export const mainMenu: Menu = {
           },
         },
         {
-          label: 'API Reference',
+          label: 'API',
           ariaLabel: 'API Reference',
           icon: 'code-20-regular',
           href: '/api',

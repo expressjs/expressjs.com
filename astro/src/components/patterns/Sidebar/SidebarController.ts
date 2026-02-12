@@ -77,6 +77,27 @@ export class SidebarController {
     }
   }
 
+  private focusActiveLevel(): void {
+    // Selector for focusable elements (excluding those with tabindex="-1")
+    const focusableSelector =
+      'a:not([tabindex="-1"]), button:not([tabindex="-1"]), input:not([tabindex="-1"]), select:not([tabindex="-1"]), textarea:not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])';
+
+    if (this.activeLevel === 0) {
+      // Focus first interactive element in root column
+      const rootColumn = this.sidebar?.querySelector('[data-nav-level="0"]');
+      const firstFocusable = rootColumn?.querySelector(focusableSelector) as HTMLElement;
+      firstFocusable?.focus();
+    } else {
+      // Focus first interactive element in active panel
+      const currentSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
+      const activePanel = this.sidebar?.querySelector(
+        `[data-parent-id="${currentSubmenuId}"]`
+      ) as HTMLElement;
+      const firstFocusable = activePanel?.querySelector(focusableSelector) as HTMLElement;
+      firstFocusable?.focus();
+    }
+  }
+
   private setupSubmenuTriggers(): void {
     this.sidebar?.querySelectorAll('[data-submenu-trigger]').forEach((trigger) => {
       trigger.addEventListener('click', (e) => {
@@ -125,10 +146,7 @@ export class SidebarController {
       this.navContainer.dataset.currentNavLevel = String(level);
     }
 
-    setTimeout(() => {
-      const firstFocusable = submenuColumn.querySelector('button, a') as HTMLElement;
-      firstFocusable?.focus();
-    }, TRANSITION_DURATION);
+    setTimeout(() => this.focusActiveLevel(), TRANSITION_DURATION);
   }
 
   private navigateBack(): void {
@@ -164,15 +182,78 @@ export class SidebarController {
   }
 
   private updateActiveColumns(): void {
-    this.sidebar?.querySelectorAll('[data-parent-id]').forEach((column) => {
-      const parentId = (column as HTMLElement).dataset.parentId || '';
-      const isInActivePath = this.activeSubmenuPath.includes(parentId);
+    // Update all nav levels
+    const allLevels = this.sidebar?.querySelectorAll('[data-nav-level]');
 
-      column.setAttribute('aria-hidden', isInActivePath ? 'false' : 'true');
-      column.classList.toggle('sidebar-nav-panel--active', isInActivePath);
+    allLevels?.forEach((column) => {
+      const columnLevel = parseInt((column as HTMLElement).dataset.navLevel || '0', 10);
+      const isCurrentLevel = columnLevel === this.activeLevel;
+
+      if (columnLevel === 0) {
+        // Root column - ALWAYS focusable
+        column.setAttribute('aria-hidden', 'false');
+        this.updateFocusableElements(column as HTMLElement, true);
+      } else {
+        // Nested level column - update all panels within it
+        const panels = column.querySelectorAll('[data-parent-id]');
+        panels.forEach((panel) => {
+          const parentId = (panel as HTMLElement).dataset.parentId || '';
+          const isInActivePath = this.activeSubmenuPath.includes(parentId);
+
+          panel.setAttribute('aria-hidden', isInActivePath ? 'false' : 'true');
+          panel.classList.toggle('sidebar-nav-panel--active', isInActivePath);
+
+          // Make focusable only if this is the current level AND the panel is in the active path
+          const shouldBeFocusable = isCurrentLevel && isInActivePath;
+          this.updateFocusableElements(panel as HTMLElement, shouldBeFocusable);
+        });
+      }
     });
 
     this.versionManager?.updateVisibility(this.activeLevel);
+  }
+
+  private updateFocusableElements(container: HTMLElement, isVisible: boolean): void {
+    // Handle scrollable containers (like sidebar-nav-content) that are focusable due to overflow
+    const scrollableContainers = container.querySelectorAll('.sidebar-nav-content, .sidebar-nav');
+    scrollableContainers.forEach((scrollContainer) => {
+      if (isVisible) {
+        // Remove tabindex to allow scrolling when visible
+        scrollContainer.removeAttribute('tabindex');
+      } else {
+        // Set tabindex="-1" to remove from tab order when hidden
+        scrollContainer.setAttribute('tabindex', '-1');
+      }
+    });
+
+    // Only manage naturally interactive elements
+    const focusableSelectors = 'a, button, input, select, textarea';
+    const focusableElements = container.querySelectorAll(focusableSelectors);
+
+    focusableElements.forEach((element) => {
+      if (isVisible) {
+        // Restore original tabindex if we previously saved it
+        const originalTabindex = element.getAttribute('data-original-tabindex');
+        if (originalTabindex !== null) {
+          if (originalTabindex === '') {
+            element.removeAttribute('tabindex');
+          } else {
+            element.setAttribute('tabindex', originalTabindex);
+          }
+          element.removeAttribute('data-original-tabindex');
+        }
+      } else {
+        // Only modify elements that are currently focusable
+        const currentTabindex = element.getAttribute('tabindex');
+        const hasOriginalTabindex = element.hasAttribute('data-original-tabindex');
+
+        // Skip if already set to -1 by us or if it was originally -1
+        if (!hasOriginalTabindex && currentTabindex !== '-1') {
+          element.setAttribute('data-original-tabindex', currentTabindex || '');
+          element.setAttribute('tabindex', '-1');
+        }
+      }
+    });
   }
 
   private enableTransitions(): void {
@@ -202,7 +283,7 @@ export class SidebarController {
     this.backdrop.classList.add('sidebar-backdrop--visible');
     document.body.style.overflow = 'hidden';
 
-    setTimeout(() => this.focusTrap?.focusFirst(), TRANSITION_DURATION);
+    setTimeout(() => this.focusActiveLevel(), TRANSITION_DURATION);
   }
 
   public close(): void {

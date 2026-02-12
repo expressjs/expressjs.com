@@ -271,6 +271,10 @@
     transition: background-color var(--duration-200) var(--ease-in-out);
     background-color: transparent;
     border-radius: 0 var(--radius-base) var(--radius-base) 0;
+
+    @media (--md-up) {
+      gap: var(--space-1-5);
+    }
   }
 
   .sidebar-nav-label {
