@@ -39,693 +39,700 @@ const lang = getLangFromUrl(Astro.url);
 ---
 
 <Layout title="Design System Foundations">
-  <header class="ds-header">
-    <H1>Design System Foundations</H1>
-    <H5 color="secondary">
-      A living reference of all primitive components, tokens, and patterns.
-    </H5>
-  </header>
+  <Container>
+    <header class="ds-header">
+      <H1>Design System Foundations</H1>
+      <H5 color="secondary">
+        A living reference of all primitive components, tokens, and patterns.
+      </H5>
+    </header>
 
-  <nav class="ds-nav">
-    <ul class="ds-nav__list">
-      <li><a href={`/${lang}`} class="ds-nav__link">← Home</a></li>
-      <li><a href="#typography" class="ds-nav__link">Typography</a></li>
-      <li><a href="#iconography" class="ds-nav__link">Iconography</a></li>
-      <li><a href="#colors" class="ds-nav__link">Colors</a></li>
-      <li><a href="#spacing" class="ds-nav__link">Spacing</a></li>
-      <li><a href="#buttons" class="ds-nav__link">Buttons</a></li>
-      <li><a href="#grid" class="ds-nav__link">Grid</a></li>
-      <li><a href="#breakpoints" class="ds-nav__link">Breakpoints</a></li>
-    </ul>
-  </nav>
+    <nav class="ds-nav">
+      <ul class="ds-nav__list">
+        <li><a href={`/${lang}`} class="ds-nav__link">← Home</a></li>
+        <li><a href="#typography" class="ds-nav__link">Typography</a></li>
+        <li><a href="#iconography" class="ds-nav__link">Iconography</a></li>
+        <li><a href="#colors" class="ds-nav__link">Colors</a></li>
+        <li><a href="#spacing" class="ds-nav__link">Spacing</a></li>
+        <li><a href="#buttons" class="ds-nav__link">Buttons</a></li>
+        <li><a href="#grid" class="ds-nav__link">Grid</a></li>
+        <li><a href="#breakpoints" class="ds-nav__link">Breakpoints</a></li>
+      </ul>
+    </nav>
 
-  <!-- TYPOGRAPHY -->
-  <section id="typography" class="ds-section">
-    <H2>Typography</H2>
+    <!-- TYPOGRAPHY -->
+    <section id="typography" class="ds-section">
+      <H2>Typography</H2>
 
-    <div class="ds-subsection">
-      <H3>Headings</H3>
-      <div class="ds-demo">
-        <H1>Heading 1 — Page titles</H1>
-        <H2>Heading 2 — Section titles</H2>
-        <H3>Heading 3 — Subsections</H3>
-        <H4>Heading 4 — Minor headings</H4>
-        <H5>Heading 5 — Lead/intro paragraph text</H5>
+      <div class="ds-subsection">
+        <H3>Headings</H3>
+        <div class="ds-demo">
+          <H1>Heading 1 — Page titles</H1>
+          <H2>Heading 2 — Section titles</H2>
+          <H3>Heading 3 — Subsections</H3>
+          <H4>Heading 4 — Minor headings</H4>
+          <H5>Heading 5 — Lead/intro paragraph text</H5>
+        </div>
       </div>
-    </div>
 
-    <div class="ds-subsection">
-      <H3>Body Text</H3>
-      <div class="ds-demo">
-        <Body
-          ><b>Body</b> — Default paragraph text. This is the standard size for documentation content and
-          general reading.</Body
-        >
-        <BodyMd
-          ><b>Body Medium</b> — Slightly smaller than default body. Good for sidebars and secondary content.</BodyMd
-        >
-        <p>
-          <BodySm
-            ><b>Body Small</b> — Secondary text, captions, and helper text. Used for metadata and less
-            prominent content.</BodySm
+      <div class="ds-subsection">
+        <H3>Body Text</H3>
+        <div class="ds-demo">
+          <Body
+            ><b>Body</b> — Default paragraph text. This is the standard size for documentation content
+            and general reading.</Body
           >
-        </p>
-        <p><BodyXs><b>Body Extra Small</b> — Fine print, legal text, and timestamps.</BodyXs></p>
-      </div>
-    </div>
-
-    <div class="ds-subsection">
-      <H3>Inline Code</H3>
-      <div class="ds-demo">
-        <Code>const express = require('express');</Code>
-        <Body>Inline code: Use <Code as="code">npm install express</Code> to install.</Body>
-      </div>
-    </div>
-
-    <div class="ds-subsection">
-      <H3>Weights</H3>
-      <Flex direction="row" gap="4">
-        <Body weight="light">Light 300</Body>
-        <Body weight="normal">Normal 400</Body>
-        <Body weight="medium">Medium 500</Body>
-        <Body weight="semibold">Semibold 600</Body>
-        <Body weight="bold">Bold 700</Body>
-      </Flex>
-    </div>
-
-    <div class="ds-subsection">
-      <H3>Polymorphic Rendering</H3>
-      <div class="ds-demo">
-        <H1 as="h2">H1 styled, rendered as h2</H1>
-        <Body as="span">Body text rendered as span (inline)</Body>
-      </div>
-    </div>
-
-    <div class="ds-subsection">
-      <H3>Type Scale</H3>
-
-      <div class="ds-type-scale">
-        <div class="ds-type-item">
-          <span style="font-size: var(--font-size-6xl); line-height: 1;">Aa</span>
-          <BodyXs>6xl (54px)</BodyXs>
-        </div>
-        <div class="ds-type-item">
-          <span style="font-size: var(--font-size-5xl); line-height: 1;">Aa</span>
-          <BodyXs>5xl (45px)</BodyXs>
-        </div>
-        <div class="ds-type-item">
-          <span style="font-size: var(--font-size-4xl); line-height: 1;">Aa</span>
-          <BodyXs>4xl (36px)</BodyXs>
-        </div>
-        <div class="ds-type-item">
-          <span style="font-size: var(--font-size-3xl); line-height: 1;">Aa</span>
-          <BodyXs>3xl (30px)</BodyXs>
-        </div>
-        <div class="ds-type-item">
-          <span style="font-size: var(--font-size-2xl); line-height: 1;">Aa</span>
-          <BodyXs>2xl (24px)</BodyXs>
-        </div>
-        <div class="ds-type-item">
-          <span style="font-size: var(--font-size-xl); line-height: 1;">Aa</span>
-          <BodyXs>xl (20px)</BodyXs>
-        </div>
-        <div class="ds-type-item">
-          <span style="font-size: var(--font-size-lg); line-height: 1;">Aa</span>
-          <BodyXs>lg (18px)</BodyXs>
-        </div>
-        <div class="ds-type-item">
-          <span style="font-size: var(--font-size-base); line-height: 1;">Aa</span>
-          <BodyXs>base (16px)</BodyXs>
-        </div>
-        <div class="ds-type-item">
-          <span style="font-size: var(--font-size-sm); line-height: 1;">Aa</span>
-          <BodyXs>sm (14px)</BodyXs>
-        </div>
-        <div class="ds-type-item">
-          <span style="font-size: var(--font-size-xs); line-height: 1;">Aa</span>
-          <BodyXs>xs (12px)</BodyXs>
+          <BodyMd
+            ><b>Body Medium</b> — Slightly smaller than default body. Good for sidebars and secondary
+            content.</BodyMd
+          >
+          <p>
+            <BodySm
+              ><b>Body Small</b> — Secondary text, captions, and helper text. Used for metadata and less
+              prominent content.</BodySm
+            >
+          </p>
+          <p><BodyXs><b>Body Extra Small</b> — Fine print, legal text, and timestamps.</BodyXs></p>
         </div>
       </div>
-    </div>
-    <H3>Usage</H3>
 
-    <CodeBlock
-      lang="js"
-      wrap
-      code={`
+      <div class="ds-subsection">
+        <H3>Inline Code</H3>
+        <div class="ds-demo">
+          <Code>const express = require('express');</Code>
+          <Body>Inline code: Use <Code as="code">npm install express</Code> to install.</Body>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <H3>Weights</H3>
+        <Flex direction="row" gap="4">
+          <Body weight="light">Light 300</Body>
+          <Body weight="normal">Normal 400</Body>
+          <Body weight="medium">Medium 500</Body>
+          <Body weight="semibold">Semibold 600</Body>
+          <Body weight="bold">Bold 700</Body>
+        </Flex>
+      </div>
+
+      <div class="ds-subsection">
+        <H3>Polymorphic Rendering</H3>
+        <div class="ds-demo">
+          <H1 as="h2">H1 styled, rendered as h2</H1>
+          <Body as="span">Body text rendered as span (inline)</Body>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <H3>Type Scale</H3>
+
+        <div class="ds-type-scale">
+          <div class="ds-type-item">
+            <span style="font-size: var(--font-size-6xl); line-height: 1;">Aa</span>
+            <BodyXs>6xl (54px)</BodyXs>
+          </div>
+          <div class="ds-type-item">
+            <span style="font-size: var(--font-size-5xl); line-height: 1;">Aa</span>
+            <BodyXs>5xl (45px)</BodyXs>
+          </div>
+          <div class="ds-type-item">
+            <span style="font-size: var(--font-size-4xl); line-height: 1;">Aa</span>
+            <BodyXs>4xl (36px)</BodyXs>
+          </div>
+          <div class="ds-type-item">
+            <span style="font-size: var(--font-size-3xl); line-height: 1;">Aa</span>
+            <BodyXs>3xl (30px)</BodyXs>
+          </div>
+          <div class="ds-type-item">
+            <span style="font-size: var(--font-size-2xl); line-height: 1;">Aa</span>
+            <BodyXs>2xl (24px)</BodyXs>
+          </div>
+          <div class="ds-type-item">
+            <span style="font-size: var(--font-size-xl); line-height: 1;">Aa</span>
+            <BodyXs>xl (20px)</BodyXs>
+          </div>
+          <div class="ds-type-item">
+            <span style="font-size: var(--font-size-lg); line-height: 1;">Aa</span>
+            <BodyXs>lg (18px)</BodyXs>
+          </div>
+          <div class="ds-type-item">
+            <span style="font-size: var(--font-size-base); line-height: 1;">Aa</span>
+            <BodyXs>base (16px)</BodyXs>
+          </div>
+          <div class="ds-type-item">
+            <span style="font-size: var(--font-size-sm); line-height: 1;">Aa</span>
+            <BodyXs>sm (14px)</BodyXs>
+          </div>
+          <div class="ds-type-item">
+            <span style="font-size: var(--font-size-xs); line-height: 1;">Aa</span>
+            <BodyXs>xs (12px)</BodyXs>
+          </div>
+        </div>
+      </div>
+      <H3>Usage</H3>
+
+      <CodeBlock
+        lang="js"
+        wrap
+        code={`
 import { H1, Body, Code } from '@components/primitives';
 
 <H1 as="h2">h2 styled as H1</H1>
 <Body>This is body text. It renders a paragraph by default.</Body>
 <Code>const express = require('express');</Code>
       `}
-    />
-  </section>
+      />
+    </section>
 
-  <!-- ICONS -->
-  <section id="iconography" class="ds-section">
-    <H2>Iconography</H2>
-    <BodyMd color="secondary">
-      Icons are provided by <Code as="code">astro-icon</Code>, a well-supported and officially
-      recommended package for Astro that gives access to 200,000+ icons from various icon sets. We
-      primarily use <a
-        href="https://icon-sets.iconify.design/fluent/"
-        target="_blank"
-        rel="noopener"
-        >Fluent Icons (prefix <Code as="code">fluent:</Code>).
-      </a>
+    <!-- ICONS -->
+    <section id="iconography" class="ds-section">
+      <H2>Iconography</H2>
+      <BodyMd color="secondary">
+        Icons are provided by <Code as="code">astro-icon</Code>, a well-supported and officially
+        recommended package for Astro that gives access to 200,000+ icons from various icon sets. We
+        primarily use <a
+          href="https://icon-sets.iconify.design/fluent/"
+          target="_blank"
+          rel="noopener"
+          >Fluent Icons (prefix <Code as="code">fluent:</Code>).
+        </a>
 
-      <div class="ds-subsection">
-        <H3>Examples</H3>
-        <Flex direction="row" gap="4" align="center">
-          <Icon name="fluent:airplane-24-regular" size="24" color="var(--color-icon-primary)" />
-          <Icon name="fluent:branch-20-regular" size="24" color="var(--color-icon-primary)" />
-          <Icon
-            name="fluent:glance-horizontal-sparkles-20-regular"
-            size="24"
-            color="var(--color-icon-primary)"
-          />
-          <Icon name="fluent:warning-28-regular" size="24" color="var(--color-icon-primary)" />
-          <Icon name="fluent:info-16-regular" size="24" color="var(--color-icon-primary)" />
-        </Flex>
-      </div>
+        <div class="ds-subsection">
+          <H3>Examples</H3>
+          <Flex direction="row" gap="4" align="center">
+            <Icon name="fluent:airplane-24-regular" size="24" color="var(--color-icon-primary)" />
+            <Icon name="fluent:branch-20-regular" size="24" color="var(--color-icon-primary)" />
+            <Icon
+              name="fluent:glance-horizontal-sparkles-20-regular"
+              size="24"
+              color="var(--color-icon-primary)"
+            />
+            <Icon name="fluent:warning-28-regular" size="24" color="var(--color-icon-primary)" />
+            <Icon name="fluent:info-16-regular" size="24" color="var(--color-icon-primary)" />
+          </Flex>
+        </div>
 
-      <div class="ds-subsection">
-        <H3>Usage</H3>
-        <CodeBlock
-          lang="js"
-          wrap
-          code={`
+        <div class="ds-subsection">
+          <H3>Usage</H3>
+          <CodeBlock
+            lang="js"
+            wrap
+            code={`
 import { Icon } from "astro-icon/components";
 
 <Icon name="fluent:airplane-24-regular" size="24" />
 <Icon name="fluent:check-24-regular" color="var(--color-icon-primary)" />
           `}
-        />
-        <BodySm color="secondary" style="margin-top: var(--space-3);">
-          Browse available icons at <a
-            href="https://icon-sets.iconify.design/ph/"
-            target="_blank"
-            rel="noopener">Phosphor Icons</a
-          > or explore other icon sets at <a
-            href="https://icon-sets.iconify.design/"
-            target="_blank"
-            rel="noopener">Iconify</a
-          >.
-        </BodySm>
-      </div>
-    </BodyMd>
-
-    <!-- COLOR TOKENS -->
-    <section id="colors" class="ds-section">
-      <H2>Color Tokens</H2>
-
-      <div class="ds-subsection">
-        <H3>Primitive tokens</H3>
-        <div class="ds-color-grid">
-          <div class="ds-color-swatch" style="background: var(--white);"><span>white</span></div>
-          <div class="ds-color-swatch" style="background: var(--gray-50);">
-            <span>gray-50</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--gray-100);">
-            <span>gray-100</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--gray-200);">
-            <span>gray-200</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--gray-300);">
-            <span>gray-300</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--gray-400);">
-            <span>gray-400</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--gray-500);">
-            <span>gray-500</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--gray-600);">
-            <span>gray-600</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--gray-700);">
-            <span>gray-700</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--gray-800);">
-            <span>gray-800</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--gray-900);">
-            <span>gray-900</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--gray-950);">
-            <span>gray-950</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--black);"><span>black</span></div>
+          />
+          <BodySm color="secondary" style="margin-top: var(--space-3);">
+            Browse available icons at <a
+              href="https://icon-sets.iconify.design/ph/"
+              target="_blank"
+              rel="noopener">Phosphor Icons</a
+            > or explore other icon sets at <a
+              href="https://icon-sets.iconify.design/"
+              target="_blank"
+              rel="noopener">Iconify</a
+            >.
+          </BodySm>
         </div>
+      </BodyMd>
 
-        <div class="ds-color-grid">
-          <div class="ds-color-swatch" style="background: var(--sky-50);"><span>sky-50</span></div>
-          <div class="ds-color-swatch" style="background: var(--sky-500);">
-            <span>sky-500</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--sky-700);">
-            <span>sky-700</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--sky-800);">
-            <span>sky-800</span>
-          </div>
-        </div>
+      <!-- COLOR TOKENS -->
+      <section id="colors" class="ds-section">
+        <H2>Color Tokens</H2>
 
-        <div class="ds-color-grid">
-          <div class="ds-color-swatch" style="background: var(--green-50);">
-            <span>green-50</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--green-300);">
-            <span>green-300</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--green-500);">
-            <span>green-500</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--green-700);">
-            <span>green-700</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--green-900);">
-            <span>green-900</span>
-          </div>
-        </div>
-
-        <div class="ds-color-grid">
-          <div class="ds-color-swatch" style="background: var(--amber-50);">
-            <span>amber-50</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--amber-300);">
-            <span>amber-300</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--amber-500);">
-            <span>amber-500</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--amber-600);">
-            <span>amber-600</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--amber-700);">
-            <span>amber-700</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--amber-900);">
-            <span>amber-900</span>
-          </div>
-        </div>
-
-        <div class="ds-color-grid">
-          <div class="ds-color-swatch" style="background: var(--red-50);">
-            <span>red-50</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--red-300);">
-            <span>red-300</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--red-500);">
-            <span>red-500</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--red-600);">
-            <span>red-600</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--red-700);">
-            <span>red-700</span>
-          </div>
-          <div class="ds-color-swatch" style="background: var(--red-900);">
-            <span>red-900</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ds-subsection">
         <div class="ds-subsection">
-          <H3>Semantic tokens</H3>
-          <div class="ds-color-grid ds-color-grid--large">
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-bg-primary);"
-            >
-              <span>bg-primary</span>
+          <H3>Primitive tokens</H3>
+          <div class="ds-color-grid">
+            <div class="ds-color-swatch" style="background: var(--white);"><span>white</span></div>
+            <div class="ds-color-swatch" style="background: var(--gray-50);">
+              <span>gray-50</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-bg-secondary);"
-            >
-              <span>bg-secondary</span>
+            <div class="ds-color-swatch" style="background: var(--gray-100);">
+              <span>gray-100</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-bg-tertiary);"
-            >
-              <span>bg-tertiary</span>
+            <div class="ds-color-swatch" style="background: var(--gray-200);">
+              <span>gray-200</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-bg-inverse);"
-            >
-              <span>bg-inverse</span>
+            <div class="ds-color-swatch" style="background: var(--gray-300);">
+              <span>gray-300</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-bg-mute);"
-            >
-              <span>bg-mute</span>
+            <div class="ds-color-swatch" style="background: var(--gray-400);">
+              <span>gray-400</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-bg-success);"
-            >
-              <span>bg-success</span>
+            <div class="ds-color-swatch" style="background: var(--gray-500);">
+              <span>gray-500</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-bg-warning);"
-            >
-              <span>bg-warning</span>
+            <div class="ds-color-swatch" style="background: var(--gray-600);">
+              <span>gray-600</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-bg-error);"
-            >
-              <span>bg-error</span>
+            <div class="ds-color-swatch" style="background: var(--gray-700);">
+              <span>gray-700</span>
+            </div>
+            <div class="ds-color-swatch" style="background: var(--gray-800);">
+              <span>gray-800</span>
+            </div>
+            <div class="ds-color-swatch" style="background: var(--gray-900);">
+              <span>gray-900</span>
+            </div>
+            <div class="ds-color-swatch" style="background: var(--gray-950);">
+              <span>gray-950</span>
+            </div>
+            <div class="ds-color-swatch" style="background: var(--black);"><span>black</span></div>
+          </div>
+
+          <div class="ds-color-grid">
+            <div class="ds-color-swatch" style="background: var(--sky-50);">
+              <span>sky-50</span>
+            </div>
+            <div class="ds-color-swatch" style="background: var(--sky-500);">
+              <span>sky-500</span>
+            </div>
+            <div class="ds-color-swatch" style="background: var(--sky-700);">
+              <span>sky-700</span>
+            </div>
+            <div class="ds-color-swatch" style="background: var(--sky-800);">
+              <span>sky-800</span>
             </div>
           </div>
-          <div class="ds-color-grid ds-color-grid--large">
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-text-primary);"
-            >
-              <span>text-primary</span>
+
+          <div class="ds-color-grid">
+            <div class="ds-color-swatch" style="background: var(--green-50);">
+              <span>green-50</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-text-secondary);"
-            >
-              <span>text-secondary</span>
+            <div class="ds-color-swatch" style="background: var(--green-300);">
+              <span>green-300</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-text-tertiary);"
-            >
-              <span>text-tertiary</span>
+            <div class="ds-color-swatch" style="background: var(--green-500);">
+              <span>green-500</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-text-inverse);"
-            >
-              <span>text-inverse</span>
+            <div class="ds-color-swatch" style="background: var(--green-700);">
+              <span>green-700</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-text-mute);"
-            >
-              <span>text-mute</span>
-            </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-text-success);"
-            >
-              <span>text-success</span>
-            </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-text-warning);"
-            >
-              <span>text-warning</span>
-            </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-text-error);"
-            >
-              <span>text-error</span>
+            <div class="ds-color-swatch" style="background: var(--green-900);">
+              <span>green-900</span>
             </div>
           </div>
-          <!-- add section for border color tokens -->
-          <div class="ds-color-grid ds-color-grid--large">
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-border-primary);"
-            >
-              <span>border-primary</span>
+
+          <div class="ds-color-grid">
+            <div class="ds-color-swatch" style="background: var(--amber-50);">
+              <span>amber-50</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-border-secondary);"
-            >
-              <span>border-secondary</span>
+            <div class="ds-color-swatch" style="background: var(--amber-300);">
+              <span>amber-300</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-border-tertiary);"
-            >
-              <span>border-tertiary</span>
+            <div class="ds-color-swatch" style="background: var(--amber-500);">
+              <span>amber-500</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-border-inverse);"
-            >
-              <span>border-inverse</span>
+            <div class="ds-color-swatch" style="background: var(--amber-600);">
+              <span>amber-600</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-border-mute);"
-            >
-              <span>border-mute</span>
+            <div class="ds-color-swatch" style="background: var(--amber-700);">
+              <span>amber-700</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-border-success);"
-            >
-              <span>border-success</span>
+            <div class="ds-color-swatch" style="background: var(--amber-900);">
+              <span>amber-900</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-border-warning);"
-            >
-              <span>border-warning</span>
+          </div>
+
+          <div class="ds-color-grid">
+            <div class="ds-color-swatch" style="background: var(--red-50);">
+              <span>red-50</span>
             </div>
-            <div
-              class="ds-color-swatch ds-color-swatch--large"
-              style="background: var(--color-border-error);"
-            >
-              <span>border-error</span>
+            <div class="ds-color-swatch" style="background: var(--red-300);">
+              <span>red-300</span>
+            </div>
+            <div class="ds-color-swatch" style="background: var(--red-500);">
+              <span>red-500</span>
+            </div>
+            <div class="ds-color-swatch" style="background: var(--red-600);">
+              <span>red-600</span>
+            </div>
+            <div class="ds-color-swatch" style="background: var(--red-700);">
+              <span>red-700</span>
+            </div>
+            <div class="ds-color-swatch" style="background: var(--red-900);">
+              <span>red-900</span>
             </div>
           </div>
         </div>
-      </div>
 
-      <H3>Usage</H3>
-      <CodeBlock
-        lang="css"
-        wrap
-        code={`
+        <div class="ds-subsection">
+          <div class="ds-subsection">
+            <H3>Semantic tokens</H3>
+            <div class="ds-color-grid ds-color-grid--large">
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-bg-primary);"
+              >
+                <span>bg-primary</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-bg-secondary);"
+              >
+                <span>bg-secondary</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-bg-tertiary);"
+              >
+                <span>bg-tertiary</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-bg-inverse);"
+              >
+                <span>bg-inverse</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-bg-mute);"
+              >
+                <span>bg-mute</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-bg-success);"
+              >
+                <span>bg-success</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-bg-warning);"
+              >
+                <span>bg-warning</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-bg-error);"
+              >
+                <span>bg-error</span>
+              </div>
+            </div>
+            <div class="ds-color-grid ds-color-grid--large">
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-text-primary);"
+              >
+                <span>text-primary</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-text-secondary);"
+              >
+                <span>text-secondary</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-text-tertiary);"
+              >
+                <span>text-tertiary</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-text-inverse);"
+              >
+                <span>text-inverse</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-text-mute);"
+              >
+                <span>text-mute</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-text-success);"
+              >
+                <span>text-success</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-text-warning);"
+              >
+                <span>text-warning</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-text-error);"
+              >
+                <span>text-error</span>
+              </div>
+            </div>
+            <!-- add section for border color tokens -->
+            <div class="ds-color-grid ds-color-grid--large">
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-border-primary);"
+              >
+                <span>border-primary</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-border-secondary);"
+              >
+                <span>border-secondary</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-border-tertiary);"
+              >
+                <span>border-tertiary</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-border-inverse);"
+              >
+                <span>border-inverse</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-border-mute);"
+              >
+                <span>border-mute</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-border-success);"
+              >
+                <span>border-success</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-border-warning);"
+              >
+                <span>border-warning</span>
+              </div>
+              <div
+                class="ds-color-swatch ds-color-swatch--large"
+                style="background: var(--color-border-error);"
+              >
+                <span>border-error</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <H3>Usage</H3>
+        <CodeBlock
+          lang="css"
+          wrap
+          code={`
 .element {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   border: 1px solid var(--color-border-primary);
 }
           `}
-      />
-    </section>
+        />
+      </section>
 
-    <!-- SPACING -->
-    <section id="spacing" class="ds-section">
-      <H2>Spacing</H2>
+      <!-- SPACING -->
+      <section id="spacing" class="ds-section">
+        <H2>Spacing</H2>
 
-      <div class="ds-subsection">
-        <H3>Scale</H3>
-        <div class="ds-spacing-grid">
-          <div class="ds-spacing-item">
-            <div class="ds-spacing-box" style="width: var(--space-0.5); height: var(--space-0.5);">
+        <div class="ds-subsection">
+          <H3>Scale</H3>
+          <div class="ds-spacing-grid">
+            <div class="ds-spacing-item">
+              <div
+                class="ds-spacing-box"
+                style="width: var(--space-0.5); height: var(--space-0.5);"
+              >
+              </div>
+              <BodyXs>0.5 (2px)</BodyXs>
             </div>
-            <BodyXs>0.5 (2px)</BodyXs>
-          </div>
-          <div class="ds-spacing-item">
-            <div class="ds-spacing-box" style="width: var(--space-1); height: var(--space-1);">
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-box" style="width: var(--space-1); height: var(--space-1);">
+              </div>
+              <BodyXs>1 (4px)</BodyXs>
             </div>
-            <BodyXs>1 (4px)</BodyXs>
-          </div>
-          <div class="ds-spacing-item">
-            <div class="ds-spacing-box" style="width: var(--space-2); height: var(--space-2);">
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-box" style="width: var(--space-2); height: var(--space-2);">
+              </div>
+              <BodyXs>2 (8px)</BodyXs>
             </div>
-            <BodyXs>2 (8px)</BodyXs>
-          </div>
-          <div class="ds-spacing-item">
-            <div class="ds-spacing-box" style="width: var(--space-3); height: var(--space-3);">
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-box" style="width: var(--space-3); height: var(--space-3);">
+              </div>
+              <BodyXs>3 (12px)</BodyXs>
             </div>
-            <BodyXs>3 (12px)</BodyXs>
-          </div>
-          <div class="ds-spacing-item">
-            <div class="ds-spacing-box" style="width: var(--space-4); height: var(--space-4);">
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-box" style="width: var(--space-4); height: var(--space-4);">
+              </div>
+              <BodyXs>4 (16px)</BodyXs>
             </div>
-            <BodyXs>4 (16px)</BodyXs>
-          </div>
-          <div class="ds-spacing-item">
-            <div class="ds-spacing-box" style="width: var(--space-6); height: var(--space-6);">
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-box" style="width: var(--space-6); height: var(--space-6);">
+              </div>
+              <BodyXs>6 (24px)</BodyXs>
             </div>
-            <BodyXs>6 (24px)</BodyXs>
-          </div>
-          <div class="ds-spacing-item">
-            <div class="ds-spacing-box" style="width: var(--space-8); height: var(--space-8);">
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-box" style="width: var(--space-8); height: var(--space-8);">
+              </div>
+              <BodyXs>8 (32px)</BodyXs>
             </div>
-            <BodyXs>8 (32px)</BodyXs>
-          </div>
-          <div class="ds-spacing-item">
-            <div class="ds-spacing-box" style="width: var(--space-12); height: var(--space-12);">
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-box" style="width: var(--space-12); height: var(--space-12);">
+              </div>
+              <BodyXs>12 (48px)</BodyXs>
             </div>
-            <BodyXs>12 (48px)</BodyXs>
-          </div>
-          <div class="ds-spacing-item">
-            <div class="ds-spacing-box" style="width: var(--space-16); height: var(--space-16);">
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-box" style="width: var(--space-16); height: var(--space-16);">
+              </div>
+              <BodyXs>16 (64px)</BodyXs>
             </div>
-            <BodyXs>16 (64px)</BodyXs>
           </div>
         </div>
-      </div>
 
-      <H3>Usage</H3>
-      <CodeBlock
-        lang="css"
-        wrap
-        code={`
+        <H3>Usage</H3>
+        <CodeBlock
+          lang="css"
+          wrap
+          code={`
 .element {
   margin: var(--space-4);
   padding: var(--space-2);
 }
           `}
-      />
-    </section>
+        />
+      </section>
 
-    <!-- BUTTONS -->
-    <section id="buttons" class="ds-section">
-      <H2>Buttons</H2>
-      <BodyMd color="secondary">
-        Interactive button component with support for variants, sizes, and polymorphic rendering.
-      </BodyMd>
+      <!-- BUTTONS -->
+      <section id="buttons" class="ds-section">
+        <H2>Buttons</H2>
+        <BodyMd color="secondary">
+          Interactive button component with support for variants, sizes, and polymorphic rendering.
+        </BodyMd>
 
-      <div class="ds-subsection">
-        <H3>Variants</H3>
-        <Flex direction="row" gap="4" align="center">
-          <Button variant="primary">Primary Button</Button>
-          <Button variant="secondary">Secondary Button</Button>
-        </Flex>
-      </div>
+        <div class="ds-subsection">
+          <H3>Variants</H3>
+          <Flex direction="row" gap="4" align="center">
+            <Button variant="primary">Primary Button</Button>
+            <Button variant="secondary">Secondary Button</Button>
+          </Flex>
+        </div>
 
-      <div class="ds-subsection">
-        <H3>Sizes</H3>
-        <Flex direction="row" gap="4" align="center">
-          <Button size="md">Medium (default)</Button>
-          <Button size="sm">Small</Button>
-          <Button size="xs">Extra Small</Button>
-        </Flex>
-      </div>
+        <div class="ds-subsection">
+          <H3>Sizes</H3>
+          <Flex direction="row" gap="4" align="center">
+            <Button size="md">Medium (default)</Button>
+            <Button size="sm">Small</Button>
+            <Button size="xs">Extra Small</Button>
+          </Flex>
+        </div>
 
-      <div class="ds-subsection">
-        <H3>Ghost Style</H3>
-        <Flex
-          direction="row"
-          gap="4"
-          align="center"
-          class="p-4 m-2"
-          style="background: var(--color-bg-inverse);"
-        >
-          <Button variant="primary" ghost>Ghost Primary - Hover me</Button>
-          <BodySm color="inverse">Can be used on light backgrounds</BodySm>
-        </Flex>
-        <Flex
-          direction="row"
-          gap="4"
-          align="center"
-          class="p-4 m-2"
-          style="border: 1px solid var(--color-border-primary);"
-        >
-          <Button variant="secondary" ghost>Ghost Secondary - Hover me</Button>
-          <BodySm>Can be used on dark backgrounds</BodySm>
-        </Flex>
-      </div>
+        <div class="ds-subsection">
+          <H3>Ghost Style</H3>
+          <Flex
+            direction="row"
+            gap="4"
+            align="center"
+            class="p-4 m-2"
+            style="background: var(--color-bg-inverse);"
+          >
+            <Button variant="primary" ghost>Ghost Primary - Hover me</Button>
+            <BodySm color="inverse">Can be used on light backgrounds</BodySm>
+          </Flex>
+          <Flex
+            direction="row"
+            gap="4"
+            align="center"
+            class="p-4 m-2"
+            style="border: 1px solid var(--color-border-primary);"
+          >
+            <Button variant="secondary" ghost>Ghost Secondary - Hover me</Button>
+            <BodySm>Can be used on dark backgrounds</BodySm>
+          </Flex>
+        </div>
 
-      <div class="ds-subsection">
-        <H3>With Icons</H3>
-        <Flex direction="row" gap="4" align="center">
-          <Button variant="primary">
-            <Icon name="fluent:arrow-left-24-regular" size="16" />
-            Back
-          </Button>
-          <Button variant="primary">
-            Continue
-            <Icon name="fluent:arrow-right-24-regular" size="16" />
-          </Button>
-        </Flex>
-      </div>
+        <div class="ds-subsection">
+          <H3>With Icons</H3>
+          <Flex direction="row" gap="4" align="center">
+            <Button variant="primary">
+              <Icon name="fluent:arrow-left-24-regular" size="16" />
+              Back
+            </Button>
+            <Button variant="primary">
+              Continue
+              <Icon name="fluent:arrow-right-24-regular" size="16" />
+            </Button>
+          </Flex>
+        </div>
 
-      <div class="ds-subsection">
-        <H3>Disabled State</H3>
-        <Flex direction="row" gap="4" align="center">
-          <Button variant="primary" disabled>Disabled Primary</Button>
-          <Button variant="secondary" disabled>Disabled Secondary</Button>
-        </Flex>
-      </div>
+        <div class="ds-subsection">
+          <H3>Disabled State</H3>
+          <Flex direction="row" gap="4" align="center">
+            <Button variant="primary" disabled>Disabled Primary</Button>
+            <Button variant="secondary" disabled>Disabled Secondary</Button>
+          </Flex>
+        </div>
 
-      <div class="ds-subsection">
-        <H3>As Link</H3>
-        <Flex direction="row" gap="4" align="center">
-          <Button as="a" href="#buttons" variant="primary">Link Button</Button>
-          <Button as="a" href="#buttons" variant="secondary">
-            External
-            <Icon name="fluent:arrow-up-right-16-regular" size="16" />
-          </Button>
-        </Flex>
-      </div>
+        <div class="ds-subsection">
+          <H3>As Link</H3>
+          <Flex direction="row" gap="4" align="center">
+            <Button as="a" href="#buttons" variant="primary">Link Button</Button>
+            <Button as="a" href="#buttons" variant="secondary">
+              External
+              <Icon name="fluent:arrow-up-right-16-regular" size="16" />
+            </Button>
+          </Flex>
+        </div>
 
-      <div class="ds-subsection">
-        <H3>Usage</H3>
-        <CodeBlock
-          lang="js"
-          wrap
-          code={`
+        <div class="ds-subsection">
+          <H3>Usage</H3>
+          <CodeBlock
+            lang="js"
+            wrap
+            code={`
 import { Button } from "@components/primitives";
 
 <Button variant="primary">Click me</Button>
 <Button variant="secondary" size="sm" ghost>Ghost</Button>
 <Button as="a" href="/docs">Link Button</Button>
           `}
-        />
-      </div>
-    </section>
-
-    <!-- GRID -->
-    <section id="grid" class="ds-section">
-      <H2>Grid & Layout</H2>
-      <BodyMd color="secondary">
-        12-column responsive grid system with Grid, Col, and Flex components.
-      </BodyMd>
-
-      <div class="ds-subsection">
-        <H3>Grid Component</H3>
-        <BodyMd color="secondary">
-          Responsive 12-column grid. Columns cascade from xs → md → lg.
-        </BodyMd>
-        <div class="ds-demo" style="margin-top: var(--space-4);">
-          <Grid gap="4">
-            <Col xs={12} md={6} lg={4}>
-              <div class="ds-box">
-                <BodySm>xs=12, md=6, lg=4</BodySm>
-              </div>
-            </Col>
-            <Col xs={12} md={6} lg={4}>
-              <div class="ds-box">
-                <BodySm>xs=12, md=6, lg=4</BodySm>
-              </div>
-            </Col>
-            <Col xs={12} md={12} lg={4}>
-              <div class="ds-box">
-                <BodySm>xs=12, md=12, lg=4</BodySm>
-              </div>
-            </Col>
-          </Grid>
+          />
         </div>
-        <H3>Usage</H3>
-        <CodeBlock
-          lang="js"
-          wrap
-          code={`
+      </section>
+
+      <!-- GRID -->
+      <section id="grid" class="ds-section">
+        <H2>Grid & Layout</H2>
+        <BodyMd color="secondary">
+          12-column responsive grid system with Grid, Col, and Flex components.
+        </BodyMd>
+
+        <div class="ds-subsection">
+          <H3>Grid Component</H3>
+          <BodyMd color="secondary">
+            Responsive 12-column grid. Columns cascade from xs → md → lg.
+          </BodyMd>
+          <div class="ds-demo" style="margin-top: var(--space-4);">
+            <Grid gap="4">
+              <Col xs={12} md={6} lg={4}>
+                <div class="ds-box">
+                  <BodySm>xs=12, md=6, lg=4</BodySm>
+                </div>
+              </Col>
+              <Col xs={12} md={6} lg={4}>
+                <div class="ds-box">
+                  <BodySm>xs=12, md=6, lg=4</BodySm>
+                </div>
+              </Col>
+              <Col xs={12} md={12} lg={4}>
+                <div class="ds-box">
+                  <BodySm>xs=12, md=12, lg=4</BodySm>
+                </div>
+              </Col>
+            </Grid>
+          </div>
+          <H3>Usage</H3>
+          <CodeBlock
+            lang="js"
+            wrap
+            code={`
 import { Grid, Col } from "@components/primitives";
 
 <Grid gap="4">
@@ -734,30 +741,30 @@ import { Grid, Col } from "@components/primitives";
   <Col xs={12} md={12} lg={4}>Content</Col>
 </Grid>
           `}
-        />
-      </div>
-
-      <div class="ds-subsection">
-        <H3>Flex Component</H3>
-        <BodyMd color="secondary">Flexbox layouts for 1D directional content.</BodyMd>
-        <div class="ds-demo" style="margin-top: var(--space-4);">
-          <Flex direction="row" gap="4" justify="between" align="center">
-            <div class="ds-box" style="background: var(--sky-100); padding: var(--space-3);">
-              <BodySm>Item 1</BodySm>
-            </div>
-            <div class="ds-box" style="padding: var(--space-3);">
-              <BodySm>Item 2</BodySm>
-            </div>
-            <div class="ds-box" style="padding: var(--space-3);">
-              <BodySm>Item 3</BodySm>
-            </div>
-          </Flex>
+          />
         </div>
-        <H3>Usage</H3>
-        <CodeBlock
-          lang="js"
-          wrap
-          code={`
+
+        <div class="ds-subsection">
+          <H3>Flex Component</H3>
+          <BodyMd color="secondary">Flexbox layouts for 1D directional content.</BodyMd>
+          <div class="ds-demo" style="margin-top: var(--space-4);">
+            <Flex direction="row" gap="4" justify="between" align="center">
+              <div class="ds-box" style="background: var(--sky-100); padding: var(--space-3);">
+                <BodySm>Item 1</BodySm>
+              </div>
+              <div class="ds-box" style="padding: var(--space-3);">
+                <BodySm>Item 2</BodySm>
+              </div>
+              <div class="ds-box" style="padding: var(--space-3);">
+                <BodySm>Item 3</BodySm>
+              </div>
+            </Flex>
+          </div>
+          <H3>Usage</H3>
+          <CodeBlock
+            lang="js"
+            wrap
+            code={`
 import { Flex } from "@components/primitives";
 
 <Flex direction="row" gap="4" justify="between">
@@ -765,51 +772,51 @@ import { Flex } from "@components/primitives";
   <div>Item 2</div>
 </Flex>
           `}
-        />
-      </div>
-
-      <div class="ds-subsection">
-        <H3>FlexItem Component</H3>
-        <BodyMd color="secondary"
-          >Control flex-grow, flex-shrink, and flex-basis for individual flex children.</BodyMd
-        >
-
-        <H4 style="margin-top: var(--space-6);">Equal Columns</H4>
-        <div class="ds-demo" style="margin-top: var(--space-3);">
-          <Flex gap="4">
-            <FlexItem flex="1">
-              <div class="ds-box"><BodySm>flex="1"</BodySm></div>
-            </FlexItem>
-            <FlexItem flex="1">
-              <div class="ds-box"><BodySm>flex="1"</BodySm></div>
-            </FlexItem>
-            <FlexItem flex="1">
-              <div class="ds-box"><BodySm>flex="1"</BodySm></div>
-            </FlexItem>
-          </Flex>
+          />
         </div>
 
-        <H4 style="margin-top: var(--space-6);">Different Basis & Grow</H4>
-        <div class="ds-demo" style="margin-top: var(--space-3);">
-          <Flex gap="4">
-            <FlexItem basis="1/4">
-              <div class="ds-box" style="background: var(--sky-100);">
-                <BodySm>FlexItem basis="1/4"</BodySm>
-              </div>
-            </FlexItem>
-            <FlexItem grow>
-              <div class="ds-box">
-                <BodySm>FlexItem (grow="1")</BodySm>
-              </div>
-            </FlexItem>
-          </Flex>
-        </div>
+        <div class="ds-subsection">
+          <H3>FlexItem Component</H3>
+          <BodyMd color="secondary"
+            >Control flex-grow, flex-shrink, and flex-basis for individual flex children.</BodyMd
+          >
 
-        <H3>Usage</H3>
-        <CodeBlock
-          lang="js"
-          wrap
-          code={`
+          <H4 style="margin-top: var(--space-6);">Equal Columns</H4>
+          <div class="ds-demo" style="margin-top: var(--space-3);">
+            <Flex gap="4">
+              <FlexItem flex="1">
+                <div class="ds-box"><BodySm>flex="1"</BodySm></div>
+              </FlexItem>
+              <FlexItem flex="1">
+                <div class="ds-box"><BodySm>flex="1"</BodySm></div>
+              </FlexItem>
+              <FlexItem flex="1">
+                <div class="ds-box"><BodySm>flex="1"</BodySm></div>
+              </FlexItem>
+            </Flex>
+          </div>
+
+          <H4 style="margin-top: var(--space-6);">Different Basis & Grow</H4>
+          <div class="ds-demo" style="margin-top: var(--space-3);">
+            <Flex gap="4">
+              <FlexItem basis="1/4">
+                <div class="ds-box" style="background: var(--sky-100);">
+                  <BodySm>FlexItem basis="1/4"</BodySm>
+                </div>
+              </FlexItem>
+              <FlexItem grow>
+                <div class="ds-box">
+                  <BodySm>FlexItem (grow="1")</BodySm>
+                </div>
+              </FlexItem>
+            </Flex>
+          </div>
+
+          <H3>Usage</H3>
+          <CodeBlock
+            lang="js"
+            wrap
+            code={`
 import { Flex, FlexItem } from "@components/primitives";
 
 <Flex gap="4">
@@ -818,54 +825,54 @@ import { Flex, FlexItem } from "@components/primitives";
   <FlexItem grow="1">Flexible content</FlexItem>
 </Flex>
           `}
-        />
-      </div>
-
-      <div class="ds-subsection">
-        <H3>Container</H3>
-        <BodyMd color="secondary">
-          Centered, responsive content wrapper with max-width and padding.
-        </BodyMd>
-        <div class="ds-demo-container" style="margin-top: var(--space-4);">
-          <Container>
-            <div class="ds-box">
-              <Body>Content centered with max-width: 1440px, width: 90-95%</Body>
-            </div>
-          </Container>
+          />
         </div>
-      </div>
-      <H3>Usage</H3>
-      <CodeBlock
-        lang="js"
-        wrap
-        code={`
+
+        <div class="ds-subsection">
+          <H3>Container</H3>
+          <BodyMd color="secondary">
+            Centered, responsive content wrapper with max-width and padding.
+          </BodyMd>
+          <div class="ds-demo-container" style="margin-top: var(--space-4);">
+            <Container>
+              <div class="ds-box">
+                <Body>Content centered with max-width: 1440px, width: 90-95%</Body>
+              </div>
+            </Container>
+          </div>
+        </div>
+        <H3>Usage</H3>
+        <CodeBlock
+          lang="js"
+          wrap
+          code={`
 import { Container } from "@components/primitives";
 
 <Container>
   <div>Your content here</div>
 </Container>
           `}
-      />
-    </section>
+        />
+      </section>
 
-    <!-- BREAKPOINTS -->
-    <section id="breakpoints" class="ds-section">
-      <H2>Breakpoints</H2>
+      <!-- BREAKPOINTS -->
+      <section id="breakpoints" class="ds-section">
+        <H2>Breakpoints</H2>
 
-      <div class="ds-demo">
-        <div class="ds-breakpoint-indicator">
-          <span class="ds-breakpoint ds-breakpoint--xs">Current: Mobile (xs) &lt; 768px</span>
-          <span class="ds-breakpoint ds-breakpoint--md">Current: Tablet (md) 768px – 1439px</span>
-          <span class="ds-breakpoint ds-breakpoint--lg">Current: Desktop (lg) ≥ 1440px</span>
+        <div class="ds-demo">
+          <div class="ds-breakpoint-indicator">
+            <span class="ds-breakpoint ds-breakpoint--xs">Current: Mobile (xs) &lt; 768px</span>
+            <span class="ds-breakpoint ds-breakpoint--md">Current: Tablet (md) 768px – 1439px</span>
+            <span class="ds-breakpoint ds-breakpoint--lg">Current: Desktop (lg) ≥ 1440px</span>
+          </div>
         </div>
-      </div>
 
-      <div class="ds-subsection">
-        <H3>Usage</H3>
-        <CodeBlock
-          lang="css"
-          wrap
-          code={`
+        <div class="ds-subsection">
+          <H3>Usage</H3>
+          <CodeBlock
+            lang="css"
+            wrap
+            code={`
 /* Example media queries using design system breakpoints */
 @media (--xs-only) {
   /* mobile only */
@@ -883,222 +890,223 @@ import { Container } from "@components/primitives";
   /* below desktop */
 }
           `}
-        />
-      </div>
-    </section>
+          />
+        </div>
+      </section>
 
-    <style>
-      /* Navigation */
-      .ds-nav {
-        position: sticky;
-        top: 60px;
-        background: var(--color-bg-primary);
-        border-bottom: 1px solid var(--color-border-secondary);
-        padding: var(--space-3) var(--space-4);
-        margin-bottom: var(--space-8);
-      }
+      <style>
+        /* Navigation */
+        .ds-nav {
+          position: sticky;
+          top: 60px;
+          background: var(--color-bg-primary);
+          border-bottom: 1px solid var(--color-border-secondary);
+          padding: var(--space-3) var(--space-4);
+          margin-bottom: var(--space-8);
+        }
 
-      .ds-nav__list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        gap: var(--space-1);
-        overflow-x: auto;
-        max-width: 1440px;
-        margin-inline: auto;
-      }
+        .ds-nav__list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          gap: var(--space-1);
+          overflow-x: auto;
+          max-width: 1440px;
+          margin-inline: auto;
+        }
 
-      .ds-nav__link {
-        display: block;
-        padding: var(--space-2) var(--space-3);
-        font-size: var(--font-size-sm);
-        color: var(--color-text-secondary);
-        text-decoration: none;
-        border-radius: 6px;
-        white-space: nowrap;
-        transition:
-          background-color 0.15s ease,
-          color 0.15s ease;
-      }
+        .ds-nav__link {
+          display: block;
+          padding: var(--space-2) var(--space-3);
+          font-size: var(--font-size-sm);
+          color: var(--color-text-secondary);
+          text-decoration: none;
+          border-radius: 6px;
+          white-space: nowrap;
+          transition:
+            background-color 0.15s ease,
+            color 0.15s ease;
+        }
 
-      .ds-nav__link:hover {
-        color: var(--color-text-primary);
-        background: var(--color-bg-secondary);
-      }
+        .ds-nav__link:hover {
+          color: var(--color-text-primary);
+          background: var(--color-bg-secondary);
+        }
 
-      /* Scroll offset for sticky nav */
-      .ds-section {
-        scroll-margin-top: var(--space-16);
-      }
+        /* Scroll offset for sticky nav */
+        .ds-section {
+          scroll-margin-top: var(--space-16);
+        }
 
-      .ds-header {
-        padding: var(--space-12) 0;
-      }
+        .ds-header {
+          padding: var(--space-12) 0;
+        }
 
-      .ds-section {
-        margin-bottom: var(--space-16);
-      }
+        .ds-section {
+          margin-bottom: var(--space-16);
+        }
 
-      .ds-subsection {
-        margin-top: var(--space-8);
-      }
+        .ds-subsection {
+          margin-top: var(--space-8);
+        }
 
-      .ds-demo {
-        padding: var(--space-6);
-        background: var(--color-bg-secondary);
-        border-radius: 8px;
-        margin-top: var(--space-4);
-      }
+        .ds-demo {
+          padding: var(--space-6);
+          background: var(--color-bg-secondary);
+          border-radius: 8px;
+          margin-top: var(--space-4);
+        }
 
-      .ds-demo--col {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-3);
-      }
+        .ds-demo--col {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-3);
+        }
 
-      .ds-demo--row {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: var(--space-4);
-      }
+        .ds-demo--row {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: var(--space-4);
+        }
 
-      .ds-demo-container {
-        background: var(--color-bg-tertiary);
-        padding: var(--space-4);
-        margin-top: var(--space-4);
-        border-radius: 8px;
-      }
+        .ds-demo-container {
+          background: var(--color-bg-tertiary);
+          padding: var(--space-4);
+          margin-top: var(--space-4);
+          border-radius: 8px;
+        }
 
-      .ds-box {
-        background: var(--color-bg-secondary);
-        padding: var(--space-4);
-        border-radius: 8px;
-        border: 1px dashed var(--color-border-primary);
-      }
+        .ds-box {
+          background: var(--color-bg-secondary);
+          padding: var(--space-4);
+          border-radius: 8px;
+          border: 1px dashed var(--color-border-primary);
+        }
 
-      /* Color Grid */
-      .ds-color-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-2);
-        margin-top: var(--space-4);
-      }
+        /* Color Grid */
+        .ds-color-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--space-2);
+          margin-top: var(--space-4);
+        }
 
-      .ds-color-grid--large {
-        gap: var(--space-4);
-      }
+        .ds-color-grid--large {
+          gap: var(--space-4);
+        }
 
-      .ds-color-swatch {
-        width: 60px;
-        height: 60px;
-        border-radius: 8px;
-        border: 1px solid var(--color-border-secondary);
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        padding: var(--space-1);
-      }
+        .ds-color-swatch {
+          width: 60px;
+          height: 60px;
+          border-radius: 8px;
+          border: 1px solid var(--color-border-secondary);
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          padding: var(--space-1);
+        }
 
-      .ds-color-swatch span {
-        font-size: var(--font-size-xxs);
-        font-family: var(--font-family-mono);
-        background: var(--color-bg-primary);
-        padding: 0.1em 0.3em;
-        border-radius: 3px;
-      }
+        .ds-color-swatch span {
+          font-size: var(--font-size-xxs);
+          font-family: var(--font-family-mono);
+          background: var(--color-bg-primary);
+          padding: 0.1em 0.3em;
+          border-radius: 3px;
+        }
 
-      .ds-color-swatch--large {
-        width: 120px;
-        height: 80px;
-      }
+        .ds-color-swatch--large {
+          width: 120px;
+          height: 80px;
+        }
 
-      /* Spacing Grid */
-      .ds-spacing-grid {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: flex-end;
-        gap: var(--space-6);
-        margin-top: var(--space-4);
-      }
+        /* Spacing Grid */
+        .ds-spacing-grid {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: flex-end;
+          gap: var(--space-6);
+          margin-top: var(--space-4);
+        }
 
-      .ds-spacing-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: var(--space-2);
-      }
+        .ds-spacing-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: var(--space-2);
+        }
 
-      .ds-spacing-box {
-        background: var(--sky-500);
-        border-radius: 2px;
-      }
+        .ds-spacing-box {
+          background: var(--sky-500);
+          border-radius: 2px;
+        }
 
-      /* Type Scale */
-      .ds-type-scale {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: flex-end;
-        gap: var(--space-8);
-        margin-top: var(--space-4);
-      }
+        /* Type Scale */
+        .ds-type-scale {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: flex-end;
+          gap: var(--space-8);
+          margin-top: var(--space-4);
+        }
 
-      .ds-type-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: var(--space-2);
-      }
+        .ds-type-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: var(--space-2);
+        }
 
-      /* Breakpoint Indicator */
-      .ds-breakpoint-indicator {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-2);
-      }
+        /* Breakpoint Indicator */
+        .ds-breakpoint-indicator {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-2);
+        }
 
-      .ds-breakpoint {
-        padding: var(--space-3) var(--space-4);
-        border-radius: 6px;
-        font-family: var(--font-family-mono);
-        font-size: var(--font-size-sm);
-        display: none;
-      }
+        .ds-breakpoint {
+          padding: var(--space-3) var(--space-4);
+          border-radius: 6px;
+          font-family: var(--font-family-mono);
+          font-size: var(--font-size-sm);
+          display: none;
+        }
 
-      .ds-breakpoint--xs {
-        background: var(--orange-50);
-        color: var(--orange-700);
-      }
-
-      .ds-breakpoint--md {
-        background: var(--sky-50);
-        color: var(--sky-700);
-      }
-
-      .ds-breakpoint--lg {
-        background: var(--green-50);
-        color: var(--green-700);
-      }
-
-      @media (--xs-only) {
         .ds-breakpoint--xs {
-          display: block;
+          background: var(--orange-50);
+          color: var(--orange-700);
         }
-      }
 
-      @media (--md-up) {
         .ds-breakpoint--md {
-          display: block;
+          background: var(--sky-50);
+          color: var(--sky-700);
         }
-      }
 
-      @media (--lg-up) {
         .ds-breakpoint--lg {
-          display: block;
+          background: var(--green-50);
+          color: var(--green-700);
         }
-      }
-    </style>
-  </section>
+
+        @media (--xs-only) {
+          .ds-breakpoint--xs {
+            display: block;
+          }
+        }
+
+        @media (--md-up) {
+          .ds-breakpoint--md {
+            display: block;
+          }
+        }
+
+        @media (--lg-up) {
+          .ds-breakpoint--lg {
+            display: block;
+          }
+        }
+      </style>
+    </section>
+  </Container>
 </Layout>
