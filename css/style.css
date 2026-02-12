@@ -1,3 +1,7 @@
+:root {
+  --header-height: 57px;
+}
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -34,6 +38,7 @@ body {
 
 header {
   grid-area: header;
+  height: var(--header-height);
 }
 
 .content {
@@ -1699,6 +1704,9 @@ blockquote {
 
   #navmenu.opens {
     display: block;
+    max-height: calc(100dvh - var(--header-height));
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   #navbar a {
