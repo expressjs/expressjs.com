@@ -6,7 +6,7 @@ export const resourcesMenu: Menu = {
     { href: `/community`, label: 'Community', ariaLabel: 'Community resources' },
     { href: `/glossary`, label: 'Glossary', ariaLabel: 'Glossary of terms' },
     { href: `/contributing`, label: 'Express community' },
-    { href: `/utils`, label: 'Express utilities'},
+    { href: `/utils`, label: 'Express utilities' },
     {
       label: 'Middleware',
       ariaLabel: 'Middleware resources',
