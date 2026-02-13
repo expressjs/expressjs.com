@@ -6,9 +6,23 @@
  */
 import './Header.css';
 import { Icon } from 'astro-icon/components';
-import { BodyMd, Flex } from '@/components/primitives';
+import { Flex } from '@/components/primitives';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.astro';
 import SearchTrigger from '../SearchTrigger/SearchTrigger.astro';
+import { LanguageSelect } from '../LanguageSelect';
+
+const languages = [
+  { code: 'en', label: 'English' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'es', label: 'Español' },
+  { code: 'fr', label: 'Français' },
+  { code: 'it', label: 'Italiano' },
+  { code: 'ja', label: '日本語' },
+  { code: 'ko', label: '한국어' },
+  { code: 'pt-br', label: 'Português (BR)' },
+  { code: 'zh-cn', label: '简体中文' },
+  { code: 'zh-tw', label: '繁體中文' },
+];
 ---
 
 <header class="header">
@@ -35,12 +49,7 @@ import SearchTrigger from '../SearchTrigger/SearchTrigger.astro';
       <a href="#main-content" class="skip-link sr-only">Skip to content</a>
       <SearchTrigger />
       <ThemeSwitcher showLabels={false} />
-      <button class="header-action" aria-label="Select language">
-        <div class="header-action-icon">
-          <Icon name="fluent:translate-16-regular" size="20" color="var(--color-icon-primary)" />
-        </div>
-        <BodyMd as="span" vMargin={false} className="sr-only">Select language</BodyMd>
-      </button>
+      <LanguageSelect languages={languages} currentLanguage="en" />
     </Flex>
   </Flex>
 </header>

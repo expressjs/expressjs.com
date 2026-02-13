@@ -1,0 +1,208 @@
+---
+/**
+ * LanguageSelect Component
+ *
+ * Accessible dropdown for selecting site language.
+ * Supports keyboard navigation (Tab, Enter, Space, Escape, Arrow keys)
+ * and click-outside-to-close behavior.
+ *
+ * @example
+ * <LanguageSelect
+ *   languages={[
+ *     { code: 'en', label: 'English' },
+ *     { code: 'es', label: 'Español' },
+ *   ]}
+ *   currentLanguage="en"
+ * />
+ */
+
+import './LanguageSelect.css';
+import { Icon } from 'astro-icon/components';
+import type { LanguageSelectProps } from './types';
+import { BodyMd } from '@/components/primitives';
+
+type Props = LanguageSelectProps;
+
+const { languages, currentLanguage = 'en', class: className, ...rest } = Astro.props;
+
+const selectedLanguage = languages.find((lang) => lang.code === currentLanguage) || languages[0];
+---
+
+<div class:list={['language-select', className]} data-language-select data-open="false" {...rest}>
+  <button
+    class="language-select-button"
+    data-language-button
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-label="Select language"
+  >
+    <span class="language-select-icon">
+      <Icon
+        name="fluent:translate-16-regular"
+        size="20"
+        color="var(--color-icon-primary)"
+        aria-hidden="true"
+      />
+    </span>
+    <span data-language-label aria-label={selectedLanguage.label} class="sr-only"
+      >{selectedLanguage.label}</span
+    >
+  </button>
+  <div class="language-select-dropdown" data-language-dropdown role="listbox">
+    {
+      languages.map((lang) => (
+        <button
+          class="language-select-option"
+          role="option"
+          aria-selected={lang.code === currentLanguage ? 'true' : 'false'}
+          data-language-code={lang.code}
+          data-language-option
+        >
+          <BodyMd vMargin={false}>{lang.label}</BodyMd>
+        </button>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  function initLanguageSelect() {
+    const containers = document.querySelectorAll('[data-language-select]');
+
+    containers.forEach((container) => {
+      const button = container.querySelector('[data-language-button]') as HTMLButtonElement;
+      const dropdown = container.querySelector('[data-language-dropdown]') as HTMLElement;
+      const options = Array.from(
+        container.querySelectorAll('[data-language-option]')
+      ) as HTMLButtonElement[];
+      const label = container.querySelector('[data-language-label]') as HTMLElement;
+
+      if (!button || !dropdown || !options.length) return;
+
+      let isOpen = false;
+      let focusedIndex = -1;
+
+      const toggle = (open?: boolean) => {
+        isOpen = open ?? !isOpen;
+        container.setAttribute('data-open', String(isOpen));
+        button.setAttribute('aria-expanded', String(isOpen));
+
+        if (isOpen) {
+          const selectedIndex = options.findIndex(
+            (opt) => opt.getAttribute('aria-selected') === 'true'
+          );
+          focusedIndex = selectedIndex >= 0 ? selectedIndex : 0;
+          options[focusedIndex]?.focus();
+        } else {
+          focusedIndex = -1;
+        }
+      };
+
+      const selectLanguage = (code: string, langLabel: string) => {
+        options.forEach((opt) => {
+          opt.setAttribute('aria-selected', opt.dataset.languageCode === code ? 'true' : 'false');
+        });
+        label.textContent = langLabel;
+
+        toggle(false);
+        button.focus();
+
+        const currentPath = window.location.pathname;
+        const langRegex = /^\/(en|de|es|fr|it|ja|ko|pt-br|zh-cn|zh-tw)\//;
+
+        let newPath: string;
+        if (langRegex.test(currentPath)) {
+          newPath = currentPath.replace(langRegex, `/${code}/`);
+        } else {
+          newPath = `/${code}${currentPath}`;
+        }
+
+        window.location.href = newPath;
+      };
+
+      const handleClickOutside = (e: MouseEvent) => {
+        if (!container.contains(e.target as Node)) {
+          toggle(false);
+        }
+      };
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (!isOpen) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            toggle(true);
+          }
+          return;
+        }
+
+        switch (e.key) {
+          case 'Escape':
+            e.preventDefault();
+            toggle(false);
+            button.focus();
+            break;
+          case 'ArrowDown':
+            e.preventDefault();
+            focusedIndex = (focusedIndex + 1) % options.length;
+            options[focusedIndex]?.focus();
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            focusedIndex = focusedIndex <= 0 ? options.length - 1 : focusedIndex - 1;
+            options[focusedIndex]?.focus();
+            break;
+          case 'Home':
+            e.preventDefault();
+            focusedIndex = 0;
+            options[focusedIndex]?.focus();
+            break;
+          case 'End':
+            e.preventDefault();
+            focusedIndex = options.length - 1;
+            options[focusedIndex]?.focus();
+            break;
+        }
+      };
+
+      button.addEventListener('click', () => toggle());
+      button.addEventListener('keydown', handleKeyDown);
+
+      options.forEach((option, index) => {
+        option.addEventListener('click', () => {
+          const code = option.dataset.languageCode;
+          const langLabel = option.textContent?.trim();
+          if (code && langLabel) {
+            selectLanguage(code, langLabel);
+          }
+        });
+
+        option.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const code = option.dataset.languageCode;
+            const langLabel = option.textContent?.trim();
+            if (code && langLabel) {
+              selectLanguage(code, langLabel);
+            }
+          } else {
+            handleKeyDown(e);
+          }
+        });
+
+        option.addEventListener('focus', () => {
+          focusedIndex = index;
+        });
+      });
+
+      document.addEventListener('click', handleClickOutside);
+
+      document.addEventListener('astro:before-preparation', () => {
+        document.removeEventListener('click', handleClickOutside);
+      });
+    });
+  }
+
+  initLanguageSelect();
+
+  document.addEventListener('astro:page-load', initLanguageSelect);
+</script>
