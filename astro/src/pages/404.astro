@@ -1,0 +1,22 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { Container, H1, H2, Body, Button } from '@components/primitives';
+---
+
+<Layout
+  title="404 - Page Not Found | Express"
+  description="The page you are looking for could not be found."
+>
+  <Container>
+    <div>
+      <H1>404</H1>
+      <H2>Page Not Found</H2>
+      <Body color="secondary">
+        The page you are looking for does not exist or has been moved.
+      </Body>
+      <div>
+        <Button as="a" href="/en/" variant="primary"> Go to Home </Button>
+      </div>
+    </div>
+  </Container>
+</Layout>

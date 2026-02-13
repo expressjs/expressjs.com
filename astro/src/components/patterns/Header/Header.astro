@@ -10,19 +10,10 @@ import { Flex } from '@/components/primitives';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.astro';
 import SearchTrigger from '../SearchTrigger/SearchTrigger.astro';
 import { LanguageSelect } from '../LanguageSelect';
+import { languagesArray } from '@/i18n/ui';
+import { getLangFromUrl } from '@/i18n/utils';
 
-const languages = [
-  { code: 'en', label: 'English' },
-  { code: 'de', label: 'Deutsch' },
-  { code: 'es', label: 'Español' },
-  { code: 'fr', label: 'Français' },
-  { code: 'it', label: 'Italiano' },
-  { code: 'ja', label: '日本語' },
-  { code: 'ko', label: '한국어' },
-  { code: 'pt-br', label: 'Português (BR)' },
-  { code: 'zh-cn', label: '简体中文' },
-  { code: 'zh-tw', label: '繁體中文' },
-];
+const currentLang = getLangFromUrl(Astro.url);
 ---
 
 <header class="header">
@@ -39,7 +30,7 @@ const languages = [
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
       </button>
-      <a href="/" class="logo-link" aria-label="Express home">
+      <a href={`/${currentLang}/`} class="logo-link" aria-label="Express home">
         <Icon name="logo-dark" class="logo logo-dark" />
         <Icon name="logo-light" class="logo logo-light" />
       </a>
@@ -49,7 +40,7 @@ const languages = [
       <a href="#main-content" class="skip-link sr-only">Skip to content</a>
       <SearchTrigger />
       <ThemeSwitcher showLabels={false} />
-      <LanguageSelect languages={languages} currentLanguage="en" />
+      <LanguageSelect languages={languagesArray} currentLanguage={currentLang} />
     </Flex>
   </Flex>
 </header>
