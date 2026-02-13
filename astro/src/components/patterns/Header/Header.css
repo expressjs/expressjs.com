@@ -25,13 +25,14 @@
   }
 
   .skip-link {
+    color: var(--color-text-primary);
+
     &:focus {
       position: relative;
       padding: var(--space-2) var(--space-4);
       background-color: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
       text-decoration: none;
-      border-radius: var(--radius-base);
+      border-radius: var(--radius-md);
       outline: 1px solid var(--color-focus-ring);
       outline-offset: -2px;
       border: 0;
