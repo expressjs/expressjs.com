@@ -12,6 +12,51 @@ export const apiMenu: Menu = {
       ],
     },
     {
+      title: 'Express',
+      items: [
+        { href: `/api/express/overview`, label: 'Overview', ariaLabel: 'Express overview' },
+        {
+          label: 'Methods',
+          ariaLabel: 'Express methods',
+          omitFrom: ['3x'],
+          submenu: {
+            items: [
+              {
+                href: `/api/express/expressjson`,
+                label: 'express.json()',
+                ariaLabel: 'express.json method',
+              },
+              {
+                href: `/api/express/expressraw`,
+                label: 'express.raw()',
+                ariaLabel: 'express.raw method',
+              },
+              {
+                href: '/api/express/expressrouter',
+                label: 'express.Router()',
+                ariaLabel: 'express.Router method',
+              },
+              {
+                href: '/api/express/expressstatic',
+                label: 'express.static()',
+                ariaLabel: 'express.static method',
+              },
+              {
+                href: `/api/express/expresstext`,
+                label: 'express.text()',
+                ariaLabel: 'express.text method',
+              },
+              {
+                href: `/api/express/expressurlencoded`,
+                label: 'express.urlencoded()',
+                ariaLabel: 'express.urlencoded method',
+              },
+            ],
+          },
+        },
+      ],
+    },
+    {
       title: 'Application',
       items: [
         { href: `/api/application/overview`, label: 'Overview', ariaLabel: 'Application overview' },
@@ -31,6 +76,32 @@ export const apiMenu: Menu = {
                 ariaLabel: 'app.mountpath property',
                 omitFrom: ['3x'],
               },
+              {
+                href: `/api/application/app-router`,
+                label: 'app.router',
+                ariaLabel: 'app.router property',
+                omitFrom: ['3x', '4x'],
+              },
+              {
+                href: `/api/application/app-routes`,
+                label: 'app.routes',
+                ariaLabel: 'app.routes property',
+                omitFrom: ['4x', '5x'],
+              },
+            ],
+          },
+        },
+        {
+          label: 'Events',
+          ariaLabel: 'Application events',
+          omitFrom: ['3x'],
+          submenu: {
+            items: [
+              {
+                href: `/api/application/app-event-mount`,
+                label: 'mount',
+                ariaLabel: 'app mount event',
+              },
             ],
           },
         },
@@ -49,6 +120,92 @@ export const apiMenu: Menu = {
                 label: 'app.delete()',
                 ariaLabel: 'app.delete method',
                 omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-disable',
+                label: 'app.disable()',
+                ariaLabel: 'app.disable method',
+              },
+              {
+                href: '/api/application/app-disabled',
+                label: 'app.disabled()',
+                arialLabel: 'app.disabled method',
+              },
+              {
+                href: '/api/application/app-enable',
+                label: 'app.enable()',
+                arialLabel: 'app.enable method',
+              },
+              {
+                href: '/api/application/app-enabled',
+                label: 'app.enabled()',
+                arialLabel: 'app.enabled method',
+              },
+              {
+                href: '/api/application/app-engine',
+                label: 'app.engine()',
+                arialLabel: 'app.engine method',
+              },
+              {
+                href: '/api/application/app-get',
+                label: 'app.get()',
+                arialLabel: 'app.get method',
+              },
+              {
+                href: '/api/application/app-get-method',
+                label: 'app.get()',
+                ariaLabel: 'app.get method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-listen',
+                label: 'app.listen()',
+                arialLabel: 'app.listen method',
+              },
+              {
+                href: '/api/application/app-param',
+                label: 'app.param()',
+                arialLabel: 'app.param method',
+              },
+              {
+                href: '/api/application/app-method',
+                label: 'app.METHOD()',
+                arialLabel: 'app.METHOD method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-path',
+                label: 'app.path()',
+                arialLabel: 'app.path method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-post',
+                label: 'app.post()',
+                arialLabel: 'app.post method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-put',
+                label: 'app.put()',
+                arialLabel: 'app.put method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-render',
+                label: 'app.render()',
+                arialLabel: 'app.render method',
+              },
+              {
+                href: '/api/application/app-route',
+                label: 'app.route()',
+                arialLabel: 'app.route method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-use',
+                label: 'app.use()',
+                arialLabel: 'app.use method',
               },
             ],
           },
