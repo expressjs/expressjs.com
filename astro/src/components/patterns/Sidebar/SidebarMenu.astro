@@ -5,6 +5,7 @@ import { Body } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
 import SidebarItemsList from './SidebarItemsList.astro';
+import { useTranslations } from '@/i18n/utils';
 import {
   shouldOmitSection,
   collectAllSubmenus,
@@ -41,6 +42,8 @@ const {
   parentId = 'root',
 } = Astro.props;
 
+const t = useTranslations(lang as any);
+
 const submenus: SubmenuData[] = [];
 if (level === 0) {
   collectAllSubmenus(menu, level, parentId, basePath, versioned, version, submenus);
@@ -61,10 +64,10 @@ const initialActiveLevel =
       data-initial-active-level={initialActiveLevel}
       aria-hidden="false"
     >
-      <nav class="sidebar-nav" aria-label="Main navigation">
+      <nav class="sidebar-nav" aria-label={t('nav.mainNavigation')}>
         <ul class="sidebar-nav-list">
           <li class="sidebar-logo-item">
-            <a href={`/${lang}/`} class="logo-link sidebar-nav-item" aria-label="Express home">
+            <a href={`/${lang}/`} class="logo-link sidebar-nav-item" aria-label={t('nav.home')}>
               <Icon name="logo-dark" class="logo logo-dark" />
               <Icon name="logo-light" class="logo logo-light" />
             </a>
@@ -148,7 +151,7 @@ const initialActiveLevel =
                       versions={availableVersions}
                       defaultVersion={defaultVersion}
                       currentPath={currentPath}
-                      aria-label="Select documentation version"
+                      aria-label={t('nav.selectVersion')}
                       data-version-switcher
                     />
                   )}

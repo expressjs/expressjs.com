@@ -17,11 +17,10 @@ const t = useTranslations(lang);
 <Layout>
   <Container>
     <H1>{t('home.welcome')}</H1>
-    <Body>This is a work-in-progress homepage.</Body>
+    <Body>{t('home.workInProgress')}</Body>
     <ul>
       <li>
-        Review the <a href={`/${lang}/ds-foundations`}>Design System Foundations</a> demo page to explore
-        all tokens, primitives, and patterns.
+        {t('home.reviewDesignSystemPrefix')} <a href={`/${lang}/ds-foundations`}>{t('home.reviewDesignSystemLink')}</a> {t('home.reviewDesignSystemSuffix')}
       </li>
     </ul>
   </Container>

@@ -1,3 +1,14 @@
+import en from './locales/en.json';
+import fr from './locales/fr.json';
+import de from './locales/de.json';
+import es from './locales/es.json';
+import it from './locales/it.json';
+import ja from './locales/ja.json';
+import ko from './locales/ko.json';
+import ptBr from './locales/pt-br.json';
+import zhCn from './locales/zh-cn.json';
+import zhTw from './locales/zh-tw.json';
+
 export const languages = {
   en: 'English',
   de: 'Deutsch',
@@ -21,34 +32,14 @@ export const languagesArray = Object.entries(languages).map(([code, label]) => (
 export const defaultLang = 'en';
 
 export const ui = {
-  en: {
-    'home.welcome': 'Welcome',
-  },
-  fr: {
-    'home.welcome': 'Bienvenue',
-  },
-  de: {
-    'home.welcome': 'Willkommen',
-  },
-  es: {
-    'home.welcome': 'Bienvenido',
-  },
-  it: {
-    'home.welcome': 'Benvenuto',
-  },
-  ja: {
-    'home.welcome': 'ようこそ',
-  },
-  ko: {
-    'home.welcome': '환영합니다',
-  },
-  'pt-br': {
-    'home.welcome': 'Bem-vindo',
-  },
-  'zh-cn': {
-    'home.welcome': '欢迎',
-  },
-  'zh-tw': {
-    'home.welcome': '歡迎',
-  },
+  en,
+  fr,
+  de,
+  es,
+  it,
+  ja,
+  ko,
+  'pt-br': ptBr,
+  'zh-cn': zhCn,
+  'zh-tw': zhTw,
 } as const;

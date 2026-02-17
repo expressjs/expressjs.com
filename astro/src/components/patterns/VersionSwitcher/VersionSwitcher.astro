@@ -21,10 +21,13 @@ import { Icon } from 'astro-icon/components';
 import { Flex, Select } from '@/components/primitives';
 import type { SelectOption } from '@/components/primitives';
 import type { VersionConfig, VersionSwitcherProps } from './types';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 type Props = VersionSwitcherProps;
 
 const { versions, defaultVersion, currentPath = '', class: className, ...rest } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 function getVersionFromPath(path: string, availableVersions: VersionConfig[]): string | null {
   for (const version of availableVersions) {
@@ -66,6 +69,6 @@ const selectOptions: SelectOption[] = versions.map((version) => ({
     variant="default"
     fullWidth
     data-version-select
-    aria-label="Select API version"
+    aria-label={t('version.selectLabel')}
   />
 </Flex>
