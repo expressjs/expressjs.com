@@ -8,3 +8,4 @@ html_url: /en/blog/posts.html
 {% for post in posts %}
 {% if post.tags contains "vulnerabilities" %}{% include feed-entry.xml entry=post %}{% endif %}
 {% endfor %}
+
