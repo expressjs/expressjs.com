@@ -37,6 +37,8 @@ const {
   id,
   name,
   disabled = false,
+  icon,
+  hideLabel = false,
   class: className,
   ...rest
 } = Astro.props;
@@ -62,6 +64,7 @@ const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
       'select-button',
       `select-button--size-${size}`,
       `select-button--variant-${variant}`,
+      icon && 'select-button--with-icon',
     ]}
     data-select-button
     aria-haspopup="listbox"
@@ -69,10 +72,21 @@ const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
     aria-label={ariaLabel}
     disabled={disabled}
   >
-    <BodyMd vMargin={false} class="select-label" data-select-label>
+    {
+      icon && (
+        <div class="select-icon">
+          <Icon name={icon} size="20" color="var(--color-icon-primary)" aria-hidden="true" />
+        </div>
+      )
+    }
+    <BodyMd vMargin={false} class:list={['select-label', hideLabel && 'sr-only']} data-select-label>
       {displayLabel}
     </BodyMd>
-    <Icon name="fluent:chevron-down-20-regular" class="select-caret" aria-hidden="true" />
+    {
+      !hideLabel && (
+        <Icon name="fluent:chevron-down-20-regular" class="select-caret" aria-hidden="true" />
+      )
+    }
   </button>
 
   <div class="select-dropdown" data-select-dropdown role="listbox" aria-label={ariaLabel}>

@@ -16,7 +16,7 @@ export interface SelectOption<T = string> {
 }
 
 export type SelectSize = 'sm' | 'md' | 'lg';
-export type SelectVariant = 'default' | 'ghost' | 'minimal';
+export type SelectVariant = 'default' | 'ghost' | 'minimal' | 'icon';
 
 export interface SelectBaseProps<T = string> {
   /** Size variant */
@@ -41,4 +41,8 @@ export interface SelectBaseProps<T = string> {
   disabled?: boolean;
   /** Callback when selection changes */
   onChange?: (value: T) => void;
+  /** Icon name to display (for icon variant) */
+  icon?: string;
+  /** Whether to hide the label (icon-only mode) */
+  hideLabel?: boolean;
 }
