@@ -1,10 +1,6 @@
 ---
-layout: page
 title: Statische Dateien in Express bereitstellen
 description: Understand how to serve static files like images, CSS, and JavaScript in Express.js applications using the built-in 'static' middleware.
-menu: starter
-order: 5
-redirect_from: '  '
 ---
 
 # Statische Dateien in Express bereitstellen

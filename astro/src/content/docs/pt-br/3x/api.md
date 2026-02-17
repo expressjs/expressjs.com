@@ -1,10 +1,7 @@
 ---
-layout: api
 version: 3x
 title: Express 3.x - Referência de API
 description: Acesso à referência da API do Express.js versão 3.x, observando que esta versão é final de vida e não mais mantida - inclui detalhes sobre módulos e métodos.
-menu: api
-redirect_from: '  '
 ---
 
 <div id="api-doc" markdown="1">

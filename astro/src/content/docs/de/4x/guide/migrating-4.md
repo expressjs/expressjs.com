@@ -1,10 +1,6 @@
 ---
-layout: page
 title: Migration auf Express 4
 description: A guide to migrating your Express.js applications from version 3 to 4, covering changes in middleware, routing, and how to update your codebase effectively.
-menu: guide
-order: 9
-redirect_from: '  '
 ---
 
 # Wechsel zu Express 4

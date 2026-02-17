@@ -1,10 +1,6 @@
 ---
-layout: page
 title: Template-Engines für Express entwickeln
 description: Learn how to develop custom template engines for Express.js using app.engine(), with examples on creating and integrating your own template rendering logic.
-menu: advanced
-order: 1
-redirect_from: '  '
 ---
 
 # Template-Engines für Express entwickeln

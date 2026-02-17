@@ -1,10 +1,7 @@
 ---
-layout: api
 version: 5x
 title: Express 5.x - API 참조
 description: Express.js 5.x의 API 레퍼런스를 확인하여, 이 버전으로 웹 애플리케이션을 구축할 때 사용할 수 있는 모든 모듈, 메서드, 속성에 대해 자세히 알아봅니다.
-menu: api
-redirect_from: '  '
 ---
 
 <div id="api-doc" markdown="1">
