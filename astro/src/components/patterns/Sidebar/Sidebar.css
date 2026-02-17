@@ -157,7 +157,7 @@
   .sidebar-root-column {
     @media (--md-up) {
       flex: 0 0 auto;
-      padding-top: var(--space-5);
+      padding: var(--space-5) var(--space-3) var(--space-4) var(--space-3);
 
       .sidebar-nav-arrow {
         display: none;
