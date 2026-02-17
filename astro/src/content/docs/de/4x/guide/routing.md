@@ -4,7 +4,7 @@ title: Weiterleitung in Express
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
 menu: guide
 order: 1
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Weiterleitung (Routing)
@@ -26,13 +26,13 @@ to the next callback.
 Der folgende Code ist ein Beispiel für ein sehr einfaches Basisrouting.
 
 ```js
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', (req, res) => {
-  res.send('hello world')
-})
+  res.send('hello world');
+});
 ```
 
 <h2 id="route-methods">Weiterleitungsmethoden</h2>
@@ -44,13 +44,13 @@ Der folgende Code ist ein Beispiel für Weiterleitungen, die für die Methoden G
 ```js
 // GET method route
 app.get('/', (req, res) => {
-  res.send('GET request to the homepage')
-})
+  res.send('GET request to the homepage');
+});
 
 // POST method route
 app.post('/', (req, res) => {
-  res.send('POST request to the homepage')
-})
+  res.send('POST request to the homepage');
+});
 ```
 
 Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
@@ -60,9 +60,9 @@ Es gibt eine spezielle Weiterleitungsmethode, `app.all()`, die nicht von einer H
 
 ```js
 app.all('/secret', (req, res, next) => {
-  console.log('Accessing the secret section ...')
-  next() // pass control to the next handler
-})
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+});
 ```
 
 <h2 id="route-paths">Weiterleitungspfade</h2>
@@ -100,24 +100,24 @@ Dieser Weiterleitungspfad gleicht Weiterleitungsanforderungen zum Stammverzeichn
 
 ```js
 app.get('/', (req, res) => {
-  res.send('root')
-})
+  res.send('root');
+});
 ```
 
 Dieser Weiterleitungspfad gleicht Anforderungen mit `/about` ab.
 
 ```js
 app.get('/about', (req, res) => {
-  res.send('about')
-})
+  res.send('about');
+});
 ```
 
 Dieser Weiterleitungspfad gleicht Anforderungen mit `/random.text` ab.
 
 ```js
 app.get('/random.text', (req, res) => {
-  res.send('random.text')
-})
+  res.send('random.text');
+});
 ```
 
 ### Route paths based on string patterns
@@ -130,32 +130,32 @@ Dieser Weiterleitungspfad gleicht `acd` und `abcd` ab.
 
 ```js
 app.get('/ab?cd', (req, res) => {
-  res.send('ab?cd')
-})
+  res.send('ab?cd');
+});
 ```
 
 Dies sind einige Beispiele für Weiterleitungspfade auf Basis von Zeichenfolgemustern.
 
 ```js
 app.get('/ab+cd', (req, res) => {
-  res.send('ab+cd')
-})
+  res.send('ab+cd');
+});
 ```
 
 Dies sind einige Beispiele für Weiterleitungspfade auf Basis von Zeichenfolgen.
 
 ```js
 app.get('/ab*cd', (req, res) => {
-  res.send('ab*cd')
-})
+  res.send('ab*cd');
+});
 ```
 
 Dieser Weiterleitungspfad gleicht `/abe` und `/abcde` ab.
 
 ```js
 app.get('/ab(cd)?e', (req, res) => {
-  res.send('ab(cd)?e')
-})
+  res.send('ab(cd)?e');
+});
 ```
 
 ### Route paths based on regular expressions
@@ -164,16 +164,16 @@ Dieser Weiterleitungspfad gleicht alle Weiterleitungsnamen ab, die den Buchstabe
 
 ```js
 app.get(/a/, (req, res) => {
-  res.send('/a/')
-})
+  res.send('/a/');
+});
 ```
 
 Dieser Weiterleitungspfad gleicht `butterfly` und `dragonfly`, jedoch nicht `butterflyman`, `dragonfly man` usw.
 
 ```js
 app.get(/.*fly$/, (req, res) => {
-  res.send('/.*fly$/')
-})
+  res.send('/.*fly$/');
+});
 ```
 
 <h2 id="route-parameters">Route parameters</h2>
@@ -190,8 +190,8 @@ To define routes with route parameters, simply specify the route parameters in t
 
 ```js
 app.get('/users/:userId/books/:bookId', (req, res) => {
-  res.send(req.params)
-})
+  res.send(req.params);
+});
 ```
 
 <div class="doc-box doc-notice" markdown="1">
@@ -248,14 +248,14 @@ Sie können mehrere Callback-Funktionen angeben, die sich wie [Middleware](/{{ p
 ```js
 app.get('/user/:id', (req, res, next) => {
   if (req.params.id === '0') {
-    return next('route')
+    return next('route');
   }
-  res.send(`User ${req.params.id}`)
-})
+  res.send(`User ${req.params.id}`);
+});
 
 app.get('/user/:id', (req, res) => {
-  res.send('Special handler for user ID 0')
-})
+  res.send('Special handler for user ID 0');
+});
 ```
 
 In this example:
@@ -269,68 +269,77 @@ Eine einzelne Callback-Funktion kann eine Weiterleitung verarbeiten. Beispiel:
 
 ```js
 app.get('/example/a', (req, res) => {
-  res.send('Hello from A!')
-})
+  res.send('Hello from A!');
+});
 ```
 
 Mehrere Callback-Funktionen können eine Weiterleitung verarbeiten (achten Sie darauf, dass Sie das Objekt `next` angeben). Beispiel:
 
 ```js
-app.get('/example/b', (req, res, next) => {
-  console.log('the response will be sent by the next function ...')
-  next()
-}, (req, res) => {
-  res.send('Hello from B!')
-})
+app.get(
+  '/example/b',
+  (req, res, next) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req, res) => {
+    res.send('Hello from B!');
+  }
+);
 ```
 
 Ein Array von Callback-Funktionen kann eine Weiterleitung verarbeiten. Beispiel:
 
 ```js
 const cb0 = function (req, res, next) {
-  console.log('CB0')
-  next()
-}
+  console.log('CB0');
+  next();
+};
 
 const cb1 = function (req, res, next) {
-  console.log('CB1')
-  next()
-}
+  console.log('CB1');
+  next();
+};
 
 const cb2 = function (req, res) {
-  res.send('Hello from C!')
-}
+  res.send('Hello from C!');
+};
 
-app.get('/example/c', [cb0, cb1, cb2])
+app.get('/example/c', [cb0, cb1, cb2]);
 ```
 
 Eine Kombination aus unabhängigen Funktionen und Funktionsarrays kann eine Weiterleitung verarbeiten. Beispiel:
 
 ```js
 const cb0 = function (req, res, next) {
-  console.log('CB0')
-  next()
-}
+  console.log('CB0');
+  next();
+};
 
 const cb1 = function (req, res, next) {
-  console.log('CB1')
-  next()
-}
+  console.log('CB1');
+  next();
+};
 
-app.get('/example/d', [cb0, cb1], (req, res, next) => {
-  console.log('the response will be sent by the next function ...')
-  next()
-}, (req, res) => {
-  res.send('Hello from D!')
-})
+app.get(
+  '/example/d',
+  [cb0, cb1],
+  (req, res, next) => {
+    console.log('the response will be sent by the next function ...');
+    next();
+  },
+  (req, res) => {
+    res.send('Hello from D!');
+  }
+);
 ```
 
 <h2 id="response-methods">Antwortmethoden</h2>
 
 Über die Methoden für das Antwortobjekt (`res`) in der folgenden Tabelle kann eine Antwort an den Client gesendet und der Anforderung/Antwort-Zyklus beendet werden. Wenn keine dieser Methoden über einen Routenhandler aufgerufen wird, bleibt die Clientanforderung im Status "blockiert".
 
-| Methode                                                                                                                                                                                                                   | Beschreibung                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Methode                                                         | Beschreibung                                                                                    |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | [res.download()](/{{ page.lang }}/4x/api.html#res.download)     | Gibt eine Eingabeaufforderung zum Herunterladen einer Datei aus.                                |
 | [res.end()](/{{ page.lang }}/4x/api.html#res.end)               | End the response process.                                                                       |
 | [res.json()](/{{ page.lang }}/4x/api.html#res.json)             | Sendet eine JSON-Antwort.                                                                       |
@@ -338,7 +347,7 @@ app.get('/example/d', [cb0, cb1], (req, res, next) => {
 | [res.redirect()](/{{ page.lang }}/4x/api.html#res.redirect)     | Leitet eine Anforderung um.                                                                     |
 | [res.render()](/{{ page.lang }}/4x/api.html#res.render)         | Render a view template.                                                                         |
 | [res.send()](/{{ page.lang }}/4x/api.html#res.send)             | Sendet eine Antwort mit unterschiedlichen Typen.                                                |
-| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)                          | Sendet eine Datei als Oktett-Stream.                                                            |
+| [res.sendFile](/{{ page.lang }}/4x/api.html#res.sendFile)       | Sendet eine Datei als Oktett-Stream.                                                            |
 | [res.sendStatus()](/{{ page.lang }}/4x/api.html#res.sendStatus) | Legt den Antwortstatuscode fest und sendet dessen Zeichenfolgedarstellung als Antworthauptteil. |
 
 <h2 id="app-route">app.route()</h2>
@@ -349,16 +358,17 @@ Da der Pfad an einer einzelnen Position angegeben wird, ist das Erstellen modula
 Dies ist ein Beispiel für verkettete Routenhandler, die mit der Funktion `app.route()` definiert werden.
 
 ```js
-app.route('/book')
+app
+  .route('/book')
   .get((req, res) => {
-    res.send('Get a random book')
+    res.send('Get a random book');
   })
   .post((req, res) => {
-    res.send('Add a book')
+    res.send('Add a book');
   })
   .put((req, res) => {
-    res.send('Update the book')
-  })
+    res.send('Update the book');
+  });
 ```
 
 <h2 id="express-router">express.Router</h2>
@@ -370,36 +380,36 @@ Im folgenden Beispiel wird ein Router als Modul erstellt, eine Middlewarefunktio
 Erstellen Sie eine Routerdatei namens `birds.js` mit dem folgenden Inhalt im Anwendungsverzeichnis:
 
 ```js
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
 // middleware that is specific to this router
 const timeLog = (req, res, next) => {
-  console.log('Time: ', Date.now())
-  next()
-}
-router.use(timeLog)
+  console.log('Time: ', Date.now());
+  next();
+};
+router.use(timeLog);
 
 // define the home page route
 router.get('/', (req, res) => {
-  res.send('Birds home page')
-})
+  res.send('Birds home page');
+});
 // define the about route
 router.get('/about', (req, res) => {
-  res.send('About birds')
-})
+  res.send('About birds');
+});
 
-module.exports = router
+module.exports = router;
 ```
 
 Laden Sie dann das Routermodul in die Anwendung:
 
 ```js
-const birds = require('./birds')
+const birds = require('./birds');
 
 // ...
 
-app.use('/birds', birds)
+app.use('/birds', birds);
 ```
 
 Die Anwendung kann nun Anforderungen an die Pfade `/birds` und `/birds/about` bearbeiten und ruft die Middlewarefunktion `timeLog` auf, die speziell für diese Weiterleitung bestimmt ist.
@@ -407,5 +417,5 @@ Die Anwendung kann nun Anforderungen an die Pfade `/birds` und `/birds/about` be
 But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/{{ page.lang }}/5x/api.html#app.use).
 
 ```js
-const router = express.Router({ mergeParams: true })
+const router = express.Router({ mergeParams: true });
 ```

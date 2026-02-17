@@ -3,36 +3,44 @@ import type { Menu } from '../types';
 export const docsMenu: Menu = {
   sections: [
     {
-      title: 'Getting started',
+      title: 'menu.gettingStarted',
       items: [
-        { href: `/starter/installing`, label: 'Installing', ariaLabel: 'Installing Express' },
-        { href: `/starter/hello-world`, label: 'Hello world', ariaLabel: 'Hello world example' },
-        { href: `/starter/generator`, label: 'Express generator', ariaLabel: 'Express generator' },
+        { href: `/starter/installing`, label: 'menu.installing', ariaLabel: 'menu.installingAria' },
+        {
+          href: `/starter/hello-world`,
+          label: 'menu.helloWorld',
+          ariaLabel: 'menu.helloWorldAria',
+        },
+        {
+          href: `/starter/generator`,
+          label: 'menu.expressGenerator',
+          ariaLabel: 'menu.expressGeneratorAria',
+        },
       ],
     },
     {
-      title: 'Guide',
+      title: 'menu.guide',
       items: [
-        { href: `/guide/routing`, label: 'Routing', ariaLabel: 'Routing guide' },
+        { href: `/guide/routing`, label: 'menu.routing', ariaLabel: 'menu.routingAria' },
         {
           href: `/guide/writing-middleware`,
-          label: 'Writing middleware',
-          ariaLabel: 'Writing middleware guide',
+          label: 'menu.writingMiddleware',
+          ariaLabel: 'menu.writingMiddlewareAria',
         },
         {
           href: `/guide/using-middleware`,
-          label: 'Using middleware',
-          ariaLabel: 'Using middleware guide',
+          label: 'menu.usingMiddleware',
+          ariaLabel: 'menu.usingMiddlewareAria',
         },
       ],
     },
     {
-      title: 'Advanced topics',
+      title: 'menu.advancedTopics',
       items: [
         {
           href: `/advanced/developing-template-engines`,
-          label: 'Building template engines',
-          ariaLabel: 'Building template engines guide',
+          label: 'menu.buildingTemplateEngines',
+          ariaLabel: 'menu.buildingTemplateEnginesAria',
         },
       ],
     },

@@ -4,7 +4,7 @@ title: Leistungsspezifische Best Practices für Express-Anwendungen in Produktio
 description: Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.
 menu: advanced
 order: 4
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Best Practices in Produktionsumgebungen: Leistung und Zuverlässigkeit
@@ -40,11 +40,11 @@ Dies sind einige Beispiele für Maßnahmen, die Sie an Ihrem Code vornehmen kön
 Mit der GZIP-Komprimierung lässt sich die Größe des Antworthauptteils deutlich verringern und somit die Geschwindigkeit der Webanwendung erhöhen. Verwenden Sie die Middleware [compression](https://www.npmjs.com/package/compression) für die GZIP-Komprimierung in Ihrer Express-Anwendung. Beispiel:
 
 ```js
-const compression = require('compression')
-const express = require('express')
-const app = express()
+const compression = require('compression');
+const express = require('express');
+const app = express();
 
-app.use(compression())
+app.use(compression());
 ```
 
 Bei Websites mit hohem Datenverkehr in Produktionsumgebungen lässt sich die Komprimierung am besten installieren, indem sie auf Reverse Proxy-Ebene implementiert wird (siehe [Reverse Proxy verwenden](#proxy)). In diesem Fall wird die Middleware "compression" nicht benötigt. Details zur Aktivierung der GZIP-Komprimierung in Nginx siehe [Modul ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in der Nginx-Dokumentation.
@@ -95,15 +95,15 @@ Diese Middlewarefunktion akzeptiert einen Abfragefeldparameter mit dem Namen "pa
 app.get('/search', (req, res) => {
   // Simulating async operation
   setImmediate(() => {
-    const jsonStr = req.query.params
+    const jsonStr = req.query.params;
     try {
-      const jsonObj = JSON.parse(jsonStr)
-      res.send('Success')
+      const jsonObj = JSON.parse(jsonStr);
+      res.send('Success');
     } catch (e) {
-      res.status(400).send('Invalid JSON string')
+      res.status(400).send('Invalid JSON string');
     }
-  })
-})
+  });
+});
 ```
 
 "try-catch" funktioniert jedoch nur in synchronem Code. Da die Node-Plattform primär asynchron ist (insbesondere in einer Produktionsumgebung), lassen sich mit "try-catch" nicht besonders viele Ausnahmebedingungen abfangen.
@@ -114,24 +114,24 @@ When an error is thrown in an `async` function or a rejected promise is awaited 
 
 ```js
 app.get('/', async (req, res, next) => {
-  const data = await userData() // If this promise fails, it will automatically call `next(err)` to handle the error.
+  const data = await userData(); // If this promise fails, it will automatically call `next(err)` to handle the error.
 
-  res.send(data)
-})
+  res.send(data);
+});
 
 app.use((err, req, res, next) => {
-  res.status(err.status ?? 500).send({ error: err.message })
-})
+  res.status(err.status ?? 500).send({ error: err.message });
+});
 ```
 
 Also, you can use asynchronous functions for your middleware, and the router will handle errors if the promise fails, for example:
 
 ```js
 app.use(async (req, res, next) => {
-  req.locals.user = await getUser(req)
+  req.locals.user = await getUser(req);
 
-  next() // This will be called if the promise does not throw an error.
-})
+  next(); // This will be called if the promise does not throw an error.
+});
 ```
 
 Best practice is to handle errors as close to the site as possible. So while this is now handled in the router, it’s best to catch the error in the middleware and handle it without relying on separate error-handling middleware.
@@ -191,7 +191,7 @@ Node-Anwendungen stürzen ab, wenn eine nicht abgefangene Ausnahmebedingung auft
 
 #### Prozessmanager verwenden
 
-In Entwicklungumgebungen wird die Anwendung einfach über die Befehlszeile mit `node server.js` oder einer vergleichbaren Datei gestartet. In der Produktionsumgebung hingegen ist durch diese Vorgehensweise die Katastrophe bereits vorprogrammiert. Wenn die Anwendung abstürzt, ist sie solange offline, bis Sie sie erneut starten. Um sicherzustellen, dass Ihre Anwendung nach einem Absturz neu gestartet wird, sollten Sie einen Prozessmanager verwenden. Ein Prozessmanager ist ein "Container" für Anwendungen, der die Bereitstellung erleichtert, eine hohe Verfügbarkeit sicherstellt und  die Verwaltung der Anwendung zur Laufzeit ermöglicht.
+In Entwicklungumgebungen wird die Anwendung einfach über die Befehlszeile mit `node server.js` oder einer vergleichbaren Datei gestartet. In der Produktionsumgebung hingegen ist durch diese Vorgehensweise die Katastrophe bereits vorprogrammiert. Wenn die Anwendung abstürzt, ist sie solange offline, bis Sie sie erneut starten. Um sicherzustellen, dass Ihre Anwendung nach einem Absturz neu gestartet wird, sollten Sie einen Prozessmanager verwenden. Ein Prozessmanager ist ein "Container" für Anwendungen, der die Bereitstellung erleichtert, eine hohe Verfügbarkeit sicherstellt und die Verwaltung der Anwendung zur Laufzeit ermöglicht.
 
 Neben einem Neustart der Anwendung nach einem Absturz bietet ein Prozessmanager noch weitere Möglichkeiten:
 

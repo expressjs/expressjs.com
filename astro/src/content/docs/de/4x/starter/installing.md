@@ -4,7 +4,7 @@ title: Express installieren
 description: Erfahren Sie, wie Sie Express.js in Ihrer Node.js-Umgebung installieren, wie Sie Ihr Projektverzeichnis aufsetzen und Abhängigkeiten mit npm verwalten.
 menu: starter
 order: 1
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Installation

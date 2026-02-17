@@ -4,7 +4,7 @@ title: Migration auf Express 5
 description: A comprehensive guide to migrating your Express.js applications from version 4 to 5, detailing breaking changes, deprecated methods, and new improvements.
 menu: guide
 order: 10
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Wechsel zu Express 5
@@ -109,12 +109,12 @@ npx @expressjs/codemod v4-deprecated-signatures
 
 ```js
 // v4
-app.del("/user/:id", (req, res) => {
+app.del('/user/:id', (req, res) => {
   res.send(`DELETE /user/${req.params.id}`);
 });
 
 // v5
-app.delete("/user/:id", (req, res) => {
+app.delete('/user/:id', (req, res) => {
   res.send(`DELETE /user/${req.params.id}`);
 });
 ```
@@ -146,19 +146,19 @@ npx @expressjs/codemod pluralized-methods
 
 ```js
 // v4
-app.all("/", (req, res) => {
-  req.acceptsCharset("utf-8");
-  req.acceptsEncoding("br");
-  req.acceptsLanguage("en");
+app.all('/', (req, res) => {
+  req.acceptsCharset('utf-8');
+  req.acceptsEncoding('br');
+  req.acceptsLanguage('en');
 
   // ...
 });
 
 // v5
-app.all("/", (req, res) => {
-  req.acceptsCharsets("utf-8");
-  req.acceptsEncodings("br");
-  req.acceptsLanguages("en");
+app.all('/', (req, res) => {
+  req.acceptsCharsets('utf-8');
+  req.acceptsEncodings('br');
+  req.acceptsLanguages('en');
 
   // ...
 });
@@ -187,16 +187,16 @@ npx @expressjs/codemod req-param
 
 ```js
 // v4
-app.post("/user", (req, res) => {
-  const id = req.param("id");
-  const body = req.param("body");
-  const query = req.param("query");
+app.post('/user', (req, res) => {
+  const id = req.param('id');
+  const body = req.param('body');
+  const query = req.param('query');
 
   // ...
 });
 
 // v5
-app.post("/user", (req, res) => {
+app.post('/user', (req, res) => {
   const id = req.params.id;
   const body = req.body;
   const query = req.query;
@@ -213,13 +213,13 @@ Express 5 unterstützt die Signatur `res.json(obj, status)` nicht mehr. Stattdes
 
 ```js
 // v4
-app.post("/user", (req, res) => {
-  res.json({ name: "Ruben" }, 201);
+app.post('/user', (req, res) => {
+  res.json({ name: 'Ruben' }, 201);
 });
 
 // v5
-app.post("/user", (req, res) => {
-  res.status(201).json({ name: "Ruben" });
+app.post('/user', (req, res) => {
+  res.status(201).json({ name: 'Ruben' });
 });
 ```
 
@@ -231,13 +231,13 @@ Express 5 unterstützt die Signatur `res.jsonp(obj, status)` nicht mehr. Stattde
 
 ```js
 // v4
-app.post("/user", (req, res) => {
-  res.jsonp({ name: "Ruben" }, 201);
+app.post('/user', (req, res) => {
+  res.jsonp({ name: 'Ruben' }, 201);
 });
 
 // v5
-app.post("/user", (req, res) => {
-  res.status(201).jsonp({ name: "Ruben" });
+app.post('/user', (req, res) => {
+  res.status(201).jsonp({ name: 'Ruben' });
 });
 ```
 
@@ -249,13 +249,13 @@ Express 5 unterstützt die Signatur `res.send(obj, status)` nicht mehr. Stattdes
 
 ```js
 // v4
-app.get("/user", (req, res) => {
-  res.redirect("/users", 301);
+app.get('/user', (req, res) => {
+  res.redirect('/users', 301);
 });
 
 // v5
-app.get("/user", (req, res) => {
-  res.redirect(301, "/users");
+app.get('/user', (req, res) => {
+  res.redirect(301, '/users');
 });
 ```
 
@@ -276,13 +276,13 @@ npx @expressjs/codemod magic-redirect
 
 ```js
 // v4
-app.get("/user", (req, res) => {
-  res.redirect("back");
+app.get('/user', (req, res) => {
+  res.redirect('back');
 });
 
 // v5
-app.get("/user", (req, res) => {
-  res.redirect(req.get("Referrer") || "/");
+app.get('/user', (req, res) => {
+  res.redirect(req.get('Referrer') || '/');
 });
 ```
 
@@ -294,13 +294,13 @@ Express 5 no longer supports the signature `res.send(obj, status)`. Instead, set
 
 ```js
 // v4
-app.get("/user", (req, res) => {
-  res.send({ name: "Ruben" }, 200);
+app.get('/user', (req, res) => {
+  res.send({ name: 'Ruben' }, 200);
 });
 
 // v5
-app.get("/user", (req, res) => {
-  res.status(200).send({ name: "Ruben" });
+app.get('/user', (req, res) => {
+  res.status(200).send({ name: 'Ruben' });
 });
 ```
 
@@ -313,12 +313,12 @@ Wenn Sie eine Zahl senden und hierfür die Funktion `res.send()` verwenden müss
 
 ```js
 // v4
-app.get("/user", (req, res) => {
+app.get('/user', (req, res) => {
   res.send(200);
 });
 
 // v5
-app.get("/user", (req, res) => {
+app.get('/user', (req, res) => {
   res.sendStatus(200);
 });
 ```
@@ -340,13 +340,13 @@ Die Funktion `res.sendfile()` wurde durch eine Version in Camel-Schreibweise von
 
 ```js
 // v4
-app.get("/user", (req, res) => {
-  res.sendfile("/path/to/file");
+app.get('/user', (req, res) => {
+  res.sendfile('/path/to/file');
 });
 
 // v5
-app.get("/user", (req, res) => {
-  res.sendFile("/path/to/file");
+app.get('/user', (req, res) => {
+  res.sendFile('/path/to/file');
 });
 ```
 
@@ -370,11 +370,11 @@ Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work wit
 
 ```js
 // v4
-express.static.mime.lookup("json");
+express.static.mime.lookup('json');
 
 // v5
-const mime = require("mime-types");
-mime.lookup("json");
+const mime = require('mime-types');
+mime.lookup('json');
 ```
 
 <h3 id="express:router-debug-logs">express:router debug logs</h3>
@@ -406,13 +406,13 @@ Path route matching syntax is when a string is supplied as the first parameter t
 
 ```js
 // v4
-app.get("/*", async (req, res) => {
-  res.send("ok");
+app.get('/*', async (req, res) => {
+  res.send('ok');
 });
 
 // v5
-app.get("/*splat", async (req, res) => {
-  res.send("ok");
+app.get('/*splat', async (req, res) => {
+  res.send('ok');
 });
 ```
 
@@ -421,8 +421,8 @@ app.get("/*splat", async (req, res) => {
 
 ```js
 // v5
-app.get("/{*splat}", async (req, res) => {
-  res.send("ok");
+app.get('/{*splat}', async (req, res) => {
+  res.send('ok');
 });
 ```
 
@@ -433,29 +433,29 @@ app.get("/{*splat}", async (req, res) => {
 
 ```js
 // v4
-app.get("/:file.:ext?", async (req, res) => {
-  res.send("ok");
+app.get('/:file.:ext?', async (req, res) => {
+  res.send('ok');
 });
 
 // v5
-app.get("/:file{.:ext}", async (req, res) => {
-  res.send("ok");
+app.get('/:file{.:ext}', async (req, res) => {
+  res.send('ok');
 });
 ```
 
 - Regexp characters are not supported. Beispiel:
 
 ```js
-app.get("/[discussion|page]/:slug", async (req, res) => {
-  res.status(200).send("ok");
+app.get('/[discussion|page]/:slug', async (req, res) => {
+  res.status(200).send('ok');
 });
 ```
 
 should be changed to:
 
 ```js
-app.get(["/discussion/:slug", "/page/:slug"], async (req, res) => {
-  res.status(200).send("ok");
+app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
+  res.status(200).send('ok');
 });
 ```
 
@@ -480,7 +480,7 @@ Example of breaking code:
 
 ```js
 // v4
-app.use(express.static("public"));
+app.use(express.static('public'));
 ```
 
 After migrating to Express 5, a request to `/.well-known/assetlinks.json` will result in a **404 Not Found**.
@@ -489,11 +489,8 @@ To fix this, serve specific dot-directories explicitly using the `dotfiles: "all
 
 ```js
 // v5
-app.use(
-  "/.well-known",
-  express.static("public/.well-known", { dotfiles: "allow" }),
-);
-app.use(express.static("public"));
+app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' }));
+app.use(express.static('public'));
 ```
 
 This approach allows you to safely serve only the intended dot-directories while keeping the default secure behavior for other dotfiles, which remain inaccessible.
@@ -504,7 +501,7 @@ In Express 5, the `app.listen` method will invoke the user-provided callback fun
 Beispiel:
 
 ```js
-const server = app.listen(8080, "0.0.0.0", (error) => {
+const server = app.listen(8080, '0.0.0.0', (error) => {
   if (error) {
     throw error; // e.g. EADDRINUSE
   }
@@ -533,7 +530,7 @@ The `req.params` object now has a **null prototype** when using string paths. Ho
 Wildcards (e.g., `/*splat`) capture path segments as an array instead of a single string.
 
 ```js
-app.get("/*splat", (req, res) => {
+app.get('/*splat', (req, res) => {
   // GET /foo/bar
   console.dir(req.params);
   // => [Object: null prototype] { splat: [ 'foo', 'bar' ] }
@@ -546,21 +543,21 @@ In Express 4, unmatched wildcards were empty strings (`''`) and optional `:` par
 
 ```js
 // v4: unmatched wildcard is empty string
-app.get("/*", (req, res) => {
+app.get('/*', (req, res) => {
   // GET /
   console.dir(req.params);
   // => { '0': '' }
 });
 
 // v4: unmatched optional param is undefined
-app.get("/:file.:ext?", (req, res) => {
+app.get('/:file.:ext?', (req, res) => {
   // GET /image
   console.dir(req.params);
   // => { file: 'image', ext: undefined }
 });
 
 // v5: unmatched optional param is omitted
-app.get("/:file{.:ext}", (req, res) => {
+app.get('/:file{.:ext}', (req, res) => {
   // GET /image
   console.dir(req.params);
   // => [Object: null prototype] { file: 'image' }

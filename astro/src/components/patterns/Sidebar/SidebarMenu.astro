@@ -6,6 +6,7 @@ import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
 import SidebarItemsList from './SidebarItemsList.astro';
 import { useTranslations } from '@/i18n/utils';
+import { ui } from '@/i18n/ui';
 import {
   shouldOmitSection,
   collectAllSubmenus,
@@ -42,7 +43,7 @@ const {
   parentId = 'root',
 } = Astro.props;
 
-const t = useTranslations(lang as any);
+const t = useTranslations(lang as keyof typeof ui);
 
 const submenus: SubmenuData[] = [];
 if (level === 0) {
@@ -74,26 +75,31 @@ const initialActiveLevel =
           </li>
           {menu.sections
             ?.filter((section) => !shouldOmitSection(section, version))
-            .map((section, sectionIndex) => (
-              <li class="sidebar-section">
-                {section.title && <Body as="h3">{section.title}</Body>}
-                <ul class="sidebar-section-list">
-                  <SidebarItemsList
-                    items={section.items}
-                    parentId={parentId}
-                    sectionIndex={sectionIndex}
-                    currentPath={currentPath}
-                    lang={lang}
-                    basePath={basePath}
-                    versioned={versioned}
-                    version={version}
-                    variant="root"
-                    showIcon={true}
-                    targetLevel={level + 1}
-                  />
-                </ul>
-              </li>
-            ))}
+            .map((section, sectionIndex) => {
+              const translatedSectionTitle = section.title?.startsWith('menu.')
+                ? t(section.title)
+                : section.title;
+              return (
+                <li class="sidebar-section">
+                  {section.title && <Body as="h3">{translatedSectionTitle}</Body>}
+                  <ul class="sidebar-section-list">
+                    <SidebarItemsList
+                      items={section.items}
+                      parentId={parentId}
+                      sectionIndex={sectionIndex}
+                      currentPath={currentPath}
+                      lang={lang}
+                      basePath={basePath}
+                      versioned={versioned}
+                      version={version}
+                      variant="root"
+                      showIcon={true}
+                      targetLevel={level + 1}
+                    />
+                  </ul>
+                </li>
+              );
+            })}
           <SidebarItemsList
             items={menu.items ?? []}
             parentId={parentId}
@@ -155,11 +161,11 @@ const initialActiveLevel =
                       data-version-switcher
                     />
                   )}
-                  <nav class="sidebar-nav" aria-label={`${submenu.title} navigation`}>
+                  <nav class="sidebar-nav" aria-label={`${t(submenu.title)} navigation`}>
                     <button
                       class="sidebar-nav-back"
                       type="button"
-                      aria-label={`Go back from ${submenu.title}`}
+                      aria-label={`Go back from ${t(submenu.title)}`}
                       data-back-button
                       data-target-level={navLevel - 1}
                     >
@@ -170,36 +176,45 @@ const initialActiveLevel =
                         aria-hidden="true"
                       />
                       <Body as="span" weight="bold" vMargin={false}>
-                        {submenu.title}
+                        {t(submenu.title)}
                       </Body>
                     </button>
                     <div class="sidebar-nav-content">
                       {submenu.menu.sections
                         ?.filter((section) => !shouldOmitSection(section, version))
-                        .map((section, sectionIndex) => (
-                          <div class="sidebar-section" data-section-index={sectionIndex}>
-                            {section.title && (
-                              <Body as="h3" weight="bold" aria-label={`Section: ${section.title}`}>
-                                {section.title}
-                              </Body>
-                            )}
-                            <ul class="sidebar-section-list">
-                              <SidebarItemsList
-                                items={section.items}
-                                parentId={submenu.id}
-                                sectionIndex={sectionIndex}
-                                currentPath={currentPath}
-                                lang={lang}
-                                basePath={submenu.basePath}
-                                versioned={submenu.versioned}
-                                version={version}
-                                variant="nested"
-                                showIcon={false}
-                                targetLevel={navLevel + 1}
-                              />
-                            </ul>
-                          </div>
-                        ))}
+                        .map((section, sectionIndex) => {
+                          const translatedSectionTitle = section.title?.startsWith('menu.')
+                            ? t(section.title)
+                            : section.title;
+                          return (
+                            <div class="sidebar-section" data-section-index={sectionIndex}>
+                              {section.title && (
+                                <Body
+                                  as="h3"
+                                  weight="bold"
+                                  aria-label={`Section: ${translatedSectionTitle}`}
+                                >
+                                  {translatedSectionTitle}
+                                </Body>
+                              )}
+                              <ul class="sidebar-section-list">
+                                <SidebarItemsList
+                                  items={section.items}
+                                  parentId={submenu.id}
+                                  sectionIndex={sectionIndex}
+                                  currentPath={currentPath}
+                                  lang={lang}
+                                  basePath={submenu.basePath}
+                                  versioned={submenu.versioned}
+                                  version={version}
+                                  variant="nested"
+                                  showIcon={false}
+                                  targetLevel={navLevel + 1}
+                                />
+                              </ul>
+                            </div>
+                          );
+                        })}
                       {submenu.menu.items && submenu.menu.items.length > 0 && (
                         <ul class="sidebar-section-list">
                           <SidebarItemsList

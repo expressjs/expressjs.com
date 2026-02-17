@@ -12,7 +12,7 @@ export interface SelectOption<T = string> {
   /** Whether the option is disabled */
   disabled?: boolean;
   /** Optional data to pass to custom renderers */
-  data?: Record<string, any>;
+  data?: Record<string, unknown>;
 }
 
 export type SelectSize = 'sm' | 'md' | 'lg';

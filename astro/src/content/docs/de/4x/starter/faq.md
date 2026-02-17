@@ -4,7 +4,7 @@ title: Häufig gestellte Fragen zu Express
 description: Finden Sie Antworten auf häufig gestellte Fragen zu Express.js, darunter Themen wie Anwendungsstruktur, Models, Authentifizierung, Template-Engines, Fehlerbehandlung und mehr.
 menu: starter
 order: 7
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Häufig gestellte Fragen
@@ -47,8 +47,8 @@ In Express sind 404-Antworten nicht das Ergebnis eines Fehlers, sodass diese Ant
 
 ```js
 app.use((req, res, next) => {
-  res.status(404).send("Sorry can't find that!")
-})
+  res.status(404).send("Sorry can't find that!");
+});
 ```
 
 Add routes dynamically at runtime on an instance of `express.Router()`
@@ -60,9 +60,9 @@ Middleware für die Fehlerbehandlung wird in derselben Weise definiert wie ander
 
 ```js
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
-})
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 ```
 
 Weitere Informationen siehe [Fehlerbehandlung](/{{ page.lang }}/guide/error-handling.html).

@@ -4,7 +4,7 @@ title: Express hinter Proxys
 description: Learn how to configure Express.js applications to work correctly behind reverse proxies, including using the trust proxy setting to handle client IP addresses.
 menu: guide
 order: 8
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Express hinter Proxys
@@ -43,10 +43,10 @@ An IP address, subnet, or an array of IP addresses and subnets to trust as being
 Sie können IP-Adressen wie folgt festlegen:
 
 ```js
-app.set('trust proxy', 'loopback') // specify a single subnet
-app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
-app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+app.set('trust proxy', 'loopback'); // specify a single subnet
+app.set('trust proxy', 'loopback, 123.123.123.123'); // specify a subnet and an address
+app.set('trust proxy', 'loopback, linklocal, uniquelocal'); // specify multiple subnets as CSV
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // specify multiple subnets as an array
 ```
 
 Sobald die Werte angegeben wurden, werden die betreffenden IP-Adressen und Teilnetze aus dem Adressfeststellungsprozess ausgeschlossen. Die nicht vertrauenswürdige IP-Adresse, die am nächsten zum Anwendungsserver liegt, wird als IP-Adresse des Clients festgelegt. This works by checking if `req.socket.remoteAddress` is trusted. If so, then each address in `X-Forwarded-For` is checked from right to left until the first non-trusted address.
@@ -70,9 +70,10 @@ Custom trust implementation.
 
 ```js
 app.set('trust proxy', (ip) => {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
-  else return false
-})
+  if (ip === '127.0.0.1' || ip === '123.123.123.123')
+    return true; // trusted IPs
+  else return false;
+});
 ```
 
 </td>

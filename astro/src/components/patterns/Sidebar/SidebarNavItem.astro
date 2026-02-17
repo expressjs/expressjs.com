@@ -2,6 +2,8 @@
 import type { MenuItem } from '@/config/types';
 import { BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
+import { useTranslations } from '@/i18n/utils';
+import { ui } from '@/i18n/ui';
 
 interface Props {
   item: MenuItem & { href?: string };
@@ -12,6 +14,7 @@ interface Props {
   submenuId?: string;
   targetLevel?: number;
   showIcon?: boolean;
+  lang: string;
 }
 
 const {
@@ -23,7 +26,16 @@ const {
   submenuId,
   targetLevel,
   showIcon = false,
+  lang,
 } = Astro.props;
+
+const t = useTranslations(lang as keyof typeof ui);
+
+// Translate label and ariaLabel if they start with 'menu.'
+const translatedLabel = item.label.startsWith('menu.') ? t(item.label) : item.label;
+const translatedAriaLabel = item.ariaLabel?.startsWith('menu.')
+  ? t(item.ariaLabel)
+  : item.ariaLabel;
 
 // Root submenu items with href should render as links on tablet/desktop
 const isRootSubmenuWithHref = type === 'submenu' && variant === 'root' && href;
@@ -39,7 +51,7 @@ const isRootSubmenuWithHref = type === 'submenu' && variant === 'root' && href;
           variant === 'nested' && 'sidebar-nav-item--nested',
           isActive && 'sidebar-nav-item--active',
         ]}
-        aria-label={item.ariaLabel}
+        aria-label={translatedAriaLabel}
         aria-current={isActive ? 'page' : undefined}
         data-omit-from={item.omitFrom?.join(',') || undefined}
       >
@@ -49,7 +61,7 @@ const isRootSubmenuWithHref = type === 'submenu' && variant === 'root' && href;
           </div>
         )}
         <BodyMd vMargin={false} class="sidebar-nav-label">
-          {item.label}
+          {translatedLabel}
         </BodyMd>
       </a>
     </li>
@@ -63,7 +75,7 @@ const isRootSubmenuWithHref = type === 'submenu' && variant === 'root' && href;
           'sidebar-nav-item--root-link',
           isActive && 'sidebar-nav-item--active',
         ]}
-        aria-label={item.ariaLabel}
+        aria-label={translatedAriaLabel}
         aria-current={isActive ? 'page' : undefined}
       >
         {showIcon && item.icon && (
@@ -72,13 +84,13 @@ const isRootSubmenuWithHref = type === 'submenu' && variant === 'root' && href;
           </div>
         )}
         <BodyMd vMargin={false} class="sidebar-nav-label">
-          {item.label}
+          {translatedLabel}
         </BodyMd>
       </a>
       {/* Button for mobile - hidden on tablet/desktop */}
       <button
         class:list={['sidebar-nav-item', 'sidebar-nav-item--root-submenu']}
-        aria-label={item.ariaLabel}
+        aria-label={translatedAriaLabel}
         aria-expanded="false"
         aria-controls={submenuId}
         type="button"
@@ -92,7 +104,7 @@ const isRootSubmenuWithHref = type === 'submenu' && variant === 'root' && href;
           </div>
         )}
         <BodyMd vMargin={false} class="sidebar-nav-label">
-          {item.label}
+          {translatedLabel}
         </BodyMd>
         <Icon
           name="fluent:arrow-right-20-regular"
@@ -111,7 +123,7 @@ const isRootSubmenuWithHref = type === 'submenu' && variant === 'root' && href;
           variant === 'nested' && 'sidebar-nav-item--nested',
           type === 'submenu' && variant === 'nested' && 'sidebar-nav-item--submenu',
         ]}
-        aria-label={item.ariaLabel}
+        aria-label={translatedAriaLabel}
         aria-expanded="false"
         aria-controls={submenuId}
         type="button"
@@ -125,7 +137,7 @@ const isRootSubmenuWithHref = type === 'submenu' && variant === 'root' && href;
           </div>
         )}
         <BodyMd vMargin={false} class="sidebar-nav-label">
-          {item.label}
+          {translatedLabel}
         </BodyMd>
         <Icon
           name="fluent:arrow-right-20-regular"

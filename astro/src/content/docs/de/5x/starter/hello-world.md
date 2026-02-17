@@ -4,7 +4,7 @@ title: Beispiel "Hello World" in Express
 description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
 menu: starter
 order: 2
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Beispiel "Hello World"
@@ -14,17 +14,17 @@ Dies ist wohl die einfachste Express-Anwendung, die Sie erstellen können. Es ha
 </div>
 
 ```js
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
+const port = 3000;
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.send('Hello World!');
+});
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});
 ```
 
 Die Anwendung startet einen Server und ist an Port 3000 empfangsbereit für Verbindungen. Die Anwendung antwortet mit "Hello World!" auf Anforderungen zur Stamm-URL (`/`) oder zu _route_. Bei jedem anderen Pfad lautet die Antwort **404 Not Found**.

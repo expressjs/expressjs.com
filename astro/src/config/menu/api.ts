@@ -6,18 +6,22 @@ export const apiMenu: Menu = {
       items: [
         {
           href: '/api',
-          label: 'Overview',
-          ariaLabel: 'Overview',
+          label: 'menu.overview',
+          ariaLabel: 'menu.overview',
         },
       ],
     },
     {
-      title: 'Application',
+      title: 'menu.application',
       items: [
-        { href: `/api/application/overview`, label: 'Overview', ariaLabel: 'Application overview' },
         {
-          label: 'Properties',
-          ariaLabel: 'Application properties',
+          href: `/api/application/overview`,
+          label: 'menu.overview',
+          ariaLabel: 'menu.applicationOverviewAria',
+        },
+        {
+          label: 'menu.properties',
+          ariaLabel: 'menu.applicationPropertiesAria',
           submenu: {
             items: [
               {
@@ -35,8 +39,8 @@ export const apiMenu: Menu = {
           },
         },
         {
-          label: 'Methods',
-          ariaLabel: 'Application methods',
+          label: 'menu.methods',
+          ariaLabel: 'menu.applicationMethodsAria',
           submenu: {
             items: [
               {
@@ -56,12 +60,16 @@ export const apiMenu: Menu = {
       ],
     },
     {
-      title: 'Request',
+      title: 'menu.request',
       items: [
-        { href: `/api/request/overview`, label: 'Overview', ariaLabel: 'Request overview' },
         {
-          label: 'Properties',
-          ariaLabel: 'Request properties',
+          href: `/api/request/overview`,
+          label: 'menu.overview',
+          ariaLabel: 'menu.requestOverviewAria',
+        },
+        {
+          label: 'menu.properties',
+          ariaLabel: 'menu.requestPropertiesAria',
           submenu: {
             items: [
               {
@@ -88,12 +96,16 @@ export const apiMenu: Menu = {
       ],
     },
     {
-      title: 'Response',
+      title: 'menu.response',
       items: [
-        { href: `/api/response/overview`, label: 'Overview', ariaLabel: 'Response overview' },
         {
-          label: 'Properties',
-          ariaLabel: 'Response properties',
+          href: `/api/response/overview`,
+          label: 'menu.overview',
+          ariaLabel: 'menu.responseOverviewAria',
+        },
+        {
+          label: 'menu.properties',
+          ariaLabel: 'menu.responsePropertiesAria',
           submenu: {
             items: [
               {
@@ -113,13 +125,17 @@ export const apiMenu: Menu = {
       ],
     },
     {
-      title: 'Router',
+      title: 'menu.router',
       omitFrom: ['3x'],
       items: [
-        { href: `/api/router/overview`, label: 'Overview', ariaLabel: 'Router overview' },
         {
-          label: 'Methods',
-          ariaLabel: 'Router methods',
+          href: `/api/router/overview`,
+          label: 'menu.overview',
+          ariaLabel: 'menu.routerOverviewAria',
+        },
+        {
+          label: 'menu.methods',
+          ariaLabel: 'menu.routerMethodsAria',
           submenu: {
             items: [
               {

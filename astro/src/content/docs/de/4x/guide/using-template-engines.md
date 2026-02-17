@@ -4,7 +4,7 @@ title: Template-Engines in Express verwenden
 description: Discover how to integrate and use template engines like Pug, Handlebars, and EJS with Express.js to render dynamic HTML pages efficiently.
 menu: guide
 order: 5
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Template-Engines in Express verwenden
@@ -36,7 +36,7 @@ Einige Template-Engines folgen dieser Konvention nicht. Die Bibliothek [Consolid
 Nach der Festlegung der View-Engine muss die Engine nicht angegeben oder das Template-Engine-Modul nicht in Ihre Anwendung geladen werden. Express lädt das Modul intern (wie unten für das obige Beispiel gezeigt).
 
 ```js
-app.set('view engine', 'pug')
+app.set('view engine', 'pug');
 ```
 
 Erstellen Sie eine Pug-Vorlagendatei namens `index.pug` im Verzeichnis `views` mit dem folgenden Inhalt:
@@ -53,8 +53,8 @@ Dann erstellen Sie eine Weiterleitung, um die Datei `index.pug` auszugeben. Wenn
 
 ```js
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Hey', message: 'Hello there!' })
-})
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
+});
 ```
 
 Wenn Sie eine Anforderung zur Homepage ausführen, wird die Datei `index.pug` im HTML-Format ausgegeben.

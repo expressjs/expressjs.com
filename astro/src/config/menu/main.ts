@@ -8,8 +8,8 @@ export const mainMenu: Menu = {
     {
       items: [
         {
-          label: 'Docs',
-          ariaLabel: 'Documentation',
+          label: 'menu.docs',
+          ariaLabel: 'menu.docsAria',
           icon: 'document-bullet-list-multiple-20-regular',
           href: '/starter/installing',
           submenu: {
@@ -18,8 +18,8 @@ export const mainMenu: Menu = {
           },
         },
         {
-          label: 'API',
-          ariaLabel: 'API Reference',
+          label: 'menu.api',
+          ariaLabel: 'menu.apiAria',
           icon: 'code-20-regular',
           href: '/api',
           submenu: {
@@ -28,8 +28,8 @@ export const mainMenu: Menu = {
           },
         },
         {
-          label: 'Resources',
-          ariaLabel: 'Resources',
+          label: 'menu.resources',
+          ariaLabel: 'menu.resourcesAria',
           icon: 'folder-20-regular',
           href: '/community',
           submenu: {
@@ -37,8 +37,13 @@ export const mainMenu: Menu = {
             items: resourcesMenu.items,
           },
         },
-        { href: `/blog`, label: 'Blog', icon: 'news-20-regular', ariaLabel: 'Blog' },
-        { href: `/support`, label: 'Support', icon: 'info-20-regular', ariaLabel: 'Support' },
+        { href: `/blog`, label: 'menu.blog', icon: 'news-20-regular', ariaLabel: 'menu.blogAria' },
+        {
+          href: `/support`,
+          label: 'menu.support',
+          icon: 'info-20-regular',
+          ariaLabel: 'menu.supportAria',
+        },
       ],
     },
   ],

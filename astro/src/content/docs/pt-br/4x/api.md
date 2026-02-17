@@ -4,7 +4,7 @@ version: 4x
 title: Express 4.x - Referência de API
 description: Acesse a referência da API para Express.js 4.x, detalhando todos os módulos, métodos e propriedades para construir aplicações web com esta versão.
 menu: api
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 <div id="api-doc" markdown="1">

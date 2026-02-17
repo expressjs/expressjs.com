@@ -91,10 +91,7 @@ const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
   </button>
 
   <div
-    class:list={[
-      'select-dropdown',
-      `select-dropdown--align-${dropdownAlign}`,
-    ]}
+    class:list={['select-dropdown', `select-dropdown--align-${dropdownAlign}`]}
     data-select-dropdown
     role="listbox"
     aria-label={ariaLabel}

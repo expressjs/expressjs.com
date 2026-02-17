@@ -4,7 +4,7 @@ title: Sicherheitsspezifische Best Practices für Express-Anwendungen in Produkt
 description: Discover crucial security best practices for Express apps in production, including using TLS, input validation, secure cookies, and preventing vulnerabilities.
 menu: advanced
 order: 3
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Best Practices in Produktionsumgebungen: Sicherheit
@@ -52,7 +52,7 @@ Stellen Sie außerdem sicher, dass Sie keine anfälligen Express-Versionen verwe
 
 Wenn über Ihre Anwendung vertrauliche Daten bearbeitet oder übertragen werden, sollten Sie [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) verwenden, um die Verbindung und die Daten zu schützen. Diese Technologie verschlüsselt Daten, bevor sie vom Client zum Server gesendet werden. Dadurch lassen sich einige gängige (und einfache) Hackerattacken vermeiden. Auch wenn Ajax- und POST-Anforderungen nicht sofort offensichtlich und in Browsern "versteckt" zu sein scheinen, ist deren Netzverkehr anfällig für das [Ausspionieren von Paketen](https://en.wikipedia.org/wiki/Packet_analyzer) und [Man-in-the-Middle-Attacken](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Möglicherweise sind Sie mit SSL-Verschlüsselung (Secure Socket Layer) bereits vertraut. [TLS ist einfach der nächste Entwicklungsschritt bei SSL](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515\(v=vs.85\).aspx). In anderen Worten: Wenn Sie bisher SSL verwendet haben, sollten Sie ein Upgrade auf TLS in Erwägung ziehen. Generell empfehlen wir für TLS den Nginx-Server. Eine gute Referenz zum Konfigurieren von TLS auf Nginx (und anderen Servern) ist [Empfohlene Serverkonfigurationen (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Möglicherweise sind Sie mit SSL-Verschlüsselung (Secure Socket Layer) bereits vertraut. [TLS ist einfach der nächste Entwicklungsschritt bei SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). In anderen Worten: Wenn Sie bisher SSL verwendet haben, sollten Sie ein Upgrade auf TLS in Erwägung ziehen. Generell empfehlen wir für TLS den Nginx-Server. Eine gute Referenz zum Konfigurieren von TLS auf Nginx (und anderen Servern) ist [Empfohlene Serverkonfigurationen (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
 Ein handliches Tool zum Abrufen eines kostenloses TLS-Zertifikats ist außerdem [Let's Encrypt](https://letsencrypt.org/about/), eine kostenlose, automatisierte und offene Zertifizierungsstelle der [Internet Security Research Group (ISRG)](https://letsencrypt.org/isrg/).
 
@@ -74,13 +74,13 @@ Here is an example of checking URLs before using `res.redirect` or `res.location
 app.use((req, res) => {
   try {
     if (new Url(req.query.url).host !== 'example.com') {
-      return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`)
+      return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`);
     }
   } catch (e) {
-    return res.status(400).end(`Invalid url: ${req.query.url}`)
+    return res.status(400).end(`Invalid url: ${req.query.url}`);
   }
-  res.redirect(req.query.url)
-})
+  res.redirect(req.query.url);
+});
 ```
 
 ## "Helmet" verwenden
@@ -116,8 +116,8 @@ So verwenden Sie "Helmet" in Ihrem Code:
 ```js
 // ...
 
-const helmet = require('helmet')
-app.use(helmet())
+const helmet = require('helmet');
+app.use(helmet());
 
 // ...
 ```
@@ -133,7 +133,7 @@ the HTTP response headers.
 Ein bewährtes Verfahren ist also, diesen Header mit der Methode `app.disable()` zu deaktivieren:
 
 ```js
-app.disable('x-powered-by')
+app.disable('x-powered-by');
 ```
 
 {% capture powered-advisory %}
@@ -158,14 +158,14 @@ and
 
 // custom 404
 app.use((req, res, next) => {
-  res.status(404).send("Sorry can't find that!")
-})
+  res.status(404).send("Sorry can't find that!");
+});
 
 // custom error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
-})
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 ```
 
 ## Cookies sicher verwenden
@@ -188,12 +188,14 @@ Die Verwendung des standardmäßigen Namens des Sitzungscookies kann Ihre Anwend
 Über [noSniff](https://github.com/helmetjs/dont-sniff-mimetype) werden `X-Content-Type-Options`-Header festgelegt, um bei Browsern MIME-Sniffing von Antworten weg vom deklarierten Inhaltstyp (declared content-type) vorzubeugen.
 
 ```js
-const session = require('express-session')
-app.set('trust proxy', 1) // trust first proxy
-app.use(session({
-  secret: 's3Cur3',
-  name: 'sessionId'
-}))
+const session = require('express-session');
+app.set('trust proxy', 1); // trust first proxy
+app.use(
+  session({
+    secret: 's3Cur3',
+    name: 'sessionId',
+  })
+);
 ```
 
 ### Cookie-Sicherheitsoptionen festlegen
@@ -209,22 +211,24 @@ Legen Sie die folgenden Cookieoptionen fest, um die Sicherheit zu erhöhen:
 Dies ist ein Beispiel zur Verwendung der [cookie-session](https://www.npmjs.com/package/cookie-session)-Middleware:
 
 ```js
-const session = require('cookie-session')
-const express = require('express')
-const app = express()
+const session = require('cookie-session');
+const express = require('express');
+const app = express();
 
-const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
-app.use(session({
-  name: 'session',
-  keys: ['key1', 'key2'],
-  cookie: {
-    secure: true,
-    httpOnly: true,
-    domain: 'example.com',
-    path: 'foo/bar',
-    expires: expiryDate
-  }
-}))
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+app.use(
+  session({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      domain: 'example.com',
+      path: 'foo/bar',
+      expires: expiryDate,
+    },
+  })
+);
 ```
 
 ## Prevent brute-force attacks against authorization

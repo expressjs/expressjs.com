@@ -4,7 +4,7 @@ version: 3x
 title: Express 3.x - API 參照
 description: Access the API reference for Express.js version 3.x, noting that this version is end-of-life and no longer maintained - includes details on modules and methods.
 menu: api
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 <div id="api-doc" markdown="1">

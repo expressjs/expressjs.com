@@ -4,7 +4,7 @@ title: Middleware für die Verwendung in Express-Anwendungen schreiben
 description: Learn how to write custom middleware functions for Express.js applications, including examples and best practices for enhancing request and response handling.
 menu: guide
 order: 2
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Middleware für die Verwendung in Express-Anwendungen schreiben
@@ -55,14 +55,14 @@ one called `myLogger` that prints a simple log message, one called `requestTime`
 displays the timestamp of the HTTP request, and one called `validateCookies` that validates incoming cookies.
 
 ```js
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.send('Hello World!');
+});
 
-app.listen(3000)
+app.listen(3000);
 ```
 
 <h3>Dies ist ein Beispiel einer einfachen Express-Anwendung namens "Hello World", für die Sie zwei Middlewarefunktionen definieren:</h3>
@@ -70,9 +70,9 @@ Dies ist ein einfaches Beispiel einer Middlewarefunktion namens "myLogger". Dies
 
 ```js
 const myLogger = function (req, res, next) {
-  console.log('LOGGED')
-  next()
-}
+  console.log('LOGGED');
+  next();
+};
 ```
 
 <div class="doc-box doc-notice" markdown="1">
@@ -85,21 +85,21 @@ Zum Laden der Middlewarefunktion rufen Sie `app.use()` auf und geben die Middlew
 Beispiel: Durch den folgenden Code wird die Middlewarefunktion `myLogger` vor der Weiterleitung zum Stammverzeichnispfad (/) geladen.
 
 ```js
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 const myLogger = function (req, res, next) {
-  console.log('LOGGED')
-  next()
-}
+  console.log('LOGGED');
+  next();
+};
 
-app.use(myLogger)
+app.use(myLogger);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.send('Hello World!');
+});
 
-app.listen(3000)
+app.listen(3000);
 ```
 
 Sobald die Anwendung eine Anforderung erhält, gibt sie die Nachricht "LOGGED" an das Terminal aus.
@@ -116,31 +116,31 @@ Im nächsten Beispiel wird die Eigenschaft `requestTime` zum Anforderungsobjekt 
 
 ```js
 const requestTime = function (req, res, next) {
-  req.requestTime = Date.now()
-  next()
-}
+  req.requestTime = Date.now();
+  next();
+};
 ```
 
 Die Anwendung verwendet nun die Middlewarefunktion `requestTime`. Außerdem verwendet die Callback-Funktion der Weiterleitung zum Stammverzeichnispfad die Eigenschaft, die die Middlewarefunktion zu `req` (dem Anforderungsobjekt) hinzufügt.
 
 ```js
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 const requestTime = function (req, res, next) {
-  req.requestTime = Date.now()
-  next()
-}
+  req.requestTime = Date.now();
+  next();
+};
 
-app.use(requestTime)
+app.use(requestTime);
 
 app.get('/', (req, res) => {
-  let responseText = 'Hello World!<br>'
-  responseText += `<small>Requested at: ${req.requestTime}</small>`
-  res.send(responseText)
-})
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
+});
 
-app.listen(3000)
+app.listen(3000);
 ```
 
 Wenn Sie eine Anforderung zum Stammverzeichnis der Anwendung einleiten, zeigt die Anwendung nun die Zeitmarke Ihrer Anforderung im Browser an.
@@ -152,11 +152,11 @@ Finally, we'll create a middleware function that validates incoming cookies and 
 Here's an example function that validates cookies with an external async service.
 
 ```js
-async function cookieValidator (cookies) {
+async function cookieValidator(cookies) {
   try {
-    await externallyValidateCookie(cookies.testCookie)
+    await externallyValidateCookie(cookies.testCookie);
   } catch {
-    throw new Error('Invalid cookies')
+    throw new Error('Invalid cookies');
   }
 }
 ```
@@ -164,27 +164,27 @@ async function cookieValidator (cookies) {
 Here, we use the [`cookie-parser`](/resources/middleware/cookie-parser.html) middleware to parse incoming cookies off the `req` object and pass them to our `cookieValidator` function. The `validateCookies` middleware returns a Promise that upon rejection will automatically trigger our error handler.
 
 ```js
-const express = require('express')
-const cookieParser = require('cookie-parser')
-const cookieValidator = require('./cookieValidator')
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const cookieValidator = require('./cookieValidator');
 
-const app = express()
+const app = express();
 
-async function validateCookies (req, res, next) {
-  await cookieValidator(req.cookies)
-  next()
+async function validateCookies(req, res, next) {
+  await cookieValidator(req.cookies);
+  next();
 }
 
-app.use(cookieParser())
+app.use(cookieParser());
 
-app.use(validateCookies)
+app.use(validateCookies);
 
 // error handler
 app.use((err, req, res, next) => {
-  res.status(400).send(err.message)
-})
+  res.status(400).send(err.message);
+});
 
-app.listen(3000)
+app.listen(3000);
 ```
 
 <div class="doc-box doc-notice" markdown="1">
@@ -205,17 +205,17 @@ File: `my-middleware.js`
 module.exports = function (options) {
   return function (req, res, next) {
     // Implement the middleware function based on the options object
-    next()
-  }
-}
+    next();
+  };
+};
 ```
 
 The middleware can now be used as shown below.
 
 ```js
-const mw = require('./my-middleware.js')
+const mw = require('./my-middleware.js');
 
-app.use(mw({ option1: '1', option2: '2' }))
+app.use(mw({ option1: '1', option2: '2' }));
 ```
 
 Refer to [cookie-session](https://github.com/expressjs/cookie-session) and [compression](https://github.com/expressjs/compression) for examples of configurable middleware.

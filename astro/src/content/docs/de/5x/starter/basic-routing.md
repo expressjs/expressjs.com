@@ -4,7 +4,7 @@ title: Basisrouting in Express
 description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
 order: 4
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Basisrouting
@@ -16,7 +16,7 @@ Jede Weiterleitung (Route) kann eine oder mehrere Handlerfunktionen haben, die a
 Weiterleitungsdefinitionen haben die folgende Struktur:
 
 ```js
-app.METHOD(PATH, HANDLER)
+app.METHOD(PATH, HANDLER);
 ```
 
 Where:
@@ -36,33 +36,32 @@ Antworten Sie mit `Hello World!` auf der Homepage:
 
 ```js
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.send('Hello World!');
+});
 ```
 
 Respond to a POST request on the root route (`/`), the application's home page:
 
 ```js
 app.post('/', (req, res) => {
-  res.send('Got a POST request')
-})
+  res.send('Got a POST request');
+});
 ```
 
 Antworten Sie auf eine PUT-Anforderung zur Weiterleitung `/user`:
 
 ```js
 app.put('/user', (req, res) => {
-  res.send('Got a PUT request at /user')
-})
+  res.send('Got a PUT request at /user');
+});
 ```
 
 Antworten Sie auf eine DELETE-Anforderung zur Weiterleitung `/user`:
 
 ```js
 app.delete('/user', (req, res) => {
-  res.send('Got a DELETE request at /user')
-})
+  res.send('Got a DELETE request at /user');
+});
 ```
 
 Details zum Thema Routing finden Sie in der entsprechenden [Routinganleitung](/{{ page.lang }}/guide/routing.html).
-

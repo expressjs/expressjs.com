@@ -4,7 +4,7 @@ title: Fehlerbehandlung in Express
 description: Understand how Express.js handles errors in synchronous and asynchronous code, and learn to implement custom error handling middleware for your applications.
 menu: guide
 order: 6
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Fehlerbehandlung
@@ -24,23 +24,23 @@ catch and process it. Beispiel:
 
 ```js
 app.get('/', (req, res) => {
-  throw new Error('BROKEN') // Express will catch this on its own.
-})
+  throw new Error('BROKEN'); // Express will catch this on its own.
+});
 ```
 
 Middlewarefunktionen für die Fehlerbehandlung werden in derselben Weise definiert wie andere Middlewarefunktionen, nur, dass Fehlerbehandlungsfunktionen vier anstatt drei Argumente aufweisen:
-`(err, req, res, next)`.  Beispiel:
+`(err, req, res, next)`. Beispiel:
 
 ```js
 app.get('/', (req, res, next) => {
   fs.readFile('/file-does-not-exist', (err, data) => {
     if (err) {
-      next(err) // Pass errors to Express.
+      next(err); // Pass errors to Express.
     } else {
-      res.send(data)
+      res.send(data);
     }
-  })
-})
+  });
+});
 ```
 
 Middleware für die Fehlerbehandlung wird ganz zuletzt nach allen anderen `app.use()`- und Weiterleitungsaufrufen definiert.
@@ -48,9 +48,9 @@ Beispiel:
 
 ```js
 app.get('/user/:id', async (req, res, next) => {
-  const user = await getUserById(req.params.id)
-  res.send(user)
-})
+  const user = await getUserById(req.params.id);
+  res.send(user);
+});
 ```
 
 If `getUserById` throws an error or rejects, `next` will be called with either
@@ -65,12 +65,12 @@ this code as follows:
 ```js
 app.get('/', [
   function (req, res, next) {
-    fs.writeFile('/inaccessible-path', 'data', next)
+    fs.writeFile('/inaccessible-path', 'data', next);
   },
   function (req, res) {
-    res.send('OK')
-  }
-])
+    res.send('OK');
+  },
+]);
 ```
 
 In the above example, `next` is provided as the callback for `fs.writeFile`,
@@ -83,12 +83,12 @@ Bei einem Routenhandler mit mehreren Callback-Funktionen können Sie den Paramet
 app.get('/', (req, res, next) => {
   setTimeout(() => {
     try {
-      throw new Error('BROKEN')
+      throw new Error('BROKEN');
     } catch (err) {
-      next(err)
+      next(err);
     }
-  }, 100)
-})
+  }, 100);
+});
 ```
 
 The above example uses a `try...catch` block to catch errors in the
@@ -97,14 +97,16 @@ block were omitted, Express would not catch the error since it is not part of th
 handler code.
 
 Use promises to avoid the overhead of the `try...catch` block or when using functions
-that return promises.  Beispiel:
+that return promises. Beispiel:
 
 ```js
 app.get('/', (req, res, next) => {
-  Promise.resolve().then(() => {
-    throw new Error('BROKEN')
-  }).catch(next) // Errors will be passed to Express.
-})
+  Promise.resolve()
+    .then(() => {
+      throw new Error('BROKEN');
+    })
+    .catch(next); // Errors will be passed to Express.
+});
 ```
 
 Since promises automatically catch both synchronous errors and rejected promises,
@@ -118,15 +120,15 @@ catching, by reducing the asynchronous code to something trivial. Beispiel:
 app.get('/', [
   function (req, res, next) {
     fs.readFile('/maybe-valid-file', 'utf-8', (err, data) => {
-      res.locals.data = data
-      next(err)
-    })
+      res.locals.data = data;
+      next(err);
+    });
   },
   function (req, res) {
-    res.locals.data = res.locals.data.split(',')[1]
-    res.send(res.locals.data)
-  }
-])
+    res.locals.data = res.locals.data.split(',')[1];
+    res.send(res.locals.data);
+  },
+]);
 ```
 
 The above example has a couple of trivial statements from the `readFile`
@@ -165,12 +167,12 @@ Wenn `next()` mit einem Fehler aufgerufen wird, nachdem Sie mit dem Schreiben de
 Wenn Sie also einen angepassten Error-Handler hinzufügen, empfiehlt es sich, eine Delegierung zur Standardfehlerbehandlungsroutine in Express vorzunehmen, wenn die Header bereits an den Client gesendet wurden:
 
 ```js
-function errorHandler (err, req, res, next) {
+function errorHandler(err, req, res, next) {
   if (res.headersSent) {
-    return next(err)
+    return next(err);
   }
-  res.status(500)
-  res.render('error', { error: err })
+  res.status(500);
+  res.render('error', { error: err });
 }
 ```
 
@@ -187,25 +189,27 @@ except error-handling functions have four arguments instead of three:
 
 ```js
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
-})
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 ```
 
 You define error-handling middleware last, after other `app.use()` and routes calls; for example:
 
 ```js
-const bodyParser = require('body-parser')
-const methodOverride = require('method-override')
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
-app.use(bodyParser.json())
-app.use(methodOverride())
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
 app.use((err, req, res, next) => {
   // logic
-})
+});
 ```
 
 Antworten von der Middlewarefunktion können das von Ihnen gewünschte Format aufweisen wie beispielsweise eine Fehlerseite im HTML-Format, eine einfache Nachricht oder eine JSON-Zeichenfolge.
@@ -213,25 +217,27 @@ Antworten von der Middlewarefunktion können das von Ihnen gewünschte Format au
 Für organisatorische Zwecke (und Frameworks der höheren Ebene) können Sie mehrere Middlewarefunktionen für die Fehlerbehandlung definieren, wie Sie dies bei regulären Middlewarefunktionen auch tun würden. Wenn Sie beispielsweise eine Fehlerbehandlungsroutine (Error-Handler) für Anforderungen über `XHR` und andere Anforderungen definieren wollen, können Sie die folgenden Befehle verwenden:
 
 ```js
-const bodyParser = require('body-parser')
-const methodOverride = require('method-override')
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
-app.use(bodyParser.json())
-app.use(methodOverride())
-app.use(logErrors)
-app.use(clientErrorHandler)
-app.use(errorHandler)
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
 ```
 
 In diesem Beispiel kann die generische `logErrors`-Funktion Anforderungs- und Fehlerinformationen in `stderr` schreiben:
 
 ```js
-function logErrors (err, req, res, next) {
-  console.error(err.stack)
-  next(err)
+function logErrors(err, req, res, next) {
+  console.error(err.stack);
+  next(err);
 }
 ```
 
@@ -240,11 +246,11 @@ In diesem Beispiel wird `clientErrorHandler` wie folgt definiert. In diesem Fall
 Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
 
 ```js
-function clientErrorHandler (err, req, res, next) {
+function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
-    res.status(500).send({ error: 'Something failed!' })
+    res.status(500).send({ error: 'Something failed!' });
   } else {
-    next(err)
+    next(err);
   }
 }
 ```
@@ -252,29 +258,32 @@ function clientErrorHandler (err, req, res, next) {
 Die `errorHandler`-Funktion "catch-all" kann wie folgt implementiert werden:
 
 ```js
-function errorHandler (err, req, res, next) {
-  res.status(500)
-  res.render('error', { error: err })
+function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
 }
 ```
 
 If you have a route handler with multiple callback functions, you can use the `route` parameter to skip to the next route handler. Beispiel:
 
 ```js
-app.get('/a_route_behind_paywall',
+app.get(
+  '/a_route_behind_paywall',
   (req, res, next) => {
     if (!req.user.hasPaid) {
       // continue handling this request
-      next('route')
+      next('route');
     } else {
-      next()
+      next();
     }
-  }, (req, res, next) => {
+  },
+  (req, res, next) => {
     PaidContent.find((err, doc) => {
-      if (err) return next(err)
-      res.json(doc)
-    })
-  })
+      if (err) return next(err);
+      res.json(doc);
+    });
+  }
+);
 ```
 
 In diesem Beispiel wird der Handler `getPaidContent` übersprungen. Alle verbleibenden Handler in `app` für `/a_route_behind_paywall` werden jedoch weiter ausgeführt.

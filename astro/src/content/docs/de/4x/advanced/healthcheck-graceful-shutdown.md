@@ -4,26 +4,26 @@ title: Health Checks and Graceful Shutdown
 description: Learn how to implement health checks and graceful shutdown in Express apps to enhance reliability, manage deployments, and integrate with load balancers like Kubernetes.
 menu: advanced
 order: 5
-redirect_from: "  "
+redirect_from: '  '
 ---
 
 # Health Checks and Graceful Shutdown
 
 ## Graceful shutdown
 
-When you deploy a new version of your application, you must replace the previous version. The process manager you're using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it should stop accepting new requests, finish all the ongoing requests, clean up the resources it used,  including database connections and file locks then exit.
+When you deploy a new version of your application, you must replace the previous version. The process manager you're using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it should stop accepting new requests, finish all the ongoing requests, clean up the resources it used, including database connections and file locks then exit.
 
 ### Beispiel
 
 ```js
-const server = app.listen(port)
+const server = app.listen(port);
 
 process.on('SIGTERM', () => {
-  debug('SIGTERM signal received: closing HTTP server')
+  debug('SIGTERM signal received: closing HTTP server');
   server.close(() => {
-    debug('HTTP server closed')
-  })
-})
+    debug('HTTP server closed');
+  });
+});
 ```
 
 ## Health checks
