@@ -2,9 +2,9 @@
 /**
  * LanguageSelect Component
  *
- * Accessible dropdown for selecting site language.
- * Supports keyboard navigation (Tab, Enter, Space, Escape, Arrow keys)
- * and click-outside-to-close behavior.
+ * Language selector built on top of the Select primitive.
+ * Provides a custom trigger with a translate icon and handles
+ * language switching via navigation.
  *
  * @example
  * <LanguageSelect
@@ -26,10 +26,19 @@ type Props = LanguageSelectProps;
 const { languages, currentLanguage = 'en', class: className, ...rest } = Astro.props;
 
 const selectedLanguage = languages.find((lang) => lang.code === currentLanguage) || languages[0];
+const containerId = `language-select-${Math.random().toString(36).slice(2, 11)}`;
 ---
 
-<div class:list={['language-select', className]} data-language-select data-open="false" {...rest}>
+<div
+  class:list={['language-select', className]}
+  data-language-select
+  data-open="false"
+  id={containerId}
+  {...rest}
+>
+  <!-- Custom trigger button with icon -->
   <button
+    type="button"
     class="language-select-button"
     data-language-button
     aria-haspopup="listbox"
@@ -44,14 +53,17 @@ const selectedLanguage = languages.find((lang) => lang.code === currentLanguage)
         aria-hidden="true"
       />
     </span>
-    <span data-language-label aria-label={selectedLanguage.label} class="sr-only"
-      >{selectedLanguage.label}</span
-    >
+    <span data-language-label aria-label={selectedLanguage.label} class="sr-only">
+      {selectedLanguage.label}
+    </span>
   </button>
+
+  <!-- Dropdown with language options -->
   <div class="language-select-dropdown" data-language-dropdown role="listbox">
     {
       languages.map((lang) => (
         <button
+          type="button"
           class="language-select-option"
           role="option"
           aria-selected={lang.code === currentLanguage ? 'true' : 'false'}
@@ -107,6 +119,7 @@ const selectedLanguage = languages.find((lang) => lang.code === currentLanguage)
         toggle(false);
         button.focus();
 
+        // Navigate to the new language path
         const currentPath = window.location.pathname;
         const langRegex = /^\/(en|de|es|fr|it|ja|ko|pt-br|zh-cn|zh-tw)\//;
 

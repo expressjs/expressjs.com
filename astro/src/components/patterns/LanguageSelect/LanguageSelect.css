@@ -99,7 +99,6 @@
   }
 
   .language-select-option[aria-selected='true'] {
-    font-weight: 600;
     background: var(--color-bg-secondary);
   }
 
