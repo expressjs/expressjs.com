@@ -45,4 +45,6 @@ export interface SelectBaseProps<T = string> {
   icon?: string;
   /** Whether to hide the label (icon-only mode) */
   hideLabel?: boolean;
+  /** Dropdown alignment relative to the button */
+  dropdownAlign?: 'left' | 'right';
 }

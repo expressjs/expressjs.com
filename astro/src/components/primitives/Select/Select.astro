@@ -39,6 +39,7 @@ const {
   disabled = false,
   icon,
   hideLabel = false,
+  dropdownAlign = 'left',
   class: className,
   ...rest
 } = Astro.props;
@@ -89,7 +90,15 @@ const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
     }
   </button>
 
-  <div class="select-dropdown" data-select-dropdown role="listbox" aria-label={ariaLabel}>
+  <div
+    class:list={[
+      'select-dropdown',
+      `select-dropdown--align-${dropdownAlign}`,
+    ]}
+    data-select-dropdown
+    role="listbox"
+    aria-label={ariaLabel}
+  >
     {
       options.map((option) => (
         <button

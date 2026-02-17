@@ -30,7 +30,6 @@
     width: 100%;
   }
 
-  /* Sizes */
   .select-button--size-sm {
     padding: var(--space-1) var(--space-2);
     font-size: var(--font-size-xs);
@@ -47,7 +46,6 @@
     font-size: var(--font-size-base);
   }
 
-  /* Variants */
   .select-button--variant-default {
     background-color: var(--color-bg-secondary);
     border-color: var(--color-border-mute);
@@ -75,7 +73,6 @@
     width: auto;
   }
 
-  /* Icon styles */
   .select-icon {
     padding: var(--space-2);
     border-radius: var(--radius-base);
@@ -91,7 +88,6 @@
     background-color: var(--color-bg-mute);
   }
 
-  /* States */
   .select-button:hover:not(:disabled) {
     border-color: var(--color-border-primary);
   }
@@ -106,7 +102,6 @@
     cursor: not-allowed;
   }
 
-  /* Caret/Chevron Icon */
   .select-caret {
     margin-left: auto;
     color: var(--color-icon-secondary);
@@ -120,13 +115,11 @@
     transform: rotate(180deg);
   }
 
-  /* Dropdown/Listbox Styles */
   .select-dropdown {
     position: absolute;
     top: calc(100% + var(--space-1));
-    left: 0;
-    right: 0;
-    min-width: 100%;
+    width: 100%;
+    min-width: var(--size-48);
     background-color: var(--color-bg-primary);
     border: 1px solid var(--color-border-secondary);
     border-radius: var(--radius-lg);
@@ -140,8 +133,18 @@
       opacity 0.2s,
       transform 0.2s,
       visibility 0.2s;
-    max-height: var(--size-64);
+    max-height: var(--size-96);
     overflow-y: auto;
+  }
+
+  .select-dropdown--align-left {
+    left: 0;
+    right: auto;
+  }
+
+  .select-dropdown--align-right {
+    right: 0;
+    left: auto;
   }
 
   .select-container[data-open='true'] .select-dropdown {

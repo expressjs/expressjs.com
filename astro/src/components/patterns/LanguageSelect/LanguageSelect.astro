@@ -35,6 +35,7 @@ const options = languages.map((lang) => ({
   icon="fluent:translate-16-regular"
   hideLabel={true}
   variant="icon"
+  dropdownAlign="right"
   ariaLabel="Select language"
   class={className}
   data-language-select
@@ -43,22 +44,16 @@ const options = languages.map((lang) => ({
 />
 
 <script>
+  import { replaceLanguageInPath } from '@/i18n/utils';
+
   function handleLanguageChange() {
     const selects = document.querySelectorAll('[data-language-select]');
 
     selects.forEach((select) => {
       select.addEventListener('select-change', ((e: CustomEvent) => {
         const code = e.detail.value;
-
         const currentPath = window.location.pathname;
-        const langRegex = /^\/(en|de|es|fr|it|ja|ko|pt-br|zh-cn|zh-tw)\//;
-
-        let newPath: string;
-        if (langRegex.test(currentPath)) {
-          newPath = currentPath.replace(langRegex, `/${code}/`);
-        } else {
-          newPath = `/${code}${currentPath}`;
-        }
+        const newPath = replaceLanguageInPath(currentPath, code);
 
         window.location.href = newPath;
       }) as EventListener);
