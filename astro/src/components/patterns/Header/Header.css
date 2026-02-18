@@ -7,7 +7,7 @@
     background-color: var(--color-bg-secondary);
     position: sticky;
     top: 0;
-    padding: 0 var(--space-4);
+    padding: var(--space-3) var(--space-4);
     z-index: var(--z-index-header);
 
     @media (--xs-only) {
@@ -97,7 +97,7 @@
     position: relative;
     transition: background-color var(--duration-200) var(--ease-in-out);
     background-color: transparent;
-    border-radius: 0 var(--radius-base) var(--radius-base) 0;
+    border-radius: var(--radius-base);
   }
 
   .header-action-icon {
