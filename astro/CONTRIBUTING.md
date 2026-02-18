@@ -60,6 +60,7 @@ If you have identified a problem or an enhancement:
 ### Development stack
 
 This project uses:
+
 - **Astro** for site generation
 - **TypeScript** for type safety
 - **ESLint** for linting
@@ -67,6 +68,7 @@ This project uses:
 <!-- TODO: add testing framework -->
 
 ### Tooling
+
 - **Node.js**: v24.x or higher
 - **npm**: v11.0.0 or higher (comes with Node 24)
 
@@ -102,13 +104,13 @@ This project uses:
 
 ## Available Scripts
 
-| Command           | Description                              |
-| ----------------- | ---------------------------------------- |
-| `npm run dev`     | Start development server with hot reload |
-| `npm run build`   | Build production site to `./dist`        |
-| `npm run preview` | Preview production build locally         |
-| `npm run lint`    | Run ESLint to check for issues           |
-| `npm run check`   | Run type checking and format verification|
+| Command           | Description                               |
+| ----------------- | ----------------------------------------- |
+| `npm run dev`     | Start development server with hot reload  |
+| `npm run build`   | Build production site to `./dist`         |
+| `npm run preview` | Preview production build locally          |
+| `npm run lint`    | Run ESLint to check for issues            |
+| `npm run check`   | Run type checking and format verification |
 
 ## Submitting a pull request
 
@@ -146,10 +148,11 @@ If a proposed feature appears to require a framework integration:
 Pull requests that introduce new framework dependencies without prior discussion may be closed.
 
 ### Existing exception
+
 > The search component is implemented using React to support the Orama-powered search experience.
 > This is a limited, isolated integration and does not indicate that React (or other frameworks) should be used elsewhere in the project.
 
->[!IMPORTANT]
+> [!IMPORTANT]
 > Pull requests that introduce new framework dependencies without prior discussion may not be accepted.
 
 ## Project structure
@@ -365,6 +368,7 @@ type MenuItem = {
   omitFrom?: VersionPrefix[]; // Versions to exclude this item from
 };
 ```
+
 ## Contributing translations
 
 We use Crowdin to manage our translations in multiple languages and achieve automatic translation with artificial intelligence. Since these translations can be inefficient in some cases, we need help from the community to provide accurate and helpful translations.
