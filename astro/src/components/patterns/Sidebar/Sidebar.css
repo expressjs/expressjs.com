@@ -96,10 +96,13 @@
     }
 
     @media (--md-up) {
-      &[data-current-nav-level='0'] {
-        .sidebar-nested {
-          display: none;
-        }
+      &[data-current-nav-level='0'] .sidebar-nested {
+        width: 0;
+        overflow: hidden;
+      }
+
+      &[data-current-nav-level='0'] .sidebar-nested-inner {
+        transform: translateX(-100%);
       }
 
       &[data-current-nav-level='2'] .sidebar-nested-inner {
@@ -123,6 +126,7 @@
   .sidebar-nested {
     display: flex;
     flex: 1 0 100%;
+    transition: transform var(--duration-300) var(--ease-in-out);
 
     .sidebar-container--interactive & {
       transition: transform var(--duration-300) var(--ease-in-out);
@@ -132,6 +136,12 @@
       flex-basis: auto;
       overflow: hidden;
       width: var(--size-64);
+      z-index: 10;
+      position: relative;
+
+      .sidebar-container--interactive & {
+        transition: width var(--duration-300) var(--ease-in-out);
+      }
     }
   }
 
@@ -141,6 +151,14 @@
 
     .sidebar-container--interactive & {
       transition: transform var(--duration-300) var(--ease-in-out);
+    }
+
+    @media (--md-up) {
+      position: absolute;
+      width: var(--size-64);
+      height: 100%;
+      left: 0;
+      top: 0;
     }
   }
 
@@ -158,31 +176,14 @@
     @media (--md-up) {
       flex: 0 0 auto;
       padding: var(--space-5) var(--space-3) var(--space-4) var(--space-3);
-
-      .sidebar-nav-arrow {
-        display: none;
-      }
+      z-index: 20;
 
       .sidebar-nav-item {
         flex-direction: column;
       }
 
-      .sidebar-nav-item--root-submenu {
+      .sidebar-nav-item--root-submenu .sidebar-nav-arrow {
         display: none;
-      }
-
-      .sidebar-nav-item--root-link {
-        display: flex;
-      }
-    }
-
-    @media (--xs-only) {
-      .sidebar-nav-item--root-link {
-        display: none;
-      }
-
-      .sidebar-nav-item--root-submenu {
-        display: flex;
       }
     }
   }
@@ -353,14 +354,6 @@
   .sidebar-nested-column {
     background-color: var(--color-bg-tertiary);
     position: relative;
-
-    @media (--md-up) {
-      &[data-nav-level='1'] {
-        .sidebar-nav-back {
-          display: none;
-        }
-      }
-    }
   }
 
   .sidebar-nav-panel {
