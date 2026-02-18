@@ -9,7 +9,7 @@
 
 import type { HTMLAttributes } from 'astro/types';
 import Typography from './Typography.astro';
-import type { TypographyColor, TypographyWeight } from './Typography.astro';
+import type { TypographyColor, TypographyWeight } from './types.ts';
 
 type BaseProps = {
   color?: TypographyColor;
@@ -22,7 +22,7 @@ type Props =
   | ({ as: 'small' } & BaseProps & HTMLAttributes<'small'>)
   | ({ as: 'label' } & BaseProps & HTMLAttributes<'label'>);
 
-const { as = 'p', ...rest } = Astro.props;
+const { as = 'p', ...rest } = Astro.props as Props;
 ---
 
 <Typography as={as} variant="body" {...rest}>

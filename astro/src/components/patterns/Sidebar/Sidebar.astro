@@ -1,0 +1,65 @@
+---
+import './Sidebar.css';
+import type { HTMLAttributes } from 'astro/types';
+import { getLangFromUrl } from '@/i18n/utils';
+import { mainMenu } from '@/config/menu/main';
+import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
+import type { Menu } from '@/config/types';
+import SidebarMenu from './SidebarMenu.astro';
+import { detectVersionFromUrl } from './utils';
+
+type Props = HTMLAttributes<'div'> & {
+  menu?: Menu;
+  versions?: VersionConfig[];
+  defaultVersion?: string;
+};
+
+const {
+  menu = mainMenu,
+  versions = [
+    { id: '5x', label: 'v5.x', isDefault: true },
+    { id: '4x', label: 'v4.x' },
+    { id: '3x', label: 'v3.x (deprecated)' },
+  ],
+  defaultVersion = '5x',
+  ...rest
+} = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+const currentVersion = detectVersionFromUrl(currentPath, versions, defaultVersion);
+---
+
+<div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true" data-sidebar-backdrop></div>
+
+<aside
+  id="sidebar"
+  class="sidebar"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="sidebar-title"
+  aria-hidden="true"
+  data-sidebar
+  data-current-path={currentPath}
+  data-current-version={currentVersion}
+  {...rest}
+>
+  <h2 id="sidebar-title" class="sr-only" aria-label="Main menu">Main menu</h2>
+
+  <div class="sidebar-container" data-nav-container data-current-nav-level="0">
+    <SidebarMenu
+      menu={menu}
+      level={0}
+      title="Main Menu"
+      lang={lang}
+      currentPath={currentPath}
+      version={currentVersion}
+      versions={versions}
+      defaultVersion={defaultVersion}
+    />
+  </div>
+
+  <script>
+    import './SidebarController';
+  </script>
+</aside>

@@ -1,0 +1,45 @@
+@layer patterns {
+  .toggle {
+    border: 0;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: var(--radius-base);
+    transition: var(--transition-colors);
+    gap: var(--space-3);
+    width: 100%;
+  }
+
+  .toggle:hover {
+    .toggle-icon {
+      background-color: var(--color-bg-mute);
+    }
+  }
+
+  .toggle-icon {
+    padding: var(--space-2);
+    border-radius: var(--radius-base);
+    background-color: var(--color-bg-secondary);
+    transition: background-color var(--duration-200) var(--ease-in-out);
+    flex-shrink: 0;
+  }
+
+  :root[data-theme='light'] .sun,
+  :root:not([data-theme]) .sun {
+    display: none;
+  }
+
+  :root[data-theme='light'] .label-dark,
+  :root:not([data-theme]) .label-dark {
+    display: none;
+  }
+
+  :root[data-theme='dark'] .label-light {
+    display: none;
+  }
+
+  :root[data-theme='dark'] .moon {
+    display: none;
+  }
+}

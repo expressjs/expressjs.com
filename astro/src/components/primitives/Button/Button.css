@@ -2,84 +2,86 @@
  * Button Component Styles
  */
 
-/* ============================================
-   BASE STYLES
-   ============================================ */
+@layer primitives {
+  /* ============================================
+     BASE STYLES
+     ============================================ */
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  line-height: var(--line-height-normal);
-  border: 1px solid;
-  border-radius: var(--radius-base);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  text-decoration: none;
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    line-height: var(--line-height-normal);
+    border: 1px solid;
+    border-radius: var(--radius-base);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    text-decoration: none;
 
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
   }
-}
 
-/* ============================================
-   SIZES
-   ============================================ */
+  /* ============================================
+     SIZES
+     ============================================ */
 
-.btn--size-md {
-  padding: var(--space-3);
-  font-size: var(--font-size-sm);
-}
+  .btn--size-md {
+    padding: var(--space-3);
+    font-size: var(--font-size-sm);
+  }
 
-.btn--size-sm {
-  padding: var(--space-2) var(--space-4);
-  font-size: var(--font-size-xs);
-}
+  .btn--size-sm {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-xs);
+  }
 
-.btn--size-xs {
-  padding: var(--space-1) var(--space-2);
-  font-size: var(--font-size-xxs);
-}
+  .btn--size-xs {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-xxs);
+  }
 
-/* ============================================
-   VARIANTS
-   ============================================ */
+  /* ============================================
+     VARIANTS
+     ============================================ */
 
-/* Primary variant */
-.btn--variant-primary {
-  background-color: var(--color-bg-inverse);
-  color: var(--color-text-inverse);
-  border-color: var(--color-border-inverse);
-
-  &:hover:not(:disabled) {
-    background-color: var(--color-bg-inverse-secondary);
+  /* Primary variant */
+  .btn--variant-primary {
+    background-color: var(--color-bg-inverse);
     color: var(--color-text-inverse);
+    border-color: var(--color-border-inverse);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-bg-inverse-secondary);
+      color: var(--color-text-inverse);
+    }
   }
-}
 
-/* Secondary variant */
-.btn--variant-secondary {
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  border-color: var(--color-border-primary);
-
-  &:hover:not(:disabled) {
-    background-color: var(--color-bg-tertiary);
-    border-color: var(--color-border-secondary);
+  /* Secondary variant */
+  .btn--variant-secondary {
+    background-color: var(--color-bg-primary);
     color: var(--color-text-primary);
+    border-color: var(--color-border-primary);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-bg-tertiary);
+      border-color: var(--color-border-secondary);
+      color: var(--color-text-primary);
+    }
   }
-}
 
-/* ============================================
-   GHOST MODIFIER
-   ============================================ */
+  /* ============================================
+     GHOST MODIFIER
+     ============================================ */
 
-.btn--ghost {
-  &:not(:hover):not(:disabled) {
-    border-color: transparent;
-    background-color: transparent;
+  .btn--ghost {
+    &:not(:hover):not(:disabled) {
+      border-color: transparent;
+      background-color: transparent;
+    }
   }
 }

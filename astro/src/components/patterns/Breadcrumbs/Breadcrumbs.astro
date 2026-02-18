@@ -6,7 +6,7 @@
  */
 import { Body } from '@components/primitives';
 import { Icon } from 'astro-icon/components';
-import type { BreadcrumbItem } from '@utils/breadcrumb';
+import type { BreadcrumbItem } from '@utils/content';
 
 interface Props {
   items: BreadcrumbItem[];
@@ -27,7 +27,9 @@ const { items } = Astro.props;
           ) : (
             <Body class="m-0">{item.label}</Body>
           )}
-          {index < items.length - 1 && <Icon name="ph:caret-right" aria-hidden="true" />}
+          {index < items.length - 1 && (
+            <Icon name="fluent:chevron-right-28-regular" aria-hidden="true" />
+          )}
         </li>
       ))
     }

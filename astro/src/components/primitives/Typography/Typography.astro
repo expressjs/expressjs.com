@@ -13,10 +13,9 @@
  *
  * Use this base component only when you need full control over variant + element.
  */
-
+import './Typography.css';
 import type { HTMLAttributes } from 'astro/types';
 import type { TypographyBaseProps } from './types';
-import './Typography.css';
 
 type Props = TypographyBaseProps & HTMLAttributes<'p'>;
 
@@ -28,6 +27,7 @@ const {
   left,
   right,
   weight,
+  vMargin = true,
   class: className,
   ...rest
 } = Astro.props;
@@ -42,6 +42,7 @@ const {
     center && 'text-center',
     left && 'text-left',
     right && 'text-right',
+    !vMargin && 'text--no-v-margin',
     className,
   ]}
   {...rest}

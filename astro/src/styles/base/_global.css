@@ -141,6 +141,16 @@ a:hover {
   color: var(--color-link-hover);
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 1px solid var(--color-focus-ring);
+  outline-offset: -2px;
+}
+
 /* Code */
 code,
 kbd,

@@ -93,15 +93,18 @@
   gap: var(--space-8);
 }
 
-/* Width */
 .w-full {
   width: 100%;
 }
+
+.h-full {
+  height: 100%;
+}
+
 .max-w-prose {
   max-width: var(--content-width);
 }
 
-/* Margin auto */
 .mx-auto {
   margin-inline: auto;
 }

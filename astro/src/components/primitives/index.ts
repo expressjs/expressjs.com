@@ -1,7 +1,5 @@
 /**
- * Primitives Components
- *
- * Re-export all primitive components for easy importing
+ * Reexport all primitives Components
  */
 
 // Typography
@@ -13,3 +11,7 @@ export { Grid, Col, Flex, FlexItem } from './Grid';
 
 // Button
 export { Button } from './Button';
+
+// Select
+export { Select } from './Select';
+export type { SelectOption, SelectSize, SelectVariant } from './Select';

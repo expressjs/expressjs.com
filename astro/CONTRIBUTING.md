@@ -1,15 +1,13 @@
-# Contributing to Expressjs.com
-
-### The Official Documentation of the Express.js Framework
+# Contributing to the expressjs.com website
 
 This is the contribution documentation for the [expressjs.com](https://github.com/expressjs/expressjs.com) website.
 
 > [!NOTE]
 > This is not the repo for Express.js framework. To contribute to the _[Express.js framework](https://github.com/expressjs/express)_, check out the [GitHub repo contributing page](https://github.com/expressjs/express?tab=contributing-ov-file) or the website's [Contributing to Express](https://expressjs.com/en/resources/contributing.html) page.
 
-#### Need some ideas? These are some typical issues.
+### Common contributions
 
-1. **Website issues**: If you see anything on the site that could use a tune-up, think about how to fix it.
+1. **Website Issues**: Improvements to the site's functionality, design, or accessibility.
    - Display or screen sizing problems
    - Mobile responsiveness issues
    - Missing or broken accessibility features
@@ -27,13 +25,13 @@ This is the contribution documentation for the [expressjs.com](https://github.co
    - Fix incorrect/poorly translated words
    - Check out the [Contributing translations](#contributing-translations) section below for a contributing guide.
 
-#### Want to work on a backlog issue?
+### Working on existing issues
 
-We often have bugs or enhancements that need work. You can find these under our repo's [Issues tab](https://github.com/expressjs/expressjs.com/issues). Check out the tags to find something that's a good match for you.
+We welcome contributions to existing bugs or enhancements. You can find these under our repo's [Issues tab](https://github.com/expressjs/expressjs.com/issues). Check out the tags to find something that matches your interests. Look for issues labeled `good first issue` or `help wanted` to get started.
 
-#### Have an idea? Found a bug?
+### Reporting bugs & requesting features
 
-If you've found a bug or a typo, or if you have an idea for an enhancement, you can:
+If you have found a bug, a typo, or have an idea for an enhancement, you can:
 
 - Submit a [new issue](https://github.com/expressjs/expressjs.com/issues/new/choose) on our repo. Do this for larger proposals, or if you'd like to discuss or get feedback first.
 
@@ -41,30 +39,40 @@ If you've found a bug or a typo, or if you have an idea for an enhancement, you 
 
 ## Getting Started
 
-The steps below will guide you through the Expressjs.com contribution process.
+The steps below will guide you through the expressjs.com contribution process.
 
-#### Step 1: (OPTIONAL) Open a New Issue
+#### Step 1: Open an Issue (Optional)
 
-So you've found a problem that you want to fix, or have a site enhancement you want to make.
+If you have identified a problem or an enhancement:
 
 1. If you want to get feedback or discuss, open a discussion [issue](https://github.com/expressjs/expressjs.com/issues/new/choose) prior to starting work. This is not required, but encouraged for larger proposals.
    - While we highly encourage this step, it is only for submissions proposing significant change. It helps us to clarify and focus the work, and ensure it aligns with overall project priorities.
    - For submissions proposing minor improvements or corrections, this is not needed. You can skip this step.
-   - When opening an issue please give it a title and fill in the description section. The more details you provide, the more feedback we can give.
+   - When opening an issue, please provide a clear title and complete description. The more details you provide, the more feedback we can give.
 
-2. After receiving your issue the Express.js documentation team will respond with feedback. We read every submission and always try to respond quickly with feedback.
+2. After receiving your issue, the Express.js documentation team will respond with feedback. We review all submissions and aim to respond as soon as possible.
    - For submissions proposing significant change, we encourage you to follow the review process before starting work.
 
-#### Step 2: Get the Application Code Base
+#### Step 2: Get the project codebase
 
 ## Prerequisites
 
-- **Node.js**: v24.13.0 or higher
+### Development stack
+
+This project uses:
+
+- **Astro** for site generation
+- **TypeScript** for type safety
+- **ESLint** for linting
+- **Prettier** for formatting
+<!-- TODO: add testing framework -->
+
+### Tooling
+
+- **Node.js**: v24.x or higher
 - **npm**: v11.0.0 or higher (comes with Node 24)
 
 > We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage Node.js versions. This project includes an `.nvmrc` file for automatic version switching.
-
-## Getting Started
 
 1. **Clone the repository:**
 
@@ -96,13 +104,58 @@ So you've found a problem that you want to fix, or have a site enhancement you w
 
 ## Available Scripts
 
-| Command           | Description                              |
-| ----------------- | ---------------------------------------- |
-| `npm run dev`     | Start development server with hot reload |
-| `npm run build`   | Build production site to `./dist`        |
-| `npm run preview` | Preview production build locally         |
+| Command           | Description                               |
+| ----------------- | ----------------------------------------- |
+| `npm run dev`     | Start development server with hot reload  |
+| `npm run build`   | Build production site to `./dist`         |
+| `npm run preview` | Preview production build locally          |
+| `npm run lint`    | Run ESLint to check for issues            |
+| `npm run check`   | Run type checking and format verification |
 
-## Project Structure
+## Submitting a pull request
+
+1. Create a new branch from `redesign`
+2. Make your changes
+3. Run `npm run check` to verify code style and types
+4. Commit with a clear message
+5. Push to your fork
+6. Open a PR against `redesign`
+
+> Ensure all checks pass and your branch is up to date with `redesign` before opening a PR.
+
+## Architecture policy
+
+Although Astro supports integrations with frameworks such as React or Vue, this project intentionally avoids additional frontend frameworks.
+
+The expressjs.com website is designed to use:
+
+- HTML
+- CSS
+- TypeScript
+
+This decision helps keep the codebase lightweight, easier to maintain, and accessible to a broader range of contributors.
+
+### Do not introduce new frontend frameworks
+
+Please do not introduce React, Vue, or other client-side frameworks without prior discussion and approval.
+
+If a proposed feature appears to require a framework integration:
+
+1. Open an issue first.
+2. Explain the use case and why the existing stack (HTML, CSS, and TypeScript) is insufficient.
+3. Wait for approval from the maintainers before proceeding.
+
+Pull requests that introduce new framework dependencies without prior discussion may be closed.
+
+### Existing exception
+
+> The search component is implemented using React to support the Orama-powered search experience.
+> This is a limited, isolated integration and does not indicate that React (or other frameworks) should be used elsewhere in the project.
+
+> [!IMPORTANT]
+> Pull requests that introduce new framework dependencies without prior discussion may not be accepted.
+
+## Project structure
 
 ```
 astro/
@@ -112,8 +165,10 @@ astro/
 │   │   ├── patterns/        # Complex UI patterns
 │   │   └── primitives/      # Base UI primitives
 │   ├── config/              # Configuration files
+│   │   ├── menu/            # Menu configuration files (sidebars)
 │   ├── content/             # Content collections
-│   │   └── docs/            # Documentation content
+│   │   ├── docs/            # Documentation content
+│   │   └── resources/       # Resource pages
 │   ├── i18n/                # Internationalization
 │   ├── layouts/             # Page layouts
 │   ├── pages/               # Route pages
@@ -125,5 +180,214 @@ astro/
 │   └── utils/               # Utility functions
 ├── public/                  # Static assets
 │   └── fonts/               # Font files
-└── astro.config.mjs         # Astro configuration
+├── astro.config.mjs         # Astro configuration
 ```
+
+## Content configuration
+
+The site uses Astro's [Content Collections](https://docs.astro.build/en/guides/content-collections/) to manage documentation and resources. The configuration is defined in `src/content.config.ts`.
+
+### Collections
+
+| Collection  | Location                 | Description                       |
+| ----------- | ------------------------ | --------------------------------- |
+| `docs`      | `src/content/docs/`      | Documentation pages (guides, API) |
+| `resources` | `src/content/resources/` | Resource pages (community, tools) |
+
+### Frontmatter schema
+
+Each content file requires frontmatter with the following properties:
+
+```yaml
+---
+title: 'Page Title' # Required: The page title
+description: 'Description' # Optional: Page description for SEO
+---
+```
+
+## Versioning
+
+The Express.js documentation supports multiple versions. Content is organized by version in the `src/content/docs/` directory.
+
+### Version structure
+
+```
+src/content/docs/
+└── en/
+    ├── 3x/          # Express 3.x documentation
+    ├── 4x/          # Express 4.x documentation
+    └── 5x/          # Express 5.x documentation (default)
+```
+
+### How versioning works
+
+- **Default Version**: `5x` is the current default version
+- **Supported Versions**: `5x`, `4x`, `3x`
+- **URL Patterns**:
+  - Versioned: `/en/5x/api/` → Express 5.x API docs
+  - Non-versioned: `/en/api/` → Defaults to Express 5.x
+
+### Adding version specific content
+
+1. Create your content file in the appropriate version directory:
+
+   ```
+   src/content/docs/en/5x/guide/my-new-page.md
+   ```
+
+2. The versioning system (configured in `src/pages/[lang]/[...slug].astro`) will automatically:
+   - Serve the page at `/en/5x/guide/my-new-page`
+   - Create non-versioned aliases for default version content
+
+### Menu configuration
+
+The navigation menus are configured in `src/config/menu/`. The type definitions are in `src/config/types.ts`.
+
+#### Menu structure
+
+Menus are composed of **sections** and **items**:
+
+```
+Menu
+├── sections[]           # Groups of menu items
+│   ├── title?           # Optional section header
+│   ├── basePath?        # Base path prepended to all item hrefs
+│   ├── omitFrom?        # Versions to exclude this section from
+│   └── items[]          # Menu items in this section
+└── items[]              # Alternative: flat list of items (no sections)
+```
+
+#### Configuration files
+
+| File            | Purpose                                     |
+| --------------- | ------------------------------------------- |
+| `main.ts`       | Top-level navigation (Docs, API, Resources) |
+| `docs.ts`       | Documentation sidebar menu                  |
+| `api.ts`        | API reference sidebar menu                  |
+| `resources.ts`  | Resources section menu                      |
+| `middleware.ts` | Middleware submenu                          |
+
+#### Adding menu items
+
+Basic menu item with a link:
+
+```typescript
+{ href: `/guide/routing`, label: 'Routing', ariaLabel: 'Routing guide' }
+```
+
+Menu item with a submenu:
+
+```typescript
+{
+  label: 'Properties',
+  ariaLabel: 'Application properties',
+  submenu: {
+    items: [
+      { href: `/api/application/app-locals`, label: 'app.locals' },
+      { href: `/api/application/app-mountpath`, label: 'app.mountpath' },
+    ],
+  },
+}
+```
+
+#### Adding sections
+
+Sections group related menu items with an optional title:
+
+```typescript
+{
+  title: 'Getting started',
+  items: [
+    { href: `/starter/installing`, label: 'Installing' },
+    { href: `/starter/hello-world`, label: 'Hello world' },
+  ],
+}
+```
+
+#### Version specific menus
+
+**Enabling versioning on a submenu** — Use `versioned` to specify which versions the menu supports. The version prefix will be automatically prepended to URLs:
+
+```typescript
+{
+  label: 'API Reference',
+  submenu: {
+    versioned: ['5x', '4x', '3x'],  // Supports all three versions
+    sections: apiMenu.sections,
+  },
+}
+```
+
+**Omitting items from specific versions** — Use `omitFrom` to hide an item in certain versions:
+
+```typescript
+{
+  href: `/api/application/app-mountpath`,
+  label: 'app.mountpath',
+  omitFrom: ['3x'],  // Not available in Express 3.x
+}
+```
+
+**Omitting entire sections from specific versions**:
+
+```typescript
+{
+  title: 'Router',
+  omitFrom: ['3x'],  // Router section doesn't exist in 3.x
+  items: [
+    { href: `/api/router/overview`, label: 'Overview' },
+  ],
+}
+```
+
+#### Type reference
+
+```typescript
+type VersionPrefix = '5x' | '4x' | '3x';
+
+type Menu = {
+  sections?: MenuSection[];
+  items?: MenuItem[];
+  basePath?: string;
+  versioned?: VersionPrefix[];
+};
+
+type MenuSection = {
+  title?: string; // Section header text
+  basePath?: string; // Prepended to all item hrefs
+  items: MenuItem[];
+  omitFrom?: VersionPrefix[]; // Versions to exclude this section from
+};
+
+type MenuItem = {
+  label: string;
+  ariaLabel?: string;
+  icon?: string;
+  href?: string; // Link destination (omit if using submenu)
+  submenu?: Menu; // Nested menu (omit if using href)
+  omitFrom?: VersionPrefix[]; // Versions to exclude this item from
+};
+```
+
+## Contributing translations
+
+We use Crowdin to manage our translations in multiple languages and achieve automatic translation with artificial intelligence. Since these translations can be inefficient in some cases, we need help from the community to provide accurate and helpful translations.
+
+The documentation is translated into these languages:
+
+- Chinese Simplified (`zh-cn`)
+- Chinese Traditional (`zh-tw`)
+- English (`en`)
+- French (`fr`)
+- German (`de`)
+- Italian (`it`)
+- Japanese (`ja`)
+- Korean (`ko`)
+- Brazilian Portuguese (`pt-br`)
+- Spanish (`es`)
+
+### How to translate
+
+1. Request to join the Express.js Website project on [Crowdin](https://express.crowdin.com/website)
+2. [Select the language you want to translate](https://support.crowdin.com/for-translators/#starting-translation)
+3. [Start translating](https://support.crowdin.com/online-editor/)

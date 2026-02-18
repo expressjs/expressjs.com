@@ -22,7 +22,7 @@
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": ">=24.13.0",
+      "version": "24.x",
       "onFail": "error"
     },
     "packageManager": {
@@ -31,20 +31,17 @@
       "onFail": "error"
     }
   },
-  "engines": {
-    "node": ">=24.13.0",
-    "npm": ">=11.0.0"
-  },
   "devDependencies": {
     "@csstools/postcss-global-data": "^4.0.0",
     "@eslint/js": "^9.39.2",
-    "@iconify-json/ph": "^1.2.2",
+    "@iconify-json/fluent": "^1.2.38",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "lint-staged": "^16.2.7",
     "postcss-custom-media": "^12.0.0",
+    "postcss-nested": "^7.0.2",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^5.9.3",

@@ -56,4 +56,6 @@ export interface TypographyBaseProps {
   left?: boolean;
   /** Right text alignment */
   right?: boolean;
+  /** Enable vertical margin (default: true) */
+  vMargin?: boolean;
 }

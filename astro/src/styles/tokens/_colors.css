@@ -24,7 +24,7 @@
   --gray-600: oklch(45% 0 0); /* #525252 */
   --gray-700: oklch(35% 0 0); /* #404040 */
   --gray-800: oklch(25% 0 0); /* #262626 */
-  --gray-900: oklch(15% 0 0); /* #141414 */
+  --gray-900: oklch(19% 0 1); /* #141414 */
   --gray-950: oklch(13% 0 0); /* #0A0A0A */
 
   /* Green */
@@ -90,10 +90,10 @@
   /* Backgrounds */
   --color-bg-primary: light-dark(var(--white), var(--black));
   --color-bg-secondary: light-dark(var(--gray-50), var(--gray-900));
-  --color-bg-tertiary: light-dark(var(--gray-100), var(--gray-800));
+  --color-bg-tertiary: light-dark(var(--gray-150), var(--gray-800));
   --color-bg-inverse: light-dark(var(--gray-900), var(--gray-100));
   --color-bg-inverse-secondary: light-dark(var(--gray-800), var(--gray-200));
-  --color-bg-mute: light-dark(var(--gray-200), var(--gray-800));
+  --color-bg-mute: light-dark(var(--gray-200), var(--gray-600));
   --color-bg-info: light-dark(var(--blue-50), var(--blue-950));
   --color-bg-success: light-dark(var(--green-50), var(--green-950));
   --color-bg-warning: light-dark(var(--amber-50), var(--amber-950));
@@ -103,7 +103,7 @@
   --color-border-primary: light-dark(var(--gray-300), var(--gray-500));
   --color-border-secondary: light-dark(var(--gray-200), var(--gray-800));
   --color-border-tertiary: light-dark(var(--gray-400), var(--gray-400));
-  --color-border-mute: light-dark(var(--gray-400), var(--gray-600));
+  --color-border-mute: light-dark(var(--gray-300), var(--gray-700));
   --color-border-inverse: light-dark(var(--gray-700), var(--gray-200));
   --color-border-info: light-dark(var(--blue-200), var(--blue-800));
   --color-border-success: light-dark(var(--green-200), var(--green-800));

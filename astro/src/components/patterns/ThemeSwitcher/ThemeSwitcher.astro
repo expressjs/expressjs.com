@@ -1,52 +1,46 @@
 ---
 /**
- * TODO: wip - improve styling and accessibility in future iterations
  * Theme Switcher Component
  * Allows users to toggle between light and dark themes
  * Persists theme preference to localStorage
  */
-
+import './ThemeSwitcher.css';
+import { BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
+
+interface Props {
+  showLabels?: boolean;
+}
+
+const { showLabels = true } = Astro.props;
 ---
 
-<button id="themeToggle" aria-label="Toggle theme">
-  <span class="sr-only">Switch theme</span>
-  <Icon name="ph:moon" class="moon" size="18" color="var(--color-icon-primary)" />
-  <Icon name="ph:sun" class="sun" size="18" color="var(--color-icon-primary)" />
+<button data-theme-toggle class="toggle" aria-label="Toggle theme">
+  <div class="toggle-icon">
+    <Icon
+      name="fluent:weather-moon-16-regular"
+      class="moon"
+      size="20"
+      color="var(--color-icon-primary)"
+    />
+    <Icon
+      name="fluent:weather-sunny-16-regular"
+      class="sun"
+      size="20"
+      color="var(--color-icon-primary)"
+    />
+  </div>
+  <BodyMd
+    vMargin={false}
+    class={`label-dark ${!showLabels ? 'sr-only' : ''}`}
+    aria-label="Switch to light mode">Switch to light mode</BodyMd
+  >
+  <BodyMd
+    vMargin={false}
+    class={`label-light ${!showLabels ? 'sr-only' : ''}`}
+    aria-label="Switch to dark mode">Switch to dark mode</BodyMd
+  >
 </button>
-
-<style>
-  #themeToggle {
-    border: 0;
-    background: none;
-    cursor: pointer;
-    padding: var(--space-2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-base);
-    transition: var(--transition-colors);
-    margin-top: var(--space-4);
-  }
-
-  #themeToggle:hover {
-    background-color: var(--color-bg-tertiary);
-  }
-
-  #themeToggle:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: 2px;
-  }
-
-  :root[data-theme='light'] .moon,
-  :root:not([data-theme]) .moon {
-    display: none;
-  }
-
-  :root[data-theme='dark'] .sun {
-    display: none;
-  }
-</style>
 
 <script is:inline>
   const theme = (() => {
@@ -71,15 +65,17 @@ import { Icon } from 'astro-icon/components';
   }
 
   window.localStorage.setItem('theme', theme);
+</script>
 
+<script>
   const handleToggleClick = () => {
     const element = document.documentElement;
-    console.log('element', element);
-
     const currentTheme = element.getAttribute('data-theme');
     localStorage.setItem('theme', currentTheme === 'dark' ? 'light' : 'dark');
     document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
   };
 
-  document.getElementById('themeToggle')?.addEventListener('click', handleToggleClick);
+  document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+    button.addEventListener('click', handleToggleClick);
+  });
 </script>

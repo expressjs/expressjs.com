@@ -1,0 +1,65 @@
+---
+import type { MenuItem, VersionPrefix } from '@/config/types';
+import SidebarNavItem from './SidebarNavItem.astro';
+import { isLink, hasSubmenu, filterItems, getItemId, resolveHref, normalizePath } from './utils';
+
+interface Props {
+  items: MenuItem[];
+  parentId: string;
+  sectionIndex: number | null;
+  currentPath: string;
+  lang: string;
+  basePath: string;
+  versioned: VersionPrefix[];
+  version: string;
+  variant: 'root' | 'nested';
+  showIcon?: boolean;
+  targetLevel: number;
+}
+
+const {
+  items,
+  parentId,
+  sectionIndex,
+  currentPath,
+  lang,
+  basePath,
+  versioned,
+  version,
+  variant,
+  showIcon = false,
+  targetLevel,
+} = Astro.props;
+
+const filteredItems = filterItems(items, version);
+---
+
+{
+  filteredItems.map((item, itemIndex) => {
+    const itemId = getItemId(parentId, sectionIndex, itemIndex);
+    const href = isLink(item) ? resolveHref(item.href, lang, basePath, versioned, version) : '';
+    const isActive = normalizePath(currentPath) === normalizePath(href);
+
+    return isLink(item) ? (
+      <SidebarNavItem
+        item={item}
+        href={href}
+        isActive={isActive}
+        variant={variant}
+        type="link"
+        showIcon={showIcon}
+      />
+    ) : hasSubmenu(item) ? (
+      <SidebarNavItem
+        item={item}
+        href=""
+        isActive={false}
+        variant={variant}
+        type="submenu"
+        submenuId={`submenu-${itemId}`}
+        targetLevel={targetLevel}
+        showIcon={showIcon}
+      />
+    ) : null;
+  })
+}

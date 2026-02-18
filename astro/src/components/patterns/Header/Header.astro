@@ -1,0 +1,75 @@
+---
+/**
+ * Header Component
+ *
+ * Main site header with logo and navigation menu
+ */
+import { Icon } from 'astro-icon/components';
+import './Header.css';
+import { BodyMd, Flex } from '@/components/primitives';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.astro';
+---
+
+<header class="header">
+  <Flex align="center" justify="between" gap="3">
+    <Flex align="center" justify="between" gap="4">
+      <button
+        id="menuToggle"
+        class="hamburger"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="sidebar"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <a href="/" class="logo-link" aria-label="Express home">
+        <img src="/logo-dark.svg" alt="" class="logo logo-dark" />
+        <img src="/logo-white.svg" alt="" class="logo logo-light" />
+      </a>
+    </Flex>
+    <!-- TODO: These are just placeholder to show how actions look like in the header. They will be reviewed later -->
+    <Flex align="center" gap="2">
+      <button class="header-action" aria-label="Search">
+        <div class="header-action-icon">
+          <Icon
+            name="fluent:search-sparkle-16-regular"
+            size="20"
+            color="var(--color-icon-primary)"
+            aria-hidden="true"
+          />
+        </div>
+      </button>
+      <ThemeSwitcher showLabels={false} />
+      <button class="header-action" aria-label="Select language">
+        <div class="header-action-icon">
+          <Icon name="fluent:translate-16-regular" size="20" color="var(--color-icon-primary)" />
+        </div>
+        <BodyMd as="span" vMargin={false} className="sr-only">Select language</BodyMd>
+      </button>
+    </Flex>
+  </Flex>
+</header>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      const newExpandedState = !isExpanded;
+
+      menuToggle.setAttribute('aria-expanded', String(newExpandedState));
+      menuToggle.classList.toggle('active');
+
+      document.dispatchEvent(new CustomEvent('sidebar:toggle'));
+    });
+
+    document.addEventListener('sidebar:closed', () => {
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.classList.remove('active');
+    });
+  }
+</script>
