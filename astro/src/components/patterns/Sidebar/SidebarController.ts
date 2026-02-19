@@ -5,7 +5,6 @@ import { SidebarFocusTrap } from './SidebarFocusTrap';
 const TRANSITION_DURATION = 300;
 
 export class SidebarController {
-  // Focusable element selectors
   private static readonly FOCUSABLE_SELECTOR =
     'a:not([tabindex="-1"]), button:not([tabindex="-1"]), input:not([tabindex="-1"]), select:not([tabindex="-1"]), textarea:not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])';
   private static readonly INTERACTIVE_SELECTOR = 'a, button, input, select, textarea';
@@ -83,7 +82,6 @@ export class SidebarController {
   }
 
   private focusActiveLevel(): void {
-    // Get the current submenu ID from the active path (works for both root and nested levels)
     const currentSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
     const targetContainer = this.sidebar?.querySelector(
       `[data-parent-id="${currentSubmenuId}"]`
@@ -188,7 +186,6 @@ export class SidebarController {
   }
 
   private updateActiveColumns(): void {
-    // Update all nav levels
     const allLevels = this.sidebar?.querySelectorAll('[data-nav-level]');
 
     allLevels?.forEach((column) => {
@@ -196,11 +193,9 @@ export class SidebarController {
       const isCurrentLevel = columnLevel === this.activeLevel;
 
       if (columnLevel === 0) {
-        // Root column - ALWAYS focusable
         column.setAttribute('aria-hidden', 'false');
         this.updateFocusableElements(column as HTMLElement, true);
       } else {
-        // Nested level column - update all panels within it
         const panels = column.querySelectorAll('[data-parent-id]');
         panels.forEach((panel) => {
           const parentId = (panel as HTMLElement).dataset.parentId || '';
@@ -209,7 +204,6 @@ export class SidebarController {
           panel.setAttribute('aria-hidden', isInActivePath ? 'false' : 'true');
           panel.classList.toggle('sidebar-nav-panel--active', isInActivePath);
 
-          // Make focusable only if this is the current level AND the panel is in the active path
           const shouldBeFocusable = isCurrentLevel && isInActivePath;
           this.updateFocusableElements(panel as HTMLElement, shouldBeFocusable);
         });
@@ -220,24 +214,19 @@ export class SidebarController {
   }
 
   private updateFocusableElements(container: HTMLElement, isVisible: boolean): void {
-    // Handle scrollable containers (like sidebar-nav-content) that are focusable due to overflow
     const scrollableContainers = container.querySelectorAll('.sidebar-nav-content, .sidebar-nav');
     scrollableContainers.forEach((scrollContainer) => {
       if (isVisible) {
-        // Remove tabindex to allow scrolling when visible
         scrollContainer.removeAttribute('tabindex');
       } else {
-        // Set tabindex="-1" to remove from tab order when hidden
         scrollContainer.setAttribute('tabindex', '-1');
       }
     });
 
-    // Only manage naturally interactive elements
     const focusableElements = container.querySelectorAll(SidebarController.INTERACTIVE_SELECTOR);
 
     focusableElements.forEach((element) => {
       if (isVisible) {
-        // Restore original tabindex if we previously saved it
         const originalTabindex = element.getAttribute('data-original-tabindex');
         if (originalTabindex !== null) {
           if (originalTabindex === '') {
@@ -248,11 +237,9 @@ export class SidebarController {
           element.removeAttribute('data-original-tabindex');
         }
       } else {
-        // Only modify elements that are currently focusable
         const currentTabindex = element.getAttribute('tabindex');
         const hasOriginalTabindex = element.hasAttribute('data-original-tabindex');
 
-        // Skip if already set to -1 by us or if it was originally -1
         if (!hasOriginalTabindex && currentTabindex !== '-1') {
           element.setAttribute('data-original-tabindex', currentTabindex || '');
           element.setAttribute('tabindex', '-1');
