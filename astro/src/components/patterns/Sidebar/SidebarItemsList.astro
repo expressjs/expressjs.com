@@ -47,11 +47,8 @@ const filteredItems = filterItems(items, version);
     const itemId = getItemId(parentId, sectionIndex, itemIndex);
     const itemHref = item.href;
 
-    // For items with submenu, use the submenu's versioned/basePath config for href resolution
-    const itemVersioned =
-      hasSubmenu(item) && item.submenu.versioned ? item.submenu.versioned : versioned;
-    const itemBasePath =
-      hasSubmenu(item) && item.submenu.basePath ? item.submenu.basePath : basePath;
+    const itemVersioned = item.submenu?.versioned ?? versioned;
+    const itemBasePath = item.submenu?.basePath ?? basePath;
 
     const href = itemHref ? resolveHref(itemHref, lang, itemBasePath, itemVersioned, version) : '';
 
@@ -69,26 +66,34 @@ const filteredItems = filterItems(items, version);
           ? normalizePath(currentPath) === normalizePath(href)
           : false;
 
-    return isLink(item) && !hasSubmenu(item) ? (
-      <SidebarNavItem
-        item={item}
-        href={href}
-        isActive={isActive}
-        variant={variant}
-        type="link"
-        showIcon={showIcon}
-      />
-    ) : hasSubmenu(item) ? (
-      <SidebarNavItem
-        item={item}
-        href={href}
-        isActive={isActive}
-        variant={variant}
-        type="submenu"
-        submenuId={`submenu-${itemId}`}
-        targetLevel={targetLevel}
-        showIcon={showIcon}
-      />
-    ) : null;
+    if (isLink(item) && !hasSubmenu(item)) {
+      return (
+        <SidebarNavItem
+          item={item}
+          href={href}
+          isActive={isActive}
+          variant={variant}
+          type="link"
+          showIcon={showIcon}
+        />
+      );
+    }
+
+    if (hasSubmenu(item)) {
+      return (
+        <SidebarNavItem
+          item={item}
+          href={href}
+          isActive={isActive}
+          variant={variant}
+          type="submenu"
+          submenuId={`submenu-${itemId}`}
+          targetLevel={targetLevel}
+          showIcon={showIcon}
+        />
+      );
+    }
+
+    return null;
   })
 }
