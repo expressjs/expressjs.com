@@ -44,15 +44,23 @@ function shouldOmit(entity: { omitFrom?: VersionPrefix[] }, version: string): bo
 
 const shouldOmitItem = (item: MenuItem, version: string): boolean => shouldOmit(item, version);
 
-export const shouldOmitSection = (section: { omitFrom?: VersionPrefix[] }, version: string): boolean =>
-  shouldOmit(section, version);
+export const shouldOmitSection = (
+  section: { omitFrom?: VersionPrefix[] },
+  version: string
+): boolean => shouldOmit(section, version);
 
 export function filterItems(items: MenuItem[], version: string): MenuItem[] {
   return items.filter((item) => !shouldOmitItem(item, version));
 }
 
-export function getItemId(parentId: string, sectionIndex: number | null, itemIndex: number): string {
-  return sectionIndex !== null ? `${parentId}-s${sectionIndex}-i${itemIndex}` : `${parentId}-i${itemIndex}`;
+export function getItemId(
+  parentId: string,
+  sectionIndex: number | null,
+  itemIndex: number
+): string {
+  return sectionIndex !== null
+    ? `${parentId}-s${sectionIndex}-i${itemIndex}`
+    : `${parentId}-i${itemIndex}`;
 }
 
 export function collectAllSubmenus(
@@ -141,14 +149,29 @@ export function submenuContainsCurrentPath(
   version: string
 ): boolean {
   const normalizedCurrentPath = normalizePath(currentPath);
-  const filteredSections = submenuMenu.sections?.filter((s) => !shouldOmitSection(s, version)) ?? [];
+  const filteredSections =
+    submenuMenu.sections?.filter((s) => !shouldOmitSection(s, version)) ?? [];
 
   return (
     filteredSections.some((section) =>
-      checkItemsForPath(section.items, normalizedCurrentPath, submenuBasePath, submenuVersioned, lang, version)
+      checkItemsForPath(
+        section.items,
+        normalizedCurrentPath,
+        submenuBasePath,
+        submenuVersioned,
+        lang,
+        version
+      )
     ) ||
     (submenuMenu.items
-      ? checkItemsForPath(submenuMenu.items, normalizedCurrentPath, submenuBasePath, submenuVersioned, lang, version)
+      ? checkItemsForPath(
+          submenuMenu.items,
+          normalizedCurrentPath,
+          submenuBasePath,
+          submenuVersioned,
+          lang,
+          version
+        )
       : false)
   );
 }
