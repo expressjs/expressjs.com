@@ -5,6 +5,11 @@ import { SidebarFocusTrap } from './SidebarFocusTrap';
 const TRANSITION_DURATION = 300;
 
 export class SidebarController {
+  // Focusable element selectors
+  private static readonly FOCUSABLE_SELECTOR =
+    'a:not([tabindex="-1"]), button:not([tabindex="-1"]), input:not([tabindex="-1"]), select:not([tabindex="-1"]), textarea:not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])';
+  private static readonly INTERACTIVE_SELECTOR = 'a, button, input, select, textarea';
+
   private sidebar: HTMLElement | null;
   private backdrop: HTMLElement | null;
   private navContainer: HTMLElement | null;
@@ -78,24 +83,27 @@ export class SidebarController {
   }
 
   private focusActiveLevel(): void {
-    // Selector for focusable elements (excluding those with tabindex="-1")
-    const focusableSelector =
-      'a:not([tabindex="-1"]), button:not([tabindex="-1"]), input:not([tabindex="-1"]), select:not([tabindex="-1"]), textarea:not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])';
+    // Get the current submenu ID from the active path (works for both root and nested levels)
+    const currentSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
+    const targetContainer = this.sidebar?.querySelector(
+      `[data-parent-id="${currentSubmenuId}"]`
+    ) as HTMLElement;
 
-    if (this.activeLevel === 0) {
-      // Focus first interactive element in root column
-      const rootColumn = this.sidebar?.querySelector('[data-nav-level="0"]');
-      const firstFocusable = rootColumn?.querySelector(focusableSelector) as HTMLElement;
-      firstFocusable?.focus();
-    } else {
-      // Focus first interactive element in active panel
-      const currentSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
-      const activePanel = this.sidebar?.querySelector(
-        `[data-parent-id="${currentSubmenuId}"]`
-      ) as HTMLElement;
-      const firstFocusable = activePanel?.querySelector(focusableSelector) as HTMLElement;
-      firstFocusable?.focus();
+    if (!targetContainer) {
+      console.warn(`Focus target not found for submenu: ${currentSubmenuId}`);
+      return;
     }
+
+    const firstFocusable = targetContainer.querySelector(
+      SidebarController.FOCUSABLE_SELECTOR
+    ) as HTMLElement;
+
+    if (!firstFocusable) {
+      console.warn(`No focusable elements found in: ${currentSubmenuId}`);
+      return;
+    }
+
+    firstFocusable.focus();
   }
 
   private setupSubmenuTriggers(): void {
@@ -146,7 +154,7 @@ export class SidebarController {
       this.navContainer.dataset.currentNavLevel = String(level);
     }
 
-    setTimeout(() => this.focusActiveLevel(), TRANSITION_DURATION);
+    this.afterTransition(() => this.focusActiveLevel());
   }
 
   private navigateBack(): void {
@@ -176,9 +184,7 @@ export class SidebarController {
     }
 
     // Restore focus to the trigger button after the transition
-    setTimeout(() => {
-      triggerToFocus?.focus();
-    }, TRANSITION_DURATION);
+    this.afterTransition(() => triggerToFocus?.focus());
   }
 
   private updateActiveColumns(): void {
@@ -227,8 +233,7 @@ export class SidebarController {
     });
 
     // Only manage naturally interactive elements
-    const focusableSelectors = 'a, button, input, select, textarea';
-    const focusableElements = container.querySelectorAll(focusableSelectors);
+    const focusableElements = container.querySelectorAll(SidebarController.INTERACTIVE_SELECTOR);
 
     focusableElements.forEach((element) => {
       if (isVisible) {
@@ -260,6 +265,10 @@ export class SidebarController {
     this.navContainer?.classList.add('sidebar-container--interactive');
   }
 
+  private afterTransition(callback: () => void): void {
+    setTimeout(callback, TRANSITION_DURATION);
+  }
+
   private handleKeyDown(e: KeyboardEvent): void {
     if (e.key === 'Escape' && this.isOpen) {
       if (this.activeLevel > 0) {
@@ -283,7 +292,7 @@ export class SidebarController {
     this.backdrop.classList.add('sidebar-backdrop--visible');
     document.body.style.overflow = 'hidden';
 
-    setTimeout(() => this.focusActiveLevel(), TRANSITION_DURATION);
+    this.afterTransition(() => this.focusActiveLevel());
   }
 
   public close(): void {
@@ -297,7 +306,7 @@ export class SidebarController {
     this.sidebar.classList.remove('sidebar--open');
     this.backdrop.classList.remove('sidebar-backdrop--visible');
 
-    setTimeout(() => this.resetToInitialState(), TRANSITION_DURATION);
+    this.afterTransition(() => this.resetToInitialState());
 
     document.body.style.overflow = '';
     this.lastFocusedElement?.focus();
@@ -327,16 +336,12 @@ export class SidebarController {
       this.open();
     }
   }
+}
 
-  public getVersion(): string {
-    return this.versionManager?.getVersion() || '5x';
-  }
-
-  public setVersion(version: string): void {
-    this.versionManager?.setVersion(version);
+declare global {
+  interface Window {
+    sidebarController?: SidebarController;
   }
 }
 
-const sidebarController = new SidebarController();
-(window as Window & { sidebarController?: SidebarController }).sidebarController =
-  sidebarController;
+(window as Window).sidebarController = new SidebarController();
