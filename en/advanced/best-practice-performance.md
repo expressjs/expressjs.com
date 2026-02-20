@@ -146,6 +146,7 @@ We also don't recommend using [domains](https://nodejs.org/api/domain.html). It 
 ## Things to do in your environment / setup {#in-environment}
 
 Here are some things you can do in your system environment to improve your app's performance:
+These practices can run on any Node.js-capable host, including managed platforms such as [Hostinger Web Apps Hosting](https://www.hostinger.com/web-apps-hosting).
 
 * [Set NODE_ENV to "production"](#set-node_env-to-production)
 * [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
