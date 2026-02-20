@@ -52,7 +52,9 @@ const filteredItems = filterItems(items, version);
       const itemVersioned = item.submenu?.versioned ?? versioned;
       const itemBasePath = item.submenu?.basePath ?? basePath;
 
-      const href = itemHref ? resolveHref(itemHref, lang, itemBasePath, itemVersioned, version) : '';
+      const href = itemHref
+        ? resolveHref(itemHref, lang, itemBasePath, itemVersioned, version)
+        : '';
 
       const isActive =
         hasSubmenu(item) && variant === 'root'
