@@ -53,6 +53,11 @@ export class SidebarController {
     this.backdrop?.addEventListener('click', () => this.close());
     document.addEventListener('keydown', (e) => this.handleKeyDown(e));
     document.addEventListener('sidebar:toggle', () => this.toggle());
+    document.addEventListener('sidebar:versionChange', () => {
+      this.updateRootActiveStates();
+      this.updateRootActiveClasses();
+      this.updateActiveColumns();
+    });
 
     this.setupSubmenuTriggers();
     this.setupBackButtons();
@@ -60,6 +65,7 @@ export class SidebarController {
     this.versionManager?.setup();
     this.initializeFromActiveState();
     this.updateActiveColumns();
+    this.updateRootActiveClasses();
   }
 
   private initializeFromActiveState(): void {
@@ -151,6 +157,30 @@ export class SidebarController {
         ?.querySelectorAll(`[data-target-id="${currentSubmenuId}"]`)
         .forEach((trigger) => {
           trigger.setAttribute('aria-expanded', 'true');
+        });
+    }
+  }
+
+  private updateRootActiveClasses(): void {
+    // Get the root submenu ID from the initial active path (based on content version)
+    // This represents which section the current page belongs to
+    const rootSubmenuId =
+      this.initialActiveSubmenuPath.length > 1 ? this.initialActiveSubmenuPath[1] : null;
+
+    // Remove all active classes from root submenu triggers across all version menus
+    this.sidebar
+      ?.querySelectorAll('[data-submenu-trigger][data-target-level="1"]')
+      .forEach((trigger) => {
+        trigger.classList.remove('sidebar-nav-item--active');
+      });
+
+    // Add active class to triggers that point to the current page's section
+    // This applies across all version menus
+    if (rootSubmenuId) {
+      this.sidebar
+        ?.querySelectorAll(`[data-target-id="${rootSubmenuId}"][data-target-level="1"]`)
+        .forEach((trigger) => {
+          trigger.classList.add('sidebar-nav-item--active');
         });
     }
   }
@@ -403,6 +433,10 @@ export class SidebarController {
     } else {
       this.open();
     }
+  }
+
+  public clearVersionWarning(): void {
+    this.versionManager?.clearV3Warning();
   }
 }
 

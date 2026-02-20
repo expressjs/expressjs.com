@@ -4,16 +4,15 @@ import { Alert, BodyMd } from '@/components/primitives';
 ---
 
 <Alert
-  variant="warning"
+  variant="default"
   dismissible
   dismissLabel="Dismiss warning"
   class="version-warning-banner"
   data-version-warning
 >
   <BodyMd as="p" vMargin={false}>
-    v3 is end-of-life. There is no documentation available. <a href="/support"
-      >Learn more about support</a
-    >
+    Version 3.x is no longer supported and has reached end-of-life. Documentation is no longer
+    available. <a href="/support">Learn more</a>
   </BodyMd>
 </Alert>
 
@@ -35,10 +34,8 @@ import { Alert, BodyMd } from '@/components/primitives';
     }
 
     private init(): void {
-      // Add our custom dismiss handler before the Alert component's handler
       this.dismissButton?.addEventListener('click', () => this.dismiss());
 
-      // Check if warning was dismissed in this session
       if (this.wasDismissed()) {
         this.hide();
       }
@@ -47,14 +44,9 @@ import { Alert, BodyMd } from '@/components/primitives';
     private dismiss(): void {
       sessionStorage.setItem(VersionWarningBanner.STORAGE_KEY, Date.now().toString());
 
-      // Clear the v3 attempt flag in version manager
       const sidebarController = (window as Window & { sidebarController?: SidebarController })
         .sidebarController;
-      if (sidebarController) {
-        // Access the version manager through the controller (we'll need to expose it)
-        const versionManager = (sidebarController as any).versionManager;
-        versionManager?.clearV3Warning();
-      }
+      sidebarController?.clearVersionWarning();
     }
 
     private hide(): void {
