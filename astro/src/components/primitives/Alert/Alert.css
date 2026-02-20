@@ -3,7 +3,9 @@
     padding: var(--space-3);
     border-radius: var(--radius-base);
     border: 1px solid;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
   }
 
   .alert[data-dismissed='true'] {
