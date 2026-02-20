@@ -1,41 +1,21 @@
 ---
 import './VersionWarningBanner.css';
-import { Body } from '@/components/primitives';
-import { Icon } from 'astro-icon/components';
+import { Alert, BodyMd } from '@/components/primitives';
 ---
 
-<div class="version-warning-banner" data-version-warning aria-live="polite" role="alert">
-  <div class="version-warning-content">
-    <Icon
-      name="fluent:warning-28-regular"
-      size="20"
-      color="var(--color-text-warning)"
-      class="version-warning-icon"
-      aria-hidden="true"
-    />
-    <div class="version-warning-message">
-      <Body as="p" vMargin={false} class="version-warning-text">
-        v3 is end-of-life. There is no documentation available. <a
-          href="/support"
-          class="version-warning-link">Learn more about support</a
-        >
-      </Body>
-    </div>
-    <button
-      type="button"
-      class="version-warning-close"
-      aria-label="Dismiss warning"
-      data-warning-dismiss
+<Alert
+  variant="warning"
+  dismissible
+  dismissLabel="Dismiss warning"
+  class="version-warning-banner"
+  data-version-warning
+>
+  <BodyMd as="p" vMargin={false}>
+    v3 is end-of-life. There is no documentation available. <a href="/support"
+      >Learn more about support</a
     >
-      <Icon
-        name="fluent:dismiss-20-regular"
-        size="16"
-        color="var(--color-text-warning)"
-        aria-hidden="true"
-      />
-    </button>
-  </div>
-</div>
+  </BodyMd>
+</Alert>
 
 <script>
   import type { SidebarController } from './SidebarController';
@@ -47,7 +27,7 @@ import { Icon } from 'astro-icon/components';
 
     constructor() {
       this.banner = document.querySelector('[data-version-warning]');
-      this.dismissButton = this.banner?.querySelector('[data-warning-dismiss]') || null;
+      this.dismissButton = this.banner?.querySelector('[data-alert-dismiss]') || null;
 
       if (this.banner && this.dismissButton) {
         this.init();
@@ -55,6 +35,7 @@ import { Icon } from 'astro-icon/components';
     }
 
     private init(): void {
+      // Add our custom dismiss handler before the Alert component's handler
       this.dismissButton?.addEventListener('click', () => this.dismiss());
 
       // Check if warning was dismissed in this session
@@ -64,7 +45,6 @@ import { Icon } from 'astro-icon/components';
     }
 
     private dismiss(): void {
-      this.hide();
       sessionStorage.setItem(VersionWarningBanner.STORAGE_KEY, Date.now().toString());
 
       // Clear the v3 attempt flag in version manager

@@ -1,0 +1,121 @@
+---
+/**
+ * Alert Primitive Component
+ *
+ * A flexible alert component for displaying notifications, warnings, and informational messages.
+ * Supports multiple variants (default, info, success, warning, error) and optional dismiss functionality.
+ *
+ * @example
+ * <Alert variant="warning">This is a warning message</Alert>
+ *
+ * @example
+ * <Alert variant="success" dismissible>
+ *   Operation completed successfully!
+ * </Alert>
+ *
+ * @example
+ * <Alert variant="info" icon="fluent:info-24-regular">
+ *   <p>Custom content with <a href="#">links</a></p>
+ * </Alert>
+ */
+import './Alert.css';
+import type { AlertProps } from './types';
+import { Icon } from 'astro-icon/components';
+
+type Props = AlertProps;
+
+const {
+  variant = 'default',
+  dismissible = false,
+  icon,
+  hideIcon = false,
+  dismissLabel = 'Dismiss alert',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const defaultIcons = {
+  default: 'fluent:info-24-regular',
+  info: 'fluent:info-24-regular',
+  success: 'fluent:checkmark-circle-24-regular',
+  warning: 'fluent:warning-28-regular',
+  error: 'fluent:error-circle-24-regular',
+} as const;
+
+const iconName = icon ?? defaultIcons[variant];
+---
+
+<div
+  class:list={['alert', `alert--${variant}`, className]}
+  role="alert"
+  aria-live="polite"
+  {...rest}
+>
+  <div class="alert__content">
+    {
+      !hideIcon && (
+        <Icon
+          name={iconName}
+          size="20"
+          class="alert__icon"
+          aria-hidden="true"
+        />
+      )
+    }
+    <div class="alert__message">
+      <slot />
+    </div>
+    {
+      dismissible && (
+        <button
+          type="button"
+          class="alert__dismiss"
+          aria-label={dismissLabel}
+          data-alert-dismiss
+        >
+          <Icon
+            name="fluent:dismiss-20-regular"
+            size="16"
+            aria-hidden="true"
+          />
+        </button>
+      )
+    }
+  </div>
+</div>
+
+{
+  dismissible && (
+    <script>
+      class AlertDismiss {
+        private alerts: NodeListOf<HTMLElement>;
+
+        constructor() {
+          this.alerts = document.querySelectorAll('.alert');
+          this.init();
+        }
+
+        private init(): void {
+          this.alerts.forEach((alert) => {
+            const dismissButton = alert.querySelector('[data-alert-dismiss]');
+            if (dismissButton) {
+              dismissButton.addEventListener('click', () => this.dismiss(alert));
+            }
+          });
+        }
+
+        private dismiss(alert: HTMLElement): void {
+          // Trigger animation
+          alert.setAttribute('data-dismissed', 'true');
+
+          // Remove from DOM after animation
+          setTimeout(() => {
+            alert.remove();
+          }, 200);
+        }
+      }
+
+      new AlertDismiss();
+    </script>
+  )
+}

@@ -24,6 +24,7 @@ import {
   BodyXs,
   Button,
   Code,
+  Alert,
 } from '@components/primitives';
 import { Code as CodeBlock } from 'astro:components';
 import { getLangFromUrl } from '@i18n/utils';
@@ -55,6 +56,7 @@ const lang = getLangFromUrl(Astro.url);
         <li><a href="#colors" class="ds-nav__link">Colors</a></li>
         <li><a href="#spacing" class="ds-nav__link">Spacing</a></li>
         <li><a href="#buttons" class="ds-nav__link">Buttons</a></li>
+        <li><a href="#alerts" class="ds-nav__link">Alerts</a></li>
         <li><a href="#grid" class="ds-nav__link">Grid</a></li>
         <li><a href="#breakpoints" class="ds-nav__link">Breakpoints</a></li>
       </ul>
@@ -692,6 +694,141 @@ import { Button } from "@components/primitives";
 <Button variant="primary">Click me</Button>
 <Button variant="secondary" size="sm" ghost>Ghost</Button>
 <Button as="a" href="/docs">Link Button</Button>
+          `}
+          />
+        </div>
+      </section>
+
+      <!-- ALERTS -->
+      <section id="alerts" class="ds-section">
+        <H2>Alerts</H2>
+        <BodyMd color="secondary">
+          Flexible alert component for displaying notifications, warnings, and informational messages.
+          Supports multiple variants and optional dismiss functionality.
+        </BodyMd>
+
+        <div class="ds-subsection">
+          <H3>Variants</H3>
+          <div class="ds-demo ds-demo--col">
+            <Alert variant="default">
+              <BodyMd vMargin={false}>
+                <strong>Default alert.</strong> Use for general information or neutral messages.
+              </BodyMd>
+            </Alert>
+
+            <Alert variant="info">
+              <BodyMd vMargin={false}>
+                <strong>Info alert.</strong> Use for helpful tips or informational messages.
+              </BodyMd>
+            </Alert>
+
+            <Alert variant="success">
+              <BodyMd vMargin={false}>
+                <strong>Success alert.</strong> Use for successful operations or confirmations.
+              </BodyMd>
+            </Alert>
+
+            <Alert variant="warning">
+              <BodyMd vMargin={false}>
+                <strong>Warning alert.</strong> Use for warnings or important notices.
+              </BodyMd>
+            </Alert>
+
+            <Alert variant="error">
+              <BodyMd vMargin={false}>
+                <strong>Error alert.</strong> Use for errors or critical issues that need attention.
+              </BodyMd>
+            </Alert>
+          </div>
+        </div>
+
+        <div class="ds-subsection">
+          <H3>Dismissible</H3>
+          <div class="ds-demo ds-demo--col">
+            <Alert variant="info" dismissible>
+              <BodyMd vMargin={false}>
+                This alert can be dismissed. Click the × button to remove it.
+              </BodyMd>
+            </Alert>
+
+            <Alert variant="warning" dismissible dismissLabel="Close warning">
+              <BodyMd vMargin={false}>
+                Dismissible alerts have a custom aria-label for accessibility.
+              </BodyMd>
+            </Alert>
+          </div>
+        </div>
+
+        <div class="ds-subsection">
+          <H3>With Links</H3>
+          <div class="ds-demo ds-demo--col">
+            <Alert variant="warning">
+              <BodyMd vMargin={false}>
+                v3 is end-of-life. There is no documentation available. <a href="/support">Learn more about support</a>
+              </BodyMd>
+            </Alert>
+
+            <Alert variant="info">
+              <BodyMd vMargin={false}>
+                New version available! <a href="/changelog">Check out what's new</a> in the latest release.
+              </BodyMd>
+            </Alert>
+          </div>
+        </div>
+
+        <div class="ds-subsection">
+          <H3>Custom Icons</H3>
+          <div class="ds-demo ds-demo--col">
+            <Alert variant="success" icon="fluent:rocket-24-regular">
+              <BodyMd vMargin={false}>
+                Deployment successful! Your app is now live.
+              </BodyMd>
+            </Alert>
+
+            <Alert variant="info" hideIcon>
+              <BodyMd vMargin={false}>
+                This alert has no icon. Use <Code as="code">hideIcon</Code> to remove it.
+              </BodyMd>
+            </Alert>
+          </div>
+        </div>
+
+        <div class="ds-subsection">
+          <H3>Rich Content</H3>
+          <div class="ds-demo">
+            <Alert variant="info">
+              <H4 style="margin-top: 0;">Getting Started</H4>
+              <Body>
+                Alerts can contain rich content including headings, paragraphs, lists, and more.
+              </Body>
+              <ul style="margin: var(--space-2) 0; padding-left: var(--space-4);">
+                <li>First step in the process</li>
+                <li>Second step to complete</li>
+                <li>Final step before finishing</li>
+              </ul>
+            </Alert>
+          </div>
+        </div>
+
+        <div class="ds-subsection">
+          <H3>Usage</H3>
+          <CodeBlock
+            lang="js"
+            wrap
+            code={`
+import { Alert } from "@components/primitives";
+
+<Alert variant="warning">
+  <p>This is a warning message</p>
+</Alert>
+
+<Alert variant="success" dismissible>
+  Operation completed successfully!
+</Alert>
+
+<Alert variant="info" icon="fluent:lightbulb-24-regular">
+  <p>Pro tip: Use custom icons for better context</p>
+</Alert>
           `}
           />
         </div>

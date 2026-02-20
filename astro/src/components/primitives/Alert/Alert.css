@@ -1,0 +1,179 @@
+@layer primitives {
+  .alert {
+    padding: var(--space-3);
+    border-radius: var(--radius-base);
+    border: 1px solid;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .alert[data-dismissed='true'] {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  .alert__content {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .alert__icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .alert__message {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .alert__message > :first-child {
+    margin-top: 0;
+  }
+
+  .alert__message > :last-child {
+    margin-bottom: 0;
+  }
+
+  .alert__dismiss {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: var(--space-1);
+    cursor: pointer;
+    border-radius: var(--radius-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+  }
+
+  /* ============================================
+     VARIANT: DEFAULT
+     ============================================ */
+  .alert--default {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border-primary);
+    color: var(--color-text-primary);
+  }
+
+  .alert--default .alert__icon {
+    color: var(--color-icon-secondary);
+  }
+
+  .alert--default .alert__dismiss:hover,
+  .alert--default .alert__dismiss:focus {
+    background-color: var(--color-bg-tertiary);
+  }
+
+  .alert--default .alert__dismiss:focus {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* ============================================
+     VARIANT: INFO
+     ============================================ */
+  .alert--info {
+    background-color: var(--color-bg-info);
+    border-color: var(--color-border-info);
+    color: var(--color-text-info);
+  }
+
+  .alert--info .alert__icon {
+    color: var(--color-text-info);
+  }
+
+  .alert--info .alert__dismiss:hover,
+  .alert--info .alert__dismiss:focus {
+    background-color: var(--color-border-info);
+  }
+
+  .alert--info .alert__dismiss:focus {
+    outline: 2px solid var(--color-text-info);
+    outline-offset: 2px;
+  }
+
+  /* ============================================
+     VARIANT: SUCCESS
+     ============================================ */
+  .alert--success {
+    background-color: var(--color-bg-success);
+    border-color: var(--color-border-success);
+    color: var(--color-text-success);
+  }
+
+  .alert--success .alert__icon {
+    color: var(--color-text-success);
+  }
+
+  .alert--success .alert__dismiss:hover,
+  .alert--success .alert__dismiss:focus {
+    background-color: var(--color-border-success);
+  }
+
+  .alert--success .alert__dismiss:focus {
+    outline: 2px solid var(--color-text-success);
+    outline-offset: 2px;
+  }
+
+  /* ============================================
+     VARIANT: WARNING
+     ============================================ */
+  .alert--warning {
+    background-color: var(--color-bg-warning);
+    border-color: var(--color-border-warning);
+    color: var(--color-text-warning);
+  }
+
+  .alert--warning .alert__icon {
+    color: var(--color-text-warning);
+  }
+
+  .alert--warning .alert__dismiss:hover,
+  .alert--warning .alert__dismiss:focus {
+    background-color: var(--color-border-warning);
+  }
+
+  .alert--warning .alert__dismiss:focus {
+    outline: 2px solid var(--color-text-warning);
+    outline-offset: 2px;
+  }
+
+  /* ============================================
+     VARIANT: ERROR
+     ============================================ */
+  .alert--error {
+    background-color: var(--color-bg-error);
+    border-color: var(--color-border-error);
+    color: var(--color-text-error);
+  }
+
+  .alert--error .alert__icon {
+    color: var(--color-text-error);
+  }
+
+  .alert--error .alert__dismiss:hover,
+  .alert--error .alert__dismiss:focus {
+    background-color: var(--color-border-error);
+  }
+
+  .alert--error .alert__dismiss:focus {
+    outline: 2px solid var(--color-text-error);
+    outline-offset: 2px;
+  }
+
+  /* ============================================
+     LINK STYLES IN ALERTS
+     ============================================ */
+  .alert a {
+    text-decoration: underline;
+    font-weight: 600;
+    color: inherit;
+  }
+
+  .alert a:hover,
+  .alert a:focus {
+    text-decoration: none;
+  }
+}
