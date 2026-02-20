@@ -52,32 +52,14 @@ const iconName = icon ?? defaultIcons[variant];
   {...rest}
 >
   <div class="alert__content">
-    {
-      !hideIcon && (
-        <Icon
-          name={iconName}
-          size="20"
-          class="alert__icon"
-          aria-hidden="true"
-        />
-      )
-    }
+    {!hideIcon && <Icon name={iconName} size="20" class="alert__icon" aria-hidden="true" />}
     <div class="alert__message">
       <slot />
     </div>
     {
       dismissible && (
-        <button
-          type="button"
-          class="alert__dismiss"
-          aria-label={dismissLabel}
-          data-alert-dismiss
-        >
-          <Icon
-            name="fluent:dismiss-20-regular"
-            size="16"
-            aria-hidden="true"
-          />
+        <button type="button" class="alert__dismiss" aria-label={dismissLabel} data-alert-dismiss>
+          <Icon name="fluent:dismiss-20-regular" size="16" aria-hidden="true" />
         </button>
       )
     }
