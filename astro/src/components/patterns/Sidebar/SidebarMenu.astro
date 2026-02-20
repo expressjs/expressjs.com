@@ -157,6 +157,7 @@ const versionMenus = allVersions.map((versionId) => {
                           panelHasActiveItem && 'sidebar-nav-panel--active',
                         ]}
                         data-parent-id={submenu.id}
+                        data-versioned={submenu.versioned.length > 0 ? submenu.versioned.join(',') : undefined}
                         aria-hidden="true"
                       >
                         {availableVersions.length > 0 && (

@@ -141,19 +141,15 @@ export class SidebarController {
   }
 
   private updateRootActiveStates(): void {
-    // Clear all root submenu active states
     this.sidebar?.querySelectorAll('[data-submenu-trigger]').forEach((trigger) => {
-      trigger.classList.remove('sidebar-nav-item--active');
       trigger.setAttribute('aria-expanded', 'false');
     });
 
-    // Set active state for current submenu path
     if (this.activeSubmenuPath.length > 1) {
-      const currentSubmenuId = this.activeSubmenuPath[1]; // First submenu from root
+      const currentSubmenuId = this.activeSubmenuPath[1];
       this.sidebar
         ?.querySelectorAll(`[data-target-id="${currentSubmenuId}"]`)
         .forEach((trigger) => {
-          trigger.classList.add('sidebar-nav-item--active');
           trigger.setAttribute('aria-expanded', 'true');
         });
     }
@@ -205,18 +201,16 @@ export class SidebarController {
       return;
     }
 
-    // If exploring and navigating to a different root submenu, sync versions first
+    // Check if we should show v3 warning (before any state changes)
+    const shouldShowV3Warning = this.versionManager?.shouldShowV3Warning() || false;
+
+    // If exploring and navigating to a different root submenu, sync versions
     if (
       this.versionManager?.isExploring() &&
       level === 1 &&
       this.activeSubmenuPath[1] !== submenuId
     ) {
       this.versionManager.syncVersionsFromUrl();
-    }
-
-    // Check for v3 warnings before navigation
-    if (!this.versionManager?.checkV3Warning()) {
-      return;
     }
 
     this.enableTransitions();
@@ -232,7 +226,13 @@ export class SidebarController {
       this.navContainer.dataset.currentNavLevel = String(level);
     }
 
-    this.afterTransition(() => this.focusActiveLevel());
+    this.afterTransition(() => {
+      // Show v3 warning in the new submenu if needed
+      if (shouldShowV3Warning) {
+        this.versionManager?.showV3WarningInPanel(submenuId);
+      }
+      this.focusActiveLevel();
+    });
   }
 
   private navigateBack(): void {

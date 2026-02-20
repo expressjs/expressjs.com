@@ -38,6 +38,8 @@ import { Icon } from 'astro-icon/components';
 </div>
 
 <script>
+  import type { SidebarController } from './SidebarController';
+
   class VersionWarningBanner {
     private banner: HTMLElement | null;
     private dismissButton: HTMLButtonElement | null;
@@ -64,6 +66,15 @@ import { Icon } from 'astro-icon/components';
     private dismiss(): void {
       this.hide();
       sessionStorage.setItem(VersionWarningBanner.STORAGE_KEY, Date.now().toString());
+
+      // Clear the v3 attempt flag in version manager
+      const sidebarController = (window as Window & { sidebarController?: SidebarController })
+        .sidebarController;
+      if (sidebarController) {
+        // Access the version manager through the controller (we'll need to expose it)
+        const versionManager = (sidebarController as any).versionManager;
+        versionManager?.clearV3Warning();
+      }
     }
 
     private hide(): void {

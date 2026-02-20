@@ -9,10 +9,17 @@ export const apiMenu: Menu = {
           label: 'Overview',
           ariaLabel: 'Overview',
         },
+        {
+          href: '/api/express',
+          label: 'Express',
+          ariaLabel: 'Express',
+          omitFrom: ['5x', '4x'],
+        },
       ],
     },
     {
       title: 'Express',
+      omitFrom: ['3x'],
       items: [
         { href: `/api/express/overview`, label: 'Overview', ariaLabel: 'Express overview' },
         {
@@ -20,6 +27,7 @@ export const apiMenu: Menu = {
           ariaLabel: 'Express methods',
           omitFrom: ['3x'],
           submenu: {
+            versioned: ['5x', '4x'],
             items: [
               {
                 href: `/api/express/expressjson`,

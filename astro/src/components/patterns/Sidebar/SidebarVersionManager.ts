@@ -4,6 +4,7 @@ export class SidebarVersionManager {
   private displayVersion: string; // Menu version being shown
   private isExploringMode: boolean = false;
   private activeSubmenuPath: string[];
+  private attemptedV3Navigation: boolean = false; // Track if user tried to view v3
 
   constructor(sidebar: HTMLElement, contentVersion: string, activeSubmenuPath: string[]) {
     this.sidebar = sidebar;
@@ -29,6 +30,11 @@ export class SidebarVersionManager {
     const previousVersion = this.displayVersion;
     this.displayVersion = newVersion;
     this.isExploringMode = this.displayVersion !== this.currentVersion;
+
+    // Track if user is attempting to view v3 when not on v3 content
+    if (newVersion === '3x' && this.currentVersion !== '3x') {
+      this.attemptedV3Navigation = true;
+    }
 
     // Update sidebar data attribute for CSS visibility
     this.sidebar.dataset.displayVersion = newVersion;
@@ -74,6 +80,7 @@ export class SidebarVersionManager {
     this.currentVersion = urlVersion;
     this.displayVersion = urlVersion;
     this.isExploringMode = false;
+    // Keep attemptedV3Navigation flag - it persists until page navigation
 
     // Update UI
     this.sidebar.dataset.contentVersion = urlVersion;
@@ -93,34 +100,42 @@ export class SidebarVersionManager {
     if (this.isExploringMode && href.includes(`/${this.currentVersion}/`)) {
       href = href.replace(`/${this.currentVersion}/`, `/${this.displayVersion}/`);
     }
+    // Clear v3 attempt flag on page navigation
+    this.attemptedV3Navigation = false;
     window.location.href = href;
   }
 
-  checkV3Warning(): boolean {
-    // Returns false and shows warning if switching to v3 in non-v3 context
-    if (this.displayVersion === '3x' && this.currentVersion !== '3x') {
-      this.showV3Warning();
-      return false;
-    }
-    return true;
+  shouldShowV3Warning(): boolean {
+    // Check if we should show v3 warning (without showing it or changing state)
+    // Use persistent flag that survives version sync
+    return this.attemptedV3Navigation;
   }
 
-  private showV3Warning(): void {
-    // Show warning banner in active submenu
-    const activeSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
-    const activePanel = this.sidebar.querySelector(
-      `[data-parent-id="${activeSubmenuId}"]`
+  showV3WarningInPanel(panelId: string): void {
+    // Show warning banner only in versioned panels that don't support v3
+    const panel = this.sidebar.querySelector(
+      `[data-parent-id="${panelId}"]`
     ) as HTMLElement;
 
-    if (activePanel) {
-      const warningBanner = activePanel.querySelector('[data-version-warning]');
-      if (warningBanner) {
-        warningBanner.setAttribute('data-show-warning', 'true');
+    if (panel) {
+      // Check if panel is versioned and doesn't support v3
+      const versionedAttr = panel.dataset.versioned;
+
+      // Only show warning if:
+      // 1. Panel is versioned (has data-versioned attribute)
+      // 2. v3 is not supported (doesn't include '3x')
+      if (versionedAttr && !versionedAttr.split(',').includes('3x')) {
+        const warningBanner = panel.querySelector('[data-version-warning]');
+        if (warningBanner) {
+          warningBanner.setAttribute('data-show-warning', 'true');
+        }
       }
     }
+  }
 
-    // Revert to content version
-    this.handleVersionChange(this.currentVersion);
+  clearV3Warning(): void {
+    // Clear the v3 attempt flag (called when warning is dismissed)
+    this.attemptedV3Navigation = false;
   }
 
   updateVisibility(activeLevel: number): void {
