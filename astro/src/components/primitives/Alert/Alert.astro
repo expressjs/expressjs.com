@@ -84,38 +84,36 @@ const iconName = icon ?? defaultIcons[variant];
   </div>
 </div>
 
-{
-  dismissible && (
-    <script>
-      class AlertDismiss {
-        private alerts: NodeListOf<HTMLElement>;
+<script>
+  class AlertDismiss {
+    private alerts: NodeListOf<HTMLElement>;
 
-        constructor() {
-          this.alerts = document.querySelectorAll('.alert');
-          this.init();
-        }
-
-        private init(): void {
-          this.alerts.forEach((alert) => {
-            const dismissButton = alert.querySelector('[data-alert-dismiss]');
-            if (dismissButton) {
-              dismissButton.addEventListener('click', () => this.dismiss(alert));
-            }
-          });
-        }
-
-        private dismiss(alert: HTMLElement): void {
-          // Trigger animation
-          alert.setAttribute('data-dismissed', 'true');
-
-          // Remove from DOM after animation
-          setTimeout(() => {
-            alert.remove();
-          }, 200);
-        }
+    constructor() {
+      this.alerts = document.querySelectorAll('.alert');
+      if (this.alerts.length > 0) {
+        this.init();
       }
+    }
 
-      new AlertDismiss();
-    </script>
-  )
-}
+    private init(): void {
+      this.alerts.forEach((alert) => {
+        const dismissButton = alert.querySelector('[data-alert-dismiss]') as HTMLButtonElement;
+        if (dismissButton) {
+          dismissButton.addEventListener('click', () => this.dismiss(alert));
+        }
+      });
+    }
+
+    private dismiss(alert: HTMLElement): void {
+      // Trigger animation
+      alert.setAttribute('data-dismissed', 'true');
+
+      // Remove from DOM after animation
+      setTimeout(() => {
+        alert.remove();
+      }, 200);
+    }
+  }
+
+  new AlertDismiss();
+</script>
