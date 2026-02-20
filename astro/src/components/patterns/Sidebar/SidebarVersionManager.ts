@@ -113,7 +113,11 @@ export class SidebarVersionManager {
 
   showV3WarningInPanel(panelId: string): void {
     // Show warning banner only in versioned panels that don't support v3
-    const panel = this.sidebar.querySelector(
+    // Scope to the current version menu to avoid finding panels from other versions
+    const versionMenu = this.sidebar.querySelector(
+      `[data-version-menu="${this.displayVersion}"]`
+    );
+    const panel = versionMenu?.querySelector(
       `[data-parent-id="${panelId}"]`
     ) as HTMLElement;
 
