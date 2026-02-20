@@ -389,6 +389,27 @@
     }
   }
 
+  /* Version menu visibility */
+  .sidebar-version-menu {
+    display: none;
+  }
+
+  .sidebar[data-display-version='5x'] .sidebar-version-menu[data-version-menu='5x'],
+  .sidebar[data-display-version='4x'] .sidebar-version-menu[data-version-menu='4x'],
+  .sidebar[data-display-version='3x'] .sidebar-version-menu[data-version-menu='3x'] {
+    display: contents;
+  }
+
+  /* Exploration mode - fade out active indicators in nested menus only */
+  .sidebar--exploring .sidebar-nested .sidebar-nav-item--active::before {
+    opacity: 0.3;
+  }
+
+  /* Root column maintains active state during exploration */
+  .sidebar-root-column .sidebar-nav-item--active {
+    /* Ensure root items stay fully visible */
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .sidebar,
     .sidebar-backdrop,

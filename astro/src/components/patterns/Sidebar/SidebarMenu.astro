@@ -5,6 +5,7 @@ import { Body } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
 import SidebarItemsList from './SidebarItemsList.astro';
+import VersionWarningBanner from './VersionWarningBanner.astro';
 import {
   shouldOmitSection,
   collectAllSubmenus,
@@ -35,7 +36,6 @@ const {
   currentPath,
   basePath = '',
   versioned = [],
-  version = '5x',
   versions = [],
   defaultVersion = '5x',
   parentId = 'root',
@@ -43,185 +43,204 @@ const {
 
 if (level !== 0) return null;
 
-const submenus: SubmenuData[] = [];
-collectAllSubmenus(menu, level, parentId, basePath, versioned, version, submenus);
+// Pre-render all versions
+const allVersions: VersionPrefix[] = ['5x', '4x', '3x'];
+const versionMenus = allVersions.map((versionId) => {
+  const submenus: SubmenuData[] = [];
+  collectAllSubmenus(menu, level, parentId, basePath, versioned, versionId, submenus);
 
-const submenusByLevel = groupSubmenusByLevel(submenus);
-const sortedLevels = [...submenusByLevel.keys()].sort((a, b) => a - b);
-const initialActiveLevel = calculateInitialActiveLevel(submenus, currentPath, lang, version);
+  const submenusByLevel = groupSubmenusByLevel(submenus);
+  const sortedLevels = [...submenusByLevel.keys()].sort((a, b) => a - b);
+  const initialActiveLevel = calculateInitialActiveLevel(submenus, currentPath, lang, versionId);
 
-const filteredSections =
-  menu.sections?.filter((section) => !shouldOmitSection(section, version)) ?? [];
+  const filteredSections =
+    menu.sections?.filter((section) => !shouldOmitSection(section, versionId)) ?? [];
 
-const commonItemsListProps = {
-  currentPath,
-  lang,
-  basePath,
-  versioned,
-  version,
-};
+  return {
+    versionId,
+    submenusByLevel,
+    sortedLevels,
+    initialActiveLevel,
+    filteredSections,
+  };
+});
 ---
 
-<div
-  class="sidebar-column sidebar-root-column"
-  data-nav-level={level}
-  data-parent-id={parentId}
-  data-initial-active-level={initialActiveLevel}
-  aria-hidden="false"
->
-  <nav class="sidebar-nav" aria-label="Main navigation">
-    <ul class="sidebar-nav-list">
-      <li class="sidebar-logo-item">
-        <a href="/" class="logo-link sidebar-nav-item" aria-label="Express home">
-          <Icon name="logo-dark" class="logo logo-dark" />
-          <Icon name="logo-light" class="logo logo-light" />
-        </a>
-      </li>
-      {
-        filteredSections.map((section, sectionIndex) => (
-          <li class="sidebar-section">
-            {section.title && <Body as="h3">{section.title}</Body>}
-            <ul class="sidebar-section-list">
+{
+  versionMenus.map((versionMenu) => {
+    const { versionId, filteredSections, sortedLevels, submenusByLevel } = versionMenu;
+    const commonItemsListProps = {
+      currentPath,
+      lang,
+      basePath,
+      versioned,
+      version: versionId,
+    };
+
+    return (
+      <div class="sidebar-version-menu" data-version-menu={versionId}>
+        <div
+          class="sidebar-column sidebar-root-column"
+          data-nav-level={level}
+          data-parent-id={parentId}
+          data-initial-active-level={versionMenu.initialActiveLevel}
+          aria-hidden="false"
+        >
+          <nav class="sidebar-nav" aria-label="Main navigation">
+            <ul class="sidebar-nav-list">
+              <li class="sidebar-logo-item">
+                <a href="/" class="logo-link sidebar-nav-item" aria-label="Express home">
+                  <Icon name="logo-dark" class="logo logo-dark" />
+                  <Icon name="logo-light" class="logo logo-light" />
+                </a>
+              </li>
+              {filteredSections.map((section, sectionIndex) => (
+                <li class="sidebar-section">
+                  {section.title && <Body as="h3">{section.title}</Body>}
+                  <ul class="sidebar-section-list">
+                    <SidebarItemsList
+                      items={section.items}
+                      parentId={parentId}
+                      sectionIndex={sectionIndex}
+                      {...commonItemsListProps}
+                      variant="root"
+                      showIcon={true}
+                      targetLevel={level + 1}
+                    />
+                  </ul>
+                </li>
+              ))}
               <SidebarItemsList
-                items={section.items}
+                items={menu.items ?? []}
                 parentId={parentId}
-                sectionIndex={sectionIndex}
+                sectionIndex={null}
                 {...commonItemsListProps}
                 variant="root"
                 showIcon={true}
                 targetLevel={level + 1}
               />
             </ul>
-          </li>
-        ))
-      }
-      <SidebarItemsList
-        items={menu.items ?? []}
-        parentId={parentId}
-        sectionIndex={null}
-        {...commonItemsListProps}
-        variant="root"
-        showIcon={true}
-        targetLevel={level + 1}
-      />
-    </ul>
-  </nav>
-</div>
+          </nav>
+        </div>
 
-{
-  sortedLevels.length > 0 && (
-    <div class="sidebar-nested" data-nested-levels-container>
-      <div class="sidebar-nested-inner">
-        {sortedLevels.map((navLevel) => (
-          <div
-            class="sidebar-column sidebar-nested-column"
-            data-nav-level={navLevel}
-            aria-hidden="true"
-          >
-            {submenusByLevel.get(navLevel)?.map((submenu) => {
-              const panelHasActiveItem = submenuContainsCurrentPath(
-                submenu.menu,
-                submenu.basePath,
-                submenu.versioned,
-                currentPath,
-                lang,
-                version
-              );
-              const availableVersions =
-                submenu.versioned.length > 0
-                  ? versions.filter((v) => submenu.versioned.includes(v.id as VersionPrefix))
-                  : [];
-              const filteredSubmenuSections =
-                submenu.menu.sections?.filter((section) => !shouldOmitSection(section, version)) ??
-                [];
-
-              return (
+        {sortedLevels.length > 0 && (
+          <div class="sidebar-nested" data-nested-levels-container>
+            <div class="sidebar-nested-inner">
+              {sortedLevels.map((navLevel) => (
                 <div
-                  class:list={[
-                    'sidebar-nav-panel',
-                    panelHasActiveItem && 'sidebar-nav-panel--active',
-                  ]}
-                  data-parent-id={submenu.id}
+                  class="sidebar-column sidebar-nested-column"
+                  data-nav-level={navLevel}
                   aria-hidden="true"
                 >
-                  {availableVersions.length > 0 && (
-                    <VersionSwitcher
-                      class="sidebar-version-switcher"
-                      versions={availableVersions}
-                      defaultVersion={defaultVersion}
-                      currentPath={currentPath}
-                      aria-label="Select documentation version"
-                      data-version-switcher
-                    />
-                  )}
-                  <nav class="sidebar-nav" aria-label={`${submenu.title} navigation`}>
-                    <button
-                      class="sidebar-nav-back"
-                      type="button"
-                      aria-label={`Go back from ${submenu.title}`}
-                      data-back-button
-                      data-target-level={navLevel - 1}
-                    >
-                      <Icon
-                        name="fluent:arrow-export-rtl-20-regular"
-                        size="16"
-                        color="var(--color-icon-primary)"
+                  {submenusByLevel.get(navLevel)?.map((submenu) => {
+                    const panelHasActiveItem = submenuContainsCurrentPath(
+                      submenu.menu,
+                      submenu.basePath,
+                      submenu.versioned,
+                      currentPath,
+                      lang,
+                      versionId
+                    );
+                    const availableVersions =
+                      submenu.versioned.length > 0
+                        ? versions.filter((v) => submenu.versioned.includes(v.id as VersionPrefix))
+                        : [];
+                    const filteredSubmenuSections =
+                      submenu.menu.sections?.filter(
+                        (section) => !shouldOmitSection(section, versionId)
+                      ) ?? [];
+
+                    return (
+                      <div
+                        class:list={[
+                          'sidebar-nav-panel',
+                          panelHasActiveItem && 'sidebar-nav-panel--active',
+                        ]}
+                        data-parent-id={submenu.id}
                         aria-hidden="true"
-                      />
-                      <Body as="span" weight="bold" vMargin={false}>
-                        {submenu.title}
-                      </Body>
-                    </button>
-                    <div class="sidebar-nav-content">
-                      {filteredSubmenuSections.map((section, sectionIndex) => (
-                        <div class="sidebar-section" data-section-index={sectionIndex}>
-                          {section.title && (
-                            <Body as="h3" weight="bold">
-                              {section.title}
-                            </Body>
-                          )}
-                          <ul class="sidebar-section-list">
-                            <SidebarItemsList
-                              items={section.items}
-                              parentId={submenu.id}
-                              sectionIndex={sectionIndex}
-                              currentPath={currentPath}
-                              lang={lang}
-                              basePath={submenu.basePath}
-                              versioned={submenu.versioned}
-                              version={version}
-                              variant="nested"
-                              showIcon={false}
-                              targetLevel={navLevel + 1}
-                            />
-                          </ul>
-                        </div>
-                      ))}
-                      {(submenu.menu.items?.length ?? 0) > 0 && (
-                        <ul class="sidebar-section-list">
-                          <SidebarItemsList
-                            items={submenu.menu.items!}
-                            parentId={submenu.id}
-                            sectionIndex={null}
+                      >
+                        {availableVersions.length > 0 && (
+                          <VersionSwitcher
+                            class="sidebar-version-switcher"
+                            versions={availableVersions}
+                            defaultVersion={defaultVersion}
                             currentPath={currentPath}
-                            lang={lang}
-                            basePath={submenu.basePath}
-                            versioned={submenu.versioned}
-                            version={version}
-                            variant="nested"
-                            showIcon={false}
-                            targetLevel={navLevel + 1}
+                            aria-label="Select documentation version"
+                            data-version-switcher
                           />
-                        </ul>
-                      )}
-                    </div>
-                  </nav>
+                        )}
+                        <VersionWarningBanner data-version-warning />
+                        <nav class="sidebar-nav" aria-label={`${submenu.title} navigation`}>
+                          <button
+                            class="sidebar-nav-back"
+                            type="button"
+                            aria-label={`Go back from ${submenu.title}`}
+                            data-back-button
+                            data-target-level={navLevel - 1}
+                          >
+                            <Icon
+                              name="fluent:arrow-export-rtl-20-regular"
+                              size="16"
+                              color="var(--color-icon-primary)"
+                              aria-hidden="true"
+                            />
+                            <Body as="span" weight="bold" vMargin={false}>
+                              {submenu.title}
+                            </Body>
+                          </button>
+                          <div class="sidebar-nav-content">
+                            {filteredSubmenuSections.map((section, sectionIndex) => (
+                              <div class="sidebar-section" data-section-index={sectionIndex}>
+                                {section.title && (
+                                  <Body as="h3" weight="bold">
+                                    {section.title}
+                                  </Body>
+                                )}
+                                <ul class="sidebar-section-list">
+                                  <SidebarItemsList
+                                    items={section.items}
+                                    parentId={submenu.id}
+                                    sectionIndex={sectionIndex}
+                                    currentPath={currentPath}
+                                    lang={lang}
+                                    basePath={submenu.basePath}
+                                    versioned={submenu.versioned}
+                                    version={versionId}
+                                    variant="nested"
+                                    showIcon={false}
+                                    targetLevel={navLevel + 1}
+                                  />
+                                </ul>
+                              </div>
+                            ))}
+                            {(submenu.menu.items?.length ?? 0) > 0 && (
+                              <ul class="sidebar-section-list">
+                                <SidebarItemsList
+                                  items={submenu.menu.items!}
+                                  parentId={submenu.id}
+                                  sectionIndex={null}
+                                  currentPath={currentPath}
+                                  lang={lang}
+                                  basePath={submenu.basePath}
+                                  versioned={submenu.versioned}
+                                  version={versionId}
+                                  variant="nested"
+                                  showIcon={false}
+                                  targetLevel={navLevel + 1}
+                                />
+                              </ul>
+                            )}
+                          </div>
+                        </nav>
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        ))}
+        )}
       </div>
-    </div>
-  )
+    );
+  })
 }

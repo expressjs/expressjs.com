@@ -1,0 +1,79 @@
+---
+import './VersionWarningBanner.css';
+import { Body } from '@/components/primitives';
+import { Icon } from 'astro-icon/components';
+---
+
+<div class="version-warning-banner" data-version-warning aria-live="polite" role="alert">
+  <div class="version-warning-content">
+    <Icon
+      name="fluent:warning-28-regular"
+      size="20"
+      color="var(--color-text-warning)"
+      class="version-warning-icon"
+      aria-hidden="true"
+    />
+    <div class="version-warning-message">
+      <Body as="p" vMargin={false} class="version-warning-text">
+        v3 is end-of-life. There is no documentation available. <a
+          href="/support"
+          class="version-warning-link">Learn more about support</a
+        >
+      </Body>
+    </div>
+    <button
+      type="button"
+      class="version-warning-close"
+      aria-label="Dismiss warning"
+      data-warning-dismiss
+    >
+      <Icon
+        name="fluent:dismiss-20-regular"
+        size="16"
+        color="var(--color-text-warning)"
+        aria-hidden="true"
+      />
+    </button>
+  </div>
+</div>
+
+<script>
+  class VersionWarningBanner {
+    private banner: HTMLElement | null;
+    private dismissButton: HTMLButtonElement | null;
+    private static readonly STORAGE_KEY = 'express-v3-warning-dismissed';
+
+    constructor() {
+      this.banner = document.querySelector('[data-version-warning]');
+      this.dismissButton = this.banner?.querySelector('[data-warning-dismiss]') || null;
+
+      if (this.banner && this.dismissButton) {
+        this.init();
+      }
+    }
+
+    private init(): void {
+      this.dismissButton?.addEventListener('click', () => this.dismiss());
+
+      // Check if warning was dismissed in this session
+      if (this.wasDismissed()) {
+        this.hide();
+      }
+    }
+
+    private dismiss(): void {
+      this.hide();
+      sessionStorage.setItem(VersionWarningBanner.STORAGE_KEY, Date.now().toString());
+    }
+
+    private hide(): void {
+      this.banner?.setAttribute('data-show-warning', 'false');
+    }
+
+    private wasDismissed(): boolean {
+      return sessionStorage.getItem(VersionWarningBanner.STORAGE_KEY) !== null;
+    }
+  }
+
+  new VersionWarningBanner();
+</script>

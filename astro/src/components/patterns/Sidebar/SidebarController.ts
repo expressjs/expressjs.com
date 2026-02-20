@@ -29,7 +29,8 @@ export class SidebarController {
     this.navContainer = document.querySelector('[data-nav-container]');
 
     if (this.sidebar && this.backdrop) {
-      const currentVersion = this.sidebar.dataset.currentVersion || '5x';
+      const currentVersion =
+        this.sidebar.dataset.contentVersion || this.sidebar.dataset.currentVersion || '5x';
       this.versionManager = new SidebarVersionManager(
         this.sidebar,
         currentVersion,
@@ -37,6 +38,14 @@ export class SidebarController {
       );
       this.focusTrap = new SidebarFocusTrap(this.sidebar, () => this.activeSubmenuPath);
       this.init();
+
+      // Sync versions on page load (handles browser back/forward)
+      this.versionManager?.syncVersionsFromUrl();
+
+      // Listen for navigation events
+      window.addEventListener('popstate', () => {
+        this.versionManager?.syncVersionsFromUrl();
+      });
     }
   }
 
@@ -47,20 +56,28 @@ export class SidebarController {
 
     this.setupSubmenuTriggers();
     this.setupBackButtons();
+    this.setupNavigationInterception();
     this.versionManager?.setup();
     this.initializeFromActiveState();
     this.updateActiveColumns();
   }
 
   private initializeFromActiveState(): void {
-    const rootColumn = this.sidebar?.querySelector('[data-initial-active-level]') as HTMLElement;
-    const initialActiveLevel = parseInt(rootColumn?.dataset.initialActiveLevel || '0', 10);
+    // Get the current version to find the correct root column
+    const contentVersion = this.sidebar?.dataset.contentVersion || '5x';
+    const currentVersionMenu = this.sidebar?.querySelector(
+      `[data-version-menu="${contentVersion}"] [data-initial-active-level]`
+    ) as HTMLElement;
+    const initialActiveLevel = parseInt(currentVersionMenu?.dataset.initialActiveLevel || '0', 10);
 
     if (initialActiveLevel > 0) {
       this.activeSubmenuPath = ['root'];
 
+      // Look for active panels in the current version's menu
+      const versionMenu = this.sidebar?.querySelector(`[data-version-menu="${contentVersion}"]`);
+
       for (let level = 1; level <= initialActiveLevel; level++) {
-        const levelColumn = this.sidebar?.querySelector(`[data-nav-level="${level}"]`);
+        const levelColumn = versionMenu?.querySelector(`[data-nav-level="${level}"]`);
         const activePanelInLevel = levelColumn?.querySelector(
           '.sidebar-nav-panel.sidebar-nav-panel--active'
         ) as HTMLElement;
@@ -78,6 +95,9 @@ export class SidebarController {
       if (this.navContainer) {
         this.navContainer.dataset.currentNavLevel = String(initialActiveLevel);
       }
+
+      // Set initial root active states
+      this.updateRootActiveStates();
     }
   }
 
@@ -114,10 +134,29 @@ export class SidebarController {
 
         if (targetId) {
           this.navigateToSubmenu(targetId, targetLevel);
-          button.setAttribute('aria-expanded', 'true');
+          this.updateRootActiveStates();
         }
       });
     });
+  }
+
+  private updateRootActiveStates(): void {
+    // Clear all root submenu active states
+    this.sidebar?.querySelectorAll('[data-submenu-trigger]').forEach((trigger) => {
+      trigger.classList.remove('sidebar-nav-item--active');
+      trigger.setAttribute('aria-expanded', 'false');
+    });
+
+    // Set active state for current submenu path
+    if (this.activeSubmenuPath.length > 1) {
+      const currentSubmenuId = this.activeSubmenuPath[1]; // First submenu from root
+      this.sidebar
+        ?.querySelectorAll(`[data-target-id="${currentSubmenuId}"]`)
+        .forEach((trigger) => {
+          trigger.classList.add('sidebar-nav-item--active');
+          trigger.setAttribute('aria-expanded', 'true');
+        });
+    }
   }
 
   private setupBackButtons(): void {
@@ -129,6 +168,33 @@ export class SidebarController {
     });
   }
 
+  private setupNavigationInterception(): void {
+    this.sidebar?.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a[href]') as HTMLAnchorElement;
+
+      if (!link) return;
+
+      // Allow default behavior for modifier keys (ctrl+click, middle-click, etc.)
+      const mouseEvent = e as MouseEvent;
+      if (
+        mouseEvent.ctrlKey ||
+        mouseEvent.metaKey ||
+        mouseEvent.shiftKey ||
+        mouseEvent.button !== 0
+      ) {
+        return;
+      }
+
+      // If exploring, intercept and sync versions
+      if (this.versionManager?.isExploring()) {
+        e.preventDefault();
+        const href = link.href;
+        this.versionManager.navigateWithVersionSync(href);
+      }
+    });
+  }
+
   private navigateToSubmenu(submenuId: string, level: number): void {
     const submenuColumn = this.sidebar?.querySelector(
       `[data-parent-id="${submenuId}"]`
@@ -136,6 +202,20 @@ export class SidebarController {
 
     if (!submenuColumn) {
       console.warn(`Submenu column not found: ${submenuId}`);
+      return;
+    }
+
+    // If exploring and navigating to a different root submenu, sync versions first
+    if (
+      this.versionManager?.isExploring() &&
+      level === 1 &&
+      this.activeSubmenuPath[1] !== submenuId
+    ) {
+      this.versionManager.syncVersionsFromUrl();
+    }
+
+    // Check for v3 warnings before navigation
+    if (!this.versionManager?.checkV3Warning()) {
       return;
     }
 
@@ -176,6 +256,7 @@ export class SidebarController {
     this.versionManager?.updatePath(this.activeSubmenuPath);
 
     this.updateActiveColumns();
+    this.updateRootActiveStates();
 
     if (this.navContainer) {
       this.navContainer.dataset.currentNavLevel = String(this.activeLevel);

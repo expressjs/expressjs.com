@@ -1,11 +1,14 @@
 export class SidebarVersionManager {
   private sidebar: HTMLElement;
-  private currentVersion: string;
+  private currentVersion: string; // Content version from URL
+  private displayVersion: string; // Menu version being shown
+  private isExploringMode: boolean = false;
   private activeSubmenuPath: string[];
 
-  constructor(sidebar: HTMLElement, currentVersion: string, activeSubmenuPath: string[]) {
+  constructor(sidebar: HTMLElement, contentVersion: string, activeSubmenuPath: string[]) {
     this.sidebar = sidebar;
-    this.currentVersion = currentVersion;
+    this.currentVersion = contentVersion;
+    this.displayVersion = contentVersion; // Start synced
     this.activeSubmenuPath = activeSubmenuPath;
   }
 
@@ -23,91 +26,101 @@ export class SidebarVersionManager {
   }
 
   handleVersionChange(newVersion: string): void {
-    const previousVersion = this.currentVersion;
-    this.currentVersion = newVersion;
+    const previousVersion = this.displayVersion;
+    this.displayVersion = newVersion;
+    this.isExploringMode = this.displayVersion !== this.currentVersion;
 
+    // Update sidebar data attribute for CSS visibility
+    this.sidebar.dataset.displayVersion = newVersion;
+
+    // Update exploring class
+    if (this.isExploringMode) {
+      this.sidebar.classList.add('sidebar--exploring');
+    } else {
+      this.sidebar.classList.remove('sidebar--exploring');
+    }
+
+    // Update all version switcher dropdowns
+    const versionSelects =
+      this.sidebar.querySelectorAll<HTMLSelectElement>('[data-version-select]');
+    versionSelects.forEach((select) => {
+      select.value = newVersion;
+    });
+
+    // Dispatch event with exploration state
     document.dispatchEvent(
       new CustomEvent('sidebar:versionChange', {
-        detail: { previousVersion, newVersion },
+        detail: {
+          previousVersion,
+          newVersion,
+          isExploring: this.isExploringMode,
+          contentVersion: this.currentVersion,
+        },
       })
     );
+  }
 
-    const currentPath = this.sidebar.dataset.currentPath || '';
+  isExploring(): boolean {
+    return this.isExploringMode;
+  }
 
-    if (currentPath.includes(`/${previousVersion}/`)) {
-      if (this.isPathOmittedForVersion(currentPath, newVersion)) {
-        const fallbackPath = this.getFirstAvailableLinkForVersion(newVersion, previousVersion);
-        if (fallbackPath) {
-          window.location.href = fallbackPath;
-          return;
-        }
-      }
+  syncVersionsFromUrl(): void {
+    // Extract version from current URL
+    const pathname = window.location.pathname;
+    const versionMatch = pathname.match(/\/(5x|4x|3x)\//);
+    const urlVersion = versionMatch ? versionMatch[1] : '5x';
 
-      window.location.href = currentPath.replace(`/${previousVersion}/`, `/${newVersion}/`);
-      return;
+    // Reset to content version
+    this.currentVersion = urlVersion;
+    this.displayVersion = urlVersion;
+    this.isExploringMode = false;
+
+    // Update UI
+    this.sidebar.dataset.contentVersion = urlVersion;
+    this.sidebar.dataset.displayVersion = urlVersion;
+    this.sidebar.classList.remove('sidebar--exploring');
+
+    // Update dropdowns
+    const versionSelects =
+      this.sidebar.querySelectorAll<HTMLSelectElement>('[data-version-select]');
+    versionSelects.forEach((select) => {
+      select.value = urlVersion;
+    });
+  }
+
+  navigateWithVersionSync(href: string): void {
+    // If exploring, rewrite URL to use display version
+    if (this.isExploringMode && href.includes(`/${this.currentVersion}/`)) {
+      href = href.replace(`/${this.currentVersion}/`, `/${this.displayVersion}/`);
     }
+    window.location.href = href;
+  }
 
-    if (this.isInVersionedSubmenu()) {
-      const fallbackPath = this.getFirstAvailableLinkForVersion(newVersion, previousVersion);
-      if (fallbackPath) {
-        window.location.href = fallbackPath;
-      }
+  checkV3Warning(): boolean {
+    // Returns false and shows warning if switching to v3 in non-v3 context
+    if (this.displayVersion === '3x' && this.currentVersion !== '3x') {
+      this.showV3Warning();
+      return false;
     }
+    return true;
   }
 
-  private isInVersionedSubmenu(): boolean {
-    const activeSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
-    if (activeSubmenuId === 'root') return false;
-
-    const activePanel = this.sidebar.querySelector(
-      `[data-parent-id="${activeSubmenuId}"]`
-    ) as HTMLElement;
-
-    if (!activePanel) return false;
-
-    // Check if the active panel contains versioned links
-    const versionedLink = activePanel.querySelector('a[href*="/4x/"], a[href*="/5x/"]');
-    return versionedLink !== null;
-  }
-
-  private isPathOmittedForVersion(currentPath: string, targetVersion: string): boolean {
-    const activeLink = this.sidebar.querySelector(
-      'a.sidebar-nav-item--active[data-omit-from]'
-    ) as HTMLAnchorElement;
-
-    if (!activeLink) return false;
-
-    const omitFrom = activeLink.dataset.omitFrom?.split(',') || [];
-    return omitFrom.includes(targetVersion);
-  }
-
-  private getFirstAvailableLinkForVersion(
-    targetVersion: string,
-    previousVersion: string
-  ): string | null {
+  private showV3Warning(): void {
+    // Show warning banner in active submenu
     const activeSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
     const activePanel = this.sidebar.querySelector(
       `[data-parent-id="${activeSubmenuId}"]`
     ) as HTMLElement;
 
-    if (!activePanel) return null;
-
-    const links = activePanel.querySelectorAll(
-      'a.sidebar-nav-item[href]'
-    ) as NodeListOf<HTMLAnchorElement>;
-
-    for (const link of links) {
-      const omitFrom = link.dataset.omitFrom?.split(',') || [];
-      if (!omitFrom.includes(targetVersion)) {
-        const href = link.getAttribute('href') || '';
-        if (href.includes(`/${previousVersion}/`)) {
-          return href.replace(`/${previousVersion}/`, `/${targetVersion}/`);
-        }
-        return href;
+    if (activePanel) {
+      const warningBanner = activePanel.querySelector('[data-version-warning]');
+      if (warningBanner) {
+        warningBanner.setAttribute('data-show-warning', 'true');
       }
     }
 
-    return null;
+    // Revert to content version
+    this.handleVersionChange(this.currentVersion);
   }
 
   updateVisibility(activeLevel: number): void {
@@ -135,11 +148,6 @@ export class SidebarVersionManager {
   }
 
   setVersion(version: string): void {
-    const versionSelects =
-      this.sidebar.querySelectorAll<HTMLSelectElement>('[data-version-select]');
-    versionSelects.forEach((select) => {
-      select.value = version;
-    });
     this.handleVersionChange(version);
   }
 }
