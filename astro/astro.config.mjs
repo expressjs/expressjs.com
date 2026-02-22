@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import icon from 'astro-icon';
 import expressiveCode from 'astro-expressive-code';
+import remarkRewriteLocalizedLinks from '@/utils/remark/rewrite-localized-links.mjs';
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
 const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
@@ -27,4 +28,7 @@ export default defineConfig({
     mdx(),
     icon(),
   ],
+  markdown: {
+    remarkPlugins: [[remarkRewriteLocalizedLinks, { prefixes: ['guide', 'starter', 'api'] }]],
+  },
 });
