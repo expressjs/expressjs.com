@@ -46,6 +46,10 @@ jobs:
         shell: bash
         run: npm run check
 
+      - name: Run unit tests
+        shell: bash
+        run: npm run test:unit
+
   build:
     name: build
     runs-on: ubuntu-latest
