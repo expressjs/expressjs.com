@@ -15,13 +15,16 @@ jobs:
 
       - name: Build site
         uses: withastro/action@15aa0a5a1e067940253e3b259413ab2ae882a740 # v5.2.0
+
         with:
+          path: "astro" # TODO: change when Astro site is moved to root
           package-manager: npm@latest
           node-version: 24.13
 
       - name: Check links
         uses: lycheeverse/lychee-action@a8c4c7cb88f0c7386610c35eb25108e448569cb0 # v2.7.0
         with:
+          workingDirectory: astro # TODO: change when Astro site is moved to root
           args: |
             --root-dir $PWD/dist
             dist/
