@@ -16,7 +16,7 @@ jobs:
       - name: Build site
         uses: withastro/action@15aa0a5a1e067940253e3b259413ab2ae882a740 # v5.2.0
         with:
-          package-manager: npm
+          package-manager: npm@latest
           node-version: 24.13
 
       - name: Check links
