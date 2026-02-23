@@ -134,7 +134,11 @@ export class SidebarController {
   private setupNavItemSelection(): void {
     this.sidebar?.querySelectorAll('.sidebar-nav-item').forEach((item) => {
       item.addEventListener('click', () => {
-        this.setSelectedItem(item as HTMLElement);
+        // Only track selection for root-level items (level 0)
+        const isRootLevel = item.closest('[data-nav-level="0"]') !== null;
+        if (isRootLevel) {
+          this.setSelectedItem(item as HTMLElement);
+        }
       });
     });
   }
@@ -172,12 +176,6 @@ export class SidebarController {
       this.activeSubmenuPath = [...this.initialActiveSubmenuPath];
       this.activeLevel = this.initialActiveLevel;
     } else {
-      // Clear selected item state when navigating to a different level
-      if (this.selectedItem && this.activeLevel !== level) {
-        this.selectedItem.classList.remove('sidebar-nav-item--selected');
-        this.selectedItem = null;
-      }
-
       this.activeSubmenuPath = this.activeSubmenuPath.slice(0, level);
       this.activeSubmenuPath.push(submenuId);
       this.activeLevel = level;
