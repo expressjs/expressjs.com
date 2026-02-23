@@ -185,6 +185,12 @@
       .sidebar-nav-item--root-submenu .sidebar-nav-arrow {
         display: none;
       }
+
+      .sidebar-nav-item--selected {
+        .sidebar-nav-icon {
+          background-color: var(--color-bg-tertiary);
+        }
+      }
     }
   }
 

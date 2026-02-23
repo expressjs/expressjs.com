@@ -19,6 +19,7 @@ export class SidebarController {
   private lastFocusedElement: HTMLElement | null = null;
   private activeLevel = 0;
   private activeSubmenuPath: string[] = ['root'];
+  private selectedItem: HTMLElement | null = null;
 
   private initialActiveLevel = 0;
   private initialActiveSubmenuPath: string[] = ['root'];
@@ -47,6 +48,7 @@ export class SidebarController {
 
     this.setupSubmenuTriggers();
     this.setupBackButtons();
+    this.setupNavItemSelection();
     this.versionManager?.setup();
     this.initializeFromActiveState();
     this.updateActiveColumns();
@@ -129,6 +131,25 @@ export class SidebarController {
     });
   }
 
+  private setupNavItemSelection(): void {
+    this.sidebar?.querySelectorAll('.sidebar-nav-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        this.setSelectedItem(item as HTMLElement);
+      });
+    });
+  }
+
+  private setSelectedItem(item: HTMLElement): void {
+    // Remove selected class from previous item
+    if (this.selectedItem) {
+      this.selectedItem.classList.remove('sidebar-nav-item--selected');
+    }
+
+    // Add selected class to new item
+    item.classList.add('sidebar-nav-item--selected');
+    this.selectedItem = item;
+  }
+
   private navigateToSubmenu(submenuId: string, level: number): void {
     const submenuColumn = this.sidebar?.querySelector(
       `[data-parent-id="${submenuId}"]`
@@ -140,6 +161,12 @@ export class SidebarController {
     }
 
     this.enableTransitions();
+
+    // Clear selected item state when navigating to a different level
+    if (this.selectedItem && this.activeLevel !== level) {
+      this.selectedItem.classList.remove('sidebar-nav-item--selected');
+      this.selectedItem = null;
+    }
 
     this.activeSubmenuPath = this.activeSubmenuPath.slice(0, level);
     this.activeSubmenuPath.push(submenuId);
@@ -159,6 +186,12 @@ export class SidebarController {
     if (this.activeSubmenuPath.length <= 1) return;
 
     this.enableTransitions();
+
+    // Clear selected item state when navigating back
+    if (this.selectedItem) {
+      this.selectedItem.classList.remove('sidebar-nav-item--selected');
+      this.selectedItem = null;
+    }
 
     const currentSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
     let triggerToFocus: HTMLElement | null = null;
@@ -287,6 +320,12 @@ export class SidebarController {
 
     document.dispatchEvent(new CustomEvent('sidebar:closed'));
     this.isOpen = false;
+
+    // Clear selected item state immediately
+    if (this.selectedItem) {
+      this.selectedItem.classList.remove('sidebar-nav-item--selected');
+      this.selectedItem = null;
+    }
 
     this.sidebar.setAttribute('aria-hidden', 'true');
     this.backdrop.setAttribute('aria-hidden', 'true');
