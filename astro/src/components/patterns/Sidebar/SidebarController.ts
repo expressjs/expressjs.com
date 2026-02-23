@@ -12,6 +12,7 @@ export class SidebarController {
   private sidebar: HTMLElement | null;
   private backdrop: HTMLElement | null;
   private navContainer: HTMLElement | null;
+  private toggleNestedButton: HTMLElement | null = null;
   private versionManager: SidebarVersionManager | null = null;
   private focusTrap: SidebarFocusTrap | null = null;
 
@@ -20,6 +21,7 @@ export class SidebarController {
   private activeLevel = 0;
   private activeSubmenuPath: string[] = ['root'];
   private selectedItem: HTMLElement | null = null;
+  private isNestedCollapsed = false;
 
   private initialActiveLevel = 0;
   private initialActiveSubmenuPath: string[] = ['root'];
@@ -28,6 +30,7 @@ export class SidebarController {
     this.sidebar = document.querySelector('[data-sidebar]');
     this.backdrop = document.querySelector('[data-sidebar-backdrop]');
     this.navContainer = document.querySelector('[data-nav-container]');
+    this.toggleNestedButton = document.querySelector('[data-toggle-nested-button]');
 
     if (this.sidebar && this.backdrop) {
       const currentVersion = this.sidebar.dataset.currentVersion || '5x';
@@ -52,6 +55,7 @@ export class SidebarController {
     this.versionManager?.setup();
     this.initializeFromActiveState();
     this.updateActiveColumns();
+    this.setupToggleNestedButton();
   }
 
   private initializeFromActiveState(): void {
@@ -143,15 +147,58 @@ export class SidebarController {
     });
   }
 
+  private setupToggleNestedButton(): void {
+    this.toggleNestedButton?.addEventListener('click', () => {
+      this.toggleNestedColumns();
+    });
+    this.updateToggleButtonVisibility();
+  }
+
+  private updateToggleButtonVisibility(): void {
+    if (!this.toggleNestedButton) return;
+
+    const shouldBeVisible = this.activeLevel > 0 || this.initialActiveLevel > 0;
+    this.toggleNestedButton.setAttribute('data-visible', String(shouldBeVisible));
+  }
+
   private setSelectedItem(item: HTMLElement): void {
-    // Remove selected class from previous item
     if (this.selectedItem) {
       this.selectedItem.classList.remove('sidebar-nav-item--selected');
     }
 
-    // Add selected class to new item
     item.classList.add('sidebar-nav-item--selected');
     this.selectedItem = item;
+  }
+
+  private toggleNestedColumns(): void {
+    this.isNestedCollapsed = !this.isNestedCollapsed;
+    this.enableTransitions();
+
+    if (this.isNestedCollapsed) {
+      if (this.selectedItem) {
+        this.selectedItem.classList.remove('sidebar-nav-item--selected');
+        this.selectedItem = null;
+      }
+
+      this.activeLevel = 0;
+      if (this.navContainer) {
+        this.navContainer.dataset.currentNavLevel = '0';
+      }
+    } else {
+      this.activeSubmenuPath = [...this.initialActiveSubmenuPath];
+      this.activeLevel = this.initialActiveLevel;
+      this.versionManager?.updatePath(this.activeSubmenuPath);
+      if (this.navContainer) {
+        this.navContainer.dataset.currentNavLevel = String(this.initialActiveLevel);
+      }
+    }
+
+    if (this.toggleNestedButton) {
+      this.toggleNestedButton.setAttribute('aria-expanded', String(!this.isNestedCollapsed));
+    }
+
+    this.updateActiveColumns();
+    this.updateToggleButtonVisibility();
   }
 
   private navigateToSubmenu(submenuId: string, level: number): void {
@@ -181,9 +228,18 @@ export class SidebarController {
       this.activeLevel = level;
     }
 
+    // If navigating to a submenu, ensure nested columns are expanded
+    if (this.isNestedCollapsed && level > 0) {
+      this.isNestedCollapsed = false;
+      if (this.toggleNestedButton) {
+        this.toggleNestedButton.setAttribute('aria-expanded', 'true');
+      }
+    }
+
     this.versionManager?.updatePath(this.activeSubmenuPath);
 
     this.updateActiveColumns();
+    this.updateToggleButtonVisibility();
 
     if (this.navContainer) {
       this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
@@ -219,6 +275,7 @@ export class SidebarController {
     this.versionManager?.updatePath(this.activeSubmenuPath);
 
     this.updateActiveColumns();
+    this.updateToggleButtonVisibility();
 
     if (this.navContainer) {
       this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
@@ -356,9 +413,16 @@ export class SidebarController {
 
     this.activeSubmenuPath = [...this.initialActiveSubmenuPath];
     this.activeLevel = this.initialActiveLevel;
+    this.isNestedCollapsed = false;
     this.versionManager?.updatePath(this.activeSubmenuPath);
 
+    // Reset toggle button state
+    if (this.toggleNestedButton) {
+      this.toggleNestedButton.setAttribute('aria-expanded', 'true');
+    }
+
     this.updateActiveColumns();
+    this.updateToggleButtonVisibility();
 
     if (this.navContainer) {
       this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
