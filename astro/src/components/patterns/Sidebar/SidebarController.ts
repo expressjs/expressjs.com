@@ -162,21 +162,33 @@ export class SidebarController {
 
     this.enableTransitions();
 
-    // Clear selected item state when navigating to a different level
-    if (this.selectedItem && this.activeLevel !== level) {
-      this.selectedItem.classList.remove('sidebar-nav-item--selected');
-      this.selectedItem = null;
+    // Check if this submenu is part of the initial path (contains current page)
+    // If so, restore to the initial navigation state instead of just going to target level
+    const isInInitialPath = this.initialActiveSubmenuPath.includes(submenuId);
+    const shouldRestoreInitialState = isInInitialPath && this.initialActiveLevel > level;
+
+    if (shouldRestoreInitialState) {
+      // Restore to the initial deep navigation state
+      this.activeSubmenuPath = [...this.initialActiveSubmenuPath];
+      this.activeLevel = this.initialActiveLevel;
+    } else {
+      // Clear selected item state when navigating to a different level
+      if (this.selectedItem && this.activeLevel !== level) {
+        this.selectedItem.classList.remove('sidebar-nav-item--selected');
+        this.selectedItem = null;
+      }
+
+      this.activeSubmenuPath = this.activeSubmenuPath.slice(0, level);
+      this.activeSubmenuPath.push(submenuId);
+      this.activeLevel = level;
     }
 
-    this.activeSubmenuPath = this.activeSubmenuPath.slice(0, level);
-    this.activeSubmenuPath.push(submenuId);
-    this.activeLevel = level;
     this.versionManager?.updatePath(this.activeSubmenuPath);
 
     this.updateActiveColumns();
 
     if (this.navContainer) {
-      this.navContainer.dataset.currentNavLevel = String(level);
+      this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
     }
 
     this.afterTransition(() => this.focusActiveLevel());
