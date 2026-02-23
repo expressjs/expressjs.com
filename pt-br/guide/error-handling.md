@@ -57,8 +57,8 @@ app.get('/user/:id', async (req, res, next) => {
 ```
 
 Se `getUserById` lança um erro ou rejeita, `next` será chamado com
-o erro lançado ou o valor rejeitado. If no rejected value is provided, `next`
-will be called with a default Error object provided by the Express router.
+o erro lançado ou o valor rejeitado. Se nenhum valor rejeitado for fornecido, `next`
+será chamado com um objeto de erro padrão fornecido pelo roteador Express.
 
 Se passar qualquer coisa para a função `next()`
 (exceto a sequência de caracteres `'route'`),
@@ -66,8 +66,8 @@ o Express considera a solicitação atual como estando em erro e irá
 ignorar quaisquer funções restantes de roteamento e middleware que
 não sejam de manipulação de erros.
 
-If the callback in a sequence provides no data, only errors, you can simplify
-this code as follows:
+Se o callback em uma sequência não fornecer dados, somente erros, você pode simplificar
+este código da seguinte forma:
 
 ```js
 app.get('/', [
@@ -80,9 +80,9 @@ app.get('/', [
 ])
 ```
 
-In the above example, `next` is provided as the callback for `fs.writeFile`,
-which is called with or without errors. If there is no error, the second
-handler is executed, otherwise Express catches and processes the error.
+No exemplo acima, `next` é fornecido como o callback para `fs.writeFile`,
+que é chamado com ou sem erros. Se não houver erro, o segundo manipulador
+é executado, caso contrário as capturas e processam o erro.
 
 You must catch errors that occur in asynchronous code invoked by route handlers or
 middleware and pass them to Express for processing. Por exemplo:
