@@ -12,7 +12,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run format:check && npm run lint",
-    "fix": "npm run format && npm run lint:fix"
+    "fix": "npm run format && npm run lint:fix",
+    "prepare": "cd .. && husky astro/.husky",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -54,6 +56,7 @@
     "eslint-plugin-astro": "^1.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "globals": "^17.4.0",
+    "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "postcss-custom-media": "^12.0.0",
     "postcss-nested": "^7.0.2",
@@ -63,5 +66,14 @@
     "typescript-eslint": "^8.53.1",
     "unplugin-icons": "^23.0.1",
     "vite-plugin-svgr": "^4.5.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,astro}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css}": [
+      "prettier --write"
+    ]
   }
 }

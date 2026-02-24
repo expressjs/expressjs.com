@@ -377,7 +377,10 @@ The expressjs.com website supports multiple languages through a combination of A
 
 We use Crowdin to manage our translations in multiple languages and to enable automatic translation with artificial intelligence. Since AI translations can be imperfect, we welcome community contributions to improve translation accuracy and quality.
 
-#### How to contribute translations
+
+
+
+### How to translate
 
 1. Request to join the [Express.js Website project on Crowdin](https://express.crowdin.com/website)
 2. [Select the language you want to translate](https://support.crowdin.com/for-translators/#starting-translation)
