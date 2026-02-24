@@ -274,6 +274,14 @@ export class SidebarController {
     this.activeLevel = this.activeSubmenuPath.length - 1;
     this.versionManager?.updatePath(this.activeSubmenuPath);
 
+    // If navigating back to level 0, collapse nested columns and update toggle button
+    if (this.activeLevel === 0) {
+      this.isNestedCollapsed = true;
+      if (this.toggleNestedButton) {
+        this.toggleNestedButton.setAttribute('aria-expanded', 'false');
+      }
+    }
+
     this.updateActiveColumns();
     this.updateToggleButtonVisibility();
 
