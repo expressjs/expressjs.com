@@ -4,6 +4,7 @@ import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types'
 import { Body } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
+import { useTranslations } from '@/i18n/utils';
 import SidebarItemsList from './SidebarItemsList.astro';
 import {
   shouldOmitSection,
@@ -40,6 +41,8 @@ const {
   defaultVersion = '5x',
   parentId = 'root',
 } = Astro.props;
+
+const t = useTranslations(lang);
 
 if (level !== 0) return null;
 
@@ -80,7 +83,7 @@ const commonItemsListProps = {
       {
         filteredSections.map((section, sectionIndex) => (
           <li class="sidebar-section">
-            {section.title && <Body as="h3">{section.title}</Body>}
+            {section.title && <Body as="h3">{t(section.title)}</Body>}
             <ul class="sidebar-section-list">
               <SidebarItemsList
                 items={section.items}
@@ -99,10 +102,10 @@ const commonItemsListProps = {
         items={menu.items ?? []}
         parentId={parentId}
         sectionIndex={null}
-        {...commonItemsListProps}
         variant="root"
         showIcon={true}
         targetLevel={level + 1}
+        {...commonItemsListProps}
       />
     </ul>
   </nav>
@@ -154,11 +157,11 @@ const commonItemsListProps = {
                       data-version-switcher
                     />
                   )}
-                  <nav class="sidebar-nav" aria-label={`${submenu.title} navigation`}>
+                  <nav class="sidebar-nav" aria-label={`${t(submenu.title)} navigation`}>
                     <button
                       class="sidebar-nav-back"
                       type="button"
-                      aria-label={`Go back from ${submenu.title}`}
+                      aria-label={`Go back from ${t(submenu.title)}`}
                       data-back-button
                       data-target-level={navLevel - 1}
                     >
@@ -169,7 +172,7 @@ const commonItemsListProps = {
                         aria-hidden="true"
                       />
                       <Body as="span" weight="bold" vMargin={false}>
-                        {submenu.title}
+                        {t(submenu.title)}
                       </Body>
                     </button>
                     <div class="sidebar-nav-content">
@@ -177,7 +180,7 @@ const commonItemsListProps = {
                         <div class="sidebar-section" data-section-index={sectionIndex}>
                           {section.title && (
                             <Body as="h3" weight="bold">
-                              {section.title}
+                              {t(section.title)}
                             </Body>
                           )}
                           <ul class="sidebar-section-list">

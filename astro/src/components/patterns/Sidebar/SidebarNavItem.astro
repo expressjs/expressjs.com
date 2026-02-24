@@ -2,6 +2,7 @@
 import type { MenuItem } from '@/config/types';
 import { BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
+import { useTranslations } from '@/i18n/utils';
 
 interface Props {
   item: MenuItem & { href?: string };
@@ -12,6 +13,7 @@ interface Props {
   submenuId?: string;
   targetLevel?: number;
   showIcon?: boolean;
+  lang: string;
 }
 
 const {
@@ -23,8 +25,10 @@ const {
   submenuId,
   targetLevel,
   showIcon = false,
+  lang,
 } = Astro.props;
 
+const t = useTranslations(lang);
 const isNested = variant === 'nested';
 const isRootSubmenu = variant === 'root';
 ---
@@ -39,7 +43,7 @@ const isRootSubmenu = variant === 'root';
           isNested && 'sidebar-nav-item--nested',
           isActive && 'sidebar-nav-item--active',
         ]}
-        aria-label={item.ariaLabel}
+        aria-label={item.ariaLabel ? t(item.ariaLabel) : undefined}
         aria-current={isActive ? 'page' : undefined}
         data-omit-from={item.omitFrom?.join(',') || undefined}
       >
@@ -49,7 +53,7 @@ const isRootSubmenu = variant === 'root';
           </div>
         )}
         <BodyMd vMargin={false} class="sidebar-nav-label">
-          {item.label}
+          {t(item.label)}
         </BodyMd>
       </a>
     </li>
@@ -63,7 +67,7 @@ const isRootSubmenu = variant === 'root';
           type === 'submenu' && isNested && 'sidebar-nav-item--submenu',
           isActive && 'sidebar-nav-item--active',
         ]}
-        aria-label={item.ariaLabel}
+        aria-label={item.ariaLabel ? t(item.ariaLabel) : undefined}
         aria-expanded="false"
         aria-controls={submenuId}
         type="button"
@@ -77,7 +81,7 @@ const isRootSubmenu = variant === 'root';
           </div>
         )}
         <BodyMd vMargin={false} class="sidebar-nav-label">
-          {item.label}
+          {t(item.label)}
         </BodyMd>
         <Icon
           name="fluent:arrow-right-20-regular"
