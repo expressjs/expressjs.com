@@ -10,19 +10,15 @@ import type { HTMLAttributes } from 'astro/types';
 import Typography from './Typography.astro';
 import type { TypographyColor, TypographyWeight } from './types.ts';
 
-type BaseProps = {
+type HTMLTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+interface Props extends HTMLAttributes<'h5'> {
+  as?: HTMLTag;
   color?: TypographyColor;
   weight?: TypographyWeight;
-};
+}
 
-type Props =
-  | ({ as?: 'h5' } & BaseProps & HTMLAttributes<'h5'>)
-  | ({ as: 'p' } & BaseProps & HTMLAttributes<'p'>)
-  | ({ as: 'span' } & BaseProps & HTMLAttributes<'span'>)
-  | ({ as: 'small' } & BaseProps & HTMLAttributes<'small'>)
-  | ({ as: 'label' } & BaseProps & HTMLAttributes<'label'>);
-
-const { as = 'p', ...rest } = Astro.props;
+const { as = 'h5', ...rest } = Astro.props;
 ---
 
 <Typography as={as} variant="h5" {...rest}>

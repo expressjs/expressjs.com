@@ -41,77 +41,75 @@ const {
   parentId = 'root',
 } = Astro.props;
 
+if (level !== 0) return null;
+
 const submenus: SubmenuData[] = [];
-if (level === 0) {
-  collectAllSubmenus(menu, level, parentId, basePath, versioned, version, submenus);
-}
+collectAllSubmenus(menu, level, parentId, basePath, versioned, version, submenus);
 
 const submenusByLevel = groupSubmenusByLevel(submenus);
-const sortedLevels = Array.from(submenusByLevel.keys()).sort((a, b) => a - b);
-const initialActiveLevel =
-  level === 0 ? calculateInitialActiveLevel(submenus, currentPath, lang, version) : 0;
+const sortedLevels = [...submenusByLevel.keys()].sort((a, b) => a - b);
+const initialActiveLevel = calculateInitialActiveLevel(submenus, currentPath, lang, version);
+
+const filteredSections =
+  menu.sections?.filter((section) => !shouldOmitSection(section, version)) ?? [];
+
+const commonItemsListProps = {
+  currentPath,
+  lang,
+  basePath,
+  versioned,
+  version,
+};
 ---
 
-{
-  level === 0 && (
-    <div
-      class="sidebar-column sidebar-root-column"
-      data-nav-level={level}
-      data-parent-id={parentId}
-      data-initial-active-level={initialActiveLevel}
-      aria-hidden="false"
-    >
-      <nav class="sidebar-nav" aria-label="Main navigation">
-        <ul class="sidebar-nav-list">
-          <li class="sidebar-logo-item">
-            <a href="/" class="logo-link sidebar-nav-item" aria-label="Express home">
-              <Icon name="logo-dark" class="logo logo-dark" />
-              <Icon name="logo-light" class="logo logo-light" />
-            </a>
+<div
+  class="sidebar-column sidebar-root-column"
+  data-nav-level={level}
+  data-parent-id={parentId}
+  data-initial-active-level={initialActiveLevel}
+  aria-hidden="false"
+>
+  <nav class="sidebar-nav" aria-label="Main navigation">
+    <ul class="sidebar-nav-list">
+      <li class="sidebar-logo-item">
+        <a href="/" class="logo-link sidebar-nav-item" aria-label="Express home">
+          <Icon name="logo-dark" class="logo logo-dark" />
+          <Icon name="logo-light" class="logo logo-light" />
+        </a>
+      </li>
+      {
+        filteredSections.map((section, sectionIndex) => (
+          <li class="sidebar-section">
+            {section.title && <Body as="h3">{section.title}</Body>}
+            <ul class="sidebar-section-list">
+              <SidebarItemsList
+                items={section.items}
+                parentId={parentId}
+                sectionIndex={sectionIndex}
+                {...commonItemsListProps}
+                variant="root"
+                showIcon={true}
+                targetLevel={level + 1}
+              />
+            </ul>
           </li>
-          {menu.sections
-            ?.filter((section) => !shouldOmitSection(section, version))
-            .map((section, sectionIndex) => (
-              <li class="sidebar-section">
-                {section.title && <Body as="h3">{section.title}</Body>}
-                <ul class="sidebar-section-list">
-                  <SidebarItemsList
-                    items={section.items}
-                    parentId={parentId}
-                    sectionIndex={sectionIndex}
-                    currentPath={currentPath}
-                    lang={lang}
-                    basePath={basePath}
-                    versioned={versioned}
-                    version={version}
-                    variant="root"
-                    showIcon={true}
-                    targetLevel={level + 1}
-                  />
-                </ul>
-              </li>
-            ))}
-          <SidebarItemsList
-            items={menu.items ?? []}
-            parentId={parentId}
-            sectionIndex={null}
-            currentPath={currentPath}
-            lang={lang}
-            basePath={basePath}
-            versioned={versioned}
-            version={version}
-            variant="root"
-            showIcon={true}
-            targetLevel={level + 1}
-          />
-        </ul>
-      </nav>
-    </div>
-  )
-}
+        ))
+      }
+      <SidebarItemsList
+        items={menu.items ?? []}
+        parentId={parentId}
+        sectionIndex={null}
+        {...commonItemsListProps}
+        variant="root"
+        showIcon={true}
+        targetLevel={level + 1}
+      />
+    </ul>
+  </nav>
+</div>
 
 {
-  level === 0 && sortedLevels.length > 0 && (
+  sortedLevels.length > 0 && (
     <div class="sidebar-nested" data-nested-levels-container>
       <div class="sidebar-nested-inner">
         {sortedLevels.map((navLevel) => (
@@ -133,6 +131,10 @@ const initialActiveLevel =
                 submenu.versioned.length > 0
                   ? versions.filter((v) => submenu.versioned.includes(v.id as VersionPrefix))
                   : [];
+              const filteredSubmenuSections =
+                submenu.menu.sections?.filter((section) => !shouldOmitSection(section, version)) ??
+                [];
+
               return (
                 <div
                   class:list={[
@@ -171,36 +173,34 @@ const initialActiveLevel =
                       </Body>
                     </button>
                     <div class="sidebar-nav-content">
-                      {submenu.menu.sections
-                        ?.filter((section) => !shouldOmitSection(section, version))
-                        .map((section, sectionIndex) => (
-                          <div class="sidebar-section" data-section-index={sectionIndex}>
-                            {section.title && (
-                              <Body as="h3" weight="bold" aria-label={`Section: ${section.title}`}>
-                                {section.title}
-                              </Body>
-                            )}
-                            <ul class="sidebar-section-list">
-                              <SidebarItemsList
-                                items={section.items}
-                                parentId={submenu.id}
-                                sectionIndex={sectionIndex}
-                                currentPath={currentPath}
-                                lang={lang}
-                                basePath={submenu.basePath}
-                                versioned={submenu.versioned}
-                                version={version}
-                                variant="nested"
-                                showIcon={false}
-                                targetLevel={navLevel + 1}
-                              />
-                            </ul>
-                          </div>
-                        ))}
-                      {submenu.menu.items && submenu.menu.items.length > 0 && (
+                      {filteredSubmenuSections.map((section, sectionIndex) => (
+                        <div class="sidebar-section" data-section-index={sectionIndex}>
+                          {section.title && (
+                            <Body as="h3" weight="bold">
+                              {section.title}
+                            </Body>
+                          )}
+                          <ul class="sidebar-section-list">
+                            <SidebarItemsList
+                              items={section.items}
+                              parentId={submenu.id}
+                              sectionIndex={sectionIndex}
+                              currentPath={currentPath}
+                              lang={lang}
+                              basePath={submenu.basePath}
+                              versioned={submenu.versioned}
+                              version={version}
+                              variant="nested"
+                              showIcon={false}
+                              targetLevel={navLevel + 1}
+                            />
+                          </ul>
+                        </div>
+                      ))}
+                      {(submenu.menu.items?.length ?? 0) > 0 && (
                         <ul class="sidebar-section-list">
                           <SidebarItemsList
-                            items={submenu.menu.items}
+                            items={submenu.menu.items!}
                             parentId={submenu.id}
                             sectionIndex={null}
                             currentPath={currentPath}

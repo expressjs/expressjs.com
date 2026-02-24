@@ -70,20 +70,21 @@ Express is a project of the OpenJS Foundation. Please review the [trademark poli
 <div class="logo-table">
     <div>
         <h3>Logotype</h3>
-        <a href="/images/brand/logotype-light.svg" class="hidden-dark">
-            <img src="/images/brand/logotype-light.svg" alt="Express.js logo" width="250" height="56"/>
+        <!-- TODO: add logos -->
+        <a href="/logotype-light.svg" >
+            <img src="/logotype-light.svg" alt="Express.js logo" width="250" height="56"/>
         </a>
-        <a href="/images/brand/logotype-dark.svg" class="hidden-light">
-            <img src="/images/brand/logotype-dark.svg" alt="Express.js logo" width="250" height="56"/>
+        <a href="/logotype-dark.svg" >
+            <img src="/logotype-dark.svg" alt="Express.js logo" width="250" height="56"/>
         </a>
     </div>
     <div>
         <h3>Logomark</h3>
-        <a href="/images/brand/logo-light.svg" class="hidden-dark">
-            <img src="/images/brand/logo-light.svg" alt="Express.js mark" width="96.5" height="56"/>
+        <a href="/logo-dark.svg">
+            <img src="/logo-dark.svg" alt="Express.js logo" width="56" height="40"/>
         </a>
-        <a href="/images/brand/logo-dark.svg" class="hidden-light">
-            <img src="/images/brand/logo-dark.svg"  alt="Express.js mark" width="96.5" height="56"/>
+        <a href="/logo-white.svg">
+            <img src="/logo-white.svg" alt="Express.js logo" width="56" height="40"/>
         </a>
     </div>
 <div>

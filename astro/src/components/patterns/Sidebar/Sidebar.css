@@ -28,12 +28,12 @@
     transition: transform var(--duration-300) var(--ease-in-out);
     z-index: var(--z-index-sidebar);
     top: var(--space-14);
-    overflow: hidden;
     overscroll-behavior: contain;
 
     @media (--xs-only) {
       visibility: hidden;
       transform: translateX(-100%);
+      overflow: hidden;
       top: var(--space-14);
       position: fixed;
       left: 0;
@@ -58,6 +58,58 @@
   .sidebar--open {
     transform: translateX(0);
     visibility: visible;
+  }
+
+  .sidebar-toggle-nested {
+    position: absolute;
+    top: var(--space-4);
+    right: 0;
+    transform: translate3d(100%, 0, 0);
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--space-8);
+    height: var(--space-8);
+    padding: 0;
+    background-color: var(--color-bg-tertiary);
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    border-radius: 0 var(--radius-base) var(--radius-base) 0;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      background-color var(--duration-200) var(--ease-in-out),
+      transform var(--duration-200) var(--ease-in-out),
+      opacity var(--duration-200) var(--ease-in-out),
+      visibility var(--duration-200) var(--ease-in-out);
+
+    &:hover {
+      color: var(--color-text-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-border-focus);
+      outline-offset: 2px;
+    }
+
+    &[aria-expanded='false'] {
+      transform: translate3d(100%, 0, 0) scale(-1);
+      background-color: var(--color-bg-secondary);
+      border-radius: var(--radius-base) 0 0 var(--radius-base) 0;
+    }
+
+    &[data-visible='false'] {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    @media (--xs-only) {
+      display: none;
+    }
   }
 
   .sidebar-container {
@@ -96,10 +148,13 @@
     }
 
     @media (--md-up) {
-      &[data-current-nav-level='0'] {
-        .sidebar-nested {
-          display: none;
-        }
+      &[data-current-nav-level='0'] .sidebar-nested {
+        width: 0;
+        overflow: hidden;
+      }
+
+      &[data-current-nav-level='0'] .sidebar-nested-inner {
+        transform: translateX(-100%);
       }
 
       &[data-current-nav-level='2'] .sidebar-nested-inner {
@@ -123,6 +178,7 @@
   .sidebar-nested {
     display: flex;
     flex: 1 0 100%;
+    transition: transform var(--duration-300) var(--ease-in-out);
 
     .sidebar-container--interactive & {
       transition: transform var(--duration-300) var(--ease-in-out);
@@ -132,6 +188,12 @@
       flex-basis: auto;
       overflow: hidden;
       width: var(--size-64);
+      z-index: 10;
+      position: relative;
+
+      .sidebar-container--interactive & {
+        transition: width var(--duration-300) var(--ease-in-out);
+      }
     }
   }
 
@@ -141,6 +203,14 @@
 
     .sidebar-container--interactive & {
       transition: transform var(--duration-300) var(--ease-in-out);
+    }
+
+    @media (--md-up) {
+      position: absolute;
+      width: var(--size-64);
+      height: 100%;
+      left: 0;
+      top: 0;
     }
   }
 
@@ -158,31 +228,20 @@
     @media (--md-up) {
       flex: 0 0 auto;
       padding: var(--space-5) var(--space-3) var(--space-4) var(--space-3);
-
-      .sidebar-nav-arrow {
-        display: none;
-      }
+      z-index: 20;
 
       .sidebar-nav-item {
         flex-direction: column;
       }
 
-      .sidebar-nav-item--root-submenu {
+      .sidebar-nav-item--root-submenu .sidebar-nav-arrow {
         display: none;
       }
 
-      .sidebar-nav-item--root-link {
-        display: flex;
-      }
-    }
-
-    @media (--xs-only) {
-      .sidebar-nav-item--root-link {
-        display: none;
-      }
-
-      .sidebar-nav-item--root-submenu {
-        display: flex;
+      .sidebar-nav-item--selected {
+        .sidebar-nav-icon {
+          background-color: var(--color-bg-tertiary);
+        }
       }
     }
   }
@@ -328,7 +387,8 @@
   }
 
   .sidebar-nav-item:hover .sidebar-nav-icon,
-  .sidebar-nav-item--active .sidebar-nav-icon {
+  .sidebar-nav-item--active .sidebar-nav-icon,
+  .sidebar-nav-item--active.sidebar-nav-item--selected .sidebar-nav-icon {
     background-color: var(--color-bg-mute);
   }
 
@@ -353,14 +413,6 @@
   .sidebar-nested-column {
     background-color: var(--color-bg-tertiary);
     position: relative;
-
-    @media (--md-up) {
-      &[data-nav-level='1'] {
-        .sidebar-nav-back {
-          display: none;
-        }
-      }
-    }
   }
 
   .sidebar-nav-panel {
