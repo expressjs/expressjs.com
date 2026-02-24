@@ -102,6 +102,43 @@
     column-gap: var(--space-16);
   }
 
+  /* Align Items */
+  .grid--align-start {
+    align-items: start;
+  }
+  .grid--align-center {
+    align-items: center;
+  }
+  .grid--align-end {
+    align-items: end;
+  }
+  .grid--align-stretch {
+    align-items: stretch;
+  }
+  .grid--align-baseline {
+    align-items: baseline;
+  }
+
+  /* Justify Items */
+  .grid--justify-start {
+    justify-items: start;
+  }
+  .grid--justify-center {
+    justify-items: center;
+  }
+  .grid--justify-end {
+    justify-items: end;
+  }
+  .grid--justify-between {
+    justify-items: stretch;
+  }
+  .grid--justify-around {
+    justify-items: stretch;
+  }
+  .grid--justify-evenly {
+    justify-items: stretch;
+  }
+
   /* ============================================
      COL COMPONENT (Responsive Column Spans)
      ============================================ */

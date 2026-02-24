@@ -13,6 +13,10 @@ export interface GridProps {
   rowGap?: GapSize;
   /** Horizontal gap override */
   columnGap?: GapSize;
+  /** Align items on block axis */
+  align?: FlexAlign;
+  /** Justify items on inline axis */
+  justify?: FlexJustify;
 }
 
 // Col

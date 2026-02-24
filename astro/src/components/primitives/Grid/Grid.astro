@@ -6,7 +6,7 @@
  * Use with <Col> children for responsive column layouts.
  *
  * @example
- * <Grid gap="4">
+ * <Grid gap="4" align="center" justify="center">
  *   <Col xs={12} md={6} lg={4}>Content</Col>
  * </Grid>
  */
@@ -17,7 +17,8 @@ import type { GridProps } from './types';
 
 type Props = GridProps & HTMLAttributes<'div'>;
 
-const { gap, rowGap, columnGap, class: className, ...rest } = Astro.props;
+const { gap, rowGap, columnGap, align, justify, class: className, ...rest } =
+  Astro.props;
 ---
 
 <div
@@ -26,6 +27,8 @@ const { gap, rowGap, columnGap, class: className, ...rest } = Astro.props;
     gap && `grid--gap-${gap}`,
     rowGap && `grid--row-gap-${rowGap}`,
     columnGap && `grid--col-gap-${columnGap}`,
+    align && `grid--align-${align}`,
+    justify && `grid--justify-${justify}`,
     className,
   ]}
   {...rest}

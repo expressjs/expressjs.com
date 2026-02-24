@@ -57,10 +57,12 @@ const {
     <Flex>
       <Sidebar />
       <FlexItem grow>
-        <main id="main-content">
-          <slot />
-        </main>
-        <Footer />
+        <Flex direction="column" class="h-full">
+          <main id="main-content">
+            <slot />
+          </main>
+          <Footer />
+        </Flex>
       </FlexItem>
     </Flex>
   </body>
