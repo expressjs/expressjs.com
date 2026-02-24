@@ -1,7 +1,3 @@
-/**
- * Footer Styles
-*/
-
 @layer patterns {
   .footer {
     background-color: var(--color-bg-primary);
