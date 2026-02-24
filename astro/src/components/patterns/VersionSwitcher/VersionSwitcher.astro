@@ -72,3 +72,51 @@ const selectOptions: SelectOption[] = versions.map((version) => ({
     aria-label={t('version.selectLabel')}
   />
 </Flex>
+
+<script>
+  interface ElementWithListener extends Element {
+    _versionChangeListener?: EventListener;
+  }
+
+  function initVersionSwitcher() {
+    const versionSwitchers = document.querySelectorAll('[data-version-switcher]');
+
+    versionSwitchers.forEach((versionSwitcher) => {
+      const selectContainer = versionSwitcher.querySelector(
+        '[data-select-container]'
+      ) as ElementWithListener;
+
+      if (!selectContainer) return;
+
+      const existingListener = selectContainer._versionChangeListener;
+      if (existingListener) {
+        selectContainer.removeEventListener('select-change', existingListener);
+      }
+
+      const listener = (event: Event) => {
+        const customEvent = event as CustomEvent<{ value: string; label: string }>;
+        const newVersion = customEvent.detail.value;
+        const currentPath = window.location.pathname;
+        const versionPattern = /\/(\d+x)\//;
+        const match = currentPath.match(versionPattern);
+
+        if (match) {
+          const newPath = currentPath.replace(versionPattern, `/${newVersion}/`);
+          window.location.href = newPath;
+        } else {
+          const pathParts = currentPath.split('/').filter(Boolean);
+          if (pathParts.length >= 2) {
+            pathParts.splice(1, 0, newVersion);
+            window.location.href = '/' + pathParts.join('/');
+          }
+        }
+      };
+
+      selectContainer._versionChangeListener = listener;
+      selectContainer.addEventListener('select-change', listener);
+    });
+  }
+
+  initVersionSwitcher();
+  document.addEventListener('astro:page-load', initVersionSwitcher);
+</script>
