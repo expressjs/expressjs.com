@@ -43,14 +43,26 @@
     padding: var(--space-6) 0;
   }
 
-  .footer-logo {
-    display: flex;
-    align-items: center;
+  .footer__logo {
     list-style: none;
     padding: 0;
     margin: 0;
 
+    @media (--xs-only) {
+      li {
+        display: block;
+        text-align: center;
+
+        a {
+          display: inline-block;
+          padding: var(--space-4) 0;
+        }
+      }
+    }
+
     @media (--md-up) {
+      display: flex;
+      align-items: center;
       gap: var(--space-8);
     }
   }
@@ -61,20 +73,28 @@
     margin: 0;
     display: flex;
     align-items: center;
-    justify-content: right;
-    gap: var(--space-10);
+    justify-content: center;
+    gap: var(--space-8);
 
     li {
       display: inline;
     }
 
-    /* Icon color switching for light/dark mode */
     svg {
       color: var(--color-icon-primary);
     }
 
     svg path {
       fill: currentColor;
+    }
+
+    @media (--xs-only) {
+      padding: var(--space-4) 0 var(--space-6);
+    }
+
+    @media (--md-up) {
+      justify-content: right;
+      gap: var(--space-10);
     }
   }
 
