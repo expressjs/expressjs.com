@@ -14,10 +14,6 @@ export function normalizePath(path: string): string {
   return path.replace(/\/$/, '');
 }
 
-/**
- * Checks if versioning is enabled for the given version.
- * Returns true if versioned array includes the current version.
- */
 export function isVersioned(versioned: VersionPrefix[] | undefined, version: string): boolean {
   return versioned?.includes(version as VersionPrefix) ?? false;
 }
@@ -30,14 +26,8 @@ export function resolveHref(
   version: string
 ): string {
   const useVersion = isVersioned(versioned, version);
-  if (useVersion && basePath) {
-    return `/${lang}${basePath}/${version}${href}`;
-  } else if (useVersion) {
-    return `/${lang}/${version}${href}`;
-  } else if (basePath) {
-    return `/${lang}${basePath}${href}`;
-  }
-  return `/${lang}${href}`;
+  const versionPath = useVersion ? `/${version}` : '';
+  return `/${lang}${basePath}${versionPath}${href}`;
 }
 
 export function isLink(item: MenuItem): item is MenuItem & { href: string } {
@@ -48,16 +38,16 @@ export function hasSubmenu(item: MenuItem): item is MenuItem & { submenu: Menu }
   return 'submenu' in item && item.submenu !== undefined;
 }
 
-function shouldOmitItem(item: MenuItem, version: string): boolean {
-  return item.omitFrom?.includes(version as VersionPrefix) ?? false;
+function shouldOmit(entity: { omitFrom?: VersionPrefix[] }, version: string): boolean {
+  return entity.omitFrom?.includes(version as VersionPrefix) ?? false;
 }
 
-export function shouldOmitSection(
+const shouldOmitItem = (item: MenuItem, version: string): boolean => shouldOmit(item, version);
+
+export const shouldOmitSection = (
   section: { omitFrom?: VersionPrefix[] },
   version: string
-): boolean {
-  return section.omitFrom?.includes(version as VersionPrefix) ?? false;
-}
+): boolean => shouldOmit(section, version);
 
 export function filterItems(items: MenuItem[], version: string): MenuItem[] {
   return items.filter((item) => !shouldOmitItem(item, version));
@@ -68,10 +58,9 @@ export function getItemId(
   sectionIndex: number | null,
   itemIndex: number
 ): string {
-  if (sectionIndex !== null) {
-    return `${parentId}-s${sectionIndex}-i${itemIndex}`;
-  }
-  return `${parentId}-i${itemIndex}`;
+  return sectionIndex !== null
+    ? `${parentId}-s${sectionIndex}-i${itemIndex}`
+    : `${parentId}-i${itemIndex}`;
 }
 
 export function collectAllSubmenus(
@@ -83,45 +72,42 @@ export function collectAllSubmenus(
   version: string,
   submenus: SubmenuData[]
 ): void {
-  const collectFromItems = (items: MenuItem[], sectionIndex: number | null) => {
-    const filteredItems = filterItems(items, version);
-    filteredItems.forEach((item, itemIndex) => {
-      if (hasSubmenu(item)) {
-        const itemId = getItemId(currentParentId, sectionIndex, itemIndex);
-        const submenuId = `submenu-${itemId}`;
-        const submenuBasePath = item.submenu.basePath || currentBasePath;
-        const submenuVersioned = item.submenu.versioned ?? currentVersioned;
+  const processItems = (items: MenuItem[], sectionIndex: number | null): void => {
+    filterItems(items, version).forEach((item, itemIndex) => {
+      if (!hasSubmenu(item)) return;
 
-        submenus.push({
-          menu: item.submenu,
-          title: item.label,
-          id: submenuId,
-          basePath: submenuBasePath,
-          versioned: submenuVersioned ?? [],
-          level: currentLevel + 1,
-        });
+      const itemId = getItemId(currentParentId, sectionIndex, itemIndex);
+      const submenuId = `submenu-${itemId}`;
+      const submenuBasePath = item.submenu.basePath || currentBasePath;
+      const submenuVersioned = item.submenu.versioned ?? currentVersioned ?? [];
 
-        collectAllSubmenus(
-          item.submenu,
-          currentLevel + 1,
-          submenuId,
-          submenuBasePath,
-          submenuVersioned,
-          version,
-          submenus
-        );
-      }
+      submenus.push({
+        menu: item.submenu,
+        title: item.label,
+        id: submenuId,
+        basePath: submenuBasePath,
+        versioned: submenuVersioned,
+        level: currentLevel + 1,
+      });
+
+      collectAllSubmenus(
+        item.submenu,
+        currentLevel + 1,
+        submenuId,
+        submenuBasePath,
+        submenuVersioned,
+        version,
+        submenus
+      );
     });
   };
 
   menuToScan.sections
     ?.filter((section) => !shouldOmitSection(section, version))
-    .forEach((section, sectionIndex) => {
-      collectFromItems(section.items, sectionIndex);
-    });
+    .forEach((section, sectionIndex) => processItems(section.items, sectionIndex));
 
   if (menuToScan.items) {
-    collectFromItems(filterItems(menuToScan.items, version), null);
+    processItems(menuToScan.items, null);
   }
 }
 
@@ -130,36 +116,28 @@ function checkItemsForPath(
   normalizedCurrentPath: string,
   basePath: string,
   versioned: VersionPrefix[] | undefined,
-  currentPath: string,
   lang: string,
   version: string
 ): boolean {
-  const filteredItems = filterItems(items, version);
-  for (const item of filteredItems) {
+  return filterItems(items, version).some((item) => {
     if (isLink(item)) {
       const href = resolveHref(item.href, lang, basePath, versioned, version);
-      if (normalizedCurrentPath === normalizePath(href)) {
-        return true;
-      }
+      return normalizedCurrentPath === normalizePath(href);
     }
     if (hasSubmenu(item)) {
       const nestedBasePath = item.submenu.basePath || basePath;
       const nestedVersioned = item.submenu.versioned ?? versioned;
-      if (
-        submenuContainsCurrentPath(
-          item.submenu,
-          nestedBasePath,
-          nestedVersioned,
-          currentPath,
-          lang,
-          version
-        )
-      ) {
-        return true;
-      }
+      return submenuContainsCurrentPath(
+        item.submenu,
+        nestedBasePath,
+        nestedVersioned,
+        normalizedCurrentPath,
+        lang,
+        version
+      );
     }
-  }
-  return false;
+    return false;
+  });
 }
 
 export function submenuContainsCurrentPath(
@@ -171,39 +149,31 @@ export function submenuContainsCurrentPath(
   version: string
 ): boolean {
   const normalizedCurrentPath = normalizePath(currentPath);
+  const filteredSections =
+    submenuMenu.sections?.filter((s) => !shouldOmitSection(s, version)) ?? [];
 
-  for (const section of submenuMenu.sections?.filter((s) => !shouldOmitSection(s, version)) || []) {
-    if (
+  return (
+    filteredSections.some((section) =>
       checkItemsForPath(
         section.items,
         normalizedCurrentPath,
         submenuBasePath,
         submenuVersioned,
-        currentPath,
         lang,
         version
       )
-    ) {
-      return true;
-    }
-  }
-
-  if (
-    submenuMenu.items &&
-    checkItemsForPath(
-      submenuMenu.items,
-      normalizedCurrentPath,
-      submenuBasePath,
-      submenuVersioned,
-      currentPath,
-      lang,
-      version
-    )
-  ) {
-    return true;
-  }
-
-  return false;
+    ) ||
+    (submenuMenu.items
+      ? checkItemsForPath(
+          submenuMenu.items,
+          normalizedCurrentPath,
+          submenuBasePath,
+          submenuVersioned,
+          lang,
+          version
+        )
+      : false)
+  );
 }
 
 export function calculateInitialActiveLevel(
@@ -212,36 +182,29 @@ export function calculateInitialActiveLevel(
   lang: string,
   version: string
 ): number {
-  let activeLevel = 0;
-
-  for (const submenu of submenus) {
-    if (
-      submenuContainsCurrentPath(
-        submenu.menu,
-        submenu.basePath,
-        submenu.versioned,
-        currentPath,
-        lang,
-        version
-      )
-    ) {
-      if (submenu.level > activeLevel) {
-        activeLevel = submenu.level;
-      }
-    }
-  }
-
-  return activeLevel;
+  return submenus.reduce((maxLevel, submenu) => {
+    const containsPath = submenuContainsCurrentPath(
+      submenu.menu,
+      submenu.basePath,
+      submenu.versioned,
+      currentPath,
+      lang,
+      version
+    );
+    return containsPath && submenu.level > maxLevel ? submenu.level : maxLevel;
+  }, 0);
 }
 
 export function groupSubmenusByLevel(submenus: SubmenuData[]): Map<number, SubmenuData[]> {
-  const submenusByLevel = new Map<number, SubmenuData[]>();
-  submenus.forEach((submenu) => {
-    const levelSubmenus = submenusByLevel.get(submenu.level) || [];
-    levelSubmenus.push(submenu);
-    submenusByLevel.set(submenu.level, levelSubmenus);
-  });
-  return submenusByLevel;
+  return submenus.reduce((map, submenu) => {
+    const levelSubmenus = map.get(submenu.level);
+    if (levelSubmenus) {
+      levelSubmenus.push(submenu);
+    } else {
+      map.set(submenu.level, [submenu]);
+    }
+    return map;
+  }, new Map<number, SubmenuData[]>());
 }
 
 export function detectVersionFromUrl(
@@ -249,10 +212,5 @@ export function detectVersionFromUrl(
   versions: VersionConfig[],
   defaultVersion: string
 ): string {
-  for (const version of versions) {
-    if (currentPath.includes(`/${version.id}/`)) {
-      return version.id;
-    }
-  }
-  return defaultVersion;
+  return versions.find((v) => currentPath.includes(`/${v.id}/`))?.id ?? defaultVersion;
 }

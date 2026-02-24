@@ -62,9 +62,4 @@ export class SidebarFocusTrap {
 
     focusableElements[nextIndex]?.focus();
   }
-
-  focusFirst(): void {
-    const focusableElements = this.getFocusableElements();
-    focusableElements[0]?.focus();
-  }
 }

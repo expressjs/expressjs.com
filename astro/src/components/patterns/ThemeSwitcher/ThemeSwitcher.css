@@ -8,7 +8,6 @@
     border-radius: var(--radius-base);
     transition: var(--transition-colors);
     gap: var(--space-3);
-    width: 100%;
   }
 
   .toggle:hover {

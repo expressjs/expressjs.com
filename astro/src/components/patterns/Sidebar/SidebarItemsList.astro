@@ -1,7 +1,15 @@
 ---
 import type { MenuItem, VersionPrefix } from '@/config/types';
 import SidebarNavItem from './SidebarNavItem.astro';
-import { isLink, hasSubmenu, filterItems, getItemId, resolveHref, normalizePath } from './utils';
+import {
+  isLink,
+  hasSubmenu,
+  filterItems,
+  getItemId,
+  resolveHref,
+  normalizePath,
+  submenuContainsCurrentPath,
+} from './utils';
 
 interface Props {
   items: MenuItem[];
@@ -35,31 +43,57 @@ const filteredItems = filterItems(items, version);
 ---
 
 {
-  filteredItems.map((item, itemIndex) => {
-    const itemId = getItemId(parentId, sectionIndex, itemIndex);
-    const href = isLink(item) ? resolveHref(item.href, lang, basePath, versioned, version) : '';
-    const isActive = normalizePath(currentPath) === normalizePath(href);
+  filteredItems
+    .filter((item) => isLink(item) || hasSubmenu(item))
+    .map((item, itemIndex) => {
+      const itemId = getItemId(parentId, sectionIndex, itemIndex);
+      const itemHref = item.href;
 
-    return isLink(item) ? (
-      <SidebarNavItem
-        item={item}
-        href={href}
-        isActive={isActive}
-        variant={variant}
-        type="link"
-        showIcon={showIcon}
-      />
-    ) : hasSubmenu(item) ? (
-      <SidebarNavItem
-        item={item}
-        href=""
-        isActive={false}
-        variant={variant}
-        type="submenu"
-        submenuId={`submenu-${itemId}`}
-        targetLevel={targetLevel}
-        showIcon={showIcon}
-      />
-    ) : null;
-  })
+      const itemVersioned = item.submenu?.versioned ?? versioned;
+      const itemBasePath = item.submenu?.basePath ?? basePath;
+
+      const href = itemHref
+        ? resolveHref(itemHref, lang, itemBasePath, itemVersioned, version)
+        : '';
+
+      const isActive =
+        hasSubmenu(item) && variant === 'root'
+          ? submenuContainsCurrentPath(
+              item.submenu,
+              itemBasePath,
+              itemVersioned,
+              currentPath,
+              lang,
+              version
+            )
+          : href
+            ? normalizePath(currentPath) === normalizePath(href)
+            : false;
+
+      if (hasSubmenu(item)) {
+        return (
+          <SidebarNavItem
+            item={item}
+            href={href}
+            isActive={isActive}
+            variant={variant}
+            type="submenu"
+            submenuId={`submenu-${itemId}`}
+            targetLevel={targetLevel}
+            showIcon={showIcon}
+          />
+        );
+      }
+
+      return (
+        <SidebarNavItem
+          item={item}
+          href={href}
+          isActive={isActive}
+          variant={variant}
+          type="link"
+          showIcon={showIcon}
+        />
+      );
+    })
 }

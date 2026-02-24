@@ -5,9 +5,14 @@ import { SidebarFocusTrap } from './SidebarFocusTrap';
 const TRANSITION_DURATION = 300;
 
 export class SidebarController {
+  private static readonly FOCUSABLE_SELECTOR =
+    'a:not([tabindex="-1"]), button:not([tabindex="-1"]), input:not([tabindex="-1"]), select:not([tabindex="-1"]), textarea:not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])';
+  private static readonly INTERACTIVE_SELECTOR = 'a, button, input, select, textarea';
+
   private sidebar: HTMLElement | null;
   private backdrop: HTMLElement | null;
   private navContainer: HTMLElement | null;
+  private toggleNestedButton: HTMLElement | null = null;
   private versionManager: SidebarVersionManager | null = null;
   private focusTrap: SidebarFocusTrap | null = null;
 
@@ -15,6 +20,8 @@ export class SidebarController {
   private lastFocusedElement: HTMLElement | null = null;
   private activeLevel = 0;
   private activeSubmenuPath: string[] = ['root'];
+  private selectedItem: HTMLElement | null = null;
+  private isNestedCollapsed = false;
 
   private initialActiveLevel = 0;
   private initialActiveSubmenuPath: string[] = ['root'];
@@ -23,6 +30,7 @@ export class SidebarController {
     this.sidebar = document.querySelector('[data-sidebar]');
     this.backdrop = document.querySelector('[data-sidebar-backdrop]');
     this.navContainer = document.querySelector('[data-nav-container]');
+    this.toggleNestedButton = document.querySelector('[data-toggle-nested-button]');
 
     if (this.sidebar && this.backdrop) {
       const currentVersion = this.sidebar.dataset.currentVersion || '5x';
@@ -43,9 +51,11 @@ export class SidebarController {
 
     this.setupSubmenuTriggers();
     this.setupBackButtons();
+    this.setupNavItemSelection();
     this.versionManager?.setup();
     this.initializeFromActiveState();
     this.updateActiveColumns();
+    this.setupToggleNestedButton();
   }
 
   private initializeFromActiveState(): void {
@@ -77,6 +87,29 @@ export class SidebarController {
     }
   }
 
+  private focusActiveLevel(): void {
+    const currentSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
+    const targetContainer = this.sidebar?.querySelector(
+      `[data-parent-id="${currentSubmenuId}"]`
+    ) as HTMLElement;
+
+    if (!targetContainer) {
+      console.warn(`Focus target not found for submenu: ${currentSubmenuId}`);
+      return;
+    }
+
+    const firstFocusable = targetContainer.querySelector(
+      SidebarController.FOCUSABLE_SELECTOR
+    ) as HTMLElement;
+
+    if (!firstFocusable) {
+      console.warn(`No focusable elements found in: ${currentSubmenuId}`);
+      return;
+    }
+
+    firstFocusable.focus();
+  }
+
   private setupSubmenuTriggers(): void {
     this.sidebar?.querySelectorAll('[data-submenu-trigger]').forEach((trigger) => {
       trigger.addEventListener('click', (e) => {
@@ -102,6 +135,72 @@ export class SidebarController {
     });
   }
 
+  private setupNavItemSelection(): void {
+    this.sidebar?.querySelectorAll('.sidebar-nav-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        // Only track selection for root-level items (level 0)
+        const isRootLevel = item.closest('[data-nav-level="0"]') !== null;
+        if (isRootLevel) {
+          this.setSelectedItem(item as HTMLElement);
+        }
+      });
+    });
+  }
+
+  private setupToggleNestedButton(): void {
+    this.toggleNestedButton?.addEventListener('click', () => {
+      this.toggleNestedColumns();
+    });
+    this.updateToggleButtonVisibility();
+  }
+
+  private updateToggleButtonVisibility(): void {
+    if (!this.toggleNestedButton) return;
+
+    const shouldBeVisible = this.activeLevel > 0 || this.initialActiveLevel > 0;
+    this.toggleNestedButton.setAttribute('data-visible', String(shouldBeVisible));
+  }
+
+  private setSelectedItem(item: HTMLElement): void {
+    if (this.selectedItem) {
+      this.selectedItem.classList.remove('sidebar-nav-item--selected');
+    }
+
+    item.classList.add('sidebar-nav-item--selected');
+    this.selectedItem = item;
+  }
+
+  private toggleNestedColumns(): void {
+    this.isNestedCollapsed = !this.isNestedCollapsed;
+    this.enableTransitions();
+
+    if (this.isNestedCollapsed) {
+      if (this.selectedItem) {
+        this.selectedItem.classList.remove('sidebar-nav-item--selected');
+        this.selectedItem = null;
+      }
+
+      this.activeLevel = 0;
+      if (this.navContainer) {
+        this.navContainer.dataset.currentNavLevel = '0';
+      }
+    } else {
+      this.activeSubmenuPath = [...this.initialActiveSubmenuPath];
+      this.activeLevel = this.initialActiveLevel;
+      this.versionManager?.updatePath(this.activeSubmenuPath);
+      if (this.navContainer) {
+        this.navContainer.dataset.currentNavLevel = String(this.initialActiveLevel);
+      }
+    }
+
+    if (this.toggleNestedButton) {
+      this.toggleNestedButton.setAttribute('aria-expanded', String(!this.isNestedCollapsed));
+    }
+
+    this.updateActiveColumns();
+    this.updateToggleButtonVisibility();
+  }
+
   private navigateToSubmenu(submenuId: string, level: number): void {
     const submenuColumn = this.sidebar?.querySelector(
       `[data-parent-id="${submenuId}"]`
@@ -112,25 +211,53 @@ export class SidebarController {
       return;
     }
 
-    this.activeSubmenuPath = this.activeSubmenuPath.slice(0, level);
-    this.activeSubmenuPath.push(submenuId);
-    this.activeLevel = level;
+    this.enableTransitions();
+
+    // Check if this submenu is part of the initial path (contains current page)
+    // If so, restore to the initial navigation state instead of just going to target level
+    const isInInitialPath = this.initialActiveSubmenuPath.includes(submenuId);
+    const shouldRestoreInitialState = isInInitialPath && this.initialActiveLevel > level;
+
+    if (shouldRestoreInitialState) {
+      // Restore to the initial deep navigation state
+      this.activeSubmenuPath = [...this.initialActiveSubmenuPath];
+      this.activeLevel = this.initialActiveLevel;
+    } else {
+      this.activeSubmenuPath = this.activeSubmenuPath.slice(0, level);
+      this.activeSubmenuPath.push(submenuId);
+      this.activeLevel = level;
+    }
+
+    // If navigating to a submenu, ensure nested columns are expanded
+    if (this.isNestedCollapsed && level > 0) {
+      this.isNestedCollapsed = false;
+      if (this.toggleNestedButton) {
+        this.toggleNestedButton.setAttribute('aria-expanded', 'true');
+      }
+    }
+
     this.versionManager?.updatePath(this.activeSubmenuPath);
 
     this.updateActiveColumns();
+    this.updateToggleButtonVisibility();
 
     if (this.navContainer) {
-      this.navContainer.dataset.currentNavLevel = String(level);
+      this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
     }
 
-    setTimeout(() => {
-      const firstFocusable = submenuColumn.querySelector('button, a') as HTMLElement;
-      firstFocusable?.focus();
-    }, TRANSITION_DURATION);
+    this.afterTransition(() => this.focusActiveLevel());
   }
 
   private navigateBack(): void {
     if (this.activeSubmenuPath.length <= 1) return;
+
+    this.enableTransitions();
+
+    // Clear selected item state when navigating back
+    if (this.selectedItem) {
+      this.selectedItem.classList.remove('sidebar-nav-item--selected');
+      this.selectedItem = null;
+    }
 
     const currentSubmenuId = this.activeSubmenuPath[this.activeSubmenuPath.length - 1];
     let triggerToFocus: HTMLElement | null = null;
@@ -147,28 +274,94 @@ export class SidebarController {
     this.activeLevel = this.activeSubmenuPath.length - 1;
     this.versionManager?.updatePath(this.activeSubmenuPath);
 
+    // If navigating back to level 0, collapse nested columns and update toggle button
+    if (this.activeLevel === 0) {
+      this.isNestedCollapsed = true;
+      if (this.toggleNestedButton) {
+        this.toggleNestedButton.setAttribute('aria-expanded', 'false');
+      }
+    }
+
     this.updateActiveColumns();
+    this.updateToggleButtonVisibility();
 
     if (this.navContainer) {
       this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
     }
 
     // Restore focus to the trigger button after the transition
-    setTimeout(() => {
-      triggerToFocus?.focus();
-    }, TRANSITION_DURATION);
+    this.afterTransition(() => triggerToFocus?.focus());
   }
 
   private updateActiveColumns(): void {
-    this.sidebar?.querySelectorAll('[data-parent-id]').forEach((column) => {
-      const parentId = (column as HTMLElement).dataset.parentId || '';
-      const isInActivePath = this.activeSubmenuPath.includes(parentId);
+    const allLevels = this.sidebar?.querySelectorAll('[data-nav-level]');
 
-      column.setAttribute('aria-hidden', isInActivePath ? 'false' : 'true');
-      column.classList.toggle('sidebar-nav-panel--active', isInActivePath);
+    allLevels?.forEach((column) => {
+      const columnLevel = parseInt((column as HTMLElement).dataset.navLevel || '0', 10);
+      const isCurrentLevel = columnLevel === this.activeLevel;
+
+      if (columnLevel === 0) {
+        column.setAttribute('aria-hidden', 'false');
+        this.updateFocusableElements(column as HTMLElement, true);
+      } else {
+        const panels = column.querySelectorAll('[data-parent-id]');
+        panels.forEach((panel) => {
+          const parentId = (panel as HTMLElement).dataset.parentId || '';
+          const isInActivePath = this.activeSubmenuPath.includes(parentId);
+
+          panel.setAttribute('aria-hidden', isInActivePath ? 'false' : 'true');
+          panel.classList.toggle('sidebar-nav-panel--active', isInActivePath);
+
+          const shouldBeFocusable = isCurrentLevel && isInActivePath;
+          this.updateFocusableElements(panel as HTMLElement, shouldBeFocusable);
+        });
+      }
     });
 
     this.versionManager?.updateVisibility(this.activeLevel);
+  }
+
+  private updateFocusableElements(container: HTMLElement, isVisible: boolean): void {
+    const scrollableContainers = container.querySelectorAll('.sidebar-nav-content, .sidebar-nav');
+    scrollableContainers.forEach((scrollContainer) => {
+      if (isVisible) {
+        scrollContainer.removeAttribute('tabindex');
+      } else {
+        scrollContainer.setAttribute('tabindex', '-1');
+      }
+    });
+
+    const focusableElements = container.querySelectorAll(SidebarController.INTERACTIVE_SELECTOR);
+
+    focusableElements.forEach((element) => {
+      if (isVisible) {
+        const originalTabindex = element.getAttribute('data-original-tabindex');
+        if (originalTabindex !== null) {
+          if (originalTabindex === '') {
+            element.removeAttribute('tabindex');
+          } else {
+            element.setAttribute('tabindex', originalTabindex);
+          }
+          element.removeAttribute('data-original-tabindex');
+        }
+      } else {
+        const currentTabindex = element.getAttribute('tabindex');
+        const hasOriginalTabindex = element.hasAttribute('data-original-tabindex');
+
+        if (!hasOriginalTabindex && currentTabindex !== '-1') {
+          element.setAttribute('data-original-tabindex', currentTabindex || '');
+          element.setAttribute('tabindex', '-1');
+        }
+      }
+    });
+  }
+
+  private enableTransitions(): void {
+    this.navContainer?.classList.add('sidebar-container--interactive');
+  }
+
+  private afterTransition(callback: () => void): void {
+    setTimeout(callback, TRANSITION_DURATION);
   }
 
   private handleKeyDown(e: KeyboardEvent): void {
@@ -194,7 +387,7 @@ export class SidebarController {
     this.backdrop.classList.add('sidebar-backdrop--visible');
     document.body.style.overflow = 'hidden';
 
-    setTimeout(() => this.focusTrap?.focusFirst(), TRANSITION_DURATION);
+    this.afterTransition(() => this.focusActiveLevel());
   }
 
   public close(): void {
@@ -203,12 +396,18 @@ export class SidebarController {
     document.dispatchEvent(new CustomEvent('sidebar:closed'));
     this.isOpen = false;
 
+    // Clear selected item state immediately
+    if (this.selectedItem) {
+      this.selectedItem.classList.remove('sidebar-nav-item--selected');
+      this.selectedItem = null;
+    }
+
     this.sidebar.setAttribute('aria-hidden', 'true');
     this.backdrop.setAttribute('aria-hidden', 'true');
     this.sidebar.classList.remove('sidebar--open');
     this.backdrop.classList.remove('sidebar-backdrop--visible');
 
-    setTimeout(() => this.resetToInitialState(), TRANSITION_DURATION);
+    this.afterTransition(() => this.resetToInitialState());
 
     document.body.style.overflow = '';
     this.lastFocusedElement?.focus();
@@ -222,9 +421,16 @@ export class SidebarController {
 
     this.activeSubmenuPath = [...this.initialActiveSubmenuPath];
     this.activeLevel = this.initialActiveLevel;
+    this.isNestedCollapsed = false;
     this.versionManager?.updatePath(this.activeSubmenuPath);
 
+    // Reset toggle button state
+    if (this.toggleNestedButton) {
+      this.toggleNestedButton.setAttribute('aria-expanded', 'true');
+    }
+
     this.updateActiveColumns();
+    this.updateToggleButtonVisibility();
 
     if (this.navContainer) {
       this.navContainer.dataset.currentNavLevel = String(this.activeLevel);
@@ -238,16 +444,12 @@ export class SidebarController {
       this.open();
     }
   }
+}
 
-  public getVersion(): string {
-    return this.versionManager?.getVersion() || '5x';
-  }
-
-  public setVersion(version: string): void {
-    this.versionManager?.setVersion(version);
+declare global {
+  interface Window {
+    sidebarController?: SidebarController;
   }
 }
 
-const sidebarController = new SidebarController();
-(window as Window & { sidebarController?: SidebarController }).sidebarController =
-  sidebarController;
+(window as Window).sidebarController = new SidebarController();

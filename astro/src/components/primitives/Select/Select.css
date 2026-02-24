@@ -30,6 +30,7 @@
     background-color: var(--color-bg-secondary);
     border: 1px solid var(--color-border-mute);
     border-radius: var(--radius-base);
+    cursor: pointer;
     appearance: none;
     transition:
       border-color 0.2s ease,
