@@ -5,11 +5,6 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import { mainMenu } from '@/config/menu/main';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
 import type { Menu } from '@/config/types';
-import { getLangFromUrl } from '@/i18n/utils';
-import { mainMenu } from '@/config/menu/main';
-import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
-import type { Menu } from '@/config/types';
-import { Icon } from 'astro-icon/components';
 import SidebarMenu from './SidebarMenu.astro';
 import {
   detectVersionFromUrl,
@@ -17,6 +12,7 @@ import {
   calculateInitialActiveLevel,
   type SubmenuData,
 } from './utils';
+import { Icon } from 'astro-icon/components';
 
 type Props = HTMLAttributes<'div'> & {
   menu?: Menu;
@@ -60,6 +56,21 @@ const initialActiveLevel = calculateInitialActiveLevel(submenus, currentPath, la
   {...rest}
 >
   <h2 id="sidebar-title" class="sr-only" aria-label={t('nav.mainMenu')}>{t('nav.mainMenu')}</h2>
+
+  {
+    submenus.length > 0 && (
+      <button
+        type="button"
+        class="sidebar-toggle-nested"
+        data-toggle-nested-button
+        data-visible={initialActiveLevel > 0}
+        aria-label="Toggle nested navigation"
+        aria-expanded="true"
+      >
+        <Icon name="fluent:panel-right-expand-20-regular" size="20" aria-hidden="true" />
+      </button>
+    )
+  }
 
   <div class="sidebar-container" data-nav-container data-current-nav-level={initialActiveLevel}>
     <SidebarMenu
