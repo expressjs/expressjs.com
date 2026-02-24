@@ -1,1 +1,2 @@
+cd astro
 npx lint-staged

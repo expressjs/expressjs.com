@@ -10,7 +10,7 @@ export default [
   // Global ignores
   globalIgnores(['dist/*', '.astro/*', 'node_modules/*', 'package-lock.json']),
   {
-    ignores: ['dist/', '.astro/', 'node_modules/', 'package-lock.json'  ],
+    ignores: ['dist/', '.astro/', 'node_modules/', 'package-lock.json'],
   },
 
   // Base ESLint recommended rules
