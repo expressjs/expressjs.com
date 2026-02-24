@@ -11,7 +11,6 @@ export const mainMenu: Menu = {
           label: 'menu.docs',
           ariaLabel: 'menu.docsAria',
           icon: 'document-bullet-list-multiple-20-regular',
-          href: '/starter/installing',
           submenu: {
             versioned: ['5x', '4x'],
             sections: docsMenu.sections,
@@ -21,7 +20,6 @@ export const mainMenu: Menu = {
           label: 'menu.api',
           ariaLabel: 'menu.apiAria',
           icon: 'code-20-regular',
-          href: '/api',
           submenu: {
             versioned: ['5x', '4x', '3x'],
             sections: apiMenu.sections,
@@ -31,7 +29,6 @@ export const mainMenu: Menu = {
           label: 'menu.resources',
           ariaLabel: 'menu.resourcesAria',
           icon: 'folder-20-regular',
-          href: '/community',
           submenu: {
             basePath: '/resources',
             items: resourcesMenu.items,

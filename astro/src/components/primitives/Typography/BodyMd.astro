@@ -19,7 +19,7 @@ type Props =
   | ({ as: 'small' } & BaseProps & HTMLAttributes<'small'>)
   | ({ as: 'label' } & BaseProps & HTMLAttributes<'label'>);
 
-const { as = 'span', ...rest } = Astro.props;
+const { as = 'span', ...rest } = Astro.props as Props;
 ---
 
 <Typography as={as} variant="body-md" {...rest}>

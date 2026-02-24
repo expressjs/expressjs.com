@@ -1,7 +1,5 @@
 /**
- * Primitives Components
- *
- * Re-export all primitive components for easy importing
+ * Reexport all primitives Components
  */
 
 // Typography

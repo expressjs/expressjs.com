@@ -5,6 +5,11 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import { mainMenu } from '@/config/menu/main';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
 import type { Menu } from '@/config/types';
+import { getLangFromUrl } from '@/i18n/utils';
+import { mainMenu } from '@/config/menu/main';
+import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
+import type { Menu } from '@/config/types';
+import { Icon } from 'astro-icon/components';
 import SidebarMenu from './SidebarMenu.astro';
 import {
   detectVersionFromUrl,
