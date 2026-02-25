@@ -11,7 +11,7 @@ redirect_from: "  "
 
 ## Desligamento Gracioso
 
-When you deploy a new version of your application, you must replace the previous version. The process manager you're using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it should stop accepting new requests, finish all the ongoing requests, clean up the resources it used,  including database connections and file locks then exit.
+Quando você publica uma nova versão do seu aplicativo, você deve substituir a versão anterior. The process manager you're using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it should stop accepting new requests, finish all the ongoing requests, clean up the resources it used,  including database connections and file locks then exit.
 
 ### Exemplo
 
@@ -28,7 +28,7 @@ process.on('SIGTERM', () => {
 
 ## Verificações de integridade
 
-A load balancer uses health checks to determine if an application instance is healthy and can accept requests. For example, [Kubernetes has two health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
+A load balancer uses health checks to determine if an application instance is healthy and can accept requests. Por exemplo, [Kubernetes tem dois exames de saúde](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/):
 
 - `liveness`, that determines when to restart a container.
 - `readiness`, that determines when a container is ready to start accepting traffic. When a pod is not ready, it is removed from the service load balancers.
