@@ -3,6 +3,7 @@ import type { MenuItem } from '@/config/types';
 import { BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { useTranslations } from '@/i18n/utils';
+import type { LanguageCode } from '@/i18n/ui';
 
 interface Props {
   item: MenuItem & { href?: string };
@@ -13,7 +14,7 @@ interface Props {
   submenuId?: string;
   targetLevel?: number;
   showIcon?: boolean;
-  lang: string;
+  lang: LanguageCode;
 }
 
 const {

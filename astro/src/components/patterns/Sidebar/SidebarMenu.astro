@@ -1,6 +1,7 @@
 ---
 import type { Menu, VersionPrefix } from '@/config/types';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
+import type { LanguageCode } from '@/i18n/ui';
 import { Body } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
@@ -19,7 +20,7 @@ interface Props {
   menu: Menu;
   level: number;
   title?: string;
-  lang: string;
+  lang: LanguageCode;
   currentPath: string;
   basePath?: string;
   versioned?: VersionPrefix[];

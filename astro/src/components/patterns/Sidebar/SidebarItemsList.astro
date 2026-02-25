@@ -1,5 +1,6 @@
 ---
 import type { MenuItem, VersionPrefix } from '@/config/types';
+import type { LanguageCode } from '@/i18n/ui';
 import SidebarNavItem from './SidebarNavItem.astro';
 import {
   isLink,
@@ -16,7 +17,7 @@ interface Props {
   parentId: string;
   sectionIndex: number | null;
   currentPath: string;
-  lang: string;
+  lang: LanguageCode;
   basePath: string;
   versioned: VersionPrefix[];
   version: string;
