@@ -142,6 +142,42 @@ const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
       let isOpen = false;
       let focusedIndex = -1;
 
+      const findNextEnabled = (startIndex: number): number => {
+        let index = (startIndex + 1) % options.length;
+        const startPos = index;
+        while (options[index]?.disabled) {
+          index = (index + 1) % options.length;
+          if (index === startPos) break;
+        }
+        return index;
+      };
+
+      const findPrevEnabled = (startIndex: number): number => {
+        let index = startIndex <= 0 ? options.length - 1 : startIndex - 1;
+        const startPos = index;
+        while (options[index]?.disabled) {
+          index = index <= 0 ? options.length - 1 : index - 1;
+          if (index === startPos) break;
+        }
+        return index;
+      };
+
+      const findFirstEnabled = (): number => {
+        let index = 0;
+        while (index < options.length && options[index]?.disabled) {
+          index++;
+        }
+        return index < options.length ? index : -1;
+      };
+
+      const findLastEnabled = (): number => {
+        let index = options.length - 1;
+        while (index >= 0 && options[index]?.disabled) {
+          index--;
+        }
+        return index;
+      };
+
       const toggle = (open?: boolean) => {
         if (button.disabled) return;
 
@@ -153,14 +189,15 @@ const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
           const selectedIndex = options.findIndex(
             (opt) => opt.getAttribute('aria-selected') === 'true'
           );
-          focusedIndex = selectedIndex >= 0 ? selectedIndex : 0;
 
-          while (focusedIndex < options.length && options[focusedIndex].disabled) {
-            focusedIndex++;
+          if (selectedIndex >= 0 && !options[selectedIndex].disabled) {
+            focusedIndex = selectedIndex;
+          } else {
+            focusedIndex = findFirstEnabled();
           }
 
-          if (focusedIndex < options.length) {
-            options[focusedIndex]?.focus();
+          if (focusedIndex >= 0) {
+            options[focusedIndex].focus();
           }
         } else {
           focusedIndex = -1;
@@ -201,10 +238,7 @@ const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (!isOpen) {
-          if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
-            e.preventDefault();
-            toggle(true);
-          } else if (e.key === 'ArrowUp') {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown' || e.key === 'ArrowUp') {
             e.preventDefault();
             toggle(true);
           }
@@ -220,36 +254,26 @@ const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
 
           case 'ArrowDown':
             e.preventDefault();
-            do {
-              focusedIndex = (focusedIndex + 1) % options.length;
-            } while (options[focusedIndex]?.disabled && focusedIndex !== 0);
-            options[focusedIndex]?.focus();
+            focusedIndex = findNextEnabled(focusedIndex);
+            options[focusedIndex].focus();
             break;
 
           case 'ArrowUp':
             e.preventDefault();
-            do {
-              focusedIndex = focusedIndex <= 0 ? options.length - 1 : focusedIndex - 1;
-            } while (options[focusedIndex]?.disabled);
-            options[focusedIndex]?.focus();
+            focusedIndex = findPrevEnabled(focusedIndex);
+            options[focusedIndex].focus();
             break;
 
           case 'Home':
             e.preventDefault();
-            focusedIndex = 0;
-            while (options[focusedIndex]?.disabled && focusedIndex < options.length) {
-              focusedIndex++;
-            }
-            options[focusedIndex]?.focus();
+            focusedIndex = findFirstEnabled();
+            if (focusedIndex >= 0) options[focusedIndex].focus();
             break;
 
           case 'End':
             e.preventDefault();
-            focusedIndex = options.length - 1;
-            while (options[focusedIndex]?.disabled && focusedIndex > 0) {
-              focusedIndex--;
-            }
-            options[focusedIndex]?.focus();
+            focusedIndex = findLastEnabled();
+            if (focusedIndex >= 0) options[focusedIndex].focus();
             break;
         }
       };
@@ -268,9 +292,9 @@ const containerId = id || `select-${Math.random().toString(36).slice(2, 11)}`;
           if ((e.key === 'Enter' || e.key === ' ') && !option.disabled) {
             e.preventDefault();
             selectOption(option);
-          } else {
-            handleKeyDown(e);
+            return;
           }
+          handleKeyDown(e);
         });
 
         option.addEventListener('focus', () => {
