@@ -67,19 +67,17 @@ const { videoSrc, videoSrcMobile, posterSrc, disableVideoOnMobile = true } = Ast
       </Flex>
 
       <Grid>
-        <Col xs={12} md={6} lg={6}>
+        <Col xs={12} lg={6}>
           <H1 vMargin={false}>Fast, unopinionated, minimalist web framework for Node.js </H1>
-          <div class="hero__install">
-            <Code code={INSTALL_COMMAND} lang="bash" />
-          </div>
           <div class="hero__cta">
-            <Button as="a" href="/en/5x/starter/installing" variant="primary" size="md" fullWidth>
+            <Code code={INSTALL_COMMAND} />
+            <Button as="a" href="/en/5x/starter/installing" size="md" fullWidth>
               Get Started
+              <Icon name="fluent:arrow-right-16-regular" size="16" />
             </Button>
           </div>
         </Col>
-        <Col xs={12} md={6} lg={6}>
-          <!-- Example code -->
+        <Col xs={12} lg={6}>
           <div class="hero__example-expressive_">
             <Code code={EXAMPLE_CODE} lang="js" />
           </div>

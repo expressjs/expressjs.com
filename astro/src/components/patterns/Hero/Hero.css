@@ -10,21 +10,11 @@
     overflow: hidden;
   }
 
-  /* @media (--md-up) {
+  @media (--md-up) {
     .hero {
-      padding: var(--space-20) 0;
+      padding: var(--space-14) 0 var(--space-20) 0;
     }
   }
-
-  @media (--lg-up) {
-    .hero {
-      padding: var(--space-24) 0;
-    }
-  } */
-
-  /* ============================================
-     VIDEO BACKGROUND
-     ============================================ */
 
   .hero__video-container {
     position: absolute;
@@ -55,35 +45,57 @@
   }
 
   /* Hide video on mobile if specified */
-  @media (max-width: 767px) {
+  @media (--xs-only) {
     .hero__video-container[data-disable-mobile='true'] {
       display: none;
     }
   }
 
-  /* Overlay for better text readability */
   .hero__video-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      rgba(0, 0, 0, 0.6) 70%,
+      var(--color-bg-primary) 100%
+    );
     z-index: 1;
   }
 
-  /* Adjust overlay for dark mode */
   [data-theme='dark'] .hero__video-overlay {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.7) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.5) 40%,
+      rgba(0, 0, 0, 0.7) 70%,
+      var(--color-bg-primary) 100%
+    );
   }
 
   @media (prefers-color-scheme: dark) {
     .hero__video-overlay {
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.7) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        rgba(0, 0, 0, 0.7) 70%,
+        var(--color-bg-primary) 100%
+      );
     }
 
     [data-theme='light'] .hero__video-overlay {
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.4) 40%,
+        rgba(0, 0, 0, 0.6) 70%,
+        var(--color-bg-primary) 100%
+      );
     }
   }
 
@@ -98,15 +110,11 @@
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: var(--space-12);
-
-    @media (--xs-only) {
-      align-items: center;
-    }
+    gap: var(--space-8);
   }
 
   .hero__logo {
-    width: var(--size-44);
+    width: var(--size-36);
 
     svg {
       width: 100%;
@@ -151,105 +159,21 @@
       display: none;
     }
   }
-
-  /* ============================================
-     INSTALLATION COMMAND
-     ============================================ */
-
-  .hero__install {
-    width: 100%;
-    max-width: 600px;
-  }
-
-  .hero__code-block {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-5);
-    background-color: var(--color-bg-tertiary);
-    border: var(--border-width-1) solid var(--color-border-primary);
-    border-radius: var(--radius-base);
-    font-family: var(--font-family-mono);
-    font-size: var(--font-size-sm);
-  }
-
-  @media (--md-up) {
-    .hero__code-block {
-      font-size: var(--font-size-base);
-    }
-  }
-
-  .hero__code {
-    flex: 1;
-    text-align: left;
-    display: flex;
-    align-items: center;
-  }
-
-  /* Style Astro Code component output for inline command */
-  .hero__code :global(code) {
-    font-family: var(--font-family-mono);
-    font-size: inherit;
-    word-break: break-all;
-    background: none !important;
-    padding: 0 !important;
-  }
-
-  /* ============================================
-     COPY BUTTON
-     ============================================ */
-
-  .hero__copy-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-2);
-    background-color: var(--color-bg-primary);
-    border: var(--border-width-1) solid var(--color-border-primary);
-    border-radius: var(--radius-sm);
-    color: var(--color-text-primary);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-  }
-
-  .hero__copy-btn:hover {
-    background-color: var(--color-bg-secondary);
-    border-color: var(--color-border-secondary);
-  }
-
-  .hero__copy-btn:active {
-    transform: scale(0.95);
-  }
-
-  /* Copy icon states */
-  .hero__copy-icon {
-    transition: opacity 0.2s ease;
-  }
-
-  .hero__copy-icon--success {
-    position: absolute;
-    opacity: 0;
-  }
-
-  .hero__copy-btn--copied .hero__copy-icon:not(.hero__copy-icon--success) {
-    opacity: 0;
-  }
-
-  .hero__copy-btn--copied .hero__copy-icon--success {
-    opacity: 1;
-    color: var(--color-text-success);
-  }
-
   /* ============================================
      CTA
      ============================================ */
 
   .hero__cta {
-    margin-top: var(--space-2);
+    width: 100%;
+    display: flex;
+    margin: var(--space-8) 0;
+    flex-direction: column;
+    gap: var(--space-4);
+
+    @media (--md-up) {
+      margin: var(--space-12) 0;
+      max-width: var(--size-96);
+    }
   }
 
   /* ============================================
