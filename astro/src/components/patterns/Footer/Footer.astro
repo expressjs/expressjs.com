@@ -1,0 +1,128 @@
+---
+/**
+ * Footer Component
+ *
+ * Main site footer with copyright and additional information
+ */
+import './Footer.css';
+import { Icon } from 'astro-icon/components';
+import { BodyMd, Col, Container, Grid } from '@/components/primitives';
+---
+
+<footer class="footer">
+  <div class="footer-top">
+    <Container>
+      <BodyMd color="secondary" center as="p">
+        Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Express.js contributors. All
+        rights reserved. The <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks
+        and uses trademarks. For a list of trademarks of the <a href="https://openjsf.org"
+          >OpenJS Foundation</a
+        >, please see our <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and <a
+          href="https://trademark-list.openjsf.org">Trademark List</a
+        >. Trademarks and logos not indicated on the <a href="https://trademark-list.openjsf.org"
+          >list of OpenJS Foundation trademarks</a
+        > are trademarks&trade; or registered&reg; trademarks of their respective holders. Use of them
+        does not imply any affiliation with or endorsement by them.
+      </BodyMd>
+      <ul class="footer__links">
+        <li><a href="https://openjsf.org">The OpenJS Foundation</a></li>
+        <li><a href="https://terms-of-use.openjsf.org">Terms of Use</a></li>
+        <li><a href="https://privacy-policy.openjsf.org">Privacy Policy</a></li>
+        <li><a href="https://bylaws.openjsf.org">Bylaws</a></li>
+        <li><a href="https://code-of-conduct.openjsf.org">Code of Conduct</a></li>
+        <li><a href="https://trademark-policy.openjsf.org">Trademark Policy</a></li>
+        <li><a href="https://trademark-list.openjsf.org">Trademark List</a></li>
+        <li><a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></li>
+      </ul>
+    </Container>
+  </div>
+  <div class="footer-bottom">
+    <Container>
+      <Grid gap="2" align="center">
+        <Col xs={12} md={6} lg={6}>
+          <ul class="footer__logo">
+            <li>
+              <a href="https://openjsf.org" aria-label="OpenJS Foundation" target="_blank">
+                <img
+                  class="footer-logo-light"
+                  src="/openjs-logo-black.svg"
+                  alt="OpenJS Foundation Logo"
+                  width="80"
+                  height="auto"
+                  loading="lazy"
+                />
+                <img
+                  class="footer-logo-dark"
+                  src="/openjs-logo-white.svg"
+                  alt="OpenJS Foundation Logo"
+                  width="80"
+                  height="auto"
+                  loading="lazy"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.netlify.com"
+                aria-label="Preview Deploys by Netlify"
+                target="_blank"
+              >
+                <img
+                  src="/netlify-logo.svg"
+                  alt="Netlify Logo"
+                  width="80"
+                  height="auto"
+                  loading="lazy"
+                />
+              </a>
+            </li>
+          </ul>
+        </Col>
+        <Col xs={12} md={6} lg={6}>
+          <ul class="footer__socials">
+            <li>
+              <a
+                href="https://github.com/expressjs/express"
+                aria-label="Go to the repository on GitHub"
+              >
+                <Icon name="github" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.youtube.com/channel/UCYjxjAeH6TRik9Iwy5nXw7g"
+                aria-label="Go to the channel on Youtube"
+                target="_blank"
+              >
+                <Icon name="youtube" />
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/UseExpressJS" aria-label="Go to the X account">
+                <Icon name="x" />
+              </a>
+            </li>
+            <li>
+              <a href="https://slack-invite.openjsf.org" aria-label="Join Slack group">
+                <Icon name="slack" />
+              </a>
+            </li>
+            <li>
+              <a href="https://opencollective.com/express" aria-label="Go to Open Collective">
+                <Icon name="open-collective" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://bsky.app/profile/expressjs.bsky.social"
+                aria-label="Go to the Bluesky"
+              >
+                <Icon name="bsky" />
+              </a>
+            </li>
+          </ul>
+        </Col>
+      </Grid>
+    </Container>
+  </div>
+</footer>

@@ -1,7 +1,7 @@
 ---
 import '@styles/main.css';
 import { Flex, FlexItem } from '@components/primitives';
-import { Sidebar } from '@/components/patterns';
+import { Footer, Sidebar } from '@/components/patterns';
 import { Header } from '@/components/patterns';
 
 interface Props {
@@ -54,12 +54,15 @@ const {
   </head>
   <body>
     <Header />
-    <Flex gap="8">
+    <Flex>
       <Sidebar />
       <FlexItem grow>
-        <main id="main-content">
-          <slot />
-        </main>
+        <Flex direction="column" class="h-full">
+          <main id="main-content">
+            <slot />
+          </main>
+          <Footer />
+        </Flex>
       </FlexItem>
     </Flex>
   </body>
