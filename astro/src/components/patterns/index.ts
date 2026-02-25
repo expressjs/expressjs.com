@@ -11,3 +11,4 @@ export { default as ThemeSwitcher } from './ThemeSwitcher/ThemeSwitcher.astro';
 export { default as VersionSwitcher } from './VersionSwitcher/VersionSwitcher.astro';
 export { default as SearchTrigger } from './SearchTrigger/SearchTrigger.astro';
 export { default as LanguageSelect } from './LanguageSelect/LanguageSelect.astro';
+export { default as Footer } from './Footer/Footer.astro';
