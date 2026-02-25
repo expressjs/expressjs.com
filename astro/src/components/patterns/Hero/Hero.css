@@ -1,0 +1,301 @@
+/**
+ * Hero Component Styles
+ */
+
+@layer patterns {
+  .hero {
+    position: relative;
+    padding: var(--space-12) 0;
+    background-color: var(--color-bg-primary);
+    overflow: hidden;
+  }
+
+  /* @media (--md-up) {
+    .hero {
+      padding: var(--space-20) 0;
+    }
+  }
+
+  @media (--lg-up) {
+    .hero {
+      padding: var(--space-24) 0;
+    }
+  } */
+
+  /* ============================================
+     VIDEO BACKGROUND
+     ============================================ */
+
+  .hero__video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .hero__video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+  }
+
+  .hero__video[data-loaded='true'] {
+    opacity: 1;
+  }
+
+  /* Hide video on mobile if specified */
+  @media (max-width: 767px) {
+    .hero__video-container[data-disable-mobile='true'] {
+      display: none;
+    }
+  }
+
+  /* Overlay for better text readability */
+  .hero__video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+    z-index: 1;
+  }
+
+  /* Adjust overlay for dark mode */
+  [data-theme='dark'] .hero__video-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.7) 100%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .hero__video-overlay {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.7) 100%);
+    }
+
+    [data-theme='light'] .hero__video-overlay {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__video {
+      display: none;
+    }
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+
+    @media (--xs-only) {
+      align-items: center;
+    }
+  }
+
+  .hero__logo {
+    width: var(--size-44);
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+
+    @media (--md-up) {
+      width: var(--size-52);
+    }
+  }
+
+  .hero__logo-icon--dark {
+    display: block;
+  }
+
+  .hero__logo-icon--light {
+    display: none;
+  }
+
+  [data-theme='dark'] .hero__logo-icon--dark {
+    display: none;
+  }
+
+  [data-theme='dark'] .hero__logo-icon--light {
+    display: block;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .hero__logo-icon--dark {
+      display: none;
+    }
+
+    .hero__logo-icon--light {
+      display: block;
+    }
+
+    [data-theme='light'] .hero__logo-icon--dark {
+      display: block;
+    }
+
+    [data-theme='light'] .hero__logo-icon--light {
+      display: none;
+    }
+  }
+
+  /* ============================================
+     INSTALLATION COMMAND
+     ============================================ */
+
+  .hero__install {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .hero__code-block {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    background-color: var(--color-bg-tertiary);
+    border: var(--border-width-1) solid var(--color-border-primary);
+    border-radius: var(--radius-base);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+  }
+
+  @media (--md-up) {
+    .hero__code-block {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  .hero__code {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Style Astro Code component output for inline command */
+  .hero__code :global(code) {
+    font-family: var(--font-family-mono);
+    font-size: inherit;
+    word-break: break-all;
+    background: none !important;
+    padding: 0 !important;
+  }
+
+  /* ============================================
+     COPY BUTTON
+     ============================================ */
+
+  .hero__copy-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2);
+    background-color: var(--color-bg-primary);
+    border: var(--border-width-1) solid var(--color-border-primary);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .hero__copy-btn:hover {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border-secondary);
+  }
+
+  .hero__copy-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Copy icon states */
+  .hero__copy-icon {
+    transition: opacity 0.2s ease;
+  }
+
+  .hero__copy-icon--success {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .hero__copy-btn--copied .hero__copy-icon:not(.hero__copy-icon--success) {
+    opacity: 0;
+  }
+
+  .hero__copy-btn--copied .hero__copy-icon--success {
+    opacity: 1;
+    color: var(--color-text-success);
+  }
+
+  /* ============================================
+     CTA
+     ============================================ */
+
+  .hero__cta {
+    margin-top: var(--space-2);
+  }
+
+  /* ============================================
+     EXAMPLE CODE
+     ============================================ */
+
+  .hero__example {
+    width: 100%;
+    max-width: 800px;
+    margin-top: var(--space-4);
+  }
+
+  .hero__example-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--color-bg-tertiary);
+    border: var(--border-width-1) solid var(--color-border-primary);
+    border-bottom: none;
+    border-radius: var(--radius-base) var(--radius-base) 0 0;
+  }
+
+  .hero__copy-btn--example {
+    padding: var(--space-1-5);
+  }
+
+  .hero__example-code {
+    border: var(--border-width-1) solid var(--color-border-primary);
+    border-radius: 0 0 var(--radius-base) var(--radius-base);
+    overflow-x: auto;
+    text-align: left;
+  }
+
+  /* Style Astro Code component output */
+  .hero__example-code :global(pre) {
+    margin: 0;
+    padding: var(--space-5) !important;
+    border-radius: 0 0 var(--radius-base) var(--radius-base);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+  }
+
+  @media (--md-up) {
+    .hero__example-code :global(pre) {
+      font-size: var(--font-size-base);
+    }
+  }
+}

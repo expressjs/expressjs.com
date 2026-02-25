@@ -17,6 +17,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
     "astro": "^5.16.11",
+    "astro-expressive-code": "^0.41.7",
     "astro-icon": "^1.1.5"
   },
   "devEngines": {

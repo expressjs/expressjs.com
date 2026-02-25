@@ -1,5 +1,5 @@
 ---
-import { Body, Container, H1 } from '@components/primitives';
+import { Hero } from '@components/patterns';
 import Layout from '@layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import { languages } from '@i18n/ui';
@@ -15,14 +15,10 @@ const t = useTranslations(lang);
 ---
 
 <Layout>
-  <Container>
-    <H1>{t('home.welcome')}</H1>
-    <Body>This is a work-in-progress homepage.</Body>
-    <ul>
-      <li>
-        Review the <a href={`/${lang}/ds-foundations`}>Design System Foundations</a> demo page to explore
-        all tokens, primitives, and patterns.
-      </li>
-    </ul>
-  </Container>
+  <Hero
+    videoSrc="/videos/hero-background.mp4"
+    videoSrcMobile="/videos/hero-background.mp4"
+    posterSrc="/hero-poster.jpg"
+    disableVideoOnMobile={true}
+  />
 </Layout>

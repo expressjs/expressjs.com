@@ -1,0 +1,217 @@
+---
+/**
+ * Hero Component (Expressive Code Version)
+ *
+ * Alternative implementation using expressive-code
+ * This is for comparison purposes
+ */
+import './Hero.css';
+import { Code } from 'astro-expressive-code/components';
+import { Icon } from 'astro-icon/components';
+import { H1, Button, Container, Flex, BodyMd, Grid, Col } from '@/components/primitives';
+
+const EXPRESS_VERSION = '5.2.1';
+const INSTALL_COMMAND = 'npm install express --save';
+const EXAMPLE_CODE = `const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(\`Example app listening on port \${port}\`)
+})`;
+
+interface Props {
+  videoSrc?: string;
+  videoSrcMobile?: string;
+  posterSrc?: string;
+  disableVideoOnMobile?: boolean;
+}
+
+const { videoSrc, videoSrcMobile, posterSrc, disableVideoOnMobile = true } = Astro.props;
+---
+
+<section class="hero">
+  {
+    videoSrc && (
+      <div class="hero__video-container" data-disable-mobile={disableVideoOnMobile}>
+        <video
+          class="hero__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster={posterSrc}
+          data-video-desktop={videoSrc}
+          data-video-mobile={videoSrcMobile}
+          aria-hidden="true"
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+        <div class="hero__video-overlay" />
+      </div>
+    )
+  }
+  <Container>
+    <div class="hero__content">
+      <Flex align="end" gap="4">
+        <div class="hero__logo">
+          <Icon name="logo-express-black" class="hero__logo-icon--dark" />
+          <Icon name="logo-express-white" class="hero__logo-icon--light" />
+        </div>
+        <BodyMd vMargin={false}>{EXPRESS_VERSION}</BodyMd>
+      </Flex>
+
+      <Grid>
+        <Col xs={12} md={6} lg={6}>
+          <H1 vMargin={false}>Fast, unopinionated, minimalist web framework for Node.js </H1>
+          <div class="hero__install">
+            <Code code={INSTALL_COMMAND} lang="bash" />
+          </div>
+          <div class="hero__cta">
+            <Button as="a" href="/en/5x/starter/installing" variant="primary" size="md" fullWidth>
+              Get Started
+            </Button>
+          </div>
+        </Col>
+        <Col xs={12} md={6} lg={6}>
+          <!-- Example code -->
+          <div class="hero__example-expressive_">
+            <Code code={EXAMPLE_CODE} lang="js" />
+          </div>
+        </Col>
+      </Grid>
+    </div>
+  </Container>
+</section>
+
+<script>
+  /**
+   * Hero Video Background Handler
+   * Optimizes video loading and playback for performance
+   */
+  function initHeroVideo() {
+    const videoContainer = document.querySelector('.hero__video-container');
+    if (!videoContainer) return;
+
+    const video = videoContainer.querySelector('.hero__video') as HTMLVideoElement;
+    if (!video) return;
+
+    const disableOnMobile = videoContainer.getAttribute('data-disable-mobile') === 'true';
+    const videoDesktop = video.getAttribute('data-video-desktop');
+    const videoMobile = video.getAttribute('data-video-mobile');
+
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      video.pause();
+      video.style.display = 'none';
+      return;
+    }
+
+    // Check if mobile device
+    const isMobile = window.innerWidth < 768;
+
+    // Disable video on mobile if specified
+    if (isMobile && disableOnMobile) {
+      video.pause();
+      video.style.display = 'none';
+      return;
+    }
+
+    // Use mobile video source if available and on mobile
+    if (isMobile && videoMobile) {
+      const source = video.querySelector('source');
+      if (source) {
+        source.src = videoMobile;
+        video.load();
+      }
+    }
+
+    // Set loaded attribute when video can play
+    const handleCanPlay = () => {
+      video.setAttribute('data-loaded', 'true');
+      video.removeEventListener('canplay', handleCanPlay);
+    };
+
+    video.addEventListener('canplay', handleCanPlay);
+
+    // Lazy load video using Intersection Observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.load();
+            // Attempt to play (may fail on some browsers without user interaction)
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch((error) => {
+                console.log('Video autoplay prevented:', error);
+              });
+            }
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        rootMargin: '50px',
+      }
+    );
+
+    observer.observe(video);
+
+    // Pause video when tab is not visible (performance optimization)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        video.pause();
+      } else {
+        video.play().catch(() => {
+          // Silently handle play failure
+        });
+      }
+    });
+
+    // Handle window resize to switch between mobile and desktop video
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const isNowMobile = window.innerWidth < 768;
+
+        if (isNowMobile && disableOnMobile) {
+          video.pause();
+          video.style.display = 'none';
+        } else {
+          video.style.display = 'block';
+          const shouldUseMobileVideo = isNowMobile && videoMobile;
+          const currentSrc = video.querySelector('source')?.src;
+          const targetSrc = shouldUseMobileVideo ? videoMobile : videoDesktop;
+
+          if (currentSrc && targetSrc && !currentSrc.endsWith(targetSrc)) {
+            const source = video.querySelector('source');
+            if (source) {
+              source.src = targetSrc;
+              video.load();
+              video.play().catch(() => {
+                // Silently handle play failure
+              });
+            }
+          }
+        }
+      }, 250);
+    });
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroVideo);
+  } else {
+    initHeroVideo();
+  }
+</script>
+
+<style></style>
