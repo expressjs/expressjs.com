@@ -33,7 +33,14 @@ interface Props {
   disableVideoOnMobile?: boolean;
 }
 
-const { videoSrc, videoSrcMobile, videoSrcLight, videoSrcMobileLight, posterSrc, disableVideoOnMobile = true } = Astro.props;
+const {
+  videoSrc,
+  videoSrcMobile,
+  videoSrcLight,
+  videoSrcMobileLight,
+  posterSrc,
+  disableVideoOnMobile = true,
+} = Astro.props;
 ---
 
 <section class="hero">
@@ -74,7 +81,9 @@ const { videoSrc, videoSrcMobile, videoSrcLight, videoSrcMobileLight, posterSrc,
         <Col xs={12} lg={6} class="hero__text-content">
           <H1 vMargin={false}>Fast, unopinionated, minimalist web framework for Node.js </H1>
           <div class="hero__cta">
-            <Code code={INSTALL_COMMAND} />
+            <div class="hero__code">
+              <Code code={INSTALL_COMMAND} />
+            </div>
             <Button as="a" href="/en/5x/starter/installing" size="md" fullWidth>
               Get Started
               <Icon name="fluent:arrow-right-16-regular" size="16" />
@@ -82,7 +91,7 @@ const { videoSrc, videoSrcMobile, videoSrcLight, videoSrcMobileLight, posterSrc,
           </div>
         </Col>
         <Col xs={12} lg={6}>
-          <div class="hero__example-expressive_">
+          <div class="hero__code hero__example-code">
             <Code code={EXAMPLE_CODE} lang="js" />
           </div>
         </Col>

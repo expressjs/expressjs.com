@@ -170,9 +170,6 @@
       display: none;
     }
   }
-  /* ============================================
-     CTA
-     ============================================ */
 
   .hero__cta {
     width: 100%;
@@ -186,51 +183,40 @@
       max-width: var(--size-96);
     }
   }
+}
 
-  /* ============================================
-     EXAMPLE CODE
-     ============================================ */
-
-  .hero__example {
-    width: 100%;
-    max-width: 800px;
-    margin-top: var(--space-4);
-  }
-
-  .hero__example-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--space-3) var(--space-4);
-    background-color: var(--color-bg-tertiary);
-    border: var(--border-width-1) solid var(--color-border-primary);
-    border-bottom: none;
-    border-radius: var(--radius-base) var(--radius-base) 0 0;
-  }
-
-  .hero__copy-btn--example {
-    padding: var(--space-1-5);
-  }
-
-  .hero__example-code {
-    border: var(--border-width-1) solid var(--color-border-primary);
-    border-radius: 0 0 var(--radius-base) var(--radius-base);
-    overflow-x: auto;
-    text-align: left;
-  }
-
-  /* Style Astro Code component output */
-  .hero__example-code :global(pre) {
-    margin: 0;
-    padding: var(--space-5) !important;
-    border-radius: 0 0 var(--radius-base) var(--radius-base);
-    font-size: var(--font-size-sm);
-    line-height: var(--line-height-relaxed);
-  }
-
-  @media (--md-up) {
-    .hero__example-code :global(pre) {
-      font-size: var(--font-size-base);
+.hero__code {
+  .expressive-code {
+    .frame pre {
+      backdrop-filter: blur(21px);
     }
+
+    figure {
+      box-shadow: none;
+    }
+  }
+
+  [data-theme='dark'] & .expressive-code .frame pre {
+    background-color: rgba(0, 0, 0, 0.62);
+  }
+
+  [data-theme='light'] & .expressive-code .frame pre {
+    background-color: color-mix(in srgb, var(--gray-950) 85%, transparent);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .expressive-code .frame pre {
+      background-color: rgba(0, 0, 0, 0.62);
+    }
+
+    [data-theme='light'] & .expressive-code .frame pre {
+      background-color: color-mix(in srgb, var(--gray-950) 85%, transparent);
+    }
+  }
+}
+
+.hero__example-code {
+  .expressive-code .frame pre {
+    padding: var(--space-3);
   }
 }
