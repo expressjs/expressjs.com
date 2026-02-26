@@ -27,11 +27,13 @@ app.listen(port, () => {
 interface Props {
   videoSrc?: string;
   videoSrcMobile?: string;
+  videoSrcLight?: string;
+  videoSrcMobileLight?: string;
   posterSrc?: string;
   disableVideoOnMobile?: boolean;
 }
 
-const { videoSrc, videoSrcMobile, posterSrc, disableVideoOnMobile = true } = Astro.props;
+const { videoSrc, videoSrcMobile, videoSrcLight, videoSrcMobileLight, posterSrc, disableVideoOnMobile = true } = Astro.props;
 ---
 
 <section class="hero">
@@ -48,6 +50,8 @@ const { videoSrc, videoSrcMobile, posterSrc, disableVideoOnMobile = true } = Ast
           poster={posterSrc}
           data-video-desktop={videoSrc}
           data-video-mobile={videoSrcMobile}
+          data-video-desktop-light={videoSrcLight}
+          data-video-mobile-light={videoSrcMobileLight}
           aria-hidden="true"
         >
           <source src={videoSrc} type="video/mp4" />
@@ -67,7 +71,7 @@ const { videoSrc, videoSrcMobile, posterSrc, disableVideoOnMobile = true } = Ast
       </Flex>
 
       <Grid>
-        <Col xs={12} lg={6}>
+        <Col xs={12} lg={6} class="hero__text-content">
           <H1 vMargin={false}>Fast, unopinionated, minimalist web framework for Node.js </H1>
           <div class="hero__cta">
             <Code code={INSTALL_COMMAND} />
@@ -102,6 +106,36 @@ const { videoSrc, videoSrcMobile, posterSrc, disableVideoOnMobile = true } = Ast
     const disableOnMobile = videoContainer.getAttribute('data-disable-mobile') === 'true';
     const videoDesktop = video.getAttribute('data-video-desktop');
     const videoMobile = video.getAttribute('data-video-mobile');
+    const videoDesktopLight = video.getAttribute('data-video-desktop-light');
+    const videoMobileLight = video.getAttribute('data-video-mobile-light');
+
+    // Helper function to get current theme
+    const getCurrentTheme = (): 'light' | 'dark' => {
+      const htmlElement = document.documentElement;
+      const dataTheme = htmlElement.getAttribute('data-theme');
+
+      if (dataTheme === 'light' || dataTheme === 'dark') {
+        return dataTheme;
+      }
+
+      // Fallback to system preference
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+
+    // Helper function to get the correct video source based on theme and device
+    const getVideoSource = (isMobile: boolean): string | null => {
+      const theme = getCurrentTheme();
+
+      if (theme === 'light') {
+        // Use light mode videos if available
+        if (isMobile && videoMobileLight) return videoMobileLight;
+        if (!isMobile && videoDesktopLight) return videoDesktopLight;
+      }
+
+      // Fallback to default (dark) videos
+      if (isMobile && videoMobile) return videoMobile;
+      return videoDesktop;
+    };
 
     // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -121,11 +155,12 @@ const { videoSrc, videoSrcMobile, posterSrc, disableVideoOnMobile = true } = Ast
       return;
     }
 
-    // Use mobile video source if available and on mobile
-    if (isMobile && videoMobile) {
+    // Set initial video source based on theme and device
+    const initialSource = getVideoSource(isMobile);
+    if (initialSource) {
       const source = video.querySelector('source');
       if (source) {
-        source.src = videoMobile;
+        source.src = initialSource;
         video.load();
       }
     }
@@ -185,9 +220,8 @@ const { videoSrc, videoSrcMobile, posterSrc, disableVideoOnMobile = true } = Ast
           video.style.display = 'none';
         } else {
           video.style.display = 'block';
-          const shouldUseMobileVideo = isNowMobile && videoMobile;
           const currentSrc = video.querySelector('source')?.src;
-          const targetSrc = shouldUseMobileVideo ? videoMobile : videoDesktop;
+          const targetSrc = getVideoSource(isNowMobile);
 
           if (currentSrc && targetSrc && !currentSrc.endsWith(targetSrc)) {
             const source = video.querySelector('source');
@@ -202,6 +236,44 @@ const { videoSrc, videoSrcMobile, posterSrc, disableVideoOnMobile = true } = Ast
         }
       }, 250);
     });
+
+    // Handle theme changes to switch between light and dark videos
+    const handleThemeChange = () => {
+      const isNowMobile = window.innerWidth < 768;
+      if (isNowMobile && disableOnMobile) return;
+
+      const currentSrc = video.querySelector('source')?.src;
+      const targetSrc = getVideoSource(isNowMobile);
+
+      if (currentSrc && targetSrc && !currentSrc.endsWith(targetSrc)) {
+        const source = video.querySelector('source');
+        if (source) {
+          source.src = targetSrc;
+          video.load();
+          video.play().catch(() => {
+            // Silently handle play failure
+          });
+        }
+      }
+    };
+
+    // Listen for theme changes via MutationObserver on data-theme attribute
+    const themeObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+          handleThemeChange();
+        }
+      });
+    });
+
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    // Listen for system theme preference changes
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    darkModeMediaQuery.addEventListener('change', handleThemeChange);
   }
 
   // Initialize on page load
