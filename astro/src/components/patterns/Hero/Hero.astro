@@ -30,23 +30,17 @@ interface Props {
   videoSrcLight?: string;
   videoSrcMobileLight?: string;
   posterSrc?: string;
-  disableVideoOnMobile?: boolean;
+  posterSrcLight?: string;
 }
 
-const {
-  videoSrc,
-  videoSrcMobile,
-  videoSrcLight,
-  videoSrcMobileLight,
-  posterSrc,
-  disableVideoOnMobile = true,
-} = Astro.props;
+const { videoSrc, videoSrcMobile, videoSrcLight, videoSrcMobileLight, posterSrc, posterSrcLight } =
+  Astro.props;
 ---
 
 <section class="hero">
   {
     videoSrc && (
-      <div class="hero__video-container" data-disable-mobile={disableVideoOnMobile}>
+      <div class="hero__video-container">
         <video
           class="hero__video"
           autoplay
@@ -59,11 +53,21 @@ const {
           data-video-mobile={videoSrcMobile}
           data-video-desktop-light={videoSrcLight}
           data-video-mobile-light={videoSrcMobileLight}
-          aria-hidden="true"
+          data-poster-dark={posterSrc}
+          data-poster-light={posterSrcLight}
         >
           <source src={videoSrc} type="video/mp4" />
         </video>
         <div class="hero__video-overlay" />
+        <button
+          class="hero__video-control"
+          type="button"
+          aria-label="Pause background video"
+          data-state="playing"
+        >
+          <Icon name="fluent:pause-16-filled" class="hero__video-control-pause" />
+          <Icon name="fluent:play-16-filled" class="hero__video-control-play" />
+        </button>
       </div>
     )
   }
@@ -112,11 +116,15 @@ const {
     const video = videoContainer.querySelector('.hero__video') as HTMLVideoElement;
     if (!video) return;
 
-    const disableOnMobile = videoContainer.getAttribute('data-disable-mobile') === 'true';
+    const controlButton = videoContainer.querySelector('.hero__video-control') as HTMLButtonElement;
+    if (!controlButton) return;
+
     const videoDesktop = video.getAttribute('data-video-desktop');
     const videoMobile = video.getAttribute('data-video-mobile');
     const videoDesktopLight = video.getAttribute('data-video-desktop-light');
     const videoMobileLight = video.getAttribute('data-video-mobile-light');
+    const posterDark = video.getAttribute('data-poster-dark');
+    const posterLight = video.getAttribute('data-poster-light');
 
     // Helper function to get current theme
     const getCurrentTheme = (): 'light' | 'dark' => {
@@ -146,110 +154,44 @@ const {
       return videoDesktop;
     };
 
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      video.pause();
-      video.style.display = 'none';
-      return;
-    }
+    // Helper function to get the correct poster based on theme
+    const getPosterSource = (): string | null => {
+      const theme = getCurrentTheme();
 
-    // Check if mobile device
-    const isMobile = window.innerWidth < 768;
-
-    // Disable video on mobile if specified
-    if (isMobile && disableOnMobile) {
-      video.pause();
-      video.style.display = 'none';
-      return;
-    }
-
-    // Set initial video source based on theme and device
-    const initialSource = getVideoSource(isMobile);
-    if (initialSource) {
-      const source = video.querySelector('source');
-      if (source) {
-        source.src = initialSource;
-        video.load();
+      if (theme === 'light' && posterLight) {
+        return posterLight;
       }
-    }
 
-    // Set loaded attribute when video can play
-    const handleCanPlay = () => {
-      video.setAttribute('data-loaded', 'true');
-      video.removeEventListener('canplay', handleCanPlay);
+      return posterDark;
     };
 
-    video.addEventListener('canplay', handleCanPlay);
-
-    // Lazy load video using Intersection Observer
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            video.load();
-            // Attempt to play (may fail on some browsers without user interaction)
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-              playPromise.catch((error) => {
-                console.log('Video autoplay prevented:', error);
-              });
-            }
-            observer.disconnect();
-          }
-        });
-      },
-      {
-        rootMargin: '50px',
-      }
-    );
-
-    observer.observe(video);
-
-    // Pause video when tab is not visible (performance optimization)
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        video.pause();
-      } else {
-        video.play().catch(() => {
-          // Silently handle play failure
-        });
-      }
-    });
-
-    // Handle window resize to switch between mobile and desktop video
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        const isNowMobile = window.innerWidth < 768;
-
-        if (isNowMobile && disableOnMobile) {
-          video.pause();
-          video.style.display = 'none';
-        } else {
-          video.style.display = 'block';
-          const currentSrc = video.querySelector('source')?.src;
-          const targetSrc = getVideoSource(isNowMobile);
-
-          if (currentSrc && targetSrc && !currentSrc.endsWith(targetSrc)) {
-            const source = video.querySelector('source');
-            if (source) {
-              source.src = targetSrc;
-              video.load();
-              video.play().catch(() => {
-                // Silently handle play failure
-              });
-            }
-          }
+    // Helper function to update poster
+    const updatePoster = () => {
+      const posterSrc = getPosterSource();
+      if (posterSrc) {
+        // Set the poster attribute
+        video.setAttribute('poster', posterSrc);
+        // Force a repaint by reading a layout property
+        void video.offsetHeight;
+        // On mobile, ensure the poster is visible by resetting the data-loaded attribute
+        if (window.innerWidth < 768) {
+          video.removeAttribute('data-loaded');
+          requestAnimationFrame(() => {
+            video.setAttribute('data-loaded', 'true');
+          });
         }
-      }, 250);
-    });
+      }
+    };
 
-    // Handle theme changes to switch between light and dark videos
+    // Handle theme changes to update poster (and video on desktop)
     const handleThemeChange = () => {
       const isNowMobile = window.innerWidth < 768;
-      if (isNowMobile && disableOnMobile) return;
+
+      // Update poster for the new theme (works on both mobile and desktop)
+      updatePoster();
+
+      // Only switch video source on desktop (mobile doesn't load videos)
+      if (isNowMobile) return;
 
       const currentSrc = video.querySelector('source')?.src;
       const targetSrc = getVideoSource(isNowMobile);
@@ -283,6 +225,144 @@ const {
     // Listen for system theme preference changes
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     darkModeMediaQuery.addEventListener('change', handleThemeChange);
+
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      // Show poster but don't play video for users who prefer reduced motion
+      updatePoster();
+      video.pause();
+      video.removeAttribute('autoplay');
+      video.setAttribute('data-loaded', 'true'); // Make poster visible
+      controlButton.style.display = 'none'; // Hide control button
+      return;
+    }
+
+    // Check if mobile device
+    const isMobile = window.innerWidth < 768;
+
+    // Set initial poster based on theme
+    updatePoster();
+
+    // Always disable video playback on mobile (but keep poster visible)
+    if (isMobile) {
+      video.pause();
+      video.removeAttribute('autoplay');
+      video.setAttribute('data-loaded', 'true'); // Make poster visible
+      controlButton.style.display = 'none'; // Hide control button
+      // Don't load video source to save bandwidth, but poster will still show
+      return;
+    }
+
+    // Set initial video source based on theme and device
+    const initialSource = getVideoSource(isMobile);
+    if (initialSource) {
+      const source = video.querySelector('source');
+      if (source) {
+        source.src = initialSource;
+        video.load();
+      }
+    }
+
+    // Set loaded attribute when video can play
+    const handleCanPlay = () => {
+      video.setAttribute('data-loaded', 'true');
+      video.removeEventListener('canplay', handleCanPlay);
+    };
+
+    video.addEventListener('canplay', handleCanPlay);
+
+    // Handle play/pause control button
+    const togglePlayPause = () => {
+      if (video.paused) {
+        video.play().catch(() => {
+          // Silently handle play failure
+        });
+        controlButton.setAttribute('data-state', 'playing');
+        controlButton.setAttribute('aria-label', 'Pause background video');
+      } else {
+        video.pause();
+        controlButton.setAttribute('data-state', 'paused');
+        controlButton.setAttribute('aria-label', 'Play background video');
+      }
+    };
+
+    controlButton.addEventListener('click', togglePlayPause);
+
+    // Lazy load video using Intersection Observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.load();
+            // Attempt to play (may fail on some browsers without user interaction)
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch((error) => {
+                console.log('Video autoplay prevented:', error);
+              });
+            }
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        rootMargin: '50px',
+      }
+    );
+
+    observer.observe(video);
+
+    // Pause video when tab is not visible (performance optimization)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        video.pause();
+        controlButton.setAttribute('data-state', 'paused');
+        controlButton.setAttribute('aria-label', 'Play background video');
+      } else {
+        video.play().catch(() => {
+          // Silently handle play failure
+        });
+        controlButton.setAttribute('data-state', 'playing');
+        controlButton.setAttribute('aria-label', 'Pause background video');
+      }
+    });
+
+    // Handle window resize to switch between mobile and desktop video
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const isNowMobile = window.innerWidth < 768;
+
+        // Update poster for current theme
+        updatePoster();
+
+        if (isNowMobile) {
+          // On mobile, pause and don't load video
+          video.pause();
+          video.removeAttribute('autoplay');
+          video.setAttribute('data-loaded', 'true'); // Make poster visible
+          controlButton.style.display = 'none'; // Hide control button
+        } else {
+          // On desktop, load and play video
+          controlButton.style.display = 'flex'; // Show control button
+          const currentSrc = video.querySelector('source')?.src;
+          const targetSrc = getVideoSource(isNowMobile);
+
+          if (currentSrc && targetSrc && !currentSrc.endsWith(targetSrc)) {
+            const source = video.querySelector('source');
+            if (source) {
+              source.src = targetSrc;
+              video.load();
+              video.play().catch(() => {
+                // Silently handle play failure
+              });
+            }
+          }
+        }
+      }, 250);
+    });
   }
 
   // Initialize on page load
@@ -292,5 +372,3 @@ const {
     initHeroVideo();
   }
 </script>
-
-<style></style>
