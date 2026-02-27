@@ -1,7 +1,7 @@
 ---
 import type { Menu, VersionPrefix } from '@/config/types';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
-import type { LanguageCode } from '@/i18n/ui';
+import type { LanguageCode } from '@/i18n/locales';
 import { Body } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
@@ -73,10 +73,10 @@ const commonItemsListProps = {
   data-initial-active-level={initialActiveLevel}
   aria-hidden="false"
 >
-  <nav class="sidebar-nav" aria-label="Main navigation">
+  <nav class="sidebar-nav" aria-label={t('nav.mainNavigation')}>
     <ul class="sidebar-nav-list">
       <li class="sidebar-logo-item">
-        <a href="/" class="logo-link sidebar-nav-item" aria-label="Express home">
+        <a href={`/${lang}/`} class="logo-link sidebar-nav-item" aria-label={t('nav.home')}>
           <Icon name="logo-dark" class="logo logo-dark" />
           <Icon name="logo-light" class="logo logo-light" />
         </a>
