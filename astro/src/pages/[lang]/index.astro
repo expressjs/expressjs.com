@@ -2,7 +2,7 @@
 import { Body, Container, H1 } from '@components/primitives';
 import Layout from '@layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
-import { languages } from '@i18n/ui';
+import { languages } from '@i18n/locales';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({

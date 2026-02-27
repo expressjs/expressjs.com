@@ -28,7 +28,7 @@ import {
 } from '@components/primitives';
 import { Code as CodeBlock } from 'astro:components';
 import { getLangFromUrl } from '@i18n/utils';
-import { languages } from '@i18n/ui';
+import { languages } from '@i18n/locales';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({
