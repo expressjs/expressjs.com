@@ -1,0 +1,46 @@
+---
+title: February 2026 Security Releases
+description: Security release for multer has been published. We recommend that all users upgrade as soon as possible.
+tags: security vulnerabilities
+authors:
+  - name: Ulises Gascón
+    github: UlisesGascon
+---
+
+The Express team has released a new patch version of [multer](https://www.npmjs.com/package/multer) addressing two high-severity security vulnerabilities.
+
+
+{% include admonitions/warning.html
+content="We recommend upgrading to the latest version of multer to secure your applications."
+%}
+
+The following vulnerabilities have been addressed:
+
+- [CVE-2026-3304 in multer middleware (High)](#cve-2026-3304-in-multer-middleware-high)
+- [CVE-2026-2359 in multer middleware (High)](#cve-2026-2359-in-multer-middleware-high)
+
+## CVE-2026-3304 in multer middleware (High)
+
+**[multer](https://www.npmjs.com/package/multer) versions `<2.1.0` are vulnerable to denial of service via incomplete cleanup**
+
+A vulnerability in Multer versions <2.1.0 allows an attacker to trigger a Denial of Service (DoS) by sending malformed requests, potentially causing resource exhaustion.
+
+**Affected versions**: `< 2.1.0`
+**Patched version**: `>= 2.1.0`
+
+For more details, see [GHSA-xf7r-hgr6-v32p](https://github.com/expressjs/multer/security/advisories/GHSA-xf7r-hgr6-v32p).
+
+## CVE-2026-2359 in multer middleware (High)
+
+**[multer](https://www.npmjs.com/package/multer) versions `<2.1.0` are vulnerable to denial of service via resource exhaustion**
+
+A vulnerability in Multer versions <2.1.0 allows an attacker to trigger a Denial of Service (DoS) by dropping connection during file upload, potentially causing resource exhaustion.
+
+**Affected versions**: `< 2.1.0`
+**Patched version**: `>= 2.1.0`
+
+For more details, see [GHSA-v52c-386h-88mc](https://github.com/expressjs/multer/security/advisories/GHSA-v52c-386h-88mc).
+
+---
+
+We recommend upgrading to the latest version of multer to secure your applications.
