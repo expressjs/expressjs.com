@@ -443,17 +443,21 @@ The website is available in the following languages:
 
 ### Using translations in components
 
-To use translations in your components, import and use the `useTranslations` function:
+To use translations in your Astro components, import the utility functions and extract the language from the current URL:
 
-```typescript
-import { useTranslations } from '@/i18n/utils';
+```astro
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
-// In your component or page
-const lang = 'en'; // Get from URL or context
+const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+---
 
-const label = t('common.home'); // Returns translated string or key as fallback
+<button aria-label={t('nav.toggleMenu')}>Menu</button>
+<h1>{t('common.welcome')}</h1>
 ```
+
+The `Astro.url` object automatically provides the current page URL, making it easy to extract the language code and get the appropriate translations.
 
 ### Content organization
 
@@ -481,6 +485,11 @@ Documentation content is stored separately from UI translations:
 
 - **Docs**: `src/content/docs/[lang-code]/[version]/` - Documentation pages
 - **Resources**: `src/content/resources/[lang-code]/` - Resource pages
+
+The following content is currently not translated:
+
+- **API reference**
+- **Blog posts**
 
 ### Adding UI translations
 
