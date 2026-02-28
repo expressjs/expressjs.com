@@ -2,10 +2,6 @@
 import Layout from '@/layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import { Container, H1, H2, Body, Button, Flex } from '@components/primitives';
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 ---
 
 <Layout title="404 - Page Not Found" description="The page you are looking for could not be found.">
@@ -17,7 +13,7 @@ const t = useTranslations(lang);
         The page you are looking for does not exist or has been moved.
       </Body>
       <Flex gap="4">
-        <Button as="a" href={`/${lang}/`} variant="primary">Go to Home</Button>
+        <Button as="a" href="/en" variant="primary">Go to Home</Button>
         <Button
           as="a"
           href={'https://github.com/expressjs/expressjs.com/issues/new?template=4documentation.yml'}

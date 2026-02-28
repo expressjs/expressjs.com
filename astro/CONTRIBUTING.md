@@ -509,6 +509,7 @@ The `crowdin.yml` configuration file defines:
 - API configuration for automation
 
 When translations are completed in Crowdin:
+
 - Files are automatically synced to the repository
 - A bot automatically creates pull requests with the translation updates
 
@@ -516,5 +517,3 @@ When translations are completed in Crowdin:
 > **Do not manually create or edit translation files** (`src/i18n/ui/*.json` and `src/content/docs/[lang-code]/*.*`)
 > These files are automatically managed by Crowdin and will be overwritten if you make manual changes.
 > All translation updates must go through the Crowdin workflow.
-
-
