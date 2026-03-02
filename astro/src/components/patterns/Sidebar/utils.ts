@@ -1,5 +1,6 @@
 import type { Menu, MenuItem, VersionPrefix } from '@/config/types';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
+import type { LanguageCode } from '@/i18n/ui';
 
 export type SubmenuData = {
   menu: Menu;
@@ -20,7 +21,7 @@ export function isVersioned(versioned: VersionPrefix[] | undefined, version: str
 
 export function resolveHref(
   href: string,
-  lang: string,
+  lang: LanguageCode,
   basePath: string,
   versioned: VersionPrefix[] | undefined,
   version: string
@@ -116,7 +117,7 @@ function checkItemsForPath(
   normalizedCurrentPath: string,
   basePath: string,
   versioned: VersionPrefix[] | undefined,
-  lang: string,
+  lang: LanguageCode,
   version: string
 ): boolean {
   return filterItems(items, version).some((item) => {
@@ -145,7 +146,7 @@ export function submenuContainsCurrentPath(
   submenuBasePath: string,
   submenuVersioned: VersionPrefix[] | undefined,
   currentPath: string,
-  lang: string,
+  lang: LanguageCode,
   version: string
 ): boolean {
   const normalizedCurrentPath = normalizePath(currentPath);
@@ -179,7 +180,7 @@ export function submenuContainsCurrentPath(
 export function calculateInitialActiveLevel(
   submenus: SubmenuData[],
   currentPath: string,
-  lang: string,
+  lang: LanguageCode,
   version: string
 ): number {
   return submenus.reduce((maxLevel, submenu) => {

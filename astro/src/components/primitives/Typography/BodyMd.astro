@@ -9,13 +9,9 @@
 
 import type { HTMLAttributes } from 'astro/types';
 import Typography from './Typography.astro';
-import type { TypographyColor, TypographyWeight } from './types.ts';
+import type { TypographyBaseProps } from './types.ts';
 
-type BaseProps = {
-  color?: TypographyColor;
-  weight?: TypographyWeight;
-  vMargin?: boolean;
-};
+type BaseProps = Omit<TypographyBaseProps, 'variant' | 'as'>;
 
 type Props =
   | ({ as?: 'span' } & BaseProps & HTMLAttributes<'span'>)

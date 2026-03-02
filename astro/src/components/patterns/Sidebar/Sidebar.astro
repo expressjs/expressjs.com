@@ -1,11 +1,10 @@
 ---
 import './Sidebar.css';
 import type { HTMLAttributes } from 'astro/types';
-import { getLangFromUrl } from '@/i18n/utils';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import { mainMenu } from '@/config/menu/main';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
 import type { Menu } from '@/config/types';
-import { Icon } from 'astro-icon/components';
 import SidebarMenu from './SidebarMenu.astro';
 import {
   detectVersionFromUrl,
@@ -13,6 +12,7 @@ import {
   calculateInitialActiveLevel,
   type SubmenuData,
 } from './utils';
+import { Icon } from 'astro-icon/components';
 
 type Props = HTMLAttributes<'div'> & {
   menu?: Menu;
@@ -32,6 +32,7 @@ const {
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const currentPath = Astro.url.pathname;
 const currentVersion = detectVersionFromUrl(currentPath, versions, defaultVersion);
 
@@ -54,7 +55,7 @@ const initialActiveLevel = calculateInitialActiveLevel(submenus, currentPath, la
   data-current-version={currentVersion}
   {...rest}
 >
-  <h2 id="sidebar-title" class="sr-only" aria-label="Main menu">Main menu</h2>
+  <h2 id="sidebar-title" class="sr-only" aria-label={t('nav.mainMenu')}>{t('nav.mainMenu')}</h2>
 
   {
     submenus.length > 0 && (
@@ -75,7 +76,6 @@ const initialActiveLevel = calculateInitialActiveLevel(submenus, currentPath, la
     <SidebarMenu
       menu={menu}
       level={0}
-      title="Main Menu"
       lang={lang}
       currentPath={currentPath}
       version={currentVersion}
