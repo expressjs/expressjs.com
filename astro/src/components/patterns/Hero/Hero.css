@@ -1,7 +1,3 @@
-/**
- * Hero Component Styles
- */
-
 @layer patterns {
   .hero {
     position: relative;
@@ -28,6 +24,7 @@
     overflow: hidden;
   }
 
+  .hero__video-poster,
   .hero__video {
     position: absolute;
     top: 50%;
@@ -38,12 +35,15 @@
     width: auto;
     height: auto;
     object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
   }
 
-  .hero__video[data-loaded='true'] {
-    opacity: 1;
+  .hero__video {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+
+    &[data-loaded='true'] {
+      opacity: 1;
+    }
   }
 
   .hero__video-overlay {
@@ -99,18 +99,16 @@
       width: var(--size-3-5);
       height: var(--size-3-5);
     }
-  }
 
-  .hero__video-control[data-state='playing'] .hero__video-control-play {
-    display: none;
-  }
+    &[data-state='playing'] .hero__video-control-play {
+      display: none;
+    }
 
-  .hero__video-control[data-state='paused'] .hero__video-control-pause {
-    display: none;
-  }
+    &[data-state='paused'] .hero__video-control-pause {
+      display: none;
+    }
 
-  @media (--md-up) {
-    .hero__video-control {
+    @media (--md-up) {
       bottom: var(--space-6);
       right: var(--space-6);
     }
