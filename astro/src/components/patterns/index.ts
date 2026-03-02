@@ -4,6 +4,7 @@
  * Re-export all primitive components for easy importing
  */
 
+export { default as Banner } from './Banner/Banner.astro';
 export { default as Breadcrumbs } from './Breadcrumbs/Breadcrumbs.astro';
 export { default as Header } from './Header/Header.astro';
 export { default as Hero } from './Hero/Hero.astro';

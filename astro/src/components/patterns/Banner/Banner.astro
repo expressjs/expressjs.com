@@ -1,0 +1,80 @@
+---
+/**
+ * Banner Component
+ *
+ * A full-width notification banner displayed at the top of the page.
+ * Visibility is controlled server-side via optional date range props.
+ * When dismissible, the closed state is persisted in localStorage.
+ *
+ * @example
+ * <Banner id="v5-release" variant="info" startDate="2024-01-01" endDate="2024-06-01" dismissible>
+ *   <strong>Express v5 is out!</strong> <a href="/changelog">Read the changelog →</a>
+ * </Banner>
+ */
+import { Container, Flex, H5 } from '@/components/primitives';
+import './Banner.css';
+import type { BannerProps } from './types';
+import { Icon } from 'astro-icon/components';
+
+type Props = BannerProps;
+
+const { id, variant = 'info', dismissible = false, title, startDate, endDate } = Astro.props;
+
+const now = new Date();
+const start = startDate ? new Date(startDate) : null;
+const end = endDate ? new Date(endDate) : null;
+const isActive = (!start || now >= start) && (!end || now <= end);
+---
+
+{
+  isActive && (
+    <div
+      id={`banner-${id}`}
+      class:list={['banner', `banner--${variant}`]}
+      data-banner-id={id}
+      data-dismissible={dismissible}
+      role="alert"
+      aria-live="polite"
+    >
+      <Container>
+        <Flex align="center" gap="2">
+          <span class="banner__icon" aria-hidden="true">
+            {variant === 'info' ? (
+              <Icon name="fluent:info-16-regular" size="20" />
+            ) : (
+              <Icon name="fluent:warning-16-regular" size="20" />
+            )}
+          </span>
+          <H5 vMargin={false}>{title}</H5>
+        </Flex>
+        <slot />
+      </Container>
+      {dismissible && (
+        <button class="banner__dismiss" aria-label="Dismiss banner">
+          <Icon name="fluent:dismiss-16-regular" size="16" />
+        </button>
+      )}
+    </div>
+  )
+}
+
+{
+  isActive && (
+    <script>
+      document.querySelectorAll<HTMLElement>('.banner').forEach((banner) => {
+        const bannerId = banner.dataset.bannerId;
+        const isDismissible = banner.dataset.dismissible === 'true';
+        const storageKey = `banner-dismissed-${bannerId}`;
+
+        if (localStorage.getItem(storageKey) === 'true') {
+          banner.style.display = 'none';
+        } else if (isDismissible) {
+          banner.querySelector('.banner__dismiss')?.addEventListener('click', () => {
+            localStorage.setItem(storageKey, 'true');
+            banner.style.display = 'none';
+          });
+        }
+      });
+    </script>
+  )
+}
