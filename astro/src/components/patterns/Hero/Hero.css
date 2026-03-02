@@ -108,6 +108,10 @@
       display: none;
     }
 
+    @media (--xs-only) {
+      display: none;
+    }
+
     @media (--md-up) {
       bottom: var(--space-6);
       right: var(--space-6);
