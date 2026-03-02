@@ -1,5 +1,6 @@
 ---
 import './Hero.css';
+import { Image } from 'astro:assets';
 import { Code } from 'astro-expressive-code/components';
 import { Icon } from 'astro-icon/components';
 import { H1, Button, Container, Flex, BodyMd, Grid, Col } from '@/components/primitives';
@@ -32,7 +33,17 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
   {
     videoSrc && (
       <div class="hero__video-container">
-        <img class="hero__video-poster" src={posterSrc} alt="" aria-hidden="true" />
+        {posterSrc && (
+          <Image
+            class="hero__video-poster"
+            src={posterSrc}
+            width={1920}
+            height={1080}
+            loading="eager"
+            alt=""
+            aria-hidden="true"
+          />
+        )}
         <video
           class="hero__video"
           autoplay
