@@ -1,27 +1,11 @@
-/**
- * Features Pattern Styles
- */
-
 @layer patterns {
-  /* ============================================
-     SECTION
-     ============================================ */
-
   .features {
-    padding: var(--space-12) 0;
+    padding: var(--space-8) 0;
 
     @media (--md-up) {
-      padding: var(--space-16) 0;
-    }
-
-    @media (--lg-up) {
-      padding: var(--space-20) 0;
+      padding: var(--space-12) 0;
     }
   }
-
-  /* ============================================
-     HEADER COLUMN (H2 title)
-     ============================================ */
 
   .features__header {
     padding-bottom: var(--space-8);
@@ -35,11 +19,37 @@
 
   .features__cards {
     overflow: hidden;
+    align-items: stretch;
     border-radius: var(--radius-card);
+    border: var(--border-width-1) solid var(--color-border-secondary);
   }
 
-  .features__cards .card {
-    flex: 1;
-    border-radius: 0;
+  .features__card-col {
+    .card {
+      flex: 1;
+      height: 100%;
+      border-radius: 0;
+      border-top: 0;
+      border-right: 0;
+      border-left: 0;
+    }
+
+    &:last-child .card {
+      border-bottom: 0;
+    }
+
+    @media (--md-up) {
+      &:nth-child(2n) {
+        .card {
+          border-left: var(--border-width-1) solid var(--color-border-secondary);
+        }
+      }
+
+      &:nth-last-child(-n + 2) {
+        .card {
+          border-bottom: 0;
+        }
+      }
+    }
   }
 }
