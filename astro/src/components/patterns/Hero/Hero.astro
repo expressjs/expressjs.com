@@ -112,6 +112,10 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
 
 <script>
   function initHeroVideo() {
+    const breakpointMd = parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue('--breakpoint-md')
+    );
+
     const videoContainer = document.querySelector('.hero__video-container');
     if (!videoContainer) return;
 
@@ -168,7 +172,7 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
     };
 
     const handleThemeChange = () => {
-      const isNowMobile = window.innerWidth < 768;
+      const isNowMobile = window.innerWidth < breakpointMd;
 
       updatePoster();
 
@@ -205,7 +209,7 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
       return;
     }
 
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < breakpointMd;
 
     updatePoster();
 
@@ -253,7 +257,7 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
           }
         });
       },
-      { rootMargin: '50px' }
+      { rootMargin: '5rem' }
     );
 
     observer.observe(video);
@@ -274,7 +278,7 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        const isNowMobile = window.innerWidth < 768;
+        const isNowMobile = window.innerWidth < breakpointMd;
 
         updatePoster();
 
