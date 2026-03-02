@@ -71,5 +71,9 @@
   "404.description": "お探しのページが見つかりませんでした。",
   "404.heading": "ページが見つかりません",
   "404.message": "お探しのページは存在しないか、移動されました。",
-  "404.goHome": "ホームに戻る"
+  "404.goHome": "ホームに戻る",
+  "hero.tagline": "Node.js向けの高速で中立的なミニマリストWebフレームワーク",
+  "hero.getStarted": "始める",
+  "hero.videoPause": "背景動画を一時停止",
+  "hero.videoPlay": "背景動画を再生"
 }

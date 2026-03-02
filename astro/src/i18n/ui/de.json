@@ -71,5 +71,9 @@
   "404.description": "Die gesuchte Seite konnte nicht gefunden werden.",
   "404.heading": "Seite nicht gefunden",
   "404.message": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
-  "404.goHome": "Zur Startseite"
+  "404.goHome": "Zur Startseite",
+  "hero.tagline": "Schnelles, unvoreingenommenes, minimalistisches Web-Framework für Node.js",
+  "hero.getStarted": "Erste Schritte",
+  "hero.videoPause": "Hintergrundvideo anhalten",
+  "hero.videoPlay": "Hintergrundvideo abspielen"
 }

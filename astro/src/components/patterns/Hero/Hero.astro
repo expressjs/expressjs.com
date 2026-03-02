@@ -4,6 +4,10 @@ import { Image } from 'astro:assets';
 import { Code } from 'astro-expressive-code/components';
 import { Icon } from 'astro-icon/components';
 import { H1, Button, Container, Flex, BodyMd, Grid, Col } from '@/components/primitives';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const EXPRESS_VERSION = '5.2.1';
 const INSTALL_COMMAND = 'npm install express --save';
@@ -62,7 +66,9 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
         <button
           class="hero__video-control"
           type="button"
-          aria-label="Pause background video"
+          aria-label={t('hero.videoPause')}
+          data-label-pause={t('hero.videoPause')}
+          data-label-play={t('hero.videoPlay')}
           data-state="playing"
         >
           <Icon name="fluent:pause-16-filled" class="hero__video-control-pause" />
@@ -83,13 +89,13 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
 
       <Grid>
         <Col xs={12} lg={6} class="hero__text-content">
-          <H1 vMargin={false}>Fast, unopinionated, minimalist web framework for Node.js </H1>
+          <H1 vMargin={false}>{t('hero.tagline')}</H1>
           <div class="hero__cta">
             <div class="hero__code">
               <Code code={INSTALL_COMMAND} />
             </div>
             <Button as="a" href="/en/5x/starter/installing" size="md" fullWidth>
-              Get Started
+              {t('hero.getStarted')}
               <Icon name="fluent:arrow-right-16-regular" size="16" />
             </Button>
           </div>
@@ -114,6 +120,9 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
 
     const controlButton = videoContainer.querySelector('.hero__video-control') as HTMLButtonElement;
     if (!controlButton) return;
+
+    const labelPause = controlButton.getAttribute('data-label-pause') ?? 'Pause background video';
+    const labelPlay = controlButton.getAttribute('data-label-play') ?? 'Play background video';
 
     const posterImg = videoContainer.querySelector('.hero__video-poster') as HTMLImageElement;
 
@@ -225,11 +234,11 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
       if (video.paused) {
         video.play().catch(() => {});
         controlButton.setAttribute('data-state', 'playing');
-        controlButton.setAttribute('aria-label', 'Pause background video');
+        controlButton.setAttribute('aria-label', labelPause);
       } else {
         video.pause();
         controlButton.setAttribute('data-state', 'paused');
-        controlButton.setAttribute('aria-label', 'Play background video');
+        controlButton.setAttribute('aria-label', labelPlay);
       }
     };
 
@@ -253,11 +262,11 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
       if (document.hidden) {
         video.pause();
         controlButton.setAttribute('data-state', 'paused');
-        controlButton.setAttribute('aria-label', 'Play background video');
+        controlButton.setAttribute('aria-label', labelPlay);
       } else {
         video.play().catch(() => {});
         controlButton.setAttribute('data-state', 'playing');
-        controlButton.setAttribute('aria-label', 'Pause background video');
+        controlButton.setAttribute('aria-label', labelPause);
       }
     });
 
