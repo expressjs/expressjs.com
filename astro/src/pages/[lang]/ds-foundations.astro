@@ -24,10 +24,11 @@ import {
   BodyXs,
   Button,
   Code,
+  Select,
 } from '@components/primitives';
 import { Code as CodeBlock } from 'astro:components';
 import { getLangFromUrl } from '@i18n/utils';
-import { languages } from '@i18n/ui';
+import { languages } from '@i18n/locales';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({
@@ -55,6 +56,7 @@ const lang = getLangFromUrl(Astro.url);
         <li><a href="#colors" class="ds-nav__link">Colors</a></li>
         <li><a href="#spacing" class="ds-nav__link">Spacing</a></li>
         <li><a href="#buttons" class="ds-nav__link">Buttons</a></li>
+        <li><a href="#form-elements" class="ds-nav__link">Form Elements</a></li>
         <li><a href="#grid" class="ds-nav__link">Grid</a></li>
         <li><a href="#breakpoints" class="ds-nav__link">Breakpoints</a></li>
       </ul>
@@ -692,6 +694,241 @@ import { Button } from "@components/primitives";
 <Button variant="primary">Click me</Button>
 <Button variant="secondary" size="sm" ghost>Ghost</Button>
 <Button as="a" href="/docs">Link Button</Button>
+          `}
+          />
+        </div>
+      </section>
+
+      <!-- FORM ELEMENTS -->
+      <section id="form-elements" class="ds-section">
+        <H2>Form Elements</H2>
+        <BodyMd color="secondary">
+          Accessible form components with full keyboard navigation and ARIA support.
+        </BodyMd>
+
+        <div class="ds-subsection">
+          <H3>Select</H3>
+          <BodyMd color="secondary">
+            Custom dropdown component using the button + listbox ARIA pattern. Supports full
+            keyboard navigation (Arrow keys, Home, End, Escape, Enter, Space) and follows WAI-ARIA
+            best practices.
+          </BodyMd>
+
+          <H4 style="margin-top: var(--space-6);">Variants</H4>
+          <div class="ds-demo ds-demo--row">
+            <div>
+              <BodySm color="secondary" style="margin-bottom: var(--space-2);">Default</BodySm>
+              <Select
+                options={[
+                  { value: '5x', label: 'v5.x', selected: true },
+                  { value: '4x', label: 'v4.x' },
+                  { value: '3x', label: 'v3.x' },
+                ]}
+                ariaLabel="Select version"
+              />
+            </div>
+
+            <div>
+              <BodySm color="secondary" style="margin-bottom: var(--space-2);">Ghost</BodySm>
+              <Select
+                options={[
+                  { value: 'en', label: 'English', selected: true },
+                  { value: 'es', label: 'Español' },
+                  { value: 'fr', label: 'Français' },
+                ]}
+                variant="ghost"
+                ariaLabel="Select language"
+              />
+            </div>
+
+            <div>
+              <BodySm color="secondary" style="margin-bottom: var(--space-2);">Minimal</BodySm>
+              <Select
+                options={[
+                  { value: 'all', label: 'All categories', selected: true },
+                  { value: 'getting-started', label: 'Getting Started' },
+                  { value: 'api', label: 'API Reference' },
+                ]}
+                variant="minimal"
+                ariaLabel="Select category"
+              />
+            </div>
+
+            <div>
+              <BodySm color="secondary" style="margin-bottom: var(--space-2);"
+                >Icon (with custom icon)</BodySm
+              >
+              <Select
+                options={[
+                  { value: 'en', label: 'English', selected: true },
+                  { value: 'es', label: 'Español' },
+                  { value: 'fr', label: 'Français' },
+                ]}
+                variant="icon"
+                icon="fluent:translate-16-regular"
+                hideLabel={true}
+                ariaLabel="Select language"
+              />
+            </div>
+          </div>
+
+          <H4 style="margin-top: var(--space-6);">Sizes</H4>
+          <div class="ds-demo">
+            <Flex direction="row" gap="4" align="center">
+              <Select
+                options={[
+                  { value: 'sm', label: 'Small', selected: true },
+                  { value: 'option2', label: 'Option 2' },
+                ]}
+                size="sm"
+                ariaLabel="Small select"
+              />
+              <Select
+                options={[
+                  { value: 'md', label: 'Medium (default)', selected: true },
+                  { value: 'option2', label: 'Option 2' },
+                ]}
+                size="md"
+                ariaLabel="Medium select"
+              />
+              <Select
+                options={[
+                  { value: 'lg', label: 'Large', selected: true },
+                  { value: 'option2', label: 'Option 2' },
+                ]}
+                size="lg"
+                ariaLabel="Large select"
+              />
+            </Flex>
+          </div>
+
+          <H4 style="margin-top: var(--space-6);">Dropdown Alignment</H4>
+          <div class="ds-demo">
+            <Flex direction="row" gap="4" align="center">
+              <Select
+                options={[
+                  { value: 'left', label: 'Left aligned (default)', selected: true },
+                  { value: 'option2', label: 'Option 2' },
+                ]}
+                dropdownAlign="left"
+                ariaLabel="Left aligned dropdown"
+              />
+              <Select
+                options={[
+                  { value: 'right', label: 'Right aligned', selected: true },
+                  { value: 'option2', label: 'Option 2' },
+                ]}
+                dropdownAlign="right"
+                ariaLabel="Right aligned dropdown"
+              />
+            </Flex>
+          </div>
+
+          <H4 style="margin-top: var(--space-6);">With Placeholder</H4>
+          <div class="ds-demo">
+            <Select
+              options={[
+                { value: 'option1', label: 'Option 1' },
+                { value: 'option2', label: 'Option 2' },
+                { value: 'option3', label: 'Option 3' },
+              ]}
+              placeholder="Choose an option..."
+              ariaLabel="Select with placeholder"
+            />
+          </div>
+
+          <H4 style="margin-top: var(--space-6);">Full Width</H4>
+          <div class="ds-demo">
+            <Select
+              options={[
+                { value: 'option1', label: 'Full width select', selected: true },
+                { value: 'option2', label: 'Option 2' },
+                { value: 'option3', label: 'Option 3' },
+              ]}
+              fullWidth={true}
+              ariaLabel="Full width select"
+            />
+          </div>
+
+          <H4 style="margin-top: var(--space-6);">Disabled State</H4>
+          <div class="ds-demo">
+            <Flex direction="row" gap="4" align="center">
+              <Select
+                options={[
+                  { value: 'option1', label: 'Disabled select', selected: true },
+                  { value: 'option2', label: 'Option 2' },
+                ]}
+                disabled={true}
+                ariaLabel="Disabled select"
+              />
+              <Select
+                options={[
+                  { value: 'option1', label: 'With disabled option', selected: true },
+                  { value: 'option2', label: 'Available option' },
+                  { value: 'option3', label: 'Disabled option', disabled: true },
+                ]}
+                ariaLabel="Select with disabled option"
+              />
+            </Flex>
+          </div>
+
+          <H4 style="margin-top: var(--space-6);">Usage</H4>
+          <CodeBlock
+            lang="js"
+            wrap
+            code={`
+import { Select } from "@components/primitives";
+
+// Basic usage
+<Select
+  options={[
+    { value: '5x', label: 'v5.x', selected: true },
+    { value: '4x', label: 'v4.x' },
+    { value: '3x', label: 'v3.x', disabled: true },
+  ]}
+  ariaLabel="Select version"
+/>
+
+// With variants and sizes
+<Select
+  options={options}
+  variant="ghost"
+  size="lg"
+  dropdownAlign="right"
+  ariaLabel="Select option"
+/>
+
+// Icon-only variant (like LanguageSelect)
+<Select
+  options={languages}
+  variant="icon"
+  icon="fluent:translate-16-regular"
+  hideLabel={true}
+  dropdownAlign="right"
+  ariaLabel="Select language"
+/>
+
+// Full width with placeholder
+<Select
+  options={options}
+  placeholder="Choose an option..."
+  fullWidth={true}
+  ariaLabel="Select option"
+/>
+
+// Listen to changes
+<Select
+  options={options}
+  id="my-select"
+  ariaLabel="Select option"
+/>
+
+<script>
+  const select = document.getElementById('my-select');
+  select?.addEventListener('select-change', (e) => {
+    console.log('Selected:', e.detail.value, e.detail.label);
+  });
+</script>
           `}
           />
         </div>

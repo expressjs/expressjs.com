@@ -1,5 +1,6 @@
 ---
 import type { MenuItem, VersionPrefix } from '@/config/types';
+import type { LanguageCode } from '@/i18n/ui';
 import SidebarNavItem from './SidebarNavItem.astro';
 import {
   isLink,
@@ -16,7 +17,7 @@ interface Props {
   parentId: string;
   sectionIndex: number | null;
   currentPath: string;
-  lang: string;
+  lang: LanguageCode;
   basePath: string;
   versioned: VersionPrefix[];
   version: string;
@@ -81,6 +82,7 @@ const filteredItems = filterItems(items, version);
             submenuId={`submenu-${itemId}`}
             targetLevel={targetLevel}
             showIcon={showIcon}
+            lang={lang}
           />
         );
       }
@@ -93,6 +95,7 @@ const filteredItems = filterItems(items, version);
           variant={variant}
           type="link"
           showIcon={showIcon}
+          lang={lang}
         />
       );
     })
