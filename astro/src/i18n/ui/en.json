@@ -75,5 +75,14 @@
   "hero.tagline": "Fast, unopinionated, minimalist web framework for Node.js",
   "hero.getStarted": "Get Started",
   "hero.videoPause": "Pause background video",
-  "hero.videoPlay": "Play background video"
+  "hero.videoPlay": "Play background video",
+  "features.title": "Clarity over complexity. For every developer.",
+  "features.performance.title": "Performance",
+  "features.performance.body": "Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love.",
+  "features.api.title": "APIs",
+  "features.api.body": "With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy.",
+  "features.middleware.title": "Middleware",
+  "features.middleware.body": "Express is a lightweight and flexible routing framework with minimal core features meant to be augmented through the use of Express middleware modules.",
+  "features.webapplication.title": "Web Applications",
+  "features.webapplication.body": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications."
 }

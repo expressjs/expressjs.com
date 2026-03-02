@@ -1,0 +1,42 @@
+---
+/**
+ * Features Pattern Component
+ *
+ * Displays a section title alongside a grid of feature cards.
+ *
+ * Layout:
+ * - Mobile:  title above cards, 1 per row
+ * - Tablet:  title above cards, 2 per row
+ * - Desktop: title in 4/12 columns · cards in 8/12 columns, 2 per row
+ *
+ * @example
+ * <Features title="Why Express?">
+ *   <Card title="Performance" body="Minimal overhead on top of Node.js." />
+ *   <Card title="Routing"     body="Robust, expressive routing API." />
+ * </Features>
+ */
+import './Features.css';
+import type { HTMLAttributes } from 'astro/types';
+import { H2, Container, Grid, Col } from '@/components/primitives';
+
+interface Props extends HTMLAttributes<'section'> {
+  title: string;
+}
+
+const { title, class: className, ...rest } = Astro.props;
+---
+
+<section class:list={['features', className]} {...rest}>
+  <Container>
+    <Grid>
+      <Col xs={12} lg={4} class="features__header">
+        <H2>{title}</H2>
+      </Col>
+      <Col xs={12} lg={8}>
+        <Grid gap="0" class="features__cards">
+          <slot />
+        </Grid>
+      </Col>
+    </Grid>
+  </Container>
+</section>

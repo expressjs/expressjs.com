@@ -13,3 +13,4 @@ export { default as VersionSwitcher } from './VersionSwitcher/VersionSwitcher.as
 export { default as SearchTrigger } from './SearchTrigger/SearchTrigger.astro';
 export { default as LanguageSelect } from './LanguageSelect/LanguageSelect.astro';
 export { default as Footer } from './Footer/Footer.astro';
+export { default as Features } from './Features/Features.astro';

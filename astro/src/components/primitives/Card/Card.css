@@ -1,0 +1,18 @@
+@layer primitives {
+  .card {
+    border: var(--border-width-1) solid var(--color-border-secondary);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+  }
+
+  .card + .card {
+    margin-block-start: calc(var(--border-width-1) * -1);
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+  }
+
+  .card:has(+ .card) {
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+}

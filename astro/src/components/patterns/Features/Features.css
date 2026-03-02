@@ -1,0 +1,45 @@
+/**
+ * Features Pattern Styles
+ */
+
+@layer patterns {
+  /* ============================================
+     SECTION
+     ============================================ */
+
+  .features {
+    padding: var(--space-12) 0;
+
+    @media (--md-up) {
+      padding: var(--space-16) 0;
+    }
+
+    @media (--lg-up) {
+      padding: var(--space-20) 0;
+    }
+  }
+
+  /* ============================================
+     HEADER COLUMN (H2 title)
+     ============================================ */
+
+  .features__header {
+    padding-bottom: var(--space-8);
+
+    @media (--lg-up) {
+      align-self: start;
+      padding-bottom: 0;
+      padding-right: var(--space-8);
+    }
+  }
+
+  .features__cards {
+    overflow: hidden;
+    border-radius: var(--radius-card);
+  }
+
+  .features__cards .card {
+    flex: 1;
+    border-radius: 0;
+  }
+}
