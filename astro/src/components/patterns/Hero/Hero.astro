@@ -4,12 +4,14 @@ import { Image } from 'astro:assets';
 import { Code } from 'astro-expressive-code/components';
 import { Icon } from 'astro-icon/components';
 import { H1, Button, Container, Flex, BodyMd, Grid, Col } from '@/components/primitives';
+import { getEntry } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const EXPRESS_VERSION = '5.2.1';
+const expressPackage = await getEntry('npm', 'express');
+const EXPRESS_VERSION = expressPackage?.data.version ?? '5.x';
 const INSTALL_COMMAND = 'npm install express --save';
 const EXAMPLE_CODE = `const express = require('express')
 const app = express()
@@ -69,7 +71,7 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
           aria-label={t('hero.videoPause')}
           data-label-pause={t('hero.videoPause')}
           data-label-play={t('hero.videoPlay')}
-          data-state="playing"
+          data-state="paused"
         >
           <Icon name="fluent:pause-16-filled" class="hero__video-control-pause" />
           <Icon name="fluent:play-16-filled" class="hero__video-control-play" />
@@ -234,19 +236,31 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
       once: true,
     });
 
-    const togglePlayPause = () => {
+    video.addEventListener(
+      'error',
+      () => {
+        controlButton.style.display = 'none';
+      },
+      { once: true }
+    );
+
+    video.addEventListener('play', () => {
+      controlButton.setAttribute('data-state', 'playing');
+      controlButton.setAttribute('aria-label', labelPause);
+    });
+
+    video.addEventListener('pause', () => {
+      controlButton.setAttribute('data-state', 'paused');
+      controlButton.setAttribute('aria-label', labelPlay);
+    });
+
+    controlButton.addEventListener('click', () => {
       if (video.paused) {
         video.play().catch(() => {});
-        controlButton.setAttribute('data-state', 'playing');
-        controlButton.setAttribute('aria-label', labelPause);
       } else {
         video.pause();
-        controlButton.setAttribute('data-state', 'paused');
-        controlButton.setAttribute('aria-label', labelPlay);
       }
-    };
-
-    controlButton.addEventListener('click', togglePlayPause);
+    });
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -265,12 +279,8 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         video.pause();
-        controlButton.setAttribute('data-state', 'paused');
-        controlButton.setAttribute('aria-label', labelPlay);
       } else {
         video.play().catch(() => {});
-        controlButton.setAttribute('data-state', 'playing');
-        controlButton.setAttribute('aria-label', labelPause);
       }
     });
 
