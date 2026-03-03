@@ -58,18 +58,14 @@ const isActive = (!start || now >= start) && (!end || now <= end);
   )
 }
 
-{
-  isActive && (
-    <script>
-      document.querySelectorAll<HTMLElement>('.banner').forEach((banner) => {
-        const bannerId = banner.dataset.bannerId;
-        if (banner.dataset.dismissible !== 'true') return;
+<script>
+  document.querySelectorAll<HTMLElement>('.banner').forEach((banner) => {
+    const bannerId = banner.dataset.bannerId;
+    if (banner.dataset.dismissible !== 'true') return;
 
-        banner.querySelector('.banner__dismiss')?.addEventListener('click', () => {
-          localStorage.setItem(`banner-dismissed-${bannerId}`, 'true');
-          banner.style.display = 'none';
-        });
-      });
-    </script>
-  )
-}
+    banner.querySelector('.banner__dismiss')?.addEventListener('click', () => {
+      localStorage.setItem(`banner-dismissed-${bannerId}`, 'true');
+      banner.style.display = 'none';
+    });
+  });
+</script>
