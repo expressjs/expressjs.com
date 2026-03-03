@@ -45,7 +45,9 @@ const isActive = (!start || now >= start) && (!end || now <= end);
               <Icon name="fluent:warning-16-regular" size="20" />
             )}
           </span>
-          <Body as="h3" vMargin={false} weight="bold">{title}</Body>
+          <Body as="h3" vMargin={false} weight="bold">
+            {title}
+          </Body>
         </Flex>
         <slot />
       </Container>
