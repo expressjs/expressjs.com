@@ -1,13 +1,9 @@
 @layer patterns {
   .banner {
     width: 100%;
-    padding: var(--space-2) var(--space-4);
+    padding: var(--space-4) 0;
     border-bottom: var(--border-width-1) solid;
     position: relative;
-
-    @media (--md-up) {
-      padding: var(--space-3) var(--space-6);
-    }
   }
 
   .banner--info {

@@ -11,7 +11,7 @@
  *   <strong>Express v5 is out!</strong> <a href="/changelog">Read the changelog →</a>
  * </Banner>
  */
-import { Container, Flex, H5 } from '@/components/primitives';
+import { Body, Container, Flex } from '@/components/primitives';
 import './Banner.css';
 import type { BannerProps } from './types';
 import { Icon } from 'astro-icon/components';
@@ -45,7 +45,7 @@ const isActive = (!start || now >= start) && (!end || now <= end);
               <Icon name="fluent:warning-16-regular" size="20" />
             )}
           </span>
-          <H5 vMargin={false}>{title}</H5>
+          <Body as="h3" vMargin={false} weight="bold">{title}</Body>
         </Flex>
         <slot />
       </Container>
