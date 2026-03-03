@@ -4,12 +4,14 @@ import { Image } from 'astro:assets';
 import { Code } from 'astro-expressive-code/components';
 import { Icon } from 'astro-icon/components';
 import { H1, Button, Container, Flex, BodyMd, Grid, Col } from '@/components/primitives';
+import { getEntry } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const EXPRESS_VERSION = '5.2.1';
+const expressPackage = await getEntry('npm', 'express');
+const EXPRESS_VERSION = expressPackage?.data.version ?? '5.x';
 const INSTALL_COMMAND = 'npm install express --save';
 const EXAMPLE_CODE = `const express = require('express')
 const app = express()
@@ -234,7 +236,13 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
       once: true,
     });
 
-    video.addEventListener('error', () => { controlButton.style.display = 'none'; }, { once: true });
+    video.addEventListener(
+      'error',
+      () => {
+        controlButton.style.display = 'none';
+      },
+      { once: true }
+    );
 
     video.addEventListener('play', () => {
       controlButton.setAttribute('data-state', 'playing');
