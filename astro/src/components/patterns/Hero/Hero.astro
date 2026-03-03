@@ -177,12 +177,18 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
       return;
     }
 
-    const isMobile = window.innerWidth < breakpointMd;
+    const isMobile = () => window.innerWidth < breakpointMd;
 
-    if (isMobile) {
-      primaryVideo.pause();
-      primaryVideo.removeAttribute('autoplay');
-      controlButton.style.display = 'none';
+    const disableVideo = () => {
+      pauseAll();
+      videos.forEach((v) => {
+        v.removeAttribute('autoplay');
+        v.removeAttribute('data-loaded');
+      });
+    };
+
+    if (isMobile()) {
+      disableVideo();
       // Don't load video sources to save bandwidth
       return;
     }
@@ -247,14 +253,8 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        const isNowMobile = window.innerWidth < breakpointMd;
-
-        if (isNowMobile) {
-          pauseAll();
-          videos.forEach((v) => {
-            v.removeAttribute('autoplay');
-            v.removeAttribute('data-loaded'); // hides video, making poster visible
-          });
+        if (isMobile()) {
+          disableVideo();
         } else {
           initSources();
           playAll();
