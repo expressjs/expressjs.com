@@ -63,17 +63,12 @@ const isActive = (!start || now >= start) && (!end || now <= end);
     <script>
       document.querySelectorAll<HTMLElement>('.banner').forEach((banner) => {
         const bannerId = banner.dataset.bannerId;
-        const isDismissible = banner.dataset.dismissible === 'true';
-        const storageKey = `banner-dismissed-${bannerId}`;
+        if (banner.dataset.dismissible !== 'true') return;
 
-        if (localStorage.getItem(storageKey) === 'true') {
+        banner.querySelector('.banner__dismiss')?.addEventListener('click', () => {
+          localStorage.setItem(`banner-dismissed-${bannerId}`, 'true');
           banner.style.display = 'none';
-        } else if (isDismissible) {
-          banner.querySelector('.banner__dismiss')?.addEventListener('click', () => {
-            localStorage.setItem(storageKey, 'true');
-            banner.style.display = 'none';
-          });
-        }
+        });
       });
     </script>
   )

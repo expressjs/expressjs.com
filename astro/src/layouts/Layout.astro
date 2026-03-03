@@ -1,7 +1,7 @@
 ---
 import '@styles/main.css';
-import { Body, BodyMd, Flex, FlexItem } from '@components/primitives';
-import { Banner, Footer, Sidebar } from '@/components/patterns';
+import { Flex, FlexItem } from '@components/primitives';
+import { Footer, Sidebar } from '@/components/patterns';
 import { Header } from '@/components/patterns';
 import { getLangFromUrl, replaceLanguageInPath } from '@/i18n/utils';
 import { languages } from '@/i18n/locales';
@@ -24,19 +24,29 @@ const lang = getLangFromUrl(Astro.url);
   <head>
     <script is:inline>
       (function () {
-        const theme = (() => {
-          if (typeof localStorage !== 'undefined') {
-            const storedTheme = localStorage.getItem('theme');
-            if (storedTheme === 'dark' || storedTheme === 'light') {
-              return storedTheme;
-            }
-          }
-          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
-          }
-          return 'light';
-        })();
+        // Theme
+        const storedTheme = localStorage.getItem('theme');
+        const theme =
+          storedTheme === 'dark' || storedTheme === 'light'
+            ? storedTheme
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
         document.documentElement.setAttribute('data-theme', theme);
+
+        // Dismissed banners
+        const styles = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith('banner-dismissed-') && localStorage.getItem(key) === 'true') {
+            styles.push('#banner-' + key.replace('banner-dismissed-', '') + '{display:none}');
+          }
+        }
+        if (styles.length) {
+          const el = document.createElement('style');
+          el.textContent = styles.join('');
+          document.head.appendChild(el);
+        }
       })();
     </script>
 
@@ -79,21 +89,6 @@ const lang = getLangFromUrl(Astro.url);
       <FlexItem grow>
         <Flex direction="column" class="h-full">
           <main id="main-content">
-            <Banner
-              id="express-5-1-0-lts"
-              variant="info"
-              startDate="2026-03-01"
-              endDate="2026-03-31"
-              dismissible
-              title="Express@5.1.0: Now the Default on npm with LTS Timeline"
-            >
-              <BodyMd vMargin={false}
-                >Express 5.1.0 is now the default on npm, and we're introducing an official LTS
-                schedule for the v4 and v5 release lines. <a href={`/${lang}/blog`}
-                  >Check out our latest blog</a
-                > for more information.</BodyMd
-              >
-            </Banner>
             <slot />
           </main>
           <Footer />
