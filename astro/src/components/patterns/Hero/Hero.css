@@ -46,6 +46,72 @@
     }
   }
 
+  /* Default (light mode): hide dark poster, show light poster */
+  .hero__video-poster--dark {
+    display: none;
+  }
+
+  /* Dark theme via data-theme */
+  [data-theme='dark'] .hero__video-poster--dark {
+    display: block;
+  }
+
+  [data-theme='dark'] .hero__video-poster--light {
+    display: none;
+  }
+
+  /* System dark mode */
+  @media (prefers-color-scheme: dark) {
+    .hero__video-poster--dark {
+      display: block;
+    }
+
+    .hero__video-poster--light {
+      display: none;
+    }
+
+    [data-theme='light'] .hero__video-poster--dark {
+      display: none;
+    }
+
+    [data-theme='light'] .hero__video-poster--light {
+      display: block;
+    }
+  }
+
+  /* Default (light mode): hide dark video, show light video */
+  .hero__video--dark {
+    display: none;
+  }
+
+  /* Dark theme via data-theme */
+  [data-theme='dark'] .hero__video--dark {
+    display: block;
+  }
+
+  [data-theme='dark'] .hero__video--light {
+    display: none;
+  }
+
+  /* System dark mode */
+  @media (prefers-color-scheme: dark) {
+    .hero__video--dark {
+      display: block;
+    }
+
+    .hero__video--light {
+      display: none;
+    }
+
+    [data-theme='light'] .hero__video--dark {
+      display: none;
+    }
+
+    [data-theme='light'] .hero__video--light {
+      display: block;
+    }
+  }
+
   .hero__video-overlay {
     position: absolute;
     top: 0;
