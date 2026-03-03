@@ -232,6 +232,16 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
       }
     }
 
+    // Preloading the alternate theme video
+    const alternateVideoSrc = getCurrentTheme() === 'dark' ? videoDesktopLight : videoDesktop;
+    if (alternateVideoSrc) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'video';
+      link.href = alternateVideoSrc;
+      document.head.appendChild(link);
+    }
+
     video.addEventListener('canplay', () => video.setAttribute('data-loaded', 'true'), {
       once: true,
     });
