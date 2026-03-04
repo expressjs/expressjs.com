@@ -18,3 +18,6 @@ export type { SelectOption, SelectSize, SelectVariant } from './Select';
 
 // Card
 export { Card } from './Card';
+
+// Avatar
+export { Avatar } from './Avatar';

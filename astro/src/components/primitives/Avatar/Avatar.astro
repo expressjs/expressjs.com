@@ -1,0 +1,40 @@
+---
+/**
+ * Avatar Primitive Component
+ *
+ * A rounded avatar image with a name and optional caption displayed to the right.
+ *
+ * @example
+ * <Avatar src="/images/author.jpg" name="John Doe" caption="Jun 05, 2025" />
+ *
+ * @example — Small size
+ * <Avatar src="/images/author.jpg" name="Jane Smith" caption="Mar 04, 2026" size="sm" />
+ */
+import './Avatar.css';
+import type { HTMLAttributes } from 'astro/types';
+import { BodyMd, BodySm, Flex } from '@components/primitives';
+
+interface Props extends HTMLAttributes<'div'> {
+  src: string;
+  alt?: string;
+  name: string;
+  caption?: string;
+  size?: 'sm' | 'md';
+}
+
+const { src, alt = '', name, caption, size = 'md', class: className, ...rest } = Astro.props;
+---
+
+<Flex align="center" gap="2" class:list={[`avatar--${size}`, className]} {...rest}>
+  <img class="avatar__image" src={src} alt={alt} />
+  <div class="avatar__content">
+    <BodyMd as="span" weight="medium" vMargin={false}>{name}</BodyMd>
+    {
+      caption && (
+        <BodySm as="span" color="secondary" vMargin={false}>
+          {caption}
+        </BodySm>
+      )
+    }
+  </div>
+</Flex>

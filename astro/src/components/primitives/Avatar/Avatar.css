@@ -1,0 +1,28 @@
+@layer primitives {
+  .avatar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .avatar__image {
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .avatar--md .avatar__image {
+    width: 32px;
+    height: 32px;
+  }
+
+  .avatar--sm .avatar__image {
+    width: 24px;
+    height: 24px;
+  }
+
+  .avatar__content {
+    display: flex;
+    flex-direction: column;
+  }
+}
