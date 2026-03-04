@@ -9,6 +9,7 @@
     top: 0;
     z-index: var(--z-index-header);
     border-bottom: 1px solid var(--color-border-secondary);
+    padding: var(--space-3) var(--space-4);
 
     @media (--md-up) {
       background-color: var(--color-bg-primary);
@@ -21,10 +22,6 @@
         display: none;
       }
     }
-  }
-
-  .header__content {
-    padding: var(--space-3) var(--space-4);
   }
 
   .skip-link {
