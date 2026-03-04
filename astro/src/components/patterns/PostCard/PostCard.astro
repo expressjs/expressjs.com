@@ -1,0 +1,78 @@
+---
+/**
+ * PostCard Pattern Component
+ *
+ * An article card with a label, title, and author avatar.
+ * Available in two sizes: medium and large.
+ *
+ * @example — Large (default)
+ * <PostCard
+ *   size="lg"
+ *   href="/blog/secure-express-app"
+ *   label="Security"
+ *   title="How to secure your Express app"
+ *   avatarSrc="/images/author.jpg"
+ *   avatarName="John Doe"
+ *   avatarCaption="Jun 05, 2025"
+ * />
+ *
+ * @example — Medium
+ * <PostCard
+ *   size="md"
+ *   href="/blog/express-5"
+ *   label="Release"
+ *   title="Express 5.0 is here"
+ *   avatarSrc="/images/author.jpg"
+ *   avatarName="Jane Smith"
+ *   avatarCaption="Mar 04, 2026"
+ * />
+ */
+import './PostCard.css';
+import type { HTMLAttributes } from 'astro/types';
+import { H2, H3, BodySm, Avatar } from '@components/primitives';
+
+interface Props extends HTMLAttributes<'article'> {
+  href: string;
+  label: string;
+  title: string;
+  avatarSrc: string;
+  avatarAlt?: string;
+  avatarName: string;
+  avatarCaption?: string;
+  size?: 'md' | 'lg';
+}
+
+const {
+  href,
+  label,
+  title,
+  avatarSrc,
+  avatarAlt = '',
+  avatarName,
+  avatarCaption,
+  size = 'lg',
+  class: className,
+  ...rest
+} = Astro.props;
+---
+
+<article class:list={['post-card', `post-card--${size}`, className]} {...rest}>
+  <a href={href} class="post-card__link">
+    <BodySm as="span" color="secondary" vMargin={false} class="post-card__label">{label}</BodySm>
+    {
+      size === 'lg' ? (
+        <H2 vMargin={false} class="post-card__title">{title}</H2>
+      ) : (
+        <H3 vMargin={false} class="post-card__title">{title}</H3>
+      )
+    }
+    <Avatar
+      src={avatarSrc}
+      alt={avatarAlt}
+      name={avatarName}
+      caption={avatarCaption}
+      size={size === 'lg' ? 'md' : 'sm'}
+      class="post-card__avatar"
+    />
+  </a>
+</article>

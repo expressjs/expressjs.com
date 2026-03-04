@@ -1,0 +1,22 @@
+@layer patterns {
+  .post-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-card--lg {
+    gap: var(--space-4);
+  }
+
+  .post-card--md {
+    gap: var(--space-3);
+  }
+
+  .post-card__link {
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+    color: inherit;
+    text-decoration: none;
+  }
+}
