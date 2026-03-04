@@ -29,12 +29,10 @@ const isActive = (!start || now >= start) && (!end || now <= end);
 {
   isActive && (
     <div
-      id={`banner-${id}`}
       class:list={['banner', `banner--${variant}`]}
-      data-banner-id={id}
+      data-banner-id={id ?? undefined}
       data-dismissible={dismissible}
       role="alert"
-      aria-live="polite"
     >
       <Container>
         <Flex align="center" gap="2">

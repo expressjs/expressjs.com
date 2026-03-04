@@ -1,10 +1,4 @@
-export interface BannerProps {
-  /**
-   * Unique identifier for this banner.
-   * Used as the HTML `id` and as the localStorage key for persisting dismissal state.
-   */
-  id: string;
-
+interface BannerBaseProps {
   /**
    * Visual style of the banner.
    * @default 'info'
@@ -16,14 +10,29 @@ export interface BannerProps {
    * Displayed prominently at the start of the banner.
    */
   title: string;
+}
 
+interface DismissibleBannerProps extends BannerBaseProps {
   /**
    * Whether the user can dismiss (close) the banner.
    * Dismissal state is persisted in localStorage so the banner stays hidden across sessions.
-   * @default false
    */
-  dismissible?: boolean;
+  dismissible: true;
 
+  /**
+   * Unique identifier for this banner.
+   * Used as the HTML `id` and as the localStorage key for persisting dismissal state.
+   * Required when `dismissible` is true.
+   */
+  id: string;
+}
+
+interface NonDismissibleBannerProps extends BannerBaseProps {
+  dismissible?: false;
+  id?: never;
+}
+
+export type BannerProps = (DismissibleBannerProps | NonDismissibleBannerProps) & {
   /**
    * ISO date string or Date object.
    * The banner will not be displayed before this date.
@@ -37,4 +46,4 @@ export interface BannerProps {
    * Omit to show the banner indefinitely.
    */
   endDate?: Date | string;
-}
+};
