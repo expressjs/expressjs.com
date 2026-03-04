@@ -46,4 +46,4 @@ export type BannerProps = (DismissibleBannerProps | NonDismissibleBannerProps) &
    * Omit to show the banner indefinitely.
    */
   endDate?: Date | string;
-}
+};
