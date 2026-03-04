@@ -782,10 +782,14 @@ footer {
 
 /* icons */
 a.openjs-logo {
-  display: flex;
+  display: inline-block;
   width: 125px;
   height: 39px;
-  cursor: pointer;
+}
+
+a.openjs-logo svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* theme and lang btn */
