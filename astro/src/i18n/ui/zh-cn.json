@@ -71,5 +71,9 @@
   "404.description": "您正在查找的页面无法找到。",
   "404.heading": "页面未找到",
   "404.message": "您正在查找的页面不存在或已被移动。",
-  "404.goHome": "返回主页"
+  "404.goHome": "返回主页",
+  "hero.tagline": "快速、无偏见、极简主义的 Node.js Web 框架",
+  "hero.getStarted": "开始使用",
+  "hero.videoPause": "暂停背景视频",
+  "hero.videoPlay": "播放背景视频"
 }

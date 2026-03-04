@@ -1,7 +1,6 @@
 ---
-import { Body, Container, H1 } from '@components/primitives';
+import { Hero } from '@components/patterns';
 import Layout from '@layouts/Layout.astro';
-import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import { languages } from '@i18n/locales';
 
 export function getStaticPaths() {
@@ -9,21 +8,13 @@ export function getStaticPaths() {
     params: { lang },
   }));
 }
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 ---
 
 <Layout>
-  <Container>
-    <H1>{t('home.welcome')}</H1>
-    <Body>{t('home.workInProgress')}</Body>
-    <ul>
-      <li>
-        {t('home.reviewDesignSystemPrefix')}
-        <a href={`/${lang}/ds-foundations`}>{t('home.reviewDesignSystemLink')}</a>
-        {t('home.reviewDesignSystemSuffix')}
-      </li>
-    </ul>
-  </Container>
+  <Hero
+    videoSrc="/videos/hero-background.mp4"
+    videoSrcLight="/videos/hero-background-light.mp4"
+    posterSrc="/hero-poster.jpg"
+    posterSrcLight="/hero-poster-light.jpg"
+  />
 </Layout>

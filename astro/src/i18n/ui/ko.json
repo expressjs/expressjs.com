@@ -71,5 +71,9 @@
   "404.description": "찾으시는 페이지를 찾을 수 없습니다.",
   "404.heading": "페이지를 찾을 수 없습니다",
   "404.message": "찾으시는 페이지가 존재하지 않거나 이동되었습니다.",
-  "404.goHome": "홈으로 이동"
+  "404.goHome": "홈으로 이동",
+  "hero.tagline": "Node.js를 위한 빠르고 독단적이지 않은 미니멀리스트 웹 프레임워크",
+  "hero.getStarted": "시작하기",
+  "hero.videoPause": "배경 비디오 일시정지",
+  "hero.videoPlay": "배경 비디오 재생"
 }

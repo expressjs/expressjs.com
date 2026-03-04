@@ -71,5 +71,9 @@
   "404.description": "The page you are looking for could not be found.",
   "404.heading": "Page Not Found",
   "404.message": "The page you are looking for does not exist or has been moved.",
-  "404.goHome": "Go to Home"
+  "404.goHome": "Go to Home",
+  "hero.tagline": "Fast, unopinionated, minimalist web framework for Node.js",
+  "hero.getStarted": "Get Started",
+  "hero.videoPause": "Pause background video",
+  "hero.videoPlay": "Play background video"
 }

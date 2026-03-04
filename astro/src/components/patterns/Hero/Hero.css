@@ -1,0 +1,332 @@
+@layer patterns {
+  .hero {
+    position: relative;
+    padding: var(--space-12) 0;
+    background-color: var(--color-bg-primary);
+    overflow: hidden;
+
+    @media (--md-up) {
+      padding: var(--space-14) 0 var(--space-20) 0;
+    }
+
+    @media (--lg-up) {
+      padding: var(--space-20) 0;
+    }
+  }
+
+  .hero__video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .hero__video-poster,
+  .hero__video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .hero__video {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+
+    &[data-loaded='true'] {
+      opacity: 1;
+    }
+  }
+
+  /* Default (light mode): hide dark poster, show light poster */
+  .hero__video-poster--dark {
+    display: none;
+  }
+
+  /* Dark theme via data-theme */
+  [data-theme='dark'] .hero__video-poster--dark {
+    display: block;
+  }
+
+  [data-theme='dark'] .hero__video-poster--light {
+    display: none;
+  }
+
+  /* System dark mode */
+  @media (prefers-color-scheme: dark) {
+    .hero__video-poster--dark {
+      display: block;
+    }
+
+    .hero__video-poster--light {
+      display: none;
+    }
+
+    [data-theme='light'] .hero__video-poster--dark {
+      display: none;
+    }
+
+    [data-theme='light'] .hero__video-poster--light {
+      display: block;
+    }
+  }
+
+  /* Default (light mode): hide dark video, show light video */
+  .hero__video--dark {
+    display: none;
+  }
+
+  /* Dark theme via data-theme */
+  [data-theme='dark'] .hero__video--dark {
+    display: block;
+  }
+
+  [data-theme='dark'] .hero__video--light {
+    display: none;
+  }
+
+  /* System dark mode */
+  @media (prefers-color-scheme: dark) {
+    .hero__video--dark {
+      display: block;
+    }
+
+    .hero__video--light {
+      display: none;
+    }
+
+    [data-theme='light'] .hero__video--dark {
+      display: none;
+    }
+
+    [data-theme='light'] .hero__video--light {
+      display: block;
+    }
+  }
+
+  .hero__video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.15) 40%,
+      rgba(255, 255, 255, 0.3) 70%,
+      var(--color-bg-primary) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero__video-control {
+    position: absolute;
+    bottom: var(--space-4);
+    right: var(--space-12);
+    z-index: 2;
+    width: var(--size-8);
+    height: var(--size-8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border-secondary);
+    border-radius: var(--radius-full);
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: transparent;
+
+    &:hover {
+      border-color: var(--color-border-primary);
+      color: var(--color-text-primary);
+      transform: scale(1.05);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-focus);
+      color: var(--color-text-primary);
+      outline-offset: 2px;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    svg {
+      width: var(--size-3-5);
+      height: var(--size-3-5);
+    }
+
+    &[data-state='playing'] .hero__video-control-play {
+      display: none;
+    }
+
+    &[data-state='paused'] .hero__video-control-pause {
+      display: none;
+    }
+
+    @media (--xs-only) {
+      display: none;
+    }
+
+    @media (--md-up) {
+      bottom: var(--space-6);
+      right: var(--space-6);
+    }
+  }
+
+  [data-theme='dark'] .hero__video-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.5) 40%,
+      rgba(0, 0, 0, 0.7) 70%,
+      var(--color-bg-primary) 100%
+    );
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .hero__video-overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        rgba(0, 0, 0, 0.7) 70%,
+        var(--color-bg-primary) 100%
+      );
+    }
+
+    [data-theme='light'] .hero__video-overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.15) 40%,
+        rgba(255, 255, 255, 0.3) 70%,
+        var(--color-bg-primary) 100%
+      );
+    }
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+
+    @media (--md-up) {
+      gap: var(--space-12);
+    }
+  }
+
+  .hero__text-content {
+    @media (--lg-up) {
+      padding-right: var(--space-10);
+    }
+  }
+
+  .hero__logo {
+    width: var(--size-36);
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+
+    @media (--md-up) {
+      width: var(--size-52);
+    }
+  }
+
+  .hero__logo-icon--dark {
+    display: block;
+  }
+
+  .hero__logo-icon--light {
+    display: none;
+  }
+
+  [data-theme='dark'] .hero__logo-icon--dark {
+    display: none;
+  }
+
+  [data-theme='dark'] .hero__logo-icon--light {
+    display: block;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .hero__logo-icon--dark {
+      display: none;
+    }
+
+    .hero__logo-icon--light {
+      display: block;
+    }
+
+    [data-theme='light'] .hero__logo-icon--dark {
+      display: block;
+    }
+
+    [data-theme='light'] .hero__logo-icon--light {
+      display: none;
+    }
+  }
+
+  .hero__cta {
+    width: 100%;
+    display: flex;
+    margin: var(--space-8) 0;
+    flex-direction: column;
+    gap: var(--space-4);
+
+    @media (--md-up) {
+      margin: var(--space-12) 0;
+      max-width: var(--size-96);
+    }
+  }
+}
+
+.hero__code {
+  .expressive-code {
+    .frame pre {
+      backdrop-filter: blur(21px);
+    }
+
+    figure {
+      box-shadow: none;
+    }
+  }
+
+  [data-theme='dark'] & .expressive-code .frame pre {
+    background-color: rgba(0, 0, 0, 0.62);
+  }
+
+  [data-theme='light'] & .expressive-code .frame pre {
+    background-color: color-mix(in srgb, var(--gray-950) 85%, transparent);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .expressive-code .frame pre {
+      background-color: rgba(0, 0, 0, 0.62);
+    }
+
+    [data-theme='light'] & .expressive-code .frame pre {
+      background-color: color-mix(in srgb, var(--gray-950) 85%, transparent);
+    }
+  }
+}
+
+.hero__example-code {
+  .expressive-code .frame pre {
+    padding: var(--space-3);
+  }
+}

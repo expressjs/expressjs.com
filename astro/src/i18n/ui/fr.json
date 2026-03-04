@@ -71,5 +71,9 @@
   "404.description": "La page que vous recherchez est introuvable.",
   "404.heading": "Page non trouvée",
   "404.message": "La page que vous recherchez n'existe pas ou a été déplacée.",
-  "404.goHome": "Aller à l'accueil"
+  "404.goHome": "Aller à l'accueil",
+  "hero.tagline": "Framework web rapide, sans opinion et minimaliste pour Node.js",
+  "hero.getStarted": "Commencer",
+  "hero.videoPause": "Mettre en pause la vidéo de fond",
+  "hero.videoPlay": "Lire la vidéo de fond"
 }

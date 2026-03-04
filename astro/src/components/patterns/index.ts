@@ -6,6 +6,7 @@
 
 export { default as Breadcrumbs } from './Breadcrumbs/Breadcrumbs.astro';
 export { default as Header } from './Header/Header.astro';
+export { default as Hero } from './Hero/Hero.astro';
 export { default as Sidebar } from './Sidebar/Sidebar.astro';
 export { default as ThemeSwitcher } from './ThemeSwitcher/ThemeSwitcher.astro';
 export { default as VersionSwitcher } from './VersionSwitcher/VersionSwitcher.astro';
