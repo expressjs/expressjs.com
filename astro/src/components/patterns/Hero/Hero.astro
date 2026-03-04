@@ -41,7 +41,7 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
       <div class="hero__video-container">
         {posterSrc && (
           <Image
-            class="hero__video-poster"
+            class={`hero__video-poster${posterSrcLight ? ' hero__video-poster--dark' : ''}`}
             src={posterSrc}
             width={1920}
             height={1080}
@@ -50,20 +50,41 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
             aria-hidden="true"
           />
         )}
+        {posterSrcLight && (
+          <Image
+            class="hero__video-poster hero__video-poster--light"
+            src={posterSrcLight}
+            width={1920}
+            height={1080}
+            loading="eager"
+            alt=""
+            aria-hidden="true"
+          />
+        )}
         <video
-          class="hero__video"
+          class={`hero__video${videoSrcLight ? ' hero__video--dark' : ''}`}
           autoplay
           muted
           loop
           playsinline
           preload="metadata"
-          data-video-desktop={videoSrc}
-          data-video-desktop-light={videoSrcLight}
-          data-poster-dark={posterSrc}
-          data-poster-light={posterSrcLight}
+          data-src={videoSrc}
         >
-          <source src={videoSrc} type="video/mp4" />
+          <source type="video/mp4" />
         </video>
+        {videoSrcLight && (
+          <video
+            class="hero__video hero__video--light"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            data-src={videoSrcLight}
+          >
+            <source type="video/mp4" />
+          </video>
+        )}
         <div class="hero__video-overlay" />
         <button
           class="hero__video-control"
@@ -121,122 +142,66 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
     const videoContainer = document.querySelector('.hero__video-container');
     if (!videoContainer) return;
 
-    const video = videoContainer.querySelector('.hero__video') as HTMLVideoElement;
-    if (!video) return;
+    const videos = Array.from(videoContainer.querySelectorAll<HTMLVideoElement>('.hero__video'));
+    if (videos.length === 0) return;
 
-    const controlButton = videoContainer.querySelector('.hero__video-control') as HTMLButtonElement;
+    const primaryVideo = videos[0];
+
+    const controlButton = videoContainer.querySelector<HTMLButtonElement>('.hero__video-control');
     if (!controlButton) return;
 
     const labelPause = controlButton.getAttribute('data-label-pause') ?? 'Pause background video';
     const labelPlay = controlButton.getAttribute('data-label-play') ?? 'Play background video';
 
-    const posterImg = videoContainer.querySelector('.hero__video-poster') as HTMLImageElement;
+    const playAll = () => videos.forEach((v) => v.play().catch(() => {}));
+    const pauseAll = () => videos.forEach((v) => v.pause());
 
-    const videoDesktop = video.getAttribute('data-video-desktop');
-    const videoDesktopLight = video.getAttribute('data-video-desktop-light');
-    const posterDark = video.getAttribute('data-poster-dark');
-    const posterLight = video.getAttribute('data-poster-light');
-
-    const getCurrentTheme = (): 'light' | 'dark' => {
-      const htmlElement = document.documentElement;
-      const dataTheme = htmlElement.getAttribute('data-theme');
-
-      if (dataTheme === 'light' || dataTheme === 'dark') {
-        return dataTheme;
-      }
-
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-
-    const getVideoSource = (): string | null => {
-      const theme = getCurrentTheme();
-
-      if (theme === 'light' && videoDesktopLight) return videoDesktopLight;
-
-      return videoDesktop;
-    };
-
-    const getPosterSource = (): string | null => {
-      const theme = getCurrentTheme();
-
-      if (theme === 'light' && posterLight) {
-        return posterLight;
-      }
-
-      return posterDark;
-    };
-
-    const updatePoster = () => {
-      const newPosterSrc = getPosterSource();
-      if (newPosterSrc && posterImg) {
-        posterImg.src = newPosterSrc;
-      }
-    };
-
-    const handleThemeChange = () => {
-      const isNowMobile = window.innerWidth < breakpointMd;
-
-      updatePoster();
-
-      if (isNowMobile) return;
-
-      const currentSrc = video.querySelector('source')?.src;
-      const targetSrc = getVideoSource();
-
-      if (currentSrc && targetSrc && !currentSrc.endsWith(targetSrc)) {
+    const initSources = () => {
+      videos.forEach((video) => {
         const source = video.querySelector('source');
-        if (source) {
-          source.src = targetSrc;
-          video.load();
-          video.play().catch(() => {});
+        if (source && !source.getAttribute('src')) {
+          const src = video.getAttribute('data-src');
+          if (src) {
+            source.src = src;
+            video.load();
+          }
         }
-      }
+      });
     };
-
-    const themeObserver = new MutationObserver(handleThemeChange);
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme'],
-    });
-
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    darkModeMediaQuery.addEventListener('change', handleThemeChange);
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
-      updatePoster();
-      video.pause();
-      video.removeAttribute('autoplay');
+      primaryVideo.pause();
+      primaryVideo.removeAttribute('autoplay');
       controlButton.style.display = 'none';
       return;
     }
 
-    const isMobile = window.innerWidth < breakpointMd;
+    const isMobile = () => window.innerWidth < breakpointMd;
 
-    updatePoster();
+    const disableVideo = () => {
+      pauseAll();
+      videos.forEach((v) => {
+        v.removeAttribute('autoplay');
+        v.removeAttribute('data-loaded');
+      });
+    };
 
-    if (isMobile) {
-      video.pause();
-      video.removeAttribute('autoplay');
-      controlButton.style.display = 'none';
-      // Don't load video source to save bandwidth
+    if (isMobile()) {
+      disableVideo();
+      // Don't load video sources to save bandwidth
       return;
     }
 
-    const initialSource = getVideoSource();
-    if (initialSource) {
-      const source = video.querySelector('source');
-      if (source) {
-        source.src = initialSource;
-        video.load();
-      }
-    }
+    initSources();
 
-    video.addEventListener('canplay', () => video.setAttribute('data-loaded', 'true'), {
-      once: true,
+    videos.forEach((video) => {
+      video.addEventListener('canplay', () => video.setAttribute('data-loaded', 'true'), {
+        once: true,
+      });
     });
 
-    video.addEventListener(
+    primaryVideo.addEventListener(
       'error',
       () => {
         controlButton.style.display = 'none';
@@ -244,21 +209,21 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
       { once: true }
     );
 
-    video.addEventListener('play', () => {
+    primaryVideo.addEventListener('play', () => {
       controlButton.setAttribute('data-state', 'playing');
       controlButton.setAttribute('aria-label', labelPause);
     });
 
-    video.addEventListener('pause', () => {
+    primaryVideo.addEventListener('pause', () => {
       controlButton.setAttribute('data-state', 'paused');
       controlButton.setAttribute('aria-label', labelPlay);
     });
 
     controlButton.addEventListener('click', () => {
-      if (video.paused) {
-        video.play().catch(() => {});
+      if (primaryVideo.paused) {
+        playAll();
       } else {
-        video.pause();
+        pauseAll();
       }
     });
 
@@ -266,21 +231,21 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            video.play().catch(() => {});
+            playAll();
             observer.disconnect();
           }
         });
       },
-      { rootMargin: '5rem' }
+      { rootMargin: '80px' }
     );
 
-    observer.observe(video);
+    observer.observe(primaryVideo);
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        video.pause();
+        pauseAll();
       } else {
-        video.play().catch(() => {});
+        playAll();
       }
     });
 
@@ -288,28 +253,11 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        const isNowMobile = window.innerWidth < breakpointMd;
-
-        updatePoster();
-
-        if (isNowMobile) {
-          video.pause();
-          video.removeAttribute('autoplay');
-          video.removeAttribute('data-loaded'); // hides video, making poster visible
-          controlButton.style.display = 'none';
+        if (isMobile()) {
+          disableVideo();
         } else {
-          controlButton.style.display = 'flex';
-          const currentSrc = video.querySelector('source')?.src;
-          const targetSrc = getVideoSource();
-
-          if (currentSrc && targetSrc && !currentSrc.endsWith(targetSrc)) {
-            const source = video.querySelector('source');
-            if (source) {
-              source.src = targetSrc;
-              video.load();
-              video.play().catch(() => {});
-            }
-          }
+          initSources();
+          playAll();
         }
       }, 250);
     });
