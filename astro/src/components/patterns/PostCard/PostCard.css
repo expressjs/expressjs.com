@@ -2,14 +2,18 @@
   .post-card {
     display: flex;
     flex-direction: column;
-  }
-
-  .post-card--lg {
+    margin: var(--space-6) 0;
+    border: var(--border-width-1) solid var(--color-border-secondary);
+    border-radius: var(--radius-base);
     gap: var(--space-4);
   }
 
+  .post-card--lg {
+    padding: var(--space-10);
+  }
+
   .post-card--md {
-    gap: var(--space-3);
+    padding: var(--space-3);
   }
 
   .post-card__link {
