@@ -17,7 +17,17 @@ const resourcesCollection = defineCollection({
   }),
 });
 
+const npmCollection = defineCollection({
+  loader: async () => {
+    const res = await fetch('https://registry.npmjs.org/express/latest');
+    const { version } = await res.json();
+    return [{ id: 'express', version }];
+  },
+  schema: z.object({ version: z.string() }),
+});
+
 export const collections = {
   docs: docsCollection,
   resources: resourcesCollection,
+  npm: npmCollection,
 };

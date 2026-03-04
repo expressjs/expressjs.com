@@ -4,12 +4,12 @@
 
 @layer primitives {
   .container {
-    width: 90%;
+    width: 85%;
     max-width: 1440px;
     margin-inline: auto;
 
     @media (--lg-up) {
-      width: 95%;
+      width: 90%;
     }
   }
 }

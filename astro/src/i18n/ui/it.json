@@ -71,5 +71,9 @@
   "404.description": "La pagina che stai cercando non è stata trovata.",
   "404.heading": "Pagina non trovata",
   "404.message": "La pagina che stai cercando non esiste o è stata spostata.",
-  "404.goHome": "Vai alla home"
+  "404.goHome": "Vai alla home",
+  "hero.tagline": "Framework web veloce, non prescrittivo e minimalista per Node.js",
+  "hero.getStarted": "Inizia",
+  "hero.videoPause": "Metti in pausa il video in background",
+  "hero.videoPlay": "Riproduci il video in background"
 }

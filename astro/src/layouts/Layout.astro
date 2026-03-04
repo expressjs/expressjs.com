@@ -24,19 +24,29 @@ const lang = getLangFromUrl(Astro.url);
   <head>
     <script is:inline>
       (function () {
-        const theme = (() => {
-          if (typeof localStorage !== 'undefined') {
-            const storedTheme = localStorage.getItem('theme');
-            if (storedTheme === 'dark' || storedTheme === 'light') {
-              return storedTheme;
-            }
-          }
-          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
-          }
-          return 'light';
-        })();
+        // Theme
+        const storedTheme = localStorage.getItem('theme');
+        const theme =
+          storedTheme === 'dark' || storedTheme === 'light'
+            ? storedTheme
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
         document.documentElement.setAttribute('data-theme', theme);
+
+        // Dismissed banners
+        const styles = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith('banner-dismissed-') && localStorage.getItem(key) === 'true') {
+            styles.push('#banner-' + key.replace('banner-dismissed-', '') + '{display:none}');
+          }
+        }
+        if (styles.length) {
+          const el = document.createElement('style');
+          el.textContent = styles.join('');
+          document.head.appendChild(el);
+        }
       })();
     </script>
 

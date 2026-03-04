@@ -21,3 +21,6 @@
 @import './base/_fonts.css' layer(base);
 @import './base/_global.css' layer(base);
 @import './utilities/_utilities.css' layer(base);
+
+/* Import expressive-code customizations OUTSIDE layers for highest priority */
+@import './base/_expressive-code.css';
