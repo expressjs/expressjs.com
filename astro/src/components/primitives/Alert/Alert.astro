@@ -1,0 +1,93 @@
+---
+/**
+ * Alert Primitive Component
+ *
+ * Contextual callout block with an icon, title, and description.
+ * Three severity levels map to distinct color schemes and icons.
+ *
+ * @example
+ * <Alert type="info" title="Note">
+ *   Useful background information for the reader.
+ * </Alert>
+ *
+ * <Alert type="alert" title="Caution">
+ *   Something that may cause unexpected behaviour if ignored.
+ * </Alert>
+ *
+ * <Alert type="warning" title="Warning">
+ *   A risk of data loss or breaking change.
+ * </Alert>
+ */
+
+import './Alert.css';
+import type { HTMLAttributes } from 'astro/types';
+import type { AlertProps } from './types';
+
+type Props = AlertProps & HTMLAttributes<'div'>;
+
+const { type = 'info', title, class: className, ...rest } = Astro.props;
+
+const defaultTitles: Record<string, string> = {
+  info: 'Note',
+  alert: 'Caution',
+  warning: 'Warning',
+};
+
+const resolvedTitle = title ?? defaultTitles[type];
+---
+
+<div class:list={['alert', `alert--${type}`, className]} role="note" {...rest}>
+  <p class="alert__title">
+    {
+      type === 'info' && (
+        <svg
+          class="alert__icon"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1ZM8 5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 5Zm0 7.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      )
+    }
+    {
+      type === 'alert' && (
+        <svg
+          class="alert__icon"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575L6.457 1.047ZM8 5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 5Zm0 7.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      )
+    }
+    {
+      type === 'warning' && (
+        <svg
+          class="alert__icon"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+        >
+          <path d="M2.22 2.22a.75.75 0 0 1 1.06 0L8 6.94l4.72-4.72a.75.75 0 1 1 1.06 1.06L9.06 8l4.72 4.72a.75.75 0 0 1-1.06 1.06L8 9.06l-4.72 4.72a.75.75 0 0 1-1.06-1.06L6.94 8 2.22 3.28a.75.75 0 0 1 0-1.06Z" />
+        </svg>
+      )
+    }
+    {resolvedTitle}
+  </p>
+  <div class="alert__description">
+    <slot />
+  </div>
+</div>
