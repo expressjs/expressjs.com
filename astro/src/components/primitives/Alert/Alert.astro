@@ -55,7 +55,7 @@ const resolvedTitle = title ?? defaultTitles[type];
         <Icon name="fluent:warning-16-regular" class="alert__icon" size="18" aria-hidden="true" />
       )
     }
-    <Body as="h3" vMargin={false}>{resolvedTitle}</Body>
+    <Body as="h3" vMargin={false} weight="bold">{resolvedTitle}</Body>
   </Flex>
   <div class="alert__description">
     <slot />
