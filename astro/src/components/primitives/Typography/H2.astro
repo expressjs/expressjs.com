@@ -17,6 +17,7 @@ interface Props extends HTMLAttributes<'h2'> {
   as?: HTMLTag;
   color?: TypographyColor;
   weight?: TypographyWeight;
+  vMargin?: boolean;
 }
 
 const { as = 'h2', ...rest } = Astro.props;
