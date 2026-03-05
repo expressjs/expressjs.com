@@ -8,7 +8,7 @@
  * @example — Single author
  * <PostCard
  *   href="/blog/secure-express-app"
- *   label="Security"
+ *   labels={["Security"]}
  *   title="How to secure your Express app"
  *   coverSrc="/images/cover.jpg"
  *   authors={[{ src: "/images/author.jpg", name: "John Doe" }]}
@@ -18,7 +18,7 @@
  * @example — Multiple authors
  * <PostCard
  *   href="/blog/express-5"
- *   label="Release"
+ *   labels={["Release"]}
  *   title="Express 5.0 is here"
  *   coverSrc="/images/cover.jpg"
  *   authors={[
@@ -40,7 +40,7 @@ interface Author {
 
 interface Props extends HTMLAttributes<'article'> {
   href: string;
-  label: string;
+  labels: string[];
   title: string;
   coverSrc?: string;
   coverAlt?: string;
@@ -50,7 +50,7 @@ interface Props extends HTMLAttributes<'article'> {
 
 const {
   href,
-  label,
+  labels,
   title,
   coverSrc,
   coverAlt = '',
@@ -65,7 +65,9 @@ const {
   <a href={href} class="post-card__link">
     <div>
       {coverSrc && <img class="post-card__cover" src={coverSrc} alt={coverAlt || ''} />}
-      <Tag class="post-card__label">{label}</Tag>
+      <div class="post-card__labels">
+        {labels.map((label) => <Tag>{label}</Tag>)}
+      </div>
       <H3 as="h2" vMargin={false} class="post-card__title">
         {title}
       </H3>

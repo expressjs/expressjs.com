@@ -1,15 +1,17 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import { languages } from '@i18n/locales';
-import { Container, Grid, Col } from '@components/primitives';
-import { PostCard, Pagination, PageHead } from '@components/patterns';
+import { Container, Grid, Col, Tabs, Flex, Button, Body } from '@components/primitives';
+import type { TabItem } from '@components/primitives';
+import { PostCard, PageHead } from '@components/patterns';
 import { getCollection } from 'astro:content';
-import type { GetStaticPathsOptions } from 'astro';
 
-export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+const PAGE_SIZE = 6;
+
+export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
 
-  return Object.keys(languages).flatMap((lang) => {
+  return Object.keys(languages).map((lang) => {
     const langPosts = allPosts
       .filter((post) => post.id.startsWith(`${lang}/`))
       .sort((a, b) => {
@@ -18,11 +20,25 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
         return bFile.localeCompare(aFile);
       });
 
-    return paginate(langPosts, { params: { lang }, pageSize: 6 });
+    const allTags = [
+      ...new Set(
+        langPosts.flatMap((p) =>
+          (p.data.tags ?? '')
+            .split(' ')
+            .map((t: string) => t.trim())
+            .filter(Boolean)
+        )
+      ),
+    ];
+
+    return {
+      params: { lang, page: undefined },
+      props: { posts: langPosts, allTags },
+    };
   });
 }
 
-const { page } = Astro.props;
+const { posts, allTags } = Astro.props;
 const { lang } = Astro.params;
 
 function getDate(id: string) {
@@ -35,10 +51,24 @@ function getDate(id: string) {
   });
 }
 
-function getLabel(tags?: string) {
-  const first = tags?.split(' ')[0] ?? '';
-  return first.charAt(0).toUpperCase() + first.slice(1);
+function formatTagLabel(tag: string) {
+  const spaced = tag.replace(/-/g, ' ');
+  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
 }
+
+function getLabels(tags?: string) {
+  return (tags ?? '').split(' ').filter(Boolean).map(formatTagLabel);
+}
+
+const filterTabs: TabItem[] = [
+  { label: 'All', value: 'all' },
+  ...(allTags as string[]).map((tag) => ({
+    label: formatTagLabel(tag),
+    value: tag,
+  })),
+];
+
+const totalPages = Math.ceil(posts.length / PAGE_SIZE);
 ---
 
 <Layout title="Express Blog">
@@ -47,18 +77,25 @@ function getLabel(tags?: string) {
       title="Blog post"
       description="Stay tuned for details on new releases, enhancements, and everything you need to know to make the most of your Express applications. Let's dive into what's new!"
     />
+    <Tabs tabs={filterTabs} defaultValue="all" data-posts-filter />
     <Grid gap="4" align="stretch">
       {
-        page.data.map((post) => {
+        posts.map((post, i) => {
           const authors = (post.data.authors ?? []).map((a) => ({
             src: a.github ? `https://github.com/${a.github}.png` : '',
             name: a.name ?? '',
           }));
           return (
-            <Col xs={12} md={4} lg={4}>
+            <Col
+              xs={12}
+              md={4}
+              lg={4}
+              data-post-tags={post.data.tags ?? ''}
+              style={i >= PAGE_SIZE ? 'display:none' : ''}
+            >
               <PostCard
                 href={`/${lang}/blog/${post.id.split('/').pop()}`}
-                label={getLabel(post.data.tags)}
+                labels={getLabels(post.data.tags)}
                 title={post.data.title}
                 coverSrc="/posts/sample-cover.png"
                 authors={authors}
@@ -69,11 +106,92 @@ function getLabel(tags?: string) {
         })
       }
     </Grid>
-    <Pagination
-      prevUrl={page.url.prev}
-      nextUrl={page.url.next}
-      currentPage={page.currentPage}
-      lastPage={page.lastPage}
-    />
+    {
+      totalPages > 1 && (
+        <Flex justify="between" align="center" gap="4" class="pagination" data-pagination>
+          <Button variant="secondary" size="md" data-pagination-prev disabled>
+            Previous
+          </Button>
+          <Body vMargin={false} data-pagination-label>
+            Page 1 of {totalPages}
+          </Body>
+          <Button variant="secondary" size="md" data-pagination-next>
+            Next
+          </Button>
+        </Flex>
+      )
+    }
   </Container>
 </Layout>
+
+<script define:vars={{ PAGE_SIZE }}>
+  function initBlogFilter() {
+    const filter = document.querySelector('[data-posts-filter]');
+    const allPosts = Array.from(document.querySelectorAll('[data-post-tags]'));
+    const paginationEl = document.querySelector('[data-pagination]');
+    const prevBtn = document.querySelector('[data-pagination-prev]');
+    const nextBtn = document.querySelector('[data-pagination-next]');
+    const pageLabel = document.querySelector('[data-pagination-label]');
+
+    if (!filter || !allPosts.length) return;
+
+    let currentTag = 'all';
+    let currentPage = 1;
+
+    function getFiltered() {
+      if (currentTag === 'all') return allPosts;
+      return allPosts.filter((el) =>
+        el.dataset.postTags?.split(' ').filter(Boolean).includes(currentTag)
+      );
+    }
+
+    function render() {
+      const filtered = getFiltered();
+      const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const end = start + PAGE_SIZE;
+
+      allPosts.forEach((el) => {
+        const idx = filtered.indexOf(el);
+        el.style.display = idx >= start && idx < end ? '' : 'none';
+      });
+
+      if (paginationEl) {
+        paginationEl.style.display = totalPages > 1 ? '' : 'none';
+      }
+      if (pageLabel) {
+        pageLabel.textContent = `Page ${currentPage} of ${totalPages}`;
+      }
+      if (prevBtn) {
+        prevBtn.disabled = currentPage === 1;
+      }
+      if (nextBtn) {
+        nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+      }
+    }
+
+    filter.addEventListener('tabs-change', (e) => {
+      currentTag = e.detail.value;
+      currentPage = 1;
+      render();
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        render();
+      }
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      const totalPages = Math.ceil(getFiltered().length / PAGE_SIZE);
+      if (currentPage < totalPages) {
+        currentPage++;
+        render();
+      }
+    });
+  }
+
+  initBlogFilter();
+  document.addEventListener('astro:page-load', initBlogFilter);
+</script>

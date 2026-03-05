@@ -45,14 +45,12 @@ interface Props extends HTMLAttributes<'div'> {
 
 const { authors, caption, size = 'md', class: className, ...rest } = Astro.props;
 
-const displayName = authors.map((a) => a.name).join(', ');
+const displayName = authors?.map((a) => a.name).join(', ') ?? '';
 ---
 
 <Flex align="center" gap="2" class:list={[`avatar--${size}`, className]} {...rest}>
   <div class="avatar__images">
-    {authors.map((a) => (
-      <img class="avatar__image" src={a.src} alt={a.alt ?? a.name} />
-    ))}
+    {authors?.map((a) => <img class="avatar__image" src={a.src} alt={a.alt ?? a.name} />)}
   </div>
   <div class="avatar__content">
     <BodyMd as="span" weight="medium" vMargin={false}>{displayName}</BodyMd>

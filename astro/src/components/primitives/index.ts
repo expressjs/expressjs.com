@@ -24,3 +24,7 @@ export { Avatar } from './Avatar';
 
 // Tag
 export { Tag } from './Tag';
+
+// Tabs
+export { Tabs } from './Tabs';
+export type { TabItem } from './Tabs';
