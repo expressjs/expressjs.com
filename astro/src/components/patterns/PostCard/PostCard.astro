@@ -31,7 +31,7 @@
  */
 import './PostCard.css';
 import type { HTMLAttributes } from 'astro/types';
-import { H2, H3, BodySm, Avatar } from '@components/primitives';
+import { H3, Avatar, Tag } from '@components/primitives';
 
 interface Props extends HTMLAttributes<'article'> {
   href: string;
@@ -43,7 +43,6 @@ interface Props extends HTMLAttributes<'article'> {
   avatarAlt?: string;
   avatarName: string;
   avatarCaption?: string;
-  size?: 'md' | 'lg';
 }
 
 const {
@@ -56,43 +55,26 @@ const {
   avatarAlt = '',
   avatarName,
   avatarCaption,
-  size = 'lg',
   class: className,
   ...rest
 } = Astro.props;
 ---
 
-<article class:list={['post-card', `post-card--${size}`, className]} {...rest}>
-  {
-    size === 'lg' && coverSrc && (
-      <div class="post-card__cover-bg" aria-hidden="true">
-        <img class="post-card__cover" src={coverSrc} alt={coverAlt} />
-        <div class="post-card__cover-overlay" />
-      </div>
-    )
-  }
+<article class:list={['post-card', className]} {...rest}>
   <a href={href} class="post-card__link">
     <div>
-      {size === 'md' && coverSrc && <img class="post-card__cover" src={coverSrc} alt={coverAlt} />}
-      <BodySm as="span" color="secondary" vMargin={false} class="post-card__label">{label}</BodySm>
-      {
-        size === 'lg' ? (
-          <H2 vMargin={false} class="post-card__title">
-            {title}
-          </H2>
-        ) : (
-          <H3 vMargin={false} class="post-card__title">
-            {title}
-          </H3>
-        )
-      }
+      {coverSrc && <img class="post-card__cover" src={coverSrc} alt={coverAlt || ''} />}
+      <Tag class="post-card__label">{label}</Tag>
+      <H3 as="h2" vMargin={false} class="post-card__title">
+        {title}
+      </H3>
     </div>
     <Avatar
       src={avatarSrc}
       alt={avatarAlt}
       name={avatarName}
       caption={avatarCaption}
-      size={size === 'lg' ? 'md' : 'sm'}
+      size="md"
       class="post-card__avatar"
     />
   </a>

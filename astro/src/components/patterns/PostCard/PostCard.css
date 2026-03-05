@@ -6,6 +6,7 @@
     border-radius: var(--radius-base);
     gap: var(--space-4);
     overflow: hidden;
+    padding: var(--space-4);
     min-height: var(--size-88);
     height: 100%;
 
@@ -14,13 +15,9 @@
     }
   }
 
-  .post-card--lg {
-    padding: var(--space-10);
-    position: relative;
-  }
-
-  .post-card--md {
-    padding: var(--space-3);
+  .post-card__label {
+    margin-top: 0;
+    margin-bottom: var(--space-4);
   }
 
   .post-card__link {
@@ -35,38 +32,9 @@
 
   .post-card__cover {
     margin-bottom: var(--space-3);
-  }
-
-  /* Cover image — md: first content, 160px tall, full card width */
-  .post-card--md .post-card__cover {
     display: block;
-    height: 160px;
+    height: var(--size-40);
     width: calc(100% + 2 * var(--space-3));
     object-fit: cover;
-  }
-
-  /* Cover image — lg: full-card background with blur + gradient overlay */
-  .post-card__cover-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .post-card--lg .post-card__cover {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .post-card__cover-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.75));
-    backdrop-filter: blur(21px);
-  }
-
-  .post-card--lg .post-card__link {
-    position: relative;
-    z-index: 1;
   }
 }

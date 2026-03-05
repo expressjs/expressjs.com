@@ -21,3 +21,6 @@ export { Card } from './Card';
 
 // Avatar
 export { Avatar } from './Avatar';
+
+// Tag
+export { Tag } from './Tag';
