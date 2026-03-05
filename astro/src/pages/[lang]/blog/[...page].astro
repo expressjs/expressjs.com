@@ -50,17 +50,18 @@ function getLabel(tags?: string) {
     <Grid gap="4" align="stretch">
       {
         page.data.map((post) => {
-          const author = post.data.authors?.[0];
+          const authors = (post.data.authors ?? []).map((a) => ({
+            src: a.github ? `https://github.com/${a.github}.png` : '',
+            name: a.name ?? '',
+          }));
           return (
             <Col xs={12} md={4} lg={4}>
               <PostCard
-                size="md"
                 href={`/${lang}/blog/${post.id.split('/').pop()}`}
                 label={getLabel(post.data.tags)}
                 title={post.data.title}
                 coverSrc="/posts/sample-cover.png"
-                avatarSrc={author?.github ? `https://github.com/${author.github}.png` : ''}
-                avatarName={author?.name ?? ''}
+                authors={authors}
                 avatarCaption={getDate(post.id)}
               />
             </Col>

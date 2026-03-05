@@ -2,30 +2,29 @@
 /**
  * PostCard Pattern Component
  *
- * An article card with a label, title, and author avatar.
+ * An article card with a label, title, and author avatar(s).
  * Available in two sizes: medium and large.
  *
- * @example — Large (default)
+ * @example — Single author
  * <PostCard
- *   size="lg"
  *   href="/blog/secure-express-app"
  *   label="Security"
  *   title="How to secure your Express app"
  *   coverSrc="/images/cover.jpg"
- *   avatarSrc="/images/author.jpg"
- *   avatarName="John Doe"
+ *   authors={[{ src: "/images/author.jpg", name: "John Doe" }]}
  *   avatarCaption="Jun 05, 2025"
  * />
  *
- * @example — Medium
+ * @example — Multiple authors
  * <PostCard
- *   size="md"
  *   href="/blog/express-5"
  *   label="Release"
  *   title="Express 5.0 is here"
  *   coverSrc="/images/cover.jpg"
- *   avatarSrc="/images/author.jpg"
- *   avatarName="Jane Smith"
+ *   authors={[
+ *     { src: "/images/author1.jpg", name: "Jane Smith" },
+ *     { src: "/images/author2.jpg", name: "John Doe" },
+ *   ]}
  *   avatarCaption="Mar 04, 2026"
  * />
  */
@@ -33,15 +32,19 @@ import './PostCard.css';
 import type { HTMLAttributes } from 'astro/types';
 import { H3, Avatar, Tag } from '@components/primitives';
 
+interface Author {
+  src: string;
+  alt?: string;
+  name: string;
+}
+
 interface Props extends HTMLAttributes<'article'> {
   href: string;
   label: string;
   title: string;
   coverSrc?: string;
   coverAlt?: string;
-  avatarSrc: string;
-  avatarAlt?: string;
-  avatarName: string;
+  authors: Author[];
   avatarCaption?: string;
 }
 
@@ -51,9 +54,7 @@ const {
   title,
   coverSrc,
   coverAlt = '',
-  avatarSrc,
-  avatarAlt = '',
-  avatarName,
+  authors,
   avatarCaption,
   class: className,
   ...rest
@@ -70,9 +71,7 @@ const {
       </H3>
     </div>
     <Avatar
-      src={avatarSrc}
-      alt={avatarAlt}
-      name={avatarName}
+      authors={authors}
       caption={avatarCaption}
       size="md"
       class="post-card__avatar"

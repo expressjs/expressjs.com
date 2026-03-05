@@ -1,15 +1,19 @@
 @layer primitives {
-  .avatar {
+  .avatar__images {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    flex-shrink: 0;
   }
 
   .avatar__image {
     border-radius: var(--radius-full);
-    border: var(--border-width-1) solid var(--color-border-primary);
+    border: var(--border-width-2) solid var(--color-bg-primary);
     object-fit: cover;
     flex-shrink: 0;
+  }
+
+  .avatar__image + .avatar__image {
+    margin-left: calc(-1 * var(--space-2));
   }
 
   .avatar--md .avatar__image {
@@ -18,8 +22,8 @@
   }
 
   .avatar--sm .avatar__image {
-    width: var(--size-8);
-    height: var(--size-8);
+    width: var(--size-6);
+    height: var(--size-6);
   }
 
   .avatar__content {

@@ -2,33 +2,60 @@
 /**
  * Avatar Primitive Component
  *
- * A rounded avatar image with a name and optional caption displayed to the right.
+ * A rounded avatar image (or stacked images for multiple authors)
+ * with a name and optional caption displayed to the right.
  *
- * @example
- * <Avatar src="/images/author.jpg" name="John Doe" caption="Jun 05, 2025" />
+ * @example — Single author
+ * <Avatar
+ *   authors={[{ src: "/images/author.jpg", name: "John Doe" }]}
+ *   caption="Jun 05, 2025"
+ * />
+ *
+ * @example — Multiple authors
+ * <Avatar
+ *   authors={[
+ *     { src: "/images/a.jpg", name: "Alex Pit" },
+ *     { src: "/images/b.jpg", name: "Tom Cruise" },
+ *   ]}
+ *   caption="Mar 04, 2026"
+ * />
  *
  * @example — Small size
- * <Avatar src="/images/author.jpg" name="Jane Smith" caption="Mar 04, 2026" size="sm" />
+ * <Avatar
+ *   authors={[{ src: "/images/author.jpg", name: "Jane Smith" }]}
+ *   caption="Mar 04, 2026"
+ *   size="sm"
+ * />
  */
 import './Avatar.css';
 import type { HTMLAttributes } from 'astro/types';
 import { BodyMd, BodySm, Flex } from '@components/primitives';
 
-interface Props extends HTMLAttributes<'div'> {
+interface Author {
   src: string;
   alt?: string;
   name: string;
+}
+
+interface Props extends HTMLAttributes<'div'> {
+  authors: Author[];
   caption?: string;
   size?: 'sm' | 'md';
 }
 
-const { src, alt = '', name, caption, size = 'md', class: className, ...rest } = Astro.props;
+const { authors, caption, size = 'md', class: className, ...rest } = Astro.props;
+
+const displayName = authors.map((a) => a.name).join(', ');
 ---
 
 <Flex align="center" gap="2" class:list={[`avatar--${size}`, className]} {...rest}>
-  <img class="avatar__image" src={src} alt={alt} />
+  <div class="avatar__images">
+    {authors.map((a) => (
+      <img class="avatar__image" src={a.src} alt={a.alt ?? a.name} />
+    ))}
+  </div>
   <div class="avatar__content">
-    <BodyMd as="span" weight="medium" vMargin={false}>{name}</BodyMd>
+    <BodyMd as="span" weight="medium" vMargin={false}>{displayName}</BodyMd>
     {
       caption && (
         <BodySm as="span" color="secondary" vMargin={false}>
