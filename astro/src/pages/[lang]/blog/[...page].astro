@@ -1,8 +1,8 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import { languages } from '@i18n/locales';
-import { Container, Grid, Col, Flex, H1, Body, Button } from '@/components/primitives';
-import { PostCard } from '@components/patterns';
+import { Container, Grid, Col, Flex, H1, Body } from '@components/primitives';
+import { PostCard, Pagination } from '@components/patterns';
 import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
 
@@ -71,28 +71,11 @@ function getLabel(tags?: string) {
         })
       }
     </Grid>
-    {
-      (page.url.prev || page.url.next) && (
-        <Flex justify="space-between" align="center" gap="4">
-          {page.url.prev ? (
-            <Button as="a" href={page.url.prev} variant="secondary" size="md">
-              ← Previous
-            </Button>
-          ) : (
-            <span />
-          )}
-          <Body vMargin={false}>
-            Page {page.currentPage} of {page.lastPage}
-          </Body>
-          {page.url.next ? (
-            <Button as="a" href={page.url.next} variant="secondary" size="md">
-              Next →
-            </Button>
-          ) : (
-            <span />
-          )}
-        </Flex>
-      )
-    }
+    <Pagination
+      prevUrl={page.url.prev}
+      nextUrl={page.url.next}
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+    />
   </Container>
 </Layout>
