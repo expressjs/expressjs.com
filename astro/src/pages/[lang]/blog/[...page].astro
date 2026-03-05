@@ -1,8 +1,8 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import { languages } from '@i18n/locales';
-import { Container, Grid, Col, Flex, H1, Body } from '@components/primitives';
-import { PostCard, Pagination } from '@components/patterns';
+import { Container, Grid, Col } from '@components/primitives';
+import { PostCard, Pagination, PageHead } from '@components/patterns';
 import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
 
@@ -43,13 +43,10 @@ function getLabel(tags?: string) {
 
 <Layout title="Express Blog">
   <Container>
-    <Flex direction="column" gap="6" align="center">
-      <H1 vMargin={false}>Blog post</H1>
-      <Body vMargin={false}
-        >Stay tuned for details on new releases, enhancements, and everything you need to know to
-        make the most of your Express applications. Let's dive into what's new!</Body
-      >
-    </Flex>
+    <PageHead
+      title="Blog post"
+      description="Stay tuned for details on new releases, enhancements, and everything you need to know to make the most of your Express applications. Let's dive into what's new!"
+    />
     <Grid gap="4" align="stretch">
       {
         page.data.map((post) => {

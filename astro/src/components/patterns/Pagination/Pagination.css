@@ -1,5 +1,5 @@
 @layer patterns {
   .pagination {
-    margin-top: var(--space-10);
+    margin-top: var(--space-8);
   }
 }

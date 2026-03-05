@@ -6,7 +6,12 @@
     border-radius: var(--radius-base);
     gap: var(--space-4);
     overflow: hidden;
+    min-height: var(--size-88);
     height: 100%;
+
+    @media (--md-up) {
+      min-height: var(--size-100);
+    }
   }
 
   .post-card--lg {
