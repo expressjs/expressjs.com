@@ -11,6 +11,7 @@
  *   href="/blog/secure-express-app"
  *   label="Security"
  *   title="How to secure your Express app"
+ *   coverSrc="/images/cover.jpg"
  *   avatarSrc="/images/author.jpg"
  *   avatarName="John Doe"
  *   avatarCaption="Jun 05, 2025"
@@ -22,6 +23,7 @@
  *   href="/blog/express-5"
  *   label="Release"
  *   title="Express 5.0 is here"
+ *   coverSrc="/images/cover.jpg"
  *   avatarSrc="/images/author.jpg"
  *   avatarName="Jane Smith"
  *   avatarCaption="Mar 04, 2026"
@@ -35,6 +37,8 @@ interface Props extends HTMLAttributes<'article'> {
   href: string;
   label: string;
   title: string;
+  coverSrc?: string;
+  coverAlt?: string;
   avatarSrc: string;
   avatarAlt?: string;
   avatarName: string;
@@ -46,6 +50,8 @@ const {
   href,
   label,
   title,
+  coverSrc,
+  coverAlt = '',
   avatarSrc,
   avatarAlt = '',
   avatarName,
@@ -57,15 +63,30 @@ const {
 ---
 
 <article class:list={['post-card', `post-card--${size}`, className]} {...rest}>
+  {
+    size === 'lg' && coverSrc && (
+      <div class="post-card__cover-bg" aria-hidden="true">
+        <img class="post-card__cover" src={coverSrc} alt={coverAlt} />
+        <div class="post-card__cover-overlay" />
+      </div>
+    )
+  }
   <a href={href} class="post-card__link">
-    <BodySm as="span" color="secondary" vMargin={false} class="post-card__label">{label}</BodySm>
-    {
-      size === 'lg' ? (
-        <H2 vMargin={false} class="post-card__title">{title}</H2>
-      ) : (
-        <H3 vMargin={false} class="post-card__title">{title}</H3>
-      )
-    }
+    <div>
+      {size === 'md' && coverSrc && <img class="post-card__cover" src={coverSrc} alt={coverAlt} />}
+      <BodySm as="span" color="secondary" vMargin={false} class="post-card__label">{label}</BodySm>
+      {
+        size === 'lg' ? (
+          <H2 vMargin={false} class="post-card__title">
+            {title}
+          </H2>
+        ) : (
+          <H3 vMargin={false} class="post-card__title">
+            {title}
+          </H3>
+        )
+      }
+    </div>
     <Avatar
       src={avatarSrc}
       alt={avatarAlt}

@@ -7,18 +7,19 @@
 
   .avatar__image {
     border-radius: var(--radius-full);
+    border: var(--border-width-1) solid var(--color-border-primary);
     object-fit: cover;
     flex-shrink: 0;
   }
 
   .avatar--md .avatar__image {
-    width: 32px;
-    height: 32px;
+    width: var(--size-8);
+    height: var(--size-8);
   }
 
   .avatar--sm .avatar__image {
-    width: 24px;
-    height: 24px;
+    width: var(--size-8);
+    height: var(--size-8);
   }
 
   .avatar__content {

@@ -2,14 +2,16 @@
   .post-card {
     display: flex;
     flex-direction: column;
-    margin: var(--space-6) 0;
     border: var(--border-width-1) solid var(--color-border-secondary);
     border-radius: var(--radius-base);
     gap: var(--space-4);
+    overflow: hidden;
+    height: 100%;
   }
 
   .post-card--lg {
     padding: var(--space-10);
+    position: relative;
   }
 
   .post-card--md {
@@ -19,8 +21,47 @@
   .post-card__link {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: inherit;
     color: inherit;
     text-decoration: none;
+    height: 100%;
+  }
+
+  .post-card__cover {
+    margin-bottom: var(--space-3);
+  }
+
+  /* Cover image — md: first content, 160px tall, full card width */
+  .post-card--md .post-card__cover {
+    display: block;
+    height: 160px;
+    width: calc(100% + 2 * var(--space-3));
+    object-fit: cover;
+  }
+
+  /* Cover image — lg: full-card background with blur + gradient overlay */
+  .post-card__cover-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .post-card--lg .post-card__cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .post-card__cover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.75));
+    backdrop-filter: blur(21px);
+  }
+
+  .post-card--lg .post-card__link {
+    position: relative;
+    z-index: 1;
   }
 }

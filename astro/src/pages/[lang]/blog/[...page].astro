@@ -1,0 +1,98 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { languages } from '@i18n/locales';
+import { Container, Grid, Col, Flex, H1, Body, Button } from '@/components/primitives';
+import { PostCard } from '@components/patterns';
+import { getCollection } from 'astro:content';
+import type { GetStaticPathsOptions } from 'astro';
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const allPosts = await getCollection('blog');
+
+  return Object.keys(languages).flatMap((lang) => {
+    const langPosts = allPosts
+      .filter((post) => post.id.startsWith(`${lang}/`))
+      .sort((a, b) => {
+        const aFile = a.id.split('/').pop() ?? '';
+        const bFile = b.id.split('/').pop() ?? '';
+        return bFile.localeCompare(aFile);
+      });
+
+    return paginate(langPosts, { params: { lang }, pageSize: 6 });
+  });
+}
+
+const { page } = Astro.props;
+const { lang } = Astro.params;
+
+function getDate(id: string) {
+  const filename = id.split('/').pop() ?? id;
+  const dateStr = filename.substring(0, 10);
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
+
+function getLabel(tags?: string) {
+  const first = tags?.split(' ')[0] ?? '';
+  return first.charAt(0).toUpperCase() + first.slice(1);
+}
+---
+
+<Layout title="Express Blog">
+  <Container>
+    <Flex direction="column" gap="6" align="center">
+      <H1 vMargin={false}>Blog post</H1>
+      <Body vMargin={false}
+        >Stay tuned for details on new releases, enhancements, and everything you need to know to
+        make the most of your Express applications. Let's dive into what's new!</Body
+      >
+    </Flex>
+    <Grid gap="4" align="stretch">
+      {
+        page.data.map((post) => {
+          const author = post.data.authors?.[0];
+          return (
+            <Col xs={12} md={4} lg={4}>
+              <PostCard
+                size="md"
+                href={`/${lang}/blog/${post.id.split('/').pop()}`}
+                label={getLabel(post.data.tags)}
+                title={post.data.title}
+                coverSrc="/posts/sample-cover.png"
+                avatarSrc={author?.github ? `https://github.com/${author.github}.png` : ''}
+                avatarName={author?.name ?? ''}
+                avatarCaption={getDate(post.id)}
+              />
+            </Col>
+          );
+        })
+      }
+    </Grid>
+    {
+      (page.url.prev || page.url.next) && (
+        <Flex justify="space-between" align="center" gap="4">
+          {page.url.prev ? (
+            <Button as="a" href={page.url.prev} variant="secondary" size="md">
+              ← Previous
+            </Button>
+          ) : (
+            <span />
+          )}
+          <Body vMargin={false}>
+            Page {page.currentPage} of {page.lastPage}
+          </Body>
+          {page.url.next ? (
+            <Button as="a" href={page.url.next} variant="secondary" size="md">
+              Next →
+            </Button>
+          ) : (
+            <span />
+          )}
+        </Flex>
+      )
+    }
+  </Container>
+</Layout>
