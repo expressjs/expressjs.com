@@ -2,4 +2,10 @@
   .pagination {
     margin-top: var(--space-8);
   }
+
+  .pagination a[aria-disabled='true'] {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
 }

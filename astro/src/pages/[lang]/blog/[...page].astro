@@ -1,9 +1,9 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import { languages } from '@i18n/locales';
-import { Container, Grid, Col, Tabs, Flex, Button, Body } from '@components/primitives';
+import { Container, Grid, Col, Tabs } from '@components/primitives';
 import type { TabItem } from '@components/primitives';
-import { PostCard, PageHead } from '@components/patterns';
+import { PostCard, PageHead, Pagination } from '@components/patterns';
 import { getCollection } from 'astro:content';
 
 const PAGE_SIZE = 6;
@@ -108,23 +108,19 @@ const totalPages = Math.ceil(posts.length / PAGE_SIZE);
     </Grid>
     {
       totalPages > 1 && (
-        <Flex justify="between" align="center" gap="4" class="pagination" data-pagination>
-          <Button variant="secondary" size="md" data-pagination-prev disabled>
-            Previous
-          </Button>
-          <Body vMargin={false} data-pagination-label>
-            Page 1 of {totalPages}
-          </Body>
-          <Button variant="secondary" size="md" data-pagination-next>
-            Next
-          </Button>
-        </Flex>
+        <Pagination
+          data-pagination
+          prevUrl="#"
+          nextUrl="#"
+          currentPage={1}
+          lastPage={totalPages}
+        />
       )
     }
   </Container>
 </Layout>
 
-<script define:vars={{ PAGE_SIZE }}>
+<script define:vars={{ PAGE_SIZE }} is:inline>
   function initBlogFilter() {
     const filter = document.querySelector('[data-posts-filter]');
     const allPosts = Array.from(document.querySelectorAll('[data-post-tags]'));
@@ -134,6 +130,8 @@ const totalPages = Math.ceil(posts.length / PAGE_SIZE);
     const pageLabel = document.querySelector('[data-pagination-label]');
 
     if (!filter || !allPosts.length) return;
+
+    prevBtn?.setAttribute('aria-disabled', 'true');
 
     let currentTag = 'all';
     let currentPage = 1;
@@ -163,10 +161,10 @@ const totalPages = Math.ceil(posts.length / PAGE_SIZE);
         pageLabel.textContent = `Page ${currentPage} of ${totalPages}`;
       }
       if (prevBtn) {
-        prevBtn.disabled = currentPage === 1;
+        prevBtn.setAttribute('aria-disabled', String(currentPage === 1));
       }
       if (nextBtn) {
-        nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+        nextBtn.setAttribute('aria-disabled', String(currentPage === totalPages || totalPages === 0));
       }
     }
 
@@ -176,14 +174,16 @@ const totalPages = Math.ceil(posts.length / PAGE_SIZE);
       render();
     });
 
-    prevBtn?.addEventListener('click', () => {
+    prevBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
       if (currentPage > 1) {
         currentPage--;
         render();
       }
     });
 
-    nextBtn?.addEventListener('click', () => {
+    nextBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
       const totalPages = Math.ceil(getFiltered().length / PAGE_SIZE);
       if (currentPage < totalPages) {
         currentPage++;

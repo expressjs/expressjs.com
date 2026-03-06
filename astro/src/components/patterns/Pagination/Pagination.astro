@@ -15,38 +15,39 @@
 import { Icon } from 'astro-icon/components';
 import './Pagination.css';
 import { Flex, Button, Body } from '@components/primitives';
+import type { HTMLAttributes } from 'astro/types';
 
-interface Props {
+interface Props extends HTMLAttributes<'div'> {
   prevUrl?: string;
   nextUrl?: string;
   currentPage: number;
   lastPage: number;
 }
 
-const { prevUrl, nextUrl, currentPage, lastPage } = Astro.props;
+const { prevUrl, nextUrl, currentPage, lastPage, ...rest } = Astro.props;
 ---
 
 {
   (prevUrl || nextUrl) && (
-    <Flex justify="between" align="center" gap="4" class="pagination">
+    <Flex justify="between" align="center" gap="4" class="pagination" {...rest}>
       {prevUrl ? (
-        <Button as="a" href={prevUrl} variant="secondary" size="md">
+        <Button as="a" href={prevUrl} variant="secondary" size="md" data-pagination-prev>
           <Icon name="fluent:arrow-left-20-filled" />
           Previous
         </Button>
       ) : (
-        <span />
+        <span data-pagination-prev />
       )}
-      <Body vMargin={false}>
+      <Body vMargin={false} data-pagination-label>
         Page {currentPage} of {lastPage}
       </Body>
       {nextUrl ? (
-        <Button as="a" href={nextUrl} variant="secondary" size="md">
+        <Button as="a" href={nextUrl} variant="secondary" size="md" data-pagination-next>
           Next
           <Icon name="fluent:arrow-right-20-filled" />
         </Button>
       ) : (
-        <span />
+        <span data-pagination-next />
       )}
     </Flex>
   )

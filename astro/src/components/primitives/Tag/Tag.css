@@ -9,5 +9,6 @@
     font-weight: var(--font-weight-medium);
     line-height: var(--line-height-tight);
     white-space: nowrap;
+    margin: 0;
   }
 }
