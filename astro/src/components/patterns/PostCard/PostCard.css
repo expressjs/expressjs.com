@@ -36,7 +36,7 @@
     margin-bottom: var(--space-3);
     display: block;
     height: var(--size-40);
-    width: calc(100% + 2 * var(--space-3));
+    width: 100%;
     object-fit: cover;
   }
 }

@@ -3,7 +3,6 @@
  * PostCard Pattern Component
  *
  * An article card with a label, title, and author avatar(s).
- * Available in two sizes: medium and large.
  *
  * @example — Single author
  * <PostCard
@@ -64,6 +63,7 @@ const {
 <article class:list={['post-card', className]} {...rest}>
   <a href={href} class="post-card__link">
     <div>
+      <!-- TODO: this will replaced by auto-generated OG images -->
       {coverSrc && <img class="post-card__cover" src={coverSrc} alt={coverAlt || ''} />}
       <div class="post-card__labels">
         {labels.map((label) => <Tag>{label}</Tag>)}
@@ -72,11 +72,6 @@ const {
         {title}
       </H3>
     </div>
-    <Avatar
-      authors={authors}
-      caption={avatarCaption}
-      size="md"
-      class="post-card__avatar"
-    />
+    <Avatar authors={authors} caption={avatarCaption} size="md" />
   </a>
 </article>
