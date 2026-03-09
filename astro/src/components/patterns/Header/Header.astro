@@ -34,10 +34,13 @@ const t = useTranslations(currentLang);
         <Icon name="logo-light" class="logo logo-light" />
       </a>
     </Flex>
-    <!-- TODO: These are just placeholder to show how actions look like in the header. They will be reviewed later -->
     <Flex align="center" justify="center" gap="2">
       <a href="#main-content" class="skip-link sr-only">Skip to content</a>
-      <SearchTrigger />
+      <SearchTrigger
+        placeholder={t('search.placeholder')}
+        ariaLabel={t('search.ariaLabel')}
+        client:load
+      />
       <ThemeSwitcher showLabels={false} />
       <LanguageSelect languages={languagesArray} currentLanguage={currentLang} />
     </Flex>

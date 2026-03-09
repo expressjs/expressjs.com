@@ -16,9 +16,15 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
+    "@astrojs/react": "^4.4.2",
+    "@iconify/react": "^6.0.2",
+    "@orama/core": "^1.2.19",
+    "@orama/ui": "^1.5.4",
     "astro": "^5.18.0",
     "astro-expressive-code": "^0.41.7",
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devEngines": {
     "runtime": {
@@ -37,6 +43,8 @@
     "@eslint/js": "^9.39.2",
     "@iconify-json/fluent": "^1.2.38",
     "@types/node": "^25.3.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.5.0",

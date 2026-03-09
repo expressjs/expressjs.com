@@ -1,0 +1,343 @@
+@layer patterns {
+  /* ============================================
+     Search Trigger Button (React version additions)
+     ============================================ */
+
+  .search-trigger-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+
+    span {
+      line-height: var(--line-height-snug);
+      font-size: var(--font-size-sm);
+      margin: 0;
+
+      @media (--xs-only) {
+        display: none;
+      }
+    }
+  }
+
+  /* ============================================
+     Modal Overlay
+     ============================================ */
+
+  .search-modal-overlay {
+    /* Override Orama defaults: keep fixed/full-viewport but use project colors */
+    background-color: oklch(0% 0 0 / 50%);
+
+    @media (--xs-only) {
+      margin-top: 6rem;
+    }
+  }
+
+  /* ============================================
+     Modal Inner Container
+     ============================================ */
+
+  .search-modal-inner {
+    background-color: color-mix(in oklch, var(--color-bg-primary) 90%, transparent);
+    width: 100%;
+    max-width: 48rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    backdrop-filter: blur(2px);
+
+    @media (--xs-only) {
+      max-width: 100%;
+      border-radius: 0;
+    }
+  }
+
+  /* ============================================
+     Modal Content
+     ============================================ */
+
+  .search-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* ============================================
+     Modal Header (tabs + close button)
+     ============================================ */
+
+  .search-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: var(--border-width-1) solid var(--color-border-secondary);
+    flex-shrink: 0;
+  }
+
+  .search-modal-tabs {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .search-modal-tab {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    border-radius: var(--radius-base);
+    padding: var(--space-1-5) var(--space-3);
+    cursor: pointer;
+    transition:
+      color var(--duration-150) var(--ease-in-out),
+      background-color var(--duration-150) var(--ease-in-out);
+
+    &:hover {
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-secondary);
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--color-focus-ring);
+    }
+
+    &[aria-selected='true'],
+    &[data-state='active'] {
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-secondary);
+    }
+  }
+
+  .search-modal-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size-8);
+    height: var(--size-8);
+    border-radius: var(--radius-base);
+    border: none;
+    background: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition:
+      color var(--duration-150) var(--ease-in-out),
+      background-color var(--duration-150) var(--ease-in-out);
+    flex-shrink: 0;
+
+    &:hover {
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-secondary);
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--color-focus-ring);
+    }
+  }
+
+  /* ============================================
+     Search Tab
+     ============================================ */
+
+  .search-tab-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .search-input-wrapper {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: var(--border-width-1) solid var(--color-border-secondary);
+    flex-shrink: 0;
+  }
+
+  .search-input-form {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .search-input-field {
+    width: 100%;
+    font-size: var(--font-size-md);
+    color: var(--color-text-primary);
+    background: none;
+    border: none;
+    outline: none;
+    font-family: inherit;
+
+    &::placeholder {
+      color: var(--color-text-tertiary);
+    }
+  }
+
+  .search-results-wrapper {
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    padding: var(--space-2) 0;
+  }
+
+  .search-loading,
+  .search-no-results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8) var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .search-results-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 var(--space-2);
+  }
+
+  .search-result-item {
+    border-radius: var(--radius-base);
+    overflow: hidden;
+  }
+
+  .search-result-link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-0-5);
+    padding: var(--space-2-5) var(--space-3);
+    border-radius: var(--radius-base);
+    text-decoration: none;
+    transition: background-color var(--duration-150) var(--ease-in-out);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-bg-secondary);
+      outline: none;
+    }
+  }
+
+  .search-result-section {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  .search-result-title {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* ============================================
+     Chat Tab
+     ============================================ */
+
+  .chat-tab-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .chat-interactions {
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .chat-interaction {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .chat-user-prompt {
+    align-self: flex-end;
+    background-color: var(--color-bg-inverse);
+    color: var(--color-text-inverse);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-sm);
+    max-width: 80%;
+  }
+
+  .chat-assistant-message {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .chat-input-area {
+    border-top: var(--border-width-1) solid var(--color-border-secondary);
+    padding: var(--space-3) var(--space-4);
+    flex-shrink: 0;
+  }
+
+  .chat-prompt-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-2);
+    border: var(--border-width-1) solid var(--color-border-secondary);
+    border-radius: var(--radius-input);
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--color-bg-primary);
+    transition: border-color var(--duration-150) var(--ease-in-out);
+
+    &:focus-within {
+      border-color: var(--color-border-primary);
+    }
+  }
+
+  .chat-prompt-field {
+    flex: 1;
+    resize: none;
+    border: none;
+    background: none;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+    font-family: inherit;
+    line-height: var(--line-height-normal);
+    outline: none;
+    max-height: 8rem;
+    overflow-y: auto;
+
+    &::placeholder {
+      color: var(--color-text-tertiary);
+    }
+  }
+
+  .chat-prompt-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size-8);
+    height: var(--size-8);
+    border-radius: var(--radius-base);
+    border: none;
+    background-color: var(--color-bg-inverse);
+    color: var(--color-text-inverse);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color var(--duration-150) var(--ease-in-out);
+
+    &:hover {
+      background-color: var(--color-bg-inverse-secondary);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--color-focus-ring);
+    }
+  }
+}
