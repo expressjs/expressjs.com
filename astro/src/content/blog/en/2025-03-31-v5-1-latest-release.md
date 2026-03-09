@@ -1,5 +1,5 @@
 ---
-title: "Express@5.1.0: Now the Default on npm with LTS Timeline"
+title: 'Express@5.1.0: Now the Default on npm with LTS Timeline'
 tags: news release
 authors:
   - name: Express Technical Committee
@@ -24,11 +24,11 @@ You can find our [v5 docs](https://expressjs.com/en/5x/api.html) and our [migrat
 
 ### Migration Support
 
-We know that migrating between versions can be challenging, especially when it involves significant changes in a widely used framework like Express. That's why we have worked on a solution to simplify part of the process and reduce the impact on developers.  
+We know that migrating between versions can be challenging, especially when it involves significant changes in a widely used framework like Express. That's why we have worked on a solution to simplify part of the process and reduce the impact on developers.
 
-Thanks to the incredible efforts of [Sebastian](https://github.com/bjohansebas) and [Filip](https://github.com/kjugi), we have developed a new [codemod package](https://www.npmjs.com/package/@expressjs/codemod) specifically designed to facilitate the transition from Express v4 to v5, as well as future major versions. This package automates many of the necessary code changes, minimizing manual effort and making the upgrade as smooth and efficient as possible.  
+Thanks to the incredible efforts of [Sebastian](https://github.com/bjohansebas) and [Filip](https://github.com/kjugi), we have developed a new [codemod package](https://www.npmjs.com/package/@expressjs/codemod) specifically designed to facilitate the transition from Express v4 to v5, as well as future major versions. This package automates many of the necessary code changes, minimizing manual effort and making the upgrade as smooth and efficient as possible.
 
-However, we understand that not all changes can be automated. Some breaking changes, such as the [new Path Route Matching syntax](https://expressjs.com/en/guide/migrating-5.html#path-syntax), require manual modifications by developers.  You can read more about all of the breaking changes which came with v5 in our [original release announcement](https://expressjs.com/2024/10/15/v5-release.html).
+However, we understand that not all changes can be automated. Some breaking changes, such as the [new Path Route Matching syntax](https://expressjs.com/en/guide/migrating-5.html#path-syntax), require manual modifications by developers. You can read more about all of the breaking changes which came with v5 in our [original release announcement](https://expressjs.com/2024/10/15/v5-release.html).
 
 For more details on the migration process and how to use the codemod package, check the [repository’s README](https://github.com/expressjs/codemod#readme) and the [migration guide](https://expressjs.com/en/guide/migrating-5.html).
 
@@ -69,11 +69,11 @@ enter EOL.
 
 Express major versions will go through three supported phases:
 
-  - `CURRENT`: A new major version is designated as `CURRENT` upon release. It is available but not the `latest` version
-    on npm for a minimum of 3 months.
-  - `ACTIVE`: After the minimum 3 month period and the TC agrees it is stable and secure, the `ACTIVE` version is
-    tagged `latest` on npm for a minimum of 12 months.
-  - `MAINTENANCE`: When a new major version becomes `ACTIVE`, the previous major version enters `MAINTENANCE` for 12 months.
+- `CURRENT`: A new major version is designated as `CURRENT` upon release. It is available but not the `latest` version
+  on npm for a minimum of 3 months.
+- `ACTIVE`: After the minimum 3 month period and the TC agrees it is stable and secure, the `ACTIVE` version is
+  tagged `latest` on npm for a minimum of 12 months.
+- `MAINTENANCE`: When a new major version becomes `ACTIVE`, the previous major version enters `MAINTENANCE` for 12 months.
 
 ### CURRENT
 
@@ -83,7 +83,7 @@ Express major versions will go through three supported phases:
   fixes of breaking nature within this period.
 - `CURRENT` lines will receive all types of active work including: bug fixes, security patches, new features, and
   deprecation notices.
-- Users are recommended to use  `CURRENT` lines and to upgrade as quickly as their risk profile allows
+- Users are recommended to use `CURRENT` lines and to upgrade as quickly as their risk profile allows
 
 ### ACTIVE
 
@@ -102,11 +102,11 @@ For the existing release lines, we will set the following phase dates:
 
 <div markdown="1" style="overflow-x: auto; max-width: 100%;">
 
-| Major | CURRENT | ACTIVE | MAINTENANCE | EOL |
-| ----- | ------- | ------ | ----------- | --- |
-| 4.x   |         |        | 2025-04-01 | *no sooner than 2026-10-01 |
-| 5.x   | 2024-09-11 | 2025-03-31 | **no sooner than 2026-04-01 | **no sooner than 2027-04-01 |
-| 6.x   | ***no sooner than 2026-01-01 | | | |
+| Major | CURRENT                         | ACTIVE     | MAINTENANCE                   | EOL                           |
+| ----- | ------------------------------- | ---------- | ----------------------------- | ----------------------------- |
+| 4.x   |                                 |            | 2025-04-01                    | \*no sooner than 2026-10-01   |
+| 5.x   | 2024-09-11                      | 2025-03-31 | \*\*no sooner than 2026-04-01 | \*\*no sooner than 2027-04-01 |
+| 6.x   | \*\*\*no sooner than 2026-01-01 |            |                               |                               |
 
 </div>
 
@@ -128,30 +128,30 @@ This release primarily focused on tech debt from supporting so many old Node.js 
 
 ### Express 5.1.0 Main Changes
 
-* Add support for `Uint8Array` in `res.send()`
-* Transitioned all remaining dependencies to use `^` ranges instead of locked versions
-* Add package.json funding field to highlight our OpenCollective 
-* Added support for ETag option in `res.sendFile()`
-* Added support for adding multiple links with the same rel with `res.links()`
-* Performance: Use loop for acceptParams
-* See [Changelog v5.1.0](https://github.com/expressjs/express/releases/tag/v5.1.0)
+- Add support for `Uint8Array` in `res.send()`
+- Transitioned all remaining dependencies to use `^` ranges instead of locked versions
+- Add package.json funding field to highlight our OpenCollective
+- Added support for ETag option in `res.sendFile()`
+- Added support for adding multiple links with the same rel with `res.links()`
+- Performance: Use loop for acceptParams
+- See [Changelog v5.1.0](https://github.com/expressjs/express/releases/tag/v5.1.0)
 
 ### Dependencies updated
 
 We also invested time to prepare several releases in the packages that Express depend on. Most of this packages are used by other libraries and framework as individual libraries.
 
-* [body-parser@2.2.0](https://github.com/expressjs/body-parser/releases/tag/v2.2.0)
-  * Remove legacy node.js support checks for Brotli & `AsyncLocalStorage`
-  * Remove `unpipe` & `destroy`
-* [router@2.2.0](https://github.com/pillarjs/router/releases/tag/v2.2.0)
-  * Restore `debug`. Now with the `router` scope instead of `express`.
-  * Remove legacy node.js support checks for `setImmediate`
-  * Deprecate non-native promise support
-  * Remove `after`, `safe-buffer`, `array-flatten`, `setprotoypeof`, `methods`, `utils-merge`
-* [finalhandler@2.1.0](https://github.com/pillarjs/finalhandler/releases/tag/v2.1.0)
-    * Remove legacy node.js support checks for `headersSent`, `setImmediate`, & http2 support
-    * Remove `unpipe`
-* [serve-static@2.2.0](https://github.com/expressjs/serve-static/releases/tag/v2.2.0)
+- [body-parser@2.2.0](https://github.com/expressjs/body-parser/releases/tag/v2.2.0)
+  - Remove legacy node.js support checks for Brotli & `AsyncLocalStorage`
+  - Remove `unpipe` & `destroy`
+- [router@2.2.0](https://github.com/pillarjs/router/releases/tag/v2.2.0)
+  - Restore `debug`. Now with the `router` scope instead of `express`.
+  - Remove legacy node.js support checks for `setImmediate`
+  - Deprecate non-native promise support
+  - Remove `after`, `safe-buffer`, `array-flatten`, `setprotoypeof`, `methods`, `utils-merge`
+- [finalhandler@2.1.0](https://github.com/pillarjs/finalhandler/releases/tag/v2.1.0)
+  - Remove legacy node.js support checks for `headersSent`, `setImmediate`, & http2 support
+  - Remove `unpipe`
+- [serve-static@2.2.0](https://github.com/expressjs/serve-static/releases/tag/v2.2.0)
 
 ---
 

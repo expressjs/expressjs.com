@@ -9,8 +9,7 @@ authors:
 
 The Express team has released a new patch version of [Multer](https://www.npmjs.com/package/multer) addressing a high-severity security vulnerability, and a new minor version of [on-headers](https://www.npmjs.com/package/on-headers) addressing a low-severity security vulnerability.
 
-
-{% include admonitions/warning.html 
+{% include admonitions/warning.html
 content="We recommend upgrading to the latest version of Multer and On-headers immediately to secure your applications."
 %}
 

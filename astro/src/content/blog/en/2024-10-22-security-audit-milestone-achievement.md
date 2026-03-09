@@ -1,12 +1,11 @@
 ---
-title: "Express.js Security Audit: A Milestone Achievement"
+title: 'Express.js Security Audit: A Milestone Achievement'
 tags: security audit releases
 authors:
   - name: Express Technical Committee
     github: expressjs
 description: Celebrating the successful completion of the Express.js security audit conducted by Ada Logics and facilitated by OSTIF.
 ---
-
 
 We are thrilled to announce the successful completion of a comprehensive security audit for Express.js, conducted by [Ada Logics](https://adalogics.com/) and facilitated by [OSTIF](https://ostif.org/). This extensive review of our framework and its core components marks a significant milestone in our commitment to ensuring the security and reliability of Express.js for our community.
 
@@ -50,7 +49,6 @@ This audit would not have been possible without the efforts and expertise of man
 - The OpenJS Foundation for sponsoring this important initiative.
 - Our Express.js community, who continue to support and trust us with their projects.
 - [Jordan Harband](https://github.com/ljharb) for his amazing support while we needed changes in [qs](https://www.npmjs.com/package/qs).
-
 
 Together, we’ve made Express.js stronger, more resilient, and ready for the challenges ahead. We look forward to continuing to serve our community with a focus on excellence and security.
 

@@ -1,5 +1,5 @@
 ---
-title: "A New Chapter for Express.js: Triumphs of 2024 and an ambitious 2025"
+title: 'A New Chapter for Express.js: Triumphs of 2024 and an ambitious 2025'
 tags: news rewind 2024
 authors:
   - name: Express Technical Committee
@@ -7,8 +7,7 @@ authors:
 description: Explore the transformative journey of Express.js in 2024, marked by governance improvements, the long-awaited release of Express 5.0, and heightened security measures. Look into the ambitious plans for 2025, including performance optimizations, scoped packages, and a bold roadmap for sustained growth in the Node.js ecosystem.
 ---
 
-
-As we step into the new year, it’s almost impossible to ignore the unmistakable energy coursing through the Express.js community. The past twelve months have proven both foundational and forward-looking: an era of governance overhauls, technical triumphs, and security enhancements that not only shaped 2024 but also laid the groundwork for what promises to be a transformative 2025. 
+As we step into the new year, it’s almost impossible to ignore the unmistakable energy coursing through the Express.js community. The past twelve months have proven both foundational and forward-looking: an era of governance overhauls, technical triumphs, and security enhancements that not only shaped 2024 but also laid the groundwork for what promises to be a transformative 2025.
 In this long-form recap and forecast, we’ll journey through the story of Express.js with its evolution, its hurdles, and the new heights it’s poised to reach.
 
 ---
@@ -40,7 +39,6 @@ Express.js also deepened its relationship with the Node.js community by re-integ
 Above all, 2024 will stand out for Express.js’s vigorous approach to security. In partnership with the [OpenJS Foundation](https://openjsf.org/) and [OSTIF](https://ostif.org/), the project undertook a comprehensive [security audit](https://expressjs.com/2024/10/22/security-audit-milestone-achievement.html) that yielded critical insights and propelled immediate improvements. The sense of proactive vigilance extended to the adoption of the [OSSF Scorecard](https://github.com/expressjs/discussions/issues/162), implemented at an organizational level to keep track of security metrics and maintain focus on ongoing enhancements.
 
 Throughout the year, maintainers rapidly responded to disclosed vulnerabilities such as [CVE-2024-43796](https://github.com/expressjs/express/security/advisories/GHSA-qw6h-vgh9-j6wx), [CVE-2024-45590](https://github.com/expressjs/body-parser/security/advisories/GHSA-qwcr-r2fm-qrc7), and [CVE-2024-47178](https://github.com/expressjs/basic-auth-connect/security/advisories/GHSA-7p89-p6hx-q4fw). Each instance underscored the community’s readiness to defend the framework’s integrity and safeguard its user base. In a further demonstration of long-term commitment, Express.js teamed up with [HeroDevs](https://www.herodevs.com/) to establish [Never-Ending Support (NES)](https://openjsf.org/blog/at-the-openjs-foundation-were-excited-to-announce-), offering an extended maintenance plan that reaffirms Express.js as a reliable foundation for developers now and in the years to come.
-
 
 ---
 
@@ -80,4 +78,3 @@ Through automated releases, scopes for packages, rigorous security protocols, pe
 
 Whether you’re a seasoned maintainer, an occasional contributor, or a newcomer to this thriving ecosystem, your voice matters. Join the [Express.js GitHub Discussions](https://github.com/expressjs/discussions), attend open meetings, and stay tuned for updates on [Express.js blog](https://expressjs.com/) as we finalize timetables for these initiatives. Each advancement, no matter how technical, flows from a common aspiration: to sustain Express.js as a fast, safe, and influential framework for millions of developers worldwide.
 Together, we’ll keep the spirit of 2024 alive—pushing boundaries, refining practices, and laying the path to a future where Express.js remains at the heart of modern web development.
-

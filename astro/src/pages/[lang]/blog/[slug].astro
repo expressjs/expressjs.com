@@ -33,7 +33,13 @@ const label = tags?.split(' ')[0] ?? '';
 <Layout title={title} description={description}>
   <Container>
     <article>
-      {label && <BodySm as="span" color="secondary" vMargin={false}>{label}</BodySm>}
+      {
+        label && (
+          <BodySm as="span" color="secondary" vMargin={false}>
+            {label}
+          </BodySm>
+        )
+      }
       <H1>{title}</H1>
       {
         author && (

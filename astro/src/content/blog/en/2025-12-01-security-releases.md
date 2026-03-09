@@ -9,8 +9,7 @@ authors:
 
 The Express team has released a new patch version of [body-parser](https://www.npmjs.com/package/body-parser) addressing a moderate-severity security vulnerability.
 
-
-{% include admonitions/warning.html 
+{% include admonitions/warning.html
 content="We recommend upgrading to the latest version of body-parser to secure your applications."
 %}
 

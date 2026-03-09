@@ -11,7 +11,7 @@
 import './Tag.css';
 import type { HTMLAttributes } from 'astro/types';
 
-interface Props extends HTMLAttributes<'span'> {}
+type Props = HTMLAttributes<'span'>;
 
 const { class: className, ...rest } = Astro.props;
 ---

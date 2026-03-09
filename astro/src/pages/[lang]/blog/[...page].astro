@@ -108,13 +108,7 @@ const totalPages = Math.ceil(posts.length / PAGE_SIZE);
     </Grid>
     {
       totalPages > 1 && (
-        <Pagination
-          data-pagination
-          prevUrl="#"
-          nextUrl="#"
-          currentPage={1}
-          lastPage={totalPages}
-        />
+        <Pagination data-pagination prevUrl="#" nextUrl="#" currentPage={1} lastPage={totalPages} />
       )
     }
   </Container>
@@ -164,7 +158,10 @@ const totalPages = Math.ceil(posts.length / PAGE_SIZE);
         prevBtn.setAttribute('aria-disabled', String(currentPage === 1));
       }
       if (nextBtn) {
-        nextBtn.setAttribute('aria-disabled', String(currentPage === totalPages || totalPages === 0));
+        nextBtn.setAttribute(
+          'aria-disabled',
+          String(currentPage === totalPages || totalPages === 0)
+        );
       }
     }
 

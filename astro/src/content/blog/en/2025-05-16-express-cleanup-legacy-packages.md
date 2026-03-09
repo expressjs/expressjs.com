@@ -1,5 +1,5 @@
 ---
-title: "Spring Cleaning in Express.js: Deprecations and the Path Ahead"
+title: 'Spring Cleaning in Express.js: Deprecations and the Path Ahead'
 tags: news
 authors:
   - name: Express Technical Committee
@@ -41,7 +41,7 @@ If your application depends on any of these packages, now is a great time to loo
 
 We're not stopping here. This cleanup is part of a broader effort to streamline Express.js, prepare for the future, and clarify what is and isn’t officially supported.
 
-👉 A full discussion of these changes can be found [expressjs/discussions#134](https://github.com/expressjs/discussions/issues/134).  
+👉 A full discussion of these changes can be found [expressjs/discussions#134](https://github.com/expressjs/discussions/issues/134).
 
 📢 Stay tuned—we'll continue to post updates and insights as we modernize the Express ecosystem.
 

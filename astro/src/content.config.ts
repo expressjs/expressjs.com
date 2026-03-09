@@ -28,7 +28,7 @@ const blogCollection = defineCollection({
         z.object({
           name: z.string(),
           github: z.string().optional(),
-        }),
+        })
       )
       .optional(),
   }),
