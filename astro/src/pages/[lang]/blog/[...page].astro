@@ -106,11 +106,7 @@ const totalPages = Math.ceil(posts.length / PAGE_SIZE);
         })
       }
     </Grid>
-    {
-      totalPages > 1 && (
-        <Pagination data-pagination currentPage={1} lastPage={totalPages} />
-      )
-    }
+    {totalPages > 1 && <Pagination data-pagination currentPage={1} lastPage={totalPages} />}
   </Container>
 </Layout>
 
