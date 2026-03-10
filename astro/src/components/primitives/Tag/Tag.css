@@ -4,7 +4,7 @@
     padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-md);
     background-color: var(--color-bg-mute);
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
     line-height: var(--line-height-tight);
