@@ -1,6 +1,6 @@
 ---
 title: 'Express.js Security Audit: A Milestone Achievement'
-tags: security audit releases
+tags: security announcements
 authors:
   - name: Express Technical Committee
     github: expressjs

@@ -1,6 +1,6 @@
 ---
 title: 'Spring Cleaning in Express.js: Deprecations and the Path Ahead'
-tags: news
+tags: announcements
 authors:
   - name: Express Technical Committee
     github: expressjs

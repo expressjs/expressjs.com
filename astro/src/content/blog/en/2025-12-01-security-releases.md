@@ -1,7 +1,7 @@
 ---
 title: November 2025 Security Releases
 description: Security release for body-parser has been published. We recommend that all users upgrade as soon as possible.
-tags: security vulnerabilities
+tags: security
 authors:
   - name: Ulises Gascón
     github: UlisesGascon
