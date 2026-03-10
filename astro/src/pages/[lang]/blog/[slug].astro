@@ -19,7 +19,10 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const { title, description, tags, authors } = post.data;
-const author = authors?.[0];
+const authorsList = (authors ?? []).map((a) => ({
+  src: a.github ? `https://github.com/${a.github}.png` : '',
+  name: a.name ?? '',
+}));
 const filename = post.id.split('/').pop() ?? post.id;
 const dateStr = filename.substring(0, 10);
 const date = new Date(dateStr).toLocaleDateString('en-US', {
@@ -41,16 +44,7 @@ const label = tags?.split(' ')[0] ?? '';
         )
       }
       <H1>{title}</H1>
-      {
-        author && (
-          <Avatar
-            src={author.github ? `https://github.com/${author.github}.png` : ''}
-            name={author.name}
-            caption={date}
-            size="md"
-          />
-        )
-      }
+      {authorsList.length > 0 && <Avatar authors={authorsList} caption={date} size="md" />}
       <Content />
     </article>
   </Container>
