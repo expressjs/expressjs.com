@@ -22,81 +22,78 @@ interface SearchModalProps {
 
 export default function SearchModal({ placeholder }: SearchModalProps) {
   return (
-    <Tabs.Wrapper defaultTab="search">
-      <div className="search-modal-header">
-        <Tabs.List className="search-modal-tabs">
-          <Tabs.Trigger tabId="search" className="search-modal-tab">
-            Search
-          </Tabs.Trigger>
-          <Tabs.Trigger tabId="chat" className="search-modal-tab">
-            Ask AI
-          </Tabs.Trigger>
-        </Tabs.List>
-        <Modal.Close className="search-modal-close" aria-label="Close search">
-          <Icon icon="fluent:dismiss-16-regular" width={20} height={20} />
-        </Modal.Close>
-      </div>
+    <>
+      <Modal.Close className="search-modal-close" aria-label="Close search">
+        <Icon icon="fluent:dismiss-16-regular" width={20} height={20} />
+      </Modal.Close>
 
-      <Tabs.Panel tabId="search" className="search-tab-panel">
-        <SearchInput.Provider>
-          <SearchInput.Wrapper className="search-input-wrapper">
-            <SearchInput.Form className="search-input-form">
-              <SearchInput.Input
-                className="search-input-field"
-                placeholder={placeholder}
-                searchOnType
-              />
-            </SearchInput.Form>
-          </SearchInput.Wrapper>
-        </SearchInput.Provider>
+      <SearchResults.Wrapper className="search-results-wrapper">
+        <SearchResults.Loading className="search-loading">
+          <span>Searching...</span>
+        </SearchResults.Loading>
 
-        <SearchResults.Wrapper className="search-results-wrapper">
-          <SearchResults.Loading className="search-loading">
-            <span>Searching...</span>
-          </SearchResults.Loading>
-
-          <SearchResults.NoResults className="search-no-results">
-            {(searchTerm) => (
-              <span>
-                No results for &ldquo;<strong>{searchTerm}</strong>&rdquo;
-              </span>
-            )}
-          </SearchResults.NoResults>
-
-          <SearchResults.List className="search-results-list" itemClassName="search-result-item">
-            {(result: Hit<DocDocument>) => (
-              <a href={result.document.url ?? '#'} className="search-result-link">
-                {result.document.section && (
-                  <span className="search-result-section">{result.document.section}</span>
-                )}
-                <span className="search-result-title">{result.document.title}</span>
-              </a>
-            )}
-          </SearchResults.List>
-        </SearchResults.Wrapper>
-      </Tabs.Panel>
-
-      <Tabs.Panel tabId="chat" className="chat-tab-panel">
-        <ChatInteractions.Wrapper className="chat-interactions" aria-label="AI chat responses">
-          {(interaction) => (
-            <div className="chat-interaction">
-              <ChatInteractions.UserPrompt className="chat-user-prompt" />
-              <ChatInteractions.AssistantMessage className="chat-assistant-message" />
-            </div>
+        <SearchResults.NoResults className="search-no-results">
+          {(searchTerm) => (
+            <>
+              {searchTerm ? (
+                <span>
+                  No results for &ldquo;<strong>{searchTerm}</strong>&rdquo;
+                </span>
+              ) : (
+                <span>Initial content...</span>
+              )}
+            </>
           )}
-        </ChatInteractions.Wrapper>
+        </SearchResults.NoResults>
 
-        <div className="chat-input-area">
-          <PromptTextArea.Wrapper className="chat-prompt-wrapper">
-            <PromptTextArea.Field
-              className="chat-prompt-field"
-              placeholder="Ask a question about Express..."
-              rows={1}
+        <SearchResults.List className="search-results-list" itemClassName="search-result-item">
+          {(result) => {
+            const doc = (result as Hit<DocDocument>).document;
+            return (
+              <a href={doc.url ?? '#'} className="search-result-link">
+                {doc.section && <span className="search-result-section">{doc.section}</span>}
+                <span className="search-result-title">{doc.title}</span>
+              </a>
+            );
+          }}
+        </SearchResults.List>
+      </SearchResults.Wrapper>
+
+      <ChatInteractions.Wrapper className="chat-interactions" aria-label="AI chat responses">
+        {(interaction) => (
+          <div className="chat-interaction">
+            <ChatInteractions.UserPrompt className="chat-user-prompt">
+              {interaction.query}
+            </ChatInteractions.UserPrompt>
+            <ChatInteractions.AssistantMessage className="chat-assistant-message">
+              {interaction.response}
+            </ChatInteractions.AssistantMessage>
+          </div>
+        )}
+      </ChatInteractions.Wrapper>
+
+      <SearchInput.Provider>
+        <SearchInput.Wrapper className="search-input-wrapper">
+          <SearchInput.Form className="search-input-form">
+            <SearchInput.Input
+              className="search-input-field"
+              placeholder={placeholder}
+              searchOnType
             />
-            <PromptTextArea.Button className="chat-prompt-button" />
-          </PromptTextArea.Wrapper>
-        </div>
-      </Tabs.Panel>
-    </Tabs.Wrapper>
+          </SearchInput.Form>
+        </SearchInput.Wrapper>
+      </SearchInput.Provider>
+
+      <div className="chat-input-area">
+        <PromptTextArea.Wrapper className="chat-prompt-wrapper">
+          <PromptTextArea.Field
+            className="chat-prompt-field"
+            placeholder="Ask a question about Express..."
+            rows={1}
+          />
+          <PromptTextArea.Button className="chat-prompt-button" />
+        </PromptTextArea.Wrapper>
+      </div>
+    </>
   );
 }
