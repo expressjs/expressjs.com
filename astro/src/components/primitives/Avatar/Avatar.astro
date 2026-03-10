@@ -29,6 +29,7 @@
  */
 import './Avatar.css';
 import type { HTMLAttributes } from 'astro/types';
+import { Image } from 'astro:assets';
 import { BodyMd, BodySm, Flex } from '@components/primitives';
 
 interface Author {
@@ -46,11 +47,22 @@ interface Props extends HTMLAttributes<'div'> {
 const { authors, caption, size = 'md', class: className, ...rest } = Astro.props;
 
 const displayName = authors?.map((a) => a.name).join(', ') ?? '';
+const imgSize = size === 'sm' ? 24 : 32;
 ---
 
 <Flex align="center" gap="2" class:list={[`avatar--${size}`, className]} {...rest}>
   <div class="avatar__images">
-    {authors?.map((a) => <img class="avatar__image" src={a.src} alt={a.alt ?? a.name} />)}
+    {
+      authors?.map((a) => (
+        <Image
+          class="avatar__image"
+          src={a.src}
+          alt={a.alt ?? a.name}
+          width={imgSize}
+          height={imgSize}
+        />
+      ))
+    }
   </div>
   <div class="avatar__content">
     <BodyMd as="span" weight="medium" vMargin={false}>{displayName}</BodyMd>

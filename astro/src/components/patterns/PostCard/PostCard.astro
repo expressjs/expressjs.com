@@ -29,6 +29,7 @@
  */
 import './PostCard.css';
 import type { HTMLAttributes } from 'astro/types';
+import { Image } from 'astro:assets';
 import { H3, Avatar, Tag } from '@components/primitives';
 
 interface Author {
@@ -64,7 +65,17 @@ const {
   <a href={href} class="post-card__link">
     <div>
       <!-- TODO: this will replaced by auto-generated OG images -->
-      {coverSrc && <img class="post-card__cover" src={coverSrc} alt={coverAlt || ''} />}
+      {
+        coverSrc && (
+          <Image
+            class="post-card__cover"
+            src={coverSrc}
+            alt={coverAlt || ''}
+            width={800}
+            height={160}
+          />
+        )
+      }
       <div class="post-card__labels">
         {labels.map((label) => <Tag>{label}</Tag>)}
       </div>
