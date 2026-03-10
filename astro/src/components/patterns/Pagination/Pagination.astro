@@ -27,28 +27,30 @@ interface Props extends HTMLAttributes<'div'> {
 const { prevUrl, nextUrl, currentPage, lastPage, ...rest } = Astro.props;
 ---
 
-{
-  (prevUrl || nextUrl) && (
-    <Flex justify="between" align="center" gap="4" class="pagination" {...rest}>
-      {prevUrl ? (
-        <Button as="a" href={prevUrl} variant="secondary" size="md" data-pagination-prev>
-          <Icon name="fluent:arrow-left-20-filled" />
-          Previous
-        </Button>
-      ) : (
-        <span data-pagination-prev />
-      )}
-      <Body vMargin={false} data-pagination-label>
-        Page {currentPage} of {lastPage}
-      </Body>
-      {nextUrl ? (
-        <Button as="a" href={nextUrl} variant="secondary" size="md" data-pagination-next>
-          Next
-          <Icon name="fluent:arrow-right-20-filled" />
-        </Button>
-      ) : (
-        <span data-pagination-next />
-      )}
-    </Flex>
-  )
-}
+<Flex justify="between" align="center" gap="4" class="pagination" {...rest}>
+  {prevUrl ? (
+    <Button as="a" href={prevUrl} variant="secondary" size="md" data-pagination-prev>
+      <Icon name="fluent:arrow-left-20-filled" />
+      Previous
+    </Button>
+  ) : (
+    <Button variant="secondary" size="md" data-pagination-prev>
+      <Icon name="fluent:arrow-left-20-filled" />
+      Previous
+    </Button>
+  )}
+  <Body vMargin={false} data-pagination-label>
+    Page {currentPage} of {lastPage}
+  </Body>
+  {nextUrl ? (
+    <Button as="a" href={nextUrl} variant="secondary" size="md" data-pagination-next>
+      Next
+      <Icon name="fluent:arrow-right-20-filled" />
+    </Button>
+  ) : (
+    <Button variant="secondary" size="md" data-pagination-next>
+      Next
+      <Icon name="fluent:arrow-right-20-filled" />
+    </Button>
+  )}
+</Flex>
