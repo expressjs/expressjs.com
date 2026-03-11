@@ -145,3 +145,9 @@
 .m-8 {
   margin: var(--space-8);
 }
+
+.disable-transitions *,
+.disable-transitions *::before,
+.disable-transitions *::after {
+  transition: none !important;
+}

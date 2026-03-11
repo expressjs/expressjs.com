@@ -1,0 +1,190 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { languages } from '@i18n/locales';
+import { Container, Grid, Col, Tabs } from '@components/primitives';
+import type { TabItem } from '@components/primitives';
+import { PostCard, PageHead, Pagination } from '@components/patterns';
+import { getCollection } from 'astro:content';
+
+const PAGE_SIZE = 6;
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+
+  return Object.keys(languages).map((lang) => {
+    const langPosts = allPosts
+      .filter((post) => post.id.startsWith(`${lang}/`))
+      .sort((a, b) => {
+        const aFile = a.id.split('/').pop() ?? '';
+        const bFile = b.id.split('/').pop() ?? '';
+        return bFile.localeCompare(aFile);
+      });
+
+    const allTags = [
+      ...new Set(
+        langPosts.flatMap((p) =>
+          (p.data.tags ?? '')
+            .split(' ')
+            .map((t: string) => t.trim())
+            .filter(Boolean)
+        )
+      ),
+    ];
+
+    return {
+      params: { lang, page: undefined },
+      props: { posts: langPosts, allTags },
+    };
+  });
+}
+
+const { posts, allTags } = Astro.props;
+const { lang } = Astro.params;
+
+function getDate(id: string) {
+  const filename = id.split('/').pop() ?? id;
+  const dateStr = filename.substring(0, 10);
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
+
+function formatTagLabel(tag: string) {
+  const spaced = tag.replace(/-/g, ' ');
+  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+}
+
+function getLabels(tags?: string) {
+  return (tags ?? '').split(' ').filter(Boolean).map(formatTagLabel);
+}
+
+const filterTabs: TabItem[] = [
+  { label: 'All', value: 'all' },
+  ...(allTags as string[]).map((tag) => ({
+    label: formatTagLabel(tag),
+    value: tag,
+  })),
+];
+
+const totalPages = Math.ceil(posts.length / PAGE_SIZE);
+---
+
+<Layout title="Express Blog">
+  <Container>
+    <PageHead
+      title="Blog post"
+      description="Stay tuned for details on new releases, enhancements, and everything you need to know to make the most of your Express applications. Let's dive into what's new!"
+    />
+    <Tabs tabs={filterTabs} defaultValue="all" data-posts-filter />
+    <Grid gap="4" align="stretch">
+      {
+        posts.map((post, i) => {
+          const authors = (post.data.authors ?? []).map((a) => ({
+            src: a.github ? `https://github.com/${a.github}.png` : '',
+            name: a.name ?? '',
+          }));
+          return (
+            <Col
+              xs={12}
+              md={6}
+              lg={4}
+              data-post-tags={post.data.tags ?? ''}
+              style={i >= PAGE_SIZE ? 'display:none' : ''}
+            >
+              <PostCard
+                href={`/${lang}/blog/${post.id.split('/').pop()}`}
+                labels={getLabels(post.data.tags)}
+                title={post.data.title}
+                coverSrc="/posts/sample-cover.png"
+                authors={authors}
+                avatarCaption={getDate(post.id)}
+              />
+            </Col>
+          );
+        })
+      }
+    </Grid>
+    {totalPages > 1 && <Pagination data-pagination currentPage={1} lastPage={totalPages} />}
+  </Container>
+</Layout>
+
+<script define:vars={{ PAGE_SIZE }} is:inline>
+  function initBlogFilter() {
+    const filter = document.querySelector('[data-posts-filter]');
+    const allPosts = Array.from(document.querySelectorAll('[data-post-tags]'));
+    const paginationEl = document.querySelector('[data-pagination]');
+    const prevBtn = document.querySelector('[data-pagination-prev]');
+    const nextBtn = document.querySelector('[data-pagination-next]');
+    const pageLabel = document.querySelector('[data-pagination-label]');
+
+    if (!filter || !allPosts.length) return;
+
+    prevBtn?.setAttribute('aria-disabled', 'true');
+
+    let currentTag = 'all';
+    let currentPage = 1;
+
+    function getFiltered() {
+      if (currentTag === 'all') return allPosts;
+      return allPosts.filter((el) =>
+        el.dataset.postTags?.split(' ').filter(Boolean).includes(currentTag)
+      );
+    }
+
+    function render() {
+      const filtered = getFiltered();
+      const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const end = start + PAGE_SIZE;
+
+      allPosts.forEach((el) => {
+        const idx = filtered.indexOf(el);
+        el.style.display = idx >= start && idx < end ? '' : 'none';
+      });
+
+      if (paginationEl) {
+        paginationEl.style.display = totalPages > 1 ? '' : 'none';
+      }
+      if (pageLabel) {
+        pageLabel.textContent = `Page ${currentPage} of ${totalPages}`;
+      }
+      if (prevBtn) {
+        prevBtn.setAttribute('aria-disabled', String(currentPage === 1));
+      }
+      if (nextBtn) {
+        nextBtn.setAttribute(
+          'aria-disabled',
+          String(currentPage === totalPages || totalPages === 0)
+        );
+      }
+    }
+
+    filter.addEventListener('tabs-change', (e) => {
+      currentTag = e.detail.value;
+      currentPage = 1;
+      render();
+    });
+
+    prevBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentPage > 1) {
+        currentPage--;
+        render();
+      }
+    });
+
+    nextBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      const totalPages = Math.ceil(getFiltered().length / PAGE_SIZE);
+      if (currentPage < totalPages) {
+        currentPage++;
+        render();
+      }
+    });
+  }
+
+  initBlogFilter();
+  document.addEventListener('astro:page-load', initBlogFilter);
+</script>

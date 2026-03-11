@@ -1,0 +1,33 @@
+@layer primitives {
+  .avatar__images {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .avatar__image {
+    border-radius: var(--radius-full);
+    border: var(--border-width-2) solid var(--color-bg-primary);
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .avatar__image + .avatar__image {
+    margin-left: calc(-1 * var(--space-2));
+  }
+
+  .avatar--md .avatar__image {
+    width: var(--size-8);
+    height: var(--size-8);
+  }
+
+  .avatar--sm .avatar__image {
+    width: var(--size-6);
+    height: var(--size-6);
+  }
+
+  .avatar__content {
+    display: flex;
+    flex-direction: column;
+  }
+}

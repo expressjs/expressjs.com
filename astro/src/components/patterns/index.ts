@@ -15,3 +15,6 @@ export { default as SearchTrigger } from './SearchTrigger/SearchTrigger.tsx';
 export { default as LanguageSelect } from './LanguageSelect/LanguageSelect.astro';
 export { default as Footer } from './Footer/Footer.astro';
 export { default as Features } from './Features/Features.astro';
+export { default as PostCard } from './PostCard/PostCard.astro';
+export { default as Pagination } from './Pagination/Pagination.astro';
+export { default as PageHead } from './PageHead/PageHead.astro';

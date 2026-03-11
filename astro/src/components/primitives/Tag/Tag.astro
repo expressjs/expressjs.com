@@ -1,0 +1,21 @@
+---
+/**
+ * Tag Primitive Component
+ *
+ * A pill-shaped label for categorizing or tagging content.
+ *
+ * @example
+ * <Tag>Security</Tag>
+ * <Tag>Release</Tag>
+ */
+import './Tag.css';
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'span'>;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<span class:list={['tag', className]} {...rest}>
+  <slot />
+</span>
