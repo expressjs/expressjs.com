@@ -79,12 +79,7 @@
     }
   }
 
-  /* ============================================
-     Modal Overlay
-     ============================================ */
-
   .search-modal-overlay {
-    /* Override Orama defaults: keep fixed/full-viewport but use project colors */
     background-color: var(--color-overlay);
     z-index: var(--z-index-modal-overlay);
 
@@ -94,13 +89,9 @@
     }
   }
 
-  /* ============================================
-     Modal Inner Container
-     ============================================ */
-
   .search-modal-inner {
     background-color: color-mix(in oklch, var(--color-bg-primary) 90%, transparent);
-    max-width: 68rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -119,7 +110,9 @@
     @media (--md-up) {
       border-radius: var(--radius-lg);
       margin-top: var(--size-14);
-      height: 70vh;
+      width: 80%;
+      max-width: 80rem;
+      height: 80vh;
     }
   }
 
@@ -143,43 +136,17 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: var(--space-3) var(--space-4);
-    border-bottom: var(--border-width-1) solid var(--color-border-secondary);
+    padding: var(--space-2) var(--space-4);
     flex-shrink: 0;
+    border-bottom: var(--border-width-1) solid var(--color-border-secondary);
   }
 
-  .search-modal-tabs {
+  .search-modal-body {
+    flex-grow: 1;
     display: flex;
-    gap: var(--space-1);
-  }
-
-  .search-modal-tab {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text-secondary);
-    background: none;
-    border: none;
-    border-radius: var(--radius-base);
-    padding: var(--space-1-5) var(--space-3);
-    cursor: pointer;
-    transition:
-      color var(--duration-150) var(--ease-in-out),
-      background-color var(--duration-150) var(--ease-in-out);
-
-    &:hover {
-      color: var(--color-text-primary);
-      background-color: var(--color-bg-secondary);
-    }
-
-    &:focus-visible {
-      outline: 1px solid var(--color-focus-ring);
-    }
-
-    &[aria-selected='true'],
-    &[data-state='active'] {
-      color: var(--color-text-primary);
-      background-color: var(--color-bg-secondary);
-    }
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
   }
 
   .search-modal-close {
@@ -209,8 +176,8 @@
   }
 
   .search-modal-footer {
-    padding: var(--space-4) var(--space-6);
-    background-color: var(--color-bg-secondary);
+    padding: var(--space-5) var(--space-6);
+    background-color: var(--color-bg-tertiary);
     display: flex;
     gap: var(--space-3);
     align-items: center;

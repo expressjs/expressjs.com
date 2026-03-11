@@ -6,6 +6,7 @@
   "home.reviewDesignSystemSuffix": "demo page to explore all tokens, primitives, and patterns.",
   "search.placeholder": "Start typing...",
   "search.ariaLabel": "Search or ask a question",
+  "search.ask.placeholder": "Search or ask: What's new in Express 5?",
   "search.close": "Close search",
   "search.loading": "Searching...",
   "search.noResultsFor": "No results for",

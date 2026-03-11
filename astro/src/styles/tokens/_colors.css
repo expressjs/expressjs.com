@@ -143,7 +143,7 @@
   --color-focus-ring: light-dark(var(--gray-900), var(--white));
 
   /* Overlay */
-  --color-overlay: color-mix(in oklch, var(--color-bg-secondary) 85%, transparent);
+  --color-overlay: color-mix(in oklch, var(--color-bg-secondary) 90%, transparent);
 }
 
 /* ============================================

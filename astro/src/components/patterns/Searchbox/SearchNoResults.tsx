@@ -14,9 +14,18 @@ export default function SearchNoResults() {
           ) : (
             <>
               <div className="search-image-wrapper">
-                <img src="/logo-express-white.svg" alt="" className="search-empty-image search-empty-image--dark" />
-                <img src="/logo-express-black.svg" alt="" className="search-empty-image search-empty-image--light" />
+                <img
+                  src="/logo-express-white.svg"
+                  alt=""
+                  className="search-empty-image search-empty-image--dark"
+                />
+                <img
+                  src="/logo-express-black.svg"
+                  alt=""
+                  className="search-empty-image search-empty-image--light"
+                />
               </div>
+              <p>What would you like to know about Express and its features?</p>
               <Suggestions.Wrapper className="search-suggestions">
                 <ul>
                   {/* TODO: placeholder suggestions, to be replaced */}

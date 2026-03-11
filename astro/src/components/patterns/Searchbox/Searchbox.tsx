@@ -59,8 +59,8 @@ export default function Searchbox({ placeholder, ariaLabel }: SearchboxProps) {
                         <Icon icon="fluent:dismiss-16-regular" width={18} height={18} />
                       </Modal.Close>
                     </div>
-                    <div className="search-modal-content">
-                      <Search placeholder={placeholder} />
+                    <div className="search-modal-body">
+                      <Search placeholder="Search or ask: What's new in Express 5?" />
                     </div>
 
                     <div className="search-modal-footer">
