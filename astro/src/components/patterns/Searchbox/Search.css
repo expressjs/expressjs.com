@@ -17,7 +17,7 @@
   }
 
   .search-tab {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     color: var(--color-text-secondary);
     background: none;
     border-radius: var(--radius-base);
@@ -145,10 +145,21 @@
   }
 
   .search-result-description {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-tertiary);
+    font-size: var(--font-size-base);
+    color: color-mix(in oklch, var(--color-text-primary) 80%, transparent);
     letter-spacing: var(--letter-spacing-wide);
     margin: var(--space-1) 0 0 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .search-result-breadcrumb {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-tertiary);
+    margin: 0 0 var(--space-2) 0;
   }
 
   .search-result-title {

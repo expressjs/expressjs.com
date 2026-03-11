@@ -14,6 +14,33 @@ type DocDocument = {
   version?: string;
 };
 
+const CATEGORY_LABELS: Record<string, string> = {
+  'menu.docs': 'Docs',
+  'menu.api': 'API',
+  'menu.resources': 'Resources',
+  'menu.blog': 'Blog',
+};
+
+function getPathBreadcrumb(path: string, category: string): string {
+  const rootLabel = CATEGORY_LABELS[category] ?? category;
+  const categorySlug = rootLabel.toLowerCase();
+
+  const segments = path
+    .split('/')
+    .filter(Boolean)
+    .slice(1) // remove language prefix (e.g., 'en')
+    .filter((s) => s !== categorySlug) // remove redundant category segment
+    .slice(0, -1) // remove last segment (the document page itself)
+    .map((s) =>
+      s
+        .split('-')
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' ')
+    );
+
+  return [rootLabel, ...segments].join(' > ');
+}
+
 interface SearchProps {
   placeholder: string;
 }
@@ -64,6 +91,9 @@ export default function Search({ placeholder }: SearchProps) {
                   <a href={document?.path || '#'} className="search-result-link">
                     <Icon icon="fluent:document-20-regular" width={20} height={20} />
                     <div>
+                      <p className="search-result-breadcrumb">
+                        {getPathBreadcrumb(document?.path ?? '', document?.category ?? '')}
+                      </p>
                       <h3 className="search-result-title">{document?.title}</h3>
                       {document?.description && (
                         <p className="search-result-description">{document.description}</p>
