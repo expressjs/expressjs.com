@@ -47,10 +47,22 @@ const t = useTranslations(lang);
 
 <script>
   const handleToggleClick = () => {
-    const element = document.documentElement;
-    const currentTheme = element.getAttribute('data-theme');
-    localStorage.setItem('theme', currentTheme === 'dark' ? 'light' : 'dark');
-    document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+    const root = document.documentElement;
+
+    const currentTheme = root.getAttribute('data-theme');
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    // Disable transitions
+    root.classList.add('disable-transitions');
+
+    // Apply theme
+    root.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('theme', nextTheme);
+
+    // Re-enable transitions on next paint
+    requestAnimationFrame(() => {
+      root.classList.remove('disable-transitions');
+    });
   };
 
   document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
