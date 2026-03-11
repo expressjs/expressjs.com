@@ -1,0 +1,98 @@
+@layer patterns {
+  /* ============================================
+     Search Tab
+     ============================================ */
+
+  .search-tab-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .search-input-wrapper {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: var(--border-width-1) solid var(--color-border-secondary);
+    flex-shrink: 0;
+  }
+
+  .search-input-form {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .search-input-field {
+    width: 100%;
+    font-size: var(--font-size-md);
+    color: var(--color-text-primary);
+    background: none;
+    border: none;
+    outline: none;
+    font-family: inherit;
+
+    &::placeholder {
+      color: var(--color-text-tertiary);
+    }
+  }
+
+  .search-results-wrapper {
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    padding: var(--space-6);
+  }
+
+  .search-loading,
+  .search-no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8) var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .search-results-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 var(--space-2);
+  }
+
+  .search-result-item {
+    border-radius: var(--radius-base);
+    overflow: hidden;
+  }
+
+  .search-result-link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-0-5);
+    padding: var(--space-2-5) var(--space-3);
+    border-radius: var(--radius-base);
+    text-decoration: none;
+    transition: background-color var(--duration-150) var(--ease-in-out);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-bg-secondary);
+      outline: none;
+    }
+  }
+
+  .search-result-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    letter-spacing: var(--letter-spacing-wide);
+    margin: 0;
+  }
+
+  .search-result-title {
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+    margin: 0;
+  }
+}

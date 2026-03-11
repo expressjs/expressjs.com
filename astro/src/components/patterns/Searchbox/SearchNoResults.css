@@ -1,0 +1,54 @@
+@layer patterns {
+  .search-empty-image {
+    width: var(--size-36);
+  }
+
+  :root[data-theme='light'] .search-empty-image--dark,
+  :root[data-theme='dark'] .search-empty-image--light {
+    display: none;
+  }
+
+  .search-image-wrapper {
+    display: block;
+    text-align: center;
+  }
+
+  .search-suggestions {
+    margin-top: var(--space-6);
+
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      padding-left: 0;
+      flex-wrap: wrap;
+    }
+
+    li {
+    }
+  }
+
+  .search-suggestion__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1-5) var(--space-3);
+    border-radius: var(--radius-base);
+    border: var(--border-width-1) solid var(--color-border-primary);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+
+    &:hover {
+      background-color: var(--color-bg-tertiary);
+      color: var(--color-text-primary);
+    }
+
+    svg {
+      color: var(--color-icon-primary);
+    }
+  }
+}

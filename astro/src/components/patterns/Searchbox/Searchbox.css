@@ -1,0 +1,232 @@
+@layer patterns {
+  .search-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    background-color: transparent;
+    border-radius: var(--radius-base);
+    border: 0;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s;
+
+    &:hover {
+      background-color: var(--color-bg-secondary);
+      border-color: var(--color-border-secondary);
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--color-focus-ring);
+    }
+
+    span {
+      line-height: var(--line-height-snug);
+
+      @media (--xs-only) {
+        display: none;
+      }
+    }
+
+    svg {
+      color: var(--color-icon-primary);
+    }
+
+    @media (--md-up) {
+      border: 1px solid var(--color-border-secondary);
+      padding: var(--space-1-5) var(--space-1-5) var(--space-1-5) var(--space-2);
+    }
+  }
+
+  .search-trigger-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-sm);
+
+    span {
+      margin: 0;
+    }
+  }
+
+  .search-trigger-icon {
+    border-radius: var(--radius-base);
+    transition: background-color var(--duration-200) var(--ease-in-out);
+    flex-shrink: 0;
+
+    @media (--xs-only) {
+      background-color: var(--color-bg-secondary);
+      padding: var(--space-2);
+
+      &:hover {
+        background-color: var(--color-bg-mute);
+      }
+    }
+  }
+
+  .search-trigger-shortcut {
+    margin-left: auto;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-secondary);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-base);
+
+    @media (--xs-only) {
+      display: none;
+    }
+  }
+
+  /* ============================================
+     Modal Overlay
+     ============================================ */
+
+  .search-modal-overlay {
+    /* Override Orama defaults: keep fixed/full-viewport but use project colors */
+    background-color: var(--color-overlay);
+    z-index: var(--z-index-modal-overlay);
+
+    @media (--xs-only) {
+      margin-top: 6rem;
+      height: calc(100vh - 6rem);
+    }
+  }
+
+  /* ============================================
+     Modal Inner Container
+     ============================================ */
+
+  .search-modal-inner {
+    background-color: color-mix(in oklch, var(--color-bg-primary) 90%, transparent);
+    max-width: 68rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    backdrop-filter: blur(2px);
+    margin: 0 auto;
+
+    > section {
+      height: 100%;
+    }
+
+    @media (--xs-only) {
+      max-width: 100%;
+      border-radius: 0;
+    }
+
+    @media (--md-up) {
+      border-radius: var(--radius-lg);
+      margin-top: var(--size-14);
+      height: 70vh;
+    }
+  }
+
+  /* ============================================
+     Modal Content
+     ============================================ */
+
+  .search-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ============================================
+     Modal Header (tabs + close button)
+     ============================================ */
+
+  .search-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: var(--border-width-1) solid var(--color-border-secondary);
+    flex-shrink: 0;
+  }
+
+  .search-modal-tabs {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .search-modal-tab {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    border-radius: var(--radius-base);
+    padding: var(--space-1-5) var(--space-3);
+    cursor: pointer;
+    transition:
+      color var(--duration-150) var(--ease-in-out),
+      background-color var(--duration-150) var(--ease-in-out);
+
+    &:hover {
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-secondary);
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--color-focus-ring);
+    }
+
+    &[aria-selected='true'],
+    &[data-state='active'] {
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-secondary);
+    }
+  }
+
+  .search-modal-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size-8);
+    height: var(--size-8);
+    border-radius: var(--radius-base);
+    border: none;
+    background: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition:
+      color var(--duration-150) var(--ease-in-out),
+      background-color var(--duration-150) var(--ease-in-out);
+    flex-shrink: 0;
+
+    &:hover {
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-secondary);
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--color-focus-ring);
+    }
+  }
+
+  .search-modal-footer {
+    padding: var(--space-4) var(--space-6);
+    background-color: var(--color-bg-secondary);
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    justify-content: flex-end;
+
+    small {
+      margin: 0;
+    }
+
+    img {
+      width: var(--size-16);
+
+      :root[data-theme='dark'] &.orama-logo-light,
+      :root[data-theme='light'] &.orama-logo-dark {
+        display: none;
+      }
+    }
+  }
+}

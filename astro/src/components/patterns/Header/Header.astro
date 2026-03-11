@@ -7,7 +7,7 @@
 import './Header.css';
 import { Icon } from 'astro-icon/components';
 import { Flex } from '@/components/primitives';
-import { ThemeSwitcher, SearchTrigger, LanguageSelect } from '@components/patterns';
+import { ThemeSwitcher, SearchBox, LanguageSelect } from '@components/patterns';
 import { languagesArray } from '@/i18n/locales';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
@@ -36,7 +36,7 @@ const t = useTranslations(currentLang);
     </Flex>
     <Flex align="center" justify="center" gap="2">
       <a href="#main-content" class="skip-link sr-only">Skip to content</a>
-      <SearchTrigger
+      <SearchBox
         placeholder={t('search.placeholder')}
         ariaLabel={t('search.ariaLabel')}
         client:load
