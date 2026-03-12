@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import DocLayout from '@layouts/DocLayout.astro';
+import { languages } from '@i18n/locales';
 import { render } from 'astro:content';
 import { buildBreadcrumbs } from '@utils/content';
 
@@ -9,6 +10,7 @@ export async function getStaticPaths() {
   const VERSION_PREFIXES = ['5x', '4x', '3x'];
 
   const pages = await getCollection('docs');
+  const api = await getCollection('api');
 
   const paths: Array<{
     params: { lang: string; slug: string };
@@ -26,6 +28,17 @@ export async function getStaticPaths() {
       props: { page, version: isVersioned ? slugParts[0] : DEFAULT_VERSION },
     });
   });
+
+  for (const lang of Object.keys(languages)) {
+    api.forEach((page) => {
+      const slug = page.id;
+
+      paths.push({
+        params: { lang, slug },
+        props: { page, version: slug[0] },
+      });
+    });
+  }
 
   const defaultVersionPages = pages.filter((page) => {
     const [, ...slugParts] = page.id.split('/');
