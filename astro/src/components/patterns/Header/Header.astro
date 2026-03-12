@@ -4,10 +4,15 @@
  *
  * Main site header with logo and navigation menu
  */
-import { Icon } from 'astro-icon/components';
 import './Header.css';
-import { BodyMd, Flex } from '@/components/primitives';
-import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.astro';
+import { Icon } from 'astro-icon/components';
+import { Flex } from '@/components/primitives';
+import { ThemeSwitcher, SearchTrigger, LanguageSelect } from '@components/patterns';
+import { languagesArray } from '@/i18n/locales';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
 ---
 
 <header class="header">
@@ -16,7 +21,7 @@ import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.astro';
       <button
         id="menuToggle"
         class="hamburger"
-        aria-label="Toggle menu"
+        aria-label={t('nav.toggleMenu')}
         aria-expanded="false"
         aria-controls="sidebar"
       >
@@ -24,31 +29,17 @@ import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.astro';
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
       </button>
-
-      <a href="/" class="logo-link" aria-label="Express home">
-        <img src="/logo-dark.svg" alt="" class="logo logo-dark" />
-        <img src="/logo-white.svg" alt="" class="logo logo-light" />
+      <a href={`/${currentLang}/`} class="logo-link" aria-label={t('nav.home')}>
+        <Icon name="logo-dark" class="logo logo-dark" />
+        <Icon name="logo-light" class="logo logo-light" />
       </a>
     </Flex>
     <!-- TODO: These are just placeholder to show how actions look like in the header. They will be reviewed later -->
-    <Flex align="center" gap="2">
-      <button class="header-action" aria-label="Search">
-        <div class="header-action-icon">
-          <Icon
-            name="fluent:search-sparkle-16-regular"
-            size="20"
-            color="var(--color-icon-primary)"
-            aria-hidden="true"
-          />
-        </div>
-      </button>
+    <Flex align="center" justify="center" gap="2">
+      <a href="#main-content" class="skip-link sr-only">Skip to content</a>
+      <SearchTrigger />
       <ThemeSwitcher showLabels={false} />
-      <button class="header-action" aria-label="Select language">
-        <div class="header-action-icon">
-          <Icon name="fluent:translate-16-regular" size="20" color="var(--color-icon-primary)" />
-        </div>
-        <BodyMd as="span" vMargin={false} className="sr-only">Select language</BodyMd>
-      </button>
+      <LanguageSelect languages={languagesArray} currentLanguage={currentLang} />
     </Flex>
   </Flex>
 </header>

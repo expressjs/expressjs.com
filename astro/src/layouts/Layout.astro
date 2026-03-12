@@ -1,8 +1,10 @@
 ---
 import '@styles/main.css';
-import { Container } from '@components/primitives';
-import { Sidebar } from '@/components/patterns';
+import { Flex, FlexItem } from '@components/primitives';
+import { Footer, Sidebar } from '@/components/patterns';
 import { Header } from '@/components/patterns';
+import { getLangFromUrl, replaceLanguageInPath } from '@/i18n/utils';
+import { languages } from '@/i18n/locales';
 
 interface Props {
   title?: string;
@@ -13,11 +15,41 @@ const {
   title = 'Express - Node.js web application framework',
   description = 'Fast, unopinionated, minimalist web framework for Node.js',
 } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang} dir={languages[lang].direction}>
   <head>
+    <script is:inline>
+      (function () {
+        // Theme
+        const storedTheme = localStorage.getItem('theme');
+        const theme =
+          storedTheme === 'dark' || storedTheme === 'light'
+            ? storedTheme
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+
+        // Dismissed banners
+        const styles = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith('banner-dismissed-') && localStorage.getItem(key) === 'true') {
+            styles.push('#banner-' + key.replace('banner-dismissed-', '') + '{display:none}');
+          }
+        }
+        if (styles.length) {
+          const el = document.createElement('style');
+          el.textContent = styles.join('');
+          document.head.appendChild(el);
+        }
+      })();
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -27,6 +59,23 @@ const {
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
 
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site || Astro.url.origin)} />
+
+    {
+      Object.keys(languages).map((altLang) => (
+        <link
+          rel="alternate"
+          hreflang={altLang}
+          href={
+            new URL(
+              replaceLanguageInPath(Astro.url.pathname, altLang),
+              Astro.site || Astro.url.origin
+            )
+          }
+        />
+      ))
+    }
+
     <title>{title}</title>
 
     <style is:inline>
@@ -34,10 +83,17 @@ const {
     </style>
   </head>
   <body>
-    <Sidebar />
     <Header />
-    <Container>
-      <slot />
-    </Container>
+    <Flex>
+      <Sidebar />
+      <FlexItem grow>
+        <Flex direction="column" class="h-full">
+          <main id="main-content">
+            <slot />
+          </main>
+          <Footer />
+        </Flex>
+      </FlexItem>
+    </Flex>
   </body>
 </html>

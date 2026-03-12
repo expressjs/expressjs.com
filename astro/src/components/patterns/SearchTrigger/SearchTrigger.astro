@@ -1,0 +1,37 @@
+---
+/**
+ * Search trigger component
+ * Allows users to open the search modal from the header
+ */
+import './SearchTrigger.css';
+import { BodyMd } from '@/components/primitives';
+import { Icon } from 'astro-icon/components';
+import { Flex } from '@/components/primitives';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<!-- TODO: click will be handled later -->
+<button class="search-trigger" aria-label={t('search.ariaLabel')}>
+  <Flex align="center" justify="center" gap="3">
+    <div class="search-trigger-icon">
+      <Icon name="fluent:search-sparkle-16-regular" size="20" color="var(--color-icon-tertiary)" />
+    </div>
+    <BodyMd as="span" vMargin={false}>{t('search.placeholder')}</BodyMd>
+  </Flex>
+  <div class="search-trigger-shortcut">
+    <span class="shortcut-key" data-shortcut-key></span>
+  </div>
+</button>
+
+<script is:inline>
+  const shortcutElement = document.querySelector('[data-shortcut-key]');
+  if (shortcutElement) {
+    const isMac = navigator.userAgentData?.platform
+      ? /mac/i.test(navigator.userAgentData.platform)
+      : /Mac|iPhone|iPod|iPad/i.test(navigator.userAgent);
+    shortcutElement.textContent = isMac ? '⌘ K' : 'Ctrl K';
+  }
+</script>

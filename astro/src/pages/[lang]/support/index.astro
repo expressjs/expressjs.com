@@ -5,7 +5,8 @@
  * TODO: This is a temporary index page for support page. This will be replaced with a proper support layout in the future.
  */
 import Layout from '@layouts/Layout.astro';
-import { languages } from '@i18n/ui';
+import { languages } from '@i18n/locales';
+import { Container } from '@/components/primitives';
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({
@@ -15,7 +16,9 @@ export function getStaticPaths() {
 ---
 
 <Layout title="Express Support">
-  <h1>Express Version Support</h1>
-  <p>This is a temporary entry point page for the Express support.</p>
-  <p>This page will be replaced with a proper support layout soon.</p>
+  <Container>
+    <h1>Express Version Support</h1>
+    <p>This is a temporary entry point page for the Express support.</p>
+    <p>This page will be replaced with a proper support layout soon.</p>
+  </Container>
 </Layout>

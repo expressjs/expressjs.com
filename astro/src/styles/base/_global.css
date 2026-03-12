@@ -229,3 +229,13 @@ ol {
   margin: var(--space-body) 0;
   padding-left: var(--space-6);
 }
+
+main {
+  flex-grow: 1;
+  padding-bottom: var(--space-16);
+
+  @media (--md-up) {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-32);
+  }
+}

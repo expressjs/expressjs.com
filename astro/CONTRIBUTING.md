@@ -369,25 +369,151 @@ type MenuItem = {
 };
 ```
 
-## Contributing translations
+## Internationalization (i18n)
 
-We use Crowdin to manage our translations in multiple languages and achieve automatic translation with artificial intelligence. Since these translations can be inefficient in some cases, we need help from the community to provide accurate and helpful translations.
+The expressjs.com website supports multiple languages through a combination of Astro routing, TypeScript utilities, and Crowdin integration.
 
-The documentation is translated into these languages:
+### Contributing translations
 
-- Chinese Simplified (`zh-cn`)
-- Chinese Traditional (`zh-tw`)
-- English (`en`)
-- French (`fr`)
-- German (`de`)
-- Italian (`it`)
-- Japanese (`ja`)
-- Korean (`ko`)
-- Brazilian Portuguese (`pt-br`)
-- Spanish (`es`)
+We use Crowdin to manage our translations in multiple languages and to enable automatic translation with artificial intelligence. Since AI translations can be imperfect, we welcome community contributions to improve translation accuracy and quality.
 
-### How to translate
+#### How to contribute translations
 
-1. Request to join the Express.js Website project on [Crowdin](https://express.crowdin.com/website)
+1. Request to join the [Express.js Website project on Crowdin](https://express.crowdin.com/website)
 2. [Select the language you want to translate](https://support.crowdin.com/for-translators/#starting-translation)
-3. [Start translating](https://support.crowdin.com/online-editor/)
+3. [Start translating in the Crowdin editor](https://support.crowdin.com/online-editor/)
+
+> Translation contributions must be made through Crowdin, not directly to the repository. Direct edits to translation files will be overwritten by Crowdin syncs.
+
+### Adding a new language
+
+To add a new language to the website, follow this process:
+
+1. **Request language support** - Contact a website captain to request a new language in Crowdin. Only website maintainers can add new languages to the Crowdin project.
+
+2. **Crowdin will generate files** - Once approved in Crowdin, translation files will be automatically created:
+   - `src/i18n/ui/[lang-code].json` - UI strings
+   - Content files in `src/content/docs/[lang-code]/`
+
+3. **Update `src/i18n/locales.ts`** - Once files are created by Crowdin:
+   - Add the language to the `languages` object
+   - Import the new language's JSON file from `src/i18n/ui/`
+
+### How i18n works (Technical Details)
+
+For developers who want to understand the technical architecture of the i18n system:
+
+### Architecture overview
+
+The i18n system is built on these key components:
+
+1. **Locales Configuration** (`src/i18n/locales.ts`):
+   - Defines all supported languages and their metadata
+   - Imports UI translation strings from JSON files
+   - Exports types for type-safe translations
+
+2. **i18n Utilities** (`src/i18n/utils.ts`):
+   - `getLangFromUrl()` - Extracts the language code from the URL
+   - `useTranslations()` - Returns a translation function for the current language
+   - Helper functions for language path manipulation
+
+3. **Routing** (`src/pages/[lang]/[...slug].astro`):
+   - Dynamic routing with the `[lang]` parameter for language selection
+   - Supports URLs like `/en/api/`, `/fr/api/`, `/de/api/`, etc.
+
+4. **UI Translations** (`src/i18n/ui/`):
+   - JSON files for each supported language (e.g., `en.json`, `fr.json`)
+   - Contains UI strings like navigation labels, buttons, and UI elements
+   - Managed through Crowdin for easier translation
+
+### Supported languages
+
+The website is available in the following languages:
+
+- `en` - English
+- `de` - German (Deutsch)
+- `es` - Spanish (Español)
+- `fr` - French (Français)
+- `it` - Italian (Italiano)
+- `ja` - Japanese (日本語)
+- `ko` - Korean (한국어)
+- `pt-br` - Brazilian Portuguese (Português)
+- `zh-cn` - Chinese Simplified (简体中文)
+- `zh-tw` - Chinese Traditional (繁體中文)
+
+### Using translations in components
+
+To use translations in your Astro components, import the utility functions and extract the language from the current URL:
+
+```astro
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<button aria-label={t('nav.toggleMenu')}>Menu</button>
+<h1>{t('common.welcome')}</h1>
+```
+
+The `Astro.url` object automatically provides the current page URL, making it easy to extract the language code and get the appropriate translations.
+
+### Content organization
+
+#### UI translations
+
+UI strings are stored in JSON files in `src/i18n/ui/`. For example, `src/i18n/ui/en.json`:
+
+```json
+{
+  "common": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "navigation": {
+    "docs": "Documentation",
+    "api": "API Reference"
+  }
+}
+```
+
+#### Content translations
+
+Documentation content is stored separately from UI translations:
+
+- **Docs**: `src/content/docs/[lang-code]/[version]/` - Documentation pages
+- **Resources**: `src/content/resources/[lang-code]/` - Resource pages
+
+The following content is currently not translated:
+
+- **API reference**
+- **Blog posts**
+
+### Adding UI translations
+
+When adding new UI strings:
+
+1. Add the string to `src/i18n/ui/en.json` first
+2. The structure will be synced to Crowdin
+3. Translators will translate it through Crowdin
+4. Updated translations will be synced back
+
+### Crowdin integration
+
+The `crowdin.yml` configuration file defines:
+
+- Source files and their Crowdin translation targets
+- Directory structure for translations
+- API configuration for automation
+
+When translations are completed in Crowdin:
+
+- Files are automatically synced to the repository
+- A bot automatically creates pull requests with the translation updates
+
+> [!WARNING]
+> **Do not manually create or edit translation files** (`src/i18n/ui/*.json` and `src/content/docs/[lang-code]/*.*`)
+> These files are automatically managed by Crowdin and will be overwritten if you make manual changes.
+> All translation updates must go through the Crowdin workflow.

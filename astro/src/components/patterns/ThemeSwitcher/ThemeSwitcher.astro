@@ -7,15 +7,18 @@
 import './ThemeSwitcher.css';
 import { BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 interface Props {
   showLabels?: boolean;
 }
 
 const { showLabels = true } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<button data-theme-toggle class="toggle" aria-label="Toggle theme">
+<button data-theme-toggle class="toggle" aria-label={t('theme.toggle')}>
   <div class="toggle-icon">
     <Icon
       name="fluent:weather-moon-16-regular"
@@ -33,39 +36,14 @@ const { showLabels = true } = Astro.props;
   <BodyMd
     vMargin={false}
     class={`label-dark ${!showLabels ? 'sr-only' : ''}`}
-    aria-label="Switch to light mode">Switch to light mode</BodyMd
+    aria-label={t('theme.switchToLight')}>{t('theme.switchToLight')}</BodyMd
   >
   <BodyMd
     vMargin={false}
     class={`label-light ${!showLabels ? 'sr-only' : ''}`}
-    aria-label="Switch to dark mode">Switch to dark mode</BodyMd
+    aria-label={t('theme.switchToDark')}>{t('theme.switchToDark')}</BodyMd
   >
 </button>
-
-<script is:inline>
-  const theme = (() => {
-    const localStorageTheme = localStorage?.getItem('theme') ?? '';
-    if (['dark', 'light'].includes(localStorageTheme)) {
-      return localStorageTheme;
-    }
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
-  })();
-
-  if (theme === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
-
-  if (typeof localStorage !== 'undefined' && theme) {
-    localStorage.setItem('theme', theme);
-  }
-
-  window.localStorage.setItem('theme', theme);
-</script>
 
 <script>
   const handleToggleClick = () => {

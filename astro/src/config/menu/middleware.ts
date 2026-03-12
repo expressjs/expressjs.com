@@ -4,8 +4,8 @@ export const middlewareMenu: Menu = {
   items: [
     {
       href: `/overview`,
-      label: 'Overview',
-      ariaLabel: 'Middleware overview',
+      label: 'menu.overview',
+      ariaLabel: 'menu.middlewareOverviewAria',
     },
     {
       href: `/body-parser`,
