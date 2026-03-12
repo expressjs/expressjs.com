@@ -38,5 +38,4 @@ jobs:
             --root-dir $PWD/dist
             --remap 'https://expressjs\.com\/(.*)/ file://'$PWD'/dist/$1/index.html'
             dist/
-            src/
           fail: true
