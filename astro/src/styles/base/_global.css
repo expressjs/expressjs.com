@@ -239,3 +239,12 @@ main {
     padding-bottom: var(--space-32);
   }
 }
+
+@media (--md-up) {
+  .layout-wrapper {
+    background-color: var(--color-bg-secondary);
+  }
+  .layout-content {
+    background-color: var(--color-bg-primary);
+  }
+}
