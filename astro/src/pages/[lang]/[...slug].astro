@@ -8,6 +8,7 @@ import { buildBreadcrumbs } from '@utils/content';
 export async function getStaticPaths() {
   const DEFAULT_VERSION = '5x';
   const VERSION_PREFIXES = ['5x', '4x', '3x'];
+  const DEFAULT_LANG = 'en';
 
   const pages = await getCollection('docs');
   const api = await getCollection('api');
@@ -16,6 +17,18 @@ export async function getStaticPaths() {
     params: { lang: string; slug: string };
     props: { page: (typeof pages)[0]; version: string };
   }> = [];
+
+  // Helper to create a map of existing content for fallback logic
+  const existingContent = new Map<string, (typeof pages)[0]>();
+  pages.forEach((page) => {
+    const [lang, ...slugParts] = page.id.split('/');
+    const fullSlug = slugParts.join('/');
+    existingContent.set(`${lang}/${fullSlug}`, page);
+  });
+
+  api.forEach((page) => {
+    existingContent.set(`en/${page.id}`, page);
+  });
 
   pages.forEach((page) => {
     const [lang, ...slugParts] = page.id.split('/');
@@ -80,6 +93,30 @@ export async function getStaticPaths() {
       });
     }
   });
+
+  // Fallback: Create paths for non-English languages using English content
+  for (const lang of Object.keys(languages)) {
+    if (lang === DEFAULT_LANG) continue; // Skip English, already added
+
+    const englishPages = pages.filter((p) => p.id.startsWith(`${DEFAULT_LANG}/`));
+
+    englishPages.forEach((page) => {
+      const [, ...slugParts] = page.id.split('/');
+      const fullSlug = slugParts.join('/');
+
+      const langSpecificExists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === fullSlug
+      );
+
+      // If no language-specific version exists, add fallback to English
+      if (!langSpecificExists) {
+        paths.push({
+          params: { lang, slug: fullSlug },
+          props: { page, version: slugParts[0] === DEFAULT_VERSION ? DEFAULT_VERSION : slugParts[0] },
+        });
+      }
+    });
+  }
 
   return paths;
 }
