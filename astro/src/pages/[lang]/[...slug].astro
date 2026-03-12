@@ -31,12 +31,34 @@ export async function getStaticPaths() {
 
   for (const lang of Object.keys(languages)) {
     api.forEach((page) => {
+      const slugParts = page.id.split('/');
+      const version = slugParts[0];
       const slug = page.id;
 
       paths.push({
         params: { lang, slug },
-        props: { page, version: slug[0] },
+        props: { page, version },
       });
+    });
+  }
+
+  const defaultVersionApiPages = api.filter((page) => page.id.startsWith(`${DEFAULT_VERSION}/`));
+
+  for (const lang of Object.keys(languages)) {
+    defaultVersionApiPages.forEach((page) => {
+      const [, ...restSlugParts] = page.id.split('/');
+      const nonVersionedSlug = restSlugParts.join('/');
+
+      const exists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === nonVersionedSlug
+      );
+
+      if (!exists && nonVersionedSlug) {
+        paths.push({
+          params: { lang, slug: nonVersionedSlug },
+          props: { page, version: DEFAULT_VERSION },
+        });
+      }
     });
   }
 
