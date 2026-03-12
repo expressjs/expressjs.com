@@ -94,6 +94,31 @@ export async function getStaticPaths() {
     }
   });
 
+  // Fallback for non-versioned default-version slugs: use English content for missing languages
+  const englishDefaultVersionPages = defaultVersionPages.filter((p) =>
+    p.id.startsWith(`${DEFAULT_LANG}/`)
+  );
+
+  for (const lang of Object.keys(languages)) {
+    if (lang === DEFAULT_LANG) continue;
+
+    englishDefaultVersionPages.forEach((page) => {
+      const [, , ...restSlugParts] = page.id.split('/');
+      const nonVersionedSlug = restSlugParts.join('/');
+
+      const exists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === nonVersionedSlug
+      );
+
+      if (!exists && nonVersionedSlug) {
+        paths.push({
+          params: { lang, slug: nonVersionedSlug },
+          props: { page, version: DEFAULT_VERSION },
+        });
+      }
+    });
+  }
+
   // Fallback: Create paths for non-English languages using English content
   for (const lang of Object.keys(languages)) {
     if (lang === DEFAULT_LANG) continue; // Skip English, already added
@@ -112,7 +137,10 @@ export async function getStaticPaths() {
       if (!langSpecificExists) {
         paths.push({
           params: { lang, slug: fullSlug },
-          props: { page, version: slugParts[0] === DEFAULT_VERSION ? DEFAULT_VERSION : slugParts[0] },
+          props: {
+            page,
+            version: slugParts[0] === DEFAULT_VERSION ? DEFAULT_VERSION : slugParts[0],
+          },
         });
       }
     });
