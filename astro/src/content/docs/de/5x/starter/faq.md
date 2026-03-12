@@ -35,7 +35,7 @@ Ein einfaches Benutzername/Kennwort-Schema können Sie in [diesem Beispiel](http
 Express unterstützt jede Template-Engine, die der `(path, locals, callback)`-Signatur entspricht.
 Informationen zur Normalisierung von Template-Engine-Schnittstellen und -Caching siehe das Projekt [consolidate.js](https://github.com/visionmedia/consolidate.js). Nicht aufgelistete Template-Engines können trotzdem die Express-Signatur unterstützen.
 
-For more information, see [Using template engines with Express](/{{page.lang}}/guide/using-template-engines.html).
+For more information, see [Using template engines with Express](/guide/using-template-engines.html).
 
 ## Wie handhabe ich 404-Antworten?
 

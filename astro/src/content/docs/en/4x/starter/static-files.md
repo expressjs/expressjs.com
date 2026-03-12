@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 The `root` argument specifies the root directory from which to serve static assets.
-For more information on the `options` argument, see [express.static](/{{page.lang}}/5x/api.html#express.static).
+For more information on the `options` argument, see [express.static](/5x/api.html#express.static).
 
 For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
 
@@ -46,7 +46,7 @@ app.use(express.static('files'));
 Express looks up the files in the order in which you set the static directories with the `express.static` middleware function.
 
 {% capture alert_content %}
-For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+For best results, [use a reverse proxy](/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
 {% endcapture %}
 {% include admonitions/note.html content=alert_content %}
 

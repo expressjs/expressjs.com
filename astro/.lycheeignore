@@ -1,4 +1,2 @@
-# TODO: remove when all links is fixed
-dist/%7B%7Bpage.lang%7D%7D$
-
+# Rate limit for npmjs.com
 ^https://npmjs.com/$

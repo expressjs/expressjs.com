@@ -43,7 +43,7 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   </td>
   <td>String</td>
   <td markdown="1">
-  Environment mode. Be sure to set to "production" in a production environment; see [Production best practices: performance and reliability](/{{page.lang}}/advanced/best-practice-performance.html#env).
+  Environment mode. Be sure to set to "production" in a production environment; see [Production best practices: performance and reliability](/advanced/best-practice-performance.html#env).
   </td>
   <td markdown="1">
   `process.env.NODE_ENV` (`NODE_ENV` environment variable) or "development" if `NODE_ENV` is not set.
@@ -212,7 +212,7 @@ A custom query string parsing function will receive the complete query string, a
   <h5 id="trust.proxy.options.table">Options for `trust proxy` setting</h5>
 
   <p markdown="1">
-  Read [Express behind proxies](/{{page.lang}}/guide/behind-proxies.html) for more
+  Read [Express behind proxies](/guide/behind-proxies.html) for more
   information.
   </p>
 

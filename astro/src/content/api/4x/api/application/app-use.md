@@ -1,11 +1,11 @@
 ---
 title: app.use
-description: Mounts the specified [middleware](/{{page.lang}}/guide/using-middleware.html) function or functions
+description: Mounts the specified [middleware](/guide/using-middleware.html) function or functions
 ---
 
 <h3 id='app.use'>app.use([path,] callback [, callback...])</h3>
 
-Mounts the specified [middleware](/{{page.lang}}/guide/using-middleware.html) function or functions
+Mounts the specified [middleware](/guide/using-middleware.html) function or functions
 at the specified path:
 the middleware function is executed when the base of the requested path matches `path`.
 
@@ -300,7 +300,7 @@ app.use(mw1, [mw2, r1, r2], subApp);
 </table>
 </div>
 
-Following are some examples of using the [express.static](/{{page.lang}}/guide/using-middleware.html#middleware.built-in)
+Following are some examples of using the [express.static](/guide/using-middleware.html#middleware.built-in)
 middleware in an Express app.
 
 Serve static content for the app from the "public" directory in the application directory:

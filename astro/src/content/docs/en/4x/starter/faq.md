@@ -44,7 +44,7 @@ To normalize template engine interfaces and caching, see the
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 project for support. Unlisted template engines might still support the Express signature.
 
-For more information, see [Using template engines with Express](/{{page.lang}}/guide/using-template-engines.html).
+For more information, see [Using template engines with Express](/guide/using-template-engines.html).
 
 ## How do I handle 404 responses?
 
