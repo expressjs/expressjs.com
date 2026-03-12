@@ -13,13 +13,22 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Build site
-        uses: withastro/action@15aa0a5a1e067940253e3b259413ab2ae882a740 # v5.2.0
+      # TODO: use astro action, when pnpm action is enabled in the org
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
         with:
-          path: "astro" # TODO: change when Astro site is moved to root
-          package-manager: npm@latest
-          node-version: 24.13
+          # node-version-file: ".nvmrc" use when .nvmrc is on root of the repo
+          node-version: "24.13"
+          # cache: "npm" use when package-lock.json is on root of the repo
+
+      - name: Install Node.js dependencies
+        working-directory: astro
+        run: npm ci
+
+      - name: Build Astro site
+        working-directory: astro
+        run: npm run build
 
       - name: Check links
         uses: lycheeverse/lychee-action@a8c4c7cb88f0c7386610c35eb25108e448569cb0 # v2.7.0
