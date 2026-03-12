@@ -7,6 +7,9 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 export default [
   // Global ignores
   {
+    env: {
+      node: true,
+    },
     ignores: ['dist/', '.astro/', 'node_modules/', 'package-lock.json'],
   },
 
