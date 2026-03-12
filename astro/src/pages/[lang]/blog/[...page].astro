@@ -4,14 +4,14 @@ import { languages } from '@i18n/locales';
 import { Container, Grid, Col, Tabs } from '@components/primitives';
 import type { TabItem } from '@components/primitives';
 import { PostCard, PageHead, Pagination } from '@components/patterns';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { PaginateFunction } from 'astro';
 
-const PAGE_SIZE = 6;
-
-export async function getStaticPaths() {
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+  const PAGE_SIZE = 6;
   const allPosts = await getCollection('blog');
 
-  return Object.keys(languages).map((lang) => {
+  return Object.keys(languages).flatMap((lang) => {
     const langPosts = allPosts
       .filter((post) => post.id.startsWith(`${lang}/`))
       .sort((a, b) => {
@@ -31,20 +31,21 @@ export async function getStaticPaths() {
       ),
     ];
 
-    return {
-      params: { lang, page: undefined },
-      props: { posts: langPosts, allTags },
-    };
+    return paginate(langPosts, {
+      params: { lang },
+      pageSize: PAGE_SIZE,
+      props: { allTags, langPosts, pageSize: PAGE_SIZE },
+    });
   });
 }
 
-const { posts, allTags } = Astro.props;
+const { page, allTags, langPosts, pageSize } = Astro.props;
 const { lang } = Astro.params;
+const pagePosts = page.data as CollectionEntry<'blog'>[];
 
 function getDate(id: string) {
   const filename = id.split('/').pop() ?? id;
-  const dateStr = filename.substring(0, 10);
-  return new Date(dateStr).toLocaleDateString('en-US', {
+  return new Date(filename.substring(0, 10)).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -60,6 +61,20 @@ function getLabels(tags?: string) {
   return (tags ?? '').split(' ').filter(Boolean).map(formatTagLabel);
 }
 
+function getPostProps(post: CollectionEntry<'blog'>) {
+  return {
+    href: `/${lang}/blog/${post.id.split('/').pop()}`,
+    labels: getLabels(post.data.tags),
+    title: post.data.title,
+    coverSrc: '/posts/sample-cover.png',
+    authors: (post.data.authors ?? []).map((a) => ({
+      src: a.github ? `https://github.com/${a.github}.png` : '',
+      name: a.name ?? '',
+    })),
+    avatarCaption: getDate(post.id),
+  };
+}
+
 const filterTabs: TabItem[] = [
   { label: 'All', value: 'all' },
   ...(allTags as string[]).map((tag) => ({
@@ -67,121 +82,123 @@ const filterTabs: TabItem[] = [
     value: tag,
   })),
 ];
-
-const totalPages = Math.ceil(posts.length / PAGE_SIZE);
 ---
 
 <Layout title="Express Blog">
   <Container>
     <PageHead
-      title="Blog post"
+      title="Blog"
       description="Stay tuned for details on new releases, enhancements, and everything you need to know to make the most of your Express applications. Let's dive into what's new!"
     />
     <Tabs tabs={filterTabs} defaultValue="all" data-posts-filter />
-    <Grid gap="4" align="stretch">
+    <Grid gap="4" align="stretch" data-posts-grid>
       {
-        posts.map((post, i) => {
-          const authors = (post.data.authors ?? []).map((a) => ({
-            src: a.github ? `https://github.com/${a.github}.png` : '',
-            name: a.name ?? '',
-          }));
-          return (
-            <Col
-              xs={12}
-              md={6}
-              lg={4}
-              data-post-tags={post.data.tags ?? ''}
-              style={i >= PAGE_SIZE ? 'display:none' : ''}
-            >
-              <PostCard
-                href={`/${lang}/blog/${post.id.split('/').pop()}`}
-                labels={getLabels(post.data.tags)}
-                title={post.data.title}
-                coverSrc="/posts/sample-cover.png"
-                authors={authors}
-                avatarCaption={getDate(post.id)}
-              />
-            </Col>
-          );
-        })
+        pagePosts.map((post) => (
+          <Col xs={12} md={6} lg={4} data-post-tags={post.data.tags ?? ''}>
+            <PostCard {...getPostProps(post)} />
+          </Col>
+        ))
       }
     </Grid>
-    {totalPages > 1 && <Pagination data-pagination currentPage={1} lastPage={totalPages} />}
+    <Pagination
+      data-pagination
+      prevUrl={page.url.prev}
+      nextUrl={page.url.next}
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      style={page.lastPage <= 1 ? 'display:none' : ''}
+    />
+    <template data-posts-pool>
+      {
+        langPosts.map((post) => (
+          <Col xs={12} md={6} lg={4} data-post-tags={post.data.tags ?? ''}>
+            <PostCard {...getPostProps(post)} />
+          </Col>
+        ))
+      }
+    </template>
   </Container>
 </Layout>
 
-<script define:vars={{ PAGE_SIZE }} is:inline>
+<script
+  define:vars={{
+    pageSize,
+    currentStaticPage: page.currentPage,
+    lastStaticPage: page.lastPage,
+  }}
+  is:inline
+>
   function initBlogFilter() {
     const filter = document.querySelector('[data-posts-filter]');
-    const allPosts = Array.from(document.querySelectorAll('[data-post-tags]'));
+    const grid = document.querySelector('[data-posts-grid]');
+    const pool = document.querySelector('[data-posts-pool]');
     const paginationEl = document.querySelector('[data-pagination]');
     const prevBtn = document.querySelector('[data-pagination-prev]');
     const nextBtn = document.querySelector('[data-pagination-next]');
     const pageLabel = document.querySelector('[data-pagination-label]');
 
-    if (!filter || !allPosts.length) return;
+    if (!filter || !grid || !pool) return;
 
-    prevBtn?.setAttribute('aria-disabled', 'true');
-
+    const staticCards = Array.from(grid.children);
+    const allCards = Array.from(pool.content.children);
     let currentTag = 'all';
-    let currentPage = 1;
+    let filterPage = 1;
 
     function getFiltered() {
-      if (currentTag === 'all') return allPosts;
-      return allPosts.filter((el) =>
-        el.dataset.postTags?.split(' ').filter(Boolean).includes(currentTag)
+      if (currentTag === 'all') return allCards;
+      return allCards.filter((el) =>
+        el.dataset.postTags.split(' ').filter(Boolean).includes(currentTag)
       );
     }
 
-    function render() {
-      const filtered = getFiltered();
-      const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
-      const start = (currentPage - 1) * PAGE_SIZE;
-      const end = start + PAGE_SIZE;
-
-      allPosts.forEach((el) => {
-        const idx = filtered.indexOf(el);
-        el.style.display = idx >= start && idx < end ? '' : 'none';
-      });
-
+    function setPaginationState(currentPage, totalPages) {
       if (paginationEl) {
         paginationEl.style.display = totalPages > 1 ? '' : 'none';
       }
-      if (pageLabel) {
-        pageLabel.textContent = `Page ${currentPage} of ${totalPages}`;
-      }
-      if (prevBtn) {
-        prevBtn.setAttribute('aria-disabled', String(currentPage === 1));
-      }
-      if (nextBtn) {
-        nextBtn.setAttribute(
-          'aria-disabled',
-          String(currentPage === totalPages || totalPages === 0)
-        );
-      }
+      if (pageLabel) pageLabel.textContent = `Page ${currentPage} of ${totalPages}`;
+      if (prevBtn) prevBtn.setAttribute('aria-disabled', String(currentPage === 1));
+      if (nextBtn) nextBtn.setAttribute('aria-disabled', String(currentPage >= totalPages));
+    }
+
+    function renderFiltered() {
+      const filtered = getFiltered();
+      const totalPages = Math.ceil(filtered.length / pageSize) || 1;
+      const start = (filterPage - 1) * pageSize;
+      grid.innerHTML = '';
+      filtered.slice(start, start + pageSize).forEach((el) => grid.appendChild(el.cloneNode(true)));
+      setPaginationState(filterPage, totalPages);
+    }
+
+    function restoreStatic() {
+      grid.innerHTML = '';
+      staticCards.forEach((card) => grid.appendChild(card));
+      setPaginationState(currentStaticPage, lastStaticPage);
     }
 
     filter.addEventListener('tabs-change', (e) => {
       currentTag = e.detail.value;
-      currentPage = 1;
-      render();
+      filterPage = 1;
+      if (currentTag === 'all') {
+        restoreStatic();
+      } else {
+        renderFiltered();
+      }
     });
 
     prevBtn?.addEventListener('click', (e) => {
+      if (currentTag === 'all') return;
       e.preventDefault();
-      if (currentPage > 1) {
-        currentPage--;
-        render();
-      }
+      if (prevBtn.getAttribute('aria-disabled') === 'true') return;
+      filterPage--;
+      renderFiltered();
     });
 
     nextBtn?.addEventListener('click', (e) => {
+      if (currentTag === 'all') return;
       e.preventDefault();
-      const totalPages = Math.ceil(getFiltered().length / PAGE_SIZE);
-      if (currentPage < totalPages) {
-        currentPage++;
-        render();
-      }
+      if (nextBtn.getAttribute('aria-disabled') === 'true') return;
+      filterPage++;
+      renderFiltered();
     });
   }
 
