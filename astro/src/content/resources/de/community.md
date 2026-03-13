@@ -66,7 +66,7 @@ The [GitHub Discussions](https://github.com/expressjs/discussions) section is an
 ## Express.js Logo
 
 Express is a project of the OpenJS Foundation. Please review the [trademark policy](https://trademark-policy.openjsf.org/) for information about permissible use of Express.js logos and marks.
-
+<!-- 
 <div class="logo-table">
     <div>
         <h3>Logotype</h3>
@@ -87,5 +87,5 @@ Express is a project of the OpenJS Foundation. Please review the [trademark poli
             <img src="/logo-white.svg" alt="Express.js logo" width="56" height="40"/>
         </a>
     </div>
-<div>
+<div> -->
 </div>
