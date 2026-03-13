@@ -272,15 +272,16 @@ must be updated as well.
 */
 
 .layout-content {
-  max-width: calc(100dvw - 16px); 
+  max-width: calc(100dvw - 16px);
 }
 
 @media (--md-up) {
   .layout-content {
     max-width: calc(100dvw - 116px);
   }
-  
-  .layout-wrapper:has([data-toggle-nested-button][data-visible="true"][aria-expanded="true"]) .layout-content {
+
+  .layout-wrapper:has([data-toggle-nested-button][data-visible='true'][aria-expanded='true'])
+    .layout-content {
     max-width: calc(100dvw - 372px);
   }
 }
