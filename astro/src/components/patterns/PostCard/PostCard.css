@@ -9,6 +9,13 @@
     padding: var(--space-4);
     min-height: var(--size-88);
     height: 100%;
+    cursor: pointer;
+    transition: ease-in-out;
+    transition-property: outline;
+
+    &:hover {
+      outline: var(--color-focus-ring) solid var(--border-width-1);
+    }
 
     @media (--md-up) {
       min-height: var(--size-100);
@@ -37,8 +44,7 @@
   }
 
   .post-card:focus-within {
-    border-color: var(--color-focus-ring);
-    box-shadow: 0 0 0 var(--border-width-1) var(--color-focus-ring);
+    outline: var(--color-focus-ring) solid var(--border-width-1);
   }
 
   .post-card__cover {
