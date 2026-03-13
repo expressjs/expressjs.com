@@ -248,3 +248,39 @@ main {
     background-color: var(--color-bg-primary);
   }
 }
+
+/*
+Layout width logic
+
+Mobile
+Content width = 100dvw - 16px
+
+Tablet
+Content width = 100dvw - 116px
+This includes the main sidebar column.
+
+Tablet with nested sidebar open
+Content width = 100dvw - 372px
+This includes the main sidebar column + nested sidebar.
+
+Important maintenance notes
+If the sidebar width changes, these max-width values must be updated to match.
+
+If the toggle button attributes (data-toggle-nested-button or aria-expanded)
+are modified, the :has() selector used to detect the open nested sidebar
+must be updated as well.
+*/
+
+.layout-content {
+  max-width: calc(100dvw - 16px); 
+}
+
+@media (--md-up) {
+  .layout-content {
+    max-width: calc(100dvw - 116px);
+  }
+  
+  .layout-wrapper:has([data-toggle-nested-button][aria-expanded="true"]) .layout-content {
+    max-width: calc(100dvw - 372px);
+  }
+}
