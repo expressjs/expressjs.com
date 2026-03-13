@@ -30,6 +30,15 @@
     color: inherit;
     text-decoration: none;
     height: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .post-card:focus-within {
+    border-color: var(--color-focus-ring);
+    box-shadow: 0 0 0 var(--border-width-1) var(--color-focus-ring);
   }
 
   .post-card__cover {
