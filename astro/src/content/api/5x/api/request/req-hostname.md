@@ -7,7 +7,7 @@ description: Contains the hostname derived from the Host HTTP header.
 
 Contains the hostname derived from the `Host` HTTP header.
 
-When the [`trust proxy` setting](/5x/api.html#trust.proxy.options.table)
+When the [`trust proxy` setting](/en/5x/api.html#trust.proxy.options.table)
 does not evaluate to `false`, this property will instead get the value
 from the `X-Forwarded-Host` header field. This header can be set by
 the client or by the proxy.

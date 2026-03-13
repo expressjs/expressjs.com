@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 The `root` argument specifies the root directory from which to serve static assets.
-For more information on the `options` argument, see [express.static](/5x/api.html#express.static).
+For more information on the `options` argument, see [express.static](/en/5x/api.html#express.static).
 
 Beispiel: Verwenden Sie den folgenden Code, um Bilder, CSS-Dateien und JavaScript-Dateien in einem Verzeichnis namens `public` bereitzustellen:
 
