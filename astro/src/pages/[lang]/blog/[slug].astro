@@ -2,17 +2,21 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import { Container, H1, BodySm, Avatar } from '@/components/primitives';
+import { languages } from '@i18n/locales';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
+  const enPosts = posts.filter((post) => post.id.startsWith('en/'));
 
-  return posts.map((post) => {
-    const [lang, filename] = post.id.split('/');
-    return {
-      params: { lang, slug: filename },
-      props: { post },
-    };
-  });
+  return Object.keys(languages).flatMap((lang) =>
+    enPosts.map((post) => {
+      const filename = post.id.split('/').pop()!;
+      return {
+        params: { lang, slug: filename },
+        props: { post },
+      };
+    })
+  );
 }
 
 const { post } = Astro.props;

@@ -84,11 +84,11 @@ const lang = getLangFromUrl(Astro.url);
   </head>
   <body>
     <Header />
-    <Flex>
+    <Flex class="layout-wrapper">
       <Sidebar />
-      <FlexItem grow>
+      <FlexItem grow class="layout-content">
         <Flex direction="column" class="h-full">
-          <main id="main-content">
+          <main id="main-content" tabindex="-1">
             <slot />
           </main>
           <Footer />
