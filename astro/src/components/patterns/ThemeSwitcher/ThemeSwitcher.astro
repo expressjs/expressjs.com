@@ -46,11 +46,33 @@ const t = useTranslations(lang);
 </button>
 
 <script>
+  // record frame requests
+  let rafHandle = 0;
+
   const handleToggleClick = () => {
-    const element = document.documentElement;
-    const currentTheme = element.getAttribute('data-theme');
-    localStorage.setItem('theme', currentTheme === 'dark' ? 'light' : 'dark');
-    document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+    const root = document.documentElement;
+    const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+
+    // Cancel any pending frame requests to prevent race conditions during rapid clicks
+    if (rafHandle) {
+      cancelAnimationFrame(rafHandle);
+    }
+
+    // Disable transitions
+    root.classList.add('disable-transitions');
+
+    // Apply theme
+    root.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('theme', nextTheme);
+
+    // Wait for the browser to paint the new theme without transitions, then re-enable
+    // them. Double requestAnimationFrame ensures this happens after a full frame.
+    rafHandle = requestAnimationFrame(() => {
+      rafHandle = requestAnimationFrame(() => {
+        root.classList.remove('disable-transitions');
+        rafHandle = 0;
+      });
+    });
   };
 
   document.querySelectorAll('[data-theme-toggle]').forEach((button) => {

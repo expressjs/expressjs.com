@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import { Container, H1, BodySm, Avatar } from '@/components/primitives';
+import { languages } from '@i18n/locales';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const enPosts = posts.filter((post) => post.id.startsWith('en/'));
+
+  return Object.keys(languages).flatMap((lang) =>
+    enPosts.map((post) => {
+      const filename = post.id.split('/').pop()!;
+      return {
+        params: { lang, slug: filename },
+        props: { post },
+      };
+    })
+  );
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const { title, description, tags, authors } = post.data;
+const authorsList = (authors ?? []).map((a) => ({
+  src: a.github ? `https://github.com/${a.github}.png` : '',
+  name: a.name ?? '',
+}));
+const filename = post.id.split('/').pop() ?? post.id;
+const dateStr = filename.substring(0, 10);
+const date = new Date(dateStr).toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+const label = tags?.split(' ')[0] ?? '';
+---
+
+<Layout title={title} description={description}>
+  <Container>
+    <article>
+      {
+        label && (
+          <BodySm as="span" color="secondary" vMargin={false}>
+            {label}
+          </BodySm>
+        )
+      }
+      <H1>{title}</H1>
+      {authorsList.length > 0 && <Avatar authors={authorsList} caption={date} size="md" />}
+      <Content />
+    </article>
+  </Container>
+</Layout>

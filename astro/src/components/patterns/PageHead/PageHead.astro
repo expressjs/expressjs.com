@@ -1,0 +1,22 @@
+---
+import './PageHead.css';
+import { Flex, H1, Body } from '@components/primitives';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<Flex direction="column" gap="6" align="center" class="page-head">
+  <H1 vMargin={false}>{title}</H1>
+  {
+    description && (
+      <Body vMargin={false} class="page-head__description">
+        {description}
+      </Body>
+    )
+  }
+</Flex>
