@@ -6,7 +6,7 @@ description: This is a built-in middleware function in Express. It parses incomi
 <h3 id='express.urlencoded' class='h2'>express.urlencoded([options])</h3>
 
 This is a built-in middleware function in Express. It parses incoming requests
-with urlencoded payloads and is based on [body-parser](/resources/middleware/body-parser.html).
+with urlencoded payloads and is based on [body-parser](/en/resources/middleware/body-parser.html).
 
 Returns middleware that only parses urlencoded bodies and only looks at
 requests where the `Content-Type` header matches the `type` option. This
