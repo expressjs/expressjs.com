@@ -23,7 +23,7 @@ Das folgende Beispiel zeigt die Elemente eines Middlewarefunktionsaufrufs:
 <div class="table-scroller">
 <table id="mw-fig">
 <tbody><tr><td id="mw-fig-imgcell">
-<img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
+<!-- <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" /> -->
 </td>
 <td class="mw-fig-callouts">
 <div class="callout" id="callout1">HTTP-Methode, für die die Middlewarefunktion angewendet wird.</div></tbody>
