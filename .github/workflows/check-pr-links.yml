@@ -37,7 +37,7 @@ jobs:
           args: |
             --root-dir $PWD/dist
             --remap 'https://expressjs\.com\/(.*)/ file://'$PWD'/dist/$1/index.html'
+            --remap 'https://expressjs\.com\/(.*\/)?index\.html file://'$PWD'/dist/$1index.html'
             --remap 'https://expressjs\.com\/(.*)\.html file://'$PWD'/dist/$1/index.html'
-            --remap 'file://.*/dist/(.*)\.html file://'$PWD'/dist/$1/index.html'
             dist/
           fail: true
