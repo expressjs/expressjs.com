@@ -36,6 +36,7 @@ const { tabs, defaultValue = tabs[0]?.value, class: className, ...rest } = Astro
         type="button"
         class:list={['tabs__tab', tab.value === defaultValue && 'tabs__tab--active']}
         aria-selected={tab.value === defaultValue ? 'true' : 'false'}
+        tabindex={tab.value === defaultValue ? 0 : -1}
         data-tabs-value={tab.value}
       >
         {tab.label}
@@ -55,6 +56,7 @@ const { tabs, defaultValue = tabs[0]?.value, class: className, ...rest } = Astro
         buttons.forEach((b) => {
           const isActive = b === btn;
           b.setAttribute('aria-selected', String(isActive));
+          b.setAttribute('tabindex', isActive ? '0' : '-1');
           b.classList.toggle('tabs__tab--active', isActive);
         });
 
