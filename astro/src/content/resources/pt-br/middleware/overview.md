@@ -13,7 +13,6 @@ The Express middleware modules listed here are maintained by the
 | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | [body-parser](/en/resources/middleware/body-parser)         | Parse HTTP request body.                                                                            |
 | [compression](/en/resources/middleware/compression)         | Compress HTTP responses.                                                                            |
-| [connect-rid](/en/resources/middleware/connect-rid)         | Generate unique request ID.                                                                         |
 | [cookie-parser](/en/resources/middleware/cookie-parser)     | Parse cookie header and populate `req.cookies`. See also [cookies](https://github.com/jed/cookies). |
 | [cookie-session](/en/resources/middleware/cookie-session)   | Establish cookie-based sessions.                                                                    |
 | [cors](/en/resources/middleware/cors)                       | Enable cross-origin resource sharing (CORS) with various options.                                   |
