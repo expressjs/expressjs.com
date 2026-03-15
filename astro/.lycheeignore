@@ -1,7 +1,6 @@
 # Rate limit for npmjs.com
-^https://www.npmjs.com/$
-
+https://www.npmjs.com/.*
 # Prevent github rate limit
-^https://github.com/$
-
-dist/404/index.html$
+https://github.com/.*
+# Exclude 404 pages
+dist/.*/404/index.html$
