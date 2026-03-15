@@ -44,7 +44,7 @@ app.use(express.static('files'));
 Express sucht in der Reihenfolge nach den Dateien, in der sie die Verzeichnisse mit den statischen Assets über die Middlewarefunktion `express.static` festgelegt haben.
 
 {% capture alert_content %}
-For best results, [use a reverse proxy](/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+For best results, [use a reverse proxy](/en/advanced/best-practice-performance#use-a-reverse-proxy) cache to improve performance of serving static assets.
 {% endcapture %}
 {% include admonitions/note.html content=alert_content %}
 

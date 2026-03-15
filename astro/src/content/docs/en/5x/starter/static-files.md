@@ -46,7 +46,7 @@ app.use(express.static('files'));
 Express looks up the files in the order in which you set the static directories with the `express.static` middleware function.
 
 {% capture alert_content %}
-For best results, [use a reverse proxy](/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+For best results, [use a reverse proxy](/en/advanced/best-practice-performance#use-a-reverse-proxy) cache to improve performance of serving static assets.
 {% endcapture %}
 {% include admonitions/note.html content=alert_content %}
 

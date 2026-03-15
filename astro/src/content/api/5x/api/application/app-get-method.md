@@ -9,7 +9,7 @@ Routes HTTP GET requests to the specified path with the specified callback funct
 
 {% include api/en/5x/routing-args.html %}
 
-For more information, see the [routing guide](/en/guide/routing.html).
+For more information, see the [routing guide](/en/guide/routing).
 
 #### Example
 

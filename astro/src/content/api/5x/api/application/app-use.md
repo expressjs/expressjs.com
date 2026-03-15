@@ -277,7 +277,7 @@ app.use(mw1, [mw2, r1, r2], subApp);
 </table>
 </div>
 
-Following are some examples of using the [express.static](/en/guide/using-middleware.html#middleware.built-in)
+Following are some examples of using the [express.static](/en/guide/using-middleware#middleware.built-in)
 middleware in an Express app.
 
 Serve static content for the app from the "public" directory in the application directory:

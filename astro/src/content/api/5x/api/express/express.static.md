@@ -8,7 +8,7 @@ description: This is a built-in middleware function in Express.
 This is a built-in middleware function in Express.
 It serves static files and is based on [serve-static](/en/resources/middleware/serve-static.html).
 
-<div class="doc-box doc-info" markdown="1">NOTE: For best results, [use a reverse proxy](/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+<div class="doc-box doc-info" markdown="1">NOTE: For best results, [use a reverse proxy](/en/advanced/best-practice-performance#use-a-reverse-proxy) cache to improve performance of serving static assets.
 </div>
 
 The `root` argument specifies the root directory from which to serve static assets.
@@ -39,7 +39,7 @@ See also the [example below](#example.of.express.static).
 </div>
 
 For more information, see [Serving static files in Express](/en/starter/static-files.html).
-and [Using middleware - Built-in middleware](/en/guide/using-middleware.html#middleware.built-in).
+and [Using middleware - Built-in middleware](/en/guide/using-middleware#middleware.built-in).
 
 <h5 id='dotfiles'> dotfiles</h5>
 

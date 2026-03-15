@@ -14,7 +14,7 @@ Entwicklungs- und Produktionsumgebungen werden in der Regel unterschiedlich konf
 {% capture security-note %}
 
 If you believe you have discovered a security vulnerability in Express, please see
-[Security Policies and Procedures](/en/resources/contributing.html#security-policies-and-procedures).
+[Security Policies and Procedures](/en/resources/contributing#security-policies-and-procedures).
 
 {% endcapture %}
 
