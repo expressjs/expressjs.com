@@ -3,14 +3,19 @@ import tseslint from 'typescript-eslint';
 import eslintAstroPlugin from 'eslint-plugin-astro';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import globals from 'globals';
+import { globalIgnores } from 'eslint/config';
 
 export default [
   // Global ignores
+  globalIgnores(['dist/*', '.astro/*', 'node_modules/*', 'package-lock.json']),
   {
-    env: {
-      node: true,
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
     },
-    ignores: ['dist/', '.astro/', 'node_modules/', 'package-lock.json'],
   },
 
   // Base ESLint recommended rules
