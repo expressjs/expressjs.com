@@ -7,7 +7,7 @@ description: Learn how to use middleware in Express.js applications, including a
 
 Express ist ein Weiterleitungs- und Middleware-Web-Framework, das selbst nur minimale Funktionalität aufweist: Eine Express-Anwendung besteht im Wesentlichen aus einer Reihe von Middlewarefunktionsaufrufen.
 
-_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/5x/api.html#req) (`req`), the [response object](/{{ page.lang }}/5x/api.html#res) (`res`), and the next middleware function in the application's request-response cycle. Die nächste Middlewarefunktion wird im Allgemeinen durch die Variable `next` bezeichnet.
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/5x/api#req) (`req`), the [response object](/{{ page.lang }}/5x/api#res) (`res`), and the next middleware function in the application's request-response cycle. Die nächste Middlewarefunktion wird im Allgemeinen durch die Variable `next` bezeichnet.
 
 Über Middlewarefunktionen lassen sich die folgenden Tasks ausführen:
 
@@ -31,7 +31,7 @@ Sie können auch eine Reihe von Middlewarefunktionen zusammen laden. Dadurch wir
 
 <h2 id='middleware.application'>Middleware auf Anwendungsebene</h2>
 
-Bind application-level middleware to an instance of the [app object](/{{ page.lang }}/5x/api.html#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
+Bind application-level middleware to an instance of the [app object](/{{ page.lang }}/5x/api#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
 
 Dieses Beispiel zeigt eine Middlewarefunktion ohne Mountpfad. Die Funktion wird immer dann ausgeführt, wenn die Anwendung eine Anforderung erhält.
 
@@ -265,9 +265,9 @@ Seit Version 4.x bestehen bei Express keine Abhängigkeiten zu [Connect](https:/
 
 Die einzige integrierte Middlewarefunktion in Express ist `express.static`.
 
-- [express.static](/en/5x/api.html#express.static) serves static assets such as HTML files, images, and so on.
-- [express.json](/en/5x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
-- [express.urlencoded](/en/5x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads. **NOTE: Available with Express 4.16.0+**
+- [express.static](/en/5x/api#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/5x/api#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/5x/api#express.urlencoded) parses incoming requests with URL-encoded payloads. **NOTE: Available with Express 4.16.0+**
 
 <h2 id='middleware.third-party'>Middleware anderer Anbieter</h2>
 

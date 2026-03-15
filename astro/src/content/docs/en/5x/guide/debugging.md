@@ -119,7 +119,7 @@ When running through Node.js, you can set a few environment variables that will 
 The environment variables beginning with `DEBUG_` end up being
 converted into an Options object that gets used with `%o`/`%O` formatters.
 See the Node.js documentation for
-[`util.inspect()`](https://nodejs.org/api/util.html#util_util_inspect_object_options)
+[`util.inspect()`](https://nodejs.org/api/util#util_util_inspect_object_options)
 for the complete list.
 
 {% endcapture %}

@@ -28,7 +28,7 @@ app.get('/user/:id', (request, response) => {
 ```
 
 The `res` object is an enhanced version of Node's own response object
-and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_serverresponse).
+and supports all [built-in fields and methods](https://nodejs.org/api/http#http_class_http_serverresponse).
 
 <h3 id='res.properties'>Properties</h3>
 

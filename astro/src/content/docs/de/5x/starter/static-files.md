@@ -14,7 +14,7 @@ express.static(root, [options]);
 ```
 
 The `root` argument specifies the root directory from which to serve static assets.
-For more information on the `options` argument, see [express.static](/en/5x/api.html#express.static).
+For more information on the `options` argument, see [express.static](/en/5x/api#express.static).
 
 Beispiel: Verwenden Sie den folgenden Code, um Bilder, CSS-Dateien und JavaScript-Dateien in einem Verzeichnis namens `public` bereitzustellen:
 
@@ -48,7 +48,7 @@ For best results, [use a reverse proxy](/en/advanced/best-practice-performance#u
 {% endcapture %}
 {% include admonitions/note.html content=alert_content %}
 
-To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/{{ page.lang }}/5x/api.html#app.use) for the static directory, as shown below:
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/{{ page.lang }}/5x/api#app.use) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'));

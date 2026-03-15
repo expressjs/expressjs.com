@@ -81,11 +81,11 @@ app.set('trust proxy', (ip) => {
 Enabling `trust proxy` will have the following impact:
 
 <ul>
-  <li markdown="1">The value of [req.hostname](/{{ page.lang }}/api.html#req.hostname) is derived from the value set in the `X-Forwarded-Host` header, which can be set by the client or by the proxy.
+  <li markdown="1">The value of [req.hostname](/{{ page.lang }}/api#req.hostname) is derived from the value set in the `X-Forwarded-Host` header, which can be set by the client or by the proxy.
   </li>
-  <li markdown="1">`X-Forwarded-Proto` can be set by the reverse proxy to tell the app whether it is `https` or  `http` or even an invalid name. This value is reflected by [req.protocol](/{{ page.lang }}/api.html#req.protocol).
+  <li markdown="1">`X-Forwarded-Proto` can be set by the reverse proxy to tell the app whether it is `https` or  `http` or even an invalid name. This value is reflected by [req.protocol](/{{ page.lang }}/api#req.protocol).
   </li>
-  <li markdown="1">The [req.ip](/{{ page.lang }}/api.html#req.ip) and [req.ips](/{{ page.lang }}/api.html#req.ips) values are populated based on the socket address and `X-Forwarded-For` header, starting at the first untrusted address.
+  <li markdown="1">The [req.ip](/{{ page.lang }}/api#req.ip) and [req.ips](/{{ page.lang }}/api#req.ips) values are populated based on the socket address and `X-Forwarded-For` header, starting at the first untrusted address.
   </li>
 </ul>
 

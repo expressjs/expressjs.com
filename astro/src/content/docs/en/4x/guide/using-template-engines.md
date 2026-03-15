@@ -11,7 +11,7 @@ This approach makes it easier to design an HTML page.
 
 The [Express application generator](/{{ page.lang }}/starter/generator.html) uses [Pug](https://pugjs.org/api/getting-started.html) as its default, but it also supports [Handlebars](https://www.npmjs.com/package/handlebars), and [EJS](https://www.npmjs.com/package/ejs), among others.
 
-To render template files, set the following [application setting properties](/{{ page.lang }}/4x/api.html#app.set), in the default `app.js` created by the generator:
+To render template files, set the following [application setting properties](/{{ page.lang }}/4x/api#app.set), in the default `app.js` created by the generator:
 
 - `views`, the directory where the template files are located. Eg: `app.set('views', './views')`.
   This defaults to the `views` directory in the application root directory.

@@ -7,7 +7,7 @@ description: Learn how to write custom middleware functions for Express.js appli
 
 <h2>Überblick</h2>
 
-_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/5x/api.html#req) (`req`), the [response object](/{{ page.lang }}/5x/api.html#res) (`res`), and the `next` function in the application's request-response cycle. Die nächste Middlewarefunktion wird im Allgemeinen durch die Variable `next` bezeichnet.
+_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/5x/api#req) (`req`), the [response object](/{{ page.lang }}/5x/api#res) (`res`), and the `next` function in the application's request-response cycle. Die nächste Middlewarefunktion wird im Allgemeinen durch die Variable `next` bezeichnet.
 
 Über Middlewarefunktionen lassen sich die folgenden Tasks ausführen:
 
@@ -34,9 +34,9 @@ Das folgende Beispiel zeigt die Elemente eines Middlewarefunktionsaufrufs:
 
 <div class="callout" id="callout4">Callback-Argument zur Middlewarefunktion, die nach der geltenden Konvention als "next" bezeichnet wird.</div>
 
-<div class="callout" id="callout5">HTTP <a href="/{{ page.lang }}/5x/api.html#res">response</a> argument to the middleware function, called "res" by convention.</div>
+<div class="callout" id="callout5">HTTP <a href="/{{ page.lang }}/5x/api#res">response</a> argument to the middleware function, called "res" by convention.</div>
 
-<div class="callout" id="callout6">HTTP <a href="/{{ page.lang }}/5x/api.html#req">request</a> argument to the middleware function, called "req" by convention.</div>
+<div class="callout" id="callout6">HTTP <a href="/{{ page.lang }}/5x/api#req">request</a> argument to the middleware function, called "req" by convention.</div>
 </td></tr>
 </table>
 </div>

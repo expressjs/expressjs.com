@@ -55,7 +55,7 @@ You can use the `--trace-sync-io` command-line flag to print a warning and a sta
 
 ### Do logging correctly
 
-Im Allgemeinen gibt es für die Protokollierung Ihrer Anwendung zwei Gründe: 1) Debugging und 2) Protokollierung von Anwendungsaktivitäten (im Wesentlichen alles andere, außer Debugging). Die Verwendung von`console.log()` oder `console.err()` zur Ausgabe von Protokollnachrichten an das Terminal ist in der Entwicklung gängige Praxis. But [these functions are synchronous](https://nodejs.org/api/console.html#console) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
+Im Allgemeinen gibt es für die Protokollierung Ihrer Anwendung zwei Gründe: 1) Debugging und 2) Protokollierung von Anwendungsaktivitäten (im Wesentlichen alles andere, außer Debugging). Die Verwendung von`console.log()` oder `console.err()` zur Ausgabe von Protokollnachrichten an das Terminal ist in der Entwicklung gängige Praxis. But [these functions are synchronous](https://nodejs.org/api/console#console) when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
 
 #### Für Debuggingzwecke
 
@@ -136,7 +136,7 @@ Best practice is to handle errors as close to the site as possible. So while thi
 
 Sie sollten _auf keinen_ Fall per Listener das Ereignis `uncaughtException` überwachen, das ausgegeben wird, wenn eine Ausnahmebedingung bis zurück zur Ereignisschleife bestehen bleibt. Durch das Hinzufügen eines Ereignislisteners für `uncaughtException` verändert sich das Standardverhalten des Prozesses, über das eine Ausnahmebedingung festgestellt wird. Das Ausführen einer Anwendung nach einer nicht abgefangenen Ausnahmebedingung ist aber eine durchaus riskante Vorgehensweise und wird nicht empfohlen, da der Prozessstatus störanfällig und unvorhersehbar wird.
 
-Außerdem wird die Verwendung von `uncaughtException` offiziell als [grobes Vorgehen](https://nodejs.org/api/process.html#process_event_uncaughtexception) angesehen, sodass es den [Vorschlag](https://github.com/nodejs/node-v0.x-archive/issues/2582) gibt, die Funktion aus dem Kern zu entfernen. Das Überwachen von `uncaughtException` per Listener ist also keine gute Idee. Daher empfehlen wir Dinge wie Mehrfachprozesse und Supervisoren: Ein Absturz und anschließender Neustart ist häufig die zuverlässigste Art der Fehlerbehebung.
+Außerdem wird die Verwendung von `uncaughtException` offiziell als [grobes Vorgehen](https://nodejs.org/api/process#process_event_uncaughtexception) angesehen, sodass es den [Vorschlag](https://github.com/nodejs/node-v0.x-archive/issues/2582) gibt, die Funktion aus dem Kern zu entfernen. Das Überwachen von `uncaughtException` per Listener ist also keine gute Idee. Daher empfehlen wir Dinge wie Mehrfachprozesse und Supervisoren: Ein Absturz und anschließender Neustart ist häufig die zuverlässigste Art der Fehlerbehebung.
 
 Zudem empfehlen wir, [domains](https://nodejs.org/api/domain.html) nicht zu verwenden. Mit diesem Modul, das zudem veraltet ist, lässt sich das Problem in der Regel nicht lösen.
 

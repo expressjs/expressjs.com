@@ -6,7 +6,7 @@ description: Redirects to the URL derived from the specified path, with specifie
 <h3 id='res.redirect'>res.redirect([status,] path)</h3>
 
 Redirects to the URL derived from the specified `path`, with specified `status`, a positive integer
-that corresponds to an [HTTP status code](https://www.rfc-editor.org/rfc/rfc9110.html#name-status-codes) .
+that corresponds to an [HTTP status code](https://www.rfc-editor.org/rfc/rfc9110#name-status-codes) .
 If not specified, `status` defaults to "302 "Found".
 
 ```js
@@ -62,4 +62,4 @@ res.redirect('back');
 {% include admonitions/note.html content="`back` redirect was deprecated in 4.21.0, use `req.get('Referrer') || '/'` as an argument instead." %}
 
 See also [Security best practices: Prevent open redirect
-vulnerabilities](http://expressjs.com/en/advanced/best-practice-security.html#prevent-open-redirects).
+vulnerabilities](http://expressjs.com/en/advanced/best-practice-security#prevent-open-redirects).

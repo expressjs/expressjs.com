@@ -146,9 +146,9 @@ Express.
 
 Express also sends its own formatted "404 Not Found" messages and formatter error
 response messages. These can be changed by
-[adding your own not found handler](/en/starter/faq.html#how-do-i-handle-404-responses)
+[adding your own not found handler](/en/starter/faq#how-do-i-handle-404-responses)
 and
-[writing your own error handler](/en/guide/error-handling.html#writing-error-handlers):
+[writing your own error handler](/en/guide/error-handling#writing-error-handlers):
 
 ```js
 // last app.use calls right before app.listen():

@@ -28,7 +28,7 @@ We know that migrating between versions can be challenging, especially when it i
 
 Thanks to the incredible efforts of [Sebastian](https://github.com/bjohansebas) and [Filip](https://github.com/kjugi), we have developed a new [codemod package](https://www.npmjs.com/package/@expressjs/codemod) specifically designed to facilitate the transition from Express v4 to v5, as well as future major versions. This package automates many of the necessary code changes, minimizing manual effort and making the upgrade as smooth and efficient as possible.
 
-However, we understand that not all changes can be automated. Some breaking changes, such as the [new Path Route Matching syntax](https://expressjs.com/en/guide/migrating-5.html#path-syntax), require manual modifications by developers. You can read more about all of the breaking changes which came with v5 in our [original release announcement](https://expressjs.com/2024/10/15/v5-release.html).
+However, we understand that not all changes can be automated. Some breaking changes, such as the [new Path Route Matching syntax](https://expressjs.com/en/guide/migrating-5#path-syntax), require manual modifications by developers. You can read more about all of the breaking changes which came with v5 in our [original release announcement](https://expressjs.com/2024/10/15/v5-release.html).
 
 For more details on the migration process and how to use the codemod package, check the [repository’s README](https://github.com/expressjs/codemod#readme) and the [migration guide](https://expressjs.com/en/guide/migrating-5.html).
 

@@ -10,7 +10,7 @@ For an introduction to routing, see [Basic routing](/{{ page.lang }}/starter/bas
 
 You define routing using methods of the Express `app` object that correspond to HTTP methods;
 for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
-see [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD). You can also use [app.all()](/{{ page.lang }}/5x/api.html#app.all) to handle all HTTP methods and [app.use()](/{{ page.lang }}/5x/api.html#app.use) to
+see [app.METHOD](/{{ page.lang }}/5x/api#app.METHOD). You can also use [app.all()](/{{ page.lang }}/5x/api#app.all) to handle all HTTP methods and [app.use()](/{{ page.lang }}/5x/api#app.use) to
 specify middleware as the callback function (See [Using middleware](/{{ page.lang }}/guide/using-middleware.html) for details).
 
 These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
@@ -50,9 +50,9 @@ app.post('/', (req, res) => {
 ```
 
 Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
-For a full list, see [app.METHOD](/{{ page.lang }}/5x/api.html#app.METHOD).
+For a full list, see [app.METHOD](/{{ page.lang }}/5x/api#app.METHOD).
 
-There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -65,7 +65,7 @@ app.all('/secret', (req, res, next) => {
 
 Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings, string patterns, or regular expressions.
 
-{% capture caution-character %} In express 5, the characters `?`, `+`, `*`, `[]`, and `()` are handled differently than in version 4, please review the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax) for more information.{% endcapture %}
+{% capture caution-character %} In express 5, the characters `?`, `+`, `*`, `[]`, and `()` are handled differently than in version 4, please review the [migration guide](/{{ page.lang }}/guide/migrating-5#path-syntax) for more information.{% endcapture %}
 
 {% include admonitions/caution.html content=caution-character %}
 
@@ -118,7 +118,7 @@ app.get('/random.text', (req, res) => {
 
 ### Route paths based on string patterns
 
-{% capture caution-string-patterns %} The string patterns in Express 5 no longer work. Please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax) for more information.{% endcapture %}
+{% capture caution-string-patterns %} The string patterns in Express 5 no longer work. Please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5#path-syntax) for more information.{% endcapture %}
 
 {% include admonitions/caution.html content=caution-string-patterns %}
 
@@ -209,7 +209,7 @@ req.params: { "genus": "Prunus", "species": "persica" }
 ```
 
 {% capture warning-regexp %}
-In express 5, Regexp characters are not supported in route paths, for more information please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5.html#path-syntax).{% endcapture %}
+In express 5, Regexp characters are not supported in route paths, for more information please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5#path-syntax).{% endcapture %}
 
 {% include admonitions/caution.html content=warning-regexp %}
 
@@ -334,22 +334,22 @@ app.get(
 
 The methods on the response object (`res`) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.
 
-| Method                                                          | Description                                                                           |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [res.download()](/{{ page.lang }}/5x/api.html#res.download)     | Prompt a file to be downloaded.                                                       |
-| [res.end()](/{{ page.lang }}/5x/api.html#res.end)               | End the response process.                                                             |
-| [res.json()](/{{ page.lang }}/5x/api.html#res.json)             | Send a JSON response.                                                                 |
-| [res.jsonp()](/{{ page.lang }}/5x/api.html#res.jsonp)           | Send a JSON response with JSONP support.                                              |
-| [res.redirect()](/{{ page.lang }}/5x/api.html#res.redirect)     | Redirect a request.                                                                   |
-| [res.render()](/{{ page.lang }}/5x/api.html#res.render)         | Render a view template.                                                               |
-| [res.send()](/{{ page.lang }}/5x/api.html#res.send)             | Send a response of various types.                                                     |
-| [res.sendFile()](/{{ page.lang }}/5x/api.html#res.sendFile)     | Send a file as an octet stream.                                                       |
-| [res.sendStatus()](/{{ page.lang }}/5x/api.html#res.sendStatus) | Set the response status code and send its string representation as the response body. |
+| Method                                                     | Description                                                                           |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [res.download()](/{{ page.lang }}/5x/api#res.download)     | Prompt a file to be downloaded.                                                       |
+| [res.end()](/{{ page.lang }}/5x/api#res.end)               | End the response process.                                                             |
+| [res.json()](/{{ page.lang }}/5x/api#res.json)             | Send a JSON response.                                                                 |
+| [res.jsonp()](/{{ page.lang }}/5x/api#res.jsonp)           | Send a JSON response with JSONP support.                                              |
+| [res.redirect()](/{{ page.lang }}/5x/api#res.redirect)     | Redirect a request.                                                                   |
+| [res.render()](/{{ page.lang }}/5x/api#res.render)         | Render a view template.                                                               |
+| [res.send()](/{{ page.lang }}/5x/api#res.send)             | Send a response of various types.                                                     |
+| [res.sendFile()](/{{ page.lang }}/5x/api#res.sendFile)     | Send a file as an octet stream.                                                       |
+| [res.sendStatus()](/{{ page.lang }}/5x/api#res.sendStatus) | Set the response status code and send its string representation as the response body. |
 
 <h2 id="app-route">app.route()</h2>
 
 You can create chainable route handlers for a route path by using `app.route()`.
-Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/{{ page.lang }}/5x/api.html#router).
+Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/{{ page.lang }}/5x/api#router).
 
 Here is an example of chained route handlers that are defined by using `app.route()`.
 
@@ -410,7 +410,7 @@ app.use('/birds', birds);
 
 The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.
 
-But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/{{ page.lang }}/5x/api.html#app.use).
+But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/{{ page.lang }}/5x/api#app.use).
 
 ```js
 const router = express.Router({ mergeParams: true });

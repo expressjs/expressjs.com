@@ -17,7 +17,7 @@ These projects are governed under the general policies and guidelines of the Nod
 
 ## Technical committee
 
-The Express technical committee consists of active project members, and guides development and maintenance of the Express project. For more information, see [Express Community - Technical committee](community.html#technical-committee).
+The Express technical committee consists of active project members, and guides development and maintenance of the Express project. For more information, see [Express Community - Technical committee](community#technical-committee).
 
 ## Community contributing guide
 
