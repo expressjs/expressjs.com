@@ -17,10 +17,5 @@ export const middlewareMenu: Menu = {
       label: 'compression',
       ariaLabel: 'compression middleware',
     },
-    {
-      href: `/connect-rid`,
-      label: 'connect-rid',
-      ariaLabel: 'connect-rid middleware',
-    },
   ],
 };
