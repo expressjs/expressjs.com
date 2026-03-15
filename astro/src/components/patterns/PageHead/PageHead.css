@@ -1,0 +1,14 @@
+@layer patterns {
+  .page-head {
+    margin: var(--space-10) 0;
+
+    @media (--md-up) {
+      margin: var(--space-16) 0 var(--space-12);
+    }
+  }
+
+  .page-head__description {
+    max-width: 68rem;
+    text-align: center;
+  }
+}

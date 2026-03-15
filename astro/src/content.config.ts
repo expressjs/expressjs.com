@@ -25,6 +25,23 @@ const resourcesCollection = defineCollection({
   }),
 });
 
+const blogCollection = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    tags: z.string().optional(),
+    authors: z
+      .array(
+        z.object({
+          name: z.string(),
+          github: z.string().optional(),
+        })
+      )
+      .optional(),
+  }),
+});
+
 const npmCollection = defineCollection({
   loader: async () => {
     const res = await fetch('https://registry.npmjs.org/express/latest');
@@ -38,5 +55,6 @@ export const collections = {
   docs: docsCollection,
   api: apiCollection,
   resources: resourcesCollection,
+  blog: blogCollection,
   npm: npmCollection,
 };
