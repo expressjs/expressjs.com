@@ -66,4 +66,5 @@ The [GitHub Discussions](https://github.com/expressjs/discussions) section is an
 ## Express.js Logo
 
 Express is a project of the OpenJS Foundation. Please review the [trademark policy](https://trademark-policy.openjsf.org/) for information about permissible use of Express.js logos and marks.
+
 <!-- TODO: add logos -->
