@@ -22,21 +22,21 @@ If you believe you have discovered a security vulnerability in Express, please s
 
 In diesem Beitrag werden einige der Best Practices in Bezug auf das Thema Sicherheit für Express-Anwendungen behandelt, die in der Produktionsumgebung bereitgestellt werden.
 
-- [Production Best Practices: Security](#production-best-practices-security)
-  - [Overview](#overview)
-  - [Don't use deprecated or vulnerable versions of Express](#dont-use-deprecated-or-vulnerable-versions-of-express)
-  - Über [hsts](https://github.com/helmetjs/hsts) werden `Strict-Transport-Security`-Header festgelegt, über die sichere (HTTP over SSL/TLS) Verbindungen zum Server durchgesetzt werden.
+- [Best Practices in Produktionsumgebungen: Sicherheit](#best-practices-in-produktionsumgebungen-sicherheit)
+  - [Überblick](#überblick)
+  - [Verwenden Sie keine veralteten oder anfälligen Versionen von Express](#verwenden-sie-keine-veralteten-oder-anfälligen-versionen-von-express)
+  - [TLS verwenden](#tls-verwenden)
   - [Do not trust user input](#do-not-trust-user-input)
     - [Prevent open redirects](#prevent-open-redirects)
-  - "Helmet" ist eine Ansammlung von neun kleineren Middlewarefunktionen, über die sicherheitsrelevante HTTP-Header festgelegt werden.
+  - ["Helmet" verwenden](#helmet-verwenden)
   - [Reduce fingerprinting](#reduce-fingerprinting)
-  - Über [xssFilter](https://github.com/helmetjs/x-xss-protection) werden `X-XSS-Protection`-Header festgelegt, um XSS-Filter (Cross-site Scripting) in den meisten aktuellen Web-Browsern zu aktivieren.
-    - Über [noCache](https://github.com/helmetjs/nocache) werden `Cache-Control`- und Pragma-Header festgelegt, um clientseitiges Caching zu deaktivieren.
-    - Über [ieNoOpen](https://github.com/helmetjs/ienoopen) werden `X-Download-Options`-Header für IE8+ festgelegt.
+  - [Cookies sicher verwenden](#cookies-sicher-verwenden)
+    - [Verwenden Sie nicht den standardmäßigen Namen des Sitzungscookies](#verwenden-sie-nicht-den-standardmäßigen-namen-des-sitzungscookies)
+    - [Cookie-Sicherheitsoptionen festlegen](#cookie-sicherheitsoptionen-festlegen)
   - [Prevent brute-force attacks against authorization](#prevent-brute-force-attacks-against-authorization)
   - [Ensure your dependencies are secure](#ensure-your-dependencies-are-secure)
-    - [Avoid other known vulnerabilities](#avoid-other-known-vulnerabilities)
-  - [Additional considerations](#additional-considerations)
+    - [Vermeiden Sie andere Schwachstellen](#vermeiden-sie-andere-schwachstellen)
+  - [Weitere Überlegungen](#weitere-überlegungen)
 
 ## Verwenden Sie keine veralteten oder anfälligen Versionen von Express
 
@@ -50,7 +50,7 @@ Wenn über Ihre Anwendung vertrauliche Daten bearbeitet oder übertragen werden,
 
 Möglicherweise sind Sie mit SSL-Verschlüsselung (Secure Socket Layer) bereits vertraut. [TLS ist einfach der nächste Entwicklungsschritt bei SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). In anderen Worten: Wenn Sie bisher SSL verwendet haben, sollten Sie ein Upgrade auf TLS in Erwägung ziehen. Generell empfehlen wir für TLS den Nginx-Server. Eine gute Referenz zum Konfigurieren von TLS auf Nginx (und anderen Servern) ist [Empfohlene Serverkonfigurationen (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
-Ein handliches Tool zum Abrufen eines kostenloses TLS-Zertifikats ist außerdem [Let's Encrypt](https://letsencrypt.org/about/), eine kostenlose, automatisierte und offene Zertifizierungsstelle der [Internet Security Research Group (ISRG)](https://letsencrypt.org/isrg/).
+Ein handliches Tool zum Abrufen eines kostenloses TLS-Zertifikats ist außerdem [Let's Encrypt](https://letsencrypt.org/about/), eine kostenlose, automatisierte und offene Zertifizierungsstelle der [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
 
 ## Do not trust user input
 

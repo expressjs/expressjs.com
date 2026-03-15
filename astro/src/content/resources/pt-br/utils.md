@@ -19,4 +19,4 @@ for utility functions that may be generally useful.
 | [router](https://www.npmjs.com/package/router)                 | Simple middleware-style router.                                                                                                                         |
 | [send](https://www.npmjs.com/package/send)                     | Library for streaming files as a HTTP response, with support for partial responses (ranges), conditional-GET negotiation, and granular events.          |
 
-For additional low-level HTTP-related modules, see [jshttp](http://jshttp.github.io/).
+For additional low-level HTTP-related modules, see [jshttp](https://github.com/jshttp).
