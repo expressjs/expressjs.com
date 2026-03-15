@@ -27,7 +27,7 @@ app.get('/user/:id', (request, response) => {
 ```
 
 The `req` object is an enhanced version of Node's own request object
-and supports all [built-in fields and methods](https://nodejs.org/api/http#http_class_http_incomingmessage).
+and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_incomingmessage).
 
 <h3 id='req.properties'>Properties</h3>
 

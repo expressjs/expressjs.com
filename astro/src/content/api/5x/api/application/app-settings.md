@@ -109,7 +109,7 @@ This is typically set to the number of spaces to use to indent prettified JSON.
   <td markdown="1">
 Disable query parsing by setting the value to `false`, or set the query parser to use either "simple" or "extended" or a custom query string parsing function.
 
-The simple query parser is based on Node's native query parser, [querystring](http://nodejs.org/api/querystring).
+The simple query parser is based on Node's native query parser, [querystring](http://nodejs.org/api/querystring.html).
 
 The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
 

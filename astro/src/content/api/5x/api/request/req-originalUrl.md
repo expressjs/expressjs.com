@@ -6,7 +6,7 @@ description: req.url is not a native Express property, it is inherited from Node
 <h3 id='req.originalUrl'>req.originalUrl</h3>
 
 <div class="doc-box doc-notice" markdown="1">
-`req.url` is not a native Express property, it is inherited from Node's [http module](https://nodejs.org/api/http#http_message_url).
+`req.url` is not a native Express property, it is inherited from Node's [http module](https://nodejs.org/api/http.html#http_message_url).
 </div>
 
 This property is much like `req.url`; however, it retains the original request URL,
