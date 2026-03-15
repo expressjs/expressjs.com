@@ -9,6 +9,8 @@ const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env
 
 const site = NETLIFY_PREVIEW_SITE || 'https://expressjs.com';
 
+// TODO: add redirecto for blog posts
+
 // https://astro.build/config
 export default defineConfig({
   site,

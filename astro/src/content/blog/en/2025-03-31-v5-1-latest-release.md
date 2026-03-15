@@ -9,7 +9,7 @@ description: Express 5.1.0 is now the default on npm, and we're introducing an o
 
 Express v5.0.0 was released on September 9th last year, but we didn't make it the `latest` release on npm. Many asked us
 why and when it would be, and frankly we were not ready at the time to take that jump. If you have not followed the news
-from the project this past year, we have been [hard at work reviving the project](https://expressjs.com/2025/01/09/rewind-2024-triumphs-and-2025-vision)
+from the project this past year, we have been [hard at work reviving the project](/en/blog/2025-01-09-rewind-2024-triumphs-and-2025-vision/)
 and when we pushed the initial v5 release there were many loose ends still hanging. So first lets quickly go over some
 of those loose ends.
 
@@ -20,7 +20,7 @@ time. Since then we have had tons of great contributors help get things into bet
 Open Source project, we love contributions to help us improve so as you upgrade please continue to open PRs to fix
 anything we missed.
 
-You can find our [v5 docs](https://expressjs.com/en/5x/api) and our [migration guide](https://expressjs.com/en/guide/migrating-5) on the website.
+You can find our [v5 docs](/en/5x/api) and our [migration guide](/en/guide/migrating-5) on the website.
 
 ### Migration Support
 
@@ -28,14 +28,14 @@ We know that migrating between versions can be challenging, especially when it i
 
 Thanks to the incredible efforts of [Sebastian](https://github.com/bjohansebas) and [Filip](https://github.com/kjugi), we have developed a new [codemod package](https://www.npmjs.com/package/@expressjs/codemod) specifically designed to facilitate the transition from Express v4 to v5, as well as future major versions. This package automates many of the necessary code changes, minimizing manual effort and making the upgrade as smooth and efficient as possible.
 
-However, we understand that not all changes can be automated. Some breaking changes, such as the [new Path Route Matching syntax](https://expressjs.com/en/guide/migrating-5#path-syntax), require manual modifications by developers. You can read more about all of the breaking changes which came with v5 in our [original release announcement](https://expressjs.com/2024/10/15/v5-release).
+However, we understand that not all changes can be automated. Some breaking changes, such as the [new Path Route Matching syntax](/en/guide/migrating-5#path-syntax), require manual modifications by developers. You can read more about all of the breaking changes which came with v5 in our [original release announcement](/en/blog/2024-10-15-v5-release).
 
-For more details on the migration process and how to use the codemod package, check the [repository’s README](https://github.com/expressjs/codemod#readme) and the [migration guide](https://expressjs.com/en/guide/migrating-5).
+For more details on the migration process and how to use the codemod package, check the [repository’s README](https://github.com/expressjs/codemod#readme) and the [migration guide](/en/guide/migrating-5).
 
 ### Ecosystem compatibility
 
 The Express ecosystem is one of its strongest assets. It goes back to the early days of Node.js and is the backbone
-that keeps express popular. When it goes [10 years without a major release](https://expressjs.com/2024/10/15/v5-release)
+that keeps express popular. When it goes [10 years without a major release](/en/blog/2024-10-15-v5-release)
 everything from middleware to documentation needed updates. We wanted to make sure folks had
 some time to get all of that updated before we had everyone moving over. Particularly we care about our very large
 beginner user base who may not know the blog post they are reading is not compatible with what they get from
@@ -53,7 +53,7 @@ and we had (still don't have) end user docs on our plans here. While we still ha
 [proposed LTS strategy ](https://github.com/expressjs/discussions/pull/352) which will be the basis for our forthcoming
 docs. Input is very welcome on this so we can make sure it is clearly communicated and acceptable to the community.
 
-Additionally since then [we have announced a partnership with HeroDevs](https://expressjs.com/2024/10/01/HeroDevs-partnership-announcement) to help companies who are less capable of
+Additionally since then [we have announced a partnership with HeroDevs](/en/blog/2024-10-01-HeroDevs-partnership-announcement) to help companies who are less capable of
 updating. More information on how this will work when v4 EOL will come when we get closer to that time.
 
 ---
@@ -161,7 +161,7 @@ Thanks so much to everyone involved in Express over the past year, the work all 
 incredible, and we couldn't do it without them. If you are not able to become a contributor yourself, please consider
 asking your companies to support the project financially on [OpenCollective](https://opencollective.com/express).
 
-As we look ahead, we’re excited to keep building momentum. If you haven’t read it yet, our [Rewind 2024 + 2025 Vision blog post](https://expressjs.com/2025/01/09/rewind-2024-triumphs-and-2025-vision) lays out where we’ve been and where we're headed. This includes performances scoped packages, better automation, security hardening, and more.
+As we look ahead, we’re excited to keep building momentum. If you haven’t read it yet, our [Rewind 2024 + 2025 Vision blog post](/en/blog/2025-01-09-rewind-2024-triumphs-and-2025-vision) lays out where we’ve been and where we're headed. This includes performances scoped packages, better automation, security hardening, and more.
 
 One major initiative is our new [Performance Working Group](https://github.com/expressjs/discussions/pull/306), focused on identifying and fixing long-standing bottlenecks in Express. We're grateful to be kicking this off with support from the [Sovereign Tech Fund (STF)](https://www.sovereign.tech/), who are helping us invest in long-term sustainability and performance of core infrastructure. Additionally, we will be working to [improve our Typescript DX](https://github.com/expressjs/discussions/issues/192) and taking next steps to [improve the website](https://github.com/expressjs/expressjs.com/issues/1787).
 
