@@ -6,12 +6,12 @@ description: Learn how to define and use routes in Express.js applications, incl
 # Routing
 
 _Routing_ refers to how an application's endpoints (URIs) respond to client requests.
-For an introduction to routing, see [Basic routing](/{{ page.lang }}/starter/basic-routing.html).
+For an introduction to routing, see [Basic routing](/{{ page.lang }}/starter/basic-routing).
 
 You define routing using methods of the Express `app` object that correspond to HTTP methods;
 for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
 see [app.METHOD](/{{ page.lang }}/5x/api#app.METHOD). You can also use [app.all()](/{{ page.lang }}/5x/api#app.all) to handle all HTTP methods and [app.use()](/{{ page.lang }}/5x/api#app.use) to
-specify middleware as the callback function (See [Using middleware](/{{ page.lang }}/guide/using-middleware.html) for details).
+specify middleware as the callback function (See [Using middleware](/{{ page.lang }}/guide/using-middleware) for details).
 
 These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
 
@@ -239,7 +239,7 @@ In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `
 
 <h2 id="route-handlers">Route handlers</h2>
 
-You can provide multiple callback functions that behave like [middleware](/{{ page.lang }}/guide/using-middleware.html) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+You can provide multiple callback functions that behave like [middleware](/{{ page.lang }}/guide/using-middleware) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
 
 ```js
 app.get('/user/:id', (req, res, next) => {

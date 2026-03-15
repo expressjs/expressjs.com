@@ -73,4 +73,4 @@ const path = require('path');
 app.use('/static', express.static(path.join(__dirname, 'public')));
 ```
 
-For more details about the `serve-static` function and its options, see [serve-static](/en/resources/middleware/serve-static.html).
+For more details about the `serve-static` function and its options, see [serve-static](/en/resources/middleware/serve-static).

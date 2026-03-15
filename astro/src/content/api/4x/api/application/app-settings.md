@@ -115,7 +115,7 @@ This is typically set to the number of spaces to use to indent prettified JSON.
   <td markdown="1">
 Disable query parsing by setting the value to `false`, or set the query parser to use either "simple" or "extended" or a custom query string parsing function.
 
-The simple query parser is based on Node's native query parser, [querystring](http://nodejs.org/api/querystring.html).
+The simple query parser is based on Node's native query parser, [querystring](http://nodejs.org/api/querystring).
 
 The extended query parser is based on [qs](https://www.npmjs.org/package/qs).
 
@@ -212,7 +212,7 @@ A custom query string parsing function will receive the complete query string, a
   <h5 id="trust.proxy.options.table">Options for `trust proxy` setting</h5>
 
   <p markdown="1">
-  Read [Express behind proxies](/en/guide/behind-proxies.html) for more
+  Read [Express behind proxies](/en/guide/behind-proxies) for more
   information.
   </p>
 

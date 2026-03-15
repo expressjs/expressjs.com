@@ -43,7 +43,7 @@ const app = express();
 app.use(compression());
 ```
 
-Bei Websites mit hohem Datenverkehr in Produktionsumgebungen lässt sich die Komprimierung am besten installieren, indem sie auf Reverse Proxy-Ebene implementiert wird (siehe [Reverse Proxy verwenden](#proxy)). In diesem Fall wird die Middleware "compression" nicht benötigt. Details zur Aktivierung der GZIP-Komprimierung in Nginx siehe [Modul ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in der Nginx-Dokumentation.
+Bei Websites mit hohem Datenverkehr in Produktionsumgebungen lässt sich die Komprimierung am besten installieren, indem sie auf Reverse Proxy-Ebene implementiert wird (siehe [Reverse Proxy verwenden](#proxy)). In diesem Fall wird die Middleware "compression" nicht benötigt. Details zur Aktivierung der GZIP-Komprimierung in Nginx siehe [Modul ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module) in der Nginx-Dokumentation.
 
 ### Keine synchronen Funktionen verwenden
 
@@ -138,7 +138,7 @@ Sie sollten _auf keinen_ Fall per Listener das Ereignis `uncaughtException` übe
 
 Außerdem wird die Verwendung von `uncaughtException` offiziell als [grobes Vorgehen](https://nodejs.org/api/process#process_event_uncaughtexception) angesehen, sodass es den [Vorschlag](https://github.com/nodejs/node-v0.x-archive/issues/2582) gibt, die Funktion aus dem Kern zu entfernen. Das Überwachen von `uncaughtException` per Listener ist also keine gute Idee. Daher empfehlen wir Dinge wie Mehrfachprozesse und Supervisoren: Ein Absturz und anschließender Neustart ist häufig die zuverlässigste Art der Fehlerbehebung.
 
-Zudem empfehlen wir, [domains](https://nodejs.org/api/domain.html) nicht zu verwenden. Mit diesem Modul, das zudem veraltet ist, lässt sich das Problem in der Regel nicht lösen.
+Zudem empfehlen wir, [domains](https://nodejs.org/api/domain) nicht zu verwenden. Mit diesem Modul, das zudem veraltet ist, lässt sich das Problem in der Regel nicht lösen.
 
 ## Things to do in your environment / setup {#in-environment}
 
@@ -242,7 +242,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Weitere Informationen zu "systemd" siehe [systemd-Referenz (Man-Page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
+Weitere Informationen zu "systemd" siehe [systemd-Referenz (Man-Page)](http://www.freedesktop.org/software/systemd/man/systemd.unit).
 
 ### Anwendung in einem Cluster ausführen
 
@@ -256,7 +256,7 @@ Bei in Gruppen zusammengefassten Anwendungen (geclusterte Anwendungen) können V
 
 #### Clustermodule von Node verwenden
 
-Clustering is made possible with Node's [cluster module](https://nodejs.org/api/cluster.html). Dadurch wird ein Masterprozess eingeleitet, um Verarbeitungsprozesse zu starten und eingehende Verbindungen auf die Verarbeitungsprozesse zu verteilen.
+Clustering is made possible with Node's [cluster module](https://nodejs.org/api/cluster). Dadurch wird ein Masterprozess eingeleitet, um Verarbeitungsprozesse zu starten und eingehende Verbindungen auf die Verarbeitungsprozesse zu verteilen.
 
 #### Using PM2
 
@@ -296,7 +296,7 @@ Use a caching server like [Varnish](https://www.varnish-cache.org/) or [Nginx](h
 
 Unabhängig davon, wie gut eine Anwendung optimiert wurde, kann eine Einzelinstanz nur eine begrenzte Arbeitslast oder einen begrenzten Datenverkehr handhaben. Eine Möglichkeit, eine Anwendung zu skalieren, ist die Ausführung mehrerer Instanzen dieser Anwendung und die Verteilung des Datenverkehrs über eine Lastausgleichsfunktion (Load Balancer) vorzunehmen. Die Einrichtung eines solchen Load Balancer kann helfen, Leistung und Geschwindigkeit Ihrer Anwendung zu verbessern.
 
-Ein Load Balancer ist in der Regel ein Reverse Proxy, der den Datenverkehr zu und von mehreren Anwendungsinstanzen und Servern koordiniert. You can easily set up a load balancer for your app by using [Nginx](https://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+Ein Load Balancer ist in der Regel ein Reverse Proxy, der den Datenverkehr zu und von mehreren Anwendungsinstanzen und Servern koordiniert. You can easily set up a load balancer for your app by using [Nginx](https://nginx.org/en/docs/http/load_balancing) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
 Bei einer solchen Lastverteilung müssen Sie sicherstellen, dass Anforderungen, die einer bestimmten Sitzungs-ID zugeordnet sind, mit dem Prozess verbunden sind, von dem sie ursprünglich stammen. Dies wird auch als _Sitzungsaffinität_ oder _Affine Sitzungen_ bezeichnet und kann durch den obigen Vorschlag, einen Datenspeicher wie Redis für Sitzungsdaten zu verwenden (je nach Anwendung), umgesetzt werden. Eine Beschreibung hierzu siehe [Mehrere Knoten verwenden](https://socket.io/docs/v4/using-multiple-nodes/).
 

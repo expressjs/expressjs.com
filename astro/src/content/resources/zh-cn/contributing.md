@@ -437,7 +437,7 @@ But just in case you need a little extra explanation, this section below outline
 **Blog Markdown Files**
 
 - These files make up the individual blog posts. If you want to contribute a blog post please
-  follow the specific instructions for [How to write a blog post.](https://expressjs.com/en/blog/write-post.html)
+  follow the specific instructions for [How to write a blog post.](https://expressjs.com/en/blog/write-post)
 - Located under the `_posts` directory.
 
 **CSS or Javascript**

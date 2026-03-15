@@ -157,7 +157,7 @@ async function cookieValidator(cookies) {
 }
 ```
 
-Here, we use the [`cookie-parser`](/en/resources/middleware/cookie-parser.html) middleware to parse incoming cookies off the `req` object and pass them to our `cookieValidator` function. The `validateCookies` middleware returns a Promise that upon rejection will automatically trigger our error handler.
+Here, we use the [`cookie-parser`](/en/resources/middleware/cookie-parser) middleware to parse incoming cookies off the `req` object and pass them to our `cookieValidator` function. The `validateCookies` middleware returns a Promise that upon rejection will automatically trigger our error handler.
 
 ```js
 const express = require('express');
@@ -189,7 +189,7 @@ Note how `next()` is called after `await cookieValidator(req.cookies)`. This ens
 
 Da Sie Zugriff auf das Anforderungsobjekt, das Antwortobjekt, die nächste Middlewarefunktion im Stack und die gesamte Node.js-API haben, sind die Möglichkeiten, die Sie mit Middlewarefunktionen haben, nahezu unendlich.
 
-Weitere Informationen zur Verwendung von Middleware in Express siehe [ Express-Middleware verwenden](/{{ page.lang }}/guide/using-middleware.html).
+Weitere Informationen zur Verwendung von Middleware in Express siehe [ Express-Middleware verwenden](/{{ page.lang }}/guide/using-middleware).
 
 <h2>Configurable middleware</h2>
 

@@ -1,11 +1,11 @@
 ---
 title: app.use
-description: Mounts the specified [middleware](/en/guide/using-middleware.html) function or functions
+description: Mounts the specified [middleware](/en/guide/using-middleware) function or functions
 ---
 
 <h3 id='app.use'>app.use([path,] callback [, callback...])</h3>
 
-Mounts the specified [middleware](/en/guide/using-middleware.html) function or functions
+Mounts the specified [middleware](/en/guide/using-middleware) function or functions
 at the specified path:
 the middleware function is executed when the base of the requested path matches `path`.
 
@@ -55,7 +55,7 @@ app.get('/', function (req, res) {
 
 **Error-handling middleware**
 
-Error-handling middleware always takes _four_ arguments. You must provide four arguments to identify it as an error-handling middleware function. Even if you don't need to use the `next` object, you must specify it to maintain the signature. Otherwise, the `next` object will be interpreted as regular middleware and will fail to handle errors. For details about error-handling middleware, see: [Error handling](/{{ page.lang }}/guide/error-handling.html).
+Error-handling middleware always takes _four_ arguments. You must provide four arguments to identify it as an error-handling middleware function. Even if you don't need to use the `next` object, you must specify it to maintain the signature. Otherwise, the `next` object will be interpreted as regular middleware and will fail to handle errors. For details about error-handling middleware, see: [Error handling](/{{ page.lang }}/guide/error-handling).
 
 Define error-handling middleware functions in the same way as other middleware functions, except with four arguments instead of three, specifically with the signature `(err, req, res, next)`):
 

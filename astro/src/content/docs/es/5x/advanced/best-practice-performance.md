@@ -43,7 +43,7 @@ const app = express();
 app.use(compression());
 ```
 
-For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#use-a-reverse-proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
+For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#use-a-reverse-proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module) in the Nginx documentation.
 
 ### Don't use synchronous functions
 
@@ -138,7 +138,7 @@ One thing you should _not_ do is to listen for the `uncaughtException` event, em
 
 Additionally, using `uncaughtException` is officially recognized as [crude](https://nodejs.org/api/process#process_event_uncaughtexception). So listening for `uncaughtException` is just a bad idea. This is why we recommend things like multiple processes and supervisors: crashing and restarting is often the most reliable way to recover from an error.
 
-We also don't recommend using [domains](https://nodejs.org/api/domain.html). It generally doesn't solve the problem and is a deprecated module.
+We also don't recommend using [domains](https://nodejs.org/api/domain). It generally doesn't solve the problem and is a deprecated module.
 
 ## Things to do in your environment / setup {#in-environment}
 
@@ -242,7 +242,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-For more information on systemd, see the [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit.html).
+For more information on systemd, see the [systemd reference (man page)](http://www.freedesktop.org/software/systemd/man/systemd.unit).
 
 ### Run your app in a cluster
 
@@ -256,7 +256,7 @@ In clustered apps, worker processes can crash individually without affecting the
 
 #### Using Node's cluster module
 
-Clustering is made possible with Node's [cluster module](https://nodejs.org/api/cluster.html). This enables a master process to spawn worker processes and distribute incoming connections among the workers.
+Clustering is made possible with Node's [cluster module](https://nodejs.org/api/cluster). This enables a master process to spawn worker processes and distribute incoming connections among the workers.
 
 #### Using PM2
 
@@ -296,7 +296,7 @@ Use a caching server like [Varnish](https://www.varnish-cache.org/) or [Nginx](h
 
 No matter how optimized an app is, a single instance can handle only a limited amount of load and traffic. One way to scale an app is to run multiple instances of it and distribute the traffic via a load balancer. Setting up a load balancer can improve your app's performance and speed, and enable it to scale more than is possible with a single instance.
 
-A load balancer is usually a reverse proxy that orchestrates traffic to and from multiple application instances and servers. You can easily set up a load balancer for your app by using [Nginx](https://nginx.org/en/docs/http/load_balancing.html) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
+A load balancer is usually a reverse proxy that orchestrates traffic to and from multiple application instances and servers. You can easily set up a load balancer for your app by using [Nginx](https://nginx.org/en/docs/http/load_balancing) or [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts).
 
 With load balancing, you might have to ensure that requests that are associated with a particular session ID connect to the process that originated them. This is known as _session affinity_, or _sticky sessions_, and may be addressed by the suggestion above to use a data store such as Redis for session data (depending on your application). For a discussion, see [Using multiple nodes](https://socket.io/docs/v4/using-multiple-nodes/).
 

@@ -9,7 +9,7 @@ A _template engine_ enables you to use static template files in your application
 variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
 This approach makes it easier to design an HTML page.
 
-The [Express application generator](/{{ page.lang }}/starter/generator.html) uses [Pug](https://pugjs.org/api/getting-started.html) as its default, but it also supports [Handlebars](https://www.npmjs.com/package/handlebars), and [EJS](https://www.npmjs.com/package/ejs), among others.
+The [Express application generator](/{{ page.lang }}/starter/generator) uses [Pug](https://pugjs.org/api/getting-started) as its default, but it also supports [Handlebars](https://www.npmjs.com/package/handlebars), and [EJS](https://www.npmjs.com/package/ejs), among others.
 
 To render template files, set the following [application setting properties](/{{ page.lang }}/4x/api#app.set), in the default `app.js` created by the generator:
 

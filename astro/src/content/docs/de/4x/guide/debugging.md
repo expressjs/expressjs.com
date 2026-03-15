@@ -17,7 +17,7 @@ Verwenden Sie unter Windows den entsprechenden Befehl.
 > $env:DEBUG = "express:*"; node index.js
 ```
 
-Die Ausführung dieses Befehls für die durch [express generator](/{{ page.lang }}/starter/generator.html) generierte Standardanwendung resultiert in folgender Ausgabe:
+Die Ausführung dieses Befehls für die durch [express generator](/{{ page.lang }}/starter/generator) generierte Standardanwendung resultiert in folgender Ausgabe:
 
 ```bash
 $ DEBUG=express:* node ./bin/www

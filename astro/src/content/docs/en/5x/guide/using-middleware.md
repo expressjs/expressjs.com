@@ -258,7 +258,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-For details about error-handling middleware, see: [Error handling](/{{ page.lang }}/guide/error-handling.html).
+For details about error-handling middleware, see: [Error handling](/{{ page.lang }}/guide/error-handling).
 
 <h2 id='middleware.built-in'>Built-in middleware</h2>
 
@@ -292,4 +292,4 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 ```
 
-For a partial list of third-party middleware functions that are commonly used with Express, see: [Third-party middleware](../resources/middleware.html).
+For a partial list of third-party middleware functions that are commonly used with Express, see: [Third-party middleware](../resources/middleware).

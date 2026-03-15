@@ -7,7 +7,7 @@ description: This is a built-in middleware function in Express. It parses incomi
 
 This is a built-in middleware function in Express. It parses incoming request
 payloads into a `Buffer` and is based on
-[body-parser](/en/resources/middleware/body-parser.html).
+[body-parser](/en/resources/middleware/body-parser).
 
 Returns middleware that parses all bodies as a `Buffer` and only looks at requests
 where the `Content-Type` header matches the `type` option. This parser accepts
