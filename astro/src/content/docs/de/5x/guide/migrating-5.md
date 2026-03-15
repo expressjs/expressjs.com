@@ -164,7 +164,7 @@ app.all('/', (req, res) => {
 
 Ein führendes Doppelpunktzeichen (:) im Namen für die Funktion `app.param(name, fn)` ist ein Überbleibsel aus Express 3. Aus Gründen der Abwärtskompatibilität wurde dieser Name in Express 4 mit einem Hinweis zu veralteten Versionen weiter unterstützt. In Express 5 wird dieser Name stillschwiegend ignoriert und der Namensparameter ohne einen vorangestellten Doppelpunkt verwendet.
 
-Dies dürfte keine Auswirkungen auf Ihren Code haben, wenn Sie die Express 4-Dokumentation zu [app.param](/{{ page.lang }}/4x/api.html#app.param) befolgen, da dort der führende Doppelpunkt nicht erwähnt wird.
+Dies dürfte keine Auswirkungen auf Ihren Code haben, wenn Sie die Express 4-Dokumentation zu [app.param](/en/4x/api#app.param) befolgen, da dort der führende Doppelpunkt nicht erwähnt wird.
 
 <h3 id="req.param">req.param(name)</h3>
 
@@ -360,7 +360,7 @@ Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work wit
 - JavaScript files (.js): now served as "text/javascript" instead of "application/javascript"
 - JSON files (.json): now served as "application/json" instead of "text/json"
 - CSS files (.css): now served as "text/css" instead of "text/plain"
-- HTML files (.html): now served as "text/html; charset=utf-8" instead of just "text/html"
+- HTML files (): now served as "text/html; charset=utf-8" instead of just "text/html"
 - XML files (.xml): now served as "application/xml" instead of "text/xml"
 - Font files (.woff): now served as "font/woff" instead of "application/font-woff"
 
@@ -462,7 +462,7 @@ app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
 
 Request middleware and handlers that return rejected promises are now handled by forwarding the rejected value as an `Error` to the error handling middleware. This means that using `async` functions as middleware and handlers are easier than ever. When an error is thrown in an `async` function or a rejected promise is `await`ed inside an async function, those errors will be passed to the error handler as if calling `next(err)`.
 
-Details of how Express handles errors is covered in the [error handling documentation](/en/guide/error-handling.html).
+Details of how Express handles errors is covered in the [error handling documentation](/en/guide/error-handling).
 
 <h3 id="express.urlencoded">express.urlencoded</h3>
 

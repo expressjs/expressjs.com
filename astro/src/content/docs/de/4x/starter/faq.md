@@ -35,7 +35,7 @@ Ein einfaches Benutzername/Kennwort-Schema können Sie in [diesem Beispiel](http
 Express unterstützt jede Template-Engine, die der `(path, locals, callback)`-Signatur entspricht.
 Informationen zur Normalisierung von Template-Engine-Schnittstellen und -Caching siehe das Projekt [consolidate.js](https://github.com/visionmedia/consolidate.js). Nicht aufgelistete Template-Engines können trotzdem die Express-Signatur unterstützen.
 
-For more information, see [Using template engines with Express](/{{page.lang}}/guide/using-template-engines.html).
+For more information, see [Using template engines with Express](/en/guide/using-template-engines).
 
 ## Wie handhabe ich 404-Antworten?
 
@@ -61,7 +61,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Weitere Informationen siehe [Fehlerbehandlung](/{{ page.lang }}/guide/error-handling.html).
+Weitere Informationen siehe [Fehlerbehandlung](/en/guide/error-handling).
 
 ## Wie gebe ich normales HTML-Format aus?
 
@@ -71,5 +71,5 @@ Wenn Sie viele Assets aus einem Verzeichnis bedienen müssen, verwenden Sie die 
 
 ## Welche Version von Node.js benötigt Express?
 
-- [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
-- [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.
+- [Express 4.x](/en/4x/api) requires Node.js 0.10 or higher.
+- [Express 5.x](/en/5x/api) requires Node.js 18 or higher.

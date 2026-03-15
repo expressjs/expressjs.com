@@ -11,7 +11,7 @@ description: Access the API reference for Express.js version 3.x, noting that th
 
 3.xの既知および未知のセキュリティ問題は、最終更新（2015年8月1日）以降は対処されていません。3.x系を使用することは安全であると見なされるべきではありません。 It is highly recommended to use the latest version of Express.
 
-If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/{{ page.lang }}/support#commercial-support-options).
+If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/en/support#commercial-support-options).
 
   </div>
 

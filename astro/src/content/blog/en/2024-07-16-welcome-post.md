@@ -23,6 +23,6 @@ Initially, posts will be written by TC members (potentially collaborating others
 
 Express TC member [Ulises Gascón](https://github.com/UlisesGascon) suggested a number of interesting topics for blog posts in [expressjs.com issue 1500](https://github.com/expressjs/expressjs.com/issues/1500), but there are undoubtedly many others.
 
-If you have an idea for a post, feel free to pitch the idea! You can add a comment to [expressjs.com issue 1500](https://github.com/expressjs/expressjs.com/issues/1500) or open a new issue, and then after appropriate discussion, open a PR. We've also written up simple [instructions to create a blog post](/en/blog/write-post.html).
+If you have an idea for a post, feel free to pitch the idea! You can add a comment to [expressjs.com issue 1500](https://github.com/expressjs/expressjs.com/issues/1500) or open a new issue, and then after appropriate discussion, open a PR. We've also written up simple [instructions to create a blog post](/en/blog/write-post).
 
 Happy blogging!

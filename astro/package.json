@@ -41,6 +41,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
+    "globals": "^17.4.0",
     "lint-staged": "^16.2.7",
     "postcss-custom-media": "^12.0.0",
     "postcss-nested": "^7.0.2",
