@@ -53,7 +53,7 @@ and we had (still don't have) end user docs on our plans here. While we still ha
 [proposed LTS strategy ](https://github.com/expressjs/discussions/pull/352) which will be the basis for our forthcoming
 docs. Input is very welcome on this so we can make sure it is clearly communicated and acceptable to the community.
 
-Additionally since then [we have announced a partnership with HeroDevs](/en/blog/2024-10-01-HeroDevs-partnership-announcement) to help companies who are less capable of
+Additionally since then [we have announced a partnership with HeroDevs](/en/blog/2024-10-01-herodevs-partnership-announcement) to help companies who are less capable of
 updating. More information on how this will work when v4 EOL will come when we get closer to that time.
 
 ---
