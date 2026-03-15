@@ -11,7 +11,7 @@ description: Acesso à referência da API do Express.js versão 3.x, observando 
 
 This series will continue to receive only security updates and bug fixes until July 2015. It is highly recommended to upgrade to Express 4.x.
 
-Se você não puder atualizar as últimas 3.x, por favor considere as [Opções de Suporte Comercial](/{{ page.lang }}/support#comercial-support-options).
+Se você não puder atualizar as últimas 3.x, por favor considere as [Opções de Suporte Comercial](/en/support#comercial-support-options).
 
   </div>
 

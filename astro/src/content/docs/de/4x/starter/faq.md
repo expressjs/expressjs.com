@@ -61,7 +61,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Weitere Informationen siehe [Fehlerbehandlung](/{{ page.lang }}/guide/error-handling).
+Weitere Informationen siehe [Fehlerbehandlung](/en/guide/error-handling).
 
 ## Wie gebe ich normales HTML-Format aus?
 
@@ -71,5 +71,5 @@ Wenn Sie viele Assets aus einem Verzeichnis bedienen müssen, verwenden Sie die 
 
 ## Welche Version von Node.js benötigt Express?
 
-- [Express 4.x](/{{ page.lang }}/4x/api) requires Node.js 0.10 or higher.
-- [Express 5.x](/{{ page.lang }}/5x/api) requires Node.js 18 or higher.
+- [Express 4.x](/en/4x/api) requires Node.js 0.10 or higher.
+- [Express 5.x](/en/5x/api) requires Node.js 18 or higher.

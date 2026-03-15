@@ -50,7 +50,7 @@ For best results, [use a reverse proxy](/en/advanced/best-practice-performance#u
 {% endcapture %}
 {% include admonitions/note.html content=alert_content %}
 
-To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/{{ page.lang }}/5x/api#app.use) for the static directory, as shown below:
+To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/en/5x/api#app.use) for the static directory, as shown below:
 
 ```js
 app.use('/static', express.static('public'));

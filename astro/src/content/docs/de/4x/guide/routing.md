@@ -6,12 +6,12 @@ description: Learn how to define and use routes in Express.js applications, incl
 # Weiterleitung (Routing)
 
 Der Begriff _Weiterleitung_ (Routing) bezieht sich auf die Definition von Anwendungsendpunkten (URIs) und deren Antworten auf Clientanforderungen.
-Eine Einführung in dieses Routing siehe [Basisrouting](/{{ page.lang }}/starter/basic-routing).
+Eine Einführung in dieses Routing siehe [Basisrouting](/en/starter/basic-routing).
 
 You define routing using methods of the Express `app` object that correspond to HTTP methods;
 for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
-see [app.METHOD](/{{ page.lang }}/5x/api#app.METHOD). You can also use [app.all()](/{{ page.lang }}/5x/api#app.all) to handle all HTTP methods and [app.use()](/{{ page.lang }}/5x/api#app.use) to
-specify middleware as the callback function (See [Using middleware](/{{ page.lang }}/guide/using-middleware) for details).
+see [app.METHOD](/en/5x/api#app.METHOD). You can also use [app.all()](/en/5x/api#app.all) to handle all HTTP methods and [app.use()](/en/5x/api#app.use) to
+specify middleware as the callback function (See [Using middleware](/en/guide/using-middleware) for details).
 
 These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
 
@@ -50,7 +50,7 @@ app.post('/', (req, res) => {
 ```
 
 Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
-For a full list, see [app.METHOD](/{{ page.lang }}/5x/api#app.METHOD).
+For a full list, see [app.METHOD](/en/5x/api#app.METHOD).
 
 Es gibt eine spezielle Weiterleitungsmethode, `app.all()`, die nicht von einer HTTP-Methode abgeleitet wird. Diese Methode wird zum Laden von Middlewarefunktionen bei einem Pfad für alle Anforderungsmethoden verwendet. Im folgenden Beispiel wird der Handler für Anforderungen zur Weiterleitung "/secret" ausgeführt, um herauszufinden, ob Sie GET-, POST-, PUT-, DELETE- oder andere HTTP-Anforderungsmethoden verwenden, die im [HTTP-Modul](https://nodejs.org/api/http#http_http_methods) unterstützt werden.
 
@@ -65,7 +65,7 @@ app.all('/secret', (req, res, next) => {
 
 Über Weiterleitungspfade werden in Kombination mit einer Anforderungsmethode die Endpunkte definiert, bei denen Anforderungen erfolgen können. Weiterleitungspfade können Zeichenfolgen, Zeichenfolgemuster oder reguläre Ausdrücke sein.
 
-{% capture caution-character %} In express 5, the characters `?`, `+`, `*`, `[]`, and `()` are handled differently than in version 4, please review the [migration guide](/{{ page.lang }}/guide/migrating-5#path-syntax) for more information.{% endcapture %}
+{% capture caution-character %} In express 5, the characters `?`, `+`, `*`, `[]`, and `()` are handled differently than in version 4, please review the [migration guide](/en/guide/migrating-5#path-syntax) for more information.{% endcapture %}
 
 {% include admonitions/caution.html content=caution-character %}
 
@@ -118,7 +118,7 @@ app.get('/random.text', (req, res) => {
 
 ### Route paths based on string patterns
 
-{% capture caution-string-patterns %} The string patterns in Express 5 no longer work. Please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5#path-syntax) for more information.{% endcapture %}
+{% capture caution-string-patterns %} The string patterns in Express 5 no longer work. Please refer to the [migration guide](/en/guide/migrating-5#path-syntax) for more information.{% endcapture %}
 
 {% include admonitions/caution.html content=caution-string-patterns %}
 
@@ -209,7 +209,7 @@ req.params: { "genus": "Prunus", "species": "persica" }
 ```
 
 {% capture warning-regexp %}
-In express 5, Regexp characters are not supported in route paths, for more information please refer to the [migration guide](/{{ page.lang }}/guide/migrating-5#path-syntax).{% endcapture %}
+In express 5, Regexp characters are not supported in route paths, for more information please refer to the [migration guide](/en/guide/migrating-5#path-syntax).{% endcapture %}
 
 {% include admonitions/caution.html content=warning-regexp %}
 
@@ -239,7 +239,7 @@ In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `
 
 <h2 id="route-handlers">Routenhandler (Weiterleitungsroutinen)</h2>
 
-Sie können mehrere Callback-Funktionen angeben, die sich wie [Middleware](/{{ page.lang }}/guide/using-middleware) verhalten, um eine Anforderung zu verarbeiten. Die einzige Ausnahme hierbei ist, dass diese Callbacks möglicherweise `next('route')` aufrufen, um die verbleibenden Weiterleitungs-Callbacks zu umgehen. Mit diesem Verfahren können Sie Vorabbedingungen für eine Weiterleitung festlegen und dann die Steuerung an nachfolgende Weiterleitungen übergeben, wenn kein Grund vorliegt, mit der aktuellen Weiterleitung fortzufahren.
+Sie können mehrere Callback-Funktionen angeben, die sich wie [Middleware](/en/guide/using-middleware) verhalten, um eine Anforderung zu verarbeiten. Die einzige Ausnahme hierbei ist, dass diese Callbacks möglicherweise `next('route')` aufrufen, um die verbleibenden Weiterleitungs-Callbacks zu umgehen. Mit diesem Verfahren können Sie Vorabbedingungen für eine Weiterleitung festlegen und dann die Steuerung an nachfolgende Weiterleitungen übergeben, wenn kein Grund vorliegt, mit der aktuellen Weiterleitung fortzufahren.
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -334,22 +334,22 @@ app.get(
 
 Über die Methoden für das Antwortobjekt (`res`) in der folgenden Tabelle kann eine Antwort an den Client gesendet und der Anforderung/Antwort-Zyklus beendet werden. Wenn keine dieser Methoden über einen Routenhandler aufgerufen wird, bleibt die Clientanforderung im Status "blockiert".
 
-| Methode                                                    | Beschreibung                                                                                    |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [res.download()](/{{ page.lang }}/4x/api#res.download)     | Gibt eine Eingabeaufforderung zum Herunterladen einer Datei aus.                                |
-| [res.end()](/{{ page.lang }}/4x/api#res.end)               | End the response process.                                                                       |
-| [res.json()](/{{ page.lang }}/4x/api#res.json)             | Sendet eine JSON-Antwort.                                                                       |
-| [res.jsonp()](/{{ page.lang }}/4x/api#res.jsonp)           | Sendet eine JSON-Antwort mit JSONP-Unterstützung.                                               |
-| [res.redirect()](/{{ page.lang }}/4x/api#res.redirect)     | Leitet eine Anforderung um.                                                                     |
-| [res.render()](/{{ page.lang }}/4x/api#res.render)         | Render a view template.                                                                         |
-| [res.send()](/{{ page.lang }}/4x/api#res.send)             | Sendet eine Antwort mit unterschiedlichen Typen.                                                |
-| [res.sendFile](/{{ page.lang }}/4x/api#res.sendFile)       | Sendet eine Datei als Oktett-Stream.                                                            |
-| [res.sendStatus()](/{{ page.lang }}/4x/api#res.sendStatus) | Legt den Antwortstatuscode fest und sendet dessen Zeichenfolgedarstellung als Antworthauptteil. |
+| Methode                                       | Beschreibung                                                                                    |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [res.download()](/en/4x/api#res.download)     | Gibt eine Eingabeaufforderung zum Herunterladen einer Datei aus.                                |
+| [res.end()](/en/4x/api#res.end)               | End the response process.                                                                       |
+| [res.json()](/en/4x/api#res.json)             | Sendet eine JSON-Antwort.                                                                       |
+| [res.jsonp()](/en/4x/api#res.jsonp)           | Sendet eine JSON-Antwort mit JSONP-Unterstützung.                                               |
+| [res.redirect()](/en/4x/api#res.redirect)     | Leitet eine Anforderung um.                                                                     |
+| [res.render()](/en/4x/api#res.render)         | Render a view template.                                                                         |
+| [res.send()](/en/4x/api#res.send)             | Sendet eine Antwort mit unterschiedlichen Typen.                                                |
+| [res.sendFile](/en/4x/api#res.sendFile)       | Sendet eine Datei als Oktett-Stream.                                                            |
+| [res.sendStatus()](/en/4x/api#res.sendStatus) | Legt den Antwortstatuscode fest und sendet dessen Zeichenfolgedarstellung als Antworthauptteil. |
 
 <h2 id="app-route">app.route()</h2>
 
 Sie können mithilfe von `app.route()` verkettbare Routenhandler für einen Weiterleitungspfad erstellen.
-Da der Pfad an einer einzelnen Position angegeben wird, ist das Erstellen modularer Weiterleitungen hilfreich, da Redundanzen und Schreibfehler reduziert werden. Weitere Informationen zu Weiterleitungen finden Sie in der Dokumentation zu [Router()](/{{ page.lang }}/4x/api#router).
+Da der Pfad an einer einzelnen Position angegeben wird, ist das Erstellen modularer Weiterleitungen hilfreich, da Redundanzen und Schreibfehler reduziert werden. Weitere Informationen zu Weiterleitungen finden Sie in der Dokumentation zu [Router()](/en/4x/api#router).
 
 Dies ist ein Beispiel für verkettete Routenhandler, die mit der Funktion `app.route()` definiert werden.
 
@@ -410,7 +410,7 @@ app.use('/birds', birds);
 
 Die Anwendung kann nun Anforderungen an die Pfade `/birds` und `/birds/about` bearbeiten und ruft die Middlewarefunktion `timeLog` auf, die speziell für diese Weiterleitung bestimmt ist.
 
-But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/{{ page.lang }}/5x/api#app.use).
+But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/en/5x/api#app.use).
 
 ```js
 const router = express.Router({ mergeParams: true });

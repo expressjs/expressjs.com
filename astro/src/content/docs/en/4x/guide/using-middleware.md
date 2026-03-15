@@ -7,7 +7,7 @@ description: Learn how to use middleware in Express.js applications, including a
 
 Express is a routing and middleware web framework that has minimal functionality of its own: An Express application is essentially a series of middleware function calls.
 
-_Middleware_ functions are functions that have access to the [request object](/{{ page.lang }}/5x/api#req) (`req`), the [response object](/{{ page.lang }}/5x/api#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
+_Middleware_ functions are functions that have access to the [request object](/en/5x/api#req) (`req`), the [response object](/en/5x/api#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
 
 Middleware functions can perform the following tasks:
 
@@ -31,7 +31,7 @@ You can also load a series of middleware functions together, which creates a sub
 
 <h2 id='middleware.application'>Application-level middleware</h2>
 
-Bind application-level middleware to an instance of the [app object](/{{ page.lang }}/5x/api#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
+Bind application-level middleware to an instance of the [app object](/en/5x/api#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
 
 This example shows a middleware function with no mount path. The function is executed every time the app receives a request.
 
@@ -258,7 +258,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-For details about error-handling middleware, see: [Error handling](/{{ page.lang }}/guide/error-handling).
+For details about error-handling middleware, see: [Error handling](/en/guide/error-handling).
 
 <h2 id='middleware.built-in'>Built-in middleware</h2>
 

@@ -40,9 +40,9 @@ In diesem Beitrag werden einige der Best Practices in Bezug auf das Thema Sicher
 
 ## Verwenden Sie keine veralteten oder anfälligen Versionen von Express
 
-Express 2.x und 3.x werden nicht mehr gepflegt. Sicherheits- und Leistungsprobleme in diesen Versionen werden nicht mehr behoben. Verwenden Sie diese Versionen nicht! Wenn Sie noch nicht auf Version 4 umgestellt haben, befolgen Sie die Anweisungen im [Migrationshandbuch](/{{ page.lang }}/guide/migrating-4).
+Express 2.x und 3.x werden nicht mehr gepflegt. Sicherheits- und Leistungsprobleme in diesen Versionen werden nicht mehr behoben. Verwenden Sie diese Versionen nicht! Wenn Sie noch nicht auf Version 4 umgestellt haben, befolgen Sie die Anweisungen im [Migrationshandbuch](/en/guide/migrating-4).
 
-Stellen Sie außerdem sicher, dass Sie keine anfälligen Express-Versionen verwenden, die auf der [Seite mit den Sicherheitsupdates](/{{ page.lang }}/advanced/security-updates) aufgelistet sind. Falls doch, führen Sie ein Update auf eines der stabileren Releases durch, bevorzugt das aktuelle Release.
+Stellen Sie außerdem sicher, dass Sie keine anfälligen Express-Versionen verwenden, die auf der [Seite mit den Sicherheitsupdates](/en/advanced/security-updates) aufgelistet sind. Falls doch, führen Sie ein Update auf eines der stabileren Releases durch, bevorzugt das aktuelle Release.
 
 ## TLS verwenden
 

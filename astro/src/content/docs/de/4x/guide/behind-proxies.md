@@ -11,7 +11,7 @@ When running an Express app behind a reverse proxy, some of the Express APIs may
 When configuring the `trust proxy` setting, it is important to understand the exact setup of the reverse proxy. Since this setting will trust values provided in the request, it is important that the combination of the setting in Express matches how the reverse proxy operates.
 </div>
 
-Bei der Ausführung einer Express-Anwendung hinter einem Proxy legen Sie die Anwendungsvariable `trust proxy` (mithilfe von [app.set()](/{{ page.lang }}/4x/api#app.set)) auf einen der in der folgenden Tabelle enthaltenen Werte fest:
+Bei der Ausführung einer Express-Anwendung hinter einem Proxy legen Sie die Anwendungsvariable `trust proxy` (mithilfe von [app.set()](/en/4x/api#app.set)) auf einen der in der folgenden Tabelle enthaltenen Werte fest:
 
 <table class="doctable" border="1" markdown="1">
   <thead><tr><th>Typ</th><th>Wert</th></tr></thead>
@@ -80,10 +80,10 @@ app.set('trust proxy', (ip) => {
 Enabling `trust proxy` will have the following impact:
 
 <ul>
-  <li markdown="1">Der Wert für [req.hostname](/{{ page.lang }}/api#req.hostname) wird vom Wert abgeleitet, der im Header `X-Forwarded-Host` festgelegt wurde. Dieser Wert kann vom Client oder Proxy festgelegt werden.</li>
-  <li markdown="1">`X-Forwarded-Proto` kann vom Reverse Proxy festgelegt werden, um der Anwendung mitzuteilen, ob es sich um `https` oder `http` oder sogar um einen ungültigen Namen handelt. Dieser Wert wird durch [req.protocol](/{{ page.lang }}/api#req.protocol) abgebildet.
+  <li markdown="1">Der Wert für [req.hostname](/en/api#req.hostname) wird vom Wert abgeleitet, der im Header `X-Forwarded-Host` festgelegt wurde. Dieser Wert kann vom Client oder Proxy festgelegt werden.</li>
+  <li markdown="1">`X-Forwarded-Proto` kann vom Reverse Proxy festgelegt werden, um der Anwendung mitzuteilen, ob es sich um `https` oder `http` oder sogar um einen ungültigen Namen handelt. Dieser Wert wird durch [req.protocol](/en/api#req.protocol) abgebildet.
   </li>
-  <li markdown="1">Als Werte für [req.ip](/{{ page.lang }}/api#req.ip) und [req.ips](/{{ page.lang }}/api#req.ips) wird die Liste der Adressen aus `X-Forwarded-For` herangezogen.
+  <li markdown="1">Als Werte für [req.ip](/en/api#req.ip) und [req.ips](/en/api#req.ips) wird die Liste der Adressen aus `X-Forwarded-For` herangezogen.
   </li>
 </ul>
 

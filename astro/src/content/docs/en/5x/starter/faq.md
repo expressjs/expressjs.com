@@ -77,7 +77,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-For more information, see [Error handling](/{{ page.lang }}/guide/error-handling).
+For more information, see [Error handling](/en/guide/error-handling).
 
 ## How do I render plain HTML?
 
@@ -88,5 +88,5 @@ middleware function.
 
 ## What version of Node.js does Express require?
 
-- [Express 4.x](/{{ page.lang }}/4x/api) requires Node.js 0.10 or higher.
-- [Express 5.x](/{{ page.lang }}/5x/api) requires Node.js 18 or higher.
+- [Express 4.x](/en/4x/api) requires Node.js 0.10 or higher.
+- [Express 5.x](/en/5x/api) requires Node.js 18 or higher.
