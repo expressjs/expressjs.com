@@ -4,3 +4,4 @@ https://www.npmjs.com/.*
 https://github.com/.*
 # Exclude 404 pages
 dist/.*/404/index.html$
+dist/404/index.html$
