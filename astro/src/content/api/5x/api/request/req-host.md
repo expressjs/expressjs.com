@@ -7,7 +7,7 @@ description: Contains the host derived from the Host HTTP header.
 
 Contains the host derived from the `Host` HTTP header.
 
-When the [`trust proxy` setting](api#app.settings.table)
+When the [`trust proxy` setting](api/api/application/app-settings/)
 does not evaluate to `false`, this property will instead get the value
 from the `X-Forwarded-Host` header field. This header can be set by
 the client or by the proxy.

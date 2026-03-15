@@ -20,7 +20,7 @@ res.status(500).jsonp({ error: 'message' });
 ```
 
 By default, the JSONP callback name is simply `callback`. Override this with the
-<a href="#app.settings.table">jsonp callback name</a> setting.
+<a href="/api/application/app-settings/">jsonp callback name</a> setting.
 
 The following are some examples of JSONP responses using the same code:
 

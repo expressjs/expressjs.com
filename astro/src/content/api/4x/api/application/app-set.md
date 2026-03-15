@@ -7,7 +7,7 @@ description: Assigns setting name to value. You may store any value that you wan
 
 Assigns setting `name` to `value`. You may store any value that you want,
 but certain names can be used to configure the behavior of the server. These
-special names are listed in the [app settings table](#app.settings.table).
+special names are listed in the [app settings table](/en/api/application/app-settings/).
 
 Calling `app.set('foo', true)` for a Boolean property is the same as calling
 `app.enable('foo')`. Similarly, calling `app.set('foo', false)` for a Boolean

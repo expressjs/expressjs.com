@@ -15,7 +15,7 @@ Sub-apps will:
 - Not inherit the value of settings that have a default value. You must set the value in the sub-app.
 - Inherit the value of settings with no default value.
 
-For details, see [Application settings](/en/5x/api#app.settings.table).
+For details, see [Application settings](/en/api/application/app-settings/).
 
 </div>
 

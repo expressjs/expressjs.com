@@ -6,7 +6,7 @@ description: Returns true if the Boolean setting name is disabled (false), where
 <h3 id='app.disabled'>app.disabled(name)</h3>
 
 Returns `true` if the Boolean setting `name` is disabled (`false`), where `name` is one of the properties from
-the [app settings table](#app.settings.table).
+the [app settings table](/en/api/application/app-settings/).
 
 ```js
 app.disabled('trust proxy');
