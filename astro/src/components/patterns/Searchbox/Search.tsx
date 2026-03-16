@@ -1,10 +1,11 @@
+import { useState, useEffect, useRef } from 'react';
 import { FacetTabs, SearchInput, SearchResults } from '@orama/ui/components';
 import type { Hit } from '@orama/core';
 import SearchNoResults from './SearchNoResults';
+import Chat from './Chat';
 import './Search.css';
 import { Icon } from '@iconify/react';
 import { useSearch } from '@orama/ui/hooks/useSearch';
-import { useEffect, useRef } from 'react';
 import { useTranslations } from '@/i18n/utils';
 import type { ui } from '@/i18n/locales';
 
@@ -48,14 +49,25 @@ export default function Search({ lang, placeholder }: SearchProps) {
     context: { searchTerm, selectedFacet },
   } = useSearch();
 
+  const [mode, setMode] = useState<'search' | 'chat'>('search');
   const inputWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const id = setTimeout(() => {
-      inputWrapperRef.current?.querySelector('input')?.focus();
-    }, 50);
-    return () => clearTimeout(id);
-  }, []);
+    if (mode === 'search') {
+      const id = setTimeout(() => {
+        inputWrapperRef.current?.querySelector('input')?.focus();
+      }, 50);
+      return () => clearTimeout(id);
+    }
+  }, [mode]);
+
+  const enterChat = (prompt?: string) => {
+    setMode('chat');
+  };
+
+  if (mode === 'chat') {
+    return <Chat onBack={() => setMode('search')} />;
+  }
 
   return (
     <>
@@ -63,30 +75,28 @@ export default function Search({ lang, placeholder }: SearchProps) {
         <span>Searching...</span>
       </SearchResults.Loading>
 
-      <SearchNoResults />
+      <SearchNoResults onSuggestionClick={enterChat} />
       <div className="search-tabs-scroll-container">
-      <FacetTabs.Wrapper>
-        <FacetTabs.List className="search-tabs">
-          {(group, isSelected) => (
-            <>
-              <FacetTabs.Item
-                isSelected={group.name === selectedFacet}
-                group={group}
-                filterBy="category"
-                searchParams={{
-                  term: searchTerm ?? '',
-                }}
-                // tabIndex={isSearchMode ? 0 : -1}
-                // aria-hidden={!isSearchMode}
-                className={`search-tab ${isSelected ? 'search-tab--selected' : ''}`}
-              >
-                {t(group.name)}
-                <span className="search-tab-count">({group.count})</span>
-              </FacetTabs.Item>
-            </>
-          )}
-        </FacetTabs.List>
-      </FacetTabs.Wrapper>
+        <FacetTabs.Wrapper>
+          <FacetTabs.List className="search-tabs">
+            {(group, isSelected) => (
+              <>
+                <FacetTabs.Item
+                  isSelected={group.name === selectedFacet}
+                  group={group}
+                  filterBy="category"
+                  searchParams={{
+                    term: searchTerm ?? '',
+                  }}
+                  className={`search-tab ${isSelected ? 'search-tab--selected' : ''}`}
+                >
+                  {t(group.name)}
+                  <span className="search-tab-count">({group.count})</span>
+                </FacetTabs.Item>
+              </>
+            )}
+          </FacetTabs.List>
+        </FacetTabs.Wrapper>
       </div>
 
       <SearchResults.GroupsWrapper groupBy="category" className="search-results-wrapper">
@@ -142,6 +152,15 @@ export default function Search({ lang, placeholder }: SearchProps) {
                 },
               }}
             />
+            <button
+              className="search-ask-button"
+              onClick={() => enterChat()}
+              type="button"
+              aria-label="Switch to chat mode"
+            >
+              <Icon icon="fluent:sparkle-16-filled" width={14} height={14} />
+              Ask
+            </button>
           </SearchInput.Wrapper>
         </SearchInput.Form>
       </SearchInput.Provider>

@@ -2,7 +2,17 @@ import { SearchResults, Suggestions } from '@orama/ui/components';
 import { Icon } from '@iconify/react';
 import './SearchNoResults.css';
 
-export default function SearchNoResults() {
+const SUGGESTIONS = [
+  'Can you give me a guide to install Express.js',
+  'What are the advantages of version 5',
+  'What are Express Superpowers',
+];
+
+interface SearchNoResultsProps {
+  onSuggestionClick?: (text: string) => void;
+}
+
+export default function SearchNoResults({ onSuggestionClick }: SearchNoResultsProps) {
   return (
     <SearchResults.NoResults className="search-no-results">
       {(searchTerm) => (
@@ -28,25 +38,17 @@ export default function SearchNoResults() {
               <p>What would you like to know about Express and its features?</p>
               <Suggestions.Wrapper className="search-suggestions">
                 <ul>
-                  {/* TODO: placeholder suggestions, to be replaced */}
-                  <li>
-                    <Suggestions.Item onClick={() => {}} className="search-suggestion__item">
-                      <Icon icon="fluent:sparkle-20-filled" width={20} height={20} />
-                      Can you give me a guide to install Express.js
-                    </Suggestions.Item>
-                  </li>
-                  <li>
-                    <Suggestions.Item onClick={() => {}} className="search-suggestion__item">
-                      <Icon icon="fluent:sparkle-20-filled" width={20} height={20} />
-                      What are the advantages of version 5
-                    </Suggestions.Item>
-                  </li>
-                  <li>
-                    <Suggestions.Item onClick={() => {}} className="search-suggestion__item">
-                      <Icon icon="fluent:sparkle-20-filled" width={20} height={20} />
-                      What are Express Superpowers
-                    </Suggestions.Item>
-                  </li>
+                  {SUGGESTIONS.map((text) => (
+                    <li key={text}>
+                      <Suggestions.Item
+                        onClick={() => onSuggestionClick?.(text)}
+                        className="search-suggestion__item"
+                      >
+                        <Icon icon="fluent:sparkle-20-filled" width={20} height={20} />
+                        {text}
+                      </Suggestions.Item>
+                    </li>
+                  ))}
                 </ul>
               </Suggestions.Wrapper>
             </>
