@@ -37,6 +37,7 @@ const t = useTranslations(currentLang);
     <Flex align="center" justify="center" gap="2">
       <a href="#main-content" class="skip-link sr-only">Skip to content</a>
       <SearchBox
+        lang={currentLang}
         placeholder={t('search.placeholder')}
         ariaLabel={t('search.ariaLabel')}
         client:load

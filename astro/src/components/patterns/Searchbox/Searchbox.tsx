@@ -15,11 +15,12 @@ const orama = import.meta.env.PUBLIC_ORAMA_PROJECT_ID
   : null;
 
 interface SearchboxProps {
+  lang: string;
   placeholder: string;
   ariaLabel: string;
 }
 
-export default function Searchbox({ placeholder, ariaLabel }: SearchboxProps) {
+export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxProps) {
   const [shortcutKey, setShortcutKey] = useState('⌘ K');
   const [mounted, setMounted] = useState(false);
 
@@ -60,7 +61,7 @@ export default function Searchbox({ placeholder, ariaLabel }: SearchboxProps) {
                       </Modal.Close>
                     </div>
                     <div className="search-modal-body">
-                      <Search placeholder="Search or ask: What's new in Express 5?" />
+                      <Search lang={lang} placeholder="Search or ask: What's new in Express 5?" />
                     </div>
 
                     <div className="search-modal-footer">
