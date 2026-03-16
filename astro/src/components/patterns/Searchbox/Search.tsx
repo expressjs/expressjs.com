@@ -98,7 +98,11 @@ export default function Search({ placeholder }: SearchProps) {
               {(result: Hit) => {
                 const document = result.document as DocDocument;
                 return (
-                  <a href={document?.path || '#'} className="search-result-link">
+                  <a
+                    href={document?.path || '#'}
+                    className="search-result-link"
+                    data-focus-on-arrow-nav
+                  >
                     <Icon icon="fluent:document-20-regular" width={20} height={20} />
                     <div>
                       <p className="search-result-breadcrumb">
