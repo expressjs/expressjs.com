@@ -5,6 +5,8 @@ import './Search.css';
 import { Icon } from '@iconify/react';
 import { useSearch } from '@orama/ui/hooks/useSearch';
 import { useEffect, useRef } from 'react';
+import { useTranslations } from '@/i18n/utils';
+import type { ui } from '@/i18n/locales';
 
 type DocDocument = {
   title: string;
@@ -15,15 +17,8 @@ type DocDocument = {
   version?: string;
 };
 
-const CATEGORY_LABELS: Record<string, string> = {
-  'menu.docs': 'Docs',
-  'menu.api': 'API',
-  'menu.resources': 'Resources',
-  'menu.blog': 'Blog',
-};
-
-function getPathBreadcrumb(path: string, category: string): string {
-  const rootLabel = CATEGORY_LABELS[category] ?? category;
+function getPathBreadcrumb(path: string, category: string, t: (key: string) => string): string {
+  const rootLabel = t(category);
   const categorySlug = rootLabel.toLowerCase();
 
   const segments = path
@@ -43,10 +38,12 @@ function getPathBreadcrumb(path: string, category: string): string {
 }
 
 interface SearchProps {
+  lang: string;
   placeholder: string;
 }
 
-export default function Search({ placeholder }: SearchProps) {
+export default function Search({ lang, placeholder }: SearchProps) {
+  const t = useTranslations(lang as keyof typeof ui);
   const {
     context: { searchTerm, selectedFacet },
   } = useSearch();
@@ -67,6 +64,7 @@ export default function Search({ placeholder }: SearchProps) {
       </SearchResults.Loading>
 
       <SearchNoResults />
+      <div className="search-tabs-scroll-container">
       <FacetTabs.Wrapper>
         <FacetTabs.List className="search-tabs">
           {(group, isSelected) => (
@@ -82,18 +80,19 @@ export default function Search({ placeholder }: SearchProps) {
                 // aria-hidden={!isSearchMode}
                 className={`search-tab ${isSelected ? 'search-tab--selected' : ''}`}
               >
-                {group.name}
+                {t(group.name)}
                 <span className="search-tab-count">({group.count})</span>
               </FacetTabs.Item>
             </>
           )}
         </FacetTabs.List>
       </FacetTabs.Wrapper>
+      </div>
 
       <SearchResults.GroupsWrapper groupBy="category" className="search-results-wrapper">
         {(group) => (
           <div key={group.name} className="search-results-group">
-            <h2 className="search-results-group-title">{group.name}</h2>
+            <h2 className="search-results-group-title">{t(group.name)}</h2>
             <SearchResults.GroupList group={group} className="search-results-list">
               {(result: Hit) => {
                 const document = result.document as DocDocument;
@@ -106,7 +105,7 @@ export default function Search({ placeholder }: SearchProps) {
                     <Icon icon="fluent:document-20-regular" width={20} height={20} />
                     <div>
                       <p className="search-result-breadcrumb">
-                        {getPathBreadcrumb(document?.path ?? '', document?.category ?? '')}
+                        {getPathBreadcrumb(document?.path ?? '', document?.category ?? '', t)}
                       </p>
                       <h3 className="search-result-title">{document?.title}</h3>
                       {document?.description && (

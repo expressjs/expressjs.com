@@ -11,9 +11,31 @@
     min-height: 0;
   }
 
+  .search-tabs-scroll-container {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: var(--space-10);
+      pointer-events: none;
+      background: linear-gradient(to right, transparent, var(--color-bg-primary));
+    }
+  }
+
   .search-tabs {
     display: flex;
     gap: var(--space-1);
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .search-tab {
