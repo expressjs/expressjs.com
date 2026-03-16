@@ -4,6 +4,7 @@ import SearchNoResults from './SearchNoResults';
 import './Search.css';
 import { Icon } from '@iconify/react';
 import { useSearch } from '@orama/ui/hooks/useSearch';
+import { useEffect, useRef } from 'react';
 
 type DocDocument = {
   title: string;
@@ -49,6 +50,15 @@ export default function Search({ placeholder }: SearchProps) {
   const {
     context: { searchTerm, selectedFacet },
   } = useSearch();
+
+  const inputWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      inputWrapperRef.current?.querySelector('input')?.focus();
+    }, 50);
+    return () => clearTimeout(id);
+  }, []);
 
   return (
     <>
@@ -109,7 +119,7 @@ export default function Search({ placeholder }: SearchProps) {
 
       <SearchInput.Provider>
         <SearchInput.Form className="search-input-form">
-          <SearchInput.Wrapper className="search-input-wrapper">
+          <SearchInput.Wrapper className="search-input-wrapper" ref={inputWrapperRef}>
             <Icon
               icon="fluent:search-16-regular"
               width={18}
