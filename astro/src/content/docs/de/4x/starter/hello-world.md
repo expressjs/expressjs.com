@@ -6,7 +6,7 @@ description: Get started with Express.js by building a simple 'Hello World' appl
 # Beispiel "Hello World"
 
 <div class="doc-box doc-info" markdown="1">
-Dies ist wohl die einfachste Express-Anwendung, die Sie erstellen können. Es handelt sich um eine Anwendung mit nur einer Datei und &mdash; *nicht* das, was Sie mit dem [Express Generator](/{{ page.lang }}/starter/generator.html) erhalten würden. Mit dem Generator würde das Gerüst für eine vollständige Anwendung mit zahlreichen JavaScript-Dateien, Jade-Vorlagen und Unterverzeichnissen für verschiedene Zwecke erstellt werden.
+Dies ist wohl die einfachste Express-Anwendung, die Sie erstellen können. Es handelt sich um eine Anwendung mit nur einer Datei und &mdash; *nicht* das, was Sie mit dem [Express Generator](/en/starter/generator) erhalten würden. Mit dem Generator würde das Gerüst für eine vollständige Anwendung mit zahlreichen JavaScript-Dateien, Jade-Vorlagen und Unterverzeichnissen für verschiedene Zwecke erstellt werden.
 </div>
 
 ```js
@@ -27,7 +27,7 @@ Die Anwendung startet einen Server und ist an Port 3000 empfangsbereit für Verb
 
 ### Running Locally
 
-Erstellen Sie zunächst ein Verzeichnis namens `myapp`, wechseln Sie in das Verzeichnis und führen Sie `npm init` aus. Installieren Sie dann `express` als Abhängigkeit, wie im [Installationshandbuch](/{{ page.lang }}/starter/installing.html) beschrieben.
+Erstellen Sie zunächst ein Verzeichnis namens `myapp`, wechseln Sie in das Verzeichnis und führen Sie `npm init` aus. Installieren Sie dann `express` als Abhängigkeit, wie im [Installationshandbuch](/en/starter/installing) beschrieben.
 
 Erstellen Sie im Verzeichnis `myapp` eine Datei namens `app.js` und fügen Sie den folgenden Code hinzu:
 

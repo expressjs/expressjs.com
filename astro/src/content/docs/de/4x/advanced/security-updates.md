@@ -14,7 +14,7 @@ Die folgende Liste enthält die Express-Schwachstellen, die im angegebenen Versi
 
 {% capture security-policy %}
 If you believe you have discovered a security vulnerability in Express, please see
-[Security Policies and Procedures](/{{page.lang}}/resources/contributing.html#security-policies-and-procedures).
+[Security Policies and Procedures](/en/resources/contributing#security-policies-and-procedures).
 {% endcapture %}
 
 {% include admonitions/note.html content=security-policy %}
@@ -65,7 +65,7 @@ If you believe you have discovered a security vulnerability in Express, please s
 
 Bekannte und unbekannte Probleme bei Sicherheit und Leistung in 3.x wurden seit dem letzten Update (1. August 2015) noch nicht behoben. Es wird dringend empfohlen, die aktuelle Version von Express zu verwenden.
 
-If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/{{ page.lang }}/support#commercial-support-options).
+If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/en/support#commercial-support-options).
 
   </div>
 

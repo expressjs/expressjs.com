@@ -11,7 +11,7 @@ description: Access the API reference for Express.js version 3.x, noting that th
 
 Les problèmes de performances et de sécurité connus et inconnus n'ont pas été traités depuis la dernière mise à jour (1er août 2015). Il est fortement recommandé d'utiliser la dernière version d'Express.
 
-If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/{{ page.lang }}/support#commercial-support-options).
+If you are unable to upgrade past 3.x, please consider [Commercial Support Options](/en/support#commercial-support-options).
 
   </div>
 

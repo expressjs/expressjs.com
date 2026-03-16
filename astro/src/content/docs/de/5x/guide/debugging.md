@@ -17,7 +17,7 @@ Verwenden Sie unter Windows den entsprechenden Befehl.
 > $env:DEBUG = "express:*"; node index.js
 ```
 
-Die Ausführung dieses Befehls für die durch [express generator](/{{ page.lang }}/starter/generator.html) generierte Standardanwendung resultiert in folgender Ausgabe:
+Die Ausführung dieses Befehls für die durch [express generator](/en/starter/generator) generierte Standardanwendung resultiert in folgender Ausgabe:
 
 ```bash
 $ DEBUG=express:* node ./bin/www
@@ -118,7 +118,7 @@ When running through Node.js, you can set a few environment variables that will 
 The environment variables beginning with `DEBUG_` end up being
 converted into an Options object that gets used with `%o`/`%O` formatters.
 See the Node.js documentation for
-[`util.inspect()`](https://nodejs.org/api/util.html#util_util_inspect_object_options)
+[`util.inspect()`](https://nodejs.org/api/util#util_util_inspect_object_options)
 for the complete list.
 
 {% endcapture %}

@@ -1,0 +1,15 @@
+---
+title: app.enable
+description: Sets the Boolean setting name to true, where name is one of the properties from the app settings table.
+---
+
+<h3 id='app.enable'>app.enable(name)</h3>
+
+Sets the Boolean setting `name` to `true`, where `name` is one of the properties from the [app settings table](/en/api/application/app-settings/).
+Calling `app.set('foo', true)` for a Boolean property is the same as calling `app.enable('foo')`.
+
+```js
+app.enable('trust proxy');
+app.get('trust proxy');
+// => true
+```

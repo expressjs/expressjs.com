@@ -14,7 +14,7 @@ Development and production environments are usually set up differently and have 
 {% capture security-note %}
 
 If you believe you have discovered a security vulnerability in Express, please see
-[Security Policies and Procedures](/en/resources/contributing.html#security-policies-and-procedures).
+[Security Policies and Procedures](/en/resources/contributing#security-policies-and-procedures).
 
 {% endcapture %}
 
@@ -40,9 +40,9 @@ Security best practices for Express applications in production include:
 
 ## Don't use deprecated or vulnerable versions of Express
 
-Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them! If you haven't moved to version 4, follow the [migration guide](/{{ page.lang }}/guide/migrating-4.html) or consider [Commercial Support Options](/{{ page.lang }}/support#commercial-support-options).
+Express 2.x and 3.x are no longer maintained. Security and performance issues in these versions won't be fixed. Do not use them! If you haven't moved to version 4, follow the [migration guide](/en/guide/migrating-4) or consider [Commercial Support Options](/en/support#commercial-support-options).
 
-Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/{{ page.lang }}/advanced/security-updates.html). If you are, update to one of the stable releases, preferably the latest.
+Also ensure you are not using any of the vulnerable Express versions listed on the [Security updates page](/en/advanced/security-updates). If you are, update to one of the stable releases, preferably the latest.
 
 ## Use TLS
 
@@ -146,9 +146,9 @@ Express.
 
 Express also sends its own formatted "404 Not Found" messages and formatter error
 response messages. These can be changed by
-[adding your own not found handler](/en/starter/faq.html#how-do-i-handle-404-responses)
+[adding your own not found handler](/en/starter/faq#how-do-i-handle-404-responses)
 and
-[writing your own error handler](/en/guide/error-handling.html#writing-error-handlers):
+[writing your own error handler](/en/guide/error-handling#writing-error-handlers):
 
 ```js
 // last app.use calls right before app.listen():
