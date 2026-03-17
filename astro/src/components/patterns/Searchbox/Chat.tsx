@@ -45,11 +45,22 @@ export default function Chat({ initialPrompt }: ChatProps) {
               <ChatInteractions.UserPrompt className="chat-user-prompt">
                 {interaction.query}
               </ChatInteractions.UserPrompt>
-              <ChatInteractions.AssistantMessage className="chat-assistant-message">
+              <ChatInteractions.AssistantMessage
+                className="chat-assistant-message"
+                markdownClassnames={{
+                  h1: 'chat-title',
+                  h2: 'chat-title',
+                  pre: 'chat-code-block',
+                }}
+              >
                 {interaction.response}
               </ChatInteractions.AssistantMessage>
               <ChatInteractions.Loading interaction={interaction} className="chat-loading">
-                <span>Thinking...</span>
+                <div className="chat-typing-dots">
+                  <span />
+                  <span />
+                  <span />
+                </div>
               </ChatInteractions.Loading>
               <ChatInteractions.Error interaction={interaction} className="chat-error">
                 <span>Something went wrong. Please try again.</span>

@@ -73,7 +73,21 @@ export default function Search({ lang, placeholder, mode, onModeChange }: Search
   return (
     <>
       <SearchResults.Loading className="search-loading">
-        <span>Searching...</span>
+        {[65, 80, 50].map((w) => (
+          <div key={w} className="search-skeleton-item">
+            <div className="search-skeleton-icon" />
+            <div className="search-skeleton-text">
+              <div
+                className="search-skeleton-line search-skeleton-line--title"
+                style={{ width: `${w}%` }}
+              />
+              <div
+                className="search-skeleton-line search-skeleton-line--desc"
+                style={{ width: `${w - 15}%` }}
+              />
+            </div>
+          </div>
+        ))}
       </SearchResults.Loading>
 
       <SearchNoResults onSuggestionClick={enterChat} />
