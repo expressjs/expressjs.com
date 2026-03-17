@@ -91,6 +91,7 @@ export default function Chat({ initialPrompt }: ChatProps) {
         <PromptTextArea.Button
           className="chat-input-button"
           isLoading={loading}
+          abortContent={<Icon icon="fluent:pause-circle-48-regular" width={18} height={18} />}
           aria-label="Send message"
         >
           <Icon icon="fluent:send-16-filled" width={16} height={16} />
