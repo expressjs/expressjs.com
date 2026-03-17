@@ -135,10 +135,40 @@
   .search-modal-header {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: var(--space-2) var(--space-4);
     flex-shrink: 0;
     border-bottom: var(--border-width-1) solid var(--color-border-secondary);
+  }
+
+  .search-modal-header-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-modal-back {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1-5);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-base);
+    border: none;
+    background: none;
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition:
+      color var(--duration-150) var(--ease-in-out),
+      background-color var(--duration-150) var(--ease-in-out);
+
+    &:hover {
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-secondary);
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--color-focus-ring);
+    }
   }
 
   .search-modal-body {

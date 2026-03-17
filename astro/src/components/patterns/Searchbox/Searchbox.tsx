@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { OramaCloud } from '@orama/core';
 import { ChatRoot, Modal, SearchRoot } from '@orama/ui/components';
+import { useSearch } from '@orama/ui/hooks/useSearch';
 import Search from './Search';
 import './orama-styles.css';
 import { Icon } from '@iconify/react';
@@ -20,9 +21,44 @@ interface SearchboxProps {
   ariaLabel: string;
 }
 
+interface SearchModalHeaderProps {
+  mode: 'search' | 'chat';
+  onBack: () => void;
+}
+
+function SearchModalHeader({ mode, onBack }: SearchModalHeaderProps) {
+  const {
+    context: { searchTerm },
+    reset,
+  } = useSearch();
+
+  return (
+    <div className="search-modal-header">
+      <div className="search-modal-header-left">
+        {mode === 'chat' && (
+          <button className="search-modal-back" onClick={onBack} aria-label="Back to search">
+            <Icon icon="fluent:arrow-left-16-regular" width={16} height={16} />
+            Back
+          </button>
+        )}
+        {mode === 'search' && searchTerm && (
+          <button className="search-modal-back" onClick={reset} aria-label="Clear search">
+            <Icon icon="fluent:arrow-left-16-regular" width={16} height={16} />
+            Clear
+          </button>
+        )}
+      </div>
+      <Modal.Close className="search-modal-close" aria-label="Close search">
+        <Icon icon="fluent:dismiss-16-regular" width={18} height={18} />
+      </Modal.Close>
+    </div>
+  );
+}
+
 export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxProps) {
   const [shortcutKey, setShortcutKey] = useState('⌘ K');
   const [mounted, setMounted] = useState(false);
+  const [mode, setMode] = useState<'search' | 'chat'>('search');
 
   useEffect(() => {
     setMounted(true);
@@ -55,13 +91,14 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
               <ChatRoot client={orama} askOptions={{ throttle_delay: 50 }}>
                 <Modal.Inner className="search-modal-inner">
                   <Modal.Content className="search-modal-content">
-                    <div className="search-modal-header">
-                      <Modal.Close className="search-modal-close" aria-label="Close search">
-                        <Icon icon="fluent:dismiss-16-regular" width={18} height={18} />
-                      </Modal.Close>
-                    </div>
+                    <SearchModalHeader mode={mode} onBack={() => setMode('search')} />
                     <div className="search-modal-body">
-                      <Search lang={lang} placeholder="Search or ask: What's new in Express 5?" />
+                      <Search
+                        lang={lang}
+                        placeholder="Start typing: What's new in Express 5?"
+                        mode={mode}
+                        onModeChange={setMode}
+                      />
                     </div>
 
                     <div className="search-modal-footer">

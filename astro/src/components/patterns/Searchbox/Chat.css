@@ -5,10 +5,17 @@
     flex-grow: 1;
     overflow: hidden;
     justify-content: space-between;
+    position: relative;
+    height: 100%;
   }
 
   .chat-container-inner {
     overflow: auto;
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
   }
 
   /* ============================================
@@ -17,16 +24,13 @@
 
   .chat-interactions {
     flex: 1;
-    overflow: auto;
-    padding: var(--space-6);
-    min-height: 0;
   }
 
   .chat-interaction {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
-    margin-bottom: var(--space-6);
+    padding: var(--space-6);
   }
 
   .chat-user-prompt {
@@ -38,42 +42,6 @@
     font-size: var(--font-size-base);
     color: var(--color-text-primary);
     max-width: 80%;
-  }
-
-  .chat-assistant-message {
-    font-size: var(--font-size-base);
-    color: var(--color-text-primary);
-    line-height: var(--line-height-relaxed);
-
-    p {
-      margin: 0 0 var(--space-3) 0;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    code {
-      background-color: var(--color-bg-tertiary);
-      border: var(--border-width-1) solid var(--color-border-secondary);
-      border-radius: var(--radius-sm);
-      padding: var(--space-0-5) var(--space-1-5);
-      font-size: 0.9em;
-    }
-
-    pre {
-      background-color: var(--color-bg-tertiary);
-      border: var(--border-width-1) solid var(--color-border-secondary);
-      border-radius: var(--radius-base);
-      padding: var(--space-4);
-      overflow-x: auto;
-
-      code {
-        background: none;
-        border: none;
-        padding: 0;
-      }
-    }
   }
 
   .chat-loading {
@@ -153,6 +121,27 @@
 
     &:focus-visible {
       outline: 1px solid var(--color-focus-ring);
+    }
+  }
+
+  .chat-go-to-bottom {
+    position: absolute;
+    bottom: var(--space-16);
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2);
+    margin-bottom: var(--space-2);
+    background-color: var(--color-bg-mute);
+    color: var(--color-text-primary);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: background-color var(--duration-300) var(--ease-in-out);
+
+    &:hover {
+      background-color: var(--color-bg-secondary);
     }
   }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { ChatInteractions, PromptTextArea } from '@orama/ui/components';
 import { useChat } from '@orama/ui/hooks/useChat';
+import { useScrollableContainer } from '@orama/ui/hooks/useScrollableContainer';
 import { Icon } from '@iconify/react';
 import './Chat.css';
 
@@ -12,6 +13,13 @@ interface ChatProps {
 export default function Chat({ initialPrompt }: ChatProps) {
   const { ask, loading } = useChat({ throttle_delay: 50 });
   const hasSentInitial = useRef(false);
+  const { containerRef, scrollToBottom, recalculateGoToBottomButton, showGoToBottomButton } =
+    useScrollableContainer();
+
+  // console.log('Show go to bottom button:', showGoToBottomButton);
+  // console.log('Container ref:', containerRef);
+  // console.log('Scroll to bottom function:', scrollToBottom);
+  // console.log('Recalculate function:', recalculateGoToBottomButton);
 
   useEffect(() => {
     if (initialPrompt && !hasSentInitial.current) {
@@ -22,8 +30,16 @@ export default function Chat({ initialPrompt }: ChatProps) {
 
   return (
     <div className="chat-container">
-      <div className="chat-container-inner">
-        <ChatInteractions.Wrapper className="chat-interactions">
+      <div
+        ref={containerRef}
+        className="chat-container-inner"
+        onScroll={recalculateGoToBottomButton}
+      >
+        <ChatInteractions.Wrapper
+          className="chat-interactions"
+          onStreaming={recalculateGoToBottomButton}
+          onNewInteraction={() => scrollToBottom({ animated: true })}
+        >
           {(interaction) => (
             <div className="chat-interaction">
               <ChatInteractions.UserPrompt className="chat-user-prompt">
@@ -42,6 +58,17 @@ export default function Chat({ initialPrompt }: ChatProps) {
           )}
         </ChatInteractions.Wrapper>
       </div>
+
+      {showGoToBottomButton && (
+        <button
+          type="button"
+          onClick={() => scrollToBottom({ animated: true })}
+          className="chat-go-to-bottom"
+          aria-label="Scroll to bottom"
+        >
+          <Icon icon="fluent:arrow-down-16-filled" width={16} height={16} />
+        </button>
+      )}
 
       <PromptTextArea.Wrapper className="chat-input-wrapper">
         <Icon icon="fluent:sparkle-16-filled" width={16} height={16} className="chat-input-icon" />

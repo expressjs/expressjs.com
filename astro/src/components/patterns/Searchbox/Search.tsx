@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { FacetTabs, SearchInput, SearchResults } from '@orama/ui/components';
 import type { Hit } from '@orama/core';
 import SearchNoResults from './SearchNoResults';
@@ -41,15 +41,16 @@ function getPathBreadcrumb(path: string, category: string, t: (key: string) => s
 interface SearchProps {
   lang: string;
   placeholder: string;
+  mode: 'search' | 'chat';
+  onModeChange: (mode: 'search' | 'chat') => void;
 }
 
-export default function Search({ lang, placeholder }: SearchProps) {
+export default function Search({ lang, placeholder, mode, onModeChange }: SearchProps) {
   const t = useTranslations(lang as keyof typeof ui);
   const {
     context: { searchTerm, selectedFacet },
   } = useSearch();
 
-  const [mode, setMode] = useState<'search' | 'chat'>('search');
   const inputWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -61,12 +62,12 @@ export default function Search({ lang, placeholder }: SearchProps) {
     }
   }, [mode]);
 
-  const enterChat = (prompt?: string) => {
-    setMode('chat');
+  const enterChat = () => {
+    onModeChange('chat');
   };
 
   if (mode === 'chat') {
-    return <Chat onBack={() => setMode('search')} />;
+    return <Chat onBack={() => onModeChange('search')} />;
   }
 
   return (
