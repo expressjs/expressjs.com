@@ -45,16 +45,6 @@ export default function Chat({ initialPrompt }: ChatProps) {
               <ChatInteractions.UserPrompt className="chat-user-prompt">
                 {interaction.query}
               </ChatInteractions.UserPrompt>
-              <ChatInteractions.AssistantMessage
-                className="chat-assistant-message"
-                markdownClassnames={{
-                  h1: 'chat-title',
-                  h2: 'chat-title',
-                  pre: 'chat-code-block',
-                }}
-              >
-                {interaction.response}
-              </ChatInteractions.AssistantMessage>
               <ChatInteractions.Loading interaction={interaction} className="chat-loading">
                 <div className="chat-typing-dots">
                   <span />
@@ -65,6 +55,55 @@ export default function Chat({ initialPrompt }: ChatProps) {
               <ChatInteractions.Error interaction={interaction} className="chat-error">
                 <span>Something went wrong. Please try again.</span>
               </ChatInteractions.Error>
+              <ChatInteractions.AssistantMessage
+                className="chat-assistant-message"
+                markdownClassnames={{
+                  h1: 'chat-title',
+                  h2: 'chat-title',
+                  pre: 'chat-code-block',
+                }}
+              >
+                {interaction.response}
+              </ChatInteractions.AssistantMessage>
+              {!interaction.loading && (
+                <ul>
+                  <li>
+                    <ChatInteractions.RegenerateLatest
+                      interaction={interaction}
+                      className="chat-regenerate"
+                    >
+                      <Icon icon="fluent:arrow-sync-20-regular" width={16} height={16} />
+                    </ChatInteractions.RegenerateLatest>
+                  </li>
+                  <li>
+                    <ChatInteractions.CopyMessage interaction={interaction} className="chat-copy">
+                      {(copied: boolean) =>
+                        copied ? (
+                          <>
+                            <Icon icon="fluent:checkmark-16-regular" width={16} height={16} />
+                            <span>Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Icon icon="fluent:copy-16-regular" width={16} height={16} />
+                            <span>Copy</span>
+                          </>
+                        )
+                      }
+                    </ChatInteractions.CopyMessage>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      className="chat-feedback-button"
+                      aria-label="Upvote response"
+                      // onClick={dislikeMessage}
+                    >
+                      <Icon icon="fluent:thumb-dislike-16-regular" width={16} height={16} />
+                    </button>
+                  </li>
+                </ul>
+              )}
             </div>
           )}
         </ChatInteractions.Wrapper>
