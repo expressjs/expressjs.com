@@ -59,7 +59,6 @@ You can find the list of available codemods [here](https://codemod.link/express)
   <li><a href="#res.sendFile.options">res.sendFile() and express.static() options</a></li>
   <li><a href="#router.param">router.param(fn)</a></li>
   <li><a href="#express.static.mime">express.static.mime</a></li>
-  <li><a href="#send-methods">Removed send methods</a></li>
   <li><a href="#express:router-debug-logs">express:router debug logs</a></li>
 </ul>
 
@@ -410,15 +409,6 @@ The following options to the `res.sendFile()` and `express.static()` functions a
 
 * `hidden`: Use the `dotfiles` option instead.
 * `from`: Use the `root` option instead.
-
-<h3 id="send-methods">Removed send methods</h3>
-
-The `send` package no longer exports the following methods. If your app relies on them, replace them with properties in the `options` object for `res.sendFile()` and `express.static()`:
-
-* `send.etag()`: Use the `etag` option instead.
-* `send.index()`: Use the `index` option instead.
-* `send.maxage()`: Use the `maxAge` option instead.
-* `send.root()`: Use the `root` option instead.
 
 <h3 id="express:router-debug-logs">express:router debug logs</h3>
 
