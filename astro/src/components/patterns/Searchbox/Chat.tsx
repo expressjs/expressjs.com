@@ -5,6 +5,7 @@ import { useScrollableContainer } from '@orama/ui/hooks/useScrollableContainer';
 import { Icon } from '@iconify/react';
 import ChatActions from './ChatActions';
 import './Chat.css';
+import { ChatSources } from './ChatSources';
 
 interface ChatProps {
   initialPrompt?: string;
@@ -51,6 +52,7 @@ export default function Chat({ initialPrompt }: ChatProps) {
               <ChatInteractions.Error interaction={interaction} className="chat-error">
                 <span>Something went wrong. Please try again.</span>
               </ChatInteractions.Error>
+              <ChatSources interaction={interaction} />
               <ChatInteractions.AssistantMessage
                 className="chat-assistant-message"
                 markdownClassnames={{
