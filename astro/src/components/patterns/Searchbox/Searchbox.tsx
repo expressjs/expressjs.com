@@ -74,25 +74,30 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
   }, []);
 
   return (
-    <Modal.Root>
-      <Modal.Trigger className="search-trigger" enableCmdK disabled={!orama} aria-label={ariaLabel}>
-        <div className="search-trigger-content">
-          <div className="search-trigger-icon">
-            <Icon icon="fluent:search-sparkle-16-regular" width={18} height={18} />
-          </div>
-          <span>{placeholder}</span>
-        </div>
-        <div className="search-trigger-shortcut">
-          <span className="shortcut-key">{shortcutKey}</span>
-        </div>
-      </Modal.Trigger>
+    <SearchRoot client={orama}>
+      <ChatRoot client={orama} askOptions={{ throttle_delay: 50 }}>
+        <Modal.Root>
+          <Modal.Trigger
+            className="search-trigger"
+            enableCmdK
+            disabled={!orama}
+            aria-label={ariaLabel}
+          >
+            <div className="search-trigger-content">
+              <div className="search-trigger-icon">
+                <Icon icon="fluent:search-sparkle-16-regular" width={18} height={18} />
+              </div>
+              <span>{placeholder}</span>
+            </div>
+            <div className="search-trigger-shortcut">
+              <span className="shortcut-key">{shortcutKey}</span>
+            </div>
+          </Modal.Trigger>
 
-      {orama &&
-        mounted &&
-        createPortal(
-          <Modal.Wrapper closeOnEscape closeOnOutsideClick className="search-modal-overlay">
-            <SearchRoot client={orama}>
-              <ChatRoot client={orama} askOptions={{ throttle_delay: 50 }}>
+          {orama &&
+            mounted &&
+            createPortal(
+              <Modal.Wrapper closeOnEscape closeOnOutsideClick className="search-modal-overlay">
                 <Modal.Inner className="search-modal-inner">
                   <Modal.Content className="search-modal-content">
                     <SearchModalHeader mode={mode} enableSearch={() => setMode('search')} />
@@ -123,11 +128,11 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
                     </div>
                   </Modal.Content>
                 </Modal.Inner>
-              </ChatRoot>
-            </SearchRoot>
-          </Modal.Wrapper>,
-          document.body
-        )}
-    </Modal.Root>
+              </Modal.Wrapper>,
+              document.body
+            )}
+        </Modal.Root>
+      </ChatRoot>
+    </SearchRoot>
   );
 }
