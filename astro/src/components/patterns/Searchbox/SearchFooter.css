@@ -8,7 +8,7 @@
       margin: 0;
     }
 
-    @media (min-width: 1024px) {
+    @media (--md-up) {
       display: flex;
     }
   }

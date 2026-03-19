@@ -158,7 +158,11 @@
     display: flex;
     gap: var(--space-3);
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+
+    @media (--md-up) {
+      justify-content: space-between;
+    }
 
     small {
       margin: 0;
