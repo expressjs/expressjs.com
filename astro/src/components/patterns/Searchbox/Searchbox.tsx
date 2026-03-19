@@ -24,10 +24,10 @@ interface SearchboxProps {
 
 interface SearchModalHeaderProps {
   mode: 'search' | 'chat';
-  enableSearch: () => void;
+  onModeChange: (mode: 'search' | 'chat') => void;
 }
 
-function SearchModalHeader({ mode, enableSearch }: SearchModalHeaderProps) {
+function SearchModalHeader({ mode, onModeChange }: SearchModalHeaderProps) {
   const {
     context: { searchTerm },
     reset,
@@ -36,12 +36,26 @@ function SearchModalHeader({ mode, enableSearch }: SearchModalHeaderProps) {
   return (
     <div className="search-modal-header">
       <div className="search-modal-header-left">
-        {mode === 'chat' && (
-          <button className="search-modal-back" onClick={enableSearch} aria-label="Back to search">
-            <Icon icon="fluent:arrow-left-16-regular" width={16} height={16} />
-            Back
+        <div className="search-modal-tabs" role="tablist">
+          <button
+            className={`search-modal-tab${mode === 'search' ? ' active' : ''}`}
+            role="tab"
+            aria-selected={mode === 'search'}
+            onClick={() => onModeChange('search')}
+          >
+            <Icon icon="fluent:search-16-regular" width={16} height={16} />
+            Search
           </button>
-        )}
+          <button
+            className={`search-modal-tab${mode === 'chat' ? ' active' : ''}`}
+            role="tab"
+            aria-selected={mode === 'chat'}
+            onClick={() => onModeChange('chat')}
+          >
+            <Icon icon="fluent:chat-sparkle-16-regular" width={16} height={16} />
+            Ask AI
+          </button>
+        </div>
       </div>
       <div className="search-modal-header-right">
         {mode === 'search' && searchTerm && (
@@ -63,6 +77,7 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
   const [shortcutKey, setShortcutKey] = useState('⌘ K');
   const [mounted, setMounted] = useState(false);
   const [mode, setMode] = useState<'search' | 'chat'>('search');
+  const [lastChatTerm, setLastChatTerm] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -100,7 +115,7 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
               <Modal.Wrapper closeOnEscape closeOnOutsideClick className="search-modal-overlay">
                 <Modal.Inner className="search-modal-inner">
                   <Modal.Content className="search-modal-content">
-                    <SearchModalHeader mode={mode} enableSearch={() => setMode('search')} />
+                    <SearchModalHeader mode={mode} onModeChange={setMode} />
                     <div className="search-modal-body">
                       <div style={{ display: mode === 'search' ? 'contents' : 'none' }}>
                         <Search
@@ -108,9 +123,12 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
                           placeholder="Start typing: What's new in Express 5?"
                           mode={mode}
                           onModeChange={setMode}
+                          lastChatTerm={lastChatTerm}
                         />
                       </div>
-                      {mode === 'chat' && <Chat />}
+                      {mode === 'chat' && (
+                        <Chat lastChatTerm={lastChatTerm} onAutoAsk={setLastChatTerm} />
+                      )}
                     </div>
 
                     <div className="search-modal-footer">

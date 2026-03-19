@@ -20,7 +20,7 @@ export const ChatSources: FC<ChatSourcesProps> = ({ interaction }) => {
           <div className="chat-sources-item" key={index}>
             {!!document.title && typeof document.title === 'string' && (
               <a
-                href={document.url as string}
+                href={document.path as string}
                 className="chat-sources-link"
                 data-focus-on-arrow-nav
               >

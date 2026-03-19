@@ -152,6 +152,43 @@
     gap: var(--space-3);
   }
 
+  .search-modal-tabs {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .search-modal-tab {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1-5);
+    padding: var(--space-1) var(--space-2-5);
+    border-radius: var(--radius-base);
+    border: none;
+    background: none;
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition:
+      color var(--duration-150) var(--ease-in-out),
+      background-color var(--duration-150) var(--ease-in-out);
+
+    &:hover {
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-secondary);
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--color-focus-ring);
+    }
+
+    &.active {
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-secondary);
+      font-weight: var(--font-weight-medium);
+    }
+  }
+
   .search-modal-back,
   .search-modal-clear {
     display: flex;
