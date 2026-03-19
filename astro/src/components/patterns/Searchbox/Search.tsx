@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import { FacetTabs, SearchInput, SearchResults } from '@orama/ui/components';
 import type { Hit } from '@orama/core';
 import SearchNoResults from './SearchNoResults';
-import Chat from './Chat';
 import './Search.css';
 import { Icon } from '@iconify/react';
 import { useSearch } from '@orama/ui/hooks/useSearch';
@@ -46,7 +45,13 @@ interface SearchProps {
   lastChatTerm: string | null;
 }
 
-export default function Search({ lang, placeholder, mode, onModeChange, lastChatTerm }: SearchProps) {
+export default function Search({
+  lang,
+  placeholder,
+  mode,
+  onModeChange,
+  lastChatTerm,
+}: SearchProps) {
   const t = useTranslations(lang as keyof typeof ui);
   const {
     context: { searchTerm, selectedFacet },
