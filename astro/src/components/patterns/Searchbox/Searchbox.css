@@ -146,7 +146,14 @@
     align-items: center;
   }
 
-  .search-modal-back {
+  .search-modal-header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .search-modal-back,
+  .search-modal-clear {
     display: flex;
     align-items: center;
     gap: var(--space-1-5);
@@ -168,6 +175,16 @@
 
     &:focus-visible {
       outline: 1px solid var(--color-focus-ring);
+    }
+  }
+
+  .search-modal-clear {
+    position: relative;
+    &::after {
+      content: '|';
+      position: absolute;
+      right: -0.75rem;
+      color: var(--color-border-primary);
     }
   }
 

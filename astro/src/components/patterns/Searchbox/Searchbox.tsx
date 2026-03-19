@@ -42,15 +42,15 @@ function SearchModalHeader({ mode, enableSearch }: SearchModalHeaderProps) {
             Back
           </button>
         )}
+      </div>
+      <div className="search-modal-header-right">
         {mode === 'search' && searchTerm && (
           <>
-            <button className="search-modal-back" onClick={reset} aria-label="Clear search">
+            <button className="search-modal-clear" onClick={reset} aria-label="Clear search">
               Clear
             </button>
           </>
         )}
-      </div>
-      <div>
         <Modal.Close className="search-modal-close" aria-label="Close search">
           <Icon icon="fluent:dismiss-16-regular" width={18} height={18} />
         </Modal.Close>
