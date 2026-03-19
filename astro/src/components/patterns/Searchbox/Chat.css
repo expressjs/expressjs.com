@@ -43,6 +43,16 @@
     max-width: 80%;
   }
 
+  .chat-assistant-message {
+    ol {
+      list-style: decimal;
+    }
+
+    ul {
+      list-style: disc;
+    }
+  }
+
   .chat-title {
     font-size: var(--font-size-2xl);
     margin: var(--space-4) 0;
