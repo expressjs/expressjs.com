@@ -10,7 +10,9 @@ import { ChatSources } from './ChatSources';
 
 export default function Chat() {
   const { ask, loading } = useChat({ throttle_delay: 50 });
-  const { context: { searchTerm } } = useSearch();
+  const {
+    context: { searchTerm },
+  } = useSearch();
   const hasSentInitial = useRef(false);
   const { containerRef, scrollToBottom, recalculateGoToBottomButton, showGoToBottomButton } =
     useScrollableContainer();
@@ -41,6 +43,7 @@ export default function Chat() {
               </ChatInteractions.UserPrompt>
               <ChatInteractions.Loading interaction={interaction} className="chat-loading">
                 <div className="chat-typing-dots">
+                  <span className="chat-typing-label">Thinking</span>
                   <span />
                   <span />
                   <span />

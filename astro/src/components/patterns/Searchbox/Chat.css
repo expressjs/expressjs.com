@@ -69,11 +69,23 @@
 
   .chat-typing-dots {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: var(--space-1);
     padding: var(--space-1) 0;
 
     & span {
+      margin: 0;
+    }
+
+    & .chat-typing-label {
+      display: block;
+      color: var(--color-text-tertiary);
+      font-size: var(--font-size-sm);
+      margin-right: var(--space-0-5);
+      line-height: 1;
+    }
+
+    & span:not(.chat-typing-label) {
       display: block;
       width: var(--size-1);
       height: var(--size-1);
@@ -81,10 +93,10 @@
       background-color: var(--color-text-tertiary);
       animation: chat-dot-bounce 1.2s ease-in-out infinite;
 
-      &:nth-child(2) {
+      &:nth-child(3) {
         animation-delay: 0.2s;
       }
-      &:nth-child(3) {
+      &:nth-child(4) {
         animation-delay: 0.4s;
       }
     }
