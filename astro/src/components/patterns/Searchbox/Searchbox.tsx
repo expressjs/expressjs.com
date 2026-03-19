@@ -6,8 +6,9 @@ import { useSearch } from '@orama/ui/hooks/useSearch';
 import Search from './Search';
 import './orama-styles.css';
 import { Icon } from '@iconify/react';
-import './Searchbox.css';
 import Chat from './Chat';
+import SearchFooter from './SearchFooter';
+import './Searchbox.css';
 
 const orama = import.meta.env.PUBLIC_ORAMA_PROJECT_ID
   ? new OramaCloud({
@@ -130,19 +131,8 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
                         <Chat lastChatTerm={lastChatTerm} onAutoAsk={setLastChatTerm} />
                       )}
                     </div>
-
                     <div className="search-modal-footer">
-                      <small>Powered by</small>
-                      <img
-                        className="orama-logo-light"
-                        src="https://website-assets.oramasearch.com/orama-when-light.svg"
-                        alt="Orama logo"
-                      />
-                      <img
-                        className="orama-logo-dark"
-                        src="https://website-assets.oramasearch.com/orama-when-dark.svg"
-                        alt="Orama logo"
-                      />
+                      <SearchFooter />
                     </div>
                   </Modal.Content>
                 </Modal.Inner>
