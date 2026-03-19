@@ -3,6 +3,7 @@ import { ChatInteractions, PromptTextArea } from '@orama/ui/components';
 import { useChat } from '@orama/ui/hooks/useChat';
 import { useScrollableContainer } from '@orama/ui/hooks/useScrollableContainer';
 import { Icon } from '@iconify/react';
+import ChatActions from './ChatActions';
 import './Chat.css';
 
 interface ChatProps {
@@ -15,11 +16,6 @@ export default function Chat({ initialPrompt }: ChatProps) {
   const hasSentInitial = useRef(false);
   const { containerRef, scrollToBottom, recalculateGoToBottomButton, showGoToBottomButton } =
     useScrollableContainer();
-
-  // console.log('Show go to bottom button:', showGoToBottomButton);
-  // console.log('Container ref:', containerRef);
-  // console.log('Scroll to bottom function:', scrollToBottom);
-  // console.log('Recalculate function:', recalculateGoToBottomButton);
 
   useEffect(() => {
     if (initialPrompt && !hasSentInitial.current) {
@@ -65,45 +61,7 @@ export default function Chat({ initialPrompt }: ChatProps) {
               >
                 {interaction.response}
               </ChatInteractions.AssistantMessage>
-              {!interaction.loading && (
-                <ul>
-                  <li>
-                    <ChatInteractions.RegenerateLatest
-                      interaction={interaction}
-                      className="chat-regenerate"
-                    >
-                      <Icon icon="fluent:arrow-sync-20-regular" width={16} height={16} />
-                    </ChatInteractions.RegenerateLatest>
-                  </li>
-                  <li>
-                    <ChatInteractions.CopyMessage interaction={interaction} className="chat-copy">
-                      {(copied: boolean) =>
-                        copied ? (
-                          <>
-                            <Icon icon="fluent:checkmark-16-regular" width={16} height={16} />
-                            <span>Copied</span>
-                          </>
-                        ) : (
-                          <>
-                            <Icon icon="fluent:copy-16-regular" width={16} height={16} />
-                            <span>Copy</span>
-                          </>
-                        )
-                      }
-                    </ChatInteractions.CopyMessage>
-                  </li>
-                  <li>
-                    <button
-                      type="button"
-                      className="chat-feedback-button"
-                      aria-label="Upvote response"
-                      // onClick={dislikeMessage}
-                    >
-                      <Icon icon="fluent:thumb-dislike-16-regular" width={16} height={16} />
-                    </button>
-                  </li>
-                </ul>
-              )}
+              <ChatActions interaction={interaction} />
             </div>
           )}
         </ChatInteractions.Wrapper>
