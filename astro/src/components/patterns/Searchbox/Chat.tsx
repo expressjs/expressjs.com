@@ -1,29 +1,26 @@
 import { useEffect, useRef } from 'react';
 import { ChatInteractions, PromptTextArea } from '@orama/ui/components';
 import { useChat } from '@orama/ui/hooks/useChat';
+import { useSearch } from '@orama/ui/hooks/useSearch';
 import { useScrollableContainer } from '@orama/ui/hooks/useScrollableContainer';
 import { Icon } from '@iconify/react';
 import ChatActions from './ChatActions';
 import './Chat.css';
 import { ChatSources } from './ChatSources';
 
-interface ChatProps {
-  initialPrompt?: string;
-  onBack: () => void;
-}
-
-export default function Chat({ initialPrompt }: ChatProps) {
+export default function Chat() {
   const { ask, loading } = useChat({ throttle_delay: 50 });
+  const { context: { searchTerm } } = useSearch();
   const hasSentInitial = useRef(false);
   const { containerRef, scrollToBottom, recalculateGoToBottomButton, showGoToBottomButton } =
     useScrollableContainer();
 
   useEffect(() => {
-    if (initialPrompt && !hasSentInitial.current) {
+    if (searchTerm && !hasSentInitial.current) {
       hasSentInitial.current = true;
-      ask({ query: initialPrompt });
+      ask({ query: searchTerm });
     }
-  }, [initialPrompt]);
+  }, [searchTerm]);
 
   return (
     <div className="chat-container">

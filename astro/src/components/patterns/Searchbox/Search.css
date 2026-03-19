@@ -122,6 +122,18 @@
     &:focus-visible {
       outline: 1px solid var(--color-focus-ring);
     }
+
+    &:disabled {
+      opacity: 0.8;
+      cursor: not-allowed;
+      background-color: var(--color-bg-secondary);
+      color: var(--color-text-tertiary);
+      border-color: var(--color-border-secondary);
+
+      svg {
+        color: var(--color-icon-secondary);
+      }
+    }
   }
 
   .search-input-field {
@@ -205,13 +217,21 @@
     background-size: 400% 100%;
     animation: search-shimmer 1.4s ease-in-out infinite;
 
-    &--title { height: 0.75rem; }
-    &--desc { height: 0.625rem; }
+    &--title {
+      height: 0.75rem;
+    }
+    &--desc {
+      height: 0.625rem;
+    }
   }
 
   @keyframes search-shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
   }
 
   .search-results-group-title {

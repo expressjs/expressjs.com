@@ -7,6 +7,7 @@ import Search from './Search';
 import './orama-styles.css';
 import { Icon } from '@iconify/react';
 import './Searchbox.css';
+import Chat from './Chat';
 
 const orama = import.meta.env.PUBLIC_ORAMA_PROJECT_ID
   ? new OramaCloud({
@@ -23,10 +24,10 @@ interface SearchboxProps {
 
 interface SearchModalHeaderProps {
   mode: 'search' | 'chat';
-  onBack: () => void;
+  enableSearch: () => void;
 }
 
-function SearchModalHeader({ mode, onBack }: SearchModalHeaderProps) {
+function SearchModalHeader({ mode, enableSearch }: SearchModalHeaderProps) {
   const {
     context: { searchTerm },
     reset,
@@ -36,21 +37,24 @@ function SearchModalHeader({ mode, onBack }: SearchModalHeaderProps) {
     <div className="search-modal-header">
       <div className="search-modal-header-left">
         {mode === 'chat' && (
-          <button className="search-modal-back" onClick={onBack} aria-label="Back to search">
+          <button className="search-modal-back" onClick={enableSearch} aria-label="Back to search">
             <Icon icon="fluent:arrow-left-16-regular" width={16} height={16} />
             Back
           </button>
         )}
         {mode === 'search' && searchTerm && (
-          <button className="search-modal-back" onClick={reset} aria-label="Clear search">
-            <Icon icon="fluent:arrow-left-16-regular" width={16} height={16} />
-            Clear
-          </button>
+          <>
+            <button className="search-modal-back" onClick={reset} aria-label="Clear search">
+              Clear
+            </button>
+          </>
         )}
       </div>
-      <Modal.Close className="search-modal-close" aria-label="Close search">
-        <Icon icon="fluent:dismiss-16-regular" width={18} height={18} />
-      </Modal.Close>
+      <div>
+        <Modal.Close className="search-modal-close" aria-label="Close search">
+          <Icon icon="fluent:dismiss-16-regular" width={18} height={18} />
+        </Modal.Close>
+      </div>
     </div>
   );
 }
@@ -91,14 +95,17 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
               <ChatRoot client={orama} askOptions={{ throttle_delay: 50 }}>
                 <Modal.Inner className="search-modal-inner">
                   <Modal.Content className="search-modal-content">
-                    <SearchModalHeader mode={mode} onBack={() => setMode('search')} />
+                    <SearchModalHeader mode={mode} enableSearch={() => setMode('search')} />
                     <div className="search-modal-body">
-                      <Search
-                        lang={lang}
-                        placeholder="Start typing: What's new in Express 5?"
-                        mode={mode}
-                        onModeChange={setMode}
-                      />
+                      {mode === 'search' && (
+                        <Search
+                          lang={lang}
+                          placeholder="Start typing: What's new in Express 5?"
+                          mode={mode}
+                          onModeChange={setMode}
+                        />
+                      )}
+                      {mode === 'chat' && <Chat />}
                     </div>
 
                     <div className="search-modal-footer">

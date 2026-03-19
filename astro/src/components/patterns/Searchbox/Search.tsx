@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FacetTabs, SearchInput, SearchResults } from '@orama/ui/components';
 import type { Hit } from '@orama/core';
 import SearchNoResults from './SearchNoResults';
@@ -52,6 +52,7 @@ export default function Search({ lang, placeholder, mode, onModeChange }: Search
   } = useSearch();
 
   const inputWrapperRef = useRef<HTMLDivElement>(null);
+  const [lastChatTerm, setLastChatTerm] = useState<string | null>(null);
 
   useEffect(() => {
     if (mode === 'search') {
@@ -63,12 +64,9 @@ export default function Search({ lang, placeholder, mode, onModeChange }: Search
   }, [mode]);
 
   const enterChat = () => {
+    setLastChatTerm(searchTerm ?? null);
     onModeChange('chat');
   };
-
-  if (mode === 'chat') {
-    return <Chat onBack={() => onModeChange('search')} />;
-  }
 
   return (
     <>
@@ -170,11 +168,12 @@ export default function Search({ lang, placeholder, mode, onModeChange }: Search
             <button
               className="search-ask-button"
               onClick={() => enterChat()}
-              type="button"
+              disabled={!searchTerm || searchTerm === lastChatTerm}
+              type="submit"
               aria-label="Switch to chat mode"
             >
               <Icon icon="fluent:sparkle-16-filled" width={14} height={14} />
-              Ask
+              Get summary
             </button>
           </SearchInput.Wrapper>
         </SearchInput.Form>
