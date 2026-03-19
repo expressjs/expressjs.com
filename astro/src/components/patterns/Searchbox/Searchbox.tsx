@@ -97,14 +97,14 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
                   <Modal.Content className="search-modal-content">
                     <SearchModalHeader mode={mode} enableSearch={() => setMode('search')} />
                     <div className="search-modal-body">
-                      {mode === 'search' && (
+                      <div style={{ display: mode === 'search' ? 'contents' : 'none' }}>
                         <Search
                           lang={lang}
                           placeholder="Start typing: What's new in Express 5?"
                           mode={mode}
                           onModeChange={setMode}
                         />
-                      )}
+                      </div>
                       {mode === 'chat' && <Chat />}
                     </div>
 
