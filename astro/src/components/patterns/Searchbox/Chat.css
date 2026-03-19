@@ -16,6 +16,24 @@
     flex: 1;
     flex-direction: column;
     height: 100%;
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-primary) transparent;
+
+    /* Chrome / Safari / Edge */
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-border-primary);
+      border-radius: 9999px;
+    }
   }
 
   /* ============================================
