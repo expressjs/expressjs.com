@@ -1,5 +1,5 @@
 import { ChatInteractions } from '@orama/ui/components';
-import { Icon } from '@iconify/react';
+import { Icon } from '@iconify/react/dist/offline';
 import './ChatActions.css';
 import { useState } from 'react';
 

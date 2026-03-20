@@ -1,7 +1,7 @@
 import { ChatInteractions, PromptTextArea } from '@orama/ui/components';
 import { useChat } from '@orama/ui/hooks/useChat';
 import { useScrollableContainer } from '@orama/ui/hooks/useScrollableContainer';
-import { Icon } from '@iconify/react';
+import { Icon } from '@iconify/react/dist/offline';
 import ChatActions from './ChatActions';
 import './Chat.css';
 import { ChatSources } from './ChatSources';

@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react';
+import { Icon } from '@iconify/react/dist/offline';
 import type { Interaction, AnyObject } from '@orama/core';
 import { ChatInteractions } from '@orama/ui/components';
 import type { FC } from 'react';

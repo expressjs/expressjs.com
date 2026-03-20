@@ -3,7 +3,7 @@ import { FacetTabs, SearchInput, SearchResults } from '@orama/ui/components';
 import type { Hit } from '@orama/core';
 import SearchNoResults from './SearchNoResults';
 import './Search.css';
-import { Icon } from '@iconify/react';
+import { Icon } from '@iconify/react/dist/offline';
 import { useSearch } from '@orama/ui/hooks/useSearch';
 import { useTranslations } from '@/i18n/utils';
 import type { ui } from '@/i18n/locales';

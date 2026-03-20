@@ -1,5 +1,7 @@
 import { SearchResults, Suggestions } from '@orama/ui/components';
-import { Icon } from '@iconify/react';
+import { Icon } from '@iconify/react/dist/offline';
+import ExpressLogoWhite from '../../../icons/logo-express-white.svg?react';
+import ExpressLogoBlack from '../../../icons/logo-express-black.svg?react';
 import './SearchNoResults.css';
 
 const SUGGESTIONS = [
@@ -24,16 +26,8 @@ export default function SearchNoResults({ onSuggestionClick }: SearchNoResultsPr
           ) : (
             <>
               <div className="search-image-wrapper">
-                <img
-                  src="/logo-express-white.svg"
-                  alt=""
-                  className="search-empty-image search-empty-image--dark"
-                />
-                <img
-                  src="/logo-express-black.svg"
-                  alt=""
-                  className="search-empty-image search-empty-image--light"
-                />
+                <ExpressLogoWhite className="search-empty-image search-empty-image--dark" aria-hidden />
+                <ExpressLogoBlack className="search-empty-image search-empty-image--light" aria-hidden />
               </div>
               <p>What would you like to know about Express and its features?</p>
               <Suggestions.Wrapper className="search-suggestions">
