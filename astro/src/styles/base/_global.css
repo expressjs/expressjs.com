@@ -240,10 +240,6 @@ main {
   }
 }
 
-.layout-content {
-  min-width: 0;
-}
-
 @media (--md-up) {
   .layout-wrapper {
     background-color: var(--color-bg-secondary);
