@@ -26,8 +26,14 @@ export default function SearchNoResults({ onSuggestionClick }: SearchNoResultsPr
           ) : (
             <>
               <div className="search-image-wrapper">
-                <ExpressLogoWhite className="search-empty-image search-empty-image--dark" aria-hidden />
-                <ExpressLogoBlack className="search-empty-image search-empty-image--light" aria-hidden />
+                <ExpressLogoWhite
+                  className="search-empty-image search-empty-image--dark"
+                  aria-hidden
+                />
+                <ExpressLogoBlack
+                  className="search-empty-image search-empty-image--light"
+                  aria-hidden
+                />
               </div>
               <p>What would you like to know about Express and its features?</p>
               <Suggestions.Wrapper className="search-suggestions">
