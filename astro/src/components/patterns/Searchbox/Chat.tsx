@@ -1,32 +1,15 @@
-import { useEffect } from 'react';
 import { ChatInteractions, PromptTextArea } from '@orama/ui/components';
 import { useChat } from '@orama/ui/hooks/useChat';
-import { useSearch } from '@orama/ui/hooks/useSearch';
 import { useScrollableContainer } from '@orama/ui/hooks/useScrollableContainer';
 import { Icon } from '@iconify/react';
 import ChatActions from './ChatActions';
 import './Chat.css';
 import { ChatSources } from './ChatSources';
 
-interface ChatProps {
-  lastChatTerm: string | null;
-  onAutoAsk: (term: string) => void;
-}
-
-export default function Chat({ lastChatTerm, onAutoAsk }: ChatProps) {
-  const { ask, loading } = useChat({ throttle_delay: 50 });
-  const {
-    context: { searchTerm },
-  } = useSearch();
+export default function Chat() {
+  const { loading } = useChat({ throttle_delay: 50 });
   const { containerRef, scrollToBottom, recalculateGoToBottomButton, showGoToBottomButton } =
     useScrollableContainer();
-
-  useEffect(() => {
-    if (searchTerm && searchTerm !== lastChatTerm) {
-      onAutoAsk(searchTerm);
-      ask({ query: searchTerm });
-    }
-  }, []);
 
   return (
     <div className="chat-container">

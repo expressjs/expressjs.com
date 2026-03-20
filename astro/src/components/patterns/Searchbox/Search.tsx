@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FacetTabs, SearchInput, SearchResults } from '@orama/ui/components';
 import type { Hit } from '@orama/core';
 import SearchNoResults from './SearchNoResults';
@@ -7,6 +7,7 @@ import { Icon } from '@iconify/react';
 import { useSearch } from '@orama/ui/hooks/useSearch';
 import { useTranslations } from '@/i18n/utils';
 import type { ui } from '@/i18n/locales';
+import { useChat } from '@orama/ui/hooks/useChat';
 
 type DocDocument = {
   title: string;
@@ -45,17 +46,13 @@ interface SearchProps {
   lastChatTerm: string | null;
 }
 
-export default function Search({
-  lang,
-  placeholder,
-  mode,
-  onModeChange,
-  lastChatTerm,
-}: SearchProps) {
+export default function Search({ lang, placeholder, mode, onModeChange }: SearchProps) {
   const t = useTranslations(lang as keyof typeof ui);
   const {
     context: { searchTerm, selectedFacet },
   } = useSearch();
+  const { ask } = useChat();
+  const [lastChatTerm, setLastChatTerm] = useState<string>();
 
   const inputWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -70,6 +67,8 @@ export default function Search({
 
   const enterChat = () => {
     onModeChange('chat');
+    setLastChatTerm(searchTerm);
+    ask({ query: searchTerm ?? '' });
   };
 
   return (

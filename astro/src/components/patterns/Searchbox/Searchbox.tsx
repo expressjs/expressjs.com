@@ -78,7 +78,6 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
   const [shortcutKey, setShortcutKey] = useState('⌘ K');
   const [mounted, setMounted] = useState(false);
   const [mode, setMode] = useState<'search' | 'chat'>('search');
-  const [lastChatTerm, setLastChatTerm] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -118,18 +117,15 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
                   <Modal.Content className="search-modal-content">
                     <SearchModalHeader mode={mode} onModeChange={setMode} />
                     <div className="search-modal-body">
-                      <div style={{ display: mode === 'search' ? 'contents' : 'none' }}>
+                      <div className={mode === 'search' ? 'contents' : 'hidden'}>
                         <Search
                           lang={lang}
                           placeholder="Start typing: What's new in Express 5?"
                           mode={mode}
                           onModeChange={setMode}
-                          lastChatTerm={lastChatTerm}
                         />
                       </div>
-                      {mode === 'chat' && (
-                        <Chat lastChatTerm={lastChatTerm} onAutoAsk={setLastChatTerm} />
-                      )}
+                      {mode === 'chat' && <Chat />}
                     </div>
                     <div className="search-modal-footer">
                       <SearchFooter />
