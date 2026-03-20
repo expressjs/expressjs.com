@@ -43,7 +43,6 @@ interface SearchProps {
   placeholder: string;
   mode: 'search' | 'chat';
   onModeChange: (mode: 'search' | 'chat') => void;
-  lastChatTerm: string | null;
 }
 
 export default function Search({ lang, placeholder, mode, onModeChange }: SearchProps) {

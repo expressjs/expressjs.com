@@ -9,6 +9,7 @@ import { Icon } from '@iconify/react';
 import Chat from './Chat';
 import SearchFooter from './SearchFooter';
 import './Searchbox.css';
+import { useChat } from '@orama/ui/hooks/index';
 
 const orama = import.meta.env.PUBLIC_ORAMA_PROJECT_ID
   ? new OramaCloud({
@@ -33,39 +34,43 @@ function SearchModalHeader({ mode, onModeChange }: SearchModalHeaderProps) {
     context: { searchTerm },
     reset,
   } = useSearch();
+  const {
+    context: { interactions },
+  } = useChat();
+
+  function handleBackToSearch() {
+    if (mode === 'chat') {
+      onModeChange('search');
+      return;
+    }
+
+    reset();
+  }
 
   return (
     <div className="search-modal-header">
       <div className="search-modal-header-left">
-        <div className="search-modal-tabs" role="tablist">
+        {(mode === 'chat' || searchTerm) && (
           <button
-            className={`search-modal-tab${mode === 'search' ? ' active' : ''}`}
+            className="search-modal-back"
             role="tab"
-            aria-selected={mode === 'search'}
-            onClick={() => onModeChange('search')}
+            type="button"
+            aria-label="Back to search"
+            onClick={handleBackToSearch}
           >
-            <Icon icon="fluent:search-16-regular" width={16} height={16} />
-            Search
+            <Icon icon="fluent:ios-arrow-left-24-regular" width={16} height={16} />
           </button>
-          <button
-            className={`search-modal-tab${mode === 'chat' ? ' active' : ''}`}
-            role="tab"
-            aria-selected={mode === 'chat'}
-            onClick={() => onModeChange('chat')}
-          >
-            <Icon icon="fluent:chat-sparkle-16-regular" width={16} height={16} />
-            Ask AI
+        )}
+        {interactions && interactions.length > 0 && (
+          <button className="search-modal-chat" role="tab" onClick={() => onModeChange('chat')}>
+            <span className="chat-interactions-count">{interactions.length}</span>
+            <span className="chat-user-prompt-preview">
+              question{interactions.length > 1 ? 's' : ''}
+            </span>
           </button>
-        </div>
+        )}
       </div>
       <div className="search-modal-header-right">
-        {mode === 'search' && searchTerm && (
-          <>
-            <button className="search-modal-clear" onClick={reset} aria-label="Clear search">
-              Clear
-            </button>
-          </>
-        )}
         <Modal.Close className="search-modal-close" aria-label="Close search">
           <Icon icon="fluent:dismiss-16-regular" width={18} height={18} />
         </Modal.Close>
