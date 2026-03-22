@@ -30,10 +30,30 @@ export const apiMenu: Menu = {
                 ariaLabel: 'app.locals property',
               },
               {
+                href: '/api/application/app.routes',
+                label: 'app.routes',
+                ariaLabel: 'app.routes property',
+                omitFrom: ['4x', '5x'],
+              },
+              {
                 href: `/api/application/app-mountpath`,
                 label: 'app.mountpath',
                 ariaLabel: 'app.mountpath property',
                 omitFrom: ['3x'],
+              },
+            ],
+          },
+        },
+        {
+          label: 'menu.events',
+          ariaLabel: 'menu.applicationEventAria',
+          omitFrom: ['3x'],
+          submenu: {
+            items: [
+              {
+                href: `/api/application/app-onmount`,
+                label: 'app.on(\'mount\')',
+                ariaLabel: 'app on mount event',
               },
             ],
           },
@@ -54,6 +74,109 @@ export const apiMenu: Menu = {
                 ariaLabel: 'app.delete method',
                 omitFrom: ['3x'],
               },
+              {
+                href: '/api/application/app-disable',
+                label: 'app.disable()',
+                ariaLabel: 'app.disable method',
+              },
+              {
+                href: '/api/aplication/app-disabled',
+                label: 'app.disabled()',
+                ariaLabel: 'app.disabled property',
+              },
+              {
+                href: '/api/application/app-configure',
+                label: 'app.configure()',
+                ariaLabel: 'app.configure method',
+                omitFrom: ['4x', '5x']
+              },
+              {
+                href: '/api/application/app-enable',
+                label: 'app.enable()',
+                ariaLabel: 'app.enable method',
+              },
+              {
+                href: '/api/application/app-enabled',
+                label: 'app.enabled()',
+                ariaLabel: 'app.enabled property',
+              },
+              {
+                href: '/api/application/app-engine',
+                label: 'app.engine()',
+                ariaLabel: 'app.engine method',
+              },
+              {
+                href: '/api/application/app-get',
+                label: 'app.get(name)',
+                ariaLabel: 'app.get method',
+              },
+              
+              {
+                href: '/api/application/app-get-method',
+                label: 'app.get(path)',
+                ariaLabel: 'app.get method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-listen',
+                label: 'app.listen()',
+                ariaLabel: 'app.listen method',
+              },
+              {
+                href: '/api/application/app-method',
+                label: 'app.method()',
+                ariaLabel: 'app.METHOD method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-param',
+                label: 'app.param()',
+                ariaLabel: 'app.param method',
+              },
+              {
+                href: '/api/application/app-verb',
+                label: 'app.verb()',
+                ariaLabel: 'app.verb methods',
+              },
+              {
+                href: '/api/application/app-path',
+                label: 'app.path()',
+                ariaLabel: 'app.path method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-post-method',
+                label: 'app.post()',
+                ariaLabel: 'app.post method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-put-method',
+                label: 'app.put()',
+                ariaLabel: 'app.put method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-render',
+                label: 'app.render()',
+                ariaLabel: 'app.render method',
+              },
+              {
+                href: '/api/application/app-route',
+                label: 'app.route()',
+                ariaLabel: 'app.route method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-set',
+                label: 'app.set()',
+                ariaLabel: 'app.set method',
+              },
+              {
+                href: '/api/application/app-use',
+                label: 'app.use()',
+                ariaLabel: 'app.use method',
+              }
             ],
           },
         },

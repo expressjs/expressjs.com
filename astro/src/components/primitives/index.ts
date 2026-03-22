@@ -8,6 +8,7 @@ export { Typography, H1, H2, H3, H4, H5, Body, BodySm, BodyMd, BodyXs, Code } fr
 // Layout
 export { Container } from './Container';
 export { Grid, Col, Flex, FlexItem } from './Grid';
+export { ListGrid } from './ListGrid';
 
 // Button
 export { Button } from './Button';

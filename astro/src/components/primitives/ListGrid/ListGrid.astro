@@ -1,0 +1,66 @@
+---
+/**
+ * ListGrid Primitive Component
+ *
+ * Responsive list layout powered by the Grid primitive.
+ * Add content through the default slot; each direct child is treated as one list item.
+ *
+ * @example
+ * <ListGrid>
+ *   <Card title="Routing" body="Robust and flexible routing." />
+ *   <Card title="Middleware" body="Composable request handlers." />
+ * </ListGrid>
+ */
+
+import './ListGrid.css';
+import type { HTMLAttributes } from 'astro/types';
+import Grid from '../Grid/Grid.astro';
+import type { GapSize, ColSpan } from '../Grid/types';
+
+interface Props extends HTMLAttributes<'div'> {
+  /** Gap between items */
+  gap?: GapSize;
+  /** Vertical gap override */
+  rowGap?: GapSize;
+  /** Horizontal gap override */
+  columnGap?: GapSize;
+  /** Columns span per item on mobile */
+  itemXs?: ColSpan;
+  /** Columns span per item on tablet */
+  itemMd?: ColSpan;
+  /** Columns span per item on desktop */
+  itemLg?: ColSpan;
+}
+
+const {
+  gap = '4',
+  rowGap,
+  columnGap,
+  itemXs = 12,
+  itemMd = 6,
+  itemLg = 4,
+  class: className,
+  style,
+  ...rest
+} = Astro.props;
+
+const responsiveStyle = [
+  `--list-grid-item-xs: ${itemXs}`,
+  `--list-grid-item-md: ${itemMd}`,
+  `--list-grid-item-lg: ${itemLg}`,
+  style,
+]
+  .filter(Boolean)
+  .join('; ');
+---
+
+<Grid
+  gap={gap}
+  rowGap={rowGap}
+  columnGap={columnGap}
+  class:list={['list-grid', className]}
+  style={responsiveStyle}
+  {...rest}
+>
+  <slot />
+</Grid>
