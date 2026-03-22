@@ -4,7 +4,7 @@ description: Learn about the properties and methods of the Express 3.x applicati
 ---
 
 import Card from '@components/primitives/Card/Card.astro';
-import ListGrid from '@components/primitives/ListGrid/ListGrid.astro';
+import { CardList } from '@components/patterns';
 
 <h2 id="app">Application</h2>
 
@@ -24,7 +24,7 @@ app.listen(3000);
 
 <h3 id="app.properties">Properties</h3>
 
-<ListGrid gap="6" role="list">
+<CardList gap="6" role="list">
   <a href="./app-locals" role="listitem">
     <Card
       title="app.locals"
@@ -40,11 +40,11 @@ app.listen(3000);
   <a href="./app-settings" role="listitem">
     <Card title="settings" body="Built-in Express 3.x settings that change app behavior." />
   </a>
-</ListGrid>
+</CardList>
 
 <h3 id="app.methods">Methods</h3>
 
-<ListGrid gap="6" role="list">
+<CardList gap="6" role="list">
   <a href="./app-set" role="listitem">
     <Card title="app.set" body="Assign a value to an application setting." />
   </a>
@@ -87,4 +87,4 @@ app.listen(3000);
   <a href="./app-listen" role="listitem">
     <Card title="app.listen" body="Start the server and listen for incoming connections." />
   </a>
-</ListGrid>
+</CardList>

@@ -1,21 +1,15 @@
 ---
 /**
- * ListGrid Primitive Component
+ * CardList Pattern Component
  *
- * Responsive list layout powered by the Grid primitive.
- * Add content through the default slot; each direct child is treated as one list item.
- *
- * @example
- * <ListGrid>
- *   <Card title="Routing" body="Robust and flexible routing." />
- *   <Card title="Middleware" body="Composable request handlers." />
- * </ListGrid>
+ * A responsive cards list built on top of the Grid primitive.
+ * Add cards (or card links) through the default slot.
  */
 
-import './ListGrid.css';
+import './CardList.css';
 import type { HTMLAttributes } from 'astro/types';
-import Grid from '../Grid/Grid.astro';
-import type { GapSize, ColSpan } from '../Grid/types';
+import { Grid } from '@/components/primitives';
+import type { GapSize, ColSpan } from '@/components/primitives/Grid/types';
 
 interface Props extends HTMLAttributes<'div'> {
   /** Gap between items */
@@ -45,9 +39,9 @@ const {
 } = Astro.props;
 
 const responsiveStyle = [
-  `--list-grid-item-xs: ${itemXs}`,
-  `--list-grid-item-md: ${itemMd}`,
-  `--list-grid-item-lg: ${itemLg}`,
+  `--card-list-item-xs: ${itemXs}`,
+  `--card-list-item-md: ${itemMd}`,
+  `--card-list-item-lg: ${itemLg}`,
   style,
 ]
   .filter(Boolean)
@@ -58,7 +52,7 @@ const responsiveStyle = [
   gap={gap}
   rowGap={rowGap}
   columnGap={columnGap}
-  class:list={['list-grid', className]}
+  class:list={['card-list', className]}
   style={responsiveStyle}
   {...rest}
 >

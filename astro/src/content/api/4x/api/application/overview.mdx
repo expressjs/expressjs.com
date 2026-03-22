@@ -4,7 +4,7 @@ description: Learn about the properties of the Express application object.
 ---
 
 import Card from '@components/primitives/Card/Card.astro';
-import ListGrid from '@components/primitives/ListGrid/ListGrid.astro';
+import { CardList } from '@components/patterns';
 
 ## Application
 
@@ -39,7 +39,7 @@ for more information, see [Application settings](./app-settings/).
 
 <h3 id="app.properties">Properties</h3>
 
-<ListGrid gap="6" role="list">
+<CardList gap="6" role="list">
   <a href="./app-locals" role="listitem">
     <Card
       title="app.locals"
@@ -49,19 +49,19 @@ for more information, see [Application settings](./app-settings/).
   <a href="./app-mountpath" role="listitem">
     <Card title="app.mountpath" body="Path pattern(s) where a sub-application is mounted." />
   </a>
-</ListGrid>
+</CardList>
 
 <h3 id="app.events">Events</h3>
 
-<ListGrid gap="6" role="list">
+<CardList gap="6" role="list">
   <a href="./app-onmount" role="listitem">
     <Card title="app.on('mount')" body="Event fired when the app is mounted on a parent app." />
   </a>
-</ListGrid>
+</CardList>
 
 <h3 id="app.methods">Methods</h3>
 
-<ListGrid gap="6" role="list">
+<CardList gap="6" role="list">
   <a href="./app-all" role="listitem">
     <Card title="app.all" body="Route all HTTP methods for a specific path." />
   </a>
@@ -119,4 +119,4 @@ for more information, see [Application settings](./app-settings/).
   <a href="./app-use" role="listitem">
     <Card title="app.use" body="Mount middleware functions at an optional path." />
   </a>
-</ListGrid>
+</CardList>
