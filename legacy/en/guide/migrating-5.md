@@ -56,6 +56,7 @@ You can find the list of available codemods [here](https://codemod.link/express)
   <li><a href="#res.send.body">res.send(body, status)</a></li>
   <li><a href="#res.send.status">res.send(status)</a></li>
   <li><a href="#res.sendfile">res.sendfile()</a></li>
+  <li><a href="#res.sendFile.options">res.sendFile() and express.static() options</a></li>
   <li><a href="#router.param">router.param(fn)</a></li>
   <li><a href="#express.static.mime">express.static.mime</a></li>
   <li><a href="#express:router-debug-logs">express:router debug logs</a></li>
@@ -376,7 +377,12 @@ app.get("/user", (req, res) => {
   res.sendFile("/path/to/file");
 });
 ```
+<h3 id="res.sendFile.options">res.sendFile() and express.static() options</h3>
 
+The following options to the `res.sendFile()` and `express.static()` functions are no longer supported:
+
+* `hidden`: Use the `dotfiles` option instead. Note that the default value of `dotfiles` is now `"ignore"`.
+* `from`: Use the `root` option instead.
 <h3 id="router.param">router.param(fn)</h3>
 
 The `router.param(fn)` signature was used for modifying the behavior of the `router.param(name, fn)` function. It has been deprecated since v4.11.0, and Express 5 no longer supports it at all.
