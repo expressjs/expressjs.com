@@ -18,7 +18,7 @@ export const apiMenu: Menu = {
         {
           href: '/api/express/overview',
           label: 'menu.overview',
-          ariaLabel: 'menu.expressOverviewAria'
+          ariaLabel: 'menu.expressOverviewAria',
         },
         {
           label: 'menu.methods',
@@ -54,11 +54,11 @@ export const apiMenu: Menu = {
                 href: '/api/express/expressurlencoded',
                 label: 'express.urlencoded()',
                 ariaLabel: 'express.urlencoded property',
-              }
-          ] 
-          }
-        }
-      ]
+              },
+            ],
+          },
+        },
+      ],
     },
     {
       title: 'menu.application',
