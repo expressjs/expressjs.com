@@ -4,8 +4,11 @@ import { URL } from 'node:url';
 import { OramaCloud } from '@orama/core';
 import { getAllDocuments } from './orama-documents.mjs';
 
-process.loadEnvFile(new URL('../.env.local', import.meta.url));
-
+try {
+  process.loadEnvFile(new URL('../.env.local', import.meta.url));
+} catch (error) {
+  console.error('Error loading .env.local file:', error);
+}
 /**
  * The default batch size to use when syncing Orama Cloud
  */
