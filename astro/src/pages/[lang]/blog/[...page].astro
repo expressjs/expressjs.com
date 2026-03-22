@@ -20,9 +20,7 @@ export async function getStaticPaths({ paginate }: { paginate: PaginateFunction 
         return bFile.localeCompare(aFile);
       });
 
-    const allTags = [
-      ...new Set(langPosts.flatMap((p) => p.data.tags ?? [])),
-    ];
+    const allTags = [...new Set(langPosts.flatMap((p) => p.data.tags ?? []))];
 
     return paginate(langPosts, {
       params: { lang },

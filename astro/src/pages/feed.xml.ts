@@ -24,7 +24,7 @@ function getAuthorsCustomData(
     .join('');
 }
 
-export const GET: APIRoute = async(context) => {
+export const GET: APIRoute = async (context) => {
   const blog = await getCollection('blog');
   const sortedBlog = [...blog].sort((a, b) => {
     const aTime = getPubDateFromId(a.id)?.getTime() ?? 0;
@@ -47,4 +47,4 @@ export const GET: APIRoute = async(context) => {
       link: `/blog/${post.id}/`,
     })),
   });
-}
+};
