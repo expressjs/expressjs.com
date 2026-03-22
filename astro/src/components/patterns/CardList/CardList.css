@@ -1,6 +1,12 @@
 @layer patterns {
   .card-list > * {
     grid-column: span var(--card-list-item-xs, 12);
+    display: flex;
+  }
+
+  .card-list > * > .card {
+    flex: 1;
+    height: 100%;
   }
 
   .card-list > a,
