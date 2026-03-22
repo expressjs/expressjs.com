@@ -1,7 +1,7 @@
 ---
 title: June 2025 Security Releases
 description: Security update for Multer released. All users are encouraged to upgrade.
-tags: security
+tags: ['security']
 authors:
   - name: Ulises Gascón
     github: UlisesGascon
