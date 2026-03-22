@@ -1,0 +1,93 @@
+---
+title: Application Properties
+description: Learn about the properties and methods of the Express 3.x application object.
+---
+
+import Card from '@components/primitives/Card/Card.astro';
+import ListGrid from '@components/primitives/ListGrid/ListGrid.astro';
+
+<h2 id="app">Application</h2>
+
+The `app` object conventionally denotes the Express application.
+Create it by calling the top-level `express()` function exported by the Express module:
+
+```js
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('hello world');
+});
+
+app.listen(3000);
+```
+
+<h3 id='app.properties'>Properties</h3>
+
+<ListGrid gap="6" role="list">
+  <a href="./app-locals" role="listitem">
+    <Card
+      title="app.locals"
+      body="Application local variables available to all rendered templates."
+    />
+  </a>
+  <a href="./app-routes" role="listitem">
+    <Card
+      title="app.routes"
+      body="Internal route table grouped by HTTP method for introspection."
+    />
+  </a>
+  <a href="./app-settings" role="listitem">
+    <Card
+      title="settings"
+      body="Built-in Express 3.x settings that change app behavior."
+    />
+  </a>
+</ListGrid>
+
+<h3 id='app.methods'>Methods</h3>
+
+<ListGrid gap="6" role="list">
+  <a href="./app-set" role="listitem">
+    <Card title="app.set" body="Assign a value to an application setting." />
+  </a>
+  <a href="./app-get" role="listitem">
+    <Card title="app.get (setting)" body="Read the current value of an application setting." />
+  </a>
+  <a href="./app-enable" role="listitem">
+    <Card title="app.enable" body="Enable a boolean application setting." />
+  </a>
+  <a href="./app-disable" role="listitem">
+    <Card title="app.disable" body="Disable a boolean application setting." />
+  </a>
+  <a href="./app-enabled" role="listitem">
+    <Card title="app.enabled" body="Check whether a boolean setting is enabled." />
+  </a>
+  <a href="./app-disabled" role="listitem">
+    <Card title="app.disabled" body="Check whether a boolean setting is disabled." />
+  </a>
+  <a href="./app-configure" role="listitem">
+    <Card title="app.configure" body="Run configuration callbacks conditionally by environment." />
+  </a>
+  <a href="./app-use" role="listitem">
+    <Card title="app.use" body="Mount middleware functions at an optional path." />
+  </a>
+  <a href="./app-engine" role="listitem">
+    <Card title="app.engine" body="Register a template engine callback by extension." />
+  </a>
+  <a href="./app-param" role="listitem">
+    <Card title="app.param" body="Attach callback logic to route parameters." />
+  </a>
+  <a href="./app-VERB" role="listitem">
+    <Card title="app.VERB" body="Route requests for a specific HTTP method." />
+  </a>
+  <a href="./app-all" role="listitem">
+    <Card title="app.all" body="Define a route handler that matches all HTTP methods." />
+  </a>
+  <a href="./app-render" role="listitem">
+    <Card title="app.render" body="Render a view and return HTML via callback." />
+  </a>
+  <a href="./app-listen" role="listitem">
+    <Card title="app.listen" body="Start the server and listen for incoming connections." />
+  </a>
+</ListGrid>
