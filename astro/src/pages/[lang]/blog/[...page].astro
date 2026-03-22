@@ -21,14 +21,7 @@ export async function getStaticPaths({ paginate }: { paginate: PaginateFunction 
       });
 
     const allTags = [
-      ...new Set(
-        langPosts.flatMap((p) =>
-          (p.data.tags ?? '')
-            .split(' ')
-            .map((t: string) => t.trim())
-            .filter(Boolean)
-        )
-      ),
+      ...new Set(langPosts.flatMap((p) => p.data.tags ?? [])),
     ];
 
     return paginate(langPosts, {
@@ -57,8 +50,8 @@ function formatTagLabel(tag: string) {
   return spaced.charAt(0).toUpperCase() + spaced.slice(1);
 }
 
-function getLabels(tags?: string) {
-  return (tags ?? '').split(' ').filter(Boolean).map(formatTagLabel);
+function getLabels(tags?: string[]) {
+  return (tags ?? []).map(formatTagLabel);
 }
 
 function getPostProps(post: CollectionEntry<'blog'>) {
@@ -94,7 +87,7 @@ const filterTabs: TabItem[] = [
     <Grid gap="4" align="stretch" data-posts-grid>
       {
         pagePosts.map((post) => (
-          <Col xs={12} md={6} lg={4} data-post-tags={post.data.tags ?? ''}>
+          <Col xs={12} md={6} lg={4} data-post-tags={(post.data.tags ?? []).join(' ')}>
             <PostCard {...getPostProps(post)} />
           </Col>
         ))
@@ -111,7 +104,7 @@ const filterTabs: TabItem[] = [
     <template data-posts-pool>
       {
         langPosts.map((post) => (
-          <Col xs={12} md={6} lg={4} data-post-tags={post.data.tags ?? ''}>
+          <Col xs={12} md={6} lg={4} data-post-tags={(post.data.tags ?? []).join(' ')}>
             <PostCard {...getPostProps(post)} />
           </Col>
         ))
