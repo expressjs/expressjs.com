@@ -23,7 +23,6 @@
     "astro": "^5.18.0",
     "astro-expressive-code": "^0.41.7",
     "astro-icon": "^1.1.5",
-    "dotenv": "^17.3.1",
     "gray-matter": "^4.0.3",
     "mdast-util-from-markdown": "^2.0.3",
     "mdast-util-to-string": "^4.0.0",

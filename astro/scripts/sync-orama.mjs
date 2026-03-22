@@ -1,11 +1,10 @@
 import process from 'node:process';
 import console from 'node:console';
 import { URL } from 'node:url';
-import dotenv from 'dotenv';
 import { OramaCloud } from '@orama/core';
 import { getAllDocuments } from './orama-documents.mjs';
 
-dotenv.config({ path: new URL('../.env.local', import.meta.url) });
+process.loadEnvFile(new URL('../.env.local', import.meta.url));
 
 /**
  * The default batch size to use when syncing Orama Cloud
