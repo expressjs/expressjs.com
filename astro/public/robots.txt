@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://expressjs.com/sitemap-index.xml
