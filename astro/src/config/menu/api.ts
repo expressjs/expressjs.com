@@ -12,6 +12,55 @@ export const apiMenu: Menu = {
       ],
     },
     {
+      title: 'express()',
+      omitFrom: ['3x'],
+      items: [
+        {
+          href: '/api/express/overview',
+          label: 'menu.overview',
+          ariaLabel: 'menu.expressOverviewAria'
+        },
+        {
+          label: 'menu.methods',
+          ariaLabel: 'menu.expressMethodsAria',
+          submenu: {
+            items: [
+              {
+                href: '/api/express/expressjson',
+                label: 'express.json()',
+                ariaLabel: 'express.json property',
+              },
+              {
+                href: '/api/express/expressraw',
+                label: 'express.raw()',
+                ariaLabel: 'express.raw property',
+              },
+              {
+                href: '/api/express/expressrouter',
+                label: 'express.Router()',
+                ariaLabel: 'express.Router property',
+              },
+              {
+                href: '/api/express/expressstatic',
+                label: 'express.static()',
+                ariaLabel: 'express.static property',
+              },
+              {
+                href: '/api/express/expresstext',
+                label: 'express.text()',
+                ariaLabel: 'express.text property',
+              },
+              {
+                href: '/api/express/expressurlencoded',
+                label: 'express.urlencoded()',
+                ariaLabel: 'express.urlencoded property',
+              }
+          ] 
+          }
+        }
+      ]
+    },
+    {
       title: 'menu.application',
       items: [
         {
