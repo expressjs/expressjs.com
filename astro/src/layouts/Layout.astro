@@ -16,6 +16,8 @@ const {
   description = 'Fast, unopinionated, minimalist web framework for Node.js',
 } = Astro.props;
 
+const isNetlify = import.meta.env.DEPLOY_PRIME_URL;
+
 const lang = getLangFromUrl(Astro.url);
 ---
 
@@ -57,7 +59,6 @@ const lang = getLangFromUrl(Astro.url);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="description" content={description} />
-    <meta name="generator" content={Astro.generator} />
 
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site || Astro.url.origin)} />
 
@@ -81,6 +82,16 @@ const lang = getLangFromUrl(Astro.url);
     <style is:inline>
       @layer base, primitives, patterns;
     </style>
+
+    <link rel="sitemap" href={new URL('/sitemap-index.xml', Astro.site || Astro.url.origin)} />
+    <!-- Robots meta tag for Google Search. Enables a large image preview in Google search results,
+      most pertinently in Chrome’s “Discover” view on mobile. See:
+      https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag#max-image-preview
+    -->
+    <meta
+      name="robots"
+      content={isNetlify ? 'noindex, nofollow' : 'max-image-preview:large, index, follow'}
+    />
   </head>
   <body>
     <Header />
