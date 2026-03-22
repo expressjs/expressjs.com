@@ -353,7 +353,6 @@ The `res.sendfile()` function has been replaced by a camel-cased version `res.se
 - CSS files (.css): now "text/css" instead of "text/plain"
 - XML files (.xml): now "application/xml" instead of "text/xml"
 - Font files (.woff): now "font/woff" instead of "application/font-woff"
-- SVG files (.svg): now "image/svg+xml" instead of "application/svg+xml"
 
 {% capture codemod-camelcase-sendfile %}
 You can replace the deprecated signatures with the following command:
