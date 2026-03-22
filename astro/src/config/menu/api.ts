@@ -80,7 +80,7 @@ export const apiMenu: Menu = {
                 ariaLabel: 'app.disable method',
               },
               {
-                href: '/api/aplication/app-disabled',
+                href: '/api/application/app-disabled',
                 label: 'app.disabled()',
                 ariaLabel: 'app.disabled property',
               },
@@ -137,6 +137,7 @@ export const apiMenu: Menu = {
                 href: '/api/application/app-verb',
                 label: 'app.verb()',
                 ariaLabel: 'app.verb methods',
+                omitFrom: ['4x', '5x'],
               },
               {
                 href: '/api/application/app-path',
