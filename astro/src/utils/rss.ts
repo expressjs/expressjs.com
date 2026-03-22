@@ -32,3 +32,8 @@ export function sortByIdDateDesc<T extends { id: string }>(items: T[]): T[] {
     return bTime - aTime;
   });
 }
+
+export function shouldIncludeInFeed(id: string): boolean {
+  const filename = id.split('/').pop() ?? id;
+  return !/^write[-_]posts?$/i.test(filename);
+}

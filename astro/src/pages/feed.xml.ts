@@ -1,11 +1,16 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIRoute } from 'astro';
-import { getAuthorsCustomData, getPubDateFromId, sortByIdDateDesc } from '@/utils/rss';
+import {
+  getAuthorsCustomData,
+  getPubDateFromId,
+  shouldIncludeInFeed,
+  sortByIdDateDesc,
+} from '@/utils/rss';
 
 export const GET: APIRoute = async (context) => {
   const blog = await getCollection('blog');
-  const sortedBlog = sortByIdDateDesc(blog);
+  const sortedBlog = sortByIdDateDesc(blog.filter((post) => shouldIncludeInFeed(post.id)));
 
   return rss({
     title: 'The Express.js Blog',

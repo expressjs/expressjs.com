@@ -1,12 +1,19 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIRoute } from 'astro';
-import { getAuthorsCustomData, getPubDateFromId, sortByIdDateDesc } from '@/utils/rss';
+import {
+  getAuthorsCustomData,
+  getPubDateFromId,
+  shouldIncludeInFeed,
+  sortByIdDateDesc,
+} from '@/utils/rss';
 
 export const GET: APIRoute = async (context) => {
   const blog = await getCollection('blog');
   const securityPosts = sortByIdDateDesc(
-    blog.filter((post) => (post.data.tags ?? []).includes('security'))
+    blog.filter(
+      (post) => shouldIncludeInFeed(post.id) && (post.data.tags ?? []).includes('security')
+    )
   );
 
   return rss({
