@@ -30,7 +30,7 @@ export const apiMenu: Menu = {
                 ariaLabel: 'app.locals property',
               },
               {
-                href: '/api/application/app.routes',
+                href: '/api/application/app-routes',
                 label: 'app.routes',
                 ariaLabel: 'app.routes property',
                 omitFrom: ['4x', '5x'],
