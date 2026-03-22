@@ -1,0 +1,42 @@
+---
+title: Express Object
+description: Learn about the methods available on the top-level Express object.
+---
+
+import Card from '@components/primitives/Card/Card.astro';
+import { CardList } from '@components/patterns';
+
+## express()
+
+Creates an Express application. The `express()` function is a top-level function exported by the `express` module.
+
+```js
+const express = require('express');
+const app = express();
+```
+
+<h3 id="express.methods">Methods</h3>
+
+<CardList gap="6">
+  <a href="./expressjson">
+    <Card title="express.json" body="Parse incoming requests with JSON payloads." />
+  </a>
+  <a href="./expressraw">
+    <Card title="express.raw" body="Parse request payloads into a Buffer." />
+  </a>
+  <a href="./expressrouter">
+    <Card
+      title="express.Router"
+      body="Create a new router instance with optional behavior settings."
+    />
+  </a>
+  <a href="./expressstatic">
+    <Card title="express.static" body="Serve static files from a root directory." />
+  </a>
+  <a href="./expresstext">
+    <Card title="express.text" body="Parse request payloads as plain text strings." />
+  </a>
+  <a href="./expressurlencoded">
+    <Card title="express.urlencoded" body="Parse incoming requests with URL-encoded payloads." />
+  </a>
+</CardList>
