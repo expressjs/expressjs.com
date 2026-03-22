@@ -248,3 +248,7 @@ main {
     background-color: var(--color-bg-primary);
   }
 }
+
+.layout-content {
+  min-width: 0;
+}
