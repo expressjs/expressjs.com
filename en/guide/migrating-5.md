@@ -58,7 +58,7 @@ You can find the list of available codemods [here](https://codemod.link/express)
   <li><a href="#res.sendfile">res.sendfile()</a></li>
   <li><a href="#res.sendFile.options">res.sendFile() and express.static() options</a></li>
   <li><a href="#router.param">router.param(fn)</a></li>
-  <li><a href="#express.static.mime">express.static.mime</a></li>
+  <li><a href="#express.static.mime">res.sendFile() and express.static() MIME type detection</a></li>
   <li><a href="#express:router-debug-logs">express:router debug logs</a></li>
 </ul>
 
@@ -68,7 +68,7 @@ You can find the list of available codemods [here](https://codemod.link/express)
   <li><a href="#path-syntax">Path route matching syntax</a></li>
   <li><a href="#rejected-promises">Rejected promises handled from middleware and handlers</a></li>
   <li><a href="#express.urlencoded">express.urlencoded</a></li>
-  <li><a href="#express.static.dotfiles">express.static dotfiles</a></li>
+  <li><a href="#express.static.dotfiles">res.sendFile() and express.static() dotfiles</a></li>
   <li><a href="#app.listen">app.listen</a></li>
   <li><a href="#app.router">app.router</a></li>
   <li><a href="#req.body">req.body</a></li>
@@ -345,14 +345,7 @@ app.get('/user', (req, res) => {
 
 The `res.sendfile()` function has been replaced by a camel-cased version `res.sendFile()` in Express 5.
 
-**Note:** In Express 5, `res.sendFile()` uses the `mime-types` package for MIME type detection, which returns different Content-Type values than Express 4 for several common file types:
-
-- JavaScript files (.js): now "text/javascript" instead of "application/javascript"
-- JSON files (.json): now "application/json" instead of "text/json"
-- CSS files (.css): now "text/css" instead of "text/plain"
-- XML files (.xml): now "application/xml" instead of "text/xml"
-- Font files (.woff): now "font/woff" instead of "application/font-woff"
-- SVG files (.svg): now "image/svg+xml" instead of "application/svg+xml"
+**Note:** See the [MIME type detection](#express.static.mime) section for changes to Content-Type values in Express 5.
 
 {% capture codemod-camelcase-sendfile %}
 You can replace the deprecated signatures with the following command:
@@ -380,19 +373,20 @@ app.get('/user', (req, res) => {
 
 The `router.param(fn)` signature was used for modifying the behavior of the `router.param(name, fn)` function. It has been deprecated since v4.11.0, and Express 5 no longer supports it at all.
 
-<h3 id="express.static.mime">express.static.mime</h3>
+<h3 id="express.static.mime">res.sendFile() and express.static() MIME type detection</h3>
 
 In Express 5, `mime` is no longer an exported property of the `static` field.
 Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work with MIME type values.
 
 **Important:** This change affects not only direct usage of `express.static.mime` but also other Express methods that rely on MIME type detection, such as `res.sendFile()`. The following MIME types have changed from Express 4:
 
-- JavaScript files (.js): now served as "text/javascript" instead of "application/javascript"
-- JSON files (.json): now served as "application/json" instead of "text/json"
-- CSS files (.css): now served as "text/css" instead of "text/plain"
-- HTML files (.html): now served as "text/html; charset=utf-8" instead of just "text/html"
-- XML files (.xml): now served as "application/xml" instead of "text/xml"
-- Font files (.woff): now served as "font/woff" instead of "application/font-woff"
+- JavaScript files (.js): now "text/javascript" instead of "application/javascript"
+- JSON files (.json): now "application/json" instead of "text/json"
+- CSS files (.css): now "text/css" instead of "text/plain"
+- HTML files (.html): now "text/html; charset=utf-8" instead of just "text/html"
+- XML files (.xml): now "application/xml" instead of "text/xml"
+- Font files (.woff): now "font/woff" instead of "application/font-woff"
+- SVG files (.svg): now "image/svg+xml" instead of "application/svg+xml"
 
 ```js
 // v4
@@ -501,9 +495,9 @@ Details of how Express handles errors is covered in the [error handling document
 
 The `express.urlencoded` method makes the `extended` option `false` by default.
 
-<h3 id="express.static.dotfiles">express.static dotfiles</h3>
+<h3 id="express.static.dotfiles">res.sendFile() and express.static() dotfiles</h3>
 
-In Express 5, the `express.static` middleware's `dotfiles` option now defaults to `"ignore"`. This is a change from Express 4, where dotfiles were served by default. As a result, files inside a directory that starts with a dot (`.`), such as `.well-known`, will no longer be accessible and will return a **404 Not Found** error. This can break functionality that depends on serving dot-directories, such as Android App Links, and Apple Universal Links.
+In Express 5, the `res.sendFile()` function and the `express.static` middleware's `dotfiles` option now defaults to `"ignore"`. This is a change from Express 4, where dotfiles were served by default. As a result, files inside a directory that starts with a dot (`.`), such as `.well-known`, will no longer be accessible and will return a **404 Not Found** error. This can break functionality that depends on serving dot-directories, such as Android App Links, and Apple Universal Links.
 
 Example of breaking code:
 
