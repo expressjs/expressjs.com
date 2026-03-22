@@ -83,7 +83,7 @@ const lang = getLangFromUrl(Astro.url);
       @layer base, primitives, patterns;
     </style>
 
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href={new URL('/sitemap-index.xml', Astro.site || Astro.url.origin)} />
     <!-- Robots meta tag for Google Search. Enables a large image preview in Google search results,
       most pertinently in Chrome’s “Discover” view on mobile. See:
       https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag#max-image-preview
