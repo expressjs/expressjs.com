@@ -38,7 +38,6 @@ export function shouldIncludeInFeed(id: string): boolean {
   return !/^write[-_]posts?$/i.test(filename);
 }
 
-
 export function getLinkedTitleContent(title: string, id: string, site: URL): string {
   const link = new URL(`/blog/${id}/`, site).href;
 
