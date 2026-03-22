@@ -19,7 +19,8 @@
 
   @media (--lg-up) {
     .list-grid > * {
-      grid-column: span var(--list-grid-item-lg, var(--list-grid-item-md, var(--list-grid-item-xs, 12)));
+      grid-column: span
+        var(--list-grid-item-lg, var(--list-grid-item-md, var(--list-grid-item-xs, 12)));
     }
   }
 }

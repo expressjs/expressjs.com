@@ -52,7 +52,7 @@ export const apiMenu: Menu = {
             items: [
               {
                 href: `/api/application/app-onmount`,
-                label: 'app.on(\'mount\')',
+                label: "app.on('mount')",
                 ariaLabel: 'app on mount event',
               },
             ],
@@ -88,7 +88,7 @@ export const apiMenu: Menu = {
                 href: '/api/application/app-configure',
                 label: 'app.configure()',
                 ariaLabel: 'app.configure method',
-                omitFrom: ['4x', '5x']
+                omitFrom: ['4x', '5x'],
               },
               {
                 href: '/api/application/app-enable',
@@ -110,7 +110,7 @@ export const apiMenu: Menu = {
                 label: 'app.get(name)',
                 ariaLabel: 'app.get method',
               },
-              
+
               {
                 href: '/api/application/app-get-method',
                 label: 'app.get(path)',
@@ -176,7 +176,7 @@ export const apiMenu: Menu = {
                 href: '/api/application/app-use',
                 label: 'app.use()',
                 ariaLabel: 'app.use method',
-              }
+              },
             ],
           },
         },
