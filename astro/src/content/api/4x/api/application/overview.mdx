@@ -1,0 +1,127 @@
+---
+title: Application Properties
+description: Learn about the properties of the Express application object.
+---
+
+import Card from '@components/primitives/Card/Card.astro';
+import ListGrid from '@components/primitives/ListGrid/ListGrid.astro';
+
+## Application
+
+The `app` object conventionally denotes the Express application.
+Create it by calling the top-level `express()` function exported by the Express module:
+
+```js
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('hello world');
+});
+
+app.listen(3000);
+```
+
+The `app` object has methods for
+
+- Routing HTTP requests; see for example, [app.METHOD](./app-METHOD) and [app.param](./app-param).
+- Configuring middleware; see [app.route](./app-route).
+- Rendering HTML views; see [app.render](./app-render).
+- Registering a template engine; see [app.engine](./app-engine).
+
+It also has settings (properties) that affect how the application behaves;
+for more information, see [Application settings](./app-settings/).
+
+<div class="doc-box doc-info" markdown="1">
+The Express application object can be referred from the [request object](#req) and the [response object](#res) as `req.app`, and `res.app`, respectively.
+</div>
+
+<h3 id='app.properties'>Properties</h3>
+
+<ListGrid gap="6" role="list">
+  <a href="./app-locals" role="listitem">
+    <Card
+      title="app.locals"
+      body="Local variables scoped to the application and exposed to view templates."
+    />
+  </a>
+  <a href="./app-mountpath" role="listitem">
+    <Card
+      title="app.mountpath"
+      body="Path pattern(s) where a sub-application is mounted."
+    />
+  </a>
+</ListGrid>
+
+<h3 id='app.events'>Events</h3>
+
+<ListGrid gap="6" role="list">
+  <a href="./app-onmount" role="listitem">
+    <Card
+      title="app.on('mount')"
+      body="Event fired when the app is mounted on a parent app."
+    />
+  </a>
+</ListGrid>
+
+<h3 id='app.methods'>Methods</h3>
+
+<ListGrid gap="6" role="list">
+  <a href="./app-all" role="listitem">
+    <Card title="app.all" body="Route all HTTP methods for a specific path." />
+  </a>
+  <a href="./app-delete-method" role="listitem">
+    <Card title="app.delete" body="Route HTTP DELETE requests to a path." />
+  </a>
+  <a href="./app-disable" role="listitem">
+    <Card title="app.disable" body="Disable a boolean application setting." />
+  </a>
+  <a href="./app-disabled" role="listitem">
+    <Card title="app.disabled" body="Check whether a boolean setting is disabled." />
+  </a>
+  <a href="./app-enable" role="listitem">
+    <Card title="app.enable" body="Enable a boolean application setting." />
+  </a>
+  <a href="./app-enabled" role="listitem">
+    <Card title="app.enabled" body="Check whether a boolean setting is enabled." />
+  </a>
+  <a href="./app-engine" role="listitem">
+    <Card title="app.engine" body="Register a template engine callback by extension." />
+  </a>
+  <a href="./app-get" role="listitem">
+    <Card title="app.get (setting)" body="Read the current value of an app setting." />
+  </a>
+  <a href="./app-get-method" role="listitem">
+    <Card title="app.get (route)" body="Route HTTP GET requests to a path." />
+  </a>
+  <a href="./app-listen" role="listitem">
+    <Card title="app.listen" body="Start the HTTP server and listen for connections." />
+  </a>
+  <a href="./app-METHOD" role="listitem">
+    <Card title="app.METHOD" body="Route requests for a specific HTTP method." />
+  </a>
+  <a href="./app-param" role="listitem">
+    <Card title="app.param" body="Attach callbacks to route parameters." />
+  </a>
+  <a href="./app-path" role="listitem">
+    <Card title="app.path" body="Get the canonical path of the app." />
+  </a>
+  <a href="./app-post-method" role="listitem">
+    <Card title="app.post" body="Route HTTP POST requests to a path." />
+  </a>
+  <a href="./app-put-method" role="listitem">
+    <Card title="app.put" body="Route HTTP PUT requests to a path." />
+  </a>
+  <a href="./app-render" role="listitem">
+    <Card title="app.render" body="Render a view and return the generated HTML via callback." />
+  </a>
+  <a href="./app-route" role="listitem">
+    <Card title="app.route" body="Create chainable route handlers for a single path." />
+  </a>
+  <a href="./app-set" role="listitem">
+    <Card title="app.set" body="Assign or configure an application setting." />
+  </a>
+  <a href="./app-use" role="listitem">
+    <Card title="app.use" body="Mount middleware functions at an optional path." />
+  </a>
+</ListGrid>

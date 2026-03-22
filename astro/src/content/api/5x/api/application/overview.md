@@ -27,7 +27,7 @@ The `app` object has methods for
 - Registering a template engine; see [app.engine](#app.engine).
 
 It also has settings (properties) that affect how the application behaves;
-for more information, see [Application settings](/en/api/application/app-settings/).
+for more information, see [Application settings](/en/api/application/app-set#app.settings.table).
 
 <div class="doc-box doc-info" markdown="1">
 The Express application object can be referred from the [request object](#req) and the [response object](#res) as `req.app`, and `res.app`, respectively.
