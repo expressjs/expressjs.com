@@ -18,6 +18,8 @@ const site = NETLIFY_PREVIEW_SITE || 'https://expressjs.com';
 export default defineConfig({
   site,
   vite: {
+    // Transforms SVG files imported with the `?react` suffix into React components,
+    // bundling them at build time to avoid runtime network requests and layout shifts.
     plugins: [svgr()],
   },
   integrations: [
