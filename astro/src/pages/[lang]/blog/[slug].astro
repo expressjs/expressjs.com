@@ -34,7 +34,7 @@ const date = new Date(dateStr).toLocaleDateString('en-US', {
   day: 'numeric',
   year: 'numeric',
 });
-const label = tags?.split(' ')[0] ?? '';
+const label = tags?.[0] ?? '';
 ---
 
 <Layout title={title} description={description}>
