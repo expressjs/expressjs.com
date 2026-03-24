@@ -10,6 +10,7 @@ import { useSearch } from '@orama/ui/hooks/useSearch';
 import { useTranslations } from '@/i18n/utils';
 import type { ui } from '@/i18n/locales';
 import { useChat } from '@orama/ui/hooks/useChat';
+import { title } from 'node:process';
 
 type DocDocument = {
   title: string;
@@ -156,6 +157,10 @@ export default function Search({ lang, placeholder, mode, onModeChange }: Search
               placeholder={placeholder}
               searchOnType
               searchParams={{
+                boost: {
+                  title: 10,
+                  description: 4,
+                },
                 groupBy: {
                   properties: ['category'],
                 },
