@@ -4,13 +4,11 @@ import { OramaCloud } from '@orama/core';
 import { ChatRoot, Modal, SearchRoot } from '@orama/ui/components';
 import { useSearch } from '@orama/ui/hooks/useSearch';
 import Search from './Search';
-import './orama-styles.css';
-import { addCollection, Icon } from '@iconify/react/dist/offline';
-import type { IconifyJSON } from '@iconify/types';
-import fluent from '@iconify-json/fluent/icons.json';
-addCollection(fluent as IconifyJSON);
+import { Icon } from '@iconify/react/dist/offline';
 import Chat from './Chat';
 import SearchFooter from './SearchFooter';
+import './orama-styles.css';
+import './fluent-icons-subset';
 import './Searchbox.css';
 import { useChat } from '@orama/ui/hooks/index';
 
@@ -61,7 +59,7 @@ function SearchModalHeader({ mode, onModeChange }: SearchModalHeaderProps) {
             aria-label="Back to search"
             onClick={handleBackToSearch}
           >
-            <Icon icon="fluent:ios-arrow-left-24-regular" width={16} height={16} />
+            <Icon icon="fluent:arrow-left-24-regular" width={16} height={16} />
           </button>
         )}
         {interactions && interactions.length > 0 && (

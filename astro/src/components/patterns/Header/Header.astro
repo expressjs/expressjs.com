@@ -40,7 +40,7 @@ const t = useTranslations(currentLang);
         lang={currentLang}
         placeholder={t('search.placeholder')}
         ariaLabel={t('search.ariaLabel')}
-        client:load
+        client:idle
       />
       <ThemeSwitcher showLabels={false} />
       <LanguageSelect languages={languagesArray} currentLanguage={currentLang} />
