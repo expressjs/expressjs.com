@@ -91,7 +91,7 @@ export const getBlogPosts = async (lang) => {
 
 const VERSIONS = /** @type {const} */ (['5x', '4x', '3x']);
 
-export const getApi = async () => {
+export const getApi = async (lang) => {
   const results = await Promise.all(
     VERSIONS.map(async (version) => {
       const baseDir = join(CONTENT_DIR, `api/${version}`);
@@ -108,7 +108,7 @@ export const getApi = async () => {
             title: data.title ?? basename(file, '.md'),
             description: data.description ?? '',
             content: mdToText(content),
-            path: `/${version}/${pathSegment}`,
+            path: `${lang}/${version}/${pathSegment}`,
             category: 'menu.api',
             version,
           };
@@ -123,7 +123,7 @@ export const getApi = async () => {
 export const getAllDocuments = async (lang) => {
   const [docs, api, resources, blog] = await Promise.all([
     getDocs(lang),
-    getApi(),
+    getApi(lang),
     getResources(lang),
     getBlogPosts(lang),
   ]);
