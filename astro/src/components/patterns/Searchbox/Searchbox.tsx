@@ -4,11 +4,12 @@ import { OramaCloud } from '@orama/core';
 import { ChatRoot, Modal, SearchRoot } from '@orama/ui/components';
 import { useSearch } from '@orama/ui/hooks/useSearch';
 import Search from './Search';
-import { Icon } from '@iconify/react/dist/offline';
+import SearchSparkle16Regular from '~icons/fluent/search-sparkle-16-regular';
+import ArrowLeft24Regular from '~icons/fluent/arrow-left-24-regular';
+import Dismiss16Regular from '~icons/fluent/dismiss-16-regular';
 import Chat from './Chat';
 import SearchFooter from './SearchFooter';
 import './orama-styles.css';
-import './fluent-icons-subset';
 import './Searchbox.css';
 import { useChat } from '@orama/ui/hooks/index';
 
@@ -59,7 +60,7 @@ function SearchModalHeader({ mode, onModeChange }: SearchModalHeaderProps) {
             aria-label="Back to search"
             onClick={handleBackToSearch}
           >
-            <Icon icon="fluent:arrow-left-24-regular" width={16} height={16} />
+            <ArrowLeft24Regular width={16} height={16} />
           </button>
         )}
         {interactions && interactions.length > 0 && (
@@ -73,7 +74,7 @@ function SearchModalHeader({ mode, onModeChange }: SearchModalHeaderProps) {
       </div>
       <div className="search-modal-header-right">
         <Modal.Close className="search-modal-close" aria-label="Close search">
-          <Icon icon="fluent:dismiss-16-regular" width={18} height={18} />
+          <Dismiss16Regular width={18} height={18} />
         </Modal.Close>
       </div>
     </div>
@@ -106,7 +107,7 @@ export default function Searchbox({ lang, placeholder, ariaLabel }: SearchboxPro
           >
             <div className="search-trigger-content">
               <div className="search-trigger-icon">
-                <Icon icon="fluent:search-sparkle-16-regular" width={18} height={18} />
+                <SearchSparkle16Regular width={18} height={18} />
               </div>
               <span>{placeholder}</span>
             </div>

@@ -1,7 +1,7 @@
-import { Icon } from '@iconify/react/dist/offline';
 import type { Interaction, AnyObject } from '@orama/core';
 import { ChatInteractions } from '@orama/ui/components';
 import type { FC } from 'react';
+import Link20Regular from '~icons/fluent/link-20-regular';
 import './ChatSources.css';
 
 type ChatSourcesProps = {
@@ -25,7 +25,7 @@ export const ChatSources: FC<ChatSourcesProps> = ({ interaction }) => {
                 data-focus-on-arrow-nav
               >
                 <h3 className="chat-sources-title">
-                  <Icon icon="fluent:link-20-regular" width={16} height={16} />
+                  <Link20Regular width={16} height={16} />
                   {(document.title as string).slice(0, 30) || ''}
                   {(document.title as string).length > 30 ? '...' : ''}
                 </h3>

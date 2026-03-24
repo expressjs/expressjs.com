@@ -1,5 +1,8 @@
 import { ChatInteractions } from '@orama/ui/components';
-import { Icon } from '@iconify/react/dist/offline';
+import ArrowSync20Regular from '~icons/fluent/arrow-sync-20-regular';
+import Checkmark16Regular from '~icons/fluent/checkmark-16-regular';
+import Copy16Regular from '~icons/fluent/copy-16-regular';
+import ThumbDislike16Regular from '~icons/fluent/thumb-dislike-16-regular';
 import './ChatActions.css';
 import { useState } from 'react';
 
@@ -22,7 +25,7 @@ export default function ChatActions({ interaction }: ChatActionsProps) {
     <ul className="chat-actions">
       <li>
         <ChatInteractions.RegenerateLatest interaction={interaction} className="chat-action">
-          <Icon icon="fluent:arrow-sync-20-regular" width={18} height={18} />
+          <ArrowSync20Regular width={18} height={18} />
         </ChatInteractions.RegenerateLatest>
       </li>
       <li>
@@ -30,12 +33,12 @@ export default function ChatActions({ interaction }: ChatActionsProps) {
           {(copied: boolean) =>
             copied ? (
               <>
-                <Icon icon="fluent:checkmark-16-regular" width={18} height={18} />
+                <Checkmark16Regular width={18} height={18} />
                 <span className="sr-only">Copied</span>
               </>
             ) : (
               <>
-                <Icon icon="fluent:copy-16-regular" width={18} height={18} />
+                <Copy16Regular width={18} height={18} />
                 <span className="sr-only">Copy</span>
               </>
             )
@@ -49,7 +52,7 @@ export default function ChatActions({ interaction }: ChatActionsProps) {
           aria-label="Upvote response"
           onClick={dislikeMessage}
         >
-          <Icon icon="fluent:thumb-dislike-16-regular" width={18} height={18} />
+          <ThumbDislike16Regular width={18} height={18} />
         </button>
       </li>
     </ul>

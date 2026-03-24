@@ -1,5 +1,5 @@
 import { SearchResults, Suggestions } from '@orama/ui/components';
-import { Icon } from '@iconify/react/dist/offline';
+import Sparkle20Filled from '~icons/fluent/sparkle-20-filled';
 import ExpressLogoWhite from '../../../icons/logo-express-white.svg?react';
 import ExpressLogoBlack from '../../../icons/logo-express-black.svg?react';
 import './SearchNoResults.css';
@@ -44,7 +44,7 @@ export default function SearchNoResults({ onSuggestionClick }: SearchNoResultsPr
                         onClick={() => onSuggestionClick?.(text)}
                         className="search-suggestion__item"
                       >
-                        <Icon icon="fluent:sparkle-20-filled" width={20} height={20} />
+                        <Sparkle20Filled width={20} height={20} />
                         {text}
                       </Suggestions.Item>
                     </li>

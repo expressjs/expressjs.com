@@ -1,4 +1,6 @@
-import { Icon } from '@iconify/react/dist/offline';
+import ArrowTurnDownRight48Regular from '~icons/fluent/arrow-turn-down-right-48-regular';
+import ArrowDown16Regular from '~icons/fluent/arrow-down-16-regular';
+import ArrowUp16Regular from '~icons/fluent/arrow-up-16-regular';
 import './SearchFooter.css';
 
 export default function SearchFooter() {
@@ -7,16 +9,16 @@ export default function SearchFooter() {
       <div className="search-footer-shortcuts">
         <div className="search-footer-shortcut">
           <kbd className="search-footer-kbd">
-            <Icon icon="fluent:arrow-turn-down-right-48-regular" width={16} height={16} />
+            <ArrowTurnDownRight48Regular width={16} height={16} />
           </kbd>
           <span>select</span>
         </div>
         <div className="search-footer-shortcut">
           <kbd className="search-footer-kbd">
-            <Icon icon="fluent:arrow-down-16-regular" width={16} height={16} />
+            <ArrowDown16Regular width={16} height={16} />
           </kbd>
           <kbd className="search-footer-kbd">
-            <Icon icon="fluent:arrow-up-16-regular" width={16} height={16} />
+            <ArrowUp16Regular width={16} height={16} />
           </kbd>
           <span>navigate</span>
         </div>

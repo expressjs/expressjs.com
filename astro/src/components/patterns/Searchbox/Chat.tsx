@@ -1,7 +1,10 @@
 import { ChatInteractions, PromptTextArea } from '@orama/ui/components';
 import { useChat } from '@orama/ui/hooks/useChat';
 import { useScrollableContainer } from '@orama/ui/hooks/useScrollableContainer';
-import { Icon } from '@iconify/react/dist/offline';
+import ArrowDown16Filled from '~icons/fluent/arrow-down-16-filled';
+import Sparkle16Filled from '~icons/fluent/sparkle-16-filled';
+import PauseCircle48Regular from '~icons/fluent/pause-circle-48-regular';
+import Send16Filled from '~icons/fluent/send-16-filled';
 import ChatActions from './ChatActions';
 import './Chat.css';
 import { ChatSources } from './ChatSources';
@@ -63,12 +66,12 @@ export default function Chat() {
           className="chat-go-to-bottom"
           aria-label="Scroll to bottom"
         >
-          <Icon icon="fluent:arrow-down-16-filled" width={16} height={16} />
+          <ArrowDown16Filled width={16} height={16} />
         </button>
       )}
 
       <PromptTextArea.Wrapper className="chat-input-wrapper">
-        <Icon icon="fluent:sparkle-16-filled" width={16} height={16} className="chat-input-icon" />
+        <Sparkle16Filled width={16} height={16} className="chat-input-icon" />
         <PromptTextArea.Field
           className="chat-input-field"
           placeholder="Ask a question about Express..."
@@ -77,10 +80,10 @@ export default function Chat() {
         <PromptTextArea.Button
           className="chat-input-button"
           isLoading={loading}
-          abortContent={<Icon icon="fluent:pause-circle-48-regular" width={18} height={18} />}
+          abortContent={<PauseCircle48Regular width={18} height={18} />}
           aria-label="Send message"
         >
-          <Icon icon="fluent:send-16-filled" width={16} height={16} />
+          <Send16Filled width={16} height={16} />
         </PromptTextArea.Button>
       </PromptTextArea.Wrapper>
     </div>

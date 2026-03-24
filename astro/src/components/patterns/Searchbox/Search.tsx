@@ -3,7 +3,9 @@ import { FacetTabs, SearchInput, SearchResults } from '@orama/ui/components';
 import type { Hit } from '@orama/core';
 import SearchNoResults from './SearchNoResults';
 import './Search.css';
-import { Icon } from '@iconify/react/dist/offline';
+import Document20Regular from '~icons/fluent/document-20-regular';
+import Search16Regular from '~icons/fluent/search-16-regular';
+import Sparkle16Filled from '~icons/fluent/sparkle-16-filled';
 import { useSearch } from '@orama/ui/hooks/useSearch';
 import { useTranslations } from '@/i18n/utils';
 import type { ui } from '@/i18n/locales';
@@ -127,7 +129,7 @@ export default function Search({ lang, placeholder, mode, onModeChange }: Search
                     className="search-result-link"
                     data-focus-on-arrow-nav
                   >
-                    <Icon icon="fluent:document-20-regular" width={20} height={20} />
+                    <Document20Regular width={20} height={20} />
                     <div>
                       <p className="search-result-breadcrumb">
                         {getPathBreadcrumb(document?.path ?? '', document?.category ?? '', t)}
@@ -148,12 +150,7 @@ export default function Search({ lang, placeholder, mode, onModeChange }: Search
       <SearchInput.Provider>
         <SearchInput.Form className="search-input-form">
           <SearchInput.Wrapper className="search-input-wrapper" ref={inputWrapperRef}>
-            <Icon
-              icon="fluent:search-16-regular"
-              width={18}
-              height={18}
-              className="search-input-icon"
-            />
+            <Search16Regular width={18} height={18} className="search-input-icon" />
             <SearchInput.Input
               className="search-input-field"
               placeholder={placeholder}
@@ -174,7 +171,7 @@ export default function Search({ lang, placeholder, mode, onModeChange }: Search
               type="submit"
               aria-label="Switch to chat mode"
             >
-              <Icon icon="fluent:sparkle-16-filled" width={14} height={14} />
+              <Sparkle16Filled width={14} height={14} />
               Get summary
             </button>
           </SearchInput.Wrapper>
