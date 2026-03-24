@@ -102,10 +102,10 @@ span,
   font-family: var(--font-family-body);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
-  margin: var(--space-body) 0;
 }
 
 .body-md {
+  margin: var(--space-body) 0;
   font-size: var(--font-size-sm);
 }
 

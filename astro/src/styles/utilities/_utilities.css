@@ -48,6 +48,9 @@
 .grid {
   display: grid;
 }
+.contents {
+  display: contents;
+}
 
 /* Flex utilities */
 .flex-row {

@@ -80,7 +80,7 @@ const lang = getLangFromUrl(Astro.url);
     <title>{title}</title>
 
     <style is:inline>
-      @layer base, primitives, patterns;
+      @layer orama, base, primitives, patterns;
     </style>
 
     <link rel="sitemap" href={new URL('/sitemap-index.xml', Astro.site || Astro.url.origin)} />

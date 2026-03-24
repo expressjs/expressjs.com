@@ -1,0 +1,47 @@
+name: Sync Orama Cloud
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - redesign
+  pull_request:
+    branches:
+      - redesign
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "${{ github.workflow }} ✨ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
+  cancel-in-progress: ${{ github.event_name != 'push' }}
+
+jobs:
+  sync-orama-cloud:
+    name: Sync Orama Cloud
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          # node-version-file: ".nvmrc" use when .nvmrc is on root of the repo
+          node-version: "24.13"
+          # cache: "npm" use when package-lock.json is on root of the repo
+
+      - name: Install Node.js dependencies
+        working-directory: astro
+        run: npm ci
+
+      - name: Sync Orama Cloud
+        working-directory: astro
+        run: node ./scripts/sync-orama.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLIC_ORAMA_PROJECT_ID: ${{ github.event_name == 'push' && secrets.PUBLIC_ORAMA_PRODUCTION_PROJECT_ID || secrets.PUBLIC_ORAMA_PROJECT_ID }}
+          PRIVATE_ORAMA_API_KEY: ${{ github.event_name == 'push' && secrets.PRIVATE_ORAMA_PRODUCTION_API_KEY || secrets.PRIVATE_ORAMA_API_KEY }}
+          PUBLIC_ORAMA_DATASOURCE_ID: ${{ github.event_name == 'push' && secrets.PUBLIC_ORAMA_PRODUCTION_DATASOURCE_ID || secrets.PUBLIC_ORAMA_DATASOURCE_ID }}
