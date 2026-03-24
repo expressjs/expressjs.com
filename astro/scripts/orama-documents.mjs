@@ -108,7 +108,7 @@ export const getApi = async (lang) => {
             title: data.title ?? basename(file, '.md'),
             description: data.description ?? '',
             content: mdToText(content),
-            path: `${lang}/${version}/${pathSegment}`,
+            path: `/${lang}/${version}/${pathSegment}`,
             category: 'menu.api',
             version,
           };
