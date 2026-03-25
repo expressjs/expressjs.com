@@ -1,8 +1,10 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
-import { Container, H1, BodySm, Avatar } from '@/components/primitives';
+import { Container, H1, BodySm, Avatar, Tag, Flex } from '@/components/primitives';
 import { languages } from '@i18n/locales';
+import { Icon } from 'astro-icon/components';
+import { Breadcrumbs } from '@/components/patterns';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -34,17 +36,33 @@ const date = new Date(dateStr).toLocaleDateString('en-US', {
   day: 'numeric',
   year: 'numeric',
 });
-const label = tags?.[0] ?? '';
+const labels = tags ?? [];
 ---
 
 <Layout title={title} description={description}>
   <Container>
+    <Flex align="center" justify="between" gap="2">
+      <Breadcrumbs
+        items={[
+          {
+            href: `/${Astro.params.lang}/`,
+            ariaLabel: 'Home',
+            icon: 'fluent:home-empty-20-regular',
+          },
+          { label: 'Blog', href: `/${Astro.params.lang}/blog` },
+          { label: title },
+        ]}
+      />
+    </Flex>
+
     <article>
       {
-        label && (
-          <BodySm as="span" color="secondary" vMargin={false}>
-            {label}
-          </BodySm>
+        labels.length > 0 && (
+          <Flex gap="2" align="center">
+            {labels.map((label) => (
+              <Tag>{label}</Tag>
+            ))}
+          </Flex>
         )
       }
       <H1>{title}</H1>
