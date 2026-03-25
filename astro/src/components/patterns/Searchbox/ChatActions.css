@@ -5,6 +5,7 @@
     margin: 0;
     padding-left: 0;
     justify-content: flex-end;
+    list-style: none;
   }
 
   .chat-action {

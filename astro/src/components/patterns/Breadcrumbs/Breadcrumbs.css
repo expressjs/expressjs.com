@@ -1,4 +1,14 @@
 @layer patterns {
+  .breadcrumbs {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    padding-left: 0;
+
+    & svg {
+      flex-shrink: 0;
+    }
+  }
   .breadcrumb-link {
     display: inline-flex;
     align-items: center;
@@ -9,9 +19,17 @@
     &:hover {
       text-decoration: underline;
     }
+
+    @media (--xs-only) {
+      font-size: var(--font-size-sm);
+    }
   }
 
   .breadcrumb-item {
     color: var(--color-text-tertiary);
+
+    @media (--xs-only) {
+      font-size: var(--font-size-sm);
+    }
   }
 }

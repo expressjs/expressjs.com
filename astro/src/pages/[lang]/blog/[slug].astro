@@ -1,10 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
-import { Container, H1, BodySm, Avatar, Tag, Flex } from '@/components/primitives';
+import { Container, Button } from '@/components/primitives';
 import { languages } from '@i18n/locales';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import { Icon } from 'astro-icon/components';
-import { Breadcrumbs } from '@/components/patterns';
+import { PageTopbar, PostHeader } from '@/components/patterns';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -20,6 +21,9 @@ export async function getStaticPaths() {
     })
   );
 }
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const { post } = Astro.props;
 const { Content } = await render(post);
@@ -41,32 +45,30 @@ const labels = tags ?? [];
 
 <Layout title={title} description={description}>
   <Container>
-    <Flex align="center" justify="between" gap="2">
-      <Breadcrumbs
-        items={[
-          {
-            href: `/${Astro.params.lang}/`,
-            ariaLabel: 'Home',
-            icon: 'fluent:home-empty-20-regular',
-          },
-          { label: 'Blog', href: `/${Astro.params.lang}/blog` },
-          { label: title },
-        ]}
-      />
-    </Flex>
+    <PageTopbar
+      breadcrumbs={[
+        {
+          href: `/${Astro.params.lang}/`,
+          ariaLabel: t('nav.home'),
+          icon: 'fluent:home-empty-20-regular',
+        },
+        { label: t('menu.blog'), href: `/${Astro.params.lang}/blog` },
+      ]}
+    >
+      <!-- TODO: review GitHub edit link -->
+      <Button
+        as="a"
+        variant="secondary"
+        size="sm"
+        href={`https://github.com/expressjs/expressjs.com/edit/gh-pages/src/content/blog/en/blog/${Astro.params.slug}`}
+      >
+        <Icon name="github" aria-hidden="true" />
+        {t('page.editOnGitHub')}
+      </Button>
+    </PageTopbar>
 
     <article>
-      {
-        labels.length > 0 && (
-          <Flex gap="2" align="center">
-            {labels.map((label) => (
-              <Tag>{label}</Tag>
-            ))}
-          </Flex>
-        )
-      }
-      <H1>{title}</H1>
-      {authorsList.length > 0 && <Avatar authors={authorsList} caption={date} size="md" />}
+      <PostHeader labels={labels} title={title} authors={authorsList} date={date} />
       <Content />
     </article>
   </Container>

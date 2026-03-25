@@ -55,6 +55,10 @@ h1,
   margin: var(--space-h1) 0;
 }
 
+h2 {
+  font-size: var(--font-size-h3-docs);
+}
+
 .h2 {
   font-size: var(--font-size-h2);
   margin: var(--space-h2) 0;

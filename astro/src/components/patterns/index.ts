@@ -19,3 +19,5 @@ export { default as CardList } from './CardList/CardList.astro';
 export { default as PostCard } from './PostCard/PostCard.astro';
 export { default as Pagination } from './Pagination/Pagination.astro';
 export { default as PageHead } from './PageHead/PageHead.astro';
+export { default as PageTopbar } from './PageTopbar/PageTopbar.astro';
+export { default as PostHeader } from './PostHeader/PostHeader.astro';

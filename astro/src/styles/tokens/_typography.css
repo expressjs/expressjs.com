@@ -60,6 +60,7 @@
 
   --font-size-h1: var(--font-size-4xl);
   --font-size-h2: var(--font-size-2xl);
+  --font-size-h2-docs: var(--font-size-xl);
   --font-size-h3: var(--font-size-lg);
   --font-size-h4: var(--font-size-base);
 

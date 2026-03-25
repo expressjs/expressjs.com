@@ -23,6 +23,7 @@
       gap: var(--space-3);
       padding-left: 0;
       flex-wrap: wrap;
+      list-style: none;
     }
 
     li {

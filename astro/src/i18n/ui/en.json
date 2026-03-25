@@ -88,5 +88,15 @@
   "features.middleware.title": "Middleware",
   "features.middleware.body": "Express is a lightweight and flexible routing framework with minimal core features meant to be augmented through the use of Express middleware modules.",
   "features.webapplication.title": "Web Applications",
-  "features.webapplication.body": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications."
+  "features.webapplication.body": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.",
+  "page.editOnGitHub": "Edit on GitHub",
+  "post.share": "Share",
+  "post.shareOnX": "Share on X",
+  "post.shareOnBluesky": "Share on Bluesky",
+  "post.shareOnLinkedIn": "Share on LinkedIn",
+  "post.shareOnSlack": "Share on Slack",
+  "post.shareOnTelegram": "Share on Telegram",
+  "post.shareOnWhatsApp": "Share on WhatsApp",
+  "post.copyLink": "Copy link",
+  "post.linkCopied": "Link copied!"
 }

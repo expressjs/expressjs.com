@@ -75,5 +75,15 @@
   "hero.tagline": "Node.js를 위한 빠르고 독단적이지 않은 미니멀리스트 웹 프레임워크",
   "hero.getStarted": "시작하기",
   "hero.videoPause": "배경 비디오 일시정지",
-  "hero.videoPlay": "배경 비디오 재생"
+  "hero.videoPlay": "배경 비디오 재생",
+  "page.editOnGitHub": "GitHub에서 편집",
+  "post.share": "공유",
+  "post.shareOnX": "X에서 공유",
+  "post.shareOnBluesky": "Bluesky에서 공유",
+  "post.shareOnLinkedIn": "LinkedIn에서 공유",
+  "post.shareOnSlack": "Slack에서 공유",
+  "post.shareOnTelegram": "Telegram에서 공유",
+  "post.shareOnWhatsApp": "WhatsApp에서 공유",
+  "post.copyLink": "링크 복사",
+  "post.linkCopied": "링크가 복사되었습니다!"
 }

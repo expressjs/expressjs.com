@@ -19,12 +19,12 @@ const t = useTranslations(lang);
 ---
 
 <nav aria-label={t('nav.breadcrumb')}>
-  <ol class="flex gap-3 items-center p-0">
+  <ol class="breadcrumbs">
     {
       items.map((item, index) => (
         <li class="flex items-center gap-3">
           {item.href ? (
-            <Body as="a" href={item.href} class="breadcrumb-link">
+            <Body vMargin={false} as="a" href={item.href} class="breadcrumb-link">
               {item.icon && (
                 <Icon
                   name={item.icon}
@@ -35,7 +35,7 @@ const t = useTranslations(lang);
               {item.label}
             </Body>
           ) : (
-            <Body class="breadcrumb-item">
+            <Body vMargin={false} class="breadcrumb-item">
               {item.icon && (
                 <Icon
                   name={item.icon}

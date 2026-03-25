@@ -75,5 +75,15 @@
   "hero.tagline": "快速、無偏見、極簡主義的 Node.js Web 框架",
   "hero.getStarted": "開始使用",
   "hero.videoPause": "暫停背景影片",
-  "hero.videoPlay": "播放背景影片"
+  "hero.videoPlay": "播放背景影片",
+  "page.editOnGitHub": "在 GitHub 上編輯",
+  "post.share": "分享",
+  "post.shareOnX": "分享到 X",
+  "post.shareOnBluesky": "分享到 Bluesky",
+  "post.shareOnLinkedIn": "分享到 LinkedIn",
+  "post.shareOnSlack": "分享到 Slack",
+  "post.shareOnTelegram": "分享到 Telegram",
+  "post.shareOnWhatsApp": "分享到 WhatsApp",
+  "post.copyLink": "複製連結",
+  "post.linkCopied": "連結已複製！"
 }
