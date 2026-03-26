@@ -23,3 +23,4 @@ export { default as PageTopbar } from './PageTopbar/PageTopbar.astro';
 export { default as PostHeader } from './PostHeader/PostHeader.astro';
 export { default as TableOfContents } from './TableOfContents/TableOfContents.astro';
 export { default as WriteBanner } from './WriteBanner/WriteBanner.astro';
+export { default as RelatedContent } from './RelatedContent/RelatedContent.astro';

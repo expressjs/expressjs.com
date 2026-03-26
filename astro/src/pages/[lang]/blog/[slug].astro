@@ -1,11 +1,17 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
-import { Container, Button, H2 } from '@/components/primitives';
+import { Container, Button } from '@/components/primitives';
 import { languages } from '@i18n/locales';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import { Icon } from 'astro-icon/components';
-import { PageTopbar, PostHeader, PostCard, TableOfContents, WriteBanner } from '@/components/patterns';
+import {
+  PageTopbar,
+  PostHeader,
+  TableOfContents,
+  WriteBanner,
+  RelatedContent,
+} from '@/components/patterns';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -86,37 +92,7 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
         <TableOfContents headings={headings} class="blog-post-toc" />
       </div>
     </article>
-    {
-      relatedPosts.length > 0 && (
-        <section class="blog-post-more">
-          <H2>{t('post.more')}</H2>
-          <div class="blog-post-more__grid">
-            {relatedPosts.map((p) => {
-              const pFilename = p.id.split('/').pop() ?? p.id;
-              const pDate = new Date(pFilename.substring(0, 10)).toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric',
-              });
-              const pAuthors = (p.data.authors ?? []).map((a) => ({
-                src: a.github ? `https://github.com/${a.github}.png` : '',
-                name: a.name ?? '',
-              }));
-              return (
-                <PostCard
-                  href={`/${Astro.params.lang}/blog/${pFilename}`}
-                  labels={p.data.tags ?? []}
-                  title={p.data.title}
-                  coverSrc={p.data.cover}
-                  authors={pAuthors}
-                  avatarCaption={pDate}
-                />
-              );
-            })}
-          </div>
-        </section>
-      )
-    }
+    <RelatedContent posts={relatedPosts} lang={Astro.params.lang} title={t('post.more')} />
     <WriteBanner
       message={t('post.writeBanner')}
       linkLabel={t('post.writeGuidelines')}
@@ -144,51 +120,6 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
 
     /* Show TOC dropdown above content on mobile */
     order: 1;
-  }
-
-  .blog-post-more {
-    margin-top: var(--space-16);
-    position: relative;
-
-    h2 {
-      margin-bottom: var(--space-6);
-    }
-
-    @media (--xs-only) {
-      &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        left: auto;
-        width: var(--space-16);
-        background: linear-gradient(to right, transparent, var(--color-bg-primary));
-        pointer-events: none;
-      }
-    }
-  }
-
-  .blog-post-more__grid {
-    display: flex;
-    gap: var(--space-6);
-
-    & > :global(.post-card) {
-      flex: 1 0 33.33%;
-    }
-
-    @media (--xs-only) {
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      & > :global(.post-card) {
-        flex: 1 0 var(--size-60);
-        scroll-snap-align: start;
-      }
-    }
   }
 
   .blog-post-toc {
