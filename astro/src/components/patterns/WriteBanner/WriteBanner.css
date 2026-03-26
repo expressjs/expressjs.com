@@ -8,6 +8,16 @@
     border: var(--border-width-1) solid var(--color-border-secondary);
     border-radius: var(--radius-base);
     margin-top: var(--space-16);
+    h3 {
+      white-space: pre-line;
+    }
+
+    background:
+      radial-gradient(circle at 0% 0%, var(--color-bg-primary) 0%, transparent 60%),
+      radial-gradient(circle at 100% 0%, var(--color-bg-primary) 0%, transparent 60%),
+      radial-gradient(circle at 0% 100%, var(--color-bg-primary) 0%, transparent 60%),
+      radial-gradient(circle at 100% 100%, var(--color-bg-primary) 0%, transparent 60%),
+      var(--color-bg-tertiary);
 
     @media (--md-up) {
       flex-direction: row;

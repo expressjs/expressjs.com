@@ -11,8 +11,9 @@
  *   href="/en/blog/write-post"
  * />
  */
+import { Icon } from 'astro-icon/components';
 import './WriteBanner.css';
-import { Button, Body } from '@/components/primitives';
+import { Button, H3 } from '@/components/primitives';
 
 interface Props {
   message: string;
@@ -24,8 +25,9 @@ const { message, linkLabel, href } = Astro.props;
 ---
 
 <div class="write-banner">
-  <Body vMargin={false}>{message}</Body>
-  <Button as="a" variant="secondary" size="sm" href={href}>
+  <H3 vMargin={false}>{message}</H3>
+  <Button as="a" variant="primary" href={href}>
     {linkLabel}
+    <Icon name="fluent:arrow-right-16-regular" aria-hidden="true" />
   </Button>
 </div>
