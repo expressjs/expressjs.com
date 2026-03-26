@@ -39,9 +39,10 @@ interface Props extends HTMLAttributes<'div'> {
   title: string;
   authors: Author[];
   date?: string;
+  cover?: string;
 }
 
-const { labels = [], title, authors, date, class: className, ...rest } = Astro.props;
+const { labels = [], title, authors, date, cover, class: className, ...rest } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -136,6 +137,14 @@ const slackShareUrl = `https://slack.com/intl/en-us/share?url=${encodedUrl}`;
       <Icon name="fluent:link-24-regular" aria-hidden="true" />
     </button>
   </div>
+
+  {
+    cover && (
+      <div class="post-header__cover">
+        <img src={cover} alt="" aria-hidden="true" />
+      </div>
+    )
+  }
 </div>
 
 <script>

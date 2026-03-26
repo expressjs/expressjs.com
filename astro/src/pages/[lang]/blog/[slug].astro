@@ -1,11 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
-import { Container, Button } from '@/components/primitives';
+import { Container, Button, H2 } from '@/components/primitives';
 import { languages } from '@i18n/locales';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import { Icon } from 'astro-icon/components';
-import { PageTopbar, PostHeader } from '@/components/patterns';
+import { PageTopbar, PostHeader, PostCard, TableOfContents } from '@/components/patterns';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -26,9 +26,9 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 
-const { title, description, tags, authors } = post.data;
+const { title, description, tags, authors, cover } = post.data;
 const authorsList = (authors ?? []).map((a) => ({
   src: a.github ? `https://github.com/${a.github}.png` : '',
   name: a.name ?? '',
@@ -41,6 +41,15 @@ const date = new Date(dateStr).toLocaleDateString('en-US', {
   year: 'numeric',
 });
 const labels = tags ?? [];
+
+const allPosts = (await getCollection('blog'))
+  .filter((p) => p.id.startsWith('en/') && p.id !== post.id)
+  .sort((a, b) => b.id.localeCompare(a.id));
+
+const currentTags = new Set(tags ?? []);
+const tagged = allPosts.filter((p) => p.data.tags?.some((tag) => currentTags.has(tag)));
+const untagged = allPosts.filter((p) => !p.data.tags?.some((tag) => currentTags.has(tag)));
+const relatedPosts = [...tagged, ...untagged].slice(0, 3);
 ---
 
 <Layout title={title} description={description}>
@@ -68,8 +77,128 @@ const labels = tags ?? [];
     </PageTopbar>
 
     <article>
-      <PostHeader labels={labels} title={title} authors={authorsList} date={date} />
-      <Content />
+      <PostHeader labels={labels} title={title} authors={authorsList} date={date} cover={cover} />
+
+      <div class="blog-post-body">
+        <div class="blog-post-content">
+          <Content />
+        </div>
+        <TableOfContents headings={headings} class="blog-post-toc" />
+      </div>
     </article>
+    {
+      relatedPosts.length > 0 && (
+        <section class="blog-post-more">
+          <H2>{t('post.more')}</H2>
+          <div class="blog-post-more__grid">
+            {relatedPosts.map((p) => {
+              const pFilename = p.id.split('/').pop() ?? p.id;
+              const pDate = new Date(pFilename.substring(0, 10)).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              });
+              const pAuthors = (p.data.authors ?? []).map((a) => ({
+                src: a.github ? `https://github.com/${a.github}.png` : '',
+                name: a.name ?? '',
+              }));
+              return (
+                <PostCard
+                  href={`/${Astro.params.lang}/blog/${pFilename}`}
+                  labels={p.data.tags ?? []}
+                  title={p.data.title}
+                  coverSrc={p.data.cover}
+                  authors={pAuthors}
+                  avatarCaption={pDate}
+                />
+              );
+            })}
+          </div>
+        </section>
+      )
+    }
   </Container>
 </Layout>
+
+<style>
+  .blog-post-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+
+    @media (--md-up) {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-10);
+    }
+  }
+
+  .blog-post-content {
+    min-width: 0;
+    flex: 1;
+
+    /* Show TOC dropdown above content on mobile */
+    order: 1;
+  }
+
+  .blog-post-more {
+    margin-top: var(--space-16);
+    position: relative;
+
+    h2 {
+      margin-bottom: var(--space-6);
+    }
+
+    @media (--xs-only) {
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        left: auto;
+        width: var(--space-16);
+        background: linear-gradient(to right, transparent, var(--color-bg-primary));
+        pointer-events: none;
+      }
+    }
+  }
+
+  .blog-post-more__grid {
+    display: flex;
+    gap: var(--space-6);
+
+    & > :global(.post-card) {
+      flex: 1 0 33.33%;
+    }
+
+    @media (--xs-only) {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      & > :global(.post-card) {
+        flex: 1 0 var(--size-60);
+        scroll-snap-align: start;
+      }
+    }
+  }
+
+  .blog-post-toc {
+    flex-shrink: 0;
+
+    /* Appear above content on mobile */
+    order: 0;
+
+    @media (--md-up) {
+      order: 1;
+      width: 22rem;
+      position: sticky;
+      top: var(--space-8);
+      max-height: calc(100vh - var(--space-16));
+      overflow-y: auto;
+    }
+  }
+</style>

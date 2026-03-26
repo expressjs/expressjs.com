@@ -5,6 +5,7 @@ tags: ['security']
 authors:
   - name: Ulises Gascón
     github: UlisesGascon
+cover: /posts/sample-cover.png
 ---
 
 Recently, the Express team has been made aware of a number of security vulnerabilities in the Express project. We have released a number of patches to address these vulnerabilities.

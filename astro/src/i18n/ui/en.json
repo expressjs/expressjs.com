@@ -98,5 +98,7 @@
   "post.shareOnTelegram": "Share on Telegram",
   "post.shareOnWhatsApp": "Share on WhatsApp",
   "post.copyLink": "Copy link",
-  "post.linkCopied": "Link copied!"
+  "post.linkCopied": "Link copied!",
+  "post.toc": "On this page",
+  "post.more": "More from Express"
 }

@@ -85,5 +85,7 @@
   "post.shareOnTelegram": "Telegram에서 공유",
   "post.shareOnWhatsApp": "WhatsApp에서 공유",
   "post.copyLink": "링크 복사",
-  "post.linkCopied": "링크가 복사되었습니다!"
+  "post.linkCopied": "링크가 복사되었습니다!",
+  "post.toc": "이 페이지에서",
+  "post.more": "Express 더 보기"
 }

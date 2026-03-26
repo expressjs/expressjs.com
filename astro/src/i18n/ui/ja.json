@@ -85,5 +85,7 @@
   "post.shareOnTelegram": "Telegramでシェア",
   "post.shareOnWhatsApp": "WhatsAppでシェア",
   "post.copyLink": "リンクをコピー",
-  "post.linkCopied": "コピーしました！"
+  "post.linkCopied": "コピーしました！",
+  "post.toc": "このページの内容",
+  "post.more": "Express の最新情報"
 }

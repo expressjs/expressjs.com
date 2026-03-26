@@ -1,0 +1,108 @@
+---
+/**
+ * TableOfContents Pattern Component
+ *
+ * Displays a table of contents for blog posts.
+ * - Desktop/tablet: sticky lateral sidebar
+ * - Mobile: collapsible dropdown
+ *
+ * @example
+ * <TableOfContents headings={headings} />
+ */
+import './TableOfContents.css';
+import type { HTMLAttributes } from 'astro/types';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { Icon } from 'astro-icon/components';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props extends HTMLAttributes<'nav'> {
+  headings: Heading[];
+}
+
+const { headings, class: className, ...rest } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+  tocHeadings.length > 0 && (
+    <nav class:list={['toc', className]} aria-label={t('post.toc')} {...rest}>
+      <p class="toc__heading" aria-hidden="true">
+        {t('post.toc')}
+      </p>
+
+      <details class="toc__details">
+        <summary class="toc__summary">
+          <span>{t('post.toc')}</span>
+          <Icon name="fluent:chevron-down-20-regular" class="toc__chevron" aria-hidden="true" />
+        </summary>
+
+        <ol class="toc__list" role="list">
+          {tocHeadings.map((heading) => (
+            <li class:list={['toc__item', `toc__item--h${heading.depth}`]}>
+              <a class="toc__link" href={`#${heading.slug}`}>
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </details>
+    </nav>
+  )
+}
+
+<script>
+  const details = document.querySelector<HTMLDetailsElement>('.toc__details');
+  if (details) {
+    const mq = window.matchMedia('(min-width: 768px)');
+
+    function syncOpen(matches: boolean) {
+      if (matches) details.open = true;
+    }
+
+    mq.addEventListener('change', (e) => syncOpen(e.matches));
+    syncOpen(mq.matches);
+
+    details.addEventListener('toggle', () => {
+      if (mq.matches && !details.open) details.open = true;
+    });
+
+    // Active heading highlight via IntersectionObserver
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.toc__link');
+    if (tocLinks.length) {
+      let activeLink: HTMLAnchorElement | null = null;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const link = document.querySelector<HTMLAnchorElement>(
+              `.toc__link[href="#${entry.target.id}"]`
+            );
+            if (entry.isIntersecting) {
+              activeLink?.classList.remove('toc__link--active');
+              link?.classList.add('toc__link--active');
+              activeLink = link;
+            }
+          }
+        },
+        { rootMargin: '0px 0px -70% 0px', threshold: 0 }
+      );
+
+      tocLinks.forEach((link) => {
+        const id = link.getAttribute('href')?.slice(1);
+        if (id) {
+          const el = document.getElementById(id);
+          if (el) observer.observe(el);
+        }
+      });
+    }
+  }
+</script>

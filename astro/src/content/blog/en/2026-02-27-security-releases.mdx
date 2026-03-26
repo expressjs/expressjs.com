@@ -5,6 +5,7 @@ tags: ['security']
 authors:
   - name: Ulises Gascón
     github: UlisesGascon
+cover: /posts/sample-cover.png
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';

@@ -5,6 +5,7 @@ authors:
   - name: Express Technical Committee
     github: expressjs
 description: As part of a broader effort to modernize and streamline Express.js, we’ve deprecated several outdated packages including csurf, connect-multiparty, and path-match. Learn why we made these changes and what it means for the future of the framework.
+cover: /posts/sample-cover.png
 ---
 
 As Express.js continues to power web applications across the world, it's important that we maintain a clean, reliable, and modern codebase. In that spirit, we've done a bit of spring cleaning.

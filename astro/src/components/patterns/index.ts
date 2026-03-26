@@ -21,3 +21,4 @@ export { default as Pagination } from './Pagination/Pagination.astro';
 export { default as PageHead } from './PageHead/PageHead.astro';
 export { default as PageTopbar } from './PageTopbar/PageTopbar.astro';
 export { default as PostHeader } from './PostHeader/PostHeader.astro';
+export { default as TableOfContents } from './TableOfContents/TableOfContents.astro';

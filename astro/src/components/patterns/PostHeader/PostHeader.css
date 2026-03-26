@@ -1,14 +1,16 @@
 @layer patterns {
   .post-header {
     padding: 0;
-    margin-top: var(--space-10);
-    margin-bottom: var(--space-6);
+    margin: var(--space-10) 0;
     display: flex;
     flex-direction: column;
     gap: var(--space-6);
     justify-content: center;
     align-items: center;
+  }
 
+  .post-header__title {
+    text-align: center;
     @media (--md-only) {
       padding: 0 var(--space-8);
     }
@@ -16,10 +18,6 @@
     @media (--lg-up) {
       padding: 0 var(--space-16);
     }
-  }
-
-  .post-header__title {
-    text-align: center;
   }
 
   .post-header__share {
@@ -59,5 +57,17 @@
 
   .post-header__copy-btn--copied {
     color: var(--color-icon-success, var(--color-success));
+  }
+
+  .post-header__cover {
+    width: 100%;
+    height: var(--size-76);
+    overflow: hidden;
+  }
+
+  .post-header__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }

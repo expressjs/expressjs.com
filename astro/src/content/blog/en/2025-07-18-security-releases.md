@@ -5,6 +5,7 @@ tags: ['security']
 authors:
   - name: Ulises Gascón
     github: UlisesGascon
+cover: /posts/sample-cover.png
 ---
 
 The Express team has released a new patch version of [Multer](https://www.npmjs.com/package/multer), addressing a high-severity vulnerability that could lead to a Denial of Service (DoS) attack.

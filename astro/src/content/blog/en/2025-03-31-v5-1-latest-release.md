@@ -5,6 +5,7 @@ authors:
   - name: Express Technical Committee
     github: expressjs
 description: Express 5.1.0 is now the default on npm, and we're introducing an official LTS schedule for the v4 and v5 release lines.
+cover: /posts/sample-cover.png
 ---
 
 Express v5.0.0 was released on September 9th last year, but we didn't make it the `latest` release on npm. Many asked us

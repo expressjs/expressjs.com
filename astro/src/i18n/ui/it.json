@@ -85,5 +85,7 @@
   "post.shareOnTelegram": "Condividi su Telegram",
   "post.shareOnWhatsApp": "Condividi su WhatsApp",
   "post.copyLink": "Copia link",
-  "post.linkCopied": "Link copiato!"
+  "post.linkCopied": "Link copiato!",
+  "post.toc": "In questa pagina",
+  "post.more": "Altro per Express"
 }

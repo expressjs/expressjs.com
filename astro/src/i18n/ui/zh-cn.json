@@ -85,5 +85,7 @@
   "post.shareOnTelegram": "分享到 Telegram",
   "post.shareOnWhatsApp": "分享到 WhatsApp",
   "post.copyLink": "复制链接",
-  "post.linkCopied": "链接已复制！"
+  "post.linkCopied": "链接已复制！",
+  "post.toc": "本页内容",
+  "post.more": "更多 Express 内容"
 }
