@@ -5,7 +5,7 @@ import { Container, Button, H2 } from '@/components/primitives';
 import { languages } from '@i18n/locales';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import { Icon } from 'astro-icon/components';
-import { PageTopbar, PostHeader, PostCard, TableOfContents } from '@/components/patterns';
+import { PageTopbar, PostHeader, PostCard, TableOfContents, WriteBanner } from '@/components/patterns';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -117,6 +117,11 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
         </section>
       )
     }
+    <WriteBanner
+      message={t('post.writeBanner')}
+      linkLabel={t('post.writeGuidelines')}
+      href={`/${Astro.params.lang}/blog/write-post`}
+    />
   </Container>
 </Layout>
 

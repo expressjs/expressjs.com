@@ -100,5 +100,7 @@
   "post.copyLink": "Copy link",
   "post.linkCopied": "Link copied!",
   "post.toc": "On this page",
-  "post.more": "More from Express"
+  "post.more": "More from Express",
+  "post.writeBanner": "Interested in writing a post? Check out our guidelines to get started.",
+  "post.writeGuidelines": "Read the guidelines"
 }

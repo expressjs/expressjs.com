@@ -1,0 +1,18 @@
+@layer patterns {
+  .write-banner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+    padding: var(--space-6);
+    border: var(--border-width-1) solid var(--color-border-secondary);
+    border-radius: var(--radius-base);
+    margin-top: var(--space-16);
+
+    @media (--md-up) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}

@@ -7,6 +7,8 @@
 
 /* Increase specificity by doubling the class selector */
 .expressive-code.expressive-code {
+  margin: var(--space-6) 0;
+
   .copy {
     top: var(--space-3);
     right: var(--space-3);

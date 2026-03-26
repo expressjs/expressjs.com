@@ -56,7 +56,8 @@ h1,
 }
 
 h2 {
-  font-size: var(--font-size-h3-docs);
+  font-size: var(--font-size-h2-docs);
+  margin: var(--space-h2) 0;
 }
 
 .h2 {
@@ -197,9 +198,11 @@ pre code {
 
 /* Blockquote */
 blockquote {
-  padding-left: var(--space-4);
+  padding: var(--space-4) var(--space-6);
   border-left: var(--border-width-4) solid var(--color-border-primary);
+  background-color: var(--color-bg-secondary);
   font-style: italic;
+  margin: var(--space-4) 0;
 }
 
 /* Horizontal rule */
