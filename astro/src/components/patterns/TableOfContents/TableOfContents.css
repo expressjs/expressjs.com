@@ -29,7 +29,6 @@
     }
   }
 
-  /* Mobile toggle button (the <summary>) */
   .toc__summary {
     display: flex;
     align-items: center;
@@ -68,7 +67,6 @@
     }
   }
 
-  /* The ordered list of headings */
   .toc__list {
     list-style: none;
     margin: 0;
@@ -83,12 +81,6 @@
     }
   }
 
-  /* Individual heading items */
-  .toc__item {
-    /* base */
-  }
-
-  /* h3 indentation */
   .toc__item--h3 {
     padding-left: var(--space-3);
 
@@ -97,7 +89,6 @@
     }
   }
 
-  /* TOC links */
   .toc__link {
     display: block;
     font-size: var(--font-size-sm);

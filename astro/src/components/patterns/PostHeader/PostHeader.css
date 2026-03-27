@@ -60,7 +60,7 @@
   }
 
   .post-header__copy-btn--copied {
-    color: var(--color-icon-success, var(--color-success));
+    color: var(--color-success);
   }
 
   .post-header__cover {

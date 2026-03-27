@@ -70,12 +70,11 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
         { label: t('menu.blog'), href: `/${Astro.params.lang}/blog` },
       ]}
     >
-      <!-- TODO: review GitHub edit link -->
       <Button
         as="a"
         variant="secondary"
         size="sm"
-        href={`https://github.com/expressjs/expressjs.com/edit/gh-pages/src/content/blog/en/blog/${Astro.params.slug}`}
+        href={`https://github.com/expressjs/expressjs.com/edit/gh-pages/astro/src/content/blog/en/${Astro.params.slug}`}
       >
         <Icon name="github" aria-hidden="true" />
         {t('page.editOnGitHub')}
