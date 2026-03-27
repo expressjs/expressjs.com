@@ -3,7 +3,6 @@
     width: 100%;
   }
 
-  /* Desktop-only heading — hidden on mobile (summary acts as title there) */
   .toc__heading {
     display: none;
 
@@ -18,7 +17,6 @@
     }
   }
 
-  /* The <details> element wrapping summary + list */
   .toc__details {
     border: var(--border-width-1) solid var(--color-border-mute);
     border-radius: var(--radius-lg);
@@ -53,7 +51,6 @@
       outline-offset: var(--border-width-1);
     }
 
-    /* Hidden on desktop — heading element takes its place */
     @media (--md-up) {
       display: none;
     }

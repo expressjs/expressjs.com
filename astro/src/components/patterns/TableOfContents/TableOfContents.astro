@@ -41,11 +41,11 @@ const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 
       <details class="toc__details">
         <summary class="toc__summary">
-          <span>{t('post.toc')}</span>
+          <span class="toc__summary-label">{t('post.toc')}</span>
           <Icon name="fluent:chevron-down-20-regular" class="toc__chevron" aria-hidden="true" />
         </summary>
 
-        <ol class="toc__list" role="list">
+        <ol class="toc__list">
           {tocHeadings.map((heading) => (
             <li class:list={['toc__item', `toc__item--h${heading.depth}`]}>
               <a class="toc__link" href={`#${heading.slug}`}>
@@ -62,10 +62,13 @@ const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 <script>
   const details = document.querySelector<HTMLDetailsElement>('.toc__details');
   if (details) {
-    const mq = window.matchMedia('(min-width: 768px)');
+    const bp = getComputedStyle(document.documentElement).getPropertyValue('--breakpoint-md').trim();
+    const mq = window.matchMedia(`(min-width: ${bp})`);
+    const summaryLabel = details.querySelector<HTMLElement>('.toc__summary-label');
+    const defaultLabel = summaryLabel?.textContent ?? '';
 
     function syncOpen(matches: boolean) {
-      if (matches) details.open = true;
+      if (details) details.open = matches;
     }
 
     mq.addEventListener('change', (e) => syncOpen(e.matches));
@@ -79,6 +82,7 @@ const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
     const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.toc__link');
     if (tocLinks.length) {
       let activeLink: HTMLAnchorElement | null = null;
+      const headingEls: HTMLElement[] = [];
 
       const observer = new IntersectionObserver(
         (entries) => {
@@ -90,6 +94,10 @@ const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
               activeLink?.classList.remove('toc__link--active');
               link?.classList.add('toc__link--active');
               activeLink = link;
+
+              if (summaryLabel && !mq.matches) {
+                summaryLabel.textContent = link?.textContent ?? defaultLabel;
+              }
             }
           }
         },
@@ -100,8 +108,31 @@ const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
         const id = link.getAttribute('href')?.slice(1);
         if (id) {
           const el = document.getElementById(id);
-          if (el) observer.observe(el);
+          if (el) {
+            headingEls.push(el);
+            observer.observe(el);
+          }
         }
+      });
+
+      function checkArticleBounds() {
+        if (!summaryLabel || mq.matches || headingEls.length === 0) return;
+        const atTop = headingEls[0].getBoundingClientRect().top > window.innerHeight;
+        const atBottom =
+          window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 50;
+        if (atTop || atBottom) {
+          activeLink?.classList.remove('toc__link--active');
+          activeLink = null;
+          summaryLabel.textContent = defaultLabel;
+        }
+      }
+
+      window.addEventListener('scroll', checkArticleBounds, { passive: true });
+
+      tocLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          if (!mq.matches && details) details.open = false;
+        });
       });
     }
   }

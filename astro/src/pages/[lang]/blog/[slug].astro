@@ -105,7 +105,6 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
   .blog-post-body {
     display: flex;
     flex-direction: column;
-    gap: var(--space-6);
 
     @media (--md-up) {
       flex-direction: row;
@@ -117,23 +116,21 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
   .blog-post-content {
     min-width: 0;
     flex: 1;
-
-    /* Show TOC dropdown above content on mobile */
     order: 1;
   }
 
   .blog-post-toc {
     flex-shrink: 0;
-
-    /* Appear above content on mobile */
     order: 0;
+    background-color: var(--color-bg-primary);
+    position: sticky;
+    top: var(--space-14);
+    padding: var(--space-6) 0 0;
 
     @media (--md-up) {
       order: 1;
-      width: 22rem;
-      position: sticky;
-      top: var(--space-8);
-      max-height: calc(100vh - var(--space-16));
+      width: var(--size-56);
+      max-height: calc(100vh - var(--space-24));
       overflow-y: auto;
     }
   }
