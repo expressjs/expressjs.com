@@ -70,7 +70,7 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
           preload="metadata"
           data-src={videoSrc}
         >
-          <source type="video/mp4" />
+          <source type="video/webm" />
         </video>
         {videoSrcLight && (
           <video
@@ -82,7 +82,7 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
             preload="metadata"
             data-src={videoSrcLight}
           >
-            <source type="video/mp4" />
+            <source type="video/webm" />
           </video>
         )}
         <div class="hero__video-overlay" />
