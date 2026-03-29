@@ -16,7 +16,7 @@ export const apiMenu: Menu = {
       omitFrom: ['3x'],
       items: [
         {
-          href: '/api/express/overview',
+          href: '/api/express/',
           label: 'menu.overview',
           ariaLabel: 'menu.expressOverviewAria',
         },

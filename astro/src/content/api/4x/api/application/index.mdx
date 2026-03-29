@@ -3,6 +3,7 @@ title: Application Object
 description: Learn about the properties of the Express application object.
 ---
 
+import Alert from '@components/primitives/Alert/Alert.astro';
 import Card from '@components/primitives/Card/Card.astro';
 import { CardList } from '@components/patterns';
 
@@ -24,99 +25,106 @@ app.listen(3000);
 
 The `app` object has methods for
 
-- Routing HTTP requests; see for example, [app.METHOD](./app-METHOD) and [app.param](./app-param).
-- Configuring middleware; see [app.route](./app-route).
-- Rendering HTML views; see [app.render](./app-render).
-- Registering a template engine; see [app.engine](./app-engine).
+- Routing HTTP requests; see for example, [app.METHOD](/en/4x/api/application/app-method) and [app.param](/en/4x/api/application/app-param).
+- Configuring middleware; see [app.route](/en/4x/api/application/app-route).
+- Rendering HTML views; see [app.render](/en/4x/api/application/app-render).
+- Registering a template engine; see [app.engine](/en/4x/api/application/app-engine).
 
 It also has settings (properties) that affect how the application behaves;
-for more information, see [Application settings](./app-settings/).
+for more information, see [Application settings](/en/4x/api/application/app-set#app.settings.table).
 
-<div class="doc-box doc-info" markdown="1">
-  The Express application object can be referred from the [request object](#req) and the [response
-  object](#res) as `req.app`, and `res.app`, respectively.
-</div>
+<Alert type="info">
 
-<h3 id="app.properties">Properties</h3>
+The Express application object can be referred from the [request object](/en/4x/api/request) and the [response object](/en/4x/api/response) as `req.app`, and `res.app`, respectively.
+
+</Alert>
+
+## Properties
+
+The Express application object has the following properties:
 
 <CardList gap="6">
-  <a href="./app-locals">
+  <a href="/en/4x/api/application/app-locals">
     <Card
       title="app.locals"
       body="Local variables scoped to the application and exposed to view templates."
     />
   </a>
-  <a href="./app-mountpath">
+  <a href="/en/4x/api/application/app-mountpath">
     <Card title="app.mountpath" body="Path pattern(s) where a sub-application is mounted." />
   </a>
 </CardList>
 
-<h3 id="app.events">Events</h3>
+## Events
+
+The Express application object emits the following events for which you can listen using `app.on()`:
 
 <CardList gap="6">
-  <a href="./app-onmount">
+  <a href="/en/4x/api/application/app-onmount">
     <Card title="app.on('mount')" body="Event fired when the app is mounted on a parent app." />
   </a>
 </CardList>
 
-<h3 id="app.methods">Methods</h3>
+## Methods
+
+The Express application object has the following methods:
 
 <CardList gap="6">
-  <a href="./app-all">
-    <Card title="app.all" body="Route all HTTP methods for a specific path." />
+  <a href="/en/4x/api/application/app-all">
+    <Card title="app.all()" body="Route all HTTP methods for a specific path." />
   </a>
-  <a href="./app-delete-method">
-    <Card title="app.delete" body="Route HTTP DELETE requests to a path." />
+  <a href="/en/4x/api/application/app-delete-method">
+    <Card title="app.delete()" body="Route HTTP DELETE requests to a path." />
   </a>
-  <a href="./app-disable">
-    <Card title="app.disable" body="Disable a boolean application setting." />
+  <a href="/en/4x/api/application/app-disable">
+    <Card title="app.disable()" body="Disable a boolean application setting." />
   </a>
-  <a href="./app-disabled">
-    <Card title="app.disabled" body="Check whether a boolean setting is disabled." />
+  <a href="/en/4x/api/application/app-disabled">
+    <Card title="app.disabled()" body="Check whether a boolean setting is disabled." />
   </a>
-  <a href="./app-enable">
-    <Card title="app.enable" body="Enable a boolean application setting." />
+  <a href="/en/4x/api/application/app-enable">
+    <Card title="app.enable()" body="Enable a boolean application setting." />
   </a>
-  <a href="./app-enabled">
-    <Card title="app.enabled" body="Check whether a boolean setting is enabled." />
+  <a href="/en/4x/api/application/app-enabled">
+    <Card title="app.enabled()" body="Check whether a boolean setting is enabled." />
   </a>
-  <a href="./app-engine">
-    <Card title="app.engine" body="Register a template engine callback by extension." />
+  <a href="/en/4x/api/application/app-engine">
+    <Card title="app.engine()" body="Register a template engine callback by extension." />
   </a>
-  <a href="./app-get">
-    <Card title="app.get (setting)" body="Read the current value of an app setting." />
+  <a href="/en/4x/api/application/app-get">
+    <Card title="app.get(setting)" body="Read the current value of an app setting." />
   </a>
-  <a href="./app-get-method">
-    <Card title="app.get (route)" body="Route HTTP GET requests to a path." />
+  <a href="/en/4x/api/application/app-get-method">
+    <Card title="app.get(route)" body="Route HTTP GET requests to a path." />
   </a>
-  <a href="./app-listen">
-    <Card title="app.listen" body="Start the HTTP server and listen for connections." />
+  <a href="/en/4x/api/application/app-listen">
+    <Card title="app.listen()" body="Start the HTTP server and listen for connections." />
   </a>
-  <a href="./app-METHOD">
+  <a href="/en/4x/api/application/app-method">
     <Card title="app.METHOD" body="Route requests for a specific HTTP method." />
   </a>
-  <a href="./app-param">
-    <Card title="app.param" body="Attach callbacks to route parameters." />
+  <a href="/en/4x/api/application/app-param">
+    <Card title="app.param()" body="Attach callbacks to route parameters." />
   </a>
-  <a href="./app-path">
-    <Card title="app.path" body="Get the canonical path of the app." />
+  <a href="/en/4x/api/application/app-path">
+    <Card title="app.path()" body="Get the canonical path of the app." />
   </a>
-  <a href="./app-post-method">
-    <Card title="app.post" body="Route HTTP POST requests to a path." />
+  <a href="/en/4x/api/application/app-post-method">
+    <Card title="app.post()" body="Route HTTP POST requests to a path." />
   </a>
-  <a href="./app-put-method">
-    <Card title="app.put" body="Route HTTP PUT requests to a path." />
+  <a href="/en/4x/api/application/app-put-method">
+    <Card title="app.put()" body="Route HTTP PUT requests to a path." />
   </a>
-  <a href="./app-render">
-    <Card title="app.render" body="Render a view and return the generated HTML via callback." />
+  <a href="/en/4x/api/application/app-render">
+    <Card title="app.render()" body="Render a view and return the generated HTML via callback." />
   </a>
-  <a href="./app-route">
-    <Card title="app.route" body="Create chainable route handlers for a single path." />
+  <a href="/en/4x/api/application/app-route">
+    <Card title="app.route()" body="Create chainable route handlers for a single path." />
   </a>
-  <a href="./app-set">
-    <Card title="app.set" body="Assign or configure an application setting." />
+  <a href="/en/4x/api/application/app-set">
+    <Card title="app.set()" body="Assign or configure an application setting." />
   </a>
-  <a href="./app-use">
-    <Card title="app.use" body="Mount middleware functions at an optional path." />
+  <a href="/en/4x/api/application/app-use">
+    <Card title="app.use()" body="Mount middleware functions at an optional path." />
   </a>
 </CardList>
