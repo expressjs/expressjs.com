@@ -354,7 +354,7 @@ export const apiMenu: Menu = {
                 href: '/api/request/req-host',
                 label: 'req.host',
                 ariaLabel: 'req.host property',
-                omitFrom: ['4x', '5x'],
+                omitFrom: ['4x'],
               },
               {
                 href: '/api/request/req-hostname',
@@ -503,6 +503,7 @@ export const apiMenu: Menu = {
                 href: '/api/request/req-param',
                 label: 'req.param()',
                 ariaLabel: 'req.param() method',
+                omitFrom: ['5x'],
               },
               {
                 href: '/api/request/req-range',
