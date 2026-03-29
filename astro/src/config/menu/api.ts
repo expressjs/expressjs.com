@@ -64,7 +64,7 @@ export const apiMenu: Menu = {
       title: 'menu.application',
       items: [
         {
-          href: `/api/application/overview`,
+          href: `/api/application`,
           label: 'menu.overview',
           ariaLabel: 'menu.applicationOverviewAria',
         },
