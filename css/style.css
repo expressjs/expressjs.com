@@ -1335,12 +1335,6 @@ h2 a {
     justify-content: center;
   }
 
-  #footer-copyright > a {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
   .header-right {
     display: flex;
     gap: 8px;
