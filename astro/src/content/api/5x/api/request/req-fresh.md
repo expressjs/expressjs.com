@@ -3,7 +3,7 @@ title: req.fresh
 description: When the response is still fresh in the client cache true is returned, otherwise false is returned to indicate that the client cache is now stale.
 ---
 
-<h3 id='req.fresh'>req.fresh</h3>
+# req.fresh
 
 When the response is still "fresh" in the client's cache `true` is returned, otherwise `false` is returned to indicate that the client cache is now stale and the full response should be sent.
 

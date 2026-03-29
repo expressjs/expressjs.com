@@ -3,7 +3,7 @@ title: req.query
 description: This property is an object containing a property for each query string parameter in the route.
 ---
 
-<h3 id='req.query'>req.query</h3>
+# req.query
 
 This property is an object containing a property for each query string parameter in the route.
 When [query parser](/en/api/application/app-set#app.settings.table) is set to disabled, it is an empty object `{}`, otherwise it is the result of the configured query parser.
