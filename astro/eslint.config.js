@@ -10,6 +10,12 @@ export default [
   // Global ignores
   globalIgnores(['dist/*', '.astro/*', 'node_modules/*', 'package-lock.json']),
   {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
     ignores: ['dist/', '.astro/', 'node_modules/', 'package-lock.json'],
   },
 
