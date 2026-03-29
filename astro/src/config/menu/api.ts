@@ -476,7 +476,7 @@ export const apiMenu: Menu = {
       title: 'menu.response',
       items: [
         {
-          href: `/api/response/overview`,
+          href: `/api/response`,
           label: 'menu.overview',
           ariaLabel: 'menu.responseOverviewAria',
         },
@@ -506,7 +506,7 @@ export const apiMenu: Menu = {
       omitFrom: ['3x'],
       items: [
         {
-          href: `/api/router/overview`,
+          href: `/api/router`,
           label: 'menu.overview',
           ariaLabel: 'menu.routerOverviewAria',
         },
