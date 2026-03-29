@@ -3,7 +3,7 @@ title: req.path
 description: Contains the path part of the request URL.
 ---
 
-<h3 id='req.path'>req.path</h3>
+# req.path
 
 Contains the path part of the request URL.
 

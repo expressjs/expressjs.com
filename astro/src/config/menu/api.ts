@@ -354,6 +354,13 @@ export const apiMenu: Menu = {
                 href: '/api/request/req-host',
                 label: 'req.host',
                 ariaLabel: 'req.host property',
+                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: '/api/request/req-hostname',
+                label: 'req.hostname',
+                ariaLabel: 'req.hostname property',
+                omitFrom: ['3x'],
               },
               {
                 href: '/api/request/req-ip',
@@ -364,6 +371,12 @@ export const apiMenu: Menu = {
                 href: '/api/request/req-ips',
                 label: 'req.ips',
                 ariaLabel: 'req.ips property',
+              },
+              {
+                href: '/api/request/req-method',
+                label: 'req.method',
+                ariaLabel: 'req.method property',
+                omitFrom: ['3x'],
               },
               {
                 href: '/api/request/req-originalurl',
@@ -408,7 +421,7 @@ export const apiMenu: Menu = {
 
               {
                 href: '/api/request/req-signedcookies',
-                label: 'req.sigendCookies',
+                label: 'req.signedCookies',
                 ariaLabel: 'req.signedCookies property',
               },
               {
@@ -438,7 +451,24 @@ export const apiMenu: Menu = {
                 href: `/api/request/req-accepts`,
                 label: 'req.accepts()',
                 ariaLabel: 'req.accepts method',
-                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: `/api/request/req-acceptscharsets`,
+                label: 'req.acceptsCharsets()',
+                ariaLabel: 'req.acceptedCharsets method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: `/api/request/req-acceptsencodings`,
+                label: 'req.acceptsEncodings()',
+                ariaLabel: 'req.acceptedCharsets method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: `/api/request/req-acceptslanguages`,
+                label: 'req.acceptsLanguages()',
+                ariaLabel: 'req.acceptedLanguages method',
+                omitFrom: ['3x'],
               },
               {
                 href: `/api/request/req-acceptscharset`,
@@ -453,9 +483,16 @@ export const apiMenu: Menu = {
                 omitFrom: ['4x', '5x'],
               },
               {
+                href: '/api/request/req-get',
+                label: 'req.get()',
+                ariaLabel: 'req.get() method',
+                omitFrom: ['3x'],
+              },
+              {
                 href: '/api/request/req-header',
                 label: 'req.header()',
                 ariaLabel: 'req.header() method',
+                omitFrom: ['4x', '5x'],
               },
               {
                 href: '/api/request/req-is',
@@ -466,6 +503,12 @@ export const apiMenu: Menu = {
                 href: '/api/request/req-param',
                 label: 'req.param()',
                 ariaLabel: 'req.param() method',
+              },
+              {
+                href: '/api/request/req-range',
+                label: 'req.range()',
+                ariaLabel: 'req.range() method',
+                omitFrom: ['3x'],
               },
             ],
           },

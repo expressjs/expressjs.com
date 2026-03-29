@@ -3,7 +3,7 @@ title: req.signedCookies
 description: When using cookie-parser middleware, this property
 ---
 
-<h3 id='req.signedCookies'>req.signedCookies</h3>
+# req.signedCookies
 
 When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this property
 contains signed cookies sent by the request, unsigned and ready for use. Signed cookies reside

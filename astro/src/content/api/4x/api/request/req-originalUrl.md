@@ -3,7 +3,7 @@ title: req.originalUrl
 description: req.url retains the original request URL, allowing you to rewrite req.url freely for internal routing purposes
 ---
 
-<h3 id='req.originalUrl'>req.originalUrl</h3>
+# req.originalUrl
 
 <div class="doc-box doc-notice" markdown="1">
 `req.url` is not a native Express property, it is inherited from Node's [http module](https://nodejs.org/api/http.html#http_message_url).

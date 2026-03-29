@@ -3,7 +3,7 @@ title: req.accepts
 description: Checks if the specified content types are acceptable, based on the request Accept HTTP header field.
 ---
 
-<h3 id='req.accepts'>req.accepts(types)</h3>
+# req.accepts(types)
 
 Checks if the specified content types are acceptable, based on the request's `Accept` HTTP header field.
 The method returns the best match, or if none of the specified content types is acceptable, returns

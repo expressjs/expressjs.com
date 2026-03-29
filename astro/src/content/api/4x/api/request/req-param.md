@@ -3,7 +3,7 @@ title: req.param
 description: Deprecated. Use either req.params, req.body or req.query, as applicable.
 ---
 
-<h3 id='req.param'>req.param(name [, defaultValue])</h3>
+# req.param(name [, defaultValue])
 
 <div class="doc-box doc-warn" markdown="1">
 Deprecated. Use either `req.params`, `req.body` or `req.query`, as applicable.

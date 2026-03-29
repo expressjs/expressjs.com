@@ -3,7 +3,7 @@ title: req.range
 description: Range header parser
 ---
 
-<h3 id='req.range'>req.range(size[, options])</h3>
+# req.range(size[, options])
 
 `Range` header parser.
 

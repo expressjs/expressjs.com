@@ -3,7 +3,7 @@ title: req.cookies
 description: When using cookie-parser middleware, this property is an object that
 ---
 
-<h3 id='req.cookies'>req.cookies</h3>
+# req.cookies
 
 When using [cookie-parser](https://www.npmjs.com/package/cookie-parser) middleware, this property is an object that
 contains cookies sent by the request. If the request contains no cookies, it defaults to `{}`.
