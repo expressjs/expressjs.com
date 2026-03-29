@@ -3,7 +3,7 @@ title: basicAuth
 description: Basic Authentication middleware, populating req.user
 ---
 
-<h3 id='basicAuth'>basicAuth()</h3>
+# basicAuth()
 
 Basic Authentication middleware, populating `req.user`
 with the username.

@@ -3,7 +3,7 @@ title: cookieSession
 description: Provides cookie-based sessions, and populates req.session.
 ---
 
-<h3 id='cookieSession'>cookieSession()</h3>
+# cookieSession()
 
 Provides cookie-based sessions, and populates `req.session`.
 This middleware takes the following options:

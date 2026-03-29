@@ -3,7 +3,7 @@ title: compress
 description: Compress response data with gzip / deflate. This middleware
 ---
 
-<h3 id='compress'>compress()</h3>
+# compress()
 
 Compress response data with gzip / deflate. This middleware
 should be placed "high" within the stack to ensure all

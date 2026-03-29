@@ -61,6 +61,60 @@ export const apiMenu: Menu = {
       ],
     },
     {
+      title: 'menu.middleware',
+      omitFrom: ['4x', '5x'],
+      items: [
+        {
+          href: '/api/middleware',
+          label: 'menu.overview',
+          ariaLabel: 'menu.middlewareOverviewAria',
+        },
+        {
+          label: 'menu.types',
+          ariaLabel: 'menu.middlewareTypesAria',
+          submenu: {
+            items: [
+              {
+                href: '/api/middleware/basicauth',
+                label: 'basicAuth()',
+                ariaLabel: 'basicAuth() middleware',
+              },
+              {
+                href: '/api/middleware/bodyparser',
+                label: 'bodyParser()',
+                ariaLabel: 'bodyParser() middleware',
+              },
+              {
+                href: '/api/middleware/compress',
+                label: 'compress()',
+                ariaLabel: 'compress() middleware',
+              },
+              {
+                href: '/api/middleware/cookieparser',
+                label: 'cookieParser()',
+                ariaLabel: 'cookieParser() middleware',
+              },
+              {
+                href: '/api/middleware/cookiesession',
+                label: 'cookieSession()',
+                ariaLabel: 'cookieSession() middleware',
+              },
+              {
+                href: '/api/middleware/csrf',
+                label: 'csrf()',
+                ariaLabel: 'csrf() middleware',
+              },
+              {
+                href: '/api/middleware/directory',
+                label: 'directory()',
+                ariaLabel: 'directory() middleware',
+              },
+            ],
+          },
+        },
+      ],
+    },
+    {
       title: 'menu.application',
       items: [
         {
