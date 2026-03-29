@@ -3,7 +3,7 @@ title: req.is
 description: Check if the incoming request contains the "Content-Type"
 ---
 
-<h3 id='req.is'>req.is(type)</h3>
+# req.is(type)
 
 Check if the incoming request contains the "Content-Type"
 header field, and it matches the give mime `type`.

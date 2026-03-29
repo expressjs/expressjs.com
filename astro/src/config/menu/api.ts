@@ -290,7 +290,7 @@ export const apiMenu: Menu = {
       title: 'menu.request',
       items: [
         {
-          href: `/api/request/overview`,
+          href: `/api/request`,
           label: 'menu.overview',
           ariaLabel: 'menu.requestOverviewAria',
         },
@@ -299,6 +299,24 @@ export const apiMenu: Menu = {
           ariaLabel: 'menu.requestPropertiesAria',
           submenu: {
             items: [
+              {
+                href: `/api/request/req-accepted`,
+                label: 'req.accepted',
+                ariaLabel: 'req.accepted property',
+                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: `/api/request/req-acceptedcharsets`,
+                label: 'req.acceptedCharsets',
+                ariaLabel: 'req.acceptedCharsets property',
+                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: `/api/request/req-acceptedlanguages`,
+                label: 'req.acceptedLanguages',
+                ariaLabel: 'req.acceptedLanguages property',
+                omitFrom: ['4x', '5x'],
+              },
               {
                 href: `/api/request/req-app`,
                 label: 'req.app',
@@ -312,10 +330,142 @@ export const apiMenu: Menu = {
                 omitFrom: ['3x'],
               },
               {
+                href: '/api/request/req-body',
+                label: 'req.body',
+                ariaLabel: 'req.body property',
+              },
+              {
+                href: `/api/request/req-cookies`,
+                label: 'req.cookies',
+                ariaLabel: 'req.cookies property',
+              },
+              {
                 href: `/api/request/req-files`,
                 label: 'req.files',
                 ariaLabel: 'req.files property',
                 omitFrom: ['5x', '4x'],
+              },
+              {
+                href: '/api/request/req-fresh',
+                label: 'req.fresh',
+                ariaLabel: 'req.fresh property',
+              },
+              {
+                href: '/api/request/req-host',
+                label: 'req.host',
+                ariaLabel: 'req.host property',
+              },
+              {
+                href: '/api/request/req-ip',
+                label: 'req.ip',
+                ariaLabel: 'req.ip property',
+              },
+              {
+                href: '/api/request/req-ips',
+                label: 'req.ips',
+                ariaLabel: 'req.ips property',
+              },
+              {
+                href: '/api/request/req-originalurl',
+                label: 'req.originalUrl',
+                ariaLabel: 'req.originalUrl property',
+              },
+              {
+                href: '/api/request/req-params',
+                label: 'req.params',
+                ariaLabel: 'req.params property',
+              },
+              {
+                href: '/api/request/req-path',
+                label: 'req.path',
+                ariaLabel: 'req.path property',
+              },
+              {
+                href: '/api/request/req-protocol',
+                label: 'req.protocol',
+                ariaLabel: 'req.protocol property',
+              },
+              {
+                href: '/api/request/req-query',
+                label: 'req.query',
+                ariaLabel: 'req.query property',
+              },
+              {
+                href: '/api/request/req-res',
+                label: 'req.res',
+                ariaLabel: 'req.res property',
+              },
+              {
+                href: '/api/request/req-route',
+                label: 'req.route',
+                ariaLabel: 'req.route property',
+              },
+              {
+                href: '/api/request/req-secure',
+                label: 'req.secure',
+                ariaLabel: 'req.secure property',
+              },
+
+              {
+                href: '/api/request/req-signedcookies',
+                label: 'req.sigendCookies',
+                ariaLabel: 'req.signedCookies property',
+              },
+              {
+                href: '/api/request/req-stale',
+                label: 'req.stale',
+                ariaLabel: 'req.stale property',
+              },
+              {
+                href: '/api/request/req-subdomains',
+                label: 'req.subdomains',
+                ariaLabel: 'req.subdomains property',
+              },
+              {
+                href: '/api/request/req-xhr',
+                label: 'req.xhr',
+                ariaLabel: 'req.xhr property',
+              },
+            ],
+          },
+        },
+        {
+          label: 'menu.methods',
+          ariaLabel: 'menu.requestMethodsAria',
+          submenu: {
+            items: [
+              {
+                href: `/api/request/req-accepts`,
+                label: 'req.accepts()',
+                ariaLabel: 'req.accepts method',
+                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: `/api/request/req-acceptscharset`,
+                label: 'req.acceptsCharset()',
+                ariaLabel: 'req.acceptsCharset method',
+                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: `/api/request/req-acceptslanguage`,
+                label: 'req.acceptsLanguage()',
+                ariaLabel: 'req.acceptsLanguage method',
+                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: '/api/request/req-header',
+                label: 'req.header()',
+                ariaLabel: 'req.header() method',
+              },
+              {
+                href: '/api/request/req-is',
+                label: 'req.is()',
+                ariaLabel: 'req.is() method',
+              },
+              {
+                href: '/api/request/req-param',
+                label: 'req.param()',
+                ariaLabel: 'req.param() method',
               },
             ],
           },

@@ -3,7 +3,7 @@ title: req.param
 description: Return the value of param name when present.
 ---
 
-<h3 id='req.param'>req.param(name)</h3>
+# req.param(name)
 
 Return the value of param `name` when present.
 

@@ -3,7 +3,7 @@ title: req.route
 description: The currently matched Route containing
 ---
 
-<h3 id='req.route'>req.route</h3>
+# req.route
 
 The currently matched `Route` containing
 several properties such as the route's original path
@@ -17,7 +17,7 @@ app.get('/user/:id?', function (req, res) {
 
 Example output from the previous snippet:
 
-```
+```json
 { path: '/user/:id?',
   method: 'get',
   callbacks: [ [Function] ],

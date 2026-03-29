@@ -3,7 +3,7 @@ title: req.signedCookies
 description: This object requires the cookieParser secret middleware for use.
 ---
 
-<h3 id='req.signedCookies'>req.signedCookies</h3>
+# req.signedCookies
 
 This object requires the `cookieParser(secret)` middleware for use.
 It contains signed cookies sent by the user-agent, unsigned and ready for use.
