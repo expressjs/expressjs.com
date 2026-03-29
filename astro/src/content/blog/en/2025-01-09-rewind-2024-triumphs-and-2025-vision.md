@@ -1,6 +1,6 @@
 ---
 title: 'A New Chapter for Express.js: Triumphs of 2024 and an ambitious 2025'
-tags: announcements
+tags: ['announcements']
 authors:
   - name: Express Technical Committee
     github: expressjs

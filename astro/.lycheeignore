@@ -15,3 +15,9 @@ dist/404/index.html$
 
 # Exclude Open Collective links
 https://opencollective.com/.*
+
+# Prevent netlify rate limit
+https://www.netlify.com/
+
+## Ignore temporaly sitemap
+https://expressjs.com/sitemap-index.xml

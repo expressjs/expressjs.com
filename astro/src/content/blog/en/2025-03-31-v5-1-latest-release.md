@@ -1,6 +1,6 @@
 ---
 title: 'Express@5.1.0: Now the Default on npm with LTS Timeline'
-tags: announcements
+tags: ['announcements']
 authors:
   - name: Express Technical Committee
     github: expressjs
