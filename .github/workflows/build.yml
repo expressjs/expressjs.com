@@ -105,7 +105,7 @@ jobs:
           workingDirectory: astro # TODO: change when Astro site is moved to root
           args: |
             --root-dir $PWD/dist
-            --remap 'https://expressjs\.com\/(.*[^/])/?$' file://'$PWD'/dist/$1/index.html'
-            --remap 'https://expressjs\.com\/(.*\.html)$ file://'$PWD'/dist/$1'
+            --remap "https://expressjs\.com\/(.*[^/])/?$ file://$PWD/dist/$1/index.html"
+            --remap "https://expressjs\.com\/(.*\.html)$ file://$PWD/dist/$1"
             dist/
           fail: true
