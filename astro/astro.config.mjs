@@ -7,8 +7,7 @@ import expressiveCode from 'astro-expressive-code';
 import react from '@astrojs/react';
 import svgr from 'vite-plugin-svgr';
 import Icons from 'unplugin-icons/vite';
-
-// TODO: add redirecto for blog posts
+import redirects from './src/config/redirect.js';
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
 const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
@@ -17,6 +16,7 @@ const site = NETLIFY_PREVIEW_SITE || 'https://expressjs.com';
 
 // https://astro.build/config
 export default defineConfig({
+  redirects,
   site,
   vite: {
     plugins: [
