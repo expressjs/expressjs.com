@@ -162,6 +162,7 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
       const src = video.getAttribute('data-src');
       if (!src) return;
 
+      // do not load video if src is loaded (reduce network call)
       if (!video.src) {
         video.src = src;
         video.load();
@@ -192,12 +193,15 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
 
       loadVideo(video);
 
-      // ref: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState#htmlmediaelement.have_enough_data
-      if (video.readyState >= video.HAVE_ENOUGH_DATA) {
+      // check if video is ready to play then just update background animation
+      // returning early to stop repeated listener on theme change 
+      // ref: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState#htmlmediaelement.have_future_data
+      if (video.readyState >= video.HAVE_FUTURE_DATA) {
         updateStatus(video, poster);
-      } else {
-        video.addEventListener('canplay', () => updateStatus(video, poster), { once: true });
+        return
       }
+        
+      video.addEventListener('canplay', () => updateStatus(video, poster), { once: true });
     }
 
     function updateVideo() {
