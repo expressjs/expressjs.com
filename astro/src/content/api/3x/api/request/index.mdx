@@ -11,7 +11,6 @@ import { CardList } from '@components/patterns';
 The `req` object is an enhanced version of Node's own request object
 and supports all [built-in fields and methods](https://nodejs.org/api/http.html#class-httpincomingmessage).
 
-
 ## Properties
 
 The `req` object contains a number of properties that provide information about the HTTP request, such as headers, query parameters, and more.
@@ -41,7 +40,7 @@ The `req` object contains a number of properties that provide information about 
     <a href="/en/3x/api/request/req-host">
     <Card title="req.host" body="The host name from the request header." />
   </a>
-<a href="/en/3x/api/request/req-ip">
+  <a href="/en/3x/api/request/req-ip">
     <Card title="req.ip" body="The remote IP address of the request." />
   </a>
   <a href="/en/3x/api/request/req-ips">
@@ -66,25 +65,27 @@ The `req` object contains a number of properties that provide information about 
   <a href="/en/3x/api/request/req-res">
     <Card title="req.res" body="The response object that is associated with the request." />
   </a>
-    <a href="/en/3x/api/request/req-route">
-    <Card title="req.route" body="The currently matched route, a string." />
-  </a>  <a href="/en/3x/api/request/req-route">
+  <a href="/en/3x/api/request/req-route">
     <Card title="req.route" body="The currently matched route, a string." />
   </a>
-    <a href="/en/3x/api/request/req-signedcookies">
+  <a href="/en/3x/api/request/req-route">
+    <Card title="req.route" body="The currently matched route, a string." />
+  </a>
+  <a href="/en/3x/api/request/req-signedcookies">
     <Card title="req.signedCookies" body="Object containing signed cookies sent by the request." />
-  </a><a href="/en/3x/api/request/req-stale">
+  </a>
+  <a href="/en/3x/api/request/req-stale">
     <Card title="req.stale" body="Indicates whether the request is stale." />
   </a>
-    
   <a href="/en/3x/api/request/req-subdomains">
     <Card title="req.subdomains" body="An array of subdomains in the domain name of the request." />
   </a>
-    
   <a href="/en/3x/api/request/req-xhr">
-    <Card title="req.xhr" body="A boolean property that is true if the request's X-Requested-With header field is 'XMLHttpRequest', indicating that the request was issued by a client library such as jQuery." />
+    <Card
+      title="req.xhr"
+      body="A boolean property that is true if the request's X-Requested-With header field is 'XMLHttpRequest', indicating that the request was issued by a client library such as jQuery."
+    />
   </a>
-
 </CardList>
 
 ## Methods
@@ -93,37 +94,39 @@ The `req` object also contains a number of methods that can be used to perform v
 
 <CardList gap="6">
   <a href="/en/3x/api/request/req-accepts">
-    <Card title="req.accepts()" body="Check if the specified content types are acceptable, based on the request's Accept HTTP header field." />
+    <Card
+      title="req.accepts()"
+      body="Check if the specified content types are acceptable, based on the request's Accept HTTP header field."
+    />
   </a>
   <a href="/en/3x/api/request/req-acceptscharset">
-    <Card title="req.acceptsCharset()" body="Check if the specified charset is acceptable, based on the request's Accept-Charset HTTP header field." />
+    <Card
+      title="req.acceptsCharset()"
+      body="Check if the specified charset is acceptable, based on the request's Accept-Charset HTTP header field."
+    />
   </a>
   <a href="/en/3x/api/request/req-acceptslanguage">
-    <Card title="req.acceptsLanguage()" body="Check if the specified language is acceptable, based on the request's Accept-Language HTTP header field." />
+    <Card
+      title="req.acceptsLanguage()"
+      body="Check if the specified language is acceptable, based on the request's Accept-Language HTTP header field."
+    />
   </a>
   <a href="/en/3x/api/request/req-header">
-    <Card title="req.header()" body="Return the value of the specified HTTP request header field." />
+    <Card
+      title="req.header()"
+      body="Return the value of the specified HTTP request header field."
+    />
   </a>
   <a href="/en/3x/api/request/req-is">
-    <Card title="req.is()" body="Check if the incoming request contains the Content-Type HTTP header field, and if it matches the given MIME type." />
+    <Card
+      title="req.is()"
+      body="Check if the incoming request contains the Content-Type HTTP header field, and if it matches the given MIME type."
+    />
   </a>
   <a href="/en/3x/api/request/req-param">
-    <Card title="req.param()" body="Return the value of a request parameter, or a default value if the parameter is not specified." />
+    <Card
+      title="req.param()"
+      body="Return the value of a request parameter, or a default value if the parameter is not specified."
+    />
   </a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </CardList>
