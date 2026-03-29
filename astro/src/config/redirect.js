@@ -42,19 +42,19 @@ const blog = {
 
 const api_v2 = {
   '/2x/': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/guide/': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/migrate/': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/screencasts/': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/executables/': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/contrib': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/applications': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/docs': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/docs/guide/': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/docs/migrate/': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/docs/screencasts/': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/docs/executables/': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/docs/contrib': 'https://github.com/expressjs/expressjs.com/tree/2x',
-  '/2x/docs/applications': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/guide.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/migrate.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/screencasts.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/executables.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/contrib.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/applications.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/docs.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/docs/guide.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/docs/migrate.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/docs/screencasts.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/docs/executables.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/docs/contrib.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
+  '/2x/docs/applications.html': 'https://github.com/expressjs/expressjs.com/tree/2x',
 };
 
 const pages = {
