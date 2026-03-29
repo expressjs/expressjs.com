@@ -3,7 +3,7 @@ title: res.location
 description: Set the location header.
 ---
 
-<h3 id='res.location'>res.location</h3>
+<h3 id='res.location'>res.location()</h3>
 
 Set the location header.
 

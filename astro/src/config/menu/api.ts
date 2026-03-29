@@ -486,15 +486,118 @@ export const apiMenu: Menu = {
           submenu: {
             items: [
               {
-                href: `/api/response/res-set`,
-                label: 'res.set',
-                ariaLabel: 'res.app property',
+                href: `/api/response/res-charset`,
+                label: 'res.charset',
+                ariaLabel: 'res.charset property',
+              },
+              {
+                href: `/api/response/res-locals`,
+                label: 'res.locals',
+                ariaLabel: 'res.locals property',
+              },
+              {
+                href: '/api/response/res-req',
+                label: 'res.req',
+                ariaLabel: 'res.req property',
               },
               {
                 href: `/api/response/res-app`,
                 label: 'res.app',
                 ariaLabel: 'res.app property',
                 omitFrom: ['3x'],
+              },
+            ],
+          },
+        },
+        {
+          label: 'menu.methods',
+          ariaLabel: 'menu.responseMethodsAria',
+          submenu: {
+            items: [
+              {
+                href: `/api/response/res-attachment`,
+                label: 'res.attachment()',
+                ariaLabel: 'res.attachment method',
+              },
+              {
+                href: `/api/response/res-clearcookie`,
+                label: 'res.clearCookie()',
+                ariaLabel: 'res.clearCookie method',
+              },
+              {
+                href: `/api/response/res-cookie`,
+                label: 'res.cookie()',
+                ariaLabel: 'res.cookie method',
+              },
+              {
+                href: `/api/response/res-download`,
+                label: 'res.download()',
+                ariaLabel: 'res.download method',
+              },
+              {
+                href: `/api/response/res-format`,
+                label: 'res.format()',
+                ariaLabel: 'res.format method',
+              },
+              {
+                href: `/api/response/res-get`,
+                label: 'res.get()',
+                ariaLabel: 'res.get method',
+              },
+              {
+                href: `/api/response/res-json`,
+                label: 'res.json()',
+                ariaLabel: 'res.json method',
+              },
+              {
+                href: `/api/response/res-jsonp`,
+                label: 'res.jsonp()',
+                ariaLabel: 'res.jsonp method',
+              },
+              {
+                href: '/api/response/res-links',
+                label: 'res.links()',
+                ariaLabel: 'res.links method',
+              },
+              {
+                href: `/api/response/res-location`,
+                label: 'res.location()',
+                ariaLabel: 'res.location method',
+              },
+              {
+                href: `/api/response/res-redirect`,
+                label: 'res.redirect()',
+                ariaLabel: 'res.redirect method',
+              },
+              {
+                href: `/api/response/res-render`,
+                label: 'res.render()',
+                ariaLabel: 'res.render method',
+              },
+              {
+                href: `/api/response/res-send`,
+                label: 'res.send()',
+                ariaLabel: 'res.send method',
+              },
+              {
+                href: `/api/response/res-sendfile`,
+                label: 'res.sendfile()',
+                ariaLabel: 'res.sendFile method',
+              },
+              {
+                href: `/api/response/res-set`,
+                label: 'res.set()',
+                ariaLabel: 'res.set method',
+              },
+              {
+                href: `/api/response/res-status`,
+                label: 'res.status()',
+                ariaLabel: 'res.status method',
+              },
+              {
+                href: `/api/response/res-type`,
+                label: 'res.type()',
+                ariaLabel: 'res.type method',
               },
             ],
           },
