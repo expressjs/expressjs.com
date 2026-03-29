@@ -16,6 +16,7 @@ export default [
         ...globals.node,
       },
     },
+    ignores: ['dist/', '.astro/', 'node_modules/', 'package-lock.json'],
   },
 
   // Base ESLint recommended rules
