@@ -3,7 +3,7 @@ title: express.static
 description: This is a built-in middleware function in Express.
 ---
 
-<h3 id='express.static' class='h2'>express.static(root, [options])</h3>
+# express.static(root, [options])
 
 This is a built-in middleware function in Express.
 It serves static files and is based on [serve-static](/en/resources/middleware/serve-static).

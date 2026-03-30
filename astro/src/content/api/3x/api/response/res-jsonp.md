@@ -3,7 +3,7 @@ title: res.jsonp
 description: Send a JSON response with JSONP support. This method is identical
 ---
 
-<h3 id='res.jsonp'>res.jsonp([status|body], [body])</h3>
+# res.jsonp([status|body], [body])
 
 Send a JSON response with JSONP support. This method is identical
 to `res.json()` however opts-in to JSONP callback

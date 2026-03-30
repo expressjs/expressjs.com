@@ -3,7 +3,7 @@ title: app.param
 description: Map logic to route parameters. For example when user
 ---
 
-<h3 id='app.param'>app.param([name], callback)</h3>
+# app.param([name], callback)
 
 Map logic to route parameters. For example when `:user`
 is present in a route path you may map user loading logic to automatically

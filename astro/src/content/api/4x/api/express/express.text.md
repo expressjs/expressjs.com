@@ -3,7 +3,7 @@ title: express.text
 description: This middleware is available in Express v4.17.0 onwards.
 ---
 
-<h3 id='express.text' class='h2'>express.text([options])</h3>
+# express.text([options])
 
 <div class="doc-box doc-info" markdown="1">
 This middleware is available in Express v4.17.0 onwards.

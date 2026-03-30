@@ -3,7 +3,7 @@ title: res.append
 description: Appends the specified value to the HTTP response header field
 ---
 
-<h3 id='res.append'>res.append(field [, value])</h3>
+# res.append(field [, value])
 
 {% include admonitions/note.html content="`res.append()` is supported by Express v4.11.0+" %}
 Appends the specified `value` to the HTTP response header `field`. If the header is not already set,

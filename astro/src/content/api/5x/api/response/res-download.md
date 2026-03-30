@@ -3,7 +3,7 @@ title: res.download
 description: res.download provides access to data on the running file system
 ---
 
-<h3 id='res.download'>res.download(path [, filename] [, options] [, fn])</h3>
+# res.download(path [, filename] [, options] [, fn])
 
 <div class="doc-box doc-info" markdown="1">
 The optional `options` argument is supported by Express v4.16.0 onwards.

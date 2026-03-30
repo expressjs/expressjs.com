@@ -3,7 +3,7 @@ title: app.disabled
 description: Check if setting name is disabled.
 ---
 
-<h3 id='app.disabled'>app.disabled(name)</h3>
+# app.disabled(name)
 
 Check if setting `name` is disabled.
 

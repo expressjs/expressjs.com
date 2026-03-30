@@ -3,7 +3,7 @@ title: res.download
 description: Transfers the file at path as an attachment. Typically, browsers will prompt the user for download.
 ---
 
-<h3 id='res.download'>res.download(path [, filename] [, options] [, fn])</h3>
+# res.download(path [, filename] [, options] [, fn])
 
 Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.
 By default, the `Content-Disposition` header "filename=" parameter is derived from the `path` argument, but can be overridden with the `filename` parameter.

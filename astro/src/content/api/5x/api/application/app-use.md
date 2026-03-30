@@ -3,7 +3,7 @@ title: app.use
 description: Mounts the specified [middleware](/en/guide/using-middleware) function or functions
 ---
 
-<h3 id='app.use'>app.use([path,] callback [, callback...])</h3>
+# app.use([path,] callback [, callback...])
 
 Mounts the specified [middleware](/en/guide/using-middleware) function or functions
 at the specified path:

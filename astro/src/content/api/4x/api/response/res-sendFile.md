@@ -3,7 +3,7 @@ title: res.sendFile
 description: Transfers the file at the given path. Sets the Content-Type response HTTP header field based on the filename extension
 ---
 
-<h3 id='res.sendFile'>res.sendFile(path [, options] [, fn])</h3>
+# res.sendFile(path [, options] [, fn])
 
 <div class="doc-box doc-info" markdown="1">
 `res.sendFile()` is supported by Express v4.8.0 onwards.

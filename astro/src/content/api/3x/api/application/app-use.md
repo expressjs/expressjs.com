@@ -3,7 +3,7 @@ title: app.use
 description: Use the given middleware function, with optional mount path,
 ---
 
-<h3 id='app.use'>app.use([path], function)</h3>
+# app.use([path], function)
 
 Use the given middleware `function`, with optional mount `path`,
 defaulting to "/".

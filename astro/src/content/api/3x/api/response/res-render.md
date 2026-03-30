@@ -3,7 +3,7 @@ title: res.render
 description: Render a view with a callback responding with
 ---
 
-<h3 id='res.render'>res.render(view, [locals], callback)</h3>
+# res.render(view, [locals], callback)
 
 Render a `view` with a callback responding with
 the rendered string. When an error occurs `next(err)`

@@ -3,7 +3,7 @@ title: app.mountpath
 description: The app.mountpath property contains one or more path patterns on which a sub-app was mounted.
 ---
 
-<h3 id='app.mountpath'>app.mountpath</h3>
+# app.mountpath
 
 The `app.mountpath` property contains one or more path patterns on which a sub-app was mounted.
 

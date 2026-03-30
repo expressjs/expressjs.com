@@ -3,7 +3,7 @@ title: res.append
 description: res.append appends the specified value to the HTTP response header field
 ---
 
-<h3 id='res.append'>res.append(field [, value])</h3>
+# res.append(field [, value])
 
 <div class="doc-box doc-info" markdown="1">
 `res.append()` is supported by Express v4.11.0+

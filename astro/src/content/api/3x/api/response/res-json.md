@@ -3,7 +3,7 @@ title: res.json
 description: Send a JSON response. This method is identical
 ---
 
-<h3 id='res.json'>res.json([status|body], [body])</h3>
+# res.json([status|body], [body])
 
 Send a JSON response. This method is identical
 to `res.send()` when an object or

@@ -3,7 +3,7 @@ title: res.render
 description: Renders a view and sends the rendered HTML string to the client.
 ---
 
-<h3 id='res.render'>res.render(view [, locals] [, callback])</h3>
+# res.render(view [, locals] [, callback])
 
 Renders a `view` and sends the rendered HTML string to the client.
 Optional parameters:

@@ -3,7 +3,7 @@ title: res.locals
 description: Use this property to set variables accessible in templates rendered with [res.render](#res.render).
 ---
 
-<h3 id='res.locals'>res.locals</h3>
+# res.locals
 
 Use this property to set variables accessible in templates rendered with [res.render](#res.render).
 The variables set on `res.locals` are available within a single request-response cycle, and will not

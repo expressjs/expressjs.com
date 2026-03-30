@@ -3,7 +3,7 @@ title: res.sendStatus
 description: Sets the response HTTP status code to statusCode and sends the registered status message as the text response body. If an unknown status code is specified, the response body will be just the code number.
 ---
 
-<h3 id='res.sendStatus'>res.sendStatus(statusCode)</h3>
+# res.sendStatus(statusCode)
 
 Sets the response HTTP status code to `statusCode` and sends the registered status message as the text response body. If an unknown status code is specified, the response body will just be the code number.
 

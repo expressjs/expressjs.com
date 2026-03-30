@@ -3,7 +3,7 @@ title: settings
 description: The following settings are provided to alter how Express will behave
 ---
 
-<h3 id='app-settings'>settings</h3>
+# settings
 
 The following settings are provided to alter how Express will behave:
 

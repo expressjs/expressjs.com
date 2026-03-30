@@ -3,7 +3,7 @@ title: app.render
 description: Returns the rendered HTML of a view via the callback function. It accepts an optional parameter that is an object containing local variables for the vie
 ---
 
-<h3 id='app.render'>app.render(view, [locals], callback)</h3>
+# app.render(view, [locals], callback)
 
 Returns the rendered HTML of a view via the `callback` function. It accepts an optional parameter
 that is an object containing local variables for the view. It is like [res.render()](#res.render),
