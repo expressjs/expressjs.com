@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import './RelatedContent.css';
+import { H2 } from '@/components/primitives';
+import { PostCard } from '@/components/patterns';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+  lang: string;
+  title: string;
+}
+
+const { posts, lang, title } = Astro.props;
+---
+
+{
+  posts.length > 0 && (
+    <section class="related-content">
+      <H2>{title}</H2>
+      <div class="related-content__grid">
+        {posts.map((p) => {
+          const pFilename = p.id.split('/').pop() ?? p.id;
+          const pDate = new Date(pFilename.substring(0, 10)).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          });
+          const pAuthors = (p.data.authors ?? []).map((a) => ({
+            src: a.github ? `https://github.com/${a.github}.png` : '',
+            name: a.name ?? '',
+          }));
+          return (
+            <PostCard
+              href={`/${lang}/blog/${pFilename}`}
+              labels={p.data.tags ?? []}
+              title={p.data.title}
+              coverSrc={p.data.cover}
+              authors={pAuthors}
+              avatarCaption={pDate}
+            />
+          );
+        })}
+      </div>
+    </section>
+  )
+}

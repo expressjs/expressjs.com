@@ -75,5 +75,17 @@
   "hero.tagline": "Framework web veloce, non prescrittivo e minimalista per Node.js",
   "hero.getStarted": "Inizia",
   "hero.videoPause": "Metti in pausa il video in background",
-  "hero.videoPlay": "Riproduci il video in background"
+  "hero.videoPlay": "Riproduci il video in background",
+  "page.editOnGitHub": "Modifica su GitHub",
+  "post.share": "Condividi",
+  "post.shareOnX": "Condividi su X",
+  "post.shareOnBluesky": "Condividi su Bluesky",
+  "post.shareOnLinkedIn": "Condividi su LinkedIn",
+  "post.shareOnSlack": "Condividi su Slack",
+  "post.shareOnTelegram": "Condividi su Telegram",
+  "post.shareOnWhatsApp": "Condividi su WhatsApp",
+  "post.copyLink": "Copia link",
+  "post.linkCopied": "Link copiato!",
+  "post.toc": "In questa pagina",
+  "post.more": "Altro per Express"
 }

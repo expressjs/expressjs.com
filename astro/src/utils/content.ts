@@ -17,10 +17,10 @@ export function hasContentAt(
   return pages.some((page) => page.id === checkPath);
 }
 
-export interface BreadcrumbItem {
-  label: string;
+export type BreadcrumbItem = {
   href?: string;
-}
+  icon?: string;
+} & ({ label: string; ariaLabel?: string } | { label?: string; ariaLabel: string });
 
 /**
  * Find the label for a collection from the main menu

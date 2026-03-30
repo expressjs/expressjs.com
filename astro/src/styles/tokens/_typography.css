@@ -60,6 +60,7 @@
 
   --font-size-h1: var(--font-size-4xl);
   --font-size-h2: var(--font-size-2xl);
+  --font-size-h2-docs: var(--font-size-2xl);
   --font-size-h3: var(--font-size-lg);
   --font-size-h4: var(--font-size-base);
 
@@ -69,6 +70,7 @@
   @media (--md-only) {
     --font-size-h1: var(--font-size-5xl);
     --font-size-h2: var(--font-size-5xl);
+    --font-size-h2-docs: var(--font-size-3xl);
     --font-size-h3: var(--font-size-lg);
     --font-size-h4: var(--font-size-lg);
   }
@@ -76,6 +78,7 @@
   @media (--lg-up) {
     --font-size-h1: var(--font-size-6xl);
     --font-size-h2: var(--font-size-5xl);
+    --font-size-h2-docs: var(--font-size-3xl);
     --font-size-h3: var(--font-size-2xl);
     --font-size-h4: var(--font-size-xl);
   }

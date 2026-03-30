@@ -55,7 +55,11 @@ h1,
   margin: var(--space-h1) 0;
 }
 
-h2,
+h2 {
+  font-size: var(--font-size-h2-docs);
+  margin: var(--space-h2) 0;
+}
+
 .h2 {
   font-size: var(--font-size-h2);
   margin: var(--space-h2) 0;
@@ -194,9 +198,11 @@ pre code {
 
 /* Blockquote */
 blockquote {
-  padding-left: var(--space-4);
+  padding: var(--space-4) var(--space-6);
   border-left: var(--border-width-4) solid var(--color-border-primary);
+  background-color: var(--color-bg-secondary);
   font-style: italic;
+  margin: var(--space-4) 0;
 }
 
 /* Horizontal rule */
@@ -228,6 +234,14 @@ ul,
 ol {
   margin: var(--space-body) 0;
   padding-left: var(--space-6);
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
 }
 
 main {

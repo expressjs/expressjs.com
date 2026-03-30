@@ -32,6 +32,7 @@
     gap: var(--space-1);
     overflow-x: auto;
     scrollbar-width: none;
+    list-style: none;
 
     &::-webkit-scrollbar {
       display: none;

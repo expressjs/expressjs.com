@@ -13,7 +13,7 @@ export async function getStaticPaths({ paginate }: { paginate: PaginateFunction 
 
   return Object.keys(languages).flatMap((lang) => {
     const langPosts = allPosts
-      .filter((post) => post.id.startsWith('en/'))
+      .filter((post) => post.id.startsWith('en/') && post.id !== 'en/write-post')
       .sort((a, b) => {
         const aFile = a.id.split('/').pop() ?? '';
         const bFile = b.id.split('/').pop() ?? '';

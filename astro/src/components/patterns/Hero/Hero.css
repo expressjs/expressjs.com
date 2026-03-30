@@ -296,7 +296,9 @@
 }
 
 .hero__code {
-  .expressive-code {
+  .expressive-code.expressive-code {
+    margin: 0;
+
     .frame pre {
       backdrop-filter: blur(21px);
     }
