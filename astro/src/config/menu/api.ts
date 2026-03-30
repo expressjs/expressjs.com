@@ -455,19 +455,19 @@ export const apiMenu: Menu = {
               {
                 href: `/api/request/req-acceptscharsets`,
                 label: 'req.acceptsCharsets()',
-                ariaLabel: 'req.acceptedCharsets method',
+                ariaLabel: 'req.acceptsCharsets method',
                 omitFrom: ['3x'],
               },
               {
                 href: `/api/request/req-acceptsencodings`,
                 label: 'req.acceptsEncodings()',
-                ariaLabel: 'req.acceptedCharsets method',
+                ariaLabel: 'req.acceptsEncodings method',
                 omitFrom: ['3x'],
               },
               {
                 href: `/api/request/req-acceptslanguages`,
                 label: 'req.acceptsLanguages()',
-                ariaLabel: 'req.acceptedLanguages method',
+                ariaLabel: 'req.acceptsLanguages method',
                 omitFrom: ['3x'],
               },
               {
