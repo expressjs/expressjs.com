@@ -9,7 +9,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 <h2>Overview</h2>
 
-_Middleware_ functions are functions that have access to the [request object](/en/5x/api#req) (`req`), the [response object](/en/5x/api#res) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
+_Middleware_ functions are functions that have access to the [request object](/api/request/) (`req`), the [response object](/api/response/) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
 
 Middleware functions can perform the following tasks:
 
@@ -43,11 +43,11 @@ The following figure shows the elements of a middleware function call:
 </div>
 
 <div class="callout" id="callout5">
-  HTTP <a href="/en/5x/api#res">response</a> argument to the middleware function, called "res" by
+  HTTP <a href="/api/response/">response</a> argument to the middleware function, called "res" by
   convention.
 </div>
 
-<div class="callout" id="callout6">HTTP <a href="/en/5x/api#req">request</a> argument to the middleware function, called "req" by convention.</div>
+<div class="callout" id="callout6">HTTP <a href="/api/request/">request</a> argument to the middleware function, called "req" by convention.</div>
 </td></tr>
 </table>
 </div>

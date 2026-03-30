@@ -8,7 +8,7 @@ description: Routes HTTP POST requests to the specified path with the specified 
 Routes HTTP POST requests to the specified path with the specified callback functions.
 For more information, see the [routing guide](/en/guide/routing).
 
-{% include api/en/4x/routing-args.html %}
+{% include api/routing-args.html %}
 
 #### Example
 

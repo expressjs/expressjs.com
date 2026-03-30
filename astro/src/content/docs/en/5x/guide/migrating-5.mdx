@@ -222,7 +222,7 @@ app.all('/', (req, res) => {
 
 A leading colon character (:) in the name for the `app.param(name, fn)` function is a remnant of Express 3, and for the sake of backwards compatibility, Express 4 supported it with a deprecation notice. Express 5 will silently ignore it and use the name parameter without prefixing it with a colon.
 
-This should not affect your code if you follow the Express 4 documentation of [app.param](/en/4x/api#app.param), as it makes no mention of the leading colon.
+This should not affect your code if you follow the Express 4 documentation of [app.param](/api/application/app-param), as it makes no mention of the leading colon.
 
 <h3 id="req.param">req.param(name)</h3>
 

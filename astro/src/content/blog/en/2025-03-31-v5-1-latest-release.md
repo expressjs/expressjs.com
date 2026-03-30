@@ -20,7 +20,7 @@ time. Since then we have had tons of great contributors help get things into bet
 Open Source project, we love contributions to help us improve so as you upgrade please continue to open PRs to fix
 anything we missed.
 
-You can find our [v5 docs](/en/5x/api) and our [migration guide](/en/guide/migrating-5) on the website.
+You can find our [v5 docs](/api) and our [migration guide](/en/guide/migrating-5) on the website.
 
 ### Migration Support
 

@@ -11,7 +11,7 @@ Mounts the specified [middleware](/en/guide/using-middleware) function or functi
 at the specified path:
 the middleware function is executed when the base of the requested path matches `path`.
 
-{/* {% include api/en/4x/routing-args.html %} */}
+{/* {% include api/routing-args.html %} */}
 
 #### Description
 
@@ -30,14 +30,13 @@ app.use(function (req, res, next) {
 ```
 
 <Alert type="info">
-**NOTE**
 
 Sub-apps will:
 
 - Not inherit the value of settings that have a default value. You must set the value in the sub-app.
 - Inherit the value of settings with no default value.
 
-For details, see [Application settings](/en/4x/api/application/app-settings/).
+For details, see [Application settings](/api/application/app-set#app.settings.table).
 
 </Alert>
 
