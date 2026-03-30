@@ -533,6 +533,19 @@ export const apiMenu: Menu = {
                 href: `/api/response/res-charset`,
                 label: 'res.charset',
                 ariaLabel: 'res.charset property',
+                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: `/api/response/res-app`,
+                label: 'res.app',
+                ariaLabel: 'res.app property',
+                omitFrom: ['3x'],
+              },
+              {
+                href: `/api/response/res-headerssent`,
+                label: 'res.headersSent',
+                ariaLabel: 'res.headersSent property',
+                omitFrom: ['3x'],
               },
               {
                 href: `/api/response/res-locals`,
@@ -544,12 +557,6 @@ export const apiMenu: Menu = {
                 label: 'res.req',
                 ariaLabel: 'res.req property',
               },
-              {
-                href: `/api/response/res-app`,
-                label: 'res.app',
-                ariaLabel: 'res.app property',
-                omitFrom: ['3x'],
-              },
             ],
           },
         },
@@ -558,6 +565,12 @@ export const apiMenu: Menu = {
           ariaLabel: 'menu.responseMethodsAria',
           submenu: {
             items: [
+              {
+                href: `/api/response/res-append`,
+                label: 'res.append()',
+                ariaLabel: 'res.append method',
+                omitFrom: ['3x'],
+              },
               {
                 href: `/api/response/res-attachment`,
                 label: 'res.attachment()',
@@ -577,6 +590,12 @@ export const apiMenu: Menu = {
                 href: `/api/response/res-download`,
                 label: 'res.download()',
                 ariaLabel: 'res.download method',
+              },
+              {
+                href: `/api/response/res-end`,
+                label: 'res.end()',
+                ariaLabel: 'res.end method',
+                omitFrom: ['3x'],
               },
               {
                 href: `/api/response/res-format`,
@@ -626,7 +645,20 @@ export const apiMenu: Menu = {
               {
                 href: `/api/response/res-sendfile`,
                 label: 'res.sendfile()',
+                ariaLabel: 'res.sendfile method',
+                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: `/api/response/res-sendFile`,
+                label: 'res.sendFile()',
                 ariaLabel: 'res.sendFile method',
+                omitFrom: ['3x'],
+              },
+              {
+                href: `/api/response/res-sendstatus`,
+                label: 'res.sendStatus()',
+                ariaLabel: 'res.sendStatus method',
+                omitFrom: ['3x'],
               },
               {
                 href: `/api/response/res-set`,
@@ -642,6 +674,12 @@ export const apiMenu: Menu = {
                 href: `/api/response/res-type`,
                 label: 'res.type()',
                 ariaLabel: 'res.type method',
+              },
+              {
+                href: `/api/response/res-vary`,
+                label: 'res.vary()',
+                ariaLabel: 'res.vary method',
+                omitFrom: ['3x'],
               },
             ],
           },

@@ -1,6 +1,6 @@
 ---
 title: Request Object
-description: The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+description: The request object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
@@ -34,15 +34,6 @@ The `req` object is an enhanced version of Node's own request object
 and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_incomingmessage).
 
 ## Properties
-
-<Alert type="alert">
-
-`req.files` is no longer available on the `req` object by default. To access uploaded files
-on the `req.files` object, use multipart-handling middleware like [multer](https://www.npmjs.com/package/multer), [multiparty](https://www.npmjs.com/package/multiparty), [busboy](https://www.npmjs.com/package/busboy),
-[formidable](https://www.npmjs.com/package/formidable),
-or [pez](https://www.npmjs.com/package/pez).
-
-</Alert>
 
 <CardList gap="6">
 
@@ -159,9 +150,6 @@ The `req` object also contains a number of methods that can be used to perform v
     />
   </a>
   <a href="/en/5x/api/request/req-range">
-    <Card
-      title="req.range()"
-      body="Range header parser."
-    />
+    <Card title="req.range()" body="Range header parser." />
   </a>
 </CardList>
