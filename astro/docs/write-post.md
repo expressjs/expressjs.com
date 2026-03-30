@@ -1,11 +1,4 @@
----
-title: How to write a blog post
-description: Learn how to propose and write a blog post for the Express.js blog, including submission guidelines and steps to contribute your content.
----
-
-import Alert from '@components/primitives/Alert/Alert.astro';
-
-{/* [Blogger](/images/blogger.jpg) */}
+# How to write a blog post
 
 If you have an idea for a blog post, follow these steps to propose it and potentially get it published!
 
@@ -17,11 +10,7 @@ If you have an idea for a blog post, follow these steps to propose it and potent
 
     If the Express TC accepts your proposal, start to write your post by forking the [expressjs.com](https://github.com/expressjs/expressjs.com) repository and cloning it to your local machine. Once you open a pull request, you'll be able to preview your post on GitHub. See step six below.
 
-<Alert type="info">
-
-Optional: To run the site locally and preview your post before opening a PR, see the [setup instructions in the README](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#expressjscom).
-
-</Alert>
+> Optional: To run the site locally and preview your post before opening a PR, see the [setup instructions in the README](https://github.com/expressjs/expressjs.com?tab=readme-ov-file#expressjscom).
 
 1.  ### Create a new file
 
