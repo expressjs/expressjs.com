@@ -33,7 +33,7 @@ const h1 = headings.find((h) => h.depth === 1);
 const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 const tocHeadings =
   h1 && filteredHeadings.length > 0
-    ? [{ depth: 2, slug: h1.slug, text: 'Overview' }, ...filteredHeadings]
+    ? [{ depth: 2, slug: h1.slug, text: t('toc.overview') }, ...filteredHeadings]
     : filteredHeadings;
 ---
 
