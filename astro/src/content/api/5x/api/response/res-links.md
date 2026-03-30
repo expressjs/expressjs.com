@@ -3,7 +3,7 @@ title: res.links
 description: Joins the links provided as properties of the parameter to populate the response Link HTTP header field
 ---
 
-<h3 id='res.links'>res.links(links)</h3>
+# res.links(links)
 
 Joins the `links` provided as properties of the parameter to populate the response's
 `Link` HTTP header field.

@@ -3,7 +3,7 @@ title: req.host
 description: Returns the hostname from the "Host" header field (void of portno).
 ---
 
-<h3 id='req.host'>req.host</h3>
+# req.host
 
 Returns the hostname from the "Host" header field (void of portno).
 

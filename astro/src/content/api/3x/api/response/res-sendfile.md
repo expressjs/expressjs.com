@@ -3,7 +3,7 @@ title: res.sendfile
 description: Transfer the file at the given path.
 ---
 
-<h3 id='res.sendfile'>res.sendfile(path, [options], [fn]])</h3>
+# res.sendfile(path, [options], [fn]])
 
 Transfer the file at the given `path`.
 

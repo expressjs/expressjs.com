@@ -3,7 +3,7 @@ title: express.Router
 description: Creates a new [router](#router) object.
 ---
 
-<h3 id='express.router' class='h2'>express.Router([options])</h3>
+# express.Router([options])
 
 Creates a new [router](#router) object.
 

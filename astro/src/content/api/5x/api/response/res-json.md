@@ -3,7 +3,7 @@ title: res.json
 description: Sends a JSON response. This method sends a response (with the correct content-type) that is the parameter converted to a
 ---
 
-<h3 id='res.json'>res.json([body])</h3>
+# res.json([body])
 
 Sends a JSON response. This method sends a response (with the correct content-type) that is the parameter converted to a
 JSON string using [JSON.stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).

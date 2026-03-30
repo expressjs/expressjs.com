@@ -3,7 +3,7 @@ title: app.listen
 description: Bind and listen for connections on the given host and port,
 ---
 
-<h3 id='app.listen'>app.listen()</h3>
+# app.listen()
 
 Bind and listen for connections on the given host and port,
 this method is identical to node's <a href="http://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback">http.Server#listen()</a>.

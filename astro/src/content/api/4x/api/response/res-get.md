@@ -3,7 +3,7 @@ title: res.get
 description: Returns the HTTP response header specified by field.
 ---
 
-<h3 id='res.get'>res.get(field)</h3>
+# res.get(field)
 
 Returns the HTTP response header specified by `field`.
 The match is case-insensitive.

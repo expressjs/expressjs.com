@@ -3,7 +3,7 @@ title: res.links
 description: Join the given links to populate the Link response header field.
 ---
 
-<h3 id='res.links'>res.links(links)</h3>
+# res.links(links)
 
 Join the given `links` to populate the "Link" response header field.
 

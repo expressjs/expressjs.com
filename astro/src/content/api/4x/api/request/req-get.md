@@ -3,7 +3,7 @@ title: req.get
 description: Returns the specified HTTP request header field (case-insensitive match).
 ---
 
-<h3 id='req.get'>req.get(field)</h3>
+# req.get(field)
 
 Returns the specified HTTP request header field (case-insensitive match).
 The `Referrer` and `Referer` fields are interchangeable.

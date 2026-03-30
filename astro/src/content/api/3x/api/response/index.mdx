@@ -1,0 +1,105 @@
+---
+title: API Response Overview
+description: An overview of the API response object in Express.js, detailing its properties and methods for handling HTTP responses.
+---
+
+import Card from '@components/primitives/Card/Card.astro';
+import { CardList } from '@components/patterns';
+
+# Response
+
+The `res` object is an enhanced version of Node's own response object
+and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_serverresponse).
+
+## Properties
+
+The `res` object contains a number of properties that provide information about the HTTP response.
+
+<CardList gap="6">
+  <a href="/en/3x/api/response/res-charset">
+    <Card title="res.charset" body="The charset of the request body, if specified." />
+  </a>
+  <a href="/en/3x/api/response/res-locals">
+    <Card
+      title="res.locals"
+      body="An object that contains response local variables scoped to the request."
+    />
+  </a>
+
+  <a href="/en/3x/api/response/res-req">
+    <Card title="res.req" body="The request object." />
+  </a>
+</CardList>
+
+## Methods
+
+The `res` object contains a number of methods that can be used to send responses, set headers, and more.
+
+<CardList gap="6">
+  <a href="/en/3x/api/response/res-attachment">
+    <Card
+      title="res.attachment()"
+      body="Set the Content-Disposition header to 'attachment' with the specified file name."
+    />
+  </a>
+  <a href="/en/3x/api/response/res-clearcookie">
+    <Card title="res.clearCookie()" body="Clear the cookie specified by name." />
+  </a>
+  <a href="/en/3x/api/response/res-cookie">
+    <Card title="res.cookie()" body="Set cookie name to value, with the given options." />
+  </a>
+  <a href="/en/3x/api/response/res-download">
+    <Card title="res.download()" body="Transfer the specified file as an attachment." />
+  </a>
+  <a href="/en/3x/api/response/res-format">
+    <Card
+      title="res.format()"
+      body="Perform content-negotiation on the Accept HTTP header on the request object."
+    />
+  </a>
+  <a href="/en/3x/api/response/res-get">
+    <Card
+      title="res.get()"
+      body="Get the value of the specified response header field or all fields."
+    />
+  </a>
+  <a href="/en/3x/api/response/res-json">
+    <Card title="res.json()" body="Send a JSON response." />
+  </a>
+  <a href="/en/3x/api/response/res-jsonp">
+    <Card title="res.jsonp()" body="Send a JSON response with JSONP support." />
+  </a>
+  <a href="/en/3x/api/response/res-links">
+    <Card title="res.links()" body="Set the Link header field with the given links." />
+  </a>
+  <a href="/en/3x/api/response/res-location">
+    <Card title="res.location()" body="Set the location header." />
+  </a>
+  <a href="/en/3x/api/response/res-redirect">
+    <Card
+      title="res.redirect()"
+      body="Redirect to the URL derived from the specified path, with specified status, a positive integer between 300 and 308."
+    />
+  </a>
+  <a href="/en/3x/api/response/res-send">
+    <Card title="res.send()" body="Send a response of various types." />
+  </a>
+  <a href="/en/3x/api/response/res-sendfile">
+    <Card title="res.sendfile()" body="Transfer the file at the given path." />
+  </a>
+  <a href="/en/3x/api/response/res-set">
+    <Card
+      title="res.set()"
+      body="Set header field to value, or pass an object to set multiple fields at once."
+    />
+  </a>
+  <a href="/en/3x/api/response/res-status">
+    <Card title="res.status()" body="Set the HTTP status for the response." />
+  </a>
+  <a href="/en/3x/api/response/res-type">
+    <Card
+      title="res.type()"
+      body="Set the Content-Type HTTP header to the MIME type as determined by the specified extension."
+    />
+  </a>
+</CardList>

@@ -3,7 +3,7 @@ title: req.subdomains
 description: Return subdomains as an array.
 ---
 
-<h3 id='req.subdomains'>req.subdomains</h3>
+# req.subdomains
 
 Return subdomains as an array.
 

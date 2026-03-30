@@ -3,7 +3,7 @@ title: app.path
 description: Returns the canonical path of the app, a string.
 ---
 
-<h3 id='app.path'>app.path()</h3>
+# app.path()
 
 Returns the canonical path of the app, a string.
 

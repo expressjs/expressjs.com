@@ -3,7 +3,7 @@ title: app.get
 description: Routes HTTP GET requests to the specified path with the specified callback functions.
 ---
 
-<h3 id='app.get.method'>app.get(path, callback [, callback ...])</h3>
+# app.get(path, callback [, callback ...])
 
 Routes HTTP GET requests to the specified path with the specified callback functions.
 

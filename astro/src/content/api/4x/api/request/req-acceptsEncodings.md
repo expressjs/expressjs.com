@@ -3,7 +3,7 @@ title: req.acceptsEncodings
 description: Returns the first accepted encoding of the specified encodings,
 ---
 
-<h3 id='req.acceptsEncodings'>req.acceptsEncodings(encoding [, ...])</h3>
+# req.acceptsEncodings(encoding [, ...])
 
 Returns the first accepted encoding of the specified encodings,
 based on the request's `Accept-Encoding` HTTP header field.
