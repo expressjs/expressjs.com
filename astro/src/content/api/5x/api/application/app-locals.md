@@ -3,7 +3,7 @@ title: app.locals
 description: The app.locals object has properties that are local variables within the application,
 ---
 
-<h3 id='app.locals'>app.locals</h3>
+# app.locals
 
 The `app.locals` object has properties that are local variables within the application,
 and will be available in templates rendered with [res.render](#res.render).

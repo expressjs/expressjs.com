@@ -3,7 +3,7 @@ title: directory
 description: Directory serving middleware, serves the given path.
 ---
 
-<h3 id='directory'>directory()</h3>
+# directory()
 
 Directory serving middleware, serves the given `path`.
 This middleware may be paired with `static()` to serve

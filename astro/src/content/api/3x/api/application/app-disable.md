@@ -3,7 +3,7 @@ title: app.disable
 description: Set setting name to false.
 ---
 
-<h3 id='app.disable'>app.disable(name)</h3>
+# app.disable(name)
 
 Set setting `name` to `false`.
 

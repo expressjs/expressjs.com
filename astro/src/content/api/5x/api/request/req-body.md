@@ -3,7 +3,7 @@ title: req.body
 description: Contains key-value pairs of data submitted in the request body.
 ---
 
-<h3 id='req.body'>req.body</h3>
+# req.body
 
 Contains key-value pairs of data submitted in the request body.
 By default, it is `undefined`, and is populated when you use body-parsing middleware such

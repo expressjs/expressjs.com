@@ -3,7 +3,7 @@ title: app.all
 description: This method is like the standard [app.METHOD()](#app.METHOD) methods,
 ---
 
-<h3 id='app.all'>app.all(path, callback [, callback ...])</h3>
+# app.all(path, callback [, callback ...])
 
 This method is like the standard [app.METHOD()](#app.METHOD) methods,
 except it matches all HTTP verbs.

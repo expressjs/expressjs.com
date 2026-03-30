@@ -3,7 +3,7 @@ title: req.ip
 description: Contains the remote IP address of the request.
 ---
 
-<h3 id='req.ip'>req.ip</h3>
+# req.ip
 
 Contains the remote IP address of the request.
 

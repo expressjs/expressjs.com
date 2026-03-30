@@ -3,7 +3,7 @@ title: res.headersSent
 description: Boolean property that indicates if the app sent HTTP headers for the response.
 ---
 
-<h3 id='res.headersSent'>res.headersSent</h3>
+# res.headersSent
 
 Boolean property that indicates if the app sent HTTP headers for the response.
 

@@ -3,7 +3,7 @@ title: express.urlencoded
 description: This is a built-in middleware function in Express. It parses incoming requests
 ---
 
-<h3 id='express.urlencoded' class='h2'>express.urlencoded([options])</h3>
+# express.urlencoded([options])
 
 This is a built-in middleware function in Express. It parses incoming requests
 with urlencoded payloads and is based on [body-parser](/en/resources/middleware/body-parser).

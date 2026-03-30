@@ -3,7 +3,7 @@ title: csrf
 description: CSRF protection middleware.
 ---
 
-<h3 id='csrf'>csrf()</h3>
+# csrf()
 
 CSRF protection middleware.
 

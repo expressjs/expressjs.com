@@ -3,7 +3,7 @@ title: req.acceptsLanguages
 description: Returns the first accepted language of the specified languages,
 ---
 
-<h3 id='req.acceptsLanguages'>req.acceptsLanguages([lang, ...])</h3>
+# req.acceptsLanguages([lang, ...])
 
 Returns the first accepted language of the specified languages,
 based on the request's `Accept-Language` HTTP header field.

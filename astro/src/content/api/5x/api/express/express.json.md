@@ -3,7 +3,7 @@ title: express.json
 description: This is a built-in middleware function in Express. It parses incoming requests
 ---
 
-<h3 id='express.json' class='h2'>express.json([options])</h3>
+# express.json([options])
 
 This is a built-in middleware function in Express. It parses incoming requests
 with JSON payloads and is based on

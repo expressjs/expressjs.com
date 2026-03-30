@@ -3,7 +3,7 @@ title: app.VERB
 description: The app.VERB methods provide the routing functionality
 ---
 
-<h3 id='app.VERB'>app.VERB(path, [callback...], callback)</h3>
+# app.VERB(path, [callback...], callback)
 
 The `app.VERB()` methods provide the routing functionality
 in Express, where <strong>VERB</strong> is one of the HTTP verbs, such

@@ -3,7 +3,7 @@ title: cookieParser
 description: Parses the Cookie header field and populates req.cookies
 ---
 
-<h3 id='cookieParser'>cookieParser()</h3>
+# cookieParser()
 
 Parses the Cookie header field and populates `req.cookies`
 with an object keyed by the cookie names. Optionally you may enabled

@@ -3,7 +3,7 @@ title: req.hostname
 description: Contains the hostname derived from the Host HTTP header.
 ---
 
-<h3 id='req.hostname'>req.hostname</h3>
+# req.hostname
 
 Contains the hostname derived from the `Host` HTTP header.
 

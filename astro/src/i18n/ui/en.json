@@ -71,6 +71,8 @@
   "menu.middleware": "Middleware",
   "menu.middlewareAria": "Middleware resources",
   "menu.middlewareOverviewAria": "Middleware overview",
+  "menu.types": "Built-in",
+  "menu.middlewareTypesAria": "Built-in middleware",
   "404.title": "404 - Page Not Found",
   "404.description": "The page you are looking for could not be found.",
   "404.heading": "Page Not Found",

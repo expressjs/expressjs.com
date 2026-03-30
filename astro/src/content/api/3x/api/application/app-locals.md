@@ -3,7 +3,7 @@ title: app.locals
 description: Application local variables are provided to all templates
 ---
 
-<h3 id='app.locals'>app.locals</h3>
+# app.locals
 
 Application local variables are provided to all templates
 rendered within the application. This is useful for providing

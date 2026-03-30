@@ -3,7 +3,7 @@ title: app.listen
 description: Starts a UNIX socket and listens for connections on the given path.
 ---
 
-<h3 id='app.listen_path_callback'>app.listen(path, [callback])</h3>
+# app.listen(path, [callback])
 
 Starts a UNIX socket and listens for connections on the given path.
 This method is identical to Node's [http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen).
@@ -14,7 +14,7 @@ const app = express();
 app.listen('/tmp/sock');
 ```
 
-<h3 id='app.listen'>app.listen([port[, host[, backlog]]][, callback])</h3>
+# app.listen([port[, host[, backlog]]][, callback])
 
 Binds and listens for connections on the specified host and port.
 This method is identical to Node's [http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen).

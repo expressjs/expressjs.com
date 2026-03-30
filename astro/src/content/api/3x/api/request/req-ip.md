@@ -3,7 +3,7 @@ title: req.ip
 description: Return the remote address, or when "trust proxy"
 ---
 
-<h3 id='req.ip'>req.ip</h3>
+# req.ip
 
 Return the remote address, or when "trust proxy"
 is enabled - the upstream address.

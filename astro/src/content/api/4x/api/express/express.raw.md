@@ -3,7 +3,7 @@ title: express.raw
 description: This middleware is available in Express v4.17.0 onwards.
 ---
 
-<h3 id='express.raw' class='h2'>express.raw([options])</h3>
+# express.raw([options])
 
 <div class="doc-box doc-info" markdown="1">
 This middleware is available in Express v4.17.0 onwards.

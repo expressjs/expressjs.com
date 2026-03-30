@@ -3,7 +3,7 @@ title: res.download
 description: Transfer the file at path as an attachment,
 ---
 
-<h3 id='res.download'>res.download(path, [filename], [fn])</h3>
+# res.download(path, [filename], [fn])
 
 Transfer the file at `path` as an "attachment",
 typically browsers will prompt the user for download. The

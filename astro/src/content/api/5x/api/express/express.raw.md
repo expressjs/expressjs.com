@@ -3,7 +3,7 @@ title: express.raw
 description: This is a built-in middleware function in Express. It parses incoming request
 ---
 
-<h3 id='express.raw' class='h2'>express.raw([options])</h3>
+# express.raw([options])
 
 This is a built-in middleware function in Express. It parses incoming request
 payloads into a `Buffer` and is based on

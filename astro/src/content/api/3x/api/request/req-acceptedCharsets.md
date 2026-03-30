@@ -3,7 +3,7 @@ title: req.acceptedCharsets
 description: Return an array of Accepted charsets ordered from highest quality to lowest.
 ---
 
-<h3 id='req.acceptedCharsets'>req.acceptedCharsets</h3>
+# req.acceptedCharsets
 
 Return an array of Accepted charsets ordered from highest quality to lowest.
 

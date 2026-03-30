@@ -3,7 +3,7 @@ title: bodyParser
 description: Request body parsing middleware supporting JSON, urlencoded,
 ---
 
-<h3 id='bodyParser'>bodyParser()</h3>
+# bodyParser()
 
 Request body parsing middleware supporting JSON, urlencoded,
 and multipart requests. This middleware is simply a wrapper

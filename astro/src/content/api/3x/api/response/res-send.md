@@ -3,7 +3,7 @@ title: res.send
 description: Send a response.
 ---
 
-<h3 id='res.send'>res.send([body|status], [body])</h3>
+# res.send([body|status], [body])
 
 Send a response.
 

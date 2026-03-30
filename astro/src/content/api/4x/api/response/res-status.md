@@ -3,7 +3,7 @@ title: res.status
 description: Sets the HTTP status for the response.
 ---
 
-<h3 id='res.status'>res.status(code)</h3>
+# res.status(code)
 
 Sets the HTTP status for the response.
 It is a chainable alias of Node's [response.statusCode](https://nodejs.org/api/http.html#http_response_statuscode).

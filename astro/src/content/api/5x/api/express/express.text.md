@@ -3,7 +3,7 @@ title: express.text
 description: This is a built-in middleware function in Express. It parses incoming request
 ---
 
-<h3 id='express.text' class='h2'>express.text([options])</h3>
+# express.text([options])
 
 This is a built-in middleware function in Express. It parses incoming request
 payloads into a string and is based on

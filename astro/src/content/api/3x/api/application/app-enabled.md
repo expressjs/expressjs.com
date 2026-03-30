@@ -3,7 +3,7 @@ title: app.enabled
 description: Check if setting name is enabled.
 ---
 
-<h3 id='app.enabled'>app.enabled(name)</h3>
+# app.enabled(name)
 
 Check if setting `name` is enabled.
 

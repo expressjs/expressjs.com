@@ -3,7 +3,7 @@ title: express.urlencoded
 description: This middleware is available in Express v4.16.0 onwards.
 ---
 
-<h3 id='express.urlencoded' class='h2'>express.urlencoded([options])</h3>
+# express.urlencoded([options])
 
 <div class="doc-box doc-info" markdown="1">
 This middleware is available in Express v4.16.0 onwards.

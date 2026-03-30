@@ -3,7 +3,7 @@ title: res.locals
 description: Response local variables are scoped to the request, thus only
 ---
 
-<h3 id='res.locals'>res.locals</h3>
+# res.locals
 
 Response local variables are scoped to the request, thus only
 available to the view(s) rendered during that request / response

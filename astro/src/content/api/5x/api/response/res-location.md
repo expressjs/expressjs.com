@@ -3,7 +3,7 @@ title: res.location
 description: Sets the response Location HTTP header to the specified path parameter.
 ---
 
-<h3 id='res.location'>res.location(path)</h3>
+# res.location(path)
 
 Sets the response `Location` HTTP header to the specified `path` parameter.
 

@@ -3,7 +3,7 @@ title: router.METHOD
 description: The router.METHOD methods provide the routing functionality in Express,
 ---
 
-<h3 id='router.METHOD'>router.METHOD(path, [callback, ...] callback)</h3>
+# router.METHOD(path, [callback, ...] callback)
 
 The `router.METHOD()` methods provide the routing functionality in Express,
 where METHOD is one of the HTTP methods, such as GET, PUT, POST, and so on,

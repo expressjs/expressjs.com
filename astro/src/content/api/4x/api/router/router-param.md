@@ -3,7 +3,7 @@ title: router.param
 description: Adds callback triggers to route parameters, where name is the name of the parameter and callback is the callback function. Although name is technically optional, it is required.
 ---
 
-<h3 id='router.param'>router.param(name, callback)</h3>
+# router.param(name, callback)
 
 Adds callback triggers to route parameters, where `name` is the name of the parameter and `callback` is the callback function. Although `name` is technically optional, using this method without it is deprecated starting with Express v4.11.0 (see below).
 

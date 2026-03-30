@@ -3,7 +3,7 @@ title: res.redirect
 description: Redirects to the URL derived from the specified path, with specified status, a positive integer
 ---
 
-<h3 id='res.redirect'>res.redirect([status,] path)</h3>
+# res.redirect([status,] path)
 
 Redirects to the URL derived from the specified `path`, with specified `status`, a positive integer
 that corresponds to an [HTTP status code](https://www.rfc-editor.org/rfc/rfc9110#name-status-codes) .

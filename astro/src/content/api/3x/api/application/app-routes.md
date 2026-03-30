@@ -3,7 +3,7 @@ title: app.routes
 description: The app.routes object houses all of the routes defined mapped
 ---
 
-<h3 id='app.routes'>app.routes</h3>
+# app.routes
 
 The `app.routes` object houses all of the routes defined mapped
 by the associated HTTP verb. This object may be used for introspection capabilities,

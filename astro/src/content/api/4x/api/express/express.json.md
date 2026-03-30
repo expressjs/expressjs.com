@@ -3,7 +3,7 @@ title: express.json
 description: This middleware is available in Express v4.16.0 onwards.
 ---
 
-<h3 id='express.json' class='h2'>express.json([options])</h3>
+# express.json([options])
 
 <div class="doc-box doc-info" markdown="1">
 This middleware is available in Express v4.16.0 onwards.

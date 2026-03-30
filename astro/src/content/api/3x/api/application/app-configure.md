@@ -3,7 +3,7 @@ title: app.configure
 description: Conditionally invoke callback when env matches app.get env,
 ---
 
-<h3 id='app.configure'>app.configure([env], callback)</h3>
+# app.configure([env], callback)
 
 Conditionally invoke `callback` when `env` matches `app.get('env')`,
 aka `process.env.NODE_ENV`. This method remains for legacy reasons, and is effectively
