@@ -26,8 +26,3 @@ https://www.netlify.com/
 ## Ignore temporaly sitemap
 
 https://expressjs.com/sitemap-index.xml
-
-# Exclude badge/shield services that redirect by design
-
-https://coveralls.io/._
-https://img.shields.io/._
