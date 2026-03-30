@@ -60,15 +60,16 @@ const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 }
 
 <script>
-  const details = document.querySelector<HTMLDetailsElement>('.toc__details');
-  if (details) {
-    const bp = getComputedStyle(document.documentElement).getPropertyValue('--breakpoint-md').trim();
+  function initToc(details: HTMLDetailsElement) {
+    const bp = getComputedStyle(document.documentElement)
+      .getPropertyValue('--breakpoint-md')
+      .trim();
     const mq = window.matchMedia(`(min-width: ${bp})`);
     const summaryLabel = details.querySelector<HTMLElement>('.toc__summary-label');
     const defaultLabel = summaryLabel?.textContent ?? '';
 
     function syncOpen(matches: boolean) {
-      if (details) details.open = matches;
+      details.open = matches;
     }
 
     mq.addEventListener('change', (e) => syncOpen(e.matches));
@@ -78,62 +79,70 @@ const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
       if (mq.matches && !details.open) details.open = true;
     });
 
-    // Active heading highlight via IntersectionObserver
     const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.toc__link');
     if (tocLinks.length) {
-      let activeLink: HTMLAnchorElement | null = null;
+      const linkMap = new Map<string, HTMLAnchorElement>();
       const headingEls: HTMLElement[] = [];
+
+      tocLinks.forEach((link) => {
+        const id = link.getAttribute('href')?.slice(1);
+        if (id) {
+          linkMap.set(id, link);
+          const el = document.getElementById(id);
+          if (el) headingEls.push(el);
+        }
+        link.addEventListener('click', () => {
+          if (!mq.matches) details.open = false;
+        });
+      });
+
+      let activeLink: HTMLAnchorElement | null = null;
+      const visibleHeadings = new Set<string>();
+
+      function setActive(link: HTMLAnchorElement | null) {
+        if (link === activeLink) return;
+        activeLink?.classList.remove('toc__link--active');
+        activeLink = link;
+        link?.classList.add('toc__link--active');
+        if (summaryLabel && !mq.matches) {
+          summaryLabel.textContent = link?.textContent ?? defaultLabel;
+        }
+      }
 
       const observer = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
-            const link = document.querySelector<HTMLAnchorElement>(
-              `.toc__link[href="#${entry.target.id}"]`
-            );
             if (entry.isIntersecting) {
-              activeLink?.classList.remove('toc__link--active');
-              link?.classList.add('toc__link--active');
-              activeLink = link;
+              visibleHeadings.add(entry.target.id);
+            } else {
+              visibleHeadings.delete(entry.target.id);
+            }
+          }
 
-              if (summaryLabel && !mq.matches) {
-                summaryLabel.textContent = link?.textContent ?? defaultLabel;
-              }
+          for (const el of headingEls) {
+            if (visibleHeadings.has(el.id)) {
+              setActive(linkMap.get(el.id) ?? null);
+              return;
             }
           }
         },
         { rootMargin: '0px 0px -70% 0px', threshold: 0 }
       );
 
-      tocLinks.forEach((link) => {
-        const id = link.getAttribute('href')?.slice(1);
-        if (id) {
-          const el = document.getElementById(id);
-          if (el) {
-            headingEls.push(el);
-            observer.observe(el);
-          }
-        }
-      });
+      headingEls.forEach((el) => observer.observe(el));
 
       function checkArticleBounds() {
         if (!summaryLabel || mq.matches || headingEls.length === 0) return;
         const atTop = headingEls[0].getBoundingClientRect().top > window.innerHeight;
         const atBottom =
           window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 50;
-        if (atTop || atBottom) {
-          activeLink?.classList.remove('toc__link--active');
-          activeLink = null;
-          summaryLabel.textContent = defaultLabel;
-        }
+        if (atTop || atBottom) setActive(null);
       }
 
       window.addEventListener('scroll', checkArticleBounds, { passive: true });
-
-      tocLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-          if (!mq.matches && details) details.open = false;
-        });
-      });
     }
   }
+
+  const details = document.querySelector<HTMLDetailsElement>('.toc__details');
+  if (details) initToc(details);
 </script>
