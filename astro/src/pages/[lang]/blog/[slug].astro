@@ -5,13 +5,7 @@ import { Container, Button } from '@/components/primitives';
 import { languages } from '@i18n/locales';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import { Icon } from 'astro-icon/components';
-import {
-  PageTopbar,
-  PostHeader,
-  TableOfContents,
-  WriteBanner,
-  RelatedContent,
-} from '@/components/patterns';
+import { PageTopbar, PostHeader, TableOfContents, RelatedContent } from '@/components/patterns';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
