@@ -8,6 +8,7 @@ authors:
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+
 The Express team has released a new patch version of [Multer](https://www.npmjs.com/package/multer), addressing a high-severity vulnerability that could lead to a Denial of Service (DoS) attack.
 
 <Alert type="warning">
@@ -22,7 +23,7 @@ This release addresses the following vulnerability:
 
 An attacker can trigger this vulnerability by sending an upload request with an empty string as the field name. This malformed request causes an unhandled exception, leading to a crash of the server process.
 
-**Affected versions**: `>=1.4.4-lts.1` and `<2.0.1`  
+**Affected versions**: `>=1.4.4-lts.1` and `<2.0.1`
 **Patched version**: `2.0.1`
 
 For more details, see [GHSA-g5hg-p3ph-g8qg](https://github.com/expressjs/multer/security/advisories/GHSA-g5hg-p3ph-g8qg).

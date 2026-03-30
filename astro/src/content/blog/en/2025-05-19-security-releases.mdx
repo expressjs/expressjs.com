@@ -8,6 +8,7 @@ authors:
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
+
 The Express team has released a new major version of [Multer](https://www.npmjs.com/package/multer) addressing two high-severity security vulnerabilities. This update improves the reliability and security of handling file uploads in Express applications.
 
 <Alert type="warning">
@@ -27,7 +28,7 @@ When the HTTP request stream emits an error, the internal `busboy` stream is not
 
 This leads to unclosed streams accumulating over time, consuming memory and file descriptors. Under sustained or repeated failure conditions, this can result in denial of service, requiring manual server restarts to recover. All users of Multer handling file uploads are potentially impacted.
 
-**Affected versions**: `<2.0.0`  
+**Affected versions**: `<2.0.0`
 **Patched version**: `>=2.0.0`
 
 For more details, see [GHSA-44fp-w29j-9vj5](https://github.com/expressjs/multer/security/advisories/GHSA-44fp-w29j-9vj5).
@@ -38,7 +39,7 @@ For more details, see [GHSA-44fp-w29j-9vj5](https://github.com/expressjs/multer/
 
 A specially crafted request can cause an unhandled exception inside Multer, resulting in a crash of the server process.
 
-**Affected versions**: `>=1.4.4-lts.1` and `<2.0.0`  
+**Affected versions**: `>=1.4.4-lts.1` and `<2.0.0`
 **Patched version**: `>=2.0.0`
 
 For more details, see [GHSA-4pg4-qvpc-4q3h](https://github.com/expressjs/multer/security/advisories/GHSA-4pg4-qvpc-4q3h).
