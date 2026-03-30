@@ -649,7 +649,7 @@ export const apiMenu: Menu = {
                 omitFrom: ['4x', '5x'],
               },
               {
-                href: `/api/response/res-sendFile`,
+                href: `/api/response/res-sendfile`,
                 label: 'res.sendFile()',
                 ariaLabel: 'res.sendFile method',
                 omitFrom: ['3x'],
