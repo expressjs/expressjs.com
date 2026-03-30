@@ -43,3 +43,4 @@ These are some additional popular middleware modules.
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | [helmet](https://github.com/helmetjs/helmet)        | Helps secure your apps by setting various HTTP headers.                                                                                       |
 | [passport](https://github.com/jaredhanson/passport) | Authentication using "strategies" such as OAuth, OpenID and many others.  See [passportjs.org](https://passportjs.org/) for more information. |
+| [pompelmi](https://github.com/pompelmi/pompelmi)    | Security-focused middleware and scanning toolkit for Express file uploads, with checks for malware, MIME spoofing, and risky archives.        |
