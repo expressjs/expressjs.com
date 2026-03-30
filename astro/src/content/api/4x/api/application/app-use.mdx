@@ -13,7 +13,7 @@ the middleware function is executed when the base of the requested path matches 
 
 {/* {% include api/en/4x/routing-args.html %} */}
 
-#### Description
+## Description
 
 A route will match any path that follows its path immediately with a "`/`".
 For example: `app.use('/apple', ...)` will match "/apple", "/apple/images",
@@ -68,7 +68,7 @@ app.use(function (err, req, res, next) {
 });
 ```
 
-#### Path examples
+## Path examples
 
 The following table provides some simple examples of valid `path` values for
 mounting middleware.
@@ -169,7 +169,7 @@ app.use(['/abcd', '/xyza', /\/lmn|\/pqr/], function (req, res, next) {
 </table>
 </div>
 
-#### Middleware callback function examples
+## Middleware callback function examples
 
 The following table provides some simple examples of middleware functions that
 can be used as the `callback` argument to `app.use()`, `app.METHOD()`, and `app.all()`.

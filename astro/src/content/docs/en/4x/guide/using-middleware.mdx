@@ -31,7 +31,7 @@ An Express application can use the following types of middleware:
 You can load application-level and router-level middleware with an optional mount path.
 You can also load a series of middleware functions together, which creates a sub-stack of the middleware system at a mount point.
 
-<h2 id="middleware.application">Application-level middleware</h2>
+## Application-level middleware
 
 Bind application-level middleware to an instance of the [app object](/en/5x/api#app) by using the `app.use()` and `app.METHOD()` functions, where `METHOD` is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.
 
@@ -157,7 +157,7 @@ app.get('/user/:id', logStuff, (req, res, next) => {
 });
 ```
 
-<h2 id="middleware.router">Router-level middleware</h2>
+## Router-level middleware
 
 Router-level middleware works in the same way as application-level middleware, except it is bound to an instance of `express.Router()`.
 
@@ -244,7 +244,7 @@ app.use('/admin', router, (req, res) => {
 });
 ```
 
-<h2 id="middleware.error-handling">Error-handling middleware</h2>
+## Error-handling middleware
 
 <Alert type="alert">
 
@@ -266,7 +266,7 @@ app.use((err, req, res, next) => {
 
 For details about error-handling middleware, see: [Error handling](/en/guide/error-handling).
 
-<h2 id="middleware.built-in">Built-in middleware</h2>
+## Built-in middleware
 
 Starting with version 4.x, Express no longer depends on [Connect](https://github.com/senchalabs/connect). The middleware
 functions that were previously included with Express are now in separate modules; see [the list of middleware functions](https://github.com/senchalabs/connect#middleware).
@@ -277,7 +277,7 @@ Express has the following built-in middleware functions:
 - [express.json](/en/5x/api#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
 - [express.urlencoded](/en/5x/api#express.urlencoded) parses incoming requests with URL-encoded payloads. **NOTE: Available with Express 4.16.0+**
 
-<h2 id="middleware.third-party">Third-party middleware</h2>
+## Third-party middleware
 
 Use third-party middleware to add functionality to Express apps.
 

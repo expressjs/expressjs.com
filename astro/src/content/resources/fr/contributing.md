@@ -352,7 +352,7 @@ pull request.
 
 ---
 
-# Contributing to Expressjs.com {#expressjs-website-contributing}
+# Contributing to Expressjs.com
 
 <!-- LOCAL: expressjs/expressjs.com ../../CONTRIBUTING.md -->
 

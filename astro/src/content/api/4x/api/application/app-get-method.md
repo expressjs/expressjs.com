@@ -11,7 +11,7 @@ Routes HTTP GET requests to the specified path with the specified callback funct
 
 For more information, see the [routing guide](/en/guide/routing).
 
-#### Example
+## Example
 
 ```js
 app.get('/', function (req, res) {

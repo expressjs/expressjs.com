@@ -7,7 +7,6 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 # Writing middleware for use in Express apps
 
-<h2>Overview</h2>
 
 _Middleware_ functions are functions that have access to the [request object](/en/5x/api#req) (`req`), the [response object](/en/5x/api#res) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
 
@@ -54,7 +53,7 @@ The following figure shows the elements of a middleware function call:
 
 Starting with Express 5, middleware functions that return a Promise will call `next(value)` when they reject or throw an error. `next` will be called with either the rejected value or the thrown Error.
 
-<h2>Example</h2>
+## Example
 
 Here is an example of a simple "Hello World" Express application.
 The remainder of this article will define and add three middleware functions to the application:
@@ -72,7 +71,7 @@ app.get('/', (req, res) => {
 app.listen(3000);
 ```
 
-<h3>Middleware function myLogger</h3>
+### Middleware function myLogger
 Here is a simple example of a middleware function called "myLogger". This function just prints
 "LOGGED" when a request to the app passes through it. The middleware function is assigned to a
 variable named `myLogger`.
@@ -122,7 +121,7 @@ If `myLogger` is loaded after the route to the root path, the request never reac
 
 The middleware function `myLogger` simply prints a message, then passes on the request to the next middleware function in the stack by calling the `next()` function.
 
-<h3>Middleware function requestTime</h3>
+### Middleware function requestTime
 
 Next, we'll create a middleware function called "requestTime" and add a property called `requestTime`
 to the request object.
@@ -158,7 +157,7 @@ app.listen(3000);
 
 When you make a request to the root of the app, the app now displays the timestamp of your request in the browser.
 
-<h3>Middleware function validateCookies</h3>
+### Middleware function validateCookies
 
 Finally, we'll create a middleware function that validates incoming cookies and sends a 400 response if cookies are invalid.
 
@@ -214,7 +213,7 @@ Because you have access to the request object, the response object, the next mid
 
 For more information about Express middleware, see: [Using Express middleware](/en/guide/using-middleware).
 
-<h2>Configurable middleware</h2>
+## Configurable middleware
 
 If you need your middleware to be configurable, export a function which accepts an options object or other parameters, which, then returns the middleware implementation based on the input parameters.
 
