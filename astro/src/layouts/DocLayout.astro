@@ -1,24 +1,69 @@
 ---
 import Layout from './Layout.astro';
 import type { BreadcrumbItem } from '@utils/content';
-import { Breadcrumbs } from '@components/patterns';
+import { Breadcrumbs, TableOfContents } from '@components/patterns';
 import { Container } from '@/components/primitives';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
 
 interface Props {
   title: string;
   description?: string;
   breadcrumbs: BreadcrumbItem[];
+  headings?: Heading[];
 }
 
-const { title, description, breadcrumbs } = Astro.props;
+const { title, description, breadcrumbs, headings = [] } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
   <Container>
     <Breadcrumbs items={breadcrumbs} />
 
-    <article>
-      <slot />
-    </article>
+    <div class="doc-layout">
+      <article>
+        <slot />
+      </article>
+      <TableOfContents headings={headings} class="doc-toc" />
+    </div>
   </Container>
 </Layout>
+
+<style>
+  .doc-layout {
+    display: flex;
+    flex-direction: column;
+
+    @media (--md-up) {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-10);
+    }
+  }
+
+  .doc-layout > article {
+    min-width: 0;
+    flex: 1;
+    order: 1;
+  }
+
+  .doc-toc {
+    flex-shrink: 0;
+    order: 0;
+    background-color: var(--color-bg-primary);
+    position: sticky;
+    top: var(--space-14);
+    padding: var(--space-6) 0 0;
+
+    @media (--md-up) {
+      order: 1;
+      width: var(--size-56);
+      max-height: calc(100vh - var(--space-24));
+      overflow-y: auto;
+    }
+  }
+</style>

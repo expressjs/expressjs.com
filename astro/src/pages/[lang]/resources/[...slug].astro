@@ -21,11 +21,11 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { lang, slug } = Astro.params;
-const { Content } = await render(page);
+const { Content, headings } = await render(page);
 const breadcrumbs = await buildBreadcrumbs(lang, slug, 'resources');
 const { title, description } = page.data;
 ---
 
-<DocLayout title={title} description={description} breadcrumbs={breadcrumbs}>
+<DocLayout title={title} description={description} breadcrumbs={breadcrumbs} headings={headings}>
   <Content />
 </DocLayout>
