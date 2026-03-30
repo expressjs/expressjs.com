@@ -3,6 +3,7 @@ title: 4x API Reference
 description: API Reference for version 4.x
 ---
 
+import Alert from '@components/primitives/Alert/Alert.astro';
 import Card from '@components/primitives/Card/Card.astro';
 import { CardList } from '@components/patterns';
 
@@ -20,6 +21,12 @@ app.get('/', function (req, res) {
 
 app.listen(3000);
 ```
+
+<Alert type="info">
+
+Express 4.x requires **Node.js 0.10.0 or higher**.
+
+</Alert>
 
 With express v4.x, you can define routes, configure middleware, and start handling HTTP requests using the application instance created by the `express()` function. The API is organized into the following sections:
 
