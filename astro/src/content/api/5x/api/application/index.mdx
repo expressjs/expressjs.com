@@ -3,6 +3,7 @@ title: Application Object
 description: Learn about the properties of the Express application object.
 ---
 
+import Alert from '@components/primitives/Alert/Alert.astro';
 import Card from '@components/primitives/Card/Card.astro';
 import { CardList } from '@components/patterns';
 
@@ -32,10 +33,10 @@ The `app` object has methods for
 It also has settings (properties) that affect how the application behaves;
 for more information, see [Application settings](./app-settings/).
 
-<div class="doc-box doc-info" markdown="1">
+<Alert type="info">
   The Express application object can be referred from the [request object](#req) and the [response
   object](#res) as `req.app`, and `res.app`, respectively.
-</div>
+</Alert>
 
 # Properties
 
