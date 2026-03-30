@@ -705,6 +705,31 @@ export const apiMenu: Menu = {
                 label: 'router.all()',
                 ariaLabel: 'router.all method',
               },
+              {
+                href: `/api/router/router-method`,
+                label: 'router.METHOD()',
+                ariaLabel: 'router.METHOD method',
+              },
+              {
+                href: `/api/router/router-param`,
+                label: 'router.param()',
+                ariaLabel: 'router.param method',
+              },
+              {
+                href: `/api/router/router-route`,
+                label: 'router.route()',
+                ariaLabel: 'router.route method',
+              },
+              {
+                href: `/api/router/router-router`,
+                label: 'router.Router()',
+                ariaLabel: 'router.Router method',
+              },
+              {
+                href: `/api/router/router-use`,
+                label: 'router.use()',
+                ariaLabel: 'router.use method',
+              },
             ],
           },
         },
