@@ -57,7 +57,6 @@ const bskyShareUrl = `https://bsky.app/intent/compose?text=${encodedTitle}%20${e
 const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
 const telegramShareUrl = `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`;
 const whatsappShareUrl = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
-const slackShareUrl = `https://slack.com/intl/en-us/share?url=${encodedUrl}`;
 ---
 
 <div class:list={['post-header', className]} {...rest}>
@@ -99,15 +98,6 @@ const slackShareUrl = `https://slack.com/intl/en-us/share?url=${encodedUrl}`;
       rel="noopener noreferrer"
     >
       <Icon name="linkedin" aria-hidden="true" />
-    </a>
-    <a
-      class="post-header__share-btn"
-      href={slackShareUrl}
-      aria-label={t('post.shareOnSlack')}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <Icon name="slack" aria-hidden="true" />
     </a>
     <a
       class="post-header__share-btn"
