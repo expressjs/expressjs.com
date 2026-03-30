@@ -92,11 +92,6 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
       </div>
     </article>
     <RelatedContent posts={relatedPosts} lang={Astro.params.lang} title={t('post.more')} />
-    <!-- <WriteBanner
-      message={t('post.writeBanner')}
-      linkLabel={t('post.writeGuidelines')}
-      href={`/${Astro.params.lang}/blog/write-post`}
-    /> -->
   </Container>
 </Layout>
 
