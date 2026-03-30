@@ -1,7 +1,6 @@
 ---
 title: How to write a blog post
 description: Step by step guide to write a blog post
-tags: ['announcements']
 authors:
   - name: Express Technical Committee
     github: expressjs
