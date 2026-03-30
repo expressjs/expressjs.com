@@ -40,12 +40,15 @@ const authorsList = (authors ?? []).map((a) => ({
   name: a.name ?? '',
 }));
 const filename = post.id.split('/').pop() ?? post.id;
-const dateStr = filename.substring(0, 10);
-const date = new Date(dateStr).toLocaleDateString('en-US', {
-  month: 'long',
-  day: 'numeric',
-  year: 'numeric',
-});
+const dateSource = filename.substring(0, 10);
+const parsedDate = new Date(dateSource);
+const date = Number.isNaN(parsedDate.getTime())
+  ? undefined
+  : parsedDate.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
 const labels = tags ?? [];
 
 const allPosts = (await getCollection('blog'))
