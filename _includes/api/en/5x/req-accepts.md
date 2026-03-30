@@ -33,4 +33,24 @@ req.accepts(['html', 'json'])
 // => "json"
 ```
 
+#### Example
+
+```js
+app.get('/resource', function (req, res) {
+  // Check which response type the client prefers
+  const type = req.accepts(['json', 'html'])
+
+  if (type === 'json') {
+    return res.json({ message: 'Hello world' })
+  }
+
+  if (type === 'html') {
+    return res.send('<p>Hello world</p>')
+  }
+
+  // If none of the supported types are acceptable
+  res.status(406).send('Not Acceptable')
+})
+
+
 For more information, or if you have issues or concerns, see [accepts](https://github.com/expressjs/accepts).
