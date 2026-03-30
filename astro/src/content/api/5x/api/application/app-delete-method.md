@@ -3,7 +3,7 @@ title: app.delete
 description: Routes HTTP DELETE requests to the specified path with the specified callback functions.
 ---
 
-<h3 id='app.delete.method'>app.delete(path, callback [, callback ...])</h3>
+# app.delete(path, callback [, callback ...])
 
 Routes HTTP DELETE requests to the specified path with the specified callback functions.
 For more information, see the [routing guide](/en/guide/routing).

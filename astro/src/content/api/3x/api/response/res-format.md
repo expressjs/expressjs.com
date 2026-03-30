@@ -3,7 +3,7 @@ title: res.format
 description: Performs content-negotiation on the request Accept header
 ---
 
-<h3 id='res.format'>res.format(object)</h3>
+# res.format(object)
 
 Performs content-negotiation on the request Accept header
 field when present. This method uses `req.accepted`, an array of

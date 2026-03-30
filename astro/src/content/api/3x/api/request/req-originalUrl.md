@@ -3,7 +3,7 @@ title: req.originalUrl
 description: This property is much like req.url, however it retains
 ---
 
-<h3 id='req.originalUrl'>req.originalUrl</h3>
+# req.originalUrl
 
 This property is much like `req.url`, however it retains
 the original request url, allowing you to rewrite `req.url`

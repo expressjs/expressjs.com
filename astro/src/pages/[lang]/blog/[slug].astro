@@ -58,7 +58,7 @@ const untagged = allPosts.filter((p) => !p.data.tags?.some((tag) => currentTags.
 const relatedPosts = [...tagged, ...untagged].slice(0, 3);
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} authors={authors}>
   <Container>
     <PageTopbar
       breadcrumbs={[

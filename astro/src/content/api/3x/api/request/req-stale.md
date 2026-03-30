@@ -3,7 +3,7 @@ title: req.stale
 description: Check if the request is stale - aka Last-Modified and/or the ETag do not match,
 ---
 
-<h3 id='req.stale'>req.stale</h3>
+# req.stale
 
 Check if the request is stale - aka Last-Modified and/or the ETag do not match,
 indicating that the resource is "stale".

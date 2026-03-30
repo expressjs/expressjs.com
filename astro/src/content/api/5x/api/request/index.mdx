@@ -1,0 +1,157 @@
+---
+title: Request Object
+description: The request object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+import Card from '@components/primitives/Card/Card.astro';
+import { CardList } from '@components/patterns';
+
+# Request
+
+The `req` object represents the HTTP request and has properties for the
+request query string, parameters, body, HTTP headers, and so on. In this documentation and by convention,
+the object is always referred to as `req` (and the HTTP response is `res`) but its actual name is determined
+by the parameters to the callback function in which you're working.
+
+For example:
+
+```js
+app.get('/user/:id', (req, res) => {
+  res.send(`user ${req.params.id}`);
+});
+```
+
+But you could just as well have:
+
+```js
+app.get('/user/:id', (request, response) => {
+  response.send(`user ${request.params.id}`);
+});
+```
+
+The `req` object is an enhanced version of Node's own request object
+and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_incomingmessage).
+
+## Properties
+
+The `req` object contains a number of properties that provide information about the HTTP request, such as headers, query parameters, and more.
+
+<CardList gap="6">
+
+  <a href="/en/5x/api/request/req-app">
+    <Card title="req.app" body="This property holds a reference to the instance of the Express application that is using the middleware." />
+  </a>
+  <a href="/en/5x/api/request/req-base-url">
+    <Card title="req.baseUrl" body="The URL path on which a router instance was mounted." />
+  </a>
+  <a href="/en/5x/api/request/req-body">
+    <Card title="req.body" body="Contains key-value pairs of data submitted in the request body." />
+  </a>
+  <a href="/en/5x/api/request/req-cookies">
+    <Card title="req.cookies" body="Object containing cookies sent by the request." />
+  </a>
+  <a href="/en/5x/api/request/req-fresh">
+    <Card title="req.fresh" body="Boolean property that is true if the request is fresh." />
+  </a>
+  <a href="/en/5x/api/request/req-host">
+    <Card title="req.host" body="Contains the host derived from the Host HTTP header." />
+  </a>
+  <a href="/en/5x/api/request/req-hostname">
+    <Card title="req.hostname" body="Contains the hostname derived from the Host HTTP header." />
+  </a>
+  <a href="/en/5x/api/request/req-ip">
+    <Card title="req.ip" body="The remote IP address of the request." />
+  </a>
+  <a href="/en/5x/api/request/req-ips">
+    <Card title="req.ips" body="When the trust proxy setting is true, this property contains an array of IP addresses specified in the X-Forwarded-For header, ordered from closest to furthest." />
+  </a>
+  <a href="/en/5x/api/request/req-method">
+    <Card title="req.method" body="Contains a string corresponding to the HTTP method of the request: GET, POST, PUT, and so on." />
+  </a>
+  <a href="/en/5x/api/request/req-originalUrl">
+    <Card title="req.originalUrl" body="The original request URL." />
+  </a>
+  <a href="/en/5x/api/request/req-params">
+    <Card title="req.params" body="Object containing route parameters." />
+  </a>
+  <a href="/en/5x/api/request/req-path">
+    <Card title="req.path" body="The path part of the request URL." />
+  </a>
+  <a href="/en/5x/api/request/req-protocol">
+    <Card title="req.protocol" body="The protocol of the request, either 'http' or 'https'." />
+  </a>
+  <a href="/en/5x/api/request/req-query">
+    <Card title="req.query" body="Object containing the parsed query-string." />
+  </a>
+  <a href="/en/5x/api/request/req-res">
+    <Card title="req.res" body="The response object that is associated with the request." />
+  </a>
+  <a href="/en/5x/api/request/req-route">
+    <Card title="req.route" body="The currently matched route, a string." />
+  </a>
+  <a href="/en/5x/api/request/req-secure">
+    <Card title="req.secure" body="A Boolean property that is true if a TLS connection is established." />
+  </a>
+  <a href="/en/5x/api/request/req-signedCookies">
+    <Card title="req.signedCookies" body="Object containing signed cookies sent by the request." />
+  </a>
+  <a href="/en/5x/api/request/req-stale">
+    <Card title="req.stale" body="Indicates whether the request is stale." />
+  </a>
+  <a href="/en/5x/api/request/req-subdomains">
+    <Card title="req.subdomains" body="An array of subdomains in the domain name of the request." />
+  </a>
+  <a href="/en/5x/api/request/req-xhr">
+    <Card
+      title="req.xhr"
+      body="A boolean property that is true if the request's X-Requested-With header field is 'XMLHttpRequest', indicating that the request was issued by a client library such as jQuery."
+    />
+  </a>
+</CardList>
+
+## Methods
+
+The `req` object also contains a number of methods that can be used to perform various tasks related to the HTTP request, such as checking the content type, retrieving header values, and more.
+
+<CardList gap="6">
+  <a href="/en/5x/api/request/req-accepts">
+    <Card
+      title="req.accepts()"
+      body="Check if the specified content types are acceptable, based on the request's Accept HTTP header field."
+    />
+  </a>
+  <a href="/en/5x/api/request/req-acceptsCharsets">
+    <Card
+      title="req.acceptsCharsets()"
+      body="Returns the first accepted charset of the specified character sets."
+    />
+  </a>
+  <a href="/en/5x/api/request/req-acceptsEncodings">
+    <Card
+      title="req.acceptsEncodings()"
+      body="Returns the first accepted encoding of the specified encodings, based on the request's Accept-Encoding HTTP header field."
+    />
+  </a>
+  <a href="/en/5x/api/request/req-acceptsLanguages">
+    <Card
+      title="req.acceptsLanguages()"
+      body="Returns the first accepted language of the specified languages."
+    />
+  </a>
+  <a href="/en/5x/api/request/req-get">
+    <Card
+      title="req.get()"
+      body="Returns the specified HTTP request header field (case-insensitive match)."
+    />
+  </a>
+  <a href="/en/5x/api/request/req-is">
+    <Card
+      title="req.is()"
+      body="Check if the incoming request contains the Content-Type HTTP header field, and if it matches the given MIME type."
+    />
+  </a>
+  <a href="/en/5x/api/request/req-range">
+    <Card title="req.range()" body="Range header parser." />
+  </a>
+</CardList>

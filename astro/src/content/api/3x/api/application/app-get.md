@@ -3,7 +3,7 @@ title: app.get
 description: Get setting name value.
 ---
 
-<h3 id='app.get'>app.get(name)</h3>
+# app.get(name)
 
 Get setting `name` value.
 

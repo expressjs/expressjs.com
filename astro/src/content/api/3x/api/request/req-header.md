@@ -3,7 +3,7 @@ title: req.get
 description: Get the case-insensitive request header field. The Referrer and Referer fields are interchangeable.
 ---
 
-<h3 id='req.get'>req.get(field)</h3>
+# req.get(field)
 
 Get the case-insensitive request header `field`. The "Referrer" and "Referer" fields are interchangeable.
 
@@ -18,4 +18,4 @@ req.get('Something');
 // => undefined
 ```
 
-p Aliased as `req.header(field)`.
+Aliased as `req.header(field)`.

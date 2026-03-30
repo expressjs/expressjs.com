@@ -3,7 +3,7 @@ title: req.ips
 description: When trust proxy is true, parse
 ---
 
-<h3 id='req.ips'>req.ips</h3>
+# req.ips
 
 When "trust proxy" is `true`, parse
 the "X-Forwarded-For" ip address list

@@ -3,7 +3,7 @@ title: app.set
 description: Assigns setting name to value
 ---
 
-<h3 id='app.set'>app.set(name, value)</h3>
+# app.set(name, value)
 
 Assigns setting `name` to `value`. You may store any value that you want,
 but certain names can be used to configure the behavior of the server. These

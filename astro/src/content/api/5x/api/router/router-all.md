@@ -3,7 +3,7 @@ title: router.all
 description: This method is just like the router.METHOD methods, except that it matches all HTTP methods (verbs).
 ---
 
-<h3 id='router.all'>router.all(path, [callback, ...] callback)</h3>
+# router.all(path, [callback, ...] callback)
 
 This method is just like the `router.METHOD()` methods, except that it matches all HTTP methods (verbs).
 

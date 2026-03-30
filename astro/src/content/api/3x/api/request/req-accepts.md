@@ -3,7 +3,7 @@ title: req.accepts
 description: Check if the given types are acceptable, returning
 ---
 
-<h3 id='req.accepts'>req.accepts(types)</h3>
+# req.accepts(types)
 
 Check if the given `types` are acceptable, returning
 the best match when true, otherwise `undefined` - in which
@@ -14,7 +14,7 @@ such as "application/json", the extension name
 such as "json", a comma-delimited list or an array. When a list
 or array is given the best match, if any is returned.
 
-```js
+```js title="index.js"
 // Accept: text/html
 req.accepts('html');
 // => "html"

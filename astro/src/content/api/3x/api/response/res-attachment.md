@@ -1,9 +1,9 @@
 ---
 title: res.attachment
-description: Sets the Content-Disposition header field to "attachment". If
+description: Sets the Content-Disposition header field to "attachment".
 ---
 
-<h3 id='res.attachment'>res.attachment([filename])</h3>
+# res.attachment([filename])
 
 Sets the Content-Disposition header field to "attachment". If
 a `filename` is given then the Content-Type will be

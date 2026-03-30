@@ -3,7 +3,7 @@ title: req.query
 description: This property is an object containing the parsed query-string,
 ---
 
-<h3 id='req.query'>req.query</h3>
+# req.query
 
 This property is an object containing the parsed query-string,
 defaulting to `{}`.

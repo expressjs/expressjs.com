@@ -3,7 +3,7 @@ title: app.all
 description: This method functions just like the app.VERB methods,
 ---
 
-<h3 id='app.all'>app.all(path, [callback...], callback)</h3>
+# app.all(path, [callback...], callback)
 
 This method functions just like the `app.VERB()` methods,
 however it matches all HTTP verbs.

@@ -3,7 +3,7 @@ title: app.engine
 description: Registers the given template engine callback as ext.
 ---
 
-<h3 id='app.engine'>app.engine(ext, callback)</h3>
+# app.engine(ext, callback)
 
 Registers the given template engine `callback` as `ext`.
 

@@ -30,7 +30,7 @@ app.get('/user/:id', (request, response) => {
 The `res` object is an enhanced version of Node's own response object
 and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_serverresponse).
 
-<h3 id='res.properties'>Properties</h3>
+# Properties
 
 <section markdown="1">
   {% include api/en/5x/res-app.md %}
@@ -48,7 +48,7 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
   {% include api/en/5x/res-req.md %}
 </section>
 
-<h3 id='res.methods'>Methods</h3>
+# Methods
 
 <section markdown="1">
   {% include api/en/5x/res-append.md %}

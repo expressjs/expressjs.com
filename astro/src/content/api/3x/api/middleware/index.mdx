@@ -1,0 +1,50 @@
+---
+title: Middleware
+description: Express 3.x includes a number of built-in middleware functions that can be used to handle common tasks such as parsing request bodies, handling cookies, and more. These middleware functions are available as properties on the Express module and can be added to your application using app.use().
+---
+
+import Card from '@components/primitives/Card/Card.astro';
+import { CardList } from '@components/patterns';
+
+## Middleware
+
+Express 3.x includes a number of built-in middleware functions that can be used to handle common tasks such as parsing request bodies, handling cookies, and more. These middleware functions are available as properties on the Express module and can be added to your application using `app.use()`.
+
+<CardList gap="6">
+  <a href="/en/3x/api/middleware/basicauth">
+    <Card title="basicAuth()" body="Basic Authentication middleware, populating req.user" />
+  </a>
+  <a href="/en/3x/api/middleware/bodyparser">
+    <Card
+      title="bodyParser()"
+      body="Parse incoming request bodies in a middleware before your handlers, available under the req.body property."
+    />
+  </a>
+  <a href="/en/3x/api/middleware/compress">
+    <Card
+      title="compress()"
+      body="Compress response data with gzip / deflate. This middleware should be placed 'high' within the stack to ensure all responses may be compressed."
+    />
+  </a>
+  <a href="/en/3x/api/middleware/cookieparser">
+    <Card
+      title="cookieParser()"
+      body="Parse Cookie header and populate req.cookies with an object keyed by the cookie names."
+    />
+  </a>
+  <a href="/en/3x/api/middleware/cookiesession">
+    <Card
+      title="cookieSession()"
+      body="Cookie-based session middleware. Stores the session data on the client within a cookie."
+    />
+  </a>
+  <a href="/en/3x/api/middleware/csrf">
+    <Card title="csrf()" body="Cross-site request forgery (CSRF) protection middleware." />
+  </a>
+  <a href="/en/3x/api/middleware/directory">
+    <Card
+      title="directory()"
+      body="Serve static files from within a given directory, with automatic indexing of the files."
+    />
+  </a>
+</CardList>

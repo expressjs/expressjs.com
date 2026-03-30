@@ -3,7 +3,7 @@ title: req.protocol
 description: Return the protocol string "http" or "https"
 ---
 
-<h3 id='req.protocol'>req.protocol</h3>
+# req.protocol
 
 Return the protocol string "http" or "https"
 when requested with TLS. When the "trust proxy"

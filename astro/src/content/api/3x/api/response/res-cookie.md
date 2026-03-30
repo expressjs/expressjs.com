@@ -3,7 +3,7 @@ title: res.cookie
 description: Set cookie name to value, which may be a string or object converted to JSON. The path
 ---
 
-<h3 id='res.cookie'>res.cookie(name, value, [options])</h3>
+# res.cookie(name, value, [options])
 
 Set cookie `name` to `value`, which may be a string or object converted to JSON. The `path`
 option defaults to "/".

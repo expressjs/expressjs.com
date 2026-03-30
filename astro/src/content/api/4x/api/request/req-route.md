@@ -3,7 +3,7 @@ title: req.route
 description: Contains the currently-matched route, a string
 ---
 
-<h3 id='req.route'>req.route</h3>
+# req.route
 
 Contains the currently-matched route, a string. For example:
 
