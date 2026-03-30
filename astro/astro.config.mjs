@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 import expressiveCode from 'astro-expressive-code';
+import remarkRewriteLocalizedLinks from './src/utils/remark/rewrite-localized-links.mjs';
 import react from '@astrojs/react';
 import svgr from 'vite-plugin-svgr';
 import Icons from 'unplugin-icons/vite';
@@ -59,4 +60,7 @@ export default defineConfig({
       },
     }),
   ],
+  markdown: {
+    remarkPlugins: [[remarkRewriteLocalizedLinks, { prefixes: ['guide', 'starter', 'api'] }]],
+  },
 });

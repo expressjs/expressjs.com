@@ -8,7 +8,7 @@ description: This method is like the standard [app.METHOD()](#app.METHOD) method
 This method is like the standard [app.METHOD()](#app.METHOD) methods,
 except it matches all HTTP verbs.
 
-{% include api/en/5x/routing-args.html %}
+{% include api/routing-args.html %}
 
 #### Examples
 

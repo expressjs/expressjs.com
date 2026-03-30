@@ -13,9 +13,9 @@ as a "mini-application," capable only of performing middleware and routing
 functions. Every Express application has a built-in app router.
 
 A router behaves like middleware itself, so you can use it as an argument to
-[app.use()](/en/4x/api/application/app-use) or as the argument to another router's [use()](/en/4x/api/router/router-use) method.
+[app.use()](/api/application/app-use) or as the argument to another router's [use()](/api/router/router-use) method.
 
-The top-level `express` object has a [Router()](/en/4x/api/express/expressrouter) method that creates a new `router` object.
+The top-level `express` object has a [Router()](/api/express/expressrouter) method that creates a new `router` object.
 
 Once you've created a router object, you can add middleware and HTTP method routes (such as `get`, `put`, `post`,
 and so on) to it just like an application. For example:
@@ -46,34 +46,34 @@ app.use('/calendar', router);
 The `router` object has the following methods:
 
 <CardList gap="6">
-  <a href="/en/4x/api/router/router-Router">
+  <a href="/api/router/router-Router">
     <Card title="router.Router()" body="Creates a new router object." />
   </a>
-  <a href="/en/4x/api/router/router-all">
+  <a href="/api/router/router-all">
     <Card
       title="router.all()"
       body="This method is just like the router.METHOD methods, except that it matches all HTTP methods (verbs)."
     />
   </a>
-  <a href="/en/4x/api/router/router-METHOD">
+  <a href="/api/router/router-METHOD">
     <Card
       title="router.METHOD()"
       body="The router.METHOD methods provide the routing functionality in Express, where METHOD is one of the HTTP methods, such as GET, PUT, POST, and so on, in lowercase."
     />
   </a>
-  <a href="/en/4x/api/router/router-param">
+  <a href="/api/router/router-param">
     <Card
       title="router.param()"
       body="Adds callback triggers to route parameters, where name is the name of the parameter and callback is the callback function."
     />
   </a>
-  <a href="/en/4x/api/router/router-route">
+  <a href="/api/router/router-route">
     <Card
       title="router.route()"
       body="Returns an instance of a single route which you can then use to handle HTTP verbs."
     />
   </a>
-  <a href="/en/4x/api/router/router-use">
+  <a href="/api/router/router-use">
     <Card
       title="router.use()"
       body="Uses the specified middleware function or functions, with optional mount path that defaults to /."

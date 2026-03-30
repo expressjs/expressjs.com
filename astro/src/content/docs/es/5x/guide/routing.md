@@ -3,17 +3,15 @@ title: Express routing
 description: Learn how to define and use routes in Express.js applications, including route methods, route paths, parameters, and using Router for modular routing.
 ---
 
-import Alert from '@components/primitives/Alert/Alert.astro';
-
 # Routing
 
 _Routing_ refers to how an application's endpoints (URIs) respond to client requests.
-For an introduction to routing, see [Basic routing](/en/starter/basic-routing).
+For an introduction to routing, see [Basic routing](/starter/basic-routing.html).
 
 You define routing using methods of the Express `app` object that correspond to HTTP methods;
 for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
-see [app.METHOD](/api/application/app-method). You can also use [app.all()](/api/application/app-all) to handle all HTTP methods and [app.use()](/api/application/app-use/) to
-specify middleware as the callback function (See [Using middleware](/guide/using-middleware) for details).
+see [app.METHOD](/api/application/app-METHOD). You can also use [app.all()](/api/application/app-all) to handle all HTTP methods and [app.use()](/api/application/app-use) to
+specify middleware as the callback function (See [Using middleware](/guide/using-middleware.html) for details).
 
 These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
 
@@ -52,7 +50,7 @@ app.post('/', (req, res) => {
 ```
 
 Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
-For a full list, see [app.METHOD](/api/application/app-method).
+For a full list, see [app.METHOD](/api/application/app-METHOD).
 
 There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
@@ -67,29 +65,30 @@ app.all('/secret', (req, res, next) => {
 
 Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings, string patterns, or regular expressions.
 
-<Alert type="alert">
+{% capture caution-character %} In express 5, the characters `?`, `+`, `*`, `[]`, and `()` are handled differently than in version 4, please review the [migration guide](/guide/migrating-5.html#path-syntax) for more information.{% endcapture %}
 
-In express 5, the characters `?`, `+`, `*`, `[]`, and `()` are handled differently than in version
-4, please review the [migration guide](/en/guide/migrating-5#path-syntax) for more information.
+{% include admonitions/caution.html content=caution-character %}
 
-</Alert>
+{% capture note-dollar-character %}In express 4, regular expression characters such as `$` need to be escaped with a `\`.
+{% endcapture %}
 
-<Alert type="alert">
+{% include admonitions/caution.html content=note-dollar-character %}
 
-In express 4, regular expression characters such as `$` need to be escaped with a `\`.
+{% capture note-path-to-regexp %}
 
-</Alert>
+Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths; see the path-to-regexp documentation for all the possibilities in defining route paths. [Express Playground Router](https://bjohansebas.github.io/playground-router/) is a handy tool for testing basic Express routes, although it does not support pattern matching.
 
-<Alert type="info">
+{% endcapture %}
 
-Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route
-paths; see the path-to-regexp documentation for all the possibilities in defining route paths.
-[Express Playground Router](https://bjohansebas.github.io/playground-router/) is a handy tool for
-testing basic Express routes, although it does not support pattern matching.
+{% include admonitions/note.html content=note-path-to-regexp %}
 
-</Alert>
+{% capture query-string-note %}
 
-<Alert type="warning">Query strings are not part of the route path.</Alert>
+Query strings are not part of the route path.
+
+{% endcapture %}
+
+{% include admonitions/warning.html content=query-string-note %}
 
 ### Route paths based on strings
 
@@ -119,12 +118,9 @@ app.get('/random.text', (req, res) => {
 
 ### Route paths based on string patterns
 
-<Alert type="alert">
+{% capture caution-string-patterns %} The string patterns in Express 5 no longer work. Please refer to the [migration guide](/guide/migrating-5.html#path-syntax) for more information.{% endcapture %}
 
-The string patterns in Express 5 no longer work. Please refer to the [migration
-guide](/en/guide/migrating-5#path-syntax) for more information.
-
-</Alert>
+{% include admonitions/caution.html content=caution-string-patterns %}
 
 This route path will match `acd` and `abcd`.
 
@@ -194,11 +190,9 @@ app.get('/users/:userId/books/:bookId', (req, res) => {
 });
 ```
 
-<Alert type="alert">
-
+<div class="doc-box doc-notice" markdown="1">
 The name of route parameters must be made up of "word characters" ([A-Za-z0-9_]).
-
-</Alert>
+</div>
 
 Since the hyphen (`-`) and the dot (`.`) are interpreted literally, they can be used along with route parameters for useful purposes.
 
@@ -214,12 +208,10 @@ Request URL: http://localhost:3000/plantae/Prunus.persica
 req.params: { "genus": "Prunus", "species": "persica" }
 ```
 
-<Alert type="alert">
+{% capture warning-regexp %}
+In express 5, Regexp characters are not supported in route paths, for more information please refer to the [migration guide](/guide/migrating-5.html#path-syntax).{% endcapture %}
 
-In express 5, Regexp characters are not supported in route paths, for more information please
-refer to the [migration guide](/en/guide/migrating-5#path-syntax).
-
-</Alert>
+{% include admonitions/caution.html content=warning-regexp %}
 
 To have more control over the exact string that can be matched by a route parameter, you can append a regular expression in parentheses (`()`):
 
@@ -229,20 +221,25 @@ Request URL: http://localhost:3000/user/42
 req.params: {"userId": "42"}
 ```
 
-<Alert type="warning">
+{% capture escape-advisory %}
 
-Because the regular expression is usually part of a literal string, be sure to escape any `\`
-characters with an additional backslash, for example `\\d+`.
+Because the regular expression is usually part of a literal string, be sure to escape any `\` characters with an additional backslash, for example `\\d+`.
 
-</Alert>
+{% endcapture %}
 
-<Alert type="warning">
+{% include admonitions/warning.html content=escape-advisory %}
+
+{% capture warning-version %}
+
 In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `*` character in regular expressions is not interpreted in the usual way</a>. As a workaround, use `{0,}` instead of `*`. This will likely be fixed in Express 5.
-</Alert>
+
+{% endcapture %}
+
+{% include admonitions/warning.html content=warning-version %}
 
 <h2 id="route-handlers">Route handlers</h2>
 
-You can provide multiple callback functions that behave like [middleware](/en/guide/using-middleware) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
+You can provide multiple callback functions that behave like [middleware](/guide/using-middleware.html) to handle a request. The only exception is that these callbacks might invoke `next('route')` to bypass the remaining route callbacks. You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there's no reason to proceed with the current route.
 
 ```js
 app.get('/user/:id', (req, res, next) => {
@@ -346,13 +343,13 @@ The methods on the response object (`res`) in the following table can send a res
 | [res.redirect()](/api/response/res-redirect)     | Redirect a request.                                                                   |
 | [res.render()](/api/response/res-render)         | Render a view template.                                                               |
 | [res.send()](/api/response/res-send)             | Send a response of various types.                                                     |
-| [res.sendFile()](/api/response/res-sendfile)     | Send a file as an octet stream.                                                       |
+| [res.sendFile()](/api/response/res-sendFile)     | Send a file as an octet stream.                                                       |
 | [res.sendStatus()](/api/response/res-sendStatus) | Set the response status code and send its string representation as the response body. |
 
 <h2 id="app-route">app.route()</h2>
 
 You can create chainable route handlers for a route path by using `app.route()`.
-Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/api#router).
+Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/api.html#router).
 
 Here is an example of chained route handlers that are defined by using `app.route()`.
 
@@ -413,7 +410,7 @@ app.use('/birds', birds);
 
 The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.
 
-But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application/app-use/).
+But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/api/application/app-use).
 
 ```js
 const router = express.Router({ mergeParams: true });

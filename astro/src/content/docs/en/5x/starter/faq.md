@@ -88,5 +88,5 @@ middleware function.
 
 ## What version of Node.js does Express require?
 
-- [Express 4.x](/en/4x/api) requires Node.js 0.10 or higher.
-- [Express 5.x](/en/5x/api) requires Node.js 18 or higher.
+- [Express 4.x](/api) requires Node.js 0.10 or higher.
+- [Express 5.x](/api) requires Node.js 18 or higher.

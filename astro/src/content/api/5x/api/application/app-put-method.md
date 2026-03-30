@@ -7,7 +7,7 @@ description: Routes HTTP PUT requests to the specified path with the specified c
 
 Routes HTTP PUT requests to the specified path with the specified callback functions.
 
-{% include api/en/5x/routing-args.html %}
+{% include api/routing-args.html %}
 
 #### Example
 

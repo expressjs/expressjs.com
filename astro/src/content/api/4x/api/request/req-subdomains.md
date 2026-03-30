@@ -15,4 +15,4 @@ console.dir(req.subdomains);
 
 The application property `subdomain offset`, which defaults to 2, is used for determining the
 beginning of the subdomain segments. To change this behavior, change its value
-using [app.set](/en/4x/api#app.set).
+using [app.set](/api/application/app-set).

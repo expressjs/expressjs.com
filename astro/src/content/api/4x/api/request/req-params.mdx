@@ -25,7 +25,7 @@ console.dir(req.params[0]);
 
 Named capturing groups in regular expressions behave like named route parameters. For example the group from `/^\/file\/(?<path>.*)$/` expression is available as `req.params.path`.
 
-If you need to make changes to a key in `req.params`, use the [app.param](/en/4x/api#app.param) handler. Changes are applicable only to [parameters](/en/guide/routing#route-parameters) already defined in the route path.
+If you need to make changes to a key in `req.params`, use the [app.param](/api/application/app-param) handler. Changes are applicable only to [parameters](/guide/routing#route-parameters) already defined in the route path.
 
 Any changes made to the `req.params` object in a middleware or route handler will be reset.
 

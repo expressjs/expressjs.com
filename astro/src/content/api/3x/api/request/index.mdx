@@ -16,68 +16,68 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
 The `req` object contains a number of properties that provide information about the HTTP request, such as headers, query parameters, and more.
 
 <CardList gap="6">
-    <a href="/en/3x/api/request/req-accepted">
+    <a href="/api/request/req-accepted">
     <Card title="req.accepted" body="Array of acceptable media types, ordered from most to least preferred." />
   </a>
-  <a href="/en/3x/api/request/req-acceptedcharsets">
+  <a href="/api/request/req-acceptedcharsets">
     <Card title="req.acceptedCharsets" body="Array of accepted charsets, ordered from most to least preferred." />
   </a>
-  <a href="/en/3x/api/request/req-acceptedlanguages">
+  <a href="/api/request/req-acceptedlanguages">
     <Card title="req.acceptedLanguages" body="Array of accepted languages, ordered from most to least preferred." />
   </a>
-    <a href="/en/3x/api/request/req-body">
+    <a href="/api/request/req-body">
     <Card title="req.body" body="Contains key-value pairs of data submitted in the request body." />
   </a>
-  <a href="/en/3x/api/request/req-cookies">
+  <a href="/api/request/req-cookies">
     <Card title="req.cookies" body="Object containing cookies sent by the request." />
   </a>
-    <a href="/en/3x/api/request/req-files">
+    <a href="/api/request/req-files">
     <Card title="req.files" body="Object containing files uploaded via multipart/form-data." />
   </a>
-  <a href="/en/3x/api/request/req-fresh">
+  <a href="/api/request/req-fresh">
     <Card title="req.fresh" body="Boolean property that is true if the request is fresh." />
   </a>
-    <a href="/en/3x/api/request/req-host">
+    <a href="/api/request/req-host">
     <Card title="req.host" body="The host name from the request header." />
   </a>
-  <a href="/en/3x/api/request/req-ip">
+  <a href="/api/request/req-ip">
     <Card title="req.ip" body="The remote IP address of the request." />
   </a>
-  <a href="/en/3x/api/request/req-ips">
+  <a href="/api/request/req-ips">
     <Card title="req.ips" body="When the trust proxy setting is true, this property contains an array of IP addresses specified in the X-Forwarded-For header, ordered from closest to furthest." />
   </a>
-    <a href="/en/3x/api/request/req-originalurl">
+    <a href="/api/request/req-originalurl">
     <Card title="req.originalUrl" body="The original request URL." />
   </a>
-  <a href="/en/3x/api/request/req-params">
+  <a href="/api/request/req-params">
     <Card title="req.params" body="Object containing route parameters." />
   </a>
-  <a href="/en/3x/api/request/req-path">
+  <a href="/api/request/req-path">
     <Card title="req.path" body="The path part of the request URL." />
   </a>
-    <a href="/en/3x/api/request/req-protocol">
+    <a href="/api/request/req-protocol">
     <Card title="req.protocol" body="The protocol of the request, either 'http' or 'https'." />
   </a>
-    <a href="/en/3x/api/request/req-query">
+    <a href="/api/request/req-query">
     <Card title="req.query" body="Object containing the parsed query-string." />
   </a>
 
-  <a href="/en/3x/api/request/req-res">
+  <a href="/api/request/req-res">
     <Card title="req.res" body="The response object that is associated with the request." />
   </a>
-  <a href="/en/3x/api/request/req-route">
+  <a href="/api/request/req-route">
     <Card title="req.route" body="The currently matched route, a string." />
   </a>
-  <a href="/en/3x/api/request/req-signedcookies">
+  <a href="/api/request/req-signedcookies">
     <Card title="req.signedCookies" body="Object containing signed cookies sent by the request." />
   </a>
-  <a href="/en/3x/api/request/req-stale">
+  <a href="/api/request/req-stale">
     <Card title="req.stale" body="Indicates whether the request is stale." />
   </a>
-  <a href="/en/3x/api/request/req-subdomains">
+  <a href="/api/request/req-subdomains">
     <Card title="req.subdomains" body="An array of subdomains in the domain name of the request." />
   </a>
-  <a href="/en/3x/api/request/req-xhr">
+  <a href="/api/request/req-xhr">
     <Card
       title="req.xhr"
       body="A boolean property that is true if the request's X-Requested-With header field is 'XMLHttpRequest', indicating that the request was issued by a client library such as jQuery."
@@ -90,37 +90,37 @@ The `req` object contains a number of properties that provide information about 
 The `req` object also contains a number of methods that can be used to perform various tasks related to the HTTP request, such as checking the content type, retrieving header values, and more.
 
 <CardList gap="6">
-  <a href="/en/3x/api/request/req-accepts">
+  <a href="/api/request/req-accepts">
     <Card
       title="req.accepts()"
       body="Check if the specified content types are acceptable, based on the request's Accept HTTP header field."
     />
   </a>
-  <a href="/en/3x/api/request/req-acceptscharset">
+  <a href="/api/request/req-acceptscharset">
     <Card
       title="req.acceptsCharset()"
       body="Check if the specified charset is acceptable, based on the request's Accept-Charset HTTP header field."
     />
   </a>
-  <a href="/en/3x/api/request/req-acceptslanguage">
+  <a href="/api/request/req-acceptslanguage">
     <Card
       title="req.acceptsLanguage()"
       body="Check if the specified language is acceptable, based on the request's Accept-Language HTTP header field."
     />
   </a>
-  <a href="/en/3x/api/request/req-header">
+  <a href="/api/request/req-header">
     <Card
       title="req.header()"
       body="Return the value of the specified HTTP request header field."
     />
   </a>
-  <a href="/en/3x/api/request/req-is">
+  <a href="/api/request/req-is">
     <Card
       title="req.is()"
       body="Check if the incoming request contains the Content-Type HTTP header field, and if it matches the given MIME type."
     />
   </a>
-  <a href="/en/3x/api/request/req-param">
+  <a href="/api/request/req-param">
     <Card
       title="req.param()"
       body="Return the value of a request parameter, or a default value if the parameter is not specified."
