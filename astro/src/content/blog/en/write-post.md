@@ -1,3 +1,13 @@
+---
+title: How to write a blog post
+description: Step by step guide to write a blog post
+tags: ['announcements']
+authors:
+  - name: Express Technical Committee
+    github: expressjs
+cover: /posts/sample-cover.png
+---
+
 # How to write a blog post
 
 If you have an idea for a blog post, follow these steps to propose it and potentially get it published!
