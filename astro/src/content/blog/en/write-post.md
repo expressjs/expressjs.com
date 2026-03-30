@@ -5,7 +5,7 @@ tags: ['announcements']
 authors:
   - name: Express Technical Committee
     github: expressjs
-cover: /posts/sample-cover.png
+cover: /posts/sample-cover.jpg
 ---
 
 # How to write a blog post

@@ -7,7 +7,7 @@ authors:
     github: crandmck
   - name: Chris Del
     github: chrisdel101
-cover: /posts/sample-cover.png
+cover: /posts/sample-cover.jpg
 ---
 
 Welcome to the new Express blog! The blog is meant to be a primary means of communication for the Express technical committee (TC). While we currently have other channels such as X, LinkedIn, and of course GitHub, there's no authoritative "soapbox" for announcements and general communication.

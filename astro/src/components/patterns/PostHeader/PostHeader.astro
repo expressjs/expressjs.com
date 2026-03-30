@@ -24,6 +24,7 @@
  */
 import './PostHeader.css';
 import type { HTMLAttributes } from 'astro/types';
+import { Image } from 'astro:assets';
 import { H1, Avatar, Tag, Flex } from '@components/primitives';
 import { Icon } from 'astro-icon/components';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
@@ -141,7 +142,15 @@ const slackShareUrl = `https://slack.com/intl/en-us/share?url=${encodedUrl}`;
   {
     cover && (
       <div class="post-header__cover">
-        <img src={cover} alt="" aria-hidden="true" />
+        <Image
+          src={cover}
+          alt=""
+          aria-hidden="true"
+          width={1200}
+          height={400}
+          loading="eager"
+          fetchpriority="high"
+        />
       </div>
     )
   }
