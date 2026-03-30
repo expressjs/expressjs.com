@@ -9,9 +9,14 @@ authors:
 
 The Express team has released new patch versions of [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) addressing three regular expression denial of service vulnerabilities.
 
-{% include admonitions/warning.html
-content="We recommend upgrading to the latest version of path-to-regexp to secure your applications."
-%}
+{% capture warning_content %}
+We recommend upgrading to the latest version of path-to-regexp to secure your applications. If you have a `package-lock.json`, you can update the dependency by running:
+
+```sh
+npm update path-to-regexp
+```
+{% endcapture %}
+{% include admonitions/warning.html content=warning_content %}
 
 The following vulnerabilities have been addressed:
 
