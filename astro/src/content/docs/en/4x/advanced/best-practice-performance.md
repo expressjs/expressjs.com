@@ -22,7 +22,7 @@ This topic clearly falls into the "devops" world, spanning both traditional deve
   - [Use a load balancer](#use-a-load-balancer)
   - [Use a reverse proxy](#use-a-reverse-proxy)
 
-## Things to do in your code {#in-code}
+## Things to do in your code
 
 Here are some things you can do in your code to improve your application's performance:
 
@@ -140,7 +140,7 @@ Additionally, using `uncaughtException` is officially recognized as [crude](http
 
 We also don't recommend using [domains](https://nodejs.org/api/domain). It generally doesn't solve the problem and is a deprecated module.
 
-## Things to do in your environment / setup {#in-environment}
+## Things to do in your environment / setup
 
 Here are some things you can do in your system environment to improve your app's performance:
 

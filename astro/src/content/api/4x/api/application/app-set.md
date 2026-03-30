@@ -20,7 +20,7 @@ app.set('title', 'My Site');
 app.get('title'); // "My Site"
 ```
 
-<h4 id='app.settings.table'>Application Settings</h4>
+## Application Settings
 
 The following table lists application settings.
 
@@ -228,7 +228,7 @@ A custom query string parsing function will receive the complete query string, a
   </table>
   </div>
 
-  <h5 id="trust.proxy.options.table">Options for `trust proxy` setting</h5>
+### Options for `trust proxy` setting
 
   <p markdown="1">
   Read [Express behind proxies](/en/guide/behind-proxies) for more
@@ -312,7 +312,7 @@ app.set('trust proxy', function (ip) {
   </table>
 </div>
 
-  <h5 id="etag.options.table">Options for `etag` setting</h5>
+### Options for `etag` setting
 
 <p markdown="1">
 **NOTE**:  These settings apply only to dynamic files, not static files.

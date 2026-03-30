@@ -9,7 +9,7 @@ Routes HTTP PUT requests to the specified path with the specified callback funct
 
 {% include api/en/5x/routing-args.html %}
 
-#### Example
+## Example
 
 ```js
 app.put('/', (req, res) => {

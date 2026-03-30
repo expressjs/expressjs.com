@@ -10,7 +10,7 @@ except it matches all HTTP verbs.
 
 {% include api/en/5x/routing-args.html %}
 
-#### Examples
+## Examples
 
 The following callback is executed for requests to `/secret` whether using
 GET, POST, PUT, DELETE, or any other HTTP request method:

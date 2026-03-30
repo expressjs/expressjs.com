@@ -10,7 +10,7 @@ For more information, see the [routing guide](/en/guide/routing).
 
 {% include api/en/5x/routing-args.html %}
 
-#### Example
+## Example
 
 ```js
 app.post('/', (req, res) => {

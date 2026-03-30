@@ -48,7 +48,7 @@ See also the [example below](#example.of.express.static).
 For more information, see [Serving static files in Express](/en/starter/static-files).
 and [Using middleware - Built-in middleware](/en/guide/using-middleware#middleware.built-in).
 
-<h5 id="dotfiles">dotfiles</h5>
+## dotfiles
 
 Possible values for this option are:
 
@@ -57,7 +57,7 @@ Possible values for this option are:
 - "ignore" - Act as if the dotfile does not exist, respond with `404`, then call `next()`.
 - `undefined` - Act as ignore, except that files in a directory that begins with a dot are **NOT** ignored.
 
-<h5 id="fallthrough">fallthrough</h5>
+## fallthrough
 
 When this option is `true`, client errors such as a bad request or a request to a non-existent
 file will cause this middleware to simply call `next()` to invoke the next middleware in the stack.
@@ -70,7 +70,7 @@ Use `false` if you have mounted this middleware at a path designed
 to be strictly a single file system directory, which allows for short-circuiting 404s
 for less overhead. This middleware will also reply to all methods.
 
-<h5 id="setHeaders">setHeaders</h5>
+## setHeaders
 
 For this option, specify a function to set custom response headers. Alterations to the headers must occur synchronously.
 
@@ -86,7 +86,7 @@ Arguments:
 - `path`, the file path that is being sent.
 - `stat`, the `stat` object of the file that is being sent.
 
-<h4 id="example.of.express.static">Example of express.static</h4>
+## Example of express.static
 
 Here is an example of using the `express.static` middleware function with an elaborate options object:
 
