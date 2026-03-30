@@ -1,28 +1,23 @@
 # Prevent rate limit for npmjs links
 
-http://npmjs.com/._
-https://npmjs.com/._
-https://www.npmjs.com/._
-https://npmjs.org/._
-https://www.npmjs.org/.\*
+http://npmjs.com/.*
+https://npmjs.com/.*
+https://www.npmjs.com/.*
+https://npmjs.org/.*
+https://www.npmjs.org/.*
 
 # Prevent github rate limit
-
-https://github.com/.\*
+https://github.com/.*
 
 # Exclude 404 pages
-
-dist/.\*/404/index.html$
+dist/.*/404/index.html$
 dist/404/index.html$
 
 # Exclude Open Collective links
-
-https://opencollective.com/.\*
+https://opencollective.com/.*
 
 # Prevent netlify rate limit
-
 https://www.netlify.com/
 
 ## Ignore temporaly sitemap
-
 https://expressjs.com/sitemap-index.xml
