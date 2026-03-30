@@ -52,7 +52,7 @@ const date = Number.isNaN(parsedDate.getTime())
 const labels = tags ?? [];
 
 const allPosts = (await getCollection('blog'))
-  .filter((p) => p.id.startsWith('en/') && p.id !== post.id)
+  .filter((p) => p.id.startsWith('en/') && p.id !== post.id && p.id !== 'en/write-post')
   .sort((a, b) => b.id.localeCompare(a.id));
 
 const currentTags = new Set(tags ?? []);
