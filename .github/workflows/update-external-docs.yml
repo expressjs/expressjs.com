@@ -19,11 +19,24 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        working-directory: astro
+        run: npm ci
+
       - name: Run scripts
         working-directory: .github/scripts
         run: |
           bash ./get-contributing.sh
           bash ./get-readmes.sh
+
+      - name: Fix formatting
+        working-directory: astro
+        run: npm run fix
 
       - name: Create Pull Request
         uses: gr2m/create-or-update-pull-request-action@v1
@@ -37,7 +50,7 @@ jobs:
 
             cc: @expressjs/docs-wg
           labels: docs
-          branch: external-docs
+          branch: bot/update-external-docs
 
   synchronize-with-crowdin:
     runs-on: ubuntu-latest
