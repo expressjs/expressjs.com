@@ -21,3 +21,7 @@ https://www.netlify.com/
 
 ## Ignore temporaly sitemap
 https://expressjs.com/sitemap-index.xml
+
+# Ignore Coveralls links
+
+https://coveralls.io/-*
