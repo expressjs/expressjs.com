@@ -1,6 +1,5 @@
 ---
 import './Hero.css';
-import { Image } from 'astro:assets';
 import { Code } from 'astro-expressive-code/components';
 import { Icon } from 'astro-icon/components';
 import { H1, Button, Container, Flex, BodyMd, Grid, Col } from '@/components/primitives';
@@ -24,82 +23,13 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(\`Example app listening on port \${port}\`)
 })`;
-
-interface Props {
-  videoSrc?: string;
-  videoSrcLight?: string;
-  posterSrc?: string;
-  posterSrcLight?: string;
-}
-
-const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
 ---
 
 <section class="hero">
-  {
-    videoSrc && (
-      <div class="hero__video-container">
-        {posterSrc && (
-          <Image
-            class={`hero__video-poster${posterSrcLight ? ' hero__video-poster--dark' : ''}`}
-            src={posterSrc}
-            width={1920}
-            height={1080}
-            loading="eager"
-            alt=""
-            aria-hidden="true"
-          />
-        )}
-        {posterSrcLight && (
-          <Image
-            class="hero__video-poster hero__video-poster--light"
-            src={posterSrcLight}
-            width={1920}
-            height={1080}
-            loading="eager"
-            alt=""
-            aria-hidden="true"
-          />
-        )}
-        <video
-          class={`hero__video${videoSrcLight ? ' hero__video--dark' : ''}`}
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          data-src={videoSrc}
-        >
-          <source type="video/mp4" />
-        </video>
-        {videoSrcLight && (
-          <video
-            class="hero__video hero__video--light"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            data-src={videoSrcLight}
-          >
-            <source type="video/mp4" />
-          </video>
-        )}
-        <div class="hero__video-overlay" />
-        <button
-          class="hero__video-control"
-          type="button"
-          aria-label={t('hero.videoPause')}
-          data-label-pause={t('hero.videoPause')}
-          data-label-play={t('hero.videoPlay')}
-          data-state="paused"
-        >
-          <Icon name="fluent:pause-16-filled" class="hero__video-control-pause" />
-          <Icon name="fluent:play-16-filled" class="hero__video-control-play" />
-        </button>
-      </div>
-    )
-  }
+  <div class="hero__bg-container">
+    <canvas class="hero__canvas" aria-hidden="true"></canvas>
+    <div class="hero__video-overlay"></div>
+  </div>
   <Container>
     <div class="hero__content">
       <Flex align="end" gap="4">
@@ -134,138 +64,48 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
 </section>
 
 <script>
-  function initHeroVideo() {
-    const breakpointMd = parseInt(
-      getComputedStyle(document.documentElement).getPropertyValue('--breakpoint-md')
-    );
+  import { initHeroWebGL } from './hero-background';
 
-    const videoContainer = document.querySelector('.hero__video-container');
-    if (!videoContainer) return;
-
-    const videos = Array.from(videoContainer.querySelectorAll<HTMLVideoElement>('.hero__video'));
-    if (videos.length === 0) return;
-
-    const primaryVideo = videos[0];
-
-    const controlButton = videoContainer.querySelector<HTMLButtonElement>('.hero__video-control');
-    if (!controlButton) return;
-
-    const labelPause = controlButton.getAttribute('data-label-pause') ?? 'Pause background video';
-    const labelPlay = controlButton.getAttribute('data-label-play') ?? 'Play background video';
-
-    const playAll = () => videos.forEach((v) => v.play().catch(() => {}));
-    const pauseAll = () => videos.forEach((v) => v.pause());
-
-    const initSources = () => {
-      videos.forEach((video) => {
-        const source = video.querySelector('source');
-        if (source && !source.getAttribute('src')) {
-          const src = video.getAttribute('data-src');
-          if (src) {
-            source.src = src;
-            video.load();
-          }
-        }
-      });
-    };
+  function initHero() {
+    const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
+    if (!canvas) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      primaryVideo.pause();
-      primaryVideo.removeAttribute('autoplay');
-      controlButton.style.display = 'none';
-      return;
-    }
 
-    const isMobile = () => window.innerWidth < breakpointMd;
+    // Initialize WebGL; if unsupported the canvas stays empty (transparent)
+    const bg = initHeroWebGL(canvas, prefersReducedMotion);
+    if (!bg) return;
 
-    const disableVideo = () => {
-      pauseAll();
-      videos.forEach((v) => {
-        v.removeAttribute('autoplay');
-        v.removeAttribute('data-loaded');
-      });
-    };
-
-    if (isMobile()) {
-      disableVideo();
-      // Don't load video sources to save bandwidth
-      return;
-    }
-
-    initSources();
-
-    videos.forEach((video) => {
-      video.addEventListener('canplay', () => video.setAttribute('data-loaded', 'true'), {
-        once: true,
-      });
-    });
-
-    primaryVideo.addEventListener(
-      'error',
-      () => {
-        controlButton.style.display = 'none';
-      },
-      { once: true }
-    );
-
-    primaryVideo.addEventListener('play', () => {
-      controlButton.setAttribute('data-state', 'playing');
-      controlButton.setAttribute('aria-label', labelPause);
-    });
-
-    primaryVideo.addEventListener('pause', () => {
-      controlButton.setAttribute('data-state', 'paused');
-      controlButton.setAttribute('aria-label', labelPlay);
-    });
-
-    controlButton.addEventListener('click', () => {
-      if (primaryVideo.paused) {
-        playAll();
-      } else {
-        pauseAll();
-      }
-    });
-
+    // Only animate when the hero is visible in the viewport
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            playAll();
-            observer.disconnect();
+            bg.play();
+          } else {
+            bg.pause();
           }
         });
       },
       { rootMargin: '80px' }
     );
 
-    observer.observe(primaryVideo);
+    observer.observe(canvas);
 
+    // Pause when the tab is hidden to save resources
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        pauseAll();
+        bg.pause();
       } else {
-        playAll();
+        bg.play();
       }
-    });
-
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        if (isMobile()) {
-          disableVideo();
-        } else {
-          initSources();
-          playAll();
-        }
-      }, 250);
     });
   }
 
+  // Run init when the DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeroVideo);
+    document.addEventListener('DOMContentLoaded', initHero);
   } else {
-    initHeroVideo();
+    initHero();
   }
 </script>
