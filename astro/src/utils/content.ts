@@ -2,7 +2,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import { mainMenu } from '@/config/menu/main';
 import { apiMenu } from '@/config/menu/api';
 import type { collections } from '@/content.config';
-import type { Menu } from '@/config/types';
+import type { Menu, MenuItem, VersionPrefix } from '@/config/types';
 
 /**
  * Checks if there is content at the specified path
@@ -211,4 +211,103 @@ export async function buildBreadcrumbs(
   }
 
   return breadcrumbs;
+}
+
+export type AdjacentPage = {
+  href: string;
+  label: string;
+};
+
+/**
+ * Flattens a menu into an ordered list of link items, respecting version filtering
+ */
+function flattenMenu(
+  menu: Menu,
+  version?: string
+): { href: string; label: string; global?: boolean }[] {
+  const items: { href: string; label: string; global?: boolean }[] = [];
+  const basePath = menu.basePath || '';
+
+  const processItems = (menuItems: MenuItem[]) => {
+    for (const item of menuItems) {
+      if (version && item.omitFrom?.includes(version as VersionPrefix)) continue;
+
+      if ('href' in item && item.href) {
+        items.push({ href: `${basePath}${item.href}`, label: item.label, global: item.global });
+      }
+      if ('submenu' in item && item.submenu) {
+        items.push(...flattenMenu(item.submenu, version));
+      }
+    }
+  };
+
+  if (menu.sections) {
+    for (const section of menu.sections) {
+      if (version && section.omitFrom?.includes(version as VersionPrefix)) continue;
+      processItems(section.items);
+    }
+  }
+
+  if (menu.items) {
+    processItems(menu.items);
+  }
+
+  return items;
+}
+
+/**
+ * Gets the previous and next pages based on a combined menu order (docs → api → resources)
+ * @param slug - The current page slug (e.g., '5x/starter/installing' or 'starter/installing')
+ * @param lang - The language code
+ * @param menus - Array of menus in navigation order, with global flag for non-versioned menus
+ * @param version - The version prefix (e.g., '5x')
+ */
+export function getAdjacentPages(
+  slug: string,
+  lang: string,
+  menus: { menu: Menu; global?: boolean }[],
+  version?: string
+): { prev: AdjacentPage | null; next: AdjacentPage | null } {
+  const flatItems = menus.flatMap(({ menu, global: isGlobalMenu }) => {
+    const items = flattenMenu(menu, version);
+    return items.map((item) => ({
+      ...item,
+      global: isGlobalMenu || item.global,
+    }));
+  });
+
+  // Remove version prefix from slug to match menu hrefs
+  const slugWithoutVersion =
+    version && slug.startsWith(`${version}/`) ? slug.slice(version.length + 1) : slug;
+
+  // Menu hrefs start with / (e.g., /starter/installing)
+  // Normalize trailing slashes for comparison
+  const normalize = (href: string) => href.replace(/\/+$/, '');
+  const currentHref = normalize(`/${slugWithoutVersion}`);
+
+  const currentIndex = flatItems.findIndex((item) => normalize(item.href) === currentHref);
+
+  if (currentIndex === -1) {
+    return { prev: null, next: null };
+  }
+
+  const versionPath = version ? `/${version}` : '';
+
+  const prev =
+    currentIndex > 0
+      ? {
+          href: `/${lang}${flatItems[currentIndex - 1].global ? '' : versionPath}${flatItems[currentIndex - 1].href}`,
+          label: flatItems[currentIndex - 1].label,
+        }
+      : null;
+
+  const next =
+    currentIndex < flatItems.length - 1
+      ? {
+          href: `/${lang}${flatItems[currentIndex + 1].global ? '' : versionPath}${flatItems[currentIndex + 1].href}`,
+          label: flatItems[currentIndex + 1].label,
+        }
+      : null;
+
+  return { prev, next };
 }
