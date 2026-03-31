@@ -3,7 +3,7 @@ title: req.params
 description: This property is an array containing properties mapped to the named route "parameters".
 ---
 
-<h3 id='req.params'>req.params</h3>
+# req.params
 
 This property is an array containing properties mapped to the named route "parameters".
 For example if you have the route `/user/:name`, then the "name" property

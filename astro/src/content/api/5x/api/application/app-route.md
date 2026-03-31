@@ -3,7 +3,7 @@ title: app.route
 description: Returns an instance of a single route, which you can then use to handle HTTP verbs with optional middleware.
 ---
 
-<h3 id='app.route'>app.route(path)</h3>
+# app.route(path)
 
 Returns an instance of a single route, which you can then use to handle HTTP verbs with optional middleware.
 Use `app.route()` to avoid duplicate route names (and thus typo errors).

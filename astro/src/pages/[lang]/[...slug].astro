@@ -12,10 +12,11 @@ export async function getStaticPaths() {
 
   const pages = await getCollection('docs');
   const api = await getCollection('api');
+  const contentPages = await getCollection('pages');
 
   const paths: Array<{
     params: { lang: string; slug: string };
-    props: { page: (typeof pages)[0]; version: string };
+    props: { page: (typeof pages)[0]; version?: string };
   }> = [];
 
   // Helper to create a map of existing content for fallback logic
@@ -39,6 +40,16 @@ export async function getStaticPaths() {
     paths.push({
       params: { lang, slug: fullSlug },
       props: { page, version: isVersioned ? slugParts[0] : DEFAULT_VERSION },
+    });
+  });
+
+  contentPages.forEach((page) => {
+    const [lang, ...slugParts] = page.id.split('/');
+    const fullSlug = slugParts.join('/');
+
+    paths.push({
+      params: { lang, slug: fullSlug },
+      props: { page },
     });
   });
 
@@ -119,7 +130,30 @@ export async function getStaticPaths() {
     });
   }
 
-  // Fallback: Create paths for non-English languages using English content
+  // Fallback: Create paths for non-English languages using English pages content
+  for (const lang of Object.keys(languages)) {
+    if (lang === DEFAULT_LANG) continue;
+
+    const englishContentPages = contentPages.filter((p) => p.id.startsWith(`${DEFAULT_LANG}/`));
+
+    englishContentPages.forEach((page) => {
+      const [, ...slugParts] = page.id.split('/');
+      const fullSlug = slugParts.join('/');
+
+      const langSpecificExists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === fullSlug
+      );
+
+      if (!langSpecificExists) {
+        paths.push({
+          params: { lang, slug: fullSlug },
+          props: { page },
+        });
+      }
+    });
+  }
+
+  // Fallback: Create paths for non-English languages using English docs content
   for (const lang of Object.keys(languages)) {
     if (lang === DEFAULT_LANG) continue; // Skip English, already added
 
@@ -151,11 +185,25 @@ export async function getStaticPaths() {
 
 const { page, version } = Astro.props;
 const { lang, slug } = Astro.params;
-const { Content } = await render(page);
+const { Content, headings } = await render(page);
 const breadcrumbs = await buildBreadcrumbs(lang, slug, 'docs', version);
 const { title, description } = page.data;
+const isTranslation = lang !== 'en';
+const fileExt = page.filePath?.endsWith('.mdx') ? '.mdx' : '.md';
+
+// TODO: change the url when finish the redesign, this is just a temporary solution to avoid broken links for translated pages
+const editUrl = isTranslation
+  ? `https://github.com/expressjs/expressjs.com/blob/redesign/astro/CONTRIBUTING.md#contributing-translations`
+  : `https://github.com/expressjs/expressjs.com/edit/redesign/astro/src/content/${page.collection}/${page.id}${fileExt}`;
 ---
 
-<DocLayout title={title} description={description} breadcrumbs={breadcrumbs}>
+<DocLayout
+  title={title}
+  description={description}
+  breadcrumbs={breadcrumbs}
+  headings={headings}
+  editUrl={editUrl}
+  isTranslation={isTranslation}
+>
   <Content />
 </DocLayout>

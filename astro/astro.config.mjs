@@ -4,8 +4,10 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 import expressiveCode from 'astro-expressive-code';
-
-// TODO: add redirecto for blog posts
+import react from '@astrojs/react';
+import svgr from 'vite-plugin-svgr';
+import Icons from 'unplugin-icons/vite';
+import redirects from './src/config/redirect.js';
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
 const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
@@ -14,7 +16,18 @@ const site = NETLIFY_PREVIEW_SITE || 'https://expressjs.com';
 
 // https://astro.build/config
 export default defineConfig({
+  redirects,
   site,
+  vite: {
+    plugins: [
+      // Transforms SVG files imported with the `?react` suffix into React components
+      // (used for local SVG assets like logos).
+      svgr(),
+      // Resolves `~icons/collection/icon-name` imports into React components,
+      // bundling only the SVG paths for icons actually used (no full icon set in the bundle).
+      Icons({ compiler: 'jsx', jsx: 'react' }),
+    ],
+  },
   integrations: [
     expressiveCode({
       themes: ['github-dark'],
@@ -27,6 +40,7 @@ export default defineConfig({
     }),
     mdx(),
     icon(),
+    react(),
     sitemap({
       i18n: {
         defaultLocale: 'en',

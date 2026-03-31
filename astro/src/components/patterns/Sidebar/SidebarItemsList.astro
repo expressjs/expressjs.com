@@ -54,7 +54,7 @@ const filteredItems = filterItems(items, version);
       const itemBasePath = item.submenu?.basePath ?? basePath;
 
       const href = itemHref
-        ? resolveHref(itemHref, lang, itemBasePath, itemVersioned, version)
+        ? resolveHref(itemHref, lang, itemBasePath, itemVersioned, version, item.global)
         : '';
 
       const isActive =

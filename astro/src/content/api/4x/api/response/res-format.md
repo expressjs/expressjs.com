@@ -3,7 +3,7 @@ title: res.format
 description: Performs content-negotiation on the Accept HTTP header on the request object, when present.
 ---
 
-<h3 id='res.format'>res.format(object)</h3>
+# res.format(object)
 
 Performs content-negotiation on the `Accept` HTTP header on the request object, when present.
 It uses [req.accepts()](#req.accepts) to select a handler for the request, based on the acceptable

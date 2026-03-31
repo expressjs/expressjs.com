@@ -75,5 +75,19 @@
   "hero.tagline": "Schnelles, unvoreingenommenes, minimalistisches Web-Framework für Node.js",
   "hero.getStarted": "Erste Schritte",
   "hero.videoPause": "Hintergrundvideo anhalten",
-  "hero.videoPlay": "Hintergrundvideo abspielen"
+  "hero.videoPlay": "Hintergrundvideo abspielen",
+  "page.editOnGitHub": "Auf GitHub bearbeiten",
+  "page.translateThis": "Diese Seite übersetzen",
+  "post.share": "Teilen",
+  "post.shareOnX": "Auf X teilen",
+  "post.shareOnBluesky": "Auf Bluesky teilen",
+  "post.shareOnLinkedIn": "Auf LinkedIn teilen",
+  "post.shareOnSlack": "Auf Slack teilen",
+  "post.shareOnTelegram": "Auf Telegram teilen",
+  "post.shareOnWhatsApp": "Auf WhatsApp teilen",
+  "post.copyLink": "Link kopieren",
+  "post.linkCopied": "Link kopiert!",
+  "post.toc": "Auf dieser Seite",
+  "toc.overview": "Übersicht",
+  "post.more": "Mehr für Express"
 }

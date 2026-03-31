@@ -5,11 +5,11 @@ export const resourcesMenu: Menu = {
   items: [
     { href: `/community`, label: 'menu.community', ariaLabel: 'menu.communityAria' },
     { href: `/glossary`, label: 'menu.glossary', ariaLabel: 'menu.glossaryAria' },
-    { href: `/contributing`, label: 'Express community' },
-    { href: `/utils`, label: 'Express utilities' },
+    { href: `/contributing`, label: 'menu.contributing', ariaLabel: 'menu.contributingAria' },
+    { href: `/utils`, label: 'menu.utils', ariaLabel: 'menu.utilsAria' },
     {
-      label: 'Middleware',
-      ariaLabel: 'Middleware resources',
+      label: 'menu.middleware',
+      ariaLabel: 'menu.middlewareAria',
       submenu: {
         basePath: '/resources/middleware',
         items: middlewareMenu.items,

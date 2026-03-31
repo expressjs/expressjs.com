@@ -3,7 +3,7 @@ title: app.render
 description: Render a view with a callback responding with
 ---
 
-<h3 id='app.render'>app.render(view, [options], callback)</h3>
+# app.render(view, [options], callback)
 
 Render a `view` with a callback responding with
 the rendered string. This is the app-level variant of `res.render()`,

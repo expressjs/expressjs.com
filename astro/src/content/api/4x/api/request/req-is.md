@@ -3,7 +3,7 @@ title: req.is
 description: Returns the matching content type if the incoming request's "Content-Type" HTTP header field
 ---
 
-<h3 id='req.is'>req.is(type)</h3>
+# req.is(type)
 
 Returns the matching content type if the incoming request's "Content-Type" HTTP header field
 matches the MIME type specified by the `type` parameter. If the request has no body, returns `null`.

@@ -1,4 +1,6 @@
 files:
+  - source: /src/content/pages/en/**/*.*
+    translation: /src/content/pages/%two_letters_code%/**/%original_file_name%
   - source: /src/content/docs/en/**/*.*
     translation: /src/content/docs/%two_letters_code%/**/%original_file_name%
   - source: /src/content/resources/en/**/*.*

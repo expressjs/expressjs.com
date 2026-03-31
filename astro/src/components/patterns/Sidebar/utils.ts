@@ -24,9 +24,10 @@ export function resolveHref(
   lang: LanguageCode,
   basePath: string,
   versioned: VersionPrefix[] | undefined,
-  version: string
+  version: string,
+  global?: boolean
 ): string {
-  const useVersion = isVersioned(versioned, version);
+  const useVersion = !global && isVersioned(versioned, version);
   const versionPath = useVersion ? `/${version}` : '';
   return `/${lang}${basePath}${versionPath}${href}`;
 }
@@ -122,7 +123,7 @@ function checkItemsForPath(
 ): boolean {
   return filterItems(items, version).some((item) => {
     if (isLink(item)) {
-      const href = resolveHref(item.href, lang, basePath, versioned, version);
+      const href = resolveHref(item.href, lang, basePath, versioned, version, item.global);
       return normalizedCurrentPath === normalizePath(href);
     }
     if (hasSubmenu(item)) {

@@ -3,7 +3,7 @@ title: req.subdomains
 description: An array of subdomains in the domain name of the request.
 ---
 
-<h3 id='req.subdomains'>req.subdomains</h3>
+# req.subdomains
 
 An array of subdomains in the domain name of the request.
 

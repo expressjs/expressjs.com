@@ -17,22 +17,31 @@ export function hasContentAt(
   return pages.some((page) => page.id === checkPath);
 }
 
-export interface BreadcrumbItem {
-  label: string;
+export type BreadcrumbItem = {
   href?: string;
+  icon?: string;
+} & ({ label: string; ariaLabel?: string } | { label?: string; ariaLabel: string });
+
+/**
+ * Find the menu item for a collection from the main menu by its basePath
+ */
+function findCollectionMenuItem(collection: string) {
+  for (const section of mainMenu.sections || []) {
+    for (const item of section.items) {
+      if ('submenu' in item && item.submenu?.basePath === `/${collection}`) {
+        return item;
+      }
+    }
+  }
+  return null;
 }
 
 /**
  * Find the label for a collection from the main menu
  */
 function getCollectionLabel(collection: string): string {
-  for (const section of mainMenu.sections || []) {
-    for (const item of section.items) {
-      if ('submenu' in item && item.submenu?.basePath === `/${collection}`) {
-        return item.label;
-      }
-    }
-  }
+  const menuItem = findCollectionMenuItem(collection);
+  if (menuItem) return menuItem.label;
   // Fallback: capitalize the collection name
   return collection.charAt(0).toUpperCase() + collection.slice(1);
 }
@@ -174,10 +183,12 @@ export async function buildBreadcrumbs(
     }
   } else {
     // For non-API pages: use the original structure
-    breadcrumbs.push({
-      label: getCollectionLabel(collection),
-      href: undefined,
-    });
+    if (!slug.startsWith('resources')) {
+      breadcrumbs.push({
+        label: getCollectionLabel(collection),
+        href: undefined,
+      });
+    }
 
     if (version) {
       breadcrumbs.push({

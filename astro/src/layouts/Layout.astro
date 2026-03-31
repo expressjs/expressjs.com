@@ -9,12 +9,23 @@ import { languages } from '@/i18n/locales';
 interface Props {
   title?: string;
   description?: string;
+  authors?: { name: string; github?: string }[];
 }
 
 const {
-  title = 'Express - Node.js web application framework',
+  title,
   description = 'Fast, unopinionated, minimalist web framework for Node.js',
+  authors,
 } = Astro.props;
+
+const pageTitle = title
+  ? `${title} · Express.js`
+  : 'Express.js · Node.js web application framework';
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || Astro.url.origin);
+
+// TODO: change this when og images is generated per page
+const imageUrl = new URL('/hero-poster.jpg', Astro.site || Astro.url.origin);
 
 const isNetlify = import.meta.env.DEPLOY_PRIME_URL;
 
@@ -60,7 +71,7 @@ const lang = getLangFromUrl(Astro.url);
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="description" content={description} />
 
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site || Astro.url.origin)} />
+    <link rel="canonical" href={canonicalUrl} />
 
     {
       Object.keys(languages).map((altLang) => (
@@ -77,11 +88,28 @@ const lang = getLangFromUrl(Astro.url);
       ))
     }
 
-    <title>{title}</title>
+    <title>{pageTitle}</title>
 
     <style is:inline>
-      @layer base, primitives, patterns;
+      @layer orama, base, primitives, patterns;
     </style>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={authors?.length ? 'article' : 'website'} />
+    <meta property="og:site_name" content="Express.js" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    {authors?.map((author) => <meta property="article:author" content={author.name} />)}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@UseExpressJS" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:domail" content="expressjs.com" />
+    <meta name="twitter:image" content={imageUrl} />
 
     <link rel="sitemap" href={new URL('/sitemap-index.xml', Astro.site || Astro.url.origin)} />
     <!-- Robots meta tag for Google Search. Enables a large image preview in Google search results,

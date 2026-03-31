@@ -2,6 +2,12 @@
   "prettier.enable": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.associations": {
+    ".lycheeignore": "ignore"
+  },
+  "[ignore]": {
+    "editor.formatOnSave": false
+  },
   "[astro]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true

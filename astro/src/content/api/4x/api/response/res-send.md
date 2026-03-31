@@ -3,7 +3,7 @@ title: res.send
 description: Sends the HTTP response.
 ---
 
-<h3 id='res.send'>res.send([body])</h3>
+# res.send([body])
 
 Sends the HTTP response.
 

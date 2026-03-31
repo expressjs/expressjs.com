@@ -1,15 +1,23 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
-import { Container, H1, BodySm, Avatar } from '@/components/primitives';
+import { Container, Button } from '@/components/primitives';
 import { languages } from '@i18n/locales';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import { Icon } from 'astro-icon/components';
+import {
+  PageTopbar,
+  PostHeader,
+  TableOfContents,
+  WriteBanner,
+  RelatedContent,
+} from '@/components/patterns';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  const enPosts = posts.filter((post) => post.id.startsWith('en/'));
 
   return Object.keys(languages).flatMap((lang) =>
-    enPosts.map((post) => {
+    posts.map((post) => {
       const filename = post.id.split('/').pop()!;
       return {
         params: { lang, slug: filename },
@@ -19,37 +27,112 @@ export async function getStaticPaths() {
   );
 }
 
-const { post } = Astro.props;
-const { Content } = await render(post);
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
-const { title, description, tags, authors } = post.data;
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+const { title, description, tags, authors, cover } = post.data;
 const authorsList = (authors ?? []).map((a) => ({
   src: a.github ? `https://github.com/${a.github}.png` : '',
   name: a.name ?? '',
 }));
 const filename = post.id.split('/').pop() ?? post.id;
-const dateStr = filename.substring(0, 10);
-const date = new Date(dateStr).toLocaleDateString('en-US', {
-  month: 'long',
-  day: 'numeric',
-  year: 'numeric',
-});
-const label = tags?.[0] ?? '';
+const dateSource = filename.substring(0, 10);
+const parsedDate = new Date(dateSource);
+const date = Number.isNaN(parsedDate.getTime())
+  ? undefined
+  : parsedDate.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+const labels = tags ?? [];
+
+const allPosts = (await getCollection('blog'))
+  .filter((p) => p.id.startsWith('en/') && p.id !== post.id && p.id !== 'en/write-post')
+  .sort((a, b) => b.id.localeCompare(a.id));
+
+const currentTags = new Set(tags ?? []);
+const tagged = allPosts.filter((p) => p.data.tags?.some((tag) => currentTags.has(tag)));
+const untagged = allPosts.filter((p) => !p.data.tags?.some((tag) => currentTags.has(tag)));
+const relatedPosts = [...tagged, ...untagged].slice(0, 3);
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} authors={authors}>
   <Container>
+    <PageTopbar
+      breadcrumbs={[
+        {
+          href: `/${Astro.params.lang}/`,
+          ariaLabel: t('nav.home'),
+          icon: 'fluent:home-empty-20-regular',
+        },
+        { label: t('menu.blog'), href: `/${Astro.params.lang}/blog` },
+      ]}
+    >
+      <Button
+        as="a"
+        variant="secondary"
+        size="sm"
+        href={`https://github.com/expressjs/expressjs.com/edit/gh-pages/astro/src/content/blog/${Astro.params.slug}`}
+      >
+        <Icon name="github" aria-hidden="true" />
+        {t('page.editOnGitHub')}
+      </Button>
+    </PageTopbar>
+
     <article>
-      {
-        label && (
-          <BodySm as="span" color="secondary" vMargin={false}>
-            {label}
-          </BodySm>
-        )
-      }
-      <H1>{title}</H1>
-      {authorsList.length > 0 && <Avatar authors={authorsList} caption={date} size="md" />}
-      <Content />
+      <PostHeader labels={labels} title={title} authors={authorsList} date={date} cover={cover} />
+
+      <div class="blog-post-body">
+        <div class="blog-post-content">
+          <Content />
+        </div>
+        <TableOfContents headings={headings} class="blog-post-toc" />
+      </div>
     </article>
+    <RelatedContent posts={relatedPosts} lang={Astro.params.lang} title={t('post.more')} />
+    <WriteBanner
+      message={t('post.writeBanner')}
+      linkLabel={t('post.writeGuidelines')}
+      href={`/${Astro.params.lang}/blog/write-post`}
+    />
   </Container>
 </Layout>
+
+<style>
+  .blog-post-body {
+    display: flex;
+    flex-direction: column;
+
+    @media (--md-up) {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-10);
+    }
+  }
+
+  .blog-post-content {
+    min-width: 0;
+    flex: 1;
+    order: 1;
+  }
+
+  .blog-post-toc {
+    flex-shrink: 0;
+    order: 0;
+    background-color: var(--color-bg-primary);
+    position: sticky;
+    top: var(--space-14);
+    padding: var(--space-6) 0 0;
+
+    @media (--md-up) {
+      order: 1;
+      width: var(--size-56);
+      max-height: calc(100vh - var(--space-24));
+      overflow-y: auto;
+    }
+  }
+</style>

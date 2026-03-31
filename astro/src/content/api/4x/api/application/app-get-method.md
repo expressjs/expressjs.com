@@ -3,15 +3,20 @@ title: app.get
 description: Routes HTTP GET requests to the specified path with the specified callback functions.
 ---
 
-<h3 id='app.get.method'>app.get(path, callback [, callback ...])</h3>
+# app.get(path, callback [, callback ...])
 
 Routes HTTP GET requests to the specified path with the specified callback functions.
 
-{% include api/en/4x/routing-args.html %}
+## Arguments
+
+| Argument   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Default           |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `path`     | The path for which the middleware function is invoked; can be any of: a string representing a path, a path pattern, a regular expression pattern to match paths, or an array of combinations of any of the above. For examples, see [Path examples](#path-examples).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | `'/'` (root path) |
+| `callback` | Callback functions; can be: a middleware function, a series of middleware functions (separated by commas), an array of middleware functions, or a combination of all of the above. You can provide multiple callback functions that behave just like middleware, except that these callbacks can invoke `next('route')` to bypass the remaining route callback(s). You can use this mechanism to impose pre-conditions on a route, then pass control to subsequent routes if there is no reason to proceed with the current route. Since [router](#router) and [app](#application) implement the middleware interface, you can use them as you would any other middleware function. For examples, see [Middleware callback function examples](#middleware-callback-function-examples). | None              |
 
 For more information, see the [routing guide](/en/guide/routing).
 
-#### Example
+## Example
 
 ```js
 app.get('/', function (req, res) {

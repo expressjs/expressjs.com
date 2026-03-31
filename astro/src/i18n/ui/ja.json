@@ -75,5 +75,19 @@
   "hero.tagline": "Node.js向けの高速で中立的なミニマリストWebフレームワーク",
   "hero.getStarted": "始める",
   "hero.videoPause": "背景動画を一時停止",
-  "hero.videoPlay": "背景動画を再生"
+  "hero.videoPlay": "背景動画を再生",
+  "page.editOnGitHub": "GitHubで編集",
+  "page.translateThis": "このページを翻訳する",
+  "post.share": "シェア",
+  "post.shareOnX": "Xでシェア",
+  "post.shareOnBluesky": "Blueskyでシェア",
+  "post.shareOnLinkedIn": "LinkedInでシェア",
+  "post.shareOnSlack": "Slackでシェア",
+  "post.shareOnTelegram": "Telegramでシェア",
+  "post.shareOnWhatsApp": "WhatsAppでシェア",
+  "post.copyLink": "リンクをコピー",
+  "post.linkCopied": "コピーしました！",
+  "post.toc": "このページの内容",
+  "toc.overview": "概要",
+  "post.more": "Express の最新情報"
 }

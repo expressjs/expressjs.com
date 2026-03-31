@@ -2,12 +2,12 @@
 /**
  * Breadcrumbs Component
  * Renders a breadcrumb navigation based on provided items
- * TODO: wip - Improve styling and accessibility in future iterations
  */
 import { Body } from '@components/primitives';
 import { Icon } from 'astro-icon/components';
 import type { BreadcrumbItem } from '@utils/content';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import './Breadcrumbs.css';
 
 interface Props {
   items: BreadcrumbItem[];
@@ -19,16 +19,32 @@ const t = useTranslations(lang);
 ---
 
 <nav aria-label={t('nav.breadcrumb')}>
-  <ol class="flex gap-3 items-center p-0">
+  <ol class="breadcrumbs">
     {
       items.map((item, index) => (
         <li class="flex items-center gap-3">
           {item.href ? (
-            <Body as="a" href={item.href} class="m-0">
+            <Body vMargin={false} as="a" href={item.href} class="breadcrumb-link">
+              {item.icon && (
+                <Icon
+                  name={item.icon}
+                  aria-hidden={item.label ? 'true' : undefined}
+                  aria-label={!item.label ? item.ariaLabel : undefined}
+                />
+              )}
               {item.label}
             </Body>
           ) : (
-            <Body class="m-0">{item.label}</Body>
+            <Body vMargin={false} class="breadcrumb-item">
+              {item.icon && (
+                <Icon
+                  name={item.icon}
+                  aria-hidden={item.label ? 'true' : undefined}
+                  aria-label={!item.label ? item.ariaLabel : undefined}
+                />
+              )}
+              {item.label}
+            </Body>
           )}
           {index < items.length - 1 && (
             <Icon name="fluent:chevron-right-28-regular" aria-hidden="true" />

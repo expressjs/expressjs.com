@@ -3,7 +3,7 @@ title: res.redirect
 description: Redirect to the given url with optional status code
 ---
 
-<h3 id='res.redirect'>res.redirect([status], url)</h3>
+# res.redirect([status], url)
 
 Redirect to the given `url` with optional `status` code
 defaulting to 302 "Found".

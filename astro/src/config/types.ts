@@ -12,10 +12,12 @@ export type MenuItem =
   | (MenuItemBaseProps & {
       href: string;
       submenu?: never;
+      global?: boolean;
     })
   | (MenuItemBaseProps & {
       submenu: Menu;
       href?: never;
+      global?: never;
     });
 
 export type MenuSection = {

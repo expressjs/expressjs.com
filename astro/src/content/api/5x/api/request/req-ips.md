@@ -3,7 +3,7 @@ title: req.ips
 description: When the trust proxy setting does not evaluate to false, this property contains an array of IP addresses specified in the X-Forwarded-For request header
 ---
 
-<h3 id='req.ips'>req.ips</h3>
+# req.ips
 
 When the [`trust proxy` setting](/en/5x/api#trust.proxy.options.table) does not evaluate to `false`,
 this property contains an array of IP addresses

@@ -9,6 +9,7 @@
     font-weight: var(--font-weight-medium);
     line-height: var(--line-height-tight);
     white-space: nowrap;
+    text-transform: capitalize;
     margin: 0;
   }
 }

@@ -1,0 +1,186 @@
+---
+title: Response
+description: The response object represents the HTTP response that an Express app sends when it gets an HTTP request.
+---
+
+import Card from '@components/primitives/Card/Card.astro';
+import { CardList } from '@components/patterns';
+
+# Response
+
+The `res` object represents the HTTP response that an Express app sends when it gets an HTTP request.
+
+In this documentation and by convention,
+the object is always referred to as `res` (and the HTTP request is `req`) but its actual name is determined
+by the parameters to the callback function in which you're working.
+
+For example:
+
+```js
+app.get('/user/:id', (req, res) => {
+  res.send(`user ${req.params.id}`);
+});
+```
+
+But you could just as well have:
+
+```js
+app.get('/user/:id', (request, response) => {
+  response.send(`user ${request.params.id}`);
+});
+```
+
+The `res` object is an enhanced version of Node's own response object
+and supports all [built-in fields and methods](https://nodejs.org/api/http.html#http_class_http_serverresponse).
+
+## Properties
+
+The `res` object has the following properties:
+
+<CardList gap="6">
+  <a href="/en/5x/api/response/res-app">
+    <Card
+      title="res.app"
+      body="This property holds a reference to the instance of the Express application that is using the middleware."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-headersSent">
+    <Card
+      title="res.headersSent"
+      body="Boolean property that indicates if the app sent HTTP headers for the response."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-locals">
+    <Card
+      title="res.locals"
+      body="Use this property to set variables accessible in templates rendered with res.render."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-req">
+    <Card
+      title="res.req"
+      body="This property holds a reference to the HTTP request object that corresponds to this HTTP response."
+    />
+  </a>
+</CardList>
+
+## Methods
+
+The `res` object has the following methods that can be used to build and send HTTP responses:
+
+<CardList gap="6">
+  <a href="/en/5x/api/response/res-append">
+    <Card
+      title="res.append()"
+      body="Appends the specified value to the HTTP response header field."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-attachment">
+    <Card
+      title="res.attachment()"
+      body="Sets the HTTP response Content-Disposition header field to attachment."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-clearCookie">
+    <Card
+      title="res.clearCookie()"
+      body="Clears the cookie with the specified name by sending a Set-Cookie header that sets its expiration date in the past."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-cookie">
+    <Card
+      title="res.cookie()"
+      body="Sets cookie name to value. The value parameter may be a string or object converted to JSON."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-download">
+    <Card
+      title="res.download()"
+      body="Transfers the file at path as an attachment. Typically, browsers will prompt the user for download."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-end">
+    <Card
+      title="res.end()"
+      body="Ends the response process. This method actually comes from Node core, specifically the response.end method of http.ServerResponse."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-format">
+    <Card
+      title="res.format()"
+      body="Performs content-negotiation on the Accept HTTP header on the request object, when present."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-get">
+    <Card title="res.get()" body="Returns the HTTP response header specified by field." />
+  </a>
+  <a href="/en/5x/api/response/res-json">
+    <Card
+      title="res.json()"
+      body="Sends a JSON response. This method sends a response (with the correct content-type) that is the parameter converted to a JSON string."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-jsonp">
+    <Card
+      title="res.jsonp()"
+      body="Sends a JSON response with JSONP support. This method is identical to res.json, except that it opts-in to JSONP callback support."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-links">
+    <Card
+      title="res.links()"
+      body="Joins the links provided as properties of the parameter to populate the response Link HTTP header field."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-location">
+    <Card
+      title="res.location()"
+      body="Sets the response Location HTTP header to the specified path parameter."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-redirect">
+    <Card
+      title="res.redirect()"
+      body="Redirects to the URL derived from the specified path, with specified status, a positive integer that corresponds to an HTTP status code."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-render">
+    <Card
+      title="res.render()"
+      body="Renders a view and sends the rendered HTML string to the client."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-send">
+    <Card title="res.send()" body="Sends the HTTP response." />
+  </a>
+  <a href="/en/5x/api/response/res-sendFile">
+    <Card
+      title="res.sendFile()"
+      body="Transfers the file at the given path. Sets the Content-Type response HTTP header field based on the filename extension."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-sendStatus">
+    <Card
+      title="res.sendStatus()"
+      body="Sets the response HTTP status code and sends the registered status message as the text response body."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-set">
+    <Card title="res.set()" body="Sets the response HTTP header field to value." />
+  </a>
+  <a href="/en/5x/api/response/res-status">
+    <Card title="res.status()" body="Sets the HTTP status for the response." />
+  </a>
+  <a href="/en/5x/api/response/res-type">
+    <Card
+      title="res.type()"
+      body="Sets the Content-Type HTTP header to the MIME type as determined by the specified type."
+    />
+  </a>
+  <a href="/en/5x/api/response/res-vary">
+    <Card
+      title="res.vary()"
+      body="Adds the field to the Vary response header, if it is not there already."
+    />
+  </a>
+</CardList>

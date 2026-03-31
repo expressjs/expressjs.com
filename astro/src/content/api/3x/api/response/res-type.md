@@ -3,7 +3,7 @@ title: res.type
 description: Sets the Content-Type to the mime lookup of type,
 ---
 
-<h3 id='res.type'>res.type(type)</h3>
+# res.type(type)
 
 Sets the Content-Type to the mime lookup of `type`,
 or when "/" is present the Content-Type is simply set to this

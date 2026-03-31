@@ -3,7 +3,7 @@ title: req.path
 description: Returns the request URL pathname.
 ---
 
-<h3 id='req.path'>req.path</h3>
+# req.path
 
 Returns the request URL pathname.
 

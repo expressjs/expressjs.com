@@ -3,7 +3,7 @@ title: res.set
 description: Sets the response HTTP header field to value.
 ---
 
-<h3 id='res.set'>res.set(field [, value])</h3>
+# res.set(field [, value])
 
 Sets the response's HTTP header `field` to `value`.
 To set multiple fields at once, pass an object as the parameter.

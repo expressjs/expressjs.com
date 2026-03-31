@@ -2,4 +2,4 @@
 title: Router
 ---
 
-<h3 id='router'>Router([options])</h3>
+# Router([options])

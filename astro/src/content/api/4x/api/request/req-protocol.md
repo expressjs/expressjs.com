@@ -3,7 +3,7 @@ title: req.protocol
 description: Contains the request protocol string either http or (for TLS requests) https.
 ---
 
-<h3 id='req.protocol'>req.protocol</h3>
+# req.protocol
 
 Contains the request protocol string: either `http` or (for TLS requests) `https`.
 

@@ -3,7 +3,7 @@ title: res.charset
 description: Assign the charset. Defaults to "utf-8".
 ---
 
-<h3 id='res.charset'>res.charset</h3>
+# res.charset
 
 Assign the charset. Defaults to "utf-8".
 

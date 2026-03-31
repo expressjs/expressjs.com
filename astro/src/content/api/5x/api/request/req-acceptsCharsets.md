@@ -3,7 +3,7 @@ title: req.acceptsCharsets
 description: Returns the first accepted charset of the specified character sets,
 ---
 
-<h3 id='req.acceptsCharsets'>req.acceptsCharsets(charset [, ...])</h3>
+# req.acceptsCharsets(charset [, ...])
 
 Returns the first accepted charset of the specified character sets,
 based on the request's `Accept-Charset` HTTP header field.

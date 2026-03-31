@@ -8,4 +8,5 @@
   --z-index-sidebar-backdrop: 10;
   --z-index-header: 20;
   --z-index-sidebar: 30;
+  --z-index-modal-overlay: 40;
 }

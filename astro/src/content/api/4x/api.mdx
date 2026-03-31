@@ -1,0 +1,61 @@
+---
+title: 4x API Reference
+description: API Reference for version 4.x
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+import Card from '@components/primitives/Card/Card.astro';
+import { CardList } from '@components/patterns';
+
+# 4.x API
+
+This section provides an overview of the modules and APIs available in Express 4.x for building web applications and HTTP services.
+
+```js title="index.js"
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('hello world');
+});
+
+app.listen(3000);
+```
+
+<Alert type="info">
+
+Express 4.x requires **Node.js 0.10.0 or higher**.
+
+</Alert>
+
+With express v4.x, you can define routes, configure middleware, and start handling HTTP requests using the application instance created by the `express()` function. The API is organized into the following sections:
+
+<CardList gap="6">
+  <a href="/en/4x/api/express">
+    <Card
+      title="express()"
+      body="Learn about the express() function, which creates an Express application."
+    />
+  </a>
+  <a href="/en/4x/api/application">
+    <Card
+      title="Application Object"
+      body="Learn about the properties and methods of the Express 4.x application object."
+    />
+  </a>
+  <a href="/en/4x/api/request">
+    <Card
+      title="Request Object"
+      body="Learn about the properties and methods of the Express 4.x request object."
+    />
+  </a>
+  <a href="/en/4x/api/response">
+    <Card
+      title="Response Object"
+      body="Learn about the properties and methods of the Express 4.x response object."
+    />
+  </a>
+  <a href="/en/4x/api/router">
+    <Card title="Router" body="Learn about the properties and methods of the Express 4.x router." />
+  </a>
+</CardList>
