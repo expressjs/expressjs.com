@@ -7,6 +7,8 @@ import expressiveCode from 'astro-expressive-code';
 import react from '@astrojs/react';
 import svgr from 'vite-plugin-svgr';
 import Icons from 'unplugin-icons/vite';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import redirects from './src/config/redirect.js';
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
@@ -18,6 +20,17 @@ const site = NETLIFY_PREVIEW_SITE || 'https://expressjs.com';
 export default defineConfig({
   redirects,
   site,
+  markdown: {
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: 'wrap',
+        },
+      ],
+    ],
+  },
   vite: {
     plugins: [
       // Transforms SVG files imported with the `?react` suffix into React components
