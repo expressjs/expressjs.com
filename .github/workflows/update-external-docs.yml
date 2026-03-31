@@ -1,0 +1,67 @@
+name: Update External Docs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * 1"
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'expressjs'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Run scripts
+        working-directory: .github/scripts
+        run: |
+          bash ./get-contributing.sh
+          bash ./get-readmes.sh
+
+      - name: Create Pull Request
+        uses: gr2m/create-or-update-pull-request-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commit-message: "docs: update external docs"
+          title: "docs: update external docs"
+          body: >
+            This auto-generated PR updates external documentation to the expressjs.com repository.
+
+            cc: @expressjs/docs-wg
+          labels: docs
+          branch: external-docs
+
+  synchronize-with-crowdin:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'expressjs'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+        # see all the options at https://github.com/crowdin/github-action
+      - name: Crowdin PR
+        uses: crowdin/github-action@60debf382ee245b21794321190ad0501db89d8c1 # https://github.com/crowdin/github-action/releases/tag/v2.13.0
+        with:
+          upload_sources: false
+          upload_translations: false
+          download_translations: true
+          localization_branch_name: crowdin/translations
+          create_pull_request: true
+          pull_request_title: "i18n: new crowdin translations"
+          pull_request_body: >
+            New Crowdin translations from the [express.js crowdin project](https://express.crowdin.com/u/projects/1). cc: @expressjs/docs-wg
+          pull_request_base_branch_name: "redesign" # TODO: update to "main" when we merge redesign into main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
