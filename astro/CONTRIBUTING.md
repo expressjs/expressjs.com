@@ -167,7 +167,8 @@ astro/
 │   ├── config/              # Configuration files
 │   │   ├── menu/            # Menu configuration files (sidebars)
 │   ├── content/             # Content collections
-│   │   ├── docs/            # Documentation content
+│   │   ├── docs/            # Versioned documentation content
+│   │   ├── pages/           # Global pages (non-versioned)
 │   │   └── resources/       # Resource pages
 │   ├── i18n/                # Internationalization
 │   ├── layouts/             # Page layouts
@@ -189,10 +190,11 @@ The site uses Astro's [Content Collections](https://docs.astro.build/en/guides/c
 
 ### Collections
 
-| Collection  | Location                 | Description                       |
-| ----------- | ------------------------ | --------------------------------- |
-| `docs`      | `src/content/docs/`      | Documentation pages (guides, API) |
-| `resources` | `src/content/resources/` | Resource pages (community, tools) |
+| Collection  | Location                 | Description                                 |
+| ----------- | ------------------------ | ------------------------------------------- |
+| `docs`      | `src/content/docs/`      | Versioned documentation pages (guides, API) |
+| `pages`     | `src/content/pages/`     | Global pages shared across all versions     |
+| `resources` | `src/content/resources/` | Resource pages (community, tools)           |
 
 ### Frontmatter schema
 
@@ -238,6 +240,43 @@ src/content/docs/
 2. The versioning system (configured in `src/pages/[lang]/[...slug].astro`) will automatically:
    - Serve the page at `/en/5x/guide/my-new-page`
    - Create non-versioned aliases for default version content
+
+### Global pages (non-versioned)
+
+Some documentation pages are shared across all versions and don't belong to a specific Express version (e.g., security updates, migration guides, performance best practices). These pages live in the `pages` collection instead of `docs`.
+
+#### Structure
+
+```
+src/content/pages/
+└── en/
+    ├── advanced/
+    │   └── security-updates.mdx
+    └── guide/
+        ├── migrating-4.mdx
+        └── migrating-5.mdx
+```
+
+#### Adding a global page
+
+1. Create your content file in `src/content/pages/`:
+
+   ```
+   src/content/pages/en/guide/my-global-page.md
+   ```
+
+2. Add the menu item in `src/config/menu/docs.ts` with `global: true`:
+
+   ```typescript
+   {
+     href: `/guide/my-global-page`,
+     label: 'menu.myGlobalPage',
+     ariaLabel: 'menu.myGlobalPageAria',
+     global: true,
+   }
+   ```
+
+   The `global: true` flag tells the sidebar to generate the link without a version prefix and prevents the version switcher from modifying its URL.
 
 ### Menu configuration
 
@@ -366,6 +405,7 @@ type MenuItem = {
   href?: string; // Link destination (omit if using submenu)
   submenu?: Menu; // Nested menu (omit if using href)
   omitFrom?: VersionPrefix[]; // Versions to exclude this item from
+  global?: boolean; // If true, the link has no version prefix (for pages collection)
 };
 ```
 
@@ -483,7 +523,8 @@ UI strings are stored in JSON files in `src/i18n/ui/`. For example, `src/i18n/ui
 
 Documentation content is stored separately from UI translations:
 
-- **Docs**: `src/content/docs/[lang-code]/[version]/` - Documentation pages
+- **Docs**: `src/content/docs/[lang-code]/[version]/` - Versioned documentation pages
+- **Pages**: `src/content/pages/[lang-code]/` - Global pages (non-versioned)
 - **Resources**: `src/content/resources/[lang-code]/` - Resource pages
 
 The following content is currently not translated:
