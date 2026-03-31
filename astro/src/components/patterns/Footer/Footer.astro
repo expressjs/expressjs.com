@@ -40,15 +40,19 @@ import { BodyMd, Col, Container, Grid } from '@/components/primitives';
     <Container>
       <Grid gap="2" align="center">
         <Col xs={12} md={6} lg={6}>
-          <ul class="footer__logo">
+          <ul class="footer__logo" aria-label="Partner logos">
             <li>
-              <a href="https://openjsf.org" aria-label="OpenJS Foundation" target="_blank">
+              <a
+                href="https://openjsf.org"
+                aria-label="Hosted by OpenJS Foundation"
+                target="_blank"
+              >
                 <img
                   class="footer-logo-light"
                   src="/openjs-logo-black.svg"
                   alt="OpenJS Foundation Logo"
                   width="80"
-                  height="auto"
+                  height="24"
                   loading="lazy"
                 />
                 <img
@@ -56,7 +60,7 @@ import { BodyMd, Col, Container, Grid } from '@/components/primitives';
                   src="/openjs-logo-white.svg"
                   alt="OpenJS Foundation Logo"
                   width="80"
-                  height="auto"
+                  height="24"
                   loading="lazy"
                 />
               </a>
@@ -64,14 +68,14 @@ import { BodyMd, Col, Container, Grid } from '@/components/primitives';
             <li>
               <a
                 href="https://www.netlify.com"
-                aria-label="Preview Deploys by Netlify"
+                aria-label="Preview deployed by netlify"
                 target="_blank"
               >
                 <img
                   src="/netlify-logo.svg"
                   alt="Netlify Logo"
                   width="80"
-                  height="auto"
+                  height="24"
                   loading="lazy"
                 />
               </a>
@@ -79,11 +83,12 @@ import { BodyMd, Col, Container, Grid } from '@/components/primitives';
           </ul>
         </Col>
         <Col xs={12} md={6} lg={6}>
-          <ul class="footer__socials">
+          <ul class="footer__socials" aria-label="Social links">
             <li>
               <a
                 href="https://github.com/expressjs/express"
-                aria-label="Go to the repository on GitHub"
+                aria-label="expressjs on GitHub"
+                target="_blank"
               >
                 <Icon name="github" />
               </a>
@@ -91,31 +96,37 @@ import { BodyMd, Col, Container, Grid } from '@/components/primitives';
             <li>
               <a
                 href="https://www.youtube.com/channel/UCYjxjAeH6TRik9Iwy5nXw7g"
-                aria-label="Go to the channel on Youtube"
+                aria-label="expressjs channel on Youtube"
                 target="_blank"
               >
                 <Icon name="youtube" />
               </a>
             </li>
             <li>
-              <a href="https://x.com/UseExpressJS" aria-label="Go to the X account">
+              <a href="https://x.com/UseExpressJS" aria-label="follow expressjs on X account">
                 <Icon name="x" />
               </a>
             </li>
             <li>
-              <a href="https://slack-invite.openjsf.org" aria-label="Join Slack group">
+              <a
+                href="https://slack-invite.openjsf.org"
+                aria-label="Join openjs foundation slack group"
+              >
                 <Icon name="slack" />
               </a>
             </li>
             <li>
-              <a href="https://opencollective.com/express" aria-label="Go to Open Collective">
+              <a
+                href="https://opencollective.com/express"
+                aria-label="support expressjs on Open Collective"
+              >
                 <Icon name="open-collective" />
               </a>
             </li>
             <li>
               <a
                 href="https://bsky.app/profile/expressjs.bsky.social"
-                aria-label="Go to the Bluesky"
+                aria-label="follow expressjs on bluesky"
               >
                 <Icon name="bsky" />
               </a>
