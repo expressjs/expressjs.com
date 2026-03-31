@@ -37,7 +37,6 @@ LIST_END
   # Preserve existing frontmatter if the file already exists
   FRONTMATTER=""
   if [ -f "$DEST" ]; then
-    FRONTMATTER=$(sed -n '1,/^---$/{ /^---$/!p; }; /^---$/{ x; /^---$/{ x; q }; x; p }' "$DEST" | head -1)
     # Extract full frontmatter block (between --- delimiters)
     FRONTMATTER=$(awk '/^---$/{c++;next} c==1{print} c==2{exit}' "$DEST")
   fi
@@ -56,10 +55,13 @@ LIST_END
     CONTENT=$(curl -s $GHURL)
   fi
 
+  # Remove the first h1 heading (title is rendered by the layout)
+  CONTENT=$(echo "$CONTENT" | sed '0,/^# /{/^# /d}')
+
   # Write with frontmatter preserved
   if [ -n "$FRONTMATTER" ]; then
     printf '%s\n%s\n%s\n\n%s\n' "---" "$FRONTMATTER" "---" "$CONTENT" > $DEST
   else
-    printf '%s\n%s\n%s\n\n%s\n' "---" "title: Express $repo middleware" "module: $repo" "---" "$CONTENT" > $DEST
+    printf '%s\n%s\n%s\n\n%s\n' "---" "title: $repo middleware" "module: $repo" "---" "$CONTENT" > $DEST
   fi
 done

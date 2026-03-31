@@ -115,7 +115,7 @@ Standard Apache combined log output.
 
 ```
 :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
-
+# will output
 ::1 - - [27/Nov/2024:06:21:42 +0000] "GET /combined HTTP/1.1" 200 2 "-" "curl/8.7.1"
 ```
 
@@ -125,7 +125,7 @@ Standard Apache common log output.
 
 ```
 :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length]
-
+# will output
 ::1 - - [27/Nov/2024:06:21:46 +0000] "GET /common HTTP/1.1" 200 2
 ```
 
@@ -138,7 +138,7 @@ for information codes.
 
 ```
 :method :url :status :response-time ms - :res[content-length]
-
+# will output
 GET /dev 200 0.224 ms - 2
 ```
 
@@ -148,7 +148,7 @@ Shorter than default, also including response time.
 
 ```
 :remote-addr :remote-user :method :url HTTP/:http-version :status :res[content-length] - :response-time ms
-
+# will output
 ::1 - GET /short HTTP/1.1 200 2 - 0.283 ms
 ```
 
@@ -158,7 +158,7 @@ The minimal output.
 
 ```
 :method :url :status :res[content-length] - :response-time ms
-
+# will output
 GET /tiny 200 2 - 0.188 ms
 ```
 
