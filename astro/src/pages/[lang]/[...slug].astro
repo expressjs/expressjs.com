@@ -188,8 +188,21 @@ const { lang, slug } = Astro.params;
 const { Content, headings } = await render(page);
 const breadcrumbs = await buildBreadcrumbs(lang, slug, 'docs', version);
 const { title, description } = page.data;
+const isTranslation = lang !== 'en';
+
+// TODO: change the url when finish the redesign, this is just a temporary solution to avoid broken links for translated pages
+const editUrl = isTranslation
+  ? `https://github.com/expressjs/expressjs.com/blob/redesign/astro/CONTRIBUTING.md#contributing-translations`
+  : `https://github.com/expressjs/expressjs.com/edit/redesign/astro/src/content/${page.collection}/${page.id}`;
 ---
 
-<DocLayout title={title} description={description} breadcrumbs={breadcrumbs} headings={headings}>
+<DocLayout
+  title={title}
+  description={description}
+  breadcrumbs={breadcrumbs}
+  headings={headings}
+  editUrl={editUrl}
+  isTranslation={isTranslation}
+>
   <Content />
 </DocLayout>

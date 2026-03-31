@@ -1,8 +1,10 @@
 ---
 import Layout from './Layout.astro';
 import type { BreadcrumbItem } from '@utils/content';
-import { Breadcrumbs, TableOfContents } from '@components/patterns';
-import { Container } from '@/components/primitives';
+import { PageTopbar, TableOfContents } from '@components/patterns';
+import { Button, Container } from '@/components/primitives';
+import { Icon } from 'astro-icon/components';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 interface Heading {
   depth: number;
@@ -15,14 +17,37 @@ interface Props {
   description?: string;
   breadcrumbs: BreadcrumbItem[];
   headings?: Heading[];
+  editUrl?: string;
+  isTranslation?: boolean;
 }
 
-const { title, description, breadcrumbs, headings = [] } = Astro.props;
+const {
+  title,
+  description,
+  breadcrumbs,
+  headings = [],
+  editUrl,
+  isTranslation = false,
+} = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout title={title} description={description}>
   <Container>
-    <Breadcrumbs items={breadcrumbs} />
+    <PageTopbar breadcrumbs={breadcrumbs}>
+      {
+        editUrl && (
+          <Button as="a" variant="secondary" size="sm" href={editUrl}>
+            <Icon
+              name={isTranslation ? 'fluent:translate-20-regular' : 'github'}
+              aria-hidden="true"
+            />
+            {isTranslation ? t('page.translateThis') : t('page.editOnGitHub')}
+          </Button>
+        )
+      }
+    </PageTopbar>
 
     <div class="doc-layout">
       <article>
