@@ -23,16 +23,25 @@ export type BreadcrumbItem = {
 } & ({ label: string; ariaLabel?: string } | { label?: string; ariaLabel: string });
 
 /**
- * Find the label for a collection from the main menu
+ * Find the menu item for a collection from the main menu by its basePath
  */
-function getCollectionLabel(collection: string): string {
+function findCollectionMenuItem(collection: string) {
   for (const section of mainMenu.sections || []) {
     for (const item of section.items) {
       if ('submenu' in item && item.submenu?.basePath === `/${collection}`) {
-        return item.label;
+        return item;
       }
     }
   }
+  return null;
+}
+
+/**
+ * Find the label for a collection from the main menu
+ */
+function getCollectionLabel(collection: string): string {
+  const menuItem = findCollectionMenuItem(collection);
+  if (menuItem) return menuItem.label;
   // Fallback: capitalize the collection name
   return collection.charAt(0).toUpperCase() + collection.slice(1);
 }
@@ -174,10 +183,12 @@ export async function buildBreadcrumbs(
     }
   } else {
     // For non-API pages: use the original structure
-    breadcrumbs.push({
-      label: getCollectionLabel(collection),
-      href: undefined,
-    });
+    if (!slug.startsWith('resources')) {
+      breadcrumbs.push({
+        label: getCollectionLabel(collection),
+        href: undefined,
+      });
+    }
 
     if (version) {
       breadcrumbs.push({
