@@ -76,6 +76,7 @@ export const docsMenu: Menu = {
           href: `/guide/database-integration`,
           label: 'menu.databaseIntegration',
           ariaLabel: 'menu.databaseIntegrationAria',
+          global: true,
         },
         {
           href: `/guide/overriding-express-api`,
@@ -86,11 +87,13 @@ export const docsMenu: Menu = {
           href: `/guide/migrating-4`,
           label: 'menu.migratingTo4',
           ariaLabel: 'menu.migratingTo4Aria',
+          global: true,
         },
         {
           href: `/guide/migrating-5`,
           label: 'menu.migratingTo5',
           ariaLabel: 'menu.migratingTo5Aria',
+          global: true,
         },
       ],
     },
@@ -106,16 +109,19 @@ export const docsMenu: Menu = {
           href: `/advanced/best-practice-performance`,
           label: 'menu.bestPracticePerformance',
           ariaLabel: 'menu.bestPracticePerformanceAria',
+          global: true,
         },
         {
           href: `/advanced/best-practice-security`,
           label: 'menu.bestPracticeSecurity',
           ariaLabel: 'menu.bestPracticeSecurityAria',
+          global: true,
         },
         {
           href: `/advanced/healthcheck-graceful-shutdown`,
           label: 'menu.healthcheckGracefulShutdown',
           ariaLabel: 'menu.healthcheckGracefulShutdownAria',
+          global: true,
         },
         {
           href: `/advanced/security-updates`,
