@@ -1,9 +1,7 @@
 ---
-title: Express serve-favicon middleware
-module: serve-favicon
+title: serve-favicon middleware
+description: Favicon serving middleware with caching
 ---
-
-# serve-favicon
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]

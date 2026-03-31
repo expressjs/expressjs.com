@@ -1,9 +1,7 @@
 ---
-title: Express cors middleware
-module: cors
+title: cors middleware
+description: Node.js CORS middleware
 ---
-
-# cors
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]

@@ -1,9 +1,7 @@
 ---
-title: Express FAQ
+title: FAQ
 description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 ---
-
-# FAQ
 
 ## How should I structure my application?
 

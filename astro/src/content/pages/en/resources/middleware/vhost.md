@@ -1,9 +1,7 @@
 ---
-title: Express vhost middleware
-module: vhost
+title: vhost middleware
+description: Virtual domain hosting
 ---
-
-# vhost
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]

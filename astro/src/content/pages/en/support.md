@@ -3,8 +3,6 @@ title: Version Support
 description: Find information about the support schedule for different Express.js versions, including which versions are currently maintained and end-of-life policies.
 ---
 
-# Version Support
-
 Only the latest version of any given major release line is supported.
 
 Versions that are EOL (end-of-life) _may_ receive updates for critical security vulnerabilities, but the Express team offers no guarantee and does not plan to address or release fixes for any issues found.

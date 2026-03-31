@@ -1,9 +1,7 @@
 ---
-title: Express body-parser middleware
-module: body-parser
+title: body-parser middleware
+description: Node.js body parsing middleware
 ---
-
-# body-parser
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]

@@ -1,11 +1,9 @@
 ---
-title: Migrating to Express 5
+title: Moving to Express 5
 description: A comprehensive guide to migrating your Express.js applications from version 4 to 5, detailing breaking changes, deprecated methods, and new improvements.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
-
-# Moving to Express 5
 
 Express 5 is not very different from Express 4; although it maintains the same basic API, there are still changes that break compatibility with the previous version. Therefore, an application built with Express 4 might not work if you update it to use Express 5.
 
@@ -479,10 +477,10 @@ To achieve the same detail of debug logging when using `express:*` in v4, use a 
 `express:*`, `router`, and `router:*`.
 
 ```sh
-# v4
+
 DEBUG=express:* node index.js
 
-# v5
+
 DEBUG=express:*,router,router:* node index.js
 ```
 
