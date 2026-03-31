@@ -3,8 +3,6 @@ title: Contributing to Express
 description: Find out how to contribute to Express.js, including guidelines for reporting issues, submitting pull requests, becoming a collaborator, and understanding security policies.
 ---
 
-# Contributing to Express
-
 Express and the other projects in the [expressjs organization on GitHub](https://github.com/expressjs) are projects of the [OpenJS Foundation](https://openjsf.org/).
 These projects are governed under the general policies and guidelines of the Node.js Foundation along with the additional guidelines below.
 

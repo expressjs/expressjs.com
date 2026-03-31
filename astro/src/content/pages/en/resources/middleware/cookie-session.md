@@ -3,8 +3,6 @@ title: Express cookie-session middleware
 module: cookie-session
 ---
 
-# cookie-session
-
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
 [![Build Status][ci-image]][ci-url]

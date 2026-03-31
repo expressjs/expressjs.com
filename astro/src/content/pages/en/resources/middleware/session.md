@@ -3,8 +3,6 @@ title: Express session middleware
 module: session
 ---
 
-# express-session
-
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][node-url]
 [![Build Status][ci-image]][ci-url]

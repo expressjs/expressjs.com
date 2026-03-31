@@ -3,8 +3,6 @@ title: Express response-time middleware
 module: response-time
 ---
 
-# response-time
-
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
 [![Node.js Version][node-image]][node-url]

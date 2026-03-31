@@ -3,8 +3,6 @@ title: Express errorhandler middleware
 module: errorhandler
 ---
 
-# errorhandler
-
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
 <a href="https://github.com/expressjs/errorhandler/actions/workflows/ci.yml"><img src="https://github.com/expressjs/errorhandler/actions/workflows/ci.yml/badge.svg"></a>

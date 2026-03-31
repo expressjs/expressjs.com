@@ -3,8 +3,6 @@ title: Express serve-static middleware
 module: serve-static
 ---
 
-# serve-static
-
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
 [![CI][github-actions-ci-image]][github-actions-ci-url]

@@ -3,8 +3,6 @@ title: Express cors middleware
 module: cors
 ---
 
-# cors
-
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][github-actions-ci-image]][github-actions-ci-url]

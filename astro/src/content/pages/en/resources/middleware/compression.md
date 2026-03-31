@@ -3,8 +3,6 @@ title: Express compression middleware
 module: compression
 ---
 
-# compression
-
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][github-actions-ci-image]][github-actions-ci-url]

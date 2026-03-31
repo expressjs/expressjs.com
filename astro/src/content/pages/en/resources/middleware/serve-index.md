@@ -3,8 +3,6 @@ title: Express serve-index middleware
 module: serve-index
 ---
 
-# serve-index
-
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Linux Build Status][ci-image]][ci-url]

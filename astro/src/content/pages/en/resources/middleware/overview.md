@@ -3,8 +3,6 @@ title: Express middleware
 description: Explore a list of Express.js middleware modules maintained by the Express team and the community, including built-in middleware and popular third-party modules.
 ---
 
-# Express middleware
-
 The Express middleware modules listed here are maintained by the
 [Expressjs team](https://github.com/orgs/expressjs/people).
 

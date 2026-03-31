@@ -3,8 +3,6 @@ title: Express serve-favicon middleware
 module: serve-favicon
 ---
 
-# serve-favicon
-
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Linux Build Status][ci-image]][ci-url]

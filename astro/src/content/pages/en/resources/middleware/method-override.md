@@ -3,8 +3,6 @@ title: Express method-override middleware
 module: method-override
 ---
 
-# method-override
-
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][travis-image]][travis-url]
