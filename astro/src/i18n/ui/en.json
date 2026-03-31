@@ -129,6 +129,7 @@
   "features.webapplication.title": "Web Applications",
   "features.webapplication.body": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.",
   "page.editOnGitHub": "Edit on GitHub",
+  "page.translateThis": "Translate this page",
   "post.share": "Share",
   "post.shareOnX": "Share on X",
   "post.shareOnBluesky": "Share on Bluesky",
