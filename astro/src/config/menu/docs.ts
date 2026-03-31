@@ -83,6 +83,11 @@ export const docsMenu: Menu = {
           label: 'menu.overridingExpressApi',
           ariaLabel: 'menu.overridingExpressApiAria',
         },
+      ],
+    },
+    {
+      title: 'menu.migrationGuides',
+      items: [
         {
           href: `/guide/migrating-4`,
           label: 'menu.migratingTo4',
