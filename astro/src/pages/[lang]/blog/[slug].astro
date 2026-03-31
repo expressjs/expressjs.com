@@ -15,10 +15,9 @@ import {
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  const enPosts = posts.filter((post) => post.id.startsWith('en/'));
 
   return Object.keys(languages).flatMap((lang) =>
-    enPosts.map((post) => {
+    posts.map((post) => {
       const filename = post.id.split('/').pop()!;
       return {
         params: { lang, slug: filename },
@@ -77,7 +76,7 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
         as="a"
         variant="secondary"
         size="sm"
-        href={`https://github.com/expressjs/expressjs.com/edit/gh-pages/astro/src/content/blog/en/${Astro.params.slug}`}
+        href={`https://github.com/expressjs/expressjs.com/edit/gh-pages/astro/src/content/blog/${Astro.params.slug}`}
       >
         <Icon name="github" aria-hidden="true" />
         {t('page.editOnGitHub')}
@@ -98,7 +97,7 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
     <WriteBanner
       message={t('post.writeBanner')}
       linkLabel={t('post.writeGuidelines')}
-      href="/en/blog/write-post"
+      href={`/${Astro.params.lang}/blog/write-post`}
     />
   </Container>
 </Layout>
