@@ -17,13 +17,13 @@
     "lint-staged": "lint-staged"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/rss": "^4.0.17",
-    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/mdx": "^5.0.3",
+    "@astrojs/react": "^5.0.2",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
     "@orama/core": "^1.2.19",
     "@orama/ui": "^1.5.4",
-    "astro": "^5.18.0",
+    "astro": "^6.1.2",
     "astro-expressive-code": "^0.41.7",
     "astro-icon": "^1.1.5",
     "gray-matter": "^4.0.3",
