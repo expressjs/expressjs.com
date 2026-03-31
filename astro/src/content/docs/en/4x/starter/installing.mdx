@@ -7,21 +7,18 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 # Installing
 
-Assuming you've already installed [Node.js](https://nodejs.org/), create a directory to hold your application, and make that your working directory.
-
-- [Express 4.x](/en/4x/api) requires Node.js 0.10 or higher.
-- [Express 5.x](/en/5x/api) requires Node.js 18 or higher.
+Before you begin, make sure you have [Node.js](https://nodejs.org/) 0.10 or higher installed. Then, create a directory for your application and navigate into it.
 
 ```bash
-$ mkdir myapp
-$ cd myapp
+mkdir myapp
+cd myapp
 ```
 
 Use the `npm init` command to create a `package.json` file for your application.
 For more information on how `package.json` works, see [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
 
 ```bash
-$ npm init
+npm init
 ```
 
 This command prompts you for a number of things, such as the name and version of your application.
@@ -36,13 +33,13 @@ Enter `app.js`, or whatever you want the name of the main file to be. If you wan
 Now, install Express in the `myapp` directory and save it in the dependencies list. For example:
 
 ```bash
-$ npm install express
+npm install express
 ```
 
 To install Express temporarily and not add it to the dependencies list:
 
 ```bash
-$ npm install express --no-save
+npm install express --no-save
 ```
 
 <Alert type="info">
