@@ -10,7 +10,10 @@ module: cors
 [![Build Status][github-actions-ci-image]][github-actions-ci-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
-CORS is a [Node.js](https://nodejs.org/en/) package for providing a [Connect](https://github.com/senchalabs/connect)/[Express](https://expressjs.com/) middleware that can be used to enable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) with various options.
+CORS is a [Node.js](https://nodejs.org/en/) middleware for [Express](https://expressjs.com/)/[Connect](https://github.com/senchalabs/connect) that sets [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) response headers. These headers tell browsers which origins can read responses from your server.
+
+> [!IMPORTANT]
+> **How CORS Works:** This package sets response headers—it doesn't block requests. CORS is enforced by browsers: they check the headers and decide if JavaScript can read the response. Non-browser clients (curl, Postman, other servers) ignore CORS entirely. See the [MDN CORS guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) for details.
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -21,6 +24,7 @@ CORS is a [Node.js](https://nodejs.org/en/) package for providing a [Connect](ht
   - [Enabling CORS Pre-Flight](#enabling-cors-pre-flight)
   - [Customizing CORS Settings Dynamically per Request](#customizing-cors-settings-dynamically-per-request)
 - [Configuration Options](#configuration-options)
+- [Common Misconceptions](#common-misconceptions)
 - [License](#license)
 - [Original Author](#original-author)
 
@@ -43,14 +47,15 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 
+// Adds headers: Access-Control-Allow-Origin: *
 app.use(cors());
 
 app.get('/products/:id', function (req, res, next) {
-  res.json({ msg: 'This is CORS-enabled for all origins!' });
+  res.json({ msg: 'Hello' });
 });
 
 app.listen(80, function () {
-  console.log('CORS-enabled web server listening on port 80');
+  console.log('web server listening on port 80');
 });
 ```
 
@@ -61,12 +66,13 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 
+// Adds headers: Access-Control-Allow-Origin: *
 app.get('/products/:id', cors(), function (req, res, next) {
-  res.json({ msg: 'This is CORS-enabled for a Single Route' });
+  res.json({ msg: 'Hello' });
 });
 
 app.listen(80, function () {
-  console.log('CORS-enabled web server listening on port 80');
+  console.log('web server listening on port 80');
 });
 ```
 
@@ -84,12 +90,13 @@ var corsOptions = {
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
+// Adds headers: Access-Control-Allow-Origin: http://example.com, Vary: Origin
 app.get('/products/:id', cors(corsOptions), function (req, res, next) {
-  res.json({ msg: 'This is CORS-enabled for only example.com.' });
+  res.json({ msg: 'Hello' });
 });
 
 app.listen(80, function () {
-  console.log('CORS-enabled web server listening on port 80');
+  console.log('web server listening on port 80');
 });
 ```
 
@@ -123,12 +130,13 @@ var corsOptions = {
   },
 };
 
+// Adds headers: Access-Control-Allow-Origin: <matched origin>, Vary: Origin
 app.get('/products/:id', cors(corsOptions), function (req, res, next) {
-  res.json({ msg: 'This is CORS-enabled for an allowed domain.' });
+  res.json({ msg: 'Hello' });
 });
 
 app.listen(80, function () {
-  console.log('CORS-enabled web server listening on port 80');
+  console.log('web server listening on port 80');
 });
 ```
 
@@ -146,13 +154,13 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 
-app.options('/products/:id', cors()); // enable pre-flight request for DELETE request
+app.options('/products/:id', cors()); // preflight for DELETE
 app.del('/products/:id', cors(), function (req, res, next) {
-  res.json({ msg: 'This is CORS-enabled for all origins!' });
+  res.json({ msg: 'Hello' });
 });
 
 app.listen(80, function () {
-  console.log('CORS-enabled web server listening on port 80');
+  console.log('web server listening on port 80');
 });
 ```
 
@@ -187,12 +195,14 @@ Here’s an example that handles both public routes and restricted, credential-s
 var dynamicCorsOptions = function (req, callback) {
   var corsOptions;
   if (req.path.startsWith('/auth/connect/')) {
+    // Access-Control-Allow-Origin: http://mydomain.com, Access-Control-Allow-Credentials: true, Vary: Origin
     corsOptions = {
-      origin: 'http://mydomain.com', // Allow only a specific origin
-      credentials: true, // Enable cookies and credentials
+      origin: 'http://mydomain.com',
+      credentials: true,
     };
   } else {
-    corsOptions = { origin: '*' }; // Allow all origins for other routes
+    // Access-Control-Allow-Origin: *
+    corsOptions = { origin: '*' };
   }
   callback(null, corsOptions);
 };
@@ -200,15 +210,15 @@ var dynamicCorsOptions = function (req, callback) {
 app.use(cors(dynamicCorsOptions));
 
 app.get('/auth/connect/twitter', function (req, res) {
-  res.send('CORS dynamically applied for Twitter authentication.');
+  res.send('Hello');
 });
 
 app.get('/public', function (req, res) {
-  res.send('Public data with open CORS.');
+  res.send('Hello');
 });
 
 app.listen(80, function () {
-  console.log('CORS-enabled web server listening on port 80');
+  console.log('web server listening on port 80');
 });
 ```
 
@@ -241,7 +251,19 @@ The default configuration is the equivalent of:
 }
 ```
 
-For details on the effect of each CORS header, read [this](https://web.dev/articles/cross-origin-resource-sharing) article.
+## Common Misconceptions
+
+### "CORS blocks requests from disallowed origins"
+
+**No.** Your server receives and processes every request. CORS headers tell the browser whether JavaScript can read the response—not whether the request is allowed.
+
+### "CORS protects my API from unauthorized access"
+
+**No.** CORS is not access control. Any HTTP client (curl, Postman, another server) can call your API regardless of CORS settings. Use authentication and authorization to protect your API.
+
+### "Setting `origin: 'http://example.com'` means only that domain can access my server"
+
+**No.** It means browsers will only let JavaScript from that origin read responses. The server still responds to all requests.
 
 ## License
 
