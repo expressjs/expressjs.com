@@ -1,10 +1,9 @@
 ---
 title: Express middleware
 description: Explore a list of Express.js middleware modules maintained by the Express team and the community, including built-in middleware and popular third-party modules.
-module: mw-home
 ---
 
-## Express middleware
+# Express middleware
 
 The Express middleware modules listed here are maintained by the
 [Expressjs team](https://github.com/orgs/expressjs/people).
@@ -32,7 +31,11 @@ The Express middleware modules listed here are maintained by the
 
 These are some additional popular middleware modules.
 
-{% include community-caveat.html %}
+<Alert type="warning">
+  This information refers to third-party sites, products, or modules that are not maintained by the
+  Expressjs team. Listing here does not constitute an endorsement or recommendation from the
+  Expressjs project team.
+</Alert>
 
 | Middleware module                                   | Description                                                                                                                                  |
 | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
