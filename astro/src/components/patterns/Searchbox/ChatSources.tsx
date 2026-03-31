@@ -30,7 +30,7 @@ export const ChatSources: FC<ChatSourcesProps> = ({ interaction }) => {
                   {(document.title as string).length > 30 ? '...' : ''}
                 </h3>
                 <p className="chat-sources-excerpt">
-                  {(document.content as string).slice(0, 60)}
+                  {(document.description as string).slice(0, 60)}
                   ...
                 </p>
               </a>

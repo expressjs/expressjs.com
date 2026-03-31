@@ -4,6 +4,7 @@ import DocLayout from '@layouts/DocLayout.astro';
 import { languages } from '@i18n/locales';
 import { render } from 'astro:content';
 import { buildBreadcrumbs } from '@utils/content';
+import { useTranslations } from '@i18n/utils';
 
 export async function getStaticPaths() {
   const DEFAULT_VERSION = '5x';
@@ -185,8 +186,16 @@ export async function getStaticPaths() {
 
 const { page, version } = Astro.props;
 const { lang, slug } = Astro.params;
+const t = useTranslations(lang);
 const { Content, headings } = await render(page);
-const breadcrumbs = await buildBreadcrumbs(lang, slug, 'docs', version);
+const breadcrumbs = [
+  {
+    href: `/${lang}/`,
+    ariaLabel: t('nav.home'),
+    icon: 'fluent:home-empty-20-regular',
+  },
+  ...(await buildBreadcrumbs(lang, slug, 'docs', version)),
+];
 const { title, description } = page.data;
 const isTranslation = lang !== 'en';
 const fileExt = page.filePath?.endsWith('.mdx') ? '.mdx' : '.md';

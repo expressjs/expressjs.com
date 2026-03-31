@@ -151,7 +151,7 @@ export async function buildBreadcrumbs(
 
     breadcrumbs.push({
       label: 'API',
-      href: undefined,
+      href: version ? `/${lang}/${version}/api` : `/${lang}/api`,
     });
 
     // Try to find the page in the API menu structure to get proper labels
