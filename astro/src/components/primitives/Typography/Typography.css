@@ -70,7 +70,6 @@
        SPACING
        ============================================ */
   .text--no-v-margin {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-block: 0;
   }
 }
