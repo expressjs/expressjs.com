@@ -1,6 +1,6 @@
 ---
-title: Express timeout middleware
-module: timeout
+title: timeout middleware
+description: Request timeout middleware for Connect/Express
 ---
 
 [![NPM Version][npm-image]][npm-url]

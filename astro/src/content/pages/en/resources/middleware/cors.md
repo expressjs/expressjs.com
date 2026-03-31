@@ -1,6 +1,6 @@
 ---
-title: Express cors middleware
-module: cors
+title: cors middleware
+description: Node.js CORS middleware
 ---
 
 [![NPM Version][npm-image]][npm-url]

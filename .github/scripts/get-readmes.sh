@@ -62,6 +62,7 @@ LIST_END
   if [ -n "$FRONTMATTER" ]; then
     printf '%s\n%s\n%s\n\n%s\n' "---" "$FRONTMATTER" "---" "$CONTENT" > $DEST
   else
-    printf '%s\n%s\n%s\n\n%s\n' "---" "title: $repo middleware" "module: $repo" "---" "$CONTENT" > $DEST
+    DESC=$(curl -s "https://registry.npmjs.org/$repo" | jq -r '.description // empty')
+    printf '%s\n%s\n%s\n%s\n\n%s\n' "---" "title: $repo middleware" "description: $DESC" "---" "$CONTENT" > $DEST
   fi
 done

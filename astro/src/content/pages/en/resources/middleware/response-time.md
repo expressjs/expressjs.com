@@ -1,6 +1,6 @@
 ---
-title: Express response-time middleware
-module: response-time
+title: response-time middleware
+description: Response time for Node.js servers
 ---
 
 [![NPM Version][npm-version-image]][npm-url]

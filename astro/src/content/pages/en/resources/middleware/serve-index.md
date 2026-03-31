@@ -1,6 +1,6 @@
 ---
-title: Express serve-index middleware
-module: serve-index
+title: serve-index middleware
+description: Serve directory listings
 ---
 
 [![NPM Version][npm-image]][npm-url]

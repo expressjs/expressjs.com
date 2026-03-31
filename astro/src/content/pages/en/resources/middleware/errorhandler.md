@@ -1,6 +1,6 @@
 ---
-title: Express errorhandler middleware
-module: errorhandler
+title: errorhandler middleware
+description: Development-only error handler middleware
 ---
 
 [![NPM Version][npm-version-image]][npm-url]

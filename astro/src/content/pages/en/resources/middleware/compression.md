@@ -1,6 +1,6 @@
 ---
-title: Express compression middleware
-module: compression
+title: compression middleware
+description: Node.js compression middleware
 ---
 
 [![NPM Version][npm-image]][npm-url]

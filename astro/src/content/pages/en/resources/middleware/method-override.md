@@ -1,6 +1,6 @@
 ---
-title: Express method-override middleware
-module: method-override
+title: method-override middleware
+description: Override HTTP verbs
 ---
 
 [![NPM Version][npm-image]][npm-url]

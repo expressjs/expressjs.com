@@ -1,6 +1,6 @@
 ---
-title: Express session middleware
-module: session
+title: session middleware
+description: Simple session middleware for Express
 ---
 
 [![NPM Version][npm-version-image]][npm-url]

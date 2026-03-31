@@ -1,6 +1,6 @@
 ---
-title: Express serve-static middleware
-module: serve-static
+title: serve-static middleware
+description: Serve static files
 ---
 
 [![NPM Version][npm-version-image]][npm-url]

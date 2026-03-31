@@ -1,6 +1,6 @@
 ---
-title: Express cookie-session middleware
-module: cookie-session
+title: cookie-session middleware
+description: Cookie session middleware
 ---
 
 [![NPM Version][npm-version-image]][npm-url]
