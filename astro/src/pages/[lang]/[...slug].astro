@@ -186,8 +186,7 @@ export async function getStaticPaths() {
 const { page, version } = Astro.props;
 const { lang, slug } = Astro.params;
 const { Content, headings } = await render(page);
-const collection = 'docs';
-const breadcrumbs = await buildBreadcrumbs(lang, slug, collection, version);
+const breadcrumbs = await buildBreadcrumbs(lang, slug, 'docs', version);
 const { title, description } = page.data;
 ---
 

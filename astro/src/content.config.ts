@@ -17,14 +17,6 @@ const apiCollection = defineCollection({
   }),
 });
 
-const resourcesCollection = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/resources' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-  }),
-});
-
 const pagesCollection = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/pages' }),
   schema: z.object({
@@ -63,7 +55,6 @@ const npmCollection = defineCollection({
 export const collections = {
   docs: docsCollection,
   api: apiCollection,
-  resources: resourcesCollection,
   pages: pagesCollection,
   blog: blogCollection,
   npm: npmCollection,

@@ -168,8 +168,7 @@ astro/
 │   │   ├── menu/            # Menu configuration files (sidebars)
 │   ├── content/             # Content collections
 │   │   ├── docs/            # Versioned documentation content
-│   │   ├── pages/           # Global pages (non-versioned)
-│   │   └── resources/       # Resource pages
+│   │   └── pages/           # Global pages (non-versioned docs, resources, support)
 │   ├── i18n/                # Internationalization
 │   ├── layouts/             # Page layouts
 │   ├── pages/               # Route pages
@@ -190,11 +189,10 @@ The site uses Astro's [Content Collections](https://docs.astro.build/en/guides/c
 
 ### Collections
 
-| Collection  | Location                 | Description                                 |
-| ----------- | ------------------------ | ------------------------------------------- |
-| `docs`      | `src/content/docs/`      | Versioned documentation pages (guides, API) |
-| `pages`     | `src/content/pages/`     | Global pages shared across all versions     |
-| `resources` | `src/content/resources/` | Resource pages (community, tools)           |
+| Collection | Location             | Description                                                    |
+| ---------- | -------------------- | -------------------------------------------------------------- |
+| `docs`     | `src/content/docs/`  | Versioned documentation pages (guides, API)                    |
+| `pages`    | `src/content/pages/` | Global pages: non-versioned docs, resources, support, and more |
 
 ### Frontmatter schema
 
@@ -251,11 +249,23 @@ Some documentation pages are shared across all versions and don't belong to a sp
 src/content/pages/
 └── en/
     ├── advanced/
+    │   ├── best-practice-performance.md
+    │   ├── best-practice-security.mdx
+    │   ├── healthcheck-graceful-shutdown.md
     │   └── security-updates.mdx
-    └── guide/
-        ├── migrating-4.mdx
-        └── migrating-5.mdx
+    ├── guide/
+    │   ├── database-integration.mdx
+    │   ├── migrating-4.mdx
+    │   └── migrating-5.mdx
+    ├── resources/
+    │   ├── community.md
+    │   ├── contributing.md
+    │   ├── glossary.mdx
+    │   ├── utils.md
+    └── support.md
 ```
+
+Pages with a slug starting with `resources/` are treated as resource pages and won't show "Docs" in the breadcrumbs.
 
 #### Adding a global page
 
@@ -524,8 +534,7 @@ UI strings are stored in JSON files in `src/i18n/ui/`. For example, `src/i18n/ui
 Documentation content is stored separately from UI translations:
 
 - **Docs**: `src/content/docs/[lang-code]/[version]/` - Versioned documentation pages
-- **Pages**: `src/content/pages/[lang-code]/` - Global pages (non-versioned)
-- **Resources**: `src/content/resources/[lang-code]/` - Resource pages
+- **Pages**: `src/content/pages/[lang-code]/` - Global pages (non-versioned docs, resources, support)
 
 The following content is currently not translated:
 

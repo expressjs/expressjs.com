@@ -23,8 +23,8 @@ const collectMdFiles = async (dir, base = dir) => {
   return results.flat();
 };
 
-export const getResources = async (lang) => {
-  const baseDir = join(CONTENT_DIR, `resources/${lang}`);
+export const getPages = async (lang) => {
+  const baseDir = join(CONTENT_DIR, `pages/${lang}`);
   const mdFiles = await collectMdFiles(baseDir);
 
   return Promise.all(
@@ -33,13 +33,14 @@ export const getResources = async (lang) => {
       const raw = await readFile(fullPath, 'utf-8');
       const { data, content } = matter(raw);
       const pathSegment = relative(baseDir, fullPath).replace(/\.md$/, '');
+      const isResource = pathSegment.startsWith('resources');
 
       return {
         title: data.title ?? basename(file, '.md'),
         description: data.description ?? '',
         content: mdToText(content),
-        path: `/${lang}/resources/${pathSegment}`,
-        category: 'menu.resources',
+        path: `/${lang}/${pathSegment}`,
+        category: isResource ? 'menu.resources' : 'menu.docs',
       };
     })
   );
@@ -121,11 +122,11 @@ export const getApi = async (lang) => {
 };
 
 export const getAllDocuments = async (lang) => {
-  const [docs, api, resources, blog] = await Promise.all([
+  const [docs, api, pages, blog] = await Promise.all([
     getDocs(lang),
     getApi(lang),
-    getResources(lang),
+    getPages(lang),
     getBlogPosts(lang),
   ]);
-  return [...docs, ...api, ...resources, ...blog];
+  return [...docs, ...api, ...pages, ...blog];
 };
