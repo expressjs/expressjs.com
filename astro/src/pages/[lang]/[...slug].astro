@@ -3,7 +3,10 @@ import { getCollection } from 'astro:content';
 import DocLayout from '@layouts/DocLayout.astro';
 import { languages } from '@i18n/locales';
 import { render } from 'astro:content';
-import { buildBreadcrumbs } from '@utils/content';
+import { buildBreadcrumbs, getAdjacentPages } from '@utils/content';
+import { docsMenu } from '@/config/menu/docs';
+import { apiMenu } from '@/config/menu/api';
+import { resourcesMenu } from '@/config/menu/resources';
 
 export async function getStaticPaths() {
   const DEFAULT_VERSION = '5x';
@@ -190,6 +193,12 @@ const breadcrumbs = await buildBreadcrumbs(lang, slug, 'docs', version);
 const { title, description } = page.data;
 const isTranslation = lang !== 'en';
 const fileExt = page.filePath?.endsWith('.mdx') ? '.mdx' : '.md';
+const { prev, next } = getAdjacentPages(
+  slug,
+  lang,
+  [{ menu: docsMenu }, { menu: apiMenu }, { menu: resourcesMenu, global: true }],
+  version
+);
 
 // TODO: change the url when finish the redesign, this is just a temporary solution to avoid broken links for translated pages
 const editUrl = isTranslation
@@ -204,6 +213,8 @@ const editUrl = isTranslation
   headings={headings}
   editUrl={editUrl}
   isTranslation={isTranslation}
+  prev={prev}
+  next={next}
 >
   <Content />
 </DocLayout>

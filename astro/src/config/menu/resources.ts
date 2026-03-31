@@ -2,6 +2,7 @@ import type { Menu } from '../types';
 import { middlewareMenu } from './middleware';
 
 export const resourcesMenu: Menu = {
+  basePath: '/resources',
   items: [
     { href: `/community`, label: 'menu.community', ariaLabel: 'menu.communityAria' },
     { href: `/glossary`, label: 'menu.glossary', ariaLabel: 'menu.glossaryAria' },
