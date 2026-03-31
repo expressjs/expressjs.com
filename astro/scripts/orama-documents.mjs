@@ -68,7 +68,7 @@ export const getDocs = async (lang) => {
 };
 
 export const getBlogPosts = async (lang) => {
-  const baseDir = join(CONTENT_DIR, `blog/${lang}`);
+  const baseDir = join(CONTENT_DIR, `blog`);
   const mdFiles = await collectMdFiles(baseDir);
 
   return Promise.all(
