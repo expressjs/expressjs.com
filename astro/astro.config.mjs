@@ -8,6 +8,7 @@ import react from '@astrojs/react';
 import svgr from 'vite-plugin-svgr';
 import Icons from 'unplugin-icons/vite';
 import redirects from './src/config/redirect.js';
+import { accessibleTablesIntegration } from './src/plugins/rehype-accessible-tables.mjs';
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
 const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
@@ -38,6 +39,7 @@ export default defineConfig({
         borderWidth: 'var(--border-width-1)',
       },
     }),
+    accessibleTablesIntegration(),
     mdx(),
     icon(),
     react(),
