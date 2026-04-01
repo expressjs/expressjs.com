@@ -29,16 +29,18 @@ export default function SearchFooter() {
       </div>
       <div className="search-footer-branding">
         <small>Powered by</small>
-        <img
-          className="orama-logo-light"
-          src="https://website-assets.oramasearch.com/orama-when-light.svg"
-          alt="Orama logo"
-        />
-        <img
-          className="orama-logo-dark"
-          src="https://website-assets.oramasearch.com/orama-when-dark.svg"
-          alt="Orama logo"
-        />
+        <a href="https://orama.com/" target="_blank" rel="noopener noreferrer">
+          <img
+            className="orama-logo-light"
+            src="https://website-assets.oramasearch.com/orama-when-light.svg"
+            alt="Orama logo"
+          />
+          <img
+            className="orama-logo-dark"
+            src="https://website-assets.oramasearch.com/orama-when-dark.svg"
+            alt="Orama logo"
+          />
+        </a>
       </div>
     </>
   );
