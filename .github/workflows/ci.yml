@@ -51,7 +51,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Ruby    
-        uses: ruby/setup-ruby@09a7688d3b55cf0e976497ff046b70949eeaccfd # https://github.com/ruby/setup-ruby/releases/tag/v1.288.0
+        uses: ruby/setup-ruby@3ff19f5e2baf30647122352b96108b1fbe250c64 # https://github.com/ruby/setup-ruby/releases/tag/v1.299.0
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
