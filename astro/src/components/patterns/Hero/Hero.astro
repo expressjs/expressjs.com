@@ -66,14 +66,14 @@ app.listen(port, () => {
 <script>
   import { initHeroWebGL } from './hero-background';
 
-  function initHero() {
+  async function initHero() {
     const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
     if (!canvas) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Initialize WebGL; if unsupported the canvas stays empty (transparent)
-    const bg = initHeroWebGL(canvas, prefersReducedMotion);
+    const bg = await initHeroWebGL(canvas, prefersReducedMotion);
     if (!bg) return;
 
     // Only animate when the hero is visible in the viewport

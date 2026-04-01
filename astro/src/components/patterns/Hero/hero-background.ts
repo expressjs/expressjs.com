@@ -1,46 +1,87 @@
 import vertexShader from './shaders/vertex.glsl?raw';
 import fragmentShader from './shaders/fragment.glsl?raw';
 
+/** Yields to the main thread so long tasks don't block rendering/input. */
+function yieldToMain(): Promise<void> {
+  const s = globalThis as unknown as { scheduler?: { yield?: () => Promise<void> } };
+  if (s.scheduler?.yield) return s.scheduler.yield();
+  return new Promise((r) => setTimeout(r, 0));
+}
+
+/**
+ * Polls until a shader/program is ready when KHR_parallel_shader_compile is
+ * available, yielding to the main thread between checks. Falls back to a
+ * single yield when the extension is absent.
+ */
+async function waitForCompilation(isReady: () => boolean) {
+  while (!isReady()) {
+    await yieldToMain();
+  }
+}
+
 /**
  * Initializes the WebGL hero background on the given canvas.
  *
  * @param canvas - The canvas element to render into.
  * @param reducedMotion - If true, freezes time at 0 (static frame).
- * @returns Controller with play/pause/destroy, or null if WebGL is unavailable.
+ * @returns Controller with play/pause, or null if WebGL is unavailable.
  */
-export function initHeroWebGL(canvas: HTMLCanvasElement, reducedMotion = false) {
+export async function initHeroWebGL(canvas: HTMLCanvasElement, reducedMotion = false) {
   // Attempt to get a WebGL context; return null if unsupported
   const gl = canvas.getContext('webgl', { alpha: false, powerPreference: 'low-power' });
   if (!gl) return null;
 
-  // -- Shader compilation --
+  const parallelExt = gl.getExtension('KHR_parallel_shader_compile') as {
+    COMPLETION_STATUS_KHR: number;
+  } | null;
+
+  // -- Shader compilation (non-blocking) --
 
   function compile(type: number, src: string) {
     const s = gl!.createShader(type)!;
     gl!.shaderSource(s, src);
     gl!.compileShader(s);
-    if (!gl!.getShaderParameter(s, gl!.COMPILE_STATUS)) {
-      console.error(gl!.getShaderInfoLog(s));
-      gl!.deleteShader(s);
-      return null;
-    }
     return s;
   }
 
+  // Kick off both compilations in parallel, then yield
   const vs = compile(gl.VERTEX_SHADER, vertexShader);
   const fs = compile(gl.FRAGMENT_SHADER, fragmentShader);
-  if (!vs || !fs) {
-    if (vs) gl.deleteShader(vs);
-    if (fs) gl.deleteShader(fs);
+
+  const kshr = parallelExt?.COMPLETION_STATUS_KHR ?? null;
+  if (kshr !== null) {
+    await waitForCompilation(() => gl.getShaderParameter(vs!, kshr));
+    await waitForCompilation(() => gl.getShaderParameter(fs!, kshr));
+  } else {
+    await yieldToMain();
+  }
+
+  if (!gl.getShaderParameter(vs!, gl.COMPILE_STATUS)) {
+    console.error(gl.getShaderInfoLog(vs!));
+    gl.deleteShader(vs);
+    gl.deleteShader(fs);
+    return null;
+  }
+  if (!gl.getShaderParameter(fs!, gl.COMPILE_STATUS)) {
+    console.error(gl.getShaderInfoLog(fs!));
+    gl.deleteShader(vs);
+    gl.deleteShader(fs);
     return null;
   }
 
-  // -- Program linking --
+  // -- Program linking (non-blocking) --
 
   const prog = gl.createProgram()!;
-  gl.attachShader(prog, vs);
-  gl.attachShader(prog, fs);
+  gl.attachShader(prog, vs!);
+  gl.attachShader(prog, fs!);
   gl.linkProgram(prog);
+
+  if (kshr !== null) {
+    await waitForCompilation(() => gl.getProgramParameter(prog, kshr));
+  } else {
+    await yieldToMain();
+  }
+
   if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
     console.error(gl.getProgramInfoLog(prog));
     gl.deleteProgram(prog);
