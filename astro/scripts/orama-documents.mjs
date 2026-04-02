@@ -7,7 +7,10 @@ import { toString } from 'mdast-util-to-string';
 
 const CONTENT_DIR = fileURLToPath(new URL('../src/content', import.meta.url));
 
-const mdToText = (content) => toString(fromMarkdown(content)).replace(/<[^>]*>/g, '');
+const stripMdxImports = (content) => content.replace(/^import\s+.*$/gm, '');
+
+const mdToText = (content) =>
+  toString(fromMarkdown(stripMdxImports(content))).replace(/<[^>]*>/g, '');
 
 const collectMdFiles = async (dir, base = dir) => {
   const entries = await readdir(dir);
@@ -16,7 +19,7 @@ const collectMdFiles = async (dir, base = dir) => {
       const fullPath = join(dir, entry);
       const info = await stat(fullPath);
       if (info.isDirectory()) return collectMdFiles(fullPath, base);
-      if (extname(entry) === '.md') return [relative(base, fullPath)];
+      if (extname(entry) === '.md' || extname(entry) === '.mdx') return [relative(base, fullPath)];
       return [];
     })
   );
@@ -32,11 +35,11 @@ export const getPages = async (lang) => {
       const fullPath = join(baseDir, file);
       const raw = await readFile(fullPath, 'utf-8');
       const { data, content } = matter(raw);
-      const pathSegment = relative(baseDir, fullPath).replace(/\.md$/, '');
+      const pathSegment = relative(baseDir, fullPath).replace(/\.mdx?$/, '');
       const isResource = pathSegment.startsWith('resources');
 
       return {
-        title: data.title ?? basename(file, '.md'),
+        title: data.title ?? basename(file).replace(/\.mdx?$/, ''),
         description: data.description ?? '',
         content: mdToText(content),
         path: `/${lang}/${pathSegment}`,
@@ -55,10 +58,10 @@ export const getDocs = async (lang) => {
       const fullPath = join(baseDir, file);
       const raw = await readFile(fullPath, 'utf-8');
       const { data, content } = matter(raw);
-      const pathSegment = relative(baseDir, fullPath).replace(/\.md$/, '');
+      const pathSegment = relative(baseDir, fullPath).replace(/\.mdx?$/, '');
 
       return {
-        title: data.title ?? basename(file, '.md'),
+        title: data.title ?? basename(file).replace(/\.mdx?$/, ''),
         description: data.description ?? '',
         content: mdToText(content),
         path: `/${lang}/${pathSegment}`,
@@ -77,7 +80,7 @@ export const getBlogPosts = async (lang) => {
       const fullPath = join(baseDir, file);
       const raw = await readFile(fullPath, 'utf-8');
       const { data, content } = matter(raw);
-      const slug = basename(file, '.md');
+      const slug = basename(file).replace(/\.mdx?$/, '');
 
       return {
         title: data.title ?? slug,
@@ -103,10 +106,10 @@ export const getApi = async (lang) => {
           const fullPath = join(baseDir, file);
           const raw = await readFile(fullPath, 'utf-8');
           const { data, content } = matter(raw);
-          const pathSegment = relative(baseDir, fullPath).replace(/\.md$/, '');
+          const pathSegment = relative(baseDir, fullPath).replace(/\.mdx?$/, '');
 
           return {
-            title: data.title ?? basename(file, '.md'),
+            title: data.title ?? basename(file).replace(/\.mdx?$/, ''),
             description: data.description ?? '',
             content: mdToText(content),
             path: `/${lang}/${version}/${pathSegment}`,

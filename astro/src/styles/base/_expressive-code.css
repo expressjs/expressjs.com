@@ -13,6 +13,11 @@
     top: var(--space-3);
     right: var(--space-3);
     height: var(--size-5);
+
+    button {
+      width: var(--size-6);
+      height: var(--size-6);
+    }
   }
 
   figcaption:not(:empty) ~ .copy {

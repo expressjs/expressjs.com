@@ -39,6 +39,7 @@ const authorsList = (authors ?? []).map((a) => ({
   name: a.name ?? '',
 }));
 const filename = post.id.split('/').pop() ?? post.id;
+console.log('filename', filename);
 const dateSource = filename.substring(0, 10);
 const parsedDate = new Date(dateSource);
 const date = Number.isNaN(parsedDate.getTime())
@@ -51,7 +52,7 @@ const date = Number.isNaN(parsedDate.getTime())
 const labels = tags ?? [];
 
 const allPosts = (await getCollection('blog'))
-  .filter((p) => p.id.startsWith('en/') && p.id !== post.id && p.id !== 'en/write-post')
+  .filter((p) => p.id.startsWith('en/') && p.id !== post.id && p.id !== 'write-post')
   .sort((a, b) => b.id.localeCompare(a.id));
 
 const currentTags = new Set(tags ?? []);
@@ -94,11 +95,15 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
       </div>
     </article>
     <RelatedContent posts={relatedPosts} lang={Astro.params.lang} title={t('post.more')} />
-    <WriteBanner
-      message={t('post.writeBanner')}
-      linkLabel={t('post.writeGuidelines')}
-      href={`/${Astro.params.lang}/blog/write-post`}
-    />
+    {
+      filename !== 'write-post' && (
+        <WriteBanner
+          message={t('post.writeBanner')}
+          linkLabel={t('post.writeGuidelines')}
+          href={`/${Astro.params.lang}/blog/write-post`}
+        />
+      )
+    }
   </Container>
 </Layout>
 
