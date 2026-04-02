@@ -2,8 +2,7 @@
 
 This is the contribution documentation for the [expressjs.com](https://github.com/expressjs/expressjs.com) website.
 
-> [!NOTE]
-> This is not the repo for Express.js framework. To contribute to the _[Express.js framework](https://github.com/expressjs/express)_, check out the [GitHub repo contributing page](https://github.com/expressjs/express?tab=contributing-ov-file) or the website's [Contributing to Express](https://expressjs.com/en/resources/contributing) page.
+You can see the current [captains and committers](https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md) of this project, and learn how to join through the [governance document](https://github.com/expressjs/discussions/blob/HEAD/docs/GOVERNANCE.md). Also review the [Express Collaborator Guide](https://github.com/expressjs/.github/blob/HEAD/CONTRIBUTING.md) for general contribution guidelines across Express.js projects.
 
 ### Common contributions
 
