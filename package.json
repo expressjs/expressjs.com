@@ -1,6 +1,15 @@
 {
   "name": "expressjs-website",
   "type": "module",
+  "private": true,
+  "description": "Express.js Website",
+  "author": {
+    "name": "Express.js Documentation Team and Contributors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/expressjs/expressjs.com.git"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -12,7 +21,7 @@
     "format:check": "prettier --check .",
     "check": "npm run format:check && npm run lint",
     "fix": "npm run format && npm run lint:fix",
-    "prepare": "cd .. && husky astro/.husky",
+    "prepare": "husky",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
@@ -36,7 +45,7 @@
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": "24.x",
+      "version": ">=24.13.0",
       "onFail": "error"
     },
     "packageManager": {
