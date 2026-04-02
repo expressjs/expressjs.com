@@ -70,14 +70,19 @@ app.listen(port, () => {
     const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
     if (!canvas) return;
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduce-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = window.matchMedia('(max-width: 768px)');
 
-    // Skip WebGL entirely on mobile
-    if (isMobile.matches) return;
-
-    const bg = await initHeroWebGL(canvas, prefersReducedMotion);
+    // On mobile, render a single static frame to save battery/performance
+    const bg = await initHeroWebGL(canvas, prefersReducedMotion || isMobile.matches);
     if (!bg) return;
+
+    // Render the initial frame, then stop if mobile
+    bg.play();
+    if (isMobile.matches) {
+      // Single frame rendered, no animation loop needed
+      return;
+    }
 
     // Only animate when the hero is visible in the viewport
     const observer = new IntersectionObserver(
@@ -95,9 +100,16 @@ app.listen(port, () => {
 
     observer.observe(canvas);
 
-    // Pause when the tab is hidden to save resources
+    isMobile.addEventListener('change', (e) => {
+      if (e.matches) {
+        bg.pause();
+      } else {
+        bg.play();
+      }
+    });
+
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
+      if (document.hidden || isMobile.matches) {
         bg.pause();
       } else {
         bg.play();
@@ -105,7 +117,6 @@ app.listen(port, () => {
     });
   }
 
-  // Run init when the DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initHero);
   } else {
