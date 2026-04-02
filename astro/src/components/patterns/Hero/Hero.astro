@@ -64,15 +64,17 @@ app.listen(port, () => {
 </section>
 
 <script>
+  import { initHeroWebGL } from './hero-background';
+
   async function initHero() {
     const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
     if (!canvas) return;
 
-    // Lazy-load the WebGL module so it doesn't block the main thread
-    const { initHeroWebGL } = await import('./hero-background');
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduce-motion: reduce)').matches;
     const isMobile = window.matchMedia('(max-width: 768px)');
+
+    // Skip WebGL entirely on mobile
+    if (isMobile.matches) return;
 
     const bg = await initHeroWebGL(canvas, prefersReducedMotion);
     if (!bg) return;
@@ -82,11 +84,7 @@ app.listen(port, () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            if (isMobile.matches) {
-              requestAnimationFrame(() => bg.renderOnce());
-            } else {
-              bg.play();
-            }
+            bg.play();
           } else {
             bg.pause();
           }
@@ -97,16 +95,9 @@ app.listen(port, () => {
 
     observer.observe(canvas);
 
-    isMobile.addEventListener('change', (e) => {
-      if (e.matches) {
-        bg.pause();
-      } else {
-        bg.play();
-      }
-    });
-
+    // Pause when the tab is hidden to save resources
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden || isMobile.matches) {
+      if (document.hidden) {
         bg.pause();
       } else {
         bg.play();
@@ -114,9 +105,10 @@ app.listen(port, () => {
     });
   }
 
-  // Defer init until the browser is idle
-  const idle =
-    'requestIdleCallback' in window ? requestIdleCallback : (cb: () => void) => setTimeout(cb, 0);
-
-  idle(() => initHero());
+  // Run init when the DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHero);
+  } else {
+    initHero();
+  }
 </script>

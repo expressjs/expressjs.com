@@ -164,16 +164,10 @@ export async function initHeroWebGL(canvas: HTMLCanvasElement, reducedMotion = f
       running = true;
       animId = requestAnimationFrame(render);
     },
-    /** Stops the render loop. The last drawn frame stays visible on the canvas. */
+    /** Stops the render loop. */
     pause() {
       running = false;
       cancelAnimationFrame(animId);
-    },
-    /** Draws a single frame without starting the animation loop. */
-    renderOnce() {
-      gl!.uniform1f(uTime, (performance.now() - t0) / 1000);
-      gl!.uniform1f(uDark, isDark() ? 1.0 : 0.0);
-      gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
     },
   };
 }
