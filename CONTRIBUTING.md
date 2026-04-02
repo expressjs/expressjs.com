@@ -158,7 +158,6 @@ Pull requests that introduce new framework dependencies without prior discussion
 ## Project structure
 
 ```
-astro/
 ├── src/
 │   ├── assets/              # Static assets (images, icons, etc.)
 │   ├── components/          # Reusable UI components
@@ -170,9 +169,11 @@ astro/
 │   │   ├── docs/            # Versioned documentation content
 │   │   └── pages/           # Global pages (non-versioned docs, resources, support)
 │   ├── i18n/                # Internationalization
+│   ├── icons/               # Icon components
 │   ├── layouts/             # Page layouts
 │   ├── pages/               # Route pages
 │   │   └── [lang]/          # Localized pages
+│   ├── plugins/             # Custom plugins
 │   ├── styles/              # Global styles
 │   │   ├── base/            # Base styles
 │   │   ├── tokens/          # Design tokens

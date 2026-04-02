@@ -4,7 +4,7 @@
 
 # TODO: change the DEST when astro project is in the root of the repo instead of in a subdirectory.
 # read contents of file into memory
-DEST="../../astro/src/content/pages/en/resources/contributing.md"
+DEST="../../src/content/pages/en/resources/contributing.md"
 
 # track the header level
 level=''
