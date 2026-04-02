@@ -1,2 +1,1 @@
-cd astro
 node --run lint-staged
