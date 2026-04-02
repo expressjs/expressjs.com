@@ -6,7 +6,6 @@ import { render } from 'astro:content';
 import { getAdjacentPages } from '@utils/content';
 import { docsMenu } from '@/config/menu/docs';
 import { apiMenu } from '@/config/menu/api';
-import { useTranslations } from '@/i18n/utils';
 import { resourcesMenu } from '@/config/menu/resources';
 import type { LanguageCode } from '@i18n/locales';
 
@@ -193,7 +192,6 @@ export async function getStaticPaths() {
 const { page, version } = Astro.props;
 const { lang: langParam, slug } = Astro.params;
 const lang = langParam as LanguageCode;
-const t = useTranslations(lang);
 const { Content, headings } = await render(page);
 const { title, description } = page.data;
 const isTranslation = lang !== 'en';
