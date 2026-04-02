@@ -28,7 +28,7 @@ LIST_END
 ) | while read org repo branch; do
   # TODO: change the DEST when astro project is in the root of the repo instead of in a subdirectory.
   # Write the README.md to a file named after the repo
-  DEST="../../astro/src/content/pages/en/resources/middleware/$repo.md"
+  DEST="../../src/content/pages/en/resources/middleware/$repo.md"
   # When fetching from a branch of a gh repo
   GHURL="https://raw.githubusercontent.com/$org/$repo/$branch/README.md"
   # When fetching from the latest release of a node module
@@ -49,7 +49,7 @@ LIST_END
     # This allows us to specify a branch other than master if we want to.
     # In this case, the branch name is added to the readme name in the filename.
     if [ "$branch" != "master" ]; then
-      DEST="../../astro/src/content/pages/en/resources/middleware/$repo-$branch.md"
+      DEST="../../src/content/pages/en/resources/middleware/$repo-$branch.md"
     fi
     echo "fetching $org/$repo/$branch from GitHub's raw content domain..."
     CONTENT=$(curl -s $GHURL)

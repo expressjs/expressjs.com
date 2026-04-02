@@ -3,7 +3,7 @@ name: Update External Docs
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 8 * * 1"
+    - cron: '0 8 * * 1'
 
 permissions:
   pull-requests: write
@@ -23,7 +23,7 @@ jobs:
         id: expiry
         run: |
           set -eo pipefail
-          expires=$(grep -i '^Expires:' astro/public/.well-known/security.txt | sed 's/.*: //')
+          expires=$(grep -i '^Expires:' public/.well-known/security.txt | sed 's/.*: //')
           if [ "$(date -d "$expires" +%s)" -le "$(date -d '+30 days' +%s)" ]; then
             echo "bump=true" >> "$GITHUB_OUTPUT"
           fi
@@ -31,7 +31,7 @@ jobs:
       - name: Bump Expires
         if: steps.expiry.outputs.bump == 'true'
         run: |
-          sed -i "s/^Expires:.*/Expires: $(date -u -d '+180 days' +%Y-%m-%dT00:00:00Z)/I" astro/public/.well-known/security.txt
+          sed -i "s/^Expires:.*/Expires: $(date -u -d '+180 days' +%Y-%m-%dT00:00:00Z)/I" public/.well-known/security.txt
 
       - name: Create Pull Request
         if: steps.expiry.outputs.bump == 'true'
@@ -39,10 +39,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          commit-message: "docs: update security.txt expiry"
-          title: "docs: update security.txt expiry"
+          commit-message: 'docs: update security.txt expiry'
+          title: 'docs: update security.txt expiry'
           body: |
-            This PR extends the `Expires` date in `astro/public/.well-known/security.txt`.
+            This PR extends the `Expires` date in `public/.well-known/security.txt`.
 
             Before merging, please explicitly confirm that:
             - The security contact listed is still correct and actively monitored
@@ -70,7 +70,6 @@ jobs:
           node-version: lts/*
 
       - name: Install dependencies
-        working-directory: astro
         run: npm ci
 
       - name: Run scripts
@@ -80,7 +79,6 @@ jobs:
           bash ./get-readmes.sh
 
       - name: Fix formatting
-        working-directory: astro
         run: npm run fix
 
       - name: Create Pull Request
@@ -88,8 +86,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          commit-message: "docs: update external docs"
-          title: "docs: update external docs"
+          commit-message: 'docs: update external docs'
+          title: 'docs: update external docs'
           body: >
             This auto-generated PR updates external documentation to the expressjs.com repository.
 
@@ -115,10 +113,10 @@ jobs:
           download_translations: true
           localization_branch_name: crowdin/translations
           create_pull_request: true
-          pull_request_title: "i18n: new crowdin translations"
+          pull_request_title: 'i18n: new crowdin translations'
           pull_request_body: >
             New Crowdin translations from the [express.js crowdin project](https://express.crowdin.com/u/projects/1). cc: @expressjs/docs-wg
-          pull_request_base_branch_name: "redesign" # TODO: update to "main" when we merge redesign into main
+          pull_request_base_branch_name: 'redesign' # TODO: update to "main" when we merge redesign into main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
