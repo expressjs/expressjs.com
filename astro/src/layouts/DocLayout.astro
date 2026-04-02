@@ -1,6 +1,6 @@
 ---
 import Layout from './Layout.astro';
-import type { BreadcrumbItem } from '@utils/content';
+import type { BreadcrumbItem, AdjacentPage } from '@utils/content';
 import { PageTopbar, TableOfContents } from '@components/patterns';
 import { Button, Container } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
@@ -19,6 +19,8 @@ interface Props {
   headings?: Heading[];
   editUrl?: string;
   isTranslation?: boolean;
+  prev?: AdjacentPage | null;
+  next?: AdjacentPage | null;
 }
 
 const {
@@ -28,6 +30,8 @@ const {
   headings = [],
   editUrl,
   isTranslation = false,
+  prev,
+  next,
 } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -51,7 +55,48 @@ const t = useTranslations(lang);
 
     <div class="doc-layout">
       <article>
+        <h1 id="overview"><a href="#overview">{title}</a></h1>
         <slot />
+        {
+          (prev || next) && (
+            <nav class="doc-nav" aria-label={t('doc.pageNavigation')}>
+              {prev ? (
+                <Button
+                  as="a"
+                  variant="secondary"
+                  ghost
+                  href={prev.href}
+                  class="doc-nav__link doc-nav__link--prev"
+                >
+                  <Icon slot="left" name="fluent:arrow-left-20-filled" aria-hidden="true" />
+                  <span class="doc-nav__meta">
+                    <span class="doc-nav__direction">{t('doc.previousPage')}</span>
+                    <span class="doc-nav__title">{t(prev.label)}</span>
+                  </span>
+                </Button>
+              ) : (
+                <span />
+              )}
+              {next ? (
+                <Button
+                  as="a"
+                  variant="secondary"
+                  ghost
+                  href={next.href}
+                  class="doc-nav__link doc-nav__link--next"
+                >
+                  <span class="doc-nav__meta">
+                    <span class="doc-nav__direction">{t('doc.nextPage')}</span>
+                    <span class="doc-nav__title">{t(next.label)}</span>
+                  </span>
+                  <Icon slot="right" name="fluent:arrow-right-20-filled" aria-hidden="true" />
+                </Button>
+              ) : (
+                <span />
+              )}
+            </nav>
+          )
+        }
       </article>
       <TableOfContents headings={headings} class="doc-toc" />
     </div>
@@ -90,5 +135,36 @@ const t = useTranslations(lang);
       max-height: calc(100vh - var(--space-24));
       overflow-y: auto;
     }
+  }
+
+  .doc-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border-secondary);
+  }
+
+  .doc-nav__link--next {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .doc-nav__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .doc-nav__direction {
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  .doc-nav__title {
+    font-size: var(--text-sm);
+    font-weight: 600;
   }
 </style>

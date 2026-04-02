@@ -133,6 +133,22 @@ small,
   margin: var(--space-body) 0;
 }
 
+/* Heading links (rehype-autolink-headings) */
+h1 > a,
+h2 > a,
+h3 > a,
+h4 > a,
+h5 > a,
+h6 > a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
+
 /* Links */
 a {
   color: var(--color-link);

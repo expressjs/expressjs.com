@@ -1,17 +1,35 @@
 ---
-title: Express serve-favicon middleware
-module: serve-favicon
+title: serve-favicon middleware
+description: Favicon serving middleware with caching
 ---
-
-# serve-index
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Linux Build Status][ci-image]][ci-url]
-[![Windows Build][appveyor-image]][appveyor-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
+[![OpenSSF Scorecard Badge][ossf-scorecard-badge]][ossf-scorecard-visualizer]
 
-Serves pages that contain directory listings for a given path.
+Node.js middleware for serving a favicon.
+
+A favicon is a visual cue that client software, like browsers, use to identify
+a site. For an example and more information, please visit
+[the Wikipedia article on favicons](https://en.wikipedia.org/wiki/Favicon).
+
+Why use this module?
+
+- User agents request `favicon.ico` frequently and indiscriminately, so you
+  may wish to exclude these requests from your logs by using this middleware
+  before your logger middleware.
+- This module caches the icon in memory to improve performance by skipping
+  disk access.
+- This module provides an `ETag` based on the contents of the icon, rather
+  than file system properties.
+- This module will serve with the most compatible `Content-Type`.
+
+**Note** This module is exclusively for serving the "default, implicit favicon",
+which is `GET /favicon.ico`. For additional vendor-specific icons that require
+HTML markup, additional middleware is required to serve the relevant files, for
+example [serve-static](https://npmjs.org/package/serve-static).
 
 ## Install
 
@@ -20,137 +38,102 @@ This is a [Node.js](https://nodejs.org/en/) module available through the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
 ```sh
-$ npm install serve-index
+$ npm install serve-favicon
 ```
 
 ## API
 
-```js
-var serveIndex = require('serve-index');
-```
+### favicon(path, options)
 
-### serveIndex(path, options)
-
-Returns middlware that serves an index of the directory in the given `path`.
-
-The `path` is based off the `req.url` value, so a `req.url` of `'/some/dir`
-with a `path` of `'public'` will look at `'public/some/dir'`. If you are using
-something like `express`, you can change the URL "base" with `app.use` (see
-the express example).
+Create new middleware to serve a favicon from the given `path` to a favicon file.
+`path` may also be a `Buffer` of the icon to serve.
 
 #### Options
 
-Serve index accepts these properties in the options object.
+Serve favicon accepts these properties in the options object.
 
-##### filter
+##### maxAge
 
-Apply this filter function to files. Defaults to `false`. The `filter` function
-is called for each file, with the signature `filter(filename, index, files, dir)`
-where `filename` is the name of the file, `index` is the array index, `files` is
-the array of files and `dir` is the absolute path the file is located (and thus,
-the directory the listing is for).
-
-##### hidden
-
-Display hidden (dot) files. Defaults to `false`.
-
-##### icons
-
-Display icons. Defaults to `false`.
-
-##### stylesheet
-
-Optional path to a CSS stylesheet. Defaults to a built-in stylesheet.
-
-##### template
-
-Optional path to an HTML template or a function that will render a HTML
-string. Defaults to a built-in template.
-
-When given a string, the string is used as a file path to load and then the
-following tokens are replaced in templates:
-
-- `{directory}` with the name of the directory.
-- `{files}` with the HTML of an unordered list of file links.
-- `{linked-path}` with the HTML of a link to the directory.
-- `{style}` with the specified stylesheet and embedded images.
-
-When given as a function, the function is called as `template(locals, callback)`
-and it needs to invoke `callback(error, htmlString)`. The following are the
-provided locals:
-
-- `directory` is the directory being displayed (where `/` is the root).
-- `displayIcons` is a Boolean for if icons should be rendered or not.
-- `fileList` is a sorted array of files in the directory. The array contains
-  objects with the following properties:
-  - `name` is the relative name for the file.
-  - `stat` is a `fs.Stats` object for the file.
-- `path` is the full filesystem path to `directory`.
-- `style` is the default stylesheet or the contents of the `stylesheet` option.
-- `viewName` is the view name provided by the `view` option.
-
-##### view
-
-Display mode. `tiles` and `details` are available. Defaults to `tiles`.
+The `cache-control` `max-age` directive in `ms`, defaulting to 1 year. This can
+also be a string accepted by the [ms](https://www.npmjs.org/package/ms#readme)
+module.
 
 ## Examples
 
-### Serve directory indexes with vanilla node.js http server
+Typically this middleware will come very early in your stack (maybe even first)
+to avoid processing any other middleware if we already know the request is for
+`/favicon.ico`.
 
-```js
-var finalhandler = require('finalhandler');
+### express
+
+```javascript
+var express = require('express');
+var favicon = require('serve-favicon');
+var path = require('path');
+
+var app = express();
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// Add your routes here, etc.
+
+app.listen(3000);
+```
+
+### connect
+
+```javascript
+var connect = require('connect');
+var favicon = require('serve-favicon');
+var path = require('path');
+
+var app = connect();
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// Add your middleware here, etc.
+
+app.listen(3000);
+```
+
+### vanilla http server
+
+This middleware can be used anywhere, even outside express/connect. It takes
+`req`, `res`, and `callback`.
+
+```javascript
 var http = require('http');
-var serveIndex = require('serve-index');
-var serveStatic = require('serve-static');
+var favicon = require('serve-favicon');
+var finalhandler = require('finalhandler');
+var path = require('path');
 
-// Serve directory indexes for public/ftp folder (with icons)
-var index = serveIndex('public/ftp', { icons: true });
+var _favicon = favicon(path.join(__dirname, 'public', 'favicon.ico'));
 
-// Serve up public/ftp folder files
-var serve = serveStatic('public/ftp');
-
-// Create server
 var server = http.createServer(function onRequest(req, res) {
   var done = finalhandler(req, res);
-  serve(req, res, function onNext(err) {
+
+  _favicon(req, res, function onNext(err) {
     if (err) return done(err);
-    index(req, res, done);
+
+    // continue to process the request here, etc.
+
+    res.statusCode = 404;
+    res.end('oops');
   });
 });
 
-// Listen
 server.listen(3000);
-```
-
-### Serve directory indexes with express
-
-```js
-var express = require('express');
-var serveIndex = require('serve-index');
-
-var app = express();
-
-// Serve URLs like /ftp/thing as public/ftp/thing
-// The express.static serves the file contents
-// The serveIndex is this module serving the directory
-app.use('/ftp', express.static('public/ftp'), serveIndex('public/ftp', { icons: true }));
-
-// Listen
-app.listen(3000);
 ```
 
 ## License
 
-[MIT](LICENSE). The [Silk](http://www.famfamfam.com/lab/icons/silk/) icons
-are created by/copyright of [FAMFAMFAM](http://www.famfamfam.com/).
+[MIT](LICENSE)
 
-[appveyor-image]: https://img.shields.io/appveyor/ci/dougwilson/serve-index/master.svg?label=windows
-[appveyor-url]: https://ci.appveyor.com/project/dougwilson/serve-index
-[ci-image]: https://badgen.net/github/checks/expressjs/serve-index/master?label=ci
-[ci-url]: https://github.com/expressjs/serve-index/actions/workflows/ci.yml
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/serve-index/master.svg
-[coveralls-url]: https://coveralls.io/r/expressjs/serve-index?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/serve-index.svg
-[downloads-url]: https://npmjs.org/package/serve-index
-[npm-image]: https://img.shields.io/npm/v/serve-index.svg
-[npm-url]: https://npmjs.org/package/serve-index
+[ci-image]: https://badgen.net/github/checks/expressjs/serve-favicon/master?label=ci
+[ci-url]: https://github.com/expressjs/serve-favicon/actions/workflows/ci.yml
+[coveralls-image]: https://img.shields.io/coveralls/expressjs/serve-favicon.svg
+[coveralls-url]: https://coveralls.io/r/expressjs/serve-favicon?branch=master
+[downloads-image]: https://img.shields.io/npm/dm/serve-favicon.svg
+[downloads-url]: https://npmjs.org/package/serve-favicon
+[npm-image]: https://img.shields.io/npm/v/serve-favicon.svg
+[npm-url]: https://npmjs.org/package/serve-favicon
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/serve-favicon/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/serve-favicon

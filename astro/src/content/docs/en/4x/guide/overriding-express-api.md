@@ -3,8 +3,6 @@ title: Overriding the Express API
 description: Discover how to customize and extend the Express.js API by overriding methods and properties on the request and response objects using prototypes.
 ---
 
-# Overriding the Express API
-
 The Express API consists of various methods and properties on the request and response objects. These are inherited by prototype. There are two extension points for the Express API:
 
 1. The global prototypes at `express.request` and `express.response`.

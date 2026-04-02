@@ -5,8 +5,6 @@ description: Learn how to write custom middleware functions for Express.js appli
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-# Writing middleware for use in Express apps
-
 _Middleware_ functions are functions that have access to the [request object](/en/5x/api#req) (`req`), the [response object](/en/5x/api#res) (`res`), and the `next` function in the application's request-response cycle. The `next` function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
 
 Middleware functions can perform the following tasks:
@@ -23,7 +21,7 @@ The following figure shows the elements of a middleware function call:
 <div class="table-scroller">
 <table id="mw-fig">
 <tr><td id="mw-fig-imgcell">
-{/* <!-- <img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" /> --> */}
+<img src="/images/express-mw.png" alt="Elements of a middleware function call" id="mw-fig-img" />
 </td>
 <td class="mw-fig-callouts">
 <div class="callout" id="callout1">HTTP method for which the middleware function applies.</div>

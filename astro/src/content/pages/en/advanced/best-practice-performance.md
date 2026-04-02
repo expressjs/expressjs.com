@@ -1,9 +1,7 @@
 ---
-title: Performance Best Practices Using Express in Production
+title: 'Production best practices: performance and reliability'
 description: Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.
 ---
-
-# Production best practices: performance and reliability
 
 This article discusses performance and reliability best practices for Express applications deployed to production.
 
@@ -170,7 +168,7 @@ In development, you typically set environment variables in your interactive shel
 With systemd, use the `Environment` directive in your unit file. For example:
 
 ```sh
-# /etc/systemd/system/myservice.service
+
 Environment=NODE_ENV=production
 ```
 
@@ -224,13 +222,13 @@ WorkingDirectory=</projects/myapp>
 User=nobody
 Group=nogroup
 
-# Environment variables:
+
 Environment=NODE_ENV=production
 
-# Allow many incoming connections
+
 LimitNOFILE=infinity
 
-# Allow core dumps for debugging
+
 LimitCORE=infinity
 
 StandardInput=null
@@ -267,9 +265,9 @@ When running an application with PM2, you can enable **cluster mode** to run it 
 To enable cluster mode, start your application like so:
 
 ```bash
-# Start 4 worker processes
+
 $ pm2 start npm --name my-app -i 4 -- start
-# Auto-detect number of available CPUs and start that many worker processes
+
 $ pm2 start npm --name my-app -i max -- start
 ```
 
@@ -278,9 +276,9 @@ This can also be configured within a PM2 process file (`ecosystem.config.js` or 
 Once running, the application can be scaled like so:
 
 ```bash
-# Add 3 more workers
+
 $ pm2 scale my-app +3
-# Scale to a specific number of workers
+
 $ pm2 scale my-app 2
 ```
 

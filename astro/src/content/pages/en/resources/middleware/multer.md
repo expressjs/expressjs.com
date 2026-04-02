@@ -1,9 +1,7 @@
 ---
-title: Express multer middleware
-module: multer
+title: multer middleware
+description: Middleware for handling multipart/form-data
 ---
-
-# Multer [![NPM Version][npm-version-image]][npm-url] [![NPM Downloads][npm-downloads-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Test Coverage][test-image]][test-url] [![OpenSSF Scorecard Badge][ossf-scorecard-badge]][ossf-scorecard-visualizer]
 
 Multer is a node.js middleware for handling `multipart/form-data`, which is primarily used for uploading files. It is written
 on top of [busboy](https://github.com/mscdex/busboy) for maximum efficiency.
@@ -25,6 +23,7 @@ This README is also available in other languages:
 | [Español](https://github.com/expressjs/multer/blob/main/doc/README-es.md)      | Spanish         |
 | [O'zbek tili](https://github.com/expressjs/multer/blob/main/doc/README-uz.md)  | Uzbek           |
 | [Việt Nam](https://github.com/expressjs/multer/blob/main/doc/README-vi.md)     | Vietnamese      |
+| [Türkçe](https://github.com/expressjs/multer/blob/main/doc/README-tr.md)       | Turkish         |
 
 ## Installation
 
@@ -144,12 +143,13 @@ renaming function can be customized according to your needs.
 
 The following are the options that can be passed to Multer.
 
-| Key                 | Description                                               |
-| ------------------- | --------------------------------------------------------- |
-| `dest` or `storage` | Where to store the files                                  |
-| `fileFilter`        | Function to control which files are accepted              |
-| `limits`            | Limits of the uploaded data                               |
-| `preservePath`      | Keep the full path of files instead of just the base name |
+| Key                 | Description                                                                                                                                                                |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dest` or `storage` | Where to store the files                                                                                                                                                   |
+| `fileFilter`        | Function to control which files are accepted                                                                                                                               |
+| `limits`            | Limits of the uploaded data                                                                                                                                                |
+| `preservePath`      | Keep the full path of files instead of just the base name                                                                                                                  |
+| `defParamCharset`   | Default character set to use for values of part header parameters (e.g. filename) that are not extended parameters (that contain an explicit charset). Default: `'latin1'` |
 
 In an average web app, only `dest` might be required, and configured as shown in
 the following example.

@@ -1,9 +1,7 @@
 ---
-title: Express body-parser middleware
-module: body-parser
+title: body-parser middleware
+description: Node.js body parsing middleware
 ---
-
-# body-parser
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
@@ -56,7 +54,14 @@ $ npm install body-parser
 ## API
 
 ```js
+// Import all parsers
 const bodyParser = require('body-parser');
+
+// Or import individual parsers directly
+const json = require('body-parser/json');
+const urlencoded = require('body-parser/urlencoded');
+const raw = require('body-parser/raw');
+const text = require('body-parser/text');
 ```
 
 The `bodyParser` object exposes various factories to create middlewares. All
@@ -97,6 +102,8 @@ Controls the maximum request body size. If this is a number, then the value
 specifies the number of bytes; if it is a string, the value is passed to the
 [bytes](https://www.npmjs.com/package/bytes) library for parsing. Defaults
 to `'100kb'`.
+
+> It’s recommended not to configure a very high limit and to use the default value whenever possible. Allowing larger payloads increases memory usage because of the resources required for decoding and transformations, and it can also lead to longer response times as more data is processed. By ‘very high’, we mean values above the default, for example payloads of 5 MB or more can already start to introduce these risks. With the default limits, these issues do not occur.
 
 ##### reviver
 
@@ -154,6 +161,8 @@ specifies the number of bytes; if it is a string, the value is passed to the
 [bytes](https://www.npmjs.com/package/bytes) library for parsing. Defaults
 to `'100kb'`.
 
+> It’s recommended not to configure a very high limit and to use the default value whenever possible. Allowing larger payloads increases memory usage because of the resources required for decoding and transformations, and it can also lead to longer response times as more data is processed. By ‘very high’, we mean values above the default, for example payloads of 5 MB or more can already start to introduce these risks. With the default limits, these issues do not occur.
+
 ##### type
 
 The `type` option is used to determine what media type the middleware will
@@ -205,6 +214,8 @@ specifies the number of bytes; if it is a string, the value is passed to the
 [bytes](https://www.npmjs.com/package/bytes) library for parsing. Defaults
 to `'100kb'`.
 
+> It’s recommended not to configure a very high limit and to use the default value whenever possible. Allowing larger payloads increases memory usage because of the resources required for decoding and transformations, and it can also lead to longer response times as more data is processed. By ‘very high’, we mean values above the default, for example payloads of 5 MB or more can already start to introduce these risks. With the default limits, these issues do not occur.
+
 ##### type
 
 The `type` option is used to determine what media type the middleware will
@@ -226,8 +237,8 @@ encoding of the request. The parsing can be aborted by throwing an error.
 
 Returns middleware that only parses `urlencoded` bodies and only looks at
 requests where the `Content-Type` header matches the `type` option. This
-parser accepts only UTF-8 encoding of the body and supports automatic
-inflation of `gzip`, `br` (brotli) and `deflate` encodings.
+parser accepts only UTF-8 and ISO-8859-1 encodings of the body and supports
+automatic inflation of `gzip`, `br` (brotli) and `deflate` encodings.
 
 A new `body` object containing the parsed data is populated on the `request`
 object after the middleware (i.e. `req.body`). This object will contain
@@ -259,6 +270,8 @@ Controls the maximum request body size. If this is a number, then the value
 specifies the number of bytes; if it is a string, the value is passed to the
 [bytes](https://www.npmjs.com/package/bytes) library for parsing. Defaults
 to `'100kb'`.
+
+> It’s recommended not to configure a very high limit and to use the default value whenever possible. Allowing larger payloads increases memory usage because of the resources required for decoding and transformations, and it can also lead to longer response times as more data is processed. By ‘very high’, we mean values above the default, for example payloads of 5 MB or more can already start to introduce these risks. With the default limits, these issues do not occur.
 
 ##### parameterLimit
 

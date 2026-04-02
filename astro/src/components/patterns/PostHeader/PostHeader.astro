@@ -69,7 +69,7 @@ const whatsappShareUrl = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
       </Flex>
     )
   }
-  <H1 vMargin={false} class="post-header__title">{title}</H1>
+  <H1 id="overview" vMargin={false} class="post-header__title"><a href="#overview">{title}</a></H1>
   {authors.length > 0 && <Avatar authors={authors} caption={date} size="md" />}
   <div class="post-header__share" role="group" aria-label={t('post.share')}>
     <a
@@ -116,6 +116,9 @@ const whatsappShareUrl = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
       rel="noopener noreferrer"
     >
       <Icon name="whatsapp" aria-hidden="true" />
+    </a>
+    <a class="post-header__share-btn" href="/feed.xml" aria-label={t('post.rssFeed')}>
+      <Icon name="rss" aria-hidden="true" />
     </a>
     <button
       class="post-header__share-btn post-header__copy-btn"

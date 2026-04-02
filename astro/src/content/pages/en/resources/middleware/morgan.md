@@ -1,9 +1,7 @@
 ---
-title: Express morgan middleware
-module: morgan
+title: morgan middleware
+description: HTTP request logger middleware for Node.js
 ---
-
-# morgan
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]

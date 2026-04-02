@@ -1,9 +1,7 @@
 ---
-title: Express cookie-parser middleware
-module: cookie-parser
+title: cookie-parser middleware
+description: Parse HTTP request cookies
 ---
-
-# cookie-parser
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
