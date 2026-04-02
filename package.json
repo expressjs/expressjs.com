@@ -6,6 +6,7 @@
   "author": {
     "name": "Express.js Documentation Team and Contributors"
   },
+  "license": "CC-BY-SA-4.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/expressjs/expressjs.com.git"
