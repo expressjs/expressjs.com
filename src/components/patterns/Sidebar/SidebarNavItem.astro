@@ -3,7 +3,7 @@ import type { MenuItem } from '@/config/types';
 import { BodyMd } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
 import { useTranslations } from '@/i18n/utils';
-import type { LanguageCode } from '@/i18n/ui';
+import type { LanguageCode } from '@/i18n/locales';
 
 interface Props {
   item: MenuItem & { href?: string };
@@ -32,6 +32,20 @@ const {
 const t = useTranslations(lang);
 const isNested = variant === 'nested';
 const isRootSubmenu = variant === 'root';
+
+// show overview instead of specific section names for top-level items that link to an overview page
+const overviewAliases = new Set([
+  'menu.main.api',
+  'menu.sections.express',
+  'menu.sections.request',
+  'menu.sections.response',
+  'menu.sections.router',
+  'menu.sections.application',
+]);
+
+function getLabel() {
+  return overviewAliases.has(item.label) ? t('menu.items.overview') : t(item.label);
+}
 ---
 
 {
@@ -53,8 +67,9 @@ const isRootSubmenu = variant === 'root';
             <Icon name={`fluent:${item.icon}`} size="24" color="var(--color-icon-primary)" />
           </div>
         )}
+
         <BodyMd vMargin={false} class="sidebar-nav-label">
-          {t(item.label)}
+          {getLabel()}
         </BodyMd>
       </a>
     </li>
@@ -81,9 +96,11 @@ const isRootSubmenu = variant === 'root';
             <Icon name={`fluent:${item.icon}`} size="24" color="var(--color-icon-primary)" />
           </div>
         )}
+
         <BodyMd vMargin={false} class="sidebar-nav-label">
           {t(item.label)}
         </BodyMd>
+
         <Icon
           name="fluent:arrow-right-20-regular"
           size="16"

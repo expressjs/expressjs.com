@@ -1,6 +1,6 @@
 import type { Menu, MenuItem, VersionPrefix } from '@/config/types';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
-import type { LanguageCode } from '@/i18n/ui';
+import type { LanguageCode } from '@/i18n/locales';
 
 export type SubmenuData = {
   menu: Menu;

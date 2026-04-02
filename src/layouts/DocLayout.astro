@@ -1,6 +1,7 @@
 ---
 import Layout from './Layout.astro';
-import type { BreadcrumbItem, AdjacentPage } from '@utils/content';
+import type { AdjacentPage } from '@utils/content';
+import { buildBreadcrumbs } from '@utils/content';
 import { PageTopbar, TableOfContents } from '@components/patterns';
 import { Button, Container } from '@/components/primitives';
 import { Icon } from 'astro-icon/components';
@@ -15,7 +16,6 @@ interface Heading {
 interface Props {
   title: string;
   description?: string;
-  breadcrumbs: BreadcrumbItem[];
   headings?: Heading[];
   editUrl?: string;
   isTranslation?: boolean;
@@ -26,15 +26,17 @@ interface Props {
 const {
   title,
   description,
-  breadcrumbs,
   headings = [],
   editUrl,
   isTranslation = false,
   prev,
   next,
 } = Astro.props;
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const breadcrumbs = buildBreadcrumbs(Astro.url.pathname, t);
 ---
 
 <Layout title={title} description={description}>
@@ -55,8 +57,11 @@ const t = useTranslations(lang);
 
     <div class="doc-layout">
       <article>
-        <h1 id="overview"><a href="#overview">{title}</a></h1>
+        <h1 id="overview">
+          <a href="#overview">{title}</a>
+        </h1>
         <slot />
+
         {
           (prev || next) && (
             <nav class="doc-nav" aria-label={t('doc.pageNavigation')}>
@@ -77,6 +82,7 @@ const t = useTranslations(lang);
               ) : (
                 <span />
               )}
+
               {next ? (
                 <Button
                   as="a"
@@ -98,6 +104,7 @@ const t = useTranslations(lang);
           )
         }
       </article>
+
       <TableOfContents headings={headings} class="doc-toc" />
     </div>
   </Container>
@@ -107,8 +114,10 @@ const t = useTranslations(lang);
   .doc-layout {
     display: flex;
     flex-direction: column;
+  }
 
-    @media (--md-up) {
+  @media (--md-up) {
+    .doc-layout {
       flex-direction: row;
       align-items: flex-start;
       gap: var(--space-10);
@@ -128,8 +137,10 @@ const t = useTranslations(lang);
     position: sticky;
     top: var(--space-14);
     padding: var(--space-6) 0 0;
+  }
 
-    @media (--md-up) {
+  @media (--md-up) {
+    .doc-toc {
       order: 1;
       width: var(--size-56);
       max-height: calc(100vh - var(--space-24));

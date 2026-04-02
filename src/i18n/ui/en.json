@@ -1,151 +1,198 @@
 {
-  "home.welcome": "Welcome",
-  "home.workInProgress": "This is a work-in-progress homepage.",
-  "home.reviewDesignSystemPrefix": "Review the",
-  "home.reviewDesignSystemLink": "Design System Foundations",
-  "home.reviewDesignSystemSuffix": "demo page to explore all tokens, primitives, and patterns.",
-  "search.placeholder": "Start typing...",
-  "search.ariaLabel": "Start typing to search",
-  "theme.toggle": "Toggle theme",
-  "theme.switchToLight": "Switch to light mode",
-  "theme.switchToDark": "Switch to dark mode",
-  "version.selectLabel": "Select API version",
-  "nav.mainMenu": "Main menu",
-  "nav.toggleMenu": "Toggle menu",
-  "nav.home": "Express home",
-  "nav.breadcrumb": "Breadcrumb",
-  "nav.mainNavigation": "Main navigation",
-  "nav.selectVersion": "Select documentation version",
-  "menu.docs": "Docs",
-  "menu.docsAria": "Documentation",
-  "menu.api": "API",
-  "menu.apiAria": "API Reference",
-  "menu.resources": "Resources",
-  "menu.resourcesAria": "Resources",
-  "menu.blog": "Blog",
-  "menu.blogAria": "Blog",
-  "menu.support": "Support",
-  "menu.supportAria": "Support",
-  "menu.gettingStarted": "Getting started",
-  "menu.installing": "Installing",
-  "menu.installingAria": "Installing Express",
-  "menu.helloWorld": "Hello world",
-  "menu.helloWorldAria": "Hello world example",
-  "menu.expressGenerator": "Express generator",
-  "menu.expressGeneratorAria": "Express generator",
-  "menu.guide": "Guide",
-  "menu.routing": "Routing",
-  "menu.routingAria": "Routing guide",
-  "menu.writingMiddleware": "Writing middleware",
-  "menu.writingMiddlewareAria": "Writing middleware guide",
-  "menu.usingMiddleware": "Using middleware",
-  "menu.usingMiddlewareAria": "Using middleware guide",
-  "menu.basicRouting": "Basic routing",
-  "menu.basicRoutingAria": "Basic routing guide",
-  "menu.examples": "Examples",
-  "menu.examplesAria": "Express examples",
-  "menu.faq": "FAQ",
-  "menu.faqAria": "Frequently asked questions",
-  "menu.staticFiles": "Serving static files",
-  "menu.staticFilesAria": "Serving static files guide",
-  "menu.behindProxies": "Behind proxies",
-  "menu.behindProxiesAria": "Express behind proxies",
-  "menu.databaseIntegration": "Database integration",
-  "menu.databaseIntegrationAria": "Database integration guide",
-  "menu.debugging": "Debugging",
-  "menu.debuggingAria": "Debugging Express",
-  "menu.errorHandling": "Error handling",
-  "menu.errorHandlingAria": "Error handling guide",
-  "menu.migrationGuides": "Migration guides",
-  "menu.migratingTo4": "Moving to Express 4",
-  "menu.migratingTo4Aria": "Migrating to Express 4 guide",
-  "menu.migratingTo5": "Moving to Express 5",
-  "menu.migratingTo5Aria": "Migrating to Express 5 guide",
-  "menu.overridingExpressApi": "Overriding the Express API",
-  "menu.overridingExpressApiAria": "Overriding the Express API guide",
-  "menu.usingTemplateEngines": "Using template engines",
-  "menu.usingTemplateEnginesAria": "Using template engines guide",
-  "menu.advancedTopics": "Advanced topics",
-  "menu.buildingTemplateEngines": "Building template engines",
-  "menu.buildingTemplateEnginesAria": "Building template engines guide",
-  "menu.bestPracticePerformance": "Performance best practices",
-  "menu.bestPracticePerformanceAria": "Performance best practices guide",
-  "menu.bestPracticeSecurity": "Security best practices",
-  "menu.bestPracticeSecurityAria": "Security best practices guide",
-  "menu.healthcheckGracefulShutdown": "Health checks & graceful shutdown",
-  "menu.healthcheckGracefulShutdownAria": "Health checks and graceful shutdown guide",
-  "menu.securityUpdates": "Security updates",
-  "menu.securityUpdatesAria": "Security updates",
-  "menu.overview": "Overview",
-  "menu.events": "Events",
-  "menu.overviewAria": "Overview",
-  "menu.expressOverviewAria": "Express overview",
-  "menu.expressMethodsAria": "Express methods",
-  "menu.application": "Application",
-  "menu.applicationOverviewAria": "Application overview",
-  "menu.properties": "Properties",
-  "menu.applicationPropertiesAria": "Application properties",
-  "menu.applicationEventAria": "Application events",
-  "menu.methods": "Methods",
-  "menu.applicationMethodsAria": "Application methods",
-  "menu.request": "Request",
-  "menu.requestOverviewAria": "Request overview",
-  "menu.requestPropertiesAria": "Request properties",
-  "menu.response": "Response",
-  "menu.responseOverviewAria": "Response overview",
-  "menu.responsePropertiesAria": "Response properties",
-  "menu.router": "Router",
-  "menu.routerOverviewAria": "Router overview",
-  "menu.routerMethodsAria": "Router methods",
-  "menu.community": "Community",
-  "menu.communityAria": "Community resources",
-  "menu.glossary": "Glossary",
-  "menu.glossaryAria": "Glossary of terms",
-  "menu.contributing": "Contributing",
-  "menu.contributingAria": "Contributing to Express",
-  "menu.utils": "Utilities",
-  "menu.utilsAria": "Express utilities",
-  "menu.middleware": "Middleware",
-  "menu.middlewareAria": "Middleware resources",
-  "menu.middlewareOverviewAria": "Middleware overview",
-  "menu.types": "Built-in",
-  "menu.middlewareTypesAria": "Built-in middleware",
-  "404.title": "404 - Page Not Found",
-  "404.description": "The page you are looking for could not be found.",
-  "404.heading": "Page Not Found",
-  "404.message": "The page you are looking for does not exist or has been moved.",
-  "404.goHome": "Go to Home",
-  "hero.tagline": "Fast, unopinionated, minimalist web framework for Node.js",
-  "hero.getStarted": "Get Started",
-  "hero.videoPause": "Pause background video",
-  "hero.videoPlay": "Play background video",
-  "features.title": "Clarity over complexity. For every developer.",
-  "features.performance.title": "Performance",
-  "features.performance.body": "Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love.",
-  "features.api.title": "APIs",
-  "features.api.body": "With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy.",
-  "features.middleware.title": "Middleware",
-  "features.middleware.body": "Express is a lightweight and flexible routing framework with minimal core features meant to be augmented through the use of Express middleware modules.",
-  "features.webapplication.title": "Web Applications",
-  "features.webapplication.body": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.",
-  "doc.previousPage": "Previous",
-  "doc.nextPage": "Next",
-  "doc.pageNavigation": "Page navigation",
-  "page.editOnGitHub": "Edit on GitHub",
-  "page.translateThis": "Translate this page",
-  "post.share": "Share",
-  "post.shareOnX": "Share on X",
-  "post.shareOnBluesky": "Share on Bluesky",
-  "post.shareOnLinkedIn": "Share on LinkedIn",
-  "post.shareOnSlack": "Share on Slack",
-  "post.shareOnTelegram": "Share on Telegram",
-  "post.shareOnWhatsApp": "Share on WhatsApp",
-  "post.rssFeed": "RSS Feed",
-  "post.copyLink": "Copy link",
-  "post.linkCopied": "Link copied!",
-  "post.toc": "On this page",
-  "toc.overview": "Overview",
-  "post.more": "More from Express",
-  "post.writeBanner": "Interested in writing a post? \n Check out our guidelines to get started.",
-  "post.writeGuidelines": "Read the guidelines"
+  "home": {
+    "welcome": "Welcome",
+    "workInProgress": "This is a work-in-progress homepage.",
+    "reviewDesignSystem": {
+      "prefix": "Review the",
+      "link": "Design System Foundations",
+      "suffix": "demo page to explore all tokens, primitives, and patterns."
+    }
+  },
+
+  "search": {
+    "placeholder": "Start typing...",
+    "ariaLabel": "Start typing to search"
+  },
+
+  "theme": {
+    "toggle": "Toggle theme",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
+  },
+
+  "version": {
+    "selectLabel": "Select API version"
+  },
+
+  "nav": {
+    "mainMenu": "Main menu",
+    "toggleMenu": "Toggle menu",
+    "home": "home",
+    "breadcrumb": "Breadcrumb",
+    "mainNavigation": "Main navigation",
+    "selectVersion": "Select documentation version"
+  },
+  "menu": {
+    "main": {
+      "docs": "Docs",
+      "api": "API",
+      "resources": "Resources",
+      "blog": "Blog",
+      "support": "Support"
+    },
+
+    "sections": {
+      "gettingStarted": "Getting started",
+      "guide": "Guide",
+      "migration": "Migration guides",
+      "advanced": "Advanced topics",
+
+      "express": "express()",
+      "application": "Application",
+      "request": "Request",
+      "response": "Response",
+      "router": "Router",
+      "middleware": "Middleware"
+    },
+
+    "items": {
+      "installing": "Installing",
+      "helloWorld": "Hello world",
+      "expressGenerator": "Express generator",
+      "basicRouting": "Basic routing",
+      "staticFiles": "Serving static files",
+      "examples": "Examples",
+      "faq": "FAQ",
+
+      "routing": "Routing",
+      "writingMiddleware": "Writing middleware",
+      "usingMiddleware": "Using middleware",
+      "usingTemplateEngines": "Using template engines",
+      "errorHandling": "Error handling",
+      "debugging": "Debugging",
+      "behindProxies": "Behind proxies",
+      "databaseIntegration": "Database integration",
+      "overridingExpressApi": "Overriding the Express API",
+
+      "migratingTo4": "Moving to Express 4",
+      "migratingTo5": "Moving to Express 5",
+
+      "buildingTemplateEngines": "Building template engines",
+      "bestPracticePerformance": "Performance best practices",
+      "bestPracticeSecurity": "Security best practices",
+      "healthcheckGracefulShutdown": "Health checks & graceful shutdown",
+      "securityUpdates": "Security updates",
+
+      "overview": "Overview",
+      "properties": "Properties",
+      "methods": "Methods",
+      "events": "Events",
+      "types": "Built-in",
+
+      "community": "Community",
+      "glossary": "Glossary",
+      "contributing": "Contributing",
+      "utils": "Utilities",
+      "middleware": "Middleware"
+    },
+
+    "aria": {
+      "docs": "Documentation",
+      "api": "API Reference",
+      "resources": "Resources",
+      "blog": "Blog",
+      "support": "Support",
+
+      "installing": "Installing Express",
+      "helloWorld": "Hello world example",
+      "expressGenerator": "Express generator",
+
+      "routing": "Routing guide",
+      "writingMiddleware": "Writing middleware guide",
+      "usingMiddleware": "Using middleware guide",
+      "usingTemplateEngines": "Using template engines guide",
+      "errorHandling": "Error handling guide",
+      "debugging": "Debugging Express",
+      "behindProxies": "Express behind proxies",
+      "databaseIntegration": "Database integration guide",
+      "overridingExpressApi": "Overriding the Express API guide",
+
+      "application": "Application overview",
+      "request": "Request overview",
+      "response": "Response overview",
+      "router": "Router overview",
+      "middleware": "Middleware resources",
+
+      "community": "Community resources",
+      "glossary": "Glossary of terms",
+      "contributing": "Contributing guide",
+      "utils": "Utilities"
+    }
+  },
+  "doc": {
+    "previousPage": "Previous",
+    "nextPage": "Next",
+    "pageNavigation": "Page navigation"
+  },
+
+  "page": {
+    "editOnGitHub": "Edit on GitHub",
+    "translateThis": "Translate this page"
+  },
+
+  "post": {
+    "share": "Share",
+    "shareOnX": "Share on X",
+    "shareOnBluesky": "Share on Bluesky",
+    "shareOnLinkedIn": "Share on LinkedIn",
+    "shareOnSlack": "Share on Slack",
+    "shareOnTelegram": "Share on Telegram",
+    "shareOnWhatsApp": "Share on WhatsApp",
+    "rssFeed": "RSS Feed",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied!",
+    "toc": "On this page",
+    "more": "More from Express",
+    "writeBanner": "Interested in writing a post? \n Check out our guidelines to get started.",
+    "writeGuidelines": "Read the guidelines"
+  },
+
+  "toc": {
+    "overview": "Overview"
+  },
+
+  "features": {
+    "title": "Clarity over complexity. For every developer.",
+    "performance": {
+      "title": "Performance",
+      "body": "Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love."
+    },
+    "api": {
+      "title": "APIs",
+      "body": "With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy."
+    },
+    "middleware": {
+      "title": "Middleware",
+      "body": "Express is a lightweight and flexible routing framework with minimal core features meant to be augmented through the use of Express middleware modules."
+    },
+    "webapplication": {
+      "title": "Web Applications",
+      "body": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications."
+    }
+  },
+
+  "error404": {
+    "title": "404 - Page Not Found",
+    "description": "The page you are looking for could not be found.",
+    "heading": "Page Not Found",
+    "message": "The page you are looking for does not exist or has been moved.",
+    "goHome": "Go to Home"
+  },
+
+  "hero": {
+    "tagline": "Fast, unopinionated, minimalist web framework for Node.js",
+    "getStarted": "Get Started",
+    "videoPause": "Pause background video",
+    "videoPlay": "Play background video"
+  }
 }
