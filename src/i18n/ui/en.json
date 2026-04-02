@@ -8,22 +8,18 @@
       "suffix": "demo page to explore all tokens, primitives, and patterns."
     }
   },
-
   "search": {
     "placeholder": "Start typing...",
     "ariaLabel": "Start typing to search"
   },
-
   "theme": {
     "toggle": "Toggle theme",
     "switchToLight": "Switch to light mode",
     "switchToDark": "Switch to dark mode"
   },
-
   "version": {
     "selectLabel": "Select API version"
   },
-
   "nav": {
     "mainMenu": "Main menu",
     "toggleMenu": "Toggle menu",
@@ -40,7 +36,6 @@
       "blog": "Blog",
       "support": "Support"
     },
-
     "sections": {
       "gettingStarted": "Getting started",
       "guide": "Guide",
@@ -54,7 +49,6 @@
       "router": "Router",
       "middleware": "Middleware"
     },
-
     "items": {
       "installing": "Installing",
       "helloWorld": "Hello world",
@@ -95,7 +89,6 @@
       "utils": "Utilities",
       "middleware": "Middleware"
     },
-
     "aria": {
       "docs": "Documentation",
       "api": "API Reference",
@@ -134,12 +127,10 @@
     "nextPage": "Next",
     "pageNavigation": "Page navigation"
   },
-
   "page": {
     "editOnGitHub": "Edit on GitHub",
     "translateThis": "Translate this page"
   },
-
   "post": {
     "share": "Share",
     "shareOnX": "Share on X",
@@ -156,11 +147,9 @@
     "writeBanner": "Interested in writing a post? \n Check out our guidelines to get started.",
     "writeGuidelines": "Read the guidelines"
   },
-
   "toc": {
     "overview": "Overview"
   },
-
   "features": {
     "title": "Clarity over complexity. For every developer.",
     "performance": {
@@ -180,7 +169,6 @@
       "body": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications."
     }
   },
-
   "error404": {
     "title": "404 - Page Not Found",
     "description": "The page you are looking for could not be found.",
@@ -188,7 +176,6 @@
     "message": "The page you are looking for does not exist or has been moved.",
     "goHome": "Go to Home"
   },
-
   "hero": {
     "tagline": "Fast, unopinionated, minimalist web framework for Node.js",
     "getStarted": "Get Started",
