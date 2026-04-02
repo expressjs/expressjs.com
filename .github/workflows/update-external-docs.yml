@@ -42,7 +42,7 @@ jobs:
           commit-message: 'docs: update security.txt expiry'
           title: 'docs: update security.txt expiry'
           body: |
-            This PR extends the `Expires` date in `astro/public/.well-known/security.txt`.
+            This PR extends the `Expires` date in `public/.well-known/security.txt`.
 
             Before merging, please explicitly confirm that:
             - The security contact listed is still correct and actively monitored
