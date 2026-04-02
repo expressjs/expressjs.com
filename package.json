@@ -1,7 +1,6 @@
 {
-  "name": "expressjs-astro-project",
+  "name": "expressjs-website",
   "type": "module",
-  "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
