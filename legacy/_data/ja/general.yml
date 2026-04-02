@@ -1,8 +1,0 @@
-title_announcement: "Express@5.1.0: LTSタイムラインでnpmのデフォルトになりました"
-body_announcement: "Express 5.1.0 が npm のデフォルトとなり、v4 および v5 リリース ラインの公式 LTS スケジュールが導入されます。<a href='https://expressjs.com/2025/03/31/v5-1-latest-release.html'>詳細については、最新のブログをご覧ください。</a>"
-community-caveat-alert: "This information refers to third-party sites, products, or modules that are not maintained by the Expressjs team. Listing here does not constitute an endorsement or recommendation from the Expressjs project team."
-warning: 'Warning'
-note: 'Note'
-caution: 'Caution'
-i18n_notice: "このドキュメントは英語のドキュメントに比べて古くなっている可能性があります。最新情報については、"
-i18n_notice_link_text: "英語のドキュメントを参照してください"

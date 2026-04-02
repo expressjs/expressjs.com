@@ -1,9 +1,0 @@
-<a role="button" class="edit-github-btn" 
-    href="{% if page.layout == 'api' %} 
-            {{ site.github.repository_url }}/tree/gh-pages/_includes/api/en/{{page.version}}
-          {% else %}
-            {{ site.github.repository_url }}/edit/gh-pages/{{ page.path }}
-          {% endif %}">      
-    {% include icons/github.svg %}
-    Edit this page
-</a>
