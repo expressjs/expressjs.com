@@ -18,7 +18,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<button data-theme-toggle class="toggle" aria-label={t('theme.toggle')}>
+<button id="theme-toggle-button" class="toggle" aria-label={t('theme.toggle')}>
   <div class="toggle-icon">
     <Icon
       name="fluent:weather-moon-16-regular"
@@ -75,7 +75,5 @@ const t = useTranslations(lang);
     });
   };
 
-  document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
-    button.addEventListener('click', handleToggleClick);
-  });
+  document.getElementById('theme-toggle-button')?.addEventListener('click', handleToggleClick);
 </script>

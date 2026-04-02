@@ -38,6 +38,8 @@ const blog = {
   '/2025/12/01/security-releases': '/en/blog/2025-12-01-security-releases',
   '/2026/02/27/security-releases.html': '/en/blog/2026-02-27-security-releases',
   '/2026/02/27/security-releases': '/en/blog/2026-02-27-security-releases',
+  '/2026/03/30/security-releases.html': '/en/blog/2026-03-30-security-releases',
+  '/2026/03/30/security-releases': '/en/blog/2026-03-30-security-releases',
 };
 
 const api_v2 = {

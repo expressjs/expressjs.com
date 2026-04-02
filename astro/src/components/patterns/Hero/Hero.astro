@@ -26,80 +26,72 @@ app.listen(port, () => {
 })`;
 
 interface Props {
-  videoSrc?: string;
-  videoSrcLight?: string;
-  posterSrc?: string;
-  posterSrcLight?: string;
+  videoSrc: string;
+  videoSrcLight: string;
+  posterSrc: string;
+  posterSrcLight: string;
 }
 
 const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
 ---
 
 <section class="hero">
-  {
-    videoSrc && (
-      <div class="hero__video-container">
-        {posterSrc && (
-          <Image
-            class={`hero__video-poster${posterSrcLight ? ' hero__video-poster--dark' : ''}`}
-            src={posterSrc}
-            width={1920}
-            height={1080}
-            loading="eager"
-            alt=""
-            aria-hidden="true"
-          />
-        )}
-        {posterSrcLight && (
-          <Image
-            class="hero__video-poster hero__video-poster--light"
-            src={posterSrcLight}
-            width={1920}
-            height={1080}
-            loading="eager"
-            alt=""
-            aria-hidden="true"
-          />
-        )}
-        <video
-          class={`hero__video${videoSrcLight ? ' hero__video--dark' : ''}`}
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          data-src={videoSrc}
-        >
-          <source type="video/mp4" />
-        </video>
-        {videoSrcLight && (
-          <video
-            class="hero__video hero__video--light"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            data-src={videoSrcLight}
-          >
-            <source type="video/mp4" />
-          </video>
-        )}
-        <div class="hero__video-overlay" />
-        <button
-          class="hero__video-control"
-          type="button"
-          aria-label={t('hero.videoPause')}
-          data-label-pause={t('hero.videoPause')}
-          data-label-play={t('hero.videoPlay')}
-          data-state="paused"
-        >
-          <Icon name="fluent:pause-16-filled" class="hero__video-control-pause" />
-          <Icon name="fluent:play-16-filled" class="hero__video-control-play" />
-        </button>
-      </div>
-    )
-  }
+  <div class="hero__video-container">
+    <Image
+      class="hero__video-poster hero__video-poster--dark"
+      src={posterSrc}
+      width={1920}
+      height={1080}
+      loading="eager"
+      priority={true}
+      alt=""
+      aria-hidden="true"
+    />
+
+    <Image
+      class="hero__video-poster hero__video-poster--light"
+      src={posterSrcLight}
+      width={1920}
+      height={1080}
+      loading="eager"
+      priority={true}
+      alt=""
+      aria-hidden="true"
+    />
+
+    <video
+      class="hero__video hero__video--dark"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      data-src={videoSrc}></video>
+
+    <video
+      class="hero__video hero__video--light"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      data-src={videoSrcLight}></video>
+
+    <div class="hero__video-overlay"></div>
+
+    <button
+      class="hero__video-control"
+      type="button"
+      title={t('hero.videoPause')}
+      aria-label={t('hero.videoPause')}
+      data-label-pause={t('hero.videoPause')}
+      data-label-play={t('hero.videoPlay')}
+      data-state="paused"
+    >
+      <Icon name="fluent:pause-16-filled" class="hero__video-control-pause" />
+      <Icon name="fluent:play-16-filled" class="hero__video-control-play" />
+    </button>
+  </div>
   <Container>
     <div class="hero__content">
       <Flex align="end" gap="4">
@@ -135,137 +127,137 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
 
 <script>
   function initHeroVideo() {
-    const breakpointMd = parseInt(
-      getComputedStyle(document.documentElement).getPropertyValue('--breakpoint-md')
-    );
+    const container = document.querySelector<HTMLDivElement>('.hero__video-container');
+    if (!container) return;
 
-    const videoContainer = document.querySelector('.hero__video-container');
-    if (!videoContainer) return;
-
-    const videos = Array.from(videoContainer.querySelectorAll<HTMLVideoElement>('.hero__video'));
-    if (videos.length === 0) return;
-
-    const primaryVideo = videos[0];
-
-    const controlButton = videoContainer.querySelector<HTMLButtonElement>('.hero__video-control');
+    const controlButton = container.querySelector<HTMLButtonElement>('.hero__video-control');
     if (!controlButton) return;
 
-    const labelPause = controlButton.getAttribute('data-label-pause') ?? 'Pause background video';
-    const labelPlay = controlButton.getAttribute('data-label-play') ?? 'Play background video';
+    const darkVideo = container.querySelector<HTMLVideoElement>('.hero__video--dark');
+    const lightVideo = container.querySelector<HTMLVideoElement>('.hero__video--light');
+    const darkPoster = container.querySelector<HTMLImageElement>('.hero__video-poster--dark');
+    const lightPoster = container.querySelector<HTMLImageElement>('.hero__video-poster--light');
 
-    const playAll = () => videos.forEach((v) => v.play().catch(() => {}));
-    const pauseAll = () => videos.forEach((v) => v.pause());
-
-    const initSources = () => {
-      videos.forEach((video) => {
-        const source = video.querySelector('source');
-        if (source && !source.getAttribute('src')) {
-          const src = video.getAttribute('data-src');
-          if (src) {
-            source.src = src;
-            video.load();
-          }
-        }
-      });
-    };
+    let currentVideo: HTMLVideoElement | null = null;
+    let currentPoster: HTMLImageElement | null = null;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      primaryVideo.pause();
-      primaryVideo.removeAttribute('autoplay');
-      controlButton.style.display = 'none';
-      return;
+
+    function getIsDark() {
+      const theme = document.documentElement.getAttribute('data-theme');
+      return (
+        theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      );
     }
 
-    const isMobile = () => window.innerWidth < breakpointMd;
-
-    const disableVideo = () => {
-      pauseAll();
-      videos.forEach((v) => {
-        v.removeAttribute('autoplay');
-        v.removeAttribute('data-loaded');
-      });
-    };
-
-    if (isMobile()) {
-      disableVideo();
-      // Don't load video sources to save bandwidth
-      return;
+    function getAssets() {
+      const isDark = getIsDark();
+      return {
+        video: isDark ? darkVideo : lightVideo,
+        poster: isDark ? darkPoster : lightPoster,
+      };
     }
 
-    initSources();
+    function loadVideo(video: HTMLVideoElement) {
+      const src = video.getAttribute('data-src');
+      if (!src) return;
 
-    videos.forEach((video) => {
-      video.addEventListener('canplay', () => video.setAttribute('data-loaded', 'true'), {
-        once: true,
-      });
-    });
+      // do not load video if src is loaded (reduce network call)
+      if (!video.src) {
+        video.src = src;
+        video.load();
+      }
+    }
 
-    primaryVideo.addEventListener(
-      'error',
-      () => {
-        controlButton.style.display = 'none';
-      },
-      { once: true }
-    );
+    function activateVideo(video: HTMLVideoElement | null, poster: HTMLImageElement | null) {
+      if (!video || !poster) return;
 
-    primaryVideo.addEventListener('play', () => {
-      controlButton.setAttribute('data-state', 'playing');
-      controlButton.setAttribute('aria-label', labelPause);
-    });
+      if (currentPoster) currentPoster.classList.remove('hide_poster');
 
-    primaryVideo.addEventListener('pause', () => {
-      controlButton.setAttribute('data-state', 'paused');
-      controlButton.setAttribute('aria-label', labelPlay);
-    });
+      currentPoster = poster;
 
+      if (currentVideo) {
+        currentVideo.pause();
+        currentVideo.classList.remove('hero__video--active');
+      }
+
+      currentVideo = video;
+
+      if (prefersReducedMotion) {
+        currentVideo.pause();
+        currentVideo.removeAttribute('autoplay');
+        currentVideo.classList.remove('hero__video--active');
+        if (controlButton) controlButton.style.display = 'none';
+        return;
+      }
+
+      loadVideo(video);
+
+      // check if video is ready to play then just update background animation
+      // returning early to stop repeated listener on theme change
+      // ref: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState#htmlmediaelement.have_future_data
+      if (video.readyState >= video.HAVE_FUTURE_DATA) {
+        updateStatus(video, poster);
+        return;
+      }
+
+      video.addEventListener('canplay', () => updateStatus(video, poster), { once: true });
+    }
+
+    function updateVideo() {
+      const { video: nextVideo, poster: hidePoster } = getAssets();
+
+      activateVideo(nextVideo, hidePoster);
+    }
+
+    function updateStatus(video: HTMLVideoElement | null, poster: HTMLImageElement | null) {
+      if (!video || !poster) return;
+      // if video is playable then hide poster
+      poster.classList.add('hide_poster');
+      // activate correct video animations
+      video.classList.add('hero__video--active');
+      video.play().catch(() => {});
+      // update controll btn on video load
+      controlButton?.setAttribute('data-state', 'playing');
+    }
+
+    // Control button
     controlButton.addEventListener('click', () => {
-      if (primaryVideo.paused) {
-        playAll();
+      if (!currentVideo) return;
+
+      if (currentVideo.paused) {
+        currentVideo.play().catch(() => {});
+        controlButton.setAttribute('data-state', 'playing');
       } else {
-        pauseAll();
+        currentVideo.pause();
+        controlButton.setAttribute('data-state', 'paused');
       }
     });
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            playAll();
-            observer.disconnect();
-          }
-        });
-      },
-      { rootMargin: '80px' }
-    );
-
-    observer.observe(primaryVideo);
-
+    // stop video on hidden tabs
     document.addEventListener('visibilitychange', () => {
+      if (!currentVideo) return;
+
       if (document.hidden) {
-        pauseAll();
-      } else {
-        playAll();
+        currentVideo.pause();
+      } else if (!prefersReducedMotion) {
+        currentVideo.play().catch(() => {});
       }
     });
 
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        if (isMobile()) {
-          disableVideo();
-        } else {
-          initSources();
-          playAll();
-        }
-      }, 250);
+    // Initial run
+    updateVideo();
+
+    // React to theme changes
+    const observer = new MutationObserver(() => {
+      updateVideo();
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeroVideo);
-  } else {
-    initHeroVideo();
-  }
+  initHeroVideo();
 </script>
