@@ -64,30 +64,29 @@ app.listen(port, () => {
 </section>
 
 <script>
-  import { initHeroWebGL } from './hero-background';
-
   async function initHero() {
     const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
     if (!canvas) return;
 
+    // Lazy-load the WebGL module so it doesn't block the main thread
+    const { initHeroWebGL } = await import('./hero-background');
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = window.matchMedia('(max-width: 768px)');
 
-    // Initialize WebGL; if unsupported the canvas stays empty (transparent)
     const bg = await initHeroWebGL(canvas, prefersReducedMotion);
     if (!bg) return;
-
-    // On mobile, draw a single static frame so the background is visible
-    if (isMobile.matches) {
-      bg.renderOnce();
-    }
 
     // Only animate when the hero is visible in the viewport
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !isMobile.matches) {
-            bg.play();
+          if (entry.isIntersecting) {
+            if (isMobile.matches) {
+              requestAnimationFrame(() => bg.renderOnce());
+            } else {
+              bg.play();
+            }
           } else {
             bg.pause();
           }
@@ -98,7 +97,6 @@ app.listen(port, () => {
 
     observer.observe(canvas);
 
-    // Pause/resume when crossing the mobile breakpoint
     isMobile.addEventListener('change', (e) => {
       if (e.matches) {
         bg.pause();
@@ -107,7 +105,6 @@ app.listen(port, () => {
       }
     });
 
-    // Pause when the tab is hidden to save resources
     document.addEventListener('visibilitychange', () => {
       if (document.hidden || isMobile.matches) {
         bg.pause();
@@ -117,10 +114,9 @@ app.listen(port, () => {
     });
   }
 
-  // Run init when the DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHero);
-  } else {
-    initHero();
-  }
+  // Defer init until the browser is idle
+  const idle =
+    'requestIdleCallback' in window ? requestIdleCallback : (cb: () => void) => setTimeout(cb, 0);
+
+  idle(() => initHero());
 </script>
