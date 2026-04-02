@@ -1,0 +1,141 @@
+:root {
+  --orange: #953800;
+  --green: #116329;
+  --blue-light: #0550ae;
+  --blue-darker: #0a3069;
+  --pupple: #8250df;
+  --gray: #6e7781;
+  --red: #cf222e;
+  --red-darker: #82071e;
+}
+
+.dark-mode:root {
+  --orange: #ffa657;
+  --green: #79c0ff;
+  --blue-light: #a5d6ff;
+  --blue-darker: #1f6feb;
+  --pupple: #d2a8ff;
+  --gray: #8b949e;
+  --red: #ff7b72;
+  --red-darker: #8e1519;
+}
+
+.highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+
+.highlight, .highlight .w {
+  color: #24292f;
+  background-color: var(--code-bg);
+}
+
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt, .highlight .kv {
+  color: var(--red);
+}
+
+.highlight .gr {
+  color: #f6f8fa;
+}
+
+.highlight .gd {
+  color: var(--red-darker);
+  background-color: #ffebe9;
+}
+
+.highlight .nb,
+.highlight .nc,
+.highlight .no,
+.highlight .nn  {
+  color: var(--orange);
+}
+
+.highlight .sr,.highlight .na, .highlight .nt, .highlight .gi {
+  color: var(--green);
+}
+
+.highlight .gi {
+  background-color: #dafbe1;
+}
+
+.highlight .ges {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.highlight .l, 
+.highlight .ld, 
+.highlight .m, 
+.highlight .mb, 
+.highlight .mf, 
+.highlight .mh, 
+.highlight .mi, 
+.highlight .il, 
+.highlight .mo, 
+.highlight .mx,
+.highlight .kc,
+.highlight .sb,
+.highlight .bp,
+.highlight .ne,
+.highlight .nl,
+.highlight .py
+.highlight .nv, 
+.highlight .vc, 
+.highlight .vg, 
+.highlight .vi, 
+.highlight .vm,
+.highlight .s1,
+.highlight .o, 
+.highlight .ow,
+.highlight .gh,
+.highlight .gu,
+.highlight .s2,
+.highlight .dl   {
+  color: var(--blue-light);
+}
+
+.highlight .gh {
+  font-weight: bold;
+}
+.highlight .gu {
+  font-weight: bold;
+}
+.highlight .s, .highlight .sa, .highlight .sc, .highlight .sd,  .highlight .se, .highlight .sh, .highlight .sx, .highlight .ss {
+  color: var(--blue-darker);
+}
+.highlight .nd, .highlight .nf, .highlight .fm {
+  color: var(--pupple);
+}
+
+.highlight .err {
+  color: #f6f8fa;
+  background-color: #82071e;
+}
+.highlight .c, 
+.highlight .gl
+.highlight .ch,
+.highlight .cd, 
+.highlight .cm, 
+.highlight .cp, 
+.highlight .cpf, 
+.highlight .cs,
+.highlight .gt {
+  color: var(--gray);
+}
+
+.highlight .c1 {
+  color: var(--green);
+}
+
+.highlight .ni,
+.highlight .ge,
+.highlight .si,
+.highlight .gs {
+  color: #24292f;
+}
+
+.highlight .ge {
+  font-style: italic;
+}
+
+.highlight .gs {
+  font-weight: bold;
+}

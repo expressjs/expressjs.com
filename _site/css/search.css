@@ -1,0 +1,22 @@
+#q {
+  display: none;
+  height: 2.5em;
+  min-width: 100%;
+  padding: 5px;
+}
+
+.algolia-autocomplete {
+  min-width: 12em;
+  max-width: 12em;
+  top: -0.2em;
+}
+
+.algolia-autocomplete #q {
+  display: initial
+}
+
+@media all and (max-width: 899px) {
+  .algolia-autocomplete {
+    display: none !important;
+  }
+}

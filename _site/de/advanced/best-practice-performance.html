@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+
+<html lang="de" prefix="og: http://ogp.me/ns#">
+
+  <head>
+    <title>Leistungsspezifische Best Practices für Express-Anwendungen in Produktionsumgebungen</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link 
+        rel="preload" 
+        href="/fonts/open-sans/woff2/open-sans-latin-wght-normal.woff2"
+        as="font" 
+        type="font/woff2" 
+        crossorigin 
+    />
+    <link 
+        rel="preload" 
+        href="/fonts/open-sans/woff2/open-sans-latin-wght-italic.woff2" 
+        as="font" 
+        type="font/woff2" 
+        crossorigin 
+    />
+    <link
+        href="/fonts/open-sans/woff/OpenSans.woff"
+        as="font"
+        type="font/woff"
+        crossorigin
+    />
+    <link
+        href="/fonts/open-sans/woff/OpenSans-Italic.woff"
+        as="font"
+        type="font/woff"
+        crossorigin
+    />
+    <link rel="stylesheet" href="/fonts/open-sans/fonts.css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <script data-cfasync="false" src="/js/theme.js"></script>
+    <link rel="stylesheet" href="/css/variables.css?_=1765734242">
+    <link rel="stylesheet" href="/css/themes/dark-theme.css?_=1765734242">
+    <link rel="stylesheet" href="/css/style.css?_=1765734242">
+    <link rel="stylesheet" href="/css/sintax.css?_=1765734242">
+    <link rel="stylesheet" href="/css/langs/de.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.">
+    <meta property="og:url" content="https://expressjs.com/de/advanced/best-practice-performance.html">
+    
+    <meta property="og:type" content="website">
+    
+    <meta name="title" property="og:title" content="Leistungsspezifische Best Practices für Express-Anwendungen in Produktionsumgebungen">
+    <meta property="og:description" content="Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.">
+    
+    <meta property="og:image" content="https://expressjs.com/images/og.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="expressjs.com">
+    <meta property="twitter:url" content="https://expressjs.com/de/advanced/best-practice-performance.html">
+    <meta name="twitter:title" content="Leistungsspezifische Best Practices für Express-Anwendungen in Produktionsumgebungen">
+    <meta name="twitter:description" content="Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.">
+    
+    <meta property="twitter:image" content="https://expressjs.com/images/og.png">
+    
+    <script data-cfasync="false" defer src="/js/app.js"></script>
+    <script data-cfasync="false" defer src="/js/menu.js"></script>
+    <script data-cfasync="false" defer src="/js/copycode.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" title="Express Blog" />
+    <link rel="alternate" type="application/atom+xml" href="/vulnerabilities.xml" title="Express Vulnerabilities" />
+</head>
+
+  
+  <body class="non-en-doc">
+  
+
+  <header>
+  <div id="mobile-menu">
+    <div id="nav-button" class="header-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="3" y1="6" x2="21" y2="6"/>
+  <line x1="3" y1="12" x2="21" y2="12"/>
+  <line x1="3" y1="18" x2="21" y2="18"/>
+</svg>
+    </div>
+  </div>
+  <div class="logo-container">
+    <a href="/" title="Go to homepage" aria-label="Go to homepage">
+      <svg xmlns="http://www.w3.org/2000/svg" class="express-logo" viewBox="0 0 1120.322 250" width="90" height="30">
+  <path d="M347.47162 250V4.890464h13.29516v38.55596a50.415241 50.415241 0 0 0 4.33954-5.43506c11.10412-23.03785 34.52487-37.57744 60.09412-37.29026 30.31296-.90408 54.94623 10.31704 69.422 37.29026a119.86915 119.86915 0 0 1 2.89302 109.881816c-13.4866 30.22788-46.79895 45.25672-82.46189 39.73657a66.688515 66.688515 0 0 1-53.22317-35.12049v97.4801zm13.29516-158.403836 2.97812 28.781356c5.25425 32.75927 24.62263 52.11702 55.03132 55.75458a62.540425 62.540425 0 0 0 68.69874-39.73657c11.82737-28.18574 10.95521-60.094116-2.33995-87.620406a61.26409 61.26409 0 0 0-64.54001-35.66294 59.668671 59.668671 0 0 0-53.30827 44.07611 304.40595 304.40595 0 0 0-6.51995 34.39724zm420.10574 33.312346a71.687494 71.687494 0 0 1-70.06017 63.35941c-55.75458 2.80794-81.91945-34.21642-86.07817-76.94174a123.27271 123.27271 0 0 1 10.85948-67.890396 75.729222 75.729222 0 0 1 78.83497-42.26797 72.432023 72.432023 0 0 1 64.26348 55.12705 371.94535 371.94535 0 0 1 6.24341 40.73636H638.50796c-2.71221 38.736776 18.10269 69.879356 47.6073 77.388456 36.74782 9.04071 68.1563-6.88157 79.55823-41.82125 2.5314-8.96625 7.14748-10.23195 15.29475-7.68992zM638.4016 84.629504h130.97326c-.81898-41.26817-26.51586-71.26205-61.37045-71.60241-39.35367-.63816-67.89039 28.15383-69.60281 71.60241zm169.53986 41.183076h12.83781a51.478853 51.478853 0 0 0 30.22787 44.35265 79.026422 79.026422 0 0 0 68.61365-1.80814 30.844768 30.844768 0 0 0 18.10269-30.3236 27.973013 27.973013 0 0 0-18.82595-27.97301c-14.12477-5.25425-29.14298-8.14727-43.53366-12.763346a319.0838 319.0838 0 0 1-43.81021-16.01801c-23.18675-11.31684-24.62263-55.39295 1.62733-69.34755a92.427941 92.427941 0 0 1 88.34367-1.36142c16.95398 9.35979 26.32441 28.26019 23.53775 47.43712h-11.00839c0-.5318-.9998-.99979-.9998-1.54223-1.36142-35.09922-30.86604-46.07571-62.54043-42.99123-9.57251 1.06361-18.64513 3.95664-27.15403 8.23236a27.122123 27.122123 0 0 0-15.74147 27.15404 27.122123 27.122123 0 0 0 18.10269 25.5267c13.82697 5.07343 28.50482 8.32809 42.81041 12.306l34.56741 9.04071a40.842727 40.842727 0 0 1 28.05811 36.843536c2.76539 18.56004-6.70076 36.801-23.44203 45.25672-30.22787 17.10289-80.01558 12.58254-102.1919-9.04071-11.34875-11.41256-17.67724-26.9094-17.54961-42.99123zm306.10774-67.794666h-12.0401c0-1.62733-.6382-3.19084-.819-4.43526a39.353669 39.353669 0 0 0-32.0466-37.83271 79.026422 79.026422 0 0 0-50.7769 2.44631 30.844768 30.844768 0 0 0-22.35715 29.41953 28.398458 28.398458 0 0 0 21.71895 28.60054l55.0313 14.12478a153.05386 153.05386 0 0 1 17.5497 5.33934c17.5496 6.381666 29.462 22.676216 29.9938 41.300076a45.203539 45.203539 0 0 1-27.6539 42.96995 100.72412 100.72412 0 0 1-81.4621.81898 56.477833 56.477833 0 0 1-34.0356-54.85051h11.76356c4.42463 21.32544 19.07054 39.08777 39.16224 47.49031 20.0916 8.40254 43.0337 6.33913 61.3066-5.48824a32.333825 32.333825 0 0 0 17.3794-30.22787 27.973013 27.973013 0 0 0-19.1024-27.7922c-14.1248-5.25425-29.143-8.05155-43.5337-12.763356a320.67922 320.67922 0 0 1-44.0761-15.83719c-22.6337-11.13602-24.44184-54.8505 1.3614-68.79447a91.151606 91.151606 0 0 1 89.7902-.99979 47.330764 47.330764 0 0 1 22.7188 46.43733zM325.59311 183.84329a20.740447 20.740447 0 0 1-25.70752-9.7746l-46.79895-64.72083-6.78585-9.04071-54.30807 73.85727a19.889557 19.889557 0 0 1-24.44182 9.59378l69.96445-93.863816-65.0931-84.81247c9.6576-3.48865 20.42136.29781 25.79261 9.04071l48.50074 65.51854 48.78791-65.26328a19.464112 19.464112 0 0 1 24.261-9.05134l-25.2608 33.51443-34.21642 44.53347a9.040708 9.040708 0 0 0 0 13.48661l65.16755 86.982236zM622.66013 4.177844v12.76335a65.624902 65.624902 0 0 0-69.87935 67.79467v99.564786h-12.94417V4.975554h12.76336v36.74781c15.65637-26.80304 39.82165-36.74781 70.14525-37.47107ZM.021272 88.724414l5.700964-28.15383c15.656379-55.66949 79.473139-78.83497 123.379074-44.35265 25.70751 20.18737 32.1211 48.78792 30.86604 81.01538H15.135208C12.79526 154.79603 54.329335 189.55489 107.45679 171.81383c17.50706-6.38167 30.68522-20.93189 35.02476-39.01331 2.80794-9.04071 7.44529-10.59359 15.93292-7.9771a73.495636 73.495636 0 0 1-35.12049 53.68054 85.089014 85.089014 0 0 1-99.118064-12.66763c-12.93353-14.53959-20.740447-32.91881-22.261413-52.32975 0-3.19084-1.063613-6.16895-1.808142-9.0407Q0 96.414334 0 88.724414Zm15.294751-3.89282H146.28929c-.81898-41.72553-27.15403-71.32587-62.274525-71.60241-39.098402-.53181-67.071415 28.41973-68.794468 71.42159Z"/>
+</svg>
+
+    </a>
+  </div>
+  <nav id="navbar" aria-label="primary">
+    <input id="q" placeholder="🔎 search">
+    <ul id="navmenu">
+      <li id="getting-started-menu" class="submenu">
+        <a href="/de/starter/installing.html" >
+          Einführung
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/de/starter/installing.html">
+              Installation
+            </a>
+          </li>
+          <li>
+            <a href="/de/starter/hello-world.html">
+              Hello world
+            </a>
+          </li>
+          <li>
+            <a href="/de/starter/generator.html">
+              Express generator
+            </a>
+          </li>
+          <li>
+            <a href="/de/starter/basic-routing.html">
+              Basisrouting
+            </a>
+          </li>
+          <li>
+            <a href="/de/starter/static-files.html">
+              Statische Dateien
+            </a>
+          </li>
+          <li>
+            <a href="/de/starter/examples.html">
+              Weitere Beispiele
+            </a>
+          </li>
+          <li>
+            <a href="/de/starter/faq.html">
+              Häufig gestellte Fragen
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="guide-menu" class="submenu">
+        <a href="/de/guide/routing.html" >
+          Leitfaden
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/de/guide/routing.html">
+              Weiterleitung (Routing)
+            </a>
+          </li>
+          <li>
+            <a href="/de/guide/writing-middleware.html">
+              Middleware schreiben
+            </a>
+          </li>
+          <li>
+            <a href="/de/guide/using-middleware.html">
+              Middleware verwenden
+            </a>
+          </li>
+          <li>
+            <a href="/de/guide/overriding-express-api.html">
+              Overriding the Express API
+            </a>
+          </li>
+          <li>
+            <a href="/de/guide/using-template-engines.html">
+              Template-Engines verwenden
+            </a>
+          </li>
+          <li>
+            <a href="/de/guide/error-handling.html">
+              Fehlerbehandlung
+            </a>
+          </li>
+          <li>
+            <a href="/de/guide/debugging.html">
+              Debugging
+            </a>
+          </li>
+          <li>
+            <a href="/de/guide/behind-proxies.html">
+              Express hinter Proxys
+            </a>
+          </li>
+          <li>
+            <a href="/de/guide/migrating-4.html">
+              Wechsel zu Express 4
+            </a>
+          </li>
+          <li>
+            <a href="/de/guide/migrating-5.html">
+              Wechsel zu Express 5
+            </a>
+          </li>
+          <li>
+            <a href="/de/guide/database-integration.html">
+              Datenbankintegration
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="application-menu" class="submenu">
+        <a href="/de/5x/api.html" >
+          API-Referenz
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/de/5x/api.html">
+              5.x
+            </a>
+          </li>
+          <li>
+            <a href="/de/4x/api.html">
+              4.x
+            </a>
+          </li>
+          <li>
+            <a href="/de/3x/api.html">
+              3.x (veraltet)
+            </a>
+          </li>
+          <li>
+            <a href="/2x/">
+              2.x (veraltet)
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="advanced-topics-menu" class="submenu">
+        <a href="/de/advanced/developing-template-engines.html"  class="active" >
+          Themen für Fortgeschrittene
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/de/advanced/developing-template-engines.html">
+              Template-Engines
+            </a>
+          </li>
+          <li>
+            <a href="/de/advanced/security-updates.html">
+              Sicherheitsupdates
+            </a>
+          </li>
+          <li>
+            <a href="/de/advanced/best-practice-security.html">
+              Sicherheitsspezifische Best Practices
+            </a>
+          </li>
+          <li>
+            <a href="/de/advanced/best-practice-performance.html">
+              Leistungsspezifische Best Practices
+            </a>
+          </li>
+          <li>
+            <a href="/de/advanced/healthcheck-graceful-shutdown.html">
+              Health checks & shutdown
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="resources-menu" class="submenu">
+        <a href="/de/resources/community.html" >
+          Ressourcen
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/de/resources/community.html">
+              Community
+            </a>
+          </li>
+          <li>
+            <a href="/de/resources/glossary.html">
+              Glossar
+            </a>
+          </li>
+          <li>
+            <a href="/de/resources/middleware.html">
+              Middleware
+            </a>
+          </li>
+          <li>
+            <a href="/de/resources/utils.html">
+              Utility modules
+            </a>
+          </li>
+          <li>
+            <a href="/de/resources/contributing.html">
+              Contributing to Express
+            </a>
+          </li>
+          <li>
+            <a href="/de/changelog">
+              Release Change Log
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/de/support" id="support-menu" >
+          Support
+        </a>
+      </li>
+      <li id="blog-menu" class="submenu">
+        <a href="/2025/12/01/security-releases.html" >
+          Blog
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/2025/12/01/security-releases.html">
+              Latest post
+            </a>
+          </li>
+          <li>
+            <a href="/en/blog/posts.html">
+              All posts
+            </a>
+          </li>
+          <li>
+            <a href="/en/blog/write-post.html">
+              Write a Post
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <div class="header-right">
+    <button id="theme-toggle" type="button" class="theme-btn" title="change theme" aria-label="Switch to dark mode">
+      <span id="icon-moon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+  <g transform="translate(1, 4) scale(0.7)">
+    <path d="M16.2 5c-9.3 5.7-9.5 19.7-.3 24.5 6.3 3.2 16.2.9 19.1-4.5 1.5-2.9.7-3.4-4.4-3.1-6.3.4-10.1-3.1-10.1-9.2 0-2.9.6-5.2 1.8-6.4 3.2-3.6-.8-4.5-6.1-1.3m2 6.3c-.4 4.9-.1 5.7 2.8 9 2 2.4 4.4 3.9 6.7 4.3 3.2.6 3.3.8 1.9 2.3-2.7 2.6-10.9 2.2-13.9-.7-4-3.8-5.2-7.6-3.8-12.2.9-3 5-8 6.6-8 .1 0 0 2.4-.3 5.3"/>
+  </g>
+</svg>
+</span>
+      <span id="icon-sun"><svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(4 4)" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <circle cx="12" cy="12" r="7.5"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(0 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(30 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(60 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(90 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(120 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(150 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(180 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(210 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(240 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(270 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(300 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(330 12 12)"/>
+  </g>
+</svg>
+</span>
+    </button>
+    
+
+
+<div class="desktop-lang-switcher">
+  <button id="langBtn" class="lang-btn" type="button" aria-expanded="false" aria-haspopup="listbox" aria-label="Change language">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" width="24" height="24">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a49 49 0 0 1 6-.371m0 0q1.681 0 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138A48 48 0 0 1 15 5.621m-4.589 8.495a18 18 0 0 1-3.827-5.802"/>
+</svg>
+
+  </button>
+  <ul id="langList" class="lang-list" role="listbox">
+    
+    <li>
+      <a href="/en/advanced/best-practice-performance.html">
+        
+        English
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/fr/advanced/best-practice-performance.html">
+        
+        Français
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/de/advanced/best-practice-performance.html">
+        
+        <strong>Deutsch</strong>
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/es/advanced/best-practice-performance.html">
+        
+        Español
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/it/advanced/best-practice-performance.html">
+        
+        Italiano
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/ja/advanced/best-practice-performance.html">
+        
+        日本語
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/zh-cn/advanced/best-practice-performance.html">
+        
+        中文 (简体)
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/zh-tw/advanced/best-practice-performance.html">
+        
+        繁體中文
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/ko/advanced/best-practice-performance.html">
+        
+        한국어
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/pt-br/advanced/best-practice-performance.html">
+        
+        Português
+        
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  </div>
+</header>
+
+  <div id="overlay"></div>
+
+  
+       <div id="i18n-notice-box" class="doc-notice" hidden>
+          
+
+
+<p>This document might be outdated relative to the documentation in English. For the latest updates, please refer to the <a href="/en/advanced/best-practice-performance.html">documentation in english</a>.</p>
+<div id="close-i18n-notice-box" title="Close" role="button" aria-label="Close notice" tabindex="0">✖</div>
+      </div>
+  
+
+  
+    <div class="content">
+      <main>
+        <h1 id="best-practices-in-produktionsumgebungen-leistung-und-zuverlässigkeit">Best Practices in Produktionsumgebungen: Leistung und Zuverlässigkeit</h1>
+
+<p>In diesem Beitrag werden Best Practices in Bezug auf Leistung und Zuverlässigkeit für Express-Anwendungen behandelt, die in der Produktionsumgebung bereitgestellt werden.</p>
+
+<p>Dieses Thema gehört sicherlich zur “DevOps”-Welt und deckt traditionelle Entwicklungs- und Betriebsprozesse ab. Entsprechend sind die Informationen hier in zwei Teile unterteilt:</p>
+
+<ul>
+  <li>Things to do in your code (the dev part):
+    <ul>
+      <li>Für statische Dateien Middleware verwenden</li>
+      <li>Keine synchronen Funktionen verwenden</li>
+      <li><a href="#do-logging-correctly">Do logging correctly</a></li>
+      <li><a href="#handle-exceptions-properly">Handle exceptions properly</a></li>
+    </ul>
+  </li>
+  <li>Things to do in your environment / setup (the ops part):
+    <ul>
+      <li>NODE_ENV auf “production” festlegen</li>
+      <li>Automatischen Neustart Ihrer Anwendung sicherstellen</li>
+      <li>Anwendung in einem Cluster ausführen</li>
+      <li>Anforderungsergebnisse im Cache speichern</li>
+      <li>Load Balancer verwenden</li>
+      <li>Reverse Proxy verwenden</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="in-code">Things to do in your code</h2>
+
+<p>Dies sind einige Beispiele für Maßnahmen, die Sie an Ihrem Code vornehmen können, um die Anwendungsleistung zu verbessern:</p>
+
+<ul>
+  <li>Für statische Dateien Middleware verwenden</li>
+  <li>Keine synchronen Funktionen verwenden</li>
+  <li><a href="#do-logging-correctly">Do logging correctly</a></li>
+  <li><a href="#handle-exceptions-properly">Handle exceptions properly</a></li>
+</ul>
+
+<h3 id="gzip-komprimierung-verwenden">GZIP-Komprimierung verwenden</h3>
+
+<p>Mit der GZIP-Komprimierung lässt sich die Größe des Antworthauptteils deutlich verringern und somit die Geschwindigkeit der Webanwendung erhöhen. Verwenden Sie die Middleware <a href="https://www.npmjs.com/package/compression">compression</a> für die GZIP-Komprimierung in Ihrer Express-Anwendung. Beispiel:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">compression</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">compression</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">compression</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Bei Websites mit hohem Datenverkehr in Produktionsumgebungen lässt sich die Komprimierung am besten installieren, indem sie auf Reverse Proxy-Ebene implementiert wird (siehe <a href="#proxy">Reverse Proxy verwenden</a>). In diesem Fall wird die Middleware “compression” nicht benötigt. Details zur Aktivierung der GZIP-Komprimierung in Nginx siehe <a href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html">Modul ngx_http_gzip_module</a> in der Nginx-Dokumentation.</p>
+
+<h3 id="keine-synchronen-funktionen-verwenden">Keine synchronen Funktionen verwenden</h3>
+
+<p>Synchrone Funktionen und Methoden belasten den Ausführungsprozess, bis sie zurückgegeben werden. Ein einzelner Aufruf für eine synchrone Funktion kann in wenigen Mikrosekunden oder Millisekunden zurückgegeben werden. Bei Websites mit hohem Datenverkehr hingegen summieren sich diese Aufrufe und verringern die Leistung der Anwendung. Sie sollten also deren Verwendung in Produktionsumgebungen vermeiden.</p>
+
+<p>Auch wenn Node und viele andere Module synchrone und asynchrone Versionen ihrer Funktionen bieten, sollten Sie in Produktionsumgebungen immer die asynchrone Version verwenden. Nur beim ersten Systemstart ist die Verwendung einer synchronen Funktion begründet.</p>
+
+<p>You can use the <code class="language-plaintext highlighter-rouge">--trace-sync-io</code> command-line flag to print a warning and a stack trace whenever your application uses a synchronous API. Auch wenn Sie diese natürlich nicht in der Produktionsumgebung verwenden werden, soll dadurch trotzdem sichergestellt werden, dass Ihr Code in der Produktionsumgebung eingesetzt werden kann. Weitere Informationen hierzu siehe <a href="https://nodejs.org/en/blog/weekly-updates/weekly-update.2015-05-22/#2-1-0">Wöchentliches Update für io.js 2.1.0</a>.</p>
+
+<h3 id="do-logging-correctly">Do logging correctly</h3>
+
+<p>Im Allgemeinen gibt es für die Protokollierung Ihrer Anwendung zwei Gründe: 1) Debugging und 2) Protokollierung von Anwendungsaktivitäten (im Wesentlichen alles andere, außer Debugging). Die Verwendung von<code class="language-plaintext highlighter-rouge">console.log()</code> oder <code class="language-plaintext highlighter-rouge">console.err()</code> zur Ausgabe von Protokollnachrichten an das Terminal ist in der Entwicklung gängige Praxis. But <a href="https://nodejs.org/api/console.html#console">these functions are synchronous</a> when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.</p>
+
+<h4 id="für-debuggingzwecke">Für Debuggingzwecke</h4>
+
+<p>Wenn Sie die Protokollierung für Debuggingzwecke nutzen, sollten Sie statt <code class="language-plaintext highlighter-rouge">console.log()</code> besser ein spezielles Debuggingmodul wie <a href="https://www.npmjs.com/package/debug">debug</a> verwenden. Mit einem solchen Modul können Sie über die Umgebungsvariable DEBUG steuern, welche Debugnachrichten an <code class="language-plaintext highlighter-rouge">console.err()</code> gesendet werden (falls vorhanden). Um Ihre Anwendung rein asynchron zu halten, können Sie trotzdem <code class="language-plaintext highlighter-rouge">console.err()</code> per Pipe zu einem anderen Programm umleiten. Sie nehmen dann aber kein Debugging in der Produktionsumgebung vor, richtig?</p>
+
+<h4 id="für-anwendungsaktivitäten">Für Anwendungsaktivitäten</h4>
+
+<p>If you’re logging app activity (for example, tracking traffic or API calls), instead of using <code class="language-plaintext highlighter-rouge">console.log()</code>, use a logging library like <a href="https://www.npmjs.com/package/pino">Pino</a>, which is the fastest and most efficient option available.</p>
+
+<h3 id="ausnahmebedingungen-ordnungsgemäß-handhaben">Ausnahmebedingungen ordnungsgemäß handhaben</h3>
+
+<p>Node-Anwendungen stürzen ab, wenn eine nicht abgefangene Ausnahmebedingung vorkommt. Wenn diese Ausnahmebedingungen nicht behandelt und entsprechende Maßnahmen eingeleitet werden, stürzt Ihre Express-Anwendung ab und geht offline. Wenn Sie dem nachfolgenden Rat in <a href="#restart">Sicherstellen, dass Ihre Anwendung automatisch neu gestartet wird</a> folgen, wird Ihre Anwendung nach einem Absturz wiederhergestellt. Glücklicherweise haben Express-Anwendungen nur eine kurze Initialisierungszeit. Nevertheless, you want to avoid crashing in the first place, and to do that, you need to handle exceptions properly.</p>
+
+<p>Mit folgenden Verfahren stellen Sie sicher, dass alle Ausnahmebedingungen gehandhabt werden:</p>
+
+<ul>
+  <li><a href="#try-catch">“try-catch” verwenden</a></li>
+  <li><a href="#promises">“Promises” verwenden</a></li>
+</ul>
+
+<p>Um näher auf diese Themen eingehen zu können, müssen Sie sich ein grundlegendes Verständnis der Fehlerbehandlung in Node und Express aneignen: Verwendung von Error-first-Callbacks und Propagieren von Fehlern in Middleware. Node verwendet die Konvention “Error-first-Callback” für die Rückgabe von Fehlern von asynchronen Funktionen, bei denen der erste Parameter zur Callback-Funktion das Fehlerobjekt ist, gefolgt von Ergebnisdaten in den nachfolgenden Parametern. Um anzugeben, dass kein Fehler vorliegt, müssen Sie “null” als ersten Parameter übergeben. Die Callback-Funktion muss der Konvention “Error-first-Callback” folgen, um den Fehler sinnvoll bearbeiten zu können. In Express hat sich bewährt, die Funktion “next()” zu verwenden, um Fehler über die Middleware-Chain zu propagieren.</p>
+
+<p>Weitere Informationen zu den Grundlagen der Fehlerbehandlung siehe:</p>
+
+<ul>
+  <li><a href="https://www.tritondatacenter.com/node-js/production/design/errors">Fehlerbehandlung in Node.js</a></li>
+</ul>
+
+<h4 id="try-catch-verwenden">“try-catch” verwenden</h4>
+
+<p>“try-catch” ist ein JavaScript-Sprachkonstrukt, mit dem Sie Ausnahmebedingungen in synchronem Code abfangen können. Verwenden Sie “try-catch” beispielsweise, um JSON-Parsing-Fehler wie unten gezeigt zu bearbeiten.</p>
+
+<p>Dies ist ein Beispiel zur Verwendung von “try-catch”, um eine potenzielle “process-crashing”-Ausnahmebedingung zu handhaben.
+Diese Middlewarefunktion akzeptiert einen Abfragefeldparameter mit dem Namen “params”, der ein JSON-Objekt ist.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/search</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Simulating async operation</span>
+  <span class="nx">setImmediate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">jsonStr</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">params</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">jsonObj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonStr</span><span class="p">)</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">Success</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid JSON string</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>“try-catch” funktioniert jedoch nur in synchronem Code. Da die Node-Plattform primär asynchron ist (insbesondere in einer Produktionsumgebung), lassen sich mit “try-catch” nicht besonders viele Ausnahmebedingungen abfangen.</p>
+
+<h4 id="promises-verwenden">“Promises” verwenden</h4>
+
+<p>When an error is thrown in an <code class="language-plaintext highlighter-rouge">async</code> function or a rejected promise is awaited inside an <code class="language-plaintext highlighter-rouge">async</code> function, those errors will be passed to the error handler as if calling <code class="language-plaintext highlighter-rouge">next(err)</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">userData</span><span class="p">()</span> <span class="c1">// If this promise fails, it will automatically call `next(err)` to handle the error.</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">status</span> <span class="o">??</span> <span class="mi">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span> <span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>Also, you can use asynchronous functions for your middleware, and the router will handle errors if the promise fails, for example:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="k">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">req</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getUser</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+
+  <span class="nx">next</span><span class="p">()</span> <span class="c1">// This will be called if the promise does not throw an error.</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>Best practice is to handle errors as close to the site as possible. So while this is now handled in the router, it’s best to catch the error in the middleware and handle it without relying on separate error-handling middleware.</p>
+
+<h4 id="what-not-to-do">What not to do</h4>
+
+<p>Sie sollten <em>auf keinen</em> Fall per Listener das Ereignis <code class="language-plaintext highlighter-rouge">uncaughtException</code> überwachen, das ausgegeben wird, wenn eine Ausnahmebedingung bis zurück zur Ereignisschleife bestehen bleibt. Durch das Hinzufügen eines Ereignislisteners für <code class="language-plaintext highlighter-rouge">uncaughtException</code> verändert sich das Standardverhalten des Prozesses, über das eine Ausnahmebedingung festgestellt wird. Das Ausführen einer Anwendung nach einer nicht abgefangenen Ausnahmebedingung ist aber eine durchaus riskante Vorgehensweise und wird nicht empfohlen, da der Prozessstatus störanfällig und unvorhersehbar wird.</p>
+
+<p>Außerdem wird die Verwendung von <code class="language-plaintext highlighter-rouge">uncaughtException</code> offiziell als <a href="https://nodejs.org/api/process.html#process_event_uncaughtexception">grobes Vorgehen</a> angesehen, sodass es den <a href="https://github.com/nodejs/node-v0.x-archive/issues/2582">Vorschlag</a> gibt, die Funktion aus dem Kern zu entfernen. Das Überwachen von <code class="language-plaintext highlighter-rouge">uncaughtException</code> per Listener ist also keine gute Idee. Daher empfehlen wir Dinge wie Mehrfachprozesse und Supervisoren: Ein Absturz und anschließender Neustart ist häufig die zuverlässigste Art der Fehlerbehebung.</p>
+
+<p>Zudem empfehlen wir, <a href="https://nodejs.org/api/domain.html">domains</a> nicht zu verwenden. Mit diesem Modul, das zudem veraltet ist, lässt sich das Problem in der Regel nicht lösen.</p>
+
+<h2 id="in-environment">Things to do in your environment / setup</h2>
+
+<p>Dies sind einige Beispiele für Maßnahmen, die Sie an Ihrer Systemumgebung vornehmen können, um die Anwendungsleistung zu verbessern:</p>
+
+<ul>
+  <li>NODE_ENV auf “production” festlegen</li>
+  <li>Automatischen Neustart Ihrer Anwendung sicherstellen</li>
+  <li>Anwendung in einem Cluster ausführen</li>
+  <li>Anforderungsergebnisse im Cache speichern</li>
+  <li>Load Balancer verwenden</li>
+  <li>Reverse Proxy verwenden</li>
+</ul>
+
+<h3 id="node_env-auf-production-festlegen">NODE_ENV auf “production” festlegen</h3>
+
+<p>In der Umgebungsvariablen NODE_ENV wird die Umgebung angegeben, in der eine Anwendung ausgeführt wird (in der Regel ist dies die Entwicklungs- oder Produktionsumgebung). One of the simplest things you can do to improve performance is to set NODE_ENV to <code class="language-plaintext highlighter-rouge">production</code>.</p>
+
+<p>Durch das Festlegen von NODE_ENV auf “production” führt Express Folgendes aus:</p>
+
+<ul>
+  <li>Speichern von Anzeigevorlagen im Cache.</li>
+  <li>Speichern von CSS-Dateien, die aus CSS-Erweiterungen generiert wurden, im Cache.</li>
+  <li>Generieren von weniger ausführlichen Fehlernachrichten.</li>
+</ul>
+
+<p><a href="https://www.dynatrace.com/news/blog/the-drastic-effects-of-omitting-node-env-in-your-express-js-applications/">Tests indicate</a> that just doing this can improve app performance by a factor of three!</p>
+
+<p>Wenn Sie umgebungsspezifischen Code schreiben müssen, können Sie den Wert von NODE_ENV mit <code class="language-plaintext highlighter-rouge">process.env.NODE_ENV</code> überprüfen. Beachten Sie, dass die Überprüfung des Werts seiner Umgebungsvariablen eine leistungsbezogene Penalisierung nach sich zieht.</p>
+
+<p>In einer Entwicklungsumgebung wird die Umgebungsvariable in der Regel in Ihrer interaktiven Shell festgelegt, indem Sie beispielsweise <code class="language-plaintext highlighter-rouge">export</code> oder Ihre Datei <code class="language-plaintext highlighter-rouge">.bash_profile</code> verwenden. But in general, you shouldn’t do that on a production server; instead, use your OS’s init system (systemd). Der nächste Abschnitt enthält weitere Details zur Verwendung des Init-Systems im Allgemeinen. Die Festlegung von NODE_ENV ist jedoch für das Leistungsverhalten so wichtig (und so einfach durchzuführen), dass hier besonders darauf eingegangen wird.</p>
+
+<p>Verwenden Sie bei systemd die Anweisung <code class="language-plaintext highlighter-rouge">Environment</code> in Ihrer Einheitendatei. Beispiel:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># /etc/systemd/system/myservice.service</span>
+<span class="nv">Environment</span><span class="o">=</span><span class="nv">NODE_ENV</span><span class="o">=</span>production
+</code></pre></div></div>
+
+<p>For more information, see <a href="https://www.flatcar.org/docs/latest/setup/systemd/environment-variables/">Using Environment Variables In systemd Units</a>.</p>
+
+<h3 id="automatischen-neustart-ihrer-anwendung-sicherstellen">Automatischen Neustart Ihrer Anwendung sicherstellen</h3>
+
+<p>In der Produktionsumgebung sollte die Anwendung nie offline sein. Das bedeutet, dass Sie sicherstellen müssen, dass die Anwendung bei einem Absturz der Anwendung oder des Servers immer wieder neu gestartet wird. Auch wenn man hofft, das keines dieser Ereignisse jemals eintritt, muss man doch mit beiden Möglichkeiten rechnen und:</p>
+
+<ul>
+  <li>einen Prozessmanager verwenden, um die Anwendung (und Node) bei einem Absturz neu zu starten.</li>
+  <li>das Init-System Ihres Betriebssystems verwenden, um den Prozessmanager bei einem Absturz des Betriebssystems neu zu starten. Außerdem kann das Init-System auch ohne einen Prozessmanager verwendet werden.</li>
+</ul>
+
+<p>Node-Anwendungen stürzen ab, wenn eine nicht abgefangene Ausnahmebedingung auftritt. Als Erstes müssen Sie in einem solchen Fall sicherstellen, dass Ihre Anwendung ausreichend getestet wurde und in der Lage ist, alle Ausnahmebedingungen zu handhaben (weitere Informationen siehe <a href="#exceptions">Ausnahmebedingungen ordnungsgemäß handhaben</a>). Die sicherste Maßnahme ist jedoch, einen Mechanismus zu implementieren, über den bei einem Absturz der Anwendung ein automatischer Neustart der Anwendung ausgeführt wird.</p>
+
+<h4 id="prozessmanager-verwenden">Prozessmanager verwenden</h4>
+
+<p>In Entwicklungumgebungen wird die Anwendung einfach über die Befehlszeile mit <code class="language-plaintext highlighter-rouge">node server.js</code> oder einer vergleichbaren Datei gestartet. In der Produktionsumgebung hingegen ist durch diese Vorgehensweise die Katastrophe bereits vorprogrammiert. Wenn die Anwendung abstürzt, ist sie solange offline, bis Sie sie erneut starten. Um sicherzustellen, dass Ihre Anwendung nach einem Absturz neu gestartet wird, sollten Sie einen Prozessmanager verwenden. Ein Prozessmanager ist ein “Container” für Anwendungen, der die Bereitstellung erleichtert, eine hohe Verfügbarkeit sicherstellt und  die Verwaltung der Anwendung zur Laufzeit ermöglicht.</p>
+
+<p>Neben einem Neustart der Anwendung nach einem Absturz bietet ein Prozessmanager noch weitere Möglichkeiten:</p>
+
+<ul>
+  <li>Einblicke in die Laufzeitleistung und die Ressourcennutzung</li>
+  <li>Dynamische Änderung der Einstellungen zur Verbesserung des Leistungsverhaltens</li>
+  <li>Control clustering (pm2).</li>
+</ul>
+
+<p>Historically, it was popular to use a Node.js process manager like <a href="https://github.com/Unitech/pm2">PM2</a>. See their documentation if you wish to do this. However, we recommend using your init system for process management.</p>
+
+<h4 id="init-system-verwenden">Init-System verwenden</h4>
+
+<p>Als nächste Ebene der Zuverlässigkeit müssen Sie sicherstellen, dass Ihre Anwendung bei einem Serverneustart neu gestartet wird. Systeme können immer wieder aus verschiedenen Gründen abstürzen. Um sicherzustellen, dass Ihre Anwendung bei einem Serverabsturz neu gestartet wird, können Sie das in Ihr Betriebssystem integrierte Init-System verwenden. The main init system in use today is <a href="https://wiki.debian.org/systemd">systemd</a>.</p>
+
+<p>Es gibt zwei Möglichkeiten, Init-Systeme mit Ihrer Express-Anwendung zu verwenden:</p>
+
+<ul>
+  <li>Ausführung Ihrer Anwendung in einem Prozessmanager und Installation des Prozessmanagers als Service mit dem Init-System. Der Prozessmanager wird neu gestartet, wenn Ihre Anwendung abstürzt. Dies ist die empfohlene Vorgehensweise.</li>
+  <li>Ausführung Ihrer Anwendung (und von Node) direkt mit dem Init-System. Diese Vorgehensweise ist zwar etwas einfacher, Sie profitieren jedoch nicht von den zusätzlichen Vorteilen des Einsatzes eines Prozessmanagers.</li>
+</ul>
+
+<h5 id="systemd">systemd</h5>
+
+<p>“systemd” ist ein Linux-System und Service-Manager. Die meisten wichtigen Linux-Distributionen haben “systemd” als Init-Standardsystem übernommen.</p>
+
+<p>Eine “systemd”-Servicekonfigurationsdatei wird als <em>Einheitendatei</em> bezeichnet, die die Endung “.service” hat. Dies ist ein Beispiel für eine Einheitendatei zur direkten Verwaltung einer Node-Anwendung (ersetzen Sie den Text in Fettdruck durch Werte für Ihr System und Ihre Anwendung): Replace the values enclosed in <code class="language-plaintext highlighter-rouge">&lt;angle brackets&gt;</code> for your system and app:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>&lt;Awesome Express App&gt;
+
+<span class="o">[</span>Service]
+<span class="nv">Type</span><span class="o">=</span>simple
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/local/bin/node &lt;/projects/myapp/index.js&gt;
+<span class="nv">WorkingDirectory</span><span class="o">=</span>&lt;/projects/myapp&gt;
+
+<span class="nv">User</span><span class="o">=</span>nobody
+<span class="nv">Group</span><span class="o">=</span>nogroup
+
+<span class="c"># Environment variables:</span>
+<span class="nv">Environment</span><span class="o">=</span><span class="nv">NODE_ENV</span><span class="o">=</span>production
+
+<span class="c"># Allow many incoming connections</span>
+<span class="nv">LimitNOFILE</span><span class="o">=</span>infinity
+
+<span class="c"># Allow core dumps for debugging</span>
+<span class="nv">LimitCORE</span><span class="o">=</span>infinity
+
+<span class="nv">StandardInput</span><span class="o">=</span>null
+<span class="nv">StandardOutput</span><span class="o">=</span>syslog
+<span class="nv">StandardError</span><span class="o">=</span>syslog
+<span class="nv">Restart</span><span class="o">=</span>always
+
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</code></pre></div></div>
+
+<p>Weitere Informationen zu “systemd” siehe <a href="http://www.freedesktop.org/software/systemd/man/systemd.unit.html">systemd-Referenz (Man-Page)</a>.</p>
+
+<h3 id="anwendung-in-einem-cluster-ausführen">Anwendung in einem Cluster ausführen</h3>
+
+<p>In einem Multi-Core-System können Sie die Leistung einer Node-Anwendung mehrmals erhöhen, indem Sie einen Cluster von Prozessen starten. Ein Cluster führt mehrere Instanzen der Anwendung aus, idealerweise eine Instanz auf jedem CPU-Core.</p>
+
+<p><img src="/images/clustering.png" alt="Balancing between application instances using the cluster API" /></p>
+
+<p>Wichtig. Da die Anwendungsinstanzen als separate Prozesse ausgeführt werden, nutzen sie nicht dieselbe Hauptspeicherkapazität gemeinsam. Das heißt, Objekte befinden sich für jede Instanz der Anwendung auf lokaler Ebene. Daher kann der Status im Anwendungscode nicht beibehalten werden. Sie können jedoch einen speicherinternen Datenspeicher wie <a href="http://redis.io/">Redis</a> verwenden, um sitzungsrelevante Daten und Statusinformationen zu speichern. Diese Einschränkung trifft im Wesentlichen auf alle Formen der horizontalen Skalierung zu, unabhängig davon, ob es sich um Clustering mit mehreren Prozessen oder mehreren physischen Servern handelt.</p>
+
+<p>Bei in Gruppen zusammengefassten Anwendungen (geclusterte Anwendungen) können Verarbeitungsprozesse einzeln ausfallen, ohne dass sich dies auf die restlichen Prozesse auswirkt. Neben den Leistungsvorteilen ist die Fehlerisolierung ein weiterer Grund, einen Cluster von Anwendungsprozessen auszuführen. Wenn ein Verarbeitungsprozess abstürzt, müssen Sie sicherstellen, dass das Ereignis protokolliert und ein neuer Prozess mithilfe von “cluster.fork()” gestartet wird.</p>
+
+<h4 id="clustermodule-von-node-verwenden">Clustermodule von Node verwenden</h4>
+
+<p>Clustering is made possible with Node’s <a href="https://nodejs.org/api/cluster.html">cluster module</a>. Dadurch wird ein Masterprozess eingeleitet, um Verarbeitungsprozesse zu starten und eingehende Verbindungen auf die Verarbeitungsprozesse zu verteilen.</p>
+
+<h4 id="using-pm2">Using PM2</h4>
+
+<p>If you deploy your application with PM2, then you can take advantage of clustering <em>without</em> modifying your application code. You should ensure your <a href="https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps">application is stateless</a> first, meaning no local data is stored in the process (such as sessions, websocket connections and the like).</p>
+
+<p>When running an application with PM2, you can enable <strong>cluster mode</strong> to run it in a cluster with a number of instances of your choosing, such as the matching the number of available CPUs on the machine. You can manually change the number of processes in the cluster using the <code class="language-plaintext highlighter-rouge">pm2</code> command line tool without stopping the app.</p>
+
+<p>To enable cluster mode, start your application like so:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Start 4 worker processes</span>
+<span class="nv">$ </span>pm2 start npm <span class="nt">--name</span> my-app <span class="nt">-i</span> 4 <span class="nt">--</span> start
+<span class="c"># Auto-detect number of available CPUs and start that many worker processes</span>
+<span class="nv">$ </span>pm2 start npm <span class="nt">--name</span> my-app <span class="nt">-i</span> max <span class="nt">--</span> start
+</code></pre></div></div>
+
+<p>This can also be configured within a PM2 process file (<code class="language-plaintext highlighter-rouge">ecosystem.config.js</code> or similar) by setting <code class="language-plaintext highlighter-rouge">exec_mode</code> to <code class="language-plaintext highlighter-rouge">cluster</code> and <code class="language-plaintext highlighter-rouge">instances</code> to the number of workers to start.</p>
+
+<p>Once running, the application can be scaled like so:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Add 3 more workers</span>
+<span class="nv">$ </span>pm2 scale my-app +3
+<span class="c"># Scale to a specific number of workers</span>
+<span class="nv">$ </span>pm2 scale my-app 2
+</code></pre></div></div>
+
+<p>For more information on clustering with PM2, see <a href="https://pm2.keymetrics.io/docs/usage/cluster-mode/">Cluster Mode</a> in the PM2 documentation.</p>
+
+<h3 id="anforderungsergebnisse-im-cache-speichern">Anforderungsergebnisse im Cache speichern</h3>
+
+<p>Eine weitere Strategie zur Verbesserung des Leistungsverhaltens in Produktionsumgebungen ist das Speichern von Anforderungergebnissen im Cache. Ihre Anwendung muss also diese Operation nicht wiederholt ausführen, um dieselbe Anforderung wiederholt zu bedienen.</p>
+
+<p>Use a caching server like <a href="https://www.varnish-cache.org/">Varnish</a> or <a href="https://blog.nginx.org/blog/nginx-caching-guide">Nginx</a> (see also <a href="https://serversforhackers.com/nginx-caching/">Nginx Caching</a>) to greatly improve the speed and performance of your app.</p>
+
+<h3 id="load-balancer-verwenden">Load Balancer verwenden</h3>
+
+<p>Unabhängig davon, wie gut eine Anwendung optimiert wurde, kann eine Einzelinstanz nur eine begrenzte Arbeitslast oder einen begrenzten Datenverkehr handhaben. Eine Möglichkeit, eine Anwendung zu skalieren, ist die Ausführung mehrerer Instanzen dieser Anwendung und die Verteilung des Datenverkehrs über eine Lastausgleichsfunktion (Load Balancer) vorzunehmen. Die Einrichtung eines solchen Load Balancer kann helfen, Leistung und Geschwindigkeit Ihrer Anwendung zu verbessern.</p>
+
+<p>Ein Load Balancer ist in der Regel ein Reverse Proxy, der den Datenverkehr zu und von mehreren Anwendungsinstanzen und Servern koordiniert. You can easily set up a load balancer for your app by using <a href="https://nginx.org/en/docs/http/load_balancing.html">Nginx</a> or <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts">HAProxy</a>.</p>
+
+<p>Bei einer solchen Lastverteilung müssen Sie sicherstellen, dass Anforderungen, die einer bestimmten Sitzungs-ID zugeordnet sind, mit dem Prozess verbunden sind, von dem sie ursprünglich stammen. Dies wird auch als <em>Sitzungsaffinität</em> oder <em>Affine Sitzungen</em> bezeichnet und kann durch den obigen Vorschlag, einen Datenspeicher wie Redis für Sitzungsdaten zu verwenden (je nach Anwendung), umgesetzt werden. Eine Beschreibung hierzu siehe <a href="https://socket.io/docs/v4/using-multiple-nodes/">Mehrere Knoten verwenden</a>.</p>
+
+<h3 id="reverse-proxy-verwenden">Reverse Proxy verwenden</h3>
+
+<p>Ein Reverse Proxy befindet sich vor einer Webanwendung und führt Unterstützungsoperationen für die Anforderungen aus (außer das Weiterleiten von Anforderungen an die Anwendung). Fehlerseiten, Komprimierungen und Caching bearbeiten, Dateien bereitstellen und Lastverteilungen vornehmen.</p>
+
+<p>Durch die Übergabe von Tasks, die keine Kenntnis des Anwendungsstatus erfordern, an einen Reverse Proxy muss Express keine speziellen Anwendungstasks mehr ausführen. For this reason, it is recommended to run Express behind a reverse proxy like <a href="https://www.nginx.org/">Nginx</a> or <a href="https://www.haproxy.org/">HAProxy</a> in production.</p>
+
+        
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+      
+      
+
+  
+
+  
+    <nav class="bottom-navigation" aria-label="Pagination">
+      
+        <a href="/de/advanced/best-practice-security.html" class="bottom-nav-prev">
+          Previous: Sicherheitsspezifische Best Practices für Express-Anwendungen in Produktionsumgebungen
+        </a>
+      
+
+      
+        <a href="/de/advanced/healthcheck-graceful-shutdown.html" class="bottom-nav-next">
+          Next: Health Checks and Graceful Shutdown
+        </a>
+      
+    </nav>
+  
+
+
+        <a role="button" class="edit-github-btn" 
+    href="
+            https://github.com/expressjs/expressjs.com/edit/gh-pages/de/advanced/best-practice-performance.md
+          ">      
+    <svg
+    viewBox="0 0 256 250"
+    width="20"
+    height="20"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+>
+    <path
+        d="M128.001 0C57.317 0 0 57.307 0 128.001c0 56.554 36.676 104.535 87.535 121.46 6.397 1.185 8.746-2.777 8.746-6.158 0-3.052-.12-13.135-.174-23.83-35.61 7.742-43.124-15.103-43.124-15.103-5.823-14.795-14.213-18.73-14.213-18.73-11.613-7.944.876-7.78.876-7.78 12.853.902 19.621 13.19 19.621 13.19 11.417 19.568 29.945 13.911 37.249 10.64 1.149-8.272 4.466-13.92 8.127-17.116-28.431-3.236-58.318-14.212-58.318-63.258 0-13.975 5-25.394 13.188-34.358-1.329-3.224-5.71-16.242 1.24-33.874 0 0 10.749-3.44 35.21 13.121 10.21-2.836 21.16-4.258 32.038-4.307 10.878.049 21.837 1.47 32.066 4.307 24.431-16.56 35.165-13.12 35.165-13.12 6.967 17.63 2.584 30.65 1.255 33.873 8.207 8.964 13.173 20.383 13.173 34.358 0 49.163-29.944 59.988-58.447 63.157 4.591 3.972 8.682 11.762 8.682 23.704 0 17.126-.148 30.91-.148 35.126 0 3.407 2.304 7.398 8.792 6.14C219.37 232.5 256 184.537 256 128.002 256 57.307 198.691 0 128.001 0Zm-80.06 182.34c-.282.636-1.283.827-2.194.39-.929-.417-1.45-1.284-1.15-1.922.276-.655 1.279-.838 2.205-.399.93.418 1.46 1.293 1.139 1.931Zm6.296 5.618c-.61.566-1.804.303-2.614-.591-.837-.892-.994-2.086-.375-2.66.63-.566 1.787-.301 2.626.591.838.903 1 2.088.363 2.66Zm4.32 7.188c-.785.545-2.067.034-2.86-1.104-.784-1.138-.784-2.503.017-3.05.795-.547 2.058-.055 2.861 1.075.782 1.157.782 2.522-.019 3.08Zm7.304 8.325c-.701.774-2.196.566-3.29-.49-1.119-1.032-1.43-2.496-.726-3.27.71-.776 2.213-.558 3.315.49 1.11 1.03 1.45 2.505.701 3.27Zm9.442 2.81c-.31 1.003-1.75 1.459-3.199 1.033-1.448-.439-2.395-1.613-2.103-2.626.301-1.01 1.747-1.484 3.207-1.028 1.446.436 2.396 1.602 2.095 2.622Zm10.744 1.193c.036 1.055-1.193 1.93-2.715 1.95-1.53.034-2.769-.82-2.786-1.86 0-1.065 1.202-1.932 2.733-1.958 1.522-.03 2.768.818 2.768 1.868Zm10.555-.405c.182 1.03-.875 2.088-2.387 2.37-1.485.271-2.861-.365-3.05-1.386-.184-1.056.893-2.114 2.376-2.387 1.514-.263 2.868.356 3.061 1.403Z" />
+</svg>
+    Edit this page
+</a>
+      </main>
+    </div>
+  
+
+  <a id="top" href="#" role="button" aria-label="go to top"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" fill="none" viewBox="0 0 1155 1000"><path fill="currentColor" d="m577.344 0 577.346 1000H0L577.344 0Z"/></svg></a>
+
+<footer>
+  <section id="footer-content">
+    <div id="footer-copyright">
+      <a href="https://openjsf.org/" class="openjs-logo" title="OpenJS Foundation">
+         <?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="ARTWORK" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1000 314.4" style="enable-background:new 0 0 1000 314.4;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:var(--fg);}
+</style>
+<g>
+	<path class="st0" d="M271.4,78.1L137,0.5L136.1,0l-0.9,0.5L1.6,77.7l-0.7,0.4L0,78.6v157.2l0.9,0.5l134.4,77.6l0.9,0.5l0.9-0.5
+		l132.6-76.5l1.8-1l0.9-0.5V78.6L271.4,78.1z M122.7,20.1L89.8,77H24.1L122.7,20.1z M84.4,86.4L69,113.1L22.8,86.4H84.4z
+		 M72.4,125.8l54.3,31.4l-54.3,31.4l-18.1-31.4L72.4,125.8z M64.4,121.2l-15.4,26.7L18.1,94.5L64.4,121.2z M10.7,100.3l32.9,56.9
+		l-32.9,56.9V100.3z M48.9,166.6l15.4,26.7l-46.2,26.7L48.9,166.6z M69,201.3L84.4,228H22.8L69,201.3z M24.1,237.4h65.7l32.9,56.9
+		L24.1,237.4z M131.5,290.8l-30.8-53.4h30.8V290.8z M131.5,228H95.2l-18.1-31.4l54.3-31.4V228z M131.5,149.1l-54.3-31.4l18.1-31.4
+		h36.2V149.1z M131.5,77h-30.8l30.8-53.4V77z M207.9,121.2l46.2-26.7l-30.8,53.4L207.9,121.2z M217.9,157.2l-18.1,31.4l-54.3-31.4
+		l54.3-31.4L217.9,157.2z M203.2,113.1l-15.4-26.7h61.6L203.2,113.1z M248.1,77h-65.7l-32.8-56.9L248.1,77z M140.8,23.6L171.6,77
+		h-30.8V23.6z M140.8,86.4H177l18.1,31.4l-54.3,31.4V86.4z M140.8,165.3l54.3,31.4L177,228h-36.2V165.3z M140.8,237.4h30.8
+		l-30.8,53.4V237.4z M149.6,294.3l32.8-56.9h65.7L149.6,294.3z M187.8,228l15.4-26.7l46.2,26.7H187.8z M207.9,193.2l15.4-26.7
+		l30.8,53.4L207.9,193.2z M261.6,214.1l-32.9-56.9l32.9-56.9V214.1z"/>
+	<polygon class="st0" points="308.4,202.7 372.6,202.7 372.6,208.5 315,208.5 315,257 367.2,257 367.2,263 315,263 315,312.9 
+		308.4,312.9 	"/>
+	<path class="st0" d="M383.8,279.7c0-19,15.2-34.4,34.5-34.4c19.3,0,34.2,15.4,34.2,34.4c0,19-14.9,34.5-34.2,34.5
+		C399,314.2,383.8,298.7,383.8,279.7 M446,279.7c0-16.4-11.2-28.7-27.7-28.7c-16.5,0-28,12.3-28,28.7c0,16.4,11.5,28.9,28,28.9
+		C434.8,308.6,446,296.1,446,279.7"/>
+	<path class="st0" d="M469.9,288.5v-41.7h6.3v40.7c0,13.5,6.3,21.1,19,21.1c14.3,0,24.3-9.6,24.3-24.8v-37h6.3v66.2h-6.3l0.2-14.6
+		c-4.4,9.9-13.5,16-25.1,16C479.8,314.4,469.9,304.7,469.9,288.5"/>
+	<path class="st0" d="M543,246.8h6.3l-0.2,14.8c4.4-10,13.6-16.2,25.3-16.2c14.8,0,24.6,9.9,24.6,26.3v41.3h-6.3v-40.2
+		c0-13.6-6.3-21.6-19.1-21.6c-14.3,0-24.3,9.4-24.3,24.8v37H543V246.8z"/>
+	<path class="st0" d="M616.3,279.7c0-19.5,13.8-34.4,32.8-34.4c13.5,0,23.2,7.3,28,17.2v-66.6h6.3v117.1h-6.3l0.3-16.5
+		c-4.7,10.2-15.6,17.8-28.4,17.8C630.1,314.2,616.3,299.2,616.3,279.7 M677.6,279.7c0-16.4-11-28.7-27.7-28.7
+		c-16.4,0-26.9,12.3-26.9,28.7c0,16.4,10.5,28.9,26.9,28.9C666.6,308.6,677.6,296.1,677.6,279.7"/>
+	<path class="st0" d="M748,271.4c0-14.9-6.8-20.6-17.7-20.6c-10.1,0-16.9,4.2-21.6,11.4l-4.5-3.2c5.5-8.6,14.9-13.6,26.3-13.6
+		c13.6,0,23.8,8.3,23.8,25.5v42.2H748l0.3-10.2c-4.2,6.3-11.5,11.5-22.9,11.5c-15.1,0-25-7-25-20.3c0-13.1,11.5-19.3,24.2-19.3H748
+		V271.4z M725.4,279.9c-10.1,0-18.6,3.9-18.6,13.9c0,10.1,6.6,14.8,19.3,14.8c11,0,21.9-6.5,21.9-16.7v-12H725.4z"/>
+	<path class="st0" d="M782.5,295.4v-43.3h-10.4v-5.4h10.4v-23.2h6.3v23.2h19.1v5.4h-19.1v43.1c0,9.7,3.4,13.3,8.9,13.3
+		c5.8,0,8.1-2.3,10.5-4.9l4.1,3.9c-3.2,3.7-7.1,6.6-14.6,6.6C789.3,314.2,782.5,308.9,782.5,295.4"/>
+	<path class="st0" d="M829.5,218.2c0-3.1,2.6-5.4,5.4-5.4c2.8,0,5.4,2.3,5.4,5.4c0,3.2-2.6,5.3-5.4,5.3
+		C832.1,223.6,829.5,221.5,829.5,218.2 M831.8,246.8h6.3v66.2h-6.3V246.8z"/>
+	<path class="st0" d="M857.1,279.7c0-19,15.2-34.4,34.5-34.4c19.3,0,34.2,15.4,34.2,34.4c0,19-14.9,34.5-34.2,34.5
+		C872.4,314.2,857.1,298.7,857.1,279.7 M919.4,279.7c0-16.4-11.2-28.7-27.7-28.7c-16.5,0-28,12.3-28,28.7c0,16.4,11.5,28.9,28,28.9
+		C908.2,308.6,919.4,296.1,919.4,279.7"/>
+	<path class="st0" d="M943.9,246.8h6.3l-0.2,14.8c4.4-10,13.6-16.2,25.3-16.2c14.8,0,24.6,9.9,24.6,26.3v41.3h-6.3v-40.2
+		c0-13.6-6.3-21.6-19.1-21.6c-14.3,0-24.3,9.4-24.3,24.8v37h-6.3V246.8z"/>
+	<path class="st0" d="M308.4,73.1c0-41.4,31.8-71.3,71.7-71.3c39.6,0,71.5,29.8,71.5,71.3c0,41.4-31.9,71.3-71.5,71.3
+		C340.2,144.3,308.4,114.5,308.4,73.1 M429.4,73.1c0-29.6-20.4-51.9-49.4-51.9c-29,0-49.6,22.3-49.6,51.9
+		c0,29.6,20.6,51.9,49.6,51.9C409,124.9,429.4,102.7,429.4,73.1"/>
+	<path class="st0" d="M473.9,56.8h20.8l-0.6,15.9c5.5-10.6,15.7-17.8,30.4-17.8c22,0,39.8,18.6,39.8,44.5c0,25.9-18,44.9-40.2,44.9
+		c-14.3,0-24.5-6.9-29.4-16.5v58h-20.8V56.8z M543.1,99.4c0-15.5-9.4-26.1-24.3-26.1c-15.1,0-24.9,10.6-24.9,26.1
+		c0,16.1,9.8,26.7,24.9,26.7C533.8,126.2,543.1,115.6,543.1,99.4"/>
+	<path class="st0" d="M635,127c11.2,0,19.4-4.5,24.3-9.2l12,12.7c-8,8-19,13.9-36.1,13.9c-29.4,0-48.4-19-48.4-44.7
+		c0-25.5,20-44.7,45.7-44.7c29.2,0,45.7,21.6,44.3,51.7h-69C610.3,119,619.3,127,635,127 M656.1,92.3c-1.8-11.6-9-20.2-23.3-20.2
+		c-13.3,0-22.5,7.3-24.9,20.2H656.1z"/>
+	<path class="st0" d="M699.7,56.8h20.6l-0.4,15.9c5.3-11.2,16.1-17.8,29-17.8c19,0,32.1,13.5,32.1,36.7v50.8h-20.6V93.3
+		c0-12.3-5.7-19.4-17.8-19.4c-13.5,0-22.3,8.2-22.3,22v46.5h-20.6V56.8z"/>
+	<path class="st0" d="M803.5,120.9l17.6-10.8c4.9,8.8,10.6,14.9,20.8,14.9c11.6,0,19.2-5.5,19.2-21.6V3.7h21.6v100
+		c0,27.6-16.5,40.6-39.8,40.6C822.3,144.3,810.1,133.7,803.5,120.9"/>
+	<path class="st0" d="M904.9,115.6l17.8-9.8c6.5,10.8,14.9,19.4,31.8,19.4c14.1,0,24.1-7.6,24.1-19c0-12-8.2-17.4-23.3-24.1
+		l-9.2-4.1c-20.2-9-32.5-19.2-32.5-40.6c0-20.6,15.9-35.3,39-35.3C971,2,983.5,9,991.8,23.9l-16.9,10.4
+		c-5.3-9.2-11.4-13.5-22.3-13.5c-11,0-18,6.7-18,16.1c0,10.4,5.9,15.1,20,21.2l9,4.1c23.7,10.4,36.3,21.4,36.3,43.7
+		c0,24.3-19,38.4-45.1,38.4C928.5,144.3,912.6,131.3,904.9,115.6"/>
+</g>
+</svg>
+
+      </a>
+      <div id="footer-policy">
+        <a href="https://terms-of-use.openjsf.org">
+          Nutzungsbedingungen
+        </a>
+        <a href="https://privacy-policy.openjsf.org">
+          Datenschutzerklärung
+        </a>
+        <a id="coc" href="https://github.com/expressjs/.github/blob/HEAD/CODE_OF_CONDUCT.md">
+          Verhaltenskodex
+        </a>
+        <a href="https://trademark-policy.openjsf.org">
+          Trademark Policy
+        </a>
+        <a id="security" href="https://github.com/expressjs/express/security/policy">
+          Security Policy
+        </a>
+      </div>
+    </div>
+    <div id="footer-links">
+      <div class="footer-social">
+        <div>
+          <a href="https://github.com/expressjs/express" aria-label="Go to the repository on GitHub">
+            <svg
+    viewBox="0 0 256 250"
+    width="20"
+    height="20"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+>
+    <path
+        d="M128.001 0C57.317 0 0 57.307 0 128.001c0 56.554 36.676 104.535 87.535 121.46 6.397 1.185 8.746-2.777 8.746-6.158 0-3.052-.12-13.135-.174-23.83-35.61 7.742-43.124-15.103-43.124-15.103-5.823-14.795-14.213-18.73-14.213-18.73-11.613-7.944.876-7.78.876-7.78 12.853.902 19.621 13.19 19.621 13.19 11.417 19.568 29.945 13.911 37.249 10.64 1.149-8.272 4.466-13.92 8.127-17.116-28.431-3.236-58.318-14.212-58.318-63.258 0-13.975 5-25.394 13.188-34.358-1.329-3.224-5.71-16.242 1.24-33.874 0 0 10.749-3.44 35.21 13.121 10.21-2.836 21.16-4.258 32.038-4.307 10.878.049 21.837 1.47 32.066 4.307 24.431-16.56 35.165-13.12 35.165-13.12 6.967 17.63 2.584 30.65 1.255 33.873 8.207 8.964 13.173 20.383 13.173 34.358 0 49.163-29.944 59.988-58.447 63.157 4.591 3.972 8.682 11.762 8.682 23.704 0 17.126-.148 30.91-.148 35.126 0 3.407 2.304 7.398 8.792 6.14C219.37 232.5 256 184.537 256 128.002 256 57.307 198.691 0 128.001 0Zm-80.06 182.34c-.282.636-1.283.827-2.194.39-.929-.417-1.45-1.284-1.15-1.922.276-.655 1.279-.838 2.205-.399.93.418 1.46 1.293 1.139 1.931Zm6.296 5.618c-.61.566-1.804.303-2.614-.591-.837-.892-.994-2.086-.375-2.66.63-.566 1.787-.301 2.626.591.838.903 1 2.088.363 2.66Zm4.32 7.188c-.785.545-2.067.034-2.86-1.104-.784-1.138-.784-2.503.017-3.05.795-.547 2.058-.055 2.861 1.075.782 1.157.782 2.522-.019 3.08Zm7.304 8.325c-.701.774-2.196.566-3.29-.49-1.119-1.032-1.43-2.496-.726-3.27.71-.776 2.213-.558 3.315.49 1.11 1.03 1.45 2.505.701 3.27Zm9.442 2.81c-.31 1.003-1.75 1.459-3.199 1.033-1.448-.439-2.395-1.613-2.103-2.626.301-1.01 1.747-1.484 3.207-1.028 1.446.436 2.396 1.602 2.095 2.622Zm10.744 1.193c.036 1.055-1.193 1.93-2.715 1.95-1.53.034-2.769-.82-2.786-1.86 0-1.065 1.202-1.932 2.733-1.958 1.522-.03 2.768.818 2.768 1.868Zm10.555-.405c.182 1.03-.875 2.088-2.387 2.37-1.485.271-2.861-.365-3.05-1.386-.184-1.056.893-2.114 2.376-2.387 1.514-.263 2.868.356 3.061 1.403Z" />
+</svg>
+          </a>
+        </div>
+        <div>
+          <a href="https://www.youtube.com/channel/UCYjxjAeH6TRik9Iwy5nXw7g"
+            aria-label="Go to the repository on Youtube">
+            <svg viewBox="0 0 256 180" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M250.346 28.075A32.18 32.18 0 0 0 227.69 5.418C207.824 0 127.87 0 127.87 0S47.912.164 28.046 5.582A32.18 32.18 0 0 0 5.39 28.24c-6.009 35.298-8.34 89.084.165 122.97a32.18 32.18 0 0 0 22.656 22.657c19.866 5.418 99.822 5.418 99.822 5.418s79.955 0 99.82-5.418a32.18 32.18 0 0 0 22.657-22.657c6.338-35.348 8.291-89.1-.164-123.134Z" fill="red"/><path fill="#FFF" d="m102.421 128.06 66.328-38.418-66.328-38.418z"/></svg></a>
+        </div>
+        <div>
+          <a href="https://x.com/UseExpressJS" aria-label="Go to the X account">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20" viewBox="0 0 1200 1227"><path d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"/></svg>
+          </a>
+        </div>
+        <div>
+          <a href="https://openjs-foundation.slack.com/archives/C02QB1731FH"
+            aria-label="Join Slack group">
+            <svg
+  viewBox="0 0 2447.6 2452.5"
+  xmlns="http://www.w3.org/2000/svg"
+  width="20"
+  height="20"
+>
+  <g clip-rule="evenodd" fill-rule="evenodd">
+    <path
+      d="m897.4 0c-135.3.1-244.8 109.9-244.7 245.2-.1 135.3 109.5 245.1 244.8 245.2h244.8v-245.1c.1-135.3-109.5-245.1-244.9-245.3.1 0 .1 0 0 0m0 654h-652.6c-135.3.1-244.9 109.9-244.8 245.2-.2 135.3 109.4 245.1 244.7 245.3h652.7c135.3-.1 244.9-109.9 244.8-245.2.1-135.4-109.5-245.2-244.8-245.3z"
+      fill="#36c5f0"
+    />
+    <path
+      d="m2447.6 899.2c.1-135.3-109.5-245.1-244.8-245.2-135.3.1-244.9 109.9-244.8 245.2v245.3h244.8c135.3-.1 244.9-109.9 244.8-245.3zm-652.7 0v-654c.1-135.2-109.4-245-244.7-245.2-135.3.1-244.9 109.9-244.8 245.2v654c-.2 135.3 109.4 245.1 244.7 245.3 135.3-.1 244.9-109.9 244.8-245.3z"
+      fill="#2eb67d"
+    />
+    <path
+      d="m1550.1 2452.5c135.3-.1 244.9-109.9 244.8-245.2.1-135.3-109.5-245.1-244.8-245.2h-244.8v245.2c-.1 135.2 109.5 245 244.8 245.2zm0-654.1h652.7c135.3-.1 244.9-109.9 244.8-245.2.2-135.3-109.4-245.1-244.7-245.3h-652.7c-135.3.1-244.9 109.9-244.8 245.2-.1 135.4 109.4 245.2 244.7 245.3z"
+      fill="#ecb22e"
+    />
+    <path
+      d="m0 1553.2c-.1 135.3 109.5 245.1 244.8 245.2 135.3-.1 244.9-109.9 244.8-245.2v-245.2h-244.8c-135.3.1-244.9 109.9-244.8 245.2zm652.7 0v654c-.2 135.3 109.4 245.1 244.7 245.3 135.3-.1 244.9-109.9 244.8-245.2v-653.9c.2-135.3-109.4-245.1-244.7-245.3-135.4 0-244.9 109.8-244.8 245.1 0 0 0 .1 0 0"
+      fill="#e01e5a"
+    />
+  </g>
+</svg>
+</a>
+        </div>
+        <div>
+          <a href="https://opencollective.com/express" aria-label="Go to Open Collective"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 64 64" fill-rule="evenodd"><path d="M52.402 31.916c0 4.03-1.17 7.895-3.178 11.087l8.196 8.23c4.014-5.375 6.523-12.094 6.523-19.318s-2.51-13.942-6.523-19.318l-8.196 8.23c2.007 3.192 3.178 6.887 3.178 11.087z" fill="#b8d3f4"/><path d="M32.004 52.41c-11.207 0-20.406-9.24-20.406-20.493s9.2-20.493 20.406-20.493c4.182 0 7.86 1.176 11.04 3.36l8.196-8.23C45.887 2.52 39.197 0 32.004 0 14.44 0 .057 14.278.057 32.084S14.44 64 32.004 64c7.36 0 14.05-2.52 19.403-6.55l-8.196-8.23c-3.178 2.016-7.025 3.192-11.207 3.192z" fill="#3385ff"/></svg></a>
+        </div>
+        <div>
+          <a href="https://bsky.app/profile/expressjs.bsky.social" aria-label="Go to the Bluesky"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -3.268 64 68.414" height="20" width="20"><path fill="#0085ff" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805zm36.254 0C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745z"/></svg></a>
+        </div>
+      </div>
+      <a href="https://www.netlify.com">
+          <img src="https://www.netlify.com/v3/img/components/netlify-color-accent.svg" alt="Preview Deploys by Netlify"
+            width="80" />
+      </a>
+    </div>
+  </section>
+</footer>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" onload="docsearch({
+  apiKey: '7164e33055faa6ecddefd9e08fc59f5d',
+  indexName: 'expressjs',
+  inputSelector: '#q',
+  algoliaOptions: { 'facetFilters': ['lang:de'] }
+})" async></script>
+
+
+  </body>
+
+</html>
+

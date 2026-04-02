@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+
+<html lang="en" prefix="og: http://ogp.me/ns#">
+
+  <head>
+    <title>Using Express middleware</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link 
+        rel="preload" 
+        href="/fonts/open-sans/woff2/open-sans-latin-wght-normal.woff2"
+        as="font" 
+        type="font/woff2" 
+        crossorigin 
+    />
+    <link 
+        rel="preload" 
+        href="/fonts/open-sans/woff2/open-sans-latin-wght-italic.woff2" 
+        as="font" 
+        type="font/woff2" 
+        crossorigin 
+    />
+    <link
+        href="/fonts/open-sans/woff/OpenSans.woff"
+        as="font"
+        type="font/woff"
+        crossorigin
+    />
+    <link
+        href="/fonts/open-sans/woff/OpenSans-Italic.woff"
+        as="font"
+        type="font/woff"
+        crossorigin
+    />
+    <link rel="stylesheet" href="/fonts/open-sans/fonts.css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <script data-cfasync="false" src="/js/theme.js"></script>
+    <link rel="stylesheet" href="/css/variables.css?_=1765734242">
+    <link rel="stylesheet" href="/css/themes/dark-theme.css?_=1765734242">
+    <link rel="stylesheet" href="/css/style.css?_=1765734242">
+    <link rel="stylesheet" href="/css/sintax.css?_=1765734242">
+    <link rel="stylesheet" href="/css/langs/en.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Learn how to use middleware in Express.js applications, including application-level and router-level middleware, error handling, and integrating third-party middleware.">
+    <meta property="og:url" content="https://expressjs.com/en/guide/using-middleware.html">
+    
+    <meta property="og:type" content="website">
+    
+    <meta name="title" property="og:title" content="Using Express middleware">
+    <meta property="og:description" content="Learn how to use middleware in Express.js applications, including application-level and router-level middleware, error handling, and integrating third-party middleware.">
+    
+    <meta property="og:image" content="https://expressjs.com/images/og.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="expressjs.com">
+    <meta property="twitter:url" content="https://expressjs.com/en/guide/using-middleware.html">
+    <meta name="twitter:title" content="Using Express middleware">
+    <meta name="twitter:description" content="Learn how to use middleware in Express.js applications, including application-level and router-level middleware, error handling, and integrating third-party middleware.">
+    
+    <meta property="twitter:image" content="https://expressjs.com/images/og.png">
+    
+    <script data-cfasync="false" defer src="/js/app.js"></script>
+    <script data-cfasync="false" defer src="/js/menu.js"></script>
+    <script data-cfasync="false" defer src="/js/copycode.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" title="Express Blog" />
+    <link rel="alternate" type="application/atom+xml" href="/vulnerabilities.xml" title="Express Vulnerabilities" />
+</head>
+
+  
+  <body class="en-doc">
+  
+
+  <header>
+  <div id="mobile-menu">
+    <div id="nav-button" class="header-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="3" y1="6" x2="21" y2="6"/>
+  <line x1="3" y1="12" x2="21" y2="12"/>
+  <line x1="3" y1="18" x2="21" y2="18"/>
+</svg>
+    </div>
+  </div>
+  <div class="logo-container">
+    <a href="/" title="Go to homepage" aria-label="Go to homepage">
+      <svg xmlns="http://www.w3.org/2000/svg" class="express-logo" viewBox="0 0 1120.322 250" width="90" height="30">
+  <path d="M347.47162 250V4.890464h13.29516v38.55596a50.415241 50.415241 0 0 0 4.33954-5.43506c11.10412-23.03785 34.52487-37.57744 60.09412-37.29026 30.31296-.90408 54.94623 10.31704 69.422 37.29026a119.86915 119.86915 0 0 1 2.89302 109.881816c-13.4866 30.22788-46.79895 45.25672-82.46189 39.73657a66.688515 66.688515 0 0 1-53.22317-35.12049v97.4801zm13.29516-158.403836 2.97812 28.781356c5.25425 32.75927 24.62263 52.11702 55.03132 55.75458a62.540425 62.540425 0 0 0 68.69874-39.73657c11.82737-28.18574 10.95521-60.094116-2.33995-87.620406a61.26409 61.26409 0 0 0-64.54001-35.66294 59.668671 59.668671 0 0 0-53.30827 44.07611 304.40595 304.40595 0 0 0-6.51995 34.39724zm420.10574 33.312346a71.687494 71.687494 0 0 1-70.06017 63.35941c-55.75458 2.80794-81.91945-34.21642-86.07817-76.94174a123.27271 123.27271 0 0 1 10.85948-67.890396 75.729222 75.729222 0 0 1 78.83497-42.26797 72.432023 72.432023 0 0 1 64.26348 55.12705 371.94535 371.94535 0 0 1 6.24341 40.73636H638.50796c-2.71221 38.736776 18.10269 69.879356 47.6073 77.388456 36.74782 9.04071 68.1563-6.88157 79.55823-41.82125 2.5314-8.96625 7.14748-10.23195 15.29475-7.68992zM638.4016 84.629504h130.97326c-.81898-41.26817-26.51586-71.26205-61.37045-71.60241-39.35367-.63816-67.89039 28.15383-69.60281 71.60241zm169.53986 41.183076h12.83781a51.478853 51.478853 0 0 0 30.22787 44.35265 79.026422 79.026422 0 0 0 68.61365-1.80814 30.844768 30.844768 0 0 0 18.10269-30.3236 27.973013 27.973013 0 0 0-18.82595-27.97301c-14.12477-5.25425-29.14298-8.14727-43.53366-12.763346a319.0838 319.0838 0 0 1-43.81021-16.01801c-23.18675-11.31684-24.62263-55.39295 1.62733-69.34755a92.427941 92.427941 0 0 1 88.34367-1.36142c16.95398 9.35979 26.32441 28.26019 23.53775 47.43712h-11.00839c0-.5318-.9998-.99979-.9998-1.54223-1.36142-35.09922-30.86604-46.07571-62.54043-42.99123-9.57251 1.06361-18.64513 3.95664-27.15403 8.23236a27.122123 27.122123 0 0 0-15.74147 27.15404 27.122123 27.122123 0 0 0 18.10269 25.5267c13.82697 5.07343 28.50482 8.32809 42.81041 12.306l34.56741 9.04071a40.842727 40.842727 0 0 1 28.05811 36.843536c2.76539 18.56004-6.70076 36.801-23.44203 45.25672-30.22787 17.10289-80.01558 12.58254-102.1919-9.04071-11.34875-11.41256-17.67724-26.9094-17.54961-42.99123zm306.10774-67.794666h-12.0401c0-1.62733-.6382-3.19084-.819-4.43526a39.353669 39.353669 0 0 0-32.0466-37.83271 79.026422 79.026422 0 0 0-50.7769 2.44631 30.844768 30.844768 0 0 0-22.35715 29.41953 28.398458 28.398458 0 0 0 21.71895 28.60054l55.0313 14.12478a153.05386 153.05386 0 0 1 17.5497 5.33934c17.5496 6.381666 29.462 22.676216 29.9938 41.300076a45.203539 45.203539 0 0 1-27.6539 42.96995 100.72412 100.72412 0 0 1-81.4621.81898 56.477833 56.477833 0 0 1-34.0356-54.85051h11.76356c4.42463 21.32544 19.07054 39.08777 39.16224 47.49031 20.0916 8.40254 43.0337 6.33913 61.3066-5.48824a32.333825 32.333825 0 0 0 17.3794-30.22787 27.973013 27.973013 0 0 0-19.1024-27.7922c-14.1248-5.25425-29.143-8.05155-43.5337-12.763356a320.67922 320.67922 0 0 1-44.0761-15.83719c-22.6337-11.13602-24.44184-54.8505 1.3614-68.79447a91.151606 91.151606 0 0 1 89.7902-.99979 47.330764 47.330764 0 0 1 22.7188 46.43733zM325.59311 183.84329a20.740447 20.740447 0 0 1-25.70752-9.7746l-46.79895-64.72083-6.78585-9.04071-54.30807 73.85727a19.889557 19.889557 0 0 1-24.44182 9.59378l69.96445-93.863816-65.0931-84.81247c9.6576-3.48865 20.42136.29781 25.79261 9.04071l48.50074 65.51854 48.78791-65.26328a19.464112 19.464112 0 0 1 24.261-9.05134l-25.2608 33.51443-34.21642 44.53347a9.040708 9.040708 0 0 0 0 13.48661l65.16755 86.982236zM622.66013 4.177844v12.76335a65.624902 65.624902 0 0 0-69.87935 67.79467v99.564786h-12.94417V4.975554h12.76336v36.74781c15.65637-26.80304 39.82165-36.74781 70.14525-37.47107ZM.021272 88.724414l5.700964-28.15383c15.656379-55.66949 79.473139-78.83497 123.379074-44.35265 25.70751 20.18737 32.1211 48.78792 30.86604 81.01538H15.135208C12.79526 154.79603 54.329335 189.55489 107.45679 171.81383c17.50706-6.38167 30.68522-20.93189 35.02476-39.01331 2.80794-9.04071 7.44529-10.59359 15.93292-7.9771a73.495636 73.495636 0 0 1-35.12049 53.68054 85.089014 85.089014 0 0 1-99.118064-12.66763c-12.93353-14.53959-20.740447-32.91881-22.261413-52.32975 0-3.19084-1.063613-6.16895-1.808142-9.0407Q0 96.414334 0 88.724414Zm15.294751-3.89282H146.28929c-.81898-41.72553-27.15403-71.32587-62.274525-71.60241-39.098402-.53181-67.071415 28.41973-68.794468 71.42159Z"/>
+</svg>
+
+    </a>
+  </div>
+  <nav id="navbar" aria-label="primary">
+    <input id="q" placeholder="🔎 search">
+    <ul id="navmenu">
+      <li id="getting-started-menu" class="submenu">
+        <a href="/en/starter/installing.html" >
+          Getting started
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/en/starter/installing.html">
+              Installing
+            </a>
+          </li>
+          <li>
+            <a href="/en/starter/hello-world.html">
+              Hello world
+            </a>
+          </li>
+          <li>
+            <a href="/en/starter/generator.html">
+              Express generator
+            </a>
+          </li>
+          <li>
+            <a href="/en/starter/basic-routing.html">
+              Basic routing
+            </a>
+          </li>
+          <li>
+            <a href="/en/starter/static-files.html">
+              Static files
+            </a>
+          </li>
+          <li>
+            <a href="/en/starter/examples.html">
+              More examples
+            </a>
+          </li>
+          <li>
+            <a href="/en/starter/faq.html">
+              FAQ
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="guide-menu" class="submenu">
+        <a href="/en/guide/routing.html"  class="active" >
+          Guide
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/en/guide/routing.html">
+              Routing
+            </a>
+          </li>
+          <li>
+            <a href="/en/guide/writing-middleware.html">
+              Writing middleware
+            </a>
+          </li>
+          <li>
+            <a href="/en/guide/using-middleware.html">
+              Using middleware
+            </a>
+          </li>
+          <li>
+            <a href="/en/guide/overriding-express-api.html">
+              Overriding the Express API
+            </a>
+          </li>
+          <li>
+            <a href="/en/guide/using-template-engines.html">
+              Using template engines
+            </a>
+          </li>
+          <li>
+            <a href="/en/guide/error-handling.html">
+              Error handling
+            </a>
+          </li>
+          <li>
+            <a href="/en/guide/debugging.html">
+              Debugging
+            </a>
+          </li>
+          <li>
+            <a href="/en/guide/behind-proxies.html">
+              Express behind proxies
+            </a>
+          </li>
+          <li>
+            <a href="/en/guide/migrating-4.html">
+              Moving to Express 4
+            </a>
+          </li>
+          <li>
+            <a href="/en/guide/migrating-5.html">
+              Moving to Express 5
+            </a>
+          </li>
+          <li>
+            <a href="/en/guide/database-integration.html">
+              Database integration
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="application-menu" class="submenu">
+        <a href="/en/5x/api.html" >
+          API reference
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/en/5x/api.html">
+              5.x
+            </a>
+          </li>
+          <li>
+            <a href="/en/4x/api.html">
+              4.x
+            </a>
+          </li>
+          <li>
+            <a href="/en/3x/api.html">
+              3.x (deprecated)
+            </a>
+          </li>
+          <li>
+            <a href="/2x/">
+              2.x (deprecated)
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="advanced-topics-menu" class="submenu">
+        <a href="/en/advanced/developing-template-engines.html" >
+          Advanced topics
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/en/advanced/developing-template-engines.html">
+              Building template engines
+            </a>
+          </li>
+          <li>
+            <a href="/en/advanced/security-updates.html">
+              Security updates
+            </a>
+          </li>
+          <li>
+            <a href="/en/advanced/best-practice-security.html">
+              Security best practices
+            </a>
+          </li>
+          <li>
+            <a href="/en/advanced/best-practice-performance.html">
+              Performance best practices
+            </a>
+          </li>
+          <li>
+            <a href="/en/advanced/healthcheck-graceful-shutdown.html">
+              Health checks & shutdown
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li id="resources-menu" class="submenu">
+        <a href="/en/resources/community.html" >
+          Resources
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/en/resources/community.html">
+              Community
+            </a>
+          </li>
+          <li>
+            <a href="/en/resources/glossary.html">
+              Glossary
+            </a>
+          </li>
+          <li>
+            <a href="/en/resources/middleware.html">
+              Middleware
+            </a>
+          </li>
+          <li>
+            <a href="/en/resources/utils.html">
+              Utility modules
+            </a>
+          </li>
+          <li>
+            <a href="/en/resources/contributing.html">
+              Contributing to Express
+            </a>
+          </li>
+          <li>
+            <a href="/en/changelog">
+              Release Change Log
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/en/support" id="support-menu" >
+          Support
+        </a>
+      </li>
+      <li id="blog-menu" class="submenu">
+        <a href="/2025/12/01/security-releases.html" >
+          Blog
+        </a>
+        <ul class="submenu-content">
+          <li>
+            <a href="/2025/12/01/security-releases.html">
+              Latest post
+            </a>
+          </li>
+          <li>
+            <a href="/en/blog/posts.html">
+              All posts
+            </a>
+          </li>
+          <li>
+            <a href="/en/blog/write-post.html">
+              Write a Post
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <div class="header-right">
+    <button id="theme-toggle" type="button" class="theme-btn" title="change theme" aria-label="Switch to dark mode">
+      <span id="icon-moon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+  <g transform="translate(1, 4) scale(0.7)">
+    <path d="M16.2 5c-9.3 5.7-9.5 19.7-.3 24.5 6.3 3.2 16.2.9 19.1-4.5 1.5-2.9.7-3.4-4.4-3.1-6.3.4-10.1-3.1-10.1-9.2 0-2.9.6-5.2 1.8-6.4 3.2-3.6-.8-4.5-6.1-1.3m2 6.3c-.4 4.9-.1 5.7 2.8 9 2 2.4 4.4 3.9 6.7 4.3 3.2.6 3.3.8 1.9 2.3-2.7 2.6-10.9 2.2-13.9-.7-4-3.8-5.2-7.6-3.8-12.2.9-3 5-8 6.6-8 .1 0 0 2.4-.3 5.3"/>
+  </g>
+</svg>
+</span>
+      <span id="icon-sun"><svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(4 4)" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <circle cx="12" cy="12" r="7.5"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(0 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(30 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(60 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(90 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(120 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(150 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(180 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(210 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(240 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(270 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(300 12 12)"/>
+    <line x1="12" y1="-2" x2="12" y2="1" transform="rotate(330 12 12)"/>
+  </g>
+</svg>
+</span>
+    </button>
+    
+
+
+<div class="desktop-lang-switcher">
+  <button id="langBtn" class="lang-btn" type="button" aria-expanded="false" aria-haspopup="listbox" aria-label="Change language">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" width="24" height="24">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a49 49 0 0 1 6-.371m0 0q1.681 0 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138A48 48 0 0 1 15 5.621m-4.589 8.495a18 18 0 0 1-3.827-5.802"/>
+</svg>
+
+  </button>
+  <ul id="langList" class="lang-list" role="listbox">
+    
+    <li>
+      <a href="/en/guide/using-middleware.html">
+        
+        <strong>English</strong>
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/fr/guide/using-middleware.html">
+        
+        Français
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/de/guide/using-middleware.html">
+        
+        Deutsch
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/es/guide/using-middleware.html">
+        
+        Español
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/it/guide/using-middleware.html">
+        
+        Italiano
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/ja/guide/using-middleware.html">
+        
+        日本語
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/zh-cn/guide/using-middleware.html">
+        
+        中文 (简体)
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/zh-tw/guide/using-middleware.html">
+        
+        繁體中文
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/ko/guide/using-middleware.html">
+        
+        한국어
+        
+      </a>
+    </li>
+    
+    <li>
+      <a href="/pt-br/guide/using-middleware.html">
+        
+        Português
+        
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  </div>
+</header>
+
+  <div id="overlay"></div>
+
+  
+
+  
+    <div class="content">
+      <main>
+        <h1 id="using-middleware">Using middleware</h1>
+
+<p>Express is a routing and middleware web framework that has minimal functionality of its own: An Express application is essentially a series of middleware function calls.</p>
+
+<p><em>Middleware</em> functions are functions that have access to the <a href="/en/5x/api.html#req">request object</a>  (<code class="language-plaintext highlighter-rouge">req</code>), the <a href="/en/5x/api.html#res">response object</a> (<code class="language-plaintext highlighter-rouge">res</code>), and the next middleware function in the application’s request-response cycle. The next middleware function is commonly denoted by a variable named <code class="language-plaintext highlighter-rouge">next</code>.</p>
+
+<p>Middleware functions can perform the following tasks:</p>
+
+<ul>
+  <li>Execute any code.</li>
+  <li>Make changes to the request and the response objects.</li>
+  <li>End the request-response cycle.</li>
+  <li>Call the next middleware function in the stack.</li>
+</ul>
+
+<p>If the current middleware function does not end the request-response cycle, it must call <code class="language-plaintext highlighter-rouge">next()</code> to pass control to the next middleware function. Otherwise, the request will be left hanging.</p>
+
+<p>An Express application can use the following types of middleware:</p>
+
+<ul>
+  <li><a href="#middleware.application">Application-level middleware</a></li>
+  <li><a href="#middleware.router">Router-level middleware</a></li>
+  <li><a href="#middleware.error-handling">Error-handling middleware</a></li>
+  <li><a href="#middleware.built-in">Built-in middleware</a></li>
+  <li><a href="#middleware.third-party">Third-party middleware</a></li>
+</ul>
+
+<p>You can load application-level and router-level middleware with an optional mount path.
+You can also load a series of middleware functions together, which creates a sub-stack of the middleware system at a mount point.</p>
+
+<h2 id="middleware.application">Application-level middleware</h2>
+
+<p>Bind application-level middleware to an instance of the <a href="/en/5x/api.html#app">app object</a> by using the <code class="language-plaintext highlighter-rouge">app.use()</code> and <code class="language-plaintext highlighter-rouge">app.METHOD()</code> functions, where <code class="language-plaintext highlighter-rouge">METHOD</code> is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.</p>
+
+<p>This example shows a middleware function with no mount path. The function is executed every time the app receives a request.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Time:</span><span class="dl">'</span><span class="p">,</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">())</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>This example shows a middleware function mounted on the <code class="language-plaintext highlighter-rouge">/user/:id</code> path. The function is executed for any type of
+HTTP request on the <code class="language-plaintext highlighter-rouge">/user/:id</code> path.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Request Type:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>This example shows a route and its handler function (middleware system). The function handles GET requests to the <code class="language-plaintext highlighter-rouge">/user/:id</code> path.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">USER</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>Here is an example of loading a series of middleware functions at a mount point, with a mount path.
+It illustrates a middleware sub-stack that prints request info for any type of HTTP request to the <code class="language-plaintext highlighter-rouge">/user/:id</code> path.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Request URL:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">originalUrl</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Request Type:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>Route handlers enable you to define multiple routes for a path. The example below defines two routes for GET requests to the <code class="language-plaintext highlighter-rouge">/user/:id</code> path. The second route will not cause any problems, but it will never get called because the first route ends the request-response cycle.</p>
+
+<p>This example shows a middleware sub-stack that handles GET requests to the <code class="language-plaintext highlighter-rouge">/user/:id</code> path.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">ID:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">User Info</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// handler for the /user/:id path, which prints the user ID</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>To skip the rest of the middleware functions from a router middleware stack, call <code class="language-plaintext highlighter-rouge">next('route')</code> to pass control to the next route.</p>
+
+<div class="doc-box doc-info">
+  <p class="doc-title">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" height="24" width="24" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"></path></svg> Note
+  </p>
+
+  <p><code class="language-plaintext highlighter-rouge">next('route')</code> will work only in middleware functions that were loaded by using the <code class="language-plaintext highlighter-rouge">app.METHOD()</code> or <code class="language-plaintext highlighter-rouge">router.METHOD()</code> functions.</p>
+
+</div>
+
+<p>This example shows a middleware sub-stack that handles GET requests to the <code class="language-plaintext highlighter-rouge">/user/:id</code> path.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// if the user ID is 0, skip to the next route</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">)</span> <span class="nx">next</span><span class="p">(</span><span class="dl">'</span><span class="s1">route</span><span class="dl">'</span><span class="p">)</span>
+  <span class="c1">// otherwise pass the control to the next middleware function in this stack</span>
+  <span class="k">else</span> <span class="nx">next</span><span class="p">()</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// send a regular response</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">regular</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// handler for the /user/:id path, which sends a special response</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">special</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>Middleware can also be declared in an array for reusability.</p>
+
+<p>This example shows an array with a middleware sub-stack that handles GET requests to the <code class="language-plaintext highlighter-rouge">/user/:id</code> path</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">logOriginalUrl</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Request URL:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">originalUrl</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">logMethod</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Request Type:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">logStuff</span> <span class="o">=</span> <span class="p">[</span><span class="nx">logOriginalUrl</span><span class="p">,</span> <span class="nx">logMethod</span><span class="p">]</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="nx">logStuff</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">User Info</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<h2 id="middleware.router">Router-level middleware</h2>
+
+<p>Router-level middleware works in the same way as application-level middleware, except it is bound to an instance of <code class="language-plaintext highlighter-rouge">express.Router()</code>.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">()</span>
+</code></pre></div></div>
+<p>Load router-level middleware by using the <code class="language-plaintext highlighter-rouge">router.use()</code> and <code class="language-plaintext highlighter-rouge">router.METHOD()</code> functions.</p>
+
+<p>The following example code replicates the middleware system that is shown above for application-level middleware, by using router-level middleware:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+<span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">()</span>
+
+<span class="c1">// a middleware function with no mount path. This code is executed for every request to the router</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Time:</span><span class="dl">'</span><span class="p">,</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">())</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="c1">// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Request URL:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">originalUrl</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Request Type:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="c1">// a middleware sub-stack that handles GET requests to the /user/:id path</span>
+<span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// if the user ID is 0, skip to the next router</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">)</span> <span class="nx">next</span><span class="p">(</span><span class="dl">'</span><span class="s1">route</span><span class="dl">'</span><span class="p">)</span>
+  <span class="c1">// otherwise pass control to the next middleware function in this stack</span>
+  <span class="k">else</span> <span class="nx">next</span><span class="p">()</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// render a regular page</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">regular</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// handler for the /user/:id path, which renders a special page</span>
+<span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">special</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// mount the router on the app</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="nx">router</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>To skip the rest of the router’s middleware functions, call <code class="language-plaintext highlighter-rouge">next('router')</code>
+to pass control back out of the router instance.</p>
+
+<p>This example shows a middleware sub-stack that handles GET requests to the <code class="language-plaintext highlighter-rouge">/user/:id</code> path.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+<span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">()</span>
+
+<span class="c1">// predicate the router with a check and bail out when needed</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">'</span><span class="s1">x-auth</span><span class="dl">'</span><span class="p">])</span> <span class="k">return</span> <span class="nx">next</span><span class="p">(</span><span class="dl">'</span><span class="s1">router</span><span class="dl">'</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/user/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello, user!</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// use the router and 401 anything falling through</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">'</span><span class="s1">/admin</span><span class="dl">'</span><span class="p">,</span> <span class="nx">router</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">sendStatus</span><span class="p">(</span><span class="mi">401</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<h2 id="middleware.error-handling">Error-handling middleware</h2>
+
+<div class="doc-box doc-notice">
+  <p>Error-handling middleware always takes <em>four</em> arguments. You must provide four arguments to identify it as an error-handling middleware function. Even if you don’t need to use the <code class="language-plaintext highlighter-rouge">next</code> object, you must specify it to maintain the signature. Otherwise, the <code class="language-plaintext highlighter-rouge">next</code> object will be interpreted as regular middleware and will fail to handle errors.</p>
+</div>
+
+<p>Define error-handling middleware functions in the same way as other middleware functions, except with four arguments instead of three, specifically with the signature <code class="language-plaintext highlighter-rouge">(err, req, res, next)</code>:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">stack</span><span class="p">)</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">Something broke!</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>For details about error-handling middleware, see: <a href="/en/guide/error-handling.html">Error handling</a>.</p>
+
+<h2 id="middleware.built-in">Built-in middleware</h2>
+
+<p>Starting with version 4.x, Express no longer depends on <a href="https://github.com/senchalabs/connect">Connect</a>. The middleware
+functions that were previously included with Express are now in separate modules; see <a href="https://github.com/senchalabs/connect#middleware">the list of middleware functions</a>.</p>
+
+<p>Express has the following built-in middleware functions:</p>
+
+<ul>
+  <li><a href="/en/5x/api.html#express.static">express.static</a> serves static assets such as HTML files, images, and so on.</li>
+  <li><a href="/en/5x/api.html#express.json">express.json</a> parses incoming requests with JSON payloads. <strong>NOTE: Available with Express 4.16.0+</strong></li>
+  <li><a href="/en/5x/api.html#express.urlencoded">express.urlencoded</a> parses incoming requests with URL-encoded payloads.  <strong>NOTE: Available with Express 4.16.0+</strong></li>
+</ul>
+
+<h2 id="middleware.third-party">Third-party middleware</h2>
+
+<p>Use third-party middleware to add functionality to Express apps.</p>
+
+<p>Install the Node.js module for the required functionality, then load it in your app at the application level or at the router level.</p>
+
+<p>The following example illustrates installing and loading the cookie-parsing middleware function <code class="language-plaintext highlighter-rouge">cookie-parser</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>cookie-parser
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+<span class="kd">const</span> <span class="nx">cookieParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">cookie-parser</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="c1">// load the cookie-parsing middleware</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cookieParser</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>For a partial list of third-party middleware functions that are commonly used with Express, see: <a href="../resources/middleware.html">Third-party middleware</a>.</p>
+
+        
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+  
+    
+  
+    
+      
+      
+
+  
+
+  
+    <nav class="bottom-navigation" aria-label="Pagination">
+      
+        <a href="/en/guide/writing-middleware.html" class="bottom-nav-prev">
+          Previous: Writing middleware for use in Express apps
+        </a>
+      
+
+      
+        <a href="/en/guide/overriding-express-api.html" class="bottom-nav-next">
+          Next: Overriding the Express API
+        </a>
+      
+    </nav>
+  
+
+
+        <a role="button" class="edit-github-btn" 
+    href="
+            https://github.com/expressjs/expressjs.com/edit/gh-pages/en/guide/using-middleware.md
+          ">      
+    <svg
+    viewBox="0 0 256 250"
+    width="20"
+    height="20"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+>
+    <path
+        d="M128.001 0C57.317 0 0 57.307 0 128.001c0 56.554 36.676 104.535 87.535 121.46 6.397 1.185 8.746-2.777 8.746-6.158 0-3.052-.12-13.135-.174-23.83-35.61 7.742-43.124-15.103-43.124-15.103-5.823-14.795-14.213-18.73-14.213-18.73-11.613-7.944.876-7.78.876-7.78 12.853.902 19.621 13.19 19.621 13.19 11.417 19.568 29.945 13.911 37.249 10.64 1.149-8.272 4.466-13.92 8.127-17.116-28.431-3.236-58.318-14.212-58.318-63.258 0-13.975 5-25.394 13.188-34.358-1.329-3.224-5.71-16.242 1.24-33.874 0 0 10.749-3.44 35.21 13.121 10.21-2.836 21.16-4.258 32.038-4.307 10.878.049 21.837 1.47 32.066 4.307 24.431-16.56 35.165-13.12 35.165-13.12 6.967 17.63 2.584 30.65 1.255 33.873 8.207 8.964 13.173 20.383 13.173 34.358 0 49.163-29.944 59.988-58.447 63.157 4.591 3.972 8.682 11.762 8.682 23.704 0 17.126-.148 30.91-.148 35.126 0 3.407 2.304 7.398 8.792 6.14C219.37 232.5 256 184.537 256 128.002 256 57.307 198.691 0 128.001 0Zm-80.06 182.34c-.282.636-1.283.827-2.194.39-.929-.417-1.45-1.284-1.15-1.922.276-.655 1.279-.838 2.205-.399.93.418 1.46 1.293 1.139 1.931Zm6.296 5.618c-.61.566-1.804.303-2.614-.591-.837-.892-.994-2.086-.375-2.66.63-.566 1.787-.301 2.626.591.838.903 1 2.088.363 2.66Zm4.32 7.188c-.785.545-2.067.034-2.86-1.104-.784-1.138-.784-2.503.017-3.05.795-.547 2.058-.055 2.861 1.075.782 1.157.782 2.522-.019 3.08Zm7.304 8.325c-.701.774-2.196.566-3.29-.49-1.119-1.032-1.43-2.496-.726-3.27.71-.776 2.213-.558 3.315.49 1.11 1.03 1.45 2.505.701 3.27Zm9.442 2.81c-.31 1.003-1.75 1.459-3.199 1.033-1.448-.439-2.395-1.613-2.103-2.626.301-1.01 1.747-1.484 3.207-1.028 1.446.436 2.396 1.602 2.095 2.622Zm10.744 1.193c.036 1.055-1.193 1.93-2.715 1.95-1.53.034-2.769-.82-2.786-1.86 0-1.065 1.202-1.932 2.733-1.958 1.522-.03 2.768.818 2.768 1.868Zm10.555-.405c.182 1.03-.875 2.088-2.387 2.37-1.485.271-2.861-.365-3.05-1.386-.184-1.056.893-2.114 2.376-2.387 1.514-.263 2.868.356 3.061 1.403Z" />
+</svg>
+    Edit this page
+</a>
+      </main>
+    </div>
+  
+
+  <a id="top" href="#" role="button" aria-label="go to top"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" fill="none" viewBox="0 0 1155 1000"><path fill="currentColor" d="m577.344 0 577.346 1000H0L577.344 0Z"/></svg></a>
+
+<footer>
+  <section id="footer-content">
+    <div id="footer-copyright">
+      <a href="https://openjsf.org/" class="openjs-logo" title="OpenJS Foundation">
+         <?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="ARTWORK" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1000 314.4" style="enable-background:new 0 0 1000 314.4;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:var(--fg);}
+</style>
+<g>
+	<path class="st0" d="M271.4,78.1L137,0.5L136.1,0l-0.9,0.5L1.6,77.7l-0.7,0.4L0,78.6v157.2l0.9,0.5l134.4,77.6l0.9,0.5l0.9-0.5
+		l132.6-76.5l1.8-1l0.9-0.5V78.6L271.4,78.1z M122.7,20.1L89.8,77H24.1L122.7,20.1z M84.4,86.4L69,113.1L22.8,86.4H84.4z
+		 M72.4,125.8l54.3,31.4l-54.3,31.4l-18.1-31.4L72.4,125.8z M64.4,121.2l-15.4,26.7L18.1,94.5L64.4,121.2z M10.7,100.3l32.9,56.9
+		l-32.9,56.9V100.3z M48.9,166.6l15.4,26.7l-46.2,26.7L48.9,166.6z M69,201.3L84.4,228H22.8L69,201.3z M24.1,237.4h65.7l32.9,56.9
+		L24.1,237.4z M131.5,290.8l-30.8-53.4h30.8V290.8z M131.5,228H95.2l-18.1-31.4l54.3-31.4V228z M131.5,149.1l-54.3-31.4l18.1-31.4
+		h36.2V149.1z M131.5,77h-30.8l30.8-53.4V77z M207.9,121.2l46.2-26.7l-30.8,53.4L207.9,121.2z M217.9,157.2l-18.1,31.4l-54.3-31.4
+		l54.3-31.4L217.9,157.2z M203.2,113.1l-15.4-26.7h61.6L203.2,113.1z M248.1,77h-65.7l-32.8-56.9L248.1,77z M140.8,23.6L171.6,77
+		h-30.8V23.6z M140.8,86.4H177l18.1,31.4l-54.3,31.4V86.4z M140.8,165.3l54.3,31.4L177,228h-36.2V165.3z M140.8,237.4h30.8
+		l-30.8,53.4V237.4z M149.6,294.3l32.8-56.9h65.7L149.6,294.3z M187.8,228l15.4-26.7l46.2,26.7H187.8z M207.9,193.2l15.4-26.7
+		l30.8,53.4L207.9,193.2z M261.6,214.1l-32.9-56.9l32.9-56.9V214.1z"/>
+	<polygon class="st0" points="308.4,202.7 372.6,202.7 372.6,208.5 315,208.5 315,257 367.2,257 367.2,263 315,263 315,312.9 
+		308.4,312.9 	"/>
+	<path class="st0" d="M383.8,279.7c0-19,15.2-34.4,34.5-34.4c19.3,0,34.2,15.4,34.2,34.4c0,19-14.9,34.5-34.2,34.5
+		C399,314.2,383.8,298.7,383.8,279.7 M446,279.7c0-16.4-11.2-28.7-27.7-28.7c-16.5,0-28,12.3-28,28.7c0,16.4,11.5,28.9,28,28.9
+		C434.8,308.6,446,296.1,446,279.7"/>
+	<path class="st0" d="M469.9,288.5v-41.7h6.3v40.7c0,13.5,6.3,21.1,19,21.1c14.3,0,24.3-9.6,24.3-24.8v-37h6.3v66.2h-6.3l0.2-14.6
+		c-4.4,9.9-13.5,16-25.1,16C479.8,314.4,469.9,304.7,469.9,288.5"/>
+	<path class="st0" d="M543,246.8h6.3l-0.2,14.8c4.4-10,13.6-16.2,25.3-16.2c14.8,0,24.6,9.9,24.6,26.3v41.3h-6.3v-40.2
+		c0-13.6-6.3-21.6-19.1-21.6c-14.3,0-24.3,9.4-24.3,24.8v37H543V246.8z"/>
+	<path class="st0" d="M616.3,279.7c0-19.5,13.8-34.4,32.8-34.4c13.5,0,23.2,7.3,28,17.2v-66.6h6.3v117.1h-6.3l0.3-16.5
+		c-4.7,10.2-15.6,17.8-28.4,17.8C630.1,314.2,616.3,299.2,616.3,279.7 M677.6,279.7c0-16.4-11-28.7-27.7-28.7
+		c-16.4,0-26.9,12.3-26.9,28.7c0,16.4,10.5,28.9,26.9,28.9C666.6,308.6,677.6,296.1,677.6,279.7"/>
+	<path class="st0" d="M748,271.4c0-14.9-6.8-20.6-17.7-20.6c-10.1,0-16.9,4.2-21.6,11.4l-4.5-3.2c5.5-8.6,14.9-13.6,26.3-13.6
+		c13.6,0,23.8,8.3,23.8,25.5v42.2H748l0.3-10.2c-4.2,6.3-11.5,11.5-22.9,11.5c-15.1,0-25-7-25-20.3c0-13.1,11.5-19.3,24.2-19.3H748
+		V271.4z M725.4,279.9c-10.1,0-18.6,3.9-18.6,13.9c0,10.1,6.6,14.8,19.3,14.8c11,0,21.9-6.5,21.9-16.7v-12H725.4z"/>
+	<path class="st0" d="M782.5,295.4v-43.3h-10.4v-5.4h10.4v-23.2h6.3v23.2h19.1v5.4h-19.1v43.1c0,9.7,3.4,13.3,8.9,13.3
+		c5.8,0,8.1-2.3,10.5-4.9l4.1,3.9c-3.2,3.7-7.1,6.6-14.6,6.6C789.3,314.2,782.5,308.9,782.5,295.4"/>
+	<path class="st0" d="M829.5,218.2c0-3.1,2.6-5.4,5.4-5.4c2.8,0,5.4,2.3,5.4,5.4c0,3.2-2.6,5.3-5.4,5.3
+		C832.1,223.6,829.5,221.5,829.5,218.2 M831.8,246.8h6.3v66.2h-6.3V246.8z"/>
+	<path class="st0" d="M857.1,279.7c0-19,15.2-34.4,34.5-34.4c19.3,0,34.2,15.4,34.2,34.4c0,19-14.9,34.5-34.2,34.5
+		C872.4,314.2,857.1,298.7,857.1,279.7 M919.4,279.7c0-16.4-11.2-28.7-27.7-28.7c-16.5,0-28,12.3-28,28.7c0,16.4,11.5,28.9,28,28.9
+		C908.2,308.6,919.4,296.1,919.4,279.7"/>
+	<path class="st0" d="M943.9,246.8h6.3l-0.2,14.8c4.4-10,13.6-16.2,25.3-16.2c14.8,0,24.6,9.9,24.6,26.3v41.3h-6.3v-40.2
+		c0-13.6-6.3-21.6-19.1-21.6c-14.3,0-24.3,9.4-24.3,24.8v37h-6.3V246.8z"/>
+	<path class="st0" d="M308.4,73.1c0-41.4,31.8-71.3,71.7-71.3c39.6,0,71.5,29.8,71.5,71.3c0,41.4-31.9,71.3-71.5,71.3
+		C340.2,144.3,308.4,114.5,308.4,73.1 M429.4,73.1c0-29.6-20.4-51.9-49.4-51.9c-29,0-49.6,22.3-49.6,51.9
+		c0,29.6,20.6,51.9,49.6,51.9C409,124.9,429.4,102.7,429.4,73.1"/>
+	<path class="st0" d="M473.9,56.8h20.8l-0.6,15.9c5.5-10.6,15.7-17.8,30.4-17.8c22,0,39.8,18.6,39.8,44.5c0,25.9-18,44.9-40.2,44.9
+		c-14.3,0-24.5-6.9-29.4-16.5v58h-20.8V56.8z M543.1,99.4c0-15.5-9.4-26.1-24.3-26.1c-15.1,0-24.9,10.6-24.9,26.1
+		c0,16.1,9.8,26.7,24.9,26.7C533.8,126.2,543.1,115.6,543.1,99.4"/>
+	<path class="st0" d="M635,127c11.2,0,19.4-4.5,24.3-9.2l12,12.7c-8,8-19,13.9-36.1,13.9c-29.4,0-48.4-19-48.4-44.7
+		c0-25.5,20-44.7,45.7-44.7c29.2,0,45.7,21.6,44.3,51.7h-69C610.3,119,619.3,127,635,127 M656.1,92.3c-1.8-11.6-9-20.2-23.3-20.2
+		c-13.3,0-22.5,7.3-24.9,20.2H656.1z"/>
+	<path class="st0" d="M699.7,56.8h20.6l-0.4,15.9c5.3-11.2,16.1-17.8,29-17.8c19,0,32.1,13.5,32.1,36.7v50.8h-20.6V93.3
+		c0-12.3-5.7-19.4-17.8-19.4c-13.5,0-22.3,8.2-22.3,22v46.5h-20.6V56.8z"/>
+	<path class="st0" d="M803.5,120.9l17.6-10.8c4.9,8.8,10.6,14.9,20.8,14.9c11.6,0,19.2-5.5,19.2-21.6V3.7h21.6v100
+		c0,27.6-16.5,40.6-39.8,40.6C822.3,144.3,810.1,133.7,803.5,120.9"/>
+	<path class="st0" d="M904.9,115.6l17.8-9.8c6.5,10.8,14.9,19.4,31.8,19.4c14.1,0,24.1-7.6,24.1-19c0-12-8.2-17.4-23.3-24.1
+		l-9.2-4.1c-20.2-9-32.5-19.2-32.5-40.6c0-20.6,15.9-35.3,39-35.3C971,2,983.5,9,991.8,23.9l-16.9,10.4
+		c-5.3-9.2-11.4-13.5-22.3-13.5c-11,0-18,6.7-18,16.1c0,10.4,5.9,15.1,20,21.2l9,4.1c23.7,10.4,36.3,21.4,36.3,43.7
+		c0,24.3-19,38.4-45.1,38.4C928.5,144.3,912.6,131.3,904.9,115.6"/>
+</g>
+</svg>
+
+      </a>
+      <div id="footer-policy">
+        <a href="https://terms-of-use.openjsf.org">
+          Terms of Use
+        </a>
+        <a href="https://privacy-policy.openjsf.org">
+          Privacy Policy
+        </a>
+        <a id="coc" href="https://github.com/expressjs/.github/blob/HEAD/CODE_OF_CONDUCT.md">
+          Code of Conduct
+        </a>
+        <a href="https://trademark-policy.openjsf.org">
+          Trademark Policy
+        </a>
+        <a id="security" href="https://github.com/expressjs/express/security/policy">
+          Security Policy
+        </a>
+      </div>
+    </div>
+    <div id="footer-links">
+      <div class="footer-social">
+        <div>
+          <a href="https://github.com/expressjs/express" aria-label="Go to the repository on GitHub">
+            <svg
+    viewBox="0 0 256 250"
+    width="20"
+    height="20"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+>
+    <path
+        d="M128.001 0C57.317 0 0 57.307 0 128.001c0 56.554 36.676 104.535 87.535 121.46 6.397 1.185 8.746-2.777 8.746-6.158 0-3.052-.12-13.135-.174-23.83-35.61 7.742-43.124-15.103-43.124-15.103-5.823-14.795-14.213-18.73-14.213-18.73-11.613-7.944.876-7.78.876-7.78 12.853.902 19.621 13.19 19.621 13.19 11.417 19.568 29.945 13.911 37.249 10.64 1.149-8.272 4.466-13.92 8.127-17.116-28.431-3.236-58.318-14.212-58.318-63.258 0-13.975 5-25.394 13.188-34.358-1.329-3.224-5.71-16.242 1.24-33.874 0 0 10.749-3.44 35.21 13.121 10.21-2.836 21.16-4.258 32.038-4.307 10.878.049 21.837 1.47 32.066 4.307 24.431-16.56 35.165-13.12 35.165-13.12 6.967 17.63 2.584 30.65 1.255 33.873 8.207 8.964 13.173 20.383 13.173 34.358 0 49.163-29.944 59.988-58.447 63.157 4.591 3.972 8.682 11.762 8.682 23.704 0 17.126-.148 30.91-.148 35.126 0 3.407 2.304 7.398 8.792 6.14C219.37 232.5 256 184.537 256 128.002 256 57.307 198.691 0 128.001 0Zm-80.06 182.34c-.282.636-1.283.827-2.194.39-.929-.417-1.45-1.284-1.15-1.922.276-.655 1.279-.838 2.205-.399.93.418 1.46 1.293 1.139 1.931Zm6.296 5.618c-.61.566-1.804.303-2.614-.591-.837-.892-.994-2.086-.375-2.66.63-.566 1.787-.301 2.626.591.838.903 1 2.088.363 2.66Zm4.32 7.188c-.785.545-2.067.034-2.86-1.104-.784-1.138-.784-2.503.017-3.05.795-.547 2.058-.055 2.861 1.075.782 1.157.782 2.522-.019 3.08Zm7.304 8.325c-.701.774-2.196.566-3.29-.49-1.119-1.032-1.43-2.496-.726-3.27.71-.776 2.213-.558 3.315.49 1.11 1.03 1.45 2.505.701 3.27Zm9.442 2.81c-.31 1.003-1.75 1.459-3.199 1.033-1.448-.439-2.395-1.613-2.103-2.626.301-1.01 1.747-1.484 3.207-1.028 1.446.436 2.396 1.602 2.095 2.622Zm10.744 1.193c.036 1.055-1.193 1.93-2.715 1.95-1.53.034-2.769-.82-2.786-1.86 0-1.065 1.202-1.932 2.733-1.958 1.522-.03 2.768.818 2.768 1.868Zm10.555-.405c.182 1.03-.875 2.088-2.387 2.37-1.485.271-2.861-.365-3.05-1.386-.184-1.056.893-2.114 2.376-2.387 1.514-.263 2.868.356 3.061 1.403Z" />
+</svg>
+          </a>
+        </div>
+        <div>
+          <a href="https://www.youtube.com/channel/UCYjxjAeH6TRik9Iwy5nXw7g"
+            aria-label="Go to the repository on Youtube">
+            <svg viewBox="0 0 256 180" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M250.346 28.075A32.18 32.18 0 0 0 227.69 5.418C207.824 0 127.87 0 127.87 0S47.912.164 28.046 5.582A32.18 32.18 0 0 0 5.39 28.24c-6.009 35.298-8.34 89.084.165 122.97a32.18 32.18 0 0 0 22.656 22.657c19.866 5.418 99.822 5.418 99.822 5.418s79.955 0 99.82-5.418a32.18 32.18 0 0 0 22.657-22.657c6.338-35.348 8.291-89.1-.164-123.134Z" fill="red"/><path fill="#FFF" d="m102.421 128.06 66.328-38.418-66.328-38.418z"/></svg></a>
+        </div>
+        <div>
+          <a href="https://x.com/UseExpressJS" aria-label="Go to the X account">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20" viewBox="0 0 1200 1227"><path d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"/></svg>
+          </a>
+        </div>
+        <div>
+          <a href="https://openjs-foundation.slack.com/archives/C02QB1731FH"
+            aria-label="Join Slack group">
+            <svg
+  viewBox="0 0 2447.6 2452.5"
+  xmlns="http://www.w3.org/2000/svg"
+  width="20"
+  height="20"
+>
+  <g clip-rule="evenodd" fill-rule="evenodd">
+    <path
+      d="m897.4 0c-135.3.1-244.8 109.9-244.7 245.2-.1 135.3 109.5 245.1 244.8 245.2h244.8v-245.1c.1-135.3-109.5-245.1-244.9-245.3.1 0 .1 0 0 0m0 654h-652.6c-135.3.1-244.9 109.9-244.8 245.2-.2 135.3 109.4 245.1 244.7 245.3h652.7c135.3-.1 244.9-109.9 244.8-245.2.1-135.4-109.5-245.2-244.8-245.3z"
+      fill="#36c5f0"
+    />
+    <path
+      d="m2447.6 899.2c.1-135.3-109.5-245.1-244.8-245.2-135.3.1-244.9 109.9-244.8 245.2v245.3h244.8c135.3-.1 244.9-109.9 244.8-245.3zm-652.7 0v-654c.1-135.2-109.4-245-244.7-245.2-135.3.1-244.9 109.9-244.8 245.2v654c-.2 135.3 109.4 245.1 244.7 245.3 135.3-.1 244.9-109.9 244.8-245.3z"
+      fill="#2eb67d"
+    />
+    <path
+      d="m1550.1 2452.5c135.3-.1 244.9-109.9 244.8-245.2.1-135.3-109.5-245.1-244.8-245.2h-244.8v245.2c-.1 135.2 109.5 245 244.8 245.2zm0-654.1h652.7c135.3-.1 244.9-109.9 244.8-245.2.2-135.3-109.4-245.1-244.7-245.3h-652.7c-135.3.1-244.9 109.9-244.8 245.2-.1 135.4 109.4 245.2 244.7 245.3z"
+      fill="#ecb22e"
+    />
+    <path
+      d="m0 1553.2c-.1 135.3 109.5 245.1 244.8 245.2 135.3-.1 244.9-109.9 244.8-245.2v-245.2h-244.8c-135.3.1-244.9 109.9-244.8 245.2zm652.7 0v654c-.2 135.3 109.4 245.1 244.7 245.3 135.3-.1 244.9-109.9 244.8-245.2v-653.9c.2-135.3-109.4-245.1-244.7-245.3-135.4 0-244.9 109.8-244.8 245.1 0 0 0 .1 0 0"
+      fill="#e01e5a"
+    />
+  </g>
+</svg>
+</a>
+        </div>
+        <div>
+          <a href="https://opencollective.com/express" aria-label="Go to Open Collective"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 64 64" fill-rule="evenodd"><path d="M52.402 31.916c0 4.03-1.17 7.895-3.178 11.087l8.196 8.23c4.014-5.375 6.523-12.094 6.523-19.318s-2.51-13.942-6.523-19.318l-8.196 8.23c2.007 3.192 3.178 6.887 3.178 11.087z" fill="#b8d3f4"/><path d="M32.004 52.41c-11.207 0-20.406-9.24-20.406-20.493s9.2-20.493 20.406-20.493c4.182 0 7.86 1.176 11.04 3.36l8.196-8.23C45.887 2.52 39.197 0 32.004 0 14.44 0 .057 14.278.057 32.084S14.44 64 32.004 64c7.36 0 14.05-2.52 19.403-6.55l-8.196-8.23c-3.178 2.016-7.025 3.192-11.207 3.192z" fill="#3385ff"/></svg></a>
+        </div>
+        <div>
+          <a href="https://bsky.app/profile/expressjs.bsky.social" aria-label="Go to the Bluesky"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -3.268 64 68.414" height="20" width="20"><path fill="#0085ff" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805zm36.254 0C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745z"/></svg></a>
+        </div>
+      </div>
+      <a href="https://www.netlify.com">
+          <img src="https://www.netlify.com/v3/img/components/netlify-color-accent.svg" alt="Preview Deploys by Netlify"
+            width="80" />
+      </a>
+    </div>
+  </section>
+</footer>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" onload="docsearch({
+  apiKey: '7164e33055faa6ecddefd9e08fc59f5d',
+  indexName: 'expressjs',
+  inputSelector: '#q',
+  algoliaOptions: { 'facetFilters': ['lang:en'] }
+})" async></script>
+
+
+  </body>
+
+</html>
+
