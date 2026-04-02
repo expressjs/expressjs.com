@@ -21,6 +21,12 @@ updates:
           - 'astro'
           - 'astro-*'
           - 'prettier-plugin-astro'
+      orama:
+        patterns:
+          - '@orama/*'
+          - 'gray-matter'
+          - 'mdast-util-from-markdown'
+          - 'mdast-util-to-string'
       linters:
         patterns:
           - 'eslint'
@@ -35,6 +41,10 @@ updates:
           - '@astrojs/*'
           - 'astro'
           - 'astro-*'
+          - '@orama/*'
+          - 'gray-matter'
+          - 'mdast-util-from-markdown'
+          - 'mdast-util-to-string'
       development:
         dependency-type: development
         exclude-patterns:
