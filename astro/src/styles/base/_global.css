@@ -229,9 +229,20 @@ hr {
 }
 
 /* Tables */
+.table-scroller {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: var(--space-body) 0;
+}
+
+.table-scroller table {
+  margin: 0;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
+  margin: var(--space-body) 0;
 }
 
 th,
