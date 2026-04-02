@@ -129,6 +129,13 @@ export async function initHeroWebGL(canvas: HTMLCanvasElement, reducedMotion = f
     canvas.height = canvas.clientHeight * dpr;
     gl!.viewport(0, 0, canvas.width, canvas.height);
     gl!.uniform2f(uRes, canvas.width, canvas.height);
+
+    // When paused, resizing clears the canvas — redraw immediately
+    if (!running) {
+      gl!.uniform1f(uTime, reducedMotion ? 0.0 : (performance.now() - t0) / 1000);
+      gl!.uniform1f(uDark, isDark() ? 1.0 : 0.0);
+      gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
+    }
   }
 
   /** Draws a single frame and schedules the next via requestAnimationFrame. */
@@ -157,10 +164,16 @@ export async function initHeroWebGL(canvas: HTMLCanvasElement, reducedMotion = f
       running = true;
       animId = requestAnimationFrame(render);
     },
-    /** Stops the render loop. */
+    /** Stops the render loop. The last drawn frame stays visible on the canvas. */
     pause() {
       running = false;
       cancelAnimationFrame(animId);
+    },
+    /** Draws a single frame without starting the animation loop. */
+    renderOnce() {
+      gl!.uniform1f(uTime, (performance.now() - t0) / 1000);
+      gl!.uniform1f(uDark, isDark() ? 1.0 : 0.0);
+      gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
     },
   };
 }
