@@ -4,8 +4,10 @@ import { apiMenu } from '@/config/menu/api';
 
 export type BreadcrumbItem = {
   href?: string;
-  icon?: string;
-} & { label?: string; ariaLabel?: string };
+} & (
+  | { label: string; icon?: string; ariaLabel?: string }
+  | { icon: string; ariaLabel: string; label?: never }
+);
 
 function formatLabel(segment: string): string {
   return segment
@@ -72,6 +74,10 @@ function resolveLabel(t: (key: string) => string, labelKey?: string, segment?: s
  */
 export function buildBreadcrumbs(pathname: string, t: (key: string) => string): BreadcrumbItem[] {
   const segments = pathname.replace(/^\/|\/$/g, '').split('/');
+
+  // Need at least lang + one content segment
+  if (segments.length < 2) return [];
+
   const [lang, ...rest] = segments;
 
   const breadcrumbs: BreadcrumbItem[] = [];
@@ -79,18 +85,27 @@ export function buildBreadcrumbs(pathname: string, t: (key: string) => string): 
   let currentPath = '';
 
   const isApi = rest.includes('api');
+  const isBlog = rest.includes('blog');
+  const isResources = rest.includes('resources');
+  const isDoc = !isApi && !isBlog && !isResources;
+
   const menuMap = isApi ? apiMenuMap : mainMenuMap;
+
+  // Matches version prefix segments like '5x', '4x', '3x'
+  const VERSION_SEGMENT = /^\d+x$/;
 
   rest.forEach((segment, index) => {
     currentPath += `/${segment}`;
 
+    const isVersion = VERSION_SEGMENT.test(segment);
     const cleanPath = currentPath.replace(/^\/\d+x\//, '').replace(/^\/+/, '');
-
     const isLast = index === rest.length - 1;
 
     let labelKey = menuMap.get(cleanPath);
 
-    // Section-aware override
+    // For API paths, replace intermediate segment labels with their section title
+    // (e.g. show "5.x API" instead of the raw item label for the /api segment).
+    // The last segment always uses its own label so the page title is accurate.
     if (isApi && !isLast) {
       const sectionKey = apiSectionMap.get(cleanPath);
       if (sectionKey) {
@@ -100,9 +115,16 @@ export function buildBreadcrumbs(pathname: string, t: (key: string) => string): 
 
     const label = resolveLabel(t, labelKey, segment);
 
+    // Breadcrumb linking logic:
+    // 1. Last item is never linked (it's the current page).
+    // 2. Version segments are never linked.
+    // 3. Docs pages do not have linked intermediate crumbs (text-only path indicator).
+    // 4. API, Blog, and Resources pages have linked intermediate crumbs for easier navigation.
+    const shouldLink = !isLast && !isVersion && !isDoc;
+
     breadcrumbs.push({
       label,
-      href: isLast ? undefined : `/${lang}${currentPath}`,
+      href: shouldLink ? `/${lang}${currentPath}` : undefined,
     });
   });
 

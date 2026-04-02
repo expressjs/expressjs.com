@@ -21,10 +21,16 @@ const t = useTranslations(lang);
 <nav aria-label={t('nav.breadcrumb')}>
   <ol class="breadcrumbs">
     <li class="flex items-center gap-3">
-      <Body vMargin={false} as="a" href={`/${lang}`} class="breadcrumb-link">
+      <Body
+        vMargin={false}
+        as="a"
+        href={`/${lang}`}
+        class="breadcrumb-link"
+        aria-label={t('nav.home')}
+      >
         <Icon name="fluent:home-empty-20-regular" />
-        <Icon name="fluent:chevron-right-28-regular" aria-hidden="true" />
       </Body>
+      {items.length > 0 && <Icon name="fluent:chevron-right-28-regular" aria-hidden="true" />}
     </li>
     {
       items.map((item, index) => (

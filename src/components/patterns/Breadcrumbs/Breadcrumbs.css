@@ -14,10 +14,11 @@
     align-items: center;
     gap: var(--space-1);
     color: var(--color-text-primary);
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
 
     &:hover {
-      text-decoration: underline;
+      opacity: 0.8;
     }
 
     @media (--xs-only) {
@@ -26,7 +27,7 @@
   }
 
   .breadcrumb-item {
-    color: var(--color-text-tertiary);
+    color: var(--color-text-primary);
 
     @media (--xs-only) {
       font-size: var(--font-size-sm);
