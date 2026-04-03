@@ -3,9 +3,6 @@ title: API Response Overview
 description: An overview of the API response object in Express.js, detailing its properties and methods for handling HTTP responses.
 ---
 
-import Card from '@components/primitives/Card/Card.astro';
-import { CardList } from '@components/patterns';
-
 # Response
 
 The `res` object is an enhanced version of Node's own response object
@@ -15,91 +12,472 @@ and supports all [built-in fields and methods](https://nodejs.org/api/http.html#
 
 The `res` object contains a number of properties that provide information about the HTTP response.
 
-<CardList gap="6">
-  <a href="/en/3x/api/response/res-charset">
-    <Card title="res.charset" body="The charset of the request body, if specified." />
-  </a>
-  <a href="/en/3x/api/response/res-locals">
-    <Card
-      title="res.locals"
-      body="An object that contains response local variables scoped to the request."
-    />
-  </a>
+### res.charset
 
-  <a href="/en/3x/api/response/res-req">
-    <Card title="res.req" body="The request object." />
-  </a>
-</CardList>
+Assign the charset. Defaults to "utf-8".
+
+```js
+res.charset = 'value';
+res.send('<p>some html</p>');
+// => Content-Type: text/html; charset=value
+```
+
+### res.locals
+
+Response local variables are scoped to the request, thus only
+available to the view(s) rendered during that request / response
+cycle, if any. Otherwise this API is identical to <a href="#app.locals">app.locals</a>.
+
+This object is useful for exposing request-level information such as the
+request pathname, authenticated user, user settings etcetera.
+
+```js
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  res.locals.authenticated = !req.user.anonymous;
+  next();
+});
+```
+
+### res.req
+
+This property holds a reference to the <a href="#request">request object</a>
+that relates to this response object.
 
 ## Methods
 
 The `res` object contains a number of methods that can be used to send responses, set headers, and more.
 
-<CardList gap="6">
-  <a href="/en/3x/api/response/res-attachment">
-    <Card
-      title="res.attachment()"
-      body="Set the Content-Disposition header to 'attachment' with the specified file name."
-    />
-  </a>
-  <a href="/en/3x/api/response/res-clearcookie">
-    <Card title="res.clearCookie()" body="Clear the cookie specified by name." />
-  </a>
-  <a href="/en/3x/api/response/res-cookie">
-    <Card title="res.cookie()" body="Set cookie name to value, with the given options." />
-  </a>
-  <a href="/en/3x/api/response/res-download">
-    <Card title="res.download()" body="Transfer the specified file as an attachment." />
-  </a>
-  <a href="/en/3x/api/response/res-format">
-    <Card
-      title="res.format()"
-      body="Perform content-negotiation on the Accept HTTP header on the request object."
-    />
-  </a>
-  <a href="/en/3x/api/response/res-get">
-    <Card
-      title="res.get()"
-      body="Get the value of the specified response header field or all fields."
-    />
-  </a>
-  <a href="/en/3x/api/response/res-json">
-    <Card title="res.json()" body="Send a JSON response." />
-  </a>
-  <a href="/en/3x/api/response/res-jsonp">
-    <Card title="res.jsonp()" body="Send a JSON response with JSONP support." />
-  </a>
-  <a href="/en/3x/api/response/res-links">
-    <Card title="res.links()" body="Set the Link header field with the given links." />
-  </a>
-  <a href="/en/3x/api/response/res-location">
-    <Card title="res.location()" body="Set the location header." />
-  </a>
-  <a href="/en/3x/api/response/res-redirect">
-    <Card
-      title="res.redirect()"
-      body="Redirect to the URL derived from the specified path, with specified status, a positive integer between 300 and 308."
-    />
-  </a>
-  <a href="/en/3x/api/response/res-send">
-    <Card title="res.send()" body="Send a response of various types." />
-  </a>
-  <a href="/en/3x/api/response/res-sendfile">
-    <Card title="res.sendfile()" body="Transfer the file at the given path." />
-  </a>
-  <a href="/en/3x/api/response/res-set">
-    <Card
-      title="res.set()"
-      body="Set header field to value, or pass an object to set multiple fields at once."
-    />
-  </a>
-  <a href="/en/3x/api/response/res-status">
-    <Card title="res.status()" body="Set the HTTP status for the response." />
-  </a>
-  <a href="/en/3x/api/response/res-type">
-    <Card
-      title="res.type()"
-      body="Set the Content-Type HTTP header to the MIME type as determined by the specified extension."
-    />
-  </a>
-</CardList>
+### res.attachment([filename])
+
+Sets the Content-Disposition header field to "attachment". If
+a `filename` is given then the Content-Type will be
+automatically set based on the extname via `res.type()`,
+and the Content-Disposition's "filename=" parameter will be set.
+
+```js
+res.attachment();
+// Content-Disposition: attachment
+
+res.attachment('path/to/logo.png');
+// Content-Disposition: attachment; filename="logo.png"
+// Content-Type: image/png
+```
+
+### res.clearCookie(name, [options])
+
+Clear cookie `name`. The `path` option defaults to "/".
+
+```js
+res.cookie('name', 'tobi', { path: '/admin' });
+res.clearCookie('name', { path: '/admin' });
+```
+
+### res.cookie(name, value, [options])
+
+Set cookie `name` to `value`, which may be a string or object converted to JSON. The `path`
+option defaults to "/".
+
+```js
+res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: true });
+res.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true });
+```
+
+The `maxAge` option is a convenience option for setting "expires"
+relative to the current time in milliseconds. The following is equivalent to
+the previous example.
+
+```js
+res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true });
+```
+
+An object may be passed which is then serialized as JSON, which is
+automatically parsed by the `bodyParser()` middleware.
+
+```js
+res.cookie('cart', { items: [1, 2, 3] });
+res.cookie('cart', { items: [1, 2, 3] }, { maxAge: 900000 });
+```
+
+Signed cookies are also supported through this method. Simply
+pass the `signed` option. When given `res.cookie()`
+will use the secret passed to `express.cookieParser(secret)`
+to sign the value.
+
+```js
+res.cookie('name', 'tobi', { signed: true });
+```
+
+Later you may access this value through the <a href="#req.signedCookies">req.signedCookie</a>
+object.
+
+### res.download(path, [filename], [fn])
+
+Transfer the file at `path` as an "attachment",
+typically browsers will prompt the user for download. The
+Content-Disposition "filename=" parameter, aka the one
+that will appear in the brower dialog is set to `path`
+by default, however you may provide an override `filename`.
+
+When an error has ocurred or transfer is complete the optional
+callback `fn` is invoked. This method uses [res.sendfile()](#ressendfilepath-options-fn)
+to transfer the file.
+
+```js
+res.download('/report-12345.pdf');
+
+res.download('/report-12345.pdf', 'report.pdf');
+
+res.download('/report-12345.pdf', 'report.pdf', function (err) {
+  if (err) {
+    // handle error, keep in mind the response may be partially-sent
+    // so check res.headerSent
+  } else {
+    // decrement a download credit etc
+  }
+});
+```
+
+### res.format(object)
+
+Performs content-negotiation on the request Accept header
+field when present. This method uses `req.accepted`, an array of
+acceptable types ordered by their quality values, otherwise the
+first callback is invoked. When no match is performed the server
+responds with 406 "Not Acceptable", or invokes the `default`
+callback.
+
+The Content-Type is set for you when a callback is selected,
+however you may alter this within the callback using `res.set()`
+or `res.type()` etcetera.
+
+The following example would respond with `{ "message": "hey" }`
+when the Accept header field is set to "application/json" or "_/json",
+however if "_/\*" is given then "hey" will be the response.
+
+```js
+res.format({
+  'text/plain': function () {
+    res.send('hey');
+  },
+
+  'text/html': function () {
+    res.send('<p>hey</p>');
+  },
+
+  'application/json': function () {
+    res.send({ message: 'hey' });
+  },
+});
+```
+
+In addition to canonicalized MIME types you may also
+use extnames mapped to these types, providing a slightly
+less verbose implementation:
+
+```js
+res.format({
+  text: function () {
+    res.send('hey');
+  },
+
+  html: function () {
+    res.send('<p>hey</p>');
+  },
+
+  json: function () {
+    res.send({ message: 'hey' });
+  },
+});
+```
+
+### res.get(field)
+
+Get the case-insensitive response header `field`.
+
+```js
+res.get('Content-Type');
+// => "text/plain"
+```
+
+### res.json([status|body], [body])
+
+Send a JSON response. This method is identical
+to `res.send()` when an object or
+array is passed, however it may be used for
+explicit JSON conversion of non-objects (null, undefined, etc),
+though these are technically not valid JSON.
+
+```js
+res.json(null);
+res.json({ user: 'tobi' });
+res.json(500, { error: 'message' });
+```
+
+### res.jsonp([status|body], [body])
+
+Send a JSON response with JSONP support. This method is identical
+to `res.json()` however opts-in to JSONP callback
+support.
+
+```js
+res.jsonp(null);
+// => null
+
+res.jsonp({ user: 'tobi' });
+// => { "user": "tobi" }
+
+res.jsonp(500, { error: 'message' });
+// => { "error": "message" }
+```
+
+By default the JSONP callback name is simply `callback`,
+however you may alter this with the <a href="#app-settings">jsonp callback name</a>
+setting. The following are some examples of JSONP responses using the same
+code:
+
+```js
+// ?callback=foo
+res.jsonp({ user: 'tobi' });
+// => foo({ "user": "tobi" })
+
+app.set('jsonp callback name', 'cb');
+
+// ?cb=foo
+res.jsonp(500, { error: 'message' });
+// => foo({ "error": "message" })
+```
+
+### res.links(links)
+
+Join the given `links` to populate the "Link" response header field.
+
+```js
+res.links({
+  next: 'http://api.example.com/users?page=2',
+  last: 'http://api.example.com/users?page=5',
+});
+```
+
+p yields:
+
+```
+Link: <http://api.example.com/users?page=2> rel="next",
+      <http://api.example.com/users?page=5> rel="last"
+```
+
+### res.location()
+
+Set the location header.
+
+```js
+res.location('/foo/bar');
+res.location('foo/bar');
+res.location('http://example.com');
+res.location('../login');
+res.location('back');
+```
+
+You can use the same kind of `urls` as in `res.redirect()`.
+
+For example, if your application is mounted at `/blog`,
+the following would set the `location` header to
+`/blog/admin`:
+
+```js
+res.location('admin');
+```
+
+### res.redirect([status], url)
+
+Redirect to the given `url` with optional `status` code
+defaulting to 302 "Found".
+
+```js
+res.redirect('/foo/bar');
+res.redirect('http://example.com');
+res.redirect(301, 'http://example.com');
+res.redirect('../login');
+```
+
+Express supports a few forms of redirection, first being
+a fully qualified URI for redirecting to a different site:
+
+```js
+res.redirect('http://google.com');
+```
+
+The second form is the pathname-relative redirect, for example
+if you were on `http://example.com/admin/post/new`, the
+following redirect to `/admin` would land you at `http://example.com/admin`:
+
+```js
+res.redirect('/admin');
+```
+
+This next redirect is relative to the `mount` point of the application. For example
+if you have a blog application mounted at `/blog`, ideally it has no knowledge of
+where it was mounted, so where a redirect of `/admin/post/new` would simply give you
+`http://example.com/admin/post/new`, the following mount-relative redirect would give
+you `http://example.com/blog/admin/post/new`:
+
+```js
+res.redirect('admin/post/new');
+```
+
+Pathname relative redirects are also possible. If you were
+on `http://example.com/admin/post/new`, the following redirect
+would land you at `http//example.com/admin/post`:
+
+```js
+res.redirect('..');
+```
+
+The final special-case is a `back` redirect, redirecting back to
+the Referer (or Referrer), defaulting to `/` when missing.
+
+```js
+res.redirect('back');
+```
+
+### res.render(view, [locals], callback)
+
+Render a `view` with a callback responding with
+the rendered string. When an error occurs `next(err)`
+is invoked internally. When a callback is provided both the possible error
+and rendered string are passed, and no automated response is performed.
+
+```js
+res.render('index', function (err, html) {
+  // ...
+});
+
+res.render('user', { name: 'Tobi' }, function (err, html) {
+  // ...
+});
+```
+
+### res.send([body|status], [body])
+
+Send a response.
+
+```js
+res.send(Buffer.from('whoop'));
+res.send({ some: 'json' });
+res.send('<p>some html</p>');
+res.send(404, 'Sorry, we cannot find that!');
+res.send(500, { error: 'something blew up' });
+res.send(200);
+```
+
+This method performs a myriad of
+useful tasks for simple non-streaming responses such
+as automatically assigning the Content-Length unless
+previously defined and providing automatic <em>HEAD</em> and
+HTTP cache freshness support.
+
+When a `Buffer` is given
+the Content-Type is set to "application/octet-stream"
+unless previously defined as shown below:
+
+```js
+res.set('Content-Type', 'text/html');
+res.send(Buffer.from('<p>some html</p>'));
+```
+
+When a `String` is given the
+Content-Type is set defaulted to "text/html":
+
+```js
+res.send('<p>some html</p>');
+```
+
+When an `Array` or `Object` is
+given Express will respond with the JSON representation:
+
+```js
+res.send({ user: 'tobi' });
+res.send([1, 2, 3]);
+```
+
+Finally when a `Number` is given without
+any of the previously mentioned bodies, then a response
+body string is assigned for you. For example 200 will
+respond will the text "OK", and 404 "Not Found" and so on.
+
+```js
+res.send(200);
+res.send(404);
+res.send(500);
+```
+
+### res.sendfile(path, [options], [fn]])
+
+Transfer the file at the given `path`.
+
+Automatically defaults the Content-Type response header field based
+on the filename's extension. The callback `fn(err)` is
+invoked when the transfer is complete or when an error occurs.
+
+Options:
+
+- `maxAge` in milliseconds defaulting to 0
+- `root` root directory for relative filenames
+
+This method provides fine-grained support for file serving
+as illustrated in the following example:
+
+```js
+app.get('/user/:uid/photos/:file', function (req, res) {
+  var uid = req.params.uid;
+  var file = req.params.file;
+
+  req.user.mayViewFilesFrom(uid, function (yes) {
+    if (yes) {
+      res.sendfile('/uploads/' + uid + '/' + file);
+    } else {
+      res.send(403, 'Sorry! you cant see that.');
+    }
+  });
+});
+```
+
+### res.set(field, [value])
+
+Set header `field` to `value`, or pass an object to set multiple fields at once.
+
+```js
+res.set('Content-Type', 'text/plain');
+
+res.set({
+  'Content-Type': 'text/plain',
+  'Content-Length': '123',
+  ETag: '12345',
+});
+```
+
+Aliased as `res.header(field, [value])`.
+
+### res.status(code)
+
+Chainable alias of node's `res.statusCode=`.
+
+```js
+res.status(404).sendfile('path/to/404.png');
+```
+
+### res.type(type)
+
+Sets the Content-Type to the mime lookup of `type`,
+or when "/" is present the Content-Type is simply set to this
+literal value.
+
+```js
+res.type('.html');
+res.type('html');
+res.type('json');
+res.type('application/json');
+res.type('png');
+```
+
+p Aliased as `res.contentType(type)`.

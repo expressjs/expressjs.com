@@ -3,48 +3,143 @@ title: Middleware
 description: Express 3.x includes a number of built-in middleware functions that can be used to handle common tasks such as parsing request bodies, handling cookies, and more. These middleware functions are available as properties on the Express module and can be added to your application using app.use().
 ---
 
-import Card from '@components/primitives/Card/Card.astro';
-import { CardList } from '@components/patterns';
-
 # Middleware
 
 Express 3.x includes a number of built-in middleware functions that can be used to handle common tasks such as parsing request bodies, handling cookies, and more. These middleware functions are available as properties on the Express module and can be added to your application using `app.use()`.
 
-<CardList gap="6">
-  <a href="/en/3x/api/middleware/basicauth">
-    <Card title="basicAuth()" body="Basic Authentication middleware, populating req.user" />
-  </a>
-  <a href="/en/3x/api/middleware/bodyparser">
-    <Card
-      title="bodyParser()"
-      body="Parse incoming request bodies in a middleware before your handlers, available under the req.body property."
-    />
-  </a>
-  <a href="/en/3x/api/middleware/compress">
-    <Card
-      title="compress()"
-      body="Compress response data with gzip / deflate. This middleware should be placed 'high' within the stack to ensure all responses may be compressed."
-    />
-  </a>
-  <a href="/en/3x/api/middleware/cookieparser">
-    <Card
-      title="cookieParser()"
-      body="Parse Cookie header and populate req.cookies with an object keyed by the cookie names."
-    />
-  </a>
-  <a href="/en/3x/api/middleware/cookiesession">
-    <Card
-      title="cookieSession()"
-      body="Cookie-based session middleware. Stores the session data on the client within a cookie."
-    />
-  </a>
-  <a href="/en/3x/api/middleware/csrf">
-    <Card title="csrf()" body="Cross-site request forgery (CSRF) protection middleware." />
-  </a>
-  <a href="/en/3x/api/middleware/directory">
-    <Card
-      title="directory()"
-      body="Serve static files from within a given directory, with automatic indexing of the files."
-    />
-  </a>
-</CardList>
+### basicAuth()
+
+Basic Authentication middleware, populating `req.user`
+with the username.
+
+Simple username and password:
+
+```js
+app.use(express.basicAuth('username', 'password'));
+```
+
+Callback verification:
+
+```js
+app.use(
+  express.basicAuth(function (user, pass) {
+    return user === 'tj' && pass === 'wahoo';
+  })
+);
+```
+
+Async callback verification, accepting `fn(err, user)`,
+in this case `req.user` will be the user object passed.
+
+```js
+app.use(
+  express.basicAuth(function (user, pass, fn) {
+    User.authenticate({ user: user, pass: pass }, fn);
+  })
+);
+```
+
+### bodyParser()
+
+Request body parsing middleware supporting JSON, urlencoded,
+and multipart requests. This middleware is simply a wrapper
+for the `json()`, `urlencoded()`, and
+`multipart()` middleware.
+
+```js
+app.use(express.bodyParser());
+
+// is equivalent to:
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(express.multipart());
+```
+
+For security sake, it's better to disable file upload if your application
+doesn't need it. To do this, use only the needed middleware, i.e. don't use
+the `bodyParser` and `multipart()` middleware:
+
+```js
+app.use(express.json());
+app.use(express.urlencoded());
+```
+
+If your application needs file upload you should set up
+<a href='https://groups.google.com/d/msg/express-js/iP2VyhkypHo/5AXQiYN3RPcJ'>a strategy for dealing with those files</a>.
+
+### compress()
+
+Compress response data with gzip / deflate. This middleware
+should be placed "high" within the stack to ensure all
+responses may be compressed.
+
+```js
+app.use(express.logger());
+app.use(express.compress());
+app.use(express.methodOverride());
+app.use(express.bodyParser());
+```
+
+### cookieParser()
+
+Parses the Cookie header field and populates `req.cookies`
+with an object keyed by the cookie names. Optionally you may enabled
+signed cookie support by passing a `secret` string.
+
+```js
+app.use(express.cookieParser());
+app.use(express.cookieParser('some secret'));
+```
+
+### cookieSession()
+
+Provides cookie-based sessions, and populates `req.session`.
+This middleware takes the following options:
+
+- `key` cookie name defaulting to `connect.sess`
+- `secret` prevents cookie tampering
+- `cookie` session cookie settings, defaulting to `{ path: '/', httpOnly: true, maxAge: null }`
+- `proxy` trust the reverse proxy when setting secure cookies (via "x-forwarded-proto")
+
+```js
+app.use(express.cookieSession());
+```
+
+To clear a cookie simply assign the session to null before responding:
+
+```js
+req.session = null;
+```
+
+### csrf()
+
+CSRF protection middleware.
+
+By default this middleware generates a token named "\_csrf"
+which should be added to requests which mutate
+state, within a hidden form field, query-string etc. This
+token is validated against `req.csrfToken()`.
+
+The default `value` function checks `req.body` generated
+by the `bodyParser()` middleware, `req.query` generated
+by `query()`, and the "X-CSRF-Token" header field.
+
+This middleware requires session support, thus should be added
+somewhere below `session()`.
+
+### directory()
+
+Directory serving middleware, serves the given `path`.
+This middleware may be paired with `static()` to serve
+files, providing a full-featured file browser.
+
+```js
+app.use(express.directory('public'));
+app.use(express.static('public'));
+```
+
+This middleware accepts the following options:
+
+- `hidden` display hidden (dot) files. Defaults to false.
+- `icons` display icons. Defaults to false.
+- `filter` Apply this filter function to files. Defaults to false.
