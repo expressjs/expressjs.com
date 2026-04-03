@@ -118,7 +118,7 @@ export const apiMenu: Menu = {
               { href: `/api/request/req-body`, label: 'req.body' },
               { href: `/api/request/req-cookies`, label: 'req.cookies' },
               { href: `/api/request/req-ip`, label: 'req.ip' },
-              { href: `/api/request/req-method`, label: 'req.method' },
+              { href: `/api/request/req-method`, label: 'req.method', omitFrom: ['3x'] },
               { href: `/api/request/req-query`, label: 'req.query' },
             ],
           },
@@ -129,7 +129,7 @@ export const apiMenu: Menu = {
           submenu: {
             items: [
               { href: `/api/request/req-accepts`, label: 'req.accepts()' },
-              { href: '/api/request/req-get', label: 'req.get()' },
+              { href: '/api/request/req-get', label: 'req.get()', omitFrom: ['3x'] },
               { href: '/api/request/req-is', label: 'req.is()' },
             ],
           },
