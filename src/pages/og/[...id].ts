@@ -36,19 +36,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
   ]);
 
   const blogPaths = blog.map((post) => ({
-    params: { id: `blog-${post.id.split('/').pop()!}` },
+    params: { id: `blog-${post.id.split('/').pop()!}.png` },
     props: { title: post.data.title, tags: post.data.tags },
   }));
 
   const collectionPaths = [...docs, ...api, ...pages].map((entry) => ({
-    params: { id: entry.id.replace(/\//g, '-') },
+    params: { id: `${entry.id.replace(/\//g, '-')}.png` },
     props: { title: entry.data.title },
   }));
 
   const homePaths = Object.keys(languages).map((lang) => {
     const t = useTranslations(lang as keyof typeof languages);
     return {
-      params: { id: `home-${lang}` },
+      params: { id: `home-${lang}.png` },
       props: { title: t('hero.tagline') },
     };
   });

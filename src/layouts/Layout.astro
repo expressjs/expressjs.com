@@ -31,7 +31,7 @@ const segments = pathname.split('/').filter(Boolean);
 const ogSlug = segments.slice(1).join('-');
 const imageUrl = image
   ? new URL(image, Astro.site || Astro.url.origin)
-  : new URL(`/og/${ogSlug || `home-${segments[0] || 'en'}`}`, Astro.site || Astro.url.origin);
+  : new URL(`/og/${ogSlug || `home-${segments[0] || 'en'}`}.png`, Astro.site || Astro.url.origin);
 
 const isNetlify = import.meta.env.DEPLOY_PRIME_URL;
 
