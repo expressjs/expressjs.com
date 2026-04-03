@@ -147,6 +147,33 @@ export const apiMenu: Menu = {
         },
       ],
     },
+    //middleware
+    {
+      title: 'menu.sections.middleware',
+      omitFrom: ['4x', '5x'],
+      items: [
+        {
+          href: '/api/middleware/',
+          label: 'menu.sections.middleware',
+          ariaLabel: 'menu.aria.middleware',
+        },
+        {
+          label: 'menu.items.methods',
+          ariaLabel: 'menu.aria.middleware',
+          submenu: {
+            items: [
+              { href: '/api/middleware/basicauth', label: 'basicAuth()' },
+              { href: '/api/middleware/bodyparser', label: 'bodyParser()' },
+              { href: '/api/middleware/compress', label: 'compress()' },
+              { href: '/api/middleware/cookieparser', label: 'cookieParser()' },
+              { href: '/api/middleware/cookiesession', label: 'cookieSession()' },
+              { href: '/api/middleware/csrf', label: 'csrf()' },
+              { href: '/api/middleware/directory', label: 'directory()' },
+            ],
+          },
+        },
+      ],
+    },
     //request
     {
       title: 'menu.sections.request',
