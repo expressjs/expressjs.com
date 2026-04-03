@@ -158,7 +158,7 @@ export const apiMenu: Menu = {
           ariaLabel: 'menu.aria.middleware',
         },
         {
-          label: 'menu.items.methods',
+          label: 'menu.items.types',
           ariaLabel: 'menu.aria.middleware',
           submenu: {
             items: [
@@ -242,7 +242,7 @@ export const apiMenu: Menu = {
               { href: '/api/request/req-res', label: 'req.res' },
               { href: '/api/request/req-route', label: 'req.route' },
               { href: '/api/request/req-secure', label: 'req.secure' },
-              { href: '/api/request/req-signedCookies', label: 'req.signedCookies' },
+              { href: '/api/request/req-signedcookies', label: 'req.signedCookies' },
               { href: '/api/request/req-stale', label: 'req.stale' },
               { href: '/api/request/req-subdomains', label: 'req.subdomains' },
               { href: '/api/request/req-xhr', label: 'req.xhr' },
