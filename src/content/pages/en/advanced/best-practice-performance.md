@@ -3,8 +3,6 @@ title: 'Production best practices: performance and reliability'
 description: Discover performance and reliability best practices for Express apps in production, covering code optimizations and environment setups for optimal performance.
 ---
 
-# Production best practices: performance and reliability
-
 This article discusses performance and reliability best practices for Express applications deployed to production.
 
 This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts:
