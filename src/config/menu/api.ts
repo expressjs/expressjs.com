@@ -64,12 +64,12 @@ export const apiMenu: Menu = {
                 omitFrom: ['3x', '4x'],
               },
               {
-                href: '/api/application/app-routes',
+                href: '/api/application#approutes',
                 label: 'app.routes',
                 omitFrom: ['4x', '5x'],
               },
               {
-                href: '/api/application/app-settings',
+                href: '/api/application#settings',
                 label: 'app.settings',
                 omitFrom: ['4x', '5x'],
               },
@@ -96,7 +96,7 @@ export const apiMenu: Menu = {
             items: [
               { href: `/api/application#appallpath-callback--callback-`, label: 'app.all()' },
               {
-                href: '/api/application/app-configure',
+                href: '/api/application#appconfigureenv-callback',
                 label: 'app.configure()',
                 omitFrom: ['4x', '5x'],
               },
@@ -150,7 +150,7 @@ export const apiMenu: Menu = {
               { href: '/api/application#appsetname-value', label: 'app.set()' },
               { href: '/api/application#appusepath-callback--callback', label: 'app.use()' },
               {
-                href: '/api/application/app-verb',
+                href: '/api/application#appverbpath-callback-callback',
                 label: 'app.VERB()',
                 omitFrom: ['4x', '5x'],
               },
@@ -174,13 +174,13 @@ export const apiMenu: Menu = {
           ariaLabel: 'menu.aria.middleware',
           submenu: {
             items: [
-              { href: '/api/middleware/basicauth', label: 'basicAuth()' },
-              { href: '/api/middleware/bodyparser', label: 'bodyParser()' },
-              { href: '/api/middleware/compress', label: 'compress()' },
-              { href: '/api/middleware/cookieparser', label: 'cookieParser()' },
-              { href: '/api/middleware/cookiesession', label: 'cookieSession()' },
-              { href: '/api/middleware/csrf', label: 'csrf()' },
-              { href: '/api/middleware/directory', label: 'directory()' },
+              { href: '/api/middleware#basicauth', label: 'basicAuth()' },
+              { href: '/api/middleware#bodyparser', label: 'bodyParser()' },
+              { href: '/api/middleware#compress', label: 'compress()' },
+              { href: '/api/middleware#cookieparser', label: 'cookieParser()' },
+              { href: '/api/middleware#cookiesession', label: 'cookieSession()' },
+              { href: '/api/middleware#csrf', label: 'csrf()' },
+              { href: '/api/middleware#directory', label: 'directory()' },
             ],
           },
         },
@@ -201,17 +201,17 @@ export const apiMenu: Menu = {
           submenu: {
             items: [
               {
-                href: '/api/request/req-accepted',
+                href: '/api/request#reqaccepted',
                 label: 'req.accepted',
                 omitFrom: ['4x', '5x'],
               },
               {
-                href: '/api/request/req-acceptedcharsets',
+                href: '/api/request#reqacceptedcharsets',
                 label: 'req.acceptedCharsets',
                 omitFrom: ['4x', '5x'],
               },
               {
-                href: '/api/request/req-acceptedlanguages',
+                href: '/api/request#reqacceptedlanguages',
                 label: 'req.acceptedLanguages',
                 omitFrom: ['4x', '5x'],
               },
@@ -228,7 +228,7 @@ export const apiMenu: Menu = {
               { href: `/api/request#reqbody`, label: 'req.body' },
               { href: `/api/request#reqcookies`, label: 'req.cookies' },
               {
-                href: '/api/request/req-files',
+                href: '/api/request#reqfiles',
                 label: 'req.files',
                 omitFrom: ['4x', '5x'],
               },
@@ -268,7 +268,7 @@ export const apiMenu: Menu = {
             items: [
               { href: `/api/request#reqacceptstypes`, label: 'req.accepts()' },
               {
-                href: '/api/request/req-acceptscharset',
+                href: '/api/request#reqacceptscharsetcharset',
                 label: 'req.acceptsCharset()',
                 omitFrom: ['4x', '5x'],
               },
@@ -283,7 +283,7 @@ export const apiMenu: Menu = {
                 omitFrom: ['3x'],
               },
               {
-                href: '/api/request/req-acceptslanguage',
+                href: '/api/request#reqacceptslanguagelang',
                 label: 'req.acceptsLanguage()',
                 omitFrom: ['4x', '5x'],
               },
@@ -294,13 +294,13 @@ export const apiMenu: Menu = {
               },
               { href: '/api/request#reqgetfield', label: 'req.get()', omitFrom: ['3x'] },
               {
-                href: '/api/request/req-header',
+                href: '/api/request#reqheaderfield',
                 label: 'req.header()',
                 omitFrom: ['4x', '5x'],
               },
               { href: '/api/request#reqistype', label: 'req.is()' },
               {
-                href: '/api/request/req-param',
+                href: '/api/request#reqparamname',
                 label: 'req.param()',
                 omitFrom: ['5x'],
               },
@@ -334,7 +334,7 @@ export const apiMenu: Menu = {
                 omitFrom: ['3x'],
               },
               {
-                href: '/api/response/res-charset',
+                href: '/api/response#rescharset',
                 label: 'res.charset',
                 omitFrom: ['4x', '5x'],
               },
@@ -380,7 +380,7 @@ export const apiMenu: Menu = {
               { href: `/api/response#resrenderview--locals--callback`, label: 'res.render()' },
               { href: `/api/response#ressendbody`, label: 'res.send()' },
               {
-                href: '/api/response/res-sendfile',
+                href: '/api/response#ressendfilepath-options-fn',
                 label: 'res.sendfile()',
                 omitFrom: ['4x', '5x'],
               },
