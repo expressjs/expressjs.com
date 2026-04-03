@@ -3,8 +3,6 @@ files:
     translation: /src/content/pages/%two_letters_code%/**/%original_file_name%
   - source: /src/content/docs/en/**/*.*
     translation: /src/content/docs/%two_letters_code%/**/%original_file_name%
-  - source: /src/content/resources/en/**/*.*
-    translation: /src/resources/docs/%two_letters_code%/**/%original_file_name%
   - source: /src/i18n/ui/en/en.json
     translation: /src/i18n/ui/%two_letters_code%/%two_letters_code%.json
 preserve_hierarchy: true
