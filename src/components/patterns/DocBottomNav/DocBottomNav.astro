@@ -1,0 +1,61 @@
+---
+/**
+ * DocBottomNav Pattern Component
+ *
+ * Renders previous and next navigation links for documentation pages.
+ */
+import { Button } from '@components/primitives';
+import { Icon } from 'astro-icon/components';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import type { AdjacentPage } from '@utils/content';
+import './DocBottomNav.css';
+interface Props {
+  prev?: AdjacentPage | null;
+  next?: AdjacentPage | null;
+}
+const { prev, next } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+{
+  (prev || next) && (
+    <nav class="doc-nav" aria-label={t('doc.pageNavigation')}>
+      {prev ? (
+        <Button
+          as="a"
+          variant="secondary"
+          ghost
+          href={prev.href}
+          class="doc-nav__link doc-nav__link--prev"
+        >
+          <Icon slot="left" name="fluent:arrow-left-20-filled" aria-hidden="true" />
+          <span class="doc-nav__meta">
+            <span class="doc-nav__direction">{t('doc.previousPage')}</span>
+            <span class="doc-nav__title">{t(prev.label)}</span>
+          </span>
+        </Button>
+      ) : (
+        <span />
+      )}
+
+      {next ? (
+        <Button
+          as="a"
+          variant="secondary"
+          ghost
+          href={next.href}
+          class="doc-nav__link doc-nav__link--next"
+        >
+          <span class="doc-nav__meta">
+            <span class="doc-nav__direction">{t('doc.nextPage')}</span>
+            <span class="doc-nav__title">{t(next.label)}</span>
+          </span>
+          <Icon slot="right" name="fluent:arrow-right-20-filled" aria-hidden="true" />
+        </Button>
+      ) : (
+        <span />
+      )}
+    </nav>
+  )
+}
