@@ -1,3 +1,5 @@
+import { languagesArray } from '../i18n/locales';
+
 // Redirect .html and non-.html blog post URLs to the new format. This will ensure that any existing links to blog posts will continue to work and redirect users to the correct location on the new site.
 const blog = {
   '/2024/07/16/welcome-post.html': '/en/blog/2024-07-16-welcome-post',
@@ -65,48 +67,61 @@ const pages = {
 };
 
 const api = {
+  '/5x/api.html': '/en/5x/api',
+  '/4x/api.html': '/en/4x/api',
+  '/3x/api.html': '/en/3x/api',
   '/5x/api': '/en/5x/api',
   '/4x/api': '/en/4x/api',
   '/3x/api': '/en/3x/api',
 };
 
-// const verDocsArr = [
-//   '/advanced/developing-template-engines',
-//   '/guide/overriding-express-api',
-//   '/guide/behind-proxies',
-//   '/guide/debugging',
-//   '/guide/error-handling',
-//   '/guide/using-template-engines',
-//   '/guide/using-middleware',
-//   '/guide/writing-middleware',
-//   '/guide/routing',
-//   '/starter/faq',
-//   '/starter/examples',
-//   '/starter/static-files',
-//   '/starter/basic-routing',
-//   '/starter/installing',
-//   '/starter/generator',
-//   '/starter/hello-world',
-// ];
+const verDocsArr = [
+  '/advanced/developing-template-engines',
+  '/guide/overriding-express-api',
+  '/guide/behind-proxies',
+  '/guide/debugging',
+  '/guide/error-handling',
+  '/guide/using-template-engines',
+  '/guide/using-middleware',
+  '/guide/writing-middleware',
+  '/guide/routing',
+  '/starter/faq',
+  '/starter/examples',
+  '/starter/static-files',
+  '/starter/basic-routing',
+  '/starter/installing',
+  '/starter/generator',
+  '/starter/hello-world',
+];
 
-const verDocs = {
-  '/en/advanced/developing-template-engines': '/en/5x/advanced/developing-template-engines',
-  '/en/guide/overriding-express-api': '/en/5x/guide/overriding-express-api',
-  '/en/guide/behind-proxies': '/en/5x/guide/behind-proxies',
-  '/en/guide/debugging': '/en/5x/guide/debugging',
-  '/en/guide/error-handling': '/en/5x/guide/error-handling',
-  '/en/guide/using-template-engines': '/en/5x/guide/using-template-engines',
-  '/en/guide/using-middleware': '/en/5x/guide/using-middleware',
-  '/en/guide/writing-middleware': '/en/5x/guide/writing-middleware',
-  '/en/guide/routing': '/en/5x/guide/routing',
-  '/en/starter/faq': '/en/5x/starter/faq',
-  '/en/starter/examples': '/en/5x/starter/examples',
-  '/en/starter/static-files': '/en/5x/starter/static-files',
-  '/en/starter/basic-routing': '/en/5x/starter/basic-routing',
-  '/en/starter/installing': '/en/5x/starter/installing',
-  '/en/starter/generator': '/en/5x/starter/generator',
-  '/en/starter/hello-world': '/en/5x/starter/hello-world',
+// const verDocs = {
+//   '/en/advanced/developing-template-engines': '/en/5x/advanced/developing-template-engines',
+//   '/en/guide/overriding-express-api': '/en/5x/guide/overriding-express-api',
+//   '/en/guide/behind-proxies': '/en/5x/guide/behind-proxies',
+//   '/en/guide/debugging': '/en/5x/guide/debugging',
+//   '/en/guide/error-handling': '/en/5x/guide/error-handling',
+//   '/en/guide/using-template-engines': '/en/5x/guide/using-template-engines',
+//   '/en/guide/using-middleware': '/en/5x/guide/using-middleware',
+//   '/en/guide/writing-middleware': '/en/5x/guide/writing-middleware',
+//   '/en/guide/routing': '/en/5x/guide/routing',
+//   '/en/starter/faq': '/en/5x/starter/faq',
+//   '/en/starter/examples': '/en/5x/starter/examples',
+//   '/en/starter/static-files': '/en/5x/starter/static-files',
+//   '/en/starter/basic-routing': '/en/5x/starter/basic-routing',
+//   '/en/starter/installing': '/en/5x/starter/installing',
+//   '/en/starter/generator': '/en/5x/starter/generator',
+//   '/en/starter/hello-world': '/en/5x/starter/hello-world',
+// };
+
+const generateVerDocs = () => {
+  return Object.fromEntries(
+    languagesArray.flatMap((lang) =>
+      verDocsArr.map((route) => [`/${lang.code}${route}`, `/${lang.code}/5x${route}`])
+    )
+  );
 };
+
+const verDocs = generateVerDocs();
 
 const redirects = { ...blog, ...api_v2, ...pages, ...api, ...verDocs };
 
