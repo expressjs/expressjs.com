@@ -124,7 +124,8 @@ function checkItemsForPath(
   return filterItems(items, version).some((item) => {
     if (isLink(item)) {
       const href = resolveHref(item.href, lang, basePath, versioned, version, item.global);
-      return normalizedCurrentPath === normalizePath(href);
+      const hrefWithoutHash = href.split('#')[0];
+      return normalizedCurrentPath === normalizePath(hrefWithoutHash);
     }
     if (hasSubmenu(item)) {
       const nestedBasePath = item.submenu.basePath || basePath;
