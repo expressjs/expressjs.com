@@ -5,7 +5,6 @@ description: Learn about the properties and methods of the Express 3.x applicati
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-
 The `app` object conventionally denotes the Express application.
 Create it by calling the top-level `express()` function exported by the Express module:
 
@@ -75,8 +74,9 @@ app.set('title', 'My App');
 The `app.routes` object houses all of the routes defined mapped
 by the associated HTTP verb. This object may be used for introspection capabilities,
 for example Express uses this internally not only for routing but to provide default
-<string>OPTIONS</string> behaviour unless `app.options()` is used. Your application
-or framework may also remove routes by simply by removing them from this object.
+
+<string>OPTIONS</string> behaviour unless `app.options()` is used. Your application or framework may
+also remove routes by simply by removing them from this object.
 
 The output of `console.log(app.routes)`:
 
@@ -348,10 +348,10 @@ though note that it aliases this method as `ejs.__express` internally
 so if you're using ".ejs" extensions you dont need to do anything.
 
 Some template engines do not follow this convention, the
+
 <a href="https://github.com/visionmedia/consolidate.js">consolidate.js</a>
-library was created to map all of node's popular template
-engines to follow this convention, thus allowing them to
-work seemlessly within Express.
+library was created to map all of node's popular template engines to follow this convention, thus
+allowing them to work seemlessly within Express.
 
 ```js
 var engines = require('consolidate');

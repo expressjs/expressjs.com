@@ -3,7 +3,6 @@ title: Request
 description: Learn about the Request object for Express 3.x, including its properties and methods.
 ---
 
-
 The `req` object is an enhanced version of Node's own request object
 and supports all [built-in fields and methods](https://nodejs.org/api/http.html#class-httpincomingmessage).
 
@@ -108,11 +107,12 @@ the following `File` object:
 ```
 
 The `bodyParser()` middleware utilizes the
+
 <a href="https://github.com/felixge/node-formidable">node-formidable</a>
-module internally, and accepts the same options. An example of this
-is the `keepExtensions` formidable option, defaulting to <strong>false</strong>
-which in this case gives you the filename "/tmp/8ef9c52abe857867fd0a4e9a819d1876" void of
-the ".png" extension. To enable this, and others you may pass them to `bodyParser()`:
+module internally, and accepts the same options. An example of this is the `keepExtensions`
+formidable option, defaulting to <strong>false</strong>
+which in this case gives you the filename "/tmp/8ef9c52abe857867fd0a4e9a819d1876" void of the ".png"
+extension. To enable this, and others you may pass them to `bodyParser()`:
 
 ```js
 app.use(express.bodyParser({ keepExtensions: true, uploadDir: '/my/files' }));
