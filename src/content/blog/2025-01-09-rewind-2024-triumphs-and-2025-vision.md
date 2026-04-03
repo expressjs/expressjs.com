@@ -5,7 +5,6 @@ authors:
   - name: Express Technical Committee
     github: expressjs
 description: Explore the transformative journey of Express.js in 2024, marked by governance improvements, the long-awaited release of Express 5.0, and heightened security measures. Look into the ambitious plans for 2025, including performance optimizations, scoped packages, and a bold roadmap for sustained growth in the Node.js ecosystem.
-cover: /posts/sample-cover.jpg
 ---
 
 As we step into the new year, it’s almost impossible to ignore the unmistakable energy coursing through the Express.js community. The past twelve months have proven both foundational and forward-looking: an era of governance overhauls, technical triumphs, and security enhancements that not only shaped 2024 but also laid the groundwork for what promises to be a transformative 2025.
