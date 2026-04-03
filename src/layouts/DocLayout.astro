@@ -57,9 +57,6 @@ const breadcrumbs = buildBreadcrumbs(Astro.url.pathname, t);
 
     <div class="doc-layout">
       <article>
-        <h1 id="overview">
-          <a href="#overview">{title}</a>
-        </h1>
         <slot />
         <DocBottomNav {prev} {next} />
       </article>

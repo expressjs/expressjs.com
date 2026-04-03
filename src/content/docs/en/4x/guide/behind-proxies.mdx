@@ -2,7 +2,7 @@
 title: Express behind proxies
 description: Learn how to configure Express.js applications to work correctly behind reverse proxies, including using the trust proxy setting to handle client IP addresses.
 ---
-
+# Express behind proxies
 import Alert from '@components/primitives/Alert/Alert.astro';
 
 When running an Express app behind a reverse proxy, some of the Express APIs may return different values than expected. In order to adjust for this, the `trust proxy` application setting may be used to expose information provided by the reverse proxy in the Express APIs. The most common issue is express APIs that expose the client's IP address may instead show an internal IP address of the reverse proxy.
