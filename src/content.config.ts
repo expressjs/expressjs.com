@@ -46,9 +46,9 @@ const blogCollection = defineCollection({
 
 const npmCollection = defineCollection({
   loader: async () => {
-    const res = await fetch('https://registry.npmjs.org/express/latest');
-    const { version } = await res.json();
-    return [{ id: 'express', version }];
+    // const res = await fetch('https://registry.npmjs.org/express/latest');
+    // const { version } = await res.json();
+    return [{ id: 'express', version: '5x' }];
   },
   schema: z.object({ version: z.string() }),
 });

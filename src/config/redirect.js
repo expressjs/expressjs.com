@@ -64,6 +64,50 @@ const pages = {
   '/en/changelog/4x': 'https://github.com/expressjs/express/releases',
 };
 
-const redirects = { ...blog, ...api_v2, ...pages };
+const api = {
+  '/5x/api': '/en/5x/api',
+  '/4x/api': '/en/4x/api',
+  '/3x/api': '/en/3x/api',
+};
+
+// const verDocsArr = [
+//   '/advanced/developing-template-engines',
+//   '/guide/overriding-express-api',
+//   '/guide/behind-proxies',
+//   '/guide/debugging',
+//   '/guide/error-handling',
+//   '/guide/using-template-engines',
+//   '/guide/using-middleware',
+//   '/guide/writing-middleware',
+//   '/guide/routing',
+//   '/starter/faq',
+//   '/starter/examples',
+//   '/starter/static-files',
+//   '/starter/basic-routing',
+//   '/starter/installing',
+//   '/starter/generator',
+//   '/starter/hello-world',
+// ];
+
+const verDocs = {
+  '/en/advanced/developing-template-engines': '/en/5x/advanced/developing-template-engines',
+  '/en/guide/overriding-express-api': '/en/5x/guide/overriding-express-api',
+  '/en/guide/behind-proxies': '/en/5x/guide/behind-proxies',
+  '/en/guide/debugging': '/en/5x/guide/debugging',
+  '/en/guide/error-handling': '/en/5x/guide/error-handling',
+  '/en/guide/using-template-engines': '/en/5x/guide/using-template-engines',
+  '/en/guide/using-middleware': '/en/5x/guide/using-middleware',
+  '/en/guide/writing-middleware': '/en/5x/guide/writing-middleware',
+  '/en/guide/routing': '/en/5x/guide/routing',
+  '/en/starter/faq': '/en/5x/starter/faq',
+  '/en/starter/examples': '/en/5x/starter/examples',
+  '/en/starter/static-files': '/en/5x/starter/static-files',
+  '/en/starter/basic-routing': '/en/5x/starter/basic-routing',
+  '/en/starter/installing': '/en/5x/starter/installing',
+  '/en/starter/generator': '/en/5x/starter/generator',
+  '/en/starter/hello-world': '/en/5x/starter/hello-world',
+};
+
+const redirects = { ...blog, ...api_v2, ...pages, ...api, ...verDocs };
 
 export default redirects;

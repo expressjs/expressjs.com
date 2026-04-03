@@ -15,7 +15,7 @@ import {
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-
+  //! Should we remove translations for blog posts?
   return Object.keys(languages).flatMap((lang) =>
     posts.map((post) => {
       const filename = post.id.split('/').pop()!;
