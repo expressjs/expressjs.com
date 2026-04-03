@@ -35,24 +35,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
     getCollection('pages'),
   ]);
 
-  const blogPaths = Object.keys(languages).flatMap((lang) =>
-    blog.map((post) => ({
-      params: { id: `${lang}-blog-${post.id.split('/').pop()!}` },
-      props: { title: post.data.title, tags: post.data.tags },
-    }))
-  );
+  const blogPaths = blog.map((post) => ({
+    params: { id: `blog-${post.id.split('/').pop()!}` },
+    props: { title: post.data.title, tags: post.data.tags },
+  }));
 
-  const collectionPaths = [...docs, ...pages].map((entry) => ({
+  const collectionPaths = [...docs, ...api, ...pages].map((entry) => ({
     params: { id: entry.id.replace(/\//g, '-') },
     props: { title: entry.data.title },
   }));
-
-  const apiPaths = Object.keys(languages).flatMap((lang) =>
-    api.map((entry) => ({
-      params: { id: `${lang}-${entry.id.replace(/\//g, '-')}` },
-      props: { title: entry.data.title },
-    }))
-  );
 
   const homePaths = Object.keys(languages).map((lang) => {
     const t = useTranslations(lang as keyof typeof languages);
@@ -62,7 +53,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   });
 
-  return [...homePaths, ...blogPaths, ...collectionPaths, ...apiPaths];
+  return [...homePaths, ...blogPaths, ...collectionPaths];
 };
 
 export const GET: APIRoute = async ({ props }) => {
