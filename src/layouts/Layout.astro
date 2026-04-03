@@ -27,10 +27,11 @@ const pageTitle = title
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site || Astro.url.origin);
 
 const pathname = Astro.url.pathname.replace(/\/$/, '');
-const slug = pathname.split('/').filter(Boolean).slice(1).join('/');
+const segments = pathname.split('/').filter(Boolean);
+const ogSlug = segments.join('-');
 const imageUrl = image
   ? new URL(image, Astro.site || Astro.url.origin)
-  : new URL(`/og/${slug || 'home'}`, Astro.site || Astro.url.origin);
+  : new URL(`/og/${ogSlug || `home-en`}`, Astro.site || Astro.url.origin);
 
 const isNetlify = import.meta.env.DEPLOY_PRIME_URL;
 

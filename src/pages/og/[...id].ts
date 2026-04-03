@@ -4,6 +4,8 @@ import satori from 'satori';
 import sharp from 'sharp';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
+import { languages } from '@/i18n/locales';
+import { useTranslations } from '@/i18n/utils';
 
 const COLORS = {
   text: '#fafafa',
@@ -33,22 +35,34 @@ export const getStaticPaths: GetStaticPaths = async () => {
     getCollection('pages'),
   ]);
 
-  const blogPaths = blog.map((post) => ({
-    params: { id: `blog/${post.id.split('/').pop()!}` },
-    props: { title: post.data.title, tags: post.data.tags },
-  }));
+  const blogPaths = Object.keys(languages).flatMap((lang) =>
+    blog.map((post) => ({
+      params: { id: `${lang}-blog-${post.id.split('/').pop()!}` },
+      props: { title: post.data.title, tags: post.data.tags },
+    }))
+  );
 
-  const collectionPaths = [...docs, ...api, ...pages].map((entry) => ({
-    params: { id: entry.id },
+  const collectionPaths = [...docs, ...pages].map((entry) => ({
+    params: { id: entry.id.replace(/\//g, '-') },
     props: { title: entry.data.title },
   }));
 
-  const homePath = {
-    params: { id: 'home' },
-    props: { title: 'Fast, unopinionated, minimalist web framework for Node.js' },
-  };
+  const apiPaths = Object.keys(languages).flatMap((lang) =>
+    api.map((entry) => ({
+      params: { id: `${lang}-${entry.id.replace(/\//g, '-')}` },
+      props: { title: entry.data.title },
+    }))
+  );
 
-  return [homePath, ...blogPaths, ...collectionPaths];
+  const homePaths = Object.keys(languages).map((lang) => {
+    const t = useTranslations(lang as keyof typeof languages);
+    return {
+      params: { id: `home-${lang}` },
+      props: { title: t('hero.tagline') },
+    };
+  });
+
+  return [...homePaths, ...blogPaths, ...collectionPaths, ...apiPaths];
 };
 
 export const GET: APIRoute = async ({ props }) => {

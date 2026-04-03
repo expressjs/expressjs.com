@@ -35,7 +35,7 @@ const { Content, headings } = await render(post);
 
 const { title, description, tags, authors, cover: customCover } = post.data;
 const filename = post.id.split('/').pop() ?? post.id;
-const cover = customCover || `/og/blog/${filename}`;
+const cover = customCover || `/og/${Astro.params.lang}-blog-${filename}`;
 const authorsList = (authors ?? []).map((a) => ({
   src: a.github ? `https://github.com/${a.github}.png` : '',
   name: a.name ?? '',

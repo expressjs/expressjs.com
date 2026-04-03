@@ -57,7 +57,7 @@ function getPostProps(post: CollectionEntry<'blog'>) {
     href: `/${lang}/blog/${post.id.split('/').pop()}`,
     labels: getLabels(post.data.tags),
     title: post.data.title,
-    coverSrc: post.data.cover || `/og/blog/${post.id.split('/').pop()}`,
+    coverSrc: post.data.cover || `/og/${lang}-blog-${post.id.split('/').pop()}`,
     authors: (post.data.authors ?? []).map((a) => ({
       src: a.github ? `https://github.com/${a.github}.png` : '',
       name: a.name ?? '',
