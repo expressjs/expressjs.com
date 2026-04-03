@@ -6,16 +6,22 @@ export function getLangFromUrl(url: URL) {
   return defaultLang;
 }
 
-export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof (typeof ui)[typeof defaultLang] | string): string {
-    return (
-      ui[lang][key as keyof (typeof ui)[typeof defaultLang]] ||
-      ui[defaultLang][key as keyof (typeof ui)[typeof defaultLang]] ||
-      key
-    );
-  };
+function getNestedValue(obj: (typeof ui)[keyof typeof ui], path: string): string | undefined {
+  const value = path.split('.').reduce((acc: unknown, part) => {
+    if (acc && typeof acc === 'object' && part in acc) {
+      return (acc as Record<string, unknown>)[part];
+    }
+    return undefined;
+  }, obj);
+
+  return typeof value === 'string' ? value : undefined;
 }
 
+export function useTranslations(lang: keyof typeof ui) {
+  return function t(key: string): string {
+    return getNestedValue(ui[lang], key) ?? getNestedValue(ui[defaultLang], key) ?? key;
+  };
+}
 /**
  * Get all supported language codes
  */

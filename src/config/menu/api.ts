@@ -2,513 +2,299 @@ import type { Menu } from '../types';
 
 export const apiMenu: Menu = {
   sections: [
+    //API root
     {
       items: [
         {
           href: '/api',
-          label: 'menu.overview',
-          ariaLabel: 'menu.overview',
+          label: 'menu.main.api',
+          ariaLabel: 'menu.aria.api',
         },
       ],
     },
+    //express()
     {
-      title: 'express()',
+      title: 'menu.sections.express',
       omitFrom: ['3x'],
       items: [
         {
           href: '/api/express/',
-          label: 'menu.overview',
-          ariaLabel: 'menu.expressOverviewAria',
+          label: 'menu.sections.express',
+          ariaLabel: 'menu.aria.api',
         },
         {
-          label: 'menu.methods',
-          ariaLabel: 'menu.expressMethodsAria',
+          label: 'menu.items.methods',
+          ariaLabel: 'menu.aria.api',
           submenu: {
             items: [
-              {
-                href: '/api/express/expressjson',
-                label: 'express.json()',
-                ariaLabel: 'express.json property',
-              },
-              {
-                href: '/api/express/expressraw',
-                label: 'express.raw()',
-                ariaLabel: 'express.raw property',
-              },
-              {
-                href: '/api/express/expressrouter',
-                label: 'express.Router()',
-                ariaLabel: 'express.Router property',
-              },
-              {
-                href: '/api/express/expressstatic',
-                label: 'express.static()',
-                ariaLabel: 'express.static property',
-              },
-              {
-                href: '/api/express/expresstext',
-                label: 'express.text()',
-                ariaLabel: 'express.text property',
-              },
-              {
-                href: '/api/express/expressurlencoded',
-                label: 'express.urlencoded()',
-                ariaLabel: 'express.urlencoded property',
-              },
+              { href: '/api/express/expressjson', label: 'express.json()' },
+              { href: '/api/express/expressraw', label: 'express.raw()' },
+              { href: '/api/express/expressrouter', label: 'express.Router()' },
+              { href: '/api/express/expressstatic', label: 'express.static()' },
+              { href: '/api/express/expresstext', label: 'express.text()' },
+              { href: '/api/express/expressurlencoded', label: 'express.urlencoded()' },
             ],
           },
         },
       ],
     },
+    //application
     {
-      title: 'menu.middleware',
-      omitFrom: ['4x', '5x'],
-      items: [
-        {
-          href: '/api/middleware',
-          label: 'menu.overview',
-          ariaLabel: 'menu.middlewareOverviewAria',
-        },
-        {
-          label: 'menu.types',
-          ariaLabel: 'menu.middlewareTypesAria',
-          submenu: {
-            items: [
-              {
-                href: '/api/middleware/basicauth',
-                label: 'basicAuth()',
-                ariaLabel: 'basicAuth() middleware',
-              },
-              {
-                href: '/api/middleware/bodyparser',
-                label: 'bodyParser()',
-                ariaLabel: 'bodyParser() middleware',
-              },
-              {
-                href: '/api/middleware/compress',
-                label: 'compress()',
-                ariaLabel: 'compress() middleware',
-              },
-              {
-                href: '/api/middleware/cookieparser',
-                label: 'cookieParser()',
-                ariaLabel: 'cookieParser() middleware',
-              },
-              {
-                href: '/api/middleware/cookiesession',
-                label: 'cookieSession()',
-                ariaLabel: 'cookieSession() middleware',
-              },
-              {
-                href: '/api/middleware/csrf',
-                label: 'csrf()',
-                ariaLabel: 'csrf() middleware',
-              },
-              {
-                href: '/api/middleware/directory',
-                label: 'directory()',
-                ariaLabel: 'directory() middleware',
-              },
-            ],
-          },
-        },
-      ],
-    },
-    {
-      title: 'menu.application',
+      title: 'menu.sections.application',
       items: [
         {
           href: `/api/application`,
-          label: 'menu.overview',
-          ariaLabel: 'menu.applicationOverviewAria',
+          label: 'menu.sections.application',
+          ariaLabel: 'menu.aria.application',
         },
         {
-          label: 'menu.properties',
-          ariaLabel: 'menu.applicationPropertiesAria',
+          label: 'menu.items.properties',
+          ariaLabel: 'menu.aria.application',
           submenu: {
             items: [
+              { href: `/api/application/app-locals`, label: 'app.locals' },
               {
-                href: `/api/application/app-locals`,
-                label: 'app.locals',
-                ariaLabel: 'app.locals property',
+                href: '/api/application/app-mountpath',
+                label: 'app.mountpath',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/application/app-router',
+                label: 'app.router',
+                omitFrom: ['3x', '4x'],
               },
               {
                 href: '/api/application/app-routes',
                 label: 'app.routes',
-                ariaLabel: 'app.routes property',
                 omitFrom: ['4x', '5x'],
               },
               {
-                href: `/api/application/app-mountpath`,
-                label: 'app.mountpath',
-                ariaLabel: 'app.mountpath property',
-                omitFrom: ['3x'],
+                href: '/api/application/app-settings',
+                label: 'app.settings',
+                omitFrom: ['4x', '5x'],
               },
             ],
           },
         },
         {
-          label: 'menu.events',
-          ariaLabel: 'menu.applicationEventAria',
+          label: 'menu.items.events',
+          ariaLabel: 'menu.aria.application',
           omitFrom: ['3x'],
           submenu: {
-            items: [
-              {
-                href: `/api/application/app-onmount`,
-                label: "app.on('mount')",
-                ariaLabel: 'app on mount event',
-              },
-            ],
+            items: [{ href: `/api/application/app-onmount`, label: "app.on('mount')" }],
           },
         },
         {
-          label: 'menu.methods',
-          ariaLabel: 'menu.applicationMethodsAria',
+          label: 'menu.items.methods',
+          ariaLabel: 'menu.aria.application',
           submenu: {
             items: [
+              { href: `/api/application/app-all`, label: 'app.all()' },
               {
-                href: `/api/application/app-all`,
-                label: 'app.all()',
-                ariaLabel: 'app.all method',
+                href: '/api/application/app-configure',
+                label: 'app.configure()',
+                omitFrom: ['4x', '5x'],
               },
               {
                 href: `/api/application/app-delete-method`,
                 label: 'app.delete()',
-                ariaLabel: 'app.delete method',
                 omitFrom: ['3x'],
               },
-              {
-                href: '/api/application/app-disable',
-                label: 'app.disable()',
-                ariaLabel: 'app.disable method',
-              },
-              {
-                href: '/api/application/app-disabled',
-                label: 'app.disabled()',
-                ariaLabel: 'app.disabled property',
-              },
-              {
-                href: '/api/application/app-configure',
-                label: 'app.configure()',
-                ariaLabel: 'app.configure method',
-                omitFrom: ['4x', '5x'],
-              },
-              {
-                href: '/api/application/app-enable',
-                label: 'app.enable()',
-                ariaLabel: 'app.enable method',
-              },
-              {
-                href: '/api/application/app-enabled',
-                label: 'app.enabled()',
-                ariaLabel: 'app.enabled property',
-              },
-              {
-                href: '/api/application/app-engine',
-                label: 'app.engine()',
-                ariaLabel: 'app.engine method',
-              },
-              {
-                href: '/api/application/app-get',
-                label: 'app.get(name)',
-                ariaLabel: 'app.get method',
-              },
-
+              { href: '/api/application/app-disable', label: 'app.disable()' },
+              { href: '/api/application/app-disabled', label: 'app.disabled()' },
+              { href: '/api/application/app-enable', label: 'app.enable()' },
+              { href: '/api/application/app-enabled', label: 'app.enabled()' },
+              { href: '/api/application/app-engine', label: 'app.engine()' },
+              { href: '/api/application/app-get', label: 'app.get(name)' },
               {
                 href: '/api/application/app-get-method',
                 label: 'app.get(path)',
-                ariaLabel: 'app.get method',
                 omitFrom: ['3x'],
               },
-              {
-                href: '/api/application/app-listen',
-                label: 'app.listen()',
-                ariaLabel: 'app.listen method',
-              },
+              { href: '/api/application/app-listen', label: 'app.listen()' },
               {
                 href: '/api/application/app-method',
-                label: 'app.method()',
-                ariaLabel: 'app.METHOD method',
+                label: 'app.METHOD()',
                 omitFrom: ['3x'],
               },
-              {
-                href: '/api/application/app-param',
-                label: 'app.param()',
-                ariaLabel: 'app.param method',
-              },
-              {
-                href: '/api/application/app-verb',
-                label: 'app.verb()',
-                ariaLabel: 'app.verb methods',
-                omitFrom: ['4x', '5x'],
-              },
+              { href: '/api/application/app-param', label: 'app.param()' },
               {
                 href: '/api/application/app-path',
                 label: 'app.path()',
-                ariaLabel: 'app.path method',
                 omitFrom: ['3x'],
               },
               {
                 href: '/api/application/app-post-method',
                 label: 'app.post()',
-                ariaLabel: 'app.post method',
                 omitFrom: ['3x'],
               },
               {
                 href: '/api/application/app-put-method',
                 label: 'app.put()',
-                ariaLabel: 'app.put method',
                 omitFrom: ['3x'],
               },
+              { href: '/api/application/app-render', label: 'app.render()' },
+              { href: '/api/application/app-route', label: 'app.route()', omitFrom: ['3x'] },
+              { href: '/api/application/app-set', label: 'app.set()' },
+              { href: '/api/application/app-use', label: 'app.use()' },
               {
-                href: '/api/application/app-render',
-                label: 'app.render()',
-                ariaLabel: 'app.render method',
-              },
-              {
-                href: '/api/application/app-route',
-                label: 'app.route()',
-                ariaLabel: 'app.route method',
-                omitFrom: ['3x'],
-              },
-              {
-                href: '/api/application/app-set',
-                label: 'app.set()',
-                ariaLabel: 'app.set method',
-              },
-              {
-                href: '/api/application/app-use',
-                label: 'app.use()',
-                ariaLabel: 'app.use method',
+                href: '/api/application/app-verb',
+                label: 'app.VERB()',
+                omitFrom: ['4x', '5x'],
               },
             ],
           },
         },
       ],
     },
+    //middleware
     {
-      title: 'menu.request',
+      title: 'menu.sections.middleware',
+      omitFrom: ['4x', '5x'],
+      items: [
+        {
+          href: '/api/middleware/',
+          label: 'menu.sections.middleware',
+          ariaLabel: 'menu.aria.middleware',
+        },
+        {
+          label: 'menu.items.types',
+          ariaLabel: 'menu.aria.middleware',
+          submenu: {
+            items: [
+              { href: '/api/middleware/basicauth', label: 'basicAuth()' },
+              { href: '/api/middleware/bodyparser', label: 'bodyParser()' },
+              { href: '/api/middleware/compress', label: 'compress()' },
+              { href: '/api/middleware/cookieparser', label: 'cookieParser()' },
+              { href: '/api/middleware/cookiesession', label: 'cookieSession()' },
+              { href: '/api/middleware/csrf', label: 'csrf()' },
+              { href: '/api/middleware/directory', label: 'directory()' },
+            ],
+          },
+        },
+      ],
+    },
+    //request
+    {
+      title: 'menu.sections.request',
       items: [
         {
           href: `/api/request`,
-          label: 'menu.overview',
-          ariaLabel: 'menu.requestOverviewAria',
+          label: 'menu.sections.request',
+          ariaLabel: 'menu.aria.request',
         },
         {
-          label: 'menu.properties',
-          ariaLabel: 'menu.requestPropertiesAria',
+          label: 'menu.items.properties',
+          ariaLabel: 'menu.aria.request',
           submenu: {
             items: [
               {
-                href: `/api/request/req-accepted`,
+                href: '/api/request/req-accepted',
                 label: 'req.accepted',
-                ariaLabel: 'req.accepted property',
                 omitFrom: ['4x', '5x'],
               },
               {
-                href: `/api/request/req-acceptedcharsets`,
+                href: '/api/request/req-acceptedcharsets',
                 label: 'req.acceptedCharsets',
-                ariaLabel: 'req.acceptedCharsets property',
                 omitFrom: ['4x', '5x'],
               },
               {
-                href: `/api/request/req-acceptedlanguages`,
+                href: '/api/request/req-acceptedlanguages',
                 label: 'req.acceptedLanguages',
-                ariaLabel: 'req.acceptedLanguages property',
                 omitFrom: ['4x', '5x'],
               },
               {
-                href: `/api/request/req-app`,
+                href: '/api/request/req-app',
                 label: 'req.app',
-                ariaLabel: 'req.app property',
                 omitFrom: ['3x'],
               },
               {
-                href: `/api/request/req-base-url`,
+                href: '/api/request/req-base-url',
                 label: 'req.baseUrl',
-                ariaLabel: 'req.baseUrl property',
                 omitFrom: ['3x'],
               },
+              { href: `/api/request/req-body`, label: 'req.body' },
+              { href: `/api/request/req-cookies`, label: 'req.cookies' },
               {
-                href: '/api/request/req-body',
-                label: 'req.body',
-                ariaLabel: 'req.body property',
-              },
-              {
-                href: `/api/request/req-cookies`,
-                label: 'req.cookies',
-                ariaLabel: 'req.cookies property',
-              },
-              {
-                href: `/api/request/req-files`,
+                href: '/api/request/req-files',
                 label: 'req.files',
-                ariaLabel: 'req.files property',
-                omitFrom: ['5x', '4x'],
+                omitFrom: ['4x', '5x'],
               },
-              {
-                href: '/api/request/req-fresh',
-                label: 'req.fresh',
-                ariaLabel: 'req.fresh property',
-              },
+              { href: '/api/request/req-fresh', label: 'req.fresh' },
               {
                 href: '/api/request/req-host',
                 label: 'req.host',
-                ariaLabel: 'req.host property',
                 omitFrom: ['4x'],
               },
               {
                 href: '/api/request/req-hostname',
                 label: 'req.hostname',
-                ariaLabel: 'req.hostname property',
                 omitFrom: ['3x'],
               },
-              {
-                href: '/api/request/req-ip',
-                label: 'req.ip',
-                ariaLabel: 'req.ip property',
-              },
-              {
-                href: '/api/request/req-ips',
-                label: 'req.ips',
-                ariaLabel: 'req.ips property',
-              },
-              {
-                href: '/api/request/req-method',
-                label: 'req.method',
-                ariaLabel: 'req.method property',
-                omitFrom: ['3x'],
-              },
-              {
-                href: '/api/request/req-originalurl',
-                label: 'req.originalUrl',
-                ariaLabel: 'req.originalUrl property',
-              },
-              {
-                href: '/api/request/req-params',
-                label: 'req.params',
-                ariaLabel: 'req.params property',
-              },
-              {
-                href: '/api/request/req-path',
-                label: 'req.path',
-                ariaLabel: 'req.path property',
-              },
-              {
-                href: '/api/request/req-protocol',
-                label: 'req.protocol',
-                ariaLabel: 'req.protocol property',
-              },
-              {
-                href: '/api/request/req-query',
-                label: 'req.query',
-                ariaLabel: 'req.query property',
-              },
-              {
-                href: '/api/request/req-res',
-                label: 'req.res',
-                ariaLabel: 'req.res property',
-              },
-              {
-                href: '/api/request/req-route',
-                label: 'req.route',
-                ariaLabel: 'req.route property',
-              },
-              {
-                href: '/api/request/req-secure',
-                label: 'req.secure',
-                ariaLabel: 'req.secure property',
-              },
-
-              {
-                href: '/api/request/req-signedcookies',
-                label: 'req.signedCookies',
-                ariaLabel: 'req.signedCookies property',
-              },
-              {
-                href: '/api/request/req-stale',
-                label: 'req.stale',
-                ariaLabel: 'req.stale property',
-              },
-              {
-                href: '/api/request/req-subdomains',
-                label: 'req.subdomains',
-                ariaLabel: 'req.subdomains property',
-              },
-              {
-                href: '/api/request/req-xhr',
-                label: 'req.xhr',
-                ariaLabel: 'req.xhr property',
-              },
+              { href: `/api/request/req-ip`, label: 'req.ip' },
+              { href: '/api/request/req-ips', label: 'req.ips' },
+              { href: `/api/request/req-method`, label: 'req.method', omitFrom: ['3x'] },
+              { href: '/api/request/req-originalurl', label: 'req.originalUrl' },
+              { href: '/api/request/req-params', label: 'req.params' },
+              { href: '/api/request/req-path', label: 'req.path' },
+              { href: '/api/request/req-protocol', label: 'req.protocol' },
+              { href: `/api/request/req-query`, label: 'req.query' },
+              { href: '/api/request/req-res', label: 'req.res' },
+              { href: '/api/request/req-route', label: 'req.route' },
+              { href: '/api/request/req-secure', label: 'req.secure' },
+              { href: '/api/request/req-signedcookies', label: 'req.signedCookies' },
+              { href: '/api/request/req-stale', label: 'req.stale' },
+              { href: '/api/request/req-subdomains', label: 'req.subdomains' },
+              { href: '/api/request/req-xhr', label: 'req.xhr' },
             ],
           },
         },
         {
-          label: 'menu.methods',
-          ariaLabel: 'menu.requestMethodsAria',
+          label: 'menu.items.methods',
+          ariaLabel: 'menu.aria.request',
           submenu: {
             items: [
+              { href: `/api/request/req-accepts`, label: 'req.accepts()' },
               {
-                href: `/api/request/req-accepts`,
-                label: 'req.accepts()',
-                ariaLabel: 'req.accepts method',
-              },
-              {
-                href: `/api/request/req-acceptscharsets`,
-                label: 'req.acceptsCharsets()',
-                ariaLabel: 'req.acceptsCharsets method',
-                omitFrom: ['3x'],
-              },
-              {
-                href: `/api/request/req-acceptsencodings`,
-                label: 'req.acceptsEncodings()',
-                ariaLabel: 'req.acceptsEncodings method',
-                omitFrom: ['3x'],
-              },
-              {
-                href: `/api/request/req-acceptslanguages`,
-                label: 'req.acceptsLanguages()',
-                ariaLabel: 'req.acceptsLanguages method',
-                omitFrom: ['3x'],
-              },
-              {
-                href: `/api/request/req-acceptscharset`,
+                href: '/api/request/req-acceptscharset',
                 label: 'req.acceptsCharset()',
-                ariaLabel: 'req.acceptsCharset method',
                 omitFrom: ['4x', '5x'],
               },
               {
-                href: `/api/request/req-acceptslanguage`,
-                label: 'req.acceptsLanguage()',
-                ariaLabel: 'req.acceptsLanguage method',
-                omitFrom: ['4x', '5x'],
-              },
-              {
-                href: '/api/request/req-get',
-                label: 'req.get()',
-                ariaLabel: 'req.get() method',
+                href: '/api/request/req-acceptscharsets',
+                label: 'req.acceptsCharsets()',
                 omitFrom: ['3x'],
               },
+              {
+                href: '/api/request/req-acceptsencodings',
+                label: 'req.acceptsEncodings()',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/request/req-acceptslanguage',
+                label: 'req.acceptsLanguage()',
+                omitFrom: ['4x', '5x'],
+              },
+              {
+                href: '/api/request/req-acceptslanguages',
+                label: 'req.acceptsLanguages()',
+                omitFrom: ['3x'],
+              },
+              { href: '/api/request/req-get', label: 'req.get()', omitFrom: ['3x'] },
               {
                 href: '/api/request/req-header',
                 label: 'req.header()',
-                ariaLabel: 'req.header() method',
                 omitFrom: ['4x', '5x'],
               },
-              {
-                href: '/api/request/req-is',
-                label: 'req.is()',
-                ariaLabel: 'req.is() method',
-              },
+              { href: '/api/request/req-is', label: 'req.is()' },
               {
                 href: '/api/request/req-param',
                 label: 'req.param()',
-                ariaLabel: 'req.param() method',
                 omitFrom: ['5x'],
               },
               {
                 href: '/api/request/req-range',
                 label: 'req.range()',
-                ariaLabel: 'req.range() method',
                 omitFrom: ['3x'],
               },
             ],
@@ -516,169 +302,89 @@ export const apiMenu: Menu = {
         },
       ],
     },
+    //response
     {
-      title: 'menu.response',
+      title: 'menu.sections.response',
       items: [
         {
           href: `/api/response`,
-          label: 'menu.overview',
-          ariaLabel: 'menu.responseOverviewAria',
+          label: 'menu.sections.response',
+          ariaLabel: 'menu.aria.response',
         },
         {
-          label: 'menu.properties',
-          ariaLabel: 'menu.responsePropertiesAria',
+          label: 'menu.items.properties',
+          ariaLabel: 'menu.aria.response',
           submenu: {
             items: [
               {
-                href: `/api/response/res-charset`,
+                href: '/api/response/res-app',
+                label: 'res.app',
+                omitFrom: ['3x'],
+              },
+              {
+                href: '/api/response/res-charset',
                 label: 'res.charset',
-                ariaLabel: 'res.charset property',
                 omitFrom: ['4x', '5x'],
               },
               {
-                href: `/api/response/res-app`,
-                label: 'res.app',
-                ariaLabel: 'res.app property',
-                omitFrom: ['3x'],
-              },
-              {
-                href: `/api/response/res-headerssent`,
+                href: '/api/response/res-headerssent',
                 label: 'res.headersSent',
-                ariaLabel: 'res.headersSent property',
                 omitFrom: ['3x'],
               },
-              {
-                href: `/api/response/res-locals`,
-                label: 'res.locals',
-                ariaLabel: 'res.locals property',
-              },
-              {
-                href: '/api/response/res-req',
-                label: 'res.req',
-                ariaLabel: 'res.req property',
-              },
+              { href: '/api/response/res-locals', label: 'res.locals' },
+              { href: '/api/response/res-req', label: 'res.req' },
             ],
           },
         },
         {
-          label: 'menu.methods',
-          ariaLabel: 'menu.responseMethodsAria',
+          label: 'menu.items.methods',
+          ariaLabel: 'menu.aria.response',
           submenu: {
             items: [
               {
-                href: `/api/response/res-append`,
+                href: '/api/response/res-append',
                 label: 'res.append()',
-                ariaLabel: 'res.append method',
                 omitFrom: ['3x'],
               },
+              { href: '/api/response/res-attachment', label: 'res.attachment()' },
+              { href: '/api/response/res-clearcookie', label: 'res.clearCookie()' },
+              { href: '/api/response/res-cookie', label: 'res.cookie()' },
+              { href: '/api/response/res-download', label: 'res.download()' },
               {
-                href: `/api/response/res-attachment`,
-                label: 'res.attachment()',
-                ariaLabel: 'res.attachment method',
-              },
-              {
-                href: `/api/response/res-clearcookie`,
-                label: 'res.clearCookie()',
-                ariaLabel: 'res.clearCookie method',
-              },
-              {
-                href: `/api/response/res-cookie`,
-                label: 'res.cookie()',
-                ariaLabel: 'res.cookie method',
-              },
-              {
-                href: `/api/response/res-download`,
-                label: 'res.download()',
-                ariaLabel: 'res.download method',
-              },
-              {
-                href: `/api/response/res-end`,
+                href: '/api/response/res-end',
                 label: 'res.end()',
-                ariaLabel: 'res.end method',
                 omitFrom: ['3x'],
               },
+              { href: `/api/response/res-format`, label: 'res.format()' },
+              { href: '/api/response/res-get', label: 'res.get()' },
+              { href: `/api/response/res-json`, label: 'res.json()' },
+              { href: '/api/response/res-jsonp', label: 'res.jsonp()' },
+              { href: '/api/response/res-links', label: 'res.links()' },
+              { href: '/api/response/res-location', label: 'res.location()' },
+              { href: '/api/response/res-redirect', label: 'res.redirect()' },
+              { href: `/api/response/res-render`, label: 'res.render()' },
+              { href: `/api/response/res-send`, label: 'res.send()' },
               {
-                href: `/api/response/res-format`,
-                label: 'res.format()',
-                ariaLabel: 'res.format method',
-              },
-              {
-                href: `/api/response/res-get`,
-                label: 'res.get()',
-                ariaLabel: 'res.get method',
-              },
-              {
-                href: `/api/response/res-json`,
-                label: 'res.json()',
-                ariaLabel: 'res.json method',
-              },
-              {
-                href: `/api/response/res-jsonp`,
-                label: 'res.jsonp()',
-                ariaLabel: 'res.jsonp method',
-              },
-              {
-                href: '/api/response/res-links',
-                label: 'res.links()',
-                ariaLabel: 'res.links method',
-              },
-              {
-                href: `/api/response/res-location`,
-                label: 'res.location()',
-                ariaLabel: 'res.location method',
-              },
-              {
-                href: `/api/response/res-redirect`,
-                label: 'res.redirect()',
-                ariaLabel: 'res.redirect method',
-              },
-              {
-                href: `/api/response/res-render`,
-                label: 'res.render()',
-                ariaLabel: 'res.render method',
-              },
-              {
-                href: `/api/response/res-send`,
-                label: 'res.send()',
-                ariaLabel: 'res.send method',
-              },
-              {
-                href: `/api/response/res-sendfile`,
+                href: '/api/response/res-sendfile',
                 label: 'res.sendfile()',
-                ariaLabel: 'res.sendfile method',
                 omitFrom: ['4x', '5x'],
               },
               {
-                href: `/api/response/res-sendfile`,
+                href: '/api/response/res-sendfile',
                 label: 'res.sendFile()',
-                ariaLabel: 'res.sendFile method',
                 omitFrom: ['3x'],
               },
               {
-                href: `/api/response/res-sendstatus`,
+                href: '/api/response/res-sendstatus',
                 label: 'res.sendStatus()',
-                ariaLabel: 'res.sendStatus method',
                 omitFrom: ['3x'],
               },
+              { href: '/api/response/res-set', label: 'res.set()' },
+              { href: `/api/response/res-status`, label: 'res.status()' },
+              { href: '/api/response/res-type', label: 'res.type()' },
               {
-                href: `/api/response/res-set`,
-                label: 'res.set()',
-                ariaLabel: 'res.set method',
-              },
-              {
-                href: `/api/response/res-status`,
-                label: 'res.status()',
-                ariaLabel: 'res.status method',
-              },
-              {
-                href: `/api/response/res-type`,
-                label: 'res.type()',
-                ariaLabel: 'res.type method',
-              },
-              {
-                href: `/api/response/res-vary`,
+                href: '/api/response/res-vary',
                 label: 'res.vary()',
-                ariaLabel: 'res.vary method',
                 omitFrom: ['3x'],
               },
             ],
@@ -686,50 +392,26 @@ export const apiMenu: Menu = {
         },
       ],
     },
+    //router
     {
-      title: 'menu.router',
+      title: 'menu.sections.router',
       omitFrom: ['3x'],
       items: [
         {
           href: `/api/router`,
-          label: 'menu.overview',
-          ariaLabel: 'menu.routerOverviewAria',
+          label: 'menu.sections.router',
+          ariaLabel: 'menu.aria.router',
         },
         {
-          label: 'menu.methods',
-          ariaLabel: 'menu.routerMethodsAria',
+          label: 'menu.items.methods',
+          ariaLabel: 'menu.aria.router',
           submenu: {
             items: [
-              {
-                href: `/api/router/router-all`,
-                label: 'router.all()',
-                ariaLabel: 'router.all method',
-              },
-              {
-                href: `/api/router/router-method`,
-                label: 'router.METHOD()',
-                ariaLabel: 'router.METHOD method',
-              },
-              {
-                href: `/api/router/router-param`,
-                label: 'router.param()',
-                ariaLabel: 'router.param method',
-              },
-              {
-                href: `/api/router/router-route`,
-                label: 'router.route()',
-                ariaLabel: 'router.route method',
-              },
-              {
-                href: `/api/router/router-router`,
-                label: 'router.Router()',
-                ariaLabel: 'router.Router method',
-              },
-              {
-                href: `/api/router/router-use`,
-                label: 'router.use()',
-                ariaLabel: 'router.use method',
-              },
+              { href: `/api/router/router-all`, label: 'router.all()' },
+              { href: `/api/router/router-method`, label: 'router.METHOD()' },
+              { href: '/api/router/router-param', label: 'router.param()' },
+              { href: '/api/router/router-route', label: 'router.route()' },
+              { href: `/api/router/router-use`, label: 'router.use()' },
             ],
           },
         },

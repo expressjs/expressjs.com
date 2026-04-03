@@ -4,9 +4,10 @@ export const middlewareMenu: Menu = {
   items: [
     {
       href: `/overview`,
-      label: 'menu.overview',
-      ariaLabel: 'menu.middlewareOverviewAria',
+      label: 'menu.items.overview',
+      ariaLabel: 'menu.aria.middleware',
     },
+    // these are NOT translation keys keep raw
     {
       href: `/body-parser`,
       label: 'body-parser',

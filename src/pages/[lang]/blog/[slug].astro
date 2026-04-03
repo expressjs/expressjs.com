@@ -63,16 +63,7 @@ const relatedPosts = [...tagged, ...untagged].slice(0, 3);
 
 <Layout title={title} description={description} authors={authors}>
   <Container>
-    <PageTopbar
-      breadcrumbs={[
-        {
-          href: `/${Astro.params.lang}/`,
-          ariaLabel: t('nav.home'),
-          icon: 'fluent:home-empty-20-regular',
-        },
-        { label: t('menu.blog'), href: `/${Astro.params.lang}/blog` },
-      ]}
-    >
+    <PageTopbar breadcrumbs={[{ label: t('menu.main.blog'), href: `/${Astro.params.lang}/blog` }]}>
       <Button
         as="a"
         variant="secondary"
