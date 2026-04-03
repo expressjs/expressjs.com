@@ -24,8 +24,11 @@ const pageTitle = title
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site || Astro.url.origin);
 
-// TODO: change this when og images is generated per page
-const imageUrl = new URL('/hero-poster.jpg', Astro.site || Astro.url.origin);
+const pathname = Astro.url.pathname.replace(/\/$/, '');
+const slug = pathname.split('/').filter(Boolean).slice(1).join('/');
+const imageUrl = slug
+  ? new URL(`/og/${slug}`, Astro.site || Astro.url.origin)
+  : new URL('/hero-poster.jpg', Astro.site || Astro.url.origin);
 
 const isNetlify = import.meta.env.DEPLOY_PRIME_URL;
 
