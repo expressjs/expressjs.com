@@ -20,7 +20,7 @@ If you have an idea for a blog post, follow these steps to propose it and potent
 
 1.  **Create a new file**
 
-    Create a new file in the `_posts` directory named using following the format: `YYYY-MM-DD-title.md`.
+    Create a new file in the `src/content/blog` directory named using following the format: `YYYY-MM-DD-title.md`.
 
 1.  **Add the required front matter**
 
@@ -34,14 +34,50 @@ If you have an idea for a blog post, follow these steps to propose it and potent
     authors:
       - name: <your-name>
         github: <github-username>
+    cover: <optional-cover-image-path>
     ---
     ```
 
     The `github` property of an author is optional. Including your username only (not your full profile URL) will ensure that your blog post links out to it.
 
+    The `cover` property is optional. If omitted, an Open Graph image will be automatically generated from the post title. If you want a custom cover image, place it in the `public` directory and reference its path (e.g. `/images/my-cover.jpg`).
+
 1.  **Add your content**
 
     Finally, start writing your content below the front matter. Use standard markdown formatting.
+
+    **Using components (MDX)**
+
+    If you need to use interactive components like alerts, callouts, or other UI elements inside your post, rename your file from `.md` to `.mdx`. MDX lets you import and use Astro components directly in your markdown.
+
+    For example, to add an alert:
+
+    ```mdx
+    ---
+    title: My blog post
+    description: A post with alerts
+    tags: ['security']
+    authors:
+      - name: John Doe
+        github: johndoe
+    ---
+
+    import Alert from '@components/primitives/Alert/Alert.astro';
+
+    This is regular markdown content.
+
+    <Alert type="warning">
+      We strongly recommend upgrading to the latest version as soon as possible.
+    </Alert>
+
+    <Alert type="info">This feature is available starting from Express 5.0.</Alert>
+
+    <Alert type="alert">
+      This is a breaking change. Please review the migration guide before upgrading.
+    </Alert>
+    ```
+
+    The available alert types are `info`, `warning`, and `alert`.
 
 1.  **Open a pull request (PR)**
 
