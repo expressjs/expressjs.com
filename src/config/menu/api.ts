@@ -407,11 +407,12 @@ export const apiMenu: Menu = {
           ariaLabel: 'menu.aria.router',
           submenu: {
             items: [
-              { href: `/api/router/router-all`, label: 'router.all()' },
-              { href: `/api/router/router-method`, label: 'router.METHOD()' },
-              { href: '/api/router/router-param', label: 'router.param()' },
-              { href: '/api/router/router-route', label: 'router.route()' },
-              { href: `/api/router/router-use`, label: 'router.use()' },
+              { href: `/api/router#routeroptions`, label: 'Router()' },
+              { href: `/api/router#routerallpath-callback--callback`, label: 'router.all()' },
+              { href: `/api/router#routermethodpath-callback--callback`, label: 'router.METHOD()' },
+              { href: '/api/router#routerparamname-callback', label: 'router.param()' },
+              { href: '/api/router#routerroutepath', label: 'router.route()' },
+              { href: `/api/router#routerusepath-function--function`, label: 'router.use()' },
             ],
           },
         },

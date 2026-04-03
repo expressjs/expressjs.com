@@ -1,5 +1,0 @@
----
-title: Router
----
-
-# Router([options])
