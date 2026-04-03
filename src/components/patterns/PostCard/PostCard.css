@@ -13,10 +13,6 @@
     &:hover {
       border: var(--color-focus-ring) solid var(--border-width-1);
     }
-
-    @media (--md-up) {
-      min-height: var(--size-100);
-    }
   }
 
   .post-card__labels {
@@ -47,8 +43,9 @@
   .post-card__cover {
     margin-bottom: var(--space-3);
     display: block;
-    height: var(--size-40);
     width: 100%;
+    aspect-ratio: 1200 / 630;
     object-fit: cover;
+    border-radius: var(--radius-base);
   }
 }

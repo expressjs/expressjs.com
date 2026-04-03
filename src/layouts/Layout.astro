@@ -10,12 +10,14 @@ interface Props {
   title?: string;
   description?: string;
   authors?: { name: string; github?: string }[];
+  image?: string;
 }
 
 const {
   title,
   description = 'Fast, unopinionated, minimalist web framework for Node.js',
   authors,
+  image,
 } = Astro.props;
 
 const pageTitle = title
@@ -26,9 +28,9 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
 
 const pathname = Astro.url.pathname.replace(/\/$/, '');
 const slug = pathname.split('/').filter(Boolean).slice(1).join('/');
-const imageUrl = slug
-  ? new URL(`/og/${slug}`, Astro.site || Astro.url.origin)
-  : new URL('/hero-poster.jpg', Astro.site || Astro.url.origin);
+const imageUrl = image
+  ? new URL(image, Astro.site || Astro.url.origin)
+  : new URL(`/og/${slug || 'home'}`, Astro.site || Astro.url.origin);
 
 const isNetlify = import.meta.env.DEPLOY_PRIME_URL;
 
