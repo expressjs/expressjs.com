@@ -336,6 +336,8 @@ Router handling logic is now performed by a separate dependency ([`router`](http
 
 ## Changed
 
+These APIs still exist but their behavior has changed. Review these changes to make sure your app works as expected.
+
 ### Path route matching syntax
 
 Path route matching syntax is when a string is supplied as the first parameter to the `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, and `router.use()` APIs. The following changes have been made to how the path string is matched to an incoming request:
