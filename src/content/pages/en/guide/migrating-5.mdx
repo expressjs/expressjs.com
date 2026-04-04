@@ -270,6 +270,7 @@ In Express 5, `res.sendFile()` uses the `mime-types` package for MIME type detec
 - XML files (.xml): now "application/xml" instead of "text/xml"
 - Font files (.woff): now "font/woff" instead of "application/font-woff"
 - SVG files (.svg): now "image/svg+xml" instead of "application/svg+xml"
+
 </Alert>
 
 #### How to update
@@ -430,6 +431,16 @@ The `app.router` object, which was removed in Express 4, has made a comeback in 
 
 The `req.body` property returns `undefined` when the body has not been parsed. In Express 4, it returns `{}` by default.
 
+```js del={4} ins={6}
+app.post('/user', (req, res) => {
+  console.dir(req.body);
+  // Express 4
+  // => {}
+  // Express 5
+  // => undefined
+});
+```
+
 ### req.host
 
 In Express 4, the `req.host` function incorrectly stripped off the port number if it was present. In Express 5, the port number is maintained.
@@ -480,6 +491,13 @@ In Express 4, unmatched wildcards were empty strings (`''`) and optional `:` par
 ### req.query
 
 The `req.query` property is no longer a writable property and is instead a getter. The default query parser has been changed from "extended" to "simple".
+
+```js del={3}
+app.get('/search', (req, res) => {
+  // This is no longer possible in Express 5
+  req.query.page = 1;
+});
+```
 
 ### res.clearCookie
 
