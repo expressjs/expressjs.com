@@ -63,47 +63,30 @@ app.all('/secret', (req, res, next) => {
 
 ## Route paths
 
-Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings, string patterns, or regular expressions.
-
-<Alert type="alert">
-
-The characters `?`, `+`, `*`, `[]`, and `()` are reserved. Use `\` to escape them if needed.
-See the [path route matching syntax](/en/guide/migrating-5#path-syntax) for more information.
-
-</Alert>
+Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings or regular expressions.
 
 <Alert type="info">
 
-Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route
-paths; see the path-to-regexp documentation for all the possibilities in defining route paths.
-[Express Playground Router](https://bjohansebas.github.io/playground-router/) is a handy tool for
-testing basic Express routes, although it does not support pattern matching.
+Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) v8 for matching the route paths; see the path-to-regexp documentation for all the possibilities in defining route paths.
+[Express Playground Router](https://bjohansebas.github.io/playground-router/) is a handy tool for testing basic Express routes, although it does not support pattern matching.
 
 </Alert>
 
+### String paths
+
+String paths match requests exactly. The dot (`.`) and hyphen (`-`) are interpreted literally.
+
 <Alert type="warning">Query strings are not part of the route path.</Alert>
-
-### Route paths based on strings
-
-This route path will match requests to the root route, `/`.
 
 ```js
 app.get('/', (req, res) => {
   res.send('root');
 });
-```
 
-This route path will match requests to `/about`.
-
-```js
 app.get('/about', (req, res) => {
   res.send('about');
 });
-```
 
-This route path will match requests to `/random.text`.
-
-```js
 app.get('/random.text', (req, res) => {
   res.send('random.text');
 });
@@ -111,7 +94,7 @@ app.get('/random.text', (req, res) => {
 
 ### Wildcards
 
-Wildcards must have a name, just like route parameters. Use `/*splat` to match any path after a prefix:
+Wildcards match any path after a prefix. They must have a name, just like route parameters, and are captured as arrays of path segments.
 
 ```js
 app.get('/files/*filepath', (req, res) => {
@@ -122,11 +105,10 @@ app.get('/files/*filepath', (req, res) => {
 });
 ```
 
-Wildcard parameters are captured as arrays of path segments.
-
-To match the root path as well, wrap the wildcard in braces:
+To also match the root path, wrap the wildcard in braces:
 
 ```js
+// Matches / , /foo , /foo/bar , etc.
 app.get('/{*splat}', (req, res) => {
   // GET / => req.params.splat = []
   // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
@@ -136,7 +118,7 @@ app.get('/{*splat}', (req, res) => {
 
 ### Optional segments
 
-Use braces to define optional segments in a route path:
+Use braces to define optional segments in a route path. When the segment is not present, the parameter is omitted from `req.params`.
 
 ```js
 app.get('/:file{.:ext}', (req, res) => {
@@ -148,24 +130,21 @@ app.get('/:file{.:ext}', (req, res) => {
 
 <Alert type="alert">
 
-Legacy string patterns (using `?`, `+`, `*`, `()`) are no longer supported. Use braces and named parameters instead.
-See the [path route matching syntax](/en/guide/migrating-5#path-syntax) for more information.
+The characters `?`, `+`, `*`, `[]`, and `()` are reserved and cannot be used as literal characters in route paths. Use `\` to escape them if needed.
 
 </Alert>
 
-### Route paths based on regular expressions
+### Regular expressions
 
-This route path will match anything with an "a" in it.
+You can also use regular expressions as route paths. This is useful when you need more complex matching logic.
 
 ```js
+// Matches any path containing "a"
 app.get(/a/, (req, res) => {
   res.send('/a/');
 });
-```
 
-This route path will match `butterfly` and `dragonfly`, but not `butterflyman`, `dragonflyman`, and so on.
-
-```js
+// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
 app.get(/.*fly$/, (req, res) => {
   res.send('/.*fly$/');
 });

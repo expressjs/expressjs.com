@@ -65,24 +65,16 @@ app.all('/secret', (req, res, next) => {
 
 Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings, string patterns, or regular expressions.
 
-<Alert type="alert">
-
-Regular expression characters such as `$` need to be escaped with a `\`.
-
-</Alert>
-
 <Alert type="info">
 
-Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route
-paths; see the path-to-regexp documentation for all the possibilities in defining route paths.
-[Express Playground Router](https://bjohansebas.github.io/playground-router/) is a handy tool for
-testing basic Express routes, although it does not support pattern matching.
+Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths; see the path-to-regexp documentation for all the possibilities in defining route paths.
+[Express Playground Router](https://bjohansebas.github.io/playground-router/) is a handy tool for testing basic Express routes, although it does not support pattern matching.
 
 </Alert>
 
-<Alert type="warning">Query strings are not part of the route path.</Alert>
-
 ### Route paths based on strings
+
+<Alert type="warning">Query strings are not part of the route path.</Alert>
 
 This route path will match requests to the root route, `/`.
 
@@ -143,6 +135,12 @@ app.get('/ab(cd)?e', (req, res) => {
 ```
 
 ### Route paths based on regular expressions
+
+<Alert type="alert">
+
+Regular expression characters such as `$` need to be escaped with a `\`.
+
+</Alert>
 
 This route path will match anything with an "a" in it.
 
