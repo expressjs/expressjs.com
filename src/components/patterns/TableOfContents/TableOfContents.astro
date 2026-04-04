@@ -1,0 +1,152 @@
+---
+/**
+ * TableOfContents Pattern Component
+ *
+ * Displays a table of contents for blog posts.
+ * - Desktop/tablet: sticky lateral sidebar
+ * - Mobile: collapsible dropdown
+ *
+ * @example
+ * <TableOfContents headings={headings} />
+ */
+import './TableOfContents.css';
+import type { HTMLAttributes } from 'astro/types';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { Icon } from 'astro-icon/components';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props extends HTMLAttributes<'nav'> {
+  headings: Heading[];
+}
+
+const { headings, class: className, ...rest } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const tocHeadings =
+  filteredHeadings.length > 0
+    ? [{ depth: 2, slug: 'overview', text: t('toc.overview') }, ...filteredHeadings]
+    : [];
+---
+
+{
+  tocHeadings.length > 0 && (
+    <nav class:list={['toc', className]} aria-label={t('post.toc')} {...rest}>
+      <p class="toc__heading" aria-hidden="true">
+        {t('post.toc')}
+      </p>
+
+      <details class="toc__details">
+        <summary class="toc__summary">
+          <span class="toc__summary-label">{t('post.toc')}</span>
+          <Icon name="fluent:chevron-down-20-regular" class="toc__chevron" aria-hidden="true" />
+        </summary>
+
+        <ol class="toc__list">
+          {tocHeadings.map((heading) => (
+            <li class:list={['toc__item', `toc__item--h${heading.depth}`]}>
+              <a class="toc__link" href={`#${heading.slug}`}>
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </details>
+    </nav>
+  )
+}
+
+<script>
+  function initToc(details: HTMLDetailsElement) {
+    const bp = getComputedStyle(document.documentElement)
+      .getPropertyValue('--breakpoint-md')
+      .trim();
+    const mq = window.matchMedia(`(min-width: ${bp})`);
+    const summaryLabel = details.querySelector<HTMLElement>('.toc__summary-label');
+    const defaultLabel = summaryLabel?.textContent ?? '';
+
+    function syncOpen(matches: boolean) {
+      details.open = matches;
+    }
+
+    mq.addEventListener('change', (e) => syncOpen(e.matches));
+    syncOpen(mq.matches);
+
+    details.addEventListener('toggle', () => {
+      if (mq.matches && !details.open) details.open = true;
+    });
+
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.toc__link');
+    if (tocLinks.length) {
+      const linkMap = new Map<string, HTMLAnchorElement>();
+      const headingEls: HTMLElement[] = [];
+
+      tocLinks.forEach((link) => {
+        const id = link.getAttribute('href')?.slice(1);
+        if (id) {
+          linkMap.set(id, link);
+          const el = document.getElementById(id);
+          if (el) headingEls.push(el);
+        }
+        link.addEventListener('click', () => {
+          if (!mq.matches) details.open = false;
+        });
+      });
+
+      let activeLink: HTMLAnchorElement | null = null;
+      const visibleHeadings = new Set<string>();
+
+      function setActive(link: HTMLAnchorElement | null) {
+        if (link === activeLink) return;
+        activeLink?.classList.remove('toc__link--active');
+        activeLink = link;
+        link?.classList.add('toc__link--active');
+        if (summaryLabel && !mq.matches) {
+          summaryLabel.textContent = link?.textContent ?? defaultLabel;
+        }
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              visibleHeadings.add(entry.target.id);
+            } else {
+              visibleHeadings.delete(entry.target.id);
+            }
+          }
+
+          for (const el of headingEls) {
+            if (visibleHeadings.has(el.id)) {
+              setActive(linkMap.get(el.id) ?? null);
+              return;
+            }
+          }
+        },
+        { rootMargin: '0px 0px -70% 0px', threshold: 0 }
+      );
+
+      headingEls.forEach((el) => observer.observe(el));
+
+      function checkArticleBounds() {
+        if (!summaryLabel || mq.matches || headingEls.length === 0) return;
+        const atTop = headingEls[0].getBoundingClientRect().top > window.innerHeight;
+        const atBottom =
+          window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 50;
+        if (atTop || atBottom) setActive(null);
+      }
+
+      window.addEventListener('scroll', checkArticleBounds, { passive: true });
+    }
+  }
+
+  const details = document.querySelector<HTMLDetailsElement>('.toc__details');
+  if (details) initToc(details);
+</script>

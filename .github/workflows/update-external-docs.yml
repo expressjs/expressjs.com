@@ -1,0 +1,123 @@
+name: Update External Docs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * 1'
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  update-security:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'expressjs'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Check security.txt expiry
+        id: expiry
+        run: |
+          set -eo pipefail
+          expires=$(grep -i '^Expires:' public/.well-known/security.txt | sed 's/.*: //')
+          if [ "$(date -d "$expires" +%s)" -le "$(date -d '+30 days' +%s)" ]; then
+            echo "bump=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bump Expires
+        if: steps.expiry.outputs.bump == 'true'
+        run: |
+          sed -i "s/^Expires:.*/Expires: $(date -u -d '+180 days' +%Y-%m-%dT00:00:00Z)/I" public/.well-known/security.txt
+
+      - name: Create Pull Request
+        if: steps.expiry.outputs.bump == 'true'
+        uses: gr2m/create-or-update-pull-request-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commit-message: 'docs: update security.txt expiry'
+          title: 'docs: update security.txt expiry'
+          body: |
+            This PR extends the `Expires` date in `public/.well-known/security.txt`.
+
+            Before merging, please explicitly confirm that:
+            - The security contact listed is still correct and actively monitored
+            - The linked security policy is still accurate
+            - The project's preferred vulnerability disclosure path has not changed
+
+            Only merge if the above information is still valid; otherwise, update it before extending the expiration.
+
+            cc: @expressjs/security-wg @expressjs/docs-wg
+          labels: docs
+          branch: bot/security-expiry
+
+  update-docs:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'expressjs'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run scripts
+        working-directory: .github/scripts
+        run: |
+          bash ./get-contributing.sh
+          bash ./get-readmes.sh
+
+      - name: Fix formatting
+        run: npm run fix
+
+      - name: Create Pull Request
+        uses: gr2m/create-or-update-pull-request-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commit-message: 'docs: update external docs'
+          title: 'docs: update external docs'
+          body: >
+            This auto-generated PR updates external documentation to the expressjs.com repository.
+
+            cc: @expressjs/docs-wg
+          labels: docs
+          branch: bot/update-external-docs
+
+  synchronize-with-crowdin:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'expressjs'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+        # see all the options at https://github.com/crowdin/github-action
+      - name: Crowdin PR
+        uses: crowdin/github-action@60debf382ee245b21794321190ad0501db89d8c1 # https://github.com/crowdin/github-action/releases/tag/v2.13.0
+        with:
+          upload_sources: false
+          upload_translations: false
+          download_translations: true
+          localization_branch_name: crowdin/translations
+          create_pull_request: true
+          pull_request_title: 'i18n: new crowdin translations'
+          pull_request_body: >
+            New Crowdin translations from the [express.js crowdin project](https://express.crowdin.com/u/projects/1). cc: @expressjs/docs-wg
+          pull_request_base_branch_name: 'redesign' # TODO: update to "main" when we merge redesign into main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}

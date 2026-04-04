@@ -1,0 +1,175 @@
+{
+  "home": {
+    "welcome": "Benvenuto",
+    "workInProgress": "Questa è una homepage in fase di sviluppo.",
+    "reviewDesignSystem": {
+      "prefix": "Consulta la",
+      "link": "Base del Design System",
+      "suffix": "pagina demo per esplorare tutti i token, le primitive e i pattern."
+    }
+  },
+  "search": {
+    "placeholder": "Inizia a digitare...",
+    "ariaLabel": "Inizia a digitare per cercare"
+  },
+  "theme": {
+    "toggle": "Cambia tema",
+    "switchToLight": "Passa alla modalità chiara",
+    "switchToDark": "Passa alla modalità scura"
+  },
+  "version": {
+    "selectLabel": "Seleziona la versione API"
+  },
+  "nav": {
+    "mainMenu": "Menu principale",
+    "toggleMenu": "Mostra/Nascondi menu",
+    "home": "home",
+    "breadcrumb": "Breadcrumb",
+    "mainNavigation": "Navigazione principale",
+    "selectVersion": "Seleziona la versione della documentazione"
+  },
+  "menu": {
+    "main": {
+      "docs": "Documentazione",
+      "api": "API",
+      "resources": "Risorse",
+      "blog": "Blog",
+      "support": "Supporto"
+    },
+    "sections": {
+      "gettingStarted": "Primi passi",
+      "guide": "Guida",
+      "migration": "Guide alla migrazione",
+      "advanced": "Argomenti avanzati",
+      "express": "express()",
+      "application": "Applicazione",
+      "request": "Richiesta",
+      "response": "Risposta",
+      "router": "Router",
+      "middleware": "Middleware"
+    },
+    "items": {
+      "installing": "Installazione",
+      "helloWorld": "Hello world",
+      "expressGenerator": "Generatore Express",
+      "basicRouting": "Routing di base",
+      "staticFiles": "Servire file statici",
+      "examples": "Esempi",
+      "faq": "FAQ",
+      "routing": "Routing",
+      "writingMiddleware": "Scrivere middleware",
+      "usingMiddleware": "Usare middleware",
+      "usingTemplateEngines": "Usare template engines",
+      "errorHandling": "Gestione errori",
+      "debugging": "Debugging",
+      "behindProxies": "Dietro i proxy",
+      "databaseIntegration": "Integrazione database",
+      "overridingExpressApi": "Sovrascrivere API di Express",
+      "migratingTo4": "Migrazione a Express 4",
+      "migratingTo5": "Migrazione a Express 5",
+      "buildingTemplateEngines": "Creare template engines",
+      "bestPracticePerformance": "Best practice di performance",
+      "bestPracticeSecurity": "Best practice di sicurezza",
+      "healthcheckGracefulShutdown": "Health check & spegnimento graduale",
+      "securityUpdates": "Aggiornamenti di sicurezza",
+      "overview": "Panoramica",
+      "properties": "Proprietà",
+      "methods": "Metodi",
+      "events": "Eventi",
+      "types": "Integrato",
+      "community": "Community",
+      "glossary": "Glossario",
+      "contributing": "Contribuire",
+      "utils": "Utility",
+      "middleware": "Middleware"
+    },
+    "aria": {
+      "docs": "Documentazione",
+      "api": "Riferimento API",
+      "resources": "Risorse",
+      "blog": "Blog",
+      "support": "Supporto",
+      "installing": "Installare Express",
+      "helloWorld": "Esempio Hello world",
+      "expressGenerator": "Generatore Express",
+      "routing": "Guida al routing",
+      "writingMiddleware": "Guida alla scrittura di middleware",
+      "usingMiddleware": "Guida all’uso di middleware",
+      "usingTemplateEngines": "Guida all’uso dei template engines",
+      "errorHandling": "Guida alla gestione degli errori",
+      "debugging": "Debugging di Express",
+      "behindProxies": "Express dietro i proxy",
+      "databaseIntegration": "Guida all’integrazione database",
+      "overridingExpressApi": "Guida alla sovrascrittura API di Express",
+      "application": "Panoramica applicazione",
+      "request": "Panoramica richiesta",
+      "response": "Panoramica risposta",
+      "router": "Panoramica router",
+      "middleware": "Risorse middleware",
+      "community": "Risorse community",
+      "glossary": "Glossario termini",
+      "contributing": "Guida al contributo",
+      "utils": "Utility"
+    }
+  },
+  "doc": {
+    "previousPage": "Precedente",
+    "nextPage": "Successivo",
+    "pageNavigation": "Navigazione pagina"
+  },
+  "page": {
+    "editOnGitHub": "Modifica su GitHub",
+    "translateThis": "Traduci questa pagina"
+  },
+  "post": {
+    "share": "Condividi",
+    "shareOnX": "Condividi su X",
+    "shareOnBluesky": "Condividi su Bluesky",
+    "shareOnLinkedIn": "Condividi su LinkedIn",
+    "shareOnSlack": "Condividi su Slack",
+    "shareOnTelegram": "Condividi su Telegram",
+    "shareOnWhatsApp": "Condividi su WhatsApp",
+    "rssFeed": "Feed RSS",
+    "copyLink": "Copia link",
+    "linkCopied": "Link copiato!",
+    "toc": "Su questa pagina",
+    "more": "Altro da Express",
+    "writeBanner": "Vuoi scrivere un post?\nConsulta le nostre linee guida per iniziare.",
+    "writeGuidelines": "Leggi le linee guida"
+  },
+  "toc": {
+    "overview": "Panoramica"
+  },
+  "features": {
+    "title": "Chiarezza sulla complessità. Per ogni sviluppatore.",
+    "performance": {
+      "title": "Performance",
+      "body": "Express fornisce uno strato leggero di funzionalità web fondamentali senza nascondere le caratteristiche di Node.js."
+    },
+    "api": {
+      "title": "API",
+      "body": "Con numerosi metodi HTTP e middleware, creare un’API robusta è rapido e semplice."
+    },
+    "middleware": {
+      "title": "Middleware",
+      "body": "Express è un framework leggero e flessibile che può essere esteso tramite middleware."
+    },
+    "webapplication": {
+      "title": "Applicazioni Web",
+      "body": "Express è un framework minimale e flessibile per applicazioni web e mobile."
+    }
+  },
+  "error404": {
+    "title": "404 - Pagina non trovata",
+    "description": "La pagina che stai cercando non è stata trovata.",
+    "heading": "Pagina non trovata",
+    "message": "La pagina non esiste o è stata spostata.",
+    "goHome": "Vai alla Home"
+  },
+  "hero": {
+    "tagline": "Framework web veloce e minimale per Node.js",
+    "getStarted": "Inizia",
+    "videoPause": "Metti in pausa il video di sfondo",
+    "videoPlay": "Riproduci il video di sfondo"
+  }
+}

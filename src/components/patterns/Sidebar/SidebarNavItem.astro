@@ -1,0 +1,114 @@
+---
+import type { MenuItem } from '@/config/types';
+import { BodyMd } from '@/components/primitives';
+import { Icon } from 'astro-icon/components';
+import { useTranslations } from '@/i18n/utils';
+import type { LanguageCode } from '@/i18n/locales';
+
+interface Props {
+  item: MenuItem & { href?: string };
+  href: string;
+  isActive: boolean;
+  variant: 'root' | 'nested';
+  type: 'link' | 'submenu';
+  submenuId?: string;
+  targetLevel?: number;
+  showIcon?: boolean;
+  lang: LanguageCode;
+}
+
+const {
+  item,
+  href,
+  isActive,
+  variant,
+  type,
+  submenuId,
+  targetLevel,
+  showIcon = false,
+  lang,
+} = Astro.props;
+
+const t = useTranslations(lang);
+const isNested = variant === 'nested';
+const isRootSubmenu = variant === 'root';
+
+// show overview instead of specific section names for top-level items that link to an overview page
+const overviewAliases = new Set([
+  'menu.main.api',
+  'menu.sections.express',
+  'menu.sections.request',
+  'menu.sections.response',
+  'menu.sections.router',
+  'menu.sections.application',
+]);
+
+function getLabel() {
+  return overviewAliases.has(item.label) ? t('menu.items.overview') : t(item.label);
+}
+---
+
+{
+  type === 'link' ? (
+    <li>
+      <a
+        href={href}
+        class:list={[
+          'sidebar-nav-item',
+          isNested && 'sidebar-nav-item--nested',
+          isActive && 'sidebar-nav-item--active',
+        ]}
+        aria-label={item.ariaLabel ? t(item.ariaLabel) : undefined}
+        aria-current={isActive ? 'page' : undefined}
+        data-omit-from={item.omitFrom?.join(',') || undefined}
+      >
+        {showIcon && item.icon && (
+          <div class="sidebar-nav-icon">
+            <Icon name={`fluent:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+          </div>
+        )}
+
+        <BodyMd vMargin={false} class="sidebar-nav-label">
+          {getLabel()}
+        </BodyMd>
+      </a>
+    </li>
+  ) : (
+    <li>
+      <button
+        class:list={[
+          'sidebar-nav-item',
+          isRootSubmenu && 'sidebar-nav-item--root-submenu',
+          isNested && 'sidebar-nav-item--nested',
+          type === 'submenu' && isNested && 'sidebar-nav-item--submenu',
+          isActive && 'sidebar-nav-item--active',
+        ]}
+        aria-label={item.ariaLabel ? t(item.ariaLabel) : undefined}
+        aria-expanded="false"
+        aria-controls={submenuId}
+        type="button"
+        data-submenu-trigger
+        data-target-id={submenuId}
+        data-target-level={targetLevel}
+      >
+        {showIcon && item.icon && (
+          <div class="sidebar-nav-icon">
+            <Icon name={`fluent:${item.icon}`} size="24" color="var(--color-icon-primary)" />
+          </div>
+        )}
+
+        <BodyMd vMargin={false} class="sidebar-nav-label">
+          {t(item.label)}
+        </BodyMd>
+
+        <Icon
+          name="fluent:arrow-right-20-regular"
+          size="16"
+          color="var(--color-icon-secondary)"
+          class="sidebar-nav-arrow"
+          aria-hidden="true"
+        />
+      </button>
+    </li>
+  )
+}
