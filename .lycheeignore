@@ -25,3 +25,8 @@ https://expressjs.com/sitemap-index.xml
 # Ignore Coveralls links
 
 https://coveralls.io/-*
+
+# Ignore llms files
+
+dist/llms.txt
+dist/llms/*.txt
