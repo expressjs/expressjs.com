@@ -384,6 +384,22 @@ Request middleware and handlers that return rejected promises are now handled by
 
 Details of how Express handles errors is covered in the [error handling documentation](/en/guide/error-handling).
 
+#### How to update
+
+You can now use `async/await` directly without manually catching errors. If `getUserById` throws an error or rejects, `next` will be called automatically with the rejected value.
+
+```diff
+-app.get('/user/:id', (req, res, next) => {
+-  getUserById(req.params.id)
+-    .then((user) => res.send(user))
+-    .catch(next);
+-});
++app.get('/user/:id', async (req, res) => {
++  const user = await getUserById(req.params.id);
++  res.send(user);
++});
+```
+
 ### express.urlencoded
 
 The `express.urlencoded` method makes the `extended` option `false` by default.
@@ -504,13 +520,34 @@ app.get('/search', (req, res) => {
 
 The `res.clearCookie` method ignores the `maxAge` and `expires` options provided by the user.
 
+```diff
+ app.get('/logout', (req, res) => {
+-  res.clearCookie('session', { maxAge: 0, expires: new Date(0) });
++  res.clearCookie('session');
+ });
+```
+
 ### res.status
 
 The `res.status` method only accepts integers in the range of `100` to `999`, following the behavior defined by Node.js, and it returns an error when the status code is not an integer.
 
+```js del={2}
+app.get('/user', (req, res) => {
+  res.status(99); // Throws an error
+  res.status(200); // OK
+});
+```
+
 ### res.vary
 
-The `res.vary` throws an error when the `field` argument is missing. In Express 4, if the argument was omitted, it gave a warning in the console
+The `res.vary` throws an error when the `field` argument is missing. In Express 4, if the argument was omitted, it gave a warning in the console.
+
+```js del={2}
+app.get('/user', (req, res) => {
+  res.vary(); // Throws an error
+  res.vary('Accept'); // OK
+});
+```
 
 ## Improvements
 
