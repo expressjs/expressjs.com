@@ -35,6 +35,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
     getCollection('pages'),
   ]);
 
+  const blogListingPath = {
+    params: { id: 'blog.png' },
+    props: { title: 'Express Blog' },
+  };
+
   const blogPaths = blog.map((post) => ({
     params: { id: `blog-${post.id.split('/').pop()!}.png` },
     props: { title: post.data.title, tags: post.data.tags },
@@ -58,7 +63,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   });
 
-  return [...homePaths, ...blogPaths, ...docsPagesPaths, ...apiPaths];
+  return [...homePaths, blogListingPath, ...blogPaths, ...docsPagesPaths, ...apiPaths];
 };
 
 export const GET: APIRoute = async ({ props }) => {
