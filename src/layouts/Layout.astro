@@ -28,10 +28,13 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
 
 const pathname = Astro.url.pathname.replace(/\/$/, '');
 const segments = pathname.split('/').filter(Boolean);
-const ogSlug = segments.slice(1).join('-');
+const langSegment = segments[0] || 'en';
+const restSegments = segments.slice(1);
+const isBlogOrApi = restSegments[0] === 'blog' || /^\dx$/.test(restSegments[0] ?? '');
+const ogSlug = isBlogOrApi ? restSegments.join('-') : segments.join('-');
 const imageUrl = image
   ? new URL(image, Astro.site || Astro.url.origin)
-  : new URL(`/og/${ogSlug || `home-${segments[0] || 'en'}`}.png`, Astro.site || Astro.url.origin);
+  : new URL(`/og/${ogSlug || `home-${langSegment}`}.png`, Astro.site || Astro.url.origin);
 
 const isNetlify = import.meta.env.DEPLOY_PRIME_URL;
 

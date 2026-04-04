@@ -40,7 +40,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
     props: { title: post.data.title, tags: post.data.tags },
   }));
 
-  const collectionPaths = [...docs, ...api, ...pages].map((entry) => ({
+  const docsPagesPaths = [...docs, ...pages].map((entry) => ({
+    params: { id: `${entry.id.replace(/\//g, '-')}.png` },
+    props: { title: entry.data.title },
+  }));
+
+  const apiPaths = api.map((entry) => ({
     params: { id: `${entry.id.replace(/\//g, '-')}.png` },
     props: { title: entry.data.title },
   }));
@@ -53,7 +58,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   });
 
-  return [...homePaths, ...blogPaths, ...collectionPaths];
+  return [...homePaths, ...blogPaths, ...docsPagesPaths, ...apiPaths];
 };
 
 export const GET: APIRoute = async ({ props }) => {
