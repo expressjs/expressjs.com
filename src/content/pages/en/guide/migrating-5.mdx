@@ -326,7 +326,7 @@ Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work wit
 
 ### MIME type changes
 
-Several MIME types have changed due to updates in [`mime-db`](https://github.com/jshttp/mime-db). This affects `express.static()`, `res.sendFile()`, and any other method that relies on MIME type detection. For a full list of changes, see the [`mime-db` changelog](https://github.com/jshttp/mime-db/blob/master/HISTORY.md):
+Several MIME types have changed due to updates in [`mime-db`](https://github.com/jshttp/mime-db). These changes only affect `express.static()` and `res.sendFile()`. For a full list of changes, see the [`mime-db` changelog](https://github.com/jshttp/mime-db/blob/HEAD/HISTORY.md).
 
 Express 4 uses `mime-db` version **1.52.0**, while Express 5 uses newer versions that reflect updates to IANA and other MIME type specifications. The most notable change is that JavaScript files (`.js`) are now served as `text/javascript` instead of `application/javascript`.
 
