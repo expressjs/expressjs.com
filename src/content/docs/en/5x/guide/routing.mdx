@@ -10,7 +10,7 @@ For an introduction to routing, see [Basic routing](/en/starter/basic-routing).
 
 You define routing using methods of the Express `app` object that correspond to HTTP methods;
 for example, `app.get()` to handle GET requests and `app.post` to handle POST requests. For a full list,
-see [app.METHOD](/en/5x/api#app.METHOD). You can also use [app.all()](/en/5x/api#app.all) to handle all HTTP methods and [app.use()](/en/5x/api#app.use) to
+see [app.METHOD](/en/5x/api/application#appmethodpath-callback--callback-). You can also use [app.all()](/en/5x/api/application#appallpath-callback--callback-) to handle all HTTP methods and [app.use()](/en/5x/api/application#appusepath-callback--callback) to
 specify middleware as the callback function (See [Using middleware](/en/guide/using-middleware) for details).
 
 These routing methods specify a callback function (sometimes called "handler functions") called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application "listens" for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
@@ -50,7 +50,7 @@ app.post('/', (req, res) => {
 ```
 
 Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
-For a full list, see [app.METHOD](/en/5x/api#app.METHOD).
+For a full list, see [app.METHOD](/en/5x/api/application#appmethodpath-callback--callback-).
 
 There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
@@ -63,112 +63,88 @@ app.all('/secret', (req, res, next) => {
 
 ## Route paths
 
-Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings, string patterns, or regular expressions.
-
-<Alert type="alert">
-
-In express 5, the characters `?`, `+`, `*`, `[]`, and `()` are handled differently than in version
-4, please review the [migration guide](/en/guide/migrating-5#path-syntax) for more information.
-
-</Alert>
-
-<Alert type="alert">
-
-In express 4, regular expression characters such as `$` need to be escaped with a `\`.
-
-</Alert>
+Route paths, in combination with a request method, define the endpoints at which requests can be made. Route paths can be strings or regular expressions.
 
 <Alert type="info">
 
-Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route
-paths; see the path-to-regexp documentation for all the possibilities in defining route paths.
-[Express Playground Router](https://bjohansebas.github.io/playground-router/) is a handy tool for
-testing basic Express routes, although it does not support pattern matching.
+Express uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) v8 for matching the route paths; see the path-to-regexp documentation for all the possibilities in defining route paths.
+[Express Playground Router](https://bjohansebas.github.io/playground-router/) is a handy tool for testing basic Express routes, although it does not support pattern matching.
 
 </Alert>
 
+### String paths
+
+String paths match requests exactly. The dot (`.`) and hyphen (`-`) are interpreted literally.
+
 <Alert type="warning">Query strings are not part of the route path.</Alert>
-
-### Route paths based on strings
-
-This route path will match requests to the root route, `/`.
 
 ```js
 app.get('/', (req, res) => {
   res.send('root');
 });
-```
 
-This route path will match requests to `/about`.
-
-```js
 app.get('/about', (req, res) => {
   res.send('about');
 });
-```
 
-This route path will match requests to `/random.text`.
-
-```js
 app.get('/random.text', (req, res) => {
   res.send('random.text');
 });
 ```
 
-### Route paths based on string patterns
+### Wildcards
+
+Wildcards match any path after a prefix. They must have a name, just like route parameters, and are captured as arrays of path segments.
+
+```js
+app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+To also match the root path, wrap the wildcard in braces:
+
+```js
+// Matches / , /foo , /foo/bar , etc.
+app.get('/{*splat}', (req, res) => {
+  // GET / => req.params.splat = []
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+### Optional segments
+
+Use braces to define optional segments in a route path. When the segment is not present, the parameter is omitted from `req.params`.
+
+```js
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
 
 <Alert type="alert">
 
-The string patterns in Express 5 no longer work. Please refer to the [migration
-guide](/en/guide/migrating-5#path-syntax) for more information.
+The characters `?`, `+`, `*`, `[]`, and `()` are reserved and cannot be used as literal characters in route paths. Use `\` to escape them if needed.
 
 </Alert>
 
-This route path will match `acd` and `abcd`.
+### Regular expressions
+
+You can also use regular expressions as route paths. This is useful when you need more complex matching logic.
 
 ```js
-app.get('/ab?cd', (req, res) => {
-  res.send('ab?cd');
-});
-```
-
-This route path will match `abcd`, `abbcd`, `abbbcd`, and so on.
-
-```js
-app.get('/ab+cd', (req, res) => {
-  res.send('ab+cd');
-});
-```
-
-This route path will match `abcd`, `abxcd`, `abRANDOMcd`, `ab123cd`, and so on.
-
-```js
-app.get('/ab*cd', (req, res) => {
-  res.send('ab*cd');
-});
-```
-
-This route path will match `/abe` and `/abcde`.
-
-```js
-app.get('/ab(cd)?e', (req, res) => {
-  res.send('ab(cd)?e');
-});
-```
-
-### Route paths based on regular expressions
-
-This route path will match anything with an "a" in it.
-
-```js
+// Matches any path containing "a"
 app.get(/a/, (req, res) => {
   res.send('/a/');
 });
-```
 
-This route path will match `butterfly` and `dragonfly`, but not `butterflyman`, `dragonflyman`, and so on.
-
-```js
+// Matches paths ending with "fly" (butterfly, dragonfly, etc.)
 app.get(/.*fly$/, (req, res) => {
   res.send('/.*fly$/');
 });
@@ -214,28 +190,9 @@ req.params: { "genus": "Prunus", "species": "persica" }
 
 <Alert type="alert">
 
-In express 5, Regexp characters are not supported in route paths, for more information please
-refer to the [migration guide](/en/guide/migrating-5#path-syntax).
+Regexp characters are not supported in route paths. Use an array of paths or regular expressions instead.
+See the [path route matching syntax](/en/guide/migrating-5#path-syntax) for more information.
 
-</Alert>
-
-To have more control over the exact string that can be matched by a route parameter, you can append a regular expression in parentheses (`()`):
-
-```
-Route path: /user/:userId(\d+)
-Request URL: http://localhost:3000/user/42
-req.params: {"userId": "42"}
-```
-
-<Alert type="warning">
-
-Because the regular expression is usually part of a literal string, be sure to escape any `\`
-characters with an additional backslash, for example `\\d+`.
-
-</Alert>
-
-<Alert type="warning">
-In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the `*` character in regular expressions is not interpreted in the usual way</a>. As a workaround, use `{0,}` instead of `*`. This will likely be fixed in Express 5.
 </Alert>
 
 ## Route handlers
@@ -335,22 +292,22 @@ app.get(
 
 The methods on the response object (`res`) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.
 
-| Method                                        | Description                                                                           |
-| --------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [res.download()](/en/5x/api#res.download)     | Prompt a file to be downloaded.                                                       |
-| [res.end()](/en/5x/api#res.end)               | End the response process.                                                             |
-| [res.json()](/en/5x/api#res.json)             | Send a JSON response.                                                                 |
-| [res.jsonp()](/en/5x/api#res.jsonp)           | Send a JSON response with JSONP support.                                              |
-| [res.redirect()](/en/5x/api#res.redirect)     | Redirect a request.                                                                   |
-| [res.render()](/en/5x/api#res.render)         | Render a view template.                                                               |
-| [res.send()](/en/5x/api#res.send)             | Send a response of various types.                                                     |
-| [res.sendFile()](/en/5x/api#res.sendFile)     | Send a file as an octet stream.                                                       |
-| [res.sendStatus()](/en/5x/api#res.sendStatus) | Set the response status code and send its string representation as the response body. |
+| Method                                                                       | Description                                                                           |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [res.download()](/en/5x/api/response#resdownloadpath--filename--options--fn) | Prompt a file to be downloaded.                                                       |
+| [res.end()](/en/5x/api/response#resenddata-encoding-callback)                | End the response process.                                                             |
+| [res.json()](/en/5x/api/response#resjsonbody)                                | Send a JSON response.                                                                 |
+| [res.jsonp()](/en/5x/api/response#resjsonpbody)                              | Send a JSON response with JSONP support.                                              |
+| [res.redirect()](/en/5x/api/response#resredirectstatus-path)                 | Redirect a request.                                                                   |
+| [res.render()](/en/5x/api/response#resrenderview--locals--callback)          | Render a view template.                                                               |
+| [res.send()](/en/5x/api/response#ressendbody)                                | Send a response of various types.                                                     |
+| [res.sendFile()](/en/5x/api/response#ressendfilepath--options--fn)           | Send a file as an octet stream.                                                       |
+| [res.sendStatus()](/en/5x/api/response#ressendstatusstatuscode)              | Set the response status code and send its string representation as the response body. |
 
 ## app.route()
 
 You can create chainable route handlers for a route path by using `app.route()`.
-Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/en/5x/api#router).
+Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos. For more information about routes, see: [Router() documentation](/en/5x/api/router).
 
 Here is an example of chained route handlers that are defined by using `app.route()`.
 
@@ -411,7 +368,7 @@ app.use('/birds', birds);
 
 The app will now be able to handle requests to `/birds` and `/birds/about`, as well as call the `timeLog` middleware function that is specific to the route.
 
-But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/en/5x/api#app.use).
+But if the parent route `/birds` has path parameters, it will not be accessible by default from the sub-routes. To make it accessible, you will need to pass the `mergeParams` option to the Router constructor [reference](/en/5x/api/application#appusepath-callback--callback).
 
 ```js
 const router = express.Router({ mergeParams: true });
