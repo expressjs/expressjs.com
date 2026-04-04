@@ -109,7 +109,42 @@ app.get('/random.text', (req, res) => {
 });
 ```
 
-### Route paths based on string patterns
+### Wildcards
+
+Wildcards must have a name, just like route parameters. Use `/*splat` to match any path after a prefix:
+
+```js
+app.get('/files/*filepath', (req, res) => {
+  // GET /files/images/logo.png
+  console.dir(req.params.filepath);
+  // => [ 'images', 'logo.png' ]
+  res.send(`File: ${req.params.filepath.join('/')}`);
+});
+```
+
+Wildcard parameters are captured as arrays of path segments.
+
+To match the root path as well, wrap the wildcard in braces:
+
+```js
+app.get('/{*splat}', (req, res) => {
+  // GET / => req.params.splat = []
+  // GET /foo/bar => req.params.splat = [ 'foo', 'bar' ]
+  res.send('ok');
+});
+```
+
+### Optional segments
+
+Use braces to define optional segments in a route path:
+
+```js
+app.get('/:file{.:ext}', (req, res) => {
+  // GET /image.png => req.params = { file: 'image', ext: 'png' }
+  // GET /image => req.params = { file: 'image' }
+  res.send('ok');
+});
+```
 
 <Alert type="alert">
 
