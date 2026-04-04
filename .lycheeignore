@@ -28,5 +28,5 @@ https://coveralls.io/-*
 
 # Ignore llms files
 
-dist/llms.txt
-dist/llms/*.txt
+dist/llms.txt$
+dist/llms/.*
