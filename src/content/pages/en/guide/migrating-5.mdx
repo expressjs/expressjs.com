@@ -263,18 +263,6 @@ Or you can update your code manually:
 
 The `res.sendfile()` function has been replaced by a camel-cased version `res.sendFile()` in Express 5.
 
-<Alert type="info">
-In Express 5, `res.sendFile()` uses the `mime-types` package for MIME type detection, which returns different Content-Type values than Express 4 for several common file types:
-
-- JavaScript files (.js): now "text/javascript" instead of "application/javascript"
-- JSON files (.json): now "application/json" instead of "text/json"
-- CSS files (.css): now "text/css" instead of "text/plain"
-- XML files (.xml): now "application/xml" instead of "text/xml"
-- Font files (.woff): now "font/woff" instead of "application/font-woff"
-- SVG files (.svg): now "image/svg+xml" instead of "application/svg+xml"
-
-</Alert>
-
 #### How to update
 
 You can automatically update your code by running the following command:
@@ -292,6 +280,33 @@ Or you can update your code manually:
  });
 ```
 
+### res.sendFile() options
+
+The `hidden` and `from` options for `res.sendFile()` are no longer supported. Use `dotfiles` and `root` instead.
+
+#### How to update
+
+```diff
+ app.get('/files/:name', (req, res) => {
+-  res.sendFile(req.params.name, { hidden: true, from: '/uploads' });
++  res.sendFile(req.params.name, { dotfiles: 'allow', root: '/uploads' });
+ });
+```
+
+### express.static() options
+
+The `hidden` and `from` options for `express.static()` are no longer supported. Use `dotfiles` and `root` instead. Note that `from` was never documented in the API but was accepted as an alias for `root`. The default value of `dotfiles` is now `"ignore"`.
+
+#### How to update
+
+```diff
+ const express = require('express');
+ const app = express();
+
+-app.use(express.static('public', { hidden: true }));
++app.use(express.static('public', { dotfiles: 'allow' }));
+```
+
 ### router.param(fn)
 
 The `router.param(fn)` signature was used for modifying the behavior of the `router.param(name, fn)` function. It has been deprecated since v4.11.0, and Express 5 no longer supports it at all.
@@ -301,20 +316,21 @@ The `router.param(fn)` signature was used for modifying the behavior of the `rou
 In Express 5, `mime` is no longer an exported property of the `static` field.
 Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work with MIME type values.
 
-**Important:** This change affects not only direct usage of `express.static.mime` but also other Express methods that rely on MIME type detection, such as `res.sendFile()`. The following MIME types have changed from Express 4:
-
-- JavaScript files (.js): now served as "text/javascript" instead of "application/javascript"
-- JSON files (.json): now served as "application/json" instead of "text/json"
-- CSS files (.css): now served as "text/css" instead of "text/plain"
-- HTML files (): now served as "text/html; charset=utf-8" instead of just "text/html"
-- XML files (.xml): now served as "application/xml" instead of "text/xml"
-- Font files (.woff): now served as "font/woff" instead of "application/font-woff"
+#### How to update
 
 ```diff
 -express.static.mime.lookup('json');
 +const mime = require('mime-types');
 +mime.lookup('json');
 ```
+
+### MIME type changes
+
+Several MIME types have changed due to updates in [`mime-db`](https://github.com/jshttp/mime-db). These changes only affect `express.static()` and `res.sendFile()`. For a full list of changes, see the [`mime-db` changelog](https://github.com/jshttp/mime-db/blob/HEAD/HISTORY.md).
+
+Express 4 uses `mime-db` version **1.52.0**, while Express 5 uses newer versions that reflect updates to IANA and other MIME type specifications. The most notable change is that JavaScript files (`.js`) are now served as `text/javascript` instead of `application/javascript`.
+
+In Express 5, changes to MIME types from `mime-db` updates are not considered breaking changes, so be careful when updating your dependencies as MIME types may change between minor or patch versions.
 
 ### express:router debug logs
 
