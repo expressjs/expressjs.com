@@ -338,41 +338,42 @@ Path route matching syntax is when a string is supplied as the first parameter t
 
 - The wildcard `*` must have a name, matching the behavior of parameters `:`, use `/*splat` instead of `/*`
 
-```diff
--app.get('/*', async (req, res) => {
-+app.get('/*splat', async (req, res) => {
-   res.send('ok');
- });
-```
+  ```diff
+  -app.get('/*', async (req, res) => {
+  +app.get('/*splat', async (req, res) => {
+     res.send('ok');
+   });
+  ```
 
-<Alert type="info">
-`*splat` matches any path without the root path. If you need to match the root path as well `/`, you can use `/{*splat}`, wrapping the wildcard in braces.
+    <Alert type="info">
 
-```js
-app.get('/{*splat}', async (req, res) => {
-  res.send('ok');
-});
-```
+  `*splat` matches any path without the root path. If you need to match the root path as well `/`, you can use `/{*splat}`, wrapping the wildcard in braces.
 
-</Alert>
+  ```js
+  app.get('/{*splat}', async (req, res) => {
+    res.send('ok');
+  });
+  ```
+
+    </Alert>
 
 - The optional character `?` is no longer supported, use braces instead.
 
-```diff
--app.get('/:file.:ext?', async (req, res) => {
-+app.get('/:file{.:ext}', async (req, res) => {
-   res.send('ok');
- });
-```
+  ```diff
+  -app.get('/:file.:ext?', async (req, res) => {
+  +app.get('/:file{.:ext}', async (req, res) => {
+     res.send('ok');
+   });
+  ```
 
 - Regexp characters are not supported. For example:
 
-```diff
--app.get('/[discussion|page]/:slug', async (req, res) => {
-+app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
-   res.status(200).send('ok');
- });
-```
+  ```diff
+  -app.get('/[discussion|page]/:slug', async (req, res) => {
+  +app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
+     res.status(200).send('ok');
+   });
+  ```
 
 - Some characters have been reserved to avoid confusion during upgrade (`()[]?+!`), use `\` to escape them.
 - Parameter names now support valid JavaScript identifiers, or quoted like `:"this"`.
