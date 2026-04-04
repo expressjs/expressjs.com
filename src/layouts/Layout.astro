@@ -30,7 +30,9 @@ const pathname = Astro.url.pathname.replace(/\/$/, '');
 const segments = pathname.split('/').filter(Boolean);
 const langSegment = segments[0] || 'en';
 const restSegments = segments.slice(1);
-const isBlogOrApi = restSegments[0] === 'blog' || /^\dx$/.test(restSegments[0] ?? '');
+const isApi =
+  restSegments[0] === 'api' || (restSegments[1] === 'api' && /^\dx$/.test(restSegments[0] ?? ''));
+const isBlogOrApi = restSegments[0] === 'blog' || isApi;
 // Build the OG image URL:
 // - Home pages (no rest segments) use a per-language image: /og/home-{lang}.png
 // - Blog and API pages strip the lang prefix since their content is not translated: /og/blog-{slug}.png
