@@ -292,6 +292,33 @@ Or you can update your code manually:
  });
 ```
 
+### res.sendFile() options
+
+The `hidden` and `from` options for `res.sendFile()` are no longer supported. Use `dotfiles` and `root` instead.
+
+#### How to update
+
+```diff
+ app.get('/files/:name', (req, res) => {
+-  res.sendFile(req.params.name, { hidden: true, from: '/uploads' });
++  res.sendFile(req.params.name, { dotfiles: 'allow', root: '/uploads' });
+ });
+```
+
+### express.static() options
+
+The `hidden` and `from` options for `express.static()` are no longer supported. Use `dotfiles` and `root` instead. Note that `from` was never documented in the API but was accepted as an alias for `root`. The default value of `dotfiles` is now `"ignore"`.
+
+#### How to update
+
+```diff
+ const express = require('express');
+ const app = express();
+
+-app.use(express.static('public', { hidden: true }));
++app.use(express.static('public', { dotfiles: 'allow' }));
+```
+
 ### router.param(fn)
 
 The `router.param(fn)` signature was used for modifying the behavior of the `router.param(name, fn)` function. It has been deprecated since v4.11.0, and Express 5 no longer supports it at all.
