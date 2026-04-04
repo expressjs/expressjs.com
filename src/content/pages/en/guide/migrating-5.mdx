@@ -318,14 +318,16 @@ Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work wit
 
 ### express:router debug logs
 
-In Express 5, router handling logic is performed by a dependency. Therefore, the
-debug logs for the router are no longer available under the `express:` namespace.
-In v4, the logs were available under the namespaces `express:router`, `express:router:layer`,
-and `express:router:route`. All of these were included under the namespace `express:*`.
-In v5.1+, the logs are available under the namespaces `router`, `router:layer`, and `router:route`.
-The logs from `router:layer` and `router:route` are included in the namespace `router:*`.
-To achieve the same detail of debug logging when using `express:*` in v4, use a conjunction of
-`express:*`, `router`, and `router:*`.
+Router handling logic is now performed by a separate dependency ([`router`](https://github.com/pillarjs/router)) maintained by the Express team, so debug logs have moved to a different namespace. Before Express 5.1, these debug logs did not exist. To get them, update to a recent Express 5 version or update the `router` package in your `package-lock.json`:
+
+| v4 | v5 |
+| --- | --- |
+| `express:router` | `router` |
+| `express:router:layer` | `router:layer` |
+| `express:router:route` | `router:route` |
+| `express:*` (includes all) | `express:*` + `router` + `router:*` |
+
+#### How to update
 
 ```diff
 -DEBUG=express:* node index.js
