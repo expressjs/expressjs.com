@@ -205,6 +205,37 @@ description: 'Description' # Optional: Page description for SEO
 ---
 ```
 
+### Using components in content (MDX)
+
+Content files that need to use interactive components must use the `.mdx` extension instead of `.md`. MDX allows you to import and use Astro components directly inside your markdown content.
+
+#### Available components
+
+| Component | Import                                                         | Description                                                 |
+| --------- | -------------------------------------------------------------- | ----------------------------------------------------------- |
+| `Alert`   | `import Alert from '@components/primitives/Alert/Alert.astro'` | Contextual alerts with `info`, `warning`, and `alert` types |
+
+#### Example
+
+```mdx
+---
+title: My page title
+description: A page with alerts
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Regular markdown content here.
+
+<Alert type="info">This is an informational note.</Alert>
+
+<Alert type="warning">This is a warning message.</Alert>
+
+<Alert type="alert">This is a critical alert.</Alert>
+```
+
+> Component imports must be placed **after** the frontmatter block and **before** the content where they are used. Do not place imports inside the frontmatter (`---`) block.
+
 ## Versioning
 
 The Express.js documentation supports multiple versions. Content is organized by version in the `src/content/docs/` directory.

@@ -64,15 +64,14 @@ const {
 <article class:list={['post-card', className]} {...rest}>
   <a href={href} class="post-card__link">
     <div>
-      <!-- TODO: this will replaced by auto-generated OG images -->
       {
         coverSrc && (
           <Image
             class="post-card__cover"
             src={coverSrc}
             alt={coverAlt || ''}
-            width={800}
-            height={160}
+            width={1200}
+            height={630}
             loading="lazy"
           />
         )

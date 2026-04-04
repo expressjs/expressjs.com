@@ -34,7 +34,7 @@ const { posts, lang, title } = Astro.props;
               href={`/${lang}/blog/${pFilename}`}
               labels={p.data.tags ?? []}
               title={p.data.title}
-              coverSrc={p.data.cover}
+              coverSrc={p.data.cover || `/og/blog-${pFilename}.png`}
               authors={pAuthors}
               avatarCaption={pDate}
             />

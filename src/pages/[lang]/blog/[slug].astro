@@ -33,13 +33,13 @@ const t = useTranslations(lang);
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
 
-const { title, description, tags, authors, cover } = post.data;
+const { title, description, tags, authors, cover: customCover } = post.data;
+const filename = post.id.split('/').pop() ?? post.id;
+const cover = customCover || `/og/blog-${filename}.png`;
 const authorsList = (authors ?? []).map((a) => ({
   src: a.github ? `https://github.com/${a.github}.png` : '',
   name: a.name ?? '',
 }));
-const filename = post.id.split('/').pop() ?? post.id;
-console.log('filename', filename);
 const dateSource = filename.substring(0, 10);
 const parsedDate = new Date(dateSource);
 const date = Number.isNaN(parsedDate.getTime())
@@ -52,7 +52,7 @@ const date = Number.isNaN(parsedDate.getTime())
 const labels = tags ?? [];
 
 const allPosts = (await getCollection('blog'))
-  .filter((p) => p.id.startsWith('en/') && p.id !== post.id && p.id !== 'write-post')
+  .filter((p) => p.id !== post.id && p.id !== 'write-post')
   .sort((a, b) => b.id.localeCompare(a.id));
 
 const currentTags = new Set(tags ?? []);
@@ -61,7 +61,7 @@ const untagged = allPosts.filter((p) => !p.data.tags?.some((tag) => currentTags.
 const relatedPosts = [...tagged, ...untagged].slice(0, 3);
 ---
 
-<Layout title={title} description={description} authors={authors}>
+<Layout title={title} description={description} authors={authors} image={customCover}>
   <Container>
     <PageTopbar breadcrumbs={[{ label: t('menu.main.blog'), href: `/${Astro.params.lang}/blog` }]}>
       <Button

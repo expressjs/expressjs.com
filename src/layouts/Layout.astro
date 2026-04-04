@@ -10,12 +10,14 @@ interface Props {
   title?: string;
   description?: string;
   authors?: { name: string; github?: string }[];
+  image?: string;
 }
 
 const {
   title,
   description = 'Fast, unopinionated, minimalist web framework for Node.js',
   authors,
+  image,
 } = Astro.props;
 
 const pageTitle = title
@@ -24,8 +26,22 @@ const pageTitle = title
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site || Astro.url.origin);
 
-// TODO: change this when og images is generated per page
-const imageUrl = new URL('/hero-poster.jpg', Astro.site || Astro.url.origin);
+const pathname = Astro.url.pathname.replace(/\/$/, '');
+const segments = pathname.split('/').filter(Boolean);
+const langSegment = segments[0] || 'en';
+const restSegments = segments.slice(1);
+const isApi =
+  restSegments[0] === 'api' || (restSegments[1] === 'api' && /^\dx$/.test(restSegments[0] ?? ''));
+const isBlogOrApi = restSegments[0] === 'blog' || isApi;
+// Build the OG image URL:
+// - Home pages (no rest segments) use a per-language image: /og/home-{lang}.png
+// - Blog and API pages strip the lang prefix since their content is not translated: /og/blog-{slug}.png
+// - Docs and other pages include the lang prefix for i18n support: /og/{lang}-{slug}.png
+const ogSlug =
+  restSegments.length === 0 ? '' : isBlogOrApi ? restSegments.join('-') : segments.join('-');
+const imageUrl = image
+  ? new URL(image, Astro.site || Astro.url.origin)
+  : new URL(`/og/${ogSlug || `home-${langSegment}`}.png`, Astro.site || Astro.url.origin);
 
 const isNetlify = import.meta.env.DEPLOY_PRIME_URL;
 
