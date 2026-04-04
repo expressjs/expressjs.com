@@ -181,13 +181,6 @@ If there is more than one `X-Forwarded-Host` header in the request, the
 value of the first header is used. This includes a single header with
 comma-separated values, in which the first value is used.
 
-<Alert type="info">
-
-Prior to Express v4.17.0, the `X-Forwarded-Host` could not contain multiple values or be present
-more than once.
-
-</Alert>
-
 ```js
 // Host: "example.com:3000"
 console.dir(req.hostname);

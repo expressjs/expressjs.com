@@ -89,8 +89,6 @@ that relates to this response object.
 
 ### res.append(field [, value])
 
-<Alert type="info">`res.append()` is supported by Express v4.11.0+</Alert>
-
 Appends the specified `value` to the HTTP response header `field`. If the header is not already set,
 it creates the header with the specified value. The `value` parameter can be a string or an array.
 
@@ -236,8 +234,6 @@ Later, you may access this value through the [req.signedCookies](/en/5x/api/requ
 
 ### res.download(path [, filename] [, options] [, fn])
 
-<Alert type="info">The optional `options` argument is supported by Express v4.16.0 onwards.</Alert>
-
 Transfers the file at `path` as an "attachment". Typically, browsers will prompt the user for download.
 By default, the `Content-Disposition` header "filename=" parameter is derived from the `path` argument, but can be overridden with the `filename` parameter.
 If `path` is relative, then it will be based on the current working directory of the process or
@@ -254,8 +250,6 @@ When the `root` option is provided, Express will validate that the relative path
 </Alert>
 
 The following table provides details on the `options` parameter.
-
-<Alert type="info">The optional `options` argument is supported by Express v4.16.0 onwards.</Alert>
 
 <div class="table-scroller" markdown="1">
 
@@ -596,8 +590,6 @@ res.send([1, 2, 3]);
 ```
 
 ### res.sendFile(path [, options] [, fn])
-
-<Alert type="info">`res.sendFile()` is supported by Express v4.8.0 onwards.</Alert>
 
 Transfers the file at the given `path`. Sets the `Content-Type` response HTTP header field
 based on the filename's extension. Unless the `root` option is set in
