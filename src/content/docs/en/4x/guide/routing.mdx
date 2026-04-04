@@ -312,17 +312,17 @@ app.get(
 
 The methods on the response object (`res`) in the following table can send a response to the client, and terminate the request-response cycle. If none of these methods are called from a route handler, the client request will be left hanging.
 
-| Method                                        | Description                                                                           |
-| --------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [res.download()](/en/4x/api/response#resdownloadpath--filename--options--fn)     | Prompt a file to be downloaded.                                                       |
-| [res.end()](/en/4x/api/response#resenddata-encoding-callback)               | End the response process.                                                             |
-| [res.json()](/en/4x/api/response#resjsonbody)             | Send a JSON response.                                                                 |
-| [res.jsonp()](/en/4x/api/response#resjsonpbody)           | Send a JSON response with JSONP support.                                              |
-| [res.redirect()](/en/4x/api/response#resredirectstatus-path)     | Redirect a request.                                                                   |
-| [res.render()](/en/4x/api/response#resrenderview--locals--callback)         | Render a view template.                                                               |
-| [res.send()](/en/4x/api/response#ressendbody)             | Send a response of various types.                                                     |
-| [res.sendFile()](/en/4x/api/response#ressendfilepath--options--fn)     | Send a file as an octet stream.                                                       |
-| [res.sendStatus()](/en/4x/api/response#ressendstatusstatuscode) | Set the response status code and send its string representation as the response body. |
+| Method                                                                       | Description                                                                           |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [res.download()](/en/4x/api/response#resdownloadpath--filename--options--fn) | Prompt a file to be downloaded.                                                       |
+| [res.end()](/en/4x/api/response#resenddata-encoding-callback)                | End the response process.                                                             |
+| [res.json()](/en/4x/api/response#resjsonbody)                                | Send a JSON response.                                                                 |
+| [res.jsonp()](/en/4x/api/response#resjsonpbody)                              | Send a JSON response with JSONP support.                                              |
+| [res.redirect()](/en/4x/api/response#resredirectstatus-path)                 | Redirect a request.                                                                   |
+| [res.render()](/en/4x/api/response#resrenderview--locals--callback)          | Render a view template.                                                               |
+| [res.send()](/en/4x/api/response#ressendbody)                                | Send a response of various types.                                                     |
+| [res.sendFile()](/en/4x/api/response#ressendfilepath--options--fn)           | Send a file as an octet stream.                                                       |
+| [res.sendStatus()](/en/4x/api/response#ressendstatusstatuscode)              | Set the response status code and send its string representation as the response body. |
 
 ## app.route()
 
