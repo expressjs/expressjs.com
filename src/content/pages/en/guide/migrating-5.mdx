@@ -320,11 +320,11 @@ Use the [`mime-types` package](https://github.com/jshttp/mime-types) to work wit
 
 Router handling logic is now performed by a separate dependency ([`router`](https://github.com/pillarjs/router)) maintained by the Express team, so debug logs have moved to a different namespace. Before Express 5.1, these debug logs did not exist. To get them, update to a recent Express 5 version or update the `router` package in your `package-lock.json`:
 
-| v4 | v5 |
-| --- | --- |
-| `express:router` | `router` |
-| `express:router:layer` | `router:layer` |
-| `express:router:route` | `router:route` |
+| v4                         | v5                                  |
+| -------------------------- | ----------------------------------- |
+| `express:router`           | `router`                            |
+| `express:router:layer`     | `router:layer`                      |
+| `express:router:route`     | `router:route`                      |
 | `express:*` (includes all) | `express:*` + `router` + `router:*` |
 
 #### How to update
