@@ -71,6 +71,8 @@ LIST_END
   CONTENT=$(echo "$CONTENT" | sed '/^\[.*\]:.*securityscorecards\.dev/d')
   CONTENT=$(echo "$CONTENT" | sed '/^\[.*\]:.*opencollective\.com.*\/badge/d')
   CONTENT=$(echo "$CONTENT" | sed '/^\[.*\]:.*bestpractices\.coreinfrastructure\.org/d')
+  # Remove HTML badge lines (<a><img></a> patterns)
+  CONTENT=$(echo "$CONTENT" | sed '/<a[^>]*><img[^>]*><\/a>/d')
 
   # Convert GitHub callouts to Alert components
   CONTENT=$(echo "$CONTENT" | perl -0777 -pe '
@@ -82,6 +84,9 @@ LIST_END
       $body =~ s|^> ?||gm;
       "<Alert type=\"$alert\">\n\n${body}\n<\/Alert>\n"
     /ge')
+
+  # Convert HTML comments to MDX comments
+  CONTENT=$(echo "$CONTENT" | sed -E 's/<!--(.*)-->/\{\/\*\1\*\/\}/g')
 
   # Convert self-closing HTML tags for MDX compatibility
   CONTENT=$(echo "$CONTENT" | sed -E 's/<(br|hr|img)([^/]*[^/])?\s*>/<\1\2 \/>/gi')

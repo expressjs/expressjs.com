@@ -26,7 +26,7 @@ $ npm install morgan
 
 ## API
 
-<!-- eslint-disable no-unused-vars -->
+{/* eslint-disable no-unused-vars */}
 
 ```js
 var morgan = require('morgan')
@@ -45,7 +45,7 @@ line, or `undefined` / `null` to skip logging.
 
 #### Using a predefined format string
 
-<!-- eslint-disable no-undef -->
+{/* eslint-disable no-undef */}
 
 ```js
 morgan('tiny')
@@ -53,7 +53,7 @@ morgan('tiny')
 
 #### Using format string of predefined tokens
 
-<!-- eslint-disable no-undef -->
+{/* eslint-disable no-undef */}
 
 ```js
 morgan(':method :url :status :res[content-length] - :response-time ms')
@@ -61,7 +61,7 @@ morgan(':method :url :status :res[content-length] - :response-time ms')
 
 #### Using a custom format function
 
-<!-- eslint-disable no-undef -->
+{/* eslint-disable no-undef */}
 
 ``` js
 morgan(function (tokens, req, res) {
@@ -90,7 +90,7 @@ response code, content length, etc.) cannot be logged_.
 Function to determine if logging is skipped, defaults to `false`. This function
 will be called as `skip(req, res)`.
 
-<!-- eslint-disable no-undef -->
+{/* eslint-disable no-undef */}
 
 ```js
 // EXAMPLE: only log error responses
@@ -167,7 +167,7 @@ To define a token, simply invoke `morgan.token()` with the name and a callback f
 This callback function is expected to return a string value. The value returned is then
 available as ":type" in this case:
 
-<!-- eslint-disable no-undef -->
+{/* eslint-disable no-undef */}
 
 ```js
 morgan.token('type', function (req, res) { return req.headers['content-type'] })

@@ -82,7 +82,7 @@ app.use(methodOverride('X-HTTP-Method-Override'))
 
 Example call with header override using `XMLHttpRequest`:
 
-<!-- eslint-env browser -->
+{/* eslint-env browser */}
 
 ```js
 const xhr = new XMLHttpRequest()
@@ -164,7 +164,7 @@ app.use(methodOverride(function (req, res) {
 Example call with query override using HTML `<form>`:
 
 ```html
-<!-- enctype must be set to the type you will parse before methodOverride() -->
+{/* enctype must be set to the type you will parse before methodOverride() */}
 <form method="POST" action="/resource" enctype="application/x-www-form-urlencoded">
   <input type="hidden" name="_method" value="DELETE">
   <button type="submit">Delete resource</button>

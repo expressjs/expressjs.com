@@ -9,7 +9,6 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 <MiddlewareInfo version="1.5.2" github="https://github.com/expressjs/errorhandler" npm="https://www.npmjs.com/package/errorhandler" />
 
 
-<a href="https://github.com/expressjs/errorhandler/actions/workflows/ci.yml"><img src="https://github.com/expressjs/errorhandler/actions/workflows/ci.yml/badge.svg"></a>
 
 Development-only error handler middleware.
 
@@ -41,7 +40,7 @@ $ npm install errorhandler
 
 ## API
 
-<!-- eslint-disable no-unused-vars -->
+{/* eslint-disable no-unused-vars */}
 
 ```js
 var errorhandler = require('errorhandler')
@@ -98,7 +97,7 @@ if (process.env.NODE_ENV === 'development') {
 Sometimes you may want to output the errors to a different location than STDERR
 during development, like a system notification, for example.
 
-<!-- eslint-disable handle-callback-err -->
+{/* eslint-disable handle-callback-err */}
 
 ```js
 var connect = require('connect')

@@ -28,6 +28,9 @@ transform_content() {
       "<Alert type=\"$alert\">\n\n${body}\n<\/Alert>\n"
     /ge')
 
+  # Convert HTML comments to MDX comments
+  content=$(echo "$content" | sed -E 's/<!--(.*)-->/\{\/\*\1\*\/\}/g')
+
   # Convert self-closing HTML tags for MDX compatibility
   content=$(echo "$content" | sed -E 's/<(br|hr|img)([^/]*[^/])?\s*>/<\1\2 \/>/gi')
 
