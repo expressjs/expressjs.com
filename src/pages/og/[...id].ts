@@ -73,7 +73,10 @@ export const GET: APIRoute = async ({ props }) => {
   const publicDir = join(process.cwd(), 'public');
   const interBold = await fs.readFile(join(publicDir, 'fonts', 'inter-bold.woff'));
 
-  const logoSvg = await fs.readFile(join(publicDir, 'logo-express-white.svg'), 'utf-8');
+  const logoSvg = await fs.readFile(
+    join(publicDir, 'images', 'logos', 'logo-express-white.svg'),
+    'utf-8'
+  );
   const logoBase64 = `data:image/svg+xml;base64,${Buffer.from(logoSvg).toString('base64')}`;
 
   const displayTitle = title.length > 80 ? title.slice(0, 80) + '...' : title;

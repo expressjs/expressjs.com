@@ -1,8 +1,8 @@
 <p align="center">
   <a href="https://expressjs.com">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="public/logo-express-white.svg">
-      <img src="public/logo-express-black.svg" alt="Express.js" width="280">
+      <source media="(prefers-color-scheme: dark)" srcset="public/images/logos/logo-express-white.svg">
+      <img src="public/images/logos/logo-express-black.svg" alt="Express.js" width="280">
     </picture>
   </a>
 </p>

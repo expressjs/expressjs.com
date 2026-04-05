@@ -180,6 +180,9 @@
     "message": "The page you are looking for does not exist or has been moved.",
     "goHome": "Go to Home"
   },
+  "common": {
+    "download": "Download"
+  },
   "hero": {
     "tagline": "Fast, unopinionated, minimalist web framework for Node.js",
     "getStarted": "Get Started",
