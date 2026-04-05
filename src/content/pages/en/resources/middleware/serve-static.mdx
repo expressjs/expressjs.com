@@ -6,9 +6,11 @@ description: Serve static files
 import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-<MiddlewareInfo version="2.2.1" github="https://github.com/expressjs/serve-static" npm="https://www.npmjs.com/package/serve-static" />
-
-
+<MiddlewareInfo
+  version="2.2.1"
+  github="https://github.com/expressjs/serve-static"
+  npm="https://www.npmjs.com/package/serve-static"
+/>
 
 ## Install
 
@@ -23,7 +25,7 @@ $ npm install serve-static
 ## API
 
 ```js
-const serveStatic = require('serve-static')
+const serveStatic = require('serve-static');
 ```
 
 ### serveStatic(root, options)
@@ -56,9 +58,9 @@ disk. If `root` is specified, only the dotfiles above the root are
 checked (i.e. the root itself can be within a dotfile when set
 to "deny").
 
-  - `'allow'` No special treatment for dotfiles.
-  - `'deny'` Deny a request for a dotfile and 403/`next()`.
-  - `'ignore'` Pretend like the dotfile does not exist and 404/`next()`.
+- `'allow'` No special treatment for dotfiles.
+- `'deny'` Deny a request for a dotfile and 403/`next()`.
+- `'ignore'` Pretend like the dotfile does not exist and 404/`next()`.
 
 The default value is `'ignore'`.
 
@@ -128,57 +130,57 @@ Function to set custom headers on response. Alterations to the headers need to
 occur synchronously. The function is called as `fn(res, path, stat)`, where
 the arguments are:
 
-  - `res` the response object
-  - `path` the file path that is being sent
-  - `stat` the stat object of the file that is being sent
+- `res` the response object
+- `path` the file path that is being sent
+- `stat` the stat object of the file that is being sent
 
 ## Examples
 
 ### Serve files with vanilla node.js http server
 
 ```js
-const finalhandler = require('finalhandler')
-const http = require('http')
-const serveStatic = require('serve-static')
+const finalhandler = require('finalhandler');
+const http = require('http');
+const serveStatic = require('serve-static');
 
 // Serve up public/ftp folder
-const serve = serveStatic('public/ftp', { index: ['index.html', 'index.htm'] })
+const serve = serveStatic('public/ftp', { index: ['index.html', 'index.htm'] });
 
 // Create server
 const server = http.createServer((req, res) => {
-  serve(req, res, finalhandler(req, res))
-})
+  serve(req, res, finalhandler(req, res));
+});
 
 // Listen
-server.listen(3000)
+server.listen(3000);
 ```
 
 ### Serve all files as downloads
 
 ```js
-const contentDisposition = require('content-disposition')
-const finalhandler = require('finalhandler')
-const http = require('http')
-const serveStatic = require('serve-static')
+const contentDisposition = require('content-disposition');
+const finalhandler = require('finalhandler');
+const http = require('http');
+const serveStatic = require('serve-static');
 
 // Serve up public/ftp folder
 const serve = serveStatic('public/ftp', {
   index: false,
-  setHeaders: setHeaders
-})
+  setHeaders: setHeaders,
+});
 
 // Set header to force download
-function setHeaders (res, path) {
-  res.setHeader('Content-Disposition', contentDisposition(path))
+function setHeaders(res, path) {
+  res.setHeader('Content-Disposition', contentDisposition(path));
 }
 
 // Create server
 const server = http.createServer((req, res) => {
-  serve(req, res, finalhandler(req, res))
-})
+  serve(req, res, finalhandler(req, res));
+});
 
 // Listen
-server.listen(3000)
+server.listen(3000);
 ```
 
 ### Serving using express
@@ -188,13 +190,13 @@ server.listen(3000)
 This is a simple example of using Express.
 
 ```js
-const express = require('express')
-const serveStatic = require('serve-static')
+const express = require('express');
+const serveStatic = require('serve-static');
 
-const app = express()
+const app = express();
 
-app.use(serveStatic('public/ftp', { index: ['default.html', 'default.htm'] }))
-app.listen(3000)
+app.use(serveStatic('public/ftp', { index: ['default.html', 'default.htm'] }));
+app.listen(3000);
 ```
 
 #### Multiple roots
@@ -204,15 +206,15 @@ Files are searched for in `public-optimized/` first, then `public/` second
 as a fallback.
 
 ```js
-const express = require('express')
-const path = require('path')
-const serveStatic = require('serve-static')
+const express = require('express');
+const path = require('path');
+const serveStatic = require('serve-static');
 
-const app = express()
+const app = express();
 
-app.use(serveStatic(path.join(__dirname, 'public-optimized')))
-app.use(serveStatic(path.join(__dirname, 'public')))
-app.listen(3000)
+app.use(serveStatic(path.join(__dirname, 'public-optimized')));
+app.use(serveStatic(path.join(__dirname, 'public')));
+app.listen(3000);
 ```
 
 #### Different settings for paths
@@ -222,23 +224,25 @@ file. In this example, HTML files are not cached, while everything else
 is for 1 day.
 
 ```js
-const express = require('express')
-const path = require('path')
-const serveStatic = require('serve-static')
+const express = require('express');
+const path = require('path');
+const serveStatic = require('serve-static');
 
-const app = express()
+const app = express();
 
-app.use(serveStatic(path.join(__dirname, 'public'), {
-  maxAge: '1d',
-  setHeaders: setCustomCacheControl
-}))
+app.use(
+  serveStatic(path.join(__dirname, 'public'), {
+    maxAge: '1d',
+    setHeaders: setCustomCacheControl,
+  })
+);
 
-app.listen(3000)
+app.listen(3000);
 
-function setCustomCacheControl (res, file) {
+function setCustomCacheControl(res, file) {
   if (path.extname(file) === '.html') {
     // Custom Cache-Control for HTML files
-    res.setHeader('Cache-Control', 'public, max-age=0')
+    res.setHeader('Cache-Control', 'public, max-age=0');
   }
 }
 ```
