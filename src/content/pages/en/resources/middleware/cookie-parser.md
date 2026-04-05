@@ -111,7 +111,7 @@ app.listen(8080);
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/cookie-parser/blob/HEAD/LICENSE)
 
 [ci-image]: https://badgen.net/github/checks/expressjs/cookie-parser/master?label=ci
 [ci-url]: https://github.com/expressjs/cookie-parser/actions?query=workflow%3Aci

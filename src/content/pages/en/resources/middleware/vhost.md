@@ -160,7 +160,7 @@ app.listen(3000);
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/vhost/blob/HEAD/LICENSE)
 
 [npm-image]: https://img.shields.io/npm/v/vhost.svg
 [npm-url]: https://npmjs.org/package/vhost

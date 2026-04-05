@@ -339,7 +339,7 @@ For information on how to build your own storage engine, see [Multer Storage Eng
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/multer/blob/HEAD/LICENSE)
 
 [ci-image]: https://github.com/expressjs/multer/actions/workflows/ci.yml/badge.svg
 [ci-url]: https://github.com/expressjs/multer/actions/workflows/ci.yml

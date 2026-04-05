@@ -67,12 +67,10 @@ morgan(function (tokens, req, res) {
     tokens.method(req, res),
     tokens.url(req, res),
     tokens.status(req, res),
-    tokens.res(req, res, 'content-length'),
-    '-',
-    tokens['response-time'](req, res),
-    'ms',
-  ].join(' ');
-});
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](https://github.com/expressjs/morgan/blob/HEAD/req, res), 'ms'
+  ].join(' ')
+})
 ```
 
 #### Options
@@ -445,7 +443,7 @@ function assignId(req, res, next) {
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/morgan/blob/HEAD/LICENSE)
 
 [ci-image]: https://badgen.net/github/checks/expressjs/morgan/master?label=ci
 [ci-url]: https://github.com/expressjs/morgan/actions/workflows/ci.yml

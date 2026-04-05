@@ -294,7 +294,7 @@ move to an [alternative session strategy](https://github.com/expressjs/session#c
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/cookie-session/blob/HEAD/LICENSE)
 
 [ci-image]: https://img.shields.io/github/actions/workflow/status/expressjs/cookie-session/ci.yml
 [ci-url]: https://github.com/expressjs/cookie-session/actions?query=workflow%3Aci

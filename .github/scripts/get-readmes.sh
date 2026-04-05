@@ -58,6 +58,10 @@ LIST_END
   # Remove the first h1 heading (title is rendered by the layout)
   CONTENT=$(echo "$CONTENT" | sed '0,/^# /{/^# /d}')
 
+  # Convert relative links to absolute GitHub URLs
+  BASEURL="https://github.com/$org/$repo/blob/HEAD"
+  CONTENT=$(echo "$CONTENT" | sed -E "s|\]\(([^)#/][^):]*)\)|](${BASEURL}/\1)|g")
+
   # Write with frontmatter preserved
   if [ -n "$FRONTMATTER" ]; then
     printf '%s\n%s\n%s\n\n%s\n' "---" "$FRONTMATTER" "---" "$CONTENT" > $DEST

@@ -116,7 +116,7 @@ defined in the object is what is used.
 
 ##### cookie.partitioned
 
-Specifies the `boolean` value for the [`Partitioned` `Set-Cookie`](rfc-cutler-httpbis-partitioned-cookies)
+Specifies the `boolean` value for the [`Partitioned` `Set-Cookie`](https://github.com/expressjs/session/blob/HEAD/rfc-cutler-httpbis-partitioned-cookies)
 attribute. When truthy, the `Partitioned` attribute is set, otherwise it is not.
 By default, the `Partitioned` attribute is not set.
 
@@ -1060,7 +1060,7 @@ On Windows, use the corresponding command;
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/session/blob/HEAD/LICENSE)
 
 [rfc-6265bis-03-4.1.2.7]: https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03#section-4.1.2.7
 [rfc-cutler-httpbis-partitioned-cookies]: https://tools.ietf.org/html/draft-cutler-httpbis-partitioned-cookies/

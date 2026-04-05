@@ -245,7 +245,7 @@ function setCustomCacheControl(res, file) {
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/serve-static/blob/HEAD/LICENSE)
 
 [coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/serve-static/master
 [coveralls-url]: https://coveralls.io/r/expressjs/serve-static?branch=master

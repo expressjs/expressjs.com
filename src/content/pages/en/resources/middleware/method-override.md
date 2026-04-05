@@ -173,7 +173,7 @@ Example call with query override using HTML `<form>`:
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/method-override/blob/HEAD/LICENSE)
 
 [npm-image]: https://img.shields.io/npm/v/method-override.svg
 [npm-url]: https://npmjs.org/package/method-override

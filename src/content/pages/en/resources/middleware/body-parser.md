@@ -498,7 +498,7 @@ app.use(bodyParser.text({ type: 'text/html' }));
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/body-parser/blob/HEAD/LICENSE)
 
 [ci-image]: https://img.shields.io/github/actions/workflow/status/expressjs/body-parser/ci.yml?branch=master&label=ci
 [ci-url]: https://github.com/expressjs/body-parser/actions/workflows/ci.yml

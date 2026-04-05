@@ -132,7 +132,7 @@ app.get('/', function (req, res) {
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/response-time/blob/HEAD/LICENSE)
 
 [npm-version-image]: https://badgen.net/npm/v/response-time
 [npm-url]: https://npmjs.org/package/response-time

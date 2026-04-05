@@ -162,7 +162,7 @@ app.listen(3000);
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/timeout/blob/HEAD/LICENSE)
 
 [npm-image]: https://img.shields.io/npm/v/connect-timeout.svg
 [npm-url]: https://npmjs.org/package/connect-timeout

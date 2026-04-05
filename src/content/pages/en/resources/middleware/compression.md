@@ -298,7 +298,7 @@ See the [Contributing Guide](https://github.com/expressjs/express/blob/master/Co
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/compression/blob/HEAD/LICENSE)
 
 [npm-image]: https://badgen.net/npm/v/compression
 [npm-url]: https://npmjs.org/package/compression

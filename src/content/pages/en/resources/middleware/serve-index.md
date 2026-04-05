@@ -139,7 +139,7 @@ app.listen(3000);
 
 ## License
 
-[MIT](LICENSE). The [Silk](http://www.famfamfam.com/lab/icons/silk/) icons
+[MIT](https://github.com/expressjs/serve-index/blob/HEAD/LICENSE). The [Silk](http://www.famfamfam.com/lab/icons/silk/) icons
 are created by/copyright of [FAMFAMFAM](http://www.famfamfam.com/).
 
 [appveyor-image]: https://img.shields.io/appveyor/ci/dougwilson/serve-index/master.svg?label=windows

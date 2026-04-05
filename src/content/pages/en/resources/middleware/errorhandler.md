@@ -122,7 +122,7 @@ function errorNotification(err, str, req) {
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/errorhandler/blob/HEAD/LICENSE)
 
 [coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/errorhandler/master
 [coveralls-url]: https://coveralls.io/r/expressjs/errorhandler?branch=master

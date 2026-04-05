@@ -125,7 +125,7 @@ server.listen(3000);
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/serve-favicon/blob/HEAD/LICENSE)
 
 [ci-image]: https://badgen.net/github/checks/expressjs/serve-favicon/master?label=ci
 [ci-url]: https://github.com/expressjs/serve-favicon/actions/workflows/ci.yml
