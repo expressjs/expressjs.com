@@ -32,6 +32,7 @@ const {
 const t = useTranslations(lang);
 const isNested = variant === 'nested';
 const isRootSubmenu = variant === 'root';
+const isExternal = href.startsWith('http');
 
 // show overview instead of specific section names for top-level items that link to an overview page
 const overviewAliases = new Set([
@@ -61,6 +62,8 @@ function getLabel() {
         aria-label={item.ariaLabel ? t(item.ariaLabel) : undefined}
         aria-current={isActive ? 'page' : undefined}
         data-omit-from={item.omitFrom?.join(',') || undefined}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
       >
         {showIcon && item.icon && (
           <div class="sidebar-nav-icon">

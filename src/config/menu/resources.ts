@@ -30,6 +30,11 @@ export const resourcesMenu: Menu = {
       ariaLabel: 'menu.aria.utils',
     },
     {
+      href: `https://github.com/expressjs/express/releases`,
+      label: 'menu.items.changelog',
+      ariaLabel: 'menu.aria.changelog',
+    },
+    {
       label: 'menu.sections.middleware',
       ariaLabel: 'menu.aria.middleware',
       submenu: {

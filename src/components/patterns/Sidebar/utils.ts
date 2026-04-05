@@ -27,6 +27,7 @@ export function resolveHref(
   version: string,
   global?: boolean
 ): string {
+  if (href.startsWith('http')) return href;
   const useVersion = !global && isVersioned(versioned, version);
   const versionPath = useVersion ? `/${version}` : '';
   return `/${lang}${basePath}${versionPath}${href}`;

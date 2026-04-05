@@ -87,6 +87,7 @@
       "glossary": "Glossary",
       "contributing": "Contributing",
       "utils": "Utilities",
+      "changelog": "Changelog",
       "middleware": "Middleware"
     },
     "aria": {
@@ -119,7 +120,8 @@
       "community": "Community resources",
       "glossary": "Glossary of terms",
       "contributing": "Contributing guide",
-      "utils": "Utilities"
+      "utils": "Utilities",
+      "changelog": "Express changelog"
     }
   },
   "doc": {
