@@ -152,6 +152,7 @@ function flattenMenu(
       if (version && item.omitFrom?.includes(version as VersionPrefix)) continue;
 
       if ('href' in item && item.href && !item.href.includes('#')) {
+        if (item.href.startsWith('http')) continue;
         items.push({ href: `${basePath}${item.href}`, label: item.label, global: item.global });
       }
       if ('submenu' in item && item.submenu) {
