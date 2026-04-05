@@ -96,6 +96,6 @@ For more detailed documentation about the project, see the [`docs/`](docs/) fold
 
 - [Project Structure](docs/project-structure.md) — Architecture, folder layout, and framework policy
 - [Content](docs/content.md) — Collections, frontmatter, versioning, and global pages
-- [Menu Configuration](docs/menu-configuration.md) — Navigation menus, sections, and version-specific items
+- [Configuration](docs/configuration.md) — Navigation menus, announcement bar, and version-specific items
 - [Internationalization](docs/i18n.md) — Translations, Crowdin integration, and adding languages
 - [Design System](docs/design-system.md) — Components, tokens, colors, typography, and breakpoints
