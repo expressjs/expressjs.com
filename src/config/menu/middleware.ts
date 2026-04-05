@@ -3,7 +3,7 @@ import type { Menu } from '../types';
 export const middlewareMenu: Menu = {
   items: [
     {
-      href: `/overview`,
+      href: `/`,
       label: 'menu.items.overview',
       ariaLabel: 'menu.aria.middleware',
     },
