@@ -132,7 +132,8 @@
     "translateThis": "Translate this page"
   },
   "announcement": {
-    "readMore": "Read more"
+    "readMore": "Read more",
+    "checkLatestBlog": "Check out our latest blog"
   },
   "post": {
     "share": "Share",
