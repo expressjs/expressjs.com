@@ -1,0 +1,27 @@
+.middleware-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 0.75rem 0 1.5rem;
+  border-bottom: 1px solid var(--color-border-primary);
+  margin-bottom: 1.5rem;
+}
+
+.middleware-info__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: var(--text-sm);
+  line-height: 1;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.middleware-info__item svg {
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+a.middleware-info__item:hover {
+  color: var(--color-text-primary);
+}

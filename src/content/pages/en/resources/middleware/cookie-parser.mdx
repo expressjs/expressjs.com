@@ -3,10 +3,14 @@ title: cookie-parser middleware
 description: Parse HTTP request cookies
 ---
 
-[![NPM Version][npm-version-image]][npm-url]
-[![NPM Downloads][npm-downloads-image]][npm-url]
-[![Build Status][ci-image]][ci-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.4.7"
+  github="https://github.com/expressjs/cookie-parser"
+  npm="https://www.npmjs.com/package/cookie-parser"
+/>
 
 Parse `Cookie` header and populate `req.cookies` with an object keyed by the
 cookie names. Optionally you may enable signed cookie support by passing a
@@ -111,12 +115,6 @@ app.listen(8080);
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/cookie-parser/blob/HEAD/LICENSE)
 
-[ci-image]: https://badgen.net/github/checks/expressjs/cookie-parser/master?label=ci
-[ci-url]: https://github.com/expressjs/cookie-parser/actions?query=workflow%3Aci
-[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/cookie-parser/master
-[coveralls-url]: https://coveralls.io/r/expressjs/cookie-parser?branch=master
-[npm-downloads-image]: https://badgen.net/npm/dm/cookie-parser
 [npm-url]: https://npmjs.org/package/cookie-parser
-[npm-version-image]: https://badgen.net/npm/v/cookie-parser

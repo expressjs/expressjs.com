@@ -5,6 +5,11 @@ export const resourcesMenu: Menu = {
   basePath: '/resources',
   items: [
     {
+      href: `/`,
+      label: 'menu.items.overview',
+      ariaLabel: 'menu.items.overview',
+    },
+    {
       href: `/community`,
       label: 'menu.items.community',
       ariaLabel: 'menu.aria.community',
@@ -23,6 +28,11 @@ export const resourcesMenu: Menu = {
       href: `/utils`,
       label: 'menu.items.utils',
       ariaLabel: 'menu.aria.utils',
+    },
+    {
+      href: `https://github.com/expressjs/express/releases`,
+      label: 'menu.items.changelog',
+      ariaLabel: 'menu.aria.changelog',
     },
     {
       label: 'menu.sections.middleware',

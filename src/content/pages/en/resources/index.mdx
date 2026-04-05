@@ -1,0 +1,42 @@
+---
+title: Resources
+description: Explore Express.js resources including community, contributing guidelines, glossary, utilities, and middleware.
+---
+
+import Card from '@components/primitives/Card/Card.astro';
+import { CardList } from '@components/patterns';
+
+Find resources to help you learn, contribute, and connect with the Express.js ecosystem. Whether you're looking to get involved in the community, explore middleware, or understand key concepts, you'll find what you need here.
+
+<CardList gap="6">
+  <a href="/en/resources/community">
+    <Card
+      title="Community"
+      body="Connect with the Express.js community, learn about the technical committee, and get involved in discussions."
+    />
+  </a>
+  <a href="/en/resources/contributing">
+    <Card
+      title="Contributing to Express"
+      body="Find out how to contribute to Express.js, including guidelines for reporting issues and submitting pull requests."
+    />
+  </a>
+  <a href="/en/resources/glossary">
+    <Card
+      title="Glossary"
+      body="A comprehensive glossary of terms related to Express.js, Node.js, middleware, routing, and other key concepts."
+    />
+  </a>
+  <a href="/en/resources/utils">
+    <Card
+      title="Utilities"
+      body="Discover utility modules related to Express.js and Node.js, including tools for cookies, CSRF protection, URL parsing, and more."
+    />
+  </a>
+  <a href="/en/resources/middleware">
+    <Card
+      title="Middleware"
+      body="Explore middleware modules for Express.js to extend your application with additional functionality."
+    />
+  </a>
+</CardList>

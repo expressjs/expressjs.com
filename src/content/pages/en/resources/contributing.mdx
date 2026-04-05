@@ -3,13 +3,9 @@ title: Contributing to Express
 description: Find out how to contribute to Express.js, including guidelines for reporting issues, submitting pull requests, becoming a collaborator, and understanding security policies.
 ---
 
-Express and the other projects in the [expressjs organization on GitHub](https://github.com/expressjs) are projects of the [OpenJS Foundation](https://openjsf.org/).
-These projects are governed under the general policies and guidelines of the Node.js Foundation along with the additional guidelines below.
+import Alert from '@components/primitives/Alert/Alert.astro';
 
-- [Technical committee](#technical-committee)
-- [Community contributing guide](#community-contributing-guide)
-- [Collaborator's guide](#collaborators-guide)
-- [Security policies and procedures](#security-policies-and-procedures)
+Express is an [OpenJS Foundation](https://openjsf.org/) project spread across three GitHub organizations: [expressjs](https://github.com/expressjs), [pillarjs](https://github.com/pillarjs), and [jshttp](https://github.com/jshttp). All contributions are welcome, whether it's reporting bugs, improving documentation, or submitting code. The guidelines below describe how the project operates and how you can get involved.
 
 ## Technical committee
 
@@ -17,7 +13,7 @@ The Express technical committee consists of active project members, and guides d
 
 ## Community contributing guide
 
-<!-- SRC: expressjs/discussions docs/GOVERNANCE.md -->
+{/* SRC: expressjs/discussions docs/GOVERNANCE.md */}
 
 The goal of this document is to create a contribution process that:
 
@@ -80,7 +76,7 @@ compromise among committers be the default resolution mechanism.
 ### Becoming a Triager
 
 Anyone can become a triager! Read more about the process of being a triager in
-[the triage process document](https://github.com/expressjs/discussions/blob/master/Triager-Guide.md).
+[the triage process document](https://github.com/expressjs/discussions/blob/HEAD/Triager-Guide.md).
 
 Currently, any existing [organization member](https://github.com/orgs/expressjs/people) can nominate
 a new triager. If you are interested in becoming a triager, our best advice is to actively participate
@@ -225,7 +221,7 @@ By making a contribution to this project, I certify that:
 
 ## Collaborator's guide
 
-<!-- SRC: expressjs/.github CONTRIBUTING.md -->
+{/* SRC: expressjs/.github CONTRIBUTING.md */}
 
 ### Website Issues
 
@@ -289,7 +285,7 @@ visibility or maintainer input.
 
 ## Security Policies and Procedures
 
-<!-- SRC: expressjs/.github SECURITY.md -->
+{/* SRC: expressjs/.github SECURITY.md */}
 
 This document outlines security procedures and general policies for the Express
 project.
@@ -301,8 +297,11 @@ project.
 
 ### Reporting a Bug or Security Vulnerability
 
-> **IMPORTANT:**
-> Before reporting a vulnerability, please review the [Express Threat Model](#the-express-threat-model) to check if the issue falls within Express's security scope.
+<Alert type="info">
+
+Before reporting a vulnerability, please review the [Express Threat Model](#the-express-threat-model) to check if the issue falls within Express's security scope.
+
+</Alert>
 
 The Express team and community take all security vulnerabilities seriously.
 Thank you for improving the security of Express and related projects.
@@ -319,8 +318,11 @@ After the initial reply to your report, the security team will
 endeavor to keep you informed of the progress towards a fix and full
 announcement, and may ask for additional information or guidance.
 
-> [!NOTE]  
-> You can find more information about our process in [this guide](https://github.com/expressjs/security-wg/blob/main/docs/incident_response_plan.md)
+<Alert type="info">
+
+You can find more information about our process in [this guide](https://github.com/expressjs/security-wg/blob/main/docs/incident_response_plan.md)
+
+</Alert>
 
 #### Reporting Security Bugs via GitHub Security Advisory (Preferred)
 

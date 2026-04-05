@@ -3,11 +3,14 @@ title: compression middleware
 description: Node.js compression middleware
 ---
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Build Status][github-actions-ci-image]][github-actions-ci-url]
-[![OpenSSF Scorecard Badge][ossf-scorecard-badge]][ossf-scorecard-visualizer]
-[![Funding][funding-image]][funding-url]
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.8.1"
+  github="https://github.com/expressjs/compression"
+  npm="https://www.npmjs.com/package/compression"
+/>
 
 Node.js compression middleware.
 
@@ -54,7 +57,7 @@ passed in to the options object or
 
 ##### chunkSize
 
-Type: `Number`<br>
+Type: `Number`<br />
 Default: `zlib.constants.Z_DEFAULT_CHUNK`, or `16384`.
 
 See [Node.js documentation](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
@@ -74,7 +77,7 @@ module to determine if `res.getHeader('Content-Type')` is compressible.
 
 ##### level
 
-Type: `Number`<br>
+Type: `Number`<br />
 Default: `zlib.constants.Z_DEFAULT_COMPRESSION`, or `-1`
 
 The level of zlib compression to apply to responses. A higher level will result
@@ -102,7 +105,7 @@ compression (currently equivalent to level 6).
 
 ##### memLevel
 
-Type: `Number`<br>
+Type: `Number`<br />
 Default: `zlib.constants.Z_DEFAULT_MEMLEVEL`, or `8`
 
 This specifies how much memory should be allocated for the internal compression
@@ -120,7 +123,7 @@ This specifies the options for configuring Brotli. See [Node.js documentation](h
 
 ##### strategy
 
-Type: `Number`<br>
+Type: `Number`<br />
 Default: `zlib.constants.Z_DEFAULT_STRATEGY`
 
 This is used to tune the compression algorithm. This value only affects the
@@ -145,7 +148,7 @@ is not set appropriately.
 
 ##### threshold
 
-Type: `Number` or `String`<br>
+Type: `Number` or `String`<br />
 Default: `1kb`
 
 The byte threshold for the response body size before compression is considered
@@ -159,7 +162,7 @@ set a `Content-Length` response header.
 
 ##### windowBits
 
-Type: `Number`<br>
+Type: `Number`<br />
 Default: `zlib.constants.Z_DEFAULT_WINDOWBITS`, or `15`
 
 See [Node.js documentation](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
@@ -167,7 +170,7 @@ regarding the usage.
 
 ##### enforceEncoding
 
-Type: `String`<br>
+Type: `String`<br />
 Default: `identity`
 
 This is the default encoding to use when the client does not specify an encoding in the request's [Accept-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding) header.
@@ -298,15 +301,10 @@ See the [Contributing Guide](https://github.com/expressjs/express/blob/master/Co
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/compression/blob/HEAD/LICENSE)
 
-[npm-image]: https://badgen.net/npm/v/compression
 [npm-url]: https://npmjs.org/package/compression
-[downloads-image]: https://badgen.net/npm/dm/compression
 [downloads-url]: https://npmcharts.com/compare/compression?minimal=true
-[github-actions-ci-image]: https://badgen.net/github/checks/expressjs/compression/master?label=CI
-[github-actions-ci-url]: https://github.com/expressjs/compression/actions?query=workflow%3Aci
 [ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/compression/badge
 [ossf-scorecard-visualizer]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/compression
 [funding-url]: https://opencollective.com/express
-[funding-image]: https://badgen.net/badge/icon/sponsor/pink?icon=github&label=Open%20Collective

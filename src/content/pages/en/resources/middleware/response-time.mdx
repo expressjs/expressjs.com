@@ -3,11 +3,14 @@ title: response-time middleware
 description: Response time for Node.js servers
 ---
 
-[![NPM Version][npm-version-image]][npm-url]
-[![NPM Downloads][npm-downloads-image]][npm-url]
-[![Node.js Version][node-image]][node-url]
-[![Build Status][ci-image]][ci-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="2.3.4"
+  github="https://github.com/expressjs/response-time"
+  npm="https://www.npmjs.com/package/response-time"
+/>
 
 Response time for Node.js servers.
 
@@ -28,7 +31,7 @@ $ npm install response-time
 
 ## API
 
-<!-- eslint-disable no-unused-vars -->
+{/* eslint-disable no-unused-vars */}
 
 ```js
 var responseTime = require('response-time');
@@ -132,14 +135,7 @@ app.get('/', function (req, res) {
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/response-time/blob/HEAD/LICENSE)
 
-[npm-version-image]: https://badgen.net/npm/v/response-time
 [npm-url]: https://npmjs.org/package/response-time
-[npm-downloads-image]: https://badgen.net/npm/dm/response-time
-[node-image]: https://badgen.net/npm/node/response-time
 [node-url]: https://nodejs.org/en/download
-[ci-image]: https://badgen.net/github/checks/express/response-time/master?label=ci
-[ci-url]: https://github.com/express/response-time/actions/workflows/ci.yml
-[coveralls-image]: https://badgen.net/coveralls/c/github/express/response-time/master
-[coveralls-url]: https://coveralls.io/r/express/response-time?branch=master

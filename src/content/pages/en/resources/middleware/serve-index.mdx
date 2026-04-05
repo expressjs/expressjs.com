@@ -3,11 +3,14 @@ title: serve-index middleware
 description: Serve directory listings
 ---
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Linux Build Status][ci-image]][ci-url]
-[![Windows Build][appveyor-image]][appveyor-url]
-[![Coverage Status][coveralls-image]][coveralls-url]
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.9.2"
+  github="https://github.com/expressjs/serve-index"
+  npm="https://www.npmjs.com/package/serve-index"
+/>
 
 Serves pages that contain directory listings for a given path.
 
@@ -139,16 +142,9 @@ app.listen(3000);
 
 ## License
 
-[MIT](LICENSE). The [Silk](http://www.famfamfam.com/lab/icons/silk/) icons
+[MIT](https://github.com/expressjs/serve-index/blob/HEAD/LICENSE). The [Silk](http://www.famfamfam.com/lab/icons/silk/) icons
 are created by/copyright of [FAMFAMFAM](http://www.famfamfam.com/).
 
-[appveyor-image]: https://img.shields.io/appveyor/ci/dougwilson/serve-index/master.svg?label=windows
 [appveyor-url]: https://ci.appveyor.com/project/dougwilson/serve-index
-[ci-image]: https://badgen.net/github/checks/expressjs/serve-index/master?label=ci
-[ci-url]: https://github.com/expressjs/serve-index/actions/workflows/ci.yml
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/serve-index/master.svg
-[coveralls-url]: https://coveralls.io/r/expressjs/serve-index?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/serve-index.svg
 [downloads-url]: https://npmjs.org/package/serve-index
-[npm-image]: https://img.shields.io/npm/v/serve-index.svg
 [npm-url]: https://npmjs.org/package/serve-index

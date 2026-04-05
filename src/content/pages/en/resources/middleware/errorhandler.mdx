@@ -3,10 +3,14 @@ title: errorhandler middleware
 description: Development-only error handler middleware
 ---
 
-[![NPM Version][npm-version-image]][npm-url]
-[![NPM Downloads][npm-downloads-image]][npm-url]
-<a href="https://github.com/expressjs/errorhandler/actions/workflows/ci.yml"><img src="https://github.com/expressjs/errorhandler/actions/workflows/ci.yml/badge.svg"></a>
-[![Test Coverage][coveralls-image]][coveralls-url]
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.5.2"
+  github="https://github.com/expressjs/errorhandler"
+  npm="https://www.npmjs.com/package/errorhandler"
+/>
 
 Development-only error handler middleware.
 
@@ -38,7 +42,7 @@ $ npm install errorhandler
 
 ## API
 
-<!-- eslint-disable no-unused-vars -->
+{/* eslint-disable no-unused-vars */}
 
 ```js
 var errorhandler = require('errorhandler');
@@ -95,7 +99,7 @@ if (process.env.NODE_ENV === 'development') {
 Sometimes you may want to output the errors to a different location than STDERR
 during development, like a system notification, for example.
 
-<!-- eslint-disable handle-callback-err -->
+{/* eslint-disable handle-callback-err */}
 
 ```js
 var connect = require('connect');
@@ -122,10 +126,6 @@ function errorNotification(err, str, req) {
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/errorhandler/blob/HEAD/LICENSE)
 
-[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/errorhandler/master
-[coveralls-url]: https://coveralls.io/r/expressjs/errorhandler?branch=master
-[npm-downloads-image]: https://badgen.net/npm/dm/errorhandler
 [npm-url]: https://npmjs.org/package/errorhandler
-[npm-version-image]: https://badgen.net/npm/v/errorhandler

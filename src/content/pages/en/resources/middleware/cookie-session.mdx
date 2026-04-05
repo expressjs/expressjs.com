@@ -3,10 +3,14 @@ title: cookie-session middleware
 description: Cookie session middleware
 ---
 
-[![NPM Version][npm-version-image]][npm-url]
-[![NPM Downloads][npm-downloads-image]][npm-url]
-[![Build Status][ci-image]][ci-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="2.1.1"
+  github="https://github.com/expressjs/cookie-session"
+  npm="https://www.npmjs.com/package/cookie-session"
+/>
 
 Simple cookie-based session middleware.
 
@@ -294,12 +298,6 @@ move to an [alternative session strategy](https://github.com/expressjs/session#c
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/cookie-session/blob/HEAD/LICENSE)
 
-[ci-image]: https://img.shields.io/github/actions/workflow/status/expressjs/cookie-session/ci.yml
-[ci-url]: https://github.com/expressjs/cookie-session/actions?query=workflow%3Aci
-[coveralls-image]: https://img.shields.io/coverallsCoverage/github/expressjs/cookie-session?branch=master
-[coveralls-url]: https://coveralls.io/r/expressjs/cookie-session?branch=master
-[npm-downloads-image]: https://img.shields.io/npm/dw/cookie-session
 [npm-url]: https://npmjs.org/package/cookie-session
-[npm-version-image]: https://img.shields.io/npm/v/cookie-session

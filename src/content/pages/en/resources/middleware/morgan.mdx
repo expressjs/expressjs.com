@@ -3,10 +3,14 @@ title: morgan middleware
 description: HTTP request logger middleware for Node.js
 ---
 
-[![NPM Version][npm-version-image]][npm-url]
-[![NPM Downloads][npm-downloads-image]][npm-url]
-[![Build Status][ci-image]][ci-url]
-[![Coverage Status][coveralls-image]][coveralls-url]
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.10.1"
+  github="https://github.com/expressjs/morgan"
+  npm="https://www.npmjs.com/package/morgan"
+/>
 
 HTTP request logger middleware for node.js
 
@@ -24,7 +28,7 @@ $ npm install morgan
 
 ## API
 
-<!-- eslint-disable no-unused-vars -->
+{/* eslint-disable no-unused-vars */}
 
 ```js
 var morgan = require('morgan');
@@ -43,7 +47,7 @@ line, or `undefined` / `null` to skip logging.
 
 #### Using a predefined format string
 
-<!-- eslint-disable no-undef -->
+{/* eslint-disable no-undef */}
 
 ```js
 morgan('tiny');
@@ -51,7 +55,7 @@ morgan('tiny');
 
 #### Using format string of predefined tokens
 
-<!-- eslint-disable no-undef -->
+{/* eslint-disable no-undef */}
 
 ```js
 morgan(':method :url :status :res[content-length] - :response-time ms');
@@ -59,7 +63,7 @@ morgan(':method :url :status :res[content-length] - :response-time ms');
 
 #### Using a custom format function
 
-<!-- eslint-disable no-undef -->
+{/* eslint-disable no-undef */}
 
 ```js
 morgan(function (tokens, req, res) {
@@ -67,12 +71,10 @@ morgan(function (tokens, req, res) {
     tokens.method(req, res),
     tokens.url(req, res),
     tokens.status(req, res),
-    tokens.res(req, res, 'content-length'),
-    '-',
-    tokens['response-time'](req, res),
-    'ms',
-  ].join(' ');
-});
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](https://github.com/expressjs/morgan/blob/HEAD/req, res), 'ms'
+  ].join(' ')
+})
 ```
 
 #### Options
@@ -90,7 +92,7 @@ response code, content length, etc.) cannot be logged_.
 Function to determine if logging is skipped, defaults to `false`. This function
 will be called as `skip(req, res)`.
 
-<!-- eslint-disable no-undef -->
+{/* eslint-disable no-undef */}
 
 ```js
 // EXAMPLE: only log error responses
@@ -170,7 +172,7 @@ To define a token, simply invoke `morgan.token()` with the name and a callback f
 This callback function is expected to return a string value. The value returned is then
 available as ":type" in this case:
 
-<!-- eslint-disable no-undef -->
+{/* eslint-disable no-undef */}
 
 ```js
 morgan.token('type', function (req, res) {
@@ -445,12 +447,6 @@ function assignId(req, res, next) {
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/expressjs/morgan/blob/HEAD/LICENSE)
 
-[ci-image]: https://badgen.net/github/checks/expressjs/morgan/master?label=ci
-[ci-url]: https://github.com/expressjs/morgan/actions/workflows/ci.yml
-[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/morgan/master
-[coveralls-url]: https://coveralls.io/r/expressjs/morgan?branch=master
-[npm-downloads-image]: https://badgen.net/npm/dm/morgan
 [npm-url]: https://npmjs.org/package/morgan
-[npm-version-image]: https://badgen.net/npm/v/morgan

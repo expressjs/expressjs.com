@@ -3,15 +3,22 @@ title: cors middleware
 description: Node.js CORS middleware
 ---
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Build Status][github-actions-ci-image]][github-actions-ci-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="2.8.6"
+  github="https://github.com/expressjs/cors"
+  npm="https://www.npmjs.com/package/cors"
+/>
 
 CORS is a [Node.js](https://nodejs.org/en/) middleware for [Express](https://expressjs.com/)/[Connect](https://github.com/senchalabs/connect) that sets [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) response headers. These headers tell browsers which origins can read responses from your server.
 
-> [!IMPORTANT]
-> **How CORS Works:** This package sets response headers—it doesn't block requests. CORS is enforced by browsers: they check the headers and decide if JavaScript can read the response. Non-browser clients (curl, Postman, other servers) ignore CORS entirely. See the [MDN CORS guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) for details.
+<Alert type="info">
+
+**How CORS Works:** This package sets response headers—it doesn't block requests. CORS is enforced by browsers: they check the headers and decide if JavaScript can read the response. Non-browser clients (curl, Postman, other servers) ignore CORS entirely. See the [MDN CORS guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) for details.
+
+</Alert>
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -271,11 +278,6 @@ The default configuration is the equivalent of:
 
 [Troy Goode](https://github.com/TroyGoode) ([troygoode@gmail.com](mailto:troygoode@gmail.com))
 
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/cors/master.svg
-[coveralls-url]: https://coveralls.io/r/expressjs/cors?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/cors.svg
 [downloads-url]: https://npmjs.com/package/cors
-[github-actions-ci-image]: https://img.shields.io/github/actions/workflow/status/expressjs/cors/ci.yml?branch=master&label=ci
 [github-actions-ci-url]: https://github.com/expressjs/cors?query=workflow%3Aci
-[npm-image]: https://img.shields.io/npm/v/cors.svg
 [npm-url]: https://npmjs.com/package/cors

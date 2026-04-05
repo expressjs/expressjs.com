@@ -25,6 +25,7 @@ function buildMenuMaps(menu: Menu) {
   const walkItems = (items: MenuItem[], section: MenuSection | null, basePath = '') => {
     for (const item of items) {
       if ('href' in item && item.href) {
+        if (item.href.startsWith('http')) continue;
         const fullPath = `${basePath}${item.href}`.replace(/^\/+/, '');
 
         labelMap.set(fullPath, item.label);
@@ -151,6 +152,7 @@ function flattenMenu(
       if (version && item.omitFrom?.includes(version as VersionPrefix)) continue;
 
       if ('href' in item && item.href && !item.href.includes('#')) {
+        if (item.href.startsWith('http')) continue;
         items.push({ href: `${basePath}${item.href}`, label: item.label, global: item.global });
       }
       if ('submenu' in item && item.submenu) {
