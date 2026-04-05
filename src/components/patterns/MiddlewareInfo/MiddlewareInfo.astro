@@ -1,0 +1,37 @@
+---
+/**
+ * MiddlewareInfo Component
+ *
+ * Displays version, links to GitHub, changelog, and npm for a middleware package.
+ */
+import './MiddlewareInfo.css';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  version: string;
+  github: string;
+  npm: string;
+}
+
+const { version, github, npm } = Astro.props;
+const changelog = `${github}/releases`;
+---
+
+<div class="middleware-info">
+  <span class="middleware-info__item">
+    <Icon name="fluent:tag-16-regular" size="16" />
+    v{version}
+  </span>
+  <a href={github} target="_blank" rel="noopener noreferrer" class="middleware-info__item">
+    <Icon name="github" size="16" />
+    GitHub
+  </a>
+  <a href={changelog} target="_blank" rel="noopener noreferrer" class="middleware-info__item">
+    <Icon name="fluent:history-16-regular" size="16" />
+    Changelog
+  </a>
+  <a href={npm} target="_blank" rel="noopener noreferrer" class="middleware-info__item">
+    <Icon name="fluent:box-16-regular" size="16" />
+    npm
+  </a>
+</div>
