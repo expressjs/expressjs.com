@@ -25,6 +25,7 @@ function buildMenuMaps(menu: Menu) {
   const walkItems = (items: MenuItem[], section: MenuSection | null, basePath = '') => {
     for (const item of items) {
       if ('href' in item && item.href) {
+        if (item.href.startsWith('http')) continue;
         const fullPath = `${basePath}${item.href}`.replace(/^\/+/, '');
 
         labelMap.set(fullPath, item.label);
