@@ -1,6 +1,6 @@
 ---
-import { Hero, Features, Banner } from '@components/patterns';
-import { BodyMd, Card, Col } from '@components/primitives';
+import { Hero, Features, AnnouncementBar } from '@components/patterns';
+import { Card, Col } from '@components/primitives';
 import Layout from '@layouts/Layout.astro';
 import { languages } from '@i18n/locales';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
@@ -16,18 +16,7 @@ const t = useTranslations(lang);
 ---
 
 <Layout>
-  <!-- TODO: Banner added for demo purposes, will be removed before release, or replaced with a new one -->
-  <Banner
-    variant="info"
-    startDate="2026-03-01"
-    endDate="2026-05-31"
-    title="Express@5.1.0: Now the Default on npm with LTS Timeline"
-  >
-    <BodyMd vMargin={false}
-      >Express 5.1.0 is now the default on npm, and we're introducing an official LTS schedule for
-      the v4 and v5 release lines. <a href={`/${lang}/blog`}>Check out our latest blog</a> for more information.</BodyMd
-    >
-  </Banner>
+  <AnnouncementBar />
   <Hero
     videoSrc="/videos/hero-background.webm"
     videoSrcLight="/videos/hero-background-light.webm"

@@ -131,6 +131,9 @@
     "editOnGitHub": "Edit on GitHub",
     "translateThis": "Translate this page"
   },
+  "announcement": {
+    "readMore": "Read more"
+  },
   "post": {
     "share": "Share",
     "shareOnX": "Share on X",
