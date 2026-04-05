@@ -1,0 +1,40 @@
+---
+/**
+ * LogoDisplay Component
+ *
+ * Displays both logo variants (dark and light) as cards side by side,
+ * each with a contrasting background and a download button.
+ */
+import { Button } from '@components/primitives';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import './LogoDisplay.css';
+
+interface Props {
+  darkSrc: string;
+  lightSrc: string;
+  alt: string;
+}
+
+const { darkSrc, lightSrc, alt } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class="logo-display">
+  <div class="logo-display__card">
+    <div class="logo-display__preview logo-display__preview--light-bg">
+      <img src={darkSrc} alt={`${alt} (dark)`} class="logo-display__img" loading="lazy" />
+    </div>
+    <Button as="a" href={darkSrc} download variant="secondary" size="sm" ghost>
+      {t('common.download')}
+    </Button>
+  </div>
+  <div class="logo-display__card">
+    <div class="logo-display__preview logo-display__preview--dark-bg">
+      <img src={lightSrc} alt={`${alt} (light)`} class="logo-display__img" loading="lazy" />
+    </div>
+    <Button as="a" href={lightSrc} download variant="secondary" size="sm" ghost>
+      {t('common.download')}
+    </Button>
+  </div>
+</div>
