@@ -73,7 +73,9 @@ const blogEndDate = blogDate
   ) : latestPost ? (
     <Banner variant={blogVariant} startDate={blogStartDate} endDate={blogEndDate} title={blogTitle}>
       <BodyMd vMargin={false}>
-        {blogDescription} <a href={`/${lang}/blog/${blogSlug}`}>{t('announcement.readMore')}</a>
+        {/* Trailing space inside template literal to prevent Prettier from stripping it */}
+        {`${blogDescription} `}
+        <a href={`/${lang}/blog/${blogSlug}`}>{t('announcement.readMore')}</a>
       </BodyMd>
     </Banner>
   ) : null
