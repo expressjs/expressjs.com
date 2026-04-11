@@ -21,7 +21,7 @@ concurrency:
 jobs:
   sync-orama-cloud:
     name: Sync Orama Cloud
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
 
     steps:
       - name: 'Checkout'

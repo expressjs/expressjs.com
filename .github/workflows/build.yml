@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   lint:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     if: |
       github.event.pull_request.draft != true &&
       (github.event_name == 'pull_request_review' && github.event.review.state == 'approved') ||
@@ -51,7 +51,7 @@ jobs:
 
   build:
     name: build
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     if: |
       github.event.pull_request.draft != true &&
       (github.event_name == 'pull_request_review' && github.event.review.state == 'approved') ||
@@ -78,7 +78,7 @@ jobs:
 
   linkChecker:
     needs: build
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6

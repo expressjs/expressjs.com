@@ -18,7 +18,7 @@ concurrency:
 jobs:
   build:
     name: build
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -33,7 +33,7 @@ jobs:
   deploy:
     name: deploy
     needs: build
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

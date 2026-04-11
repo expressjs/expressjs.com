@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   update-security:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     if: github.repository_owner == 'expressjs'
     steps:
       - name: Checkout
@@ -56,7 +56,7 @@ jobs:
           branch: bot/security-expiry
 
   update-docs:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     if: github.repository_owner == 'expressjs'
     steps:
       - name: Checkout
@@ -96,7 +96,7 @@ jobs:
           branch: bot/update-external-docs
 
   synchronize-with-crowdin:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     if: github.repository_owner == 'expressjs'
     steps:
       - name: Checkout
