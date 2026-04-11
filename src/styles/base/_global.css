@@ -267,6 +267,10 @@ ol {
   padding-left: var(--space-6);
 }
 
+:is(ul, ol) :is(ul, ol) {
+  margin: var(--space-1) 0;
+}
+
 ul {
   list-style-type: disc;
 }
