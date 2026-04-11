@@ -13,10 +13,10 @@ name: 'CodeQL'
 
 on:
   push:
-    branches: ['gh-pages']
+    branches: ['main']
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: ['gh-pages']
+    branches: ['main']
   schedule:
     - cron: '0 0 * * 1'
 
@@ -26,7 +26,7 @@ permissions:
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       actions: read
       contents: read

@@ -5,9 +5,11 @@ on:
   push:
     branches:
       - redesign
+      - main
   pull_request:
     branches:
       - redesign
+      - main
 
 permissions:
   contents: read
@@ -19,7 +21,7 @@ concurrency:
 jobs:
   sync-orama-cloud:
     name: Sync Orama Cloud
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
 
     steps:
       - name: 'Checkout'

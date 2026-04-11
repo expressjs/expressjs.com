@@ -12,7 +12,7 @@ on:
   schedule:
     - cron: '20 7 * * 2'
   push:
-    branches: ['gh-pages']
+    branches: ['main']
 
 # Declare default permissions as read only.
 permissions: read-all
@@ -20,7 +20,7 @@ permissions: read-all
 jobs:
   analysis:
     name: Scorecard analysis
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       # Needed to upload the results to code-scanning dashboard.
       security-events: write
