@@ -23,7 +23,14 @@ const t = useTranslations(lang);
 <div class="logo-display">
   <div class="logo-display__card">
     <div class="logo-display__preview logo-display__preview--light-bg">
-      <img src={darkSrc} alt={`${alt} (dark)`} class="logo-display__img" loading="lazy" />
+      <img
+        src={darkSrc}
+        alt={`${alt} (dark)`}
+        class="logo-display__img"
+        width="200"
+        height="65"
+        loading="lazy"
+      />
     </div>
     <Button as="a" href={darkSrc} download variant="secondary" size="sm" ghost>
       {t('common.download')}
@@ -31,7 +38,14 @@ const t = useTranslations(lang);
   </div>
   <div class="logo-display__card">
     <div class="logo-display__preview logo-display__preview--dark-bg">
-      <img src={lightSrc} alt={`${alt} (light)`} class="logo-display__img" loading="lazy" />
+      <img
+        src={lightSrc}
+        alt={`${alt} (light)`}
+        class="logo-display__img"
+        width="200"
+        height="65"
+        loading="lazy"
+      />
     </div>
     <Button as="a" href={lightSrc} download variant="secondary" size="sm" ghost>
       {t('common.download')}
