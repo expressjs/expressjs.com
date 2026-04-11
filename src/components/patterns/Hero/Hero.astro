@@ -96,8 +96,15 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
     <div class="hero__content">
       <Flex align="end" gap="4">
         <div class="hero__logo">
-          <Icon name="logo-express-black" class="hero__logo-icon--dark" />
-          <Icon name="logo-express-white" class="hero__logo-icon--light" />
+          <Image
+            src="/images/logos/express-kawaii.webp"
+            alt="Express.js kawaii logo"
+            class="hero__logo-kawaii"
+            width={400}
+            height={225}
+          />
+          <Icon name="logo-express-black" class="hero__logo-icon--dark hero__logo-default" />
+          <Icon name="logo-express-white" class="hero__logo-icon--light hero__logo-default" />
         </div>
         <BodyMd vMargin={false}>{EXPRESS_VERSION}</BodyMd>
       </Flex>

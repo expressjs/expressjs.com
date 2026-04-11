@@ -70,7 +70,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-8);
+    gap: var(--space-6);
 
     li {
       display: inline;
@@ -90,7 +90,7 @@
 
     @media (--md-up) {
       justify-content: right;
-      gap: var(--space-10);
+      gap: var(--space-8);
     }
   }
 
@@ -122,5 +122,13 @@
 
   [data-theme='light'] .footer-logo-dark {
     display: none;
+  }
+
+  .kawaii-toggle {
+    font-size: var(--font-size-sm);
+  }
+
+  .kawaii-toggle[aria-pressed='true'] {
+    color: var(--color-link);
   }
 }
