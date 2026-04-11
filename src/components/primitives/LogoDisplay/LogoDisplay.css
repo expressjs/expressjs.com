@@ -29,8 +29,9 @@
 }
 
 .logo-display__img {
-  max-width: 200px;
-  height: auto;
+  width: 200px;
+  aspect-ratio: 200 / 65;
+  object-fit: contain;
 }
 
 .logo-display__card .btn {

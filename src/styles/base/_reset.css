@@ -47,6 +47,14 @@ h6 {
   text-wrap: balance;
 }
 
+/* Prevent orphans in long-form text */
+p,
+li,
+blockquote,
+figcaption {
+  text-wrap: pretty;
+}
+
 /* Better text decoration rendering */
 a {
   text-decoration-skip-ink: auto;

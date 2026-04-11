@@ -79,15 +79,18 @@ h4,
 
 h5,
 .h5 {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-relaxed);
   margin: var(--space-body) 0;
 }
 
 h6,
 .h6 {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
   margin: var(--space-body) 0;
 }
 
@@ -155,6 +158,7 @@ a {
   text-decoration: underline;
   text-underline-offset: 0.15em;
   transition: var(--transition-colors);
+  overflow-wrap: break-word;
 }
 
 a:hover {
@@ -261,6 +265,10 @@ ul,
 ol {
   margin: var(--space-body) 0;
   padding-left: var(--space-6);
+}
+
+:is(ul, ol) :is(ul, ol) {
+  margin: var(--space-1) 0;
 }
 
 ul {

@@ -43,7 +43,7 @@ export const getPages = async (lang) => {
         description: data.description ?? '',
         content: mdToText(content),
         path: `/${lang}/${pathSegment}`,
-        category: isResource ? 'menu.resources' : 'menu.docs',
+        category: isResource ? 'menu.main.resources' : 'menu.main.docs',
       };
     })
   );
@@ -65,7 +65,7 @@ export const getDocs = async (lang) => {
         description: data.description ?? '',
         content: mdToText(content),
         path: `/${lang}/${pathSegment}`,
-        category: 'menu.docs',
+        category: 'menu.main.docs',
       };
     })
   );
@@ -87,7 +87,7 @@ export const getBlogPosts = async (lang) => {
         description: data.description ?? '',
         content: mdToText(content),
         path: `/${lang}/blog/${slug}`,
-        category: 'menu.blog',
+        category: 'menu.main.blog',
       };
     })
   );
@@ -113,7 +113,7 @@ export const getApi = async (lang) => {
             description: data.description ?? '',
             content: mdToText(content),
             path: `/${lang}/${version}/${pathSegment}`,
-            category: 'menu.api',
+            category: 'menu.main.api',
             version,
           };
         })
