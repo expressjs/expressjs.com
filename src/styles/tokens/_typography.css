@@ -61,8 +61,8 @@
   --font-size-h1: var(--font-size-4xl);
   --font-size-h2: var(--font-size-2xl);
   --font-size-h2-docs: var(--font-size-2xl);
-  --font-size-h3: var(--font-size-lg);
-  --font-size-h4: var(--font-size-base);
+  --font-size-h3: var(--font-size-xl);
+  --font-size-h4: var(--font-size-lg);
 
   --font-family-code: var(--font-family-mono);
   --font-size-code: 0.9em;
@@ -71,7 +71,7 @@
     --font-size-h1: var(--font-size-5xl);
     --font-size-h2: var(--font-size-5xl);
     --font-size-h2-docs: var(--font-size-3xl);
-    --font-size-h3: var(--font-size-lg);
+    --font-size-h3: var(--font-size-2xl);
     --font-size-h4: var(--font-size-lg);
   }
 
