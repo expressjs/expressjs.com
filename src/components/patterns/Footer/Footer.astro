@@ -6,7 +6,7 @@
  */
 import './Footer.css';
 import { Icon } from 'astro-icon/components';
-import { BodyMd, Col, Container, Grid } from '@/components/primitives';
+import { BodyMd, Button, Col, Container, Grid } from '@/components/primitives';
 ---
 
 <footer class="footer">
@@ -85,6 +85,20 @@ import { BodyMd, Col, Container, Grid } from '@/components/primitives';
         <Col xs={12} md={6} lg={6}>
           <ul class="footer__socials" aria-label="Social links">
             <li>
+              <Button
+                id="kawaiiToggle"
+                class="kawaii-toggle"
+                type="button"
+                aria-label="Toggle kawaii logo"
+                aria-pressed="false"
+                variant="secondary"
+                size="xs"
+                ghost
+              >
+                Kawaii?
+              </Button>
+            </li>
+            <li>
               <a
                 href="https://github.com/expressjs/express"
                 aria-label="expressjs on GitHub"
@@ -142,3 +156,27 @@ import { BodyMd, Col, Container, Grid } from '@/components/primitives';
     </Container>
   </div>
 </footer>
+
+<script>
+  const toggle = document.getElementById('kawaiiToggle');
+  const isKawaii = localStorage.getItem('kawaii') === 'true';
+
+  if (isKawaii) {
+    document.documentElement.setAttribute('data-kawaii', '');
+    toggle?.setAttribute('aria-pressed', 'true');
+  }
+
+  toggle?.addEventListener('click', () => {
+    const active = document.documentElement.hasAttribute('data-kawaii');
+
+    if (active) {
+      document.documentElement.removeAttribute('data-kawaii');
+      localStorage.removeItem('kawaii');
+      toggle.setAttribute('aria-pressed', 'false');
+    } else {
+      document.documentElement.setAttribute('data-kawaii', '');
+      localStorage.setItem('kawaii', 'true');
+      toggle.setAttribute('aria-pressed', 'true');
+    }
+  });
+</script>

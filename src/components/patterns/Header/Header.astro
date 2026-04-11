@@ -5,6 +5,7 @@
  * Main site header with logo and navigation menu
  */
 import './Header.css';
+import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import { Flex } from '@/components/primitives';
 import { ThemeSwitcher, SearchBox, LanguageSelect } from '@components/patterns';
@@ -30,8 +31,15 @@ const t = useTranslations(currentLang);
         <span class="hamburger-line"></span>
       </button>
       <a href={`/${currentLang}/`} class="logo-link" aria-label={t('nav.home')}>
-        <Icon name="logo-dark" class="logo logo-dark" />
-        <Icon name="logo-light" class="logo logo-light" />
+        <Image
+          src="/images/logos/express-kawaii.webp"
+          alt="Express.js kawaii logo"
+          class="logo logo-kawaii"
+          width={40}
+          height={40}
+        />
+        <Icon name="logo-dark" class="logo logo-dark logo-default" />
+        <Icon name="logo-light" class="logo logo-light logo-default" />
       </a>
     </Flex>
     <Flex align="center" justify="center" gap="2">

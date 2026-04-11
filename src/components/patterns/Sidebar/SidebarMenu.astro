@@ -3,6 +3,7 @@ import type { Menu, VersionPrefix } from '@/config/types';
 import type { VersionConfig } from '@/components/patterns/VersionSwitcher/types';
 import type { LanguageCode } from '@/i18n/locales';
 import { Body } from '@/components/primitives';
+import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import { VersionSwitcher } from '@/components/patterns';
 import { useTranslations } from '@/i18n/utils';
@@ -77,8 +78,15 @@ const commonItemsListProps = {
     <ul class="sidebar-nav-list">
       <li class="sidebar-logo-item">
         <a href={`/${lang}/`} class="logo-link sidebar-nav-item" aria-label={t('nav.home')}>
-          <Icon name="logo-dark" class="logo logo-dark" />
-          <Icon name="logo-light" class="logo logo-light" />
+          <Image
+            src="/images/logos/express-kawaii.webp"
+            alt="Express.js kawaii logo"
+            class="logo logo-kawaii"
+            width={40}
+            height={40}
+          />
+          <Icon name="logo-dark" class="logo logo-dark logo-default" />
+          <Icon name="logo-light" class="logo logo-light logo-default" />
         </a>
       </li>
       {

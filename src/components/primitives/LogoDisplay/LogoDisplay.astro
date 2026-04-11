@@ -5,6 +5,7 @@
  * Displays both logo variants (dark and light) as cards side by side,
  * each with a contrasting background and a download button.
  */
+import { Image } from 'astro:assets';
 import { Button } from '@components/primitives';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import './LogoDisplay.css';
@@ -23,12 +24,12 @@ const t = useTranslations(lang);
 <div class="logo-display">
   <div class="logo-display__card">
     <div class="logo-display__preview logo-display__preview--light-bg">
-      <img
+      <Image
         src={darkSrc}
         alt={`${alt} (dark)`}
         class="logo-display__img"
-        width="200"
-        height="65"
+        width={200}
+        height={65}
         loading="lazy"
       />
     </div>
@@ -38,12 +39,12 @@ const t = useTranslations(lang);
   </div>
   <div class="logo-display__card">
     <div class="logo-display__preview logo-display__preview--dark-bg">
-      <img
+      <Image
         src={lightSrc}
         alt={`${alt} (light)`}
         class="logo-display__img"
-        width="200"
-        height="65"
+        width={200}
+        height={65}
         loading="lazy"
       />
     </div>

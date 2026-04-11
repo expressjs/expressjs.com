@@ -204,9 +204,22 @@
     width: var(--size-36);
   }
 
-  .hero__logo svg {
+  .hero__logo svg,
+  .hero__logo img {
     width: 100%;
     height: auto;
+  }
+
+  .hero__logo-kawaii {
+    display: none;
+  }
+
+  :root[data-kawaii] .hero__logo-kawaii {
+    display: block;
+  }
+
+  :root[data-kawaii] .hero__logo-default {
+    display: none !important;
   }
 
   @media (--md-up) {

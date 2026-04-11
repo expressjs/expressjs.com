@@ -63,6 +63,24 @@
     }
   }
 
+  .logo-kawaii {
+    display: none;
+    height: var(--size-8);
+    width: auto;
+
+    @media (--md-up) {
+      height: var(--size-10);
+    }
+  }
+
+  :root[data-kawaii] .logo-kawaii {
+    display: block;
+  }
+
+  :root[data-kawaii] .logo-default {
+    display: none;
+  }
+
   :root[data-theme='light'] .logo-light,
   :root:not([data-theme]) .logo-light {
     display: none;
