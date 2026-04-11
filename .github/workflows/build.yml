@@ -4,11 +4,13 @@ on:
   pull_request:
     branches:
       - redesign
+      - main
   pull_request_review:
     types: [submitted]
   push:
     branches:
       - redesign
+      - main
 
 # Cancel in progress workflows
 # in the scenario where we already had a run going for that PR/branch/tag but then triggered a new run
@@ -60,19 +62,22 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
-
-      - name: Install Node.js dependencies
-        run: npm ci
-
       - name: Build Astro site
-        run: npm run build
+        uses: withastro/action@v6
+        with:
+          path: .
+          package-manager: npm
+          out-dir: dist
+
+      - name: Upload build artifact for linkChecker
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist/
+          if-no-files-found: error
 
   linkChecker:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -80,17 +85,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
         with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
-
-      - name: Install Node.js dependencies
-        run: npm ci
-
-      - name: Build Astro site
-        run: npm run build
+          name: site-dist
+          path: dist/
 
       - name: Check links
         uses: lycheeverse/lychee-action@a8c4c7cb88f0c7386610c35eb25108e448569cb0 # v2.7.0
