@@ -21,6 +21,16 @@
             <li>An array of combinations of any of the above.</li>
           </ul>
           For examples, see <a href="#path-examples">Path examples</a>.
+          <p>
+            <strong>Note:</strong> the linked Path examples demonstrate the prefix-matching
+            behavior used by <a href="#app.use"><code>app.use()</code></a>. The HTTP method
+            handlers (<a href="#app.get.method"><code>app.get()</code></a>,
+            <a href="#app.post.method"><code>app.post()</code></a>,
+            <a href="#app.METHOD"><code>app.METHOD()</code></a>, etc.) instead match the full
+            request path against the route, so the path <code>/abcd</code> registered with
+            <code>app.get('/abcd', …)</code> matches <code>/abcd</code> only and <strong>not</strong>
+            <code>/abcd/foo</code>.
+          </p>
         </td>
         <td>'/' (root path)</td>
       </tr>
