@@ -3,7 +3,7 @@
 Transfer the file at `path` as an "attachment",
 typically browsers will prompt the user for download. The
 Content-Disposition "filename=" parameter, aka the one
-that will appear in the brower dialog is set to `path`
+that will appear in the browser dialog is set to `path`
 by default, however you may provide an override `filename`.
 
 When an error has ocurred or transfer is complete the optional
