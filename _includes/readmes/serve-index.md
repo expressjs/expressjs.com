@@ -26,7 +26,7 @@ var serveIndex = require('serve-index')
 
 ### serveIndex(path, options)
 
-Returns middlware that serves an index of the directory in the given `path`.
+Returns middleware that serves an index of the directory in the given `path`.
 
 The `path` is based off the `req.url` value, so a `req.url` of `'/some/dir`
 with a `path` of `'public'` will look at `'public/some/dir'`. If you are using
