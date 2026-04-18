@@ -170,7 +170,7 @@
       margin: 0;
     }
 
-    svg {
+    :is(img, svg) {
       width: var(--size-16);
       height: auto;
 
