@@ -28,6 +28,3 @@ export { Tag } from './Tag';
 // Tabs
 export { Tabs } from './Tabs';
 export type { TabItem } from './Tabs';
-
-// LogoDisplay
-export { default as LogoDisplay } from './LogoDisplay/LogoDisplay.astro';
