@@ -176,8 +176,8 @@
       height: auto;
     }
 
-    :root[data-theme='dark'] &.orama-logo-light,
-    :root[data-theme='light'] &.orama-logo-dark {
+    :root[data-theme='dark'] & .orama-logo-light,
+    :root[data-theme='light'] & .orama-logo-dark {
       display: none;
     }
   }
