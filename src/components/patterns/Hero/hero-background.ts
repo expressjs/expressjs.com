@@ -124,7 +124,7 @@ export async function initHeroWebGL(canvas: HTMLCanvasElement, reducedMotion = f
 
   /** Syncs the canvas resolution with its CSS size, accounting for device pixel ratio. */
   function resize() {
-    const dpr = Math.min(window.devicePixelRatio, 2);
+    const dpr = Math.min(window.devicePixelRatio, 1.5);
     canvas.width = canvas.clientWidth * dpr;
     canvas.height = canvas.clientHeight * dpr;
     gl!.viewport(0, 0, canvas.width, canvas.height);
