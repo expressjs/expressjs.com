@@ -6,6 +6,8 @@ import { H1, Button, Container, Flex, BodyMd, Grid, Col } from '@/components/pri
 import { getEntry } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import { Image } from 'astro:assets';
+import heroFallbackLight from './hero-fallback-light.svg';
+import heroFallbackDark from './hero-fallback-dark.svg';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -28,6 +30,18 @@ app.listen(port, () => {
 
 <section class="hero">
   <div class="hero__bg-container">
+    <Image
+      class="hero__fallback hero__fallback--light"
+      src={heroFallbackLight}
+      alt=""
+      aria-hidden="true"
+    />
+    <Image
+      class="hero__fallback hero__fallback--dark"
+      src={heroFallbackDark}
+      alt=""
+      aria-hidden="true"
+    />
     <canvas class="hero__canvas" aria-hidden="true"></canvas>
     <div class="hero__video-overlay"></div>
   </div>
@@ -72,62 +86,56 @@ app.listen(port, () => {
 </section>
 
 <script>
-  import { initHeroWebGL } from './hero-background';
+  if (!window.matchMedia('(max-width: 768px)').matches) {
+    import('./hero-background').then(({ initHeroWebGL }) => {
+      async function initHero() {
+        const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
+        if (!canvas) return;
 
-  async function initHero() {
-    const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
-    if (!canvas) return;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.matchMedia('(max-width: 768px)');
+        const bg = await initHeroWebGL(canvas, prefersReducedMotion);
+        if (!bg) return;
 
-    // On mobile, render a single static frame to save battery/performance
-    const bg = await initHeroWebGL(canvas, prefersReducedMotion || isMobile.matches);
-    if (!bg) return;
+        // WebGL is ready — show canvas, hide fallback
+        const fallbacks = document.querySelectorAll<HTMLImageElement>('.hero__fallback');
+        canvas.classList.add('hero__canvas--ready');
+        fallbacks.forEach((el) => (el.style.display = 'none'));
 
-    // Render the initial frame, then stop if mobile
-    bg.play();
-    if (isMobile.matches) {
-      // Single frame rendered, no animation loop needed
-      return;
-    }
+        bg.play();
 
-    // Only animate when the hero is visible in the viewport
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            bg.play();
-          } else {
+        if (prefersReducedMotion) return;
+
+        // Only animate when the hero is visible in the viewport
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                bg.play();
+              } else {
+                bg.pause();
+              }
+            });
+          },
+          { rootMargin: '80px' }
+        );
+
+        observer.observe(canvas);
+
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
             bg.pause();
+          } else {
+            bg.play();
           }
         });
-      },
-      { rootMargin: '80px' }
-    );
+      }
 
-    observer.observe(canvas);
-
-    isMobile.addEventListener('change', (e) => {
-      if (e.matches) {
-        bg.pause();
+      if (document.readyState === 'complete') {
+        initHero();
       } else {
-        bg.play();
+        window.addEventListener('load', initHero);
       }
     });
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden || isMobile.matches) {
-        bg.pause();
-      } else {
-        bg.play();
-      }
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHero);
-  } else {
-    initHero();
   }
 </script>
