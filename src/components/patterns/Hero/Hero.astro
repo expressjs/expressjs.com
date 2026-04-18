@@ -5,6 +5,7 @@ import { Icon } from 'astro-icon/components';
 import { H1, Button, Container, Flex, BodyMd, Grid, Col } from '@/components/primitives';
 import { getEntry } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { Image } from 'astro:assets';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
