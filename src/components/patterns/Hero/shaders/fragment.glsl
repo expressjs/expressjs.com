@@ -14,18 +14,11 @@ float noise(vec2 p) {
   vec2 i = floor(p);
   vec2 f = fract(p);
   f = f * f * (3.0 - 2.0 * f);
-  return mix(
-    mix(hash(i), hash(i + vec2(1, 0)), f.x),
-    mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x),
-    f.y
-  );
-}
-
-float turbulence(vec2 p) {
-  float v = 0.5 * noise(p);
-  p = mat2(0.877, 0.479, -0.479, 0.877) * p * 2.0;
-  v += 0.25 * noise(p);
-  return v;
+  float a = hash(i);
+  float b = hash(i + vec2(1.0, 0.0));
+  float c = hash(i + vec2(0.0, 1.0));
+  float d = hash(i + vec2(1.0, 1.0));
+  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
 }
 
 vec3 iridescence(float t, float shift) {
@@ -53,7 +46,7 @@ void main() {
 
   /* early exit: skip expensive work far from the arc */
   vec3 bg = mix(vec3(1.0), vec3(0.0), uDark);
-  if (absd > 0.2) {
+  if (absd > 0.15) {
     gl_FragColor = vec4(bg, 1.0);
     return;
   }
@@ -65,16 +58,17 @@ void main() {
   float ribbon = 1.0 - smoothstep(0.0, thickness, absd);
   float glow = exp(-absd * 12.0) * 0.35;
 
-  /* color — use 2-octave turbulence */
+  /* color — single-octave noise instead of turbulence */
   float cp = angle * 1.2 + t * 0.15;
-  float n = turbulence(vec2(angle * 3.0, t * 0.3)) * 0.6;
+  float n = noise(vec2(angle * 3.0, t * 0.3)) * 0.5;
   vec3 iriCol = iridescence(cp + n, t * 0.2);
-  iriCol += turbulence(vec2(angle * 8.0 - t * 0.5, d * 60.0)) * 0.2 * ribbon;
+  iriCol += noise(vec2(angle * 8.0 - t * 0.5, d * 60.0)) * 0.2 * ribbon;
 
   /* secondary arc */
   float d2 = d + 0.07 + 0.005 * sin(t * 0.6);
-  float ribbon2 = 1.0 - smoothstep(0.0, 0.012, abs(d2));
-  float glow2 = exp(-abs(d2) * 18.0) * 0.15;
+  float absd2 = abs(d2);
+  float ribbon2 = 1.0 - smoothstep(0.0, 0.012, absd2);
+  float glow2 = exp(-absd2 * 18.0) * 0.15;
   vec3 iriCol2 = iridescence(cp + 1.5 + n, t * 0.25 + 1.0);
 
   /* compose */
@@ -82,9 +76,9 @@ void main() {
   col = mix(col, mix(iriCol * 1.2 + 0.1, iriCol, uDark), ribbon + glow);
   col = mix(col, mix(iriCol2 * 1.2 + 0.1, iriCol2, uDark), ribbon2 + glow2);
 
-  /* sparkles */
+  /* sparkles — reduced to 6 */
   float sparkle = 0.0;
-  for (int i = 0; i < 12; i++) {
+  for (int i = 0; i < 6; i++) {
     float fi = float(i);
     float seed = hash(vec2(fi, fi * 0.7));
     float pAngle = seed * PI * 0.8 + 1.8;
@@ -103,7 +97,7 @@ void main() {
   col += vec3(0.5, 0.2, 0.4) * exp(-absd * 4.0) * 0.06;
 
   /* smooth fade to background near cutoff edge */
-  col = mix(col, bg, smoothstep(0.12, 0.2, absd));
+  col = mix(col, bg, smoothstep(0.1, 0.15, absd));
 
   gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
 }
