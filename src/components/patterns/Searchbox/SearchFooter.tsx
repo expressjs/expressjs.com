@@ -1,6 +1,8 @@
 import ArrowTurnDownRight48Regular from '~icons/fluent/arrow-turn-down-right-48-regular';
 import ArrowDown16Regular from '~icons/fluent/arrow-down-16-regular';
 import ArrowUp16Regular from '~icons/fluent/arrow-up-16-regular';
+import OramaLogoLight from '../../../icons/orama-logo-light.svg?react';
+import OramaLogoDark from '../../../icons/orama-logo-dark.svg?react';
 import './SearchFooter.css';
 
 export default function SearchFooter() {
@@ -30,16 +32,8 @@ export default function SearchFooter() {
       <div className="search-footer-branding">
         <small>Powered by</small>
         <a href="https://orama.com/" target="_blank" rel="noopener noreferrer">
-          <img
-            className="orama-logo-light"
-            src="https://website-assets.oramasearch.com/orama-when-light.svg"
-            alt="Orama logo"
-          />
-          <img
-            className="orama-logo-dark"
-            src="https://website-assets.oramasearch.com/orama-when-dark.svg"
-            alt="Orama logo"
-          />
+          <OramaLogoLight className="orama-logo-light" aria-label="Orama logo" />
+          <OramaLogoDark className="orama-logo-dark" aria-label="Orama logo" />
         </a>
       </div>
     </>
