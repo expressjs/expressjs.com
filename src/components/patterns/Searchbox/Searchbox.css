@@ -180,7 +180,8 @@
       }
     }
 
-    svg {
+    .orama-logo-light,
+    .orama-logo-dark {
       height: auto;
     }
   }
