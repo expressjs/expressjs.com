@@ -170,14 +170,18 @@
       margin: 0;
     }
 
-    :is(img, svg) {
+    img,
+    svg {
       width: var(--size-16);
-      height: auto;
 
       :root[data-theme='dark'] &.orama-logo-light,
       :root[data-theme='light'] &.orama-logo-dark {
         display: none;
       }
+    }
+
+    svg {
+      height: auto;
     }
   }
 
