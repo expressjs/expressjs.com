@@ -25,6 +25,5 @@ export { Avatar } from './Avatar';
 // Tag
 export { Tag } from './Tag';
 
-// Tabs
-export { Tabs } from './Tabs';
+// Tabs — imported directly where needed to avoid CSS leaking via barrel export
 export type { TabItem } from './Tabs';
