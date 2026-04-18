@@ -4,13 +4,13 @@ on:
   pull_request:
     branches:
       - redesign
-      - main
+      - gh-pages
   pull_request_review:
     types: [submitted]
   push:
     branches:
       - redesign
-      - main
+      - gh-pages
 
 # Cancel in progress workflows
 # in the scenario where we already had a run going for that PR/branch/tag but then triggered a new run
