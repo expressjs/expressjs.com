@@ -41,6 +41,7 @@ app.listen(port, () => {
             class="hero__logo-kawaii"
             width={400}
             height={225}
+            loading="lazy"
           />
           <Icon name="logo-express-black" class="hero__logo-icon--dark hero__logo-default" />
           <Icon name="logo-express-white" class="hero__logo-icon--light hero__logo-default" />
@@ -72,52 +73,54 @@ app.listen(port, () => {
 </section>
 
 <script>
-  import('./hero-background').then(({ initHeroWebGL }) => {
-    const isMobile = window.matchMedia('(max-width: 768px)');
+  function startHero() {
+    const idle = window.requestIdleCallback || ((cb: IdleRequestCallback) => setTimeout(cb, 1));
+    idle(() => {
+      import('./hero-background').then(({ initHeroWebGL }) => {
+        const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
+        if (!canvas) return;
 
-    async function initHero() {
-      const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
-      if (!canvas) return;
+        const isMobile = window.matchMedia('(max-width: 768px)');
+        const staticOnly =
+          isMobile.matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const staticOnly =
-        isMobile.matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        initHeroWebGL(canvas, staticOnly).then((bg) => {
+          if (!bg) return;
 
-      const bg = await initHeroWebGL(canvas, staticOnly);
-      if (!bg) return;
+          bg.play();
 
-      bg.play();
+          if (staticOnly) return;
 
-      if (staticOnly) return;
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  bg.play();
+                } else {
+                  bg.pause();
+                }
+              });
+            },
+            { rootMargin: '80px' }
+          );
 
-      // Only animate when the hero is visible in the viewport
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              bg.play();
-            } else {
+          observer.observe(canvas);
+
+          document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
               bg.pause();
+            } else {
+              bg.play();
             }
           });
-        },
-        { rootMargin: '80px' }
-      );
-
-      observer.observe(canvas);
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          bg.pause();
-        } else {
-          bg.play();
-        }
+        });
       });
-    }
+    });
+  }
 
-    if (document.readyState === 'complete') {
-      initHero();
-    } else {
-      window.addEventListener('load', initHero);
-    }
-  });
+  if (document.readyState === 'complete') {
+    startHero();
+  } else {
+    window.addEventListener('load', startHero, { once: true });
+  }
 </script>
