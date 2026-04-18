@@ -40,3 +40,43 @@ After gathering feedback from the community, both on the OpenJS Foundation [Slac
 ![The new Express logo and favicon](/images/blog/redesign/logo-favicon.png)
 
 It represents a fresh chapter for Express while staying true to the minimalism and clarity that have always defined the framework.
+
+## A New Website
+
+Rebuilding the Express website was not only a visual refresh. It was also an opportunity to rethink the foundations of how the documentation is organized, generated, and maintained.
+
+![Side-by-side comparison of the current Express homepage and the redesigned version](/images/blog/redesign/before-after.png)
+
+### Picking the Right Stack
+
+Choosing the technology behind the new site was not a quick decision. The previous site was built on Jekyll, and moving away from it meant picking something that could carry Express forward for years to come. We went through a long community discussion weighing different options, tradeoffs, and long-term maintenance costs. You can read the full thread here: [Choosing the new documentation framework](https://github.com/expressjs/expressjs.com/discussions/2019).
+
+In the end, we chose [Astro](https://astro.build). It gave us the flexibility we needed for content-heavy pages, excellent performance out of the box, great i18n support, and a component model that made it easy to build the new design system without locking us into a single UI framework.
+
+### What's New in the Documentation
+
+The redesign was also a chance to bring long-requested improvements to how the documentation works.
+
+- **Improved versioning.** Documentation pages now support multiple versions of Express side by side. You can read the docs for the version you're actually running, and the content stays stable as new versions are released. The previous site didn't make this easy to achieve, which often led to confusion between versions. This is especially helpful now that Express 5 is the latest stable release and many projects are still on Express 4.
+- **AI-powered search.** The new search is built on top of [Orama](https://orama.com) and goes beyond keyword matching. You can ask questions in natural language and get contextual answers drawn directly from the documentation, which makes finding the right API or concept much faster.
+- **`llms.txt` support.** Every section of the documentation is now available through an `llms.txt` endpoint, following the [llms.txt](https://llmstxt.org) convention. This makes it much easier for language models, AI assistants, and other tools to access accurate, up-to-date Express documentation.
+
+### Built by the Community
+
+This new site wouldn't exist without the people who showed up to make it happen. The effort was led by [Sebastian Beltran](https://github.com/bjohansebas), and built together with [Francesca Giannino](https://github.com/g-francesca), who drove much of the design and UI work across the site.
+
+A huge thank you goes to the entire [Orama](https://orama.com) team for sponsoring [Francesca](https://github.com/g-francesca), [Angelina](https://www.linkedin.com/in/angeliningl/), and [Michele Riva](https://github.com/micheleriva) to help us through the redesign, and for all the time, feedback, and support they contributed to the project.
+
+From the Express side, many contributors helped shape the redesign: [Ulises Gascón](https://github.com/ulisesgascon), [Rand McKinney](https://github.com/crandmck), [Jon Church](https://github.com/jonchurch), [Shubham Oulkar](https://github.com/ShubhamOulkar), and the rest of the [Express Technical Committee](https://github.com/expressjs/express#technical-committee), alongside everyone who left feedback on issues, discussions, and community channels along the way.
+
+The full story, including every PR that made it into the redesign, lives in [the pull request](https://github.com/expressjs/expressjs.com/pull/2169).
+
+This redesign is the result of more than a year of work. In open source, things don't always move fast, decisions take discussions, design takes iterations, and reviews take time, but step by step, a community can build something it's proud of. This launch is one of those steps.
+
+## What's Next
+
+This redesign is a milestone, but it's not the finish line. The documentation will keep growing, translations will keep improving, and new features will keep landing. Express has always been shaped by its community, and the new site is designed to make contributing easier than ever. If you spot something that could be better, an unclear explanation, a missing example, or a translation that needs love, please [open an issue or a pull request](https://github.com/expressjs/expressjs.com).
+
+Thank you to everyone who has written code with Express over the years, to the people who helped build this new site, and to the broader community that keeps the project alive. We can't wait to see what you build next.
+
+Welcome to the new Express.
