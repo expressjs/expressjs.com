@@ -73,23 +73,31 @@ app.listen(port, () => {
 </section>
 
 <script>
-  function startHero() {
-    const idle = window.requestIdleCallback || ((cb: IdleRequestCallback) => setTimeout(cb, 1));
-    idle(() => {
-      import('./hero-background').then(({ initHeroWebGL }) => {
-        const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
-        if (!canvas) return;
+  // Import immediately — module is small (~6KB) and shader compilation is async.
+  // initHeroWebGL renders the first frame during init (in resize()),
+  // so the arc appears as soon as shaders compile — no image fallback needed.
+  import('./hero-background').then(({ initHeroWebGL }) => {
+    const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
+    if (!canvas) return;
 
-        const isMobile = window.matchMedia('(max-width: 768px)');
-        const staticOnly =
-          isMobile.matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 768px)');
+    const staticOnly =
+      isMobile.matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        initHeroWebGL(canvas, staticOnly).then((bg) => {
-          if (!bg) return;
+    initHeroWebGL(canvas, staticOnly).then((bg) => {
+      if (!bg) return;
 
+      // On mobile / reduced-motion: render one frame, done
+      if (staticOnly) {
+        bg.play();
+        return;
+      }
+
+      // Desktop: defer animation loop to after page load + idle
+      function startAnimation() {
+        const idle = window.requestIdleCallback || ((cb: IdleRequestCallback) => setTimeout(cb, 1));
+        idle(() => {
           bg.play();
-
-          if (staticOnly) return;
 
           const observer = new IntersectionObserver(
             (entries) => {
@@ -114,13 +122,13 @@ app.listen(port, () => {
             }
           });
         });
-      });
-    });
-  }
+      }
 
-  if (document.readyState === 'complete') {
-    startHero();
-  } else {
-    window.addEventListener('load', startHero, { once: true });
-  }
+      if (document.readyState === 'complete') {
+        startAnimation();
+      } else {
+        window.addEventListener('load', startAnimation, { once: true });
+      }
+    });
+  });
 </script>
