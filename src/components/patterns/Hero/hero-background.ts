@@ -122,6 +122,13 @@ export async function initHeroWebGL(canvas: HTMLCanvasElement, reducedMotion = f
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
+  /** Draws a single frame with current time and theme. */
+  function drawFrame() {
+    gl!.uniform1f(uTime, reducedMotion ? 0.0 : (performance.now() - t0) / 1000);
+    gl!.uniform1f(uDark, isDark() ? 1.0 : 0.0);
+    gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
+  }
+
   /** Syncs the canvas resolution with its CSS size, accounting for device pixel ratio. */
   function resize() {
     const dpr = Math.min(window.devicePixelRatio, 1.5);
@@ -131,26 +138,31 @@ export async function initHeroWebGL(canvas: HTMLCanvasElement, reducedMotion = f
     gl!.uniform2f(uRes, canvas.width, canvas.height);
 
     // When paused, resizing clears the canvas — redraw immediately
-    if (!running) {
-      gl!.uniform1f(uTime, reducedMotion ? 0.0 : (performance.now() - t0) / 1000);
-      gl!.uniform1f(uDark, isDark() ? 1.0 : 0.0);
-      gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
-    }
+    if (!running) drawFrame();
   }
 
-  /** Draws a single frame and schedules the next via requestAnimationFrame. */
+  /** Draws a frame and schedules the next via requestAnimationFrame. */
   function render() {
     if (!running) return;
-    gl!.uniform1f(uTime, reducedMotion ? 0.0 : (performance.now() - t0) / 1000);
-    gl!.uniform1f(uDark, isDark() ? 1.0 : 0.0);
-    gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
-    // Static frame: stop after the first render
+    drawFrame();
     if (reducedMotion) {
       running = false;
       return;
     }
     animId = requestAnimationFrame(render);
   }
+
+  // Redraw when theme changes, even if paused
+  const themeObserver = new MutationObserver(() => {
+    if (!running) drawFrame();
+  });
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (!running) drawFrame();
+  });
 
   // Initial sizing + auto-resize on layout changes
   resize();
