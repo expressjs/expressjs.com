@@ -81,8 +81,8 @@ app.listen(port, () => {
     if (!canvas) return;
 
     const isMobile = window.matchMedia('(max-width: 768px)');
-    const staticOnly =
-      isMobile.matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const staticOnly = isMobile.matches || motionQuery.matches;
 
     initHeroWebGL(canvas, staticOnly).then((bg) => {
       if (!bg) return;
@@ -90,6 +90,13 @@ app.listen(port, () => {
       // On mobile / reduced-motion: render one frame, done
       if (staticOnly) {
         bg.play();
+
+        // Listen for reduced-motion changes so animation can start if preference is removed
+        motionQuery.addEventListener('change', (e) => {
+          if (!e.matches && !isMobile.matches) {
+            bg.play();
+          }
+        });
         return;
       }
 
@@ -116,6 +123,15 @@ app.listen(port, () => {
 
           document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
+              bg.pause();
+            } else {
+              bg.play();
+            }
+          });
+
+          // Pause animation if user enables reduced-motion at runtime
+          motionQuery.addEventListener('change', (e) => {
+            if (e.matches) {
               bg.pause();
             } else {
               bg.play();
