@@ -25,56 +25,12 @@
     overflow: hidden;
   }
 
-  .hero__fallback {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero__fallback--dark {
-    display: none;
-  }
-
-  [data-theme='dark'] .hero__fallback--light {
-    display: none;
-  }
-
-  [data-theme='dark'] .hero__fallback--dark {
-    display: block;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .hero__fallback--light {
-      display: none;
-    }
-
-    .hero__fallback--dark {
-      display: block;
-    }
-
-    [data-theme='light'] .hero__fallback--light {
-      display: block;
-    }
-
-    [data-theme='light'] .hero__fallback--dark {
-      display: none;
-    }
-  }
-
   .hero__canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: none;
-  }
-
-  .hero__canvas--ready {
-    display: block;
   }
 
   .hero__video-overlay {

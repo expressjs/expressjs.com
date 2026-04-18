@@ -6,8 +6,6 @@ import { H1, Button, Container, Flex, BodyMd, Grid, Col } from '@/components/pri
 import { getEntry } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import { Image } from 'astro:assets';
-import heroFallbackLight from './hero-fallback-light.svg';
-import heroFallbackDark from './hero-fallback-dark.svg';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -30,18 +28,6 @@ app.listen(port, () => {
 
 <section class="hero">
   <div class="hero__bg-container">
-    <Image
-      class="hero__fallback hero__fallback--light"
-      src={heroFallbackLight}
-      alt=""
-      aria-hidden="true"
-    />
-    <Image
-      class="hero__fallback hero__fallback--dark"
-      src={heroFallbackDark}
-      alt=""
-      aria-hidden="true"
-    />
     <canvas class="hero__canvas" aria-hidden="true"></canvas>
     <div class="hero__video-overlay"></div>
   </div>
@@ -86,56 +72,52 @@ app.listen(port, () => {
 </section>
 
 <script>
-  if (!window.matchMedia('(max-width: 768px)').matches) {
-    import('./hero-background').then(({ initHeroWebGL }) => {
-      async function initHero() {
-        const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
-        if (!canvas) return;
+  import('./hero-background').then(({ initHeroWebGL }) => {
+    const isMobile = window.matchMedia('(max-width: 768px)');
 
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    async function initHero() {
+      const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
+      if (!canvas) return;
 
-        const bg = await initHeroWebGL(canvas, prefersReducedMotion);
-        if (!bg) return;
+      const staticOnly =
+        isMobile.matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // WebGL is ready — show canvas, hide fallback
-        const fallbacks = document.querySelectorAll<HTMLImageElement>('.hero__fallback');
-        canvas.classList.add('hero__canvas--ready');
-        fallbacks.forEach((el) => (el.style.display = 'none'));
+      const bg = await initHeroWebGL(canvas, staticOnly);
+      if (!bg) return;
 
-        bg.play();
+      bg.play();
 
-        if (prefersReducedMotion) return;
+      if (staticOnly) return;
 
-        // Only animate when the hero is visible in the viewport
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                bg.play();
-              } else {
-                bg.pause();
-              }
-            });
-          },
-          { rootMargin: '80px' }
-        );
+      // Only animate when the hero is visible in the viewport
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              bg.play();
+            } else {
+              bg.pause();
+            }
+          });
+        },
+        { rootMargin: '80px' }
+      );
 
-        observer.observe(canvas);
+      observer.observe(canvas);
 
-        document.addEventListener('visibilitychange', () => {
-          if (document.hidden) {
-            bg.pause();
-          } else {
-            bg.play();
-          }
-        });
-      }
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          bg.pause();
+        } else {
+          bg.play();
+        }
+      });
+    }
 
-      if (document.readyState === 'complete') {
-        initHero();
-      } else {
-        window.addEventListener('load', initHero);
-      }
-    });
-  }
+    if (document.readyState === 'complete') {
+      initHero();
+    } else {
+      window.addEventListener('load', initHero);
+    }
+  });
 </script>
