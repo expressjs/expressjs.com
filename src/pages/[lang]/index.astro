@@ -17,12 +17,7 @@ const t = useTranslations(lang);
 
 <Layout>
   <AnnouncementBar />
-  <Hero
-    videoSrc="/videos/hero-background.webm"
-    videoSrcLight="/videos/hero-background-light.webm"
-    posterSrc="/hero-poster.webp"
-    posterSrcLight="/hero-poster-light.webp"
-  />
+  <Hero />
   <Features title={t('features.title')}>
     <Col xs={12} md={6} lg={6} class="features__card-col">
       <Card title={t('features.webapplication.title')} body={t('features.webapplication.body')} />

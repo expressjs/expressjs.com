@@ -1,11 +1,11 @@
 ---
 import './Hero.css';
-import { Image } from 'astro:assets';
 import { Code } from 'astro-expressive-code/components';
 import { Icon } from 'astro-icon/components';
 import { H1, Button, Container, Flex, BodyMd, Grid, Col } from '@/components/primitives';
 import { getEntry } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { Image } from 'astro:assets';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -24,73 +24,12 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(\`Example app listening on port \${port}\`)
 })`;
-
-interface Props {
-  videoSrc: string;
-  videoSrcLight: string;
-  posterSrc: string;
-  posterSrcLight: string;
-}
-
-const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
 ---
 
 <section class="hero">
-  <div class="hero__video-container">
-    <Image
-      class="hero__video-poster hero__video-poster--dark"
-      src={posterSrc}
-      width={1920}
-      height={1080}
-      loading="eager"
-      priority={true}
-      alt=""
-      aria-hidden="true"
-    />
-
-    <Image
-      class="hero__video-poster hero__video-poster--light"
-      src={posterSrcLight}
-      width={1920}
-      height={1080}
-      loading="eager"
-      priority={true}
-      alt=""
-      aria-hidden="true"
-    />
-
-    <video
-      class="hero__video hero__video--dark"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      data-src={videoSrc}></video>
-
-    <video
-      class="hero__video hero__video--light"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      data-src={videoSrcLight}></video>
-
+  <div class="hero__bg-container">
+    <canvas class="hero__canvas" aria-hidden="true"></canvas>
     <div class="hero__video-overlay"></div>
-
-    <button
-      class="hero__video-control"
-      type="button"
-      title={t('hero.videoPause')}
-      aria-label={t('hero.videoPause')}
-      data-label-pause={t('hero.videoPause')}
-      data-label-play={t('hero.videoPlay')}
-      data-state="paused"
-    >
-      <Icon name="fluent:pause-16-filled" class="hero__video-control-pause" />
-      <Icon name="fluent:play-16-filled" class="hero__video-control-play" />
-    </button>
   </div>
   <Container>
     <div class="hero__content">
@@ -102,6 +41,7 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
             class="hero__logo-kawaii"
             width={400}
             height={225}
+            loading="lazy"
           />
           <Icon name="logo-express-black" class="hero__logo-icon--dark hero__logo-default" />
           <Icon name="logo-express-white" class="hero__logo-icon--light hero__logo-default" />
@@ -133,138 +73,62 @@ const { videoSrc, videoSrcLight, posterSrc, posterSrcLight } = Astro.props;
 </section>
 
 <script>
-  function initHeroVideo() {
-    const container = document.querySelector<HTMLDivElement>('.hero__video-container');
-    if (!container) return;
+  // Import immediately — module is small (~6KB) and shader compilation is async.
+  // initHeroWebGL renders the first frame during init (in resize()),
+  // so the arc appears as soon as shaders compile — no image fallback needed.
+  import('./hero-background').then(({ initHeroWebGL }) => {
+    const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
+    if (!canvas) return;
 
-    const controlButton = container.querySelector<HTMLButtonElement>('.hero__video-control');
-    if (!controlButton) return;
+    const isMobile = window.matchMedia('(max-width: 768px)');
+    const staticOnly =
+      isMobile.matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const darkVideo = container.querySelector<HTMLVideoElement>('.hero__video--dark');
-    const lightVideo = container.querySelector<HTMLVideoElement>('.hero__video--light');
-    const darkPoster = container.querySelector<HTMLImageElement>('.hero__video-poster--dark');
-    const lightPoster = container.querySelector<HTMLImageElement>('.hero__video-poster--light');
+    initHeroWebGL(canvas, staticOnly).then((bg) => {
+      if (!bg) return;
 
-    let currentVideo: HTMLVideoElement | null = null;
-    let currentPoster: HTMLImageElement | null = null;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function getIsDark() {
-      const theme = document.documentElement.getAttribute('data-theme');
-      return (
-        theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
-      );
-    }
-
-    function getAssets() {
-      const isDark = getIsDark();
-      return {
-        video: isDark ? darkVideo : lightVideo,
-        poster: isDark ? darkPoster : lightPoster,
-      };
-    }
-
-    function loadVideo(video: HTMLVideoElement) {
-      const src = video.getAttribute('data-src');
-      if (!src) return;
-
-      // do not load video if src is loaded (reduce network call)
-      if (!video.src) {
-        video.src = src;
-        video.load();
-      }
-    }
-
-    function activateVideo(video: HTMLVideoElement | null, poster: HTMLImageElement | null) {
-      if (!video || !poster) return;
-
-      if (currentPoster) currentPoster.classList.remove('hide_poster');
-
-      currentPoster = poster;
-
-      if (currentVideo) {
-        currentVideo.pause();
-        currentVideo.classList.remove('hero__video--active');
-      }
-
-      currentVideo = video;
-
-      if (prefersReducedMotion) {
-        currentVideo.pause();
-        currentVideo.removeAttribute('autoplay');
-        currentVideo.classList.remove('hero__video--active');
-        if (controlButton) controlButton.style.display = 'none';
+      // On mobile / reduced-motion: render one frame, done
+      if (staticOnly) {
+        bg.play();
         return;
       }
 
-      loadVideo(video);
+      // Desktop: defer animation loop to after page load + idle
+      function startAnimation() {
+        const idle = window.requestIdleCallback || ((cb: IdleRequestCallback) => setTimeout(cb, 1));
+        idle(() => {
+          bg.play();
 
-      // check if video is ready to play then just update background animation
-      // returning early to stop repeated listener on theme change
-      // ref: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState#htmlmediaelement.have_future_data
-      if (video.readyState >= video.HAVE_FUTURE_DATA) {
-        updateStatus(video, poster);
-        return;
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  bg.play();
+                } else {
+                  bg.pause();
+                }
+              });
+            },
+            { rootMargin: '80px' }
+          );
+
+          observer.observe(canvas);
+
+          document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+              bg.pause();
+            } else {
+              bg.play();
+            }
+          });
+        });
       }
 
-      video.addEventListener('canplay', () => updateStatus(video, poster), { once: true });
-    }
-
-    function updateVideo() {
-      const { video: nextVideo, poster: hidePoster } = getAssets();
-
-      activateVideo(nextVideo, hidePoster);
-    }
-
-    function updateStatus(video: HTMLVideoElement | null, poster: HTMLImageElement | null) {
-      if (!video || !poster) return;
-      // if video is playable then hide poster
-      poster.classList.add('hide_poster');
-      // activate correct video animations
-      video.classList.add('hero__video--active');
-      video.play().catch(() => {});
-      // update controll btn on video load
-      controlButton?.setAttribute('data-state', 'playing');
-    }
-
-    // Control button
-    controlButton.addEventListener('click', () => {
-      if (!currentVideo) return;
-
-      if (currentVideo.paused) {
-        currentVideo.play().catch(() => {});
-        controlButton.setAttribute('data-state', 'playing');
+      if (document.readyState === 'complete') {
+        startAnimation();
       } else {
-        currentVideo.pause();
-        controlButton.setAttribute('data-state', 'paused');
+        window.addEventListener('load', startAnimation, { once: true });
       }
     });
-
-    // stop video on hidden tabs
-    document.addEventListener('visibilitychange', () => {
-      if (!currentVideo) return;
-
-      if (document.hidden) {
-        currentVideo.pause();
-      } else if (!prefersReducedMotion) {
-        currentVideo.play().catch(() => {});
-      }
-    });
-
-    // Initial run
-    updateVideo();
-
-    // React to theme changes
-    const observer = new MutationObserver(() => {
-      updateVideo();
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme'],
-    });
-  }
-
-  initHeroVideo();
+  });
 </script>

@@ -14,59 +14,24 @@
     }
   }
 
-  /* ================= VIDEO CONTAINER ================= */
-
-  .hero__video-container {
+  .hero__bg-container {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
     z-index: 0;
     overflow: hidden;
   }
 
-  .hero__video,
-  .hero__video-poster {
+  .hero__canvas {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
-
-  /* ================= VIDEO ================= */
-
-  .hero__video {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  /* visible video */
-  .hero__video--active {
-    opacity: 1;
-  }
-
-  /* ================= POSTERS ================= */
-
-  .hero__video-poster {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  [data-theme='dark'] .hero__video-poster--dark {
-    opacity: 1;
-  }
-
-  [data-theme='light'] .hero__video-poster--light {
-    opacity: 1;
-  }
-
-  /* hide poster if video is playable */
-  .hero__video-poster.hide_poster {
-    opacity: 0;
-  }
-
-  /* ================= OVERLAY ================= */
 
   .hero__video-overlay {
     position: absolute;
@@ -80,9 +45,9 @@
       rgba(255, 255, 255, 0.3) 70%,
       var(--color-bg-primary) 100%
     );
+    z-index: 1;
   }
 
-  /* Dark theme overlay */
   [data-theme='dark'] .hero__video-overlay {
     background: linear-gradient(
       180deg,
