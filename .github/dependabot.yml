@@ -1,0 +1,57 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 10
+    groups:
+      astro:
+        patterns:
+          - '@astrojs/*'
+          - 'astro'
+          - 'astro-*'
+          - 'prettier-plugin-astro'
+      orama:
+        patterns:
+          - '@orama/*'
+          - 'gray-matter'
+          - 'mdast-util-from-markdown'
+          - 'mdast-util-to-string'
+      linters:
+        patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '@eslint/*'
+          - 'prettier'
+          - 'typescript-eslint'
+          - 'globals'
+      production:
+        dependency-type: production
+        exclude-patterns:
+          - '@astrojs/*'
+          - 'astro'
+          - 'astro-*'
+          - '@orama/*'
+          - 'gray-matter'
+          - 'mdast-util-from-markdown'
+          - 'mdast-util-to-string'
+      development:
+        dependency-type: development
+        exclude-patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '@eslint/*'
+          - 'prettier'
+          - 'prettier-plugin-astro'
+          - 'typescript-eslint'
+          - 'globals'

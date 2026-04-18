@@ -4,16 +4,18 @@ on:
   pull_request:
     branches:
       - redesign
+      - main
   pull_request_review:
     types: [submitted]
   push:
     branches:
       - redesign
+      - main
 
 # Cancel in progress workflows
 # in the scenario where we already had a run going for that PR/branch/tag but then triggered a new run
 concurrency:
-  group: "${{ github.workflow }} ✨ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
+  group: '${{ github.workflow }} ✨ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
   cancel-in-progress: true
 
 permissions:
@@ -28,7 +30,8 @@ jobs:
       github.event_name != 'pull_request_review'
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
@@ -36,15 +39,13 @@ jobs:
         uses: actions/setup-node@v6
         with:
           # node-version-file: ".nvmrc" use when .nvmrc is on root of the repo
-          node-version: "24.13"
+          node-version: '24.13'
           # cache: "npm" use when package-lock.json is on root of the repo
 
       - name: Install Node.js dependencies
-        working-directory: astro
         run: npm ci
 
       - name: Run tests
-        working-directory: astro
         shell: bash
         run: npm run check
 
@@ -61,50 +62,42 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          # node-version-file: ".nvmrc" use when .nvmrc is on root of the repo
-          node-version: "24.13"
-          # cache: "npm" use when package-lock.json is on root of the repo
-
-      - name: Install Node.js dependencies
-        working-directory: astro
-        run: npm ci
-
       - name: Build Astro site
-        working-directory: astro
-        run: npm run build
+        uses: withastro/action@v6
+        with:
+          path: .
+          package-manager: npm
+          out-dir: dist
+
+      - name: Upload build artifact for linkChecker
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist/
+          if-no-files-found: error
 
   linkChecker:
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
-      # TODO: use astro action, when pnpm action is enabled in the org
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
         with:
-          # node-version-file: ".nvmrc" use when .nvmrc is on root of the repo
-          node-version: "24.13"
-          # cache: "npm" use when package-lock.json is on root of the repo
-
-      - name: Install Node.js dependencies
-        working-directory: astro
-        run: npm ci
-
-      - name: Build Astro site
-        working-directory: astro
-        run: npm run build
+          name: site-dist
+          path: dist/
 
       - name: Check links
         uses: lycheeverse/lychee-action@a8c4c7cb88f0c7386610c35eb25108e448569cb0 # v2.7.0
         with:
-          workingDirectory: astro # TODO: change when Astro site is moved to root
           args: |
             --root-dir $PWD/dist
+            --exclude-path dist/llms.txt
+            --exclude-path dist/llms/
             --remap "https://expressjs\.com\/((?:[^\/]+\/)*[^\/\.]+)\/?$ file://$PWD/dist/\$1/index.html"
             --remap "https://expressjs\.com\/(.*\.html)$ file://$PWD/dist/\$1"
             dist/

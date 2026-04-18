@@ -1,0 +1,35 @@
+---
+import { Hero, Features, AnnouncementBar } from '@components/patterns';
+import { Card, Col } from '@components/primitives';
+import Layout from '@layouts/Layout.astro';
+import { languages } from '@i18n/locales';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout>
+  <AnnouncementBar />
+  <Hero />
+  <Features title={t('features.title')}>
+    <Col xs={12} md={6} lg={6} class="features__card-col">
+      <Card title={t('features.webapplication.title')} body={t('features.webapplication.body')} />
+    </Col>
+    <Col xs={12} md={6} lg={6} class="features__card-col">
+      <Card title={t('features.api.title')} body={t('features.api.body')} />
+    </Col>
+    <Col xs={12} md={6} lg={6} class="features__card-col">
+      <Card title={t('features.performance.title')} body={t('features.performance.body')} />
+    </Col>
+    <Col xs={12} md={6} lg={6} class="features__card-col">
+      <Card title={t('features.middleware.title')} body={t('features.middleware.body')} />
+    </Col>
+  </Features>
+</Layout>
