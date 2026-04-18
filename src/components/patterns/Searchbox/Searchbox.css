@@ -170,19 +170,15 @@
       margin: 0;
     }
 
-    img,
-    svg {
-      width: var(--size-16);
-
-      :root[data-theme='dark'] &.orama-logo-light,
-      :root[data-theme='light'] &.orama-logo-dark {
-        display: none;
-      }
-    }
-
     .orama-logo-light,
     .orama-logo-dark {
+      width: var(--size-16);
       height: auto;
+    }
+
+    :root[data-theme='dark'] .orama-logo-light,
+    :root[data-theme='light'] .orama-logo-dark {
+      display: none;
     }
   }
 
