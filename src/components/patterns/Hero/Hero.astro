@@ -73,77 +73,68 @@ app.listen(port, () => {
 </section>
 
 <script>
-  // Import immediately — module is small (~6KB) and shader compilation is async.
-  // initHeroWebGL renders the first frame during init (in resize()),
-  // so the arc appears as soon as shaders compile — no image fallback needed.
+  /**
+   * Import immediately — module is small (~6KB) and shader compilation is async.
+   * initHeroWebGL renders the first frame during init (in resize()),
+   * so the arc appears as soon as shaders compile — no image fallback needed.
+   *
+   * Manages the WebGL background lifecycle.
+   * Consolidates IntersectionObserver, Visibility API, and Motion preferences
+   * into a single state machine to avoid conflicting play/pause calls.
+   */
   import('./hero-background').then(({ initHeroWebGL }) => {
     const canvas = document.querySelector<HTMLCanvasElement>('.hero__canvas');
     if (!canvas) return;
 
     const isMobile = window.matchMedia('(max-width: 768px)');
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const staticOnly = isMobile.matches || motionQuery.matches;
 
-    initHeroWebGL(canvas, staticOnly).then((bg) => {
+    initHeroWebGL(canvas, isMobile.matches || motionQuery.matches).then((bg) => {
       if (!bg) return;
 
-      // On mobile / reduced-motion: render one frame, done
-      if (staticOnly) {
-        bg.play();
+      let isIntersecting = true;
 
-        // Listen for reduced-motion changes so animation can start if preference is removed
-        motionQuery.addEventListener('change', (e) => {
-          if (!e.matches && !isMobile.matches) {
-            bg.play();
-          }
-        });
-        return;
+      function sync() {
+        // Only run the animation loop if:
+        // 1. Not on mobile (performance)
+        // 2. User hasn't requested reduced motion
+        // 3. Element is in/near the viewport
+        // 4. Tab is currently active
+        const shouldAnimate =
+          !isMobile.matches && !motionQuery.matches && isIntersecting && !document.hidden;
+
+        if (shouldAnimate) {
+          bg!.play();
+        } else {
+          bg!.pause();
+        }
       }
 
-      // Desktop: defer animation loop to after page load + idle
-      function startAnimation() {
+      // Lifecycle Listeners
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          isIntersecting = entries[0].isIntersecting;
+          sync();
+        },
+        { rootMargin: '80px' }
+      );
+      observer.observe(canvas);
+
+      document.addEventListener('visibilitychange', sync);
+      motionQuery.addEventListener('change', sync);
+
+      // Initialization
+
+      const start = () => {
         const idle = window.requestIdleCallback || ((cb: IdleRequestCallback) => setTimeout(cb, 1));
-        idle(() => {
-          bg.play();
-
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  bg.play();
-                } else {
-                  bg.pause();
-                }
-              });
-            },
-            { rootMargin: '80px' }
-          );
-
-          observer.observe(canvas);
-
-          document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-              bg.pause();
-            } else {
-              bg.play();
-            }
-          });
-
-          // Pause animation if user enables reduced-motion at runtime
-          motionQuery.addEventListener('change', (e) => {
-            if (e.matches) {
-              bg.pause();
-            } else {
-              bg.play();
-            }
-          });
-        });
-      }
+        idle(sync);
+      };
 
       if (document.readyState === 'complete') {
-        startAnimation();
+        start();
       } else {
-        window.addEventListener('load', startAnimation, { once: true });
+        window.addEventListener('load', start, { once: true });
       }
     });
   });
