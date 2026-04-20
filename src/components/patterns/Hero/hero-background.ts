@@ -35,6 +35,18 @@ export async function initHeroWebGL(canvas: HTMLCanvasElement, reducedMotion = f
     COMPLETION_STATUS_KHR: number;
   } | null;
 
+  /** Checks the current color scheme (data-theme attribute or system preference). */
+  function isDark() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    if (theme) return theme === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  // -- Immediate Clear (prevents flashing while compiling) --
+  const dark = isDark();
+  gl.clearColor(dark ? 0 : 1, dark ? 0 : 1, dark ? 0 : 1, 1);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+
   // -- Shader compilation (non-blocking) --
 
   function compile(type: number, src: string) {
@@ -114,13 +126,6 @@ export async function initHeroWebGL(canvas: HTMLCanvasElement, reducedMotion = f
   let animId = 0;
   const t0 = performance.now();
   let running = false;
-
-  /** Checks the current color scheme (data-theme attribute or system preference). */
-  function isDark() {
-    const theme = document.documentElement.getAttribute('data-theme');
-    if (theme) return theme === 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  }
 
   /** Draws a single frame with current time and theme. */
   function drawFrame() {
