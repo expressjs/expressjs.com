@@ -126,17 +126,9 @@ app.listen(port, () => {
       isMobile.addEventListener('change', sync);
 
       // Initialization
-
-      const start = () => {
-        const idle = window.requestIdleCallback || ((cb: IdleRequestCallback) => setTimeout(cb, 1));
-        idle(sync);
-      };
-
-      if (document.readyState === 'complete') {
-        start();
-      } else {
-        window.addEventListener('load', start, { once: true });
-      }
+      // Trigger sync immediately so the background appears as soon as
+      // the WebGL context and shaders are ready.
+      sync();
     });
   });
 </script>
