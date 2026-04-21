@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
+import enStrings from '../../src/i18n/ui/en.json';
 
-test.describe('Homepage Hero Section', () => {
+test.describe('Homepage Content', () => {
   let latestVersion: string;
 
   test.beforeAll(async () => {
@@ -10,65 +11,77 @@ test.describe('Homepage Hero Section', () => {
   });
 
   test.beforeEach(async ({ page }) => {
-    // Navigate to the English homepage before each test
     await page.goto('/en');
   });
 
-  test('should display the core brand elements', async ({ page }) => {
-    // 1. Verify the Tagline (H1) exists
+  test('should display the core brand elements and features', async ({ page }) => {
+    // 1. Verify Tagline
     const tagline = page.getByRole('heading', { level: 1 });
     await expect(tagline).toBeVisible();
+    await expect(tagline).toHaveText(enStrings.hero.tagline);
 
-    // 2. Verify the Standard Logo is visible and the Kawaii logo is hidden
-    const standardLogo = page.locator('.hero__logo-default').first();
-    const kawaiiLogo = page.locator('.hero__logo-kawaii');
+    // 2. Verify Logos
+    const standardLogo = page.getByTestId('logo-standard').first();
+    const kawaiiLogo = page.getByAltText(enStrings.hero.kawaiiLogoAlt);
 
     await expect(standardLogo).toBeVisible();
-    await expect(kawaiiLogo).toBeHidden(); // Hidden by default as we discovered!
+    await expect(kawaiiLogo).toBeHidden();
 
-    // 3. Verify the EXACT latest version from NPM is rendered
-    const versionText = page.locator('.hero').getByText(latestVersion);
+    // 3. Verify Version
+    const versionText = page.getByTestId('hero-brand').getByText(latestVersion);
     await expect(versionText).toBeVisible();
+
+    // 4. Verify Features Section
+    const featureSection = page.getByTestId('features-section');
+    const featuresTitle = featureSection.getByRole('heading', { level: 2 });
+    await expect(featuresTitle).toHaveText(enStrings.features.title);
+
+    // 5. Verify all four feature cards
+    const features = [
+      enStrings.features.webapplication,
+      enStrings.features.api,
+      enStrings.features.performance,
+      enStrings.features.middleware,
+    ];
+
+    for (const feature of features) {
+      const card = featureSection.getByTestId('card').filter({ hasText: feature.title });
+      await expect(card).toBeVisible();
+      await expect(card.locator('p')).toHaveText(feature.body);
+    }
   });
 
   test('should display the installation command', async ({ page }) => {
-    // Verify the first code block contains "npm install"
-    const installCode = page.locator('.hero__code').first();
+    const installCode = page.getByTestId('install-command');
     await expect(installCode).toBeVisible();
-    await expect(installCode).toContainText(/npm install/i);
+    await expect(installCode).toContainText(enStrings.hero.tagline); // Verify it's in the hero area
+    await expect(installCode).toContainText(/npm install express --save/i);
   });
 
   test('should have a working "Get Started" call to action', async ({ page }) => {
-    const getStartedBtn = page.getByRole('link', { name: /Get Started/i });
-
-    // Verify it points to the correct 5.x installation page
+    const getStartedBtn = page.getByRole('link', { name: enStrings.hero.getStarted });
     await expect(getStartedBtn).toHaveAttribute('href', /\/en\/5x\/starter\/installing/);
 
-    // Test navigation
     await getStartedBtn.click();
     await expect(page).toHaveURL(/\/en\/5x\/starter\/installing/);
   });
 
   test('should display the example code block', async ({ page }) => {
-    // Verify the secondary code block (example code) is visible on larger screens
-    const exampleCode = page.locator('.hero__example-code');
+    const exampleCode = page.getByTestId('example-code');
     await expect(exampleCode).toBeVisible();
   });
 
   test('should toggle the Kawaii logo when the data attribute is set', async ({ page }) => {
-    const standardLogo = page.locator('.hero__logo-default').first();
-    const kawaiiLogo = page.locator('.hero__logo-kawaii');
+    const standardLogo = page.getByTestId('logo-standard').first();
+    const kawaiiLogo = page.getByAltText(enStrings.hero.kawaiiLogoAlt);
 
-    // Initially standard is visible, kawaii is hidden
     await expect(standardLogo).toBeVisible();
     await expect(kawaiiLogo).toBeHidden();
 
-    // Trigger Kawaii mode via script
     await page.evaluate(() => {
       document.documentElement.setAttribute('data-kawaii', 'true');
     });
 
-    // Now kawaii should be visible, standard should be hidden
     await expect(kawaiiLogo).toBeVisible();
     await expect(standardLogo).toBeHidden();
   });

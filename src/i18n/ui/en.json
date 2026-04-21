@@ -188,6 +188,7 @@
   "hero": {
     "tagline": "Fast, unopinionated, minimalist web framework for Node.js",
     "getStarted": "Get Started",
+    "kawaiiLogoAlt": "Express.js kawaii logo",
     "videoPause": "Pause background video",
     "videoPlay": "Play background video"
   }

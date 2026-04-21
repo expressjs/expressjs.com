@@ -26,7 +26,7 @@ interface Props extends HTMLAttributes<'section'> {
 const { title, class: className, ...rest } = Astro.props;
 ---
 
-<section class:list={['features', className]} {...rest}>
+<section class:list={['features', className]} data-testid="features-section" {...rest}>
   <Container>
     <Grid>
       <Col xs={12} lg={4} class="features__header">
