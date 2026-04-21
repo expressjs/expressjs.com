@@ -36,3 +36,15 @@ The following table describes the properties of the optional `options` object.
 | `verify`      | This option, if supplied, is called as `verify(req, res, buf, encoding)`, where `buf` is a `Buffer` of the raw request body and `encoding` is the encoding of the request. The parsing can be aborted by throwing an error. | Function | `undefined` |
 
 </div>
+
+To apply different size limits per route, pass `express.json()` inline rather than globally:
+
+```js
+// Default 100kb limit for all routes
+app.use(express.json())
+
+// Override with a higher limit for a specific route
+app.post('/upload', express.json({ limit: '10mb' }), (req, res) => {
+  res.send('ok')
+})
+```
