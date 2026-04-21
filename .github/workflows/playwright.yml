@@ -36,7 +36,7 @@ jobs:
           PREVIEW_URL="https://deploy-preview-${{ github.event.pull_request.number }}--expressjscom-preview.netlify.app"
           echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
 
-          MAX_RETRIES=30
+          MAX_RETRIES=10
           DELAY=20
           echo "Checking Netlify preview: $PREVIEW_URL"
 

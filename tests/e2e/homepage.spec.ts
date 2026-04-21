@@ -1,6 +1,14 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Homepage Hero Section', () => {
+  let latestVersion: string;
+
+  test.beforeAll(async () => {
+    const response = await fetch('https://registry.npmjs.org/express/latest');
+    const data = await response.json();
+    latestVersion = data.version;
+  });
+
   test.beforeEach(async ({ page }) => {
     // Navigate to the English homepage before each test
     await page.goto('/en');
@@ -18,10 +26,9 @@ test.describe('Homepage Hero Section', () => {
     await expect(standardLogo).toBeVisible();
     await expect(kawaiiLogo).toBeHidden(); // Hidden by default as we discovered!
 
-    // 3. Verify Version text is present
-    // It's in BodyMd next to the logo
-    const versionText = page.locator('.hero__logo + p, .hero__logo + div');
-    await expect(versionText).toContainText(/\d+\.\d+\.\d+/);
+    // 3. Verify the EXACT latest version from NPM is rendered
+    const versionText = page.locator('.hero').getByText(latestVersion);
+    await expect(versionText).toBeVisible();
   });
 
   test('should display the installation command', async ({ page }) => {
