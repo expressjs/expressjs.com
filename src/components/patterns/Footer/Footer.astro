@@ -162,26 +162,28 @@ import { BodyMd, Button, Col, Container, Grid } from '@/components/primitives';
   </div>
 </footer>
 
-<script>
-  const toggle = document.getElementById('kawaiiToggle');
-  const isKawaii = localStorage.getItem('kawaii') === 'true';
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('kawaiiToggle');
+    if (!toggle) return;
 
-  if (isKawaii) {
-    document.documentElement.setAttribute('data-kawaii', '');
-    toggle?.setAttribute('aria-pressed', 'true');
-  }
+    const getState = () => localStorage.getItem('kawaii') === 'true';
 
-  toggle?.addEventListener('click', () => {
-    const active = document.documentElement.hasAttribute('data-kawaii');
+    const applyState = (enabled) => {
+      document.documentElement.toggleAttribute('data-kawaii', enabled);
+      toggle.setAttribute('aria-pressed', String(enabled));
 
-    if (active) {
-      document.documentElement.removeAttribute('data-kawaii');
-      localStorage.removeItem('kawaii');
-      toggle.setAttribute('aria-pressed', 'false');
-    } else {
-      document.documentElement.setAttribute('data-kawaii', '');
-      localStorage.setItem('kawaii', 'true');
-      toggle.setAttribute('aria-pressed', 'true');
-    }
+      if (enabled) {
+        localStorage.setItem('kawaii', 'true');
+      } else {
+        localStorage.removeItem('kawaii');
+      }
+    };
+
+    applyState(getState());
+
+    toggle.addEventListener('click', () => {
+      applyState(!getState());
+    });
   });
 </script>

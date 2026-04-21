@@ -81,45 +81,72 @@ test.describe('Homepage Content', () => {
     await expect(exampleCode).toBeVisible();
   });
 
-  test('should toggle the Kawaii logo when clicking the footer button', async ({ page }) => {
+  test('should toggle Kawaii mode and persist it', async ({ page }) => {
+    const root = page.locator('html');
+    const toggleBtn = page.locator('#kawaiiToggle');
     const heroBrand = page.getByTestId('hero-brand');
+
     const standardLogo = heroBrand.getByTestId('logo-standard').first();
     const kawaiiLogo = heroBrand.getByAltText(enStrings.hero.kawaiiLogoAlt);
 
-    // Initially standard is visible
-    await expect(standardLogo).toBeVisible();
-    // Click the toggle in the footer
-    const toggleBtn = page.getByTestId('kawaii-toggle');
-    await toggleBtn.scrollIntoViewIfNeeded();
-    await toggleBtn.click({ force: true });
+    // Ensure page is ready
+    await expect(toggleBtn).toBeVisible();
+    await expect(toggleBtn).toBeEnabled();
 
-    // 1. Verify the attribute is actually set on HTML (confirms script ran)
-    await expect(page.locator('html')).toHaveAttribute('data-kawaii', '');
-
-    // 2. Now kawaii should be visible
-    await expect(kawaiiLogo).toBeVisible();
-
-    // 3. Verify persistence in localStorage
-    const savedKawaii = await page.evaluate(() => localStorage.getItem('kawaii'));
-    expect(savedKawaii).toBe('true');
-
-    // 4. All standard logos in the hero should be hidden
-    const allStandardLogos = heroBrand.getByTestId('logo-standard');
-    const count = await allStandardLogos.count();
-    for (let i = 0; i < count; i++) {
-      await expect(allStandardLogos.nth(i)).toBeHidden();
-    }
-
-    // Click again to revert
-    await toggleBtn.click({ force: true });
-    await expect(page.locator('html')).not.toHaveAttribute('data-kawaii');
-
-    // Verify localStorage was cleared
-    const revertedKawaii = await page.evaluate(() => localStorage.getItem('kawaii'));
-    expect(revertedKawaii).toBeNull();
-
+    // Initial state
+    await expect(root).not.toHaveAttribute('data-kawaii');
     await expect(standardLogo).toBeVisible();
     await expect(kawaiiLogo).toBeHidden();
+
+    // Click toggle
+    await toggleBtn.click({ force: true });
+
+    // Wait until DOM actually updates
+    await expect
+      .poll(async () => {
+        return await page.evaluate(() => document.documentElement.hasAttribute('data-kawaii'));
+      })
+      .toBe(true);
+
+    // Assert accessibility state
+    await expect(toggleBtn).toHaveAttribute('aria-pressed', 'true');
+
+    // Assert UI change
+    await expect(kawaiiLogo).toBeVisible();
+    await expect(standardLogo).toBeHidden();
+
+    // Assert persistence
+    await expect
+      .poll(async () => {
+        return await page.evaluate(() => localStorage.getItem('kawaii'));
+      })
+      .toBe('true');
+
+    // Reload → should persist
+    await page.reload();
+
+    await expect(root).toHaveAttribute('data-kawaii', '');
+    await expect(kawaiiLogo).toBeVisible();
+
+    // Toggle OFF
+    await toggleBtn.click({ force: true });
+
+    await expect
+      .poll(async () => {
+        return await page.evaluate(() => document.documentElement.hasAttribute('data-kawaii'));
+      })
+      .toBe(false);
+
+    await expect(root).not.toHaveAttribute('data-kawaii');
+    await expect(toggleBtn).toHaveAttribute('aria-pressed', 'false');
+    await expect(standardLogo).toBeVisible();
+
+    // Storage cleared
+    await expect
+      .poll(async () => {
+        return await page.evaluate(() => localStorage.getItem('kawaii'));
+      })
+      .toBe(null);
   });
 
   test('should toggle between light and dark themes', async ({ page }) => {
