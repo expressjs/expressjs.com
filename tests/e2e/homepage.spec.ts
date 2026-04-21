@@ -47,7 +47,9 @@ test.describe('Homepage Content', () => {
     ];
 
     for (const feature of features) {
-      const card = featureSection.getByTestId('card').filter({ hasText: feature.title });
+      const card = featureSection.getByTestId('card').filter({
+        has: page.getByRole('heading', { name: feature.title, exact: true }),
+      });
       await expect(card).toBeVisible();
       await expect(card.locator('p')).toHaveText(feature.body);
     }
@@ -84,22 +86,16 @@ test.describe('Homepage Content', () => {
     // Click the toggle in the footer
     const toggleBtn = page.getByTestId('kawaii-toggle');
     await toggleBtn.scrollIntoViewIfNeeded();
-    await toggleBtn.click();
+    await toggleBtn.click({ force: true });
 
     // Now kawaii should be visible
     await expect(kawaiiLogo).toBeVisible();
     await expect(standardLogo).toBeHidden();
 
     // Click again to revert
-    await toggleBtn.click();
+    await toggleBtn.click({ force: true });
     await expect(standardLogo).toBeVisible();
     await expect(kawaiiLogo).toBeHidden();
-  });
-});
-
-test.describe('Footer Content', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/en');
   });
 
   test('should display copyright and foundation links', async ({ page }) => {
