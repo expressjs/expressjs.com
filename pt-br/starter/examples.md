@@ -16,5 +16,4 @@ Estes são alguns exemplos adicionais com integrações mais extensas.
 
 {% include community-caveat.html %}
 
-- [prisma-fullstack](https://github.com/prisma/prisma-examples/tree/latest/pulse/fullstack-simple-chat) - Aplicativo Fullstack com Express e Next.js utilizando [Prisma](https://www.npmjs.com/package/prisma) como ORM
 - [prisma-rest-api-ts](https://github.com/prisma/prisma-examples/tree/latest/orm/express) - API REST com Express em TypeScript utilizando [Prisma](https://www.npmjs.com/package/prisma) como ORM
