@@ -1,6 +1,13 @@
 import { test, expect } from '@playwright/test';
 import enStrings from '../../src/i18n/ui/en.json' with { type: 'json' };
 
+/**
+ * Homepage E2E Tests
+ * Includes: Hero, Features, Theme Toggle, Kawaii Toggle, Footer and Language Selector tests.
+ *
+ * TODO: Add tests for Sidebar and Orama Search component in the future.
+ */
+
 test.describe('Homepage Content', () => {
   let latestVersion: string;
 
@@ -81,21 +88,55 @@ test.describe('Homepage Content', () => {
 
     // Initially standard is visible
     await expect(standardLogo).toBeVisible();
-    await expect(kawaiiLogo).toBeHidden();
-
     // Click the toggle in the footer
     const toggleBtn = page.getByTestId('kawaii-toggle');
     await toggleBtn.scrollIntoViewIfNeeded();
     await toggleBtn.click({ force: true });
 
-    // Now kawaii should be visible
+    // 1. Verify the attribute is actually set on HTML (confirms script ran)
+    await expect(page.locator('html')).toHaveAttribute('data-kawaii', '');
+
+    // 2. Now kawaii should be visible
     await expect(kawaiiLogo).toBeVisible();
-    await expect(standardLogo).toBeHidden();
+
+    // 3. Verify persistence in localStorage
+    const savedKawaii = await page.evaluate(() => localStorage.getItem('kawaii'));
+    expect(savedKawaii).toBe('true');
+
+    // 4. All standard logos in the hero should be hidden
+    const allStandardLogos = heroBrand.getByTestId('logo-standard');
+    const count = await allStandardLogos.count();
+    for (let i = 0; i < count; i++) {
+      await expect(allStandardLogos.nth(i)).toBeHidden();
+    }
 
     // Click again to revert
     await toggleBtn.click({ force: true });
+    await expect(page.locator('html')).not.toHaveAttribute('data-kawaii');
+
+    // Verify localStorage was cleared
+    const revertedKawaii = await page.evaluate(() => localStorage.getItem('kawaii'));
+    expect(revertedKawaii).toBeNull();
+
     await expect(standardLogo).toBeVisible();
     await expect(kawaiiLogo).toBeHidden();
+  });
+
+  test('should toggle between light and dark themes', async ({ page }) => {
+    const root = page.locator('html');
+    const toggleBtn = page.locator('#theme-toggle-button');
+
+    const initialTheme = (await root.getAttribute('data-theme')) || 'light';
+    const targetTheme = initialTheme === 'light' ? 'dark' : 'light';
+
+    await toggleBtn.click();
+    await expect(root).toHaveAttribute('data-theme', targetTheme);
+
+    const savedTheme = await page.evaluate(() => localStorage.getItem('theme'));
+    expect(savedTheme).toBe(targetTheme);
+
+    await toggleBtn.click();
+    await expect(root).toHaveAttribute('data-theme', initialTheme);
   });
 
   test('should display copyright and foundation links', async ({ page }) => {
