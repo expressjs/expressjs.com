@@ -35,11 +35,11 @@ jobs:
           # Calculate the Netlify preview URL based on the PR number
           PREVIEW_URL="https://deploy-preview-${{ github.event.pull_request.number }}--expressjscom-preview.netlify.app"
           echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
-          
+
           MAX_RETRIES=30
           DELAY=20
           echo "Checking Netlify preview: $PREVIEW_URL"
-          
+
           for i in $(seq 1 $MAX_RETRIES); do
             # Check if the URL returns a 200 OK
             if curl -s -I "$PREVIEW_URL" | grep -q "HTTP/.* 200"; then
