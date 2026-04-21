@@ -1,0 +1,84 @@
+name: Playwright Tests
+
+on:
+  pull_request:
+    branches:
+      - redesign
+      - gh-pages
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  playwright:
+    if: github.actor != 'dependabot[bot]'
+    name: Playwright Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24.13'
+          cache: 'npm'
+
+      - name: Wait for Netlify preview
+        id: wait-for-preview
+        run: |
+          # Calculate the Netlify preview URL based on the PR number
+          PREVIEW_URL="https://deploy-preview-${{ github.event.pull_request.number }}--expressjscom-preview.netlify.app"
+          echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
+          
+          MAX_RETRIES=30
+          DELAY=20
+          echo "Checking Netlify preview: $PREVIEW_URL"
+          
+          for i in $(seq 1 $MAX_RETRIES); do
+            # Check if the URL returns a 200 OK
+            if curl -s -I "$PREVIEW_URL" | grep -q "HTTP/.* 200"; then
+              echo "✅ Preview is live at $PREVIEW_URL"
+              exit 0
+            fi
+            echo "⏳ Waiting for Netlify to deploy... ($i/$MAX_RETRIES)"
+            sleep $DELAY
+          done
+
+          echo "❌ Preview not live after $((MAX_RETRIES*DELAY)) seconds."
+          exit 1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(npx playwright --version | awk '{print $2}')" >> $GITHUB_OUTPUT
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
+      - name: Install Playwright Browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npm run test:e2e
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ env.PREVIEW_URL }}
+
+      - name: Upload Playwright test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
