@@ -71,24 +71,64 @@ Tooling required:
 
 ### Available Scripts
 
-| Command           | Description                               |
-| ----------------- | ----------------------------------------- |
-| `npm run dev`     | Start development server with hot reload  |
-| `npm run build`   | Build production site to `./dist`         |
-| `npm run preview` | Preview production build locally          |
-| `npm run lint`    | Run ESLint to check for issues            |
-| `npm run check`   | Run type checking and format verification |
+| Command            | Description                               |
+| ------------------ | ----------------------------------------- |
+| `npm run dev`      | Start development server with hot reload  |
+| `npm run build`    | Build production site to `./dist`         |
+| `npm run preview`  | Preview production build locally          |
+| `npm run lint`     | Run ESLint to check for issues            |
+| `npm run check`    | Run type checking and format verification |
+| `npm run test:e2e` | Run Playwright E2E tests                  |
 
 ## Submitting a Pull Request
 
-1. Create a new branch from `main`
-2. Make your changes
-3. Run `npm run check` to verify code style and types
-4. Commit with a clear message
-5. Push to your fork
-6. Open a PR against `main`
+1. Create a new branch from `main`.
+2. Make your changes.
+3. Run `npm run check` to verify code style and types.
+4. Run `npm run test:e2e` to ensure your changes don't break existing functionality.
+5. Commit with a clear message.
+6. Push to your fork.
+7. Open a PR against `main`.
 
 > Ensure all checks pass and your branch is up to date with `main` before opening a PR.
+
+## Testing
+
+We use **Playwright** for End-to-End (E2E) testing. All PRs are automatically tested against a Netlify Preview deployment before they can be merged.
+
+### Prerequisites
+
+Before running E2E tests for the first time, you need to install the browser binaries:
+
+```bash
+npx playwright install --with-deps
+```
+
+### Running Tests Locally
+
+You can run the full test suite against your local development server:
+
+1. In one terminal, start the site: `npm run dev`
+2. In another terminal, run the tests: `npm run test:e2e`
+
+### Writing Stable Tests
+
+When adding new tests or modifying components, please follow these stability guidelines:
+
+1. **Avoid CSS Classes**: Do not use CSS classes (e.g., `.hero__content`) for locators, as they are fragile and change during refactoring.
+2. **Use data-testid**: Add `data-testid` attributes to components for stable targeting (e.g., `<div data-testid="my-component">`).
+3. **User-Visible Locators**: Prefer semantic locators like `getByRole`, `getByText`, or `getByAltText` over IDs when possible.
+
+Example:
+
+```typescript
+// Good: Stable and accessible
+const logo = page.getByAltText('Express.js logo');
+const section = page.getByTestId('features-section');
+
+// Bad: Fragile
+const logo = page.locator('.hero__logo');
+```
 
 ## Further Documentation
 
