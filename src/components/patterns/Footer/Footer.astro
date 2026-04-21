@@ -163,7 +163,7 @@ import { BodyMd, Button, Col, Container, Grid } from '@/components/primitives';
 </footer>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
+  const initKawaii = () => {
     const toggle = document.getElementById('kawaiiToggle');
     if (!toggle) return;
 
@@ -185,5 +185,11 @@ import { BodyMd, Button, Col, Container, Grid } from '@/components/primitives';
     toggle.addEventListener('click', () => {
       applyState(!getState());
     });
-  });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initKawaii);
+  } else {
+    initKawaii();
+  }
 </script>
