@@ -1,7 +1,6 @@
 <h3 id='app.listen_path_callback'>app.listen(path, [callback])</h3>
 
 Starts a UNIX socket and listens for connections on the given path.
-This method is identical to Node's [http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen).
 
 ```js
 const express = require('express')
@@ -12,7 +11,17 @@ app.listen('/tmp/sock')
 <h3 id='app.listen'>app.listen([port[, host[, backlog]]][, callback])</h3>
 
 Binds and listens for connections on the specified host and port.
-This method is identical to Node's [http.Server.listen()](https://nodejs.org/api/http.html#http_server_listen).
+
+In Express 5, if a `callback` is provided, server errors (such as `EADDRINUSE`) are passed to the callback as the first argument rather than being thrown. Always check for errors in the callback:
+
+```js
+const server = app.listen(3000, (error) => {
+  if (error) {
+    throw error // e.g. EADDRINUSE
+  }
+  console.log(`Listening on ${JSON.stringify(server.address())}`)
+})
+```
 
 If port is omitted or is 0, the operating system will assign an arbitrary unused
 port, which is useful for cases like automated tasks (tests, etc.).
