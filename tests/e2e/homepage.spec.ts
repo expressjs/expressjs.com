@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import enStrings from '../../src/i18n/ui/en.json';
+import enStrings from '../../src/i18n/ui/en.json' with { type: 'json' };
 
 test.describe('Homepage Content', () => {
   let latestVersion: string;
