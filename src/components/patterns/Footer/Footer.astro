@@ -9,7 +9,7 @@ import { Icon } from 'astro-icon/components';
 import { BodyMd, Button, Col, Container, Grid } from '@/components/primitives';
 ---
 
-<footer class="footer">
+<footer class="footer" data-testid="footer">
   <div class="footer-top">
     <Container>
       <BodyMd color="secondary" center as="p">
@@ -98,6 +98,7 @@ import { BodyMd, Button, Col, Container, Grid } from '@/components/primitives';
                 variant="secondary"
                 size="xs"
                 ghost
+                data-testid="kawaii-toggle"
               >
                 Kawaii?
               </Button>
