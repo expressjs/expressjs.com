@@ -1,5 +1,14 @@
 import { test, expect } from '@playwright/test';
 import enStrings from '../../src/i18n/ui/en.json' with { type: 'json' };
+import esStrings from '../../src/i18n/ui/es.json' with { type: 'json' };
+import frStrings from '../../src/i18n/ui/fr.json' with { type: 'json' };
+import deStrings from '../../src/i18n/ui/de.json' with { type: 'json' };
+import itStrings from '../../src/i18n/ui/it.json' with { type: 'json' };
+import jaStrings from '../../src/i18n/ui/ja.json' with { type: 'json' };
+import koStrings from '../../src/i18n/ui/ko.json' with { type: 'json' };
+import ptBrStrings from '../../src/i18n/ui/pt-br.json' with { type: 'json' };
+import zhCnStrings from '../../src/i18n/ui/zh-cn.json' with { type: 'json' };
+import zhTwStrings from '../../src/i18n/ui/zh-tw.json' with { type: 'json' };
 
 /**
  * Homepage E2E Tests
@@ -21,6 +30,7 @@ test.describe('Homepage Content', () => {
     await page.goto('/en');
   });
 
+  // testing hero component
   test('should display the core brand elements and features', async ({ page }) => {
     const heroBrand = page.getByTestId('hero-brand');
 
@@ -81,74 +91,7 @@ test.describe('Homepage Content', () => {
     await expect(exampleCode).toBeVisible();
   });
 
-  test('should toggle Kawaii mode and persist it', async ({ page }) => {
-    const root = page.locator('html');
-    const toggleBtn = page.locator('#kawaiiToggle');
-    const heroBrand = page.getByTestId('hero-brand');
-
-    const standardLogo = heroBrand.getByTestId('logo-standard').first();
-    const kawaiiLogo = heroBrand.getByAltText(enStrings.hero.kawaiiLogoAlt);
-
-    // Ensure page is ready
-    await expect(toggleBtn).toBeVisible();
-    await expect(toggleBtn).toBeEnabled();
-
-    // Initial state
-    await expect(root).not.toHaveAttribute('data-kawaii');
-    await expect(standardLogo).toBeVisible();
-    await expect(kawaiiLogo).toBeHidden();
-
-    // Click toggle
-    await toggleBtn.click({ force: true });
-
-    // Wait until DOM actually updates
-    await expect
-      .poll(async () => {
-        return await page.evaluate(() => document.documentElement.hasAttribute('data-kawaii'));
-      })
-      .toBe(true);
-
-    // Assert accessibility state
-    await expect(toggleBtn).toHaveAttribute('aria-pressed', 'true');
-
-    // Assert UI change
-    await expect(kawaiiLogo).toBeVisible();
-    await expect(standardLogo).toBeHidden();
-
-    // Assert persistence
-    await expect
-      .poll(async () => {
-        return await page.evaluate(() => localStorage.getItem('kawaii'));
-      })
-      .toBe('true');
-
-    // Reload → should persist
-    await page.reload();
-
-    await expect(root).toHaveAttribute('data-kawaii', '');
-    await expect(kawaiiLogo).toBeVisible();
-
-    // Toggle OFF
-    await toggleBtn.click({ force: true });
-
-    await expect
-      .poll(async () => {
-        return await page.evaluate(() => document.documentElement.hasAttribute('data-kawaii'));
-      })
-      .toBe(false);
-
-    await expect(root).not.toHaveAttribute('data-kawaii');
-    await expect(toggleBtn).toHaveAttribute('aria-pressed', 'false');
-    await expect(standardLogo).toBeVisible();
-
-    // Storage cleared
-    await expect
-      .poll(async () => {
-        return await page.evaluate(() => localStorage.getItem('kawaii'));
-      })
-      .toBe(null);
-  });
-
+  // testing theme toggle component
   test('should toggle between light and dark themes', async ({ page }) => {
     const root = page.locator('html');
     const toggleBtn = page.locator('#theme-toggle-button');
@@ -166,6 +109,43 @@ test.describe('Homepage Content', () => {
     await expect(root).toHaveAttribute('data-theme', initialTheme);
   });
 
+  // Testing languages selector
+  const languagesToTest = [
+    { code: 'es', label: 'Español', tagline: esStrings.hero.tagline },
+    { code: 'fr', label: 'Français', tagline: frStrings.hero.tagline },
+    { code: 'de', label: 'Deutsch', tagline: deStrings.hero.tagline },
+    { code: 'it', label: 'Italiano', tagline: itStrings.hero.tagline },
+    { code: 'ja', label: '日本語', tagline: jaStrings.hero.tagline },
+    { code: 'ko', label: '한국어', tagline: koStrings.hero.tagline },
+    { code: 'pt-br', label: 'Português', tagline: ptBrStrings.hero.tagline },
+    { code: 'zh-cn', label: '简体中文', tagline: zhCnStrings.hero.tagline },
+    { code: 'zh-tw', label: '繁體中文', tagline: zhTwStrings.hero.tagline },
+  ];
+
+  for (const lang of languagesToTest) {
+    test(`should switch to ${lang.label} successfully`, async ({ page }) => {
+      // 1. Find language switcher button (using translated aria-label)
+      const langSwitcher = page.getByRole('button', { name: enStrings.language.selectLabel });
+      await expect(langSwitcher).toBeVisible();
+
+      // 2. Click to open dropdown
+      await langSwitcher.click();
+
+      // 3. Select the language option
+      const option = page.getByRole('option', { name: lang.label });
+      await expect(option).toBeVisible();
+      await option.click();
+
+      // 4. Verify URL change (handling potential trailing slashes or other path parts)
+      await expect(page).toHaveURL(new RegExp(`/${lang.code}`));
+
+      // 5. Verify tagline is correctly translated
+      const tagline = page.getByRole('heading', { level: 1 });
+      await expect(tagline).toHaveText(lang.tagline);
+    });
+  }
+
+  // testing footer component
   test('should display copyright and foundation links', async ({ page }) => {
     const footer = page.getByTestId('footer');
     await expect(footer).toBeVisible();

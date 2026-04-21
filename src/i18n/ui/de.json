@@ -20,6 +20,9 @@
   "version": {
     "selectLabel": "API-Version auswählen"
   },
+  "language": {
+    "selectLabel": "Sprache auswählen"
+  },
   "nav": {
     "mainMenu": "Hauptmenü",
     "toggleMenu": "Menü umschalten",

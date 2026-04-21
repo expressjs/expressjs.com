@@ -3,14 +3,15 @@
  */
 
 import type { HTMLAttributes } from 'astro/types';
+import type { LanguageCode } from '@/i18n/locales';
 
 export interface LanguageConfig {
-  code: string;
+  code: LanguageCode;
   label: string;
 }
 
 export type LanguageSelectProps = HTMLAttributes<'div'> & {
   languages: LanguageConfig[];
-  currentLanguage?: string;
-  onLanguageChange?: (code: string) => void;
+  currentLanguage?: LanguageCode;
+  onLanguageChange?: (code: LanguageCode) => void;
 };

@@ -20,6 +20,9 @@
   "version": {
     "selectLabel": "选择 API 版本"
   },
+  "language": {
+    "selectLabel": "选择语言"
+  },
   "nav": {
     "mainMenu": "主菜单",
     "toggleMenu": "切换菜单",

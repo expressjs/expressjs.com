@@ -18,7 +18,10 @@
     "switchToDark": "切换到深色模式"
   },
   "version": {
-    "selectLabel": "选择 API 版本"
+    "selectLabel": "選擇 API 版本"
+  },
+  "language": {
+    "selectLabel": "選擇語言"
   },
   "nav": {
     "mainMenu": "主菜单",
