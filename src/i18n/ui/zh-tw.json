@@ -13,9 +13,9 @@
     "ariaLabel": "开始输入以搜索"
   },
   "theme": {
-    "toggle": "切换主题",
-    "switchToLight": "切换到浅色模式",
-    "switchToDark": "切换到深色模式"
+    "toggle": "切換主題",
+    "switchToLight": "切換到淺色模式",
+    "switchToDark": "切換到深色模式"
   },
   "version": {
     "selectLabel": "選擇 API 版本"

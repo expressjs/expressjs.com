@@ -10,6 +10,64 @@ import ptBrStrings from '../../src/i18n/ui/pt-br.json' with { type: 'json' };
 import zhCnStrings from '../../src/i18n/ui/zh-cn.json' with { type: 'json' };
 import zhTwStrings from '../../src/i18n/ui/zh-tw.json' with { type: 'json' };
 
+// Add property here that will be used to test translations
+const languagesToTest = [
+  {
+    code: 'es',
+    label: 'Español',
+    tagline: esStrings.hero.tagline,
+    themeLabel: esStrings.theme.toggle,
+  },
+  {
+    code: 'fr',
+    label: 'Français',
+    tagline: frStrings.hero.tagline,
+    themeLabel: frStrings.theme.toggle,
+  },
+  {
+    code: 'de',
+    label: 'Deutsch',
+    tagline: deStrings.hero.tagline,
+    themeLabel: deStrings.theme.toggle,
+  },
+  {
+    code: 'it',
+    label: 'Italiano',
+    tagline: itStrings.hero.tagline,
+    themeLabel: itStrings.theme.toggle,
+  },
+  {
+    code: 'ja',
+    label: '日本語',
+    tagline: jaStrings.hero.tagline,
+    themeLabel: jaStrings.theme.toggle,
+  },
+  {
+    code: 'ko',
+    label: '한국어',
+    tagline: koStrings.hero.tagline,
+    themeLabel: koStrings.theme.toggle,
+  },
+  {
+    code: 'pt-br',
+    label: 'Português',
+    tagline: ptBrStrings.hero.tagline,
+    themeLabel: ptBrStrings.theme.toggle,
+  },
+  {
+    code: 'zh-cn',
+    label: '简体中文',
+    tagline: zhCnStrings.hero.tagline,
+    themeLabel: zhCnStrings.theme.toggle,
+  },
+  {
+    code: 'zh-tw',
+    label: '繁體中文',
+    tagline: zhTwStrings.hero.tagline,
+    themeLabel: zhTwStrings.theme.toggle,
+  },
+];
+
 /**
  * Homepage E2E Tests
  * Includes: Hero, Features, Theme Toggle, Kawaii Toggle, Footer and Language Selector tests.
@@ -96,6 +154,8 @@ test.describe('Homepage Content', () => {
     const root = page.locator('html');
     const toggleBtn = page.locator('#theme-toggle-button');
 
+    await expect(toggleBtn).toHaveAttribute('aria-label', enStrings.theme.toggle);
+
     const initialTheme = (await root.getAttribute('data-theme')) || 'light';
     const targetTheme = initialTheme === 'light' ? 'dark' : 'light';
 
@@ -110,18 +170,6 @@ test.describe('Homepage Content', () => {
   });
 
   // Testing languages selector
-  const languagesToTest = [
-    { code: 'es', label: 'Español', tagline: esStrings.hero.tagline },
-    { code: 'fr', label: 'Français', tagline: frStrings.hero.tagline },
-    { code: 'de', label: 'Deutsch', tagline: deStrings.hero.tagline },
-    { code: 'it', label: 'Italiano', tagline: itStrings.hero.tagline },
-    { code: 'ja', label: '日本語', tagline: jaStrings.hero.tagline },
-    { code: 'ko', label: '한국어', tagline: koStrings.hero.tagline },
-    { code: 'pt-br', label: 'Português', tagline: ptBrStrings.hero.tagline },
-    { code: 'zh-cn', label: '简体中文', tagline: zhCnStrings.hero.tagline },
-    { code: 'zh-tw', label: '繁體中文', tagline: zhTwStrings.hero.tagline },
-  ];
-
   for (const lang of languagesToTest) {
     test(`should switch to ${lang.label} successfully`, async ({ page }) => {
       // 1. Find language switcher button (using translated aria-label)
@@ -142,6 +190,10 @@ test.describe('Homepage Content', () => {
       // 5. Verify tagline is correctly translated
       const tagline = page.getByRole('heading', { level: 1 });
       await expect(tagline).toHaveText(lang.tagline);
+
+      // 6. Verify theme toggle aria-label is correctly translated
+      const themeToggle = page.locator('#theme-toggle-button');
+      await expect(themeToggle).toHaveAttribute('aria-label', lang.themeLabel);
     });
   }
 
