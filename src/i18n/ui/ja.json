@@ -20,6 +20,9 @@
   "version": {
     "selectLabel": "APIバージョンを選択"
   },
+  "language": {
+    "selectLabel": "言語を選択"
+  },
   "nav": {
     "mainMenu": "メインメニュー",
     "toggleMenu": "メニューを切替",

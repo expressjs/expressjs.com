@@ -33,18 +33,27 @@ app.listen(port, () => {
   </div>
   <Container>
     <div class="hero__content">
-      <Flex align="end" gap="4">
+      <Flex align="end" gap="4" data-testid="hero-brand">
         <div class="hero__logo">
           <Image
             src="/images/logos/express-kawaii.webp"
-            alt="Express.js kawaii logo"
+            alt={t('hero.kawaiiLogoAlt')}
             class="hero__logo-kawaii"
             width={400}
             height={225}
             loading="lazy"
+            data-testid="logo-kawaii"
           />
-          <Icon name="logo-express-black" class="hero__logo-icon--dark hero__logo-default" />
-          <Icon name="logo-express-white" class="hero__logo-icon--light hero__logo-default" />
+          <Icon
+            name="logo-express-black"
+            class="hero__logo-icon--dark hero__logo-default"
+            data-testid="logo-standard"
+          />
+          <Icon
+            name="logo-express-white"
+            class="hero__logo-icon--light hero__logo-default"
+            data-testid="logo-standard"
+          />
         </div>
         <BodyMd vMargin={false}>{EXPRESS_VERSION}</BodyMd>
       </Flex>
@@ -53,8 +62,8 @@ app.listen(port, () => {
         <Col xs={12} lg={6} class="hero__text-content">
           <H1 vMargin={false}>{t('hero.tagline')}</H1>
           <div class="hero__cta">
-            <div class="hero__code">
-              <Code code={INSTALL_COMMAND} />
+            <div class="hero__code" data-testid="install-command">
+              <Code code={INSTALL_COMMAND} lang="plaintext" />
             </div>
             <Button as="a" href="/en/5x/starter/installing" size="md" fullWidth>
               {t('hero.getStarted')}
@@ -63,7 +72,7 @@ app.listen(port, () => {
           </div>
         </Col>
         <Col xs={12} lg={6}>
-          <div class="hero__code hero__example-code">
+          <div class="hero__code hero__example-code" data-testid="example-code">
             <Code code={EXAMPLE_CODE} lang="js" />
           </div>
         </Col>

@@ -17,10 +17,13 @@
 
 import { Select } from '@/components/primitives';
 import type { LanguageSelectProps } from './types';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 type Props = LanguageSelectProps;
 
-const { languages, currentLanguage = 'en', class: className, id, ...rest } = Astro.props;
+const { languages, currentLanguage: propLanguage, class: className, id, ...rest } = Astro.props;
+const currentLanguage = propLanguage || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLanguage);
 
 const options = languages.map((lang) => ({
   value: lang.code,
@@ -36,7 +39,7 @@ const options = languages.map((lang) => ({
   hideLabel={true}
   variant="icon"
   dropdownAlign="right"
-  ariaLabel="Select language"
+  ariaLabel={t('language.selectLabel')}
   class={className}
   data-language-select
   {...id && { id }}

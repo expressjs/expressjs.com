@@ -23,7 +23,8 @@
     "check": "npm run format:check && npm run lint",
     "fix": "npm run format && npm run lint:fix",
     "prepare": "husky",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
@@ -62,6 +63,7 @@
     "@csstools/postcss-global-data": "^4.0.0",
     "@eslint/js": "^9.39.2",
     "@iconify-json/fluent": "^1.2.41",
+    "@playwright/test": "^1.59.1",
     "@types/node": "^25.3.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
