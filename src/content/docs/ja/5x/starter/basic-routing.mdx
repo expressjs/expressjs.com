@@ -1,0 +1,67 @@
+---
+title: 基本ルーティング
+description: Express.jsアプリケーションでルーティングの基礎を学びます。ルートの定義、HTTPメソッドの処理、Webサーバーのルートハンドラの作成などです。
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+*Routing* は、アプリケーションが特定のエンドポイントに対してどのように応答するかを決定することを指します。 これはURI(またはパス)と特定のHTTPリクエストメソッド(GET、POSTなど)です。
+
+各ルートは、ルートが一致したときに実行される、1つまたは複数のハンドラ関数を持つことができます。
+
+ルート定義は以下の構造をとります:
+
+```js
+app.METHOD(PATH, HANDLER);
+```
+
+場所:
+
+* `app` は `express` のインスタンスです。
+* `METHOD` は [HTTP リクエストメソッド](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods) の小文字です。
+* `PATH` はサーバー上のパスです。
+* `HANDLER` はルートが一致したときに実行される関数です。
+
+<Alert type="アラート">
+
+このチュートリアルでは、`app` という名前の `express` インスタンスが作成され、サーバーが
+動作していることを前提としています。 アプリの作成に慣れていない場合は、Hello world
+exampleを参照してください。
+
+</Alert>
+
+以下の例は、単純なルートの定義を示しています。
+
+ホームページの「Hello World!」に返信:
+
+```js
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+```
+
+ルートルート (`/`) の POST リクエストに応答します。アプリケーションのホームページ:
+
+```js
+app.post('/', (req, res) => {
+  res.send('Got a POST request');
+});
+```
+
+`/user`ルートにPUTリクエストに応答します：
+
+```js
+app.put('/user', (req, res) => {
+  res.send('Got a PUT request at /user');
+});
+```
+
+`/user`ルートへのDELETEリクエストに対応:
+
+```js
+app.delete('/user', (req, res) => {
+  res.send('Got a DELETE request at /user');
+});
+```
+
+For more details about routing, see the [routing guide](/en/guide/routing).

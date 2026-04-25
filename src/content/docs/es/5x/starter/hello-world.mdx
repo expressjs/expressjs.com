@@ -1,0 +1,54 @@
+---
+title: Hola ejemplo de mundo
+description: Comienza con Express.js construyendo una sencilla aplicación 'Hola Mundo', demostrando la configuración básica y la creación de servidores para principiantes.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<Alert type="info">
+
+Incrustado a continuación es esencialmente la aplicación Express más simple que puede crear. Es una aplicación de archivo única
+&mdash; *no* lo que obtendrías si utilizas el [generador Express](/en/starter/generator), que
+crea el andamio para una aplicación completa con numerosos archivos JavaScript, plantillas de Jade y subdirectorios
+para varios propósitos.
+
+</Alert>
+
+```js
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+  res. end('¡Hola Mundo!');
+});
+
+app.listen(port, () => {
+  console.log(`Ejemplo de aplicación escuchando en el puerto ${port}`);
+});
+```
+
+Esta aplicación inicia un servidor y escucha en el puerto 3000 para las conexiones. La aplicación responde con "¡Hola Mundo!" para las solicitudes
+a la URL raíz (`/`) o *route*. Por cada otro camino, responderá con un **404 No Encontrado**.
+
+## Ejecutar localmente
+
+Primero cree un directorio llamado `myapp`, cámbielo y ejecute `npm init`. Luego, instala `express` como una dependencia, según la [guía de instalación](/en/starter/installing).
+
+En el directorio `myapp`, crea un archivo llamado `app.js` y copia el código del ejemplo anterior.
+
+<Alert type="alerta">
+
+El `req` (petición) y `res` (respuesta) son los mismos objetos exactos que el Node proporciona, así que puedes
+invocar `req. ipe()`, `req.on('data', callback)`, y cualquier otra cosa que hagas sin Express
+involucradas.
+
+</Alert>
+
+Ejecutar la aplicación con el siguiente comando:
+
+```bash
+$ node app.js
+```
+
+Luego, carga `http://localhost:3000/` en un navegador para ver la salida.

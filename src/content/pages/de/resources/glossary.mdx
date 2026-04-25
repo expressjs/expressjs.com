@@ -1,0 +1,61 @@
+---
+title: Glossary
+description: Ein umfassendes Glossar mit Begriffen, die sich auf Express.js, Node.js, Middleware, Routing und andere Schlüsselkonzepte beziehen, damit Sie Express verstehen und effektiv nutzen können.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+### anwendung
+
+Im Allgemeinen ein oder mehrere Programme, die darauf ausgelegt sind, Operationen für einen bestimmten Zweck durchzuführen. Im Kontext von Express, ein Programm, das die Express-API verwendet, die auf der Node.js-Plattform läuft. Könnte auch auf ein [app object](/en/api#express).
+
+### API
+
+Programmierschnittstelle für Anwendungen. Sprich die Abkürzung aus, wenn sie zum ersten Mal verwendet wird.
+
+### Express
+
+Ein schnelles, unübersichtliches, minimalistisches Webframework für Node.js Anwendungen. Im Allgemeinen wird "Express" von "Express.js" bevorzugt, obwohl letztere akzeptabel ist.
+
+### libuv
+
+Eine mehrplattformunabhängige Unterstützungsbibliothek, die sich auf asynchrone I/O konzentriert, die hauptsächlich für den Einsatz durch Node.js entwickelt wurde.
+
+### Middleware
+
+Eine Funktion, die von der Express-Routing Layer vor dem letzten Request-Handler aufgerufen wird und sitzt somit in der Mitte zwischen einer Rohanforderung und der endgültigen geplanten Route. Ein paar schöne Terminologiepunkte rund um die Middleware:
+
+* `var foo = require('middleware')` heißt *requiring* oder *using* ein Node.js Modul. Dann gibt die Anweisung `var mw = foo()` typischerweise die Middleware zurück.
+* `app.use(mw)` heißt *adding the middleware to the global processing stack*.
+* `app.get('/foo', mw, function (req, res) { ... })` heißt *adding the middleware to the "GET /foo" processing stack*.
+
+### Node.js
+
+Eine Softwareplattform, die zur Erstellung skalierbarer Netzwerkanwendungen verwendet wird. Node.js verwendet JavaScript als Skriptsprache und erzielt einen hohen Durchsatz über nicht-blockierende I/O und eine einzige Threading-Ereignisschleife. Siehe [nodejs.org](https://nodejs.org/en/). **Verwende Notiz**: Anfangs "Node.js", danach "Knoten".
+
+### Open-Source, Open-Source
+
+Wenn als Adjektiv verwendet wird, Bindestrich; zum Beispiel: "Dies ist Open-Source-Software." Siehe [Open-Source-Software auf Wikipedia](http://en.wikipedia.org/wiki/Open-source_software).
+
+<Alert type="info">
+
+Obwohl es üblich ist, diesen Begriff nicht zu überschreiben, verwenden wir die üblichen englischen Regeln für
+und hyphenieren ein Compound Adjektiv.
+
+</Alert>
+
+### anfragen
+
+Eine HTTP-Anfrage. Ein Client sendet eine HTTP-Anfrage an einen Server, der eine Antwort zurückgibt. Die Anfrage muss eine von mehreren [Anfragemethoden](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) wie GET, POST usw. verwenden.
+
+### antwort
+
+Eine HTTP-Antwort. Ein Server gibt dem Client eine HTTP-Antwortmeldung zurück. Die Antwort enthält Vollständigkeitsinformationen über die Anfrage und kann auch angeforderte Inhalte in ihrem Nachrichtentext enthalten.
+
+### routen
+
+Teil einer URL, die eine Ressource identifiziert. In `http://foo.com/products/id`, zum Beispiel, ist "/products/id" die Route.
+
+### router
+
+Siehe [router](/en/api#router) in der API-Referenz.

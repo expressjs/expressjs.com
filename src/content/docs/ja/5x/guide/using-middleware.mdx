@@ -1,0 +1,299 @@
+---
+title: ミドルウェアの使用
+description: Express.jsアプリケーションでミドルウェアを使用する方法、アプリケーションレベルおよびルータレベルのミドルウェア、エラー処理、サードパーティミドルウェアの統合などを学びます。
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Express はルーティングおよびミドルウェアの Web フレームワークで、独自の最小限の機能を持っています。Express アプリケーションは、基本的にはミドルウェア関数の一連の呼び出しです。
+
+*Middleware* 関数は、[request object](/en/5x/api#req) (`req`) にアクセスできる関数です。 [response object](/en/5x/api#res) (`res`) と、アプリケーションのリクエストレスポンスサイクルの次のミドルウェア関数。 次のミドルウェア関数は通常`next`という名前の変数で表されます。
+
+ミドルウェア機能は以下のタスクを実行できます。
+
+* 任意のコードを実行します。
+* リクエストとレスポンスオブジェクトに変更を加えます。
+* リクエストレスポンスサイクルを終了します。
+* スタック内の次のミドルウェア関数を呼び出します。
+
+現在のミドルウェア関数がリクエスト応答サイクルを終了しない場合は、次のミドルウェア関数に制御を渡すために `next()` を呼び出す必要があります。 そうでなければ、リクエストはハングアップのままになります。
+
+Express アプリケーションでは、次のタイプのミドルウェアを使用できます。
+
+* [Application-level middleware](#middleware.application)
+* [Router-level middleware](#middleware.router)
+* [Error-handling middleware](#middleware.error-handling)
+* [Built-in middleware](#middleware.built-in)
+* [Third-party middleware](#middleware.third-party)
+
+アプリケーションレベルおよびルーターレベルのミドルウェアは、任意のマウントパスでロードできます。
+また、一連のミドルウェア関数を一緒にロードして、マウントポイントでミドルウェアシステムのサブスタックを作成することもできます。
+
+## アプリケーションレベルのミドルウェア
+
+`app.use()` と `app()` を使用して、アプリケーションレベルのミドルウェアを [app object](/en/5x/api#app) のインスタンスにバインドします。 ETHOD()関数。`METHOD`はミドルウェア関数が小文字で処理するHTTPメソッドです(GET、PUT、POSTなど)。
+
+この例では、マウントパスのないミドルウェア関数を示します。 この関数はアプリがリクエストを受け取るたびに実行されます。
+
+```js
+const express = require('express');
+const app = expresss();
+
+app.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
+});
+```
+
+この例では、`/user/:id` パスにマウントされたミドルウェア関数を示します。 関数は `/user/:id` パス上の任意のタイプの
+HTTP リクエストに対して実行されます。
+
+```js
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request Type:', req.method);
+  next();
+});
+```
+
+この例ではルートとハンドラ関数(ミドルウェアシステム)を示します。 関数は`/user/:id`パスへのGETリクエストを処理します。
+
+```js
+app.get('/user/:id', (req, res, next) => {
+  res.send('USER');
+});
+```
+
+次に、マウントパスを持つ一連のミドルウェア関数をマウントポイントにロードする例を示します。
+これは `/user/:id` パスにHTTPリクエスト情報を出力するミドルウェアのサブスタックを示しています。
+
+```js
+app.use(
+  '/user/:id',
+  (req, res, next) => {
+    console.log('Request URL:', req.originalUrl);
+    next();
+  },
+  (req, res, next) => {
+    console.log('Request Type:', req.method);
+    next();
+  }
+);
+```
+
+ルートハンドラを使用すると、パスに複数のルートを定義できます。 下の例では、`/user/:id`パスへのGETリクエストに対する2つのルートを定義しています。 2番目のルートは問題を引き起こすことはありませんが、最初のルートはリクエスト応答サイクルを終了するため、呼び出されることはありません。
+
+この例では、`/user/:id`パスへのGETリクエストを処理するミドルウェアサブスタックを示します。
+
+```js
+app.get(
+  '/user/:id',
+  (req, res, next) => {
+    console.log('ID:', req.params.id);
+    next();
+  },
+  (req, res, next) => {
+    res.send('User Info');
+  }
+);
+
+// handler for the /user/:id path, which prints the user ID
+app.get('/user/:id', (req, res, next) => {
+  res.send(req.params.id);
+});
+```
+
+他のミドルウェア関数をルータのミドルウェアスタックからスキップするには、次のルートに制御を渡すために `next('route')` を呼び出します。
+
+<Alert type="情報">
+
+`next('route')` は、
+`app.METHOD()` または `router.METHOD()` 関数を使用してロードされたミドルウェア関数でのみ動作します。
+
+</Alert>
+
+この例では、`/user/:id`パスへのGETリクエストを処理するミドルウェアサブスタックを示します。
+
+```js
+app.get(
+  '/user/:id',
+  (req, res, next) => {
+    // if the user ID is 0, skip to the next route
+    if (req.params.id === '0') next('route');
+    // otherwise pass the control to the next middleware function in this stack
+    else next();
+  },
+  (req, res, next) => {
+    // send a regular response
+    res.send('regular');
+  }
+);
+
+// handler for the /user/:id path, which sends a special response
+app.get('/user/:id', (req, res, next) => {
+  res.send('special');
+});
+```
+
+ミドルウェアは、再利用可能な配列で宣言することもできます。
+
+この例では、`/user/:id`パスへのGETリクエストを処理するミドルウェアサブスタックを持つ配列を示しています。
+
+```js
+function logOriginalUrl(req, res, next) {
+  console.log('Request URL:', req.originalUrl);
+  next();
+}
+
+function logMethod(req, res, next) {
+  console.log('Request Type:', req.method);
+  next();
+}
+
+const logStuff = [logOriginalUrl, logMethod];
+app.get('/user/:id', logStuff, (req, res, next) => {
+  res.send('User Info');
+});
+```
+
+## ルーターレベルのミドルウェア
+
+ルータレベルのミドルウェアは、`express.Router()`のインスタンスにバインドされている場合を除き、アプリケーションレベルのミドルウェアと同じ方法で動作します。
+
+```js
+const router = express.Router();
+```
+
+`router.use()`と`router.METHOD()`関数を使ってルーターレベルのミドルウェアをロードします。
+
+次のコード例は、ルーターレベルのミドルウェアを使用して、アプリケーションレベルのミドルウェアに対して上記のミドルウェアシステムを複製します。
+
+```js
+const express = require('express');
+const app = express();
+const router = express.Router();
+
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
+});
+
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use(
+  '/user/:id',
+  (req, res, next) => {
+    console.log('Request URL:', req.originalUrl);
+    next();
+  },
+  (req, res, next) => {
+    console.log('Request Type:', req.method);
+    next();
+  }
+);
+
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get(
+  '/user/:id',
+  (req, res, next) => {
+    // if the user ID is 0, skip to the next router
+    if (req.params.id === '0') next('route');
+    // otherwise pass control to the next middleware function in this stack
+    else next();
+  },
+  (req, res, next) => {
+    // render a regular page
+    res.render('regular');
+  }
+);
+
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id);
+  res.render('special');
+});
+
+// mount the router on the app
+app.use('/', router);
+```
+
+ルーターのミドルウェア関数の残りをスキップするには、`next('router')`
+を呼び出してルーターインスタンスからコントロールを渡します。
+
+この例では、`/user/:id`パスへのGETリクエストを処理するミドルウェアサブスタックを示します。
+
+```js
+const express = require('express');
+const app = express();
+const router = express.Router();
+
+// predicate the router with a check and bail out when needed
+router.use((req, res, next) => {
+  if (!req.headers['x-auth']) return next('router');
+  next();
+});
+
+router.get('/user/:id', (req, res) => {
+  res.send('hello, user!');
+});
+
+// use the router and 401 anything falling through
+app.use('/admin', router, (req, res) => {
+  res.sendStatus(401);
+});
+```
+
+## エラー処理のミドルウェア
+
+<Alert type="アラート">
+
+エラー処理ミドルウェアは常に_4つの引数を取ります。 エラー処理ミドルウェア関数として
+識別するには、4つの引数を指定する必要があります。 `next`
+オブジェクトを使用しなくても、署名を維持するために指定する必要があります。 Otherwise, the `next` object will be
+interpreted as regular middleware and will fail to handle errors.
+
+</Alert>
+
+他のミドルウェア関数と同じ方法でエラー処理ミドルウェア関数を定義します 3 つの代わりに 4 つの引数を指定する場合を除き、特に \`(err, req, res, next) というシグネチャを使用します。
+
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+エラー処理ミドルウェアの詳細については、[Error handling](/en/guide/error-handling)を参照してください。
+
+## 組み込みのミドルウェア
+
+バージョン 4.x 以降、Express は [Connect](https://github.com/senchalabs/connect) に依存しなくなりました。 The middleware
+functions that were previously included with Express are now in separate modules; see [the list of middleware functions](https://github.com/senchalabs/connect#middleware).
+
+Express には次のミドルウェア関数が組み込まれています。
+
+* [express.static](/en/5x/api#express.static) は、HTML ファイル、画像などの静的なアセットを提供します。
+* [express.json](/en/5x/api#express.json) は、JSON ペイロードで受信したリクエストを解析します。 \*\*注意: Express 4.16.0+で利用可能
+* [express.urlencoded](/en/5x/api#express.urlencoded) は、URLエンコードされたペイロードで受信するリクエストを解析します。 \*\*注意: Express 4.16.0+で利用可能
+
+## サードパーティのミドルウェア
+
+サードパーティ製ミドルウェアを使用して、Express アプリに機能を追加します。
+
+必要な機能のためにNode.jsモジュールをインストールし、アプリケーション・レベルまたはルータレベルでアプリケーションにロードします。
+
+次の例は、cookie-parser関数`cookie-parser`のインストールとロードを示しています。
+
+```bash
+$ npm install cookie-parser
+```
+
+```js
+const express = require('express');
+const app = express();
+const cookieParser = require('cookie-parser');
+
+// cookie-parsing middleware
+app.use(cookieParser());
+```
+
+Expressで一般的に使用されるサードパーティミドルウェア関数の部分的なリストについては、[サードパーティミドルウェア](../resources/middleware)を参照してください。

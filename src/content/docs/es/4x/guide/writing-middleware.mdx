@@ -1,0 +1,239 @@
+---
+title: Escribiendo middleware para uso en aplicaciones Express
+description: Aprenda cómo escribir funciones personalizadas de middleware para aplicaciones Express.js, incluyendo ejemplos y mejores prácticas para mejorar la gestión de peticiones y respuestas.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Las funciones *Middleware* son funciones que tienen acceso al [objeto de solicitud](/en/5x/api#req) (`req`), el [objeto de respuesta](/en/5x/api#res) (`res`), y la función `next` en el ciclo de solicitud y respuesta de la aplicación. La función `siguiente` es una función en el router Express que, cuando se invoca, ejecuta el middleware sucediendo al middleware actual.
+
+Las funciones de Middleware pueden realizar las siguientes tareas:
+
+* Ejecutar cualquier código.
+* Realizar cambios en la solicitud y en los objetos de respuesta.
+* Terminar el ciclo de solicitud de respuesta.
+* Llama al siguiente middleware en la pila.
+
+Si la función actual de middleware no termina el ciclo de solicitud de respuesta, debe llamar a `next()` para pasar el control a la siguiente función de middleware. De lo contrario, la solicitud quedará colgada.
+
+La siguiente figura muestra los elementos de una llamada a una función de middleware:
+
+<div class="rascacielos">
+<table id="higuera-mw">
+<tr>
+<td id="mw-figur-imgcell">
+<img src="/images/express-mw.png" alt="Elementos de una llamada a función middleware" id="mw-fig-img" />
+</td>
+<td class="mw-fig-callouts">
+<div class="callout" id="callout1">método HTTP para el cual se aplica la función middleware.</div>
+
+<div class="callout" id="callout2">
+  Ruta (ruta) para la que se aplica la función middleware.
+</div>
+
+<div class="callout" id="callout3">
+  La función Middleware.
+</div>
+
+<div class="callout" id="callout4">
+  Argumento de llamada a la función middleware, llamado "siguiente" por convención.
+</div>
+
+<div class="callout" id="callout5">
+  HTTP <a href="/en/5x/api#res">argumento</a> de respuesta a la función de middleware, llamada "res" por convención
+  .
+</div>
+
+<div class="callout" id="callout6">HTTP <a href="/en/5x/api#req">solicita un argumento</a> a la función de middleware, llamado "req" por convención.</div>
+</td>
+</tr>
+</table>
+</div>
+
+A partir de Express 5, las funciones de middleware que devuelven una Promise llamarán `next(value)` cuando rechacen o lancen un error. `next` será llamado con el valor rechazado o con el error arrojado.
+
+## Ejemplo
+
+He aquí un ejemplo de una simple aplicación "Hola Mundo" Express.
+El resto de este artículo definirá y añadirá tres funciones de middleware a la aplicación:
+una llamada `myLogger` que imprime un simple mensaje de registro, uno llamado `requestTime` que
+muestra la marca de tiempo de la petición HTTP, y uno llamado `validateCookies` que valida las cookies entrantes.
+
+```js
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('¡Hola Mundo!');
+});
+
+app.listen(3000);
+```
+
+### Función Middleware myLogger
+
+Aquí hay un ejemplo simple de una función middleware llamada "myLogger". Esta función solo imprime
+"LOGGED" cuando una solicitud a la aplicación pasa a través de ella. La función middleware está asignada a una variable
+llamada `myLogger`.
+
+```js
+const myLogger = function (req, res, next) {
+  console.log('LOGGED');
+  next();
+};
+```
+
+<Alert type="alerta">
+
+Tenga en cuenta la llamada anterior a `next()`. Llamar a esta función invoca la siguiente función de middleware en
+la aplicación. La función `next()` no es parte del Nodo. s o Express API, pero es el tercer argumento
+que se pasa a la función middleware. La función `next()` podría ser nombrada cualquier cosa,
+pero por convención siempre se llama "siguiente". Para evitar la confusión, utilice siempre esta convención.
+
+</Alert>
+
+Para cargar la función middleware, llama a `app.use()`, especificando la función middleware.
+Por ejemplo, el siguiente código carga la función middleware `myLogger` antes de la ruta a la ruta raíz (/).
+
+```js
+const express = require('express');
+const app = express();
+
+const myLogger = function (req, res, next) {
+  consola. og('LOGGED');
+  siguiente();
+};
+
+app.use(myLogger);
+
+app.get('/', (req, res) => {
+  res.send('¡Hola Mundo!');
+});
+
+app.listen(3000);
+```
+
+Cada vez que la aplicación recibe una solicitud, imprime el mensaje "LOGGED" en el terminal.
+
+El orden de carga de middleware es importante: las funciones de middleware que se cargan primero también se ejecutan primero.
+
+Si `myLogger` es cargado después de la ruta a la ruta raíz, la solicitud nunca llega a ella y la aplicación no imprime "LOGGED", porque el manejador de rutas de la ruta raíz termina el ciclo de solicitud de respuesta.
+
+La función Middleware `myLogger` simplemente imprime un mensaje, luego pasa la solicitud a la siguiente función de middleware en la pila llamando a la función `next()`.
+
+### Tiempo de solicitud de la función Middleware
+
+A continuación, crearemos una función de middleware llamada "requestTime" y agregaremos una propiedad llamada `requestTime`
+al objeto de la solicitud.
+
+```js
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now();
+  next();
+};
+```
+
+La aplicación ahora utiliza la función de middleware `requestTime`. Además, la función de callback de la ruta raíz utiliza la propiedad que la función middleware añade a `req` (el objeto de la solicitud).
+
+```js
+const express = require('express');
+const app = express();
+
+const requestTime = function (req, res, next) {
+  req. equestTime = Date.now();
+  next();
+};
+
+app.use(requestTime);
+
+app. et('/', (req, res) => {
+  let responseText = '¡Hola Mundo!<br>';
+  responseText += `<small>Solicitado en: ${req.requestTime}</small>`;
+  res. end(responseText);
+});
+
+app.listen(3000);
+```
+
+Cuando hace una solicitud a la raíz de la aplicación, la aplicación ahora muestra la marca de tiempo de su solicitud en el navegador.
+
+### Función Middleware validateCookies
+
+Finalmente, crearemos una función de middleware que valida las cookies entrantes y envía una respuesta 400 si las cookies no son válidas.
+
+Aquí hay una función de ejemplo que valida las cookies con un servicio externo asíncrono.
+
+```js
+async function cookieValidator(cookies) {
+  try {
+    await externallyValidateCookie(cookies.testCookie);
+  } catch {
+    throw new Error('Invalid cookies');
+  }
+}
+```
+
+Aquí usamos el [`cookie-parser`](/en/resources/middleware/cookie-parser) middleware para analizar las cookies entrantes del objeto `req` y pasarlas a nuestra función `cookieValidator`. El middleware `validateCookies` devuelve una Promesa que al rechazar activará automáticamente nuestro gestor de errores.
+
+```js
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const cookieValidator = require('. cookieValidator');
+
+const app = express();
+
+async function validateCookies(req, res, next) {
+  await cookieValidator(req. ookies);
+  next();
+}
+
+app.use(cookieParser());
+
+app.use(validateCookies);
+
+// manejador de errores
+app. se((err, req, res, next) => {
+  res.status(400).send(err.message);
+});
+
+app.listen(3000);
+```
+
+<Alert type="alerta">
+
+Observe cómo `next()` es llamado después de `await cookieValidator(req.cookies)`. Esto asegura que si
+`cookieValidator` resuelve, se llamará al siguiente middleware en la pila. Si pasas algo
+a la función `next()` (excepto la cadena `'route'` o `'router'`), Express considera que la actual petición
+es un error y se saltará cualquier función
+que no sea de manejo de enrutamiento y middleware restante.
+
+</Alert>
+
+Debido a que tiene acceso al objeto de solicitud, el objeto de respuesta, la siguiente función de middleware en la pila, y el nodo entero. s API, las posibilidades con funciones middleware son infinitas.
+
+Para más información sobre middleware exprés, vea: [Usando middleware exprés](/en/guide/using-middleware).
+
+## Middleware configurable
+
+Si necesita que su middleware sea configurable, exporte una función que acepte un objeto de opciones u otros parámetros, , que luego devuelve la implementación de middleware basada en los parámetros de entrada.
+
+Archivo: `my-middleware.js`
+
+```js
+módulo. xports = function (options) {
+  return function (req, res, next) {
+    // Implementar la función middleware basada en el objeto de opciones
+    siguiente();
+  };
+};
+```
+
+El middleware ahora puede ser usado como se muestra a continuación.
+
+```js
+const mw = require('./my-middleware.js');
+
+app.use(mw({ option1: '1', option2: '2' }));
+```
+
+Consulte [cookie-session](https://github.com/expressjs/cookie-session) y [compression](https://github.com/expressjs/compression) para ver ejemplos de middleware configurable.

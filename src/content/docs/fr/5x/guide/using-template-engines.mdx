@@ -1,0 +1,63 @@
+---
+title: Utiliser les moteurs de gabarits avec Express
+description: Découvrez comment intégrer et utiliser des moteurs de gabarits tels que Pug, Handlebars et EJS avec Express.js pour rendre les pages HTML dynamiques efficacement.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Un *moteur de modèle* vous permet d'utiliser des fichiers de modèles statiques dans votre application. Lors de l'exécution, le moteur de gabarit remplace les variables
+dans un fichier de gabarit par des valeurs réelles, et transforme le modèle en un fichier HTML envoyé au client.
+Cette approche facilite la conception d'une page HTML.
+
+Le [générateur d'application Express](/en/starter/generator) utilise [Pug](https://pugjs.org/api/getting-started.html) par défaut, mais il supporte aussi [Handlebars](https://www.npmjs.com/package/handlebars), et [EJS](https://www.npmjs.com/package/ejs), entre autres.
+
+Pour afficher les fichiers de gabarit, définissez les [propriétés de réglage de l'application](/en/4x/api#app.set), dans le `app.js` par défaut créé par le générateur:
+
+* `views`, le répertoire où se trouvent les fichiers de modèle. Ex. : `app.set('vues', './views')`.
+  Par défaut, le répertoire `views` se trouve à la racine de l'application.
+* `voir le moteur`, le moteur de gabarit à utiliser. Par exemple, pour utiliser le moteur de gabarit Pug : `app.set('moteur de vue', 'pug')`.
+
+Ensuite, installez le paquet npm correspondant au moteur de gabarits ; par exemple pour installer Pug:
+
+```bash
+$ npm install pug --save
+```
+
+<Alert type="Alerte">
+Les moteurs de gabarits conformes à la norme Express tels que Pug exportent une fonction nommée `__express(filePath, options, callback)`,
+qui `res.render()` appelle pour rendre le code du gabarit.
+
+Certains moteurs de gabarits ne suivent pas cette convention. La bibliothèque [@ladjs/consolidate](https://www.npmjs.com/package/@ladjs/consolidate)
+suit cette convention en mappant tous les moteurs de gabarits populaires Node.js, et fonctionne donc parfaitement dans Express.
+
+</Alert>
+
+Une fois que le moteur de vue est défini, vous n'avez pas à spécifier le moteur ou charger le module moteur de gabarit dans votre application ;
+Express charge le module en interne, par exemple :
+
+```js
+app.set('moteur d'affichage', 'pug');
+```
+
+Ensuite, créez un fichier de modèle Pug nommé `index.pug` dans le dossier `views`, avec le contenu suivant:
+
+```pug
+html
+  devant
+    title= titre
+  corps
+    h1= message
+```
+
+Créez une route pour afficher le fichier `index.pug`. Si la propriété `view engine` n'est pas définie,
+vous devez spécifier l'extension du fichier `view`. Sinon, vous pouvez l'oublier.
+
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Bonjour !' });
+});
+```
+
+Lorsque vous faites une requête sur la page d'accueil, le fichier `index.pug` sera rendu en HTML.
+
+Le cache du moteur de vue ne cache pas le contenu de la sortie du modèle, seulement le modèle sous-jacent. La vue est toujours rendue à chaque requête, même lorsque le cache est activé.

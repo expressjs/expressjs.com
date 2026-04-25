@@ -1,0 +1,61 @@
+---
+title: Glossary
+description: Un glossaire complet de termes liés à Express.js, Node.js, middleware, routing et autres concepts clés pour vous aider à comprendre et utiliser Express efficacement.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+### application
+
+En général, un ou plusieurs programmes sont conçus pour réaliser des opérations à des fins précises. Dans le contexte d'Express, un programme qui utilise l'API Express exécutée sur la plate-forme Node.js. Peut aussi se référer à un [objet application] (/en/api#express).
+
+### API
+
+Interface de programmation applicative. Sortez l'abréviation quand elle est utilisée pour la première fois.
+
+### Exprimé
+
+Un framework web rapide, sans avis et minimaliste pour les applications Node.js. En général, "Express" est préféré à "Express.js", bien que ce dernier soit acceptable.
+
+### libuv
+
+Une bibliothèque de support multi-plateforme qui se concentre sur les E/S asynchrones, principalement développée pour Node.js.
+
+### middleware
+
+Une fonction qui est appelée par la couche de routage Express avant le gestionnaire de requête finale, et se trouve donc au milieu entre une requête brute et la route finale. Quelques bons points de terminologie autour du middleware :
+
+* `var foo = require('middleware')` est appelé *requiring* ou *using* un module Node.js. Puis l'instruction `var mw = foo()` retourne typiquement le middleware.
+* `app.use(mw)` est appelé *adding the middleware to the global processing stack*.
+* `app.get('/foo', mw, function (req, res) { ... })` est appelé _ajoutant le middleware à la pile de traitement "GET /foo".
+
+### Node.js
+
+Une plate-forme logicielle utilisée pour construire des applications réseau évolutives. Node.js utilise JavaScript comme langage de script, et obtient un débit élevé via des E/S non-bloquantes et une boucle d'événements à un seul thread. Voir [nodejs.org](https://nodejs.org/en/). **Note d'utilisation**: Initialement, "Node.js," ensuite "Node".
+
+### open-source, open source
+
+Lorsqu'il est utilisé comme adjectif, trait d'union, par exemple : "Il s'agit d'un logiciel open-source". Voir [Logiciel open source sur Wikipédia](http://en.wikipedia.org/wiki/Open-source_software).
+
+<Alert type="Infos">
+
+Bien qu'il soit courant de ne pas faire de trait d'union avec ce terme, nous utilisons les règles anglaises standards pour
+tiret de trait d'union d'un adjectif composé.
+
+</Alert>
+
+### demande
+
+Une requête HTTP. Un client envoie un message de requête HTTP à un serveur, qui retourne une réponse. La requête doit utiliser une de plusieurs [méthodes de requête] (https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) telles que GET, POST, etc.
+
+### réponse
+
+Une réponse HTTP. Un serveur retourne un message de réponse HTTP au client. La réponse contient des informations sur l'état de la requête et peut également contenir le contenu demandé dans le corps du message.
+
+### route
+
+Partie d'une URL qui identifie une ressource. Par exemple, dans `http://foo.com/products/id`, "/products/id" est la route.
+
+### routeur
+
+Voir [router](/en/api#router) dans la référence de l'API.

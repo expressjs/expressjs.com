@@ -1,0 +1,61 @@
+---
+title: Glossary
+description: Un glossario completo di termini relativi a Express.js, Node.js, middleware, routing e altri concetti chiave per aiutarti a capire e utilizzare Express in modo efficace.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+### applicazione
+
+In generale, uno o più programmi che sono progettati per effettuare operazioni per uno scopo specifico. Nel contesto di Express, un programma che utilizza l'API Express in esecuzione sulla piattaforma Node.js. Potrebbe anche fare riferimento a un [app object](/en/api#express).
+
+### API
+
+Interfaccia di programmazione applicativa. Spiega l'abbreviazione quando viene usata per la prima volta.
+
+### Espresso
+
+Un framework web veloce, non opinabile, minimalista per applicazioni Node.js. In generale, "Express" è preferito a "Express.js", anche se quest'ultimo è accettabile.
+
+### libuv
+
+Una libreria di supporto multi-piattaforma che si concentra su I/O asincrono sviluppato principalmente per l'uso da Node.js.
+
+### middleware
+
+Una funzione che viene invocata dallo strato di routing Express prima del gestore finale della richiesta, e si siede così al centro tra una richiesta grezza e il percorso finale previsto. Alcuni punti di fine terminologia intorno al middleware:
+
+* `var foo = require('middleware')` si chiama *requiring* o *using* un modulo Node.js. Quindi la dichiarazione `var mw = foo()` restituisce tipicamente il middleware.
+* `app.use(mw)` si chiama *aggiungendo il middleware allo stack globale di elaborazione*.
+* `app.get('/foo', mw, function (req, res) { ... })` si chiama _aggiungendo il middleware allo stack di elaborazione "GET /foo" .
+
+### Node.js
+
+Una piattaforma software che viene utilizzata per costruire applicazioni di rete scalabili. Node.js utilizza JavaScript come linguaggio di scripting e raggiunge un elevato rendimento tramite I/O non bloccante e un ciclo di eventi a filettatura singola. Vedi [nodejs.org](https://nodejs.org/en/). **Nota di utilizzo**: Inizialmente, "Node.js," in seguito "Node".
+
+### open-source, open source
+
+Quando usato come aggettivo, ifenato; per esempio: "Questo è software open-source." Vedi [Software Open-source su Wikipedia](http://en.wikipedia.org/wiki/Open-source_software).
+
+<Alert type="info">
+
+Anche se è comune non trattenere questo termine, stiamo usando le regole standard inglesi per
+che trattiene un aggettivo composto.
+
+</Alert>
+
+### richiesta
+
+Una richiesta HTTP. Un client invia un messaggio di richiesta HTTP a un server, che restituisce una risposta. La richiesta deve utilizzare uno dei diversi [metodi di richiesta](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) come GET, POST, e così via.
+
+### risposta
+
+Una risposta HTTP. Un server restituisce un messaggio di risposta HTTP al client. La risposta contiene informazioni sullo stato di completamento della richiesta e potrebbe anche contenere contenuto richiesto nel suo corpo del messaggio.
+
+### percorso
+
+Parte di un URL che identifica una risorsa. Ad esempio, in `http://foo.com/products/id`, "/products/id" è il percorso.
+
+### router
+
+Vedi [router](/en/api#router) nel riferimento API.

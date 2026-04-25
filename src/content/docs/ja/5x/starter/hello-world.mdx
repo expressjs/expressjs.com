@@ -1,0 +1,54 @@
+---
+title: Hello world example
+description: Express.jsを始めるには、シンプルな「Hello World」アプリケーションを構築しましょう。初心者向けの基本的なセットアップとサーバー作成を説明します。
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<Alert type="情報">
+
+以下に埋め込まれているのは、基本的に作成できる最も簡単なExpressアプリです。 It is a single file app
+&mdash; *not* what you'd get if you use the [Express generator](/en/starter/generator), which
+creates the scaffolding for a full app with numerous JavaScript files, Jade templates, and
+sub-directories for various purposes.
+
+</Alert>
+
+```js
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+```
+
+このアプリはサーバーを起動し、接続のためにポート3000をリッスンします。 アプリはルート URL (`/`) または *route* にリクエスト
+を返します。 他のすべてのパスについては、**404 Not Found**で応答します。
+
+## ローカルで実行中
+
+最初に `myapp` という名前のディレクトリを作成し、変更して `npm init` を実行します。 Then, install `express` as a dependency, as per the [installation guide](/en/starter/installing).
+
+`myapp` ディレクトリで、`app.js`という名前のファイルを作成し、上の例からコードをコピーします。
+
+<Alert type="アラート">
+
+The `req` (request) and `res` (response) are the exact same objects that Node provides, so you can
+invoke `req.pipe()`, `req.on('data', callback)`, and anything else you would do without Express
+involved.
+
+</Alert>
+
+次のコマンドでアプリを実行します。
+
+```bash
+$ node app.js
+```
+
+次に、ブラウザーに `http://localhost:3000/` をロードして出力を確認します。

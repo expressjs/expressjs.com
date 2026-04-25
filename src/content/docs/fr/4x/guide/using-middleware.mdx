@@ -1,0 +1,299 @@
+---
+title: Utilisation du middleware
+description: Apprenez à utiliser les middleware dans les applications Express.js, y compris les middleware de niveau application et routeur, la gestion des erreurs et l'intégration de logiciels tiers middleware.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Express est un framework web de routage et de middleware qui possède des fonctionnalités minimales : Une application Express est essentiellement une série d'appels de fonctions de middleware.
+
+Les fonctions *Middleware* sont des fonctions qui ont accès à l'objet [request object](/en/5x/api#req) (`req`), l'objet [réponse](/en/5x/api#res) (`res`), et la prochaine fonction du middleware dans le cycle de réponse de l'application. La prochaine fonction du middleware est généralement dénotée par une variable nommée `next`.
+
+Les fonctions Middleware peuvent effectuer les tâches suivantes :
+
+* Exécuter n'importe quel code.
+* Effectuez des modifications à la requête et aux objets de réponse.
+* Termine le cycle de réponse de la requête.
+* Appeler la prochaine fonction du middleware dans la pile.
+
+Si la fonction middleware actuelle ne met pas fin au cycle de réponse de requête, elle doit appeler `next()` pour passer le contrôle à la prochaine fonction du middleware. Sinon, la demande sera laissée en suspens.
+
+Une application Express peut utiliser les types de middleware suivants :
+
+* (#middleware.application)
+* [middleware au niveau du routeur] (#middleware.router)
+* (#middleware.error-handling)
+* (#middleware.built-in)
+* [middleware de tierce partie](#middleware.third-party)
+
+Vous pouvez charger le middleware au niveau de l'application et du routeur avec un chemin de montage optionnel.
+Vous pouvez également charger une série de fonctions middleware ensemble, ce qui crée une sous-pile du système middleware à un point de montage.
+
+## Outil d'interface de l'application
+
+Lier le middleware au niveau de l'application à une instance de l'objet [app object](/en/5x/api#app) en utilisant `app.use()` et `app. Les fonctions ETHOD()`, où `METHOD` est la méthode HTTP de la requête que la fonction middleware gère (comme GET, PUT ou POST) en minuscule.
+
+Cet exemple montre une fonction middleware sans chemin de montage. La fonction est exécutée chaque fois que l'application reçoit une requête.
+
+```js
+const express = require('express');
+const app = express();
+
+app.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
+});
+```
+
+Cet exemple montre une fonction middleware montée sur le chemin `/user/:id`. La fonction est exécutée pour n'importe quel type de requête HTTP
+sur le chemin `/user/:id`.
+
+```js
+app.use('/user/:id', (req, res, next) => {
+  console.log('Request Type:', req.method);
+  next();
+});
+```
+
+Cet exemple montre une route et sa fonction de gestion (système middleware). La fonction gère les requêtes GET vers le chemin `/user/:id`.
+
+```js
+app.get('/user/:id', (req, res, next) => {
+  res.send('USER');
+});
+```
+
+Voici un exemple de chargement d'une série de fonctions middleware à un point de montage, avec un chemin de montage.
+Il illustre une sous-pile middleware qui affiche les informations de requête pour tout type de requête HTTP vers le chemin `/user/:id`.
+
+```js
+app.use(
+  '/user/:id',
+  (req, res, next) => {
+    console.log('Request URL:', req. riginalUrl);
+    next();
+  },
+  (req, res, next) => {
+    console. og('Type de requête :', req.method);
+    suivant();
+  }
+;
+```
+
+Les gestionnaires de routes vous permettent de définir plusieurs routes pour un chemin. L'exemple ci-dessous définit deux routes pour les requêtes GET vers le chemin `/user/:id`. La deuxième route ne posera aucun problème, mais elle ne sera jamais appelée parce que le premier parcours termine le cycle de réponse de la requête.
+
+Cet exemple montre une sous-pile middleware qui gère les requêtes GET vers le chemin `/user/:id`.
+
+```js
+app.get(
+  '/user/:id',
+  (req, res, next) => {
+    console.log('ID:', req. arams.id);
+    next();
+  },
+  (req, res, next) => {
+    res. end('Info utilisateur');
+  }
+);
+
+// gestionnaire pour le chemin /user/:id qui affiche l'identifiant utilisateur
+. et('/user/:id', (req, res, next) => {
+  res.send(req.params.id);
+});
+```
+
+Pour sauter le reste des fonctions du middleware à partir d'une pile de middleware du routeur, appelez `next('route')` pour passer le contrôle à la route suivante.
+
+<Alert type="Infos">
+
+`next('route')` ne fonctionnera que dans les fonctions du middleware qui ont été chargées en utilisant les fonctions
+`app.METHOD()` ou `router.METHOD()`.
+
+</Alert>
+
+Cet exemple montre une sous-pile middleware qui gère les requêtes GET vers le chemin `/user/:id`.
+
+```js
+app.get(
+  '/user/:id',
+  (req, res, next) => {
+    // si l'identifiant de l'utilisateur est 0, passer à la route
+    suivante si (req. arams. d === '0') next('route');
+    // sinon passez le contrôle à la prochaine fonction du middleware de cette pile
+    else next();
+  },
+  (req, res, next) => {
+    // envoie une réponse régulière
+    res. end('regular');
+  }
+);
+
+// gestionnaire pour le chemin /user/:id qui envoie une réponse spéciale
+. et('/user/:id', (req, res, next) => {
+  res.send('special');
+});
+```
+
+Les Middleware peuvent également être déclarés dans un tableau pour être réutilisables.
+
+Cet exemple montre un tableau avec une sous-pile middleware qui gère les requêtes GET vers le chemin `/user/:id`
+
+```js
+function logOriginalUrl(req, res, next) {
+  console.log('Request URL:', req. riginalUrl);
+  next();
+}
+
+function logMethod(req, res, next) {
+  console.log('Type de requête:', req. ethod);
+  next();
+}
+
+const logStuff = [logOriginalUrl, logMethod];
+app. et('/user/:id', logStuff, (req, res, next) => {
+  res.send('User Info');
+});
+```
+
+## middleware au niveau du routeur
+
+Le middleware au niveau du routeur fonctionne de la même manière que le middleware au niveau de l'application, sauf qu'il est lié à une instance de `express.Router()`.
+
+```js
+routeur const = express.Router();
+```
+
+Charger le middleware au niveau du routeur en utilisant les fonctions `router.use()` et `router.METHOD()`.
+
+L'exemple suivant réplique le système middleware qui est affiché ci-dessus pour le middleware au niveau de l'application, en utilisant le middleware au niveau du routeur:
+
+```js
+const express = require('express');
+const app = express();
+const router = express. і();
+
+// une fonction middleware sans chemin de montage. Ce code est exécuté pour chaque requête au routeur
+. se(req, res, next) => {
+  console.log('Heure:', Date. ow());
+  next();
+});
+
+// une sous-pile middleware affiche les informations de requête pour tout type de requête HTTP vers le routeur /user/:id path
+. se(
+  '/user/:id',
+  (req, res, next) => {
+    console.log('Request URL:', req. riginalUrl);
+    next();
+  },
+  (req, res, next) => {
+    . og('Type de requête:', req. ethod);
+    suivante();
+  }
+);
+
+// une sous-pile middleware qui gère les requêtes GET sur le routeur /user/:id path
+. et(
+  '/user/:id',
+  (req, res, next) => {
+    // si l'identifiant de l'utilisateur est 0, passer au routeur
+    suivant si (req. arams. d === '0') next('route');
+    // passe autrement le contrôle à la prochaine fonction du middleware de cette pile
+    else next();
+  },
+  (req, res, next) => {
+    // renvoie une page normale
+    res. ender('regular');
+  }
+);
+
+// gestionnaire pour le chemin /user/:id qui affiche une page spéciale
+. et('/user/:id', (req, res, next) => {
+  . og(req.params.id);
+  res.render('special');
+});
+
+// monte le routeur sur l'application
+app.use('/', router);
+```
+
+Pour sauter le reste des fonctions du middleware du routeur, appelez `next('router')`
+pour passer le contrôle hors de l'instance du routeur.
+
+Cet exemple montre une sous-pile middleware qui gère les requêtes GET vers le chemin `/user/:id`.
+
+```js
+const express = require('express');
+const app = express();
+const router = express. і();
+
+// prédice le routeur avec un contrôle et un renflouement si nécessaire le routeur
+. se(req, res, next) => {
+  if (!req.headers['x-auth']) return next('router');
+  next();
+});
+
+routeur. et('/user/:id', (req, res) => {
+  res.send('hello, user!');
+});
+
+// utilise le routeur et 401 tout ce qui passe par l'application
+. se('/admin', router, (req, res) => {
+  res.sendStatus(401);
+});
+```
+
+## Gestion des erreurs du middleware
+
+<Alert type="Alerte">
+
+La gestion d'erreurs du middleware prend toujours *four* arguments. Vous devez fournir quatre arguments à
+l'identifier comme une fonction de gestion des erreurs du middleware. Même si vous n'avez pas besoin d'utiliser l'objet `next`
+, vous devez le spécifier pour maintenir la signature. Sinon, l'objet `next` sera
+interprété comme un middleware normal et ne gérera pas les erreurs.
+
+</Alert>
+
+Définissez les fonctions du middleware de la même manière que les autres fonctions du middleware, sauf avec quatre arguments au lieu de trois, spécifiquement avec la signature `(err, req, res, next)`:
+
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Quelque chose s'est cassé !');
+});
+```
+
+Pour plus de détails sur la gestion des erreurs du middleware, voir : [Gestion des erreurs](/en/guide/error-handling).
+
+## middleware intégré
+
+À partir de la version 4.x, Express ne dépend plus de [Connect](https://github.com/senchalabs/connect). Les fonctions du middleware
+qui étaient précédemment incluses avec Express sont maintenant dans des modules séparés ; voir [la liste des fonctions du middleware] (https://github.com/senchalabs/connect#middleware).
+
+Express a les fonctions internes suivantes :
+
+* [express.static](/en/5x/api#express.static) serves static assets such as HTML files, images, and so on.
+* [express.json](/en/5x/api#express.json) analyse les requêtes entrantes avec des charges utiles JSON. **NOTE : Disponible avec Express 4.16.0+**
+* [express.urlencoded](/en/5x/api#express.urlencoded) analyse les requêtes entrantes avec des charges utiles encodées en URL. **NOTE : Disponible avec Express 4.16.0+**
+
+## middleware de tierce partie
+
+Utilisez des logiciels tiers pour ajouter des fonctionnalités aux applications Express.
+
+Installez le module Node.js pour la fonctionnalité requise, puis chargez-le dans votre application au niveau de l'application ou au niveau du routeur.
+
+L'exemple suivant illustre l'installation et le chargement de la fonction middleware d'analyse de cookies `cookie-parser`.
+
+```bash
+$ npm install cookie-parser
+```
+
+```js
+const express = require('express');
+const app = express();
+const cookieParser = require('cookie-parser');
+
+// charge le middleware
+app.use(cookieParser());
+```
+
+Pour une liste partielle des fonctions middleware tierces qui sont couramment utilisées avec Express, voir : [middleware de tierce] (../resources/middleware).

@@ -1,0 +1,312 @@
+---
+title: Tratamento de erros
+description: Entenda como o Express.js lida com erros em código síncrono e assíncrono e aprenda a implementar erro personalizado de manipulação de intermediários para seus aplicativos.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+*Tratamento de erros* refere-se a como as capturas Expressas e processa erros que
+ocorrem de forma sincronizada e assíncrona. Expresso vem com um erro padrão
+manipulador para que você não precise escrever seu próprio para começar.
+
+## Capturando Erros
+
+É importante garantir que Expresso pegue todos os erros que ocorrem enquanto
+rodando manipuladores de rotas e intermediários.
+
+Erros que ocorrem no código síncrono dentro dos manipuladores de rota e middleware
+não exigem trabalho extra. If synchronous code throws an error, then Express will
+catch and process it. Por exemplo:
+
+```js
+app.get('/', (req, res) => {
+  throw new Error('BROKEN'); // Expresso irá pegar isso sozinho.
+});
+```
+
+Para erros retornados de funções assíncronas, invocados pelos manipuladores de rota
+e intermediário, você deve passá-los para a função `next()`, onde o Express irá capturá-los a
+e processá-los. Por exemplo:
+
+```js
+app.get('/', (req, res, next) => {
+  fs. eadFile('/file-does-not-existente', (err, data) => {
+    if (err) {
+      next(err); // Passa os erros para o Express.
+    } else {
+      res. end(data);
+    }
+  });
+});
+```
+
+Começando pelo Express 5, roteadores e intermediários que retornam um Promise
+chamarão `next(value)` automaticamente quando eles rejeitarem ou lançarem um erro.
+Por exemplo:
+
+```js
+app.get('/user/:id', async (req, res, next) => {
+  const user = await getUserById(req.params.id);
+  res.send(user);
+});
+```
+
+Se `getUserById` lança um erro ou rejeita, `next` será chamado com
+o erro lançado ou o valor rejeitado. Se nenhum valor rejeitado for fornecido, `next`
+será chamado com um objeto de erro padrão fornecido pelo roteador Express.
+
+Se você passar qualquer coisa para a função `next()` (exceto a string `'route'`),
+Expressa que a requisição atual é um erro e irá pular quaisquer funções
+restantes que não sejam de manipulação de erros e middleware.
+
+Se o callback em uma sequência não fornecer dados, somente erros, você pode simplificar
+este código da seguinte forma:
+
+```js
+app.get('/', [
+  function (req, res, next) {
+    fs.writeFile('/inaccessible-path', 'data', next);
+  },
+  function (req, res) {
+    res.send('OK');
+  },
+]);
+```
+
+No exemplo acima, `next` é fornecido como o callback para `fs.writeFile`,
+que é chamado com ou sem erros. Se não houver erro, o segundo receptor
+é executado, caso contrário as pegadas do Express e processa o erro.
+
+Você deve capturar os erros que ocorrem em código assíncrono invocado pelos manipuladores da rota ou
+middleware e passá-los para o Expresso para processamento. Por exemplo:
+
+```js
+app.get('/', (q, next) => {
+  setTimeout(() => {
+    try {
+      throw new Error('BROKEN');
+    } catch (err) {
+      ext(err);
+    }
+  }, 100);
+});
+```
+
+O exemplo acima usa um bloco `tentar... catch` para capturar erros no código assíncrono
+e passá-los para o Express. Se o bloco `tentar...catch`
+fosse omitido, Express não pegaria o erro, uma vez que ele não faz parte do código de manipulador
+síncrono.
+
+Use promessas para evitar a sobrecarga do bloco `tentar... capturar` ou ao usar funções
+que retornam promessas. Por exemplo:
+
+```js
+app.get('/', (req, res, next) => {
+  Promise.resolve()
+    . hen(() => {
+      joga novo Error('BROKEN');
+    })
+    . atch(next); // Erros serão passados para o Express.
+});
+```
+
+Since promises automatically catch both synchronous errors and rejected promises,
+you can simply provide `next` as the final catch handler and Express will catch errors,
+because the catch handler is given the error as the first argument.
+
+Você também pode usar uma cadeia de manipuladores para confiar em erro síncrono
+de recuperação, reduzindo o código assíncrono a algo trivial. Por exemplo:
+
+```js
+app.get('/', [
+  função (req, res, ext) {
+    fs. eadFile('/maybe-valid-file', 'utf-8', (err, data) => {
+      res.locals. ata = data;
+      ext(err);
+    });
+  },
+  função (req, res) {
+    res. ocals.data = res.locals.data.split(',')[1];
+    res.send(res.locals.data);
+  },
+]);
+```
+
+O exemplo acima tem algumas declarações triviais da chamada `readFile`
+. If `readFile` causes an error, then it passes the error to Express, otherwise you
+quickly return to the world of synchronous error handling in the next handler
+in the chain. Então, o exemplo acima tenta processar os dados. Se isso falhar, o manipulador de erro
+síncrono irá pegá-lo. Se você tivesse feito este processamento dentro do
+o callback `readFile`, então o aplicativo poderia sair e o erro Express
+manipuladores não executariam.
+
+Seja qual for o método que você usar, se você quer que os manipuladores de erro Expressos sejam chamados para dentro e o aplicativo
+para sobreviver, você deve garantir que o Expresso receba o erro.
+
+## O manipulador de erro padrão
+
+Expresso vem com um manipulador de erro embutido que cuida de quaisquer erros que possam ser encontrados no aplicativo. Esta função de middleware com erros padrão é adicionada no final da função middleware stack.
+
+Se você passar um erro para `next()` e não lidar com ele em um erro personalizado
+handler, será tratado pelo manipulador de erro embutido; o erro será
+escrito no cliente com o rastreamento de pilha. O rastreamento da pilha não está incluído
+no ambiente de produção.
+
+<Alert type="informações">
+
+Defina a variável de ambiente `NODE_ENV` como `production`, para executar o aplicativo em modo de produção.
+
+</Alert>
+
+Quando um erro é escrito, a seguinte informação é adicionada a
+resposta:
+
+* O `res.statusCode` é definido em `err.status` (ou `err.statusCode`). Se
+  este valor estiver fora do intervalo de 4xx ou 5xx, ele será definido como 500.
+* A mensagem 'res.statusMessage' é definida de acordo com o código de status.
+* O corpo será o HTML da mensagem do código de status quando em produção
+  ambiente, caso contrário será `err.stack`.
+* Qualquer cabeçalho especificado em um objeto `err.headers`.
+
+Se você chamar `next()` com um erro depois que você começou a escrever a
+resposta (por exemplo, se você encontrar um erro ao transmitir a resposta
+ao cliente), o Express default error handler fecha a conexão
+e falha na solicitação.
+
+Então, quando você adicionar um manipulador de erro personalizado, você deve delegar para
+o manipulador de erro padrão Express, quando os cabeçalhos
+já foram enviados para o cliente:
+
+```js
+function errorHandler(err, req, res, next) {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
+Observe que o manipulador de erro padrão pode ser acionado se você chamar `next()` com um erro
+no seu código mais de uma vez. Mesmo que um erro personalizado de manipulação de middleware esteja no lugar.
+
+Outro erro de manipulação de middleware pode ser encontrado em [Express middleware](/en/resources/middleware).
+
+## Escrevendo manipuladores de erros
+
+Definir funções intermediárias de manipulação de erros da mesma forma que outras funções de middleware,
+exceto funções de manipulação de erro possuem quatro argumentos ao invés de três:
+`(err, req, res, next)`. Por exemplo:
+
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Algo quebrado!');
+});
+```
+
+Você define o middleware de erro duramente, depois de outro `app.use()` e roteia chamadas; por exemplo:
+
+```js
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+
+app.use(
+  bodyParser. rlencoded({
+    extendido: true,
+  })
+);
+app.use(bodyParser.json());
+app. se(methodOverride());
+app.use((err, req, res, next) => {
+  // lógica
+});
+```
+
+As respostas de dentro de uma função middleware podem estar em qualquer formato, como uma página de erro HTML, uma mensagem simples ou uma string JSON.
+
+Para fins de estrutura organizacional (e de nível superior), você pode definir
+várias funções de middleware com manipulação de erros, tanto quanto você poderia com funções de intermediário
+regulares. Por exemplo, para definir um manipulador de erro
+para solicitações feitas usando `XHR` e aqueles sem:
+
+```js
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+
+app. se(
+  bodyParser.urlencoded({
+    extendido: true,
+  })
+);
+app. se(bodyParser.json());
+app.use(methodOverride());
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
+```
+
+In this example, the generic `logErrors` might write request and
+error information to `stderr`, for example:
+
+```js
+function logErrors(err, req, res, ext) {
+  console.error(err.stack);
+  next(err);
+}
+```
+
+Também neste exemplo, `clientErrorHandler` é definido como segue; neste caso, o erro é explicitamente passado para o próximo.
+
+Observe que quando *não* estiver chamando "próximo" em uma função de manipulação de erros, você é responsável por escrever (e terminar) a resposta. Caso contrário, esses pedidos ficarão "pendentes" e não serão elegíveis para a recolha de lixo.
+
+```js
+function clientErrorHandler(err, req, res, next) {
+  if (req.xhr) {
+    res.status(500). end({ error: 'Algo falhou!' });
+  } else {
+    next(err);
+  }
+}
+```
+
+Implementar a função "catch-all" `errorHandler` da seguinte forma (por exemplo):
+
+```js
+function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+}
+```
+
+Se você tiver um gerenciador de rotas com múltiplas funções de retorno de chamada, você pode usar o parâmetro `rota` para pular para o próximo manipulador de rota. Por exemplo:
+
+```js
+app.get(
+  '/a_route_behind_paywall',
+  (req, res, next) => {
+    if (!req.user. asPaid) {
+      // continue lidando com esta requisição
+      next('route');
+    } else {
+      next();
+    }
+  },
+  (req, res, next) => {
+    PaidContent. ind((err, doc) => {
+      se (err) retornar next(err);
+      res. son(doc);
+    });
+  }
+);
+```
+
+Neste exemplo, o manipulador `getPaidContent` será ignorado, mas quaisquer manipuladores restantes em `app` para `/a_route_behind_paywall` continuariam sendo executados.
+
+<Alert type="informações">
+
+Chama para `next()` e `next(err)` indicam que o manipulador atual está completo e em que estado.
+`next(err)` pulará todos os manipuladores restantes na cadeia, exceto aqueles que estão configurados para
+lidar com erros conforme descrito acima.
+
+</Alert>

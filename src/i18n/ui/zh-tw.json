@@ -1,178 +1,175 @@
 {
   "home": {
-    "welcome": "欢迎",
-    "workInProgress": "这是正在开发中的主页。",
+    "welcome": "Welcome",
+    "workInProgress": "This is a work-in-progress homepage.",
     "reviewDesignSystem": {
-      "prefix": "查看",
-      "link": "设计系统基础",
-      "suffix": "演示页面以探索所有令牌、原语和模式。"
+      "prefix": "Review the",
+      "link": "Design System Foundations",
+      "suffix": "demo page to explore all tokens, primitives, and patterns."
     }
   },
   "search": {
-    "placeholder": "开始输入...",
-    "ariaLabel": "开始输入以搜索"
+    "placeholder": "Start typing...",
+    "ariaLabel": "Start typing to search"
   },
   "theme": {
-    "toggle": "切換主題",
-    "switchToLight": "切換到淺色模式",
-    "switchToDark": "切換到深色模式"
+    "toggle": "Toggle theme",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
   },
   "version": {
-    "selectLabel": "選擇 API 版本"
-  },
-  "language": {
-    "selectLabel": "選擇語言"
+    "selectLabel": "Select API version"
   },
   "nav": {
-    "mainMenu": "主菜单",
-    "toggleMenu": "切换菜单",
-    "home": "首页",
-    "breadcrumb": "面包屑导航",
-    "mainNavigation": "主导航",
-    "selectVersion": "选择文档版本"
+    "mainMenu": "Main menu",
+    "toggleMenu": "Toggle menu",
+    "home": "home",
+    "breadcrumb": "Breadcrumb",
+    "mainNavigation": "Main navigation",
+    "selectVersion": "Select documentation version"
   },
   "menu": {
     "main": {
-      "docs": "文档",
+      "docs": "Docs",
       "api": "API",
-      "resources": "资源",
-      "blog": "博客",
-      "support": "支持"
+      "resources": "Resources",
+      "blog": "Blog",
+      "support": "Support"
     },
     "sections": {
-      "gettingStarted": "入门",
-      "guide": "指南",
-      "migration": "迁移指南",
-      "advanced": "高级主题",
+      "gettingStarted": "Getting started",
+      "guide": "Guide",
+      "migration": "Migration guides",
+      "advanced": "Advanced topics",
       "express": "express()",
-      "application": "应用程序",
-      "request": "请求",
-      "response": "响应",
-      "router": "路由器",
-      "middleware": "中间件"
+      "application": "Application",
+      "request": "Request",
+      "response": "Response",
+      "router": "Router",
+      "middleware": "Middleware"
     },
     "items": {
-      "installing": "安装",
+      "installing": "Installing",
       "helloWorld": "Hello world",
-      "expressGenerator": "Express 生成器",
-      "basicRouting": "基础路由",
-      "staticFiles": "静态文件服务",
-      "examples": "示例",
-      "faq": "常见问题",
-      "routing": "路由",
-      "writingMiddleware": "编写中间件",
-      "usingMiddleware": "使用中间件",
-      "usingTemplateEngines": "使用模板引擎",
-      "errorHandling": "错误处理",
-      "debugging": "调试",
-      "behindProxies": "代理背后",
-      "databaseIntegration": "数据库集成",
-      "overridingExpressApi": "覆盖 Express API",
-      "migratingTo4": "迁移到 Express 4",
-      "migratingTo5": "迁移到 Express 5",
-      "buildingTemplateEngines": "构建模板引擎",
-      "bestPracticePerformance": "性能最佳实践",
-      "bestPracticeSecurity": "安全最佳实践",
-      "healthcheckGracefulShutdown": "健康检查 & 优雅关闭",
-      "securityUpdates": "安全更新",
-      "overview": "概览",
-      "properties": "属性",
-      "methods": "方法",
-      "events": "事件",
-      "types": "内置",
-      "community": "社区",
-      "glossary": "术语表",
-      "contributing": "贡献",
-      "utils": "工具",
-      "middleware": "中间件"
+      "expressGenerator": "Express generator",
+      "basicRouting": "Basic routing",
+      "staticFiles": "Serving static files",
+      "examples": "Examples",
+      "faq": "FAQ",
+      "routing": "Routing",
+      "writingMiddleware": "Writing middleware",
+      "usingMiddleware": "Using middleware",
+      "usingTemplateEngines": "Using template engines",
+      "errorHandling": "Error handling",
+      "debugging": "Debugging",
+      "behindProxies": "Behind proxies",
+      "databaseIntegration": "Database integration",
+      "overridingExpressApi": "Overriding the Express API",
+      "migratingTo4": "Moving to Express 4",
+      "migratingTo5": "Moving to Express 5",
+      "buildingTemplateEngines": "Building template engines",
+      "bestPracticePerformance": "Performance best practices",
+      "bestPracticeSecurity": "Security best practices",
+      "healthcheckGracefulShutdown": "Health checks & graceful shutdown",
+      "securityUpdates": "Security updates",
+      "overview": "Overview",
+      "properties": "Properties",
+      "methods": "Methods",
+      "events": "Events",
+      "types": "Built-in",
+      "community": "Community",
+      "glossary": "Glossary",
+      "contributing": "Contributing",
+      "utils": "Utilities",
+      "middleware": "Middleware"
     },
     "aria": {
-      "docs": "文档",
-      "api": "API 参考",
-      "resources": "资源",
-      "blog": "博客",
-      "support": "支持",
-      "installing": "安装 Express",
-      "helloWorld": "Hello world 示例",
-      "expressGenerator": "Express 生成器",
-      "routing": "路由指南",
-      "writingMiddleware": "编写中间件指南",
-      "usingMiddleware": "使用中间件指南",
-      "usingTemplateEngines": "使用模板引擎指南",
-      "errorHandling": "错误处理指南",
-      "debugging": "调试 Express",
-      "behindProxies": "代理背后的 Express",
-      "databaseIntegration": "数据库集成指南",
-      "overridingExpressApi": "覆盖 Express API 指南",
-      "application": "应用程序概览",
-      "request": "请求概览",
-      "response": "响应概览",
-      "router": "路由器概览",
-      "middleware": "中间件资源",
-      "community": "社区资源",
-      "glossary": "术语表",
-      "contributing": "贡献指南",
-      "utils": "工具"
+      "docs": "Documentation",
+      "api": "API Reference",
+      "resources": "Resources",
+      "blog": "Blog",
+      "support": "Support",
+      "installing": "Installing Express",
+      "helloWorld": "Hello world example",
+      "expressGenerator": "Express generator",
+      "routing": "Routing guide",
+      "writingMiddleware": "Writing middleware guide",
+      "usingMiddleware": "Using middleware guide",
+      "usingTemplateEngines": "Using template engines guide",
+      "errorHandling": "Error handling guide",
+      "debugging": "Debugging Express",
+      "behindProxies": "Express behind proxies",
+      "databaseIntegration": "Database integration guide",
+      "overridingExpressApi": "Overriding the Express API guide",
+      "application": "Application overview",
+      "request": "Request overview",
+      "response": "Response overview",
+      "router": "Router overview",
+      "middleware": "Middleware resources",
+      "community": "Community resources",
+      "glossary": "Glossary of terms",
+      "contributing": "Contributing guide",
+      "utils": "Utilities"
     }
   },
   "doc": {
-    "previousPage": "上一页",
-    "nextPage": "下一页",
-    "pageNavigation": "页面导航"
+    "previousPage": "Previous",
+    "nextPage": "Next",
+    "pageNavigation": "Page navigation"
   },
   "page": {
-    "editOnGitHub": "在 GitHub 上编辑",
-    "translateThis": "翻译此页面"
+    "editOnGitHub": "Edit on GitHub",
+    "translateThis": "Translate this page"
   },
   "post": {
-    "share": "分享",
-    "shareOnX": "在 X 上分享",
-    "shareOnBluesky": "在 Bluesky 上分享",
-    "shareOnLinkedIn": "在 LinkedIn 上分享",
-    "shareOnSlack": "在 Slack 上分享",
-    "shareOnTelegram": "在 Telegram 上分享",
-    "shareOnWhatsApp": "在 WhatsApp 上分享",
-    "rssFeed": "RSS 订阅",
-    "copyLink": "复制链接",
-    "linkCopied": "链接已复制！",
-    "toc": "本页内容",
-    "more": "更多 Express 内容",
-    "writeBanner": "有兴趣写文章吗？\n查看我们的指南开始。",
-    "writeGuidelines": "阅读指南"
+    "share": "Share",
+    "shareOnX": "Share on X",
+    "shareOnBluesky": "Share on Bluesky",
+    "shareOnLinkedIn": "Share on LinkedIn",
+    "shareOnSlack": "Share on Slack",
+    "shareOnTelegram": "Share on Telegram",
+    "shareOnWhatsApp": "Share on WhatsApp",
+    "rssFeed": "RSS Feed",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied!",
+    "toc": "On this page",
+    "more": "More from Express",
+    "writeBanner": "Interested in writing a post? \n Check out our guidelines to get started.",
+    "writeGuidelines": "Read the guidelines"
   },
   "toc": {
-    "overview": "概览"
+    "overview": "Overview"
   },
   "features": {
-    "title": "清晰胜于复杂。为每位开发者而设。",
+    "title": "Clarity over complexity. For every developer.",
     "performance": {
-      "title": "性能",
-      "body": "Express 提供了 Web 应用的基础功能层，同时不隐藏你熟悉的 Node.js 功能。"
+      "title": "Performance",
+      "body": "Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love."
     },
     "api": {
-      "title": "API",
-      "body": "借助丰富的 HTTP 工具方法和中间件，可快速轻松地创建强大的 API。"
+      "title": "APIs",
+      "body": "With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy."
     },
     "middleware": {
-      "title": "中间件",
-      "body": "Express 是轻量且灵活的路由框架，核心功能最小，可通过中间件模块扩展。"
+      "title": "Middleware",
+      "body": "Express is a lightweight and flexible routing framework with minimal core features meant to be augmented through the use of Express middleware modules."
     },
     "webapplication": {
-      "title": "Web 应用",
-      "body": "Express 是一个简洁灵活的 Node.js Web 应用框架，为 Web 和移动应用提供强大功能集。"
+      "title": "Web Applications",
+      "body": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications."
     }
   },
   "error404": {
-    "title": "404 - 页面未找到",
-    "description": "您访问的页面不存在。",
-    "heading": "页面未找到",
-    "message": "您访问的页面不存在或已被移动。",
-    "goHome": "返回首页"
+    "title": "404 - Page Not Found",
+    "description": "The page you are looking for could not be found.",
+    "heading": "Page Not Found",
+    "message": "The page you are looking for does not exist or has been moved.",
+    "goHome": "Go to Home"
   },
   "hero": {
-    "tagline": "Node.js 的快速、简约 Web 框架",
-    "getStarted": "开始使用",
-    "videoPause": "暂停背景视频",
-    "videoPlay": "播放背景视频"
+    "tagline": "Fast, unopinionated, minimalist web framework for Node.js",
+    "getStarted": "Get Started",
+    "videoPause": "Pause background video",
+    "videoPlay": "Play background video"
   }
 }

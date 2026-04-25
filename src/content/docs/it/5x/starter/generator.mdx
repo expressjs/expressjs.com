@@ -1,0 +1,125 @@
+---
+title: Generatore di applicazioni espresso
+description: Scopri come utilizzare lo strumento del generatore di applicazioni Express per creare rapidamente uno scheletro per le applicazioni Express.js, semplificando la configurazione e la configurazione.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Utilizzare lo strumento generatore di applicazioni, `express-generator`, per creare rapidamente uno scheletro di applicazione.
+
+È possibile eseguire il generatore di applicazioni con il comando `npx` (disponibile in Node.js 8.2.0).
+
+```bash
+$ npx express-generator
+```
+
+Per le versioni precedenti di Node, installare il generatore di applicazioni come pacchetto globale npm e quindi lanciarlo:
+
+```bash
+$ npm install -g express-generator
+$ express
+```
+
+Visualizza le opzioni del comando con l'opzione `-h`:
+
+```bash
+$ express -h
+
+  Uso: express [options] [dir]
+
+  Opzioni:
+
+    -h, --help informazioni di utilizzo dell'output
+        --version output il numero di versione
+    -e, --ejs aggiungi il supporto del motore ejs
+        --hbs aggiungi il supporto del motore del manubrio
+        --pug aggiungi il supporto del motore del pug
+    -H, --hogan aggiungi hogan. s supporto motore
+        --no-view genera senza motore di visualizzazione
+    -v, --view <engine> aggiungi vista <engine> supporto (ejs<unk> hbs<unk> hjs<unk> jade<unk> pug<unk> twig<unk> vash) (valori predefiniti per jade)
+    -c, --css <engine>  aggiungi il foglio di stile <engine> supporto (less<unk> stylus<unk> compass<unk> sass) (valori predefiniti per css normali)
+        --git add . itignore
+    -f, --force force sulla directory non vuota
+```
+
+Ad esempio, il seguente crea un'app Express chiamata *myapp*. L'app verrà creata in una cartella chiamata *myapp* nella directory di lavoro corrente e il motore di visualizzazione sarà impostato su <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
+
+```bash
+$ express --view=pug myapp
+
+   create : myapp
+   create : myapp/package.json
+   create : myapp/app. s
+   create : myapp/public
+   create : myapp/public/javascripts
+   create : myapp/public/images
+   create : myapp/route
+   create : myapp/routes/index. s
+   create : myapp/routes/users. s
+   create : myapp/public/stylesheets
+   create : myapp/public/stylesheets/style. ss
+   create : myapp/views
+   create : myapp/views/index. ug
+   create : myapp/views/layout.pug
+   create : myapp/views/error. ug
+   create : myapp/bin
+   create : myapp/bin/www
+```
+
+Quindi installare dipendenze:
+
+```bash
+$ cd myapp
+$ npm install
+```
+
+Su MacOS o Linux, esegui l'app con questo comando:
+
+```bash
+$ DEBUG=myapp:* npm start
+```
+
+Su Windows Command Prompt, utilizzare questo comando:
+
+```bash
+> imposta DEBUG=myapp:* & npm start
+```
+
+Su Windows PowerShell, utilizzare questo comando:
+
+```bash
+PS> $env:DEBUG='myapp:*'; npm start
+```
+
+Quindi, caricare `http://localhost:3000/` nel tuo browser per accedere all'app.
+
+L'app generata ha la seguente struttura di directory:
+
+```bash
+.
+├── app.js
+├── bin
+│   └── www
+├── package.json
+├── public
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+│       └── style.css
+├── routes
+│   ├── index.js
+│   └── users.js
+└── views
+    ├── error.pug
+    ├── index.pug
+    └── layout.pug
+
+7 directories, 9 files
+```
+
+<Alert type="info">
+
+La struttura delle app creata dal generatore è solo uno dei tanti modi per strutturare le app Express.
+Sentitevi liberi di utilizzare questa struttura o modificarla per soddisfare al meglio le vostre esigenze.
+
+</Alert>

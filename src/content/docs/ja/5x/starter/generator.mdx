@@ -1,0 +1,125 @@
+---
+title: Express アプリケーションジェネレーター
+description: Expressアプリケーションジェネレータツールを使用して、Express.jsアプリケーション用のスケルトンを迅速に作成し、セットアップと構成を合理化する方法を学びます。
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+アプリケーションジェネレータツール`express-generator`を使用して、アプリケーションスケルトンを素早く作成します。
+
+アプリケーションジェネレータは `npx` コマンド (Node.js 8.2.0で利用可能) で実行できます。
+
+```bash
+$ npx express-generator
+```
+
+以前のNodeバージョンの場合は、アプリケーションジェネレータをグローバルnpmパッケージとしてインストールしてから起動します。
+
+```bash
+$ npm install -g express-generator
+$ express
+```
+
+`-h` オプションでコマンドオプションを表示します。
+
+```bash
+$ express -h
+
+  Usage: express [options] [dir]
+
+  Options:
+
+    -h, --help          output usage information
+        --version       output the version number
+    -e, --ejs           add ejs engine support
+        --hbs           add handlebars engine support
+        --pug           add pug engine support
+    -H, --hogan         add hogan.js engine support
+        --no-view       generate without view engine
+    -v, --view <engine> add view <engine> support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+        --git           add .gitignore
+    -f, --force         force on non-empty directory
+```
+
+例えば、次のように、*myapp* という名前の Express アプリケーションを作成します。 アプリは現在の作業ディレクトリの *myapp* というフォルダに作成され、ビューエンジンは <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a> に設定されます。
+
+```bash
+$ express --view=pug myapp
+
+   create : myapp
+   create : myapp/package.json
+   create : myapp/app.js
+   create : myapp/public
+   create : myapp/public/javascripts
+   create : myapp/public/images
+   create : myapp/routes
+   create : myapp/routes/index.js
+   create : myapp/routes/users.js
+   create : myapp/public/stylesheets
+   create : myapp/public/stylesheets/style.css
+   create : myapp/views
+   create : myapp/views/index.pug
+   create : myapp/views/layout.pug
+   create : myapp/views/error.pug
+   create : myapp/bin
+   create : myapp/bin/www
+```
+
+次に依存関係をインストール:
+
+```bash
+$ cd myapp
+$ npm install
+```
+
+MacOS または Linux では、次のコマンドでアプリを実行します。
+
+```bash
+$ DEBUG=myapp:* npm start
+```
+
+Windows コマンドプロンプトでは、次のコマンドを使用します。
+
+```bash
+> set DEBUG=myapp:* & npm start
+```
+
+Windows PowerShell では、次のコマンドを使用します。
+
+```bash
+PS> $env:DEBUG='myapp:*'; npm start
+```
+
+次に、ブラウザに`http://localhost:3000/`を読み込んでアプリにアクセスします。
+
+生成されたアプリには、次のディレクトリ構造があります。
+
+```bash
+.
+├── app.js
+├── bin
+│   └── www
+├── package.json
+├── public
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+│       └── style.css
+├── routes
+│   ├── index.js
+│   └── users.js
+└── views
+    ├── error.pug
+    ├── index.pug
+    └── layout.pug
+
+7 directories, 9 files
+```
+
+<Alert type="情報">
+
+ジェネレータによって作成されたアプリ構造は、Express アプリケーションを構成するための多くの方法の1つに過ぎません。
+自由にこの構造を使用するか、あなたのニーズに最適に変更してください。
+
+</Alert>

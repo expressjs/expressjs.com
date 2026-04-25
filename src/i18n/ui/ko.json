@@ -1,178 +1,175 @@
 {
   "home": {
-    "welcome": "환영합니다",
-    "workInProgress": "이 페이지는 작업 중인 홈페이지입니다.",
+    "welcome": "Welcome",
+    "workInProgress": "This is a work-in-progress homepage.",
     "reviewDesignSystem": {
-      "prefix": "다음 페이지를 확인하세요:",
-      "link": "디자인 시스템 기초",
-      "suffix": "데모 페이지에서 모든 토큰, 프리미티브 및 패턴을 탐색할 수 있습니다."
+      "prefix": "Review the",
+      "link": "Design System Foundations",
+      "suffix": "demo page to explore all tokens, primitives, and patterns."
     }
   },
   "search": {
-    "placeholder": "입력 시작...",
-    "ariaLabel": "검색하려면 입력하세요"
+    "placeholder": "Start typing...",
+    "ariaLabel": "Start typing to search"
   },
   "theme": {
-    "toggle": "테마 전환",
-    "switchToLight": "라이트 모드로 전환",
-    "switchToDark": "다크 모드로 전환"
+    "toggle": "Toggle theme",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
   },
   "version": {
-    "selectLabel": "API 버전 선택"
-  },
-  "language": {
-    "selectLabel": "언어 선택"
+    "selectLabel": "Select API version"
   },
   "nav": {
-    "mainMenu": "메인 메뉴",
-    "toggleMenu": "메뉴 전환",
-    "home": "홈",
-    "breadcrumb": "브레드크럼",
-    "mainNavigation": "메인 내비게이션",
-    "selectVersion": "문서 버전 선택"
+    "mainMenu": "Main menu",
+    "toggleMenu": "Toggle menu",
+    "home": "home",
+    "breadcrumb": "Breadcrumb",
+    "mainNavigation": "Main navigation",
+    "selectVersion": "Select documentation version"
   },
   "menu": {
     "main": {
-      "docs": "문서",
+      "docs": "Docs",
       "api": "API",
-      "resources": "리소스",
-      "blog": "블로그",
-      "support": "지원"
+      "resources": "Resources",
+      "blog": "Blog",
+      "support": "Support"
     },
     "sections": {
-      "gettingStarted": "시작하기",
-      "guide": "가이드",
-      "migration": "마이그레이션 가이드",
-      "advanced": "고급 주제",
+      "gettingStarted": "Getting started",
+      "guide": "Guide",
+      "migration": "Migration guides",
+      "advanced": "Advanced topics",
       "express": "express()",
-      "application": "애플리케이션",
-      "request": "요청",
-      "response": "응답",
-      "router": "라우터",
-      "middleware": "미들웨어"
+      "application": "Application",
+      "request": "Request",
+      "response": "Response",
+      "router": "Router",
+      "middleware": "Middleware"
     },
     "items": {
-      "installing": "설치",
+      "installing": "Installing",
       "helloWorld": "Hello world",
-      "expressGenerator": "Express 생성기",
-      "basicRouting": "기본 라우팅",
-      "staticFiles": "정적 파일 제공",
-      "examples": "예제",
+      "expressGenerator": "Express generator",
+      "basicRouting": "Basic routing",
+      "staticFiles": "Serving static files",
+      "examples": "Examples",
       "faq": "FAQ",
-      "routing": "라우팅",
-      "writingMiddleware": "미들웨어 작성",
-      "usingMiddleware": "미들웨어 사용",
-      "usingTemplateEngines": "템플릿 엔진 사용",
-      "errorHandling": "오류 처리",
-      "debugging": "디버깅",
-      "behindProxies": "프록시 뒤",
-      "databaseIntegration": "데이터베이스 통합",
-      "overridingExpressApi": "Express API 재정의",
-      "migratingTo4": "Express 4로 이전",
-      "migratingTo5": "Express 5로 이전",
-      "buildingTemplateEngines": "템플릿 엔진 구축",
-      "bestPracticePerformance": "성능 모범 사례",
-      "bestPracticeSecurity": "보안 모범 사례",
-      "healthcheckGracefulShutdown": "헬스체크 및 점진적 종료",
-      "securityUpdates": "보안 업데이트",
-      "overview": "개요",
-      "properties": "속성",
-      "methods": "메서드",
-      "events": "이벤트",
-      "types": "내장",
-      "community": "커뮤니티",
-      "glossary": "용어집",
-      "contributing": "기여",
-      "utils": "유틸리티",
-      "middleware": "미들웨어"
+      "routing": "Routing",
+      "writingMiddleware": "Writing middleware",
+      "usingMiddleware": "Using middleware",
+      "usingTemplateEngines": "Using template engines",
+      "errorHandling": "Error handling",
+      "debugging": "Debugging",
+      "behindProxies": "Behind proxies",
+      "databaseIntegration": "Database integration",
+      "overridingExpressApi": "Overriding the Express API",
+      "migratingTo4": "Moving to Express 4",
+      "migratingTo5": "Moving to Express 5",
+      "buildingTemplateEngines": "Building template engines",
+      "bestPracticePerformance": "Performance best practices",
+      "bestPracticeSecurity": "Security best practices",
+      "healthcheckGracefulShutdown": "Health checks & graceful shutdown",
+      "securityUpdates": "Security updates",
+      "overview": "Overview",
+      "properties": "Properties",
+      "methods": "Methods",
+      "events": "Events",
+      "types": "Built-in",
+      "community": "Community",
+      "glossary": "Glossary",
+      "contributing": "Contributing",
+      "utils": "Utilities",
+      "middleware": "Middleware"
     },
     "aria": {
-      "docs": "문서",
-      "api": "API 참고",
-      "resources": "리소스",
-      "blog": "블로그",
-      "support": "지원",
-      "installing": "Express 설치",
-      "helloWorld": "Hello world 예제",
-      "expressGenerator": "Express 생성기",
-      "routing": "라우팅 가이드",
-      "writingMiddleware": "미들웨어 작성 가이드",
-      "usingMiddleware": "미들웨어 사용 가이드",
-      "usingTemplateEngines": "템플릿 엔진 사용 가이드",
-      "errorHandling": "오류 처리 가이드",
-      "debugging": "Express 디버깅",
-      "behindProxies": "프록시 뒤의 Express",
-      "databaseIntegration": "데이터베이스 통합 가이드",
-      "overridingExpressApi": "Express API 재정의 가이드",
-      "application": "애플리케이션 개요",
-      "request": "요청 개요",
-      "response": "응답 개요",
-      "router": "라우터 개요",
-      "middleware": "미들웨어 리소스",
-      "community": "커뮤니티 리소스",
-      "glossary": "용어집",
-      "contributing": "기여 가이드",
-      "utils": "유틸리티"
+      "docs": "Documentation",
+      "api": "API Reference",
+      "resources": "Resources",
+      "blog": "Blog",
+      "support": "Support",
+      "installing": "Installing Express",
+      "helloWorld": "Hello world example",
+      "expressGenerator": "Express generator",
+      "routing": "Routing guide",
+      "writingMiddleware": "Writing middleware guide",
+      "usingMiddleware": "Using middleware guide",
+      "usingTemplateEngines": "Using template engines guide",
+      "errorHandling": "Error handling guide",
+      "debugging": "Debugging Express",
+      "behindProxies": "Express behind proxies",
+      "databaseIntegration": "Database integration guide",
+      "overridingExpressApi": "Overriding the Express API guide",
+      "application": "Application overview",
+      "request": "Request overview",
+      "response": "Response overview",
+      "router": "Router overview",
+      "middleware": "Middleware resources",
+      "community": "Community resources",
+      "glossary": "Glossary of terms",
+      "contributing": "Contributing guide",
+      "utils": "Utilities"
     }
   },
   "doc": {
-    "previousPage": "이전",
-    "nextPage": "다음",
-    "pageNavigation": "페이지 내비게이션"
+    "previousPage": "Previous",
+    "nextPage": "Next",
+    "pageNavigation": "Page navigation"
   },
   "page": {
-    "editOnGitHub": "GitHub에서 편집",
-    "translateThis": "이 페이지 번역"
+    "editOnGitHub": "Edit on GitHub",
+    "translateThis": "Translate this page"
   },
   "post": {
-    "share": "공유",
-    "shareOnX": "X에서 공유",
-    "shareOnBluesky": "Bluesky에서 공유",
-    "shareOnLinkedIn": "LinkedIn에서 공유",
-    "shareOnSlack": "Slack에서 공유",
-    "shareOnTelegram": "Telegram에서 공유",
-    "shareOnWhatsApp": "WhatsApp에서 공유",
-    "rssFeed": "RSS 피드",
-    "copyLink": "링크 복사",
-    "linkCopied": "링크가 복사되었습니다!",
-    "toc": "이 페이지에서",
-    "more": "Express 더 보기",
-    "writeBanner": "게시글을 작성하고 싶나요?\n가이드라인을 확인하고 시작하세요.",
-    "writeGuidelines": "가이드라인 읽기"
+    "share": "Share",
+    "shareOnX": "Share on X",
+    "shareOnBluesky": "Share on Bluesky",
+    "shareOnLinkedIn": "Share on LinkedIn",
+    "shareOnSlack": "Share on Slack",
+    "shareOnTelegram": "Share on Telegram",
+    "shareOnWhatsApp": "Share on WhatsApp",
+    "rssFeed": "RSS Feed",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied!",
+    "toc": "On this page",
+    "more": "More from Express",
+    "writeBanner": "Interested in writing a post? \n Check out our guidelines to get started.",
+    "writeGuidelines": "Read the guidelines"
   },
   "toc": {
-    "overview": "개요"
+    "overview": "Overview"
   },
   "features": {
-    "title": "복잡함보다 명확함. 모든 개발자를 위해.",
+    "title": "Clarity over complexity. For every developer.",
     "performance": {
-      "title": "성능",
-      "body": "Express는 Node.js 기능을 숨기지 않고 웹 애플리케이션의 기본 기능만을 제공하는 얇은 레이어를 제공합니다."
+      "title": "Performance",
+      "body": "Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you know and love."
     },
     "api": {
-      "title": "API",
-      "body": "다양한 HTTP 유틸리티와 미들웨어를 사용하면 견고한 API를 빠르고 쉽게 만들 수 있습니다."
+      "title": "APIs",
+      "body": "With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy."
     },
     "middleware": {
-      "title": "미들웨어",
-      "body": "Express는 최소한의 핵심 기능을 가진 가벼운 라우팅 프레임워크로, 미들웨어 모듈을 통해 확장할 수 있습니다."
+      "title": "Middleware",
+      "body": "Express is a lightweight and flexible routing framework with minimal core features meant to be augmented through the use of Express middleware modules."
     },
     "webapplication": {
-      "title": "웹 애플리케이션",
-      "body": "Express는 웹 및 모바일 애플리케이션을 위한 최소하고 유연한 Node.js 웹 프레임워크입니다."
+      "title": "Web Applications",
+      "body": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications."
     }
   },
   "error404": {
-    "title": "404 - 페이지를 찾을 수 없음",
-    "description": "요청하신 페이지를 찾을 수 없습니다.",
-    "heading": "페이지를 찾을 수 없음",
-    "message": "페이지가 존재하지 않거나 이동되었습니다.",
-    "goHome": "홈으로 이동"
+    "title": "404 - Page Not Found",
+    "description": "The page you are looking for could not be found.",
+    "heading": "Page Not Found",
+    "message": "The page you are looking for does not exist or has been moved.",
+    "goHome": "Go to Home"
   },
   "hero": {
-    "tagline": "Node.js를 위한 빠르고 최소한의 웹 프레임워크",
-    "getStarted": "시작하기",
-    "videoPause": "배경 영상 일시정지",
-    "videoPlay": "배경 영상 재생"
+    "tagline": "Fast, unopinionated, minimalist web framework for Node.js",
+    "getStarted": "Get Started",
+    "videoPause": "Pause background video",
+    "videoPlay": "Play background video"
   }
 }
