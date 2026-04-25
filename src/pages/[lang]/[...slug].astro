@@ -12,6 +12,7 @@ import type { LanguageCode } from '@i18n/locales';
 export async function getStaticPaths() {
   const DEFAULT_VERSION = '5x';
   const VERSION_PREFIXES = ['5x', '4x', '3x'];
+  const DEFAULT_LANG = 'en';
 
   const pages = await getCollection('docs');
   const api = await getCollection('api');
@@ -23,6 +24,18 @@ export async function getStaticPaths() {
     params: { lang: string; slug: string };
     props: { page: AnyPage; version?: string };
   }> = [];
+
+  // Helper to create a map of existing content for fallback logic
+  const existingContent = new Map<string, AnyPage>();
+  pages.forEach((page) => {
+    const [lang, ...slugParts] = page.id.split('/');
+    const fullSlug = slugParts.join('/');
+    existingContent.set(`${lang}/${fullSlug}`, page);
+  });
+
+  api.forEach((page) => {
+    existingContent.set(`en/${page.id}`, page);
+  });
 
   pages.forEach((page) => {
     const [lang, ...slugParts] = page.id.split('/');
@@ -46,6 +59,39 @@ export async function getStaticPaths() {
     });
   });
 
+  for (const lang of Object.keys(languages)) {
+    api.forEach((page) => {
+      const slugParts = page.id.split('/');
+      const version = slugParts[0];
+      const slug = page.id;
+
+      paths.push({
+        params: { lang, slug },
+        props: { page, version },
+      });
+    });
+  }
+
+  const defaultVersionApiPages = api.filter((page) => page.id.startsWith(`${DEFAULT_VERSION}/`));
+
+  for (const lang of Object.keys(languages)) {
+    defaultVersionApiPages.forEach((page) => {
+      const [, ...restSlugParts] = page.id.split('/');
+      const nonVersionedSlug = restSlugParts.join('/');
+
+      const exists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === nonVersionedSlug
+      );
+
+      if (!exists && nonVersionedSlug) {
+        paths.push({
+          params: { lang, slug: nonVersionedSlug },
+          props: { page, version: DEFAULT_VERSION },
+        });
+      }
+    });
+  }
+
   const defaultVersionPages = pages.filter((page) => {
     const [, ...slugParts] = page.id.split('/');
     return slugParts[0] === DEFAULT_VERSION;
@@ -64,6 +110,81 @@ export async function getStaticPaths() {
       });
     }
   });
+
+  // Fallback for non-versioned default-version slugs: use English content for missing languages
+  const englishDefaultVersionPages = defaultVersionPages.filter((p) =>
+    p.id.startsWith(`${DEFAULT_LANG}/`)
+  );
+
+  for (const lang of Object.keys(languages)) {
+    if (lang === DEFAULT_LANG) continue;
+
+    englishDefaultVersionPages.forEach((page) => {
+      const [, , ...restSlugParts] = page.id.split('/');
+      const nonVersionedSlug = restSlugParts.join('/');
+
+      const exists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === nonVersionedSlug
+      );
+
+      if (!exists && nonVersionedSlug) {
+        paths.push({
+          params: { lang, slug: nonVersionedSlug },
+          props: { page, version: DEFAULT_VERSION },
+        });
+      }
+    });
+  }
+
+  // Fallback: Create paths for non-English languages using English pages content
+  for (const lang of Object.keys(languages)) {
+    if (lang === DEFAULT_LANG) continue;
+
+    const englishContentPages = contentPages.filter((p) => p.id.startsWith(`${DEFAULT_LANG}/`));
+
+    englishContentPages.forEach((page) => {
+      const [, ...slugParts] = page.id.split('/');
+      const fullSlug = slugParts.join('/');
+
+      const langSpecificExists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === fullSlug
+      );
+
+      if (!langSpecificExists) {
+        paths.push({
+          params: { lang, slug: fullSlug },
+          props: { page },
+        });
+      }
+    });
+  }
+
+  // Fallback: Create paths for non-English languages using English docs content
+  for (const lang of Object.keys(languages)) {
+    if (lang === DEFAULT_LANG) continue; // Skip English, already added
+
+    const englishPages = pages.filter((p) => p.id.startsWith(`${DEFAULT_LANG}/`));
+
+    englishPages.forEach((page) => {
+      const [, ...slugParts] = page.id.split('/');
+      const fullSlug = slugParts.join('/');
+
+      const langSpecificExists = paths.some(
+        (p) => p.params.lang === lang && p.params.slug === fullSlug
+      );
+
+      // If no language-specific version exists, add fallback to English
+      if (!langSpecificExists) {
+        paths.push({
+          params: { lang, slug: fullSlug },
+          props: {
+            page,
+            version: slugParts[0] === DEFAULT_VERSION ? DEFAULT_VERSION : slugParts[0],
+          },
+        });
+      }
+    });
+  }
 
   return paths;
 }
