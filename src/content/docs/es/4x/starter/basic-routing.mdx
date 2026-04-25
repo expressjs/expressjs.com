@@ -1,0 +1,67 @@
+---
+title: Ruta básica
+description: Aprenda los fundamentos de la enrutamiento en aplicaciones Express.js, incluyendo cómo definir rutas, manejar métodos HTTP y crear manejadores de rutas para su servidor web.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+_Enrutamiento_ se refiere a determinar cómo responde una aplicación a una solicitud de cliente a un punto final en particular, que es una URI (o ruta) y un método específico de petición HTTP (GET, POST, etc.).
+
+Cada ruta puede tener una o más funciones manejadoras, que se ejecutan cuando la ruta es igualada.
+
+La definición de ruta tiene la siguiente estructura:
+
+```js
+app.METHOD(PATH, HANDLER);
+```
+
+Donde:
+
+- `app` es una instancia de `express`.
+- `METHOD` es un [método de solicitud HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), en minúsculas.
+- `PATH` es una ruta en el servidor.
+- `HANDLER` es la función ejecutada cuando la ruta es coincidente.
+
+<Alert type="alerta">
+
+This tutorial assumes that an instance of `express` named `app` is created and the server is
+running. Si no estás familiarizado con la creación de una aplicación e iniciarla, consulta el Hola mundo
+ejemplo.
+
+</Alert>
+
+Los siguientes ejemplos ilustran la definición de rutas simples.
+
+Responder con `¡Hola Mundo!` en la página principal:
+
+```js
+app.get('/', (req, res) => {
+  res.send('Hola Mundo!');
+});
+```
+
+Responder a una solicitud POST en la ruta raíz (`/`), la página de inicio de la aplicación:
+
+```js
+app.post('/', (req, res) => {
+  res.send('Obtener una solicitud POST');
+});
+```
+
+Responder a una solicitud PUT a la ruta `/user`:
+
+```js
+app.put('/user', (req, res) => {
+  res.send('Obtener una solicitud PUT en /user');
+});
+```
+
+Responder a una solicitud DELETE a la ruta `/user`:
+
+```js
+app.delete('/user', (req, res) => {
+  res.send('Obtuvo una solicitud DELETE en /user');
+});
+```
+
+Para más detalles sobre enrutamiento, vea la [guía de enrutamiento](/en/guide/routing).

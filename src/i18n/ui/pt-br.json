@@ -1,11 +1,11 @@
 {
   "home": {
-    "welcome": "Bem-vindo",
-    "workInProgress": "Esta é uma página inicial em desenvolvimento.",
+    "welcome": "Boas-vindas",
+    "workInProgress": "Esta é uma página inicial em progresso.",
     "reviewDesignSystem": {
-      "prefix": "Revise a",
-      "link": "Base do Design System",
-      "suffix": "página de demonstração para explorar todos os tokens, primitivas e padrões."
+      "prefix": "Revisar o",
+      "link": "Criar Fundamentos de Sistema",
+      "suffix": "página demo para explorar todos os tokens, primitivos e padrões."
     }
   },
   "search": {
@@ -14,114 +14,111 @@
   },
   "theme": {
     "toggle": "Alternar tema",
-    "switchToLight": "Mudar para modo claro",
-    "switchToDark": "Mudar para modo escuro"
+    "switchToLight": "Alternar para o modo claro",
+    "switchToDark": "Mudar para o modo escuro"
   },
   "version": {
     "selectLabel": "Selecionar versão da API"
   },
-  "language": {
-    "selectLabel": "Selecionar idioma"
-  },
   "nav": {
     "mainMenu": "Menu principal",
-    "toggleMenu": "Alternar menu",
-    "home": "início",
-    "breadcrumb": "Breadcrumb",
+    "toggleMenu": "Abrir/fechar menu",
+    "home": "casa",
+    "breadcrumb": "Trilha",
     "mainNavigation": "Navegação principal",
     "selectVersion": "Selecionar versão da documentação"
   },
   "menu": {
     "main": {
-      "docs": "Documentos",
+      "docs": "Documentação",
       "api": "API",
       "resources": "Recursos",
-      "blog": "Blog",
-      "support": "Suporte"
+      "blog": "Blogue",
+      "support": "SUPORTE"
     },
     "sections": {
-      "gettingStarted": "Introdução",
+      "gettingStarted": "Primeiros Passos",
       "guide": "Guia",
       "migration": "Guias de migração",
       "advanced": "Tópicos avançados",
       "express": "express()",
-      "application": "Aplicação",
-      "request": "Requisição",
+      "application": "Solicitação",
+      "request": "Pedir",
       "response": "Resposta",
       "router": "Roteador",
-      "middleware": "Middleware"
+      "middleware": "Mediador"
     },
     "items": {
       "installing": "Instalando",
-      "helloWorld": "Hello world",
-      "expressGenerator": "Gerador Express",
+      "helloWorld": "Olá, mundo",
+      "expressGenerator": "Gerador expresso",
       "basicRouting": "Roteamento básico",
       "staticFiles": "Servindo arquivos estáticos",
       "examples": "Exemplos",
-      "faq": "FAQ",
+      "faq": "Perguntas Frequentes",
       "routing": "Roteamento",
       "writingMiddleware": "Escrevendo middleware",
-      "usingMiddleware": "Usando middleware",
-      "usingTemplateEngines": "Usando motores de template",
-      "errorHandling": "Tratamento de erros",
+      "usingMiddleware": "Usando o middleware",
+      "usingTemplateEngines": "Usando motores de modelos",
+      "errorHandling": "Manipulação de erros",
       "debugging": "Depuração",
-      "behindProxies": "Por trás de proxies",
-      "databaseIntegration": "Integração com banco de dados",
-      "overridingExpressApi": "Substituindo a API do Express",
-      "migratingTo4": "Migrando para Express 4",
-      "migratingTo5": "Migrando para Express 5",
-      "buildingTemplateEngines": "Criando motores de template",
-      "bestPracticePerformance": "Melhores práticas de performance",
+      "behindProxies": "Atrás dos proxies",
+      "databaseIntegration": "Integração com base de dados",
+      "overridingExpressApi": "Sobrescrevendo a API Expresso",
+      "migratingTo4": "Mover para Expresso 4",
+      "migratingTo5": "Movendo para Expresso 5",
+      "buildingTemplateEngines": "Mecanismos de construção",
+      "bestPracticePerformance": "Melhores práticas de desempenho",
       "bestPracticeSecurity": "Melhores práticas de segurança",
-      "healthcheckGracefulShutdown": "Health checks & encerramento gracioso",
+      "healthcheckGracefulShutdown": "Verificações de saúde e desligamento gracioso",
       "securityUpdates": "Atualizações de segurança",
-      "overview": "Visão geral",
-      "properties": "Propriedades",
+      "overview": "Geral",
+      "properties": "propriedades",
       "methods": "Métodos",
       "events": "Eventos",
-      "types": "Integrado",
+      "types": "Internos",
       "community": "Comunidade",
-      "glossary": "Glossário",
-      "contributing": "Contribuindo",
-      "utils": "Utilitários",
-      "middleware": "Middleware"
+      "glossary": "Glossary",
+      "contributing": "Contribuições",
+      "utils": "Serviços",
+      "middleware": "Mediador"
     },
     "aria": {
       "docs": "Documentação",
       "api": "Referência de API",
       "resources": "Recursos",
-      "blog": "Blog",
-      "support": "Suporte",
-      "installing": "Instalando Express",
-      "helloWorld": "Exemplo Hello world",
-      "expressGenerator": "Gerador Express",
+      "blog": "Blogue",
+      "support": "SUPORTE",
+      "installing": "Instalando o Express",
+      "helloWorld": "Olá, exemplo do mundo",
+      "expressGenerator": "Gerador expresso",
       "routing": "Guia de roteamento",
-      "writingMiddleware": "Guia de escrita de middleware",
-      "usingMiddleware": "Guia de uso de middleware",
-      "usingTemplateEngines": "Guia de uso de motores de template",
-      "errorHandling": "Guia de tratamento de erros",
-      "debugging": "Depurando Express",
-      "behindProxies": "Express atrás de proxies",
-      "databaseIntegration": "Guia de integração com banco de dados",
-      "overridingExpressApi": "Guia de substituição da API do Express",
-      "application": "Visão geral da aplicação",
-      "request": "Visão geral da requisição",
-      "response": "Visão geral da resposta",
+      "writingMiddleware": "Escrevendo o guia middleware",
+      "usingMiddleware": "Usando guia de middleware",
+      "usingTemplateEngines": "Usando guia de motores de modelos",
+      "errorHandling": "Guia para manipulação de erros",
+      "debugging": "Expresso de depuração",
+      "behindProxies": "Expresso atrás dos proxies",
+      "databaseIntegration": "Guia de integração do banco",
+      "overridingExpressApi": "Sobrescrevendo o guia API Expresso",
+      "application": "Resumo do aplicativo",
+      "request": "Solicitar resumo",
+      "response": "Resumo da resposta",
       "router": "Visão geral do roteador",
-      "middleware": "Recursos de middleware",
-      "community": "Recursos da comunidade",
+      "middleware": "Recursos do Mediador",
+      "community": "Recursos da Comunidade",
       "glossary": "Glossário de termos",
-      "contributing": "Guia de contribuição",
-      "utils": "Utilitários"
+      "contributing": "Guia contribuidor",
+      "utils": "Serviços"
     }
   },
   "doc": {
     "previousPage": "Anterior",
-    "nextPage": "Próxima",
-    "pageNavigation": "Navegação da página"
+    "nextPage": "Próximo",
+    "pageNavigation": "Page navigation"
   },
   "page": {
-    "editOnGitHub": "Editar no GitHub",
+    "editOnGitHub": "Edit on GitHub",
     "translateThis": "Traduzir esta página"
   },
   "post": {
@@ -131,48 +128,48 @@
     "shareOnLinkedIn": "Compartilhar no LinkedIn",
     "shareOnSlack": "Compartilhar no Slack",
     "shareOnTelegram": "Compartilhar no Telegram",
-    "shareOnWhatsApp": "Compartilhar no WhatsApp",
+    "shareOnWhatsApp": "Compartilhe no WhatsApp",
     "rssFeed": "Feed RSS",
-    "copyLink": "Copiar link",
+    "copyLink": "Link de cópia",
     "linkCopied": "Link copiado!",
     "toc": "Nesta página",
     "more": "Mais do Express",
-    "writeBanner": "Interessado em escrever um post?\nConfira nossas diretrizes para começar.",
+    "writeBanner": "Interessou-se em escrever uma publicação? U \n Confira nossas diretrizes para começar.",
     "writeGuidelines": "Leia as diretrizes"
   },
   "toc": {
-    "overview": "Visão geral"
+    "overview": "Geral"
   },
   "features": {
-    "title": "Clareza sobre complexidade. Para todos os desenvolvedores.",
+    "title": "Clareza sobre complexidade. Para cada desenvolvedor.",
     "performance": {
-      "title": "Performance",
-      "body": "O Express fornece uma camada fina de recursos fundamentais para aplicações web, sem esconder recursos do Node.js."
+      "title": "Desempenho",
+      "body": "Expresso fornece uma fina camada de recursos fundamentais de aplicativos web, sem obscurecer recursos de Node.js que você conhece e ama."
     },
     "api": {
       "title": "APIs",
-      "body": "Com diversos métodos HTTP e middleware, criar uma API robusta é rápido e fácil."
+      "body": "Com uma miríade de métodos de utilitário HTTP e middleware à sua disposição, criar uma API robusta é rápido e fácil."
     },
     "middleware": {
-      "title": "Middleware",
-      "body": "O Express é um framework de roteamento leve e flexível, com recursos mínimos que podem ser estendidos via módulos de middleware."
+      "title": "Mediador",
+      "body": "Expresso é um framework de roteamento leve e flexível com recursos básicos mínimos destinados a serem aumentados através do uso de módulos de middleware Express."
     },
     "webapplication": {
-      "title": "Aplicações Web",
-      "body": "O Express é um framework Node.js mínimo e flexível para aplicações web e mobile."
+      "title": "Aplicativos Web",
+      "body": "Expresso é um framework de aplicativos web Node.js mínimo e flexível que fornece um conjunto robusto de recursos para aplicativos web e móveis."
     }
   },
   "error404": {
     "title": "404 - Página não encontrada",
-    "description": "A página que você procura não foi encontrada.",
+    "description": "A página que você está procurando não pôde ser encontrada.",
     "heading": "Página não encontrada",
-    "message": "A página não existe ou foi movida.",
-    "goHome": "Ir para a página inicial"
+    "message": "A página que você procura não existe ou foi movida.",
+    "goHome": "Ir para o início"
   },
   "hero": {
-    "tagline": "Framework web rápido e minimalista para Node.js",
-    "getStarted": "Começar",
-    "videoPause": "Pausar vídeo de fundo",
+    "tagline": "Framework web para Node.js rápido, não opinionizado e minimalista",
+    "getStarted": "Comece Agora",
+    "videoPause": "Pausar vídeo em segundo plano",
     "videoPlay": "Reproduzir vídeo de fundo"
   }
 }

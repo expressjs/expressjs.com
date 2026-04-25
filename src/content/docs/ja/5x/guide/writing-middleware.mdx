@@ -1,0 +1,209 @@
+---
+title: Express アプリで使用するミドルウェアを書く
+description: Express.jsアプリケーション用にカスタムミドルウェア関数を作成する方法を学びます。例や、リクエストとレスポンスの処理を強化するためのベストプラクティスなどです。
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+_Middleware_ 関数は、[request object](/en/5x/api#req) (`req`) にアクセスできる関数です。 [response object](/en/5x/api#res) (`res`)とアプリケーションのリクエストレスポンスサイクルの中の `next` 関数。 `next` 関数はExpressルータ内の関数で、呼び出されたときに現在のミドルウェアを継承してミドルウェアを実行します。
+
+ミドルウェア機能は以下のタスクを実行できます。
+
+- 任意のコードを実行します。
+- リクエストとレスポンスオブジェクトに変更を加えます。
+- リクエストレスポンスサイクルを終了します。
+- スタック内の次のミドルウェアを呼び出します。
+
+現在のミドルウェア関数がリクエスト応答サイクルを終了しない場合は、次のミドルウェア関数に制御を渡すために `next()` を呼び出す必要があります。 そうでなければ、リクエストはハングアップのままになります。
+
+次の図はミドルウェア関数呼び出しの要素を示しています。
+
+![Elements of a middleware function call](/images/express-mw.png)
+
+Express 5以降、Promiseを返すミドルウェア関数はエラーの拒否またはスロー時に「next(value)」を呼び出します。 `next`は、拒否された値またはスローされたエラーで呼び出されます。
+
+## 例
+
+以下は、簡単な「Hello World」エクスプレスアプリケーションの例です。
+The remainder of this article will define and add three middleware functions to the application:
+one called `myLogger` that prints a simple log message, one called `requestTime` that
+displays the timestamp of the HTTP request, and one called `validateCookies` that validates incoming cookies.
+
+```js
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+### ミドルウェア関数 myLogger
+
+以下は、「myLogger」というミドルウェア関数の簡単な例です。 この関数は、アプリへのリクエストがそれを通過したときに
+"LOGGED" を出力します。 ミドルウェア関数は、`myLogger`という名前の
+変数に割り当てられます。
+
+```js
+const myLogger = function (req, res, next) {
+  console.log('LOGGED');
+  next();
+};
+```
+
+<Alert type="アラート">
+
+上記の `next()` の呼び出しに注目してください。 この関数を呼び出すと、
+アプリケーションで次のミドルウェア関数が呼び出されます。 `next()`関数はノードの一部ではありません。 sまたはExpress APIはミドルウェア関数に渡される3番目の
+引数です。 `next()`関数には、
+という名前が付けられますが、慣習的には常に「next」という名前が付けられています。 混乱を避けるため、常にこの規約を使用してください。
+
+</Alert>
+
+ミドルウェア関数をロードするには、ミドルウェア関数を指定して `app.use()` を呼び出します。
+例えば、次のコードはルートパス(/)の前に`myLogger`ミドルウェア関数をロードします。
+
+```js
+const express = require('express');
+const app = express();
+
+const myLogger = function (req, res, next) {
+  console.log('LOGGED');
+  next();
+};
+
+app.use(myLogger);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000);
+```
+
+アプリがリクエストを受け取るたびに、「LOGGED」というメッセージが端末に出力されます。
+
+ミドルウェアのロード順序は重要です。最初にロードされるミドルウェア関数も最初に実行されます。
+
+ルートパスの後に`myLogger`がロードされている場合、リクエストは到達せず、アプリは"LOGGED"を出力しません。 なぜなら、ルートパスのルートハンドラは、リクエスト応答サイクルを終了するからです。
+
+ミドルウェア関数 `myLogger` は単にメッセージを出力します。 次に、`next()`関数を呼び出すことで、スタック内の次のミドルウェア関数にリクエストを渡します。
+
+### ミドルウェア関数requestTime
+
+次に、"requestTime" というミドルウェア関数を作成し、リクエストオブジェクトに `requestTime`
+というプロパティを追加します。
+
+```js
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now();
+  next();
+};
+```
+
+アプリは `requestTime` ミドルウェア関数を使用します。 また、ルートのコールバック関数はミドルウェア関数が`req`（リクエストオブジェクト）に追加するプロパティを使用します。
+
+```js
+const express = require('express');
+const app = express();
+
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now();
+  next();
+};
+
+app.use(requestTime);
+
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
+});
+
+app.listen(3000);
+```
+
+アプリのルートにリクエストを送信すると、アプリはブラウザにリクエストのタイムスタンプを表示するようになりました。
+
+### ミドルウェア関数 validateCookies
+
+最後に、入力されたクッキーを検証するミドルウェア機能を作成し、クッキーが無効な場合に400回のレスポンスを送信します。
+
+ここでは、外部非同期サービスで Cookie を検証する機能の例を示します。
+
+```js
+async function cookieValidator(cookies) {
+  try {
+    await externallyValidateCookie(cookies.testCookie);
+  } catch {
+    throw new Error('Invalid cookies');
+  }
+}
+```
+
+ここでは、[`cookie-parser`](/en/resources/middleware/cookie-parser) ミドルウェアを使用して、`req`オブジェクトから入ってくるCookieを解析し、それを私たちの`cookieValidator`関数に渡します。 `validateCookies`ミドルウェアは、拒否時に自動的にエラーハンドラをトリガーするPromiseを返します。
+
+```js
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const cookieValidator = require('./cookieValidator');
+
+const app = express();
+
+async function validateCookies(req, res, next) {
+  await cookieValidator(req.cookies);
+  next();
+}
+
+app.use(cookieParser());
+
+app.use(validateCookies);
+
+// error handler
+app.use((err, req, res, next) => {
+  res.status(400).send(err.message);
+});
+
+app.listen(3000);
+```
+
+<Alert type="アラート">
+
+`await cookieValidator(req.cookies)`の後に`next()`が呼び出されることに注意してください。 これにより、
+`cookieValidator` が解決した場合、スタック内の次のミドルウェアが呼ばれます。 If you pass anything
+to the `next()` function (except the string `'route'` or `'router'`), Express regards the current
+request as being an error and will skip any remaining non-error handling routing and middleware
+functions.
+
+</Alert>
+
+リクエストオブジェクト、レスポンスオブジェクト、スタック内の次のミドルウェア関数、そしてノード全体にアクセスできるためです。 s API、ミドルウェア関数の可能性は無限大です。
+
+Express ミドルウェアの詳細については、[Express ミドルウェアを使用する](/en/guide/using-middleware)を参照してください。
+
+## 設定可能なミドルウェア
+
+ミドルウェアの設定が必要な場合は、optionsオブジェクトや他のパラメータを受け付ける関数をエクスポートしてください。 入力パラメータに基づいてミドルウェアの実装を返します。
+
+ファイル: `my-middleware.js`
+
+```js
+module.exports = function (options) {
+  return function (req, res, next) {
+    // Implement the middleware function based on the options object
+    next();
+  };
+};
+```
+
+ミドルウェアを以下のように使用できるようになりました。
+
+```js
+const mw = require('./my-middleware.js');
+
+app.use(mw({ option1: '1', option2: '2' }));
+```
+
+構成可能なミドルウェアの例については、 [cookie-session](https://github.com/expressjs/cookie-session) と [compression](https://github.com/expressjs/compression) を参照してください。
