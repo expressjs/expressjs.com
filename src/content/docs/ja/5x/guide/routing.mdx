@@ -5,7 +5,7 @@ description: Express.jsアプリケーションでルートを定義して使用
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Routing* とは、アプリケーションのエンドポイント(URI)がクライアントリクエストに対してどのように応答するかを指します。
+_Routing_ とは、アプリケーションのエンドポイント(URI)がクライアントリクエストに対してどのように応答するかを指します。
 For an introduction to routing, see [Basic routing](/en/starter/basic-routing).
 
 HTTPメソッドに対応するExpress `app` オブジェクトのメソッドを使用してルーティングを定義します。
@@ -52,7 +52,7 @@ app.post('/', (req, res) => {
 Expressは、すべてのHTTPリクエストメソッドに対応するメソッドをサポートしています: `get`、`post`など。
 完全なリストについては、 [app.METHOD](/en/5x/api#app.METHOD) を参照してください。
 
-特別なルーティングメソッド`app.all()`があり、_all_HTTPリクエストメソッドのパスにミドルウェア関数をロードするために使用されます。 例えば、`GET`を使用しているかどうかに関わらず、ルート`"/secret"へのリクエストに対して以下のハンドラが実行されます。 `POST`、`PUT`、`DELETE\`、または[http module](https://nodejs.org/api/http.html#http_http_methods)でサポートされている他のHTTPリクエストメソッド。
+特別なルーティングメソッド`app.all()`があり、\_all_HTTPリクエストメソッドのパスにミドルウェア関数をロードするために使用されます。 例えば、`GET`を使用しているかどうかに関わらず、ルート`"/secret"へのリクエストに対して以下のハンドラが実行されます。 `POST`、`PUT`、`DELETE\`、または[http module](https://nodejs.org/api/http.html#http_http_methods)でサポートされている他のHTTPリクエストメソッド。
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -257,8 +257,8 @@ app.get('/user/:id', (req, res) => {
 
 この例では:
 
-* `GET /user/5` → 最初のルートで処理 → "User 5" を送信
-* `GET /user/0` → 最初のroute ('route')`を呼び出し、次に一致する `/user/:id\` route (ルート) をスキップします。
+- `GET /user/5` → 最初のルートで処理 → "User 5" を送信
+- `GET /user/0` → 最初のroute ('route')`を呼び出し、次に一致する `/user/:id\` route (ルート) をスキップします。
 
 ルートハンドラは、次の例に示すように、関数、関数の配列、または両方の組み合わせの形式で使用できます。
 
@@ -335,16 +335,16 @@ app.get(
 
 次の表のレスポンスオブジェクト (`res`) のメソッドは、クライアントにレスポンスを送信し、リクエスト応答のサイクルを終了することができます。 これらのメソッドのいずれもルートハンドラから呼び出されない場合、クライアントリクエストはハングしたままになります。
 
-| 方法                                            | 説明                                        |
-| --------------------------------------------- | ----------------------------------------- |
-| [res.download()](/en/5x/api#res.download)     | ダウンロードするファイルを指示します。                       |
-| [res.end()](/en/5x/api#res.end)               | 応答プロセスを終了します。                             |
-| [res.json()](/en/5x/api#res.json)             | JSON 応答を送信します。                            |
-| [res.jsonp()](/en/5x/api#res.jsonp)           | JSONP サポートを使用して JSON 応答を送信します。            |
-| [res.redirect()](/en/5x/api#res.redirect)     | リダイレクトします。                                |
-| [res.render()](/en/5x/api#res.render)         | ビューテンプレートをレンダリングします。                      |
-| [res.send()](/en/5x/api#res.send)             | さまざまなタイプの応答を送信します。                        |
-| [res.sendFile()](/en/5x/api#res.sendFile)     | ファイルをオクテットストリームとして送信する。                   |
+| 方法                                          | 説明                                                                               |
+| --------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [res.download()](/en/5x/api#res.download)     | ダウンロードするファイルを指示します。                                             |
+| [res.end()](/en/5x/api#res.end)               | 応答プロセスを終了します。                                                         |
+| [res.json()](/en/5x/api#res.json)             | JSON 応答を送信します。                                                            |
+| [res.jsonp()](/en/5x/api#res.jsonp)           | JSONP サポートを使用して JSON 応答を送信します。                                   |
+| [res.redirect()](/en/5x/api#res.redirect)     | リダイレクトします。                                                               |
+| [res.render()](/en/5x/api#res.render)         | ビューテンプレートをレンダリングします。                                           |
+| [res.send()](/en/5x/api#res.send)             | さまざまなタイプの応答を送信します。                                               |
+| [res.sendFile()](/en/5x/api#res.sendFile)     | ファイルをオクテットストリームとして送信する。                                     |
 | [res.sendStatus()](/en/5x/api#res.sendStatus) | レスポンスステータスコードを設定し、文字列表現をレスポンスボディとして送信します。 |
 
 ## app.route()

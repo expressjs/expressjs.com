@@ -208,7 +208,7 @@ Il y a deux façons d'utiliser les systèmes d'initialisation avec votre applica
 
 Systemd est un gestionnaire de systèmes et de services Linux. La plupart des grandes distributions Linux ont adopté le système comme système d'initialisation par défaut.
 
-Un fichier de configuration du service système est appelé un fichier _unit avec un nom de fichier se terminant par `.service`. Voici un exemple de fichier d'unité pour gérer une application Node directement. Remplacez les valeurs placées en `<angle brackets>` pour votre système et votre application:
+Un fichier de configuration du service système est appelé un fichier \_unit avec un nom de fichier se terminant par `.service`. Voici un exemple de fichier d'unité pour gérer une application Node directement. Remplacez les valeurs placées en `<angle brackets>` pour votre système et votre application:
 
 ```sh
 [Unit]

@@ -5,7 +5,7 @@ description: Una guía para migrar sus aplicaciones Express.js de la versión 3 
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Express 4 es un cambio de ruptura de Express 3. Esto significa que una aplicación Express 3 funcionará *no* si actualiza la versión Express en sus dependencias.
+Express 4 es un cambio de ruptura de Express 3. Esto significa que una aplicación Express 3 funcionará _no_ si actualiza la versión Express en sus dependencias.
 
 Este artículo cubre:
 
@@ -27,8 +27,8 @@ Hay varios cambios significativos en Express 4:
 
 <ul class="doclista">
   <li>
-    <a href="#core-changes">Cambios a Express core y middleware.</a> Las dependencias de
-    Conectar y middleware integrados fueron eliminadas, por lo que debe añadir middleware usted mismo.
+    <a href="#core-changes">Cambios a Express core y middleware.</a> Las dependencias de Conectar y
+    middleware integrados fueron eliminadas, por lo que debe añadir middleware usted mismo.
   </li>
   <li>
     <a href="#routing">Cambia al sistema de enrutamiento.</a>
@@ -40,8 +40,8 @@ Hay varios cambios significativos en Express 4:
 
 Ver también:
 
-* [Nuevas características en 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
-* [Migración de 3.x a 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
+- [Nuevas características en 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+- [Migración de 3.x a 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 ### Cambios al sistema Express core y middleware
 
@@ -214,8 +214,8 @@ el middleware `router`.
 La forma en que defines las rutas no ha cambiado, pero el sistema de enrutamiento tiene dos características
 nuevas para ayudar a organizar tus rutas:
 
-* Un nuevo método, `app.route()`, para crear manejadores de rutas encadenables para una ruta de ruta.
-* Una nueva clase, `express.Router`, para crear manejadores modulares de rutas montables.
+- Un nuevo método, `app.route()`, para crear manejadores de rutas encadenables para una ruta de ruta.
+- Una nueva clase, `express.Router`, para crear manejadores modulares de rutas montables.
 
 #### método `app.route()`
 
@@ -229,14 +229,14 @@ Aquí hay un ejemplo de manejadores encadenados de rutas que se definen usando l
 app
   .route('/book')
   .get((req, res) => {
-    res. end('Obtén un libro al azar');
+    res.end('Obtén un libro al azar');
   })
-  . ost((req, res) => {
+  .ost((req, res) => {
     res.send('Agregar un libro');
   })
-  . ut((req, res) => {
+  .ut((req, res) => {
     res.send('Actualizar el libro');
-});
+  });
 ```
 
 #### Clase `express.Router`
@@ -298,7 +298,9 @@ La siguiente tabla muestra otros cambios pequeños pero importantes en Express 4
   </tr>
   <tr>
     <td>Node.js</td>
-    <td>Express 4 requiere Node.js 0.10.x o posterior y ha eliminado el soporte para Node.js 0.8.x.</td>
+    <td>
+      Express 4 requiere Node.js 0.10.x o posterior y ha eliminado el soporte para Node.js 0.8.x.
+    </td>
   </tr>
   <tr>
     <td markdown="1">`http.createServer()`</td>
@@ -358,8 +360,8 @@ La siguiente tabla muestra otros cambios pequeños pero importantes en Express 4
   <tr>
     <td markdown="1">`res.setHeader('Set-Cookie', val)`</td>
     <td markdown="1">
-      La funcionalidad ahora se limita a establecer el valor básico de la cookie. Usa `res.cookie()` para añadir funcionalidad
-      .
+      La funcionalidad ahora se limita a establecer el valor básico de la cookie. Usa `res.cookie()`
+      para añadir funcionalidad .
     </td>
   </tr>
 </table>
@@ -385,26 +387,26 @@ var path = require('path');
 var app = express();
 
 // todos los entornos
-app. et('puerto', process.env.PORT || 3000);
+app.et('puerto', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
-app.use(express. ession({ secret: 'your secret here' }));
+app.use(express.ession({ secret: 'your secret here' }));
 app.use(express.bodyParser());
 app.use(app.router);
-app.use(express. tatic(path.join(__dirname, 'public')));
+app.use(express.tatic(path.join(__dirname, 'public')));
 
 // desarrolla sólo
 if (app.get('env') === 'development') {
-  app. se(express.errorHandler());
+  app.se(express.errorHandler());
 }
 
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http. reateServer(app).listen(app.get('port'), () => {
+http.reateServer(app).listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
 });
 ```
@@ -505,34 +507,34 @@ var errorHandler = require('errorhandler');
 var app = express();
 
 // todos los entornos
-app. et('puerto', process.env.PORT || 3000);
+app.et('puerto', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 app.use(logger('dev'));
-app. se(methodOverride());
-app. se(
+app.se(methodOverride());
+app.se(
   session({
     resave: true,
     saveUninitialized: true,
     secretos: 'uwotm8',
   })
 );
-aplicaciones. se(bodyParser.json());
+aplicaciones.se(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', rutas. ndex);
+app.get('/', rutas.ndex);
 app.get('/users', user.list);
 
 // middleware de manejo de error debe ser cargado después de la carga de las rutas
-if (app. et('env') === 'development') {
-  app. se(errorHandler());
+if (app.et('env') === 'development') {
+  app.se(errorHandler());
 }
 
 var server = http.createServer(app);
-server.listen(app. et('puerto'), () => {
+server.listen(app.et('puerto'), () => {
   console.log('Servidor expreso escuchando en el puerto ' + app.get('port'));
 });
 ```
@@ -595,9 +597,9 @@ Express 4.
 
 Las opciones de comando y uso siguen siendo en gran medida las mismas, con las siguientes excepciones:
 
-* Se ha eliminado la opción `--sessions`.
-* Se ha eliminado la opción `--jshtml`.
-* Se añadió la opción `--hogan` para soportar [Hogan.js](http://twitter.github.io/hogan.js/).
+- Se ha eliminado la opción `--sessions`.
+- Se ha eliminado la opción `--jshtml`.
+- Se añadió la opción `--hogan` para soportar [Hogan.js](http://twitter.github.io/hogan.js/).
 
 ### Ejemplo
 

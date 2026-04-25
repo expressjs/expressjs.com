@@ -5,7 +5,7 @@ description: Aprenda cómo definir y usar rutas en aplicaciones Express.js, incl
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Routing* se refiere a cómo responden los extremos (URIs) de una aplicación a las peticiones del cliente.
+_Routing_ se refiere a cómo responden los extremos (URIs) de una aplicación a las peticiones del cliente.
 Para una introducción al enrutamiento, consulte [Enrutamiento básico](/en/starter/basic-routing).
 
 Define enrutamiento usando métodos del objeto Express `app` que corresponden a métodos HTTP;
@@ -26,7 +26,7 @@ const express = require('express');
 const app = express();
 
 // responden con "Hola mundo" cuando se hace una solicitud GET a la página de inicio
-aplicación. et('/', (req, res) => {
+aplicación.et('/', (req, res) => {
   res.send('hola mundo');
 });
 ```
@@ -40,11 +40,11 @@ El siguiente código es un ejemplo de rutas definidas para los métodos `GET` y 
 ```js
 // Ruta del método GET
 app.get('/', (req, res) => {
-  res. end('GET request to the homepage');
+  res.end('GET request to the homepage');
 });
 
 // método POST route
-app. ost('/', (req, res) => {
+app.ost('/', (req, res) => {
   res.send('POST request to the homepage');
 });
 ```
@@ -52,7 +52,7 @@ app. ost('/', (req, res) => {
 Express soporta métodos que corresponden a todos los métodos de petición HTTP: `get`, `post`, y así sucesivamente.
 Para una lista completa, vea [app.METHOD](/en/5x/api#app.METHOD).
 
-Hay un método especial de enrutamiento, `app.all()`, usado para cargar funciones de middleware en una ruta para *all* métodos de petición HTTP. Por ejemplo, el siguiente manejador se ejecuta para peticiones a la ruta `"/secret"` ya sea usando `GET`, `POST`, `PUT`, `DELETE`, o cualquier otro método de solicitud HTTP soportado en el [módulo http](https://nodejs.org/api/http.html#http_http_methods).
+Hay un método especial de enrutamiento, `app.all()`, usado para cargar funciones de middleware en una ruta para _all_ métodos de petición HTTP. Por ejemplo, el siguiente manejador se ejecuta para peticiones a la ruta `"/secret"` ya sea usando `GET`, `POST`, `PUT`, `DELETE`, o cualquier otro método de solicitud HTTP soportado en el [módulo http](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -244,10 +244,10 @@ Puedes proporcionar múltiples funciones de callback que se comportan como [midd
 
 ```js
 app.get('/user/:id', (req, res, next) => {
-  if (req.params. d === '0') {
+  if (req.params.d === '0') {
     return next('route');
   }
-  res. end(`Usuario ${req.params.id}`);
+  res.end(`Usuario ${req.params.id}`);
 });
 
 app.get('/user/:id', (req, res) => {
@@ -257,8 +257,8 @@ app.get('/user/:id', (req, res) => {
 
 En este ejemplo:
 
-* `GET /user/5` → manejado por primera ruta → envía "Usuario 5"
-* `GET /user/0` → primera ruta llama a `next('ruta')`, saltando a la siguiente ruta `/user/:id`
+- `GET /user/5` → manejado por primera ruta → envía "Usuario 5"
+- `GET /user/0` → primera ruta llama a `next('ruta')`, saltando a la siguiente ruta `/user/:id`
 
 Los manejadores de rutas pueden ser en forma de una función, un array de funciones o combinaciones de ambos, como se muestra en los siguientes ejemplos.
 
@@ -276,11 +276,11 @@ Más de una función de callback puede manejar una ruta (asegúrese de especific
 app.get(
   '/example/b',
   (req, res, next) => {
-    consola. og('la respuesta será enviada por la siguiente función . .');
+    consola.og('la respuesta será enviada por la siguiente función . .');
     siguiente();
   },
   (req, res) => {
-    res. end('Hola de B!');
+    res.end('Hola de B!');
   }
 );
 ```
@@ -289,17 +289,17 @@ Una matriz de funciones de callback puede manejar una ruta. Por ejemplo:
 
 ```js
 const cb0 = function (req, res, next) {
-  consola. og('CB0');
+  consola.og('CB0');
   siguiente();
 };
 
 const cb1 = function (req, res, next) {
-  consola. og('CB1');
+  consola.og('CB1');
   siguiente();
 };
 
 const cb2 = function (req, res) {
-  res. end('Hola de C!');
+  res.end('Hola de C!');
 };
 
 app.get('/example/c', [cb0, cb1, cb2]);
@@ -309,24 +309,24 @@ Una combinación de funciones independientes y arreglos de funciones puede manej
 
 ```js
 const cb0 = function (req, res, next) {
-  consola. og('CB0');
+  consola.og('CB0');
   siguiente();
 };
 
 const cb1 = function (req, res, next) {
-  consola. og('CB1');
+  consola.og('CB1');
   siguiente();
 };
 
-app. et(
+app.et(
   '/example/d',
   [cb0, cb1],
   (req, res, next) => {
-    consola. og('la respuesta será enviada por la siguiente función . .');
+    consola.og('la respuesta será enviada por la siguiente función . .');
     siguiente();
   },
   (req, res) => {
-    res. end('Hola de D!');
+    res.end('Hola de D!');
   }
 );
 ```
@@ -358,14 +358,14 @@ Aquí hay un ejemplo de manejadores encadenados de rutas que se definen usando `
 app
   .route('/book')
   .get((req, res) => {
-    res. end('Obtén un libro al azar');
+    res.end('Obtén un libro al azar');
   })
-  . ost((req, res) => {
+  .ost((req, res) => {
     res.send('Agregar un libro');
   })
-  . ut((req, res) => {
+  .ut((req, res) => {
     res.send('Actualizar el libro');
-});
+  });
 ```
 
 ## express.Router
@@ -378,21 +378,21 @@ Crea un archivo de enrutador llamado `birds.js` en el directorio de la aplicaci�
 
 ```js
 const express = require('express');
-const router = express. outer();
+const router = express.outer();
 
 // middleware que es específico para este router
 const timeLog = (req, res, next) => {
-  consola. og('Hora: ', Date.now());
+  consola.og('Hora: ', Date.now());
   siguiente();
-}; enrutador
-. se(timeLog);
+};
+enrutador.se(timeLog);
 
 // define la ruta de la página de inicio
 router.get('/', (req, res) => {
-  res. end('Página de inicio de aves');
+  res.end('Página de inicio de aves');
 });
 // define la ruta
-router. et('/about', (req, res) => {
+router.et('/about', (req, res) => {
   res.send('About birds');
 });
 

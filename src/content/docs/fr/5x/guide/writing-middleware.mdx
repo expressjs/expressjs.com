@@ -5,14 +5,14 @@ description: Apprenez à écrire des fonctions personnalisées de middleware pou
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Les fonctions *Middleware* sont des fonctions qui ont accès à l'objet [request object](/en/5x/api#req) (`req`), l'objet [réponse](/en/5x/api#res) (`res`), et la fonction `next` dans le cycle de réponse de l'application. La fonction `next` est une fonction dans le routeur Express qui, lorsqu'elle est appelée, exécute le middleware qui succède au middleware actuel.
+Les fonctions _Middleware_ sont des fonctions qui ont accès à l'objet [request object](/en/5x/api#req) (`req`), l'objet [réponse](/en/5x/api#res) (`res`), et la fonction `next` dans le cycle de réponse de l'application. La fonction `next` est une fonction dans le routeur Express qui, lorsqu'elle est appelée, exécute le middleware qui succède au middleware actuel.
 
 Les fonctions Middleware peuvent effectuer les tâches suivantes :
 
-* Exécuter n'importe quel code.
-* Effectuez des modifications à la requête et aux objets de réponse.
-* Termine le cycle de réponse de la requête.
-* Appelez le prochain middleware dans la pile.
+- Exécuter n'importe quel code.
+- Effectuez des modifications à la requête et aux objets de réponse.
+- Termine le cycle de réponse de la requête.
+- Appelez le prochain middleware dans la pile.
 
 Si la fonction middleware actuelle ne met pas fin au cycle de réponse de requête, elle doit appeler `next()` pour passer le contrôle à la prochaine fonction du middleware. Sinon, la demande sera laissée en suspens.
 
@@ -70,7 +70,7 @@ const express = require('express');
 const app = express();
 
 const myLogger = function (req, res, next) {
-  console. og('LOGGED');
+  console.og('LOGGED');
   next();
 };
 
@@ -110,16 +110,16 @@ const express = require('express');
 const app = express();
 
 const requestTime = function (req, res, next) {
-  req. equestTime = Date.now();
+  req.equestTime = Date.now();
   next();
 };
 
 app.use(requestTime);
 
-app. et('/', (req, res) => {
+app.et('/', (req, res) => {
   let responseText = 'Bonjour le monde!<br>';
   responseText += `<small>Demandé à: ${req.requestTime}</small>`;
-  res. end(responseText);
+  res.end(responseText);
 });
 
 app.listen(3000);

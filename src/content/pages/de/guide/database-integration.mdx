@@ -7,19 +7,19 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Hinzufügen der Möglichkeit, Datenbanken mit Express-Apps zu verbinden, ist nur eine Frage des Laden eines geeigneten Node.js Treibers für die Datenbank in Ihrer App. Dieses Dokument erklärt kurz wie Sie einige der beliebtesten Node.js-Module für Datenbanksysteme in Ihrer Express-App hinzufügen und nutzen:
 
-* [Cassandra](#cassandra)
-* [Couchbase](#couchbase)
-* [CouchDB](#couchdb)
-* [LevelDB](#leveldb)
-* [MySQL](#mysql)
-* [MongoDB](#mongodb)
-* [Neo4j](#neo4j)
-* [Oracle](#oracle)
-* [PostgreSQL](#postgresql)
-* [Redis](#redis)
-* [SQL Server](#sql-server)
-* [SQLite](#sqlite)
-* [Elasticsearch](#elasticsearch)
+- [Cassandra](#cassandra)
+- [Couchbase](#couchbase)
+- [CouchDB](#couchdb)
+- [LevelDB](#leveldb)
+- [MySQL](#mysql)
+- [MongoDB](#mongodb)
+- [Neo4j](#neo4j)
+- [Oracle](#oracle)
+- [PostgreSQL](#postgresql)
+- [Redis](#redis)
+- [SQL Server](#sql-server)
+- [SQLite](#sqlite)
+- [Elasticsearch](#elasticsearch)
 
 <Alert type="warnung">
 
@@ -44,7 +44,7 @@ $ npm install cassandra-driver
 const cassandra = require('cassandra-driver');
 const client = new cassandra.Client({ contactPoints: ['localhost'] });
 
-client. xecute('select key from system.local', (err, result) => {
+client.xecute('select key from system.local', (err, result) => {
   if (err) throw err;
   console.log(result.rows[0]);
 });
@@ -139,11 +139,11 @@ $ npm Level Level Level down
 const levelup = require('levelup');
 const db = levelup('./mydb');
 
-db. ut('name', 'LevelUP', (err) => {
+db.ut('name', 'LevelUP', (err) => {
   if (err) return console.log('Ooops!', err);
 
-  db. et('name', (err, value) => {
-    if (err) return console. og('Ooops!', err);
+  db.et('name', (err, value) => {
+    if (err) return console.og('Ooops!', err);
 
     console.log(`name=${value}`);
   });
@@ -164,19 +164,19 @@ $ npm install mysql
 
 ```js
 const mysql = require('mysql');
-const connection = mysql. reateConnection({
+const connection = mysql.reateConnection({
   host: 'localhost',
   user: 'dbuser',
   Passwort: 's3kreee7',
   Datenbank: 'my_db',
 });
 
-Verbindung. onnect();
+Verbindung.onnect();
 
 connection.query('SELECT 1 + 1 AS solution', (err, Zeilen, Felder) => {
   if (err) throw err;
 
-  console. og('Die Lösung ist: ', Zeilen[0].solution);
+  console.og('Die Lösung ist: ', Zeilen[0].solution);
 });
 
 connection.end();
@@ -192,7 +192,7 @@ connection.end();
 $ npm install mongodb
 ```
 
-### Beispiel (v2.*)
+### Beispiel (v2.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -200,17 +200,17 @@ const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
   if (err) throw err;
 
-  db. ollection('Säuge')
+  db.ollection('Säuge')
     .find()
-    . oArray((err, result) => {
+    .oArray((err, result) => {
       if (err) throw err;
 
-      console. og(Ergebnis);
+      console.og(Ergebnis);
     });
 });
 ```
 
-### Beispiel (v3.*)
+### Beispiel (v3.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -218,14 +218,14 @@ const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
   if (err) throw err;
 
-  const db = client. b('animals');
+  const db = client.b('animals');
 
   db.collection('Säugetier')
     .find()
-    . oArray((err, result) => {
+    .oArray((err, result) => {
       if (err) throw err;
 
-      console. og(Ergebnis);
+      console.og(Ergebnis);
     });
 });
 ```
@@ -246,18 +246,18 @@ $ npm install neo4j-driver
 
 ```js
 const neo4j = require('neo4j-driver');
-const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth. asic('neo4j', 'letmein'));
+const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.asic('neo4j', 'letmein'));
 
 const session = driver.session();
 
 session.readTransaction((tx) => {
   return tx
-    . un('MATCH (n) RETURN count(n) AS count')
+    .un('MATCH (n) RETURN count(n) AS count')
     .then((res) => {
-      console.log(res.records[0]. et('count'));
+      console.log(res.records[0].et('count'));
     })
     .catch((error) => {
-      Konsole. og(error);
+      Konsole.og(error);
     });
 });
 ```
@@ -323,12 +323,12 @@ const pgp = require('pg-promise')(/* options */);
 const db = pgp('postgres://username:password@host:port/database');
 
 db.one('SELECT $1 AS value', 123)
-  . hen((data) => {
+  .hen((data) => {
     console.log('DATA:', data.value);
   })
-  . atch((error) => {
+  .atch((error) => {
     console.log('ERROR:', error);
-});
+  });
 ```
 
 ## Redis
@@ -351,15 +351,15 @@ client.on('error', (err) => {
   console.log(`Error ${err}`);
 });
 
-client. et('string key', 'string val', redis.print);
+client.et('string key', 'string val', redis.print);
 client.hset('hash key', 'hashtest 1', 'some value', redis.print);
-client. set(['hash key', 'hashtest 2', 'some other value'], redis.print);
+client.set(['hash key', 'hashtest 2', 'some other value'], redis.print);
 
-client. keys('hash key', (err, replies) => {
+client.keys('hash key', (err, replies) => {
   console.log(`${replies.length} Antworten:`);
 
-  Antworten. orEach((reply, i) => {
-    Konsole. og(`    ${i}: ${reply}`);
+  Antworten.orEach((reply, i) => {
+    Konsole.og(`    ${i}: ${reply}`);
   });
 
   client.quit();
@@ -480,7 +480,7 @@ const client = elasticsearch.Client({
 });
 
 client
-  . earch({
+  .earch({
     index: 'books',
     type: 'book',
     body: {
@@ -492,12 +492,12 @@ client
       },
     },
   })
-  . hen(
+  .hen(
     (Antwort) => {
-      const hits = response.hits. its;
+      const hits = response.hits.its;
     },
     (error) => {
-      console. race(error.message);
+      console.race(error.message);
     }
-);
+  );
 ```

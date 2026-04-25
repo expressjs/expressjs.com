@@ -5,7 +5,7 @@ description: Descubra como integrar e usar mecanismos de modelos como Pug, Handl
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Um *motor de template* permite que você use arquivos de template estáticos na sua aplicação. At runtime, the template engine replaces
+Um _motor de template_ permite que você use arquivos de template estáticos na sua aplicação. At runtime, the template engine replaces
 variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
 Esta abordagem torna mais fácil projetar uma página HTML.
 
@@ -13,9 +13,9 @@ O [gerador de aplicação Expressa](/en/starter/generator) usa [Pug](https://pug
 
 Para renderizar arquivos de template, defina as seguintes [propriedades de configuração da aplicação](/en/4x/api#app.set), no `app.js` padrão criado pelo gerador:
 
-* `views`, o diretório onde se localizam os arquivos de template. Ex: `app.set('views', './views')`.
+- `views`, o diretório onde se localizam os arquivos de template. Ex: `app.set('views', './views')`.
   Isto é padrão para o diretório `views` no diretório raiz do aplicativo.
-* `ver engenho`, o mecanismo de modelos a ser usado. Por exemplo, para usar o motor de template Pug: `app.set('engenharia de visualização', 'pug')`.
+- `ver engenho`, o mecanismo de modelos a ser usado. Por exemplo, para usar o motor de template Pug: `app.set('engenharia de visualização', 'pug')`.
 
 Então instale o correspondente mecanismo de template do npm pacote; por exemplo, para instalar o Pug:
 

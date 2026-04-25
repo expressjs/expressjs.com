@@ -25,9 +25,9 @@ Una biblioteca de soporte multiplataforma que se centra en E/S asíncrona, desar
 
 Una función que es invocada por la capa de enrutamiento Express antes del gestor de solicitud final, y por lo tanto se encuentra en el medio entre una solicitud cruda y la ruta final deseada. Unos pocos puntos finos de terminología en torno a middleware:
 
-* `var foo = require('middleware')` es llamado *requiring* o *using* un módulo Node.js. Luego la instrucción `var mw = foo()` típicamente devuelve el middleware.
-* `app.use(mw)` se llama *agregando el middleware a la pila global de procesamiento de datos*.
-* `app.get('/foo', mw, function (req, res) { ... })` se llama *adding the middleware to the "GET /foo" processing stack*.
+- `var foo = require('middleware')` es llamado _requiring_ o _using_ un módulo Node.js. Luego la instrucción `var mw = foo()` típicamente devuelve el middleware.
+- `app.use(mw)` se llama _agregando el middleware a la pila global de procesamiento de datos_.
+- `app.get('/foo', mw, function (req, res) { ... })` se llama _adding the middleware to the "GET /foo" processing stack_.
 
 ### Node.js
 

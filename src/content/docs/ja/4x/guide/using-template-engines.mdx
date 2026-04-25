@@ -5,7 +5,7 @@ description: Pug、Handlebars、EJSなどのテンプレートエンジンをExp
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*template engine* を使用すると、アプリケーションで静的なテンプレート ファイルを使用できます。 実行時に、テンプレートエンジンはテンプレートファイルの
+_template engine_ を使用すると、アプリケーションで静的なテンプレート ファイルを使用できます。 実行時に、テンプレートエンジンはテンプレートファイルの
 変数を実際の値に置き換えます。 をクリックして、テンプレートをクライアントに送信する HTML ファイルに変換します。
 このアプローチにより、HTML ページのデザインが容易になります。
 
@@ -13,9 +13,9 @@ The [Express application generator](/en/starter/generator) uses [Pug](https://pu
 
 テンプレートファイルをレンダリングするには、ジェネレータが作成したデフォルトの `app.js` で、次の[アプリケーション設定プロパティ](/en/4x/api#app.set)を設定します。
 
-* `views` テンプレートファイルがあるディレクトリ。 例: `app.set('views', './views')` 。
+- `views` テンプレートファイルがあるディレクトリ。 例: `app.set('views', './views')` 。
   デフォルトはアプリケーションのルートディレクトリにある `views` ディレクトリです。
-* `viewengine` を使用するテンプレートエンジン。 たとえば、Pugテンプレートエンジンを使用するには、`app.set('view engine', 'pug')`を使います。
+- `viewengine` を使用するテンプレートエンジン。 たとえば、Pugテンプレートエンジンを使用するには、`app.set('view engine', 'pug')`を使います。
 
 次に、対応するテンプレートエンジン npm パッケージをインストールします。例えば、Pug をインストールする場合:
 

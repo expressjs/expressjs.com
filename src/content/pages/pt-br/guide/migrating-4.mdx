@@ -40,8 +40,8 @@ Há várias mudanças significativas na Expresso 4:
 
 Ver também:
 
-* [Novas funcionalidades em 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
-* [Migrando da 3.x para a versão 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
+- [Novas funcionalidades em 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+- [Migrando da 3.x para a versão 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 ### Alterações no núcleo do Express e sistema de middleware
 
@@ -214,8 +214,8 @@ o middleware do `router`.
 A forma como você define rotas é inalterada, mas o sistema de roteamento tem dois
 novos recursos para ajudar a organizar suas rotas:
 
-* Um novo método, `app.route()`, para criar gerenciadores de rotas em cadeia para um caminho de rota.
-* Uma nova classe, `express.Router`, para criar modular montável handlers.
+- Um novo método, `app.route()`, para criar gerenciadores de rotas em cadeia para um caminho de rota.
+- Uma nova classe, `express.Router`, para criar modular montável handlers.
 
 #### Método `app.route()`
 
@@ -229,14 +229,14 @@ Aqui está um exemplo de manipuladores de rota encadeados que são definidos usa
 app
   .route('/book')
   .get((req, res) => {
-    res. end('Recebe um livro aleatório');
+    res.end('Recebe um livro aleatório');
   })
-  . ost((req, res) => {
+  .ost((req, res) => {
     res.send('Adicionar um livro');
   })
-  . ut((req, res) => {
+  .ut((req, res) => {
     res.send('Atualizar o livro');
-});
+  });
 ```
 
 #### Classe `express.Router`
@@ -298,7 +298,9 @@ A tabela a seguir lista outras pequenas mas importantes mudanças no Express 4:
   </tr>
   <tr>
     <td>Node.js</td>
-    <td>Express 4 requer Node.js 0.10.x ou posterior e tem abandonado o suporte para Node.js 0.8.</td>
+    <td>
+      Express 4 requer Node.js 0.10.x ou posterior e tem abandonado o suporte para Node.js 0.8.
+    </td>
   </tr>
   <tr>
     <td markdown="1">`http.createServer()`</td>
@@ -358,8 +360,8 @@ A tabela a seguir lista outras pequenas mas importantes mudanças no Express 4:
   <tr>
     <td markdown="1">`res.setHeader('Set-Cookie', val)`</td>
     <td markdown="1">
-      A funcionalidade agora está limitada a definir o valor básico de cookie. Use `res.cookie()` para adicionar
-      funcionalidade.
+      A funcionalidade agora está limitada a definir o valor básico de cookie. Use `res.cookie()`
+      para adicionar funcionalidade.
     </td>
   </tr>
 </table>
@@ -595,9 +597,9 @@ Express 4.
 
 Opções de comando e uso em grande parte permanecem iguais, com as seguintes exceções:
 
-* A opção `--sessions` foi removida.
-* A opção `--jshtml` foi removida.
-* Adicionado a opção `--hogan` para apoiar [Hogan.js](http://twitter.github.io/hogan.js/).
+- A opção `--sessions` foi removida.
+- A opção `--jshtml` foi removida.
+- Adicionado a opção `--hogan` para apoiar [Hogan.js](http://twitter.github.io/hogan.js/).
 
 ### Exemplo
 

@@ -5,7 +5,7 @@ description: Impara i fondamenti del routing nelle applicazioni Express.js, tra 
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Routing* si riferisce alla determinazione di come un'applicazione risponde a una richiesta di client a un determinato endpoint, che è un URI (o percorso) e un metodo di richiesta HTTP specifico (GET, POST, e così via).
+_Routing_ si riferisce alla determinazione di come un'applicazione risponde a una richiesta di client a un determinato endpoint, che è un URI (o percorso) e un metodo di richiesta HTTP specifico (GET, POST, e così via).
 
 Ogni percorso può avere una o più funzioni di gestore, che vengono eseguite quando il percorso è abbinato.
 
@@ -17,10 +17,10 @@ app.METHOD(PATH, HANDLER);
 
 Dove:
 
-* `app` è un'istanza di `express`.
-* `METHOD` è un [metodo di richiesta HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in minuscolo.
-* `PATH` è un percorso sul server.
-* `HANDLER` è la funzione eseguita quando il percorso è corrispondente.
+- `app` è un'istanza di `express`.
+- `METHOD` è un [metodo di richiesta HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in minuscolo.
+- `PATH` è un percorso sul server.
+- `HANDLER` è la funzione eseguita quando il percorso è corrispondente.
 
 <Alert type="allerta">
 

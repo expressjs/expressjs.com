@@ -410,12 +410,12 @@ app.get('/user', (req, res) => {
 
 **注意:** Express 5, `res. endFile()`は、MIME タイプの検出に`mime-types`パッケージを使用します。これは、一般的なファイルタイプの場合、Express 4とは異なるContent-Type値を返します。
 
-* JavaScriptファイル (.js): 「application/javascript」の代わりに「text/javascript」を追加しました
-* JSON ファイル (.json): 「text/json」の代わりに「application/json」になりました
-* CSS ファイル (.css): "text/plain" ではなく "text/css" になりました
-* XML ファイル (.xml): "text/xml" の代わりに "application/xml" になりました
-* フォントファイル (.woff): "application/font-woff" ではなく "font/woff" になりました
-* SVG ファイル (.svg): "application/svg+xml" の代わりに "image/svg+xml" になりました
+- JavaScriptファイル (.js): 「application/javascript」の代わりに「text/javascript」を追加しました
+- JSON ファイル (.json): 「text/json」の代わりに「application/json」になりました
+- CSS ファイル (.css): "text/plain" ではなく "text/css" になりました
+- XML ファイル (.xml): "text/xml" の代わりに "application/xml" になりました
+- フォントファイル (.woff): "application/font-woff" ではなく "font/woff" になりました
+- SVG ファイル (.svg): "application/svg+xml" の代わりに "image/svg+xml" になりました
 
 <Alert type="情報">
 非推奨の署名は次のコマンドで置き換えることができます:
@@ -449,12 +449,12 @@ MIME タイプの値を扱うには、[`mime-types` package](https://github.com/
 
 **重要:** この変更は `express.static.mime` の直接使用だけでなく、 `res.sendFile()` のような MIME タイプの検出に依存する Express メソッドにも影響します。 Express 4から次のMIMEタイプが変更されました。
 
-* JavaScriptファイル (.js): 「application/javascript」の代わりに「text/javascript」として提供されるようになりました
-* JSON ファイル (.json): 「text/json」の代わりに「application/json」として提供されるようになりました
-* CSS ファイル (.css): 「text/plain」の代わりに「text/css」として提供されるようになりました
-* HTML ファイル (): 単に "text/html" の代わりに "text/html; charset=utf-8" として提供されました
-* XML ファイル (.xml): "text/xml" の代わりに "application/xml" として提供されるようになりました
-* フォント ファイル (.woff): "application/font-woff" ではなく "font/woff" として提供されるようになりました
+- JavaScriptファイル (.js): 「application/javascript」の代わりに「text/javascript」として提供されるようになりました
+- JSON ファイル (.json): 「text/json」の代わりに「application/json」として提供されるようになりました
+- CSS ファイル (.css): 「text/plain」の代わりに「text/css」として提供されるようになりました
+- HTML ファイル (): 単に "text/html" の代わりに "text/html; charset=utf-8" として提供されました
+- XML ファイル (.xml): "text/xml" の代わりに "application/xml" として提供されるようになりました
+- フォント ファイル (.woff): "application/font-woff" ではなく "font/woff" として提供されるようになりました
 
 ```js
 // v4
@@ -490,7 +490,7 @@ DEBUG=express:*,router,router:* node index.js
 
 パスルートマッチング構文は、文字列が`app.all()`、`app.use()`、`app.METHOD()`、`router.all()`、`router.METHOD()`、`router.METHOD()`、`router.METHOD()`、`router.use()` APIに最初のパラメータとして与えられた場合です。 パス文字列が受信リクエストと一致する方法を次のように変更しました:
 
-* ワイルドカード`*`には名前が必要です。パラメータ`:`の動作に一致します。`/*`の代わりに`/*splat`を使用します。
+- ワイルドカード`*`には名前が必要です。パラメータ`:`の動作に一致します。`/*`の代わりに`/*splat`を使用します。
 
 ```js
 // v4
@@ -516,7 +516,7 @@ app.get('/{*splat}', async (req, res) => {
 
 </Alert>
 
-* オプションの文字 `?` はサポートされなくなりました。代わりに括弧を使用してください。
+- オプションの文字 `?` はサポートされなくなりました。代わりに括弧を使用してください。
 
 ```js
 // v4
@@ -530,7 +530,7 @@ app.get('/:file{.:ext}', async (req, res) => {
 });
 ```
 
-* 正規表現文字はサポートされていません。 例:
+- 正規表現文字はサポートされていません。 例:
 
 ```js
 app.get('/[discussion|page]/:slug', async (req, res) => {
@@ -546,8 +546,8 @@ app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
 });
 ```
 
-* いくつかの文字はアップグレード中に混乱を避けるために予約されています (`()[]?+!`), それらをエスケープするために`\`を使用します。
-* パラメータ名が有効な JavaScript 識別子をサポートするようになりました。また、`:"this"` のように引用符で囲まれました。
+- いくつかの文字はアップグレード中に混乱を避けるために予約されています (`()[]?+!`), それらをエスケープするために`\`を使用します。
+- パラメータ名が有効な JavaScript 識別子をサポートするようになりました。また、`:"this"` のように引用符で囲まれました。
 
 ### ミドルウェアとハンドラーから取り扱われる拒否された約束。
 

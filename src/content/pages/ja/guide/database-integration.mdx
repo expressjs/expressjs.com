@@ -7,19 +7,19 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Expressアプリケーションにデータベースを接続する機能を追加することは、アプリケーション内のデータベースに適切なNode.jsドライバをロードするだけです。 このドキュメントでは、Express アプリケーションで最も人気のある Node.js モジュールのいくつかを追加して使用する方法を簡単に説明します。
 
-* [Cassandra](#cassandra)
-* [Couchbase](#couchbase)
-* [CouchDB](#couchdb)
-* [LevelDB](#leveldb)
-* [MySQL](#mysql)
-* [MongoDB](#mongodb)
-* [Neo4j](#neo4j)
-* [Oracle](#oracle)
-* [PostgreSQL](#postgresql)
-* [Redis](#redis)
-* [SQL Server](#sql-server)
-* [SQLite](#sqlite)
-* [Elasticsearch](#elasticsearch)
+- [Cassandra](#cassandra)
+- [Couchbase](#couchbase)
+- [CouchDB](#couchdb)
+- [LevelDB](#leveldb)
+- [MySQL](#mysql)
+- [MongoDB](#mongodb)
+- [Neo4j](#neo4j)
+- [Oracle](#oracle)
+- [PostgreSQL](#postgresql)
+- [Redis](#redis)
+- [SQL Server](#sql-server)
+- [SQLite](#sqlite)
+- [Elasticsearch](#elasticsearch)
 
 <Alert type="アラート">
 
@@ -192,7 +192,7 @@ connection.end();
 $ npm install mongodb
 ```
 
-### 例 (v2.*)
+### 例 (v2.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -210,7 +210,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
 });
 ```
 
-### 例 (v3.*)
+### 例 (v3.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;

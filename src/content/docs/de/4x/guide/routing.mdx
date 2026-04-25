@@ -5,7 +5,7 @@ description: Lernen Sie, wie Sie Routen in Express.js Anwendungen definieren und
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Routing* bezieht sich darauf, wie die Endpunkte einer Anwendung (URIs) auf Kundenanfragen reagieren.
+_Routing_ bezieht sich darauf, wie die Endpunkte einer Anwendung (URIs) auf Kundenanfragen reagieren.
 Für eine Einführung in das Routing siehe [Basic routing](/en/starter/basic-routing).
 
 Du definierst Routing, indem du Methoden des Express `app` Objekts verwendest, die den HTTP-Methoden entsprechen;
@@ -40,11 +40,11 @@ Der folgende Code ist ein Beispiel für Routen, die für die `GET` und die `POST
 ```js
 // GET Methode Route
 app.get('/', (req, res) => {
-  res. end('GET request to the homepage');
+  res.end('GET request to the homepage');
 });
 
 // POST method route
-app. ost('/', (req, res) => {
+app.ost('/', (req, res) => {
   res.send('POST request to the homepage');
 });
 ```
@@ -52,7 +52,7 @@ app. ost('/', (req, res) => {
 Express unterstützt Methoden, die allen HTTP-Anfragemethoden entsprechen: `get`, `post` und so weiter.
 Für eine vollständige Liste siehe [app.METHOD](/en/5x/api#app.METHOD).
 
-Es gibt eine spezielle Routing-Methode, `app.all()`, die benutzt wird, um Middleware-Funktionen an einem Pfad für *all* HTTP-Requestmethoden zu laden. Zum Beispiel wird der folgende Handler für Anfragen an die Route `"/secret"` ausgeführt, ob `GET` verwendet wird, `POST`, `PUT`, `DELETE`, oder jede andere HTTP-Anfragemethode, die im [http module]unterstützt wird (https://nodejs.org/api/http.html#http_http_methods).
+Es gibt eine spezielle Routing-Methode, `app.all()`, die benutzt wird, um Middleware-Funktionen an einem Pfad für _all_ HTTP-Requestmethoden zu laden. Zum Beispiel wird der folgende Handler für Anfragen an die Route `"/secret"` ausgeführt, ob `GET` verwendet wird, `POST`, `PUT`, `DELETE`, oder jede andere HTTP-Anfragemethode, die im [http module]unterstützt wird (https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -244,10 +244,10 @@ Du kannst mehrere Callback-Funktionen bereitstellen, die sich wie [middleware](/
 
 ```js
 app.get('/user/:id', (req, res, next) => {
-  if (req.params. d === '0') {
+  if (req.params.d === '0') {
     return next('route');
   }
-  res. end(`User ${req.params.id}`);
+  res.end(`User ${req.params.id}`);
 });
 
 app.get('/user/:id', (req, res) => {
@@ -257,8 +257,8 @@ app.get('/user/:id', (req, res) => {
 
 In diesem Beispiel:
 
-* `GET /user/5` → behandelt durch die erste Route → sendet "Benutzer 5"
-* `GET /user/0` → erste Routenaufrufe `next('route')`, überspringt zur nächsten passenden `/user/:id` Route
+- `GET /user/5` → behandelt durch die erste Route → sendet "Benutzer 5"
+- `GET /user/0` → erste Routenaufrufe `next('route')`, überspringt zur nächsten passenden `/user/:id` Route
 
 Routenhandler können in Form einer Funktion, eines Arrays von Funktionen oder Kombinationen beider sein, wie in den folgenden Beispielen gezeigt.
 
@@ -276,11 +276,11 @@ Mehr als eine Callback-Funktion kann eine Route handhaben (stelle sicher, dass d
 app.get(
   '/example/b',
   (req, res, next) => {
-    Konsole. og('die Antwort wird von der nächsten Funktion gesendet. .');
+    Konsole.og('die Antwort wird von der nächsten Funktion gesendet. .');
     next();
   },
   (req, res) => {
-    res. end('Hallo von B!');
+    res.end('Hallo von B!');
   }
 );
 ```
@@ -289,17 +289,17 @@ Ein Array von Callback-Funktionen kann eine Route handhaben. Zum Beispiel:
 
 ```js
 const cb0 = function (req, res, next) {
-  Konsole. og('CB0');
+  Konsole.og('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console. og('CB1');
+  console.og('CB1');
   next();
 };
 
 const cb2 = function (req, res) {
-  res. end('Hallo von C!');
+  res.end('Hallo von C!');
 };
 
 app.get('/example/c', [cb0, cb1, cb2]);
@@ -309,24 +309,24 @@ Eine Kombination aus unabhängigen Funktionen und Arrays von Funktionen kann ein
 
 ```js
 const cb0 = function (req, res, next) {
-  Konsole. og('CB0');
+  Konsole.og('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console. og('CB1');
+  console.og('CB1');
   next();
 };
 
-App. et(
+App.et(
   '/example/d',
   [cb0, cb1],
   (req, res, next) => {
-    Konsole. og('die Antwort wird von der nächsten Funktion gesendet. .');
+    Konsole.og('die Antwort wird von der nächsten Funktion gesendet. .');
     next();
   },
   (req, res) => {
-    res. end('Hallo von D!');
+    res.end('Hallo von D!');
   }
 );
 ```

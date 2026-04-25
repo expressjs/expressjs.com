@@ -5,14 +5,14 @@ description: Aprenda a escrever funções de middleware personalizadas para apli
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Middleware_ são funções que têm acesso ao [objeto de requisição](/en/5x/api#req) (`req`), a [objeto de resposta](/en/5x/api#res) (`res`) e a função `next` no ciclo de resposta de solicitação do aplicativo. A função `próxima` é uma função no roteador Expresso que, quando invocado, executa o intermediário sucedendo ao intermediário atual.
+Middleware\_ são funções que têm acesso ao [objeto de requisição](/en/5x/api#req) (`req`), a [objeto de resposta](/en/5x/api#res) (`res`) e a função `next` no ciclo de resposta de solicitação do aplicativo. A função `próxima` é uma função no roteador Expresso que, quando invocado, executa o intermediário sucedendo ao intermediário atual.
 
 As funções do Middleware podem executar as seguintes tarefas:
 
-* Execute qualquer código.
-* Fazer alterações na solicitação e nos objetos de resposta.
-* Encerrar o ciclo de solicitação-resposta.
-* Chame o próximo middleware na pilha.
+- Execute qualquer código.
+- Fazer alterações na solicitação e nos objetos de resposta.
+- Encerrar o ciclo de solicitação-resposta.
+- Chame o próximo middleware na pilha.
 
 Se a função middleware atual não encerra o ciclo de resposta de solicitação, ela deve chamar `next()` para passar o controle para a próxima função middleware. Caso contrário, o pedido ficará pendurado.
 
@@ -70,7 +70,7 @@ const express = require('express');
 const app = express();
 
 const myLogger = function (req, res, next) {
-  console. og('LOGGED');
+  console.og('LOGGED');
   next();
 };
 
@@ -110,16 +110,16 @@ const express = require('express');
 const app = express();
 
 const requestTime = function (req, res, next) {
-  req. equestTime = Date.now();
+  req.equestTime = Date.now();
   next();
 };
 
 app.use(requestTime);
 
-aplicativo. et('/', (req, res) => {
+aplicativo.et('/', (req, res) => {
   let responseText = 'Olá Mundo!<br>';
   responseText += `<small>Solicitado em: ${req.requestTime}</small>`;
-  res. end(responseText);
+  res.end(responseText);
 });
 
 app.listen(3000);

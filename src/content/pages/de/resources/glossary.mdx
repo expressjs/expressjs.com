@@ -25,9 +25,9 @@ Eine mehrplattformunabhängige Unterstützungsbibliothek, die sich auf asynchron
 
 Eine Funktion, die von der Express-Routing Layer vor dem letzten Request-Handler aufgerufen wird und sitzt somit in der Mitte zwischen einer Rohanforderung und der endgültigen geplanten Route. Ein paar schöne Terminologiepunkte rund um die Middleware:
 
-* `var foo = require('middleware')` heißt *requiring* oder *using* ein Node.js Modul. Dann gibt die Anweisung `var mw = foo()` typischerweise die Middleware zurück.
-* `app.use(mw)` heißt *adding the middleware to the global processing stack*.
-* `app.get('/foo', mw, function (req, res) { ... })` heißt *adding the middleware to the "GET /foo" processing stack*.
+- `var foo = require('middleware')` heißt _requiring_ oder _using_ ein Node.js Modul. Dann gibt die Anweisung `var mw = foo()` typischerweise die Middleware zurück.
+- `app.use(mw)` heißt _adding the middleware to the global processing stack_.
+- `app.get('/foo', mw, function (req, res) { ... })` heißt _adding the middleware to the "GET /foo" processing stack_.
 
 ### Node.js
 

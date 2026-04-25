@@ -7,24 +7,24 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express é uma web framework de roteamento e middleware que tem a funcionalidade mínima de sua própria funcionalidade: Um aplicativo Express é essencialmente uma série de chamadas de função middleware.
 
-Middleware_ são funções que têm acesso ao [objeto de requisição](/en/5x/api#req) (`req`), a [objeto de resposta](/en/5x/api#res) (`res`) e a próxima função de middleware no ciclo de resposta de solicitação do aplicativo. A próxima função de middleware é comumente denotada por uma variável chamada `next`.
+Middleware\_ são funções que têm acesso ao [objeto de requisição](/en/5x/api#req) (`req`), a [objeto de resposta](/en/5x/api#res) (`res`) e a próxima função de middleware no ciclo de resposta de solicitação do aplicativo. A próxima função de middleware é comumente denotada por uma variável chamada `next`.
 
 As funções do Middleware podem executar as seguintes tarefas:
 
-* Execute qualquer código.
-* Fazer alterações na solicitação e nos objetos de resposta.
-* Encerrar o ciclo de solicitação-resposta.
-* Chame a próxima função middleware na pilha.
+- Execute qualquer código.
+- Fazer alterações na solicitação e nos objetos de resposta.
+- Encerrar o ciclo de solicitação-resposta.
+- Chame a próxima função middleware na pilha.
 
 Se a função middleware atual não encerra o ciclo de resposta de solicitação, ela deve chamar `next()` para passar o controle para a próxima função middleware. Caso contrário, o pedido ficará pendurado.
 
 Um aplicativo Express pode usar os seguintes tipos de middleware:
 
-* [Meio do aplicativo](#middleware.application)
-* [Meio do roteador](#middleware.router)
-* [Middleware com erro](#middleware.error-handling)
-* [middleware](#middleware.built-in)
-* [Middleware de terceiros](#middleware.third-party)
+- [Meio do aplicativo](#middleware.application)
+- [Meio do roteador](#middleware.router)
+- [Middleware com erro](#middleware.error-handling)
+- [middleware](#middleware.built-in)
+- [Middleware de terceiros](#middleware.third-party)
 
 Você pode carregar o nível de aplicação e middleware de nível de roteador com um caminho de montagem opcional.
 Você também pode carregar uma série de funções intermediárias juntas, o que cria uma sub-pilha do sistema intermediário em um ponto de montagem.
@@ -88,16 +88,16 @@ Este exemplo mostra uma sub-pilha de middleware que lida com requisições GET p
 app.get(
   '/user/:id',
   (req, res, next) => {
-    console.log('ID:', req. arams.id);
+    console.log('ID:', req.arams.id);
     next();
   },
   (req, res, next) => {
-    res. end('Informações do usuário');
+    res.end('Informações do usuário');
   }
 );
 
 // manipulador para o caminho /user/:id, que imprime o ID do usuário
-aplicativo. et('/user/:id', (req, res, next) => {
+aplicativo.et('/user/:id', (req, res, next) => {
   res.send(req.params.id);
 });
 ```
@@ -140,17 +140,17 @@ Este exemplo mostra um array com um sub-stack de middleware que lida com requisi
 
 ```js
 function logOriginalUrl(req, res, próximo) {
-  console.log('Solicitação URL:', req. riginalUrl);
+  console.log('Solicitação URL:', req.riginalUrl);
   next();
 }
 
 function logMethod(req, res, ext) {
-  console.log('Request Type:', req. ethod);
+  console.log('Request Type:', req.ethod);
   next();
 }
 
 const logStuff = [logOriginalUrl, logMethod];
-app. et('/user/:id', logStuff, (req, res, next) => {
+app.et('/user/:id', logStuff, (req, res, next) => {
   res.send('Usuário Info');
 });
 ```
@@ -246,7 +246,7 @@ router. et('/user/:id', (req, res) => {
 
 <Alert type="alerta">
 
-O middleware com erros de manipulação sempre toma *quatro* argumentos. Você deve fornecer quatro argumentos para
+O middleware com erros de manipulação sempre toma _quatro_ argumentos. Você deve fornecer quatro argumentos para
 identificá-lo como uma função de middleware manipulação de erros. Mesmo se você não precisar usar o objeto `next`
 , você deve especificá-lo para manter a assinatura. Caso contrário, o objeto `próximo` será
 interpretado como um middleware regular e irá falhar em lidar com erros.
@@ -271,9 +271,9 @@ funções que foram previamente incluídas com Express estão agora em módulos 
 
 O Express tem as seguintes funções de middleware incorporadas:
 
-* [express.static](/en/5x/api#express.static) serve como arquivos estáticos, como arquivos HTML, imagens e assim por diante.
-* [express.json](/en/5x/api#express.json) analisa solicitações recebidas com carga JSON. **NOTA: Disponível com Expresso 4.16.0+**
-* [express.urlencoded](/en/5x/api#express.urlencoded) analisa solicitações recebidas com payloads codificados por URL. **NOTA: Disponível com Expresso 4.16.0+**
+- [express.static](/en/5x/api#express.static) serve como arquivos estáticos, como arquivos HTML, imagens e assim por diante.
+- [express.json](/en/5x/api#express.json) analisa solicitações recebidas com carga JSON. **NOTA: Disponível com Expresso 4.16.0+**
+- [express.urlencoded](/en/5x/api#express.urlencoded) analisa solicitações recebidas com payloads codificados por URL. **NOTA: Disponível com Expresso 4.16.0+**
 
 ## Midddleware de terceiros
 

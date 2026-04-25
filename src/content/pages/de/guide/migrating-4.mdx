@@ -5,7 +5,7 @@ description: Eine Anleitung zur Migration Ihrer Express.js Anwendungen von Versi
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Express 4 ist ein brillanter Wechsel von Express 3. Das bedeutet, dass eine bestehende Express 3-App *nicht* funktioniert, wenn Sie die Express-Version in ihren Abhängigkeiten aktualisieren.
+Express 4 ist ein brillanter Wechsel von Express 3. Das bedeutet, dass eine bestehende Express 3-App _nicht_ funktioniert, wenn Sie die Express-Version in ihren Abhängigkeiten aktualisieren.
 
 Dieser Artikel Covers:
 
@@ -14,7 +14,8 @@ Dieser Artikel Covers:
     <a href="#changes">Änderungen in Express 4</a>.
   </li>
   <li>
-    <a href="#example-migration">Ein Beispiel</a> für die Migration einer Express 3 App auf Express 4.
+    <a href="#example-migration">Ein Beispiel</a> für die Migration einer Express 3 App auf Express
+    4.
   </li>
   <li>
     <a href="#app-gen">Upgrade auf den Express 4 App-Generator</a>.
@@ -27,8 +28,9 @@ Es gibt mehrere bedeutende Änderungen in Express 4:
 
 <ul class="doklist">
   <li>
-    <a href="#core-changes">Änderungen des Express-Core- und Middleware-Systems.</a> Die Abhängigkeiten von
-    Connect und eingebauter Middleware wurden entfernt, daher müssen Sie selbst Middleware hinzufügen.
+    <a href="#core-changes">Änderungen des Express-Core- und Middleware-Systems.</a> Die
+    Abhängigkeiten von Connect und eingebauter Middleware wurden entfernt, daher müssen Sie selbst
+    Middleware hinzufügen.
   </li>
   <li>
     <a href="#routing">Änderungen am Routingsystem.</a>
@@ -40,8 +42,8 @@ Es gibt mehrere bedeutende Änderungen in Express 4:
 
 Siehe auch:
 
-* [Neue Features in 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
-* [Migration von 3.x auf 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
+- [Neue Features in 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+- [Migration von 3.x auf 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 ### Änderungen am Express-Kern- und Middleware-System
 
@@ -214,8 +216,8 @@ der `router` Middleware geladen wird.
 Die Art und Weise, wie Sie Routen definieren, ist unverändert, aber das Routensystem hat zwei
 neue Funktionen, um Ihre Routen zu organisieren:
 
-* Eine neue Methode, `app.route()`, um verkettete Routenhandler für einen Routenpfad zu erstellen.
-* Eine neue Klasse, `express.Router`, um modulare montierbare Routenhandler zu erstellen.
+- Eine neue Methode, `app.route()`, um verkettete Routenhandler für einen Routenpfad zu erstellen.
+- Eine neue Klasse, `express.Router`, um modulare montierbare Routenhandler zu erstellen.
 
 #### `app.route()` Methode
 
@@ -297,27 +299,30 @@ Die folgende Tabelle listet weitere kleine, aber wichtige Änderungen in Express
     <th>Beschreibung</th>
   </tr>
   <tr>
-    <td>Node.js</td><td>Express 4 benötigt Node.js 0.10.x oder höher und hat die Unterstützung für Node.js 0.8.x fallen gelassen.</td>
+    <td>Node.js</td>
+    <td>
+      Express 4 benötigt Node.js 0.10.x oder höher und hat die Unterstützung für Node.js 0.8.x
+      fallen gelassen.
+    </td>
   </tr>
   <tr>
     <td markdown="1">`http.createServer()`</td>
     <td markdown="1">
       Das `http` Modul wird nicht mehr benötigt, außer du musst direkt mit ihm
-      (socket.io/SPDY/HTTPS) arbeiten. Die App kann über die Funktion `app.listen()` gestartet werden.
+      (socket.io/SPDY/HTTPS) arbeiten. Die App kann über die Funktion `app.listen()` gestartet
+      werden.
     </td>
   </tr>
   <tr>
     <td markdown="1">`app.configure()`</td>
     <td markdown="1">
-      Die Funktion `app.configure()` wurde entfernt. Benutze die Funktion `process.env.NODE_ENV` oder
-      `app.get('env')` um die Umgebung zu erkennen und die App entsprechend zu konfigurieren.
+      Die Funktion `app.configure()` wurde entfernt. Benutze die Funktion `process.env.NODE_ENV`
+      oder `app.get('env')` um die Umgebung zu erkennen und die App entsprechend zu konfigurieren.
     </td>
   </tr>
   <tr>
     <td markdown="1">`json spaces`</td>
-    <td markdown="1">
-      Die Eigenschaft `json spaces` ist standardmäßig in Express 4 deaktiviert.
-    </td>
+    <td markdown="1">Die Eigenschaft `json spaces` ist standardmäßig in Express 4 deaktiviert.</td>
   </tr>
   <tr>
     <td markdown="1">`req.accepted()`</td>
@@ -357,8 +362,8 @@ Die folgende Tabelle listet weitere kleine, aber wichtige Änderungen in Express
   <tr>
     <td markdown="1">`res.setHeader('Set-Cookie', val)`</td>
     <td markdown="1">
-      Die Funktionalität ist nun auf das Setzen des grundlegenden Cookie-Wertes beschränkt. Benutze `res.cookie()` für hinzugefügte
-      Funktionalität.
+      Die Funktionalität ist nun auf das Setzen des grundlegenden Cookie-Wertes beschränkt. Benutze
+      `res.cookie()` für hinzugefügte Funktionalität.
     </td>
   </tr>
 </table>
@@ -384,26 +389,26 @@ var path = require('path');
 var app = express();
 
 // alle Umgebungen
-app. et('port', process.env.PORT || 3000);
+app.et('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
-app.use(express. ession({ secret: 'your secret here' }));
+app.use(express.ession({ secret: 'your secret here' }));
 app.use(express.bodyParser());
 app.use(app.router);
-app.use(express. tatic(path.join(__dirname, 'public')));
+app.use(express.tatic(path.join(__dirname, 'public')));
 
 // Entwicklung nur
 if (app.get('env') === 'development') {
-  app. se(express.errorHandler());
+  app.se(express.errorHandler());
 }
 
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http. reateServer(app).listen(app.get('port'), () => {
+http.reateServer(app).listen(app.get('port'), () => {
   console.log('Express Server, der auf Port ' + app.get('port'));
 });
 ```
@@ -594,9 +599,9 @@ Express 4 Generator aktualisiert.
 
 Befehlsoptionen und -verwendung bleiben weitgehend gleich, mit den folgenden Ausnahmen:
 
-* Die Option `--sessions` wurde entfernt.
-* Die `--jshtml` Option wurde entfernt.
-* `--hogan` Option hinzugefügt, um [Hogan.js]zu unterstützen (http://twitter.github.io/hogan.js/).
+- Die Option `--sessions` wurde entfernt.
+- Die `--jshtml` Option wurde entfernt.
+- `--hogan` Option hinzugefügt, um [Hogan.js]zu unterstützen (http://twitter.github.io/hogan.js/).
 
 ### Beispiel
 
@@ -643,7 +648,7 @@ die Zeile, die `module. xports = app;` am Ende der
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), () => {
-  debug('Express Server, der auf Port '+ server.address().port);
+  debug('Express Server, der auf Port ' + server.address().port);
 });
 ```
 

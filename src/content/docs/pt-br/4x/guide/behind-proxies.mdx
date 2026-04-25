@@ -37,9 +37,9 @@ Ao definir como `true`, é importante garantir que o último proxy reverso confi
 <td markdown="1">
 Um endereço IP, subnet ou uma matriz de endereços IP e subnets para confiar como sendo um proxy reverso. A seguinte lista mostra os nomes das sub-redes pré-configuradas:
 
-* loopback - `127.0.0.1/8`, `::1/128`
-* linklocal - `169.254.0.0/16`, `fe80::/10`
-* uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
+- loopback - `127.0.0.1/8`, `::1/128`
+- linklocal - `169.254.0.0/16`, `fe80::/10`
+- uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
 
 Você pode definir endereços IP das seguintes maneiras:
 
@@ -90,12 +90,13 @@ Habilitar `trust proxy` terá o seguinte impacto:
     `X-Forwarded-Host`, que pode ser configurado pelo cliente ou pelo proxy.
   </li>
   <li markdown="1">
-    `X-Forwarded-Proto` pode ser configurado pelo proxy reverso para dizer ao aplicativo se ele é `https` ou
-    `http` ou até mesmo um nome inválido. Este valor é refletido por [req.protocol](/en/api#req.protocol).
+    `X-Forwarded-Proto` pode ser configurado pelo proxy reverso para dizer ao aplicativo se ele é
+    `https` ou `http` ou até mesmo um nome inválido. Este valor é refletido por
+    [req.protocol](/en/api#req.protocol).
   </li>
   <li markdown="1">
-    Os valores [req.ip](/en/api#req.ip) e [req.ips](/en/api#req.ips) são preenchidos com base no cabeçalho
-    do socket e `X-Forwarded-For`, iniciando no primeiro endereço não confiável.
+    Os valores [req.ip](/en/api#req.ip) e [req.ips](/en/api#req.ips) são preenchidos com base no
+    cabeçalho do socket e `X-Forwarded-For`, iniciando no primeiro endereço não confiável.
   </li>
 </ul>
 

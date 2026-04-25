@@ -7,24 +7,24 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express is a routing and middleware web framework that has minimal functionality of its own: An Express application is essentially a series of middleware function calls.
 
-*Middleware* functions are functions that have access to the [request object](/en/5x/api#req) (`req`), the [response object](/en/5x/api#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
+_Middleware_ functions are functions that have access to the [request object](/en/5x/api#req) (`req`), the [response object](/en/5x/api#res) (`res`), and the next middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`.
 
 Middleware functions can perform the following tasks:
 
-* Execute any code.
-* Make changes to the request and the response objects.
-* End the request-response cycle.
-* Call the next middleware function in the stack.
+- Execute any code.
+- Make changes to the request and the response objects.
+- End the request-response cycle.
+- Call the next middleware function in the stack.
 
 If the current middleware function does not end the request-response cycle, it must call `next()` to pass control to the next middleware function. Otherwise, the request will be left hanging.
 
 An Express application can use the following types of middleware:
 
-* [Application-level middleware](#middleware.application)
-* [Router-level middleware](#middleware.router)
-* [Error-handling middleware](#middleware.error-handling)
-* [Built-in middleware](#middleware.built-in)
-* [Third-party middleware](#middleware.third-party)
+- [Application-level middleware](#middleware.application)
+- [Router-level middleware](#middleware.router)
+- [Error-handling middleware](#middleware.error-handling)
+- [Built-in middleware](#middleware.built-in)
+- [Third-party middleware](#middleware.third-party)
 
 You can load application-level and router-level middleware with an optional mount path.
 You can also load a series of middleware functions together, which creates a sub-stack of the middleware system at a mount point.
@@ -246,7 +246,7 @@ app.use('/admin', router, (req, res) => {
 
 <Alert type="alert">
 
-Error-handling middleware always takes *four* arguments. You must provide four arguments to
+Error-handling middleware always takes _four_ arguments. You must provide four arguments to
 identify it as an error-handling middleware function. Even if you don't need to use the `next`
 object, you must specify it to maintain the signature. Otherwise, the `next` object will be
 interpreted as regular middleware and will fail to handle errors.
@@ -271,9 +271,9 @@ functions that were previously included with Express are now in separate modules
 
 Express has the following built-in middleware functions:
 
-* [express.static](/en/5x/api#express.static) serves static assets such as HTML files, images, and so on.
-* [express.json](/en/5x/api#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
-* [express.urlencoded](/en/5x/api#express.urlencoded) parses incoming requests with URL-encoded payloads. **NOTE: Available with Express 4.16.0+**
+- [express.static](/en/5x/api#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/5x/api#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/5x/api#express.urlencoded) parses incoming requests with URL-encoded payloads. **NOTE: Available with Express 4.16.0+**
 
 ## Third-party middleware
 

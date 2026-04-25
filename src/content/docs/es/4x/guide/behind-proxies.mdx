@@ -37,16 +37,16 @@ Cuando se establece en `true`, es importante asegurarse de que el último proxy 
 <td markdown="1">
 Una dirección IP, subred, o un array de direcciones IP y subredes en las que confiar como un proxy inverso. La siguiente lista muestra los nombres de subred preconfigurados:
 
-* bucle atrás - `127.0.0.1/8`, `::1/128`
-* linklocal - `169.254.0.0/16`, `fe80::/10`
-* uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
+- bucle atrás - `127.0.0.1/8`, `::1/128`
+- linklocal - `169.254.0.0/16`, `fe80::/10`
+- uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
 
 Puede establecer direcciones IP de cualquiera de las siguientes maneras:
 
 ```js
 app.set('trust proxy', 'loopback'); // especificar una única subred
 app.set('trust proxy', 'loopback, 123.123.123.123'); // especificar una subred y una dirección
-app. et('trust proxy', 'loopback, linklocal, uniquelocal'); // especifica múltiples subredes como CSV
+app.et('trust proxy', 'loopback, linklocal, uniquelocal'); // especifica múltiples subredes como CSV
 app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // especifica múltiples subredes como un array
 ```
 
@@ -90,12 +90,14 @@ Habilitar `proxy de confianza` tendrá el siguiente impacto:
     `X-Forwarded-Host`, que puede ser definido por el cliente o por el proxy.
   </li>
   <li markdown="1">
-    `X-Forwarded-Proto` puede ser establecido por el proxy inverso para decirle a la aplicación si es `https` o
-    `http` o incluso un nombre inválido. Este valor se refleja en [req.protocol](/en/api#req.protocol).
+    `X-Forwarded-Proto` puede ser establecido por el proxy inverso para decirle a la aplicación si
+    es `https` o `http` o incluso un nombre inválido. Este valor se refleja en
+    [req.protocol](/en/api#req.protocol).
   </li>
   <li markdown="1">
-    Los valores [req.ip](/en/api#req.ip) y [req.ips](/en/api#req.ips) son poblados según la dirección del socket
-    y la cabecera `X-Forwarded-For`, comenzando en la primera dirección no confiable.
+    Los valores [req.ip](/en/api#req.ip) y [req.ips](/en/api#req.ips) son poblados según la
+    dirección del socket y la cabecera `X-Forwarded-For`, comenzando en la primera dirección no
+    confiable.
   </li>
 </ul>
 

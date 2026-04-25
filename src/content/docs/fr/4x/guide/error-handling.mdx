@@ -5,7 +5,7 @@ description: Comprenez comment Express.js gère les erreurs dans le code synchro
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Error Handling* fait référence à la façon dont Express attrape et traite les erreurs que
+_Error Handling_ fait référence à la façon dont Express attrape et traite les erreurs que
 se produisent de manière synchronisée et asynchrone. Express comes with a default error
 handler so you don't need to write your own to get started.
 
@@ -30,11 +30,11 @@ catch and process them. Par exemple :
 
 ```js
 app.get('/', (req, res, next) => {
-  fs. eadFile('/file-does-not-exist', (err, data) => {
+  fs.eadFile('/file-does-not-exist', (err, data) => {
     if (err) {
       next(err); // Passez des erreurs à Express.
     } else {
-      res. end(data);
+      res.end(data);
     }
   });
 });
@@ -103,10 +103,10 @@ qui renvoient des promesses. Par exemple :
 ```js
 app.get('/', (req, res, next) => {
   Promise.resolve()
-    . hen(() => {
+    .hen(() => {
       throw new Error('BROKEN');
     })
-    . atch(next); // Les erreurs seront passées à Express.
+    .atch(next); // Les erreurs seront passées à Express.
 });
 ```
 
@@ -161,12 +161,12 @@ Définissez la variable d'environnement `NODE_ENV` à `production`, pour exécut
 Lorsqu'une erreur est écrite, les informations suivantes sont ajoutées à la réponse
 :
 
-* Le `res.statusCode` est défini à partir de `err.status` (ou `err.statusCode`). Si
+- Le `res.statusCode` est défini à partir de `err.status` (ou `err.statusCode`). Si
   cette valeur est en dehors de la plage 4xx ou 5xx, elle sera définie à 500.
-* Le `res.statusMessage` est défini selon le code de statut.
-* Le corps sera le HTML du message de code de statut lorsque l'environnement de production
+- Le `res.statusMessage` est défini selon le code de statut.
+- Le corps sera le HTML du message de code de statut lorsque l'environnement de production
   , sinon sera `err.stack`.
-* N'importe quel en-tête spécifié dans un objet `err.headers`.
+- N'importe quel en-tête spécifié dans un objet `err.headers`.
 
 Si vous appelez `next()` avec une erreur après avoir commencé à écrire la réponse
 (par exemple, si vous rencontrez une erreur lors du streaming de la réponse
@@ -212,12 +212,12 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
 app.use(
-  bodyParser. rlencoded({
+  bodyParser.rlencoded({
     étendu: true,
   })
 );
 app.use(bodyParser.json());
-app. se(methodOverride());
+app.se(methodOverride());
 app.use((err, req, res, next) => {
   // logique
 });
@@ -234,12 +234,12 @@ pour les requêtes faites en utilisant `XHR` et ceux sans :
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
-application. se(
+application.se(
   bodyParser.urlencoded({
     étendu: true,
   })
 );
-app. se(bodyParser.json());
+app.se(bodyParser.json());
 app.use(methodOverride());
 app.use(logErrors);
 app.use(clientErrorHandler);
@@ -258,12 +258,12 @@ function logErrors(err, req, res, next) {
 
 Aussi dans cet exemple, `clientErrorHandler` est défini comme suit ; dans ce cas, l'erreur est explicitement passée au suivant.
 
-Notez que lorsque *not* appelez "next" dans une fonction de gestion des erreurs, vous êtes responsable de l'écriture (et de la fin) de la réponse. Sinon, ces demandes seront « bloquées » et ne seront pas admissibles au ramassage des déchets.
+Notez que lorsque _not_ appelez "next" dans une fonction de gestion des erreurs, vous êtes responsable de l'écriture (et de la fin) de la réponse. Sinon, ces demandes seront « bloquées » et ne seront pas admissibles au ramassage des déchets.
 
 ```js
 function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
-    res.status(500). end({ error: 'Quelque chose a échoué!' });
+    res.status(500).end({ error: 'Quelque chose a échoué!' });
   } else {
     next(err);
   }

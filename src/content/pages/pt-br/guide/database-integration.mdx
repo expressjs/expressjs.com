@@ -7,19 +7,19 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Adicionar a capacidade de conectar bancos de dados aos aplicativos Express é apenas uma questão de carregar um driver Node.js apropriado para o banco de dados em seu aplicativo. Este documento explica brevemente como adicionar e usar alguns dos mais populares módulos Node.js para os sistemas de banco de dados no seu aplicativo Express:
 
-* [Cassandra](#cassandra)
-* [Couchbase](#couchbase)
-* [CouchDB](#couchdb)
-* [LevelDB](#leveldb)
-* [MySQL](#mysql)
-* [MongoDB](#mongodb)
-* [Neo4j](#neo4j)
-* [Oracle](#oracle)
-* [PostgreSQL](#postgresql)
-* [Redis](#redis)
-* [SQL Server](#sql-server)
-* [SQLite](#sqlite)
-* [Elasticsearch](#elasticsearch)
+- [Cassandra](#cassandra)
+- [Couchbase](#couchbase)
+- [CouchDB](#couchdb)
+- [LevelDB](#leveldb)
+- [MySQL](#mysql)
+- [MongoDB](#mongodb)
+- [Neo4j](#neo4j)
+- [Oracle](#oracle)
+- [PostgreSQL](#postgresql)
+- [Redis](#redis)
+- [SQL Server](#sql-server)
+- [SQLite](#sqlite)
+- [Elasticsearch](#elasticsearch)
 
 <Alert type="alerta">
 
@@ -44,7 +44,7 @@ $ npm install cassandra-driver
 const cassandra = require('cassandra-driver');
 const client = new cassandra.Client({ contactPoints: ['localhost'] });
 
-cliente. xecute('selecione chave de system.local', (err, result) => {
+cliente.xecute('selecione chave de system.local', (err, result) => {
   if (err) throw err;
   console.log(result.rows[0]);
 });
@@ -102,21 +102,21 @@ $ npm install nano
 ```js
 const nano = require('nano')('http://localhost:5984');
 nano.db.create('books');
-const books = nano.db. se('livros');
+const books = nano.db.se('livros');
 
 // Insira um documento de livro no banco de dados de livros
-livros. nsert({ name: 'A Arte da guerra' }, null, (err, body) => {
+livros.nsert({ name: 'A Arte da guerra' }, null, (err, body) => {
   if (err) {
-    console. og(err);
+    console.og(err);
   } else {
-    console. og(corpo);
+    console.og(corpo);
   }
 });
 
 // Pegue uma lista de todos os livros
-livros. ist((err, corpo) => {
+livros.ist((err, corpo) => {
   if (err) {
-    console. og(err);
+    console.og(err);
   } else {
     console.log(body.rows);
   }
@@ -192,7 +192,7 @@ connection.end();
 $ npm install mongodb
 ```
 
-### Exemplo (v2.*)
+### Exemplo (v2.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -200,17 +200,17 @@ const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
   if (err) throw err;
 
-  db. ollection('mammal')
+  db.ollection('mammal')
     .find()
-    . oArray((err, result) => {
+    .oArray((err, result) => {
       if (err) throw err;
 
-      console. og(resultado);
+      console.og(resultado);
     });
 });
 ```
 
-### Exemplo (v3.*)
+### Exemplo (v3.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -218,14 +218,14 @@ const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
   if (err) throw err;
 
-  const db = client. b('animais');
+  const db = client.b('animais');
 
   db.collection('mammals')
     .find()
-    . oArray((err, result) => {
+    .oArray((err, result) => {
       if (err) throw err;
 
-      console. og(resultado);
+      console.og(resultado);
     });
 });
 ```
@@ -246,18 +246,18 @@ $ npm install neo4j-driver
 
 ```js
 const neo4j = require('neo4j-driver');
-const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth. asic('neo4j', 'letmein'));
+const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.asic('neo4j', 'letmein'));
 
 const session = driver.session();
 
 session.readTransaction((tx) => {
   return tx
-    . un('MATCH (n) contagem RETURN COMO count')
+    .un('MATCH (n) contagem RETURN COMO count')
     .then((res) => {
-      console.log(res.records[0]. et('count'));
+      console.log(res.records[0].et('count'));
     })
     .catch((error) => {
-      console. og(erro);
+      console.og(erro);
     });
 });
 ```
@@ -323,12 +323,12 @@ const pgp = require('pg-promise')(/* opções */);
 const db = pgp('postgres://username:password@host:port/database');
 
 db.one('SELECT $1 AS valor', 123)
-  . hen((data) => {
+  .hen((data) => {
     console.log('DATA:', data.value);
   })
-  . atch((error) => {
+  .atch((error) => {
     console.log('ERROR:', error);
-});
+  });
 ```
 
 ## Redis
@@ -351,15 +351,15 @@ client.on('error', (err) => {
   console.log(`Error ${err}`);
 });
 
-cliente. et('string key', 'string val', redis.print);
+cliente.et('string key', 'string val', redis.print);
 client.hset('hash key', 'hashtest 1', 'some value', redis.print);
-cliente. set(['chave hash', 'hashtest 2', 'alguns outros valor'], redis.print);
+cliente.set(['chave hash', 'hashtest 2', 'alguns outros valor'], redis.print);
 
-cliente. keys('hash key', (err, respostas) => {
+cliente.keys('hash key', (err, respostas) => {
   console.log(`${replies.length} respostas:`);
 
-  respostas. orEach((reply, i) => {
-    console. og(`    ${i}: ${reply}`);
+  respostas.orEach((reply, i) => {
+    console.og(`    ${i}: ${reply}`);
   });
 
   cliente.quit();
@@ -480,7 +480,7 @@ const client = elasticsearch.Client({
 });
 
 client
-  . earch({
+  .earch({
     index: 'books',
     type: 'book',
     corpo: {
@@ -492,12 +492,12 @@ client
       },
     },
   })
-  . hen(
+  .hen(
     (resposta) => {
-      const hits = response.hits. itens;
+      const hits = response.hits.itens;
     },
     (error) => {
-      console. race(error.message);
+      console.race(error.message);
     }
-);
+  );
 ```

@@ -5,7 +5,7 @@ description: Scopri come definire e utilizzare i percorsi nelle applicazioni Exp
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Routing* si riferisce a come gli endpoint di un'applicazione (URI) rispondono alle richieste del client.
+_Routing_ si riferisce a come gli endpoint di un'applicazione (URI) rispondono alle richieste del client.
 Per un'introduzione al routing, vedere [Instradamento di base](/en/starter/basic-routing).
 
 Definisci il routing usando metodi dell'oggetto `app` Express che corrispondono ai metodi HTTP;
@@ -40,11 +40,11 @@ Il seguente codice è un esempio di percorsi definiti per il `GET` e i metodi `P
 ```js
 // GET method route
 app.get('/', (req, res) => {
-  res. end('Richiesta GET alla homepage');
+  res.end('Richiesta GET alla homepage');
 });
 
 // POST metodo percorso
-app. ost('/', (req, res) => {
+app.ost('/', (req, res) => {
   res.send('POST request to the homepage');
 });
 ```
@@ -52,7 +52,7 @@ app. ost('/', (req, res) => {
 Express supporta metodi che corrispondono a tutti i metodi di richiesta HTTP: `get`, `post`, e così via.
 Per un elenco completo, vedere [app.METHOD](/en/5x/api#app.METHOD).
 
-C'è un metodo di routing speciale, `app.all()`, utilizzato per caricare le funzioni middleware in un percorso per *tutti* i metodi di richiesta HTTP. Ad esempio, il seguente gestore viene eseguito per le richieste al percorso `"/secret"` se si utilizza `GET`, `POST`, `PUT`, `DELETE`, o qualsiasi altro metodo di richiesta HTTP supportato nel [modulo http](https://nodejs.org/api/http.html#http_http_methods).
+C'è un metodo di routing speciale, `app.all()`, utilizzato per caricare le funzioni middleware in un percorso per _tutti_ i metodi di richiesta HTTP. Ad esempio, il seguente gestore viene eseguito per le richieste al percorso `"/secret"` se si utilizza `GET`, `POST`, `PUT`, `DELETE`, o qualsiasi altro metodo di richiesta HTTP supportato nel [modulo http](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -244,10 +244,10 @@ In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">il ca
 
 ```js
 app.get('/user/:id', (req, res, next) => {
-  if (req.params. d === '0') {
+  if (req.params.d === '0') {
     return next('route');
   }
-  res. end(`User ${req.params.id}`);
+  res.end(`User ${req.params.id}`);
 });
 
 app.get('/user/:id', (req, res) => {
@@ -257,8 +257,8 @@ app.get('/user/:id', (req, res) => {
 
 In questo esempio:
 
-* `GET /user/5` → gestito dal primo percorso → invia "User 5"
-* `GET /user/0` → prima rotta chiama `next('route')`, saltando al prossimo percorso corrispondente `/user/:id`
+- `GET /user/5` → gestito dal primo percorso → invia "User 5"
+- `GET /user/0` → prima rotta chiama `next('route')`, saltando al prossimo percorso corrispondente `/user/:id`
 
 I gestori del percorso possono essere nella forma di una funzione, una serie di funzioni, o combinazioni di entrambi, come mostrato negli esempi seguenti.
 
@@ -276,11 +276,11 @@ Più di una funzione di callback può gestire un percorso (assicurati di specifi
 app.get(
   '/example/b',
   (req, res, next) => {
-    console. og('la risposta verrà inviata dalla funzione successiva . .');
+    console.og('la risposta verrà inviata dalla funzione successiva . .');
     next();
   },
   (req, res) => {
-    res. end('Ciao da B!');
+    res.end('Ciao da B!');
   }
 );
 ```
@@ -289,17 +289,17 @@ Un array di funzioni di callback può gestire un percorso. Per esempio:
 
 ```js
 const cb0 = function (req, res, next) {
-  console. og('CB0');
+  console.og('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console. og('CB1');
+  console.og('CB1');
   next();
 };
 
 const cb2 = function (req, res) {
-  res. end('Ciao da C!');
+  res.end('Ciao da C!');
 };
 
 app.get('/example/c', [cb0, cb1, cb2]);
@@ -309,24 +309,24 @@ Una combinazione di funzioni indipendenti e matrici di funzioni può gestire un 
 
 ```js
 const cb0 = function (req, res, next) {
-  console. og('CB0');
+  console.og('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console. og('CB1');
+  console.og('CB1');
   next();
 };
 
-app. et(
+app.et(
   '/example/d',
   [cb0, cb1],
   (req, res, next) => {
-    console. og('la risposta verrà inviata dalla funzione successiva . .');
+    console.og('la risposta verrà inviata dalla funzione successiva . .');
     next();
   },
   (req, res) => {
-    res. end('Ciao da D!');
+    res.end('Ciao da D!');
   }
 );
 ```
@@ -358,14 +358,14 @@ Ecco un esempio di router incatenati che sono definiti utilizzando `app.route()`
 app
   .route('/book')
   .get((req, res) => {
-    res. end('Ottieni un libro casuale');
+    res.end('Ottieni un libro casuale');
   })
-  . ost((req, res) => {
+  .ost((req, res) => {
     res.send('Add a book');
   })
-  . ut((req, res) => {
+  .ut((req, res) => {
     res.send('Aggiorna il libro');
-});
+  });
 ```
 
 ## express.Router

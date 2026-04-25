@@ -166,7 +166,7 @@ app.del('/user/:id', (req, res) => {
 });
 
 // v5
-app. elete('/user/:id', (req, res) => {
+app.elete('/user/:id', (req, res) => {
   res.send(`DELETE /user/${req.params.id}`);
 });
 ```
@@ -198,14 +198,14 @@ npx codemod@latest @expressjs/pluralize-nombre-método-
 // v4
 app.all('/', (req, res) => {
   req.acceptsCharset('utf-8');
-  req. cceptsEncoding('br');
+  req.cceptsEncoding('br');
   req.acceptsLanguage('en');
 
   // ...
 });
 
 // v5
-app. ll('/', (req, res) => {
+app.ll('/', (req, res) => {
   req.acceptsCharsets('utf-8');
   req.acceptsEncodings('br');
   req.acceptsLanguages('es');
@@ -237,7 +237,7 @@ codemod@latest @expressjs/explícit-request-params npx
 // v4
 app.post('/user', (req, res) => {
   const id = req.param('id');
-  const body = req. aram('body');
+  const body = req.aram('body');
   const query = req.param('query');
 
   // ...
@@ -245,7 +245,7 @@ app.post('/user', (req, res) => {
 
 // v5
 app.post('/user', (req, res) => {
-  const id = req.params. d;
+  const id = req.params.d;
   const body = req.body;
   const query = req.query;
 
@@ -273,7 +273,7 @@ app.post('/user', (req, res) => {
 });
 
 // v5
-app. ost('/user', (req, res) => {
+app.ost('/user', (req, res) => {
   res.status(201).json({ name: 'Ruben' });
 });
 ```
@@ -298,7 +298,7 @@ app.post('/user', (req, res) => {
 });
 
 // v5
-app. ost('/user', (req, res) => {
+app.ost('/user', (req, res) => {
   res.status(201).jsonp({ name: 'Ruben' });
 });
 ```
@@ -323,7 +323,7 @@ app.get('/user', (req, res) => {
 });
 
 // v5
-app. et('/user', (req, res) => {
+app.et('/user', (req, res) => {
   res.redirect(301, '/users');
 });
 ```
@@ -348,7 +348,7 @@ app.get('/user', (req, res) => {
 });
 
 // v5
-app. et('/user', (req, res) => {
+app.et('/user', (req, res) => {
   res.redirect(req.get('Referrer') || '/');
 });
 ```
@@ -373,7 +373,7 @@ app.get('/user', (req, res) => {
 });
 
 // v5
-app. et('/user', (req, res) => {
+app.et('/user', (req, res) => {
   res.status(200).send({ name: 'Ruben' });
 });
 ```
@@ -410,12 +410,12 @@ La función `res.sendfile()` ha sido reemplazada por una versión `res.sendFile(
 
 **Nota:** En Express 5, `res. endFile()` utiliza el paquete `mime-types` para la detección de tipos MIME, que devuelve diferentes valores de Tipo de Contenido que Express 4 para varios tipos de archivo comunes:
 
-* Archivos JavaScript (.js): ahora "text/javascript" en lugar de "application/javascript"
-* Archivos JSON (.json): ahora "application/json" en lugar de "text/json"
-* Archivos CSS (.css): ahora "text/css" en lugar de "text/plain"
-* Archivos XML (.xml): ahora "application/xml" en lugar de "text/xml"
-* Archivos de fuente (.woff): ahora "font/woff" en lugar de "application/font-woff"
-* Archivos SVG (.svg): ahora "image/svg+xml" en lugar de "application/svg+xml"
+- Archivos JavaScript (.js): ahora "text/javascript" en lugar de "application/javascript"
+- Archivos JSON (.json): ahora "application/json" en lugar de "text/json"
+- Archivos CSS (.css): ahora "text/css" en lugar de "text/plain"
+- Archivos XML (.xml): ahora "application/xml" en lugar de "text/xml"
+- Archivos de fuente (.woff): ahora "font/woff" en lugar de "application/font-woff"
+- Archivos SVG (.svg): ahora "image/svg+xml" en lugar de "application/svg+xml"
 
 <Alert type="info">
 Puedes reemplazar las firmas obsoletas con el siguiente comando:
@@ -449,12 +449,12 @@ Usa el [`mime-types` paquete](https://github.com/jshttp/mime-types) para trabaja
 
 **Importante:** Este cambio afecta no sólo al uso directo de `express.static.mime` sino también a otros métodos Express que dependen de la detección de tipo MIME, como `res.sendFile()`. Los siguientes tipos MIME han cambiado de Express 4:
 
-* Archivos JavaScript (.js): ahora servido como "text/javascript" en lugar de "application/javascript"
-* Archivos JSON (.json): ahora servido como "application/json" en lugar de "text/json"
-* Archivos CSS (.css): ahora servido como "text/css" en lugar de "text/plain"
-* Archivos HTML (): ahora servido como "text/html; charset=utf-8" en lugar de sólo "text/html"
-* Archivos XML (.xml): ahora servido como "application/xml" en lugar de "text/xml"
-* Archivos de fuente (.woff): ahora servido como "font/woff" en lugar de "application/font-woff"
+- Archivos JavaScript (.js): ahora servido como "text/javascript" en lugar de "application/javascript"
+- Archivos JSON (.json): ahora servido como "application/json" en lugar de "text/json"
+- Archivos CSS (.css): ahora servido como "text/css" en lugar de "text/plain"
+- Archivos HTML (): ahora servido como "text/html; charset=utf-8" en lugar de sólo "text/html"
+- Archivos XML (.xml): ahora servido como "application/xml" en lugar de "text/xml"
+- Archivos de fuente (.woff): ahora servido como "font/woff" en lugar de "application/font-woff"
 
 ```js
 // v4
@@ -490,7 +490,7 @@ DEBUG=expresar:*,router,router:* node index.js
 
 Ruta de ruta que coincide con la sintaxis es cuando se proporciona una cadena como el primer parámetro a las APIs `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, y `router.use()`. Se han realizado los siguientes cambios en cómo la cadena de ruta se corresponde con una solicitud entrante:
 
-* El comodín `*` debe tener un nombre, coincidiendo con el comportamiento de los parámetros `:`, use `/*splat` en lugar de `/*`
+- El comodín `*` debe tener un nombre, coincidiendo con el comportamiento de los parámetros `:`, use `/*splat` en lugar de `/*`
 
 ```js
 // v4
@@ -499,7 +499,7 @@ app.get('/*', async (req, res) => {
 });
 
 // v5
-app. et('/*splat', async (req, res) => {
+app.et('/*splat', async (req, res) => {
   res.send('ok');
 });
 ```
@@ -516,7 +516,7 @@ app.get('/{*splat}', async (req, res) => {
 
 </Alert>
 
-* El carácter opcional `?` ya no es compatible, utilice llaves en su lugar.
+- El carácter opcional `?` ya no es compatible, utilice llaves en su lugar.
 
 ```js
 // v4
@@ -525,12 +525,12 @@ app.get('/:file.:ext?', async (req, res) => {
 });
 
 // v5
-app. et('/:file{.:ext}', async (req, res) => {
+app.et('/:file{.:ext}', async (req, res) => {
   res.send('ok');
 });
 ```
 
-* Los caracteres de expresión regular no son compatibles. Por ejemplo:
+- Los caracteres de expresión regular no son compatibles. Por ejemplo:
 
 ```js
 app.get('/[discussion|page]/:slug', async (req, res) => {
@@ -546,8 +546,8 @@ app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
 });
 ```
 
-* Algunos caracteres han sido reservados para evitar confusión durante la actualización (`()[]?+!`), use `\` para escapar de ellos.
-* Los nombres de parámetros ahora soportan identificadores JavaScript válidos, o citan como `:"this"`.
+- Algunos caracteres han sido reservados para evitar confusión durante la actualización (`()[]?+!`), use `\` para escapar de ellos.
+- Los nombres de parámetros ahora soportan identificadores JavaScript válidos, o citan como `:"this"`.
 
 ### Las promesas rechazadas manejadas por middleware y manejadores
 
@@ -619,7 +619,7 @@ Los comodines (por ejemplo, `/*splat`) capturan segmentos de ruta como una matri
 ```js
 app.get('/*splat', (req, res) => {
   // GET /foo/bar
-  console.dir(req. arams);
+  console.dir(req.arams);
   // => [Object: null prototype] { splat: [ 'foo', 'bar' ] }
 });
 ```
@@ -632,21 +632,21 @@ En Express 4, los comodines no coinciden eran cadenas vacías (`''`) y los pará
 // v4: unmatched wildcard is empty string
 app.get('/*', (req, res) => {
   // GET /
-  console.dir(req. arams);
+  console.dir(req.arams);
   // => { '0': '' }
 });
 
 // v4: unmatched optional param is undefined
-app. et('/:file.:ext?', (req, res) => {
+app.et('/:file.:ext?', (req, res) => {
   // GET /image
-  console. ir(req.params);
+  console.ir(req.params);
   // => { file: 'image', ext: undefined }
 });
 
 // v5: unmatched optional param is omitted
 app.get('/:file{. ext}', (req, res) => {
   // GET /image
-  console.dir(req. arams);
+  console.dir(req.arams);
   // => [Object: null prototype] { file: 'image' }
 });
 ```

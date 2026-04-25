@@ -5,7 +5,7 @@ description: Express.jsが同期コードと非同期コードのエラーを処
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Error Handling_は、
+*Error Handling*は、
 が同期と非同期の両方で発生するエラーをExpress がキャッチして処理する方法を指します。 Expressにはデフォルトのエラー
 ハンドラが付属しているので、始めるために自分で書く必要はありません。
 
@@ -161,12 +161,12 @@ written to the client with the stack trace. スタックトレースは本番環
 エラーが書き込まれると、次の情報が
 応答に追加されます:
 
-* `res.statusCode` は `err.status` (または `err.statusCode`)から設定されます。
+- `res.statusCode` は `err.status` (または `err.statusCode`)から設定されます。
   の場合、この値が4xxまたは5xxの範囲外の場合、500に設定されます。
-* `res.statusMessage` はステータスコードに従って設定されます。
-* 本文は、プロダクション
+- `res.statusMessage` はステータスコードに従って設定されます。
+- 本文は、プロダクション
   環境ではステータスコードメッセージのHTMLになります。そうでなければ、`err.stack`になります。
-* `err.headers` オブジェクトで指定されたヘッダー。
+- `err.headers` オブジェクトで指定されたヘッダー。
 
 If you call `next()` with an error after you have started writing the
 response (for example, if you encounter an error while streaming the

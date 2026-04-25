@@ -166,7 +166,7 @@ app.del('/user/:id', (req, res) => {
 });
 
 // v5
-app. elete('/user/:id', (req, res) => {
+app.elete('/user/:id', (req, res) => {
   res.send(`DELETE /user/${req.params.id}`);
 });
 ```
@@ -198,14 +198,14 @@ npx codemod@latest @expressjs/pluralize-method-names
 // v4
 app.all('/', (req, res) => {
   req.acceptsCharset('utf-8');
-  req. cceptsEncoding('br');
+  req.cceptsEncoding('br');
   req.acceptsLanguage('en');
 
   // ...
 });
 
 // v5
-app. ll('/', (req, res) => {
+app.ll('/', (req, res) => {
   req.acceptsCharsets('utf-8');
   req.acceptsEncodings('br');
   req.acceptsLanguages('en');
@@ -237,7 +237,7 @@ npx codemod@latest @expressjs/explicit-request-params
 // v4
 app.post('/user', (req, res) => {
   const id = req.param('id');
-  const body = req. aram('body');
+  const body = req.aram('body');
   const query = req.param('query');
 
   // ...
@@ -245,7 +245,7 @@ app.post('/user', (req, res) => {
 
 // v5
 app.post('/user', (req, res) => {
-  const id = req.params. d;
+  const id = req.params.d;
   const body = req.body;
   const query = req.query;
 
@@ -273,7 +273,7 @@ app.post('/user', (req, res) => {
 });
 
 // v5
-aplicativo. ost('/user', (req, res) => {
+aplicativo.ost('/user', (req, res) => {
   res.status(201).json({ name: 'Ruben' });
 });
 ```
@@ -323,7 +323,7 @@ app.get('/user', (req, res) => {
 });
 
 // v5
-app. et('/user', (req, res) => {
+app.et('/user', (req, res) => {
   res.redirect(301, '/users');
 });
 ```
@@ -373,7 +373,7 @@ app.get('/user', (req, res) => {
 });
 
 // v5
-app. et('/user', (req, res) => {
+app.et('/user', (req, res) => {
   res.status(200).send({ name: 'Ruben' });
 });
 ```
@@ -410,12 +410,12 @@ A função `res.sendfile()` foi substituída por uma versão caída por camelo `
 
 **Nota:** No Expresso 5, `res. endFile()` usa o pacote `mime-types` para detecção do tipo MIME que retorna valores diferentes de Content-Type que Expresso 4 para vários tipos de arquivo comuns:
 
-* Arquivos JavaScript (.js): agora "text/javascript" ao invés de "application/javascript"
-* Arquivos JSON (.json): agora "application/json" em vez de "text/json"
-* Arquivos CSS (.css): agora "text/css" em vez de "text/plain"
-* Arquivos XML (.xml): agora "application/xml" em vez de "text/xml"
-* Arquivos de fonte (.woff): agora "font/woff" em vez de "application/font-woff"
-* Arquivos SVG (.svg): agora "image/svg+xml" em vez de "application/svg+xml"
+- Arquivos JavaScript (.js): agora "text/javascript" ao invés de "application/javascript"
+- Arquivos JSON (.json): agora "application/json" em vez de "text/json"
+- Arquivos CSS (.css): agora "text/css" em vez de "text/plain"
+- Arquivos XML (.xml): agora "application/xml" em vez de "text/xml"
+- Arquivos de fonte (.woff): agora "font/woff" em vez de "application/font-woff"
+- Arquivos SVG (.svg): agora "image/svg+xml" em vez de "application/svg+xml"
 
 <Alert type="informações">
 Você pode substituir as assinaturas obsoletas pelo seguinte comando:
@@ -449,12 +449,12 @@ Use o [pacote `mime-types`](https://github.com/jshttp/mime-types) para trabalhar
 
 **Importante:** Esta alteração afeta não apenas o uso direto de `express.static.mime`, mas também outros métodos Express que dependem da detecção de tipo MIME como `res.sendFile()`. Os seguintes tipos MIME mudaram de Express 4:
 
-* Arquivos JavaScript (.js): agora servido como "text/javascript" em vez de "application/javascript"
-* Arquivos JSON (.json): agora servido como "application/json" em vez de "text/json"
-* Arquivos CSS (.css): agora servido como "text/css" em vez de "text/plain"
-* Arquivos HTML (): agora servido como "text/html; charset=utf-8" ao invés de apenas "text/html"
-* Arquivos XML (.xml): agora servido como "application/xml" ao invés de "text/xml"
-* Arquivos de fonte (.woff): agora servido como "font/woff" em vez de "application/font-woff"
+- Arquivos JavaScript (.js): agora servido como "text/javascript" em vez de "application/javascript"
+- Arquivos JSON (.json): agora servido como "application/json" em vez de "text/json"
+- Arquivos CSS (.css): agora servido como "text/css" em vez de "text/plain"
+- Arquivos HTML (): agora servido como "text/html; charset=utf-8" ao invés de apenas "text/html"
+- Arquivos XML (.xml): agora servido como "application/xml" ao invés de "text/xml"
+- Arquivos de fonte (.woff): agora servido como "font/woff" em vez de "application/font-woff"
 
 ```js
 // v4
@@ -490,7 +490,7 @@ DEBUG=express:*,router,router:* node index.js
 
 A sintaxe de rota de correspondência de um caminho é quando uma string é fornecida como o primeiro parâmetro para o `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, and `router.use()` APIs. As seguintes alterações foram feitas em como a seqüência de caracteres de caminho é combinada para uma solicitação de entrada:
 
-* O caractere curinga `*` deve ter um nome, correspondendo ao comportamento dos parâmetros `:`, use `/*splat` em vez de `/*`
+- O caractere curinga `*` deve ter um nome, correspondendo ao comportamento dos parâmetros `:`, use `/*splat` em vez de `/*`
 
 ```js
 // v4
@@ -499,7 +499,7 @@ app.get('/*', async (req, res) => {
 });
 
 // v5
-app. et('/*splat', async (req, res) => {
+app.et('/*splat', async (req, res) => {
   res.send('ok');
 });
 ```
@@ -516,7 +516,7 @@ app.get('/{*splat}', async (req, res) => {
 
 </Alert>
 
-* O caractere opcional `?` não é mais suportado, use chaves em vez disso.
+- O caractere opcional `?` não é mais suportado, use chaves em vez disso.
 
 ```js
 // v4
@@ -530,7 +530,7 @@ app.get('/:file{.:ext}', async (req, res) => {
 });
 ```
 
-* Caracteres Regexp não são suportados. Por exemplo:
+- Caracteres Regexp não são suportados. Por exemplo:
 
 ```js
 app.get('/[discussionőpage]/:slug', async (req, res) => {
@@ -546,8 +546,8 @@ app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
 });
 ```
 
-* Alguns personagens foram reservados para evitar confusão durante a atualização (`()[]?+!`), use `\` para escapá-los.
-* Os nomes de parâmetros agora suportam identificadores JavaScript válidos, ou citados como `:"isto"`.
+- Alguns personagens foram reservados para evitar confusão durante a atualização (`()[]?+!`), use `\` para escapá-los.
+- Os nomes de parâmetros agora suportam identificadores JavaScript válidos, ou citados como `:"isto"`.
 
 ### promessas rejeitadas tratadas de intermediários e manipuladores
 
@@ -619,7 +619,7 @@ Caracteres curinga (por exemplo, `/*splat`) capturam segmentos de caminho como u
 ```js
 app.get('/*splat', (req, res) => {
   // GET /foo/bar
-  console.dir(req. arams);
+  console.dir(req.arams);
   // => [Objeto: null prototype] { splat: [ 'foo', 'bar' ] }
 });
 ```
@@ -632,21 +632,21 @@ No Expresso 4, os caracteres curinga eram strings vazias (`''`) e parâmetros op
 // v4: curinga sem comparação é uma string vazia
 app.get('/*', (req, res) => {
   // GET /
-  console.dir(req. arams);
+  console.dir(req.arams);
   // => { '0': '' }
 });
 
 // v4: parâmetro opcional não correspondente é indefinido
-aplicativo. et('/:file.:ext?', (req, res) => {
+aplicativo.et('/:file.:ext?', (req, res) => {
   // GET /image
-  console. ir(req.params);
+  console.ir(req.params);
   // => { file: 'image', ext: undefined }
 });
 
 // v5: param opcional não comparado é omitido
 app.get('/:file{. ext}', (req, res) => {
   // GET /image
-  console.dir(req. arams);
+  console.dir(req.arams);
   // => [Object: null prototype] { file: 'image' }
 });
 ```

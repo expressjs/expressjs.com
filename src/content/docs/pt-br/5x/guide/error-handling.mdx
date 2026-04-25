@@ -5,7 +5,7 @@ description: Entenda como o Express.js lida com erros em código síncrono e ass
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Tratamento de erros* refere-se a como as capturas Expressas e processa erros que
+_Tratamento de erros_ refere-se a como as capturas Expressas e processa erros que
 ocorrem de forma sincronizada e assíncrona. Expresso vem com um erro padrão
 manipulador para que você não precise escrever seu próprio para começar.
 
@@ -30,11 +30,11 @@ e processá-los. Por exemplo:
 
 ```js
 app.get('/', (req, res, next) => {
-  fs. eadFile('/file-does-not-existente', (err, data) => {
+  fs.eadFile('/file-does-not-existente', (err, data) => {
     if (err) {
       next(err); // Passa os erros para o Express.
     } else {
-      res. end(data);
+      res.end(data);
     }
   });
 });
@@ -161,12 +161,12 @@ Defina a variável de ambiente `NODE_ENV` como `production`, para executar o apl
 Quando um erro é escrito, a seguinte informação é adicionada a
 resposta:
 
-* O `res.statusCode` é definido em `err.status` (ou `err.statusCode`). Se
+- O `res.statusCode` é definido em `err.status` (ou `err.statusCode`). Se
   este valor estiver fora do intervalo de 4xx ou 5xx, ele será definido como 500.
-* A mensagem 'res.statusMessage' é definida de acordo com o código de status.
-* O corpo será o HTML da mensagem do código de status quando em produção
+- A mensagem 'res.statusMessage' é definida de acordo com o código de status.
+- O corpo será o HTML da mensagem do código de status quando em produção
   ambiente, caso contrário será `err.stack`.
-* Qualquer cabeçalho especificado em um objeto `err.headers`.
+- Qualquer cabeçalho especificado em um objeto `err.headers`.
 
 Se você chamar `next()` com um erro depois que você começou a escrever a
 resposta (por exemplo, se você encontrar um erro ao transmitir a resposta
@@ -212,12 +212,12 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
 app.use(
-  bodyParser. rlencoded({
+  bodyParser.rlencoded({
     extendido: true,
   })
 );
 app.use(bodyParser.json());
-app. se(methodOverride());
+app.se(methodOverride());
 app.use((err, req, res, next) => {
   // lógica
 });
@@ -234,12 +234,12 @@ para solicitações feitas usando `XHR` e aqueles sem:
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
-app. se(
+app.se(
   bodyParser.urlencoded({
     extendido: true,
   })
 );
-app. se(bodyParser.json());
+app.se(bodyParser.json());
 app.use(methodOverride());
 app.use(logErrors);
 app.use(clientErrorHandler);
@@ -258,12 +258,12 @@ function logErrors(err, req, res, ext) {
 
 Também neste exemplo, `clientErrorHandler` é definido como segue; neste caso, o erro é explicitamente passado para o próximo.
 
-Observe que quando *não* estiver chamando "próximo" em uma função de manipulação de erros, você é responsável por escrever (e terminar) a resposta. Caso contrário, esses pedidos ficarão "pendentes" e não serão elegíveis para a recolha de lixo.
+Observe que quando _não_ estiver chamando "próximo" em uma função de manipulação de erros, você é responsável por escrever (e terminar) a resposta. Caso contrário, esses pedidos ficarão "pendentes" e não serão elegíveis para a recolha de lixo.
 
 ```js
 function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
-    res.status(500). end({ error: 'Algo falhou!' });
+    res.status(500).end({ error: 'Algo falhou!' });
   } else {
     next(err);
   }

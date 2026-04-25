@@ -7,19 +7,19 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Adding the capability to connect databases to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node.js modules for database systems in your Express app:
 
-* [Cassandra](#cassandra)
-* [Couchbase](#couchbase)
-* [CouchDB](#couchdb)
-* [LevelDB](#leveldb)
-* [MySQL](#mysql)
-* [MongoDB](#mongodb)
-* [Neo4j](#neo4j)
-* [Oracle](#oracle)
-* [PostgreSQL](#postgresql)
-* [Redis](#redis)
-* [SQL Server](#sql-server)
-* [SQLite](#sqlite)
-* [Elasticsearch](#elasticsearch)
+- [Cassandra](#cassandra)
+- [Couchbase](#couchbase)
+- [CouchDB](#couchdb)
+- [LevelDB](#leveldb)
+- [MySQL](#mysql)
+- [MongoDB](#mongodb)
+- [Neo4j](#neo4j)
+- [Oracle](#oracle)
+- [PostgreSQL](#postgresql)
+- [Redis](#redis)
+- [SQL Server](#sql-server)
+- [SQLite](#sqlite)
+- [Elasticsearch](#elasticsearch)
 
 <Alert type="alert">
 
@@ -192,7 +192,7 @@ connection.end();
 $ npm install mongodb
 ```
 
-### Example (v2.*)
+### Example (v2.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -210,7 +210,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
 });
 ```
 
-### Example (v3.*)
+### Example (v3.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;

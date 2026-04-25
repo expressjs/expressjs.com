@@ -5,7 +5,7 @@ description: Learn how to define and use routes in Express.js applications, incl
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Routing* refers to how an application's endpoints (URIs) respond to client requests.
+_Routing_ refers to how an application's endpoints (URIs) respond to client requests.
 For an introduction to routing, see [Basic routing](/en/starter/basic-routing).
 
 You define routing using methods of the Express `app` object that correspond to HTTP methods;
@@ -52,7 +52,7 @@ app.post('/', (req, res) => {
 Express supports methods that correspond to all HTTP request methods: `get`, `post`, and so on.
 For a full list, see [app.METHOD](/en/5x/api#app.METHOD).
 
-There is a special routing method, `app.all()`, used to load middleware functions at a path for *all* HTTP request methods. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
+There is a special routing method, `app.all()`, used to load middleware functions at a path for _all_ HTTP request methods. For example, the following handler is executed for requests to the route `"/secret"` whether using `GET`, `POST`, `PUT`, `DELETE`, or any other HTTP request method supported in the [http module](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -257,8 +257,8 @@ app.get('/user/:id', (req, res) => {
 
 In this example:
 
-* `GET /user/5` → handled by first route → sends "User 5"
-* `GET /user/0` → first route calls `next('route')`, skipping to the next matching `/user/:id` route
+- `GET /user/5` → handled by first route → sends "User 5"
+- `GET /user/0` → first route calls `next('route')`, skipping to the next matching `/user/:id` route
 
 Route handlers can be in the form of a function, an array of functions, or combinations of both, as shown in the following examples.
 

@@ -5,7 +5,7 @@ description: Verstehen Sie, wie Express.js Fehler im synchronen und asynchronen 
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Error Handling* bezieht sich darauf, wie Express Fehler fängt und verarbeitet, die
+_Error Handling_ bezieht sich darauf, wie Express Fehler fängt und verarbeitet, die
 sowohl synchron als auch asynchron auftritt. Express kommt mit einem Standardfehler
 \-Handler, damit Sie nicht Ihren eigenen schreiben müssen, um loszulegen.
 
@@ -30,11 +30,11 @@ catch and process them. Zum Beispiel:
 
 ```js
 app.get('/', (req, res, next) => {
-  fs. eadFile('/file-does-not-exist', (err, data) => {
+  fs.eadFile('/file-does-not-exist', (err, data) => {
     if (err) {
       next(err); // Fehler an Express übergeben.
     } else {
-      res. end(data);
+      res.end(data);
     }
   });
 });
@@ -161,12 +161,12 @@ Setze die Umgebungsvariable `NODE_ENV` auf `production`, um die App im Produktio
 Wenn ein Fehler geschrieben wird, werden folgende Informationen zur Antwort
 hinzugefügt:
 
-* Der `res.statusCode` wurde von `err.status` (oder `err.statusCode`) gesetzt. Wenn
+- Der `res.statusCode` wurde von `err.status` (oder `err.statusCode`) gesetzt. Wenn
   sich dieser Wert außerhalb des 4xx oder 5xx Bereichs befindet, wird er auf 500 gesetzt.
-* Die `res.statusMessage` wurde gemäß dem Statuscode gesetzt.
-* Der Körper wird der HTML-Code der Statuscode-Nachricht sein, wenn in der Produktion
+- Die `res.statusMessage` wurde gemäß dem Statuscode gesetzt.
+- Der Körper wird der HTML-Code der Statuscode-Nachricht sein, wenn in der Produktion
   \-Umgebung, andernfalls 'err.stack' ist.
-* Alle in einem `err.headers` Objekt angegebenen Header.
+- Alle in einem `err.headers` Objekt angegebenen Header.
 
 Wenn du `next()` mit einem Fehler aufruft, nachdem du die
 Antwort geschrieben hast (z. B. wenn beim Streamen der
@@ -212,12 +212,12 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
 app.use(
-  bodyParser. rlencoded({
+  bodyParser.rlencoded({
     extended: true,
   })
 );
 app.use(bodyParser.json());
-app. se(methodOverride());
+app.se(methodOverride());
 app.use((err, req, res, next) => {
   // Logik
 });
@@ -234,12 +234,12 @@ für Anfragen mit `XHR` und denen ohne folgende zu definieren:
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
-app. se(
+app.se(
   bodyParser.urlencoded({
     extended: true,
   })
 );
-app. se(bodyParser.json());
+app.se(bodyParser.json());
 app.use(methodOverride());
 app.use(logErrors);
 app.use(clientErrorHandler);
@@ -258,12 +258,12 @@ function logErrors(err, req, res, next) {
 
 Auch in diesem Beispiel wird `clientErrorHandler` wie folgt definiert; in diesem Fall wird der Fehler explizit an den nächsten weitergegeben.
 
-Beachten Sie, dass, wenn *not* in einer Fehlerbehandlungsfunktion "Weiter" aufruft, Sie dafür verantwortlich sind, die Antwort zu schreiben (und zu beenden). Andernfalls werden diese Anträge "hängen" und sind nicht für die Müllsammlung berechtigt.
+Beachten Sie, dass, wenn _not_ in einer Fehlerbehandlungsfunktion "Weiter" aufruft, Sie dafür verantwortlich sind, die Antwort zu schreiben (und zu beenden). Andernfalls werden diese Anträge "hängen" und sind nicht für die Müllsammlung berechtigt.
 
 ```js
 function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
-    res.status(500). end({ error: 'Something failed!' });
+    res.status(500).end({ error: 'Something failed!' });
   } else {
     next(err);
   }
@@ -285,7 +285,7 @@ Wenn du einen Route-Handler mit mehreren Callback-Funktionen hast, kannst du den
 app.get(
   '/a_route_behind_paywall',
   (req, res, next) => {
-    if (!req.user. asPaid) {
+    if (!req.user.asPaid) {
       // weitere Bearbeitung dieser Anfrage
       next('route');
     } else {
@@ -293,9 +293,9 @@ app.get(
     }
   },
   (req, res, next) => {
-    PaidContent. ind((err, doc) => {
+    PaidContent.ind((err, doc) => {
       if (err) return next(err);
-      res. son(doc);
+      res.son(doc);
     });
   }
 );

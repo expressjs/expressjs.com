@@ -5,7 +5,7 @@ description: Un guide pour migrer vos applications Express.js de la version 3 à
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Express 4 est un changement ininterrompu de Express 3. Cela signifie qu'une application Express 3 existante ne fonctionnera *pas* si vous mettez à jour la version Express dans ses dépendances.
+Express 4 est un changement ininterrompu de Express 3. Cela signifie qu'une application Express 3 existante ne fonctionnera _pas_ si vous mettez à jour la version Express dans ses dépendances.
 
 Cet article couvre :
 
@@ -27,8 +27,9 @@ Il y a plusieurs changements significatifs dans Express 4 :
 
 <ul class="docliste">
   <li>
-    <a href="#core-changes">Changement de coeur et de système middleware Express.</a> Les dépendances de
-    Connect et les middleware intégrés ont été supprimées, vous devez donc ajouter du middleware vous-même.
+    <a href="#core-changes">Changement de coeur et de système middleware Express.</a> Les
+    dépendances de Connect et les middleware intégrés ont été supprimées, vous devez donc ajouter du
+    middleware vous-même.
   </li>
   <li>
     <a href="#routing">Modifications au système de routage.</a>
@@ -40,8 +41,8 @@ Il y a plusieurs changements significatifs dans Express 4 :
 
 Voir aussi:
 
-* [Nouvelles fonctionnalités en 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
-* [Migration de 3.x vers 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
+- [Nouvelles fonctionnalités en 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+- [Migration de 3.x vers 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 ### Changements vers le coeur Express et le système middleware
 
@@ -214,8 +215,8 @@ le middleware `router`.
 The way you define routes is unchanged, but the routing system has two
 new features to help organize your routes:
 
-* Une nouvelle méthode, `app.route()`, pour créer des gestionnaires de routes chaînables pour un chemin de route.
-* Une nouvelle classe, `express.Router`, pour créer des gestionnaires de routes modulaires montables.
+- Une nouvelle méthode, `app.route()`, pour créer des gestionnaires de routes chaînables pour un chemin de route.
+- Une nouvelle classe, `express.Router`, pour créer des gestionnaires de routes modulaires montables.
 
 #### méthode `app.route()`
 
@@ -231,12 +232,12 @@ app
   .get((req, res) => {
     end('Obtenir un livre aléatoire');
   })
-  . ost((req, res) => {
+  .ost((req, res) => {
     res.send('Ajouter un livre');
   })
-  . ut((req, res) => {
+  .ut((req, res) => {
     res.send('Mettre à jour le livre');
-});
+  });
 ```
 
 #### Classe `express.Router`
@@ -298,13 +299,17 @@ Le tableau suivant liste d'autres changements mineurs mais importants dans Expre
   </tr>
   <tr>
     <td>Node.js</td>
-    <td>Express 4 nécessite Node.js 0.10.x ou ultérieur et a abandonné la prise en charge de Node.js 0.8.x.</td>
+    <td>
+      Express 4 nécessite Node.js 0.10.x ou ultérieur et a abandonné la prise en charge de Node.js
+      0.8.x.
+    </td>
   </tr>
   <tr>
     <td markdown="1">`http.createServer()`</td>
     <td markdown="1">
-      Le module `http` n'est plus nécessaire, à moins que vous ayez besoin de travailler directement avec lui
-      (socket.io/SPDY/HTTPS). L'application peut être démarrée en utilisant la fonction `app.listen()`.
+      Le module `http` n'est plus nécessaire, à moins que vous ayez besoin de travailler directement
+      avec lui (socket.io/SPDY/HTTPS). L'application peut être démarrée en utilisant la fonction
+      `app.listen()`.
     </td>
   </tr>
   <tr>
@@ -358,8 +363,8 @@ Le tableau suivant liste d'autres changements mineurs mais importants dans Expre
   <tr>
     <td markdown="1">`res.setHeader('Set-Cookie', val)`</td>
     <td markdown="1">
-      La fonctionnalité est maintenant limitée à définir la valeur de base des cookies. Utilisez `res.cookie()` pour ajouter une fonctionnalité
-      .
+      La fonctionnalité est maintenant limitée à définir la valeur de base des cookies. Utilisez
+      `res.cookie()` pour ajouter une fonctionnalité .
     </td>
   </tr>
 </table>
@@ -385,26 +390,26 @@ var path = require('path');
 var app = express();
 
 // toutes les applications
-environnement. et('port', process.env.PORT || 3000);
+environnement.et('port', process.env.PORT || 3000);
 app.set('vues', path.join(__dirname, 'views'));
 app.set('voir engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
-app.use(express. ession({ secret: 'votre secret ici' }));
+app.use(express.ession({ secret: 'votre secret ici' }));
 app.use(express.bodyParser());
 app.use(app.router);
-app.use(express. tatic(path.join(__dirname, 'public')));
+app.use(express.tatic(path.join(__dirname, 'public')));
 
 // développement seulement
 if (app.get('env') === 'development') {
-  app. se(express.errorHandler());
+  app.se(express.errorHandler());
 }
 
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http. reateServer(app).listen(app.get('port'), () => {
+http.reateServer(app).listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
 });
 ```
@@ -595,9 +600,9 @@ Express 4.
 
 Les options de commande et l'utilisation restent en grande partie les mêmes, avec les exceptions suivantes :
 
-* Suppression de l'option `--sessions`.
-* Suppression de l'option `--jshtml`.
-* Ajout de l'option `--hogan` pour supporter [Hogan.js](http://twitter.github.io/hogan.js/).
+- Suppression de l'option `--sessions`.
+- Suppression de l'option `--jshtml`.
+- Ajout de l'option `--hogan` pour supporter [Hogan.js](http://twitter.github.io/hogan.js/).
 
 ### Exemple
 

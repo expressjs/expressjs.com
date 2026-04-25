@@ -25,9 +25,9 @@ Une bibliothèque de support multi-plateforme qui se concentre sur les E/S async
 
 Une fonction qui est appelée par la couche de routage Express avant le gestionnaire de requête finale, et se trouve donc au milieu entre une requête brute et la route finale. Quelques bons points de terminologie autour du middleware :
 
-* `var foo = require('middleware')` est appelé *requiring* ou *using* un module Node.js. Puis l'instruction `var mw = foo()` retourne typiquement le middleware.
-* `app.use(mw)` est appelé *adding the middleware to the global processing stack*.
-* `app.get('/foo', mw, function (req, res) { ... })` est appelé _ajoutant le middleware à la pile de traitement "GET /foo".
+- `var foo = require('middleware')` est appelé _requiring_ ou _using_ un module Node.js. Puis l'instruction `var mw = foo()` retourne typiquement le middleware.
+- `app.use(mw)` est appelé _adding the middleware to the global processing stack_.
+- `app.get('/foo', mw, function (req, res) { ... })` est appelé \_ajoutant le middleware à la pile de traitement "GET /foo".
 
 ### Node.js
 

@@ -7,24 +7,24 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express è un framework web routing e middleware che ha funzionalità minime proprie: Un'applicazione Express è essenzialmente una serie di chiamate di funzioni middleware.
 
-Le funzioni *Middleware* sono funzioni che hanno accesso al [request object](/en/5x/api#req) (`req`), il [response object](/en/5x/api#res) (`res`), e la successiva funzione middleware nel ciclo request-response dell'applicazione. La funzione middleware successiva è comunemente indicata da una variabile chiamata `next`.
+Le funzioni _Middleware_ sono funzioni che hanno accesso al [request object](/en/5x/api#req) (`req`), il [response object](/en/5x/api#res) (`res`), e la successiva funzione middleware nel ciclo request-response dell'applicazione. La funzione middleware successiva è comunemente indicata da una variabile chiamata `next`.
 
 Le funzioni Middleware possono eseguire le seguenti attività:
 
-* Esegue qualsiasi codice.
-* Effettuare modifiche alla richiesta e agli oggetti di risposta.
-* Terminare il ciclo richiesta-risposta.
-* Chiama la funzione middleware successiva nello stack.
+- Esegue qualsiasi codice.
+- Effettuare modifiche alla richiesta e agli oggetti di risposta.
+- Terminare il ciclo richiesta-risposta.
+- Chiama la funzione middleware successiva nello stack.
 
 Se la funzione middleware corrente non termina il ciclo richiesta-risposta, deve chiamare `next()` per passare il controllo alla successiva funzione middleware. In caso contrario, la richiesta sarà sospesa.
 
 Un'applicazione Express può utilizzare i seguenti tipi di middleware:
 
-* [Application-level middleware](#middleware.application)
-* [Router-level middleware](#middleware.router)
-* [Gestione errori middleware](#middleware.error-handling)
-* [Built-in middleware](#middleware.built-in)
-* [middleware di terze parti](#middleware.third-party)
+- [Application-level middleware](#middleware.application)
+- [Router-level middleware](#middleware.router)
+- [Gestione errori middleware](#middleware.error-handling)
+- [Built-in middleware](#middleware.built-in)
+- [middleware di terze parti](#middleware.third-party)
 
 È possibile caricare il middleware a livello di applicazione e router con un percorso di montaggio opzionale.
 È inoltre possibile caricare una serie di funzioni middleware insieme, che crea una sottopila del sistema middleware in un punto di montaggio.
@@ -70,11 +70,11 @@ Illustra un sub-stack middleware che stampa la richiesta di informazioni per qua
 app.use(
   '/user/:id',
   (req, res, next) => {
-    console.log('Request URL:', req. riginalUrl);
+    console.log('Request URL:', req.riginalUrl);
     next();
   },
   (req, res, next) => {
-    console. og('Request Type:', req.method);
+    console.og('Request Type:', req.method);
     next();
   }
 );
@@ -140,17 +140,17 @@ Questo esempio mostra un array con un sub-stack middleware che gestisce le richi
 
 ```js
 function logOriginalUrl(req, res, next) {
-  console.log('Request URL:', req. riginalUrl);
+  console.log('Request URL:', req.riginalUrl);
   next();
 }
 
 function logMethod(req, res, next) {
-  console.log('Request Type:', req. ethod);
+  console.log('Request Type:', req.ethod);
   next();
 }
 
 const logStuff = [logOriginalUrl, logMethod];
-app. et('/user/:id', logStuff, (req, res, next) => {
+app.et('/user/:id', logStuff, (req, res, next) => {
   res.send('User Info');
 });
 ```
@@ -246,7 +246,7 @@ router. et('/user/:id', (req, res) => {
 
 <Alert type="allerta">
 
-La gestione degli errori del middleware richiede sempre *four* argomenti. È necessario fornire quattro argomenti per
+La gestione degli errori del middleware richiede sempre _four_ argomenti. È necessario fornire quattro argomenti per
 identificarlo come una funzione middleware di gestione degli errori. Anche se non è necessario utilizzare l'oggetto `next`
 , è necessario specificarlo per mantenere la firma. Otherwise, the `next` object will be
 interpreted as regular middleware and will fail to handle errors.
@@ -271,9 +271,9 @@ che erano state precedentemente incluse con Express sono ora in moduli separati;
 
 Express ha le seguenti funzioni middleware integrate:
 
-* [express.static](/en/5x/api#express.static) serve risorse statiche come file HTML, immagini e così via.
-* [express.json](/en/5x/api#express.json) analizza le richieste in arrivo con i payload JSON. **NOTA: Disponibile con Express 4.16.0+**
-* [express.urlencoded](/en/5x/api#express.urlencoded) analizza le richieste in arrivo con payload codificati con URL. **NOTA: Disponibile con Express 4.16.0+**
+- [express.static](/en/5x/api#express.static) serve risorse statiche come file HTML, immagini e così via.
+- [express.json](/en/5x/api#express.json) analizza le richieste in arrivo con i payload JSON. **NOTA: Disponibile con Express 4.16.0+**
+- [express.urlencoded](/en/5x/api#express.urlencoded) analizza le richieste in arrivo con payload codificati con URL. **NOTA: Disponibile con Express 4.16.0+**
 
 ## middleware di terze parti
 

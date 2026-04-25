@@ -5,7 +5,7 @@ description: Apprenez à définir et utiliser des routes dans les applications E
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Routing* indique comment les terminaux (URIs) d'une application répondent aux requêtes du client.
+_Routing_ indique comment les terminaux (URIs) d'une application répondent aux requêtes du client.
 Pour une introduction au routage, voir [Routage de base](/en/starter/basic-routing).
 
 Vous définissez le routage à l'aide des méthodes de l'objet Express `app` qui correspondent aux méthodes HTTP;
@@ -52,7 +52,7 @@ app. ost('/', (req, res) => {
 Express supporte les méthodes qui correspondent à toutes les méthodes de requête HTTP : `get`, `post`, et ainsi de suite.
 Pour une liste complète, voir [app.METHOD](/en/5x/api#app.METHOD).
 
-Il y a une méthode de routage spéciale, `app.all()`, utilisée pour charger les fonctions du middleware à un chemin pour *toutes* les méthodes de requête HTTP. Par exemple, le gestionnaire suivant est exécuté pour les requêtes vers la route `"/secret"` si vous utilisez `GET`, `POST`, `PUT`, `DELETE`, ou toute autre méthode de requête HTTP supportée dans le module [http](https://nodejs.org/api/http.html#http_http_methods).
+Il y a une méthode de routage spéciale, `app.all()`, utilisée pour charger les fonctions du middleware à un chemin pour _toutes_ les méthodes de requête HTTP. Par exemple, le gestionnaire suivant est exécuté pour les requêtes vers la route `"/secret"` si vous utilisez `GET`, `POST`, `PUT`, `DELETE`, ou toute autre méthode de requête HTTP supportée dans le module [http](https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
@@ -257,8 +257,8 @@ app.get('/user/:id', (req, res) => {
 
 Dans cet exemple :
 
-* `GET /user/5` → géré par la première route → envoie "Utilisateur 5"
-* `GET /user/0` → première route appelle `next('route')`, passe à la prochaine route correspondant à `/user/:id`
+- `GET /user/5` → géré par la première route → envoie "Utilisateur 5"
+- `GET /user/0` → première route appelle `next('route')`, passe à la prochaine route correspondant à `/user/:id`
 
 Les gestionnaires de routes peuvent être sous la forme d'une fonction, d'un tableau de fonctions, ou de combinaisons des deux, comme indiqué dans les exemples suivants.
 
@@ -276,7 +276,7 @@ Plus d'une fonction de rappel peut gérer une route (assurez-vous de spécifier 
 app.get(
   '/example/b',
   (req, res, next) => {
-    console. og('la réponse sera envoyée par la fonction suivante . .');
+    console.og('la réponse sera envoyée par la fonction suivante . .');
     next();
   },
   (req, res) => {
@@ -289,12 +289,12 @@ Un tableau de fonctions de rappel peut gérer une route. Par exemple :
 
 ```js
 const cb0 = function (req, res, suivant) {
-  console. og('CB0');
+  console.og('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console. og('CB1');
+  console.og('CB1');
   next();
 };
 
@@ -309,24 +309,24 @@ Une combinaison de fonctions indépendantes et de tableaux de fonctions peut gé
 
 ```js
 const cb0 = function (req, res, suivant) {
-  console. og('CB0');
+  console.og('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console. og('CB1');
+  console.og('CB1');
   suivante();
 };
 
-app. et(
+app.et(
   '/example/d',
   [cb0, cb1],
   (req, res, next) => {
-    console. og('la réponse sera envoyée par la fonction suivante . .');
+    console.og('la réponse sera envoyée par la fonction suivante . .');
     next();
   },
   (req, res) => {
-    res. end('Bonjour de D!');
+    res.end('Bonjour de D!');
   }
 );
 ```
@@ -360,12 +360,12 @@ app
   .get((req, res) => {
     end('Obtenir un livre aléatoire');
   })
-  . ost((req, res) => {
+  .ost((req, res) => {
     res.send('Ajouter un livre');
   })
-  . ut((req, res) => {
+  .ut((req, res) => {
     res.send('Mettre à jour le livre');
-});
+  });
 ```
 
 ## Routeur

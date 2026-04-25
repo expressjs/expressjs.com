@@ -8,7 +8,7 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 <Alert type="info">
 
 Incorporato qui sotto è essenzialmente l'app Express più semplice che puoi creare. Si tratta di un singolo file app
-&mdash; *non* quello che si otterrebbe se si utilizza il [Express generator](/en/starter/generator), che
+&mdash; _non_ quello che si otterrebbe se si utilizza il [Express generator](/en/starter/generator), che
 crea il ponteggio per un'app completa con numerosi file JavaScript, modelli Jade e sottodirectory
 per vari scopi.
 
@@ -20,7 +20,7 @@ const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => {
-  res. end('Hello World!');
+  res.end('Hello World!');
 });
 
 app.listen(port, () => {
@@ -29,7 +29,7 @@ app.listen(port, () => {
 ```
 
 Questa app avvia un server e ascolta la porta 3000 per le connessioni. L'app risponde con "Ciao Mondo!" per le richieste
-all'URL radice (`/`) o *route*. Per ogni altro percorso, risponderà con un **404 non trovato**.
+all'URL radice (`/`) o _route_. Per ogni altro percorso, risponderà con un **404 non trovato**.
 
 ## Esecuzione Localmente
 

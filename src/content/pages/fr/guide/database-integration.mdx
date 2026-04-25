@@ -7,19 +7,19 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Ajouter la possibilité de connecter des bases de données à des applications Express est juste une question de charger un pilote Node.js approprié pour la base de données dans votre application. Ce document explique brièvement comment ajouter et utiliser certains des modules Node.js les plus populaires pour les systèmes de base de données dans votre application Express :
 
-* [Cassandra](#cassandra)
-* [Couchbase](#couchbase)
-* [CouchDB](#couchdb)
-* [LevelDB](#leveldb)
-* [MySQL](#mysql)
-* [MongoDB](#mongodb)
-* [Neo4j](#neo4j)
-* [Oracle](#oracle)
-* [PostgreSQL](#postgresql)
-* [Redis](#redis)
-* [Serveur SQL](#sql-server)
-* [SQLite](#sqlite)
-* [Elasticsearch](#elasticsearch)
+- [Cassandra](#cassandra)
+- [Couchbase](#couchbase)
+- [CouchDB](#couchdb)
+- [LevelDB](#leveldb)
+- [MySQL](#mysql)
+- [MongoDB](#mongodb)
+- [Neo4j](#neo4j)
+- [Oracle](#oracle)
+- [PostgreSQL](#postgresql)
+- [Redis](#redis)
+- [Serveur SQL](#sql-server)
+- [SQLite](#sqlite)
+- [Elasticsearch](#elasticsearch)
 
 <Alert type="Alerte">
 
@@ -44,7 +44,7 @@ $ npm install cassandra-driver
 const cassandra = require('cassandra-driver');
 const client = new cassandra.Client({ contactPoints: ['localhost'] });
 
-client. xecute('select key from system.local', (err, result) => {
+client.xecute('select key from system.local', (err, result) => {
   if (err) throw err;
   console.log(result.rows[0]);
 });
@@ -139,11 +139,11 @@ $ npm install levelup levelup level down
 const levelup = require('levelup');
 const db = levelup('./mydb');
 
-db. ut('name', 'LevelUP', (err) => {
+db.ut('name', 'LevelUP', (err) => {
   if (err) return console.log('Ooops!', err);
 
-  db. et('name', (err, value) => {
-    if (err) return console. og('Ooops!', err);
+  db.et('name', (err, value) => {
+    if (err) return console.og('Ooops!', err);
 
     console.log(`name=${value}`);
   });
@@ -164,19 +164,19 @@ $ npm install mysql
 
 ```js
 const mysql = require('mysql');
-const connection = mysql. reateConnection({
+const connection = mysql.reateConnection({
   hôte: 'localhost',
   user: 'dbuser',
   password: 's3kreee7',
   database: 'my_db',
 });
 
-connexion. onnect();
+connexion.onnect();
 
 connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
   if (err) throw err;
 
-  console. og('La solution est : ', lignes[0].solution);
+  console.og('La solution est : ', lignes[0].solution);
 });
 
 connection.end();
@@ -192,7 +192,7 @@ connection.end();
 $ npm install mongodb
 ```
 
-### Exemple (v2.*)
+### Exemple (v2.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -210,7 +210,7 @@ MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
 });
 ```
 
-### Exemple (v3.*)
+### Exemple (v3.\*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -246,18 +246,18 @@ $ npm install neo4j-driver
 
 ```js
 const neo4j = require('neo4j-driver');
-const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth. asic('neo4j', 'letmein'));
+const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.asic('neo4j', 'letmein'));
 
 const session = driver.session();
 
 session.readTransaction((tx) => {
   return tx
-    . un('MATCH (n) RETURN count(n) AS count')
+    .un('MATCH (n) RETURN count(n) AS count')
     .then((res) => {
-      console.log(res.records[0]. et('count'));
+      console.log(res.records[0].et('count'));
     })
     .catch((error) => {
-      console. og(erreur);
+      console.og(erreur);
     });
 });
 ```
@@ -323,12 +323,12 @@ const pgp = require('pg-promise')(/* options */);
 const db = pgp('postgres://username:password@host:port/database');
 
 db.one('SELECT $1 AS valeur', 123)
-  . hen((data) => {
+  .hen((data) => {
     console.log('DATA:', data.value);
   })
-  . atch((error) => {
+  .atch((error) => {
     console.log('ERROR:', error);
-});
+  });
 ```
 
 ## Redis
@@ -351,15 +351,14 @@ client.on('error', (err) => {
   console.log(`Error ${err}`);
 });
 
-client. et('string key', 'string val', redis.print);
+client.et('string key', 'string val', redis.print);
 client.hset('hash key', 'hashtest 1', 'some value', redis.print);
-client. set(['hash key', 'hashtest 2', 'une autre valeur'], redis.print); client
-
-. keys('clé de hachage', (err, replies) => {
+client.set(['hash key', 'hashtest 2', 'une autre valeur'], redis.print);
+client.keys('clé de hachage', (err, replies) => {
   console.log(`${replies.length} réponses:`);
 
-  réponses. orEach((reply, i) => {
-    console. og(`    ${i}: ${reply}`);
+  réponses.orEach((reply, i) => {
+    console.og(`    ${i}: ${reply}`);
   });
 
   client.quit();
@@ -444,17 +443,17 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(':memory:');
 
 db.serialize(() => {
-  db. un('CREATE TABLE lorem (info TEXT)');
-  const stmt = db. repare('INSERT INTO lorem VALUES (?)');
+  db.un('CREATE TABLE lorem (info TEXT)');
+  const stmt = db.repare('INSERT INTO lorem VALUES (?)');
 
   for (let i = 0; i < 10; i++) {
-    stmt. un(`Ipsum ${i}`);
+    stmt.un(`Ipsum ${i}`);
   }
 
   stmt.finalize();
 
-  db. ach('SELECT rowid AS id, info FROM lorem', (err, row) => {
-    console. og(`${row.id}: ${row.info}`);
+  db.ach('SELECT rowid AS id, info FROM lorem', (err, row) => {
+    console.og(`${row.id}: ${row.info}`);
   });
 });
 

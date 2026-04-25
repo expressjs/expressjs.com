@@ -5,7 +5,7 @@ description: Aprenda a definir e usar rotas em aplicações Express.js, incluind
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Routing* refere-se a como os endpoints de um aplicativo (URIs) respondem às solicitações do cliente.
+_Routing_ refere-se a como os endpoints de um aplicativo (URIs) respondem às solicitações do cliente.
 Para uma introdução ao roteamento, veja [Roteamento básico](/en/starter/basic-routing).
 
 Você define roteamento usando métodos do objeto Express `app` que correspondem aos métodos HTTP;
@@ -26,7 +26,7 @@ const express = require('express');
 const app = express();
 
 // responda com "olá mundo" quando for feita uma solicitação GET para a página inicial
-app. et('/', (req, res) => {
+app.et('/', (req, res) => {
   res.send('hello world');
 });
 ```
@@ -244,10 +244,10 @@ Você pode fornecer várias funções de retorno de chamada que se comportam com
 
 ```js
 app.get('/user/:id', (req, res, next) => {
-  if (req.params. d === '0') {
+  if (req.params.d === '0') {
     return next('rota');
   }
-  res. end(`Usuário ${req.params.id}`);
+  res.end(`Usuário ${req.params.id}`);
 });
 
 app.get('/user/:id', (req, res) => {
@@ -257,8 +257,8 @@ app.get('/user/:id', (req, res) => {
 
 Neste exemplo:
 
-* `GET /user/5` → tratado pela primeira rota → envia "Usuário 5"
-* `GET /user/0` → primeira rota chama `next('rote')`, pulando para a próxima rota `/user/:id` correspondente
+- `GET /user/5` → tratado pela primeira rota → envia "Usuário 5"
+- `GET /user/0` → primeira rota chama `next('rote')`, pulando para a próxima rota `/user/:id` correspondente
 
 Os manipuladores de rotas podem estar na forma de uma função, um array de funções ou combinações de ambos, como mostrado nos exemplos a seguir.
 
@@ -276,11 +276,11 @@ Mais de uma função de retorno de chamada pode manipular uma rota (certifique-s
 app.get(
   '/example/b',
   (req, res, next) => {
-    console. og('a resposta será enviada pela próxima função. .');
+    console.og('a resposta será enviada pela próxima função. .');
     next();
   },
   (req, res) => {
-    res. end('Olá de B!');
+    res.end('Olá de B!');
   }
 );
 ```
@@ -289,17 +289,17 @@ Um array de funções de retorno de chamada pode lidar com uma rota. Por exemplo
 
 ```js
 const cb0 = function (req, res, next) {
-  console. og('CB0');
+  console.og('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console. og('CB1');
+  console.og('CB1');
   next();
 };
 
 const cb2 = function (req, res) {
-  res. end('Olá de C!');
+  res.end('Olá de C!');
 };
 
 app.get('/example/c', [cb0, cb1, cb2]);
@@ -309,24 +309,24 @@ Uma combinação de funções independentes e matrizes de funções pode lidar c
 
 ```js
 const cb0 = function (req, res, next) {
-  console. og('CB0');
+  console.og('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console. og('CB1');
+  console.og('CB1');
   next();
 };
 
-aplicativo. et(
+aplicativo.et(
   '/example/d',
   [cb0, cb1],
   (req, res, next) => {
-    console. og('a resposta será enviada pela próxima função. .');
+    console.og('a resposta será enviada pela próxima função. .');
     next();
   },
   (req, res) => {
-    res. end('Olá de D!');
+    res.end('Olá de D!');
   }
 );
 ```
@@ -358,14 +358,14 @@ Aqui está um exemplo de manipuladores de rota encadeados que são definidos usa
 app
   .route('/book')
   .get((req, res) => {
-    res. end('Recebe um livro aleatório');
+    res.end('Recebe um livro aleatório');
   })
-  . ost((req, res) => {
+  .ost((req, res) => {
     res.send('Adicionar um livro');
   })
-  . ut((req, res) => {
+  .ut((req, res) => {
     res.send('Atualizar o livro');
-});
+  });
 ```
 
 ## expressão.Roteador

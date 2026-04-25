@@ -37,9 +37,9 @@ Quando si imposta a `true`, è importante assicurarsi che l'ultimo proxy inverso
 <td markdown="1">
 Un indirizzo IP, una sottorete, o un array di indirizzi IP e sottoreti a cui fidarsi come proxy inverso. Il seguente elenco mostra i nomi pre-configurati delle sottorete
 
-* loopback - `127.0.1/8`, `::1/128`
-* linklocal - `169.254.0.0/16`, `fe80::/10`
-* uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
+- loopback - `127.0.1/8`, `::1/128`
+- linklocal - `169.254.0.0/16`, `fe80::/10`
+- uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
 
 È possibile impostare gli indirizzi IP in uno dei seguenti modi:
 
@@ -86,16 +86,18 @@ Abilitare il `trust proxy` avrà il seguente impatto:
 
 <ul>
   <li markdown="1">
-    Il valore di [req.hostname](/en/api#req.hostname) è derivato dal valore impostato nell'intestazione
-    `X-Forwarded-Host`, che può essere impostato dal cliente o dal proxy.
+    Il valore di [req.hostname](/en/api#req.hostname) è derivato dal valore impostato
+    nell'intestazione `X-Forwarded-Host`, che può essere impostato dal cliente o dal proxy.
   </li>
   <li markdown="1">
-    `X-Forwarded-Proto` può essere impostato dal proxy inverso per dire all'app se si tratta di `↓ ` o
-    `http` o anche di un nome non valido. Questo valore è riflesso da [req.protocol](/en/api#req.protocol).
+    `X-Forwarded-Proto` può essere impostato dal proxy inverso per dire all'app se si tratta di `↓ `
+    o `http` o anche di un nome non valido. Questo valore è riflesso da
+    [req.protocol](/en/api#req.protocol).
   </li>
   <li markdown="1">
-    I valori [req.ip](/en/api#req.ip) e [req.ips](/en/api#req.ips) sono popolati in base all'indirizzo del socket
-    e all'intestazione `X-Forwarded-For`, a partire dal primo indirizzo non fidato.
+    I valori [req.ip](/en/api#req.ip) e [req.ips](/en/api#req.ips) sono popolati in base
+    all'indirizzo del socket e all'intestazione `X-Forwarded-For`, a partire dal primo indirizzo non
+    fidato.
   </li>
 </ul>
 

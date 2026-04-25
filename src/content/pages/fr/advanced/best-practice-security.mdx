@@ -1,11 +1,11 @@
 ---
-title: "Meilleures pratiques de production : Sécurité"
+title: 'Meilleures pratiques de production : Sécurité'
 description: Découvrez les meilleures pratiques de sécurité cruciales pour les applications Express en production, y compris l'utilisation de TLS, la validation des entrées, les cookies sécurisés et la prévention des vulnérabilités.
 ---
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Le terme *"production"* désigne l'étape du cycle de vie du logiciel quand une application ou une API est généralement disponible pour ses utilisateurs finaux ou ses consommateurs. Par contre, dans l'étape *"développement"*, vous êtes toujours en train d'écrire et de tester du code, et l'application n'est pas ouverte à un accès externe. Les environnements système correspondants sont respectivement les environnements *production* et *development*.
+Le terme _"production"_ désigne l'étape du cycle de vie du logiciel quand une application ou une API est généralement disponible pour ses utilisateurs finaux ou ses consommateurs. Par contre, dans l'étape _"développement"_, vous êtes toujours en train d'écrire et de tester du code, et l'application n'est pas ouverte à un accès externe. Les environnements système correspondants sont respectivement les environnements _production_ et _development_.
 
 Les environnements de développement et de production sont généralement mis en place différemment et ont des exigences très différentes. Ce qui est bon dans le développement peut ne pas être acceptable dans la production. Par exemple, dans un environnement de développement, vous pouvez vouloir une journalisation détaillée des erreurs pour le débogage, alors que le même comportement peut devenir une préoccupation de sécurité dans un environnement de production. Et en matière de développement, vous n'avez pas à vous soucier de l'évolutivité, de la fiabilité et de la performance, alors que ces préoccupations deviennent cruciales dans la production.
 
@@ -18,21 +18,21 @@ de sécurité [/en/resources/contributing#security-policies-and-procedures).
 
 Les meilleures pratiques de sécurité pour les applications Express en production comprennent:
 
-* [Meilleures pratiques de production : Sécurité](#production-best-practices-security)
-  * [Overview](#overview)
-  * [Ne pas utiliser de versions obsolètes ou vulnérables d'Express] (#dont-use-deprecated-or-vulnerable-versions-of-express)
-  * [Utiliser TLS](#use-tls)
-  * [Ne pas faire confiance à la saisie de l'utilisateur](#do-not-trust-user-input)
-    * [Empêcher les redirections ouvertes](#prevent-open-redirects)
-  * [Utiliser le casque](#use-helmet)
-  * [Réduire l'empreinte digitale](#reduce-fingerprinting)
-  * (#use-cookies-securely)
-    * [Ne pas utiliser le nom du cookie de session par défaut](#dont-use-the-default-session-cookie-name)
-    * (#set-cookie-security-options)
-  * [Empêcher les attaques par force brute contre l'autorisation] (#prevent-brute-force-attacks-against-authorization)
-  * [Assurez-vous que vos dépendances sont sécurisées](#ensure-your-dependencies-are-secure)
-    * [Éviter les autres vulnérabilités connues] (#avoid-other-known-vulnerabilities)
-  * [Considérations supplémentaires](#additional-considerations)
+- [Meilleures pratiques de production : Sécurité](#production-best-practices-security)
+  - [Overview](#overview)
+  - [Ne pas utiliser de versions obsolètes ou vulnérables d'Express] (#dont-use-deprecated-or-vulnerable-versions-of-express)
+  - [Utiliser TLS](#use-tls)
+  - [Ne pas faire confiance à la saisie de l'utilisateur](#do-not-trust-user-input)
+    - [Empêcher les redirections ouvertes](#prevent-open-redirects)
+  - [Utiliser le casque](#use-helmet)
+  - [Réduire l'empreinte digitale](#reduce-fingerprinting)
+  - (#use-cookies-securely)
+    - [Ne pas utiliser le nom du cookie de session par défaut](#dont-use-the-default-session-cookie-name)
+    - (#set-cookie-security-options)
+  - [Empêcher les attaques par force brute contre l'autorisation] (#prevent-brute-force-attacks-against-authorization)
+  - [Assurez-vous que vos dépendances sont sécurisées](#ensure-your-dependencies-are-secure)
+    - [Éviter les autres vulnérabilités connues] (#avoid-other-known-vulnerabilities)
+  - [Considérations supplémentaires](#additional-considerations)
 
 ## Ne pas utiliser les versions obsolètes ou vulnérables de Express
 
@@ -44,7 +44,7 @@ Assurez-vous également que vous n'utilisez aucune des versions vulnérables Exp
 
 Si votre application traite ou transmet des données sensibles, utilisez [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) pour sécuriser la connexion et les données. Cette technologie crypte les données avant qu'elles ne soient envoyées du client au serveur, empêchant ainsi certains hacks courants (et faciles). Bien que les requêtes Ajax et POST puissent ne pas être visiblement évidentes et semblent "cachées" dans les navigateurs, leur trafic réseau est vulnérable à [sniffing de paquets] (https://en.wikipedia.org/wiki/Packet_analyzer) et aux [attaques de l'homme au milieu] (https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Il se peut que vous soyez familier avec le cryptage Secure Socket Layer (SSL) . [TLS est simplement la prochaine progression de SSL](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515\(v=vs.85\).aspx). En d'autres termes, si vous utilisiez SSL auparavant, envisagez la mise à niveau vers TLS. En général, nous recommandons à Nginx de gérer les TLS. Pour une bonne référence pour configurer TLS sur Nginx (et d'autres serveurs), voir [Configurations de serveur recommandées (Mozilla Wiki)] (https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Il se peut que vous soyez familier avec le cryptage Secure Socket Layer (SSL) . [TLS est simplement la prochaine progression de SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). En d'autres termes, si vous utilisiez SSL auparavant, envisagez la mise à niveau vers TLS. En général, nous recommandons à Nginx de gérer les TLS. Pour une bonne référence pour configurer TLS sur Nginx (et d'autres serveurs), voir [Configurations de serveur recommandées (Mozilla Wiki)] (https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
 De plus, un outil pratique pour obtenir un certificat TLS gratuit est [Let's Encrypt](https://letsencrypt.org/about/), un outil gratuit, automatisé, et l'autorité de certification ouverte (CA) fournie par le [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
 
@@ -55,7 +55,7 @@ En fin de compte, la responsabilité de valider et de gérer correctement les ty
 
 ### Empêcher les redirections ouvertes
 
-Un exemple de saisie potentiellement dangereuse de l'utilisateur est une redirection _ouverte, où une application accepte une URL comme entrée utilisateur (souvent dans la requête URL, par exemple `? rl=https://exemple. ) et utilise `res.redirect`pour définir l'en-tête`location\` et
+Un exemple de saisie potentiellement dangereuse de l'utilisateur est une redirection \_ouverte, où une application accepte une URL comme entrée utilisateur (souvent dans la requête URL, par exemple `? rl=https://exemple. ) et utilise `res.redirect`pour définir l'en-tête`location\` et
 retourne un statut 3xx.
 
 Une application doit valider qu'elle prend en charge la redirection vers l'URL entrante pour éviter d'envoyer des utilisateurs à des liens malveillants tels que des sites Web d'hameçonnage, entre autres risques.
@@ -81,19 +81,19 @@ app.use((req, res) => {
 
 Helmet est une fonction middleware qui définit les en-têtes de réponse HTTP liés à la sécurité. Le casque définit par défaut les en-têtes suivants :
 
-* `Content-Security-Policy` : Une puissante liste de ce qui peut se passer sur votre page qui atténue de nombreuses attaques
-* `Cross-Origin-Opener-Policy`: Aide à isoler votre page
-* `Cross-Origin-Resource-Policy`: empêche les autres de charger vos ressources cross-origin
-* `Origin-Agent-Cluster`: Modifie l'isolement du processus pour qu'il soit basé sur l'origine
-* `Referrer-Policy`: contrôle l'en-tête [`Referer`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer)
-* `Strict-Transport-Security` : dit aux navigateurs de préférer HTTPS
-* `X-Content-Type-Options`: évite [sniffing MIME](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#mime_sniffing)
-* `X-DNS-Prefetch-Control`: contrôle le préchargement DNS
-* `X-Download-Options`: force les téléchargements à être sauvegardés (Internet Explorer uniquement)
-* `X-Frame-Options`: En-tête hérité qui atténue les attaques [Clickjacking](https://en.wikipedia.org/wiki/Clickjacking)
-* `X-Permitted-Cross-Domain-Policies`: Contrôle le comportement inter-domaine pour les produits Adobe, comme Acrobat
-* `X-Powered-By`: Informations sur le serveur web. Supprimé parce qu'il peut être utilisé dans des attaques simples
-* `X-XSS-Protection`: L'en-tête hérité qui tente d'atténuer [les attaques XSS](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting), mais rend les choses pires, alors le casque le désactive
+- `Content-Security-Policy` : Une puissante liste de ce qui peut se passer sur votre page qui atténue de nombreuses attaques
+- `Cross-Origin-Opener-Policy`: Aide à isoler votre page
+- `Cross-Origin-Resource-Policy`: empêche les autres de charger vos ressources cross-origin
+- `Origin-Agent-Cluster`: Modifie l'isolement du processus pour qu'il soit basé sur l'origine
+- `Referrer-Policy`: contrôle l'en-tête [`Referer`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer)
+- `Strict-Transport-Security` : dit aux navigateurs de préférer HTTPS
+- `X-Content-Type-Options`: évite [sniffing MIME](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#mime_sniffing)
+- `X-DNS-Prefetch-Control`: contrôle le préchargement DNS
+- `X-Download-Options`: force les téléchargements à être sauvegardés (Internet Explorer uniquement)
+- `X-Frame-Options`: En-tête hérité qui atténue les attaques [Clickjacking](https://en.wikipedia.org/wiki/Clickjacking)
+- `X-Permitted-Cross-Domain-Policies`: Contrôle le comportement inter-domaine pour les produits Adobe, comme Acrobat
+- `X-Powered-By`: Informations sur le serveur web. Supprimé parce qu'il peut être utilisé dans des attaques simples
+- `X-XSS-Protection`: L'en-tête hérité qui tente d'atténuer [les attaques XSS](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting), mais rend les choses pires, alors le casque le désactive
 
 Chaque en-tête peut être configuré ou désactivé. Pour en savoir plus à ce sujet, veuillez vous rendre sur [son site de documentation][helmet].
 
@@ -164,8 +164,8 @@ Pour vous assurer que les cookies n'ouvrent pas votre application aux exploitati
 
 Il y a deux principaux modules de session de cookies du middleware :
 
-* [express-session](https://www.npmjs.com/package/express-session) qui remplace le middleware `express.session` intégré à Express 3.x.
-* [cookie-session](https://www.npmjs.com/package/cookie-session) qui remplace le middleware `express.cookieSession` intégré à Express 3.x.
+- [express-session](https://www.npmjs.com/package/express-session) qui remplace le middleware `express.session` intégré à Express 3.x.
+- [cookie-session](https://www.npmjs.com/package/cookie-session) qui remplace le middleware `express.cookieSession` intégré à Express 3.x.
 
 La principale différence entre ces deux modules est la façon dont ils enregistrent les données de session des cookies. Le middleware [express-session](https://www.npmjs.com/package/express-session) stocke les données de session sur le serveur ; il n'enregistre que l'ID de session dans le cookie lui-même, pas les données de session. Par défaut, il utilise du stockage en mémoire et n'est pas conçu pour un environnement de production. En production, vous devrez configurer un magasin de session évolutif ; voir la liste des [magasins de sessions compatibles] (https://github.com/expressjs/session#compatible-session-stores).
 
@@ -180,7 +180,7 @@ Pour éviter ce problème, utilisez des noms génériques de cookies; par exempl
 ```js
 const session = require('express-session');
 app.set('trust proxy', 1); // trust first proxy
-app. se(
+app.se(
   session({
     secret: 's3Cur3',
     name: 'sessionId',
@@ -192,11 +192,11 @@ app. se(
 
 Définissez les options suivantes des cookies pour améliorer la sécurité :
 
-* `secure` - Permet au navigateur d'envoyer le cookie uniquement via HTTPS.
-* `httpOnly` - Assure que le cookie est envoyé uniquement sur HTTP(S), et non sur le JavaScript du client, aidant à se protéger contre les attaques de scripts intersites.
-* `domain` - indique le domaine du cookie; utilisez-le pour comparer avec le domaine du serveur dans lequel l'URL est demandée. S'ils correspondent alors vérifiez l'attribut path suivant.
-* `path` - indique le chemin du cookie; utilisez-le pour comparer le chemin de la requête. Si cela et le domaine correspondent, alors envoyez le cookie dans la requête.
-* `expires` - utiliser pour définir la date d'expiration des cookies persistants.
+- `secure` - Permet au navigateur d'envoyer le cookie uniquement via HTTPS.
+- `httpOnly` - Assure que le cookie est envoyé uniquement sur HTTP(S), et non sur le JavaScript du client, aidant à se protéger contre les attaques de scripts intersites.
+- `domain` - indique le domaine du cookie; utilisez-le pour comparer avec le domaine du serveur dans lequel l'URL est demandée. S'ils correspondent alors vérifiez l'attribut path suivant.
+- `path` - indique le chemin du cookie; utilisez-le pour comparer le chemin de la requête. Si cela et le domaine correspondent, alors envoyez le cookie dans la requête.
+- `expires` - utiliser pour définir la date d'expiration des cookies persistants.
 
 Voici un exemple utilisant [cookie-session](https://www.npmjs.com/package/cookie-session) middleware:
 
@@ -267,10 +267,10 @@ Enfin, les applications Express&mdash;comme toutes les autres applications web&m
 
 Voici quelques autres recommandations de l'excellent [Liste de contrôle de sécurité Node.js](https://blog.risingstack.com/node-js-security-checklist/). Reportez-vous à cet article de blog pour tous les détails sur ces recommandations :
 
-* Filtrer et nettoyer toujours les entrées de l'utilisateur pour se protéger contre les attaques de script intersite (XSS) et d'injection de commandes.
-* Protégez contre les attaques d'injection SQL en utilisant des requêtes paramétrées ou des requêtes préparées.
-* Utilisez l'outil [sqlmap](http://sqlmap.org/) pour détecter les vulnérabilités d'injection SQL dans votre application.
-* Utilisez les outils [nmap](https://nmap.org/) et [sslyze](https://github.com/nabla-c0d3/sslyze) pour tester la configuration de vos codes SSL, , et renégociation ainsi que la validité de votre certificat.
-* Utilisez [safe-regex](https://www.npmjs.com/package/safe-regex) pour vous assurer que vos expressions régulières ne sont pas susceptibles d'attaques [déni de service d'expression régulière](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS).
+- Filtrer et nettoyer toujours les entrées de l'utilisateur pour se protéger contre les attaques de script intersite (XSS) et d'injection de commandes.
+- Protégez contre les attaques d'injection SQL en utilisant des requêtes paramétrées ou des requêtes préparées.
+- Utilisez l'outil [sqlmap](http://sqlmap.org/) pour détecter les vulnérabilités d'injection SQL dans votre application.
+- Utilisez les outils [nmap](https://nmap.org/) et [sslyze](https://github.com/nabla-c0d3/sslyze) pour tester la configuration de vos codes SSL, , et renégociation ainsi que la validité de votre certificat.
+- Utilisez [safe-regex](https://www.npmjs.com/package/safe-regex) pour vous assurer que vos expressions régulières ne sont pas susceptibles d'attaques [déni de service d'expression régulière](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS).
 
 [helmet]: https://helmetjs.github.io/

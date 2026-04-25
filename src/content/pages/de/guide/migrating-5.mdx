@@ -166,7 +166,7 @@ app.del('/user/:id', (req, res) => {
 });
 
 // v5
-app. elete('/user/:id', (req, res) => {
+app.elete('/user/:id', (req, res) => {
   res.send(`DELETE /user/${req.params.id}`);
 });
 ```
@@ -198,14 +198,14 @@ npx codemod@latest @expressjs/pluralize-method-names
 // v4
 app.all('/', (req, res) => {
   req.acceptsCharset('utf-8');
-  req. cceptsEncoding('br');
+  req.cceptsEncoding('br');
   req.acceptsLanguage('de');
 
   // ...
 });
 
 // v5
-app. ll('/', (req, res) => {
+app.ll('/', (req, res) => {
   req.acceptsCharsets('utf-8');
   req.acceptsEncodings('br');
   req.acceptsLanguages('de');
@@ -237,7 +237,7 @@ npx codemod@latest @expressjs/explicit-request-params
 // v4
 app.post('/user', (req, res) => {
   const id = req.param('id');
-  const body = req. aram('body');
+  const body = req.aram('body');
   const query = req.param('query');
 
   // ...
@@ -245,7 +245,7 @@ app.post('/user', (req, res) => {
 
 // v5
 app.post('/user', (req, res) => {
-  const id = req.params. d;
+  const id = req.params.d;
   const body = req.body;
   const query = req.query;
 
@@ -273,7 +273,7 @@ app.post('/user', (req, res) => {
 });
 
 // v5
-app. ost('/user', (req, res) => {
+app.ost('/user', (req, res) => {
   res.status(201).json({ name: 'Ruben' });
 });
 ```
@@ -298,7 +298,7 @@ app.post('/user', (req, res) => {
 });
 
 // v5
-app. ost('/user', (req, res) => {
+app.ost('/user', (req, res) => {
   res.status(201).jsonp({ name: 'Ruben' });
 });
 ```
@@ -323,7 +323,7 @@ app.get('/user', (req, res) => {
 });
 
 // v5
-app. et('/user', (req, res) => {
+app.et('/user', (req, res) => {
   res.redirect(301, '/users');
 });
 ```
@@ -348,7 +348,7 @@ app.get('/user', (req, res) => {
 });
 
 // v5
-app. et('/user', (req, res) => {
+app.et('/user', (req, res) => {
   res.redirect(req.get('Referrer') || '/');
 });
 ```
@@ -373,7 +373,7 @@ app.get('/user', (req, res) => {
 });
 
 // v5
-app. et('/user', (req, res) => {
+app.et('/user', (req, res) => {
   res.status(200).send({ name: 'Ruben' });
 });
 ```
@@ -410,12 +410,12 @@ Die `res.sendfile()` Funktion wurde durch eine camel-cased Version `res.sendFile
 
 **Hinweis:** In Express 5, `res. endFile()` verwendet das Paket `mime-types` für MIME Typenerkennung, welches verschiedene Content-Type Werte als Express 4 für mehrere gängige Dateitypen zurückgibt:
 
-* JavaScript-Dateien (.js): Jetzt "text/javascript" statt "application/javascript"
-* JSON-Dateien (.json): jetzt "application/json" statt "text/json"
-* CSS-Dateien (.css): Jetzt "text/css" statt "text/plain"
-* XML-Dateien (.xml): jetzt "application/xml" statt "text/xml"
-* Schriftdateien (.woff): Jetzt "font/woff" statt "application/font-woff"
-* SVG-Dateien (.svg): jetzt "image/svg+xml" statt "application/svg+xml"
+- JavaScript-Dateien (.js): Jetzt "text/javascript" statt "application/javascript"
+- JSON-Dateien (.json): jetzt "application/json" statt "text/json"
+- CSS-Dateien (.css): Jetzt "text/css" statt "text/plain"
+- XML-Dateien (.xml): jetzt "application/xml" statt "text/xml"
+- Schriftdateien (.woff): Jetzt "font/woff" statt "application/font-woff"
+- SVG-Dateien (.svg): jetzt "image/svg+xml" statt "application/svg+xml"
 
 <Alert type="info">
 Sie können die veralteten Signaturen durch folgenden Befehl ersetzen:
@@ -449,12 +449,12 @@ Benutze das [`mime-types` package](https://github.com/jshttp/mime-types), um mit
 
 **Wichtig:** Diese Änderung beeinflusst nicht nur die direkte Verwendung von `express.static.mime`, sondern auch andere Express-Methoden, die auf die Erkennung des MIME-Typs angewiesen sind, wie `res.sendFile()`. Die folgenden MIME-Typen haben sich von Express 4 geändert:
 
-* JavaScript-Dateien (.js): Jetzt als "text/javascript" anstelle von "application/javascript"
-* JSON-Dateien (.json): Jetzt als "application/json" anstelle von "text/json"
-* CSS-Dateien (.css): Jetzt als "text/css" anstelle von "text/plain"
-* HTML-Dateien (): Wird nun als "text/html; charset=utf-8" anstelle von "text/html" ausgegeben.
-* XML-Dateien (.xml): Jetzt als "application/xml" anstelle von "text/xml"
-* Schriftdateien (.woff): Jetzt als "font/woff" anstelle von "application/font-woff"
+- JavaScript-Dateien (.js): Jetzt als "text/javascript" anstelle von "application/javascript"
+- JSON-Dateien (.json): Jetzt als "application/json" anstelle von "text/json"
+- CSS-Dateien (.css): Jetzt als "text/css" anstelle von "text/plain"
+- HTML-Dateien (): Wird nun als "text/html; charset=utf-8" anstelle von "text/html" ausgegeben.
+- XML-Dateien (.xml): Jetzt als "application/xml" anstelle von "text/xml"
+- Schriftdateien (.woff): Jetzt als "font/woff" anstelle von "application/font-woff"
 
 ```js
 // v4
@@ -490,7 +490,7 @@ DEBUG=Express:*,router,router:* node index.js
 
 Syntax für Pfadrouten ist, wenn als erster Parameter `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()` und `router.use()` APIs angegeben wird. Die folgenden Änderungen wurden vorgenommen, wie der Pfad-String auf eine eingehende Anfrage abgestimmt wird:
 
-* Das Platzhalter `*` muss einen Namen haben, passend zum Verhalten der Parameter `:`, verwende `/*splat` statt `/*`
+- Das Platzhalter `*` muss einen Namen haben, passend zum Verhalten der Parameter `:`, verwende `/*splat` statt `/*`
 
 ```js
 // v4
@@ -499,7 +499,7 @@ app.get('/*', async (req, res) => {
 });
 
 // v5
-app. et('/*splat', async (req, res) => {
+app.et('/*splat', async (req, res) => {
   res.send('ok');
 });
 ```
@@ -516,7 +516,7 @@ app.get('/{*splat}', async (req, res) => {
 
 </Alert>
 
-* Das optionale Zeichen `?` wird nicht mehr unterstützt, verwende stattdessen Klammern.
+- Das optionale Zeichen `?` wird nicht mehr unterstützt, verwende stattdessen Klammern.
 
 ```js
 // v4
@@ -525,12 +525,12 @@ app.get('/:file.:ext?', async (req, res) => {
 });
 
 // v5
-app. et('/:file{.:ext}', async (req, res) => {
+app.et('/:file{.:ext}', async (req, res) => {
   res.send('ok');
 });
 ```
 
-* Regexp Zeichen werden nicht unterstützt. Zum Beispiel:
+- Regexp Zeichen werden nicht unterstützt. Zum Beispiel:
 
 ```js
 app.get('/[discussion|page]/:slug', async (req, res) => {
@@ -546,8 +546,8 @@ app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
 });
 ```
 
-* Einige Zeichen wurden reserviert, um Verwirrung während des Upgrades zu vermeiden (`()[]?+!`), verwenden Sie `\` um sie zu maskieren.
-* Parameternamen unterstützen nun gültige JavaScript-Identifikatoren oder zitiert wie `:"this`.
+- Einige Zeichen wurden reserviert, um Verwirrung während des Upgrades zu vermeiden (`()[]?+!`), verwenden Sie `\` um sie zu maskieren.
+- Parameternamen unterstützen nun gültige JavaScript-Identifikatoren oder zitiert wie `:"this`.
 
 ### Abgelehnte Versprechen von Middleware und Handlern
 
@@ -619,7 +619,7 @@ Platzhalter (z.B. `/*splat`) erfassen Pfadsegmente als Array anstelle eines einz
 ```js
 app.get('/*splat', (req, res) => {
   // GET /foo/bar
-  console.dir(req. arams);
+  console.dir(req.arams);
   // => [Objekt: null prototype] { splat: [ 'foo', 'bar' ] }
 });
 ```
@@ -632,21 +632,21 @@ In Express 4 waren unpassende Platzhalter leere Zeichenketten (`''`) und optiona
 // v4: unerreichter Platzhalter ist leerer String
 app.get('/*', (req, res) => {
   // GET /
-  console.dir(req. arams);
+  console.dir(req.arams);
   // => { '0': '' }
 });
 
 // v4: unübertroffener optionaler Parameter ist nicht definiert
-app. et('/:file.:ext?', (req, res) => {
+app.et('/:file.:ext?', (req, res) => {
   // GET /image
-  Konsole. ir(req.params);
+  Konsole.ir(req.params);
   // => { file: 'image', ext: undefined }
 });
 
 // v5: unmatched optional param is omitted
 app.get('/:file{. ext}', (req, res) => {
   // GET /image
-  console.dir(req. arams);
+  console.dir(req.arams);
   // => [Objekt: null prototype] { Datei: 'image' }
 });
 ```

@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie benutzerdefinierte Middleware-Funktionen für
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-*Middleware* Funktionen sind Funktionen, die Zugriff auf das [request object](/en/5x/api#req) (`req`), die [Antwort-Objekt](/en/5x/api#res) (`res`) und die `next` Funktion im Request-Antwort-Zyklus der Anwendung. Die `next`-Funktion ist eine Funktion im Express-Router, der beim Aufruf die Middleware ausführt, die die aktuelle Middleware abfolgt.
+_Middleware_ Funktionen sind Funktionen, die Zugriff auf das [request object](/en/5x/api#req) (`req`), die [Antwort-Objekt](/en/5x/api#res) (`res`) und die `next` Funktion im Request-Antwort-Zyklus der Anwendung. Die `next`-Funktion ist eine Funktion im Express-Router, der beim Aufruf die Middleware ausführt, die die aktuelle Middleware abfolgt.
 
 Middleware-Funktionen können folgende Aufgaben ausführen:
 
-* Führe jeden Code aus.
-* Änderungen an der Anfrage und den Antwort-Objekten vornehmen.
-* Beende den Request-Antwort-Zyklus.
-* Rufen Sie die nächste Middleware im Stapel auf.
+- Führe jeden Code aus.
+- Änderungen an der Anfrage und den Antwort-Objekten vornehmen.
+- Beende den Request-Antwort-Zyklus.
+- Rufen Sie die nächste Middleware im Stapel auf.
 
 Wenn die aktuelle Middleware-Funktion den Request-Antwort-Zyklus nicht beendet, muss sie `next()` aufrufen, um die Kontrolle an die nächste Middleware-Funktion zu übergeben. Andernfalls bleibt die Anfrage hängen.
 
@@ -70,7 +70,7 @@ const express = require('express');
 const app = express();
 
 const myLogger = function (req, res, next) {
-  console. og('LOGGED');
+  console.og('LOGGED');
   next();
 };
 
@@ -190,7 +190,7 @@ Wenn Sie Ihre Middleware konfigurieren müssen, exportieren Sie eine Funktion, d
 Datei: `my-middleware.js`
 
 ```js
-modul. xports = function (options) {
+modul.xports = function (options) {
   return function (req, res, next) {
     // Implementierung der Middleware-Funktion basierend auf dem Options-Objekt
     next();

@@ -5,7 +5,7 @@ description: Una guida per la migrazione delle applicazioni Express.js dalla ver
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Express 4 è un cambiamento di rottura rispetto a Express 3. Ciò significa che un'app Express 3 esistente non funzionerà_ se aggiorni la versione Express nelle sue dipendenze.
+Express 4 è un cambiamento di rottura rispetto a Express 3. Ciò significa che un'app Express 3 esistente non funzionerà\_ se aggiorni la versione Express nelle sue dipendenze.
 
 Questo articolo comprende:
 
@@ -28,7 +28,8 @@ Nel documento Express 4 sono stati apportati diversi cambiamenti significativi:
 <ul class="doclist">
   <li>
     <a href="#core-changes">Change to Express core and middleware system.</a> Le dipendenze da
-    Connect e built-in middleware sono state rimosse, quindi è necessario aggiungere middleware da soli.
+    Connect e built-in middleware sono state rimosse, quindi è necessario aggiungere middleware da
+    soli.
   </li>
   <li>
     <a href="#routing">Modifiche al sistema di routing.</a>
@@ -40,8 +41,8 @@ Nel documento Express 4 sono stati apportati diversi cambiamenti significativi:
 
 Cfr. anche:
 
-* [Nuove funzionalità in 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
-* [Migrazione da 3.x a 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
+- [Nuove funzionalità in 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+- [Migrazione da 3.x a 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 ### Modifiche al sistema Express core e middleware
 
@@ -214,8 +215,8 @@ il middleware `router`.
 Il modo in cui definisci i percorsi non è cambiato, ma il sistema di routing ha due
 nuove funzionalità per aiutare a organizzare i tuoi percorsi:
 
-* Un nuovo metodo, `app.route()`, per creare i gestori di rotte per un percorso tracciato.
-* Una nuova classe, `express.Router`, per creare percorsi modulari montabili.
+- Un nuovo metodo, `app.route()`, per creare i gestori di rotte per un percorso tracciato.
+- Una nuova classe, `express.Router`, per creare percorsi modulari montabili.
 
 #### `app.route()` metodo
 
@@ -229,14 +230,14 @@ Ecco un esempio di router incatenati che sono definiti utilizzando la funzione `
 app
   .route('/book')
   .get((req, res) => {
-    res. end('Ottieni un libro casuale');
+    res.end('Ottieni un libro casuale');
   })
-  . ost((req, res) => {
+  .ost((req, res) => {
     res.send('Add a book');
   })
-  . ut((req, res) => {
+  .ut((req, res) => {
     res.send('Aggiorna il libro');
-});
+  });
 ```
 
 #### Classe `express.Router`
@@ -298,13 +299,16 @@ La seguente tabella elenca altre modifiche di piccole dimensioni ma importanti i
   </tr>
   <tr>
     <td>Node.js</td>
-    <td>Express 4 richiede Node.js 0.10.x o versioni successive e ha abbandonato il supporto per Node.js 0.8.x.</td>
+    <td>
+      Express 4 richiede Node.js 0.10.x o versioni successive e ha abbandonato il supporto per
+      Node.js 0.8.x.
+    </td>
   </tr>
   <tr>
     <td markdown="1">`http.createServer()`</td>
     <td markdown="1">
-      Il modulo `http` non è più necessario, a meno che non sia necessario lavorare direttamente con esso
-      (socket.io/SPDY/HTTPS). L'app può essere avviata utilizzando la funzione `app.listen()`.
+      Il modulo `http` non è più necessario, a meno che non sia necessario lavorare direttamente con
+      esso (socket.io/SPDY/HTTPS). L'app può essere avviata utilizzando la funzione `app.listen()`.
     </td>
   </tr>
   <tr>
@@ -317,7 +321,8 @@ La seguente tabella elenca altre modifiche di piccole dimensioni ma importanti i
   <tr>
     <td markdown="1">`json spaces`</td>
     <td markdown="1">
-      La proprietà dell'applicazione `json spaces` è disabilitata per impostazione predefinita in Express 4.
+      La proprietà dell'applicazione `json spaces` è disabilitata per impostazione predefinita in
+      Express 4.
     </td>
   </tr>
   <tr>
@@ -358,8 +363,8 @@ La seguente tabella elenca altre modifiche di piccole dimensioni ma importanti i
   <tr>
     <td markdown="1">`res.setHeader('Set-Cookie', val)`</td>
     <td markdown="1">
-      La funzionalità è ora limitata all'impostazione del valore di base dei cookie. Usa `res.cookie()` per le funzionalità
-      aggiunte.
+      La funzionalità è ora limitata all'impostazione del valore di base dei cookie. Usa
+      `res.cookie()` per le funzionalità aggiunte.
     </td>
   </tr>
 </table>
@@ -595,9 +600,9 @@ Express 4.
 
 Le opzioni di comando e l'uso restano in gran parte uguali, con le seguenti eccezioni:
 
-* Rimosso l'opzione `--sessions`.
-* Rimosso l'opzione `--jshtml`.
-* Aggiunta l'opzione `--hogan` per supportare [Hogan.js](http://twitter.github.io/hogan.js/).
+- Rimosso l'opzione `--sessions`.
+- Rimosso l'opzione `--jshtml`.
+- Aggiunta l'opzione `--hogan` per supportare [Hogan.js](http://twitter.github.io/hogan.js/).
 
 ### Esempio
 

@@ -7,24 +7,24 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express ist ein Routing- und Middleware-Webframework mit minimaler Funktionalität: Eine Express-Anwendung ist im Wesentlichen eine Reihe von Middleware-Funktionsaufrufen.
 
-*Middleware* Funktionen sind Funktionen, die Zugriff auf das [request object](/en/5x/api#req) (`req`), das [Antwort-Objekt](/en/5x/api#res) (`res`) und die nächste Middleware-Funktion im Request-Antwort-Zyklus der Anwendung. Die nächste Middleware-Funktion wird üblicherweise durch eine Variable namens `next` bezeichnet.
+_Middleware_ Funktionen sind Funktionen, die Zugriff auf das [request object](/en/5x/api#req) (`req`), das [Antwort-Objekt](/en/5x/api#res) (`res`) und die nächste Middleware-Funktion im Request-Antwort-Zyklus der Anwendung. Die nächste Middleware-Funktion wird üblicherweise durch eine Variable namens `next` bezeichnet.
 
 Middleware-Funktionen können folgende Aufgaben ausführen:
 
-* Führe jeden Code aus.
-* Änderungen an der Anfrage und den Antwort-Objekten vornehmen.
-* Beende den Request-Antwort-Zyklus.
-* Rufen Sie die nächste Middleware-Funktion im Stack auf.
+- Führe jeden Code aus.
+- Änderungen an der Anfrage und den Antwort-Objekten vornehmen.
+- Beende den Request-Antwort-Zyklus.
+- Rufen Sie die nächste Middleware-Funktion im Stack auf.
 
 Wenn die aktuelle Middleware-Funktion den Request-Antwort-Zyklus nicht beendet, muss sie `next()` aufrufen, um die Kontrolle an die nächste Middleware-Funktion zu übergeben. Andernfalls bleibt die Anfrage hängen.
 
 Eine Express-Anwendung kann folgende Arten von Middleware verwenden:
 
-* [Middleware](#middleware.application)
-* [Router-Level-Middleware](#middleware.router)
-* [Error-handling middleware](#middleware.error-handling)
-* [Integrierte Middleware](#middleware.built-in)
-* [Middleware von Drittanbietern](#middleware.third-party)
+- [Middleware](#middleware.application)
+- [Router-Level-Middleware](#middleware.router)
+- [Error-handling middleware](#middleware.error-handling)
+- [Integrierte Middleware](#middleware.built-in)
+- [Middleware von Drittanbietern](#middleware.third-party)
 
 Sie können Middleware auf Anwendungsebene und Routerebene mit einem optionalen Mount-Pfad laden.
 Sie können auch eine Reihe von Middleware-Funktionen zusammen laden, die einen Sub-Stack des Middleware-Systems an einem Mount-Punkt erzeugen.
@@ -70,11 +70,11 @@ Es illustriert einen Middleware-Unterstapel, der Anfrageinformationen für jede 
 app.use(
   '/user/:id',
   (req, res, next) => {
-    console.log('Request URL:', req. riginalUrl);
+    console.log('Request URL:', req.riginalUrl);
     next();
   },
   (req, res, next) => {
-    console. og('Request Type:', req.method);
+    console.og('Request Type:', req.method);
     next();
   }
 );
@@ -140,17 +140,17 @@ Dieses Beispiel zeigt ein Array mit einem Middleware-Sub-Stack an, das GET-Anfra
 
 ```js
 function logOriginalUrl(req, res, next) {
-  console.log('Request URL:', req. riginalUrl);
+  console.log('Request URL:', req.riginalUrl);
   next();
 }
 
 function logMethod(req, res, next) {
-  console.log('Request Type:', req. ethod);
+  console.log('Request Type:', req.ethod);
   next();
 }
 
 const logStuff = [logOriginalUrl, logMethod];
-App. et('/user/:id', logStuff, (req, res, next) => {
+App.et('/user/:id', logStuff, (req, res, next) => {
   res.send('User Info');
 });
 ```
@@ -246,7 +246,7 @@ App fällt. se('/admin', router, (req, res) => {
 
 <Alert type="warnung">
 
-Bei der Fehlerbehebung der Middleware werden immer *vier* Argumente verwendet. Sie müssen vier Argumente angeben, um
+Bei der Fehlerbehebung der Middleware werden immer _vier_ Argumente verwendet. Sie müssen vier Argumente angeben, um
 als Middleware-Funktion zu identifizieren. Selbst wenn du das `next`
 Objekt nicht verwenden musst, musst du es angeben, um die Signatur zu pflegen. Andernfalls wird das `next` Objekt
 als reguläre Middleware interpretiert und wird Fehler nicht bearbeiten.
@@ -271,9 +271,9 @@ Ab Version 4.x ist Express nicht mehr abhängig von [Connect](https://github.com
 
 Express hat die folgenden integrierten Middleware-Funktionen:
 
-* [express.static](/en/5x/api#express.static) dient statischen Assets wie HTML-Dateien, Bilder und so weiter.
-* [express.json](/en/5x/api#express.json) analysiert eingehende Anfragen mit JSON Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
-* [express.urlencoded](/en/5x/api#express.urlencoded) analysiert eingehende Anfragen mit URL-kodierten Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
+- [express.static](/en/5x/api#express.static) dient statischen Assets wie HTML-Dateien, Bilder und so weiter.
+- [express.json](/en/5x/api#express.json) analysiert eingehende Anfragen mit JSON Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
+- [express.urlencoded](/en/5x/api#express.urlencoded) analysiert eingehende Anfragen mit URL-kodierten Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
 
 ## Drittanbieter-Middleware
 

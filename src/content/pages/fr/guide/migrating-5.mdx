@@ -166,7 +166,7 @@ app.del('/user/:id', (req, res) => {
 });
 
 // v5
-application. elete('/user/:id', (req, res) => {
+application.elete('/user/:id', (req, res) => {
   res.send(`DELETE /user/${req.params.id}`);
 });
 ```
@@ -198,14 +198,14 @@ npx codemod@latest @expressjs/pluralize-method-names
 // v4
 app.all('/', (req, res) => {
   req.acceptsCharset('utf-8');
-  req. cceptsEncoding('br');
+  req.cceptsEncoding('br');
   req.acceptsLanguage('en');
 
   // ...
 });
 
 // v5
-application. ll('/', (req, res) => {
+application.ll('/', (req, res) => {
   req.acceptsCharsets('utf-8');
   req.acceptsEncodings('br');
   req.acceptsLanguages('en');
@@ -237,7 +237,7 @@ npx codemod@latest @expressjs/explicit-request-params
 // v4
 app.post('/user', (req, res) => {
   const id = req.param('id');
-  const body = req. aram('body');
+  const body = req.aram('body');
   const query = req.param('query');
 
   // ...
@@ -245,7 +245,7 @@ app.post('/user', (req, res) => {
 
 // v5
 app.post('/user', (req, res) => {
-  const id = req.params. d;
+  const id = req.params.d;
   const body = req.body;
   const query = req.query;
 
@@ -298,7 +298,7 @@ app.post('/user', (req, res) => {
 });
 
 // v5
-app. ost('/user', (req, res) => {
+app.ost('/user', (req, res) => {
   res.status(201).jsonp({ name: 'Ruben' });
 });
 ```
@@ -323,7 +323,7 @@ app.get('/user', (req, res) => {
 });
 
 // v5
-app. et('/user', (req, res) => {
+app.et('/user', (req, res) => {
   res.redirect(301, '/users');
 });
 ```
@@ -348,7 +348,7 @@ app.get('/user', (req, res) => {
 });
 
 // v5
-application. et('/user', (req, res) => {
+application.et('/user', (req, res) => {
   res.redirect(req.get('Referrer') || '/');
 });
 ```
@@ -373,7 +373,7 @@ app.get('/user', (req, res) => {
 });
 
 // v5
-app. et('/user', (req, res) => {
+app.et('/user', (req, res) => {
   res.status(200).send({ name: 'Ruben' });
 });
 ```
@@ -410,12 +410,12 @@ La fonction `res.sendfile()` a été remplacée par une version à chameau `res.
 
 **Note:** En Express 5, `res. endFile()` utilise le paquet `mime-types` pour la détection de type MIME, qui retourne des valeurs de type de contenu différentes que Express 4 pour plusieurs types de fichiers communs:
 
-* Fichiers JavaScript (.js): maintenant "text/javascript" au lieu de "application/javascript"
-* Fichiers JSON (.json): maintenant "application/json" au lieu de "text/json"
-* Fichiers CSS (.css): maintenant "text/css" au lieu de "text/plain"
-* Fichiers XML (.xml): maintenant "application/xml" au lieu de "text/xml"
-* Fichiers de police (.woff): maintenant "font/woff" au lieu de "application/font-woff"
-* Fichiers SVG (.svg): maintenant "image/svg+xml" au lieu de "application/svg+xml"
+- Fichiers JavaScript (.js): maintenant "text/javascript" au lieu de "application/javascript"
+- Fichiers JSON (.json): maintenant "application/json" au lieu de "text/json"
+- Fichiers CSS (.css): maintenant "text/css" au lieu de "text/plain"
+- Fichiers XML (.xml): maintenant "application/xml" au lieu de "text/xml"
+- Fichiers de police (.woff): maintenant "font/woff" au lieu de "application/font-woff"
+- Fichiers SVG (.svg): maintenant "image/svg+xml" au lieu de "application/svg+xml"
 
 <Alert type="Infos">
 Vous pouvez remplacer les signatures obsolètes par la commande suivante :
@@ -449,12 +449,12 @@ Utilisez le paquet [`mime-types`](https://github.com/jshttp/mime-types) pour tra
 
 **Important:** Ce changement affecte non seulement l'utilisation directe de `express.static.mime` mais aussi d'autres méthodes Express qui dépendent de la détection de type MIME, telles que `res.sendFile()`. Les types MIME suivants sont passés de Express 4 :
 
-* Fichiers JavaScript (.js): maintenant servi comme "text/javascript" au lieu de "application/javascript"
-* Fichiers JSON (.json): maintenant servi comme "application/json" au lieu de "text/json"
-* Fichiers CSS (.css): maintenant servi comme "text/css" au lieu de "text/plain"
-* Fichiers HTML (): maintenant servi comme "text/html; charset=utf-8" au lieu de "text/html"
-* Fichiers XML (.xml): maintenant servi comme "application/xml" au lieu de "text/xml"
-* Fichiers de police (.woff): maintenant utilisé comme "font/woff" au lieu de "application/font-woff"
+- Fichiers JavaScript (.js): maintenant servi comme "text/javascript" au lieu de "application/javascript"
+- Fichiers JSON (.json): maintenant servi comme "application/json" au lieu de "text/json"
+- Fichiers CSS (.css): maintenant servi comme "text/css" au lieu de "text/plain"
+- Fichiers HTML (): maintenant servi comme "text/html; charset=utf-8" au lieu de "text/html"
+- Fichiers XML (.xml): maintenant servi comme "application/xml" au lieu de "text/xml"
+- Fichiers de police (.woff): maintenant utilisé comme "font/woff" au lieu de "application/font-woff"
 
 ```js
 // v4
@@ -490,7 +490,7 @@ DEBUG=express:*,router,routeur:* node index.js
 
 La syntaxe correspondante au chemin d'accès est lorsqu'une chaîne de caractères est fournie comme premier paramètre pour les API `app.all()`, `app.use()`, `app.METHOD()`, `router.all()`, `router.METHOD()`, et `router.use()`. Les modifications suivantes ont été apportées à la façon dont la chaîne de chemin est associée à une requête entrante :
 
-* Le caractère générique `*` doit avoir un nom correspondant au comportement des paramètres `:`, utilisez `/*splat` au lieu de `/*`
+- Le caractère générique `*` doit avoir un nom correspondant au comportement des paramètres `:`, utilisez `/*splat` au lieu de `/*`
 
 ```js
 // v4
@@ -499,7 +499,7 @@ app.get('/*', async (req, res) => {
 });
 
 // v5
-application. et('/*splat', async (req, res) => {
+application.et('/*splat', async (req, res) => {
   res.send('ok');
 });
 ```
@@ -516,7 +516,7 @@ app.get('/{*splat}', async (req, res) => {
 
 </Alert>
 
-* Le caractère optionnel `?` n'est plus pris en charge, utilisez plutôt des accolades.
+- Le caractère optionnel `?` n'est plus pris en charge, utilisez plutôt des accolades.
 
 ```js
 // v4
@@ -530,7 +530,7 @@ app.get('/:file.:ext?', async (req, res) => {
 });
 ```
 
-* Les caractères Regexp ne sont pas pris en charge. Par exemple :
+- Les caractères Regexp ne sont pas pris en charge. Par exemple :
 
 ```js
 app.get('/[discussion|page]/:slug', async (req, res) => {
@@ -546,8 +546,8 @@ app.get(['/discussion/:slug', '/page/:slug'], async (req, res) => {
 });
 ```
 
-* Certains caractères ont été réservés pour éviter toute confusion lors de la mise à jour (`()[]?+!`), utilisez `\` pour les échapper.
-* Les noms de paramètres supportent maintenant des identifiants JavaScript valides, ou des guillemets comme `:"this"`.
+- Certains caractères ont été réservés pour éviter toute confusion lors de la mise à jour (`()[]?+!`), utilisez `\` pour les échapper.
+- Les noms de paramètres supportent maintenant des identifiants JavaScript valides, ou des guillemets comme `:"this"`.
 
 ### Les promesses rejetées des middleware et des gestionnaires
 
@@ -619,7 +619,7 @@ Les jokers (par exemple, `/*splat`) capturent les segments de chemin en tant que
 ```js
 app.get('/*splat', (req, res) => {
   // GET /foo/bar
-  console.dir(req. arams);
+  console.dir(req.arams);
   // => [Object: null prototype] { splat: [ 'foo', 'bar' ] }
 });
 ```
