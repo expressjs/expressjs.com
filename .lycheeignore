@@ -1,5 +1,4 @@
 # Prevent rate limit for npmjs links
-
 http://npmjs.com/.*
 https://npmjs.com/.*
 https://www.npmjs.com/.*
@@ -19,10 +18,11 @@ https://opencollective.com/.*
 # Prevent netlify rate limit
 https://www.netlify.com/
 
-## Ignore temporaly sitemap
+# Ignore temporarily sitemap
 https://expressjs.com/sitemap-index.xml
 
 # Ignore Coveralls links
-
 https://coveralls.io/-*
 
+# Prevent LinkedIn rate limit
+https://www.linkedin.com/sharing/share-offsite/.*
