@@ -30,7 +30,7 @@ Some template engines do not follow this convention, the
 <a href="https://github.com/visionmedia/consolidate.js">consolidate.js</a>
 library was created to map all of node's popular template
 engines to follow this convention, thus allowing them to
-work seemlessly within Express.
+work seamlessly within Express.
 
 ```js
 var engines = require('consolidate')
