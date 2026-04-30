@@ -48,7 +48,7 @@ basic-auth-connect `<1.1.0` uses a timing-unsafe equality comparison that can le
 **Patched versions**
 - `>=1.1.0`
 
-This vulnerability was discovered during the [OSTIF audit to Express](https://github.com/expressjs/security-wg/issues/6) and was mitigated by [the Express Securty triage team](https://github.com/expressjs/security-wg?tab=readme-ov-file#security-triage-team).
+This vulnerability was discovered during the [OSTIF audit to Express](https://github.com/expressjs/security-wg/issues/6) and was mitigated by [the Express Security triage team](https://github.com/expressjs/security-wg?tab=readme-ov-file#security-triage-team).
 
 More details area available in [GHSA-7p89-p6hx-q4fw](https://github.com/expressjs/basic-auth-connect/security/advisories/GHSA-7p89-p6hx-q4fw)
 
@@ -134,4 +134,3 @@ Because JavaScript is single-threaded and regex matching runs on the main thread
 Thanks to [Blake Embrey](https://github.com/blakeembrey) who reported and created the security patch.
 
 For more details, see [GHSA-9wv6-86v2-598j](https://github.com/pillarjs/path-to-regexp/security/advisories/GHSA-9wv6-86v2-598j)
-

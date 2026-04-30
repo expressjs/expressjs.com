@@ -11,7 +11,7 @@ with the route matched.
 
 The following snippet illustrates the most simple route definition possible. Express
 translates the path strings to regular expressions, used internally to match incoming requests.
-Query strings are <em>not</em> considered when peforming these matches, for example "GET /"
+Query strings are <em>not</em> considered when performing these matches, for example "GET /"
 would match the following route, as would "GET /?name=tobi".
 
 ```js

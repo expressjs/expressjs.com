@@ -115,8 +115,8 @@ starts the clock on EOL for v4 by moving it to `MAINTENANCE`. We recognize that 
 only major version for most of the history of Node.js itself. Because of this, we want to remain flexible and also
 provide a bit longer support. We want to do what is best for the ecosystem, so consider these goals not commitments.
 
-\*: v4 is a special case, and we may extend MAINTENENCE support  
-\*\*: v5 MAINTENENCE and EOL dates are determined by when v6 is released, these dates reflect the earliest dates if we
+\*: v4 is a special case, and we may extend MAINTENANCE support
+\*\*: v5 MAINTENANCE and EOL dates are determined by when v6 is released, these dates reflect the earliest dates if we
 were to ship v6 on 2025-10-01  
 \*\*\* : v6 work has not officially started yet, this is simply the earliest date we can ship based on our proposed policy
 
