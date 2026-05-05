@@ -54,14 +54,11 @@ By default with version npm 5.0+, `npm install` adds the module to the `dependen
 
 ## Verify your installation
 
-After installing Express, verify it is available:
+After installing, confirm Express is available in your project:
 
 ```bash
-npx express-generator@latest --version
-```
-If the command is not found, install it globally:
-
-```
-npm install -g express-generator
+npm ls express
 ```
 
+You should see `express@x.x.x` in the output. If the package 
+is missing, re-run the install command above.
