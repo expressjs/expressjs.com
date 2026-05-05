@@ -50,3 +50,18 @@ $ npm install express --no-save
 <div class="doc-box doc-info" markdown="1">
 By default with version npm 5.0+, `npm install` adds the module to the `dependencies` list in the `package.json` file; with earlier versions of npm, you must specify the `--save` option explicitly. Then, afterwards, running `npm install` in the app directory will automatically install modules in the dependencies list.
 </div>
+
+
+## Verify your installation
+
+After installing Express, verify it is available:
+
+```bash
+npx express-generator@latest --version
+```
+If the command is not found, install it globally:
+
+```
+npm install -g express-generator
+```
+
