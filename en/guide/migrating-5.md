@@ -265,12 +265,12 @@ npx codemod@latest @expressjs/redirect-arg-order
 ```js
 // v4
 app.get('/user', (req, res) => {
-  res.redirect('/users', 301)
+  res.redirect('/users')
 })
 
 // v5
 app.get('/user', (req, res) => {
-  res.redirect(301, '/users')
+  res.redirect('/users')
 })
 ```
 
