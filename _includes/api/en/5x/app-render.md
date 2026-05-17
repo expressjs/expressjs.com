@@ -4,6 +4,12 @@ Returns the rendered HTML of a view via the `callback` function. It accepts an o
 that is an object containing local variables for the view. It is like [res.render()](#res.render),
 except it cannot send the rendered view to the client on its own.
 
+The `view` argument is resolved the same way as in [res.render()](#res.render): it can
+be an absolute path or a path relative to the `views` setting. If the path does not
+contain a file extension, then the `view engine` setting determines the file extension.
+For example, with `app.set('views', './views')` and `app.set('view engine', 'pug')`,
+`app.render('email', ...)` renders `./views/email.pug`.
+
 <div class="doc-box doc-info" markdown="1">
 Think of `app.render()` as a utility function for generating rendered view strings.
 Internally `res.render()` uses `app.render()` to render views.
