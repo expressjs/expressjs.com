@@ -3,7 +3,7 @@ name: Deploy Website
 on:
   push:
     branches:
-      - gh-pages
+      - main
   workflow_dispatch:
 
 permissions:
@@ -29,6 +29,9 @@ jobs:
           path: .
           package-manager: npm
           out-dir: dist
+        env:
+          PUBLIC_ORAMA_PROJECT_ID: ${{ secrets.PUBLIC_ORAMA_PRODUCTION_PROJECT_ID }}
+          PUBLIC_ORAMA_API_KEY: ${{ secrets.PUBLIC_ORAMA_PRODUCTION_API_KEY }}
 
   deploy:
     name: deploy

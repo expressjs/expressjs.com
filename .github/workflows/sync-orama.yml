@@ -4,12 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - redesign
-      - gh-pages
+      - main
   pull_request:
     branches:
-      - redesign
-      - gh-pages
+      - main
 
 permissions:
   contents: read
@@ -22,29 +20,24 @@ jobs:
   sync-orama-cloud:
     name: Sync Orama Cloud
     runs-on: ubuntu-latest
-    env:
-      HAS_API_KEY_SECRET: ${{ github.event_name == 'push' || secrets.PRIVATE_ORAMA_API_KEY != '' }}
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
     steps:
       - name: 'Checkout'
-        if: ${{ env.HAS_API_KEY_SECRET == 'true' }}
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           persist-credentials: false
 
       - name: Set up Node.js
-        if: ${{ env.HAS_API_KEY_SECRET == 'true' }}
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Install Node.js dependencies
-        if: ${{ env.HAS_API_KEY_SECRET == 'true' }}
         run: npm ci
 
       - name: Sync Orama Cloud
-        if: ${{ env.HAS_API_KEY_SECRET == 'true' }}
         run: node ./scripts/sync-orama.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
