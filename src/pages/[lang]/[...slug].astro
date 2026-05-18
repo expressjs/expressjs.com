@@ -195,7 +195,6 @@ const lang = langParam as LanguageCode;
 const { Content, headings } = await render(page);
 const { title, description } = page.data;
 const isTranslation = lang !== 'en';
-const fileExt = page.filePath?.endsWith('.mdx') ? '.mdx' : '.md';
 const { prev, next } = getAdjacentPages(
   slug,
   lang,
@@ -203,10 +202,9 @@ const { prev, next } = getAdjacentPages(
   version
 );
 
-// TODO: change the url when finish the redesign, this is just a temporary solution to avoid broken links for translated pages
 const editUrl = isTranslation
-  ? `https://github.com/expressjs/expressjs.com/blob/redesign/docs/i18n.md`
-  : `https://github.com/expressjs/expressjs.com/edit/redesign/src/content/${page.collection}/${page.id}${fileExt}`;
+  ? `https://github.com/expressjs/expressjs.com/blob/main/docs/i18n.md`
+  : `https://github.com/expressjs/expressjs.com/edit/main/${page.filePath}`;
 ---
 
 <DocLayout
