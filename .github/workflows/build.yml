@@ -36,9 +36,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
-          # node-version-file: ".nvmrc" use when .nvmrc is on root of the repo
-          node-version: '24.13'
-          # cache: "npm" use when package-lock.json is on root of the repo
+          node-version-file: '.nvmrc'
+          cache: 'npm'
 
       - name: Install Node.js dependencies
         run: npm ci
