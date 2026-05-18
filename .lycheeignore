@@ -18,9 +18,6 @@ https://opencollective.com/.*
 # Prevent netlify rate limit
 https://www.netlify.com/
 
-# Ignore temporarily sitemap
-https://expressjs.com/sitemap-index.xml
-
 # Ignore Coveralls links
 https://coveralls.io/-*
 
