@@ -47,15 +47,11 @@
     "sharp": "^0.34.5",
     "unist-util-visit": "^5.1.0"
   },
+  "packageManager": "npm@11.14.1",
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": ">=24.13.0",
-      "onFail": "error"
-    },
-    "packageManager": {
-      "name": "npm",
-      "version": ">=11.0.0",
+      "version": ">=24.15.0",
       "onFail": "error"
     }
   },
