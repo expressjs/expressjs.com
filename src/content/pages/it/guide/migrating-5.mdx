@@ -197,7 +197,7 @@ Oppure è possibile aggiornare il codice manualmente:
 
 ### res.redirect('back') e res.location('back')
 
-Express 5 non supporta più la stringa magica `back` nei metodi `res.redirect()` e `res.location()`. Usa invece il valore `req.get('Referrer') \<unk> \<unk> '/'` per reindirizzare alla pagina precedente. In Express 4, i metodi `res.redirect('back')` e `res.location('back')` sono stati deprecati.
+Express 5 non supporta più la stringa magica `back` nei metodi `res.redirect()` e `res.location()`. Usa invece il valore `req.get('Referrer') || '/'` per reindirizzare alla pagina precedente. In Express 4, i metodi `res.redirect('back')` e `res.location('back')` sono stati deprecati.
 
 #### Come aggiornare
 
