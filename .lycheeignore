@@ -26,3 +26,6 @@ https://coveralls.io/-*
 
 # Prevent LinkedIn rate limit
 https://www.linkedin.com/sharing/share-offsite/.*
+
+# Ignore slack invite 403 (this will cause us to miss link invite expiration too)
+https://slack-invite.openjsf.org/
