@@ -2,7 +2,7 @@ name: Crowdin Upload
 
 on:
   push:
-    branches: [gh-pages]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

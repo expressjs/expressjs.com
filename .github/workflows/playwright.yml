@@ -3,8 +3,7 @@ name: Playwright Tests
 on:
   pull_request:
     branches:
-      - redesign
-      - gh-pages
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
