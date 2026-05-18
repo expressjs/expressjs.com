@@ -1,0 +1,137 @@
+---
+title: middleware de resposta
+description: Tempo de resposta para servidores Node.js
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo version="2.3.4" github="https://github.com/expressjs/response-time" npm="https://www.npmjs.com/package/response-time" />
+
+Tempo de resposta para servidores Node.js.
+
+Este módulo cria um middleware que registra o tempo de resposta para
+solicitações em servidores HTTP. O "tempo de resposta" é definido aqui como o tempo
+decorrido de quando uma solicitação entra nesse middleware para quando os cabeçalhos
+são escritos ao cliente.
+
+## Instalação
+
+Este é um módulo [Node.js](https://nodejs.org/en/) disponível através do
+[registro do npm](https://www.npmjs.com/). A instalação é feita usando o comando
+[`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install response-time
+```
+
+## API
+
+{/* eslint-disable no-unused-vars */}
+
+```js
+var responseTime = require('response-time');
+```
+
+### responseTime([options])
+
+Crie um middleware que adiciona um cabeçalho `X-Response-Time` para respostas. Se
+você não deseja utilizar este módulo para definir automaticamente um cabeçalho, por favor
+veja a seção sobre [`responseTime(fn)`](#responsetimefn).
+
+#### Opções
+
+The `responseTime` function accepts an optional `options` object that may
+contain any of the following keys:
+
+##### digits
+
+O número fixo de dígitos a serem incluídos na saída, que está sempre em
+milissegundos, o padrão é `3` (ex: `2.300ms`).
+
+##### cabeçalho
+
+O nome do cabeçalho a definir, o padrão é `X-Response-Time`.
+
+##### suffix
+
+Boolean para indicar se as unidades de sufixo de medida devem ser adicionadas à
+a saída, o padrão é `true` (ex: `2.300ms` vs `2.300`).
+
+### responseTime(fn)
+
+Crie um novo middleware que registra o tempo de resposta de uma solicitação e
+torna isso disponível para sua própria função `fn`. O argumento `fn` será
+invocado como `fn(req, res, tempo)`, onde `time` é um número em milissegundos.
+
+## Exemplos
+
+### expressão/conexão
+
+```js
+var express = require('express');
+var responseTime = require('response-time');
+
+var app = express();
+
+app.use(responseTime());
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+### servidor http vanilla
+
+```js
+var finalhandler = require('finalhandler');
+var http = require('http');
+var responseTime = require('response-time');
+
+// create "middleware"
+var _responseTime = responseTime();
+
+http.createServer(function (req, res) {
+  var done = finalhandler(req, res);
+  _responseTime(req, res, function (err) {
+    if (err) return done(err);
+
+    // respond to request
+    res.setHeader('content-type', 'text/plain');
+    res.end('hello, world!');
+  });
+});
+```
+
+### format@@0tempo de resposta métricas
+
+```js
+var express = require('express');
+var responseTime = require('response-time');
+var StatsD = require('node-statsd');
+
+var app = express();
+var stats = new StatsD();
+
+stats.socket.on('error', function (error) {
+  console.error(error.stack);
+});
+
+app.use(
+  responseTime(function (req, res, time) {
+    var stat = (req.method + req.url).toLowerCase().replace(/[:.]/g, '').replace(/\//g, '_');
+    stats.timing(stat, time);
+  })
+);
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+## Tipo:
+
+[MIT](https://github.com/expressjs/response-time/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/response-time
+[node-url]: https://nodejs.org/pt/download

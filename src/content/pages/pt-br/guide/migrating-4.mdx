@@ -40,8 +40,8 @@ Há várias mudanças significativas na Expresso 4:
 
 Ver também:
 
-- [Novas funcionalidades em 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
-- [Migrando da 3.x para a versão 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
+* [Novas funcionalidades em 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+* [Migrando da 3.x para a versão 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 ### Alterações no núcleo do Express e sistema de middleware
 
@@ -53,7 +53,7 @@ Versões e versões Express não são afetados por atualizações de middleware.
 Sem o intermediário integrado, você deve adicionar explicitamente todo o intermediário
 que é necessário para executar seu aplicativo. Basta seguir estes passos:
 
-1. Instale o módulo: `npm install --save <module-name>`
+1. Instale o módulo: `npm install --save \<module-name>`
 2. Na sua aplicação, requer o módulo: `require('module-name')`
 3. Use o módulo de acordo com sua documentação: `app.use( ... )`
 
@@ -214,8 +214,8 @@ o middleware do `router`.
 A forma como você define rotas é inalterada, mas o sistema de roteamento tem dois
 novos recursos para ajudar a organizar suas rotas:
 
-- Um novo método, `app.route()`, para criar gerenciadores de rotas em cadeia para um caminho de rota.
-- Uma nova classe, `express.Router`, para criar modular montável handlers.
+* Um novo método, `app.route()`, para criar gerenciadores de rotas em cadeia para um caminho de rota.
+* Uma nova classe, `express.Router`, para criar modular montável handlers.
 
 #### Método `app.route()`
 
@@ -229,13 +229,13 @@ Aqui está um exemplo de manipuladores de rota encadeados que são definidos usa
 app
   .route('/book')
   .get((req, res) => {
-    res.end('Recebe um livro aleatório');
+    res.send('Get a random book');
   })
-  .ost((req, res) => {
-    res.send('Adicionar um livro');
+  .post((req, res) => {
+    res.send('Add a book');
   })
-  .ut((req, res) => {
-    res.send('Atualizar o livro');
+  .put((req, res) => {
+    res.send('Update the book');
   });
 ```
 
@@ -256,18 +256,18 @@ com o seguinte conteúdo:
 var express = require('express');
 var router = express.Router();
 
-// middleware específico para este roteador
-. se((req, res, ext) => {
-  console.log('Tempo:', Data. ow());
+// middleware specific to this router
+router.use((req, res, next) => {
+  console.log('Time: ', Date.now());
   next();
 });
-// define a rota da página inicial do roteador
-. et('/', (req, res) => {
+// define the home page route
+router.get('/', (req, res) => {
   res.send('Birds home page');
 });
-// define a rota
-roteador. et('/about', (req, res) => {
-  res.send('Sobre birds');
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
 });
 
 module.exports = router;
@@ -298,9 +298,7 @@ A tabela a seguir lista outras pequenas mas importantes mudanças no Express 4:
   </tr>
   <tr>
     <td>Node.js</td>
-    <td>
-      Express 4 requer Node.js 0.10.x ou posterior e tem abandonado o suporte para Node.js 0.8.
-    </td>
+    <td>Express 4 requer Node.js 0.10.x ou posterior e tem abandonado o suporte para Node.js 0.8.</td>
   </tr>
   <tr>
     <td markdown="1">`http.createServer()`</td>
@@ -360,8 +358,8 @@ A tabela a seguir lista outras pequenas mas importantes mudanças no Express 4:
   <tr>
     <td markdown="1">`res.setHeader('Set-Cookie', val)`</td>
     <td markdown="1">
-      A funcionalidade agora está limitada a definir o valor básico de cookie. Use `res.cookie()`
-      para adicionar funcionalidade.
+      A funcionalidade agora está limitada a definir o valor básico de cookie. Use `res.cookie()` para adicionar
+      funcionalidade.
     </td>
   </tr>
 </table>
@@ -380,34 +378,34 @@ Considere um aplicativo Express v.3 com o seguinte arquivo `app.js`:
 ```js
 var express = require('express');
 var routes = require('./routes');
-var usuário = require('. routes/user');
+var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
 var app = express();
 
-// todos os ambientes
-app. et('porta', process.env.PORT ├3000);
+// all environments
+app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
-app.use(express. ession({ secret: 'your secret here' }));
+app.use(express.session({ secret: 'your secret here' }));
 app.use(express.bodyParser());
 app.use(app.router);
-app.use(express. tatic(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// desenvolvimento apenas
+// development only
 if (app.get('env') === 'development') {
-  app. se(express.errorHandler());
+  app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http. reateServer(app).listen(app.get('port'), () => {
-  console.log('Servidor expresso escutando na porta ' + app.get('port'));
+http.createServer(app).listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
 });
 ```
 
@@ -419,13 +417,13 @@ algo como isto:
 ```json
 {
   "name": "application-name",
-  "version": "0.0. ",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app. "
+    "start": "node app.js"
   },
   "dependencies": {
-    "express": "3. 2.0",
+    "express": "3.12.0",
     "pug": "*"
   }
 }
@@ -465,20 +463,20 @@ Executar o comando `npm` acima atualizará o `package.json` da seguinte forma:
 ```json
 {
   "name": "application-name",
-  "version": "0.0. ",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app. "
+    "start": "node app.js"
   },
   "dependencies": {
     "body-parser": "^1.5.2",
-    "errorhandler": "^1.1. ",
+    "errorhandler": "^1.1.1",
     "express": "^4.8.0",
-    "express-session": "^1. .2",
-    "put": "^2.0.0",
-    "override-método": "^2. .2",
+    "express-session": "^1.7.2",
+    "pug": "^2.0.0",
+    "method-override": "^2.1.2",
     "morgan": "^1.2.2",
-    "multer": "^0.1. ",
+    "multer": "^0.1.3",
     "serve-favicon": "^2.0.1"
   }
 }
@@ -544,7 +542,7 @@ A menos que você precise trabalhar diretamente com o módulo 'http' (socket.io/
 
 ```js
 app.listen(app.get('port'), () => {
-  console.log('Servidor Express escutando na porta ' + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'));
 });
 ```
 
@@ -556,7 +554,7 @@ O processo de migração está completo, e o aplicativo agora é um aplicativo
 Express 4. Para confirmar, inicie o aplicativo usando o seguinte comando:
 
 ```bash
-$ nó .
+$ node .
 ```
 
 Carregue [http://localhost:3000](http://localhost:3000)
@@ -575,7 +573,7 @@ Se você já tiver o gerador de aplicativo Express 3 instalado em seu sistema,
 você deve desinstalá-lo:
 
 ```bash
-$ npm desinstale -g expresso
+$ npm uninstall -g express
 ```
 
 Dependendo de como seus privilégios de arquivo e diretório são configurados,
@@ -597,16 +595,16 @@ Express 4.
 
 Opções de comando e uso em grande parte permanecem iguais, com as seguintes exceções:
 
-- A opção `--sessions` foi removida.
-- A opção `--jshtml` foi removida.
-- Adicionado a opção `--hogan` para apoiar [Hogan.js](http://twitter.github.io/hogan.js/).
+* A opção `--sessions` foi removida.
+* A opção `--jshtml` foi removida.
+* Adicionado a opção `--hogan` para apoiar [Hogan.js](http://twitter.github.io/hogan.js/).
 
 ### Exemplo
 
 Execute o seguinte comando para criar um aplicativo Express 4:
 
 ```bash
-$ app4 expresso
+$ express app4
 ```
 
 Se você olhar o conteúdo do arquivo `app4/app.js`, você notará
@@ -619,7 +617,7 @@ Você também vai notar que o arquivo `app.js` agora é um Node. módulo s, em c
 Depois de instalar as dependências, inicie o aplicativo usando o seguinte comando:
 
 ```bash
-$ início do npm
+$ npm start
 ```
 
 Se você olhar o script `npm start` no `package. arquivo son`,
@@ -643,10 +641,10 @@ apague a linha que diz `módulo. xports = app;` no final do arquivo
 `app.js`, e então cole o seguinte código em seu lugar:
 
 ```js
-app.set('port', process.env.PORT →3000);
+app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), () => {
-  debug('Expresse servidor escutando na porta ' + server.address().port);
+  debug('Express server listening on port ' + server.address().port);
 });
 ```
 

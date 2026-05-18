@@ -5,22 +5,22 @@ description: Aprenda os fundamentos do roteamento em aplicações Express.js, in
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Routing_ refere-se a determinar como uma aplicação responde a uma solicitação do cliente para um ponto final específico, que é um URI (ou caminho) e um método de requisição HTTP específico (GET, POST, e assim por diante).
+*Routing* refere-se a determinar como uma aplicação responde a uma solicitação do cliente para um ponto final específico, que é um URI (ou caminho) e um método de requisição HTTP específico (GET, POST, e assim por diante).
 
 Cada rota pode ter uma ou mais funções de manipulador, que são executadas quando a rota é correspondente.
 
 A definição de rota aceita a seguinte estrutura:
 
 ```js
-app.METHOD(PATH, MUITO);
+app.METHOD(PATH, HANDLER);
 ```
 
 Onde:
 
-- `app` é uma instância de `express`.
-- `METHOD` é um [método de solicitação HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), em minúsculas.
-- O `PATH` é um caminho no servidor.
-- `HANDLER` é a função executada quando a rota é correspondente.
+* `app` é uma instância de `express`.
+* `METHOD` é um [método de solicitação HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), em minúsculas.
+* O `PATH` é um caminho no servidor.
+* `HANDLER` é a função executada quando a rota é correspondente.
 
 <Alert type="alerta">
 
@@ -36,7 +36,7 @@ Responda com `Olá Mundo!` na página inicial:
 
 ```js
 app.get('/', (req, res) => {
-  res.send('Olá Mundo!');
+  res.send('Hello World!');
 });
 ```
 
@@ -44,7 +44,7 @@ Responder a uma solicitação POST na rota raiz (`/`), a página inicial do apli
 
 ```js
 app.post('/', (req, res) => {
-  res.send('Tem uma solicitação POST');
+  res.send('Got a POST request');
 });
 ```
 
@@ -52,7 +52,7 @@ Responda a uma solicitação PUT para a rota `/user`:
 
 ```js
 app.put('/user', (req, res) => {
-  res.send('Tem uma solicitação de PUT em/user');
+  res.send('Got a PUT request at /user');
 });
 ```
 
@@ -60,7 +60,7 @@ Responder a uma solicitação de DELETE para a rota `/user`:
 
 ```js
 app.delete('/user', (req, res) => {
-  res.send('Tem uma solicitação de DELETE em/user');
+  res.send('Got a DELETE request at /user');
 });
 ```
 

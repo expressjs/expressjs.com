@@ -20,6 +20,9 @@
   "version": {
     "selectLabel": "Select API version"
   },
+  "language": {
+    "selectLabel": "Select language"
+  },
   "nav": {
     "mainMenu": "Main menu",
     "toggleMenu": "Toggle menu",
@@ -81,6 +84,7 @@
       "glossary": "Glossary",
       "contributing": "Contributing",
       "utils": "Utilities",
+      "changelog": "Changelog",
       "middleware": "Middleware"
     },
     "aria": {
@@ -109,7 +113,8 @@
       "community": "Community resources",
       "glossary": "Glossary of terms",
       "contributing": "Contributing guide",
-      "utils": "Utilities"
+      "utils": "Utilities",
+      "changelog": "Express changelog"
     }
   },
   "doc": {
@@ -120,6 +125,10 @@
   "page": {
     "editOnGitHub": "Edit on GitHub",
     "translateThis": "Translate this page"
+  },
+  "announcement": {
+    "readMore": "Read more",
+    "checkLatestBlog": "Check out our latest blog"
   },
   "post": {
     "share": "Share",
@@ -166,9 +175,13 @@
     "message": "The page you are looking for does not exist or has been moved.",
     "goHome": "Go to Home"
   },
+  "common": {
+    "download": "Download"
+  },
   "hero": {
     "tagline": "Fast, unopinionated, minimalist web framework for Node.js",
     "getStarted": "Get Started",
+    "kawaiiLogoAlt": "Express.js kawaii logo",
     "videoPause": "Pause background video",
     "videoPlay": "Play background video"
   }

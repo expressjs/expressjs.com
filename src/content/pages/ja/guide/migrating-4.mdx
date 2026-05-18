@@ -40,8 +40,8 @@ Express 4にはいくつかの大きな変更点があります。
 
 こちらもご参照ください:
 
-- [新機能 in 4.x] (https://github.com/expressjs/express/wiki/New-features-in-4.x)
-- [Migrating from 3.x to 4.x](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
+* [新機能 in 4.x] (https://github.com/expressjs/express/wiki/New-features-in-4.x)
+* [Migrating from 3.x to 4.x](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 ### Express coreとミドルウェアシステムへの変更
 
@@ -214,8 +214,8 @@ the `router` middleware.
 ルートの定義方法は変更されていませんが、ルーティングシステムにはルートの整理に役立つ2つの
 新機能があります。
 
-- 新しいメソッド `app.route()` は、ルートパスに対してチェーン可能なルートハンドラを作成します。
-- モジュール式のマウント可能なルートハンドラを作成するための新しいクラス `express.Router` 。
+* 新しいメソッド `app.route()` は、ルートパスに対してチェーン可能なルートハンドラを作成します。
+* モジュール式のマウント可能なルートハンドラを作成するための新しいクラス `express.Router` 。
 
 #### `app.route()`メソッド
 
@@ -304,15 +304,14 @@ middleware that is specific to the route.
     <td markdown="1">`http.createServer()`</td>
     <td markdown="1">
       `http`モジュールは、
-      （socket.io/SPDY/HTTPS）で直接動作する必要がない限り、もはや必要ありません。
-      アプリは、`app.listen()`関数を使用して起動できます。
+      （socket.io/SPDY/HTTPS）で直接動作する必要がない限り、もはや必要ありません。 アプリは、`app.listen()`関数を使用して起動できます。
     </td>
   </tr>
   <tr>
     <td markdown="1">`app.configure()`</td>
     <td markdown="1">
-      `app.configure()`関数が削除されました。 `process.env.NODE_ENV` または `app.get('env')`
-      関数を使用して環境を検出し、それに応じてアプリを構成します。
+      `app.configure()`関数が削除されました。 `process.env.NODE_ENV` または
+      `app.get('env')` 関数を使用して環境を検出し、それに応じてアプリを構成します。
     </td>
   </tr>
   <tr>
@@ -359,8 +358,8 @@ middleware that is specific to the route.
   <tr>
     <td markdown="1">`res.setHeader('Set-Cookie', val)`</td>
     <td markdown="1">
-      機能は基本的なクッキー値の設定に限定されるようになりました。 追加された 機能には、
-      `res.cookie()` を使用します。
+      機能は基本的なクッキー値の設定に限定されるようになりました。 追加された
+      機能には、 `res.cookie()` を使用します。
     </td>
   </tr>
 </table>
@@ -437,7 +436,7 @@ Express 4アプリに必要なミドルウェアをインストールし、Expre
 バージョンにアップデートして移行を開始します。
 
 ```bash
-$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest --save
+$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
 ```
 
 `app.js`に以下の変更を加えます。
@@ -596,9 +595,9 @@ Express 4ジェネレータに更新されます。
 
 コマンドオプションと使用方法は、以下の例外を除き、ほとんど同じままです。
 
-- `--sessions` オプションを削除しました。
-- `--jshtml` オプションを削除しました。
-- [Hogan.js](http://twitter.github.io/hogan.js/) をサポートするための `--hogan` オプションを追加しました。
+* `--sessions` オプションを削除しました。
+* `--jshtml` オプションを削除しました。
+* [Hogan.js](http://twitter.github.io/hogan.js/) をサポートするための `--hogan` オプションを追加しました。
 
 ### 例
 

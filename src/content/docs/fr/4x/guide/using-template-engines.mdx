@@ -5,7 +5,7 @@ description: Découvrez comment intégrer et utiliser des moteurs de gabarits te
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Un _moteur de modèle_ vous permet d'utiliser des fichiers de modèles statiques dans votre application. Lors de l'exécution, le moteur de gabarit remplace les variables
+Un *moteur de modèle* vous permet d'utiliser des fichiers de modèles statiques dans votre application. Lors de l'exécution, le moteur de gabarit remplace les variables
 dans un fichier de gabarit par des valeurs réelles, et transforme le modèle en un fichier HTML envoyé au client.
 Cette approche facilite la conception d'une page HTML.
 
@@ -13,9 +13,9 @@ Le [générateur d'application Express](/en/starter/generator) utilise [Pug](htt
 
 Pour afficher les fichiers de gabarit, définissez les [propriétés de réglage de l'application](/en/4x/api#app.set), dans le `app.js` par défaut créé par le générateur:
 
-- `views`, le répertoire où se trouvent les fichiers de modèle. Ex. : `app.set('vues', './views')`.
+* `views`, le répertoire où se trouvent les fichiers de modèle. Ex. : `app.set('vues', './views')`.
   Par défaut, le répertoire `views` se trouve à la racine de l'application.
-- `voir le moteur`, le moteur de gabarit à utiliser. Par exemple, pour utiliser le moteur de gabarit Pug : `app.set('moteur de vue', 'pug')`.
+* `voir le moteur`, le moteur de gabarit à utiliser. Par exemple, pour utiliser le moteur de gabarit Pug : `app.set('moteur de vue', 'pug')`.
 
 Ensuite, installez le paquet npm correspondant au moteur de gabarits ; par exemple pour installer Pug:
 
@@ -36,16 +36,16 @@ Une fois que le moteur de vue est défini, vous n'avez pas à spécifier le mote
 Express charge le module en interne, par exemple :
 
 ```js
-app.set('moteur d'affichage', 'pug');
+app.set('view engine', 'pug');
 ```
 
 Ensuite, créez un fichier de modèle Pug nommé `index.pug` dans le dossier `views`, avec le contenu suivant:
 
 ```pug
 html
-  devant
-    title= titre
-  corps
+  head
+    title= title
+  body
     h1= message
 ```
 
@@ -54,7 +54,7 @@ vous devez spécifier l'extension du fichier `view`. Sinon, vous pouvez l'oublie
 
 ```js
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Hey', message: 'Bonjour !' });
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
 });
 ```
 

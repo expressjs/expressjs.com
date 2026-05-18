@@ -37,17 +37,17 @@ Wenn Sie auf `true` setzen, ist es wichtig sicherzustellen, dass der letzte Reve
 <td markdown="1">
 Eine IP-Adresse, ein Subnetz oder ein Array von IP-Adressen und Subnetzen, die darauf vertrauen, dass es sich um einen Reverse Proxy handelt. Die folgende Liste zeigt die vorkonfigurierten Subnetznamen an:
 
-- loopback - `127.0.0.1/8`, `::1/128`
-- linklocal - `169.254.0.0/16`, `fe80::/10`
-- uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
+* loopback - `127.0.0.1/8`, `::1/128`
+* linklocal - `169.254.0.0/16`, `fe80::/10`
+* uniquelocal - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
 
 Sie können IP-Adressen auf jede der folgenden Arten festlegen:
 
 ```js
-app.set('trust proxy', 'loopback'); // ein einzelnes Subnetz
-app.set('trust proxy', 'loopback, 123.123.123.123''); // ein Subnetz und eine Adresse
-angeben. et('trust proxy', 'loopback, linklocal, uniquelocal'); // mehrere Subnetze als CSV
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // mehrere Subnetze als Array angeben
+app.set('trust proxy', 'loopback'); // specify a single subnet
+app.set('trust proxy', 'loopback, 123.123.123.123'); // specify a subnet and an address
+app.set('trust proxy', 'loopback, linklocal, uniquelocal'); // specify multiple subnets as CSV
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // specify multiple subnets as an array
 ```
 
 Wenn angegeben, werden die IP-Adressen oder Subnetze vom Prozess der Adressermittlung ausgeschlossen und die dem Anwendungsserver nächstgelegene nicht vertrauenswürdige IP-Adresse wird als IP-Adresse des Clients ermittelt. Dies funktioniert indem überprüft wird, ob `req.socket.remoteAddress` vertrauenswürdig ist. Wenn ja, dann wird jede Adresse in `X-Forwarded-For` von rechts nach links bis zur ersten Adresse überprüft, die nicht vertrauenswürdig ist.
@@ -71,8 +71,8 @@ Benutzerdefinierte Vertrauens-Implementierung.
 
 ```js
 app.set('trust proxy', (ip) => {
-  if (ip === '127.0.0.1' || ip === '123.123.123. 23')
-    return true; // vertrauenswürdige IPs
+  if (ip === '127.0.0.1' || ip === '123.123.123.123')
+    return true; // trusted IPs
   else return false;
 });
 ```
@@ -90,14 +90,12 @@ Das Aktivieren von `trust proxy` hat folgende Auswirkungen:
     `X-Forwarded-Host` Header gesetzt wurde , die vom Client oder vom Proxy gesetzt werden kann.
   </li>
   <li markdown="1">
-    `X-Forwarded-Proto` kann vom Reverse Proxy gesetzt werden, um der App mitzuteilen, ob es `https`
-    oder `http` oder sogar ein ungültiger Name ist. Dieser Wert wird von [req.protocol]reflektiert
-    (/en/api#req.protocol).
+    `X-Forwarded-Proto` kann vom Reverse Proxy gesetzt werden, um der App mitzuteilen, ob es `https` oder
+    `http` oder sogar ein ungültiger Name ist. Dieser Wert wird von [req.protocol]reflektiert (/en/api#req.protocol).
   </li>
   <li markdown="1">
     Die Werte [req.ip](/en/api#req.ip) und [req.ips](/en/api#req.ips) werden auf der Basis der
-    Socket-Adresse und des `X-Forwarded-For` Headers gefüllt beginnend an der ersten nicht
-    vertrauenswürdigen Adresse.
+    Socket-Adresse und des `X-Forwarded-For` Headers gefüllt beginnend an der ersten nicht vertrauenswürdigen Adresse.
   </li>
 </ul>
 

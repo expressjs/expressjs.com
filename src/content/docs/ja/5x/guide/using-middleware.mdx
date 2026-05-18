@@ -7,24 +7,24 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express はルーティングおよびミドルウェアの Web フレームワークで、独自の最小限の機能を持っています。Express アプリケーションは、基本的にはミドルウェア関数の一連の呼び出しです。
 
-_Middleware_ 関数は、[request object](/en/5x/api#req) (`req`) にアクセスできる関数です。 [response object](/en/5x/api#res) (`res`) と、アプリケーションのリクエストレスポンスサイクルの次のミドルウェア関数。 次のミドルウェア関数は通常`next`という名前の変数で表されます。
+*Middleware* 関数は、[request object](/en/5x/api#req) (`req`) にアクセスできる関数です。 [response object](/en/5x/api#res) (`res`) と、アプリケーションのリクエストレスポンスサイクルの次のミドルウェア関数。 次のミドルウェア関数は通常`next`という名前の変数で表されます。
 
 ミドルウェア機能は以下のタスクを実行できます。
 
-- 任意のコードを実行します。
-- リクエストとレスポンスオブジェクトに変更を加えます。
-- リクエストレスポンスサイクルを終了します。
-- スタック内の次のミドルウェア関数を呼び出します。
+* 任意のコードを実行します。
+* リクエストとレスポンスオブジェクトに変更を加えます。
+* リクエストレスポンスサイクルを終了します。
+* スタック内の次のミドルウェア関数を呼び出します。
 
 現在のミドルウェア関数がリクエスト応答サイクルを終了しない場合は、次のミドルウェア関数に制御を渡すために `next()` を呼び出す必要があります。 そうでなければ、リクエストはハングアップのままになります。
 
 Express アプリケーションでは、次のタイプのミドルウェアを使用できます。
 
-- [Application-level middleware](#middleware.application)
-- [Router-level middleware](#middleware.router)
-- [Error-handling middleware](#middleware.error-handling)
-- [Built-in middleware](#middleware.built-in)
-- [Third-party middleware](#middleware.third-party)
+* [Application-level middleware](#middleware.application)
+* [Router-level middleware](#middleware.router)
+* [Error-handling middleware](#middleware.error-handling)
+* [Built-in middleware](#middleware.built-in)
+* [Third-party middleware](#middleware.third-party)
 
 アプリケーションレベルおよびルーターレベルのミドルウェアは、任意のマウントパスでロードできます。
 また、一連のミドルウェア関数を一緒にロードして、マウントポイントでミドルウェアシステムのサブスタックを作成することもできます。
@@ -37,7 +37,7 @@ Express アプリケーションでは、次のタイプのミドルウェアを
 
 ```js
 const express = require('express');
-const app = expresss();
+const app = express();
 
 app.use((req, res, next) => {
   console.log('Time:', Date.now());
@@ -246,7 +246,7 @@ app.use('/admin', router, (req, res) => {
 
 <Alert type="アラート">
 
-エラー処理ミドルウェアは常に\_4つの引数を取ります。 エラー処理ミドルウェア関数として
+エラー処理ミドルウェアは常に_4つの引数を取ります。 エラー処理ミドルウェア関数として
 識別するには、4つの引数を指定する必要があります。 `next`
 オブジェクトを使用しなくても、署名を維持するために指定する必要があります。 Otherwise, the `next` object will be
 interpreted as regular middleware and will fail to handle errors.
@@ -271,9 +271,9 @@ functions that were previously included with Express are now in separate modules
 
 Express には次のミドルウェア関数が組み込まれています。
 
-- [express.static](/en/5x/api#express.static) は、HTML ファイル、画像などの静的なアセットを提供します。
-- [express.json](/en/5x/api#express.json) は、JSON ペイロードで受信したリクエストを解析します。 \*\*注意: Express 4.16.0+で利用可能
-- [express.urlencoded](/en/5x/api#express.urlencoded) は、URLエンコードされたペイロードで受信するリクエストを解析します。 \*\*注意: Express 4.16.0+で利用可能
+* [express.static](/en/5x/api#express.static) は、HTML ファイル、画像などの静的なアセットを提供します。
+* [express.json](/en/5x/api#express.json) は、JSON ペイロードで受信したリクエストを解析します。 \*\*注意: Express 4.16.0+で利用可能
+* [express.urlencoded](/en/5x/api#express.urlencoded) は、URLエンコードされたペイロードで受信するリクエストを解析します。 \*\*注意: Express 4.16.0+で利用可能
 
 ## サードパーティのミドルウェア
 
@@ -292,7 +292,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 
-// cookie-parsing middleware
+// load the cookie-parsing middleware
 app.use(cookieParser());
 ```
 

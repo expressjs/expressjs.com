@@ -5,7 +5,7 @@ description: Entdecken Sie, wie Sie Template-Engines wie Pug, Handlebars und EJS
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Eine _template engine_ ermöglicht es Ihnen, statische Template-Dateien in Ihrer Anwendung zu verwenden. Zur Laufzeit ersetzt die Template-Engine
+Eine *template engine* ermöglicht es Ihnen, statische Template-Dateien in Ihrer Anwendung zu verwenden. Zur Laufzeit ersetzt die Template-Engine
 Variablen in einer Template-Datei mit aktuellen Werten und verwandelt die Vorlage in eine HTML-Datei, die an den Client gesendet wird.
 Dieser Ansatz erleichtert die Gestaltung einer HTML-Seite.
 
@@ -13,14 +13,14 @@ Der [Express-Anwendungsgenerator](/en/starter/generator) verwendet [Pug](https:/
 
 Um Template-Dateien zu rendern, setzen Sie folgende [Anwendungs-Einstellungen-Eigenschaften](/en/4x/api#app.set), in der Standardeinstellung `app.js`, die vom Generator erstellt wurde:
 
-- `views`, das Verzeichnis, in dem sich die Template-Dateien befinden. Eg: `app.set('views', './views')`.
+* `views`, das Verzeichnis, in dem sich die Template-Dateien befinden. Eg: `app.set('views', './views')`.
   Dies ist standardmäßig im Verzeichnis `views` im Root-Verzeichnis der Anwendung.
-- `view engine`, die zu verwendende Template-Engine. Um zum Beispiel die Mückenvorlagen-Engine zu verwenden: `app.set('view engine', 'pug')`.
+* `view engine`, die zu verwendende Template-Engine. Um zum Beispiel die Mückenvorlagen-Engine zu verwenden: `app.set('view engine', 'pug')`.
 
 Installieren Sie dann das entsprechende Template Engine npm Paket; zum Beispiel um Pug:
 
 ```bash
-$ npm Installations-Pug --save
+$ npm install pug --save
 ```
 
 <Alert type="warnung">
@@ -43,10 +43,10 @@ Erstelle dann eine Pug Template Datei namens `index.pug` im `views` Verzeichnis 
 
 ```pug
 html
-  Kopf
+  head
     title= title
-  Körper
-    h1= Nachricht
+  body
+    h1= message
 ```
 
 Erstelle eine Route um die `index.pug` Datei zu rendern. Wenn die `view engine` Eigenschaft nicht gesetzt ist,
@@ -54,7 +54,7 @@ musst du die Erweiterung der `view` Datei angeben. Andernfalls können Sie es au
 
 ```js
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Hey', message: 'Hallo there!' });
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
 });
 ```
 

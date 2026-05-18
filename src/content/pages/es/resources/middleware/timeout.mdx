@@ -1,0 +1,169 @@
+---
+title: tiempo de espera de middleware
+description: Solicitar middleware de tiempo de espera para Conectar/Express
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo version="0.2.1" github="https://github.com/expressjs/timeout" npm="https://www.npmjs.com/package/timeout" />
+
+Realiza una solicitud en el marco de la aplicación Connect/Express.
+
+## Instalar
+
+Este es un módulo [Node.js](https://nodejs.org/en/) disponible a través del
+[npm registry](https://www.npmjs.com/). La instalación se realiza usando el comando
+[`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install connect-timeout
+```
+
+## API
+
+**NOTA** Este módulo no es recomendado como un middleware "de nivel superior" (por ejemplo,
+`app.use(timeout('5s'))`) a menos que tome precauciones para detener su propio middleware
+. Ver [como middleware de nivel superior](#as-top-level-middleware)
+para saber cómo usar como un middleware de nivel superior.
+
+Mientras que la biblioteca emitirá un evento de 'timeout' cuando las solicitudes excedan el tiempo de espera dado
+, nodo continuará procesando la solicitud lenta hasta que termine.
+Las peticiones lentas continuarán usando CPU y memoria, incluso si regresa
+una respuesta HTTP en el tiempo de espera de devolución. Para un mejor control sobre la CPU/memoria,
+puede que necesite encontrar los eventos que están tomando mucho tiempo (peticiones HTTP
+de terceros, E/S de disco, llamadas a bases de datos) y encontrar una forma de cancelarlas, y/o
+cerrar los sockets adjuntos.
+
+### tiempo de espera (tiempo, [options])
+
+Devuelve middleware que se apaga en `time` milisegundos. `time` también puede ser
+una cadena aceptada por el módulo [ms](https://www.npmjs.org/package/ms#readme)
+. En tiempo de espera, `req` emitirá `"timeout"`.
+
+#### Opciones
+
+La función `timeout` toma un objeto opcional `options` que puede contener
+cualquiera de las siguientes claves:
+
+##### responder
+
+Controla si este módulo "responderá" en forma de reenvío de un error.
+Si es `true`, el error de tiempo de espera se pasa a `next()` para que puedas personalizar
+el comportamiento de respuesta. Este error tiene una propiedad `.timeout` así como
+`.status == 503`. Esto por defecto es `true`.
+
+### req.clearTimeout()
+
+Limpia el tiempo de espera de la solicitud. El tiempo de espera se ha eliminado completamente y
+no disparará esta solicitud en el futuro.
+
+### req.tiempo agotado
+
+`true` si el tiempo de espera se disparó; `falso` de lo contrario.
+
+## Ejemplos
+
+### como middleware de nivel superior
+
+Debido a la forma en que trabaja el middleware una vez que este módulo
+pase la solicitud al siguiente middleware (que tiene que hacer en orden
+para que usted haga el trabajo), ya no puede detener el flujo, así que debes tener
+cuidado para comprobar si la solicitud ha agotado el tiempo de espera antes de continuar actuando
+en la solicitud.
+
+```javascript
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var express = require('express');
+var timeout = require('connect-timeout');
+
+// example of using this top-level; note the use of haltOnTimedout
+// after every middleware; it will stop the request flow on a timeout
+var app = express();
+app.use(timeout('5s'));
+app.use(bodyParser());
+app.use(haltOnTimedout);
+app.use(cookieParser());
+app.use(haltOnTimedout);
+
+// Add your routes here, etc.
+
+function haltOnTimedout(req, res, next) {
+  if (!req.timedout) next();
+}
+
+app.listen(3000);
+```
+
+### exprese 3.x
+
+```javascript
+var express = require('express');
+var bodyParser = require('body-parser');
+var timeout = require('connect-timeout');
+
+var app = express();
+app.post('/save', timeout('5s'), bodyParser.json(), haltOnTimedout, function (req, res, next) {
+  savePost(req.body, function (err, id) {
+    if (err) return next(err);
+    if (req.timedout) return;
+    res.send('saved as id ' + id);
+  });
+});
+
+function haltOnTimedout(req, res, next) {
+  if (!req.timedout) next();
+}
+
+function savePost(post, cb) {
+  setTimeout(
+    function () {
+      cb(null, (Math.random() * 40000) >>> 0);
+    },
+    (Math.random() * 7000) >>> 0
+  );
+}
+
+app.listen(3000);
+```
+
+### conectar
+
+```javascript
+var bodyParser = require('body-parser');
+var connect = require('connect');
+var timeout = require('connect-timeout');
+
+var app = connect();
+app.use('/save', timeout('5s'), bodyParser.json(), haltOnTimedout, function (req, res, next) {
+  savePost(req.body, function (err, id) {
+    if (err) return next(err);
+    if (req.timedout) return;
+    res.send('saved as id ' + id);
+  });
+});
+
+function haltOnTimedout(req, res, next) {
+  if (!req.timedout) next();
+}
+
+function savePost(post, cb) {
+  setTimeout(
+    function () {
+      cb(null, (Math.random() * 40000) >>> 0);
+    },
+    (Math.random() * 7000) >>> 0
+  );
+}
+
+app.listen(3000);
+```
+
+## Licencia
+
+[MIT](https://github.com/expressjs/timeout/blob/HEAD/LICENSE)
+
+[npm-url]: <https://npmjs.org/paquete/tiempo de espera de conexión>
+[url de travis]: https://travis-ci.org/expressjs/timeout
+[descarga-url]: <https://npmjs.org/paquete/tiempo de espera de conexión>

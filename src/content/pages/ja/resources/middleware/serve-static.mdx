@@ -1,0 +1,251 @@
+---
+title: serve-static middleware
+description: 静的ファイルを提供
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo version="2.2.1" github="https://github.com/express/serve-static" npm="https://www.npmjs.com/package/serve-static" />
+
+## インストール
+
+これは、 [Node.js](https://nodejs.org/en/) モジュールで、
+[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install serve-static
+```
+
+## API
+
+```js
+const serveStatic = require('serve-static');
+```
+
+### serveStatic(root, options)
+
+指定したルート
+ディレクトリ内からファイルを提供する新しいミドルウェア関数を作成します。 `req.url`
+と指定されたルートディレクトリを組み合わせることで、サービスを提供するファイルを決定します。 When a file is not found, instead of
+sending a 404 response, this module will instead call `next()` to move on
+to the next middleware, allowing for stacking and fall-backs.
+
+#### オプション
+
+##### acceptRanges
+
+指定されたリクエストの受け付けを有効または無効にします。デフォルトは true です。
+Disabling this will not send `Accept-Ranges` and ignore the contents
+of the `Range` request header.
+
+##### cacheControl
+
+`Cache-Control` レスポンスヘッダーの設定を有効または無効にします。デフォルトは
+true です。 これを無効にすると、 `immutable` と `maxAge` オプションは無視されます。
+
+##### dotfiles
+
+「dotfiles」が発生したときにどのように扱われるかを設定します。 ドットファイルは、
+またはドット(.)で始まるディレクトリです。 このチェックは、実際にパスが
+ディスク上に存在するかどうかをチェックすることなく、
+で行われます。 If `root` is specified, only the dotfiles above the root are
+checked (i.e. the root itself can be within a dotfile when set
+to "deny").
+
+* `'allow'` dotfilesに特別な処理はありません。
+* `'deny'` dotfileと403/`next()`のリクエストを拒否します。
+* `'ignore'` dotfileが存在せず、404/`next()`と同じようにしてください。
+
+デフォルト値は `'ignore'` です。
+
+##### etag
+
+etag の生成を有効または無効にします。デフォルトは true です。
+
+##### extensions
+
+ファイル拡張子のフォールバックを設定します。 設定すると、ファイルが見つからない場合、指定された
+拡張子がファイル名に追加され、検索されます。
+が存在する最初のものが提供されます。 Example: `['html', 'htm']`.
+
+デフォルト値は `false` です。
+
+##### Fallthrough
+
+クライアントエラーが処理されていない
+リクエストとしてフォールスルーされるミドルウェアを設定します。そうでなければ、クライアントエラーを転送します。 違いは、悪いリクエストや存在しないファイルへのリクエストなどのクライアント
+エラーが発生すると、このミドルウェアは
+単純に次のミドルウェアに`next()`が発生します。この値は
+が`true`の場合。 この値が `false` の場合、これらのエラー (404でさえ) は
+`next(err)` を呼び出します。
+
+通常、複数の物理ディレクトリが
+同じウェブアドレスまたは存在しないファイルを埋めるルートにマッピングされるように、`true` が必要です。
+
+The value `false` can be used if this middleware is mounted at a path that
+is designed to be strictly a single file system directory, which allows for
+short-circuiting 404s for less overhead. このミドルウェアは
+すべてのメソッドにも返信します。
+
+デフォルト値は `true` です。
+
+##### イミュータブル
+
+`Cache-Control` レスポンス
+で`immutable` ディレクティブを有効または無効にします。デフォルトは `false` です。 `true`の場合、`maxAge`オプションも
+を指定してキャッシュを有効にします。 `immutable` ディレクティブは、
+サポートされているクライアントが
+`maxAge` オプションでファイルが変更されたかどうかをチェックする条件付きリクエストを行うのを防ぎます。
+
+##### インデックス
+
+デフォルトでは、このモジュールはディレクトリのリクエスト
+に応答して「index.html」ファイルを送信します。 この設定を無効にするには、`false` または新しいインデックスを提供するには、
+文字列または配列を優先順位で渡します。
+
+##### 最終更新日
+
+`Last-Modified` ヘッダーを有効または無効にします。デフォルトは true です。 ファイル
+システムの最後の変更値を使用します。
+
+##### maxAge
+
+httpキャッシュのために最大年齢をミリ秒単位で指定します。デフォルトは0です。 この
+は [ms](https://www.npmjs.org/package/ms#readme)
+モジュールで受け付けられる文字列にすることもできます。
+
+##### リダイレクト
+
+パス名がdirの場合、末尾の"/"にリダイレクトします。 デフォルトは `true` です。
+
+##### setHeaders
+
+レスポンスにカスタムヘッダーを設定する関数です。 ヘッダへの変更は
+で同期的に行われます。 関数は `fn(res, path, stat)` と呼ばれます。引数は
+です。
+
+* `res` the response object
+* 送信されるファイルのパス `path`
+* `stat` 送信されているファイルの stat オブジェクト
+
+## 例
+
+### vanilla node.js http サーバーでファイルを提供します
+
+```js
+const finalhandler = require('finalhandler');
+const http = require('http');
+const serveStatic = require('serve-static');
+
+// Serve up public/ftp folder
+const serve = serveStatic('public/ftp', { index: ['index.html', 'index.htm'] });
+
+// Create server
+const server = http.createServer((req, res) => {
+  serve(req, res, finalhandler(req, res));
+});
+
+// Listen
+server.listen(3000);
+```
+
+### すべてのファイルをダウンロードとして提供
+
+```js
+const contentDisposition = require('content-disposition');
+const finalhandler = require('finalhandler');
+const http = require('http');
+const serveStatic = require('serve-static');
+
+// Serve up public/ftp folder
+const serve = serveStatic('public/ftp', {
+  index: false,
+  setHeaders: setHeaders,
+});
+
+// Set header to force download
+function setHeaders(res, path) {
+  res.setHeader('Content-Disposition', contentDisposition(path));
+}
+
+// Create server
+const server = http.createServer((req, res) => {
+  serve(req, res, finalhandler(req, res));
+});
+
+// Listen
+server.listen(3000);
+```
+
+### 急行を利用してサービング
+
+#### 単純な
+
+これは、Expressを使用した簡単な例です。
+
+```js
+const express = require('express');
+const serveStatic = require('serve-static');
+
+const app = express();
+
+app.use(serveStatic('public/ftp', { index: ['default.html', 'default.htm'] }));
+app.listen(3000);
+```
+
+#### 複数のルート
+
+この例では、複数のディレクトリを検索する簡単な方法を示しています。
+Files are searched for in `public-optimized/` first, then `public/` second
+as a fallback.
+
+```js
+const express = require('express');
+const path = require('path');
+const serveStatic = require('serve-static');
+
+const app = express();
+
+app.use(serveStatic(path.join(__dirname, 'public-optimized')));
+app.use(serveStatic(path.join(__dirname, 'public')));
+app.listen(3000);
+```
+
+#### パスの異なる設定
+
+この例では、送信された
+ファイルによって異なる最大年齢を設定する方法を示します。 この例では、HTMLファイルはキャッシュされませんが、
+はすべて1日間です。
+
+```js
+const express = require('express');
+const path = require('path');
+const serveStatic = require('serve-static');
+
+const app = express();
+
+app.use(
+  serveStatic(path.join(__dirname, 'public'), {
+    maxAge: '1d',
+    setHeaders: setCustomCacheControl,
+  })
+);
+
+app.listen(3000);
+
+function setCustomCacheControl(res, file) {
+  if (path.extname(file) === '.html') {
+    // Custom Cache-Control for HTML files
+    res.setHeader('Cache-Control', 'public, max-age=0');
+  }
+}
+```
+
+## ライセンス
+
+[MIT](https://github.com/expressjs/serve-static/blob/HEAD/LICENSE)
+
+[ノード URL]: https://nodejs.org/en/download/
+[npm-url]: https://npmjs.org/package/serve-static

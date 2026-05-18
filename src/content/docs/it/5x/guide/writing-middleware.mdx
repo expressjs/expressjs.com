@@ -5,14 +5,14 @@ description: Scopri come scrivere funzioni middleware personalizzate per le appl
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Le funzioni _Middleware_ sono funzioni che hanno accesso al [request object](/en/5x/api#req) (`req`), il [response object](/en/5x/api#res) (`res`), e la funzione `next` nel ciclo request-response dell'applicazione. La funzione `next` è una funzione nel router Express che, quando invocato, esegue il middleware con successo al middleware corrente.
+Le funzioni *Middleware* sono funzioni che hanno accesso al [request object](/en/5x/api#req) (`req`), il [response object](/en/5x/api#res) (`res`), e la funzione `next` nel ciclo request-response dell'applicazione. La funzione `next` è una funzione nel router Express che, quando invocato, esegue il middleware con successo al middleware corrente.
 
 Le funzioni Middleware possono eseguire le seguenti attività:
 
-- Esegue qualsiasi codice.
-- Effettuare modifiche alla richiesta e agli oggetti di risposta.
-- Terminare il ciclo richiesta-risposta.
-- Chiama il prossimo middleware nello stack.
+* Esegue qualsiasi codice.
+* Effettuare modifiche alla richiesta e agli oggetti di risposta.
+* Terminare il ciclo richiesta-risposta.
+* Chiama il prossimo middleware nello stack.
 
 Se la funzione middleware corrente non termina il ciclo richiesta-risposta, deve chiamare `next()` per passare il controllo alla successiva funzione middleware. In caso contrario, la richiesta sarà sospesa.
 
@@ -70,14 +70,14 @@ const express = require('express');
 const app = express();
 
 const myLogger = function (req, res, next) {
-  console.og('LOGGED');
+  console.log('LOGGED');
   next();
 };
 
 app.use(myLogger);
 
 app.get('/', (req, res) => {
-  res.send('Ciao World!');
+  res.send('Hello World!');
 });
 
 app.listen(3000);
@@ -110,16 +110,16 @@ const express = require('express');
 const app = express();
 
 const requestTime = function (req, res, next) {
-  req.equestTime = Date.now();
+  req.requestTime = Date.now();
   next();
 };
 
 app.use(requestTime);
 
-app.et('/', (req, res) => {
-  let responseText = 'Ciao Mondo!<br>';
-  responseText += `<small>Richiesto a: ${req.requestTime}</small>`;
-  res.end(responseText);
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
 });
 
 app.listen(3000);
@@ -148,12 +148,12 @@ Qui utilizziamo il middleware [`cookie-parser`](/en/resources/middleware/cookie-
 ```js
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const cookieValidator = require('. cookieValidator');
+const cookieValidator = require('./cookieValidator');
 
 const app = express();
 
 async function validateCookies(req, res, next) {
-  await cookieValidator(req.ookies);
+  await cookieValidator(req.cookies);
   next();
 }
 
@@ -162,7 +162,7 @@ app.use(cookieParser());
 app.use(validateCookies);
 
 // error handler
-app.se((err, req, res, next) => {
+app.use((err, req, res, next) => {
   res.status(400).send(err.message);
 });
 
@@ -190,9 +190,9 @@ Se hai bisogno del tuo middleware per essere configurabile, esporta una funzione
 File: `my-middleware.js`
 
 ```js
-modulo.xports = function (options) {
+module.exports = function (options) {
   return function (req, res, next) {
-    // Implementa la funzione middleware basata sulle opzioni object
+    // Implement the middleware function based on the options object
     next();
   };
 };

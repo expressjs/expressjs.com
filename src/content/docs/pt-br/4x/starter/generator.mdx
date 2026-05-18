@@ -10,7 +10,7 @@ Use a ferramenta de gerador de aplicação, `express-generator`, para criar rapi
 Você pode executar o gerador de aplicação com o comando `npx` (disponível em Node.js 8.2.0).
 
 ```bash
-$ gerador de expressão npx
+$ npx express-generator
 ```
 
 Para versões anteriores do Nó, instale o gerador de aplicativo como um pacote npm global e, em seguida, inicie-o:
@@ -25,43 +25,43 @@ Exibe as opções de comando com a opção '-h':
 ```bash
 $ express -h
 
-  Uso: express [options] [dir]
+  Usage: express [options] [dir]
 
-  Opções:
+  Options:
 
-    -h, --help mostra informação de uso
-        --version mostra o número da versão
-    -e, --ejs add ejs engine suporte
-        --hbs add handlebars engine support
-        --pug add pug engine support
-    -H, --hogan adiciona hogan. s mecanismo suporta
-        --no-view gera sem o mecanismo de exibição
-    -v, --view <engine> add view <engine> support (ejs├hbs─jsėjade├jade├pug├twig├vash) (o padrão é jade)
-    -c, --css <engine>  add stylesheet <engine> (menos:stylus➲ bússola) (o padrão é sem css)
-        --git add . itignore
-    -f, --force força em diretório não-vazio
+    -h, --help          output usage information
+        --version       output the version number
+    -e, --ejs           add ejs engine support
+        --hbs           add handlebars engine support
+        --pug           add pug engine support
+    -H, --hogan         add hogan.js engine support
+        --no-view       generate without view engine
+    -v, --view <engine> add view <engine> support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+        --git           add .gitignore
+    -f, --force         force on non-empty directory
 ```
 
-Por exemplo, o seguinte cria um aplicativo Expresso chamado _myapp_. O aplicativo será criado em uma pasta chamada _myapp_ no diretório de trabalho atual e o mecanismo de visualização será definido para <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
+Por exemplo, o seguinte cria um aplicativo Expresso chamado *myapp*. O aplicativo será criado em uma pasta chamada *myapp* no diretório de trabalho atual e o mecanismo de visualização será definido para <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
 ```bash
-$ express --view=pug meuapp
+$ express --view=pug myapp
 
-   create : meuapp
+   create : myapp
    create : myapp/package.json
-   create : myapp/app. s
-   criam : myapp/public
+   create : myapp/app.js
+   create : myapp/public
    create : myapp/public/javascripts
    create : myapp/public/images
    create : myapp/routes
-   create : myapp/routes/index. s
-   criar: meuapp/rotas/usuários. s
-   cria : myapp/public/stylesheets
-   create : myapp/public/stylesheets/style. ss
-   cria : myapp/views
-   criar : myapp/views/index. ug
-   criar : myapp/views/layout.pug
-   criar : myapp/views/error. ug
+   create : myapp/routes/index.js
+   create : myapp/routes/users.js
+   create : myapp/public/stylesheets
+   create : myapp/public/stylesheets/style.css
+   create : myapp/views
+   create : myapp/views/index.pug
+   create : myapp/views/layout.pug
+   create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
 ```
@@ -76,13 +76,13 @@ $ npm install
 No MacOS ou Linux, execute o aplicativo com este comando:
 
 ```bash
-$ DEBUG=meuapp:* npm start
+$ DEBUG=myapp:* npm start
 ```
 
 No prompt de comando Windows, use este comando:
 
 ```bash
-> definir DEBUG=myapp:* & npm start
+> set DEBUG=myapp:* & npm start
 ```
 
 No Windows PowerShell, use este comando:
@@ -97,26 +97,24 @@ O aplicativo gerado possui a seguinte estrutura de diretórios:
 
 ```bash
 .
-── app.js
-─── bin
-├── www
-package. son
-── public
-── imagens
-├── javascripts
-├── stylesheets
-── style styesheets
- ─ style. ss
-── rotas
-├── index.js
-─── usuarios
-. s
-── visões
-    erros de ── . ug
-    ── index.pug
-    ── layout.pug
+├── app.js
+├── bin
+│   └── www
+├── package.json
+├── public
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+│       └── style.css
+├── routes
+│   ├── index.js
+│   └── users.js
+└── views
+    ├── error.pug
+    ├── index.pug
+    └── layout.pug
 
-diretórios e 9 arquivos
+7 directories, 9 files
 ```
 
 <Alert type="informações">

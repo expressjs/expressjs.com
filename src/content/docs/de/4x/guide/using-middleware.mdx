@@ -7,24 +7,24 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Express ist ein Routing- und Middleware-Webframework mit minimaler Funktionalität: Eine Express-Anwendung ist im Wesentlichen eine Reihe von Middleware-Funktionsaufrufen.
 
-_Middleware_ Funktionen sind Funktionen, die Zugriff auf das [request object](/en/5x/api#req) (`req`), das [Antwort-Objekt](/en/5x/api#res) (`res`) und die nächste Middleware-Funktion im Request-Antwort-Zyklus der Anwendung. Die nächste Middleware-Funktion wird üblicherweise durch eine Variable namens `next` bezeichnet.
+*Middleware* Funktionen sind Funktionen, die Zugriff auf das [request object](/en/5x/api#req) (`req`), das [Antwort-Objekt](/en/5x/api#res) (`res`) und die nächste Middleware-Funktion im Request-Antwort-Zyklus der Anwendung. Die nächste Middleware-Funktion wird üblicherweise durch eine Variable namens `next` bezeichnet.
 
 Middleware-Funktionen können folgende Aufgaben ausführen:
 
-- Führe jeden Code aus.
-- Änderungen an der Anfrage und den Antwort-Objekten vornehmen.
-- Beende den Request-Antwort-Zyklus.
-- Rufen Sie die nächste Middleware-Funktion im Stack auf.
+* Führe jeden Code aus.
+* Änderungen an der Anfrage und den Antwort-Objekten vornehmen.
+* Beende den Request-Antwort-Zyklus.
+* Rufen Sie die nächste Middleware-Funktion im Stack auf.
 
 Wenn die aktuelle Middleware-Funktion den Request-Antwort-Zyklus nicht beendet, muss sie `next()` aufrufen, um die Kontrolle an die nächste Middleware-Funktion zu übergeben. Andernfalls bleibt die Anfrage hängen.
 
 Eine Express-Anwendung kann folgende Arten von Middleware verwenden:
 
-- [Middleware](#middleware.application)
-- [Router-Level-Middleware](#middleware.router)
-- [Error-handling middleware](#middleware.error-handling)
-- [Integrierte Middleware](#middleware.built-in)
-- [Middleware von Drittanbietern](#middleware.third-party)
+* [Middleware](#middleware.application)
+* [Router-Level-Middleware](#middleware.router)
+* [Error-handling middleware](#middleware.error-handling)
+* [Integrierte Middleware](#middleware.built-in)
+* [Middleware von Drittanbietern](#middleware.third-party)
 
 Sie können Middleware auf Anwendungsebene und Routerebene mit einem optionalen Mount-Pfad laden.
 Sie können auch eine Reihe von Middleware-Funktionen zusammen laden, die einen Sub-Stack des Middleware-Systems an einem Mount-Punkt erzeugen.
@@ -70,11 +70,11 @@ Es illustriert einen Middleware-Unterstapel, der Anfrageinformationen für jede 
 app.use(
   '/user/:id',
   (req, res, next) => {
-    console.log('Request URL:', req.riginalUrl);
+    console.log('Request URL:', req.originalUrl);
     next();
   },
   (req, res, next) => {
-    console.og('Request Type:', req.method);
+    console.log('Request Type:', req.method);
     next();
   }
 );
@@ -88,16 +88,16 @@ Dieses Beispiel zeigt einen Middleware-Sub-Stack an, der GET-Anfragen im `/user/
 app.get(
   '/user/:id',
   (req, res, next) => {
-    console.log('ID:', req. arams.id);
+    console.log('ID:', req.params.id);
     next();
   },
   (req, res, next) => {
-    res. end('User Info');
+    res.send('User Info');
   }
 );
 
-// Handler für den /user/:id Pfad, der die Benutzer-ID
-App ausgibt. et('/user/:id', (req, res, next) => {
+// handler for the /user/:id path, which prints the user ID
+app.get('/user/:id', (req, res, next) => {
   res.send(req.params.id);
 });
 ```
@@ -116,20 +116,20 @@ Dieses Beispiel zeigt einen Middleware-Sub-Stack an, der GET-Anfragen im `/user/
 ```js
 app.get(
   '/user/:id',
-  (req, res, Nächste) => {
-    // wenn die Benutzer-ID 0 ist springe zur nächsten Route
-    wenn (req. arams. d === '0') als nächstes ('route');
-    // Andernfalls übergeben Sie die Steuerung an die nächste Middleware-Funktion in diesem Stack
+  (req, res, next) => {
+    // if the user ID is 0, skip to the next route
+    if (req.params.id === '0') next('route');
+    // otherwise pass the control to the next middleware function in this stack
     else next();
   },
   (req, res, next) => {
-    // Senden Sie eine reguläre Antwort
-    res. end('regular');
+    // send a regular response
+    res.send('regular');
   }
 );
 
-// Handler für den /user/:id Pfad, der eine spezielle Antwort
-App sendet. et('/user/:id', (req, res, next) => {
+// handler for the /user/:id path, which sends a special response
+app.get('/user/:id', (req, res, next) => {
   res.send('special');
 });
 ```
@@ -140,17 +140,17 @@ Dieses Beispiel zeigt ein Array mit einem Middleware-Sub-Stack an, das GET-Anfra
 
 ```js
 function logOriginalUrl(req, res, next) {
-  console.log('Request URL:', req.riginalUrl);
+  console.log('Request URL:', req.originalUrl);
   next();
 }
 
 function logMethod(req, res, next) {
-  console.log('Request Type:', req.ethod);
+  console.log('Request Type:', req.method);
   next();
 }
 
 const logStuff = [logOriginalUrl, logMethod];
-App.et('/user/:id', logStuff, (req, res, next) => {
+app.get('/user/:id', logStuff, (req, res, next) => {
   res.send('User Info');
 });
 ```
@@ -170,50 +170,50 @@ Der folgende Beispielcode repliziert das oben angezeigte Middleware-System für 
 ```js
 const express = require('express');
 const app = express();
-const router = express. Externe();
+const router = express.Router();
 
-// eine Middleware-Funktion ohne Mount-Pfad. Dieser Code wird für jede Anfrage an den Router
-ausgeführt. se(req, res, next) => {
-  console.log('Zeit:', Datum. ow());
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use((req, res, next) => {
+  console.log('Time:', Date.now());
   next();
 });
 
-// Ein Middleware-Sub-Stack zeigt Anfrageinformationen für jede Art von HTTP-Anfrage an den /user/:id path
-Router an. se(
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use(
   '/user/:id',
   (req, res, next) => {
-    console.log('Request URL:', req. riginalUrl);
+    console.log('Request URL:', req.originalUrl);
     next();
   },
   (req, res, next) => {
-    Konsole. og('Request Typ:', req. ethod);
+    console.log('Request Type:', req.method);
     next();
   }
 );
 
-// ein Middleware-Sub-Stack, der GET-Anfragen an den /user/:id path
-Router verarbeitet. et(
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get(
   '/user/:id',
-  (req, res, Nächste) => {
-    // wenn die Benutzer-ID 0 ist springe zum nächsten Router
-    wenn (req. arams. d === '0') als nächstes ('route');
-    // Andernfalls übergeben Sie die Kontrolle an die nächste Middleware-Funktion in diesem Stapel
+  (req, res, next) => {
+    // if the user ID is 0, skip to the next router
+    if (req.params.id === '0') next('route');
+    // otherwise pass control to the next middleware function in this stack
     else next();
   },
   (req, res, next) => {
-    // rendern Sie eine reguläre Seite
-    res. ender('regular');
+    // render a regular page
+    res.render('regular');
   }
 );
 
-// Handler für den /user/:id Pfad, der eine spezielle Seite
-Router darstellt. et('/user/:id', (req, res, next) => {
-  Konsole. og(req.params.id);
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', (req, res, next) => {
+  console.log(req.params.id);
   res.render('special');
 });
 
-// Router auf die App
-app.use('/', Router);
+// mount the router on the app
+app.use('/', router);
 ```
 
 To skip the rest of the router's middleware functions, call `next('router')`
@@ -224,20 +224,20 @@ Dieses Beispiel zeigt einen Middleware-Sub-Stack an, der GET-Anfragen im `/user/
 ```js
 const express = require('express');
 const app = express();
-const router = express. Externe ();
+const router = express.Router();
 
-// Vorhersage des Routers mit Scheck und Kaution bei Bedarf
-Router. se((req, res, next) => {
+// predicate the router with a check and bail out when needed
+router.use((req, res, next) => {
   if (!req.headers['x-auth']) return next('router');
   next();
 });
 
-router. et('/user/:id', (req, res) => {
-  res.send('hallo, user!');
+router.get('/user/:id', (req, res) => {
+  res.send('hello, user!');
 });
 
-// den Router verwenden und 401 alles, was durch die
-App fällt. se('/admin', router, (req, res) => {
+// use the router and 401 anything falling through
+app.use('/admin', router, (req, res) => {
   res.sendStatus(401);
 });
 ```
@@ -246,7 +246,7 @@ App fällt. se('/admin', router, (req, res) => {
 
 <Alert type="warnung">
 
-Bei der Fehlerbehebung der Middleware werden immer _vier_ Argumente verwendet. Sie müssen vier Argumente angeben, um
+Bei der Fehlerbehebung der Middleware werden immer *vier* Argumente verwendet. Sie müssen vier Argumente angeben, um
 als Middleware-Funktion zu identifizieren. Selbst wenn du das `next`
 Objekt nicht verwenden musst, musst du es angeben, um die Signatur zu pflegen. Andernfalls wird das `next` Objekt
 als reguläre Middleware interpretiert und wird Fehler nicht bearbeiten.
@@ -256,9 +256,9 @@ als reguläre Middleware interpretiert und wird Fehler nicht bearbeiten.
 Definieren Sie die Middleware-Funktionen wie andere Middleware-Funktionen außer mit vier Argumenten anstelle von drei, speziell mit der Signatur `(err, req, res, next)`:
 
 ```js
-app.use(((err, req, res, next) => {
+app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Etwas kaputt!');
+  res.status(500).send('Something broke!');
 });
 ```
 
@@ -267,13 +267,13 @@ Details über die Fehlerbehandlungsmittelsoftware finden Sie hier: [Fehlerbehand
 ## Integrierte Middleware
 
 Ab Version 4.x ist Express nicht mehr abhängig von [Connect](https://github.com/senchalabs/connect). Die Middleware-
-\-Funktionen, die zuvor mit Express integriert wurden, befinden sich nun in separaten Modulen; siehe [Liste der Middleware-Funktionen](https://github.com/senchalabs/connect#middleware).
+-Funktionen, die zuvor mit Express integriert wurden, befinden sich nun in separaten Modulen; siehe [Liste der Middleware-Funktionen](https://github.com/senchalabs/connect#middleware).
 
 Express hat die folgenden integrierten Middleware-Funktionen:
 
-- [express.static](/en/5x/api#express.static) dient statischen Assets wie HTML-Dateien, Bilder und so weiter.
-- [express.json](/en/5x/api#express.json) analysiert eingehende Anfragen mit JSON Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
-- [express.urlencoded](/en/5x/api#express.urlencoded) analysiert eingehende Anfragen mit URL-kodierten Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
+* [express.static](/en/5x/api#express.static) dient statischen Assets wie HTML-Dateien, Bilder und so weiter.
+* [express.json](/en/5x/api#express.json) analysiert eingehende Anfragen mit JSON Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
+* [express.urlencoded](/en/5x/api#express.urlencoded) analysiert eingehende Anfragen mit URL-kodierten Payloads. **HINWEIS: Verfügbar mit Express 4.16.0+**
 
 ## Drittanbieter-Middleware
 
@@ -284,7 +284,7 @@ Installieren Sie das Modul Node.js für die erforderliche Funktionalität, laden
 Das folgende Beispiel zeigt die Installation und das Laden der Cookie-Parsing-Middleware-Funktion "cookie-parser".
 
 ```bash
-$ npm Cookie-Parser installieren
+$ npm install cookie-parser
 ```
 
 ```js
@@ -292,7 +292,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 
-// cookie-parsing middleware
+// load the cookie-parsing middleware
 app.use(cookieParser());
 ```
 

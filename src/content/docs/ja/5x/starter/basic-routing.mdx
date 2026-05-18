@@ -5,7 +5,7 @@ description: Express.jsアプリケーションでルーティングの基礎を
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Routing_ は、アプリケーションが特定のエンドポイントに対してどのように応答するかを決定することを指します。 これはURI(またはパス)と特定のHTTPリクエストメソッド(GET、POSTなど)です。
+*Routing* は、アプリケーションが特定のエンドポイントに対してどのように応答するかを決定することを指します。 これはURI(またはパス)と特定のHTTPリクエストメソッド(GET、POSTなど)です。
 
 各ルートは、ルートが一致したときに実行される、1つまたは複数のハンドラ関数を持つことができます。
 
@@ -17,10 +17,10 @@ app.METHOD(PATH, HANDLER);
 
 場所:
 
-- `app` は `express` のインスタンスです。
-- `METHOD` は [HTTP リクエストメソッド](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods) の小文字です。
-- `PATH` はサーバー上のパスです。
-- `HANDLER` はルートが一致したときに実行される関数です。
+* `app` は `express` のインスタンスです。
+* `METHOD` は [HTTP リクエストメソッド](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods) の小文字です。
+* `PATH` はサーバー上のパスです。
+* `HANDLER` はルートが一致したときに実行される関数です。
 
 <Alert type="アラート">
 

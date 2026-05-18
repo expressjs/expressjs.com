@@ -1,0 +1,137 @@
+---
+title: responsetime-middleware
+description: Node.js サーバーのレスポンスタイム
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo version="2.3.4" github="https://github.com/expressjs/responsetime" npm="https://www.npmjs.com/package/responsetime" />
+
+Node.js サーバーの応答時間。
+
+このモジュールは、HTTPサーバーで
+リクエストの応答時間を記録するミドルウェアを作成します。 The "response time" is defined here as the
+elapsed time from when a request enters this middleware to when the
+headers are written out to the client.
+
+## インストール
+
+これは、 [Node.js](https://nodejs.org/en/) モジュールで、
+[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install response-time
+```
+
+## API
+
+{/* eslint-disable no-unused-var */}
+
+```js
+var responseTime = require('response-time');
+```
+
+### responseTime([options])
+
+レスポンスに `X-Response-Time` ヘッダーを追加するミドルウェアを作成します。
+このモジュールを使用してヘッダーを自動的に設定したくない場合は、
+[`responseTime(fn)`](#responsetimefn)に関するセクションを参照してください。
+
+#### オプション
+
+The `responseTime` function accepts an optional `options` object that may
+contain any of the following keys:
+
+##### digits
+
+出力に含める固定桁数は常に
+ミリ秒です。デフォルトは`3`（例：`2.300ms`）です。
+
+##### ヘッダー
+
+設定されるヘッダーの名前はデフォルトで `X-Response-Time` になります。
+
+##### suffix
+
+ブール値は、出力の単位を
+に追加するかどうかを示します。デフォルトは `true` (例: `2.300ms` vs `2.300`)。
+
+### responseTime(fn)
+
+リクエストの応答時間を記録する新しいミドルウェアを作成し、
+が関数`fn`で利用できるようにします。 The `fn` argument will be
+invoked as `fn(req, res, time)`, where `time` is a number in milliseconds.
+
+## 例
+
+### エクスプレス/接続
+
+```js
+var express = require('express');
+var responseTime = require('response-time');
+
+var app = express();
+
+app.use(responseTime());
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+### vanilla http サーバー
+
+```js
+var finalhandler = require('finalhandler');
+var http = require('http');
+var responseTime = require('response-time');
+
+// create "middleware"
+var _responseTime = responseTime();
+
+http.createServer(function (req, res) {
+  var done = finalhandler(req, res);
+  _responseTime(req, res, function (err) {
+    if (err) return done(err);
+
+    // respond to request
+    res.setHeader('content-type', 'text/plain');
+    res.end('hello, world!');
+  });
+});
+```
+
+### レスポンスタイムメトリック
+
+```js
+var express = require('express');
+var responseTime = require('response-time');
+var StatsD = require('node-statsd');
+
+var app = express();
+var stats = new StatsD();
+
+stats.socket.on('error', function (error) {
+  console.error(error.stack);
+});
+
+app.use(
+  responseTime(function (req, res, time) {
+    var stat = (req.method + req.url).toLowerCase().replace(/[:.]/g, '').replace(/\//g, '_');
+    stats.timing(stat, time);
+  })
+);
+
+app.get('/', function (req, res) {
+  res.send('hello, world!');
+});
+```
+
+## ライセンス
+
+[MIT](https://github.com/expressjs/response-time/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/responsetime
+[ノード URL]: https://nodejs.org/en/download

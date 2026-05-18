@@ -1,0 +1,1005 @@
+---
+title: セッションミドルウェア
+description: Express 用のシンプルなセッションミドルウェア
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo version="0.1.0" github="https://github.com/expressjs/session" npm="https://www.npmjs.com/package/session" />
+
+## インストール
+
+これは、 [Node.js](https://nodejs.org/en/) モジュールで、
+[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install express-session
+```
+
+## API
+
+```js
+var session = require('express-session');
+```
+
+### session(options)
+
+与えられた `options` を使ってセッションミドルウェアを作成します。
+
+**注意** セッションデータはクッキー自体に保存されず、セッションIDだけです。
+セッションデータはサーバーサイドに保存されます。
+
+**注意** バージョン1.5.0以降、[`cookie-parser` middleware](https://www.npmjs.com/package/cookie-parser)
+はこのモジュールを動作させるために使用する必要がなくなりました。 このモジュールは
+を直接読み込み、 `req`/`res` に Cookie を書き込みます。 `cookie-parser` を使用すると、このモジュールと `cookie-parser` の間で`secret` が同じでない場合、
+が発生する可能性があります。
+
+**警告** デフォルトのサーバーサイドセッションストレージである`MemoryStore`は、*意図的に*
+本番環境用に設計されていません。 ほとんどの
+条件下でメモリをリークし、単一のプロセスを経過させることはなく、デバッグと
+開発のためのものです。
+
+店舗一覧については、[compatible session store](#compatible-session-stores)を参照してください。
+
+#### オプション
+
+`express-session` は options オブジェクトのこれらのプロパティを受け付けます。
+
+##### クッキー
+
+Settings object for the session ID cookie. デフォルト値は
+`{ path: '/', httpOnly: true, secure: false, maxAge: null }` です。
+
+静的オブジェクトを提供するだけでなく、各リクエストの Cookie オプションを動的に生成するコールバック関数を渡すこともできます。 コールバックは `req` オブジェクトを引数として受け取り、Cookie の設定を含むオブジェクトを返します。
+
+```js
+var app = express();
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: function (req) {
+      var match = req.url.match(/^\/([^/]+)/);
+      return {
+        path: match ? '/' + match[1] : '/',
+        httpOnly: true,
+        secure: req.secure || false,
+        maxAge: 60000,
+      };
+    },
+  })
+);
+```
+
+このオブジェクトに設定できるオプションは以下のとおりです。
+
+##### cookie.domain
+
+`Domain` `Set-Cookie` 属性の値を指定します。 デフォルトでは、ドメイン
+は設定されておらず、ほとんどのクライアントは現在の
+ドメインのみに適用するクッキーを考慮します。
+
+##### cookie.expires
+
+`Expires `Set-Cookie`属性の値にする`Date\`オブジェクトを指定します。
+デフォルトでは、有効期限は設定されていません そして、ほとんどのクライアントはこれを
+"非永続クッキー"と見なし、Webブラウザ
+アプリケーションを終了するような状態で削除します。
+
+**注意** オプションで `expires` と `maxAge` の両方が設定されている場合、オブジェクトで定義された最後の
+が使用されます。
+
+**注意** `expires` オプションは直接設定しないでください。代わりに、 `maxAge`
+オプションのみを使用してください。
+
+##### cookie.httpOnly
+
+`HttpOnly`Set-Cookie`属性の`boolean`値を指定します。 truthyの場合、
+`HttpOnly` 属性が設定されています。そうでなければ、そうではありません。 デフォルトでは、`HttpOnly\`
+属性が設定されています。
+
+**Note** be careful when setting this to `true`, as compliant clients will not allow
+client-side JavaScript to see the cookie in `document.cookie`.
+
+##### cookie.maxAge
+
+`Expires`
+`Set-Cookie` 属性を計算するときに使用する `number` (ミリ秒単位) を指定します。 これは現在のサーバ時間を要し、`Expires`日付を計算するための値に
+`maxAge`ミリ秒を追加することによって行われます。 デフォルトでは、
+の最大年齢は設定されていません。
+
+**注意** オプションで `expires` と `maxAge` の両方が設定されている場合、オブジェクトで定義された最後の
+が使用されます。
+
+##### cookie.partitioned
+
+[`Partitioned` `Set-Cookie`](https://github.com/expressjs/session/blob/HEAD/rfc-cutler-httpbis-partitioned-cookies)
+属性の `boolean` 値を指定します。 truthyの場合、`Partitioned` 属性が設定されています。そうでなければ、そうではありません。
+デフォルトでは、 `Partitioned` 属性は設定されていません。
+
+**Note** This is an attribute that has not yet been fully standardized, and may
+change in the future. これは、
+が理解するまで、多くのクライアントがこの属性を無視することを意味します。
+
+More information about can be found in [the proposal](https://github.com/privacycg/CHIPS).
+
+##### cookie.path
+
+`Path` `Set-Cookie` の値を指定します。 デフォルトでは、これは `'/'` に設定されており、ドメインのルートパスは
+になります。
+
+##### cookie.priority
+
+[`Priority` `Set-Cookie` 属性][rfc-west-cookie-priority-00-4.1] の値にする文字列を指定します。
+
+* `'low'`は`Priority`属性を`Low`に設定します。
+* `medium'` は `Priority` 属性に設定されていない場合のデフォルトの優先度である `Medium` を設定します。
+* `'high'`は`Priority`属性を`High`に設定します。
+
+異なる優先度レベルの詳細については、
+[仕様][rfc-west-cookie-priority-00-4.1] を参照してください。
+
+**注意** これは完全に標準化されていない属性であり、将来変更される可能性があります。
+これはまた、多くのクライアントがこの属性を理解するまでこの属性を無視することを意味します。
+
+##### cookie.sameSite
+
+`Set-Cookie`属性の値にする`boolean`または`string`を指定します。
+デフォルトでは `false` です。
+
+* `true` は、サイトを厳密に強制するために `SameSite` 属性を `Strict` に設定します。
+* `false` は `SameSite` 属性を設定しません。
+* `'lax'` は `SameSite` 属性に `Lax` を設定します。
+* `none'`は明示的なクロスサイト・クッキーのために`SameSite`属性を`None`に設定します。
+* `'strict'` はサイトを厳密に強制するために、 `SameSite` 属性に `Strict` を設定します。
+* `'auto'` は `SameSite` 属性を `None` に、セキュリティ保護されていない接続は `Lax` に設定します。
+
+異なる執行レベルの詳細については、
+[仕様][rfc-6265bis-03-4.1.2.7] を参照してください。
+
+**注意** これは、完全に標準化されていない属性であり、
+将来に変更される可能性があります。 これはまた、多くのクライアントがこの属性を理解するまでこの属性を無視することを意味します。
+
+**Note** There is a [draft spec](https://tools.ietf.org/html/draft-west-cookie-incrementalism-01)
+that requires that the `Secure` attribute be set to `true` when the `SameSite` attribute has been
+set to `'none'`. 一部のウェブブラウザや他のクライアントがこの仕様を採用している可能性があります。
+
+The `cookie.sameSite` option can also be set to the special value `'auto'` to have
+this setting automatically match the determined security of the connection. 接続
+がセキュア(HTTPS)の場合、クロスサイトの使用を可能にするため、`SameSite`属性は`None`に設定されます。
+When the connection is not secure (HTTP), the `SameSite` attribute will be set to `Lax` for
+better security while maintaining functionality. これは、Express `"Trust proxy"`
+設定が適切にセットアップされている場合に便利で、開発と本番環境の設定、特に
+SAML認証シナリオを簡素化します。
+
+##### cookie.secure
+
+`Set-Cookie` 属性の `boolean` 値を指定します。 truthyの場合、
+`Secure` 属性が設定されています。そうでなければ、そうではありません。 デフォルトでは、`Secure`
+属性は設定されていません。
+
+**Note** be careful when setting this to `true`, as compliant clients will not send
+the cookie back to the server in the future if the browser does not have an HTTPS
+connection.
+
+`secure: true` は **recommended** オプションです。 ただし、
+はhttps対応のウェブサイトを必要とします。つまり、HTTPSはセキュアなクッキーに必要です。 `secure`
+が設定されていて、HTTP経由でサイトにアクセスすると、クッキーは設定されません。
+プロキシの後ろに node.js があり、`secure: true` を使用している場合、式で
+"proxy を信頼する" を設定する必要があります。
+
+```js
+var app = express();
+app.set('trust proxy', 1); // trust first proxy
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
+);
+```
+
+本番環境でセキュアなCookieを使用する場合は、開発時にテストすることができます。
+以下は、式の `NODE_ENV` に基づいてこのセットアップを有効にする例です。
+
+```js
+var app = express();
+var sess = {
+  secret: 'keyboard cat',
+  cookie: {},
+};
+
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1); // trust first proxy
+  sess.cookie.secure = true; // serve secure cookies
+}
+
+app.use(session(sess));
+```
+
+The `cookie.secure` option can also be set to the special value `'auto'` to have
+this setting automatically match the determined security of the connection. Be
+careful when using this setting if the site is available both as HTTP and HTTPS,
+as once the cookie is set on HTTPS, it will no longer be visible over HTTP. この
+は、Express の \`"Trust proxy" 設定が適切にセットアップされている場合に便利です。これにより、
+開発と本番環境での設定が簡素化されます。
+
+##### genid
+
+新しいセッション ID を生成するために呼び出す関数。 Provide a function that returns
+a string that will be used as a session ID. The function is given `req` as the
+first argument if you want to use some value attached to `req` when generating
+the ID.
+
+デフォルト値は、`uid-safe`ライブラリを使用してIDを生成する関数です。
+
+**注意** セッションが競合しないように、固有のIDを生成するように注意してください。
+
+```js
+app.use(
+  session({
+    genid: function (req) {
+      return genuuid(); // use UUIDs for session IDs
+    },
+    secret: 'keyboard cat',
+  })
+);
+```
+
+##### 名前
+
+レスポンスに設定するセッション ID Cookie の名前 (および
+リクエストから読み込む)
+
+デフォルト値は `'connect.sid'` です。
+
+**Note** if you have multiple apps running on the same hostname (this is just
+the name, i.e. `localhost` or `127.0.0.1`; different schemes and ports do not
+name a different hostname), then you need to separate the session cookies from
+each other. 最も簡単な方法は、アプリごとに異なる`name`を設定することです。
+
+##### プロキシ
+
+セキュア Cookie を("X-Forwarded-Proto"
+ヘッダーを介して) 設定する場合、リバースプロキシを信頼します。
+
+デフォルト値は `undefined` です。
+
+* `true` "X-Forwarded-Proto" ヘッダーが使用されます。
+* `false` すべてのヘッダは無視され、直接TLS/SSL接続がある場合、接続は
+  のみセキュアとみなされます。
+* `undefined` エクスプレスからの「信頼プロキシ」設定を使用します
+
+##### 保存する
+
+セッション
+がリクエスト中に変更されなかった場合でも、セッションストアに強制的に保存されます。 Depending on your store this may be
+necessary, but it can also create race conditions where a client makes two
+parallel requests to your server and changes made to the session in one
+request may get overwritten when the other request ends, even if it made no
+changes (this behavior also depends on what store you're using).
+
+The default value is `true`, but using the default has been deprecated,
+as the default will change in the future. この設定
+を調べて、使用事例に適したものを選んでください。 通常は、
+`false` を使用します。
+
+これが自分の店で必要かどうかどうかを知るにはどうすればいいですか? 最良の方法は、`touch`メソッドを実装しているかどうか、店舗で
+確認することです。 もしそうであれば、
+は `resave: false` を安全に設定できます。 If it does not implement the `touch`
+method and your store sets an expiration date on stored sessions, then you
+likely need `resave: true`.
+
+##### ローリング
+
+セッション識別子クッキーをすべてのレスポンスに設定します。 有効期限
+は元の[`maxAge`](#cookiemaxage)にリセットされ、有効期限
+カウントダウンをリセットします。
+
+デフォルト値は `false` です。
+
+これを有効にする セッション識別子クッキーは
+[`maxAge`](#cookiemaxage) で失効します。最後のレスポンスは
+[`maxAge`](#cookiemaxage) ではなく送信されたためです。
+
+これは通常短絡と組み合わせて使用されます。 非セッション長
+[`maxAge`](#cookiemaxage) の値は、セッションデータ
+の迅速なタイムアウトを提供し、サーバ間の相互作用中に発生する可能性を低減します。
+
+**Note** When this option is set to `true` but the `saveUninitialized` option is
+set to `false`, the cookie will not be set on a response with an uninitialized
+session. このオプションは、リクエストに対して既存のセッションが
+ロードされた場合のみ動作を変更します。
+
+##### saveUninitialized
+
+ストアに保存される「初期化されていない」セッションを強制します。 A session is
+is uninitialized when it is new but not modified Choosing `false` is useful for
+implementing login sessions, reducing server storage usage, or complying with
+laws that require permission before setting a cookie. Choosing `false` will also
+help with race conditions where a client makes multiple parallel requests
+without a session.
+
+デフォルト値は `true` ですが、
+のデフォルトが将来変更されるため、デフォルトを使用することは推奨されません。 この設定を調べて、
+あなたのユースケースに適したものを選択してください。
+
+**Note** if you are using Session in conjunction with PassportJS, Passport
+will add an empty Passport object to the session for use after a user is
+authenticated, which will be treated as a modification to the session, causing
+it to be saved. *PassportJS 0.3.0* で修正されました
+
+##### シークレット
+
+**必須オプション**
+
+これはセッションIDクッキーに署名するために使用されるシークレットです。 シークレットは、Node.js の `crypto.createHmac` (文字列や
+`Buffer` のように) でサポートされている値の
+型にすることができます。 これは単一のシークレット、または複数のシークレットの配列のいずれかになります。 If
+an array of secrets is provided, only the first element will be used to sign the
+session ID cookie, while all the elements will be considered when verifying the
+signature in requests. シークレット自体は人間によって簡単に解析されるべきではなく、
+はランダムな文字セットであることが最善です。 ベストプラクティスは以下のとおりです:
+
+* シークレットを格納するために環境変数を使用して、シークレット自体
+  がリポジトリに存在しないことを保証します。
+* シークレットの定期的な更新は、前のシークレットが
+  配列にあることを確認します。
+
+推測できないシークレットを使用すると、セッションを
+セッションIDを推測するだけのformat@@1にハイジャックすることができなくなります(`genid` オプションで決定されます)。
+
+シークレットの値を変更すると、既存のすべてのセッションが無効になります。 In order to rotate
+the secret without invalidating sessions, provide an array of secrets, with the new
+secret as first element of the array, and including previous secrets as the later
+elements.
+
+**注意** HMAC-256 はセッションIDに署名するために使用されます。 このため、シークレットは
+に少なくとも 32 バイトのエントロピーを含める必要があります。
+
+##### ストア
+
+セッションストアインスタンスは、デフォルトで新しい `MemoryStore` インスタンスです。
+
+##### 未設定
+
+`req.session` の設定を解除した結果を制御します (`delete`、`null`、
+など)。
+
+デフォルト値は `'keep'` です。
+
+* `'destroy'` レスポンスが終了するとセッションが破棄されます。
+* `'keep'` The session in the store will be kept, but modifications made during
+  the request are ignored and not saved.
+
+### req.session
+
+セッションデータを保存またはアクセスするには、requestプロパティ`reqを使用します。 ession`, (一般的に) ストアによって JSON としてシリアライズされている
+ので、入れ子になったオブジェクト
+は通常問題ありません。 例えば、以下はユーザー固有のビューカウンターです。
+
+```js
+// Use the session middleware
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 } }));
+
+// Access the session as req.session
+app.get('/', function (req, res, next) {
+  if (req.session.views) {
+    req.session.views++;
+    res.setHeader('Content-Type', 'text/html');
+    res.write('<p>views: ' + req.session.views + '</p>');
+    res.write('<p>expires in: ' + req.session.cookie.maxAge / 1000 + 's</p>');
+    res.end();
+  } else {
+    req.session.views = 1;
+    res.end('welcome to the session demo. refresh!');
+  }
+});
+```
+
+#### Session.regenerate(callback)
+
+セッションを再生成するには、単にメソッドを呼び出します。 完了すると、
+新しいSIDと`Session` インスタンスが`req.session`
+で初期化され、`callback`が呼び出されます。
+
+```js
+req.session.regenerate(function (err) {
+  // will have a new session here
+});
+```
+
+#### Session.destroy(callback)
+
+セッションを破壊し、`req.session` プロパティを解除します。
+完了すると、`callback` が呼び出されます。
+
+```js
+req.session.destroy(function (err) {
+  // cannot access session here
+});
+```
+
+#### Session.reload(callback)
+
+ストアからセッションデータをリロードし、
+`req.session` オブジェクトを再入力します。 完了すると、`callback` が呼び出されます。
+
+```js
+req.session.reload(function (err) {
+  // session updated
+});
+```
+
+#### Session.save(callback)
+
+セッションをストアに保存する ストアのコンテンツをメモリ内の
+コンテンツに置き換えます (ただし、ストアは正確な動作については、店舗の
+ドキュメントを参照してください)。
+
+このメソッドは、
+セッションデータが変更された場合、HTTPレスポンスの最後に自動的に呼び出されます(ミドルウェアコンストラクタの様々な
+オプションでこの動作を変更することができます)。 このため、通常、このメソッド
+を呼び出す必要はありません。
+
+リダイレクト、長寿命リクエスト、WebSocketなど、このメソッドを呼び出すと便利な場合があります。
+
+```js
+req.session.save(function (err) {
+  // session saved
+});
+```
+
+#### Session.touch()
+
+`.maxAge` プロパティを更新します。 セッションミドルウェアがこれを行うので、通常はこれは
+を呼び出す必要はありません。
+
+### req.session.id
+
+各セッションには、それに関連付けられた一意のIDがあります。 This property is an
+alias of [`req.sessionID`](#reqsessionid-1) and cannot be modified.
+`session`
+オブジェクトからセッション ID をアクセス可能にするために追加されました。
+
+### req.session.cookie
+
+各セッションには、それに付随する固有のクッキーオブジェクトがあります。 This allows
+you to alter the session cookie per visitor. 例えば、
+`req.session.cookie.expires` を `false` に設定すると、ユーザーエージェントの期間のみクッキー
+を有効にできます。
+
+#### Cookie.maxAge
+
+別の方法として、`req.session.cookie.maxAge`はミリ秒単位の残り時間
+を返し、`.expires`プロパティを適切に調整するために新しい値
+を再割り当てることもできます。 以下の
+は本質的に同等です
+
+```js
+var hour = 3600000;
+req.session.cookie.expires = new Date(Date.now() + hour);
+req.session.cookie.maxAge = hour;
+```
+
+For example when `maxAge` is set to `60000` (one minute), and 30 seconds
+has elapsed it will return `30000` until the current request has completed,
+at which time `req.session.touch()` is called to reset
+`req.session.cookie.maxAge` to its original value.
+
+```js
+req.session.cookie.maxAge; // => 30000
+```
+
+#### Cookie.originalMaxAge
+
+`req.session.cookie.originalMaxAge` プロパティは、セッションクッキーの元の
+`maxAge` (time-to-live) をミリ秒単位で返します。
+
+### req.sessionID
+
+ロードされたセッションの ID を取得するには、request プロパティ
+`req.sessionID` にアクセスします。 これは、セッション
+がロード/作成されたときに読み取り専用の値セットです。
+
+## セッションストアの実装
+
+すべてのセッションストア_must_は`EventEmitter`で、特定の
+メソッドを実装します。 以下のメソッドは、**required**、**recommended**、
+、**optional**のリストです。
+
+* 必須メソッドは、このモジュールが常にストアで呼び出すメソッドです。
+* 推奨されるメソッドは、
+  利用可能な場合、このモジュールがストアで呼び出すメソッドです。
+* オプションのメソッドは、このモジュールがまったく呼び出さないメソッドですが、
+  がユーザーにユニフォームストアを提供するのに役立ちます。
+
+実装例では、 [connect-redis](http://github.com/visionmedia/connect-redis) リポジトリを表示します。
+
+### store.all(callback)
+
+**任意**
+
+このオプションのメソッドは、ストア内のすべてのセッションを配列として取得するために使用されます。
+`callback` は `callback(error, sessions)` として呼び出されます。
+
+### store.destroy(sid, callback)
+
+**必須**
+
+This required method is used to destroy a session from the store given
+a session ID (`sid`).
+セッションが破棄されると、`callback(error)`として呼び出されます。
+
+### store.clear(callback)
+
+**任意**
+
+このオプションの方法は、ストアからすべてのセッションを削除するために使用されます。
+`callback` は店舗がクリアされると`callback(error)`として呼び出されます。
+
+### store.length(callback)
+
+**任意**
+
+このオプションのメソッドは、ストア内のすべてのセッション数を取得するために使用されます。
+`callback` は `callback(error, len)` と呼ばれます。
+
+### store.get(sid, callback)
+
+**必須**
+
+This required method is used to get a session from the store give a session
+ID (`sid`). `callback` は `callback(error, session)` と呼ばれます。
+
+`session` 引数が見つかった場合はセッションを指定します。それ以外の場合は `null` または
+`undefined` セッションが見つからなかった場合は (エラーがなかった場合) 特別な
+の場合は、 `error.code === 'ENOENT'` で `callback(null, null)` のように動作します。
+
+### store.set(sid, session, callback)
+
+**必須**
+
+この必須メソッドは、
+セッション ID (`sid`) とセッション (`session`) オブジェクトを与えられたストアにセッションをアップサートするために使用されます。 The callback should be
+should be `callback(error)` when the session has been set in the store.
+
+### store.touch(sid, session, callback)
+
+**推奨**
+
+この推奨メソッドは、
+セッション ID (`sid`) とセッション (`session`) オブジェクトを与えられた特定のセッションを「タッチ」するために使用されます。 The `callback` should be
+called as `callback(error)` once the session has been touched.
+
+This is primarily used when the store will automatically delete idle sessions
+and this method is used to signal to the store the given session is active,
+potentially resetting the idle timer.
+
+## 互換性のあるセッションストア
+
+以下のモジュールは、この
+モジュールと互換性のあるセッションストアを実装します。 追加モジュールを追加するために PR を作成してください :)
+
+[![★][aerospike-session-store-image] aerospike-session-store][aerospike-session-store-url] A session store using [Aerospike](http://www.aerospike.com/).
+
+[aerospike-session-store-url]: https://www.npmjs.com/package/aerospike-session-store
+
+[![★][better-sqlite3-session-store-image] better-sqlite3-session-store][better-sqlite3-session-store-url] A session store based on [better-sqlite3](https://github.com/JoshuaWise/better-sqlite3).
+
+[better -sqlite3-session-store-url]: https://www.npmjs.com/package/better-sqlite3-session-store
+
+[![★][cassandra-store-image] cassandra-store][cassandra-store-url] Apache Cassandra ベースのセッションストア。
+
+[cassandra-store-url]: https://www.npmjs.com/package/cassandra-store
+
+[![★][cluster-store-image] cluster-store][cluster-store-url] A wrapper for using in-process / embedded
+stores - such as SQLite (via knex), leveldb, files, or memory - with node cluster (desirable for Raspberry Pi 2
+and other multi-core embedded devices).
+
+[cluster-store-url]: https://www.npmjs.com/package/cluster-store
+
+[![★][connect-arango-image] connect-arango][connect-arango-url] ArangoDBベースのセッションストア。
+
+[connect-arango-url]: https://www.npmjs.com/package/connect-arango
+
+[![★][connect-azuretables-image] connect-azuretables][connect-azuretables-url] [Azure Table Storage](https://azure.microsoft.com/en-gb/services/storage/tables/)ベースのセッションストア。
+
+[connect-azuretables-url]: https://www.npmjs.com/package/connect-azuretables
+
+[![★][connect-cloudant-store-image] connect-cloudant-store][connect-cloudant-store-url] [IBM Cloudant](https://cloudant.com/)ベースのセッションストア。
+
+[connect-cloudant-store-url]: https://www.npmjs.com/package/connect-cloudant-store
+
+[![★][connect-cosmosdb-image] connect-cosmosdb][connect-cosmosdb-url] Azure [Cosmos DB](https://azure.microsoft.com/en-us/products/cosmos-db/)ベースのセッションストア。
+
+[connect-cosmosdb-url]: https://www.npmjs.com/package/connect-cosmosdb
+
+[![★][connect-couchbase-image] connect-couchbase][connect-couchbase-url] A [couchbase](http://www.couchbase.com/)ベースのセッションストア。
+
+[connect-couchbase-url]: https://www.npmjs.com/package/connect-couchbase
+
+[![★][connect-datacache-image] connect-datacache][connect-datacache-url] [IBM Bluemix Data Cache](http://www.ibm.com/cloud-computing/bluemix/)ベースのセッションストア。
+
+[connect-datache-url]: https://www.npmjs.com/package/connect-datacache
+
+[![★][@google-cloud/connect-datastore-image] @google-cloud/connect-datastore][@google-cloud/connect-datastore-url] A [Google Cloud Datastore](https://cloud.google.com/datastore/docs/concepts/overview)ベースのセッションストア。
+
+[@google-cloud/connect-datastore-url]: https://www.npmjs.com/package/@google-cloud/connect-datastore
+
+[![★][connect-db2-image] connect--db2][connect-db2-url] [ibm_db](https://www.npmjs.com/package/ibm_db) モジュールを使って作られた IBM DB2 ベースのセッションストア。
+
+[connect-db2-url]: https://www.npmjs.com/package/connect-db2
+
+[![★][connect-dynamodb-image] connect-dynamodb][connect-dynamodb-url] DynamoDBベースのセッションストア。
+
+[connect-dynamodb-url]: https://www.npmjs.com/package/connect-dynamodb
+
+[![★][@google-cloud/connect-firestore-image] @google-cloud/connect-firestore][@google-cloud/connect-firestore-url] A [Google Cloud Firestore](https://cloud.google.com/firestore/docs/overview)ベースのセッションストア。
+
+[@google-cloud/connect-firestore-url]: https://www.npmjs.com/package/@google-cloud/connect-firestore
+
+[![★][connect-hazelcast-image] connect-hazelcast][connect-hazelcast-url] 接続とエクスプレスのためのHazelcastセッションストア。
+
+[connect-hazelcast-url]: https://www.npmjs.com/package/connect-hazelcast
+
+[![★][connect-loki-image] connect-loki][connect-loki-url] Loki.jsベースのセッションストア。
+
+[connect-loki-url]: https://www.npmjs.com/package/connect-loki
+
+[![★][connect-lowdb-image] connect-lowdb][connect-lowdb-url] ローdbベースのセッションストア。
+
+[connect-lowdb-url]: https://www.npmjs.com/package/connect-lowdb
+
+[![★][connect-memcached-image] connect-memcached][connect-memcached-url] memcachedベースのセッションストア。
+
+[connect-memcached-url]: https://www.npmjs.com/package/connect-memcached
+
+[![★][connect-memjs-image] connect-memjs][connect-memjs-url] memcached クライアントとして
+[memjs](https://www.npmjs.com/package/memjs) を使用した memcachedベースのセッションストア。
+
+[connect-memjs-url]: https://www.npmjs.com/package/connect-memjs
+
+[![★][connect-ml-image] connect-ml][connect-ml-url] MarkLogic Serverベースのセッションストア。
+
+[connect-ml-url]: https://www.npmjs.com/package/connect-ml
+
+[![★][connect-monetdb-image] connect-monetdb][connect-monetdb-url] MonetDBベースのセッションストア。
+
+[connect-monetdb-url]: https://www.npmjs.com/package/connect-monetdb
+
+[![★][connect-mongo-image] connect-mongo][connect-mongo-url] MongoDBベースのセッションストア。
+
+[connect-mongo-url]: https://www.npmjs.com/package/connect-mongo
+
+[![★][connect-mongodb-session-image] connect-mongodb-session][connect-mongodb-session-url] MongoDBが建設・メンテナンスした軽量MongoDBベースのセッションストア。
+
+[connect-mongodb-session-url]: https://www.npmjs.com/package/connect-mongodb-session
+
+[![★][connect-mssql-v2-image] connect-mssql-v2][connect-mssql-v2-url] [connect-mssql](https://www.npmjs.com/package/connect-mssql) に基づくMicrosoft SQL Serverベースのセッションストア。
+
+[connect-mssql-v2-url]: https://www.npmjs.com/package/connect-mssql-v2
+
+[![★][connect-neo4j-image] connect-neo4j][connect-neo4j-url] A [Neo4j](https://neo4j.com)ベースのセッションストア。
+
+[connect-neo4j-url]: https://www.npmjs.com/package/connect-neo4j
+
+[![★][connect-ottoman-image] connect-ottoman:[connect-ottoman-url] A [couchbase ottoman](http://www.couchbase.com/)ベースのセッションストア。
+
+[connect-ottoman-url]: https://www.npmjs.com/package/connect-ottoman
+
+[![★][connect-pg-simple-image] connect-pg-simple][connect-pg-simple-url] PostgreSQLベースのセッションストア。
+
+[connect-pg-simple-url]: https://www.npmjs.com/package/connect-pg-simple
+
+[![★][connect-redis-image] connect-redis][connect-redis-url] A Redisベースのセッションストア。
+
+[接続-redis-url]: https://www.npmjs.com/package/connect-redis
+
+[![★][connect-session-firebase-image] connect-session-firebase][connect-session-firebase-url] [Firebase Realtime Database](https://firebase.google.com/docs/database/) に基づくセッションストア
+
+[connect-session-firebase-url]: https://www.npmjs.com/package/connect-session-firebase
+
+[![★][connect-session-knex-image] connect-session-knex][connect-session-knex-url] A session store using
+[Knex.js](http://knexjs.org/), これはPostgreSQL、MySQL、MariaDB、SQLite3、およびOracleのSQLクエリビルダです。
+
+[connect-session-knex-url]: https://www.npmjs.com/package/connect-session-knex
+
+[![★][connect-session-sequelize-image] connect-session-sequelize][connect-session-sequelize-url] A session store using
+[Sequelize.js](http://sequelizejs.com/), which is a Node. s / io.js PostgreSQL、MySQL、SQLite、MSSLQLのORM。
+
+[connect-session-sequenize-url]: https://www.npmjs.com/package/connect-session-sequenlize
+
+[![★][connect-sqlite3-image] connect-sqlite3][connect-sqlite3-url] [SQLite3](https://github.com/mapbox/node-sqlite3) TJ の `connect-redis` ストアをモデルにしたセッションストア。
+
+[connect-sqlite3-url]: https://www.npmjs.com/package/connect-sqlite3
+
+[![★][connect-typeorm-image] connect-typeorm][connect-typeorm-url] [TypeORM](https://github.com/typeorm/typeorm)ベースのセッションストア。
+
+[connect-typeorm-url]: https://www.npmjs.com/package/connect-typeorm
+
+[![★][couchdb-expression-image] couchdb-expression][couchdb-expression-url] A [CouchDB](https://couchdb.apache.org/)ベースのセッションストア。
+
+[couchdb-expression-URL]: https://www.npmjs.com/package/couchdb-expression
+
+[![★][dynamodb-store-image] dynamodb-store][dynamodb-store-url] DynamoDBベースのセッションストア。
+
+[dynamodb-store-url]: https://www.npmjs.com/package/dynamodb-store
+
+[![★][dynamodb-store-v3-image] dynamodb-store-v3][dynamodb-store-v3-url] [AWS SDK for JavaScript v3](https://github.com/aws/aws-sdk-js-v3) に裏付けられた DynamoDB を使用したセッションストアの実装
+
+[dynamodb-store-v3-url]: https://www.npmjs.com/package/dynamodb-store-v3
+
+[![★][express-etcd-image] express-etcd][express-etcd-url] [etcd](https://github.com/stianeikeland/node-etcd) ベースのセッションストア。
+
+[express-etcd-url]: https://www.npmjs.com/package/express-etcd
+
+[![★][express-mysql-session-image] express-mysql-session][express-mysql-session-url] ネイティブ
+[MySQL](https://www.mysql.com/) via the [node-mysql](https://github.com/felixge/node-mysql) module.
+
+[express-mysql-session-url]: https://www.npmjs.com/package/express-mysql-session
+
+[![★][express-nedb-session-image] express-nedb-session][express-nedb-session-url] NeDBベースのセッションストア。
+
+[express-nedb-session-url]: https://www.npmjs.com/package/express-nedb-session
+
+[![★][express-oracle-session-image] express-oracle-session][express-oracle-session-url] ネイティブ
+[oracle](https://www.oracle.com/) via the [node-oracledb](https://www.npmjs.com/package/oracledb) module.
+
+[express-oracle-session-url]: https://www.npmjs.com/package/express-oracle-session
+
+[![★][express-session-cache-manager-image] express-session-cache-manager][express-session-cache-manager-url]
+[cache-manager](https://www.npmjs.com/package/cache-manager), 実装されている
+a [variety of storage types](https://www.npmjs.com/package/cache-manager#store-engines) をサポートする ストア。
+
+[express-session-cache-manager-url]: https://www.npmjs.com/package/express-session-cache-manager
+
+[![★][express-session-etcd3-image] express-session-etcd3][express-session-etcd3-url] A [etcd3](https://github.com/mixer/etcd3) based session store.
+
+[express-session-etcd3-url]: https://www.npmjs.com/package/express-session-etcd3
+
+[![★][express-session-level-image] express-session-level][express-session-level-url] A [LevelDB](https://github.com/Level/levelup) based session store.
+
+[express-session-level-url]: https://www.npmjs.com/package/express-session-level
+
+[![★][express-session-rsdb-image] express-session-rsdb][express-session-rsdb-url] Rocket-Storeベースのセッションストア: とてもシンプルで超高速でパワフルなフラットファイルデータベース。
+
+[express-session-rsdb-url]: https://www.npmjs.com/package/express-session-rsdb
+
+[![★][express-sessions-image] express-sessions][express-sessions-url] MongoDBとRedisをサポートするセッションストア。
+
+[express-sessions-URL]: https://www.npmjs.com/package/express-sessions
+
+[![★][firestore-store-image] firestore-store][firestore-store-url] A [Firestore](https://github.com/hendrysadrak/firestore-store)ベースのセッションストア。
+
+[firestore-url]: https://www.npmjs.com/package/firestore-store
+
+[![★][fortune-session-image] fortune-session][fortune-session-url] A [Fortune.js](https://github.com/fortunejs/fortune)
+based session store. Fortune (ongoDB、Redis、Postgres、NeDB)でサポートされているすべてのバックエンドをサポートしています。
+
+[fortune-session-url]: https://www.npmjs.com/package/fortune-session
+
+[![★][hazelcast-store-image] hazelcast-store][hazelcast-store-url] [Hazelcast Node Client](https://www.npmjs.com/package/hazelcast-client)に基づくHazelcastベースのセッションストア。
+
+[hazelcast-store-url]: https://www.npmjs.com/package/hazelcast-store
+
+[![★][level-session-store-image] level-session-store][level-session-store-url] LevelDBベースのセッションストア。
+
+[level-session-store-url]: https://www.npmjs.com/package/level-session-store
+
+[![★][lowdb-session-store-image] lowdb-session-store][lowdb-session-store-url] A [lowdb](https://www.npmjs.com/package/lowdb)ベースのセッションストア。
+
+[lowdb-session-store-url]: https://www.npmjs.com/package/lowdb-session-store
+
+[![★][medea-session-store-image] medea-session-store][medea-session-store-url] A Medeaベースのセッションストア。
+
+[medea-session-store-url]: https://www.npmjs.com/package/medea-session-store
+
+[![★][memorystore-image] memorystore][memorystore-url] 制作用のメモリーセッションストア。
+
+[memorystore-url]: https://www.npmjs.com/package/memorystore
+
+[![★][mssql-session-store-image] mssql-session-store][mssql-session-store-url] SQL Serverベースのセッションストア。
+
+[mssql-session-store-url]: https://www.npmjs.com/package/mssql-session-store
+
+[![★][nedb-session-store-image] nedb-session-store][nedb-session-store-url] NeDBベースのセッションストア。
+
+[nedb-session-store-url]: https://www.npmjs.com/package/nedb-session-store
+
+[![★][@quixo3/prism-session-store-image] @quixo3/prism-session-store][@quixo3/prism-session-store-url] [Prisma Framework](https://www.prisma.io)のセッションストア。
+
+[@quixo3/prishma-session-store-url]: https://www.npmjs.com/package/@quixo3/prism-session-store
+
+[![★][restsession-image] restsession][restsession-url] RESTful APIを利用したストアセッション
+
+[restsession-url]: https://www.npmjs.com/package/restsession
+
+[![★][sequelstore-connect-image] sequelstore-connect][sequelstore-connect-url] A session store using [Sequelize.js](http://sequelizejs.com/).
+
+[sequelstore-connect-url]: https://www.npmjs.com/package/sequelstore-connect
+
+[![★][session-file-store-image] session-file-store][session-file-store-url] ファイルシステムベースのセッションストア。
+
+[session-file-store-url]: https://www.npmjs.com/package/session-file-store
+
+[![★][session-pouchdb-store-image] session-pouchdb-store][session-pouchdb-store-url] PouchDB / CouchDB用セッションストア 埋め込み、カスタム、またはリモートPouchDBインスタンスとリアルタイム同期を受け入れます。
+
+[session-pouchdb-store-url]: https://www.npmjs.com/package/session-pouchdb-store
+
+[![★][@cyclic.sh/session-store-image] @cyclic.sh/session-store][@cyclic.sh/session-store-url] A DynamoDB based session store for [Cyclic.sh](https://www.cyclic.sh/) apps.
+
+[@cyclic.sh/session-store-url]: https://www.npmjs.com/package/@cyclic.sh/session-store
+
+[![★][@dabunker/session-store-image] @dabunker/session-store][@dabunker/session-url] A [Databunker](https://databunker.org/)based encrypted session store.
+
+[@databunker/session-store-url]: https://www.npmjs.com/package/@dabunker/session-store
+
+[![★][sessionstore-image] sessionstore][sessionstore-url] 様々なデータベースに対応したセッションストア。
+
+[sessionstore-url]: https://www.npmjs.com/package/sessionstore
+
+[![★][tch-nedb-session-image] tch-nedb-session][tch-nedb-session-url] NeDBをベースにしたファイルシステムセッションストア。
+
+[tch-nedb-session-url]: https://www.npmjs.com/package/tch-nedb-session
+
+## 例
+
+### カウンターを表示
+
+ユーザーのページビューを保存するための簡単な例として、 `express-session` を使用します。
+
+```js
+var express = require('express');
+var parseurl = require('parseurl');
+var session = require('express-session');
+
+var app = express();
+
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+app.use(function (req, res, next) {
+  if (!req.session.views) {
+    req.session.views = {};
+  }
+
+  // get the url pathname
+  var pathname = parseurl(req).pathname;
+
+  // count the views
+  req.session.views[pathname] = (req.session.views[pathname] || 0) + 1;
+
+  next();
+});
+
+app.get('/foo', function (req, res, next) {
+  res.send('you viewed this page ' + req.session.views['/foo'] + ' times');
+});
+
+app.get('/bar', function (req, res, next) {
+  res.send('you viewed this page ' + req.session.views['/bar'] + ' times');
+});
+
+app.listen(3000);
+```
+
+### ユーザーログイン
+
+ユーザーのログインをセッションに保つために、`express-session` を使った簡単な例です。
+
+```js
+var escapeHtml = require('escape-html');
+var express = require('express');
+var session = require('express-session');
+
+var app = express();
+
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+// middleware to test if authenticated
+function isAuthenticated(req, res, next) {
+  if (req.session.user) next();
+  else next('route');
+}
+
+app.get('/', isAuthenticated, function (req, res) {
+  // this is only called when there is an authentication user due to isAuthenticated
+  res.send('hello, ' + escapeHtml(req.session.user) + '!' + ' <a href="/logout">Logout</a>');
+});
+
+app.get('/', function (req, res) {
+  res.send(
+    '<form action="/login" method="post">' +
+      'Username: <input name="user"><br />' +
+      'Password: <input name="pass" type="password"><br />' +
+      '<input type="submit" text="Login"></form>'
+  );
+});
+
+app.post('/login', express.urlencoded({ extended: false }), function (req, res) {
+  // login logic to validate req.body.user and req.body.pass
+  // would be implemented here. for this example any combo works
+
+  // regenerate the session, which is good practice to help
+  // guard against forms of session fixation
+  req.session.regenerate(function (err) {
+    if (err) next(err);
+
+    // store user information in session, typically a user id
+    req.session.user = req.body.user;
+
+    // save the session before redirection to ensure page
+    // load does not happen before session is saved
+    req.session.save(function (err) {
+      if (err) return next(err);
+      res.redirect('/');
+    });
+  });
+});
+
+app.get('/logout', function (req, res, next) {
+  // logout logic
+
+  // clear the user from the session object and save.
+  // this will ensure that re-using the old session id
+  // does not have a logged in user
+  req.session.user = null;
+  req.session.save(function (err) {
+    if (err) next(err);
+
+    // regenerate the session, which is good practice to help
+    // guard against forms of session fixation
+    req.session.regenerate(function (err) {
+      if (err) next(err);
+      res.redirect('/');
+    });
+  });
+});
+
+app.listen(3000);
+```
+
+## デバッグ
+
+このモジュールはセッション操作に関する情報をログに記録するために内部的に [debug](https://www.npmjs.com/package/debug) モジュール
+を使用します。
+
+すべての内部ログを表示するには、アプリを起動するときに `DEBUG` 環境変数を
+`express-session` に設定します(この例では`npm start` )。
+
+```sh
+$ DEBUG=express-session npm start
+```
+
+Windows では、対応するコマンドを使用します。
+
+```sh
+> set DEBUG=express-session & npm start
+```
+
+## ライセンス
+
+[MIT](https://github.com/expressjs/session/blob/HEAD/LICENSE)
+
+[rfc-6265bis-03-4.1.2.7]: https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03#section-4.1.2.7
+[rfc-cutler-httpbis-partitioned-cookies]: https://tools.ietf.org/html/draft-cutler-httpbis-partitioned-cookies/
+[rfc-west-cookie-priority-00-4.1]: https://tools.ietf.org/html/draft-west-cookie-priority-00#section-4.1
+[ノード URL]: https://nodejs.org/en/download
+[npm-url]: https://npmjs.org/package/express-session

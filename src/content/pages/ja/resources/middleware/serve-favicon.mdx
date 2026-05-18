@@ -1,0 +1,132 @@
+---
+title: serve-faviconミドルウェア
+description: キャッシュ機能付きミドルウェアのファビコン
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo version="2.5.1" github="https://github.com/express/serve-favicon" npm="https://www.npmjs.com/package/serve-favicon" />
+
+faviconを提供するNode.jsミドルウェア。
+
+A favicon is a visual cue that client software, like browsers, use to identify
+a site. 例や詳しい情報については、
+[faviconsに関するWikipediaの記事](https://en.wikipedia.org/wiki/Favicon)をご覧ください。
+
+なぜこのモジュールを使うのですか？
+
+* User agents request `favicon.ico` frequently and indiscriminately, so you
+  may wish to exclude these requests from your logs by using this middleware
+  before your logger middleware.
+* このモジュールは、
+  ディスクアクセスをスキップしてパフォーマンスを向上させるために、メモリ内のアイコンをキャッシュします。
+* This module provides an `ETag` based on the contents of the icon, rather
+  than file system properties.
+* このモジュールは、最も互換性のある `Content-Type` で動作します。
+
+**注意** このモジュールは、 `GET /favicon.ico` の "implicit favicon",
+のみを提供するためのものです。
+HTMLマークアップを必要とする追加のベンダー固有のアイコンは、
+例 [serve-static](https://npmjs.org/package/serve-static) の関連するファイルを提供するために追加のミドルウェアが必要です。
+
+## インストール
+
+これは、 [Node.js](https://nodejs.org/en/) モジュールで、
+[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install serve-favicon
+```
+
+## API
+
+### favicon(path, options)
+
+指定された`path`からfaviconファイルにfaviconを提供するために、新しいミドルウェアを作成します。
+`path` は、役立つアイコンの `Buffer` にすることもできます。
+
+#### オプション
+
+faviconはoptionsオブジェクトでこれらのプロパティを受け付けます。
+
+##### maxAge
+
+`ms` の `cache-control` `max-age` ディレクティブは、デフォルトで 1 年になります。
+は、 [ms](https://www.npmjs.org/package/ms#readme)
+モジュールで受け付けられる文字列でもあります。
+
+## 例
+
+Typically this middleware will come very early in your stack (maybe even first)
+to avoid processing any other middleware if we already know the request is for
+`/favicon.ico`.
+
+### エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|エクスプレス|
+
+```javascript
+var express = require('express');
+var favicon = require('serve-favicon');
+var path = require('path');
+
+var app = express();
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// Add your routes here, etc.
+
+app.listen(3000);
+```
+
+### 接続する
+
+```javascript
+var connect = require('connect');
+var favicon = require('serve-favicon');
+var path = require('path');
+
+var app = connect();
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// Add your middleware here, etc.
+
+app.listen(3000);
+```
+
+### vanilla http サーバー
+
+このミドルウェアは、外部のエクスプレス/コネクトでもどこでも使用できます。
+`req`、`res`、そして `callback`が必要です。
+
+```javascript
+var http = require('http');
+var favicon = require('serve-favicon');
+var finalhandler = require('finalhandler');
+var path = require('path');
+
+var _favicon = favicon(path.join(__dirname, 'public', 'favicon.ico'));
+
+var server = http.createServer(function onRequest(req, res) {
+  var done = finalhandler(req, res);
+
+  _favicon(req, res, function onNext(err) {
+    if (err) return done(err);
+
+    // continue to process the request here, etc.
+
+    res.statusCode = 404;
+    res.end('oops');
+  });
+});
+
+server.listen(3000);
+```
+
+## ライセンス
+
+[MIT](https://github.com/expressjs/serve-favicon/blob/HEAD/LICENSE)
+
+[downloads-url]: https://npmjs.org/package/serve-favicon
+[npm-url]: https://npmjs.org/package/serve-favicon
+[ossf-scorecard-badge]: https://api.scorecard.dev/projects/github.com/expressjs/serve-favicon/badge
+[ossf-scorecard-visualizer]: https://ossf.github.io/scorerecard-visualizer/#/projects/github.com/expressjs/serve-favicon

@@ -25,43 +25,43 @@ Visualizza le opzioni del comando con l'opzione `-h`:
 ```bash
 $ express -h
 
-  Uso: express [options] [dir]
+  Usage: express [options] [dir]
 
-  Opzioni:
+  Options:
 
-    -h, --help informazioni di utilizzo dell'output
-        --version output il numero di versione
-    -e, --ejs aggiungi il supporto del motore ejs
-        --hbs aggiungi il supporto del motore del manubrio
-        --pug aggiungi il supporto del motore del pug
-    -H, --hogan aggiungi hogan. s supporto motore
-        --no-view genera senza motore di visualizzazione
-    -v, --view <engine> aggiungi vista <engine> supporto (ejs<unk> hbs<unk> hjs<unk> jade<unk> pug<unk> twig<unk> vash) (valori predefiniti per jade)
-    -c, --css <engine>  aggiungi il foglio di stile <engine> supporto (less<unk> stylus<unk> compass<unk> sass) (valori predefiniti per css normali)
-        --git add . itignore
-    -f, --force force sulla directory non vuota
+    -h, --help          output usage information
+        --version       output the version number
+    -e, --ejs           add ejs engine support
+        --hbs           add handlebars engine support
+        --pug           add pug engine support
+    -H, --hogan         add hogan.js engine support
+        --no-view       generate without view engine
+    -v, --view <engine> add view <engine> support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+        --git           add .gitignore
+    -f, --force         force on non-empty directory
 ```
 
-Ad esempio, il seguente crea un'app Express chiamata _myapp_. L'app verrà creata in una cartella chiamata _myapp_ nella directory di lavoro corrente e il motore di visualizzazione sarà impostato su <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
+Ad esempio, il seguente crea un'app Express chiamata *myapp*. L'app verrà creata in una cartella chiamata *myapp* nella directory di lavoro corrente e il motore di visualizzazione sarà impostato su <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
 ```bash
 $ express --view=pug myapp
 
    create : myapp
    create : myapp/package.json
-   create : myapp/app. s
+   create : myapp/app.js
    create : myapp/public
    create : myapp/public/javascripts
    create : myapp/public/images
-   create : myapp/route
-   create : myapp/routes/index. s
-   create : myapp/routes/users. s
+   create : myapp/routes
+   create : myapp/routes/index.js
+   create : myapp/routes/users.js
    create : myapp/public/stylesheets
-   create : myapp/public/stylesheets/style. ss
+   create : myapp/public/stylesheets/style.css
    create : myapp/views
-   create : myapp/views/index. ug
+   create : myapp/views/index.pug
    create : myapp/views/layout.pug
-   create : myapp/views/error. ug
+   create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
 ```
@@ -82,7 +82,7 @@ $ DEBUG=myapp:* npm start
 Su Windows Command Prompt, utilizzare questo comando:
 
 ```bash
-> imposta DEBUG=myapp:* & npm start
+> set DEBUG=myapp:* & npm start
 ```
 
 Su Windows PowerShell, utilizzare questo comando:

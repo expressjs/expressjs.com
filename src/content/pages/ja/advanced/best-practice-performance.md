@@ -132,7 +132,7 @@ app.use(async (req, res, next) => {
 
 #### 何をしないか
 
-`unchaughtException`をリッスンするのは\_しないでください。 イベントループに戻るまで例外が発生した場合に発生します。 `uncaughtException` に対してイベントリスナーを追加すると、例外に遭遇するプロセスのデフォルトの動作が変更されます。 例外にもかかわらずこのプロセスは続けられます これはアプリがクラッシュするのを防ぐ良い方法に思えるかもしれません。 しかし、未取得の例外が危険な方法であり、推奨されていない場合、アプリを実行し続けます。 プロセスの状態は信頼できず予測不能になるからです
+`unchaughtException`をリッスンするのは_しないでください。 イベントループに戻るまで例外が発生した場合に発生します。 `uncaughtException` に対してイベントリスナーを追加すると、例外に遭遇するプロセスのデフォルトの動作が変更されます。 例外にもかかわらずこのプロセスは続けられます これはアプリがクラッシュするのを防ぐ良い方法に思えるかもしれません。 しかし、未取得の例外が危険な方法であり、推奨されていない場合、アプリを実行し続けます。 プロセスの状態は信頼できず予測不能になるからです
 
 さらに、 `uncaughtException` を使用すると、公式に [crude](https://nodejs.org/api/process#process_event_uncaughtexception) として認識されます。 ですから、 `unchaughtException` を聴くのは悪い考えです。 このため、複数のプロセスやスーパーバイザのようなものをお勧めします。クラッシュと再起動は、多くの場合、エラーから回復する最も信頼性の高い方法です。
 
@@ -208,7 +208,7 @@ Express アプリで init システムを使用するには、次の 2 つの方
 
 SystemdはLinuxシステムとサービスマネージャーです。 ほとんどの主要な Linux ディストリビューションでは、systemd をデフォルトの init システムとして採用しています。
 
-systemd サービスの設定ファイルは *unit file*と呼ばれ、ファイル名は `.service` で終わります。 Nodeアプリケーションを直接管理するためのユニットファイルの例を示します。 `<angle brackets>`で囲まれたシステムとアプリの値を置き換えます。
+systemd サービスの設定ファイルは _unit file_と呼ばれ、ファイル名は `.service` で終わります。 Nodeアプリケーションを直接管理するためのユニットファイルの例を示します。 `<angle brackets>`で囲まれたシステムとアプリの値を置き換えます。
 
 ```sh
 [Unit]
@@ -258,7 +258,7 @@ systemd の詳細については、[systemd reference (man page)](http://www.fre
 
 #### PM2の使用
 
-PM2を使用してアプリケーションをデプロイする場合は、*without*アプリケーションコードを変更するクラスタリングを利用できます。 [application is stateless](https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) を最初に確認してください。 つまり、プロセスにローカルデータは保存されません(セッション、WebSocket接続など)。
+PM2を使用してアプリケーションをデプロイする場合は、_without_アプリケーションコードを変更するクラスタリングを利用できます。 [application is stateless](https://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) を最初に確認してください。 つまり、プロセスにローカルデータは保存されません(セッション、WebSocket接続など)。
 
 PM2を使用してアプリケーションを実行する場合、**クラスタモード**を有効にして、選択した複数のインスタンスを使用してクラスタで実行できます。 例えば、マシン上の利用可能なCPU数と一致するなど。 `pm2`コマンドラインツールを使って、クラスタ内のプロセス数を手動で変更できます。
 
@@ -296,7 +296,7 @@ For more information on clustering with PM2, see [Cluster Mode](https://pm2.keym
 
 ロードバランサは通常、複数のアプリケーションインスタンスとサーバーとの間でトラフィックをオーケストレーションするリバースプロキシです。 アプリのロードバランサーは、 [Nginx](https://nginx.org/en/docs/http/load_balancing) または [HAProxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts) を使用して簡単に設定できます。
 
-ロードバランシングでは、特定のセッション ID に関連付けられているリクエストがそれらを起動したプロセスに接続されていることを確認する必要があります。 これは*session affinity*または*sticky sessions*として知られています。 そして、セッションデータにRedisなどのデータストアを使用するために上記の提案によって対処される場合があります(アプリケーションによって異なります)。 For a discussion, see [Using multiple nodes](https://socket.io/docs/v4/using-multiple-nodes/).
+ロードバランシングでは、特定のセッション ID に関連付けられているリクエストがそれらを起動したプロセスに接続されていることを確認する必要があります。 これは_session affinity_または_sticky sessions_として知られています。 そして、セッションデータにRedisなどのデータストアを使用するために上記の提案によって対処される場合があります(アプリケーションによって異なります)。 For a discussion, see [Using multiple nodes](https://socket.io/docs/v4/using-multiple-nodes/).
 
 ### リバースプロキシを使用
 

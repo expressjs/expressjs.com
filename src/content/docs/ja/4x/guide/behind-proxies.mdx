@@ -37,9 +37,9 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 <td markdown="1">
 リバースプロキシとして信頼する IP アドレス、サブネット、または IP アドレスとサブネットの配列。 次のリストに、事前に設定されたサブネット名が表示されます。
 
-- loopback - `127.0.0.1/8`, `::1/128`
-- linklocal - `169.254.0.0/16`, `fe80::/10`
-- uniqueloc - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
+* loopback - `127.0.0.1/8`, `::1/128`
+* linklocal - `169.254.0.0/16`, `fe80::/10`
+* uniqueloc - `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`
 
 IPアドレスは以下のいずれかの方法で設定できます。
 
@@ -86,17 +86,15 @@ app.set('trust proxy', (ip) => {
 
 <ul>
   <li markdown="1">
-    [req.hostname](/en/api#req.hostname) の値は、 `X-Forwarded-Host`
-    ヘッダで設定された値から取得されます。 クライアントやプロキシによって設定できます
+    [req.hostname](/en/api#req.hostname) の値は、
+    `X-Forwarded-Host` ヘッダで設定された値から取得されます。 クライアントやプロキシによって設定できます
   </li>
   <li markdown="1">
-    `X-Forwarded-Proto` はリバースプロキシによって設定することで、アプリが https`か`http\`
-    か無効な名前かをアプリに伝えることができます。 この値は [req.protocol](/en/api#req.protocol)
-    で反映されます。
+    `X-Forwarded-Proto` はリバースプロキシによって設定することで、アプリが https`か`http\` か無効な名前かをアプリに伝えることができます。 この値は [req.protocol](/en/api#req.protocol) で反映されます。
   </li>
   <li markdown="1">
-    [req.ip](/en/api#req.ip) と [req.ips](/en/api#req.ips) の値は、 ソケットアドレスと
-    `X-Forwarded-For` ヘッダーに基づいて入力されます。 最初の信頼されていないアドレスから始めます
+    [req.ip](/en/api#req.ip) と [req.ips](/en/api#req.ips) の値は、
+    ソケットアドレスと `X-Forwarded-For` ヘッダーに基づいて入力されます。 最初の信頼されていないアドレスから始めます
   </li>
 </ul>
 

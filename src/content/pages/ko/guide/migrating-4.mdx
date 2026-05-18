@@ -5,7 +5,7 @@ description: A guide to migrating your Express.js applications from version 3 to
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Express 4 is a breaking change from Express 3. That means an existing Express 3 app will _not_ work if you update the Express version in its dependencies.
+Express 4 is a breaking change from Express 3. That means an existing Express 3 app will *not* work if you update the Express version in its dependencies.
 
 This article covers:
 
@@ -40,8 +40,8 @@ There are several significant changes in Express 4:
 
 See also:
 
-- [New features in 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
-- [Migrating from 3.x to 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
+* [New features in 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+* [Migrating from 3.x to 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 ### Changes to Express core and middleware system
 
@@ -53,7 +53,7 @@ Express versioning and releases are not affected by middleware updates.
 Without built-in middleware, you must explicitly add all the
 middleware that is required to run your app. Simply follow these steps:
 
-1. Install the module: `npm install --save <module-name>`
+1. Install the module: `npm install --save \<module-name>`
 2. In your app, require the module: `require('module-name')`
 3. Use the module according to its documentation: `app.use( ... )`
 
@@ -214,8 +214,8 @@ the `router` middleware.
 The way you define routes is unchanged, but the routing system has two
 new features to help organize your routes:
 
-- A new method, `app.route()`, to create chainable route handlers for a route path.
-- A new class, `express.Router`, to create modular mountable route handlers.
+* A new method, `app.route()`, to create chainable route handlers for a route path.
+* A new class, `express.Router`, to create modular mountable route handlers.
 
 #### `app.route()` method
 
@@ -595,9 +595,9 @@ Express 4 generator.
 
 Command options and use largely remain the same, with the following exceptions:
 
-- Removed the `--sessions` option.
-- Removed the `--jshtml` option.
-- Added the `--hogan` option to support [Hogan.js](http://twitter.github.io/hogan.js/).
+* Removed the `--sessions` option.
+* Removed the `--jshtml` option.
+* Added the `--hogan` option to support [Hogan.js](http://twitter.github.io/hogan.js/).
 
 ### Example
 

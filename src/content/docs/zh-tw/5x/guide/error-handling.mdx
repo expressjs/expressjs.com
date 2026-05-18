@@ -5,7 +5,7 @@ description: Understand how Express.js handles errors in synchronous and asynchr
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Error Handling_ refers to how Express catches and processes errors that
+*Error Handling* refers to how Express catches and processes errors that
 occur both synchronously and asynchronously. Express comes with a default error
 handler so you don't need to write your own to get started.
 
@@ -161,12 +161,12 @@ Set the environment variable `NODE_ENV` to `production`, to run the app in produ
 When an error is written, the following information is added to the
 response:
 
-- The `res.statusCode` is set from `err.status` (or `err.statusCode`). If
+* The `res.statusCode` is set from `err.status` (or `err.statusCode`). If
   this value is outside the 4xx or 5xx range, it will be set to 500.
-- The `res.statusMessage` is set according to the status code.
-- The body will be the HTML of the status code message when in production
+* The `res.statusMessage` is set according to the status code.
+* The body will be the HTML of the status code message when in production
   environment, otherwise will be `err.stack`.
-- Any headers specified in an `err.headers` object.
+* Any headers specified in an `err.headers` object.
 
 If you call `next()` with an error after you have started writing the
 response (for example, if you encounter an error while streaming the
@@ -258,7 +258,7 @@ function logErrors(err, req, res, next) {
 
 Also in this example, `clientErrorHandler` is defined as follows; in this case, the error is explicitly passed along to the next one.
 
-Notice that when _not_ calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
+Notice that when *not* calling "next" in an error-handling function, you are responsible for writing (and ending) the response. Otherwise, those requests will "hang" and will not be eligible for garbage collection.
 
 ```js
 function clientErrorHandler(err, req, res, next) {

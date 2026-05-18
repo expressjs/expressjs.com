@@ -5,14 +5,14 @@ description: Apprenez à écrire des fonctions personnalisées de middleware pou
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Les fonctions _Middleware_ sont des fonctions qui ont accès à l'objet [request object](/en/5x/api#req) (`req`), l'objet [réponse](/en/5x/api#res) (`res`), et la fonction `next` dans le cycle de réponse de l'application. La fonction `next` est une fonction dans le routeur Express qui, lorsqu'elle est appelée, exécute le middleware qui succède au middleware actuel.
+Les fonctions *Middleware* sont des fonctions qui ont accès à l'objet [request object](/en/5x/api#req) (`req`), l'objet [réponse](/en/5x/api#res) (`res`), et la fonction `next` dans le cycle de réponse de l'application. La fonction `next` est une fonction dans le routeur Express qui, lorsqu'elle est appelée, exécute le middleware qui succède au middleware actuel.
 
 Les fonctions Middleware peuvent effectuer les tâches suivantes :
 
-- Exécuter n'importe quel code.
-- Effectuez des modifications à la requête et aux objets de réponse.
-- Termine le cycle de réponse de la requête.
-- Appelez le prochain middleware dans la pile.
+* Exécuter n'importe quel code.
+* Effectuez des modifications à la requête et aux objets de réponse.
+* Termine le cycle de réponse de la requête.
+* Appelez le prochain middleware dans la pile.
 
 Si la fonction middleware actuelle ne met pas fin au cycle de réponse de requête, elle doit appeler `next()` pour passer le contrôle à la prochaine fonction du middleware. Sinon, la demande sera laissée en suspens.
 
@@ -70,7 +70,7 @@ const express = require('express');
 const app = express();
 
 const myLogger = function (req, res, next) {
-  console.og('LOGGED');
+  console.log('LOGGED');
   next();
 };
 
@@ -110,16 +110,16 @@ const express = require('express');
 const app = express();
 
 const requestTime = function (req, res, next) {
-  req.equestTime = Date.now();
+  req.requestTime = Date.now();
   next();
 };
 
 app.use(requestTime);
 
-app.et('/', (req, res) => {
-  let responseText = 'Bonjour le monde!<br>';
-  responseText += `<small>Demandé à: ${req.requestTime}</small>`;
-  res.end(responseText);
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
 });
 
 app.listen(3000);
@@ -134,11 +134,11 @@ Enfin, nous allons créer une fonction middleware qui valide les cookies entrant
 Voici un exemple de fonction qui valide les cookies avec un service asynchrone externe.
 
 ```js
-fonction async cookieValidator(cookies) {
-  essayer {
-    attendre externalyValidateCookie(cookies.testCookie);
+async function cookieValidator(cookies) {
+  try {
+    await externallyValidateCookie(cookies.testCookie);
   } catch {
-    throw new Error('Cookies invalides');
+    throw new Error('Invalid cookies');
   }
 }
 ```
@@ -148,12 +148,12 @@ Ici, nous utilisons le middleware [`cookie-parser`](/en/resources/middleware/coo
 ```js
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const cookieValidator = require('. cookieValidator');
+const cookieValidator = require('./cookieValidator');
 
 const app = express();
 
-fonction async validateCookies(req, res, next) {
-  attendent cookieValidator(req. ookies);
+async function validateCookies(req, res, next) {
+  await cookieValidator(req.cookies);
   next();
 }
 
@@ -161,8 +161,8 @@ app.use(cookieParser());
 
 app.use(validateCookies);
 
-// gestionnaire d'erreur
-app. se(err, req, res, next) => {
+// error handler
+app.use((err, req, res, next) => {
   res.status(400).send(err.message);
 });
 
@@ -190,9 +190,9 @@ Si vous avez besoin que votre middleware soit configurable, exportez une fonctio
 Fichier: `my-middleware.js`
 
 ```js
-module. xports = function (options) {
-  fonction de retour (req, res, next) {
-    // Implémente la fonction middleware basée sur l'objet d'options
+module.exports = function (options) {
+  return function (req, res, next) {
+    // Implement the middleware function based on the options object
     next();
   };
 };

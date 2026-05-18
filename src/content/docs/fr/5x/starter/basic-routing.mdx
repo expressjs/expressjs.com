@@ -5,7 +5,7 @@ description: Apprenez les fondamentaux du routage dans les applications Express.
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Routing_ désigne la façon dont une application répond à une requête client à un point de terminaison particulier, qui est une URI (ou un chemin) et une méthode spécifique de requête HTTP (GET, POST, etc.).
+*Routing* désigne la façon dont une application répond à une requête client à un point de terminaison particulier, qui est une URI (ou un chemin) et une méthode spécifique de requête HTTP (GET, POST, etc.).
 
 Chaque route peut avoir une ou plusieurs fonctions de gestionnaire, qui sont exécutées lorsque la route est correspondante.
 
@@ -17,10 +17,10 @@ app.METHOD(PATH, HANDLER);
 
 Où :
 
-- `app` est une instance de `express`.
-- `METHOD` est une [méthode de requête HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), en minuscule.
-- `PATH` est un chemin sur le serveur.
-- `HANDLER` est la fonction exécutée lorsque la route est correspondante.
+* `app` est une instance de `express`.
+* `METHOD` est une [méthode de requête HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), en minuscule.
+* `PATH` est un chemin sur le serveur.
+* `HANDLER` est la fonction exécutée lorsque la route est correspondante.
 
 <Alert type="Alerte">
 
@@ -44,7 +44,7 @@ Répondre à une requête POST sur la route racine (`/`), la page d'accueil de l
 
 ```js
 app.post('/', (req, res) => {
-  res.send('Requête POST');
+  res.send('Got a POST request');
 });
 ```
 
@@ -52,7 +52,7 @@ Répondre à une requête PUT sur la route `/user`:
 
 ```js
 app.put('/user', (req, res) => {
-  res.send('Requête PUT à /user');
+  res.send('Got a PUT request at /user');
 });
 ```
 
@@ -60,7 +60,7 @@ Répondre à une requête DELETE sur la route `/user`:
 
 ```js
 app.delete('/user', (req, res) => {
-  res.send('Requête DELETE à /user');
+  res.send('Got a DELETE request at /user');
 });
 ```
 

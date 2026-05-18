@@ -1,0 +1,116 @@
+---
+title: cookie-parser middleware
+description: HTTP リクエストクッキーを解析
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo version="1.4.7" github="https://github.com/expressjs/cookie-parser" npm="https://www.npmjs.com/package/cookie-parser" />
+
+`Cookie`ヘッダを解析し、
+クッキー名でキー指定されたオブジェクトを`req.cookies`に追加します。 Optionally you may enable signed cookie support by passing a
+`secret` string, which assigns `req.secret` so it may be used by other
+middleware.
+
+## インストール
+
+```sh
+$ npm install cookie-parser
+```
+
+## API
+
+```js
+var cookieParser = require('cookie-parser');
+```
+
+### cookieParser(secret, options)
+
+与えられた `secret` と
+`options` を使用して、新しいクッキーパーサミドルウェア関数を作成します。
+
+* `secret` cookieへの署名に使用される文字列または配列。 これはオプションで、
+  が指定されていない場合、署名されたクッキーを解析しません。 文字列が与えられた場合、この
+  がシークレットとして使用されます。 配列が指定された場合、
+  シークレットごとにクッキーの署名を解除しようとします。
+* `options` 2 番目のオプションとして `cookie.parse` に渡されるオブジェクト。 詳細は
+  [cookie](https://www.npmjs.org/package/cookie) を参照してください。
+  * `decode` クッキーの値をデコードする関数
+
+The middleware will parse the `Cookie` header on the request and expose the
+cookie data as the property `req.cookies` and, if a `secret` was provided, as
+the property `req.signedCookies`. これらのプロパティは、クッキーの値への
+クッキー名の名前値のペアです。
+
+`secret` が提供されると、このモジュールは署名を解除して署名された Cookie
+の値を検証し、それらの値のペアを `req.cookies` から `req.signedCookies` に移動します。
+署名されたクッキーは、`:`の前に値が付いたクッキーです。 署名済みクッキー
+失敗する署名検証は、改ざんされた
+値の代わりに `false` になります。
+
+さらに、このモジュールは特別な「JSON Cookie」をサポートしています。 これらは
+の前に`j:`が付いているクッキーです。 これらの値に遭遇すると、値は
+が JSON.parse\` の結果として公開されます。 解析に失敗した場合、元の値は
+のままになります。
+
+### cookieParser.JSONCookie(str)
+
+JSON クッキーとしてクッキーの値を解析します。 JSONクッキーの場合、解析されたJSON値
+を返します。それ以外の場合は、渡された値を返します。
+
+### cookieParser.JSONCookies(cookies)
+
+オブジェクトが与えられると、キーに対して反復処理を行い、各
+値に対して `JSONCookie` を呼び出し、元の値をパースされた値に置き換えます。 これは渡された
+同じオブジェクトを返します。
+
+### cookieParser.signedCookie(str, secret)
+
+クッキーの値を署名されたクッキーとして解析します。 これは、署名されたCookieで署名が有効であった場合、解析された未署名の
+値を返します。 値が
+であった場合、元の値が返されます。 値が署名されたが、
+署名が検証できなかった場合、`false` が返されます。
+
+`secret` 引数には配列または文字列を指定できます。 文字列が与えられた場合、この
+がシークレットとして使用されます。 配列が指定された場合、
+シークレットごとにクッキーの署名を解除しようとします。
+
+### cookieParser.signedCookies(cookie, secret)
+
+オブジェクトが与えられた場合、キーに対して反復処理を行い、任意の値が
+署名された Cookie であるかどうかを確認します。 署名されたCookieで署名が有効な場合、 キー
+はオブジェクトから削除され、返された新しいオブジェクトに追加されます。
+
+`secret` 引数には配列または文字列を指定できます。 文字列が与えられた場合、この
+がシークレットとして使用されます。 配列が指定された場合、
+シークレットごとにクッキーの署名を解除しようとします。
+
+## 例
+
+```js
+var express = require('express');
+var cookieParser = require('cookie-parser');
+
+var app = express();
+app.use(cookieParser());
+
+app.get('/', function (req, res) {
+  // Cookies that have not been signed
+  console.log('Cookies: ', req.cookies);
+
+  // Cookies that have been signed
+  console.log('Signed Cookies: ', req.signedCookies);
+});
+
+app.listen(8080);
+
+// curl command that sends an HTTP request with two cookies
+// curl http://127.0.0.1:8080 --cookie "Cho=Kim;Greet=Hello"
+```
+
+## ライセンス
+
+[MIT](https://github.com/expressjs/cookie-parser/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/cookie-parser

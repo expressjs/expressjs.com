@@ -5,14 +5,14 @@ description: Aprenda a escrever funções de middleware personalizadas para apli
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Middleware\_ são funções que têm acesso ao [objeto de requisição](/en/5x/api#req) (`req`), a [objeto de resposta](/en/5x/api#res) (`res`) e a função `next` no ciclo de resposta de solicitação do aplicativo. A função `próxima` é uma função no roteador Expresso que, quando invocado, executa o intermediário sucedendo ao intermediário atual.
+Middleware_ são funções que têm acesso ao [objeto de requisição](/en/5x/api#req) (`req`), a [objeto de resposta](/en/5x/api#res) (`res`) e a função `next` no ciclo de resposta de solicitação do aplicativo. A função `próxima` é uma função no roteador Expresso que, quando invocado, executa o intermediário sucedendo ao intermediário atual.
 
 As funções do Middleware podem executar as seguintes tarefas:
 
-- Execute qualquer código.
-- Fazer alterações na solicitação e nos objetos de resposta.
-- Encerrar o ciclo de solicitação-resposta.
-- Chame o próximo middleware na pilha.
+* Execute qualquer código.
+* Fazer alterações na solicitação e nos objetos de resposta.
+* Encerrar o ciclo de solicitação-resposta.
+* Chame o próximo middleware na pilha.
 
 Se a função middleware atual não encerra o ciclo de resposta de solicitação, ela deve chamar `next()` para passar o controle para a próxima função middleware. Caso contrário, o pedido ficará pendurado.
 
@@ -40,8 +40,8 @@ A figura a seguir mostra os elementos de uma chamada de função middleware:
 </div>
 
 <div class="callout" id="callout5">
-  HTTP <a href="/en/5x/api#res">resposta</a> argumento para a função middleware, chamada de "res"
-  pela convenção .
+  HTTP <a href="/en/5x/api#res">resposta</a> argumento para a função middleware, chamada de "res" pela convenção
+  .
 </div>
 
 <div class="callout" id="callout6">HTTP <a href="/en/5x/api#req">request</a> argumento para a função middleware, chamado de "req" pela convenção.</div>
@@ -78,7 +78,7 @@ chamada `myLogger`.
 
 ```js
 const myLogger = function (req, res, next) {
-  console.log('LOGGGED');
+  console.log('LOGGED');
   next();
 };
 ```
@@ -100,7 +100,7 @@ const express = require('express');
 const app = express();
 
 const myLogger = function (req, res, next) {
-  console.og('LOGGED');
+  console.log('LOGGED');
   next();
 };
 
@@ -140,16 +140,16 @@ const express = require('express');
 const app = express();
 
 const requestTime = function (req, res, next) {
-  req.equestTime = Date.now();
+  req.requestTime = Date.now();
   next();
 };
 
 app.use(requestTime);
 
-aplicativo.et('/', (req, res) => {
-  let responseText = 'Olá Mundo!<br>';
-  responseText += `<small>Solicitado em: ${req.requestTime}</small>`;
-  res.end(responseText);
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
 });
 
 app.listen(3000);
@@ -164,11 +164,11 @@ Finalmente, vamos criar uma função de middleware que valida os cookies recebid
 Aqui está uma função de exemplo que valida cookies com um serviço assíncrono externo.
 
 ```js
-função assíncrona cookieValidator(cookies) {
-  tente {
-    aguarde externamenteCookie(cookies.testCookie);
-  } pesque {
-    throw new Error('Cookies inválidos');
+async function cookieValidator(cookies) {
+  try {
+    await externallyValidateCookie(cookies.testCookie);
+  } catch {
+    throw new Error('Invalid cookies');
   }
 }
 ```
@@ -178,12 +178,12 @@ Aqui, usamos o [`cookie-parser`](/en/resources/middleware/cookie-parser) middlew
 ```js
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const cookieValidator = require('. cookieValidator');
+const cookieValidator = require('./cookieValidator');
 
 const app = express();
 
-função async validateCookies(req, res, next) {
-  aguarde cookieValidator(req. ookies);
+async function validateCookies(req, res, next) {
+  await cookieValidator(req.cookies);
   next();
 }
 
@@ -191,8 +191,8 @@ app.use(cookieParser());
 
 app.use(validateCookies);
 
-// manipulador de erro
-. se((err, req, res, next) => {
+// error handler
+app.use((err, req, res, next) => {
   res.status(400).send(err.message);
 });
 
@@ -220,9 +220,9 @@ Se precisar de seu middleware para ser configurável, exporte uma função que a
 Arquivo: `meu-middleware.js`
 
 ```js
-Módulo xports = função (opcions) {
-  return function (req, next) {
-    // Implementa a função middleware baseada no objeto de opções
+module.exports = function (options) {
+  return function (req, res, next) {
+    // Implement the middleware function based on the options object
     next();
   };
 };
@@ -231,7 +231,7 @@ Módulo xports = função (opcions) {
 O middleware agora pode ser usado como mostrado abaixo.
 
 ```js
-const mw = require('./meu-middleware.js');
+const mw = require('./my-middleware.js');
 
 app.use(mw({ option1: '1', option2: '2' }));
 ```

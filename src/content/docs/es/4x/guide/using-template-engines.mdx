@@ -5,7 +5,7 @@ description: Descubra cómo integrar y utilizar motores de plantillas como Pug, 
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-Un _template engine_ le permite usar plantillas estáticas en su aplicación. En tiempo de ejecución, el motor de plantillas reemplaza variables
+Un *template engine* le permite usar plantillas estáticas en su aplicación. En tiempo de ejecución, el motor de plantillas reemplaza variables
 en un archivo de plantilla con valores reales. y transforma la plantilla en un archivo HTML enviado al cliente.
 Este enfoque facilita el diseño de una página HTML.
 
@@ -13,9 +13,9 @@ El [generador de aplicaciones Express](/en/starter/generator) utiliza [Pug](http
 
 Para renderizar archivos de plantilla, establezca las siguientes [propiedades de configuración de aplicación](/en/4x/api#app.set), en el `app.js` por defecto creado por el generador:
 
-- `vistas`, el directorio donde están ubicados los archivos de plantilla. Ej: `app.set('vistas', './views')`.
+* `vistas`, el directorio donde están ubicados los archivos de plantilla. Ej: `app.set('vistas', './views')`.
   Esto por defecto es el directorio `views` en el directorio raíz de la aplicación.
-- `ver engine`, el motor de plantillas a usar. Por ejemplo, para usar el motor de plantillas Pug: `app.set('view engine', 'pug')`.
+* `ver engine`, el motor de plantillas a usar. Por ejemplo, para usar el motor de plantillas Pug: `app.set('view engine', 'pug')`.
 
 A continuación, instale el correspondiente paquete npm del motor de plantillas; por ejemplo para instalar Pug:
 
@@ -36,7 +36,7 @@ Después de que el motor de vista esté definido, no tiene que especificar el mo
 Express carga el módulo internamente, por ejemplo:
 
 ```js
-app.set('ver motor', 'pug');
+app.set('view engine', 'pug');
 ```
 
 Luego, crea un archivo de plantilla Pug llamado `index.pug` en el directorio `views`, con el siguiente contenido:
@@ -54,7 +54,7 @@ debe especificar la extensión del archivo `view`. De lo contrario, puede omitir
 
 ```js
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Hey', message: '¡Hola!' });
+  res.render('index', { title: 'Hey', message: 'Hello there!' });
 });
 ```
 

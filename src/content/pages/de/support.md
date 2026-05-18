@@ -7,14 +7,14 @@ Nur die neueste Version einer der wichtigsten Release-Zeilen wird unterstützt.
 
 Versionen, die EOL (Ende des Lebens) _may_ sind, erhalten Updates für kritische Sicherheitslücken, aber das Express-Team bietet keine Garantie und plant keine Korrekturen für festgestellte Probleme zu beheben oder zu veröffentlichen.
 
-| Hauptversion           | Minimale Node.js Version | Support-Startdatum | Support-Enddatum |
-| ---------------------- | ------------------------ | ------------------ | ---------------- |
-| [**v5.x**](/en/5x/api) | 18                       | September 2024     | **Laufend**      |
-| [**v4.x**](/en/4x/api) | 0.10.0                   | April 2014         | **Laufend**      |
-| [**v3.x**](/en/3x/api) | 0.8.0                    | Oktober 2012       | Juli 2015        |
-| [**v2.x**](/2x/)       | 0.4.1                    | März 2011          | Juli 2012        |
-| **v1.x**               | 0.2.0                    | Dezember 2010      | März 2011        |
-| **v0.14.x**            | 0.1.98                   | Dezember 2010      | Dezember 2010    |
+| Hauptversion                                | Minimale Node.js Version | Support-Startdatum | Support-Enddatum |
+| ------------------------------------------- | ---------------------------------------- | ------------------ | ---------------- |
+| [**v5.x**](/en/5x/api)      | 18                                       | September 2024     | **Laufend**      |
+| [**v4.x**](/en/4x/api)      | 0.10.0   | April 2014         | **Laufend**      |
+| [**v3.x**](/en/3x/api)      | 0.8.0    | Oktober 2012       | Juli 2015        |
+| [**v2.x**](/2x/)            | 0.4.1    | März 2011          | Juli 2012        |
+| **v1.x**                    | 0.2.0    | Dezember 2010      | März 2011        |
+| **v0.14.x** | 0.1.98   | Dezember 2010      | Dezember 2010    |
 
 ## Kommerzielle Support-Optionen
 

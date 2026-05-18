@@ -5,13 +5,13 @@ description: Lernen Sie, wie Sie Routen in Express.js Anwendungen definieren und
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Routing_ bezieht sich darauf, wie die Endpunkte einer Anwendung (URIs) auf Kundenanfragen reagieren.
-Für eine Einführung in das Routing siehe [Basic routing](/en/starter/basic-routing).
+*Routing* bezieht sich darauf, wie die Endpunkte einer Anwendung (URIs) auf Kundenanfragen reagieren.
+Für eine Einführung in das Routing siehe [Basic routing](/en/4x/starter/basic-routing).
 
 Du definierst Routing, indem du Methoden des Express `app` Objekts verwendest, die den HTTP-Methoden entsprechen;
 zum Beispiel, `app. et()` um GET-Anfragen und `app.post` zu behandeln, um POST-Anfragen zu bearbeiten. Für eine vollständige Liste
-siehe [app.METHOD](/en/5x/api#app.METHOD). Du kannst auch [app.all()](/en/5x/api#app.all) verwenden, um alle HTTP-Methoden und [app. se()](/en/5x/api#app.use) bis
-Middleware als Callback-Funktion angeben (siehe [Middleware](/en/guide/using-middleware) für Details).
+siehe [app.METHOD](/en/4x/api/application#appmethodpath-callback--callback-). Du kannst auch [app.all()](/en/4x/api/application#appallpath-callback--callback-) verwenden, um alle HTTP-Methoden und [app. se()](/en/4x/api/application#appusepath-callback--callback) bis
+Middleware als Callback-Funktion angeben (siehe [Middleware](/en/4x/guide/using-middleware) für Details).
 
 Diese Routing-Methoden geben eine Callback-Funktion (manchmal auch "handler functions") an, die aufgerufen wird, wenn die Anwendung eine Anfrage an die angegebene Route (Endpunkt) und die HTTP-Methode erhält. Mit anderen Worten, die Anwendung "lauscht" für Anforderungen, die mit der angegebenen Route(s) und Methode(n) übereinstimmen und wenn es ein Spiel erkennt, ruft es die angegebene Callback-Funktion auf.
 
@@ -22,12 +22,12 @@ an den nächsten Callback zu übergeben.
 Der folgende Code ist ein Beispiel für eine sehr einfache Route.
 
 ```js
-const express = require('express ');
-const app = express = );
+const express = require('express');
+const app = express();
 
-// Mit "Hallo world" antworten, wenn eine GET-Anfrage an die Homepage
-App gestellt wird. et('/', (req, res) => {
-  res.send('Hallo Welt');
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+  res.send('hello world');
 });
 ```
 
@@ -38,26 +38,26 @@ Eine Route-Methode wird von einer der HTTP-Methoden abgeleitet und an eine Insta
 Der folgende Code ist ein Beispiel für Routen, die für die `GET` und die `POST` Methoden im Root der App definiert sind.
 
 ```js
-// GET Methode Route
+// GET method route
 app.get('/', (req, res) => {
-  res.end('GET request to the homepage');
+  res.send('GET request to the homepage');
 });
 
 // POST method route
-app.ost('/', (req, res) => {
+app.post('/', (req, res) => {
   res.send('POST request to the homepage');
 });
 ```
 
 Express unterstützt Methoden, die allen HTTP-Anfragemethoden entsprechen: `get`, `post` und so weiter.
-Für eine vollständige Liste siehe [app.METHOD](/en/5x/api#app.METHOD).
+Für eine vollständige Liste siehe [app.METHOD](/en/4x/api/application#appmethodpath-callback--callback-).
 
-Es gibt eine spezielle Routing-Methode, `app.all()`, die benutzt wird, um Middleware-Funktionen an einem Pfad für _all_ HTTP-Requestmethoden zu laden. Zum Beispiel wird der folgende Handler für Anfragen an die Route `"/secret"` ausgeführt, ob `GET` verwendet wird, `POST`, `PUT`, `DELETE`, oder jede andere HTTP-Anfragemethode, die im [http module]unterstützt wird (https://nodejs.org/api/http.html#http_http_methods).
+Es gibt eine spezielle Routing-Methode, `app.all()`, die benutzt wird, um Middleware-Funktionen an einem Pfad für *all* HTTP-Requestmethoden zu laden. Zum Beispiel wird der folgende Handler für Anfragen an die Route `"/secret"` ausgeführt, ob `GET` verwendet wird, `POST`, `PUT`, `DELETE`, oder jede andere HTTP-Anfragemethode, die im [http module]unterstützt wird (https://nodejs.org/api/http.html#http_http_methods).
 
 ```js
 app.all('/secret', (req, res, next) => {
-  console.log('Zugriff auf den geheimen Abschnitt ...');
-  next(); // Kontrolle an den nächsten Handler
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
 });
 ```
 
@@ -65,31 +65,16 @@ app.all('/secret', (req, res, next) => {
 
 Routenpfade in Kombination mit einer Anfragemethode definieren die Endpunkte, an denen Anfragen gestellt werden können. Routenpfade können Zeichenketten, Zeichenkettenmuster oder reguläre Ausdrücke sein.
 
-<Alert type="warnung">
-
-Im Ausdruck 5, die Zeichen `? , `+`, `\*`, `[]`und`()\` werden anders behandelt als in Version
-4, bitte lesen Sie die [Migrationsanleitung](/en/guide/migrating-5#path-syntax) für weitere Informationen.
-
-</Alert>
-
-<Alert type="warnung">
-
-Im Ausdruck 4 müssen reguläre Ausdrücke wie `$` mit einem `\` maskiert werden.
-
-</Alert>
-
 <Alert type="info">
 
-Express verwendet [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) um die Route
-Pfade zu treffen; lesen Sie die Dokumentation zu regexp für alle Möglichkeiten bei der Definition von Routenpfaden.
-[Express Playground Router](https://bjohansebas.github.io/playground-router/) ist ein praktisches Werkzeug für
-grundlegende Express-Routen zu testen, obwohl es kein Muster-Matching unterstützt.
+Express verwendet [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) um die Routenpfade zu finden; lesen Sie die Dokumentation zu regexp für alle Möglichkeiten bei der Definition von Routenpfaden.
+[Express Playground Router](https://bjohansebas.github.io/playground-router/) ist ein praktisches Werkzeug zum Testen grundlegender Express-Routen, obwohl es kein Muster-Matching unterstützt.
 
 </Alert>
 
-<Alert type="warning">Abfragezeichenketten sind nicht Teil des Routenweges.</Alert>
-
 ### Routenpfade basierend auf Zeichenketten
+
+<Alert type="warning">Abfragezeichenketten sind nicht Teil des Routenweges.</Alert>
 
 Dieser Routenpfad wird den Anfragen an die Root-Route `/` entsprechen.
 
@@ -116,13 +101,6 @@ app.get('/random.text', (req, res) => {
 ```
 
 ### Routenpfade basierend auf Stringmustern
-
-<Alert type="warnung">
-
-Die Zeichenkettenmuster in Express 5 funktionieren nicht mehr. Weitere Informationen finden Sie in der Migration
-Anleitung .
-
-</Alert>
 
 Dieser Routenpfad stimmt mit `acd` und `abcd` überein.
 
@@ -158,6 +136,12 @@ app.get('/ab(cd)?e', (req, res) => {
 
 ### Routenpfade basierend auf regulären Ausdrücken
 
+<Alert type="warnung">
+
+Zeichen wie `$` müssen mit einem `\` maskiert werden.
+
+</Alert>
+
 Dieser Routenpfad stimmt mit einem "a" darin überein.
 
 ```js
@@ -179,15 +163,15 @@ app.get(/.*fly$/, (req, res) => {
 Routenparameter sind URL-Segmente, die zur Erfassung der an ihrer Position in der URL angegebenen Werte verwendet werden. Die erfassten Werte werden im Objekt `req.params` gefüllt, wobei der Name des im Pfad angegebenen Routenparameter als ihre jeweiligen Schlüssel angegeben ist.
 
 ```
-Routenpfad: /users/:userId/books/:bookId
-Anfrage-URL: http://localhost:3000/users/34/books/8989
+Route path: /users/:userId/books/:bookId
+Request URL: http://localhost:3000/users/34/books/8989
 req.params: { "userId": "34", "bookId": "8989" }
 ```
 
 Um Routen mit Routenparametern zu definieren, geben Sie einfach die Routenparameter im Pfad der Route, wie unten gezeigt, an.
 
 ```js
-app.get('/users/:userId/bookId', (req, res) => {
+app.get('/users/:userId/books/:bookId', (req, res) => {
   res.send(req.params);
 });
 ```
@@ -201,29 +185,22 @@ Der Name der Routenparameter muss aus "Wortzeichen" ([A-Za-z0-9_] ) bestehen.
 Da die Bindestriche (`-`) und der Punkt (`.`) wörtlich interpretiert werden, können sie zusammen mit Routenparametern für nützliche Zwecke verwendet werden.
 
 ```
-Routenpfad: /flights/:from-:to
-Abfrage URL: http://localhost:3000/flights/LAX-SFO
+Route path: /flights/:from-:to
+Request URL: http://localhost:3000/flights/LAX-SFO
 req.params: { "from": "LAX", "to": "SFO" }
 ```
 
 ```
-Routenpfad: /plantae/:genus.:species
-Anfrage URL: http://localhost:3000/plantae/Prunus.persica
+Route path: /plantae/:genus.:species
+Request URL: http://localhost:3000/plantae/Prunus.persica
 req.params: { "genus": "Prunus", "species": "persica" }
 ```
-
-<Alert type="warnung">
-
-In express 5, Regexp characters are not supported in route paths, for more information please
-refer to the [migration guide](/en/guide/migrating-5#path-syntax).
-
-</Alert>
 
 Um mehr Kontrolle über den exakten String zu haben, der mit einem Route-Parameter übereinstimmen kann, können Sie einen regulären Ausdruck in Klammern (`()`) anhängen:
 
 ```
-Routenpfad: /user/:userId(\d+)
-Anfrage-URL: http://localhost:3000/user/42
+Route path: /user/:userId(\d+)
+Request URL: http://localhost:3000/user/42
 req.params: {"userId": "42"}
 ```
 
@@ -235,7 +212,7 @@ Zeichen mit einem zusätzlichen Backslash maskieren, zum Beispiel `\d+`.
 </Alert>
 
 <Alert type="warnung">
-In Express 4.x wird <a href="https://github.com/expressjs/express/issues/2495">das `*` Zeichen in regulären Ausdrücken nicht auf die übliche Weise</a> interpretiert. Benutze `{0,}` anstelle von `*`. Dies wird wahrscheinlich in Express 5 behoben.
+Das Zeichen <a href="https://github.com/expressjs/express/issues/2495">`*` in regulären Ausdrücken wird nicht auf die übliche Weise</a> interpretiert. Benutze `{0,}` anstelle von `*`.
 </Alert>
 
 ## Routenhandler
@@ -244,10 +221,10 @@ Du kannst mehrere Callback-Funktionen bereitstellen, die sich wie [middleware](/
 
 ```js
 app.get('/user/:id', (req, res, next) => {
-  if (req.params.d === '0') {
+  if (req.params.id === '0') {
     return next('route');
   }
-  res.end(`User ${req.params.id}`);
+  res.send(`User ${req.params.id}`);
 });
 
 app.get('/user/:id', (req, res) => {
@@ -257,8 +234,8 @@ app.get('/user/:id', (req, res) => {
 
 In diesem Beispiel:
 
-- `GET /user/5` → behandelt durch die erste Route → sendet "Benutzer 5"
-- `GET /user/0` → erste Routenaufrufe `next('route')`, überspringt zur nächsten passenden `/user/:id` Route
+* `GET /user/5` → behandelt durch die erste Route → sendet "Benutzer 5"
+* `GET /user/0` → erste Routenaufrufe `next('route')`, überspringt zur nächsten passenden `/user/:id` Route
 
 Routenhandler können in Form einer Funktion, eines Arrays von Funktionen oder Kombinationen beider sein, wie in den folgenden Beispielen gezeigt.
 
@@ -266,7 +243,7 @@ Eine einzelne Callback-Funktion kann eine Route handhaben. Zum Beispiel:
 
 ```js
 app.get('/example/a', (req, res) => {
-  res.send('Hallo von A!');
+  res.send('Hello from A!');
 });
 ```
 
@@ -276,11 +253,11 @@ Mehr als eine Callback-Funktion kann eine Route handhaben (stelle sicher, dass d
 app.get(
   '/example/b',
   (req, res, next) => {
-    Konsole.og('die Antwort wird von der nächsten Funktion gesendet. .');
+    console.log('the response will be sent by the next function ...');
     next();
   },
   (req, res) => {
-    res.end('Hallo von B!');
+    res.send('Hello from B!');
   }
 );
 ```
@@ -289,17 +266,17 @@ Ein Array von Callback-Funktionen kann eine Route handhaben. Zum Beispiel:
 
 ```js
 const cb0 = function (req, res, next) {
-  Konsole.og('CB0');
+  console.log('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console.og('CB1');
+  console.log('CB1');
   next();
 };
 
 const cb2 = function (req, res) {
-  res.end('Hallo von C!');
+  res.send('Hello from C!');
 };
 
 app.get('/example/c', [cb0, cb1, cb2]);
@@ -309,24 +286,24 @@ Eine Kombination aus unabhängigen Funktionen und Arrays von Funktionen kann ein
 
 ```js
 const cb0 = function (req, res, next) {
-  Konsole.og('CB0');
+  console.log('CB0');
   next();
 };
 
 const cb1 = function (req, res, next) {
-  console.og('CB1');
+  console.log('CB1');
   next();
 };
 
-App.et(
+app.get(
   '/example/d',
   [cb0, cb1],
   (req, res, next) => {
-    Konsole.og('die Antwort wird von der nächsten Funktion gesendet. .');
+    console.log('the response will be sent by the next function ...');
     next();
   },
   (req, res) => {
-    res.end('Hallo von D!');
+    res.send('Hello from D!');
   }
 );
 ```
@@ -335,22 +312,22 @@ App.et(
 
 Die Methoden auf dem Antwortobjekt (`res`) in der folgenden Tabelle können eine Antwort an den Client senden und den Request-Antwort-Zyklus beenden. Wenn keine dieser Methoden von einem Routenhandler aufgerufen wird, bleibt die Client-Anfrage hängen.
 
-| Methode                                       | Beschreibung                                                                                              |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| [res.download()](/en/5x/api#res.download)     | Fordern Sie eine Datei zum Download an.                                                                   |
-| [res.end()](/en/5x/api#res.end)               | Beenden Sie den Antwort-Prozess.                                                                          |
-| [res.json()](/en/5x/api#res.json)             | Sende eine JSON-Antwort.                                                                                  |
-| [res.jsonp()](/en/5x/api#res.jsonp)           | Senden Sie eine JSON-Antwort mit JSONP-Unterstützung.                                                     |
-| [res.redirect()](/en/5x/api#res.redirect)     | Anfrage umleiten.                                                                                         |
-| [res.render()](/en/5x/api#res.render)         | Ansichtsvorlage ausblenden.                                                                               |
-| [res.send()](/en/5x/api#res.send)             | Senden Sie eine Antwort von verschiedenen Typen.                                                          |
-| [res.sendFile()](/en/5x/api#res.sendFile)     | Senden Sie eine Datei als octet-Stream.                                                                   |
-| [res.sendStatus()](/en/5x/api#res.sendStatus) | Legen Sie den Antwort-Statuscode fest und senden Sie seine Zeichenfolge Repräsentation als Antwortkörper. |
+| Methode                                                                      | Beschreibung                                                                                              |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| [res.download()](/en/4x/api/response#resdownloadpath--filename--options--fn) | Fordern Sie eine Datei zum Download an.                                                                   |
+| [res.end()](/en/4x/api/response#resenddata-encoding-callback)                | Beenden Sie den Antwort-Prozess.                                                                          |
+| [res.json()](/en/4x/api/response#resjsonbody)                                | Sende eine JSON-Antwort.                                                                                  |
+| [res.jsonp()](/en/4x/api/response#resjsonpbody)                              | Senden Sie eine JSON-Antwort mit JSONP-Unterstützung.                                                     |
+| [res.redirect()](/en/4x/api/response#resredirectstatus-path)                 | Anfrage umleiten.                                                                                         |
+| [res.render()](/en/4x/api/response#resrenderview--locals--callback)          | Ansichtsvorlage ausblenden.                                                                               |
+| [res.send()](/en/4x/api/response#ressendbody)                                | Senden Sie eine Antwort von verschiedenen Typen.                                                          |
+| [res.sendFile()](/en/4x/api/response#ressendfilepath--options--fn)           | Senden Sie eine Datei als octet-Stream.                                                                   |
+| [res.sendStatus()](/en/4x/api/response#ressendstatusstatuscode)              | Legen Sie den Antwort-Statuscode fest und senden Sie seine Zeichenfolge Repräsentation als Antwortkörper. |
 
 ## app.route()
 
 Sie können verkettende Routenhandler für einen Routenpfad erstellen, indem Sie `app.route()` verwenden.
-Da der Weg an einem einzigen Ort angegeben wird, ist die Schaffung modularer Routen hilfreich, ebenso wie die Reduzierung von Redundanz und Typos. Weitere Informationen über Routen finden Sie unter [Router() documentation](/en/5x/api#router).
+Da der Weg an einem einzigen Ort angegeben wird, ist die Schaffung modularer Routen hilfreich, ebenso wie die Reduzierung von Redundanz und Typos. Weitere Informationen über Routen finden Sie unter [Router() documentation](/en/4x/api/router).
 
 Hier ist ein Beispiel für verkettete Routenhandler, die mit `app.route()` definiert werden.
 
@@ -358,14 +335,14 @@ Hier ist ein Beispiel für verkettete Routenhandler, die mit `app.route()` defin
 app
   .route('/book')
   .get((req, res) => {
-    res. end('Holt ein zufälliges Buch');
+    res.send('Get a random book');
   })
-  . ost(req, res) => {
+  .post((req, res) => {
     res.send('Add a book');
   })
-  . ut((req, res) => {
-    res.send('Buch aktualisieren');
-});
+  .put((req, res) => {
+    res.send('Update the book');
+  });
 ```
 
 ## express.Router
@@ -378,22 +355,22 @@ Erstelle eine Router-Datei namens `birds.js` im App-Verzeichnis, mit folgendem I
 
 ```js
 const express = require('express');
-const Router = express. outer();
+const router = express.Router();
 
-// Middleware, die spezifisch für diesen Router
+// middleware that is specific to this router
 const timeLog = (req, res, next) => {
-  Konsole ist. og('Zeit: ', Date.now());
+  console.log('Time: ', Date.now());
   next();
 };
-Router. se(timeLog);
+router.use(timeLog);
 
-// die Startseite Route
+// define the home page route
 router.get('/', (req, res) => {
-  res. end('Birds home page');
+  res.send('Birds home page');
 });
-// die "about route
-definieren. et('/about', (req, res) => {
-  res.send('Über Vögel');
+// define the about route
+router.get('/about', (req, res) => {
+  res.send('About birds');
 });
 
 module.exports = router;
@@ -406,12 +383,12 @@ const birds = require('./birds');
 
 // ...
 
-app.use('/birds', Vögel);
+app.use('/birds', birds);
 ```
 
 Die App wird nun in der Lage sein, Anfragen an `/birds` und `/birds/about` zu bearbeiten, aufrufen sowie die Middleware-Funktion `timeLog` aufrufen, die spezifisch für die Route ist.
 
-Aber wenn die übergeordnete Route `/birds` Pfadparameter hat, wird sie standardmäßig nicht von den Unterrouten aus erreichbar sein. Um es zugänglich zu machen, müssen Sie die Option "mergeParams" an den Router-Konstruktor [reference](/en/5x/api#app.use) übergeben.
+Aber wenn die übergeordnete Route `/birds` Pfadparameter hat, wird sie standardmäßig nicht von den Unterrouten aus erreichbar sein. Um es zugänglich zu machen, müssen Sie die Option "mergeParams" an den Router-Konstruktor [reference](/en/4x/api/application#appusepath-callback--callback) übergeben.
 
 ```js
 const router = express.Router({ mergeParams: true });

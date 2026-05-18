@@ -5,7 +5,7 @@ description: Lernen Sie die Grundlagen des Routings in Express.js Anwendungen ke
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Routing_ bezieht sich darauf, wie eine Anwendung auf einen bestimmten Endpunkt antwortet , die eine URI (oder Pfad) und eine bestimmte HTTP-Request-Methode (GET, POST usw.) ist.
+*Routing* bezieht sich darauf, wie eine Anwendung auf einen bestimmten Endpunkt antwortet , die eine URI (oder Pfad) und eine bestimmte HTTP-Request-Methode (GET, POST usw.) ist.
 
 Jede Route kann eine oder mehrere Handler-Funktionen haben, die ausgeführt werden, wenn die Route übereinstimmt.
 
@@ -17,10 +17,10 @@ app.METHOD(PATH, HANDLER);
 
 Wo:
 
-- `app` ist eine Instanz von `express `.
-- `METHOD` ist eine [HTTP-Anfrage-Methode](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in Kleinbuchstaben.
-- `PATH` ist ein Pfad auf dem Server.
-- `HANDLER` ist die Funktion, die ausgeführt wird, wenn die Route übereinstimmt.
+* `app` ist eine Instanz von `express `.
+* `METHOD` ist eine [HTTP-Anfrage-Methode](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in Kleinbuchstaben.
+* `PATH` ist ein Pfad auf dem Server.
+* `HANDLER` ist die Funktion, die ausgeführt wird, wenn die Route übereinstimmt.
 
 <Alert type="warnung">
 
@@ -36,7 +36,7 @@ Antworte mit `Hallo World!` auf der Homepage:
 
 ```js
 app.get('/', (req, res) => {
-  res.send('Hallo Welt!');
+  res.send('Hello World!');
 });
 ```
 
@@ -44,7 +44,7 @@ Antwort auf eine POST-Anfrage auf der Root-Route (`/`), der Startseite der Anwen
 
 ```js
 app.post('/', (req, res) => {
-  res.send('Hat eine POST-Anfrage');
+  res.send('Got a POST request');
 });
 ```
 
@@ -52,7 +52,7 @@ Antworte auf eine PUT-Anfrage auf die `/user`-Route:
 
 ```js
 app.put('/user', (req, res) => {
-  res.send('Eine PUT-Anfrage bei /user');
+  res.send('Got a PUT request at /user');
 });
 ```
 
@@ -60,7 +60,7 @@ Antworte auf eine LÖSCHE Anfrage auf die `/user`-Route:
 
 ```js
 app.delete('/user', (req, res) => {
-  res.send('Erhalte eine DELETE Anfrage unter /user');
+  res.send('Got a DELETE request at /user');
 });
 ```
 

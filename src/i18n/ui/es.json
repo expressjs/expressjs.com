@@ -20,6 +20,9 @@
   "version": {
     "selectLabel": "Seleccionar versión API"
   },
+  "language": {
+    "selectLabel": "Seleccionar idioma"
+  },
   "nav": {
     "mainMenu": "Menú principal",
     "toggleMenu": "Cambiar menú",
@@ -81,6 +84,7 @@
       "glossary": "Glossary",
       "contributing": "Contribuyendo",
       "utils": "Utilidades",
+      "changelog": "Cambios",
       "middleware": "Medios"
     },
     "aria": {
@@ -109,7 +113,8 @@
       "community": "Recursos de la comunidad",
       "glossary": "Glosario de términos",
       "contributing": "Guía de contribución",
-      "utils": "Utilidades"
+      "utils": "Utilidades",
+      "changelog": "Registro de cambios urgente"
     }
   },
   "doc": {
@@ -120,6 +125,10 @@
   "page": {
     "editOnGitHub": "Edit on GitHub",
     "translateThis": "Traducir esta página"
+  },
+  "announcement": {
+    "readMore": "Leer más",
+    "checkLatestBlog": "Echa un vistazo a nuestro último blog"
   },
   "post": {
     "share": "Compartir",
@@ -166,9 +175,13 @@
     "message": "La página que buscas no existe o ha sido movida.",
     "goHome": "Ir a Inicio"
   },
+  "common": {
+    "download": "Descargar"
+  },
   "hero": {
     "tagline": "Marco web para Node.js rápido, sin opinión y minimalista",
     "getStarted": "Empezar",
+    "kawaiiLogoAlt": "Logo de Express.js kawaii",
     "videoPause": "Pausar vídeo de fondo",
     "videoPlay": "Reproducir vídeo de fondo"
   }

@@ -5,14 +5,14 @@ description: Erfahren Sie, wie Sie benutzerdefinierte Middleware-Funktionen für
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-_Middleware_ Funktionen sind Funktionen, die Zugriff auf das [request object](/en/5x/api#req) (`req`), die [Antwort-Objekt](/en/5x/api#res) (`res`) und die `next` Funktion im Request-Antwort-Zyklus der Anwendung. Die `next`-Funktion ist eine Funktion im Express-Router, der beim Aufruf die Middleware ausführt, die die aktuelle Middleware abfolgt.
+*Middleware* Funktionen sind Funktionen, die Zugriff auf das [request object](/en/5x/api#req) (`req`), die [Antwort-Objekt](/en/5x/api#res) (`res`) und die `next` Funktion im Request-Antwort-Zyklus der Anwendung. Die `next`-Funktion ist eine Funktion im Express-Router, der beim Aufruf die Middleware ausführt, die die aktuelle Middleware abfolgt.
 
 Middleware-Funktionen können folgende Aufgaben ausführen:
 
-- Führe jeden Code aus.
-- Änderungen an der Anfrage und den Antwort-Objekten vornehmen.
-- Beende den Request-Antwort-Zyklus.
-- Rufen Sie die nächste Middleware im Stapel auf.
+* Führe jeden Code aus.
+* Änderungen an der Anfrage und den Antwort-Objekten vornehmen.
+* Beende den Request-Antwort-Zyklus.
+* Rufen Sie die nächste Middleware im Stapel auf.
 
 Wenn die aktuelle Middleware-Funktion den Request-Antwort-Zyklus nicht beendet, muss sie `next()` aufrufen, um die Kontrolle an die nächste Middleware-Funktion zu übergeben. Andernfalls bleibt die Anfrage hängen.
 
@@ -64,7 +64,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Hallo World!');
+  res.send('Hello World!');
 });
 
 app.listen(3000);
@@ -87,7 +87,7 @@ const myLogger = function (req, res, next) {
 
 Beachten Sie den obigen Aufruf zu `next()`. Beim Aufruf dieser Funktion wird die nächste Middleware-Funktion in
 der App aufgerufen. Die `next()` Funktion ist kein Teil des Knotens. s oder Express API, aber ist das dritte
-\-Argument, das an die Middleware-Funktion übergeben wird. Die `next()` Funktion kann alles benannt werden,
+-Argument, das an die Middleware-Funktion übergeben wird. Die `next()` Funktion kann alles benannt werden,
 , aber nach der Konvention wird sie immer als "weiter" bezeichnet. Um Verwirrung zu vermeiden, verwenden Sie immer dieses Übereinkommen.
 
 </Alert>
@@ -100,14 +100,14 @@ const express = require('express');
 const app = express();
 
 const myLogger = function (req, res, next) {
-  console.og('LOGGED');
+  console.log('LOGGED');
   next();
 };
 
 app.use(myLogger);
 
 app.get('/', (req, res) => {
-  res.send('Hallo World!');
+  res.send('Hello World!');
 });
 
 app.listen(3000);
@@ -166,9 +166,9 @@ Hier ist eine Beispielfunktion, die Cookies mit einem externen Asynchrondienst �
 ```js
 async function cookieValidator(cookies) {
   try {
-    wait externallyValidateCookie(cookies.testCookie);
+    await externallyValidateCookie(cookies.testCookie);
   } catch {
-    throw new Error('Ungültige Cookies');
+    throw new Error('Invalid cookies');
   }
 }
 ```
@@ -178,12 +178,12 @@ Hier verwenden wir die [`cookie-parser`](/en/resources/middleware/cookie-parser)
 ```js
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const cookieValidator = require('. cookieValidator');
+const cookieValidator = require('./cookieValidator');
 
 const app = express();
 
 async function validateCookies(req, res, next) {
-  wartet cookieValidator(req. ookies);
+  await cookieValidator(req.cookies);
   next();
 }
 
@@ -191,8 +191,8 @@ app.use(cookieParser());
 
 app.use(validateCookies);
 
-// Fehlerbehandler
-app. se(err, req, res, next) => {
+// error handler
+app.use((err, req, res, next) => {
   res.status(400).send(err.message);
 });
 
@@ -220,9 +220,9 @@ Wenn Sie Ihre Middleware konfigurieren müssen, exportieren Sie eine Funktion, d
 Datei: `my-middleware.js`
 
 ```js
-modul.xports = function (options) {
+module.exports = function (options) {
   return function (req, res, next) {
-    // Implementierung der Middleware-Funktion basierend auf dem Options-Objekt
+    // Implement the middleware function based on the options object
     next();
   };
 };

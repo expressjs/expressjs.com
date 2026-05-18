@@ -7,19 +7,19 @@ import Alert from '@components/primitives/Alert/Alert.astro';
 
 Hinzufügen der Möglichkeit, Datenbanken mit Express-Apps zu verbinden, ist nur eine Frage des Laden eines geeigneten Node.js Treibers für die Datenbank in Ihrer App. Dieses Dokument erklärt kurz wie Sie einige der beliebtesten Node.js-Module für Datenbanksysteme in Ihrer Express-App hinzufügen und nutzen:
 
-- [Cassandra](#cassandra)
-- [Couchbase](#couchbase)
-- [CouchDB](#couchdb)
-- [LevelDB](#leveldb)
-- [MySQL](#mysql)
-- [MongoDB](#mongodb)
-- [Neo4j](#neo4j)
-- [Oracle](#oracle)
-- [PostgreSQL](#postgresql)
-- [Redis](#redis)
-- [SQL Server](#sql-server)
-- [SQLite](#sqlite)
-- [Elasticsearch](#elasticsearch)
+* [Cassandra](#cassandra)
+* [Couchbase](#couchbase)
+* [CouchDB](#couchdb)
+* [LevelDB](#leveldb)
+* [MySQL](#mysql)
+* [MongoDB](#mongodb)
+* [Neo4j](#neo4j)
+* [Oracle](#oracle)
+* [PostgreSQL](#postgresql)
+* [Redis](#redis)
+* [SQL Server](#sql-server)
+* [SQLite](#sqlite)
+* [Elasticsearch](#elasticsearch)
 
 <Alert type="warnung">
 
@@ -44,7 +44,7 @@ $ npm install cassandra-driver
 const cassandra = require('cassandra-driver');
 const client = new cassandra.Client({ contactPoints: ['localhost'] });
 
-client.xecute('select key from system.local', (err, result) => {
+client.execute('select key from system.local', (err, result) => {
   if (err) throw err;
   console.log(result.rows[0]);
 });
@@ -66,21 +66,21 @@ $ npm install couchbase
 const couchbase = require('couchbase');
 const bucket = new couchbase.Cluster('http://localhost:8091').openBucket('bucketName');
 
-// Ein Dokument zu einem Bucket
-bucket hinzufügen. nsert('document-key', { name: 'Matt', shoeSize: 13 }, (err, result) => {
+// add a document to a bucket
+bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, (err, result) => {
   if (err) {
-    console. og(err);
+    console.log(err);
   } else {
-    console. og(result);
+    console.log(result);
   }
 });
 
-// alle Dokumente mit Schuhgröße 13
-const n1ql = 'SELECT d. FROM `bucketName` d WHERE shoeSize = $1';
-const query = N1qlQuery. romString(n1ql);
+// get all documents with shoe size 13
+const n1ql = 'SELECT d.* FROM `bucketName` d WHERE shoeSize = $1';
+const query = N1qlQuery.fromString(n1ql);
 bucket.query(query, [13], (err, result) => {
   if (err) {
-    console. og(err);
+    console.log(err);
   } else {
     console.log(result);
   }
@@ -102,21 +102,21 @@ $ npm install nano
 ```js
 const nano = require('nano')('http://localhost:5984');
 nano.db.create('books');
-const books = nano.db. se('books');
+const books = nano.db.use('books');
 
-// Fügen Sie ein Buchdokument in die Datenbank
-Bücher ein. nsert({ name: 'The Art of War' }, null, (err, body) => {
+// Insert a book document in the books database
+books.insert({ name: 'The Art of war' }, null, (err, body) => {
   if (err) {
-    console. og(err);
+    console.log(err);
   } else {
-    console. og(body);
+    console.log(body);
   }
 });
 
-// Eine Liste aller Bücher
-herunterladen. ist((err, body) => {
+// Get a list of all books
+books.list((err, body) => {
   if (err) {
-    console. og(err);
+    console.log(err);
   } else {
     console.log(body.rows);
   }
@@ -130,7 +130,7 @@ herunterladen. ist((err, body) => {
 ### Installation
 
 ```bash
-$ npm Level Level Level down
+$ npm install level levelup leveldown
 ```
 
 ### Beispiel
@@ -139,11 +139,11 @@ $ npm Level Level Level down
 const levelup = require('levelup');
 const db = levelup('./mydb');
 
-db.ut('name', 'LevelUP', (err) => {
+db.put('name', 'LevelUP', (err) => {
   if (err) return console.log('Ooops!', err);
 
-  db.et('name', (err, value) => {
-    if (err) return console.og('Ooops!', err);
+  db.get('name', (err, value) => {
+    if (err) return console.log('Ooops!', err);
 
     console.log(`name=${value}`);
   });
@@ -164,19 +164,19 @@ $ npm install mysql
 
 ```js
 const mysql = require('mysql');
-const connection = mysql.reateConnection({
+const connection = mysql.createConnection({
   host: 'localhost',
   user: 'dbuser',
-  Passwort: 's3kreee7',
-  Datenbank: 'my_db',
+  password: 's3kreee7',
+  database: 'my_db',
 });
 
-Verbindung.onnect();
+connection.connect();
 
-connection.query('SELECT 1 + 1 AS solution', (err, Zeilen, Felder) => {
+connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
   if (err) throw err;
 
-  console.og('Die Lösung ist: ', Zeilen[0].solution);
+  console.log('The solution is: ', rows[0].solution);
 });
 
 connection.end();
@@ -192,7 +192,7 @@ connection.end();
 $ npm install mongodb
 ```
 
-### Beispiel (v2.\*)
+### Beispiel (v2.*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -200,17 +200,17 @@ const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect('mongodb://localhost:27017/animals', (err, db) => {
   if (err) throw err;
 
-  db.ollection('Säuge')
+  db.collection('mammals')
     .find()
-    .oArray((err, result) => {
+    .toArray((err, result) => {
       if (err) throw err;
 
-      console.og(Ergebnis);
+      console.log(result);
     });
 });
 ```
 
-### Beispiel (v3.\*)
+### Beispiel (v3.*)
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -218,14 +218,14 @@ const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect('mongodb://localhost:27017/animals', (err, client) => {
   if (err) throw err;
 
-  const db = client.b('animals');
+  const db = client.db('animals');
 
-  db.collection('Säugetier')
+  db.collection('mammals')
     .find()
-    .oArray((err, result) => {
+    .toArray((err, result) => {
       if (err) throw err;
 
-      console.og(Ergebnis);
+      console.log(result);
     });
 });
 ```
@@ -246,18 +246,18 @@ $ npm install neo4j-driver
 
 ```js
 const neo4j = require('neo4j-driver');
-const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.asic('neo4j', 'letmein'));
+const driver = neo4j.driver('neo4j://localhost:7687', neo4j.auth.basic('neo4j', 'letmein'));
 
 const session = driver.session();
 
 session.readTransaction((tx) => {
   return tx
-    .un('MATCH (n) RETURN count(n) AS count')
+    .run('MATCH (n) RETURN count(n) AS count')
     .then((res) => {
-      console.log(res.records[0].et('count'));
+      console.log(res.records[0].get('count'));
     })
     .catch((error) => {
-      Konsole.og(error);
+      console.log(error);
     });
 });
 ```
@@ -271,7 +271,7 @@ session.readTransaction((tx) => {
 HINWEIS: [Siehe die Installationsvoraussetzungen](https://github.com/oracle/node-oracledb#-installation).
 
 ```bash
-$ npm oracledb installieren
+$ npm install oracledb
 ```
 
 ### Beispiel
@@ -280,7 +280,7 @@ $ npm oracledb installieren
 const oracledb = require('oracledb');
 const config = {
   user: '<your db user>',
-  Passwort: '<your db password>',
+  password: '<your db password>',
   connectString: 'localhost:1521/orcl',
 };
 
@@ -288,17 +288,17 @@ async function getEmployee(empId) {
   let conn;
 
   try {
-    conn = wait oracledb. etConnection(config);
+    conn = await oracledb.getConnection(config);
 
-    const result = warten conn. xecute('wählen Sie * von Mitarbeitern, bei denen staffe_id = :id', [empId]);
+    const result = await conn.execute('select * from employees where employee_id = :id', [empId]);
 
-    Konsole. og(result.rows[0]);
+    console.log(result.rows[0]);
   } catch (err) {
-    Konsole. og('Ouch! , Fehler);
-  } Endlich {
+    console.log('Ouch!', err);
+  } finally {
     if (conn) {
-      // conn assignment worked, müssen Sie
-      warten Konn. lose();
+      // conn assignment worked, need to close
+      await conn.close();
     }
   }
 }
@@ -323,10 +323,10 @@ const pgp = require('pg-promise')(/* options */);
 const db = pgp('postgres://username:password@host:port/database');
 
 db.one('SELECT $1 AS value', 123)
-  .hen((data) => {
+  .then((data) => {
     console.log('DATA:', data.value);
   })
-  .atch((error) => {
+  .catch((error) => {
     console.log('ERROR:', error);
   });
 ```
@@ -351,15 +351,15 @@ client.on('error', (err) => {
   console.log(`Error ${err}`);
 });
 
-client.et('string key', 'string val', redis.print);
+client.set('string key', 'string val', redis.print);
 client.hset('hash key', 'hashtest 1', 'some value', redis.print);
-client.set(['hash key', 'hashtest 2', 'some other value'], redis.print);
+client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print);
 
-client.keys('hash key', (err, replies) => {
-  console.log(`${replies.length} Antworten:`);
+client.hkeys('hash key', (err, replies) => {
+  console.log(`${replies.length} replies:`);
 
-  Antworten.orEach((reply, i) => {
-    Konsole.og(`    ${i}: ${reply}`);
+  replies.forEach((reply, i) => {
+    console.log(`    ${i}: ${reply}`);
   });
 
   client.quit();
@@ -380,45 +380,45 @@ $ npm install tedious
 
 ```js
 const Connection = require('tedious').Connection;
-const Request = require('tedious'). quest;
+const Request = require('tedious').Request;
 
 const config = {
   server: 'localhost',
-  Authentifizierung: {
+  authentication: {
     type: 'default',
-    Optionen: {
-      userName: 'your_username', // Aktualisiere mich
-      Passwort: 'your_password', // Aktualisiere mich
+    options: {
+      userName: 'your_username', // update me
+      password: 'your_password', // update me
     },
   },
 };
 
 const connection = new Connection(config);
 
-Verbindung. n('connect', (err) => {
+connection.on('connect', (err) => {
   if (err) {
-    console. og(err);
+    console.log(err);
   } else {
     executeStatement();
   }
 });
 
-Funktion executeStatement() {
-  request = new Request("select 123, 'Hallo world'", (err, rowCount) => {
+function executeStatement() {
+  request = new Request("select 123, 'hello world'", (err, rowCount) => {
     if (err) {
-      console. og(err);
+      console.log(err);
     } else {
-      console. og(`${rowCount} Zeilen`);
+      console.log(`${rowCount} rows`);
     }
-    Verbindung. lose();
+    connection.close();
   });
 
   request.on('row', (columns) => {
-    columns. orEach((column) => {
+    columns.forEach((column) => {
       if (column.value === null) {
-        console. og('NULL');
+        console.log('NULL');
       } else {
-        console.log(column. alue);
+        console.log(column.value);
       }
     });
   });
@@ -444,17 +444,17 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(':memory:');
 
 db.serialize(() => {
-  db. un('CREATE TABLE lorem (info TEXT)');
-  const stmt = db. repare('INSERT INTO lorem VALUES (?)');
+  db.run('CREATE TABLE lorem (info TEXT)');
+  const stmt = db.prepare('INSERT INTO lorem VALUES (?)');
 
-  für (let i = 0; i < 10; i++) {
-    stmt. un(`Ipsum ${i}`);
+  for (let i = 0; i < 10; i++) {
+    stmt.run(`Ipsum ${i}`);
   }
 
   stmt.finalize();
 
-  db. ach('SELECT rowid AS id, info FROM lorem', (err, row) => {
-    Konsole. og(`${row.id}: ${row.info}`);
+  db.each('SELECT rowid AS id, info FROM lorem', (err, row) => {
+    console.log(`${row.id}: ${row.info}`);
   });
 });
 
@@ -468,7 +468,7 @@ db.close();
 ### Installation
 
 ```bash
-$ npm elasticsearch installieren
+$ npm install elasticsearch
 ```
 
 ### Beispiel
@@ -480,24 +480,24 @@ const client = elasticsearch.Client({
 });
 
 client
-  .earch({
+  .search({
     index: 'books',
     type: 'book',
     body: {
       query: {
         multi_match: {
           query: 'express js',
-          Felder: ['title', 'description'],
+          fields: ['title', 'description'],
         },
       },
     },
   })
-  .hen(
-    (Antwort) => {
-      const hits = response.hits.its;
+  .then(
+    (response) => {
+      const hits = response.hits.hits;
     },
     (error) => {
-      console.race(error.message);
+      console.trace(error.message);
     }
   );
 ```

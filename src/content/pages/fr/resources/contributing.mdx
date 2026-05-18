@@ -1,0 +1,378 @@
+---
+title: Contribuer à Express
+description: Découvrez comment contribuer à Express.js, y compris des lignes directrices pour signaler les problèmes, soumettre des demandes d'ajout, devenir collaborateur et comprendre les politiques de sécurité.
+---
+
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+Express est un projet [Fondation OpenJS](https://openjsf.org/) répartis entre trois organisations GitHub : [expressjs](https://github.com/expressjs), [pillarjs](https://github.com/pillarjs), et [jshttp](https://github.com/jshttp). Toutes les contributions sont les bienvenues, qu'il s'agisse de rapports de bogues, d'amélioration de la documentation ou de soumission de code. Les lignes directrices ci-dessous décrivent le fonctionnement du projet et la manière dont vous pouvez vous impliquer.
+
+## Comité technique
+
+Le comité technique Express est composé de membres actifs du projet et guide le développement et la maintenance du projet Express. Pour plus d'informations, voir [Communauté expresse - Comité Technique] (/en/resources/community/#technical-committee).
+
+## Guide de contribution de la communauté
+
+{/* SRC: expressjs/discussions docs/GOVERNANCE.md */}
+
+L'objectif de ce document est de créer un processus de contribution qui :
+
+* Encourage les nouvelles contributions.
+* Encourage les contributeurs à rester impliqués.
+* Évite les processus inutiles et la bureaucratie dans la mesure du possible.
+* Creates a transparent decision making process that makes it clear how
+  contributors can be involved in decision making.
+
+### Vocabulaire
+
+* Un **Contributeur** est toute personne qui crée ou commente sur un ticket ou une demande de fusion.
+* Un **committer** est un sous-ensemble de contributeurs qui ont reçu un accès en écriture au référentiel.
+* Un **Capitaine du projet** est le responsable principal d'un dépôt.
+* Un **TC (Comité Technique)** est un groupe d'auteurs représentant l'expertise technique
+  requise pour résoudre les litiges rares.
+* Un **Triager** est un sous-ensemble de contributeurs qui ont reçu un accès triage au dépôt.
+
+### Problèmes de journalisation
+
+Enregistrez un problème pour toute question ou problème que vous pourriez avoir. En cas de doute, enregistrez un problème et
+toute politique supplémentaire sur ce qu'il faut inclure sera fournie dans les réponses. La seule exception
+est la divulgation de sécurité qui doit être envoyée en privé.
+
+Les auteurs peuvent vous diriger vers un autre référentiel, demander des clarifications supplémentaires et
+ajouter des métadonnées appropriées avant que le problème ne soit résolu.
+
+Soyez courtois et respectueux. Chaque participant doit suivre le Code de conduite du projet
+.
+
+### Contributions
+
+Toute modification des ressources de ce dépôt doit passer par des demandes de fusion. Ceci s'applique à tous les changements
+à la documentation, code, fichiers binaires, etc. Even long term committers and TC members must use
+pull requests.
+
+Aucune pull request ne peut être fusionnée sans être revue.
+
+For non-trivial contributions, pull requests should sit for at least 36 hours to ensure that
+contributors in other timezones have time to review. Il convient également de prendre en considération les week-ends
+et autres périodes de vacances pour s'assurer que tous les commutateurs actifs ont un temps raisonnable à
+pour participer au processus de discussion et de révision s'ils le souhaitent.
+
+La valeur par défaut pour chaque contribution est qu'elle est acceptée une fois qu'aucun validateur n'a une objection.
+Lors d'un examen, les commutateurs peuvent également demander qu'un contributeur spécifique qui est le plus versé dans une zone
+particulière donne un "LGTM" avant que la PR puisse être fusionnée. Il n'y a pas de processus supplémentaire de "déconnexion"
+pour les contributions à la terre. Once all issues brought by committers are addressed it can
+be landed by any committer.
+
+In the case of an objection being raised in a pull request by another committer, all involved
+committers should seek to arrive at a consensus by way of addressing concerns being expressed
+by discussion, compromise on the proposed change, or withdrawal of the proposed change.
+
+Si une contribution est controversée et que les auteurs ne peuvent pas s'entendre sur la façon de l'amener à la terre
+ou si elle doit atterrir, alors elle devrait être escaladée vers le TC. Les membres de TC devraient régulièrement
+discuter des contributions en attente afin de trouver une résolution. It is expected that only a
+small minority of issues be brought to the TC for resolution and that discussion and
+compromise among committers be the default resolution mechanism.
+
+### Devenir un Triager
+
+« N'importe qui peut devenir un triager! » En savoir plus sur le processus de triagerie en
+[document sur le processus de triage](https://github.com/expressjs/discussions/blob/HEAD/Triager-Guide.md).
+
+Actuellement, tout [membre de l'organisme] (https://github.com/orgs/expressjs/people) existant peut nommer
+un nouveau triager. Si vous souhaitez devenir un triager, notre meilleur conseil est de participer activement
+à la communauté en aidant à trier les problèmes et les pull requests. De plus, nous recommandons à
+de participer à d'autres activités de la communauté, comme assister aux réunions de TC et participer aux discussions de Slack
+. If you feel ready and have been helping triage some issues, reach out to an active member of the organization to ask if they'd
+be willing to support you. S'ils sont d'accord, ils peuvent créer une pull request pour formaliser votre candidature. En cas d'opposition à la mise en candidature, l'équipe de triage est chargée de travailler avec les personnes impliquées et de trouver une solution.
+
+Vous pouvez également contacter n'importe lequel des [membres de l'organisme](https://github.com/orgs/expressjs/people)
+si vous avez des questions ou si vous avez besoin de conseils.
+
+### Devenir Commun
+
+All contributors who have landed significant and valuable contributions should be onboarded in a timely manner,
+and added as a committer, and be given write access to the repository.
+
+Les développeurs doivent suivre cette politique et continuer à envoyer des pull requests, passer en revue
+correctement et faire fusionner leurs pull requests par d'autres committers.
+
+### Processus TC
+
+Le TC utilise un processus de « recherche de consensus » pour les questions qui sont escaladées vers le TC.
+Le groupe tente de trouver une résolution qui n'a aucune objection ouverte parmi les membres de TC.
+Si un consensus ne peut pas être atteint qui n'a aucune objection, alors une majorité gagne le vote
+est appelée. On s'attend également à ce que la majorité des décisions prises par TC passent par
+un processus de recherche de consensus et que le vote ne soit utilisé qu'en dernier recours.
+
+La résolution peut impliquer de renvoyer le problème aux capitaines du projet avec des suggestions sur
+sur la façon de progresser vers un consensus. Il n'est pas prévu qu'une réunion du TC
+résoudra tous les problèmes à son ordre du jour durant cette réunion et préférera peut-être continuer
+la discussion qui se déroule parmi les capitaines du projet.
+
+Les membres peuvent être ajoutés au TC à tout moment. Any TC member can nominate another committer
+to the TC and the TC uses its standard consensus seeking process to evaluate whether or
+not to add this new member. The TC will consist of a minimum of 3 active members and a
+maximum of 10. If the TC should drop below 5 members the active TC members should nominate
+someone new. If a TC member is stepping down, they are encouraged (but not required) to
+nominate someone to take their place.
+
+Les membres de TC seront ajoutés en tant qu'administrateur sur les organes Github, les organisations npm et d'autres ressources comme
+nécessaire pour être efficace dans le rôle.
+
+To remain "active" a TC member should have participation within the last 12 months and miss
+no more than six consecutive TC meetings. Our goal is to increase participation, not punish
+people for any lack of participation, this guideline should be only be used as such
+(replace an inactive member with a new active one, for example). Les membres qui ne rencontrent pas cette
+devraient se retirer. Si un membre de TC ne se déconnecte pas, un problème peut être ouvert dans le dépôt des discussions
+pour le déplacer vers un statut inactif. Les membres TC qui se déconnectent ou sont retirés à cause de l'inactivité
+seront transférés vers un statut inactif.
+
+Inactive status members can become active members by self nomination if the TC is not already
+larger than the maximum of 10. They will also be given preference if, while at max size, an
+active member steps down.
+
+### Capitaines du projet
+
+Le TC Express peut désigner des capitaines pour des projets individuels ou des repos dans les organisations
+. These captains are responsible for being the primary
+day-to-day maintainers of the repo on a technical and community front.
+Les capitaines du dépôt sont dotés de droits de propriété de dépôt et de publication de paquets.
+En cas de conflit, en particulier sur les sujets qui affectent le projet Express
+en général, les capitaines sont responsables de l'élever jusqu'à la TC et de conduire
+à résoudre ces conflits. Captains are also responsible for making sure
+community members follow the community guidelines, maintaining the repo
+and the published package, as well as in providing user support.
+
+Tout comme les membres de TC, les capitaines Repo sont un sous-ensemble de commetteurs.
+
+Pour devenir capitaine d'un projet, le candidat devrait participer à ce projet
+pendant au moins 6 mois en tant qu'entrepreneur avant la demande. Ils devraient avoir
+aidé avec des contributions de code ainsi que des problèmes de triage. Ils sont également requis pour
+avoir 2FA activé sur leurs comptes GitHub et npm.
+
+Tout membre de TC ou capitaine existant sur le **même** repo peut nommer un autre committer
+au rôle de capitaine. Pour ce faire, ils doivent soumettre une PR à ce document, mise à jour de la section
+**Active Project Captains** (tout en maintenant l'ordre de tri) avec le nom du projet
+le gestionnaire GitHub du candidat et son nom d'utilisateur npm (si différent).
+
+* Les dépôts peuvent avoir autant de capitaines que de sens pour la portée du travail.
+* Un membre de TC ou un capitaine de dépôt existant **sur le même projet** peut nommer un nouveau capitaine.
+  Les capitaines Repo d'autres projets ne devraient pas nommer de capitaines pour un projet différent.
+
+La PR nécessitera au moins 2 approbations de la part des membres de TC et 2 semaines de temps de attente pour autoriser
+pour commentaires et/ou dissidents. Lorsque la PR est fusionnée, un membre de TC les ajoutera aux groupes GitHub/npm propres à
+.
+
+#### Projets actifs et capitaines
+
+La liste peut être trouvée à [https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#active-projects-and-members](https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#active-projects-and-members)
+
+#### Capitaine de l'initiative actuelle
+
+La liste peut être trouvée à [https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#current-initiative-captains](https://github.com/expressjs/discussions/blob/HEAD/docs/contributing/captains_and_committers.md#current-initiative-captains)
+
+### Politique d'inactivité et d'émérite pour n'importe quel rôle
+
+Pour soutenir la santé et la continuité du projet, toutes les personnes qui jouent un rôle au sein de la communauté (comme Triager, Contributeur, membre de WG, capitaine du projet ou membre de TC) sont encouragés à maintenir une participation active.
+
+L'inactivité est définie comme l'absence d'implication significative dans le projet, comme les contributions, des examens de code, du triage, de la participation à une réunion ou de la participation à une discussion, pour une période continue de 6 mois.
+
+#### Exception
+
+Toute personne peut demander un congé temporaire de participation active pour des raisons personnelles ou professionnelles. Dans de tels cas, la personne devrait en informer l'équipe concernée ou le comité technique (TC). Pendant ce temps, la politique d'inactivité est suspendue et l'individu ne sera pas signalé comme inactif.
+
+#### Processus d'inactivité
+
+* Si quelqu'un est jugé inactif, la personne peut être transférée à un rôle émérite qui reflète ses contributions passées. Nous ferons tout ce qui est en notre pouvoir pour les informer. Ils peuvent demander à être rétablis quand ils sont prêts à être à nouveau actifs.
+* Le statut d'émérite aide à conserver une trace claire des contributeurs qui ont façonné le projet de manière significative au fil du temps.
+
+#### Responsabilité
+
+* Le comité technique (TC) et les capitaines respectifs de chaque paquet/équipe sont chargés d'évaluer les niveaux d'activité et de mettre en œuvre cette politique de manière équitable et transparente, en coordination avec d'autres équipes pertinentes.
+* En cas de désaccord, la situation peut être discutée et résolue par consensus au sein du TC ou de l'équipe appropriée.
+
+### Certificat d'origine du développeur 1.1
+
+```text
+By making a contribution to this project, I certify that:
+
+ (a) The contribution was created in whole or in part by me and I
+     have the right to submit it under the open source license
+     indicated in the file; or
+
+ (b) The contribution is based upon previous work that, to the best
+     of my knowledge, is covered under an appropriate open source
+     license and I have the right under that license to submit that
+     work with modifications, whether created in whole or in part
+     by me, under the same open source license (unless I am
+     permitted to submit under a different license), as indicated
+     in the file; or
+
+ (c) The contribution was provided directly to me by some other
+     person who certified (a), (b) or (c) and I have not modified
+     it.
+
+ (d) I understand and agree that this project and the contribution
+     are public and that a record of the contribution (including all
+     personal information I submit with it, including my sign-off) is
+     maintained indefinitely and may be redistributed consistent with
+     this project or the open source license(s) involved.
+```
+
+## Guide du collaborateur
+
+{/* SRC: expressjs/.github CONTRIBUTING.md */}
+
+### Problèmes de site web
+
+Problèmes ouverts pour le site expressjs.com sur https://github.com/expressjs/expressjs.com.
+
+Pour les problèmes dans d'autres repos gérés par Express (tout ce qui se trouve dans `expressjs`, `pillarjs` ou `jshttp` autre que `expressjs/express`), Assurez-vous de vérifier leur guide de contribution et les problèmes ouverts et les PRP dans le référentiel approprié.
+
+### Contributions RP et Code
+
+* Les tests doivent réussir.
+* Suivez [JavaScript Standard Style] (https://standardjs.com/) et `npm run lint`.
+* Si vous corrigez un bug, ajoutez un test.
+
+### Branches
+
+Utilisez la branche `master` pour les corrections de bugs ou le travail mineur qui est prévu pour le flux de version actuelformat@@0 de
+.
+
+Utilisez la branche nommée correspondante, par exemple `6.x`, pour tout ce qui est destiné à
+une future version d'Express.
+
+### Étapes pour contribuer
+
+1. Créez un problème pour le bogue
+   que vous voulez corriger ou la fonctionnalité que vous souhaitez ajouter.
+2. Créez votre propre fork sur GitHub, puis
+   passez en revue votre fork.
+3. Écrivez votre code dans votre copie locale. Il est bon de créer une branche pour
+   à chaque nouveau problème sur lequel vous travaillez, mais pas obligatoire.
+4. Pour exécuter la suite de test, installez d'abord les dépendances en exécutant `npm install`,
+   puis exécutez `npm test`.
+5. Ensure your code is linted by running `npm run lint` -- fix any issue you
+   see listed.
+6. Si les tests réussissent, vous pouvez valider vos modifications sur votre fork et ensuite créer
+   une pull request à partir de là. Assurez-vous de faire référence à votre problème depuis la requête pull
+   en incluant le numéro du problème, par exemple `#123`.
+
+### Problèmes qui sont des questions
+
+Nous fermerons généralement tous les problèmes ou questions vagues qui sont spécifiques à certaines applications
+que vous écrivez. Veuillez vérifier la documentation et les autres références avant qu'
+ne se déclenche heureux avec la publication d'un problème de question.
+
+Des choses qui vous aideront à examiner votre problème de question :
+
+* Code JS complet et exécutable.
+* Description claire du problème ou comportement inattendu.
+* Effacer la description du résultat attendu.
+* Des mesures que vous avez prises pour le déboguer vous-même.
+
+If you post a question and do not outline the above items or make it easy for
+us to understand and reproduce your issue, it will be closed.
+
+Si votre question répond à toutes les exigences ci-dessus, mais que vous ne pensez pas qu'elle doit être examinée par les responsables
+par les responsables
+(par exemple, si vous cherchez juste des informations sur la communauté), veuillez l'ouvrir comme un sujet de discussion à la place
+d'un problème. If you
+are unsure and open an issue, we may move it to discussions if we triage them and decide they do
+not need high
+visibility or maintainer input.
+
+## Politiques et procédures de sécurité
+
+{/* SRC: expressjs/.github SECURITY.md */}
+
+Ce document décrit les procédures de sécurité et les politiques générales du projet Express
+.
+
+* [Signaler un bug ou une vulnérabilité à la sécurité] (#reporting-a-bug-or-security-vulnerability)
+* [Politique de divulgation] (#disclosure-policy)
+* (#comments-on-this-policy)
+* [Le modèle de menace express](#the-express-threat-model)
+
+### Signaler un bug ou une vulnérabilité de sécurité
+
+<Alert type="Infos">
+
+Avant de signaler une vulnérabilité, veuillez consulter le [modèle de menace express] (#the-express-threat-model) pour vérifier si le problème tombe dans le cadre de sécurité d'Express.
+
+</Alert>
+
+L'équipe Express et la communauté prennent toutes les vulnérabilités de sécurité au sérieux.
+Merci pour l'amélioration de la sécurité des projets Express et des projets connexes.
+We appreciate your efforts in responsible disclosure and will make every effort
+to acknowledge your contributions.
+
+Un [membre de l'équipe de triage sécuritaire](https://github.com/expressjs/security-wg#security-triage-team-expressjssecurity-triage)
+ou [le capitaine du dépôt](https://github.com/expressjs/discussions/blob/master/docs/contributing/captains_and_committers.md)
+reconnaîtra votre signalement dès que possible.
+Ces échéanciers peuvent être prolongés lorsque nos bénévoles de triage
+sont absents en vacances, en particulier à la fin de l'année.
+
+Après la réponse initiale à votre rapport, l'équipe en charge de la sécurité
+s'efforcera de vous tenir informé de la progression vers une résolution et une annonce
+complète, et peut demander des renseignements supplémentaires ou des conseils.
+
+<Alert type="Infos">
+
+Vous pouvez trouver plus d'informations sur notre processus dans [ce guide](https://github.com/expressjs/security-wg/blob/main/docs/incident_response_plan.md)
+
+</Alert>
+
+#### Signaler des bugs de sécurité via GitHub (préférentiel)
+
+La façon préférée de signaler des vulnérabilités de sécurité est par l'intermédiaire de
+[GitHub Security Advisories](https://github.com/advisories).
+Cela nous permet de collaborer à un correctif tout en maintenant la confidentialité
+du rapport.
+
+Pour signaler une vulnérabilité
+([docs](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability):
+
+1. Visitez l'onglet **Sécurité** du dépôt affecté sur GitHub.
+2. Cliquez sur **Signaler une vulnérabilité** et suivez les étapes fournies.
+
+Ce processus s'applique à tous les dépôts de l'écosystème Express.
+Si vous n'êtes pas sûr qu'un dépôt tombe sous cette politique,
+n'hésitez pas à le contacter par e-mail.
+
+#### Rapports par e-mail
+
+Si vous préférez, vous pouvez également signaler des problèmes de sécurité en envoyant un e-mail à `express-security@lists.openjsf.org`.
+
+Pour vous assurer une réponse en temps opportun, veuillez inclure tous les détails pertinents directement dans le corps du courriel plutôt que de vous lier à des sources externes ou de joindre des fichiers.
+
+Le responsable principal reconnaîtra votre courriel dans les 48 heures et fournira une réponse initiale décrivant les étapes suivantes. L'équipe de sécurité vous tiendra au courant de l'état d'avancement et pourra vous demander des détails supplémentaires.
+
+#### Modules tiers
+
+Si le problème de sécurité se rapporte à un module tiers qui n'est pas directement maintenu dans l'écosystème Express, veuillez le signaler aux responsables de ce module.
+
+### Politique de divulgation
+
+Quand l'équipe de sécurité reçoit un rapport de bogue de sécurité, elle l'assignera à un gestionnaire
+principal. Cette personne coordonnera le processus de correction et de libération,
+avec les étapes suivantes :
+
+* Confirmez le problème et déterminez les versions affectées.
+* Code d'audit pour trouver des problèmes similaires potentiels.
+* Préparez des correctifs pour toutes les versions encore en maintenance. These fixes will be
+  released as fast as possible to npm.
+
+### Commentaires sur cette politique
+
+Si vous avez des suggestions sur la façon dont ce processus pourrait être amélioré, veuillez soumettre une demande de tirage
+.
+
+### Le modèle de menace Express
+
+Le modèle de menace Express définit les limites de ce que le cadre considère comme sa responsabilité en matière de sécurité. Il établit quels éléments sont fiables (comme le développeur, l'environnement d'exécution et le code de l'application) par rapport à ceux qui ne sont pas fiables (comme les données des connexions réseau). Les problèmes liés à des éléments de confiance sont considérés hors de portée tandis qu'Express est responsable du traitement sécuritaire des données non fiables.
+
+De nombreux problèmes signalés ne relèvent pas du domaine de la sécurité d’Express et sont de la responsabilité du développeur de l’application. Comme la pollution du prototype par les entrées non vérifiées de l'utilisateur, la mauvaise configuration de la fonction de fichiers statiques ou les problèmes dans les dépendances de tiers.
+
+Pour plus de détails, voir le [modèle de menace express](https://github.com/expressjs/security-wg/blob/main/docs/ThreatModel.md).

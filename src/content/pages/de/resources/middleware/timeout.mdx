@@ -1,0 +1,169 @@
+---
+title: timeout Middleware
+description: Timeout Middleware für Connect/Express anfordern
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo version="0.2.1" github="https://github.com/expressjs/Timeout" npm="https://www.npmjs.com/package/timeout" />
+
+Timeout einer Anfrage im Connect/Express Anwendungs-Framework.
+
+## Installieren
+
+Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
+[npm Registry](https://www.npmjs.com/). Installation erfolgt mit dem
+[`npm install` Befehl](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install connect-timeout
+```
+
+## API
+
+**HINWEIS** Dieses Modul wird nicht als "Top-Level"-Middleware empfohlen (d.h.
+`app.use(timeout('5s')`), es sei denn, Sie treffen Vorsichtsmaßnahmen, um Ihre eigene
+Middleware-Verarbeitung zu stoppen. Siehe [als Top-Level-Middleware](#as-top-level-middleware)
+für die Verwendung als Top-Level-Middleware.
+
+Während die Bibliothek ein 'Timeout'-Ereignis ausstrahlt, wenn die Anfrage die angegebene
+Zeitüberschreitung überschreitet, wird der Knoten die langsame Anfrage weiter verarbeiten, bis er beendet ist.
+Slow requests will continue to use CPU and memory, even if you are returning
+a HTTP response in the timeout callback. For better control over CPU/memory,
+you may need to find the events that are taking a long time (3rd party HTTP
+requests, disk I/O, database calls) and find a way to cancel them, and/or
+close the attached sockets.
+
+### timeout(time, [options])
+
+Gibt Middleware zurück, die in `time` Millisekunden ausfällt. `time` kann auch
+ein String sein, der von der [ms](https://www.npmjs.org/package/ms#readme)
+akzeptiert wird. Beim Timeout wird `req` \`"timeout" emittieren.
+
+#### Optionen
+
+Die `timeout` Funktion benötigt ein optionales `options` Objekt, das
+eines der folgenden Schlüssel enthalten kann:
+
+##### antworten
+
+Legt fest, ob dieses Modul in Form der Weiterleitung eines Fehlers "reagiert" wird.
+Falls `true`, wird der Timeout-Fehler an `next()` übergeben, so dass du das Antwortverhalten
+anpassen kannst. Dieser Fehler hat eine `.timeout` Eigenschaft sowie
+`.status == 503`. Dies ist standardmäßig `true`.
+
+### req.clearTimeout()
+
+Löscht den Timeout auf der Anfrage. Der Timeout ist komplett entfernt und
+wird für diese Anfrage in Zukunft nicht starten.
+
+### req.timedout
+
+`true` wenn timeout fired; `false` sonst.
+
+## Beispiele
+
+### als Top-Level-Middleware
+
+Wegen der Funktionsweise der Middleware-Verarbeitung sobald dieses Modul
+die Anfrage an die nächste Middleware übergibt (was es in der Reihenfolge
+tun muss, damit Sie arbeiten können), es kann den Fluss nicht mehr stoppen, also müssen Sie
+beachten, um zu überprüfen, ob die Anfrage eine Zeitüberschreitung hat, bevor Sie
+auf die Anfrage fortsetzen.
+
+```javascript
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var express = require('express');
+var timeout = require('connect-timeout');
+
+// example of using this top-level; note the use of haltOnTimedout
+// after every middleware; it will stop the request flow on a timeout
+var app = express();
+app.use(timeout('5s'));
+app.use(bodyParser());
+app.use(haltOnTimedout);
+app.use(cookieParser());
+app.use(haltOnTimedout);
+
+// Add your routes here, etc.
+
+function haltOnTimedout(req, res, next) {
+  if (!req.timedout) next();
+}
+
+app.listen(3000);
+```
+
+### explizit 3.x
+
+```javascript
+var express = require('express');
+var bodyParser = require('body-parser');
+var timeout = require('connect-timeout');
+
+var app = express();
+app.post('/save', timeout('5s'), bodyParser.json(), haltOnTimedout, function (req, res, next) {
+  savePost(req.body, function (err, id) {
+    if (err) return next(err);
+    if (req.timedout) return;
+    res.send('saved as id ' + id);
+  });
+});
+
+function haltOnTimedout(req, res, next) {
+  if (!req.timedout) next();
+}
+
+function savePost(post, cb) {
+  setTimeout(
+    function () {
+      cb(null, (Math.random() * 40000) >>> 0);
+    },
+    (Math.random() * 7000) >>> 0
+  );
+}
+
+app.listen(3000);
+```
+
+### verbinden
+
+```javascript
+var bodyParser = require('body-parser');
+var connect = require('connect');
+var timeout = require('connect-timeout');
+
+var app = connect();
+app.use('/save', timeout('5s'), bodyParser.json(), haltOnTimedout, function (req, res, next) {
+  savePost(req.body, function (err, id) {
+    if (err) return next(err);
+    if (req.timedout) return;
+    res.send('saved as id ' + id);
+  });
+});
+
+function haltOnTimedout(req, res, next) {
+  if (!req.timedout) next();
+}
+
+function savePost(post, cb) {
+  setTimeout(
+    function () {
+      cb(null, (Math.random() * 40000) >>> 0);
+    },
+    (Math.random() * 7000) >>> 0
+  );
+}
+
+app.listen(3000);
+```
+
+## Lizenz
+
+[MIT](https://github.com/expressjs/timeout/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/connect-timeout
+[travis-url]: https://travis-ci.org/expressjs/Timeout
+[downloads-url]: https://npmjs.org/package/connect-timeout

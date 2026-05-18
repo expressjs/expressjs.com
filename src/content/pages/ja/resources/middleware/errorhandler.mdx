@@ -1,0 +1,127 @@
+---
+title: errorhandler middleware
+description: 開発専用エラーハンドラミドルウェア
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo version="1.5.2" github="https://github.com/express/errorhandler" npm="https://www.npmjs.com/package/errorhandler" />
+
+開発専用エラーハンドラミドルウェア。
+
+このミドルウェアは開発環境でのみ使用することを意図しています。
+として *full error stack トレースと、この
+module* に渡されたオブジェクトの内部詳細は、エラーが発生したときにクライアントに送り返されます。
+
+When an object is provided to Express as an error, this module will display
+as much about this object as possible, and will do so by using content negotiation
+for the response between HTML, JSON, and plain text.
+
+* オブジェクトが標準の `Error` オブジェクトの場合、
+  `stack` プロパティによって与えられた文字列は、HTML/テキスト応答で返されます。
+* オブジェクトが `Error` オブジェクトでない場合、
+  [util.inspect](https://nodejs.org/api/util.html#util_util_inspect_object_options)
+  の結果は HTML/テキスト応答で返されます。
+* JSON 応答の場合、結果は、レスポンス内のオブジェクトからすべての列挙可能なプロパティ
+  を持つオブジェクトになります。
+
+## インストール
+
+これは、 [Node.js](https://nodejs.org/en/) モジュールで、
+[npm registry](https://www.npmjs.com/) を介して利用できます。 インストールは
+[`npm install` コマンド](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install errorhandler
+```
+
+## API
+
+{/* eslint-disable no-unused-var */}
+
+```js
+var errorhandler = require('errorhandler');
+```
+
+### errorhandler(options)
+
+エラーを処理し、コンテンツネゴシエーションで応答するための新しいミドルウェアを作成します。
+
+#### オプション
+
+エラーハンドラは、optionsオブジェクトでこれらのプロパティを受け入れます。
+
+##### ログ
+
+エラーとともに呼び出される関数と、
+エラーの文字列表現を提供します。 任意の場所にエラーを書き込むために使用するか、
+`false` に設定すると、応答内のエラーのみを返します。 Called as
+`log(err, str, req, res)` where `err` is the `Error` object, `str` is a string
+representation of the error, `req` is the request object and `res` is the
+response object (note, this function is invoked *after* the response has been
+written).
+
+`process.env.NODE_ENV === 'test'` を除き、このオプションのデフォルト値は `true` です。
+
+可能な値:
+
+* `true`: `console.error(str)`を使用してエラーを記録します。
+* `false`: レスポンスにエラーを返すだけです。
+* 関数: 処理のための関数にエラーを渡します。
+
+## 例
+
+### シンプルな例
+
+Basic example of adding this middleware as the error handler only in development
+with `connect` (`express` also can be used in this example).
+
+```js
+var connect = require('connect');
+var errorhandler = require('errorhandler');
+
+var app = connect();
+
+// assumes NODE_ENV is set by the user
+if (process.env.NODE_ENV === 'development') {
+  // only use in development
+  app.use(errorhandler());
+}
+```
+
+### カスタム出力場所
+
+たとえばシステム通知のように、開発中にエラーをSTDERR
+とは異なる場所に出力したい場合があります。
+
+{/* eslint-disable handle-callback-err */}
+
+```js
+var connect = require('connect');
+var errorhandler = require('errorhandler');
+var notifier = require('node-notifier');
+
+var app = connect();
+
+// assumes NODE_ENV is set by the user
+if (process.env.NODE_ENV === 'development') {
+  // only use in development
+  app.use(errorhandler({ log: errorNotification }));
+}
+
+function errorNotification(err, str, req) {
+  var title = 'Error in ' + req.method + ' ' + req.url;
+
+  notifier.notify({
+    title: title,
+    message: str,
+  });
+}
+```
+
+## ライセンス
+
+[MIT](https://github.com/expressjs/errorhandler/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/errorhandler
