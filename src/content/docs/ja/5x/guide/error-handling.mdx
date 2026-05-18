@@ -20,7 +20,7 @@ Express がルートハンドラと
 
 ```js
 app.get('/', (req, res) => {
-  throw new Error('BROKEN'); // Express はこれを独自にキャッチします。
+  throw new Error('BROKEN'); // Express will catch this on its own.
 });
 ```
 

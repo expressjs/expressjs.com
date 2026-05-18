@@ -9,13 +9,13 @@ Para ver todos los registros internos usados en Express, establece la variable d
 `express:*` al ejecutar tu aplicación.
 
 ```bash
-$ DEBUG=express:* nodo index.js
+$ DEBUG=express:* node index.js
 ```
 
 En Windows, utilice el comando correspondiente.
 
 ```bash
-> $env:DEBUG = "express:*"; nodo index.js
+> $env:DEBUG = "express:*"; node index.js
 ```
 
 Ejecutando este comando en la aplicación predeterminada generada por el [generador expreso](/en/starter/generator) imprime la siguiente salida:
@@ -56,11 +56,11 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +1ms
   express:router use /users router +0ms
   express:router:layer new /users +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
 ```
 
@@ -93,13 +93,13 @@ Una aplicación generada por el comando `express` utiliza el módulo `debug` y s
 Por ejemplo, si generaste la aplicación con \`$ muestra expresa, puedes habilitar las declaraciones de depuración con el siguiente comando:
 
 ```bash
-$ DEBUG=sample-app:* nodo ./bin/www
+$ DEBUG=sample-app:* node ./bin/www
 ```
 
 Puede especificar más de un espacio de nombres de depuración asignando una lista de nombres separados por comas:
 
 ```bash
-$ DEBUG=http,mail,express:* nodo index.js
+$ DEBUG=http,mail,express:* node index.js
 ```
 
 ## Opciones avanzadas

@@ -20,6 +20,9 @@
   "version": {
     "selectLabel": "API バージョンを選択"
   },
+  "language": {
+    "selectLabel": "言語を選択"
+  },
   "nav": {
     "mainMenu": "メインメニュー",
     "toggleMenu": "切り替えメニュー",
@@ -81,6 +84,7 @@
       "glossary": "Glossary",
       "contributing": "コントリビューション",
       "utils": "ユーティリティ",
+      "changelog": "更新履歴",
       "middleware": "ミドルウェア"
     },
     "aria": {
@@ -109,7 +113,8 @@
       "community": "コミュニティリソース",
       "glossary": "用語集",
       "contributing": "貢献ガイド",
-      "utils": "ユーティリティ"
+      "utils": "ユーティリティ",
+      "changelog": "エクスプレスの更新履歴"
     }
   },
   "doc": {
@@ -120,6 +125,10 @@
   "page": {
     "editOnGitHub": "Edit on GitHub",
     "translateThis": "このページを翻訳"
+  },
+  "announcement": {
+    "readMore": "もっと読む",
+    "checkLatestBlog": "最新のブログをご覧ください"
   },
   "post": {
     "share": "共有",
@@ -166,9 +175,13 @@
     "message": "お探しのページは存在しないか、移動されています。",
     "goHome": "ホームへ移動"
   },
+  "common": {
+    "download": "ダウンロード"
+  },
   "hero": {
     "tagline": "Node.jsの高速、非公開、最小限のWebフレームワーク",
     "getStarted": "はじめよう",
+    "kawaiiLogoAlt": "Express.js kawaiiのロゴ",
     "videoPause": "背景ビデオを一時停止",
     "videoPlay": "背景ビデオを再生"
   }

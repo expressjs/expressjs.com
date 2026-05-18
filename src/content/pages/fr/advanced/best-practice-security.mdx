@@ -44,7 +44,7 @@ Assurez-vous également que vous n'utilisez aucune des versions vulnérables Exp
 
 Si votre application traite ou transmet des données sensibles, utilisez [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) pour sécuriser la connexion et les données. Cette technologie crypte les données avant qu'elles ne soient envoyées du client au serveur, empêchant ainsi certains hacks courants (et faciles). Bien que les requêtes Ajax et POST puissent ne pas être visiblement évidentes et semblent "cachées" dans les navigateurs, leur trafic réseau est vulnérable à [sniffing de paquets] (https://en.wikipedia.org/wiki/Packet_analyzer) et aux [attaques de l'homme au milieu] (https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-Il se peut que vous soyez familier avec le cryptage Secure Socket Layer (SSL) . [TLS est simplement la prochaine progression de SSL](<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>). En d'autres termes, si vous utilisiez SSL auparavant, envisagez la mise à niveau vers TLS. En général, nous recommandons à Nginx de gérer les TLS. Pour une bonne référence pour configurer TLS sur Nginx (et d'autres serveurs), voir [Configurations de serveur recommandées (Mozilla Wiki)] (https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
+Il se peut que vous soyez familier avec le cryptage Secure Socket Layer (SSL) . [TLS est simplement la prochaine progression de SSL](<%3Chttps://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx%3E>). En d'autres termes, si vous utilisiez SSL auparavant, envisagez la mise à niveau vers TLS. En général, nous recommandons à Nginx de gérer les TLS. Pour une bonne référence pour configurer TLS sur Nginx (et d'autres serveurs), voir [Configurations de serveur recommandées (Mozilla Wiki)] (https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations).
 
 De plus, un outil pratique pour obtenir un certificat TLS gratuit est [Let's Encrypt](https://letsencrypt.org/about/), un outil gratuit, automatisé, et l'autorité de certification ouverte (CA) fournie par le [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
 
@@ -64,12 +64,12 @@ Voici un exemple de vérification des URLs avant d'utiliser `res.redirect` ou `r
 
 ```js
 app.use((req, res) => {
-  essayer {
-    if (new Url(req. uery.url).host !== 'exemple.com') {
-      return res.status(400). nd(`Redirection non prise en charge vers l'hôte : ${req.query.url}`);
+  try {
+    if (new Url(req.query.url).host !== 'example.com') {
+      return res.status(400).end(`Unsupported redirect to host: ${req.query.url}`);
     }
-  } attraper (e) {
-    retourne. tatus(400).end(`URL invalide : ${req.query.url}`);
+  } catch (e) {
+    return res.status(400).end(`Invalid url: ${req.query.url}`);
   }
   res.redirect(req.query.url);
 });
@@ -148,13 +148,13 @@ et
 
 // custom 404
 app.use((req, res, next) => {
-  res.status(404). end("Désolé ne peut pas trouver cela!");
+  res.status(404).send("Sorry can't find that!");
 });
 
-// application de gestion d'erreurs personnalisée
-. se(err, req, res, next) => {
+// custom error handler
+app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Quelque chose s'est cassé !');
+  res.status(500).send('Something broke!');
 });
 ```
 
@@ -180,7 +180,7 @@ Pour éviter ce problème, utilisez des noms génériques de cookies; par exempl
 ```js
 const session = require('express-session');
 app.set('trust proxy', 1); // trust first proxy
-app.se(
+app.use(
   session({
     secret: 's3Cur3',
     name: 'sessionId',
@@ -239,7 +239,7 @@ Utiliser npm pour gérer les dépendances de votre application est puissant et p
 Depuis npm@6, npm vérifie automatiquement chaque demande d'installation. Vous pouvez également utiliser `npm audit` pour analyser votre arborescence des dépendances.
 
 ```bash
-Audit npm $
+$ npm audit
 ```
 
 Si vous voulez être plus sécurisé, considérez [Snyk](https://snyk.io/).
@@ -248,13 +248,13 @@ Snyk offre à la fois un [outil de ligne de commande] (https://www.npmjs.com/pac
 
 ```bash
 $ npm install -g snyk
-$ cd votre-application
+$ cd your-app
 ```
 
 Utilisez cette commande pour tester les vulnérabilités de votre application :
 
 ```bash
-$ test snyk
+$ snyk test
 ```
 
 ### Éviter les autres vulnérabilités connues

@@ -20,6 +20,9 @@
   "version": {
     "selectLabel": "Seleziona la versione API"
   },
+  "language": {
+    "selectLabel": "Seleziona lingua"
+  },
   "nav": {
     "mainMenu": "Menu principale",
     "toggleMenu": "Attiva/disattiva menu",
@@ -81,6 +84,7 @@
       "glossary": "Glossary",
       "contributing": "Contribuire",
       "utils": "Utilità",
+      "changelog": "Changelog",
       "middleware": "Middleware"
     },
     "aria": {
@@ -109,7 +113,8 @@
       "community": "Risorse comunitarie",
       "glossary": "Glossario dei termini",
       "contributing": "Guida al contributo",
-      "utils": "Utilità"
+      "utils": "Utilità",
+      "changelog": "Cambio rapido"
     }
   },
   "doc": {
@@ -120,6 +125,10 @@
   "page": {
     "editOnGitHub": "Edit on GitHub",
     "translateThis": "Traduci questa pagina"
+  },
+  "announcement": {
+    "readMore": "Leggi di più",
+    "checkLatestBlog": "Scopri il nostro ultimo blog"
   },
   "post": {
     "share": "Condividi",
@@ -166,9 +175,13 @@
     "message": "La pagina che stai cercando non esiste o è stata spostata.",
     "goHome": "Vai a Home"
   },
+  "common": {
+    "download": "Scarica"
+  },
   "hero": {
     "tagline": "Quadro web veloce, senza pareri, minimalista per Node.js",
     "getStarted": "Per Iniziare",
+    "kawaiiLogoAlt": "Logo Express.js kawaii",
     "videoPause": "Pausa video in background",
     "videoPlay": "Riproduci video in background"
   }

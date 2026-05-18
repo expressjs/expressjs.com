@@ -56,11 +56,11 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +1ms
   express:router use /users router +0ms
   express:router:layer new /users +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
 ```
 
@@ -68,18 +68,18 @@ Lorsqu'une demande est faite à l'application, vous verrez les journaux spécifi
 
 ```bash
   express:router dispatching GET / +4h
-  express:router query : / +2ms
-  express:router expressInit : / +0ms
-  express:router favicon : / +0ms
-  express:router logger : / +1ms
-  express:router jsonParser : / +0ms
-  express:router urlencodedParser : / +1ms
-  express:router cookieParser : / +0ms
-  express:router stylus : / +0ms
-  express:router serveStatic : / +2ms
-  express:router : / +2ms
+  express:router query  : / +2ms
+  express:router expressInit  : / +0ms
+  express:router favicon  : / +0ms
+  express:router logger  : / +1ms
+  express:router jsonParser  : / +0ms
+  express:router urlencodedParser  : / +1ms
+  express:router cookieParser  : / +0ms
+  express:router stylus  : / +0ms
+  express:router serveStatic  : / +2ms
+  express:router router  : / +2ms
   express:router dispatching GET / +1ms
-  express:view lookup "index. ug" +338ms
+  express:view lookup "index.pug" +338ms
   express:view stat "/projects/example/views/index.pug" +0ms
   express:view render "/projects/example/views/index.pug" +1ms
 ```

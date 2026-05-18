@@ -1,0 +1,150 @@
+---
+title: dienst-Index Middleware
+description: Serve-Verzeichnislisten
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.9.2"
+  github="https://github.com/express js/serve-index"
+  npm="https://www.npmjs.com/package/serve-index"
+/>
+
+Serviert Seiten, die Verzeichnislisten für einen gegebenen Pfad enthalten.
+
+## Installieren
+
+Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
+[npm Registry](https://www.npmjs.com/). Installation erfolgt mit dem
+[`npm install` Befehl](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install serve-index
+```
+
+## API
+
+```js
+var serveIndex = require('serve-index');
+```
+
+### serveIndex(Pfad, Optionen)
+
+Gibt Middlware zurück, die einen Index des Verzeichnisses im angegebenen `path` enthält.
+
+Der `path` basiert auf dem `req.url` Wert, also wird eine `req.url` von `'/some/dir`
+mit einem `path` von `'public'` auf `'public/some/dir'` schauen. Wenn du
+so etwas wie `express verwendest, kannst du die URL "base" mit `app.use\` ändern (siehe
+das Expressbeispiel).
+
+#### Optionen
+
+Serve-Index akzeptiert diese Eigenschaften im Options-Objekt.
+
+##### filtern
+
+Diese Filterfunktion auf Dateien anwenden. Standard ist `false`. Die `filter` Funktion
+wird für jede Datei aufgerufen, mit der Signatur `filter(Dateiname, Index, Dateien, dir)`
+wobei `filename` der Name der Datei ist `index` ist der Array-Index, `files` ist
+das Array der Dateien und `dir` ist der absolute Pfad, den die Datei befindet (und somit
+das Verzeichnis, für das das Angebot bestimmt ist).
+
+##### hidden
+
+Versteckte (Punkte) Dateien anzeigen. Standard ist `false`.
+
+##### symbole
+
+Symbole anzeigen. Standard ist `false`.
+
+##### stylesheet
+
+Optionaler Pfad zu einem CSS-Stylesheet. Standardmäßig ein eingebautes Stylesheet.
+
+##### vorlage
+
+Optionaler Pfad zu einer HTML-Vorlage oder einer Funktion, die einen HTML-
+-String darstellen wird. Standardmäßig wird eine eingebaute Vorlage verwendet.
+
+When given a string, the string is used as a file path to load and then the
+following tokens are replaced in templates:
+
+- `{directory}` mit dem Namen des Verzeichnisses.
+- `{files}` mit dem HTML einer ungeordneten Liste von Dateilinks.
+- `{linked-path}` mit dem HTML eines Links zum Verzeichnis.
+- `{style}` mit dem angegebenen Stylesheet und eingebetteten Bildern.
+
+When given as a function, the function is called as `template(locals, callback)`
+and it needs to invoke `callback(error, htmlString)`. Folgende sind die von
+angegebenen Gebietsschema:
+
+- `directory` ist das Verzeichnis, das angezeigt wird (wobei `/` der Root ist).
+- `displayIcons` ist ein Boolescher für ob Symbole gerendert werden sollen oder nicht.
+- `fileList` ist ein sortiertes Array von Dateien im Verzeichnis. Das Array enthält
+  Objekte mit den folgenden Eigenschaften:
+  - `name` ist der relative Name für die Datei.
+  - `stat` ist ein `fs.Stats` Objekt für die Datei.
+- `path` ist der vollständige Dateisystempfad zu `directory`.
+- `style` ist das Standardstylesheet oder der Inhalt der `stylesheet` Option.
+- `viewName` ist der Ansichtsname, der von der `view` Option angegeben wird.
+
+##### anschauen
+
+Anzeigemodus. `tiles` und `details` sind verfügbar. Standard ist `tiles`.
+
+## Beispiele
+
+### Verzeichnis-Indizes mit Vanilla node.js http-Server
+
+```js
+var finalhandler = require('finalhandler');
+var http = require('http');
+var serveIndex = require('serve-index');
+var serveStatic = require('serve-static');
+
+// Serve directory indexes for public/ftp folder (with icons)
+var index = serveIndex('public/ftp', { icons: true });
+
+// Serve up public/ftp folder files
+var serve = serveStatic('public/ftp');
+
+// Create server
+var server = http.createServer(function onRequest(req, res) {
+  var done = finalhandler(req, res);
+  serve(req, res, function onNext(err) {
+    if (err) return done(err);
+    index(req, res, done);
+  });
+});
+
+// Listen
+server.listen(3000);
+```
+
+### Verzeichnis-Indizes mit Expresscode servieren
+
+```js
+var express = require('express');
+var serveIndex = require('serve-index');
+
+var app = express();
+
+// Serve URLs like /ftp/thing as public/ftp/thing
+// The express.static serves the file contents
+// The serveIndex is this module serving the directory
+app.use('/ftp', express.static('public/ftp'), serveIndex('public/ftp', { icons: true }));
+
+// Listen
+app.listen(3000);
+```
+
+## Lizenz
+
+[MIT](https://github.com/expressjs/serve-index/blob/HEAD/LICENSE). Die [Silk](http://www.famfamfam.com/lab/icons/silk/) Icons
+werden von/Copyright von [FAMFAMFAM]erstellt (http://www.famfamfam.com/).
+
+[appveyor-url]: https://ci.appveyor.com/project/dougwilson/serve-index
+[downloads-url]: https://npmjs.org/package/serve-index
+[npm-url]: https://npmjs.org/package/serve-index

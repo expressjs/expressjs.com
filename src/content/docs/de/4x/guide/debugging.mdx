@@ -9,13 +9,13 @@ Um alle internen Logs zu sehen, die in Express verwendet werden, setzen Sie die 
 `express:*` beim Starten Ihrer App.
 
 ```bash
-$ DEBUG=Express:* node index.js
+$ DEBUG=express:* node index.js
 ```
 
 Verwenden Sie unter Windows den entsprechenden Befehl.
 
 ```bash
-> $env:DEBUG = "Express:*"; node index.js
+> $env:DEBUG = "express:*"; node index.js
 ```
 
 Das Ausführen dieses Befehls auf der vom [Express-Generator] generierten Standard-App (/en/starter/generator) gibt folgende Ausgabe aus:
@@ -56,30 +56,30 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +1ms
   express:router use /users router +0ms
   express:router:layer new /users +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
 ```
 
 Wenn eine Anfrage an die App gestellt wird, sehen Sie die im Express-Code angegebenen Protokolle:
 
 ```bash
-  express :router dispatching GET / +4h
-  express :router query : / +2ms
-  express :router expresInit : / +0ms
-  express:router favicon : / +0ms
-  express :router logger : / +1ms
-  express :router jsonParser : / +0ms
-  express:router urlencodedParser : / +1ms
-  express :router cookieParser : / +0ms
-  express:router stylus : / +0ms
-  express :router serveStatic : / +2ms
-  express :router router router : / +2ms
+  express:router dispatching GET / +4h
+  express:router query  : / +2ms
+  express:router expressInit  : / +0ms
+  express:router favicon  : / +0ms
+  express:router logger  : / +1ms
+  express:router jsonParser  : / +0ms
+  express:router urlencodedParser  : / +1ms
+  express:router cookieParser  : / +0ms
+  express:router stylus  : / +0ms
+  express:router serveStatic  : / +2ms
+  express:router router  : / +2ms
   express:router dispatching GET / +1ms
-  express:view lookup "index. ug" +338ms
+  express:view lookup "index.pug" +338ms
   express:view stat "/projects/example/views/index.pug" +0ms
   express:view render "/projects/example/views/index.pug" +1ms
 ```
@@ -93,13 +93,13 @@ Eine Anwendung, die durch den Befehl `express generiert` erzeugt wird, benutzt d
 Wenn Sie zum Beispiel die App mit `$ express Beispiel-App` erstellt haben, können Sie die Debug-Anweisungen mit folgendem Befehl aktivieren:
 
 ```bash
-$ DEBUG=Beispiel-app:* Knoten ./bin/www
+$ DEBUG=sample-app:* node ./bin/www
 ```
 
 Sie können mehr als einen Debug-Namensraum angeben, indem Sie eine kommaseparierte Namensliste zuweisen:
 
 ```bash
-$ DEBUG=http,mail,Express:* node index.js
+$ DEBUG=http,mail,express:* node index.js
 ```
 
 ## Erweiterte Optionen

@@ -44,7 +44,7 @@ Also ensure you are not using any of the vulnerable Express versions listed on t
 
 機密データを扱ったり転送したりする場合は、[Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) を使用して接続とデータを保護します。 この技術は、クライアントからサーバーに送信される前にデータを暗号化し、一般的な(そして簡単な)ハッキングを防ぎます。 Ajax と POST リクエストは目に見えて明らかではなく、ブラウザーでは「非表示」に見えるかもしれません。 彼らのネットワークトラフィックは、[パケットスニッフィング](https://en.wikipedia.org/wiki/Packet_analyzer)と[man-in-the-middle攻撃](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)に対して脆弱です。
 
-You may be familiar with Secure Socket Layer (SSL) encryption. [TLS は、単に SSLの次の進行である](<%3Chttps://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx%3E>)。 言い換えれば、以前SSLを使用していた場合は、TLSへのアップグレードを検討してください。 一般的に、Nginx は TLS を扱うことをお勧めします。 Nginx (および他のサーバ) で TLS を設定するための参考情報については、[推奨サーバー構成 (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations)を参照してください。
+SSL(Secure Socket Layer)暗号化に精通しているかもしれません。 [TLS は、単に SSLの次の進行である] (\<https://msdn.microsoft.com/en-us/library/windows/desktop/aa380515(v=vs.85).aspx>)。 言い換えれば、以前SSLを使用していた場合は、TLSへのアップグレードを検討してください。 一般的に、Nginx は TLS を扱うことをお勧めします。 Nginx (および他のサーバ) で TLS を設定するための参考情報については、[推奨サーバー構成 (Mozilla Wiki)](https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Server_Configurations)を参照してください。
 
 Also, a handy tool to get a free TLS certificate is [Let's Encrypt](https://letsencrypt.org/about/), a free, automated, and open certificate authority (CA) provided by the [Internet Security Research Group (ISRG)](https://www.abetterinternet.org/).
 
@@ -108,7 +108,7 @@ $ npm install helmet
 ```js
 // ...
 
-const helt = require('helmet');
+const helmet = require('helmet');
 app.use(helmet());
 
 // ...

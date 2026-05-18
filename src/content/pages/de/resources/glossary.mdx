@@ -5,23 +5,23 @@ description: Ein umfassendes Glossar mit Begriffen, die sich auf Express.js, Nod
 
 import Alert from '@components/primitives/Alert/Alert.astro';
 
-### anwendung
+## anwendung
 
 Im Allgemeinen ein oder mehrere Programme, die darauf ausgelegt sind, Operationen für einen bestimmten Zweck durchzuführen. Im Kontext von Express, ein Programm, das die Express-API verwendet, die auf der Node.js-Plattform läuft. Könnte auch auf ein [app object](/en/api#express).
 
-### API
+## API
 
 Programmierschnittstelle für Anwendungen. Sprich die Abkürzung aus, wenn sie zum ersten Mal verwendet wird.
 
-### Express
+## Express
 
 Ein schnelles, unübersichtliches, minimalistisches Webframework für Node.js Anwendungen. Im Allgemeinen wird "Express" von "Express.js" bevorzugt, obwohl letztere akzeptabel ist.
 
-### libuv
+## libuv
 
 Eine mehrplattformunabhängige Unterstützungsbibliothek, die sich auf asynchrone I/O konzentriert, die hauptsächlich für den Einsatz durch Node.js entwickelt wurde.
 
-### Middleware
+## Middleware
 
 Eine Funktion, die von der Express-Routing Layer vor dem letzten Request-Handler aufgerufen wird und sitzt somit in der Mitte zwischen einer Rohanforderung und der endgültigen geplanten Route. Ein paar schöne Terminologiepunkte rund um die Middleware:
 
@@ -29,11 +29,11 @@ Eine Funktion, die von der Express-Routing Layer vor dem letzten Request-Handler
 - `app.use(mw)` heißt _adding the middleware to the global processing stack_.
 - `app.get('/foo', mw, function (req, res) { ... })` heißt _adding the middleware to the "GET /foo" processing stack_.
 
-### Node.js
+## Node.js
 
 Eine Softwareplattform, die zur Erstellung skalierbarer Netzwerkanwendungen verwendet wird. Node.js verwendet JavaScript als Skriptsprache und erzielt einen hohen Durchsatz über nicht-blockierende I/O und eine einzige Threading-Ereignisschleife. Siehe [nodejs.org](https://nodejs.org/en/). **Verwende Notiz**: Anfangs "Node.js", danach "Knoten".
 
-### Open-Source, Open-Source
+## Open-Source, Open-Source
 
 Wenn als Adjektiv verwendet wird, Bindestrich; zum Beispiel: "Dies ist Open-Source-Software." Siehe [Open-Source-Software auf Wikipedia](http://en.wikipedia.org/wiki/Open-source_software).
 
@@ -44,18 +44,18 @@ und hyphenieren ein Compound Adjektiv.
 
 </Alert>
 
-### anfragen
+## anfragen
 
 Eine HTTP-Anfrage. Ein Client sendet eine HTTP-Anfrage an einen Server, der eine Antwort zurückgibt. Die Anfrage muss eine von mehreren [Anfragemethoden](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) wie GET, POST usw. verwenden.
 
-### antwort
+## antwort
 
 Eine HTTP-Antwort. Ein Server gibt dem Client eine HTTP-Antwortmeldung zurück. Die Antwort enthält Vollständigkeitsinformationen über die Anfrage und kann auch angeforderte Inhalte in ihrem Nachrichtentext enthalten.
 
-### routen
+## routen
 
 Teil einer URL, die eine Ressource identifiziert. In `http://foo.com/products/id`, zum Beispiel, ist "/products/id" die Route.
 
-### router
+## router
 
 Siehe [router](/en/api#router) in der API-Referenz.

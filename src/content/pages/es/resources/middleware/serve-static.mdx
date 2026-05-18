@@ -1,0 +1,255 @@
+---
+title: servidor-middleware estático
+description: Servir archivos estáticos
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="2.2.1"
+  github="https://github.com/expressjs/serve-static"
+  npm="https://www.npmjs.com/package/serve-static"
+/>
+
+## Instalar
+
+Este es un módulo [Node.js](https://nodejs.org/en/) disponible a través del
+[npm registry](https://www.npmjs.com/). La instalación se realiza usando el comando
+[`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install serve-static
+```
+
+## API
+
+```js
+const serveStatic = require('serve-static');
+```
+
+### servidor estático (raíz, opciones)
+
+Crear una nueva función de middleware para servir archivos desde un directorio raíz
+dado. El archivo a servir se determinará combinando `req.url`
+con el directorio raíz proporcionado. Cuando no se encuentra un archivo, en lugar de
+enviar una respuesta 404, este módulo llamará a `next()` para moverlo en
+al siguiente middleware, permitiendo apilar y fall-backs.
+
+#### Opciones
+
+##### aceptar rangos
+
+Activar o desactivar aceptar solicitudes a distancia, el valor predeterminado es verdadero.
+Deshabilitar esto no enviará `Accept-Ranges` e ignorará el contenido
+del encabezado de solicitud `Range`.
+
+##### cacheControl
+
+Activa o desactiva la configuración de la cabecera de respuesta `Cache-Control`, por defecto
+verdadera. Deshabilitar esto ignorará las opciones `inmutable` y `maxAge`.
+
+##### dotfiles
+
+Establecer cómo se tratan los "dotfiles" cuando se encuentran. Un dotfile es un archivo
+o directorio que comienza con un punto ("."). Tenga en cuenta que esta verificación se hace en
+la ruta en sí misma sin comprobar si la ruta existe realmente en el disco
+. Si se especifica `root`, solo los archivos de puntos sobre la raíz son revisados
+(i. . la raíz misma puede estar dentro de un archivo de puntos cuando se establece
+en "negar").
+
+- `'allow'` No hay tratamiento especial para archivos de puntos.
+- `'deny'` Denegar una solicitud para un archivo de puntos y 403/`next()`.
+- `'ignore'` Pretiende como el archivo de puntos no existe y 404/`next()`.
+
+El valor por defecto es `'ignore'`.
+
+##### etag
+
+Activar o desactivar la generación de etag, el valor predeterminado es verdadero.
+
+##### extensiones
+
+Definir retrocesos de extensión de archivo. Cuando se establece, si no se encuentra un archivo, las extensiones
+dadas se añadirán al nombre del archivo y buscarán. La primera que existe
+se servirá. Example: `['html', 'htm']`.
+
+El valor por defecto es `false`.
+
+##### caída
+
+Establezca el middleware para que los errores del cliente caigan a través ya que no se gestiona una solicitud
+, de lo contrario reenvíe un error del cliente. The difference is that client
+errors like a bad request or a request to a non-existent file will cause
+this middleware to simply `next()` to your next middleware when this value
+is `true`. Cuando este valor es `false`, estos errores (incluso 404s), invocarán
+`next(err)`.
+
+Normalmente `true` es deseado de tal manera que múltiples directorios físicos pueden ser
+mapeados a la misma dirección web o para rutas para rellenar archivos inexistentes.
+
+El valor `false` puede ser usado si este middleware está montado en una ruta que
+está diseñado para ser estrictamente un único directorio del sistema de archivos, que permite
+cortocircuitos 404s para menos sobrecarga. Este middleware también contestará a
+todos los métodos.
+
+El valor por defecto es `true`.
+
+##### inmutable
+
+Activa o desactiva la directiva 'inmutable' en la cabecera 'Cache-Control' respuesta
+, por defecto 'false'. Si se establece en `true`, la opción `maxAge` debe
+también se especifica para habilitar la caché. La directiva `inmutable` evitará que clientes soportados
+hagan solicitudes condicionales durante la vida de la opción
+`maxAge` para comprobar si el archivo ha cambiado.
+
+##### índice
+
+Por defecto, este módulo enviará archivos "index.html" en respuesta a una solicitud
+en un directorio. Para deshabilitar este ajuste `false` o para proporcionar un nuevo pase de índice una cadena
+o un array en orden preferido.
+
+##### última modificación
+
+Activa o desactiva la cabecera `Last-Modified`, por defecto es verdadera. Utiliza el último valor modificado del archivo
+del sistema.
+
+##### maxAge
+
+Proporciona una edad máxima en milisegundos para la caché http, por defecto a 0. Esta
+también puede ser una cadena aceptada por el módulo [ms](https://www.npmjs.org/package/ms#readme)
+.
+
+##### redireccionar
+
+Redirigir al final "/" cuando el nombre de la ruta es dir. Por defecto es `true`.
+
+##### setHeaders
+
+Función para configurar cabeceras personalizadas en la respuesta. Las modificaciones a los encabezados necesitan que
+ocurra sincrónicamente. La función se llama como `fn(res, ruta, stat)`, donde
+los argumentos son:
+
+- `res` el objeto de respuesta
+- `ruta` la ruta del archivo que se está enviando
+- `stat` el objeto de la estadística del archivo que está siendo enviado
+
+## Ejemplos
+
+### Servir archivos con el servidor http node.js vanilla
+
+```js
+const finalhandler = require('finalhandler');
+const http = require('http');
+const serveStatic = require('serve-static');
+
+// Serve up public/ftp folder
+const serve = serveStatic('public/ftp', { index: ['index.html', 'index.htm'] });
+
+// Create server
+const server = http.createServer((req, res) => {
+  serve(req, res, finalhandler(req, res));
+});
+
+// Listen
+server.listen(3000);
+```
+
+### Servir todos los archivos como descargas
+
+```js
+const contentDisposition = require('content-disposition');
+const finalhandler = require('finalhandler');
+const http = require('http');
+const serveStatic = require('serve-static');
+
+// Serve up public/ftp folder
+const serve = serveStatic('public/ftp', {
+  index: false,
+  setHeaders: setHeaders,
+});
+
+// Set header to force download
+function setHeaders(res, path) {
+  res.setHeader('Content-Disposition', contentDisposition(path));
+}
+
+// Create server
+const server = http.createServer((req, res) => {
+  serve(req, res, finalhandler(req, res));
+});
+
+// Listen
+server.listen(3000);
+```
+
+### Comenzando usando exprés
+
+#### Simple
+
+Este es un simple ejemplo de uso de Express.
+
+```js
+const express = require('express');
+const serveStatic = require('serve-static');
+
+const app = express();
+
+app.use(serveStatic('public/ftp', { index: ['default.html', 'default.htm'] }));
+app.listen(3000);
+```
+
+#### Múltiples raíces
+
+Este ejemplo muestra una forma simple de buscar a través de múltiples directorios.
+Los archivos son buscados en `public-optimized/` primero, luego `public/` segundo
+como un respaldo.
+
+```js
+const express = require('express');
+const path = require('path');
+const serveStatic = require('serve-static');
+
+const app = express();
+
+app.use(serveStatic(path.join(__dirname, 'public-optimized')));
+app.use(serveStatic(path.join(__dirname, 'public')));
+app.listen(3000);
+```
+
+#### Opciones diferentes para rutas
+
+Este ejemplo muestra cómo establecer una edad máxima diferente dependiendo del archivo servido
+. En este ejemplo, los archivos HTML no se almacenan en caché, mientras que todo lo demás
+es por 1 día.
+
+```js
+const express = require('express');
+const path = require('path');
+const serveStatic = require('serve-static');
+
+const app = express();
+
+app.use(
+  serveStatic(path.join(__dirname, 'public'), {
+    maxAge: '1d',
+    setHeaders: setCustomCacheControl,
+  })
+);
+
+app.listen(3000);
+
+function setCustomCacheControl(res, file) {
+  if (path.extname(file) === '.html') {
+    // Custom Cache-Control for HTML files
+    res.setHeader('Cache-Control', 'public, max-age=0');
+  }
+}
+```
+
+## Licencia
+
+[MIT](https://github.com/expressjs/serve-static/blob/HEAD/LICENSE)
+
+[url del nodo]: https://nodejs.org/es/download/
+[npm-url]: https://npmjs.org/paquete/serve-static

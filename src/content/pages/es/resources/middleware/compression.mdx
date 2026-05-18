@@ -1,0 +1,310 @@
+---
+title: middleware de compresión
+description: Middleware de compresión Node.js
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="1.8.1"
+  github="https://github.com/expressjs/compression"
+  npm="https://www.npmjs.com/package/compression"
+/>
+
+Middleware de compresión Node.js.
+
+Las siguientes codificaciones de compresión están soportadas:
+
+- desflar
+- gzip
+- br (brotli)
+
+**Nota** Brotli sólo es compatible desde las versiones de Node.js v11.7.0 y v10.16.0.
+
+## Instalar
+
+Este es un módulo [Node.js](https://nodejs.org/en/) disponible a través del
+[npm registry](https://www.npmjs.com/). La instalación se realiza usando el comando
+[`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```bash
+$ npm install compression
+```
+
+## API
+
+```js
+var compression = require('compression');
+```
+
+### compresión([options])
+
+Devuelve el middleware de compresión usando las `options` dadas. El middleware
+intentará comprimir los cuerpos de respuesta para todas las peticiones que atraviesan por
+el middleware, basado en las `options` dadas.
+
+Este middleware nunca comprimirá las respuestas que incluyen una cabecera `Cache-Control`
+con la [`no-transform` directive](https://tools.ietf.org/html/rfc7234#section-5.2.2.4),
+ya que comprimir transformará el cuerpo.
+
+#### Opciones
+
+`compression()` acepta estas propiedades en el objeto de opciones. In addition to
+those listed below, [zlib](https://nodejs.org/api/zlib.html) options may be
+passed in to the options object or
+[brotli](https://nodejs.org/api/zlib.html#zlib_class_brotlioptions) options.
+
+##### chunkSize
+
+Tipo: `Number`<br />
+Por defecto: `zlib.constants.Z_DEFAULT_CHUNK`, o `16384`.
+
+Vea [documentación de Node.js](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
+con respecto al uso.
+
+##### filtro
+
+Tipo: `Function`
+
+Una función para decidir si la respuesta debe ser considerada para la compresión.
+Esta función se llama como `filter(req, res)` y se espera que devuelva
+`true` para considerar la respuesta para la compresión, o `false` para no comprimir
+la respuesta.
+
+La función de filtro por defecto utiliza el módulo [compressible](https://www.npmjs.com/package/compressible)
+para determinar si `res.getHeader('Content-Type')` es compresible.
+
+##### nivel
+
+Tipo: `Number`<br />
+Por defecto: `zlib.constants.Z_DEFAULT_COMPRESSION`, o `-1`
+
+El nivel de compresión de zlib a aplicar a las respuestas. Un nivel más alto dará como resultado
+una mejor compresión, pero tardará más tiempo en completarse. Un nivel menor
+dará lugar a una menor compresión, pero será mucho más rápido.
+
+Este es un entero en el rango de `0` (sin compresión) a `9` (compresión máxima
+). El valor especial `-1` puede ser usado para significar el "nivel de compresión predeterminado
+", que es un compromiso por defecto entre velocidad y compresión
+(actualmente equivalente al nivel 6).
+
+- `-1` Nivel de compresión predeterminado (también `zlib.constants.Z_DEFAULT_COMPRESSION`).
+- `0` No compresión (también `zlib.constants.Z_NO_COMPRESSION`).
+- `1` Compresión más rápida (también `zlib.constants.Z_BEST_SPEED`).
+- `2`
+- `3`
+- `4`
+- `5`
+- `6` (actualmente a qué apunta `zlib.constants.Z_DEFAULT_COMPRESSION`).
+- `7`
+- `8`
+- `9` Mejor compresión (también `zlib.constants.Z_BEST_COMPRESSION`).
+
+**Nota** en la lista anterior, `zlib` es de `zlib = require('zlib')`.
+
+##### memLevel
+
+Tipo: `Number`<br />
+Por defecto: `zlib.constants.Z_DEFAULT_MEMLEVEL`, o `8`
+
+Esto especifica cuánta memoria debe asignarse para el estado de compresión interna
+y es un entero en el rango de `1` (nivel mínimo) y `9` (nivel máximo
+).
+
+Vea [documentación de Node.js](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
+con respecto al uso.
+
+##### brotli
+
+Tipo: `Objeto`
+
+Esto especifica las opciones para configurar Brotli. Vea [documentación de Node.js] (https://nodejs.org/api/zlib.html#class-brotlioptions) para una lista completa de opciones disponibles.
+
+##### estrategia
+
+Tipo: `Number`<br />
+Por defecto: `zlib.constants.Z_DEFAULT_STRATEGY`
+
+Esto se utiliza para ajustar el algoritmo de compresión. Este valor solo afecta la proporción
+de compresión, no la corrección de la salida comprimida, incluso si
+no se establece apropiadamente.
+
+- `zlib.constants.Z_DEFAULT_STRATEGY` Usar para datos normales.
+- `zlib.constants.Z_FILTERED` Usar para datos producidos por un filtro (o predictor).
+  Los datos filtrados consisten principalmente en valores pequeños con una distribución
+  algo aleatoria. En este caso, el algoritmo de compresión se ajusta a
+  comprimirlos mejor. The effect is to force more Huffman coding and less
+  string matching; it is somewhat intermediate between `zlib.constants.Z_DEFAULT_STRATEGY`
+  and `zlib.constants.Z_HUFFMAN_ONLY`.
+- `zlib.constants.Z_FIXED` Usar para prevenir el uso de códigos Huffman dinámicos, permitiendo
+  para un decodificador más simple para aplicaciones especiales.
+- `zlib.constants.Z_HUFFMAN_ONLY` Usar para forzar la codificación de Huffman sólo (no coinciden cadenas).
+- `zlib.constants.Z_RLE` Usar para limitar las distancias de coincidencia a una (codificación de longitud de ejecución).
+  Esto está diseñado para ser casi tan rápido como `zlib.constants.Z_HUFFMAN_ONLY`, pero dar
+  mejor compresión para datos de imágenes PNG.
+
+**Nota** en la lista anterior, `zlib` es de `zlib = require('zlib')`.
+
+##### umbral
+
+Tipo: `Number` o `String`<br />
+Predeterminado: `1kb`
+
+El umbral de bytes para el tamaño del cuerpo de respuesta antes de que la compresión se considere
+para la respuesta. Este es un número de bytes o cualquier cadena
+aceptada por el módulo [bytes](https://www.npmjs.com/package/bytes).
+
+**Nota** esta es sólo una configuración de aviso; si el tamaño de la respuesta no se puede determinar
+en el momento en que se escriben las cabeceras de respuesta, entonces se asume que la respuesta es
+_sob_ el umbral. To guarantee the response size can be determined, be sure
+set a `Content-Length` response header.
+
+##### windowBits
+
+Tipo: `Number`<br />
+Por defecto: `zlib.constants.Z_DEFAULT_WINDOWBITS`, o `15`
+
+Vea [documentación de Node.js](https://nodejs.org/api/zlib.html#zlib_memory_usage_tuning)
+con respecto al uso.
+
+##### codificar forzosamente
+
+Tipo: `String`<br />
+Por defecto: `identity`
+
+Esta es la codificación predeterminada a usar cuando el cliente no especifica una codificación en la cabecera [Accept-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding).
+
+#### .filtro
+
+La función `filter` predeterminada. Esto se utiliza para construir una función de filtro personalizado
+que es una extensión de la función por defecto.
+
+```js
+var compression = require('compression');
+var express = require('express');
+
+var app = express();
+
+app.use(compression({ filter: shouldCompress }));
+
+function shouldCompress(req, res) {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false;
+  }
+
+  // fallback to standard filter function
+  return compression.filter(req, res);
+}
+```
+
+### res.flush
+
+Este módulo añade un método `res.flush()` para forzar que la respuesta
+parcialmente comprimida sea volteada al cliente.
+
+## Ejemplos
+
+### expreso
+
+Cuando se utiliza este módulo con express, simplemente `app.use` el módulo como
+alto a tu gusto. Las solicitudes que pasen por el middleware serán comprimidas.
+
+```js
+var compression = require('compression');
+var express = require('express');
+
+var app = express();
+
+// compress all responses
+app.use(compression());
+
+// add all routes
+```
+
+### Servidor HTTP Node.js
+
+```js
+var compression = require('compression')({ threshold: 0 });
+var http = require('http');
+
+function createServer(fn) {
+  return http.createServer(function (req, res) {
+    compression(req, res, function (err) {
+      if (err) {
+        res.statusCode = err.status || 500;
+        res.end(err.message);
+        return;
+      }
+
+      fn(req, res);
+    });
+  });
+}
+
+var server = createServer(function (req, res) {
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('hello world!');
+});
+
+server.listen(3000, () => {
+  console.log('> Listening at http://localhost:3000');
+});
+```
+
+### Eventos enviados por servidor
+
+Debido a la naturaleza de la compresión este módulo no funciona fuera de la caja
+con eventos enviados por el servidor. Para comprimir el contenido, una ventana de la salida necesita
+ser almacenada en buffer para obtener una buena compresión. Normalmente al usar eventos
+enviados por servidor, hay cierto bloque de datos que necesitan llegar al cliente.
+
+Puedes lograr esto llamando a `res.flush()` cuando necesites los datos escritos en
+realmente llegan al cliente.
+
+```js
+var compression = require('compression');
+var express = require('express');
+
+var app = express();
+
+// compress responses
+app.use(compression());
+
+// server-sent event stream
+app.get('/events', function (req, res) {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+
+  // send a ping approx every 2 seconds
+  var timer = setInterval(function () {
+    res.write('data: ping\n\n');
+
+    // !!! this is the important part
+    res.flush();
+  }, 2000);
+
+  res.on('close', function () {
+    clearInterval(timer);
+  });
+});
+```
+
+## Contribuyendo
+
+El proyecto Express.js acoge con satisfacción todas las contribuciones constructivas. Las contribuciones toman muchos formularios,
+desde código para correcciones de errores y mejoras, hasta adiciones y correcciones a la documentación, ¡pruebas
+adicionales, probando solicitudes y problemas entrantes, y más!
+
+Vea la [Guía de contribución] (https://github.com/expressjs/express/blob/master/Contributing.md) para más detalles técnicos sobre contribuir.
+
+## Licencia
+
+[MIT](https://github.com/expressjs/compression/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/compression
+[descarga-url]: https://npmcharts.com/compare/compression?minimal=true
+[insignia osf-scorecard-scorecard-]: https://api.scorecard.dev/projects/github.com/expressjs/compression/badge
+[visualizador-escorecard-ossf]: https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/compression
+[url de financiación]: https://opencollective.com/express

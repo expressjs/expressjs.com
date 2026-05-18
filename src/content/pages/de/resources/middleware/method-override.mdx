@@ -1,0 +1,184 @@
+---
+title: Methode, Middleware zu überschreiben
+description: HTTP-Verben überschreiben
+---
+
+import MiddlewareInfo from '@components/patterns/MiddlewareInfo/MiddlewareInfo.astro';
+import Alert from '@components/primitives/Alert/Alert.astro';
+
+<MiddlewareInfo
+  version="3.0.0"
+  github="https://github.com/express js/method-override"
+  npm="https://www.npmjs.com/package/method-override"
+/>
+
+Lässt Sie HTTP-Verben wie PUT oder DELETE an Orten verwenden, an denen der Client es nicht unterstützt.
+
+## Installieren
+
+Dies ist ein [Node.js](https://nodejs.org/en/) Modul über die
+[npm Registry](https://www.npmjs.com/). Installation erfolgt mit dem
+[`npm install` Befehl](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install method-override
+```
+
+## API
+
+**HINWEIS** Es ist sehr wichtig, dass dieses Modul **vorher** jedes Moduls verwendet wird, das
+die Methode der Anfrage wissen muss (zum Beispiel es _must_ vor
+das `csurf` Modul verwendet werden muss).
+
+### methodOverride(getter, Optionen)
+
+Erstelle eine neue Middleware-Funktion, um die Eigenschaft `req.method` mit einem neuen
+-Wert zu überschreiben. Dieser Wert wird aus dem angegebenen 'getter' gezogen.
+
+- `getter` - Der zu verwendende Getter, um die überschriebene Anfragemethode für die Anfrage aufzurufen. (Standard: `X-HTTP-Method-Override`)
+- `options.methods` - Die erlaubten Methoden, in denen die ursprüngliche Anfrage sein muss, um auf eine Methode zu überprüfen, die Wert überschreibt. (Standard: `['POST']`)
+
+Wenn die gefundene Methode von node.js Core unterstützt wird, dann `req. ethod` wird auf diesen Wert
+gesetzt, als wäre er ursprünglich dieser Wert. Der vorherige Wert der `req.method`
+wird in `req.originalMethod` gespeichert.
+
+#### getter
+
+Dies ist die Methode, um den Überschreibungswert der Anfrage zu erhalten. Wenn eine Funktion zur Verfügung gestellt wird, wird
+die `req` als erstes Argument übergeben, das `res` als zweites Argument und die Methode wird
+erwartet. Wenn eine Zeichenkette angegeben wird, wird die Zeichenkette verwendet, um die Methode
+mit den folgenden Regeln aufzurufen:
+
+- If the string starts with `X-`, then it is treated as the name of a header and that header
+  is used for the method override. Wenn die Anfrage den gleichen Header mehrmals enthält, wird das erste Vorkommen
+  verwendet.
+- Alle anderen Strings werden als Schlüssel im URL-Query-String behandelt.
+
+#### options.methods
+
+Dies erlaubt die Angabe welcher Methode(n) die Anfrage _MUST_ sein wird, um auf
+die Methode zu überprüfen, die Wert überschreibt. Standardmäßig sind nur `POST` Methoden, was die einzige Methode ist, in der die
+überschreibt. Hier können mehr Methoden angegeben werden, aber es kann Sicherheits-
+Probleme verursachen und ein seltsames Verhalten verursachen, wenn Anfragen durch Caches reisen. Dieser Wert ist ein Array
+von Methoden in Großbuchstaben. `null` kann angegeben werden, um alle Methoden zu erlauben.
+
+## Beispiele
+
+### überschreiben mit einem Header
+
+Um einen Header zu verwenden, um die Methode zu überschreiben, geben Sie den Headernamen
+als String-Argument für die `methodOverride` Funktion an. Um dann
+zum Anruf zu machen, senden Sie eine `POST` Anfrage an eine URL mit der überschriebenen Methode
+als Wert dieses Headers. Diese Methode, einen Header zu verwenden, würde in der Regel
+in Verbindung mit `XMLHttpRequest` bei Implementierungen
+verwendet werden, die die Methode, die Sie verwenden wollen, nicht unterstützen.
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with the X-HTTP-Method-Override header in the request
+app.use(methodOverride('X-HTTP-Method-Override'));
+```
+
+Beispielaufruf mit Überschreibung mit `XMLHttpRequest`:
+
+{/* eslint-env Browser */}
+
+```js
+const xhr = new XMLHttpRequest();
+xhr.onload = onload;
+xhr.open('post', '/resource', true);
+xhr.setRequestHeader('X-HTTP-Method-Override', 'DELETE');
+xhr.send();
+
+function onload() {
+  alert('got response: ' + this.responseText);
+}
+```
+
+### mit einem Abfragewert überschreiben
+
+Um einen Abfrage-String Wert zu verwenden, um die Methode zu überschreiben, geben Sie den Abfrage-
+String Schlüssel als String-Argument an die `methodOverride` Funktion an. Zu
+und dann anrufen, eine `POST` Anfrage an eine URL mit der überschriebenen
+Methode als Wert dieses Query String Schlüssels senden. Diese Methode, einen
+-Abfragewert zu verwenden, würde typischerweise in Verbindung mit reinen HTML
+`\<form>` Elementen verwendet werden, wenn versucht wird, alte Browser zu unterstützen, aber trotzdem
+neuere Methoden verwenden.
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'));
+```
+
+Beispiel Aufruf mit Abfrageüberschreibung mit HTML `\<form>`:
+
+```html
+<form method="POST" action="/resource?_method=DELETE">
+  <button type="submit">Delete resource</button>
+</form>
+```
+
+### mehrfache Formatunterstützung
+
+```js
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// override with different headers; last one takes precedence
+app.use(methodOverride('X-HTTP-Method')); //          Microsoft
+app.use(methodOverride('X-HTTP-Method-Override')); // Google/GData
+app.use(methodOverride('X-Method-Override')); //      IBM
+```
+
+### eigene Logik
+
+Sie können jede Art von benutzerdefinierter Logik mit einer Funktion für den "getter" implementieren. Die folgende
+implementiert die Logik um in `req.body` zu suchen, die in `method-override@1` war:
+
+```js
+const bodyParser = require('body-parser');
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
+
+// NOTE: when using req.body, you must fully parse the request body
+//       before you call methodOverride() in your middleware stack,
+//       otherwise req.body will not be populated.
+app.use(bodyParser.urlencoded());
+app.use(
+  methodOverride(function (req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      // look in urlencoded POST bodies and delete it
+      const method = req.body._method;
+      delete req.body._method;
+      return method;
+    }
+  })
+);
+```
+
+Beispiel Aufruf mit Abfrageüberschreibung mit HTML `\<form>`:
+
+```html
+{/* enctype must be set to the type you will parse before methodOverride() */}
+<form method="POST" action="/resource" enctype="application/x-www-form-urlencoded">
+  <input type="hidden" name="_method" value="DELETE" />
+  <button type="submit">Delete resource</button>
+</form>
+```
+
+## Lizenz
+
+[MIT](https://github.com/expressjs/method-override/blob/HEAD/LICENSE)
+
+[npm-url]: https://npmjs.org/package/method-override
+[travis-url]: https://travis-ci.org/expressjs/method-override
+[downloads-url]: https://npmjs.org/package/method-override

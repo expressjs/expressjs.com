@@ -37,7 +37,7 @@ Express アプリケーションでは、次のタイプのミドルウェアを
 
 ```js
 const express = require('express');
-const app = expresss();
+const app = express();
 
 app.use((req, res, next) => {
   console.log('Time:', Date.now());
@@ -292,7 +292,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 
-// cookie-parsing middleware
+// load the cookie-parsing middleware
 app.use(cookieParser());
 ```
 

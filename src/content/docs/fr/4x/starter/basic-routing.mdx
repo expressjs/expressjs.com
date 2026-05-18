@@ -44,7 +44,7 @@ Répondre à une requête POST sur la route racine (`/`), la page d'accueil de l
 
 ```js
 app.post('/', (req, res) => {
-  res.send('Requête POST');
+  res.send('Got a POST request');
 });
 ```
 
@@ -52,7 +52,7 @@ Répondre à une requête PUT sur la route `/user`:
 
 ```js
 app.put('/user', (req, res) => {
-  res.send('Requête PUT à /user');
+  res.send('Got a PUT request at /user');
 });
 ```
 
@@ -60,7 +60,7 @@ Répondre à une requête DELETE sur la route `/user`:
 
 ```js
 app.delete('/user', (req, res) => {
-  res.send('Requête DELETE à /user');
+  res.send('Got a DELETE request at /user');
 });
 ```
 

@@ -54,7 +54,7 @@ Le versionnage et les versions Express ne sont pas affectés par les mises à jo
 Sans middleware intégré, vous devez explicitement ajouter tout le middleware
 nécessaire pour exécuter votre application. Suivez simplement ces étapes :
 
-1. Installez le module: `npm install --save <module-name>`
+1. Installez le module: `npm install --save \<module-name>`
 2. Dans votre application, nécessite le module : `require('module-name')`
 3. Utilisez le module selon sa documentation: `app.use( ... )`
 
@@ -230,13 +230,13 @@ Voici un exemple de gestionnaires de routes enchaînés qui sont définis en uti
 app
   .route('/book')
   .get((req, res) => {
-    end('Obtenir un livre aléatoire');
+    res.send('Get a random book');
   })
-  .ost((req, res) => {
-    res.send('Ajouter un livre');
+  .post((req, res) => {
+    res.send('Add a book');
   })
-  .ut((req, res) => {
-    res.send('Mettre à jour le livre');
+  .put((req, res) => {
+    res.send('Update the book');
   });
 ```
 
@@ -281,7 +281,7 @@ var birds = require('./birds');
 
 // ...
 
-app.use('/birds', oiseaux);
+app.use('/birds', birds);
 ```
 
 L'application sera maintenant en mesure de traiter les requêtes vers les chemins `/birds` et
@@ -383,33 +383,33 @@ Considérez une application Express v.3 avec le fichier `app.js` suivant :
 ```js
 var express = require('express');
 var routes = require('./routes');
-var user = require('. routes/utilisateur');
+var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
 var app = express();
 
-// toutes les applications
-environnement.et('port', process.env.PORT || 3000);
-app.set('vues', path.join(__dirname, 'views'));
-app.set('voir engine', 'pug');
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
-app.use(express.ession({ secret: 'votre secret ici' }));
+app.use(express.session({ secret: 'your secret here' }));
 app.use(express.bodyParser());
 app.use(app.router);
-app.use(express.tatic(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// développement seulement
+// development only
 if (app.get('env') === 'development') {
-  app.se(express.errorHandler());
+  app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http.reateServer(app).listen(app.get('port'), () => {
+http.createServer(app).listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
 });
 ```
@@ -422,13 +422,13 @@ quelque chose comme ceci:
 ```json
 {
   "name": "application-name",
-  "version": "0.0. ",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app. s"
+    "start": "node app.js"
   },
-  "dépendances": {
-    "express": "3. 2.0",
+  "dependencies": {
+    "express": "3.12.0",
     "pug": "*"
   }
 }
@@ -468,20 +468,20 @@ Lancer la commande `npm` ci-dessus mettra à jour `package.json` comme suit:
 ```json
 {
   "name": "application-name",
-  "version": "0.0. ",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app. s"
+    "start": "node app.js"
   },
   "dependencies": {
     "body-parser": "^1.5.2",
-    "errorhandler": "^1.1. ",
+    "errorhandler": "^1.1.1",
     "express": "^4.8.0",
-    "express-session": "^1. .2",
+    "express-session": "^1.7.2",
     "pug": "^2.0.0",
-    "method-override": "^2. .2",
+    "method-override": "^2.1.2",
     "morgan": "^1.2.2",
-    "multer": "^0.1. ",
+    "multer": "^0.1.3",
     "serve-favicon": "^2.0.1"
   }
 }
@@ -496,7 +496,7 @@ changes as necessary. Le fichier `app.js` ressemblera à ceci :
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
-var user = require('. routes/utilisateur');
+var user = require('./routes/user');
 var path = require('path');
 
 var favicon = require('serve-favicon');
@@ -509,36 +509,36 @@ var errorHandler = require('errorhandler');
 
 var app = express();
 
-// tous environnements
-application. et('port', process.env.PORT || 3000);
-app.set('vues', path.join(__dirname, 'views'));
-app.set('moteur de vue', 'pug');
-app.use(favicon(path.join(__dirname, '/public/favicon.ico'));
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 app.use(logger('dev'));
-application. se(methodOverride());
-app. se(
+app.use(methodOverride());
+app.use(
   session({
     resave: true,
     saveUninitialized: true,
     secret: 'uwotm8',
   })
 );
-app. se(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', routes. ndex);
+app.get('/', routes.index);
 app.get('/users', user.list);
 
-// gestion des erreurs du middleware doit être chargée après le chargement des routes
-si (app. et('env') === 'développement') {
-  application. se(errorHandler());
+// error handling middleware should be loaded after the loading the routes
+if (app.get('env') === 'development') {
+  app.use(errorHandler());
 }
 
 var server = http.createServer(app);
-server.listen(app. et('port'), () => {
-  console.log('Ecoute de serveur Express sur le port ' + app.get('port'));
+server.listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
 });
 ```
 
@@ -547,7 +547,7 @@ Sauf si vous avez besoin de travailler directement avec le module `http` (socket
 
 ```js
 app.listen(app.get('port'), () => {
-  console.log('Ecouter le serveur Express sur le port ' + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'));
 });
 ```
 
@@ -578,7 +578,7 @@ Si vous avez déjà le générateur d'application Express 3 installé sur votre 
 vous devez le désinstaller :
 
 ```bash
-$ npm désinstaller -g express
+$ npm uninstall -g express
 ```
 
 Selon la façon dont vos droits de fichier et de répertoire sont configurés,
@@ -609,7 +609,7 @@ Les options de commande et l'utilisation restent en grande partie les mêmes, av
 Exécutez la commande suivante pour créer une application Express 4 :
 
 ```bash
-$ app4 express
+$ express app4
 ```
 
 Si vous regardez le contenu du fichier `app4/app.js`, vous remarquerez

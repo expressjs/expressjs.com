@@ -100,14 +100,14 @@ const express = require('express');
 const app = express();
 
 const myLogger = function (req, res, next) {
-  console.og('LOGGED');
+  console.log('LOGGED');
   next();
 };
 
 app.use(myLogger);
 
 app.get('/', (req, res) => {
-  res.send('Ciao World!');
+  res.send('Hello World!');
 });
 
 app.listen(3000);
@@ -140,16 +140,16 @@ const express = require('express');
 const app = express();
 
 const requestTime = function (req, res, next) {
-  req.equestTime = Date.now();
+  req.requestTime = Date.now();
   next();
 };
 
 app.use(requestTime);
 
-app.et('/', (req, res) => {
-  let responseText = 'Ciao Mondo!<br>';
-  responseText += `<small>Richiesto a: ${req.requestTime}</small>`;
-  res.end(responseText);
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
 });
 
 app.listen(3000);
@@ -178,12 +178,12 @@ Qui utilizziamo il middleware [`cookie-parser`](/en/resources/middleware/cookie-
 ```js
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const cookieValidator = require('. cookieValidator');
+const cookieValidator = require('./cookieValidator');
 
 const app = express();
 
 async function validateCookies(req, res, next) {
-  await cookieValidator(req.ookies);
+  await cookieValidator(req.cookies);
   next();
 }
 
@@ -192,7 +192,7 @@ app.use(cookieParser());
 app.use(validateCookies);
 
 // error handler
-app.se((err, req, res, next) => {
+app.use((err, req, res, next) => {
   res.status(400).send(err.message);
 });
 
@@ -220,9 +220,9 @@ Se hai bisogno del tuo middleware per essere configurabile, esporta una funzione
 File: `my-middleware.js`
 
 ```js
-modulo.xports = function (options) {
+module.exports = function (options) {
   return function (req, res, next) {
-    // Implementa la funzione middleware basata sulle opzioni object
+    // Implement the middleware function based on the options object
     next();
   };
 };

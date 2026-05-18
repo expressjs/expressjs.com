@@ -20,6 +20,9 @@
   "version": {
     "selectLabel": "API-Version auswählen"
   },
+  "language": {
+    "selectLabel": "Sprache auswählen"
+  },
   "nav": {
     "mainMenu": "Hauptmenü",
     "toggleMenu": "Menü umschalten",
@@ -81,6 +84,7 @@
       "glossary": "Glossary",
       "contributing": "Mitwirken",
       "utils": "Hilfsmittel",
+      "changelog": "Changelog",
       "middleware": "Middleware"
     },
     "aria": {
@@ -109,7 +113,8 @@
       "community": "Community-Ressourcen",
       "glossary": "Glossar der Begriffe",
       "contributing": "Beitragende Anleitung",
-      "utils": "Hilfsmittel"
+      "utils": "Hilfsmittel",
+      "changelog": "Express-Änderungsprotokoll"
     }
   },
   "doc": {
@@ -120,6 +125,10 @@
   "page": {
     "editOnGitHub": "Edit on GitHub",
     "translateThis": "Diese Seite übersetzen"
+  },
+  "announcement": {
+    "readMore": "Lesen Sie mehr",
+    "checkLatestBlog": "Schau dir unseren neuesten Blog an"
   },
   "post": {
     "share": "Teilen",
@@ -166,9 +175,13 @@
     "message": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
     "goHome": "Gehe zu Zuhause"
   },
+  "common": {
+    "download": "Download"
+  },
   "hero": {
     "tagline": "Schnell, unüberlegtes, minimalistisches Web-Framework für Node.js",
     "getStarted": "Los geht's",
+    "kawaiiLogoAlt": "Express.js kawaii Logo",
     "videoPause": "Hintergrundvideo pausieren",
     "videoPlay": "Hintergrundvideo abspielen"
   }

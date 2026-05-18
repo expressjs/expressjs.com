@@ -50,7 +50,7 @@ no caminho `/user/:id`.
 
 ```js
 app.use('/user/:id', (req, res, next) => {
-  console.log('Tipo de requisição:', req.method);
+  console.log('Request Type:', req.method);
   next();
 });
 ```
@@ -70,14 +70,14 @@ Isto ilustra um sub-stack de middleware que imprime informação de solicitaçã
 app.use(
   '/user/:id',
   (req, res, next) => {
-    console.log('Solicitação de URL:', req. riginalUrl);
+    console.log('Request URL:', req.originalUrl);
     next();
   },
-  (req, res, next) => console {
-    . og('Tipo de requisição:', req.method);
+  (req, res, next) => {
+    console.log('Request Type:', req.method);
     next();
   }
-
+);
 ```
 
 Os gerenciadores de rotas permitem que você defina várias rotas para um caminho. O exemplo abaixo define duas rotas para solicitações GET para o caminho `/user/:id`. A segunda via não causará quaisquer problemas, mas nunca será chamada, porque a primeira via termina o ciclo de resposta aos pedidos.
@@ -88,16 +88,16 @@ Este exemplo mostra uma sub-pilha de middleware que lida com requisições GET p
 app.get(
   '/user/:id',
   (req, res, next) => {
-    console.log('ID:', req.arams.id);
+    console.log('ID:', req.params.id);
     next();
   },
   (req, res, next) => {
-    res.end('Informações do usuário');
+    res.send('User Info');
   }
 );
 
-// manipulador para o caminho /user/:id, que imprime o ID do usuário
-aplicativo.et('/user/:id', (req, res, next) => {
+// handler for the /user/:id path, which prints the user ID
+app.get('/user/:id', (req, res, next) => {
   res.send(req.params.id);
 });
 ```
@@ -139,19 +139,19 @@ O Middleware também pode ser declarado em um array para reutilizabilidade.
 Este exemplo mostra um array com um sub-stack de middleware que lida com requisições GET para o caminho `/user/:id`
 
 ```js
-function logOriginalUrl(req, res, próximo) {
-  console.log('Solicitação URL:', req.riginalUrl);
+function logOriginalUrl(req, res, next) {
+  console.log('Request URL:', req.originalUrl);
   next();
 }
 
-function logMethod(req, res, ext) {
-  console.log('Request Type:', req.ethod);
+function logMethod(req, res, next) {
+  console.log('Request Type:', req.method);
   next();
 }
 
 const logStuff = [logOriginalUrl, logMethod];
-app.et('/user/:id', logStuff, (req, res, next) => {
-  res.send('Usuário Info');
+app.get('/user/:id', logStuff, (req, res, next) => {
+  res.send('User Info');
 });
 ```
 
@@ -224,20 +224,20 @@ Este exemplo mostra uma sub-pilha de middleware que lida com requisições GET p
 ```js
 const express = require('express');
 const app = express();
-const router = expressos.
+const router = express.Router();
 
-// prefixa o roteador com uma verificação e resgate quando necessário
-roteador. se((req, res, ext) => {
+// predicate the router with a check and bail out when needed
+router.use((req, res, next) => {
   if (!req.headers['x-auth']) return next('router');
   next();
 });
 
-router. et('/user/:id', (req, res) => {
+router.get('/user/:id', (req, res) => {
   res.send('hello, user!');
 });
 
-// usa o roteador e 401 tudo que cai através do app
-. se('/admin', roteador, (req, res) => {
+// use the router and 401 anything falling through
+app.use('/admin', router, (req, res) => {
   res.sendStatus(401);
 });
 ```
@@ -258,7 +258,7 @@ Definir funções intermediárias de manipulação de erros da mesma forma que o
 ```js
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Algo quebrado!');
+  res.status(500).send('Something broke!');
 });
 ```
 
@@ -292,7 +292,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 
-// carrega o middleware
+// load the cookie-parsing middleware
 app.use(cookieParser());
 ```
 

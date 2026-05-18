@@ -54,7 +54,7 @@ Express non sono influenzati dagli aggiornamenti di middleware.
 Senza middleware integrato, è necessario aggiungere esplicitamente tutto il middleware
 che è necessario per eseguire l'app. Basta seguire questi passaggi:
 
-1. Installa il modulo: `npm install --save <module-name>`
+1. Installa il modulo: `npm install --save \<module-name>`
 2. Nella tua app, richiede il modulo: `require('module-name')`
 3. Usa il modulo in base alla sua documentazione: `app.use( ... )`
 
@@ -230,13 +230,13 @@ Ecco un esempio di router incatenati che sono definiti utilizzando la funzione `
 app
   .route('/book')
   .get((req, res) => {
-    res.end('Ottieni un libro casuale');
+    res.send('Get a random book');
   })
-  .ost((req, res) => {
+  .post((req, res) => {
     res.send('Add a book');
   })
-  .ut((req, res) => {
-    res.send('Aggiorna il libro');
+  .put((req, res) => {
+    res.send('Update the book');
   });
 ```
 
@@ -257,17 +257,17 @@ con i seguenti contenuti:
 var express = require('express');
 var router = express.Router();
 
-// middleware specifico per questo router
-router. se((req, res, next) => {
-  console.log('Time: ', Date. ow());
+// middleware specific to this router
+router.use((req, res, next) => {
+  console.log('Time: ', Date.now());
   next();
 });
-// definire il router della home page
-. et('/', (req, res) => {
+// define the home page route
+router.get('/', (req, res) => {
   res.send('Birds home page');
 });
-// definire il router circa il percorso
-. et('/about', (req, res) => {
+// define the about route
+router.get('/about', (req, res) => {
   res.send('About birds');
 });
 
@@ -382,34 +382,34 @@ Considera un'applicazione Express v.3 con il seguente file `app.js`:
 
 ```js
 var express = require('express');
-var route = require('./routes');
-var user = require('. routes/user');
+var routes = require('./routes');
+var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
 var app = express();
 
-// tutti gli ambienti
-app. et('port', process.env.PORT <unk> <unk> 3000);
+// all environments
+app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
-app.use(express. ession({ secret: 'your secret here' }));
+app.use(express.session({ secret: 'your secret here' }));
 app.use(express.bodyParser());
 app.use(app.router);
-app.use(express. tatic(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// sviluppo solo
+// development only
 if (app.get('env') === 'development') {
-  app. se(express.errorHandler());
+  app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http. reateServer(app).listen(app.get('port'), () => {
+http.createServer(app).listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
 });
 ```
@@ -422,13 +422,13 @@ qualcosa del genere:
 ```json
 {
   "name": "application-name",
-  "version": "0.0. ",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app. s"
+    "start": "node app.js"
   },
   "dependencies": {
-    "express": "3. 2.0",
+    "express": "3.12.0",
     "pug": "*"
   }
 }
@@ -468,20 +468,20 @@ L'esecuzione del comando `npm` sopra aggiornerà `package.json` come segue:
 ```json
 {
   "name": "application-name",
-  "version": "0.0. ",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app. s"
+    "start": "node app.js"
   },
   "dependencies": {
     "body-parser": "^1.5.2",
-    "errorhandler": "^1.1. ",
+    "errorhandler": "^1.1.1",
     "express": "^4.8.0",
-    "express-session": "^1. .2",
+    "express-session": "^1.7.2",
     "pug": "^2.0.0",
-    "method-override": "^2. .2",
+    "method-override": "^2.1.2",
     "morgan": "^1.2.2",
-    "multer": "^0.1. ",
+    "multer": "^0.1.3",
     "serve-favicon": "^2.0.1"
   }
 }
@@ -495,8 +495,8 @@ se necessario. Il file `app.js` sarà simile a questo:
 ```js
 var http = require('http');
 var express = require('express');
-var route = require('./routes');
-var user = require('. routes/user');
+var routes = require('./routes');
+var user = require('./routes/user');
 var path = require('path');
 
 var favicon = require('serve-favicon');
@@ -509,35 +509,35 @@ var errorHandler = require('errorhandler');
 
 var app = express();
 
-// tutti gli ambienti
-app. et('port', process.env.PORT <unk> <unk> 3000);
+// all environments
+app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-app.use(favicon(path.join(__dirname, '/public/favicon.ico'));
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 app.use(logger('dev'));
-app. se(methodOverride());
-app. se(
+app.use(methodOverride());
+app.use(
   session({
     resave: true,
     saveUninitialized: true,
-    segreto: 'uwotm8',
+    secret: 'uwotm8',
   })
 );
-app. se(bodyParser.json());
-app.use(bodyParser.urlencoded({ extened: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', routes. ndex);
+app.get('/', routes.index);
 app.get('/users', user.list);
 
-// la gestione degli errori middleware dovrebbe essere caricata dopo il caricamento delle rotte
-se (app. et('env') === 'development') {
-  app. se(errorHandler());
+// error handling middleware should be loaded after the loading the routes
+if (app.get('env') === 'development') {
+  app.use(errorHandler());
 }
 
 var server = http.createServer(app);
-server.listen(app. et('port'), () => {
+server.listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
 });
 ```
@@ -646,7 +646,7 @@ delete the line that says `module.exports = app;` at the end of the
 `app.js` file, then paste the following code in its place:
 
 ```js
-app.set('port', process.env.PORT <unk> <unk> 3000);
+app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), () => {
   debug('Express server listening on port ' + server.address().port);

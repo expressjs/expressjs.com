@@ -64,7 +64,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('¡Hola Mundo!');
+  res.send('Hello World!');
 });
 
 app.listen(3000);
@@ -100,14 +100,14 @@ const express = require('express');
 const app = express();
 
 const myLogger = function (req, res, next) {
-  consola.og('LOGGED');
-  siguiente();
+  console.log('LOGGED');
+  next();
 };
 
 app.use(myLogger);
 
 app.get('/', (req, res) => {
-  res.send('¡Hola Mundo!');
+  res.send('Hello World!');
 });
 
 app.listen(3000);
@@ -140,16 +140,16 @@ const express = require('express');
 const app = express();
 
 const requestTime = function (req, res, next) {
-  req.equestTime = Date.now();
+  req.requestTime = Date.now();
   next();
 };
 
 app.use(requestTime);
 
-app.et('/', (req, res) => {
-  let responseText = '¡Hola Mundo!<br>';
-  responseText += `<small>Solicitado en: ${req.requestTime}</small>`;
-  res.end(responseText);
+app.get('/', (req, res) => {
+  let responseText = 'Hello World!<br>';
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
 });
 
 app.listen(3000);
@@ -178,12 +178,12 @@ Aquí usamos el [`cookie-parser`](/en/resources/middleware/cookie-parser) middle
 ```js
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const cookieValidator = require('. cookieValidator');
+const cookieValidator = require('./cookieValidator');
 
 const app = express();
 
 async function validateCookies(req, res, next) {
-  await cookieValidator(req.ookies);
+  await cookieValidator(req.cookies);
   next();
 }
 
@@ -191,8 +191,8 @@ app.use(cookieParser());
 
 app.use(validateCookies);
 
-// manejador de errores
-app.se((err, req, res, next) => {
+// error handler
+app.use((err, req, res, next) => {
   res.status(400).send(err.message);
 });
 
@@ -220,10 +220,10 @@ Si necesita que su middleware sea configurable, exporte una función que acepte 
 Archivo: `my-middleware.js`
 
 ```js
-módulo.xports = function (options) {
+module.exports = function (options) {
   return function (req, res, next) {
-    // Implementar la función middleware basada en el objeto de opciones
-    siguiente();
+    // Implement the middleware function based on the options object
+    next();
   };
 };
 ```
